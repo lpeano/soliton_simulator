@@ -80,6 +80,17 @@ File canonico: **`soliton_simulator.py`**. Default: deterministico + forma tau p
 
 **Diaglog multimassa:** per ogni massa `mI_*` (coer_nucleo, spin, Lz, N); per ogni coppia `coer_ab`,
 `cosphi_ab` (+1 costruttiva/arancione, −1 distruttiva/ciano), `Lz_orb_ab` (precessione orbitale), `dist_ab`.
+Inoltre le colonne **gauge/olonomia** (calcolate per ogni config a ≥2 masse): `centro_*` (N/coer/cosphi
+della struttura al centro della config; cosphi<0 = antifase = pozzo/valle) e `guscio_*` (N/coer/cosphi/circ
+dell'anello attorno al centro; **`guscio_circ` = olonomia** = giri interi di fase attorno al baricentro).
+
+**IMPORTANTE — lo spinore SU(2) È ATTIVO.** Non ripetere l'errore di dire che il settore spinoriale o
+l'accoppiamento non-abeliano sono "dormienti/da attivare/Passo 2 da fare": è un commento vecchio, smentito
+dal codice. `SPINORE=True` di default, `TORS_4PI=True`, e `_passo_spinoriale` (riga ~938, "Passo 2+3") è
+chiamato a OGNI step sotto `if SPINORE and self.n>2`. I legami fra chiralità opposte ruotano il Bloch attorno
+a σ_z, fra uguali attorno a σ_x; σ_z e σ_x NON commutano → **SU(2) genuina, commutatore ≠ 0 verificato**.
+Le simulazioni girano quindi con non-abelianità viva. Limite reale residuo: SU(2) (isospin) ≠ SU(3) (colore).
+Verificare SEMPRE nel codice prima di affermare lo stato di una feature, non fidarsi dei commenti.
 
 **Trappola video:** il moov atom si scrive solo a fine run. Interrompere a metà → file illeggibile.
 Usa `--frames N` che finisca da solo. Non interrompere run video.

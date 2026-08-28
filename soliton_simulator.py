@@ -607,13 +607,16 @@ FRAME_DRAG = True
 PASSI_PER_FRAME = 6      # passi di motore per frame nell'interattivo: rende visibile l'evoluzione
 GRAV_BIFASE = True       # LEGGE gravitazionale bifase unica (sciolta-1, direzione intrinseca,
                          # spinore accoppiato, tetto causale). Attiva di default.
-# SETTORE SPINORIALE a 4pi (PASSO 1: infrastruttura, SPENTO di default). Risveglia il grado
-# di liberta' spinoriale semplificato via a favore della fase scalare. Quando SPENTO
-# (SPINORE=False) il sistema e' IDENTICO a prima: la componente spinoriale non entra in alcun
-# calcolo (non-regressione garantita per costruzione). Quando acceso, ogni nodo porta una
-# SECONDA componente di fase che, accoppiata alle antichiralita' (perc_chi, i +-pi gia' nel
-# sistema), trasforma come uno spinore sotto 4pi. L'accoppiamento non-abeliano (Passo 2) e'
-# separato e ancora da attivare: qui si predispone solo la struttura, verificata non-regressiva.
+# SETTORE SPINORIALE a 4pi (ATTIVO di default). Ogni nodo porta una SECONDA componente di
+# fase che, accoppiata alle antichiralita' (perc_chi, i +-pi gia' nel sistema), trasforma
+# come uno spinore sotto 4pi (doppia copertura). Quando SPENTO (SPINORE=False) il sistema e'
+# IDENTICO all'U(1) scalare (non-regressione garantita per costruzione).
+# NB (aggiornato): l'ACCOPPIAMENTO NON-ABELIANO SU(2) NON e' piu' "da attivare" - E' IMPLEMENTATO
+# E ATTIVO. Il metodo _passo_spinoriale (Passo 2+3) e' chiamato a ogni step (sotto if SPINORE):
+# i legami fra chiralita' OPPOSTE ruotano il Bloch attorno a sigma_z, quelli fra UGUALI attorno
+# a sigma_x; sigma_z e sigma_x NON commutano -> struttura SU(2) genuina, non-abelianita'
+# verificata (commutatore dei generatori != 0). Il motore e' conservativo hebbiano (memoria
+# omega_s), non un rilassamento. Quindi le simulazioni girano con SU(2) non-abeliana viva.
 SPINORE = True          # SETTORE SPINORIALE a 4pi ATTIVO DI DEFAULT. Implementato, FUNZIONANTE
                         # e VALIDATO (motore conservativo hebbiano: lo spinore si accende col
                         # vuoto e resta vivo, all'equatore, senza disturbare l'U(1); non-abelianita'
