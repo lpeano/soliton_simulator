@@ -3,9 +3,11 @@
 #  run_tutti.bash - esegue TUTTI i test batch e i video a 10000 passi in parallelo.
 #  Linux / Mac.  Uso:  bash run_tutti.bash
 #
-#  Default del canonico: regime deterministico + forma tau pura + calcio vettoriale.
-#  I test coprono: 2 e 3 masse, confronto calcio vett/scalare, confronto d/d0.
-#  I batch producono i CSV (dati), i video producono gli .mp4 (camera ferma).
+#  Canonico: soliton_simulator.py (determ + forma pura + calcio vettoriale di default).
+#  Il diaglog ora scrive AUTOMATICAMENTE anche le colonne del test gauge emergente:
+#    centro_N/coer/cosphi  (struttura collettiva al centro: cosphi<0 = antifase = pozzo/valle)
+#    guscio_N/coer/cosphi/circ  (buccia attorno alle masse; circ = olonomia = firma gauge)
+#  I test: 2 e 3 masse, confronto calcio vett/scalare, confronto d/d0.
 # =============================================================================
 
 set -u
@@ -19,7 +21,6 @@ echo "=== Avvio di tutti i test in parallelo (10000 passi). Log in ./log/ ==="
 echo "    CPU disponibili: $(nproc 2>/dev/null || echo '?')  -- ogni processo usa ~1 core"
 echo ""
 
-# ---- funzione: lancia un batch (dati CSV) ----
 batch () {  # $1=nome  $2...=flag extra
   local nome=$1; shift
   echo "[batch] avvio $nome"
@@ -27,7 +28,6 @@ batch () {  # $1=nome  $2...=flag extra
     --csv "out_test/cond_${nome}.csv" --diaglog "out_test/diag_${nome}.csv" \
     > "log/${nome}.log" 2>&1 &
 }
-# ---- funzione: lancia un video (mp4, camera ferma) ----
 video () {  # $1=nome  $2...=flag extra
   local nome=$1; shift
   echo "[video] avvio $nome"
@@ -38,23 +38,23 @@ video () {  # $1=nome  $2...=flag extra
 
 # ============ 2 MASSE ============
 NM=2
-batch  "2m_default"           # d + calcio vettoriale (default)
-batch  "2m_scalare"  --calore-scal      # calcio scalare (confronto A/B)
-batch  "2m_d0"       --tau-d0           # forma d0
+batch  "2m_default"                  # d + calcio vettoriale (default)
+batch  "2m_scalare"  --calore-scal   # calcio scalare (confronto A/B)
+batch  "2m_d0"       --tau-d0        # forma d0
 video  "2m_default"
 video  "2m_d0"       --tau-d0
 
 # ============ 3 MASSE ============
 NM=3
-batch  "3m_default"           # d + calcio vettoriale (default)
-batch  "3m_scalare"  --calore-scal      # calcio scalare (confronto A/B - test frustrazione)
-batch  "3m_d0"       --tau-d0           # forma d0
+batch  "3m_default"                  # d + calcio vettoriale (default)
+batch  "3m_scalare"  --calore-scal   # calcio scalare (A/B - test frustrazione)
+batch  "3m_d0"       --tau-d0        # forma d0
 video  "3m_default"
 video  "3m_d0"       --tau-d0
 
 echo ""
 echo "=== Tutti i processi lanciati in parallelo. Attendo il completamento... ==="
-echo "    (puoi seguire i log:  tail -f log/*.log )"
+echo "    (segui i log:  tail -f log/*.log )"
 wait
 echo ""
 echo "=== FINITO. Risultati in:  out_test/ (CSV)  out_video/ (mp4)  log/ (log) ==="

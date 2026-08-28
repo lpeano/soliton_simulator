@@ -3274,6 +3274,55 @@ def batch_condensazione(a):
                         setattr(net,keyo,ang_orb)
                         # distanza tra le masse (nell'interferenza: baricentri pesati |Psi|^2)
                         cols['dist_%d%d'%(a,b)]=round(float(np.linalg.norm(cong)),3)
+                # ============ GUSCIO E CENTRO COLLETTIVI (test gauge emergente) ============
+                # Ipotesi: N masse in configurazione chiusa generano strutture di fase collettive
+                # (candidato campo di gauge emergente). Misuriamo DUE regioni:
+                #  - CENTRO: dentro la configurazione, verso il baricentro (il pozzo/valle collettiva)
+                #  - GUSCIO: anello attorno a ciascuna massa, fuori dai nuclei (la "buccia" di antifase)
+                try:
+                    if len(mm) >= 2:
+                        P = net.pos[:net.n]
+                        cms = np.array([info[m]['cm'][:2] for m in mm])
+                        bar = cms.mean(axis=0)
+                        r_masse = np.mean([np.linalg.norm(info[m]['cm'][:2]-bar) for m in mm])
+                        dr = np.linalg.norm(P[:,:2]-bar, axis=1)
+                        # distanza dal nucleo di massa piu' vicino
+                        dmin_nuc = np.full(net.n, 1e9)
+                        for m in mm:
+                            cm = info[m]['cm'][:2]
+                            dmin_nuc = np.minimum(dmin_nuc, np.linalg.norm(P[:,:2]-cm, axis=1))
+                        # fase media dei nuclei (riferimento)
+                        fasi_nuc = [np.angle(np.mean(np.exp(1j*net.phi[info[m]['idx']]))) for m in mm]
+                        fase_nuc_media = np.angle(np.mean(np.exp(1j*np.array(fasi_nuc))))
+
+                        # --- CENTRO: dentro il triangolo, lontano dai nuclei ma vicino al baricentro ---
+                        centro = (dr < r_masse*0.6) & (dmin_nuc > 1.2)
+                        nc = int(centro.sum())
+                        cols['centro_N'] = nc
+                        if nc > 3:
+                            zc = np.mean(np.exp(1j*net.phi[:net.n][centro]))
+                            cols['centro_coer'] = round(float(np.abs(zc)),4)
+                            cols['centro_cosphi'] = round(float(np.cos(np.angle(zc)-fase_nuc_media)),4)  # -1=antifase
+                        else:
+                            cols['centro_coer']=0.0; cols['centro_cosphi']=0.0
+
+                        # --- GUSCIO: buccia attorno alle masse, fuori dai nuclei (1.2<dnuc<2.5) ---
+                        guscio = (dmin_nuc > 1.2) & (dmin_nuc < 2.5)
+                        ng = int(guscio.sum())
+                        cols['guscio_N'] = ng
+                        if ng > 3:
+                            zg = np.mean(np.exp(1j*net.phi[:net.n][guscio]))
+                            cols['guscio_coer'] = round(float(np.abs(zg)),4)
+                            cols['guscio_cosphi'] = round(float(np.cos(np.angle(zg)-fase_nuc_media)),4)  # -1=antifase
+                            # circolazione di fase attorno al baricentro (olonomia = firma gauge)
+                            pg = P[:net.n][guscio]
+                            ang_pos = np.arctan2(pg[:,1]-bar[1], pg[:,0]-bar[0])
+                            o = np.argsort(ang_pos)
+                            cols['guscio_circ'] = round(float(np.sum(np.diff(np.unwrap(net.phi[:net.n][guscio][o])))/(2*np.pi)),4)
+                        else:
+                            cols['guscio_coer']=0.0; cols['guscio_cosphi']=0.0; cols['guscio_circ']=0.0
+                except Exception:
+                    pass
         except Exception as _e:
             pass
         return cols

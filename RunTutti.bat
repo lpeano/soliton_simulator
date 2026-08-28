@@ -3,21 +3,23 @@ REM ============================================================================
 REM  run_tutti.bat - esegue TUTTI i test batch e i video a 10000 passi in parallelo.
 REM  Windows.  Uso:  run_tutti.bat
 REM
-REM  Default del canonico: regime deterministico + forma tau pura + calcio vettoriale.
-REM  I test coprono: 2 e 3 masse, confronto calcio vett/scalare, confronto d/d0.
+REM  Canonico: soliton_simulator.py (determ + forma pura + calcio vettoriale di default).
+REM  Il diaglog scrive AUTOMATICAMENTE anche le colonne del test gauge emergente:
+REM    centro_N/coer/cosphi  (struttura collettiva al centro: cosphi<0 = antifase)
+REM    guscio_N/coer/cosphi/circ  (buccia attorno alle masse; circ = olonomia = firma gauge)
 REM  Ogni processo parte in una finestra separata (START) = esecuzione in parallelo.
 REM =============================================================================
 
 setlocal
 set SIM=soliton_simulator.py
-set PASSI=10000
-set FRAMES=10000
+set PASSI=20000
+set FRAMES=20000
 set SEP=8
 if not exist out_test  mkdir out_test
 if not exist out_video mkdir out_video
 if not exist log        mkdir log
 
-echo === Avvio di tutti i test in parallelo (10000 passi) ===
+echo === Avvio di tutti i test in parallelo (20000 passi) ===
 echo     Ogni test apre una finestra separata. Log in .\log\
 echo.
 
