@@ -3295,30 +3295,37 @@ def batch_condensazione(a):
                         fasi_nuc = [np.angle(np.mean(np.exp(1j*net.phi[info[m]['idx']]))) for m in mm]
                         fase_nuc_media = np.angle(np.mean(np.exp(1j*np.array(fasi_nuc))))
 
-                        # --- CENTRO: dentro il triangolo, lontano dai nuclei ma vicino al baricentro ---
-                        centro = (dr < r_masse*0.6) & (dmin_nuc > 1.2)
+                        # --- CENTRO: dentro la configurazione, lontano dai nuclei ---
+                        # (la struttura collettiva: pozzo/valle. cosphi<0 = antifase con le masse)
+                        centro = (dr < r_masse*0.7) & (dmin_nuc > 1.3)
                         nc = int(centro.sum())
                         cols['centro_N'] = nc
                         if nc > 3:
                             zc = np.mean(np.exp(1j*net.phi[:net.n][centro]))
                             cols['centro_coer'] = round(float(np.abs(zc)),4)
-                            cols['centro_cosphi'] = round(float(np.cos(np.angle(zc)-fase_nuc_media)),4)  # -1=antifase
+                            cols['centro_cosphi'] = round(float(np.cos(np.angle(zc)-fase_nuc_media)),4)
                         else:
                             cols['centro_coer']=0.0; cols['centro_cosphi']=0.0
 
-                        # --- GUSCIO: buccia attorno alle masse, fuori dai nuclei (1.2<dnuc<2.5) ---
-                        guscio = (dmin_nuc > 1.2) & (dmin_nuc < 2.5)
-                        ng = int(guscio.sum())
+                        # --- ANELLO attorno al centro: i nodi tra il pozzo centrale e le masse ---
+                        # Qui si misura l'OLONOMIA (circolazione netta di fase lungo un giro attorno
+                        # al centro del triangolo = firma di gauge emergente / carica topologica).
+                        anello = (dr > r_masse*0.3) & (dr < r_masse*0.85) & (dmin_nuc > 1.3)
+                        ng = int(anello.sum())
                         cols['guscio_N'] = ng
-                        if ng > 3:
-                            zg = np.mean(np.exp(1j*net.phi[:net.n][guscio]))
+                        if ng > 5:
+                            phg = net.phi[:net.n][anello]
+                            zg = np.mean(np.exp(1j*phg))
                             cols['guscio_coer'] = round(float(np.abs(zg)),4)
-                            cols['guscio_cosphi'] = round(float(np.cos(np.angle(zg)-fase_nuc_media)),4)  # -1=antifase
-                            # circolazione di fase attorno al baricentro (olonomia = firma gauge)
-                            pg = P[:net.n][guscio]
+                            cols['guscio_cosphi'] = round(float(np.cos(np.angle(zg)-fase_nuc_media)),4)
+                            # OLONOMIA: ordino per angolo attorno al baricentro, sommo i salti di fase
+                            # lungo il giro chiuso. Netto intero != 0 = carica di gauge topologica.
+                            pg = net.pos[:net.n][anello]
                             ang_pos = np.arctan2(pg[:,1]-bar[1], pg[:,0]-bar[0])
                             o = np.argsort(ang_pos)
-                            cols['guscio_circ'] = round(float(np.sum(np.diff(np.unwrap(net.phi[:net.n][guscio][o])))/(2*np.pi)),4)
+                            phi_ord = phg[o]
+                            salti = np.diff(np.unwrap(np.concatenate([phi_ord, phi_ord[:1]])))
+                            cols['guscio_circ'] = round(float(np.sum(salti)/(2*np.pi)),4)
                         else:
                             cols['guscio_coer']=0.0; cols['guscio_cosphi']=0.0; cols['guscio_circ']=0.0
                 except Exception:
