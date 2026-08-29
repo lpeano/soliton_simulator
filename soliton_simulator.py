@@ -2805,7 +2805,7 @@ def _applica_flag(a):
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -2828,6 +2828,7 @@ def _applica_flag(a):
     GAMMA = a.gamma
     LAM = a.lam
     MITMAX = a.mitmax
+    K_FRANGE = a.kfrange   # canale ORBITALE tangenziale (moto lungo le frange). 0 = spento (non-regressione)
     # COARSE-GRAINING: se richiesta una scala > 1, applico le regole di scala derivate.
     SCALA_B = a.scala
     if SCALA_B != 1.0:
@@ -2942,6 +2943,10 @@ def _cli():
                    help="auto-interazione dell'interferenza (<0 repulsiva, 0 spenta)")
     p.add_argument("--mitmax", type=int, default=MITMAX,
                    help="tetto nascite per passo (0 = nessun tetto, mitosi libera)")
+    p.add_argument("--kfrange", type=float, default=K_FRANGE,
+                   help="MOTO LUNGO LE FRANGE (canale orbitale tangenziale): sposta d0 lungo il "
+                        "gradiente di fase, dove il flusso e' rotazionale. 0 = spento (default, "
+                        "identico a prima). Prova 0.02-0.05 per cercare la precessione orbitale.")
     p.add_argument("--bussola", type=int, default=1,
                    help="1 = indicatore d'assi nel margine, 0 = nessun riferimento")
     p.add_argument("--giri", type=float, default=1.0,
