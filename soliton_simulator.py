@@ -1905,17 +1905,21 @@ class Rete:
             passo_causale = c_sistema * DT                 # TETTO CAUSALE: quanto la causalita' permette
             if VIRIALE:
                 # CONVERSIONE VIRIALE (legge, zero parametri): la spinta radiale NON e' additiva
-                # (fu il fallimento di K_FRANGE) ma si RIPARTISCE fra cadere e girare secondo
-                # l'angolo fra le due forze per arco: pozzo radiale (dpozzo) vs flusso di fase
-                # tangenziale (dphi_arc). theta = atan2(|dphi_arc|,|dpozzo|): cos^2 resta RADIALE
-                # (attrazione ridotta = feedback negativo), sin^2 diventa TANGENZIALE (orbita).
-                # cos^2+sin^2=1 -> budget conservato, nessuna energia netta iniettata.
-                dphi_arc = np.angle(np.exp(1j * (self.phi[jj] - self.phi[ii])))  # flusso tangenziale
-                H = np.maximum(np.hypot(dpozzo, dphi_arc), 1e-9)   # ipotenusa = budget totale
-                cos2 = (dpozzo / H) ** 2                           # quota RADIALE (cadere)
-                sin2 = (dphi_arc / H) ** 2                         # quota TANGENZIALE (girare)
+                # (fu il fallimento di K_FRANGE) ma si RIPARTISCE fra cadere e girare. La direzione
+                # tangenziale segue il TWIST (self.tw), che ACCUMULA in modo coerente (mentre il
+                # flusso di fase si cancella). Pozzo e twist sono normalizzati con lo STESSO tanh
+                # (scale gia' nello stato: scala_p per il pozzo, PHI_CRIT per il twist), cosi'
+                # l'angolo e' pulito e nessuno dei due domina per pura scala. theta = atan2(|t_tan|,
+                # |r_rad|): cos^2 resta RADIALE (attrazione ridotta = feedback negativo), sin^2
+                # diventa TANGENZIALE (orbita). cos^2+sin^2=1 -> budget conservato.
+                tw_arc = self.tw[mask]                             # twist per arco (accumula, coerente)
+                r_rad = ampiezza                                  # |pozzo| gia' normalizzato: tanh(|dpozzo|/scala_p)
+                t_tan = np.tanh(np.abs(tw_arc) / PHI_CRIT)        # |twist| normalizzato allo stesso modo, in [0,1)
+                H = np.maximum(np.hypot(r_rad, t_tan), 1e-9)      # ipotenusa = budget totale
+                cos2 = (r_rad / H) ** 2                            # quota RADIALE (cadere)
+                sin2 = (t_tan / H) ** 2                            # quota TANGENZIALE (girare)
                 radiale = grav * cos2                              # attrazione ridotta (feedback negativo)
-                tangenz = np.abs(grav) * sin2 * np.sign(dphi_arc)  # budget convertito in orbita
+                tangenz = np.abs(grav) * sin2 * np.sign(tw_arc)   # budget convertito in orbita, verso dal TWIST
                 spinta = radiale + tangenz
                 spinta = spinta - spinta.mean()                   # conserva la lunghezza
                 spinta = np.clip(spinta, -passo_causale, passo_causale)
