@@ -244,6 +244,7 @@ ZETA_M   = 0.75         # SMORZAMENTO METRICO ADIMENSIONALE (ATTIVO). 0 = BETA_M
                         # x5,8 su due semi, archi entro portata dal 5,8% al 24,6%,
                         # a parita' di numero di nodi. Sotto 1 il mezzo resta
                         # sottosmorzato per sempre, condizione che serve alle onde.
+ZETA_LOC = False        # SMORZAMENTO METRICO LOCALE (legge, non parametro): se True, zeta scende
 TAU_LOC  = 1.0          # TEMPO PROPRIO LOCALE ATTIVO. Ogni nodo evolve al proprio ritmo
                         # (0 = un solo DT globale, com'era prima). 1 = ogni nodo avanza col PROPRIO
                         # ritmo, ricavato dalla frequenza di Psi (Legge V) e mai
@@ -596,6 +597,7 @@ MEM_HEBB  = True        # MEMORIA HEBBIANA DEL MOTO ATTIVA (inerzia plastica). Q
 # e' tangenziale e produce orbita e precessione. Il feedback spinge ogni solitone lungo il
 # gradiente di fase locale (grad theta pesato da |Psi|^2), la direzione delle frange.
 K_FRANGE = 0.0
+VIRIALE  = False        # CONVERSIONE VIRIALE (legge): ripartisce la spinta radiale fra
 # TERMINE DI HALL / FRAME-DRAGGING come LEGGE, ATTIVO di default. Interruttore on/off (non un
 # coefficiente): la forza NON e' tarata, e' il twist locale medio normalizzato da PHI_CRIT
 # (grandezza di stato), coefficiente 1. Il twist, da diagnostica passiva, diventa forza: la
@@ -1343,7 +1345,19 @@ class Rete:
         else:
             # forza dal potenziale delle fasi: coerenza CONTRAE, frustrazione DILATA
             src = -HAM_SRC * K_C * (w / LAM) * np.cos(self.phi0[i] - self.phi0[j]) * np.cos(dph)
-        beta = BETA_M if ZETA_M == 0.0 else 2.0 * ZETA_M * CS_M / np.maximum(self.d, 1e-6)
+        if ZETA_M == 0.0:
+            beta = BETA_M
+        elif ZETA_LOC:
+            # SMORZAMENTO METRICO LOCALE (legge, non parametro): zeta scende dove la densita'
+            # d'interferenza rho supera la mediana (nella MATERIA), lasciando vivere la
+            # circolazione tangenziale; nel VUOTO (rho ~ mediana) resta ZETA_M pieno (stabilita').
+            # Nessun numero nuovo: ZETA_M e rho gia' calcolati, forma 1/(1+x) come nel resto.
+            med_rho = max(float(np.median(rho)), 1e-9)
+            eccesso = np.maximum(rho / med_rho - 1.0, 0.0)   # 0 nel vuoto, cresce nella materia
+            zeta_loc = ZETA_M / (1.0 + eccesso)              # ZETA_M nel vuoto, ->0 nel denso
+            beta = 2.0 * zeta_loc * CS_M / np.maximum(self.d, 1e-6)
+        else:
+            beta = 2.0 * ZETA_M * CS_M / np.maximum(self.d, 1e-6)
         # il sotto-ciclo si infittisce quanto SERVE alla stabilita': nessun tetto
         # arbitrario al numero di sotto-passi, cosi' non tronca la dinamica veloce
         n1 = np.ceil(np.abs(src).max() * DT / (0.05 * CS_M))
@@ -1889,8 +1903,26 @@ class Rete:
             grav = grav - grav.mean()                     # conserva la lunghezza
             c_sistema = LAM * np.sqrt(K_C)                 # velocita' del cono (da LAM, K_C: stato)
             passo_causale = c_sistema * DT                 # TETTO CAUSALE: quanto la causalita' permette
-            grav = np.clip(grav, -passo_causale, passo_causale)
-            self.d0[mask] += grav * float(np.median(self.d0[mask]))
+            if VIRIALE:
+                # CONVERSIONE VIRIALE (legge, zero parametri): la spinta radiale NON e' additiva
+                # (fu il fallimento di K_FRANGE) ma si RIPARTISCE fra cadere e girare secondo
+                # l'angolo fra le due forze per arco: pozzo radiale (dpozzo) vs flusso di fase
+                # tangenziale (dphi_arc). theta = atan2(|dphi_arc|,|dpozzo|): cos^2 resta RADIALE
+                # (attrazione ridotta = feedback negativo), sin^2 diventa TANGENZIALE (orbita).
+                # cos^2+sin^2=1 -> budget conservato, nessuna energia netta iniettata.
+                dphi_arc = np.angle(np.exp(1j * (self.phi[jj] - self.phi[ii])))  # flusso tangenziale
+                H = np.maximum(np.hypot(dpozzo, dphi_arc), 1e-9)   # ipotenusa = budget totale
+                cos2 = (dpozzo / H) ** 2                           # quota RADIALE (cadere)
+                sin2 = (dphi_arc / H) ** 2                         # quota TANGENZIALE (girare)
+                radiale = grav * cos2                              # attrazione ridotta (feedback negativo)
+                tangenz = np.abs(grav) * sin2 * np.sign(dphi_arc)  # budget convertito in orbita
+                spinta = radiale + tangenz
+                spinta = spinta - spinta.mean()                   # conserva la lunghezza
+                spinta = np.clip(spinta, -passo_causale, passo_causale)
+                self.d0[mask] += spinta * float(np.median(self.d0[mask]))
+            else:
+                grav = np.clip(grav, -passo_causale, passo_causale)
+                self.d0[mask] += grav * float(np.median(self.d0[mask]))
             self.d0 = np.maximum(self.d0, 0.05)
         # MOTO LUNGO LE FRANGE: spinta tangenziale lungo il gradiente di fase (le frange
         # rotanti = geodetiche del flusso). Diversamente dal gradiente di torsione (radiale),
@@ -2804,8 +2836,8 @@ def _applica_flag(a):
     """Applica i parametri/flag ai globali. Usata sia in headless sia in interattivo,
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
-    global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE
+    global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -2819,6 +2851,7 @@ def _applica_flag(a):
     P_LAM = a.plam
     TAU_LOC = a.tauloc
     ZETA_M = a.zeta
+    ZETA_LOC = bool(getattr(a, "zeta_loc", False))   # smorzamento locale (legge): default off = non-regressione
     HAM_SRC = a.ham
     ALPHA_NAT = a.alfanat
     DIFF_RES = a.diffres
@@ -2829,6 +2862,7 @@ def _applica_flag(a):
     LAM = a.lam
     MITMAX = a.mitmax
     K_FRANGE = a.kfrange   # canale ORBITALE tangenziale (moto lungo le frange). 0 = spento (non-regressione)
+    VIRIALE = bool(getattr(a, "viriale", False))   # conversione viriale (legge): default off = non-regressione
     # COARSE-GRAINING: se richiesta una scala > 1, applico le regole di scala derivate.
     SCALA_B = a.scala
     if SCALA_B != 1.0:
@@ -2923,6 +2957,10 @@ def _cli():
                    help="1 = sorgente metrica hamiltoniana (toglie ALPHA_M), 0 = fenomenologica")
     p.add_argument("--zeta", type=float, default=ZETA_M,
                    help="smorzamento metrico adimensionale (0 = BETA_M costante)")
+    p.add_argument("--zeta-loc", action="store_true", dest="zeta_loc",
+                   help="SMORZAMENTO LOCALE (legge): zeta scende nella MATERIA (rho>mediana), "
+                        "resta pieno nel VUOTO. Lascia vivere la circolazione tangenziale. "
+                        "Default off = identico a prima (non-regressione).")
     p.add_argument("--tauloc", type=float, default=TAU_LOC,
                    help="1 = ogni nodo avanza nel proprio tempo proprio, 0 = orologio globale")
     p.add_argument("--plam", type=float, default=P_LAM,
@@ -2947,6 +2985,11 @@ def _cli():
                    help="MOTO LUNGO LE FRANGE (canale orbitale tangenziale): sposta d0 lungo il "
                         "gradiente di fase, dove il flusso e' rotazionale. 0 = spento (default, "
                         "identico a prima). Prova 0.02-0.05 per cercare la precessione orbitale.")
+    p.add_argument("--viriale", action="store_true", dest="viriale",
+                   help="CONVERSIONE VIRIALE (legge, zero parametri): la spinta radiale si "
+                        "ripartisce fra cadere (cos^2) e girare (sin^2) secondo l'angolo fra "
+                        "pozzo e flusso di fase. Conservativa (non additiva come kfrange). "
+                        "Default off = non-regressione.")
     p.add_argument("--bussola", type=int, default=1,
                    help="1 = indicatore d'assi nel margine, 0 = nessun riferimento")
     p.add_argument("--giri", type=float, default=1.0,
