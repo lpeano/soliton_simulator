@@ -1906,20 +1906,25 @@ class Rete:
             if VIRIALE:
                 # CONVERSIONE VIRIALE (legge, zero parametri): la spinta radiale NON e' additiva
                 # (fu il fallimento di K_FRANGE) ma si RIPARTISCE fra cadere e girare. La direzione
-                # tangenziale segue il TWIST (self.tw), che ACCUMULA in modo coerente (mentre il
-                # flusso di fase si cancella). Pozzo e twist sono normalizzati con lo STESSO tanh
-                # (scale gia' nello stato: scala_p per il pozzo, PHI_CRIT per il twist), cosi'
-                # l'angolo e' pulito e nessuno dei due domina per pura scala. theta = atan2(|t_tan|,
-                # |r_rad|): cos^2 resta RADIALE (attrazione ridotta = feedback negativo), sin^2
-                # diventa TANGENZIALE (orbita). cos^2+sin^2=1 -> budget conservato.
-                tw_arc = self.tw[mask]                             # twist per arco (accumula, coerente)
+                # tangenziale segue la CIRCOLAZIONE ORIENTATA del twist (+tw su i, -tw su j), come
+                # FRAME_DRAG: ha curl coerente anche quando tw_mean~0 (il segno grezzo del twist,
+                # bilanciato, NON circolava). Pozzo e circolazione normalizzati con lo stesso tanh.
+                # theta = atan2(|t_tan|,|r_rad|): cos^2 resta RADIALE (attrazione ridotta), sin^2
+                # diventa TANGENZIALE (orbita). cos^2+sin^2=1 -> budget conservato. Dove non c'e'
+                # circolazione coerente (circ~0) la conversione tangenziale svanisce da se'.
+                twn_a = self.tw[mask] / PHI_CRIT                   # twist adimensionale (come FRAME_DRAG)
+                circ_nodo = np.zeros(self.n); grado_c = np.zeros(self.n)
+                np.add.at(circ_nodo, ii, twn_a); np.add.at(circ_nodo, jj, -twn_a)  # CIRCOLAZIONE ORIENTATA
+                np.add.at(grado_c, ii, 1.0);     np.add.at(grado_c, jj, 1.0)
+                circ_nodo = circ_nodo / np.maximum(grado_c, 1.0)
+                circ_arc = 0.5 * (circ_nodo[ii] + circ_nodo[jj])  # circolazione orientata per arco (curl)
                 r_rad = ampiezza                                  # |pozzo| gia' normalizzato: tanh(|dpozzo|/scala_p)
-                t_tan = np.tanh(np.abs(tw_arc) / PHI_CRIT)        # |twist| normalizzato allo stesso modo, in [0,1)
+                t_tan = np.tanh(np.abs(circ_arc))                 # |circolazione orientata| normalizzata, in [0,1)
                 H = np.maximum(np.hypot(r_rad, t_tan), 1e-9)      # ipotenusa = budget totale
                 cos2 = (r_rad / H) ** 2                            # quota RADIALE (cadere)
                 sin2 = (t_tan / H) ** 2                            # quota TANGENZIALE (girare)
                 radiale = grav * cos2                              # attrazione ridotta (feedback negativo)
-                tangenz = np.abs(grav) * sin2 * np.sign(tw_arc)   # budget convertito in orbita, verso dal TWIST
+                tangenz = np.abs(grav) * sin2 * np.sign(circ_arc) # verso dalla CIRCOLAZIONE ORIENTATA (coerente)
                 spinta = radiale + tangenz
                 spinta = spinta - spinta.mean()                   # conserva la lunghezza
                 spinta = np.clip(spinta, -passo_causale, passo_causale)
