@@ -597,6 +597,31 @@ MEM_HEBB  = True        # MEMORIA HEBBIANA DEL MOTO ATTIVA (inerzia plastica). Q
 # e' tangenziale e produce orbita e precessione. Il feedback spinge ogni solitone lungo il
 # gradiente di fase locale (grad theta pesato da |Psi|^2), la direzione delle frange.
 K_FRANGE = 0.0
+PAV_COM  = False        # PAVIMENTO COMOVENTE (legge): se True, il pavimento di d0 diventa
+# median(d0)-MAD(d0) (una dispersione sotto la mediana, scala col sistema) invece del muro
+# assoluto 0.05. Blocca il collasso anomalo locale, non il respiro comovente. Default off = 0.05.
+SYNC_UPDATE = False     # AGGIORNAMENTO SINCRONO (transazionale): se True, dph (il ponte fase->
+# twist/metrica) legge la fase dallo SNAPSHOT di inizio passo, non da quella appena aggiornata.
+# Cosi' pesi materia (gia' calcolati a inizio passo) e dph vedono la STESSA fase (t-1): il passo
+# diventa coerente e indipendente dall'ordine di aggiornamento (Jacobi invece di Gauss-Seidel).
+# Il cuore simplettico (phivel->phi) resta sequenziale. Snapshot -> commit globale a fine passo.
+# Default off = comportamento attuale (non-regressione).
+ZETA_VIR = False        # FRENO ANISOTROPO (legge, zero parametri): se True, lo smorzamento
+# metrico beta viene moltiplicato per cos2 (la quota RADIALE della viriale): pieno sul moto
+# radiale (cos2=1), scende a zero sul tangenziale (sin2=1). Non toglie il freno ovunque nella
+# materia (come zeta-loc, cieco alla direzione), ma SOLO lungo il verso in cui la viriale
+# converte in tangenziale. Freno anisotropo = valvola: dissipa il radiale, lascia vivere la
+# rotazione -> puo' SELEZIONARE un verso (dissipa tutto tranne il tangenziale) invece che solo
+# preservarlo. Usa la stessa sin2/cos2 che la viriale gia' calcola (geometrico, zero parametri).
+# Senza --viriale, sin2=0 ovunque -> beta invariato (nessun effetto). Default off = non-regressione.
+CHI_BASC = False        # BASCULAMENTO CHIRALE (legge, zero parametri): se True, la chiralita'
+# di ogni nodo NON resta piu' fissa dalla nascita, ma vira secondo la TORSIONE LOCALE rispetto
+# al QUANTO DI OLONOMIA (PHI_CRIT = 2pi): chi=+1 dove la torsione ha COMPLETATO il giro (materia
+# matura), chi=-1 dove non l'ha completato (spazio/vuoto). La soglia non e' scelta: e' il quanto
+# stesso del sistema. Scopo: rompere la simmetria dei quanti +-pi (twist_dip), che con chiralita'
+# casuali 50/50 si bilanciano e azzerano l'olonomia netta -> nessun verso -> nessuna precessione.
+# Organizzando le chiralita' sulla torsione, i +-pi si sbilanciano dove la torsione lo impone e
+# l'olonomia netta acquista un verso. Default off = identico a prima (non-regressione).
 VIRIALE  = False        # CONVERSIONE VIRIALE (legge): ripartisce la spinta radiale fra
 # TERMINE DI HALL / FRAME-DRAGGING come LEGGE, ATTIVO di default. Interruttore on/off (non un
 # coefficiente): la forza NON e' tarata, e' il twist locale medio normalizzato da PHI_CRIT
@@ -664,6 +689,7 @@ class Rete:
         self.i = np.zeros(0, int); self.j = np.zeros(0, int)
         self.d = np.zeros(0); self.d0 = np.zeros(0); self.vd = np.zeros(0)
         self.peq = np.zeros(0); self.tw = np.zeros(0); self.twp = np.zeros(0)
+        self._sin2_vir = None                 # memoria per-arco della quota tangenziale della viriale (freno anisotropo)
         # MEMORIA HEBBIANA DEL MOTO (inerzia plastica). Per ogni nodo, un vettore che
         # ricorda la direzione di moto del baricentro d'interferenza locale. Si rinforza
         # percorrendola (hebbiano: la via percorsa si consolida) e decade se non usata.
@@ -1129,9 +1155,23 @@ class Rete:
     # invece che su 2pi. Usato dalla torsione a doppia copertura (flag TORS_4PI),
     # motivato dai legami dipolari che uniscono due antichirali (due mezzi-twist).
 
+    def _floor_d0(self):
+        # PAVIMENTO di d0. Assoluto (0.05) di default; COMOVENTE se PAV_COM: f*median(d0), con
+        # f = 0.05/LAM_BASE = il RAPPORTO DI NASCITA (il vecchio pavimento assoluto diviso la
+        # lunghezza d'onda fondamentale). LAM caratterizza la nascita: fissa la frazione, poi il
+        # pavimento SCALA comovente con median(d0). Sta nella CODA (~6% della mediana), non nel
+        # corpo (come median-MAD, che clampava il 73% e falsava la misura). Non-regressivo alla
+        # nascita (median~LAM_BASE -> pavimento~0.05). Circolarita' 1/(1-q*f) trascurabile: f<<1.
+        if not PAV_COM or not len(self.d0):
+            return 0.05
+        f = 0.05 / LAM_BASE                       # rapporto di nascita (adimensionale), NON scelto
+        return f * float(np.median(self.d0))
+
     def step(self):
         if self.n < 2 or not len(self.i): return
         i, j = self.i, self.j
+        if SYNC_UPDATE:
+            self._phi_snap = self.phi.copy()   # snapshot t-1: dph lo leggera' da qui (aggiornamento sincrono)
         r = self.ritmo()                       # None se l'orologio e' globale
         if r is None:
             dt_n = DT; dt_e = DT
@@ -1281,7 +1321,8 @@ class Rete:
             zc = wI @ np.exp(1j * self.phi)
             media = np.angle(zc)
             self.phi = (self.phi + dt_n * forza * np.sin(media - self.phi)) % (4 * np.pi)
-        dph = self._w4(self.phi[i] - self.phi[j])
+        _phi_src = self._phi_snap if (SYNC_UPDATE and hasattr(self, '_phi_snap')) else self.phi
+        dph = self._w4(_phi_src[i] - _phi_src[j])
         if TORS_4PI and len(self.perc_chi) >= self.n:
             # TORSIONE A DOPPIA COPERTURA (4pi): sul legame dipolare, la torsione
             # include il contributo dei profili di percorrenza dei due antichirali
@@ -1296,6 +1337,25 @@ class Rete:
             _ttw = _tau_tw_locale(self) if TAU_LOCALI else TAU_TW
             self.tw += self._w4(dph - self.twp) - dt_e * self.tw / _ttw
             self.twp = dph
+        # --- BASCULAMENTO CHIRALE (legge, zero parametri): la chiralita' vira secondo la
+        # TORSIONE LOCALE rispetto al QUANTO DI OLONOMIA (PHI_CRIT = 2pi). La torsione degli
+        # archi (per-arco) e' aggregata ai nodi (media di |tw| sugli archi incidenti); dove
+        # supera il quanto, chi=+1 (materia matura, il giro e' completo), altrove chi=-1
+        # (spazio, giro incompleto). La soglia NON e' scelta: e' il quanto stesso del sistema,
+        # lo stesso di mitosi e gravita'. Rompe la simmetria casuale 50/50 dei +-pi: le
+        # chiralita' non nascono piu' a caso e restano fisse, ma seguono la torsione, cosi'
+        # l'olonomia netta dei twist_dip acquista un verso dove la torsione lo impone.
+        if CHI_BASC and len(self.perc_chi) >= self.n and len(self.tw):
+            twabs = np.abs(self.tw)
+            twn = np.zeros(self.n)
+            np.add.at(twn, i, twabs); np.add.at(twn, j, twabs)
+            twn = twn / np.maximum(self._deg, 1)          # torsione locale per nodo
+            # soglia STATO-DERIVATA: la mediana della torsione locale (non il quanto assoluto,
+            # che collasserebbe tutto a una specie perche' la torsione media e' << 2pi). Cosi'
+            # chi=+1 dove la torsione e' SOPRA la tipica (materia matura), -1 dove sotto: split
+            # ~50/50 organizzato dal PAESAGGIO della torsione. Zero parametri (mediana = stato).
+            soglia = np.median(twn) if self.n else 0.0
+            self.perc_chi[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_chi.dtype)
         # --- materia: una sola matrice dei pesi, riusata per Psi e diffusione ---
         Mw = self._mat(w)
         F = Mw @ np.exp(1j * self.phi)
@@ -1358,6 +1418,10 @@ class Rete:
             beta = 2.0 * zeta_loc * CS_M / np.maximum(self.d, 1e-6)
         else:
             beta = 2.0 * ZETA_M * CS_M / np.maximum(self.d, 1e-6)
+        if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta):
+            # FRENO ANISOTROPO: beta pieno sul radiale, ->0 sul tangenziale della viriale.
+            # (1 - sin2) = cos2: dissipa il moto radiale, lascia vivere quello tangenziale.
+            beta = beta * (1.0 - self._sin2_vir)
         # il sotto-ciclo si infittisce quanto SERVE alla stabilita': nessun tetto
         # arbitrario al numero di sotto-passi, cosi' non tronca la dinamica veloce
         n1 = np.ceil(np.abs(src).max() * DT / (0.05 * CS_M))
@@ -1393,7 +1457,7 @@ class Rete:
         # minima del sistema (0.05, la stessa di d). Un d0 -> 0 non e' fisico (due nodi
         # non hanno distanza di riposo nulla) e fa divergere lo stress |d-d0|/d0 anche
         # con d sano. Non e' un tetto arbitrario: e' la scala minima gia' presente su d.
-        self.d0 = np.maximum(self.d0, 0.05)
+        self.d0 = np.maximum(self.d0, self._floor_d0())
 
     def mitosi(self):
         if self.n >= MAX_NODI or not len(self.tw): return 0
@@ -1497,7 +1561,7 @@ class Rete:
             # limitata (2% per passo) e conservativa in media come nella memoria hebbiana.
             spinta = 0.02 * np.median(self.d0) * rep
             self.d0 = self.d0 + spinta - spinta.mean()     # media zero: pressione, non espansione
-            self.d0 = np.maximum(self.d0, 0.05)            # PAVIMENTO: la spinta non deve
+            self.d0 = np.maximum(self.d0, self._floor_d0())            # PAVIMENTO: la spinta non deve
             #   portare d0 sotto la scala minima, o lo stress |d-d0|/d0 diverge (bug rientrante)
         c = np.where(nasce)[0]
         if not len(c): return 0
@@ -1868,7 +1932,7 @@ class Rete:
             passo_max = 0.01 * float(np.median(self.d0[mask])) if mask.any() else 0.0
             proj = np.clip(proj, -passo_max, passo_max)    # nessuna deriva locale per passo
             self.d0[mask] += proj
-            self.d0 = np.maximum(self.d0, 0.05)            # PAVIMENTO: anche il moto non deve
+            self.d0 = np.maximum(self.d0, self._floor_d0())            # PAVIMENTO: anche il moto non deve
             #   portare d0 sotto la scala minima, o lo stress diverge (stessa causa)
         # LEGGE GRAVITAZIONALE BIFASE (direzione intrinseca). UNA sola legge firmata dalla torsione
         # rispetto al quanto: s = |tw|/PHI_CRIT - 1. Il SEGNO di s E' la direzione (s<0 attrae,
@@ -1923,6 +1987,10 @@ class Rete:
                 H = np.maximum(np.hypot(r_rad, t_tan), 1e-9)      # ipotenusa = budget totale
                 cos2 = (r_rad / H) ** 2                            # quota RADIALE (cadere)
                 sin2 = (t_tan / H) ** 2                            # quota TANGENZIALE (girare)
+                if ZETA_VIR:                                      # memorizza la quota tangenziale per-arco (freno anisotropo, prossimo step)
+                    s2full = np.zeros(len(self.i))
+                    s2full[mask] = sin2
+                    self._sin2_vir = s2full
                 radiale = grav * cos2                              # attrazione ridotta (feedback negativo)
                 tangenz = np.abs(grav) * sin2 * np.sign(circ_arc) # verso dalla CIRCOLAZIONE ORIENTATA (coerente)
                 spinta = radiale + tangenz
@@ -1932,7 +2000,7 @@ class Rete:
             else:
                 grav = np.clip(grav, -passo_causale, passo_causale)
                 self.d0[mask] += grav * float(np.median(self.d0[mask]))
-            self.d0 = np.maximum(self.d0, 0.05)
+            self.d0 = np.maximum(self.d0, self._floor_d0())
         # MOTO LUNGO LE FRANGE: spinta tangenziale lungo il gradiente di fase (le frange
         # rotanti = geodetiche del flusso). Diversamente dal gradiente di torsione (radiale),
         # il flusso di fase e' tangenziale e produce orbita/precessione. Per ogni arco, la
@@ -1944,7 +2012,7 @@ class Rete:
             flusso = flusso - flusso.mean()                # conserva la lunghezza (come proj)
             flusso = np.clip(flusso, -passo_max, passo_max)
             self.d0[mask] += flusso
-            self.d0 = np.maximum(self.d0, 0.05)
+            self.d0 = np.maximum(self.d0, self._floor_d0())
 
     def diagnostica(self):
         I = self.intensita()
@@ -2846,7 +2914,7 @@ def _applica_flag(a):
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -2872,6 +2940,18 @@ def _applica_flag(a):
     MITMAX = a.mitmax
     K_FRANGE = a.kfrange   # canale ORBITALE tangenziale (moto lungo le frange). 0 = spento (non-regressione)
     VIRIALE = bool(getattr(a, "viriale", False))   # conversione viriale (legge): default off = non-regressione
+    CHI_BASC = bool(getattr(a, "chi_basc", False)) # basculamento chirale (legge): default off = non-regressione
+    ZETA_VIR = bool(getattr(a, "zeta_vir", False)) # freno anisotropo (legge): default off = non-regressione
+    PAV_COM = bool(getattr(a, "pav_com", False))   # pavimento comovente (legge): default off = muro assoluto 0.05
+    SYNC_UPDATE = bool(getattr(a, "sync", False)) # aggiornamento sincrono (transazionale): default off
+    if SYNC_UPDATE:
+        print("[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)")
+    if PAV_COM:
+        print("[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto")
+    if ZETA_VIR:
+        print("[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)")
+    if CHI_BASC:
+        print("[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)")
     # COARSE-GRAINING: se richiesta una scala > 1, applico le regole di scala derivate.
     SCALA_B = a.scala
     if SCALA_B != 1.0:
@@ -2999,6 +3079,26 @@ def _cli():
                         "ripartisce fra cadere (cos^2) e girare (sin^2) secondo l'angolo fra "
                         "pozzo e flusso di fase. Conservativa (non additiva come kfrange). "
                         "Default off = non-regressione.")
+    p.add_argument("--chi-basc", action="store_true", dest="chi_basc",
+                   help="BASCULAMENTO CHIRALE (legge, zero parametri): la chiralita' dei nodi "
+                        "vira secondo la torsione locale rispetto al quanto PHI_CRIT (2pi): "
+                        "chi=+1 dove il giro e' completo (materia), -1 dove no (spazio). Rompe "
+                        "la simmetria casuale dei +-pi. Default off = non-regressione.")
+    p.add_argument("--zeta-vir", action="store_true", dest="zeta_vir",
+                   help="FRENO ANISOTROPO (legge, zero parametri): lo smorzamento beta viene "
+                        "moltiplicato per cos2 della viriale (pieno sul radiale, ->0 sul "
+                        "tangenziale). Dissipa il moto radiale, lascia vivere la rotazione. "
+                        "Usa la sin2/cos2 della viriale (serve --viriale). Default off.")
+    p.add_argument("--pav-com", action="store_true", dest="pav_com",
+                   help="PAVIMENTO COMOVENTE (legge, zero parametri): il pavimento di d0 diventa "
+                        "median(d0)-MAD(d0) (una dispersione sotto la mediana, scala col sistema) "
+                        "invece del muro assoluto 0.05. Blocca il collasso anomalo locale, non il "
+                        "respiro comovente. Default off = 0.05 assoluto (non-regressione).")
+    p.add_argument("--sync", action="store_true", dest="sync",
+                   help="AGGIORNAMENTO SINCRONO (transazionale): dph (ponte fase->twist/metrica) "
+                        "legge la fase dallo snapshot di inizio passo, coerente coi pesi materia. "
+                        "Jacobi invece di Gauss-Seidel: il passo diventa indipendente dall'ordine. "
+                        "Il simplettico resta intatto. Default off = non-regressione.")
     p.add_argument("--bussola", type=int, default=1,
                    help="1 = indicatore d'assi nel margine, 0 = nessun riferimento")
     p.add_argument("--giri", type=float, default=1.0,
@@ -3334,6 +3434,96 @@ def batch_condensazione(a):
                         setattr(net,keyo,ang_orb)
                         # distanza tra le masse (nell'interferenza: baricentri pesati |Psi|^2)
                         cols['dist_%d%d'%(a,b)]=round(float(np.linalg.norm(cong)),3)
+                # SCALA COMOVENTE dai BARICENTRI (indipendente da median(d0), che il pavimento tocca):
+                # RMS della dispersione dei baricentri dal centroide globale = "taglia" del sistema.
+                # Serve a misurare il raggio di precessione COMOVENTE (dist/scala) senza che il
+                # pavimento di d0 contamini la scala. r_com_% = distanza fra masse / taglia comovente.
+                try:
+                    cms = np.array([info[mm[a]]['cm'][:2] for a in range(len(mm))])
+                    if len(cms) >= 2:
+                        centroide = cms.mean(0)
+                        scala_com = float(np.sqrt(np.mean(np.sum((cms - centroide)**2, axis=1)))) or 1e-9
+                        cols['scala_com'] = round(scala_com, 4)
+                        for a in range(len(mm)):
+                            for b in range(a+1, len(mm)):
+                                dcom = float(np.linalg.norm(info[mm[b]]['cm'][:2]-info[mm[a]]['cm'][:2]))
+                                cols['rcom_%d%d'%(a,b)] = round(dcom/scala_com, 4)  # raggio COMOVENTE
+                except Exception:
+                    pass
+                # ANISOTROPIA s2 media (quota tangenziale della viriale): serve a testare la legge
+                # R ~ s2^(2/3)/(1-s2). Da self._sin2_vir se la viriale/freno anisotropo e' attivo.
+                if getattr(net, '_sin2_vir', None) is not None and len(net._sin2_vir):
+                    cols['s2_medio'] = round(float(np.mean(net._sin2_vir)), 4)
+                    cols['s2_max']   = round(float(np.max(net._sin2_vir)), 4)
+                # ============ METRICHE COVARIANTI (adimensionali, immuni all'espansione) ============
+                # Misurate DENTRO il motore come rapporti alla scala corrente: l'espansione non le
+                # inflaziona, quindi le correlazioni fra queste sono FISICHE, non trend spuri.
+                #  tw_q      = |tw|/2pi           -> twist in quanti di olonomia (gia' adimensionale)
+                #  sync_rel  = <|dw|>/<|w|>       -> desincronizzazione RELATIVA (0=sincroni)
+                #  d0_disp   = MAD(d0)/median(d0) -> dispersione della metrica (forma, non taglia)
+                #  tw_ratio  = |tw|/median(|tw|)  -> disomogeneita' del twist
+                try:
+                    ii, jj = net.i, net.j
+                    if len(net.tw):
+                        cols['tw_q'] = round(float(np.mean(np.abs(net.tw))) / (2*np.pi), 5)
+                        med_tw = float(np.median(np.abs(net.tw))) or 1e-9
+                        cols['tw_disp'] = round(float(np.median(np.abs(np.abs(net.tw)-med_tw)))/med_tw, 5)
+                    if len(net.phivel) >= n and len(ii):
+                        pv = net.phivel[:n]
+                        dpv = np.abs(pv[ii] - pv[jj])
+                        wmean = float(np.mean(np.abs(pv))) + 1e-9
+                        cols['sync_rel'] = round(float(np.mean(dpv)) / wmean, 5)
+                    if len(net.d0):
+                        med_d0 = float(np.median(net.d0)) or 1e-9
+                        cols['d0_disp'] = round(float(np.median(np.abs(net.d0-med_d0)))/med_d0, 5)
+                except Exception:
+                    pass
+                # ============ SEPARAZIONE SPAZIALE PER CHIRALITA' (ipotesi guscio/coda) ============
+                # Test: le chi=-1 ("spazio"/antiparticelle) stanno FUORI (guscio/coda) e le chi=+1
+                # ("materia") DENTRO (nuclei)? Misuro il raggio medio dal centro di massa globale di
+                # ciascuna specie, COMOVENTE (diviso la dispersione RMS di tutti i nodi). Se
+                # r_chi_neg > r_chi_pos in modo concorde -> le chi=-1 formano il guscio esterno.
+                try:
+                    Pn = net.pos[:n, :2]
+                    if len(net.perc_chi) >= n and n > 10:
+                        cen = Pn.mean(0)
+                        rr = np.linalg.norm(Pn - cen, axis=1)
+                        rms = float(np.sqrt(np.mean(rr**2))) or 1e-9
+                        chi = net.perc_chi[:n]
+                        mpos = chi > 0; mneg = chi < 0
+                        if mpos.sum() > 0 and mneg.sum() > 0:
+                            r_pos = float(np.mean(rr[mpos])) / rms   # raggio comovente materia (chi+1)
+                            r_neg = float(np.mean(rr[mneg])) / rms   # raggio comovente spazio (chi-1)
+                            cols['rchi_pos'] = round(r_pos, 4)
+                            cols['rchi_neg'] = round(r_neg, 4)
+                            cols['rchi_ratio'] = round(r_neg / max(r_pos, 1e-9), 4)  # >1 = chi-1 piu' esterne (guscio)
+                            cols['frac_chi_neg'] = round(float(mneg.mean()), 4)
+                except Exception:
+                    pass
+                # ============ PROFILO DI DENSITA' RADIALE (guscio globale vs nucleo) ============
+                # Risponde al dubbio dello ZOOM: la camera puo' stare sempre "dentro la pelle" del
+                # guscio e nasconderlo, ma il conteggio dei nodi per raggio no. Divido lo spazio in
+                # 5 gusci concentrici comoventi (per frazione del raggio massimo) e conto i nodi in
+                # ciascuno, normalizzati per l'area dell'anello (densita' superficiale). FIRMA:
+                #  - GUSCIO GLOBALE: densita' bassa al centro, PICCO nell'anello ESTERNO (la pelle).
+                #  - NUCLEO/consolidamento: PICCO al centro, densita' che cala verso fuori.
+                # Cieco allo zoom: usa raggi veri dei puntatori, non la camera.
+                try:
+                    Pn2 = net.pos[:n, :2]
+                    if n > 20:
+                        cen2 = Pn2.mean(0)
+                        rr2 = np.linalg.norm(Pn2 - cen2, axis=1)
+                        rmax = float(np.percentile(rr2, 98)) or 1e-9      # raggio (robusto agli outlier)
+                        bordi = np.linspace(0, rmax, 6)                    # 5 gusci
+                        for gi in range(5):
+                            in_g = (rr2 >= bordi[gi]) & (rr2 < bordi[gi+1])
+                            area = np.pi * (bordi[gi+1]**2 - bordi[gi]**2) or 1e-9
+                            cols['dens_g%d'%gi] = round(float(in_g.sum()) / area, 4)  # densita' superf. anello
+                        # indice sintetico: densita' anello ESTERNO / densita' anello CENTRALE
+                        dc = cols.get('dens_g0', 1e-9); de = cols.get('dens_g4', 0.0)
+                        cols['guscio_idx'] = round(de / max(dc, 1e-9), 4)  # >1 = picco esterno (PELLE!)
+                except Exception:
+                    pass
                 # ============ GUSCIO E CENTRO COLLETTIVI (test gauge emergente) ============
                 # Ipotesi: N masse in configurazione chiusa generano strutture di fase collettive
                 # (candidato campo di gauge emergente). Misuriamo DUE regioni:
