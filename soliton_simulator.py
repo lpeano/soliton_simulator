@@ -125,7 +125,7 @@ import numpy as np
 REGIME = "deterministico"     # <-- cambia qui: "stocastico" (stabile) | "deterministico" (default: forma pura + calcio vett)
 
 if REGIME == "deterministico":
-    _SCUOTIMENTO_REGIME = False
+    _SCUOTIMENTO_REGIME = True  
     _G_PH_REGIME = 3e-3        # attrito basso ma non nullo (1e-4 e 0 divergono)
     _TAU_A_REGIME = 50.0       # alta persistenza memoria spinoriale
     _CALORE_INIT = 0.4         # impulso iniziale conservativo (punto zero)
@@ -499,31 +499,51 @@ def lambda_vuoto(net):
     return float(np.mean(np.abs(net.psi[:net.n])**2))
 
 def scuoti_vuoto(net):
-    """Applica la legge dello scuotimento locale del vuoto: inietta agitazione di fase.
-    Ampiezza sqrt(Lambda) con Lambda calcolato DINAMICAMENTE dallo stato (energia del vuoto),
-    soppressa dalla COERENZA locale |Psi|^2 (non piu' dalla curvatura): il vuoto ribolle dove
-    non c'e' materia, la materia (coerenza alta) e' protetta. Genera materia stocasticamente
-    dal caos e non la riassorbe. Sempre attiva."""
-    if not SCUOTIMENTO or net.n == 0:
+    """Applica lo scuotimento del vuoto guidato dallo stress metrico locale (senza numeri fissi).
+    L'intensità emerge dallo scostamento fra la distanza reale (d) e la distanza di riposo (d0)
+    degli archi connessi al nodo, pesata dalla soppressione della coerenza locale |Psi|^2."""
+    if not SCUOTIMENTO or net.n == 0 or not len(net.i):
         return
-    Lam = lambda_vuoto(net)                        # energia del vuoto, dinamica
+    
+    # 1. Calcola l'energia del vuoto dinamica (scala di riferimento)
+    Lam = lambda_vuoto(net)
     if Lam <= 0:
         return
-    # SOPPRESSIONE PER COERENZA (non piu' per curvatura). Il vuoto deve ribollire dove NON c'e'
-    # materia, ed essere soppresso DENTRO la materia. Il discriminante giusto e' la coerenza
-    # locale |Psi|^2 (quanto un nodo E' materia), non la curvatura della metrica: misurato, la
-    # curvatura proteggeva la materia solo all'81% del vuoto (protezione debole), e le masse si
-    # decoerivano (~70% in 60 passi). La coerenza le protegge (~47% persa) senza spegnere la
-    # creazione dal vuoto. Forma NON-PARAMETRICA: lo stesso Lambda che da' l'ampiezza da' la
-    # scala di normalizzazione. Un nodo con energia ~Lambda (vuoto) ribolle a piena ampiezza;
-    # un nodo con energia >> Lambda (materia) e' fortemente soppresso. Nessun coefficiente libero.
+
     if not hasattr(net, "psi") or len(net.psi) < net.n:
         net.calcola_psi()
+        
     I2 = np.abs(net.psi[:net.n]) ** 2
-    ampiezza = np.sqrt(Lam) / (1.0 + I2 / Lam)     # sqrt(Lam)/(1 + |Psi|^2/Lam): legge pura
-    net.phivel[:net.n] += net.rng.normal(0, 1.0, net.n) * ampiezza
-    # Nota: l'eccitazione del vuoto sul settore spinoriale (se attivo) e' integrata dentro
-    # _passo_spinoriale (parte del ciclo di evoluzione in step), non qui.
+
+    # 2. Deriva lo stress locale dagli archi (senza parametri arbitrari)
+    # Stress dell'arco = |d - d0| / d0
+    stress_archi = np.abs(net.d - net.d0) / np.maximum(net.d0, 1e-6)
+    
+    # Mappa lo stress dagli archi ai nodi (media sui vicini di ciascun nodo)
+    stress_nodo = np.zeros(net.n)
+    grado_nodo = np.zeros(net.n)
+    i, j = net.i, net.j
+    mask = (i < net.n) & (j < net.n)
+    
+    np.add.at(stress_nodo, i[mask], stress_archi[mask])
+    np.add.at(stress_nodo, j[mask], stress_archi[mask])
+    np.add.at(grado_nodo, i[mask], 1.0)
+    np.add.at(grado_nodo, j[mask], 1.0)
+    
+    stress_nodo = stress_nodo / np.maximum(grado_nodo, 1.0)
+
+    # 3. Intensità non-parametrica: radice dello stress locale modulata dalla coerenza
+    # - Dove lo spazio è teso/frustrato, lo scuotimento sale.
+    # - Dove c'è materia coerente (|Psi|^2 alto), viene soppresso dalla formula pura (1 + I2/Lam).
+    intensita_stress = np.sqrt(stress_nodo + 1e-9)
+    ampiezza = intensita_stress * (np.sqrt(Lam) / (1.0 + I2 / Lam))
+
+    # Inietta l'agitazione vettoriale di fase firmata dalla chiralità
+    calcio = net.rng.normal(0.0, 1.0, net.n) * ampiezza
+    if hasattr(net, "perc_chi") and len(net.perc_chi) == net.n:
+        calcio = calcio * net.perc_chi  # Firma antichirale (rompe simmetria speculare)
+        
+    net.phivel[:net.n] += calcio
 # ============================================================================
 MU_PSI   = -0.05
 REPULS_LEGGE = True      # repulsione EMERGENTE con conversione dinamica (riempimento*coerenza vs Ncrit adattivo): legge, non parametro        # AUTO-INTERAZIONE repulsiva ATTIVA (default B): pressione
@@ -600,6 +620,21 @@ K_FRANGE = 0.0
 PAV_COM  = False        # PAVIMENTO COMOVENTE (legge): se True, il pavimento di d0 diventa
 # median(d0)-MAD(d0) (una dispersione sotto la mediana, scala col sistema) invece del muro
 # assoluto 0.05. Blocca il collasso anomalo locale, non il respiro comovente. Default off = 0.05.
+LS_AZIM = False         # L·S VETTORIALE (legge): se True, il verso tangenziale della
+# viriale viene dalla componente azimutale di (radiale x spinore _nb), non da circ_arc oscillante.
+# Il gradiente radiale incrociato con l'asse dello spinore (che non batte) da' un verso azimutale
+# STABILE = precessione. L'asse e' lo spinore (stato), non un parametro. Default off.
+OLON_PART = False       # OLONOMIA NELLA PARTIZIONE (legge): se True, la quota tangenziale
+# della viriale combina il curl |circ_arc| E il twist coerente accumulato |twn_a| (hypot), cosi'
+# il verso coerente (polo maturo) comanda QUANTO radiale diventa tangenziale e il freno, non solo
+# la direzione. Chiude il buco: coerenza -> curl basso -> poca conversione. Default off.
+POLO_MATURO = False     # POLO MATURO (legge, strategia 3): al twist_dip partecipa la
+# chiralita' del POLO che matura (nodo con torsione locale maggiore), non la differenza dei due
+# poli. Rompe il bilanciamento dei +-pi (olonomia netta acquista verso). Mantiene SU(2). Default off.
+VERSO_CHI = False       # AGGANCIO AL VERSO STABILE (legge): se True, FRAME_DRAG e'
+# pilotato dalla circolazione del solo twist_dip CHIRALE (segno fisso, gradiente vecchio/nuovo)
+# invece che dal tw pieno (dominato da dph oscillante -> il verso si inverte). Aggancia l'orbita
+# al verso che NON batte. Default off = comportamento attuale (FRAME_DRAG su tw pieno).
 SYNC_UPDATE = False     # AGGIORNAMENTO SINCRONO (transazionale): se True, dph (il ponte fase->
 # twist/metrica) legge la fase dallo SNAPSHOT di inizio passo, non da quella appena aggiornata.
 # Cosi' pesi materia (gia' calcolati a inizio passo) e dph vedono la STESSA fase (t-1): il passo
@@ -1293,7 +1328,14 @@ class Rete:
         # scala giusta (~0.2 della coppia principale) senza aggiustamenti. E' la forza non
         # conservativa (frame-dragging, v x B con B=twist) che devia trasversalmente il moto.
         if FRAME_DRAG and len(self.tw):
-            twn = self.tw / PHI_CRIT                     # twist adimensionale (scala di stato)
+            if VERSO_CHI and len(self.perc_chi) >= self.n:
+                # AGGANCIO AL VERSO STABILE: FRAME_DRAG pilotato dalla circolazione del solo
+                # twist_dip CHIRALE (segno fisso, gradiente vecchio/nuovo), NON dal tw pieno che
+                # e' dominato da dph=phi[i]-phi[j] (oscilla col battito delle fasi -> inverte il
+                # verso). Le chiralita' non battono come le fasi: il verso non si inverte.
+                twn = (np.pi * 0.5 * (self.perc_chi[i] - self.perc_chi[j])) / PHI_CRIT
+            else:
+                twn = self.tw / PHI_CRIT                 # twist adimensionale (scala di stato)
             twist_nodo = np.zeros(self.n)
             grado = np.zeros(self.n)
             np.add.at(twist_nodo, i, twn); np.add.at(twist_nodo, j, -twn)  # circolazione orientata
@@ -1381,7 +1423,21 @@ class Rete:
             # che unisce (perc_chi[i], perc_chi[j], di segno opposto per il filtro).
             # Ogni polo aggiunge il suo mezzo-twist di pi: il legame puo' accumulare
             # fino a 4pi invece di 2pi. L'avvolgimento passa da _w4 a _w8 (dominio doppio).
-            twist_dip = np.pi * 0.5 * (self.perc_chi[i] - self.perc_chi[j])  # ±pi dai due poli
+            if POLO_MATURO:
+                # POLO MATURO (strategia 3): al twist partecipa la chiralita' del POLO CHE MATURA
+                # (il nodo con torsione locale twn maggiore fra i,j), NON la differenza dei due poli.
+                # La differenza (chi_i-chi_j) da' +-pi bilanciati (olonomia netta zero); il polo
+                # maturo da' un contributo COERENTE (i poli maturi sono +1 via basculamento) ->
+                # olonomia netta con verso. La specie che partecipa e' selezionata dalla TORSIONE
+                # (stato), non a mano: legge, non parametro.
+                _twabs = np.abs(self.tw)
+                _twn = np.zeros(self.n)
+                np.add.at(_twn, i, _twabs); np.add.at(_twn, j, _twabs)
+                _twn = _twn / np.maximum(self._deg[:self.n] if len(self._deg) >= self.n else 1.0, 1.0)
+                _chi_mat = np.where(_twn[i] >= _twn[j], self.perc_chi[i], self.perc_chi[j])
+                twist_dip = np.pi * 0.5 * _chi_mat            # un solo polo (maturo), segno coerente
+            else:
+                twist_dip = np.pi * 0.5 * (self.perc_chi[i] - self.perc_chi[j])  # ±pi dai due poli
             _ttw = _tau_tw_locale(self) if TAU_LOCALI else TAU_TW
             self.tw += self._w8(dph + twist_dip - self.twp) - dt_e * self.tw / _ttw
             self.twp = self._w8(dph + twist_dip)
@@ -1982,11 +2038,16 @@ class Rete:
         # cio' che si allunga da un lato si accorcia dall'altro. Il moto SPOSTA la
         # materia, non espande lo spazio. E un tetto per arco impedisce derive locali.
         if len(proj):
-            proj = proj - proj.mean()                     # media zero: conserva la lunghezza
+            # DINAMICO DALLO STATO: l'intensita' del campo riduce la cancellazione della media
+            # dove c'e' materia (I/Imed alto), permettendo al moto di spostare realmente i nodi.
+            peso_campo = np.clip(0.5 * (I[ii] + I[jj]) / Imed, 0.0, 1.0)
+            fattore_locale = 1.0 - 0.7 * peso_campo   # nel vuoto frena, nella materia libera la spinta
+            
+            proj = proj - fattore_locale * proj.mean()
             passo_max = 0.01 * float(np.median(self.d0[mask])) if mask.any() else 0.0
-            proj = np.clip(proj, -passo_max, passo_max)    # nessuna deriva locale per passo
+            proj = np.clip(proj, -passo_max, passo_max)
             self.d0[mask] += proj
-            self.d0 = np.maximum(self.d0, self._floor_d0())            # PAVIMENTO: anche il moto non deve
+            self.d0 = np.maximum(self.d0, self._floor_d0())          # PAVIMENTO: anche il moto non deve
             #   portare d0 sotto la scala minima, o lo stress diverge (stessa causa)
         # LEGGE GRAVITAZIONALE BIFASE (direzione intrinseca). UNA sola legge firmata dalla torsione
         # rispetto al quanto: s = |tw|/PHI_CRIT - 1. Il SEGNO di s E' la direzione (s<0 attrae,
@@ -2003,22 +2064,21 @@ class Rete:
             scala_p = max(float(np.median(np.abs(dpozzo))), 1e-9)
             ampiezza = np.tanh(np.abs(dpozzo) / scala_p)  # scala dal pozzo, in [0,1), dallo stato
             grav = -np.tanh(s) * ampiezza                 # bifase: -s = verso (attrae/respinge), firmato
-            # ACCOPPIAMENTO SPIN-ORBITA: il SEGNO viene dallo SPINORE REALE _nb, non dal twist. La
-            # proiezione dello spin sulla direzione del pozzo (allineamento spin-gravita') firma
-            # l'accoppiamento: spin allineato col pozzo e anti-allineato si accoppiano in verso
-            # opposto. Questo e' il segno intrinseco dello spinore reale, non una grandezza imposta.
-            # La precessione non e' scritta: emerge da come lo spin (che gia' precede attorno al suo
-            # campo) risponde a una geometria modulata dal proprio allineamento.
             if SPINORE and self._nb is not None and len(self._nb) >= self.n:
-                # direzione del pozzo nello spazio, per arco: versore da i a j pesato dalla pendenza
                 dirp = (self.pos[jj] - self.pos[ii])
                 dirp = dirp / np.maximum(np.linalg.norm(dirp, axis=1, keepdims=True), 1e-9)
-                # spin dell'arco = media dei Bloch dei due estremi (lo spinore reale)
                 spin_arc = 0.5 * (self._nb[ii] + self._nb[jj])
-                # PROIEZIONE dello spin reale sulla direzione del pozzo: il segno intrinseco.
-                proiez = np.sum(spin_arc * dirp, axis=1) * np.sign(dpozzo)  # allineamento spin-pozzo
+                proiez = np.sum(spin_arc * dirp, axis=1) * np.sign(dpozzo)
                 grav = grav * proiez                       # firmato dallo SPINORE REALE (spin-orbita)
-            grav = grav - grav.mean()                     # conserva la lunghezza
+            
+            # --- MODIFICA GRAVITÀ DINAMICA ---
+            # Sostituisce il vecchio 'grav = grav - grav.mean()' rigido.
+            # L'onerosità della media si riduce dove c'e' materia densa (I/Imed alto).
+            w_campo_arco = 0.5 * (I[ii] + I[jj]) / Imed
+            onerosita_media = np.clip(0.8 / (1.0 + w_campo_arco), 0.1, 0.8)
+            grav = grav - onerosita_media * grav.mean()
+            # ---------------------------------
+
             c_sistema = LAM * np.sqrt(K_C)                 # velocita' del cono (da LAM, K_C: stato)
             passo_causale = c_sistema * DT                 # TETTO CAUSALE: quanto la causalita' permette
             if VIRIALE:
@@ -2036,22 +2096,43 @@ class Rete:
                 np.add.at(grado_c, ii, 1.0);     np.add.at(grado_c, jj, 1.0)
                 circ_nodo = circ_nodo / np.maximum(grado_c, 1.0)
                 circ_arc = 0.5 * (circ_nodo[ii] + circ_nodo[jj])  # circolazione orientata per arco (curl)
-                r_rad = ampiezza                                  # |pozzo| gia' normalizzato: tanh(|dpozzo|/scala_p)
-                t_tan = np.tanh(np.abs(circ_arc))                 # |circolazione orientata| normalizzata, in [0,1)
-                H = np.maximum(np.hypot(r_rad, t_tan), 1e-9)      # ipotenusa = budget totale
-                cos2 = (r_rad / H) ** 2                            # quota RADIALE (cadere)
-                sin2 = (t_tan / H) ** 2                            # quota TANGENZIALE (girare)
-                if ZETA_VIR:                                      # memorizza la quota tangenziale per-arco (freno anisotropo, prossimo step)
+                r_rad = ampiezza
+                if OLON_PART:
+                    t_tan = np.tanh(np.hypot(np.abs(circ_arc), np.abs(twn_a)))
+                else:
+                    t_tan = np.tanh(np.abs(circ_arc))
+                H = np.maximum(np.hypot(r_rad, t_tan), 1e-9)
+                cos2 = (r_rad / H) ** 2
+                sin2 = (t_tan / H) ** 2
+                if ZETA_VIR:
                     s2full = np.zeros(len(self.i))
                     s2full[mask] = sin2
                     self._sin2_vir = s2full
-                radiale = grav * cos2                              # attrazione ridotta (feedback negativo)
-                tangenz = np.abs(grav) * sin2 * np.sign(circ_arc) # verso dalla CIRCOLAZIONE ORIENTATA (coerente)
+                radiale = grav * cos2
+                if LS_AZIM and self._nb is not None and len(self._nb) >= self.n:
+                    _cen = self.pos[:self.n].mean(0)
+                    _rmid = 0.5 * (self.pos[ii] + self.pos[jj]) - _cen
+                    _rhat = _rmid / np.maximum(np.linalg.norm(_rmid, axis=1, keepdims=True), 1e-9)
+                    _spin = 0.5 * (self._nb[ii] + self._nb[jj])
+                    _azim = np.cross(_rhat, _spin)[:, 2]
+                    tangenz = np.abs(grav) * sin2 * np.sign(_azim)
+                else:
+                    tangenz = np.abs(grav) * sin2 * np.sign(circ_arc)
                 spinta = radiale + tangenz
-                spinta = spinta - spinta.mean()                   # conserva la lunghezza
+                
+                # DINAMICO LOCALE DALLO STATO: alleggerisce la media zero dove il campo e' denso
+                w_campo_arco = 0.5 * (I[ii] + I[jj]) / Imed
+                onerosita_media = np.clip(0.8 / (1.0 + w_campo_arco), 0.1, 0.8)
+                spinta = spinta - onerosita_media * spinta.mean()
+                
+                passo_causale = c_sistema * DT
                 spinta = np.clip(spinta, -passo_causale, passo_causale)
                 self.d0[mask] += spinta * float(np.median(self.d0[mask]))
             else:
+                w_campo_arco = 0.5 * (I[ii] + I[jj]) / Imed
+                onerosita_media = np.clip(0.8 / (1.0 + w_campo_arco), 0.1, 0.8)
+                
+                grav = grav - onerosita_media * grav.mean()
                 grav = np.clip(grav, -passo_causale, passo_causale)
                 self.d0[mask] += grav * float(np.median(self.d0[mask]))
             self.d0 = np.maximum(self.d0, self._floor_d0())
@@ -2968,7 +3049,7 @@ def _applica_flag(a):
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -2998,6 +3079,18 @@ def _applica_flag(a):
     ZETA_VIR = bool(getattr(a, "zeta_vir", False)) # freno anisotropo (legge): default off = non-regressione
     PAV_COM = bool(getattr(a, "pav_com", False))   # pavimento comovente (legge): default off = muro assoluto 0.05
     SYNC_UPDATE = bool(getattr(a, "sync", False)) # aggiornamento sincrono (transazionale): default off
+    VERSO_CHI = bool(getattr(a, "verso_chi", False)) # aggancio al verso chirale stabile: default off
+    LS_AZIM = bool(getattr(a, "ls_azim", False))   # L.S vettoriale azimutale: default off
+    POLO_MATURO = bool(getattr(a, "polo_maturo", False)) # polo maturo (strategia 3): default off
+    OLON_PART = bool(getattr(a, "olon_part", False)) # olonomia nella partizione: default off
+    if OLON_PART:
+        print("[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)")
+    if POLO_MATURO:
+        print("[polo-maturo] al twist partecipa la chiralita del polo che matura (twn maggiore)")
+    if LS_AZIM:
+        print("[ls-azim] L.S vettoriale: verso tangenziale da (radiale x spinore), azimutale stabile")
+    if VERSO_CHI:
+        print("[verso-chi] FRAME_DRAG pilotato dal verso CHIRALE stabile (non dal tw oscillante)")
     if SYNC_UPDATE:
         print("[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)")
     if PAV_COM:
@@ -3053,18 +3146,45 @@ def esegui_headless(a):
     # subito per far scattare la prima fase.
     if a.test:
         avvia_test(a.test)()
+    # DB nel VIDEO: se --sync-db e il file esiste, CARICA lo stato (sovrascrive la scena appena
+    # creata) e renderizza IN AVANTI da li' - senza risimulare la formazione. Stessa protezione
+    # hash-versione del batch. Utile: batch veloce col DB fino al punto interessante, poi video
+    # corto che riparte da quello stato. (Il tracking-masse/didascalie puo' rietichettarsi;
+    # il rendering dell'interferenza e' corretto.)
+    import os as _os_v
+    _db_v = getattr(a, "sync_db", None)
+    if _db_v and _os_v.path.exists(_db_v):
+        try:
+            net.carica_stato(_db_v)
+            print(f"[db-video] stato CARICATO da {_db_v}: renderizzo IN AVANTI da nodi={net.n}", flush=True)
+        except RuntimeError as _e_v:
+            print(f"[db-video] {_e_v}", flush=True); raise
+    elif _db_v:
+        print(f"[db-video] {_db_v} non esiste: renderizzo dalla formazione (nessuno stato da caricare)", flush=True)
     w = FFMpegWriter(fps=a.fps, bitrate=4000,
                      metadata=dict(title=f"Muratore di Planck - {a.test}"))
     print(f"[headless] test={a.test} frame={n} fps={a.fps} - tutte le leggi attive")
+    _da_libera = bool(getattr(a, "da_libera", False))
+    if _da_libera:
+        print("[video] --da-libera: la formazione NON viene registrata, solo l'evoluzione libera", flush=True)
     with w.saving(fig, a.out, dpi=a.dpi):
-        for f in range(n):
-            update(f); w.grab_frame()
+        _registrando = not _da_libera
+        _grabbed = 0
+        _fmax = n + (3000 if _da_libera else 0)
+        for f in range(_fmax):
+            update(f)
+            if not _registrando and (test.get("nome") is None or test.get("fase", 0) >= 1):
+                _registrando = True
+                print(f"[video] EVOLUZIONE LIBERA a frame {f}: inizio registrazione", flush=True)
+            if _registrando:
+                w.grab_frame(); _grabbed += 1
             if (f + 1) % 25 == 0:
                 d = net.diagnostica()
-                print(f"   {f+1}/{n} nodi={net.n} archi={len(net.i)} "
-                      f"dilataz={100*d['dil']:+.1f}% torsione={d['tw']:.1f} "
-                      f"mitosi={net.nati}", flush=True)
-    print(f"[headless] scritto {a.out}")
+                print(f"   f={f+1} reg={_grabbed}/{n} nodi={net.n} torsione={d['tw']:.1f} "
+                      f"mitosi={net.nati} fase={test.get('fase')} nome={test.get('nome')}", flush=True)
+            if _grabbed >= n:
+                break
+    print(f"[headless] scritto {a.out} ({_grabbed} frame registrati)")
 
 
 def _cli():
@@ -3148,6 +3268,22 @@ def _cli():
                         "median(d0)-MAD(d0) (una dispersione sotto la mediana, scala col sistema) "
                         "invece del muro assoluto 0.05. Blocca il collasso anomalo locale, non il "
                         "respiro comovente. Default off = 0.05 assoluto (non-regressione).")
+    p.add_argument("--olon-part", action="store_true", dest="olon_part",
+                   help="OLONOMIA NELLA PARTIZIONE: la quota tangenziale usa curl + twist coerente "
+                        "(non solo curl), cosi' il verso coerente comanda la conversione e il freno, "
+                        "non solo la direzione. Usare con --polo-maturo --viriale. Default off.")
+    p.add_argument("--polo-maturo", action="store_true", dest="polo_maturo",
+                   help="POLO MATURO (legge): al twist partecipa la chiralita del polo che matura "
+                        "(torsione locale maggiore), non la differenza dei poli. Rompe il "
+                        "bilanciamento dei +-pi -> olonomia netta con verso. Usare con --chi-basc.")
+    p.add_argument("--ls-azim", action="store_true", dest="ls_azim",
+                   help="L.S VETTORIALE: il verso tangenziale della viriale viene dalla componente "
+                        "azimutale di (radiale x spinore _nb), non da circ_arc oscillante. Da' un "
+                        "verso azimutale STABILE (precessione). Usare con --viriale. Default off.")
+    p.add_argument("--verso-chi", action="store_true", dest="verso_chi",
+                   help="AGGANCIO AL VERSO STABILE: FRAME_DRAG pilotato dalla circolazione del solo "
+                        "twist_dip chirale (segno fisso) invece del tw pieno (dominato da dph "
+                        "oscillante che inverte il verso). Usare con --chi-basc. Default off.")
     p.add_argument("--sync", action="store_true", dest="sync",
                    help="AGGIORNAMENTO SINCRONO (transazionale): dph (ponte fase->twist/metrica) "
                         "legge la fase dallo snapshot di inizio passo, coerente coi pesi materia. "
@@ -3164,6 +3300,12 @@ def _cli():
     p.add_argument("--db-cleanup", dest="db_cleanup", action="store_true",
                    help="cancella il DB di stato prima di partire (run pulito da zero). Usare quando "
                         "la fisica e' cambiata (il DB verrebbe comunque rifiutato per hash diverso).")
+    p.add_argument("--da-libera", dest="da_libera", action="store_true",
+                   help="VIDEO: non registra la formazione, inizia a registrare quando il sistema "
+                        "entra in EVOLUZIONE LIBERA. Video corto e mirato.")
+    p.add_argument("--db-ogni", dest="db_ogni", type=int, default=250,
+                   help="ogni quanti passi salvare il DB di stato (default 250). Piu' basso = piu' "
+                        "sicuro contro le interruzioni, ma piu' scritture su disco.")
     p.add_argument("--batch", action="store_true",
                    help="processo batch: due masse, evoluzione lunga, misura la CONDENSAZIONE "
                         "nel vuoto fra le masse (ordine, densita', nuovo nucleo). Output numerico.")
@@ -3794,15 +3936,13 @@ def batch_condensazione(a):
     diag_path = getattr(a, "diaglog", None)
     diag_f = None
     _diag_header = None   # header dinamico: fissato alla prima riga (include colonne multimassa)
-    if diag_path:
-        diag_f = open(diag_path, "w")
-        print(f"[batch] LOG DIAGNOSTICO COMPLETO attivo -> {diag_path} (una riga per ogni step)")
     # ============ DB DI STATO (idempotente + versionato): spezzare i run ============
     import os as _os
     _db = getattr(a, "sync_db", None)
     if _db and getattr(a, "db_cleanup", False) and _os.path.exists(_db):
         _os.remove(_db); print(f"[db] --db-cleanup: rimosso {_db}, riparto pulito")
     _db_step0 = 0
+    _db_ogni = max(1, int(getattr(a, "db_ogni", 250)))
     if _db and _os.path.exists(_db):
         try:
             net.carica_stato(_db)
@@ -3810,20 +3950,49 @@ def batch_condensazione(a):
             print(f"[db] stato CARICATO da {_db}: riprendo da step interno {_db_step0}, nodi={net.n}")
         except RuntimeError as _e:
             print(f"[db] {_e}"); raise
-    for step in range(passi + 1):
+    # diaglog: se RESUME (_db_step0>0) apro in APPEND e NON riscrivo l'header (continuita');
+    # se fresh apro in WRITE. Cosi' il diaglog e' continuo attraverso i resume.
+    if diag_path:
+        _resume = _db_step0 > 0 and _os.path.exists(diag_path)
+        if _resume:
+            # tolgo l'eventuale OVERLAP: righe con step >= _db_step0 (il primo run puo' essere
+            # proseguito oltre l'ultimo salvataggio DB). Tengo header + righe con step < _db_step0,
+            # poi il loop appende da _db_step0 in avanti. Niente duplicati.
+            try:
+                _righe = open(diag_path).read().splitlines()
+                _hdr = _righe[0] if _righe else ""
+                _tenute = [_hdr] + [r for r in _righe[1:]
+                                    if r and r.split(",")[0].isdigit() and int(r.split(",")[0]) < _db_step0]
+                open(diag_path, "w").write("\n".join(_tenute) + "\n")
+            except Exception:
+                pass
+        diag_f = open(diag_path, "a" if _resume else "w")
+        if _resume:
+            _diag_header = "GIA_SCRITTO"   # marca: non riscrivere l'header in append
+        print(f"[batch] LOG DIAGNOSTICO COMPLETO {'(APPEND, resume)' if _resume else ''} -> {diag_path}")
+    # RESUME CORRETTO: se ripreso dal DB a _db_step0, fai solo i passi RIMANENTI per arrivare al
+    # totale 'passi' (non altri 'passi' interi), e numera il diaglog in CONTINUO (_db_step0 + step).
+    _rimanenti = max(0, passi - _db_step0)
+    if _db_step0 > 0:
+        print(f"[db] resume: {_db_step0} passi gia' fatti, ne mancano {_rimanenti} per arrivare a {passi}")
+    for step in range(_rimanenti + 1):
+        _step_glob = _db_step0 + step   # passo GLOBALE (continuo attraverso i resume)
         if step > 0:
             _passo(net)
-        # DB: salva periodicamente (ogni 1000 passi) cosi' un run interrotto e' riprendibile
-        if _db and step > 0 and step % 1000 == 0:
-            net._db_step = _db_step0 + step
+        # DB: salva periodicamente (default ogni 250 passi, configurabile con --db-ogni) cosi'
+        # un run interrotto e' riprendibile senza perdere troppo lavoro.
+        if _db and step > 0 and _step_glob % _db_ogni == 0:
+            net._db_step = _step_glob
             net.salva_stato(_db)
         if diag_f is not None:
-            d = _diag_completa(net, step); d['step'] = step
-            if _diag_header is None:
+            d = _diag_completa(net, _step_glob); d['step'] = _step_glob
+            if _diag_header is None or _diag_header == "GIA_SCRITTO":
                 # ordine: colonne fisse note, poi le extra multimassa/interazione in coda
                 extra = [k for k in d.keys() if k not in _DIAG_COLS]
+                _scrivi_intestazione = (_diag_header is None)   # solo se fresh, non in append/resume
                 _diag_header = list(_DIAG_COLS) + extra
-                diag_f.write(",".join(_diag_header) + "\n")
+                if _scrivi_intestazione:
+                    diag_f.write(",".join(_diag_header) + "\n")
             diag_f.write(",".join(str(d.get(c, '')) for c in _diag_header) + "\n")
             diag_f.flush()   # flush a ogni step: se il run si blocca, il log fino al blocco e' salvo
         if step % ogni == 0:
