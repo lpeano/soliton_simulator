@@ -1167,11 +1167,63 @@ class Rete:
         f = 0.05 / LAM_BASE                       # rapporto di nascita (adimensionale), NON scelto
         return f * float(np.median(self.d0))
 
+    def salva_stato(self, path):
+        """DB VERSIONATO + IDEMPOTENTE. Salva TUTTE le grandezze di stato (generico: scorre
+        __dict__, cosi' non ne dimentica nessuna - requisito dell'idempotenza), PIU' lo stato
+        dell'RNG (senno' la mitosi riparte con casuali diverse) e l'HASH della versione del codice
+        (senno' si mescolano fisiche diverse). Al ricarico l'hash viene verificato e RIFIUTATO se
+        diverso: il DB non puo' iniettare uno stato vecchio in una fisica cambiata."""
+        import hashlib, pickle, sys
+        src = open(sys.modules[type(self).__module__].__file__, 'rb').read()
+        code_hash = hashlib.sha256(src).hexdigest()[:16]
+        stato = {'code_hash': code_hash,
+                 'rng_state': self.rng.bit_generator.state,
+                 'attrs': {}}
+        for k, v in self.__dict__.items():
+            if k == 'rng':
+                continue
+            if isinstance(v, (np.ndarray, int, float, bool, np.integer, np.floating, str)):
+                stato['attrs'][k] = v
+        tmp = path + '.tmp'
+        pickle.dump(stato, open(tmp, 'wb'), protocol=pickle.HIGHEST_PROTOCOL)
+        import os
+        os.replace(tmp, path)   # scrittura atomica: o il DB e' completo o non c'e'
+        return code_hash
+
+    def carica_stato(self, path):
+        """Ricarica lo stato dal DB. VERIFICA l'hash-versione: rifiuta se il codice e' cambiato
+        (protezione contro l'inquinamento fisica-vecchia/fisica-nuova). Ripristina anche l'RNG."""
+        import hashlib, pickle, sys, os
+        if not os.path.exists(path):
+            return False
+        src = open(sys.modules[type(self).__module__].__file__, 'rb').read()
+        code_hash = hashlib.sha256(src).hexdigest()[:16]
+        stato = pickle.load(open(path, 'rb'))
+        if stato.get('code_hash') != code_hash:
+            raise RuntimeError(
+                f"DB RIFIUTATO: versione codice diversa (DB={stato.get('code_hash')} vs ora={code_hash}). "
+                f"La fisica e' cambiata: uno stato vecchio inquinerebbe il run. Usa --db-cleanup per ripartire pulito.")
+        for k, v in stato['attrs'].items():
+            setattr(self, k, v)
+        self.rng.bit_generator.state = stato['rng_state']
+        # INVALIDA le cache derivate (matrice sparsa _S, permutazione, kernel): non sono ndarray,
+        # quindi non erano nel salvataggio; vanno ricostruite dalla topologia caricata (i/j/n).
+        # Senza questo, _mat() userebbe la struttura vecchia -> mismatch (lo stana l'idempotenza).
+        self._S = None
+        if hasattr(self, '_perm'): self._perm = None
+        if hasattr(self, '_ker_cache'): self._ker_cache = {}
+        return True
+
     def step(self):
         if self.n < 2 or not len(self.i): return
         i, j = self.i, self.j
         if SYNC_UPDATE:
-            self._phi_snap = self.phi.copy()   # snapshot t-1: dph lo leggera' da qui (aggiornamento sincrono)
+            # snapshot t-1 delle grandezze lette CROSS-sistema (sync completo): la fase (per dph),
+            # il twist (per il basculamento), la velocita' di fase (per il vuoto peq). Le letture
+            # INTERNE (simplettico phi<-phivel, d0<-d) restano fresche. Commit implicito a fine passo.
+            self._phi_snap = self.phi.copy()
+            self._tw_snap = self.tw.copy()
+            self._pv_snap = self.phivel.copy()
         r = self.ritmo()                       # None se l'orologio e' globale
         if r is None:
             dt_n = DT; dt_e = DT
@@ -1346,7 +1398,8 @@ class Rete:
         # chiralita' non nascono piu' a caso e restano fisse, ma seguono la torsione, cosi'
         # l'olonomia netta dei twist_dip acquista un verso dove la torsione lo impone.
         if CHI_BASC and len(self.perc_chi) >= self.n and len(self.tw):
-            twabs = np.abs(self.tw)
+            _tw_src = self._tw_snap if (SYNC_UPDATE and hasattr(self, '_tw_snap')) else self.tw
+            twabs = np.abs(_tw_src)
             twn = np.zeros(self.n)
             np.add.at(twn, i, twabs); np.add.at(twn, j, twabs)
             twn = twn / np.maximum(self._deg, 1)          # torsione locale per nodo
@@ -1392,7 +1445,8 @@ class Rete:
         if TAU_LOCALI:
             # TAU_BG LOCALE = kappa_BG / r, con r = ritmo del tempo proprio (|frequenza| di fase).
             # Il vuoto insegue la densita' al ritmo del tempo PROPRIO locale, non coordinato.
-            r_nodo = np.abs(self.phivel[:self.n]) if len(self.phivel) >= self.n else np.ones(self.n)
+            _pv_src = self._pv_snap if (SYNC_UPDATE and hasattr(self, '_pv_snap')) else self.phivel
+            r_nodo = np.abs(_pv_src[:self.n]) if len(_pv_src) >= self.n else np.ones(self.n)
             r_arco = 0.5 * (r_nodo[i] + r_nodo[j])
             tau_bg_loc = np.maximum(1.0 / np.maximum(r_arco, 1e-3), 1e-3)   # kappa=1: tau_bg = 1/r_locale
             self.peq += dt_e * ((rho - self.peq) / tau_bg_loc + flusso / TAU_DIFF)
@@ -3103,6 +3157,13 @@ def _cli():
                    help="1 = indicatore d'assi nel margine, 0 = nessun riferimento")
     p.add_argument("--giri", type=float, default=1.0,
                    help="giri di camera sulla durata della scena (0 = vista fissa)")
+    p.add_argument("--sync-db", dest="sync_db", default=None,
+                   help="DB DI STATO (idempotente+versionato): file da cui CARICARE lo stato a inizio "
+                        "run (se esiste e la versione combacia) e su cui SALVARE periodicamente. "
+                        "Permette di spezzare un run lungo in piu' sessioni.")
+    p.add_argument("--db-cleanup", dest="db_cleanup", action="store_true",
+                   help="cancella il DB di stato prima di partire (run pulito da zero). Usare quando "
+                        "la fisica e' cambiata (il DB verrebbe comunque rifiutato per hash diverso).")
     p.add_argument("--batch", action="store_true",
                    help="processo batch: due masse, evoluzione lunga, misura la CONDENSAZIONE "
                         "nel vuoto fra le masse (ordine, densita', nuovo nucleo). Output numerico.")
@@ -3736,9 +3797,26 @@ def batch_condensazione(a):
     if diag_path:
         diag_f = open(diag_path, "w")
         print(f"[batch] LOG DIAGNOSTICO COMPLETO attivo -> {diag_path} (una riga per ogni step)")
+    # ============ DB DI STATO (idempotente + versionato): spezzare i run ============
+    import os as _os
+    _db = getattr(a, "sync_db", None)
+    if _db and getattr(a, "db_cleanup", False) and _os.path.exists(_db):
+        _os.remove(_db); print(f"[db] --db-cleanup: rimosso {_db}, riparto pulito")
+    _db_step0 = 0
+    if _db and _os.path.exists(_db):
+        try:
+            net.carica_stato(_db)
+            _db_step0 = int(getattr(net, "_db_step", 0))
+            print(f"[db] stato CARICATO da {_db}: riprendo da step interno {_db_step0}, nodi={net.n}")
+        except RuntimeError as _e:
+            print(f"[db] {_e}"); raise
     for step in range(passi + 1):
         if step > 0:
             _passo(net)
+        # DB: salva periodicamente (ogni 1000 passi) cosi' un run interrotto e' riprendibile
+        if _db and step > 0 and step % 1000 == 0:
+            net._db_step = _db_step0 + step
+            net.salva_stato(_db)
         if diag_f is not None:
             d = _diag_completa(net, step); d['step'] = step
             if _diag_header is None:
