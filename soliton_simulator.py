@@ -2161,51 +2161,32 @@ class Rete:
             flusso = np.clip(flusso, -passo_max, passo_max)
             self.d0[mask] += flusso
             self.d0 = np.maximum(self.d0, self._floor_d0())
-        # --- COESIONE DI DOMINIO / TENSIO-SUPERFICIALE RADIALE (Legge di stato pura) ---
-        # Si oppone alla spiralizzazione tirando i nodi periferici verso il baricentro energetico locale,
-        # scalata unicamente sulla rigidita' del mezzo (c_s^2) e sulla densita' locale (senza parametri).
+        # --- COESIONE DI DOMINIO RELAZIONALE (Senza coordinate di sfondo) ---
+        # La coesione emerge come gradiente locale della densita' d'interferenza lungo il grafo,
+        # agendo direttamente sulla tensione di riposo d0 degli archi in base alla pendenza locale.
         if len(mask) and mask.any():
             I_nodi = np.abs(self.psi[:n]) ** 2
-            I_tot = float(I_nodi.sum())
             
-            # SOGLIA DI STATO: attivo solo se l'addensamento energetico supera la fluttuazione del vuoto
-            Lam_vuoto = lambda_vuoto(self)
+            # Gradiente locale di interferenza lungo l'arco (differenza di densita' tra i nodi)
+            d_archi = np.maximum(self.d[mask], 1e-6)
+            grad_I_relativo = (I_nodi[jj[mask]] - I_nodi[ii[mask]]) / d_archi
             
-            if I_tot > (max(self.n, 1) * Lam_vuoto * 0.1):
-                # Baricentro energetico locale (pesato per l'interferenza |Psi|^2)
-                baricentro = (self.pos[:n] * I_nodi[:, None]).sum(axis=0) / I_tot
-                
-                # Vettore posizione di ciascun nodo rispetto al baricentro
-                r_vett = self.pos[:n] - baricentro
-                r_dist = np.maximum(np.linalg.norm(r_vett, axis=1, keepdims=True), 1e-6)
-                r_hat = r_vett / r_dist  # Versore radiale
-                
-                # Mappiamo il versore radiale sugli archi (differenza tra i nodi estremi)
-                r_hat_arco = 0.5 * (r_hat[ii] + r_hat[jj])
-                
-                # Direzione dell'arco
-                v_arco = self.pos[jj] - self.pos[ii]
-                L_arco = np.maximum(np.linalg.norm(v_arco, axis=1, keepdims=True), 1e-9)
-                dir_arco = v_arco / L_arco
-                
-                # Proiezione radiale dell'arco (quanto l'arco e' allineato col raggio dal centro)
-                proiez_radiale = np.sum(r_hat_arco * dir_arco, axis=1)
-                
-                # Intensita' derivata dallo stato: pressione del campo scalata su c_s^2 e densita'
-                I_med = max(float(np.mean(I_nodi)), 1e-9)
-                
-                # Filtro geometrico non-lineare a barriera elastica fuori dal nucleo
-                distanza_arco = 0.5 * (r_dist[ii].ravel() + r_dist[jj].ravel() + 1e-6)
-                fattore_confine = np.tanh(distanza_arco / (LAM * 2.0))
-                
-                # Fattore di scala dimensionale derivato unicamente dallo stato (c_s^2 / I_med)
-                scala_statale = (CS_M ** 2) / I_med
-                
-                # Contrazione di d0 orientata radialmente verso il centro (segno negativo = attrazione)
-                coesione_radiale = -scala_statale * fattore_confine * proiez_radiale * (self.d0[mask] ** 2)
-                
-                self.d0[mask] += np.clip(coesione_radiale, -0.05 * self.d0[mask], 0.05 * self.d0[mask])
-                self.d0 = np.maximum(self.d0, self._floor_d0())
+            # Densita' di riferimento locale (media sull'arco rapportata alla scala del mezzo)
+            I_arco = 0.5 * (I_nodi[ii[mask]] + I_nodi[jj[mask]])
+            I_med = max(float(np.mean(I_nodi)), 1e-9)
+            
+            # La contrazione agisce proporzionalmente dove c'e' un incremento di densita' verso il cuore,
+            # scalata rigidamente sulla rigidita' del mezzo (c_s^2) e sulla portata locale LAM.
+            portata_breve = LAM * 3.0
+            filtro_portata = np.clip(1.0 - (self.d[mask] / portata_breve), 0.0, 1.0)
+            
+            scala_statale = (CS_M ** 2) / I_med
+            
+            # Legge di stato pura: gli archi si contraggono in proporzione al gradiente relazionale di campo
+            coesione_relazionale = -scala_statale * grad_I_relativo * filtro_portata * (self.d0[mask] ** 2) * (I_arco / I_med)
+            
+            self.d0[mask] += np.clip(coesione_relazionale, -0.05 * self.d0[mask], 0.05 * self.d0[mask])
+            self.d0 = np.maximum(self.d0, self._floor_d0())
 
     def diagnostica(self):
         I = self.intensita()
