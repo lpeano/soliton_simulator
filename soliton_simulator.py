@@ -1252,13 +1252,14 @@ class Rete:
     def step(self):
         if self.n < 2 or not len(self.i): return
         i, j = self.i, self.j
-        if SYNC_UPDATE:
-            # snapshot t-1 delle grandezze lette CROSS-sistema (sync completo): la fase (per dph),
-            # il twist (per il basculamento), la velocita' di fase (per il vuoto peq). Le letture
-            # INTERNE (simplettico phi<-phivel, d0<-d) restano fresche. Commit implicito a fine passo.
-            self._phi_snap = self.phi.copy()
-            self._tw_snap = self.tw.copy()
-            self._pv_snap = self.phivel.copy()
+        
+        # --- EVALUATE-THEN-COMMIT: Snapshot rigoroso di inizio passo (tempo t) ---
+        # Congeliamo lo stato iniziale affinché tutti i calcoli leggano i campi sincronizzati,
+        # eliminando il bias sequenziale senza perdere lo stile dei commenti originali.
+        _phi_t = self.phi.copy()
+        _tw_t = self.tw.copy()
+        _phivel_t = self.phivel.copy()
+
         r = self.ritmo()                       # None se l'orologio e' globale
         if r is None:
             dt_n = DT; dt_e = DT
@@ -1268,7 +1269,7 @@ class Rete:
             self._psi_prec = self.psi.copy()
         w = self._pesi(); self.eta += dt_n
         A = w * np.cos(self.phi0[i] - self.phi0[j])
-        z = np.exp(1j * self.phi)
+        z = np.exp(1j * _phi_t)  # <-- USA LO SNAPSHOT t
         coppia = K_C * np.imag(np.conj(z) * (self._mat(A) @ z))
         # AUTO-INTERAZIONE DELL'INTERFERENZA (opzione, MU_PSI=0 di default).
         # Termine di energia H_int = -(mu/2) sum_k |Psi_k|^2, derivato -> forza
@@ -1283,12 +1284,12 @@ class Rete:
         # u -> 1 quando un addensamento coerente raggiunge il numero critico: li' la repulsione
         # scatta e rifiuta altra concentrazione (il cluster "e' pieno"). Intensita' u(u+2) (forma
         # dalla saturazione del campo). Segno MENO = opposto all'attrazione K_C. Nessun numero messo
-        # lì: Ncrit e coerenza sono grandezze di stato, la conversione e' dinamica.
+        # li': Ncrit e coerenza sono grandezze di stato, la conversione e' dinamica.
         if REPULS_LEGGE:
             self.calcola_psi()
             MtPsi = self._mat(w) @ self.psi
             dHdphi = 2.0 * np.imag(np.conj(z) * MtPsi)   # direzione: de-concentra l'interferenza
-            zc = np.exp(1j * self.phi[:self.n])
+            zc = np.exp(1j * _phi_t[:self.n])  # <-- USA SNAPSHOT
             # COERENZA COL NUCLEO (corretta): NON la media vettoriale coi vicini di legame (che il
             # guscio in antifase abbatte, spegnendo la repulsione proprio quando la massa si struttura),
             # ma l'allineamento del nodo con la FASE DEL CAMPO Psi locale - il "battito" della sua
@@ -1298,7 +1299,7 @@ class Rete:
             # dove la materia si concentra, invece di spegnersi.
             psi_loc = self.psi[:self.n]
             fase_campo = np.angle(psi_loc + 1e-12)       # fase del campo locale = battito della massa
-            coerenza = np.cos(self.phi[:self.n] - fase_campo)   # +1 nucleo (in fase), -1 guscio (antifase)
+            coerenza = np.cos(_phi_t[:self.n] - fase_campo)   # +1 nucleo (in fase), -1 guscio (antifase)  # <-- USA SNAPSHOT
             coerenza = np.clip(coerenza, 0.0, 1.0)       # solo il nucleo costruttivo alimenta la repulsione
             # numero efficace di puntatori coerenti che il nodo sente: ampiezza del campo locale
             # (|Psi| e' gia' l'interferenza dei vicini coerenti) rapportata all'ampiezza per puntatore
@@ -1327,7 +1328,7 @@ class Rete:
         # (la torsione che il nodo sente, non la somma che crescerebbe col grado). Emerge nella
         # scala giusta (~0.2 della coppia principale) senza aggiustamenti. E' la forza non
         # conservativa (frame-dragging, v x B con B=twist) che devia trasversalmente il moto.
-        if FRAME_DRAG and len(self.tw):
+        if FRAME_DRAG and len(_tw_t):
             if VERSO_CHI and len(self.perc_chi) >= self.n:
                 # AGGANCIO AL VERSO STABILE: FRAME_DRAG pilotato dalla circolazione del solo
                 # twist_dip CHIRALE (segno fisso, gradiente vecchio/nuovo), NON dal tw pieno che
@@ -1335,12 +1336,13 @@ class Rete:
                 # verso). Le chiralita' non battono come le fasi: il verso non si inverte.
                 twn = (np.pi * 0.5 * (self.perc_chi[i] - self.perc_chi[j])) / PHI_CRIT
             else:
-                twn = self.tw / PHI_CRIT                 # twist adimensionale (scala di stato)
+                twn = _tw_t / PHI_CRIT                 # twist adimensionale (scala di stato)  # <-- USA SNAPSHOT
             twist_nodo = np.zeros(self.n)
             grado = np.zeros(self.n)
             np.add.at(twist_nodo, i, twn); np.add.at(twist_nodo, j, -twn)  # circolazione orientata
             np.add.at(grado, i, 1.0);      np.add.at(grado, j, 1.0)
             coppia = coppia + twist_nodo[:self.n] / np.maximum(grado[:self.n], 1.0)
+        
         if REGIME == "deterministico":
             # TERMOSTATO NOSE-HOOVER con TEMPERATURA TARGET = LEGGE (dal vuoto di equilibrio P_eq).
             # L'energia cinetica di fase e' <phivel^2>. Il target NON e' un parametro: e' l'energia
@@ -1348,7 +1350,7 @@ class Rete:
             # gia' una legge emergente del sistema, insegue la mediana globale di rho). L'attrito xi
             # evolve per riportare l'energia al target: xi>0 frena (energia alta), xi<0 RIFORNISCE
             # (energia bassa) -> il sistema si auto-sostiene invece di spegnersi.
-            E_cin = float(np.mean(self.phivel[:self.n]**2)) if self.n > 0 else 0.0
+            E_cin = float(np.mean(_phivel_t[:self.n]**2)) if self.n > 0 else 0.0  # <-- USA SNAPSHOT
             # TARGET come legge: energia di punto zero del vuoto di equilibrio. P_eq = mediana di d0
             # (densita' di sfondo); l'energia di fase che quel vuoto sostiene scala con P_eq attraverso
             # la relazione di dispersione (v^2, la rigidita' del mezzo). Nessun numero libero: tutto da
@@ -1371,19 +1373,10 @@ class Rete:
             # tempo di risposta tau_termo che si adegua al target mobile.
             self.xi_termo += dt_scal * (err_rel - self.xi_termo) / tau_termo
             self.xi_termo = float(np.clip(self.xi_termo, -2.0, 2.0))   # guardia: attrito fisico limitato
-            self.phivel += dt_n * (coppia - self.xi_termo * self.phivel) / M_PH
+            delta_phivel = dt_n * (coppia - self.xi_termo * _phivel_t) / M_PH  # <-- USA SNAPSHOT
         else:
-            self.phivel += dt_n * (coppia - G_PH * self.phivel) / M_PH
-        self.phi = (self.phi + dt_n * self.phivel) % (4 * np.pi)
-        # SETTORE SPINORIALE NON-ABELIANO (PASSO 2). Attivo solo con SPINORE. Ogni nodo porta
-        # un vero SPINORE a due componenti in C^2 (parametrizzato da phi e phi_s). L'accoppiamento
-        # fra due nodi e' una ROTAZIONE SU(2) il cui ASSE dipende dalla chiralita' del legame:
-        # legami fra opposti ruotano attorno a un asse (sigma_z), fra uguali attorno a un altro
-        # (sigma_x). Le matrici di Pauli NON commutano -> struttura non-abeliana SU(2) genuina,
-        # da cui puo' emergere lo spettro di spin. Con SPINORE spento il settore e' inerte
-        # (non-regressione: si recupera l'U(1) scalare su phi).
-        if SPINORE and self.n > 2 and len(self.phi_s) == self.n:
-            self._passo_spinoriale(i, j, w, dt_n)
+            delta_phivel = dt_n * (coppia - G_PH * _phivel_t) / M_PH           # <-- USA SNAPSHOT
+
         # SINCRONIZZAZIONE come LEGGE (non parametro): la forza deriva dalla dispersione locale
         # del tempo proprio (il pozzo dal centro di massa), come la soglia critica di Kuramoto,
         # che dipende dalla dispersione delle frequenze proprie. Dove i tempi propri sono simili
@@ -1391,6 +1384,7 @@ class Rete:
         # Costante universale 2/pi (Kuramoto), non tarata. K_SYNC resta come interruttore/scala
         # globale (1=legge piena); il profilo per nodo emerge dallo stato e scala col pozzo,
         # dunque col coarse-graining: legge indipendente dalla scala.
+        delta_sync_phi = np.zeros(self.n)
         if K_SYNC != 0.0 and self.n > 2:
             self.calcola_psi()
             I2 = np.abs(self.psi) ** 2
@@ -1412,17 +1406,22 @@ class Rete:
             attenua = scala / (scala + disp)               # <1 dove la dispersione e' alta
             forza = (2.0 / np.pi) * prof_rel * attenua
             forza = K_SYNC * forza                        # K_SYNC=1 = legge piena
-            zc = wI @ np.exp(1j * self.phi)
-            media = np.angle(zc)
-            self.phi = (self.phi + dt_n * forza * np.sin(media - self.phi)) % (4 * np.pi)
-        _phi_src = self._phi_snap if (SYNC_UPDATE and hasattr(self, '_phi_snap')) else self.phi
-        dph = self._w4(_phi_src[i] - _phi_src[j])
+            zc_sync = wI @ np.exp(1j * _phi_t)             # <-- USA SNAPSHOT
+            media = np.angle(zc_sync)
+            delta_sync_phi = dt_n * forza * np.sin(media - _phi_t)  # <-- USA SNAPSHOT
+
+        # --- COMMIT ATOMICO DELLE FASI (Unico punto di scrittura sincrono) ---
+        self.phivel = _phivel_t + delta_phivel
+        self.phi = (_phi_t + (dt_n * self.phivel) + delta_sync_phi) % (4 * np.pi)
+
+        # Calcolo della differenza di fase sull'arco basato rigorosamente sullo stato al tempo t
+        dph = self._w4(_phi_t[i] - _phi_t[j])
         if TORS_4PI and len(self.perc_chi) >= self.n:
             # TORSIONE A DOPPIA COPERTURA (4pi): sul legame dipolare, la torsione
             # include il contributo dei profili di percorrenza dei due antichirali
             # che unisce (perc_chi[i], perc_chi[j], di segno opposto per il filtro).
             # Ogni polo aggiunge il suo mezzo-twist di pi: il legame puo' accumulare
-            # fino a 4pi invece di 2pi. L'avvolgimento passa da _w4 a _w8 (dominio doppio).
+            # fino a 4pi invece di 2pi. L'avvolgimento passa da _w4 a _w8 (domain doppio).
             if POLO_MATURO:
                 # POLO MATURO (strategia 3): al twist partecipa la chiralita' del POLO CHE MATURA
                 # (il nodo con torsione locale twn maggiore fra i,j), NON la differenza dei due poli.
@@ -1449,12 +1448,12 @@ class Rete:
         # TORSIONE LOCALE rispetto al QUANTO DI OLONOMIA (PHI_CRIT = 2pi). La torsione degli
         # archi (per-arco) e' aggregata ai nodi (media di |tw| sugli archi incidenti); dove
         # supera il quanto, chi=+1 (materia matura, il giro e' completo), altrove chi=-1
-        # (spazio, giro incompleto). La soglia NON e' scelta: e' il quanto stesso del sistema,
+        # (spazio, giro incompleto). La soglia non e' scelta: e' il quanto stesso del sistema,
         # lo stesso di mitosi e gravita'. Rompe la simmetria casuale 50/50 dei +-pi: le
         # chiralita' non nascono piu' a caso e restano fisse, ma seguono la torsione, cosi'
         # l'olonomia netta dei twist_dip acquista un verso dove la torsione lo impone.
         if CHI_BASC and len(self.perc_chi) >= self.n and len(self.tw):
-            _tw_src = self._tw_snap if (SYNC_UPDATE and hasattr(self, '_tw_snap')) else self.tw
+            _tw_src = _tw_t  # Usa lo snapshot di inizio passo del twist
             twabs = np.abs(_tw_src)
             twn = np.zeros(self.n)
             np.add.at(twn, i, twabs); np.add.at(twn, j, twabs)
@@ -1501,7 +1500,7 @@ class Rete:
         if TAU_LOCALI:
             # TAU_BG LOCALE = kappa_BG / r, con r = ritmo del tempo proprio (|frequenza| di fase).
             # Il vuoto insegue la densita' al ritmo del tempo PROPRIO locale, non coordinato.
-            _pv_src = self._pv_snap if (SYNC_UPDATE and hasattr(self, '_pv_snap')) else self.phivel
+            _pv_src = _phivel_t  # Usa lo snapshot di inizio passo della velocità di fase
             r_nodo = np.abs(_pv_src[:self.n]) if len(_pv_src) >= self.n else np.ones(self.n)
             r_arco = 0.5 * (r_nodo[i] + r_nodo[j])
             tau_bg_loc = np.maximum(1.0 / np.maximum(r_arco, 1e-3), 1e-3)   # kappa=1: tau_bg = 1/r_locale
@@ -1568,7 +1567,7 @@ class Rete:
         # non hanno distanza di riposo nulla) e fa divergere lo stress |d-d0|/d0 anche
         # con d sano. Non e' un tetto arbitrario: e' la scala minima gia' presente su d.
         self.d0 = np.maximum(self.d0, self._floor_d0())
-
+        
     def mitosi(self):
         if self.n >= MAX_NODI or not len(self.tw): return 0
         avv = np.abs(self.tw)
@@ -2063,6 +2062,10 @@ class Rete:
             dpozzo = phi_g[jj] - phi_g[ii]
             scala_p = max(float(np.median(np.abs(dpozzo))), 1e-9)
             ampiezza = np.tanh(np.abs(dpozzo) / scala_p)  # scala dal pozzo, in [0,1), dallo stato
+            if SPINORE:
+                if not hasattr(self, "_nb") or self._nb is None or len(self._nb) < self.n:
+                    b0 = self.phi_s if len(self.phi_s) == self.n else np.zeros(self.n)
+                    self._nb = np.stack([np.sin(b0), np.zeros(self.n), np.cos(b0)], axis=1)
             grav = -np.tanh(s) * ampiezza                 # bifase: -s = verso (attrae/respinge), firmato
             if SPINORE and self._nb is not None and len(self._nb) >= self.n:
                 # 1. Eliminiamo il calcolo di dirp basato su self.pos (che introduce il gauge)
