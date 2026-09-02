@@ -2119,15 +2119,13 @@ class Rete:
             self.d0[mask] += flusso
             self.d0 = np.maximum(self.d0, self._floor_d0())
             
-        # --- COESIONE RELAZIONALE AUTOREGOLATA (Zero parametri, velocità da rapporti di stato) ---
+        # --- COESIONE RELAZIONALE CON ANCORA ELASTICA VERSO LA SCALA NATIVA (LAM) ---
         if len(mask) and mask.any():
             I_nodi = np.abs(self.psi[:n]) ** 2
             d_archi = np.maximum(self.d[mask], 1e-6)
             
-            # 1. Gradiente di campo lungo l'arco (forza di richiamo principale verso il nucleo)
             grad_I_relativo = (I_nodi[jj[mask]] - I_nodi[ii[mask]]) / d_archi
             
-            # 2. Laplaciano locale di campo sui nodi (curvatura / pressione di Laplace trasversale)
             lap_I = np.zeros(self.n)
             deg_loc = np.maximum(self._deg[:n], 1)
             np.add.at(lap_I, ii, I_nodi[jj] - I_nodi[ii])
@@ -2138,29 +2136,69 @@ class Rete:
             I_arco = 0.5 * (I_nodi[ii[mask]] + I_nodi[jj[mask]])
             I_med = max(float(np.mean(I_nodi)), 1e-9)
             
-            # 3. PORTATA DINAMICA DAL KERNEL (Senza fattori fissi tipo pi greco)
-            # La transizione di portata emerge in modo continuo tramite la tanh rapportata a LAM
             rapporto_portata = self.d[mask] / LAM
             filtro_portata = 1.0 - np.tanh(rapporto_portata)
             
             scala_statale = (CS_M ** 2) / I_med
             
-            # 4. PESO DINAMICO DEL TAGLIO ADENSIONALE DALLO STATO
-            # La variazione relativa di intensità modula la reazione di taglio (laplaciano)
             delta_relativo_arco = np.abs(I_nodi[jj[mask]] - I_nodi[ii[mask]]) / I_med
             peso_dinamico_shear = np.tanh(delta_relativo_arco)
             
-            # Legge di stato pura: bilancio geometrico tra gradiente e curvatura trasversale auto-regolata
-            coesione_relazionale = -scala_statale * (grad_I_relativo - peso_dinamico_shear * lap_arco) * filtro_portata * (self.d0[mask] ** 2) * (I_arco / I_med)
+            # 1. Dinamica di campo (gradiente e curvatura trasversale)
+            forza_campo = -(grad_I_relativo - peso_dinamico_shear * lap_arco)
             
-            # 5. LIMITATORE DI VELOCITÀ DINAMICO DALLO STATO (Sostituisce lo 0.05 fisso)
-            # Il tasso di aggiornamento scala istantaneamente in base allo stress metrico locale (|d - d0| / d0).
-            # A riposo lo stress è zero e la velocità si spegne; sotto sforzo, si apre in modo fluido.
+            # 2. Ancora elastica verso la scala nativa LAM (potenziale armonico di richiamo)
+            # Penalizza lo scostamento di d0 dalla lunghezza d'onda fondamentale LAM
+            scostamento_scala = (self.d0[mask] - LAM) / LAM
+            richiamo_elastico = -scostamento_scala
+            
+            # Composizione della coesione totale con il bilancio elastico
+            coesione_relazionale = scala_statale * (forza_campo + richiamo_elastico) * filtro_portata * (self.d0[mask] ** 2) * (I_arco / I_med)
+            
             stress_metrico = np.abs(self.d[mask] - self.d0[mask]) / np.maximum(self.d0[mask], 1e-6)
             tasso_dinamico = np.tanh(stress_metrico) * self.d0[mask]
             
             self.d0[mask] += np.clip(coesione_relazionale, -tasso_dinamico, tasso_dinamico)
             self.d0 = np.maximum(self.d0, self._floor_d0())
+        #--- ACCOPPIAMENTO LATERALE DINAMICO E RELATIVO (Senza costanti improprie) ---
+        if len(self.tw) and len(self.i) and self.n > 0:
+            mask = (self.i < n) & (self.j < n)
+            if mask.any():
+                ii, jj = self.i[mask], self.j[mask]
+                
+                # 1. Intensità di campo locale e media di riferimento relativa
+                I_nodi = np.abs(self.psi[:n]) ** 2 if hasattr(self, "psi") and len(self.psi) >= n else np.ones(n)
+                I_med = max(float(np.mean(I_nodi)), 1e-9)
+                
+                # 2. Spin locale normalizzato rispetto al quanto di olonomia
+                spin_relativo = np.abs(self.tw[mask]) / PHI_CRIT
+                
+                # 3. Geodetica e direzione ortogonale trasversale nel piano relazionale
+                v_rel = self.pos[jj] - self.pos[ii]
+                v_norm = np.maximum(np.linalg.norm(v_rel, axis=1, keepdims=True), 1e-9)
+                dir_radiale = v_rel / v_norm
+                
+                # Vettore ortogonale (di lato) per il dragging laterale
+                dir_laterale = np.stack([-dir_radiale[:, 1], dir_radiale[:, 0], np.zeros_like(dir_radiale[:, 0])], axis=1)
+                
+                # 4. Fattore di accoppiamento totalmente relativo (interazione vs inerzia locale)
+                inerzia_locale = np.maximum(0.5 * (I_nodi[ii] + I_nodi[jj]) / I_med, 1e-3)
+                accoppiamento_dinamico = spin_relativo / inerzia_locale
+                
+                # Proiezione del gradiente di memoria del moto sulla direzione trasversale
+                proiezione_trasversale = np.sum(self.mem_mot[ii] * dir_laterale, axis=1)
+                
+                # Shift di fase emergente guidato interamente dallo stato del sistema e dalla deformazione metrica
+                d_archi = np.maximum(self.d[mask], 1e-6)
+                d0_archi = np.maximum(self.d0[mask], 1e-6)
+                shift_fase_dinamico = accoppiamento_dinamico * proiezione_trasversale * (d_archi / d0_archi)
+                
+                # Limite geometrico causale del passo di fase per preservare la stabilità del campo
+                shift_fase_dinamico = np.clip(shift_fase_dinamico, -np.pi * 0.25, np.pi * 0.25)
+                
+                # Applica lo shift al campo di fase senza alterare le coordinate fisse dei puntatori (net.pos)
+                self.phi[ii] = (self.phi[ii] + shift_fase_dinamico) % (4 * np.pi)
+                self.d0 = np.maximum(self.d0, self._floor_d0())
 
     def diagnostica(self):
         I = self.intensita()
