@@ -597,7 +597,7 @@ TORS_4PI = True         # TORSIONE A DOPPIA COPERTURA (4pi): se True, la torsion
                         # dominio doppio [-4pi,4pi] includendo i profili di percorrenza dei
                         # legami dipolari, e la soglia di mitosi diventa 4pi. Prova
                         # sperimentale, default off: non tocca la torsione classica.
-MITOSI_DIR = 0.5        # MITOSI DIREZIONALE ATTIVA: il figlio nasce spostato in fase verso il
+MITOSI_DIR = 0.0        # MITOSI DIREZIONALE ATTIVA: il figlio nasce spostato in fase verso il
                         # figlio nasce decentrato verso il gradiente di torsione (frazione
                         # della semi-lunghezza dell'arco). Polarizza la replicazione e fa
                         # traslare il baricentro lungo la geodetica. Sperimentale.
@@ -1548,17 +1548,21 @@ class Rete:
             self.vd = self.vd + dts * (CS_M ** 2 * lap + src - beta * self.vd)
             self.d = np.maximum(self.d + dts * self.vd, 0.05)
         if TAU_LOCALI:
-            # TAU_P LOCALE = kappa_p * d/c_s (tempo di transito elastico dell'arco). kappa_p = TAU_P
-            # come rapporto adimensionale O(1). Invariante per riparametrizzazione: e' un TEMPO fisico
-            # dell'arco (quanto ci mette un'onda ad attraversarlo), non un numero di step.
-            # FLAG TAU_USA_D0: se True usa d0 (distanza di RIPOSO) invece di d (distanza REALE dilatata).
-            #   d  -> il tau cresce con lo spazio gonfiato: lascia dilatare di piu' (d_medio ~2.88)
-            #   d0 -> il tau si basa sul riposo: piu' stabile, meno gonfiaggio (d_medio ~1.33)
             if TAU_USA_D0:
                 d_arco = 0.5 * (self.d0[self.i] + self.d0[self.j]) if len(self.d0) else self.d0
             else:
                 d_arco = 0.5 * (self.d[self.i] + self.d[self.j]) if len(self.d) else self.d
-            tau_p_loc = np.maximum(d_arco / max(CS_M, 1e-9), 1e-3)   # kappa=1: tau_p = d_locale/c_s
+            
+            # --- CORREZIONE CAUSALE: RESISTENZA ELASTICA DEL NUCLEO ---
+            I_nodi = np.abs(self.psi[:self.n])**2 if hasattr(self, "psi") and len(self.psi) >= self.n else np.ones(self.n)
+            rho_arco = 0.5 * (I_nodi[self.i] + I_nodi[self.j])
+            rho_med = max(float(np.median(I_nodi)), 1e-9)
+            
+            # Nel nucleo denso (rho >> rho_med), aumentiamo TAU_P (es. x10 o x20).
+            # d0 oppone resistenza al cambiamento, accumulando elasticità e impedendo lo stiramento plastico.
+            fattore_elasticita = 1.0 + 100.0 * np.maximum(rho_arco / rho_med - 1.0, 0.0)
+            
+            tau_p_loc = (d_arco / max(CS_M, 1e-9)) * fattore_elasticita
             self.d0 += dt_e * (self.d - self.d0) / tau_p_loc
         else:
             self.d0 += dt_e * (self.d - self.d0) / TAU_P
