@@ -1673,8 +1673,8 @@ class Rete:
             # spinta repulsiva proporzionale a rep: d0 cresce dove il tempo proprio e' estremo.
             # limitata (2% per passo) e conservativa in media come nella memoria hebbiana.
             spinta = 0.02 * np.median(self.d0) * rep
-            self.d0 = self.d0 + spinta - spinta.mean()     # media zero: pressione, non espansione
-            self.d0 = np.maximum(self.d0, self._floor_d0())            # PAVIMENTO: la spinta non deve
+            self.d0 = self.d0 + spinta                     # Locale pura
+            self.d0 = np.maximum(self.d0, self._floor_d0())       # PAVIMENTO: la spinta non deve
             #   portare d0 sotto la scala minima, o lo stress |d-d0|/d0 diverge (bug rientrante)
         c = np.where(nasce)[0]
         if not len(c): return 0
@@ -2035,29 +2035,14 @@ class Rete:
         memedge = 0.5 * (self.mem_mot[ii] * (I[ii, None] / Imed) +
                          self.mem_mot[jj] * (I[jj, None] / Imed))
         proj = np.sum(memedge * dirarc, axis=1)
-        # CONSERVAZIONE: proj sposta le d0 (traslazione della massa) ma NON deve
-        # cambiare la lunghezza totale, altrimenti d0 si gonfia senza limite e le
-        # distanze esplodono (feedback divergente sugli archi). Sottraggo la media:
-        # cio' che si allunga da un lato si accorcia dall'altro. Il moto SPOSTA la
-        # materia, non espande lo spazio. E un tetto per arco impedisce derive locali.
+        
         if len(proj):
-            # DINAMICO DALLO STATO: l'intensita' del campo riduce la cancellazione della media
-            # dove c'e' materia (I/Imed alto), permettendo al moto di spostare realmente i nodi.
-            peso_campo = np.clip(0.5 * (I[ii] + I[jj]) / Imed, 0.0, 1.0)
-            fattore_locale = 1.0 - 0.7 * peso_campo   # nel vuoto frena, nella materia libera la spinta
-            
-            proj = proj - fattore_locale * proj.mean()
+            # --- LOCALE PURA: rimossa la sottrazione di proj.mean() ---
             passo_max = 0.01 * float(np.median(self.d0[mask])) if mask.any() else 0.0
             proj = np.clip(proj, -passo_max, passo_max)
             self.d0[mask] += proj
-            self.d0 = np.maximum(self.d0, self._floor_d0())          # PAVIMENTO: anche il moto non deve
-            #   portare d0 sotto la scala minima, o lo stress diverge (stessa causa)
-        # LEGGE GRAVITAZIONALE BIFASE (direzione intrinseca). UNA sola legge firmata dalla torsione
-        # rispetto al quanto: s = |tw|/PHI_CRIT - 1. Il SEGNO di s E' la direzione (s<0 attrae,
-        # s>0 respinge, s=0 equilibrio); il POZZO (somma I/d) da' la scala spaziale; il TWIST
-        # firmato ruota il vettore del moto (precessione intrinseca, non attenuazione). Il tetto
-        # e' CAUSALE (c*dt, c dalla velocita' del cono = LAM*sqrt(K_C)), non un numero: la
-        # stabilita' emerge dalla causalita'. Nessun parametro, ampiezza e direzione dallo stato.
+            self.d0 = np.maximum(self.d0, self._floor_d0())          # PAVIMENTO
+            
         if GRAV_BIFASE and len(proj):
             s = np.abs(self.tw[mask]) / PHI_CRIT - 1.0    # grandezza FIRMATA: segno = direzione
             phi_g = np.zeros(self.n)                       # pozzo sul grafo (scala spaziale)
@@ -2072,50 +2057,22 @@ class Rete:
                     self._nb = np.stack([np.sin(b0), np.zeros(self.n), np.cos(b0)], axis=1)
             grav = -np.tanh(s) * ampiezza                 # bifase: -s = verso (attrae/respinge), firmato
             if SPINORE and self._nb is not None and len(self._nb) >= self.n:
-                # 1. Eliminiamo il calcolo di dirp basato su self.pos (che introduce il gauge)
-                # dirp = (self.pos[jj] - self.pos[ii])
-                # dirp = dirp / np.maximum(np.linalg.norm(dirp, axis=1, keepdims=True), 1e-9)
-                
-                # 2. Sostituiamo spin_arc e la proiezione spaziale con il prodotto scalare interno 
-                # tra i vettori di Bloch dei nodi estremi dell'arco (invariante di gauge rotazionale).
-                prod_interno = np.sum(self._nb[ii] * self._nb[jj], axis=1) # forma: (n_archi,)
-                
-                # 3. La proiezione diventa l'allineamento interno modulato dal segno del pozzo
+                prod_interno = np.sum(self._nb[ii] * self._nb[jj], axis=1)
                 proiez = prod_interno * np.sign(dpozzo)
-                
                 grav = grav * proiez
-            # if SPINORE and self._nb is not None and len(self._nb) >= self.n:
-            #     dirp = (self.pos[jj] - self.pos[ii])
-            #     dirp = dirp / np.maximum(np.linalg.norm(dirp, axis=1, keepdims=True), 1e-9)
-            #     spin_arc = 0.5 * (self._nb[ii] + self._nb[jj])
-            #     proiez = np.sum(spin_arc * dirp, axis=1) * np.sign(dpozzo)
-            #     grav = grav * proiez                       # firmato dallo SPINORE REALE (spin-orbita)
             
-            # --- MODIFICA GRAVITÀ DINAMICA ---
-            # Sostituisce il vecchio 'grav = grav - grav.mean()' rigido.
-            # L'onerosità della media si riduce dove c'e' materia densa (I/Imed alto).
-            w_campo_arco = 0.5 * (I[ii] + I[jj]) / Imed
-            onerosita_media = np.clip(0.8 / (1.0 + w_campo_arco), 0.1, 0.8)
-            grav = grav - onerosita_media * grav.mean()
-            # ---------------------------------
+            # --- LOCALE PURA: rimossa la sottrazione di grav.mean() ---
+            # grav resta intatto, senza compensazioni globali
 
             c_sistema = LAM * np.sqrt(K_C)                 # velocita' del cono (da LAM, K_C: stato)
-            passo_causale = c_sistema * DT                 # TETTO CAUSALE: quanto la causalita' permette
+            passo_causale = c_sistema * DT                 # TETTO CAUSALE
             if VIRIALE:
-                # CONVERSIONE VIRIALE (legge, zero parametri): la spinta radiale NON e' additiva
-                # (fu il fallimento di K_FRANGE) ma si RIPARTISCE fra cadere e girare. La direzione
-                # tangenziale segue la CIRCOLAZIONE ORIENTATA del twist (+tw su i, -tw su j), come
-                # FRAME_DRAG: ha curl coerente anche quando tw_mean~0 (il segno grezzo del twist,
-                # bilanciato, NON circolava). Pozzo e circolazione normalizzati con lo stesso tanh.
-                # theta = atan2(|t_tan|,|r_rad|): cos^2 resta RADIALE (attrazione ridotta), sin^2
-                # diventa TANGENZIALE (orbita). cos^2+sin^2=1 -> budget conservato. Dove non c'e'
-                # circolazione coerente (circ~0) la conversione tangenziale svanisce da se'.
-                twn_a = self.tw[mask] / PHI_CRIT                   # twist adimensionale (come FRAME_DRAG)
+                twn_a = self.tw[mask] / PHI_CRIT
                 circ_nodo = np.zeros(self.n); grado_c = np.zeros(self.n)
-                np.add.at(circ_nodo, ii, twn_a); np.add.at(circ_nodo, jj, -twn_a)  # CIRCOLAZIONE ORIENTATA
+                np.add.at(circ_nodo, ii, twn_a); np.add.at(circ_nodo, jj, -twn_a)
                 np.add.at(grado_c, ii, 1.0);     np.add.at(grado_c, jj, 1.0)
                 circ_nodo = circ_nodo / np.maximum(grado_c, 1.0)
-                circ_arc = 0.5 * (circ_nodo[ii] + circ_nodo[jj])  # circolazione orientata per arco (curl)
+                circ_arc = 0.5 * (circ_nodo[ii] + circ_nodo[jj])
                 r_rad = ampiezza
                 if OLON_PART:
                     t_tan = np.tanh(np.hypot(np.abs(circ_arc), np.abs(twn_a)))
@@ -2140,61 +2097,42 @@ class Rete:
                     tangenz = np.abs(grav) * sin2 * np.sign(circ_arc)
                 spinta = radiale + tangenz
                 
-                # DINAMICO LOCALE DALLO STATO: alleggerisce la media zero dove il campo e' denso
-                w_campo_arco = 0.5 * (I[ii] + I[jj]) / Imed
-                onerosita_media = np.clip(0.8 / (1.0 + w_campo_arco), 0.1, 0.8)
-                spinta = spinta - onerosita_media * spinta.mean()
+                # --- LOCALE PURA: rimossa la sottrazione di spinta.mean() ---
                 
                 passo_causale = c_sistema * DT
                 spinta = np.clip(spinta, -passo_causale, passo_causale)
                 self.d0[mask] += spinta * float(np.median(self.d0[mask]))
             else:
-                w_campo_arco = 0.5 * (I[ii] + I[jj]) / Imed
-                onerosita_media = np.clip(0.8 / (1.0 + w_campo_arco), 0.1, 0.8)
-                
-                grav = grav - onerosita_media * grav.mean()
+                # --- LOCALE PURA ---
                 grav = np.clip(grav, -passo_causale, passo_causale)
                 self.d0[mask] += grav * float(np.median(self.d0[mask]))
             self.d0 = np.maximum(self.d0, self._floor_d0())
-        # MOTO LUNGO LE FRANGE: spinta tangenziale lungo il gradiente di fase (le frange
-        # rotanti = geodetiche del flusso). Diversamente dal gradiente di torsione (radiale),
-        # il flusso di fase e' tangenziale e produce orbita/precessione. Per ogni arco, la
-        # differenza di fase pesata dall'intensita' da' il flusso; sposta le d0 lungo di esso.
+            
         if K_FRANGE != 0.0 and len(proj):
-            dphi_arc = np.angle(np.exp(1j * (self.phi[jj] - self.phi[ii])))  # flusso di fase
-            wI = 0.5 * (I[ii] + I[jj]) / Imed              # peso: intensita' della frangia
+            dphi_arc = np.angle(np.exp(1j * (self.phi[jj] - self.phi[ii])))
+            wI = 0.5 * (I[ii] + I[jj]) / Imed
             flusso = K_FRANGE * wI * dphi_arc
-            flusso = flusso - flusso.mean()                # conserva la lunghezza (come proj)
+            
+            # --- LOCALE PURA: rimossa la sottrazione di flusso.mean() ---
+            
             flusso = np.clip(flusso, -passo_max, passo_max)
             self.d0[mask] += flusso
             self.d0 = np.maximum(self.d0, self._floor_d0())
-        # --- COESIONE DI DOMINIO RELAZIONALE (Senza coordinate di sfondo) ---
-        # La coesione emerge come gradiente locale della densita' d'interferenza lungo il grafo,
-        # agendo direttamente sulla tensione di riposo d0 degli archi in base alla pendenza locale.
+            
+        # --- COESIONE DI DOMINIO RELAZIONALE ---
         if len(mask) and mask.any():
             I_nodi = np.abs(self.psi[:n]) ** 2
-            
-            # Gradiente locale di interferenza lungo l'arco (differenza di densita' tra i nodi)
             d_archi = np.maximum(self.d[mask], 1e-6)
             grad_I_relativo = (I_nodi[jj[mask]] - I_nodi[ii[mask]]) / d_archi
-            
-            # Densita' di riferimento locale (media sull'arco rapportata alla scala del mezzo)
             I_arco = 0.5 * (I_nodi[ii[mask]] + I_nodi[jj[mask]])
             I_med = max(float(np.mean(I_nodi)), 1e-9)
-            
-            # La contrazione agisce proporzionalmente dove c'e' un incremento di densita' verso il cuore,
-            # scalata rigidamente sulla rigidita' del mezzo (c_s^2) e sulla portata locale LAM.
             portata_breve = LAM * 3.0
             filtro_portata = np.clip(1.0 - (self.d[mask] / portata_breve), 0.0, 1.0)
-            
             scala_statale = (CS_M ** 2) / I_med
-            
-            # Legge di stato pura: gli archi si contraggono in proporzione al gradiente relazionale di campo
             coesione_relazionale = -scala_statale * grad_I_relativo * filtro_portata * (self.d0[mask] ** 2) * (I_arco / I_med)
-            
             self.d0[mask] += np.clip(coesione_relazionale, -0.05 * self.d0[mask], 0.05 * self.d0[mask])
             self.d0 = np.maximum(self.d0, self._floor_d0())
-
+            
     def diagnostica(self):
         I = self.intensita()
         z = np.exp(1j * self.phi)
