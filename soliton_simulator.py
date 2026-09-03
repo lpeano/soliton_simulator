@@ -831,8 +831,8 @@ class Rete:
         misura le DUE componenti non-gradientali che la decomposizione di Hodge
         ammette: l'OLONOMIA di fase (somma di w4(phi_i-phi_j) sul ciclo: !=0 se
         c'e' un vortice/difetto topologico, componente armonica) e la fase di
-        BERRY spinoriale (solid angle racchiuso dai vettori di Bloch sul ciclo:
-        curvatura non-abeliana SU(2), versione gauge-invariante di n_i x n_j)."""
+        BERRY spinoriale (invariante di Bargmann: prodotto ciclico degli overlap
+        tra spinori sul ciclo; curvatura non-abeliana SU(2), gauge-invariante)."""
         vuoto = {"n_cicli": 0, "circolazione_max": 0.0,
                  "circolazione_media_assoluta": 0.0, "circolazione_rms": 0.0,
                  "corrente_arco_max": 0.0, "gradiente_rho_arco_media_assoluta": 0.0,
@@ -862,17 +862,22 @@ class Rete:
         berry = []
         if ha_spin:
             nb = self._nb
+            # spinori di spin-1/2 dai vettori di Bloch; la fase geometrica e' l'INVARIANTE DI
+            # BARGMANN (prodotto ciclico degli overlap <s_k|s_{k+1}>): ciclico -> indipendente dal
+            # vertice di partenza, le fasi arbitrarie dei singoli spinori si cancellano. Gauge-invariante
+            # (a differenza del solid angle a ventaglio, che dipende dall'apice = dall'orientazione arco).
+            th = np.arccos(np.clip(nb[:, 2], -1.0, 1.0))
+            ph = np.arctan2(nb[:, 1], nb[:, 0])
+            spq = np.stack([np.cos(th / 2.0), np.sin(th / 2.0) * np.exp(1j * ph)], axis=1)
             for ciclo in cicli:
                 seq = self._vertici_ciclo(ciclo)
                 if seq is None or len(seq) < 3:
                     continue
-                a = nb[seq[0]]; om = 0.0
-                for k in range(1, len(seq) - 1):
-                    b = nb[seq[k]]; c = nb[seq[k + 1]]
-                    num = float(np.dot(a, np.cross(b, c)))
-                    den = 1.0 + float(np.dot(a, b) + np.dot(b, c) + np.dot(c, a))
-                    om += 2.0 * np.arctan2(num, den)
-                berry.append(om)
+                s = spq[seq]
+                ov = np.sum(np.conj(s) * np.roll(s, -1, axis=0), axis=1)  # <s_k|s_{k+1}> ciclico
+                P = np.prod(ov)
+                if abs(P) > 1e-12:
+                    berry.append(float(np.angle(P)))
         berry = np.array(berry, float) if berry else np.zeros(0)
         return {"n_cicli": int(len(valori)),
                 "circolazione_max": float(np.max(np.abs(valori))),
