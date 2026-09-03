@@ -22,7 +22,7 @@ proprie. Il nodo $i$ porta:
 
 Il puntatore elementare è
 
-$$z_i=e^{\mathrm i\phi_i}, \qquad |z_i|=1.$$
+$$z_i=e^{\mathrm{i}\phi_i}, \qquad |z_i|=1.$$
 
 La grandezza fisica primaria del modello non è la posizione di un puntatore, ma il
 campo d'interferenza prodotto dalle relazioni fra puntatori.
@@ -61,13 +61,28 @@ stato.
 
 Il ritmo locale è ricavato dalla variazione della fase del campo:
 
-$$f_i=\frac{|\Delta\arg\Psi_i|}{DT}, \qquad x_i=\frac{f_i}{\operatorname{med}(f)},$$
+$$f_i=\frac{|\Delta\arg\Psi_i|}{DT}, \qquad x_i=\frac{f_i}{\mathrm{med}(f)},$$
 
 $$r_i^{(\tau)}=1+\tau_{loc}\left(
 \frac{x_i/\sqrt{1+x_i^2}}{1/\sqrt 2}-1\right),
 \qquad dt_i=DT\,r_i^{(\tau)}.$$
 
 Il passo di un arco è la media dei passi locali ai suoi estremi.
+
+Nella sincronizzazione pesata sul taglio, il profilo del pozzo non viene
+normalizzato con una media dell'intero sistema. Se $W$ è la matrice dei pesi e
+$\mathbf 1$ il vettore unitario, il riferimento locale è
+
+$$\bar p_i=\frac{(W\,\mathbf p)_i}{(W\,\mathbf 1)_i},
+\qquad p_i^{rel}=\frac{p_i}{\bar p_i}.$$
+
+Analogamente, la scala del taglio usa l'RMS dei soli vicini:
+
+$$s_i^{loc}=\sqrt{\frac{(W\,\mathbf s^2)_i}{(W\,\mathbf 1)_i}},
+\qquad K_i^{shear}=1+\frac{s_i}{s_i^{loc}}.$$
+
+Queste normalizzazioni sono topologicamente locali; non usano `pozzo.mean()` o
+`disp_shear.mean()` sull'intero array.
 
 ## 4. Dinamica delle fasi
 
@@ -77,7 +92,7 @@ $$A_{ij}=w_{ij}\cos(\phi_{0i}-\phi_{0j}),$$
 
 il termine di fase è
 
-$$T_i^{fase}=K_C\,\operatorname{Im}\left[z_i^*(M(A)z)_i\right].$$
+$$T_i^{fase}=K_C\,\mathrm{Im}\left[z_i^*(M(A)z)_i\right].$$
 
 L'integrazione discreta è
 
@@ -90,10 +105,10 @@ $$\phi_i^{n+1}=\phi_i^n+dt_i v_i^{n+1}+\Delta\phi_i^{sync}
 Il codice usa snapshot di inizio passo per rendere coerenti peso, fase e torsione.
 Nel regime deterministico il termine dissipativo è sostituito da un termostato:
 
-$$E_{cin}=\langle v^2\rangle, \qquad T_*=c_s^2P_{eq},
-\qquad e=\frac{E_{cin}-T_*}{T_*},$$
+$$E_{\mathrm{cin}}=\langle v^2\rangle, \qquad T_{*}=c_s^2P_{eq},
+\qquad e=\frac{E_{\mathrm{cin}}-T_{*}}{T_{*}},$$
 
-$$\xi^{n+1}=\xi^n+\frac{dt}{\tau_*}(e-\xi^n),
+$$\xi^{n+1}=\xi^n+\frac{dt}{\tau_{*}}(e-\xi^n),
 \qquad v^{n+1}=v^n+\frac{dt}{M_{ph}}(T-\xi v).$$
 
 ## 5. Repulsione emergente
@@ -101,7 +116,7 @@ $$\xi^{n+1}=\xi^n+\frac{dt}{\tau_*}(e-\xi^n),
 La repulsione principale non usa `MU_PSI` come manopola. Il gradiente della densità
 rispetto alle fasi è
 
-$$D_i=2\,\operatorname{Im}\left[z_i^*(M(w)\Psi)_i\right].$$
+$$D_i=2\,\mathrm{Im}\left[z_i^*(M(w)\Psi)_i\right].$$
 
 La vicinanza locale al collasso è
 
@@ -122,12 +137,12 @@ alimenta direttamente la repulsione del nucleo.
 
 La soglia critica adattiva è
 
-$$N_c(\lambda,\gamma,s)=C\lambda^{-3}\gamma^b(1+s)^\theta,
+$$N_{c}(\lambda,\gamma,s)=C\lambda^{-3}\gamma^b(1+s)^\theta,
 \qquad s=\gamma|F|,$$
 
 con coefficienti e crossover definiti nel codice. Alla scala nativa:
 
-$$\rho_c=\frac{N_c}{(4/3)\pi LAM^3}.$$
+$$\rho_{c}=\frac{N_{c}}{(4/3)\pi LAM^3}.$$
 
 La schermatura è attiva di default. Con $u=\rho/\rho_c$ il fattore continuo è
 
@@ -145,12 +160,12 @@ Il limite $0.15\,LAM$ è il limite geometrico attualmente codificato. `P_LAM` e
 
 La differenza di fase sull'arco è avvolta e combinata con il contributo dipolare
 
-$$\Delta\phi_{dip,ij}=\frac\pi2(\chi_i-\chi_j).$$
+$$\Delta\phi_{\mathrm{dip},ij}=\frac{\pi}{2}(\chi_i-\chi_j).$$
 
 In doppia copertura:
 
 $$tw_{ij}^{n+1}=tw_{ij}^{n}+
-\operatorname{wrap}_{8\pi}(\Delta\phi_{ij}+\Delta\phi_{dip,ij}-tw_{ij}^{prec})
+\mathrm{wrap}_{8\pi}(\Delta\phi_{ij}+\Delta\phi_{\mathrm{dip},ij}-tw_{ij}^{\mathrm{prec}})
 -\frac{dt_{ij}}{\tau_{tw,ij}}tw_{ij}^{n}.$$
 
 Il quanto di olonomia è
@@ -165,7 +180,7 @@ cioè un giro completo più il massimo twist dipolare. La soglia viene modulata 
 gradiente locale del tempo proprio. La probabilità di nascita è una campana sopra
 soglia che si spegne verso $4\pi$; schematicamente:
 
-$$p_{mit}=\operatorname{clip}\left[
+$$p_{\mathrm{mit}}=\mathrm{clip}\left[
 S\left(\max\left(0,\frac{|tw|}{\Phi_{soglia}}-1\right)\right)
 \left(1-\frac{|tw|}{4\pi}\right)\frac{1}{1+|tw|/\Phi_{crit}},0,1\right].$$
 
@@ -208,8 +223,8 @@ $$\Lambda_{vuoto}=\langle|\Psi|^2\rangle.$$
 Lo scuotimento locale usa lo stress degli archi $\sigma_i$ e viene soppresso dalla
 coerenza:
 
-$$A_i=\sqrt{\sigma_i}\frac{\sqrt{\Lambda_{vuoto}}}
-{1+\rho_i/\Lambda_{vuoto}},
+$$A_i=\sqrt{\sigma_i}\frac{\sqrt{\Lambda_{\mathrm{vuoto}}}}
+ {1+\rho_i/\Lambda_{\mathrm{vuoto}}},
 \qquad \Delta v_i\propto\mathcal N(0,1)A_i\chi_i.$$
 
 Il fondo $P_{eq}$ insegue la densità e viene diffuso sulla topologia degli archi. Nel
@@ -242,7 +257,7 @@ osservabili da verificare.
 
 Il twist orientato produce una coppia locale schematizzabile come
 
-$$T_i^{drag}=\left\langle\frac{tw_{ij}}{\Phi_{crit}}\right\rangle_j.$$
+$$T_i^{\mathrm{drag}}=\left\langle\frac{tw_{ij}}{\Phi_{\mathrm{crit}}}\right\rangle_j.$$
 
 Con `--viriale`, la risposta viene ripartita:
 

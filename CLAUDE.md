@@ -40,8 +40,20 @@ Il tuo ruolo non è compiacere, è fare da **guardiano scientifico**. Concretame
    presenti (es. il calcio termico esistente su gradi di libertà che il solitone già possiede), non
    aggiungono parametri. Programma attivo di eliminazione dei parametri residui.
 
-**Corollario "la media non va qui":** le leggi locali non devono contenere medie/mediane globali.
-Una media globale dentro una legge locale è un canale non-locale spurio. Da evitare.
+**Corollario "la media non va qui":** quando il sistema deve eseguire un evento
+locale, la legge deve usare parametri e grandezze locali: stato del nodo, suoi
+vicini, archi incidenti e scale del vicinato. Una media o mediana dell'intero
+array inserita in quell'evento crea un canale non-locale spurio e va evitata.
+Le statistiche globali possono invece essere usate per diagnosi, report o come
+gauge esplicitamente dichiarato; non devono diventare di nascosto il parametro
+che decide una dinamica locale.
+
+**Stato verificato (2026-09-03):** nel blocco di sincronizzazione pesata sul
+taglio, la normalizzazione del pozzo usa la media pesata dei vicini e quella
+dello shear usa il loro RMS pesato. Sono stati rimossi `pozzo.mean()` e
+`disp_shear.mean()` dalla decisione locale; la modifica è documentata in
+`FISICA.md`. Eventuali medie globali residue vanno valutate una per una secondo
+il loro ruolo: gauge o diagnostica possono essere leciti, una legge locale no.
 
 ---
 

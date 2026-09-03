@@ -1364,13 +1364,17 @@ class Rete:
             media_pv = wI @ pv / uno
             disp_shear = np.sqrt(np.maximum(wI @ (pv ** 2) / uno - media_pv ** 2, 0.0))
             
-            scala_pozzo = max(pozzo.mean(), 1e-9)
-            prof_rel = pozzo / scala_pozzo                 # profondita' relativa (nucleo >> vuoto)
-            
-            # K cresce con il taglio rotazionale anziché attenuarsi: 
-            # dove le velocità di fase si sparpagliano, l'accoppiamento stringe per mantenere la rigidità.
-            scala_shear = max(disp_shear.mean(), 1e-9)
-            rinforzo_shear = 1.0 + (disp_shear / scala_shear)
+            # NORMALIZZAZIONE LOCALE: il riferimento del pozzo e' la media pesata
+            # dei soli vicini topologici (media_p), non pozzo.mean() sull'intero
+            # universo. Cosi' la sync confronta ogni nodo con il proprio intorno.
+            prof_rel = pozzo / np.maximum(media_p, 1e-9)  # profondita' relativa locale
+
+            # Anche il rinforzo del taglio usa una scala di vicinato: RMS della
+            # dispersione dei vicini pesata da wI. Nessuna media globale entra nella
+            # legge locale; il valore 1 e' solo il termine di fondo del rinforzo.
+            scala_shear_locale = np.sqrt(np.maximum(wI @ (disp_shear ** 2) / uno, 0.0))
+            rinforzo_shear = 1.0 + (disp_shear /
+                                    np.maximum(scala_shear_locale, 1e-9))
             
             forza = (2.0 / np.pi) * prof_rel * rinforzo_shear
             forza = K_SYNC * forza                        # K_SYNC=1 = legge piena

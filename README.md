@@ -18,6 +18,10 @@ La formalizzazione matematica, con formule e definizioni delle leggi
 implementate, è disponibile in [`FISICA.md`](FISICA.md). Questo README resta la
 guida operativa del progetto.
 
+La descrizione pedissequa della geometria di contatto, del grafo, della metrica
+degli archi e delle modifiche topologiche è in
+[`GEOMETRIA_CONTATTO.md`](GEOMETRIA_CONTATTO.md).
+
 Guida operativa e scientifica per `soliton_simulator.py` e per gli script di
 esperimento del repository.
 
