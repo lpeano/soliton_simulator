@@ -181,6 +181,13 @@ Gli output finiscono in `out_elast/` e i log in `log/`. Il coefficiente è una
 sonda di test, non una legge derivata: il verdetto va basato su `m0_coer`,
 `m0_coer_nucleo`, `m0_Lz`, `Lz_orb` e sulle metriche normalizzate.
 
+I tre test usano la stessa catena completa su entrambi i rami/configurazioni:
+`--verlet --sync --viriale --zeta-vir --pav-com --chi-basc --polo-maturo
+--olon-part --calore-vett`. Cambia solo `--elast-c` nel test di ridondanza;
+negli altri test cambia esclusivamente il valore scansionato o la scala del
+numero di masse. `--sync-db` è infrastruttura: ogni seme e condizione ha un DB
+separato per poter riprendere i run senza modificare la fisica.
+
 ## 6. Script Windows
 
 Tutti i `.bat` vanno lanciati dalla cartella del progetto:

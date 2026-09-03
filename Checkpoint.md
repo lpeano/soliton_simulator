@@ -49,6 +49,10 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 - **[IMPLEMENTATO]** Aggiunti `test_ridondanza.bat`, `test_sensibilita.bat` e
       `test_scala.bat`; vanno eseguiti in quest'ordine e richiedono run lunghi
       su più semi per una conclusione.
+- **[AGGIORNATO]** I tre test ELAST_C ora usano la catena completa (`sync`,
+      `viriale`, `zeta-vir`, `pav-com`, `chi-basc`, `polo-maturo`, `olon-part`,
+      `calore-vett`, `verlet`) e DB distinti per seme/condizione; `sync-db` serve
+      solo a spezzare e riprendere il run.
 - **[IMPLEMENTATO]** Il batch crea automaticamente le directory padre per i
       percorsi di `--csv`, `--diaglog` e `--sync-db`, evitando il `FileNotFoundError`
       quando si lancia il comando da una checkout pulita.
