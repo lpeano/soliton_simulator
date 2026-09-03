@@ -67,10 +67,29 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 - **[IMPLEMENTATO]** Il batch crea automaticamente le directory padre per i
       percorsi di `--csv`, `--diaglog` e `--sync-db`, evitando il `FileNotFoundError`
       quando si lancia il comando da una checkout pulita.
+- **[IMPLEMENTATO]** Anche la modalità video crea automaticamente la directory
+      padre di `--out`; verificato con 3 frame in una cartella nuova.
+- **[IMPLEMENTATO]** Protetta la scala del pozzo in `memoria_hebbiana_moto()`
+      contro array vuoti, evitando il crash NumPy su `np.median([])` durante
+      run video con topologia in evoluzione.
 - **[IMPLEMENTATO, DIAGNOSTICO]** Aggiunta la circolazione topologica passiva:
       i cicli sono costruiti da `net.i/net.j` e la corrente usa densità locale,
-      twist e allineamento spinoriale, senza embedding. Da validare il segnale
-      e il confronto con `Lz_orb`.
+      twist e allineamento spinoriale, senza embedding.
+- **[DIMOSTRATO, NEGATIVO]** La diagnostica è valida: gauge-invariante per
+      rinumerazione degli archi (differenza `~5e-18`), indipendente
+      dall'embedding (perturbando `pos` la circolazione non cambia), nulla con
+      twist nullo o rete senza cicli, e non-nulla (`~0.12`) su un campo di
+      twist artificiale non-gradiente. **Ma sul run reale la circolazione è
+      zero numerico** (`|Γ|_max ~1e-15` medio, `~4e-14` picco) mentre `m0_Lz`
+      dello stesso run è `~0.022` medio con picchi `~0.77`. Rapporto
+      `Γ/m0_Lz ~5e-14`. Interpretazione: il twist reale all'equilibrio è
+      essenzialmente un gradiente di fase (curl-free), quindi non porta
+      corrente circolante; la "rotazione" vista in `m0_Lz` è artefatto
+      dell'embedding (il dito, non la luna). Conferma dal lato gauge-invariante
+      il risultato negativo sulla precessione. **Fase C (accoppiamento dinamico
+      `--corrente-ciclica`) non giustificata**: non c'è circolazione da
+      ridirigere e crearne una richiederebbe una sorgente non-gradiente
+      imposta a mano (parametro spurio).
 - **[IN CORSO]** Sono in esecuzione i test `sep=10`: confronto ELAST_C a 700
       passi (tre semi) e test a run singolo dei canali `--verso-chi`,
       `--ls-azim` e della circolazione topologica. I CSV/log non vanno letti
