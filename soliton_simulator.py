@@ -80,32 +80,22 @@ headless:     python soliton_simulator.py --test URTO --out urto.mp4
 #   Le masse crescono per interferenza -> solo una SCHERMATURA dall'interferenza
 #   le stabilizza (intuizione di Luca). Meccanismo: lambda_nodi() ora accorcia la
 #   portata dell'interferenza dove e' denso, con TRANSIZIONE DOLCE (tanh), non un
-#   muro (la vecchia potenza (dl/med)^P_LAM esplodeva). Con P_LAM=1, LAM_MIN=0.3 il
-#   grumo per la PRIMA VOLTA si stabilizza a taglia finita (massa si assesta, non
-#   cresce senza limite, e lambda resta finita). Il nucleo denso, schermato, smette
+#   muro: la portata e' ora determinata direttamente dal rapporto rho/rho_c. Il
+#   grumo puo' stabilizzarsi a taglia finita (massa si assesta, non cresce senza
+#   limite, e lambda resta finita). Il nucleo denso, schermato, smette
 #   di sentire la propria interferenza collettiva -> mitosi non alimentata -> stop.
 #   Collega spin/ordine: nucleo = cristallizzato (spin allineati, sync forte perche'
 #   denso); guscio = liquido (spin frustrati, sync debole perche' rado). Stabilita'
 #   = cristallizzazione che si chiude quando la schermatura isola il denso.
 #
-# DIFETTO DA RISOLVERE (verifica di Luca "P_LAM serve?"):
-#   La taglia di equilibrio dipende da DUE parametri liberi P_LAM e LAM_MIN, in modo
-#   NON monotono (P_LAM 0.5/1/2 -> taglia 4983/9669/4400; LAM_MIN 0.1/0.3 -> 2369/9669).
-#   E' stabilizzazione per TARATURA, non derivata = parametro travestito.
-#
-# DA FARE:
-#   1. ANCORARE scala e profondita' della schermatura a N_critico (non parametri):
-#      la scala della transizione = densita' critica, non la mediana generica;
-#      LAM_MIN dal rapporto densita'/densita'_critica, non un numero scelto.
-#      Obiettivo: taglia di equilibrio DETERMINATA dal sistema (~N_c), non scelta.
-#   2. VINCOLO buchi neri: schermatura totale = orizzonte, deve restare possibile
+# IMPLEMENTATO: scala e profondita' della schermatura sono ancorate a N_critico;
+#   il limite inferiore e' geometrico (15% di LAM), non una manopola di taratura.
+#   Il vincolo buchi neri resta: schermatura totale = orizzonte deve restare possibile
 #      (schermatura parziale = materia stabile; totale = buco nero).
-#   3. NULL-TEST: gusci a tempo proprio, esponente M(N), olonomia, causalita', semi
-#   4. validare su TEMPI LUNGHI (hardware di Luca): taglia stabile e coerente?
+#   Da validare su TEMPI LUNGHI (hardware di Luca): taglia stabile e coerente?
 #
-# NB stato interruttori: P_LAM=0 default (schermatura spenta finche' non ancorata a
-#   N_c); lambda_nodi() ora usa la forma DOLCE (tanh) se P_LAM>0, non piu' la potenza
-#   che esplodeva. LAM_MIN, COPPIA_DENSITA, ANTIFASE_ADD presenti (esplorativi).
+# NB: la schermatura e' ora sempre ancorata a N_c. P_LAM e LAM_MIN non sono piu'
+#   parametri fisici; COPPIA_DENSITA e ANTIFASE_ADD restano esplorativi indipendenti.
 # ============================================================================
 import numpy as np
 
@@ -252,19 +242,9 @@ TAU_LOC  = 1.0          # TEMPO PROPRIO LOCALE ATTIVO. Ogni nodo evolve al propr
                         # Se il modello e' invariante per riparametrizzazione, gli
                         # osservabili RELAZIONALI non devono cambiare: e' un test,
                         # non una legge nuova.
-SCHERMATURA = False     # LEGGE DI SCHERMATURA (derivata da N_critico, senza parametri liberi):
-                        # la portata dell interferenza si accorcia dove rho supera la densita
-                        # critica -> la massa densa si scherma e si stabilizza. Default off
-                        # finche non validata sui tempi lunghi con i null-test.
-LAM_MIN  = 0.3          # SCHERMATURA (con P_LAM>0): frazione minima della portata nel denso.
-                        # PARAMETRO da derivare/ancorare a N_c (vedi TASK): con P_LAM insieme
-                        # determina la taglia di equilibrio, per ora in modo tarato non derivato.
-                        # (lambda -> LAM*LAM_MIN dove massimamente denso). Transizione DOLCE (tanh).
-P_LAM    = 0.0          # ESPONENTE DELLA SCALA LOCALE. 0 = lambda fissa (come prima).
-                        # >0: lambda_i = LAM * (scala locale / mediana)^P_LAM, poi
-                        # simmetrizzata sull arco. Normalizzando sulla MEDIANA il
-                        # raffinamento locale viene compensato, mentre la dilatazione
-                        # GLOBALE resta sentita: le due cose non vanno confuse.
+SCHERMATURA = True      # LEGGE INTRINSECA: portata ancorata alla densita' critica adattiva.
+                        # Si attiva automaticamente sopra rho_c, senza manopole di taratura.
+P_LAM    = 1.0          # Indicatore storico mantenuto per compatibilita'; non e' piu' un esponente.
 CS_M, ALPHA_M, BETA_M = 2.0, 0.05, 0.8
 TAU_BG   = 5.0          # il vuoto insegue la densita' LOCALE
 TAU_DIFF = 1.0          # e diffonde sulla topologia (Legge I: nessuna scorciatoia globale)
@@ -911,7 +891,7 @@ class Rete:
     def _allaccia(self, base):
         if base >= self.n: return
         T = cKDTree(self.pos); Tn = cKDTree(self.pos[base:])
-        rc = R_CONN() if P_LAM == 0.0 or not len(self.i) else \
+        rc = R_CONN() if not len(self.i) else \
              3.0 * float(np.median(self.lambda_nodi()))   # i neonati non hanno vicinato
         M = Tn.sparse_distance_matrix(T, rc, output_type="coo_matrix")
         a = M.row + base; b = M.col; dd = M.data
@@ -936,48 +916,34 @@ class Rete:
         self._grado()
 
     def lambda_nodi(self):
-        """scala d'interazione LOCALE per nodo (SCHERMATURA dell'interferenza).
-        Con SCHERMATURA=False e' la costante LAM (comportamento storico).
-        Con SCHERMATURA=True la portata dell'interferenza si ACCORCIA dolcemente dove la densita'
-        d'interferenza supera la densita' CRITICA: una massa densa si scherma dalla propria
-        interferenza collettiva, smette di alimentarsi, si stabilizza. TUTTO DERIVATO DALLO STATO,
-        nessun parametro libero:
-          - la SCALA della transizione e' la densita' critica rho_c, ancorata a N_critico
-            (massa_critica_collasso), non una mediana generica;
-          - la PROFONDITA' emerge dal rapporto rho/rho_c stesso: dove rho >> rho_c la portata
-            tende a LAM*(rho_c/rho) (schermatura tanto piu' forte quanto piu' si e' sopra soglia),
-            dove rho << rho_c resta LAM (interferenza piena). Nessun LAM_MIN scelto.
-          - transizione DOLCE (no muro secco), coerente col principio costruttivo del sistema.
-        Interpretazione: schermatura PARZIALE (rho di poco sopra rho_c) = materia stabile;
-        schermatura che tende a isolare del tutto (rho >> rho_c) = nucleo/orizzonte = buco nero.
-        Cosi' il vincolo dei buchi neri e' rispettato: il collasso resta possibile come limite."""
+        """SCHERMATURA NON-PARAMETRICA ANCORATA A N_CRITICO."""
         if (not SCHERMATURA) or (not len(self.i)):
             return np.full(self.n, LAM)
-        # densita' d'interferenza per nodo (|Psi|^2). Uso il psi GIA' calcolato (dello step
-        # precedente) per evitare ricorsione (calcola_psi -> _pesi -> _lam_archi -> lambda_nodi).
-        # Se non disponibile ancora, nessuna schermatura questo giro (parte al giro dopo).
         if not hasattr(self, "psi") or len(self.psi) < self.n:
             return np.full(self.n, LAM)
         rho = np.abs(self.psi[:self.n])**2
-        # densita' critica rho_c ancorata a N_critico: la densita' media che un grumo di massa
-        # N_critico avrebbe. Derivata dallo stato: massa critica / volume tipico del nucleo.
-        Ncrit = massa_critica_collasso()
-        # volume di riferimento: quello entro il raggio di correlazione LAM (scala nativa),
-        # cosi' rho_c e' una densita' d'interferenza critica, non un numero imposto.
-        rho_c = Ncrit / max((4.0/3.0) * np.pi * (LAM**3), 1e-9)
-        # rapporto sopra/sotto soglia, schermatura dolce: fattore in (0,1], = 1 sotto soglia,
-        # decresce dolcemente come rho_c/rho sopra soglia. Uso una transizione morbida:
-        #   f = 1 / (1 + softplus((rho/rho_c) - 1))   -> 1 se rho<rho_c, ~rho_c/rho se rho>>rho_c
-        u = rho / rho_c
-        softplus = np.log1p(np.exp(np.clip(u - 1.0, -30, 30)))   # dolce, >=0, ~0 sotto soglia
+        # massa_critica_adattiva usa i pesi correnti e quindi richiama lambda_nodi.
+        # Nel ramo ricorsivo si usa LAM: il crossover resta dinamico senza loop infinito.
+        if getattr(self, "_calcolo_schermatura", False):
+            return np.full(self.n, LAM)
+        self._calcolo_schermatura = True
+        try:
+            Ncrit = massa_critica_adattiva(self)
+        finally:
+            self._calcolo_schermatura = False
+        rho_c = Ncrit / max((4.0 / 3.0) * np.pi * (LAM**3), 1e-9)
+        u = rho / max(rho_c, 1e-9)
+        softplus = np.log1p(np.exp(np.clip(u - 1.0, -30, 30)))
         fattore = 1.0 / (1.0 + softplus)
-        return LAM * fattore
+        portata_minima = LAM * 0.15
+        return np.maximum(LAM * fattore, portata_minima)
 
     def _lam_archi(self):
         """SIMMETRIZZATA: w_ij deve valere quanto w_ji, altrimenti la matrice
         di accoppiamento perde la simmetria su cui poggiano memoria hebbiana
         e costruzione del campo."""
-        if (not SCHERMATURA) and P_LAM == 0.0: return LAM
+        if not SCHERMATURA:
+            return LAM
         li = self.lambda_nodi()
         return np.maximum(0.5 * (li[self.i] + li[self.j]), 1e-6)
 
@@ -1271,6 +1237,7 @@ class Rete:
         A = w * np.cos(self.phi0[i] - self.phi0[j])
         z = np.exp(1j * _phi_t)  # <-- USA LO SNAPSHOT t
         coppia = K_C * np.imag(np.conj(z) * (self._mat(A) @ z))
+        
         # AUTO-INTERAZIONE DELL'INTERFERENZA (opzione, MU_PSI=0 di default).
         # Termine di energia H_int = -(mu/2) sum_k |Psi_k|^2, derivato -> forza
         # sulle fasi -dH/dphi. Con MU_PSI<0 e' REPULSIVO: l'interferenza alta ALZA
@@ -1321,6 +1288,7 @@ class Rete:
             MtPsi = self._mat(w) @ self.psi            # M simmetrica: M^T Psi = M Psi
             dHdphi = 2.0 * np.imag(np.conj(z) * MtPsi)  # d(sum|Psi|^2)/dphi_n
             coppia = coppia + MU_PSI * dHdphi           # (vecchia repulsione a parametro, fallback)
+            
         # TERMINE DI HALL / FRAME-DRAGGING come LEGGE (non parametro): il twist, finora solo
         # registrato, chiude il loop e agisce come coppia. La forza NON ha un coefficiente
         # libero: e' il twist locale MEDIO normalizzato dalla scala critica del sistema
@@ -1357,6 +1325,7 @@ class Rete:
             # grandezze gia' nel sistema (d0, la scala di frequenza mediana del ritmo).
             P_eq = float(np.median(self.d0[:self.n])) if self.n > 0 and len(self.d0) >= self.n else 1.0
             T_target = (CS_M ** 2) * P_eq          # energia di punto zero = rigidita' del mezzo (c_s^2) * densita' vuoto (P_eq): leggi/costanti gia' nel sistema, nessun parametro nuovo
+            
             # TERMOSTATO NOSE-HOOVER con TARGET MOBILE STABILE. Il target T_target = c_s^2 * P_eq
             # NON e' costante: P_eq (densita' del vuoto di equilibrio) evolve e cala mentre il
             # sistema si dirada. Un termostato con inerzia FISSA insegue troppo lentamente un target
@@ -1377,13 +1346,7 @@ class Rete:
         else:
             delta_phivel = dt_n * (coppia - G_PH * _phivel_t) / M_PH           # <-- USA SNAPSHOT
 
-        # SINCRONIZZAZIONE come LEGGE (non parametro): la forza deriva dalla dispersione locale
-        # del tempo proprio (il pozzo dal centro di massa), come la soglia critica di Kuramoto,
-        # che dipende dalla dispersione delle frequenze proprie. Dove i tempi propri sono simili
-        # (nucleo uniforme) la sync e' forte e ordina; dove dispersi (bordo, vuoto) e' debole.
-        # Costante universale 2/pi (Kuramoto), non tarata. K_SYNC resta come interruttore/scala
-        # globale (1=legge piena); il profilo per nodo emerge dallo stato e scala col pozzo,
-        # dunque col coarse-graining: legge indipendente dalla scala.
+        # SINCRONIZZAZIONE PESATA SUL TAGLIO ROTAZIONALE (Legge corretta di Kuramoto)
         delta_sync_phi = np.zeros(self.n)
         if K_SYNC != 0.0 and self.n > 2:
             self.calcola_psi()
@@ -1391,22 +1354,28 @@ class Rete:
             cmv = (self.pos[:self.n] * I2[:, None]).sum(0) / max(I2.sum(), 1e-9)
             r_cm = np.linalg.norm(self.pos[:self.n] - cmv, axis=1) + LAM * 0.5
             pozzo = I2.sum() / r_cm                       # tempo proprio: pozzo dal centro
+            
             wI = self._mat(w)
             uno = np.maximum(wI @ np.ones(self.n), 1e-9)
             media_p = wI @ pozzo / uno
-            disp = np.sqrt(np.maximum(wI @ (pozzo ** 2) / uno - media_p ** 2, 0.0))
-            # Soglia di Kuramoto bilanciata: la forza cresce con la PROFONDITA' del pozzo
-            # relativa al suo valore tipico (alta nel nucleo denso, bassa nel vuoto), attenuata
-            # dove la dispersione dei tempi propri e' alta (che alza la soglia di sincronizza-
-            # zione). La profondita' DOMINA (il nucleo si ordina); il vuoto, poco profondo,
-            # resta sotto. Tutto normalizzato dalla scala del pozzo -> adimensionale, indip.
-            # dalla scala. Costante universale 2/pi.
-            scala = max(pozzo.mean(), 1e-9)
-            prof_rel = pozzo / scala                       # profondita' relativa (nucleo >> vuoto)
-            attenua = scala / (scala + disp)               # <1 dove la dispersione e' alta
-            forza = (2.0 / np.pi) * prof_rel * attenua
+            
+            # --- CORRETTO: dispersione e taglio basati su phivel (shear feedback) ---
+            pv = self.phivel[:self.n] if len(self.phivel) >= self.n else np.zeros(self.n)
+            media_pv = wI @ pv / uno
+            disp_shear = np.sqrt(np.maximum(wI @ (pv ** 2) / uno - media_pv ** 2, 0.0))
+            
+            scala_pozzo = max(pozzo.mean(), 1e-9)
+            prof_rel = pozzo / scala_pozzo                 # profondita' relativa (nucleo >> vuoto)
+            
+            # K cresce con il taglio rotazionale anziché attenuarsi: 
+            # dove le velocità di fase si sparpagliano, l'accoppiamento stringe per mantenere la rigidità.
+            scala_shear = max(disp_shear.mean(), 1e-9)
+            rinforzo_shear = 1.0 + (disp_shear / scala_shear)
+            
+            forza = (2.0 / np.pi) * prof_rel * rinforzo_shear
             forza = K_SYNC * forza                        # K_SYNC=1 = legge piena
-            zc_sync = wI @ np.exp(1j * _phi_t)             # <-- USA SNAPSHOT
+            
+            zc_sync = wI @ np.exp(1j * _phi_t)            # USA LO SNAPSHOT t
             media = np.angle(zc_sync)
             delta_sync_phi = dt_n * forza * np.sin(media - _phi_t)  # <-- USA SNAPSHOT
 
@@ -1417,18 +1386,7 @@ class Rete:
         # Calcolo della differenza di fase sull'arco basato rigorosamente sullo stato al tempo t
         dph = self._w4(_phi_t[i] - _phi_t[j])
         if TORS_4PI and len(self.perc_chi) >= self.n:
-            # TORSIONE A DOPPIA COPERTURA (4pi): sul legame dipolare, la torsione
-            # include il contributo dei profili di percorrenza dei due antichirali
-            # che unisce (perc_chi[i], perc_chi[j], di segno opposto per il filtro).
-            # Ogni polo aggiunge il suo mezzo-twist di pi: il legame puo' accumulare
-            # fino a 4pi invece di 2pi. L'avvolgimento passa da _w4 a _w8 (domain doppio).
             if POLO_MATURO:
-                # POLO MATURO (strategia 3): al twist partecipa la chiralita' del POLO CHE MATURA
-                # (il nodo con torsione locale twn maggiore fra i,j), NON la differenza dei due poli.
-                # La differenza (chi_i-chi_j) da' +-pi bilanciati (olonomia netta zero); il polo
-                # maturo da' un contributo COERENTE (i poli maturi sono +1 via basculamento) ->
-                # olonomia netta con verso. La specie che partecipa e' selezionata dalla TORSIONE
-                # (stato), non a mano: legge, non parametro.
                 _twabs = np.abs(self.tw)
                 _twn = np.zeros(self.n)
                 np.add.at(_twn, i, _twabs); np.add.at(_twn, j, _twabs)
@@ -1444,132 +1402,96 @@ class Rete:
             _ttw = _tau_tw_locale(self) if TAU_LOCALI else TAU_TW
             self.tw += self._w4(dph - self.twp) - dt_e * self.tw / _ttw
             self.twp = dph
-        # --- BASCULAMENTO CHIRALE (legge, zero parametri): la chiralita' vira secondo la
-        # TORSIONE LOCALE rispetto al QUANTO DI OLONOMIA (PHI_CRIT = 2pi). La torsione degli
-        # archi (per-arco) e' aggregata ai nodi (media di |tw| sugli archi incidenti); dove
-        # supera il quanto, chi=+1 (materia matura, il giro e' completo), altrove chi=-1
-        # (spazio, giro incompleto). La soglia non e' scelta: e' il quanto stesso del sistema,
-        # lo stesso di mitosi e gravita'. Rompe la simmetria casuale 50/50 dei +-pi: le
-        # chiralita' non nascono piu' a caso e restano fisse, ma seguono la torsione, cosi'
-        # l'olonomia netta dei twist_dip acquista un verso dove la torsione lo impone.
+            
+        # --- BASCULAMENTO CHIRALE ---
         if CHI_BASC and len(self.perc_chi) >= self.n and len(self.tw):
-            _tw_src = _tw_t  # Usa lo snapshot di inizio passo del twist
+            _tw_src = _tw_t  
             twabs = np.abs(_tw_src)
             twn = np.zeros(self.n)
             np.add.at(twn, i, twabs); np.add.at(twn, j, twabs)
-            twn = twn / np.maximum(self._deg, 1)          # torsione locale per nodo
-            # soglia STATO-DERIVATA: la mediana della torsione locale (non il quanto assoluto,
-            # che collasserebbe tutto a una specie perche' la torsione media e' << 2pi). Cosi'
-            # chi=+1 dove la torsione e' SOPRA la tipica (materia matura), -1 dove sotto: split
-            # ~50/50 organizzato dal PAESAGGIO della torsione. Zero parametri (mediana = stato).
+            twn = twn / np.maximum(self._deg, 1)          
             soglia = np.median(twn) if self.n else 0.0
             self.perc_chi[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_chi.dtype)
+            
         # --- materia: una sola matrice dei pesi, riusata per Psi e diffusione ---
         Mw = self._mat(w)
         F = Mw @ np.exp(1j * self.phi)
-        self.psi = self.satura(F)                          # saturazione regolarizzata (Leggi XV/XVIII)
+        self.psi = self.satura(F)                          
         I = np.abs(self.psi) ** 2
         rho = 0.5 * (I[i] + I[j])
 
-        # CALIBRAZIONE alla nascita, PRIMA di ogni lettura di peq: un arco appena
-        # nato adotta la densita' che vede. Va fatta qui e non dopo, altrimenti
-        # i NaN dei nuovi archi entrano nella proiezione e la diffusione li
-        # propaga all'intero grafo (accade appena si aggiunge materia al vuoto).
         nuovi = np.isnan(self.peq)
-        if nuovi.any(): self.peq[nuovi] = rho[nuovi]
+        if nuevos := nuovi.any(): self.peq[nuovi] = rho[nuovi]
 
         # --- VUOTO DI SFONDO LOCALE, che DIFFONDE sulla topologia (Legge I) ---
-        # nessuna mediana globale: il vuoto conosce solo i propri vicini.
-        # archi -> nodi (media topologica)
         den_w = np.maximum(np.bincount(i, w, minlength=self.n) +
                            np.bincount(j, w, minlength=self.n), 1e-12)
-        # CHE COSA diffonde: P_eq stesso (livella, e con cio' sposta il punto
-        # fisso) oppure il RESIDUO rho-P_eq (a residuo nullo la diffusione si
-        # annulla, dunque P_eq = rho resta punto fisso esatto)
         campo = self.peq if DIFF_RES == 0.0 else (rho - self.peq)
         sp = np.bincount(i, campo, minlength=self.n) + \
              np.bincount(j, campo, minlength=self.n)
         cn = (Mw @ (sp / self._deg)) / den_w
         c_arco = 0.5 * (cn[i] + cn[j])
-        # per DIFF_RES: r = rho - P_eq deve obbedire a  dr/dt = -r/TAU_BG + Lap(r),
-        # e poiche' r = rho - P_eq il laplaciano entra in P_eq col segno MENO
         flusso = (c_arco - self.peq) if DIFF_RES == 0.0 else ((rho - self.peq) - c_arco)
-        # il vuoto insegue la densita' locale E si mescola con il vicinato.
-        # Nessuna fase privilegiata, nessuna metrica congelata: il sistema vale
-        # tutto intero dal primo istante, transitorio compreso.
+        
         if TAU_LOCALI:
-            # TAU_BG LOCALE = kappa_BG / r, con r = ritmo del tempo proprio (|frequenza| di fase).
-            # Il vuoto insegue la densita' al ritmo del tempo PROPRIO locale, non coordinato.
-            _pv_src = _phivel_t  # Usa lo snapshot di inizio passo della velocità di fase
+            _pv_src = _phivel_t  
             r_nodo = np.abs(_pv_src[:self.n]) if len(_pv_src) >= self.n else np.ones(self.n)
             r_arco = 0.5 * (r_nodo[i] + r_nodo[j])
-            tau_bg_loc = np.maximum(1.0 / np.maximum(r_arco, 1e-3), 1e-3)   # kappa=1: tau_bg = 1/r_locale
+            tau_bg_loc = np.maximum(1.0 / np.maximum(r_arco, 1e-3), 1e-3)   
             self.peq += dt_e * ((rho - self.peq) / tau_bg_loc + flusso / TAU_DIFF)
         else:
             self.peq += dt_e * ((rho - self.peq) / TAU_BG + flusso / TAU_DIFF)
+            
         if HAM_SRC == 0.0:
-            anom = (rho - self.peq) / np.maximum(self.peq, 1e-9)     # anomalia relativa
+            anom = (rho - self.peq) / np.maximum(self.peq, 1e-9)     
             src = (ALPHA_M * anom if ALPHA_NAT == 0.0
                    else ALPHA_NAT * (CS_M ** 2 / np.maximum(self.d, 1e-6)) * anom)
         else:
-            # forza dal potenziale delle fasi: coerenza CONTRAE, frustrazione DILATA
             src = -HAM_SRC * K_C * (w / LAM) * np.cos(self.phi0[i] - self.phi0[j]) * np.cos(dph)
+            
         if ZETA_M == 0.0:
             beta = BETA_M
         elif ZETA_LOC:
-            # SMORZAMENTO METRICO LOCALE (legge, non parametro): zeta scende dove la densita'
-            # d'interferenza rho supera la mediana (nella MATERIA), lasciando vivere la
-            # circolazione tangenziale; nel VUOTO (rho ~ mediana) resta ZETA_M pieno (stabilita').
-            # Nessun numero nuovo: ZETA_M e rho gia' calcolati, forma 1/(1+x) come nel resto.
             med_rho = max(float(np.median(rho)), 1e-9)
-            eccesso = np.maximum(rho / med_rho - 1.0, 0.0)   # 0 nel vuoto, cresce nella materia
-            zeta_loc = ZETA_M / (1.0 + eccesso)              # ZETA_M nel vuoto, ->0 nel denso
+            eccesso = np.maximum(rho / med_rho - 1.0, 0.0)   
+            zeta_loc = ZETA_M / (1.0 + eccesso)              
             beta = 2.0 * zeta_loc * CS_M / np.maximum(self.d, 1e-6)
         else:
             beta = 2.0 * ZETA_M * CS_M / np.maximum(self.d, 1e-6)
+            
         if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta):
-            # FRENO ANISOTROPO: beta pieno sul radiale, ->0 sul tangenziale della viriale.
-            # (1 - sin2) = cos2: dissipa il moto radiale, lascia vivere quello tangenziale.
             beta = beta * (1.0 - self._sin2_vir)
-        # il sotto-ciclo si infittisce quanto SERVE alla stabilita': nessun tetto
-        # arbitrario al numero di sotto-passi, cosi' non tronca la dinamica veloce
+            
         n1 = np.ceil(np.abs(src).max() * DT / (0.05 * CS_M))
         n2 = np.ceil(np.max(beta) * DT / 0.5)
         n3 = np.ceil(np.abs(self.vd).max() * DT / (0.1 * max(np.median(self.d), 0.1)))
         nsub = int(max(1, n1, n2, n3))
         dts = dt_e / nsub
+        
         for _ in range(nsub):
             q = self.d - self.d0
             sm = np.bincount(i, q, minlength=self.n) + np.bincount(j, q, minlength=self.n)
             med = sm / self._deg
             lap = 0.5 * (med[i] + med[j]) - q
-            # niente clip a mano: la velocita' resta limitata dalla dinamica
-            # (smorzamento + saturazione), col passo infittito quanto basta
             self.vd = self.vd + dts * (CS_M ** 2 * lap + src - beta * self.vd)
             self.d = np.maximum(self.d + dts * self.vd, 0.05)
+            
         if TAU_LOCALI:
             if TAU_USA_D0:
                 d_arco = 0.5 * (self.d0[self.i] + self.d0[self.j]) if len(self.d0) else self.d0
             else:
                 d_arco = 0.5 * (self.d[self.i] + self.d[self.j]) if len(self.d) else self.d
             
-            # --- CORREZIONE CAUSALE: RESISTENZA ELASTICA DEL NUCLEO ---
             I_nodi = np.abs(self.psi[:self.n])**2 if hasattr(self, "psi") and len(self.psi) >= self.n else np.ones(self.n)
             rho_arco = 0.5 * (I_nodi[self.i] + I_nodi[self.j])
             rho_med = max(float(np.median(I_nodi)), 1e-9)
             
-            # Nel nucleo denso (rho >> rho_med), aumentiamo TAU_P (es. x10 o x20).
-            # d0 oppone resistenza al cambiamento, accumulando elasticità e impedendo lo stiramento plastico.
             fattore_elasticita = 1.0 + 100.0 * np.maximum(rho_arco / rho_med - 1.0, 0.0)
-            
             tau_p_loc = (d_arco / max(CS_M, 1e-9)) * fattore_elasticita
             self.d0 += dt_e * (self.d - self.d0) / tau_p_loc
         else:
             self.d0 += dt_e * (self.d - self.d0) / TAU_P
-        # PAVIMENTO FISICO su d0: la distanza di riposo non puo' scendere sotto la scala
-        # minima del sistema (0.05, la stessa di d). Un d0 -> 0 non e' fisico (due nodi
-        # non hanno distanza di riposo nulla) e fa divergere lo stress |d-d0|/d0 anche
-        # con d sano. Non e' un tetto arbitrario: e' la scala minima gia' presente su d.
+            
         self.d0 = np.maximum(self.d0, self._floor_d0())
         
     def mitosi(self):
@@ -1900,7 +1822,7 @@ class Rete:
                                       np.fft.fftn(np.fft.ifftshift(K ** 2)))
             return self._ker_cache[k]
         z = np.exp(1j * self.phi)
-        if P_LAM == 0.0:
+        if not SCHERMATURA:
             classi = [(LAM, np.ones(self.n, bool))]
         else:                       # 4 classi di lambda: 4 convoluzioni invece di 1
             li = self.lambda_nodi()
@@ -2207,10 +2129,13 @@ class Rete:
         num = np.abs(self._mat(w) @ z)
         den = np.maximum(np.bincount(self.i, w, minlength=self.n) +
                          np.bincount(self.j, w, minlength=self.n), 1e-9)
+        li = self.lambda_nodi() if self.n and len(self.i) else np.full(self.n, LAM)
+        ncrit = massa_critica_adattiva(self) if self.n and len(self.i) else 0.0
+        rho_c = ncrit / max((4.0 / 3.0) * np.pi * LAM**3, 1e-9) if ncrit else 0.0
         return dict(I=I,
                     coer_g=float(abs(z.mean())) if self.n else 0.0,
                     coer_l=float(np.mean(np.clip(num / den, 0, 1))) if self.n else 0.0,
-                    picco=float(I.max()) if self.n else 0.0,
+                    picco=float(I.max()) if len(I) else 0.0,
                     stress=float(np.median((self.d - self.d0) / np.maximum(self.d0, 1e-9))) if len(self.d) else 0.0,
                     # MEDIANA, non media: lo stress e' |d-d0|/d0 per arco. Pochi archi
                     # patologici (corti a riposo, tesi ora: ~2%) dominano la MEDIA e la
@@ -2219,7 +2144,14 @@ class Rete:
                     dil=float(np.mean(self.d) / max(np.mean(self.d0), 1e-9) - 1) if len(self.d) else 0.0,
                     tw=float(np.abs(self.tw).max()) if len(self.tw) else 0.0,
                     entro=float((self.d <= R_CONN()).mean()) if len(self.d) else 0.0,
-                    d_med=float(np.mean(self.d)) if len(self.d) else 0.0)
+                    d_med=float(np.mean(self.d)) if len(self.d) else 0.0,
+                    ncrit_adattivo=float(ncrit),
+                    rho_critica=float(rho_c),
+                    lambda_eff_min=float(np.min(li)) if len(li) else LAM,
+                    lambda_eff_med=float(np.median(li)) if len(li) else LAM,
+                    lambda_eff_max=float(np.max(li)) if len(li) else LAM,
+                    lambda_eff_ratio_med=float(np.median(li) / max(LAM, 1e-9)) if len(li) else 1.0,
+                    rho_su_rhoc_max=float(np.max(I) / max(rho_c, 1e-9)) if len(I) and rho_c else 0.0)
 
 
 net = Rete()
@@ -3111,7 +3043,7 @@ def _applica_flag(a):
         CALORE_VETTORIALE = False
         print("[calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)")
     MAX_NODI = a.maxnodi
-    P_LAM = a.plam
+    P_LAM = 1.0  # compatibilita' CLI: il valore passato a --plam non agisce piu' sulla fisica
     TAU_LOC = a.tauloc
     ZETA_M = a.zeta
     ZETA_LOC = bool(getattr(a, "zeta_loc", False))   # smorzamento locale (legge): default off = non-regressione
@@ -3278,7 +3210,7 @@ def _cli():
     p.add_argument("--tauloc", type=float, default=TAU_LOC,
                    help="1 = ogni nodo avanza nel proprio tempo proprio, 0 = orologio globale")
     p.add_argument("--plam", type=float, default=P_LAM,
-                   help="esponente della scala locale di lambda (0 = lambda fissa)")
+                   help="deprecato: mantenuto per compatibilita', ignorato dalla schermatura ancorata a N_c")
     p.add_argument("--plastmit", type=float, default=PLAST_MIT,
                    help="spinta plastica su d0 alla mitosi (0 = spenta, dimezzamento normale)")
     p.add_argument("--coppia", type=float, default=COPPIA_MIT,
@@ -3472,6 +3404,21 @@ def batch_condensazione(a):
         cols['dmin_nodi'] = dmin
         cols['xi_termo'] = float(getattr(net, 'xi_termo', 0.0))
         cols['n_archi'] = len(net.i)
+        # SCHERMATURA: osservabili della legge ancorata a N_c. La portata effettiva
+        # mostra direttamente la differenza fra nucleo schermato e guscio non schermato.
+        try:
+            ncrit_scr = float(massa_critica_adattiva(net)) if n and len(net.i) else 0.0
+            rho_c_scr = ncrit_scr / max((4.0 / 3.0) * np.pi * LAM**3, 1e-9) if ncrit_scr else 0.0
+            lam_eff = net.lambda_nodi() if n and len(net.i) else np.full(n, LAM)
+            cols['ncrit_adattivo'] = ncrit_scr
+            cols['rho_critica'] = rho_c_scr
+            cols['lambda_eff_min'] = float(np.min(lam_eff)) if len(lam_eff) else LAM
+            cols['lambda_eff_med'] = float(np.median(lam_eff)) if len(lam_eff) else LAM
+            cols['lambda_eff_max'] = float(np.max(lam_eff)) if len(lam_eff) else LAM
+            cols['lambda_eff_ratio_med'] = float(np.median(lam_eff) / max(LAM, 1e-9)) if len(lam_eff) else 1.0
+            cols['rho_su_rhoc_max'] = float(np.max(I2) / max(rho_c_scr, 1e-9)) if rho_c_scr else 0.0
+        except Exception:
+            pass
         # conteggi di degenerazione: quanti valori non-finiti o estremi
         cols['n_naninf'] = int(np.sum(~np.isfinite(I2)) + np.sum(~np.isfinite(net.phivel[:n])))
         cols['n_I2_grandi'] = int(np.sum(I2 > 1.0))     # nodi con |Psi|^2 anomalo

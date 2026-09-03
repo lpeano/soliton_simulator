@@ -1,2 +1,15 @@
-out_video/
-out_video/
+# Output sperimentali e artefatti generati: non fanno parte del repository.
+out_*/
+log/
+__pycache__/
+*.py[cod]
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.csv
+*.log
+*.pkl
+*.pickle
+*.npy
+*.npz
