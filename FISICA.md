@@ -214,6 +214,19 @@ $$\dot d_{0,ij}=\frac{d_{ij}-d_{0,ij}}{\tau_{p,ij}}.$$
 
 La deformazione $d-d_0$, non la distanza assoluta, è la sorgente delle onde metriche.
 
+### Integratore metrico sperimentale
+
+Il ramo canonico usa Eulero esplicito. Con `--verlet` il sottociclo metrico
+usa invece un predictor-corrector Velocity-Verlet: calcola l'accelerazione a
+$t$, aggiorna la velocità a metà passo, calcola la nuova distanza e richiude la
+velocità con l'accelerazione a $t+\Delta t$. Il ramo mantiene la sorgente dello
+stesso passo e ricalcola lo smorzamento locale sulla nuova distanza.
+
+Il flag è intenzionalmente **off di default** per garantire la non regressione.
+La maggiore accuratezza del secondo ordine e l'eventuale riduzione delle
+oscillazioni devono essere verificate con un confronto A/B su più semi; non sono
+conseguenze dimostrate dalla sola implementazione.
+
 ## 9. Vuoto e fondo
 
 L'energia dinamica del vuoto è

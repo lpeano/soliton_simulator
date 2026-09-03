@@ -129,6 +129,7 @@ per i batch.
 | `--olon-part` | include twist coerente e curl nella partizione tangenziale | da usare con viriale/polo |
 | `--ls-azim` | ricava il verso tangenziale da radiale × spinore | da usare con `--viriale` |
 | `--sync` | aggiorna il ponte fase→metrica dallo snapshot iniziale del passo | test Jacobi/Gauss-Seidel |
+| `--verlet` | integratore metrico Velocity-Verlet al secondo ordine | confronto A/B, default off |
 | `--kfrange X` | aggiunge il canale di moto lungo le frange | sonda con parametro, non legge dimostrata |
 | `--scala B` | coarse-graining: un solitone rappresenta `B` solitoni fini | cambio di scala |
 | `--sync-db FILE` | salva o ricarica lo stato versionato | esecuzioni spezzate |

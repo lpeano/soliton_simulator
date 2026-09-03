@@ -629,6 +629,9 @@ ZETA_VIR = False        # FRENO ANISOTROPO (legge, zero parametri): se True, lo 
 # rotazione -> puo' SELEZIONARE un verso (dissipa tutto tranne il tangenziale) invece che solo
 # preservarlo. Usa la stessa sin2/cos2 che la viriale gia' calcola (geometrico, zero parametri).
 # Senza --viriale, sin2=0 ovunque -> beta invariato (nessun effetto). Default off = non-regressione.
+VERLET = False          # INTEGRATORE METRICO SPERIMENTALE: se True, il sottociclo d/vd usa
+# Velocity-Verlet al secondo ordine invece di Eulero esplicito. Default off per mantenere
+# invariato il comportamento canonico; attivare con --verlet per il confronto A/B.
 CHI_BASC = False        # BASCULAMENTO CHIRALE (legge, zero parametri): se True, la chiralita'
 # di ogni nodo NON resta piu' fissa dalla nascita, ma vira secondo la TORSIONE LOCALE rispetto
 # al QUANTO DI OLONOMIA (PHI_CRIT = 2pi): chi=+1 dove la torsione ha COMPLETATO il giro (materia
@@ -1466,19 +1469,55 @@ class Rete:
         if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta):
             beta = beta * (1.0 - self._sin2_vir)
             
-        n1 = np.ceil(np.abs(src).max() * DT / (0.05 * CS_M))
-        n2 = np.ceil(np.max(beta) * DT / 0.5)
-        n3 = np.ceil(np.abs(self.vd).max() * DT / (0.1 * max(np.median(self.d), 0.1)))
-        nsub = int(max(1, n1, n2, n3))
+        if VERLET:
+            n1 = np.ceil(np.abs(src).max() * DT / (0.02 * CS_M))
+            n2 = np.ceil(np.max(beta) * DT / 0.2)
+            n3 = np.ceil(np.abs(self.vd).max() * DT / (0.05 * max(np.median(self.d), 0.1)))
+            nsub = int(max(4, n1, n2, n3))
+        else:
+            n1 = np.ceil(np.abs(src).max() * DT / (0.05 * CS_M))
+            n2 = np.ceil(np.max(beta) * DT / 0.5)
+            n3 = np.ceil(np.abs(self.vd).max() * DT / (0.1 * max(np.median(self.d), 0.1)))
+            nsub = int(max(1, n1, n2, n3))
         dts = dt_e / nsub
-        
-        for _ in range(nsub):
-            q = self.d - self.d0
-            sm = np.bincount(i, q, minlength=self.n) + np.bincount(j, q, minlength=self.n)
-            med = sm / self._deg
-            lap = 0.5 * (med[i] + med[j]) - q
-            self.vd = self.vd + dts * (CS_M ** 2 * lap + src - beta * self.vd)
-            self.d = np.maximum(self.d + dts * self.vd, 0.05)
+
+        if VERLET:
+            # --- VELOCITY-VERLET METRICO (2 ordine) ---
+            # src resta valutata al tempo t; beta viene ricalcolata alla configurazione nuova.
+            for _ in range(nsub):
+                q = self.d - self.d0
+                sm = np.bincount(i, q, minlength=self.n) + np.bincount(j, q, minlength=self.n)
+                med = sm / self._deg
+                lap = 0.5 * (med[i] + med[j]) - q
+                acc_t = CS_M ** 2 * lap + src - beta * self.vd
+                vd_half = self.vd + 0.5 * dts * acc_t
+                d_new = np.maximum(self.d + dts * vd_half, 0.05)
+
+                q_new = d_new - self.d0
+                sm_new = np.bincount(i, q_new, minlength=self.n) + np.bincount(j, q_new, minlength=self.n)
+                med_new = sm_new / self._deg
+                lap_new = 0.5 * (med_new[i] + med_new[j]) - q_new
+                if ZETA_M == 0.0:
+                    beta_new = BETA_M
+                elif ZETA_LOC:
+                    beta_new = 2.0 * zeta_loc * CS_M / np.maximum(d_new, 1e-6)
+                else:
+                    beta_new = 2.0 * ZETA_M * CS_M / np.maximum(d_new, 1e-6)
+                if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta_new):
+                    beta_new = beta_new * (1.0 - self._sin2_vir)
+                acc_next = CS_M ** 2 * lap_new + src - beta_new * vd_half
+                self.vd = vd_half + 0.5 * dts * acc_next
+                self.d = d_new
+                beta = beta_new
+        else:
+            # --- EULERO ESPLICITO (ramo canonico, invariato) ---
+            for _ in range(nsub):
+                q = self.d - self.d0
+                sm = np.bincount(i, q, minlength=self.n) + np.bincount(j, q, minlength=self.n)
+                med = sm / self._deg
+                lap = 0.5 * (med[i] + med[j]) - q
+                self.vd = self.vd + dts * (CS_M ** 2 * lap + src - beta * self.vd)
+                self.d = np.maximum(self.d + dts * self.vd, 0.05)
             
         if TAU_LOCALI:
             if TAU_USA_D0:
@@ -3035,7 +3074,7 @@ def _applica_flag(a):
     """Applica i parametri/flag ai globali. Usata sia in headless sia in interattivo,
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
-    global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC
+    global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
@@ -3051,6 +3090,7 @@ def _applica_flag(a):
     TAU_LOC = a.tauloc
     ZETA_M = a.zeta
     ZETA_LOC = bool(getattr(a, "zeta_loc", False))   # smorzamento locale (legge): default off = non-regressione
+    VERLET = bool(getattr(a, "verlet", False))       # integratore metrico sperimentale: default off
     HAM_SRC = a.ham
     ALPHA_NAT = a.alfanat
     DIFF_RES = a.diffres
@@ -3070,6 +3110,8 @@ def _applica_flag(a):
     LS_AZIM = bool(getattr(a, "ls_azim", False))   # L.S vettoriale azimutale: default off
     POLO_MATURO = bool(getattr(a, "polo_maturo", False)) # polo maturo (strategia 3): default off
     OLON_PART = bool(getattr(a, "olon_part", False)) # olonomia nella partizione: default off
+    if VERLET:
+        print("[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo")
     if OLON_PART:
         print("[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)")
     if POLO_MATURO:
@@ -3250,6 +3292,9 @@ def _cli():
                         "moltiplicato per cos2 della viriale (pieno sul radiale, ->0 sul "
                         "tangenziale). Dissipa il moto radiale, lascia vivere la rotazione. "
                         "Usa la sin2/cos2 della viriale (serve --viriale). Default off.")
+    p.add_argument("--verlet", action="store_true", dest="verlet",
+                   help="INTEGRATORE metrico Velocity-Verlet (2 ordine) invece di Eulero (1). "
+                        "Default off: il ramo canonico resta invariato.")
     p.add_argument("--pav-com", action="store_true", dest="pav_com",
                    help="PAVIMENTO COMOVENTE (legge, zero parametri): il pavimento di d0 diventa "
                         "median(d0)-MAD(d0) (una dispersione sotto la mediana, scala col sistema) "

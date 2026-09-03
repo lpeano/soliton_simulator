@@ -37,6 +37,9 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 - **[IMPLEMENTATO]** La sincronizzazione sul taglio usa esclusivamente riferimenti
       di vicinato pesati da `wI`: media locale del pozzo e RMS locale dello shear;
       rimossi i riferimenti globali `pozzo.mean()` e `disp_shear.mean()`.
+- **[IMPLEMENTATO, SPERIMENTALE]** Aggiunto `--verlet`: il ramo opzionale usa
+      Velocity-Verlet nel sottociclo metrico `d/vd`; default off, con Eulero
+      canonico invariato. Riduzione delle oscillazioni ancora da verificare.
 - **[VERIFICATO]** Compilazione Python e batch breve con `diaglog` completati
       senza errori; il `diaglog` contiene le nuove colonne della schermatura.
 - **[DA VERIFICARE]** Stabilità della taglia, contrasto nucleo/guscio e
