@@ -103,6 +103,12 @@ $$\phi_i^{n+1}=\phi_i^n+dt_i v_i^{n+1}+\Delta\phi_i^{sync}
 \pmod{4\pi}.$$
 
 Il codice usa snapshot di inizio passo per rendere coerenti peso, fase e torsione.
+Con `SYNC_UPDATE=True` (flag `--sync`) anche il campo materia viene valutato
+sulla fase dello snapshot e la sorgente metrica usa il `P_eq` dello snapshot.
+Questo chiude le due riletture cross-sistema principali; l'integratore
+`phivel -> phi` e il sottociclo metrico `d/vd/d0` restano sequenziali per
+costruzione. `--sync` è quindi un ETC esteso, non una transazione atomica di
+ogni variabile dell'intero programma.
 Nel regime deterministico il termine dissipativo è sostituito da un termostato:
 
 $$E_{\mathrm{cin}}=\langle v^2\rangle, \qquad T_{*}=c_s^2P_{eq},

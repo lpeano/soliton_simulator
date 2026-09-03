@@ -58,7 +58,13 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
       quando si lancia il comando da una checkout pulita.
 - **[AGGIORNATO]** Tutti gli script di lancio attivi includono esplicitamente
       `--sync`, sia per Eulero sia per Velocity-Verlet; questa uniformità non
-      cambia la fisica finché `SYNC_UPDATE` resta un flag non operativo nel codice.
+      aveva un effetto fisico finché `SYNC_UPDATE` era un flag non operativo.
+- **[IMPLEMENTATO, SPERIMENTALE]** `--sync` ora seleziona l'ETC esteso: il campo
+      materia usa `_phi_t` e la sorgente metrica usa `_peq_t` (con fallback di
+      sola inizializzazione per i nuovi archi). Default ancora off; convergenza
+      e superiorità rispetto al percorso storico sono da misurare.
+- **[VERIFICATO]** Batch minimo con e senza `--sync` completati senza errori né
+      valori non finiti; il ramo sincrono stampa il flag e produce `diaglog`.
 - **[VERIFICATO]** Compilazione Python e batch breve con `diaglog` completati
       senza errori; il `diaglog` contiene le nuove colonne della schermatura.
 - **[DA VERIFICARE]** Stabilità della taglia, contrasto nucleo/guscio e

@@ -52,8 +52,11 @@ che decide una dinamica locale.
 taglio, la normalizzazione del pozzo usa la media pesata dei vicini e quella
 dello shear usa il loro RMS pesato. Sono stati rimossi `pozzo.mean()` e
 `disp_shear.mean()` dalla decisione locale; la modifica è documentata in
-`FISICA.md`. Eventuali medie globali residue vanno valutate una per una secondo
-il loro ruolo: gauge o diagnostica possono essere leciti, una legge locale no.
+`FISICA.md`. Il flag `--sync` ora attiva inoltre l'ETC esteso: il campo materia
+legge la fase di inizio passo e la sorgente metrica legge il `peq` di inizio
+passo, con fallback limitato all'inizializzazione dei nuovi archi. Eventuali
+medie globali residue vanno valutate una per una secondo il loro ruolo: gauge o
+diagnostica possono essere leciti, una legge locale no.
 
 ---
 

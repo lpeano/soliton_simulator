@@ -144,6 +144,10 @@ Euleriano sia nelle varianti Velocity-Verlet. La schermatura è sempre attiva
 per compatibilità con vecchi comandi: il suo valore viene ignorato. I valori
 `P_LAM` e `LAM_MIN` non controllano più la dinamica.
 
+Con `--sync` il campo materia e la sorgente metrica leggono gli snapshot del
+passo precedente; senza flag resta il percorso storico. L'integratore fase e
+il sottociclo metrico restano sequenziali in entrambi i casi.
+
 ## 5. Varianti Velocity-Verlet
 
 Per ogni script di esperimento è disponibile una copia con suffisso `_verlet`.

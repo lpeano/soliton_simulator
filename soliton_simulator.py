@@ -1230,6 +1230,7 @@ class Rete:
         _phi_t = self.phi.copy()
         _tw_t = self.tw.copy()
         _phivel_t = self.phivel.copy()
+        _peq_t = self.peq.copy()
 
         r = self.ritmo()                       # None se l'orologio e' globale
         if r is None:
@@ -1424,7 +1425,11 @@ class Rete:
             
         # --- materia: una sola matrice dei pesi, riusata per Psi e diffusione ---
         Mw = self._mat(w)
-        F = Mw @ np.exp(1j * self.phi)
+        # Con --sync la materia viene valutata sullo snapshot t, nello stesso istante
+        # delle coppie di fase e del ponte fase->torsione. Senza flag resta il percorso
+        # storico: la materia legge la fase appena committata.
+        _phi_src = _phi_t if SYNC_UPDATE else self.phi
+        F = Mw @ np.exp(1j * _phi_src)
         self.psi = self.satura(F)                          
         I = np.abs(self.psi) ** 2
         rho = 0.5 * (I[i] + I[j])
@@ -1452,7 +1457,11 @@ class Rete:
             self.peq += dt_e * ((rho - self.peq) / TAU_BG + flusso / TAU_DIFF)
             
         if HAM_SRC == 0.0:
-            anom = (rho - self.peq) / np.maximum(self.peq, 1e-9)     
+            # Gli archi nuovi non hanno ancora un peq storico: per loro il valore appena
+            # inizializzato è il dato di t. Gli altri usano esclusivamente lo snapshot.
+            _peq_src = (np.where(np.isfinite(_peq_t), _peq_t, self.peq)
+                        if SYNC_UPDATE else self.peq)
+            anom = (rho - _peq_src) / np.maximum(_peq_src, 1e-9)
             src = (ALPHA_M * anom if ALPHA_NAT == 0.0
                    else ALPHA_NAT * (CS_M ** 2 / np.maximum(self.d, 1e-6)) * anom)
         else:
