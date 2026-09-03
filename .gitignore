@@ -24,3 +24,8 @@ __pycache__/
 !out_spinore/
 !out_spinore/*.csv
 !log/spinore*.log
+
+# Risultati A/B spinore-vivo + plasticita' dinamica.
+!out_spinore_plastdin/
+!out_spinore_plastdin/*.csv
+!log/pd_*.log

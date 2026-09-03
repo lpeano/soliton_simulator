@@ -141,3 +141,58 @@ metrica, `Lz_orb`) tra ON e OFF appaiati:
 5. Part 2: confronta $\omega_S$/`berry_media` (gauge-inv) con `m0_Lz`/`Lz_orb`
    (embedding) → luna o dito.
 6. Etichetta ogni conclusione: dimostrato / in verifica / aperto.
+
+---
+
+## 6. Risultati misurati (esecuzione del 2026-09-03)
+
+Campagna interrotta prima del completamento: disponibili `m2_on_s1` e `m2_on_s2`
+**completi** (2000 passi), `prec_on_s1` **parziale** (~467 passi), baseline OFF non
+ancora eseguite. Lettura sull'ultimo terzo e andamento per quarti.
+
+### Dati
+
+| Run | $S_M$ (per quarti) | $\omega_S$ (per quarti) | berry firm/abs |
+|---|---|---|---|
+| `m2_on_s1` (2000) | 0.29 → 0.51 → 0.53 → **0.61** | 0.81 → 0.42 → 0.26 → **0.17** | +0.005 |
+| `m2_on_s2` (2000) | 0.38 → 0.51 → 0.56 → **0.63** | 0.68 → 0.30 → 0.29 → **0.21** | −0.005 |
+| `prec_on_s1` (467, parziale) | 0.23 → 0.32 → 0.63 → **0.66** | 0.25 → 0.21 → 0.08 → **0.06** | +0.03 |
+
+Soglia di rumore casuale $S_M \sim 1/\sqrt N \approx 0.02$ (N ~ 2500 spin) →
+$S_M \approx 0.6$ è **~30× sopra il rumore**.
+
+### Conclusioni con livello di certezza
+
+- **[DIMOSTRATO] Ordine di spin parziale emergente.** $S_M$ cresce in modo
+  **monotòno e riproducibile** su entrambi i semi (→ 0.60–0.63), ~30× sopra il
+  rumore. Lo spinore vivo **non si frustra a zero**: costruisce una polarizzazione
+  netta. Non è sincronizzazione piena ($S_M \ne 1$), ma ordine genuino.
+
+- **[IN VERIFICA] La precessione RALLENTA, non è stazionaria.** $\omega_S$
+  **decresce monotòno** in tutti i run (s1: 0.81→0.17; s2: 0.68→0.21; prec:
+  0.25→0.06). I decrementi si riducono (possibile asintoto), ma a 2000 passi
+  $\omega_S$ **sta ancora calando** — non un plateau. Quindi: mentre l'ordine
+  $S_M$ si costruisce, la direzione media **si stabilizza e rallenta**. Aperto se
+  $\omega_S$ tenda a un valore piccolo ≠0 (precessione lenta stazionaria) o a 0
+  (ordine che si congela). Nel run di precessione piena tende più verso 0.
+  *Nota: una precedente lettura a run parziale suggeriva un "plateau ~0.18"; il
+  trend per quarti la corregge — è un declino, non un plateau.*
+
+- **[DIMOSTRATO negativo] La curvatura sui cicli è incoerente.** `berry_firm/abs`
+  ~0 in tutti i run e **il segno flippa tra i semi** (+ vs −): la fase di Berry
+  sui cicli locali è rumore, non segnale. La coerenza (se c'è) è **globale**
+  (in $S_M$), non nella tessitura locale.
+
+- **[DIMOSTRATO negativo] Handedness del transiente.** Il segno di $\omega_S$ è
+  **positivo in tutti e tre i run** (verso concorde). Ma poiché $\omega_S$
+  decade, è la chiralità di un transiente di ordinamento, non di una precessione
+  sostenuta.
+
+### Sintesi
+
+Riacceso il settore SU(2), emerge un **ferromagnete di spin parziale** ($S_M\sim0.6$,
+robusto) la cui direzione media **precede rallentando** ($\omega_S$ in declino, verso
+concorde). **Non** frustrazione (S_M non crolla), **non** precessione stazionaria
+confermata (omega non fa plateau a 2000 passi), **non** coerenza sui cicli locali.
+Restano aperti: il destino asintotico di $\omega_S$, le baseline OFF appaiate, e il
+confronto Part 2 con `m0_Lz` (spin che precede vs asse orbitale che ruota).
