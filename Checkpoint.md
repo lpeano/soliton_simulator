@@ -40,6 +40,9 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 - **[IMPLEMENTATO, SPERIMENTALE]** Aggiunto `--verlet`: il ramo opzionale usa
       Velocity-Verlet nel sottociclo metrico `d/vd`; default off, con Eulero
       canonico invariato. Riduzione delle oscillazioni ancora da verificare.
+- **[IMPLEMENTATO]** Il batch crea automaticamente le directory padre per i
+      percorsi di `--csv`, `--diaglog` e `--sync-db`, evitando il `FileNotFoundError`
+      quando si lancia il comando da una checkout pulita.
 - **[VERIFICATO]** Compilazione Python e batch breve con `diaglog` completati
       senza errori; il `diaglog` contiene le nuove colonne della schermatura.
 - **[DA VERIFICARE]** Stabilità della taglia, contrasto nucleo/guscio e

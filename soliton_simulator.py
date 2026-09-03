@@ -3986,6 +3986,13 @@ def batch_condensazione(a):
     # ============ DB DI STATO (idempotente + versionato): spezzare i run ============
     import os as _os
     _db = getattr(a, "sync_db", None)
+    # Crea automaticamente le directory degli output personalizzati. Gli script
+    # .bat le preparano gia', ma un comando diretto deve funzionare anche da una
+    # checkout pulita (es. --diaglog out_test/verify.csv).
+    for _percorso in (a.csv, diag_path, _db):
+        _cartella = _os.path.dirname(_percorso) if _percorso else ""
+        if _cartella:
+            _os.makedirs(_cartella, exist_ok=True)
     if _db and getattr(a, "db_cleanup", False) and _os.path.exists(_db):
         _os.remove(_db); print(f"[db] --db-cleanup: rimosso {_db}, riparto pulito")
     _db_step0 = 0

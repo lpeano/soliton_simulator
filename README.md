@@ -103,6 +103,9 @@ Il batch non crea video. Produce:
 - un `diaglog` dettagliato, una riga per passo, con variabili globali e misure
 	per massa/coppia di masse.
 
+Le directory padre indicate in `--csv`, `--diaglog` e `--sync-db` vengono create
+automaticamente se non esistono.
+
 ### Video headless
 
 ```text
