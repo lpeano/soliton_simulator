@@ -141,7 +141,33 @@ La schermatura è sempre attiva (`SCHERMATURA=True`). `--plam` è mantenuto solo
 per compatibilità con vecchi comandi: il suo valore viene ignorato. I valori
 `P_LAM` e `LAM_MIN` non controllano più la dinamica.
 
-## 5. Script Windows
+## 5. Varianti Velocity-Verlet
+
+Per ogni script di esperimento è disponibile una copia con suffisso `_verlet`.
+Le copie non modificano gli script originali: aggiungono `--verlet` ai comandi
+e scrivono output distinti, così il confronto con il ramo Euleriano resta
+possibile.
+
+| Script originale | Variante Velocity-Verlet |
+|---|---|
+| `RunTutti.bat` / `RunTutti.bash` | `RunTutti_verlet.bat` / `RunTutti_verlet.bash` |
+| `run_catena.bat` | `run_catena_verlet.bat` |
+| `run_guscio.bat` | `run_guscio_verlet.bat` |
+| `run_kfrange.bat` | `run_kfrange_verlet.bat` |
+| `run_ordine_spin.bat` | `run_ordine_spin_verlet.bat` |
+| `run_polo_maturo.bat` | `run_polo_maturo_verlet.bat` |
+| `run_precessine.bat` | `run_precessine_verlet.bat` |
+| `run_test_aperti.bat` | `run_test_aperti_verlet.bat` |
+| `run_verso_chi.bat` | `run_verso_chi_verlet.bat` |
+| `run_viriale.bat` | `run_viriale_verlet.bat` |
+| `run_zetaloc.bat` | `run_zetaloc_verlet.bat` |
+
+`run_differenza_verlet.bat` esegue un A/B diretto sullo stesso scenario:
+un ramo senza flag (Eulero) e uno con `--verlet`. Le varianti sono esperimenti
+numerici: eventuali riduzioni di oscillazione o miglioramenti di precessione
+vanno misurati nei `diaglog`, su run lunghi e più semi.
+
+## 6. Script Windows
 
 Tutti i `.bat` vanno lanciati dalla cartella del progetto:
 
@@ -240,7 +266,7 @@ Confronta smorzamento fisso e `--zeta-loc`, lasciando spento `K_FRANGE`. Misura
 se il rilascio del freno nella materia permette alla circolazione di
 sopravvivere e se cambia `Lz_orb`.
 
-## 6. Script Linux/macOS
+## 7. Script Linux/macOS
 
 ### `RunTutti.bash`
 
@@ -257,7 +283,7 @@ Avvio:
 bash RunTutti.bash
 ```
 
-## 7. Lettura dei risultati
+## 8. Lettura dei risultati
 
 ### CSV compatto
 
@@ -282,7 +308,7 @@ Per la schermatura, il nucleo dovrebbe mostrare portata ridotta e un rapporto
 vicine a `LAM`. Questo è un criterio di lettura: la stabilità va verificata su
 run lunghi e più semi.
 
-## 8. Run lunghi e ripresa con DB
+## 9. Run lunghi e ripresa con DB
 
 Per spezzare un batch lungo:
 
@@ -295,7 +321,7 @@ passi mancanti. Il DB contiene l'hash del codice: se il codice cambia, il DB
 viene rifiutato per evitare di mischiare fisiche diverse. Per ricominciare da
 zero usare `--db-cleanup`.
 
-## 9. Cosa non versionare
+## 10. Cosa non versionare
 
 Il repository conserva codice, script e documentazione. Sono ignorati:
 

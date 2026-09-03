@@ -40,6 +40,9 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 - **[IMPLEMENTATO, SPERIMENTALE]** Aggiunto `--verlet`: il ramo opzionale usa
       Velocity-Verlet nel sottociclo metrico `d/vd`; default off, con Eulero
       canonico invariato. Riduzione delle oscillazioni ancora da verificare.
+- **[IMPLEMENTATO]** Create le varianti `_verlet` di tutti gli script di test,
+      inclusi `RunTutti_verlet.bat/.bash` e `run_differenza_verlet.bat`; gli
+      output delle varianti usano nomi distinti per mantenere l'A/B riproducibile.
 - **[IMPLEMENTATO]** Il batch crea automaticamente le directory padre per i
       percorsi di `--csv`, `--diaglog` e `--sync-db`, evitando il `FileNotFoundError`
       quando si lancia il comando da una checkout pulita.
