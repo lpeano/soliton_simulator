@@ -838,7 +838,9 @@ class Rete:
                  "corrente_arco_max": 0.0, "gradiente_rho_arco_media_assoluta": 0.0,
                  "olonomia_max": 0.0, "olonomia_media_assoluta": 0.0,
                  "olonomia_rms": 0.0, "berry_spin_max": 0.0,
-                 "berry_spin_media_assoluta": 0.0, "berry_spin_rms": 0.0}
+                 "berry_spin_media_assoluta": 0.0, "berry_spin_rms": 0.0,
+                 "berry_spin_media": 0.0, "spin_cluster_modulo": 0.0,
+                 "spin_cluster_omega": 0.0}
         if self.n < 3 or not len(self.i):
             return vuoto
         if not hasattr(self, "psi") or len(self.psi) < self.n:
@@ -879,6 +881,20 @@ class Rete:
                 if abs(P) > 1e-12:
                     berry.append(float(np.angle(P)))
         berry = np.array(berry, float) if berry else np.zeros(0)
+        # PARAMETRO D'ORDINE SPINORIALE (embedding-indipendente): S_M = |media dei vettori di Bloch|,
+        # in [0,1]. S_M~1 = spin allineati/precessione collettiva; S_M~0 = frustrati/sparsi. omega_S =
+        # angolo spazzato dalla direzione media Shat fra due campioni consecutivi (precessione dello
+        # spin collettivo). Entrambi invarianti per rotazione globale SO(3) (gauge statico dei Bloch).
+        S_M = 0.0; omega_S = 0.0
+        if ha_spin:
+            somma = np.sum(self._nb[:self.n], axis=0)
+            norm = float(np.linalg.norm(somma))
+            S_M = norm / self.n
+            if norm > 1e-9:
+                shat = somma / norm
+                if getattr(self, "_shat_prec", None) is not None:
+                    omega_S = float(np.arccos(np.clip(float(np.dot(shat, self._shat_prec)), -1.0, 1.0)))
+                self._shat_prec = shat
         return {"n_cicli": int(len(valori)),
                 "circolazione_max": float(np.max(np.abs(valori))),
                 "circolazione_media_assoluta": float(np.mean(np.abs(valori))),
@@ -891,6 +907,9 @@ class Rete:
                 "berry_spin_max": float(np.max(np.abs(berry))) if len(berry) else 0.0,
                 "berry_spin_media_assoluta": float(np.mean(np.abs(berry))) if len(berry) else 0.0,
                 "berry_spin_rms": float(np.sqrt(np.mean(berry ** 2))) if len(berry) else 0.0,
+                "berry_spin_media": float(np.mean(berry)) if len(berry) else 0.0,
+                "spin_cluster_modulo": S_M,
+                "spin_cluster_omega": omega_S,
                 "circolazione_media": float(np.mean(valori)),
                 "circolazione": valori, "olonomia": olonomia, "berry_spin": berry}
 
@@ -3658,6 +3677,9 @@ def batch_condensazione(a):
             cols['berry_spin_max'] = circ.get('berry_spin_max', 0.0)
             cols['berry_spin_media_assoluta'] = circ.get('berry_spin_media_assoluta', 0.0)
             cols['berry_spin_rms'] = circ.get('berry_spin_rms', 0.0)
+            cols['berry_spin_media'] = circ.get('berry_spin_media', 0.0)
+            cols['spin_cluster_modulo'] = circ.get('spin_cluster_modulo', 0.0)
+            cols['spin_cluster_omega'] = circ.get('spin_cluster_omega', 0.0)
         except Exception:
             pass
         # SCHERMATURA: osservabili della legge ancorata a N_c. La portata effettiva
