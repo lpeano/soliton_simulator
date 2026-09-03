@@ -366,9 +366,13 @@ $$J_{ij}=w_{ij}\,\frac{\rho_i+\rho_j}{2}\,
 (\mathbf n_i\cdot\mathbf n_j)\,\frac{tw_{ij}}{\Phi_{crit}}.$$
 
 Le colonne sono `n_cicli_topologici`, `circolazione_topologica_max`,
-`circolazione_topologica_media_assoluta` e `circolazione_topologica_media`.
+`circolazione_topologica_media_assoluta` e `circolazione_topologica_media`, più
+le componenti non-gradientali gauge-invarianti `olonomia_fase_*` (olonomia di
+fase sui cicli) e `berry_spin_*` (fase di Berry come invariante di Bargmann).
 Non dipendono da `pos` o dal rendering e non costituiscono ancora una nuova
-forza dinamica.
+forza dinamica. Sul sistema reale $\Gamma\simeq0$ (twist curl-free); `berry_spin_*`
+è $\equiv0$ con spinore congelato (default) e diventa non-nullo solo con
+`--spinore-vivo`, il flag che reinnesta l'evoluzione SU(2) (sotto test A/B).
 
 La condizione `entro` non dimostra che il grafo sia correttamente connesso in
 senso fisico: misura solo il rapporto tra la metrica corrente e il raggio

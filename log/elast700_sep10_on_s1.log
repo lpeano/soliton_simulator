@@ -105,3 +105,61 @@ passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
     450 |    0.0000 |    19.988 | r=16.2 c=0.134 n=194   | tot=2 NUOVI=2 | TRACK accr=2041 coppie=412 nuova=88
     455 |    0.0000 |    19.988 | r=15.8 c=0.163 n=18    | tot=2 NUOVI=2 | TRACK accr=2069 coppie=425 nuova=89
     460 |    0.0000 |    19.988 | r=15.8 c=0.164 n=20    | tot=2 NUOVI=2 | TRACK accr=2091 coppie=437 nuova=89
+    465 |    0.0000 |    19.988 | r=19.2 c=0.157 n=13    | tot=2 NUOVI=2 | TRACK accr=2115 coppie=451 nuova=89
+    470 |    0.0000 |    19.988 | r=16.2 c=0.149 n=133   | tot=1 NUOVI=1 | TRACK accr=2139 coppie=462 nuova=89
+    475 |    0.0000 |    19.988 | r=15.8 c=0.122 n=11    | tot=2 NUOVI=2 | TRACK accr=2159 coppie=472 nuova=89
+    480 |    0.0000 |    19.988 | r=18.8 c=0.150 n=81    | tot=1 NUOVI=1 | TRACK accr=2181 coppie=484 nuova=91
+    485 |    0.0000 |    19.988 | r=16.8 c=0.156 n=335   | tot=1 NUOVI=1 | TRACK accr=2209 coppie=493 nuova=91
+    490 |    0.0000 |    19.988 | r=0.8 c=0.138 n=166    | tot=2 NUOVI=2 | TRACK accr=2229 coppie=501 nuova=91
+    495 |    0.0000 |    19.988 | r=19.8 c=0.133 n=5     | tot=1 NUOVI=1 | TRACK accr=2254 coppie=508 nuova=91
+    500 |    0.0000 |    19.988 | r=19.2 c=0.091 n=4     | tot=1 NUOVI=1 | TRACK accr=2274 coppie=519 nuova=91
+    505 |    0.0000 |    19.988 | r=18.2 c=0.082 n=273   | tot=2 NUOVI=2 | TRACK accr=2308 coppie=531 nuova=91
+    510 |    0.0000 |    19.988 | r=18.2 c=0.087 n=275   | tot=2 NUOVI=2 | TRACK accr=2336 coppie=543 nuova=91
+    515 |    0.0000 |    19.988 | r=16.2 c=0.084 n=204   | tot=2 NUOVI=2 | TRACK accr=2361 coppie=555 nuova=91
+    520 |    0.0000 |    19.988 | r=18.2 c=0.090 n=270   | tot=2 NUOVI=2 | TRACK accr=2386 coppie=567 nuova=91
+    525 |    0.0000 |    19.988 | r=11.5 c=0.173 n=105   | tot=1 NUOVI=1 | TRACK accr=2402 coppie=577 nuova=92
+    530 |    0.0000 |    19.988 | r=11.5 c=0.175 n=107   | tot=1 NUOVI=1 | TRACK accr=2425 coppie=587 nuova=93
+    535 |    0.0000 |    19.988 | r=11.5 c=0.203 n=106   | tot=1 NUOVI=1 | TRACK accr=2446 coppie=597 nuova=93
+    540 |    0.0000 |    19.988 | r=11.5 c=0.168 n=109   | tot=1 NUOVI=1 | TRACK accr=2465 coppie=606 nuova=93
+    545 |    0.0000 |    19.988 | r=11.5 c=0.189 n=110   | tot=1 NUOVI=1 | TRACK accr=2489 coppie=613 nuova=93
+    550 |    0.0000 |    19.988 | r=12.0 c=0.176 n=36    | tot=1 NUOVI=1 | TRACK accr=2513 coppie=625 nuova=93
+    555 |    0.0000 |    19.988 | r=11.5 c=0.164 n=113   | tot=1 NUOVI=1 | TRACK accr=2535 coppie=629 nuova=93
+    560 |    0.0000 |    19.988 | r=11.5 c=0.154 n=117   | tot=1 NUOVI=1 | TRACK accr=2558 coppie=637 nuova=93
+    565 |    0.0000 |    19.988 | r=11.5 c=0.174 n=123   | tot=1 NUOVI=1 | TRACK accr=2584 coppie=651 nuova=93
+    570 |    0.0000 |    19.988 | r=11.5 c=0.178 n=131   | tot=1 NUOVI=1 | TRACK accr=2601 coppie=657 nuova=93
+    575 |    0.0000 |    19.988 | r=11.5 c=0.192 n=138   | tot=1 NUOVI=1 | TRACK accr=2622 coppie=665 nuova=93
+    580 |    0.0000 |    19.988 | r=11.5 c=0.179 n=141   | tot=1 NUOVI=1 | TRACK accr=2644 coppie=674 nuova=93
+    585 |    0.0000 |    19.988 | r=11.5 c=0.174 n=148   | tot=1 NUOVI=1 | TRACK accr=2670 coppie=689 nuova=93
+    590 |    0.0000 |    19.988 | r=11.5 c=0.230 n=148   | tot=1 NUOVI=1 | TRACK accr=2689 coppie=695 nuova=93
+    595 |    0.0000 |    19.988 | r=11.5 c=0.193 n=152   | tot=1 NUOVI=1 | TRACK accr=2715 coppie=708 nuova=93
+    600 |    0.0000 |    19.988 | r=11.5 c=0.198 n=154   | tot=1 NUOVI=1 | TRACK accr=2740 coppie=720 nuova=93
+    605 |    0.0000 |    19.988 | r=11.5 c=0.183 n=161   | tot=1 NUOVI=1 | TRACK accr=2763 coppie=731 nuova=93
+    610 |    0.0000 |    19.988 | r=11.5 c=0.158 n=162   | tot=1 NUOVI=1 | TRACK accr=2782 coppie=737 nuova=94
+    615 |    0.0000 |    19.988 | r=11.5 c=0.193 n=166   | tot=1 NUOVI=1 | TRACK accr=2822 coppie=751 nuova=94
+    620 |    0.0000 |    19.988 | r=11.5 c=0.181 n=172   | tot=1 NUOVI=1 | TRACK accr=2852 coppie=767 nuova=94
+    625 |    0.0000 |    19.988 | r=11.5 c=0.165 n=179   | tot=1 NUOVI=1 | TRACK accr=2880 coppie=783 nuova=96
+    630 |    0.0000 |    19.988 | r=11.5 c=0.152 n=179   | tot=1 NUOVI=1 | TRACK accr=2898 coppie=799 nuova=96
+    635 |    0.0000 |    19.988 | r=11.5 c=0.156 n=188   | tot=1 NUOVI=1 | TRACK accr=2928 coppie=811 nuova=96
+    640 |    0.0000 |    19.988 | r=11.5 c=0.154 n=188   | tot=1 NUOVI=1 | TRACK accr=2954 coppie=822 nuova=96
+    645 |    0.0000 |    19.988 | r=11.5 c=0.147 n=192   | tot=1 NUOVI=1 | TRACK accr=2978 coppie=836 nuova=96
+    650 |    0.0000 |    19.988 | r=11.5 c=0.166 n=184   | tot=1 NUOVI=1 | TRACK accr=2999 coppie=846 nuova=96
+    655 |    0.0000 |    19.988 | r=11.5 c=0.142 n=188   | tot=1 NUOVI=1 | TRACK accr=3031 coppie=864 nuova=96
+    660 |    0.0000 |    19.988 | r=11.5 c=0.217 n=194   | tot=1 NUOVI=1 | TRACK accr=3062 coppie=879 nuova=97
+    665 |    0.0000 |    19.988 | r=11.5 c=0.178 n=201   | tot=1 NUOVI=1 | TRACK accr=3093 coppie=895 nuova=97
+    670 |    0.0000 |    19.988 | r=12.0 c=0.209 n=78    | tot=1 NUOVI=1 | TRACK accr=3116 coppie=908 nuova=97
+    675 |    0.0000 |    19.988 | r=11.5 c=0.180 n=199   | tot=1 NUOVI=1 | TRACK accr=3142 coppie=925 nuova=97
+    680 |    0.0000 |    19.988 | r=11.5 c=0.165 n=207   | tot=1 NUOVI=1 | TRACK accr=3170 coppie=937 nuova=98
+    685 |    0.0000 |    19.988 | r=11.5 c=0.179 n=217   | tot=1 NUOVI=1 | TRACK accr=3200 coppie=954 nuova=98
+    690 |    0.0000 |    19.988 | r=11.5 c=0.191 n=221   | tot=1 NUOVI=1 | TRACK accr=3225 coppie=965 nuova=98
+    695 |    0.0000 |    19.988 | r=11.5 c=0.196 n=226   | tot=1 NUOVI=1 | TRACK accr=3255 coppie=979 nuova=98
+    700 |    0.0000 |    19.988 | r=11.5 c=0.174 n=232   | tot=1 NUOVI=1 | TRACK accr=3290 coppie=993 nuova=99
+[batch] log diagnostico completo salvato in out_elast\on_700_sep10_s1.csv
+
+[batch] completato in 3982.3s, 700 passi. CSV salvato in out_elast\cond_on_700_sep10_s1.csv
+[batch] LETTURA condensazione: se dens_centrale e n_centrali CRESCONO e frac_nati resta
+        ALTA mentre dist_masse NON crolla -> NUOVA massa dal vuoto (non accrescimento).
+[batch] LETTURA picchi_nuovi: se picchi_nuovi passa da 0 a >=1 a un certo passo, quello e'
+        il momento in cui una MASSA NUOVA si stacca dal vuoto (materia isolata che si crea).
+[batch] LETTURA antiguscio: se compare un anello a coerenza_min BASSA (antifase) e raggio
+        stabile oltre le masse, con nodi presenti -> GUSCIO DI ANTIFASE che avvolge i nuclei
+        = massa di scala superiore (il guscio del sistema e antifase, non materia).

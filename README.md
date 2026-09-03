@@ -103,8 +103,13 @@ Il batch non crea video. Produce:
 - un `diaglog` dettagliato, una riga per passo, con variabili globali e misure
 	per massa/coppia di masse.
 
-Le directory padre indicate in `--csv`, `--diaglog` e `--sync-db` vengono create
-automaticamente se non esistono.
+Le directory padre indicate in `--csv`, `--diaglog`, `--sync-db` e `--out`
+vengono create automaticamente se non esistono.
+
+In PowerShell il comando va lanciato direttamente con `python`. Se si usa
+`Start-Process`, tutti gli argomenti del simulatore devono essere passati con
+`-ArgumentList`; altrimenti PowerShell può interpretare `--test` o altri flag
+come argomenti di `Start-Process`.
 
 ### Video headless
 
@@ -327,6 +332,12 @@ bash RunTutti.bash
 ```
 
 ## 8. Lettura dei risultati
+
+`test_circolazione_topologica.bat` produce inoltre le colonne passive
+`n_cicli_topologici`, `corrente_arco_max`, `gradiente_rho_arco_media_assoluta`,
+`circolazione_topologica_max`, `circolazione_topologica_rms` e
+`circolazione_topologica_media`. Sono misure sul grafo e non dipendono
+dall'embedding; non costituiscono ancora una forza dinamica.
 
 ### CSV compatto
 

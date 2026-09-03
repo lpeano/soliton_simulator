@@ -278,9 +278,16 @@ $$\boldsymbol\omega_i^{n+1}=\boldsymbol\omega_i^n+dt_i
 -\frac{\boldsymbol\omega_i^n}{\tau_{A,i}}\right).$$
 
 Poi il Bloch viene ruotato attorno a $\boldsymbol\omega_i$ con angolo
-$\vartheta_i=|\boldsymbol\omega_i|dt_i$ mediante la formula di Rodrigues. Il settore
-spinoriale è quindi attivo nel codice; ordine macroscopico e precessione sono invece
-osservabili da verificare.
+$\vartheta_i=|\boldsymbol\omega_i|dt_i$ mediante la formula di Rodrigues. Questa
+evoluzione è però **orfana dal commit d2c76f3** (2026-09-02): la chiamata a
+`_passo_spinoriale` fu persa come collaterale del refactor a snapshot/commit-atomico
+ETC. Nel percorso di default lo spinore resta quindi **congelato** all'inizializzazione
+planare ($\mathbf n_i=(\sin b_i,0,\cos b_i)$, coplanari), letto ma mai ruotato. Il flag
+`--spinore-vivo` (default off) **reinnesta** l'evoluzione nell'ordine ETC (legge lo
+snapshot $t$, prima del commit atomico delle fasi). È sotto test A/B, non ancora
+promosso a default; ordine macroscopico, precessione e curvatura non-abeliana su
+spinore vivo sono osservabili **da validare**. Ogni misura di fase di Berry precedente
+al reinnesto è ~0 per spinore congelato, non per natura abeliana del sistema.
 
 ### Circolazione topologica spin-dipendente
 
@@ -298,6 +305,26 @@ $$\Gamma_C=\sum_{e\in C}\sigma_{C,e}J_e,$$
 dove $\sigma_{C,e}$ tiene conto del verso dell'arco nel ciclo. Il diagnostico
 registra numero di cicli, massimo, media assoluta e media firmata di
 $\Gamma_C$. La misura è passiva: non modifica fasi, metrica o coordinate.
+
+**Risultato misurato (dimostrato).** Sul sistema reale $\Gamma_C\simeq0$ (zero
+numerico, $\sim10^{-15}$): il twist d'equilibrio è essenzialmente un gradiente di
+fase, dunque curl-free. La "rotazione" vista in `m0_Lz` (asse PCA, dipendente
+dall'embedding) è artefatto delle coordinate, non corrente circolante reale.
+
+**Componenti non-gradientali (decomposizione di Hodge).** Accanto a $\Gamma_C$ il
+diagnostico misura due grandezze gauge-invarianti che catturano ciò che il gradiente
+non ha: l'**olonomia di fase** $\oint_C\mathrm{d}\phi$ (somma di $\phi_i-\phi_j$
+attorno al ciclo, componente armonica/vortici) e la **fase di Berry spinoriale**,
+calcolata come invariante di Bargmann–Pancharatnam
+
+$$\gamma_C=-\arg\prod_{k}\langle\psi_k|\psi_{k+1}\rangle,$$
+
+prodotto ciclico degli overlap fra spinori attorno al ciclo. Essendo ciclico è
+indipendente dal vertice di partenza e dalle fasi arbitrarie dei singoli spinori
+(gauge-invariante; verificato invariante per rinumerazione degli archi, rotazione
+globale $SO(3)$ dei Bloch ed embedding). Le colonne sono `olonomia_fase_*` e
+`berry_spin_*`. Con spinore congelato (default) $\gamma_C\equiv0$ per costruzione
+(Bloch coplanari); diventa misurabile solo con `--spinore-vivo`.
 
 ## 11. Gravitazione, frame-dragging e viriale
 
