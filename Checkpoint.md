@@ -60,9 +60,21 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
       `viriale`, `zeta-vir`, `pav-com`, `chi-basc`, `polo-maturo`, `olon-part`,
       `calore-vett`, `verlet`) e DB distinti per seme/condizione; `sync-db` serve
       solo a spezzare e riprendere il run.
+- **[IMPLEMENTATO]** Aggiunti due test di precessione a run singolo:
+      `test_precessione_verso_chi.bat` e `test_precessione_ls_azim.bat`.
+      Usano `sep=10`, seed 1, 700 passi e producono dati separati; ogni script
+      avvia un solo processo.
 - **[IMPLEMENTATO]** Il batch crea automaticamente le directory padre per i
       percorsi di `--csv`, `--diaglog` e `--sync-db`, evitando il `FileNotFoundError`
       quando si lancia il comando da una checkout pulita.
+- **[IMPLEMENTATO, DIAGNOSTICO]** Aggiunta la circolazione topologica passiva:
+      i cicli sono costruiti da `net.i/net.j` e la corrente usa densità locale,
+      twist e allineamento spinoriale, senza embedding. Da validare il segnale
+      e il confronto con `Lz_orb`.
+- **[IN CORSO]** Sono in esecuzione i test `sep=10`: confronto ELAST_C a 700
+      passi (tre semi) e test a run singolo dei canali `--verso-chi`,
+      `--ls-azim` e della circolazione topologica. I CSV/log non vanno letti
+      come completi finché i processi non terminano.
 - **[AGGIORNATO]** Tutti gli script di lancio attivi includono esplicitamente
       `--sync`, sia per Eulero sia per Velocity-Verlet; questa uniformità non
       aveva un effetto fisico finché `SYNC_UPDATE` era un flag non operativo.

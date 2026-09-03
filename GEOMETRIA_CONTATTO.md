@@ -358,6 +358,18 @@ Per i test usare soprattutto grandezze relazionali e confrontare più semi:
 - `tw_q` e `tw_disp`: torsione in unità di olonomia;
 - `Lz_orb_ij` e `dist_ij`: relazioni tra strutture di massa.
 
+La diagnostica passiva `circolazione_topologica()` costruisce cicli fondamentali
+dalla sola lista degli archi. La corrente è pesata da densità locale, twist e
+allineamento spinoriale:
+
+$$J_{ij}=w_{ij}\,\frac{\rho_i+\rho_j}{2}\,
+(\mathbf n_i\cdot\mathbf n_j)\,\frac{tw_{ij}}{\Phi_{crit}}.$$
+
+Le colonne sono `n_cicli_topologici`, `circolazione_topologica_max`,
+`circolazione_topologica_media_assoluta` e `circolazione_topologica_media`.
+Non dipendono da `pos` o dal rendering e non costituiscono ancora una nuova
+forza dinamica.
+
 La condizione `entro` non dimostra che il grafo sia correttamente connesso in
 senso fisico: misura solo il rapporto tra la metrica corrente e il raggio
 `R_CONN()`. Poiché gli archi hanno memoria, è possibile avere archi oltre la

@@ -174,6 +174,15 @@ un ramo senza flag (Eulero) e uno con `--verlet`. Le varianti sono esperimenti
 numerici: eventuali riduzioni di oscillazione o miglioramenti di precessione
 vanno misurati nei `diaglog`, su run lunghi e più semi.
 
+Per isolare i due canali aggiuntivi della precessione sono disponibili anche
+due script a **un solo run** ciascuno (seed 1, `sep=10`, 700 passi):
+
+- `test_precessione_verso_chi.bat`: aggiunge solo `--verso-chi`;
+- `test_precessione_ls_azim.bat`: aggiunge solo `--ls-azim`.
+
+Producono dati distinti in `out_elast/` e log distinti in `log/`; non avviano
+sei processi per test.
+
 ## 5.1 Test del nucleo elastico
 
 Tre script dedicati usano `--verlet` e studiano il coefficiente storico

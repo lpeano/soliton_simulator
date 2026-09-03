@@ -742,7 +742,90 @@ class Rete:
     def _grado(self):
         self._deg = np.maximum(np.bincount(self.i, minlength=self.n) +
                                np.bincount(self.j, minlength=self.n), 1)
+        self._cicli_topologici = None
         self._costruisci_struttura()
+
+    def _base_cicli_topologici(self, massimo=256):
+        """Costruisce una base di cicli fondamentali usando SOLO la topologia.
+        Non legge pos, d, embedding o coordinate: ogni ciclo e' una sequenza di
+        (indice_arco, verso). La cache viene invalidata da _grado() quando cambia
+        la topologia. Il limite serve solo a mantenere la diagnostica leggera."""
+        if getattr(self, "_cicli_topologici", None) is not None:
+            return self._cicli_topologici
+        n = self.n
+        archi = [(e, int(a), int(b)) for e, (a, b) in enumerate(zip(self.i, self.j))
+             if a < n and b < n and a != b]
+        adiacenza = [[] for _ in range(n)]
+        for e, (_, a, b) in enumerate(archi):
+            adiacenza[a].append((b, e)); adiacenza[b].append((a, e))
+        visitato = np.zeros(n, bool); parent = np.full(n, -1, int)
+        parent_e = np.full(n, -1, int); profondita = np.zeros(n, int)
+        alberi = set()
+        for radice in range(n):
+            if visitato[radice]: continue
+            visitato[radice] = True; pila = [radice]
+            while pila:
+                u = pila.pop()
+                for v, e in adiacenza[u]:
+                    if not visitato[v]:
+                        visitato[v] = True; parent[v] = u; parent_e[v] = e
+                        profondita[v] = profondita[u] + 1; alberi.add(e); pila.append(v)
+        def verso(e, u, v):
+            _, a, b = archi[e]
+            return 1 if (a == u and b == v) else -1
+        cicli = []
+        for e, (_, u, v) in enumerate(archi):
+            if e in alberi: continue
+            pu = []; x = u
+            while x >= 0:
+                pu.append(x); x = parent[x]
+            pv = []; x = v
+            while x >= 0:
+                pv.append(x); x = parent[x]
+            comuni = set(pu); lca = next((x for x in pv if x in comuni), None)
+            if lca is None: continue
+            ciclo = [(archi[e][0], 1)]  # chiusura v -> u: orientamento i -> j
+            x = u
+            while x != lca and x >= 0:
+                y, pe = parent[x], parent_e[x]
+                ciclo.append((archi[pe][0], verso(pe, x, y))); x = y
+            ramo = []; x = v
+            while x != lca and x >= 0:
+                y, pe = parent[x], parent_e[x]
+                ramo.append((archi[pe][0], verso(pe, y, x))); x = y
+            ciclo.extend(reversed(ramo))
+            if len(ciclo) > 2:
+                cicli.append(ciclo)
+                if len(cicli) >= massimo: break
+        self._cicli_topologici = cicli
+        return cicli
+
+    def circolazione_topologica(self):
+        """Diagnostica della corrente circolante sui cicli del grafo.
+        E' deliberatamente passiva: non modifica alcuno stato dinamico.
+        La corrente d'arco usa densita' locale, twist orientato e allineamento
+        spinoriale; nessuna coordinata o media globale entra nel calcolo."""
+        if self.n < 3 or not len(self.i):
+            return {"n_cicli": 0, "circolazione_max": 0.0,
+                    "circolazione_media_assoluta": 0.0}
+        if not hasattr(self, "psi") or len(self.psi) < self.n:
+            self.calcola_psi()
+        cicli = self._base_cicli_topologici()
+        if not cicli:
+            return {"n_cicli": 0, "circolazione_max": 0.0,
+                    "circolazione_media_assoluta": 0.0}
+        w = self._pesi(); rho = np.abs(self.psi[:self.n]) ** 2
+        spin = np.ones(len(self.i))
+        if SPINORE and hasattr(self, "_nb") and len(self._nb) >= self.n:
+            spin = np.sum(self._nb[self.i] * self._nb[self.j], axis=1)
+        corrente = w * (0.5 * (rho[self.i] + rho[self.j])) * spin * self.tw / max(PHI_CRIT, 1e-9)
+        valori = np.array([sum(segno * corrente[e] for e, segno in ciclo)
+                           for ciclo in cicli], float)
+        return {"n_cicli": int(len(valori)),
+                "circolazione_max": float(np.max(np.abs(valori))),
+                "circolazione_media_assoluta": float(np.mean(np.abs(valori))),
+                "circolazione_media": float(np.mean(valori)),
+                "circolazione": valori}
 
     def _costruisci_struttura(self):
         """struttura CSR simmetrica in cache: la topologia cambia solo alla
@@ -3470,6 +3553,16 @@ def batch_condensazione(a):
         cols['dmin_nodi'] = dmin
         cols['xi_termo'] = float(getattr(net, 'xi_termo', 0.0))
         cols['n_archi'] = len(net.i)
+        # CIRCOLAZIONE TOPOLOGICA: misura passiva sui cicli del grafo, indipendente
+        # dall'embedding. Non entra nella dinamica finche' non viene validata.
+        try:
+            circ = net.circolazione_topologica()
+            cols['n_cicli_topologici'] = circ['n_cicli']
+            cols['circolazione_topologica_max'] = circ['circolazione_max']
+            cols['circolazione_topologica_media_assoluta'] = circ['circolazione_media_assoluta']
+            cols['circolazione_topologica_media'] = circ.get('circolazione_media', 0.0)
+        except Exception:
+            pass
         # SCHERMATURA: osservabili della legge ancorata a N_c. La portata effettiva
         # mostra direttamente la differenza fra nucleo schermato e guscio non schermato.
         try:

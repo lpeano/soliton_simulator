@@ -282,6 +282,23 @@ $\vartheta_i=|\boldsymbol\omega_i|dt_i$ mediante la formula di Rodrigues. Il set
 spinoriale è quindi attivo nel codice; ordine macroscopico e precessione sono invece
 osservabili da verificare.
 
+### Circolazione topologica spin-dipendente
+
+La diagnostica passiva `circolazione_topologica()` costruisce una base di cicli
+fondamentali direttamente dagli archi `net.i` e `net.j`, senza usare coordinate
+o embedding. La corrente dell'arco è
+
+$$J_{ij}=w_{ij}\,\frac{\rho_i+\rho_j}{2}\,
+(\mathbf n_i\cdot\mathbf n_j)\,\frac{tw_{ij}}{\Phi_{crit}}.$$
+
+Per un ciclo $C$ la circolazione è
+
+$$\Gamma_C=\sum_{e\in C}\sigma_{C,e}J_e,$$
+
+dove $\sigma_{C,e}$ tiene conto del verso dell'arco nel ciclo. Il diagnostico
+registra numero di cicli, massimo, media assoluta e media firmata di
+$\Gamma_C$. La misura è passiva: non modifica fasi, metrica o coordinate.
+
 ## 11. Gravitazione, frame-dragging e viriale
 
 Il twist orientato produce una coppia locale schematizzabile come
