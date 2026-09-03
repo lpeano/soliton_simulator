@@ -1,5 +1,23 @@
 # Sistema dei solitoni relazionali
 
+## Intento e ontologia
+
+Questo progetto esplora un modello discreto in cui spazio, materia e tempo non
+sono ingredienti primitivi, ma emergono dalle relazioni di fase tra solitoni.
+I solitoni sono **puntatori di fase**, non oggetti materiali: ciò che il modello
+considera fisico è il campo d'interferenza e la rete di relazioni sugli archi.
+Le coordinate servono alla connettività, all'integrazione metrica e al disegno;
+non rappresentano da sole la materia.
+
+Il simulatore è uno strumento di ricerca e falsificazione. Una legge presente
+nel codice è una legge del modello implementato, non automaticamente una legge
+della natura. I risultati vanno distinti tra **dimostrati**, **in verifica** e
+**aperti**, secondo la loro ripetibilità sperimentale.
+
+La formalizzazione matematica, con formule e definizioni delle leggi
+implementate, è disponibile in [`FISICA.md`](FISICA.md). Questo README resta la
+guida operativa del progetto.
+
 Guida operativa e scientifica per `soliton_simulator.py` e per gli script di
 esperimento del repository.
 
