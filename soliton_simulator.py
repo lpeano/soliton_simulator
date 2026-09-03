@@ -679,6 +679,10 @@ SPINORE_VIVO = False    # REINNESTO dell'evoluzione SU(2) nell'ordine ETC: se Tr
                         # viene chiamato dentro step() PRIMA del commit atomico delle fasi, cosi' legge
                         # lo snapshot t (self.phi non ancora committata). Default off = spinore congelato
                         # (comportamento attuale). Reversibile, per A/B; richiede rimisura di Berry.
+SPIN_LARMOR = False     # CAMPO TRASVERSO GEOMETRICO sullo spinore (legge, zero parametri). Se True,
+                        # al campo effettivo B si somma B_geo = <|tw|/PHI_CRIT * (n_i x n_j)>, termine
+                        # non-abeliano perpendicolare a n che sostiene la precessione di Larmor senza
+                        # auto-spegnersi quando gli spin si ordinano. Richiede --spinore-vivo. Default off.
 # SEME_INIZIALE: numero di puntatori da cui il sistema PARTE. Non e' piu' una densita'
 # del vuoto imposta (BOX+N_VUOTO fissavano insieme una densita' fisica nascosta) - e'
 # solo il seme da cui la dinamica evolve, sparpagliato sulla scala del sistema (~lambda).
@@ -846,7 +850,8 @@ class Rete:
                  "olonomia_rms": 0.0, "berry_spin_max": 0.0,
                  "berry_spin_media_assoluta": 0.0, "berry_spin_rms": 0.0,
                  "berry_spin_media": 0.0, "spin_cluster_modulo": 0.0,
-                 "spin_cluster_omega": 0.0}
+                 "spin_cluster_omega": 0.0, "spin_neel_modulo": 0.0,
+                 "spin_neel_omega": 0.0}
         if self.n < 3 or not len(self.i):
             return vuoto
         if not hasattr(self, "psi") or len(self.psi) < self.n:
@@ -901,6 +906,20 @@ class Rete:
                 if getattr(self, "_shat_prec", None) is not None:
                     omega_S = float(np.arccos(np.clip(float(np.dot(shat, self._shat_prec)), -1.0, 1.0)))
                 self._shat_prec = shat
+        # PARAMETRO D'ORDINE STAGGERED (vettore di Neel): N = |media di chi_i * n_i|. Alto quando gli
+        # spin sono ordinati in modo ALTERNATO per chiralita' (antiferromagnetico), anche se S_M~0.
+        # omega_N = precessione del vettore di Neel. Embedding-indipendente, gauge-invariante SO(3).
+        N_stag = 0.0; omega_N = 0.0
+        if ha_spin and len(self.perc_chi) >= self.n:
+            chi_n = self.perc_chi[:self.n].astype(float)[:, None] * self._nb[:self.n]
+            somN = np.sum(chi_n, axis=0)
+            normN = float(np.linalg.norm(somN))
+            N_stag = normN / self.n
+            if normN > 1e-9:
+                nhat = somN / normN
+                if getattr(self, "_nhat_prec", None) is not None:
+                    omega_N = float(np.arccos(np.clip(float(np.dot(nhat, self._nhat_prec)), -1.0, 1.0)))
+                self._nhat_prec = nhat
         return {"n_cicli": int(len(valori)),
                 "circolazione_max": float(np.max(np.abs(valori))),
                 "circolazione_media_assoluta": float(np.mean(np.abs(valori))),
@@ -916,6 +935,8 @@ class Rete:
                 "berry_spin_media": float(np.mean(berry)) if len(berry) else 0.0,
                 "spin_cluster_modulo": S_M,
                 "spin_cluster_omega": omega_S,
+                "spin_neel_modulo": N_stag,
+                "spin_neel_omega": omega_N,
                 "circolazione_media": float(np.mean(valori)),
                 "circolazione": valori, "olonomia": olonomia, "berry_spin": berry}
 
@@ -1213,6 +1234,20 @@ class Rete:
         np.add.at(B, ii, contrib_j * refl); np.add.at(deg, ii, wl)
         np.add.at(B, jj, contrib_i * refl); np.add.at(deg, jj, wl)
         B = B / np.maximum(deg[:, None], 1e-9)
+        if SPIN_LARMOR:
+            # Campo trasverso GEOMETRICO STAGGERED (non-abeliano): chiralita' del legame (+-1) *
+            # torsione * (n_i x n_j). Il fattore staggered cl=chi_i*chi_j alterna il verso della
+            # coppia coi domini chirali -> struttura antiferromagnetica/onda di spin che NON si
+            # auto-spegne con l'ordine ferromagnetico (a differenza della media dei vicini).
+            # Perpendicolare a n, asse dalla torsione e dalla chiralita' (stato), zero parametri.
+            twL = np.abs(self.tw[mask]) / max(PHI_CRIT, 1e-9)
+            stag = cl * twL
+            cross_ij = np.cross(nb_vic[ii], nb_vic[jj])
+            Bg = np.zeros((n, 3)); degg = np.zeros(n)
+            np.add.at(Bg, ii,  cross_ij * (wl * stag)[:, None]); np.add.at(degg, ii, wl)
+            np.add.at(Bg, jj, -cross_ij * (wl * stag)[:, None]); np.add.at(degg, jj, wl)
+            Bg = Bg / np.maximum(degg[:, None], 1e-9)
+            B = B + Bg
         # INERZIA = |Psi|^2 (la materia mantiene il moto), come in mem_mot
         if not hasattr(self, "psi") or len(self.psi) < n: self.calcola_psi()
         inerzia = np.maximum(np.abs(self.psi[:n])**2, 1e-6)
@@ -3280,7 +3315,7 @@ def _applica_flag(a):
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -3316,6 +3351,7 @@ def _applica_flag(a):
     PAV_COM = bool(getattr(a, "pav_com", False))   # pavimento comovente (legge): default off = muro assoluto 0.05
     SYNC_UPDATE = bool(getattr(a, "sync", False)) # aggiornamento sincrono (transazionale): default off
     SPINORE_VIVO = bool(getattr(a, "spinore_vivo", False)) # reinnesto evoluzione SU(2) nell'ETC: default off
+    SPIN_LARMOR = bool(getattr(a, "spin_larmor", False))   # campo trasverso geometrico (Larmor): default off
     VERSO_CHI = bool(getattr(a, "verso_chi", False)) # aggancio al verso chirale stabile: default off
     LS_AZIM = bool(getattr(a, "ls_azim", False))   # L.S vettoriale azimutale: default off
     POLO_MATURO = bool(getattr(a, "polo_maturo", False)) # polo maturo (strategia 3): default off
@@ -3547,6 +3583,11 @@ def _cli():
                         "+ eccitazione del vuoto) dentro step(), PRIMA del commit atomico (legge lo "
                         "snapshot t). Riattiva il settore non-abeliano orfano dal commit d2c76f3. "
                         "Cambia la fisica: A/B e rimisura (Berry, curvatura). Default off = spinore congelato.")
+    p.add_argument("--spin-larmor", action="store_true", dest="spin_larmor",
+                   help="CAMPO TRASVERSO GEOMETRICO (legge, zero parametri): al campo dello spinore "
+                        "somma B_geo = <|tw|/PHI_CRIT * (n_i x n_j)>, termine non-abeliano perpendicolare "
+                        "a n che sostiene la precessione di Larmor senza auto-spegnersi con l'ordine. "
+                        "Richiede --spinore-vivo. Default off = non-regressione.")
     p.add_argument("--bussola", type=int, default=1,
                    help="1 = indicatore d'assi nel margine, 0 = nessun riferimento")
     p.add_argument("--giri", type=float, default=1.0,
@@ -3699,6 +3740,8 @@ def batch_condensazione(a):
             cols['berry_spin_media'] = circ.get('berry_spin_media', 0.0)
             cols['spin_cluster_modulo'] = circ.get('spin_cluster_modulo', 0.0)
             cols['spin_cluster_omega'] = circ.get('spin_cluster_omega', 0.0)
+            cols['spin_neel_modulo'] = circ.get('spin_neel_modulo', 0.0)
+            cols['spin_neel_omega'] = circ.get('spin_neel_omega', 0.0)
         except Exception:
             pass
         # SCHERMATURA: osservabili della legge ancorata a N_c. La portata effettiva
