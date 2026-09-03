@@ -1,5 +1,4 @@
 # Output sperimentali e artefatti generati: non fanno parte del repository.
-out_*/
 log/
 __pycache__/
 *.py[cod]
