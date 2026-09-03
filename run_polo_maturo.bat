@@ -22,8 +22,8 @@ echo === POLO MATURO (seme %SEMI%, %PASSI% passi) ===
 echo.
 
 for %%S in (%SEMI%) do (
-  START "base_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --chi-basc               --sync-db out_pm\db_base_s%%S.pkl --db-ogni %DBOGNI% --csv out_pm\cond_base_s%%S.csv --diaglog out_pm\diag_base_s%%S.csv > log\base_s%%S.log 2>&1"
-  START "polo_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --chi-basc --polo-maturo --sync-db out_pm\db_polo_s%%S.pkl --db-ogni %DBOGNI% --csv out_pm\cond_polo_s%%S.csv --diaglog out_pm\diag_polo_s%%S.csv > log\polo_s%%S.log 2>&1"
+  START "base_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --chi-basc               --sync-db out_pm\db_base_s%%S.pkl --db-ogni %DBOGNI% --csv out_pm\cond_base_s%%S.csv --diaglog out_pm\diag_base_s%%S.csv > log\base_s%%S.log 2>&1"
+  START "polo_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --chi-basc --polo-maturo --sync-db out_pm\db_polo_s%%S.pkl --db-ogni %DBOGNI% --csv out_pm\cond_polo_s%%S.csv --diaglog out_pm\diag_polo_s%%S.csv > log\polo_s%%S.log 2>&1"
 )
 
 echo Lanciati. Al ritorno: Lz_orb accumula con --polo-maturo (precessione) o resta rumore (radiale)?

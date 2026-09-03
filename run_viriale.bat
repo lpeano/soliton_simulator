@@ -43,13 +43,13 @@ echo.
 
 REM ================= BATCH: la PROVA (CSV + diaglog) su TUTTI i semi =================
 for %%S in (%SEMI%) do (
-  START "voff_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --kfrange 0            --csv out_vir\cond_voff_s%%S.csv --diaglog out_vir\diag_voff_s%%S.csv > log\voff_s%%S.log 2>&1"
-  START "von_s%%S"  /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --kfrange 0 --viriale  --csv out_vir\cond_von_s%%S.csv  --diaglog out_vir\diag_von_s%%S.csv  > log\von_s%%S.log 2>&1"
+  START "voff_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --kfrange 0            --csv out_vir\cond_voff_s%%S.csv --diaglog out_vir\diag_voff_s%%S.csv > log\voff_s%%S.log 2>&1"
+  START "von_s%%S"  /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --kfrange 0 --viriale  --csv out_vir\cond_von_s%%S.csv  --diaglog out_vir\diag_von_s%%S.csv  > log\von_s%%S.log 2>&1"
 )
 
 REM ================= VIDEO: l'OCCHIO (camera FISSA), seed 1, off + on =================
-START "video_voff_s1" /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %FRAMES% --fps %FPS% --size 0.7,0.7,0.7 --kfrange 0           --out out_video\video_voff_s1.mp4 > log\video_voff_s1.log 2>&1"
-START "video_von_s1"  /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %FRAMES% --fps %FPS% --size 0.7,0.7,0.7 --kfrange 0 --viriale --out out_video\video_von_s1.mp4 > log\video_von_s1.log 2>&1"
+START "video_voff_s1" /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %FRAMES% --fps %FPS% --size 0.7,0.7,0.7 --sync --kfrange 0           --out out_video\video_voff_s1.mp4 > log\video_voff_s1.log 2>&1"
+START "video_von_s1"  /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %FRAMES% --fps %FPS% --size 0.7,0.7,0.7 --sync --kfrange 0 --viriale --out out_video\video_von_s1.mp4 > log\video_von_s1.log 2>&1"
 
 echo.
 echo === Lanciati. Risultati in out_vir\ (CSV+diaglog), out_video\, log\ ===

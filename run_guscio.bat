@@ -25,10 +25,10 @@ echo     misura rchi_pos/rchi_neg/rchi_ratio nella fusione
 echo.
 
 for %%S in (%SEMI%) do (
-  START "gus_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --pav-com --csv out_guscio\cond_gus_s%%S.csv --diaglog out_guscio\diag_gus_s%%S.csv > log\gus_s%%S.log 2>&1"
+  START "gus_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --pav-com --csv out_guscio\cond_gus_s%%S.csv --diaglog out_guscio\diag_gus_s%%S.csv > log\gus_s%%S.log 2>&1"
 )
 
-START "video_gus_s1" /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %PASSI% --fps 24 --size 0.7,0.7,0.7 --pav-com --out out_video\video_gus_s1.mp4 > log\video_gus_s1.log 2>&1"
+START "video_gus_s1" /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %PASSI% --fps 24 --size 0.7,0.7,0.7 --sync --pav-com --out out_video\video_gus_s1.mp4 > log\video_gus_s1.log 2>&1"
 
 echo Lanciati. Diaglog in out_guscio\, video in out_video\, log in log\.
 echo Al ritorno: rchi_ratio sale sopra 1 nella fusione? (chi-1 = guscio/coda esterno)

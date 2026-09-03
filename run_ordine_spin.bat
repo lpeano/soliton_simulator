@@ -24,7 +24,7 @@ echo === ORDINE DI SPIN con chi-basc (seme %SEMI%, %PASSI% passi) ===
 echo.
 
 for %%S in (%SEMI%) do (
-  START "spin_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --chi-basc --sync-db out_spin\db_spin_s%%S.pkl --db-ogni %DBOGNI% --csv out_spin\cond_spin_s%%S.csv --diaglog out_spin\diag_spin_s%%S.csv > log\spin_s%%S.log 2>&1"
+  START "spin_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --chi-basc --sync-db out_spin\db_spin_s%%S.pkl --db-ogni %DBOGNI% --csv out_spin\cond_spin_s%%S.csv --diaglog out_spin\diag_spin_s%%S.csv > log\spin_s%%S.log 2>&1"
 )
 
 echo Lanciato. Al ritorno guardo: lo spinore si ordina (verso azim coerente) nel tempo?

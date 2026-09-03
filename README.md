@@ -138,7 +138,9 @@ per i batch.
 | `--scala B` | coarse-graining: un solitone rappresenta `B` solitoni fini | cambio di scala |
 | `--sync-db FILE` | salva o ricarica lo stato versionato | esecuzioni spezzate |
 
-La schermatura è sempre attiva (`SCHERMATURA=True`). `--plam` è mantenuto solo
+Tutti gli script di lancio includono esplicitamente `--sync`, sia nel ramo
+Euleriano sia nelle varianti Velocity-Verlet. La schermatura è sempre attiva
+(`SCHERMATURA=True`). `--plam` è mantenuto solo
 per compatibilità con vecchi comandi: il suo valore viene ignorato. I valori
 `P_LAM` e `LAM_MIN` non controllano più la dinamica.
 

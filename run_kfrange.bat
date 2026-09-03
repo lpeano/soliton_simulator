@@ -41,15 +41,15 @@ echo.
 
 REM ================= BATCH: la PROVA numerica (CSV + diaglog), su TUTTI i semi =================
 for %%S in (%SEMI%) do (
-  START "batch_kf0_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --kfrange 0   --csv out_test\cond_kf0_s%%S.csv --diaglog out_test\diag_kf0_s%%S.csv > log\batch_kf0_s%%S.log 2>&1"
-  START "batch_kf_s%%S"  /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --kfrange %KF% --csv out_test\cond_kf_s%%S.csv  --diaglog out_test\diag_kf_s%%S.csv  > log\batch_kf_s%%S.log 2>&1"
+  START "batch_kf0_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --kfrange 0   --csv out_test\cond_kf0_s%%S.csv --diaglog out_test\diag_kf0_s%%S.csv > log\batch_kf0_s%%S.log 2>&1"
+  START "batch_kf_s%%S"  /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --kfrange %KF% --csv out_test\cond_kf_s%%S.csv  --diaglog out_test\diag_kf_s%%S.csv  > log\batch_kf_s%%S.log 2>&1"
 )
 
 REM ================= VIDEO: l'OCCHIO (camera FISSA --giri 0), seed 1 spento+acceso =================
 REM  (per allineare meglio occhio<->numeri, --size uguale su entrambi. Restano corse
 REM   gemelle non identiche: video=guarda, diaglog=misura.)
-START "video_kf0_s1" /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %FRAMES% --fps %FPS% --size 0.7,0.7,0.7 --kfrange 0   --out out_video\video_kf0_s1.mp4 > log\video_kf0_s1.log 2>&1"
-START "video_kf_s1"  /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %FRAMES% --fps %FPS% --size 0.7,0.7,0.7 --kfrange %KF% --out out_video\video_kf_s1.mp4 > log\video_kf_s1.log 2>&1"
+START "video_kf0_s1" /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %FRAMES% --fps %FPS% --size 0.7,0.7,0.7 --sync --kfrange 0   --out out_video\video_kf0_s1.mp4 > log\video_kf0_s1.log 2>&1"
+START "video_kf_s1"  /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %FRAMES% --fps %FPS% --size 0.7,0.7,0.7 --sync --kfrange %KF% --out out_video\video_kf_s1.mp4 > log\video_kf_s1.log 2>&1"
 
 echo.
 echo === Lanciati. ===

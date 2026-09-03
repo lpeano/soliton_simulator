@@ -27,12 +27,12 @@ echo     pavimento comovente ovunque; misura rcom + s2 nei diaglog
 echo.
 
 for %%S in (%SEMI%) do (
-  START "base_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --kfrange 0 --pav-com                       --csv out_prec\cond_base_s%%S.csv --diaglog out_prec\diag_base_s%%S.csv > log\base_s%%S.log 2>&1"
-  START "vir_s%%S"  /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --kfrange 0 --pav-com --viriale            --csv out_prec\cond_vir_s%%S.csv  --diaglog out_prec\diag_vir_s%%S.csv  > log\vir_s%%S.log 2>&1"
-  START "virz_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --kfrange 0 --pav-com --viriale --zeta-vir --csv out_prec\cond_virz_s%%S.csv --diaglog out_prec\diag_virz_s%%S.csv > log\virz_s%%S.log 2>&1"
+  START "base_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --kfrange 0 --pav-com                       --csv out_prec\cond_base_s%%S.csv --diaglog out_prec\diag_base_s%%S.csv > log\base_s%%S.log 2>&1"
+  START "vir_s%%S"  /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --kfrange 0 --pav-com --viriale            --csv out_prec\cond_vir_s%%S.csv  --diaglog out_prec\diag_vir_s%%S.csv  > log\vir_s%%S.log 2>&1"
+  START "virz_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --kfrange 0 --pav-com --viriale --zeta-vir --csv out_prec\cond_virz_s%%S.csv --diaglog out_prec\diag_virz_s%%S.csv > log\virz_s%%S.log 2>&1"
 )
 
-START "video_virz_s1" /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %PASSI% --fps 24 --size 0.7,0.7,0.7 --kfrange 0 --pav-com --viriale --zeta-vir --out out_video\video_virz_s1.mp4 > log\video_virz_s1.log 2>&1"
+START "video_virz_s1" /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %PASSI% --fps 24 --size 0.7,0.7,0.7 --sync --kfrange 0 --pav-com --viriale --zeta-vir --out out_video\video_virz_s1.mp4 > log\video_virz_s1.log 2>&1"
 
 echo Lanciati. Diaglog in out_prec\, video in out_video\, log in log\.
 echo Al ritorno: leggo Lz_orb (concorde?), rcom_ vs s2_medio (segue s2^(2/3)/(1-s2)?).

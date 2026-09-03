@@ -56,6 +56,9 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 - **[IMPLEMENTATO]** Il batch crea automaticamente le directory padre per i
       percorsi di `--csv`, `--diaglog` e `--sync-db`, evitando il `FileNotFoundError`
       quando si lancia il comando da una checkout pulita.
+- **[AGGIORNATO]** Tutti gli script di lancio attivi includono esplicitamente
+      `--sync`, sia per Eulero sia per Velocity-Verlet; questa uniformità non
+      cambia la fisica finché `SYNC_UPDATE` resta un flag non operativo nel codice.
 - **[VERIFICATO]** Compilazione Python e batch breve con `diaglog` completati
       senza errori; il `diaglog` contiene le nuove colonne della schermatura.
 - **[DA VERIFICARE]** Stabilità della taglia, contrasto nucleo/guscio e

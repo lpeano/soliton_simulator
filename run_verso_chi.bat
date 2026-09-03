@@ -24,8 +24,8 @@ echo === AGGANCIO VERSO STABILE (seme %SEMI%, %PASSI% passi) ===
 echo.
 
 for %%S in (%SEMI%) do (
-  START "senza_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --chi-basc            --sync-db out_vc\db_senza_s%%S.pkl --db-ogni %DBOGNI% --csv out_vc\cond_senza_s%%S.csv --diaglog out_vc\diag_senza_s%%S.csv > log\senza_s%%S.log 2>&1"
-  START "con_s%%S"   /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --chi-basc --verso-chi --sync-db out_vc\db_con_s%%S.pkl   --db-ogni %DBOGNI% --csv out_vc\cond_con_s%%S.csv   --diaglog out_vc\diag_con_s%%S.csv   > log\con_s%%S.log 2>&1"
+  START "senza_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --chi-basc            --sync-db out_vc\db_senza_s%%S.pkl --db-ogni %DBOGNI% --csv out_vc\cond_senza_s%%S.csv --diaglog out_vc\diag_senza_s%%S.csv > log\senza_s%%S.log 2>&1"
+  START "con_s%%S"   /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --chi-basc --verso-chi --sync-db out_vc\db_con_s%%S.pkl   --db-ogni %DBOGNI% --csv out_vc\cond_con_s%%S.csv   --diaglog out_vc\diag_con_s%%S.csv   > log\con_s%%S.log 2>&1"
 )
 
 echo Lanciati. Al ritorno: Lz_orb coerenza del verso, senza vs con --verso-chi.

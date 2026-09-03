@@ -24,7 +24,7 @@ echo ""
 batch () {  # $1=nome  $2...=flag extra
   local nome=$1; shift
   echo "[batch] avvio $nome"
-  python3 "$SIM" --batch --nmasse "$NM" --sep "$SEP" --passi "$PASSI" --ogni 5 "$@" \
+  python3 "$SIM" --batch --nmasse "$NM" --sep "$SEP" --passi "$PASSI" --ogni 5 --sync "$@" \
     --csv "out_test/cond_${nome}.csv" --diaglog "out_test/diag_${nome}.csv" \
     > "log/${nome}.log" 2>&1 &
 }
@@ -32,7 +32,7 @@ video () {  # $1=nome  $2...=flag extra
   local nome=$1; shift
   echo "[video] avvio $nome"
   python3 "$SIM" --test "N-MASSE" --nmasse "$NM" --sep "$SEP" --giri 0 --ppf 1 \
-    --frames "$FRAMES" --fps 24 "$@" --out "out_video/${nome}.mp4" \
+    --frames "$FRAMES" --fps 24 --sync "$@" --out "out_video/${nome}.mp4" \
     > "log/${nome}_video.log" 2>&1 &
 }
 
