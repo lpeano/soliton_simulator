@@ -34,16 +34,16 @@ set CATENA=--verlet --sync --plast-din --viriale --zeta-vir --pav-com --chi-basc
 REM ==== PRIMA gli ON (portano l'informazione), POI gli OFF (baseline confermativa) ====
 
 REM ---- PART 1 ON: canale non-abeliano sul binario, base minima + plast-din. ----
-for %%S in (1 2) do (
-  echo [part1 seed %%S] binario ON (plast-din)
-  python %SIM% --batch --nmasse 2 --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %BASE% --spinore-vivo --sync-db %OUT%\db_m2_on_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_m2_on_s%%S.csv --diaglog %OUT%\m2_on_s%%S.csv > log\pd_m2_on_s%%S.log 2>&1
-)
+echo [part1 seed 1] binario ON (plast-din)
+python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %BASE% --spinore-vivo --sync-db %OUT%\db_m2_on_s1.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_m2_on_s1.csv --diaglog %OUT%\m2_on_s1.csv > log\pd_m2_on_s1.log 2>&1
+echo [part1 seed 2] binario ON (plast-din)
+python %SIM% --batch --nmasse 2 --sep %SEP% --seed 2 --passi %PASSI% --ogni %OGNI% %BASE% --spinore-vivo --sync-db %OUT%\db_m2_on_s2.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_m2_on_s2.csv --diaglog %OUT%\m2_on_s2.csv > log\pd_m2_on_s2.log 2>&1
 
 REM ---- PART 2 ON: precessione, base piena + --ls-azim + plast-din. ----
-for %%S in (1 2) do (
-  echo [part2 seed %%S] precessione ON (plast-din)
-  python %SIM% --batch --nmasse 2 --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %CATENA% --spinore-vivo --sync-db %OUT%\db_prec_on_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_prec_on_s%%S.csv --diaglog %OUT%\prec_on_s%%S.csv > log\pd_prec_on_s%%S.log 2>&1
-)
+echo [part2 seed 1] precessione ON (plast-din)
+python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %CATENA% --spinore-vivo --sync-db %OUT%\db_prec_on_s1.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_prec_on_s1.csv --diaglog %OUT%\prec_on_s1.csv > log\pd_prec_on_s1.log 2>&1
+echo [part2 seed 2] precessione ON (plast-din)
+python %SIM% --batch --nmasse 2 --sep %SEP% --seed 2 --passi %PASSI% --ogni %OGNI% %CATENA% --spinore-vivo --sync-db %OUT%\db_prec_on_s2.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_prec_on_s2.csv --diaglog %OUT%\prec_on_s2.csv > log\pd_prec_on_s2.log 2>&1
 
 REM ---- BASELINE OFF-plast (spinore congelato ma plast-din attivo, solo seme 1) ----
 echo [part1] binario OFF-spinore (plast-din, baseline, seme 1)
