@@ -669,6 +669,10 @@ GRAV_BIFASE = True       # LEGGE gravitazionale bifase unica (sciolta-1, direzio
 SPINORE = True          # Flag del settore spinoriale a 4pi. NB: l'EVOLUZIONE e' orfana (vedi
                         # sopra) - _nb resta all'init planare. Richiede COMPAT_CHI=False per i due
                         # generatori SU(2). Il costo raddoppia gli archi (la non-abelianita' stessa).
+SPINORE_VIVO = False    # REINNESTO dell'evoluzione SU(2) nell'ordine ETC: se True, _passo_spinoriale
+                        # viene chiamato dentro step() PRIMA del commit atomico delle fasi, cosi' legge
+                        # lo snapshot t (self.phi non ancora committata). Default off = spinore congelato
+                        # (comportamento attuale). Reversibile, per A/B; richiede rimisura di Berry.
 # SEME_INIZIALE: numero di puntatori da cui il sistema PARTE. Non e' piu' una densita'
 # del vuoto imposta (BOX+N_VUOTO fissavano insieme una densita' fisica nascosta) - e'
 # solo il seme da cui la dinamica evolve, sparpagliato sulla scala del sistema (~lambda).
@@ -1531,6 +1535,12 @@ class Rete:
             zc_sync = wI @ np.exp(1j * _phi_t)            # USA LO SNAPSHOT t
             media = np.angle(zc_sync)
             delta_sync_phi = dt_n * forza * np.sin(media - _phi_t)  # <-- USA SNAPSHOT
+
+        # REINNESTO ETC DEL SETTORE SPINORIALE: evolve _nb leggendo lo snapshot t (self.phi non e'
+        # ancora stata committata, quindi calcola_psi() usa _phi_t). Deve stare PRIMA del commit
+        # atomico per non leggere le fasi t+1 (sfasamento che l'ETC deve evitare).
+        if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) == self.n:
+            self._passo_spinoriale(i, j, w, dt_n)
 
         # --- COMMIT ATOMICO DELLE FASI (Unico punto di scrittura sincrono) ---
         self.phivel = _phivel_t + delta_phivel
@@ -3233,7 +3243,7 @@ def _applica_flag(a):
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -3267,6 +3277,7 @@ def _applica_flag(a):
     ZETA_VIR = bool(getattr(a, "zeta_vir", False)) # freno anisotropo (legge): default off = non-regressione
     PAV_COM = bool(getattr(a, "pav_com", False))   # pavimento comovente (legge): default off = muro assoluto 0.05
     SYNC_UPDATE = bool(getattr(a, "sync", False)) # aggiornamento sincrono (transazionale): default off
+    SPINORE_VIVO = bool(getattr(a, "spinore_vivo", False)) # reinnesto evoluzione SU(2) nell'ETC: default off
     VERSO_CHI = bool(getattr(a, "verso_chi", False)) # aggancio al verso chirale stabile: default off
     LS_AZIM = bool(getattr(a, "ls_azim", False))   # L.S vettoriale azimutale: default off
     POLO_MATURO = bool(getattr(a, "polo_maturo", False)) # polo maturo (strategia 3): default off
@@ -3488,6 +3499,11 @@ def _cli():
                         "legge la fase dallo snapshot di inizio passo, coerente coi pesi materia. "
                         "Jacobi invece di Gauss-Seidel: il passo diventa indipendente dall'ordine. "
                         "Il simplettico resta intatto. Default off = non-regressione.")
+    p.add_argument("--spinore-vivo", action="store_true", dest="spinore_vivo",
+                   help="REINNESTO EVOLUZIONE SU(2): richiama _passo_spinoriale (rotazione del Bloch "
+                        "+ eccitazione del vuoto) dentro step(), PRIMA del commit atomico (legge lo "
+                        "snapshot t). Riattiva il settore non-abeliano orfano dal commit d2c76f3. "
+                        "Cambia la fisica: A/B e rimisura (Berry, curvatura). Default off = spinore congelato.")
     p.add_argument("--bussola", type=int, default=1,
                    help="1 = indicatore d'assi nel margine, 0 = nessun riferimento")
     p.add_argument("--giri", type=float, default=1.0,
