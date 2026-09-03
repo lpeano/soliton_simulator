@@ -19,3 +19,8 @@ __pycache__/
 !out_elast/*.csv
 !log/
 !log/elast*.log
+
+# Risultati A/B spinore-vivo conservati nel repository (mai i DB .pkl).
+!out_spinore/
+!out_spinore/*.csv
+!log/spinore*.log
