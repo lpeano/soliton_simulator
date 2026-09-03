@@ -43,6 +43,12 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 - **[IMPLEMENTATO]** Create le varianti `_verlet` di tutti gli script di test,
       inclusi `RunTutti_verlet.bat/.bash` e `run_differenza_verlet.bat`; gli
       output delle varianti usano nomi distinti per mantenere l'A/B riproducibile.
+- **[IMPLEMENTATO, SPERIMENTALE]** Esposto `ELAST_C=100` tramite `--elast-c`:
+      il default è non regressivo, `0` spegne il nucleo elastico e `30/100/300`
+      sono predisposti per i test di sensibilità.
+- **[IMPLEMENTATO]** Aggiunti `test_ridondanza.bat`, `test_sensibilita.bat` e
+      `test_scala.bat`; vanno eseguiti in quest'ordine e richiedono run lunghi
+      su più semi per una conclusione.
 - **[IMPLEMENTATO]** Il batch crea automaticamente le directory padre per i
       percorsi di `--csv`, `--diaglog` e `--sync-db`, evitando il `FileNotFoundError`
       quando si lancia il comando da una checkout pulita.

@@ -212,6 +212,16 @@ La lunghezza di riposo evolve plasticamente:
 
 $$\dot d_{0,ij}=\frac{d_{ij}-d_{0,ij}}{\tau_{p,ij}}.$$
 
+Quando sono attive le scale temporali locali, il codice usa il nucleo elastico
+
+$$\tau_{p,ij}=\frac{d_{ij}}{c_s}\left[1+ELAST\_C\,
+\max\left(\frac{\rho_{ij}}{\rho_{med}}-1,0\right)\right],$$
+
+con `ELAST_C=100` come valore storico predefinito. Il flag `--elast-c` è una
+sonda reversibile: `ELAST_C=0` disattiva il rinforzo, mentre `30/100/300`
+permettono il test di sensibilità. La ridondanza rispetto al rinforzo di shear
+e l'invarianza di scala sono ancora da verificare.
+
 La deformazione $d-d_0$, non la distanza assoluta, è la sorgente delle onde metriche.
 
 ### Integratore metrico sperimentale

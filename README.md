@@ -133,6 +133,7 @@ per i batch.
 | `--ls-azim` | ricava il verso tangenziale da radiale × spinore | da usare con `--viriale` |
 | `--sync` | aggiorna il ponte fase→metrica dallo snapshot iniziale del passo | test Jacobi/Gauss-Seidel |
 | `--verlet` | integratore metrico Velocity-Verlet al secondo ordine | confronto A/B, default off |
+| `--elast-c C` | coefficiente del nucleo elastico nella dinamica di `d0` | test ridondanza/sensibilita' |
 | `--kfrange X` | aggiunge il canale di moto lungo le frange | sonda con parametro, non legge dimostrata |
 | `--scala B` | coarse-graining: un solitone rappresenta `B` solitoni fini | cambio di scala |
 | `--sync-db FILE` | salva o ricarica lo stato versionato | esecuzioni spezzate |
@@ -166,6 +167,19 @@ possibile.
 un ramo senza flag (Eulero) e uno con `--verlet`. Le varianti sono esperimenti
 numerici: eventuali riduzioni di oscillazione o miglioramenti di precessione
 vanno misurati nei `diaglog`, su run lunghi e più semi.
+
+## 5.1 Test del nucleo elastico
+
+Tre script dedicati usano `--verlet` e studiano il coefficiente storico
+`ELAST_C=100` nella dinamica plastica di `d0`:
+
+- `test_ridondanza.bat`: confronto `ELAST_C=100` contro `ELAST_C=0` su tre semi;
+- `test_sensibilita.bat`: scansione `ELAST_C=30/100/300` su due semi;
+- `test_scala.bat`: confronto tra 3 e 6 masse a `ELAST_C=100`.
+
+Gli output finiscono in `out_elast/` e i log in `log/`. Il coefficiente è una
+sonda di test, non una legge derivata: il verdetto va basato su `m0_coer`,
+`m0_coer_nucleo`, `m0_Lz`, `Lz_orb` e sulle metriche normalizzate.
 
 ## 6. Script Windows
 

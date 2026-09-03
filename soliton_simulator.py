@@ -632,6 +632,8 @@ ZETA_VIR = False        # FRENO ANISOTROPO (legge, zero parametri): se True, lo 
 VERLET = False          # INTEGRATORE METRICO SPERIMENTALE: se True, il sottociclo d/vd usa
 # Velocity-Verlet al secondo ordine invece di Eulero esplicito. Default off per mantenere
 # invariato il comportamento canonico; attivare con --verlet per il confronto A/B.
+ELAST_C = 100.0         # COEFFICIENTE DEL NUCLEO ELASTICO: default storico, esposto solo per
+# esperimenti di ridondanza/sensibilita'. ELAST_C=0 disattiva il rinforzo elastico di d0.
 CHI_BASC = False        # BASCULAMENTO CHIRALE (legge, zero parametri): se True, la chiralita'
 # di ogni nodo NON resta piu' fissa dalla nascita, ma vira secondo la TORSIONE LOCALE rispetto
 # al QUANTO DI OLONOMIA (PHI_CRIT = 2pi): chi=+1 dove la torsione ha COMPLETATO il giro (materia
@@ -1529,7 +1531,7 @@ class Rete:
             rho_arco = 0.5 * (I_nodi[self.i] + I_nodi[self.j])
             rho_med = max(float(np.median(I_nodi)), 1e-9)
             
-            fattore_elasticita = 1.0 + 100.0 * np.maximum(rho_arco / rho_med - 1.0, 0.0)
+            fattore_elasticita = 1.0 + ELAST_C * np.maximum(rho_arco / rho_med - 1.0, 0.0)
             tau_p_loc = (d_arco / max(CS_M, 1e-9)) * fattore_elasticita
             self.d0 += dt_e * (self.d - self.d0) / tau_p_loc
         else:
@@ -3074,7 +3076,7 @@ def _applica_flag(a):
     """Applica i parametri/flag ai globali. Usata sia in headless sia in interattivo,
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
-    global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET
+    global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
@@ -3091,6 +3093,9 @@ def _applica_flag(a):
     ZETA_M = a.zeta
     ZETA_LOC = bool(getattr(a, "zeta_loc", False))   # smorzamento locale (legge): default off = non-regressione
     VERLET = bool(getattr(a, "verlet", False))       # integratore metrico sperimentale: default off
+    if getattr(a, "elast_c", None) is not None:
+        ELAST_C = float(a.elast_c)
+        print(f"[elast] nucleo elastico C = {ELAST_C}")
     HAM_SRC = a.ham
     ALPHA_NAT = a.alfanat
     DIFF_RES = a.diffres
@@ -3295,6 +3300,9 @@ def _cli():
     p.add_argument("--verlet", action="store_true", dest="verlet",
                    help="INTEGRATORE metrico Velocity-Verlet (2 ordine) invece di Eulero (1). "
                         "Default off: il ramo canonico resta invariato.")
+    p.add_argument("--elast-c", type=float, default=None, dest="elast_c",
+                   help="Coefficiente del nucleo elastico (default storico 100). 0 = spento; "
+                        "30/100/300 = test di sensibilita'.")
     p.add_argument("--pav-com", action="store_true", dest="pav_com",
                    help="PAVIMENTO COMOVENTE (legge, zero parametri): il pavimento di d0 diventa "
                         "median(d0)-MAD(d0) (una dispersione sotto la mediana, scala col sistema) "
