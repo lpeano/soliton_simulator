@@ -302,6 +302,15 @@ Documento storico: **`doc/leggi_del_sistema_solitoni .docx`**.
 - **Precessione scritta a mano**: tentativo di imporre la rotazione del vettore di Bloch -> rifiutato.
   La precessione non va scritta a mano, deve emergere.
 - **Legge XIX** (gusci/confinamento) e un **corollario di chiralita'**: ritirate dopo test falliti.
+- **[2026-09-03] Spinore SU(2) congelato = misure non-abeliane invalide.** Git-archeologia: la chiamata
+  a `_passo_spinoriale` (evoluzione SU(2)) è stata persa come collaterale del refactor a snapshot/commit
+  atomico ETC nel commit `d2c76f3` (2026-09-02) — bug, non scelta (messaggio "add script" non menziona
+  lo spinore; `SPINORE=True` e init di `_nb` tenuti; funzione lasciata orfana, non cancellata). Da allora
+  `_nb` resta all'init planare (coplanare → solid angle nullo). **Tutte le misure di fase di Berry /
+  curvatura non-abeliana dal 2026-09-02 sono su spinore congelato: l'assenza non-abeliana NON è
+  dimostrata, è artefatto di codice morto.** Anche la nota di CLAUDE.md "SU(2) attivo, chiamato a ogni
+  step" era falsa e va considerata ritratta. La riattivazione (dietro flag, reinnesto nell'ordine ETC,
+  A/B, rimisura) è l'unico modo per testare davvero il canale non-abeliano.
 
 ---
 

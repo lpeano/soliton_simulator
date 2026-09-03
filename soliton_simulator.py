@@ -654,23 +654,21 @@ FRAME_DRAG = True
 PASSI_PER_FRAME = 6      # passi di motore per frame nell'interattivo: rende visibile l'evoluzione
 GRAV_BIFASE = True       # LEGGE gravitazionale bifase unica (sciolta-1, direzione intrinseca,
                          # spinore accoppiato, tetto causale). Attiva di default.
-# SETTORE SPINORIALE a 4pi (ATTIVO di default). Ogni nodo porta una SECONDA componente di
-# fase che, accoppiata alle antichiralita' (perc_chi, i +-pi gia' nel sistema), trasforma
-# come uno spinore sotto 4pi (doppia copertura). Quando SPENTO (SPINORE=False) il sistema e'
-# IDENTICO all'U(1) scalare (non-regressione garantita per costruzione).
-# NB (aggiornato): l'ACCOPPIAMENTO NON-ABELIANO SU(2) NON e' piu' "da attivare" - E' IMPLEMENTATO
-# E ATTIVO. Il metodo _passo_spinoriale (Passo 2+3) e' chiamato a ogni step (sotto if SPINORE):
-# i legami fra chiralita' OPPOSTE ruotano il Bloch attorno a sigma_z, quelli fra UGUALI attorno
-# a sigma_x; sigma_z e sigma_x NON commutano -> struttura SU(2) genuina, non-abelianita'
-# verificata (commutatore dei generatori != 0). Il motore e' conservativo hebbiano (memoria
-# omega_s), non un rilassamento. Quindi le simulazioni girano con SU(2) non-abeliana viva.
-SPINORE = True          # SETTORE SPINORIALE a 4pi ATTIVO DI DEFAULT. Implementato, FUNZIONANTE
-                        # e VALIDATO (motore conservativo hebbiano: lo spinore si accende col
-                        # vuoto e resta vivo, all'equatore, senza disturbare l'U(1); non-abelianita'
-                        # genuina verificata, commutatore dei generatori != 0). Attivo ovunque come
-                        # legge valida del sistema. Richiede COMPAT_CHI=False per i due generatori
-                        # SU(2) (impostato di conseguenza). Il costo raddoppia gli archi (e' la
-                        # non-abelianita' stessa, non spreco: verificato), ma e' una legge del sistema.
+# SETTORE SPINORIALE a 4pi. Ogni nodo porta una SECONDA componente di fase che, accoppiata
+# alle antichiralita' (perc_chi, i +-pi gia' nel sistema), trasforma come uno spinore sotto
+# 4pi (doppia copertura). Quando SPENTO (SPINORE=False) il sistema e' IDENTICO all'U(1)
+# scalare (non-regressione garantita per costruzione).
+# STATO REALE (verificato 2026-09-03, git-archeologia): l'EVOLUZIONE SU(2) E' CONGELATA. Il
+# metodo _passo_spinoriale (Passo 2+3) e' ORFANO: la sua chiamata e' stata rimossa come
+# collaterale del refactor a snapshot/commit-atomico ETC nel commit d2c76f3 (2026-09-02) e non
+# e' mai stata reinnestata nel percorso vivo. Nel percorso batch/video _nb viene solo
+# INIZIALIZZATO planare ([sin b, 0, cos b], tutti y=0 -> coplanari) e LETTO (proiezione grav,
+# LS_AZIM), mai ruotato. Conseguenza: la fase di Berry / curvatura non-abeliana misurata dal
+# 2026-09-02 e' ~0 per SPINORE CONGELATO, NON per natura abeliana del sistema. La riattivazione
+# richiede il reinnesto corretto nell'ordine ETC (dietro flag, non scommento meccanico).
+SPINORE = True          # Flag del settore spinoriale a 4pi. NB: l'EVOLUZIONE e' orfana (vedi
+                        # sopra) - _nb resta all'init planare. Richiede COMPAT_CHI=False per i due
+                        # generatori SU(2). Il costo raddoppia gli archi (la non-abelianita' stessa).
 # SEME_INIZIALE: numero di puntatori da cui il sistema PARTE. Non e' piu' una densita'
 # del vuoto imposta (BOX+N_VUOTO fissavano insieme una densita' fisica nascosta) - e'
 # solo il seme da cui la dinamica evolve, sparpagliato sulla scala del sistema (~lambda).
@@ -800,32 +798,92 @@ class Rete:
         self._cicli_topologici = cicli
         return cicli
 
+    def _vertici_ciclo(self, ciclo):
+        """Ricostruisce la sequenza ORDINATA dei nodi di un ciclo fondamentale
+        (che e' un ciclo semplice: ogni nodo ha grado 2 al suo interno) a partire
+        dalla lista di archi (indice, verso). Serve alle misure che vivono sui
+        nodi in ordine ciclico (fase di Berry spinoriale). Nessuna coordinata."""
+        archi = [(int(self.i[e]), int(self.j[e])) for e, _ in ciclo]
+        adj = {}
+        for a, b in archi:
+            adj.setdefault(a, []).append(b); adj.setdefault(b, []).append(a)
+        if any(len(v) != 2 for v in adj.values()):
+            return None  # non e' un ciclo semplice: la fase di Berry non e' definita
+        start = archi[0][0]; seq = [start]; prev = None; cur = start
+        for _ in range(len(archi)):
+            n0, n1 = adj[cur]
+            nxt = n0 if n0 != prev else n1
+            prev, cur = cur, nxt; seq.append(cur)
+        return seq[:-1] if seq[-1] == start else None
+
     def circolazione_topologica(self):
         """Diagnostica della corrente circolante sui cicli del grafo.
         E' deliberatamente passiva: non modifica alcuno stato dinamico.
         La corrente d'arco usa densita' locale, twist orientato e allineamento
-        spinoriale; nessuna coordinata o media globale entra nel calcolo."""
+        spinoriale; nessuna coordinata o media globale entra nel calcolo.
+        La densita' media dell'arco fornisce l'ampiezza energetica locale, mentre
+        il twist orientato fornisce la 1-forma che puo' avere circolazione non nulla.
+        Oltre alla circolazione della corrente (gradientale, curl-free -> ~0),
+        misura le DUE componenti non-gradientali che la decomposizione di Hodge
+        ammette: l'OLONOMIA di fase (somma di w4(phi_i-phi_j) sul ciclo: !=0 se
+        c'e' un vortice/difetto topologico, componente armonica) e la fase di
+        BERRY spinoriale (solid angle racchiuso dai vettori di Bloch sul ciclo:
+        curvatura non-abeliana SU(2), versione gauge-invariante di n_i x n_j)."""
+        vuoto = {"n_cicli": 0, "circolazione_max": 0.0,
+                 "circolazione_media_assoluta": 0.0, "circolazione_rms": 0.0,
+                 "corrente_arco_max": 0.0, "gradiente_rho_arco_media_assoluta": 0.0,
+                 "olonomia_max": 0.0, "olonomia_media_assoluta": 0.0,
+                 "olonomia_rms": 0.0, "berry_spin_max": 0.0,
+                 "berry_spin_media_assoluta": 0.0, "berry_spin_rms": 0.0}
         if self.n < 3 or not len(self.i):
-            return {"n_cicli": 0, "circolazione_max": 0.0,
-                    "circolazione_media_assoluta": 0.0}
+            return vuoto
         if not hasattr(self, "psi") or len(self.psi) < self.n:
             self.calcola_psi()
         cicli = self._base_cicli_topologici()
         if not cicli:
-            return {"n_cicli": 0, "circolazione_max": 0.0,
-                    "circolazione_media_assoluta": 0.0}
+            return vuoto
         w = self._pesi(); rho = np.abs(self.psi[:self.n]) ** 2
         spin = np.ones(len(self.i))
-        if SPINORE and hasattr(self, "_nb") and len(self._nb) >= self.n:
+        ha_spin = SPINORE and hasattr(self, "_nb") and self._nb is not None and len(self._nb) >= self.n
+        if ha_spin:
             spin = np.sum(self._nb[self.i] * self._nb[self.j], axis=1)
-        corrente = w * (0.5 * (rho[self.i] + rho[self.j])) * spin * self.tw / max(PHI_CRIT, 1e-9)
+        rho_arco = 0.5 * (rho[self.i] + rho[self.j])
+        gradiente_rho = rho[self.j] - rho[self.i]
+        corrente = w * rho_arco * spin * self.tw / max(PHI_CRIT, 1e-9)
+        dph = self._w4(self.phi[self.i] - self.phi[self.j])   # 1-forma di fase, orientata i->j
         valori = np.array([sum(segno * corrente[e] for e, segno in ciclo)
                            for ciclo in cicli], float)
+        olonomia = np.array([sum(segno * dph[e] for e, segno in ciclo)
+                             for ciclo in cicli], float)
+        berry = []
+        if ha_spin:
+            nb = self._nb
+            for ciclo in cicli:
+                seq = self._vertici_ciclo(ciclo)
+                if seq is None or len(seq) < 3:
+                    continue
+                a = nb[seq[0]]; om = 0.0
+                for k in range(1, len(seq) - 1):
+                    b = nb[seq[k]]; c = nb[seq[k + 1]]
+                    num = float(np.dot(a, np.cross(b, c)))
+                    den = 1.0 + float(np.dot(a, b) + np.dot(b, c) + np.dot(c, a))
+                    om += 2.0 * np.arctan2(num, den)
+                berry.append(om)
+        berry = np.array(berry, float) if berry else np.zeros(0)
         return {"n_cicli": int(len(valori)),
                 "circolazione_max": float(np.max(np.abs(valori))),
                 "circolazione_media_assoluta": float(np.mean(np.abs(valori))),
+                "circolazione_rms": float(np.sqrt(np.mean(valori ** 2))),
+                "corrente_arco_max": float(np.max(np.abs(corrente))) if len(corrente) else 0.0,
+                "gradiente_rho_arco_media_assoluta": float(np.mean(np.abs(gradiente_rho))) if len(gradiente_rho) else 0.0,
+                "olonomia_max": float(np.max(np.abs(olonomia))) if len(olonomia) else 0.0,
+                "olonomia_media_assoluta": float(np.mean(np.abs(olonomia))) if len(olonomia) else 0.0,
+                "olonomia_rms": float(np.sqrt(np.mean(olonomia ** 2))) if len(olonomia) else 0.0,
+                "berry_spin_max": float(np.max(np.abs(berry))) if len(berry) else 0.0,
+                "berry_spin_media_assoluta": float(np.mean(np.abs(berry))) if len(berry) else 0.0,
+                "berry_spin_rms": float(np.sqrt(np.mean(berry ** 2))) if len(berry) else 0.0,
                 "circolazione_media": float(np.mean(valori)),
-                "circolazione": valori}
+                "circolazione": valori, "olonomia": olonomia, "berry_spin": berry}
 
     def _costruisci_struttura(self):
         """struttura CSR simmetrica in cache: la topologia cambia solo alla
@@ -1056,7 +1114,9 @@ class Rete:
         return 1.0 + TAU_LOC * (r_normalized - 1.0)
 
     def _passo_spinoriale(self, i, j, w, dt_n):
-        """PASSO 2+3: settore spinoriale non-abeliano con MOTORE CONSERVATIVO hebbiano.
+        """ORFANO dal 2026-09-02 (commit d2c76f3): la chiamata e' stata persa nel refactor ETC e
+        non e' piu' invocata nel percorso vivo. Riattivabile solo reinnestandolo nell'ordine ETC.
+        PASSO 2+3: settore spinoriale non-abeliano con MOTORE CONSERVATIVO hebbiano.
         Ogni nodo e' uno spinore, rappresentato dal vettore di Bloch n_i(phi, phi_s). Il campo
         effettivo B_i viene dai vicini, con rotazione SU(2) il cui asse dipende dalla chiralita'
         del legame (opposti -> sigma_z, uguali -> sigma_x; non commutano -> SU(2) genuino).
@@ -2108,7 +2168,11 @@ class Rete:
             np.add.at(phi_g, ii, I[jj] / L)
             np.add.at(phi_g, jj, I[ii] / L)
             dpozzo = phi_g[jj] - phi_g[ii]
-            scala_p = max(float(np.median(np.abs(dpozzo))), 1e-9)
+            # Guardia: durante una variazione topologica puo' esistere un passo
+            # senza differenze di pozzo valide. np.median([]) genera un warning
+            # e poi un errore NumPy (median usa mean internamente).
+            scala_p = (max(float(np.median(np.abs(dpozzo))), 1e-9)
+                       if len(dpozzo) else 1e-9)
             ampiezza = np.tanh(np.abs(dpozzo) / scala_p)  # scala dal pozzo, in [0,1), dallo stato
             if SPINORE:
                 if not hasattr(self, "_nb") or self._nb is None or len(self._nb) < self.n:
@@ -3287,6 +3351,9 @@ def esegui_headless(a):
             print(f"[db-video] {_e_v}", flush=True); raise
     elif _db_v:
         print(f"[db-video] {_db_v} non esiste: renderizzo dalla formazione (nessuno stato da caricare)", flush=True)
+    _cartella_video = _os_v.path.dirname(a.out) if a.out else ""
+    if _cartella_video:
+        _os_v.makedirs(_cartella_video, exist_ok=True)
     w = FFMpegWriter(fps=a.fps, bitrate=4000,
                      metadata=dict(title=f"Muratore di Planck - {a.test}"))
     print(f"[headless] test={a.test} frame={n} fps={a.fps} - tutte le leggi attive")
@@ -3560,7 +3627,16 @@ def batch_condensazione(a):
             cols['n_cicli_topologici'] = circ['n_cicli']
             cols['circolazione_topologica_max'] = circ['circolazione_max']
             cols['circolazione_topologica_media_assoluta'] = circ['circolazione_media_assoluta']
+            cols['circolazione_topologica_rms'] = circ.get('circolazione_rms', 0.0)
+            cols['corrente_arco_max'] = circ.get('corrente_arco_max', 0.0)
+            cols['gradiente_rho_arco_media_assoluta'] = circ.get('gradiente_rho_arco_media_assoluta', 0.0)
             cols['circolazione_topologica_media'] = circ.get('circolazione_media', 0.0)
+            cols['olonomia_fase_max'] = circ.get('olonomia_max', 0.0)
+            cols['olonomia_fase_media_assoluta'] = circ.get('olonomia_media_assoluta', 0.0)
+            cols['olonomia_fase_rms'] = circ.get('olonomia_rms', 0.0)
+            cols['berry_spin_max'] = circ.get('berry_spin_max', 0.0)
+            cols['berry_spin_media_assoluta'] = circ.get('berry_spin_media_assoluta', 0.0)
+            cols['berry_spin_rms'] = circ.get('berry_spin_rms', 0.0)
         except Exception:
             pass
         # SCHERMATURA: osservabili della legge ancorata a N_c. La portata effettiva
