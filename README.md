@@ -180,11 +180,18 @@ Tre script dedicati usano `--verlet` e studiano il coefficiente storico
 `ELAST_C=100` nella dinamica plastica di `d0`:
 
 - `test_ridondanza.bat`: confronto `ELAST_C=100` contro `ELAST_C=0` su tre semi;
+	ora configurato a 300 passi come test preliminare rapido;
+- `test_elastico_300.bat`: copia separata per il test rapido a 300 passi, con
+  output e DB dedicati; non modifica `test_ridondanza.bat`;
+- `test_elastico_300_sep10.bat`: stesso test a 300 passi con `sep=10`;
+- `test_elastico_700_sep10.bat`: variante a 700 passi con `sep=10`, output e
+	DB distinti dal test da 300 passi;
 - `test_sensibilita.bat`: scansione `ELAST_C=30/100/300` su due semi;
 - `test_scala.bat`: confronto tra 3 e 6 masse a `ELAST_C=100`.
 
 Gli output finiscono in `out_elast/` e i log in `log/`. Il coefficiente è una
-sonda di test, non una legge derivata: il verdetto va basato su `m0_coer`,
+sonda di test, non una legge derivata: il run breve da 300 passi mostra la
+formazione ma non chiude il verdetto; quello lungo va basato su `m0_coer`,
 `m0_coer_nucleo`, `m0_Lz`, `Lz_orb` e sulle metriche normalizzate.
 
 I tre test usano la stessa catena completa su entrambi i rami/configurazioni:
@@ -353,8 +360,10 @@ zero usare `--db-cleanup`.
 Il repository conserva codice, script e documentazione. Sono ignorati:
 
 - tutti gli `*.mp4`, `*.avi`, `*.mov` e `*.mkv`;
-- CSV, log e file pickle/NumPy generati;
+- file CSV e log generati, salvo i risultati ELAST_C esplicitamente conservati;
+- file pickle/NumPy generati;
 - directory `out_*`, `log/` e `__pycache__/`.
 
-La regola `*.mp4` vale in ogni sottocartella. I risultati importanti vanno
-riassunti nella documentazione o conservati fuori dal repository.
+La regola `*.mp4` vale in ogni sottocartella. I CSV di `out_elast/` e i log
+`log/elast*.log` sono conservati per documentare i test ELAST_C; i DB `.pkl`
+restano cache locali e non vengono versionati.

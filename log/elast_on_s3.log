@@ -1,0 +1,26 @@
+[calore] calcio termico VETTORIALE+chirale attivo: omega_s 3D eccitato, phivel firmato da perc_chi
+[elast] nucleo elastico C = 100.0
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[polo-maturo] al twist partecipa la chiralita del polo che matura (twn maggiore)
+[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+[batch] condensazione: seed=3 passi=4000 ogni=5 sep=4.0 nmasse=3
+[batch] leggi attive: GRAV_BIFASE=True SPIN_ORBITA(via SPINORE)=True COPPIA_MIT=1.0 lambda=0.800
+
+passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
+[db] DB RIFIUTATO: versione codice diversa (DB=b6fc11b59dfffa7b vs ora=dcc2b7a84af404b8). La fisica e' cambiata: uno stato vecchio inquinerebbe il run. Usa --db-cleanup per ripartire pulito.
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\soliton_simulator.py", line 4166, in <module>
+    batch_condensazione(a)
+    ~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\lpeano\soliton_simulator\soliton_simulator.py", line 4019, in batch_condensazione
+    net.carica_stato(_db)
+    ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\lpeano\soliton_simulator\soliton_simulator.py", line 1209, in carica_stato
+    raise RuntimeError(
+        f"DB RIFIUTATO: versione codice diversa (DB={stato.get('code_hash')} vs ora={code_hash}). "
+        f"La fisica e' cambiata: uno stato vecchio inquinerebbe il run. Usa --db-cleanup per ripartire pulito.")
+RuntimeError: DB RIFIUTATO: versione codice diversa (DB=b6fc11b59dfffa7b vs ora=dcc2b7a84af404b8). La fisica e' cambiata: uno stato vecchio inquinerebbe il run. Usa --db-cleanup per ripartire pulito.

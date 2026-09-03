@@ -49,6 +49,13 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 - **[IMPLEMENTATO]** Aggiunti `test_ridondanza.bat`, `test_sensibilita.bat` e
       `test_scala.bat`; vanno eseguiti in quest'ordine e richiedono run lunghi
       su più semi per una conclusione.
+- **[AGGIORNATO]** `test_ridondanza.bat` è temporaneamente impostato a 300 passi,
+      con DB/output separati e suffisso `_300`, per un controllo preliminare
+      rapido senza riutilizzare i DB incompatibili del tentativo precedente.
+- **[IMPLEMENTATO]** Aggiunto `test_elastico_300.bat` come alternativa separata
+      per il test rapido multiseme; non riutilizza né modifica `test_ridondanza.bat`.
+- **[IMPLEMENTATO]** Aggiunto `test_elastico_700_sep10.bat`: stesso A/B
+      multiseme a `sep=10` e 700 passi, con output/DB separati dal test da 300.
 - **[AGGIORNATO]** I tre test ELAST_C ora usano la catena completa (`sync`,
       `viriale`, `zeta-vir`, `pav-com`, `chi-basc`, `polo-maturo`, `olon-part`,
       `calore-vett`, `verlet`) e DB distinti per seme/condizione; `sync-db` serve
@@ -59,6 +66,9 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 - **[AGGIORNATO]** Tutti gli script di lancio attivi includono esplicitamente
       `--sync`, sia per Eulero sia per Velocity-Verlet; questa uniformità non
       aveva un effetto fisico finché `SYNC_UPDATE` era un flag non operativo.
+- **[AGGIORNATO]** I CSV di `out_elast/` e i log `log/elast*.log` dei test ELAST_C
+      vengono conservati nel repository; i DB `.pkl` restano esclusi perché sono
+      cache di ripresa e i filmati restano esclusi da `.gitignore`.
 - **[IMPLEMENTATO, SPERIMENTALE]** `--sync` ora seleziona l'ETC esteso: il campo
       materia usa `_phi_t` e la sorgente metrica usa `_peq_t` (con fallback di
       sola inizializzazione per i nuovi archi). Default ancora off; convergenza
@@ -70,6 +80,13 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 - **[DA VERIFICARE]** Stabilità della taglia, contrasto nucleo/guscio e
       indipendenza da seed su tempi lunghi (almeno ~2000 passi, preferibilmente
       20000 e 2–3 semi).
+- **[IN VERIFICA]** `--sync` è ora operativo e produce traiettorie diverse dal
+      percorso storico: su grafo controllato da 100 nodi/739 archi, dopo 50 passi
+      la differenza massima è `2.73e-1` su `phi` e `1.35e-3` su `d`. Il test di
+      convergenza preliminare (`dt=.01` contro `.005`, stesso tempo fisico, 10/20
+      passi) non mostra ancora un vantaggio di sync: errore `phi` `1.36e-2` senza
+      sync contro `2.37e-2` con sync. Non promuovere quindi a default: servono
+      run lunghi, più semi e una metrica di errore relazionale.
 
 ### Audit delle sezioni storiche
 

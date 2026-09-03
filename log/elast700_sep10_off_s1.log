@@ -1,0 +1,19 @@
+[calore] calcio termico VETTORIALE+chirale attivo: omega_s 3D eccitato, phivel firmato da perc_chi
+[elast] nucleo elastico C = 0.0
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[polo-maturo] al twist partecipa la chiralita del polo che matura (twn maggiore)
+[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+[batch] condensazione: seed=1 passi=700 ogni=5 sep=10.0 nmasse=3
+[batch] leggi attive: GRAV_BIFASE=True SPIN_ORBITA(via SPINORE)=True COPPIA_MIT=1.0 lambda=0.800
+
+passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
+[batch] LOG DIAGNOSTICO COMPLETO  -> out_elast\off_700_sep10_s1.csv
+      0 |    0.0000 |    19.988 | r=8.8 c=0.313 n=5      | tot=1 NUOVI=1 | TRACK accr=1116 coppie=0 nuova=80
+      5 |    0.0000 |    19.988 | r=16.8 c=0.065 n=171   | tot=1 NUOVI=0 | TRACK accr=1116 coppie=0 nuova=80
+     10 |    0.0000 |    19.988 | r=8.8 c=0.047 n=7      | tot=1 NUOVI=0 | TRACK accr=1116 coppie=0 nuova=80
+     15 |    0.0000 |    19.988 | r=17.8 c=0.151 n=217   | tot=1 NUOVI=0 | TRACK accr=1116 coppie=0 nuova=80
+     20 |    0.0000 |    19.988 | r=8.2 c=0.042 n=5      | tot=1 NUOVI=0 | TRACK accr=1116 coppie=0 nuova=80

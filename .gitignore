@@ -13,3 +13,9 @@ __pycache__/
 *.pickle
 *.npy
 *.npz
+
+# Risultati ELAST_C conservati nel repository (mai i video o i DB/cache).
+!out_elast/
+!out_elast/*.csv
+!log/
+!log/elast*.log
