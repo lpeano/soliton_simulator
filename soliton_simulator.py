@@ -561,6 +561,12 @@ PLAST_MIT = 0.0         # SPINTA VOLUMETRICA ALLA MITOSI (opzione, spenta di def
                         # esponente di scala R(M), conservazione olonomia, sopravvivenza
                         # del collasso oltre la massa critica. Da MISURARE, non imporre.
 QMIN_M   = 0.000
+PLAST_DIN = False       # PLASTICITA' METRICA DINAMICA (legge, non parametro). Se True sostituisce
+                        # PLAST_MIT statico: l'offset plastico sul d0 dei nuovi archi emerge dallo
+                        # stress metrico dell'arco |d-d0|/d0 e dall'ECCESSO di torsione
+                        # (|tw|/PHI_CRIT - 1), saturato via tanh e non-negativo. Genera volume solo
+                        # dove il reticolo e' sotto forte tensione. Locale (grandezze dell'arco),
+                        # nessuna coordinata, nessun parametro libero. Default off = non-regressione.
 MITMAX   = 0            # NESSUN tetto di default: un massimo di falsa fisica falsifica le metriche
 KERNEL_ALPHA = 1.0      # KERNEL BILANCIATO DAL TEMPO PROPRIO (tau^alpha) SEMPRE ATTIVO.
                         # alpha=1: il kernel e' pesato LINEARMENTE dal tempo proprio locale
@@ -1922,7 +1928,14 @@ class Rete:
         # sciolta, cosicche' la suddivisione registri nel mezzo una generazione di
         # struttura metrica invece di un puro infittimento. Modifica lo stato
         # stazionario dell'arco (d0), non un impulso transitorio su vd.
-        if PLAST_MIT > 0.0:
+        if PLAST_DIN:
+            # Plasticita' emergente: stress metrico dell'arco * eccesso di torsione, saturato.
+            stress_arco = np.abs(self.d[sel] - self.d0[sel]) / np.maximum(self.d0[sel], 1e-6)
+            sciolta_ecc = np.abs(self.tw[sel]) / PHI_CRIT - 1.0
+            fattore_plastico = np.tanh(np.maximum(sciolta_ecc * stress_arco, 0.0))
+            d0h = dh * (1.0 + fattore_plastico)
+            d0new = np.concatenate([d0h, d0h])
+        elif PLAST_MIT > 0.0:
             d0h = dh * (1.0 + PLAST_MIT * sciolta)   # sciolta = |tw|/PHI_CRIT >= 1
             d0new = np.concatenate([d0h, d0h])
         else:
@@ -3266,7 +3279,7 @@ def _applica_flag(a):
     """Applica i parametri/flag ai globali. Usata sia in headless sia in interattivo,
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
-    global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C
+    global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
@@ -3290,6 +3303,7 @@ def _applica_flag(a):
     ALPHA_NAT = a.alfanat
     DIFF_RES = a.diffres
     PLAST_MIT = a.plastmit
+    PLAST_DIN = bool(getattr(a, "plast_din", False))  # plasticita' metrica dinamica: default off
     COPPIA_MIT = a.coppia
     MU_PSI = a.mupsi
     GAMMA = a.gamma
@@ -3494,6 +3508,11 @@ def _cli():
     p.add_argument("--verlet", action="store_true", dest="verlet",
                    help="INTEGRATORE metrico Velocity-Verlet (2 ordine) invece di Eulero (1). "
                         "Default off: il ramo canonico resta invariato.")
+    p.add_argument("--plast-din", action="store_true", dest="plast_din",
+                   help="PLASTICITA' METRICA DINAMICA (legge, zero parametri): alla mitosi il d0 "
+                        "dei nuovi archi riceve un offset plastico emergente da stress metrico "
+                        "|d-d0|/d0 ed eccesso di torsione (|tw|/PHI_CRIT-1), saturato via tanh e "
+                        "non-negativo. Sostituisce PLAST_MIT statico. Default off = non-regressione.")
     p.add_argument("--elast-c", type=float, default=None, dest="elast_c",
                    help="Coefficiente del nucleo elastico (default storico 100). 0 = spento; "
                         "30/100/300 = test di sensibilita'.")
