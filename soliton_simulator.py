@@ -154,6 +154,7 @@ LAM_BASE = 0.8   # lunghezza d'onda del solitone fondamentale (~2 lunghezze di P
 # SCALA_B=1 e' la scala di Planck (solitone fondamentale). Salendo, si copre una
 # gerarchia di scale reali: il blocco copre SCALA_B^(1/3) lunghezze d'onda del solitone.
 SCALA_B  = 1.0
+SCALA_AMP = 1.0  # fattore di ampiezza del campo: sqrt(SCALA_B), identita' a B=1
 # BOX eliminato come parametro fisico: il sistema e' relazionale, le coordinate non
 # esistono nella fisica (servono solo al disegno, rilassate verso le d_ij). La scala
 # di semina deriva da LAMBDA (la scala propria del sistema): i puntatori del vuoto
@@ -166,6 +167,18 @@ GAMMA    = 0.05
 # scala caratteristica di semina e disegno: derivata da LAMBDA, non un box scelto.
 # ~10 lambda copre l'estensione tipica di un addensamento sulla scala del sistema.
 def _scala_sistema(): return 10.0 * LAM
+
+
+def _fattori_coarse(B):
+    """Restituisce i soli fattori di scala della descrizione efficace.
+
+    B=1 e' per costruzione l'identita': nessun parametro della fisica nativa viene
+    modificato. Il coarse-graining non introduce una nuova legge dinamica.
+    """
+    B = float(B)
+    if not np.isfinite(B) or B < 1.0:
+        raise ValueError("SCALA_B deve essere finito e maggiore o uguale a 1")
+    return B ** (1.0 / 3.0), B ** -0.5, B ** 0.5
 # DT: NON e' un passo temporale continuo (da raffinare con dt->0), ma l'avanzamento di UNO
 # STATO nella successione discreta degli stati del sistema — un contatore, un tick. Il sistema
 # E' una successione di stati discreti; DT ne e' l'incremento. E' la granularita' irriducibile,
@@ -683,6 +696,13 @@ SPIN_LARMOR = False     # CAMPO TRASVERSO GEOMETRICO sullo spinore (legge, zero 
                         # al campo effettivo B si somma B_geo = <|tw|/PHI_CRIT * (n_i x n_j)>, termine
                         # non-abeliano perpendicolare a n che sostiene la precessione di Larmor senza
                         # auto-spegnersi quando gli spin si ordinano. Richiede --spinore-vivo. Default off.
+SPIN_FEEDBACK = False   # FEEDBACK LOCALE SPINORE->ARCHI: usa l'overlap complesso dei lift sugli archi
+                        # come flusso di fase antisimmmetrico. Richiede --spinore-vivo; default off
+                        # per A/B. Non impone alcuna cucitura o olonomia: la misura deve emergere.
+SPIN_POSITIVI = False   # MISURA DELLO SPINORE DI GRUPPO POSITIVO: seleziona perc_chi=+1 solo nella
+                        # diagnostica per-massa. Non modifica la dinamica dei solitoni.
+CHI_CORE = False        # CHIRALITA' DEL CORE LOCALE: il segno emerge da tutti i nodi sopra
+                        # soglia del core; default off per A/B, nessun segno selezionato a priori.
 # SEME_INIZIALE: numero di puntatori da cui il sistema PARTE. Non e' piu' una densita'
 # del vuoto imposta (BOX+N_VUOTO fissavano insieme una densita' fisica nascosta) - e'
 # solo il seme da cui la dinamica evolve, sparpagliato sulla scala del sistema (~lambda).
@@ -708,6 +728,10 @@ class Rete:
                                              # SPINORE=False. Parallela a phi, gestita ovunque phi cambi.
         self.omega_s = np.zeros((0, 3))      # MEMORIA HEBBIANA del momento angolare spinoriale
                                              # (motore conservativo: si conserva, non rilassa).
+        # LIFT COMPLESSO del Bloch: non aggiunge gradi di liberta'. Conserva la scelta di fase
+        # del rappresentante spinoriale fra due passi; senza questo trasporto il Bloch perde il
+        # segno psi <-> -psi. Viene attivato solo da SPINORE_VIVO.
+        self._spinor_lift = np.zeros((0, 2), complex)
         # PROFILO DI PERCORRENZA (struttura a nastro delle specifiche originali).
         # Ogni solitone e' una sinusoide che, percorsa lungo il suo profilo, esegue
         # un salto NETTO di 180 gradi (pi) nel punto d'incrocio con l'asse al mediano.
@@ -829,6 +853,268 @@ class Rete:
             nxt = n0 if n0 != prev else n1
             prev, cur = cur, nxt; seq.append(cur)
         return seq[:-1] if seq[-1] == start else None
+
+    def _aggiorna_lift_spinoriale(self, nb_precedente=None):
+        """Ricava e trasporta il lift complesso del vettore di Bloch.
+
+        Il rappresentante canonico viene corretto con la fase dell'overlap col passo precedente,
+        cosi' l'overlap consecutivo e' reale positivo. Questo conserva il lift lungo la storia
+        senza introdurre una dinamica indipendente: il Bloch resta la variabile fisica.
+        Non definisce da solo una cucitura spaziale Möbiusiana; rende pero' misurabile il segno
+        globale del lift quando una traiettoria compie un giro di 2pi.
+        """
+        if not hasattr(self, "_nb") or self._nb is None or len(self._nb) < self.n:
+            return
+        nb = np.asarray(self._nb[:self.n], float)
+        th = np.arccos(np.clip(nb[:, 2], -1.0, 1.0))
+        ph = np.arctan2(nb[:, 1], nb[:, 0])
+        candidato = np.stack([np.cos(th / 2.0), np.sin(th / 2.0) * np.exp(1j * ph)], axis=1)
+        precedente = self._spinor_lift
+        if nb_precedente is not None and len(precedente) == 0:
+            precedente = np.asarray(nb_precedente)
+        n_comuni = min(len(precedente), self.n)
+        if n_comuni:
+            overlap = np.sum(np.conj(precedente[:n_comuni]) * candidato[:n_comuni], axis=1)
+            fase = np.ones(n_comuni, complex)
+            validi = np.abs(overlap) > 1e-12
+            fase[validi] = np.exp(-1j * np.angle(overlap[validi]))
+            candidato[:n_comuni] = candidato[:n_comuni] * fase[:, None]
+        self._spinor_lift = candidato
+
+    def olonomia_lift_ciclo(self, ciclo):
+        """Misura il prodotto ciclico degli overlap del lift complesso trasportato."""
+        if len(self._spinor_lift) < self.n:
+            return 1.0 + 0.0j
+        seq = self._vertici_ciclo(ciclo)
+        if seq is None or len(seq) < 3:
+            return 1.0 + 0.0j
+        s = self._spinor_lift[seq]
+        overlap = np.sum(np.conj(s) * np.roll(s, -1, axis=0), axis=1)
+        return complex(np.prod(overlap))
+
+    def _feedback_spinoriale_archi(self, i, j, w):
+        """Trasforma l'overlap spinoriale locale in una coppia antisimmmetrica ai nodi.
+
+        La parte immaginaria dell'overlap normalizzato e' un flusso orientato sull'arco;
+        il modulo pesa la coerenza. La divisione per il grado pesato resta locale e non
+        introduce una manopola. E' una legge sperimentale separata, default off.
+        """
+        out = np.zeros(self.n)
+        self._spin_feedback_last = 0.0
+        if not SPIN_FEEDBACK or len(self._spinor_lift) < self.n:
+            return out
+        mask = (i < self.n) & (j < self.n)
+        if not mask.any():
+            return out
+        ii, jj, ww = i[mask], j[mask], w[mask]
+        ov = np.sum(np.conj(self._spinor_lift[ii]) * self._spinor_lift[jj], axis=1)
+        flusso = ww * np.imag(ov)
+        grado = np.zeros(self.n)
+        np.add.at(grado, ii, ww); np.add.at(grado, jj, ww)
+        np.add.at(out, ii, -flusso / np.maximum(grado[ii], 1e-9))
+        np.add.at(out, jj, flusso / np.maximum(grado[jj], 1e-9))
+        self._spin_feedback_last = float(np.mean(np.abs(flusso))) if len(flusso) else 0.0
+        return out
+
+    def chiralita_core_locale(self):
+        """Calcola la chiralità emergente del core locale per ogni nodo."""
+        if self.n == 0 or not len(self.i):
+            return np.zeros(self.n)
+        if not hasattr(self, "psi") or len(self.psi) < self.n:
+            self.calcola_psi()
+        I2 = np.abs(self.psi[:self.n]) ** 2
+        chi = self.perc_chi[:self.n].astype(float)
+        vicini = [[] for _ in range(self.n)]
+        for a, b in zip(self.i, self.j):
+            a, b = int(a), int(b)
+            if a < self.n and b < self.n:
+                vicini[a].append(b); vicini[b].append(a)
+        try:
+            rho_c = float(massa_critica_adattiva(self)) / ((4.0 / 3.0) * np.pi * LAM_BASE**3)
+        except Exception:
+            rho_c = float(massa_critica_collasso()) / ((4.0 / 3.0) * np.pi * LAM_BASE**3)
+        lam_loc = self.lambda_nodi()
+        chi_core = chi.copy(); r_core = np.zeros(self.n); rho0 = I2.copy()
+        for k in range(self.n):
+            gruppo = np.asarray([k] + vicini[k], dtype=int)
+            intensita = I2[gruppo]
+            rho0[k] = float(np.max(intensita)) if len(intensita) else 0.0
+            rapporto = rho0[k] / max(rho_c, 1e-12)
+            r = float(lam_loc[k]) * np.log(rapporto) if rapporto > 1.0 else 0.0
+            r_core[k] = r
+            if r <= 0.0:
+                continue
+            centro = np.average(self.pos[gruppo], axis=0, weights=np.maximum(intensita, 1e-12))
+            dentro = np.linalg.norm(self.pos[gruppo] - centro, axis=1) <= r
+            wloc = intensita[dentro]
+            if np.sum(wloc) > 1e-12:
+                chi_core[k] = float(np.sum(wloc * chi[gruppo[dentro]]) / np.sum(wloc))
+        self._chi_core_nodi = chi_core
+        self._chi_core_rho0 = rho0
+        self._chi_core_rhoc = rho_c
+        self._chi_core_raggio = r_core
+        return chi_core
+
+    def misura_spin_picco_massa(self, idx_massa, pesi=None):
+        """Misura spin e chiralita' nel dominio locale del picco costruttivo.
+
+        Il picco e' il nodo della massa con intensita' |Psi|^2 massima. Il dominio
+        e' il picco piu' i suoi vicini topologici che appartengono alla stessa massa;
+        non usa coordinate, raggio o soglie libere. Le medie sono pesate da |Psi|^2
+        e, se disponibili, dai pesi di concorrenza della massa.
+        """
+        vuoto = dict(picco=-1, n_dominio=0, chi=0.0, spin=0.0,
+                     spin_x=0.0, spin_y=0.0, spin_z=0.0,
+                     spinor_alpha_re=0.0, spinor_alpha_im=0.0,
+                     spinor_beta_re=0.0, spinor_beta_im=0.0,
+                     coerenza=0.0, verso_x=0.0, verso_y=0.0, verso_z=0.0)
+        idx = np.asarray(idx_massa, dtype=int)
+        idx = idx[(idx >= 0) & (idx < self.n)]
+        if len(idx) == 0:
+            return vuoto
+        if not hasattr(self, "psi") or len(self.psi) < self.n:
+            self.calcola_psi()
+        if not hasattr(self, "_nb") or len(self._nb) < self.n:
+            mancanti = self.n - len(getattr(self, "_nb", []))
+            nuovi = np.tile([0.0, 0.0, 1.0], (mancanti, 1))
+            self._nb = np.vstack([self._nb, nuovi]) if hasattr(self, "_nb") else nuovi
+        if len(self._spinor_lift) < self.n:
+            self._aggiorna_lift_spinoriale()
+        I2 = np.abs(self.psi[:self.n]) ** 2
+        campo_formato = float(np.sum(I2[idx])) > 1e-12
+        I2_misura = I2 if campo_formato else np.ones(self.n)
+        if pesi is None:
+            pesi = np.ones(len(idx))
+        pesi = np.asarray(pesi, float)
+        if len(pesi) != len(idx):
+            pesi = np.ones(len(idx))
+        peso_nodo = {int(k): max(float(p), 0.0) for k, p in zip(idx, pesi)}
+        if not any(p > 0.0 for p in peso_nodo.values()):
+            # Il tracking puo' essere negativo durante il transitorio (antifase). In
+            # quel caso non eliminiamo il picco: usiamo il dominio della massa con
+            # peso topologico unitario, lasciando |Psi|^2 come peso fisico principale.
+            peso_nodo = {int(k): 1.0 for k in idx}
+        picco = int(idx[np.argmax(I2_misura[idx])])
+        dominio = {picco}
+        for a, b in zip(self.i, self.j):
+            a, b = int(a), int(b)
+            if a == picco and b in peso_nodo:
+                dominio.add(b)
+            elif b == picco and a in peso_nodo:
+                dominio.add(a)
+        dominio = np.array(sorted(dominio), dtype=int)
+        w = I2_misura[dominio] * np.array([peso_nodo[k] for k in dominio])
+        den = float(np.sum(w))
+        if den <= 1e-12:
+            return vuoto
+        chi = self.perc_chi[dominio].astype(float) if len(self.perc_chi) >= self.n else np.zeros(len(dominio))
+        nb = self._nb[dominio] if hasattr(self, "_nb") and len(self._nb) >= self.n else np.zeros((len(dominio), 3))
+        spin_vec = np.sum(w[:, None] * nb, axis=0) / den
+        spin_mod = float(np.linalg.norm(spin_vec))
+        # Usa il lift complesso gia' trasportato temporalmente; ricostruire qui il
+        # rappresentante canonico dal Bloch perderebbe la fase relativa accumulata.
+        if len(self._spinor_lift) < self.n and hasattr(self, "_nb") and len(self._nb) >= self.n:
+            self._aggiorna_lift_spinoriale()
+        spinori = (self._spinor_lift[dominio]
+                   if len(self._spinor_lift) >= self.n
+                   else np.zeros((len(dominio), 2), complex))
+        spinore = np.sum(w[:, None] * spinori, axis=0)
+        norma = float(np.linalg.norm(spinore))
+        if norma > 1e-12:
+            spinore /= norma
+        verso = spin_vec / max(spin_mod, 1e-12)
+        return dict(picco=picco, n_dominio=int(len(dominio)),
+                    chi=float(np.sum(w * chi) / den), spin=spin_mod,
+                    spin_x=float(spin_vec[0]), spin_y=float(spin_vec[1]), spin_z=float(spin_vec[2]),
+                    spinor_alpha_re=float(spinore[0].real), spinor_alpha_im=float(spinore[0].imag),
+                    spinor_beta_re=float(spinore[1].real), spinor_beta_im=float(spinore[1].imag),
+                    coerenza=(float(den / max(np.sum(I2[dominio]), 1e-12))
+                              if campo_formato else 0.0),
+                    verso_x=float(verso[0]), verso_y=float(verso[1]), verso_z=float(verso[2]))
+
+    def misura_spin_picco_per_chiralita(self, idx_massa, pesi=None):
+        """Confronta S+ e S- nello stesso dominio locale del picco costruttivo.
+
+        Il dominio viene scelto una sola volta dalla massa completa; la divisione
+        per chiralita' e' quindi una misura simmetrica, non una selezione del picco.
+        Restituisce anche Q = <chi*n>, correlazione vettoriale spin-chiralita'.
+        """
+        base = self.misura_spin_picco_massa(idx_massa, pesi)
+        vuoto = dict(spin_plus=0.0, spin_minus=0.0, contrasto=0.0,
+                     q_x=0.0, q_y=0.0, q_z=0.0, q_modulo=0.0,
+                     n_plus=0, n_minus=0)
+        if base['picco'] < 0:
+            return dict(base, **vuoto)
+        idx = np.asarray(idx_massa, dtype=int)
+        idx = idx[(idx >= 0) & (idx < self.n)]
+        if pesi is None or len(np.asarray(pesi)) != len(idx):
+            pesi = np.ones(len(idx))
+        pesi = np.asarray(pesi, float)
+        if not any(p > 0.0 for p in pesi):
+            pesi = np.ones(len(idx))
+        I2 = np.abs(self.psi[:self.n]) ** 2
+        # Ricostruisce esattamente il dominio: stesso picco e vicini appartenenti alla massa.
+        picco = base['picco']; ammessi = set(idx.tolist()); dominio = {picco}
+        for a, b in zip(self.i, self.j):
+            a, b = int(a), int(b)
+            if a == picco and b in ammessi: dominio.add(b)
+            elif b == picco and a in ammessi: dominio.add(a)
+        dominio = np.array(sorted(dominio), dtype=int)
+        pmap = {int(k): max(float(p), 0.0) for k, p in zip(idx, pesi)}
+        w = I2[dominio] * np.array([pmap.get(int(k), 0.0) for k in dominio])
+        if w.sum() <= 1e-12:
+            w = I2[dominio]
+        chi = self.perc_chi[dominio].astype(float)
+        nb = self._nb[dominio]
+        plus = chi > 0; minus = chi < 0
+        def modulo(mask):
+            den = float(w[mask].sum())
+            return float(np.linalg.norm(np.sum(w[mask, None] * nb[mask], axis=0) / den)) if den > 1e-12 else 0.0
+        sp, sm = modulo(plus), modulo(minus)
+        q = np.sum(w[:, None] * chi[:, None] * nb, axis=0) / max(float(w.sum()), 1e-12)
+        contrasto = (sp - sm) / max(sp + sm, 1e-12)
+        return dict(base, spin_plus=sp, spin_minus=sm, contrasto=float(contrasto),
+                    q_x=float(q[0]), q_y=float(q[1]), q_z=float(q[2]),
+                    q_modulo=float(np.linalg.norm(q)), n_plus=int(plus.sum()), n_minus=int(minus.sum()))
+
+    def misura_spin_picco_positivi(self, idx_massa, pesi=None):
+        """Controtest empirico: misura lo stesso dominio usando solo perc_chi=+1.
+
+        La selezione e' diagnostica, non una legge dinamica: serve a verificare
+        se i generatori positivi possiedono da soli spin e verso piu' coerenti.
+        """
+        idx = np.asarray(idx_massa, dtype=int)
+        if len(self.perc_chi) < self.n:
+            return self.misura_spin_picco_massa(idx, pesi)
+        mask = self.perc_chi[idx] > 0
+        idx_pos = idx[mask]
+        if not len(idx_pos):
+            return dict(picco=-1, n_dominio=0, chi=0.0, spin=0.0,
+                        spin_x=0.0, spin_y=0.0, spin_z=0.0,
+                        spinor_alpha_re=0.0, spinor_alpha_im=0.0,
+                        spinor_beta_re=0.0, spinor_beta_im=0.0,
+                        coerenza=0.0, verso_x=0.0, verso_y=0.0, verso_z=0.0)
+        pesi_pos = None if pesi is None else np.asarray(pesi)[mask]
+        return self.misura_spin_picco_massa(idx_pos, pesi_pos)
+
+    def indici_massa_vivi(self, mass_id, fallback=None):
+        """Restituisce gli indici vivi di una massa e i relativi pesi correnti.
+
+        Il tracking di concorrenza segue anche i figli creati dalla mitosi. Il
+        fallback e' usato solo quando la massa non ha ancora voci di tracking.
+        """
+        indici = []; pesi = []
+        for k in range(min(len(self.conc_nodi), self.n)):
+            for voce in self.conc_nodi[k]:
+                if voce[0] == mass_id:
+                    indici.append(k); pesi.append(float(voce[2]) if len(voce) > 2 else 1.0)
+                    break
+        if indici:
+            return np.asarray(indici, dtype=int), np.asarray(pesi, dtype=float)
+        if fallback is None:
+            return np.zeros(0, dtype=int), np.zeros(0, dtype=float)
+        idx = np.asarray(sorted(k for k in fallback if 0 <= k < self.n), dtype=int)
+        return idx, np.ones(len(idx), dtype=float)
 
     def circolazione_topologica(self):
         """Diagnostica della corrente circolante sui cicli del grafo.
@@ -1222,7 +1508,11 @@ class Rete:
             nb_vic = self._nb_prec
         # campo effettivo B_i = somma dei vicini, con segno SU(2) dalla chiralita' del legame.
         # Il segno chirale (opposti/uguali) da' i due generatori non commutanti.
-        chi = (self.perc_chi[i] * self.perc_chi[j]).astype(float)  # +1 uguali / -1 opposti
+        if CHI_CORE and len(self.perc_chi) >= n:
+            chi_nodi = self.chiralita_core_locale()
+        else:
+            chi_nodi = self.perc_chi[:n].astype(float)
+        chi = (chi_nodi[i] * chi_nodi[j]).astype(float)  # +1 uguali / -1 opposti
         B = np.zeros((n, 3)); deg = np.zeros(n)
         mask = (i < n) & (j < n)
         ii, jj, wl, cl = i[mask], j[mask], w[mask], chi[mask]
@@ -1281,6 +1571,7 @@ class Rete:
         nb_new = nb_new / np.maximum(np.linalg.norm(nb_new, axis=1, keepdims=True), 1e-9)
         self._nb = nb_new.copy()                          # stato dello spinore (indipendente da phi)
         self._nb_prec = nb_new.copy()                     # memorizzo per il ritardo causale
+        self._aggiorna_lift_spinoriale()
         # rileggo phi_s (angolo polare) dal Bloch. phi (fase scalare U(1)) resta intatta.
         self.phi_s = np.arccos(np.clip(nb_new[:, 2], -1, 1))            # b = angolo polare [0,pi]
 
@@ -1346,7 +1637,7 @@ class Rete:
         # COARSE-GRAINING: ogni solitone-blocco porta la massa di SCALA_B fini. L'ampiezza
         # scala come sqrt(SCALA_B) cosi' che l'intensita' |Psi|^2 (la massa) scali con
         # SCALA_B, come richiesto per preservare Poisson (la sorgente e' rho=|Psi|^2).
-        amp = 1.0 if SCALA_B == 1.0 else np.sqrt(SCALA_B)
+        amp = SCALA_AMP
         F = self._mat(w) @ (amp * np.exp(1j * self.phi))
         self.psi = self.satura(F)                          # saturazione regolarizzata (Leggi XV/XVIII)
         return self.psi
@@ -1506,6 +1797,10 @@ class Rete:
             MtPsi = self._mat(w) @ self.psi            # M simmetrica: M^T Psi = M Psi
             dHdphi = 2.0 * np.imag(np.conj(z) * MtPsi)  # d(sum|Psi|^2)/dphi_n
             coppia = coppia + MU_PSI * dHdphi           # (vecchia repulsione a parametro, fallback)
+
+        # FEEDBACK SPINORE -> ARCHI: deve entrare prima dell'integrazione di delta_phivel.
+        if SPINORE_VIVO and SPINORE and SPIN_FEEDBACK:
+            coppia += self._feedback_spinoriale_archi(i, j, w)
             
         # TERMINE DI HALL / FRAME-DRAGGING come LEGGE (non parametro): il twist, finora solo
         # registrato, chiude il loop e agisce come coppia. La forza NON ha un coefficiente
@@ -1515,13 +1810,16 @@ class Rete:
         # scala giusta (~0.2 della coppia principale) senza aggiustamenti. E' la forza non
         # conservativa (frame-dragging, v x B con B=twist) che devia trasversalmente il moto.
         if FRAME_DRAG and len(_tw_t):
-            if VERSO_CHI and len(self.perc_chi) >= self.n:
+            if CHI_CORE and len(self.perc_chi) >= self.n:
+                chi_core = self.chiralita_core_locale()
+                twn = (np.pi * 0.5 * (chi_core[i] - chi_core[j])) / PHI_CRIT
+            elif VERSO_CHI and len(self.perc_chi) >= self.n:
                 # AGGANCIO AL VERSO STABILE: FRAME_DRAG pilotato dalla circolazione del solo
                 # twist_dip CHIRALE (segno fisso, gradiente vecchio/nuovo), NON dal tw pieno che
                 # e' dominato da dph=phi[i]-phi[j] (oscilla col battito delle fasi -> inverte il
                 # verso). Le chiralita' non battono come le fasi: il verso non si inverte.
                 twn = (np.pi * 0.5 * (self.perc_chi[i] - self.perc_chi[j])) / PHI_CRIT
-            else:
+            elif not (CHI_CORE and len(self.perc_chi) >= self.n):
                 twn = _tw_t / PHI_CRIT                 # twist adimensionale (scala di stato)  # <-- USA SNAPSHOT
             twist_nodo = np.zeros(self.n)
             grado = np.zeros(self.n)
@@ -1614,15 +1912,19 @@ class Rete:
         # Calcolo della differenza di fase sull'arco basato rigorosamente sullo stato al tempo t
         dph = self._w4(_phi_t[i] - _phi_t[j])
         if TORS_4PI and len(self.perc_chi) >= self.n:
+            chi_torsione = (self._chi_core_nodi if CHI_CORE and
+                            len(getattr(self, '_chi_core_nodi', [])) == self.n
+                            else (self.chiralita_core_locale() if CHI_CORE else
+                                  self.perc_chi[:self.n].astype(float)))
             if POLO_MATURO:
                 _twabs = np.abs(self.tw)
                 _twn = np.zeros(self.n)
                 np.add.at(_twn, i, _twabs); np.add.at(_twn, j, _twabs)
                 _twn = _twn / np.maximum(self._deg[:self.n] if len(self._deg) >= self.n else 1.0, 1.0)
-                _chi_mat = np.where(_twn[i] >= _twn[j], self.perc_chi[i], self.perc_chi[j])
+                _chi_mat = np.where(_twn[i] >= _twn[j], chi_torsione[i], chi_torsione[j])
                 twist_dip = np.pi * 0.5 * _chi_mat            # un solo polo (maturo), segno coerente
             else:
-                twist_dip = np.pi * 0.5 * (self.perc_chi[i] - self.perc_chi[j])  # ±pi dai due poli
+                twist_dip = np.pi * 0.5 * (chi_torsione[i] - chi_torsione[j])  # chiralità core o nodale
             _ttw = _tau_tw_locale(self) if TAU_LOCALI else TAU_TW
             self.tw += self._w8(dph + twist_dip - self.twp) - dt_e * self.tw / _ttw
             self.twp = self._w8(dph + twist_dip)
@@ -3315,7 +3617,7 @@ def _applica_flag(a):
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -3352,6 +3654,9 @@ def _applica_flag(a):
     SYNC_UPDATE = bool(getattr(a, "sync", False)) # aggiornamento sincrono (transazionale): default off
     SPINORE_VIVO = bool(getattr(a, "spinore_vivo", False)) # reinnesto evoluzione SU(2) nell'ETC: default off
     SPIN_LARMOR = bool(getattr(a, "spin_larmor", False))   # campo trasverso geometrico (Larmor): default off
+    SPIN_FEEDBACK = bool(getattr(a, "spin_feedback", False)) # feedback locale overlap spinoriale: default off
+    SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
+    CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale
     VERSO_CHI = bool(getattr(a, "verso_chi", False)) # aggancio al verso chirale stabile: default off
     LS_AZIM = bool(getattr(a, "ls_azim", False))   # L.S vettoriale azimutale: default off
     POLO_MATURO = bool(getattr(a, "polo_maturo", False)) # polo maturo (strategia 3): default off
@@ -3374,12 +3679,14 @@ def _applica_flag(a):
         print("[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)")
     if CHI_BASC:
         print("[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)")
+    if CHI_CORE:
+        print("[chi-core] frame-dragging guidato dalla chiralità emergente del core locale")
     # COARSE-GRAINING: se richiesta una scala > 1, applico le regole di scala derivate.
-    SCALA_B = a.scala
+    SCALA_B = float(a.scala)
+    fattore_lam, fattore_gamma, SCALA_AMP = _fattori_coarse(SCALA_B)
+    LAM = a.lam * fattore_lam
+    GAMMA = a.gamma * fattore_gamma
     if SCALA_B != 1.0:
-        LAM = a.lam * (SCALA_B ** (1.0 / 3.0))   # lambda_eff = lambda_base * B^(1/3)
-        GAMMA = a.gamma / np.sqrt(SCALA_B)        # gamma_eff = gamma/sqrt(B): la saturazione
-                                                  # resta invariante in forma (derivato esatto)
         print(f"[scala] coarse-graining B={SCALA_B:.0f}: ogni solitone rappresenta "
               f"{SCALA_B:.0f} fini | lambda_eff={LAM:.3f} | gamma_eff={GAMMA:.4f} | "
               f"R_conn={3.0*LAM:.2f} (scala con lambda). NB: la regione FISICA di semina "
@@ -3588,6 +3895,16 @@ def _cli():
                         "somma B_geo = <|tw|/PHI_CRIT * (n_i x n_j)>, termine non-abeliano perpendicolare "
                         "a n che sostiene la precessione di Larmor senza auto-spegnersi con l'ordine. "
                         "Richiede --spinore-vivo. Default off = non-regressione.")
+    p.add_argument("--spin-feedback", action="store_true", dest="spin_feedback",
+                   help="FEEDBACK LOCALE SPINORE->ARCHI: la parte immaginaria dell'overlap del lift "
+                        "spinoriale aggiunge una coppia antisimmmetrica alle fasi. Richiede "
+                        "--spinore-vivo. Default off = non-regressione.")
+    p.add_argument("--spin-positivi", action="store_true", dest="spin_positivi",
+                   help="MISURA SPINORE DI GRUPPO: registra anche la misura per-picco usando solo "
+                        "i generatori perc_chi=+1. Diagnostica, non modifica la dinamica.")
+    p.add_argument("--chi-core", action="store_true", dest="chi_core",
+                   help="CHIRALITA' EMERGENTE DEL CORE: usa rho0/rhoc e il raggio locale del core "
+                        "per il frame-dragging. Non seleziona il segno a priori; default off.")
     p.add_argument("--bussola", type=int, default=1,
                    help="1 = indicatore d'assi nel margine, 0 = nessun riferimento")
     p.add_argument("--giri", type=float, default=1.0,
@@ -3707,7 +4024,28 @@ def batch_condensazione(a):
         # torsione, velocita' di fase, densita', tempo proprio, ampiezza
         tw = net.tw if len(net.tw) else np.zeros(1)
         cols = {}
+        # Misura locale delle masse: usa le coorti di nascita della scena come
+        # dominio di riferimento stabile; il picco viene poi scelto da |Psi|^2
+        # e il vicinato e' ricavato solo dagli archi topologici.
+        try:
+            for i_m, coorte in enumerate(coorti):
+                idx_coorte = np.array(sorted(k for k in coorte if k < n), dtype=int)
+                misura = net.misura_spin_picco_massa(idx_coorte)
+                for nome, valore in misura.items():
+                    cols[f'm{i_m}_picco_{nome}'] = round(float(valore), 7)
+        except Exception:
+            pass
         cols['n'] = n
+        if CHI_CORE:
+            try:
+                chi_core = net.chiralita_core_locale()
+                cols['chi_core_media'] = float(np.mean(chi_core))
+                cols['chi_core_abs_media'] = float(np.mean(np.abs(chi_core)))
+                cols['rho0_core_max'] = float(np.max(getattr(net, '_chi_core_rho0', np.zeros(1))))
+                cols['rho_c_core'] = float(getattr(net, '_chi_core_rhoc', 0.0))
+                cols['r_core_medio'] = float(np.mean(getattr(net, '_chi_core_raggio', np.zeros(1))))
+            except Exception:
+                pass
         cols['I2_min'], cols['I2_max'], cols['I2_mean'], cols['I2_absmax'] = _stat(I2)
         cols['r_min'], cols['r_max'], cols['r_mean'], _ = _stat(r)
         cols['tw_min'], cols['tw_max'], cols['tw_mean'], cols['tw_absmax'] = _stat(tw)
@@ -3738,6 +4076,7 @@ def batch_condensazione(a):
             cols['berry_spin_media_assoluta'] = circ.get('berry_spin_media_assoluta', 0.0)
             cols['berry_spin_rms'] = circ.get('berry_spin_rms', 0.0)
             cols['berry_spin_media'] = circ.get('berry_spin_media', 0.0)
+            cols['spin_feedback_arco'] = float(getattr(net, '_spin_feedback_last', 0.0))
             cols['spin_cluster_modulo'] = circ.get('spin_cluster_modulo', 0.0)
             cols['spin_cluster_omega'] = circ.get('spin_cluster_omega', 0.0)
             cols['spin_neel_modulo'] = circ.get('spin_neel_modulo', 0.0)
@@ -3868,6 +4207,28 @@ def batch_condensazione(a):
         cols['m0_Lz'] = m0_Lz              # rotazione asse pattern per step = PRECESSIONE (spin)
         cols['m0_Lz_norm'] = m0_Lz_norm
 
+        # SPIN DEL PICCO COSTRUTTIVO: misura locale sul picco di |Psi|^2 di ogni massa
+        # tracciata. Non sostituisce m*_spin (che resta la velocita' di fase media):
+        # qui chi_picco e spin_picco sono rispettivamente chiralita' e Bloch della massa.
+        try:
+            if getattr(net, 'conc_nodi', None) and getattr(net, 'masse_info', None):
+                for i_m, mid in enumerate(sorted(net.masse_info.keys())):
+                    idx_picco = []; pesi_picco = []
+                    for k in range(min(len(net.conc_nodi), n)):
+                        for voce in net.conc_nodi[k]:
+                            if voce[0] == mid:
+                                idx_picco.append(k); pesi_picco.append(voce[2]); break
+                    misura = net.misura_spin_picco_massa(idx_picco, pesi_picco)
+                    if misura['picco'] < 0 and 'coorti' in locals() and i_m < len(coorti):
+                        # Durante l'inizializzazione il tracking puo' non avere ancora voci
+                        # correnti; la coorte di nascita e' il fallback locale deterministico.
+                        idx_picco = np.array(sorted(k for k in coorti[i_m] if k < n), dtype=int)
+                        misura = net.misura_spin_picco_massa(idx_picco)
+                    for nome, valore in misura.items():
+                        cols[f'm{i_m}_picco_{nome}'] = round(float(valore), 7)
+        except Exception:
+            pass
+
         # ============ MULTIMASSA: tutte le masse + interazioni tra coppie ============
         # Estende la misura a OGNI massa (m0, m1, ... qualsiasi tipo e numero) e calcola
         # la coerenza e la precessione TRA le masse (grandezze di interazione).
@@ -3905,6 +4266,9 @@ def batch_condensazione(a):
                                          N=int(len(idxA)),
                                          spin=float(np.mean(net.phivel[idxA])),
                                          tipo=lab)
+                        misura = net.misura_spin_picco_massa(idxA, pesA)
+                        for nome, valore in misura.items():
+                            cols[f'm{i_lab}_picco_{nome}'] = round(float(valore), 7)
                 mids = sorted(info.keys())
             elif getattr(net, 'conc_nodi', None) and getattr(net, 'masse_info', None):
                 mids = sorted(net.masse_info.keys())
@@ -4331,6 +4695,21 @@ def batch_condensazione(a):
             net.salva_stato(_db)
         if diag_f is not None:
             d = _diag_completa(net, _step_glob); d['step'] = _step_glob
+            # Tracking esplicito del picco costruttivo: usa conc_nodi, che include
+            # i figli della mitosi, e la coorte solo come fallback iniziale.
+            for i_m, (mid, coorte) in enumerate(zip(ids_massa, coorti)):
+                idx_coorte, pesi_coorte = net.indici_massa_vivi(mid, coorte)
+                misura = net.misura_spin_picco_massa(idx_coorte, pesi_coorte)
+                for nome, valore in misura.items():
+                    d[f'm{i_m}_picco_{nome}'] = round(float(valore), 7)
+                confronto = net.misura_spin_picco_per_chiralita(idx_coorte, pesi_coorte)
+                for nome in ('spin_plus', 'spin_minus', 'contrasto', 'q_x', 'q_y', 'q_z',
+                             'q_modulo', 'n_plus', 'n_minus'):
+                    d[f'm{i_m}_picco_{nome}'] = round(float(confronto[nome]), 7)
+                if SPIN_POSITIVI:
+                    misura_pos = net.misura_spin_picco_positivi(idx_coorte, pesi_coorte)
+                    for nome, valore in misura_pos.items():
+                        d[f'm{i_m}_picco_pos_{nome}'] = round(float(valore), 7)
             if _diag_header is None or _diag_header == "GIA_SCRITTO":
                 # ordine: colonne fisse note, poi le extra multimassa/interazione in coda
                 extra = [k for k in d.keys() if k not in _DIAG_COLS]

@@ -340,6 +340,27 @@ L'angolo deriva da grandezze dello stato, come pozzo, curl e twist coerente. Con
 `--zeta-vir` lo stesso fattore riduce il solo smorzamento radiale. `--kfrange` è
 invece un canale sperimentale parametrico e non una legge derivata.
 
+### Chiralità emergente del core (`--chi-core`)
+
+La chiralità microscopica `perc_chi` resta assegnata alla nascita ed ereditata
+dai figli. Con `--chi-core` il codice calcola invece una chiralità collettiva
+locale senza selezionare a priori il segno. Per ogni nodo, con
+$I_k=|\Psi_k|^2$, usa il massimo del nodo e dei suoi vicini come $\rho_0$ e la
+soglia
+
+$$\rho_c=\frac{N_c(\lambda,\gamma,s)}{(4/3)\pi\lambda_{base}^3}.$$
+
+Il raggio sopra soglia è
+
+$$R_{core,k}=\lambda_{eff,k}\max\left(\log\frac{\rho_{0,k}}{\rho_c},0\right).$$
+
+La chiralità del core è la proiezione pesata da $|\Psi|^2$ di tutti i nodi
+nella maschera locale. Quando attivo, `CHI_CORE` guida i canali collettivi
+spinoriali, il twist dipolare e il frame-dragging; nascita, scuotimento,
+mitosi ed eredità mantengono `perc_chi`. La legge è implementata ma **in
+verifica**: stabilità del segno e interpretazione topologica del guscio non
+sono dimostrate.
+
 ## 12. Osservabili e livello di evidenza
 
 | Osservabile | Definizione | Uso |

@@ -379,6 +379,21 @@ senso fisico: misura solo il rapporto tra la metrica corrente e il raggio
 `R_CONN()`. Poiché gli archi hanno memoria, è possibile avere archi oltre la
 portata corrente senza che il codice li elimini.
 
+### Core locale e chiralità collettiva
+
+Il flag sperimentale `--chi-core` distingue `perc_chi`, chiralità del singolo
+puntatore, dalla chiralità emergente del dominio denso. Il core usa il massimo
+locale di $|\Psi|^2$, la soglia critica riferita alla cella nativa e la portata
+schermata locale:
+
+$$R_{core}=\lambda_{eff}\max\left(\log(\rho_0/\rho_c),0\right).$$
+
+La chiralità è poi la proiezione pesata da $|\Psi|^2$ di tutti i nodi nella
+maschera, senza filtro preventivo su $+1$ o $-1$. Con il flag attivo guida i
+canali collettivi spinoriali, il twist dipolare e il frame-dragging; i processi
+di nascita ed eredità mantengono la chiralità microscopica. Stabilità del segno
+e separazione fisica core/guscio restano da verificare.
+
 ## 13. Livello di certezza
 
 **Implementato**: le regole descritte corrispondono alle routine e alle

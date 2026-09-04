@@ -141,6 +141,8 @@ per i batch.
 | `--elast-c C` | coefficiente del nucleo elastico nella dinamica di `d0` | test ridondanza/sensibilita' |
 | `--kfrange X` | aggiunge il canale di moto lungo le frange | sonda con parametro, non legge dimostrata |
 | `--scala B` | coarse-graining: un solitone rappresenta `B` solitoni fini | cambio di scala |
+| `--chi-core` | chiralità emergente del core nei canali collettivi | A/B fisico, default off |
+| `--spin-positivi` | registra il sottogruppo `perc_chi=+1` | sola diagnostica |
 | `--sync-db FILE` | salva o ricarica lo stato versionato | esecuzioni spezzate |
 
 Tutti gli script di lancio includono esplicitamente `--sync`, sia nel ramo
@@ -152,6 +154,11 @@ per compatibilità con vecchi comandi: il suo valore viene ignorato. I valori
 Con `--sync` il campo materia e la sorgente metrica leggono gli snapshot del
 passo precedente; senza flag resta il percorso storico. L'integratore fase e
 il sottociclo metrico restano sequenziali in entrambi i casi.
+
+Con `--chi-core` il segno usato nei canali collettivi viene calcolato nel core
+locale da $|\Psi|^2$, dalla soglia $\rho_c$ e dalla portata schermata. `perc_chi`
+resta la chiralità microscopica di nascita ed eredità. La legge è sperimentale
+e va validata con confronto OFF/ON su più semi.
 
 ## 5. Varianti Velocity-Verlet
 

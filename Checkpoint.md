@@ -23,6 +23,13 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 
 ### Stato fisico verificato nel codice
 
+- **[IMPLEMENTATO, SPERIMENTALE]** `--chi-core` calcola la chiralità emergente
+      del core locale da $\rho_0$, $\rho_c$ e $\lambda_{eff}$, usando tutti i
+      nodi nella maschera e senza selezionare il segno. La quantità core-aware
+      guida campo spinoriale, torsione dipolare e frame-dragging; `perc_chi`
+      resta microscopica per nascita, scuotimento e mitosi. Stabilità del segno
+      e impatto fisico sono ancora da validare.
+
 - **[IMPLEMENTATO]** Lo spinore SU(2) è attivo di default (`SPINORE=True`) e il
       metodo `_passo_spinoriale` viene eseguito a ogni passo; non è una voce “da
       implementare”. L'ordine macroscopico resta da misurare.
