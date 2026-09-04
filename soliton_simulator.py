@@ -1955,18 +1955,25 @@ class Rete:
         I = np.abs(self.psi) ** 2
         rho = 0.5 * (I[i] + I[j])
 
-        # Velocita' locale delle onde metriche: nel ramo storico cs_arco=CS_M;
-        # il ramo dinamico usa solo la densita' locale del campo e una transizione
-        # liscia. Il bound analitico e' [0.1*CS_M, CS_M].
+        # Velocita' locale delle onde metriche: nel ramo storico cs_arco=CS_M.
+        # Nel ramo dinamico la normalizzazione di densita' e' strettamente locale
+        # (vicini topologici), mentre il pavimento emerge dalla stessa saturazione
+        # razionale del campo: non viene introdotto un numero minimo arbitrario.
         if CS_DINAMICO:
-            rho_med = max(float(np.median(I[:self.n])), 1e-9)
-            u_nodo = I[:self.n] / rho_med
-            cs_nodo = (0.1 * CS_M + 0.9 * CS_M * 0.5 *
-                       (1.0 + np.tanh(1.0 - u_nodo)))
+            W_loc = self._mat(w)
+            media_vicini = (W_loc @ I[:self.n]) / np.maximum(
+                W_loc @ np.ones(self.n), 1e-9)
+            u_nodo = I[:self.n] / np.maximum(media_vicini, 1e-9)
+            # Floor emergente: deriva dalla saturazione locale gia' presente in
+            # satura(), cs_floor resta positivo e non introduce una manopola.
+            cs_floor = CS_M / (1.0 + GAMMA * np.sqrt(np.maximum(I[:self.n], 0.0)))
+            cs_floor = np.minimum(cs_floor, CS_M)
+            transizione = 0.5 * (1.0 + np.tanh(1.0 - u_nodo))
+            cs_nodo = cs_floor + (CS_M - cs_floor) * transizione
             # Collo di bottiglia causale: media armonica, non media aritmetica.
             cs_arco = (2.0 * cs_nodo[i] * cs_nodo[j] /
                        np.maximum(cs_nodo[i] + cs_nodo[j], 1e-12))
-            cs_max_corrente = max(float(np.max(cs_arco)), 0.1 * CS_M)
+            cs_max_corrente = float(np.max(cs_arco)) if len(cs_arco) else CS_M
         else:
             cs_arco = np.full(len(i), CS_M, dtype=float)
             cs_max_corrente = CS_M
@@ -4048,9 +4055,13 @@ def batch_condensazione(a):
         tw = net.tw if len(net.tw) else np.zeros(1)
         cols = {}
         if CS_DINAMICO and len(net.i):
-            rho_med_cs = max(float(np.median(I2[:n])), 1e-9)
-            cs_nodo_diag = (0.1 * CS_M + 0.9 * CS_M * 0.5 *
-                            (1.0 + np.tanh(1.0 - I2[:n] / rho_med_cs)))
+            W_diag = net._mat(net._pesi())
+            media_vicini_diag = (W_diag @ I2[:n]) / np.maximum(
+                W_diag @ np.ones(n), 1e-9)
+            u_diag = I2[:n] / np.maximum(media_vicini_diag, 1e-9)
+            floor_diag = CS_M / (1.0 + GAMMA * np.sqrt(np.maximum(I2[:n], 0.0)))
+            trans_diag = 0.5 * (1.0 + np.tanh(1.0 - u_diag))
+            cs_nodo_diag = floor_diag + (CS_M - floor_diag) * trans_diag
             cs_arco_diag = (2.0 * cs_nodo_diag[net.i] * cs_nodo_diag[net.j] /
                             np.maximum(cs_nodo_diag[net.i] + cs_nodo_diag[net.j], 1e-12))
             cols['cs_eff_min'] = float(np.min(cs_arco_diag))

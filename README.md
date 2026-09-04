@@ -161,10 +161,11 @@ locale da $|\Psi|^2$, dalla soglia $\rho_c$ e dalla portata schermata. `perc_chi
 resta la chiralità microscopica di nascita ed eredità. La legge è sperimentale
 e va validata con confronto OFF/ON su più semi.
 
-Con `--cs-dinamico` la velocità metrica locale è limitata lisciamente tra
-$0.1CS_M$ e $CS_M$ dalla densità $|\Psi|^2$. La velocità sugli archi è la
-media armonica dei due nodi, per rispettare il collo di bottiglia causale; il
-ramo OFF conserva la fisica storica.
+Con `--cs-dinamico` la velocità metrica locale usa la densità rispetto al solo
+vicinato topologico. Il floor è emergente dalla saturazione locale
+$CS_M/(1+\gamma\sqrt{|\Psi|^2})$, la transizione è liscia con `tanh`, la
+velocità sugli archi è la media armonica dei due nodi e il ramo OFF conserva la
+fisica storica.
 
 ## 5. Varianti Velocity-Verlet
 

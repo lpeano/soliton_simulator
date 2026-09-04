@@ -204,12 +204,18 @@ la velocità dipende localmente dalla densità del campo. Ponendo
 
 $$u_i=\frac{|\Psi_i|^2}{\max(\operatorname{mediana}(|\Psi|^2),10^{-9})},$$
 
-il codice usa il profilo liscio
+il codice usa il riferimento locale dei vicini
 
-$$c_{s,i}=0.1CS_M+0.9CS_M\frac{1+\tanh(1-u_i)}2,$$
+$$\bar I_i=\frac{(W I)_i}{(W\mathbf 1)_i},
+\qquad u_i=\frac{I_i}{\max(\bar I_i,10^{-9})},$$
 
-con $0.1CS_M\le c_{s,i}\le CS_M$. L'arco usa la media armonica, non quella
-aritmetica:
+e il profilo liscio con un floor che emerge dalla saturazione locale:
+
+$$c_{floor,i}=\frac{CS_M}{1+\gamma\sqrt{I_i}},
+\qquad
+c_{s,i}=c_{floor,i}+(CS_M-c_{floor,i})\frac{1+\tanh(1-u_i)}2.$$
+
+L'arco usa la media armonica, non quella aritmetica:
 
 $$c_{s,ij}=\frac{2c_{s,i}c_{s,j}}{c_{s,i}+c_{s,j}}.$$
 

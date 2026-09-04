@@ -217,12 +217,18 @@ $$\beta_{ij}=\frac{2\zeta_M c_s}{d_{ij}}.$$
 
 Con `--cs-dinamico` la velocità delle onde metriche non è più uniforme. Il
 ramo storico resta invariato quando il flag è spento. Nel ramo dinamico, con
-$I_i=|\Psi_i|^2$ e $u_i=I_i/\max(\operatorname{mediana}(I),10^{-9})$, il codice usa
+$I_i=|\Psi_i|^2$, il riferimento è esclusivamente il vicinato topologico:
 
-$$c_{s,i}=0.1CS_M+0.9CS_M\frac{1+\tanh(1-u_i)}{2}.$$
+$$\bar I_i=\frac{(W I)_i}{(W\mathbf 1)_i},
+\qquad u_i=\frac{I_i}{\max(\bar I_i,10^{-9})}.$$
 
-La velocità è quindi compresa analiticamente tra $0.1CS_M$ e $CS_M$ e rallenta
-nei nodi densi. Sugli archi si usa il collo di bottiglia causale, cioè la media
+La transizione è liscia con `tanh`; il floor locale emerge dalla saturazione già presente nel campo:
+
+$$c_{floor,i}=\frac{CS_M}{1+\gamma\sqrt{I_i}},
+\qquad
+c_{s,i}=c_{floor,i}+(CS_M-c_{floor,i})\frac{1+\tanh(1-u_i)}2.$$
+
+Non viene quindi introdotta una costante minima arbitraria. Sugli archi si usa il collo di bottiglia causale, cioè la media
 armonica:
 
 $$c_{s,ij}=\frac{2c_{s,i}c_{s,j}}{c_{s,i}+c_{s,j}}.$$
