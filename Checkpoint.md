@@ -5,7 +5,37 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 
 ---
 
-## AGGIORNAMENTO CORRENTE — 2026-09-03
+## AGGIORNAMENTO CORRENTE — 2026-09-04
+
+### Chiusura sessione 2026-09-04
+
+- **[IMPLEMENTATO]** Il pozzo fisico locale è centralizzato in `Rete.pozzo_grafo()`
+      e la vista campo interpola la stessa quantità `phi_g` usata da `GRAV_BIFASE`.
+      La vista topologica non usa più un layout XYZ come se fosse la fisica.
+- **[IMPLEMENTATO]** `--sync` usa una snapshot unica del passo precedente per
+      campo, intensità, metrica e settore spinoriale; il ricalcolo è ammesso solo
+      quando la mitosi cambia la topologia.
+- **[IMPLEMENTATO]** Ogni CSV batch e `diaglog` contiene una riga iniziale
+      `# RUN_PARAMS` con parametri CLI, leggi attive e costanti effettive.
+- **[AGGIORNATO]** Le campagne core, spin/chiralità e matrice CS sono state
+      predisposte con `--cs-dinamico` in tutte le varianti; `test_cs_dinamico.bat`
+      conserva il ramo OFF per l’A/B dedicato.
+- **[VERIFICATO]** Compilazione, controllo del diff e batch minimo metadata/sync
+      completati senza errori.
+- **[FERMATO]** I batch lunghi precedenti sono stati interrotti prima di questa
+      modifica e non sono stati considerati risultati della nuova configurazione.
+
+Relazione completa: `REPORT_SESSIONE_2026-09-04.md`.
+
+### TODO — prossima sessione
+
+- **[TODO]** Rilanciare tutte le campagne aggiornate con `--cs-dinamico`, usando
+      DB/output nuovi e 2–3 semi.
+- **[TODO]** Attendere 2000 passi e confrontare `cs_eff_*`, `dmin_nodi`, torsione,
+      coerenza, spin, `m*_Lz` e `Lz_orb_*`.
+- **[TODO]** Verificare se la quasi-collocazione dei nodi altera il pozzo `phi_g`.
+- **[TODO]** Valutare precessione e frame dragging solo da serie temporali e
+      osservabili relazionali, non da singoli fotogrammi.
 
 ### Stato documentale e geometrico
 

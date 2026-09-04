@@ -103,6 +103,12 @@ Il batch non crea video. Produce:
 - un `diaglog` dettagliato, una riga per passo, con variabili globali e misure
 	per massa/coppia di masse.
 
+Ogni CSV batch e ogni `diaglog` inizia con una riga commentata
+`# RUN_PARAMS {...}` in formato JSON compatto. La riga registra la configurazione
+del run (seed, masse, separazione, passi, flag fisici come `--sync` e
+`--cs-dinamico`, oltre alle costanti effettive), così il report resta interpretabile
+anche quando viene separato dal comando o dallo script `.bat` che lo ha prodotto.
+
 Le directory padre indicate in `--csv`, `--diaglog`, `--sync-db` e `--out`
 vengono create automaticamente se non esistono.
 
@@ -166,6 +172,11 @@ vicinato topologico. Il floor è emergente dalla saturazione locale
 $CS_M/(1+\gamma\sqrt{|\Psi|^2})$, la transizione è liscia con `tanh`, la
 velocità sugli archi è la media armonica dei due nodi e il ramo OFF conserva la
 fisica storica.
+
+Le campagne da ripetere con la versione corrente devono usare DB/output nuovi:
+le cache `--sync-db` sono versionate per hash del codice e non vanno riutilizzate
+tra configurazioni fisiche diverse. Vedi `REPORT_SESSIONE_2026-09-04.md` per lo
+stato della sessione e il TODO dei test.
 
 ## 5. Varianti Velocity-Verlet
 

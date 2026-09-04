@@ -260,6 +260,7 @@ SCHERMATURA = True      # LEGGE INTRINSECA: portata ancorata alla densita' criti
 P_LAM    = 1.0          # Indicatore storico mantenuto per compatibilita'; non e' piu' un esponente.
 CS_M, ALPHA_M, BETA_M = 2.0, 0.05, 0.8
 CS_DINAMICO = False       # velocita' locale delle onde metriche, A/B default off
+VISTA_RETE = False        # rendering alternativo: solo rete, default = vista campo attuale
 TAU_BG   = 5.0          # il vuoto insegue la densita' LOCALE
 TAU_DIFF = 1.0          # e diffonde sulla topologia (Legge I: nessuna scorciatoia globale)
 TAU_P    = 2.0
@@ -1455,7 +1456,7 @@ class Rete:
         r_normalized = r / r_unit                       # x=1 -> fattore unitario
         return 1.0 + TAU_LOC * (r_normalized - 1.0)
 
-    def _passo_spinoriale(self, i, j, w, dt_n):
+    def _passo_spinoriale(self, i, j, w, dt_n, psi_snapshot=None):
         """ORFANO dal 2026-09-02 (commit d2c76f3): la chiamata e' stata persa nel refactor ETC e
         non e' piu' invocata nel percorso vivo. Riattivabile solo reinnestandolo nell'ordine ETC.
         PASSO 2+3: settore spinoriale non-abeliano con MOTORE CONSERVATIVO hebbiano.
@@ -1487,12 +1488,21 @@ class Rete:
             self._nb = np.vstack([self._nb, nuovi])
         elif len(self._nb) > n:
             self._nb = self._nb[:n]
+        # Nel ramo sincrono il settore spinoriale legge una snapshot immutabile
+        # dello stato t. Le copie vengono usate solo a destra dell'equazione;
+        # le assegnazioni a _nb/omega_s sono il commit verso t+1.
+        if SYNC_UPDATE:
+            nb_t = self._nb.copy()
+            nb_prec_t = (self._nb_prec.copy()
+                         if hasattr(self, "_nb_prec") and self._nb_prec is not None
+                         and len(self._nb_prec) == n else nb_t.copy())
+            omega_t = self.omega_s.copy()
         # ECCITAZIONE DEL VUOTO sullo spinore, integrata nel passo (cosi' e' parte del ciclo di
         # evoluzione fisica, non dipende dal loop di disegno). Il rumore del vuoto perturba il
         # Bloch spingendolo fuori dal polo; la memoria hebbiana poi mantiene la rotazione.
         # STESSA legge dello scuotimento scalare: soppressione per COERENZA |Psi|^2, non per
         # curvatura (le due leggi devono essere identiche - il vuoto e' lo stesso vuoto).
-        if SCUOTIMENTO:
+        if SCUOTIMENTO and not SYNC_UPDATE:
             Lam = lambda_vuoto(self)
             if Lam > 0:
                 if not hasattr(self, "psi") or len(self.psi) < n:
@@ -1501,9 +1511,11 @@ class Rete:
                 amp = np.sqrt(Lam) / (1.0 + I2 / Lam)   # sqrt(Lam)/(1+|Psi|^2/Lam): come lo scalare
                 self._nb = self._nb + self.rng.normal(0, 1.0, (n, 3)) * amp[:, None]
                 self._nb = self._nb / np.maximum(np.linalg.norm(self._nb, axis=1, keepdims=True), 1e-9)
-        nb = self._nb
+        nb = nb_t if SYNC_UPDATE else self._nb
         # CAUSALITA': campo dai vicini allo stato RITARDATO (Bloch del passo precedente)
-        if not hasattr(self, "_nb_prec") or self._nb_prec is None or len(self._nb_prec) != n:
+        if SYNC_UPDATE:
+            nb_vic = nb_prec_t
+        elif not hasattr(self, "_nb_prec") or self._nb_prec is None or len(self._nb_prec) != n:
             nb_vic = nb
         else:
             nb_vic = self._nb_prec
@@ -1561,15 +1573,26 @@ class Rete:
             _tau = _tau[:, None]
         else:
             _tau = TAU_A
-        self.omega_s = self.omega_s + dtn_c * (correzione / inerzia[:, None] - self.omega_s / _tau)
+        omega_src = omega_t if SYNC_UPDATE else self.omega_s
+        omega_new = omega_src + dtn_c * (correzione / inerzia[:, None] - omega_src / _tau)
         # PRECESSIONE conservativa: ruoto il Bloch attorno a omega (rotazione esatta, unitaria)
-        on = np.linalg.norm(self.omega_s, axis=1, keepdims=True)
-        ohat = self.omega_s / np.maximum(on, 1e-9)
+        on = np.linalg.norm(omega_new, axis=1, keepdims=True)
+        ohat = omega_new / np.maximum(on, 1e-9)
         ang = on * (dtn_c if not np.isscalar(dtn_c) else dtn_c)
         cA = np.cos(ang); sA = np.sin(ang)
         dot = np.sum(ohat * nb, axis=1, keepdims=True)
         nb_new = nb * cA + np.cross(ohat, nb) * sA + ohat * dot * (1 - cA)
+        if SYNC_UPDATE and SCUOTIMENTO:
+            # Il rumore e' un aggiornamento t -> t+1: non puo' contaminare il
+            # campo B letto dalla snapshot. Usa comunque la stessa psi_t.
+            Lam = lambda_vuoto(self)
+            if Lam > 0:
+                I2 = (np.abs(psi_snapshot[:n]) ** 2
+                      if psi_snapshot is not None else np.zeros(n))
+                amp = np.sqrt(Lam) / (1.0 + I2 / Lam)
+                nb_new = nb_new + self.rng.normal(0, 1.0, (n, 3)) * amp[:, None]
         nb_new = nb_new / np.maximum(np.linalg.norm(nb_new, axis=1, keepdims=True), 1e-9)
+        self.omega_s = omega_new.copy()
         self._nb = nb_new.copy()                          # stato dello spinore (indipendente da phi)
         self._nb_prec = nb_new.copy()                     # memorizzo per il ritardo causale
         self._aggiorna_lift_spinoriale()
@@ -1744,6 +1767,13 @@ class Rete:
             dt_e = DT * 0.5 * (r[i] + r[j])    # per arco
             self._psi_prec = self.psi.copy()
         w = self._pesi(); self.eta += dt_n
+        # In modalita' sincrona tutte le leggi del passo leggono un unico campo
+        # calcolato dalla snapshot t. Non ricalcolare psi in punti diversi del
+        # passo: quello introdurrebbe letture miste t/t+1.
+        psi_t = None
+        if SYNC_UPDATE:
+            psi_t = self.satura(self._mat(w) @ np.exp(1j * _phi_t))
+            self.psi = psi_t.copy()
         A = w * np.cos(self.phi0[i] - self.phi0[j])
         z = np.exp(1j * _phi_t)  # <-- USA LO SNAPSHOT t
         coppia = K_C * np.imag(np.conj(z) * (self._mat(A) @ z))
@@ -1763,8 +1793,8 @@ class Rete:
         # dalla saturazione del campo). Segno MENO = opposto all'attrazione K_C. Nessun numero messo
         # li': Ncrit e coerenza sono grandezze di stato, la conversione e' dinamica.
         if REPULS_LEGGE:
-            self.calcola_psi()
-            MtPsi = self._mat(w) @ self.psi
+            psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()
+            MtPsi = self._mat(w) @ psi_forces
             dHdphi = 2.0 * np.imag(np.conj(z) * MtPsi)   # direzione: de-concentra l'interferenza
             zc = np.exp(1j * _phi_t[:self.n])  # <-- USA SNAPSHOT
             # COERENZA COL NUCLEO (corretta): NON la media vettoriale coi vicini di legame (che il
@@ -1774,7 +1804,7 @@ class Rete:
             # coerente ~1 anche quando il guscio si forma; il guscio (antifase col campo) da coerenza
             # negativa e NON contribuisce alla repulsione del nucleo. Cosi' la repulsione resta accesa
             # dove la materia si concentra, invece di spegnersi.
-            psi_loc = self.psi[:self.n]
+            psi_loc = psi_forces[:self.n]
             fase_campo = np.angle(psi_loc + 1e-12)       # fase del campo locale = battito della massa
             coerenza = np.cos(_phi_t[:self.n] - fase_campo)   # +1 nucleo (in fase), -1 guscio (antifase)  # <-- USA SNAPSHOT
             coerenza = np.clip(coerenza, 0.0, 1.0)       # solo il nucleo costruttivo alimenta la repulsione
@@ -1794,8 +1824,8 @@ class Rete:
             fattore = u * (u + 2.0)                       # (1+u)^2 - 1, la legge dalla saturazione
             coppia = coppia - fattore * dHdphi           # MENO = repulsivo, opposto all'attrazione
         elif MU_PSI != 0.0:
-            self.calcola_psi()
-            MtPsi = self._mat(w) @ self.psi            # M simmetrica: M^T Psi = M Psi
+            psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()
+            MtPsi = self._mat(w) @ psi_forces            # M simmetrica: M^T Psi = M Psi
             dHdphi = 2.0 * np.imag(np.conj(z) * MtPsi)  # d(sum|Psi|^2)/dphi_n
             coppia = coppia + MU_PSI * dHdphi           # (vecchia repulsione a parametro, fallback)
 
@@ -1866,8 +1896,8 @@ class Rete:
         # SINCRONIZZAZIONE PESATA SUL TAGLIO ROTAZIONALE (Legge corretta di Kuramoto)
         delta_sync_phi = np.zeros(self.n)
         if K_SYNC != 0.0 and self.n > 2:
-            self.calcola_psi()
-            I2 = np.abs(self.psi) ** 2
+            psi_sync = psi_t if SYNC_UPDATE else self.calcola_psi()
+            I2 = np.abs(psi_sync) ** 2
             cmv = (self.pos[:self.n] * I2[:, None]).sum(0) / max(I2.sum(), 1e-9)
             r_cm = np.linalg.norm(self.pos[:self.n] - cmv, axis=1) + LAM * 0.5
             pozzo = I2.sum() / r_cm                       # tempo proprio: pozzo dal centro
@@ -1904,7 +1934,7 @@ class Rete:
         # ancora stata committata, quindi calcola_psi() usa _phi_t). Deve stare PRIMA del commit
         # atomico per non leggere le fasi t+1 (sfasamento che l'ETC deve evitare).
         if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) == self.n:
-            self._passo_spinoriale(i, j, w, dt_n)
+            self._passo_spinoriale(i, j, w, dt_n, psi_snapshot=psi_t)
 
         # --- COMMIT ATOMICO DELLE FASI (Unico punto di scrittura sincrono) ---
         self.phivel = _phivel_t + delta_phivel
@@ -1949,9 +1979,13 @@ class Rete:
         # Con --sync la materia viene valutata sullo snapshot t, nello stesso istante
         # delle coppie di fase e del ponte fase->torsione. Senza flag resta il percorso
         # storico: la materia legge la fase appena committata.
-        _phi_src = _phi_t if SYNC_UPDATE else self.phi
-        F = Mw @ np.exp(1j * _phi_src)
-        self.psi = self.satura(F)                          
+        if SYNC_UPDATE:
+            # Il campo della metrica resta quello della snapshot t, uguale a
+            # quello usato da repulsione, sync, spinore e pozzo del passo.
+            self.psi = psi_t.copy()
+        else:
+            F = Mw @ np.exp(1j * self.phi)
+            self.psi = self.satura(F)
         I = np.abs(self.psi) ** 2
         rho = 0.5 * (I[i] + I[j])
 
@@ -2514,6 +2548,28 @@ class Rete:
             self.pos[:n] = P - rot
 
 
+    def pozzo_grafo(self, intensita=None):
+        """Pozzo fisico locale del grafo, condiviso da dinamica e visualizzazione.
+
+        Il pozzo non usa la geometria del rendering: ogni nodo riceve il contributo
+        di intensita' dei vicini diviso per la distanza reale dell'arco. Restituisce
+        anche la maschera degli archi validi e la pendenza del pozzo su ciascun arco,
+        cosi' la figura puo' mostrare esattamente la grandezza che guida GRAV_BIFASE.
+        """
+        n = self.n
+        phi_g = np.zeros(n, dtype=float)
+        mask = (self.i < n) & (self.j < n)
+        ii, jj = self.i[mask], self.j[mask]
+        if not len(ii):
+            return phi_g, mask, np.zeros(0, dtype=float)
+        I = (np.abs(self.psi[:n]) ** 2 if intensita is None and len(self.psi) >= n
+             else np.asarray(intensita, dtype=float)[:n])
+        v = self.pos[jj] - self.pos[ii]
+        L = np.maximum(np.linalg.norm(v, axis=1), 1e-9)
+        np.add.at(phi_g, ii, I[jj] / L)
+        np.add.at(phi_g, jj, I[ii] / L)
+        return phi_g, mask, phi_g[jj] - phi_g[ii]
+
     def memoria_hebbiana_moto(self):
         """MEMORIA HEBBIANA DELLA DINAMICA — come LEGGE, non parametri.
         Il momento del moto si CONSERVA (inerzia) e viene corretto dal campo (geodetica),
@@ -2572,10 +2628,7 @@ class Rete:
             
         if GRAV_BIFASE and len(proj):
             s = np.abs(self.tw[mask]) / PHI_CRIT - 1.0    # grandezza FIRMATA: segno = direzione
-            phi_g = np.zeros(self.n)                       # pozzo sul grafo (scala spaziale)
-            np.add.at(phi_g, ii, I[jj] / L)
-            np.add.at(phi_g, jj, I[ii] / L)
-            dpozzo = phi_g[jj] - phi_g[ii]
+            phi_g, _, dpozzo = self.pozzo_grafo(I)
             # Guardia: durante una variazione topologica puo' esistere un passo
             # senza differenze di pozzo valide. np.median([]) genera un warning
             # e poi un errore NumPy (median usa mean internamente).
@@ -3198,6 +3251,161 @@ axt = fig.add_axes([0.005, _y0, 0.195, 0.81 - _y0]); axt.axis("off")
 axc = fig.add_axes([0.205, 0.90, 0.79, 0.09]); axc.axis("off")
 
 
+def _render_vista_rete_sola(net, M, R, dg):
+    """Mostra l'evoluzione del grafo: nodi e archi nello stesso quadro."""
+    from matplotlib.collections import LineCollection
+    from mpl_toolkits.mplot3d.art3d import Line3DCollection
+
+    n = net.n
+    P3 = net.pos[:n] @ M
+    P2 = net.pos[:n]                    # piano intrinseco fisico (x, y), non vista ruotata
+    if hasattr(net, "psi") and len(net.psi) >= n:
+        Ivis = np.abs(net.psi[:n]) ** 2
+    else:
+        Ivis = np.zeros(n)
+    phi_g, _, dpozzo_tutti = net.pozzo_grafo(Ivis)
+    chi = (net.perc_chi[:n] if hasattr(net, "perc_chi") and len(net.perc_chi) >= n
+           else np.zeros(n))
+    valid = ((net.i < n) & (net.j < n)) if len(net.i) else np.zeros(0, dtype=bool)
+    indici = np.flatnonzero(valid)[:24000]
+    na = len(indici)
+    ii = net.i[indici] if na else np.zeros(0, dtype=int)
+    jj = net.j[indici] if na else np.zeros(0, dtype=int)
+    seg2 = np.stack([P2[ii, :2], P2[jj, :2]], axis=1) if na else np.zeros((0, 2, 2))
+    tw = (np.abs(net.tw[indici]) / max(PHI_CRIT, 1e-9)
+          if na and len(net.tw) > int(indici.max()) else np.zeros(na))
+    # dpozzo_tutti e' gia' compresso sulla maschera degli archi validi;
+    # indici serve invece per leggere i vettori originali i/j/tw.
+    dpozzo = np.abs(dpozzo_tutti[:na]) if na else np.zeros(0)
+
+    # La scala appartiene al grafo, non al campo: così l'evoluzione topologica resta leggibile.
+    r_grafo_2d = float(np.max(np.linalg.norm(P2[:, :2], axis=1))) if n else 1.0
+    r_grafo_2d = max(r_grafo_2d * 1.18, 1e-6)
+    r_grafo_3d = float(np.max(np.linalg.norm(P3, axis=1))) if n else 1.0
+    r_grafo_3d = max(r_grafo_3d * 1.18, 1e-6)
+    phi_max = max(float(np.max(phi_g)) if n else 0.0, 1e-12)
+    dimensione_nodi = 18.0 + 38.0 * np.sqrt(np.clip(phi_g / phi_max, 0.0, 1.0))
+    dphi_max = max(float(np.max(dpozzo)) if na else 0.0, 1e-12)
+
+    # Pannello principale: grafo XY, nodi e archi nello stesso spazio e nello stesso frame.
+    if na:
+        lc = LineCollection(seg2, cmap="plasma", linewidths=0.8, alpha=0.72,
+                            zorder=1)
+        lc.set_array(np.clip(dpozzo / dphi_max, 0.0, 1.0)); ax.add_collection(lc)
+    if n:
+        ax.scatter(P2[:, 0], P2[:, 1], c=phi_g, s=dimensione_nodi, cmap="magma",
+                   vmin=0, vmax=phi_max, alpha=1.0, edgecolors="white", linewidths=0.35,
+                   zorder=3)
+    ax.set_xlim(-r_grafo_2d, r_grafo_2d); ax.set_ylim(-r_grafo_2d, r_grafo_2d)
+    ax.set_aspect("equal"); ax.axis("off")
+    ax.set_title("EVOLUZIONE DEL GRAFO PLANARE · pozzo fisico\n"
+                 f"frame {stato['nframe']} · N={n} · E={len(net.i)} · colore = phi_g",
+                 fontsize=11, color="#0277bd", weight="bold")
+
+    # Pannello centrale: la stessa rete nello spazio 3D.
+    if na:
+        seg3 = [[tuple(P3[a]), tuple(P3[b])] for a, b in zip(ii, jj)]
+        lc3 = Line3DCollection(seg3, cmap="plasma", linewidths=0.65, alpha=0.65)
+        lc3.set_array(np.clip(dpozzo / dphi_max, 0.0, 1.0)); ax3d.add_collection3d(lc3)
+    if n:
+        ax3d.scatter(P3[:, 0], P3[:, 1], P3[:, 2], c=phi_g, cmap="magma",
+                     vmin=0, vmax=phi_max, s=dimensione_nodi, alpha=1.0,
+                     edgecolors="white", linewidths=0.25)
+    ax3d.view_init(elev=26, azim=-60)
+    ax3d.set_xlim(-r_grafo_3d, r_grafo_3d); ax3d.set_ylim(-r_grafo_3d, r_grafo_3d)
+    ax3d.set_zlim(-r_grafo_3d, r_grafo_3d)
+    ax3d.set_axis_off()
+    ax3d.set_title("RETE DINAMICA 3D · pozzo fisico\ncolore nodi = phi_g",
+                   fontsize=9, color="#0277bd")
+
+    # Pannello destro: seconda proiezione, utile per seguire separazione e collasso dei nodi.
+    if na:
+        seg_yz = np.stack([P3[ii][:, 1:3], P3[jj][:, 1:3]], axis=1)
+        lc_yz = LineCollection(seg_yz, cmap="plasma", linewidths=0.65, alpha=0.7)
+        lc_yz.set_array(np.clip(dpozzo / dphi_max, 0.0, 1.0)); ax2.add_collection(lc_yz)
+    if n:
+        ax2.scatter(P3[:, 1], P3[:, 2], c=phi_g, cmap="magma", vmin=0, vmax=phi_max,
+                    s=dimensione_nodi, alpha=1.0, edgecolors="white", linewidths=0.35)
+    ax2.set_xlim(-r_grafo_3d, r_grafo_3d); ax2.set_ylim(-r_grafo_3d, r_grafo_3d)
+    ax2.set_aspect("equal"); ax2.axis("off")
+    ax2.set_title("RETE DINAMICA · pendenza del pozzo\ncolore archi = |Δphi_g|",
+                  fontsize=9, color="#0277bd")
+
+    # Pannello metriche: stessi indicatori principali della vista campo.
+    righe = [
+        ("VISTA RETE", 14, "#0277bd", "bold"),
+        ("stessa dinamica · stesso stato", 9, "#7b1fa2", "normal"), ("", 8, "#000", "normal"),
+        (f"puntatori: {net.n} / {MAX_NODI}", 10, "#111", "normal"),
+        (f"archi:     {len(net.i)}", 10, "#111", "normal"), ("", 8, "#000", "normal"),
+        (f"phi_g: {phi_g.min() if n else 0:.3g} .. {phi_g.max() if n else 0:.3g}",
+         10, "#7b1fa2", "normal"),
+        (f"|Δphi_g| max: {dphi_max:.3g}", 10, "#7b1fa2", "normal"),
+        ("— GEOMETRIA VIVA —", 10, "#7b1fa2", "bold"),
+        (f"d medio:     {dg['d_med']:.3f}", 10, "#7b1fa2", "normal"),
+        (f"dilatazione: {100 * dg['dil']:+.1f}%", 10, "#7b1fa2", "normal"),
+        (f"stress:      {100 * dg['stress']:+.2f}%", 10, "#7b1fa2", "normal"), ("", 8, "#000", "normal"),
+        ("— TOPOLOGIA —", 10, "#0277bd", "bold"),
+        (f"torsione max: {dg['tw']:.1f} / {(3*np.pi if TORS_4PI else PHI_CRIT):.1f}", 10, "#0277bd", "normal"),
+        (f"mitosi: {net.nati}  (negate {net.negate})", 10, "#0277bd", "normal"),
+        (f"entro portata: {100 * dg['entro']:.0f}%", 10, "#0277bd", "normal"),
+    ]
+    y = 0.97
+    for txt, sz, col, wt in righe:
+        if txt: axt.text(0, y, txt, fontsize=sz, color=col, weight=wt, va="top")
+        y -= 0.042 if txt else 0.018
+    axc.text(0.5, 0.5, "VISTA RETE · premere N o usare --vista-campo per tornare alla vista attuale",
+             ha="center", va="center", fontsize=11, color="#0277bd", weight="bold")
+
+
+def _render_grafo_topologico(net, dg):
+    """Visualizza solo la topologia: il layout non usa le coordinate XYZ.
+
+    Le coordinate sul pannello sono un supporto grafico astratto; la fisica mostrata
+    sui nodi e sugli archi resta quella del pozzo `phi_g` e della sua pendenza.
+    """
+    from matplotlib.collections import LineCollection
+
+    n = net.n
+    if n == 0:
+        ax.set_title("GRAFO TOPOLOGICO · vuoto", fontsize=11, color="#0277bd")
+        return
+    phi_g, valid, dpozzo_tutti = net.pozzo_grafo()
+    grado = np.bincount(np.concatenate([net.i[valid], net.j[valid]]),
+                        minlength=n) if np.any(valid) else np.zeros(n)
+
+    # Layout astratto: seleziona i nodi più connessi/densi solo per rendere leggibile
+    # una rete enorme. La posizione sul pannello NON è net.pos e non entra nella fisica.
+    limite = 2800
+    punteggio = np.log1p(grado) * (1.0 + phi_g / max(float(phi_g.max()), 1e-12))
+    sel = np.argsort(punteggio)[-min(n, limite):]
+    sel = np.sort(sel)
+    presente = np.zeros(n, dtype=bool); presente[sel] = True
+    ang = 2.0 * np.pi * np.arange(len(sel)) / max(len(sel), 1)
+    raggio = 1.0 + 0.18 * np.log1p(grado[sel]) / max(np.log1p(grado[sel]).max(), 1.0)
+    Q = np.column_stack([raggio * np.cos(ang), raggio * np.sin(ang)])
+    indice = np.full(n, -1, dtype=int); indice[sel] = np.arange(len(sel))
+
+    archi = valid & presente[net.i] & presente[net.j]
+    ia = indice[net.i[archi]]; ja = indice[net.j[archi]]
+    seg = np.stack([Q[ia], Q[ja]], axis=1) if len(ia) else np.zeros((0, 2, 2))
+    dp = np.abs(dpozzo_tutti[np.flatnonzero(archi)]) if len(ia) else np.zeros(0)
+    dpmax = max(float(dp.max()) if len(dp) else 0.0, 1e-12)
+    phimax = max(float(phi_g[sel].max()), 1e-12)
+
+    if len(seg):
+        lc = LineCollection(seg, cmap="plasma", linewidths=0.7, alpha=0.72, zorder=1)
+        lc.set_array(np.clip(dp / dpmax, 0.0, 1.0)); ax.add_collection(lc)
+    ax.scatter(Q[:, 0], Q[:, 1], c=phi_g[sel], s=14 + 34 * np.sqrt(phi_g[sel] / phimax),
+               cmap="magma", vmin=0, vmax=phimax, edgecolors="white", linewidths=0.3,
+               zorder=3)
+    ax.set_xlim(-1.35, 1.35); ax.set_ylim(-1.35, 1.35)
+    ax.set_aspect("equal"); ax.axis("off")
+    ax.set_title("GRAFO TOPOLOGICO ASTRATTO · non XYZ\n"
+                 f"frame {stato['nframe']} · nodi mostrati {len(sel)}/{n} · "
+                 f"archi {len(net.i)} · colore = phi_g / |Δphi_g|",
+                 fontsize=10, color="#0277bd", weight="bold")
+
+
 def update(frame):
     if stato["pausa"]: return
     stato["nframe"] += 1
@@ -3340,38 +3548,24 @@ def update(frame):
     if n0 > 0 and len(net.psi) == n0:
         Pn = (net.pos @ M)[:, :2]
         Iv = np.abs(net.psi[:n0]) ** 2
+        # La superficie deve usare ESATTAMENTE il pozzo fisico discreto phi_g.
+        # Non si ricalcola una seconda sorgente continua e non si applica smoothing
+        # globale: si interpola soltanto il valore gia' usato da GRAV_BIFASE.
+        phi_nodo, _, _ = net.pozzo_grafo(Iv)
         tree = cKDTree(Pn)
-        vic = tree.query_ball_point(pts2d, r=lim_g * 0.5)
-        phi_w = np.zeros(pts2d.shape[0])
-        for gi in range(pts2d.shape[0]):
-            vv = vic[gi]
-            if vv:
-                dd = np.linalg.norm(Pn[vv] - pts2d[gi], axis=1) + LAM * 0.5
-                phi_w[gi] = np.sum(Iv[vv] / dd)
+        k_interp = min(16, n0)
+        dd, kk = tree.query(pts2d, k=k_interp)
+        if k_interp == 1:
+            dd = dd[:, None]; kk = kk[:, None]
+        pesi = 1.0 / np.maximum(dd, 1e-9)
+        phi_w = np.sum(pesi * phi_nodo[kk], axis=1) / np.maximum(pesi.sum(axis=1), 1e-9)
         phi_w = phi_w.reshape(GXm.shape)
-        # LISCIATURA: durante la valanga di mitosi con antifase, i singoli anti-nodi
-        # rendono il potenziale rugoso (picchi e crateri locali). Lo smoothing mostra
-        # la curvatura gravitazionale D'INSIEME (la luna) invece del rumore dei nodi
-        # (il dito), cosi' il pozzo resta un imbuto pulito anche a molti nodi.
-        phi_w = gaussian_filter(phi_w, sigma=1.6)
-        # sottraggo il FONDO (il bordo della scena, dove non c'e' materia concentrata):
-        # cosi' il pozzo mostra il CONTRASTO della massa, e non annega quando la
-        # valanga di mitosi riempie di puntatori tutto lo spazio uniformemente.
-        bordo = np.concatenate([phi_w[0], phi_w[-1], phi_w[:, 0], phi_w[:, -1]])
-        phi_w = np.maximum(phi_w - np.median(bordo), 0.0)
-        pm = phi_w.max()
-        # profondita' ANCORATA a scala assoluta (come vmax dell'interferenza).
-        ps = stato.get("pozzo_scala")
-        if pm > 0:
-            stato["pozzo_scala"] = pm if ps is None else max(pm, 0.97 * ps)
-        scala = stato.get("pozzo_scala") or max(pm, 1e-6)
+        pm = float(np.max(phi_w)) if phi_w.size else 0.0
+        # Scala istantanea: il rilievo deve riflettere la quantita' corrente, senza
+        # memoria del rendering precedente che potrebbe nascondere un secondo pozzo.
+        scala = max(pm, 1e-6)
         prof_scala = _scala_sistema() * 0.9
-        # POZZI MULTIPLI: il potenziale somma di piu' sorgenti gia' contiene un pozzo
-        # per ogni massa; la mappatura sqrt li rende proporzionati alla massa (fedele
-        # alla gravita': massa maggiore, pozzo piu' profondo). La griglia piu' fitta
-        # (resg alto) garantisce che masse vicine restino pozzi DISTINTI e non si
-        # fondano in un'unica conca larga.
-        Zdef = -prof_scala * np.sqrt(np.clip(phi_w / scala, 0, 1) + 1e-6) if pm > 0 else np.zeros_like(GXm)
+        Zdef = -prof_scala * np.sqrt(np.clip(phi_w / scala, 0, 1)) if pm > 0 else np.zeros_like(GXm)
     else:
         Zdef = np.zeros_like(GXm)
     prof = -Zdef; pmx = max(prof.max(), 1e-6)
@@ -3385,10 +3579,23 @@ def update(frame):
     ax3d.set_xlim(-R, R); ax3d.set_ylim(-R, R)
     ax3d.set_zlim(-_scala_sistema() * 0.95, _scala_sistema() * 0.35)
     ax3d.axis("off")
-    ax3d.set_title("POZZO GRAVITAZIONALE\n(embedding della metrica · profondità = materia)",
+    ax3d.set_title("POZZO FISICO DEL GRAFO\n(phi_g usato da GRAV_BIFASE · interpolazione grafica)",
                    fontsize=9, color="#7b1fa2")
 
     P = net.pos @ M                            # i puntatori ruotano col campo
+    # RETE DINAMICA: stesso pannello della vista dei puntatori, cosi' GUI e video
+    # mostrano nella stessa finestra la composizione topologica e la risposta del campo.
+    # Gli archi sono colorati per torsione; i nodi per densita' di interferenza.
+    if len(net.i):
+        na = min(len(net.i), 24000)  # limite solo di rendering: non modifica la fisica
+        ee = np.arange(na)
+        seg = np.stack([P[net.i[ee], :2], P[net.j[ee], :2]], axis=1)
+        from matplotlib.collections import LineCollection
+        tw_render = np.abs(net.tw[ee]) if len(net.tw) >= na else np.zeros(na)
+        tw_norm = np.clip(tw_render / max(PHI_CRIT, 1e-9), 0.0, 2.0)
+        lc = LineCollection(seg, cmap="viridis", linewidths=0.25, alpha=0.32)
+        lc.set_array(tw_norm)
+        ax2.add_collection(lc)
     # TRASPARENZA AL VUOTO: l'opacita' di ogni puntatore e' proporzionale alla sua intensita'
     # d'interferenza. Le masse (alta intensita', la materia coerente) restano visibili; il vuoto
     # ribollente (bassa intensita') diventa quasi trasparente. Cosi' si vede la materia, non la
@@ -3396,11 +3603,17 @@ def update(frame):
     Ivis = net.intensita()[:net.n]
     Iref = max(float(np.median(Ivis)) * 3.0, 1e-9)     # scala relativa (materia >> vuoto)
     alpha_nodo = np.clip(Ivis / Iref, 0.03, 1.0)       # vuoto ~0.03 (quasi invisibile), masse ~1
-    ax2.scatter(P[:net.n, 0], P[:net.n, 1], c=np.cos(net.phi[:net.n]), s=5, cmap="twilight",
+    ax2.scatter(P[:net.n, 0], P[:net.n, 1], c=Ivis, s=7, cmap="magma",
                 vmin=-1, vmax=1, alpha=alpha_nodo, linewidths=0)
     ax2.set_xlim(-R*1.12, R*1.12); ax2.set_ylim(-R*1.12, R*1.12)
     ax2.set_aspect("equal"); ax2.axis("off")
-    ax2.set_title("i puntatori (fase) — il dito", fontsize=9, color="#666")
+    ax2.set_title("rete dinamica · archi=twist · nodi=|Psi|²", fontsize=9, color="#444")
+
+    # In vista rete il pannello principale diventa un layout puramente topologico;
+    # il pannello 3D continua invece a mostrare il pozzo fisico calcolato dal campo.
+    if VISTA_RETE:
+        ax.clear()
+        _render_grafo_topologico(net, dg)
 
     # ---------- DIAGNOSTICA ----------
     massa = massa3d      # integrale di |Psi|^2 su TUTTO il volume
@@ -3503,6 +3716,8 @@ def _tasto(ev):
         stato["denoise"] = not stato.get("denoise", False)
         stato["_q_mem"] = None
         print("[DENOISE]", "ON" if stato["denoise"] else "OFF")
+    elif k in ("n", "N"):
+        _toggle_vista_rete()
 
 
 def _btn(x, y, lab, cb, w=0.105, h=0.045):
@@ -3516,6 +3731,12 @@ def _zoom(v):
 
 
 def _pausa(_=None): stato["pausa"] = not stato["pausa"]
+
+
+def _toggle_vista_rete(_=None):
+    global VISTA_RETE
+    VISTA_RETE = not VISTA_RETE
+    print("[VISTA]", "RETE" if VISTA_RETE else "CAMPO")
 
 
 def _limite(_=None):
@@ -3620,6 +3841,7 @@ if "--test" not in _sys.argv:       # bottoni in interattivo (con o senza flag);
     BOTTONI.append(_btn(0.468, 0.115, "raggio +", _ragg(+0.5), w=0.048))
     BOTTONI.append(_btn(0.520, 0.115, "masse -", _nmasse(-1), w=0.048))
     BOTTONI.append(_btn(0.571, 0.115, "masse +", _nmasse(+1), w=0.048))
+    BOTTONI.append(_btn(0.674, 0.115, "vista rete", _toggle_vista_rete, w=0.10))
     x = 0.005
     for lab, cb in (("< ruota", _ruota(-0.12, 0)), ("ruota >", _ruota(+0.12, 0)),
                     ("alza", _ruota(0, +0.10)), ("abbassa", _ruota(0, -0.10)),
@@ -3641,7 +3863,7 @@ def _applica_flag(a):
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -3682,6 +3904,7 @@ def _applica_flag(a):
     SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
     CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale
     CS_DINAMICO = bool(getattr(a, "cs_dinamico", False)) # velocita' metrica locale: default off
+    VISTA_RETE = bool(getattr(a, "vista_rete", False)) # rendering alternativo rete-only: default campo
     VERSO_CHI = bool(getattr(a, "verso_chi", False)) # aggancio al verso chirale stabile: default off
     LS_AZIM = bool(getattr(a, "ls_azim", False))   # L.S vettoriale azimutale: default off
     POLO_MATURO = bool(getattr(a, "polo_maturo", False)) # polo maturo (strategia 3): default off
@@ -3934,7 +4157,10 @@ def _cli():
                         "per il frame-dragging. Non seleziona il segno a priori; default off.")
     p.add_argument("--cs-dinamico", action="store_true", dest="cs_dinamico",
                    help="VELOCITA' METRICA LOCALE: cs_eff(rho) con transizione tanh, "
-                        "pavimento 0.1*CS_M, media armonica sugli archi e CFL dinamico. Default off.")
+                        "pavimento locale emergente, media armonica sugli archi e CFL dinamico. Default off.")
+    p.add_argument("--vista-rete", action="store_true", dest="vista_rete",
+                   help="RENDERING RETE-ONLY: mantiene dinamica, metriche e pulsanti della vista campo "
+                        "ma mostra nei tre pannelli solo nodi e archi. Default: vista campo attuale.")
     p.add_argument("--bussola", type=int, default=1,
                    help="1 = indicatore d'assi nel margine, 0 = nessun riferimento")
     p.add_argument("--giri", type=float, default=1.0,
@@ -3998,6 +4224,35 @@ def batch_condensazione(a):
     seed = a.seed if a.seed is not None else SEME_INIZIALE
     passi = int(a.passi); ogni = max(1, int(a.ogni)); sep = float(a.sep)
     _nm = max(2, int(getattr(a, "nmasse", 2)))
+    # Una riga commento auto-descrittiva precede ogni report: conserva la
+    # configurazione esatta del run senza confonderla con le colonne numeriche.
+    import json as _json
+    _parametri = dict(vars(a))
+    _parametri.update({
+        "seed_effettivo": seed,
+        "nmasse_effettive": _nm,
+        "passi_effettivi": passi,
+        "ogni_effettivo": ogni,
+        "sep_effettivo": sep,
+        "leggi_attive": {
+            "REGIME": REGIME, "SPINORE": SPINORE, "SPINORE_VIVO": SPINORE_VIVO,
+            "SPIN_FEEDBACK": SPIN_FEEDBACK, "SPIN_LARMOR": SPIN_LARMOR,
+            "CHI_CORE": CHI_CORE, "CS_DINAMICO": CS_DINAMICO,
+            "SYNC_UPDATE": SYNC_UPDATE, "VERLET": VERLET,
+            "VIRIALE": VIRIALE, "ZETA_VIR": ZETA_VIR, "PAV_COM": PAV_COM,
+            "PLAST_DIN": PLAST_DIN, "TAU_USA_D0": TAU_USA_D0,
+            "OLON_PART": OLON_PART, "POLO_MATURO": POLO_MATURO,
+            "LS_AZIM": LS_AZIM, "VERSO_CHI": VERSO_CHI,
+            "CHI_BASC": CHI_BASC, "ZETA_LOC": ZETA_LOC,
+        },
+        "costanti_effettive": {
+            "LAM": LAM, "GAMMA": GAMMA, "SCALA_B": SCALA_B,
+            "CS_M": CS_M, "K_C": K_C, "PHI_CRIT": PHI_CRIT,
+        },
+    })
+    _metadata_csv = "# RUN_PARAMS " + _json.dumps(_parametri, ensure_ascii=False,
+                                                    sort_keys=True, default=str,
+                                                    separators=(",", ":"))
     print(f"[batch] condensazione: seed={seed} passi={passi} ogni={ogni} sep={sep} nmasse={_nm}")
     print(f"[batch] leggi attive: GRAV_BIFASE={GRAV_BIFASE} SPIN_ORBITA(via SPINORE)={SPINORE} "
           f"COPPIA_MIT={COPPIA_MIT} lambda={LAM:.3f}")
@@ -4669,7 +4924,8 @@ def batch_condensazione(a):
     centri_sem = [np.array([cx, cy]) for (cx, cy) in centri]
 
     # intestazione CSV
-    righe = ["passo,n_tot,ord_centrale,dens_centrale,n_centrali,frac_nati_centrali,"
+    righe = [_metadata_csv,
+             "passo,n_tot,ord_centrale,dens_centrale,n_centrali,frac_nati_centrali,"
              "dist_masse,dens_picco_centrale,ord_masse,"
              "antiguscio_raggio,antiguscio_coerenza_min,antiguscio_nodi,antiguscio_tau,"
              "picchi_totali,picchi_nuovi,raggio_picco_nuovo"]
@@ -4712,13 +4968,19 @@ def batch_condensazione(a):
             # poi il loop appende da _db_step0 in avanti. Niente duplicati.
             try:
                 _righe = open(diag_path).read().splitlines()
-                _hdr = _righe[0] if _righe else ""
-                _tenute = [_hdr] + [r for r in _righe[1:]
-                                    if r and r.split(",")[0].isdigit() and int(r.split(",")[0]) < _db_step0]
+                _meta = _righe[0] if _righe and _righe[0].startswith("# RUN_PARAMS ") else _metadata_csv
+                _hdr_idx = 1 if _righe and _righe[0].startswith("# RUN_PARAMS ") else 0
+                _hdr = _righe[_hdr_idx] if len(_righe) > _hdr_idx else ""
+                _data = _righe[_hdr_idx + 1:]
+                _tenute = [_meta, _hdr] + [r for r in _data
+                                            if r and r.split(",")[0].isdigit() and int(r.split(",")[0]) < _db_step0]
                 open(diag_path, "w").write("\n".join(_tenute) + "\n")
             except Exception:
                 pass
         diag_f = open(diag_path, "a" if _resume else "w")
+        if not _resume:
+            diag_f.write(_metadata_csv + "\n")
+            diag_f.flush()
         if _resume:
             _diag_header = "GIA_SCRITTO"   # marca: non riscrivere l'header in append
         print(f"[batch] LOG DIAGNOSTICO COMPLETO {'(APPEND, resume)' if _resume else ''} -> {diag_path}")
