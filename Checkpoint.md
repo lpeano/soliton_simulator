@@ -29,6 +29,12 @@ Relazione completa: `REPORT_SESSIONE_2026-09-04.md`.
 
 ### TODO — prossima sessione
 
+- **[TODO PRIORITARIO 1]** Aggiungere e misurare `spin_core` e `spin_core_disp`
+      usando solo la maschera del nucleo, senza selezione `perc_chi=+1`. Il test
+      deve usare la catena fisica completa: `--sync --cs-dinamico --verlet
+      --spinore-vivo --spin-feedback --chi-core --viriale --zeta-vir
+      --pav-com --chi-basc --polo-maturo --olon-part --ls-azim --verso-chi
+      --tau-d0 --zeta-loc --plast-din --calore-vett`.
 - **[TODO]** Rilanciare tutte le campagne aggiornate con `--cs-dinamico`, usando
       DB/output nuovi e 2–3 semi.
 - **[TODO]** Attendere 2000 passi e confrontare `cs_eff_*`, `dmin_nodi`, torsione,
