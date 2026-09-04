@@ -11,7 +11,9 @@ La geometria di contatto è quindi composta da due livelli distinti:
 
 1. **topologia di contatto**: quali coppie di nodi sono collegate (`i`, `j`);
 2. **geometria metrica dell'arco**: distanza reale `d`, distanza di riposo `d0`
-   e velocità metrica `vd`.
+  e velocità metrica `vd`;
+3. **mezzo metrico locale**: velocità d'onda `cs_eff` sugli archi, attiva solo
+  con `--cs-dinamico`.
 
 La topologia nasce dalle coordinate, mentre la metrica degli archi evolve nel
 tempo. Le coordinate sono il supporto computazionale e visuale della geometria
@@ -50,6 +52,7 @@ rappresentati da `net.i` e `net.j`. Per ogni arco esistono array paralleli:
 | `d[e]` | distanza metrica corrente |
 | `d0[e]` | distanza di riposo/plastica |
 | `vd[e]` | velocità di variazione di `d` |
+| `cs_eff[e]` | velocità locale dell'onda metrica, diagnostica |
 | `peq[e]` | fondo/equilibrio locale |
 | `tw[e]` | torsione accumulata |
 | `twp[e]` | torsione di riferimento del passo precedente |
@@ -163,6 +166,11 @@ ricostruisca $E$ in base alla nuova distanza o alla nuova portata. Pertanto la
 schermatura è dinamica per i pesi e per i futuri allacciamenti, ma la topologia
 è storica e discreta.
 
+La portata `lambda_ij` e la velocità dell'onda metrica `cs_eff_ij` sono
+grandezze distinte: la prima controlla il kernel d'interferenza e la ricerca
+di contatti futuri; la seconda controlla la rigidità e la stabilità della
+propagazione metrica.
+
 ## 5. Inizializzazione della metrica dell'arco
 
 Quando un contatto nasce, il codice imposta:
@@ -191,6 +199,25 @@ con un'equazione discreta di tipo onda sul grafo:
 
 $$\ddot q_{ij}=c_s^2\Delta_Gq_{ij}+a_{ij}-\beta_{ij}\dot q_{ij}.$$
 
+Nel ramo canonico (`CS_DINAMICO=False`) $c_s=CS_M=2$. Con `--cs-dinamico`,
+la velocità dipende localmente dalla densità del campo. Ponendo
+
+$$u_i=\frac{|\Psi_i|^2}{\max(\operatorname{mediana}(|\Psi|^2),10^{-9})},$$
+
+il codice usa il profilo liscio
+
+$$c_{s,i}=0.1CS_M+0.9CS_M\frac{1+\tanh(1-u_i)}2,$$
+
+con $0.1CS_M\le c_{s,i}\le CS_M$. L'arco usa la media armonica, non quella
+aritmetica:
+
+$$c_{s,ij}=\frac{2c_{s,i}c_{s,j}}{c_{s,i}+c_{s,j}}.$$
+
+La rigidità locale diventa quindi $c_{s,ij}^2\Delta_Gq_{ij}$ e lo smorzamento
+locale usa $\beta_{ij}=2\zeta_Mc_{s,ij}/d_{ij}$. Il CFL usa il massimo
+attuale $\max_{ij}c_{s,ij}$ per i sottopassi. Il flag è default-off: a
+`CS_DINAMICO=False` il percorso storico resta invariato.
+
 Qui:
 
 - $\Delta_G$ è il Laplaciano discreto sugli archi adiacenti;
@@ -205,7 +232,8 @@ $$\rho_{ij}=\frac{\rho_i+\rho_j}{2},
 
 salvo il ramo hamiltoniano opzionale. Con lo smorzamento locale di scala:
 
-$$\beta_{ij}=\frac{2\zeta_Mc_s}{d_{ij}}.$$
+$$\beta_{ij}=\frac{2\zeta_Mc_{s,ij}}{d_{ij}}$$
+nel ramo dinamico, mentre nel ramo storico $c_{s,ij}=CS_M$.
 
 Il codice integra questa dinamica con sottopassi quando sorgente, smorzamento o
 velocità lo richiedono. La distanza reale è protetta inferiormente da `0.05`:
@@ -353,6 +381,8 @@ Per i test usare soprattutto grandezze relazionali e confrontare più semi:
 - `d0_min`, `d0_mean`, `d0_max`: distribuzione della metrica di riposo;
 - `dmin_nodi`: minima distanza euclidea fra posizioni nel `diaglog`;
 - `lambda_eff_min/med/max`: portata schermata;
+- `cs_eff_min/med/max`: velocità locale dell'onda metrica, presenti solo con
+  `--cs-dinamico`;
 - `ncrit_adattivo`, `rho_critica`: ancoraggio della schermatura;
 - `stress` e `dil`: deformazione e dilatazione metriche;
 - `tw_q` e `tw_disp`: torsione in unità di olonomia;

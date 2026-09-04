@@ -143,6 +143,7 @@ per i batch.
 | `--scala B` | coarse-graining: un solitone rappresenta `B` solitoni fini | cambio di scala |
 | `--chi-core` | chiralità emergente del core nei canali collettivi | A/B fisico, default off |
 | `--spin-positivi` | registra il sottogruppo `perc_chi=+1` | sola diagnostica |
+| `--cs-dinamico` | velocità metrica locale `cs_eff(rho)` con profilo `tanh` e media armonica sugli archi | A/B metrico, default off |
 | `--sync-db FILE` | salva o ricarica lo stato versionato | esecuzioni spezzate |
 
 Tutti gli script di lancio includono esplicitamente `--sync`, sia nel ramo
@@ -159,6 +160,11 @@ Con `--chi-core` il segno usato nei canali collettivi viene calcolato nel core
 locale da $|\Psi|^2$, dalla soglia $\rho_c$ e dalla portata schermata. `perc_chi`
 resta la chiralità microscopica di nascita ed eredità. La legge è sperimentale
 e va validata con confronto OFF/ON su più semi.
+
+Con `--cs-dinamico` la velocità metrica locale è limitata lisciamente tra
+$0.1CS_M$ e $CS_M$ dalla densità $|\Psi|^2$. La velocità sugli archi è la
+media armonica dei due nodi, per rispettare il collo di bottiglia causale; il
+ramo OFF conserva la fisica storica.
 
 ## 5. Varianti Velocity-Verlet
 

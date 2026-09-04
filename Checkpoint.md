@@ -23,6 +23,12 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 
 ### Stato fisico verificato nel codice
 
+- **[IMPLEMENTATO, SPERIMENTALE]** `--cs-dinamico` calcola una velocità metrica
+      locale da $|\Psi|^2$ con profilo `tanh`, pavimento $0.1CS_M$ e media
+      armonica sugli archi. Rigidità metrica, CFL e smorzamento usano `cs_eff`
+      solo nel ramo ON; default invariato. Verificato con smoke A/B, da testare
+      su run lunghi e più semi.
+
 - **[IMPLEMENTATO, SPERIMENTALE]** `--chi-core` calcola la chiralità emergente
       del core locale da $\rho_0$, $\rho_c$ e $\lambda_{eff}$, usando tutti i
       nodi nella maschera e senza selezionare il segno. La quantità core-aware

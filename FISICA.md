@@ -82,7 +82,6 @@ $$s_i^{loc}=\sqrt{\frac{(W\,\mathbf s^2)_i}{(W\,\mathbf 1)_i}},
 \qquad K_i^{shear}=1+\frac{s_i}{s_i^{loc}}.$$
 
 Queste normalizzazioni sono topologicamente locali; non usano `pozzo.mean()` o
-`disp_shear.mean()` sull'intero array.
 
 ## 4. Dinamica delle fasi
 
@@ -213,6 +212,27 @@ $$a^H_{ij}=-K_C\frac{w_{ij}}{LAM}
 Per lo smorzamento locale di scala:
 
 $$\beta_{ij}=\frac{2\zeta_M c_s}{d_{ij}}.$$
+
+### Velocità metrica locale (`--cs-dinamico`)
+
+Con `--cs-dinamico` la velocità delle onde metriche non è più uniforme. Il
+ramo storico resta invariato quando il flag è spento. Nel ramo dinamico, con
+$I_i=|\Psi_i|^2$ e $u_i=I_i/\max(\operatorname{mediana}(I),10^{-9})$, il codice usa
+
+$$c_{s,i}=0.1CS_M+0.9CS_M\frac{1+\tanh(1-u_i)}{2}.$$
+
+La velocità è quindi compresa analiticamente tra $0.1CS_M$ e $CS_M$ e rallenta
+nei nodi densi. Sugli archi si usa il collo di bottiglia causale, cioè la media
+armonica:
+
+$$c_{s,ij}=\frac{2c_{s,i}c_{s,j}}{c_{s,i}+c_{s,j}}.$$
+
+La rigidità dell'equazione metrica usa $c_{s,ij}^2\,\mathrm{lap}$; il numero
+di sotto-passi usa il massimo corrente degli archi $\max c_{s,ij}$ per la
+condizione CFL. Anche lo smorzamento locale usa la velocità d'arco nel ramo
+dinamico. Le colonne diagnostiche sono `cs_eff_min`, `cs_eff_med` e
+`cs_eff_max`. Questa legge è **sperimentale** e va confrontata A/B su più semi;
+`CS_DINAMICO=False` resta il default.
 
 La lunghezza di riposo evolve plasticamente:
 

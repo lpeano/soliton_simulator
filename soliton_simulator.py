@@ -259,6 +259,7 @@ SCHERMATURA = True      # LEGGE INTRINSECA: portata ancorata alla densita' criti
                         # Si attiva automaticamente sopra rho_c, senza manopole di taratura.
 P_LAM    = 1.0          # Indicatore storico mantenuto per compatibilita'; non e' piu' un esponente.
 CS_M, ALPHA_M, BETA_M = 2.0, 0.05, 0.8
+CS_DINAMICO = False       # velocita' locale delle onde metriche, A/B default off
 TAU_BG   = 5.0          # il vuoto insegue la densita' LOCALE
 TAU_DIFF = 1.0          # e diffonde sulla topologia (Legge I: nessuna scorciatoia globale)
 TAU_P    = 2.0
@@ -1954,6 +1955,22 @@ class Rete:
         I = np.abs(self.psi) ** 2
         rho = 0.5 * (I[i] + I[j])
 
+        # Velocita' locale delle onde metriche: nel ramo storico cs_arco=CS_M;
+        # il ramo dinamico usa solo la densita' locale del campo e una transizione
+        # liscia. Il bound analitico e' [0.1*CS_M, CS_M].
+        if CS_DINAMICO:
+            rho_med = max(float(np.median(I[:self.n])), 1e-9)
+            u_nodo = I[:self.n] / rho_med
+            cs_nodo = (0.1 * CS_M + 0.9 * CS_M * 0.5 *
+                       (1.0 + np.tanh(1.0 - u_nodo)))
+            # Collo di bottiglia causale: media armonica, non media aritmetica.
+            cs_arco = (2.0 * cs_nodo[i] * cs_nodo[j] /
+                       np.maximum(cs_nodo[i] + cs_nodo[j], 1e-12))
+            cs_max_corrente = max(float(np.max(cs_arco)), 0.1 * CS_M)
+        else:
+            cs_arco = np.full(len(i), CS_M, dtype=float)
+            cs_max_corrente = CS_M
+
         nuovi = np.isnan(self.peq)
         if nuevos := nuovi.any(): self.peq[nuovi] = rho[nuovi]
 
@@ -1993,22 +2010,22 @@ class Rete:
             med_rho = max(float(np.median(rho)), 1e-9)
             eccesso = np.maximum(rho / med_rho - 1.0, 0.0)   
             zeta_loc = ZETA_M / (1.0 + eccesso)              
-            beta = 2.0 * zeta_loc * CS_M / np.maximum(self.d, 1e-6)
+            beta = 2.0 * zeta_loc * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(self.d, 1e-6)
         else:
-            beta = 2.0 * ZETA_M * CS_M / np.maximum(self.d, 1e-6)
+            beta = 2.0 * ZETA_M * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(self.d, 1e-6)
             
         if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta):
             beta = beta * (1.0 - self._sin2_vir)
             
         if VERLET:
-            n1 = np.ceil(np.abs(src).max() * DT / (0.02 * CS_M))
+            n1 = np.ceil(np.abs(src).max() * DT / (0.02 * cs_max_corrente))
             n2 = np.ceil(np.max(beta) * DT / 0.2)
-            n3 = np.ceil(np.abs(self.vd).max() * DT / (0.05 * max(np.median(self.d), 0.1)))
+            n3 = np.ceil(np.abs(self.vd).max() * DT / (0.05 * max(np.median(self.d), 0.1) * cs_max_corrente / CS_M))
             nsub = int(max(4, n1, n2, n3))
         else:
-            n1 = np.ceil(np.abs(src).max() * DT / (0.05 * CS_M))
+            n1 = np.ceil(np.abs(src).max() * DT / (0.05 * cs_max_corrente))
             n2 = np.ceil(np.max(beta) * DT / 0.5)
-            n3 = np.ceil(np.abs(self.vd).max() * DT / (0.1 * max(np.median(self.d), 0.1)))
+            n3 = np.ceil(np.abs(self.vd).max() * DT / (0.1 * max(np.median(self.d), 0.1) * cs_max_corrente / CS_M))
             nsub = int(max(1, n1, n2, n3))
         dts = dt_e / nsub
 
@@ -2020,7 +2037,7 @@ class Rete:
                 sm = np.bincount(i, q, minlength=self.n) + np.bincount(j, q, minlength=self.n)
                 med = sm / self._deg
                 lap = 0.5 * (med[i] + med[j]) - q
-                acc_t = CS_M ** 2 * lap + src - beta * self.vd
+                acc_t = cs_arco ** 2 * lap + src - beta * self.vd
                 vd_half = self.vd + 0.5 * dts * acc_t
                 d_new = np.maximum(self.d + dts * vd_half, 0.05)
 
@@ -2031,12 +2048,12 @@ class Rete:
                 if ZETA_M == 0.0:
                     beta_new = BETA_M
                 elif ZETA_LOC:
-                    beta_new = 2.0 * zeta_loc * CS_M / np.maximum(d_new, 1e-6)
+                    beta_new = 2.0 * zeta_loc * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(d_new, 1e-6)
                 else:
-                    beta_new = 2.0 * ZETA_M * CS_M / np.maximum(d_new, 1e-6)
+                    beta_new = 2.0 * ZETA_M * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(d_new, 1e-6)
                 if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta_new):
                     beta_new = beta_new * (1.0 - self._sin2_vir)
-                acc_next = CS_M ** 2 * lap_new + src - beta_new * vd_half
+                acc_next = cs_arco ** 2 * lap_new + src - beta_new * vd_half
                 self.vd = vd_half + 0.5 * dts * acc_next
                 self.d = d_new
                 beta = beta_new
@@ -2047,7 +2064,7 @@ class Rete:
                 sm = np.bincount(i, q, minlength=self.n) + np.bincount(j, q, minlength=self.n)
                 med = sm / self._deg
                 lap = 0.5 * (med[i] + med[j]) - q
-                self.vd = self.vd + dts * (CS_M ** 2 * lap + src - beta * self.vd)
+                self.vd = self.vd + dts * (cs_arco ** 2 * lap + src - beta * self.vd)
                 self.d = np.maximum(self.d + dts * self.vd, 0.05)
             
         if TAU_LOCALI:
@@ -3617,7 +3634,7 @@ def _applica_flag(a):
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -3657,6 +3674,7 @@ def _applica_flag(a):
     SPIN_FEEDBACK = bool(getattr(a, "spin_feedback", False)) # feedback locale overlap spinoriale: default off
     SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
     CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale
+    CS_DINAMICO = bool(getattr(a, "cs_dinamico", False)) # velocita' metrica locale: default off
     VERSO_CHI = bool(getattr(a, "verso_chi", False)) # aggancio al verso chirale stabile: default off
     LS_AZIM = bool(getattr(a, "ls_azim", False))   # L.S vettoriale azimutale: default off
     POLO_MATURO = bool(getattr(a, "polo_maturo", False)) # polo maturo (strategia 3): default off
@@ -3681,6 +3699,8 @@ def _applica_flag(a):
         print("[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)")
     if CHI_CORE:
         print("[chi-core] frame-dragging guidato dalla chiralità emergente del core locale")
+    if CS_DINAMICO:
+        print("[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico")
     # COARSE-GRAINING: se richiesta una scala > 1, applico le regole di scala derivate.
     SCALA_B = float(a.scala)
     fattore_lam, fattore_gamma, SCALA_AMP = _fattori_coarse(SCALA_B)
@@ -3905,6 +3925,9 @@ def _cli():
     p.add_argument("--chi-core", action="store_true", dest="chi_core",
                    help="CHIRALITA' EMERGENTE DEL CORE: usa rho0/rhoc e il raggio locale del core "
                         "per il frame-dragging. Non seleziona il segno a priori; default off.")
+    p.add_argument("--cs-dinamico", action="store_true", dest="cs_dinamico",
+                   help="VELOCITA' METRICA LOCALE: cs_eff(rho) con transizione tanh, "
+                        "pavimento 0.1*CS_M, media armonica sugli archi e CFL dinamico. Default off.")
     p.add_argument("--bussola", type=int, default=1,
                    help="1 = indicatore d'assi nel margine, 0 = nessun riferimento")
     p.add_argument("--giri", type=float, default=1.0,
@@ -4024,6 +4047,15 @@ def batch_condensazione(a):
         # torsione, velocita' di fase, densita', tempo proprio, ampiezza
         tw = net.tw if len(net.tw) else np.zeros(1)
         cols = {}
+        if CS_DINAMICO and len(net.i):
+            rho_med_cs = max(float(np.median(I2[:n])), 1e-9)
+            cs_nodo_diag = (0.1 * CS_M + 0.9 * CS_M * 0.5 *
+                            (1.0 + np.tanh(1.0 - I2[:n] / rho_med_cs)))
+            cs_arco_diag = (2.0 * cs_nodo_diag[net.i] * cs_nodo_diag[net.j] /
+                            np.maximum(cs_nodo_diag[net.i] + cs_nodo_diag[net.j], 1e-12))
+            cols['cs_eff_min'] = float(np.min(cs_arco_diag))
+            cols['cs_eff_med'] = float(np.median(cs_arco_diag))
+            cols['cs_eff_max'] = float(np.max(cs_arco_diag))
         # Misura locale delle masse: usa le coorti di nascita della scena come
         # dominio di riferimento stabile; il picco viene poi scelto da |Psi|^2
         # e il vicinato e' ricavato solo dagli archi topologici.
