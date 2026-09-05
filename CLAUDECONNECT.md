@@ -105,10 +105,10 @@ Vincoli: flag default off; laplaciano = quello delle onde; nessun parametro nuov
 ### 13. L: stime tempi Fase 0
 **A — ALLARME dai dati reali.** `tauloc 1` (30 passi, no diaglog) = **80,3 s** → ~2,7 s/passo: è il
 costo della FISICA (caso attaccato sep 4 + catena completa + cs-dinamico), non del diaglog. `tauloc 5`
-run 2: PID vivo, **~2,6 h CPU, ZERO output** → sospetto **runaway di mitosi** (dilatazione alta destabilizza
-→ nodi verso MAX_NODI → passo O(N²) → impianto). Stima: `tauloc 5/10` a 400 passi = ORE/giorni ciascuno →
-**non praticabile** così. La stima "1-2 min/run" valeva solo per `tauloc 1`. Run impiantati fermati.
-(Errore mio: usato `Start-Sleep` — da evitare.)
+run 2: PID vivo, **~2,6 h CPU, ZERO output** → all'epoca etichettato **"runaway di mitosi"**. **[RETTIFICATO
+in §17: NON verificato, quasi certamente ERRATO — è un impianto del PRIMO passo, non crescita nodi.]**
+La stima "1-2 min/run" valeva solo per `tauloc 1`. Run impiantati fermati. (Errore mio: usato
+`Start-Sleep` — da evitare.)
 
 ### 14. L: trascrivi la chat in CLAUDECONNECT sulla root, mantienilo aggiornato, committa+pusha, riprendi
 **A.** Creato questo file. Commit+push di tutto (`0fd36b7`). → ripresa Fase 0 **ri-scalata** a taglia
@@ -122,13 +122,66 @@ backup datato + py_compile + smoke + A/B una variabile + mostra diff; `--cs-dina
 --spinore-vivo`; batch≠video; MAI Start-Sleep/polling; runaway mitosi; manutenzione `Checkpoint.md` +
 `CLAUDECONNECT.md` + **`CLAUDE.md`** + `/memories/repo/`; commit a ogni step, push solo su richiesta).
 
+### 16. Fase 0 ri-scalata (bounded) + throttling diagnostiche
+**Contesto (guardiano di Luca):** rallentamento attribuito (all'epoca) al "runaway" da `--tauloc` alto.
+**A — risultati bounded (sep 8, seed 1):**
+- **(a) tauloc [NON CONCLUSA — vedi §17]**: `tauloc 1` 60 passi = 139s, `tau_max=1.414=√2` (fattore
+  tempo-proprio GIÀ SATURO, DIMOSTRATO); `tauloc 5` si impianta al primo passo. La causa NON è un runaway
+  di nodi (vedi §17): resta solo la saturazione del fattore a tauloc 1.
+- **(b) ELAST_C — INCONCLUSIVO [IN VERIFICA]**: a 60 passi `elast-c 100` vs `0` danno deformazione
+  core quasi identica (`|d-d0|/d0` 0.8331 vs 0.8305). MA ELAST_C è DORMIENTE quando la densità è
+  uniforme (`1+100·max(ρ/ρ_med−1,0)≈1`) → non è prova di ridondanza. Serve core maturo/denso.
+- **Throttling [VERIFICATO nel codice]**: `_diag_completa` (Delaunay vortici + centro/guscio + J/inerzia)
+  gira a OGNI passo (riga ~5061), NON throttled. Costo ~0.8 s/passo (~34% runtime su ~800 nodi), O(N·logN)
+  non O(N²). Era stato aggiunto `--diag-ogni N`, poi **REVERTATO** (§17, richiesta di Luca: forma originale).
+
+### 17. L: aspetta — spiega il runaway, c'era o no? se non c'era torna alla forma originale
+**A — RETTIFICA onesta (guardiano).** Il "runaway di mitosi" NON era verificato ed è quasi certamente ERRATO.
+Prove misurate: (1) `tlq5.log` (tauloc 5, `python -u` unbuffered) stampa SOLO la legenda dei flag, poi NULLA:
+nessuna riga di step → si impianta DENTRO il primo `net.step()`, quando N è ancora quello iniziale (nessuna
+mitosi possibile). (2) `nd_tl1.log` (tauloc 1, senza diag): `accr≈1116→1117` su 30 passi → ZERO crescita
+nodi. Quindi NON è accumulo progressivo di nodi (O(N²)). Causa reale, probabile ma non ancora isolata:
+instabilità numerica del PRIMO passo ad alta dilatazione (sospetto: sotto-ciclo metrico CFL `nsub` che
+esplode). **Codice riportato alla forma originale**: `git checkout` di `soliton_simulator.py` → rimosso
+`--diag-ogni` (era l'unica modifica non committata). py_compile OK. Lezione: non etichettare un meccanismo
+senza misurarlo ("misura prima di concludere").
+
+### 18. L: throttling SOLO per le metriche pesanti; poi — il campionamento è FISICA (aliasing/Nyquist)
+**Contesto (guardiano di Luca):** (a) throttlare solo le metriche pesanti, le altre a ogni passo; (b) poi
+un argomento fisico profondo: certe metriche oscillano al passo (Lz, Berry, fasi) → throttlarle è **aliasing**
+(sotto Nyquist si ricostruisce fisica FALSA, come sotto-risolvere Planck). Per le veloci serve campionamento
+fine; se fossero anche pesanti servirebbe messaggistica **async** (cattura leggera ogni passo + calcolo fuori).
+
+**A — misura prima (guardiano).** Avevo ri-aggiunto `--diag-ogni` con `_diag_leggera` (solo min/max/mean) +
+`_diag_completa` throttlata. **ERRORE:** le metriche VELOCI (`m0_Lz`, `berry`, `spin_neel`, `guscio_circ`,
+`m0_spin_core`) stavano nel blocco throttlato → le avrei **aliasate**. **Edit annullato** (`git checkout`),
+codice al baseline corretto (tutto ogni passo, niente aliasing), py_compile OK.
+
+**Classificazione MISURATA** (da `tl1_diag.csv`, 60 passi ogni-passo, lag-1 autocorr):
+- VELOCE (aliasing se throttlata): `m0_Lz` (ac −0.23), `berry_spin_media` (−0.04), `spin_neel_modulo`
+  (−0.09), `guscio_circ` (0.30), `centro_cosphi`, `m0_spin_core`.
+- LENTA (throttle-safe): `m0_Mdyn`/`m0_Jrot` (ac 1.0), `m0_Rinerzia`, dispersioni, `d_mean`,
+  `m0_carica`/vortici (Delaunay, costante), `dens_g*`.
+
+**Conclusione architetturale [MISURATA]:** le metriche veloci sono tutte ECONOMICHE (Lz=PCA 2×2, spin=media
+mascherata, Berry/Neel=piccole somme); le pesanti (Delaunay, profilo radiale) sono LENTE. **Nessuna metrica
+è fast∩heavy → l'ASYNC NON serve.** Basta: veloci-economiche a ogni passo, throttle solo lente-pesanti.
+(In Python l'async su numpy CPU-bound pagherebbe GIL + copia snapshot: costo reale, beneficio nullo qui.)
+Eccezione non ancora classificata: `m*_picco_*` (spin picco per-massa) — possibile fast∩heavy, da misurare.
+
 ---
 
 ## Stato corrente (per la ripresa)
-- **Codice committato**: cs-locale integrale, spin_core, diagnostica inerzia guscio (`48310e0`, pushato).
+- **Codice committato**: cs-locale integrale, spin_core, diagnostica inerzia guscio (`48310e0`/`a5bf7de`, pushati).
+- **Codice al baseline corretto**: nessun throttle (l'edit `--diag-ogni`/`_diag_leggera` aliasava le veloci ed
+  è stato annullato). Tutto a ogni passo = niente aliasing. py_compile OK.
 - **NON ancora scritto**: diffusione `--guscio-morbido` (Fase 1) — in attesa dei test-gratis.
-- **Fase 0 da ri-scalare**: `tauloc 5/10` a 400 passi sep 4 è impraticabile (runaway). Prossimo passo:
-  test-gratis a taglia bounded (meno passi, o sep maggiore, o cap nodi) per rispondere comunque a
-  (a) dilatazione→rigidità e (b) ELAST_C ridondante.
+- **Decisioni aperte (Luca decide):**
+  1. Profilare quale sub-blocco domina gli ~0.8 s/passo, poi throttlare SOLO quel blocco lento-pesante
+     (gating `if diag_full:` in `_diag_completa`) tenendo le veloci ogni passo — oppure lasciare tutto
+     ogni passo (corretto ma lento).
+  2. Isolare la causa dell'instabilità del PRIMO passo a `--tauloc` alto (sospetto CFL `nsub`) per far
+     girare i test tauloc come nella prima proposta (sep 4, tauloc 1/5/10).
+  3. (b) ELAST_C 100 vs 0 su core MATURO/denso (a 60 passi ELAST_C è dormiente → inconcluso).
 - **Governance**: ogni modifica dietro flag default-off; 2000 passi + 2-3 semi per concludere;
-  verificare nel codice non nei commenti; misura prima, modifica dopo.
+  verificare nel codice non nei commenti; misura prima, modifica dopo; il campionamento è fisica (no aliasing).

@@ -47,6 +47,25 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
       (b) `--elast-c 100 vs 0`: il `d/cs` basta senza il ×100 (ELAST_C ridondante)?
       Output in `out_freetest/`. Decidere la Fase 1 (diffusione) solo dai risultati.
 
+### FASE 0 — risultati bounded (2026-09-05)
+
+- **[DIMOSTRATO] (a) tempo-proprio SATURO a tauloc 1.** `tauloc 1` (sep 8, 60 passi)
+      ha `tau_max=1.414=√2`: il fattore tempo-proprio è GIÀ SATURO. `tauloc 5` si
+      **impianta al PRIMO passo** (unbuffered stampa solo la legenda, poi nulla).
+- **[RETTIFICATO — NEGATIVO su me stesso] Il "runaway di mitosi" NON è verificato ed è
+      quasi certamente errato.** `tauloc 1` non cresce (`accr≈1116` costante su 30 passi);
+      `tauloc 5` si pianta allo step 0, quando N è ancora iniziale → NON può essere
+      accumulo di nodi O(N²). Causa probabile (non isolata): instabilità del primo passo
+      ad alta dilatazione (sospetto sotto-ciclo CFL `nsub`). Da misurare prima di affermare.
+- **[IN VERIFICA] (b) ELAST_C ridondante: inconcludente a 60 passi.** `elast-c 100`
+      vs `0` danno deformazione core quasi identica (`|d-d0|/d0` 0.8331 vs 0.8305),
+      MA a 60 passi ELAST_C è DORMIENTE (densità uniforme → `1+100·max(ρ/ρ_med−1,0)≈1`).
+      Non è prova di ridondanza: serve core maturo/denso. Da rifare più lungo.
+- **[REVERTATO] `--diag-ogni`**: era stato aggiunto per throttlare il diaglog (che gira
+      a OGNI passo, ~0.8 s/passo, O(N·logN)); su richiesta di Luca il codice è tornato
+      alla forma originale (`git checkout soliton_simulator.py`). Il fatto che le diagnostiche
+      non siano throttled resta valido ma non è stato modificato.
+
 ---
 
 ## AGGIORNAMENTO PRECEDENTE — 2026-09-04

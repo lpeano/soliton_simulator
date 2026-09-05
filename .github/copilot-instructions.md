@@ -50,8 +50,9 @@ chat di sessione (vedi `CLAUDECONNECT.md`). Integrano — non sostituiscono — 
 - **MAI `Start-Sleep` né polling.** I run async/lunghi notificano da soli il completamento.
 - **Run lunghi (≥2000 passi, catena completa)** vanno in background o sull'hardware di Luca; in-ambiente
   usa run corti solo per verificare che il codice giri.
-- **Attenzione al runaway di mitosi:** dilatazione alta (`--tauloc` grande) su caso attaccato (`sep` piccolo)
-  fa esplodere i nodi verso `MAX_NODI` → passo O(N²) → impianto. Preferisci taglie bounded per i test rapidi.
+- **Attenzione all'instabilità ad alta dilatazione:** con `--tauloc` grande il primo passo può impiantarsi
+  (instabilità numerica, sospetto sotto-ciclo metrico CFL che esplode). NON è dimostrato che sia un runaway
+  di nodi/mitosi: MISURA prima di affermarlo. Preferisci taglie bounded per i test rapidi.
 - Non interrompere i run video (il moov atom si scrive a fine run).
 
 ## Manutenzione documenti (a OGNI step significativo)
