@@ -224,9 +224,11 @@ dinamica) accoppia misura e fisica — il diaglog dev'essere read-only, con snap
 ---
 
 ## Stato corrente (per la ripresa)
-- **[FATTO, da committare] CURA ALLA RADICE (§21):** diaglog reso SOLO-LETTURA (chi_core lettura pura +
+- **[FATTO, committato `2465d2d`] CURA ALLA RADICE (§21):** diaglog reso SOLO-LETTURA (chi_core lettura pura +
   snapshot/restore di psi/_psi_prec/_spinor_lift). Fisica BYTE-IDENTICA con/senza diaglog (verificato).
   Flag `--diag-lente-ogni` rimosso (superfluo). `test_spincore.bat` ripulito.
+- **[LANCIATO §22]** Campagna `test_spincore.bat` (2 masse, sep 8, 2000 passi, 3 semi, catena completa)
+  in background, con diaglog pulito → risultati validi sul congelamento da guscio (J_shell/Rinerzia vs Lz/spin_core).
 - **Codice committato**: cs-locale integrale, spin_core, diagnostica inerzia guscio (`48310e0`/`a5bf7de`);
   profiling Fase 1 (`c98a9ca`); throttle poi rimosso (`2c895c7`/`7fa2b2b`).
 - **PRONTO:** rilanciare la campagna `test_spincore.bat` (3 semi × 2000 passi) — ora il diaglog NON
