@@ -1,11 +1,55 @@
 # CHECKPOINT — Sistema dei Solitoni Relazionali (VQT / U2)
 
-_Ultimo aggiornamento: 2026-09-03. Progetto di Luca Peano ("Il Muratore di Planck")._
+_Ultimo aggiornamento: 2026-09-05. Progetto di Luca Peano ("Il Muratore di Planck")._
 _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md per le norme di conduzione._
 
 ---
 
-## AGGIORNAMENTO CORRENTE — 2026-09-04
+## AGGIORNAMENTO CORRENTE — 2026-09-05
+
+### cs-dinamico: c locale nell'intero settore metrico (committato+pushato)
+
+- **[IMPLEMENTATO]** Con `--cs-dinamico` la velocità metrica locale `cs_arco`
+      è ora usata nell'INTERO settore metrico: sorgente in unità naturali
+      (`cs_arco^2/d`), tempo plastico delle `d0` (`tau_p = d/cs_arco`) e target
+      del termostato (`cs^2*P_eq`, con `cs` = mediana del campo locale). Prima
+      questi tre usavano `CS_M` globale. Helper `_cs_nodo()` = unica fonte della
+      legge `cs(rho)`. Ramo `CS_DINAMICO=False` invariato. Backup:
+      `soliton_simulator.backup_2026-09-05_cs-locale.py`.
+- **[DIMOSTRATO, formula]** La modifica APPROFONDISCE il congelamento del nucleo:
+      `cs` bassa nel denso → `tau_p` più lungo del vecchio `CS_M` uniforme.
+
+### spin_core (TODO PRIORITARIO 1) + diagnostica inerzia guscio
+
+- **[IMPLEMENTATO]** Aggiunte colonne diaglog `m0_spin_core`/`m0_spin_core_disp`:
+      spin di fase sulla maschera del nucleo (quartile interno di raggio), pesato
+      `|Psi|^2`, SENZA selezione `perc_chi`.
+- **[IMPLEMENTATO]** Diagnostica congelamento da guscio (massa 0, dominio
+      nucleo+guscio): `m0_Mdyn`, `m0_Mcoh`, `m0_Rinerzia=Mdyn/|Mcoh|`,
+      `m0_Jrot=Σ|Psi|^2 r^2`, `m0_Jshell_frac`, `m0_Ncore`, `m0_Nshell`.
+- **[IN VERIFICA — 1 solo seme]** Run `test_spincore.bat` seed 1 (2000 passi):
+      in blocco, mentre il guscio cresce (`Nshell 327→3964`, `Rinerzia 3.6→5.8`)
+      la precessione `|Lz|` (0.19→0.08) e `spin_core` (0.40→0.18) CALANO ~½ e la
+      dispersione sale. MA le correlazioni ISTANTANEE guscio↔precessione sono
+      DEBOLI (`corr(Jshell_frac,|Lz|)≈0.08`, `corr(Rinerzia,|Lz|)≈0.03`). Unico
+      segnale medio: `corr(Jshell_frac, spin_core_disp)=+0.47` (il guscio
+      DISORDINA lo spin, non lo congela per inerzia). CONFONDENTE grave: cresce
+      TUTTO (`Ncore` come `Nshell`) → "guscio" confuso con "aging". Il run è stato
+      INTERROTTO (seed 2 a metà) per passare ai test-gratis; CSV in
+      `out_spincore/PRE_diffusione/`.
+
+### FASE 0 (in corso): test-gratis prima di ogni modifica
+
+- **[IN CORSO]** Prima di scrivere la diffusione di superficie, test-gratis
+      (nessuna modifica al codice) su caso attaccato (`nmasse 3 sep 4 400 passi
+      2 semi`, con `--cs-dinamico --chi-core --spinore-vivo`):
+      (a) `--tauloc 1/5/10`: la dilatazione forte irrigidisce il core?
+      (b) `--elast-c 100 vs 0`: il `d/cs` basta senza il ×100 (ELAST_C ridondante)?
+      Output in `out_freetest/`. Decidere la Fase 1 (diffusione) solo dai risultati.
+
+---
+
+## AGGIORNAMENTO PRECEDENTE — 2026-09-04
 
 ### Chiusura sessione 2026-09-04
 
