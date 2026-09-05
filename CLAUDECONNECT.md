@@ -169,9 +169,25 @@ mascherata, Berry/Neel=piccole somme); le pesanti (Delaunay, profilo radiale) so
 (In Python l'async su numpy CPU-bound pagherebbe GIL + copia snapshot: costo reale, beneficio nullo qui.)
 Eccezione non ancora classificata: `m*_picco_*` (spin picco per-massa) — possibile fast∩heavy, da misurare.
 
+### 19. L: prompt FASE 1 (verifica) — la pesante è lenta o alimenta veloci? profila e riporta prima di agire
+**A — profiling MISURATO** (stato reale caricato da `tl1_db.pkl`, n=824, archi=138k, grafo denso):
+| sub-blocco | ms | alimenta | natura |
+|---|---|---|---|
+| `chiralita_core_locale` | 94 | `chi_core_*` | RIDONDANTE — già cachata in `self._chi_core_nodi` (step, riga 1858) |
+| cicli + `circolazione_topologica` | ~60+47 | **berry_spin_media (VELOCE)** + olonomia/circ (lente) | alimenta VELOCE → non throttlabile |
+| `calcola_psi` | 22 | ricalcolo | RIDONDANTE — `self.psi` già calcolata nello step |
+| Delaunay vortici/inerzia/`dens_g*` | ~4 | m0_carica/Jrot (lente) | throttle-safe ma MINORE |
+
+**VERDETTO [MISURATO]:** i costi dominanti sono ricalcoli RIDONDANTI (chi_core+psi=116 ms) o alimentano
+VELOCI (Berry). I blocchi solo-lenti throttlabili valgono ~4 ms → throttle inutile. **→ FASE 2B (ottimizza),
+NON 2A (throttle).** Ottimizzazione più pulita: **riusare `self.psi` e `self._chi_core_nodi` già calcolati**
+(byte-identico, ~116 ms risparmiati, zero aliasing). Le VELOCI restano a ogni passo. Async: confermato non serve.
+
 ---
 
 ## Stato corrente (per la ripresa)
+- **In corso [FASE 2B]**: riuso di `psi`/`chi_core` cachati in `_diag_completa` (byte-identico), poi
+  eventuale vettorizzazione dei loop per-ciclo (Berry/olonomia). NIENTE throttle delle veloci, NIENTE async.
 - **Codice committato**: cs-locale integrale, spin_core, diagnostica inerzia guscio (`48310e0`/`a5bf7de`, pushati).
 - **Codice al baseline corretto**: nessun throttle (l'edit `--diag-ogni`/`_diag_leggera` aliasava le veloci ed
   è stato annullato). Tutto a ogni passo = niente aliasing. py_compile OK.
