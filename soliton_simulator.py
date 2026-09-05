@@ -655,6 +655,10 @@ VERLET = False          # INTEGRATORE METRICO SPERIMENTALE: se True, il sottocic
 # invariato il comportamento canonico; attivare con --verlet per il confronto A/B.
 ELAST_C = 100.0         # COEFFICIENTE DEL NUCLEO ELASTICO: default storico, esposto solo per
 # esperimenti di ridondanza/sensibilita'. ELAST_C=0 disattiva il rinforzo elastico di d0.
+GUSCIO_MORBIDO = False   # DIFFUSIONE DI SUPERFICIE delle d0 (legge, zero parametri): se True, aggiunge
+# al rilassamento plastico un termine diffusivo D*lap(d0) con D = c_locale * spaziatura d'arco. Il
+# laplaciano e' ~0 nel nucleo uniforme e grande al bordo ripido -> smussa SOLO il guscio (tensione
+# superficiale), non tocca la rigidita' del core. Clamp causale (CFL). Default off = non-regressione.
 CHI_BASC = False        # BASCULAMENTO CHIRALE (legge, zero parametri): se True, la chiralita'
 # di ogni nodo NON resta piu' fissa dalla nascita, ma vira secondo la TORSIONE LOCALE rispetto
 # al QUANTO DI OLONOMIA (PHI_CRIT = 2pi): chi=+1 dove la torsione ha COMPLETATO il giro (materia
@@ -2137,6 +2141,15 @@ class Rete:
             cs_taup = (cs_arco if CS_DINAMICO else CS_M)
             tau_p_loc = (d_arco / np.maximum(cs_taup, 1e-9)) * fattore_elasticita
             self.d0 += dt_e * (self.d - self.d0) / tau_p_loc
+            if GUSCIO_MORBIDO:
+                # DIFFUSIONE DI SUPERFICIE: lap(d0) ~0 nel nucleo uniforme, grande al bordo ripido ->
+                # smussa SOLO il guscio. D = c_locale * spaziatura (lunghezza^2/tempo), nessun coeff.
+                # nuovo; clamp causale CFL: |delta d0| <= cs*dt_e (cammino delle onde in un passo).
+                _sm0 = np.bincount(self.i, self.d0, minlength=self.n) + np.bincount(self.j, self.d0, minlength=self.n)
+                _med0 = _sm0 / np.maximum(self._deg, 1)
+                _lap_d0 = 0.5 * (_med0[self.i] + _med0[self.j]) - self.d0
+                _cfl = cs_taup * dt_e
+                self.d0 += np.clip(dt_e * cs_taup * d_arco * _lap_d0, -_cfl, _cfl)
         else:
             self.d0 += dt_e * (self.d - self.d0) / TAU_P
             
@@ -3878,7 +3891,7 @@ def _applica_flag(a):
     """Applica i parametri/flag ai globali. Usata sia in headless sia in interattivo,
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
-    global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN
+    global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
@@ -3895,6 +3908,7 @@ def _applica_flag(a):
     ZETA_M = a.zeta
     ZETA_LOC = bool(getattr(a, "zeta_loc", False))   # smorzamento locale (legge): default off = non-regressione
     VERLET = bool(getattr(a, "verlet", False))       # integratore metrico sperimentale: default off
+    GUSCIO_MORBIDO = bool(getattr(a, "guscio_morbido", False))   # diffusione di superficie delle d0: default off
     if getattr(a, "elast_c", None) is not None:
         ELAST_C = float(a.elast_c)
         print(f"[elast] nucleo elastico C = {ELAST_C}")
@@ -4125,6 +4139,10 @@ def _cli():
     p.add_argument("--elast-c", type=float, default=None, dest="elast_c",
                    help="Coefficiente del nucleo elastico (default storico 100). 0 = spento; "
                         "30/100/300 = test di sensibilita'.")
+    p.add_argument("--guscio-morbido", action="store_true", dest="guscio_morbido",
+                   help="DIFFUSIONE DI SUPERFICIE delle d0 (legge, zero parametri): aggiunge D*lap(d0) "
+                        "con D = c_locale * spaziatura d'arco. Smussa SOLO il guscio (bordo ripido), "
+                        "non il nucleo (lap ~0 dove uniforme). Clamp causale CFL. Default off (identico).")
     p.add_argument("--pav-com", action="store_true", dest="pav_com",
                    help="PAVIMENTO COMOVENTE (legge, zero parametri): il pavimento di d0 diventa "
                         "median(d0)-MAD(d0) (una dispersione sotto la mediana, scala col sistema) "
