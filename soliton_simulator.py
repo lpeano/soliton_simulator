@@ -4194,12 +4194,6 @@ def _cli():
     p.add_argument("--db-ogni", dest="db_ogni", type=int, default=250,
                    help="ogni quanti passi salvare il DB di stato (default 250). Piu' basso = piu' "
                         "sicuro contro le interruzioni, ma piu' scritture su disco.")
-    p.add_argument("--diag-lente-ogni", dest="diag_lente_ogni", type=int, default=1,
-                   help="batch: ogni quanti passi calcolare le sole metriche diagnostiche LENTE "
-                        "(chiralita_core, la piu' cara ~94ms su grafo denso; misurata costante). "
-                        "default 1 = ogni passo (IDENTICO). >1 = le VELOCI (Lz, Berry, Neel, "
-                        "spin_core, guscio_circ) restano a ogni passo, le LENTE campionate ogni N "
-                        "(colonne vuote fra i campioni). Riduce il costo/passo senza aliasing.")
     p.add_argument("--batch", action="store_true",
                    help="processo batch: due masse, evoluzione lunga, misura la CONDENSAZIONE "
                         "nel vuoto fra le masse (ordine, densita', nuovo nucleo). Output numerico.")
@@ -4313,7 +4307,7 @@ def batch_condensazione(a):
         v = np.asarray(v, float).ravel()
         return (float(np.nanmin(v)), float(np.nanmax(v)), float(np.nanmean(v)), float(np.nanmax(np.abs(v))))
 
-    def _diag_completa(net, step, diag_lente=True):
+    def _diag_completa(net, step):
         """LOG DIAGNOSTICO COMPLETO: tutte le variabili di stato del sistema a questo step, con le
         loro statistiche. Serve a catturare l'istante in cui una grandezza degenera (artefatto):
         guardando quale colonna esplode PER PRIMA si individua la causa. Ritorna una riga CSV."""
@@ -4356,10 +4350,14 @@ def batch_condensazione(a):
         except Exception:
             pass
         cols['n'] = n
-        # chi_core e' LENTA/costante (misurato lag-1): throttlabile senza aliasing (~94ms su grafo denso).
-        if CHI_CORE and diag_lente:
+        # LETTURA PURA del cache impostato dalla DINAMICA. chiralita_core_locale() MUTA
+        # self._chi_core_nodi (riga ~954), letto dalla fisica a ~1967: il diaglog NON deve
+        # richiamarla (muterebbe stato fisico) ne' ricalcolare a N nuovo. Solo lettura.
+        if CHI_CORE:
             try:
-                chi_core = net.chiralita_core_locale()
+                chi_core = getattr(net, '_chi_core_nodi', None)
+                if chi_core is None or not len(chi_core):
+                    chi_core = np.zeros(net.n)
                 cols['chi_core_media'] = float(np.mean(chi_core))
                 cols['chi_core_abs_media'] = float(np.mean(np.abs(chi_core)))
                 cols['rho0_core_max'] = float(np.max(getattr(net, '_chi_core_rho0', np.zeros(1))))
@@ -5015,7 +5013,6 @@ def batch_condensazione(a):
         _os.remove(_db); print(f"[db] --db-cleanup: rimosso {_db}, riparto pulito")
     _db_step0 = 0
     _db_ogni = max(1, int(getattr(a, "db_ogni", 250)))
-    _diag_lente_ogni = max(1, int(getattr(a, "diag_lente_ogni", 1)))   # throttle SELETTIVO: solo metriche LENTE (chi_core); le VELOCI restano a ogni passo
     if _db and _os.path.exists(_db):
         try:
             net.carica_stato(_db)
@@ -5064,8 +5061,12 @@ def batch_condensazione(a):
             net._db_step = _step_glob
             net.salva_stato(_db)
         if diag_f is not None:
-            _diag_lente = (_diag_header is None) or (_step_glob % _diag_lente_ogni == 0)
-            d = _diag_completa(net, _step_glob, _diag_lente); d['step'] = _step_glob
+            # IL DIAGLOG E' SOLO LETTURA: non deve mutare lo stato fisico. Le funzioni diagnostiche
+            # ricalcolano/aggiornano cache di CONTINUITA' che la DINAMICA legge: self.psi (da _pesi ->
+            # lambda_nodi), self._psi_prec (da ritmo(), tempo proprio), self._spinor_lift (feedback
+            # spinoriale). Snapshot + restore garantiscono byte-identita' della fisica con/senza diaglog.
+            _snap_fisica = {k: getattr(net, k, None) for k in ('psi', '_psi_prec', '_spinor_lift')}
+            d = _diag_completa(net, _step_glob); d['step'] = _step_glob
             # Tracking esplicito del picco costruttivo: usa conc_nodi, che include
             # i figli della mitosi, e la coorte solo come fallback iniziale.
             for i_m, (mid, coorte) in enumerate(zip(ids_massa, coorti)):
@@ -5081,6 +5082,8 @@ def batch_condensazione(a):
                     misura_pos = net.misura_spin_picco_positivi(idx_coorte, pesi_coorte)
                     for nome, valore in misura_pos.items():
                         d[f'm{i_m}_picco_pos_{nome}'] = round(float(valore), 7)
+            for _k, _v in _snap_fisica.items():   # RESTORE: il diaglog non lascia tracce sulla fisica
+                setattr(net, _k, _v)
             if _diag_header is None or _diag_header == "GIA_SCRITTO":
                 # ordine: colonne fisse note, poi le extra multimassa/interazione in coda
                 extra = [k for k in d.keys() if k not in _DIAG_COLS]

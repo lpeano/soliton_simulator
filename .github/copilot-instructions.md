@@ -40,6 +40,10 @@ chat di sessione (vedi `CLAUDECONNECT.md`). Integrano — non sostituiscono — 
 - **Verifica sempre:** `python -m py_compile`, poi un run-lampo che confermi che il flag fa ciò che deve.
 - **Un flag = una variabile.** Gli A/B cambiano una cosa sola per volta.
 - **Mostra il diff prima di applicare** modifiche non banali e conferma che non introducano parametri da tarare.
+- **Il diaglog / la diagnostica è SOLO LETTURA: mai mutare lo stato fisico.** Non chiamare funzioni impure
+  (che scrivono in cache letti dalla dinamica, es. `chiralita_core_locale`→`_chi_core_nodi`, `ritmo`→`_psi_prec`,
+  `calcola_psi`→`psi`, `_spinor_lift`). Usa letture pure dei cache o snapshot/restore attorno al blocco diagnostico.
+  Verifica con test byte-identico della fisica (stesso caso con/senza diaglog: stato finale identico).
 
 ## Regole di flag verificate
 - **`--cs-dinamico` implica SEMPRE anche `--chi-core` e `--spinore-vivo`** (anche in tutti gli script di

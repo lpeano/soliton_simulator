@@ -7,6 +7,16 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 
 ## AGGIORNAMENTO CORRENTE — 2026-09-05
 
+### Diaglog reso SOLO-LETTURA (cura alla radice, byte-identico verificato)
+
+- **[FATTO, DIMOSTRATO]** `chiralita_core_locale()` è IMPURA (muta `self._chi_core_nodi`,
+      letto dalla fisica a ~1967). Il diaglog che la richiamava contaminava la dinamica.
+      Cura: nel diaglog **lettura pura** del cache + **snapshot/restore** dei cache di
+      continuità fisica che le funzioni diagnostiche mutano (`psi`, `_psi_prec` da `ritmo()`,
+      `_spinor_lift`). Verificato: stato fisico finale **byte-identico** con/senza diaglog
+      (`max|A−B|=0` su phi/d/tw/pos/…). Rimosso il flag `--diag-lente-ogni` (superfluo).
+      Regola: **il diaglog è SOLO LETTURA, mai mutare stato fisico.**
+
 ### cs-dinamico: c locale nell'intero settore metrico (committato+pushato)
 
 - **[IMPLEMENTATO]** Con `--cs-dinamico` la velocità metrica locale `cs_arco`

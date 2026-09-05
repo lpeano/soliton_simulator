@@ -198,23 +198,42 @@ a N=10 `chi_core`/`rho_c_core` = 3/21 (diradate), mentre `berry`/`spin_neel`/`m0
 risparmiati **a scala** (chi_core = 94 ms a n=824, misurato). Byte-identico a N=1 per costruzione
 (`if CHI_CORE and diag_lente` = `if CHI_CORE` quando N=1).
 
+### 21. RETTIFICA FINALE: due difetti di chiralita_core_locale nel diaglog → CURA ALLA RADICE (lettura pura + snapshot/restore)
+**Contesto (2 reperti indipendenti):** (A, §20) il ricalcolo nel diaglog è a N nuovo (mitosi) → non
+byte-identico; (B, reperto Claude) `chiralita_core_locale()` è IMPURA: muta `self._chi_core_nodi` (riga ~954)
+che la FISICA legge a ~1967 (frame-drag/torsione). Il diaglog che la richiama (riga ~4362) SOVRASCRIVE lo
+stato fisico → diagnostica accoppiata alla fisica. Il throttle (§20) NON era la cura giusta (mascherava, non
+risolveva). **Verificato nel codice: entrambi i reperti reali.**
+
+**CURA ALLA RADICE (il diaglog è SOLO LETTURA):**
+1. `chi_core` nel diaglog: **lettura pura** del cache `getattr(net,'_chi_core_nodi',None)`, mai richiamare
+   la funzione mutante né ricalcolare.
+2. **Snapshot/restore** dei cache di CONTINUITÀ FISICA che le funzioni diagnostiche mutano transitoriamente
+   e che la dinamica legge: `psi` (da `_pesi`→`lambda_nodi`), **`_psi_prec`** (da `ritmo()`, tempo proprio —
+   il colpevole principale: il diaglog chiamava `ritmo()` pre-aggiornando `_psi_prec` → dt diverso il passo
+   dopo), `_spinor_lift` (feedback spinoriale).
+3. Rimosso il flag `--diag-lente-ogni` (dead code: chi_core in lettura pura non costa più i 94 ms).
+
+**VERIFICA OBBLIGATORIA — PASSA.** Stesso caso (sep 4, `--chi-core --spinore-vivo --cs-dinamico --sync`, seed 1,
+40 passi) con diaglog ogni passo vs senza: stato fisico finale **BYTE-IDENTICO** (phi/phivel/d/d0/tw/pos/perc_chi/eta,
+`max|A−B| = 0.000e+00`, N_A=N_B=1288). Prima della cura divergeva (N_A=1373 poi 1935 vs N_B=1568). Post-pulizia
+ri-verificato (1207=1207). `chi_core_media`/`m0_Lz`/`berry` restano densi a ogni passo. **Reperto B chiuso: il
+diaglog non muta più la fisica.** Lezione: una diagnostica che chiama funzioni IMPURE (cache letti dalla
+dinamica) accoppia misura e fisica — il diaglog dev'essere read-only, con snapshot/restore dei cache condivisi.
+
 ---
 
 ## Stato corrente (per la ripresa)
-- **[FASE 2A FATTA, da committare]**: flag `--diag-lente-ogni N` (default 1 = identico) throttla solo
-  `chi_core` (lenta/costante, 94 ms a scala); VELOCI a ogni passo. Verificato densità colonne + compile.
-  NIENTE riuso byte-identico (mitosi cambia N — §20), NIENTE throttle delle veloci, NIENTE async.
+- **[FATTO, da committare] CURA ALLA RADICE (§21):** diaglog reso SOLO-LETTURA (chi_core lettura pura +
+  snapshot/restore di psi/_psi_prec/_spinor_lift). Fisica BYTE-IDENTICA con/senza diaglog (verificato).
+  Flag `--diag-lente-ogni` rimosso (superfluo). `test_spincore.bat` ripulito.
 - **Codice committato**: cs-locale integrale, spin_core, diagnostica inerzia guscio (`48310e0`/`a5bf7de`);
-  profiling Fase 1 (`c98a9ca`).
-- **Codice al baseline corretto**: nessun throttle (l'edit `--diag-ogni`/`_diag_leggera` aliasava le veloci ed
-  è stato annullato). Tutto a ogni passo = niente aliasing. py_compile OK.
-- **NON ancora scritto**: diffusione `--guscio-morbido` (Fase 1) — in attesa dei test-gratis.
-- **Decisioni aperte (Luca decide):**
-  1. Profilare quale sub-blocco domina gli ~0.8 s/passo, poi throttlare SOLO quel blocco lento-pesante
-     (gating `if diag_full:` in `_diag_completa`) tenendo le veloci ogni passo — oppure lasciare tutto
-     ogni passo (corretto ma lento).
-  2. Isolare la causa dell'instabilità del PRIMO passo a `--tauloc` alto (sospetto CFL `nsub`) per far
-     girare i test tauloc come nella prima proposta (sep 4, tauloc 1/5/10).
-  3. (b) ELAST_C 100 vs 0 su core MATURO/denso (a 60 passi ELAST_C è dormiente → inconcluso).
-- **Governance**: ogni modifica dietro flag default-off; 2000 passi + 2-3 semi per concludere;
-  verificare nel codice non nei commenti; misura prima, modifica dopo; il campionamento è fisica (no aliasing).
+  profiling Fase 1 (`c98a9ca`); throttle poi rimosso (`2c895c7`/`7fa2b2b`).
+- **PRONTO:** rilanciare la campagna `test_spincore.bat` (3 semi × 2000 passi) — ora il diaglog NON
+  contamina la fisica, quindi i risultati sul congelamento da guscio sono validi.
+- **Decisioni aperte (fisica vera):**
+  1. Campagna spin_core/inerzia guscio (3 semi, 2000 passi) → congelamento da guscio: J_shell/Rinerzia vs Lz/spin_core.
+  2. Instabilità del PRIMO passo a `--tauloc` alto (sospetto CFL `nsub`) per i test tauloc.
+  3. (b) ELAST_C 100 vs 0 su core MATURO/denso.
+- **Governance**: flag default-off; 2000 passi + 2-3 semi; verificare nel codice; misura prima, modifica dopo;
+  il campionamento è fisica (no aliasing); **il diaglog è SOLO LETTURA (mai mutare stato fisico)**.
