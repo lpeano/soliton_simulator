@@ -16,7 +16,8 @@ set PASSI=2000
 set OGNI=10
 set DBOGNI=100
 set OUT=out_spincore
-set CHAIN=--sync --cs-dinamico --verlet --spinore-vivo --spin-feedback --chi-core --viriale --zeta-vir --pav-com --chi-basc --polo-maturo --olon-part --ls-azim --verso-chi --tau-d0 --zeta-loc --plast-din --calore-vett
+REM --diag-lente-ogni 50: throttla solo chi_core (lenta/costante); le VELOCI (Lz, Berry, Neel, spin_core) restano a ogni passo (niente aliasing).
+set CHAIN=--sync --cs-dinamico --verlet --spinore-vivo --spin-feedback --chi-core --viriale --zeta-vir --pav-com --chi-basc --polo-maturo --olon-part --ls-azim --verso-chi --tau-d0 --zeta-loc --plast-din --calore-vett --diag-lente-ogni 50
 if not exist %OUT% mkdir %OUT%
 if not exist log mkdir log
 
