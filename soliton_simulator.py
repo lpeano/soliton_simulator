@@ -1747,6 +1747,19 @@ class Rete:
         if hasattr(self, '_ker_cache'): self._ker_cache = {}
         return True
 
+    def _cs_nodo(self, I, w):
+        """Campo della velocita' metrica locale per nodo (ramo cs-dinamico). Unica fonte della
+        legge cs_eff(rho): normalizzazione strettamente locale (vicini topologici) e floor
+        emergente dalla saturazione razionale del campo, senza costanti minime arbitrarie."""
+        n = self.n
+        W_loc = self._mat(w)
+        media_vicini = (W_loc @ I[:n]) / np.maximum(W_loc @ np.ones(n), 1e-9)
+        u_nodo = I[:n] / np.maximum(media_vicini, 1e-9)
+        cs_floor = CS_M / (1.0 + GAMMA * np.sqrt(np.maximum(I[:n], 0.0)))
+        cs_floor = np.minimum(cs_floor, CS_M)
+        transizione = 0.5 * (1.0 + np.tanh(1.0 - u_nodo))
+        return cs_floor + (CS_M - cs_floor) * transizione
+
     def step(self):
         if self.n < 2 or not len(self.i): return
         i, j = self.i, self.j
@@ -1871,7 +1884,15 @@ class Rete:
             # la relazione di dispersione (v^2, la rigidita' del mezzo). Nessun numero libero: tutto da
             # grandezze gia' nel sistema (d0, la scala di frequenza mediana del ritmo).
             P_eq = float(np.median(self.d0[:self.n])) if self.n > 0 and len(self.d0) >= self.n else 1.0
-            T_target = (CS_M ** 2) * P_eq          # energia di punto zero = rigidita' del mezzo (c_s^2) * densita' vuoto (P_eq): leggi/costanti gia' nel sistema, nessun parametro nuovo
+            # RIGIDITA' DEL MEZZO: con cs-dinamico il mezzo NON e' omogeneo. Il target (grandezza
+            # globale, gauge del vuoto) usa la rigidita' rappresentativa = mediana del campo cs locale.
+            if CS_DINAMICO:
+                _psi_ct = psi_t if psi_t is not None else (self.psi if len(self.psi) >= self.n else None)
+                cs_rappr = (float(np.median(self._cs_nodo(np.abs(_psi_ct[:self.n]) ** 2, w)))
+                            if _psi_ct is not None else CS_M)
+            else:
+                cs_rappr = CS_M
+            T_target = (cs_rappr ** 2) * P_eq          # rigidita' del mezzo (c_s^2, locale se cs-dinamico) * densita' vuoto (P_eq)
             
             # TERMOSTATO NOSE-HOOVER con TARGET MOBILE STABILE. Il target T_target = c_s^2 * P_eq
             # NON e' costante: P_eq (densita' del vuoto di equilibrio) evolve e cala mentre il
@@ -1994,16 +2015,7 @@ class Rete:
         # (vicini topologici), mentre il pavimento emerge dalla stessa saturazione
         # razionale del campo: non viene introdotto un numero minimo arbitrario.
         if CS_DINAMICO:
-            W_loc = self._mat(w)
-            media_vicini = (W_loc @ I[:self.n]) / np.maximum(
-                W_loc @ np.ones(self.n), 1e-9)
-            u_nodo = I[:self.n] / np.maximum(media_vicini, 1e-9)
-            # Floor emergente: deriva dalla saturazione locale gia' presente in
-            # satura(), cs_floor resta positivo e non introduce una manopola.
-            cs_floor = CS_M / (1.0 + GAMMA * np.sqrt(np.maximum(I[:self.n], 0.0)))
-            cs_floor = np.minimum(cs_floor, CS_M)
-            transizione = 0.5 * (1.0 + np.tanh(1.0 - u_nodo))
-            cs_nodo = cs_floor + (CS_M - cs_floor) * transizione
+            cs_nodo = self._cs_nodo(I, w)
             # Collo di bottiglia causale: media armonica, non media aritmetica.
             cs_arco = (2.0 * cs_nodo[i] * cs_nodo[j] /
                        np.maximum(cs_nodo[i] + cs_nodo[j], 1e-12))
@@ -2040,8 +2052,10 @@ class Rete:
             _peq_src = (np.where(np.isfinite(_peq_t), _peq_t, self.peq)
                         if SYNC_UPDATE else self.peq)
             anom = (rho - _peq_src) / np.maximum(_peq_src, 1e-9)
+            # cs-dinamico: la sorgente in unita' naturali usa la c LOCALE dell'arco.
+            cs2_src = (cs_arco ** 2 if CS_DINAMICO else CS_M ** 2)
             src = (ALPHA_M * anom if ALPHA_NAT == 0.0
-                   else ALPHA_NAT * (CS_M ** 2 / np.maximum(self.d, 1e-6)) * anom)
+                   else ALPHA_NAT * (cs2_src / np.maximum(self.d, 1e-6)) * anom)
         else:
             src = -HAM_SRC * K_C * (w / LAM) * np.cos(self.phi0[i] - self.phi0[j]) * np.cos(dph)
             
@@ -2119,7 +2133,9 @@ class Rete:
             rho_med = max(float(np.median(I_nodi)), 1e-9)
             
             fattore_elasticita = 1.0 + ELAST_C * np.maximum(rho_arco / rho_med - 1.0, 0.0)
-            tau_p_loc = (d_arco / max(CS_M, 1e-9)) * fattore_elasticita
+            # cs-dinamico: il tempo plastico delle d0 scala con la c LOCALE dell'arco.
+            cs_taup = (cs_arco if CS_DINAMICO else CS_M)
+            tau_p_loc = (d_arco / np.maximum(cs_taup, 1e-9)) * fattore_elasticita
             self.d0 += dt_e * (self.d - self.d0) / tau_p_loc
         else:
             self.d0 += dt_e * (self.d - self.d0) / TAU_P
@@ -4403,6 +4419,9 @@ def batch_condensazione(a):
         # MISURE PER-MASSA (massa 0 tracciata): isolano la singola massa dall'espansione GLOBALE
         # del sistema, per rispondere a decadimento/equilibrio/divergenza sulla massa VERA.
         m0_I2pesata = 0.0; m0_raggio = 0.0; m0_N = 0; m0_coer = 0.0; m0_spin = 0.0; m0_spin_disp = 0.0
+        m0_spin_core = 0.0; m0_spin_core_disp = 0.0
+        m0_Mdyn = 0.0; m0_Mcoh = 0.0; m0_Rinerzia = 0.0; m0_Jrot = 0.0; m0_Jshell_frac = 0.0
+        m0_Ncore = 0; m0_Nshell = 0
         m0_vort_pos = 0; m0_vort_neg = 0; m0_carica = 0
         m0_coer_nucleo = 0.0; m0_N_nucleo = 0; m0_raggio_nucleo = 0.0
         m0_Lz = 0.0; m0_Lz_norm = 0.0
@@ -4465,6 +4484,13 @@ def batch_condensazione(a):
                     if wpos.sum() > 1e-9:
                         m0_spin = float(np.sum(vphi_m * wpos) / wpos.sum())   # spin medio pesato
                         m0_spin_disp = float(np.sqrt(np.sum(wpos*(vphi_m - m0_spin)**2)/wpos.sum()))  # dispersione
+                    # SPIN DEL NUCLEO (TODO Checkpoint): vphi sui soli nodi della MASCHERA DEL NUCLEO,
+                    # pesati per l'inerzia |Psi|^2, senza alcuna selezione di chiralita' (perc_chi).
+                    if nuc.sum() >= 3:
+                        vphi_nuc = vphi_m[nuc]; w_nuc = I2[idx_m][nuc]
+                        if w_nuc.sum() > 1e-9:
+                            m0_spin_core = float(np.sum(vphi_nuc * w_nuc) / w_nuc.sum())
+                            m0_spin_core_disp = float(np.sqrt(np.sum(w_nuc*(vphi_nuc - m0_spin_core)**2)/w_nuc.sum()))
                     # SPIN TOPOLOGICO: la massa e' una struttura VORTICE-ANTIVORTICE. I vortici
                     # (singolarita' di fase, +-2pi) NON stanno nel nucleo coerente ma nel GUSCIO,
                     # al confine nucleo/vuoto. Quindi li cerco sui nodi entro un raggio dal centro
@@ -4488,6 +4514,26 @@ def batch_condensazione(a):
                             m0_carica = int(np.sum(q))     # carica topologica netta = spin della massa
                     except Exception:
                         pass
+                    # ============ INERZIA E CONGELAMENTO DA GUSCIO (verifica densita' del guscio) ============
+                    # Un guscio denso/esteso gonfia J=sum|Psi|^2 r^2 e R=M_dyn/M_coh -> congela la
+                    # precessione. Misuro su nucleo+guscio, separando per coerenza col campo della massa.
+                    try:
+                        d_cm2 = np.linalg.norm(P[:, :2] - cm[:2], axis=1)
+                        dom = np.where(d_cm2 < max(4.0*m0_raggio, 3.0))[0]
+                        if len(dom) >= 3:
+                            Id = I2[dom]; rd = np.linalg.norm(P[dom] - cm, axis=1)
+                            fase_m = float(np.angle(np.sum(I2[idx_m] * np.exp(1j*net.phi[idx_m]))))
+                            coh = np.cos(net.phi[dom] - fase_m)   # +1 nucleo (in fase), -1 guscio (antifase)
+                            m0_Mdyn = float(np.sum(Id))           # massa dinamica (inerzia, senza segno)
+                            m0_Mcoh = float(np.sum(Id * coh))     # massa coerente (guscio antifase sottrae)
+                            m0_Rinerzia = float(m0_Mdyn / max(abs(m0_Mcoh), 1e-9))
+                            Jr = Id * rd**2
+                            m0_Jrot = float(np.sum(Jr))           # inerzia rotazionale sum|Psi|^2 r^2
+                            shell = coh < 0
+                            m0_Jshell_frac = float(np.sum(Jr[shell]) / max(m0_Jrot, 1e-9))
+                            m0_Ncore = int(np.sum(~shell)); m0_Nshell = int(np.sum(shell))
+                    except Exception:
+                        pass
         except Exception:
             pass
         cols['m0_I2pesata'] = m0_I2pesata
@@ -4496,6 +4542,15 @@ def batch_condensazione(a):
         cols['m0_coer'] = m0_coer
         cols['m0_spin'] = m0_spin        # spin coerente locale (vphi media pesata)
         cols['m0_spin_disp'] = m0_spin_disp   # dispersione dello spin (bassa=coerente)
+        cols['m0_spin_core'] = m0_spin_core    # spin sulla MASCHERA DEL NUCLEO, pesato |Psi|^2, no perc_chi
+        cols['m0_spin_core_disp'] = m0_spin_core_disp  # dispersione dello spin del nucleo
+        cols['m0_Mdyn'] = m0_Mdyn              # sum|Psi|^2 (inerzia dinamica, guscio incluso)
+        cols['m0_Mcoh'] = m0_Mcoh              # sum|Psi|^2 cos(phi-phi_m): guscio antifase sottrae
+        cols['m0_Rinerzia'] = m0_Rinerzia      # M_dyn/|M_coh|: alto = pesante ma incoerente (guscio)
+        cols['m0_Jrot'] = m0_Jrot              # sum|Psi|^2 r^2 = inerzia rotazionale
+        cols['m0_Jshell_frac'] = m0_Jshell_frac  # frazione di J dovuta al guscio antifase
+        cols['m0_Ncore'] = m0_Ncore
+        cols['m0_Nshell'] = m0_Nshell
         cols['m0_vort_pos'] = m0_vort_pos     # numero di vortici (+1)
         cols['m0_vort_neg'] = m0_vort_neg     # numero di antivortici (-1)
         cols['m0_carica'] = m0_carica         # carica topologica netta = SPIN della massa
@@ -4794,6 +4849,8 @@ def batch_condensazione(a):
                   'd_min','d_max','d_mean','d0_min','d0_max','d0_mean','eta_min','eta_max','eta_mean',
                   'tau_min','tau_max','tau_mean','dmin_nodi','xi_termo','n_naninf','n_I2_grandi','n_lontani',
                   'm0_I2pesata','m0_raggio','m0_N','m0_coer','m0_spin','m0_spin_disp',
+                  'm0_spin_core','m0_spin_core_disp',
+                  'm0_Mdyn','m0_Mcoh','m0_Rinerzia','m0_Jrot','m0_Jshell_frac','m0_Ncore','m0_Nshell',
                   'm0_vort_pos','m0_vort_neg','m0_carica',
                   'm0_coer_nucleo','m0_N_nucleo','m0_raggio_nucleo','m0_Lz','m0_Lz_norm']
 

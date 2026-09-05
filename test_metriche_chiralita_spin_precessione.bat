@@ -38,11 +38,11 @@ echo.
 
 for %%S in (1 2 3) do (
   echo [BASE] seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --cs-dinamico --sync-db %OUT%\db_base_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_base_s%%S.csv --diaglog %OUT%\diag_base_s%%S.csv > log\metriche_base_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --chi-core --cs-dinamico --sync-db %OUT%\db_base_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_base_s%%S.csv --diaglog %OUT%\diag_base_s%%S.csv > log\metriche_base_s%%S.log 2>&1
   if errorlevel 1 goto :errore
 
   echo [FEEDBACK] seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --spin-feedback --cs-dinamico --sync-db %OUT%\db_feedback_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_feedback_s%%S.csv --diaglog %OUT%\diag_feedback_s%%S.csv > log\metriche_feedback_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --spin-feedback --chi-core --cs-dinamico --sync-db %OUT%\db_feedback_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_feedback_s%%S.csv --diaglog %OUT%\diag_feedback_s%%S.csv > log\metriche_feedback_s%%S.log 2>&1
   if errorlevel 1 goto :errore
 
   echo [CORE] seed %%S

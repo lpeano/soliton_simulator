@@ -43,16 +43,16 @@ for %%S in (1 2 3) do (
   python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --chi-core --cs-dinamico --sync-db %OUT%\db_corecs_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_corecs_s%%S.csv --diaglog %OUT%\diag_corecs_s%%S.csv > log\matrice_cs_corecs_s%%S.log 2>&1
   if errorlevel 1 goto :errore
   echo [FEEDBACK] seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --spin-feedback --cs-dinamico --sync-db %OUT%\db_feedback_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_feedback_s%%S.csv --diaglog %OUT%\diag_feedback_s%%S.csv > log\matrice_cs_feedback_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --spin-feedback --chi-core --cs-dinamico --sync-db %OUT%\db_feedback_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_feedback_s%%S.csv --diaglog %OUT%\diag_feedback_s%%S.csv > log\matrice_cs_feedback_s%%S.log 2>&1
   if errorlevel 1 goto :errore
   echo [FEEDBACK+CS] seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --spin-feedback --cs-dinamico --sync-db %OUT%\db_feedbackcs_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_feedbackcs_s%%S.csv --diaglog %OUT%\diag_feedbackcs_s%%S.csv > log\matrice_cs_feedbackcs_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --spin-feedback --chi-core --cs-dinamico --sync-db %OUT%\db_feedbackcs_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_feedbackcs_s%%S.csv --diaglog %OUT%\diag_feedbackcs_s%%S.csv > log\matrice_cs_feedbackcs_s%%S.log 2>&1
   if errorlevel 1 goto :errore
   echo [BASE] seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --cs-dinamico --sync-db %OUT%\db_base_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_base_s%%S.csv --diaglog %OUT%\diag_base_s%%S.csv > log\matrice_cs_base_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --chi-core --cs-dinamico --sync-db %OUT%\db_base_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_base_s%%S.csv --diaglog %OUT%\diag_base_s%%S.csv > log\matrice_cs_base_s%%S.log 2>&1
   if errorlevel 1 goto :errore
   echo [BASE+CS] seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --cs-dinamico --sync-db %OUT%\db_basecs_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_basecs_s%%S.csv --diaglog %OUT%\diag_basecs_s%%S.csv > log\matrice_cs_basecs_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --chi-core --cs-dinamico --sync-db %OUT%\db_basecs_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_basecs_s%%S.csv --diaglog %OUT%\diag_basecs_s%%S.csv > log\matrice_cs_basecs_s%%S.log 2>&1
   if errorlevel 1 goto :errore
 )
 
