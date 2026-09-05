@@ -111,8 +111,16 @@ run 2: PID vivo, **~2,6 h CPU, ZERO output** → sospetto **runaway di mitosi** 
 (Errore mio: usato `Start-Sleep` — da evitare.)
 
 ### 14. L: trascrivi la chat in CLAUDECONNECT sulla root, mantienilo aggiornato, committa+pusha, riprendi
-**A.** Creato questo file. → commit+push di tutto → ripresa Fase 0 **ri-scalata** a taglia che finisce
-(ridurre passi/masse o disattivare il runaway), poi tabelle (a)/(b), poi decisione diffusione.
+**A.** Creato questo file. Commit+push di tutto (`0fd36b7`). → ripresa Fase 0 **ri-scalata** a taglia
+che finisce (ridurre passi/masse o disattivare il runaway), poi tabelle (a)/(b), poi decisione diffusione.
+
+### 15. L: autogenera il file canonico di regole di Copilot + obbligo di manutenere CLAUDE.md
+**A.** Creato `.github/copilot-instructions.md` con le regole di questa chat (lingua italiana; guardiano;
+due principi ferrei; "la media non va qui"; verifica nel codice non nei commenti; livelli di certezza;
+disciplina sperimentale 2000 passi + 2-3 semi; test-gratis prima delle modifiche; flag default-off +
+backup datato + py_compile + smoke + A/B una variabile + mostra diff; `--cs-dinamico ⟹ --chi-core +
+--spinore-vivo`; batch≠video; MAI Start-Sleep/polling; runaway mitosi; manutenzione `Checkpoint.md` +
+`CLAUDECONNECT.md` + **`CLAUDE.md`** + `/memories/repo/`; commit a ogni step, push solo su richiesta).
 
 ---
 
