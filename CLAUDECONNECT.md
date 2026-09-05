@@ -178,17 +178,34 @@ Eccezione non ancora classificata: `m*_picco_*` (spin picco per-massa) — possi
 | `calcola_psi` | 22 | ricalcolo | RIDONDANTE — `self.psi` già calcolata nello step |
 | Delaunay vortici/inerzia/`dens_g*` | ~4 | m0_carica/Jrot (lente) | throttle-safe ma MINORE |
 
-**VERDETTO [MISURATO]:** i costi dominanti sono ricalcoli RIDONDANTI (chi_core+psi=116 ms) o alimentano
-VELOCI (Berry). I blocchi solo-lenti throttlabili valgono ~4 ms → throttle inutile. **→ FASE 2B (ottimizza),
-NON 2A (throttle).** Ottimizzazione più pulita: **riusare `self.psi` e `self._chi_core_nodi` già calcolati**
-(byte-identico, ~116 ms risparmiati, zero aliasing). Le VELOCI restano a ogni passo. Async: confermato non serve.
+**VERDETTO §19 [poi RETTIFICATO in §20]:** avevo concluso "riusare `self.psi` e `self._chi_core_nodi`
+già calcolati (byte-identico, ~116 ms)". **SBAGLIATO** — vedi §20.
+
+### 20. RETTIFICA: il riuso NON è byte-identico (la mitosi cambia N) → pivot a 2A throttle di chi_core
+**A — errore e correzione (guardiano; Luca aveva segnalato l'esatto dubbio).** Fra il cache nello step e il
+ricalcolo nel diaglog c'è la **mitosi** (cambia N e topologia) + rilassa + memoria. Quindi `self.psi` e
+`self._chi_core_nodi` cachati sono a N VECCHIO/metà-step, mentre `_diag_completa` li ricalcola a N NUOVO
+(fine-step). Riusarli darebbe numeri DIVERSI → **il "byte-identico" NON regge**. Il riuso (2B) è abbandonato.
+
+**Soluzione corretta = 2A throttle SELETTIVO.** Misurato che `chi_core_*` è **COSTANTE/lenta** (lag-1) → la
+funzione più cara (`chiralita_core`, 94 ms su grafo denso) è **throttle-safe**: diradarla NON aliasa.
+Implementato flag **`--diag-lente-ogni N`** (default 1 = IDENTICO): con N>1 solo `chi_core` è calcolata ogni
+N passi (+ prima riga per l'header), mentre Berry/Neel/Lz/spin_core/guscio_circ restano a OGNI passo.
+
+**VERIFICATO:** py_compile OK. A/B 20 passi (`dl1` vs `dl10`): a N=1 tutte le colonne 21/21 dense (=baseline);
+a N=10 `chi_core`/`rho_c_core` = 3/21 (diradate), mentre `berry`/`spin_neel`/`m0_Lz`/`m0_spin_core`/`guscio_circ`
+= **21/21 dense → zero aliasing**. Speedup nullo a 20 passi (grafo piccolo, chi_core ~1 ms) ma ~85 ms/passo
+risparmiati **a scala** (chi_core = 94 ms a n=824, misurato). Byte-identico a N=1 per costruzione
+(`if CHI_CORE and diag_lente` = `if CHI_CORE` quando N=1).
 
 ---
 
 ## Stato corrente (per la ripresa)
-- **In corso [FASE 2B]**: riuso di `psi`/`chi_core` cachati in `_diag_completa` (byte-identico), poi
-  eventuale vettorizzazione dei loop per-ciclo (Berry/olonomia). NIENTE throttle delle veloci, NIENTE async.
-- **Codice committato**: cs-locale integrale, spin_core, diagnostica inerzia guscio (`48310e0`/`a5bf7de`, pushati).
+- **[FASE 2A FATTA, da committare]**: flag `--diag-lente-ogni N` (default 1 = identico) throttla solo
+  `chi_core` (lenta/costante, 94 ms a scala); VELOCI a ogni passo. Verificato densità colonne + compile.
+  NIENTE riuso byte-identico (mitosi cambia N — §20), NIENTE throttle delle veloci, NIENTE async.
+- **Codice committato**: cs-locale integrale, spin_core, diagnostica inerzia guscio (`48310e0`/`a5bf7de`);
+  profiling Fase 1 (`c98a9ca`).
 - **Codice al baseline corretto**: nessun throttle (l'edit `--diag-ogni`/`_diag_leggera` aliasava le veloci ed
   è stato annullato). Tutto a ogni passo = niente aliasing. py_compile OK.
 - **NON ancora scritto**: diffusione `--guscio-morbido` (Fase 1) — in attesa dei test-gratis.
