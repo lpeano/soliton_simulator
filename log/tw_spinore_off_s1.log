@@ -1,0 +1,229 @@
+[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile
+[calore] calcio termico VETTORIALE+chirale attivo: omega_s 3D eccitato, phivel firmato da perc_chi
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[polo-maturo] al twist partecipa la chiralita del polo che matura (twn maggiore)
+[ls-azim] L.S vettoriale: verso tangenziale da (radiale x spinore), azimutale stabile
+[verso-chi] FRAME_DRAG pilotato dal verso CHIRALE stabile (non dal tw oscillante)
+[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+[batch] condensazione: seed=1 passi=2000 ogni=10 sep=6.0 nmasse=2
+[batch] leggi attive: GRAV_BIFASE=True SPIN_ORBITA(via SPINORE)=True COPPIA_MIT=1.0 lambda=0.800
+
+passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
+[batch] LOG DIAGNOSTICO COMPLETO  -> out_tw_spinore\diag_off_s1.csv
+      0 |    0.0000 |    12.009 | r=4.2 c=0.313 n=6      | tot=1 NUOVI=1 | TRACK accr=744 coppie=0 nuova=80
+     10 |    0.0000 |    12.009 | r=8.2 c=0.413 n=6      | tot=2 NUOVI=0 | TRACK accr=744 coppie=0 nuova=80
+     20 |    0.0000 |    12.009 | r=9.2 c=0.419 n=5      | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+     30 |    0.0000 |    12.009 | r=4.8 c=0.186 n=5      | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+     40 |    0.0000 |    12.009 | r=5.2 c=0.156 n=8      | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+     50 |    0.0000 |    12.009 | r=4.8 c=0.248 n=5      | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+     60 |    0.0000 |    12.009 | r=6.8 c=0.340 n=10     | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+     70 |    0.0000 |    12.009 | r=6.8 c=0.403 n=10     | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+     80 |    0.0000 |    12.009 | r=6.8 c=0.316 n=10     | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+     90 |    0.0000 |    12.009 | r=7.8 c=0.257 n=10     | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+    100 |    0.0000 |    12.009 | r=7.2 c=0.311 n=10     | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+    110 |    0.0000 |    12.008 | r=6.8 c=0.501 n=10     | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+    120 |    0.0000 |    12.008 | r=8.8 c=0.348 n=5      | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+    130 |    0.0000 |    12.008 | r=7.2 c=0.334 n=7      | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+    140 |    0.0000 |    12.008 | r=5.8 c=0.250 n=4      | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+    150 |    0.0000 |    12.008 | r=7.8 c=0.307 n=8      | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+    160 |    0.0000 |    12.008 | r=5.2 c=0.226 n=9      | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+    170 |    0.0000 |    12.008 | r=6.2 c=0.328 n=9      | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+    180 |    0.0000 |    12.008 | r=6.8 c=0.266 n=9      | tot=2 NUOVI=0 | TRACK accr=745 coppie=0 nuova=80
+    190 |    0.0000 |    12.008 | r=7.8 c=0.461 n=9      | tot=2 NUOVI=0 | TRACK accr=746 coppie=1 nuova=80
+    200 |    0.0000 |    12.008 | r=5.2 c=0.372 n=10     | tot=2 NUOVI=0 | TRACK accr=747 coppie=1 nuova=80
+    210 |    0.0000 |    12.008 | r=8.2 c=0.168 n=7      | tot=2 NUOVI=0 | TRACK accr=747 coppie=1 nuova=80
+    220 |    0.0000 |    12.008 | r=4.8 c=0.312 n=6      | tot=2 NUOVI=0 | TRACK accr=747 coppie=1 nuova=80
+    230 |    0.0000 |    12.008 | r=7.8 c=0.199 n=6      | tot=2 NUOVI=0 | TRACK accr=748 coppie=1 nuova=80
+    240 |    0.0000 |    12.008 | r=7.2 c=0.218 n=9      | tot=2 NUOVI=0 | TRACK accr=749 coppie=2 nuova=80
+    250 |    0.0000 |    12.008 | r=7.2 c=0.197 n=8      | tot=1 NUOVI=0 | TRACK accr=751 coppie=2 nuova=80
+    260 |    0.0000 |    12.008 | r=7.8 c=0.381 n=6      | tot=1 NUOVI=0 | TRACK accr=753 coppie=3 nuova=81
+    270 |    0.0000 |    12.008 | r=4.8 c=0.304 n=4      | tot=1 NUOVI=0 | TRACK accr=754 coppie=4 nuova=81
+    280 |    0.0000 |    12.008 | r=6.8 c=0.044 n=9      | tot=2 NUOVI=0 | TRACK accr=754 coppie=4 nuova=81
+    290 |    0.0000 |    12.007 | r=9.2 c=0.095 n=4      | tot=2 NUOVI=0 | TRACK accr=754 coppie=4 nuova=81
+    300 |    0.0000 |    12.007 | r=7.2 c=0.062 n=8      | tot=2 NUOVI=0 | TRACK accr=754 coppie=4 nuova=81
+    310 |    0.0000 |    12.007 | r=5.2 c=0.178 n=9      | tot=2 NUOVI=0 | TRACK accr=755 coppie=4 nuova=81
+    320 |    0.0000 |    12.007 | r=7.8 c=0.216 n=6      | tot=2 NUOVI=0 | TRACK accr=756 coppie=4 nuova=81
+    330 |    0.0000 |    12.007 | r=7.8 c=0.287 n=6      | tot=2 NUOVI=0 | TRACK accr=756 coppie=4 nuova=83
+    340 |    0.0000 |    12.007 | r=7.8 c=0.326 n=7      | tot=2 NUOVI=0 | TRACK accr=758 coppie=5 nuova=83
+    350 |    0.0000 |    12.007 | r=7.8 c=0.190 n=6      | tot=2 NUOVI=0 | TRACK accr=760 coppie=6 nuova=83
+    360 |    0.0000 |    12.007 | r=5.2 c=0.087 n=4      | tot=2 NUOVI=0 | TRACK accr=760 coppie=6 nuova=83
+    370 |    0.0000 |    12.007 | r=5.8 c=0.372 n=9      | tot=2 NUOVI=0 | TRACK accr=763 coppie=7 nuova=83
+    380 |    0.0000 |    12.007 | r=6.8 c=0.181 n=8      | tot=2 NUOVI=0 | TRACK accr=765 coppie=8 nuova=83
+    390 |    0.0000 |    12.007 | r=5.2 c=0.320 n=6      | tot=2 NUOVI=0 | TRACK accr=766 coppie=8 nuova=83
+    400 |    0.0000 |    12.007 | r=9.2 c=0.199 n=10     | tot=1 NUOVI=0 | TRACK accr=766 coppie=8 nuova=83
+    410 |    0.0000 |    12.007 | r=9.2 c=0.275 n=10     | tot=2 NUOVI=0 | TRACK accr=766 coppie=8 nuova=83
+    420 |    0.0000 |    12.007 | r=7.8 c=0.146 n=6      | tot=1 NUOVI=0 | TRACK accr=766 coppie=8 nuova=83
+    430 |    0.0000 |    12.007 | r=10.8 c=0.277 n=18    | tot=1 NUOVI=0 | TRACK accr=768 coppie=8 nuova=83
+    440 |    0.0000 |    12.007 | r=6.8 c=0.370 n=5      | tot=2 NUOVI=0 | TRACK accr=772 coppie=11 nuova=83
+    450 |    0.0000 |    12.007 | r=6.2 c=0.201 n=7      | tot=2 NUOVI=0 | TRACK accr=773 coppie=11 nuova=83
+    460 |    0.0000 |    12.007 | r=4.2 c=0.308 n=5      | tot=2 NUOVI=0 | TRACK accr=780 coppie=14 nuova=83
+    470 |    0.0000 |    12.007 | r=3.2 c=0.199 n=4      | tot=2 NUOVI=0 | TRACK accr=795 coppie=19 nuova=83
+    480 |    0.0000 |    12.007 | r=2.8 c=0.284 n=4      | tot=2 NUOVI=0 | TRACK accr=810 coppie=28 nuova=83
+    490 |    0.0000 |    12.007 | r=6.2 c=0.213 n=5      | tot=2 NUOVI=0 | TRACK accr=837 coppie=42 nuova=83
+    500 |    0.0000 |    12.007 | r=7.2 c=0.325 n=10     | tot=1 NUOVI=0 | TRACK accr=853 coppie=52 nuova=83
+    510 |    0.0000 |    12.007 | r=5.2 c=0.091 n=10     | tot=2 NUOVI=0 | TRACK accr=880 coppie=62 nuova=83
+    520 |    0.0000 |    12.007 | r=9.2 c=0.242 n=4      | tot=2 NUOVI=0 | TRACK accr=910 coppie=78 nuova=83
+    530 |    0.0000 |    12.007 | r=9.2 c=0.292 n=4      | tot=2 NUOVI=0 | TRACK accr=934 coppie=92 nuova=83
+    540 |    0.0000 |    12.007 | r=7.2 c=0.286 n=9      | tot=2 NUOVI=0 | TRACK accr=963 coppie=103 nuova=83
+    550 |    0.0000 |    12.007 | r=9.8 c=0.135 n=5      | tot=2 NUOVI=0 | TRACK accr=993 coppie=116 nuova=83
+    560 |    0.0000 |    12.007 | r=8.2 c=0.174 n=4      | tot=2 NUOVI=0 | TRACK accr=1018 coppie=127 nuova=83
+    570 |    0.0000 |    12.006 | r=6.2 c=0.362 n=8      | tot=2 NUOVI=0 | TRACK accr=1041 coppie=133 nuova=83
+    580 |    0.0000 |    12.006 | r=5.8 c=0.232 n=7      | tot=2 NUOVI=0 | TRACK accr=1074 coppie=150 nuova=83
+    590 |    0.0000 |    12.006 | r=0.8 c=0.302 n=109    | tot=2 NUOVI=0 | TRACK accr=1097 coppie=162 nuova=83
+    600 |    0.0000 |    12.006 | r=4.8 c=0.232 n=10     | tot=2 NUOVI=0 | TRACK accr=1138 coppie=177 nuova=83
+    610 |    0.0000 |    12.006 | r=11.2 c=0.216 n=113   | tot=2 NUOVI=0 | TRACK accr=1166 coppie=189 nuova=84
+    620 |    0.0000 |    12.006 | r=0.8 c=0.132 n=203    | tot=2 NUOVI=0 | TRACK accr=1203 coppie=204 nuova=84
+    630 |    0.0000 |    12.006 | r=7.8 c=0.164 n=10     | tot=2 NUOVI=0 | TRACK accr=1257 coppie=226 nuova=84
+    640 |    0.0000 |    12.006 | r=0.8 c=0.062 n=228    | tot=1 NUOVI=0 | TRACK accr=1310 coppie=253 nuova=84
+    650 |    0.0001 |    12.006 | r=7.5 c=0.239 n=51     | tot=1 NUOVI=0 | TRACK accr=1346 coppie=272 nuova=84
+    660 |    0.0000 |    12.006 | r=7.5 c=0.207 n=54     | tot=1 NUOVI=0 | TRACK accr=1371 coppie=287 nuova=84
+    670 |    0.0000 |    12.006 | r=7.5 c=0.230 n=64     | tot=1 NUOVI=0 | TRACK accr=1409 coppie=308 nuova=84
+    680 |    0.0000 |    12.006 | r=7.5 c=0.201 n=66     | tot=1 NUOVI=0 | TRACK accr=1439 coppie=319 nuova=84
+    690 |    0.0001 |    12.006 | r=7.5 c=0.199 n=64     | tot=2 NUOVI=0 | TRACK accr=1464 coppie=331 nuova=84
+    700 |    0.0000 |    12.006 | r=7.5 c=0.215 n=64     | tot=2 NUOVI=0 | TRACK accr=1511 coppie=356 nuova=84
+    710 |    0.0002 |    12.006 | r=7.5 c=0.228 n=69     | tot=2 NUOVI=0 | TRACK accr=1549 coppie=374 nuova=85
+    720 |    0.0001 |    12.005 | r=7.5 c=0.223 n=72     | tot=1 NUOVI=0 | TRACK accr=1602 coppie=399 nuova=85
+    730 |    0.0001 |    12.005 | r=7.5 c=0.212 n=72     | tot=1 NUOVI=0 | TRACK accr=1642 coppie=415 nuova=85
+    740 |    0.0001 |    12.005 | r=7.5 c=0.214 n=72     | tot=1 NUOVI=0 | TRACK accr=1677 coppie=436 nuova=85
+    750 |    0.0001 |    12.005 | r=7.5 c=0.189 n=78     | tot=1 NUOVI=0 | TRACK accr=1717 coppie=454 nuova=85
+    760 |    0.0002 |    12.005 | r=7.5 c=0.183 n=83     | tot=1 NUOVI=0 | TRACK accr=1766 coppie=478 nuova=87
+    770 |    0.0003 |    12.005 | r=7.5 c=0.236 n=99     | tot=1 NUOVI=0 | TRACK accr=1813 coppie=505 nuova=87
+    780 |    0.0002 |    12.005 | r=7.5 c=0.218 n=111    | tot=1 NUOVI=0 | TRACK accr=1856 coppie=523 nuova=87
+    790 |    0.0002 |    12.005 | r=7.5 c=0.155 n=117    | tot=1 NUOVI=0 | TRACK accr=1914 coppie=552 nuova=87
+    800 |    0.0004 |    12.005 | r=7.5 c=0.171 n=124    | tot=1 NUOVI=0 | TRACK accr=1954 coppie=572 nuova=87
+    810 |    0.0003 |    12.005 | r=7.5 c=0.181 n=134    | tot=1 NUOVI=0 | TRACK accr=1996 coppie=590 nuova=87
+    820 |    0.0006 |    12.005 | r=7.5 c=0.185 n=134    | tot=1 NUOVI=0 | TRACK accr=2040 coppie=607 nuova=87
+    830 |    0.0010 |    12.005 | r=7.5 c=0.180 n=134    | tot=1 NUOVI=0 | TRACK accr=2086 coppie=621 nuova=87
+    840 |    0.0004 |    12.005 | r=7.5 c=0.165 n=147    | tot=1 NUOVI=0 | TRACK accr=2131 coppie=643 nuova=87
+    850 |    0.0008 |    12.005 | r=7.5 c=0.198 n=144    | tot=1 NUOVI=0 | TRACK accr=2179 coppie=665 nuova=87
+    860 |    0.0005 |    12.005 | r=7.5 c=0.171 n=151    | tot=1 NUOVI=0 | TRACK accr=2236 coppie=691 nuova=87
+    870 |    0.0003 |    12.005 | r=7.5 c=0.183 n=164    | tot=1 NUOVI=0 | TRACK accr=2287 coppie=722 nuova=87
+    880 |    0.0003 |    12.005 | r=7.5 c=0.187 n=179    | tot=2 NUOVI=0 | TRACK accr=2328 coppie=742 nuova=89
+    890 |    0.0004 |    12.005 | r=7.5 c=0.169 n=190    | tot=2 NUOVI=0 | TRACK accr=2375 coppie=764 nuova=92
+    900 |    0.0004 |    12.005 | r=7.5 c=0.180 n=201    | tot=2 NUOVI=0 | TRACK accr=2425 coppie=785 nuova=97
+    910 |    0.0004 |    12.005 | r=7.5 c=0.190 n=204    | tot=2 NUOVI=0 | TRACK accr=2468 coppie=807 nuova=97
+    920 |    0.0005 |    12.005 | r=7.5 c=0.225 n=210    | tot=2 NUOVI=0 | TRACK accr=2532 coppie=829 nuova=100
+    930 |    0.0003 |    12.005 | r=7.5 c=0.197 n=229    | tot=1 NUOVI=0 | TRACK accr=2589 coppie=855 nuova=100
+    940 |    0.0004 |    12.005 | r=7.5 c=0.211 n=239    | tot=2 NUOVI=0 | TRACK accr=2638 coppie=878 nuova=100
+    950 |    0.0006 |    12.005 | r=7.5 c=0.170 n=241    | tot=2 NUOVI=0 | TRACK accr=2688 coppie=904 nuova=100
+    960 |    0.0006 |    12.005 | r=7.5 c=0.177 n=256    | tot=2 NUOVI=0 | TRACK accr=2745 coppie=928 nuova=102
+    970 |    0.0009 |    12.005 | r=7.5 c=0.181 n=262    | tot=2 NUOVI=0 | TRACK accr=2793 coppie=947 nuova=105
+    980 |    0.0014 |    12.005 | r=7.5 c=0.188 n=279    | tot=2 NUOVI=0 | TRACK accr=2837 coppie=970 nuova=106
+    990 |    0.0013 |    12.005 | r=7.5 c=0.189 n=290    | tot=2 NUOVI=0 | TRACK accr=2891 coppie=1001 nuova=111
+   1000 |    0.0011 |    12.004 | r=7.5 c=0.197 n=292    | tot=2 NUOVI=0 | TRACK accr=2945 coppie=1021 nuova=112
+   1010 |    0.0010 |    12.004 | r=7.5 c=0.191 n=299    | tot=2 NUOVI=0 | TRACK accr=2997 coppie=1050 nuova=112
+   1020 |    0.0014 |    12.004 | r=7.5 c=0.153 n=312    | tot=2 NUOVI=0 | TRACK accr=3042 coppie=1067 nuova=112
+   1030 |    0.0010 |    12.004 | r=7.5 c=0.179 n=327    | tot=2 NUOVI=0 | TRACK accr=3090 coppie=1084 nuova=112
+   1040 |    0.0011 |    12.004 | r=7.5 c=0.175 n=344    | tot=2 NUOVI=0 | TRACK accr=3159 coppie=1116 nuova=112
+   1050 |    0.0008 |    12.004 | r=7.5 c=0.140 n=363    | tot=1 NUOVI=0 | TRACK accr=3207 coppie=1131 nuova=113
+   1060 |    0.0010 |    12.003 | r=7.5 c=0.157 n=360    | tot=1 NUOVI=0 | TRACK accr=3263 coppie=1165 nuova=115
+   1070 |    0.0008 |    12.003 | r=7.5 c=0.143 n=367    | tot=1 NUOVI=0 | TRACK accr=3320 coppie=1185 nuova=115
+   1080 |    0.0007 |    12.003 | r=7.5 c=0.139 n=382    | tot=1 NUOVI=0 | TRACK accr=3372 coppie=1202 nuova=115
+   1090 |    0.0008 |    12.003 | r=7.5 c=0.137 n=390    | tot=1 NUOVI=0 | TRACK accr=3439 coppie=1232 nuova=115
+   1100 |    0.0013 |    12.003 | r=7.5 c=0.117 n=390    | tot=1 NUOVI=0 | TRACK accr=3492 coppie=1267 nuova=116
+   1110 |    0.0013 |    12.003 | r=7.5 c=0.123 n=401    | tot=1 NUOVI=0 | TRACK accr=3541 coppie=1298 nuova=116
+   1120 |    0.0017 |    12.003 | r=7.5 c=0.155 n=412    | tot=1 NUOVI=0 | TRACK accr=3595 coppie=1321 nuova=116
+   1130 |    0.0015 |    12.003 | r=7.5 c=0.136 n=421    | tot=1 NUOVI=0 | TRACK accr=3661 coppie=1351 nuova=118
+   1140 |    0.0018 |    12.003 | r=7.5 c=0.113 n=432    | tot=1 NUOVI=0 | TRACK accr=3720 coppie=1376 nuova=118
+   1150 |    0.0016 |    12.003 | r=7.5 c=0.116 n=444    | tot=1 NUOVI=0 | TRACK accr=3787 coppie=1402 nuova=118
+   1160 |    0.0011 |    12.003 | r=7.5 c=0.145 n=458    | tot=1 NUOVI=0 | TRACK accr=3862 coppie=1441 nuova=118
+   1170 |    0.0022 |    12.003 | r=7.5 c=0.145 n=484    | tot=1 NUOVI=0 | TRACK accr=3942 coppie=1480 nuova=118
+   1180 |    0.0024 |    12.003 | r=7.5 c=0.141 n=503    | tot=1 NUOVI=0 | TRACK accr=3996 coppie=1508 nuova=118
+   1190 |    0.0022 |    12.003 | r=7.5 c=0.111 n=518    | tot=1 NUOVI=0 | TRACK accr=4066 coppie=1545 nuova=122
+   1200 |    0.0034 |    12.003 | r=7.5 c=0.121 n=520    | tot=1 NUOVI=0 | TRACK accr=4145 coppie=1575 nuova=122
+   1210 |    0.0021 |    12.003 | r=7.5 c=0.116 n=526    | tot=1 NUOVI=0 | TRACK accr=4212 coppie=1606 nuova=122
+   1220 |    0.0045 |    12.004 | r=7.5 c=0.111 n=534    | tot=1 NUOVI=0 | TRACK accr=4291 coppie=1646 nuova=122
+   1230 |    0.0049 |    12.004 | r=7.5 c=0.135 n=511    | tot=1 NUOVI=0 | TRACK accr=4342 coppie=1677 nuova=123
+   1240 |    0.0061 |    12.005 | r=7.5 c=0.115 n=498    | tot=1 NUOVI=0 | TRACK accr=4413 coppie=1714 nuova=124
+   1250 |    0.0036 |    12.005 | r=7.5 c=0.125 n=499    | tot=1 NUOVI=0 | TRACK accr=4481 coppie=1747 nuova=126
+   1260 |    0.0045 |    12.006 | r=7.5 c=0.120 n=518    | tot=1 NUOVI=0 | TRACK accr=4552 coppie=1771 nuova=126
+   1270 |    0.0081 |    12.007 | r=7.5 c=0.104 n=492    | tot=1 NUOVI=0 | TRACK accr=4615 coppie=1810 nuova=129
+   1280 |    0.0057 |    12.008 | r=7.5 c=0.109 n=470    | tot=1 NUOVI=0 | TRACK accr=4689 coppie=1848 nuova=133
+   1290 |    0.0066 |    12.008 | r=7.5 c=0.152 n=490    | tot=1 NUOVI=0 | TRACK accr=4786 coppie=1887 nuova=138
+   1300 |    0.0041 |    12.009 | r=7.5 c=0.135 n=500    | tot=1 NUOVI=0 | TRACK accr=4853 coppie=1915 nuova=138
+   1310 |    0.0086 |    12.010 | r=7.5 c=0.114 n=550    | tot=1 NUOVI=0 | TRACK accr=4944 coppie=1955 nuova=138
+   1320 |    0.0149 |    12.011 | r=8.5 c=0.187 n=239    | tot=1 NUOVI=0 | TRACK accr=5021 coppie=1990 nuova=138
+   1330 |    0.0138 |    12.012 | r=9.5 c=0.227 n=122    | tot=1 NUOVI=0 | TRACK accr=5102 coppie=2028 nuova=138
+   1340 |    0.0177 |    12.013 | r=13.0 c=0.246 n=20    | tot=1 NUOVI=0 | TRACK accr=5204 coppie=2074 nuova=138
+   1350 |    0.0133 |    12.015 | r=13.5 c=0.223 n=17    | tot=1 NUOVI=0 | TRACK accr=5306 coppie=2128 nuova=138
+   1360 |    0.0154 |    12.016 | r=7.5 c=0.141 n=602    | tot=1 NUOVI=0 | TRACK accr=5403 coppie=2169 nuova=138
+   1370 |    0.0211 |    12.017 | r=14.0 c=0.178 n=6     | tot=1 NUOVI=0 | TRACK accr=5484 coppie=2208 nuova=138
+   1380 |    0.0180 |    12.018 | r=7.5 c=0.115 n=576    | tot=1 NUOVI=0 | TRACK accr=5573 coppie=2262 nuova=139
+   1390 |    0.0364 |    12.019 | r=8.5 c=0.214 n=277    | tot=1 NUOVI=0 | TRACK accr=5641 coppie=2295 nuova=140
+   1400 |    0.0226 |    12.019 | r=13.5 c=0.239 n=15    | tot=1 NUOVI=0 | TRACK accr=5739 coppie=2352 nuova=140
+   1410 |    0.0209 |    12.020 | r=10.5 c=0.309 n=77    | tot=1 NUOVI=0 | TRACK accr=5826 coppie=2393 nuova=140
+   1420 |    0.0186 |    12.020 | r=10.5 c=0.319 n=84    | tot=1 NUOVI=0 | TRACK accr=5920 coppie=2437 nuova=141
+   1430 |    0.0120 |    12.021 | r=7.5 c=0.141 n=667    | tot=1 NUOVI=0 | TRACK accr=6018 coppie=2490 nuova=141
+   1440 |    0.0408 |    12.022 | r=7.5 c=0.128 n=694    | tot=1 NUOVI=0 | TRACK accr=6090 coppie=2532 nuova=143
+   1450 |    0.0344 |    12.022 | r=13.0 c=0.218 n=26    | tot=1 NUOVI=0 | TRACK accr=6194 coppie=2584 nuova=145
+   1460 |    0.0243 |    12.023 | r=9.0 c=0.208 n=238    | tot=1 NUOVI=1 | TRACK accr=6271 coppie=2621 nuova=146
+   1470 |    0.0235 |    12.025 | r=13.0 c=0.102 n=17    | tot=1 NUOVI=1 | TRACK accr=6358 coppie=2667 nuova=148
+   1480 |    0.0150 |    12.026 | r=7.5 c=0.148 n=718    | tot=1 NUOVI=1 | TRACK accr=6429 coppie=2702 nuova=149
+   1490 |    0.0176 |    12.028 | r=10.5 c=0.286 n=105   | tot=2 NUOVI=1 | TRACK accr=6513 coppie=2736 nuova=154
+   1500 |    0.0286 |    12.030 | r=14.0 c=0.145 n=17    | tot=2 NUOVI=1 | TRACK accr=6606 coppie=2784 nuova=155
+   1510 |    0.0255 |    12.032 | r=13.0 c=0.076 n=21    | tot=2 NUOVI=1 | TRACK accr=6696 coppie=2828 nuova=156
+   1520 |    0.0091 |    12.035 | r=7.5 c=0.146 n=772    | tot=1 NUOVI=0 | TRACK accr=6783 coppie=2867 nuova=156
+   1530 |    0.0192 |    12.038 | r=11.5 c=0.367 n=68    | tot=1 NUOVI=0 | TRACK accr=6875 coppie=2899 nuova=156
+   1540 |    0.0220 |    12.041 | r=7.5 c=0.177 n=773    | tot=1 NUOVI=0 | TRACK accr=6949 coppie=2940 nuova=157
+   1550 |    0.0159 |    12.044 | r=8.0 c=0.177 n=578    | tot=1 NUOVI=0 | TRACK accr=7029 coppie=2973 nuova=160
+   1560 |    0.0086 |    12.048 | r=7.5 c=0.218 n=780    | tot=1 NUOVI=0 | TRACK accr=7128 coppie=3031 nuova=161
+   1570 |    0.0136 |    12.052 | r=13.5 c=0.226 n=38    | tot=1 NUOVI=0 | TRACK accr=7246 coppie=3083 nuova=161
+   1580 |    0.0134 |    12.058 | r=14.0 c=0.096 n=26    | tot=1 NUOVI=0 | TRACK accr=7368 coppie=3135 nuova=161
+   1590 |    0.0098 |    12.064 | r=8.5 c=0.199 n=426    | tot=1 NUOVI=0 | TRACK accr=7477 coppie=3198 nuova=163
+   1600 |    0.0132 |    12.071 | r=15.0 c=0.236 n=13    | tot=1 NUOVI=0 | TRACK accr=7600 coppie=3257 nuova=165
+   1610 |    0.0265 |    12.078 | r=7.5 c=0.109 n=784    | tot=1 NUOVI=1 | TRACK accr=7711 coppie=3329 nuova=169
+   1620 |    0.0181 |    12.085 | r=7.5 c=0.178 n=797    | tot=1 NUOVI=1 | TRACK accr=7802 coppie=3381 nuova=170
+   1630 |    0.0169 |    12.092 | r=8.0 c=0.208 n=622    | tot=1 NUOVI=1 | TRACK accr=7924 coppie=3446 nuova=170
+   1640 |    0.0134 |    12.098 | r=9.5 c=0.308 n=355    | tot=1 NUOVI=1 | TRACK accr=8036 coppie=3500 nuova=171
+   1650 |    0.0136 |    12.104 | r=8.5 c=0.263 n=551    | tot=1 NUOVI=1 | TRACK accr=8118 coppie=3538 nuova=173
+   1660 |    0.0212 |    12.110 | r=15.0 c=0.235 n=26    | tot=1 NUOVI=1 | TRACK accr=8227 coppie=3593 nuova=173
+   1670 |    0.0104 |    12.115 | r=7.5 c=0.191 n=805    | tot=1 NUOVI=1 | TRACK accr=8317 coppie=3643 nuova=177
+   1680 |    0.0187 |    12.119 | r=15.0 c=0.259 n=36    | tot=1 NUOVI=0 | TRACK accr=8397 coppie=3692 nuova=178
+   1690 |    0.0120 |    12.122 | r=8.0 c=0.126 n=691    | tot=1 NUOVI=0 | TRACK accr=8473 coppie=3730 nuova=178
+   1700 |    0.0202 |    12.125 | r=8.0 c=0.133 n=690    | tot=1 NUOVI=0 | TRACK accr=8569 coppie=3797 nuova=178
+   1710 |    0.0145 |    12.126 | r=15.5 c=0.292 n=40    | tot=1 NUOVI=0 | TRACK accr=8658 coppie=3861 nuova=178
+   1720 |    0.0183 |    12.126 | r=17.5 c=0.328 n=19    | tot=1 NUOVI=0 | TRACK accr=8761 coppie=3919 nuova=182
+   1730 |    0.0099 |    12.125 | r=8.0 c=0.195 n=756    | tot=1 NUOVI=0 | TRACK accr=8888 coppie=3987 nuova=186
+   1740 |    0.0225 |    12.123 | r=15.0 c=0.309 n=65    | tot=1 NUOVI=0 | TRACK accr=8993 coppie=4036 nuova=186
+   1750 |    0.0181 |    12.120 | r=8.0 c=0.176 n=738    | tot=1 NUOVI=0 | TRACK accr=9082 coppie=4092 nuova=187
+   1760 |    0.0155 |    12.117 | r=10.0 c=0.321 n=361   | tot=1 NUOVI=1 | TRACK accr=9164 coppie=4144 nuova=189
+   1770 |    0.0192 |    12.113 | r=7.5 c=0.175 n=883    | tot=1 NUOVI=1 | TRACK accr=9279 coppie=4204 nuova=190
+   1780 |    0.0236 |    12.109 | r=16.0 c=0.302 n=53    | tot=1 NUOVI=1 | TRACK accr=9375 coppie=4252 nuova=193
+   1790 |    0.0356 |    12.106 | r=17.5 c=0.208 n=44    | tot=1 NUOVI=1 | TRACK accr=9457 coppie=4301 nuova=193
+   1800 |    0.0215 |    12.103 | r=18.0 c=0.143 n=37    | tot=1 NUOVI=0 | TRACK accr=9554 coppie=4354 nuova=195
+   1810 |    0.0563 |    12.102 | r=19.0 c=0.280 n=32    | tot=1 NUOVI=0 | TRACK accr=9653 coppie=4405 nuova=196
+   1820 |    0.0603 |    12.100 | r=18.5 c=0.180 n=25    | tot=1 NUOVI=1 | TRACK accr=9751 coppie=4465 nuova=196
+   1830 |    0.0743 |    12.100 | r=23.5 c=0.286 n=9     | tot=1 NUOVI=1 | TRACK accr=9850 coppie=4524 nuova=197
+   1840 |    0.0522 |    12.100 | r=19.5 c=0.453 n=20    | tot=2 NUOVI=2 | TRACK accr=9968 coppie=4570 nuova=197
+   1850 |    0.0410 |    12.101 | r=17.0 c=0.306 n=57    | tot=2 NUOVI=2 | TRACK accr=10074 coppie=4632 nuova=199
+   1860 |    0.0357 |    12.102 | r=16.0 c=0.145 n=75    | tot=2 NUOVI=2 | TRACK accr=10177 coppie=4691 nuova=201
+   1870 |    0.0334 |    12.104 | r=17.5 c=0.244 n=57    | tot=2 NUOVI=2 | TRACK accr=10278 coppie=4754 nuova=201
+   1880 |    0.0563 |    12.106 | r=16.5 c=0.061 n=65    | tot=2 NUOVI=2 | TRACK accr=10378 coppie=4803 nuova=202
+   1890 |    0.0470 |    12.108 | r=18.5 c=0.316 n=44    | tot=2 NUOVI=2 | TRACK accr=10483 coppie=4878 nuova=206
+   1900 |    0.0339 |    12.110 | r=14.5 c=0.297 n=139   | tot=2 NUOVI=2 | TRACK accr=10586 coppie=4923 nuova=211
+   1910 |    0.0406 |    12.112 | r=17.0 c=0.471 n=55    | tot=2 NUOVI=2 | TRACK accr=10693 coppie=4982 nuova=215
+   1920 |    0.0394 |    12.115 | r=17.0 c=0.389 n=52    | tot=2 NUOVI=2 | TRACK accr=10787 coppie=5031 nuova=215
+   1930 |    0.0245 |    12.117 | r=9.5 c=0.257 n=642    | tot=2 NUOVI=2 | TRACK accr=10907 coppie=5094 nuova=215
+   1940 |    0.0157 |    12.119 | r=18.0 c=0.323 n=54    | tot=1 NUOVI=1 | TRACK accr=11010 coppie=5161 nuova=215
+   1950 |    0.0147 |    12.121 | r=19.0 c=0.325 n=34    | tot=1 NUOVI=1 | TRACK accr=11097 coppie=5223 nuova=216
+   1960 |    0.0163 |    12.123 | r=16.5 c=0.148 n=93    | tot=1 NUOVI=1 | TRACK accr=11202 coppie=5286 nuova=221
+   1970 |    0.0305 |    12.124 | r=18.5 c=0.289 n=54    | tot=1 NUOVI=1 | TRACK accr=11309 coppie=5345 nuova=223
+   1980 |    0.0221 |    12.126 | r=20.0 c=0.358 n=31    | tot=1 NUOVI=1 | TRACK accr=11413 coppie=5410 nuova=227
+   1990 |    0.0177 |    12.128 | r=19.5 c=0.318 n=32    | tot=1 NUOVI=1 | TRACK accr=11531 coppie=5479 nuova=228
+   2000 |    0.0398 |    12.131 | r=15.0 c=0.347 n=134   | tot=1 NUOVI=1 | TRACK accr=11642 coppie=5539 nuova=228
+[batch] log diagnostico completo salvato in out_tw_spinore\diag_off_s1.csv
+
+[batch] completato in 3875.3s, 2000 passi. CSV salvato in out_tw_spinore\cond_off_s1.csv
+[batch] LETTURA condensazione: se dens_centrale e n_centrali CRESCONO e frac_nati resta
+        ALTA mentre dist_masse NON crolla -> NUOVA massa dal vuoto (non accrescimento).
+[batch] LETTURA picchi_nuovi: se picchi_nuovi passa da 0 a >=1 a un certo passo, quello e'
+        il momento in cui una MASSA NUOVA si stacca dal vuoto (materia isolata che si crea).
+[batch] LETTURA antiguscio: se compare un anello a coerenza_min BASSA (antifase) e raggio
+        stabile oltre le masse, con nodi presenti -> GUSCIO DI ANTIFASE che avvolge i nuclei
+        = massa di scala superiore (il guscio del sistema e antifase, non materia).

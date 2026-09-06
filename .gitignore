@@ -37,3 +37,14 @@ __pycache__/
 !out_guscio_morbido/*.csv
 !log/spincore_*.log
 !log/guscio_*.log
+
+# Risultati A/B --tw-spinore (aggancio doppia copertura) e regimi (mai i .pkl).
+!out_tw_spinore/
+!out_tw_spinore/*.csv
+!out_guscio_regimi/
+!out_guscio_regimi/*.csv
+!out_guscio_fase1/
+!out_guscio_fase1/*.csv
+!log/tw_spinore_*.log
+!log/guscio_regimi_*.log
+!log/guscio_fase1_*.log

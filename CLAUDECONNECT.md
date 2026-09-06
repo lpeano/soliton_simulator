@@ -242,10 +242,38 @@ seed 3 in corso. Analisi (correlazioni + trend 1ª/2ª metà):
 - **CONTRO-PROVA in corso:** A/B `--guscio-morbido` (OFF s1 fatto, ON s1 in corso): se smussare il guscio riduce
   `spin_core_disp`, il disordine viene davvero dal guscio ruvido.
 
-### Campagne in corso
-- **spin_core** (terminale `1e7655f0`, `out_spincore/`): seed 1✅ 2✅ 3 in corso.
-- **guscio-morbido A/B** (terminale `04cc98f9`, `out_guscio_morbido/`): OFF s1✅, ON s1 in corso, poi s2.
-- Girano in parallelo (CPU condivisa → più lente). Log+CSV committati; `.pkl` esclusi (enormi).
+### §25. SPINORE & DOPPIA COPERTURA — indagine + risultato (NEGATIVO)
+**Domanda di Luca:** "pensavo lo spinore funzionasse, cosa mancava?" → verifica nel codice.
+- **Stato verificato:** `SPINORE_VIVO` on (evoluzione viva, non l'orfano). MA lo spinore è agganciato **solo alla
+  CHIRALITÀ** (χ_i·χ_j → riflessione σz/σx = generatori SU(2)), **NON alla TORSIONE a 4π** (`tw`, doppia copertura):
+  il canale tw→spinore vive solo in `SPIN_LARMOR` (off, storicamente fallito per auto-spegnimento).
+- **Le "due z"** (spinore a 2 componenti col segno, `_spinor_lift = [cos(θ/2), sin(θ/2)e^{iφ}]`) **ci sono ma
+  come LIFT DERIVATO** dal Bloch a una z: il segno a doppia copertura è **misurato, non guidato**. L'evoluzione è
+  SO(3) sul Bloch; il segno è ricostruito per continuità, non un DOF primario.
+- **Cosa mancava:** che il **twist a 4π pilotasse il Bloch** — precessione di **`tw/2`** (la metà = firma spin-½)
+  attorno a un asse persistente.
+- **IMPLEMENTATO `--tw-spinore`** (default off, byte-identico OFF, commit `bf0f75e`): Bloch precede di `tw/2`
+  attorno all'asse σ chirale (persistente, non `n_i×n_j` che si auto-spegneva in SPIN_LARMOR). Smoke 30 passi:
+  non destabilizza (nodi stabili), `spin_cluster_omega` +94%, `guscio_circ` 1.0→0.5. **Promettente in formazione.**
+- **RISULTATO A/B 2000 passi (3 semi ON vs 2 OFF, sep 6) — DIMOSTRATO NEGATIVO:** a equilibrio **ON ≈ OFF su tutto**.
+  `spin_cluster_omega`: ON 0.010/0.010/0.011 vs OFF 0.011/0.010 (identico). Auto-spegnimento `corr(M,ω) ~ −0.35`
+  presente in ENTRAMBI. `spin_core`/`guscio_circ`/`|Lz|`: rumore seme-a-seme, nessuna differenza sistematica.
+  → il boost dello smoke era **solo formazione**; a equilibrio il twist a 4π satura, `tw/2` diventa offset inerte,
+  l'ordinamento spin si auto-spegne come sempre. **L'aggancio così com'è NON dà lo spin coerente sperato.**
+
+### §26. Prerequisito risolto: il diaglog contaminava la fisica (§21)
+Prima di ogni misura di spin: `chiralita_core_locale` (muta `_chi_core_nodi`) e `ritmo` (muta `_psi_prec`),
+letti dalla dinamica, venivano chiamati dal diaglog → la diagnostica alterava la fisica. Reso SOLO-LETTURA
+(lettura pura + snapshot/restore di psi/_psi_prec/_spinor_lift). Fisica BYTE-IDENTICA con/senza diaglog (verificato,
+commit `2465d2d`). Senza questo, nessuna misura di spin era affidabile.
+
+### Stato campagne (2026-09-06)
+- **spin_core (3 semi):** §24 confermato — guscio DISORDINA lo spin (corr Jshell↔spin_core_disp +0.47/+0.40/+0.51),
+  NON congela per inerzia. Dati cancellati dal working dir su richiesta (recuperabili da git, commit `fc88537`).
+- **tw-spinore A/B (`out_tw_spinore/`):** §25, negativo. In fase di commit anche se non tutto finito (off_s3 parziale).
+- **guscio-morbido (FASE 2) e regimi (sep 5/6/8/12):** dati cancellati (working dir pulito), da rifare se serve.
+- **APERTO:** l'aggancio doppia-copertura→spin va ripensato (l'asse σ chirale non basta a evitare l'auto-spegnimento
+  a equilibrio); oppure il segnale è genuinamente frustrato (plasma vortice-antivortice bilanciato, `m0_carica`~0).
 
 ### Riferimenti codice/commit
 - **[FATTO, `2465d2d`] CURA ALLA RADICE (§21):** diaglog SOLO-LETTURA (chi_core lettura pura + snapshot/restore
