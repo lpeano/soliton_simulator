@@ -702,6 +702,11 @@ SPIN_LARMOR = False     # CAMPO TRASVERSO GEOMETRICO sullo spinore (legge, zero 
                         # al campo effettivo B si somma B_geo = <|tw|/PHI_CRIT * (n_i x n_j)>, termine
                         # non-abeliano perpendicolare a n che sostiene la precessione di Larmor senza
                         # auto-spegnersi quando gli spin si ordinano. Richiede --spinore-vivo. Default off.
+TW_SPINORE = False      # AGGANCIO DOPPIA COPERTURA: la torsione a 4pi (tw) pilota il Bloch di tw/2
+                        # (spin-1/2, geometrico) attorno all'asse sigma FISSO dalla chiralita' del legame
+                        # (sigma_x uguali, sigma_z opposti). Asse persistente (non svanisce all'allineamento,
+                        # il difetto di SPIN_LARMOR). Zero parametri (tw/PHI_CRIT gia' nel sistema, 1/2 = spin-1/2).
+                        # Richiede --spinore-vivo. Default off = non-regressione.
 SPIN_FEEDBACK = False   # FEEDBACK LOCALE SPINORE->ARCHI: usa l'overlap complesso dei lift sugli archi
                         # come flusso di fase antisimmmetrico. Richiede --spinore-vivo; default off
                         # per A/B. Non impone alcuna cucitura o olonomia: la misura deve emergere.
@@ -1579,6 +1584,17 @@ class Rete:
             _tau = TAU_A
         omega_src = omega_t if SYNC_UPDATE else self.omega_s
         omega_new = omega_src + dtn_c * (correzione / inerzia[:, None] - omega_src / _tau)
+        if TW_SPINORE:
+            # DOPPIA COPERTURA: la torsione a 4pi (tw) pilota il Bloch. Angolo = tw/2 (spin-1/2,
+            # geometrico, NON una manopola) attorno all'asse sigma FISSO dalla chiralita' del legame
+            # (sigma_x uguali, sigma_z opposti) -> asse persistente, non svanisce all'allineamento
+            # (il difetto che spense SPIN_LARMOR). Il segno di tw da' il verso. Nessun parametro nuovo.
+            _twh = self.tw[mask] / (2.0 * max(PHI_CRIT, 1e-9))
+            _axis = np.where(cl[:, None] > 0, np.array([1.0, 0.0, 0.0]), np.array([0.0, 0.0, 1.0]))
+            _otw = np.zeros((n, 3)); _degt = np.zeros(n)
+            np.add.at(_otw, ii, _axis * _twh[:, None]); np.add.at(_degt, ii, 1.0)
+            np.add.at(_otw, jj, _axis * _twh[:, None]); np.add.at(_degt, jj, 1.0)
+            omega_new = omega_new + _otw / np.maximum(_degt[:, None], 1.0)
         # PRECESSIONE conservativa: ruoto il Bloch attorno a omega (rotazione esatta, unitaria)
         on = np.linalg.norm(omega_new, axis=1, keepdims=True)
         ohat = omega_new / np.maximum(on, 1e-9)
@@ -3892,7 +3908,7 @@ def _applica_flag(a):
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -3930,6 +3946,7 @@ def _applica_flag(a):
     SYNC_UPDATE = bool(getattr(a, "sync", False)) # aggiornamento sincrono (transazionale): default off
     SPINORE_VIVO = bool(getattr(a, "spinore_vivo", False)) # reinnesto evoluzione SU(2) nell'ETC: default off
     SPIN_LARMOR = bool(getattr(a, "spin_larmor", False))   # campo trasverso geometrico (Larmor): default off
+    TW_SPINORE = bool(getattr(a, "tw_spinore", False))     # torsione 4pi -> Bloch (doppia copertura): default off
     SPIN_FEEDBACK = bool(getattr(a, "spin_feedback", False)) # feedback locale overlap spinoriale: default off
     SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
     CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale
@@ -4179,6 +4196,11 @@ def _cli():
                         "somma B_geo = <|tw|/PHI_CRIT * (n_i x n_j)>, termine non-abeliano perpendicolare "
                         "a n che sostiene la precessione di Larmor senza auto-spegnersi con l'ordine. "
                         "Richiede --spinore-vivo. Default off = non-regressione.")
+    p.add_argument("--tw-spinore", action="store_true", dest="tw_spinore",
+                   help="AGGANCIO DOPPIA COPERTURA (legge, zero parametri): la torsione a 4pi (tw) fa "
+                        "precedere il Bloch di tw/2 (spin-1/2) attorno all'asse sigma della chiralita' del "
+                        "legame (sigma_x uguali, sigma_z opposti). Asse persistente (non si auto-spegne come "
+                        "SPIN_LARMOR). Richiede --spinore-vivo. Default off = non-regressione.")
     p.add_argument("--spin-feedback", action="store_true", dest="spin_feedback",
                    help="FEEDBACK LOCALE SPINORE->ARCHI: la parte immaginaria dell'overlap del lift "
                         "spinoriale aggiunge una coppia antisimmmetrica alle fasi. Richiede "
