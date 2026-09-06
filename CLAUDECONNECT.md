@@ -364,4 +364,19 @@ pezzo per pezzo dalle domande di Luca. Ogni passo sotto flag default-off, evalua
   - `m0_omega_axis_R` = allineamento ASSI degli orologi (omega_s) nel nucleo [0,1].
   - `m0_spin_core_cv` = spin_core_disp / scala freq comovente (mediana |phivel|, gauge) -> adimensionale.
 - **Tutti i run hanno SEMPRE --sync** (ETC/contemporaneita'): gia' in PREREQ, entrambi i rami A/B.
-- Verdetto da leggere a N APPAIATO ON vs OFF su 3 semi (analisi_covariante.py).
+
+### §29 — STEP 1 RISULTATO: NEGATIVO covariante (2026-09-07)
+Campagna completata (6 run, 2000 passi, 3 semi). Confronto ON vs OFF a **N appaiato** (N=2000/2500/3000;
+la catena fredda cresce piano, N max ~3000-4300, NON ~18-20k delle campagne calde).
+- **`m0_spin_axis_R` (allineamento spinori nucleo): NEGATIVO.** ON-OFF ~ -0.001/+0.004/-0.028; per-seme @N=3000
+  ON<OFF su TUTTI e 3 (0.034/0.048, 0.046/0.111, 0.056/0.062). Valore assoluto ~0.04 = FRUSTRATO in ON e OFF.
+  La sincronizzazione NON ordina i Bloch.
+- **`m0_omega_axis_R` (assi orologi): accenno debole NON robusto.** ON>OFF (+0.03/+0.05) ma solo 2 semi su 3
+  (seed 3 inverte).
+- **`m0_spin_core_cv` (dispersione): rumoroso**, nessuna riduzione chiara.
+- **VERDETTO (guardiano): al MINIMO FREDDO --sync-spinore NON scioglie la frustrazione.** Coerente con la
+  SOGLIA di Kuramoto (accoppiamento < dispersione degli orologi rho*r). La macchina e' corretta (sigilli
+  passati) ma NECESSARIA NON SUFFICIENTE. CAVEAT: regime meno maturo (N~3-4k); non escluso che a N maggiore
+  o con un canale (STEP 2) cambi. Strumento: out_freetest/_analisi_sync.py.
+- **PROSSIMO: STEP 2** = candidate una alla volta (--chi-core; poi --cs-dinamico [che porta --chi-core];
+  poi --guscio-morbido), A/B, 3 semi, per vedere se una da' il CANALE che fa propagare la sync.

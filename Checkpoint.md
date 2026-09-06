@@ -27,6 +27,12 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
       (|media versori Bloch| globale [0,1], non diluisce), `m0_spin_axis_R` (allineamento spinori nucleo =
       parametro d'ordine Kuramoto SU(2)), `m0_omega_axis_R` (allineamento assi orologi), `m0_spin_core_cv`
       (spin_core_disp normalizzata per scala freq comovente). NB: tutti i run hanno SEMPRE `--sync`.
+- **[NEGATIVO covariante, 3 semi]** STEP 1 minimo freddo completato. ON vs OFF a N APPAIATO (N=2000-3000;
+      catena fredda cresce piano, N max ~3-4k). `m0_spin_axis_R` ~0.04 (FRUSTRATO) in ON e OFF, ON<OFF su
+      tutti e 3 i semi -> `--sync-spinore` NON scioglie la frustrazione al minimo freddo. Solo accenno debole
+      non robusto su `m0_omega_axis_R` (assi orologi, 2/3 semi). Coerente con la SOGLIA di Kuramoto
+      (accoppiamento < dispersione orologi). Macchina corretta ma NON sufficiente. Analisi: out_freetest/_analisi_sync.py.
+- **[PROSSIMO]** STEP 2: candidate una alla volta (--chi-core; poi --cs-dinamico; poi --guscio-morbido), A/B 3 semi.
 - **[APERTO]** La macchina corretta è necessaria NON sufficiente per lo spin ½: l'ordinamento (frustrazione
       chiralità) è il problema separato che `--sync-spinore` prova a sciogliere.
 
