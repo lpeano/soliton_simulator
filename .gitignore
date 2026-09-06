@@ -48,3 +48,8 @@ __pycache__/
 !log/tw_spinore_*.log
 !log/guscio_regimi_*.log
 !log/guscio_fase1_*.log
+
+# Risultati A/B --sync-spinore (Kuramoto SU(2), STEP 1 minimo freddo) (mai i .pkl).
+!out_sync_spinore/
+!out_sync_spinore/*.csv
+!log/sync_spinore_*.log
