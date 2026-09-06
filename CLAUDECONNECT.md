@@ -301,3 +301,58 @@ Non covarianti → "il dito, non la luna". Il "calo" di spin poteva essere l'esp
 - **Aperto:** instabilità del warmup a `--tauloc` alto (sospetto CFL `nsub`, IN VERIFICA); ELAST_C 100 vs 0 su core maturo.
 - **Governance**: flag default-off; 2000 passi + 2-3 semi; verificare nel codice; misura prima, modifica dopo;
   il campionamento è fisica (no aliasing); **il diaglog è SOLO LETTURA (mai mutare stato fisico)**.
+
+---
+
+## §28 — PACCHETTO SPINORE CORRETTO + KURAMOTO SU(2) (2026-09-06)
+
+Catena di gate rigorosi (Copilot analizza → si ferma → Luca+guardiano confermano → implementa), costruita
+pezzo per pezzo dalle domande di Luca. Ogni passo sotto flag default-off, evaluate-then-commit, sigilli passati.
+
+### Richieste di Luca (cronologia)
+1. "gestisci tutte le misure metriche in modo covariante SEMPRE" → regola covarianza in copilot-instructions +
+   `analisi_covariante.py` (confronto a N appaiato). [committato+pushato]
+2. "Implementa la gestione corretta dello spinore sotto `--spinore-corretto`… PRIORITÀ ASSOLUTA: cache e
+   contemporaneità (evaluate-then-commit). Prima MOSTRA (i) variabili snapshottate (ii) niente commit di
+   metà passo (iii) estensione cache dopo mitosi. Non procedere finché non confermo."
+3. (dopo conferma) → implementato `--spinore-corretto` + flag separati `--chi-da-spinore`, `--tempo-proprio-orientato`.
+4. "Aggiungi Kuramoto sul settore SPINORE sotto `--sync-spinore`… MOSTRA (i) formula omega_sync (ii) ordine ETC
+   (iii) zero parametri. Non procedere finché non confermo." → confermato: omega_sync in omega_tot (rotazione),
+   NON in omega_s (memoria) — torque istantaneo, non momento conservato (altrimenti accumulo/divergenza).
+5. "Testa --sync-spinore a SCALA (minimo freddo), non tutto acceso: classi A prerequisiti / B candidate una
+   alla volta / C rumore. Attento alla soglia di Kuramoto."
+6. "procedi con campagna lunga ma prima aggiorna Claude."
+
+### Cosa è stato implementato (tutto default-off, sigilli passati)
+- **`--spinore-corretto`** (master): OROLOGIO PROPRIO de Broglie [omega_clk=(rho/rho_c)·r lungo l'asse di Bloch
+  PROPRIO nb = pura fase] + SPINORE PRIMARIO complesso `_psi_spinor` (n×2) in SU(2); Bloch `_nb` DERIVATO
+  (nb=psi†σψ). U=exp(-i/2 ω·σ dt), |psi|=1 atomico. Richiede `--spinore-vivo`. **Risolve la collisione di nome**:
+  `self.psi` è il campo materia U(1), lo spinore è `_psi_spinor` (nuovo).
+- **`--chi-da-spinore`** (flag 3): perc_chi = segno di doppia-copertura di `_psi_spinor` DOPO il commit; disattiva
+  CHI_BASC; richiede `--spinore-corretto`.
+- **`--tempo-proprio-orientato`** (flag 4): r con SEGNO (toglie |.| da f in `ritmo()`).
+- **`--sync-spinore`**: Kuramoto SU(2). `omega_sync = forza·(nb × nb_media)`, `nb_media=(wI@nb_t)/uno` da
+  snapshot t-1, `forza` = la STESSA del Kuramoto-φ (K_SYNC, 2/π, prof_rel, rinforzo_shear). Torque ISTANTANEO
+  → in `omega_tot` (rotazione), MAI in `omega_s` (memoria). Zero parametri nuovi.
+- **Cache coerenti dopo mitosi/Schwinger** (`_eredita_spinore_figli`, regola D): il figlio eredita lo spinore
+  COMPLESSO del genitore col segno (antinodo = −psi); estende anche `_psi_prec` → elimina il RESET SPURIO
+  globale in `ritmo()` su len!=n. Audit di TUTTI i punti di crescita di n (semina/mitosi/Schwinger).
+- **Diaglog sola-lettura** esteso: snapshot/restore di `_psi_spinor,_nb,_nb_prec,omega_s,phi_s`.
+
+### Sigilli (verificati)
+- `--spinore-corretto`: OFF byte-identico (max|A−B|=0, n=831); ON |psi|²=1.000000, `_psi_spinor/_nb/omega_s`
+  tutti len==n dopo mitosi (n=842). Commit del pacchetto.
+- `--sync-spinore`: OFF byte-identico (max|A−B|=0, n=831); ON |psi|²=1, len==n (n=844). Commit.
+
+### Test a SCALA (metodo guardiano) — `test_sync_spinore.bat`
+- **STEP 1 MINIMO FREDDO**: solo prerequisiti (`--spinore-vivo --spinore-corretto --sync`), regime deterministico
+  = FREDDO (SCUOTIMENTO off), niente classe B/C. A/B ON vs OFF, 3 semi, 2000 passi, sep 6.
+- Misura COVARIANTE (N appaiato): `spin_cluster_modulo` (→1?), Berry firmata/assoluta, dispersione omega/assi.
+- **Soglia di Kuramoto**: può sincronizzare il nucleo (denso) ma non il guscio (rado, frequenze disperse) →
+  risultato fisico, va LETTO non forzato.
+- **APERTO**: la macchina corretta è necessaria NON sufficiente per lo spin ½; l'ordinamento (frustrazione) è
+  il problema separato che `--sync-spinore` prova a sciogliere.
+- **STEP 2/3** (dopo): candidate una alla volta (--cs-dinamico, --chi-core, --guscio-morbido); annealing.
+
+### In corso
+- Campagna STEP 1 LANCIATA (6 run, `out_sync_spinore/`, `log/sync_spinore_*.log`). DA LEGGERE covariante a fine run.

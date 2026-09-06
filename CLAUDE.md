@@ -99,20 +99,18 @@ Inoltre le colonne **gauge/olonomia** (calcolate per ogni config a ≥2 masse): 
 della struttura al centro della config; cosphi<0 = antifase = pozzo/valle) e `guscio_*` (N/coer/cosphi/circ
 dell'anello attorno al centro; **`guscio_circ` = olonomia** = giri interi di fase attorno al baricentro).
 
-**IMPORTANTE — lo spinore SU(2) È CONGELATO (evoluzione orfana).** Stato reale verificato con
-git-archeologia il 2026-09-03: `SPINORE=True` di default, ma il metodo `_passo_spinoriale`
-(l'evoluzione non-abeliana, rotazioni SU(2) del Bloch + eccitazione del vuoto) è **ORFANO** — la
-sua chiamata è stata rimossa come collaterale del refactor a snapshot/commit-atomico ETC nel commit
-`d2c76f3` (2026-09-02) e non è mai stata reinnestata nel percorso vivo. Nel percorso batch/video
-`_nb` viene solo **inizializzato planare** (`[sin b, 0, cos b]`, tutti y=0 → coplanari) e **letto**
-(proiezione gravitazionale, `LS_AZIM`), **mai ruotato**. Conseguenza: ogni misura di fase di
-Berry / curvatura non-abeliana dal 2026-09-02 è ~0 **per spinore congelato, NON per natura abeliana
-del sistema** — l'assenza non-abeliana NON è dimostrata, è artefatto di codice morto. La vecchia
-nota "SU(2) attivo, chiamato a ogni step" era **falsa** (smentita dal codice): è la prova plateale
-del perché "verificare nel codice, non fidarsi dei commenti" è la regola — un commit intitolato
-"add script" conteneva un refactor che ha spento un settore fisico. Riattivazione: solo reinnestando
-`_passo_spinoriale` nell'ordine ETC (snapshot, ordine nel passo), dietro flag, A/B, rimisurando.
-Verificare SEMPRE nel codice prima di affermare lo stato di una feature, non fidarsi dei commenti.
+**IMPORTANTE — lo spinore SU(2): DA CONGELATO A VIVO+PRIMARIO (aggiornato 2026-09-06).** Storia:
+`_passo_spinoriale` era ORFANO dal refactor `d2c76f3` (2026-09-02) — spento, non chiamato (Berry~0 per
+codice morto, non per natura abeliana: prova plateale del "verificare nel codice, non nei commenti").
+**Ora reinnestato e corretto** dietro flag default-off, con sigilli byte-identici:
+- `--spinore-vivo`: reinnesta `_passo_spinoriale` nell'ordine ETC (legge lo snapshot t).
+- `--spinore-corretto`: rende PRIMARIO lo spinore complesso `_psi_spinor` (n×2, SU(2)); il Bloch `_nb`
+  ne è la PROIEZIONE (nb=psi†σψ). Orologio proprio de Broglie (omega_clk lungo l'asse nb = pura fase).
+  ATTENZIONE alla collisione di nome: `self.psi` è il CAMPO MATERIA U(1), lo spinore è `_psi_spinor`.
+- `--sync-spinore`: Kuramoto SU(2) (omega_sync in omega_tot/rotazione, mai in omega_s/memoria).
+- `--chi-da-spinore` / `--tempo-proprio-orientato`: flag separati (perc_chi da doppia-copertura; r con segno).
+Cache spinoriali estese coerenti dopo mitosi (`_eredita_spinore_figli`, regola D). Con TUTTI i flag off il
+comportamento resta quello storico (spinore congelato). Verificare SEMPRE nel codice lo stato di una feature.
 
 **Trappola video:** il moov atom si scrive solo a fine run. Interrompere a metà → file illeggibile.
 Usa `--frames N` che finisca da solo. Non interrompere run video.

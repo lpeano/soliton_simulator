@@ -1,11 +1,35 @@
 # CHECKPOINT — Sistema dei Solitoni Relazionali (VQT / U2)
 
-_Ultimo aggiornamento: 2026-09-05. Progetto di Luca Peano ("Il Muratore di Planck")._
+_Ultimo aggiornamento: 2026-09-06. Progetto di Luca Peano ("Il Muratore di Planck")._
 _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md per le norme di conduzione._
 
 ---
 
-## AGGIORNAMENTO CORRENTE — 2026-09-05
+## AGGIORNAMENTO CORRENTE — 2026-09-06
+
+### Pacchetto SPINORE CORRETTO + Kuramoto SU(2) (tutto default-off, sigilli passati)
+
+- **[FATTO, sigilli byte-identici]** Catena di gate rigorosi (analisi → stop → conferma → implementa).
+      Vedi `CLAUDECONNECT.md` §28 per il dettaglio. Flag aggiunti (default off):
+  - **`--spinore-corretto`** (master): orologio proprio de Broglie + spinore primario complesso
+      `_psi_spinor` (n×2, SU(2)); Bloch `_nb` DERIVATO (nb=psi†σψ). Evaluate-then-commit, |psi|=1.
+      Collisione di nome risolta: `self.psi`=materia U(1), `_psi_spinor`=spinore. Richiede `--spinore-vivo`.
+  - **`--chi-da-spinore`** (flag 3): perc_chi da segno di doppia-copertura, post-commit; disattiva CHI_BASC.
+  - **`--tempo-proprio-orientato`** (flag 4): r con segno (toglie |.| da f in ritmo()).
+  - **`--sync-spinore`**: Kuramoto SU(2). omega_sync=forza·(nb×nb_media) da snapshot t-1, forza dal
+      Kuramoto-φ. Torque ISTANTANEO in omega_tot (rotazione), MAI in omega_s (memoria). Zero parametri.
+  - Cache coerenti dopo mitosi/Schwinger (`_eredita_spinore_figli`, regola D); eliminato reset spurio di
+      `_psi_prec`. Diaglog sola-lettura esteso a `_psi_spinor,_nb,omega_s,phi_s`.
+- **[SIGILLI]** OFF byte-identico (max|A−B|=0); ON |psi|²=1.000000 e `_psi_spinor/_nb/omega_s` len==n dopo mitosi.
+- **[IN CORSO]** Campagna STEP 1 "minimo freddo" (`test_sync_spinore.bat`): solo prerequisiti, regime freddo,
+      A/B ON vs OFF, 3 semi, 2000 passi. Misura COVARIANTE (N appaiato) di S_M/Berry/dispersione omega.
+      Attento alla SOGLIA di Kuramoto (nucleo sì, guscio forse no). DA LEGGERE a fine run.
+- **[APERTO]** La macchina corretta è necessaria NON sufficiente per lo spin ½: l'ordinamento (frustrazione
+      chiralità) è il problema separato che `--sync-spinore` prova a sciogliere.
+
+---
+
+## AGGIORNAMENTO — 2026-09-05
 
 ### Congelamento da guscio: RISULTATO 2 semi (diaglog pulito, byte-identico)
 
