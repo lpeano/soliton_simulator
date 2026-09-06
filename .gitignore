@@ -53,3 +53,8 @@ __pycache__/
 !out_sync_spinore/
 !out_sync_spinore/*.csv
 !log/sync_spinore_*.log
+
+# Risultati STEP 2 --sync-spinore (candidate una alla volta: chi-core, ...) (mai i .pkl).
+!out_sync_spinore_step2/
+!out_sync_spinore_step2/*.csv
+!log/sync_step2_*.log
