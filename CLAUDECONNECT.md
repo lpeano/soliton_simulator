@@ -355,4 +355,13 @@ pezzo per pezzo dalle domande di Luca. Ogni passo sotto flag default-off, evalua
 - **STEP 2/3** (dopo): candidate una alla volta (--cs-dinamico, --chi-core, --guscio-morbido); annealing.
 
 ### In corso
-- Campagna STEP 1 LANCIATA (6 run, `out_sync_spinore/`, `log/sync_spinore_*.log`). DA LEGGERE covariante a fine run.
+- Campagna STEP 1 FERMATA e RILANCIATA con misure COVARIANTI (richiesta Luca: "voglio tutte le misure
+  covarianti, poi fermi e rilanci"). `spin_cluster_modulo` e `spin_core*` non erano covarianti: media globale
+  che diluisce ~1/sqrt(N) / unita' di phivel che driftano col vuoto / settore materia non spinore.
+- **Aggiunti al diaglog osservabili COVARIANTI (intensivi, adimensionali, per-dominio), diaglog byte-identico**:
+  - `spin_axis_R` = |media VERSORI di Bloch| globale [0,1] (non diluisce, sostituisce spin_cluster_modulo).
+  - `m0_spin_axis_R` = allineamento spinori nel NUCLEO [0,1] = parametro d'ordine del Kuramoto SU(2).
+  - `m0_omega_axis_R` = allineamento ASSI degli orologi (omega_s) nel nucleo [0,1].
+  - `m0_spin_core_cv` = spin_core_disp / scala freq comovente (mediana |phivel|, gauge) -> adimensionale.
+- **Tutti i run hanno SEMPRE --sync** (ETC/contemporaneita'): gia' in PREREQ, entrambi i rami A/B.
+- Verdetto da leggere a N APPAIATO ON vs OFF su 3 semi (analisi_covariante.py).

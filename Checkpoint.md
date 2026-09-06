@@ -22,8 +22,11 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
       `_psi_prec`. Diaglog sola-lettura esteso a `_psi_spinor,_nb,omega_s,phi_s`.
 - **[SIGILLI]** OFF byte-identico (max|A−B|=0); ON |psi|²=1.000000 e `_psi_spinor/_nb/omega_s` len==n dopo mitosi.
 - **[IN CORSO]** Campagna STEP 1 "minimo freddo" (`test_sync_spinore.bat`): solo prerequisiti, regime freddo,
-      A/B ON vs OFF, 3 semi, 2000 passi. Misura COVARIANTE (N appaiato) di S_M/Berry/dispersione omega.
-      Attento alla SOGLIA di Kuramoto (nucleo sì, guscio forse no). DA LEGGERE a fine run.
+      A/B ON vs OFF, 3 semi, 2000 passi. Misura COVARIANTE (N appaiato). DA LEGGERE a fine run.
+- **[FATTO]** Diaglog reso COVARIANTE (intensivo/adimensionale, per-dominio; byte-identico): `spin_axis_R`
+      (|media versori Bloch| globale [0,1], non diluisce), `m0_spin_axis_R` (allineamento spinori nucleo =
+      parametro d'ordine Kuramoto SU(2)), `m0_omega_axis_R` (allineamento assi orologi), `m0_spin_core_cv`
+      (spin_core_disp normalizzata per scala freq comovente). NB: tutti i run hanno SEMPRE `--sync`.
 - **[APERTO]** La macchina corretta è necessaria NON sufficiente per lo spin ½: l'ordinamento (frustrazione
       chiralità) è il problema separato che `--sync-spinore` prova a sciogliere.
 

@@ -4638,6 +4638,18 @@ def batch_condensazione(a):
             cols['spin_neel_omega'] = circ.get('spin_neel_omega', 0.0)
         except Exception:
             pass
+        # --- PARAMETRO D'ORDINE SPINORIALE COVARIANTE (globale, INTENSIVO, adimensionale) ---
+        # spin_axis_R = |media dei VERSORI di Bloch| in [0,1]: 1 = spinori allineati, 0 = frustrati.
+        # A differenza di spin_cluster_modulo (=|somma Bloch|/N, che DILUISCE ~1/sqrt(N) con l'espansione)
+        # questa e' una media di versori: NON diluisce con N -> confrontabile a N appaiato (covariante).
+        cols['spin_axis_R'] = 0.0
+        _nb_g = getattr(net, '_nb', None)
+        if _nb_g is not None and len(_nb_g) >= n and n > 0:
+            _ax = np.asarray(_nb_g[:n], float)
+            _u = _ax / np.maximum(np.linalg.norm(_ax, axis=1, keepdims=True), 1e-12)
+            _w = np.maximum(I2, 0.0)
+            if _w.sum() > 1e-9:
+                cols['spin_axis_R'] = float(np.linalg.norm((_u * _w[:, None]).sum(0) / _w.sum()))
         # SCHERMATURA: osservabili della legge ancorata a N_c. La portata effettiva
         # mostra direttamente la differenza fra nucleo schermato e guscio non schermato.
         try:
@@ -4661,6 +4673,7 @@ def batch_condensazione(a):
         # del sistema, per rispondere a decadimento/equilibrio/divergenza sulla massa VERA.
         m0_I2pesata = 0.0; m0_raggio = 0.0; m0_N = 0; m0_coer = 0.0; m0_spin = 0.0; m0_spin_disp = 0.0
         m0_spin_core = 0.0; m0_spin_core_disp = 0.0
+        m0_spin_axis_R = 0.0; m0_omega_axis_R = 0.0; m0_spin_core_cv = 0.0
         m0_Mdyn = 0.0; m0_Mcoh = 0.0; m0_Rinerzia = 0.0; m0_Jrot = 0.0; m0_Jshell_frac = 0.0
         m0_Ncore = 0; m0_Nshell = 0
         m0_vort_pos = 0; m0_vort_neg = 0; m0_carica = 0
@@ -4732,6 +4745,28 @@ def batch_condensazione(a):
                         if w_nuc.sum() > 1e-9:
                             m0_spin_core = float(np.sum(vphi_nuc * w_nuc) / w_nuc.sum())
                             m0_spin_core_disp = float(np.sqrt(np.sum(w_nuc*(vphi_nuc - m0_spin_core)**2)/w_nuc.sum()))
+                    # --- OSSERVABILI COVARIANTI del NUCLEO (intensivi, adimensionali) per la sync SU(2) ---
+                    # m0_spin_axis_R = |media versori di Bloch| nel nucleo in [0,1] (1=allineati, 0=frustrati):
+                    # e' IL parametro d'ordine del Kuramoto spinoriale, non diluisce con N. m0_omega_axis_R =
+                    # allineamento degli ASSI degli orologi (omega_s). m0_spin_core_cv = spin_core_disp
+                    # normalizzata per la scala di frequenza comovente (mediana |phivel|, gauge) -> adimensionale.
+                    _nbm = getattr(net, '_nb', None)
+                    if _nbm is not None and len(_nbm) >= n and nuc.sum() >= 3:
+                        _axc = np.asarray(_nbm[idx_m][nuc], float)
+                        _uc = _axc / np.maximum(np.linalg.norm(_axc, axis=1, keepdims=True), 1e-12)
+                        _wc = np.maximum(I2[idx_m][nuc], 0.0)
+                        if _wc.sum() > 1e-9:
+                            m0_spin_axis_R = float(np.linalg.norm((_uc * _wc[:, None]).sum(0) / _wc.sum()))
+                    _omm = getattr(net, 'omega_s', None)
+                    if _omm is not None and len(_omm) >= n and nuc.sum() >= 3:
+                        _oax = np.asarray(_omm[idx_m][nuc], float)
+                        _onrm = np.linalg.norm(_oax, axis=1)
+                        _ok = _onrm > 1e-9
+                        if _ok.sum() >= 3:
+                            _ou = _oax[_ok] / _onrm[_ok][:, None]
+                            m0_omega_axis_R = float(np.linalg.norm(_ou.mean(0)))
+                    _fscale = float(np.median(np.abs(net.phivel[:n]))) if n > 0 else 0.0
+                    m0_spin_core_cv = float(m0_spin_core_disp / _fscale) if _fscale > 1e-9 else 0.0
                     # SPIN TOPOLOGICO: la massa e' una struttura VORTICE-ANTIVORTICE. I vortici
                     # (singolarita' di fase, +-2pi) NON stanno nel nucleo coerente ma nel GUSCIO,
                     # al confine nucleo/vuoto. Quindi li cerco sui nodi entro un raggio dal centro
@@ -4785,6 +4820,9 @@ def batch_condensazione(a):
         cols['m0_spin_disp'] = m0_spin_disp   # dispersione dello spin (bassa=coerente)
         cols['m0_spin_core'] = m0_spin_core    # spin sulla MASCHERA DEL NUCLEO, pesato |Psi|^2, no perc_chi
         cols['m0_spin_core_disp'] = m0_spin_core_disp  # dispersione dello spin del nucleo
+        cols['m0_spin_axis_R'] = m0_spin_axis_R        # COVARIANTE: |media versori Bloch| nel nucleo [0,1]
+        cols['m0_omega_axis_R'] = m0_omega_axis_R      # COVARIANTE: allineamento assi orologi (omega_s) [0,1]
+        cols['m0_spin_core_cv'] = m0_spin_core_cv      # COVARIANTE: spin_core_disp / scala freq comovente (adim.)
         cols['m0_Mdyn'] = m0_Mdyn              # sum|Psi|^2 (inerzia dinamica, guscio incluso)
         cols['m0_Mcoh'] = m0_Mcoh              # sum|Psi|^2 cos(phi-phi_m): guscio antifase sottrae
         cols['m0_Rinerzia'] = m0_Rinerzia      # M_dyn/|M_coh|: alto = pesante ma incoerente (guscio)
@@ -5090,7 +5128,7 @@ def batch_condensazione(a):
                   'd_min','d_max','d_mean','d0_min','d0_max','d0_mean','eta_min','eta_max','eta_mean',
                   'tau_min','tau_max','tau_mean','dmin_nodi','xi_termo','n_naninf','n_I2_grandi','n_lontani',
                   'm0_I2pesata','m0_raggio','m0_N','m0_coer','m0_spin','m0_spin_disp',
-                  'm0_spin_core','m0_spin_core_disp',
+                  'm0_spin_core','m0_spin_core_disp','m0_spin_axis_R','m0_omega_axis_R','m0_spin_core_cv',
                   'm0_Mdyn','m0_Mcoh','m0_Rinerzia','m0_Jrot','m0_Jshell_frac','m0_Ncore','m0_Nshell',
                   'm0_vort_pos','m0_vort_neg','m0_carica',
                   'm0_coer_nucleo','m0_N_nucleo','m0_raggio_nucleo','m0_Lz','m0_Lz_norm']
