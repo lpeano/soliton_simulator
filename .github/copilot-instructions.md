@@ -33,6 +33,20 @@ chat di sessione (vedi `CLAUDECONNECT.md`). Integrano — non sostituiscono — 
 - **Ordine giusto: prima i test-GRATIS** (che rispondono senza scrivere codice), poi le modifiche solo
   se i test le giustificano. Misura prima, modifica dopo.
 
+## Misure covarianti (IL SISTEMA SI ESTENDE)
+Il sistema si estende sempre: N cresce (da ~400 a ~20000 nodi) e le `d0` si stirano. Ogni misura metrica va
+gestita **in modo covariante**, altrimenti misuri l'espansione, non la fisica (il dito, non la luna).
+- **MAI confrontare a passo-coordinata fisso.** Confronta a **N appaiato** e/o **tempo proprio cumulativo
+  appaiato** (`tau_cum = Σ tau_mean·DT`), non allo stesso `step`.
+- **MAI usare medie globali che diluiscono con N** (es. `spin_cluster_modulo = |media Bloch|/N` cala come
+  ~1/√N per pura aggiunta di nodi): usa osservabili **intensivi/adimensionali**, **per-dominio** (nucleo/guscio
+  separati), o **normalizzati per la scala comovente** (`d_mean`, mediana `d0`).
+- **I trend nel tempo** (1ª vs 2ª metà) vanno letti a **scala/popolazione appaiata**, non a passo fisso.
+- Osservabili già covarianti da preferire: rapporti relazionali (coer, cosphi, correlazioni istantanee),
+  invarianti topologici (`guscio_circ`, carica), quantità per-arco.
+- Regola pratica: prima di dichiarare un effetto, **rifai la misura a N appaiato**; se sparisce, era espansione.
+
+
 ## Flusso di modifica del codice
 - **Mai modificare il canonico per esperimenti.** Ogni modifica dietro **flag reversibile default-OFF**;
   con flag off il comportamento resta IDENTICO (idealmente byte-identico) a prima.
