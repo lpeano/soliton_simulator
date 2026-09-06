@@ -29,3 +29,11 @@ __pycache__/
 !out_spinore_plastdin/
 !out_spinore_plastdin/*.csv
 !log/pd_*.log
+
+# Risultati campagna congelamento da guscio (spin_core + inerzia) e A/B guscio-morbido (mai i .pkl).
+!out_spincore/
+!out_spincore/*.csv
+!out_guscio_morbido/
+!out_guscio_morbido/*.csv
+!log/spincore_*.log
+!log/guscio_*.log

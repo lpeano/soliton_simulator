@@ -7,6 +7,17 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 
 ## AGGIORNAMENTO CORRENTE — 2026-09-05
 
+### Congelamento da guscio: RISULTATO 2 semi (diaglog pulito, byte-identico)
+
+- **[IN VERIFICA, 2 semi]** Campagna `spin_core`/inerzia guscio (sep 8, 2000 passi). L'ipotesi
+      "il guscio congela la precessione per INERZIA" **NON è confermata**: `corr(Jshell_frac,|Lz|)`
+      e `corr(Rinerzia,|Lz|)` ~0 (cambiano segno tra semi). Il calo di `|Lz|`/`spin_core` in blocco
+      è confuso con l'AGING (cresce tutto, ~18-21k nodi). **Segnale REALE e concorde:** il guscio
+      **DISORDINA lo spin del nucleo** — `corr(Jshell_frac, spin_core_disp)` = +0.47/+0.40 su 2 semi;
+      `corr(Nshell, spin_core)` negativo. Frustrazione/disordine, NON congelamento inerziale.
+      Contro-prova in corso: A/B `--guscio-morbido` (se smussa il guscio → cala `spin_core_disp`).
+      Dettaglio in `CLAUDECONNECT.md` §24.
+
 ### Diaglog reso SOLO-LETTURA (cura alla radice, byte-identico verificato)
 
 - **[FATTO, DIMOSTRATO]** `chiralita_core_locale()` è IMPURA (muta `self._chi_core_nodi`,

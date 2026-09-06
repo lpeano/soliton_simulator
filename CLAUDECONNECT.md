@@ -224,23 +224,35 @@ dinamica) accoppia misura e fisica — il diaglog dev'essere read-only, con snap
 ---
 
 ## Stato corrente (per la ripresa)
-- **[FATTO, committato `2465d2d`] CURA ALLA RADICE (§21):** diaglog reso SOLO-LETTURA (chi_core lettura pura +
-  snapshot/restore di psi/_psi_prec/_spinor_lift). Fisica BYTE-IDENTICA con/senza diaglog (verificato).
-  Flag `--diag-lente-ogni` rimosso (superfluo). `test_spincore.bat` ripulito.
-- **[LANCIATO §22]** Campagna `test_spincore.bat` (2 masse, sep 8, 2000 passi, 3 semi, catena completa)
-  in background, con diaglog pulito → risultati validi sul congelamento da guscio (J_shell/Rinerzia vs Lz/spin_core).
-- **[FATTO §23 — FASE 1] diffusione `--guscio-morbido`** (default off, byte-identico OFF): nel sottociclo
-  metrico `d0 += clip(dt_e*D*lap(d0), ±cs*dt_e)`, `D = cs_arco*d_arco` (nessun coeff. nuovo), laplaciano
-  = quello delle onde. Smussa solo il guscio (lap~0 nel nucleo). py_compile OK, smoke ON gira. FASE 2 (A/B
-  ON vs OFF, 2000 passi) rimandata: CPU occupata dalla campagna spin_core. Test tauloc (FASE 0) bloccati
-  dall'instabilita' del warmup ad alta dilatazione (sospetto CFL nsub, IN VERIFICA).
-- **Codice committato**: cs-locale integrale, spin_core, diagnostica inerzia guscio (`48310e0`/`a5bf7de`);
-  profiling Fase 1 (`c98a9ca`); throttle poi rimosso (`2c895c7`/`7fa2b2b`).
-- **PRONTO:** rilanciare la campagna `test_spincore.bat` (3 semi × 2000 passi) — ora il diaglog NON
-  contamina la fisica, quindi i risultati sul congelamento da guscio sono validi.
-- **Decisioni aperte (fisica vera):**
-  1. Campagna spin_core/inerzia guscio (3 semi, 2000 passi) → congelamento da guscio: J_shell/Rinerzia vs Lz/spin_core.
-  2. Instabilità del PRIMO passo a `--tauloc` alto (sospetto CFL `nsub`) per i test tauloc.
-  3. (b) ELAST_C 100 vs 0 su core MATURO/denso.
+
+### §24. RISULTATO — congelamento da guscio: 2 semi puliti (diaglog non contamina)
+Campagna `test_spincore.bat` con diaglog SOLO-LETTURA (fisica byte-identica). Seed 1 e 2 completi (2000 passi),
+seed 3 in corso. Analisi (correlazioni + trend 1ª/2ª metà):
+- **In blocco, concorde su 2 semi:** mentre il guscio cresce (Nshell 483→5490 / 308→4210; Rinerzia 3.6→6.8 /
+  2.0→4.7), `spin_core` cala (0.28→0.04 / 0.14→−0.24), `|Lz|` cala (0.080→0.038 / 0.075→0.020),
+  `spin_core_disp` sale (1.37→2.64 / 1.55→1.81).
+- **Correlazioni istantanee:** `corr(Jshell_frac,|Lz|)` = +0.05/−0.06 ≈ **0**; `corr(Rinerzia,|Lz|)` = +0.04/−0.02 ≈ **0**;
+  `corr(Nshell,|Lz|)` = −0.09/−0.25 (debole); `corr(Nshell,spin_core)` = −0.10/−0.62; **`corr(Jshell_frac,spin_core_disp)`
+  = +0.47/+0.40 (CONCORDE).**
+- **VERDETTO [IN VERIFICA, 2 semi]:** l'ipotesi "il guscio congela la precessione per INERZIA" **NON è confermata**
+  (corr con |Lz| ~0, cambia segno). Il calo di |Lz| in blocco è confuso con l'AGING (cresce tutto: ~21000/18000 nodi).
+  Il segnale **REALE e concorde**: il guscio **DISORDINA lo spin del nucleo** (Jshell_frac↔spin_core_disp ≈ +0.4;
+  Nshell↔spin_core negativo). NON congelamento inerziale → **frustrazione/disordine**. Stesso segnale (+0.47) del
+  run contaminato di seed-1 → è fisica reale, non artefatto del diaglog (la cura era necessaria ma non l'ha inventato).
+- **CONTRO-PROVA in corso:** A/B `--guscio-morbido` (OFF s1 fatto, ON s1 in corso): se smussare il guscio riduce
+  `spin_core_disp`, il disordine viene davvero dal guscio ruvido.
+
+### Campagne in corso
+- **spin_core** (terminale `1e7655f0`, `out_spincore/`): seed 1✅ 2✅ 3 in corso.
+- **guscio-morbido A/B** (terminale `04cc98f9`, `out_guscio_morbido/`): OFF s1✅, ON s1 in corso, poi s2.
+- Girano in parallelo (CPU condivisa → più lente). Log+CSV committati; `.pkl` esclusi (enormi).
+
+### Riferimenti codice/commit
+- **[FATTO, `2465d2d`] CURA ALLA RADICE (§21):** diaglog SOLO-LETTURA (chi_core lettura pura + snapshot/restore
+  di psi/_psi_prec/_spinor_lift). Fisica byte-identica. Flag `--diag-lente-ogni` rimosso.
+- **[FATTO, `41f75b5`] FASE 1 (§23):** diffusione `--guscio-morbido` (default off): `d0 += clip(dt_e*D*lap(d0),
+  ±cs*dt_e)`, `D = cs_arco*d_arco` (nessun coeff. nuovo). Smussa solo il guscio.
+- **Codice base**: cs-locale integrale, spin_core, diagnostica inerzia guscio (`48310e0`/`a5bf7de`).
+- **Aperto:** instabilità del warmup a `--tauloc` alto (sospetto CFL `nsub`, IN VERIFICA); ELAST_C 100 vs 0 su core maturo.
 - **Governance**: flag default-off; 2000 passi + 2-3 semi; verificare nel codice; misura prima, modifica dopo;
   il campionamento è fisica (no aliasing); **il diaglog è SOLO LETTURA (mai mutare stato fisico)**.
