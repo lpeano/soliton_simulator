@@ -718,6 +718,12 @@ CHI_DA_SPINORE = False  # FLAG 3 (separato, NON nel master): perc_chi = segno di
                         # DOPO il commit di psi, e CHI_BASC disattivato. RICHIEDE --spinore-corretto (sennò loop).
 TEMPO_PROPRIO_ORIENTATO = False # FLAG 4 (separato, profondo): toglie |.| da f in ritmo() -> r con SEGNO
                         # (tempo proprio orientato). Cambia una legge di base; default off.
+SYNC_SPINORE = False    # KURAMOTO SU(2) SUGLI SPINORI (sotto-flag): tira ogni spinore verso l'allineamento
+                        # con la media di vicinato via torque omega_sync = forza*(nb x nb_media), nb_media
+                        # = (wI @ nb_t)/uno. forza = la STESSA del Kuramoto-phi (K_SYNC, 2/pi, prof_rel,
+                        # rinforzo_shear). Torque ISTANTANEO -> entra in omega_tot (rotazione), NON in omega_s
+                        # (memoria: darebbe accumulo/divergenza). Zero parametri nuovi. Richiede il settore
+                        # spinore vivo e K_SYNC!=0 (forza dal blocco Kuramoto-phi). Default off = byte-identico.
 SPIN_FEEDBACK = False   # FEEDBACK LOCALE SPINORE->ARCHI: usa l'overlap complesso dei lift sugli archi
                         # come flusso di fase antisimmmetrico. Richiede --spinore-vivo; default off
                         # per A/B. Non impone alcuna cucitura o olonomia: la misura deve emergere.
@@ -1536,7 +1542,8 @@ class Rete:
         r_normalized = r / r_unit                       # x=1 -> fattore unitario
         return 1.0 + TAU_LOC * (r_normalized - 1.0)
 
-    def _passo_spinoriale(self, i, j, w, dt_n, psi_snapshot=None):
+    def _passo_spinoriale(self, i, j, w, dt_n, psi_snapshot=None,
+                          forza_sync=None, wI_sync=None, uno_sync=None):
         """ORFANO dal 2026-09-02 (commit d2c76f3): la chiamata e' stata persa nel refactor ETC e
         non e' piu' invocata nel percorso vivo. Riattivabile solo reinnestandolo nell'ordine ETC.
         PASSO 2+3: settore spinoriale non-abeliano con MOTORE CONSERVATIVO hebbiano.
@@ -1666,6 +1673,14 @@ class Rete:
             np.add.at(_otw, ii, _axis * _twh[:, None]); np.add.at(_degt, ii, 1.0)
             np.add.at(_otw, jj, _axis * _twh[:, None]); np.add.at(_degt, jj, 1.0)
             omega_new = omega_new + _otw / np.maximum(_degt[:, None], 1.0)
+        # KURAMOTO SU(2) (--sync-spinore): torque di ALLINEAMENTO verso la media di vicinato degli
+        # spinori. nb_media dallo snapshot t-1 (nb), forza = la STESSA del Kuramoto-phi. E' un torque
+        # ISTANTANEO: entra nella rotazione (omega_sync, sotto), MAI in omega_s (memoria: darebbe
+        # accumulo/divergenza). |nb_media| non normalizzato = coerenza locale (debole nel guscio frustrato).
+        omega_sync = None
+        if SYNC_SPINORE and forza_sync is not None and wI_sync is not None and uno_sync is not None:
+            nb_media = (wI_sync @ nb) / uno_sync[:, None]
+            omega_sync = np.asarray(forza_sync[:n])[:, None] * np.cross(nb, nb_media)
         # PRECESSIONE conservativa: ruoto il Bloch attorno a omega (rotazione esatta, unitaria)
         psi_sp_new = None
         if SPINORE_CORRETTO:
@@ -1689,6 +1704,8 @@ class Rete:
                 rho_c = float(massa_critica_collasso())
             omega_clk = (rho / max(rho_c, 1e-12)) * r_node          # frequenza propria (scalare per nodo)
             omega_tot = omega_new + omega_clk[:, None] * nb          # lungo l'asse PROPRIO (nb unitario)
+            if omega_sync is not None:
+                omega_tot = omega_tot + omega_sync                  # torque di allineamento SU(2) (istantaneo)
             # spinore primario: init da Bloch corrente se assente/nuovo (la mitosi eredita il complesso;
             # qui e' solo fallback/primo-init). Legge lo snapshot t-1 di _psi_spinor.
             self._estendi_psi_spinor(n, nb)
@@ -1719,8 +1736,9 @@ class Rete:
                                2.0 * np.imag(np.conj(a1) * b1),
                                np.abs(a1) ** 2 - np.abs(b1) ** 2], axis=1)
         else:
-            on = np.linalg.norm(omega_new, axis=1, keepdims=True)
-            ohat = omega_new / np.maximum(on, 1e-9)
+            omega_rot = omega_new if omega_sync is None else (omega_new + omega_sync)  # sync nella rotazione, non in memoria
+            on = np.linalg.norm(omega_rot, axis=1, keepdims=True)
+            ohat = omega_rot / np.maximum(on, 1e-9)
             ang = on * (dtn_c if not np.isscalar(dtn_c) else dtn_c)
             cA = np.cos(ang); sA = np.sin(ang)
             dot = np.sum(ohat * nb, axis=1, keepdims=True)
@@ -2064,6 +2082,7 @@ class Rete:
 
         # SINCRONIZZAZIONE PESATA SUL TAGLIO ROTAZIONALE (Legge corretta di Kuramoto)
         delta_sync_phi = np.zeros(self.n)
+        _forza_sync = _wI_sync = _uno_sync = None   # ingredienti del Kuramoto per il torque SU(2) (--sync-spinore)
         if K_SYNC != 0.0 and self.n > 2:
             psi_sync = psi_t if SYNC_UPDATE else self.calcola_psi()
             I2 = np.abs(psi_sync) ** 2
@@ -2094,7 +2113,9 @@ class Rete:
             
             forza = (2.0 / np.pi) * prof_rel * rinforzo_shear
             forza = K_SYNC * forza                        # K_SYNC=1 = legge piena
-            
+            if SYNC_SPINORE:
+                _forza_sync, _wI_sync, _uno_sync = forza, wI, uno   # riuso per il torque SU(2), snapshot t-1
+
             zc_sync = wI @ np.exp(1j * _phi_t)            # USA LO SNAPSHOT t
             media = np.angle(zc_sync)
             delta_sync_phi = dt_n * forza * np.sin(media - _phi_t)  # <-- USA SNAPSHOT
@@ -2103,7 +2124,8 @@ class Rete:
         # ancora stata committata, quindi calcola_psi() usa _phi_t). Deve stare PRIMA del commit
         # atomico per non leggere le fasi t+1 (sfasamento che l'ETC deve evitare).
         if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) == self.n:
-            self._passo_spinoriale(i, j, w, dt_n, psi_snapshot=psi_t)
+            self._passo_spinoriale(i, j, w, dt_n, psi_snapshot=psi_t,
+                                   forza_sync=_forza_sync, wI_sync=_wI_sync, uno_sync=_uno_sync)
 
         # --- COMMIT ATOMICO DELLE FASI (Unico punto di scrittura sincrono) ---
         self.phivel = _phivel_t + delta_phivel
@@ -4048,7 +4070,7 @@ def _applica_flag(a):
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -4090,6 +4112,7 @@ def _applica_flag(a):
     SPINORE_CORRETTO = bool(getattr(a, "spinore_corretto", False)) # master: orologio proprio + spinore primario complesso
     CHI_DA_SPINORE = bool(getattr(a, "chi_da_spinore", False))     # flag 3: perc_chi da doppia-copertura di _psi_spinor
     TEMPO_PROPRIO_ORIENTATO = bool(getattr(a, "tempo_proprio_orientato", False)) # flag 4: r con segno (toglie |.|)
+    SYNC_SPINORE = bool(getattr(a, "sync_spinore", False))         # Kuramoto SU(2) sugli spinori: default off
     if CHI_DA_SPINORE and not SPINORE_CORRETTO:
         raise SystemExit("[errore] --chi-da-spinore richiede --spinore-corretto (senno' loop di feedback perc_chi->spinore->perc_chi)")
     if SPINORE_CORRETTO and not SPINORE_VIVO:
@@ -4100,6 +4123,8 @@ def _applica_flag(a):
         print("[chi-da-spinore] perc_chi dal segno di doppia-copertura di _psi_spinor (post-commit); CHI_BASC disattivato")
     if TEMPO_PROPRIO_ORIENTATO:
         print("[tempo-proprio-orientato] ritmo() con segno: r orientato (toglie |.| da f)")
+    if SYNC_SPINORE:
+        print("[sync-spinore] Kuramoto SU(2) sugli spinori: torque di allineamento omega_sync = forza*(nb x nb_media) in omega_tot")
     SPIN_FEEDBACK = bool(getattr(a, "spin_feedback", False)) # feedback locale overlap spinoriale: default off
     SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
     CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale
@@ -4366,6 +4391,12 @@ def _cli():
     p.add_argument("--tempo-proprio-orientato", action="store_true", dest="tempo_proprio_orientato",
                    help="FLAG 4 (separato, profondo): toglie |.| da f in ritmo() -> r con SEGNO (tempo proprio "
                         "orientato, non solo modulo). Cambia una legge di base. Default off.")
+    p.add_argument("--sync-spinore", action="store_true", dest="sync_spinore",
+                   help="KURAMOTO SU(2) SUGLI SPINORI (zero parametri): tira ogni spinore verso l'allineamento "
+                        "con la media di vicinato, torque omega_sync = forza*(nb x nb_media) con nb_media=(wI@nb_t)/uno "
+                        "e forza dal Kuramoto-phi esistente (K_SYNC, 2/pi, prof_rel, rinforzo_shear). Torque "
+                        "istantaneo in omega_tot (rotazione), non nella memoria omega_s. Richiede settore spinore "
+                        "vivo e K_SYNC!=0. Default off = byte-identico.")
     p.add_argument("--spin-feedback", action="store_true", dest="spin_feedback",
                    help="FEEDBACK LOCALE SPINORE->ARCHI: la parte immaginaria dell'overlap del lift "
                         "spinoriale aggiunge una coppia antisimmmetrica alle fasi. Richiede "
