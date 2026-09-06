@@ -267,6 +267,23 @@ letti dalla dinamica, venivano chiamati dal diaglog → la diagnostica alterava 
 (lettura pura + snapshot/restore di psi/_psi_prec/_spinor_lift). Fisica BYTE-IDENTICA con/senza diaglog (verificato,
 commit `2465d2d`). Senza questo, nessuna misura di spin era affidabile.
 
+### §27. COVARIANZA — critica di Luca ("hai fatto misure covarianti? il sistema si estende!")
+**Punto (giusto):** le misure erano in TEMPO-COORDINATA e mediate su una POPOLAZIONE che cresce (N: 372→~20000).
+Non covarianti → "il dito, non la luna". Il "calo" di spin poteva essere l'espansione, non la fisica.
+**Re-analisi covariante (dati tw_spinore, confronto a N APPAIATO invece che a passo fisso):**
+- `tau_mean = 1.000` sempre → il tempo proprio MEDIO è gaugeato a 1 (mediana del ritmo); la covarianza che conta
+  qui è la POPOLAZIONE crescente, non il clock.
+- **Il "calo" era in gran parte DILUIZIONE da espansione:** a N appaiato la coerenza `spin_cluster_modulo` è
+  ROBUSTA (~0.7); cala solo mite 0.73→0.70 da N=8k a N=16k (non il collasso che vedevo a passo fisso).
+- **A N=16k, ON > OFF** (S_M: ON 0.711 vs OFF 0.686, concorde su 3 semi) → `--tw-spinore` dà un PICCOLO vantaggio
+  di coerenza che il confronto a passo fisso NASCONDEVA. `omega`/tempo-proprio: ON ≈ OFF.
+- **VERDETTO RIVISTO:** §25 ("ON=OFF, nullo") va AMMORBIDITO — covariantemente c'è un accenno di effetto ON
+  (piccolo, ~+0.025, da confermare per significatività). E il §24 ("guscio disordina lo spin") va RI-VERIFICATO
+  covariante: parte del disordine/calo potrebbe essere diluizione da espansione.
+- **LEZIONE (metodologica, per Claude):** in questo sistema che si ESTENDE, misurare a passo fisso e su media
+  globale è NON covariante. Servono osservabili INTENSIVI/adimensionali, coerenza PER DOMINIO, confronto a
+  N/tempo-proprio-cumulativo APPAIATI. Da implementare nel diaglog prima di dichiarare verdetti.
+
 ### Stato campagne (2026-09-06)
 - **spin_core (3 semi):** §24 confermato — guscio DISORDINA lo spin (corr Jshell↔spin_core_disp +0.47/+0.40/+0.51),
   NON congela per inerzia. Dati cancellati dal working dir su richiesta (recuperabili da git, commit `fc88537`).
