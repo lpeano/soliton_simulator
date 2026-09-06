@@ -707,6 +707,17 @@ TW_SPINORE = False      # AGGANCIO DOPPIA COPERTURA: la torsione a 4pi (tw) pilo
                         # (sigma_x uguali, sigma_z opposti). Asse persistente (non svanisce all'allineamento,
                         # il difetto di SPIN_LARMOR). Zero parametri (tw/PHI_CRIT gia' nel sistema, 1/2 = spin-1/2).
                         # Richiede --spinore-vivo. Default off = non-regressione.
+SPINORE_CORRETTO = False # MASTER: gestione corretta dello spinore. Accende (1) OROLOGIO PROPRIO di de
+                        # Broglie [omega_proprio = (rho/rho_c)*r_medio lungo l'asse di Bloch PROPRIO nb_t,
+                        # pura fase, non deviazione dell'asse] e (2) SPINORE PRIMARIO complesso _psi_spinor
+                        # (n x 2) in SU(2): psi(t+dt)=U psi_t, U=exp(-i/2 omega.sigma dt), Bloch=psi^dag sigma psi
+                        # DERIVATO. Evaluate-then-commit rigoroso (snapshot t-1, commit atomico, |psi|=1).
+                        # Richiede --spinore-vivo. Default off = byte-identico. NON aggancia perc_chi (flag 3
+                        # separato) ne' toglie |.| dal ritmo (flag 4 separato): quelli chiudono loop/cambiano leggi.
+CHI_DA_SPINORE = False  # FLAG 3 (separato, NON nel master): perc_chi = segno di doppia-copertura di _psi_spinor
+                        # DOPO il commit di psi, e CHI_BASC disattivato. RICHIEDE --spinore-corretto (sennò loop).
+TEMPO_PROPRIO_ORIENTATO = False # FLAG 4 (separato, profondo): toglie |.| da f in ritmo() -> r con SEGNO
+                        # (tempo proprio orientato). Cambia una legge di base; default off.
 SPIN_FEEDBACK = False   # FEEDBACK LOCALE SPINORE->ARCHI: usa l'overlap complesso dei lift sugli archi
                         # come flusso di fase antisimmmetrico. Richiede --spinore-vivo; default off
                         # per A/B. Non impone alcuna cucitura o olonomia: la misura deve emergere.
@@ -743,6 +754,10 @@ class Rete:
         # del rappresentante spinoriale fra due passi; senza questo trasporto il Bloch perde il
         # segno psi <-> -psi. Viene attivato solo da SPINORE_VIVO.
         self._spinor_lift = np.zeros((0, 2), complex)
+        # SPINORE PRIMARIO COMPLESSO (--spinore-corretto): n x 2 in SU(2). Quando attivo e' la
+        # variabile FISICA primaria (orologio proprio de Broglie + precessione), e il Bloch _nb
+        # ne e' la PROIEZIONE (nb = psi^dag sigma psi). Vuoto = inattivo (path storico: _nb primario).
+        self._psi_spinor = np.zeros((0, 2), complex)
         # PROFILO DI PERCORRENZA (struttura a nastro delle specifiche originali).
         # Ogni solitone e' una sinusoide che, percorsa lungo il suo profilo, esegue
         # un salto NETTO di 180 gradi (pi) nel punto d'incrocio con l'asse al mediano.
@@ -891,6 +906,59 @@ class Rete:
             fase[validi] = np.exp(-1j * np.angle(overlap[validi]))
             candidato[:n_comuni] = candidato[:n_comuni] * fase[:, None]
         self._spinor_lift = candidato
+
+    @staticmethod
+    def _bloch_a_spinore(nb):
+        """Rappresentante canonico complesso di un vettore di Bloch: a=cos(th/2), b=sin(th/2)e^{i ph}."""
+        nb = np.asarray(nb, float).reshape(-1, 3)
+        th = np.arccos(np.clip(nb[:, 2], -1.0, 1.0))
+        ph = np.arctan2(nb[:, 1], nb[:, 0])
+        return np.stack([np.cos(th / 2.0), np.sin(th / 2.0) * np.exp(1j * ph)], axis=1)
+
+    def _estendi_psi_spinor(self, n, nb_rif):
+        """Garantisce len(_psi_spinor)==n SENZA reset spurio (regola D). I nuovi indici (non gia'
+        ereditati dalla mitosi) si inizializzano dal Bloch corrente nb_rif (init da Bloch attuale)."""
+        cur = getattr(self, "_psi_spinor", None)
+        if cur is None or len(cur) == 0:
+            self._psi_spinor = self._bloch_a_spinore(nb_rif[:n])
+        elif len(cur) < n:
+            manca = self._bloch_a_spinore(nb_rif[len(cur):n])
+            self._psi_spinor = np.vstack([cur, manca])
+        elif len(cur) > n:
+            self._psi_spinor = cur[:n]
+
+    def _eredita_spinore_figli(self, src, segno=1):
+        """Estende le cache spinoriali ai nuovi nodi EREDITANDO dal genitore src (regola D: eredita
+        lo spinore COMPLESSO col segno, non un Bloch ri-derivato). segno=-1 per antinodi (doppia-
+        copertura opposta -> antichirale, coerente con perc_chi=-perc_chi[genitore]). Estende anche
+        _psi_prec (evita il reset spurio globale in ritmo() su len!=n). No-op se --spinore-corretto off.
+        Va chiamata DOPO la crescita di self.phi (self.n gia' nuovo): n0 = self.n - len(src)."""
+        if not SPINORE_CORRETTO:
+            return
+        src = np.asarray(src, int); k = len(src)
+        if k == 0:
+            return
+        n0 = self.n - k                                   # conteggio PRIMA della crescita
+        if n0 <= 0:
+            return
+        if hasattr(self, "_nb") and self._nb is not None and len(self._nb) >= n0:
+            self._nb = np.vstack([self._nb, self._nb[src]])
+            if hasattr(self, "_nb_prec") and self._nb_prec is not None and len(self._nb_prec) >= n0:
+                self._nb_prec = np.vstack([self._nb_prec, self._nb_prec[src]])
+        if len(self.omega_s) >= n0:
+            self.omega_s = np.vstack([self.omega_s, self.omega_s[src]])
+        if len(self._psi_spinor) >= n0:
+            er = self._psi_spinor[src].copy()
+            if segno < 0:
+                er = -er                                  # -1 = segno di doppia-copertura opposto (antichirale)
+            self._psi_spinor = np.vstack([self._psi_spinor, er])
+        if len(self._spinor_lift) >= n0:
+            el = self._spinor_lift[src].copy()
+            if segno < 0:
+                el = -el
+            self._spinor_lift = np.vstack([self._spinor_lift, el])
+        if self._psi_prec is not None and len(self._psi_prec) >= n0:
+            self._psi_prec = np.concatenate([self._psi_prec, self._psi_prec[src]])
 
     def olonomia_lift_ciclo(self, ciclo):
         """Misura il prodotto ciclico degli overlap del lift complesso trasportato."""
@@ -1457,8 +1525,11 @@ class Rete:
             self._psi_prec = self.psi.copy() if len(self.psi) == self.n else np.ones(self.n, complex)
             return np.ones(self.n)
         a = np.angle(self.psi) - np.angle(self._psi_prec)
-        f = np.abs((a + np.pi) % (2 * np.pi) - np.pi) / DT
-        med = max(float(np.median(f)), 1e-9)
+        signed = ((a + np.pi) % (2 * np.pi) - np.pi) / DT
+        # FLAG 4 (--tempo-proprio-orientato): f mantiene il SEGNO (tempo proprio orientato);
+        # off = modulo, byte-identico al comportamento storico. La scala gauge resta positiva.
+        f = signed if TEMPO_PROPRIO_ORIENTATO else np.abs(signed)
+        med = max(float(np.median(np.abs(f))), 1e-9)
         x = f / med
         r = x / np.sqrt(1.0 + x**2) + 1.0e-6           # bottleneck liscio, satura a 1 per x->inf
         r_unit = 1.0 / np.sqrt(2.0) + 1.0e-6           # valore al gauge x=1
@@ -1596,26 +1667,83 @@ class Rete:
             np.add.at(_otw, jj, _axis * _twh[:, None]); np.add.at(_degt, jj, 1.0)
             omega_new = omega_new + _otw / np.maximum(_degt[:, None], 1.0)
         # PRECESSIONE conservativa: ruoto il Bloch attorno a omega (rotazione esatta, unitaria)
-        on = np.linalg.norm(omega_new, axis=1, keepdims=True)
-        ohat = omega_new / np.maximum(on, 1e-9)
-        ang = on * (dtn_c if not np.isscalar(dtn_c) else dtn_c)
-        cA = np.cos(ang); sA = np.sin(ang)
-        dot = np.sum(ohat * nb, axis=1, keepdims=True)
-        nb_new = nb * cA + np.cross(ohat, nb) * sA + ohat * dot * (1 - cA)
-        if SYNC_UPDATE and SCUOTIMENTO:
-            # Il rumore e' un aggiornamento t -> t+1: non puo' contaminare il
-            # campo B letto dalla snapshot. Usa comunque la stessa psi_t.
-            Lam = lambda_vuoto(self)
-            if Lam > 0:
-                I2 = (np.abs(psi_snapshot[:n]) ** 2
-                      if psi_snapshot is not None else np.zeros(n))
-                amp = np.sqrt(Lam) / (1.0 + I2 / Lam)
-                nb_new = nb_new + self.rng.normal(0, 1.0, (n, 3)) * amp[:, None]
+        psi_sp_new = None
+        if SPINORE_CORRETTO:
+            # === OROLOGIO PROPRIO de Broglie + SPINORE PRIMARIO COMPLESSO (evaluate-then-commit) ===
+            # L'asse dell'orologio e' l'asse di Bloch PROPRIO nb (pura FASE attorno a se', non
+            # deviazione dell'asse): l'orologio di de Broglie e' un avanzamento e^{-i omega tau/2},
+            # invisibile al Bloch, che pilota il SEGNO di doppia-copertura del primario. rho=|Psi|^2
+            # (materia, snapshot t), rho_c=massa critica adattiva (legge di stato), r=ritmo proprio
+            # RIUSATO (dt_n=DT*r, nessuna nuova chiamata a ritmo() -> nessuna mutazione di _psi_prec,
+            # regola C). Nessun coefficiente libero.
+            r_node = (np.asarray(dtn) / DT if not np.isscalar(dtn) else np.full(n, dtn / DT))
+            if psi_snapshot is not None and len(psi_snapshot) >= n:
+                rho = np.abs(psi_snapshot[:n]) ** 2
+            elif len(self.psi) >= n:
+                rho = np.abs(self.psi[:n]) ** 2
+            else:
+                rho = np.zeros(n)
+            try:
+                rho_c = float(massa_critica_adattiva(self))
+            except Exception:
+                rho_c = float(massa_critica_collasso())
+            omega_clk = (rho / max(rho_c, 1e-12)) * r_node          # frequenza propria (scalare per nodo)
+            omega_tot = omega_new + omega_clk[:, None] * nb          # lungo l'asse PROPRIO (nb unitario)
+            # spinore primario: init da Bloch corrente se assente/nuovo (la mitosi eredita il complesso;
+            # qui e' solo fallback/primo-init). Legge lo snapshot t-1 di _psi_spinor.
+            self._estendi_psi_spinor(n, nb)
+            psi_sp_t = self._psi_spinor
+            _dts = (np.asarray(dtn) if not np.isscalar(dtn) else np.full(n, dtn))
+            _on = np.linalg.norm(omega_tot, axis=1)
+            theta = _on * _dts                                       # angolo di rotazione SU(2)
+            nhat = omega_tot / np.maximum(_on[:, None], 1e-12)
+            c = np.cos(theta / 2.0); s = np.sin(theta / 2.0)
+            nx, ny, nz = nhat[:, 0], nhat[:, 1], nhat[:, 2]
+            a0 = psi_sp_t[:, 0]; b0 = psi_sp_t[:, 1]
+            # U = exp(-i/2 omega.sigma dt) applicato allo spinore t-1
+            a1 = (c - 1j * s * nz) * a0 + (-1j * s * (nx - 1j * ny)) * b0
+            b1 = (-1j * s * (nx + 1j * ny)) * a0 + (c + 1j * s * nz) * b0
+            if SYNC_UPDATE and SCUOTIMENTO:
+                # eccitazione del vuoto sul PRIMARIO complesso (t->t+1): perturba psi, non il B letto
+                Lam = lambda_vuoto(self)
+                if Lam > 0:
+                    I2 = (np.abs(psi_snapshot[:n]) ** 2 if psi_snapshot is not None else np.zeros(n))
+                    amp = np.sqrt(Lam) / (1.0 + I2 / Lam)
+                    a1 = a1 + (self.rng.normal(0, 1.0, n) + 1j * self.rng.normal(0, 1.0, n)) * amp
+                    b1 = b1 + (self.rng.normal(0, 1.0, n) + 1j * self.rng.normal(0, 1.0, n)) * amp
+            nrm = np.maximum(np.sqrt(np.abs(a1) ** 2 + np.abs(b1) ** 2), 1e-12)  # |psi|=1 ATOMICO
+            a1 = a1 / nrm; b1 = b1 / nrm
+            psi_sp_new = np.stack([a1, b1], axis=1)
+            # Bloch DERIVATO dal primario: nb = psi^dag sigma psi
+            nb_new = np.stack([2.0 * np.real(np.conj(a1) * b1),
+                               2.0 * np.imag(np.conj(a1) * b1),
+                               np.abs(a1) ** 2 - np.abs(b1) ** 2], axis=1)
+        else:
+            on = np.linalg.norm(omega_new, axis=1, keepdims=True)
+            ohat = omega_new / np.maximum(on, 1e-9)
+            ang = on * (dtn_c if not np.isscalar(dtn_c) else dtn_c)
+            cA = np.cos(ang); sA = np.sin(ang)
+            dot = np.sum(ohat * nb, axis=1, keepdims=True)
+            nb_new = nb * cA + np.cross(ohat, nb) * sA + ohat * dot * (1 - cA)
+            if SYNC_UPDATE and SCUOTIMENTO:
+                # Il rumore e' un aggiornamento t -> t+1: non puo' contaminare il
+                # campo B letto dalla snapshot. Usa comunque la stessa psi_t.
+                Lam = lambda_vuoto(self)
+                if Lam > 0:
+                    I2 = (np.abs(psi_snapshot[:n]) ** 2
+                          if psi_snapshot is not None else np.zeros(n))
+                    amp = np.sqrt(Lam) / (1.0 + I2 / Lam)
+                    nb_new = nb_new + self.rng.normal(0, 1.0, (n, 3)) * amp[:, None]
         nb_new = nb_new / np.maximum(np.linalg.norm(nb_new, axis=1, keepdims=True), 1e-9)
+        # --- COMMIT ATOMICO del settore spinoriale ---
         self.omega_s = omega_new.copy()
-        self._nb = nb_new.copy()                          # stato dello spinore (indipendente da phi)
+        self._nb = nb_new.copy()                          # Bloch (derivato dal primario se SPINORE_CORRETTO)
         self._nb_prec = nb_new.copy()                     # memorizzo per il ritardo causale
-        self._aggiorna_lift_spinoriale()
+        if SPINORE_CORRETTO:
+            self._psi_spinor = psi_sp_new                 # primario complesso: segno di doppia-copertura robusto
+            self._spinor_lift = psi_sp_new.copy()         # il lift E' il primario (niente ri-derivazione da nb)
+        else:
+            self._aggiorna_lift_spinoriale()
         # rileggo phi_s (angolo polare) dal Bloch. phi (fase scalare U(1)) resta intatta.
         self.phi_s = np.arccos(np.clip(nb_new[:, 2], -1, 1))            # b = angolo polare [0,pi]
 
@@ -2006,7 +2134,7 @@ class Rete:
             self.twp = dph
             
         # --- BASCULAMENTO CHIRALE ---
-        if CHI_BASC and len(self.perc_chi) >= self.n and len(self.tw):
+        if CHI_BASC and not CHI_DA_SPINORE and len(self.perc_chi) >= self.n and len(self.tw):
             _tw_src = _tw_t  
             twabs = np.abs(_tw_src)
             twn = np.zeros(self.n)
@@ -2014,6 +2142,16 @@ class Rete:
             twn = twn / np.maximum(self._deg, 1)          
             soglia = np.median(twn) if self.n else 0.0
             self.perc_chi[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_chi.dtype)
+
+        # --- FLAG 3 (--chi-da-spinore): perc_chi dal SEGNO di doppia-copertura del primario, DOPO
+        # il commit di _psi_spinor (regola A/B: mai durante). Confronto col rappresentante canonico
+        # del Bloch corrente: +1 = allineato, -1 = ha accumulato il segno -1 di un giro 2pi. CHI_BASC
+        # e' gia' disattivato sopra. Richiede --spinore-corretto (garantito in _applica_flag).
+        if (CHI_DA_SPINORE and SPINORE_CORRETTO and len(self.perc_chi) >= self.n
+                and len(getattr(self, "_psi_spinor", [])) >= self.n):
+            _canon = self._bloch_a_spinore(self._nb[:self.n])
+            _ov = np.sum(np.conj(_canon) * self._psi_spinor[:self.n], axis=1)
+            self.perc_chi[:self.n] = np.where(np.real(_ov) >= 0.0, 1, -1).astype(self.perc_chi.dtype)
             
         # --- materia: una sola matrice dei pesi, riusata per Psi e diffusione ---
         Mw = self._mat(w)
@@ -2334,6 +2472,7 @@ class Rete:
         self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])
         self.perc_tw = np.concatenate([self.perc_tw, np.zeros(len(sel))])
         self.mem_mot = np.vstack([self.mem_mot, self.mem_mot[a]]) if len(self.mem_mot) else np.zeros((len(sel), 3))
+        self._eredita_spinore_figli(a, segno=1)   # regola D: figlio eredita lo spinore COMPLESSO del genitore
         # TRACKING: i figli della mitosi ereditano la concorrenza del genitore a (nascono dalla sua
         # divisione, concorrono alle stesse masse). conc_archi viene riallineato sotto (keep+nuovi).
         if self.conc_nodi:
@@ -2450,6 +2589,7 @@ class Rete:
                 self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])
                 self.perc_tw = np.concatenate([self.perc_tw, np.zeros(nc)])
                 self.mem_mot = np.vstack([self.mem_mot, np.zeros((nc, 3))]) if len(self.mem_mot) else np.zeros((nc, 3))
+                self._eredita_spinore_figli(aa, segno=-1)   # antinodo: doppia-copertura opposta (antichirale)
                 # TRACKING: l'anti-nodo Schwinger EREDITA la concorrenza del genitore aa. Se aa
                 # concorre a una massa (nasce nel campo di una massa), l'anti-nodo vi concorre pure
                 # (categoria "creazione di coppie" = accrescimento, non materia nuova). Se aa non
@@ -3908,7 +4048,7 @@ def _applica_flag(a):
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -3947,6 +4087,19 @@ def _applica_flag(a):
     SPINORE_VIVO = bool(getattr(a, "spinore_vivo", False)) # reinnesto evoluzione SU(2) nell'ETC: default off
     SPIN_LARMOR = bool(getattr(a, "spin_larmor", False))   # campo trasverso geometrico (Larmor): default off
     TW_SPINORE = bool(getattr(a, "tw_spinore", False))     # torsione 4pi -> Bloch (doppia copertura): default off
+    SPINORE_CORRETTO = bool(getattr(a, "spinore_corretto", False)) # master: orologio proprio + spinore primario complesso
+    CHI_DA_SPINORE = bool(getattr(a, "chi_da_spinore", False))     # flag 3: perc_chi da doppia-copertura di _psi_spinor
+    TEMPO_PROPRIO_ORIENTATO = bool(getattr(a, "tempo_proprio_orientato", False)) # flag 4: r con segno (toglie |.|)
+    if CHI_DA_SPINORE and not SPINORE_CORRETTO:
+        raise SystemExit("[errore] --chi-da-spinore richiede --spinore-corretto (senno' loop di feedback perc_chi->spinore->perc_chi)")
+    if SPINORE_CORRETTO and not SPINORE_VIVO:
+        raise SystemExit("[errore] --spinore-corretto richiede --spinore-vivo (il settore SU(2) dev'essere nel percorso vivo)")
+    if SPINORE_CORRETTO:
+        print("[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)")
+    if CHI_DA_SPINORE:
+        print("[chi-da-spinore] perc_chi dal segno di doppia-copertura di _psi_spinor (post-commit); CHI_BASC disattivato")
+    if TEMPO_PROPRIO_ORIENTATO:
+        print("[tempo-proprio-orientato] ritmo() con segno: r orientato (toglie |.| da f)")
     SPIN_FEEDBACK = bool(getattr(a, "spin_feedback", False)) # feedback locale overlap spinoriale: default off
     SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
     CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale
@@ -4201,6 +4354,18 @@ def _cli():
                         "precedere il Bloch di tw/2 (spin-1/2) attorno all'asse sigma della chiralita' del "
                         "legame (sigma_x uguali, sigma_z opposti). Asse persistente (non si auto-spegne come "
                         "SPIN_LARMOR). Richiede --spinore-vivo. Default off = non-regressione.")
+    p.add_argument("--spinore-corretto", action="store_true", dest="spinore_corretto",
+                   help="MASTER gestione corretta dello spinore (zero parametri): (1) OROLOGIO PROPRIO di "
+                        "de Broglie [omega_proprio=(rho/rho_c)*r_medio lungo l'asse di Bloch PROPRIO, pura "
+                        "fase]; (2) SPINORE PRIMARIO complesso _psi_spinor (n x 2) in SU(2), Bloch derivato. "
+                        "Evaluate-then-commit rigoroso, |psi|=1 ogni passo. Richiede --spinore-vivo. "
+                        "Default off = byte-identico. NON aggancia perc_chi ne' orienta il ritmo (flag separati).")
+    p.add_argument("--chi-da-spinore", action="store_true", dest="chi_da_spinore",
+                   help="FLAG 3 (separato): perc_chi = segno di doppia-copertura di _psi_spinor DOPO il commit "
+                        "di psi, e CHI_BASC disattivato. RICHIEDE --spinore-corretto (senno' loop). Default off.")
+    p.add_argument("--tempo-proprio-orientato", action="store_true", dest="tempo_proprio_orientato",
+                   help="FLAG 4 (separato, profondo): toglie |.| da f in ritmo() -> r con SEGNO (tempo proprio "
+                        "orientato, non solo modulo). Cambia una legge di base. Default off.")
     p.add_argument("--spin-feedback", action="store_true", dest="spin_feedback",
                    help="FEEDBACK LOCALE SPINORE->ARCHI: la parte immaginaria dell'overlap del lift "
                         "spinoriale aggiunge una coppia antisimmmetrica alle fasi. Richiede "
@@ -5105,7 +5270,7 @@ def batch_condensazione(a):
             # ricalcolano/aggiornano cache di CONTINUITA' che la DINAMICA legge: self.psi (da _pesi ->
             # lambda_nodi), self._psi_prec (da ritmo(), tempo proprio), self._spinor_lift (feedback
             # spinoriale). Snapshot + restore garantiscono byte-identita' della fisica con/senza diaglog.
-            _snap_fisica = {k: getattr(net, k, None) for k in ('psi', '_psi_prec', '_spinor_lift')}
+            _snap_fisica = {k: getattr(net, k, None) for k in ('psi', '_psi_prec', '_spinor_lift', '_psi_spinor', '_nb', '_nb_prec', 'omega_s', 'phi_s')}
             d = _diag_completa(net, _step_glob); d['step'] = _step_glob
             # Tracking esplicito del picco costruttivo: usa conc_nodi, che include
             # i figli della mitosi, e la coorte solo come fallback iniziale.
