@@ -1,0 +1,32 @@
+[dt] passo di tempo coordinata DT=0.005 (test di convergenza; con dt/2 raddoppia --passi)
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)
+[batch] condensazione: seed=1 passi=1200 ogni=100 sep=6.0 nmasse=2
+[batch] leggi attive: GRAV_BIFASE=True SPIN_ORBITA(via SPINORE)=True COPPIA_MIT=1.0 lambda=0.800
+
+passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
+[batch] LOG DIAGNOSTICO COMPLETO  -> csv/deparam_probe/conv_dt2.csv
+      0 |    0.0000 |    12.038 | r=8.2 c=0.336 n=6      | tot=1 NUOVI=1 | TRACK accr=744 coppie=0 nuova=80
+    100 |    0.0000 |    12.038 | r=12.8 c=0.229 n=55    | tot=1 NUOVI=0 | TRACK accr=1008 coppie=78 nuova=80
+    200 |    0.0000 |    12.038 | r=1.2 c=0.109 n=7      | tot=1 NUOVI=0 | TRACK accr=1090 coppie=112 nuova=80
+    300 |    0.0000 |    12.037 | r=11.8 c=0.160 n=243   | tot=1 NUOVI=0 | TRACK accr=1162 coppie=145 nuova=80
+    400 |    0.0000 |    12.036 | r=5.8 c=0.144 n=12     | tot=2 NUOVI=0 | TRACK accr=1257 coppie=176 nuova=81
+    500 |    0.0000 |    12.036 | r=0.8 c=0.179 n=394    | tot=2 NUOVI=0 | TRACK accr=1348 coppie=215 nuova=81
+    600 |    0.0000 |    12.035 | r=12.8 c=0.220 n=89    | tot=2 NUOVI=0 | TRACK accr=1428 coppie=252 nuova=81
+    700 |    0.0000 |    12.034 | r=0.8 c=0.241 n=448    | tot=2 NUOVI=0 | TRACK accr=1474 coppie=274 nuova=81
+    800 |    0.0000 |    12.033 | r=7.2 c=0.139 n=7      | tot=1 NUOVI=0 | TRACK accr=1508 coppie=296 nuova=81
+    900 |    0.0000 |    12.033 | r=11.2 c=0.157 n=78    | tot=2 NUOVI=0 | TRACK accr=1584 coppie=337 nuova=81
+   1000 |    0.0000 |    12.032 | r=11.2 c=0.139 n=78    | tot=2 NUOVI=0 | TRACK accr=1639 coppie=370 nuova=81
+   1100 |    0.0002 |    12.032 | r=12.2 c=0.159 n=394   | tot=2 NUOVI=0 | TRACK accr=1685 coppie=384 nuova=81
+   1200 |    0.0002 |    12.031 | r=0.8 c=0.118 n=615    | tot=2 NUOVI=0 | TRACK accr=1728 coppie=405 nuova=81
+[batch] log diagnostico completo salvato in csv/deparam_probe/conv_dt2.csv
+
+[batch] completato in 1628.7s, 1200 passi. CSV salvato in csv/deparam_probe/cond_dt2.csv
+[batch] LETTURA condensazione: se dens_centrale e n_centrali CRESCONO e frac_nati resta
+        ALTA mentre dist_masse NON crolla -> NUOVA massa dal vuoto (non accrescimento).
+[batch] LETTURA picchi_nuovi: se picchi_nuovi passa da 0 a >=1 a un certo passo, quello e'
+        il momento in cui una MASSA NUOVA si stacca dal vuoto (materia isolata che si crea).
+[batch] LETTURA antiguscio: se compare un anello a coerenza_min BASSA (antifase) e raggio
+        stabile oltre le masse, con nodi presenti -> GUSCIO DI ANTIFASE che avvolge i nuclei
+        = massa di scala superiore (il guscio del sistema e antifase, non materia).
