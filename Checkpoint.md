@@ -5,6 +5,23 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 
 ---
 
+## MODELLO BRANCH E TRACING — 2026-09-07 (canonico)
+
+- **`main` = versione STABILE del codice + UNICO punto di documentazione e tracing per TUTTI i branch.**
+  Tutta la parte documentale (`Checkpoint.md`, `CLAUDECONNECT.md`, `CLAUDE.md`, `FISICA.md`, i report e le
+  interpretazioni, `/memories/repo/`) si aggiorna e vive **solo su `main`**. Per leggere lo stato del lavoro,
+  qualunque sia il branch di sviluppo, si guarda `main`.
+- **`dev` = branch di sviluppo / test in corso.** Su `dev` si scrive/modifica solo CODICE (non la doc).
+  Eventuali branch topic (`test/<nome>`) si diramano da `dev`. Campagne lunghe: `git worktree add ../st_wt/<commit> <commit>`.
+- **Test in corso su `dev` adesso:** (1) versionamento DB per coppia branch/commit (vedi sotto); (2) ripresa
+  della campagna sync-spinore / de-parametrizzazione (STEP 2 chi-core → `--sync-fase-orologio` → de-parametrizzazione).
+- **Versionamento DB (in implementazione su `dev`):** l'identità di accettazione/rifiuto del DB è il **git blob
+  hash** di `soliton_simulator.py` (`git rev-parse HEAD:soliton_simulator.py`); `commit`, `branch` e flag `dirty`
+  sono registrati come **metadati** (branch diverso → solo warning, mai rifiuto; working tree sporco → fallback
+  su `sha256` attuale + warning). I DB legacy (solo `code_hash` sha256) restano gestiti in retro-compatibilità.
+
+---
+
 ## PUNTO DI INTERRUZIONE — 2026-09-07 ~08:20 (ripresa rapida)
 
 ### IN CORSO adesso

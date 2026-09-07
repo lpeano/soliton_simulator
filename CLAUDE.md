@@ -129,6 +129,18 @@ usa run corti (≤300 passi batch, ≤100 frame video) solo per verificare che i
    flag fa quello che deve (misura la grandezza attesa, es. chiralità netta, omega_s).
 3. **Un flag = una variabile.** Gli esperimenti A/B cambiano una cosa sola per volta.
 
+## BRANCH E TRACING (canonico dal 2026-09-07)
+
+- **`main` = versione STABILE del codice + UNICO punto di documentazione e tracing per TUTTI i branch.** Tutta
+  la doc (`Checkpoint.md`, `CLAUDECONNECT.md`, questo `CLAUDE.md`, `FISICA.md`, report, interpretazioni,
+  `/memories/repo/`) si aggiorna e vive **solo su `main`**. Per lo stato del lavoro si guarda sempre `main`.
+- **`dev` = branch di sviluppo / test in corso** (solo CODICE, non la doc). I branch topic (`test/<nome>`) si
+  diramano da `dev`. Campagne lunghe: `git worktree add ../st_wt/<commit> <commit>` (versione immutabile).
+- **Versionamento DB per commit, non per contenuto grezzo:** l'identità di accettazione/rifiuto del DB è il git
+  **blob hash** di `soliton_simulator.py`; `commit`/`branch`/`dirty` sono metadati (branch diverso → solo
+  warning; working tree sporco → fallback `sha256` + warning). Il branch NON entra mai nella chiave di rifiuto.
+- **Push solo su richiesta esplicita** di Luca.
+
 ## FLUSSO DI EDITING DEL DOCUMENTO (.docx)
 
 1. `cp` il canonico in /tmp, modifica lì, poi copia sul canonico solo dopo validazione.

@@ -406,3 +406,31 @@ Kuramoto sulla FASE dell'orologio (segno di doppia-copertura), non sulla direzio
 python nuovo per ogni run -> on_s2+ girerebbero con codice diverso da on_s1 = contaminazione; e l'hash del db
 cambia = ripresa rotta). Implementare DOPO la fine della campagna (o fermarla prima). ATTESA conferma design + timing.
 
+### §31 — MODELLO BRANCH/COMMIT + versionamento DB + tracing su main (2026-09-07)
+Richieste di Luca (cronologia): (a) "sospendi la campagna, occupati di spostare il check di scrittura DB
+sull'hash della COMMIT"; (b) "usa un checkout chrooted alla versione giusta dell'hash per eseguire i test";
+(c) "dubbio: meglio un branch per i test, chiave = coppia branch/commit; `main` stabile, `dev` sviluppo";
+(d) "quello che c'è ora su `main` va tenuto STABILE; tutta la documentazione e il tracing restano su `main`,
+unico punto di tracing per tutti i branch; crea il branch per i test in corso e fai referenziare quel branch
+dalla doc".
+
+**Verifica nel codice (non nei commenti).** Check attuale in `salva_stato`/`carica_stato` (soliton_simulator.py
+~L1868/L1892): identità = `code_hash = sha256(bytes dell'INTERO file)[:16]`, rifiutato al ricarico se diverso.
+Limite: qualunque edit (anche un commento) cambia l'hash → DB rifiutato; non mappa la storia git.
+
+**Valutazione (guardiano).** La coppia branch/commit è metà giusta: il **commit** è l'identità sana, il **branch
+NON** deve entrare nella chiave di rifiuto (stesso commit su `dev` o `main` = codice byte-identico = stessa fisica;
+un merge `dev→main` non deve invalidare DB identici → sarebbe guardare il dito, non la luna). Buco scoperto:
+working tree SPORCO (file modificato non committato) → il commit hash mente → serve guardiano del dirty. Il
+"chroot" per i test = `git worktree` (versione immutabile a un commit, senza toccare main/dev).
+
+**Design deciso (da implementare su `dev`):** identità di accettazione/rifiuto = git **blob hash** di
+`soliton_simulator.py` (file-scoped, immutabile); metadati registrati = `commit`, `branch`, `blob`, `dirty`;
+branch diverso → solo warning; working tree sporco → fallback su `sha256` + warning; DB legacy (solo `code_hash`)
+gestiti in retro-compatibilità.
+
+**Modello branch/tracing (canonico, vedi Checkpoint "MODELLO BRANCH E TRACING"):** `main` = codice stabile +
+UNICO hub di documentazione/tracing per tutti i branch; `dev` = sviluppo/test in corso (solo codice); doc
+aggiornata SOLO su `main`. Creato `dev` da `main` stabile (`5fbd53f`). Prossimo passo: implementare il
+versionamento DB su `dev`, con backup datato del canonico prima di modificarlo.
+
