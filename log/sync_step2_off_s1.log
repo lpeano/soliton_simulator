@@ -26,3 +26,13 @@ passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
     170 |    0.0000 |    12.037 | r=11.8 c=0.134 n=288   | tot=1 NUOVI=0 | TRACK accr=1352 coppie=215 nuova=83
     180 |    0.0000 |    12.037 | r=11.8 c=0.136 n=284   | tot=1 NUOVI=0 | TRACK accr=1355 coppie=217 nuova=83
     190 |    0.0000 |    12.037 | r=11.8 c=0.130 n=279   | tot=1 NUOVI=0 | TRACK accr=1357 coppie=217 nuova=83
+    200 |    0.0000 |    12.037 | r=11.8 c=0.123 n=275   | tot=1 NUOVI=0 | TRACK accr=1360 coppie=221 nuova=83
+    210 |    0.0000 |    12.037 | r=11.2 c=0.088 n=47    | tot=1 NUOVI=0 | TRACK accr=1362 coppie=222 nuova=83
+    220 |    0.0000 |    12.037 | r=11.8 c=0.039 n=271   | tot=1 NUOVI=0 | TRACK accr=1370 coppie=226 nuova=83
+    230 |    0.0000 |    12.037 | r=12.2 c=0.087 n=387   | tot=1 NUOVI=0 | TRACK accr=1370 coppie=227 nuova=83
+    240 |    0.0000 |    12.036 | r=12.2 c=0.145 n=386   | tot=2 NUOVI=0 | TRACK accr=1372 coppie=229 nuova=83
+    250 |    0.0000 |    12.036 | r=12.2 c=0.185 n=389   | tot=2 NUOVI=0 | TRACK accr=1376 coppie=231 nuova=83
+    260 |    0.0000 |    12.036 | r=12.2 c=0.235 n=388   | tot=2 NUOVI=0 | TRACK accr=1380 coppie=231 nuova=83
+    270 |    0.0000 |    12.036 | r=12.8 c=0.263 n=90    | tot=2 NUOVI=0 | TRACK accr=1384 coppie=232 nuova=83
+    280 |    0.0000 |    12.036 | r=12.8 c=0.268 n=89    | tot=2 NUOVI=0 | TRACK accr=1391 coppie=236 nuova=83
+    290 |    0.0000 |    12.036 | r=6.8 c=0.227 n=11     | tot=2 NUOVI=0 | TRACK accr=1403 coppie=242 nuova=83

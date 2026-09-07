@@ -13,6 +13,17 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
   senza fare gli OFF. **Rilanciato** (riprendibile: hash db combacia, ON saltati come no-op) → sta facendo i **3 OFF**.
   ATTESA: off_s1/2/3, poi verdetto covariante ON vs OFF su `m0_spin_axis_R`/`m0_omega_axis_R`/`m0_spin_core_cv`.
 
+### >>> INTERRUZIONE PER SPEGNIMENTO PC — 2026-09-07 (COME RIPRENDERE) <<<
+- **UNICA campagna interrotta**: STEP 2 chi-core (`test_sync_spinore_step2.bat`). Stato al momento dello stop:
+  - ON: on_s1/2/3 **COMPLETI** (2000 passi).
+  - OFF: **off_s1 PARZIALE** (~273 passi, db `db_off_s1.pkl` salvato a step ~200); **off_s2/off_s3 NON iniziati**.
+- **RIPRESA (una riga)**: `cmd /c test_sync_spinore_step2.bat`. Riprende automaticamente: ON saltati (db a 2000,
+  no-op), off_s1 riparte dal db (~step 200), poi off_s2/off_s3 da zero. NON serve altro (script non-distruttivo).
+- **VINCOLO**: NON aver editato `soliton_simulator.py` nel frattempo (l'hash del db deve combaciare; se editi,
+  la ripresa degli ON verrebbe rifiutata → servirebbe `--db-cleanup` e rifarli). Al riavvio, prima di rilanciare,
+  verificare: `python -c "import hashlib,pickle;h=hashlib.sha256(open('soliton_simulator.py','rb').read()).hexdigest()[:16];print(h==pickle.load(open('out_sync_spinore_step2/db_on_s1.pkl','rb'))['code_hash'])"` deve dare True.
+- Le altre campagne (tauloc/scuotimento) erano gia' FERMATE (instabilita'), NON vanno riprese cosi'.
+
 ### DA FARE (coda, priorità dall'alto)
 1. **Completare chi-core** (3 OFF) e dare il verdetto covariante: `--chi-core` da' il CANALE alla sync o no?
 2. **FIX `--sync-fase-orologio`** (design pronto, CLAUDECONNECT §30): Kuramoto sulla FASE-orologio (segno di
