@@ -4764,6 +4764,31 @@ def batch_condensazione(a):
             _w = np.maximum(I2, 0.0)
             if _w.sum() > 1e-9:
                 cols['spin_axis_R'] = float(np.linalg.norm((_u * _w[:, None]).sum(0) / _w.sum()))
+        # --- SEGNO DI DOPPIA-COPERTURA + VERSO, coerenza sugli archi (ORDER PARAMETER, pure-read) ---
+        # segno_k = sign(Re<canon(nb_k)|psi_k>) = foglio ±1 che l'orologio pura-fase pilota (riga ~2265):
+        # RISPONDE all'orologio, a differenza di spin_axis_R/berry_* (ciechi). Covariante (per-arco, intensivo).
+        # Misura VERSO e SEGNO con lo STESSO metodo -> si ordinano INSIEME (un motore) o separati (due)?
+        cols['segno_arco_coer'] = 0.0    # <sign_i*sign_j> pesato: +1 concorde, -1 alternato, 0 frustrato
+        cols['verso_arco_coer'] = 0.0    # <nb_i·nb_j> pesato: allineamento del verso di Bloch
+        cols['segno_ov_absmedia'] = 0.0  # |Re<canon|psi>| medio: commitment a un foglio (intensivo)
+        _psp = getattr(net, '_psi_spinor', None)
+        if (_nb_g is not None and _psp is not None and len(_psp) >= n and len(_nb_g) >= n and n > 0 and len(net.i)):
+            try:
+                _nbf = np.asarray(_nb_g[:n], float)
+                _canon = net._bloch_a_spinore(_nbf)
+                _seg = np.real(np.sum(np.conj(_canon) * np.asarray(_psp[:n]), axis=1))  # Re<canon|psi> in [-1,1]
+                _sgn = np.sign(_seg)
+                _uu = _nbf / np.maximum(np.linalg.norm(_nbf, axis=1, keepdims=True), 1e-12)
+                cols['segno_ov_absmedia'] = float(np.mean(np.abs(_seg)))
+                _mk = (net.i < n) & (net.j < n)
+                if _mk.any():
+                    _ii = net.i[_mk]; _jj = net.j[_mk]
+                    _wa = net._pesi()[_mk] if hasattr(net, '_pesi') else np.ones(int(_mk.sum()))
+                    _dsum = max(float(np.sum(_wa)), 1e-12)
+                    cols['segno_arco_coer'] = float(np.sum(_wa * _sgn[_ii] * _sgn[_jj]) / _dsum)
+                    cols['verso_arco_coer'] = float(np.sum(_wa * np.sum(_uu[_ii] * _uu[_jj], axis=1)) / _dsum)
+            except Exception:
+                pass
         # SCHERMATURA: osservabili della legge ancorata a N_c. La portata effettiva
         # mostra direttamente la differenza fra nucleo schermato e guscio non schermato.
         try:
