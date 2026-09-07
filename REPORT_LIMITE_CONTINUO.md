@@ -356,3 +356,41 @@ Quindi un campo ciano crescente con masse quasi immobili e' compatibile con il c
 7. **Solo dopo:** usare `chi_core` come feedback fisico definitivo.
 
 La regola di governance resta: una modifica alla volta, default invariato, almeno 2000 passi e 2–3 semi prima di promuovere una legge.
+
+---
+
+## 14. ADDENDUM 2026-09-07 — il criterio giusto è il COARSE-GRAINING (RG), non `h→0`
+
+**Verificato che il report resta consistente col codice al 2026-09-07** (campo `satura`, `rho0=max`, `R_core=λ·log(rho0/rho_c)`, `gF_med` globale, Laplaciano senza `h⁻²`, archi storici, convenzione `LAM` vs `LAM_BASE`: tutti invariati). Unica aggiunta non riflessa: **`--cs-dinamico`** (2026-09-05) rende `cs²` un CAMPO LOCALE → la §7 diventa una PDE a **coefficiente variabile** `cs²(x)·Δq` (estende, non contraddice).
+
+### 14.1 Correzione di criterio (obiezione di Luca, ACCOLTA)
+I solitoni hanno lunghezza d'onda **2ℓ_P** (LAM): è la **granularità FONDAMENTALE** di Planck, non un artefatto di reticolo. Quindi **`h→0` è il test SBAGLIATO** (sotto Planck non c'è geometria). Il continuo del sistema emerge per **COARSE-GRAINING a grande scala** (molti solitoni aggregati), come in idrodinamica/termodinamica e in gravità emergente (causal sets, LQG). Il criterio giusto è: **le osservabili macroscopiche sono INVARIANTI sotto coarse-graining** (gruppo di rinormalizzazione), cioè descrivere lo stesso sistema con blocchi di `B` o `2B` solitoni dà le stesse grandezze macroscopiche.
+
+### 14.2 L'onere si SPOSTA, non si elimina (guardiano)
+Cambiare criterio non cancella la prova: **va dimostrata l'invarianza sotto coarse-graining (RG)**. E alcuni problemi del report **sopravvivono anche col criterio giusto**, perché rompono proprio l'invarianza di coarse-graining:
+- **Ψ non normalizzata per il grado** (`deg`): raggruppare solitoni cambierebbe Ψ in modo scala-dipendente → rompe l'invarianza RG. [APERTO]
+- **Mediana globale `gF_med`** in `N_c`: canale non-locale → nessun analogo continuo locale → rompe l'invarianza di scala locale. [APERTO]
+- **Conservazione della misura alla mitosi**: se la mitosi non conserva una misura, il coarse-graining non è consistente. [APERTO — il più duro, non chiudibile analiticamente]
+
+### 14.3 Classificazione ANALITICA di scaling a N→∞ (dallo scaling, senza girare)
+Criterio: **intensiva/adimensionale (rapporto, media normalizzata) → converge; estensiva (somma su N) → diverge; con media/mediana globale → non-locale.**
+
+- **CLASSE 1 — CONVERGONO** (limite continuo ben definito): `spin_axis_R`, `m0_spin_axis_R`, `m0_omega_axis_R` (medie di versori ∈[0,1]); `u=ρ/ρ_c`; `λ` schermatura `=f(ρ/ρ_c)`; `tw/Φ_crit`; frazioni/coerenze per dominio. Il diaglog covariante è **analiticamente corretto**.
+- **CLASSE 2 — DIVERGONO per ESTENSIVITÀ** (→ NORMALIZZARE per N/I/V, non de-parametrizzare): `m0_Lz`/`Lz_orb` (÷ I), `N`/`N_nucleo`/massa (÷ V), energia totale (÷ N).
+- **CLASSE 3 — NON convergono per PARAMETRO** (scala assoluta → DE-PARAMETRIZZARE con rapporti di stato): **GAMMA=0.05** (Ψ, cs_floor, dens_crit — il più centrale, in 3 osservabili), DENS_CRIT_C, ELAST_C, K_C, KICK_TW, MU_PSI, TAU_BG/TAU_P/TAU_DIFF.
+- **CLASSE 4 — NON-LOCALI** (→ LOCALIZZARE con media di vicinato `wI`): `N_c` via `gF_med`, eventuali `pozzo.mean()` residui.
+- **UNITÀ (non parametri, non toccare):** LAM=2ℓ_P, DT, Φ_crit=2π.
+
+### 14.4 La connessione (INTUIZIONE di Luca, criterio non ancora dimostrato)
+**"Non parametri, ma leggi" ≡ criterio del limite continuo**, per le Classi 3-4: de-parametrizzare = sostituire una scala assoluta con un rapporto di stato = rendere adimensionale/invariante di scala = far convergere a N→∞. Un parametro fisso è una scala assoluta che rompe l'invarianza di scala. NON copre le Classi 1-2 (la 1 converge per natura; la 2 diverge per estensività → si normalizza). **Etichetta: CRITERIO/mappa, non risultato — è analitico sullo scaling.**
+
+### 14.5 Limite onesto dell'analitica
+L'analitica dà lo **SCALING** (converge sì/no, come va con N), **non il VALORE del limite né la velocità di convergenza** (non-linearità: saturazione, mitosi, accoppiamenti → numerici). E soprattutto **non chiude l'indipendenza dal MODO di crescere N** (la mitosi conserva la misura?) → serve il numerico o un'analisi profonda della mitosi. La mappa è chiara; il territorio va percorso.
+
+### 14.6 TODO (pian piano — vedi Checkpoint)
+1. De-parametrizzare **GAMMA** per primo (Classe 3, centrale in 3 osservabili) con un rapporto di stato — un flag reversibile, byte-identico off, A/B.
+2. Localizzare **`gF_med`** (Classe 4) con media di vicinato `wI` (come già fatto per il sync) — ramo sperimentale.
+3. Normalizzare le estensive (Classe 2): `Lz/I`, `N/V` — nel diaglog (covariante), non nella dinamica.
+4. Test di **invarianza sotto coarse-graining** (RG): stesso sistema a `B` vs `2B`, osservabili macroscopiche coincidono?
+5. Aggiungere la normalizzazione di Ψ per il grado come ramo A/B (romperebbe la byte-identità: solo esplorativo).
+6. Il punto duro: misura conservata dalla mitosi (analitico + numerico).

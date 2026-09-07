@@ -1,11 +1,64 @@
 # CHECKPOINT — Sistema dei Solitoni Relazionali (VQT / U2)
 
-_Ultimo aggiornamento: 2026-09-06. Progetto di Luca Peano ("Il Muratore di Planck")._
+_Ultimo aggiornamento: 2026-09-07. Progetto di Luca Peano ("Il Muratore di Planck")._
 _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md per le norme di conduzione._
 
 ---
 
-## AGGIORNAMENTO CORRENTE — 2026-09-06
+## STATO RUN CORRENTE — 2026-09-07 (cosa gira / cosa attendiamo)
+
+### IN RUN adesso (in attesa di completamento)
+- **STEP 2 — candidata `--chi-core`** (`test_sync_spinore_step2.bat`, cartella `out_sync_spinore_step2/`).
+  A/B `--sync-spinore` ON vs OFF a parita' di `--chi-core`, 3 semi, 2000 passi, minimo freddo, tutti con `--sync`.
+  Stato: `on_s1` ~1137/2000 (primo dei 6 run: on_s1/2/3 poi off_s1/2/3). **ATTESA: verdetto covariante**
+  (N appaiato) su `m0_spin_axis_R` / `m0_omega_axis_R` / `m0_spin_core_cv`, ON vs OFF — la candidata
+  `--chi-core` da' il CANALE che fa propagare la sync o e' inerte/contrasta (come al minimo freddo, negativo)?
+
+### FERMATI (NON in run) — instabilita' numerica, non forzare
+- **Run `--chi-core --cs-dinamico --tauloc 2.0`** (`test_sync_spinore_step2cs.bat`) e la sua variante
+  **`+ --scuotimento`** (`test_sync_spinore_step2cssc.bat`): IMPIANTATI al primo passo. MISURATO:
+  `tauloc>1` con `cs-dinamico` fa ESPLODERE il sotto-ciclo metrico CFL (`nsub`) -> 10-100x piu' lento;
+  `tauloc 2.0` = 1500 CPU-s con 0 righe (impraticabile), `tauloc 1.5` = 756 CPU-s per ~10 righe (rigidissimo).
+  Cartelle svuotate. DA DECIDERE con Luca: tauloc gentile (1.1-1.2, comunque lento), oppure tauloc SENZA
+  cs-dinamico, oppure abbandonare tauloc. Conferma la nota storica: "--tauloc grande impianta il 1o passo".
+
+### Novita' di codice (2026-09-07)
+- **`--scuotimento`** (nuovo flag, default off = byte-identico): forza `SCUOTIMENTO=True` anche in regime
+  DETERMINISTICO (il vuoto ribolle ma la dinamica resta deterministica). Applicato dopo `--regime`.
+  VERIFICATO: EXIT=0, stampa corretta, 21 righe, no crash.
+- **Campagne RIPRENDIBILI**: rimosso il `del /q` distruttivo dagli script `test_sync_spinore*.bat`. Il sim
+  riprende dal `--sync-db` (`salva_stato` salva TUTTO `__dict__` incl. cache spinoriali + stato RNG;
+  `carica_stato` fa i passi rimanenti e appende il diaglog senza duplicati). ATTENZIONE: `carica_stato`
+  VERIFICA l'HASH del codice -> **NON editare `soliton_simulator.py`** mentre i run girano, o i db vengono
+  rifiutati (usare `--db-cleanup` per ripartire puliti). Hash ora CONGELATO per non rompere `chi-core`.
+
+---
+
+## TODO — LIMITE CONTINUO = DE-PARAMETRIZZAZIONE (pian piano, dal 2026-09-07)
+
+**Scoperta (INTUIZIONE di Luca, criterio analitico):** il limite continuo di QUESTO sistema NON è `h→0`
+(la granularità 2ℓ_P è FONDAMENTALE, Planck, non un artefatto) ma il **COARSE-GRAINING a grande scala**
+(gruppo di rinormalizzazione: osservabili macroscopiche invarianti sotto raggruppamento B→2B). E
+**"non parametri, ma leggi" ≡ criterio del limite continuo**: de-parametrizzare (sostituire una scala
+assoluta con un rapporto di stato) = rendere adimensionale/invariante di scala = far convergere a N→∞.
+Dettaglio e classificazione analitica in `REPORT_LIMITE_CONTINUO.md` §14. Etichetta: CRITERIO (mappa),
+non risultato dimostrato — l'analitica dà lo SCALING, non il valore né l'indipendenza dal modo di crescere N.
+
+Lista operativa (una alla volta, flag reversibile default-off, byte-identico off, A/B, 2000 passi + 3 semi):
+- [ ] **GAMMA** (Classe 3, il più centrale — in Ψ, cs_floor, dens_crit): de-parametrizzare con un rapporto
+      di stato adimensionale. Priorità 1: farebbe convergere tre osservabili insieme. Da decidere CON QUALE rapporto.
+- [ ] **`gF_med`** (Classe 4, non-locale in `N_c`): localizzare con media di vicinato `wI` (come per il sync),
+      in un ramo sperimentale; misurare l'impatto.
+- [ ] **Estensive** (Classe 2): normalizzare nel DIAGLOG (non nella dinamica) — `Lz/I`, `N/V`, energia/N.
+- [ ] **Test RG / invarianza coarse-graining**: stesso sistema a B vs 2B solitoni → osservabili macro coincidono?
+- [ ] **Ψ / deg** (normalizzazione mancante, non parametro): ramo A/B esplorativo (rompe byte-identità).
+- [ ] **Misura conservata dalla mitosi** (il punto duro, non chiudibile solo analiticamente): analitico + numerico.
+- Altri parametri Classe 3 (DENS_CRIT_C, ELAST_C, K_C, KICK_TW, MU_PSI, TAU_*): dopo GAMMA.
+- NON toccare le UNITÀ (LAM=2ℓ_P, DT, Φ_crit=2π): sono scale, non manopole.
+
+---
+
+## AGGIORNAMENTO — 2026-09-06
 
 ### Pacchetto SPINORE CORRETTO + Kuramoto SU(2) (tutto default-off, sigilli passati)
 

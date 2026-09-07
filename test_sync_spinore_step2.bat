@@ -17,8 +17,7 @@ set SEP=6
 set PREREQ=--spinore-vivo --spinore-corretto --sync --chi-core
 if not exist out_sync_spinore_step2 mkdir out_sync_spinore_step2
 if not exist log mkdir log
-del /q out_sync_spinore_step2\*.csv out_sync_spinore_step2\*.pkl 2>nul
-del /q log\sync_step2_*.log 2>nul
+REM RIPRENDIBILE: NON cancellare i .pkl/.csv. Rilanciare il .bat RIPRENDE dal --sync-db.
 
 for %%S in (1 2 3) do (
   echo [step2 chi-core seed %%S] ON

@@ -32,9 +32,9 @@ REM PREREQUISITI (classe A) soltanto: nessuno switch di classe B o C.
 set PREREQ=--spinore-vivo --spinore-corretto --sync
 if not exist out_sync_spinore mkdir out_sync_spinore
 if not exist log mkdir log
-REM pulizia: il diaglog accoda se il file esiste -> rimuovo i vecchi CSV/PKL per ripartire freschi
-del /q out_sync_spinore\*.csv out_sync_spinore\*.pkl 2>nul
-del /q log\sync_spinore_*.log 2>nul
+REM RIPRENDIBILE: NON cancellare i .pkl/.csv. Se un run e' interrotto, rilanciare questo .bat
+REM RIPRENDE dal --sync-db (il sim carica lo stato, fa i passi rimanenti, appende il diaglog).
+REM Per ripartire PULITI: cancellare a mano la cartella, o passare --db-cleanup ai singoli run.
 
 REM ==== PRIMA gli ON (portano l'informazione), POI gli OFF (baseline confermativa) ====
 for %%S in (1 2 3) do (

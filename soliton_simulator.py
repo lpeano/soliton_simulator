@@ -4069,11 +4069,15 @@ def _applica_flag(a):
     """Applica i parametri/flag ai globali. Usata sia in headless sia in interattivo,
     cosi' TUTTI i flag (coarse-graining incluso) valgono in ogni modalita'."""
     global net
+    global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
+    if getattr(a, "scuotimento", False):
+        SCUOTIMENTO = True   # forza lo scuotimento del vuoto ON anche in regime deterministico (default off = segue il regime)
+        print("[scuotimento] ribollio del vuoto FORZATO ON (regime deterministico + scuotimento): il vuoto ribolle ma la dinamica resta deterministica")
     if getattr(a, "calore_vett", False):
         CALORE_VETTORIALE = True
         print("[calore] calcio termico VETTORIALE+chirale attivo: omega_s 3D eccitato, phivel firmato da perc_chi")
@@ -4257,6 +4261,10 @@ def _cli():
     p.add_argument("--tau-d0", action="store_true", dest="tau_d0",
                    help="tau_p locale usa d0 (distanza di riposo) invece di d (reale dilatata). "
                         "Piu' stabile, meno gonfiaggio (d_medio ~1.33 vs ~2.88).")
+    p.add_argument("--scuotimento", action="store_true", dest="scuotimento",
+                   help="FORZA lo scuotimento del vuoto ON anche in regime deterministico (default off = "
+                        "segue il regime: OFF in deterministico, ON in stocastico). La dinamica resta "
+                        "deterministica, ma il vuoto ribolle (temperatura). Applicato dopo --regime.")
     p.add_argument("--regime", choices=["stocastico", "deterministico"], default=None,
                    help="regime dinamico: 'stocastico' (vuoto attivo, VALIDATO e STABILE) | "
                         "'deterministico' (vuoto spento, mitosi modulata dal tempo proprio locale, "
