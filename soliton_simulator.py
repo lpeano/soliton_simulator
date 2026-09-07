@@ -4161,7 +4161,9 @@ def _applica_flag(a):
     global net
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, DT
+    if getattr(a, "dt", None) is not None:
+        DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -4372,6 +4374,9 @@ def _cli():
     p.add_argument("--fps", type=int, default=20)
     p.add_argument("--dpi", type=int, default=100)
     p.add_argument("--seed", type=int, default=None)
+    p.add_argument("--dt", type=float, default=None,
+                   help="passo di tempo coordinata (default DT=0.01). Per il TEST DI CONVERGENZA dt vs dt/2: "
+                        "con dt/2 raddoppia --passi per lo stesso tempo fisico. Default None = invariato (byte-identico).")
     p.add_argument("--nodi", type=int, default=SEME_INIZIALE, help="puntatori del seme iniziale")
     p.add_argument("--maxnodi", type=int, default=MAX_NODI,
                    help="tetto ai puntatori (la mitosi ne crea: serve margine)")
@@ -5477,6 +5482,10 @@ def batch_condensazione(a):
             diag_f.write(",".join(str(d.get(c, '')) for c in _diag_header) + "\n")
             diag_f.flush()   # flush a ogni step: se il run si blocca, il log fino al blocco e' salvo
         if step % ogni == 0:
+            # MISURA SOLA-LETTURA: la condensazione ricalcola psi e chiama misure per diagnostica;
+            # snapshot/restore dei cache di CONTINUITA' che la DINAMICA legge (stesso set del diaglog),
+            # cosi' --ogni NON contamina il tempo proprio (ritmo() al passo dopo legge self.psi/_psi_prec).
+            _snap_cond = {k: getattr(net, k, None) for k in ('psi', '_psi_prec', '_spinor_lift', '_psi_spinor', '_nb', '_nb_prec', 'omega_s', 'phi_s')}
             n = net.n
             idxc = _regione_centrale(net)
             net.calcola_psi(); I2 = np.abs(net.psi[:n])**2
@@ -5535,6 +5544,8 @@ def batch_condensazione(a):
                   f" | TRACK accr={cls['accrescimento']} coppie={cls['creazione_coppie']} "
                   f"nuova={cls['materia_nuova']}",
                   flush=True)
+            for _k, _v in _snap_cond.items():   # RESTORE: la misura condensazione non lascia tracce sulla fisica
+                setattr(net, _k, _v)
     dt = _t.time() - t0
     if diag_f is not None:
         diag_f.close()
