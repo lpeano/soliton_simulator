@@ -7,7 +7,7 @@ cosi' ogni verdetto e' covariante. Uso:
     python analisi_covariante.py <metrica> <diag1.csv> [diag2.csv ...] [--n 8000,12000,16000]
 
 Esempio A/B:
-    python analisi_covariante.py spin_cluster_modulo out_tw_spinore/diag_on_s1.csv out_tw_spinore/diag_off_s1.csv
+    python analisi_covariante.py spin_cluster_modulo csv/tw_spinore/diag_on_s1.csv csv/tw_spinore/diag_off_s1.csv
 """
 import sys, numpy as np
 

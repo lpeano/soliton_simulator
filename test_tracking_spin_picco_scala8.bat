@@ -8,17 +8,15 @@ set SEP=16
 set PASSI=2000
 set OGNI=10
 set DBOGNI=100
-set OUT=out_tracking_spin_picco_scala8
-if not exist %OUT% mkdir %OUT%
-if not exist log mkdir log
+if not exist log\tracking_spin_picco_scala8 mkdir log\tracking_spin_picco_scala8
 
 echo === TRACKING PICCO SPIN: B=%B% sep=%SEP% passi=%PASSI% ===
 for %%S in (1 2 3) do (
   echo [OFF] seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --sync-db %OUT%\db_off_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_off_s%%S.csv --diaglog %OUT%\diag_off_s%%S.csv > log\tracking_picco_scala8_off_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --sync-db db\tracking_spin_picco_scala8\db_off_s%%S.pkl --db-ogni %DBOGNI% --csv csv\tracking_spin_picco_scala8\cond_off_s%%S.csv --diaglog csv\tracking_spin_picco_scala8\diag_off_s%%S.csv > log\tracking_spin_picco_scala8\tracking_picco_scala8_off_s%%S.log 2>&1
   if errorlevel 1 goto :errore
   echo [ON] seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --spin-feedback --sync-db %OUT%\db_on_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_on_s%%S.csv --diaglog %OUT%\diag_on_s%%S.csv > log\tracking_picco_scala8_on_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --spin-feedback --sync-db db\tracking_spin_picco_scala8\db_on_s%%S.pkl --db-ogni %DBOGNI% --csv csv\tracking_spin_picco_scala8\cond_on_s%%S.csv --diaglog csv\tracking_spin_picco_scala8\diag_on_s%%S.csv > log\tracking_spin_picco_scala8\tracking_picco_scala8_on_s%%S.log 2>&1
   if errorlevel 1 goto :errore
 )
 echo Campagna completata.

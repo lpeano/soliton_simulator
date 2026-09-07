@@ -1,0 +1,21 @@
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[sync-spinore] Kuramoto SU(2) sugli spinori: torque di allineamento omega_sync = forza*(nb x nb_media) in omega_tot
+[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)
+[batch] condensazione: seed=1 passi=80 ogni=20 sep=4.0 nmasse=2
+[batch] leggi attive: GRAV_BIFASE=True SPIN_ORBITA(via SPINORE)=True COPPIA_MIT=1.0 lambda=0.800
+
+passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
+      0 |    0.0000 |     8.038 | r=6.2 c=0.318 n=5      | tot=1 NUOVI=1 | TRACK accr=744 coppie=0 nuova=80
+     20 |    0.0000 |     8.038 | r=1.2 c=0.225 n=9      | tot=2 NUOVI=0 | TRACK accr=1137 coppie=123 nuova=81
+     40 |    0.0000 |     8.040 | r=6.8 c=0.216 n=7      | tot=2 NUOVI=0 | TRACK accr=1327 coppie=202 nuova=82
+     60 |    0.0000 |     8.040 | r=6.8 c=0.272 n=7      | tot=2 NUOVI=0 | TRACK accr=1433 coppie=237 nuova=82
+     80 |    0.0000 |     8.039 | r=0.8 c=0.193 n=421    | tot=2 NUOVI=0 | TRACK accr=1482 coppie=259 nuova=83
+
+[batch] completato in 49.5s, 80 passi. CSV salvato in out_freetest/covB.csv
+[batch] LETTURA condensazione: se dens_centrale e n_centrali CRESCONO e frac_nati resta
+        ALTA mentre dist_masse NON crolla -> NUOVA massa dal vuoto (non accrescimento).
+[batch] LETTURA picchi_nuovi: se picchi_nuovi passa da 0 a >=1 a un certo passo, quello e'
+        il momento in cui una MASSA NUOVA si stacca dal vuoto (materia isolata che si crea).
+[batch] LETTURA antiguscio: se compare un anello a coerenza_min BASSA (antifase) e raggio
+        stabile oltre le masse, con nodi presenti -> GUSCIO DI ANTIFASE che avvolge i nuclei
+        = massa di scala superiore (il guscio del sistema e antifase, non materia).

@@ -1,0 +1,33 @@
+[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile
+[calore] calcio termico VETTORIALE+chirale attivo: omega_s 3D eccitato, phivel firmato da perc_chi
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[polo-maturo] al twist partecipa la chiralita del polo che matura (twn maggiore)
+[ls-azim] L.S vettoriale: verso tangenziale da (radiale x spinore), azimutale stabile
+[verso-chi] FRAME_DRAG pilotato dal verso CHIRALE stabile (non dal tw oscillante)
+[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+[chi-core] frame-dragging guidato dalla chiralitÓ emergente del core locale
+[cs-dinamico] velocitÓ metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+[batch] condensazione: seed=1 passi=120 ogni=30 sep=4.0 nmasse=2
+[batch] leggi attive: GRAV_BIFASE=True SPIN_ORBITA(via SPINORE)=True COPPIA_MIT=1.0 lambda=0.800
+
+passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
+[batch] LOG DIAGNOSTICO COMPLETO  -> out_freetest/scA_diag.csv
+      0 |    0.0000 |     8.009 | r=2.8 c=0.313 n=6      | tot=1 NUOVI=1 | TRACK accr=744 coppie=0 nuova=80
+     30 |    0.0000 |     8.009 | r=4.2 c=0.242 n=6      | tot=2 NUOVI=0 | TRACK accr=746 coppie=0 nuova=80
+     60 |    0.0000 |     8.010 | r=3.2 c=0.098 n=6      | tot=2 NUOVI=0 | TRACK accr=747 coppie=1 nuova=81
+     90 |    0.0000 |     8.009 | r=0.8 c=0.257 n=278    | tot=2 NUOVI=0 | TRACK accr=747 coppie=1 nuova=81
+    120 |    0.0000 |     8.004 | r=6.2 c=0.182 n=8      | tot=1 NUOVI=0 | TRACK accr=749 coppie=1 nuova=81
+[batch] log diagnostico completo salvato in out_freetest/scA_diag.csv
+
+[batch] completato in 231.1s, 120 passi. CSV salvato in out_freetest/scA.csv
+[batch] LETTURA condensazione: se dens_centrale e n_centrali CRESCONO e frac_nati resta
+        ALTA mentre dist_masse NON crolla -> NUOVA massa dal vuoto (non accrescimento).
+[batch] LETTURA picchi_nuovi: se picchi_nuovi passa da 0 a >=1 a un certo passo, quello e'
+        il momento in cui una MASSA NUOVA si stacca dal vuoto (materia isolata che si crea).
+[batch] LETTURA antiguscio: se compare un anello a coerenza_min BASSA (antifase) e raggio
+        stabile oltre le masse, con nodi presenti -> GUSCIO DI ANTIFASE che avvolge i nuclei
+        = massa di scala superiore (il guscio del sistema e antifase, non materia).

@@ -1,0 +1,12 @@
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[sync-spinore] Kuramoto SU(2) sugli spinori: torque di allineamento omega_sync = forza*(nb x nb_media) in omega_tot
+[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)
+[chi-core] frame-dragging guidato dalla chiralitÓ emergente del core locale
+[cs-dinamico] velocitÓ metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+[batch] condensazione: seed=1 passi=15 ogni=5 sep=6.0 nmasse=2
+[batch] leggi attive: GRAV_BIFASE=True SPIN_ORBITA(via SPINORE)=True COPPIA_MIT=1.0 lambda=0.800
+
+passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
+[batch] LOG DIAGNOSTICO COMPLETO  -> out_freetest/tl15_smoke.csv
+      0 |    0.0000 |    12.038 | r=8.2 c=0.339 n=6      | tot=1 NUOVI=1 | TRACK accr=744 coppie=0 nuova=80
+      5 |    0.0000 |    12.038 | r=5.2 c=0.253 n=8      | tot=1 NUOVI=0 | TRACK accr=744 coppie=0 nuova=80

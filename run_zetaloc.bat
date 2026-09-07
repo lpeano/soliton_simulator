@@ -30,9 +30,8 @@ set FPS=24
 set OGNI=5
 set SEMI=1 2 3
 
-if not exist out_zeta  mkdir out_zeta
 if not exist out_video mkdir out_video
-if not exist log        mkdir log
+if not exist log\zeta        mkdir log\zeta
 
 echo === A/B smorzamento locale ZETA_LOC (K_FRANGE SPENTO in entrambi) ===
 echo     %NM% masse, sep %SEP%, %PASSI% passi ^| zeta fisso vs zeta-loc ^| semi: %SEMI%
@@ -40,15 +39,15 @@ echo.
 
 REM ================= BATCH: la PROVA (CSV + diaglog), K_FRANGE=0 sempre =================
 for %%S in (%SEMI%) do (
-  START "zoff_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --kfrange 0                 --csv out_zeta\cond_zoff_s%%S.csv --diaglog out_zeta\diag_zoff_s%%S.csv > log\zoff_s%%S.log 2>&1"
-  START "zon_s%%S"  /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --kfrange 0 --zeta-loc       --csv out_zeta\cond_zon_s%%S.csv  --diaglog out_zeta\diag_zon_s%%S.csv  > log\zon_s%%S.log 2>&1"
+  START "zoff_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --kfrange 0                 --csv csv\zeta\cond_zoff_s%%S.csv --diaglog csv\zeta\diag_zoff_s%%S.csv > log\zeta\zoff_s%%S.log 2>&1"
+  START "zon_s%%S"  /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --kfrange 0 --zeta-loc       --csv csv\zeta\cond_zon_s%%S.csv  --diaglog csv\zeta\diag_zon_s%%S.csv  > log\zeta\zon_s%%S.log 2>&1"
 )
 
 REM ================= VIDEO: l'OCCHIO (camera FISSA), seed 1, off + on =================
-START "video_zoff_s1" /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %FRAMES% --fps %FPS% --size 0.7,0.7,0.7 --sync --kfrange 0           --out out_video\video_zoff_s1.mp4 > log\video_zoff_s1.log 2>&1"
-START "video_zon_s1"  /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %FRAMES% --fps %FPS% --size 0.7,0.7,0.7 --sync --kfrange 0 --zeta-loc --out out_video\video_zon_s1.mp4 > log\video_zon_s1.log 2>&1"
+START "video_zoff_s1" /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %FRAMES% --fps %FPS% --size 0.7,0.7,0.7 --sync --kfrange 0           --out out_video\video_zoff_s1.mp4 > log\zeta\video_zoff_s1.log 2>&1"
+START "video_zon_s1"  /MIN cmd /c "python %SIM% --test N-MASSE --nmasse %NM% --sep %SEP% --seed 1 --giri 0 --ppf 1 --frames %FRAMES% --fps %FPS% --size 0.7,0.7,0.7 --sync --kfrange 0 --zeta-loc --out out_video\video_zon_s1.mp4 > log\zeta\video_zon_s1.log 2>&1"
 
 echo.
-echo === Lanciati. Risultati in out_zeta\ (CSV+diaglog), out_video\, log\ ===
+echo === Lanciati. Risultati in csv\zeta\ (CSV+diaglog), out_video\, log\zeta\ ===
 pause
 endlocal

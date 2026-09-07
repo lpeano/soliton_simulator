@@ -8,20 +8,18 @@ REM ============================================================================
 set SIM=soliton_simulator.py
 set PASSI=400
 set OGNI=10
-set OUT=out_guscio_fase1
 set CHAIN=--sync --cs-dinamico --verlet --spinore-vivo --spin-feedback --chi-core --viriale --zeta-vir --pav-com --chi-basc --polo-maturo --olon-part --ls-azim --verso-chi --tau-d0 --zeta-loc --plast-din --calore-vett --guscio-morbido
-if not exist %OUT% mkdir %OUT%
-if not exist log mkdir log
+if not exist log\guscio_fase1 mkdir log\guscio_fase1
 
 echo === FASE 1 REGIMI (guscio-morbido ON): sep 5/6/8, 400 passi, seed 1 ===
 for %%P in (5 6 8) do (
   echo [sep %%P]
-  python %SIM% --batch --nmasse 2 --sep %%P --seed 1 --passi %PASSI% --ogni %OGNI% %CHAIN% --sync-db %OUT%\db_sep%%P.pkl --db-ogni 200 --csv %OUT%\cond_sep%%P.csv --diaglog %OUT%\diag_sep%%P.csv > log\guscio_fase1_sep%%P.log 2>&1
+  python %SIM% --batch --nmasse 2 --sep %%P --seed 1 --passi %PASSI% --ogni %OGNI% %CHAIN% --sync-db db\guscio_fase1\db_sep%%P.pkl --db-ogni 200 --csv csv\guscio_fase1\cond_sep%%P.csv --diaglog csv\guscio_fase1\diag_sep%%P.csv > log\guscio_fase1\guscio_fase1_sep%%P.log 2>&1
   if errorlevel 1 goto :errore
 )
 echo FASE 1 completata.
 goto :fine
 
 :errore
-echo ERRORE, vedi log\guscio_fase1_sep*.log
+echo ERRORE, vedi log\guscio_fase1\guscio_fase1_sep*.log
 :fine

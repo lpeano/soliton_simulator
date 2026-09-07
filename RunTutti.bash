@@ -15,9 +15,9 @@ SIM=soliton_simulator.py
 PASSI=10000
 FRAMES=10000
 SEP=8
-mkdir -p out_test out_video log
+mkdir -p out_video log/test
 
-echo "=== Avvio di tutti i test in parallelo (10000 passi). Log in ./log/ ==="
+echo "=== Avvio di tutti i test in parallelo (10000 passi). Log in ./log/test/ ==="
 echo "    CPU disponibili: $(nproc 2>/dev/null || echo '?')  -- ogni processo usa ~1 core"
 echo ""
 
@@ -25,15 +25,15 @@ batch () {  # $1=nome  $2...=flag extra
   local nome=$1; shift
   echo "[batch] avvio $nome"
   python3 "$SIM" --batch --nmasse "$NM" --sep "$SEP" --passi "$PASSI" --ogni 5 --sync "$@" \
-    --csv "out_test/cond_${nome}.csv" --diaglog "out_test/diag_${nome}.csv" \
-    > "log/${nome}.log" 2>&1 &
+    --csv "csv/test/cond_${nome}.csv" --diaglog "csv/test/diag_${nome}.csv" \
+    > "log/test/${nome}.log" 2>&1 &
 }
 video () {  # $1=nome  $2...=flag extra
   local nome=$1; shift
   echo "[video] avvio $nome"
   python3 "$SIM" --test "N-MASSE" --nmasse "$NM" --sep "$SEP" --giri 0 --ppf 1 \
     --frames "$FRAMES" --fps 24 --sync "$@" --out "out_video/${nome}.mp4" \
-    > "log/${nome}_video.log" 2>&1 &
+    > "log/test/${nome}_video.log" 2>&1 &
 }
 
 # ============ 2 MASSE ============
@@ -57,4 +57,4 @@ echo "=== Tutti i processi lanciati in parallelo. Attendo il completamento... ==
 echo "    (segui i log:  tail -f log/*.log )"
 wait
 echo ""
-echo "=== FINITO. Risultati in:  out_test/ (CSV)  out_video/ (mp4)  log/ (log) ==="
+echo "=== FINITO. Risultati in:  csv/test/ (CSV)  out_video/ (mp4)  log/test/ (log) ==="

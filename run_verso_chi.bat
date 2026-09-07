@@ -17,15 +17,14 @@ set OGNI=5
 set DBOGNI=100
 set SEMI=1
 
-if not exist out_vc mkdir out_vc
-if not exist log     mkdir log
+if not exist log\vc     mkdir log\vc
 
 echo === AGGANCIO VERSO STABILE (seme %SEMI%, %PASSI% passi) ===
 echo.
 
 for %%S in (%SEMI%) do (
-  START "senza_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --chi-basc            --sync-db out_vc\db_senza_s%%S.pkl --db-ogni %DBOGNI% --csv out_vc\cond_senza_s%%S.csv --diaglog out_vc\diag_senza_s%%S.csv > log\senza_s%%S.log 2>&1"
-  START "con_s%%S"   /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --chi-basc --verso-chi --sync-db out_vc\db_con_s%%S.pkl   --db-ogni %DBOGNI% --csv out_vc\cond_con_s%%S.csv   --diaglog out_vc\diag_con_s%%S.csv   > log\con_s%%S.log 2>&1"
+  START "senza_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --chi-basc            --sync-db db\vc\db_senza_s%%S.pkl --db-ogni %DBOGNI% --csv csv\vc\cond_senza_s%%S.csv --diaglog csv\vc\diag_senza_s%%S.csv > log\vc\senza_s%%S.log 2>&1"
+  START "con_s%%S"   /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --chi-basc --verso-chi --sync-db db\vc\db_con_s%%S.pkl   --db-ogni %DBOGNI% --csv csv\vc\cond_con_s%%S.csv   --diaglog csv\vc\diag_con_s%%S.csv   > log\vc\con_s%%S.log 2>&1"
 )
 
 echo Lanciati. Al ritorno: Lz_orb coerenza del verso, senza vs con --verso-chi.

@@ -22,8 +22,7 @@ set PASSI=2000
 set OGNI=10
 set DBOGNI=200
 set SEP=10
-if not exist out_spinore mkdir out_spinore
-if not exist log mkdir log
+if not exist log\spinore mkdir log\spinore
 
 REM ---- PART 1: canale non-abeliano sul binario. Base minima (--verlet --sync). ----
 REM         berry_spin (curvatura spinoriale) e circolazione (orbitale) sono gia'
@@ -38,23 +37,23 @@ REM ==== PRIMA gli ON (portano l'informazione), POI gli OFF (baseline confermati
 REM ---- PART 1 ON: canale non-abeliano sul binario, base minima. ----
 for %%S in (1 2) do (
   echo [part1 seed %%S] binario ON
-  python %SIM% --batch --nmasse 2 --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %BASE% --spinore-vivo --sync-db out_spinore\db_m2_on_s%%S.pkl --db-ogni %DBOGNI% --csv out_spinore\cond_m2_on_s%%S.csv --diaglog out_spinore\m2_on_s%%S.csv > log\spinore_m2_on_s%%S.log 2>&1
+  python %SIM% --batch --nmasse 2 --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %BASE% --spinore-vivo --sync-db db\spinore\db_m2_on_s%%S.pkl --db-ogni %DBOGNI% --csv csv\spinore\cond_m2_on_s%%S.csv --diaglog csv\spinore\m2_on_s%%S.csv > log\spinore\spinore_m2_on_s%%S.log 2>&1
 )
 
 REM ---- PART 2 ON: precessione, base piena + --ls-azim (che legge _nb). ----
 for %%S in (1 2) do (
   echo [part2 seed %%S] precessione ON
-  python %SIM% --batch --nmasse 2 --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %CATENA% --spinore-vivo --sync-db out_spinore\db_prec_on_s%%S.pkl --db-ogni %DBOGNI% --csv out_spinore\cond_prec_on_s%%S.csv --diaglog out_spinore\prec_on_s%%S.csv > log\spinore_prec_on_s%%S.log 2>&1
+  python %SIM% --batch --nmasse 2 --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %CATENA% --spinore-vivo --sync-db db\spinore\db_prec_on_s%%S.pkl --db-ogni %DBOGNI% --csv csv\spinore\cond_prec_on_s%%S.csv --diaglog csv\spinore\prec_on_s%%S.csv > log\spinore\spinore_prec_on_s%%S.log 2>&1
 )
 
 REM ---- BASELINE OFF (confermativa, solo seme 1, in coda) ----
 echo [part1] binario OFF (baseline appaiata, solo seme 1)
-python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %BASE% --sync-db out_spinore\db_m2_off_s1.pkl --db-ogni %DBOGNI% --csv out_spinore\cond_m2_off_s1.csv --diaglog out_spinore\m2_off_s1.csv > log\spinore_m2_off_s1.log 2>&1
+python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %BASE% --sync-db db\spinore\db_m2_off_s1.pkl --db-ogni %DBOGNI% --csv csv\spinore\cond_m2_off_s1.csv --diaglog csv\spinore\m2_off_s1.csv > log\spinore\spinore_m2_off_s1.log 2>&1
 echo [part2] precessione OFF (baseline appaiata, solo seme 1)
-python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %CATENA% --sync-db out_spinore\db_prec_off_s1.pkl --db-ogni %DBOGNI% --csv out_spinore\cond_prec_off_s1.csv --diaglog out_spinore\prec_off_s1.csv > log\spinore_prec_off_s1.log 2>&1
+python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %CATENA% --sync-db db\spinore\db_prec_off_s1.pkl --db-ogni %DBOGNI% --csv csv\spinore\cond_prec_off_s1.csv --diaglog csv\spinore\prec_off_s1.csv > log\spinore\spinore_prec_off_s1.log 2>&1
 
 echo.
-echo Test spinore-vivo completato: 6 run in out_spinore\, log in log\.
+echo Test spinore-vivo completato: 6 run in csv\spinore\, log in log\spinore\.
 echo Confronto Part 1 (off vs on): berry_spin_max/media_assoluta, olonomia_fase_*, circolazione_topologica_*.
 echo Confronto Part 2 (precessione): Lz_orb_*, m0_Lz vs berry_spin/circolazione gauge-invarianti.
 pause

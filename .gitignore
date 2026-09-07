@@ -14,47 +14,21 @@ __pycache__/
 *.npy
 *.npz
 
-# Risultati ELAST_C conservati nel repository (mai i video o i DB/cache).
-!out_elast/
-!out_elast/*.csv
+# ----------------------------------------------------------------------------
+# NUOVO LAYOUT OUTPUT (2026-09-07): db/<campagna>/ (.pkl), csv/<campagna>/ (.csv),
+# log/<campagna>/ (.log). Si TRACCIANO i CSV diagnostici e i log delle campagne
+# (sono i dati e la prova); MAI i .pkl (DB di stato, enormi) ne' i video.
+# ----------------------------------------------------------------------------
+# db/ resta ignorato: contiene solo .pkl (gia' esclusi globalmente), enormi.
+db/
+
+# TRACCIA i CSV sotto csv/ e i log sotto log/ (ri-includi cartelle + file).
+!csv/
+!csv/**/
+!csv/**/*.csv
 !log/
-!log/elast*.log
+!log/**/
+!log/**/*.log
 
-# Risultati A/B spinore-vivo conservati nel repository (mai i DB .pkl).
-!out_spinore/
-!out_spinore/*.csv
-!log/spinore*.log
-
-# Risultati A/B spinore-vivo + plasticita' dinamica.
-!out_spinore_plastdin/
-!out_spinore_plastdin/*.csv
-!log/pd_*.log
-
-# Risultati campagna congelamento da guscio (spin_core + inerzia) e A/B guscio-morbido (mai i .pkl).
-!out_spincore/
-!out_spincore/*.csv
-!out_guscio_morbido/
-!out_guscio_morbido/*.csv
-!log/spincore_*.log
-!log/guscio_*.log
-
-# Risultati A/B --tw-spinore (aggancio doppia copertura) e regimi (mai i .pkl).
-!out_tw_spinore/
-!out_tw_spinore/*.csv
-!out_guscio_regimi/
-!out_guscio_regimi/*.csv
-!out_guscio_fase1/
-!out_guscio_fase1/*.csv
-!log/tw_spinore_*.log
-!log/guscio_regimi_*.log
-!log/guscio_fase1_*.log
-
-# Risultati A/B --sync-spinore (Kuramoto SU(2), STEP 1 minimo freddo) (mai i .pkl).
-!out_sync_spinore/
-!out_sync_spinore/*.csv
-!log/sync_spinore_*.log
-
-# Risultati STEP 2 --sync-spinore (candidate una alla volta: chi-core, ...) (mai i .pkl).
-!out_sync_spinore_step2/
-!out_sync_spinore_step2/*.csv
-!log/sync_step2_*.log
+# Legacy: i vecchi out_<campagna>/ sono stati migrati a db/ /csv/ /log/. Restano
+# ignorati (out_*/ sopra). I loro CSV storici sono ora sotto csv/<campagna>/.

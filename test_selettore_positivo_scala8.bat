@@ -17,10 +17,8 @@ set SEP=16
 set PASSI=2000
 set OGNI=10
 set DBOGNI=100
-set OUT=out_selettore_positivo_scala8
 
-if not exist %OUT% mkdir %OUT%
-if not exist log mkdir log
+if not exist log\selettore_positivo_scala8 mkdir log\selettore_positivo_scala8
 
 echo === SELETTORE POSITIVO: B=%B%, sep=%SEP%, passi=%PASSI% ===
 echo === soli generatori perc_chi=+1 nella misura per-picco ===
@@ -28,12 +26,12 @@ echo.
 
 for %%S in (1 2 3) do (
   echo [SEME %%S]
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --spin-positivi --sync-db %OUT%\db_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_s%%S.csv --diaglog %OUT%\diag_s%%S.csv > log\selettore_pos_scala8_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --spin-positivi --sync-db db\selettore_positivo_scala8\db_s%%S.pkl --db-ogni %DBOGNI% --csv csv\selettore_positivo_scala8\cond_s%%S.csv --diaglog csv\selettore_positivo_scala8\diag_s%%S.csv > log\selettore_positivo_scala8\selettore_pos_scala8_s%%S.log 2>&1
   if errorlevel 1 echo ERRORE seme %%S & goto :errore
 )
 
 echo.
-echo Test selettore positivo completato in %OUT%\.
+echo Test selettore positivo completato in csv\selettore_positivo_scala8\.
 goto :fine
 
 :errore

@@ -16,10 +16,8 @@ set SEP=16
 set PASSI=2000
 set OGNI=10
 set DBOGNI=100
-set OUT=out_spin_feedback_scala8_esplorativo
 
-if not exist %OUT% mkdir %OUT%
-if not exist log mkdir log
+if not exist log\spin_feedback_scala8_esplorativo mkdir log\spin_feedback_scala8_esplorativo
 
 echo === CAMPAGNA ESPLORATIVA: B=%B%, sep=%SEP%, passi=%PASSI% ===
 echo === ordine seriale OFF/ON per seme ===
@@ -27,16 +25,16 @@ echo.
 
 for %%S in (1 2 3) do (
   echo [OFF] B=%B% seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --sync-db %OUT%\db_off_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_off_s%%S.csv --diaglog %OUT%\diag_off_s%%S.csv > log\spinfb_scala8_exp_off_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --sync-db db\spin_feedback_scala8_esplorativo\db_off_s%%S.pkl --db-ogni %DBOGNI% --csv csv\spin_feedback_scala8_esplorativo\cond_off_s%%S.csv --diaglog csv\spin_feedback_scala8_esplorativo\diag_off_s%%S.csv > log\spin_feedback_scala8_esplorativo\spinfb_scala8_exp_off_s%%S.log 2>&1
   if errorlevel 1 echo ERRORE OFF seed %%S & goto :errore
 
   echo [ON] B=%B% seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --spin-feedback --sync-db %OUT%\db_on_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_on_s%%S.csv --diaglog %OUT%\diag_on_s%%S.csv > log\spinfb_scala8_exp_on_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --spin-feedback --sync-db db\spin_feedback_scala8_esplorativo\db_on_s%%S.pkl --db-ogni %DBOGNI% --csv csv\spin_feedback_scala8_esplorativo\cond_on_s%%S.csv --diaglog csv\spin_feedback_scala8_esplorativo\diag_on_s%%S.csv > log\spin_feedback_scala8_esplorativo\spinfb_scala8_exp_on_s%%S.log 2>&1
   if errorlevel 1 echo ERRORE ON seed %%S & goto :errore
 )
 
 echo.
-echo Campagna esplorativa completata in %OUT%\.
+echo Campagna esplorativa completata in csv\spin_feedback_scala8_esplorativo\.
 goto :fine
 
 :errore

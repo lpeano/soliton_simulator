@@ -24,9 +24,7 @@ set PASSI=2000
 set OGNI=10
 set DBOGNI=200
 set SEP=10
-set OUT=out_spinore_plastdin
-if not exist %OUT% mkdir %OUT%
-if not exist log mkdir log
+if not exist log\spinore_plastdin mkdir log\spinore_plastdin
 
 set BASE=--verlet --sync --plast-din
 set CATENA=--verlet --sync --plast-din --viriale --zeta-vir --pav-com --chi-basc --polo-maturo --olon-part --calore-vett --ls-azim
@@ -35,24 +33,24 @@ REM ==== PRIMA gli ON (portano l'informazione), POI gli OFF (baseline confermati
 
 REM ---- PART 1 ON: canale non-abeliano sul binario, base minima + plast-din. ----
 echo [part1 seed 1] binario ON (plast-din)
-python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %BASE% --spinore-vivo --sync-db %OUT%\db_m2_on_s1.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_m2_on_s1.csv --diaglog %OUT%\m2_on_s1.csv > log\pd_m2_on_s1.log 2>&1
+python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %BASE% --spinore-vivo --sync-db db\spinore_plastdin\db_m2_on_s1.pkl --db-ogni %DBOGNI% --csv csv\spinore_plastdin\cond_m2_on_s1.csv --diaglog csv\spinore_plastdin\m2_on_s1.csv > log\spinore_plastdin\pd_m2_on_s1.log 2>&1
 echo [part1 seed 2] binario ON (plast-din)
-python %SIM% --batch --nmasse 2 --sep %SEP% --seed 2 --passi %PASSI% --ogni %OGNI% %BASE% --spinore-vivo --sync-db %OUT%\db_m2_on_s2.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_m2_on_s2.csv --diaglog %OUT%\m2_on_s2.csv > log\pd_m2_on_s2.log 2>&1
+python %SIM% --batch --nmasse 2 --sep %SEP% --seed 2 --passi %PASSI% --ogni %OGNI% %BASE% --spinore-vivo --sync-db db\spinore_plastdin\db_m2_on_s2.pkl --db-ogni %DBOGNI% --csv csv\spinore_plastdin\cond_m2_on_s2.csv --diaglog csv\spinore_plastdin\m2_on_s2.csv > log\spinore_plastdin\pd_m2_on_s2.log 2>&1
 
 REM ---- PART 2 ON: precessione, base piena + --ls-azim + plast-din. ----
 echo [part2 seed 1] precessione ON (plast-din)
-python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %CATENA% --spinore-vivo --sync-db %OUT%\db_prec_on_s1.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_prec_on_s1.csv --diaglog %OUT%\prec_on_s1.csv > log\pd_prec_on_s1.log 2>&1
+python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %CATENA% --spinore-vivo --sync-db db\spinore_plastdin\db_prec_on_s1.pkl --db-ogni %DBOGNI% --csv csv\spinore_plastdin\cond_prec_on_s1.csv --diaglog csv\spinore_plastdin\prec_on_s1.csv > log\spinore_plastdin\pd_prec_on_s1.log 2>&1
 echo [part2 seed 2] precessione ON (plast-din)
-python %SIM% --batch --nmasse 2 --sep %SEP% --seed 2 --passi %PASSI% --ogni %OGNI% %CATENA% --spinore-vivo --sync-db %OUT%\db_prec_on_s2.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_prec_on_s2.csv --diaglog %OUT%\prec_on_s2.csv > log\pd_prec_on_s2.log 2>&1
+python %SIM% --batch --nmasse 2 --sep %SEP% --seed 2 --passi %PASSI% --ogni %OGNI% %CATENA% --spinore-vivo --sync-db db\spinore_plastdin\db_prec_on_s2.pkl --db-ogni %DBOGNI% --csv csv\spinore_plastdin\cond_prec_on_s2.csv --diaglog csv\spinore_plastdin\prec_on_s2.csv > log\spinore_plastdin\pd_prec_on_s2.log 2>&1
 
 REM ---- BASELINE OFF-plast (spinore congelato ma plast-din attivo, solo seme 1) ----
 echo [part1] binario OFF-spinore (plast-din, baseline, seme 1)
-python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %BASE% --sync-db %OUT%\db_m2_off_s1.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_m2_off_s1.csv --diaglog %OUT%\m2_off_s1.csv > log\pd_m2_off_s1.log 2>&1
+python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %BASE% --sync-db db\spinore_plastdin\db_m2_off_s1.pkl --db-ogni %DBOGNI% --csv csv\spinore_plastdin\cond_m2_off_s1.csv --diaglog csv\spinore_plastdin\m2_off_s1.csv > log\spinore_plastdin\pd_m2_off_s1.log 2>&1
 echo [part2] precessione OFF-spinore (plast-din, baseline, seme 1)
-python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %CATENA% --sync-db %OUT%\db_prec_off_s1.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_prec_off_s1.csv --diaglog %OUT%\prec_off_s1.csv > log\pd_prec_off_s1.log 2>&1
+python %SIM% --batch --nmasse 2 --sep %SEP% --seed 1 --passi %PASSI% --ogni %OGNI% %CATENA% --sync-db db\spinore_plastdin\db_prec_off_s1.pkl --db-ogni %DBOGNI% --csv csv\spinore_plastdin\cond_prec_off_s1.csv --diaglog csv\spinore_plastdin\prec_off_s1.csv > log\spinore_plastdin\pd_prec_off_s1.log 2>&1
 
 echo.
-echo Test spinore-vivo + plast-din completato: 6 run in %OUT%\, log in log\ (pd_*).
-echo Confronto vs base: S_M, omega_S, berry_spin_* (out_spinore_plastdin vs out_spinore).
+echo Test spinore-vivo + plast-din completato: 6 run in csv\spinore_plastdin\, log in log\spinore_plastdin\ (pd_*).
+echo Confronto vs base: S_M, omega_S, berry_spin_* (csv\spinore_plastdin\ vs csv\spinore\).
 echo Metrica/volume: d0_mean/d0_max, stress, dil, m0_raggio, scala_com.
 pause

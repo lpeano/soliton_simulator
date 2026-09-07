@@ -15,20 +15,18 @@ set SEP=8
 set PASSI=2000
 set OGNI=10
 set DBOGNI=100
-set OUT=out_spincore
 set CHAIN=--sync --cs-dinamico --verlet --spinore-vivo --spin-feedback --chi-core --viriale --zeta-vir --pav-com --chi-basc --polo-maturo --olon-part --ls-azim --verso-chi --tau-d0 --zeta-loc --plast-din --calore-vett
-if not exist %OUT% mkdir %OUT%
-if not exist log mkdir log
+if not exist log\spincore mkdir log\spincore
 
 echo === SPIN_CORE + INERZIA GUSCIO: B=1, sep=%SEP%, passi=%PASSI%, 3 semi ===
 for %%S in (1 2 3) do (
   echo [seed %%S]
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %CHAIN% --sync-db %OUT%\db_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_s%%S.csv --diaglog %OUT%\diag_s%%S.csv > log\spincore_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %CHAIN% --sync-db db\spincore\db_s%%S.pkl --db-ogni %DBOGNI% --csv csv\spincore\cond_s%%S.csv --diaglog csv\spincore\diag_s%%S.csv > log\spincore\spincore_s%%S.log 2>&1
   if errorlevel 1 goto :errore
 )
 echo Campagna spin_core completata.
 goto :fine
 
 :errore
-echo ERRORE nel run, vedi log\spincore_s*.log
+echo ERRORE nel run, vedi log\spincore\spincore_s*.log
 :fine

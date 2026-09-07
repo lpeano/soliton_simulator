@@ -1866,16 +1866,57 @@ class Rete:
         f = 0.05 / LAM_BASE                       # rapporto di nascita (adimensionale), NON scelto
         return f * float(np.median(self.d0))
 
+    def _versione_codice(self):
+        """IDENTITA' DI VERSIONE del codice in esecuzione, per il versionamento del DB.
+        - `blob` = git blob hash dei BYTE ATTUALI del file (`git hash-object`): e' l'IDENTITA' di
+          accetta/rifiuta. E' un hash di CONTENUTO (non richiede commit), stabile e uguale al blob
+          committato quando il working tree e' pulito. Il branch NON entra nella chiave: stesso
+          codice su branch diversi = stessa fisica.
+        - `committed_blob`/`commit`/`branch` = METADATI (per rintracciare/worktree; branch diverso
+          -> solo avviso). `dirty` = i byte attuali differiscono dal blob committato.
+        - `content_hash` = sha256 dei byte: FALLBACK quando git non e' disponibile o per i DB legacy.
+        Ritorna un dict. Cache per-processo (il file non cambia durante il run)."""
+        cache = getattr(self, '_ver_codice_cache', None)
+        if cache is not None:
+            return cache
+        import hashlib, sys, os, subprocess
+        _file = os.path.abspath(sys.modules[type(self).__module__].__file__)
+        content_hash = hashlib.sha256(open(_file, 'rb').read()).hexdigest()[:16]
+        _dir = os.path.dirname(_file) or "."
+        def _git(*args):
+            try:
+                r = subprocess.run(("git",) + args, cwd=_dir, capture_output=True,
+                                   text=True, timeout=5)
+                return r.stdout.strip() if r.returncode == 0 else None
+            except Exception:
+                return None
+        blob = _git("hash-object", _file)          # blob dei byte ATTUALI (non serve commit)
+        top = _git("rev-parse", "--show-toplevel")
+        committed_blob = None
+        if top:
+            rel = os.path.relpath(_file, top).replace(os.sep, "/")
+            committed_blob = _git("rev-parse", f"HEAD:{rel}")
+        commit = _git("rev-parse", "HEAD")
+        branch = _git("rev-parse", "--abbrev-ref", "HEAD")
+        dirty = (blob is None) or (committed_blob is None) or (blob != committed_blob)
+        cache = {'blob': blob, 'committed_blob': committed_blob, 'commit': commit,
+                 'branch': branch, 'dirty': dirty, 'content_hash': content_hash}
+        self._ver_codice_cache = cache
+        return cache
+
     def salva_stato(self, path):
         """DB VERSIONATO + IDEMPOTENTE. Salva TUTTE le grandezze di stato (generico: scorre
         __dict__, cosi' non ne dimentica nessuna - requisito dell'idempotenza), PIU' lo stato
-        dell'RNG (senno' la mitosi riparte con casuali diverse) e l'HASH della versione del codice
-        (senno' si mescolano fisiche diverse). Al ricarico l'hash viene verificato e RIFIUTATO se
-        diverso: il DB non puo' iniettare uno stato vecchio in una fisica cambiata."""
-        import hashlib, pickle, sys
-        src = open(sys.modules[type(self).__module__].__file__, 'rb').read()
-        code_hash = hashlib.sha256(src).hexdigest()[:16]
-        stato = {'code_hash': code_hash,
+        dell'RNG (senno' la mitosi riparte con casuali diverse) e l'IDENTITA' di versione del codice
+        (git blob dei byte attuali + metadati commit/branch/dirty). Al ricarico il blob viene
+        verificato e RIFIUTATO se diverso: il DB non puo' iniettare uno stato vecchio in una
+        fisica cambiata. `code_hash` (sha256) resta scritto per retro-compatibilita' col fallback."""
+        import pickle, os
+        ver = self._versione_codice()
+        stato = {'code_hash': ver['content_hash'],   # LEGACY/fallback (retro-compat DB vecchi + no-git)
+                 'content_hash': ver['content_hash'],
+                 'blob': ver['blob'], 'committed_blob': ver['committed_blob'],
+                 'commit': ver['commit'], 'branch': ver['branch'], 'dirty': ver['dirty'],
                  'rng_state': self.rng.bit_generator.state,
                  'attrs': {}}
         for k, v in self.__dict__.items():
@@ -1885,23 +1926,42 @@ class Rete:
                 stato['attrs'][k] = v
         tmp = path + '.tmp'
         pickle.dump(stato, open(tmp, 'wb'), protocol=pickle.HIGHEST_PROTOCOL)
-        import os
         os.replace(tmp, path)   # scrittura atomica: o il DB e' completo o non c'e'
-        return code_hash
+        return ver['blob'] or ver['content_hash']
 
     def carica_stato(self, path):
-        """Ricarica lo stato dal DB. VERIFICA l'hash-versione: rifiuta se il codice e' cambiato
-        (protezione contro l'inquinamento fisica-vecchia/fisica-nuova). Ripristina anche l'RNG."""
-        import hashlib, pickle, sys, os
+        """Ricarica lo stato dal DB. VERIFICA l'IDENTITA' di versione: RIFIUTA se il codice e'
+        cambiato (protezione fisica-vecchia/fisica-nuova). Chiave di rifiuto = git BLOB dei byte
+        (branch/commit sono solo metadati: branch diverso -> avviso, non rifiuto). Fallback su
+        sha256 del contenuto se git non e' disponibile o per i DB legacy. Ripristina anche l'RNG."""
+        import pickle, os
         if not os.path.exists(path):
             return False
-        src = open(sys.modules[type(self).__module__].__file__, 'rb').read()
-        code_hash = hashlib.sha256(src).hexdigest()[:16]
         stato = pickle.load(open(path, 'rb'))
-        if stato.get('code_hash') != code_hash:
-            raise RuntimeError(
-                f"DB RIFIUTATO: versione codice diversa (DB={stato.get('code_hash')} vs ora={code_hash}). "
-                f"La fisica e' cambiata: uno stato vecchio inquinerebbe il run. Usa --db-cleanup per ripartire pulito.")
+        ver = self._versione_codice()
+        db_blob = stato.get('blob')
+        if db_blob is not None and ver['blob'] is not None:
+            # NUOVO schema: identita' = git blob dei byte del file.
+            if db_blob != ver['blob']:
+                raise RuntimeError(
+                    f"DB RIFIUTATO: codice diverso (blob DB={db_blob} vs ora={ver['blob']}). "
+                    f"DB da commit={stato.get('commit')} branch={stato.get('branch')}; "
+                    f"ora commit={ver['commit']} branch={ver['branch']}. La fisica e' cambiata. "
+                    f"Esegui la versione giusta (git worktree/checkout del commit del DB) o usa --db-cleanup.")
+            if stato.get('branch') and ver['branch'] and stato.get('branch') != ver['branch']:
+                print(f"[db] AVVISO: branch diverso (DB={stato.get('branch')} vs ora={ver['branch']}), "
+                      f"ma codice IDENTICO (stesso blob) -> accetto.")
+            if ver['dirty'] or stato.get('dirty'):
+                print("[db] AVVISO: working tree SPORCO (codice non committato): identita' sui byte attuali.")
+        else:
+            # LEGACY (solo code_hash) o git non disponibile: fallback su sha256 del contenuto.
+            db_hash = stato.get('content_hash', stato.get('code_hash'))
+            if db_hash != ver['content_hash']:
+                raise RuntimeError(
+                    f"DB RIFIUTATO: versione codice diversa (DB={db_hash} vs ora={ver['content_hash']}) "
+                    f"[fallback sha256: DB legacy o git non disponibile]. Usa --db-cleanup per ripartire pulito.")
+            if db_blob is None:
+                print("[db] AVVISO: DB legacy (solo sha256): accettato per contenuto identico.")
         for k, v in stato['attrs'].items():
             setattr(self, k, v)
         self.rng.bit_generator.state = stato['rng_state']

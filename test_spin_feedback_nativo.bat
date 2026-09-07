@@ -15,10 +15,8 @@ set SEP=8
 set PASSI=2000
 set OGNI=10
 set DBOGNI=100
-set OUT=out_spin_feedback_nativo
 
-if not exist %OUT% mkdir %OUT%
-if not exist log mkdir log
+if not exist log\spin_feedback_nativo mkdir log\spin_feedback_nativo
 
 echo === CAMPAGNA NATIVA SERIALE: B=1, passi=%PASSI%, semi 1 2 3 ===
 echo === ordine: OFF e ON appaiati per ogni seme ===
@@ -26,16 +24,16 @@ echo.
 
 for %%S in (1 2 3) do (
   echo [OFF] scala nativa seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --sync-db %OUT%\db_off_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_off_s%%S.csv --diaglog %OUT%\diag_off_s%%S.csv > log\spinfb_nativo_off_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --sync-db db\spin_feedback_nativo\db_off_s%%S.pkl --db-ogni %DBOGNI% --csv csv\spin_feedback_nativo\cond_off_s%%S.csv --diaglog csv\spin_feedback_nativo\diag_off_s%%S.csv > log\spin_feedback_nativo\spinfb_nativo_off_s%%S.log 2>&1
   if errorlevel 1 echo ERRORE OFF seed %%S & goto :errore
 
   echo [ON]  scala nativa seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --spin-feedback --sync-db %OUT%\db_on_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_on_s%%S.csv --diaglog %OUT%\diag_on_s%%S.csv > log\spinfb_nativo_on_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --spin-feedback --sync-db db\spin_feedback_nativo\db_on_s%%S.pkl --db-ogni %DBOGNI% --csv csv\spin_feedback_nativo\cond_on_s%%S.csv --diaglog csv\spin_feedback_nativo\diag_on_s%%S.csv > log\spin_feedback_nativo\spinfb_nativo_on_s%%S.log 2>&1
   if errorlevel 1 echo ERRORE ON seed %%S & goto :errore
 )
 
 echo.
-echo Campagna nativa completata: 6 run seriali in %OUT%\.
+echo Campagna nativa completata: 6 run seriali in csv\spin_feedback_nativo\.
 echo Osservabile diretta: spin_feedback_arco nel diaglog.
 goto :fine
 

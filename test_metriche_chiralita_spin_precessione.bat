@@ -27,10 +27,8 @@ set SEP=8
 set PASSI=2000
 set OGNI=10
 set DBOGNI=100
-set OUT=out_metriche_chiralita_spin_precessione
 
-if not exist %OUT% mkdir %OUT%
-if not exist log mkdir log
+if not exist log\metriche_chiralita_spin_precessione mkdir log\metriche_chiralita_spin_precessione
 
 echo === METRICHE CHIRALITA-SPIN-PRECESSIONE: B=1, sep=%SEP%, passi=%PASSI% ===
 echo === 4 bracci x 3 semi, esecuzione seriale ===
@@ -38,24 +36,24 @@ echo.
 
 for %%S in (1 2 3) do (
   echo [BASE] seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --chi-core --cs-dinamico --sync-db %OUT%\db_base_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_base_s%%S.csv --diaglog %OUT%\diag_base_s%%S.csv > log\metriche_base_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --chi-core --cs-dinamico --sync-db db\metriche_chiralita_spin_precessione\db_base_s%%S.pkl --db-ogni %DBOGNI% --csv csv\metriche_chiralita_spin_precessione\cond_base_s%%S.csv --diaglog csv\metriche_chiralita_spin_precessione\diag_base_s%%S.csv > log\metriche_chiralita_spin_precessione\metriche_base_s%%S.log 2>&1
   if errorlevel 1 goto :errore
 
   echo [FEEDBACK] seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --spin-feedback --chi-core --cs-dinamico --sync-db %OUT%\db_feedback_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_feedback_s%%S.csv --diaglog %OUT%\diag_feedback_s%%S.csv > log\metriche_feedback_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --spin-feedback --chi-core --cs-dinamico --sync-db db\metriche_chiralita_spin_precessione\db_feedback_s%%S.pkl --db-ogni %DBOGNI% --csv csv\metriche_chiralita_spin_precessione\cond_feedback_s%%S.csv --diaglog csv\metriche_chiralita_spin_precessione\diag_feedback_s%%S.csv > log\metriche_chiralita_spin_precessione\metriche_feedback_s%%S.log 2>&1
   if errorlevel 1 goto :errore
 
   echo [CORE] seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --chi-core --cs-dinamico --sync-db %OUT%\db_core_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_core_s%%S.csv --diaglog %OUT%\diag_core_s%%S.csv > log\metriche_core_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --chi-core --cs-dinamico --sync-db db\metriche_chiralita_spin_precessione\db_core_s%%S.pkl --db-ogni %DBOGNI% --csv csv\metriche_chiralita_spin_precessione\cond_core_s%%S.csv --diaglog csv\metriche_chiralita_spin_precessione\diag_core_s%%S.csv > log\metriche_chiralita_spin_precessione\metriche_core_s%%S.log 2>&1
   if errorlevel 1 goto :errore
 
   echo [FULL] seed %%S
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --spin-feedback --chi-core --cs-dinamico --sync-db %OUT%\db_full_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_full_s%%S.csv --diaglog %OUT%\diag_full_s%%S.csv > log\metriche_full_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --verlet --sync --spinore-vivo --spin-feedback --chi-core --cs-dinamico --sync-db db\metriche_chiralita_spin_precessione\db_full_s%%S.pkl --db-ogni %DBOGNI% --csv csv\metriche_chiralita_spin_precessione\cond_full_s%%S.csv --diaglog csv\metriche_chiralita_spin_precessione\diag_full_s%%S.csv > log\metriche_chiralita_spin_precessione\metriche_full_s%%S.log 2>&1
   if errorlevel 1 goto :errore
 )
 
 echo.
-echo Campagna completata: 12 run in %OUT%\.
+echo Campagna completata: 12 run in csv\metriche_chiralita_spin_precessione\.
 echo Analizzare ultimo 50%% e stabilita' temporale, non solo l'ultima riga.
 goto :fine
 

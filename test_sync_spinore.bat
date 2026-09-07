@@ -30,8 +30,8 @@ set DBOGNI=200
 set SEP=6
 REM PREREQUISITI (classe A) soltanto: nessuno switch di classe B o C.
 set PREREQ=--spinore-vivo --spinore-corretto --sync
-if not exist out_sync_spinore mkdir out_sync_spinore
-if not exist log mkdir log
+if not exist log\sync_spinore mkdir log\sync_spinore
+REM db\<campagna>\ e csv\<campagna>\ le crea il motore (auto-mkdir). log\<campagna>\ serve al redirect di shell.
 REM RIPRENDIBILE: NON cancellare i .pkl/.csv. Se un run e' interrotto, rilanciare questo .bat
 REM RIPRENDE dal --sync-db (il sim carica lo stato, fa i passi rimanenti, appende il diaglog).
 REM Per ripartire PULITI: cancellare a mano la cartella, o passare --db-cleanup ai singoli run.
@@ -39,17 +39,17 @@ REM Per ripartire PULITI: cancellare a mano la cartella, o passare --db-cleanup 
 REM ==== PRIMA gli ON (portano l'informazione), POI gli OFF (baseline confermativa) ====
 for %%S in (1 2 3) do (
   echo [sync-spinore seed %%S] minimo freddo ON
-  python %SIM% --batch --nmasse 2 --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %PREREQ% --sync-spinore --sync-db out_sync_spinore\db_on_s%%S.pkl --db-ogni %DBOGNI% --csv out_sync_spinore\cond_on_s%%S.csv --diaglog out_sync_spinore\on_s%%S.csv > log\sync_spinore_on_s%%S.log 2>&1
+  python %SIM% --batch --nmasse 2 --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %PREREQ% --sync-spinore --sync-db db\sync_spinore\db_on_s%%S.pkl --db-ogni %DBOGNI% --csv csv\sync_spinore\cond_on_s%%S.csv --diaglog csv\sync_spinore\on_s%%S.csv > log\sync_spinore\on_s%%S.log 2>&1
 )
 for %%S in (1 2 3) do (
   echo [sync-spinore seed %%S] minimo freddo OFF
-  python %SIM% --batch --nmasse 2 --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %PREREQ% --sync-db out_sync_spinore\db_off_s%%S.pkl --db-ogni %DBOGNI% --csv out_sync_spinore\cond_off_s%%S.csv --diaglog out_sync_spinore\off_s%%S.csv > log\sync_spinore_off_s%%S.log 2>&1
+  python %SIM% --batch --nmasse 2 --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %PREREQ% --sync-db db\sync_spinore\db_off_s%%S.pkl --db-ogni %DBOGNI% --csv csv\sync_spinore\cond_off_s%%S.csv --diaglog csv\sync_spinore\off_s%%S.csv > log\sync_spinore\off_s%%S.log 2>&1
 )
 
 echo.
-echo STEP 1 completato: 6 run in out_sync_spinore\, log in log\.
+echo STEP 1 completato: 6 run: db in db\, csv in csv\, log in log\.
 echo Analisi COVARIANTE (a N appaiato), ON vs OFF su 3 semi:
-echo   python analisi_covariante.py spin_cluster_modulo out_sync_spinore\on_s1.csv out_sync_spinore\off_s1.csv
+echo   python analisi_covariante.py spin_cluster_modulo csv\sync_spinore\on_s1.csv csv\sync_spinore\off_s1.csv
 echo   (ripetere per berry_spin_media_assoluta e per la dispersione di omega/assi)
 echo Attento alla SOGLIA di Kuramoto: puo' sincronizzare il nucleo (denso, frequenze simili)
 echo ma non il guscio (rado, frequenze disperse) - e' un risultato, va LETTO non forzato.

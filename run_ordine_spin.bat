@@ -17,14 +17,13 @@ set OGNI=5
 set DBOGNI=100
 set SEMI=1
 
-if not exist out_spin mkdir out_spin
-if not exist log       mkdir log
+if not exist log\spin       mkdir log\spin
 
 echo === ORDINE DI SPIN con chi-basc (seme %SEMI%, %PASSI% passi) ===
 echo.
 
 for %%S in (%SEMI%) do (
-  START "spin_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --chi-basc --sync-db out_spin\db_spin_s%%S.pkl --db-ogni %DBOGNI% --csv out_spin\cond_spin_s%%S.csv --diaglog out_spin\diag_spin_s%%S.csv > log\spin_s%%S.log 2>&1"
+  START "spin_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --sync --chi-basc --sync-db db\spin\db_spin_s%%S.pkl --db-ogni %DBOGNI% --csv csv\spin\cond_spin_s%%S.csv --diaglog csv\spin\diag_spin_s%%S.csv > log\spin\spin_s%%S.log 2>&1"
 )
 
 echo Lanciato. Al ritorno guardo: lo spinore si ordina (verso azim coerente) nel tempo?

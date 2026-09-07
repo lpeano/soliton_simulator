@@ -20,10 +20,8 @@ set SEP=8
 set PASSI=2000
 set OGNI=10
 set DBOGNI=100
-set OUT=out_spin_feedback_scala_v2
 
-if not exist %OUT% mkdir %OUT%
-if not exist log mkdir log
+if not exist log\spin_feedback_scala_v2 mkdir log\spin_feedback_scala_v2
 
 echo === SCREENING COARSE-GRAINED: B=%B%, passi=%PASSI%, semi 1 2 3 ===
 echo === OFF/ON feedback spinoriale, spinore vivo in entrambe le braccia ===
@@ -31,13 +29,13 @@ echo.
 
 for %%S in (1 2 3) do (
   echo [OFF] scala B=%B% seed %%S
-  START "spinfb_scala_off_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --sync-db %OUT%\db_off_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_off_s%%S.csv --diaglog %OUT%\diag_off_s%%S.csv > log\spinfb_scala_off_s%%S.log 2>&1"
+  START "spinfb_scala_off_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --sync-db db\spin_feedback_scala_v2\db_off_s%%S.pkl --db-ogni %DBOGNI% --csv csv\spin_feedback_scala_v2\cond_off_s%%S.csv --diaglog csv\spin_feedback_scala_v2\diag_off_s%%S.csv > log\spin_feedback_scala_v2\spinfb_scala_off_s%%S.log 2>&1"
   echo [ON]  scala B=%B% seed %%S
-  START "spinfb_scala_on_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --spin-feedback --sync-db %OUT%\db_on_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_on_s%%S.csv --diaglog %OUT%\diag_on_s%%S.csv > log\spinfb_scala_on_s%%S.log 2>&1"
+  START "spinfb_scala_on_s%%S" /MIN cmd /c "python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% --scala %B% --verlet --sync --spinore-vivo --spin-feedback --sync-db db\spin_feedback_scala_v2\db_on_s%%S.pkl --db-ogni %DBOGNI% --csv csv\spin_feedback_scala_v2\cond_on_s%%S.csv --diaglog csv\spin_feedback_scala_v2\diag_on_s%%S.csv > log\spin_feedback_scala_v2\spinfb_scala_on_s%%S.log 2>&1"
 )
 
 echo.
-echo Screening lanciato: 6 run in %OUT%\, log in log\.
+echo Screening lanciato: 6 run in csv\spin_feedback_scala_v2\, log in log\spin_feedback_scala_v2\.
 echo Confrontare OFF/ON su feedback_arco_ampiezza_ultima, berry_spin_* e olonomia.
 echo Un segnale ON non dimostra il Moebius: richiede conferma a scala 1 e run lunghi.
 pause

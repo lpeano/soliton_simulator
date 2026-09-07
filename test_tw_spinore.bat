@@ -12,25 +12,24 @@ set SEP=6
 set PASSI=2000
 set OGNI=10
 set DBOGNI=200
-set OUT=out_tw_spinore
 set CHAIN=--sync --cs-dinamico --verlet --spinore-vivo --spin-feedback --chi-core --viriale --zeta-vir --pav-com --chi-basc --polo-maturo --olon-part --ls-azim --verso-chi --tau-d0 --zeta-loc --plast-din --calore-vett
-if not exist %OUT% mkdir %OUT%
-if not exist log mkdir log
+if not exist log\tw_spinore mkdir log\tw_spinore
+REM db\<campagna>\ e csv\<campagna>\ le crea il motore (auto-mkdir). log\<campagna>\ serve al redirect di shell.
 
 echo === A/B TW-SPINORE: sep=%SEP%, passi=%PASSI%, 3 semi (ON poi OFF) ===
 for %%S in (1 2 3) do (
   echo [ON seed %%S]
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %CHAIN% --tw-spinore --sync-db %OUT%\db_on_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_on_s%%S.csv --diaglog %OUT%\diag_on_s%%S.csv > log\tw_spinore_on_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %CHAIN% --tw-spinore --sync-db db\tw_spinore\db_on_s%%S.pkl --db-ogni %DBOGNI% --csv csv\tw_spinore\cond_on_s%%S.csv --diaglog csv\tw_spinore\diag_on_s%%S.csv > log\tw_spinore\on_s%%S.log 2>&1
   if errorlevel 1 goto :errore
 )
 for %%S in (1 2 3) do (
   echo [OFF seed %%S]
-  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %CHAIN% --sync-db %OUT%\db_off_s%%S.pkl --db-ogni %DBOGNI% --csv %OUT%\cond_off_s%%S.csv --diaglog %OUT%\diag_off_s%%S.csv > log\tw_spinore_off_s%%S.log 2>&1
+  python %SIM% --batch --nmasse %NM% --sep %SEP% --seed %%S --passi %PASSI% --ogni %OGNI% %CHAIN% --sync-db db\tw_spinore\db_off_s%%S.pkl --db-ogni %DBOGNI% --csv csv\tw_spinore\cond_off_s%%S.csv --diaglog csv\tw_spinore\diag_off_s%%S.csv > log\tw_spinore\off_s%%S.log 2>&1
   if errorlevel 1 goto :errore
 )
 echo Campagna tw-spinore completata.
 goto :fine
 
 :errore
-echo ERRORE, vedi log\tw_spinore_*.log
+echo ERRORE, vedi log\tw_spinore\*.log
 :fine
