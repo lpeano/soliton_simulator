@@ -464,3 +464,39 @@ una campagna vecchia usa `git worktree` sul commit del DB. (2) Output SEMPRE in 
 **Prossimo passo (su `dev-dof`)**: implementare `--sync-fase-orologio` e la de-parametrizzazione (ordine §30:
 prima de-parametrizzare = radice della dispersione, poi il Kuramoto sul segno).
 
+### §33 — DE-PARAM OROLOGIO su dev-dof: analisi, test-GRATIS, impl, SIGILLI (2026-09-07)
+Sessione su `dev-dof`. Sequenza decisa da Luca: **prima la convergenza (de-parametrizzazione), poi l'aggancio**
+("i test dell'aggancio dopo aver fixato la CONVERGENZA"). Correzione chiave di Luca: **"la normalizzazione non per
+volume ma RELAZIONALE sulla rete"** (i due principi ferrei: coerenza d'arco, non ampiezza÷volume).
+
+**Analisi coupling (in banca, DIMOSTRATA — codice+dati).** `--sync-spinore` fa torque TRASVERSO `forza*(nb×nb_media)`
+→ allinea la DIREZIONE di Bloch, non il SEGNO/fase (l'orologio `omega_clk` lungo nb). DOF disaccoppiati.
+Dati (ultimo terzo): `m0_spin_axis_R`(segno)≈0.068-0.072 IDENTICO ON/OFF (sync NON tocca il segno);
+`m0_omega_axis_R`(direzioni)≈0.19-0.24. `--sync-fase-orologio` (design §30) resta in banca per DOPO.
+
+**Test-GRATIS convergenza (il cancello, PASSATO).** Su stato reale (n=1990, deg 2→379): `omega_clk=(|Ψ|²/rho_c_glob)·r`
+correla con la connettività a **corr(deg)=+0.948, corr(Σw)=+0.975** → **~95% artefatto di connettività, non fisica**.
+La coerenza d'arco RELAZIONALE `Σⱼwᵢⱼcos(φᵢ−φⱼ)/Σⱼwᵢⱼ` ha **corr(deg)=−0.10 ≈ 0** → intensiva, indipendente dal grado.
+La volume-normalizzata `|F/Σw|²` (mia prima proposta) RIGETTATA da Luca ("è il dito"). Cancello: artefatto dominante → de-param giustificata.
+
+**Implementazione (flag `--deparam-orologio`, default off, richiede --spinore-corretto).** `omega_clk` diventa la
+coerenza d'arco intensiva (tetto naturale 1, nessun rho_c globale, nessun volume). Solo l'input dell'orologio;
+`calcola_psi` (Ψ-sorgente) INTATTA. Commit WIP `2e39ea0`.
+
+**SIGILLI — reperto CRITICO (NEGATIVO parziale, onesto).**
+- **OFF byte-identico: PASSATO** (`max|A−B|=0` su tutti gli attrs vs pre-edit). ✓
+- **Gravità invariata: FALLITO.** ON vs OFF: N **1990→1821**. Causa trovata nel codice (riga ~2933):
+  **la gravità è SPIN-MODULATA by design** — `grav *= prod_interno` con `prod_interno=Σ_nb[ii]·_nb[jj]`, e
+  `grav→spinta→d0`. Quindi orologio→spinore→`_nb`→`prod_interno`→gravità→mitosi→N. **L'orologio NON è
+  disaccoppiato dalla gravità.** Secondo reperto: `omega_clk` NON è "pura fase" come dice il commento —
+  `omega_tot=omega_new+omega_clk·nb` con `omega_new≠0` inclina l'asse di rotazione → cambia `_nb` (vale già in OFF).
+- **Conseguenza:** il sigillo "gravità byte-identica" atteso da Luca è **impossibile per costruzione** (gravità
+  spin-modulata). La de-param è un cambiamento fisico GLOBALE, non isolato. Ψ-sorgente intatta ma dinamica accoppiata.
+
+**DECISIONE PENDENTE (Luca: "poi vediamo").** Tre strade: (1) accettare che è cambiamento fisico reale e valutare
+per OSSERVABILI su campagna 2000 passi/3 semi (dispersione orologio/segno ↓? convergenza ↑? il calo N −8.5% a 600
+passi è formazione o destabilizzazione?); (2) rendere l'orologio DAVVERO pura-fase (separare `omega_clk·nb` da
+`omega_new` così che NON inclini `_nb`), poi la de-param diventa isolabile e il sigillo gravità torna possibile;
+(3) ripensare (attaccare la connettività estensiva a monte, non l'orologio a valle). Consiglio guardiano: la (2)
+prima — l'orologio che inclina `_nb` è un difetto a sé, indipendente dalla de-param.
+

@@ -16,7 +16,11 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
   - **`dev-infra`** (commit `aa94b29`) — infrastruttura: nuovo check DB per git-blob + layout output
     `db//csv//log/` per campagna. **Trasversale**: quando stabile va promosso su `main`.
   - **`dev-dof`** (da `dev-infra`) — **soluzione DOF**: Kuramoto sulla FASE-orologio (segno di doppia-copertura)
-    `--sync-fase-orologio` + de-parametrizzazione (Ψ per deg, mediana locale). Vedi CLAUDECONNECT §30 (design), §31, §32.
+    `--sync-fase-orologio` + de-parametrizzazione (Ψ per deg, mediana locale). Vedi CLAUDECONNECT §30 (design), §31, §32, §33.
+    **STATO (§33, WIP `2e39ea0`)**: implementato `--deparam-orologio` (orologio RELAZIONALE = coerenza d'arco intensiva;
+    test-GRATIS: `omega_clk` era ~95% connettività, corr(deg)=0.948). Sigillo OFF byte-identico PASSATO; **sigillo
+    gravità FALLITO** (la gravità è spin-modulata by design, riga ~2933 `grav*=_nb·_nb` → N 1990→1821). Decisione
+    pendente: (1) valutare per osservabili, (2) rendere l'orologio pura-fase prima, (3) ripensare. Aggancio `--sync-fase-orologio` DOPO.
 - **Campagne lunghe**: `git worktree add ../st_wt/<commit> <commit>` (versione immutabile a un commit).
 - **Versionamento DB (IMPLEMENTATO su `dev-infra`):** identità di accetta/rifiuta = **git blob hash** dei byte di
   `soliton_simulator.py` (`git hash-object`); `commit`/`branch`/`dirty` = metadati (branch diverso → solo warning,
