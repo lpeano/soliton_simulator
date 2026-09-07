@@ -576,3 +576,28 @@ passi) per certificare `m0_spin_core_cv` prima del "va"; (3) verdetto su come la
 possa aver sporcato le campagne passate; (4) prossimo: con fondamenta pulite, ri-test del sync sul segno (la
 de-param riduce la dispersione → il sync ordina la chiralità?).
 
+### §36 — ANALISI di Claude (guardiano) + CORREZIONE onesta di §35 (2026-09-07)
+Claude ha verificato la convergenza pulita e **corretto §35 su un punto** (l'etichetta "formazione" era ottimista).
+Copilot ha RI-VERIFICATO i numeri e conferma la correzione. Test dell'etichetta formazione: se è formazione,
+l'ultimo quarto deve convergere MEGLIO della 2ª metà.
+
+| osservabile | diff 2ª metà | diff ultimo ¼ | verdetto |
+|---|---|---|---|
+| `m0_spin_axis_R` (il SEGNO) | 0% | 4% | **CONVERGE (~0-4%) → CERTIFICATO fisica** ✓ |
+| `spin_axis_R` | 4% | 16% | near-zero (rumore, % gonfiato dal valore piccolo) |
+| `m0_spin_core_cv` (dispersione) | 16% | 15% | **NON migliora → "formazione" NON dimostrata → NON certificato** |
+| `m0_omega_axis_R` | 28% | 19% | migliora poco ma resta 19% (valori near-zero 0.034/0.025) |
+
+**VERDETTO (onesto, corregge §35):**
+- **"va" PARZIALE.** Certificato SOLO sul **segno** (`m0_spin_axis_R` converge → dt-indipendente → fisica). È
+  l'osservabile che conta per la chiralità/frustrazione → **il ri-test del sync su di esso è affidabile.**
+- **`m0_spin_core_cv` (16%) e `m0_omega_axis_R` (28%) NON convergono, e l'ultimo quarto NON migliora** → l'etichetta
+  "formazione" di §35 è NON verificata. NON spacciarli per convergenti. Serve un **run lungo (t≥20, ~2000+ passi)**
+  per distinguere formazione (transiente) da dt-dipendenza genuina. APERTO.
+- La pulizia aveva già smascherato che il "40%" su `m0_omega_axis_R` era contaminazione `--ogni` (ora near-zero).
+
+**PROSSIMO (confermato da Claude):** procedere al **ri-test del sync sul segno certificato** (`m0_spin_axis_R`), SENZA
+attendere di chiudere `spin_core_cv` (riguarda altre osservabili). Domanda che conta: la de-param riduce la
+dispersione dell'orologio (−95% l'artefatto) → il sync ora ordina la chiralità (m0_spin_axis_R sale)? Quando c'è
+tempo, il run lungo (t≥20) per chiudere l'etichetta formazione su `spin_core_cv`.
+
