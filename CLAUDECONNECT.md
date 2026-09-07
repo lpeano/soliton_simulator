@@ -661,3 +661,8 @@ il segno? (b) N + spin_axis_R → il segno ordinato CAMBIA la fisica? B″ è il
 — (1) aggiungere la diagnostica pura di coerenza-segno (lettura pura, default invariato, test byte-identico);
 (2) nessun nuovo flag (`--chi-da-spinore` esiste). NON ancora lanciato: si attende il go dopo il diff della diagnostica.
 
+
+### §39 — Diagnostica SEGNO+VERSO aggiunta, B'' con spin-feedback (2026-09-07, WIP - PC spento)
+GO del guardiano a B''. Distinzione chiave: DRIVER (cosa il filo legge) != ORDER PARAMETER (cosa misuriamo). Aggiunta diagnostica pure-read su dev-dof (commit 9542f2f, py_compile OK): segno_arco_coer=<sign(Re<canon|psi>)_i*_j> archi (foglio doppia-copertura, RISPONDE all'orologio a differenza di spin_axis_R/berry_* ciechi), verso_arco_coer=<nb_i.nb_j> archi, segno_ov_absmedia. Misura SEGNO e VERSO con lo stesso metodo -> si ordinano INSIEME (un motore) o separati (due)? Covariante per-arco, zero parametri.
+FILO scelto con Luca = --spin-feedback (sua idea: 'segno dentro la memoria hebbiana'; gia' implementato come _feedback_spinoriale_archi = Im<psi_i|psi_j>->coppia, legge nuda zero param). IMPEGNO REGISTRATO: il filo spin-feedback tocca il verso INDIRETTAMENTE (->coppia->phi U(1)->hebbiano->nb) = debole. Se B'' ordina il SEGNO ma NON il VERSO -> NON dire 'abeliano': fare B''-bis con --chi-da-spinore (filo diretto via frame-drag/kick) PRIMA del verdetto. Due fili falliti = abeliano; un filo debole no.
+RIPRESA (da fare): (1) sigillo diaglog-puro byte-identico; (2) run-lampo colonne !=0; (3) script B'' (--spinore-vivo --spinore-corretto --sync --spin-feedback, de-param ON/OFF unica variabile, 2000p/3semi). Dettagli in /memories/repo/deparam_orologio.md par.39.
