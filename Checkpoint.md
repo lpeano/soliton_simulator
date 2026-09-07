@@ -13,6 +13,10 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
   qualunque sia il branch di sviluppo, si guarda `main`.
 - **`dev` = branch di sviluppo / test in corso.** Su `dev` si scrive/modifica solo CODICE (non la doc).
   Eventuali branch topic (`test/<nome>`) si diramano da `dev`. Campagne lunghe: `git worktree add ../st_wt/<commit> <commit>`.
+- **Branch topic attivi (da `dev`):**
+  - `test/dof-fase-orologio` — sviluppo della **soluzione DOF**: Kuramoto sulla FASE-orologio (segno di
+    doppia-copertura) `--sync-fase-orologio` + de-parametrizzazione (Ψ per deg, mediana locale) come radice
+    della dispersione. Vedi CLAUDECONNECT §30 (design) e §31.
 - **Test in corso su `dev` adesso:** (1) versionamento DB per coppia branch/commit (vedi sotto); (2) ripresa
   della campagna sync-spinore / de-parametrizzazione (STEP 2 chi-core → `--sync-fase-orologio` → de-parametrizzazione).
 - **Versionamento DB (in implementazione su `dev`):** l'identità di accettazione/rifiuto del DB è il **git blob
