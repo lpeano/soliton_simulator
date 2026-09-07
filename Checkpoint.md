@@ -25,6 +25,14 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
     PASSATI: OFF byte-identico; chirurgico `max|nb−nb'|=6.7e-16` (l'orologio non tocca nb→gravità); N 2014 vs legacy
     1990 (+1.2%, = rimozione del tilt-legacy). De-param RELAZIONALE+PURA-FASE completa e sigillata. PROSSIMO: campagna
     2000 passi/3 semi (coerenza del segno ↑? dispersione ↓?), poi ri-testare il sync sul DOF giusto (`--sync-fase-orologio`).
+    **STOP (§38, 2026-09-07)**: campagna B **FERMATA** — misurava l'osservabile SBAGLIATO. Verificato nel codice: (1) il
+    segno è CONDIZIONALMENTE dinamico — due canali reali segno→fisica (`SPIN_FEEDBACK` = `Im⟨lift_i|lift_j⟩`→coppia;
+    `CHI_DA_SPINORE` = `sign(Re⟨canon|ψ⟩)`→perc_chi), ENTRAMBI OFF in B → in B il segno è solo diagnostico ("motore
+    acceso, frizione staccata"). (2) `m0_spin_axis_R` = DIREZIONE nb (corregge §36: NON è il segno), cieco all'orologio
+    pura-fase (nb invariante 6.7e-16). (3) anche `berry_*` è cieca (ricostruita da nb + Bargmann gauge-invariante). (4)
+    NON esiste diagnostica del segno → va aggiunta (`|media sign(Re⟨canon(nb)|ψ⟩)|`). **PIANO B″**: `--chi-da-spinore`
+    ON (filo coerente = stessa quantità dell'osservabile), de-param ON vs OFF (un flag = una variabile), misura
+    coerenza-segno (ordina?) + N/spin_axis_R (cambia la fisica?). Prima: edit diagnostica pura (test byte-identico). Vedi CLAUDECONNECT §38.
 - **Campagne lunghe**: `git worktree add ../st_wt/<commit> <commit>` (versione immutabile a un commit).
 - **Versionamento DB (IMPLEMENTATO su `dev-infra`):** identità di accetta/rifiuta = **git blob hash** dei byte di
   `soliton_simulator.py` (`git hash-object`); `commit`/`branch`/`dirty` = metadati (branch diverso → solo warning,

@@ -614,3 +614,50 @@ de-param sola risolve e `--sync-fase-orologio` (A) NON serve. B è gratis (zero 
   nessun cambiamento → serve A (`--sync-fase-orologio`, §30). Ordine: B → A se serve → C (run lungo t≥20 per `spin_core_cv`) in parallelo.
 - **Esecuzione**: sul hardware di Luca (~5h, 6 run 2000 passi con diaglog; impraticabile in-ambiente).
 
+### §38 — STOP CAMPAGNA B: la campagna misurava l'OSSERVABILE SBAGLIATO (2026-09-07)
+**Luca ferma tutto** (campagna B + video) e chiede: "come è possibile ~0.05 frustrato, cosa non va?". Il guardiano
+verifica NEL CODICE (non a memoria) e trova NON un bug, ma una catena di **mismatch osservabile/meccanismo**. DIMOSTRATO.
+
+**1. Il segno è CONDIZIONALMENTE dinamico (non cosmetico, non sempre fisico).** Esistono DUE canali reali che portano
+il segno di doppia-copertura dello spinore nella FISICA, ENTRAMBI default-OFF e ASSENTI dai flag di B:
+- `SPIN_FEEDBACK` (`--spin-feedback`, riga 2102): `coppia += _feedback_spinoriale_archi` = `Im⟨lift_i|lift_j⟩` =
+  fase RELATIVA fra nodi → `coppia` → `delta_phivel` (riga 2169) → fisica. Canale vero. Nessun parametro (divide per grado pesato).
+- `CHI_DA_SPINORE` (`--chi-da-spinore`, riga 2262): segno = `sign(Re⟨canon(nb)|_psi_spinor⟩)` → `perc_chi` →
+  frame-drag/`VERSO_CHI` (riga 2121), kick vettoriale firmato (riga 271), `CHI_CORE` (riga 1618). Molto dinamico.
+- Campagna B: `--spinore-vivo --spinore-corretto --sync --deparam-orologio` → **né spin-feedback né chi-da-spinore**
+  → in B il segno è PURAMENTE DIAGNOSTICO (lo leggono solo le diagnostiche). Ordinarlo non muove nessuna forza.
+- SOTTIGLIEZZA che risolve il dubbio "fase globale = cosmetica": l'orologio applica una fase **PER-NODO**
+  (`omega_clk` è array) → cambia la fase RELATIVA fra nodi → è fisica *se* un canale la legge (SPIN_FEEDBACK la legge).
+  Il segno NON è cosmetico in assoluto: è cosmetico SOLO coi fili staccati (come in B). Metafora: **motore acceso
+  (spinore SU(2)), frizione staccata (no feedback), tachimetro sbagliato (direzione invece di segno).**
+
+**2. `m0_spin_axis_R` è la DIREZIONE, non il segno (corregge §36).** `m0_spin_axis_R` = `|media versori nb|`
+(righe 4756/4873) = allineamento delle DIREZIONI di Bloch. La de-param pura-fase lascia `nb` INVARIANTE (6.7e-16) →
+`m0_spin_axis_R` è CIECO all'orologio per costruzione. §36 aveva certificato `m0_spin_axis_R` come "il segno": ERRORE,
+è la direzione (l'aspetto che il vecchio Bloch aveva già; il NUOVO spinore aggiunge il SEGNO, non la direzione).
+
+**3. Anche la BERRY è cieca al segno (corregge la prima cura del guardiano).** `berry_spin_media` /
+`berry_spin_media_assoluta` (righe 1256-1275) NON leggono `_psi_spinor`: ricostruiscono gli spinori DA `nb`
+(`th=arccos(nb_z), ph=arctan2(nb_y,nb_x)`) e fanno l'invariante di BARGMANN (prodotto ciclico), gauge-invariante per
+costruzione ("le fasi arbitrarie dei singoli spinori si cancellano"). Cieca al segno per DUE motivi (legge nb + Bargmann
+cancella le fasi per-nodo). RITRATTATA la raccomandazione "misura la Berry".
+
+**4. NON esiste una diagnostica del segno.** L'unica lettura di `Re⟨canon(nb)|_psi_spinor⟩` è dentro il ramo
+`CHI_DA_SPINORE` (riga 2265, mutazione di perc_chi, non lettura). Va AGGIUNTA una diagnostica PURA:
+`sign_k = sign(Re⟨canon(nb_k)|ψ_k⟩)`, coerenza `|media(sign_k)|` ∈ [0,1] (→1 coerente, →0 frustrato). È l'osservabile giusto.
+
+**Scelta del filo per il test decisivo (più netta della "profondità"): `--chi-da-spinore`.** Le tre quantità sono
+DIVERSE: `Im⟨lift_i|lift_j⟩` (SPIN_FEEDBACK, fase relativa inter-nodo) ≠ `Re⟨canon|ψ⟩` (CHI_DA_SPINORE, segno per-nodo)
+≠ Berry (fase geometrica di nb, cieca). L'osservabile-segno da aggiungere legge ESATTAMENTE ciò che CHI_DA_SPINORE
+collega alla fisica → **osservabile = filo = stessa quantità** (coerenza di doppia-copertura). SPIN_FEEDBACK collegherebbe
+una quantità diversa = ennesimo mismatch. Il loop segno→perc_chi→frame-drag→nb(asse)→ψ è l'accoppiamento dinamico
+VOLUTO che il test deve sondare (il guard riga 4213 richiede `--spinore-corretto` per evitare solo il loop spurio diretto).
+
+**PIANO B″ (deciso col guardiano Luca): il test che chiede la cosa giusta.** A parità di tutto
+(`--spinore-vivo --spinore-corretto --sync --chi-da-spinore`, minimo freddo, 2000 passi, 3 semi), UNICA variabile
+`--deparam-orologio` ON vs OFF (un flag = una variabile). Osservabili: (a) coerenza-segno nuova → la de-param ordina
+il segno? (b) N + spin_axis_R → il segno ordinato CAMBIA la fisica? B″ è il primo test che risponde alla domanda VERA
+(non a metà): può dare positivo o negativo, ma con osservabile giusto e frizione attaccata. Prima di lanciare: 2 edit
+— (1) aggiungere la diagnostica pura di coerenza-segno (lettura pura, default invariato, test byte-identico);
+(2) nessun nuovo flag (`--chi-da-spinore` esiste). NON ancora lanciato: si attende il go dopo il diff della diagnostica.
+
