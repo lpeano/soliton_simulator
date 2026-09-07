@@ -22,6 +22,18 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
   Cartelle svuotate. DA DECIDERE con Luca: tauloc gentile (1.1-1.2, comunque lento), oppure tauloc SENZA
   cs-dinamico, oppure abbandonare tauloc. Conferma la nota storica: "--tauloc grande impianta il 1o passo".
 
+### DIAGNOSI del negativo sync-spinore + FIX proposto (design, 2026-09-07)
+- **NON un fallimento della macchina** (corretta, sigilli passati) ma NEGATIVO diagnosticato. Causa principale
+  (i dati la indicano): il Kuramoto `--sync-spinore` agisce sulla DIREZIONE di Bloch (`nb x nb_media`, torque
+  trasverso), ma la frustrazione vive nella FASE lungo l'asse = SEGNO di doppia-copertura. DOF disaccoppiati:
+  `omgR~0.2` (direzioni allineate) > `spinR~0.1` (segno frustrato). Vedi CLAUDECONNECT §30.
+- **FIX proposto (design, NON implementato): `--sync-fase-orologio`** — Kuramoto sulla FASE dell'orologio:
+  `theta_i=arg<canon(nb_i)|psi_i>`, `omega_sync_clk=forza*(wI @ sin(theta))/uno` sommato a `omega_clk` (lungo
+  nb, non trasverso). Zero parametri nuovi (riusa `forza`). Aggancio col limite continuo: la dispersione degli
+  orologi e' in parte artefatto di Ψ-non-normalizzata + gF_med globale -> de-parametrizzare aiuterebbe.
+- **VINCOLO**: NON editare il .py mentre gira la campagna chi-core (contamina on_s2+ e rompe la ripresa).
+  Implementare DOPO la campagna o fermarla. ATTESA conferma design + timing da Luca.
+
 ### Novita' di codice (2026-09-07)
 - **`--scuotimento`** (nuovo flag, default off = byte-identico): forza `SCUOTIMENTO=True` anche in regime
   DETERMINISTICO (il vuoto ribolle ma la dinamica resta deterministica). Applicato dopo `--regime`.

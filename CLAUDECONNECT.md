@@ -380,3 +380,29 @@ la catena fredda cresce piano, N max ~3000-4300, NON ~18-20k delle campagne cald
   o con un canale (STEP 2) cambi. Strumento: out_freetest/_analisi_sync.py.
 - **PROSSIMO: STEP 2** = candidate una alla volta (--chi-core; poi --cs-dinamico [che porta --chi-core];
   poi --guscio-morbido), A/B, 3 semi, per vedere se una da' il CANALE che fa propagare la sync.
+
+### §30 — DIAGNOSI del negativo + FIX proposto (design, 2026-09-07)
+Domanda di Luca: "il nuovo spinore pare un fallimento? come mai?". Da guardiano: NON un fallimento della
+MACCHINA (corretta, sigilli passati) ma un NEGATIVO informativo e DIAGNOSTICATO. Ipotesi (IN VERIFICA):
+1. **Kuramoto sul grado di liberta' SBAGLIATO (causa principale, i dati la indicano).** La frustrazione vive
+   nel SEGNO di doppia-copertura = FASE lungo l'asse dello spinore. L'orologio de Broglie ruota psi attorno
+   al proprio asse (pura fase) a `omega_clk=(rho/rho_c)*r`: densita' diverse -> orologi a freq diverse ->
+   i SEGNI si sfasano -> frustrazione. Ma `--sync-spinore` fa `omega_sync=forza*(nb x nb_media)` = torque
+   TRASVERSO che allinea la DIREZIONE di Bloch, NON la fase-segno. DOF disaccoppiati. Firma nei dati:
+   `omgR~0.2` (direzioni) > `spinR~0.1` (segno) -> ho sincronizzato le direzioni, non il segno.
+2. **L'orologio CREA la dispersione** (omega_clk ∝ rho, rho varia enorme nucleo/guscio) -> auto-sabotaggio.
+3. **Aggancio col limite continuo**: la dispersione e' in parte ARTEFATTO: rho = Ψ non normalizzata per deg
+   (estensiva) e rho_c usa gF_med (mediana globale non-locale). De-parametrizzare/normalizzare -> dispersione
+   cala -> sync potrebbe agganciare. Fallimento sync e limite continuo = stesso problema.
+4. Forse stato genuinamente bilanciato (vortice-antivortice, m0_carica~0): allora spinR~0 e' fisica corretta.
+
+**FIX PROPOSTO (design, non ancora implementato): `--sync-fase-orologio`** (flag separato, default off).
+Kuramoto sulla FASE dell'orologio (segno di doppia-copertura), non sulla direzione:
+- `theta_i = arg<canon(nb_i)|psi_i>` (fase lungo l'asse = doppia-copertura, come --chi-da-spinore);
+- `omega_sync_clk_i = forza_i * (wI @ sin(theta) campo-medio) / uno` -> si SOMMA a `omega_clk` (lungo nb),
+  NON al torque trasverso. `forza` = la stessa del Kuramoto-phi. ZERO parametri nuovi.
+- ETC: theta da snapshot t-1, wI da step, in omega_clk prima della U, commit atomico.
+**VINCOLO OPERATIVO**: NON editare soliton_simulator.py mentre gira la campagna chi-core (il .bat lancia un
+python nuovo per ogni run -> on_s2+ girerebbero con codice diverso da on_s1 = contaminazione; e l'hash del db
+cambia = ripresa rotta). Implementare DOPO la fine della campagna (o fermarla prima). ATTESA conferma design + timing.
+
