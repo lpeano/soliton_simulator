@@ -601,3 +601,16 @@ attendere di chiudere `spin_core_cv` (riguarda altre osservabili). Domanda che c
 dispersione dell'orologio (−95% l'artefatto) → il sync ora ordina la chiralità (m0_spin_axis_R sale)? Quando c'è
 tempo, il run lungo (t≥20) per chiudere l'etichetta formazione su `spin_core_cv`.
 
+### §37 — CAMPAGNA B pronta (test-GRATIS del guardiano): la de-param SOLA ordina il segno? (2026-09-07)
+Il guardiano raccomanda **B prima di A**: non un precursore ma IL test. Ragionamento: la frustrazione nasce dagli
+orologi che si SFASANO (frequenze ρ·r disperse); la de-param riduce la dispersione del ~95% → orologi a frequenze
+simili → **potrebbero non sfasarsi più → il segno resta coerente DA SOLO, senza sync esplicito**. Se è così, la
+de-param sola risolve e `--sync-fase-orologio` (A) NON serve. B è gratis (zero codice) e decisivo.
+- **Script**: `test_deparam_segno.bat` (dev-dof, commit `9c0d05a`, smoke OK). A/B `--deparam-orologio` ON vs OFF,
+  minimo freddo (`--spinore-vivo --spinore-corretto --sync`), 2000 passi, 3 semi, sep 6, diaglog.
+- **Misura**: `m0_spin_axis_R` (il segno, l'unica osservabile CERTIFICATA §36) COVARIANTE a N appaiato, su 3 semi,
+  significatività oltre il rumore fra semi (NON il "+0.011" su 1 seme). `analisi_covariante.py m0_spin_axis_R on_sX.csv off_sX.csv`.
+- **Verdetto atteso**: ON>OFF concorde 3 semi oltre rumore → la de-param sola ordina il segno (vicinissimi allo spin ½);
+  nessun cambiamento → serve A (`--sync-fase-orologio`, §30). Ordine: B → A se serve → C (run lungo t≥20 per `spin_core_cv`) in parallelo.
+- **Esecuzione**: sul hardware di Luca (~5h, 6 run 2000 passi con diaglog; impraticabile in-ambiente).
+
