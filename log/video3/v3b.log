@@ -1,0 +1,11 @@
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)
+[chi-core] frame-dragging guidato dalla chiralitÓ emergente del core locale
+[cs-dinamico] velocitÓ metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+[db-video] db/video3/v3b.pkl non esiste: renderizzo dalla formazione (nessuno stato da caricare)
+[headless] test=N-MASSE frame=600 fps=24 - tutte le leggi attive
+   f=25 reg=25/600 nodi=2445 torsione=11.9 mitosi=54 fase=0 nome=N-MASSE
+   f=50 reg=50/600 nodi=2526 torsione=11.6 mitosi=135 fase=0 nome=N-MASSE
+   f=75 reg=75/600 nodi=2582 torsione=11.3 mitosi=191 fase=0 nome=N-MASSE

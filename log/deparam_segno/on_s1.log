@@ -1,0 +1,19 @@
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)
+[batch] condensazione: seed=1 passi=2000 ogni=100 sep=6.0 nmasse=2
+[batch] leggi attive: GRAV_BIFASE=True SPIN_ORBITA(via SPINORE)=True COPPIA_MIT=1.0 lambda=0.800
+
+passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
+[batch] LOG DIAGNOSTICO COMPLETO  -> csv\deparam_segno\on_s1.csv
+      0 |    0.0000 |    12.038 | r=8.2 c=0.338 n=6      | tot=1 NUOVI=1 | TRACK accr=744 coppie=0 nuova=80
+    100 |    0.0000 |    12.038 | r=5.8 c=0.192 n=4      | tot=1 NUOVI=0 | TRACK accr=1573 coppie=256 nuova=80
+    200 |    0.0000 |    12.038 | r=12.8 c=0.069 n=96    | tot=2 NUOVI=0 | TRACK accr=1650 coppie=290 nuova=80
+    300 |    0.0000 |    12.037 | r=12.8 c=0.209 n=113   | tot=2 NUOVI=0 | TRACK accr=1710 coppie=321 nuova=80
+    400 |    0.0000 |    12.036 | r=11.2 c=0.156 n=66    | tot=2 NUOVI=0 | TRACK accr=1788 coppie=355 nuova=80
+    500 |    0.0001 |    12.036 | r=12.8 c=0.261 n=131   | tot=1 NUOVI=0 | TRACK accr=1872 coppie=389 nuova=80
+    600 |    0.0001 |    12.035 | r=11.2 c=0.095 n=85    | tot=1 NUOVI=0 | TRACK accr=1940 coppie=413 nuova=80
+    700 |    0.0001 |    12.034 | r=10.8 c=0.207 n=5     | tot=2 NUOVI=0 | TRACK accr=1981 coppie=444 nuova=80
+    800 |    0.0003 |    12.034 | r=4.8 c=0.162 n=6      | tot=1 NUOVI=0 | TRACK accr=2030 coppie=461 nuova=80
+    900 |    0.0009 |    12.033 | r=5.8 c=0.154 n=11     | tot=1 NUOVI=0 | TRACK accr=2083 coppie=493 nuova=80
+   1000 |    0.0015 |    12.033 | r=10.8 c=0.198 n=55    | tot=2 NUOVI=0 | TRACK accr=2165 coppie=545 nuova=80
