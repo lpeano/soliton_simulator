@@ -434,3 +434,33 @@ UNICO hub di documentazione/tracing per tutti i branch; `dev` = sviluppo/test in
 aggiornata SOLO su `main`. Creato `dev` da `main` stabile (`5fbd53f`). Prossimo passo: implementare il
 versionamento DB su `dev`, con backup datato del canonico prima di modificarlo.
 
+### §32 — IMPLEMENTAZIONE infra (check DB + layout output) + branch `dev-<nome>` (2026-09-07)
+Sessione di realizzazione. Richieste di Luca: (a) implementare il nuovo check DB e "spostare i log/db/csv nei
+posti giusti in TUTTI i sorgenti"; (b) prima layout flat, poi correzione "il layout non può essere flat" →
+sottocartella per campagna; (c) "un unico `dev` è limitante sui paralleli: serve `dev-<nome-sviluppo>`";
+(d) rendicontare e tracciare PER CLAUDE la nuova filosofia.
+
+**FATTO e verificato (nel codice, non nei commenti):**
+- **Motore** `soliton_simulator.py`: nuovo `_versione_codice()` + `salva_stato`/`carica_stato`. Identità
+  accetta/rifiuta = **git blob hash** dei byte del file (`git hash-object`), stabile e file-scoped; metadati
+  `commit`/`branch`/`dirty`; fallback `sha256` (no-git o DB legacy). **Test passati**: ripresa ACCETTA (stesso
+  blob) con avviso dirty; blob taroccato RIFIUTATO; DB legacy (solo `code_hash`) accettato per contenuto identico;
+  auto-mkdir crea `db/`/`csv/`. Il branch NON entra nella chiave (stesso commit su branch diversi = stessa fisica).
+- **Layout output**: migrati i file esistenti in `db/<campagna>/`, `csv/<campagna>/`, `log/<campagna>/` (nomi
+  originali). Riscritti ~52 `.bat` + 2 `.bash` al nuovo layout (bulk + verifica campione + 2 mancati sistemati a
+  mano: step2cs/step2cssc). `.gitignore` riscritto (traccia `csv/**` e `log/**`, MAI i `.pkl` in `db/`).
+  `analisi_covariante.py`: esempio d'uso aggiornato; gli altri `.py` prendono i percorsi come argomenti. Video
+  (`.mp4`, `out_video/`) fuori scope. Compila.
+- **Branch**: adottata la convenzione **`dev-<nome-sviluppo>`** (paralleli), niente più `dev` unico. Creato
+  `dev-infra` (commit `aa94b29`, l'infra sopra); `dev-dof` diramato da `dev-infra` (eredita l'infra); eliminati
+  `dev` e `test/dof-fase-orologio`. Doc/tracing (questa voce, `CLAUDE.md`, `Checkpoint.md`, memoria) su `main`.
+
+**Per Claude — la nuova filosofia in due righe:** (1) l'identità del DB è il **git blob** del codice (non lo
+sha256 grezzo, non il branch): un merge o un cambio-branch a codice identico NON invalida i DB; per riprendere
+una campagna vecchia usa `git worktree` sul commit del DB. (2) Output SEMPRE in `db/<campagna>/`,
+`csv/<campagna>/`, `log/<campagna>/`; il motore crea db/csv, lo script crea `log\<campagna>`. (3) Sviluppo su
+`dev-<nome>` paralleli; la doc vive solo su `main`.
+
+**Prossimo passo (su `dev-dof`)**: implementare `--sync-fase-orologio` e la de-parametrizzazione (ordine §30:
+prima de-parametrizzare = radice della dispersione, poi il Kuramoto sul segno).
+

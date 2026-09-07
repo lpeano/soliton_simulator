@@ -11,18 +11,20 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
   Tutta la parte documentale (`Checkpoint.md`, `CLAUDECONNECT.md`, `CLAUDE.md`, `FISICA.md`, i report e le
   interpretazioni, `/memories/repo/`) si aggiorna e vive **solo su `main`**. Per leggere lo stato del lavoro,
   qualunque sia il branch di sviluppo, si guarda `main`.
-- **`dev` = branch di sviluppo / test in corso.** Su `dev` si scrive/modifica solo CODICE (non la doc).
-  Eventuali branch topic (`test/<nome>`) si diramano da `dev`. Campagne lunghe: `git worktree add ../st_wt/<commit> <commit>`.
-- **Branch topic attivi (da `dev`):**
-  - `test/dof-fase-orologio` — sviluppo della **soluzione DOF**: Kuramoto sulla FASE-orologio (segno di
-    doppia-copertura) `--sync-fase-orologio` + de-parametrizzazione (Ψ per deg, mediana locale) come radice
-    della dispersione. Vedi CLAUDECONNECT §30 (design) e §31.
-- **Test in corso su `dev` adesso:** (1) versionamento DB per coppia branch/commit (vedi sotto); (2) ripresa
-  della campagna sync-spinore / de-parametrizzazione (STEP 2 chi-core → `--sync-fase-orologio` → de-parametrizzazione).
-- **Versionamento DB (in implementazione su `dev`):** l'identità di accettazione/rifiuto del DB è il **git blob
-  hash** di `soliton_simulator.py` (`git rev-parse HEAD:soliton_simulator.py`); `commit`, `branch` e flag `dirty`
-  sono registrati come **metadati** (branch diverso → solo warning, mai rifiuto; working tree sporco → fallback
-  su `sha256` attuale + warning). I DB legacy (solo `code_hash` sha256) restano gestiti in retro-compatibilità.
+- **`dev-<nome-sviluppo>` = linee di sviluppo PARALLELE** (solo CODICE, non la doc). Niente più un unico `dev`
+  (strozzava i paralleli). Branch attivi:
+  - **`dev-infra`** (commit `aa94b29`) — infrastruttura: nuovo check DB per git-blob + layout output
+    `db//csv//log/` per campagna. **Trasversale**: quando stabile va promosso su `main`.
+  - **`dev-dof`** (da `dev-infra`) — **soluzione DOF**: Kuramoto sulla FASE-orologio (segno di doppia-copertura)
+    `--sync-fase-orologio` + de-parametrizzazione (Ψ per deg, mediana locale). Vedi CLAUDECONNECT §30 (design), §31, §32.
+- **Campagne lunghe**: `git worktree add ../st_wt/<commit> <commit>` (versione immutabile a un commit).
+- **Versionamento DB (IMPLEMENTATO su `dev-infra`):** identità di accetta/rifiuta = **git blob hash** dei byte di
+  `soliton_simulator.py` (`git hash-object`); `commit`/`branch`/`dirty` = metadati (branch diverso → solo warning,
+  mai rifiuto; sporco → fallback `sha256` + warning). DB legacy (solo `code_hash` sha256) accettati per contenuto
+  identico. **Ripresa di campagne vecchie**: se il DB è rifiutato per codice cambiato, esegui la versione giusta con
+  `git worktree add ../st_wt/<commit-del-DB> <commit-del-DB>` (il commit è nei metadati del DB) — NON forzare `--db-cleanup`.
+- **Layout output**: `db/<campagna>/*.pkl`, `csv/<campagna>/*.csv`, `log/<campagna>/*.log` (auto-mkdir motore per db/csv;
+  gli script fanno `mkdir log\<campagna>` per il redirect). Video (`.mp4`, `out_video/`) fuori schema.
 
 ---
 
@@ -37,12 +39,13 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 ### >>> INTERRUZIONE PER SPEGNIMENTO PC — 2026-09-07 (COME RIPRENDERE) <<<
 - **UNICA campagna interrotta**: STEP 2 chi-core (`test_sync_spinore_step2.bat`). Stato al momento dello stop:
   - ON: on_s1/2/3 **COMPLETI** (2000 passi).
-  - OFF: **off_s1 PARZIALE** (~273 passi, db `db_off_s1.pkl` salvato a step ~200); **off_s2/off_s3 NON iniziati**.
-- **RIPRESA (una riga)**: `cmd /c test_sync_spinore_step2.bat`. Riprende automaticamente: ON saltati (db a 2000,
-  no-op), off_s1 riparte dal db (~step 200), poi off_s2/off_s3 da zero. NON serve altro (script non-distruttivo).
-- **VINCOLO**: NON aver editato `soliton_simulator.py` nel frattempo (l'hash del db deve combaciare; se editi,
-  la ripresa degli ON verrebbe rifiutata → servirebbe `--db-cleanup` e rifarli). Al riavvio, prima di rilanciare,
-  verificare: `python -c "import hashlib,pickle;h=hashlib.sha256(open('soliton_simulator.py','rb').read()).hexdigest()[:16];print(h==pickle.load(open('out_sync_spinore_step2/db_on_s1.pkl','rb'))['code_hash'])"` deve dare True.
+  - OFF: **off_s1 PARZIALE** (~273 passi, db salvato a step ~200); **off_s2/off_s3 NON iniziati**.
+  - I DB/CSV sono ora in `db/sync_spinore_step2/` e `csv/sync_spinore_step2/` (migrati dal vecchio `out_sync_spinore_step2/`).
+- **ATTENZIONE — il codice è CAMBIATO** (infra su `dev-infra`, commit `aa94b29`): quei DB sono legacy (sha256 del
+  codice `5fbd53f`) → sul codice nuovo verrebbero **RIFIUTATI**. Per riprendere ESATTAMENTE la campagna interrotta:
+  `git worktree add ../st_wt/5fbd53f 5fbd53f`, copiare/puntare i DB e rilanciare LÌ (blob combacia). In alternativa,
+  ri-eseguire la campagna PULITA sul codice nuovo (consigliato se STEP 2 va comunque rifatto col nuovo layout).
+- **NB**: `test_sync_spinore_step2.bat` è già aggiornato al nuovo layout (`db\sync_spinore_step2\`, `csv\...`, `log\...`).
 - Le altre campagne (tauloc/scuotimento) erano gia' FERMATE (instabilita'), NON vanno riprese cosi'.
 
 ### DA FARE (coda, priorità dall'alto)

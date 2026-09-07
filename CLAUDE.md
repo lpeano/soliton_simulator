@@ -134,12 +134,28 @@ usa run corti (≤300 passi batch, ≤100 frame video) solo per verificare che i
 - **`main` = versione STABILE del codice + UNICO punto di documentazione e tracing per TUTTI i branch.** Tutta
   la doc (`Checkpoint.md`, `CLAUDECONNECT.md`, questo `CLAUDE.md`, `FISICA.md`, report, interpretazioni,
   `/memories/repo/`) si aggiorna e vive **solo su `main`**. Per lo stato del lavoro si guarda sempre `main`.
-- **`dev` = branch di sviluppo / test in corso** (solo CODICE, non la doc). I branch topic (`test/<nome>`) si
-  diramano da `dev`. Campagne lunghe: `git worktree add ../st_wt/<commit> <commit>` (versione immutabile).
-- **Versionamento DB per commit, non per contenuto grezzo:** l'identità di accettazione/rifiuto del DB è il git
-  **blob hash** di `soliton_simulator.py`; `commit`/`branch`/`dirty` sono metadati (branch diverso → solo
-  warning; working tree sporco → fallback `sha256` + warning). Il branch NON entra mai nella chiave di rifiuto.
+- **`dev-<nome-sviluppo>` = linee di sviluppo PARALLELE** (solo CODICE, non la doc). NON esiste più un unico
+  `dev` (strozzava gli sviluppi paralleli): ogni filone ha il suo branch, es. `dev-infra` (infrastruttura),
+  `dev-dof` (soluzione DOF sync-fase-orologio + de-parametrizzazione). Un filone che dipende da un altro si
+  dirama da quello (es. `dev-dof` nasce da `dev-infra` finché l'infra non è promossa su `main`).
+- **Campagne lunghe**: `git worktree add ../st_wt/<commit> <commit>` (versione immutabile a un commit).
 - **Push solo su richiesta esplicita** di Luca.
+
+## VERSIONAMENTO DB E LAYOUT OUTPUT (nuova filosofia, canonico dal 2026-09-07)
+
+- **Identità del DB = git BLOB hash dei byte di `soliton_simulator.py`** (`git hash-object`), non più lo sha256
+  del contenuto grezzo. È la chiave di ACCETTA/RIFIUTA in `salva_stato`/`carica_stato` (helper `_versione_codice`).
+  `commit`, `branch`, `dirty` sono METADATI: **il branch NON entra nella chiave** (stesso commit su branch
+  diversi = codice byte-identico = stessa fisica → un merge non invalida i DB). Working tree sporco → fallback
+  `sha256` + avviso. DB **legacy** (solo `code_hash` sha256) accettati per contenuto identico (retro-compat).
+- **RIPRESA di una campagna vecchia**: se il DB viene rifiutato perché il codice è cambiato, NON forzare
+  `--db-cleanup`; esegui la **versione giusta** con `git worktree add ../st_wt/<commit-del-DB> <commit-del-DB>`
+  (il commit è nei metadati del DB) e rilancia lì: il blob combacia e la ripresa riparte.
+- **Layout output (TUTTI gli script)**: `db/<campagna>/*.pkl`, `csv/<campagna>/*.csv` (cond + diaglog),
+  `log/<campagna>/*.log`. La `<campagna>` è il vecchio token `out_<campagna>` (radice per tipo, campagna in
+  sottocartella, nomi file originali). Il **motore fa auto-mkdir** di `db/`/`csv/` (parent di --sync-db/--csv/
+  --diaglog); gli script creano solo `log\<campagna>` (serve al redirect di shell). I **video** (`.mp4`,
+  `out_video/`) restano fuori da questo schema. `.gitignore`: si tracciano `csv/**` e `log/**`, MAI i `.pkl` (`db/`).
 
 ## FLUSSO DI EDITING DEL DOCUMENTO (.docx)
 
