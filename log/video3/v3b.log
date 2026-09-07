@@ -9,3 +9,7 @@
    f=25 reg=25/600 nodi=2445 torsione=11.9 mitosi=54 fase=0 nome=N-MASSE
    f=50 reg=50/600 nodi=2526 torsione=11.6 mitosi=135 fase=0 nome=N-MASSE
    f=75 reg=75/600 nodi=2582 torsione=11.3 mitosi=191 fase=0 nome=N-MASSE
+   f=100 reg=100/600 nodi=2628 torsione=12.0 mitosi=237 fase=0 nome=N-MASSE
+   f=125 reg=125/600 nodi=2672 torsione=12.1 mitosi=281 fase=1 nome=N-MASSE
+   f=150 reg=150/600 nodi=2709 torsione=12.0 mitosi=318 fase=1 nome=N-MASSE
+   f=175 reg=175/600 nodi=2764 torsione=11.8 mitosi=373 fase=1 nome=N-MASSE

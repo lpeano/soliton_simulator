@@ -1,0 +1,9 @@
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)
+[batch] condensazione: seed=2 passi=2000 ogni=100 sep=6.0 nmasse=2
+[batch] leggi attive: GRAV_BIFASE=True SPIN_ORBITA(via SPINORE)=True COPPIA_MIT=1.0 lambda=0.800
+
+passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
+[batch] LOG DIAGNOSTICO COMPLETO  -> csv\deparam_segno\on_s2.csv
+      0 |    0.0000 |    12.029 | r=8.2 c=0.121 n=6      | tot=2 NUOVI=2 | TRACK accr=744 coppie=0 nuova=80
