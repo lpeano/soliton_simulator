@@ -1710,10 +1710,10 @@ class Rete:
             except Exception:
                 rho_c = float(massa_critica_collasso())
             if DEPARAM_OROLOGIO:
-                # DE-PARAM RELAZIONALE: freq guidata dalla COERENZA D'ARCO intensiva (media pesata di
-                # cos(phi_i-phi_j) sugli archi incidenti, indipendente dal grado), NON dalla densita'
-                # estensiva / rho_c globale (~95% connettivita'). Tetto naturale 1: nessun rho_c, niente
-                # volume. self.phi qui e' lo snapshot t (commit fasi non ancora avvenuto -> ETC).
+                # DE-PARAM RELAZIONALE + PURA FASE: freq guidata dalla COERENZA D'ARCO intensiva (media
+                # pesata di cos(phi_i-phi_j) sugli archi incidenti, indipendente dal grado), NON dalla
+                # densita' estensiva / rho_c globale (~95% connettivita'). Tetto naturale 1: nessun rho_c,
+                # niente volume. self.phi qui e' lo snapshot t (commit fasi non ancora avvenuto -> ETC).
                 _m = (i < n) & (j < n)
                 _ii, _jj, _wc = i[_m], j[_m], w[_m]
                 _cij = np.cos(self.phi[_ii] - self.phi[_jj])
@@ -1721,11 +1721,14 @@ class Rete:
                 np.add.at(_num, _ii, _wc * _cij); np.add.at(_num, _jj, _wc * _cij)
                 np.add.at(_den, _ii, _wc);        np.add.at(_den, _jj, _wc)
                 omega_clk = (_num / np.maximum(_den, 1e-12)) * r_node   # coerenza d'arco [-1,1] * ritmo proprio
+                # PURA FASE: l'orologio NON entra nell'asse di rotazione (non inclina nb -> non tocca la
+                # gravita' grav*=nb.nb); e' applicato SOTTO come fase globale e^{-i omega_clk dt/2}.
+                omega_tot = omega_new if omega_sync is None else (omega_new + omega_sync)
             else:
                 omega_clk = (rho / max(rho_c, 1e-12)) * r_node          # legacy: densita' estensiva / rho_c globale
-            omega_tot = omega_new + omega_clk[:, None] * nb          # lungo l'asse PROPRIO (nb unitario)
-            if omega_sync is not None:
-                omega_tot = omega_tot + omega_sync                  # torque di allineamento SU(2) (istantaneo)
+                omega_tot = omega_new + omega_clk[:, None] * nb         # lungo l'asse PROPRIO (nb unitario)
+                if omega_sync is not None:
+                    omega_tot = omega_tot + omega_sync                  # torque di allineamento SU(2) (istantaneo)
             # spinore primario: init da Bloch corrente se assente/nuovo (la mitosi eredita il complesso;
             # qui e' solo fallback/primo-init). Legge lo snapshot t-1 di _psi_spinor.
             self._estendi_psi_spinor(n, nb)
@@ -1740,6 +1743,13 @@ class Rete:
             # U = exp(-i/2 omega.sigma dt) applicato allo spinore t-1
             a1 = (c - 1j * s * nz) * a0 + (-1j * s * (nx - 1j * ny)) * b0
             b1 = (-1j * s * (nx + 1j * ny)) * a0 + (c + 1j * s * nz) * b0
+            if DEPARAM_OROLOGIO:
+                # OROLOGIO PURA FASE de Broglie: fase globale e^{-i omega_clk dt/2} sullo spinore. Lascia
+                # nb = psi^dag sigma psi INVARIANTE (una fase globale non cambia nb -> gravita' grav*=nb.nb
+                # intatta); vincola SOLO il segno di doppia-copertura (arg<canon(nb)|psi>). E' la de Broglie
+                # 'pura': avanzamento invisibile al Bloch, pilota il SEGNO non la DIREZIONE.
+                _phc = np.exp(-0.5j * omega_clk * _dts)
+                a1 = a1 * _phc; b1 = b1 * _phc
             if SYNC_UPDATE and SCUOTIMENTO:
                 # eccitazione del vuoto sul PRIMARIO complesso (t->t+1): perturba psi, non il B letto
                 Lam = lambda_vuoto(self)
