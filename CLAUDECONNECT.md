@@ -525,3 +525,54 @@ coerenza del SEGNO migliora (dispersione orologio ↓), poi — con la dispersio
 (`--sync-fase-orologio`, in banca §30) sul DOF giusto. Metodo consolidato in `copilot-instructions.md`
 ("Metodo di lavoro standard": cancello test-GRATIS + relazionale-non-volume + sigilli mirati + riporta i negativi).
 
+### §35 — CERTIFICAZIONE NUMERICA + due bug pre-esistenti stanati (2026-09-07) — HANDOFF PER ANALISI
+Test di convergenza-dt (Luca: "dimostra che l'epsilon non si amplifica, non eliminarlo") sulla de-param pura-fase.
+Il test ha stanato **tre reperti prima del "va"**, tutti tracciati qui.
+
+**REPERTO A — falso sigillo.** Il primo confronto `max|A−B|=0` era FUORVIANTE: era 0 solo perché saltava gli array
+a forma diversa (N diverso). Corretto: si confronta N *e* i valori.
+
+**REPERTO B — contaminazione PRE-ESISTENTE della condensazione (bug, ora sanato, commit `946b464`).** Il blocco
+condensazione (a `--ogni`) chiamava `net.calcola_psi()` che muta `self.psi` SENZA snapshot/restore. Catena:
+`--ogni` → `calcola_psi` muta `self.psi` → `ritmo()` del passo dopo legge quella (`a=angle(psi)−angle(_psi_prec)`)
+→ tempo proprio diverso → fisica diversa. **Stesso pattern ritmo/_psi_prec già sanato nel diaglog, ricomparso in
+un path dimenticato.** FIX: snapshot/restore delle 8 cache attorno a `calcola_psi` (come il diaglog). SIGILLO:
+`--ogni 50` == `--ogni 600` con `max|A−B|=0` → `--ogni` ora byte-identico neutro. **La contaminazione era
+SIGNIFICATIVA: N pulito 2433 vs contaminato 2014 (+21%, amplificata dal caos).** Conseguenza retroattiva: **le
+campagne passate con `--ogni < passi` hanno il tempo proprio contaminato** — da rivalutare.
+
+**REPERTO C — il mio test era confuso.** I due run di convergenza avevano `--ogni` diverso (50 vs 100) → A vs B era
+confuso da `--ogni`, non solo da dt. Demolito e rifatto pulito.
+
+**Sigilli verificati (fondamenta pulite):**
+- **Diaglog PULITO**: con vs senza diaglog (stesso `--ogni 600`) → `max|A−B|=0` (X==Y=2014). Le osservabili
+  covarianti sono letture pure (`getattr(net,'omega_s')`, ecc.) — scagionate.
+- **Pura-fase chirurgica** (§34): fase globale lascia `nb` invariante a 6.7e-16 → non tocca la gravità.
+- **OFF byte-identico** (§33/§34): `--deparam-orologio` off = codice pre-esistente.
+
+**CONVERGENZA-dt PULITA (dt=0.01 vs dt/2=0.005, media 2ª metà t∈[3,6], condensazione sanata):**
+- `m0_spin_axis_R` (il SEGNO/DOF, ciò che conta per la de-param): **0.0485 vs 0.0485 = 0% CONVERGE** → fisica, dt-stabile.
+- `spin_axis_R`: 0.038/0.037 (4%, near-zero) ✓.
+- `m0_omega_axis_R`: 0.034/0.025 (28% ma **near-zero**). NB: la pulizia ha SMASCHERATO che il "40% sistematico"
+  di prima (0.184/0.305) era **contaminazione da `--ogni`**, non fisica.
+- `m0_spin_core_cv` (la DISPERSIONE, bersaglio de-param): **1.380 vs 1.648 = 16%, NON converge pulito.** APERTO:
+  siamo in FORMAZIONE (600 passi < 2000); da certificare con run lungo. È l'unico residuo per il "va" pieno.
+
+**DOVE STANNO I FILE (per l'analisi):**
+- **Codice** (branch `dev-dof`): de-param relazionale + pura-fase = commit `5c53717`; flag `--dt` + FIX condensazione
+  sola-lettura = commit `946b464`. Motore `soliton_simulator.py`: clock in `_passo_spinoriale` (~riga 1705-1785,
+  ramo `DEPARAM_OROLOGIO`); fix condensazione nel loop batch (~riga 5484, `_snap_cond`); gravità spin-modulata
+  ~riga 2933 (`grav *= _nb·_nb`).
+- **Dati** (branch `dev-dof`, commit `6763f81`): `csv/deparam_probe/` (diaglog) e `log/deparam_probe/`. Chiave:
+  `clean_dt1.csv` (dt=0.01) e `clean_dt2.csv` (dt=0.005) = convergenza PULITA; `diagseal_*` = sigillo diaglog;
+  `fix_o50/o600` = sigillo condensazione. I `.pkl` (DB di stato, 146MB) sono esclusi (gitignore) ma **rigenerabili
+  deterministicamente** (seed 1) coi comandi nei log.
+- **Comando per rigenerare** un probe: `python soliton_simulator.py --batch --nmasse 2 --sep 6 --seed 1
+  --spinore-vivo --spinore-corretto --sync --deparam-orologio --dt <DT> --passi <P> --ogni <P> --diaglog <out.csv>`.
+
+**ANALISI CHIESTA A CLAUDE:** (1) confermare/criticare la lettura della convergenza pulita (segno converge 0% =
+fisica; `m0_spin_core_cv` 16% = formazione o dt-sensibilità reale?); (2) valutare se serve il run lungo (2000
+passi) per certificare `m0_spin_core_cv` prima del "va"; (3) verdetto su come la contaminazione retroattiva (`--ogni`)
+possa aver sporcato le campagne passate; (4) prossimo: con fondamenta pulite, ri-test del sync sul segno (la
+de-param riduce la dispersione → il sync ordina la chiralità?).
+
