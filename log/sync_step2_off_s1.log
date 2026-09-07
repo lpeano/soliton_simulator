@@ -1,0 +1,28 @@
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[batch] condensazione: seed=1 passi=2000 ogni=10 sep=6.0 nmasse=2
+[batch] leggi attive: GRAV_BIFASE=True SPIN_ORBITA(via SPINORE)=True COPPIA_MIT=1.0 lambda=0.800
+
+passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
+[batch] LOG DIAGNOSTICO COMPLETO  -> out_sync_spinore_step2\off_s1.csv
+      0 |    0.0000 |    12.038 | r=8.2 c=0.339 n=6      | tot=1 NUOVI=1 | TRACK accr=744 coppie=0 nuova=80
+     10 |    0.0000 |    12.038 | r=8.2 c=0.362 n=6      | tot=1 NUOVI=0 | TRACK accr=791 coppie=18 nuova=80
+     20 |    0.0000 |    12.038 | r=5.2 c=0.246 n=6      | tot=1 NUOVI=0 | TRACK accr=953 coppie=70 nuova=80
+     30 |    0.0000 |    12.038 | r=5.2 c=0.114 n=6      | tot=1 NUOVI=0 | TRACK accr=1085 coppie=107 nuova=80
+     40 |    0.0000 |    12.038 | r=7.8 c=0.233 n=9      | tot=1 NUOVI=0 | TRACK accr=1170 coppie=135 nuova=82
+     50 |    0.0000 |    12.038 | r=8.2 c=0.218 n=9      | tot=1 NUOVI=0 | TRACK accr=1208 coppie=146 nuova=83
+     60 |    0.0000 |    12.038 | r=12.2 c=0.223 n=277   | tot=1 NUOVI=0 | TRACK accr=1252 coppie=165 nuova=83
+     70 |    0.0000 |    12.038 | r=11.2 c=0.190 n=37    | tot=1 NUOVI=0 | TRACK accr=1284 coppie=182 nuova=83
+     80 |    0.0000 |    12.038 | r=11.2 c=0.179 n=39    | tot=1 NUOVI=0 | TRACK accr=1296 coppie=185 nuova=83
+     90 |    0.0000 |    12.038 | r=11.2 c=0.161 n=42    | tot=1 NUOVI=0 | TRACK accr=1305 coppie=190 nuova=83
+    100 |    0.0000 |    12.038 | r=11.2 c=0.156 n=43    | tot=1 NUOVI=0 | TRACK accr=1318 coppie=195 nuova=83
+    110 |    0.0000 |    12.038 | r=11.2 c=0.147 n=44    | tot=1 NUOVI=0 | TRACK accr=1329 coppie=201 nuova=83
+    120 |    0.0000 |    12.038 | r=11.2 c=0.140 n=44    | tot=1 NUOVI=0 | TRACK accr=1335 coppie=204 nuova=83
+    130 |    0.0000 |    12.038 | r=5.2 c=0.096 n=5      | tot=1 NUOVI=0 | TRACK accr=1341 coppie=206 nuova=83
+    140 |    0.0000 |    12.038 | r=4.8 c=0.035 n=7      | tot=1 NUOVI=0 | TRACK accr=1344 coppie=211 nuova=83
+    150 |    0.0000 |    12.037 | r=4.8 c=0.100 n=7      | tot=1 NUOVI=0 | TRACK accr=1346 coppie=211 nuova=83
+    160 |    0.0000 |    12.037 | r=11.2 c=0.135 n=45    | tot=1 NUOVI=0 | TRACK accr=1350 coppie=213 nuova=83
+    170 |    0.0000 |    12.037 | r=11.8 c=0.134 n=288   | tot=1 NUOVI=0 | TRACK accr=1352 coppie=215 nuova=83
+    180 |    0.0000 |    12.037 | r=11.8 c=0.136 n=284   | tot=1 NUOVI=0 | TRACK accr=1355 coppie=217 nuova=83
+    190 |    0.0000 |    12.037 | r=11.8 c=0.130 n=279   | tot=1 NUOVI=0 | TRACK accr=1357 coppie=217 nuova=83
