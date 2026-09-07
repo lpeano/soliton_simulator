@@ -724,6 +724,13 @@ SYNC_SPINORE = False    # KURAMOTO SU(2) SUGLI SPINORI (sotto-flag): tira ogni s
                         # rinforzo_shear). Torque ISTANTANEO -> entra in omega_tot (rotazione), NON in omega_s
                         # (memoria: darebbe accumulo/divergenza). Zero parametri nuovi. Richiede il settore
                         # spinore vivo e K_SYNC!=0 (forza dal blocco Kuramoto-phi). Default off = byte-identico.
+DEPARAM_OROLOGIO = False # DE-PARAMETRIZZAZIONE RELAZIONALE DELL'OROLOGIO de Broglie: omega_clk non piu' da
+                        # |Psi|^2 ESTENSIVA / rho_c GLOBALE (misurato ~95% connettivita', deg 2->379), ma
+                        # dalla COERENZA D'ARCO intensiva sum_j w_ij cos(phi_i-phi_j) / sum_j w_ij (media pesata
+                        # sugli archi incidenti, indipendente dal grado, in [-1,1]); tetto naturale = 1 (nessun
+                        # rho_c globale, niente normalizzazione per volume). Relazionale sulla rete, non per volume.
+                        # Tocca SOLO l'orologio spinoriale, NON la Psi-sorgente di gravita'. Richiede
+                        # --spinore-corretto. Zero parametri. Default off = byte-identico.
 SPIN_FEEDBACK = False   # FEEDBACK LOCALE SPINORE->ARCHI: usa l'overlap complesso dei lift sugli archi
                         # come flusso di fase antisimmmetrico. Richiede --spinore-vivo; default off
                         # per A/B. Non impone alcuna cucitura o olonomia: la misura deve emergere.
@@ -1702,7 +1709,20 @@ class Rete:
                 rho_c = float(massa_critica_adattiva(self))
             except Exception:
                 rho_c = float(massa_critica_collasso())
-            omega_clk = (rho / max(rho_c, 1e-12)) * r_node          # frequenza propria (scalare per nodo)
+            if DEPARAM_OROLOGIO:
+                # DE-PARAM RELAZIONALE: freq guidata dalla COERENZA D'ARCO intensiva (media pesata di
+                # cos(phi_i-phi_j) sugli archi incidenti, indipendente dal grado), NON dalla densita'
+                # estensiva / rho_c globale (~95% connettivita'). Tetto naturale 1: nessun rho_c, niente
+                # volume. self.phi qui e' lo snapshot t (commit fasi non ancora avvenuto -> ETC).
+                _m = (i < n) & (j < n)
+                _ii, _jj, _wc = i[_m], j[_m], w[_m]
+                _cij = np.cos(self.phi[_ii] - self.phi[_jj])
+                _num = np.zeros(n); _den = np.zeros(n)
+                np.add.at(_num, _ii, _wc * _cij); np.add.at(_num, _jj, _wc * _cij)
+                np.add.at(_den, _ii, _wc);        np.add.at(_den, _jj, _wc)
+                omega_clk = (_num / np.maximum(_den, 1e-12)) * r_node   # coerenza d'arco [-1,1] * ritmo proprio
+            else:
+                omega_clk = (rho / max(rho_c, 1e-12)) * r_node          # legacy: densita' estensiva / rho_c globale
             omega_tot = omega_new + omega_clk[:, None] * nb          # lungo l'asse PROPRIO (nb unitario)
             if omega_sync is not None:
                 omega_tot = omega_tot + omega_sync                  # torque di allineamento SU(2) (istantaneo)
@@ -4131,7 +4151,7 @@ def _applica_flag(a):
     global net
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO
     if getattr(a, "tau_d0", False):
         TAU_USA_D0 = True
         print("[tau] tau_p locale usa d0 (distanza di riposo) invece di d reale: forma piu' stabile")
@@ -4189,6 +4209,11 @@ def _applica_flag(a):
         print("[tempo-proprio-orientato] ritmo() con segno: r orientato (toglie |.| da f)")
     if SYNC_SPINORE:
         print("[sync-spinore] Kuramoto SU(2) sugli spinori: torque di allineamento omega_sync = forza*(nb x nb_media) in omega_tot")
+    DEPARAM_OROLOGIO = bool(getattr(a, "deparam_orologio", False))  # de-param relazionale dell'orologio: default off
+    if DEPARAM_OROLOGIO and not SPINORE_CORRETTO:
+        print("[deparam-orologio] AVVISO: inerte senza --spinore-corretto (l'orologio de Broglie vive solo li').")
+    if DEPARAM_OROLOGIO:
+        print("[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)")
     SPIN_FEEDBACK = bool(getattr(a, "spin_feedback", False)) # feedback locale overlap spinoriale: default off
     SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
     CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale
@@ -4465,6 +4490,12 @@ def _cli():
                         "e forza dal Kuramoto-phi esistente (K_SYNC, 2/pi, prof_rel, rinforzo_shear). Torque "
                         "istantaneo in omega_tot (rotazione), non nella memoria omega_s. Richiede settore spinore "
                         "vivo e K_SYNC!=0. Default off = byte-identico.")
+    p.add_argument("--deparam-orologio", action="store_true", dest="deparam_orologio",
+                   help="DE-PARAMETRIZZAZIONE RELAZIONALE dell'orologio de Broglie (zero parametri): la frequenza "
+                        "propria omega_clk non e' piu' |Psi|^2 estensiva / rho_c GLOBALE (~95% connettivita', deg "
+                        "2->379) ma la COERENZA D'ARCO intensiva sum_j w_ij cos(phi_i-phi_j)/sum_j w_ij (indipendente "
+                        "dal grado, tetto naturale 1, nessun volume). Tocca SOLO l'orologio spinoriale, non la "
+                        "Psi-sorgente di gravita'. Richiede --spinore-corretto. Default off = byte-identico.")
     p.add_argument("--spin-feedback", action="store_true", dest="spin_feedback",
                    help="FEEDBACK LOCALE SPINORE->ARCHI: la parte immaginaria dell'overlap del lift "
                         "spinoriale aggiunge una coppia antisimmmetrica alle fasi. Richiede "
