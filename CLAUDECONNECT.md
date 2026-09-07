@@ -500,3 +500,28 @@ passi è formazione o destabilizzazione?); (2) rendere l'orologio DAVVERO pura-f
 (3) ripensare (attaccare la connettività estensiva a monte, non l'orologio a valle). Consiglio guardiano: la (2)
 prima — l'orologio che inclina `_nb` è un difetto a sé, indipendente dalla de-param.
 
+### §34 — OROLOGIO PURA-FASE: la cura convergente (2026-09-07)
+Luca sceglie l'opzione (2): **orologio PURA-FASE**. Motivo (converge tutto): la fase globale ruota il SEGNO
+(doppia-copertura) attorno a nb ma lascia nb INVARIANTE; la gravità è modulata dalla DIREZIONE (`grav*=nb·nb`),
+non dalla fase → pura-fase (a) decoupla dalla gravità (chirurgico) e (b) attacca il DOF giusto (il segno, §30).
+
+**Implementazione (WIP `5c53717`).** Sotto `--deparam-orologio`: `omega_clk` (coerenza d'arco relazionale) NON
+entra più nell'asse di rotazione (`omega_tot = omega_new [+omega_sync]`), ma è applicato DOPO come fase globale
+`a1,b1 *= e^{-i·omega_clk·dt/2}`. OFF invariato.
+
+**SIGILLI — PASSATI (verificati, 600 passi seed 1).**
+- **OFF byte-identico**: `max|A−B|=0.000e+00` vs pre-edit. ✓
+- **Chirurgico (prova decisiva)**: fase globale ARBITRARIA su `_psi_spinor` → `max|nb−nb'| = 6.7e-16` (≈0 macchina):
+  una fase globale lascia `nb=ψ†σψ` INVARIANTE → l'orologio pura-fase **non può** toccare la gravità. `nb_new`
+  dipende ORA solo da `omega_new` (memoria hebbiana), non dall'orologio.
+- **N**: pura-fase **2014** vs legacy **1990** (**+1.2%**), contro il **−8.5%** (1821) della versione non-pura-fase.
+  Il residuo +1.2% NON è l'orologio che tocca la gravità (provato 6.7e-16) ma la RIMOZIONE del tilt-legacy (il bug:
+  l'orologio che inclinava nb): 2014 = gravità "pulita", 1990 = buggata.
+- **Effetto sul segno**: `_psi_spinor` cambia (l'orologio pilota il segno). ✓
+
+**Stato**: de-param orologio RELAZIONALE + PURA-FASE completa e sigillata su `dev-dof`. Radice della dispersione
+(95% connettività) rimossa in modo chirurgico. **PROSSIMO**: campagna 2000 passi/3 semi per misurare se la
+coerenza del SEGNO migliora (dispersione orologio ↓), poi — con la dispersione ridotta — ri-testare il sync
+(`--sync-fase-orologio`, in banca §30) sul DOF giusto. Metodo consolidato in `copilot-instructions.md`
+("Metodo di lavoro standard": cancello test-GRATIS + relazionale-non-volume + sigilli mirati + riporta i negativi).
+

@@ -59,6 +59,21 @@ gestita **in modo covariante**, altrimenti misuri l'espansione, non la fisica (i
   `calcola_psi`→`psi`, `_spinor_lift`). Usa letture pure dei cache o snapshot/restore attorno al blocco diagnostico.
   Verifica con test byte-identico della fisica (stesso caso con/senza diaglog: stato finale identico).
 
+## Metodo di lavoro standard (cancello test-GRATIS + relazionale + sigilli mirati)
+Consolidato 2026-09-07 (de-param orologio, CLAUDECONNECT §33-§34). Da seguire per ogni cambio-legge / de-parametrizzazione:
+- **Il CANCELLO test-GRATIS.** Prima di scrivere codice, una MISURA read-only che QUANTIFICA l'artefatto/effetto
+  con un numero (es. `corr(omega_clk, deg)=0.948` → 95% connettività, non fisica). Procedi SOLO se il numero
+  giustifica la modifica; se domina la fisica reale, fermati — ti sei risparmiato una modifica inutile.
+- **Normalizzazione RELAZIONALE, mai per volume** (corollario di "guarda la luna"): rendi intensiva una grandezza
+  con le RELAZIONI sugli archi (coerenza `cos(φᵢ−φⱼ)`), non dividendo un'ampiezza per il volume/grado (`Σw`, `deg`).
+  Il volume è il dito; l'arco è la luna. (Verificato: la volume-normalizzata `|F/Σw|²` è sbagliata — corr con deg residua.)
+- **Sigilli MIRATI oltre all'OFF byte-identico.** Leggendo il CODICE, identifica cosa la modifica NON deve toccare
+  e PROVALO invariante. Es.: la gravità è spin-modulata (`grav *= nb·nb`) → un cambio all'orologio va reso
+  PURA-FASE (fase globale: `nb` invariante a ~1e-16) perché non tocchi la gravità. Se un sigillo fallisce, FERMATI
+  e riporta — non spacciare una chirurgia non riuscita per riuscita.
+- **Riporta i NEGATIVI appena emergono** (sigillo fallito, effetto assente, accoppiamento nascosto) e poni la
+  decisione a Luca; non nasconderli né sovra-interpretare i positivi.
+
 ## Regole di flag verificate
 - **`--cs-dinamico` implica SEMPRE anche `--chi-core` e `--spinore-vivo`** (anche in tutti gli script di
   test), altrimenti non aggancia il settore che serve.

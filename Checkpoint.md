@@ -21,6 +21,10 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
     test-GRATIS: `omega_clk` era ~95% connettività, corr(deg)=0.948). Sigillo OFF byte-identico PASSATO; **sigillo
     gravità FALLITO** (la gravità è spin-modulata by design, riga ~2933 `grav*=_nb·_nb` → N 1990→1821). Decisione
     pendente: (1) valutare per osservabili, (2) rendere l'orologio pura-fase prima, (3) ripensare. Aggancio `--sync-fase-orologio` DOPO.
+    **AGGIORNATO (§34, WIP `5c53717`)**: scelta (2) — orologio **PURA-FASE** (fase globale, non nell'asse). Sigilli
+    PASSATI: OFF byte-identico; chirurgico `max|nb−nb'|=6.7e-16` (l'orologio non tocca nb→gravità); N 2014 vs legacy
+    1990 (+1.2%, = rimozione del tilt-legacy). De-param RELAZIONALE+PURA-FASE completa e sigillata. PROSSIMO: campagna
+    2000 passi/3 semi (coerenza del segno ↑? dispersione ↓?), poi ri-testare il sync sul DOF giusto (`--sync-fase-orologio`).
 - **Campagne lunghe**: `git worktree add ../st_wt/<commit> <commit>` (versione immutabile a un commit).
 - **Versionamento DB (IMPLEMENTATO su `dev-infra`):** identità di accetta/rifiuta = **git blob hash** dei byte di
   `soliton_simulator.py` (`git hash-object`); `commit`/`branch`/`dirty` = metadati (branch diverso → solo warning,
