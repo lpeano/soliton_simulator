@@ -5,6 +5,43 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 
 ---
 
+## PUNTO DI INTERRUZIONE — 2026-09-07 ~08:20 (ripresa rapida)
+
+### IN CORSO adesso
+- **Campagna STEP 2 chi-core** (`test_sync_spinore_step2.bat`, `out_sync_spinore_step2/`): i 3 run **ON completati**
+  (on_s1/2/3 a 2000 passi, db+csv OK). Il batch si era BLOCCATO 4h dopo on_s3 (04:16→08:18, prob. sleep macchina)
+  senza fare gli OFF. **Rilanciato** (riprendibile: hash db combacia, ON saltati come no-op) → sta facendo i **3 OFF**.
+  ATTESA: off_s1/2/3, poi verdetto covariante ON vs OFF su `m0_spin_axis_R`/`m0_omega_axis_R`/`m0_spin_core_cv`.
+
+### DA FARE (coda, priorità dall'alto)
+1. **Completare chi-core** (3 OFF) e dare il verdetto covariante: `--chi-core` da' il CANALE alla sync o no?
+2. **FIX `--sync-fase-orologio`** (design pronto, CLAUDECONNECT §30): Kuramoto sulla FASE-orologio (segno di
+   doppia-copertura) invece che sulla direzione di Bloch. È l'ipotesi che i dati indicano come causa del negativo.
+   Implementare DOPO la campagna (non editare il .py mentre gira: contamina/rompe la ripresa). Poi A/B, 3 semi.
+3. **STEP 2 candidate rimanenti** (una alla volta): `--guscio-morbido`. NB: `--cs-dinamico + --tauloc>1` è
+   INSTABILE (CFL/nsub esplode) → evitare o usare tauloc gentile senza cs-dinamico.
+4. **Programma DE-PARAMETRIZZAZIONE = limite continuo** (TODO dedicato sotto): GAMMA per primo (Classe 3,
+   centrale), poi gF_med locale (Classe 4), normalizzare estensive (Classe 2). Attacca la radice della
+   dispersione degli orologi.
+5. **tauloc + scuotimento**: flag `--scuotimento` pronto e verificato, ma la variante con tauloc 2.0 era
+   impraticabile (instabilità). Da rifare con tauloc gentile o senza cs-dinamico, se serve.
+6. **Test RG / invarianza coarse-graining** (B vs 2B) — la prova del limite continuo.
+
+### MIE VALUTAZIONI (guardiano, IN VERIFICA)
+- **Il nuovo spinore NON è un fallimento**: la macchina è corretta (sigilli passati), ma ho messo il Kuramoto
+  sul grado di liberta' SBAGLIATO — la frustrazione vive nel SEGNO/fase di doppia-copertura, non nella direzione
+  di Bloch (firma: `omgR~0.2` > `spinR~0.1`). Il fix `--sync-fase-orologio` è il test diretto di questa ipotesi.
+- **De-parametrizzare = limite continuo** (intuizione di Luca, verificata sullo SCALING): eliminare un parametro
+  (scala assoluta) = rapporto di stato adimensionale = invariante di scala = converge a N→∞. Il criterio giusto
+  NON è h→0 (2ℓ_P fondamentale) ma il coarse-graining/RG. Vedi REPORT_LIMITE_CONTINUO.md §14.
+- **Le due cose si toccano**: la dispersione degli orologi che frustra la sync è in parte ARTEFATTO di Ψ-non-
+  normalizzata (∝deg) + gF_med globale. Quindi il fix profondo potrebbe essere de-parametrizzare (GAMMA/gF_med),
+  NON solo cambiare l'accoppiamento. Due strade: (A) sync-fase-orologio (rapido, test dell'ipotesi DOF);
+  (B) de-parametrizzare (radice, ma piu' lungo). Consiglio: (A) prima come diagnosi, poi (B) come cura strutturale.
+- **Riprendibilita' salva-lavoro**: senza il resume avremmo perso i 3 ON (ore). Da tenere per ogni campagna lunga.
+
+---
+
 ## STATO RUN CORRENTE — 2026-09-07 (cosa gira / cosa attendiamo)
 
 ### IN RUN adesso (in attesa di completamento)
