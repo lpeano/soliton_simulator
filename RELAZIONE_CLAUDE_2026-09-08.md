@@ -215,3 +215,38 @@ di doppia-copertura.
 ON/OFF **3 semi, 2000 passi** + convergenza-dt (sigillo 4), covariante N-appaiato; se resta ~0 concorde →
 **ABELIANO PULITO** registrato con onore (risultato negativo che vale quanto un positivo). Oppure (B) diagnosi
 del perché il Kuramoto non ordina (zero-param → non si può rinforzare). Consiglio guardiano: (A).
+
+---
+
+## 11. §45-bis + §46 — ANTIFERROMAGNETICO SMENTITO, poi `--kuramoto-su2` (via NON-ABELIANA) IMPLEMENTATA
+
+### §45-bis — ipotesi antiferromagnetica SMENTITA (test-gratis, dai DB pilota sfo)
+Ipotesi (guardiano): il segno potrebbe essere ordinato in due sotto-reticoli (materia +1 / antimateria −1) e
+`segno_arco_coer` globale ~0 perché mescola i settori opposti. Verificato nel codice che la coppia Schwinger nasce
+con segno OPPOSTO (`perc_chi=−perc_chi`, `_psi_spinor` segno=−1) e nel punto medio (locale). **Test:** decomposizione
+di `⟨s_i s_j⟩` per settore (mat-mat, anti-anti, mat-anti) dai DB finali. **RISULTATO: SMENTITO.** Tutti i settori ~0
+(mat-mat=+0.003, anti-anti=−0.004; `|media sgn|` materia=0.046) — **nessun ordine dentro i settori**, non solo globale.
+Il ~0 è frustrazione genuina, non cancellazione di due settori ordinati.
+
+### §46 — `--kuramoto-su2` IMPLEMENTATO (SIGILLI DA FARE — ripresa 2026-09-09)
+Tutte le vie precedenti erano **abeliane** (fasi/assi che commutano). Via genuina NON-ABELIANA: ruotare lo **spinore
+INTERO** verso la media SU(2) dei vicini con rotazione geodetica attorno all'asse **variabile** `nb×nb_bar` (non
+commuta → non-abeliano). Verso e segno ruotano **insieme**; il segno emerge per **OLONOMIA** (fase geometrica).
+- **Legge:** `ψ_bar=(wI@ψ)/|.|` (snapshot t−1); `nb_bar=ψ_bar†σψ_bar`; `Ω=forza·arcsin|nb×nb_bar|·(nb×nb_bar)/|.|`;
+  `ψ→exp(−i/2 Ω·σ dt)ψ`. O(dt¹). **nb SI muove** (gravità fisica, VOLUTO — non 6.7e-16). Zero param.
+- Flag `--kuramoto-su2` default OFF; guard richiede `--spinore-corretto`. Nuova colonna diaglog
+  **`spin_overlap_arco = ⟨|⟨ψ_i|ψ_j⟩|²⟩`** (coerenza SU(2) PIENA, osservabile naturale, pure-read). py_compile OK.
+- **Rilievo (accettato):** il torque allinea il VERSO; il SEGNO segue per olonomia (non targettizzato = corretto,
+  targettizzarlo sarebbe abeliano già fallito). Se olonomia ordina → spin-½; se no → teorema di assenza DEFINITIVO.
+
+**STATO: SIGILLI INTERROTTI a metà (stop richiesto).** Ripresa domani mattina come **PRIMA attività**:
+1. Rifare da zero i 3 run sigillo (OLD=commit pre-kuramoto, NEW-off, NEW-on `--kuramoto-su2`, 300 passi seed 1,
+   prereqs `--spinore-vivo --spinore-corretto --sync --deparam-orologio`) in `csv/_seal_k2/`.
+2. Verificare: (1) OFF byte-identico (OLD==NEW-off), (2) unitarietà, (3) primo ordine [analitico: `angolo=|Ω|·dt`],
+   (4) convergenza-dt sulle intensive.
+3. Se passano → pilota go/no-go `--kuramoto-su2` ON/OFF su **`spin_overlap_arco`** (primario) + segno + verso; poi
+   3 semi/2000. **Lettura:** segno segue verso → olonomia vinta = spin-½; verso sì segno no → olonomia persa.
+- Codice committato (flag default OFF); tracing `/memories/repo/deparam_orologio.md §46`.
+
+**Bilancio vie:** abeliane §41/42/44 fallite, motore-unico=artefatto §43, antiferromagnetico smentito §45-bis.
+`--kuramoto-su2` = **ULTIMA carta** (non-abeliana genuina). Se fallisce → **ABELIANO definitivo**.

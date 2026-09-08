@@ -739,6 +739,13 @@ SYNC_FASE_OROLOGIO = False # KURAMOTO SUL SEGNO DI DOPPIA-COPERTURA (la via genu
                         # Kuramoto-phi (K_SYNC, prof_rel, rinforzo_shear) -> zero parametri. Primo ordine in dt
                         # (NON O(dt^2) come il motore-unico artefatto: qui il termine dipende dalla DIFFERENZA
                         # sin(media-alpha), relazionale). Richiede --spinore-corretto. Default off = byte-identico.
+KURAMOTO_SU2 = False     # KURAMOTO SU(2) NON-ABELIANO (§46): ruota lo SPINORE INTERO verso la media SU(2) dei
+                        # vicini psi_bar=(wI@psi)/|.| con rotazione geodetica attorno all'asse VARIABILE nb x nb_bar
+                        # (non commuta -> non-abeliano genuino). Verso+segno ruotano INSIEME; il segno emerge per
+                        # OLONOMIA (fase geometrica, asse variabile), non targettizzato. nb SI muove (gravita' fisica,
+                        # voluto: convergenza-dt, non 6.7e-16). Torque O(dt^1), forza/wI dal Kuramoto-phi, zero param.
+                        # Differenza da --sync-spinore: quello media i Bloch (fase-invariante) senza de-param; qui la
+                        # media SU(2) e' modulata dalla coerenza di segno (accoppia segno/verso). Richiede --spinore-corretto.
 SPIN_FEEDBACK = False   # FEEDBACK LOCALE SPINORE->ARCHI: usa l'overlap complesso dei lift sugli archi
                         # come flusso di fase antisimmmetrico. Richiede --spinore-vivo; default off
                         # per A/B. Non impone alcuna cucitura o olonomia: la misura deve emergere.
@@ -1772,6 +1779,29 @@ class Rete:
                 _eta = np.asarray(forza_sync[:n]) * np.sin(np.angle(_Za) - np.angle(_za)) * _dts  # O(dt^1)
                 _phs = np.exp(1j * _eta)
                 a1 = a1 * _phs; b1 = b1 * _phs
+            if KURAMOTO_SU2 and forza_sync is not None and wI_sync is not None:
+                # KURAMOTO SU(2) NON-ABELIANO (§46): ruota lo SPINORE INTERO verso la media SU(2) dei vicini,
+                # rotazione geodetica attorno all'asse VARIABILE nb x nb_bar (non commuta -> non-abeliano genuino).
+                # psi_bar = media SU(2) dei vicini (snapshot t-1) rinormalizzata; nb_bar = suo Bloch (modulato dalla
+                # coerenza di segno: se i segni disaccordano Sum w psi si cancella -> torque debole = accoppia segno/verso).
+                # Il torque allinea il VERSO (nb->nb_bar); il SEGNO segue per OLONOMIA (fase geometrica, asse variabile).
+                # O(dt^1). nb SI muove (gravita' fisica, voluto). forza/wI = Kuramoto-phi, zero param.
+                _pb = wI_sync @ psi_sp_t                                    # somma pesata dei vicini (n,2), snapshot t-1
+                _pb = _pb / np.maximum(np.linalg.norm(_pb, axis=1, keepdims=True), 1e-12)   # media SU(2) rinormalizzata
+                _ab = _pb[:, 0]; _bbo = _pb[:, 1]
+                _nb_bar = np.stack([2.0*np.real(np.conj(_ab)*_bbo), 2.0*np.imag(np.conj(_ab)*_bbo),
+                                    np.abs(_ab)**2 - np.abs(_bbo)**2], axis=1)
+                _crx = np.cross(nb[:n], _nb_bar)                            # nb x nb_bar (asse, snapshot t-1)
+                _sink = np.linalg.norm(_crx, axis=1)
+                _amp = np.arcsin(np.clip(_sink, 0.0, 1.0))                  # angolo geodetico verso nb_bar
+                _Om = (np.asarray(forza_sync[:n]) * _amp)[:, None] * (_crx / np.maximum(_sink[:, None], 1e-12))
+                _thk = np.linalg.norm(_Om, axis=1) * _dts                   # angolo di rotazione O(dt^1)
+                _uk = _Om / np.maximum(np.linalg.norm(_Om, axis=1, keepdims=True), 1e-12)
+                _ck = np.cos(_thk/2.0); _sk = np.sin(_thk/2.0)
+                _kx, _ky, _kz = _uk[:, 0], _uk[:, 1], _uk[:, 2]
+                _na1 = (_ck - 1j*_sk*_kz)*a1 + (-1j*_sk*(_kx - 1j*_ky))*b1
+                _nb1 = (-1j*_sk*(_kx + 1j*_ky))*a1 + (_ck + 1j*_sk*_kz)*b1
+                a1, b1 = _na1, _nb1
             if SYNC_UPDATE and SCUOTIMENTO:
                 # eccitazione del vuoto sul PRIMARIO complesso (t->t+1): perturba psi, non il B letto
                 Lam = lambda_vuoto(self)
@@ -2225,7 +2255,7 @@ class Rete:
             
             forza = (2.0 / np.pi) * prof_rel * rinforzo_shear
             forza = K_SYNC * forza                        # K_SYNC=1 = legge piena
-            if SYNC_SPINORE or SYNC_FASE_OROLOGIO:
+            if SYNC_SPINORE or SYNC_FASE_OROLOGIO or KURAMOTO_SU2:
                 _forza_sync, _wI_sync, _uno_sync = forza, wI, uno   # riuso per il torque SU(2)/segno, snapshot t-1
 
             zc_sync = wI @ np.exp(1j * _phi_t)            # USA LO SNAPSHOT t
@@ -4183,7 +4213,7 @@ def _applica_flag(a):
     global net
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, DT
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
     if getattr(a, "tau_d0", False):
@@ -4253,6 +4283,11 @@ def _applica_flag(a):
         print("[sync-fase-orologio] AVVISO: inerte senza --spinore-corretto (agisce sul segno di _psi_spinor); no-op.")
     if SYNC_FASE_OROLOGIO:
         print("[sync-fase-orologio] Kuramoto sul SEGNO di doppia-copertura: eta = dt*forza*sin(media_alpha-alpha), fase globale (nb invariante), O(dt^1)")
+    KURAMOTO_SU2 = bool(getattr(a, "kuramoto_su2", False)) # Kuramoto SU(2) non-abeliano (spinore intero): default off
+    if KURAMOTO_SU2 and not SPINORE_CORRETTO:
+        print("[kuramoto-su2] AVVISO: inerte senza --spinore-corretto (agisce sullo spinore primario); no-op.")
+    if KURAMOTO_SU2:
+        print("[kuramoto-su2] Kuramoto SU(2) NON-ABELIANO: rotazione piena dello spinore verso la media SU(2) dei vicini (asse variabile nb x nb_bar), O(dt^1). nb SI muove (gravita' fisica, non 6.7e-16)")
     SPIN_FEEDBACK = bool(getattr(a, "spin_feedback", False)) # feedback locale overlap spinoriale: default off
     SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
     CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale
@@ -4544,6 +4579,12 @@ def _cli():
                         "eta = dt*forza*sin(media_alpha-alpha), forza dal Kuramoto-phi (K_SYNC, prof_rel, rinforzo_shear). "
                         "Fase globale su psi -> nb invariante (gravita' intatta), agisce sul SEGNO non su phi. Richiede "
                         "--spinore-corretto. Default off = byte-identico.")
+    p.add_argument("--kuramoto-su2", action="store_true", dest="kuramoto_su2",
+                   help="KURAMOTO SU(2) NON-ABELIANO (zero parametri): ruota lo SPINORE INTERO verso la media SU(2) "
+                        "dei vicini psi_bar=(wI@psi)/|.| con rotazione geodetica attorno all'asse VARIABILE nb x nb_bar "
+                        "(non commuta -> non-abeliano). Verso+segno ruotano INSIEME (il segno emerge per OLONOMIA). "
+                        "Torque O(dt^1), forza dal Kuramoto-phi. nb SI muove (gravita' fisica, non 6.7e-16). Richiede "
+                        "--spinore-corretto (+ --deparam-orologio sopra soglia). Default off = byte-identico.")
     p.add_argument("--spin-feedback", action="store_true", dest="spin_feedback",
                    help="FEEDBACK LOCALE SPINORE->ARCHI: la parte immaginaria dell'overlap del lift "
                         "spinoriale aggiunge una coppia antisimmmetrica alle fasi. Richiede "
@@ -4804,6 +4845,7 @@ def batch_condensazione(a):
         cols['segno_arco_coer'] = 0.0    # <sign_i*sign_j> pesato: +1 concorde, -1 alternato, 0 frustrato
         cols['verso_arco_coer'] = 0.0    # <nb_i·nb_j> pesato: allineamento del verso di Bloch
         cols['segno_ov_absmedia'] = 0.0  # |Re<canon|psi>| medio: commitment a un foglio (intensivo)
+        cols['spin_overlap_arco'] = 0.0  # <|<psi_i|psi_j>|^2> pesato: coerenza SU(2) PIENA (verso+segno), pure-read
         _psp = getattr(net, '_psi_spinor', None)
         if (_nb_g is not None and _psp is not None and len(_psp) >= n and len(_nb_g) >= n and n > 0 and len(net.i)):
             try:
@@ -4820,6 +4862,9 @@ def batch_condensazione(a):
                     _dsum = max(float(np.sum(_wa)), 1e-12)
                     cols['segno_arco_coer'] = float(np.sum(_wa * _sgn[_ii] * _sgn[_jj]) / _dsum)
                     cols['verso_arco_coer'] = float(np.sum(_wa * np.sum(_uu[_ii] * _uu[_jj], axis=1)) / _dsum)
+                    _psi2 = np.asarray(_psp[:n])
+                    _ovl = np.abs(np.sum(np.conj(_psi2[_ii]) * _psi2[_jj], axis=1)) ** 2   # |<psi_i|psi_j>|^2 (coerenza SU(2) piena)
+                    cols['spin_overlap_arco'] = float(np.sum(_wa * _ovl) / _dsum)
             except Exception:
                 pass
         # SCHERMATURA: osservabili della legge ancorata a N_c. La portata effettiva
