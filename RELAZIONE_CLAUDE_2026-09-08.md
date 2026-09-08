@@ -180,3 +180,38 @@ segno E verso insieme = ordinamento vero; solo segno = verificare artefatto own-
 **VERDETTO finale atteso:** segno_arco_coer ON≫OFF concorde 3 semi → **spin-½** (il sync relazionale ordina il
 segno). Ancora ~0 → **teorema di assenza ABELIANO pulito** (tre vie fallite: filo §41/42, unico-artefatto §43,
 sync-relazionale §44). Codice: `soliton_simulator.py` (flag `--sync-fase-orologio`, default OFF).
+
+---
+
+## 10. §45 — PILOTA `--sync-fase-orologio`: NO-GO (TERZA via fallita)
+
+Pilota covariante go/no-go (800 passi, 1 seme, ON vs OFF, prereqs `--spinore-vivo --spinore-corretto --sync
+--deparam-orologio` fissi). Dati: `csv/deparam_pilota_sfo/`.
+
+| osservabile | ON | OFF | ON−OFF | sd |
+|---|---|---|---|---|
+| **segno_arco_coer** | +0.00005 | −0.00005 | +0.00010 | ~0.003 |
+| **verso_arco_coer** | −0.00020 | +0.00006 | −0.00027 | ~0.0016 |
+| segno_ov_absmedia | 0.660 | 0.665 | −0.005 | ~0.02 |
+| spin_axis_R | 0.039 | 0.038 | +0.0009 | ~0.017 |
+
+**NO-GO.** `segno_arco_coer ≈ 0` in ON e OFF (ON−OFF = 30× più piccolo della sd). Il sync **fa qualcosa**
+(`_psi_spinor` cambia, sigilli) — muove la fase del segno per-nodo — ma **non la ORDINA relazionalmente**
+(`segno_arco_coer` piatto). Stessa frustrazione (`segno_ov ≈ 0.66` commitment locale, arco ~0).
+
+**BILANCIO TRE VIE (tutte segno_arco_coer ≈ 0, ON≈OFF):**
+- §41 `--spin-feedback` (filo indiretto) — NO-GO
+- §42 `--chi-da-spinore` (filo diretto) — NO-GO
+- §44 `--sync-fase-orologio` (Kuramoto relazionale sul segno, O(dt¹) genuino) — NO-GO ← **carta finale**
+- (§43 motore-unico = artefatto O(dt²), scartato al gate)
+
+→ **L'ipotesi ABELIANA sale forte.** Nessun accoppiamento — filo, motore, sync-relazionale — ordina il segno
+di doppia-copertura.
+
+**CAUTELE:** 800 passi = formazione, 1 seme (pilota, non verdetto). La flatness a ~0 (non "piccolo positivo")
+è la stessa firma delle altre due vie.
+
+**PROSSIMO (in attesa Luca):** (A) conferma disciplinare del teorema di assenza — campagna `--sync-fase-orologio`
+ON/OFF **3 semi, 2000 passi** + convergenza-dt (sigillo 4), covariante N-appaiato; se resta ~0 concorde →
+**ABELIANO PULITO** registrato con onore (risultato negativo che vale quanto un positivo). Oppure (B) diagnosi
+del perché il Kuramoto non ordina (zero-param → non si può rinforzare). Consiglio guardiano: (A).
