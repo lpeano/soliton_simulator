@@ -731,6 +731,14 @@ DEPARAM_OROLOGIO = False # DE-PARAMETRIZZAZIONE RELAZIONALE DELL'OROLOGIO de Bro
                         # rho_c globale, niente normalizzazione per volume). Relazionale sulla rete, non per volume.
                         # Tocca SOLO l'orologio spinoriale, NON la Psi-sorgente di gravita'. Richiede
                         # --spinore-corretto. Zero parametri. Default off = byte-identico.
+SYNC_FASE_OROLOGIO = False # KURAMOTO SUL SEGNO DI DOPPIA-COPERTURA (la via genuina all'ordinamento del segno,
+                        # §43): torque RELAZIONALE O(dt^1) che tira la fase di doppia-copertura alpha_k =
+                        # arg<canon(nb_k)|psi_k> verso la media di vicinato. eta = dt*forza*sin(media_alpha-alpha),
+                        # applicato come FASE GLOBALE e^{i eta} su psi -> lascia nb=psi^dag sigma psi INVARIANTE
+                        # (gravita' intatta), agisce SOLO sul segno (non su phi U(1)). forza/wI/uno = gli stessi del
+                        # Kuramoto-phi (K_SYNC, prof_rel, rinforzo_shear) -> zero parametri. Primo ordine in dt
+                        # (NON O(dt^2) come il motore-unico artefatto: qui il termine dipende dalla DIFFERENZA
+                        # sin(media-alpha), relazionale). Richiede --spinore-corretto. Default off = byte-identico.
 SPIN_FEEDBACK = False   # FEEDBACK LOCALE SPINORE->ARCHI: usa l'overlap complesso dei lift sugli archi
                         # come flusso di fase antisimmmetrico. Richiede --spinore-vivo; default off
                         # per A/B. Non impone alcuna cucitura o olonomia: la misura deve emergere.
@@ -1750,6 +1758,20 @@ class Rete:
                 # 'pura': avanzamento invisibile al Bloch, pilota il SEGNO non la DIREZIONE.
                 _phc = np.exp(-0.5j * omega_clk * _dts)
                 a1 = a1 * _phc; b1 = b1 * _phc
+            if SYNC_FASE_OROLOGIO and forza_sync is not None and wI_sync is not None and uno_sync is not None:
+                # KURAMOTO SUL SEGNO DI DOPPIA-COPERTURA (sync-fase-orologio, §43): ordina il foglio +- in modo
+                # RELAZIONALE. alpha_k = arg<canon(nb_k)|psi_k> (fase di doppia-copertura, snapshot t-1); torque
+                # O(dt^1) verso la media di vicinato: eta = dt*forza*sin(media_alpha-alpha). Fase GLOBALE e^{i eta}
+                # su psi -> nb = psi^dag sigma psi INVARIANTE (gravita' intatta), agisce SOLO sul segno. forza/wI/uno
+                # = gli stessi del Kuramoto-phi (zero parametri). ETC: alpha e la media dei vicini dallo snapshot
+                # t-1 (psi_sp_t, nb), applicati simultaneamente -> il segno di k influenza j solo a t+1.
+                _canon_s = self._bloch_a_spinore(nb[:n])
+                _ov_s = np.sum(np.conj(_canon_s) * psi_sp_t, axis=1)         # e^{i alpha}, snapshot t-1
+                _za = _ov_s / np.maximum(np.abs(_ov_s), 1e-12)               # fasore unitario del segno
+                _Za = (wI_sync @ _za) / uno_sync                             # media di vicinato pesata (snapshot t-1)
+                _eta = np.asarray(forza_sync[:n]) * np.sin(np.angle(_Za) - np.angle(_za)) * _dts  # O(dt^1)
+                _phs = np.exp(1j * _eta)
+                a1 = a1 * _phs; b1 = b1 * _phs
             if SYNC_UPDATE and SCUOTIMENTO:
                 # eccitazione del vuoto sul PRIMARIO complesso (t->t+1): perturba psi, non il B letto
                 Lam = lambda_vuoto(self)
@@ -2203,8 +2225,8 @@ class Rete:
             
             forza = (2.0 / np.pi) * prof_rel * rinforzo_shear
             forza = K_SYNC * forza                        # K_SYNC=1 = legge piena
-            if SYNC_SPINORE:
-                _forza_sync, _wI_sync, _uno_sync = forza, wI, uno   # riuso per il torque SU(2), snapshot t-1
+            if SYNC_SPINORE or SYNC_FASE_OROLOGIO:
+                _forza_sync, _wI_sync, _uno_sync = forza, wI, uno   # riuso per il torque SU(2)/segno, snapshot t-1
 
             zc_sync = wI @ np.exp(1j * _phi_t)            # USA LO SNAPSHOT t
             media = np.angle(zc_sync)
@@ -4161,7 +4183,7 @@ def _applica_flag(a):
     global net
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, DT
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, DT
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
     if getattr(a, "tau_d0", False):
@@ -4226,6 +4248,11 @@ def _applica_flag(a):
         print("[deparam-orologio] AVVISO: inerte senza --spinore-corretto (l'orologio de Broglie vive solo li').")
     if DEPARAM_OROLOGIO:
         print("[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)")
+    SYNC_FASE_OROLOGIO = bool(getattr(a, "sync_fase_orologio", False)) # Kuramoto sul segno di doppia-copertura: default off
+    if SYNC_FASE_OROLOGIO and not SPINORE_CORRETTO:
+        print("[sync-fase-orologio] AVVISO: inerte senza --spinore-corretto (agisce sul segno di _psi_spinor); no-op.")
+    if SYNC_FASE_OROLOGIO:
+        print("[sync-fase-orologio] Kuramoto sul SEGNO di doppia-copertura: eta = dt*forza*sin(media_alpha-alpha), fase globale (nb invariante), O(dt^1)")
     SPIN_FEEDBACK = bool(getattr(a, "spin_feedback", False)) # feedback locale overlap spinoriale: default off
     SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
     CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale
@@ -4511,6 +4538,12 @@ def _cli():
                         "2->379) ma la COERENZA D'ARCO intensiva sum_j w_ij cos(phi_i-phi_j)/sum_j w_ij (indipendente "
                         "dal grado, tetto naturale 1, nessun volume). Tocca SOLO l'orologio spinoriale, non la "
                         "Psi-sorgente di gravita'. Richiede --spinore-corretto. Default off = byte-identico.")
+    p.add_argument("--sync-fase-orologio", action="store_true", dest="sync_fase_orologio",
+                   help="KURAMOTO SUL SEGNO DI DOPPIA-COPERTURA (zero parametri): ordina relazionalmente il foglio "
+                        "+- (alpha_k=arg<canon(nb_k)|psi_k>) tirandolo verso la media di vicinato con torque O(dt^1) "
+                        "eta = dt*forza*sin(media_alpha-alpha), forza dal Kuramoto-phi (K_SYNC, prof_rel, rinforzo_shear). "
+                        "Fase globale su psi -> nb invariante (gravita' intatta), agisce sul SEGNO non su phi. Richiede "
+                        "--spinore-corretto. Default off = byte-identico.")
     p.add_argument("--spin-feedback", action="store_true", dest="spin_feedback",
                    help="FEEDBACK LOCALE SPINORE->ARCHI: la parte immaginaria dell'overlap del lift "
                         "spinoriale aggiunge una coppia antisimmmetrica alle fasi. Richiede "

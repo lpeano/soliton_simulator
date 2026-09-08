@@ -134,3 +134,49 @@ intensive che convergono a N→∞ = costanti candidate. Programma lungo, separa
 - Comandi pilota (riproducibili): `--batch --nmasse 2 --sep 6 --seed 1 --passi 800 --ogni 100 --db-ogni 400
   --spinore-vivo --spinore-corretto --sync {--spin-feedback | --chi-da-spinore} [--deparam-orologio]`.
 - Commit chiave: `86989a4` (§41), `d77c09b` (§42), + questo.
+
+---
+
+## 9. §44 — IMPLEMENTATO `--sync-fase-orologio` (la via genuina) + SIGILLI
+
+Design approvato al gate (guardiano VIA LIBERA su (i)-(iv)). **Implementato** dietro flag `--sync-fase-orologio`
+(default OFF = byte-identico). È la carta finale genuina: Kuramoto sul SEGNO di doppia-copertura.
+
+**Cosa fa (codice):** in `_passo_spinoriale`, ramo `SPINORE_CORRETTO`, dopo il `_phc` de-param:
+```
+alpha_k = arg<canon(nb_k)|psi_k>            # segno di doppia-copertura (snapshot t-1)
+z_k = e^{i alpha_k};  Z_k = (wI @ z)/uno    # media di vicinato pesata (snapshot t-1)
+eta_k = forza_sync * sin(angle(Z)-angle(z)) * dt   # Kuramoto O(dt^1), forza dal Kuramoto-phi
+psi_k -> e^{i eta_k} psi_k                  # FASE GLOBALE -> nb invariante, agisce solo sul SEGNO
+```
+Zero parametri (riusa `forza`/`wI`/`uno`/`K_SYNC`). Plumbing: `_forza_sync/_wI_sync/_uno_sync` ora salvati
+anche `if SYNC_FASE_OROLOGIO`. Guard: richiede `--spinore-corretto` (senno' avviso/no-op).
+
+**SIGILLI (dati in csv/_seal_sfo, probe rigenerabili):**
+| sigillo | esito | come |
+|---|---|---|
+| 1 — OFF byte-identico | ✅ PASSATO | OLD (HEAD) vs NEW-off: tutti gli array `max\|A−B\|=0`, N=2111 |
+| 3 — unitarietà | ✅ PASSATO | `\|ψ\|=1` (3.3e-16), len==n |
+| 2 — gravità (nb O(dt²)) | ✅ PASSATO | a 1 passo `Δnb ≈ 0.57·Δψ²` (2° ordine); Δψ=2.7e-4 → Δnb=4.15e-8. Il torque NON tilta nb al 1° ordine → gravità-safe nel continuo |
+| 5 — sign O(dt¹) | ✅ PASSATO (analitico) | `_eta = forza·sin(Δα)·dt`: dt fattore lineare esplicito, forza/α da snapshot t−1 → O(dt¹) per costruzione (stesso metodo che diagnosticò motore-unico=O(dt²)) |
+| 4 — convergenza-dt | ⏳ da fare | sulle intensive, nella campagna covariante |
+
+**Reperto importante (perché l'empirico non basta):** a 300 passi N diverge (ON=2051 vs OFF=2111). NON è
+gravità: è il **caos** che amplifica QUALSIASI perturbazione (anche il residuo O(dt²)) a O(1) in ~3 passi
+(nb 4e-8→0.375). Stesso meccanismo della de-param (§34, N 2014 vs 1990). Lo scaling-dt empirico a 1 passo è
+**contaminato** da soglie discrete (mitosi/nascita-morte nodi → index-shift): Δψ empirico ~dt⁵, NON l'ordine
+del torque. Per questo il sigillo 5 poggia sull'**analitico** (decisivo, non hand-waving) e il sigillo 4 va
+letto sulle **intensive** (covarianza = la lezione del coarse-graining), non su N/traiettorie.
+
+**DECISIONE (guardiano):** strada (1) **covariante** — NON il refactor (separare α scalare = estetica non
+necessaria, cambierebbe il design da ri-verificare). Il caos decorrela N; le intensive (`segno_arco_coer`,
+`verso_arco_coer`) a N-appaiato salgono comunque se il sync ordina.
+
+**PROSSIMO:** pilota corto go/no-go (`--sync-fase-orologio` ON/OFF, prereqs `--spinore-vivo --spinore-corretto
+--sync --deparam-orologio` fissi, 1 seme, 800 passi) su `segno_arco_coer`+`verso_arco_coer` a N-appaiato; se
+accenna → pieno 3 semi/2000 passi + convergenza-dt (sigillo 4). Lettura (caveat own-canon del guardiano):
+segno E verso insieme = ordinamento vero; solo segno = verificare artefatto own-canon.
+
+**VERDETTO finale atteso:** segno_arco_coer ON≫OFF concorde 3 semi → **spin-½** (il sync relazionale ordina il
+segno). Ancora ~0 → **teorema di assenza ABELIANO pulito** (tre vie fallite: filo §41/42, unico-artefatto §43,
+sync-relazionale §44). Codice: `soliton_simulator.py` (flag `--sync-fase-orologio`, default OFF).
