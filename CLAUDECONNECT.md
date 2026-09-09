@@ -666,3 +666,59 @@ il segno? (b) N + spin_axis_R → il segno ordinato CAMBIA la fisica? B″ è il
 GO del guardiano a B''. Distinzione chiave: DRIVER (cosa il filo legge) != ORDER PARAMETER (cosa misuriamo). Aggiunta diagnostica pure-read su dev-dof (commit 9542f2f, py_compile OK): segno_arco_coer=<sign(Re<canon|psi>)_i*_j> archi (foglio doppia-copertura, RISPONDE all'orologio a differenza di spin_axis_R/berry_* ciechi), verso_arco_coer=<nb_i.nb_j> archi, segno_ov_absmedia. Misura SEGNO e VERSO con lo stesso metodo -> si ordinano INSIEME (un motore) o separati (due)? Covariante per-arco, zero parametri.
 FILO scelto con Luca = --spin-feedback (sua idea: 'segno dentro la memoria hebbiana'; gia' implementato come _feedback_spinoriale_archi = Im<psi_i|psi_j>->coppia, legge nuda zero param). IMPEGNO REGISTRATO: il filo spin-feedback tocca il verso INDIRETTAMENTE (->coppia->phi U(1)->hebbiano->nb) = debole. Se B'' ordina il SEGNO ma NON il VERSO -> NON dire 'abeliano': fare B''-bis con --chi-da-spinore (filo diretto via frame-drag/kick) PRIMA del verdetto. Due fili falliti = abeliano; un filo debole no.
 RIPRESA (da fare): (1) sigillo diaglog-puro byte-identico; (2) run-lampo colonne !=0; (3) script B'' (--spinore-vivo --spinore-corretto --sync --spin-feedback, de-param ON/OFF unica variabile, 2000p/3semi). Dettagli in /memories/repo/deparam_orologio.md par.39.
+
+### §40 — Nota in RISERVA: unificazione del motore (Dirac). NON implementare ora (2026-09-08, idea di Luca)
+DIAGNOSI: lo spinore ha OGGI motori DIVERSI per i due DOF: VERSO (nb) <- omega_new (memoria hebbiana);
+SEGNO <- omega_clk (orologio, coerenza di fase con de-param). Due sorgenti distinte -> verso e segno possono
+ordinarsi separatamente = possibile radice della frustrazione. IDEA (Dirac): in un vero spinore SU(2) il motore
+e' UNO SOLO (massa/energia): ruota l'INTERO spinore, verso e segno emergono INSIEME. LINEA ROSSA: deve emergere
+da un PRINCIPIO, MAI da un termine che forza verso=segno. QUANDO: solo SE i pilota mostrano verso+segno scollegati.
+
+### §41 — Pilota go/no-go spin-feedback: NO-GO (2026-09-08) [NEGATIVO]
+Sigillo diaglog-puro §39 PASSATO (2 run 300p seed1 con/senza --diaglog: tutti gli array fisici max|A-B|=0, N=2011;
+colonne §39 pure-read certificate). Pilota (800p, 1 seme, de-param ON vs OFF, filo --spin-feedback, media dal 25%):
+segno_arco_coer ON+0.00006/OFF+0.00016, verso_arco_coer ON-0.00001/OFF+0.00104 -> ENTRAMBI DENTRO IL RUMORE
+(sd~0.003). segno_ov_absmedia~0.67 (commitment locale al foglio) ma segno_arco_coer~0 (fogli non coerenti fra
+archi) = frustrazione, identica ON/OFF. NON e' 'segno si', verso no'. NO-GO sulla campagna 5h. Cautele: 800p=formazione, 1 seme.
+
+### §42 — Pilota chi-da-spinore: SECONDO FILO FALLITO (2026-09-08) [NEGATIVO]
+Filo DIRETTO --chi-da-spinore (perc_chi=segno doppia-copertura -> frame-drag/chi-core). Stesso disegno §41.
+segno_arco_coer ON+0.00008/OFF-0.00009 (dentro rumore sd~0.0035); verso_arco_coer ~0 entrambi; segno_ov~0.65.
+Anche il filo diretto/forte NON ordina il segno. BILANCIO DUE FILI (spin-feedback indiretto + chi-da-spinore
+diretto) falliti -> ipotesi 'due motori scollegati/abeliano' SALE. Motore-unico (§40) da RISERVA a candidata giustificata.
+
+### §43 — Motore-unico = ARTEFATTO DI RETICOLO (2026-09-08) [DIMOSTRATO, negativo formale]
+La 'carta finale' motore-unico NON e' genuina. ALGEBRA: nb=psi†sigma psi -> psi e' autostato +1 di nb·sigma ->
+exp(-i/2 omega_clk dt nb·sigma)psi = FASE PURA (identica a _phc). Unire a omega_new differisce dallo split solo
+per il commutatore BCH O(dt^2) -> NEL CONTINUO unito==split (il sigillo conv-dt lo rivelerebbe artefatto).
+CORROBORAZIONE: il ramo OFF dei pilota E' gia' la struttura motore-unito; OFF≈ON su segno_arco_coer (§41/§42).
+VIA GENUINA proposta: accoppiamento sui SEGNI dei vicini, O(dt^1), gravita'-safe = --sync-fase-orologio.
+
+### §44 — Implementato --sync-fase-orologio + SIGILLI (2026-09-08) [macchina corretta]
+Kuramoto sul SEGNO di doppia-copertura (via genuina §43). alpha_k=arg<canon(nb_k)|psi_k>; eta=dt*forza*sin(media-alpha);
+psi->e^{i eta}psi (FASE GLOBALE -> nb invariante, agisce solo sul segno). Zero param (riusa forza/wI/uno). Flag default
+OFF byte-identico. SIGILLI: (1) OFF byte-identico PASSATO; (3) unitarieta' PASSATO; (2) gravita'-safe (torque O(dt^2)
+su nb); (5) sign O(dt^1) analitico. Sigillo (4) conv-dt sulle intensive nella campagna.
+
+### §45 — Pilota sync-fase-orologio: NO-GO, TERZA via fallita (2026-09-08) [NEGATIVO]
+Pilota 800p 1 seme ON vs OFF: segno_arco_coer ON+0.00005/OFF-0.00005 (dentro rumore); verso~0; segno_ov~0.66.
+Il sync FA qualcosa (_psi_spinor cambia, sigilli) ma NON ordina relazionalmente (segno_arco_coer piatto ~0). BILANCIO
+TRE VIE tutte ~0 ON=OFF: §41 spin-feedback, §42 chi-da-spinore, §44 sync-fase-orologio (la carta finale abeliana).
+-> IPOTESI ABELIANA SALE FORTE. §45-bis: variante antiferromagnetica anche smentita.
+
+### §46 — Implementato --kuramoto-su2 (via NON-ABELIANA) — l'ULTIMA carta (2026-09-08)
+Kuramoto SU(2) NON-ABELIANO: ruota lo SPINORE INTERO verso la media SU(2) dei vicini, rotazione geodetica attorno
+all'asse VARIABILE nb x nb_bar (non commuta -> non-abeliano genuino). Il torque allinea il VERSO (nb->nb_bar); il
+SEGNO segue per OLONOMIA (fase geometrica), NON targettizzato (targettizzare=abeliano gia' fallito). nb SI muove
+(gravita' fisica, voluto). O(dt^1), zero param. Flag --kuramoto-su2 default OFF. Colonna diaglog spin_overlap_arco
+= <|<psi_i|psi_j>|^2> (coerenza SU(2) PIENA, pure-read). Se olonomia ordina -> spin 1/2; se no -> teorema di assenza.
+
+### §46-bis — SIGILLI --kuramoto-su2 FATTI: 1+2 PASSATI, pilota in corso (2026-09-09)
+Ripresa mattutina. OLD (pre-kuramoto) = ff2982e. 3 run 300p seed1 (pre=--spinore-vivo --spinore-corretto --sync
+--deparam-orologio): OLD, NEW-off, NEW-on --kuramoto-su2. SIGILLO 1 (OFF byte-identico OLD vs NEW-off): max|A-B|=0
+su 28 array (complessi confrontati col MODULO). PASSATO. SIGILLO 2 (unitarieta' NEW-on): |psi|=1 (3.3e-16), len==n=1856.
+PASSATO. SIGILLO 3 (primo ordine) analitico O(dt^1); SIGILLO 4 (conv-dt) nella campagna covariante. PRELIM a 300p
+(formazione, 1 seme, NON verdetto): spin_overlap_arco ON=0.5000 OFF=0.5000 (spinori scorrelati sugli archi),
+segno_arco_coer ON-0.0006 (dentro rumore sd~0.003), verso~0, spin_axis_R 0.041 entrambi -> nessun accenno precoce.
+Evidenza committata+pushata su dev-dof (6a3864a, csv/_seal_k2/_verifica.py). IN CORSO: pilota go/no-go 800p seed1
+ON vs OFF (csv/deparam_pilota_k2/). Se accenna -> 3 semi/2000 + conv-dt covariante; se ~0 -> ABELIANO definitivo.

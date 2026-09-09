@@ -1,7 +1,31 @@
 # CHECKPOINT — Sistema dei Solitoni Relazionali (VQT / U2)
 
-_Ultimo aggiornamento: 2026-09-07. Progetto di Luca Peano ("Il Muratore di Planck")._
+_Ultimo aggiornamento: 2026-09-09. Progetto di Luca Peano ("Il Muratore di Planck")._
 _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md per le norme di conduzione._
+
+---
+
+## PUNTO DI INTERRUZIONE — 2026-09-09 (ripresa rapida)
+
+**Filone `dev-dof` — ordinamento del SEGNO di doppia-copertura (spin 1/2?).** Cronologia delle vie tentate
+(dettaglio in CLAUDECONNECT §40–46-bis e `/memories/repo/deparam_orologio.md`):
+- **§41 `--spin-feedback`** (filo indiretto) → **NO-GO** (segno_arco_coer ~0, ON=OFF).
+- **§42 `--chi-da-spinore`** (filo diretto) → **NO-GO** (secondo filo fallito).
+- **§43 motore-unico** → **DIMOSTRATO artefatto di reticolo** (BCH O(dt²), unito==split nel continuo).
+- **§44 `--sync-fase-orologio`** (Kuramoto abeliano sul segno, O(dt¹) genuino) implementato + sigilli → **§45 NO-GO**.
+- **§45-bis antiferromagnetico** → smentito. → **Tre vie abeliane fallite: ipotesi ABELIANA forte.**
+- **§46 `--kuramoto-su2`** (via NON-ABELIANA, l'ULTIMA carta): rotazione SU(2) piena dello spinore verso la
+  media dei vicini, asse variabile `nb×nb_bar`; il verso si allinea, il SEGNO segue per **OLONOMIA** (non
+  targettizzato). Se ordina → spin 1/2; se no → **teorema di assenza / abeliano definitivo**.
+
+**FATTO oggi (§46-bis):** sigilli `--kuramoto-su2` → **SIGILLO 1** (OFF byte-identico OLD=`ff2982e` vs NEW-off)
+**PASSATO** (max|A-B|=0 su 28 array); **SIGILLO 2** (unitarietà) **PASSATO** (|psi|=1, len==n); sigillo 3
+(primo ordine) analitico O(dt¹); sigillo 4 (conv-dt) nella campagna. Prelim a 300 passi (formazione, non
+verdetto): `spin_overlap_arco`~0.5 ON=OFF, nessun accenno. Evidenza su `dev-dof` (`6a3864a`).
+
+**IN CORSO:** pilota go/no-go 800 passi, seed 1, ON vs OFF (`csv/deparam_pilota_k2/`). Guardare
+`spin_overlap_arco` (SU(2) pieno) + segno e verso separati: se salgono insieme → candidato spin 1/2 → campagna
+3 semi/2000 + conv-dt covariante; se ~0 → **ABELIANO definitivo** (negativo che vale quanto un positivo).
 
 ---
 
