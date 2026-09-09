@@ -2304,7 +2304,7 @@ class Rete:
             twn = np.zeros(self.n)
             np.add.at(twn, i, twabs); np.add.at(twn, j, twabs)
             twn = twn / np.maximum(self._deg, 1)          
-            soglia = PHI_CRIT   # soglia = QUANTO di olonomia (2pi), locale: +1 solo dove il giro e' completato. NON la mediana globale (imponeva 50/50)
+            soglia = np.median(twn) if self.n else 0.0
             self.perc_chi[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_chi.dtype)
 
         # --- FLAG 3 (--chi-da-spinore): perc_chi dal SEGNO di doppia-copertura del primario, DOPO

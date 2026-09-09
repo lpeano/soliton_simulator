@@ -98,6 +98,66 @@ con espansione ×2.71 **nemmeno il verso** si ordina sugli archi (il disordine d
 
 ---
 
+## 5. AGGIORNAMENTO (stessa giornata) — I TRE FRENI A MANO + fix `CHI_BASC` [DIMOSTRATO]
+
+Dopo il NO-GO del pilota `--kuramoto-su2`, l'intuizione di Luca ("il test ha tutti gli agganci?") ha
+innescato una catena di verifiche. Il pilota girava **col freno a mano — anzi, triplo**:
+
+1. **Flag spenti**: il pilota kuramoto-su2 girava con `CHI_BASC=OFF` e `OLON_PART=OFF` — i due meccanismi
+   che organizzano/sbloccano l'olonomia (rompono il bilanciamento 50/50 dei ±π).
+2. **`CHI_BASC` ROTTO** (test-GRATIS sui dati reali `db_ond.pkl`): il codice (riga ~2308) usava
+   `soglia = np.median(twn)` — **MEDIANA GLOBALE** — mentre il commento dichiara "soglia = 2π (PHI_CRIT)".
+   **Il commento mente.** Conseguenze verificate sui dati: la mediana dà `perc_chi=+1` al **50.0%** dei nodi
+   (per costruzione ~metà sopra/metà sotto) → **IMPONE** il 50/50 che `CHI_BASC` dovrebbe *rompere*. Tre
+   violazioni: (a) commento mente; (b) la mediana è il freno a mano DENTRO lo sblocco; (c) viola "la media
+   non va qui" (mediana globale in decisione locale). Distribuzione `twn`: min 0.02, median 2.88, max 7.85,
+   2π=6.28 → con soglia 2π solo **0.9%** maturi (17 nodi su 1856).
+3. **`OLON_PART` inerte senza `--viriale`**: annidato in `if VIRIALE:` (righe 3004–3011). Senza viriale non
+   fa nulla → il braccio B come da prompt sarebbe stato un altro test viziato (misura zero).
+
+### FIX di legge (non trucco): `CHI_BASC` soglia `median(twn)` → `PHI_CRIT`
+- Backup datato `soliton_simulator.backup_2026-09-09_chibasc-2pi.py`. Diff = **1 riga** (riga ~2308),
+  isolata dentro `if CHI_BASC:`. Allinea il codice alla legge già scritta nel commento (soglia = quanto 2π,
+  locale per-nodo, zero parametri). NON è un target ("finché il segno si ordina") ma un allineamento-alla-legge.
+- **SIGILLO OFF byte-identico PASSATO**: backup vs fix (senza `--chi-basc`), `max|A-B|=0` su 28 array →
+  non-regressione intatta (il fix vive solo nel ramo ON).
+- **Run-lampo (100 passi, `--chi-basc`)**: `perc_chi=+1` all'**1.3%** (98.7% a −1, mean −0.974) → il flag ORA
+  rompe il 50/50 (legge vera). [confermato che il flag fa ciò che deve, prima di leggere i risultati]
+
+### Disegno del test (concordato con Luca) — attribuzione pulita
+`VIRIALE` = conversione viriale: converte spinta **radiale → tangenziale/orbitale** (in base alla circolazione
+del twist), imparentata col frame-dragging; zero param, normalizza per 2π. `OLON_PART` vive dentro: fa entrare
+l'**olonomia locale** (`twn_a`) nella conversione tangenziale → inerte senza VIRIALE.
+
+| Braccio | Flag oltre base+kuramoto-su2 | Confronto |
+|---|---|---|
+| baseline | (nessuno) = `csv/deparam_pilota_k2/on.csv` | — |
+| **A** | `--chi-basc` (fixato 2π) | vs baseline |
+| **V** | `--viriale` (controllo) | vs baseline |
+| **B** | `--viriale --olon-part` | vs **V** (isola OLON_PART) |
+| **C** | `--chi-basc --viriale --olon-part` | vs V e vs A |
+
+### STATO (a fine sessione)
+- **Braccio A in corso** (800 passi, seed 1). **Leggere su DUE assi** (indicazione di Luca): `berry_spin_media`
+  (l'olonomia netta acquista un verso? = sbilanciamento) **E** `spin_overlap_arco`/`segno_arco_coer` (c'è
+  ordine LOCALE fra vicini?). **Rompere il 50/50 (0.9% +1) è metà; creare coerenza locale è l'altra metà.**
+  Cautela: 0.9% +1 è un estremo (quasi-tutto −1) → potrebbe sbilanciare senza ordinare localmente.
+- Poi V, B (vs V), C.
+- **Questione profonda aperta**: orologio, `CHI_BASC`, `VIRIALE` sono TUTTI tarati su **2π**. Se i tre freni
+  tolti non bastano a ordinare il segno localmente → il muro è il **quanto 2π (abeliano)** del sistema, e lì
+  serve il trace / ripensamento della soglia, non un altro flag.
+
+### Riproducibilità / doppio-check per Claude
+- Fix: 1 riga, `git diff soliton_simulator.py`. Backup = `soliton_simulator.backup_2026-09-09_chibasc-2pi.py`.
+- Test-GRATIS soglia: rigira lo snippet su `csv/_seal_k2/db_ond.pkl` (median vs 2π sulla torsione `twn`).
+- Sigillo OFF: `csv/_seal_chibasc/{bkoff,newoff,cond_*}.csv` (+ i DB `.pkl` esclusi ma rigenerabili seed 1);
+  confronto attrs backup vs fix. Run-lampo: `csv/_seal_chibasc/lampo.csv` + `db_lampo.pkl`.
+- **DA VERIFICARE (Claude)**: che il fix sia SOLO allineamento-alla-legge (soglia 2π = PHI_CRIT, locale,
+  zero param), non un target; che il sigillo OFF sia davvero byte-identico; che la lettura dei bracci usi
+  entrambi gli assi (berry = sbilanciamento, overlap/segno = ordine locale) a N appaiato.
+
+---
+
 ## 5. DOPPIO CHECK richiesto a Claude (rivedi il CODICE del test, non fidarti dei numeri)
 
 Un sigillo/confronto vale quanto lo script che lo calcola. Ti chiedo esplicitamente di **rileggere e
