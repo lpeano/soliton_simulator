@@ -113,6 +113,18 @@
   coppie 0→409, no blow-up). Backup `soliton_simulator.backup_2026-09-09_fase3.py`. **NON è ancora il
   VERDETTO**: serve il confronto covariante ON vs OFF, N-appaiato, 2-3 seed su run ≥2000 passi
   (segno_arco_coer diventa ATTRATTORE vs §48 dove decadeva? berry_firmata sale?) → hardware di Luca.
+  **CAMPAGNA COVARIANTE LANCIATA** (branch `dev-spinoriale`, notturna): timing misurato = 300p ON
+  completo in **614,5 s** (nmasse 2, sep 6; costo/passo cresce con N → NON lineare). Script
+  `run_covariante_fase3.ps1`: **6 run in parallelo** (ON/OFF × seed 1,2,3), **10000 passi**, isola
+  ESATTAMENTE `--campo-spinoriale` (OFF = spinore vivo + campo scalare U(1); ON = OFF + forze overlap
+  spinoriale). Dominati da ops sparse → `*_NUM_THREADS=1` per processo, 1 core fisico ciascuno (6 core).
+  Checkpoint DB ogni 1000 passi (`db/fase3_cov/`, gitignorati) + diaglog ogni 50 passi
+  (`csv/fase3_cov/diag_*`), log in `log/fase3_cov/`. **Verdetto** = `csv/fase3_cov/_verdetto_fase3.py`:
+  appaia per N (bin), confronta ON vs OFF su segno_arco_coer / spin_overlap_arco / verso_arco_coer /
+  berry_spin_media(_assoluta) / coer_01. DOMANDA: in ON segno_arco_coer resta alto a N appaiato
+  (ordine = ATTRATTORE → ribalta §48, non-abeliano EMERGE) o ~0 come OFF (abeliano più profondo,
+  risultato onesto)? **PER CLAUDE**: i CSV/log si committano a fine run (prossima sessione); ora sono
+  versionati solo lo script di lancio e quello di verdetto. Rilancia con `run_covariante_fase3.ps1`.
   Mitosi/coppie restano scalari (Fase 4).
 - **`dev-dof`** (`5a4e754`): tracing per-passo §48 + **conferma 2 semi** del meccanismo
   repulsore. Pushato. **Capitolo CHIUSO**: core abeliano con meccanismo.
