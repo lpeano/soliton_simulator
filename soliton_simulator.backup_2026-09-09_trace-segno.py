@@ -4585,13 +4585,6 @@ def _cli():
                         "(non commuta -> non-abeliano). Verso+segno ruotano INSIEME (il segno emerge per OLONOMIA). "
                         "Torque O(dt^1), forza dal Kuramoto-phi. nb SI muove (gravita' fisica, non 6.7e-16). Richiede "
                         "--spinore-corretto (+ --deparam-orologio sopra soglia). Default off = byte-identico.")
-    p.add_argument("--trace-segno", action="store_true", dest="trace_segno",
-                   help="TRACING per-passo del SEGNO di doppia-copertura (SOLO OSSERVAZIONE, pure-read, zero mutazioni): "
-                        "dump per-passo di s_k=Re<canon(nb)|psi>, archi sign_i*sign_j, torque |media SU(2) vicini|, "
-                        "twist, correlazioni sign-twn/geometria, eventi nati/coppie. Per capire perche' i segni si "
-                        "cancellano (berry assoluta forte, firmata zero). Non tocca la fisica. Default off.")
-    p.add_argument("--trace-out", dest="trace_out", default=None,
-                   help="percorso del dump di --trace-segno (default: <diaglog>.trace.csv).")
     p.add_argument("--spin-feedback", action="store_true", dest="spin_feedback",
                    help="FEEDBACK LOCALE SPINORE->ARCHI: la parte immaginaria dell'overlap del lift "
                         "spinoriale aggiunge una coppia antisimmmetrica alle fasi. Richiede "
@@ -5544,16 +5537,6 @@ def batch_condensazione(a):
         if _resume:
             _diag_header = "GIA_SCRITTO"   # marca: non riscrivere l'header in append
         print(f"[batch] LOG DIAGNOSTICO COMPLETO {'(APPEND, resume)' if _resume else ''} -> {diag_path}")
-    # TRACING SEGNO (--trace-segno): dump per-passo pure-read (zero mutazioni) per capire la cancellazione.
-    trace_path = getattr(a, "trace_out", None) or ((diag_path + ".trace.csv") if diag_path else None)
-    trace_f = None
-    if bool(getattr(a, "trace_segno", False)) and trace_path:
-        _os.makedirs(_os.path.dirname(trace_path) or ".", exist_ok=True)
-        trace_f = open(trace_path, "w")
-        trace_f.write("step,n,nati,coppie,s_abs_mean,frac_s_pos,archi_concordi,segno_arco,"
-                      "torque,twn_su2pi,frac_twn_gt2pi,corr_sign_twn,corr_sign_nbz,s_firmata_mean\n")
-        trace_f.flush()
-        print(f"[trace-segno] dump per-passo (pure-read) -> {trace_path}")
     # RESUME CORRETTO: se ripreso dal DB a _db_step0, fai solo i passi RIMANENTI per arrivare al
     # totale 'passi' (non altri 'passi' interi), e numera il diaglog in CONTINUO (_db_step0 + step).
     _rimanenti = max(0, passi - _db_step0)
@@ -5601,29 +5584,6 @@ def batch_condensazione(a):
                     diag_f.write(",".join(_diag_header) + "\n")
             diag_f.write(",".join(str(d.get(c, '')) for c in _diag_header) + "\n")
             diag_f.flush()   # flush a ogni step: se il run si blocca, il log fino al blocco e' salvo
-        if trace_f is not None:
-            # TRACING SEGNO: SOLO LETTURA (getattr + numpy, nessuna funzione mutante) -> non tocca la fisica.
-            _tn = net.n
-            _tpsi = np.asarray(getattr(net, '_psi_spinor', np.zeros((_tn, 2), complex)))[:_tn]
-            _tnb = np.asarray(getattr(net, '_nb', np.zeros((_tn, 3))))[:_tn]
-            _ti = net.i; _tj = net.j; _ttw = np.asarray(net.tw); _tdeg = np.asarray(net._deg)[:_tn]
-            if len(_tpsi) >= _tn and len(_tnb) >= _tn and _tn > 0 and len(_ti):
-                _tmk = (_ti < _tn) & (_tj < _tn); _tii = _ti[_tmk]; _tjj = _tj[_tmk]
-                _tcanon = net._bloch_a_spinore(_tnb)
-                _ts = np.real(np.sum(np.conj(_tcanon) * _tpsi, axis=1))
-                _tsg = np.sign(_ts); _tprod = _tsg[_tii] * _tsg[_tjj]
-                _ttwn = np.zeros(_tn); np.add.at(_ttwn, _ti, np.abs(_ttw)); np.add.at(_ttwn, _tj, np.abs(_ttw))
-                _ttwn = _ttwn / np.maximum(_tdeg, 1)
-                _tacc = np.zeros((_tn, 2), complex); np.add.at(_tacc, _tii, _tpsi[_tjj]); np.add.at(_tacc, _tjj, _tpsi[_tii])
-                _ttorq = np.linalg.norm(_tacc, axis=1) / np.maximum(_tdeg, 1)
-                def _tcc(x, y):
-                    x = x - x.mean(); y = y - y.mean(); dn = np.sqrt((x * x).sum() * (y * y).sum())
-                    return float((x * y).sum() / dn) if dn > 0 else 0.0
-                _trow = [_step_glob, _tn, int(getattr(net, 'nati', 0)), int(getattr(net, 'coppie_nate', 0)),
-                         float(np.mean(np.abs(_ts))), float(np.mean(_tsg > 0)), float(np.mean(_tprod > 0)),
-                         float(np.mean(_tprod)), float(np.mean(_ttorq)), float(np.mean(_ttwn) / (2 * np.pi)),
-                         float(np.mean(_ttwn > 2 * np.pi)), _tcc(_tsg, _ttwn), _tcc(_tsg, _tnb[:, 2]), float(np.mean(_ts))]
-                trace_f.write(",".join(str(x) for x in _trow) + "\n"); trace_f.flush()
         if step % ogni == 0:
             # MISURA SOLA-LETTURA: la condensazione ricalcola psi e chiama misure per diagnostica;
             # snapshot/restore dei cache di CONTINUITA' che la DINAMICA legge (stesso set del diaglog),

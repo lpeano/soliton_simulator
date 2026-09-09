@@ -170,6 +170,48 @@ l'**olonomia locale** (`twn_a`) nella conversione tangenziale → inerte senza V
 
 ---
 
+## 6. TRACING PER-PASSO — perché i segni si cancellano: DECADIMENTO da instabilità dinamica [reperto chiave]
+
+Prima del bivio, tracing deterministico per CAPIRE (non testare) il meccanismo. Due passi:
+
+### 6.1 Test-GRATIS snapshot (`csv/deparam_bracci/_trace_segno_snapshot.py`, su `db_on.pkl`)
+Sullo stato finale (N=2231): `|s_k|`=0.63 (segno DEFINITO), archi `sign_i·sign_j` **49.9/50.1** (cancellazione),
+torque `|media SU(2) vicini|`=0.45 (NON nullo), `corr(sign,twn)`≈0, `corr(sign,nb_z)`≈0. Snapshot → sembrava (d)
+"segno geometricamente random". **Ma lo snapshot è un istante — non vede l'origine.**
+
+### 6.2 Tracing per-passo (flag `--trace-segno`, pure-read, SIGILLO OFF byte-identico PASSATO max|A-B|=0)
+Aggiunto flag `--trace-segno` (dump per-passo di s_k, archi, torque, twist, correlazioni, nati/coppie; zero
+mutazioni; backup `soliton_simulator.backup_2026-09-09_trace-segno.py`). Run 50 passi deterministico
+(prereq baseline, NO chi-basc). Dump: `csv/deparam_bracci/trace_segno.csv`.
+
+**Traiettoria (il reperto):**
+| step | frac+ | segno_arco | s_firmata | torque | nati |
+|---|---|---|---|---|---|
+| 1–3 | 0.95 | **0.996** | 0.90 | 0.93 | **0** |
+| 5 | 0.74 | 0.497 | 0.48 | 0.52 | 0 |
+| 7 | 0.68 | 0.340 | 0.35 | 0.37 | **0** |
+| 11 | 0.49 | **0.000** | −0.02 | 0.16 | 106 |
+| 50 | 0.48 | 0.002 | −0.03 | 0.34 | 704 |
+
+**IL SEGNO NASCE ORDINATO (semina fase=0, segno_arco 0.996) E DECADE a 0.000 in ~10 passi.**
+- **(a) coppie → ESCLUSA**: il grosso del crollo (0.996→0.34) è a `nati=0` (step 1–7); le nascite iniziano dopo.
+- **(b) twist non accumula → NO**: il segno è definito, l'ordine c'è e svanisce.
+- **(d) random dall'origine → SMENTITA**: nasce ordinato, *diventa* random. (Lo snapshot ingannava.)
+- **(c) torque ~0 → SÌ ma DINAMICO**: il torque non è nullo a priori (0.93!), **collassa** a 0.15 mentre i vicini si scorrelano.
+
+**MECCANISMO (deterministico): lo stato a segno ordinato è un REPULSORE, non un attrattore.** Feedback
+auto-distruttivo: appena il segno si disordina, la media SU(2) dei vicini si cancella → torque kuramoto cala →
+non riallinea → il disordine si amplifica → plateau a `segno_arco=0` (lo scorrelato è l'attrattore, confermato
+dagli 800 passi di tutti i bracci/semi). "berry assoluta forte, firmata zero" = `|s|` resta alto mentre il
+VERSO del segno si randomizza per rilassamento.
+
+**Implicazione per il bivio**: il core non è solo abeliano — **il sistema relassa attivamente *via* dall'ordine
+del segno**, e il torque non-abeliano si auto-indebolisce. Lo spin ½ richiederebbe un termine che renda l'ordine
+un **attrattore** = **costruire**, non scoprire. Cautele: 50 passi/1 seed deterministico; meccanismo netto e
+leggibile (test di comprensibilità PASSATO); plateau a 0 robusto su tutti i bracci/semi.
+
+**Riproducibilità Claude**: `_trace_segno_snapshot.py` (snapshot), flag `--trace-segno` + `trace_segno.csv`
+(traiettoria). Sigillo OFF: `db_bktr.pkl` vs `db_newtr.pkl` (backup vs new, flag off) → max|A-B|=0. .pkl esclusi.
 ## 5. DOPPIO CHECK richiesto a Claude (rivedi il CODICE del test, non fidarti dei numeri)
 
 Un sigillo/confronto vale quanto lo script che lo calcola. Ti chiedo esplicitamente di **rileggere e
