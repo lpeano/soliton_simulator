@@ -95,3 +95,34 @@ con espansione ×2.71 **nemmeno il verso** si ordina sugli archi (il disordine d
 - Dati pilota: `csv/deparam_pilota_k2/{on,off,cond_on,cond_off}.csv` + `_valuta_on.py` + `_confronta.py`.
   I `.pkl` esclusi (gitignore).
 - Doc canonica su `main` (`CLAUDECONNECT.md` §40–§46-bis, `Checkpoint.md`) allineata (commit `40c7dc8`).
+
+---
+
+## 5. DOPPIO CHECK richiesto a Claude (rivedi il CODICE del test, non fidarti dei numeri)
+
+Un sigillo/confronto vale quanto lo script che lo calcola. Ti chiedo esplicitamente di **rileggere e
+criticare** i tre script del test (committati e pushati su `origin/dev-dof`), prima di dare per buono il
+verdetto NO-GO. Cerca bug, bias e assunzioni nascoste — sono io stesso ad averli scritti in questa sessione.
+
+**Script da revisionare (percorsi esatti):**
+1. `csv/_seal_k2/_verifica.py` (commit `6a3864a`) — SIGILLI 1 (OFF byte-identico OLD vs NEW-off) e 2
+   (unitarietà). **Punti da controllare:** (a) gli array complessi sono confrontati col **modulo**
+   `np.abs(a-b)` — corretto per il byte-identico (se `a==b` → 0), ma verifica che non nasconda differenze
+   di fase; (b) le chiavi presenti "solo in OLD" o "solo in NEW-off" sono **stampate ma NON fanno fallire**
+   il sigillo — è giusto? (sono cache diagnostiche, ma controlla); (c) `n` è dedotto da `len(phi)` perché è
+   una `@property` non serializzata — verifica che `phi` sia effettivamente per-nodo.
+2. `csv/deparam_pilota_k2/_valuta_on.py` (commit `b729fe8`) — evoluzione temporale + correlazioni del solo ON.
+   **Punti da controllare:** (a) possibile **bias own-canon**: `segno = sign(Re⟨canon(nb)|ψ⟩)` usa `_bloch_a_spinore(nb)`
+   come canone, che dipende da `nb` stesso → il segno potrebbe essere parzialmente auto-referenziale; (b)
+   `corr(verso, overlap) = +1.000` è **sospettosamente perfetto** — è una tautologia (`spin_overlap_arco` è
+   dominato dal verso by construction) o un vero segnale? va capito.
+3. `csv/deparam_pilota_k2/_confronta.py` (commit `b729fe8`) — confronto covariante ON vs OFF **a N appaiato**
+   via interpolazione su griglia di N. **Punti da controllare:** (a) `N` non è perfettamente monotono (la
+   mitosi lo fa oscillare) → `argsort(N)+np.interp` può introdurre artefatti; valuta se serve un binning
+   robusto invece dell'interpolazione; (b) il test di significatività `|media| > 2·sd` sulla finestra tardiva
+   è **grezzo** (nessun n_eff, nessuna correzione per autocorrelazione temporale) — va bene per un pilota ma
+   NON per il verdetto a 2000/3 semi; (c) la finestra "tardiva" = ultimo terzo del **range di N comune**, non
+   dello step: conferma che sia la scelta covariante giusta.
+
+**Se trovi un errore che cambia il segno del risultato → il NO-GO va rifatto.** Se gli script reggono, il
+NO-GO del pilota è solido come pilota (ma resta 800p/1 seme → conferma 3 semi/2000 comunque necessaria).
