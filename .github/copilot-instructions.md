@@ -85,3 +85,18 @@ gestita **in modo covariante**, altrimenti misuri l'espansione, non la fisica (i
 - **Committa e commenta a ogni step.** Messaggi in italiano, descrittivi.
 - Aggiungi solo i file pertinenti; escludi binari enormi (`.pkl`) salvo richiesta esplicita.
 - **Push solo su richiesta esplicita** di Luca.
+
+## Allineamento e riproducibilità (SEMPRE, per il doppio-check indipendente)
+- **Committa TUTTI i dati del test, non solo il verdetto.** Le evidenze grezze (CSV diaglog/condensazione) E
+  gli script di analisi (`_verifica.py`, `_valuta*.py`, `_confronta.py`) vanno versionati, così il prossimo
+  agente (Claude) può rifare il doppio-check SENZA rilanciare. Non lasciare untracked le evidenze su cui poggia
+  un verdetto etichettandole "rigenerabili".
+- **Nel messaggio di commit di' ESPLICITAMENTE a Claude cosa sono i file e cosa verificare:** quale run è quale
+  (es. OLD=pre-flag, OFF=flag off, ON=flag on), su quali dati gira lo script di analisi, e i punti sospetti della
+  logica da ricontrollare. Un sigillo vale quanto il codice che lo verifica → serve revisione indipendente.
+- **Escludi solo il davvero-rigenerabile, e indica SEMPRE nel commit COME rigenerarlo** (es. `_old_sim.py` =
+  `git show <commit>:soliton_simulator.py`; `.pkl` = DB deterministici da seed). Mai escludere le evidenze di un verdetto.
+- **Allinea la doc canonica su `main` a valle di OGNI step/verdetto** (worktree `../st_main`): il tracing
+  (`CLAUDECONNECT.md`, `Checkpoint.md`, `CLAUDE.md`) deve riflettere l'esito PRIMA di chiudere il task.
+- **Verifica che il push sia andato davvero:** `git status -sb` deve mostrare il branch allineato con `origin`
+  (e `git ls-files`/`git status --short` sulle cartelle dei dati). Non fermarti al commit locale.
