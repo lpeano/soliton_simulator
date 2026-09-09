@@ -1519,7 +1519,7 @@ class Rete:
             return np.full(self.n, LAM)
         if not hasattr(self, "psi") or len(self.psi) < self.n:
             return np.full(self.n, LAM)
-        rho = self._rho_sorgente()   # [FASE 2] |psi|^2 (off) o rho_spin = norma del campo emesso (CAMPO_SPINORIALE on)
+        rho = np.abs(self.psi[:self.n])**2
         # massa_critica_adattiva usa i pesi correnti e quindi richiama lambda_nodi.
         # Nel ramo ricorsivo si usa LAM: il crossover resta dinamico senza loop infinito.
         if getattr(self, "_calcolo_schermatura", False):
@@ -1934,39 +1934,6 @@ class Rete:
         return self.psi
 
     def intensita(self): return np.abs(self.psi) ** 2
-
-    def _rho_sorgente(self):
-        """[FASE 2 dev-spinoriale] densita' SORGENTE della fisica: |psi|^2 scalare (CAMPO_SPINORIALE off)
-        oppure rho_spin = psi_spin^dag psi_spin (ON), la norma del campo EMESSO dallo spinore. Nel limite
-        (spinori in fase) rho_spin == |psi|^2 (riduzione esatta)."""
-        n = self.n
-        if CAMPO_SPINORIALE:
-            _rs = getattr(self, "rho_spin", None)
-            if _rs is not None and len(_rs) >= n:
-                return np.asarray(_rs)[:n]
-        return np.abs(self.psi[:n]) ** 2
-
-    def _nb_grav(self):
-        """[FASE 2 dev-spinoriale] direzione di Bloch per la GRAVITA': self._nb (off) oppure NATIVA dal campo
-        EMESSO psi_spin (ON): nb = psi_spin^dag sigma psi_spin / (psi_spin^dag psi_spin). Il campo emesso porta
-        la direzione. Nel limite (spinori in fase asse 0) nb -> [0,0,1] == Bloch del vecchio (riduzione esatta)."""
-        n = self.n
-        if CAMPO_SPINORIALE:
-            _ps = getattr(self, "psi_spin", None)
-            if _ps is not None and len(_ps) >= n:
-                _ps = np.asarray(_ps)[:n]
-                _a = _ps[:, 0]; _b = _ps[:, 1]
-                _nbn = np.stack([2.0 * np.real(np.conj(_a) * _b), 2.0 * np.imag(np.conj(_a) * _b),
-                                 np.abs(_a) ** 2 - np.abs(_b) ** 2], axis=1)
-                # norma di Bloch |psi^dag sigma psi| = psi^dag psi = rho_spin (identita'). Normalizzo per rho_spin
-                # con floor MINUSCOLO (solo anti 0/0): dove il campo e' ~0 (vuoto) la direzione e' indefinita -> [0,0,1].
-                _rs = np.abs(_a) ** 2 + np.abs(_b) ** 2
-                _nbn = _nbn / np.maximum(_rs, 1e-30)[:, None]
-                _def = _rs <= 1e-20
-                if _def.any():
-                    _nbn[_def] = np.array([0.0, 0.0, 1.0])
-                return _nbn
-        return self._nb
 
     @staticmethod
     def satura(f):
@@ -3042,8 +3009,7 @@ class Rete:
                     self._nb = np.stack([np.sin(b0), np.zeros(self.n), np.cos(b0)], axis=1)
             grav = -np.tanh(s) * ampiezza                 # bifase: -s = verso (attrae/respinge), firmato
             if SPINORE and self._nb is not None and len(self._nb) >= self.n:
-                _nbg = self._nb_grav()                     # [FASE 2] _nb (off) o direzione NATIVA dal campo emesso (on)
-                prod_interno = np.sum(_nbg[ii] * _nbg[jj], axis=1)
+                prod_interno = np.sum(self._nb[ii] * self._nb[jj], axis=1)
                 proiez = prod_interno * np.sign(dpozzo)
                 grav = grav * proiez
             
