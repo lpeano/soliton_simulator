@@ -61,11 +61,37 @@
 - **Test finale (la visione)**: la densità (materia) segue i segni concordi? Se sì →
   spin ½ nativo, non aggiunto.
 
-## 4. Stato repo (branch-specifico)
+## 3-bis. Sigilli OBBLIGATORI (fissati dalla fondazione, in `doc/REFACTORING_SPINORIALE.md`)
 
-- **`dev-spinoriale`**: fondazione documentale committata (3 doc sotto `doc/`). NIENTE codice.
-- **`dev-dof`**: commit `97c4586` (tracing per-passo §48) — verifica se pushato.
-- **`main`**: doc canonica fino a §46-ter; §47 (fix chi-basc/tre freni) + §48 (tracing) da
-  allineare a valle (vivono in memoria repo + relazione su `dev-dof`).
-- **REGOLA d'ora in poi**: ogni relazione/commit dichiara il branch. `dev-dof` (spin-½ sul
-  vecchio, chiuso: abeliano) ≠ `dev-spinoriale` (rifondazione, in corso).
+- **S1 — Causalità (ETC rigoroso)**: nel nuovo sistema il loop emitter-campo è PIÙ stretto
+  (il campo Ψ *è* fatto degli spinori). Campo da snapshot t−1, commit atomico, sigillo
+  **no-loop-istantaneo** (Jacobi non Gauss-Seidel), convergenza-dt come prova di causalità.
+- **S2 — Tempo proprio = campo di Reeb**: la geometria di contatto dà il criterio ESATTO
+  (α(R)=1, dα(R,·)=0), il **battito sull'otto (4π non 2π)**, convergenza-dt covariante
+  N-appaiato. Molto più forte del vago "converge?" del vecchio.
+- **S3 — Riduzione al limite**: spinori in fase → campo/causalità/tempo-proprio del vecchio.
+  Se non si riduce, è un sistema arbitrario, non l'inversione.
+- **Perché fin d'ora**: implementare *per essere verificabile*. Causalità e tempo proprio
+  sono al CUORE del nuovo sistema (struttura emitter-campo; geometria di contatto), non ai margini.
+
+## 4. Stato repo (branch-specifico) — tutto allineato e pushato
+
+- **`dev-spinoriale`** (`81241d0`): fondazione documentale (3 doc sotto `doc/`) + sigilli
+  S1/S2/S3 in `doc/REFACTORING_SPINORIALE.md`. NIENTE codice ancora. Pushato.
+- **`dev-dof`** (`5a4e754`): tracing per-passo §48 + **conferma 2 semi** del meccanismo
+  repulsore. Pushato. **Capitolo CHIUSO**: core abeliano con meccanismo.
+- **`main`** (`eab5db5`): doc canonica allineata §47/§48/§49. Pushato. Per lo stato del
+  lavoro di qualunque branch, guarda `main`.
+- **REGOLA d'ora in poi**: ogni relazione/commit dichiara il BRANCH. `dev-dof` (spin-½ sul
+  vecchio, CHIUSO: abeliano con meccanismo repulsore) ≠ `dev-spinoriale` (rifondazione,
+  IN CORSO: fondazione fatta, Fase 1 da implementare).
+
+## 5. Il collegamento §48 ↔ §49 (perché la visione è la soluzione giusta)
+
+Il tracing su `dev-dof` (§48) ha trovato il MECCANISMO del fallimento: nel sistema attuale
+l'ordine del segno è un **repulsore dinamico** (segno = grado aggiunto, niente lo
+stabilizza). Nel sistema spinoriale (`dev-spinoriale`), la **materia** richiede accordo di
+segno (interferenza non distruttiva, Legge II) → l'ordine diventerebbe un **attrattore**
+*per fisica*, non per un termine imposto. **Non è "proviamo il nuovo per disperazione": è
+"l'attuale fallisce per un meccanismo preciso, e il nuovo lo risolve per costruzione".**
+Il fallimento dell'uno è la mappa per l'altro.
