@@ -739,10 +739,6 @@ SYNC_FASE_OROLOGIO = False # KURAMOTO SUL SEGNO DI DOPPIA-COPERTURA (la via genu
                         # Kuramoto-phi (K_SYNC, prof_rel, rinforzo_shear) -> zero parametri. Primo ordine in dt
                         # (NON O(dt^2) come il motore-unico artefatto: qui il termine dipende dalla DIFFERENZA
                         # sin(media-alpha), relazionale). Richiede --spinore-corretto. Default off = byte-identico.
-CAMPO_SPINORIALE = False # [FASE 1 dev-spinoriale] campo EMESSO dallo spinore (Psi spinoriale n x 2) calcolato IN
-                        # PARALLELO in calcola_psi (self.psi_spin, self.rho_spin), non ancora agganciato a
-                        # gravita'/forze/mitosi (fasi 2-4). Riduzione-al-limite: con _psi_spinor=(e^{i phi},0) la
-                        # componente 0 == campo scalare. Default off = byte-identico.
 KURAMOTO_SU2 = False     # KURAMOTO SU(2) NON-ABELIANO (§46): ruota lo SPINORE INTERO verso la media SU(2) dei
                         # vicini psi_bar=(wI@psi)/|.| con rotazione geodetica attorno all'asse VARIABILE nb x nb_bar
                         # (non commuta -> non-abeliano genuino). Verso+segno ruotano INSIEME; il segno emerge per
@@ -1916,21 +1912,6 @@ class Rete:
         amp = SCALA_AMP
         F = self._mat(w) @ (amp * np.exp(1j * self.phi))
         self.psi = self.satura(F)                          # saturazione regolarizzata (Leggi XV/XVIII)
-        if CAMPO_SPINORIALE:
-            # [FASE 1] CAMPO EMESSO DALLO SPINORE (Legge I), calcolato IN PARALLELO: non ancora agganciato a
-            # gravita'/forze/mitosi (self.psi scalare resta la sorgente in Fase 1). CAUSALITA' S1 (Jacobi):
-            # legge lo SNAPSHOT _psi_spinor (stato committato), tutti i nodi simultanei (sparse @ dense),
-            # nessuna dipendenza dall'ordine. Riduzione-al-limite S3: con _psi_spinor=(e^{i phi},0) -> comp 0 == self.psi.
-            _n = self.n
-            _psp = getattr(self, "_psi_spinor", None)
-            if _psp is None or len(_psp) < _n:
-                _psp = np.zeros((_n, 2), complex); _psp[:, 0] = np.exp(1j * self.phi[:_n])  # fallback: fase pura asse 0
-            else:
-                _psp = np.asarray(_psp)[:_n]
-            _Fs = self._mat(w) @ (amp * _psp)                                  # (n,2): STESSO kernel del grafo
-            _norm = np.sqrt(np.sum(np.abs(_Fs) ** 2, axis=1) + 1e-9)           # norma dello spinore-campo
-            self.psi_spin = _Fs / (1.0 + GAMMA * _norm)[:, None]               # saturazione sulla NORMA (non ruota lo spinore)
-            self.rho_spin = np.real(np.sum(np.conj(self.psi_spin) * self.psi_spin, axis=1))  # rho = psi^dag psi
         return self.psi
 
     def intensita(self): return np.abs(self.psi) ** 2
@@ -4232,7 +4213,7 @@ def _applica_flag(a):
     global net
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
     if getattr(a, "tau_d0", False):
@@ -4307,9 +4288,6 @@ def _applica_flag(a):
         print("[kuramoto-su2] AVVISO: inerte senza --spinore-corretto (agisce sullo spinore primario); no-op.")
     if KURAMOTO_SU2:
         print("[kuramoto-su2] Kuramoto SU(2) NON-ABELIANO: rotazione piena dello spinore verso la media SU(2) dei vicini (asse variabile nb x nb_bar), O(dt^1). nb SI muove (gravita' fisica, non 6.7e-16)")
-    CAMPO_SPINORIALE = bool(getattr(a, "campo_spinoriale", False)) # [FASE 1] campo emesso dallo spinore: default off
-    if CAMPO_SPINORIALE:
-        print("[campo-spinoriale] FASE 1: campo Psi EMESSO dallo spinore (n,2) in calcola_psi (self.psi_spin, self.rho_spin), in PARALLELO (non ancora agganciato a gravita'/forze/mitosi). Riduzione-al-limite: (e^{i phi},0) -> campo scalare")
     SPIN_FEEDBACK = bool(getattr(a, "spin_feedback", False)) # feedback locale overlap spinoriale: default off
     SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
     CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale
@@ -4614,12 +4592,6 @@ def _cli():
                         "cancellano (berry assoluta forte, firmata zero). Non tocca la fisica. Default off.")
     p.add_argument("--trace-out", dest="trace_out", default=None,
                    help="percorso del dump di --trace-segno (default: <diaglog>.trace.csv).")
-    p.add_argument("--campo-spinoriale", action="store_true", dest="campo_spinoriale",
-                   help="[FASE 1 dev-spinoriale] CAMPO EMESSO DALLO SPINORE (zero parametri): in calcola_psi costruisce "
-                        "il campo Psi spinoriale (n,2) = _mat(w) @ (amp*_psi_spinor) con lo STESSO kernel del grafo, "
-                        "saturato sulla NORMA (non ruota lo spinore), e rho=psi^dag psi. Calcolato IN PARALLELO "
-                        "(self.psi_spin/rho_spin), NON ancora agganciato a gravita'/forze/mitosi (fasi 2-4). Riduzione-al-"
-                        "limite: con _psi_spinor=(e^{i phi},0) la componente 0 == campo scalare. Default off = byte-identico.")
     p.add_argument("--spin-feedback", action="store_true", dest="spin_feedback",
                    help="FEEDBACK LOCALE SPINORE->ARCHI: la parte immaginaria dell'overlap del lift "
                         "spinoriale aggiunge una coppia antisimmmetrica alle fasi. Richiede "
