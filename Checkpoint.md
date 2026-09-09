@@ -23,9 +23,13 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 (primo ordine) analitico O(dt¹); sigillo 4 (conv-dt) nella campagna. Prelim a 300 passi (formazione, non
 verdetto): `spin_overlap_arco`~0.5 ON=OFF, nessun accenno. Evidenza su `dev-dof` (`6a3864a`).
 
-**IN CORSO:** pilota go/no-go 800 passi, seed 1, ON vs OFF (`csv/deparam_pilota_k2/`). Guardare
-`spin_overlap_arco` (SU(2) pieno) + segno e verso separati: se salgono insieme → candidato spin 1/2 → campagna
-3 semi/2000 + conv-dt covariante; se ~0 → **ABELIANO definitivo** (negativo che vale quanto un positivo).
+**IN CORSO / GATE:** pilota go/no-go 800 passi seed 1 ON vs OFF (`csv/deparam_pilota_k2/`) = **NO-GO** (§46-ter).
+A N appaiato (N 824→2231 ×2.71): `spin_overlap_arco` (SU(2) pieno) **0.500 ON=OFF** = scorrelato; `segno_arco_coer`/
+`verso_arco_coer` ~0, ON=OFF; unico stacco `segno_ov_absmedia` ON<OFF −0.041 (direzione sbagliata, disordina);
+`corr(segno,verso)`≈0 (non un motore unico). **L'olonomia non trasferisce coerenza al segno.** 4 vie tutte piatte
+(§41/§42/§44 + §46 non-abeliano) → **ipotesi ABELIANA molto forte**. Cautele: 800p=formazione, 1 seme = NON
+verdetto. **Prossimo (gate a Luca):** (A) conferma **3 semi/2000 + conv-dt covariante** → se ~0 concorde = **ABELIANO
+DEFINITIVO** (chiusura formale); (B) diagnosi del perché nemmeno il non-abeliano ordina. MAI forzare verso=segno.
 
 ---
 

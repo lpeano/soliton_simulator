@@ -722,3 +722,19 @@ PASSATO. SIGILLO 3 (primo ordine) analitico O(dt^1); SIGILLO 4 (conv-dt) nella c
 segno_arco_coer ON-0.0006 (dentro rumore sd~0.003), verso~0, spin_axis_R 0.041 entrambi -> nessun accenno precoce.
 Evidenza committata+pushata su dev-dof (6a3864a, csv/_seal_k2/_verifica.py). IN CORSO: pilota go/no-go 800p seed1
 ON vs OFF (csv/deparam_pilota_k2/). Se accenna -> 3 semi/2000 + conv-dt covariante; se ~0 -> ABELIANO definitivo.
+
+### §46-ter — Pilota --kuramoto-su2: NO-GO, la via non-abeliana fallisce (2026-09-09) [IN VERIFICA -> NEGATIVO]
+Confronto covariante ON vs OFF a N APPAIATO (N 824->2231 x2.71, tau_cum~704; a passo fisso misureresti
+l'espansione), terzo tardivo, finestra N comune [824,2231]: spin_overlap_arco (SU(2) PIENO, primario)
+ON=0.50001 OFF=0.50002 = SCORRELATO in entrambi (0.5=scorrelato); segno_arco_coer ON-OFF=-0.00016 (~uguale);
+verso_arco_coer ~0 ON=OFF; spin_axis_R ~uguale. UNICO stacco: segno_ov_absmedia ON=0.666 OFF=0.708 (ON<OFF
+di 0.041 = direzione SBAGLIATA: il torque geodetico DISORDINA il foglio locale, non lo ordina). Accoppiamento
+(corr temporale 2a meta' ON): corr(segno,verso)=+0.016~0 (NON un motore unico), corr(verso,overlap)=+1.000
+(l'overlap SU(2) e' guidato SOLO dal verso; il segno non ci mette coerenza). OLONOMIA NON trasferisce coerenza
+al segno = 'olonomia persa'. BILANCIO 4 VIE tutte piatte (segno_arco_coer~0, ON=OFF): §41 spin-feedback, §42
+chi-da-spinore, §44 sync-fase-orologio (abeliano), §46 kuramoto-su2 (NON-ABELIANO genuino, l'ultima carta);
+§43 motore-unico=artefatto O(dt^2). -> IPOTESI ABELIANA molto forte. CAUTELE: 800p=FORMAZIONE, 1 seme -> NON
+verdetto. GATE a Luca: (A) conferma 3 semi/2000+conv-dt covariante -> se ~0 concorde = ABELIANO DEFINITIVO
+(negativo che vale un positivo, chiusura formale); (B) diagnosi perche' nemmeno il non-abeliano ordina (torque
+si dissolve in mitosi/espansione? o segno=gauge non-osservabile §38). MAI forzare verso=segno. Relazione:
+RELAZIONE_CLAUDE_2026-09-09.md; dati csv/deparam_pilota_k2/ (dev-dof b729fe8), .pkl esclusi.
