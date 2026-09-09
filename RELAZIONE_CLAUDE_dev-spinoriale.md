@@ -86,9 +86,19 @@
   casuali il campo è ~1e-7 (si cancellano per interferenza distruttiva, Legge II) → il test
   giusto è l'INDIPENDENZA delle componenti, non l'ampiezza (un primo test con soglia assoluta
   dava falso "degenere", corretto). Backup `soliton_simulator.backup_2026-09-09_campo-spinoriale.py`,
-  sigillo `csv/_seal_fase1/_sigillo_fase1.py`. **CAVEAT**: Fase 1 = mattone CORRETTO ma in
-  PARALLELO (non pilota ancora la fisica); il vero test della visione (non-abeliano) è la
-  **Fase 2** (quando `rho_spin` diventa la sorgente di gravità/densità, sigillo gravità ∝ nb·nb).
+  sigillo `csv/_seal_fase1/_sigillo_fase1.py`.
+  **FASE 2 FATTA** (`59af724`): il campo spinoriale PILOTA densità e gravità (dietro
+  `--campo-spinoriale`). Helper `_rho_sorgente` (|ψ|² off / rho_spin on) in `lambda_nodi`;
+  `_nb_grav` (_nb off / **nb NATIVO** = ψ†σψ/rho_spin on) nella gravità bifase. Sigilli PASSATI:
+  OFF byte-identico (bk vs off max|A-B|=0); **S3 riduzione-al-limite** in-process (densità 3.8e-29,
+  nb 0.000e+00 esatto); **STABILITÀ** (300p spinore-vivo: N 824→1940, n_naninf=0, no blow-up);
+  coerenza; controprova fuori limite (spinori inclinati → nb pilota direzione diversa = nuova
+  fisica). **BUG stanato dal sigillo S3**: normalizzazione nb floor 1e-12 falliva per campo piccolo
+  (~1e-7 cancellazione, |nbn|~1e-14) → FIX per rho_spin floor 1e-30. **PRIMO SGUARDO** (NON verdetto):
+  spin_overlap_arco~0.5, segno_arco_coer~0 → segno NON ancora ordinato, ATTESO (Fase 2 = solo
+  densità/gravità, non le forze; il canale è la Fase 3). Backup `soliton_simulator.backup_2026-09-09_fase2.py`,
+  sigillo `csv/_seal_fase2/_sigillo_fase2.py`. **PROSSIMO: Fase 3** (forze/overlap ⟨ψ_i|ψ_j⟩) =
+  dove si decide se la visione dà il non-abeliano.
 - **`dev-dof`** (`5a4e754`): tracing per-passo §48 + **conferma 2 semi** del meccanismo
   repulsore. Pushato. **Capitolo CHIUSO**: core abeliano con meccanismo.
 - **`main`** (`eab5db5`): doc canonica allineata §47/§48/§49. Pushato. Per lo stato del
