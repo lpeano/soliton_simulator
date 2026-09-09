@@ -2120,25 +2120,6 @@ class Rete:
         transizione = 0.5 * (1.0 + np.tanh(1.0 - u_nodo))
         return cs_floor + (CS_M - cs_floor) * transizione
 
-    def _coppia_interferenza(self, A, z):
-        """[FASE 3] Coppia di fase sugli archi. Ramo OFF: interferenza SCALARE
-        K_C*Im(conj(z) (mat(A)@z)) con z=e^{i phi} (identica al canonico). Ramo CAMPO_SPINORIALE:
-        OVERLAP SPINORIALE <psi_i|psi_j> = conj(a_i)a_j + conj(b_i)b_j; la somma pesata sugli archi
-        e' sum_j A_ij <psi_i|psi_j> = conj(a)(mat(A)@a) + conj(b)(mat(A)@b). Generalizzazione ESATTA:
-        nel limite spinore in fase (b=0, a=e^{i phi}) il termine b sparisce e a=z -> coppia identica
-        alla scalare. Legge lo SNAPSHOT _psi_spinor di inizio passo (causalita' Jacobi: _passo_spinoriale
-        lo aggiorna DOPO). Nessun parametro nuovo: stesso K_C, stesso kernel A. Se lo spinore non c'e'
-        (feature off) ricade sul ramo scalare."""
-        n = self.n
-        if CAMPO_SPINORIALE:
-            _ps = getattr(self, '_psi_spinor', None)
-            if _ps is not None and len(_ps) >= n:
-                _ps = np.asarray(_ps)[:n]
-                _a = _ps[:, 0]; _b = _ps[:, 1]
-                return K_C * np.imag(np.conj(_a) * (self._mat(A) @ _a)
-                                     + np.conj(_b) * (self._mat(A) @ _b))
-        return K_C * np.imag(np.conj(z) * (self._mat(A) @ z))
-
     def step(self):
         if self.n < 2 or not len(self.i): return
         i, j = self.i, self.j
@@ -2168,7 +2149,7 @@ class Rete:
             self.psi = psi_t.copy()
         A = w * np.cos(self.phi0[i] - self.phi0[j])
         z = np.exp(1j * _phi_t)  # <-- USA LO SNAPSHOT t
-        coppia = self._coppia_interferenza(A, z)  # [FASE 3] scalare (off) o overlap spinoriale (on)
+        coppia = K_C * np.imag(np.conj(z) * (self._mat(A) @ z))
         
         # AUTO-INTERAZIONE DELL'INTERFERENZA (opzione, MU_PSI=0 di default).
         # Termine di energia H_int = -(mu/2) sum_k |Psi_k|^2, derivato -> forza
@@ -4362,7 +4343,7 @@ def _applica_flag(a):
         print("[kuramoto-su2] Kuramoto SU(2) NON-ABELIANO: rotazione piena dello spinore verso la media SU(2) dei vicini (asse variabile nb x nb_bar), O(dt^1). nb SI muove (gravita' fisica, non 6.7e-16)")
     CAMPO_SPINORIALE = bool(getattr(a, "campo_spinoriale", False)) # [FASE 1] campo emesso dallo spinore: default off
     if CAMPO_SPINORIALE:
-        print("[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)")
+        print("[campo-spinoriale] FASE 1: campo Psi EMESSO dallo spinore (n,2) in calcola_psi (self.psi_spin, self.rho_spin), in PARALLELO (non ancora agganciato a gravita'/forze/mitosi). Riduzione-al-limite: (e^{i phi},0) -> campo scalare")
     SPIN_FEEDBACK = bool(getattr(a, "spin_feedback", False)) # feedback locale overlap spinoriale: default off
     SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
     CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale

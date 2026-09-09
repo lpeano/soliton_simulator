@@ -99,6 +99,21 @@
   densità/gravità, non le forze; il canale è la Fase 3). Backup `soliton_simulator.backup_2026-09-09_fase2.py`,
   sigillo `csv/_seal_fase2/_sigillo_fase2.py`. **PROSSIMO: Fase 3** (forze/overlap ⟨ψ_i|ψ_j⟩) =
   dove si decide se la visione dà il non-abeliano.
+  **FASE 3 FATTA** (branch `dev-spinoriale`): le FORZE di fase diventano OVERLAP SPINORIALE.
+  La coppia `K_C·Im(conj(z)·(mat(A)@z))` è estratta nel metodo testabile `_coppia_interferenza(A,z)`;
+  ramo `CAMPO_SPINORIALE` on: `Σ_j A_ij⟨ψ_i|ψ_j⟩ = conj(a)(mat(A)@a) + conj(b)(mat(A)@b)` con
+  a,b = componenti di `_psi_spinor` (snapshot inizio passo = causalità Jacobi; `_passo_spinoriale`
+  aggiorna DOPO). GENERALIZZAZIONE ESATTA: nel limite spinore in fase (b=0, a=e^{iφ}) → coppia
+  IDENTICA alla scalare. **Zero parametri nuovi** (stesso K_C, stesso kernel A). Sigilli (tutti PASS,
+  `csv/_seal_fase3/_sigillo_fase3.py` in-process sul VERO codice): **S3 GATE riduzione-al-limite
+  max|Δcoppia|=0.000e+00 ESATTO**; controprova non-abeliana (spinore per-nodo → 3.1e-05>0; gauge
+  SU(2) globale → 0, gauge-invarianza rispettata); fallback spinore assente → 0; **OFF byte-identico**
+  (attuale vs backup pre-Fase3 a flag off: max|dphi|=0, max|dpos|=0); **STABILITÀ** (300p ON completo
+  --campo-spinoriale --spinore-vivo --spinore-corretto --chi-core: nessun nan/inf, accr 1116→2349,
+  coppie 0→409, no blow-up). Backup `soliton_simulator.backup_2026-09-09_fase3.py`. **NON è ancora il
+  VERDETTO**: serve il confronto covariante ON vs OFF, N-appaiato, 2-3 seed su run ≥2000 passi
+  (segno_arco_coer diventa ATTRATTORE vs §48 dove decadeva? berry_firmata sale?) → hardware di Luca.
+  Mitosi/coppie restano scalari (Fase 4).
 - **`dev-dof`** (`5a4e754`): tracing per-passo §48 + **conferma 2 semi** del meccanismo
   repulsore. Pushato. **Capitolo CHIUSO**: core abeliano con meccanismo.
 - **`main`** (`eab5db5`): doc canonica allineata §47/§48/§49. Pushato. Per lo stato del
