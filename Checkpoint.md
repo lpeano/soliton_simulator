@@ -31,6 +31,32 @@ A N appaiato (N 824→2231 ×2.71): `spin_overlap_arco` (SU(2) pieno) **0.500 ON
 verdetto. **Prossimo (gate a Luca):** (A) conferma **3 semi/2000 + conv-dt covariante** → se ~0 concorde = **ABELIANO
 DEFINITIVO** (chiusura formale); (B) diagnosi del perché nemmeno il non-abeliano ordina. MAI forzare verso=segno.
 
+## CHIUSURA CAPITOLO ATTUALE + NUOVO BRANCH (2026-09-09)
+
+**[branch `dev-dof`] §47 — Tre freni + bracci A/V/B/C: tutti NO-GO.** L'intuizione "il test ha gli agganci?" ha
+stanato un freno TRIPLO: flag spenti; `CHI_BASC` rotto (soglia `median(twn)` globale invece di 2π → imponeva il
+50/50 che doveva rompere — viola "la media non va qui"); `OLON_PART` inerte senza `--viriale`. Fix di legge
+(median→PHI_CRIT, sigillo OFF byte-identico). Bracci A(chi-basc)/V(viriale)/B(viriale+olon)/C(tutto): **tutti
+NO-GO** (`spin_overlap_arco`~0.500, `berry` firmata ~0 ovunque). `CHI_BASC` soffoca la crescita (il "372" costante
+= congelamento), ma il test decisivo mostra che **il congelamento NON maschera** (il congelato C ha spin_overlap
+identico ai non-congelati V/B — gli osservabili del segno sono relazionali sugli archi, a N fisso).
+
+**[branch `dev-dof`] §48 — Tracing per-passo: il segno è un REPULSORE (reperto chiave, confermato 2 semi).** Il
+segno **nasce ordinato** (`segno_arco`=0.996, semina) e **decade a 0.000 in ~10 passi**, **pre-nascite** (coppie
+escluse), col **torque che collassa** (0.93→0.15). Confermato su **2 semi**. Lo stato ordinato è un **repulsore**;
+l'attrattore è lo scorrelato — il sistema **relassa attivamente via dall'ordine** (feedback auto-distruttivo). →
+**Teorema di assenza CON MECCANISMO**: il core è abeliano *perché* l'ordine del segno è un repulsore dinamico, non
+per caso/misura. Flag `--trace-segno` (pure-read, sigillo OFF byte-identico). **Verdetto capitolo `dev-dof`:
+ABELIANO, con ragione fisica.**
+
+**[branch `dev-spinoriale`] §49 — Refactoring rifondativo (nuovo branch parallelo).** Lo spinore diventa
+FONDAMENTALE, il campo Ψ è ciò che emette (inversione campo→spinore ⇒ spinore→campo; fondamentale SU(2)
+non-abeliano incorporato). **Collegamento col §48**: nell'attuale l'ordine è un repulsore (segno = grado aggiunto,
+niente lo stabilizza); nel spinoriale la **materia** richiede accordo di segno (interferenza non distruttiva) →
+l'ordine diventerebbe un **attrattore** *per fisica*, non per trucco. Il fallimento dell'attuale è la mappa per il
+nuovo. Doc sotto `doc/`: `FONDAZIONE_SPINORIALE.md`, `REFACTORING_SPINORIALE.md`, `ONTOLOGIA_SPINORIALE.md`. Solo
+fondazione, niente codice. **REGOLA: d'ora in poi ogni relazione/commit dichiara il BRANCH.**
+
 ---
 
 ## MODELLO BRANCH E TRACING — 2026-09-07 (canonico)

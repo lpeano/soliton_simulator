@@ -738,3 +738,42 @@ verdetto. GATE a Luca: (A) conferma 3 semi/2000+conv-dt covariante -> se ~0 conc
 (negativo che vale un positivo, chiusura formale); (B) diagnosi perche' nemmeno il non-abeliano ordina (torque
 si dissolve in mitosi/espansione? o segno=gauge non-osservabile §38). MAI forzare verso=segno. Relazione:
 RELAZIONE_CLAUDE_2026-09-09.md; dati csv/deparam_pilota_k2/ (dev-dof b729fe8), .pkl esclusi.
+
+### §47 — [branch dev-dof] TRE FRENI A MANO + fix CHI_BASC + bracci A/V/B/C (2026-09-09) [DIMOSTRATO, negativo]
+L'intuizione di Luca ("il test ha tutti gli agganci?") ha stanato un freno TRIPLO nel pilota kuramoto-su2:
+(1) flag CHI_BASC/OLON_PART spenti; (2) CHI_BASC ROTTO (test-GRATIS: soglia=np.median(twn) GLOBALE invece di
+PHI_CRIT/2pi come dice il commento -> IMPONEVA il 50/50 che doveva ROMPERE; median->50% +1 vs 2pi->0.9%; viola
+"la media non va qui"); (3) OLON_PART inerte senza --viriale (annidato in if VIRIALE). FIX di legge (1 riga,
+median->PHI_CRIT, backup datato): allineamento-alla-legge, NON trucco. Sigillo OFF byte-identico PASSATO
+(max|A-B|=0). Run-lampo: --chi-basc ora perc_chi +1 all'1.3% (rompe il 50/50). BRACCI (800p seed1, N appaiato):
+A=--chi-basc, V=--viriale(controllo), B=--viriale --olon-part (vs V), C=tutto. TUTTI NO-GO su ENTRAMBI gli assi:
+spin_overlap_arco ~0.500 (scorrelato) ovunque; berry_spin_media FIRMATA ~0 ovunque (olonomia locale forte ~1.1
+ASSOLUTA ma i SEGNI SI CANCELLANO). CHI_BASC per giunta SOFFOCA la crescita (N 1174/1017 vs 2231; masse ferme).
+Il 372 costante nel CSV C = firma del congelamento (occhio di Luca); MA test decisivo: il sistema congelato C ha
+spin_overlap 0.49976 IDENTICO ai non-congelati V/B -> il congelamento NON maschera (gli osservabili del segno
+sono relazionali sugli archi, a N fisso). Ne' chiralita', ne' viriale, ne' olonomia locale ordinano il segno.
+Soglia intermedia = parametro tarato = linea rossa (ritirata). Dati csv/deparam_bracci/ (dev-dof). Muro = quanto 2pi.
+
+### §48 — [branch dev-dof] TRACING PER-PASSO: il segno DECADE, l'ordine e' un REPULSORE (2026-09-09) [reperto chiave]
+Prima del bivio, tracing deterministico per CAPIRE il meccanismo. Flag --trace-segno (pure-read, SIGILLO OFF
+byte-identico PASSATO max|A-B|=0). Snapshot (db_on.pkl) sembrava (d) "segno geometricamente random". MA il
+tracing per-passo RIBALTA: il segno NASCE ORDINATO (segno_arco 0.996, semina fase=0) e DECADE a 0.000 in ~10
+passi. Crollo PRE-nascite (nati=0 fino step7 -> coppie ESCLUSE, ipotesi (a) cade). torque COLLASSA (0.93->0.15).
+CONFERMATO su 2 SEMI (seed1 e seed2 identici, seed2 decade piu' rapido). MECCANISMO: lo stato a segno ordinato e'
+un REPULSORE, l'attrattore e' lo scorrelato. Feedback auto-distruttivo: segno si disordina -> media SU(2) vicini
+si cancella -> torque cala -> non riallinea -> amplifica. Il sistema RELASSA ATTIVAMENTE VIA dall'ordine.
+=> TEOREMA DI ASSENZA CON MECCANISMO: il core non e' abeliano per caso/limite di misura, ma perche' l'ordine del
+segno e' un repulsore dinamico. Molto piu' forte di "misurato ~0". Dati trace_segno.csv/trace_segno_s2.csv (dev-dof).
+BIVIO nominato con onesta': SCOPRIRE (l'attuale e' abeliano, ordine repulsore - certificato) vs COSTRUIRE.
+
+### §49 — [branch dev-spinoriale] REFACTORING RIFONDATIVO: lo spinore emette il campo (2026-09-09)
+Nuovo branch PARALLELO `dev-spinoriale` (da dev-dof). Visione di Luca (dai 12 anni): il solitone e' uno SPINORE
+SU(2) che EMETTE il campo (la sfera-otto), non una fase scalare con lo spinore aggiunto. Inversione ontologica:
+campo->spinore diventa SPINORE->campo. Il fondamentale diventa SU(2) (non-abeliano INCORPORATO, non innestato).
+COLLEGAMENTO col §48: nell'attuale l'ordine del segno e' un REPULSORE (segno = grado aggiunto, niente lo
+stabilizza); nel spinoriale la MATERIA stessa richiede accordo di segno (interferenza NON distruttiva, Legge II)
+-> l'ordine diventerebbe un ATTRATTORE (la materia coerente esiste solo dove i segni concordano). NON e' un trucco:
+la materia stabilizza l'ordine PER FISICA, non per termine imposto. Il fallimento dell'attuale (§48) e' la mappa
+per il nuovo. Doc sotto doc/: FONDAZIONE_SPINORIALE.md (leggi I-X + geometria di contatto), REFACTORING_SPINORIALE.md
+(piano tecnico, flag --campo-spinoriale, fasi+sigilli riduzione-al-limite), ONTOLOGIA_SPINORIALE.md. Solo fondazione,
+NIENTE codice ancora. Progetto di settimane. REGOLA: d'ora in poi ogni relazione/commit dichiara il BRANCH.
