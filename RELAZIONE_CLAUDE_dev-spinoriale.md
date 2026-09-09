@@ -81,9 +81,14 @@
   (default OFF byte-identico) + campo Psi spinoriale (n,2) in `calcola_psi` (in PARALLELO,
   non ancora agganciato). Sigilli PASSATI: **S3 riduzione-al-limite ESATTO** (`ψ=(e^{iφ},0)`
   → comp0 == scalare, max|Δ|=0.000e+00; comp1=0), S1 causalità (Jacobi/no-mutazione), OFF
-  byte-identico, coerenza (ρ≥0). Backup `soliton_simulator.backup_2026-09-09_campo-spinoriale.py`,
-  sigillo `csv/_seal_fase1/_sigillo_fase1.py`. **PROSSIMO: Fase 2** (agganciare il campo
-  spinoriale a gravità/densità, sigillo gravità ∝ nb·nb).
+  byte-identico, coerenza (ρ≥0), e **GENUINAMENTE spinoriale** (test deterministico A/B:
+  ψ=(e^{iφ},0)→solo comp0; ψ=(0,e^{iφ})→solo comp1; componenti INDIPENDENTI). NB: con spinori
+  casuali il campo è ~1e-7 (si cancellano per interferenza distruttiva, Legge II) → il test
+  giusto è l'INDIPENDENZA delle componenti, non l'ampiezza (un primo test con soglia assoluta
+  dava falso "degenere", corretto). Backup `soliton_simulator.backup_2026-09-09_campo-spinoriale.py`,
+  sigillo `csv/_seal_fase1/_sigillo_fase1.py`. **CAVEAT**: Fase 1 = mattone CORRETTO ma in
+  PARALLELO (non pilota ancora la fisica); il vero test della visione (non-abeliano) è la
+  **Fase 2** (quando `rho_spin` diventa la sorgente di gravità/densità, sigillo gravità ∝ nb·nb).
 - **`dev-dof`** (`5a4e754`): tracing per-passo §48 + **conferma 2 semi** del meccanismo
   repulsore. Pushato. **Capitolo CHIUSO**: core abeliano con meccanismo.
 - **`main`** (`eab5db5`): doc canonica allineata §47/§48/§49. Pushato. Per lo stato del

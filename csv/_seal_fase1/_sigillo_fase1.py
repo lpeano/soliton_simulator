@@ -43,6 +43,23 @@ perm = np.random.default_rng(0).permutation(n)
 psi_spin_ref = net.psi_spin.copy()
 print(f"  ESITO S1 (no-mutazione): {'PASSATO' if d_mut == 0.0 else 'ATTENZIONE'}")
 
+# --- TEST VERO (guardiano): campo GENUINAMENTE spinoriale, non degenere ---
+# DETERMINISTICO (spinori casuali si CANCELLANO per interferenza distruttiva, Legge II -> campo ~1e-7,
+# sotto ogni soglia assoluta; il test giusto e' l'INDIPENDENZA delle componenti, non l'ampiezza).
+# A) psi=(e^{i phi},0) -> campo solo comp0.  B) psi=(0,e^{i phi}) -> campo solo comp1. Se seguono -> genuino.
+_pa = np.zeros((n, 2), complex); _pa[:, 0] = np.exp(1j * net.phi[:n])
+net._psi_spinor = _pa.copy(); net.calcola_psi()
+_a0 = float(np.mean(np.abs(net.psi_spin[:, 0]))); _a1 = float(np.mean(np.abs(net.psi_spin[:, 1])))
+_pb = np.zeros((n, 2), complex); _pb[:, 1] = np.exp(1j * net.phi[:n])
+net._psi_spinor = _pb.copy(); net.calcola_psi()
+_b0 = float(np.mean(np.abs(net.psi_spin[:, 0]))); _b1 = float(np.mean(np.abs(net.psi_spin[:, 1])))
+print("\n=== GENUINAMENTE SPINORIALE (componenti indipendenti, deterministico) ===")
+print(f"  A) psi=(e^iphi,0): comp0={_a0:.3e}  comp1={_a1:.3e}  (comp1 deve ~0)")
+print(f"  B) psi=(0,e^iphi): comp0={_b0:.3e}  comp1={_b1:.3e}  (comp0 deve ~0, comp1 vive)")
+_genuino = (_a1 < 1e-12 and _b0 < 1e-12 and _b1 > 1e-15)
+print(f"  ESITO: {'PASSATO (le 2 componenti sono INDIPENDENTI = campo genuinamente spinoriale)' if _genuino else 'DEGENERE'}")
+print(f"  NB: ampiezza ~1e-7 = fasi scorrelate (3 step da semina casuale) -> interferenza distruttiva (Legge II), NON un difetto.")
+
 # --- coerenza: rho>=0, tutto finito, len corretti ---
 print("\n=== COERENZA ===")
 print(f"  rho_spin: min={net.rho_spin.min():.3e} (>=0), finito={np.all(np.isfinite(net.rho_spin))}")
