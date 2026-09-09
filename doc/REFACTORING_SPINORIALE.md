@@ -186,3 +186,55 @@ lo stesso Bloch ma **segno opposto** → interferiscono **distruttivamente** anc
 "puntano nello stesso posto". Quindi il segno di doppia-copertura ENTRA nell'interferenza:
 la materia non distruttiva richiede accordo di direzione E di segno. È il punto dove lo
 spin ½ entra nella *formazione* della materia — strutturale, non accessorio.
+
+---
+
+## Sigilli OBBLIGATORI: causalità, tempo proprio (Reeb), riduzione al limite
+
+*Requisiti fissati DALLA FONDAZIONE, prima di implementare — così il codice nasce
+verificabile. Nel sistema spinoriale questi non sono dettagli: la struttura emitter-campo
+rende la causalità PIÙ stretta, e la geometria di contatto dà al tempo proprio una
+struttura ESATTA (il campo di Reeb). Da rieseguire dopo ogni fase.*
+
+### S1 — Causalità (ETC rigoroso, il loop emitter-campo è più stretto)
+
+Nel nuovo sistema il campo Ψ_i è **fatto** degli spinori vicini (Legge I) e lo spinore
+evolve **leggendo** il campo (Legge VIII) → potenziale **loop istantaneo**:
+`ψ_i(t) → Ψ_i(t) → ψ_j(t) → ...`. Più intrinseco che nel vecchio (là il campo era una
+fase, qui il campo *è* fatto degli spinori). Requisiti:
+- **ETC (Evaluate-Then-Commit) rigoroso**: il campo Ψ si calcola dallo **snapshot t−1**
+  degli spinori; gli spinori si aggiornano; **commit atomico** a fine passo.
+- **Sigillo no-loop-istantaneo**: `ψ_i(t+dt)` NON deve dipendere da `Ψ_i(t+dt)` (stesso
+  passo). Verifica: l'ordine di aggiornamento dei nodi non cambia il risultato (Jacobi,
+  non Gauss-Seidel).
+- **Convergenza-dt come prova di causalità**: se c'è un loop istantaneo nascosto, la
+  convergenza-dt si rompe. τ e osservabili intensive devono convergere per dt→0.
+
+### S2 — Tempo proprio = campo di Reeb (struttura di contatto esatta)
+
+Nel vecchio il tempo proprio era una legge da "far convergere" (vago). Nel nuovo ha una
+struttura geometrica precisa: **τ è il flusso del campo di Reeb R** della forma di
+contatto α (vedi `FONDAZIONE_SPINORIALE.md` Parte III). Requisiti:
+- **Condizione di Reeb**: verificare α(R)=1 e dα(R,·)=0 (R è la direzione lungo cui lo
+  spinore avanza la fase a ritmo costante). Il tempo proprio implementato DEVE essere
+  questo flusso, non un surrogato.
+- **Battito sull'otto (4π, non 2π)**: l'orologio deve chiudersi dopo **4π** (doppia
+  copertura), non 2π. Lega il tempo proprio alla non-integrabilità (l'olonomia). Sigillo:
+  dopo una rotazione di 2π lo spinore torna alla stessa direzione ma con **segno opposto**;
+  solo dopo 4π torna identico.
+- **Convergenza-dt di τ**: il tempo proprio deve convergere per dt→0 e a N→∞ (covariante,
+  N appaiato — la lezione di `dev-dof`).
+
+### S3 — Riduzione al limite (il nuovo → il vecchio quando gli spinori sono in fase)
+
+Quando gli spinori sono tutti allineati in fase (ψ=(e^{iφ/2}, 0), limite scalare):
+- il **campo** Ψ_spin deve ridursi al campo scalare Ψ=e^{iφ} (sigillo di Fase 1);
+- la **causalità** (S1) e il **tempo proprio** (S2) devono ridursi a quelli del vecchio
+  sistema. Se NON si riducono, l'implementazione ha deviato — è un sistema arbitrario,
+  non l'inversione.
+
+**Perché fin d'ora:** sapere già cosa verificare significa implementare *per essere
+verificabile*. La disciplina di `dev-dof` (causalità delicata, tempo proprio da
+certificare, covarianza N-appaiato, sigilli byte-identici) si applica al nuovo sistema —
+dove causalità e tempo proprio sono al CUORE (la struttura emitter-campo, la geometria di
+contatto), non ai margini.
