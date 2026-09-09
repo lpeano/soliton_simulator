@@ -138,14 +138,26 @@ l'**olonomia locale** (`twn_a`) nella conversione tangenziale → inerte senza V
 | **C** | `--chi-basc --viriale --olon-part` | vs V e vs A |
 
 ### STATO (a fine sessione)
-- **Braccio A in corso** (800 passi, seed 1). **Leggere su DUE assi** (indicazione di Luca): `berry_spin_media`
-  (l'olonomia netta acquista un verso? = sbilanciamento) **E** `spin_overlap_arco`/`segno_arco_coer` (c'è
-  ordine LOCALE fra vicini?). **Rompere il 50/50 (0.9% +1) è metà; creare coerenza locale è l'altra metà.**
-  Cautela: 0.9% +1 è un estremo (quasi-tutto −1) → potrebbe sbilanciare senza ordinare localmente.
-- Poi V, B (vs V), C.
-- **Questione profonda aperta**: orologio, `CHI_BASC`, `VIRIALE` sono TUTTI tarati su **2π**. Se i tre freni
-  tolti non bastano a ordinare il segno localmente → il muro è il **quanto 2π (abeliano)** del sistema, e lì
-  serve il trace / ripensamento della soglia, non un altro flag.
+- **Braccio A COMPLETATO (800 passi, seed 1) — NO-GO su ENTRAMBI gli assi [IN VERIFICA].**
+  Confronto covariante a N appaiato (script `csv/deparam_bracci/_confronta_braccio.py`, braccio vs
+  baseline `csv/deparam_pilota_k2/on.csv`). **Fatto strutturale**: `--chi-basc` (98.7% a −1) **soffoca la
+  crescita** — N arriva a **1174** vs **2231** del baseline (mitosi quasi ferma con quasi-tutto vuoto);
+  finestra N comune ristretta [826, 1174].
+  - **Asse SBILANCIAMENTO/olonomia netta**: `berry_spin_media` (firmata) A=0.009 vs base=0.096 (~uguale,
+    A più basso → NON sale); `berry_spin_media_assoluta` ~1.13 uguale; `olonomia_fase_media_assoluta`
+    A=6.94 vs base=10.10 (**STACCA ↓**). → l'olonomia locale ASSOLUTA è forte e uguale, ma la FIRMATA ~0
+    in entrambi = i segni si CANCELLANO (frustrata, senza verso netto). Rompere il 50/50 non le dà un verso.
+  - **Asse ORDINE LOCALE**: `spin_overlap_arco` A=0.49986 vs base=0.49926 (~uguale, **0.5 = scorrelato**);
+    `segno_arco_coer`/`verso_arco_coer` ~0, ~uguali. Nessuna coerenza locale.
+  - Contesto: `segno_ov_absmedia` A=0.633 vs base=0.819 (**STACCA ↓** = meno commitment locale).
+  - **VERDETTO A**: il 50/50 NON era il blocco. Sbilanciare verso 98.7% −1 (legge vera 2π) non sblocca
+    l'olonomia netta né crea ordine locale — la DEPRIME (olonomia_fase ↓, commitment ↓) e soffoca la
+    dinamica. **Conferma la questione profonda: il muro sembra il quanto 2π stesso, non la configurazione
+    delle chiralità.** "Sbilanciare ≠ ordinare": qui non fa né l'uno né l'altro nel verso giusto.
+  - Cautele: 800p=formazione, 1 seme; N comune ristretto (soppressione crescita). Firma però chiara e negativa.
+- **PROSSIMO**: bracci V (viriale-solo, controllo) e B (viriale+olon-part vs V) testano un asse INDIPENDENTE
+  (conversione radiale→orbitale + olonomia locale), non tocco da chi-basc. Poi C (tutto). In attesa scelta Luca:
+  procedere V/B/C o fermarsi a ragionare sul quanto 2π (il muro candidato).
 
 ### Riproducibilità / doppio-check per Claude
 - Fix: 1 riga, `git diff soliton_simulator.py`. Backup = `soliton_simulator.backup_2026-09-09_chibasc-2pi.py`.
