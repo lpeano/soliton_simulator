@@ -1,0 +1,21 @@
+=== PILOTA COVARIANTE MOD 5.3a+5.3b (--tempo-segno) — ON vs OFF, 800p seed 1 ===
+config: --batch --nmasse 3 --sep 8 --passi 800 --ogni 100 --campo-spinoriale --spinore-vivo
+        --spinore-corretto --chi-core [+ --tempo-segno per ON]. Media 2a meta', N-appaiato.
+
+metrica                    OFF(2a meta)  ON(2a meta)       ON-OFF
+segno_arco_coer                -0.00000     +0.00013     +0.00013  (sd_off 0.0023)  -> NEL RUMORE
+spin_overlap_arco              +0.49998     +0.49998     -0.00000                    -> 0.500 scorrelato
+berry_spin_media               -0.00012     +0.00166     +0.00179  (sd_off 0.1213)  -> nel rumore
+berry_spin_media_assoluta      +1.19834     +1.07647     -0.12187  (sd_off 0.1317)  -> il flag agisce (abbassa il modulo)
+
+TREND segno_arco_coer:
+  OFF: nasce 0.962 -> decade -> ultimi3 [0.005, 0.001, -0.001]
+  ON : nasce 0.907 -> decade -> ultimi3 [0.000, 0.002, 0.009]
+
+VERDETTO PILOTA = NO-GO. Con --tempo-segno (materia/antimateria coerente che controlla il verso del
+tempo, Feynman-Stuckelberg, antimateria indietro), l'ordine del segno DECADE esattamente come OFF (=§48).
+NON diventa attrattore; resta 0.5 = ABELIANO, anche con infrastruttura del segno pulita. Il flag non e'
+inerte (berry_abs cala 0.12, sigillo 7 ON!=OFF max|dphi|=12.4) ma NON ordina il segno.
+
+CAUTELE: 800p = FORMAZIONE (sotto 2000), 1 solo seme -> PILOTA, non verdetto definitivo. La piattezza
+netta (ON~OFF, entrambi decadono a 0) suggerisce che estendere non cambi. Conferma: campagna 2000p/2-3 semi.
