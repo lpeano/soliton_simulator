@@ -238,3 +238,74 @@ verificabile*. La disciplina di `dev-dof` (causalità delicata, tempo proprio da
 certificare, covarianza N-appaiato, sigilli byte-identici) si applica al nuovo sistema —
 dove causalità e tempo proprio sono al CUORE (la struttura emitter-campo, la geometria di
 contatto), non ai margini.
+
+---
+
+# AGGIORNAMENTO (post-verdetto Fase 3): rendere NON-ABELIANO TUTTO il sistema
+
+## Il reperto che riapre il quadro (verificato nel codice)
+
+Il verdetto Fase 3 (forze overlap spinoriale) e' NEGATIVO: segno_arco ~0, spin_overlap
+0.500 (ON=OFF, 3 semi, ~4000 passi). MA la verifica di `omega_new` (l'evoluzione dello
+spinore, riga ~1690) rivela che IL LOOP E' APERTO:
+```
+inerzia    = |self.psi|**2          # CAMPO SCALARE VECCHIO (non rho_spin!)
+correzione = cross(B, nb)           # geometrico (B include B_geo non-abeliano)
+omega_new  = omega_src + dt*(correzione/inerzia - omega_src/tau)
+```
+=> lo spinore EMETTE un campo spinoriale (Fasi 1-3), ma la sua ROTAZIONE legge il campo
+SCALARE (|self.psi|**2) per l'inerzia. Il campo spinoriale NON retroagisce sull'evoluzione.
+Il sistema e' MISTO (emissione spinoriale, evoluzione scalare) -> il verdetto Fase 3 e' su
+un LOOP APERTO, NON sulla visione completa.
+
+## Il PRINCIPIO UNICO (rende tutto non-abeliano mantenendo la struttura)
+
+REGOLA: ovunque una legge legga una FASE (phi, U(1)) o una DIREZIONE sola (nb), sostituiscila
+con lo SPINORE PIENO (psi) o l'OVERLAP <psi_i|psi_j>. La fase commuta (abeliano); lo spinore
+no (SU(2)) e porta il segno. Applicata OVUNQUE -> non-abeliano coerente, struttura invariata.
+
+PRESIDIO: ogni sostituzione RIDUCE al vecchio nel limite (spinori in fase, sigillo S3).
+La struttura (gravita' bifase, repulsioni, grafo) e' il CASO LIMITE; il non-abeliano la
+generalizzazione. Nulla perso.
+
+## Tabella: cosa e' non-abeliano, cosa resta abeliano
+
+| # | Componente | Stato | Come | Fase |
+|---|---|---|---|---|
+| 1 | Campo emesso Psi=Sum psi | NON-AB. OK | fatto | 1 |
+| 2 | Densita' rho=psi-dag psi | NON-AB. OK | fatto | 2 |
+| 3 | Gravita' (nb nativo) | NON-AB. OK | fatto | 2 |
+| 4 | Forze di fase <psi_i|psi_j> | NON-AB. OK | fatto | 3 |
+| 5 | INERZIA evoluzione | ABELIANA (|self.psi|**2) | -> rho_spin | 4 |
+| 6 | Campo B (ruota lo spinore) | MISTO (B_geo ok, da phi) | dall'overlap | 4 |
+| 7 | Memoria hebbiana (omega_new) | ABELIANA (gradiente twist da phi) | gradiente overlap | 4 |
+| 8 | Creazione coppie | MISTA (segno ok, separaz. da phi) | separaz. da overlap | 5 |
+| 9 | Mitosi | ABELIANA (soglia rho scalare) | soglia rho_spin, eredita psi | 5 |
+| 10 | Tempo proprio | DA FARE | Reeb sull'otto (4pi) | 5 |
+
+## FASE 4 — chiudere il loop (l'EVOLUZIONE non-abeliana) [LA PIU' IMPORTANTE]
+
+- MOD 4.1: inerzia = rho_spin=psi-dag psi (non |self.psi|**2). Limite -> identica.
+- MOD 4.2: il torque che ruota lo spinore deriva dall'OVERLAP <psi_i|psi_j> (non da omega_new
+  abeliano). La parte di fase dell'overlap ruota segno+verso INSIEME. Limite -> cross(B,nb).
+- MOD 4.3: mem_mot/omega_new seguono il gradiente dell'OVERLAP (non del twist da phi).
+- SIGILLI: OFF byte-identico; S3 riduzione-al-limite; causalita' (overlap da snapshot t-1,
+  Jacobi); primo ordine; stabilita'; convergenza-dt; controprova non-abeliana (gauge SU(2)
+  globale -> 0, per-nodo != 0).
+- TEST: a loop chiuso, segno_arco/overlap salgono sopra 0.5 e l'ordine e' ATTRATTORE
+  (semina ordinato -> RESTA)? Confronto §48 (dove decadeva).
+
+## FASE 5 — il ciclo di vita non-abeliano
+
+- Creazione coppie: la SEPARAZIONE nodo-antinodo segue <psi|psi> negativo (repulsione), non phi.
+- Mitosi: soglia su rho_spin; il figlio eredita lo SPINORE PIENO psi.
+- Tempo proprio = campo di Reeb: batte sull'OTTO (4pi, non 2pi). Sigillo S2.
+
+## Onesta' sul verdetto
+
+Il negativo Fase 3 e' su un sistema MISTO (loop aperto). La Fase 4+5 testa la visione
+COMPLETA (tutto non-abeliano coerentemente). MA: l'evoluzione ha gia' termini non-abeliani
+(B_geo; il kuramoto-su2 provato e fallito) -> chiudere il loop e' legittimo e NON testato,
+ma dopo molti negativi la probabilita' resta bassa. Se anche a loop chiuso e' abeliano ->
+teorema di assenza DEFINITIVO. Se si sblocca -> era la COERENZA non-abeliana il pezzo
+mancante, spin-1/2 emerge.

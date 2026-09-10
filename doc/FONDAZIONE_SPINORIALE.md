@@ -308,3 +308,55 @@ materia è l'interferenza non distruttiva sul grafo, il segno di doppia-copertur
 perché la geometria di contatto non-integrabile lo seleziona — non perché un meccanismo
 lo forza. È il test della visione: il solitone è la sfera con l'otto, la materia è la sua
 interferenza costruttiva, e lo spin ½ è la sua olonomia nativa.
+
+---
+
+# AGGIORNAMENTO (post-verdetto Fase 3): il PRINCIPIO DI NON-ABELIANITA' TOTALE
+
+## Il principio (il cuore, emerso dal verdetto Fase 3)
+
+Lo spin-1/2 (il segno di doppia-copertura, l'olonomia) puo' ordinarsi SOLO se TUTTO il
+sistema e' non-abeliano in modo COERENTE. Un sistema MISTO — dove l'emissione e' spinoriale
+(SU(2), Fasi 1-3) ma l'EVOLUZIONE e' scalare (U(1)) — NON puo' ordinare il segno: la parte
+abeliana lo "tira indietro" (l'ordine resta un repulsore, come nel sistema scalare, §48).
+
+Verifica: l'evoluzione dello spinore (ω_new) usa `|self.psi|²` (campo SCALARE) per
+l'inerzia -> il LOOP E' APERTO. Il verdetto Fase 3 negativo e' su un sistema misto, NON
+sulla visione completa.
+
+## La regola unica
+
+Ovunque una legge legga una FASE (φ) o una DIREZIONE sola (nb), deve leggere lo SPINORE
+PIENO (ψ) o l'OVERLAP ⟨ψ_i|ψ_j⟩. Fase = commuta (abeliano); spinore = non commuta (SU(2),
+porta il segno). Applicata a OGNI componente (emissione, densita', forze, EVOLUZIONE,
+memoria, coppie, mitosi, tempo proprio) -> non-abeliano coerente per costruzione.
+
+PRESIDIO: riduzione-al-limite (spinori in fase -> la legge non-abeliana torna la vecchia).
+La struttura e' il CASO LIMITE; il non-abeliano la generalizzazione. Nulla si perde.
+
+## Stato delle leggi (non-abeliano / da fare)
+
+- Legge I (campo emesso): NON-ABELIANO OK (Fase 1)
+- Legge II (materia, interferenza non distruttiva): NON-ABELIANO OK (Fase 2) — il segno
+  e' COSTITUTIVO della materia (accordo di direzione E segno)
+- Legge III (saturazione): NON-ABELIANO OK
+- Legge IV/V (interferenza/forze, overlap): NON-ABELIANO OK (Fase 3)
+- Legge VI (schermatura, ρ=ψ†ψ): NON-ABELIANO OK
+- Legge VII (gravita' bifase, nb nativo): NON-ABELIANO OK — accoppiata allo spin a due
+  livelli (sorgente ρ_spin + modulazione nb·nb)
+- Legge VIII (EVOLUZIONE dello spinore): DA RENDERE NON-ABELIANO (Fase 4) — lo spinore va
+  ruotato dall'OVERLAP spinoriale (non da ω_new abeliano); inerzia = ρ_spin. E' la
+  chiusura del loop.
+- Legge IX (tempo proprio = campo di Reeb): DA FARE (Fase 5) — l'orologio batte sull'OTTO
+  (4π, non 2π), IDENTIFICATO con la rotazione dello spinore (non un rotatore separato).
+- Legge X (creazione coppie): DA RENDERE NON-ABELIANO (Fase 5) — la separazione segue
+  l'overlap negativo, non la fase.
+
+## Ipotesi da testare (Fase 4+)
+
+A LOOP CHIUSO (evoluzione non-abeliana), la materia (interferenza non distruttiva) rende
+l'ordine del segno un ATTRATTORE, e lo spin-1/2 emerge — dove nel sistema misto (loop
+aperto) restava abeliano. ONESTA': dopo molti negativi la probabilita' e' bassa; se anche
+a loop chiuso e' abeliano, e' un teorema di assenza definitivo; se si sblocca, era la
+coerenza non-abeliana totale il pezzo mancante. La geometria di contatto (non-integrabile)
+resta la ragione geometrica per cui il non-abeliano, se coerente, dovrebbe dare l'olonomia.
