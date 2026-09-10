@@ -965,7 +965,7 @@ class Rete:
         copertura opposta -> antichirale, coerente con perc_chi=-perc_chi[genitore]). Estende anche
         _psi_prec (evita il reset spurio globale in ritmo() su len!=n). No-op se --spinore-corretto off.
         Va chiamata DOPO la crescita di self.phi (self.n gia' nuovo): n0 = self.n - len(src)."""
-        if not (SPINORE_CORRETTO or CAMPO_SPINORIALE):   # [FASE 5] eredita' spinore attiva anche nei run --campo-spinoriale
+        if not SPINORE_CORRETTO:
             return
         src = np.asarray(src, int); k = len(src)
         if k == 0:
@@ -1558,14 +1558,6 @@ class Rete:
             return np.ones(self.n)
         a = np.angle(self.psi) - np.angle(self._psi_prec)
         signed = ((a + np.pi) % (2 * np.pi) - np.pi) / DT
-        # [FASE 5] TEMPO PROPRIO dal CAMPO SPINORIALE (batte sull'OTTO, 4pi) invece del campo scalare.
-        # COERENZA (magnitudine): nel limite psi_spin[:,0]=self.psi e |dphi|<pi -> ritmo IDENTICO. Il segno
-        # non entra nel ritmo (magnitudine); il legame orologio-segno vive nel de Broglie SU(2) (gia' 4pi,
-        # TW_SPINORE = tw/4pi). Snapshot t-1 (Jacobi): psi_spin del passo precedente, _psi_spin_prec aggiornato in step.
-        _ps = getattr(self, "psi_spin", None); _psp = getattr(self, "_psi_spin_prec", None)
-        if CAMPO_SPINORIALE and _ps is not None and _psp is not None and len(_ps) == self.n and len(_psp) == self.n:
-            a = np.angle(_ps[:, 0]) - np.angle(_psp[:, 0])
-            signed = ((a + 2 * np.pi) % (4 * np.pi) - 2 * np.pi) / DT   # wrapping su 4pi (l'otto)
         # FLAG 4 (--tempo-proprio-orientato): f mantiene il SEGNO (tempo proprio orientato);
         # off = modulo, byte-identico al comportamento storico. La scala gauge resta positiva.
         f = signed if TEMPO_PROPRIO_ORIENTATO else np.abs(signed)
@@ -2172,8 +2164,6 @@ class Rete:
             dt_n = DT * r                      # per nodo
             dt_e = DT * 0.5 * (r[i] + r[j])    # per arco
             self._psi_prec = self.psi.copy()
-            if CAMPO_SPINORIALE and hasattr(self, "psi_spin") and len(getattr(self, "psi_spin", [])) == self.n:
-                self._psi_spin_prec = self.psi_spin.copy()   # [FASE 5] snapshot per il ritmo spinoriale (4pi)
         w = self._pesi(); self.eta += dt_n
         # In modalita' sincrona tutte le leggi del passo leggono un unico campo
         # calcolato dalla snapshot t. Non ricalcolare psi in punti diversi del
@@ -2667,7 +2657,7 @@ class Rete:
         c = np.where(nasce)[0]
         if not len(c): return 0
         c = c if MITMAX == 0 else c[np.argsort(avv[c])[::-1]][:MITMAX]
-        I = self._rho_sorgente()   # [FASE 5] soglia mitosi su densita' SPINORIALE (rho_spin ON / |psi|^2 OFF); limite identico
+        I = self.intensita()
         a, b = self.i[c], self.j[c]
         ok = 0.5 * (I[a] + I[b]) >= QMIN_M * float(np.median(self.peq))
         self.negate += int((~ok).sum()); sel = c[ok]
@@ -2810,7 +2800,7 @@ class Rete:
             # pareggio (anomalia 0). NON un parametro nuovo: rho e peq sono gia' nello stato.
             # eccesso totale = eccesso_torsione + max(0, anomalia_densita). Interruttore per null-test.
             if COPPIA_DENSITA:
-                I = self._rho_sorgente()   # [FASE 5] densita' coppia su campo SPINORIALE (rho_spin ON / |psi|^2 OFF); limite identico
+                I = self.intensita()
                 rho_sel = 0.5 * (I[a] + I[b])                   # densita' d'interferenza sull'arco
                 peq_sel = self.peq[sel]
                 peq_sel = np.where(np.isnan(peq_sel), rho_sel, peq_sel)
