@@ -105,6 +105,22 @@ ZERO mitosi). Causa: `soglia0=PHI_CRIT=4π` = tetto fisso `TW_TETTO=4π` → fin
 **8π** dove è già corretto → **leva sbagliata**. **RACCOMANDAZIONE**: 5.3a (verso da `s_k`) + 5.3b (magnitudine da
 torsione esplicita), **SALTARE 5.3c globale**. IN ATTESA DECISIONE LUCA ("poi ti dico"). Dev non pushato.
 
+**[branch `dev-spinoriale`] §53 — MOD 5.3a+5.3b IMPLEMENTATE (`--tempo-segno`): 7 SIGILLI PASS (2026-09-10).**
+Dopo lunga catena di test-GRATIS (tutti misurati prima): **teorema segno-da-fase impossibile** (A/B'/B'' mutuamente
+esclusive: stabile XOR vede-antimateria, perché π-antimateria e de Broglie vivono nella stessa fase globale). Scelta
+**β = perc_chi** (vera identità materia/antimateria) **modulata dalla MATERIALITÀ** (Luca: il verso del tempo alle
+PARTICELLE, non al VUOTO). `s_k = 1+(perc_chi−1)·m_k`, **materialità dalla COERENZA** `m_k=clip(cos(φ−arg(Ψ)),0,1)`
+(peq/massa_critica misurati INERTI). Coerenza: lenta (|Δm|/passo 0.0017), stabile (flip 0.2%), locale, zero-param,
+vuoto-neutro (s_k 0.943), materia-segue-perc_chi (100%). **5.3b**: magnitudine `ritmo()` → torsione `1+|tw|/PHI_CRIT`
+(de Broglie bocciato da S3b). Aggancio selettivo: `dt_n_s=s_k·dt_n` firmato su evoluzione interna (delta_phivel,
+delta_sync_phi, _passo_spinoriale, self.phi); `dt_n` magnitudine su eta+termostato; `dt_e` geometria intatto. t-1
+causale. Commit dev **`0639ba2`** (pushato). **7 SIGILLI PASS** (`csv/_seal_53a/`): OFF byte-identico 0.00e+00;
+riduzione-vuoto |s_k−1|=0; CONSERVAZIONE (Σperc_chi bilanciato, olonomia non diverge); STABILITÀ (N 1196→2447,
+n_naninf=0, eta≥0); controprova non-abeliana ON≠OFF; causalità+completezza strutturali. Relazione dev aggiornata.
+**PROSSIMO = IL TEST DECISIVO (non ancora lanciato)**: campagna covariante `--tempo-segno` ON vs OFF, N-appaiato,
+2-3 semi, run lunghi. DOMANDA: la materia/antimateria coerente che controlla il verso del tempo → ordine del segno
+ATTRATTORE (sale e RESTA, vs §48) o resta 0.5 (abeliano DEFINITIVO)?
+
 ---
 
 ## MODELLO BRANCH E TRACING — 2026-09-07 (canonico)

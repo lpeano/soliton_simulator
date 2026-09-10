@@ -858,3 +858,39 @@ commento "torsione a 4pi, angolo=tw/2 spin-1/2"); `ritmo()` Fase5 wrappa su 4pi 
 esplicita `1+|tw|/PHI_CRIT`), **SALTARE 5.3c globale**. Eventuale 4pi esplicito solo circoscritto a una grandezza
 a doppia copertura che non abbia già il fattore 2 — mai la costante globale né la soglia di mitosi. **IN ATTESA
 DELLA DECISIONE DI LUCA** ("poi ti dico"). Doc `main` allineata; codice/dati committati su `dev` (non pushato).
+
+### §53 — [branch dev-spinoriale] MOD 5.3a+5.3b IMPLEMENTATE (--tempo-segno): tempo proprio DEPURATO, 7 sigilli PASS (2026-09-10)
+**Percorso (tutto misurato PRIMA di implementare):** dopo il gate §52, lunga catena di test-GRATIS per trovare
+il SEGNO giusto del verso del tempo.
+- **Teorema segno-da-fase IMPOSSIBILE (dimostrato):** un segno da fase istantanea dell'overlap `<canon(nb)|_psi_spinor>`
+  non può insieme (i) ridurre a +1 nel limite, (ii) essere stabile, (iii) vedere l'antimateria. Tre varianti
+  MUTUAMENTE ESCLUSIVE: A letterale (vede antimateria 60/60 ma oscilla 49.9%), B' fase-propria-rimossa (stabile
+  0.0% ma CIECA all'antimateria 0/60 — il flip π è una fase globale che B' rimuove), B'' rif campo-emesso (vede
+  60/60 ma oscilla 49.4%). Radice: segno-antimateria (π discreto) e de Broglie (continua) vivono ENTRAMBI nella
+  fase globale. Olonomia `sign(cos(tw/2))` = parità del winding, stabile ma DECORRELATA da perc_chi (53%≈caso).
+- **Scelta β = perc_chi (la vera identità materia/antimateria), MODULATA dalla MATERIALITÀ** (osservazione di Luca:
+  Feynman-Stückelberg vale per le PARTICELLE, non per lo spaziotempo VUOTO). `s_k = 1 + (perc_chi−1)·m_k`.
+- **Materialità dalla COERENZA** (non peq/massa_critica, misurati INERTI: peq~1e-8 vs massa_critica~621
+  incommensurabili → m≈0 ovunque): `m_k = clip(cos(φ − arg(Ψ_locale)), 0, 1)` (coerenza col campo locale = Legge II,
+  materia = interferenza costruttiva). Misurato: LENTA (|Δm|/passo 0.0017, NON contaminata dal de Broglie — la radice
+  di tutti i fallimenti), stabile (flip 0.2%), locale, zero-param, vuoto-neutro (s_k 0.943), materia segue perc_chi (100%).
+- **5.3b magnitudine:** `ritmo()` Fase5 era de Broglie (corr con torsione +0.008, bocciato da S3b) → sotto `--tempo-segno`
+  la magnitudine diventa `1+|tw_nodo|/PHI_CRIT` (torsione esplicita, RI-TEST 2: lenta/stabile).
+
+**IMPLEMENTAZIONE (`--tempo-segno`, default OFF byte-identico, richiede --campo-spinoriale + --spinore-corretto):**
+aggancio selettivo — `dt_n_s = s_k·dt_n` FIRMATO solo su evoluzione interna (delta_phivel, delta_sync_phi,
+_passo_spinoriale, self.phi); `dt_n` MAGNITUDINE su eta+termostato; `dt_e` (geometria) INTATTO. `s_k` da stato
+committato t-1 (causale). Commit dev `0639ba2` (pushato).
+
+**7 SIGILLI TUTTI PASS** (`csv/_seal_53a/_sigillo_53a.py`, ON=800/300p batch con mitosi):
+1. OFF byte-identico (flag-off vs HEAD/Fase5): max|Δ|=0.00e+00 (phi/psi/tw/pos). 2. Riduzione-vuoto: max|s_k−1|=0
+sul vuoto (m<0.1), s_k medio 0.493 (materia inverte). 3. CONSERVAZIONE: Σperc_chi ON −45/2447 OFF +87/2815
+(bilanciato); olonomia netta non diverge (drift ON −480 < OFF −2853). 4. STABILITÀ: N 1196→2447, n_naninf=0,
+min(eta)=0 (≥0). 5. causalità (strutturale, t-1). 6. completezza (firmato #3-6, magnitudine #1-2, geom intatta).
+7. controprova non-abeliana: ON≠OFF (max|Δphi|=12.4). Relazione dev `RELAZIONE_CLAUDE_dev-spinoriale.md` aggiornata.
+
+**PROSSIMO — IL TEST DECISIVO (non ancora lanciato):** campagna covariante `--tempo-segno` ON vs OFF, N-appaiato,
+2-3 semi, run lunghi (OOM: max 2-3 sequenziali). Misura segno_arco_coer, spin_overlap_arco, berry_firmata. DOMANDA:
+con la materia/antimateria coerente che controlla il VERSO del tempo (antimateria indietro, Feynman-Stückelberg),
+l'ordine del segno diventa ATTRATTORE (segno_arco sale e RESTA, vs §48 dove decadeva) o resta 0.5 (abeliano
+DEFINITIVO anche con infrastruttura del segno pulita)?
