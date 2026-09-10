@@ -165,6 +165,17 @@ globale; l'ordine di aggiornamento resta ETC t-1).
 7. GRAVITA' INTATTA: la geometria (peq, distanze) usa |dt_e| MAGNITUDINE, NON si congela fra
    materia e antimateria. Verificare che l'attrazione gravitazionale materia-antimateria
    PERSISTA (lo split e' nel segno/tempo, non nella gravita').
+8. INVECCHIAMENTO (GATE FISICA, ALPHA 2023): eta >= 0 per ENTRAMBI i settori. Materia e
+   antimateria invecchiano in AVANTI (l'anti-idrogeno cade in giu' e invecchia); solo
+   l'orologio INTERNO (spinore/fase) inverte. eta usa |dt_n| (magnitudine), mai il firmato.
+
+### DICHIARAZIONE ONESTA (nel commit e nel doc)
+
+Il verso opposto del tempo INTERNO dell'antimateria e' un POSTULATO di modellazione
+(Feynman-Stuckelberg), NON un dato emergente. Il codice conferma: senza --tempo-segno, dt_n e'
+magnitudine (tutto avanti). Il 3+1 ASSUME il verso (5.3a), non lo scopre. La scoperta, se c'e',
+sara' nelle CONSEGUENZE non postulate: il segno si ordina? emerge rotazione? Il postulato e'
+lecito (FS e' interpretazione standard; ALPHA 2023 vincola: gravita'/invecchiamento NON invertono).
 
 ---
 
@@ -184,6 +195,21 @@ come coordinata). MA il pattern finora e' abeliano a ogni livello. Il 3+1 potreb
 - oppure RESTARE abeliano (il segno frustrato anche in 4D) -> teorema di assenza definitivo,
 su un sistema ora COMPLETO (spaziotempo). In entrambi i casi, e' il test piu' informativo:
 a sistema 3+1 completo, se resta 0.5, l'abelianita' e' DEFINITIVA a ogni livello geometrico.
+
+### 5.1 PRESIDIO CRITICO: distinguere ORDINE da SEPARAZIONE (obbligatorio)
+
+`segno_arco_coer` sul sistema INTERO puo' salire per DUE motivi OPPOSTI:
+- (A) ORDINE VERO: dentro il settore materia, il segno si ordina (i +1 coerenti fra loro);
+- (B) SEPARAZIONE ILLUSORIA: gli archi materia-antimateria (che davano -1) sono CONGELATI, quindi
+  `segno_arco` sale solo perche' hai TOLTO gli archi discordi, NON perche' il segno si e' ordinato.
+
+PER DISTINGUERE, misura `segno_arco_coer` DENTRO UN SOLO SETTORE (solo archi materia-materia,
+escludendo gli archi congelati/discordi):
+- se sale ANCHE dentro il solo settore materia -> (A) ORDINE VERO (non-abeliano emergente, scoperta);
+- se dentro il solo settore materia resta ~0 -> (B) SEPARAZIONE (il 3+1 separa i settori ma NON
+  ordina il segno: nessuna scoperta, solo la geometria dello split che postuli).
+SENZA questa misura, un `segno_arco` che sale sul sistema intero e' AMBIGUO e non va interpretato
+come ordine.
 
 ---
 

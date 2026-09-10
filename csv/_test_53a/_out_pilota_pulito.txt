@@ -1,0 +1,28 @@
+=== PILOTA COVARIANTE PULITO (--calore-scal, vuoto isotropo) — ON vs OFF, 800p seed1 ===
+config: --batch --nmasse 3 --sep 8 --passi 800 --ogni 100 --campo-spinoriale --spinore-vivo
+        --spinore-corretto --chi-core --calore-scal [+ --tempo-segno per ON].
+NOTA: il run ON si e' IMPIANTATO a step ~764 (spia di stabilita' del ramo torsione a run lunghi);
+uso il range comune (2a meta', ~step 380-762), rappresentativo. Media 2a meta'.
+
+metrica                      OFF(2a met)    ON(2a met)        ON-OFF        note
+segno_arco_coer                 -0.00007      +0.00006      +0.00014  (sd 0.0024)  NEL RUMORE
+spin_overlap_arco               +0.50000      +0.50003      +0.00003               0.500 scorrelato
+berry_spin_media                +0.00251      -0.00598      -0.00848  (sd 0.0968)  nel rumore
+berry_spin_media_assoluta       +1.07260      +1.07539      +0.00279               identici
+segno_ov_absmedia               +0.63818      +0.63969      +0.00152               identici
+verso_arco_coer                 -0.00000      +0.00006      +0.00007               ~0
+m0_Lz                           -0.00607      +0.00054      +0.00660  (sd 0.2089)  NEL RUMORE (no rotazione)
+m0_spin_axis_R                  +0.05614      +0.08367      +0.02753  (sd 0.0249)   ~1 sd borderline (DIREZIONE)
+
+TREND segno_arco_coer:
+  OFF: nasce 0.967 -> decade -> ultimi3 [0.004, -0.001, 0.001]
+  ON : nasce 0.905 -> decade -> ultimi3 [-0.003, 0.002, -0.004]
+
+VERDETTO = NO-GO CONFERMATO ANCHE PULITO. Togliere la contaminazione chirale (calore vettoriale)
+NON cambia l'esito: segno_arco_coer decade a ~0 in ENTRAMBI, spin_overlap 0.500, m0_Lz~0 (no
+rotazione). Il sistema e' ABELIANO anche col vuoto isotropo. Il pilota pulito e' PIU' piatto del
+contaminato: la differenza berry_abs (ON 1.076 < OFF 1.198) SPARISCE (ora 1.073=1.075) = era
+artefatto di contaminazione. -> ipotesi abeliana RAFFORZATA su dati puliti.
+
+CAUTELE: (1) run ON impiantato a step 764 = spia di stabilita' --tempo-segno a run lunghi;
+(2) 800p=formazione, 1 seme -> pilota, non verdetto. Conferma: 2-3 semi/2000 passi.
