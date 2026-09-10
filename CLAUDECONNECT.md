@@ -799,3 +799,29 @@ controprova non-abeliana per-nodo 1.992, stabilita' 400p (N 1196->2757, no nan/i
 NON e' il verdetto Fase 4: serve la campagna covariante lunga a loop chiuso. NB: stanata e riparata una REGRESSIONE
 (soliton_simulator.py sovrascritto con backup pre-Fase1, 206 righe perse -> git restore da HEAD). Commit su
 `dev-spinoriale` (Fase 3 677fc80, verdetto a903491, doc a623f27, Fase 4 7fc637e), dati+sigilli versionati per Claude.
+
+### §51 — [branch dev-spinoriale] FASE 5 committata + DESIGN MOD 5.3 rivista (il SEGNO nel tempo proprio) (2026-09-10)
+**FASE 5 committata** (`dev-spinoriale`, commit `4ea6f0c`, backup `soliton_simulator.backup_2026-09-10_fase5.py`).
+Sotto `--campo-spinoriale` (default OFF byte-identico): `ritmo()` prende il tempo proprio dal campo emesso
+`psi_spin[:,0]` battendo sull'OTTO (wrapping **4pi**) invece di `angle(psi)` scalare; soglia mitosi/coppie da
+`_rho_sorgente` (rho_spin ON / |psi|^2 OFF); `_eredita_spinore_figli` attiva anche con `--campo-spinoriale`.
+SIGILLO FASE 5 (`csv/_seal_fase5/_sigillo_fase5.py`, in-process, PASS): S3 riduzione-al-limite DETERMINISTICA
+(spinori in fase, 1 passo ON vs OFF) `max|dphi|=max|dpos|=max|d_psi_spinor|=0.000e+00` ESATTO; controprova
+non-abeliana per-nodo ON≠OFF (`max|d_psi_spinor|=1.98`).
+
+**DESIGN MOD 5.3 (rivista) — proposto, IN ATTESA DI CONFERMA DI LUCA (nessun codice scritto).** Intuizione di
+Luca (Feynman-Stückelberg): far entrare il **SEGNO** di doppia-copertura nel tempo proprio, che può **invertire
+verso** (materia→avanti, antimateria→indietro). Reperto: in `ritmo()` il wrapping 4pi da `psi_spin[:,0]` è già la
+MAGNITUDINE del de Broglie/Reeb (esatta riduzione), ma il segno NON entra; il segno vive in
+`s_k=sign(Re<canon(nb_k)|_psi_spinor_k>)` (chi-da-spinore). **Design**: dietro flag nuovo (default OFF) che
+richiede `--campo-spinoriale`+`--spinore-corretto`, moltiplicare l'uscita di `ritmo()` per `s_k`:
+`r_signed_k = s_k · r_mag_k`. (1) tau deriva dal de Broglie/Reeb: magnitudine da `psi_spin[:,0]` sull'otto,
+verso dal lobo `s_k`. (2) verso inverte PER COSTRUZIONE (lobo dell'otto = flusso di Reeb opposto sui due lobi),
+non per decreto. (3) riduzione-al-limite ESATTA: tutta materia → `s_k=+1` → `r_signed=ritmo()` identità. (4)
+causalità OK: `ritmo()` legge `_nb`/`_psi_spinor` committati a t-1; l'inversione è LOCALE al `dt_n` del nodo,
+ordine ETC Jacobi globale invariato (nessun loop causale). **Punto aperto per Luca**: rischio `eta<0`/`dt_e<0`
+(antimateria che ringiovanisce, archi misti col tempo proprio ~0) → scelta (A) inversione piena del `dt_n`
+(Feynman-Stückelberg letterale) sigillando la stabilità, vs (B) invertire solo l'orologio interno lasciando
+`|dt_n|`. Sigilli da fare prima del test: OFF byte-id, S3, causalità, stabilità (punti eta/dt_e<0), conservazione
+(olonomia globale, coppie somma-zero), controprova non-abeliana. Test: `segno_arco_coer` sale e RESTA (attrattore)
+vs §48 dove decadeva?

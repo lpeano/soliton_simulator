@@ -75,6 +75,23 @@ Prossimo: **campagna covariante lunga a loop chiuso** (2-3 run paralleli, evitar
 → se il segno si ordina e RESTA = attrattore (ribaltamento); se ~0 = abeliano definitivo anche a loop chiuso. Poi Fase 5
 (coppie/mitosi/tempo-proprio Reeb).
 
+**[branch `dev-spinoriale`] §51 — FASE 5 committata + DESIGN MOD 5.3 rivista (segno nel tempo proprio) (2026-09-10).**
+**FASE 5 committata** (`4ea6f0c`, backup `soliton_simulator.backup_2026-09-10_fase5.py`). Sotto `--campo-spinoriale`
+(OFF byte-identico): `ritmo()` dal campo `psi_spin[:,0]` sull'OTTO (wrapping **4π**); soglia mitosi/coppie da
+`_rho_sorgente`; eredità spinore ai figli attiva. Sigillo FASE 5 PASS (`csv/_seal_fase5/_sigillo_fase5.py`):
+S3 riduzione-al-limite DETERMINISTICA **0.000e+00** esatto; controprova non-abeliana per-nodo ON≠OFF (1.98).
+**DESIGN MOD 5.3 (rivista) proposto — IN ATTESA CONFERMA LUCA, nessun codice.** Feynman-Stückelberg: il SEGNO di
+doppia-copertura entra nel tempo proprio e ne inverte il VERSO (materia→avanti, antimateria→indietro). Il 4π in
+`ritmo()` è già la MAGNITUDINE del de Broglie/Reeb (segno non entra); il segno è `s_k=sign(Re⟨canon(nb)|_psi_spinor⟩)`.
+Proposta (flag nuovo default OFF, richiede `--campo-spinoriale`+`--spinore-corretto`, zero parametri):
+`r_signed_k = s_k · ritmo()_k`. Riduzione-al-limite ESATTA (tutta materia → s_k=+1 → identità); causalità OK
+(`ritmo()` legge `_nb`/`_psi_spinor` a t-1; inversione LOCALE al `dt_n`, ordine ETC Jacobi invariato).
+**Punto aperto (decide Luca)**: rischio `eta<0`/`dt_e<0` (antimateria che ringiovanisce, archi misti) → (A) inversione
+piena del `dt_n` sigillando la stabilità, vs (B) invertire solo l'orologio interno lasciando `|dt_n|`. Sigilli
+pre-test: OFF byte-id, S3, causalità, stabilità (eta/dt_e<0), conservazione (olonomia, coppie somma-zero),
+controprova non-abeliana. Test: `segno_arco_coer` sale e RESTA (attrattore) vs §48 dove decadeva?
+NOTA: `soliton_simulator.regressione_2026-09-10.py.bak` = scratch (−205 righe vs HEAD), lasciato untracked su dev.
+
 ---
 
 ## MODELLO BRANCH E TRACING — 2026-09-07 (canonico)
