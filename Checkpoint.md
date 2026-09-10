@@ -92,6 +92,19 @@ pre-test: OFF byte-id, S3, causalità, stabilità (eta/dt_e<0), conservazione (o
 controprova non-abeliana. Test: `segno_arco_coer` sale e RESTA (attrattore) vs §48 dove decadeva?
 NOTA: `soliton_simulator.regressione_2026-09-10.py.bak` = scratch (−205 righe vs HEAD), lasciato untracked su dev.
 
+**[branch `dev-spinoriale`] §52 — DUE TEST-GRATIS: S3b NEGATIVO + PHI_CRIT=4π globale SOFFOCA la mitosi (2026-09-10).**
+Lanciati PRIMA di implementare (misura-prima). Nessuna modifica al codice (`git restore` del 5.3b non committato;
+resta Fase 5 `4ea6f0c`). Commit evidenze `dev` `95bbce1` (`csv/_seal_53rel/`: script + `_out_*.txt`).
+**(1) S3b NEGATIVO**: l'orologio de Broglie di `_psi_spinor` (`|Δα|/DT` sull'otto) è SCORRELATO dalla dilatazione
+torsionale `1+|tw|/PHI_CRIT` (corr **+0.008**, freq ~100-230 vs τ~1.55, scala **~100×**). La MAGNITUDINE del tempo
+proprio NON emerge dal de Broglie → il de Broglie porta solo il VERSO/segno. **(2) PHI_CRIT=4π globale SOFFOCA la
+mitosi → STOP**: config batch fedele, spinoriale Fase5, 300 passi: 2π N 1196→2815 (×2.35) vs 4π N 1196→1196 (×1.00,
+ZERO mitosi). Causa: `soglia0=PHI_CRIT=4π` = tetto fisso `TW_TETTO=4π` → finestra mitosi collassa (righe 2582-2644).
+**Reperto guardiano**: il 4π doppia-copertura è GIÀ presente come `2·PHI_CRIT` dove serve (`TW_SPINORE _twh=tw/(2·PHI_CRIT)
+=tw/4π` riga 1710; `ritmo()` wrappa su 4π riga ~1560). `PHI_CRIT=4π` globale (a) uccide la mitosi E (b) raddoppia a
+**8π** dove è già corretto → **leva sbagliata**. **RACCOMANDAZIONE**: 5.3a (verso da `s_k`) + 5.3b (magnitudine da
+torsione esplicita), **SALTARE 5.3c globale**. IN ATTESA DECISIONE LUCA ("poi ti dico"). Dev non pushato.
+
 ---
 
 ## MODELLO BRANCH E TRACING — 2026-09-07 (canonico)

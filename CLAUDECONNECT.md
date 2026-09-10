@@ -825,3 +825,36 @@ ordine ETC Jacobi globale invariato (nessun loop causale). **Punto aperto per Lu
 `|dt_n|`. Sigilli da fare prima del test: OFF byte-id, S3, causalità, stabilità (punti eta/dt_e<0), conservazione
 (olonomia globale, coppie somma-zero), controprova non-abeliana. Test: `segno_arco_coer` sale e RESTA (attrattore)
 vs §48 dove decadeva?
+
+### §52 — [branch dev-spinoriale] DUE TEST-GRATIS: S3b NEGATIVO + PHI_CRIT=4pi globale SOFFOCA la mitosi (2026-09-10)
+**L:** dopo il redesign, prima S3b (magnitudine de Broglie vs dilatazione), poi — se separo i ruoli — MOD 5.3a
+(verso da `s_k`), 5.3b (magnitudine da torsione esplicita), 5.3c (PHI_CRIT=4pi nel sistema spinoriale), con
+test-GRATIS PRIMA di 5.3c per verificare che il 4pi non soffochi la mitosi.
+
+**A — due test-GRATIS lanciati PRIMA di implementare (disciplina misura-prima). Nessuna modifica al codice
+(`soliton_simulator.py` resta Fase 5 `4ea6f0c`; `git restore` del 5.3b non committato). Commit evidenze su
+`dev-spinoriale` `95bbce1` (`csv/_seal_53rel/`: script + output grezzi `_out_*.txt`).**
+
+**(1) S3b = NEGATIVO (DIMOSTRATO).** L'orologio de Broglie del PRIMARIO `_psi_spinor`
+(`|Δα|/DT`, `α=arg<canon(nb)|psi_sp>` sull'otto) è **SCORRELATO** dalla dilatazione torsionale
+`tau_nodo=1+media_archi|tw|/PHI_CRIT`: corr media **+0.008** (min −0.12 max +0.08); freq de Broglie
+~100-230 rad/s (rotazione interna ~1-2.3 rad/passo) vs `tau~1.55` — scala **~100×** diversa. La MAGNITUDINE
+del tempo proprio NON emerge dal de Broglie → il de Broglie porta solo il VERSO/segno (S3a). Config Fase5,
+`SCUOTIMENTO=False`, causale (α da stati committati a step consecutivi t-1/t-2), 120 nodi.
+
+**(2) PHI_CRIT=4pi globale = SOFFOCA LA MITOSI → STOP (NEGATIVO).** Config batch FEDELE (`nuova_massa` in
+cerchio nmasse3 sep8 + passo batch completo, spinoriale Fase5, 300 passi): **2pi** → N 1196→2815 (**×2.35**,
+mitosi sana); **4pi** → N 1196→1196 (**×1.00**, ZERO mitosi). Conferma il commento riga 276-280. Causa
+(righe 2582-2644): `soglia0=PHI_CRIT=4pi` coincide col tetto fisso `TW_TETTO=4pi` → la finestra di mitosi
+`[soglia,tetto]` collassa. **Mi sono fermato al gate come da ordine di Luca.**
+
+**REPERTO GUARDIANO DECISIVO:** il 4pi della doppia copertura **è GIÀ presente** nel settore spinoriale come
+`2·PHI_CRIT`, esattamente dove tocca la doppia copertura: `TW_SPINORE _twh=tw/(2·PHI_CRIT)=tw/4pi` (riga 1710,
+commento "torsione a 4pi, angolo=tw/2 spin-1/2"); `ritmo()` Fase5 wrappa su 4pi (riga ~1560). Quindi
+`PHI_CRIT=4pi` GLOBALE (a) uccide la mitosi E (b) raddoppia di nuovo il 4pi a **8pi** dove è già corretto →
+**leva sbagliata e ridondante**. La coerenza geometrica a doppia copertura è già soddisfatta dove serve.
+
+**RACCOMANDAZIONE (guardiano):** procedere con **5.3a** (verso da `s_k`) + **5.3b** (magnitudine da torsione
+esplicita `1+|tw|/PHI_CRIT`), **SALTARE 5.3c globale**. Eventuale 4pi esplicito solo circoscritto a una grandezza
+a doppia copertura che non abbia già il fattore 2 — mai la costante globale né la soglia di mitosi. **IN ATTESA
+DELLA DECISIONE DI LUCA** ("poi ti dico"). Doc `main` allineata; codice/dati committati su `dev` (non pushato).
