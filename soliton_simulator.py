@@ -535,8 +535,8 @@ def scuoti_vuoto(net):
 
     # Inietta l'agitazione vettoriale di fase firmata dalla chiralità
     calcio = net.rng.normal(0.0, 1.0, net.n) * ampiezza
-    if hasattr(net, "perc_chi") and len(net.perc_chi) == net.n:
-        calcio = calcio * net.perc_chi  # Firma antichirale (rompe simmetria speculare)
+    if CALORE_VETTORIALE and hasattr(net, "perc_chi") and len(net.perc_chi) == net.n:
+        calcio = calcio * net.perc_chi  # Firma antichirale (rompe simmetria speculare); SCALARE se --calore-scal
         
     net.phivel[:net.n] += calcio
 # ============================================================================
