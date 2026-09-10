@@ -777,3 +777,25 @@ la materia stabilizza l'ordine PER FISICA, non per termine imposto. Il falliment
 per il nuovo. Doc sotto doc/: FONDAZIONE_SPINORIALE.md (leggi I-X + geometria di contatto), REFACTORING_SPINORIALE.md
 (piano tecnico, flag --campo-spinoriale, fasi+sigilli riduzione-al-limite), ONTOLOGIA_SPINORIALE.md. Solo fondazione,
 NIENTE codice ancora. Progetto di settimane. REGOLA: d'ora in poi ogni relazione/commit dichiara il BRANCH.
+
+### §50 — [branch dev-spinoriale] FASI 1-4 implementate + VERDETTO FASE 3 NEGATIVO + non-abelianita' totale (2026-09-10)
+Implementate quattro fasi dietro `--campo-spinoriale` (default OFF byte-identico), ognuna con sigillo di
+riduzione-al-limite S3 (spinori in fase -> il vecchio, ESATTO 0.000e+00). **Fase 1**: il campo Psi e' EMESSO
+dallo spinore (calcola_psi, self.psi_spin/rho_spin n×2). **Fase 2**: densita' (rho=psi^dag psi) e gravita'
+(nb nativo) pilotate dal campo (`_rho_sorgente`, `_nb_grav`). **Fase 3**: forze di fase = OVERLAP SPINORIALE
+`<psi_i|psi_j>` (`_coppia_interferenza`).
+**VERDETTO FASE 3 = NEGATIVO** (campagna covariante ON vs OFF, 3 semi, N-appaiato, ~3000-4470 passi; run finiti
+per OOM la notte + riavvio Windows Update alle 02:12, eventi separati e posteriori alla morte dei run): ON≈OFF
+su TUTTO il settore del segno (segno_arco_coer ON−OFF=+0.0001, spin_overlap 0.500=0.500 scorrelato, berry_firmata
+~0). Le forze = overlap spinoriale DA SOLE **NON** ordinano il segno -> §48 NON ribaltato, core ancora ABELIANO.
+**REPERTO che riapre il quadro**: `omega_new` (evoluzione dello spinore) usava inerzia `|self.psi|^2` SCALARE ->
+LOOP APERTO (emissione spinoriale ma evoluzione scalare = sistema MISTO). Il verdetto Fase 3 e' su un loop aperto,
+non sulla visione completa. **Principio di non-abelianita' totale** (doc/ aggiornati): ovunque una legge legga
+FASE (phi) o DIREZIONE (nb), sostituire con SPINORE (psi) o OVERLAP; presidio = riduzione-al-limite. **Fase 4**
+(ARRICCHIMENTO, deciso da Luca: mantenere i generatori chirali di B, non sostituirli): inerzia = rho_spin;
+`correzione = cross(B,nb) + cross(nb_campo,nb)` (identita' cross(nb_campo,nb)=cross(nb_campo−nb,nb) -> 0 nel
+limite, zero parametri). Sigilli TUTTI PASS: S3 gate 0.000e+00 esatto (deterministico), OFF byte-identico,
+controprova non-abeliana per-nodo 1.992, stabilita' 400p (N 1196->2757, no nan/inf). Il LOOP e' ora CHIUSO.
+NON e' il verdetto Fase 4: serve la campagna covariante lunga a loop chiuso. NB: stanata e riparata una REGRESSIONE
+(soliton_simulator.py sovrascritto con backup pre-Fase1, 206 righe perse -> git restore da HEAD). Commit su
+`dev-spinoriale` (Fase 3 677fc80, verdetto a903491, doc a623f27, Fase 4 7fc637e), dati+sigilli versionati per Claude.

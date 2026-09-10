@@ -1,6 +1,6 @@
 # CHECKPOINT — Sistema dei Solitoni Relazionali (VQT / U2)
 
-_Ultimo aggiornamento: 2026-09-09. Progetto di Luca Peano ("Il Muratore di Planck")._
+_Ultimo aggiornamento: 2026-09-10. Progetto di Luca Peano ("Il Muratore di Planck")._
 _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md per le norme di conduzione._
 
 ---
@@ -56,6 +56,24 @@ niente lo stabilizza); nel spinoriale la **materia** richiede accordo di segno (
 l'ordine diventerebbe un **attrattore** *per fisica*, non per trucco. Il fallimento dell'attuale è la mappa per il
 nuovo. Doc sotto `doc/`: `FONDAZIONE_SPINORIALE.md`, `REFACTORING_SPINORIALE.md`, `ONTOLOGIA_SPINORIALE.md`. Solo
 fondazione, niente codice. **REGOLA: d'ora in poi ogni relazione/commit dichiara il BRANCH.**
+
+**[branch `dev-spinoriale`] §50 — Fasi 1-4 implementate + VERDETTO FASE 3 NEGATIVO + non-abelianità totale (2026-09-10).**
+Quattro fasi dietro `--campo-spinoriale` (OFF byte-identico), ognuna col sigillo di riduzione-al-limite S3 (spinori
+in fase → il vecchio, **esatto 0.000e+00**). **Fase 1**: campo Ψ EMESSO dallo spinore (`psi_spin`/`rho_spin`).
+**Fase 2**: densità (ρ=ψ†ψ) e gravità (nb nativo) dal campo (`_rho_sorgente`, `_nb_grav`). **Fase 3**: forze =
+OVERLAP `⟨ψ_i|ψ_j⟩` (`_coppia_interferenza`). **VERDETTO FASE 3 = NEGATIVO** (covariante ON vs OFF, 3 semi,
+N-appaiato, ~3000-4470 passi): ON≈OFF su tutto (segno_arco ON−OFF=+0.0001, overlap 0.500=0.500, berry_firmata ~0)
+→ **§48 NON ribaltato**, core ancora ABELIANO. **Reperto**: l'evoluzione (`omega_new`) usava inerzia `|ψ|²`
+SCALARE → **LOOP APERTO** (sistema misto). Il verdetto Fase 3 è su loop aperto, non sulla visione completa.
+**Principio di non-abelianità totale** (doc/): ovunque φ o nb → ψ o overlap, col presidio riduzione-al-limite.
+**Fase 4** (ARRICCHIMENTO, scelta di Luca: mantenere i generatori chirali di B): inerzia = ρ_spin;
+`correzione = cross(B,nb) + cross(nb_campo,nb)` (→ 0 nel limite, zero parametri). **Sigilli tutti PASS**: S3 gate
+0.000e+00 esatto, OFF byte-identico, controprova non-abeliana per-nodo 1.992, stabilità (N 1196→2757, no nan/inf).
+Il **loop è ora CHIUSO**. **NON è il verdetto Fase 4**: serve la campagna covariante lunga a loop chiuso (ON vs OFF,
+N-appaiato, 2-3 semi). Commit su `dev-spinoriale`: Fase 3 `677fc80`, verdetto `a903491`, doc `a623f27`, Fase 4 `7fc637e`.
+Prossimo: **campagna covariante lunga a loop chiuso** (2-3 run paralleli, evitare OOM; occhio a Windows Update notturno)
+→ se il segno si ordina e RESTA = attrattore (ribaltamento); se ~0 = abeliano definitivo anche a loop chiuso. Poi Fase 5
+(coppie/mitosi/tempo-proprio Reeb).
 
 ---
 
