@@ -126,6 +126,24 @@
   risultato onesto)? **PER CLAUDE**: i CSV/log si committano a fine run (prossima sessione); ora sono
   versionati solo lo script di lancio e quello di verdetto. Rilancia con `run_covariante_fase3.ps1`.
   Mitosi/coppie restano scalari (Fase 4).
+  **VERDETTO FASE 3 = NEGATIVO** (branch `dev-spinoriale`, 2026-09-10). I 6 run sono terminati per OOM
+  (RAM esaurita, 6 run paralleli con N a migliaia di nodi su 32 GB; `.err` VUOTI, log puliti, morte
+  scaglionata 22:38→00:22 = firma OOM, NON bug: ON e OFF muoiono agli stessi passi) a **3060–4472 passi**
+  ciascuno — comunque ABBONDANTI (§48 si vedeva a ~10 passi; soglia disciplina 2000p superata). Verdetto
+  covariante N-appaiato (3 semi, range N [824–6319], `csv/fase3_cov/VERDETTO_fase3.txt`):
+  **segno_arco_coer ON−OFF = +0.0001** (decade a ~0 in ON IDENTICO a OFF); **spin_overlap_arco 0.500=0.500**
+  (spinori scorrelati fra archi in entrambi); verso_arco_coer ~0; **berry_firmata ON−OFF = −0.0001** (nessuna
+  olonomia netta); berry_assoluta ~1.15 in entrambi (fase geometrica LOCALE non nulla ma a segni che si
+  mediano a zero); coer_01 e m0_coer_nucleo LEGGERMENTE PIÙ BASSI in ON (−0.002/−0.019). CONCLUSIONE: le
+  forze = overlap spinoriale, DA SOLE, NON correlano gli spinori né ordinano il segno → **§48 NON ribaltato**,
+  l'ordine resta un repulsore, il core resta ABELIANO. **CAVEAT onesto**: mitosi/coppie ancora scalari
+  (Fase 4) → il canale che crea/distrugge archi è ancora abeliano e può diluire l'ordine; il risultato
+  solido è "le forze spinoriali da sole non bastano", non un verdetto sull'intera visione (serve Fase 4).
+  **PER CLAUDE (doppio-check)**: `csv/fase3_cov/diag_{on,off}_s{1,2,3}.csv` = serie temporali complete,
+  `csv/fase3_cov/cond_*` = condensazioni, `log/fase3_cov/*` = log (mostrano l'OOM: log puliti, .err vuoti),
+  `csv/fase3_cov/VERDETTO_fase3.txt` = output analisi, `_verdetto_fase3.py` = script (rilancia per verificare).
+  I `.pkl` (checkpoint ~passo 3000) esclusi (gitignore). Prossimo bivio: Fase 4 (coppie/mitosi spinoriali)
+  come vero banco di prova, oppure chiusura onesta come §48-bis (abeliano anche nel canale forze).
 - **`dev-dof`** (`5a4e754`): tracing per-passo §48 + **conferma 2 semi** del meccanismo
   repulsore. Pushato. **Capitolo CHIUSO**: core abeliano con meccanismo.
 - **`main`** (`eab5db5`): doc canonica allineata §47/§48/§49. Pushato. Per lo stato del

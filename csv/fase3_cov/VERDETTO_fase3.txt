@@ -1,0 +1,94 @@
+=== VERDETTO FASE 3 covariante (ON vs OFF, N-appaiato) ===
+
+N-range appaiato: [824, 6319]  bin=[np.int64(824), np.int64(1511), np.int64(2198), np.int64(2885), np.int64(3572), np.int64(4258), np.int64(4945), np.int64(5632), np.int64(6319)]
+
+--- segno_arco_coer (media per bin di N, appaiata) ---
+  bin_N              ON        OFF     ON-OFF
+  824-1511       0.0662     0.0660    +0.0003
+  1511-2198      0.0001     0.0000    +0.0001
+  2198-2885      0.0000    -0.0000    +0.0000
+  2885-3572     -0.0001    -0.0001    -0.0001
+  3572-4258     -0.0001    -0.0001    +0.0001
+  4258-4945     -0.0002    -0.0000    -0.0002
+  4945-5632      0.0001    -0.0003    +0.0004
+  5632-6319      0.0002     0.0001    +0.0000
+  DELTA ON-OFF (meta' alta di N): +0.0001
+
+--- spin_overlap_arco (media per bin di N, appaiata) ---
+  bin_N              ON        OFF     ON-OFF
+  824-1511       0.5193     0.5193    -0.0000
+  1511-2198      0.5000     0.5000    -0.0000
+  2198-2885      0.5000     0.5000    +0.0000
+  2885-3572      0.5001     0.5000    +0.0001
+  3572-4258      0.5000     0.5000    +0.0000
+  4258-4945      0.5000     0.5000    -0.0000
+  4945-5632      0.5000     0.5000    -0.0000
+  5632-6319      0.5000     0.4999    +0.0001
+  DELTA ON-OFF (meta' alta di N): +0.0000
+
+--- verso_arco_coer (media per bin di N, appaiata) ---
+  bin_N              ON        OFF     ON-OFF
+  824-1511       0.0601     0.0599    +0.0002
+  1511-2198     -0.0001    -0.0000    -0.0001
+  2198-2885     -0.0000    -0.0000    +0.0000
+  2885-3572      0.0001    -0.0001    +0.0002
+  3572-4258     -0.0000    -0.0000    +0.0000
+  4258-4945     -0.0001    -0.0000    -0.0000
+  4945-5632      0.0000     0.0001    -0.0001
+  5632-6319      0.0000    -0.0002    +0.0002
+  DELTA ON-OFF (meta' alta di N): +0.0000
+
+--- berry_spin_media (media per bin di N, appaiata) ---
+  bin_N              ON        OFF     ON-OFF
+  824-1511      -0.0028    -0.0082    +0.0055
+  1511-2198      0.0030     0.0011    +0.0020
+  2198-2885     -0.0027     0.0021    -0.0048
+  2885-3572      0.0048    -0.0025    +0.0073
+  3572-4258      0.0024    -0.0011    +0.0035
+  4258-4945     -0.0022    -0.0042    +0.0021
+  4945-5632      0.0012    -0.0029    +0.0041
+  5632-6319     -0.0022     0.0080    -0.0102
+  DELTA ON-OFF (meta' alta di N): -0.0001
+
+--- berry_spin_media_assoluta (media per bin di N, appaiata) ---
+  bin_N              ON        OFF     ON-OFF
+  824-1511       1.1469     1.1623    -0.0154
+  1511-2198      1.1403     1.1587    -0.0184
+  2198-2885      1.1535     1.1690    -0.0155
+  2885-3572      1.1496     1.1664    -0.0168
+  3572-4258      1.1492     1.1686    -0.0195
+  4258-4945      1.1425     1.1611    -0.0186
+  4945-5632      1.1490     1.1634    -0.0144
+  5632-6319      1.1614     1.1547    +0.0068
+  DELTA ON-OFF (meta' alta di N): -0.0114
+
+--- coer_01 (media per bin di N, appaiata) ---
+  bin_N              ON        OFF     ON-OFF
+  824-1511       0.4874     0.4802    +0.0072
+  1511-2198      0.0861     0.1022    -0.0162
+  2198-2885      0.0567     0.0883    -0.0317
+  2885-3572      0.0238     0.0433    -0.0195
+  3572-4258      0.0065     0.0129    -0.0064
+  4258-4945      0.0034     0.0047    -0.0013
+  4945-5632      0.0020     0.0017    +0.0004
+  5632-6319      0.0013     0.0016    -0.0003
+  DELTA ON-OFF (meta' alta di N): -0.0019
+
+--- m0_coer_nucleo (media per bin di N, appaiata) ---
+  bin_N              ON        OFF     ON-OFF
+  824-1511       0.7752     0.7684    +0.0067
+  1511-2198      0.3196     0.3485    -0.0289
+  2198-2885      0.2731     0.3514    -0.0782
+  2885-3572      0.2732     0.3196    -0.0464
+  3572-4258      0.1253     0.1942    -0.0689
+  4258-4945      0.0985     0.1216    -0.0231
+  4945-5632      0.0877     0.0794    +0.0083
+  5632-6319      0.0700     0.0634    +0.0066
+  DELTA ON-OFF (meta' alta di N): -0.0193
+
+=== LETTURA ===
+Se segno_arco_coer ON-OFF > 0 e CRESCE/RESTA a N alto -> l'ordine e' ATTRATTORE
+  (la visione spinoriale RIBALTA il par.48: il segno ordina, non-abeliano EMERGE).
+Se ON-OFF ~ 0 su tutti i bin -> abeliano piu' profondo del previsto (risultato onesto,
+  le forze spinoriali non bastano a rendere l'ordine attrattore).
+berry_spin_media (firmata) != 0 in ON = fase geometrica non-abeliana accumulata.
