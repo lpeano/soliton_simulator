@@ -236,3 +236,30 @@ esclusive) — verificare `_verifica_cecita_antimateria.py` (B′ invariante sot
 **PROSSIMO: test covariante** `--tempo-segno` ON vs OFF, N-appaiato, 2-3 semi, run lunghi. DOMANDA:
 con la materia/antimateria coerente che controlla il verso del tempo (antimateria indietro), l'ordine
 del segno diventa ATTRATTORE (`segno_arco_coer` sale e RESTA, vs §48 dove decadeva) o resta 0.5?
+
+
+---
+
+## AGGIORNAMENTO 2026-09-10 (sera) — contaminazione CALORE VETTORIALE + FONDAZIONE 3+1
+
+**Reperto (Luca):** il calore vettoriale-chirale (surrogato di spin PRE-spinore) contaminava il segno:
+`SCUOTIMENTO=True` default -> `scuoti_vuoto` iniettava ogni passo un calcio firmato da `perc_chi` in
+`phivel` (riga 539); `--calore-scal` NON lo toglieva (gate solo il calcio iniziale). FIX (dev `3fb5143`):
+`scuoti_vuoto` rispetta `CALORE_VETTORIALE` -> con `--calore-scal` il calcio e' SCALARE/isotropo.
+OFF byte-identico (CV=True: max|dphi|=max|dpsi|=max|dphivel|=0). Principio: VUOTO ISOTROPO (simmetrico)
++ VERSO solo nella materia/antimateria (rottura spontanea di simmetria: l'asimmetria vive nello stato).
+Il pilota §54 (NO-GO) era su dati contaminati -> RIFATTO pulito (`csv/_test_53a/{off,on}_scal_s1.csv`).
+
+**Accenno (NON scoperta, 1 seme -> dentro il rumore):** `Sigma perc_chi` OFF +87 vs ON -45 (con
+`--tempo-segno` vira all'antimateria); `Sigma tw` netto negativo. Da confermare 2-3 semi/2000 passi.
+
+**FONDAZIONE 3+1** (`doc/FONDAZIONE_3+1.md`): proposta di Luca — il tempo proprio come QUARTA dimensione
+firmata dal segno (R^3 -> R^{3,1}), Feynman-Stuckelberg geometrico, split materia/antimateria EMERGENTE
+via `dt_e = 0.5(s_i|r_i|+s_j|r_j|)~0` fra opposti (non imposto). RAFFINATO con due presidi guardiano:
+(1) AGGANCIO SELETTIVO (dt_e firmato per il segno/dinamica, |dt_e| magnitudine per la GEOMETRIA -> la
+gravita' materia-antimateria NON si congela); (2) LOCALITA' TEMPORALE TOPOLOGICA (|T_i-T_j|>soglia ->
+nessun arco -> costo O(N), non solo arco inerte). Sigilli aggiornati (3=localita' topologica GATE COSTO,
+7=gravita' intatta). NON ancora implementato: e' la fondazione teorica del prossimo capitolo.
+
+**PROSSIMO:** valutare il pilota pulito (incluso materia/antimateria); poi braccio `--cs-dinamico`
+(metrica completamente locale: c_s locale <-> dilatazione = stessa metrica); poi eventualmente 3+1.
