@@ -895,17 +895,21 @@ con la materia/antimateria coerente che controlla il VERSO del tempo (antimateri
 l'ordine del segno diventa ATTRATTORE (segno_arco sale e RESTA, vs §48 dove decadeva) o resta 0.5 (abeliano
 DEFINITIVO anche con infrastruttura del segno pulita)?
 
-### §54 — [branch dev-spinoriale] TEST DECISIVO covariante MOD 5.3a+5.3b: PILOTA NO-GO (2026-09-10)
-Pilota go/no-go 800p seed 1 ON vs OFF (`csv/_test_53a/`, dev `db1b835`), config `--batch --nmasse 3 --sep 8
---campo-spinoriale --spinore-vivo --spinore-corretto --chi-core [+ --tempo-segno]`. Media 2a metà, N-appaiato.
-**segno_arco_coer** OFF −0.00000 / ON +0.00013 (ON−OFF **+0.0001**, sd 0.0023) = **NEL RUMORE**; **spin_overlap_arco**
-0.49998 = 0.49998 (**0.500 scorrelato**); berry_spin_media nel rumore; berry_spin_media_assoluta ON 1.076 < OFF 1.198
-(il flag AGISCE ma abbassa il modulo, non ordina). **Trend**: segno_arco_coer nasce ~0.9 e **DECADE a ~0 in ENTRAMBI**
-(OFF ultimi3 [0.005,0.001,−0.001]; ON [0.000,0.002,0.009]) = identico al §48.
-**VERDETTO PILOTA = NO-GO.** Con `--tempo-segno` (materia/antimateria COERENTE che controlla il verso del tempo,
-Feynman-Stückelberg, antimateria indietro) l'ordine del segno **decade come OFF**: NON diventa attrattore, resta 0.5 =
-**ABELIANO**, anche con infrastruttura del segno completa e pulita (mitosi/coppie non-abeliani + magnitudine torsionale
-+ verso dal segno). Il flag non è inerte (sigillo 7 ON≠OFF max|Δφ|=12.4) ma la sua fisica non crea ordine di segno.
-**5ª via che fallisce** (dopo §41/42/44/46) → **ipotesi ABELIANA molto forte**. CAUTELE: 800p=formazione, 1 seme →
-pilota, NON verdetto. **Conferma pendente:** campagna 2000p/2-3 semi (sull'hardware di Luca; qui ~45 min/run).
-**NB (da Luca):** verificare se il CALORE VETTORIALE è attivo mentre non dovrebbe — potrebbe contaminare il test.
+### §55 — [branch dev-spinoriale] FIX CALORE (contaminazione stanata) + pilota PULITO NO-GO + doc 3+1 + diagnosi 5.3c (2026-09-10)
+**Base codice = commit `8b8f8b0`** (dev, pushato). Catena: `3fb5143` (fix calore) → `1f2634f` (doc 3+1) → `8b8f8b0` (pilota pulito).
+**FIX CALORE (Luca):** il calore vettoriale-chirale (surrogato di spin PRE-spinore) contaminava il segno. `SCUOTIMENTO=True`
+default → `scuoti_vuoto` iniettava ogni passo un calcio firmato da `perc_chi` in `phivel` (riga 539); `--calore-scal` NON lo
+toglieva (gate solo il calcio iniziale). FIX: `scuoti_vuoto` rispetta `CALORE_VETTORIALE` (riga 538) → `--calore-scal` = vuoto
+SCALARE/isotropo. OFF byte-identico (CV=True: max|Δ|=0). Principio: **vuoto isotropo (simmetrico) + verso solo nella
+materia/antimateria** (rottura spontanea di simmetria: l'asimmetria vive nello stato, non nella scena).
+**PILOTA PULITO (`--calore-scal`, 800p seed1, `csv/_test_53a/{off,on}_scal_s1.csv`) = NO-GO confermato:** `segno_arco_coer`
+decade a ~0 in ON e OFF (ON−OFF +0.0001 nel rumore); `spin_overlap 0.500`; `m0_Lz~0`; `berry_abs` ON≈OFF (la differenza del
+pilota contaminato era artefatto). Togliere il calore chirale NON rivela ordine → **abeliano anche pulito**. NB: run ON
+impiantato step 764 (spia stabilità ramo torsione). Cautele: 1 seme/formazione.
+**DIAGNOSI 5.3a NO-GO (→ 5.3c):** il 5.3a firma `dt_n` (tempo ESTERNO di evoluzione), NON la fase de Broglie INTERNA dello
+spinore. Feynman-Stückelberg vero inverte la FASE QUANTISTICA interna (`exp(iφ)→exp(−iφ)`) dell'antimateria, non il tempo.
+Bersaglio sbagliato → prossimo capitolo **MOD 5.3c `--orologio-segno`** (firma l'orologio de Broglie INTERNO, `dt_n` resta
+magnitudine; s_k=sign(perc_chi) coppie stabile; gravità/eta intatti; presidio critico ordine-vero-vs-separazione con
+`segno_arco_coer` solo-settore-materia). Design da mostrare prima di implementare (vedi Checkpoint TODO).
+**Doc `doc/FONDAZIONE_3+1.md`** (tempo proprio come quarta dimensione, spaziotempo relazionale) raffinato: aggancio selettivo
+(gravità materia-antimateria non si congela) + località topologica O(N). TODO priorità 2.

@@ -7,27 +7,42 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 
 ## >>> PUNTO DI RIPRESA — 2026-09-10 (branch `dev-spinoriale`, riprendere DA QUI) <<<
 
-**Stato: MOD 5.3a+5.3b IMPLEMENTATE, SIGILLATE (7/7 PASS) e PILOTA covariante = NO-GO.**
-- Codice: `--tempo-segno` su `dev-spinoriale`, commit **`0639ba2`** (pushato). Verso del tempo = materia/antimateria
-  COERENTE (`s_k=1+(perc_chi−1)·m_coer`, `m_coer=clip(cos(φ−arg(Ψ)),0,1)`); magnitudine = torsione `1+|tw|/PHI_CRIT`.
-  Aggancio selettivo (firmato su evoluzione interna; eta/geometria = magnitudine). Default OFF byte-identico.
-- Sigilli: `csv/_seal_53a/` → **7/7 PASS**. Tracing **§53**+**§54** su main.
-- **PILOTA covariante 800p seed1 ON vs OFF (`csv/_test_53a/`, dev `db1b835`) = NO-GO**: `segno_arco_coer` decade a
-  ~0 in ENTRAMBI (ON−OFF +0.0001 nel rumore); `spin_overlap_arco` 0.500=0.500. Feynman-Stückelberg vero NON rende
-  l'ordine del segno un attrattore → **ipotesi ABELIANA molto forte** (5ª via fallita). Cautele: 800p/1seme = non verdetto.
+**Stato: MOD 5.3a+5.3b = NO-GO CONFERMATO (anche pulito). Base = commit `8b8f8b0` (pushato).**
+- Codice `8b8f8b0` (dev-spinoriale, allineato origin): contiene `--tempo-segno` (5.3a `dt_n_s` firmato riga ~2380 +
+  5.3b magnitudine torsionale), il **fix calore** (`scuoti_vuoto` rispetta `CALORE_VETTORIALE`, riga 538 → `--calore-scal`
+  = vuoto scalare isotropo), `_passo_spinoriale`. **LAVORARE DA QUI, NON da restore/versioni vecchie.**
+- **Pilota 5.3a (contaminato §54) e PULITO (§55, `--calore-scal`) = entrambi NO-GO:** `segno_arco_coer` decade a ~0 in
+  ON e OFF (ON−OFF +0.0001 nel rumore), `spin_overlap 0.500`, `m0_Lz~0`. Togliere il calore chirale NON rivela ordine
+  → **abeliano anche pulito**. `berry_abs` diff sparisce (era artefatto della contaminazione). NB: run ON impiantato a
+  step 764 (spia stabilità del ramo torsione). Cautele: 800p/1 seme = pilota.
+- **DIAGNOSI del NO-GO (chiave per 5.3c):** il 5.3a firma `dt_n` (il TEMPO ESTERNO di evoluzione), NON la fase de
+  Broglie INTERNA dello spinore. Feynman-Stückelberg vero inverte la FASE QUANTISTICA interna (`exp(iφ)→exp(−iφ)`) per
+  l'antimateria, non il tempo di evoluzione. Il 5.3a ha colpito il bersaglio sbagliato.
+- Doc `doc/FONDAZIONE_3+1.md` (tempo proprio come quarta dimensione) + relazione aggiornati.
 
-**DA FARE (ripresa, in ordine):**
-0. **[PRIMA di tutto — segnalato da Luca] CALORE VETTORIALE:** verificare se `CALORE_VETTORIALE`/calcio vettoriale è
-   ATTIVO mentre NON dovrebbe (default True nel codice?). Se attivo durante il test del segno, potrebbe contaminare
-   l'esito. Controllare nel codice lo stato reale del flag e se va spento per il test covariante pulito → eventualmente
-   RIFARE il pilota con il calore corretto prima di concludere l'abeliano.
-1. **CONFERMA definitiva** (se il calore era ok): campagna covariante `--tempo-segno` ON vs OFF, N-appaiato, **2-3 semi**,
-   **2000+ passi**, sull'hardware di Luca (qui ~45 min/run → ore). Se resta ~0 concorde → ABELIANO DEFINITIVO anche
-   con Feynman-Stückelberg. Diaglog `segno_arco_coer`, `spin_overlap_arco`, `berry_firmata`.
-2. Aggiorna relazione + tracing §55 con l'esito finale; push + `git log` conferma.
-- Nota terminale: se lo schermo torna nero → `terminal.integrated.gpuAcceleration:off` + Reload Window, oppure
-  `[Console]::Write([char]27+"c"); [Console]::ResetColor(); Clear-Host`.
-- Nota: `soliton_simulator.regressione_2026-09-10.py.bak` = scratch, untracked su dev (lasciare fuori).
+**>>> TODO DOMANI (priorità 1): MOD OROLOGIO-INTERNO (5.3c) — il verso è nella FASE de Broglie, non in dt_n <<<**
+LAVORA SUL CODICE ATTUALE (`8b8f8b0`), NON da restore. Verifica `git log -1` = questo commit; il codice DEVE già avere
+`--tempo-segno`, fix calore, `_passo_spinoriale`. Ogni modifica = DIFF INCREMENTALE.
+- **Flag `--orologio-segno`** (default OFF byte-identico; richiede `--campo-spinoriale`+`--spinore-corretto`).
+  ALTERNATIVO a `--tempo-segno`: 5.3a firma `dt_n` (tempo), 5.3c firma l'orologio INTERNO (fase). Testare SEPARATAMENTE.
+- **5.3c:** in `_passo_spinoriale`, dove la fase de Broglie INTERNA avanza (l'orologio proprio, la rotazione di
+  `exp(iφ)`, NON la precessione B di vicinato = interazione), moltiplicare il VERSO di avanzamento per `s_k`:
+  materia +1 (`exp(+i…)`), antimateria −1 (`exp(−i…)`). **`dt_n` resta MAGNITUDINE `|dt_n|`** (non firmato — distinto da 5.3a).
+- **PRESIDIO 1:** `s_k = sign(perc_chi)` delle COPPIE (stabile, opposto per conservazione), NON `sign(Re<canon|psi>)`
+  (oscilla 50%/passo — dimostrato). **PRESIDIO 2:** tocca SOLO l'orologio interno; gravità (Ψ-sorgente), invecchiamento
+  (eta), geometria INTATTI (ALPHA 2023). Se NON riesci a isolare l'orologio de Broglie dalla precessione di vicinato → FERMATI.
+- **SIGILLI:** 1 OFF byte-id; 2 riduzione-al-limite (tutta-materia s_k=+1 → orologio normale esatto); 3 gravità/eta intatti;
+  4 conservazione (Σs_k=0 coppie, |psi|=1); 5 stabilità 300p (|psi|=1, no blow-up); 6 non-oscillazione (s_k stabile).
+- **DISCIPLINA:** MOSTRA il design (dove/come firmi l'orologio interno + prova che dt_n resta magnitudine + riduzione-al-limite),
+  FERMATI per conferma di Luca. Poi diff, sigilli, commit+push+`git log` hash, test.
+- **TEST + PRESIDIO CRITICO (ordine VERO vs separazione ILLUSORIA):** misura `segno_arco_coer` TOTALE **E** dentro il SOLO
+  settore materia (solo archi materia-materia). Se sale anche nel solo-settore → (A) ORDINE VERO (non-abeliano emergente);
+  se resta ~0 nel solo-settore → (B) SEPARAZIONE (abeliano mascherato). RIPORTA ENTRAMBI = il verdetto.
+
+**TODO priorità 2 (dopo 5.3c):** MOD 3+1 (`doc/FONDAZIONE_3+1.md`) + `--cs-dinamico` — tempo proprio come quarta
+coordinata, split emergente, aggancio selettivo (gravità intatta), località topologica O(N).
+- Nota terminale nero → `terminal.integrated.gpuAcceleration:off` + Reload Window, o `[Console]::Write([char]27+"c")`.
+- `soliton_simulator.regressione_2026-09-10.py.bak` = scratch untracked (lasciare fuori).
 
 ---
 
