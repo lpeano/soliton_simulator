@@ -1666,17 +1666,11 @@ class Rete:
             B = B + Bg
         # INERZIA = |Psi|^2 (la materia mantiene il moto), come in mem_mot
         if not hasattr(self, "psi") or len(self.psi) < n: self.calcola_psi()
-        inerzia = np.maximum(self._rho_sorgente(), 1e-6)   # [FASE 4] rho_spin (ON) / |psi|^2 (OFF); limite identico
+        inerzia = np.maximum(np.abs(self.psi[:n])**2, 1e-6)
         dtn = dt_n if np.isscalar(dt_n) else np.asarray(dt_n)[:n]
         dtn_c = dtn if np.isscalar(dtn) else dtn[:, None]
         # MEMORIA HEBBIANA: omega si conserva + correzione dal campo (torsione B x n) - decadimento
-        correzione = np.cross(B, nb)                      # la geodetica che piega il momento (canale chirale B_geo)
-        if CAMPO_SPINORIALE:
-            # [FASE 4] ARRICCHIMENTO non-abeliano: AGGIUNGO il torque verso il Bloch del CAMPO EMESSO
-            # spinoriale (porta il segno relativo dei vicini via interferenza). Identita': cross(nb_campo, nb)
-            # = cross(nb_campo - nb, nb) (perche' cross(nb,nb)=0) -> ZERO nel limite (nb_campo=nb=polo) ->
-            # riduzione esatta. Mantiene i generatori chirali di B; nessun parametro (peso 1.0); snapshot t-1.
-            correzione = correzione + np.cross(self._nb_grav(), nb)
+        correzione = np.cross(B, nb)                      # la geodetica che piega il momento
         # VITA MEDIA LOCALE (ispirata al decadimento atomico / regola d'oro di Fermi): TAU_A non e'
         # piu' un numero fisso ma una PROPRIETA' DELLO STATO. Come ogni isotopo ha la sua vita media,
         # ogni nodo ha la sua: stati fortemente legati (|Psi|^2 grande, nucleo coerente) decadono

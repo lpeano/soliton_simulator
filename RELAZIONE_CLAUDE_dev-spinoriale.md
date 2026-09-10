@@ -144,6 +144,24 @@
   `csv/fase3_cov/VERDETTO_fase3.txt` = output analisi, `_verdetto_fase3.py` = script (rilancia per verificare).
   I `.pkl` (checkpoint ~passo 3000) esclusi (gitignore). Prossimo bivio: Fase 4 (coppie/mitosi spinoriali)
   come vero banco di prova, oppure chiusura onesta come §48-bis (abeliano anche nel canale forze).
+  **FASE 4 IMPLEMENTATA** (branch `dev-spinoriale`, 2026-09-10): chiuso il LOOP dell'EVOLUZIONE dello
+  spinore (`_passo_spinoriale`), dietro `--campo-spinoriale`, per ARRICCHIMENTO (deciso da Luca: mantenere
+  i generatori chirali, non sostituirli). **MOD 4.1** inerzia = `_rho_sorgente()` (rho_spin ON / |psi|² OFF)
+  invece di |self.psi|². **MOD 4.2** `correzione = cross(B,nb) + cross(nb_campo, nb)` con nb_campo = `_nb_grav()`
+  (Bloch del campo EMESSO); identità `cross(nb_campo,nb)=cross(nb_campo−nb,nb)` → **0 nel limite** (nb_campo=nb=polo),
+  **zero parametri** (peso 1.0). Mantiene B (chirale) e AGGIUNGE il canale spinoriale. Rimossa una garanzia di
+  freschezza invasiva (ricalcolava self.psi → scollegava rho_spin): `_rho_sorgente`/`_nb_grav` hanno già il
+  fallback, e REPULS_LEGGE chiama calcola_psi nel passo. Sigilli TUTTI PASS (`csv/_seal_fase4/_sigillo_fase4.py`):
+  **S3 GATE riduzione-al-limite 0.000e+00 ESATTO** (deterministico, senza rumore); OFF byte-identico (vs backup
+  pre-Fase4: dphi=0,dpos=0,dψ=0); controprova non-abeliana per-nodo 1.992>0; **STABILITÀ** 400p ON+rumore (N
+  1196→2757, n_naninf=0, no blow-up). **REPERTO chiave** (`csv/_seal_fase4/_diag_gate.py`): il gate falliva a
+  2e-3 SOLO col rumore del vuoto (SCUOTIMENTO) attivo — il nuovo termine `cross(nb_campo,nb)` REAGISCE al Bloch
+  perturbato (riallineamento fisico corretto), quindi S3 va testato sul limite DETERMINISTICO (senza rumore);
+  la parte deterministica si riduce ESATTA. Backup `soliton_simulator.backup_2026-09-10_fase4.py`. Primo sguardo
+  400p (NON verdetto): segno_arco 0.000, overlap 0.5001 — formazione, serve la campagna covariante lunga.
+  **NON è il VERDETTO Fase 4**: serve ON vs OFF N-appaiato 2-3 seed su run lunghi (ora il LOOP È CHIUSO: inerzia
+  + evoluzione spinoriali). **NB REGRESSIONE stanata**: soliton_simulator.py era stato sovrascritto con un backup
+  pre-Fase1 (perse 206 righe committate); ripristinato da HEAD (`git restore`), sigillo Fase 3 riverificato OK.
 - **`dev-dof`** (`5a4e754`): tracing per-passo §48 + **conferma 2 semi** del meccanismo
   repulsore. Pushato. **Capitolo CHIUSO**: core abeliano con meccanismo.
 - **`main`** (`eab5db5`): doc canonica allineata §47/§48/§49. Pushato. Per lo stato del
