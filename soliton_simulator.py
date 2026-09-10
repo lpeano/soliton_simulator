@@ -743,6 +743,12 @@ CAMPO_SPINORIALE = False # [FASE 1 dev-spinoriale] campo EMESSO dallo spinore (P
                         # PARALLELO in calcola_psi (self.psi_spin, self.rho_spin), non ancora agganciato a
                         # gravita'/forze/mitosi (fasi 2-4). Riduzione-al-limite: con _psi_spinor=(e^{i phi},0) la
                         # componente 0 == campo scalare. Default off = byte-identico.
+TEMPO_SEGNO = False      # MOD 5.3a+5.3b (dev-spinoriale): tempo proprio DEPURATO. 5.3a VERSO (Feynman-Stuckelberg):
+                        # s_k = 1+(perc_chi-1)*m_coer, m_coer = coerenza col campo locale (materia/antimateria COERENTE
+                        # inverte il verso, il VUOTO incoerente va avanti). 5.3b MAGNITUDINE: ritmo() = 1+|tw_nodo|/PHI_CRIT
+                        # (torsione esplicita, il de Broglie del campo emesso e' stato bocciato da S3b). Firma solo
+                        # l'evoluzione interna (spinore+fase U(1)); eta/geometria restano magnitudine. Da stato t-1 (causale).
+                        # Richiede --campo-spinoriale + --spinore-corretto. Default off = byte-identico.
 KURAMOTO_SU2 = False     # KURAMOTO SU(2) NON-ABELIANO (§46): ruota lo SPINORE INTERO verso la media SU(2) dei
                         # vicini psi_bar=(wI@psi)/|.| con rotazione geodetica attorno all'asse VARIABILE nb x nb_bar
                         # (non commuta -> non-abeliano genuino). Verso+segno ruotano INSIEME; il segno emerge per
@@ -1553,6 +1559,16 @@ class Rete:
         per x->0 decade dolcemente verso un pavimento infinitesimo, senza discontinuita'. Nessun
         parametro libero: la scala e' dettata dalla transizione analitica."""
         if TAU_LOC == 0.0: return None
+        if TEMPO_SEGNO and len(getattr(self, "tw", [])):
+            # MOD 5.3b: magnitudine del tempo proprio = dilatazione torsionale ESPLICITA 1+|tw_nodo|/PHI_CRIT
+            # (il de Broglie del campo emesso e' scorrelato dalla dilatazione: bocciato da S3b). tw_nodo =
+            # media di |tw| sugli archi incidenti (stessa forma del kernel mitosi). Lenta e stabile (RI-TEST 2).
+            aw = np.abs(self.tw); ii, jj = self.i, self.j
+            twn = np.zeros(self.n); deg = np.zeros(self.n)
+            mi = ii < self.n; mj = jj < self.n
+            np.add.at(twn, ii[mi], aw[mi]); np.add.at(twn, jj[mj], aw[mj])
+            np.add.at(deg, ii[mi], 1.0);    np.add.at(deg, jj[mj], 1.0)
+            return 1.0 + (twn / np.maximum(deg, 1.0)) / max(PHI_CRIT, 1e-9)
         if self._psi_prec is None or len(self._psi_prec) != self.n:
             self._psi_prec = self.psi.copy() if len(self.psi) == self.n else np.ones(self.n, complex)
             return np.ones(self.n)
@@ -2174,6 +2190,14 @@ class Rete:
             self._psi_prec = self.psi.copy()
             if CAMPO_SPINORIALE and hasattr(self, "psi_spin") and len(getattr(self, "psi_spin", [])) == self.n:
                 self._psi_spin_prec = self.psi_spin.copy()   # [FASE 5] snapshot per il ritmo spinoriale (4pi)
+        # MOD 5.3a (--tempo-segno): VERSO del tempo dalla MATERIA/ANTIMATERIA COERENTE (Feynman-Stuckelberg).
+        # s_k = 1+(perc_chi-1)*m_coer, m_coer = coerenza col campo locale (materia coerente inverte col segno;
+        # vuoto incoerente -> +1 avanti). Da stato committato t-1 (perc_chi, phi, Psi). Firma solo #3-6.
+        dt_n_s = dt_n
+        if TEMPO_SEGNO and not np.isscalar(dt_n) and len(self.perc_chi) >= self.n and len(self.psi) >= self.n:
+            _mcoer = np.clip(np.cos(self.phi[:self.n] - np.angle(self.psi[:self.n] + 1e-12)), 0.0, 1.0)
+            _pc = np.sign(self.perc_chi[:self.n]).astype(float); _pc[_pc == 0] = 1.0
+            dt_n_s = (1.0 + (_pc - 1.0) * _mcoer) * dt_n
         w = self._pesi(); self.eta += dt_n
         # In modalita' sincrona tutte le leggi del passo leggono un unico campo
         # calcolato dalla snapshot t. Non ricalcolare psi in punti diversi del
@@ -2305,9 +2329,9 @@ class Rete:
             # tempo di risposta tau_termo che si adegua al target mobile.
             self.xi_termo += dt_scal * (err_rel - self.xi_termo) / tau_termo
             self.xi_termo = float(np.clip(self.xi_termo, -2.0, 2.0))   # guardia: attrito fisico limitato
-            delta_phivel = dt_n * (coppia - self.xi_termo * _phivel_t) / M_PH  # <-- USA SNAPSHOT
+            delta_phivel = dt_n_s * (coppia - self.xi_termo * _phivel_t) / M_PH  # <-- USA SNAPSHOT; dt_n_s = verso firmato (5.3a)
         else:
-            delta_phivel = dt_n * (coppia - G_PH * _phivel_t) / M_PH           # <-- USA SNAPSHOT
+            delta_phivel = dt_n_s * (coppia - G_PH * _phivel_t) / M_PH           # <-- USA SNAPSHOT; dt_n_s = verso firmato (5.3a)
 
         # SINCRONIZZAZIONE PESATA SUL TAGLIO ROTAZIONALE (Legge corretta di Kuramoto)
         delta_sync_phi = np.zeros(self.n)
@@ -2347,18 +2371,18 @@ class Rete:
 
             zc_sync = wI @ np.exp(1j * _phi_t)            # USA LO SNAPSHOT t
             media = np.angle(zc_sync)
-            delta_sync_phi = dt_n * forza * np.sin(media - _phi_t)  # <-- USA SNAPSHOT
+            delta_sync_phi = dt_n_s * forza * np.sin(media - _phi_t)  # <-- USA SNAPSHOT; dt_n_s firmato (5.3a)
 
         # REINNESTO ETC DEL SETTORE SPINORIALE: evolve _nb leggendo lo snapshot t (self.phi non e'
         # ancora stata committata, quindi calcola_psi() usa _phi_t). Deve stare PRIMA del commit
         # atomico per non leggere le fasi t+1 (sfasamento che l'ETC deve evitare).
         if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) == self.n:
-            self._passo_spinoriale(i, j, w, dt_n, psi_snapshot=psi_t,
+            self._passo_spinoriale(i, j, w, dt_n_s, psi_snapshot=psi_t,
                                    forza_sync=_forza_sync, wI_sync=_wI_sync, uno_sync=_uno_sync)
 
         # --- COMMIT ATOMICO DELLE FASI (Unico punto di scrittura sincrono) ---
         self.phivel = _phivel_t + delta_phivel
-        self.phi = (_phi_t + (dt_n * self.phivel) + delta_sync_phi) % (4 * np.pi)
+        self.phi = (_phi_t + (dt_n_s * self.phivel) + delta_sync_phi) % (4 * np.pi)  # dt_n_s = verso firmato (5.3a)
 
         # Calcolo della differenza di fase sull'arco basato rigorosamente sullo stato al tempo t
         dph = self._w4(_phi_t[i] - _phi_t[j])
@@ -4301,7 +4325,7 @@ def _applica_flag(a):
     global net
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
     if getattr(a, "tau_d0", False):
@@ -4379,6 +4403,11 @@ def _applica_flag(a):
     CAMPO_SPINORIALE = bool(getattr(a, "campo_spinoriale", False)) # [FASE 1] campo emesso dallo spinore: default off
     if CAMPO_SPINORIALE:
         print("[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)")
+    TEMPO_SEGNO = bool(getattr(a, "tempo_segno", False)) # MOD 5.3a+5.3b: verso dalla materia/antimateria coerente + magnitudine torsionale
+    if TEMPO_SEGNO and not (CAMPO_SPINORIALE and SPINORE_CORRETTO):
+        raise SystemExit("[errore] --tempo-segno richiede --campo-spinoriale + --spinore-corretto (il segno di doppia-copertura e la coerenza vivono li')")
+    if TEMPO_SEGNO:
+        print("[tempo-segno] MOD 5.3a+5.3b: VERSO del tempo = materia/antimateria COERENTE (Feynman-Stuckelberg, s_k=1+(perc_chi-1)*m_coer, vuoto avanti); MAGNITUDINE = torsione 1+|tw|/PHI_CRIT. Firma solo l'evoluzione interna; eta/geometria = magnitudine. Da stato t-1 (causale). OFF = byte-identico.")
     SPIN_FEEDBACK = bool(getattr(a, "spin_feedback", False)) # feedback locale overlap spinoriale: default off
     SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
     CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale
@@ -4689,6 +4718,13 @@ def _cli():
                         "saturato sulla NORMA (non ruota lo spinore), e rho=psi^dag psi. Calcolato IN PARALLELO "
                         "(self.psi_spin/rho_spin), NON ancora agganciato a gravita'/forze/mitosi (fasi 2-4). Riduzione-al-"
                         "limite: con _psi_spinor=(e^{i phi},0) la componente 0 == campo scalare. Default off = byte-identico.")
+    p.add_argument("--tempo-segno", action="store_true", dest="tempo_segno",
+                   help="MOD 5.3a+5.3b (dev-spinoriale, zero parametri): il VERSO del tempo proprio dalla "
+                        "MATERIA/ANTIMATERIA COERENTE (Feynman-Stuckelberg): s_k=1+(perc_chi-1)*m_coer con "
+                        "m_coer=clip(cos(phi-arg(Psi)),0,1) (materia coerente inverte col segno, il VUOTO incoerente "
+                        "va avanti); omega/fase interne usano s_k*dt_n, eta/geometria usano |dt_n|. La MAGNITUDINE del "
+                        "ritmo() diventa la torsione esplicita 1+|tw|/PHI_CRIT (il de Broglie del campo emesso, bocciato "
+                        "da S3b). Da stato t-1 (causale). Richiede --campo-spinoriale + --spinore-corretto. Default off = byte-identico.")
     p.add_argument("--spin-feedback", action="store_true", dest="spin_feedback",
                    help="FEEDBACK LOCALE SPINORE->ARCHI: la parte immaginaria dell'overlap del lift "
                         "spinoriale aggiunge una coppia antisimmmetrica alle fasi. Richiede "

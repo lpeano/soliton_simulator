@@ -179,3 +179,60 @@ segno (interferenza non distruttiva, Legge II) → l'ordine diventerebbe un **at
 *per fisica*, non per un termine imposto. **Non è "proviamo il nuovo per disperazione": è
 "l'attuale fallisce per un meccanismo preciso, e il nuovo lo risolve per costruzione".**
 Il fallimento dell'uno è la mappa per l'altro.
+
+## 6. MOD 5.3a + 5.3b — il tempo proprio DEPURATO (verso dal segno, magnitudine dalla torsione)
+
+**Contesto.** Fase 5 aggancia il campo spinoriale alla dinamica ma il tempo proprio (`ritmo()`)
+usava la magnitudine **de Broglie del campo emesso**. Serie di test-GRATIS (`csv/_seal_53rel/`):
+
+- **S3b NEGATIVO**: l'orologio de Broglie (`|Δα|/DT ~162`, veloce) è **scorrelato** dalla
+  dilatazione torsionale `1+|tw|/PHI_CRIT ~1.55` (corr +0.008, scala ~100×). Il de Broglie
+  **non** è la dilatazione → magnitudine e verso sono ruoli DIVERSI.
+- **PHI_CRIT=4π globale**: soffoca la mitosi (N ×1.00 vs ×2.35) — il 4π doppia-copertura è
+  già presente come `2·PHI_CRIT` dove serve. **MOD 5.3c saltata.**
+
+**Teorema segno-da-fase-istantanea impossibile.** Il segno di doppia-copertura deve essere
+(i) +1 nel limite, (ii) stabile, (iii) sensibile all'antimateria. Con un riferimento di fase
+SINGOLA le tre sono **mutuamente esclusive** (misurato su 3 varianti): **A** letterale
+`sign(Re⟨canon|ψ⟩)` vede l'antimateria (60/60) ma oscilla (49.9% flip); **B′** rif. fase propria
+è stabile (0%) ma **CIECO** all'antimateria (0/60, invariante sotto ψ→−ψ perché il flip di
+antimateria È una fase globale π); **B″** rif. campo emesso vede l'antimateria (60/60) ma oscilla
+(49.4%). De Broglie (continuo) e antimateria (π discreto) vivono ENTRAMBI nella fase globale.
+
+**Osservazione di Luca (decisiva).** Il verso del tempo (Feynman-Stückelberg) è proprietà delle
+**PARTICELLE** (materia/antimateria = addensamenti COERENTI), NON dello **spaziotempo vuoto**.
+Il vuoto non ha un verso da invertire: è la SCENA, non gli attori. → il segno va **modulato dalla
+materialità**: `s_k = 1 + (perc_chi − 1)·m_k`, materia coerente inverte col segno, vuoto → +1 avanti.
+
+**Materialità dalla COERENZA** (non peq/massa_critica, misurate INERTI: `peq~1e-8` vs
+`massa_critica~621` incommensurabili → `m_k≈0` ovunque → segno inerte). `m_k = clip(cos(φ − arg(Ψ)),0,1)`
+= coerenza col campo locale (Legge II: materia = interferenza costruttiva). **Lenta** (|Δm|/passo
+0.0017, NON contaminata dal de Broglie — la radice di tutti i fallimenti), stabile (flip 0.2%),
+locale, zero-param, vuoto-neutro (s_k 0.943), materia segue perc_chi (100%).
+
+**MOD 5.3a (verso)** `s_k=1+(perc_chi−1)·m_coer` firma SOLO l'evoluzione interna
+(`dt_n_s = s_k·dt_n` su delta_phivel, delta_sync_phi, `_passo_spinoriale`, self.phi termine
+`dt_n·phivel`); eta/termostato usano `|dt_n|`; `dt_e` (geometria) intatto. **MOD 5.3b (magnitudine)**
+`ritmo() = 1+|tw_nodo|/PHI_CRIT` (torsione esplicita, sostituisce il de Broglie bocciato).
+Da stato committato t-1 (causale). Flag `--tempo-segno`, richiede `--campo-spinoriale`+`--spinore-corretto`.
+
+**SIGILLI (S3a byte-identico SOSTITUITO da conservazione+stabilità, perché Feynman-Stückelberg è
+un cambio fisico deliberato) — TUTTI PASS** (`csv/_seal_53a/_sigillo_53a.py`, evidenza `_out_sigillo_53a.txt`):
+1. **OFF byte-identico** (flag-off vs HEAD Fase5): `max|Δ|=0.00e+00` su phi/psi/tw/pos.
+2. **RIDUZIONE-VUOTO**: `max|s_k−1|=0` esatto sul vuoto (m<0.1) → il vuoto non inverte.
+3. **CONSERVAZIONE (gate)**: Σperc_chi ON=−45/2447 (bilanciato = coppie somma-zero); olonomia netta
+   ON=−10420 vs OFF=−15263, drift ON=−480 vs OFF=−2853 → ON **non diverge** (drift minore di OFF).
+4. **STABILITÀ (gate)**: 300p ON, N 1196→2447, `n_naninf=0`, `min(eta)=0` (≥0). No blow-up.
+5. **CAUSALITÀ** (strutturale): s_k da stato t-1 prima di ogni commit; ordine ETC invariato.
+6. **COMPLETEZZA** (strutturale): firmato solo #3-6; magnitudine su eta+termostato; geometria intatta.
+7. **CONTROPROVA non-abeliana**: ON≠OFF (`max|dphi|=12.4`) → il flag cambia la dinamica.
+
+**PER CLAUDE (doppio-check senza rilanciare):** evidenze in `csv/_seal_53a/_out_sigillo_53a.txt`
+e `csv/_seal_53rel/_out_*.txt`; rigenera con `python csv/_seal_53a/_sigillo_53a.py`. Punti da
+ricontrollare: (a) `dt_n_s` firmato SOLO su #3-6 (grep `dt_n_s` in step); (b) `m_coer` da `self.psi`
+committato a inizio step (t-1, no mutazione); (c) il teorema segno-da-fase (3 varianti mutuamente
+esclusive) — verificare `_verifica_cecita_antimateria.py` (B′ invariante sotto ψ→−ψ).
+
+**PROSSIMO: test covariante** `--tempo-segno` ON vs OFF, N-appaiato, 2-3 semi, run lunghi. DOMANDA:
+con la materia/antimateria coerente che controlla il verso del tempo (antimateria indietro), l'ordine
+del segno diventa ATTRATTORE (`segno_arco_coer` sale e RESTA, vs §48 dove decadeva) o resta 0.5?

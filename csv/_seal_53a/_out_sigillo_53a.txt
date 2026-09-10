@@ -1,0 +1,38 @@
+=== SIGILLO MOD 5.3a+5.3b (--tempo-segno) — TUTTI PASSANO (dev-spinoriale) ===
+Script: _sigillo_53a.py  |  riferimento OFF: _old.py (HEAD Fase5 4ea6f0c)
+
+=== SIGILLO 1: OFF byte-identico (nuovo flag-off vs HEAD/Fase5) ===
+  N (120, 120)  max|dphi|=0.00e+00  max|dpsi|=0.00e+00  max|dtw|=0.00e+00  max|dpos|=0.00e+00
+  ESITO 1: PASS
+
+=== SIGILLO 2: RIDUZIONE-VUOTO (s_k -> +1 dove m_coer -> 0) ===
+  nodi vuoto (m<0.1): 15   max|s_k - 1| sul vuoto = 0.00e+00
+  s_k medio globale = +0.493  (materia inverte, vuoto +1)
+  ESITO 2: PASS (il vuoto non inverte)
+
+=== SIGILLO 4: STABILITA' (300p ON, no blow-up, eta>=0) ===
+  N 1196->2447 (max 2447)  n_naninf=0  min(eta)=0.000e+00
+  ESITO 4: PASS
+
+=== SIGILLO 3: CONSERVAZIONE (Sigma perc_chi; olonomia netta ON vs OFF) ===
+  Sigma perc_chi: ON=-45/2447  OFF=87/2815  (~bilanciato = coppie somma-zero)
+  olonomia netta (media Sigma tw, 2a meta'): ON=-10419.87  OFF=-15263.31
+  drift olonomia (2a meta'): ON=-479.66  OFF=-2852.95  (ON non diverge; anzi drift MINORE di OFF)
+  ESITO 3: PASS
+
+=== SIGILLO 7: CONTROPROVA non-abeliana (ON != OFF) ===
+  ON vs OFF: N (2447, 2815)  max|dphi|=1.238e+01  max|dpsi|=6.945e-01
+  ESITO 7: PASS (il flag cambia la dinamica)
+
+=== SIGILLI 5 (causalita') e 6 (completezza): STRUTTURALI ===
+  5 causalita': s_k da self.perc_chi/self.phi/self.psi a inizio step (t-1), prima di ogni commit; ordine ETC invariato.
+  6 completezza: dt_n_s (firmato) SOLO su #3-6 (delta_phivel, delta_sync_phi, _passo_spinoriale, self.phi);
+                 dt_n (magnitudine) su eta+termostato; dt_e intatto.
+
+===================== RIEPILOGO =====================
+  1 OFF byte-identico   : PASS
+  2 riduzione-vuoto     : PASS
+  3 CONSERVAZIONE (gate): PASS
+  4 STABILITA' (gate)   : PASS
+  7 controprova non-ab. : PASS
+  >>> TUTTI I SIGILLI PASSANO
