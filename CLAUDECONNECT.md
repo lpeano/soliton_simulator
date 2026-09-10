@@ -894,3 +894,18 @@ min(eta)=0 (≥0). 5. causalità (strutturale, t-1). 6. completezza (firmato #3-
 con la materia/antimateria coerente che controlla il VERSO del tempo (antimateria indietro, Feynman-Stückelberg),
 l'ordine del segno diventa ATTRATTORE (segno_arco sale e RESTA, vs §48 dove decadeva) o resta 0.5 (abeliano
 DEFINITIVO anche con infrastruttura del segno pulita)?
+
+### §54 — [branch dev-spinoriale] TEST DECISIVO covariante MOD 5.3a+5.3b: PILOTA NO-GO (2026-09-10)
+Pilota go/no-go 800p seed 1 ON vs OFF (`csv/_test_53a/`, dev `db1b835`), config `--batch --nmasse 3 --sep 8
+--campo-spinoriale --spinore-vivo --spinore-corretto --chi-core [+ --tempo-segno]`. Media 2a metà, N-appaiato.
+**segno_arco_coer** OFF −0.00000 / ON +0.00013 (ON−OFF **+0.0001**, sd 0.0023) = **NEL RUMORE**; **spin_overlap_arco**
+0.49998 = 0.49998 (**0.500 scorrelato**); berry_spin_media nel rumore; berry_spin_media_assoluta ON 1.076 < OFF 1.198
+(il flag AGISCE ma abbassa il modulo, non ordina). **Trend**: segno_arco_coer nasce ~0.9 e **DECADE a ~0 in ENTRAMBI**
+(OFF ultimi3 [0.005,0.001,−0.001]; ON [0.000,0.002,0.009]) = identico al §48.
+**VERDETTO PILOTA = NO-GO.** Con `--tempo-segno` (materia/antimateria COERENTE che controlla il verso del tempo,
+Feynman-Stückelberg, antimateria indietro) l'ordine del segno **decade come OFF**: NON diventa attrattore, resta 0.5 =
+**ABELIANO**, anche con infrastruttura del segno completa e pulita (mitosi/coppie non-abeliani + magnitudine torsionale
++ verso dal segno). Il flag non è inerte (sigillo 7 ON≠OFF max|Δφ|=12.4) ma la sua fisica non crea ordine di segno.
+**5ª via che fallisce** (dopo §41/42/44/46) → **ipotesi ABELIANA molto forte**. CAUTELE: 800p=formazione, 1 seme →
+pilota, NON verdetto. **Conferma pendente:** campagna 2000p/2-3 semi (sull'hardware di Luca; qui ~45 min/run).
+**NB (da Luca):** verificare se il CALORE VETTORIALE è attivo mentre non dovrebbe — potrebbe contaminare il test.

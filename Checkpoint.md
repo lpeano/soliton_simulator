@@ -7,22 +7,24 @@ _Traccia stato, fatto, da-fare. Da aggiornare a ogni sessione. Vedi CLAUDE.md pe
 
 ## >>> PUNTO DI RIPRESA — 2026-09-10 (branch `dev-spinoriale`, riprendere DA QUI) <<<
 
-**Stato: MOD 5.3a+5.3b IMPLEMENTATE e SIGILLATE (7/7 PASS). Manca SOLO il test decisivo.**
+**Stato: MOD 5.3a+5.3b IMPLEMENTATE, SIGILLATE (7/7 PASS) e PILOTA covariante = NO-GO.**
 - Codice: `--tempo-segno` su `dev-spinoriale`, commit **`0639ba2`** (pushato). Verso del tempo = materia/antimateria
   COERENTE (`s_k=1+(perc_chi−1)·m_coer`, `m_coer=clip(cos(φ−arg(Ψ)),0,1)`); magnitudine = torsione `1+|tw|/PHI_CRIT`.
   Aggancio selettivo (firmato su evoluzione interna; eta/geometria = magnitudine). Default OFF byte-identico.
-- Sigilli: `csv/_seal_53a/_sigillo_53a.py` → **7/7 PASS** (OFF byte-id 0.00e+00; riduzione-vuoto |s_k−1|=0;
-  conservazione; stabilità N 1196→2447 eta≥0 no-naninf; controprova ON≠OFF). Tracing **§53** su main (`0e78772`).
+- Sigilli: `csv/_seal_53a/` → **7/7 PASS**. Tracing **§53**+**§54** su main.
+- **PILOTA covariante 800p seed1 ON vs OFF (`csv/_test_53a/`, dev `db1b835`) = NO-GO**: `segno_arco_coer` decade a
+  ~0 in ENTRAMBI (ON−OFF +0.0001 nel rumore); `spin_overlap_arco` 0.500=0.500. Feynman-Stückelberg vero NON rende
+  l'ordine del segno un attrattore → **ipotesi ABELIANA molto forte** (5ª via fallita). Cautele: 800p/1seme = non verdetto.
 
 **DA FARE (ripresa, in ordine):**
-1. **IL TEST DECISIVO covariante** (NON ancora lanciato): `--tempo-segno --campo-spinoriale --spinore-vivo
-   --spinore-corretto --chi-core`, ON vs OFF, N-appaiato, **2-3 semi**, run **lunghi** (2000+ passi).
-   OOM: **max 2-3 run paralleli o SEQUENZIALI** (la campagna a 6 morì per RAM). Diaglog con
-   `segno_arco_coer`, `spin_overlap_arco`, `berry_firmata`. Pilota rapido = 800p seed1 ON vs OFF sequenziale.
-   **DOMANDA:** con la materia/antimateria coerente che controlla il VERSO del tempo (antimateria indietro,
-   Feynman-Stückelberg), l'ordine del segno diventa **ATTRATTORE** (`segno_arco_coer` sale e RESTA, vs §48 dove
-   decadeva) o resta **0.5** (abeliano DEFINITIVO anche con infrastruttura del segno pulita)?
-2. Committa i dati del test (csv + script analisi) su `dev`; aggiorna relazione + tracing §54 su `main`; push + `git log` conferma.
+0. **[PRIMA di tutto — segnalato da Luca] CALORE VETTORIALE:** verificare se `CALORE_VETTORIALE`/calcio vettoriale è
+   ATTIVO mentre NON dovrebbe (default True nel codice?). Se attivo durante il test del segno, potrebbe contaminare
+   l'esito. Controllare nel codice lo stato reale del flag e se va spento per il test covariante pulito → eventualmente
+   RIFARE il pilota con il calore corretto prima di concludere l'abeliano.
+1. **CONFERMA definitiva** (se il calore era ok): campagna covariante `--tempo-segno` ON vs OFF, N-appaiato, **2-3 semi**,
+   **2000+ passi**, sull'hardware di Luca (qui ~45 min/run → ore). Se resta ~0 concorde → ABELIANO DEFINITIVO anche
+   con Feynman-Stückelberg. Diaglog `segno_arco_coer`, `spin_overlap_arco`, `berry_firmata`.
+2. Aggiorna relazione + tracing §55 con l'esito finale; push + `git log` conferma.
 - Nota terminale: se lo schermo torna nero → `terminal.integrated.gpuAcceleration:off` + Reload Window, oppure
   `[Console]::Write([char]27+"c"); [Console]::ResetColor(); Clear-Host`.
 - Nota: `soliton_simulator.regressione_2026-09-10.py.bak` = scratch, untracked su dev (lasciare fuori).
