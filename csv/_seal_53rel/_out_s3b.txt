@@ -1,0 +1,27 @@
+=== TEST-GRATIS S3b (dev-spinoriale, MOD 5.3) — de Broglie vs dilatazione torsionale ===
+Script: _test_s3b.py  |  config Fase5, SCUOTIMENTO=False (determ.), causale t-1/t-2, 120 nodi, 60 form + 12 misura
+DT=0.01 -> tetto wrapping |da|/DT = pi/DT = 314.159
+
+step   n    corr(|da|/DT, tau_nodo)   corr(|da|/DT, mean|tw|)   slope   freq_med   tau_med
+   0   120   +0.0271                  +0.0271                +34.2063   97.9394   1.5526
+   1   120   -0.0026                  -0.0026                -3.2027   133.1782   1.5521
+   2   120   -0.0474                  -0.0474                -59.2417   180.4624   1.5512
+   3   120   -0.0585                  -0.0585                -74.9645   227.8727   1.5505
+   4   120   +0.0633                  +0.0633                +80.2723   166.1528   1.5495
+   5   120   -0.1197                  -0.1197                -148.3976   158.8854   1.5489
+   6   120   +0.0783                  +0.0783                +100.9838   144.6493   1.5459
+   7   120   +0.0446                  +0.0446                +57.3564   175.5876   1.5458
+   8   120   +0.0627                  +0.0627                +78.0266   168.4852   1.5457
+   9   120   +0.0780                  +0.0780                +96.0867   97.9946   1.5434
+  10   120   -0.0633                  -0.0633                -80.7251   172.8307   1.5433
+  11   120   +0.0357                  +0.0357                +45.5263   125.3256   1.5431
+
+=== SINTESI S3b ===
+  corr(|da|/DT, tau_nodo)  media=+0.0082  (min=-0.1197 max=+0.0783)
+  corr(|da|/DT, mean|tw|)  media=+0.0082
+  slope medio              +10.4939
+  ESITO: S3b FALLISCE (corr ~0, de Broglie != dilatazione torsionale)
+
+VERDETTO: l'orologio de Broglie del _psi_spinor (rotazione interna ~1-2.3 rad/passo, freq_med~100-230)
+e' SCORRELATO dalla dilatazione torsionale tau_nodo~1.55 (scala ~100x diversa). La MAGNITUDINE del
+tempo proprio NON emerge dal de Broglie -> il de Broglie porta solo il VERSO/segno (S3a).

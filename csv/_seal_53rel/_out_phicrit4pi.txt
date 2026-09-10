@@ -1,0 +1,18 @@
+=== TEST-GRATIS 5.3c (dev-spinoriale) — PHI_CRIT=4pi soffoca la mitosi? ===
+Script: _test_phicrit4pi.py  |  config batch FEDELE: nuova_massa in cerchio (nmasse=3, sep=8) +
+passo batch completo (scuoti_vuoto; step; mitosi; rilassa_disegno; memoria_hebbiana_moto),
+300 passi, sistema spinoriale Fase 5 (--campo-spinoriale --spinore-vivo --spinore-corretto --chi-core),
+SCUOTIMENTO=False. Confronto PHI_CRIT=2pi (baseline) vs 4pi.
+
+PHI_CRIT=2pi  N: 1196 -> 2815  (x2.35)   traccia@50: [1196, 2121, 2534, 2732, 2767, 2789, 2815]
+PHI_CRIT=4pi  N: 1196 -> 1196  (x1.00)   traccia@50: [1196, 1196, 1196, 1196, 1196, 1196, 1196]
+
+=== ESITO ===
+  crescita 2pi = +1619   crescita 4pi = +0
+  4pi SOFFOCA la mitosi (N non cresce) -> FERMARSI, applicare 4pi solo dove tocca la doppia copertura
+
+VERDETTO: PHI_CRIT=4pi GLOBALE azzera la mitosi (conferma commento riga 276-280). Causa: soglia0=PHI_CRIT
+coincide col tetto fisso TW_TETTO=4pi -> finestra mitosi [soglia,tetto] collassa (righe 2582-2644).
+REPERTO: il 4pi doppia-copertura E' GIA' presente come 2*PHI_CRIT dove serve (TW_SPINORE _twh=tw/(2*PHI_CRIT)
+=tw/4pi riga 1710; ritmo() Fase5 wrappa su 4pi riga ~1560). 5.3c globale = leva sbagliata (uccide mitosi
+E raddoppia il 4pi a 8pi dove e' gia' corretto). RACCOMANDAZIONE: 5.3a+5.3b senza 5.3c globale.
