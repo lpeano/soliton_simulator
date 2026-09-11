@@ -91,7 +91,12 @@ gestita **in modo covariante**, altrimenti misuri l'espansione, non la fisica (i
 ## Commit
 - **Committa e commenta a ogni step.** Messaggi in italiano, descrittivi.
 - Aggiungi solo i file pertinenti; escludi binari enormi (`.pkl`) salvo richiesta esplicita.
-- **Push solo su richiesta esplicita** di Luca.
+- **OGNI COMMIT COINCIDE CON UNA PUSH** (regola Luca 2026-09-11): dopo ogni `git commit` fai subito `git push`.
+  (Sostituisce la vecchia regola "push solo su richiesta".)
+- **Messaggi di commit MOLTO APPROFONDITI:** cosa/perche'/come, file toccati, esito sigilli/verifiche, numeri
+  chiave, cosa deve ri-controllare il prossimo agente. Un commit deve bastare a capire lo step senza il codice.
+- **PRIMA DI OGNI RUN: commit + push.** Nessun run (test, campagna, check) parte con working tree sporco non
+  committato: prima si committa e pusha lo stato, poi si lancia. Cosi' ogni run e' riproducibile da un commit noto.
 
 ## Allineamento e riproducibilità (SEMPRE, per il doppio-check indipendente)
 - **Committa TUTTI i dati del test, non solo il verdetto.** Le evidenze grezze (CSV diaglog/condensazione) E
