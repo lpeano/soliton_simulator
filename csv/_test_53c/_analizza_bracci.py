@@ -7,7 +7,7 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 COLS = ["segno_arco_coer", "segno_arco_coer_materia", "spin_overlap_arco", "m0_Lz",
-        "berry_spinor_media", "berry_spinor_media_assoluta", "segno_ov_absmedia"]
+        "berry_segno_media", "berry_segno_media_assoluta", "segno_ov_absmedia"]
 # punto 3 (asimmetria materia/antimateria): frazione di antimateria e raggio relativo dei due settori
 COLS_ASIMM = ["frac_chi_neg", "rchi_ratio"]
 
@@ -88,13 +88,13 @@ for tag in sorted(risult):
           f"   (totale {tot['media']:+.5f})")
 
 print("\n=== ARBITRO GAUGE-INVARIANTE: OLONOMIA DI BARGMANN di _psi_spinor (segno-orologio) ===")
-print("berry_spinor_media (FIRMATA, gauge-inv): ~0 = segno frustrato BLINDATO; !=0 = ordine reale.")
+print("berry_segno_media (FIRMATA, gauge-inv): ~0 = segno frustrato BLINDATO; !=0 = ordine reale.")
 print("segno_ov_absmedia ~2/pi=0.637 = fase di doppia-copertura uniformemente random (robusto al gauge).")
 for tag in sorted(risult):
-    bm = risult[tag].get("berry_spinor_media", {})
-    ba = risult[tag].get("berry_spinor_media_assoluta", {})
+    bm = risult[tag].get("berry_segno_media", {})
+    ba = risult[tag].get("berry_segno_media_assoluta", {})
     so = risult[tag].get("segno_ov_absmedia", {})
-    print(f"  {tag:22s}: berry_spinor FIRMATA {bm.get('media', float('nan')):+.5f} "
+    print(f"  {tag:22s}: berry_segno FIRMATA {bm.get('media', float('nan')):+.5f} "
           f"| assoluta {ba.get('media', float('nan')):.5f} | segno_ov_abs {so.get('media', float('nan')):.4f} (2/pi=0.637)")
 
 print("\n=== PUNTO 3: ASIMMETRIA MATERIA/ANTIMATERIA (frac_chi_neg 2a met, rchi_ratio) ===")
