@@ -1301,6 +1301,25 @@ class Rete:
                 if abs(P) > 1e-12:
                     berry.append(float(np.angle(P)))
         berry = np.array(berry, float) if berry else np.zeros(0)
+        # OLONOMIA DI BARGMANN DEL PRIMARIO _psi_spinor (gauge-invariante DEL SEGNO-orologio): arg del
+        # prodotto ciclico degli overlap <psi_k|psi_{k+1}> sul ciclo CHIUSO. A differenza della berry su nb
+        # (ricostruisce lo spinore dal Bloch -> CIECA al segno-orologio, §38-bis), questa usa il PRIMARIO
+        # complesso _psi_spinor -> sonda DIRETTAMENTE se il segno di doppia-copertura si accumula coerente
+        # (olonomia netta !=0 = ordine) o si cancella (~0 = frustrato). Invariante di gauge per costruzione:
+        # le fasi locali dei singoli spinori si cancellano nel prodotto ciclico chiuso (nessun frame locale).
+        berry_sp = []
+        _psp = getattr(self, "_psi_spinor", None)
+        if _psp is not None and len(_psp) >= self.n:
+            for ciclo in cicli:
+                seq = self._vertici_ciclo(ciclo)
+                if seq is None or len(seq) < 3:
+                    continue
+                sp = _psp[seq]
+                ovp = np.sum(np.conj(sp) * np.roll(sp, -1, axis=0), axis=1)   # <psi_k|psi_{k+1}> ciclico
+                Pp = np.prod(ovp)
+                if abs(Pp) > 1e-12:
+                    berry_sp.append(float(np.angle(Pp)))
+        berry_sp = np.array(berry_sp, float) if berry_sp else np.zeros(0)
         # PARAMETRO D'ORDINE SPINORIALE (embedding-indipendente): S_M = |media dei vettori di Bloch|,
         # in [0,1]. S_M~1 = spin allineati/precessione collettiva; S_M~0 = frustrati/sparsi. omega_S =
         # angolo spazzato dalla direzione media Shat fra due campioni consecutivi (precessione dello
