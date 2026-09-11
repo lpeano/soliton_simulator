@@ -1260,7 +1260,9 @@ class Rete:
                  "berry_spin_media_assoluta": 0.0, "berry_spin_rms": 0.0,
                  "berry_spin_media": 0.0, "spin_cluster_modulo": 0.0,
                  "spin_cluster_omega": 0.0, "spin_neel_modulo": 0.0,
-                 "spin_neel_omega": 0.0}
+                 "spin_neel_omega": 0.0,
+                 "berry_segno_media": 0.0, "berry_segno_media_assoluta": 0.0,
+                 "berry_segno_rms": 0.0, "n_cicli_segno": 0}
         if self.n < 3 or not len(self.i):
             return vuoto
         if not hasattr(self, "psi") or len(self.psi) < self.n:
@@ -1365,6 +1367,12 @@ class Rete:
                 "spin_cluster_omega": omega_S,
                 "spin_neel_modulo": N_stag,
                 "spin_neel_omega": omega_N,
+                # OLONOMIA DI BARGMANN del SEGNO-orologio (_psi_spinor), gauge-invariante: firmata = ORDER
+                # PARAMETER (~0 frustrato, !=0 ordine); assoluta = struttura locale; conta i cicli usati.
+                "berry_segno_media": float(np.mean(berry_sp)) if len(berry_sp) else 0.0,
+                "berry_segno_media_assoluta": float(np.mean(np.abs(berry_sp))) if len(berry_sp) else 0.0,
+                "berry_segno_rms": float(np.sqrt(np.mean(berry_sp ** 2))) if len(berry_sp) else 0.0,
+                "n_cicli_segno": int(len(berry_sp)),
                 "circolazione_media": float(np.mean(valori)),
                 "circolazione": valori, "olonomia": olonomia, "berry_spin": berry}
 
@@ -5005,6 +5013,10 @@ def batch_condensazione(a):
             cols['berry_spin_media_assoluta'] = circ.get('berry_spin_media_assoluta', 0.0)
             cols['berry_spin_rms'] = circ.get('berry_spin_rms', 0.0)
             cols['berry_spin_media'] = circ.get('berry_spin_media', 0.0)
+            cols['berry_segno_media'] = circ.get('berry_segno_media', 0.0)                 # olonomia Bargmann _psi_spinor FIRMATA (gauge-inv): ~0 frustrato / !=0 ordine
+            cols['berry_segno_media_assoluta'] = circ.get('berry_segno_media_assoluta', 0.0)
+            cols['berry_segno_rms'] = circ.get('berry_segno_rms', 0.0)
+            cols['n_cicli_segno'] = circ.get('n_cicli_segno', 0)
             cols['spin_feedback_arco'] = float(getattr(net, '_spin_feedback_last', 0.0))
             cols['spin_cluster_modulo'] = circ.get('spin_cluster_modulo', 0.0)
             cols['spin_cluster_omega'] = circ.get('spin_cluster_omega', 0.0)
