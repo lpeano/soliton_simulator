@@ -1,0 +1,19 @@
+{
+    "blob":  "4fc7a794fb5fb831fcb33ed823ba5b6e6c01ed07",
+    "gate_esito":  "PASS",
+    "presidi":  {
+                    "diaglog_byte_id":  true,
+                    "metrica_non_tautologica":  true,
+                    "baseline_zero":  true
+                },
+    "sigilli":  {
+                    "off_byte_id":  true,
+                    "riduzione_limite":  true,
+                    "norma":  true,
+                    "stabilita":  true,
+                    "nota":  "analitici (s_k=1.0 -\u003e exp identico) + verificati al sigillo 77c83e5"
+                },
+    "data":  "2026-09-11T17:00:28.5738733+02:00",
+    "commit":  "da8758d06567e6157c774596d6379fee47197fb2",
+    "config":  "batch nmasse3 sep8 800p campo-spinoriale spinore-vivo spinore-corretto chi-core calore-scal deparam-orologio verlet"
+}
