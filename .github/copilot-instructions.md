@@ -97,6 +97,9 @@ gestita **in modo covariante**, altrimenti misuri l'espansione, non la fisica (i
   chiave, cosa deve ri-controllare il prossimo agente. Un commit deve bastare a capire lo step senza il codice.
 - **PRIMA DI OGNI RUN: commit + push.** Nessun run (test, campagna, check) parte con working tree sporco non
   committato: prima si committa e pusha lo stato, poi si lancia. Cosi' ogni run e' riproducibile da un commit noto.
+- **FILE DI STATO PER CLAUDE (regola Luca 2026-09-11):** mantieni `STATO_CLAUDE_<branch>.md` (locale al branch)
+  e AGGIORNALO a ogni commit/push con lo stato operativo (ultimo commit, cosa fatto, in corso, prossimo, presidi
+  aperti). Serve a Claude per riprendere senza rileggere tutta la storia. Va incluso nello stesso commit dello step.
 
 ## Allineamento e riproducibilità (SEMPRE, per il doppio-check indipendente)
 - **Committa TUTTI i dati del test, non solo il verdetto.** Le evidenze grezze (CSV diaglog/condensazione) E

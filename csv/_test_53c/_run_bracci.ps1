@@ -15,6 +15,16 @@ $bracci = @{
   "b2_orolseg"     = @("--orologio-segno")
   "b3_orolseg_cs"  = @("--orologio-segno","--cs-dinamico")
 }
+
+# RI-CONFERMA 5.3a PULITO (presidio Luca #2): --tempo-segno seed 1 su fisica pulita (diaglog fixato).
+# Da confrontare col baseline b1_base_s1 -> il verdetto NO-GO regge senza contaminazione?
+$tag5 = "r53a_tsegno_s1"
+$args5 = $BASE + @("--tempo-segno","--seed","1","--diaglog","$OUT/$tag5.csv","--csv","$OUT/${tag5}_cond.csv","--sync-db","$OUT/$tag5.pkl","--db-ogni","200")
+Write-Output "=== RUN $tag5 (ri-conferma 5.3a pulito) ==="
+Write-Output ("python soliton_simulator.py " + ($args5 -join " "))
+python soliton_simulator.py @args5
+Write-Output "=== FINE $tag5 (exit $LASTEXITCODE) ==="
+
 foreach ($seed in 1,2,3) {
   foreach ($nome in "b1_base","b2_orolseg","b3_orolseg_cs") {
     $tag = "${nome}_s${seed}"
