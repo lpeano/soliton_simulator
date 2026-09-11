@@ -69,3 +69,11 @@ print(f"   media2ameta={media:+.5f} sd={sd:.5f} -> {esito}")
 print(f"\n[PRESIDIO 2] statistica: n_arco_materia (archi materia-materia usati):")
 print(f"   min={int(np.nanmin(nm))} max={int(np.nanmax(nm))} ultimo={int(nm[-1])}  "
       f"(frac_chi_neg ultimo={fneg[-1]:.3f}); segno_arco_coer TOTALE media2ameta={np.mean(st[len(st)//2:]):+.5f}")
+
+# GATE VIVO (per il launcher): PASS solo se purezza byte-identica E metrica non-tautologica E baseline ~0.
+_tautologico = bool(np.allclose(sm, 1.0))
+_baseline_ok = abs(media) < 0.1
+gate_ok = bool(puro) and (not _tautologico) and _baseline_ok
+print(f"\n=== GATE PRESIDIO: {'PASS' if gate_ok else 'FAIL'} "
+      f"(purezza byte-id={bool(puro)}, non-tautologico={not _tautologico}, baseline~0={_baseline_ok}) ===")
+sys.exit(0 if gate_ok else 1)

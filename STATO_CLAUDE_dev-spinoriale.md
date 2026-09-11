@@ -47,6 +47,15 @@
 - Ri-confermare 5.3a pulito dopo il fix (nel launcher, run `r53a_tsegno_s1`).
 - Monitorare braccio 3 (`--cs-dinamico`) per instabilità; STOP se cs non governa il cono causale.
 
+## GATE-CACHE (Luca 2026-09-11) — rigore + velocità
+- I gate NON sono più solo script a mano: `csv/_test_53c/_run_batch.ps1` ha un GUARD che legge `gate_cache.json`
+  ancorato al **git BLOB** di `soliton_simulator.py` (byte attuali, cattura anche modifiche non committate).
+- Cache-hit (blob invariato + PASS) → parti istantaneo. Cache-miss/stale → `_gate.ps1` rigira il presidio UNA
+  volta e timbra la cache; se FAIL → STOP (non lancia i bracci). Qualsiasi modifica al .py invalida la cache.
+- Gate vivo = `_check_presidio.py` (purezza byte-id + baseline discrimina + non-tautologico, exit 0/1).
+  Sigilli firma (OFF byte-id, riduzione-al-limite, norma) = analitici + verificati al sigillo 77c83e5.
+- Uso: `powershell -File csv/_test_53c/_run_batch.ps1 -seed N` (auto-gate su cache-miss).
+
 ## Futuro concordato (non ora)
 - Refactor diaglog→messaging: produttore emette snapshot immutabile; consumer applica REGOLE PURE
   disaccoppiate da `net`, fa i conti pesanti a parte. Purezza per costruzione.
