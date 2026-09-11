@@ -6,8 +6,23 @@
 
 ## Ultimo aggiornamento
 - Data: 2026-09-11
-- Ultimo commit: risultati SEED 1 completi (3 bracci a 800 passi)
+- Ultimo commit: ROADMAP pluri-sessione + TODO persistenti (Step 0 saltato, Step 1A da fare)
 - Branch allineato con `origin/dev-spinoriale`.
+
+## ROADMAP (piano pluri-sessione) — vedi `ROADMAP_dev-spinoriale.md` + `/memories/repo/roadmap_todo.md`
+Obiettivo: EM e gravita' come 2 proiezioni dello STESSO campo spinoriale, con la giusta gerarchia.
+- Canali gauge-invarianti = MODULO |psi|^2 (gravita') vs FASE/segno (EM). MAI Re/Im per-arco
+  (2 proiezioni di 1 solo grado, gauge-dipendenti; Im = motore forza, non carica). Bargmann e' CIECO
+  al segno (telescoping) -> misura EM = phase-locking TEMPORALE (SYNC/Kuramoto).
+- STEP 0 SALTATO (Luca): seed-1 (B) = BASELINE INTERNA, non risultato robusto. seed-2/3 = TODO
+  rimandato (solo se il (B) andra' presentato come stabilito).
+- STEP 1A = PROSSIMA AZIONE (pure-read, NON tocca .py): scrivere `_run_3gamma.ps1` +
+  `_analizza_3gamma.py`, coarse-graining a blocchi di b, fittare d in gamma_eff(b)~b^d nei due canali
+  (modulo; fase via SYNC). Verdetto: FASE d~0 + DENSITA' d<0 = gerarchia emersa. Sigillo b=1=identita' byte-id.
+- STEP 1B (flag `--gamma-nudo`/`--gamma-relazionale`), STEP 2 (accoppiamento cs<->orologio:
+  omega_clk*(cs/CS_M)^2, solo magnitudine; segno invariato; sigillo cs=CS_M byte-id + stabilita'),
+  STEP 3 (esplorativo alpha_G, magnitudine NON torna ~35 ordini). Tutto SCRITTO, NON eseguito.
+- Regola: CHECKPOINT a Luca tra ogni step. Precondizione ripresa: blob == 4fc7a794.
 
 ## VERDETTO SEED 1 (completo, 3 bracci a 800 passi) — (B) abeliano su tutti
 | Braccio | N | solo-materia (2a met) | spin_ovl | segno_ov | verdetto |
