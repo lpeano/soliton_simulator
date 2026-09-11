@@ -6,8 +6,21 @@
 
 ## Ultimo aggiornamento
 - Data: 2026-09-11
-- Ultimo commit: `2f8fa61` (regola commit/push)
+- Ultimo commit: risultati SEED 1 completi (3 bracci a 800 passi)
 - Branch allineato con `origin/dev-spinoriale`.
+
+## VERDETTO SEED 1 (completo, 3 bracci a 800 passi) — (B) abeliano su tutti
+| Braccio | N | solo-materia (2a met) | spin_ovl | segno_ov | verdetto |
+|---|---|---|---|---|---|
+| b1_base | 4713 | -0.00024 | 0.5000 | 0.638 | (B) abeliano |
+| b2_orolseg (5.3c) | 4933 | +0.00011 | 0.5000 | 0.631 | (B) abeliano |
+| b3_orolseg_cs (5.3c+cs) | 4697 | +0.00028 | 0.5000 | 0.637 | (B) abeliano |
+- Solo-materia decade sempre 0.65->~0. cs-dinamico NON aggiunge ordine (b3 ~ b1/b2).
+- Misure gauge-robuste concordi: spin_ovl=0.5000, segno_ov~2/pi ovunque.
+- PUNTO 3 (asimmetria settori): la firma AGISCE ma non ordina. frac_chi_neg: b1=0.4997,
+  b2 (5.3c)=0.5122 (verso antimateria), b3 (5.3c+cs)=0.4917 (verso opposto). N diverge (b2 4933).
+- CAUTELA: 1 solo seed. Non consolidato -> servono seed 2 e 3 (gate-cache -> cache-hit istantaneo).
+- berry_segno IGNORATO (cieco: olonomia Bargmann chiusa telescopa la fase per-nodo del segno).
 
 ## Cosa è stato fatto (in ordine)
 1. **MOD 5.3c `--orologio-segno`** (commit `77c83e5`): firma il VERSO dell'orologio de Broglie INTERNO
@@ -30,12 +43,10 @@
    commit/push prima di ogni run; (c) `--verlet` default nei test.
 
 ## In corso / prossimo
-- **Purezza diaglog VERIFICATA byte-identica** (max|A−B|=0) sia NON-verlet sia CON `--verlet` (config test).
-  Baseline `segno_arco_coer_materia` 0.65→~0 (metrica discrimina), 54039 archi materia-materia (statistica solida).
-- **Campagna PRONTA ma IN ATTESA** (Luca sta generando un video → no contention/OOM): lanciare
-  `csv/_test_53c/_run_bracci.ps1` quando la macchina è libera:
-  - RI-CONFERMA 5.3a pulito (`--tempo-segno` seed 1) vs baseline b1 → il NO-GO regge senza contaminazione?
-  - 9 BRACCI (3 × seed 1,2,3): b1_base, b2_orolseg (`--orologio-segno`), b3_orolseg_cs (`+ --cs-dinamico`).
+- **SEED 1 COMPLETO** (vedi verdetto sopra): (B) abeliano su b1/b2/b3.
+- **PROSSIMO: seed 2 e 3.** Lanciare `powershell -File csv/_test_53c/_run_batch.ps1 -seed 2` poi `-seed 3`
+  (gate-cache -> cache-hit istantaneo, blob invariato). Commit/push PRIMA di ogni run. Attenzione OOM se video attivo.
+- Poi: verdetto consolidato a 3 seed + punto 3 (asimmetria) + effetto cs.
 - **Verdetto** (arbitro = `segno_arco_coer_materia` SOLO-MATERIA): (A) sale/resta = ordine vero;
   (B) ~0 = separazione/abeliano. Guardare SOLO-MATERIA, non il totale. Analisi: `csv/_test_53c/_analizza_bracci.py`.
 
