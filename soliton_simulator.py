@@ -749,6 +749,12 @@ TEMPO_SEGNO = False      # MOD 5.3a+5.3b (dev-spinoriale): tempo proprio DEPURAT
                         # (torsione esplicita, il de Broglie del campo emesso e' stato bocciato da S3b). Firma solo
                         # l'evoluzione interna (spinore+fase U(1)); eta/geometria restano magnitudine. Da stato t-1 (causale).
                         # Richiede --campo-spinoriale + --spinore-corretto. Default off = byte-identico.
+OROLOGIO_SEGNO = False    # MOD 5.3c (dev-spinoriale): firma il VERSO dell'orologio de Broglie INTERNO _phc col
+                        # segno di doppia-copertura STABILE s_k=sign(perc_chi) (lignaggio, non l'istantaneo che
+                        # oscilla): materia exp(-), antimateria exp(+), tempi SPECULARI. |omega_clk| INVARIATA (S3b:
+                        # solo verso, non velocita'). Fase globale -> nb invariante (gravita'/direzione intatte);
+                        # eta/geometria = magnitudine. Vive nel ramo --deparam-orologio (orologio pura-fase).
+                        # Richiede --campo-spinoriale + --spinore-corretto. Default off = byte-identico.
 KURAMOTO_SU2 = False     # KURAMOTO SU(2) NON-ABELIANO (§46): ruota lo SPINORE INTERO verso la media SU(2) dei
                         # vicini psi_bar=(wI@psi)/|.| con rotazione geodetica attorno all'asse VARIABILE nb x nb_bar
                         # (non commuta -> non-abeliano genuino). Verso+segno ruotano INSIEME; il segno emerge per
@@ -1797,7 +1803,13 @@ class Rete:
                 # nb = psi^dag sigma psi INVARIANTE (una fase globale non cambia nb -> gravita' grav*=nb.nb
                 # intatta); vincola SOLO il segno di doppia-copertura (arg<canon(nb)|psi>). E' la de Broglie
                 # 'pura': avanzamento invisibile al Bloch, pilota il SEGNO non la DIREZIONE.
-                _phc = np.exp(-0.5j * omega_clk * _dts)
+                # MOD 5.3c (--orologio-segno): VERSO firmato dal segno di doppia-copertura STABILE
+                # s_k=sign(perc_chi) (lignaggio, non l'istantaneo che oscilla): materia exp(-), antimateria
+                # exp(+), tempi SPECULARI (|omega_clk| invariata). OFF: s_k=1.0 -> byte-identico. Tutta-materia
+                # (s_k=+1) -> esatto. Fase globale: tocca SOLO il segno, non nb/gravita'/eta.
+                _sk = (np.where(np.asarray(self.perc_chi[:n]) >= 0.0, 1.0, -1.0)
+                       if (OROLOGIO_SEGNO and hasattr(self, "perc_chi") and len(self.perc_chi) >= n) else 1.0)
+                _phc = np.exp(-0.5j * _sk * omega_clk * _dts)
                 a1 = a1 * _phc; b1 = b1 * _phc
             if SYNC_FASE_OROLOGIO and forza_sync is not None and wI_sync is not None and uno_sync is not None:
                 # KURAMOTO SUL SEGNO DI DOPPIA-COPERTURA (sync-fase-orologio, §43): ordina il foglio +- in modo
@@ -4325,7 +4337,7 @@ def _applica_flag(a):
     global net
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
     if getattr(a, "tau_d0", False):
@@ -4408,6 +4420,13 @@ def _applica_flag(a):
         raise SystemExit("[errore] --tempo-segno richiede --campo-spinoriale + --spinore-corretto (il segno di doppia-copertura e la coerenza vivono li')")
     if TEMPO_SEGNO:
         print("[tempo-segno] MOD 5.3a+5.3b: VERSO del tempo = materia/antimateria COERENTE (Feynman-Stuckelberg, s_k=1+(perc_chi-1)*m_coer, vuoto avanti); MAGNITUDINE = torsione 1+|tw|/PHI_CRIT. Firma solo l'evoluzione interna; eta/geometria = magnitudine. Da stato t-1 (causale). OFF = byte-identico.")
+    OROLOGIO_SEGNO = bool(getattr(a, "orologio_segno", False)) # MOD 5.3c: firma dell'orologio de Broglie interno _phc col segno stabile
+    if OROLOGIO_SEGNO and not (CAMPO_SPINORIALE and SPINORE_CORRETTO):
+        raise SystemExit("[errore] --orologio-segno richiede --campo-spinoriale + --spinore-corretto (l'orologio de Broglie interno _phc vive li')")
+    if OROLOGIO_SEGNO and not DEPARAM_OROLOGIO:
+        print("[orologio-segno] AVVISO: _phc (orologio pura-fase) vive nel ramo --deparam-orologio; senza di esso la firma e' INERTE (no-op). Aggiungere --deparam-orologio per attivarla.")
+    if OROLOGIO_SEGNO:
+        print("[orologio-segno] MOD 5.3c: VERSO dell'orologio de Broglie interno _phc firmato da s_k=sign(perc_chi) STABILE (materia exp-, antimateria exp+, tempi speculari); |omega_clk| INVARIATA (S3b: solo verso). Fase globale: tocca SOLO il segno, non nb/gravita'/eta. OFF/tutta-materia = esatto.")
     SPIN_FEEDBACK = bool(getattr(a, "spin_feedback", False)) # feedback locale overlap spinoriale: default off
     SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
     CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale
@@ -4725,6 +4744,14 @@ def _cli():
                         "va avanti); omega/fase interne usano s_k*dt_n, eta/geometria usano |dt_n|. La MAGNITUDINE del "
                         "ritmo() diventa la torsione esplicita 1+|tw|/PHI_CRIT (il de Broglie del campo emesso, bocciato "
                         "da S3b). Da stato t-1 (causale). Richiede --campo-spinoriale + --spinore-corretto. Default off = byte-identico.")
+    p.add_argument("--orologio-segno", action="store_true", dest="orologio_segno",
+                   help="MOD 5.3c (dev-spinoriale, zero parametri): firma il VERSO dell'orologio de Broglie INTERNO "
+                        "_phc = exp(-0.5j * s_k * omega_clk * dt) col segno di doppia-copertura STABILE s_k=sign(perc_chi) "
+                        "(lignaggio, non l'istantaneo Re<canon|psi> che oscilla): materia exp(-), antimateria exp(+), "
+                        "tempi SPECULARI. |omega_clk| INVARIATA (S3b: solo verso, non velocita'). Fase globale -> nb "
+                        "invariante (gravita'/direzione intatte); eta/geometria = magnitudine. Vive nel ramo "
+                        "--deparam-orologio (orologio pura-fase). Richiede --campo-spinoriale + --spinore-corretto. "
+                        "Default off = byte-identico.")
     p.add_argument("--spin-feedback", action="store_true", dest="spin_feedback",
                    help="FEEDBACK LOCALE SPINORE->ARCHI: la parte immaginaria dell'overlap del lift "
                         "spinoriale aggiunge una coppia antisimmmetrica alle fasi. Richiede "
@@ -4983,6 +5010,7 @@ def batch_condensazione(a):
         # RISPONDE all'orologio, a differenza di spin_axis_R/berry_* (ciechi). Covariante (per-arco, intensivo).
         # Misura VERSO e SEGNO con lo STESSO metodo -> si ordinano INSIEME (un motore) o separati (due)?
         cols['segno_arco_coer'] = 0.0    # <sign_i*sign_j> pesato: +1 concorde, -1 alternato, 0 frustrato
+        cols['segno_arco_coer_materia'] = 0.0  # PRESIDIO: <sign_i*sign_j> SOLO archi materia-materia (sign>0): ordine vero vs separazione
         cols['verso_arco_coer'] = 0.0    # <nb_i·nb_j> pesato: allineamento del verso di Bloch
         cols['segno_ov_absmedia'] = 0.0  # |Re<canon|psi>| medio: commitment a un foglio (intensivo)
         cols['spin_overlap_arco'] = 0.0  # <|<psi_i|psi_j>|^2> pesato: coerenza SU(2) PIENA (verso+segno), pure-read
@@ -5001,6 +5029,15 @@ def batch_condensazione(a):
                     _wa = net._pesi()[_mk] if hasattr(net, '_pesi') else np.ones(int(_mk.sum()))
                     _dsum = max(float(np.sum(_wa)), 1e-12)
                     cols['segno_arco_coer'] = float(np.sum(_wa * _sgn[_ii] * _sgn[_jj]) / _dsum)
+                    # PRESIDIO CRITICO: segno_arco_coer sui SOLI archi materia-materia (sign_i>0 E sign_j>0),
+                    # escludendo gli archi materia-antimateria (congelati/discordi). Distingue ORDINE VERO
+                    # (sale anche solo-materia) da SEPARAZIONE illusoria (sale il totale solo per esclusione dei discordi).
+                    _mm = (_sgn[_ii] > 0) & (_sgn[_jj] > 0)
+                    if _mm.any():
+                        _wmm = _wa[_mm]; _dmm = max(float(np.sum(_wmm)), 1e-12)
+                        cols['segno_arco_coer_materia'] = float(np.sum(_wmm * _sgn[_ii][_mm] * _sgn[_jj][_mm]) / _dmm)
+                    else:
+                        cols['segno_arco_coer_materia'] = 0.0
                     cols['verso_arco_coer'] = float(np.sum(_wa * np.sum(_uu[_ii] * _uu[_jj], axis=1)) / _dsum)
                     _psi2 = np.asarray(_psp[:n])
                     _ovl = np.abs(np.sum(np.conj(_psi2[_ii]) * _psi2[_jj], axis=1)) ** 2   # |<psi_i|psi_j>|^2 (coerenza SU(2) piena)
