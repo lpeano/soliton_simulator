@@ -30,8 +30,10 @@
    commit/push prima di ogni run; (c) `--verlet` default nei test.
 
 ## In corso / prossimo
-- **Check purezza CON `--verlet`** in esecuzione (config reale dei test) — atteso byte-identico.
-- **Poi**: commit/push launcher → lanciare la campagna `csv/_test_53c/_run_bracci.ps1`:
+- **Purezza diaglog VERIFICATA byte-identica** (max|A−B|=0) sia NON-verlet sia CON `--verlet` (config test).
+  Baseline `segno_arco_coer_materia` 0.65→~0 (metrica discrimina), 54039 archi materia-materia (statistica solida).
+- **Campagna PRONTA ma IN ATTESA** (Luca sta generando un video → no contention/OOM): lanciare
+  `csv/_test_53c/_run_bracci.ps1` quando la macchina è libera:
   - RI-CONFERMA 5.3a pulito (`--tempo-segno` seed 1) vs baseline b1 → il NO-GO regge senza contaminazione?
   - 9 BRACCI (3 × seed 1,2,3): b1_base, b2_orolseg (`--orologio-segno`), b3_orolseg_cs (`+ --cs-dinamico`).
 - **Verdetto** (arbitro = `segno_arco_coer_materia` SOLO-MATERIA): (A) sale/resta = ordine vero;
