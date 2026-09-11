@@ -54,10 +54,17 @@ gestita **in modo covariante**, altrimenti misuri l'espansione, non la fisica (i
 - **Verifica sempre:** `python -m py_compile`, poi un run-lampo che confermi che il flag fa ciò che deve.
 - **Un flag = una variabile.** Gli A/B cambiano una cosa sola per volta.
 - **Mostra il diff prima di applicare** modifiche non banali e conferma che non introducano parametri da tarare.
-- **Il diaglog / la diagnostica è SOLO LETTURA: mai mutare lo stato fisico.** Non chiamare funzioni impure
-  (che scrivono in cache letti dalla dinamica, es. `chiralita_core_locale`→`_chi_core_nodi`, `ritmo`→`_psi_prec`,
-  `calcola_psi`→`psi`, `_spinor_lift`). Usa letture pure dei cache o snapshot/restore attorno al blocco diagnostico.
-  Verifica con test byte-identico della fisica (stesso caso con/senza diaglog: stato finale identico).
+- **ATTENZIONE MANIACALE — il diaglog, il trace e la condensazione sono SOLO-LETTURA: mai mutare la fisica,
+  mai consumare `net.rng`.** Ogni funzione diagnostica impura (scrive cache letti dalla dinamica, es.
+  `chiralita_core_locale`→`_chi_core_nodi`, `ritmo`→`_psi_prec`, `calcola_psi`→`psi`/`psi_spin`/`rho_spin`/
+  `_psi_spin_prec`, `_spinor_lift`) va neutralizzata con snapshot/restore. Il SET COMPLETO da ripristinare
+  attorno a diaglog E condensazione: `psi,_psi_prec,_spinor_lift,_psi_spinor,_nb,_nb_prec,omega_s,phi_s`
+  + cache campo-spinoriale `psi_spin,rho_spin,_psi_spin_prec` + **stato RNG** (`net.rng.bit_generator.state`).
+  BUG storico (2026-09-11): sotto `--campo-spinoriale` mancavano le 3 cache spinoriali + l'RNG → il diaglog
+  contaminava (N 3228 vs 3299). **VERIFICA OBBLIGATORIA dopo OGNI modifica a diaglog/trace/misure:** run CON vs
+  SENZA `--diaglog`, **BYTE-IDENTICO** (`max|A-B|=0` su TUTTI gli array, non solo N). Script `csv/_seal_53c/_check_presidio.py`.
+  Futuro concordato (non ora): refactor diaglog→messaging (produttore emette snapshot immutabile; consumer
+  applica REGOLE PURE disaccoppiate da `net`) → purezza per costruzione.
 
 ## Regole di flag verificate
 - **`--cs-dinamico` implica SEMPRE anche `--chi-core` e `--spinore-vivo`** (anche in tutti gli script di

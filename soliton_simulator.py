@@ -5010,7 +5010,8 @@ def batch_condensazione(a):
         # RISPONDE all'orologio, a differenza di spin_axis_R/berry_* (ciechi). Covariante (per-arco, intensivo).
         # Misura VERSO e SEGNO con lo STESSO metodo -> si ordinano INSIEME (un motore) o separati (due)?
         cols['segno_arco_coer'] = 0.0    # <sign_i*sign_j> pesato: +1 concorde, -1 alternato, 0 frustrato
-        cols['segno_arco_coer_materia'] = 0.0  # PRESIDIO: <sign_i*sign_j> SOLO archi materia-materia (sign>0): ordine vero vs separazione
+        cols['segno_arco_coer_materia'] = 0.0  # PRESIDIO: <sign_i*sign_j> SOLO archi materia-materia (perc_chi>0): ordine vero vs separazione
+        cols['n_arco_materia'] = 0             # PRESIDIO stat: numero archi materia-materia usati (perc_chi>0 su entrambi)
         cols['verso_arco_coer'] = 0.0    # <nb_i·nb_j> pesato: allineamento del verso di Bloch
         cols['segno_ov_absmedia'] = 0.0  # |Re<canon|psi>| medio: commitment a un foglio (intensivo)
         cols['spin_overlap_arco'] = 0.0  # <|<psi_i|psi_j>|^2> pesato: coerenza SU(2) PIENA (verso+segno), pure-read
@@ -5029,10 +5030,14 @@ def batch_condensazione(a):
                     _wa = net._pesi()[_mk] if hasattr(net, '_pesi') else np.ones(int(_mk.sum()))
                     _dsum = max(float(np.sum(_wa)), 1e-12)
                     cols['segno_arco_coer'] = float(np.sum(_wa * _sgn[_ii] * _sgn[_jj]) / _dsum)
-                    # PRESIDIO CRITICO: segno_arco_coer sui SOLI archi materia-materia (sign_i>0 E sign_j>0),
-                    # escludendo gli archi materia-antimateria (congelati/discordi). Distingue ORDINE VERO
-                    # (sale anche solo-materia) da SEPARAZIONE illusoria (sale il totale solo per esclusione dei discordi).
-                    _mm = (_sgn[_ii] > 0) & (_sgn[_jj] > 0)
+                    # PRESIDIO CRITICO (§5.1): coerenza del SEGNO di doppia-copertura _sgn DENTRO il settore
+                    # MATERIA, selezionato con l'etichetta STABILE perc_chi>0 (materia/antimateria = s_k della
+                    # firma), NON con _sgn stesso (che darebbe la tautologia _sgn*_sgn=+1). Distingue ORDINE VERO
+                    # (sale dentro il solo settore materia) da SEPARAZIONE illusoria (il totale sale solo perche'
+                    # gli archi materia-antimateria discordi sono esclusi). Baseline: _sgn scorrelato da perc_chi -> ~0.
+                    _pcm = np.sign(np.asarray(net.perc_chi[:n])) if len(net.perc_chi) >= n else np.ones(n)
+                    _mm = (_pcm[_ii] > 0) & (_pcm[_jj] > 0)
+                    cols['n_arco_materia'] = int(_mm.sum())
                     if _mm.any():
                         _wmm = _wa[_mm]; _dmm = max(float(np.sum(_wmm)), 1e-12)
                         cols['segno_arco_coer_materia'] = float(np.sum(_wmm * _sgn[_ii][_mm] * _sgn[_jj][_mm]) / _dmm)
@@ -5742,8 +5747,11 @@ def batch_condensazione(a):
             # IL DIAGLOG E' SOLO LETTURA: non deve mutare lo stato fisico. Le funzioni diagnostiche
             # ricalcolano/aggiornano cache di CONTINUITA' che la DINAMICA legge: self.psi (da _pesi ->
             # lambda_nodi), self._psi_prec (da ritmo(), tempo proprio), self._spinor_lift (feedback
-            # spinoriale). Snapshot + restore garantiscono byte-identita' della fisica con/senza diaglog.
-            _snap_fisica = {k: getattr(net, k, None) for k in ('psi', '_psi_prec', '_spinor_lift', '_psi_spinor', '_nb', '_nb_prec', 'omega_s', 'phi_s')}
+            # spinoriale). Sotto --campo-spinoriale ANCHE psi_spin/rho_spin/_psi_spin_prec (ritmo 4pi,
+            # _rho_sorgente, _nb_grav) e lo stato RNG (se una misura consuma random). Snapshot+restore
+            # garantiscono byte-identita' della fisica con/senza diaglog.
+            _snap_rng = net.rng.bit_generator.state
+            _snap_fisica = {k: getattr(net, k) for k in ('psi', '_psi_prec', '_spinor_lift', '_psi_spinor', '_nb', '_nb_prec', 'omega_s', 'phi_s', 'psi_spin', 'rho_spin', '_psi_spin_prec') if hasattr(net, k)}
             d = _diag_completa(net, _step_glob); d['step'] = _step_glob
             # Tracking esplicito del picco costruttivo: usa conc_nodi, che include
             # i figli della mitosi, e la coorte solo come fallback iniziale.
@@ -5762,6 +5770,7 @@ def batch_condensazione(a):
                         d[f'm{i_m}_picco_pos_{nome}'] = round(float(valore), 7)
             for _k, _v in _snap_fisica.items():   # RESTORE: il diaglog non lascia tracce sulla fisica
                 setattr(net, _k, _v)
+            net.rng.bit_generator.state = _snap_rng   # RESTORE RNG: byte-identita' con/senza diaglog
             if _diag_header is None or _diag_header == "GIA_SCRITTO":
                 # ordine: colonne fisse note, poi le extra multimassa/interazione in coda
                 extra = [k for k in d.keys() if k not in _DIAG_COLS]
@@ -5796,9 +5805,11 @@ def batch_condensazione(a):
                 trace_f.write(",".join(str(x) for x in _trow) + "\n"); trace_f.flush()
         if step % ogni == 0:
             # MISURA SOLA-LETTURA: la condensazione ricalcola psi e chiama misure per diagnostica;
-            # snapshot/restore dei cache di CONTINUITA' che la DINAMICA legge (stesso set del diaglog),
-            # cosi' --ogni NON contamina il tempo proprio (ritmo() al passo dopo legge self.psi/_psi_prec).
-            _snap_cond = {k: getattr(net, k, None) for k in ('psi', '_psi_prec', '_spinor_lift', '_psi_spinor', '_nb', '_nb_prec', 'omega_s', 'phi_s')}
+            # snapshot/restore dei cache di CONTINUITA' che la DINAMICA legge (stesso set del diaglog +
+            # cache campo-spinoriale + RNG), cosi' --ogni NON contamina il tempo proprio (ritmo() al passo
+            # dopo legge self.psi/_psi_prec/_psi_spin_prec).
+            _snap_cond_rng = net.rng.bit_generator.state
+            _snap_cond = {k: getattr(net, k) for k in ('psi', '_psi_prec', '_spinor_lift', '_psi_spinor', '_nb', '_nb_prec', 'omega_s', 'phi_s', 'psi_spin', 'rho_spin', '_psi_spin_prec') if hasattr(net, k)}
             n = net.n
             idxc = _regione_centrale(net)
             net.calcola_psi(); I2 = np.abs(net.psi[:n])**2
@@ -5859,6 +5870,7 @@ def batch_condensazione(a):
                   flush=True)
             for _k, _v in _snap_cond.items():   # RESTORE: la misura condensazione non lascia tracce sulla fisica
                 setattr(net, _k, _v)
+            net.rng.bit_generator.state = _snap_cond_rng   # RESTORE RNG: --ogni non contamina lo stream
     dt = _t.time() - t0
     if diag_f is not None:
         diag_f.close()
