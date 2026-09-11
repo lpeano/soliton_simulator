@@ -27,6 +27,19 @@ con tempo esterno. Se il tempo proprio diventa una DIMENSIONE (3D -> 3+1), il se
 la POSIZIONE lungo la quarta coordinata (verso del tempo), quindi GEOMETRICO, non arbitrario.
 E lo split materia/antimateria emerge dalla metrica, non da un decreto.
 
+### 0.1 — DIAGNOSI 5.3a e BERSAGLIO GIUSTO (l'orologio INTERNO _phc)
+
+Il pilota MOD 5.3a (`--tempo-segno`) ha firmato `dt_n` = il tempo proprio ESTERNO (il passo)
+-> NO-GO (segno_arco_coer ~0, spin_overlap ~0.5, m0_Lz ~0). Bersaglio SBAGLIATO: firmare il
+tempo esterno non pilota il segno di doppia-copertura.
+
+BERSAGLIO GIUSTO: l'OROLOGIO de Broglie INTERNO, gia' isolato nel codice come
+`_phc = np.exp(-0.5j * omega_clk * _dts)`. Il commento del codice lo dichiara: "pilota il SEGNO
+non la DIREZIONE, vincola SOLO il segno di doppia-copertura". E' il termine che porta il verso
+del tempo INTERNO (fase de Broglie), non il tempo esterno. La CONGETTURA di Luca in prospettiva
+3+1: il verso sta nell'orologio interno; il segno diventa la POSIZIONE lungo la quarta coordinata,
+geometrico. **La MOD 5.3c (`--orologio-segno`, firma di `_phc`) e' il PRIMO passo operativo verso il 3+1.**
+
 ---
 
 ## 1. LA STRUTTURA GEOMETRICA: da R^3 a R^{3,1}
@@ -225,3 +238,7 @@ come ordine.
 - Costo: O(N) (relazionale, non griglia), garantito dalla localita' temporale TOPOLOGICA
   (|T_i-T_j| > soglia_T -> nessun arco), non solo dinamica.
 - Presidio: riduzione al limite (tutta-materia -> 3D vecchio esatto).
+- PRIMO PASSO OPERATIVO: la MOD 5.3c (`--orologio-segno`, firma dell'orologio interno `_phc`
+  con `s_k` = sign(perc_chi) delle coppie) e' l'implementazione operativa iniziale verso il 3+1:
+  firma SOLO il verso del segno di doppia-copertura (materia exp-, antimateria exp+), omega_clk
+  invariata (S3b: solo verso, non velocita'); geometria/gravita'/eta restano magnitudine.
