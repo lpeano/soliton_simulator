@@ -264,6 +264,30 @@ non cambia, **il fork non fa nulla al sistema**.
 trasporto agisce eccome (9.940e-01). Nel codice quei due oggetti esistono gia': `_nb_grav` prende
 i Bloch dal campo EMESSO `psi_spin`, mentre `_coppia_interferenza` trasporta `_psi_spinor`.
 
+### ⚠⚠ CHIARIMENTO CRITICO — il run a 150 passi mostrava N diverso: E' RUMORE, NON FISICA
+Confrontando i due run da 150 passi si vedeva **N = 3164 (OFF) contro 3209 (ON), +1.4%**. Sembra
+che il fork faccia qualcosa. **NON lo fa.** Misurato rifacendo i confronti in modo pulito:
+
+| orizzonte | esito |
+|---|---|
+| 2 passi, ramo ON **eseguito 305 volte** (verificato con spia su stderr) | ramo attivo, non saltato |
+| 3 passi, ON vs OFF | **file .pkl BYTE-IDENTICI** |
+| 40 passi, ON vs OFF | **max\|OFF-ON\| = 2.220e-16**, N identico (1889 = 1889) |
+| 150 passi, ON vs OFF | N 3164 vs 3209 |
+
+Lettura: il ramo ON **viene eseguito**, ma per il teorema produce lo stesso risultato; l'unica
+differenza e' il **percorso di calcolo** (4 matvec invece di 2), che cambia l'ordine delle somme e
+quindi l'ultimo bit. A 40 passi la differenza e' ancora **2.2e-16** (arrotondamento puro). Su
+orizzonti lunghi il sistema e' caotico e quel rumore a 1e-16 si amplifica fino a cambiare le
+mitosi, quindi N. **La differenza di N a 150 passi e' rumore di arrotondamento amplificato, non
+un effetto fisico del fork.**
+
+**PRESIDIO — il falso positivo che ho quasi preso:** guardare solo N a 150 passi avrebbe fatto
+concludere "il fork fa qualcosa" (+1.4%, sembra un effetto). E' esattamente l'autoinganno contro
+cui i documenti mettono in guardia. Il modo per non cascarci: **misurare la divergenza a orizzonte
+CORTO**, dove l'arrotondamento non ha ancora avuto tempo di amplificarsi. Se a 40 passi vale
+1e-16, non c'e' fisica dentro, qualunque cosa si veda dopo.
+
 ## ⚠ DECISIONE APERTA (di Luca, non mia) — da CHE COSA si costruisce la connessione?
 Cambiare la sorgente dei Bloch (da `_psi_spinor` a `psi_spin`) farebbe agire il fork. **Ma
 sceglierlo PERCHE' fa muovere il risultato sarebbe tarare un meccanismo per ottenere un effetto:
@@ -282,9 +306,15 @@ sistema, da che cosa deve essere costruita, e perche'? Possibilita' viste, nessu
 ## PROSSIMA AZIONE — decisione di Luca sul punto qui sopra
 - Il gate NON e' stato ri-timbrato: con il fork inerte non cambia nessun run, e la decisione di
   Luca era "si ri-timbra al PEZZO 3 quando i run cambiano davvero". **Oggi non cambiano.**
-- Restano da girare (interrotti): i sigilli S3/S4/S6 del PEZZO 3, che richiedono il run con
-  `--fork-su2` ON. **S6 (ON != OFF) fallira' per lo stesso motivo di S2b**: e' prevedibile
-  dall'algebra, non serve spendere il run per scoprirlo.
+- **S3/S4/S6 ora girati** (dai run gia' su disco piu' due run corti nuovi): **S3 norma |psi|=1
+  (2.220e-16 su 3209 nodi) PASS ; S4a nessun NaN/inf PASS ; S6 (ON deve differire da OFF) FAIL**,
+  come previsto dall'algebra. Bilancio finale del PEZZO 3: **6 PASS, 2 FAIL (S2b e S6)**, e i due
+  FAIL sono la stessa cosa: il fork non cambia la fisica.
+- **BUG CORRETTO in `_sigillo_pezzo3.py`:** il codice pre-cablaggio veniva estratto da `HEAD`.
+  Appena il cablaggio e' stato committato, `HEAD` ha smesso di essere il pre-cablaggio, quindi il
+  sigillo avrebbe confrontato il nuovo codice **con se stesso** e sarebbe passato sempre. Ora il
+  riferimento e' il commit FISSO `4d7ca25`. Da ricordare: **un sigillo ancorato a HEAD si
+  auto-assolve** appena il lavoro viene committato.
 1. **PEZZO 3:** in `_coppia_interferenza` (righe ~2242 sul blob precedente, da ri-cercare per NOME
    sul blob `cf24cd28`), dietro flag OFF: `Im<psi_i|psi_j>` -> `Im<psi_i| N_ij/2 |psi_j>`.
    Attenzione all'ORIENTAMENTO: `N_ij` trasporta n_j -> n_i, il verso giusto per quella forma.

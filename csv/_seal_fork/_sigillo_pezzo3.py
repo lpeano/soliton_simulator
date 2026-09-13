@@ -30,6 +30,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
 NEW = os.path.join(ROOT, "soliton_simulator.py")
 OLD = os.path.join(HERE, "_old_sim_pre_pezzo3.py")
+# BUG CORRETTO (2026-09-13): prima qui c'era "HEAD". Appena il cablaggio e' stato COMMITTATO, HEAD
+# ha smesso di essere il codice pre-cablaggio, quindi il sigillo avrebbe confrontato il nuovo
+# codice con se stesso e sarebbe passato SEMPRE. Il riferimento dev'essere un commit FISSO.
+PRE = "4d7ca25"   # RIFATTORIZZAZIONE su N: ultimo commit PRIMA del cablaggio del PEZZO 3
 PY = sys.executable
 BASE = ["--batch", "--nmasse", "3", "--sep", "8", "--seed", "1", "--passi", "150",
         "--ogni", "150", "--db-ogni", "150",
@@ -80,9 +84,9 @@ print("SIGILLO 1 — FLAG OFF = BYTE-IDENTICO (due run veri, 150 passi, seed 1)"
 print("=" * 92)
 if not os.path.exists(OLD):
     with open(OLD, "w", encoding="utf-8", newline="") as f:
-        f.write(subprocess.run(["git", "show", "HEAD:soliton_simulator.py"], cwd=ROOT,
+        f.write(subprocess.run(["git", "show", PRE + ":soliton_simulator.py"], cwd=ROOT,
                                capture_output=True, text=True).stdout)
-    print("  (creato %s da HEAD = codice PRIMA del cablaggio)" % os.path.basename(OLD))
+    print("  (creato %s da %s = codice PRIMA del cablaggio)" % (os.path.basename(OLD), PRE))
 A = run(OLD, os.path.join(HERE, "_p3_old.pkl"))
 B = run(NEW, os.path.join(HERE, "_p3_off.pkl"))
 worst, bad = diff(A, B)
