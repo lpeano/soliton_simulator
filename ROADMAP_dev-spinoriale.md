@@ -1,7 +1,18 @@
 # ROADMAP dev-spinoriale — PIANO COMPLETO (logica + matematica + todo)
 
+> **⚠ SUPERATA (2026-09-13) — NON e' la roadmap viva.**
+> **La roadmap VIVA e' `doc/ROADMAP_fork_SU2.md`.** Decisione di Luca: **FORK-FIRST**
+> (CLAUDE.md par.6). Tutto quello che sta in QUESTO file — GAMMA / Step 1A coarse-graining /
+> Step 2 cs<->orologio / Step 3 alpha_G — e' **A VALLE del fork**: non si tocca finche' il fork
+> non gira. Motivo: a densita' reali `cs` e' MORTO (I~0.05 contro la soglia ~400), quindi **oggi
+> ogni test cs-dipendente e' NULLO** — vedi il par. "AVVISO DI MAGNITUDINE" e la legge base qui sotto.
+> **Il contenuto resta valido come MATEMATICA e come piano futuro**: non e' ritrattato, e'
+> RIMANDATO. Quando il fork avra' girato, si riprende da qui.
+> La "PROSSIMA AZIONE ALLA RIPRESA" in fondo (Step 1A) e' **SOSPESA**: la prossima azione reale e'
+> il **fork Strato 0 / PEZZO 1** di `doc/ROADMAP_fork_SU2.md`.
+>
 > Piano pluri-sessione, da eseguire A STEP con CHECKPOINT a Luca tra ognuno.
-> **Scritto ora, NON ancora eseguito** (Step 0 saltato, Step 1A da lanciare alla ripresa).
+> **Scritto ora, NON ancora eseguito** (Step 0 saltato, Step 1A sospeso: vedi avviso sopra).
 > I TODO operativi vivono anche in `/memories/repo/roadmap_todo.md` (persistenti tra sessioni).
 > Lingua: italiano.
 
@@ -138,7 +149,10 @@ traguardo. Non trattarlo come "quasi fatto". Nessun codice ora.
 - I **TODO sono PERSISTENTI** e attraversano PIÙ SESSIONI: non cancellarli a fine sessione,
   spuntare solo ciò che è certificato da Luca.
 
-## PROSSIMA AZIONE ALLA RIPRESA
+## PROSSIMA AZIONE ALLA RIPRESA — ⚠ SOSPESA (2026-09-13, decisione fork-first)
+> Questo blocco NON e' piu' la prossima azione. La prossima azione e' il **fork Strato 0 / PEZZO 1**
+> (`doc/ROADMAP_fork_SU2.md`). Quanto segue riprende quando il fork avra' girato.
+
 1. Verifica blob = `4fc7a794` (altrimenti STOP).
 2. **Step 1A (pure-read)**: scrivere+lanciare `_run_3gamma.ps1` + `_analizza_3gamma.py`,
    sigillo b=1=identità byte-id. → CHECKPOINT a Luca.

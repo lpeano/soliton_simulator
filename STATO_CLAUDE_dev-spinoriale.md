@@ -23,21 +23,50 @@
   assenti da tutti i branch e dalla storia git -> il par.0-bis non era eseguibile):
   `BUSSOLA_dev-spinoriale.md`, `BUSSOLA_TECNICA_dev-spinoriale.md` (v2), `ROADMAP_fork_SU2.md`,
   `PROTOCOLLO_test_olonomia.md`, `SYSTASIS_nota_concettuale.md`.
-- **CONFLITTO D'ORDINE APERTO (decisione di Luca, non presa da Claude):** CLAUDE.md par.6 dice
-  "prima il FORK, poi il resto" e mette GAMMA/Step 2 A VALLE; `ROADMAP_dev-spinoriale.md` (radice) e la
-  sezione ROADMAP qui sotto dicono che la prossima azione e' lo Step 1A (coarse-graining GAMMA).
-  Anche `doc/BUSSOLA_dev-spinoriale.md` ordina GAMMA(1) -> cs-orologio(2) -> fork(3), l'opposto di par.6.
-  Per la regola "in caso di conflitto vince CLAUDE.md" la prossima azione sarebbe il **fork Strato 0 /
-  PEZZO 1** (`doc/ROADMAP_fork_SU2.md`). NON procedere finche' Luca non conferma quale ordine vale.
+- **CONFLITTO D'ORDINE: RISOLTO (Luca, 2026-09-13) -> FORK-FIRST.** Vale CLAUDE.md par.6: si parte dal
+  fork non-abeliano; GAMMA / Step 1A / Step 2 (cs<->orologio) / Step 3 (alpha_G) sono **A VALLE**
+  (a densita' reali cs e' MORTO, I~0.05 vs soglia ~400 -> ogni test cs-dipendente oggi e' NULLO).
+  Allineati di conseguenza: `ROADMAP_dev-spinoriale.md` (radice) marcata **SUPERATA** (rimandata, NON
+  ritrattata: la matematica resta valida e si riprende dopo il fork) e la sua "PROSSIMA AZIONE"
+  marcata SOSPESA; `doc/BUSSOLA_dev-spinoriale.md` riga 86, puntatore corretto a
+  `doc/ROADMAP_fork_SU2.md` + nota che la sua lista 0-4 e' l'ordine STORICO, non di esecuzione.
+- **ROADMAP VIVA = `doc/ROADMAP_fork_SU2.md`** (Preparazione -> PEZZO 1 -> PEZZO 2 -> PEZZO 3, un pezzo
+  un sigillo). Il test di verifica e' `doc/PROTOCOLLO_test_olonomia.md`, da eseguire DOPO il sigillo di
+  riduzione al limite (se non passa, misurerebbe un bug, non la fisica).
+- **§9 RIVERIFICATO DA LUCA sul repo (blob 4fc7a794): sano tranne la riga gia' corretta.** Confermati
+  dal disco: forza 2207-2208 ✓, cs 2187 ✓, omega_clk/`_phc`/dt_n NON usano cs ✓, chiamata
+  `_passo_spinoriale` 2419 dietro SPINORE_VIVO ✓, ancora elastica 3234-3237 con filtro
+  `1-tanh(d/LAM)` a 3224 ✓. L'unico sbaglio era 2196 (docstring citato come codice), gia' fixato.
+- **COORDINAMENTO (regola Luca 2026-09-13): la CLAUDE.md AUTOREVOLE e' quella NEL REPO.** Le copie
+  fuori dal repo sono indietro sul fix 2207-2208 e **NON vanno ripushate** (rimetterebbero l'errore).
+  Le modifiche a CLAUDE.md le applica Claude Code nel repo; Luca fornisce il testo esatto.
 
-## ROADMAP (piano pluri-sessione) — vedi `ROADMAP_dev-spinoriale.md` + `/memories/repo/roadmap_todo.md`
+## PROSSIMA AZIONE — FORK, STRATO 0 (PEZZO 1)
+Ordine operativo in `doc/ROADMAP_fork_SU2.md`, un pezzo un sigillo, flag OFF di default:
+1. **PEZZO 1** — funzione `U_ij(n_i,n_j)` isolata: `chi=arccos(n_i.n_j)`, `m_hat=(n_j x n_i)/|...|`,
+   `U_ij=exp(-i (chi/2) m_hat.sigma)`. Sigilli: allineati -> U->I ; `U U^dag = I` ; caso antipodale
+   gestito dal PESO (Pezzo 2), MAI da una convenzione d'asse.
+2. **PEZZO 2** — peso `w_ij=|n_j x n_i|=sin(chi)`. Niente soglia netta, niente coefficiente tarato.
+3. **PEZZO 3** — cablaggio nella forza, **righe 2207-2208** (`_coppia_interferenza`):
+   `Im<psi_i|psi_j> -> w_ij * Im<psi_i|U_ij|psi_j>`. Attenzione all'ORIENTAMENTO (`U_ij=U_ji^dag`):
+   con gli scalari era irrilevante, ora conta. Sigillo: flag OFF / allineati -> BYTE-IDENTICO.
+4. Poi (lettura, gratis): controllare che `SYNC_UPDATE` e `SCUOTIMENTO` siano ATTIVI nella config del
+   fork, altrimenti la degenerazione dei Bloch non si rompe.
+5. Poi le verifiche dinamiche (Luca gira, Claude legge): distribuzione degli angoli chi, olonomia
+   W(r) secondo `doc/PROTOCOLLO_test_olonomia.md`, isotropia `<n>`.
+
+## ROADMAP A VALLE (GAMMA / cs<->orologio) — ⚠ RIMANDATA dopo il fork (2026-09-13)
+> Vedi `ROADMAP_dev-spinoriale.md` (marcata SUPERATA) + `/memories/repo/roadmap_todo.md`.
+> **Non e' il lavoro corrente**: la prossima azione e' il fork Strato 0 (sezione sopra). Questa
+> sezione resta come RECORD del piano e della sua matematica: valida, solo rimandata.
+
 Obiettivo: EM e gravita' come 2 proiezioni dello STESSO campo spinoriale, con la giusta gerarchia.
 - Canali gauge-invarianti = MODULO |psi|^2 (gravita') vs FASE/segno (EM). MAI Re/Im per-arco
   (2 proiezioni di 1 solo grado, gauge-dipendenti; Im = motore forza, non carica). Bargmann e' CIECO
   al segno (telescoping) -> misura EM = phase-locking TEMPORALE (SYNC/Kuramoto).
 - STEP 0 SALTATO (Luca): seed-1 (B) = BASELINE INTERNA, non risultato robusto. seed-2/3 = TODO
   rimandato (solo se il (B) andra' presentato come stabilito).
-- STEP 1A = PROSSIMA AZIONE (pure-read, NON tocca .py): scrivere `_run_3gamma.ps1` +
+- STEP 1A [SOSPESO, non piu' la prossima azione] (pure-read, NON tocca .py): scrivere `_run_3gamma.ps1` +
   `_analizza_3gamma.py`, coarse-graining a blocchi di b, fittare d in gamma_eff(b)~b^d nei due canali
   (modulo; fase via SYNC). Verdetto: FASE d~0 + DENSITA' d<0 = gerarchia emersa. Sigillo b=1=identita' byte-id.
 - STEP 1B (flag `--gamma-nudo`/`--gamma-relazionale`), STEP 2 (accoppiamento cs<->orologio:
@@ -78,10 +107,15 @@ Obiettivo: EM e gravita' come 2 proiezioni dello STESSO campo spinoriale, con la
    toccare la fisica, verifica byte-identico obbligatoria; (b) ogni commit → push, messaggi approfonditi,
    commit/push prima di ogni run; (c) `--verlet` default nei test.
 
-## In corso / prossimo
+## Campagna 5.3c — CHIUSA come baseline (non e' il lavoro corrente)
+> La prossima azione e' il **fork Strato 0** (sezione "PROSSIMA AZIONE" sopra). Quanto segue e' il
+> record della campagna e i suoi TODO, che restano aperti ma RIMANDATI.
+
 - **SEED 1 COMPLETO** (vedi verdetto sopra): (B) abeliano su b1/b2/b3.
-- **PROSSIMO: seed 2 e 3.** Lanciare `powershell -File csv/_test_53c/_run_batch.ps1 -seed 2` poi `-seed 3`
-  (gate-cache -> cache-hit istantaneo, blob invariato). Commit/push PRIMA di ogni run. Attenzione OOM se video attivo.
+- **TODO RIMANDATO: seed 2 e 3.** Servono solo se il (B) andra' presentato come risultato STABILITO
+  (oggi e' BASELINE INTERNA, 1 seed). Comando: `powershell -File csv/_test_53c/_run_batch.ps1 -seed 2`
+  poi `-seed 3` (gate-cache -> cache-hit istantaneo se il blob e' invariato). Commit/push PRIMA di ogni
+  run. Attenzione OOM se video attivo. NB: il fork cambiera' il blob -> gate da ri-timbrare.
 - Poi: verdetto consolidato a 3 seed + punto 3 (asimmetria) + effetto cs.
 - **Verdetto** (arbitro = `segno_arco_coer_materia` SOLO-MATERIA): (A) sale/resta = ordine vero;
   (B) ~0 = separazione/abeliano. Guardare SOLO-MATERIA, non il totale. Analisi: `csv/_test_53c/_analizza_bracci.py`.

@@ -83,14 +83,21 @@ Se regge: gravità + gauge + materia dallo stesso campo. È la forma dell'unific
 
 ---
 
-## LA ROADMAP (ordine di lavoro — dettagli in ROADMAP_dev-spinoriale.md)
+## LA ROADMAP (ordine di lavoro — dettagli in doc/ROADMAP_fork_SU2.md)
+> **ORDINE VIGENTE: FORK-FIRST** (decisione di Luca, 2026-09-13; CLAUDE.md par.6). Si parte dal
+> punto 3 qui sotto — **FORK SU(2), Strato 0** — e i punti 1, 2 e 4 sono **A VALLE**: `cs` a densita'
+> reali e' MORTO (I~0.05 contro soglia ~400), quindi ogni test cs-dipendente oggi e' NULLO.
+> La numerazione che segue e' l'ordine STORICO in cui i pezzi sono stati pensati, **non** l'ordine
+> di esecuzione. Il piano operativo del fork e' `doc/ROADMAP_fork_SU2.md`;
+> `ROADMAP_dev-spinoriale.md` (radice, punti 1-2-4) e' marcata SUPERATA/rimandata, non ritrattata.
+
 0. (opz.) seed-2 di robustezza per il (B).
-1. **Coarse-graining GAMMA** (3 regimi) → dimensioni di scala dei due canali.
-2. **cs↔orologio** (un solo tempo proprio) → serve cs attivo (floor relazionale).
-3. **FORK SU(2):** link U_ij = exp(-i χ/2 m̂·σ), χ=arccos(n_i·n_j), m̂=n_j×n_i.
+1. **Coarse-graining GAMMA** (3 regimi) → dimensioni di scala dei due canali. [a valle]
+2. **cs↔orologio** (un solo tempo proprio) → serve cs attivo (floor relazionale). [a valle]
+3. **FORK SU(2):** link U_ij = exp(-i χ/2 m̂·σ), χ=arccos(n_i·n_j), m̂=n_j×n_i. **← SI PARTE DA QUI**
    Sostituzione: Im⟨ψ_i|ψ_j⟩ → Im⟨ψ_i|U_ij|ψ_j⟩. Sigillo: allineati→U→I→byte-id.
    Test: olonomia plaquette Tr(U_ij U_jk U_ki) = angolo solido dei Bloch.
-4. (orizzonte) α_G / massa minima gravitante. NON traguardo: gap 35 ordini.
+4. (orizzonte) α_G / massa minima gravitante. NON traguardo: gap 35 ordini. [a valle]
 
 ---
 *Ultima nota, da guardiano: questa bussola indica il nord, non garantisce di
