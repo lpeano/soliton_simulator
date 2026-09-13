@@ -63,6 +63,26 @@ un verso all'universo). Invece PESA il contributo d'arco:
   derivato dalla geometria, zero parametri.
 - SIGILLO: allineati -> w->0 e U->I insieme (svanisce liscio); antipodali -> w->0 (nessuna direzione spuria).
 
+> **⚠ CORREZIONE (2026-09-13, misurata — la riga "allineati -> w=0, INNOCUO" qui sopra e' FALSA
+> nel sistema reale).** Innocuo lo sarebbe solo se gli spinori fossero i rappresentanti canonici
+> dei rispettivi Bloch. Nel codice NON e' cosi': `_nb_grav` costruisce i Bloch dal campo EMESSO
+> `psi_spin`, mentre cio' che viene trasportato in `_coppia_interferenza` e' `_psi_spinor`. Sono
+> oggetti distinti -> **Bloch allineati NON implica fasi allineate**, e a chi=0 lo scalare di oggi
+> `Im<psi_i|psi_j>` arriva a **0.995** (misura in `csv/_seal_fork/_sigillo_pezzo2.py`, P5).
+> Quindi `sin(chi)` **spegne il canale di fase** (settore U(1)/orologio -> EM).
+>
+> **DIAGNOSI (Luca): `sin(chi)` SOVRA-CORREGGE.** L'indeterminatezza dell'asse `m_hat` si annulla a
+> ENTRAMBI gli estremi, ma e' **dannosa solo a chi=pi**: a chi=0 il fattore `sin(chi/2)=0` uccide
+> gia' il termine dell'asse (U=I qualunque sia m_hat), a chi=pi invece `sin(chi/2)=1` lo lascia
+> vivo (U=-i m_hat.sigma). Il peso giusto deve annullarsi **SOLO a chi=pi**.
+>
+> **CANDIDATO (misurato, NON ancora deliberato): `w = cos(chi/2)`.** Non e' una scelta: e' la norma
+> del trasporto parallelo NON normalizzato `N = (1+n_i.n_j) I + i (n_i x n_j).sigma`, che vale
+> esattamente `2 cos(chi/2) U` (verificato a 2.7e-14). Vale 1 a chi=0 (EM preservato, riduzione
+> allo scalare ESATTA a 2.2e-16), 0.707 a chi=90, 0 a chi=pi. In piu' `N` e' polinomiale nei
+> Bloch: niente arccos, niente asse da normalizzare, niente floor, nessun caso degenere a mano.
+> Confronto completo dei candidati: `csv/_seal_fork/_sigillo_pesi.py`. **Decisione a Luca.**
+
 ### 4.2 — Olonomia di plaquette (il test)
 - Plaquette = tre nodi mutuamente connessi (triangolo del grafo). Trovarli: vicini comuni di ogni arco.
 - `W = Tr(U_ij * U_jk * U_ki)` ; **W = 2*cos(Omega/2)**, con Omega = angolo solido dei Bloch. Il **fattore 1/2
