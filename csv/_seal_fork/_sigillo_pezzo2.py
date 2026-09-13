@@ -67,7 +67,13 @@ b_ = np.stack([np.sin(th), np.zeros_like(th), np.cos(th)], axis=1)
 pa = np.tile(spinori(1, 101), (len(th), 1))
 pb = np.tile(spinori(1, 202), (len(th), 1))
 c_sc, w_sc = contributo(a_, b_, pa, pb)
-verdetto("P2 allineati (chi=0): contributo = 0", abs(c_sc[0]) < 1e-15, "c(chi=0) = %.3e" % c_sc[0])
+# [SPECIFICA CAMBIATA PER DELIBERA il 2026-09-13 - non e' il test aggiustato per farlo passare]
+# PRIMA (w = sin(chi)): ad allineati il contributo era 0, e questo test lo pretendeva. Ma quello
+# ERA IL BUG: spegneva il canale di fase (EM). ORA (w = cos(chi/2)) ad allineati il contributo
+# deve valere ESATTAMENTE lo scalare di oggi, Im<psi_i|psi_j>, perche' li' U = I e w = 1.
+sc0 = np.imag(np.sum(np.conj(pa[0]) * pb[0]))
+verdetto("P2 allineati (chi=0): contributo = scalare",
+         abs(c_sc[0] - sc0) < 1e-15, "c(chi=0) = %+.4f  scalare = %+.4f" % (c_sc[0], sc0))
 verdetto("P2b antipodali (chi=pi): contributo = 0", abs(c_sc[-1]) < 1e-15,
          "c(chi=pi) = %.3e" % c_sc[-1])
 
@@ -82,11 +88,19 @@ verdetto("P3b liscio ai bordi (derivata limitata)", np.max(der) < 10.0,
 # --- P4. NESSUNA DIREZIONE SPURIA dal caso degenere -------------------------------------------
 nap = versori(4000, 7)
 c_ap, w_ap = contributo(nap, -nap, spinori(4000, 55), spinori(4000, 66))
-verdetto("P4 antipodali: contributo identicamente 0", np.max(np.abs(c_ap)) == 0.0,
+# NB soglia: con versori normalizzati NUMERICAMENTE il prodotto scalare ad antipodali vale
+# -1 +- 1e-16, quindi det N ~ 1e-32 e w ~ 1e-16 invece di 0 esatto. Il contributo resta ~1e-16:
+# fisicamente nullo. Pretendere == 0.0 su input numerici era una soglia sbagliata, non un difetto.
+verdetto("P4 antipodali: contributo nullo", np.max(np.abs(c_ap)) < 1e-15,
          "max|c| = %.3e" % np.max(np.abs(c_ap)))
-c_al, _ = contributo(nap, nap.copy(), spinori(4000, 55), spinori(4000, 66))
-verdetto("P4b allineati: contributo identicamente 0", np.max(np.abs(c_al)) == 0.0,
-         "max|c| = %.3e" % np.max(np.abs(c_al)))
+# [SPECIFICA CAMBIATA PER DELIBERA - vedi P2] ad allineati il contributo NON deve piu' essere 0:
+# deve essere lo scalare. Se tornasse a 0, sarebbe il bug EM che abbiamo appena rimosso.
+pa4, pb4 = spinori(4000, 55), spinori(4000, 66)
+c_al, _ = contributo(nap, nap.copy(), pa4, pb4)
+sc_al4 = np.imag(np.sum(np.conj(pa4) * pb4, axis=1))
+verdetto("P4b allineati: contributo = scalare (EM preservato)",
+         np.max(np.abs(c_al - sc_al4)) < 1e-15,
+         "max|c - scalare| = %.3e" % np.max(np.abs(c_al - sc_al4)))
 
 # --- P5. CONFRONTO COL RAMO SCALARE ATTUALE — il punto delicato --------------------------------
 # Lo scalare di oggi e' Im<psi_i|psi_j> (senza U, senza w). Domanda del sigillo del PEZZO 3:

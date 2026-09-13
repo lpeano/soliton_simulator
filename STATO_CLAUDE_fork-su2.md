@@ -171,7 +171,71 @@ Poi ha sciolto il nodo, e la sua lettura e' piu' profonda della mia:
   (par.3). `cos(chi/2)` evita la manopola proprio perche' non e' scelto: emerge.
 - **NESSUNA DECISIONE PRESA.** Il peso si tocca solo su delibera di Luca.
 
-## PROSSIMA AZIONE — decisione di Luca sul peso, poi PEZZO 3
+## DELIBERA SUL PESO + RIFATTORIZZAZIONE SU N — FATTO (2026-09-13)
+- **DELIBERA: il peso e' `cos(chi/2)`, non `sin(chi)`.** La ragione e' FISICA, non estetica
+  (argomento di Luca, misurato in `csv/_seal_fork/_sigillo_N.py`):
+  - **`cos(chi/2) = |<n_i|n_j>|` = OVERLAP QUANTISTICO dei due spin** (F1: 1.122e-14). Non e' un
+    artefatto del non-normalizzare: e' **quanto i due spin si sovrappongono**, cioe' l'accoppia-
+    mento fisico fra due solitoni. Questo scioglie la tensione sull'"ammorbidimento stretto":
+    trattavamo il peso come un REGOLARIZZATORE (che vorrebbe essere stretto), ma e' un
+    **ACCOPPIAMENTO**, e un accoppiamento e' **globale per natura**. "Globale ma non scelto" non e'
+    un compromesso: e' corretto. L'antipodale si cura come CONSEGUENZA (overlap -> 0), non come scopo.
+  - **Contro `cos^2(chi/2)`: quella e' la PROBABILITA' di Born** (F2: 9.548e-15). La forza e'
+    `Im<psi_i|N|psi_j>`, una **AMPIEZZA**: si pesa con un'ampiezza, non con una probabilita'.
+    `cos^2` conterebbe due volte. Contro `sin(chi)`: spegne chi=0, perde l'EM. Contro
+    l'ammorbidimento stretto: una larghezza = un numero nuovo = manopola (par.3).
+- **SIGILLO N: 19/19 PASS.** I tre presidi di Luca: (1) nella forza si usa **N/2**, che ad allineati
+  vale I -> `Im<psi_i|N/2|psi_j>` = scalare entro **4.441e-16** (con `sin(chi)` dava 9.992e-01:
+  **il reperto del PEZZO 2 e' CHIUSO**); (2) **N nella forza, U = N/sqrt(det N) nell'olonomia** — la
+  fase dell'olonomia e' identica con N o U (9.149e-13), il peso fattorizza come scalare positivo
+  sul ciclo; (3) l'algebra NON dimostra la correttezza dinamica (vedi PRESIDIO APERTO in fondo).
+
+### RIFATTORIZZAZIONE — `_link_su2` ora poggia sul polinomiale N. **Blob: b4c6c3f8 -> `cf24cd28`**
+- **`_link_su2_N(ni,nj)` (NUOVA)** = `N = (1+n_i.n_j) I + i (n_i x n_j).sigma`. **Primitiva della
+  FORZA.** Polinomiale: **niente arccos, niente asse da normalizzare, niente floor, nessun caso
+  degenere**. Ad antipodali N=0 da solo (dot=-1, cross=0).
+- **`_link_su2(ni,nj)` (RISCRITTA)** ritorna `(U, w)` con `U = N/sqrt(det N)` e `w = sqrt(det N)/2
+  = cos(chi/2)`. **Per l'OLONOMIA** (pure-read), dove serve la rotazione pura. **La radice vive solo
+  qui, mai nella forza.** Resta UN caso degenere, e solo in questo ramo: ad antipodali esatti U e'
+  indefinita (0/0) perche' nessuna rotazione porta n_j su -n_j -> `U := I`, con w=0 che spegne
+  l'arco. La forza, passando da N, non eredita ne' il caso speciale ne' la soglia.
+- Diff: 68 inserite / 41 rimosse. `py_compile` OK. **Ancora NESSUN call-site nella dinamica**
+  (`grep _link_su2` -> solo le 2 definizioni + 1 uso interno) -> **sigillo "OFF = byte-identico"
+  regge sempre per costruzione**: il fork non e' ancora cablato.
+- **SIGILLI DOPO LA RIFATTORIZZAZIONE: N 19/19, PEZZO 1 17/17, PEZZO 2 11/11, tutti exit 0.**
+
+### ⚠ SIGILLI STORICI AGGIORNATI — dichiarato, non silenziato
+Cambiando il peso, 5 asserzioni dei sigilli PEZZO 1/2 sono passate a FAIL. **Codificavano la
+specifica VECCHIA**, cioe' il bug: sono state riscritte con un commento che dice cosa pretendevano
+prima, cosa pretendono ora e perche'. **Non e' "aggiustare il test per farlo passare": la
+specifica e' cambiata per delibera motivata, e la pretesa vecchia era sbagliata.**
+- `S1b`: "allineati -> w = 0" **-> "allineati -> w = 1"** (overlap massimo, EM preservato).
+- `S7`: "w = sin(chi)" **-> "w = cos(chi/2)"**.
+- `P2`, `P4b`: "allineati -> contributo = 0" **-> "contributo = scalare"**. Se tornassero a
+  pretendere 0, starebbero ri-chiedendo il bug EM.
+- `P4`: soglia da `== 0.0` a `< 1e-15`. Motivo NUMERICO, non di specifica: con versori normalizzati
+  in floating point il dot ad antipodali vale -1 +- 1e-16, quindi det N ~ 1e-32 e w ~ 1e-16.
+
+## ⚠ PRESIDIO APERTO — cosa NON e' dimostrato
+L'algebra chiude tre problemi e **solo** quelli: **numerico** (niente arccos/floor/casi speciali),
+**EM** (riduzione allo scalare esatta a chi=0), **antipodale** (indeterminatezza spenta). **NON**
+dimostra che `cos(chi/2)` sia **DINAMICAMENTE** corretto. Il peso sotto-pesa gli archi a chi grande
+(0.707 a 90 gradi, 0.500 a 120). C'e' un argomento buono che sia giusto — `N|psi_j>` e' la
+proiezione naturale del trasportato, e spin disallineati interferiscono davvero meno — **ma e' un
+ARGOMENTO, non una MISURA.** Olonomia W(r) sensata, stabilita', comportamento EM: lo dice un RUN.
+**Elegante non significa dinamicamente corretto.**
+
+## PROSSIMA AZIONE — PEZZO 3 (cablaggio), e li' il gate
+1. **PEZZO 3:** in `_coppia_interferenza` (righe ~2242 sul blob precedente, da ri-cercare per NOME
+   sul blob `cf24cd28`), dietro flag OFF: `Im<psi_i|psi_j>` -> `Im<psi_i| N_ij/2 |psi_j>`.
+   Attenzione all'ORIENTAMENTO: `N_ij` trasporta n_j -> n_i, il verso giusto per quella forma.
+   Da decidere: da DOVE arrivano i Bloch dentro `_coppia_interferenza` (`_nb_grav` usa `psi_spin`).
+2. **Sigilli del PEZZO 3:** flag OFF -> byte-identico (ora va verificato per davvero, non piu' per
+   costruzione: ci sara' un call-site); allineati -> scalare (ora PASSA esatto); norma; stabilita'.
+3. **QUI si ri-timbra il gate** sul blob del fork (decisione di Luca: al PEZZO 3, non prima).
+4. Poi: `SYNC_UPDATE`/`SCUOTIMENTO` attivi? Poi olonomia W(r) (`doc/PROTOCOLLO_test_olonomia.md`).
+5. Deprioritizzato (Luca): il run sulla divergenza `psi_spin` vs `_psi_spinor`. Non e' piu'
+   decision-critical, perche' `cos(chi/2)` preserva chi=0 a qualunque divergenza.
 1. **Delibera sul peso** (`sin(chi)` -> `cos(chi/2)` o altro). Finche' non arriva, il PEZZO 3 resta
    fermo: cablare con il peso sbagliato significherebbe cablare una perdita di fisica.
 2. **Run di misura (di Luca): quanto divergono davvero `psi_spin` e `_psi_spinor`?** Da' la SCALA

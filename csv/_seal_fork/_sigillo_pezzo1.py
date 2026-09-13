@@ -48,8 +48,14 @@ U, w = Rete._link_su2(ni, nj)
 Ua, wa = Rete._link_su2(ni, ni.copy())
 d_id = np.max(np.abs(Ua - I2))
 verdetto("S1 allineati -> U = I (riduzione al limite)", d_id == 0.0, "max|U-I| = %.3e" % d_id)
-verdetto("S1b allineati -> w = 0 (peso svanisce)", np.max(np.abs(wa)) == 0.0,
-         "max|w| = %.3e" % np.max(np.abs(wa)))
+# [SPECIFICA CAMBIATA PER DELIBERA il 2026-09-13 - non e' il test aggiustato per farlo passare]
+# PRIMA: w = sin(chi) -> ad allineati w = 0 e questo test pretendeva max|w| == 0.0 (e passava).
+# ORA:   w = cos(chi/2) = |<n_i|n_j>| (overlap di spin) -> ad allineati w = 1, overlap MASSIMO.
+# MOTIVO: sin(chi) spegneva gli archi a Bloch allineati, cioe' il canale di fase (EM). Misure e
+# delibera in _sigillo_pezzo2.py (P5), _sigillo_pesi.py, _sigillo_N.py. La pretesa VECCHIA era
+# sbagliata: se questo test tornasse a chiedere w=0 ad allineati, starebbe ri-chiedendo il bug.
+verdetto("S1b allineati -> w = 1 (overlap massimo, EM preservato)",
+         np.max(np.abs(wa - 1.0)) < 1e-15, "max|w - 1| = %.3e" % np.max(np.abs(wa - 1.0)))
 
 # --- S2. UNITARIETA': U U^dag = I (conserva |psi| = 1) ----------------------------------------
 UU = U @ np.conj(np.transpose(U, (0, 2, 1)))
@@ -105,8 +111,10 @@ th = np.linspace(0.0, np.pi, 200001)
 a_ = np.stack([np.zeros_like(th), np.zeros_like(th), np.ones_like(th)], axis=1)
 b_ = np.stack([np.sin(th), np.zeros_like(th), np.cos(th)], axis=1)
 _, wsc = Rete._link_su2(a_, b_)
-d_w = np.max(np.abs(wsc - np.sin(th)))
-verdetto("S7 w = sin(chi) esatto (nessuna soglia)", d_w < 1e-12, "max|w - sin(chi)| = %.3e" % d_w)
+# [SPECIFICA CAMBIATA PER DELIBERA - vedi S1b] PRIMA: w = sin(chi). ORA: w = cos(chi/2).
+d_w = np.max(np.abs(wsc - np.cos(th / 2.0)))
+verdetto("S7 w = cos(chi/2) esatto (nessuna soglia)", d_w < 1e-12,
+         "max|w - cos(chi/2)| = %.3e" % d_w)
 salto = np.max(np.abs(np.diff(wsc)))
 verdetto("S7b w continuo (nessun salto)", salto < 1e-4, "max salto = %.3e" % salto)
 

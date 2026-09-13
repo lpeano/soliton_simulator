@@ -960,51 +960,78 @@ class Rete:
         return np.stack([np.cos(th / 2.0), np.sin(th / 2.0) * np.exp(1j * ph)], axis=1)
 
     @staticmethod
-    def _link_su2(nb_i, nb_j):
-        """[FORK SU(2) - PEZZO 1] Connessione di Berry sull'arco i->j: trasporto parallelo geodetico
-        sulla sfera di Bloch, elemento di SU(2). ZERO PARAMETRI (tutto geometria).
-            chi   = arccos(n_i . n_j)              angolo geodetico tra i due Bloch
-            m_hat = (n_j x n_i)/|n_j x n_i|        asse di rotazione (perp. a entrambi)
-            U_ij  = cos(chi/2) I - i sin(chi/2) (m_hat . sigma) = exp(-i (chi/2) m_hat.sigma)
-        Il chi/2 e' la DOPPIA COPERTURA (spin-1/2), non un fattore di comodo: e' lo stesso th/2 di
-        `_bloch_a_spinore`. U MESCOLA a,b (e' il pezzo NON-ABELIANO: due U con assi diversi non
-        commutano), a differenza dello scalare A_ij applicato uguale ad a e b in
-        `_coppia_interferenza` (righe ~2207-2208), che e' abeliano per STRUTTURA.
+    def _link_su2_N(nb_i, nb_j):
+        """[FORK SU(2) - PEZZO 1/2, rifattorizzato] Trasporto parallelo NON normalizzato sull'arco
+        i->j. E' la PRIMITIVA usata dalla FORZA:
 
-        Ritorna (U, w), con U di forma (m,2,2) complessa e
-            w = |n_j x n_i| = sin(chi)         PESO di antipodalita' (PEZZO 2)
-        perpendicolari (chi=90) -> w=1 (asse netto) ; allineati (chi=0) -> w->0 (innocuo: U->I) ;
-        antipodali (chi=180) -> w->0 (asse INDETERMINATO -> l'arco non contribuisce, nessun asse
-        inventato). NIENTE soglia netta, NIENTE coefficiente tarato: solo sin(chi), continuo.
+            N_ij = (1 + n_i.n_j) I + i (n_i x n_j).sigma
 
-        U_ji = U_ij^dag per costruzione: scambiando i,j l'angolo chi non cambia e m_hat cambia
-        segno. Con gli scalari l'orientamento dell'arco era irrilevante, ora CONTA.
+        POLINOMIALE nei Bloch: niente arccos, niente asse da normalizzare, niente floor, nessun
+        caso degenere da trattare a mano. A chi=pi il prodotto scalare vale -1 e il vettoriale 0,
+        quindi N = 0 da solo: l'arco si spegne senza che nessuno inventi una direzione.
 
-        CONVENZIONE DI SICUREZZA NUMERICA (non e' fisica): dove il prodotto vettore e' esattamente
-        nullo l'asse non esiste e `cos(chi/2)*I` da sola NON sarebbe unitaria nel caso antipodale
-        (varrebbe la matrice NULLA), violando il sigillo SU(2). Li' si pone U := I, che e' unitaria
-        e, essendo w=0, non entra comunque nella forza. Il floor 1e-30 e' lo stesso anti-0/0 gia'
-        usato da `_nb_grav` (riga ~2033), non un parametro nuovo.
+        Identita' (sigillata, csv/_seal_fork/_sigillo_N.py):  N_ij = 2 cos(chi/2) U_ij
+        dove U_ij e' la connessione di Berry unitaria. Quindi N porta con se' un PESO:
+
+            |N|/2 = cos(chi/2) = |<n_i|n_j>|   = OVERLAP DI SPIN dei due solitoni
+
+        Il peso NON e' scelto: e' cio' che resta quando non si normalizza, ed e' l'accoppiamento
+        fisico fra i due spin. Vale 1 ad allineati (canale di fase / EM PRESERVATO, riduzione
+        esatta allo scalare), 0.707 a 90 gradi, 0 ad antipodali. ZERO MANOPOLE (par.3).
+        NB: e' l'overlap-AMPIEZZA. La forza e' Im<psi_i|N|psi_j>, cioe' un'ampiezza: va pesata con
+        un'ampiezza. L'overlap-PROBABILITA' cos^2(chi/2) (regola di Born) conterebbe due volte.
+
+        USO NELLA FORZA:  Im<psi_i|psi_j>  ->  Im<psi_i| N_ij/2 |psi_j>
+        Il /2 e' la normalizzazione che rende N/2 = I ad allineati (riduzione allo scalare ESATTA).
+
+        N_ji = N_ij^dag ESATTAMENTE (polinomiale, nessun arrotondamento): l'azione-reazione e'
+        esatta. Attenzione all'ORIENTAMENTO: con gli scalari era irrilevante, ora CONTA.
+        VERSO: N_ij trasporta n_j -> n_i, il verso giusto per Im<psi_i| N_ij |psi_j>.
 
         PURE-READ: non legge ne' scrive stato dell'oggetto, non consuma `net.rng`."""
         ni = np.asarray(nb_i, float).reshape(-1, 3)
         nj = np.asarray(nb_j, float).reshape(-1, 3)
-        ni = ni / np.maximum(np.linalg.norm(ni, axis=1), 1e-30)[:, None]
-        nj = nj / np.maximum(np.linalg.norm(nj, axis=1), 1e-30)[:, None]
-        cos_chi = np.clip(np.sum(ni * nj, axis=1), -1.0, 1.0)
-        chi = np.arccos(cos_chi)
-        asse = np.cross(nj, ni)
-        w = np.linalg.norm(asse, axis=1)          # = sin(chi), peso di antipodalita'
-        m = asse / np.maximum(w, 1e-30)[:, None]  # versore dove w>0; irrilevante dove w->0
-        c = np.cos(chi / 2.0)
-        s = np.sin(chi / 2.0)
-        mx = m[:, 0]; my = m[:, 1]; mz = m[:, 2]
-        U = np.empty((len(ni), 2, 2), dtype=complex)
-        U[:, 0, 0] = c - 1j * s * mz
-        U[:, 0, 1] = -1j * s * mx - s * my
-        U[:, 1, 0] = -1j * s * mx + s * my
-        U[:, 1, 1] = c + 1j * s * mz
-        degenere = w <= 1e-30                     # asse inesistente -> U := I (unitaria), w=0 spegne l'arco
+        d = np.sum(ni * nj, axis=1)
+        c = np.cross(ni, nj)
+        N = np.empty((len(ni), 2, 2), dtype=complex)
+        N[:, 0, 0] = (1.0 + d) + 1j * c[:, 2]
+        N[:, 0, 1] = 1j * c[:, 0] + c[:, 1]
+        N[:, 1, 0] = 1j * c[:, 0] - c[:, 1]
+        N[:, 1, 1] = (1.0 + d) - 1j * c[:, 2]
+        return N
+
+    @staticmethod
+    def _link_su2(nb_i, nb_j):
+        """[FORK SU(2)] Connessione di Berry UNITARIA U_ij e peso w, ricavati da `_link_su2_N`.
+
+            U_ij = N_ij / sqrt(det N_ij) = exp(-i (chi/2) m_hat.sigma)   [SU(2), det=1]
+            w    = sqrt(det N_ij)/2     = cos(chi/2) = |<n_i|n_j>|       [overlap di spin]
+
+        DESTINAZIONE D'USO — "due oggetti, due usi" (presidio di Luca):
+          * la FORZA usa `_link_su2_N` (N/2): polinomiale, nessuna radice, nessun caso degenere;
+          * l'OLONOMIA di plaquette (diagnostico PURE-READ) usa U, che richiede la rotazione pura
+            perche' Tr(U_ij U_jk U_ki) sia l'invariante atteso. La radice quadrata vive SOLO qui.
+        Su un ciclo chiuso il peso fattorizza come scalare POSITIVO, quindi la FASE dell'olonomia
+        e' la stessa con N o con U: cambia solo l'ampiezza (sigillato, P2c).
+
+        CASO DEGENERE (l'unico rimasto, e vive SOLO in questo ramo): ad antipodali esatti N=0 e
+        det N=0, quindi U = 0/0 e' indefinita — non esiste una rotazione che porti n_j su -n_j.
+        Li' si pone U := I (unitaria) e w = 0, cosi' il peso spegne comunque l'arco. La forza non
+        passa da qui, quindi non eredita ne' il caso speciale ne' la soglia.
+
+        STORIA (non ripetere l'errore): fino al 2026-09-13 questa funzione costruiva U via arccos +
+        asse normalizzato e restituiva w = sin(chi). Quel peso SOVRA-CORREGGEVA: si annullava anche
+        ad allineati, dove l'indeterminatezza dell'asse e' INNOCUA (sin(chi/2)=0 uccide gia' il
+        termine dell'asse, U=I qualunque sia m_hat), e cosi' spegneva il canale di fase (EM).
+        Misure e delibera: csv/_seal_fork/_sigillo_pezzo2.py, _sigillo_pesi.py, _sigillo_N.py.
+
+        PURE-READ: non legge ne' scrive stato dell'oggetto, non consuma `net.rng`."""
+        N = Rete._link_su2_N(nb_i, nb_j)
+        detN = np.real(N[:, 0, 0] * N[:, 1, 1] - N[:, 0, 1] * N[:, 1, 0])
+        rad = np.sqrt(np.maximum(detN, 0.0))
+        w = rad / 2.0                              # = cos(chi/2) = |<n_i|n_j>|
+        U = N / np.maximum(rad, 1e-30)[:, None, None]
+        degenere = rad <= 0.0                      # antipodali esatti: U indefinita -> I, w gia' 0
         if np.any(degenere):
             U[degenere] = np.eye(2, dtype=complex)
         return U, w
