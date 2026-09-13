@@ -959,6 +959,56 @@ class Rete:
         ph = np.arctan2(nb[:, 1], nb[:, 0])
         return np.stack([np.cos(th / 2.0), np.sin(th / 2.0) * np.exp(1j * ph)], axis=1)
 
+    @staticmethod
+    def _link_su2(nb_i, nb_j):
+        """[FORK SU(2) - PEZZO 1] Connessione di Berry sull'arco i->j: trasporto parallelo geodetico
+        sulla sfera di Bloch, elemento di SU(2). ZERO PARAMETRI (tutto geometria).
+            chi   = arccos(n_i . n_j)              angolo geodetico tra i due Bloch
+            m_hat = (n_j x n_i)/|n_j x n_i|        asse di rotazione (perp. a entrambi)
+            U_ij  = cos(chi/2) I - i sin(chi/2) (m_hat . sigma) = exp(-i (chi/2) m_hat.sigma)
+        Il chi/2 e' la DOPPIA COPERTURA (spin-1/2), non un fattore di comodo: e' lo stesso th/2 di
+        `_bloch_a_spinore`. U MESCOLA a,b (e' il pezzo NON-ABELIANO: due U con assi diversi non
+        commutano), a differenza dello scalare A_ij applicato uguale ad a e b in
+        `_coppia_interferenza` (righe ~2207-2208), che e' abeliano per STRUTTURA.
+
+        Ritorna (U, w), con U di forma (m,2,2) complessa e
+            w = |n_j x n_i| = sin(chi)         PESO di antipodalita' (PEZZO 2)
+        perpendicolari (chi=90) -> w=1 (asse netto) ; allineati (chi=0) -> w->0 (innocuo: U->I) ;
+        antipodali (chi=180) -> w->0 (asse INDETERMINATO -> l'arco non contribuisce, nessun asse
+        inventato). NIENTE soglia netta, NIENTE coefficiente tarato: solo sin(chi), continuo.
+
+        U_ji = U_ij^dag per costruzione: scambiando i,j l'angolo chi non cambia e m_hat cambia
+        segno. Con gli scalari l'orientamento dell'arco era irrilevante, ora CONTA.
+
+        CONVENZIONE DI SICUREZZA NUMERICA (non e' fisica): dove il prodotto vettore e' esattamente
+        nullo l'asse non esiste e `cos(chi/2)*I` da sola NON sarebbe unitaria nel caso antipodale
+        (varrebbe la matrice NULLA), violando il sigillo SU(2). Li' si pone U := I, che e' unitaria
+        e, essendo w=0, non entra comunque nella forza. Il floor 1e-30 e' lo stesso anti-0/0 gia'
+        usato da `_nb_grav` (riga ~2033), non un parametro nuovo.
+
+        PURE-READ: non legge ne' scrive stato dell'oggetto, non consuma `net.rng`."""
+        ni = np.asarray(nb_i, float).reshape(-1, 3)
+        nj = np.asarray(nb_j, float).reshape(-1, 3)
+        ni = ni / np.maximum(np.linalg.norm(ni, axis=1), 1e-30)[:, None]
+        nj = nj / np.maximum(np.linalg.norm(nj, axis=1), 1e-30)[:, None]
+        cos_chi = np.clip(np.sum(ni * nj, axis=1), -1.0, 1.0)
+        chi = np.arccos(cos_chi)
+        asse = np.cross(nj, ni)
+        w = np.linalg.norm(asse, axis=1)          # = sin(chi), peso di antipodalita'
+        m = asse / np.maximum(w, 1e-30)[:, None]  # versore dove w>0; irrilevante dove w->0
+        c = np.cos(chi / 2.0)
+        s = np.sin(chi / 2.0)
+        mx = m[:, 0]; my = m[:, 1]; mz = m[:, 2]
+        U = np.empty((len(ni), 2, 2), dtype=complex)
+        U[:, 0, 0] = c - 1j * s * mz
+        U[:, 0, 1] = -1j * s * mx - s * my
+        U[:, 1, 0] = -1j * s * mx + s * my
+        U[:, 1, 1] = c + 1j * s * mz
+        degenere = w <= 1e-30                     # asse inesistente -> U := I (unitaria), w=0 spegne l'arco
+        if np.any(degenere):
+            U[degenere] = np.eye(2, dtype=complex)
+        return U, w
+
     def _estendi_psi_spinor(self, n, nb_rif):
         """Garantisce len(_psi_spinor)==n SENZA reset spurio (regola D). I nuovi indici (non gia'
         ereditati dalla mitosi) si inizializzano dal Bloch corrente nb_rif (init da Bloch attuale)."""

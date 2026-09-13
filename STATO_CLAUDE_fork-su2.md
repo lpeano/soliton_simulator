@@ -21,9 +21,9 @@
 
 ## Ultimo aggiornamento
 - Data: 2026-09-13
-- Ultimo commit: STATO allineato a CLAUDE.md v2 + documenti di riferimento in `doc/`.
-- Branch allineato con `origin/dev-spinoriale`.
-- Blob `soliton_simulator.py` = **4fc7a794** (verificato dal disco, invariato: nessuna modifica al codice).
+- Ultimo commit: PEZZO 1 del fork SU(2) (`_link_su2`) + sigillo 17/17 PASS.
+- Branch: **`fork-su2`**, allineato con `origin/fork-su2`.
+- Blob `soliton_simulator.py` = **b4c6c3f8** (verificato dal disco). Su `dev-spinoriale`: 4fc7a794.
 
 ## REGOLE E DOCUMENTI (aggiornamento 2026-09-13)
 - **CLAUDE.md v2** e' l'istruzione autorevole (sostituisce `.github/copilot-instructions.md`, che resta
@@ -56,11 +56,33 @@
   fuori dal repo sono indietro sul fix 2207-2208 e **NON vanno ripushate** (rimetterebbero l'errore).
   Le modifiche a CLAUDE.md le applica Claude Code nel repo; Luca fornisce il testo esatto.
 
-## PROSSIMA AZIONE — FORK, STRATO 0 (PEZZO 1)
+## PEZZO 1 — FATTO, SIGILLO PASS (2026-09-13)
+- **Aggiunta `Rete._link_su2(nb_i, nb_j)`** (staticmethod, subito dopo `_bloch_a_spinore`):
+  `chi=arccos(n_i.n_j)`, `m_hat=(n_j x n_i)/|n_j x n_i|`, `U=exp(-i (chi/2) m_hat.sigma)`.
+  Ritorna **(U, w)** con `w=|n_j x n_i|=sin(chi)` (il PESO del PEZZO 2, gia' calcolato qui perche'
+  e' lo stesso prodotto vettore: non e' anticipare il PEZZO 2, il cablaggio resta al PEZZO 3).
+- **Blob: 4fc7a794 -> `b4c6c3f8`** (su `fork-su2`; su `dev-spinoriale` resta 4fc7a794).
+- **SIGILLO 1 (OFF = byte-identico): PASS per COSTRUZIONE, verificato strutturalmente.**
+  `grep _link_su2` da UN SOLO risultato: la definizione. **Nessun call-site** -> la funzione non
+  puo' alterare l'esecuzione. Diff = **50 righe inserite, 0 rimosse, 0 modificate**. Questa e' una
+  prova LOGICA (piu' forte di un run A/B, che campiona una sola traiettoria); se si vuole anche la
+  prova empirica, il run A/B contro `git show cebaee3:soliton_simulator.py` resta da fare.
+- **SIGILLO PEZZO 1: 17/17 PASS** — `csv/_seal_fork/_sigillo_pezzo1.py` (pure-read, exit 0/1):
+  S1 allineati -> U=I **esatto** (max|U-I|=0.000e+00) e w=0 ; S2 unitarieta' 5.6e-16 ;
+  S3 det U=1 4.5e-16 (e' SU(2), non U(2): la fase U(1)/EM resta separata) ; S4 U_ji=U_ij^dag
+  **esatto** ; S5 trasporto |<psi_i|U_ij|psi_j>|=1 (5.6e-16 su 20000 archi) ; S5b Bloch
+  trasportato = n_i (1.9e-14) ; S6 antipodali: no NaN, w=0, U unitaria, contributo pesato **0** ;
+  S7 w=sin(chi) esatto (1.1e-16), continuo, nessuna soglia ; S8 pure-read (RNG non consumato,
+  input non mutati) ; S9 **[U1,U2] = 1.0e+00 != 0** = la non-commutativita' c'e' davvero.
+- **FATTO GEOMETRICO DA NON DIMENTICARE (verificato, S5b):** con `m_hat = (n_j x n_i)` la matrice
+  `U_ij` trasporta **n_j -> n_i** (NON n_i -> n_j: l'intuizione inganna). E' esattamente il verso
+  che serve a `Im<psi_i| U_ij |psi_j>`: porta psi_j fino al sito i, poi confronta con psi_i.
+  La formula della BUSSOLA e l'uso nella forza sono coerenti. Invertendo l'asse si otterrebbe
+  U^dag e la forza cambierebbe segno: **l'orientamento dell'arco ora CONTA** (con gli scalari no).
+
+## PROSSIMA AZIONE — PEZZO 2, poi PEZZO 3
 Ordine operativo in `doc/ROADMAP_fork_SU2.md`, un pezzo un sigillo, flag OFF di default:
-1. **PEZZO 1** — funzione `U_ij(n_i,n_j)` isolata: `chi=arccos(n_i.n_j)`, `m_hat=(n_j x n_i)/|...|`,
-   `U_ij=exp(-i (chi/2) m_hat.sigma)`. Sigilli: allineati -> U->I ; `U U^dag = I` ; caso antipodale
-   gestito dal PESO (Pezzo 2), MAI da una convenzione d'asse.
+1. ~~PEZZO 1~~ **FATTO** (sigillo 17/17 PASS, vedi sezione sopra).
 2. **PEZZO 2** — peso `w_ij=|n_j x n_i|=sin(chi)`. Niente soglia netta, niente coefficiente tarato.
 3. **PEZZO 3** — cablaggio nella forza, **righe 2207-2208** (`_coppia_interferenza`):
    `Im<psi_i|psi_j> -> w_ij * Im<psi_i|U_ij|psi_j>`. Attenzione all'ORIENTAMENTO (`U_ij=U_ji^dag`):
