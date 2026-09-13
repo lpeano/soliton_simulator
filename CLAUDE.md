@@ -99,7 +99,7 @@ Il fork si costruisce a strati (ognuno un flag OFF, ognuno si riduce a quello so
 - **STRATO 0 — connessione Berry statica (arc-connection): IL PRIMO MATTONE.**
   `U_ij = exp(-i (chi/2) m_hat . sigma)`, `chi=arccos(n_i.n_j)`, `m_hat=(n_j x n_i)/|n_j x n_i|`.
   Peso antipodalita': `w_ij = |n_j x n_i| = sin(chi)` (NIENTE soglia netta, NIENTE coeff. tarato).
-  Sostituzione nella forza (~riga 2196): `Im<psi_i|psi_j> -> w_ij * Im<psi_i| U_ij |psi_j>`.
+  Sostituzione nella forza (`_coppia_interferenza`, righe 2207-2208): `Im<psi_i|psi_j> -> w_ij * Im<psi_i| U_ij |psi_j>`.
   Flag OFF (es. `FORK_SU2=False`). Sigillo: OFF -> byte-identico scalare; ON+allineati -> scalare.
 - **STRATO 1 — orientazione con memoria (rilassamento):** `dU/dt=(U^Berry-U)/tau`, tau=d/cs, primo
   ordine (vedi par.4). Riduce a Strato 0 per tau->0.
@@ -107,7 +107,7 @@ Il fork si costruisce a strati (ognuno un flag OFF, ognuno si riduce a quello so
   `G(rho)` legato alla DENSITA' col GAMMA di cs ("sorelle non catena": G da rho, NON da cs diretto).
   Riduce a Strato 1 per g=cost.
 
-**FATTO STABILITO (non ri-derivare male):** il trasporto attuale e' SCALARE (riga ~2196, stessa A
+**FATTO STABILITO (non ri-derivare male):** il trasporto attuale e' SCALARE (righe 2207-2208, stessa A
 applicata ad a e b) -> il sistema e' abeliano per STRUTTURA -> l'olonomia e' banale (W=2) qualunque
 cosa facciano gli spinori on-site. **La dinamica sugli ARCHI (arc-connection) e' il pezzo mancante:
 senza, non c'e' olonomia.** L'evoluzione on-site esistente (`SPINORE_VIVO`, `KURAMOTO_SU2`) e'
@@ -126,8 +126,13 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
 (derivazione, non innesto), non una rivendicazione. Verbo onesto: "dovrebbe emergere", non "genera".
 
 ## 9. FATTI VERIFICATI DAL CODICE (per non rifare errori gia' fatti)
-- Trasporto forza = SCALARE (riga ~2196): abeliano per struttura.
-- cs = CS_M/(1+GAMMA*sqrt(I)) (~riga 2187): vive SOLO nel settore metrica/gravita', MAI nell'orologio/EM.
+- Trasporto forza = SCALARE: `_coppia_interferenza`, **righe 2207-2208**
+  (`np.conj(_a)*(mat(A)@_a) + np.conj(_b)*(mat(A)@_b)`, stessa A su a e b) -> abeliano per
+  struttura. VERIFICATO dal sorgente
+  sul blob 4fc7a794 il 2026-09-13. **La riga 2196 citata in passato era il DOCSTRING, non il codice**
+  (la funzione inizia a 2192, il docstring occupa 2193-2200): errore da par.0, corretto.
+- cs = CS_M/(1+GAMMA*sqrt(I)) (riga 2187, `cs_floor`): vive SOLO nel settore metrica/gravita', MAI
+  nell'orologio/EM. VERIFICATO dal sorgente il 2026-09-13.
 - Orologio/EM (`_phc`, `omega_clk`, `ritmo()`, `dt_n=DT*r`): NON usa cs. Due tempi propri scollegati
   (metrico tau_p=d/cs vs orologio dt_n=DT*r). L'accoppiamento cs<->orologio e' lo Step 2 (non fatto).
 - `_passo_spinoriale`: NON orfano (docstring stale), cablato dietro `SPINORE_VIVO` (OFF). E' ON-SITE
