@@ -12,8 +12,13 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
 - **VERIFICA DAL CODICE, non dai commenti.** I commenti possono essere stale (es. il
   docstring di `_passo_spinoriale` dice "ORFANO" ma la chiamata esiste, riga ~2419).
   Fidati del sorgente eseguibile, non delle annotazioni.
-- Blob di riferimento certificato: `git hash-object soliton_simulator.py` -> **4fc7a794...**.
-  Se diverso, le righe possono essere shiftate: cerca per NOME di funzione/flag, non per riga.
+- Blob di riferimento certificato, **per branch** (verifica sempre dal DISCO):
+  - `dev-spinoriale` (BASELINE, codice pre-fork) -> **4fc7a794...**
+  - `fork-su2` (branch del fork SU(2), dove si lavora) -> **b4c6c3f8...** (dal PEZZO 1,
+    `_link_su2`). Cambiera' ancora a ogni pezzo del fork: **il blob e' un timbro, non una
+    costante.** Quello che NON cambia e' l'obbligo di ri-timbrare il gate quando cambia.
+  - Se il blob non e' quello atteso, le righe possono essere shiftate: cerca per NOME di
+    funzione/flag, non per riga.
 
 ## 0-bis. PRIMA DI LAVORARE — LEGGI LE ISTRUZIONI (ad ogni avvio di sessione)
 1. Leggi QUESTO file (CLAUDE.md) per intero.
