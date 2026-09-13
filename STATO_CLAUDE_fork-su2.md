@@ -130,7 +130,54 @@ Le due meta' non sono equivalenti, e la seconda e' **FALSA in generale** (misura
   nel caso canonico. Nel sistema reale toglie un canale che oggi esiste.
 - **NESSUNA SCELTA PRESA.** Lo script MISURA, non decide. Serve Luca prima del PEZZO 3.
 
-## PROSSIMA AZIONE — PEZZO 3, ma PRIMA il reperto qui sopra
+## DIAGNOSI DEL REPERTO — il peso, non un bivio (Luca + misura, 2026-09-13)
+Luca ha verificato il reperto dal disco (righe shiftate di +50 dal PEZZO 1: `_nb_grav` a **2068**,
+`_coppia_interferenza` a **2242**, `psi_spin` a **2051**) e ha rigirato il sigillo: 11/11, P5=0.995.
+Poi ha sciolto il nodo, e la sua lettura e' piu' profonda della mia:
+- **Il reperto NON e' un bivio "perdere l'EM o tenerlo": e' un BUG del peso.** `sin(chi)`
+  **SOVRA-CORREGGE**. Traccia l'indeterminatezza dell'asse `m_hat`, che si annulla a ENTRAMBI gli
+  estremi, ma quell'indeterminatezza e' **dannosa solo a chi=pi**:
+  - **chi=0:** `U = cos(0) I - sin(0)(m.sigma) = I` **qualunque sia m_hat** -> asse indeterminato
+    ma INNOCUO, perche' `sin(chi/2)=0` uccide gia' il termine dell'asse. Non serve spegnere.
+  - **chi=pi:** `U = -i (m.sigma)` e `sin(chi/2)=1` NON uccide il termine -> U dipende davvero da
+    un asse indeterminato. **Dannoso.** Qui serve spegnere.
+- **Conseguenza: il sigillo "allineati -> scalare" NON era sbagliato.** E' un controllo giusto (a
+  chi=0, U=I, quindi `Im<psi_i|U|psi_j>` = lo scalare) e stava **diagnosticando il peso**. Aggiusti
+  il peso -> il sigillo passa -> EM preservato -> antipodalita' gestita. Tutto si riconcilia.
+- **Luca ha respinto la mia strada (a)** ("accettare e riformulare il sigillo"): la riformulazione
+  e' corretta in se' (CLAUDE.md par.2.2) ma **non va usata per coprire una perdita di fisica**.
+  Il sigillo che segnala un problema vero non si silenzia. Registrato: non prendere (a).
+
+### MISURA DEI CANDIDATI — `csv/_seal_fork/_sigillo_pesi.py` (pure-read, blob invariato)
+| peso | chi=0 | chi=90 | chi=180 | riduce allo scalare | cura l'antipodale |
+|---|---|---|---|---|---|
+| `sin(chi)` ATTUALE | 0.000 | 1.000 | 0.000 | **NO (err 9.99e-01)** | si' |
+| `cos(chi/2)` da N | 1.000 | 0.707 | 0.000 | **SI' (2.22e-16)** | si' |
+| `cos^2(chi/2)` | 1.000 | 0.500 | 0.000 | si' (2.22e-16) | si' (piu' forte) |
+| nessun peso | 1.000 | 1.000 | 1.000 | si' | **NO (dispersione 1.62 costante)** |
+
+- **RISULTATO CHIAVE: `cos(chi/2)` NON e' una scelta, e' cio' che resta quando NON si normalizza.**
+  Il trasporto parallelo non normalizzato `N = (1+n_i.n_j) I + i (n_i x n_j).sigma` vale
+  **esattamente `2 cos(chi/2) U`** (verificato **2.741e-14** su 200000 archi). Quindi il peso e'
+  `|N|/2`: **derivato, zero manopole** (par.3 rispettato). In piu' `N` e' polinomiale nei Bloch:
+  niente `arccos`, niente asse da normalizzare, niente floor 1e-30, nessun caso degenere a mano.
+- **Il test dell'antipodale va fatto sulla DIREZIONE, non sull'angolo** (prima versione del test
+  sbagliata, corretta): si perturba n_j attorno all'antipodale in 360 direzioni azimutali e si
+  misura la DISPERSIONE del contributo. Senza peso resta **1.62 costante** anche per eps->1e-6
+  (contributo indeterminato = dannoso); con `sin(chi)` e `cos(chi/2)` svanisce linearmente; con
+  `cos^2(chi/2)` quadraticamente.
+- **CAVEAT:** tutti questi pesi sono GLOBALI. L'ammorbidimento STRETTO vicino a pi che Luca
+  preferirebbe in linea di principio richiederebbe una larghezza = **un numero nuovo = manopola**
+  (par.3). `cos(chi/2)` evita la manopola proprio perche' non e' scelto: emerge.
+- **NESSUNA DECISIONE PRESA.** Il peso si tocca solo su delibera di Luca.
+
+## PROSSIMA AZIONE — decisione di Luca sul peso, poi PEZZO 3
+1. **Delibera sul peso** (`sin(chi)` -> `cos(chi/2)` o altro). Finche' non arriva, il PEZZO 3 resta
+   fermo: cablare con il peso sbagliato significherebbe cablare una perdita di fisica.
+2. **Run di misura (di Luca): quanto divergono davvero `psi_spin` e `_psi_spinor`?** Da' la SCALA
+   dell'effetto. Non cambia il fix di principio, ma dice se l'effetto e' grande o marginale.
+3. Poi PEZZO 3 (cablaggio in `_coppia_interferenza`, righe ~2242), e **li'** si ri-timbra il gate.
+4. Poi controllo che `SYNC_UPDATE`/`SCUOTIMENTO` siano attivi, poi olonomia W(r).
 Ordine operativo in `doc/ROADMAP_fork_SU2.md`, un pezzo un sigillo, flag OFF di default:
 1. ~~PEZZO 1~~ **FATTO** (sigillo 17/17 PASS, vedi sezione sopra).
 2. **PEZZO 2** — peso `w_ij=|n_j x n_i|=sin(chi)`. Niente soglia netta, niente coefficiente tarato.
