@@ -434,3 +434,161 @@ UNICO hub di documentazione/tracing per tutti i branch; `dev` = sviluppo/test in
 aggiornata SOLO su `main`. Creato `dev` da `main` stabile (`5fbd53f`). Prossimo passo: implementare il
 versionamento DB su `dev`, con backup datato del canonico prima di modificarlo.
 
+
+
+---
+
+## Sessione 2026-09-13 — FORK SU(2): dai documenti al cablaggio, e il teorema che lo ferma
+
+> Agent: Claude Code (Opus 5). Branch di lavoro: **`fork-su2`** (creato oggi da `dev-spinoriale`).
+> Blob `soliton_simulator.py`: `4fc7a794` (inizio) -> `b4c6c3f8` -> `cf24cd28` -> **`968fba34`** (fine).
+> Tutti i commit pushati. Tutti i sigilli sono script committati in `csv/_seal_fork/`, exit 0/1.
+
+### §32 — Allineamento delle istruzioni e dei documenti (commit 57010f5, e3c4447, 29b0ac5)
+**L:** "rileggi le direttive da CLAUDE.md", poi "ho aggiornato le istruzioni rivedile".
+
+**A — verifiche dal disco.** Blob confermato `4fc7a794`. Trovato che i **cinque documenti di
+riferimento citati dal par.0-bis NON esistevano in nessun branch ne' nella storia git**: il par.0-bis
+non era eseguibile. **L** li ha forniti; entrati nel repo in `doc/`: BUSSOLA, BUSSOLA_TECNICA v2,
+ROADMAP_fork_SU2, PROTOCOLLO_test_olonomia, SYSTASIS.
+Promosse in CLAUDE.md tre regole che vivevano solo in `.github/copilot-instructions.md` (retrocesso a
+contesto storico): snapshot/restore completo incluso RNG per la purezza; `--cs-dinamico` implica
+`--chi-core` e `--spinore-vivo`; mai confronti a passo fisso su sistema che si espande (aliasing).
+
+### §33 — ERRORE DEL GUARDIANO, corretto dai due occhi (commit ddefcfd) — DIMOSTRATO
+**A:** segnalato che CLAUDE.md par.9 indicava la forza di interferenza alla **riga 2196**, ma li' c'e'
+il **DOCSTRING**: il codice eseguibile e' alle **righe 2207-2208**.
+**L:** *"Claude Code ha ragione, e io avevo torto. E' l'errore ESATTO contro cui il §0 mette in guardia
+('verifica dal codice, non dai commenti'), e l'ho commesso io scrivendo la bussola stessa. Non e' un
+fallimento del sistema: e' il sistema che FUNZIONA."* Poi ha **riverificato tutto il §9 dal repo**:
+sano tranne quella riga (cs 2187, `_phc`/`omega_clk`/`dt_n` non usano cs, `_passo_spinoriale` 2419
+dietro SPINORE_VIVO, ancora elastica 3234-3237 + filtro 3224).
+**Regola di coordinamento nata qui:** la CLAUDE.md **autorevole e' quella nel REPO**; le copie fuori
+non vanno ripushate. Le modifiche le applica Claude Code, Luca fornisce il testo esatto.
+
+### §34 — Ordine di lavoro: FORK-FIRST (commit a936d3c, abe9925, c9fcc1e)
+**L** conferma **fork-first** e segnala di aver introdotto lui stesso un puntatore stale (la BUSSOLA
+rimandava alla vecchia `ROADMAP_dev-spinoriale`, gamma-first). Allineati: STATO, ROADMAP radice
+marcata **SUPERATA** (rimandata, NON ritrattata), BUSSOLA riga 86.
+Promosse due regole in CLAUDE.md, testo dato da **L**: **par.2 sigillo 7** (niente conclusioni sotto
+~2000 passi, mai un solo seme) e **par.4 LOCALE PURA** (mai sottrarre la media globale: introduce
+non-localita' in un sistema relazionale). Sostituite le citazioni del vecchio `ISTRUZIONI_CLAUDE_CODE`
+con `CLAUDE.md`: **un solo file autorevole per le regole dell'esecutore**, per non ricreare la
+trappola dei due documenti che divergono in silenzio.
+
+### §35 — Branch `fork-su2` (commit cebaee3)
+**A** stava scrivendo il PEZZO 1 direttamente su `dev-spinoriale`. **L:** *"fermo, devi forkare un
+altro branch"*. Stop in tempo: il `.py` non era stato toccato (blob verificato dopo lo stop: intatto).
+Creato `fork-su2` da `dev-spinoriale`, che resta **BASELINE intatta**. File di stato rinominato
+`STATO_CLAUDE_fork-su2.md`.
+
+### §36 — PEZZO 1: connessione di Berry `_link_su2` (commit 8039e1f) — DIMOSTRATO, 17/17 PASS
+`U_ij = exp(-i (chi/2) m_hat.sigma)`, ritorna `(U, w)`. Sigillo `csv/_seal_fork/_sigillo_pezzo1.py`.
+Numeri: allineati -> U=I **esatto** (0.000e+00); unitarieta' 5.6e-16; **det U = 1** 4.5e-16 (e' SU(2),
+non U(2): la fase U(1)/EM resta separata); `U_ji = U_ij^dag` **esatto**; trasporto
+`|<psi_i|U_ij|psi_j>| = 1` entro 5.6e-16 su 20000 archi; **`|[U1,U2]| = 1.000e+00`** (non commutano).
+**Fatto geometrico contro-intuitivo, verificato:** con `m_hat = (n_j x n_i)` la matrice trasporta
+**n_j -> n_i**, che e' il verso giusto per `Im<psi_i|U_ij|psi_j>`. **L** ha rigirato il sigillo di
+persona (17/17, exit 0) e verificato dal disco branch, blob e assenza di call-site.
+**Presidio aggiunto da A:** S9 dice che lo **STRUMENTO** e' non-abeliano, **non il SISTEMA**.
+
+### §37 — PEZZO 2 e il REPERTO sul peso (commit ca02af0) — NEGATIVO, poi risolto
+Il peso era gia' dentro `_link_su2`; mancava il sigillo della **grandezza composta**
+`w * Im<psi_i|U_ij|psi_j>`. 11/11 PASS, incluso **antisimmetria i<->j = azione-reazione** (5.6e-16).
+**REPERTO:** il sigillo previsto *"allineati -> byte-identico allo scalare"* **non puo' passare** con
+`w = sin(chi)`: a chi=0 il peso vale 0, ma lo scalare **non** e' zero se le fasi differiscono
+(**max 9.954e-01**). Coincidono solo con spinori canonici dei Bloch, e nel codice non e' il caso:
+`_nb_grav` prende i Bloch dal campo EMESSO `psi_spin`, `_coppia_interferenza` trasporta `_psi_spinor`.
+**`sin(chi)` spegne il canale di fase (EM).**
+
+### §38 — Diagnosi di L: `sin(chi)` SOVRA-CORREGGE (commit aa42518, 83d9203)
+**L:** *"non e' un bivio 'perdere l'EM o tenerlo': e' un BUG del peso."* L'indeterminatezza dell'asse si
+annulla a entrambi gli estremi ma e' **dannosa solo a chi=pi**: a chi=0 `sin(chi/2)=0` uccide gia' il
+termine dell'asse (U=I qualunque sia m_hat) -> **innocua**; a chi=pi `sin(chi/2)=1` lo lascia vivo ->
+**dannosa**. Quindi **il sigillo non era sbagliato: stava diagnosticando il peso.**
+**L** ha riconosciuto falsa la propria riga in BUSSOLA TECNICA par.4.1 (*"allineati -> w=0, innocuo"*):
+corretta nel doc, con la riga originale lasciata e la correzione sotto.
+**L** ha respinto la strada *"accettare e riformulare il sigillo"*: corretta in se' (par.2.2) **ma non
+va usata per coprire una perdita di fisica**.
+**Errore di A, trovato e dichiarato da A prima di usarne i numeri:** la prima versione del test
+sull'antipodale perturbava **l'angolo** e dava PASS a tutti, "nessun peso" incluso — non discriminava.
+L'indeterminatezza e' sulla **direzione** dell'asse: test corretto = 360 direzioni azimutali, e solo
+cosi' "nessun peso" fallisce (dispersione **1.62 costante** fino a eps=1e-6).
+
+### §39 — DELIBERA: il peso e' `cos(chi/2)` (commit 3916e29, 4d7ca25) — DIMOSTRATO, 19/19 PASS
+**A** scopre che il peso **non va scelto**: il trasporto parallelo **NON normalizzato**
+`N = (1 + n_i.n_j) I + i (n_i x n_j).sigma` e' polinomiale nei Bloch e vale **esattamente
+`2 cos(chi/2) U`** (2.7e-14 su 200000 archi). Il peso e' `|N|/2`: cio' che resta non normalizzando.
+**L** verifica (4.6e-14) e aggiunge **la ragione che eleva la scelta da elegante a giusta**:
+- **`cos(chi/2) = |<n_i|n_j>|` = OVERLAP QUANTISTICO dei due spin** (misurato 1.122e-14). Non e' un
+  regolarizzatore ma un **ACCOPPIAMENTO FISICO**, e un accoppiamento e' **globale per natura**: cade
+  cosi' la domanda sull'"ammorbidimento stretto", che era mal posta.
+- **Contro `cos^2(chi/2)`: e' la PROBABILITA' di Born** (9.548e-15). La forza e' `Im<psi_i|N|psi_j>`,
+  una **AMPIEZZA**: si pesa con un'ampiezza, non con una probabilita'. Conterebbe due volte.
+**Tre presidi di L, sigillati:** (1) nella forza si usa **N/2**, che ad allineati vale I -> riduzione
+allo scalare **4.441e-16** (con `sin(chi)`: 9.992e-01) — **reperto del §37 CHIUSO**; (2) **N nella
+forza, `U = N/sqrt(det N)` nell'olonomia** — la fase dell'olonomia e' identica con N o U (9.149e-13),
+il peso fattorizza come scalare positivo sul ciclo; (3) **l'algebra NON dimostra la correttezza
+dinamica**: quella la dice un run.
+**Rifattorizzazione:** `_link_su2_N` (primitiva della forza, polinomiale) + `_link_su2` riscritta su N.
+**Spariscono arccos, asse normalizzato e il floor 1e-30** dalla forza; resta un solo caso degenere, nel
+ramo dell'olonomia, dove e' genuino. **A dichiara** che 5 asserzioni dei sigilli PEZZO 1/2 sono state
+riscritte perche' **codificavano la specifica vecchia, cioe' il bug** — non per farle passare.
+
+### §40 — PEZZO 3: cablato, sigillato, **INERTE** (commit 6d66887) — NEGATIVO, DIMOSTRATO
+Flag `--fork-su2` (OFF di default), `_mat2` per le due direzioni dell'arco (`_mat` metterebbe lo stesso
+valore in M[i,j] e M[j,i]: rompe l'hermitianita'), e la sostituzione in `_coppia_interferenza`.
+**Sigilli: 6 PASS, 2 FAIL.** PASS: flag OFF **byte-identico** (0.000e+00 su 32 array, due run veri
+contro il commit fisso `4d7ca25`); riduzione al limite ad allineati (0.000e+00); azione-reazione su
+entrambi i rami; norma |psi|=1 (2.220e-16 su 3209 nodi); nessun NaN/inf.
+**FAIL (S2b, S6): con Bloch generici il ramo ON non differisce dallo scalare.**
+
+**NON E' UN BUG: E' UN TEOREMA** (`csv/_seal_fork/_reperto_inerzia.py`, 1.570e-15 su 200000 coppie).
+Se i Bloch sono quelli **degli stessi spinori trasportati**:
+`(n_i.sigma)(n_j.sigma) = (n_i.n_j) I + i (n_i x n_j).sigma` => `N = I + (n_i.sigma)(n_j.sigma)`; ma
+`|psi_i>` e' autovettore di `(n_i.sigma)` con autovalore +1, idem j => `<psi_i|N|psi_j> = 2<psi_i|psi_j>`.
+**La connessione porta psi_j esattamente su psi_i: un overlap con se stesso non puo' cambiare.**
+E' la forma **forte** del caveat gia' in `doc/ROADMAP_fork_SU2.md` (*"i link derivati dai soli Bloch
+sono schiavi della materia"*): **non sono solo schiavi, sono INERTI.**
+**Distinzione ferma:** riguarda la **FORZA**. L'**OLONOMIA** resta non banale (§36, S9). Ma un
+diagnostico non e' dinamica: se la forza non cambia, il sistema non cambia.
+
+### §41 — Il falso positivo evitato (commit 2d8cd5d) — PRESIDIO
+Dai run a 150 passi si leggeva **N = 3164 (OFF) contro 3209 (ON), +1.4%**: sembra che il fork agisca.
+**Non agisce.** Misure rifatte pulite: a **2 passi** il ramo ON viene **eseguito 305 volte** (spia su
+stderr, su copia strumentata); a **3 passi** i due `.pkl` sono **byte-identici**; a **40 passi**
+**max|OFF-ON| = 2.220e-16** con N identico (1889 = 1889). Il ramo gira, ma per il teorema da' lo stesso
+risultato: cambia solo il **percorso di calcolo** (4 matvec invece di 2) e quindi l'ultimo bit. Il
+sistema e' caotico e quel rumore a 1e-16 si amplifica fino a cambiare le mitosi. **La differenza di N
+e' rumore amplificato, non fisica.**
+**PRESIDIO:** misurare la divergenza a **orizzonte CORTO**. Se a 40 passi vale 1e-16, dentro non c'e'
+fisica, qualunque cosa si veda dopo.
+**Secondo bug di A, trovato e corretto:** `_sigillo_pezzo3.py` estraeva il codice di confronto da
+**`HEAD`**. Appena il cablaggio e' stato committato, HEAD ha smesso di essere il pre-cablaggio: il
+sigillo avrebbe confrontato il nuovo codice **con se stesso** e sarebbe passato sempre. Ora punta al
+commit fisso `4d7ca25`. **Un sigillo ancorato a HEAD si auto-assolve.**
+
+### §42 — DECISIONE APERTA (a L, non all'agent) — da CHE COSA si costruisce la connessione?
+**Controprova misurata:** con Bloch presi da un campo **diverso** dagli spinori trasportati il trasporto
+agisce eccome (**9.940e-01**). E i due oggetti **esistono gia' distinti** nel codice (`psi_spin` emesso
+vs `_psi_spinor` primario). **Ma sceglierlo perche' fa muovere il risultato sarebbe tarare un
+meccanismo per ottenere un effetto: l'opposto del par.3.**
+Tre strade, nessuna deliberata:
+1. **Dal campo emesso `psi_spin`** — da giustificare fisicamente; se la risposta e' *"perche' cosi'
+   funziona"*, e' la strada sbagliata.
+2. **Dallo STRATO 1** (ipotesi che l'agent considera la piu' seria, e non e' un rattoppo): con la
+   memoria del link (`dU/dt = (U^Berry - U)/tau`) U **non e' piu' istantaneamente** la connessione
+   degli stati correnti -> **il teorema di inerzia si rompe da solo, per costruzione**. Sarebbe
+   coerente con il piano gia' scritto: forse **lo Strato 0 e' inerte BY DESIGN** e il fork inizia a
+   vivere solo allo Strato 1.
+3. Accettare che lo Strato 0 sia solo infrastruttura diagnostica (olonomia), non dinamica.
+**L:** *"ci penso e ti dico domani."* Fino ad allora: **flag OFF, ramo inerte, gate NON ri-timbrato**
+(con il fork inerte nessun run cambia davvero), **`dev-spinoriale` intatto** (blob `4fc7a794`).
+
+### §43 — Presidio ancora aperto sul peso — IN VERIFICA
+`cos(chi/2)` chiude i problemi **numerico**, **EM** e **antipodale**. **NON** e' dimostrata la sua
+correttezza **DINAMICA**: sotto-pesa gli archi a chi grande (0.707 a 90 gradi, 0.500 a 120). C'e' un
+argomento buono che sia giusto (`N|psi_j>` e' la proiezione naturale, spin disallineati interferiscono
+meno) **ma e' un argomento, non una misura**. Olonomia W(r), stabilita' e comportamento EM: li dice un
+run. **Elegante non significa dinamicamente corretto.** Oggi il punto e' accademico, perche' il ramo e'
+inerte.
