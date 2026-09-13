@@ -762,6 +762,15 @@ KURAMOTO_SU2 = False     # KURAMOTO SU(2) NON-ABELIANO (§46): ruota lo SPINORE 
                         # voluto: convergenza-dt, non 6.7e-16). Torque O(dt^1), forza/wI dal Kuramoto-phi, zero param.
                         # Differenza da --sync-spinore: quello media i Bloch (fase-invariante) senza de-param; qui la
                         # media SU(2) e' modulata dalla coerenza di segno (accoppia segno/verso). Richiede --spinore-corretto.
+FORK_SU2 = False        # [FORK SU(2) - STRATO 0] ARC-CONNECTION non-abeliana nella FORZA. Sostituisce il
+                        # trasporto SCALARE (stessa A applicata ad a e b -> abeliano per STRUTTURA) con il
+                        # trasporto parallelo di Berry NON normalizzato N_ij = (1+n_i.n_j) I + i(n_i x n_j).sigma,
+                        # che MESCOLA a,b:  Im<psi_i|psi_j> -> Im<psi_i| N_ij/2 |psi_j>.
+                        # N/2 = cos(chi/2) U_ij, quindi porta con se' il peso cos(chi/2) = |<n_i|n_j>| = OVERLAP
+                        # DI SPIN (accoppiamento fisico, non manopola: e' cio' che resta non normalizzando).
+                        # Ad allineati N/2 = I -> riduzione ESATTA al ramo scalare (canale di fase/EM preservato);
+                        # ad antipodali N = 0 -> arco spento senza inventare assi. Zero parametri nuovi.
+                        # Richiede --campo-spinoriale (il trasporto agisce su _psi_spinor). Default off = byte-identico.
 SPIN_FEEDBACK = False   # FEEDBACK LOCALE SPINORE->ARCHI: usa l'overlap complesso dei lift sugli archi
                         # come flusso di fase antisimmmetrico. Richiede --spinore-vivo; default off
                         # per A/B. Non impone alcuna cucitura o olonomia: la misura deve emergere.
@@ -2052,6 +2061,21 @@ class Rete:
         self._S.data = np.concatenate([val, val])[self._perm]
         return self._S
 
+    def _mat2(self, val_dir, val_rev):
+        """Come `_mat`, ma con valori DIVERSI nelle due direzioni dell'arco.
+
+        `_mat` mette lo stesso `val` sia in M[i,j] sia in M[j,i]: corretto per una quantita'
+        simmetrica (lo scalare A_ij). NON basta per il trasporto di gauge, dove l'orientamento
+        conta: M[i,j] porta una componente di N_ij, M[j,i] la corrispondente di N_ji = N_ij^dag.
+        Passare `val` due volte darebbe una matrice NON hermitiana e romperebbe l'azione-reazione.
+
+        ATTENZIONE: `self._S` e' UNA struttura in cache riusata a ogni chiamata. Il risultato va
+        CONSUMATO (matvec) prima della chiamata successiva, altrimenti i dati vengono sovrascritti.
+        """
+        if self._S is None: self._costruisci_struttura()
+        self._S.data = np.concatenate([val_dir, val_rev])[self._perm]
+        return self._S
+
     def calcola_psi(self, w=None):
         if self.n == 0 or not len(self.i):
             self.psi = np.zeros(self.n, complex); return self.psi
@@ -2281,6 +2305,31 @@ class Rete:
             if _ps is not None and len(_ps) >= n:
                 _ps = np.asarray(_ps)[:n]
                 _a = _ps[:, 0]; _b = _ps[:, 1]
+                if FORK_SU2 and len(self.i):
+                    # [FORK SU(2) - STRATO 0, PEZZO 3] Trasporto NON-ABELIANO sugli archi.
+                    # Lo scalare A_ij resta (e' il kernel: peso d'arco * cos(dphi0)); cambia CHE COSA
+                    # viene trasportato: non piu' a e b separatamente con lo stesso numero, ma lo
+                    # SPINORE INTERO attraverso la matrice N_ij/2 in SU(2), che MESCOLA a,b.
+                    #   sum_j A_ij (N_ij/2) psi_j  ->  4 matvec: le componenti (00,01,10,11) di N.
+                    # I Bloch vengono da _psi_spinor, cioe' dagli STESSI stati che vengono
+                    # trasportati: cosi' N_ij e' la connessione di Berry DI quegli stati, e la
+                    # freccia causale resta spinore -> link (i nodi guidano, gli archi ricordano).
+                    _ii = self.i; _jj = self.j
+                    _nb = np.stack([2.0 * np.real(np.conj(_a) * _b),
+                                    2.0 * np.imag(np.conj(_a) * _b),
+                                    np.abs(_a) ** 2 - np.abs(_b) ** 2], axis=1)
+                    _nb = _nb / np.maximum(np.linalg.norm(_nb, axis=1), 1e-30)[:, None]
+                    # N_ij trasporta n_j -> n_i: il verso giusto per Im<psi_i| N_ij |psi_j>.
+                    _N = self._link_su2_N(_nb[_ii], _nb[_jj]) * 0.5   # il /2: N/2 = I ad allineati
+                    _N00 = A * _N[:, 0, 0]; _N01 = A * _N[:, 0, 1]
+                    _N10 = A * _N[:, 1, 0]; _N11 = A * _N[:, 1, 1]
+                    # direzione opposta = N_ji = N_ij^dag (hermitiana: conserva l'azione-reazione)
+                    _c00 = self._mat2(_N00, np.conj(_N00)) @ _a
+                    _c01 = self._mat2(_N01, np.conj(_N10)) @ _b
+                    _c10 = self._mat2(_N10, np.conj(_N01)) @ _a
+                    _c11 = self._mat2(_N11, np.conj(_N11)) @ _b
+                    return K_C * np.imag(np.conj(_a) * (_c00 + _c01)
+                                         + np.conj(_b) * (_c10 + _c11))
                 return K_C * np.imag(np.conj(_a) * (self._mat(A) @ _a)
                                      + np.conj(_b) * (self._mat(A) @ _b))
         return K_C * np.imag(np.conj(z) * (self._mat(A) @ z))
@@ -4441,7 +4490,7 @@ def _applica_flag(a):
     global net
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
     if getattr(a, "tau_d0", False):
@@ -4519,6 +4568,13 @@ def _applica_flag(a):
     CAMPO_SPINORIALE = bool(getattr(a, "campo_spinoriale", False)) # [FASE 1] campo emesso dallo spinore: default off
     if CAMPO_SPINORIALE:
         print("[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)")
+    FORK_SU2 = bool(getattr(a, "fork_su2", False)) # [FORK SU(2) STRATO 0] arc-connection non-abeliana: default off
+    if FORK_SU2 and not CAMPO_SPINORIALE:
+        print("[fork-su2] AVVISO: inerte senza --campo-spinoriale (il trasporto agisce su _psi_spinor); no-op.")
+    if FORK_SU2:
+        print("[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). "
+              "Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; "
+              "antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).")
     TEMPO_SEGNO = bool(getattr(a, "tempo_segno", False)) # MOD 5.3a+5.3b: verso dalla materia/antimateria coerente + magnitudine torsionale
     if TEMPO_SEGNO and not (CAMPO_SPINORIALE and SPINORE_CORRETTO):
         raise SystemExit("[errore] --tempo-segno richiede --campo-spinoriale + --spinore-corretto (il segno di doppia-copertura e la coerenza vivono li')")
@@ -4822,6 +4878,13 @@ def _cli():
                         "eta = dt*forza*sin(media_alpha-alpha), forza dal Kuramoto-phi (K_SYNC, prof_rel, rinforzo_shear). "
                         "Fase globale su psi -> nb invariante (gravita' intatta), agisce sul SEGNO non su phi. Richiede "
                         "--spinore-corretto. Default off = byte-identico.")
+    p.add_argument("--fork-su2", action="store_true", dest="fork_su2",
+                   help="[FORK SU(2) STRATO 0] ARC-CONNECTION non-abeliana nella forza: il trasporto smette di essere "
+                        "uno SCALARE applicato uguale ad a e b (abeliano per STRUTTURA) e diventa la matrice di Berry "
+                        "N_ij/2 = cos(chi/2) U_ij in SU(2), che MESCOLA a,b. Il peso cos(chi/2) = |<n_i|n_j>| e' "
+                        "l'OVERLAP DI SPIN, non un parametro: e' cio' che resta non normalizzando il trasporto. "
+                        "Allineati -> N/2 = I -> riduzione ESATTA al ramo scalare; antipodali -> N = 0. Zero parametri "
+                        "nuovi. Richiede --campo-spinoriale. Default off = byte-identico.")
     p.add_argument("--kuramoto-su2", action="store_true", dest="kuramoto_su2",
                    help="KURAMOTO SU(2) NON-ABELIANO (zero parametri): ruota lo SPINORE INTERO verso la media SU(2) "
                         "dei vicini psi_bar=(wI@psi)/|.| con rotazione geodetica attorno all'asse VARIABILE nb x nb_bar "

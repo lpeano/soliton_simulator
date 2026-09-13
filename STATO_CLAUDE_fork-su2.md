@@ -225,7 +225,66 @@ proiezione naturale del trasportato, e spin disallineati interferiscono davvero 
 ARGOMENTO, non una MISURA.** Olonomia W(r) sensata, stabilita', comportamento EM: lo dice un RUN.
 **Elegante non significa dinamicamente corretto.**
 
-## PROSSIMA AZIONE — PEZZO 3 (cablaggio), e li' il gate
+## PEZZO 3 — CABLATO, MA IL SIGILLO S2b FALLISCE: IL FORK E' INERTE (2026-09-13)
+**Blob: cf24cd28 -> `968fba34`.** Flag `--fork-su2` (OFF di default), `_mat2` per le due direzioni
+dell'arco, e la sostituzione in `_coppia_interferenza`:
+`Im<psi_i|psi_j>` -> `Im<psi_i| N_ij/2 |psi_j>`, con i Bloch presi da `_psi_spinor`.
+
+### SIGILLI: 5 PASS, 1 FAIL — e il FAIL e' quello che conta
+| sigillo | esito | misura |
+|---|---|---|
+| S1 flag OFF = byte-identico (2 run veri, 150 passi, seed 1) | **PASS** | **max\|A-B\| = 0.000e+00** su 32 array |
+| S2 allineati: ON == ramo scalare (riduzione al limite) | **PASS** | max\|ON-OFF\| = 0.000e+00 |
+| S5 azione-reazione, somma coppia ~ 0 (ramo OFF) | PASS | sum = +1.066e-14 (max\|c\| = 13.3) |
+| S5 azione-reazione, somma coppia ~ 0 (ramo ON) | PASS | sum = +2.554e-15 (max\|c\| = 13.3) |
+| **S2b Bloch generici: ON deve differire dallo scalare** | **FAIL** | **max\|ON-OFF\| = 4.441e-15** |
+
+### ⚠ REPERTO — non e' un bug del cablaggio, e' un TEOREMA
+Evidenza: `csv/_seal_fork/_reperto_inerzia.py`. Se i Bloch da cui si costruisce la connessione sono
+i Bloch **DEGLI STESSI spinori che vengono trasportati**, allora
+
+        <psi_i| N_ij |psi_j>  ==  2 <psi_i|psi_j>      (misurato: 1.570e-15 su 200000 coppie)
+
+quindi **N/2 agisce come l'IDENTITA' sull'overlap e la forza non cambia di un bit.**
+Dimostrazione, due righe: `(n_i.sigma)(n_j.sigma) = (n_i.n_j) I + i (n_i x n_j).sigma`, quindi
+`N = I + (n_i.sigma)(n_j.sigma)`; ma `n_i` e' il Bloch di `psi_i`, quindi `|psi_i>` e' autovettore
+di `(n_i.sigma)` con autovalore +1, e lo stesso per j. I due termini danno lo stesso overlap.
+
+**Significato:** la connessione di Berry costruita dagli stessi stati che trasporta e' BANALE
+SULLA FORZA — trasporta `psi_j` esattamente su `psi_i`, quindi l'overlap non puo' cambiare. E' la
+forma FORTE del caveat gia' scritto in `doc/ROADMAP_fork_SU2.md` ("i link derivati dai soli Bloch
+sono schiavi della materia, no gradi di liberta' propri"): **non sono solo schiavi, sono INERTI.**
+
+**Distinzione da tenere ferma:** questo riguarda la **FORZA**. L'**OLONOMIA** di plaquette resta
+non banale (due U con assi diversi non commutano, PEZZO 1 S9 = 1.000e+00). Quindi il fork puo'
+ancora produrre un **diagnostico** non abeliano. Ma un diagnostico non e' dinamica: se la forza
+non cambia, **il fork non fa nulla al sistema**.
+
+**CONTROPROVA (misurata):** se i Bloch vengono da un campo DIVERSO dagli spinori trasportati, il
+trasporto agisce eccome (9.940e-01). Nel codice quei due oggetti esistono gia': `_nb_grav` prende
+i Bloch dal campo EMESSO `psi_spin`, mentre `_coppia_interferenza` trasporta `_psi_spinor`.
+
+## ⚠ DECISIONE APERTA (di Luca, non mia) — da CHE COSA si costruisce la connessione?
+Cambiare la sorgente dei Bloch (da `_psi_spinor` a `psi_spin`) farebbe agire il fork. **Ma
+sceglierlo PERCHE' fa muovere il risultato sarebbe tarare un meccanismo per ottenere un effetto:
+l'opposto del par.3.** La domanda giusta e' FISICA: la connessione di gauge su un arco, in questo
+sistema, da che cosa deve essere costruita, e perche'? Possibilita' viste, nessuna deliberata:
+1. **Dal campo emesso `psi_spin`** (i due oggetti esistono gia' e sono distinti). Da giustificare:
+   perche' il gauge dovrebbe vivere sul campo emesso e non sullo stato primario?
+2. **Dallo STRATO 1** (`doc/ROADMAP_fork_SU2.md`): dare al link una MEMORIA propria
+   (`dU/dt = (U^Berry - U)/tau`). Con memoria, U NON e' piu' istantaneamente la Berry degli stati
+   correnti, quindi il teorema di inerzia si rompe **da solo, per costruzione**. Questa e' la via
+   che il piano gia' prevedeva: forse lo Strato 0 e' inerte **by design** e il fork inizia a vivere
+   solo allo Strato 1.
+3. Accettare che lo Strato 0 sia solo un'infrastruttura diagnostica (olonomia) e non dinamica.
+**Finche' non c'e' una risposta DERIVATA, il cablaggio resta inerte e il flag resta OFF.**
+
+## PROSSIMA AZIONE — decisione di Luca sul punto qui sopra
+- Il gate NON e' stato ri-timbrato: con il fork inerte non cambia nessun run, e la decisione di
+  Luca era "si ri-timbra al PEZZO 3 quando i run cambiano davvero". **Oggi non cambiano.**
+- Restano da girare (interrotti): i sigilli S3/S4/S6 del PEZZO 3, che richiedono il run con
+  `--fork-su2` ON. **S6 (ON != OFF) fallira' per lo stesso motivo di S2b**: e' prevedibile
+  dall'algebra, non serve spendere il run per scoprirlo.
 1. **PEZZO 3:** in `_coppia_interferenza` (righe ~2242 sul blob precedente, da ri-cercare per NOME
    sul blob `cf24cd28`), dietro flag OFF: `Im<psi_i|psi_j>` -> `Im<psi_i| N_ij/2 |psi_j>`.
    Attenzione all'ORIENTAMENTO: `N_ij` trasporta n_j -> n_i, il verso giusto per quella forma.
