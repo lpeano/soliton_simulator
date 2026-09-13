@@ -1,8 +1,23 @@
-# STATO PER CLAUDE — branch `dev-spinoriale`
+# STATO PER CLAUDE — branch `fork-su2`
 
 > File di continuità locale al branch, aggiornato a OGNI commit/push (regola Luca 2026-09-11).
 > Serve a Claude per riprendere lo stato senza rileggere tutta la storia. Lingua: italiano.
 > La doc canonica di tracing vive su `main`; questo è lo stato operativo del branch di sviluppo.
+
+## BRANCH — il fork vive QUI (regola Luca 2026-09-13)
+- **`fork-su2`**, creato da `dev-spinoriale` al commit **`c9fcc1e`** (blob `soliton_simulator.py`
+  = **4fc7a794**, invariato al momento della biforcazione). Tracciato su `origin/fork-su2`.
+- **Tutte le modifiche al `.py` per il fork SU(2) si fanno QUI, non su `dev-spinoriale`**, che
+  resta la BASELINE intatta: se il non-abeliano demolisce, ci si torna in un secondo
+  (`doc/ROADMAP_fork_SU2.md`, sezione PREPARAZIONE).
+- Questo file e' il rename di `STATO_CLAUDE_dev-spinoriale.md` (un solo file di stato per branch,
+  il nome dice quale). **ATTENZIONE AL MERGE:** se un giorno `fork-su2` rientra in
+  `dev-spinoriale`, il rename cancellerebbe lo stato di quel branch — va risolto a mano,
+  consapevolmente, non lasciato fare a git.
+- **Il blob 4fc7a794 CESSA di essere il riferimento su questo branch** appena il PEZZO 1 tocca il
+  `.py`. La precondizione "blob == 4fc7a794" scritta in `ROADMAP_dev-spinoriale.md` e nel
+  gate-cache vale ancora per `dev-spinoriale`, NON per `fork-su2`: qui il gate va **ri-timbrato
+  sul nuovo blob** (altrimenti il guard di `csv/_test_53c/_run_batch.ps1` blocca ogni campagna).
 
 ## Ultimo aggiornamento
 - Data: 2026-09-13
