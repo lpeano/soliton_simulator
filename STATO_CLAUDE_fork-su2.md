@@ -80,6 +80,23 @@
   La formula della BUSSOLA e l'uso nella forza sono coerenti. Invertendo l'asse si otterrebbe
   U^dag e la forza cambierebbe segno: **l'orientamento dell'arco ora CONTA** (con gli scalari no).
 
+## DECISIONI DI LUCA (2026-09-13, dopo verifica indipendente del PEZZO 1)
+Luca ha verificato il PEZZO 1 dal DISCO, non dal resoconto: branch, blob, assenza di call-site, e
+ha **rigirato lui stesso il sigillo (17/17 PASS, exit 0)**. Confermato anche che `dev-spinoriale`
+e' intatto (4fc7a794). Due decisioni operative:
+- **GATE — si ri-timbra al PEZZO 3, NON prima.** Il gate esiste per garantire "questo RISULTATO
+  viene da questo CODICE esatto". PEZZO 1 e 2 sono funzioni ISOLATE senza call-site: non cambiano
+  nessuna dinamica, quindi **nessuna campagna e' necessaria** e i sigilli isolati bastano. Il gate
+  stale (ancorato a 4fc7a794) e' **inerte finche' non si girano campagne**. Diventa rilevante al
+  PEZZO 3, quando `U_ij` entra nella forza e i run cambiano davvero: li' si ri-timbra sul blob del
+  fork, e cosi' a ogni pezzo successivo che tocca la DINAMICA.
+- **DOC — non si biforcano.** I documenti in `doc/` descrivono il PROGRAMMA (design, formule,
+  roadmap), non un blob: restano unici e branch-agnostici. La verita' per-branch del blob vive in
+  **CLAUDE.md par.0 e solo li'** (fonte unica). Cura minima applicata: in
+  `doc/BUSSOLA_TECNICA_dev-spinoriale.md` la riga del blob dichiara che e' il riferimento della
+  BASELINE e rimanda a CLAUDE.md par.0 per il per-branch. Una riga, non una copia: duplicare
+  sarebbe la trappola dei due documenti che divergono in silenzio.
+
 ## PROSSIMA AZIONE — PEZZO 2, poi PEZZO 3
 Ordine operativo in `doc/ROADMAP_fork_SU2.md`, un pezzo un sigillo, flag OFF di default:
 1. ~~PEZZO 1~~ **FATTO** (sigillo 17/17 PASS, vedi sezione sopra).

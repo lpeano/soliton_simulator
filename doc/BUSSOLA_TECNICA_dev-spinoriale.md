@@ -3,8 +3,10 @@
 *Documento tecnico completo. Numeri di riga APPROSSIMATIVI (verificare col blob corrente).*
 *v2 integra: antipodalità (peso sin χ), olonomia corretta (fattore 1/2), gauge dinamico a strati.*
 
-> Blob certificato di riferimento: `git hash-object soliton_simulator.py` -> **4fc7a794...**
-> Se diverso, le righe possono essere shiftate: cercare per nome di funzione/flag.
+> Blob certificato di riferimento (BASELINE `dev-spinoriale`): `git hash-object
+> soliton_simulator.py` -> **4fc7a794...**. **Blob per-branch: vedi CLAUDE.md par.0** (unica fonte:
+> i branch del fork hanno blob diversi, e questo documento resta branch-agnostico).
+> Se il blob e' diverso, le righe possono essere shiftate: cercare per nome di funzione/flag.
 
 ---
 
