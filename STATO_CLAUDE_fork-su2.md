@@ -97,7 +97,40 @@ e' intatto (4fc7a794). Due decisioni operative:
   BASELINE e rimanda a CLAUDE.md par.0 per il per-branch. Una riga, non una copia: duplicare
   sarebbe la trappola dei due documenti che divergono in silenzio.
 
-## PROSSIMA AZIONE — PEZZO 2, poi PEZZO 3
+## PEZZO 2 — FATTO, SIGILLO 11/11 PASS + 1 REPERTO PER IL PEZZO 3 (2026-09-13)
+- **Il peso come IMPLEMENTAZIONE era gia' dentro `_link_su2`** (w = sin(chi), stesso prodotto
+  vettore di m_hat). Il PEZZO 2 quindi non aggiunge codice: **blob INVARIATO b4c6c3f8**, nessuna
+  riga di `.py` toccata. Quello che mancava era il sigillo della GRANDEZZA che finira' nella forza,
+  non dei suoi fattori presi separatamente:
+  `contrib_ij = w_ij * Im<psi_i| U_ij |psi_j>`   (oggi, scalare: `Im<psi_i|psi_j>`).
+- **SIGILLO PEZZO 2: 11/11 PASS** — `csv/_seal_fork/_sigillo_pezzo2.py` (pure-read, exit 0/1):
+  P1 **antisimmetria i<->j = azione-reazione** (5.6e-16: la coppia non crea momento dal nulla) ;
+  P2/P2b contributo = 0 ai due estremi (0.000e+00 / -2.3e-18) ; P3 continuo (salto 3.3e-06) ;
+  P3b **liscio ai bordi**, max|dc/dchi| = 0.208 (una soglia netta darebbe un picco: non c'e') ;
+  P4/P4b contributo IDENTICAMENTE 0 su antipodali e allineati ; P6 nessun verso preferito
+  (media -4.3e-03 dentro 3 sigma = 8.7e-03) ; P7 |contributo| <= 1, il peso non amplifica.
+
+### ⚠ REPERTO — il sigillo previsto per il PEZZO 3 NON puo' passare come e' formulato
+La ROADMAP chiede al PEZZO 3: *"flag OFF / tutti allineati -> BYTE-IDENTICO al ramo scalare"*.
+Le due meta' non sono equivalenti, e la seconda e' **FALSA in generale** (misurato, P5):
+- *flag OFF -> byte-identico*: **VERO** per costruzione (il ramo nuovo non viene eseguito).
+- *tutti allineati -> byte-identico*: **FALSO.** Con chi=0 il peso vale w=0 -> contributo nuovo
+  **zero**; ma lo scalare di oggi `Im<psi_i|psi_j>` **non e' zero** se i due spinori hanno FASI
+  diverse. Misura: max|Im<psi_i|psi_j>| = **9.954e-01**, media |.| = 4.199e-01 su Bloch allineati.
+  Le due espressioni coincidono **solo** se gli spinori sono i rappresentanti canonici dei
+  rispettivi Bloch (P5b: 2.8e-17), che nel codice **NON e' il caso**: `_nb_grav` (riga ~2024)
+  costruisce i Bloch dal campo EMESSO `psi_spin`, mentre cio' che viene trasportato in
+  `_coppia_interferenza` (riga ~2203) e' `_psi_spinor`. **Due oggetti distinti**: i Bloch possono
+  essere allineati mentre le fasi no.
+- **CONSEGUENZA FISICA (la parte che conta):** il peso sin(chi) **SPEGNE gli archi a Bloch
+  allineati**, cioe' proprio quelli che oggi portano il contributo di FASE — il settore
+  U(1)/orologio, il canale EM. Non e' un bug del peso: e' cio' che il peso fa per costruzione,
+  ed e' coerente con "antipodali e allineati non contribuiscono". Ma la ROADMAP lo chiama
+  "innocuo" (par.4.1 della BUSSOLA TECNICA: *allineati -> w=0, innocuo*), e innocuo lo e' **solo**
+  nel caso canonico. Nel sistema reale toglie un canale che oggi esiste.
+- **NESSUNA SCELTA PRESA.** Lo script MISURA, non decide. Serve Luca prima del PEZZO 3.
+
+## PROSSIMA AZIONE — PEZZO 3, ma PRIMA il reperto qui sopra
 Ordine operativo in `doc/ROADMAP_fork_SU2.md`, un pezzo un sigillo, flag OFF di default:
 1. ~~PEZZO 1~~ **FATTO** (sigillo 17/17 PASS, vedi sezione sopra).
 2. **PEZZO 2** — peso `w_ij=|n_j x n_i|=sin(chi)`. Niente soglia netta, niente coefficiente tarato.
