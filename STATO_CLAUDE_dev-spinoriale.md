@@ -5,9 +5,30 @@
 > La doc canonica di tracing vive su `main`; questo è lo stato operativo del branch di sviluppo.
 
 ## Ultimo aggiornamento
-- Data: 2026-09-11
-- Ultimo commit: ROADMAP pluri-sessione + TODO persistenti (Step 0 saltato, Step 1A da fare)
+- Data: 2026-09-13
+- Ultimo commit: STATO allineato a CLAUDE.md v2 + documenti di riferimento in `doc/`.
 - Branch allineato con `origin/dev-spinoriale`.
+- Blob `soliton_simulator.py` = **4fc7a794** (verificato dal disco, invariato: nessuna modifica al codice).
+
+## REGOLE E DOCUMENTI (aggiornamento 2026-09-13)
+- **CLAUDE.md v2** e' l'istruzione autorevole (sostituisce `.github/copilot-instructions.md`, che resta
+  solo come contesto storico). Novita' rispetto alla v1: par.0-bis (leggi le istruzioni a ogni avvio +
+  rilettura dopo compattazione), par.5 politiche di commit (un commit = un cambiamento logico, forma del
+  messaggio, commit anche del sigillo FALLITO poi STOP, niente `Start-Sleep`/polling), par.5-bis
+  auto-manutenzione (CLAUDE.md per i fatti stabili, STATO a ogni commit, commit dedicato per le regole).
+  Promosse in par.2/4 tre regole prima solo in copilot-instructions: snapshot/restore COMPLETO incluso RNG
+  per la purezza pure-read; `--cs-dinamico` implica `--chi-core` e `--spinore-vivo`; mai confronti a passo
+  fisso su sistema che si espande (aliasing).
+- **Documenti di riferimento ora NEL REPO**, cartella `doc/` (prima esistevano solo nel Progetto/chat,
+  assenti da tutti i branch e dalla storia git -> il par.0-bis non era eseguibile):
+  `BUSSOLA_dev-spinoriale.md`, `BUSSOLA_TECNICA_dev-spinoriale.md` (v2), `ROADMAP_fork_SU2.md`,
+  `PROTOCOLLO_test_olonomia.md`, `SYSTASIS_nota_concettuale.md`.
+- **CONFLITTO D'ORDINE APERTO (decisione di Luca, non presa da Claude):** CLAUDE.md par.6 dice
+  "prima il FORK, poi il resto" e mette GAMMA/Step 2 A VALLE; `ROADMAP_dev-spinoriale.md` (radice) e la
+  sezione ROADMAP qui sotto dicono che la prossima azione e' lo Step 1A (coarse-graining GAMMA).
+  Anche `doc/BUSSOLA_dev-spinoriale.md` ordina GAMMA(1) -> cs-orologio(2) -> fork(3), l'opposto di par.6.
+  Per la regola "in caso di conflitto vince CLAUDE.md" la prossima azione sarebbe il **fork Strato 0 /
+  PEZZO 1** (`doc/ROADMAP_fork_SU2.md`). NON procedere finche' Luca non conferma quale ordine vale.
 
 ## ROADMAP (piano pluri-sessione) — vedi `ROADMAP_dev-spinoriale.md` + `/memories/repo/roadmap_todo.md`
 Obiettivo: EM e gravita' come 2 proiezioni dello STESSO campo spinoriale, con la giusta gerarchia.
