@@ -42,6 +42,8 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
 4. **Norma |psi|=1**, no NaN/inf. **Stabilita':** no runaway; per Hebb, `g <= G(rho)` sempre.
 5. **Unitarieta' SU(2):** `U_ij^dag U_ij = I` preservata anche DURANTE l'evoluzione, non solo all'init.
 6. **Gate ancorato al git-BLOB** (un commit puo' "mentire", un blob no). Verifica dal DISCO.
+7. **Statistica:** nessuna conclusione sotto ~2000 passi, MAI su un solo seme. Un risultato su
+   un seme e' baseline interna, non un fatto pubblicabile: serve robustezza su piu' semi.
 
 ## 3. ZERO MANOPOLE
 - Nessun parametro nuovo tarato a mano. Le scale esistono gia': `tau = d/cs`, `G(rho)` con lo
@@ -63,6 +65,9 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
 - **Mai confronti a PASSO FISSO su un sistema che si espande/dilata:** genera ALIASING (una struttura
   che trasla o si dilata, campionata a intervalli costanti, sembra ferma o va a velocita' falsa).
   Campiona in modo adattivo o normalizza sulla scala (comovente), non su intervalli assoluti.
+- **LOCALE PURA — niente sottrazione della media:** mai togliere la media globale (spinta.mean(),
+  flusso.mean(), ...). La media globale introduce NON-LOCALITA' (una scorciatoia che il sistema
+  relazionale non deve avere). Tutto agisce per arco/vicinato. La media NON va qui.
 
 ## 5. POLITICHE DI COMMIT
 - **Commit PRIMA di ogni run** (riproducibilita'): il codice che genera un output dev'essere gia'
