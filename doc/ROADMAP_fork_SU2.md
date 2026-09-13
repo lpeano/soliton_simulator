@@ -75,4 +75,4 @@ Testarli UNO ALLA VOLTA, non insieme al primo colpo.
 ---
 *Ordine: Preparazione → Pezzo 1 (+sigillo) → Pezzo 2 (+sigillo) → Pezzo 3 (+sigillo) →
 controlla scuotimento attivo → verifiche dinamiche (Luca gira, Claude legge). Un pezzo, un sigillo.*
-*Vedi anche: BUSSOLA, BUSSOLA TECNICA, PROTOCOLLO_test_olonomia, ISTRUZIONI_CLAUDE_CODE.*
+*Vedi anche: BUSSOLA, BUSSOLA TECNICA, PROTOCOLLO_test_olonomia, CLAUDE.md (regole dell'esecutore).*

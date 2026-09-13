@@ -158,4 +158,5 @@ Da esaminare/confrontare prima di scrivere 4.0 da zero (potrebbe coprire parte d
 ---
 *Questa bussola dice DOVE e COME. La BUSSOLA concettuale dice PERCHE' e DOVE-VA. La ROADMAP_fork_SU2
 dice IN-CHE-ORDINE. Il PROTOCOLLO_test_olonomia dice COME-MISURARE. SYSTASIS definisce il concetto.
-ISTRUZIONI_CLAUDE_CODE dice come far ESEGUIRE a basso costo.*
+CLAUDE.md dice come si COMPORTA l'esecutore (regole, sigilli, commit) ed e' l'unico file autorevole
+per quel ruolo.*
