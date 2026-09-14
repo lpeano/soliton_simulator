@@ -57,6 +57,11 @@ def main():
                          "(True->False). Verificato confrontando TUTTI i globali del modulo.")
     ap.add_argument("--no-osserva", action="store_true", dest="no_osserva",
                     help="gira senza osservatore: serve al sigillo di byte-identita'.")
+    ap.add_argument("--riprendi-da", default=None, dest="riprendi_da",
+                    help="RESUME: copia questo .pkl come DB del run e NON passa --db-cleanup, cosi' "
+                         "il simulatore riparte dallo stato salvato. La guardia del DB confronta solo "
+                         "il git blob dei byte del codice, non i flag: stesso .py con flag diversi e' "
+                         "accettato (verificato dal sorgente).")
     ap.add_argument("--outdir", default=HERE)
     a = ap.parse_args()
 
@@ -68,7 +73,13 @@ def main():
             "--campo-spinoriale", "--spinore-vivo", "--spinore-corretto", "--chi-core",
             "--calore-scal", "--deparam-orologio", "--verlet",
             "--fork-su2", "--fork-su2-mem",
-            "--csv", base + ".cond.csv", "--sync-db", base + ".pkl", "--db-cleanup"]
+            "--csv", base + ".cond.csv", "--sync-db", base + ".pkl"]
+    if a.riprendi_da:
+        import shutil
+        shutil.copyfile(a.riprendi_da, base + ".pkl")   # il DB da cui ripartire
+        print("[osserva] RESUME da %s" % a.riprendi_da, flush=True)
+    else:
+        argv += ["--db-cleanup"]
     if a.kuramoto:
         argv += ["--kuramoto-su2"]
     if a.regime_det:
