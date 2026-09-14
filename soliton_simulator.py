@@ -790,6 +790,26 @@ FORK_SU2_MEM = False    # [FORK SU(2) - STRATO 1] CONNESSIONE CON MEMORIA: N_ij 
                         # A RIPOSO n_ret = n_cur -> inerte -> si riduce allo Strato 0 (e quindi allo
                         # scalare): da fermo la memoria non inventa forza. Per tau->0, alpha->1, idem.
                         # Richiede --fork-su2 (da solo verrebbe IGNORATO con avviso). Default off = byte-identico.
+STEP2_OROLOGIO = False  # [STEP 2] AGGANCIO OROLOGIO <-> METRICA: omega_clk *= (cs/CS_M)^2.
+                        # E' l'OROLOGIO DI COMPTON, omega = m c^2 / hbar: la frequenza propria di una
+                        # massa va come c^2, e nel modello c e' cs. Quindi omega ∝ cs^2 non e' una
+                        # manopola, e' fisica NECESSARIA e derivata: zero parametri nuovi, nessun
+                        # floor, nessun coefficiente. A cs = CS_M il fattore vale ESATTAMENTE 1, quindi
+                        # la riduzione al limite e' esatta per COSTRUZIONE e non per taratura.
+                        # PERCHE' SERVE: la metrica legge solo |psi|^2 (cs = _cs_nodo) e l'orologio NON
+                        # legge cs -> i due tempi propri (metrico tau_p = d/cs e orologio dt_n = DT*r)
+                        # sono SCOLLEGATI. Questo e' l'unico aggancio lecito fra i due.
+                        # DOVE AGISCE: su omega_clk, che entra in _phc come FASE GLOBALE per nodo. Il
+                        # Bloch nb = psi^dag sigma psi e' INVARIANTE per fase globale (verificato:
+                        # 3.3e-16), quindi lo Step 2 vive nel canale U(1)/orologio e NON PUO' muovere
+                        # la direzione SU(2). Cambia pero' le fasi RELATIVE fra nodi, che entrano in
+                        # Im<psi_i|psi_j>: la forza cambia e la traiettoria diverge (caos), ma non
+                        # perche' abbia toccato lo spin.
+                        # cs viene dal passo PRECEDENTE (self._cs_nodo_prev): l'orologio gira a :2691,
+                        # il settore metrico a :2762. E' un ritardo di un passo, coerente col fatto che
+                        # tutto il resto legge snapshot t-1. Senza cache -> CS_M -> fattore 1.
+                        # Richiede --campo-spinoriale + --deparam-orologio (e' li' che _phc vive).
+                        # Default off = byte-identico.
 SPIN_FEEDBACK = False   # FEEDBACK LOCALE SPINORE->ARCHI: usa l'overlap complesso dei lift sugli archi
                         # come flusso di fase antisimmmetrico. Richiede --spinore-vivo; default off
                         # per A/B. Non impone alcuna cucitura o olonomia: la misura deve emergere.
@@ -1957,6 +1977,17 @@ class Rete:
                 # (s_k=+1) -> esatto. Fase globale: tocca SOLO il segno, non nb/gravita'/eta.
                 _sk = (np.where(np.asarray(self.perc_chi[:n]) >= 0.0, 1.0, -1.0)
                        if (OROLOGIO_SEGNO and hasattr(self, "perc_chi") and len(self.perc_chi) >= n) else 1.0)
+                if STEP2_OROLOGIO:
+                    # [STEP 2] OROLOGIO DI COMPTON: omega ∝ cs^2. `cs` dal passo PRECEDENTE, perche'
+                    # il settore metrico gira DOPO questo punto; assente -> CS_M -> fattore 1 esatto.
+                    # NIENTE floor, NIENTE coefficiente: solo (cs/CS_M)^2 (par.3, zero manopole).
+                    # Tocca la MAGNITUDINE, mai il segno: _sk resta quello che e'.
+                    _csp2 = getattr(self, "_cs_nodo_prev", None)
+                    if _csp2 is not None and len(_csp2) >= n:
+                        _csn2 = np.maximum(np.asarray(_csp2, float)[:n], 0.0)
+                    else:
+                        _csn2 = np.full(n, CS_M)
+                    omega_clk = omega_clk * (_csn2 / CS_M) ** 2
                 _phc = np.exp(-0.5j * _sk * omega_clk * _dts)
                 a1 = a1 * _phc; b1 = b1 * _phc
             if SYNC_FASE_OROLOGIO and forza_sync is not None and wI_sync is not None and uno_sync is not None:
@@ -2760,7 +2791,7 @@ class Rete:
         # razionale del campo: non viene introdotto un numero minimo arbitrario.
         if CS_DINAMICO:
             cs_nodo = self._cs_nodo(I, w)
-            if FORK_SU2_MEM:
+            if FORK_SU2_MEM or STEP2_OROLOGIO:
                 # [FORK SU(2) - STRATO 1] cache per tau = d/cs. La coppia gira PRIMA di questo punto,
                 # quindi al passo dopo leggera' il cs di UN PASSO FA: e' un ritardo dentro un
                 # meccanismo di ritardo, coerente e innocuo. Scritta solo col flag ON (byte-identita').
@@ -4641,7 +4672,7 @@ def _applica_flag(a):
     global net
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
     if getattr(a, "tau_d0", False):
@@ -4740,6 +4771,17 @@ def _applica_flag(a):
               "quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp "
               "geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> "
               "riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.")
+    STEP2_OROLOGIO = bool(getattr(a, "step2_orologio", False)) # [STEP 2] orologio <-> metrica: default off
+    if STEP2_OROLOGIO and not (CAMPO_SPINORIALE and DEPARAM_OROLOGIO):
+        # Stessa convenzione degli altri avvisi: si IGNORA, non si forza. _phc vive nel ramo
+        # --deparam-orologio; senza, non c'e' nulla da moltiplicare e il flag sarebbe incoerente.
+        print("[step2-orologio] AVVISO: richiede --campo-spinoriale + --deparam-orologio (l'orologio _phc vive li'). IGNORATO, flag riportato a OFF.")
+        STEP2_OROLOGIO = False
+    if STEP2_OROLOGIO:
+        print("[step2-orologio] STEP 2: omega_clk *= (cs/CS_M)^2 = OROLOGIO DI COMPTON (omega = m c^2/hbar, e nel modello c e' cs). "
+              "Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il "
+              "fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. "
+              "NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.")
     TEMPO_SEGNO = bool(getattr(a, "tempo_segno", False)) # MOD 5.3a+5.3b: verso dalla materia/antimateria coerente + magnitudine torsionale
     if TEMPO_SEGNO and not (CAMPO_SPINORIALE and SPINORE_CORRETTO):
         raise SystemExit("[errore] --tempo-segno richiede --campo-spinoriale + --spinore-corretto (il segno di doppia-copertura e la coerenza vivono li')")
@@ -5060,6 +5102,16 @@ def _cli():
                         "ritardato rilassa verso il corrente con slerp geodetico, alpha = 1-exp(-dt/tau) (passo esatto di "
                         "primo ordine, mai Verlet). A riposo, o per tau->0, torna allo Strato 0. Richiede --fork-su2. "
                         "Default off = byte-identico.")
+    p.add_argument("--step2-orologio", action="store_true", dest="step2_orologio",
+                   help="[STEP 2] AGGANCIO OROLOGIO <-> METRICA: omega_clk *= (cs/CS_M)^2. E' l'OROLOGIO DI COMPTON "
+                        "(omega = m c^2 / hbar): la frequenza propria di una massa va come c^2, e nel modello c e' cs. "
+                        "Non e' una manopola ma fisica NECESSARIA e derivata: zero parametri, nessun floor, nessun "
+                        "coefficiente, e a cs = CS_M il fattore vale esattamente 1 (riduzione al limite per costruzione). "
+                        "Serve perche' la metrica legge solo |psi|^2 e l'orologio non legge cs: i due tempi propri "
+                        "(metrico d/cs e orologio DT*r) erano SCOLLEGATI. Con cs < CS_M (pozzo, alta densita') l'orologio "
+                        "RALLENTA come cs^2 = redshift gravitazionale. Agisce sulla FASE dello spinore (U(1)): NON muove "
+                        "il Bloch (invariante per fase globale) e quindi NON organizza lo spin. Richiede "
+                        "--campo-spinoriale + --deparam-orologio. Default off = byte-identico.")
     p.add_argument("--kuramoto-su2", action="store_true", dest="kuramoto_su2",
                    help="KURAMOTO SU(2) NON-ABELIANO (zero parametri): ruota lo SPINORE INTERO verso la media SU(2) "
                         "dei vicini psi_bar=(wI@psi)/|.| con rotazione geodetica attorno all'asse VARIABILE nb x nb_bar "

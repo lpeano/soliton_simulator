@@ -1,0 +1,45 @@
+================================================================================================
+SIGILLO STEP 2 — omega_clk *= (cs/CS_M)^2  (orologio di Compton)
+================================================================================================
+  (creato _old_sim_pre_step2.py da cdc39d0 = codice PRIMA del cablaggio)
+[PASS] S1.0 il riferimento e' il blob certificato     blob = 2277e9a0  (atteso 2277e9a0)
+[PASS] S1 flag OFF vs codice pre-cablaggio            max|A-B| = 0.000e+00   [nodi 3164 vs 3164, shape divergenti 0]
+
+================================================================================================
+SIGILLI 3 e 2 — in-process sul METODO VERO (_passo_spinoriale)
+================================================================================================
+   cs/CS_M    rapporto fase MISURATO      atteso (cs/CS_M)^2     |differenza|
+     1.00        1.000000000000            1.000000000000       0.000e+00
+     0.50        1.000000000000            0.250000000000       7.500e-01
+     0.10        1.000000000000            0.010000000000       9.900e-01
+[FAIL] S3 omega_eff/omega_base = (cs/CS_M)^2          max|misurato - atteso| = 9.900e-01 su cs/CS_M = 1.0, 0.5, 0.1
+[FAIL] S3b l'orologio RALLENTA dove cs e' basso       fase a cs=0.1*CS_M e' 1.0000 volte quella a cs=CS_M (deve essere < 1)
+[PASS] S3c a cs = CS_M il fattore e' 1 ESATTO         rapporto = 1.000000000000000
+
+================================================================================================
+SIGILLO 2 — riduzione al limite: ON senza --cs-dinamico (cs = CS_M ovunque) == OFF
+================================================================================================
+  Senza --cs-dinamico, _cs_nodo non viene mai calcolato -> la cache resta None -> fattore 1
+  esatto. Il ramo ON GIRA ma non deve cambiare NULLA: e' la riduzione al limite del par.2.2.
+[PASS] S2 ON (cs=CS_M) vs OFF: byte-identico          max|A-B| = 0.000e+00   [nodi 3164 vs 3164, shape divergenti 0]
+
+================================================================================================
+SIGILLO 4 — stabilita' col flag ON
+================================================================================================
+[PASS] S4a norma |psi| = 1                            max| |psi| - 1 | = 2.220e-16 su 3164 nodi
+[PASS] S4b nessun NaN/inf in tutto lo stato           tutti finiti
+[PASS] S4c nessun runaway di scala                    max|x| = 9.2
+================================================================================================
+SIGILLO STEP 2: 7/9 PASS -> FAIL
+
+COSA QUESTO SIGILLO NON DICE (doc/PREDIZIONE_step2.md par.2)
+------------------------------------------------------------
+S3 dice che il MECCANISMO risponde nel verso giusto e scala come cs^2. NON dice che l'effetto
+DINAMICO sia grande: alle densita' attuali cs e' quasi-costante (I~0.05 contro soglia ~400), quindi
+(cs/CS_M)^2 ~ 1 e qualunque effetto sara' piccolo PER COSTRUZIONE. E il profilo di dt_n e' un
+effetto INDIRETTO (omega_clk -> _phc -> psi_spin -> ritmo() -> dt_n): S3 PASS + dt_n piccolo
+significa CABLATO BENE, non fallito.
+E lo Step 2 NON deve organizzare lo spin: _phc e' una fase globale, il Bloch e' invariante (3.3e-16).
+Firme di spin invariate = conferma che fa il suo mestiere.
+
+EXIT=1
