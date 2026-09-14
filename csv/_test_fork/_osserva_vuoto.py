@@ -113,7 +113,25 @@ def main():
     flag_visti = set()
 
     righe = []
-    stato = {"k": 0}
+    stato = {"k": 0, "hdr": False}
+
+    def _scrivi_incrementale(r):
+        """Scrive OGNI campione SUBITO, invece di tenerlo in memoria fino a fine run.
+
+        PERCHE': senza, un run lungo non e' TRONCABILE SULL'EVIDENZA. Il 2026-09-14 lo scan del
+        turbo e' stato ordinato partendo dal forcing piu' forte proprio per poterlo fermare presto
+        se le firme restano piatte — ma l'osservatore scriveva il CSV solo alla fine, quindi al
+        passo 500 non c'era nulla da guardare: o si aspettavano tutti i 2000 passi (2.8 ore), o si
+        uccideva il run perdendo tutto. Difetto di progetto, corretto qui.
+        Costo: una riga di CSV per campione (cioe' ogni `--ogni` passi). Irrilevante."""
+        out = base + ".vuoto.csv"
+        modo = "a" if stato["hdr"] else "w"
+        with open(out, modo, newline="") as f:
+            wcsv = _csv.DictWriter(f, fieldnames=list(r.keys()))
+            if not stato["hdr"]:
+                wcsv.writeheader()
+                stato["hdr"] = True
+            wcsv.writerow(r)
     orig_step = S.Rete.step
 
     def in_applica_flag():
@@ -193,6 +211,7 @@ def main():
         r["norma_nret_err"] = (float(np.max(np.abs(np.linalg.norm(np.asarray(nbr)[:n], axis=1) - 1.0)))
                                if nbr is not None and len(nbr) >= n else float("nan"))
         r["nan_psi"] = int(not np.all(np.isfinite(np.asarray(psi)[:n])))
+        _scrivi_incrementale(r)                    # <-- vedi `_scrivi_incrementale`
         r["max_pos"] = (float(np.max(np.abs(np.asarray(net.pos)[:n])))
                         if getattr(net, "pos", None) is not None and len(net.pos) >= n else float("nan"))
         # CON COSA HA GIRATO DAVVERO QUESTO PASSO (letto dai globali vivi, non da prima del run)
@@ -236,14 +255,11 @@ def main():
         print("[osserva-flag] ATTENZIONE: i flag sono CAMBIATI durante il run.", flush=True)
 
     if not a.no_osserva and righe:
-        cols = list(righe[0].keys())
-        out = base + ".vuoto.csv"
-        with open(out, "w", newline="") as f:
-            wcsv = _csv.DictWriter(f, fieldnames=cols)
-            wcsv.writeheader()
-            for r in righe:
-                wcsv.writerow(r)
-        print("[osserva] %d campioni -> %s" % (len(righe), out), flush=True)
+        # NON si riscrive il file: ogni campione e' gia' stato scritto da `_scrivi_incrementale`
+        # mano a mano. Riscriverlo qui vanificherebbe la troncabilita' (un run ucciso perderebbe
+        # tutto, che e' esattamente il difetto corretto).
+        print("[osserva] %d campioni -> %s (scritti incrementalmente)"
+              % (len(righe), base + ".vuoto.csv"), flush=True)
 
 
 if __name__ == "__main__":
