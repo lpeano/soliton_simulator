@@ -1,0 +1,80 @@
+====================================================================================================
+FDT DELLO SCUOTIMENTO — il rumore contiene una dissipazione allineante?
+====================================================================================================
+RIFERIMENTI:  allineato = 0.000 gradi   |   isotropo = 90.000 gradi   |   antipodale = 180
+Costanti dal simulatore: DT = 0.01, LAM = 0.8, CS_M = 2
+
+====================================================================================================
+TEST 3c — l'espansione analitica a O(amp^2) regge?
+====================================================================================================
+  Sviluppo di n' = (n + a g)/|n + a g| con g ~ N(0, I_3), mediato su g:
+    |n+ag|^-1 = 1 - a s - a^2 G/2 + (3/2) a^2 s^2 + O(a^3)     con s = n.g , G = |g|^2
+    n'        = n + a g - a s n - a^2 s g - a^2 (G/2) n + (3/2) a^2 s^2 n + O(a^3)
+  Medie: E[g] = 0, E[s] = 0, E[s g] = n, E[G] = 3, E[s^2] = 1  ->
+
+      E[n'] - n  =  -a^2 n  +  O(a^3)          <--- IL DRIFT
+
+  Cioe': (i) il drift e' PARALLELO a n, nessuna componente trasversa -> nessuna rotazione media;
+         (ii) dipende dal SOLO n: nessuna traccia dei vicini;
+         (iii) |E[n']| = 1 - a^2 : e' la CONTRAZIONE DEL RISULTANTE, cioe' DIFFUSIONE PURA.
+
+   amp      |E[n']| misurato   atteso 1 - amp^2    |differenza|   componente TRASVERSA
+   0.300      0.91010933        0.91000000      1.09e-04       2.32e-04  (err.stat. 5.0e-04)
+   0.100      0.99001025        0.99000000      1.03e-05       6.37e-05  (err.stat. 5.0e-04)
+   0.030      0.99909921        0.99910000      7.91e-07       8.98e-06  (err.stat. 5.0e-04)
+   0.013      0.99983113        0.99983100      1.28e-07       8.20e-06  (err.stat. 5.0e-04)
+
+  LETTURA: |E[n']| segue 1 - amp^2 e la componente TRASVERSA e' al livello dell'errore statistico.
+  L'espansione e' confermata: il drift e' radiale, cioe' NON e' un moto sulla sfera. Sulla sfera il
+  drift a O(amp^2) e' NULLO: il rumore+normalizzazione e' DIFFUSIONE ISOTROPA PURA.
+
+====================================================================================================
+TEST 3a — SOLO rumore + normalizzazione: due Bloch a 60 gradi, molti passi
+====================================================================================================
+  amp = 0.013 (quella misurata nel vuoto).  Atteso analitico per l'angolo:
+  diffusione pura -> <cos chi> decade come (1-amp^2)^(2k) e chi -> 90.000 gradi (isotropo)
+
+   passo    chi medio (gradi)    <cos chi>     atteso (1-amp^2)^(2k) * cos(60)
+       0        60.000          +0.500000        +0.500000
+      10        60.105          +0.498413        +0.498313
+      50        60.551          +0.491652        +0.491620
+     100        61.085          +0.483508        +0.483381
+     300        63.196          +0.450933        +0.451782
+    1000        69.188          +0.355303        +0.356587
+    2000        75.336          +0.253151        +0.254309
+    3000        79.559          +0.181228        +0.181367
+
+  LETTURA: l'angolo SALE da 60 verso 90 (isotropo). NON scende verso 0. Nessun allineamento.
+  E <cos chi> segue la legge della diffusione pura, coerente con 3c.
+
+====================================================================================================
+TEST 3b — PRECESSIONE (Rodrigues, campo B dai vicini) + rumore + normalizzazione
+====================================================================================================
+  Due nodi vicini: ciascuno precede attorno al campo dell'ALTRO (B_A = k*nB, B_B = k*nA), che e'
+  la forma del campo nel codice (somma pesata dei Bloch dei vicini). E' QUI che l'accoppiamento ai
+  vicini esiste: se una dissipazione allineante emerge, emerge da questa combinazione.
+  |B|=  0.5 amp=0.000 | chi ai passi 0/100/500/1000/2000:  60.000  60.124  60.622  61.248  62.511 | |<n>| finale = 0.8549
+  |B|=  0.5 amp=0.013 | chi ai passi 0/100/500/1000/2000:  60.000  60.669  63.650  67.565  74.628 | |<n>| finale = 0.6092
+  |B|=  2.0 amp=0.000 | chi ai passi 0/100/500/1000/2000:  60.000  62.004  70.378  81.472 104.208 | |<n>| finale = 0.6142
+  |B|=  2.0 amp=0.013 | chi ai passi 0/100/500/1000/2000:  60.000  62.510  72.484  84.090 102.215 | |<n>| finale = 0.4540
+  |B|= 10.0 amp=0.000 | chi ai passi 0/100/500/1000/2000:  60.000 114.799 178.677 179.991 180.000 | |<n>| finale = 0.0000
+  |B|= 10.0 amp=0.013 | chi ai passi 0/100/500/1000/2000:  60.000 114.412 170.506 170.625 170.613 | |<n>| finale = 0.0001
+
+  LETTURA (CORRETTA il 2026-09-14 DOPO aver visto i dati: la prima versione di questa riga diceva
+  "con amp=0 la precessione CONSERVA l'angolo esattamente" ed era FALSA. L'avevo scritta prima di
+  girare, ed e' proprio il commento stale contro cui mette in guardia il par.0 di CLAUDE.md.)
+
+  Rodrigues conserva l'angolo fra UN vettore e il SUO asse. Ma qui i due nodi ruotano l'uno attorno
+  all'altro SIMULTANEAMENTE: la coppia (nA, nB) NON e' angolo-conservante, ed e' un sistema
+  dinamico non lineare a se'. Infatti con amp = 0 (rumore SPENTO) l'angolo si muove eccome:
+       |B| = 0.5  ->  60 -> 62.5 gradi     (deriva lenta)
+       |B| = 2.0  ->  60 -> 104.2 gradi    (supera l'isotropo)
+       |B| = 10.0 ->  60 -> 180.000 gradi  (ANTIPODALE esatto)
+  Cioe': la precessione mutua non e' neutra, e' ATTIVAMENTE DISORDINANTE, e a campo forte ha un
+  punto fisso ANTI-allineante a chi = 180.
+
+  IL VERDETTO NON CAMBIA, anzi si rafforza: in nessuna configurazione chi scende verso 0. Non solo
+  manca il "tira verso" (dissipazione allineante): c'e' uno "spinge via". La combinazione
+  precessione + rumore NON produce alcuna dissipazione allineante.
+====================================================================================================
+EXIT=0

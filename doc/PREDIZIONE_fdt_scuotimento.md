@@ -105,3 +105,89 @@ esattamente cio' che il test deve saper distinguere. Non accende `KURAMOTO_SU2`.
 scuotimento. Non conclude su olonomia o gravita'. E un test a due nodi **non e' il sistema**: dice
 cosa fa il meccanismo isolato, non cosa fa dentro la dinamica completa — dove infatti ci sono gia'
 tre stati misurati, tutti senza struttura.
+
+
+---
+
+# 6. ESITO — aggiunto il 2026-09-14 DOPO l'analisi e i test
+
+> Tutto sopra questa riga e' stato scritto e committato (`ad96669`) **prima**. Qui solo il risultato.
+
+## 6.1 — Il drift: la forma esatta
+
+Per `n' = (n + a g)/|n + a g|` con `g ~ N(0, I_3)`:
+
+```
+|n+ag|^-1 = 1 - a s - a^2 G/2 + (3/2) a^2 s^2 + O(a^3)        s = n.g ,  G = |g|^2
+E[g]=0 , E[s]=0 , E[s g]=n , E[G]=3 , E[s^2]=1
+                          ==>   E[n'] - n  =  -a^2 n  +  O(a^3)
+```
+
+Tre letture, tutte decisive:
+1. il drift e' **parallelo a `n`**: nessuna componente trasversa, **nessuna rotazione media**;
+2. dipende dal **solo `n`**: **nessuna traccia dei vicini `{n_k}`**;
+3. `|E[n']| = 1 - a^2` e' la contrazione del **risultante** -> **diffusione isotropa pura**.
+   Sulla sfera il drift a `O(a^2)` e' **NULLO**.
+
+Verifica numerica (4·10^6 campioni, errore statistico 5.0e-04):
+
+| amp | \|E[n']\| misurato | atteso `1-amp^2` | differenza | componente **trasversa** |
+|---|---|---|---|---|
+| 0.300 | 0.91010933 | 0.91000000 | 1.09e-04 | 2.32e-04 |
+| 0.100 | 0.99001025 | 0.99000000 | 1.03e-05 | 6.37e-05 |
+| 0.030 | 0.99909921 | 0.99910000 | 7.91e-07 | 8.98e-06 |
+| 0.013 | 0.99983113 | 0.99983100 | **1.28e-07** | 8.20e-06 |
+
+## 6.2 — Test 3a: solo rumore. L'angolo SALE.
+
+Due Bloch a 60 gradi, `amp = 0.013`, 200000 campioni:
+
+| passo | 0 | 10 | 50 | 100 | 300 | 1000 | 2000 | 3000 |
+|---|---|---|---|---|---|---|---|---|
+| chi (gradi) | 60.000 | 60.105 | 60.551 | 61.085 | 63.196 | 69.188 | 75.336 | 79.559 |
+
+Sale verso 90 (isotropo). **Non scende mai verso 0.** E `<cos chi>` segue la legge della diffusione
+pura `(1-amp^2)^(2k) cos(60)` entro ~1e-3.
+
+## 6.3 — Test 3b: **il reperto che non aveva previsto nessuno**
+
+| \|B\| | amp | chi ai passi 0 / 100 / 500 / 1000 / 2000 |
+|---|---|---|
+| 0.5 | **0.000** | 60.000 → 60.124 → 60.622 → 61.248 → **62.511** |
+| 0.5 | 0.013 | 60.000 → 60.669 → 63.650 → 67.565 → 74.628 |
+| 2.0 | **0.000** | 60.000 → 62.004 → 70.378 → 81.472 → **104.208** |
+| 2.0 | 0.013 | 60.000 → 62.510 → 72.484 → 84.090 → 102.215 |
+| 10.0 | **0.000** | 60.000 → 114.799 → 178.677 → 179.991 → **180.000** |
+| 10.0 | 0.013 | 60.000 → 114.412 → 170.506 → 170.625 → 170.613 |
+
+**Con il rumore SPENTO l'angolo non si conserva affatto.** Rodrigues conserva l'angolo fra **un**
+vettore e il **suo** asse; qui i due nodi ruotano **l'uno attorno all'altro simultaneamente**, e la
+coppia `(nA, nB)` non conserva nulla: e' un sistema dinamico non lineare a se', con un **punto fisso
+ANTI-allineante a chi = 180** a campo forte.
+
+> **La precessione mutua non e' neutra: e' attivamente DISORDINANTE.**
+
+## 6.4 — VERDETTO: **ESITO B**, come predetto
+
+Non solo manca il **"tira verso"** (dissipazione allineante): c'e' uno **"spinge via"**.
+
+> **Lo scuotimento NON contiene una dissipazione allineante. Un Kuramoto in questo sistema sarebbe
+> IMPOSTO, non emergente.**
+
+Ed e' escluso **per dimostrazione**, non solo per misura: una cosa che non legge i vicini non puo'
+allinearli, e l'espansione lo conferma nella forma esatta del drift.
+
+## 6.5 — Errore mio, corretto e non nascosto
+
+La riga di lettura che lo script stampava diceva *"con amp=0 la precessione CONSERVA l'angolo
+esattamente"*. **Falsa**, smentita da tutte e tre le configurazioni. L'avevo scritta nello script
+**prima** di girare: e' il commento stale contro cui mette in guardia il par.0 di CLAUDE.md, e
+l'ho prodotto io. Corretta nel sorgente **dichiarando la correzione** invece di cancellarla, e lo
+script rigirato da zero (seed fissi -> numeri identici).
+
+## 6.6 — Una pista aperta, non verificata
+
+Il vuoto si isotropizza in **~50 passi**, ma la sola diffusione a `amp = 0.013` ha tempo di
+decorrelazione `~1/amp^2 ~ 5900` passi. **Non torna di due ordini.** Il §6.3 suggerisce la
+spiegazione: **non e' il rumore a randomizzare in fretta, e' la precessione mutua.** Registrato
+come pista, **non verificato**.
