@@ -124,3 +124,76 @@ Non dira' nulla su **olonomia**, `W(r)` o gravita': quello e' il passo dopo, **s
 SI. Non concludera' sulla fisica (par.2.7: 300 passi, un seme): **ATTRIBUISCE** l'effetto di
 Kuramoto fra tre possibilita'. E non dira' che il fork funziona o non funziona: dira' se il
 **substrato** puo' avere struttura di Bloch quando si accende un allineamento locale.
+
+
+---
+
+# 6. ESITO — aggiunto il 2026-09-14 DOPO i run
+
+> Tutto quanto sta SOPRA questa riga e' stato scritto e committato (`1e0a82c`) **prima** di lanciare
+> i run. Qui sotto c'e' solo il risultato, e il confronto con la predizione.
+
+## 6.1 — K-frozen: **INERTE, ed esattamente come predetto**
+
+Non "quasi uguale" al braccio OFF: **byte-identico**.
+
+| confronto K-frozen vs OFF | esito |
+|---|---|
+| array confrontabili (stessa shape) | **34 / 34** — il confronto ESISTE |
+| `max\|A-B\|` | **0.000e+00** |
+| N | 3576 = 3576 |
+
+Kuramoto non ha fatto **letteralmente nulla**. L'algebra del §1 era giusta: sullo stato allineato
+`nb_bar = nb`, quindi `cross(nb, nb_bar) = 0`, quindi torque nullo. **Lo stato allineato e' un punto
+fisso anche per Kuramoto.** La predizione era falsificabile e non e' stata falsificata.
+*(Il controllo "34/34 stessa shape" e' li' apposta: senza, uno `0.000e+00` potrebbe voler dire
+"nessun confronto" — presidio di `CLAUDE.md` par.9.)*
+
+## 6.2 — K-noise: **NO-rumore. Kuramoto non vince sul vuoto.**
+
+| firma | RUMORE (null) | COLLASSO | **K-noise misurato** | verdetto |
+|---|---|---|---|---|
+| chi materia | 90.000 +- 39.171 | 0 +- 0 | **89.91 +- 39.23** | rumore |
+| chi p90 (densi) | 90.000 | 0 | **89.80** | rumore |
+| \|⟨n⟩\| / (1/sqrt(N)) | ~1 | ~60 | **0.91** | rumore |
+| ⟨n_i·n_j⟩ vicino (d~0.22) | ~0 | 1.0 | **0.0022** | rumore |
+| ⟨n_i·n_j⟩ lontano (d~13.9) | ~0 | 1.0 | **0.0007** | rumore |
+| calo vicino→lontano | ~0 | 0 | **0.0015** | nessun decadimento |
+
+Nessuna scala di dominio: la correlazione e' **piatta a zero** su tutte e 14 le distanze, da 0.22 a
+13.9. E stabile nel tempo: `|⟨n⟩|` oscilla fra 0.009 e 0.016 dai passi 50 a 300 senza tendenza.
+
+## 6.3 — MA Kuramoto NON e' inerte con il rumore: e' INEFFICACE
+
+Distinzione da non perdere. Con lo scuotimento acceso, Kuramoto **cambia la dinamica**:
+
+> N a 300 passi: ON (senza Kuramoto) = 3536 ; **K-noise = 4114** (**+578, +16.3%**)
+
+Il torque agisce e cambia la traiettoria — semplicemente **non organizza le direzioni di Bloch**.
+Non "non fa niente": **perde**. Coerente con l'ordine di grandezza scritto nella scommessa del §3:
+calcio del vuoto ~1.29 gradi/passo contro un torque `O(dt^1)`.
+
+## 6.4 — VERDETTO contro la PREDIZIONE
+
+| | predetto al §3 | misurato | coincide? |
+|---|---|---|---|
+| K-frozen | inerte | **byte-identico a OFF** | **SI** |
+| K-noise | "piu' probabile NO-rumore che SI" | **NO-rumore** | **SI** |
+
+> **Esito: NO su entrambi i bracci. Kuramoto e' REFUTATO come sorgente di struttura** in questa
+> configurazione, secondo il criterio dichiarato prima del dato.
+
+**Non c'e' nulla da dichiarare sulla provenienza** (§4): quel paragrafo serviva solo in caso di SI.
+Non essendoci struttura, non c'e' struttura semi-imposta di cui discutere l'onesta'.
+
+## 6.5 — Cosa resta aperto, e cosa NO
+
+Chiuso: Kuramoto non produce domini qui. I tre stati misurati del substrato sono ora **tre e tutti
+senza struttura**: congelato (chi=0), rumore (chi=90), rumore+Kuramoto (chi=90).
+
+**NON chiuso, e va detto:** 300 passi, **un seme**, e — soprattutto — **Kuramoto e' stato provato
+SOLO contro il rumore a piena ampiezza.** Il §6.3 dice che perde; non dice che perderebbe sempre.
+Se il calcio del vuoto fosse piu' debole, l'allineamento locale potrebbe vincere. Ma **abbassare
+l'ampiezza dello scuotimento sarebbe TARARE UNA MANOPOLA per ottenere l'effetto voluto** — esattamente
+il par.3 — e non si fa. Se un giorno l'ampiezza cambiasse per una ragione *derivata*, questa misura
+andrebbe rifatta.

@@ -176,6 +176,38 @@ QUESTA configurazione**. Esiste un flag documentato che muove `nb` per fisica (`
 accenderlo e' un meccanismo nuovo (par.1) e **una decisione di Luca**, non dell'esecutore.
 Stabilita' perfetta su entrambi i bracci: nessun NaN, `|psi|-1` ~ 4e-16, `max|x|` ~ 9.4, niente runaway.
 
+## ⚠ ESITO KURAMOTO (2026-09-14) — REFUTATO come sorgente di struttura. Tre stati, zero struttura.
+
+Predizione scritta e committata PRIMA dei run (`doc/PREDIZIONE_kuramoto.md`, commit `1e0a82c`).
+Esito **NO su entrambi i bracci**, coincidente con la predizione.
+
+| passo 300 | chi materia | chi p90 | \|⟨n⟩\|/(1/sqrt N) | ⟨n_i·n_j⟩ vicino → lontano |
+|---|---|---|---|---|
+| *riferimento RUMORE* | *90.000 +- 39.171* | *90.000* | *~1* | *~0 → ~0* |
+| *riferimento COLLASSO* | *0 +- 0* | *0* | *~60* | *1.0 → 1.0* |
+| ON (scuotimento) | 90.04 +- 39.17 | 89.86 | 1.50 | -0.0200 → 0.0004 |
+| OFF (niente) | 0.00 +- 0.00 | 0.00 | 59.72 | 1.0000 → 1.0000 |
+| **K-noise** | **89.91 +- 39.23** | **89.80** | **0.91** | **0.0022 → 0.0007** |
+| **K-frozen** | **0.00 +- 0.00** | **0.00** | **59.72** | **1.0000 → 1.0000** |
+
+- **K-frozen e' BYTE-IDENTICO a OFF** (34/34 array stessa shape, `max|A-B| = 0.000e+00`, N 3576 =
+  3576): Kuramoto non ha fatto **letteralmente nulla**. Confermata l'algebra pre-registrata — sullo
+  stato allineato `nb_bar = nb`, `cross(nb, nb_bar) = 0`, torque nullo. **Lo stato allineato e' un
+  punto fisso anche per Kuramoto.**
+- **K-noise = NO-rumore.** Autocorrelazione **piatta a zero su tutte e 14 le distanze** (0.22 → 13.9):
+  nessuna scala di dominio. `|⟨n⟩|` stabile fra 0.009 e 0.016 dai passi 50 a 300.
+- **MA Kuramoto non e' inerte col rumore: e' INEFFICACE.** N a 300 passi: ON = 3536, **K-noise =
+  4114 (+16.3%)**. Il torque agisce e cambia la traiettoria; semplicemente **non organizza i Bloch**.
+  Non "non fa niente": **perde** (calcio del vuoto ~1.29 gradi/passo contro un torque `O(dt^1)`).
+
+**Il substrato ha ora TRE stati misurati, tutti senza struttura di Bloch:** congelato (chi=0),
+rumore (chi=90), rumore+Kuramoto (chi=90). Il fork continua a non avere nulla da trasportare.
+
+**Aperto, e da non risolvere a manopola:** Kuramoto e' stato provato solo contro il rumore a piena
+ampiezza. Abbassare l'ampiezza dello scuotimento per far vincere l'allineamento sarebbe **tarare un
+parametro per ottenere l'effetto voluto** (par.3): non si fa. Se un giorno l'ampiezza cambiasse per
+una ragione DERIVATA, questa misura va rifatta.
+
 ## PROSSIMA AZIONE (dopo lo STRATO 1)
 1. **Run di fisica, non piu' sigilli tecnici**: >= 2000 passi, **piu' semi** (par.2.7), con e senza
    `--fork-su2-mem`. Prima domanda: **olonomia W(r)** secondo `doc/PROTOCOLLO_test_olonomia.md`

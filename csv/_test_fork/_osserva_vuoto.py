@@ -50,6 +50,8 @@ def main():
     ap.add_argument("--passi", type=int, default=2000)
     ap.add_argument("--ogni", type=int, default=100)
     ap.add_argument("--tag", default="on")
+    ap.add_argument("--kuramoto", action="store_true", dest="kuramoto",
+                    help="accende --kuramoto-su2 (allineamento locale alla media SU(2) dei vicini).")
     ap.add_argument("--regime-det", action="store_true", dest="regime_det",
                     help="braccio OFF: --regime deterministico, che cambia SOLO SCUOTIMENTO "
                          "(True->False). Verificato confrontando TUTTI i globali del modulo.")
@@ -67,6 +69,8 @@ def main():
             "--calore-scal", "--deparam-orologio", "--verlet",
             "--fork-su2", "--fork-su2-mem",
             "--csv", base + ".cond.csv", "--sync-db", base + ".pkl", "--db-cleanup"]
+    if a.kuramoto:
+        argv += ["--kuramoto-su2"]
     if a.regime_det:
         argv += ["--regime", "deterministico"]
 
@@ -173,6 +177,7 @@ def main():
         r["FORK_SU2_MEM"] = int(S.FORK_SU2_MEM)
         r["SCUOTIMENTO"] = int(S.SCUOTIMENTO)
         r["SYNC_UPDATE"] = int(S.SYNC_UPDATE)
+        r["KURAMOTO_SU2"] = int(S.KURAMOTO_SU2)
         righe.append(r)
 
     def spia(self):
@@ -183,7 +188,7 @@ def main():
             # i globali VIVI, campionati a ogni passo del batch: se cambiassero a meta' run lo si
             # vedrebbe qui (l'insieme avrebbe piu' di un elemento).
             flag_visti.add((bool(S.FORK_SU2), bool(S.FORK_SU2_MEM),
-                            bool(S.SCUOTIMENTO), bool(S.SYNC_UPDATE)))
+                            bool(S.SCUOTIMENTO), bool(S.SYNC_UPDATE), bool(S.KURAMOTO_SU2)))
             if not a.no_osserva and (stato["k"] == 1 or stato["k"] % a.ogni == 0):
                 misura(self, stato["k"])
 
@@ -192,7 +197,8 @@ def main():
 
     for f in sorted(flag_visti):
         print("[osserva-flag] tag=%s seed=%d  FORK_SU2=%s FORK_SU2_MEM=%s SCUOTIMENTO=%s "
-              "SYNC_UPDATE=%s   (letti DURANTE il run)" % ((a.tag, a.seed) + f), flush=True)
+              "SYNC_UPDATE=%s KURAMOTO_SU2=%s   (letti DURANTE il run)"
+              % ((a.tag, a.seed) + f), flush=True)
     if len(flag_visti) > 1:
         print("[osserva-flag] ATTENZIONE: i flag sono CAMBIATI durante il run.", flush=True)
 
