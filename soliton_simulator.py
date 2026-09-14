@@ -771,6 +771,25 @@ FORK_SU2 = False        # [FORK SU(2) - STRATO 0] ARC-CONNECTION non-abeliana ne
                         # Ad allineati N/2 = I -> riduzione ESATTA al ramo scalare (canale di fase/EM preservato);
                         # ad antipodali N = 0 -> arco spento senza inventare assi. Zero parametri nuovi.
                         # Richiede --campo-spinoriale (il trasporto agisce su _psi_spinor). Default off = byte-identico.
+FORK_SU2_MEM = False    # [FORK SU(2) - STRATO 1] CONNESSIONE CON MEMORIA: N_ij nasce dai Bloch RITARDATI
+                        # n(t-tau) invece che da quelli dell'ISTANTE. tau = d/cs (tempo-luce d'arco):
+                        # nessun numero nuovo, d e cs esistono gia'.
+                        # PERCHE': lo Strato 0 e' INERTE per TEOREMA, non per bug. Se i Bloch che
+                        # costruiscono la connessione sono quelli DEGLI STESSI stati trasportati e allo
+                        # STESSO istante, |psi_i> e' autovettore di (n_i.sigma) con autovalore +1, quindi
+                        # <psi_i|N_ij|psi_j> = 2<psi_i|psi_j> ESATTO (misurato 1.57e-15 su 200000 coppie,
+                        # csv/_seal_fork/_reperto_inerzia.py) e la forza non cambia di un bit.
+                        # LA CURA E' LA CAUSALITA', non una taratura: una mappa costruita ORA, dagli stati
+                        # di ORA, non puo' muovere gli stati di ORA. Col ritardo psi(t) NON e' piu'
+                        # autovettore di n(t-tau).sigma -> il teorema non si applica -> la forza cambia.
+                        # COME: rilassamento del VERSORE di Bloch (non della matrice: un blend lineare di
+                        # matrici uscirebbe da SU(2), par.4), slerp GEODETICO sulla sfera con
+                        # alpha = 1 - exp(-dt/tau) = passo ESATTO di dn/dt = (n_cur - n_ret)/tau. PRIMO
+                        # ORDINE, quindi esponenziale esatto e MAI Verlet (par.4). Il TRASPORTO resta
+                        # sugli spinori CORRENTI: cambia solo DA QUANDO viene la connessione.
+                        # A RIPOSO n_ret = n_cur -> inerte -> si riduce allo Strato 0 (e quindi allo
+                        # scalare): da fermo la memoria non inventa forza. Per tau->0, alpha->1, idem.
+                        # Richiede --fork-su2 (da solo verrebbe IGNORATO con avviso). Default off = byte-identico.
 SPIN_FEEDBACK = False   # FEEDBACK LOCALE SPINORE->ARCHI: usa l'overlap complesso dei lift sugli archi
                         # come flusso di fase antisimmmetrico. Richiede --spinore-vivo; default off
                         # per A/B. Non impone alcuna cucitura o olonomia: la misura deve emergere.
@@ -811,6 +830,16 @@ class Rete:
         # variabile FISICA primaria (orologio proprio de Broglie + precessione), e il Bloch _nb
         # ne e' la PROIEZIONE (nb = psi^dag sigma psi). Vuoto = inattivo (path storico: _nb primario).
         self._psi_spinor = np.zeros((0, 2), complex)
+        # [FORK SU(2) - STRATO 1] BLOCH RITARDATO per nodo, n(t-tau): il PASSATO da cui nasce la
+        # connessione quando FORK_SU2_MEM e' attivo. None = non ancora nato (al primo passo viene
+        # inizializzato al Bloch corrente: non c'e' ancora passato, quindi nessun effetto).
+        self._nb_ret = None
+        # cs del passo PRECEDENTE, cachato per tau = d/cs: la coppia gira PRIMA del settore metrico,
+        # quindi il cs del passo corrente non esiste ancora quando serve. E' un RITARDO: va bene.
+        self._cs_nodo_prev = None
+        # ritmo del tempo proprio locale del passo corrente (None = orologio globale), esposto da
+        # step() perche' il rilassamento della memoria si misuri in dt_n = DT*r e non nel tic globale.
+        self._r_corrente = None
         # PROFILO DI PERCORRENZA (struttura a nastro delle specifiche originali).
         # Ogni solitone e' una sinusoide che, percorsa lungo il suo profilo, esegue
         # un salto NETTO di 180 gradi (pi) nel punto d'incrocio con l'asse al mediano.
@@ -1075,6 +1104,12 @@ class Rete:
             self._nb = np.vstack([self._nb, self._nb[src]])
             if hasattr(self, "_nb_prec") and self._nb_prec is not None and len(self._nb_prec) >= n0:
                 self._nb_prec = np.vstack([self._nb_prec, self._nb_prec[src]])
+        # [FORK SU(2) - STRATO 1] il Bloch RITARDATO e' memoria di NODO: il figlio eredita il passato
+        # del padre, esattamente come _nb_prec. Senza questo, al passo dopo len(_nb_ret) != n e la
+        # memoria verrebbe RESETTATA a ogni mitosi (ritardo perso proprio dove il sistema evolve di piu').
+        _nbr_er = getattr(self, "_nb_ret", None)
+        if _nbr_er is not None and len(_nbr_er) >= n0:
+            self._nb_ret = np.vstack([_nbr_er, _nbr_er[src]])
         if len(self.omega_s) >= n0:
             self.omega_s = np.vstack([self.omega_s, self.omega_s[src]])
         if len(self._psi_spinor) >= n0:
@@ -2290,6 +2325,103 @@ class Rete:
         transizione = 0.5 * (1.0 + np.tanh(1.0 - u_nodo))
         return cs_floor + (CS_M - cs_floor) * transizione
 
+    def _bloch_ritardato(self, nb_cur, ii, jj):
+        """[FORK SU(2) - STRATO 1] Aggiorna e restituisce il BLOCH RITARDATO n(t-tau) per nodo.
+
+        E' l'unico pezzo dello Strato 1: la connessione dello Strato 0 e' identica, cambia solo da
+        QUANDO vengono i Bloch che la costruiscono. Il trasporto agisce sugli spinori CORRENTI.
+
+        LEGGE (primo ordine, quindi passo ESATTO e MAI Verlet, par.4):
+            dn_ret/dt = (n_cur - n_ret) / tau          tau = d/cs (tempo-luce d'arco)
+            alpha = 1 - exp(-dt_n/tau)                 dt_n = DT*r = TEMPO PROPRIO del nodo
+        Il tic e' quello LOCALE, non il DT di coordinata: tau e' tempo proprio, e usare DT
+        cancellerebbe la dipendenza dall'orologio del luogo (frame preferito). Sigillo S7.
+        e il passo si esegue come SLERP GEODETICO sulla sfera, non come blend lineare: n_ret deve
+        restare un VERSORE (|n| = 1). Si rilassa il BLOCH, NON la matrice U/N: un blend lineare di
+        matrici uscirebbe da SU(2) (par.4). La fase resta sullo stato corrente; qui vive solo la
+        direzione.
+
+        LIMITI (li verifica il sigillo S2/S6):
+          * tau -> 0  => alpha -> 1 => n_ret = n_cur  => si riduce ESATTAMENTE allo Strato 0;
+          * sistema a RIPOSO (Bloch fermi) => n_ret resta = n_cur => inerte => scalare.
+        Cioe': la memoria "morde" solo dove la configurazione evolve entro il tempo-luce tau.
+
+        LOCALE PURA (par.4): d_nodo e' la media degli archi INCIDENTI al nodo, cs e' per nodo.
+        Nessuna media globale, nessun parametro nuovo (d, cs, DT, LAM esistono gia').
+
+        NON e' pure-read: aggiorna `self._nb_ret` (e' lo stato della memoria). Non consuma `net.rng`.
+        Chiamata UNA volta per passo, dall'unico call-site di `_coppia_interferenza`."""
+        n = self.n
+        nb_cur = np.asarray(nb_cur, float)[:n]
+        nbr = getattr(self, "_nb_ret", None)
+        if nbr is None or len(nbr) != n:
+            # Primo passo (o conteggio nodi cambiato fuori dalla mitosi): non c'e' ANCORA un passato.
+            # Ritardato := corrente -> nessun effetto. E' corretto: la causalita' non inventa memoria.
+            self._nb_ret = nb_cur.copy()
+            return self._nb_ret
+        nbr = np.asarray(nbr, float)
+
+        # --- tau = d/cs, per nodo -----------------------------------------------------------
+        dd = self.d
+        if len(ii) and len(dd) == len(ii):
+            grado = (np.bincount(ii, minlength=n) + np.bincount(jj, minlength=n)).astype(float)
+            somma = (np.bincount(ii, weights=dd, minlength=n) +
+                     np.bincount(jj, weights=dd, minlength=n))
+            d_nodo = somma / np.maximum(grado, 1.0)
+            d_nodo[grado <= 0] = LAM        # nodo isolato: nessun arco da cui leggere la scala
+        else:
+            d_nodo = np.full(n, LAM)        # fallback: LAM e' la scala gia' esistente (par.3)
+        d_nodo = np.maximum(d_nodo, 1e-12)
+        csp = getattr(self, "_cs_nodo_prev", None)
+        if csp is not None and len(csp) >= n:
+            cs_nodo = np.maximum(np.asarray(csp, float)[:n], 1e-12)   # cs di UN PASSO FA (e' un ritardo)
+        else:
+            # --cs-dinamico OFF (o primo passo): cs e' costante = CS_M. Alle densita' attuali cs e'
+            # comunque quasi-costante (I~0.05 contro soglia ~400), quindi tau ~ d/CS_M: il RITARDO
+            # esiste, ma la sua VARIAZIONE spaziale (la curvatura) e' debole finche' cs non e' vivo.
+            cs_nodo = np.full(n, CS_M)
+        tau = np.maximum(d_nodo / cs_nodo, 1e-30)
+        # Il tic con cui si rilassa e' il TEMPO PROPRIO del nodo, dt_n = DT*r, non DT. tau = d/cs e'
+        # tempo proprio: rilassarlo col tempo di COORDINATA mescolerebbe due frame e cancellerebbe la
+        # dipendenza dall'orologio locale, cioe' imporrebbe una foliazione globale sincrona a un
+        # processo locale. Tutto il resto della fisica integra gia' in dt_n/dt_e (phivel, tw): DT nudo
+        # vive solo nel conteggio dei sottopassi CFL. Un nodo con r piccolo (tempo dilatato) ricorda
+        # piu' a lungo, ed e' esattamente quello che deve fare.
+        r_loc = getattr(self, "_r_corrente", None)
+        if r_loc is None or len(r_loc) < n:
+            dt_n = np.full(n, DT)           # orologio globale (TAU_LOC = 0): r == 1 -> dt_n = DT
+        else:
+            dt_n = DT * np.asarray(r_loc, float)[:n]
+        alpha = 1.0 - np.exp(-dt_n / tau)   # rilassamento ESATTO, non un eulero esplicito
+
+        # --- passo geodetico sulla sfera (slerp) --------------------------------------------
+        dot = np.clip(np.sum(nbr * nb_cur, axis=1), -1.0, 1.0)
+        Om = np.arccos(dot)
+        sinOm = np.sin(Om)
+        # Due degenerazioni NUMERICHE (non fisiche, non soglie tarate): assi coincidenti (Om~0, lo
+        # slerp e' 0/0) e assi antipodali (Om~pi, sin(Om)~0: NON esiste una geodetica unica). In
+        # entrambe si usa l'interpolazione lineare, poi si normalizza.
+        lineare = (Om < 1e-6) | (sinOm < 1e-12)
+        a = alpha[:, None]
+        lin = (1.0 - a) * nbr + a * nb_cur
+        sl = (nbr * np.sin((1.0 - alpha) * Om)[:, None] +
+              nb_cur * np.sin(alpha * Om)[:, None]) / np.maximum(sinOm, 1e-30)[:, None]
+        out = np.where(lineare[:, None], lin, sl)
+        nor = np.linalg.norm(out, axis=1)
+        morto = nor <= 1e-12                # antipodali esatti a meta' strada: l'interpolazione si
+        if np.any(morto):                   # annulla. Nessuna direzione da inventare: resta il presente.
+            out[morto] = nb_cur[morto]
+            nor[morto] = 1.0
+        out = out / np.maximum(nor, 1e-30)[:, None]
+        # LIMITE tau->0 preso ALLA LETTERA: alpha = 1 significa "nessuna memoria", il ritardato E' il
+        # corrente. Senza questa riga la ri-normalizzazione qui sopra sporcherebbe l'ultimo bit e la
+        # riduzione allo Strato 0 sarebbe 1e-16 invece che 0.000e+00 (sigillo S2).
+        pieno = alpha >= 1.0
+        if np.any(pieno):
+            out[pieno] = nb_cur[pieno]
+        self._nb_ret = out
+        return out
+
     def _coppia_interferenza(self, A, z):
         """[FASE 3] Coppia di fase sugli archi. Ramo OFF: interferenza SCALARE
         K_C*Im(conj(z) (mat(A)@z)) con z=e^{i phi} (identica al canonico). Ramo CAMPO_SPINORIALE:
@@ -2319,8 +2451,15 @@ class Rete:
                                     2.0 * np.imag(np.conj(_a) * _b),
                                     np.abs(_a) ** 2 - np.abs(_b) ** 2], axis=1)
                     _nb = _nb / np.maximum(np.linalg.norm(_nb, axis=1), 1e-30)[:, None]
+                    # [STRATO 0] la connessione nasce dall'ISTANTE -> INERTE per teorema (vedi
+                    # FORK_SU2_MEM). [STRATO 1] nasce dal PASSATO n(t-tau) -> il teorema non si
+                    # applica. Cambia SOLO la sorgente della connessione: il trasporto qui sotto
+                    # resta sugli spinori CORRENTI _a,_b, e la freccia causale resta spinore -> link.
+                    _nb_conn = _nb
+                    if FORK_SU2_MEM:
+                        _nb_conn = self._bloch_ritardato(_nb, _ii, _jj)
                     # N_ij trasporta n_j -> n_i: il verso giusto per Im<psi_i| N_ij |psi_j>.
-                    _N = self._link_su2_N(_nb[_ii], _nb[_jj]) * 0.5   # il /2: N/2 = I ad allineati
+                    _N = self._link_su2_N(_nb_conn[_ii], _nb_conn[_jj]) * 0.5   # il /2: N/2 = I ad allineati
                     _N00 = A * _N[:, 0, 0]; _N01 = A * _N[:, 0, 1]
                     _N10 = A * _N[:, 1, 0]; _N11 = A * _N[:, 1, 1]
                     # direzione opposta = N_ji = N_ij^dag (hermitiana: conserva l'azione-reazione)
@@ -2355,6 +2494,13 @@ class Rete:
             self._psi_prec = self.psi.copy()
             if CAMPO_SPINORIALE and hasattr(self, "psi_spin") and len(getattr(self, "psi_spin", [])) == self.n:
                 self._psi_spin_prec = self.psi_spin.copy()   # [FASE 5] snapshot per il ritmo spinoriale (4pi)
+        if FORK_SU2_MEM:
+            # [FORK SU(2) - STRATO 1] il rilassamento della memoria vive nel TEMPO PROPRIO del nodo
+            # (dt_n = DT*r), non nel tic di COORDINATA globale DT: tau = d/cs e' tempo proprio, e
+            # mescolare i due frame infilerebbe la foliazione sincrona globale dentro un processo
+            # locale (un frame preferito, un "etere"). `r = None` = orologio globale, cioe' r == 1.
+            # Scritto solo col flag ON, cosi' la baseline resta byte-identica.
+            self._r_corrente = r
         # MOD 5.3a (--tempo-segno): VERSO del tempo dalla MATERIA/ANTIMATERIA COERENTE (Feynman-Stuckelberg).
         # s_k = 1+(perc_chi-1)*m_coer, m_coer = coerenza col campo locale (materia coerente inverte col segno;
         # vuoto incoerente -> +1 avanti). Da stato committato t-1 (perc_chi, phi, Psi). Firma solo #3-6.
@@ -2614,6 +2760,11 @@ class Rete:
         # razionale del campo: non viene introdotto un numero minimo arbitrario.
         if CS_DINAMICO:
             cs_nodo = self._cs_nodo(I, w)
+            if FORK_SU2_MEM:
+                # [FORK SU(2) - STRATO 1] cache per tau = d/cs. La coppia gira PRIMA di questo punto,
+                # quindi al passo dopo leggera' il cs di UN PASSO FA: e' un ritardo dentro un
+                # meccanismo di ritardo, coerente e innocuo. Scritta solo col flag ON (byte-identita').
+                self._cs_nodo_prev = cs_nodo.copy()
             # Collo di bottiglia causale: media armonica, non media aritmetica.
             cs_arco = (2.0 * cs_nodo[i] * cs_nodo[j] /
                        np.maximum(cs_nodo[i] + cs_nodo[j], 1e-12))
@@ -4490,7 +4641,7 @@ def _applica_flag(a):
     global net
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
     if getattr(a, "tau_d0", False):
@@ -4575,6 +4726,20 @@ def _applica_flag(a):
         print("[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). "
               "Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; "
               "antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).")
+    FORK_SU2_MEM = bool(getattr(a, "fork_su2_mem", False)) # [FORK SU(2) STRATO 1] connessione con memoria: default off
+    if FORK_SU2_MEM and not FORK_SU2:
+        # SCELTA DOCUMENTATA: si IGNORA, non si forza FORK_SU2=True. Accendere da soli un meccanismo
+        # che l'utente non ha chiesto violerebbe "un interruttore alla volta" (par.1); lasciare
+        # FORK_SU2_MEM=True sarebbe invece uno stato INCOERENTE (memoria senza connessione su cui
+        # vivere). Stessa convenzione dell'avviso --fork-su2 senza --campo-spinoriale qui sopra.
+        print("[fork-su2-mem] AVVISO: richiede --fork-su2 (la memoria vive sulla connessione dello Strato 0). IGNORATO, flag riportato a OFF.")
+        FORK_SU2_MEM = False
+    if FORK_SU2_MEM:
+        print("[fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, "
+              "zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, "
+              "quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp "
+              "geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> "
+              "riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.")
     TEMPO_SEGNO = bool(getattr(a, "tempo_segno", False)) # MOD 5.3a+5.3b: verso dalla materia/antimateria coerente + magnitudine torsionale
     if TEMPO_SEGNO and not (CAMPO_SPINORIALE and SPINORE_CORRETTO):
         raise SystemExit("[errore] --tempo-segno richiede --campo-spinoriale + --spinore-corretto (il segno di doppia-copertura e la coerenza vivono li')")
@@ -4885,6 +5050,16 @@ def _cli():
                         "l'OVERLAP DI SPIN, non un parametro: e' cio' che resta non normalizzando il trasporto. "
                         "Allineati -> N/2 = I -> riduzione ESATTA al ramo scalare; antipodali -> N = 0. Zero parametri "
                         "nuovi. Richiede --campo-spinoriale. Default off = byte-identico.")
+    p.add_argument("--fork-su2-mem", action="store_true", dest="fork_su2_mem",
+                   help="[FORK SU(2) STRATO 1] CONNESSIONE CON MEMORIA: la connessione N_ij non nasce piu' dai Bloch "
+                        "dell'ISTANTE ma da quelli RITARDATI n(t-tau), con tau = d/cs (tempo-luce dell'arco, zero "
+                        "parametri nuovi). Serve a rompere il TEOREMA DI INERZIA dello Strato 0: costruita dagli stessi "
+                        "stati che trasporta e nello stesso istante, la connessione di Berry e' l'identita' sull'overlap "
+                        "e la forza non cambia di un bit (misurato 1.57e-15). Col ritardo psi(t) non e' piu' autovettore "
+                        "di n(t-tau).sigma e la forza cambia: e' CAUSALITA' (cono di luce), non una taratura. Il Bloch "
+                        "ritardato rilassa verso il corrente con slerp geodetico, alpha = 1-exp(-dt/tau) (passo esatto di "
+                        "primo ordine, mai Verlet). A riposo, o per tau->0, torna allo Strato 0. Richiede --fork-su2. "
+                        "Default off = byte-identico.")
     p.add_argument("--kuramoto-su2", action="store_true", dest="kuramoto_su2",
                    help="KURAMOTO SU(2) NON-ABELIANO (zero parametri): ruota lo SPINORE INTERO verso la media SU(2) "
                         "dei vicini psi_bar=(wI@psi)/|.| con rotazione geodetica attorno all'asse VARIABILE nb x nb_bar "
@@ -5922,7 +6097,7 @@ def batch_condensazione(a):
             # _rho_sorgente, _nb_grav) e lo stato RNG (se una misura consuma random). Snapshot+restore
             # garantiscono byte-identita' della fisica con/senza diaglog.
             _snap_rng = net.rng.bit_generator.state
-            _snap_fisica = {k: getattr(net, k) for k in ('psi', '_psi_prec', '_spinor_lift', '_psi_spinor', '_nb', '_nb_prec', 'omega_s', 'phi_s', 'psi_spin', 'rho_spin', '_psi_spin_prec') if hasattr(net, k)}
+            _snap_fisica = {k: getattr(net, k) for k in ('psi', '_psi_prec', '_spinor_lift', '_psi_spinor', '_nb', '_nb_prec', '_nb_ret', 'omega_s', 'phi_s', 'psi_spin', 'rho_spin', '_psi_spin_prec') if hasattr(net, k)}
             d = _diag_completa(net, _step_glob); d['step'] = _step_glob
             # Tracking esplicito del picco costruttivo: usa conc_nodi, che include
             # i figli della mitosi, e la coorte solo come fallback iniziale.
@@ -5980,7 +6155,7 @@ def batch_condensazione(a):
             # cache campo-spinoriale + RNG), cosi' --ogni NON contamina il tempo proprio (ritmo() al passo
             # dopo legge self.psi/_psi_prec/_psi_spin_prec).
             _snap_cond_rng = net.rng.bit_generator.state
-            _snap_cond = {k: getattr(net, k) for k in ('psi', '_psi_prec', '_spinor_lift', '_psi_spinor', '_nb', '_nb_prec', 'omega_s', 'phi_s', 'psi_spin', 'rho_spin', '_psi_spin_prec') if hasattr(net, k)}
+            _snap_cond = {k: getattr(net, k) for k in ('psi', '_psi_prec', '_spinor_lift', '_psi_spinor', '_nb', '_nb_prec', '_nb_ret', 'omega_s', 'phi_s', 'psi_spin', 'rho_spin', '_psi_spin_prec') if hasattr(net, k)}
             n = net.n
             idxc = _regione_centrale(net)
             net.calcola_psi(); I2 = np.abs(net.psi[:n])**2
