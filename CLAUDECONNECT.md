@@ -746,3 +746,224 @@ lo Strato 1 vivevano **solo** in `STATO_CLAUDE_fork-su2.md`, che e' **locale al 
 merge o a un branch abbandonato, persi. Portarli nella narrazione madre li mette al sicuro nel
 **racconto durevole**. I messaggi di commit dicono *cosa* e' cambiato; solo qui sta **come ci si e'
 arrivati**, e i due errori del §45 e del §46 valgono piu' del risultato.
+
+### §50 — L: il PASSO 0 prima del run lungo — e A SBAGLIA, poi si corregge — PRESIDIO
+**L** chiede un controllo gratis prima di spendere ore: *"`SYNC_UPDATE` e `SCUOTIMENTO` sono ATTIVI
+nella config del fork?"* (la ROADMAP avverte: se spenti, la degenerazione dei Bloch non si rompe).
+
+**A risponde: "lo scuotimento dei Bloch non gira".** **E' FALSO.** A aveva cercato il pattern
+`SYNC_UPDATE and SCUOTIMENTO`, trovato tre occorrenze tutte nel ramo sincrono, e **concluso
+dall'assenza**. Non aveva cercato il ramo complementare, che esiste a `:1796`:
+`if SCUOTIMENTO and not SYNC_UPDATE:` -> `self._nb += rng.normal(0,1,(n,3)) * amp` (`:1803`).
+
+Il gate non e' una congiunzione che spegne: e' un **DISPATCH** fra due implementazioni della stessa
+legge, una per schema di aggiornamento. **Errore di METODO**, non di lettura: conclusione da un
+`grep` di un solo pattern invece che dalla mappa completa delle sorgenti stocastiche.
+Conseguenza: i bracci certificati 5.3a/b/c e i sigilli dello Strato 0/1 **avevano il vuoto ACCESO**.
+
+### §51 — INDAGINE sullo scuotimento (commit 515aaf7) — DIMOSTRATO
+Su richiesta di **L**, indagine di sola lettura. `doc/INDAGINE_scuotimento.md`.
+
+**Il gate `SYNC_UPDATE` e' STRUTTURALE e DOCUMENTATO, non accidentale.** Le ragioni sono nel codice
+(`:2023`): *"il rumore e' un aggiornamento t->t+1: non puo' contaminare il campo B letto dalla
+snapshot"*. In Jacobi il rumore deve stare **al commit** o corromperebbe la snapshot che i vicini
+leggono; in asincrono non c'e' snapshot da proteggere, quindi sta **a monte** su `_nb`.
+
+**Ma i due punti d'iniezione non sono equivalenti.** Nel ramo asincrono il rumore colpisce
+`self._nb`, che a `:2034` viene **sovrascritto** dalla proiezione del primario: raggiunge
+`_psi_spinor` solo via il torque `cross(B, nb)`, cioe' **O(amp·|B|·dt)** invece di **O(amp)**.
+Non e' "acceso contro spento": e' **diretto contro mediato**.
+
+**Ampiezza misurata** (`Lam = 1.688e-04`): vuoto `amp = 1.2993e-02` (calcio ~**1.29 gradi/passo**),
+picco `1.4928e-03` (~**0.148 gradi/passo**), rapporto **8.70**. La legge *"forte nel vuoto, debole
+nella materia"* e' verificata numericamente.
+
+**TRAPPOLA `--regime` (reperto):** `:117-121` (modulo, sempre eseguito) mette `SCUOTIMENTO=True` per
+"deterministico"; `:6246` (`_applica_regime`, solo se `--regime` e' passato) lo mette **False** per
+LO STESSO "deterministico". Passare il flag *"per essere espliciti"* **spegne il vuoto in silenzio**.
+**Opportunita':** `--regime deterministico` fissa `G_PH`, `TAU_A`, `_CALORE_INIT` agli stessi valori
+di modulo -> **l'unica differenza e' `SCUOTIMENTO`** -> e' un interruttore A/B a **costo zero di codice**.
+
+### §52 — AUDIT del corpus, e A ci SBAGLIA DENTRO (commit 8573d15, corretto 0e2fe19) — PRESIDIO
+**L** chiede un audit: cosa nel corpus e' **MISURATO**, cosa solo **ASSERITO**, cosa **SMENTITO**.
+`doc/AUDIT_misurato_vs_asserito.md`, che elenca **senza correggere le fonti** (decisione di L).
+
+**[SMENTITO] x2:** `PROTOCOLLO:41` (*"centro: massa coerente -> Bloch allineati -> chi~0"*) contro
+**chi = 90.14 +- 39.35** misurato sugli archi piu' densi; e `STATO:112`/`:433` (*"senza
+SYNC_UPDATE/SCUOTIMENTO la degenerazione non si rompe"*) contro il ramo `:1796` che gira eccome.
+**[ASSERITO] x4**, capofila *"ISOTROPIA GIA' VERIFICATA"* (`ROADMAP:46`), che cita l'**apodosi di un
+periodo ipotetico** marcato `# APERTO` — e la ROADMAP si contraddice da sola otto righe dopo (`:54`),
+elencando l'isotropia fra i sigilli **da fare**.
+
+**MA A SBAGLIA IL PARAGRAFO PIU' IMPORTANTE.** Aveva scritto che `spin_ovl = 0.5` *"era un segnale
+nei dati, letto come una tesi diversa, e nessuno gli ha posto quella domanda"*. **L verifica dal
+disco e corregge:** `STATO:513` dice testualmente *"spin_overlap=0.5 **(direzione random)**"* e lo
+usa **come prova** del verdetto (B) abeliano — che significa esattamente *disordinato*. **La domanda
+fu posta e risposta bene.** A aveva cercato un terzo episodio che completasse lo schema del "filo
+comune" e **costruito un reperto inesistente**. Bastava leggere `STATO:513` per intero.
+
+**La correzione rende il reperto PIU' GRANDE, non piu' piccolo.** Non e' nuovo il **fatto** (Bloch
+casuali, noto da 800 passi e tre bracci): e' nuova la **CONSEGUENZA** — quelle direzioni casuali si
+estendono **DENTRO la materia**, e da li' segue per pura geometria che **la firma del PROTOCOLLO non
+puo' esistere**: con Bloch casuali anche nel nucleo, `W(r)` e' piatto **per costruzione**.
+Il §2.7 corretto e' **nel testo, marcato**, non cancellato; e il §5 dice: *"se un audit sull'onesta'
+si assolve da solo, e' peggiore dei documenti che critica"*.
+
+### §53 — Tre presidi in CLAUDE.md par.9 (commit 1a72304) — REGOLE
+Dalla lezione, tre regole permanenti dove si rileggono a ogni sessione:
+1. **Prima di leggere una statistica riassuntiva, chiediti che valore avrebbe SE NON CI FOSSE
+   NIENTE.** Coi tre casi reali e i loro valori sotto ipotesi nulla, cosi' `0.5` e `90 +- 39` si
+   riconoscono **a vista** come "Bloch casuali".
+2. **Quando si apre una domanda nuova, ri-interroga le misure vecchie.** Una misura letta bene per
+   la domanda di allora puo' essere decisiva per una posta mesi dopo.
+3. **Un pattern che spiega tutto va verificato contro la fonte PRIMA di scriverlo.** *"L'entusiasmo
+   per uno schema elegante e' una fonte di errore quanto la disattenzione."*
+
+### §54 — REPERTO: i Bloch non hanno dinamica propria (commit a04ee3d) — DIMOSTRATO
+A/B a variabile singola (`--regime deterministico`, sigillato O2: cambia **solo** `SCUOTIMENTO`),
+300 passi, osservatore sigillato pure-read (O1: `0.000e+00`).
+
+| | ON (scuotimento) | OFF |
+|---|---|---|
+| chi materia / vuoto / p90 | 90.04 / 90.06 / 89.86 | **0.00 / 0.00 / 0.00** |
+| \|⟨n⟩\| | ~1/sqrt(N) | **1.000000 esatto, su (0,0,+1)** |
+
+**Non e' nessuna delle due ipotesi previste, e' la terza: senza scuotimento i Bloch NON SI MUOVONO
+AFFATTO.** `(0,0,+1)` **e' la condizione iniziale** (`:1778`, *"nuovi nodi al polo"*), immobile dal
+passo 1 al 300 mentre N cresce 80 -> 3567. Non e' un collasso verso l'allineamento: **il sistema
+parte sul punto fisso e non se ne muove mai.** Punto fisso **esatto**: se tutti gli `nb` sono uguali,
+`B` e' parallelo a `nb`, quindi `cross(B, nb) = 0`, quindi nessuna rotazione.
+
+> **ATTRIBUZIONE: 100% lo scuotimento. La dinamica deterministica non contribuisce NULLA alla
+> direzione dei Bloch — ne' ordine ne' disordine. Il campo di Bloch e' PURO RUMORE DI VUOTO.**
+
+**Era nel codice, in quattro punti** (`:761`, `:1982`, `:4718`, `:5067`), su `KURAMOTO_SU2`:
+*"nb **SI muove** (gravita' fisica, voluto: convergenza-dt, **non 6.7e-16**)"*. Cioe': **senza**
+`--kuramoto-su2`, `nb` si muove di ~6.7e-16 = arrotondamento. E la config del fork **non l'ha mai
+avuto**. Secondo caso del presidio §53.2 — solo che qui la risposta stava nei **commenti del codice**.
+
+### §55 — KURAMOTO: predizione PRIMA, poi REFUTATO (commit 1e0a82c + dc03a80) — NEGATIVO, DIMOSTRATO
+**Predizione scritta e committata PRIMA dei run**, con i valori di riferimento fissati.
+**A cambia il disegno del mandato, con ragione verificata dal codice:** il torque e'
+`cross(nb, nb_bar)` (`:1988`), e sullo stato allineato `nb_bar = nb` -> torque **nullo**. *"Lo stato
+allineato e' un punto fisso ANCHE per Kuramoto: una forza di allineamento non ha nulla da allineare
+quando tutto e' gia' allineato."* Quindi due bracci, dichiarati prima: **K-frozen** (controprova
+dell'algebra) e **K-noise** (l'esperimento vero, con l'unica variabile = Kuramoto).
+
+**Terza firma nuova: l'autocorrelazione `⟨n_i·n_j⟩` vs distanza**, perche' `chi` e `|⟨n⟩|` non
+bastano — un chi basso e' compatibile **sia** coi domini **sia** col collasso: e' la
+**decorrelazione a distanza** a separarli. **Validata sui due stati di natura nota** (da ~0 ovunque
+sul rumore, 1.0000 ovunque sul collasso): non tarata su un'ipotesi, mostrata dare la risposta giusta
+dove la risposta si sa. Bin **logaritmici** e non a quantili (la geometria a 3 masse e' bimodale e i
+quantili sprecavano 8 bin su 12 nel campo lontano).
+
+| passo 300 | chi materia | \|⟨n⟩\|/(1/sqrt N) | autocorr vicino -> lontano |
+|---|---|---|---|
+| *rif. RUMORE* | *90.000 +- 39.171* | *~1* | *~0 -> ~0* |
+| *rif. COLLASSO* | *0 +- 0* | *~60* | *1.0 -> 1.0* |
+| **K-noise** | **89.91 +- 39.23** | **0.91** | **0.0022 -> 0.0007** |
+| **K-frozen** | **0.00 +- 0.00** | **59.72** | **1.0000 -> 1.0000** |
+
+**K-frozen e' BYTE-IDENTICO a OFF** (34/34 array stessa shape, `max|A-B| = 0.000e+00`, N 3576 =
+3576): Kuramoto non ha fatto **letteralmente nulla**. **K-noise = NO-rumore**: autocorrelazione
+**piatta a zero su tutte e 14 le distanze**. **Entrambi gli esiti coincidono con la predizione.**
+
+**Distinzione da non perdere:** col rumore Kuramoto **non e' inerte, e' INEFFICACE**. N a 300 passi:
+ON = 3536, **K-noise = 4114 (+16.3%)**. Il torque agisce e cambia la traiettoria; semplicemente
+**non organizza i Bloch**. Non "non fa niente": **perde**.
+
+### §56 — FDT: lo scuotimento NON contiene dissipazione allineante (ad96669 + 1d722d1) — DIMOSTRATO
+**L** propone l'ipotesi piu' elegante della giornata: un rumore porta con se' una **dissipazione
+compagna** col coefficiente **fissato dal rumore**. Se allineasse ai vicini, sarebbe un **Kuramoto
+EMERGENTE a zero manopole**.
+
+**A scrive la predizione dichiarando di NON avere un vero dubbio**, invece di fingere incertezza:
+*"lo scuotimento del singolo nodo non legge i vicini (`:1803`), quindi il drift e' per forza
+funzione del solo `n`: una cosa che non guarda i vicini non puo' allinearli"*. Il dubbio vero era il
+test 3b (precessione+rumore), dove i vicini entrano via `B`.
+
+**L'espansione a O(a^2)** di `n' = (n + a g)/|n + a g|`, mediata su `g`:
+`E[n'] - n = -a^2 n + O(a^3)`. Drift **parallelo a n** (nessuna componente trasversa), dipendente dal
+**solo n**, con `|E[n']| = 1 - a^2` = contrazione del risultante: **DIFFUSIONE ISOTROPA PURA**, drift
+nullo sulla sfera. Verificato a **1.28e-07** (amp=0.013, 4·10^6 campioni, componente trasversa
+`8.2e-06` sotto l'errore statistico `5.0e-04`).
+
+**REPERTO CHE NON AVEVA PREVISTO NESSUNO (test 3b):** con **rumore SPENTO** l'angolo **non si
+conserva**: `60 -> 62.5` (|B|=0.5), `60 -> 104.2` (|B|=2, **supera l'isotropo**), `60 -> 180.000`
+(|B|=10, **antipodale esatto**). Rodrigues conserva l'angolo fra **un** vettore e il **suo** asse; ma
+i due nodi ruotano **l'uno attorno all'altro simultaneamente** e la coppia non conserva nulla.
+**La precessione mutua e' ATTIVAMENTE DISORDINANTE**, con un punto fisso **anti-allineante** a
+`chi = 180`. Il verdetto ne esce **rafforzato**: non solo manca il *"tira verso"*, **c'e' uno
+"spinge via"**.
+
+**Errore di A, corretto e non nascosto:** la riga di lettura che lo script stampava diceva *"con
+amp=0 la precessione CONSERVA l'angolo esattamente"* — scritta **prima** di girare, **falsa**, il
+commento stale contro cui mette in guardia il par.0. Corretta **dichiarando la correzione** invece
+di cancellarla, e lo script rigirato da zero (seed fissi -> numeri identici).
+
+**LA CONVERGENZA (lettura di L).** Quattro misure indipendenti sono **un fatto da quattro lati**:
+teorema di inerzia (la connessione e' uno **specchio** della materia) + frozen-o-noise (cio' che
+specchia e' **rumore**) + Kuramoto refutato (aggiungere allineamento locale **non basta**) + FDT
+(nel rumore **non c'e' dissipazione compagna**, perche' e' locale e la normalizzazione e' radiale).
+**L'ultimo e' l'unico che SPIEGA gli altri tre invece di confermarli.** Le tre porte ovvie del
+settore di spin — precessione, rumore, Kuramoto — sono **chiuse**. Se si vuole struttura di spin, va
+**imposta (e dichiarata)** o trovata in una fisica non ancora identificata.
+
+### §57 — STEP 2: cablato, ma il sigillo e' CIECO (cdc39d0 + 4f44c68) — FALLIMENTO, DA RIPRENDERE
+**L** propone l'aggancio mancante: `omega_clk *= (cs/CS_M)^2`, l'**orologio di Compton**
+(`omega = m c^2/hbar`, e nel modello `c` e' `cs`). **Non una manopola: fisica necessaria e derivata**,
+zero parametri, e a `cs = CS_M` il fattore vale esattamente 1.
+
+**A corregge la firma del mandato PRIMA di cablare, e L accoglie.** `L` aveva scritto che la firma
+sarebbe *"`dt_n` piu' piccolo nel nucleo"*. **Ma moltiplicare `omega_clk` NON tocca `dt_n`: tocca
+`_phc`, cioe' la FASE.** La via verso `dt_n` passa per **quattro anelli**
+(`omega_clk -> _phc -> psi_spin -> ritmo() -> dt_n`). Quindi **due misure separate**: il rapporto
+diretto `(cs/CS_M)^2` **e' il verdetto**; il profilo di `dt_n` e' un effetto derivato **che puo'
+essere minuscolo senza che il cablaggio sia sbagliato**. **L:** *"questo e' il guardiano
+interiorizzato"*, e corregge il mandato.
+
+**Terza protezione, aggiunta da A:** `_phc` e' una fase **globale per nodo**, e il Bloch e'
+invariante per fase globale (**verificato: 3.3e-16**) -> lo Step 2 **non puo'** muovere lo spin, e
+firme di spin invariate = **conferma**. Ma `omega_clk` e' **diverso da nodo a nodo**, quindi le fasi
+**RELATIVE** cambiano, ed entrano in `Im<psi_i|psi_j>`: la forza cambia e la traiettoria diverge.
+L'attesa corretta e' *"statisticamente invariate, NON bit-identiche"*; una piccola deriva sarebbe
+**caos**, non azione sullo spin.
+
+**ESITO: 7/9 PASS, S3 e S3b FALLISCONO.**
+
+| | |
+|---|---|
+| S1 flag OFF byte-identico | **PASS** `0.000e+00` [nodi 3164 vs 3164, 0 shape divergenti] |
+| S2 riduzione al limite | **PASS** `0.000e+00` |
+| **S3 scaling `(cs/CS_M)^2`** | **FAIL** — misurato `1.000000000000` per cs/CS_M = 1.0, 0.5, 0.1 |
+| S4 stabilita' | PASS |
+
+**DIAGNOSI: IL SIGILLO E' CIECO, NON IL CABLAGGIO.** Nel setup di S3 **`omega_clk` vale ESATTAMENTE
+0** (misurato: media e max `0.000000e+00`). Subito dopo `semina()`, `eta = 0` -> `ramp = 0` -> i pesi
+`w` sono nulli -> `den = 0` -> `num/max(den,1e-12) = 0`. **Moltiplicare zero per `(cs/CS_M)^2` da'
+zero.** E la fase di `4.030e-03` che il sigillo misurava veniva **tutta dalla precessione**: il test
+confrontava due fasi di rotazione identiche -> `1.000000000000` esatto per ogni `cs`.
+
+**PROVATO:** il sigillo non puo' vedere l'effetto. **NON PROVATO:** che il cablaggio sia corretto —
+**un test cieco non assolve**. Lo Step 2 e' **CABLATO MA NON SIGILLATO**.
+**GATE NON RI-TIMBRATO di proposito:** il blob e' cambiato (`c0803713`) ma `CLAUDE.md` par.0 resta a
+`2277e9a0`, perche' ri-timbrare su un cablaggio non sigillato sarebbe un timbro falso.
+Regge il presidio che conta: **S1 e S2 passano, la baseline non e' contaminata.**
+
+**Ammissione di A:** e' il **terzo errore della stessa famiglia in due giorni** — un numero
+(`1.000000000000`) letto come risultato quando era l'**assenza di segnale**. Il presidio scritto in
+`CLAUDE.md` par.9 **quella stessa mattina** (§53.1) avrebbe dovuto far chiedere *quanto vale
+`omega_clk` in quel setup* prima di girare. **Non e' stato applicato a se stessi.**
+
+### §58 — BILANCIO DELLA GIORNATA (2026-09-14)
+**Fatto e sigillato:** STRATO 1 (23/23, il fork non e' piu' inerte), osservatore del vuoto (6/6,
+pure-read), tre presidi nuovi in CLAUDE.md, due documenti di indagine e uno di audit.
+**Chiuso come NEGATIVO PULITO:** Kuramoto (refutato), FDT (nessuna dissipazione allineante,
+dimostrato), i Bloch senza dinamica propria (attribuito 100% al rumore).
+**Aperto:** lo Step 2 cablato ma non sigillato (il prossimo passo e' **correggere lo strumento**, non
+il cablaggio — ma sapendo che oggi **non sappiamo** se il cablaggio sia giusto).
+**Domanda che resta, da porre a mente fresca (L):** *lo spin e' il portatore giusto in questo
+sistema, o la struttura vive altrove?* A registra una pista non interpretata: nel braccio K-noise il
+raggio della regione centrale salta da 0.8 a 13.2 fra due campioni **mentre tutte le firme di spin
+restavano piatte**. Se la struttura vive altrove, e' nel settore **metrico/densita'** che se ne
+vedrebbe traccia — e li' non si e' mai guardato con lo stesso rigore.
