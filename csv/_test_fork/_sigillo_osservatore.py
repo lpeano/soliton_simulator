@@ -117,10 +117,17 @@ _, out_det = run("sigDET", extra=["--regime-det", "--no-osserva"])
 
 
 def riga_flag(txt):
-    for l in txt.splitlines():
-        if l.startswith("[osserva]") and "SCUOTIMENTO" in l:
-            return l.strip()
-    return "(riga [osserva] non trovata)"
+    """La riga [osserva-flag] e' quella letta DENTRO il ciclo, a run gia' avviato. NON usare la
+    riga [osserva] di intestazione: FORK_SU2/FORK_SU2_MEM sono assegnati da _applica_flag, che
+    batch_condensazione chiama al suo interno, quindi prima del run valgono False anche quando il
+    run li usa. Sbaglio preso davvero (O3c FAIL, commit 279c3b7): il sigillo misurava la riga di
+    stampa, non la fisica."""
+    righe = [l.strip() for l in txt.splitlines() if l.startswith("[osserva-flag]")]
+    if not righe:
+        return "(riga [osserva-flag] non trovata)"
+    if len(righe) > 1:
+        return "FLAG CAMBIATI DURANTE IL RUN: " + " || ".join(righe)
+    return righe[0]
 
 
 r_on, r_det = riga_flag(out_on), riga_flag(out_det)

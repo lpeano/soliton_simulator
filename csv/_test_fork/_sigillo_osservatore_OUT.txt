@@ -14,13 +14,13 @@ O2 — l'A/B dello scuotimento e' a VARIABILE SINGOLA?
 ============================================================================================
 O3 — i due bracci hanno i flag giusti?
 ============================================================================================
-   braccio ON : [osserva] tag=sigON seed=1 passi=150  SCUOTIMENTO=True  FORK_SU2=False FORK_SU2_MEM=False
-   braccio OFF: [osserva] tag=sigDET seed=1 passi=150  SCUOTIMENTO=False  FORK_SU2=False FORK_SU2_MEM=False
-[PASS] O3a braccio ON: SCUOTIMENTO=True               ssi=150  SCUOTIMENTO=True  FORK_SU2=False FORK_SU2_MEM=False
-[PASS] O3b braccio OFF: SCUOTIMENTO=False             si=150  SCUOTIMENTO=False  FORK_SU2=False FORK_SU2_MEM=False
-[FAIL] O3c entrambi testano lo STRATO 1 (fork + memoria) fork+mem attivi su entrambi i bracci
+   braccio ON : [osserva-flag] tag=sigON seed=1  FORK_SU2=True FORK_SU2_MEM=True SCUOTIMENTO=True SYNC_UPDATE=False   (letti DURANTE il run)
+   braccio OFF: [osserva-flag] tag=sigDET seed=1  FORK_SU2=True FORK_SU2_MEM=True SCUOTIMENTO=False SYNC_UPDATE=False   (letti DURANTE il run)
+[PASS] O3a braccio ON: SCUOTIMENTO=True                SCUOTIMENTO=True SYNC_UPDATE=False   (letti DURANTE il run)
+[PASS] O3b braccio OFF: SCUOTIMENTO=False             SCUOTIMENTO=False SYNC_UPDATE=False   (letti DURANTE il run)
+[PASS] O3c entrambi testano lo STRATO 1 (fork + memoria) fork+mem attivi su entrambi i bracci
 ============================================================================================
-SIGILLO OSSERVATORE: 5/6 PASS -> FAIL
+SIGILLO OSSERVATORE: 6/6 PASS -> PASS
 
 COSA QUESTO SIGILLO NON DICE
 ----------------------------

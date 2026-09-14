@@ -77,8 +77,13 @@ def main():
 
     arg = S._cli()
     S._applica_regime(arg)
-    print("[osserva] tag=%s seed=%d passi=%d  SCUOTIMENTO=%s  FORK_SU2=%s FORK_SU2_MEM=%s"
-          % (a.tag, a.seed, a.passi, S.SCUOTIMENTO, S.FORK_SU2, S.FORK_SU2_MEM), flush=True)
+    # I FLAG NON SI LEGGONO QUI. `_applica_regime` fissa solo SCUOTIMENTO; FORK_SU2 e FORK_SU2_MEM
+    # sono assegnati da `_applica_flag`, che `batch_condensazione` chiama al suo interno (:5172),
+    # cioe' DOPO questo punto. Leggerli adesso darebbe False su entrambi anche quando il run li usa
+    # (sbaglio preso davvero: sigillo O3c FAIL, commit 279c3b7). L'unica lettura onesta di "con
+    # cosa ha girato la fisica" e' quella presa DENTRO il ciclo, al momento della misura: vedi
+    # `flag_visti` piu' sotto e la riga [osserva-flag] stampata a fine run.
+    flag_visti = set()
 
     righe = []
     stato = {"k": 0}
@@ -163,6 +168,11 @@ def main():
         r["nan_psi"] = int(not np.all(np.isfinite(np.asarray(psi)[:n])))
         r["max_pos"] = (float(np.max(np.abs(np.asarray(net.pos)[:n])))
                         if getattr(net, "pos", None) is not None and len(net.pos) >= n else float("nan"))
+        # CON COSA HA GIRATO DAVVERO QUESTO PASSO (letto dai globali vivi, non da prima del run)
+        r["FORK_SU2"] = int(S.FORK_SU2)
+        r["FORK_SU2_MEM"] = int(S.FORK_SU2_MEM)
+        r["SCUOTIMENTO"] = int(S.SCUOTIMENTO)
+        r["SYNC_UPDATE"] = int(S.SYNC_UPDATE)
         righe.append(r)
 
     def spia(self):
@@ -170,12 +180,21 @@ def main():
         orig_step(self)
         if mio:
             stato["k"] += 1
-            if stato["k"] == 1 or stato["k"] % a.ogni == 0:
+            # i globali VIVI, campionati a ogni passo del batch: se cambiassero a meta' run lo si
+            # vedrebbe qui (l'insieme avrebbe piu' di un elemento).
+            flag_visti.add((bool(S.FORK_SU2), bool(S.FORK_SU2_MEM),
+                            bool(S.SCUOTIMENTO), bool(S.SYNC_UPDATE)))
+            if not a.no_osserva and (stato["k"] == 1 or stato["k"] % a.ogni == 0):
                 misura(self, stato["k"])
 
-    if not a.no_osserva:
-        S.Rete.step = spia
-    S.batch_condensazione(arg)
+    S.Rete.step = spia          # sempre: la spia dei flag e' pure-read e serve anche al braccio
+    S.batch_condensazione(arg)  # --no-osserva (dove `misura` non gira mai: vedi `campiona`)
+
+    for f in sorted(flag_visti):
+        print("[osserva-flag] tag=%s seed=%d  FORK_SU2=%s FORK_SU2_MEM=%s SCUOTIMENTO=%s "
+              "SYNC_UPDATE=%s   (letti DURANTE il run)" % ((a.tag, a.seed) + f), flush=True)
+    if len(flag_visti) > 1:
+        print("[osserva-flag] ATTENZIONE: i flag sono CAMBIATI durante il run.", flush=True)
 
     if not a.no_osserva and righe:
         cols = list(righe[0].keys())
