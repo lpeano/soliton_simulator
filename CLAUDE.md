@@ -175,6 +175,28 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   dell'esecuzione) e corretto. **Presidio permanente: il sigillo S7** (`_sigillo_strato1.py`), che
   misura `alpha` su nodi con ritmi diversi: con `dt_n` il rapporto r=2/r=1 vale 1.9753, col `DT`
   varrebbe esattamente 1.000. S1..S6 passavano IDENTICI col bug: senza S7 era invisibile.
+- **PRESIDIO PERMANENTE — PRIMA DI LEGGERE UNA STATISTICA RIASSUNTIVA, CHIEDITI CHE VALORE
+  AVREBBE SE NON CI FOSSE NIENTE** (il valore sotto ipotesi nulla). Costa due righe e ferma gli
+  autoinganni piu' comuni. Casi reali gia' presi su questo repo:
+  * `N = 3164 -> 3209` a 150 passi sembrava un effetto del fork: era rumore a 1e-16 amplificato dal
+    caos (2026-09-13). Sotto ipotesi nulla, due run che divergono a 1e-16 danno ESATTAMENTE quello.
+  * `max|A-B| = 0.000e+00` sembrava identita': era mancanza di confronto, 3209 nodi contro 3073
+    (2026-09-14). Sotto ipotesi nulla di "nessun array confrontabile", il massimo di un insieme
+    vuoto e' 0.
+  * `spin_overlap = 0.5000` e `chi ~ 90 +- 39 gradi` NON sono numeri qualunque: sono **esattamente**
+    i valori di direzioni di Bloch CASUALI (`<|<psi_i|psi_j>|^2> = (1+<cos chi>)/2 = 0.5`;
+    `sin(chi)/2` ha media 90.000 e std 39.171 gradi). Chi li vede deve riconoscerli.
+- **PRESIDIO — QUANDO SI APRE UNA DOMANDA NUOVA, RI-INTERROGA LE MISURE VECCHIE.** Una misura letta
+  correttamente per la domanda di allora puo' essere DECISIVA per una domanda posta mesi dopo, e
+  nessuno torna a chiedergliela. Caso reale: `spin_ovl = 0.5 (direzione random)` fu misurato e letto
+  BENE a 800 passi (verdetto (B) abeliano = disordinato, `STATO:513`); ma diceva gia' che il fork
+  SU(2) avrebbe cercato struttura su un substrato senza struttura, e quella conseguenza e' stata
+  tratta solo il 2026-09-14. Non tutte le risposte arrivano da run nuovi.
+- **PRESIDIO — UN PATTERN CHE SPIEGA TUTTO VA VERIFICATO CONTRO LA FONTE PRIMA DI SCRIVERLO.**
+  Nel primo audit (2026-09-14) l'esecutore ha costruito un reperto inesistente ("il segnale era nei
+  dati e nessuno l'ha visto") cercando un terzo episodio che completasse uno schema: bastava leggere
+  `STATO:513` per intero per vedere che il segnale era stato visto e annotato. **L'entusiasmo per uno
+  schema elegante e' una fonte di errore quanto la disattenzione.**
 - **TRAPPOLA DI LETTURA (2026-09-14): `max|A-B| = 0.000e+00` puo' significare "nessun confronto".**
   Se due run divergono al punto di cambiare il NUMERO DI NODI, nessun array ha piu' la stessa
   shape, il confronto non ha nulla da confrontare e lo zero e' MANCANZA DI CONFRONTO, non
