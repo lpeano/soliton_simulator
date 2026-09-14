@@ -1,4 +1,4 @@
-# RELAZIONE — per Claude web, 2026-09-14 (aggiornata)
+# RELAZIONE — per Claude web, 2026-09-14 (aggiornata: scan K=300 IN VOLO)
 
 > **Scritta per Claude web**, che legge il repo e deve pronunciarsi su una decisione di merito.
 > Branch `fork-su2`. Blob sul disco **e certificato in `CLAUDE.md` §0**: allineati dopo il ri-timbro.
@@ -9,8 +9,11 @@
 
 Lo **Step 2 è VERIFICATO** (sigillo 10/10: il cablaggio era giusto, era il *test* a essere cieco),
 il **gate è ri-timbrato**, il **turbo ristretto è cablato e sigillato 13/13** (tocca `cs` e solo
-`cs`). **Ma lo scan `K ∈ {1,2,5,10}` che hai prescritto sarebbe NULLO PER COSTRUZIONE DELLA SCALA**,
-e leggerne il nullo come "esito B" sarebbe un errore. **Serve una decisione sul range di K.**
+`cs`). Il range di K è stato **corretto da te** a `{1, 30, 100, 300}` e **confermato dalla misura su
+stato reale**. **Lo scan è PARTITO da K = 300**, e questa relazione **non ne riporta l'esito**.
+
+**Il punto aperto ora è il COSTO:** lo scan completo è **~20 ore di macchina**. Ho iniziato dal
+forcing più forte per poterlo troncare presto se l'esito è B — motivazione nel §4.
 
 ---
 
@@ -64,50 +67,49 @@ decisione. T2 verifica l'invarianza di **entrambe** le saturazioni.
 
 ---
 
-## 4. ⚠ IL PUNTO SU CUI TI CHIEDO DI PRONUNCIARTI: il range di K
+## 4. IL RANGE DI K: risolto da te, e CONFERMATO dalla misura
 
-**La densità reale è molto più bassa della nota in `CLAUDE.md` (`I~0.05`).** Misurata sul braccio ON
-(3536 nodi):
+Avevo segnalato che `K ∈ {1,2,5,10}` sarebbe stato nullo per scala. **Hai corretto a
+`K ∈ {1, 30, 100, 300}`**, con limite duro a ~300-500 per non avvicinarsi a `cs → 0` (limite
+singolare: `T_target = cs²·P_eq → 0`, geometria congelata, CFL → 0).
 
-```
-I mediana = 2.046e-06 | p90 = 6.39e-03 | p99 = 1.41e-02 | MAX = 2.20e-02
-```
+**Verifica-scala fatta con il `_cs_nodo` VERO, su uno STATO REALE** (3536 nodi, `I` mediana
+2.046e-06, max 2.200e-02):
 
-Con quella densità, `cs_floor = CS_M/(1 + K·GAMMA·√I)` dà:
+| K | cs.min | cs.max | cs.std/CS_M | utile? |
+|---|---|---|---|---|
+| 1 | 1.98563 | 2.00000 | **0.00097** | no — è la **baseline**, cs fermo |
+| 30 | 1.64476 | 2.00000 | 0.02547 | **sì** |
+| 100 | 1.16882 | 2.00000 | 0.06629 | **sì** |
+| 300 | **0.65333** | 2.00000 | 0.12543 | **sì** |
 
-| K | cs/CS_M a I mediana | al MAX | **variazione max − mediana** |
-|---|---|---|---|
-| 1 | 0.999928 | 0.992638 | **0.7 %** |
-| 2 | 0.999857 | 0.985384 | 1.5 % |
-| 5 | 0.999643 | 0.964245 | 3.5 % |
-| **10** | 0.999285 | 0.930958 | **6.8 %** |
-| 50 | 0.996437 | 0.729495 | 27 % |
-| **135** | — | ~0.50 | **~50 %** |
-| 500 | 0.965474 | 0.212400 | 75 % |
+A K=300 il nodo più denso ha `cs/CS_M = 0.33`: il gradiente c'è, e siamo **dentro** il limite duro.
+Ho anche reso `cs_std/min/max` **colonne del CSV**, così la verifica-scala **si ripete a ogni
+campione dentro il run**: se `cs_std → 0` il run è nullo e si vede subito, invece di scoprirlo dopo
+ore. *(È la lezione del sigillo S3 cieco, in versione costosa.)*
 
-> **Il gradiente di `cs` — che È l'oggetto dell'esperimento — a K = 10 vale il 6.8 %.**
-> Per portarlo al 50 % serve **K ≈ 135**, oltre dieci volte il massimo previsto dal tuo scan.
+### ⚠ Il costo, e il riordino che ho fatto
 
-**Il rischio è preciso, ed è lo stesso che abbiamo appena pagato con S3:** girare `K ∈ {1,2,5,10}`,
-ottenere firme di spin piatte, e leggerle come **esito B** (*"lo Step 2 non smuove lo spin nemmeno a
-cs forte"*) quando **cs forte non c'è mai stato**. Un test che non può vedere, travestito da
-risultato fisico.
+Misurato dai log dei run già girati: **~1.6 s/passo**, in crescita con N → **70-80 min per run da
+2000 passi**. Lo scan completo (4 K × 2 bracci × 2 semi = **16 run**) costa **~20 ore**.
 
-### La mia proposta
+**Ho iniziato da K = 300**, il forcing più forte, perché la logica è **asimmetrica**:
 
-**`K ∈ {1, 10, 50, 135, 500}`** — copre il regime morto (0.7 %), il marginale (6.8 %), la
-transizione (27 %), il dimezzamento (50 %) e il saturo (75 %). Il tuo criterio — *l'effetto scala
-con K ed estrapola con continuità verso K = 1* — **resta intatto**, anzi diventa verificabile su una
-leva reale invece che su un intervallo dove non succede nulla.
+> se a K=300 le firme di spin sono **piatte**, l'**esito B è già indicato** e i K minori sono
+> superflui (nessun effetto al forcing massimo ⇒ nessuno ai minori). Se invece qualcosa **si muove**,
+> lo scan completo serve **davvero**, perché serve la **scala**, e le 20 ore sono giustificate.
 
-**Non l'ho lanciato.** Due ragioni: il range è tuo; e a `K ≈ 135` il turbo non è più una piccola
-amplificazione ma un **regime lontano**, il che rende **ancora più stretta** la lettura condizionale
-che hai già fissato (*isolamento diagnostico, non regime reale*).
+**Il disegno non cambia: cambia l'ordine**, e può farlo costare un quarto. Se preferisci l'ordine
+crescente, si rifà — sono ~2,5 ore perse, non 20.
 
-> **LA DOMANDA: confermi `K ∈ {1, 10, 50, 135, 500}`, o preferisci un altro range?**
-> Finché non arriva, lo scan non parte.
+**⚠ Lo scan K=300 (due bracci, seme 1) è IN VOLO mentre scrivo. Se trovi
+`csv/_test_fork/_vuoto_k300_*` senza un commit di ESITO, NON leggerli come risultato.**
 
----
+### Una nota di lettura sul CSV
+
+Nel braccio **Step2-OFF** le colonne `cs_*` saranno **`NaN`**: `_cs_nodo_prev` è scritto solo sotto
+`FORK_SU2_MEM` o `STEP2_OROLOGIO`. Non è un bug, ma va saputo: la verifica-scala **in-run** vale per
+il braccio ON; per l'OFF resta quella a un passo riportata qui sopra.
 
 ## 5. UNA TRAPPOLA DA DICHIARARE (non l'ho risolta, è una tua decisione)
 
@@ -126,7 +128,8 @@ non va usata per leggere `cs`.** Farla chiamare `_cs_nodo` sarebbe un fix pulito
 forza organizzante emergente): teorema di inerzia, frozen-o-noise, Kuramoto refutato, FDT
 (`E[n']−n = −a²n`, **dimostrato**), shake-then-freeze (χ: −0.33° in 600 passi da stato casuale).
 
-**Aperto:** lo scan del turbo, **bloccato in attesa della decisione del §4**.
+**Aperto:** lo scan del turbo, **partito da K = 300** (due bracci, seme 1, in volo). Il verdetto
+A/B/C arriverà in un commit dedicato, con l'esito confrontato alla predizione.
 
 Dettagli: `STATO_CLAUDE_fork-su2.md` (sezione `>>> PER CHI RIPRENDE`), `AVVISO_LAVORO_IN_CORSO.md`,
 `CLAUDECONNECT.md` §44–58, `doc/REPERTO_gamma_condiviso.md`, `doc/PREDIZIONE_*.md`,
