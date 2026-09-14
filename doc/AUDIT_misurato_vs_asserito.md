@@ -82,7 +82,7 @@ previsione sull'esito dinamico, e fino a oggi nessuno aveva misurato la distribu
 | 2.4 | *"χ resta SPARSA → il rumore vince, degenerazione rotta, settore non-abeliano vivo"* | `ROADMAP:59` | **[MISURATO]**, ma la dicotomia e' incompleta |
 | 2.5 | *"U_ij derivato dai soli Bloch e' «schiavo» della materia (no gradi di liberta' propri)"* | `BUSSOLA:69` | **[MISURATO]**, e in forma piu' forte |
 | 2.6 | *"Il verdetto (B) abeliano e' STRUTTURALE, non dinamico"* | `BUSSOLA:23` | **[MISURATO]** |
-| 2.7 | *"Misure gauge-robuste concordi: spin_ovl=0.5000, segno_ov~2/pi ovunque"* | `STATO:463` | **[MISURATO]**, ma **letto come un'altra cosa** |
+| 2.7 | *"spin_overlap=0.5 **(direzione random)**"* | `STATO:513` | **[MISURATO]** e **letto correttamente** — vedi la correzione qui sotto |
 
 **2.1 — perche' SMENTITO, col numero.** Misurato oggi (osservatore sigillato pure-read, 150 passi,
 braccio ON), sugli archi **piu' densi** del sistema (p90 di `|Psi|^2`):
@@ -108,23 +108,46 @@ allo stesso modo* significa che non c'e' niente da trasportare.
 `csv/_seal_fork/_reperto_inerzia.py`, 1.570e-15 su 200000 coppie): non solo schiavi, **inerti** —
 poi risolto dallo Strato 1.
 
-**2.7 — il reperto piu' importante di questo audit.** `spin_overlap_arco` e'
-`<|<psi_i|psi_j>|^2>` pesato sugli archi (`soliton_simulator.py:5394`), cioe'
-`<cos^2(χ/2)> = (1 + <cos χ>)/2`. Per direzioni casuali `<cos χ> = 0`, quindi **l'atteso e'
-esattamente 0.5000**. La campagna 5.3c misuro' **spin_ovl = 0.5000 su tutti e tre i bracci a 800
-passi** (`STATO:457-463`) e lo registro' come *"misura gauge-robusta concorde col verdetto (B)
-abeliano"*.
+**2.7 — CORRETTO IL 2026-09-14, dopo revisione. La prima stesura di questo paragrafo era
+SBAGLIATA, e l'errore era proprio quello che l'audit denuncia negli altri.**
 
-> **La casualita' dei Bloch era nei dati da allora, a 800 passi e su tre bracci. E' stata letta
-> come conferma di una tesi diversa.**
+Avevo scritto che la casualita' dei Bloch *"era nei dati da allora ed e' stata letta come conferma
+di una tesi diversa"*, e che *"nessuno gli ha posto quella domanda"*. **Falso.** `STATO:513` dice
+testualmente:
 
-*Precisione doverosa:* `spin_ovl = 0.5` e' **necessario ma non sufficiente** per l'uniformita' —
-qualunque distribuzione simmetrica in `cos χ` da' 0.5. Quindi quel numero da solo **non
-dimostrava** la casualita': la rendeva compatibile. E' la distribuzione **completa** misurata oggi
-(media, deviazione standard, **entrambe le code**) a fissarla. Ma il segnale c'era, e nessuno gli
-ha fatto quella domanda.
+> *"Verdetto (B) regge per TRIANGOLAZIONE con misure gauge-INVARIANTI: **spin_overlap=0.5
+> (direzione random)**, segno_ov_absmedia~2/pi=0.637 (fase doppia-copertura uniformemente random)"*
 
----
+La casualita' **era annotata in chiaro** — *"(direzione random)"* — e usata **come prova** del
+verdetto (B) abeliano, che significa esattamente *disordinato*. La domanda fu posta e risposta
+**correttamente**. Nessun segnale perso, nessuna lettura sbagliata. Un audit sull'onesta' che
+sbaglia proprio qui non vale niente, quindi: la versione precedente di questo paragrafo era un
+errore dell'esecutore, non della fonte.
+
+**Che cosa e' nuovo, allora? Non il FATTO. La CONSEGUENZA — ed e' piu' grande, non piu' piccola.**
+
+Il fatto (Bloch casuali) e' noto da 800 passi e tre bracci. La cosa che **nessuno aveva tratto** e'
+che quelle stesse direzioni casuali **si estendono DENTRO la materia**: misurato oggi, gli archi
+del p90 di densita' sono casuali (90.14° / 39.35°) **quanto il vuoto** (90.13° / 39.10°). E da
+questo segue, per pura geometria:
+
+> **La firma che il PROTOCOLLO cerca NON PUO' ESISTERE su questo substrato.** `PROTOCOLLO:41` fonda
+> la gobba di W(r) su *"nel centro la massa e' coerente → Bloch allineati → χ≈0"*. Se i Bloch sono
+> casuali anche nel nucleo, W(r) e' piatto **per costruzione**, qualunque cosa faccia il fork.
+
+**Il cerchio si chiude con il teorema di inerzia.** Lo Strato 0 era inerte perche' la connessione
+e' **uno specchio della materia** (costruita dagli stessi stati che trasporta). Ora si sa che i
+Bloch della materia sono **rumore casuale**. Quindi **lo specchio riflette rumore**: il fork stava
+costruendo struttura non-abeliana su un substrato **gia' misurato senza struttura**, e la misura
+c'era da giorni. Lo Strato 1 ha rotto l'inerzia — quello e' dimostrato (23/23) — ma ha reso la
+connessione sensibile a un passato che e' anch'esso casuale.
+
+**La lezione di metodo, diversa da quella del §4.** Qui nessuno ha letto male un numero: il numero
+e' stato letto giusto **per la domanda di allora** (il sistema e' ordinato? no, e' random → (B)
+abeliano). Quel che manca e' che **la stessa misura era decisiva per una domanda DIVERSA, posta
+mesi dopo** (il fork puo' trovare struttura?), e nessuno e' tornato a chiedergliela.
+→ **Presidio: quando si apre una domanda nuova, ripassare le misure vecchie chiedendosi se ne
+rispondono gia'. Non tutte le risposte arrivano da run nuovi.**
 
 ## 3. CHE COSA E' [MISURATO] DA OGGI (per la prima volta)
 
@@ -164,17 +187,26 @@ Tre episodi in due giorni, stessa forma:
    amplificato dal caos**. (Numero grande scambiato per segnale.)
 2. **2026-09-14** — `max|A-B| = 0.000e+00` letto come identita'. Era **mancanza di confronto**: i
    due run avevano 3209 e 3073 nodi, 32 shape su 32 divergenti. (Zero scambiato per identita'.)
-3. **2026-09-14** — `spin_ovl = 0.5000` letto come conferma del verdetto (B). Era **anche** il
-   valore atteso per Bloch casuali, e nessuno gli ha posto quella domanda. (Numero giusto, domanda
-   sbagliata.)
+3. **2026-09-14** — la prima stesura del §2.7 di QUESTO documento sosteneva che `spin_ovl=0.5`
+   fosse un segnale perso. **Non lo era** (`STATO:513` lo annota *"(direzione random)"*): l'errore
+   era dell'audit, ed e' corretto sopra. **Questo terzo episodio NON appartiene alla famiglia dei
+   primi due** e va tenuto distinto: e' l'esecutore che ha costruito un reperto inesistente
+   cercando un pattern. Lasciato qui per non ripetere neanche quello.
 
-**La regola che li copre tutti e tre: prima di leggere una statistica riassuntiva, chiedersi che
-valore avrebbe se NON ci fosse niente.** N a 150 passi, uno zero, un 0.5: in tutti e tre i casi il
+**La regola che copre i primi due: prima di leggere una statistica riassuntiva, chiedersi che
+valore avrebbe se NON ci fosse niente.** N a 150 passi e uno zero: in entrambi i casi il
 valore-sotto-ipotesi-nulla era calcolabile in due righe, e avrebbe fermato l'errore.
+
+**La regola che copre il terzo (diversa, e vale contro l'entusiasmo):** un pattern che *spiega
+tutto* va verificato contro la fonte **prima** di scriverlo. Bastava leggere `STATO:513` per intero.
 
 ---
 
 ## 5. COSA QUESTO AUDIT NON FA
+
+**Non e' infallibile:** il §2.7 della prima stesura era sbagliato ed e' stato corretto dopo
+revisione (la correzione e' nel testo, non nascosta). Se un audit sull'onesta' si assolve da solo,
+e' un documento peggiore di quelli che critica.
 
 Non corregge le fonti: `ROADMAP`, `BUSSOLA`, `BUSSOLA_TECNICA`, `PROTOCOLLO` e `STATO` restano
 com'erano, e le correzioni sono decisioni di Luca (in particolare `ROADMAP:46` e `:42`,
