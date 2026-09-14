@@ -20,10 +20,102 @@
   sul nuovo blob** (altrimenti il guard di `csv/_test_53c/_run_batch.ps1` blocca ogni campagna).
 
 ## Ultimo aggiornamento
-- Data: 2026-09-13
-- Ultimo commit: PEZZO 1 del fork SU(2) (`_link_su2`) + sigillo 17/17 PASS.
+- Data: **2026-09-14**
+- Ultimo commit: **STRATO 1 — connessione con MEMORIA (`--fork-su2-mem`), sigillo 23/23 PASS**,
+  + ri-timbro del gate in CLAUDE.md par.0.
 - Branch: **`fork-su2`**, allineato con `origin/fork-su2`.
-- Blob `soliton_simulator.py` = **b4c6c3f8** (verificato dal disco). Su `dev-spinoriale`: 4fc7a794.
+- Blob `soliton_simulator.py` = **2277e9a0** (verificato dal disco). Su `dev-spinoriale`: 4fc7a794.
+  Storia dei timbri del branch: `b4c6c3f8` (PEZZO 1) -> `968fba34` (PEZZO 3) -> `2277e9a0` (STRATO 1).
+- **GATE RI-TIMBRATO** in CLAUDE.md par.0 (era la condizione posta da Luca al PEZZO 3: "si
+  ri-timbra quando i run cambiano davvero". Oggi cambiano). `csv/_test_53c/gate_cache.json` resta
+  volutamente STALE su `4fc7a794`: la guardia di `_run_batch.ps1` rigira `_check_presidio.py` da
+  sola al primo cache-miss. **Non si scrive un PASS a mano per un blob non verificato.**
+
+## ⚑ STRATO 1 — FATTO, SIGILLO 23/23 PASS (2026-09-14). IL FORK NON E' PIU' INERTE.
+**Questo e' il pezzo che accende il fork.** Lo Strato 0 era inerte per TEOREMA (vedi sotto): la
+connessione costruita dagli stessi stati che trasporta, nello stesso istante, e' l'identita'
+sull'overlap. La cura e' la **CAUSALITA'**, non una taratura: la connessione nasce dai Bloch a
+`t-tau`, `tau = d/cs` (tempo-luce d'arco, zero parametri nuovi).
+
+**Cablaggio** (flag `FORK_SU2_MEM` / `--fork-su2-mem`, OFF di default, richiede `--fork-su2`):
+- `Rete._bloch_ritardato()`: rilassa il versore `_nb_ret` verso il corrente con **slerp geodetico**,
+  `alpha = 1 - exp(-dt_n/tau)`. Si rilassa il **BLOCH**, non la matrice U/N (un blend lineare di
+  matrici uscirebbe da SU(2), par.4). **Diverso da come era pianificato** in
+  `doc/ROADMAP_fork_SU2.md` (`dU/dt=(U^Berry-U)/tau`, memoria della MATRICE): stesso effetto
+  fisico, ma resta dentro SU(2) per costruzione invece che per correzione.
+- stato per-nodo `_nb_ret`, **ereditato dalla mitosi** in `_eredita_spinore_figli` (senza, la
+  memoria si azzererebbe a ogni nascita: misurato, con l'eredita' 2 reset su 34 chiamate).
+- cache `_cs_nodo_prev` e `_r_corrente` **scritte solo col flag ON**: la byte-identita' di S1
+  dipende da quel gating.
+- in `_coppia_interferenza` il cablaggio e' **una riga**: `_nb_conn = _nb` (Strato 0) oppure
+  `self._bloch_ritardato(...)` (Strato 1). Il TRASPORTO resta sugli spinori CORRENTI.
+
+**FIX DI UN FRAME PREFERITO (il punto piu' importante della giornata).** La prima stesura usava
+`alpha = 1 - exp(-DT/tau)`, col tic di COORDINATA globale. Ma `tau = d/cs` e' tempo PROPRIO:
+rilassarlo con `DT` cancella la dipendenza dall'orologio locale, cioe' impone a un processo locale
+la foliazione sincrona globale — **un frame preferito, un "etere"**, l'opposto di un sistema
+relazionale. Ora `alpha = 1 - exp(-dt_n/tau)` con `dt_n = DT*r` (`self._r_corrente` esposto da
+`step()`). **La radice l'ha vista LUCA**, non l'agent: il prompt di partenza diceva `dt = DT` e
+nessuno dei sigilli S1..S6 l'avrebbe presa. Dell'agent e' **S7**, il presidio che impedisce il
+rientro del bug.
+
+**SIGILLI (csv/_seal_fork/_sigillo_strato1.py, output _sigillo_strato1_OUT.txt): 23/23 PASS**
+
+| sigillo | misura |
+|---|---|
+| S1.0 riferimento = blob certificato PEZZO 3 | `968fba34` (commit FISSO `af003c2`, mai HEAD) |
+| S1a fork ON + MEM OFF vs pre-Strato 1 | **0.000e+00** (assolve il plumbing in `step()`) |
+| S1b baseline fork OFF vs pre-Strato 1 | **0.000e+00** |
+| S2 tau->0 -> Strato 0 | **0.000e+00** (e `n_ret == n_cur`, 0.000e+00) |
+| S3.0 controprova: Strato 0 e' inerte | 4.441e-15 |
+| **S3 LA FORZA CAMBIA** | **9.931e+00 = 74.47% di \|coppia\|** |
+| **S3b ... nel CICLO DINAMICO REALE** | mediana **0.170**, max **0.717** su 36 passi |
+| S3b2 memoria non resettata dalla mitosi | 2 reset su 34 chiamate |
+| S4 `\|n_ret\|=1` / `\|psi\|=1` / NaN / runaway | 2.220e-16 su 3073 nodi / 3.331e-16 / nessuno / max\|x\|=9.37 |
+| S5 azione-reazione (ramo MEM) | sum = +6.439e-15 (max\|c\| = 9.312e+00) |
+| S6 a riposo MEM == scalare | 5.329e-15 dopo 200 tic |
+| **S7 il tic e' il TEMPO PROPRIO** | rapporto r=2/r=1 = **1.975309912** (col bug DT: **1.000000000**) |
+
+**S7 in dettaglio — e' il sigillo che mancava.** Esercita il METODO VERO (`_bloch_ritardato`
+chiamato, `alpha` RICAVATO dall'avanzamento geodetico di `n_ret`, non ricalcolato inline):
+
+| r | alpha atteso (dt_n) | alpha misurato | alpha col BUG (DT) |
+|---|---|---|---|
+| 0.5 | 0.012422199506 | 0.012422199506 | 0.024690087972 |
+| 1.0 | 0.024690087972 | 0.024690087972 | 0.024690087972 |
+| 2.0 | 0.048770575499 | 0.048770575499 | 0.024690087972 |
+| 4.0 | 0.095162581964 | 0.095162581964 | 0.024690087972 |
+
+`max|alpha_mis - atteso| = 2.550e-15`. **S1..S6 passavano IDENTICI anche col bug**: senza S7 il
+frame preferito sarebbe rimasto invisibile.
+
+**⚠ TRAPPOLA DI LETTURA PRESA E CORRETTA OGGI (gemello del falso positivo del 2026-09-13).** Il
+confronto fra i due run a 150 passi stampava `max|A-B| = 0.000e+00` e sembrava dire "il fork non
+fa nulla". **Non lo diceva:** i due run finiscono con **3209 nodi (Strato 0) contro 3073 (Strato
+1)**, quindi tutte e **32 le shape su 32** divergono, nessun array era confrontabile e lo zero era
+**MANCANZA DI CONFRONTO, non identita'**. Lo script ora stampa PRIMA la riga delle shape.
+Regola: **guardare sempre il conteggio nodi prima di leggere uno zero.**
+
+**COSA QUESTO NON DICE (par.8, verbo onesto).** S3/S3b dicono che la forza CAMBIA, **non che sia
+FISICA**. Rompere il teorema era garantito per costruzione. Olonomia `W(r)` non banale, stabilita'
+su orizzonti lunghi, verso corretto per la gravita': li dice un **RUN**, e non sotto ~2000 passi
+ne' su un solo seme (par.2.7). **Non dire "il fork funziona": dire "il fork non e' piu' inerte".**
+Inoltre l'effetto e' proporzionale a quanto i Bloch cambiano ENTRO `tau` (a riposo S6 misura
+5e-15), e `cs` e' quasi-costante alle densita' attuali -> `tau ~ d/CS_M`: il ritardo c'e', ma la
+sua VARIAZIONE spaziale (la curvatura) e' debole finche' `cs` non e' vivo.
+
+## PROSSIMA AZIONE (dopo lo STRATO 1)
+1. **Run di fisica, non piu' sigilli tecnici**: >= 2000 passi, **piu' semi** (par.2.7), con e senza
+   `--fork-su2-mem`. Prima domanda: **olonomia W(r)** secondo `doc/PROTOCOLLO_test_olonomia.md`
+   (W != 2, non-commutante, gobba sul BORDO delle masse = non-abelianita' fisica emergente).
+2. Controllare che `SYNC_UPDATE` e `SCUOTIMENTO` siano ATTIVI nella config del fork (lettura,
+   gratis): senza, la degenerazione dei Bloch non si rompe.
+3. Distribuzione degli angoli `chi` fra vicini nel tempo (sparsa = settore non-abeliano vivo;
+   collassata su 0/pi = una forza di allineamento domina il rumore). Isotropia `<n>`.
+4. **STRATO 2** (memoria hebbiana saturata) solo DOPO che lo Strato 1 ha un verdetto di fisica.
+   Un pezzo, un sigillo, un flag OFF.
+5. Prima della prossima campagna la guardia di `_run_batch.ps1` rigirera' `_check_presidio.py` sul
+   blob nuovo: se FALLISSE, e' un problema da affrontare li', **non da mascherare timbrando la cache**.
 
 ## REGOLE E DOCUMENTI (aggiornamento 2026-09-13)
 - **CLAUDE.md v2** e' l'istruzione autorevole (sostituisce `.github/copilot-instructions.md`, che resta
