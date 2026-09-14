@@ -14,9 +14,15 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
   Fidati del sorgente eseguibile, non delle annotazioni.
 - Blob di riferimento certificato, **per branch** (verifica sempre dal DISCO):
   - `dev-spinoriale` (BASELINE, codice pre-fork) -> **4fc7a794...**
-  - `fork-su2` (branch del fork SU(2), dove si lavora) -> **b4c6c3f8...** (dal PEZZO 1,
-    `_link_su2`). Cambiera' ancora a ogni pezzo del fork: **il blob e' un timbro, non una
-    costante.** Quello che NON cambia e' l'obbligo di ri-timbrare il gate quando cambia.
+  - `fork-su2` (branch del fork SU(2), dove si lavora) -> **2277e9a0...** (dallo STRATO 1,
+    `_bloch_ritardato` + `FORK_SU2_MEM`, 2026-09-14). Storia dei timbri su questo branch:
+    `b4c6c3f8` (PEZZO 1) -> `968fba34` (PEZZO 3, Strato 0) -> **`2277e9a0` (STRATO 1, attuale)**.
+    Cambiera' ancora a ogni pezzo del fork: **il blob e' un timbro, non una costante.** Quello che
+    NON cambia e' l'obbligo di ri-timbrare il gate quando cambia.
+  - **`csv/_test_53c/gate_cache.json` NON si timbra a mano.** E' ancorato al blob e oggi e'
+    volutamente STALE (punta ancora a `4fc7a794`): la guardia di `_run_batch.ps1` rileva il
+    cache-miss e rigira `_check_presidio.py` da sola prima di ogni campagna. Scrivere un `PASS`
+    per un blob su cui il presidio non e' stato eseguito sarebbe un TIMBRO FALSO.
   - Se il blob non e' quello atteso, le righe possono essere shiftate: cerca per NOME di
     funzione/flag, non per riga.
 
@@ -111,8 +117,14 @@ Il fork si costruisce a strati (ognuno un flag OFF, ognuno si riduce a quello so
   Peso antipodalita': `w_ij = |n_j x n_i| = sin(chi)` (NIENTE soglia netta, NIENTE coeff. tarato).
   Sostituzione nella forza (`_coppia_interferenza`, righe 2207-2208): `Im<psi_i|psi_j> -> w_ij * Im<psi_i| U_ij |psi_j>`.
   Flag OFF (es. `FORK_SU2=False`). Sigillo: OFF -> byte-identico scalare; ON+allineati -> scalare.
-- **STRATO 1 — orientazione con memoria (rilassamento):** `dU/dt=(U^Berry-U)/tau`, tau=d/cs, primo
-  ordine (vedi par.4). Riduce a Strato 0 per tau->0.
+- **STRATO 1 — connessione con MEMORIA (ritardazione): FATTO** (2026-09-14, flag `FORK_SU2_MEM`
+  / `--fork-su2-mem`, OFF di default; sigillo `csv/_seal_fork/_sigillo_strato1.py`, **23/23 PASS**).
+  Realizzato come **ritardazione dei BLOCH**, non come memoria della matrice: `_bloch_ritardato()`
+  rilassa il versore `n_ret` verso quello corrente con **slerp geodetico** e
+  `alpha = 1 - exp(-dt_n/tau)`, `tau = d_nodo/cs_nodo`. Si rilassa il Bloch e NON U/N perche' un
+  blend lineare di matrici uscirebbe da SU(2) (par.4). Il trasporto resta sugli spinori CORRENTI.
+  **E' il pezzo che ACCENDE il fork:** rompe il teorema di inerzia dello Strato 0 (vedi par.9).
+  Riduce a Strato 0 per tau->0 (esatto, 0.000e+00) e a riposo (5.3e-15).
 - **STRATO 2 — memoria hebbiana saturata (relazionale):** `dg/dt=c_ij*g*(1-g/G(rho))/tau`, tetto
   `G(rho)` legato alla DENSITA' col GAMMA di cs ("sorelle non catena": G da rho, NON da cs diretto).
   Riduce a Strato 1 per g=cost.
@@ -149,5 +161,25 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   (precessione dello spinore del nodo con memoria hebbiana + inerzia |Psi|^2), NON arc-connection.
 - `PLAST_MIT=0` in TUTTI i test committati: la "compressione" osservata e' il regime di default
   (dimezzamento d0=d/2, "compressione degenere"), NON la generazione di spazio (mai girata).
+- **`FORK_SU2_MEM` / `--fork-su2-mem` (STRATO 1, 2026-09-14):** la connessione `N_ij` si costruisce
+  dai Bloch RITARDATI `self._nb_ret` invece che da quelli correnti. Metodo `_bloch_ritardato()`;
+  stato per-nodo `_nb_ret` (ereditato dalla mitosi in `_eredita_spinore_figli`), cache
+  `_cs_nodo_prev` e `_r_corrente` **scritte solo col flag ON** (da cui dipende la byte-identita'
+  di S1: se un giorno servissero a ramo spento, il sigillo S1 va rifatto). Richiede `--fork-su2`;
+  da solo viene IGNORATO con avviso. VERIFICATO dal sorgente sul blob 2277e9a0.
+- **IL TIC DEI PROCESSI LOCALI E' `dt_n = DT*r`, NON `DT`** (fatto generale, non solo del fork).
+  `DT` nudo e' il tempo di COORDINATA: usarlo dentro un rilassamento locale cancella la dipendenza
+  dall'orologio del luogo, cioe' impone la foliazione sincrona globale = **un frame preferito, un
+  "etere"**. Tutta la fisica del file integra gia' in `dt_n`/`dt_e` (phivel, tw); `DT` nudo vive
+  solo nel conteggio dei sottopassi CFL. Preso una volta nello Strato 1 (bug dell'istruzione, non
+  dell'esecuzione) e corretto. **Presidio permanente: il sigillo S7** (`_sigillo_strato1.py`), che
+  misura `alpha` su nodi con ritmi diversi: con `dt_n` il rapporto r=2/r=1 vale 1.9753, col `DT`
+  varrebbe esattamente 1.000. S1..S6 passavano IDENTICI col bug: senza S7 era invisibile.
+- **TRAPPOLA DI LETTURA (2026-09-14): `max|A-B| = 0.000e+00` puo' significare "nessun confronto".**
+  Se due run divergono al punto di cambiare il NUMERO DI NODI, nessun array ha piu' la stessa
+  shape, il confronto non ha nulla da confrontare e lo zero e' MANCANZA DI CONFRONTO, non
+  identita'. (Misurato: Strato 0 = 3209 nodi, Strato 1 = 3073, 32 shape su 32 divergenti.)
+  E' il gemello speculare del falso positivo del 2026-09-13. **Guardare SEMPRE prima la riga delle
+  shape / del conteggio nodi.**
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
