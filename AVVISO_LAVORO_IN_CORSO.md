@@ -7,35 +7,28 @@
 
 ---
 
-## 1. DUE COSE CHE SEMBRANO ERRORI E NON LO SONO
+## 1. DUE COSE CHE SEMBRAVANO ERRORI — ORA RISOLTE (2026-09-14)
 
-### 1.1 — Il blob sul DISCO non coincide con quello CERTIFICATO. È VOLUTO.
+### 1.1 — ✅ RISOLTO: blob allineato, gate ri-timbrato su `c0803713`
 
-| | |
-|---|---|
-| blob di `soliton_simulator.py` **sul disco** | **`c0803713`** |
-| blob **certificato** in `CLAUDE.md` §0 | **`2277e9a0`** |
+Per un giorno il blob sul disco e' stato **avanti** di quello certificato, perche' lo STEP 2 era
+cablato ma il suo sigillo **falliva**. **Ora il sigillo passa 10/10**, quindi il ri-timbro e'
+LECITO ed e' stato fatto: `CLAUDE.md` §0 dice **`c0803713`**, che e' il blob sul disco.
 
-Il `.py` sul disco è **avanti** di un cablaggio (**STEP 2**, `--step2-orologio`) **il cui sigillo è
-FALLITO**. Il gate **non** è stato ri-timbrato, di proposito: ri-timbrare su un cablaggio non
-sigillato sarebbe un timbro falso.
+*(Il disallineamento non era una svista: si ri-timbra **dopo** il sigillo, mai prima.)*
 
-**Non "correggere" il disallineamento aggiornando CLAUDE.md.** Va risolto in un senso o nell'altro
-(sigillo corretto → ri-timbro, oppure rollback del cablaggio), ed è una decisione di Luca.
+### 1.2 — ✅ RISOLTO: il sigillo era CIECO, il cablaggio era giusto
 
-**La baseline NON è contaminata:** S1 e S2 del sigillo Step 2 **passano** (`0.000e+00`, nodi
-3164 vs 3164, 0 shape divergenti). A flag spento il codice è **byte-identico** a `2277e9a0`.
+`S3` misurava `1.000000000000` per ogni `cs` perche' nel setup del test `omega_clk` valeva
+**esattamente 0** (dopo `semina()`, `eta = 0` → `ramp = 0` → pesi nulli → `den = 0`): il test
+valutava **prima del transitorio** e misurava solo la precessione.
 
-### 1.2 — Il sigillo dello STEP 2 fallisce, ma NON sappiamo se il cablaggio sia sbagliato
+Riparato: `eta = TAU_A` (lo stato che il sistema raggiunge da solo) + estrazione **lineare**
+`f(q) = P + C q²` → `(f(q)-f(0))/(f(1)-f(0)) = q²`, che cancella la precessione da se'.
+**Esito: `(cs/CS_M)^2` misurato a `3.469e-18`. SIGILLO STEP 2: 10/10 PASS.**
 
-`S3` misurava `1.000000000000` per ogni `cs`. **Diagnosi provata:** nel setup del test
-`omega_clk` vale **esattamente 0** (dopo `semina()`, `eta = 0` → `ramp = 0` → pesi nulli → `den = 0`).
-Moltiplicare zero per `(cs/CS_M)^2` dà zero, e la fase misurata veniva **tutta dalla precessione**.
-
-- **PROVATO:** il sigillo è **cieco**.
-- **NON PROVATO:** che il cablaggio sia corretto. **Un test cieco non assolve.**
-- Il prossimo passo è correggere lo **STRUMENTO**, non il cablaggio — sapendo che oggi **non
-  sappiamo** se il cablaggio sia giusto.
+**Aggiunto S3.0**, che verifica che il test *veda* (`|f(1)-f(0)| > 1e-13`, misurato su 39/40 nodi).
+Era esattamente questo a mancare: senza, un sigillo cieco puo' fallire **o passare** inosservato.
 
 ---
 

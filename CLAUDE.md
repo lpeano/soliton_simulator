@@ -14,9 +14,10 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
   Fidati del sorgente eseguibile, non delle annotazioni.
 - Blob di riferimento certificato, **per branch** (verifica sempre dal DISCO):
   - `dev-spinoriale` (BASELINE, codice pre-fork) -> **4fc7a794...**
-  - `fork-su2` (branch del fork SU(2), dove si lavora) -> **2277e9a0...** (dallo STRATO 1,
-    `_bloch_ritardato` + `FORK_SU2_MEM`, 2026-09-14). Storia dei timbri su questo branch:
-    `b4c6c3f8` (PEZZO 1) -> `968fba34` (PEZZO 3, Strato 0) -> **`2277e9a0` (STRATO 1, attuale)**.
+  - `fork-su2` (branch del fork SU(2), dove si lavora) -> **c0803713...** (dallo STEP 2,
+    `--step2-orologio`, sigillo 10/10 PASS, 2026-09-14). Storia dei timbri su questo branch:
+    `b4c6c3f8` (PEZZO 1) -> `968fba34` (PEZZO 3, Strato 0) -> `2277e9a0` (STRATO 1) ->
+    **`c0803713` (STEP 2, attuale)**.
     Cambiera' ancora a ogni pezzo del fork: **il blob e' un timbro, non una costante.** Quello che
     NON cambia e' l'obbligo di ri-timbrare il gate quando cambia.
   - **`csv/_test_53c/gate_cache.json` NON si timbra a mano.** E' ancorato al blob e oggi e'
