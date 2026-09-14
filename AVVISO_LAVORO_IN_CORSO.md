@@ -3,7 +3,7 @@
 > **Leggi questo PRIMA di trarre conclusioni dal repo.** Branch `fork-su2`.
 > Scritto per chi legge il repo da fuori (Claude web / chiunque riprenda) e potrebbe avere uno
 > snapshot vecchio o trovare il codice in uno stato intermedio.
-> **Aggiornato al commit `3d2c9e5`.**
+> **Aggiornato dopo la chiusura dello shake-then-freeze.**
 
 ---
 
@@ -39,7 +39,7 @@ Moltiplicare zero per `(cs/CS_M)^2` dà zero, e la fase misurata veniva **tutta 
 
 ---
 
-## 2. C'È UN ESPERIMENTO IN VOLO IN QUESTO MOMENTO
+## 2. L'ESPERIMENTO CHE ERA IN VOLO — ORA CHIUSO
 
 **SHAKE-THEN-FREEZE.** Predizione scritta e committata **prima** dei run:
 `doc/PREDIZIONE_shake_then_freeze.md` (commit `d0f3de6`).
@@ -56,15 +56,21 @@ Moltiplicare zero per `(cs/CS_M)^2` dà zero, e la fase misurata veniva **tutta 
 DB** con `--regime deterministico` (spegne **solo** `SCUOTIMENTO`, sigillato O2), 600 passi.
 Zero modifiche al simulatore.
 
-**⚠ Se trovi i file `csv/_test_fork/_vuoto_stf_*` senza un commit di ESITO, il run non è finito o
-non è stato letto. NON leggerli come risultato.** L'esito, quando c'è, sta in un commit dedicato e
-in coda a `doc/PREDIZIONE_shake_then_freeze.md`.
+**✅ CHIUSO il 2026-09-14.** Esito in coda a `doc/PREDIZIONE_shake_then_freeze.md` §5.
+**ESITO B, come predetto:** da uno stato casuale, con la sola precessione, χ deriva di **−0.33°** in
+600 passi (riferimento casuale 90.000°) e l'autocorrelazione resta **piatta a zero** su tutte e 14
+le distanze. La premessa è confermata — **non si congela più al polo** (`|⟨n⟩|` resta ~1/√N, non 1) —
+quindi il congelamento di prima **era** la condizione iniziale speciale. Ma toglierla **non rivela
+struttura sotto: rivela che non c'è struttura.**
+
+> **È il QUINTO lato dello stesso fatto**, e chiude l'ultima scappatoia (*"forse era solo la
+> condizione iniziale degenere"*).
 
 ---
 
 ## 3. QUELLO CHE È CHIUSO, E COME VA DETTO
 
-**Quattro misure indipendenti sono UN fatto da quattro lati: il settore di spin non ha una forza
+**CINQUE misure indipendenti sono UN fatto da cinque lati: il settore di spin non ha una forza
 organizzante emergente.**
 
 1. **Teorema di inerzia** — la connessione è uno **specchio** della materia (1.57e-15).
@@ -73,7 +79,9 @@ organizzante emergente.**
    materia compresa (χ = 90.0 ± 39.2 contro l'atteso casuale 90.000 ± 39.171).
 3. **Kuramoto REFUTATO** — allineamento locale aggiunto **non basta** a vincere il rumore.
 4. **FDT** — nel rumore **non c'è dissipazione compagna**: `E[n'] − n = −a²·n`, senza `{n_k}`.
-   **Dimostrato**, non solo misurato. È l'unico dei quattro che **spiega** gli altri tre.
+   **Dimostrato**, non solo misurato. È l'unico dei cinque che **spiega** gli altri.
+5. **Shake-then-freeze** — da uno stato **casuale**, la sola precessione **non organizza**
+   (χ: −0.33° in 600 passi, autocorrelazione piatta). Chiude l'obiezione della condizione iniziale.
 
 **Formula onesta:** le tre porte ovvie (precessione / rumore / Kuramoto) sono **chiuse**. Se si
 vuole struttura di spin, va **imposta e dichiarata**, o trovata in una fisica **non ancora
