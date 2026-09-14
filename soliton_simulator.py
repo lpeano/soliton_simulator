@@ -4811,7 +4811,12 @@ def _applica_flag(a):
               "fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. "
               "NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.")
     GAMMA_TURBO = float(getattr(a, "gamma_turbo", 1.0) or 1.0)  # [DIAGNOSTICO] default 1.0 = byte-identico
-    if GAMMA_TURBO != 1.0 and not CS_DINAMICO:
+    # NB: si legge `a.cs_dinamico` DAGLI ARGOMENTI, non il globale CS_DINAMICO: quest'ultimo viene
+    # assegnato PIU' SOTTO (:4842), quindi qui varrebbe ancora il default False e il guard
+    # scatterebbe SEMPRE, azzerando il turbo anche quando --cs-dinamico e' passato. Preso davvero il
+    # 2026-09-14: il primo run K=300 e' girato a K=1 senza che nulla lo segnalasse, tranne un avviso
+    # che diceva il falso. Leggere dagli argomenti toglie del tutto la dipendenza dall'ordine.
+    if GAMMA_TURBO != 1.0 and not bool(getattr(a, "cs_dinamico", False)):
         # Stessa convenzione degli altri avvisi: si IGNORA, non si forza. Senza --cs-dinamico,
         # cs = CS_M costante: non c'e' nessuna sensibilita' da amplificare e il flag sarebbe muto.
         print("[gamma-turbo] AVVISO: richiede --cs-dinamico (senza, cs = CS_M costante e K non morde). IGNORATO, K riportato a 1.0.")
