@@ -211,7 +211,6 @@ def main():
         r["norma_nret_err"] = (float(np.max(np.abs(np.linalg.norm(np.asarray(nbr)[:n], axis=1) - 1.0)))
                                if nbr is not None and len(nbr) >= n else float("nan"))
         r["nan_psi"] = int(not np.all(np.isfinite(np.asarray(psi)[:n])))
-        _scrivi_incrementale(r)                    # <-- vedi `_scrivi_incrementale`
         r["max_pos"] = (float(np.max(np.abs(np.asarray(net.pos)[:n])))
                         if getattr(net, "pos", None) is not None and len(net.pos) >= n else float("nan"))
         # CON COSA HA GIRATO DAVVERO QUESTO PASSO (letto dai globali vivi, non da prima del run)
@@ -229,6 +228,10 @@ def main():
             r["cs_std"] = float(np.std(_c)); r["cs_min"] = float(np.min(_c)); r["cs_max"] = float(np.max(_c))
         else:
             r["cs_std"] = r["cs_min"] = r["cs_max"] = float("nan")
+        # La riga e' COMPLETA solo qui: flag e cs_* sono appena stati aggiunti. Scrivere prima
+        # troncherebbe il CSV proprio sulle colonne di verifica (errore fatto e corretto il
+        # 2026-09-14: il primo tentativo scriveva dopo `nan_psi`, e STEP2/cs_* sparivano).
+        _scrivi_incrementale(r)
         righe.append(r)
 
     def spia(self):
