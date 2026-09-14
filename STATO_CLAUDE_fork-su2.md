@@ -104,6 +104,78 @@ Inoltre l'effetto e' proporzionale a quanto i Bloch cambiano ENTRO `tau` (a ripo
 5e-15), e `cs` e' quasi-costante alle densita' attuali -> `tau ~ d/CS_M`: il ritardo c'e', ma la
 sua VARIAZIONE spaziale (la curvatura) e' debole finche' `cs` non e' vivo.
 
+## ⚠⚠ REPERTO 2026-09-14 — I BLOCH NON HANNO DINAMICA PROPRIA. Il fork trasporta rumore.
+
+**Test A/B a variabile singola** (`--regime deterministico` cambia SOLO `SCUOTIMENTO`, sigillato
+O2), 300 passi, seme 1, osservatore sigillato pure-read (O1: `0.000e+00`). Entrambi i bracci con
+`FORK_SU2=True FORK_SU2_MEM=True` verificato **dentro** il ciclo.
+
+| | BRACCIO ON (scuotimento) | BRACCIO OFF (`--regime deterministico`) |
+|---|---|---|
+| chi materia | 90.04 +- 39.17 gradi | **0.00 +- 0.00** |
+| chi vuoto | 90.06 +- 39.06 gradi | **0.00 +- 0.00** |
+| chi p90 (densi) | 89.86 +- 39.11 gradi | **0.00 +- 0.00** |
+| frazione chi < 10 gradi | 0.0076 | **1.0000** |
+| \|<n>\| | 0.007 – 0.025 (~1/sqrt(N)) | **1.000000 esatto** |
+| direzione <n> | casuale, cambia | **(0, 0, +1) esatto, immobile** |
+| \|n_ret\| - 1 | 2.22e-16 | **0.00e+00 esatto** |
+
+*(atteso per direzioni casuali indipendenti: 90.000 / 39.171 gradi, fr<10 = 0.0076)*
+
+### IL VERDETTO — non e' nessuna delle due ipotesi previste
+
+Non "lo scuotimento copriva la struttura", non "la dinamica non organizza". E' la terza:
+**senza scuotimento i Bloch NON SI MUOVONO AFFATTO.** `|<n>| = 1.000000` su `(0,0,+1)` dal passo 1
+al passo 300, mentre N cresce 80 -> 3567. Quello e' **esattamente la condizione iniziale**
+(`soliton_simulator.py:1778`, *"nuovi nodi al polo"* = `[0,0,1]`). Non e' un collasso verso
+l'allineamento: e' che **il sistema parte sul punto fisso e non se ne muove mai**.
+
+**Perche' e' un punto fisso esatto:** se tutti gli `nb` sono uguali, il campo `B` dei vicini e'
+parallelo a `nb`, quindi `cross(B, nb) = 0`, quindi `omega_new = 0`, quindi nessuna rotazione. E i
+nodi nuovi nascono al polo, cioe' gia' dentro il punto fisso.
+
+**ATTRIBUZIONE: 100% lo scuotimento.** La dinamica deterministica non contribuisce **nulla** alla
+direzione dei Bloch — ne' ordine ne' disordine. Il campo di Bloch e' **puro rumore di vuoto**.
+
+### ERA DOCUMENTATO NEL CODICE, e nessuno l'aveva collegato al fork
+
+`soliton_simulator.py` lo dice in **quattro punti** (`:761`, `:1982`, `:4718`, `:5067`), a proposito
+di `KURAMOTO_SU2`:
+> *"nb **SI muove** (gravita' fisica, voluto: convergenza-dt, **non 6.7e-16**)"*
+
+Cioe': **senza** `--kuramoto-su2`, `nb` si muove di ~6.7e-16 — arrotondamento, non fisica. E la
+config certificata del fork **non ha mai avuto `--kuramoto-su2`**. Coerente con il resto del
+disegno: `--deparam-orologio` e' esplicitamente costruito perche' l'orologio **non inclini** `nb`
+(*"PURA FASE: l'orologio NON entra nell'asse di rotazione ... non tocca la gravita'"*), e
+`--sync-fase-orologio` perche' *"nb [resti] invariante"*. Piu' meccanismi sono **nb-invarianti per
+progetto**, e l'unico che muove `nb` non era acceso.
+
+E' il secondo caso del presidio nuovo di `CLAUDE.md` par.9 (*"quando si apre una domanda nuova,
+ri-interroga le misure vecchie"*): qui la risposta era nei **commenti del codice**, non in un run.
+
+### CONSEGUENZA PER IL FORK (dura, e da non addolcire)
+
+La connessione `N_ij` e' costruita dalle direzioni di Bloch. In questo sistema quelle direzioni
+sono, nei due soli regimi possibili:
+- **con scuotimento:** indistinguibili dal rumore bianco, **ovunque**, materia compresa;
+- **senza scuotimento:** una costante, **zero informazione**.
+
+In nessuno dei due c'e' struttura spaziale. E il W(r) del `PROTOCOLLO` non puo' discriminare in
+nessuno dei due: con chi uniforme e' piatto per costruzione; con chi = 0 vale `W = 2` esatto
+(`U = I` ovunque), cioe' abeliano banale. **La gobba sul bordo non e' misurabile su questo
+substrato.**
+
+Il cerchio con il teorema di inerzia: la connessione e' **uno specchio della materia**; i Bloch
+della materia sono **rumore**; lo specchio riflette rumore. Lo Strato 1 ha rotto l'inerzia (23/23
+PASS, dimostrato) — ma ha reso la connessione sensibile a un **passato anch'esso casuale**.
+
+### COSA QUESTO NON DICE
+300 passi, **un seme**, due bracci (par.2.7): ATTRIBUISCE la causa, non conclude sulla fisica. Non
+dice che il fork sia sbagliato: dice che **il substrato su cui gira non ha struttura di Bloch in
+QUESTA configurazione**. Esiste un flag documentato che muove `nb` per fisica (`--kuramoto-su2`);
+accenderlo e' un meccanismo nuovo (par.1) e **una decisione di Luca**, non dell'esecutore.
+Stabilita' perfetta su entrambi i bracci: nessun NaN, `|psi|-1` ~ 4e-16, `max|x|` ~ 9.4, niente runaway.
+
 ## PROSSIMA AZIONE (dopo lo STRATO 1)
 1. **Run di fisica, non piu' sigilli tecnici**: >= 2000 passi, **piu' semi** (par.2.7), con e senza
    `--fork-su2-mem`. Prima domanda: **olonomia W(r)** secondo `doc/PROTOCOLLO_test_olonomia.md`
