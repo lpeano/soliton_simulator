@@ -592,3 +592,157 @@ argomento buono che sia giusto (`N|psi_j>` e' la proiezione naturale, spin disal
 meno) **ma e' un argomento, non una misura**. Olonomia W(r), stabilita' e comportamento EM: li dice un
 run. **Elegante non significa dinamicamente corretto.** Oggi il punto e' accademico, perche' il ramo e'
 inerte.
+
+---
+
+## Sessione 2026-09-14 — STRATO 1: il fork si accende
+
+### §44 — L: fai il PEZZO 4 / STRATO 1, la connessione con memoria — ESEGUITO
+**L** consegna il piano dello Strato 1 con la diagnosi gia' fatta: lo Strato 0 e' inerte per
+**simultaneita'** (§40), quindi la cura e' la **ritardazione**. La connessione `N_ij` deve nascere
+dai Bloch a `t-tau`, con `tau = d/cs` (tempo-luce d'arco). *"E' causalita' (cono di luce), NON una
+taratura per ottenere l'effetto."*
+
+**A — cablaggio** (blob di partenza verificato dal disco: `968fba34`, branch `fork-su2`). Flag
+`FORK_SU2_MEM` / `--fork-su2-mem`, OFF di default, richiede `--fork-su2` (da solo viene **ignorato
+con avviso**: accendere da soli un meccanismo che l'utente non ha chiesto violerebbe il par.1, e
+lasciarlo acceso sarebbe uno stato incoerente). Nuovo metodo `Rete._bloch_ritardato()`, stato
+per-nodo `_nb_ret` ereditato dalla mitosi, cache `_cs_nodo_prev`, e in `_coppia_interferenza` il
+cablaggio e' **una riga sola**: `_nb_conn = _nb` (Strato 0) oppure `self._bloch_ritardato(...)`
+(Strato 1). Il **trasporto resta sugli spinori CORRENTI**: cambia solo *da quando* viene la
+connessione, non *cosa* viene trasportato.
+
+**Scelta di progetto, diversa dal documento.** `doc/ROADMAP_fork_SU2.md` prescriveva memoria della
+**MATRICE** (`dU/dt = (U^Berry - U)/tau`). A rilassa invece il **BLOCH** (un versore) con **slerp
+geodetico**. Motivo: par.4 — un blend lineare di matrici uscirebbe da SU(2); rilassando il versore
+si resta in SU(2) **per costruzione** invece che per correzione. La fase resta sullo stato
+corrente, la connessione usa solo le direzioni. **Il codice e il documento oggi divergono, e il
+documento e' quello indietro** (registrato nello STATO, da allineare a valle).
+
+### §45 — REPERTO: uno zero che NON voleva dire "identico" — PRESIDIO
+Primo giro di sigillo, 17/17 PASS. Ma nella riga informativa: **`max|Strato0 - Strato1| sul run
+intero = 0.000e+00`**. Con S3 che diceva "la forza cambia del 74%", le due cose non potevano
+stare insieme. **A non archivia il PASS e indaga.**
+
+Due errori di A, trovati e corretti:
+1. **Il rumore della diagnosi.** La prima spia misurava *"quanto si muovono i Bloch fra un passo e
+   l'altro"* e dava una mediana di **1.989** (su una sfera unitaria: quasi antipodale). Falso:
+   `_applica_flag` esegue `for _ in range(300): net.step()` su un'**ALTRA rete** (quella
+   interattiva globale). Su 313 chiamate, **299 non erano del batch**. La misura mescolava due
+   sistemi diversi. *Lezione: prima di leggere una spia, verificare CHI la sta chiamando.*
+2. **Lo zero.** `diff()` confronta solo gli array con la **stessa shape**. I due run finiscono con
+   **3209 nodi (Strato 0) contro 3073 (Strato 1)**: **32 shape su 32 divergono**, nessun array e'
+   confrontabile, e `worst` resta a 0.0 **per mancanza di confronto**. La riga di stampa scartava
+   la lista dei divergenti e mostrava solo lo zero.
+
+**E' il gemello speculare del falso positivo del §41.** Li' un numero che *sembrava* un effetto ed
+era rumore; qui uno zero che *sembrava* identita' ed era **assenza di dati**. Stessa famiglia: una
+statistica riassuntiva letta senza guardare da dove viene. Lo script ora stampa **PRIMA** la riga
+delle shape e del conteggio nodi, e spiega la trappola in chiaro.
+
+**Misura rifatta pulita** (spia ristretta alla rete del batch, entrambi i rami calcolati sullo
+stesso stato a ogni passo): la forza cambia eccome. `|MEM - Strato0| / |coppia|` sale da ~1e-7 nei
+primi passi a **0.21-0.42** verso il passo 35. Da qui nasce il sigillo **S3b**, che pone la
+domanda di S3 alla **dinamica reale** invece che a stati sintetici.
+
+### §46 — L: STOP — il bug del frame preferito (DT contro dt_n) — DIMOSTRATO
+**L ferma tutto a sigillo in corso.** *"C'è un errore da correggere PRIMA di qualunque verdetto."*
+
+Il rilassamento usava `alpha = 1 - exp(-DT/tau)`, cioe' il **tic di COORDINATA globale**. Ma
+`tau = d/cs` e' tempo **PROPRIO**. Rilassare un tempo proprio con un tempo di coordinata:
+- **mescola due frame**;
+- **cancella la dipendenza dall'orologio locale** — con `tau=0.4`, un nodo con `r~0.01` rilassa
+  ~100 volte piu' in fretta con `DT` che con `dt_n`;
+- cioe' **infila la foliazione sincrona globale dentro un processo locale**: un frame preferito,
+  un *"etere"*. **E' esattamente cio' che un sistema relazionale non deve avere.**
+
+E non e' nemmeno coerente col file: tutta la fisica integra gia' in `dt_n = DT*r` / `dt_e`
+(`phivel`, `tw`); **`DT` nudo vive solo nel conteggio dei sottopassi CFL**. Era l'unico punto fuori
+convenzione.
+
+**Attribuzione, esplicita perche' resti vera.** *"Il prompt che ti avevo dato conteneva la versione
+vecchia (`dt = DT`): l'errore è nell'istruzione, non nella tua esecuzione."* **La radice l'ha vista
+L, non A.** Nessuno dei sigilli S1..S6 l'avrebbe presa: testano la **struttura** del ritardo (che
+ci sia, che si riduca al limite, che resti unitario), **non la sua SCALA TEMPORALE**. Sarebbero
+passati identici col bug dentro. *(Quando in un secondo momento L attribuisce ad A il merito della
+radice, A corregge: e' di L.)*
+
+**Correzione**, tre punti e nient'altro: `self._r_corrente = r` esposto da `step()` (**gated sul
+flag**, cosi' la baseline resta intatta); `dt_n = DT * r[:n]` (o `DT` se `r is None`, orologio
+globale) in `_bloch_ritardato`; dichiarazione nel costruttore. `DT` nudo **sparisce** dal metodo.
+
+### §47 — S7: il sigillo che mancava — DIMOSTRATO
+**L richiede un sigillo nuovo**, perche' *"nessuno dei sigilli attuali distingue DT da dt_n"*. E
+pone il monito gia' visto al sigillo N: **deve esercitare il METODO VERO**, non ricalcolare la
+formula inline — *"se S7 ricalcola la formula per conto suo, testa l'aritmetica, non il codice"*.
+
+**S7 come costruito:** quattro nodi con stato **identico** (presente `+z`, passato `+x`, `Omega =
+pi/2`, stesso `tau`) e **orologi diversi** (`_r_corrente = [0.5, 1, 2, 4]`). Si **chiama
+`_bloch_ritardato`** e si **ricava** `alpha` dall'avanzamento geodetico di `n_ret`
+(`arccos(n_ret . passato) / Omega`), **non** lo si ricalcola. Inline ci sono solo le **due ipotesi
+a confronto**, che e' il compito di un sigillo discriminante:
+
+| r | alpha atteso (dt_n) | alpha misurato | alpha col BUG (DT) |
+|---|---|---|---|
+| 0.5 | 0.012422199506 | 0.012422199506 | 0.024690087972 |
+| 1.0 | 0.024690087972 | 0.024690087972 | 0.024690087972 |
+| 2.0 | 0.048770575499 | 0.048770575499 | 0.024690087972 |
+| 4.0 | 0.095162581964 | 0.095162581964 | 0.024690087972 |
+
+`max|alpha_mis - atteso| = 2.550e-15`. Rapporto **r=2 / r=1 = 1.975309912**; **col bug varrebbe
+esattamente 1.000000000** (alpha costante, il ritmo locale non conterebbe). Con orologio globale
+(`r = None`) torna a `1-exp(-DT/tau)` entro 3.816e-16.
+
+**L, da guardiano:** *"questo è il sigillo che mancava — quello che rende il fatto verificato
+invece che sperato. Con DT, S1-S6 passavano lo stesso e il bug restava invisibile; S7 lo
+acchiappa."*
+
+### §48 — STRATO 1 SIGILLATO: 23/23 PASS. Il fork NON E' PIU' INERTE — DIMOSTRATO
+Sigillo intero ri-girato dopo la correzione (`csv/_seal_fork/_sigillo_strato1.py`, output
+committato in `_sigillo_strato1_OUT.txt`). Riferimento ancorato al **commit FISSO `af003c2`**, con
+verifica che il blob estratto sia `968fba34` — *un sigillo ancorato a HEAD si auto-assolve* (§41).
+
+| sigillo | misura |
+|---|---|
+| S1a fork ON + MEM OFF vs pre-Strato 1 | **0.000e+00** |
+| S1b baseline fork OFF vs pre-Strato 1 | **0.000e+00** |
+| S2 `tau->0` -> Strato 0 | **0.000e+00** (e `n_ret == n_cur` esatto) |
+| S3.0 controprova: Strato 0 e' inerte | 4.441e-15 |
+| **S3 LA FORZA CAMBIA** | **9.931e+00 = 74.47% di \|coppia\|** |
+| **S3b ... nel CICLO DINAMICO REALE** | mediana **0.170**, max **0.717** su 36 passi |
+| S3b2 memoria non resettata dalla mitosi | 2 reset su 34 chiamate |
+| S4 norme / NaN / runaway | `\|n_ret\|=1` a 2.220e-16 su 3073 nodi; nessun NaN; max\|x\|=9.37 |
+| S5 azione-reazione (ramo MEM) | sum = +6.439e-15 (max\|c\| = 9.312e+00) |
+| S6 a riposo MEM == scalare | 5.329e-15 dopo 200 tic |
+| **S7 il tic e' il TEMPO PROPRIO** | rapporto **1.9753** (col bug: **1.0000**) |
+
+**S1a e' il sigillo che assolve la correzione del §46:** `self._r_corrente = r` vive in `step()`,
+cioe' sul percorso caldo di **tutti** i run. Zero esatto su 32 array contro il blob certificato.
+
+**GATE RI-TIMBRATO** (era la condizione posta da L al PEZZO 3: *"si ri-timbra quando i run cambiano
+davvero"* — oggi cambiano): blob di `fork-su2` in `CLAUDE.md` par.0 da `b4c6c3f8` a **`2277e9a0`**,
+con la storia dei timbri del branch. **`gate_cache.json` NON e' stato timbrato a mano**: resta
+volutamente stale su `4fc7a794`, e la guardia di `_run_batch.ps1` rigirera' `_check_presidio.py`
+da sola al primo cache-miss. *Scrivere un PASS per un blob su cui il presidio non e' stato
+eseguito sarebbe un timbro falso.*
+
+**COSA QUESTO NON DICE (par.8, verbo onesto).** S3 e S3b dicono che la forza **CAMBIA**, non che
+sia **FISICA**. Rompere il teorema di inerzia era **garantito per costruzione**: non e' una
+scoperta, e' l'esecuzione di una previsione. Che la dinamica che ne esce sia sensata — olonomia
+`W(r)` non banale, stabilita' su orizzonti lunghi, verso corretto per la gravita' — **lo dice un
+RUN**, e non sotto ~2000 passi ne' su un solo seme (par.2.7). Inoltre l'effetto e' proporzionale a
+quanto i Bloch cambiano **entro `tau`**: dove il sistema e' quasi-statico l'inerzia quasi ritorna
+(S6 lo misura: 5e-15 a riposo). E `cs` e' quasi-costante alle densita' attuali (`I~0.05` contro
+soglia ~400), quindi `tau ~ d/CS_M`: il ritardo c'e', ma la sua **variazione spaziale** — la
+curvatura — resta debole finche' `cs` non e' vivo.
+
+**La formula onesta e' una sola: il fork NON E' PIU' INERTE.** Non "il fork funziona", non "il fork
+riproduce la gravita'". Il meccanismo si e' acceso; il giudizio sulla sua fisica e' il prossimo
+lavoro, ed e' un run, non un'algebra.
+
+### §49 — L: porta il racconto in CLAUDECONNECT — PRESIDIO
+**L** chiede il transcript e il push. **Motivo, da guardiano:** il teorema di inerzia (§40) e ora
+lo Strato 1 vivevano **solo** in `STATO_CLAUDE_fork-su2.md`, che e' **locale al branch** — a un
+merge o a un branch abbandonato, persi. Portarli nella narrazione madre li mette al sicuro nel
+**racconto durevole**. I messaggi di commit dicono *cosa* e' cambiato; solo qui sta **come ci si e'
+arrivati**, e i due errori del §45 e del §46 valgono piu' del risultato.
