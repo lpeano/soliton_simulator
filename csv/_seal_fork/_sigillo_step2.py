@@ -14,6 +14,9 @@ I SIGILLI
   S1  flag OFF byte-identico al codice pre-modifica        max|A-B| = 0.000e+00
   S2  riduzione al limite: ON con cs = CS_M ovunque        byte-identico a OFF, 0 esatto
   S3  IL DECISIVO: verso e scaling                         omega_eff/omega_base = (cs/CS_M)^2
+      (RIPARATO dopo il FAIL di 4f44c68: valutava al seme nudo, dove eta=0 -> ramp=0 -> pesi=0 ->
+       omega_clk=0 ESATTO, e misurava solo la precessione. Ora eta = TAU_A e il contributo
+       dell'orologio e' ISOLATO per linearita': f(q) = P + C q^2 -> (f(q)-f(0))/(f(1)-f(0)) = q^2.)
   S4  stabilita': ON su run breve                          nessun NaN/inf, nessun runaway
 
 S3 esercita il PERCORSO REALE (`_passo_spinoriale` chiamato, il rapporto RICAVATO dalla fase dello
@@ -119,70 +122,93 @@ sys.argv = ["soliton_simulator.py"]
 import soliton_simulator as S  # noqa: E402
 
 
-def fase_spinore(cs_rapporto, nodi=40, seed=7):
-    """Gira UN passo di `_passo_spinoriale` VERO e RICAVA la fase impressa dall'orologio.
+def _rete_test(nodi=40, seed=7):
+    """Rete sintetica con `eta` GIA' ACCUMULATA.
 
-    Non ricalcola (cs/CS_M)^2: costruisce una rete, chiama il metodo reale, e legge di quanto la
-    FASE dello spinore e' ruotata. Il rapporto fra due run a cs diversi e' il rapporto fra gli
-    omega_clk EFFETTIVI, qualunque cosa il codice ci abbia fatto.
-    """
-    g = np.random.default_rng(seed)
+    ERRORE RIPARATO (il FAIL di `4f44c68`): la prima versione valutava al SEME NUDO, dove
+    `eta = 0` -> `ramp = min(1, eta/TAU_A) = 0` -> i pesi `w` sono nulli -> `den = 0` ->
+    `omega_clk = num/max(den,1e-12) = 0` **esatto**. Moltiplicare zero per `(cs/CS_M)^2` da' zero:
+    il test misurava un rapporto fra due fasi di PRECESSIONE identiche, e dava 1.000000000000 per
+    ogni cs. Non era il cablaggio a essere muto: era il test a valutare TROPPO PRESTO.
+    Qui `eta` e' portata a `TAU_A` (ramp = 1) senza toccare il simulatore: e' lo stato che il
+    sistema raggiunge da solo dopo il transitorio."""
     net = S.Rete(seed)
     net.semina(nodi)
     n = net.n
-    # spinore noto e IDENTICO nei due run: la sola differenza sara' cs
     ps = np.zeros((n, 2), complex)
     ps[:, 0] = 1.0
-    net._psi_spinor = ps.copy()
+    net._psi_spinor = ps
     net._nb = np.tile([0.0, 0.0, 1.0], (n, 1))
     net._nb_prec = net._nb.copy()
     net.psi = np.full(n, 0.01 + 0j)
-    net._cs_nodo_prev = (None if cs_rapporto is None
-                         else np.full(n, cs_rapporto * S.CS_M))
-    w = net._pesi()
+    net.eta = np.full(n, S.TAU_A)          # <-- ramp = 1: i pesi esistono, omega_clk != 0
+    return net, n
+
+
+def fase(q, nodi=40, seed=7):
+    """Gira UN passo di `_passo_spinoriale` VERO e restituisce la fase impressa allo spinore,
+    con il fattore di Step 2 pari a `q^2` (cioe' `cs = q * CS_M`).
+
+    NON ricalcola `(cs/CS_M)^2`: costruisce lo stato, chiama il METODO REALE, e legge di quanto la
+    fase e' ruotata. Stesso monito del sigillo N e di S7."""
+    net, n = _rete_test(nodi, seed)
+    net._cs_nodo_prev = np.full(n, q * S.CS_M)
     prima = net._psi_spinor.copy()
-    net._passo_spinoriale(net.i, net.j, w, np.full(n, S.DT),
-                          psi_snapshot=net.psi.copy())
+    w = net._pesi()
+    net._passo_spinoriale(net.i, net.j, w, np.full(n, S.DT), psi_snapshot=net.psi.copy())
     dopo = net._psi_spinor
     k = min(len(prima), len(dopo))
-    # fase relativa impressa, componente per componente (la parte che _phc ha ruotato)
-    ov = np.sum(np.conj(prima[:k]) * dopo[:k], axis=1)
-    return np.angle(ov), k
+    return np.angle(np.sum(np.conj(prima[:k]) * dopo[:k], axis=1)), k
 
 
-vS, vD, vC, vK = S.CAMPO_SPINORIALE, S.DEPARAM_OROLOGIO, S.SPINORE_CORRETTO, S.STEP2_OROLOGIO
+vS, vD, vC, vK, vSc = (S.CAMPO_SPINORIALE, S.DEPARAM_OROLOGIO, S.SPINORE_CORRETTO,
+                       S.STEP2_OROLOGIO, S.SCUOTIMENTO)
 S.CAMPO_SPINORIALE = True
 S.DEPARAM_OROLOGIO = True
 S.SPINORE_CORRETTO = True
+S.SCUOTIMENTO = False          # niente rumore: il confronto dev'essere deterministico
 try:
-    S.STEP2_OROLOGIO = False
-    base, kb = fase_spinore(1.0)
+    # --- il test e' LINEARE, e cosi' isola l'orologio dalla precessione -----------------------
+    # La fase totale impressa in un passo e':      f(q) = P + C * q^2
+    #   P = contributo della PRECESSIONE (indipendente da cs)
+    #   C = contributo dell'OROLOGIO      (quello che lo Step 2 scala)
+    # Quindi  (f(q) - f(0)) / (f(1) - f(0))  =  q^2   ESATTO, e P si cancella da solo.
+    # Nessuna sottrazione arbitraria: q = 0 e' il ramo ON col fattore ZERO, cioe' orologio spento.
     S.STEP2_OROLOGIO = True
-    print("   cs/CS_M    rapporto fase MISURATO      atteso (cs/CS_M)^2     |differenza|")
+    f0, k0 = fase(0.0)
+    f1, k1 = fase(1.0)
+    base = f1 - f0
+    k = min(k0, k1)
+    m = np.abs(base[:k]) > 1e-13          # nodi dove l'orologio ha impresso qualcosa di misurabile
+    print("  contributo dell'OROLOGIO isolato: |f(1) - f(0)| mediana = %.3e su %d/%d nodi misurabili"
+          % (float(np.median(np.abs(base[:k][m]))) if m.sum() else float("nan"), int(m.sum()), k))
+    verdetto("S3.0 l'orologio ha un contributo NON NULLO (il test VEDE)",
+             m.sum() > 0.5 * k,
+             "%d/%d nodi con |f(1)-f(0)| > 1e-13   [era QUESTO a mancare nel FAIL di 4f44c68]"
+             % (int(m.sum()), k))
+
+    print("   cs/CS_M    rapporto MISURATO        atteso (cs/CS_M)^2      |differenza|")
     righe = []
-    for rap in (1.0, 0.5, 0.1):
-        f, kf = fase_spinore(rap)
-        k = min(kb, kf)
-        m = np.abs(base[:k]) > 1e-14
-        if m.sum() == 0:
-            righe.append((rap, float("nan"), rap ** 2, float("nan")))
-            continue
-        r_mis = float(np.median(f[:k][m] / base[:k][m]))
-        att = rap ** 2
-        righe.append((rap, r_mis, att, abs(r_mis - att)))
-        print("    %5.2f        %.12f            %.12f       %.3e" % (rap, r_mis, att, abs(r_mis - att)))
+    for q in (1.0, 0.5, 0.1):
+        fq, kq = fase(q)
+        kk = min(k, kq)
+        mm = m[:kk]
+        r_mis = float(np.median((fq[:kk][mm] - f0[:kk][mm]) / base[:kk][mm])) if mm.sum() else float("nan")
+        att = q ** 2
+        righe.append((q, r_mis, att, abs(r_mis - att)))
+        print("    %5.2f        %.12f            %.12f        %.3e" % (q, r_mis, att, abs(r_mis - att)))
     err = max(r[3] for r in righe if np.isfinite(r[3]))
     verdetto("S3 omega_eff/omega_base = (cs/CS_M)^2", err < 1e-9,
              "max|misurato - atteso| = %.3e su cs/CS_M = 1.0, 0.5, 0.1" % err)
     r1 = [r for r in righe if r[0] == 1.0][0][1]
     r01 = [r for r in righe if r[0] == 0.1][0][1]
-    verdetto("S3b l'orologio RALLENTA dove cs e' basso", r01 < r1 and r01 > 0,
-             "fase a cs=0.1*CS_M e' %.4f volte quella a cs=CS_M (deve essere < 1)" % (r01 / r1))
+    verdetto("S3b l'orologio RALLENTA dove cs e' basso", r01 < r1,
+             "contributo a cs=0.1*CS_M e' %.4f volte quello a cs=CS_M (deve essere < 1)" % (r01 / r1))
     verdetto("S3c a cs = CS_M il fattore e' 1 ESATTO", abs(r1 - 1.0) < 1e-12,
              "rapporto = %.15f" % r1)
 finally:
-    S.CAMPO_SPINORIALE, S.DEPARAM_OROLOGIO = vS, vD
-    S.SPINORE_CORRETTO, S.STEP2_OROLOGIO = vC, vK
+    (S.CAMPO_SPINORIALE, S.DEPARAM_OROLOGIO, S.SPINORE_CORRETTO,
+     S.STEP2_OROLOGIO, S.SCUOTIMENTO) = vS, vD, vC, vK, vSc
 
 # ============================================================ S2: riduzione al limite (run veri)
 print()
