@@ -20,12 +20,36 @@
   sul nuovo blob** (altrimenti il guard di `csv/_test_53c/_run_batch.ps1` blocca ogni campagna).
 
 ## Ultimo aggiornamento
-- Data: **2026-09-14**
-- Ultimo commit: **STRATO 1 — connessione con MEMORIA (`--fork-su2-mem`), sigillo 23/23 PASS**,
-  + ri-timbro del gate in CLAUDE.md par.0.
+- Data: **2026-09-14** (fine giornata)
+- Ultimo commit: **CLAUDECONNECT par. 50-58** (`6a31b68`). Prima: STEP 2 cablato con sigillo FALLITO.
 - Branch: **`fork-su2`**, allineato con `origin/fork-su2`.
-- Blob `soliton_simulator.py` = **2277e9a0** (verificato dal disco). Su `dev-spinoriale`: 4fc7a794.
-  Storia dei timbri del branch: `b4c6c3f8` (PEZZO 1) -> `968fba34` (PEZZO 3) -> `2277e9a0` (STRATO 1).
+- Blob `soliton_simulator.py` **SUL DISCO** = **`c0803713`** (STEP 2 cablato **ma NON sigillato**).
+- Blob **CERTIFICATO** in `CLAUDE.md` par.0 = **`2277e9a0`** (STRATO 1). **I DUE NON COINCIDONO, ed
+  e' VOLUTO:** il gate non si ri-timbra su un cablaggio il cui sigillo e' fallito. Chi riprende deve
+  sapere che il `.py` sul disco e' **avanti** rispetto all'ultimo blob certificato.
+  Storia dei timbri: `b4c6c3f8` (PEZZO 1) -> `968fba34` (PEZZO 3) -> **`2277e9a0` (STRATO 1, attuale
+  certificato)** -> `c0803713` (STEP 2, cablato non sigillato).
+
+## >>> PER CHI RIPRENDE — orientamento in 10 righe (2026-09-14)
+
+**CHIUSO E SIGILLATO:** STRATO 1 (`--fork-su2-mem`, 23/23 PASS): il fork **non e' piu' inerte**.
+Osservatore del vuoto (chi, <n>, autocorrelazione), pure-read, 6/6 PASS.
+
+**CHIUSO COME NEGATIVO PULITO — quattro lati dello STESSO fatto:**
+il settore di spin **non ha una forza organizzante emergente**.
+1. **Teorema di inerzia:** la connessione e' uno **specchio** della materia (Strato 0 inerte, 1.57e-15).
+2. **Frozen-o-noise:** cio' che specchia e' **rumore**. Senza scuotimento i Bloch **non si muovono**
+   (`|<n>| = 1.000000` sul polo per 300 passi); con scuotimento sono **rumore bianco ovunque**,
+   materia compresa (chi = 90.0 +- 39.2 contro l'atteso casuale 90.000 +- 39.171).
+3. **Kuramoto REFUTATO:** aggiungere allineamento locale **non basta** a vincere il rumore.
+4. **FDT:** nel rumore **non c'e' dissipazione compagna** — `E[n'] - n = -a^2 n`, senza `{n_k}`.
+   **Dimostrato**, non solo misurato. L'unico dei quattro che **spiega** gli altri tre.
+=> Le tre porte ovvie (precessione / rumore / Kuramoto) sono **chiuse**. Struttura di spin: o
+**imposta e dichiarata**, o in una fisica **non ancora identificata**.
+
+**APERTO, e sono DUE cose diverse:**
+- **(a) STEP 2** cablato ma **NON sigillato** (sotto). Il prossimo passo e' correggere lo **STRUMENTO**.
+- **(b) SHAKE-THEN-FREEZE:** un esperimento **mai fatto** (sotto). E' la pista viva.
 - **GATE RI-TIMBRATO** in CLAUDE.md par.0 (era la condizione posta da Luca al PEZZO 3: "si
   ri-timbra quando i run cambiano davvero". Oggi cambiano). `csv/_test_53c/gate_cache.json` resta
   volutamente STALE su `4fc7a794`: la guardia di `_run_batch.ps1` rigira `_check_presidio.py` da
@@ -207,6 +231,97 @@ rumore (chi=90), rumore+Kuramoto (chi=90). Il fork continua a non avere nulla da
 ampiezza. Abbassare l'ampiezza dello scuotimento per far vincere l'allineamento sarebbe **tarare un
 parametro per ottenere l'effetto voluto** (par.3): non si fa. Se un giorno l'ampiezza cambiasse per
 una ragione DERIVATA, questa misura va rifatta.
+
+## ESITO FDT (2026-09-14, commit `1d722d1`) — lo scuotimento NON contiene dissipazione allineante
+
+Predizione scritta PRIMA (`ad96669`, `doc/PREDIZIONE_fdt_scuotimento.md`). Ipotesi:
+fluttuazione-dissipazione — un rumore porta con se' una dissipazione compagna col coefficiente
+**fissato dal rumore**. Se allineasse ai vicini sarebbe un **Kuramoto emergente a zero manopole**.
+
+**ESPANSIONE ANALITICA.** Per `n' = (n + a g)/|n + a g|`, `g ~ N(0, I_3)`, mediata su `g`:
+
+> **`E[n'] - n = -a^2 n + O(a^3)`**
+
+Drift **parallelo a `n`** (nessuna componente trasversa), dipendente dal **solo `n`** (nessun
+`{n_k}`), con `|E[n']| = 1 - a^2` = contrazione del risultante: **DIFFUSIONE ISOTROPA PURA**, drift
+**nullo** sulla sfera. Verificato a **1.28e-07** (amp = 0.013, 4·10^6 campioni; trasversa 8.2e-06,
+sotto l'errore statistico 5.0e-04).
+
+> **Kuramoto emergente dal rumore: ESCLUSO PER DIMOSTRAZIONE.** Una cosa che non legge i vicini non
+> puo' allinearli, e l'espansione lo conferma nella forma esatta del drift.
+
+**REPERTO NON PREVISTO — la precessione MUTUA e' attivamente DISORDINANTE.** Con il rumore
+**spento**, l'angolo fra due nodi che precedono l'uno attorno all'altro **non si conserva**:
+
+| \|B\| | chi: 0 -> 2000 passi (amp = 0) |
+|---|---|
+| 0.5 | 60 -> **62.5** |
+| 2.0 | 60 -> **104.2** (supera l'isotropo) |
+| 10.0 | 60 -> **180.000** (antipodale ESATTO) |
+
+Rodrigues conserva l'angolo fra **un** vettore e il **suo** asse; ma i due ruotano **l'uno attorno
+all'altro simultaneamente** e la coppia non conserva nulla. **Punto fisso ANTI-allineante a
+`chi = 180`.** Non solo manca il *"tira verso"*: **c'e' uno "spinge via"**.
+
+## STEP 2 (2026-09-14, commit `4f44c68`) — CABLATO ma NON SIGILLATO. Gate NON ri-timbrato.
+
+`--step2-orologio`: `omega_clk *= (cs/CS_M)^2` = **orologio di Compton** (`omega = m c^2/hbar`, e nel
+modello `c` e' `cs`). Fisica derivata, zero parametri; a `cs = CS_M` il fattore e' **1 esatto**.
+Aggancia i due tempi propri (metrico `d/cs` e orologio `DT*r`) che erano **scollegati**.
+Predizione scritta PRIMA (`cdc39d0`, `doc/PREDIZIONE_step2.md`), con **tre protezioni di lettura**.
+
+**SIGILLO: 7/9 PASS — S3 e S3b FALLISCONO.**
+
+| | |
+|---|---|
+| S1 flag OFF byte-identico | **PASS** `0.000e+00` [nodi 3164 vs 3164, 0 shape divergenti] |
+| S2 riduzione al limite | **PASS** `0.000e+00` |
+| **S3 scaling `(cs/CS_M)^2`** | **FAIL** — misurato `1.000000000000` per cs/CS_M = 1.0, 0.5, 0.1 |
+| S4 stabilita' | PASS |
+
+**DIAGNOSI: IL SIGILLO E' CIECO, NON (necessariamente) IL CABLAGGIO.** Nel setup di S3 `omega_clk`
+vale **ESATTAMENTE 0** (misurato: media e max `0.000000e+00`). Subito dopo `semina()`, `eta = 0` ->
+`ramp = min(1, eta/TAU_A) = 0` -> pesi `w = 0` -> `den = 0` -> `num/max(den,1e-12) = 0`.
+**Moltiplicare zero per `(cs/CS_M)^2` da' zero.** La fase `4.030e-03` che S3 misurava veniva **tutta
+dalla precessione**: confrontava due rotazioni identiche -> `1.000000000000` per ogni `cs`.
+
+- **PROVATO:** il sigillo non puo' vedere l'effetto.
+- **NON PROVATO:** che il cablaggio sia corretto. **Un test cieco non assolve.**
+- **Prossimo passo:** correggere lo **STRUMENTO** (un S3 con `eta > 0`, pesi non nulli e coerenza
+  d'arco non nulla, che isoli la fase dell'orologio da quella della precessione). **Sapendo che oggi
+  NON sappiamo se il cablaggio sia giusto.**
+- **GATE NON RI-TIMBRATO di proposito:** `CLAUDE.md` par.0 resta a `2277e9a0`. Ri-timbrare su un
+  cablaggio non sigillato sarebbe un timbro falso. **S1 e S2 passano: la baseline non e' contaminata.**
+
+## ⚑ PISTA APERTA — SHAKE-THEN-FREEZE: l'esperimento mai fatto (domanda di Luca, 2026-09-14)
+
+**La domanda:** *"potrebbe servire un periodo di scuotimento caotico prima del test?"*
+
+**Nella lettura "ricottura": NO, ed e' dimostrato.** Il ricottura funziona quando c'e' competizione
+fra un accoppiamento ordinante `J` e un rumore `T`: abbassando `T`, `J` vince. Qui **`J` e' zero**
+(FDT: drift senza `{n_k}`), e la diffusione sulla sfera ha **una sola distribuzione stazionaria,
+l'uniforme**. Scuotere e poi testare riporta dove siamo gia'.
+
+**MA la domanda apre un esperimento MAI FATTO, ed e' lecito.** Il braccio OFF si e' congelato al polo
+**solo perche' PARTIVA dal polo** (`:1778`, *"nuovi nodi al polo"*), che e' **il piu' degenere degli
+stati possibili** e un punto fisso esatto per simmetria. Se si scuote **e poi si smette**, si congela
+una configurazione **casuale**, che **non e' nel punto fisso**. E il FDT ha appena mostrato che **la
+precessione mutua ha una dinamica propria** (punto fisso anti-allineante a `chi = 180`).
+
+> **La domanda vera: qual e' l'ATTRATTORE della sola precessione, partendo da una configurazione
+> CASUALE invece che dal polo?** Mai misurato nel sistema: solo su **due nodi isolati**.
+
+**NON e' una manopola (par.3).** Cambiare la **condizione iniziale** non e' tarare un **parametro
+della dinamica**. E la condizione iniziale attuale **e' gia' una scelta arbitraria del codice**, ed e'
+la piu' speciale che esista: **partire da Bloch casuali e' MENO particolare, non di piu'.**
+
+**E si puo' fare a COSTO ZERO DI CODICE** con la macchina di resume gia' esistente:
+run con scuotimento ON -> `--sync-db` salva lo stato (Bloch ormai casuali) -> **riprendi dallo stesso
+DB** con `--regime deterministico` (che spegne **solo** `SCUOTIMENTO`, sigillato O2). Stesso blob,
+flag diversi: nessuna riga nuova, nessun numero scelto.
+**DA VERIFICARE PRIMA:** il DB rifiuta il resume se cambia la **versione del codice** — va controllato
+dal sorgente che **non** rifiuti anche un cambio di **flag**. Se rifiutasse, serve un'altra via, e
+va discussa: non si forza il controllo di versione.
 
 ## PROSSIMA AZIONE (dopo lo STRATO 1)
 1. **Run di fisica, non piu' sigilli tecnici**: >= 2000 passi, **piu' semi** (par.2.7), con e senza
