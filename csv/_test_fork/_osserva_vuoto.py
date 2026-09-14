@@ -50,6 +50,12 @@ def main():
     ap.add_argument("--passi", type=int, default=2000)
     ap.add_argument("--ogni", type=int, default=100)
     ap.add_argument("--tag", default="on")
+    ap.add_argument("--step2", action="store_true", dest="step2",
+                    help="accende --step2-orologio (omega_clk *= (cs/CS_M)^2, orologio di Compton).")
+    ap.add_argument("--cs-dinamico", action="store_true", dest="cs_dinamico",
+                    help="accende --cs-dinamico: senza, cs = CS_M costante e il turbo e' ignorato.")
+    ap.add_argument("--gamma-turbo", type=float, default=1.0, dest="gamma_turbo", metavar="K",
+                    help="amplificatore DIAGNOSTICO della sensibilita' di cs a rho (solo _cs_nodo).")
     ap.add_argument("--kuramoto", action="store_true", dest="kuramoto",
                     help="accende --kuramoto-su2 (allineamento locale alla media SU(2) dei vicini).")
     ap.add_argument("--regime-det", action="store_true", dest="regime_det",
@@ -80,6 +86,12 @@ def main():
         print("[osserva] RESUME da %s" % a.riprendi_da, flush=True)
     else:
         argv += ["--db-cleanup"]
+    if a.step2:
+        argv += ["--step2-orologio"]
+    if a.cs_dinamico:
+        argv += ["--cs-dinamico"]
+    if a.gamma_turbo != 1.0:
+        argv += ["--gamma-turbo", str(a.gamma_turbo)]
     if a.kuramoto:
         argv += ["--kuramoto-su2"]
     if a.regime_det:
@@ -189,6 +201,15 @@ def main():
         r["SCUOTIMENTO"] = int(S.SCUOTIMENTO)
         r["SYNC_UPDATE"] = int(S.SYNC_UPDATE)
         r["KURAMOTO_SU2"] = int(S.KURAMOTO_SU2)
+        r["STEP2"] = int(S.STEP2_OROLOGIO)
+        r["GAMMA_TURBO"] = float(S.GAMMA_TURBO)
+        # cs VIVO? se std ~ 0 il turbo non morde e il run e' nullo (verifica-scala in-run)
+        _csp = getattr(net, "_cs_nodo_prev", None)
+        if _csp is not None and len(_csp) >= n:
+            _c = np.asarray(_csp, float)[:n]
+            r["cs_std"] = float(np.std(_c)); r["cs_min"] = float(np.min(_c)); r["cs_max"] = float(np.max(_c))
+        else:
+            r["cs_std"] = r["cs_min"] = r["cs_max"] = float("nan")
         righe.append(r)
 
     def spia(self):
@@ -199,7 +220,8 @@ def main():
             # i globali VIVI, campionati a ogni passo del batch: se cambiassero a meta' run lo si
             # vedrebbe qui (l'insieme avrebbe piu' di un elemento).
             flag_visti.add((bool(S.FORK_SU2), bool(S.FORK_SU2_MEM),
-                            bool(S.SCUOTIMENTO), bool(S.SYNC_UPDATE), bool(S.KURAMOTO_SU2)))
+                            bool(S.SCUOTIMENTO), bool(S.SYNC_UPDATE), bool(S.KURAMOTO_SU2),
+                            bool(S.STEP2_OROLOGIO), bool(S.CS_DINAMICO), float(S.GAMMA_TURBO)))
             if not a.no_osserva and (stato["k"] == 1 or stato["k"] % a.ogni == 0):
                 misura(self, stato["k"])
 
@@ -208,8 +230,8 @@ def main():
 
     for f in sorted(flag_visti):
         print("[osserva-flag] tag=%s seed=%d  FORK_SU2=%s FORK_SU2_MEM=%s SCUOTIMENTO=%s "
-              "SYNC_UPDATE=%s KURAMOTO_SU2=%s   (letti DURANTE il run)"
-              % ((a.tag, a.seed) + f), flush=True)
+              "SYNC_UPDATE=%s KURAMOTO_SU2=%s STEP2=%s CS_DIN=%s GAMMA_TURBO=%.4g"
+              "   (letti DURANTE il run)" % ((a.tag, a.seed) + f), flush=True)
     if len(flag_visti) > 1:
         print("[osserva-flag] ATTENZIONE: i flag sono CAMBIATI durante il run.", flush=True)
 
