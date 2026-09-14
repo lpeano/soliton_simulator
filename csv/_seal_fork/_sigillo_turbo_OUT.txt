@@ -1,0 +1,47 @@
+================================================================================================
+SIGILLO TURBO — `--gamma-turbo K` tocca cs e SOLO cs?
+================================================================================================
+GAMMA = 0.05.  Usi di GAMMA nel file: cs (:2354), satura() (:2216), psi_spin (:2168).
+[PASS] T1 K = 1 e' NEUTRO (cs identico a se stesso)     max|D cs| = 0.000e+00 su 60 nodi
+
+================================================================================================
+T2 — IL DECISIVO: con K > 1, satura() e psi_spin sono INVARIATE mentre cs CAMBIA?
+================================================================================================
+   K =   2.0 | D satura() = 0.000e+00 | D psi_spin = 0.000e+00 | D cs = 4.563e-02
+[PASS] T2 K=2: satura() INVARIATA                       max|D| = 0.000e+00
+[PASS] T2 K=2: psi_spin INVARIATA                       max|D| = 0.000e+00
+[PASS] T2 K=2: cs CAMBIA (il turbo MORDE)               max|D cs| = 4.563e-02
+   K =   5.0 | D satura() = 0.000e+00 | D psi_spin = 0.000e+00 | D cs = 1.706e-01
+[PASS] T2 K=5: satura() INVARIATA                       max|D| = 0.000e+00
+[PASS] T2 K=5: psi_spin INVARIATA                       max|D| = 0.000e+00
+[PASS] T2 K=5: cs CAMBIA (il turbo MORDE)               max|D cs| = 1.706e-01
+   K =  10.0 | D satura() = 0.000e+00 | D psi_spin = 0.000e+00 | D cs = 3.460e-01
+[PASS] T2 K=10: satura() INVARIATA                      max|D| = 0.000e+00
+[PASS] T2 K=10: psi_spin INVARIATA                      max|D| = 0.000e+00
+[PASS] T2 K=10: cs CAMBIA (il turbo MORDE)              max|D cs| = 3.460e-01
+
+================================================================================================
+T3 — cs risponde a K nel verso giusto e in modo monotono?
+================================================================================================
+   Atteso: cs_floor = CS_M/(1 + K*GAMMA*sqrt(I)) -> cs CALA al crescere di K, a parita' di I.
+   K       cs mediana     cs min      cs/CS_M mediana
+    1.0     1.990008    1.952128      0.995004
+    2.0     1.980150    1.906495      0.990075
+    5.0     1.951349    1.781556      0.975674
+   10.0     1.906187    1.606131      0.953093
+[PASS] T3 cs MONOTONO NON CRESCENTE in K                mediane: 1.990008 -> 1.980150 -> 1.951349 -> 1.906187
+[PASS] T3b il turbo MORDE davvero (cs cala)             cs mediana: K=1 -> 1.990008 ; K=10 -> 1.906187  (calo 8.382e-02)
+[PASS] T3c a densita' NULLA cs = CS_M anche con K=10    max|cs - CS_M| = 0.000e+00  (il turbo amplifica la SENSIBILITA', non crea cs dal nulla)
+================================================================================================
+SIGILLO TURBO: 13/13 PASS -> PASS
+
+COSA QUESTO SIGILLO NON DICE
+----------------------------
+Che il turbo sia FISICAMENTE LEGITTIMO: dice solo che e' RISTRETTO come dichiarato. Restringere
+ROMPE DI PROPOSITO la condivisione di GAMMA fra cs e le due saturazioni, quindi il turbo e' un
+ISOLAMENTO DIAGNOSTICO e **non** il regime reale ad alta densita' — dove, con GAMMA condiviso,
+cambierebbero ENTRAMBI. Un esito positivo dello scan va letto come CONDIZIONALE:
+"il gradiente di cs, IN ISOLAMENTO, retroagisce sullo spin".
+E non dice nulla sulla dinamica: quella la dicono i run.
+
+EXIT=0

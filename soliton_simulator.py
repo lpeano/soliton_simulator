@@ -810,6 +810,30 @@ STEP2_OROLOGIO = False  # [STEP 2] AGGANCIO OROLOGIO <-> METRICA: omega_clk *= (
                         # tutto il resto legge snapshot t-1. Senza cache -> CS_M -> fattore 1.
                         # Richiede --campo-spinoriale + --deparam-orologio (e' li' che _phc vive).
                         # Default off = byte-identico.
+GAMMA_TURBO = 1.0       # [DIAGNOSTICO, NON PERCORSO CERTIFICATO] amplificatore della SENSIBILITA'
+                        # DI cs ALLA DENSITA'. Dentro `_cs_nodo` si usa GAMMA*GAMMA_TURBO al posto
+                        # di GAMMA; OVUNQUE ALTROVE GAMMA resta ORIGINALE. Default 1.0 = nessun
+                        # effetto = byte-identico.
+                        # PERCHE' ESISTE: alle densita' attuali cs e' MORTO (I~0.05 contro la soglia
+                        # ~1/GAMMA^2 ~ 400), quindi cs ~ CS_M costante e ogni test cs-dipendente e'
+                        # nullo. Il turbo abbassa la soglia cosi' che cs si svegli a densita'
+                        # RAGGIUNGIBILI. Non aggiunge fisica: accelera un meccanismo che ESISTE
+                        # (cs = cs(rho)) e che e' spento SOLO dalla scala.
+                        # PERCHE' RISTRETTO: GAMMA e' UN parametro fisico CONDIVISO fra cs (:2354),
+                        # la saturazione scalare `satura()` e la saturazione del campo SPINORIALE
+                        # (psi_spin = _Fs/(1+GAMMA*norm)). Turboarlo globalmente cambierebbe la
+                        # DINAMICA DEL CAMPO, non la sensibilita' di cs, e il risultato sarebbe
+                        # INATTRIBUIBILE (il braccio di controllo Step2 ON/OFF non lo isolerebbe:
+                        # entrambi avrebbero il campo alterato allo stesso modo).
+                        # ONESTA' (da tenere nella lettura): restringendo si ROMPE DI PROPOSITO la
+                        # condivisione di GAMMA. Quindi il turbo ristretto e' un ISOLAMENTO
+                        # DIAGNOSTICO, **non** il regime reale ad alta densita' — dove, con GAMMA
+                        # condiviso, cambierebbero ENTRAMBI. Un esito positivo va letto come
+                        # "il gradiente di cs, IN ISOLAMENTO, retroagisce sullo spin": un
+                        # CONDIZIONALE, non un'affermazione sul regime reale.
+                        # NB: `:5318` (diaglog) RE-IMPLEMENTA cs inline e NON chiama `_cs_nodo`:
+                        # sotto turbo quella colonna riporta il cs NON turboato. Non usarla.
+                        # Richiede --cs-dinamico (senza, cs = CS_M costante e K non morde).
 SPIN_FEEDBACK = False   # FEEDBACK LOCALE SPINORE->ARCHI: usa l'overlap complesso dei lift sugli archi
                         # come flusso di fase antisimmmetrico. Richiede --spinore-vivo; default off
                         # per A/B. Non impone alcuna cucitura o olonomia: la misura deve emergere.
@@ -2351,7 +2375,11 @@ class Rete:
         W_loc = self._mat(w)
         media_vicini = (W_loc @ I[:n]) / np.maximum(W_loc @ np.ones(n), 1e-9)
         u_nodo = I[:n] / np.maximum(media_vicini, 1e-9)
-        cs_floor = CS_M / (1.0 + GAMMA * np.sqrt(np.maximum(I[:n], 0.0)))
+        # [TURBO DIAGNOSTICO] UNICO punto in cui GAMMA e' amplificato. Default GAMMA_TURBO = 1.0
+        # -> _g = GAMMA -> byte-identico. Ogni ALTRO uso di GAMMA nel file resta ORIGINALE: in
+        # particolare `satura()` e la saturazione del campo spinoriale NON sono toccate (sigillo T2).
+        _g = GAMMA * GAMMA_TURBO
+        cs_floor = CS_M / (1.0 + _g * np.sqrt(np.maximum(I[:n], 0.0)))
         cs_floor = np.minimum(cs_floor, CS_M)
         transizione = 0.5 * (1.0 + np.tanh(1.0 - u_nodo))
         return cs_floor + (CS_M - cs_floor) * transizione
@@ -4672,7 +4700,7 @@ def _applica_flag(a):
     global net
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
     if getattr(a, "tau_d0", False):
@@ -4782,6 +4810,20 @@ def _applica_flag(a):
               "Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il "
               "fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. "
               "NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.")
+    GAMMA_TURBO = float(getattr(a, "gamma_turbo", 1.0) or 1.0)  # [DIAGNOSTICO] default 1.0 = byte-identico
+    if GAMMA_TURBO != 1.0 and not CS_DINAMICO:
+        # Stessa convenzione degli altri avvisi: si IGNORA, non si forza. Senza --cs-dinamico,
+        # cs = CS_M costante: non c'e' nessuna sensibilita' da amplificare e il flag sarebbe muto.
+        print("[gamma-turbo] AVVISO: richiede --cs-dinamico (senza, cs = CS_M costante e K non morde). IGNORATO, K riportato a 1.0.")
+        GAMMA_TURBO = 1.0
+    if GAMMA_TURBO != 1.0:
+        print("[gamma-turbo] AMPLIFICATORE DIAGNOSTICO K = %.4g: dentro _cs_nodo si usa GAMMA*K = %.5g al posto di GAMMA = %.5g. "
+              "OVUNQUE ALTROVE GAMMA resta ORIGINALE (satura() e la saturazione del campo spinoriale NON sono toccate). "
+              "NON e' il percorso certificato. E' un ISOLAMENTO DIAGNOSTICO, NON il regime reale ad alta densita': "
+              "con GAMMA condiviso cambierebbero ENTRAMBI. Un esito positivo si legge come CONDIZIONALE "
+              "('il gradiente di cs, in isolamento, retroagisce'), non come affermazione sul regime reale. "
+              "NB: la colonna cs_* del diaglog (:5318) re-implementa cs inline e NON e' turboata: non usarla."
+              % (GAMMA_TURBO, GAMMA * GAMMA_TURBO, GAMMA))
     TEMPO_SEGNO = bool(getattr(a, "tempo_segno", False)) # MOD 5.3a+5.3b: verso dalla materia/antimateria coerente + magnitudine torsionale
     if TEMPO_SEGNO and not (CAMPO_SPINORIALE and SPINORE_CORRETTO):
         raise SystemExit("[errore] --tempo-segno richiede --campo-spinoriale + --spinore-corretto (il segno di doppia-copertura e la coerenza vivono li')")
@@ -5102,6 +5144,19 @@ def _cli():
                         "ritardato rilassa verso il corrente con slerp geodetico, alpha = 1-exp(-dt/tau) (passo esatto di "
                         "primo ordine, mai Verlet). A riposo, o per tau->0, torna allo Strato 0. Richiede --fork-su2. "
                         "Default off = byte-identico.")
+    p.add_argument("--gamma-turbo", type=float, default=1.0, dest="gamma_turbo", metavar="K",
+                   help="[DIAGNOSTICO, NON PERCORSO CERTIFICATO] amplifica di K la SENSIBILITA' DI cs ALLA "
+                        "DENSITA': dentro _cs_nodo si usa GAMMA*K al posto di GAMMA, e SOLO li'. Default K=1 "
+                        "= nessun effetto = byte-identico. Serve perche' alle densita' attuali cs e' MORTO "
+                        "(I~0.05 contro la soglia ~1/GAMMA^2 ~ 400): il turbo abbassa la soglia cosi' che cs si "
+                        "svegli a densita' raggiungibili. NON aggiunge fisica: accelera un meccanismo che ESISTE "
+                        "(cs = cs(rho)) e che e' spento SOLO dalla scala. RISTRETTO di proposito: GAMMA e' "
+                        "condiviso con satura() e con la saturazione del campo spinoriale, e turboarlo "
+                        "globalmente cambierebbe la dinamica del campo invece della sensibilita' di cs, rendendo "
+                        "il risultato inattribuibile. ONESTA': restringendo si rompe di proposito quella "
+                        "condivisione, quindi e' un ISOLAMENTO DIAGNOSTICO e NON il regime reale ad alta "
+                        "densita'. Richiede --cs-dinamico. Il criterio di lettura non e' 'l'effetto appare' ma "
+                        "'l'effetto SCALA con K ed ESTRAPOLA con continuita' verso K=1'.")
     p.add_argument("--step2-orologio", action="store_true", dest="step2_orologio",
                    help="[STEP 2] AGGANCIO OROLOGIO <-> METRICA: omega_clk *= (cs/CS_M)^2. E' l'OROLOGIO DI COMPTON "
                         "(omega = m c^2 / hbar): la frequenza propria di una massa va come c^2, e nel modello c e' cs. "
