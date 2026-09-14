@@ -3,7 +3,15 @@
 > **Leggi questo PRIMA di trarre conclusioni dal repo.** Branch `fork-su2`.
 > Scritto per chi legge il repo da fuori (Claude web / chiunque riprenda) e potrebbe avere uno
 > snapshot vecchio o trovare il codice in uno stato intermedio.
-> **Aggiornato dopo la chiusura dello shake-then-freeze.**
+> **Aggiornato dopo la chiusura dello scan K=300 (esito B).**
+>
+> **NON C'E' NESSUN RUN IN VOLO.** I file `csv/_test_fork/_vuoto_k300_*` sono **risultati
+> definitivi**, non intermedi: il verdetto e' in `doc/ESITO_scan_turbo_K300.md` ed e' committato
+> accanto ai dati. (La versione precedente di questo avviso diceva di non leggerli: quell'avviso
+> e' **superato**.)
+>
+> **Blob sul disco `f5887254`, gate in `CLAUDE.md` par.0 su `c0803713`.** Non coincidono, ed e'
+> voluto: il turbo e' un ramo **diagnostico**, e si ri-timbra a pezzo compiuto, non a meta'.
 
 ---
 

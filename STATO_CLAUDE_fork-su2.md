@@ -21,21 +21,24 @@
 
 ## Ultimo aggiornamento
 - Data: **2026-09-14** (fine giornata)
-- Ultimo commit: **CLAUDECONNECT par. 50-58** (`6a31b68`). Prima: STEP 2 cablato con sigillo FALLITO.
-- Branch: **`fork-su2`**, allineato con `origin/fork-su2`.
-- Blob `soliton_simulator.py` **SUL DISCO** = **`c0803713`** (STEP 2 cablato **ma NON sigillato**).
-- Blob **CERTIFICATO** in `CLAUDE.md` par.0 = **`2277e9a0`** (STRATO 1). **I DUE NON COINCIDONO, ed
-  e' VOLUTO:** il gate non si ri-timbra su un cablaggio il cui sigillo e' fallito. Chi riprende deve
-  sapere che il `.py` sul disco e' **avanti** rispetto all'ultimo blob certificato.
-  Storia dei timbri: `b4c6c3f8` (PEZZO 1) -> `968fba34` (PEZZO 3) -> **`2277e9a0` (STRATO 1, attuale
-  certificato)** -> `c0803713` (STEP 2, cablato non sigillato).
+- Ultimo commit: **ESITO scan K=300 + reperto `_pesi` + relazione**. Prima: profilazione, fix guard
+  `--gamma-turbo`, osservatore incrementale.
+- Branch: **`fork-su2`**, allineato con `origin/fork-su2`. **Nessun run in volo.**
+- Blob `soliton_simulator.py` **SUL DISCO** = **`f5887254`** (turbo cablato + fix guard).
+- Blob **CERTIFICATO** in `CLAUDE.md` par.0 = **`c0803713`** (STEP 2, sigillo 10/10). **I DUE NON
+  COINCIDONO, ed e' VOLUTO:** il turbo e' un ramo DIAGNOSTICO, non il percorso certificato, e si
+  ri-timbra a pezzo compiuto, non a meta'. Chi riprende deve sapere che il `.py` sul disco e'
+  **avanti** rispetto all'ultimo blob certificato.
+  Storia dei timbri: `b4c6c3f8` (PEZZO 1) -> `968fba34` (PEZZO 3) -> `2277e9a0` (STRATO 1) -> **`c0803713` (STEP 2 sigillato 10/10, ultimo TIMBRATO)** -> `f5887254` (cablaggio turbo
+  + fix guard + osservatore incrementale: **sul disco, NON ancora timbrato, di proposito**).
 
-## >>> PER CHI RIPRENDE — orientamento in 10 righe (2026-09-14)
+## >>> PER CHI RIPRENDE — orientamento in 10 righe (2026-09-14, fine giornata)
 
 **CHIUSO E SIGILLATO:** STRATO 1 (`--fork-su2-mem`, 23/23 PASS): il fork **non e' piu' inerte**.
+STEP 2 (`--step2-orologio`, 10/10 PASS). TURBO ristretto (`--gamma-turbo`, 13/13 PASS).
 Osservatore del vuoto (chi, <n>, autocorrelazione), pure-read, 6/6 PASS.
 
-**CHIUSO COME NEGATIVO PULITO — CINQUE lati dello STESSO fatto:**
+**CHIUSO COME NEGATIVO PULITO — SEI lati dello STESSO fatto:**
 il settore di spin **non ha una forza organizzante emergente**.
 1. **Teorema di inerzia:** la connessione e' uno **specchio** della materia (Strato 0 inerte, 1.57e-15).
 2. **Frozen-o-noise:** cio' che specchia e' **rumore**. Senza scuotimento i Bloch **non si muovono**
@@ -43,20 +46,34 @@ il settore di spin **non ha una forza organizzante emergente**.
    materia compresa (chi = 90.0 +- 39.2 contro l'atteso casuale 90.000 +- 39.171).
 3. **Kuramoto REFUTATO:** aggiungere allineamento locale **non basta** a vincere il rumore.
 4. **FDT:** nel rumore **non c'e' dissipazione compagna** — `E[n'] - n = -a^2 n`, senza `{n_k}`.
-   **Dimostrato**, non solo misurato. L'unico dei cinque che **spiega** gli altri.
-5. **SHAKE-THEN-FREEZE (chiuso 2026-09-14):** da uno stato **casuale**, la sola precessione **non
-   organizza** (chi: **-0.33 gradi in 600 passi**, autocorrelazione **piatta a zero**). Chiude
-   l'ultima obiezione: *"forse era solo la condizione iniziale degenere"*. **Non lo era.**
-=> Le porte provate (precessione / rumore / Kuramoto / condizione iniziale) sono **chiuse**.
-Struttura di spin: o **imposta e dichiarata**, o in una fisica **non ancora identificata**.
+   **Dimostrato**, non solo misurato. L'unico dei sei che **spiega** gli altri.
+5. **SHAKE-THEN-FREEZE:** da uno stato **casuale**, la sola precessione **non organizza**
+   (chi: **-0.33 gradi in 600 passi**, autocorrelazione **piatta a zero**). Chiude l'obiezione
+   *"forse era solo la condizione iniziale degenere"*. **Non lo era.**
+6. **STEP 2 CON cs VIVO (chiuso 2026-09-14, `doc/ESITO_scan_turbo_K300.md`):** col turbo a K=300
+   `cs` scende al **5% di CS_M** nei nodi densi, e lo Step 2 **non muove lo spin**: chi materia
+   **89.9865 (ON) vs 89.9941 (OFF)** contro il nullo 90.000, chi p90 idem, autocorrelazione
+   **piatta a zero in entrambi**. **ESITO B.** Lo scan ai K minori si **chiude** per la logica
+   asimmetrica dichiarata prima di partire (piatto al forcing massimo => i minori sono superflui).
+=> Le porte provate (precessione / rumore / Kuramoto / condizione iniziale / metrica-orologio) sono
+**chiuse**. Struttura di spin: o **imposta e dichiarata**, o in una fisica **non ancora identificata**.
 
-**APERTO — UNA cosa sola:**
-- **STEP 2** cablato ma **NON sigillato** (sotto). Il prossimo passo e' correggere lo **STRUMENTO**,
-  sapendo che oggi **non sappiamo** se il cablaggio sia giusto.
-- **GATE RI-TIMBRATO** in CLAUDE.md par.0 (era la condizione posta da Luca al PEZZO 3: "si
-  ri-timbra quando i run cambiano davvero". Oggi cambiano). `csv/_test_53c/gate_cache.json` resta
-  volutamente STALE su `4fc7a794`: la guardia di `_run_batch.ps1` rigira `_check_presidio.py` da
-  sola al primo cache-miss. **Non si scrive un PASS a mano per un blob non verificato.**
+**CAVEAT DA NON PERDERE sul lato 6:** un solo seme (par.2.7: screening, non fatto pubblicabile), e
+il turbo ristretto e' un **ISOLAMENTO DIAGNOSTICO**, non il regime reale — GAMMA e' condiviso, e
+restringerlo a `_cs_nodo` rompe di proposito quella condivisione. La lettura e' **condizionale**, e
+un negativo in isolamento e' **piu' debole**, non piu' forte, di un negativo nel regime vero.
+
+**APERTO — nessun run in volo. Due decisioni di Luca, non dell'esecutore:**
+- **`_pesi()`**: FASE A fatta, FASE B **non eseguita** perche' la premessa del mandato e' falsa
+  (`doc/REPERTO_pesi_ricorsione.md`): non e' ridondanza di `calcola_psi` (12.8%), e' una
+  **ricorsione** (43.6% del totale). Tre strade nel documento par.5.
+- **`:5318`**: il diaglog re-implementa `cs` inline e non chiama `_cs_nodo` -> **sotto turbo quella
+  colonna mente**. Dichiarato, non risolto.
+- **GATE**: `CLAUDE.md` par.0 dice `c0803713`, sul disco c'e' **`f5887254`** (cablaggio turbo + i due
+  fix). **Non ri-timbrato di proposito**: si timbra a pezzo compiuto, non a meta'.
+  `csv/_test_53c/gate_cache.json` resta volutamente STALE su `4fc7a794`: la guardia di
+  `_run_batch.ps1` rigira `_check_presidio.py` da sola al primo cache-miss. **Non si scrive un PASS
+  a mano per un blob non verificato.**
 
 ## ⚑ STRATO 1 — FATTO, SIGILLO 23/23 PASS (2026-09-14). IL FORK NON E' PIU' INERTE.
 **Questo e' il pezzo che accende il fork.** Lo Strato 0 era inerte per TEOREMA (vedi sotto): la
