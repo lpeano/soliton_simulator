@@ -35,7 +35,7 @@
 **CHIUSO E SIGILLATO:** STRATO 1 (`--fork-su2-mem`, 23/23 PASS): il fork **non e' piu' inerte**.
 Osservatore del vuoto (chi, <n>, autocorrelazione), pure-read, 6/6 PASS.
 
-**CHIUSO COME NEGATIVO PULITO — quattro lati dello STESSO fatto:**
+**CHIUSO COME NEGATIVO PULITO — CINQUE lati dello STESSO fatto:**
 il settore di spin **non ha una forza organizzante emergente**.
 1. **Teorema di inerzia:** la connessione e' uno **specchio** della materia (Strato 0 inerte, 1.57e-15).
 2. **Frozen-o-noise:** cio' che specchia e' **rumore**. Senza scuotimento i Bloch **non si muovono**
@@ -43,13 +43,16 @@ il settore di spin **non ha una forza organizzante emergente**.
    materia compresa (chi = 90.0 +- 39.2 contro l'atteso casuale 90.000 +- 39.171).
 3. **Kuramoto REFUTATO:** aggiungere allineamento locale **non basta** a vincere il rumore.
 4. **FDT:** nel rumore **non c'e' dissipazione compagna** — `E[n'] - n = -a^2 n`, senza `{n_k}`.
-   **Dimostrato**, non solo misurato. L'unico dei quattro che **spiega** gli altri tre.
-=> Le tre porte ovvie (precessione / rumore / Kuramoto) sono **chiuse**. Struttura di spin: o
-**imposta e dichiarata**, o in una fisica **non ancora identificata**.
+   **Dimostrato**, non solo misurato. L'unico dei cinque che **spiega** gli altri.
+5. **SHAKE-THEN-FREEZE (chiuso 2026-09-14):** da uno stato **casuale**, la sola precessione **non
+   organizza** (chi: **-0.33 gradi in 600 passi**, autocorrelazione **piatta a zero**). Chiude
+   l'ultima obiezione: *"forse era solo la condizione iniziale degenere"*. **Non lo era.**
+=> Le porte provate (precessione / rumore / Kuramoto / condizione iniziale) sono **chiuse**.
+Struttura di spin: o **imposta e dichiarata**, o in una fisica **non ancora identificata**.
 
-**APERTO, e sono DUE cose diverse:**
-- **(a) STEP 2** cablato ma **NON sigillato** (sotto). Il prossimo passo e' correggere lo **STRUMENTO**.
-- **(b) SHAKE-THEN-FREEZE:** un esperimento **mai fatto** (sotto). E' la pista viva.
+**APERTO — UNA cosa sola:**
+- **STEP 2** cablato ma **NON sigillato** (sotto). Il prossimo passo e' correggere lo **STRUMENTO**,
+  sapendo che oggi **non sappiamo** se il cablaggio sia giusto.
 - **GATE RI-TIMBRATO** in CLAUDE.md par.0 (era la condizione posta da Luca al PEZZO 3: "si
   ri-timbra quando i run cambiano davvero". Oggi cambiano). `csv/_test_53c/gate_cache.json` resta
   volutamente STALE su `4fc7a794`: la guardia di `_run_batch.ps1` rigira `_check_presidio.py` da
@@ -293,7 +296,29 @@ dalla precessione**: confrontava due rotazioni identiche -> `1.000000000000` per
 - **GATE NON RI-TIMBRATO di proposito:** `CLAUDE.md` par.0 resta a `2277e9a0`. Ri-timbrare su un
   cablaggio non sigillato sarebbe un timbro falso. **S1 e S2 passano: la baseline non e' contaminata.**
 
-## ⚑ PISTA APERTA — SHAKE-THEN-FREEZE: l'esperimento mai fatto (domanda di Luca, 2026-09-14)
+## ✅ SHAKE-THEN-FREEZE — CHIUSO (2026-09-14, commit `5cffa73`). ESITO B, come predetto.
+
+**ESITO, in tre righe.** Fase 2 (600 passi, scuotimento OFF, da stato **casuale**): chi resta
+**indistinguibile dal casuale**, deriva `90.13 -> 89.80 = -0.33 gradi` (riferimento 90.000 +- 39.171);
+`|<n>|` resta **~1/sqrt(N)** (oscilla fra 0.38 e 1.60 in unita' del casuale, senza tendenza);
+**autocorrelazione piatta a zero** su tutte e 14 le distanze (`+0.0050` vicino -> `+0.0014` lontano).
+`|n_ret|-1 = 2.22e-16`. N cresce 3611 -> 4679: **il sistema non e' fermo, evolve e fa mitosi — solo,
+non organizza i Bloch.**
+
+**LA PREMESSA ERA GIUSTA, LA CONCLUSIONE NO.** Il congelamento del braccio OFF **era** davvero la
+condizione iniziale speciale: qui, da uno stato casuale, **non si congela piu' al polo**. Ma
+toglierla **non rivela struttura sotto: rivela che non c'e' struttura.**
+
+**La predizione quantitativa ha retto:** predetto "una frazione di grado" dal prior `|B| ~ 0.53`
+misurato (`n_eff ~ 2`); misurato **-0.33 gradi**. Il prior a due nodi **si e' trasferito** al sistema
+a molti corpi. Il segno e' opposto a quello del test FDT, ma la deriva e' **dentro la dispersione dei
+campioni**: non e' significativa, e' rumore attorno a 90.
+
+**Il protocollo (resume da DB con flag diversi) ha funzionato**, e resta disponibile: la guardia del
+DB confronta **solo il git blob dei byte del codice**, non i flag. Zero modifiche al simulatore.
+Dettagli ed esito completo: `doc/PREDIZIONE_shake_then_freeze.md` par.5.
+
+### Come era stata posta (resta qui perche' il ragionamento vale, non solo l'esito)
 
 **La domanda:** *"potrebbe servire un periodo di scuotimento caotico prima del test?"*
 
