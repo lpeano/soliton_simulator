@@ -100,3 +100,83 @@ Questo limite è scritto **prima** di vedere i numeri, apposta.
 ## 7. COSA QUESTO LAVORO NON FA
 
 Non propone correzioni. **Prima si trova il termine, poi decide Luca.**
+
+---
+
+# AGGIUNTA AL CRITERIO — **ESITO (IV)**, scritto PRIMA dei dati
+
+> Aggiunta posta da Luca, 2026-09-15. **Il tracer era in corso ed è stato FERMATO** per scriverla:
+> i suoi dati sarebbero nati sotto un criterio incompleto, e una spiegazione aggiunta **dopo** averli
+> visti è esattamente ciò che il §1 di questo stesso documento vieta.
+> **Un criterio protegge solo dalle ipotesi che contiene.**
+
+## IV.1 L'ipotesi
+
+Il criterio come scritto copre tre colpevoli **deterministici** — a valle (I), ampiezza (II-a),
+geometria (II-b) — più il reperto nuovo (III). **Manca il caso in cui `omega` non è governato da
+NESSUN termine deterministico.**
+
+> **(IV)** L'incremento di `omega` per passo non viene né dalla coppia (`correzione/inerzia`) né dal
+> rilassamento (`omega_src/tau`), ma dal **RUMORE**.
+
+Se fosse così:
+- il rumore **non sa nulla dell'inerzia**, quindi **qualunque pendenza deterministica è irrilevante
+  per costruzione**, e una pendenza debole come **−0.106** **non richiede nessun bug** per essere
+  spiegata;
+- un incremento stocastico indipendente per passo produce un **random walk**, cioè
+  `omega ∝ √n` — **che è esattamente ciò che è già stato misurato**: `omega/√n` costante entro il
+  **4.6 %** su 15 punti (`doc/ANALISI_gilbert_fdt.md` §2).
+
+> **È l'unico esito che spiega INSIEME la pendenza −0.106 E il random walk.**
+> Gli altri tre spiegano la pendenza e lasciano il random walk **senza causa**.
+
+## IV.2 La firma da misurare
+
+Si scompone l'incremento **effettivo** nelle sue due parti, **per nodo e per passo**, e come
+**vettori** (non moduli: la direzione serve al controllo di IV.4):
+
+```
+Delta_vec = omega_new - omega_src                                  <- MISURATO
+det_vec   = dt_n * ( correzione/inerzia - omega_src/tau )          <- quello che la riga 1918 prescrive
+stoc_vec  = Delta_vec - det_vec                                    <- tutto il resto
+R_stoc    = |stoc_vec| / |det_vec|
+```
+
+`stoc_vec` cattura il rumore **anche se entra a monte** (dentro `B` o `nb`): è per definizione la
+parte di incremento che la formula, **valutata sugli ingressi tracciati**, non spiega.
+
+## IV.3 LA LETTURA, fissata adesso
+
+| `R_stoc` (mediana) | verdetto |
+|---|---|
+| **≥ 3** | **ESITO (IV): è il RUMORE che guida `omega`.** Le pendenze deterministiche sono irrilevanti; la −0.106 non è un bug ma **l'impronta di una dinamica stocastica**. |
+| **0.3 … 3** | regime **MISTO**: nessuno dei due domina. **Si riporta come tale e non si sceglie.** |
+| **≤ 0.3** | il rumore è marginale: **(IV) è ESCLUSO**, e la diagnosi resta fra (I), (II-a), (II-b), (III). |
+
+## IV.4 IL CONTROLLO INTERNO — `R_stoc` alto potrebbe essere un MIO errore
+
+`stoc_vec` è *«ciò che la mia ricostruzione non spiega»*. Un `R_stoc` alto ha **due** cause possibili:
+**(a)** rumore genuino; **(b)** un errore sistematico nella mia ricostruzione. Vanno separate, e si
+separano dalla **direzione**:
+
+> Si riporta anche **`cos(stoc_vec, det_vec)`**, la coseno-similarità mediana fra le due parti.
+> - **≈ 0** → le due parti sono **scorrelate in direzione**: coerente con **rumore isotropo**;
+> - **≈ ±1** → `stoc_vec` è **allineato** (o antiallineato) a `det_vec`: è un **errore sistematico
+>   della ricostruzione**, non rumore. **In quel caso (IV) NON si dichiara.**
+
+E una **stima a priori** dell'errore di ricostruzione, per confronto: l'unica approssimazione nota è
+`nb` rumoroso nel prodotto vettore (§5), che produce un errore relativo su `correzione` di ordine
+`amp·√2 / sin(angolo)`. **Va riportato quel numero accanto a `R_stoc`:** se `R_stoc` lo supera di
+molto, l'approssimazione **non può** spiegarlo.
+
+## IV.5 PRESIDIO DI PUREZZA — non consumare l'RNG
+
+Per ricostruire la parte deterministica serve `dt_n = DT·r`, cioè `ritmo()` — che **muta**
+`_psi_prec`. Si chiama **sulla copia profonda**, e **prima** di `calcola_psi` (che sovrascriverebbe
+`psi`, cambiando ciò che `ritmo()` legge). Inoltre si fa **snapshot/restore completo dello stato
+dell'RNG** della rete vera attorno alla misura (§2.3), e **il sigillo lo verifica**.
+
+> **Il generatore in sé non è in discussione.** È PCG64 con periodo 2^128, e le misure di questo
+> repo concordano col caso ideale a quattro cifre (`chi = 90.000` contro il nullo 90.000, dispersione
+> 39.2 contro 39.171): **un RNG difettoso non lo darebbe.** L'unico rischio è che il tracer
+> **consumi** la sequenza, e quello si sigilla.
