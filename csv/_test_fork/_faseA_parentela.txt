@@ -1,0 +1,17 @@
+flag: SCUOTIMENTO=True SYNC_UPDATE=False SPINORE_CORRETTO=True CAMPO_SPINORIALE=True
+stato dopo riscaldamento: n=900 archi=58702   (seme 1)
+
+nuovi nodi osservati             : 7
+  con ESATTAMENTE 2 genitori     : 7  (100.0%)
+  con il padre `a` identificabile: 7  (100.0%)
+
+chi PADRE-FIGLIO alla nascita (gradi), n=7:
+   media 0.0000  mediana 0.0000  min 0.0000  max 0.0000
+   VALORE-NULL (direzioni casuali): 90.000 +- 39.171
+
+spostamento del PADRE nel passo della nascita (gradi), n=7:
+   media 85.6452  mediana 95.8363  min 36.6732  max 108.7353
+   confronta col VALORE-NULL: uno spostamento ~90 gradi in UN passo significa
+   che il Bloch decorrela DA SE' STESSO in un tick.
+
+n finale=907  nati=7  coppie Schwinger=1

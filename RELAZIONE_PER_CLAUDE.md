@@ -139,6 +139,36 @@ relazione **non** vengono da lì: vengono dall'osservatore, che legge `_cs_nodo_
 
 ---
 
+## 6-bis. APERTO DA OGGI (2026-09-15) — la riformulazione: **un bilancio, non un meccanismo mancante**
+
+Documento: **`doc/BILANCIO_ordine_spin.md`**. **FASE A chiusa, B e C da fare.**
+
+Dal codice e' emerso un fatto che **cambia la domanda**: alla mitosi il figlio eredita il padre per
+**copia esatta** (`_nb`, `_psi_spinor`, `omega_s`, `_nb_ret`, `_psi_prec` — nessun jitter), e nasce
+**adiacente** nello spazio e nella topologia. Quindi **ogni nascita crea una coppia con chi = 0**
+(misurato: `0.0000` esatto). Ma la misura dice `chi = 90` ovunque.
+
+> **L'ordine non manca: nasce di continuo e viene DISTRUTTO.** Non serve cercare un meccanismo
+> ordinante (la strada che porterebbe a *imporre* un Kuramoto, gia' refutato): serve misurare il
+> **bilancio fra due tassi gia' presenti** — la mitosi che crea, il rumore + la precessione mutua
+> che distruggono.
+
+**Il numero che mi ha sorpreso**, e che va rifatto prima di crederci: nello **stesso passo** in cui
+nasce il figlio, il **padre** si sposta di **85.6 gradi in media** (mediana 95.8). Il Bloch
+decorrela **da se' stesso in un tick**, cioe' e' gia' sul valore-null. Se regge sulla statistica,
+`tau_dec` e' inferiore al passo e il bilancio e' dominato dalla distruzione. **Ma sono 7 campioni:
+un indizio, non un risultato.**
+
+**Due cose gia' utili per chi legge:**
+- l'**antinodo** Schwinger eredita `-psi`, ma `nb = psi^dag sigma psi` e' invariante per fase
+  globale: **anche l'antinodo nasce con chi = 0 in Bloch.** «Antichirale» riguarda il segno di
+  doppia copertura, non la direzione.
+- sotto `--spinore-corretto` il rumore **non** perturba il Bloch direttamente (quel ramo e' gated su
+  `SYNC_UPDATE`, spento): entra **solo** via `cross(B, nb) -> omega`. E' **rumore di COPPIA**, e
+  `omega_s` **ha gia' memoria** (`TAU_A`). Un canale che la memoria ce l'ha, e resta disordinato.
+
+---
+
 ## 7. IL LAVORO DI CONTORNO, in breve
 
 - **Profilazione** (`doc/PROFILAZIONE_costo_run.md`): il collo **non** è il loop CFL. I due hoist
