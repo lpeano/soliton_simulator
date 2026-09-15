@@ -1,0 +1,85 @@
+====================================================================================================
+PRIMA MISURA DEL SETTORE SPINORIALE SU SISTEMA PULITO - 2 semi
+  entrambe le cure nel codice; NB: --cs-dinamico OFF in questi run, quindi la cura della
+  cache cs e' INERTE qui: si sta esercitando l'orologio a 4pi, non il tempo-luce.
+====================================================================================================
+----------------------------------------------------------------------------------------------------
+  _vuoto_pulito1_s1.vuoto.csv   passi 500   n 3708   campioni 11
+----------------------------------------------------------------------------------------------------
+  chi (gradi) - valore-null: 90.000 +- 39.171   [z = (media-90)/SE, SE INTERNA al run]
+    MATERIA media  89.9682   std 39.1119   n  209846   SE 0.0854   scarto -0.0318   z  -0.37
+    VUOTO   media  93.0216   std 39.5574   n     869   SE 1.3419   scarto +3.0216   z  +2.25
+    p90     media  90.0210   std 39.0216   n   67760   SE 0.1499   scarto +0.0210   z  +0.14
+    tutto   media  89.9808   std 39.1142   n  210715   SE 0.0852   scarto -0.0192   z  -0.23
+    frazioni ai poli degeneri:  <10 gradi  mat 0.00745  p90 0.00748     >170 gradi  mat 0.00744  p90 0.00736
+
+  |<n>| - valore-null 1/sqrt(N); la firma che smaschera il COLLASSO e' il confronto con 1
+    tutto   |<n>| 0.028595   atteso 0.016422   rapporto 1.741   contro 1: 0.0286
+    materia |<n>| 0.040281   atteso 0.029934   rapporto 1.346
+
+  AUTOCORRELAZIONE <n_i . n_j> per bin di distanza - la firma che DISCRIMINA
+    bin |  distanza |     acorr |        SE |    z
+      0 |    0.6231 |  +0.00004 |   0.00410 | +0.01
+      1 |    1.0695 |  +0.00510 |   0.00409 | +1.25
+      2 |    1.5360 |  +0.00584 |   0.00409 | +1.43
+      3 |    8.6565 |  -0.00416 |   0.00407 | -1.02
+      4 |   13.0776 |  +0.00587 |   0.00411 | +1.43
+      5 |   13.4883 |  -0.00535 |   0.00407 | -1.32
+      6 |   13.7951 |  -0.00395 |   0.00409 | -0.97
+      7 |   14.0857 |  -0.00285 |   0.00406 | -0.70
+      8 |   14.4127 |  +0.00738 |   0.00409 | +1.80
+      9 |   14.9875 |  +0.00063 |   0.00407 | +0.16
+
+  theta = |omega|*dt_n : mediana 98.65 GIRI/passo   sopra 30 gradi/passo: 0.9978   sopra 360: 0.9841
+  r : dispersione std 0.474939   IQR 0.879904   (mediana 1.000000 - deve valere 1: e' NORMALIZZATA,
+      non e' una misura, vedi CLAUDE.md par.9)
+----------------------------------------------------------------------------------------------------
+  _vuoto_pulito2_s2.vuoto.csv   passi 500   n 3143   campioni 11
+----------------------------------------------------------------------------------------------------
+  chi (gradi) - valore-null: 90.000 +- 39.171   [z = (media-90)/SE, SE INTERNA al run]
+    MATERIA media  90.0639   std 39.1950   n  209120   SE 0.0857   scarto +0.0639   z  +0.75
+    VUOTO   media  91.7664   std 40.6763   n     808   SE 1.4310   scarto +1.7664   z  +1.23
+    p90     media  90.1174   std 39.1300   n   54469   SE 0.1677   scarto +0.1174   z  +0.70
+    tutto   media  90.0705   std 39.2009   n  209928   SE 0.0856   scarto +0.0705   z  +0.82
+    frazioni ai poli degeneri:  <10 gradi  mat 0.00763  p90 0.00751     >170 gradi  mat 0.00773  p90 0.00745
+
+  |<n>| - valore-null 1/sqrt(N); la firma che smaschera il COLLASSO e' il confronto con 1
+    tutto   |<n>| 0.024502   atteso 0.017837   rapporto 1.374   contro 1: 0.0245
+    materia |<n>| 0.030256   atteso 0.029934   rapporto 1.011
+
+  AUTOCORRELAZIONE <n_i . n_j> per bin di distanza - la firma che DISCRIMINA
+    bin |  distanza |     acorr |        SE |    z
+      0 |    0.5686 |  +0.00437 |   0.00409 | +1.07
+      1 |    0.9773 |  +0.00351 |   0.00408 | +0.86
+      2 |    1.3769 |  +0.00399 |   0.00409 | +0.97
+      3 |    6.8897 |  +0.00090 |   0.00407 | +0.22
+      4 |   13.0499 |  -0.00401 |   0.00411 | -0.98
+      5 |   13.4989 |  -0.00216 |   0.00412 | -0.52
+      6 |   13.8028 |  +0.00037 |   0.00409 | +0.09
+      7 |   14.0829 |  -0.00372 |   0.00410 | -0.91
+      8 |   14.3937 |  +0.00105 |   0.00410 | +0.26
+      9 |   14.9385 |  +0.00445 |   0.00407 | +1.09
+
+  theta = |omega|*dt_n : mediana 92.81 GIRI/passo   sopra 30 gradi/passo: 0.9997   sopra 360: 0.9943
+  r : dispersione std 0.421813   IQR 0.765755   (mediana 1.000000 - deve valere 1: e' NORMALIZZATA,
+      non e' una misura, vedi CLAUDE.md par.9)
+
+====================================================================================================
+VERDETTO contro doc/PREDIZIONE_prima_misura_4pi.md (soglie fissate PRIMA del run)
+====================================================================================================
+  _vuoto_pulito1_s1.vuoto.csv  ->  (A)      |z_mat| 0.37  |z_p90| 0.14  |<n>|/atteso 1.74  max|z_acorr| 1.80
+  _vuoto_pulito2_s2.vuoto.csv  ->  (A)      |z_mat| 0.75  |z_p90| 0.70  |<n>|/atteso 1.37  max|z_acorr| 1.09
+
+  ESITO (A) su tutti i semi - NIENTE CAMBIA.
+  E il CAVEAT dichiarato nella predizione par.1, che NON si toglie:
+    theta e' a 99 giri/passo: il settore e' ALIASATO, e queste cure non lo risolvono.
+    (A) e' l'esito che l'aliasing produrrebbe DA SOLO. E' compatibile con 'non c'e'
+    ordine' E con 'c'e' ordine e non lo vediamo': NON separa le due.
+    La frase dicibile e' quella, piu' stretta, scritta nella predizione par.1.
+
+  LA BARRA FRA SEMI (C10) - e' quella che conta, non la SE interna:
+    chi materia (gradi)    89.96822  90.06393   media 90.016075   dev.std FRA SEMI 0.067679
+    |<n>|                  0.02859  0.02450   media 0.026548   dev.std FRA SEMI 0.002894
+    theta (giri/passo)     98.65211  92.81346   media 95.732787   dev.std FRA SEMI 4.128548
+    dispersione di r       0.47494  0.42181   media 0.448376   dev.std FRA SEMI 0.037565
+====================================================================================================
