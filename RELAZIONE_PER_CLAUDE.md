@@ -8,13 +8,15 @@
 
 ---
 
-## 0. L'ULTIMO GIRO (2026-09-15, sera) — in sette righe
+## 0. L'ULTIMO GIRO (2026-09-15, sera) — in dieci righe
 
 > 1. **Trovato e curato un difetto silenzioso:** la cache `_cs_nodo_prev` veniva **scartata a ogni
 >    mitosi**, quindi nel **71.88 %** delle chiamate `tau = d/cs` calcolava `tau = d/CS_M`.
 >    Colpiva anche **lo STRATO 1, gia' sigillato 23/23**. Sigillo della patch: **5/5 PASS**.
 > 2. **La cura NON chiude la FASE 2.** La pendenza T3 va da **-0.4265** a **-0.4710** contro
 >    l'attesa **-0.69**: **16.9 % del divario**, non la meta'. `theta` resta a **42.8 giri/passo**.
+>    **⚠ IL "16.9 %" E' STATO RITIRATO — vedi il punto 4. Lo lascio scritto perche' la sequenza
+>    conti: e' cosi' che un numero sopravvive mezza giornata prima di cadere.**
 > 3. **Due predizioni opposte, entrambe sbagliate:** il mandato diceva ~50 %, **io dicevo zero**.
 >    L'errore mio e' spiegato al §6-duodecies ed e' di tipo generale.
 > 4. **Il controllo sui semi ha SMENTITO il punto 2** (§6-terdecies): su 3 semi il segno di `Delta`
@@ -28,7 +30,16 @@
 >    **Non** è "tempo proprio stale": è **l'orologio scalare storico invece di quello dichiarato.**
 > 6. **`S4` di quella cura ha misurato la cosa sbagliata:** `median(r) = 1.0` **per costruzione**,
 >    con qualunque orologio. Secondo caso del **punto fisso auto-normalizzante**.
-> 7. **E la domanda aperta più utile non cerca un bug** (§6-quindecies): l'attesa `-0.69` assume che
+> 7. **ESITO (A) sul braccio OFF della prima misura vera** (par.6-sexdecies): nessuna firma si
+>    stacca dal casuale, su 2 semi. **Ma theta e' a 92.8-98.7 giri/passo, il DOPPIO di quanto avevo
+>    scritto**: (A) e' l'esito che l'aliasing produrrebbe da solo.
+> 8. **--cs-dinamico era SPENTO** (par.6-septdecies), dimostrato da TRE vie. Decisione di Luca:
+>    **ci va SEMPRE**. E il sigillo 23/23 dello STRATO 1 **non ha mai esercitato la dipendenza da
+>    cs** (par.6-octodecies): i quattro run in partenza sono **la prima volta che gira davvero**.
+> 9. **Due REGOLE nuove** (par.6-vicies): la **promozione delle componenti** (par.10) e **un dato
+>    deve portarsi dietro le proprie condizioni** (par.9). Dal primo e' uscito il reperto dei
+>    **10 flag gia' accesi** che non sono mai passati per nessun criterio.
+> 10. **E la domanda aperta più utile non cerca un bug** (§6-quindecies): l'attesa `-0.69` assume che
 >    `sigma` sia indipendente da `tau`, ma c'è un **anello** che lo mette a valle. **Forse è il
 >    BERSAGLIO a essere mal calcolato.** Da provare **per prima**; **non lanciata**, e il numero
 >    **non è nei dati** come si credeva.
@@ -1112,6 +1123,136 @@ la causa**, e lo dirà il numero.
 
 **Criterio scritto prima, come sempre. Registrato come fronte R** in `doc/RAMIFICAZIONI.md`.
 **Non lanciato**: aspetta il via libera.
+
+---
+
+## 6-sexdecies. **PRIMA MISURA DEL SETTORE SPINORIALE, braccio OFF: ESITO (A)** — e l'aliasing è il doppio di quanto avevo scritto
+
+Predizione committata **prima** del run (`c547294`), soglie in **codice** committate prima di girare
+(`c8cd9d1`). 2 semi, 500 passi, blob `08784685`, osservatore **sigillato 6/6 PASS**.
+
+| | seme 1 | seme 2 |
+|---|---|---|
+| `chi` **materia** | 89.9682° · `SE 0.0854` → **`z = −0.37`** | 90.0639° · `SE 0.0857` → **`z = +0.75`** |
+| `chi` **p90** | 90.0210° → `z = +0.14` | 90.1174° → `z = +0.70` |
+| autocorrelazione, **10 bin** (0.57–15.0) | `max\|z\| = 1.80` | `max\|z\| = 1.09` |
+| frazioni `<10°` / `>170°` | 0.00745 / 0.00744 | 0.00763 / 0.00773 |
+
+Le frazioni ai poli **coincidono entro il terzo decimale** su entrambi i semi: distribuzione
+**simmetrica attorno a 90°**. Un ordinamento darebbe eccesso sotto i 10°, un'antiallineazione sopra
+i 170°. **Nessuno dei due.**
+
+**Una cosa pende e non la annuncio:** `|<n>|` è sopra il casuale su **entrambi** i semi (1.741 e
+1.374). **Ma il nullo che l'osservatore stampa (`1/√N`) è la SCALA, non l'ATTESA.** Misurato con
+4000 estrazioni di `N` versori casuali: **`|<n>|·√N = 0.915 ± 0.383`**, `p95 ≈ 1.59`. Contro quello:
+`z = +2.11` (seme 1, **sopra** il p95) e `z = +1.16`. **Media 1.64. Va riguardata, non annunciata.**
+
+**⚠ CORREZIONE A UN MIO NUMERO:** la predizione diceva *«`theta` resta a ~43 giri/passo»*.
+**Misurato 98.65 e 92.81.** Il `43` è il valore del braccio **ON**, con `--tau-luce`; questi run
+sono il sistema naturale. **Il 98–99 % dei nodi compie più di un giro intero per passo.**
+
+**Ciò che (A) toglie di mezzo** è l'obiezione *«ma la FASE 5 non era attiva»*, che rendeva i sei lati
+precedenti **non conclusivi**. **Ciò che non toglie:** (A) è l'esito che l'aliasing produrrebbe **da
+solo**. Il negativo è **più pulito**, non **conclusivo**.
+
+---
+
+## 6-septdecies. **`--cs-dinamico` era SPENTO** — e la decisione di Luca: **ci va SEMPRE**
+
+Rilievo di Luca, e la verifica ha dato **tre vie indipendenti concordi**.
+
+**1) Dai dati, e non è `0` ma `nan`:** `cs_std = cs_min = cs_max = **nan**` su tutti gli 11 campioni
+di entrambi i semi. **`nan` è una prova di ASSENZA, non di costanza**: uno `0` direbbe *«cs c'era e
+non variava»*, il `nan` dice che **la cache `_cs_nodo_prev` non esiste.**
+**2) Dal codice:** la cache è scritta **solo** dentro `if CS_DINAMICO:` — e `FORK_SU2_MEM` valeva
+**1**, letto dal CSV. **Resta solo `CS_DINAMICO`.**
+**3) Dal log in-run:** `CS_DIN=False` su entrambi i semi, letto dai **globali vivi** durante il ciclo.
+
+### La decisione, e la ragione è più forte di quella numerica che avevo misurato io
+
+Avevo argomentato sull'**ampiezza**: dove `cs` era acceso, `cs ∈ [1.99954, 2.0]` (**0.023 %**) contro
+`tau = d/cs ∈ [0.0271, 1.0509]` (**×38.74**) → **`cs` pesa `0.00629 %` della dispersione di `tau`,
+una parte su 15 898**. Il numero resta vero, **ma non è quello che decide**, e il mio «propongo di
+lanciare com'è» era sbagliato.
+
+> **Senza `--cs-dinamico` la cache non viene MAI scritta, quindi cade anche il `tau = d/cs` dello
+> STRATO 1** (`_bloch_ritardato`), non solo quello di `--tau-luce`: **tutta la memoria del fork
+> girava su una legge amputata.**
+> **Un `cs` costante non è un `cs` piccolo: è un `cs` ASSENTE**, e rende `tau = d/cs` un
+> `tau ∝ d` travestito. **Il punto non è l'ampiezza: è che la legge dev'essere CABLATA.**
+
+**Correzione al rilievo:** diceva che ciò *«spiegherebbe il 16.9 % di T3»*. **No:**
+`_rimisura_t3.py` riga 24 **contiene `--cs-dinamico`** — T3 girava col `cs` dinamico. E il **16.9 %
+era già stato ritirato** (segno non concorde su 3 semi, `t = −0.77`). **Non c'è un 16.9 % da
+spiegare.**
+
+---
+
+## 6-octodecies. ⚠ **IL SIGILLO 23/23 DELLO STRATO 1 NON HA MAI ESERCITATO LA DIPENDENZA DA `cs`**
+
+Rilievo di Luca, **verificato dal disco** — e vale **due volte**, non una.
+
+L'argv di `csv/_seal_fork/_sigillo_strato1.py` (righe **380-386**) **non contiene `--cs-dinamico`**.
+E quel sigillo è del blob **`2277e9a0`**, **precedente alla cura della cache**: anche col flag
+acceso, la cache sarebbe stata **scartata a ogni mitosi**.
+
+| | |
+|---|---|
+| **resta valido** | il **meccanismo** del ritardo (slerp geodetico, `alpha = 1−exp(−dt_n/tau)`) e **S7**, che misura `r=2 / r=1 = **1.9753**` — dipende da **`r`**, non da `cs`: il presidio sul tempo proprio **tiene** |
+| **mai testato** | che **`tau` SEGUA `cs`** — ed è *proprio* la ragione per cui `tau = d/cs` sarebbe più principiato di `tau ∝ rho` |
+
+> **I quattro run in partenza sono la PRIMA VOLTA che quella dipendenza gira davvero.**
+> **Non è «rifare la misura meglio»: è misurare per la prima volta.** *(Scritto prima che partano.)*
+
+---
+
+## 6-novodecies. **T3 sul sistema pulito** — il numero, e perché **non** riporto l'«11 %»
+
+4 bracci, 300 passi, seme **1**, **con `--cs-dinamico`**, blob `08784685`.
+
+| braccio | pendenza | SE | r² | n | `theta` | fallback |
+|---|---|---|---|---|---|---|
+| PRE OFF | −0.1685 | 0.0090 | 0.126 | 2417 | 129.51 giri/passo | n/d |
+| PRE ON | −0.4265 | 0.0091 | 0.464 | 2534 | 43.55 | n/d |
+| **POST OFF** | **−0.1024** | 0.0071 | 0.088 | 2146 | 128.88 | **0/302** |
+| **POST ON** | **−0.4555** | 0.0082 | 0.567 | 2364 | **38.99** | **2/608** |
+
+Lo script stampa `Delta = −0.0290 ± 0.0122`, `z = 2.37`, «11.0 % recuperato».
+**Non lo riporto.** Quella `SE` è **interna a un singolo run**; la dispersione **fra semi** vale
+**~0.030** (**C10**). Con `Delta = 0.029` e barra `0.030`, **non c'è un effetto: c'è un seme.**
+**È il 16.9 % di stamattina con un'altra cifra**, e quello fu ritirato quando tre semi diedero segno
+**non concorde**.
+
+**Regge invece, contro la barra giusta:** **la FASE 2 non si chiude** (divario **−0.2345** verso
+`−0.69`, `z ≈ 7.8`) · `--tau-luce` ha un effetto **grande** (ON−OFF **−0.3531**, ~12× la
+dispersione) · **`theta` resta ALIASATO a 38.99 giri/passo** nel braccio migliore.
+
+---
+
+## 6-vicies. DUE REGOLE NUOVE, e un reperto che ne è uscito
+
+**§10 — PROMOZIONE DELLE COMPONENTI.** Una componente sotto flag diventa fisica di default **solo**
+se: ① **derivata** non tarata · ② **sigillata con CONTROLLO POSITIVO** («con ON DEVONO differire»:
+un sigillo che verifica solo la byte-identità a OFF passerebbe anche su **codice morto**) ·
+③ **la sua assenza è un DIFETTO, non un'alternativa**. Si promuove il **default**, non si cancella
+il ramo. Registro: `doc/COMPONENTI_PROMOSSE.md`, **sezione A VUOTA**.
+
+> **IL REPERTO:** il file ha **51 flag booleani, 10 già a `True`**. Nessuno è passato per quei
+> criteri, **perché non esistevano**. Il peggiore: **`TAU_A_LOCALE`** — acceso di default, marcato
+> **«IN VERIFICA» dal suo stesso commento**, e **senza flag da riga di comando**, quindi **non
+> spegnibile per un A/B**: il criterio ② non è nemmeno *verificabile*. Ed è la branca che produce
+> il **punto fisso auto-normalizzante** (`tau_mediano ≈ TAU_A` sempre), cioè **esattamente ciò che
+> `--tau-luce` sostituirebbe**. *Una legge «in verifica» è la fisica di default da mesi, mentre la
+> sua alternativa è dietro un flag i cui sigilli non passano.*
+
+**§9 — UN DATO DEVE PORTARSI DIETRO LE PROPRIE CONDIZIONI.** Ogni CSV deve portare **blob, seme e
+tutti i flag che distinguono quel run dagli altri bracci**. *Un file che si distingue dagli altri
+solo per il NOME non è un dato: è un ricordo.* Caso reale: il braccio OFF aveva **136 colonne e
+sette flag corretti**, ma **non `TAU_LUCE`** — l'unica variabile che distingue i due bracci — né
+`CS_DINAMICO`, né blob, né seme. **Il run non era sbagliato: era non certificabile dai dati.**
+Diagnosi **dal disco**: i CSV scritti alle `19:18:46`, la colonna aggiunta alle `19:23:32`,
+**cinque minuti dopo**. Sanato: ora il CSV porta `TAU_LUCE`, `CS_DINAMICO`, **blob** (calcolato come
+lo calcola git, senza subprocess) e **seme**.
 
 ---
 

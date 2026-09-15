@@ -1,7 +1,7 @@
 ============================================================================================
 SIGILLO OSSERVATORE — la misura del vuoto e' PURE-READ? (2 run veri, 150 passi)
 ============================================================================================
-[PASS] O1.0 stesso numero di nodi (il confronto ESISTE) nodi: osservatore ON = 3073, OFF = 3073
+[PASS] O1.0 stesso numero di nodi (il confronto ESISTE) nodi: osservatore ON = 3070, OFF = 3070
 [PASS] O1 osservatore ON vs OFF: byte-identico        max|A-B| = 0.000e+00
 
 ============================================================================================
@@ -14,10 +14,10 @@ O2 — l'A/B dello scuotimento e' a VARIABILE SINGOLA?
 ============================================================================================
 O3 — i due bracci hanno i flag giusti?
 ============================================================================================
-   braccio ON : [osserva-flag] tag=sigON seed=1  FORK_SU2=True FORK_SU2_MEM=True SCUOTIMENTO=True SYNC_UPDATE=False   (letti DURANTE il run)
-   braccio OFF: [osserva-flag] tag=sigDET seed=1  FORK_SU2=True FORK_SU2_MEM=True SCUOTIMENTO=False SYNC_UPDATE=False   (letti DURANTE il run)
-[PASS] O3a braccio ON: SCUOTIMENTO=True                SCUOTIMENTO=True SYNC_UPDATE=False   (letti DURANTE il run)
-[PASS] O3b braccio OFF: SCUOTIMENTO=False             SCUOTIMENTO=False SYNC_UPDATE=False   (letti DURANTE il run)
+   braccio ON : [osserva-flag] tag=sigON seed=1  FORK_SU2=True FORK_SU2_MEM=True SCUOTIMENTO=True SYNC_UPDATE=False KURAMOTO_SU2=False STEP2=False CS_DIN=False GAMMA_TURBO=1 TAU_LUCE=False   (letti DURANTE il run)
+   braccio OFF: [osserva-flag] tag=sigDET seed=1  FORK_SU2=True FORK_SU2_MEM=True SCUOTIMENTO=False SYNC_UPDATE=False KURAMOTO_SU2=False STEP2=False CS_DIN=False GAMMA_TURBO=1 TAU_LUCE=False   (letti DURANTE il run)
+[PASS] O3a braccio ON: SCUOTIMENTO=True               =False GAMMA_TURBO=1 TAU_LUCE=False   (letti DURANTE il run)
+[PASS] O3b braccio OFF: SCUOTIMENTO=False             =False GAMMA_TURBO=1 TAU_LUCE=False   (letti DURANTE il run)
 [PASS] O3c entrambi testano lo STRATO 1 (fork + memoria) fork+mem attivi su entrambi i bracci
 ============================================================================================
 SIGILLO OSSERVATORE: 6/6 PASS -> PASS
