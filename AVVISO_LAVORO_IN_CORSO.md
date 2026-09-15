@@ -8,8 +8,8 @@
 >
 > ## RUN IN VOLO (2026-09-15, dalle 12:24)
 > `csv/_test_fork/_maturazione_s1.txt` e' **CONCLUSO** (2000 passi, esito C, committato).
-> E' **IN VOLO** invece `csv/_test_fork/_trasversale_s1.txt`: 700 passi, il **test trasversale**
-> del `doc/CRITERIO_omega_rho.md`. **NON leggerlo come risultato finche' non e' committato.**
+> Anche `csv/_test_fork/_trasversale_s1.txt` e' **CONCLUSO** e committato (test trasversale).
+> **NON C'E' NESSUN RUN IN VOLO.**
 >
 > **NON C'E' NESSUN ALTRO RUN IN VOLO.** I file `csv/_test_fork/_vuoto_k300_*` sono **risultati
 > definitivi**, non intermedi: il verdetto e' in `doc/ESITO_scan_turbo_K300.md` ed e' committato

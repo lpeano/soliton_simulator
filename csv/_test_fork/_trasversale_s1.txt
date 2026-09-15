@@ -1,0 +1,48 @@
+====================================================================================================
+CONFERMA DEI FLAG **IN-RUN** (lezione del falso O3c: non fidarsi della riga di comando)
+====================================================================================================
+  [calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+  [spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+  [deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+  [campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+  [fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+  [fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+  [verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+  [chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+  [cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+  GAMMA_TURBO = 1   (1.0 = NESSUN turbo)        STEP2_OROLOGIO = False   (deve essere False)
+  FORK_SU2 = True   FORK_SU2_MEM = True   CS_DINAMICO = True
+  TAU_A = 50   DT = 0.01   -> maturazione piena a 5000 passi
+
+scena: n=1196 archi=207563  (seme 1)  soglia di aliasing = 30 gradi/passo
+
+ passo      n    ramp_med |  rho_med   %sotto |  theta_med   theta_p95 | %>soglia |  tau/DT med  tau/DT p50nodo | giovani  maturi
+ ----------------------------------------------------------------------------------------------------------------------
+     1    1196    0.0002 |  1.76e-11  100.0% |    0.01433        4096 |     6.7% |         250          100.0% |  0.01433      nan
+   100    2936    0.0136 |  8.11e-08   71.8% |  3.827e+04   9.226e+04 |   100.0% |         250           62.0% | 3.827e+04      nan
+   200    3598    0.0269 |   5.8e-07   57.6% |    4.6e+04   1.108e+05 |   100.0% |         250           69.0% |  4.6e+04      nan
+   300    3889    0.0439 |  1.84e-06   37.9% |  4.662e+04    1.14e+05 |   100.0% |       445.1           40.6% | 4.662e+04      nan
+   400    4077    0.0614 |  4.18e-06   19.4% |  4.631e+04   1.153e+05 |   100.0% |        2884           10.7% | 4.631e+04      nan
+   500    4223    0.0783 |  7.49e-06    9.4% |  4.785e+04   1.194e+05 |   100.0% |        3932            8.2% |  4.8e+04      nan
+   600    4368    0.0956 |  1.27e-05    5.7% |  4.978e+04   1.252e+05 |   100.0% |        4318            7.4% | 5.197e+04      nan
+   700    4595    0.1127 |  1.99e-05    4.8% |  4.945e+04   1.254e+05 |   100.0% |        4425            8.9% | 6.089e+04      nan
+
+====================================================================================================
+TEST TRASVERSALE — a UN SOLO ISTANTE, fra i nodi (doc/CRITERIO_omega_rho.md par.4.1)
+====================================================================================================
+  nodi usati 4374   (esclusi 221 col pavimento attivo: li' l'inerzia non varia)
+  leva sull'inerzia: x1.008e+04      correlazione r = -0.395
+  theta mediano per decile di inerzia:  basso 6.663e+04 | medio 5.073e+04 | ALTO 3.464e+04
+
+  >>> PENDENZA TRASVERSALE  d(log theta)/d(log inerzia) = -0.106
+  >>> -0.2..+0.2 : omega NON DIPENDE da inerzia PER NESSUNA VIA.
+  >>> La lettura omega = coppia/inerzia e' SBAGLIATA ALLA RADICE. Nessun ritardo la salva.
+
+====================================================================================================
+LETTURA (regola scritta PRIMA, doc/PREDIZIONE_maturazione.md)
+====================================================================================================
+  theta mediano: 0.01433 -> 4.945e+04 gradi/passo   (fattore 3.45e+06)
+  frazione aliasata (theta > 30): 6.7% -> 100.0%
+  ramp mediano: 0.0002 -> 0.1127      rho mediano: 1.76e-11 -> 1.99e-05   (pavimento 1e-6)
+
+  -> theta NON e' sceso sotto soglia: esito (C), aliasing STRUTTURALE.

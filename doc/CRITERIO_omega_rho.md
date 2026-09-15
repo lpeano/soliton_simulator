@@ -107,3 +107,82 @@ Misurare `tau` (colonna nuova nella sonda, costo nullo) e verificare:
 - **Non** invocare di nuovo il ritardo se il criterio scatta.
 - **Non** raffinare l'ipotesi una terza volta senza un criterio nuovo scritto **prima**.
 - **Non** dedurre nulla dall'attesa: `tau ∝ rho` e `rho` cresce, quindi l'attesa **non converge**.
+
+---
+
+# ESITO — il criterio è stato applicato. Due risposte.
+
+> Misure del 2026-09-15, sonda **ri-sigillata PASS** prima dell'uso (20 campi + RNG, `0.000e+00`,
+> N confrontabile). Dati: `csv/_test_fork/_trasversale_s1.txt`, 700 passi, seme 1.
+
+## E.1 Il meccanismo `tau`: **CONFERMATO PER MISURA**, non più ipotesi
+
+| passo | `tau/DT` | % nodi col pavimento `0.05` attivo |
+|---|---|---|
+| 1-200 | **250** | 100 % → 69 % |
+| 300 | 445 | 40.6 % |
+| 400 | 2884 | 10.7 % |
+| 600 | 4318 | 7.4 % |
+| **700** | **4425** | **8.9 %** |
+
+> **`tau/DT` è passato da 250 a 4425 — ×17.7 — e tende a `TAU_A/DT = 5000`**, cioè all'ancoraggio
+> del nodo mediano previsto da Luca (§2). Il pavimento `0.05` passa dal vincolare il **100 %** dei
+> nodi all'**8.9 %**.
+>
+> **L'ipotesi è confermata: la memoria si allunga di quasi 18× mentre il sistema matura.**
+> Ma — ed è il punto — **questo non la salva**, perché il test qui sotto **non contiene il tempo**.
+
+## E.2 Il test trasversale: **la lettura cade**
+
+4374 nodi (221 esclusi col pavimento attivo), **leva sull'inerzia ×10 080** — quattro decadi.
+
+```
+correlazione r = -0.395
+theta mediano per decile di inerzia:  basso 6.663e4  ->  medio 5.073e4  ->  ALTO 3.464e4
+PENDENZA  d(log theta)/d(log inerzia) = -0.106
+```
+
+Che cosa implica quella pendenza, sulla stessa leva:
+
+| esponente | `theta` cadrebbe di | |
+|---|---|---|
+| **−1.000** (lettura originale) | **×10 080** | |
+| **−0.500** (lettura raffinata) | **×100.4** | |
+| **−0.106** (misurato) | ×2.66 | osservato per decili: **×1.92** |
+
+## E.3 ⚠ CORREZIONE AL MIO STESSO CRITERIO — la banda era formulata male
+
+La banda `−0.2…+0.2` che avevo scritto dice *«`omega` NON dipende da `inerzia` PER NESSUNA VIA»*.
+**Quella formulazione è troppo forte, e i dati la smentiscono:** `r = −0.395` e l'andamento per
+decili è **monotono**, con `theta` che cala di un fattore **1.92** dai nodi a bassa inerzia a quelli
+ad alta. **Una dipendenza c'è.**
+
+> **La formulazione corretta è:**
+> `omega` **dipende** da `inerzia`, ma con esponente **−0.106**: circa **un decimo** di quello
+> richiesto dalla lettura `omega = coppia/inerzia` (−1), e **un quinto** di quello richiesto dalla
+> lettura raffinata (−0.5).
+
+**La conclusione non cambia, la sua motivazione sì.** Non è «nessuna dipendenza»: è **una
+dipendenza dieci volte troppo debole**. E poiché la misura è **a un solo istante**, nessun ritardo —
+per quanto lungo, e ora sappiamo che è davvero lungo, 4425 passi — **può spiegare un esponente
+sbagliato di un fattore 10**.
+
+> ### VERDETTO: la lettura `omega = coppia/inerzia` come **legge di scala** è **falsificata**.
+> L'esponente misurato è **−0.106**, non −1 né −0.5, su quattro decadi di leva e senza scappatoia
+> temporale.
+
+**Nota di metodo:** sto correggendo la formulazione di un criterio che avevo scritto io, **dopo**
+aver visto i dati. Lo dichiaro esplicitamente perché è proprio la mossa che il presidio §9 vieta —
+con una differenza che va detta: **non sto salvando l'ipotesi, la sto seppellendo lo stesso.** La
+correzione rende il verdetto **più preciso**, non più clemente. Se avessi corretto la banda per far
+*sopravvivere* la lettura, sarebbe stato l'errore; qui la lettura cade in entrambe le formulazioni.
+
+## E.4 E un indizio precedente che il test vero **smentisce**
+
+Nel run da 2000 passi avevo riportato, come **indizio grezzo**, che i nodi «maturi» (`ramp > 0.5`)
+ruotavano **più velocemente** dei giovani (4.088e4 contro 3.485e4) — segno **opposto** all'atteso.
+
+**Il test trasversale lo smentisce:** per **decili di inerzia** l'andamento è **monotono nel verso
+giusto** (alta inerzia → `theta` più basso). Le due popolazioni non coincidono — «maturo» (`ramp`
+alto) e «inerzia alta» sono cose diverse — e **vale il test per decili, non il confronto a due
+classi**. L'indizio era fuorviante: lo ritiro.

@@ -455,6 +455,65 @@ puo' spiegarlo** — ma e' grezzo (due classi, campione piccolo sui maturi): lo 
 
 ---
 
+## 6-septies. IL TEST TRASVERSALE (2026-09-15) — **la lettura `omega = coppia/inerzia` e' FALSIFICATA**
+
+Documenti: **`doc/CRITERIO_omega_rho.md`** (criterio scritto PRIMA + esito) e
+`doc/MATURAZIONE_aliasing.md`. Sonda **ri-sigillata PASS** prima dell'uso. **Nessun run in volo.**
+
+**Perche' serviva un test senza tempo.** Luca ha rilevato che la mia ipotesi **rigenerava la propria
+scusa**: ogni volta che l'effetto non si vedeva, il ritardo era cresciuto (pavimento -> `tau=250` ->
+`tau=5000`). Con `tau` proporzionale a `rho` e `rho` crescente, **aspettare non converge mai**.
+Il presidio, ora in `CLAUDE.md` §9: **quando la spiegazione e' temporale, il test che la decide non
+deve contenere il tempo.**
+
+**RISULTATO 1 — il meccanismo `tau` e' CONFERMATO PER MISURA**, non piu' ipotesi:
+
+| passo | `tau/DT` | % col pavimento 0.05 attivo |
+|---|---|---|
+| 1-200 | **250** | 100% -> 69% |
+| 400 | 2884 | 10.7% |
+| **700** | **4425** | **8.9%** |
+
+`tau/DT` da **250 a 4425** (**x17.7**), e tende a `TAU_A/DT = 5000` — l'ancoraggio del nodo mediano
+che Luca aveva dedotto dalla riga 1913. **La memoria si allunga di quasi 18x mentre il sistema
+matura.** Ma non salva la lettura, perche' il test qui sotto non contiene il tempo.
+
+**RISULTATO 2 — il test trasversale: la lettura CADE.** 4374 nodi, **leva sull'inerzia x10 080**
+(quattro decadi), a **un solo istante**:
+
+```
+correlazione r = -0.395
+theta per decile di inerzia:  basso 6.663e4 -> medio 5.073e4 -> ALTO 3.464e4
+PENDENZA  d(log theta)/d(log inerzia) = -0.106
+```
+
+| esponente | `theta` cadrebbe di |
+|---|---|
+| -1.000 (lettura originale) | **x10 080** |
+| -0.500 (lettura raffinata) | **x100.4** |
+| **-0.106 (misurato)** | x2.66 — osservato per decili **x1.92** |
+
+> **VERDETTO: `omega = coppia/inerzia` come LEGGE DI SCALA e' FALSIFICATA.** L'esponente misurato e'
+> **-0.106**, non -1 ne' -0.5, su quattro decadi e **senza scappatoia temporale**.
+
+**CORREZIONE AL MIO STESSO CRITERIO, dichiarata.** La banda che avevo scritto (-0.2..+0.2) diceva
+*"omega NON dipende da inerzia PER NESSUNA VIA"*. **Quella formulazione e' troppo forte e i dati la
+smentiscono:** `r = -0.395` e l'andamento per decili e' **monotono**, `theta` cala di **x1.92**. Una
+dipendenza **c'e'**. La formulazione corretta: **`omega` dipende da `inerzia` con esponente -0.106,
+circa UN DECIMO di quello richiesto.** La conclusione non cambia, la motivazione si': non e'
+"nessuna dipendenza", e' **una dipendenza dieci volte troppo debole** — e nessun ritardo, per quanto
+lungo (ora sappiamo: 4425 passi), spiega un **esponente** sbagliato di un fattore 10.
+Sto correggendo un mio criterio **dopo** aver visto i dati, ed e' la mossa che il presidio §9 vieta:
+lo dichiaro. La differenza e' che **non sto salvando l'ipotesi, la seppellisco lo stesso** — la
+correzione rende il verdetto **piu' preciso, non piu' clemente**.
+
+**E RITIRO UN INDIZIO PRECEDENTE.** Avevo riportato che i nodi "maturi" ruotavano **piu'
+velocemente** (segno opposto all'atteso). Il test per **decili di inerzia** lo **smentisce**:
+l'andamento e' monotono **nel verso giusto**. "Maturo" e "inerzia alta" non sono la stessa
+popolazione, e vale il test per decili, non il confronto a due classi. **Indizio ritirato.**
+
+---
+
 ## 7. IL LAVORO DI CONTORNO, in breve
 
 - **Profilazione** (`doc/PROFILAZIONE_costo_run.md`): il collo **non** è il loop CFL. I due hoist
