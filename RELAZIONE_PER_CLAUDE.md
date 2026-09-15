@@ -734,6 +734,59 @@ righe originali visibili.
 
 ---
 
+## 6-undecies. FASE 2 `--tau-luce` (2026-09-15) — **SIGILLO FALLITO. Ci si ferma.**
+
+Documento: **`doc/SIGILLO_tau_luce_FALLITO.md`**. Blob `f5887254` -> **`7d484580`**.
+**Gate NON ri-timbrato.** Flag **OFF di default**, e **T1 dimostra la byte-identita'**: il
+comportamento di default del repo e' **invariato**.
+
+```
+T1=PASS   T2=FAIL   T3=FAIL   T4=FAIL   T5=PASS      ->   SIGILLO COMPLESSIVO: FAIL
+```
+
+**T1 PASS**, ed e' quello che copre di piu': confronto contro il file **prima** della modifica, 21
+campi + RNG a `0.000e+00` con N confrontabile. Certifica insieme il flag OFF **e** che l'estrazione
+di `_tempo_luce_nodo` da `_bloch_ritardato` non ha cambiato una virgola.
+
+**T2 FAIL — ma e' un difetto del TEST.** Il monkeypatch agisce sul metodo **condiviso**, quindi
+cambia **anche la ritardazione dello Strato 1** (`--fork-su2-mem` e' attivo): due meccanismi insieme,
+traiettoria diversa, `N` 1718 contro 1647. E' il rovescio della scelta - giusta - di avere **una
+sola** formula: un test naive che la sostituisce colpisce entrambi gli utilizzatori. Il presidio ha
+funzionato: la riga dei conteggi per prima ha impedito di leggere uno zero come identita'.
+
+**T3 FAIL — l'effetto e' REALE ma la META' di quello predetto.**
+
+| | pendenza | SE | r^2 | n |
+|---|---|---|---|---|
+| OFF | -0.1685 | 0.0090 | 0.126 | 2417 |
+| **ON** | **-0.4265** | **0.0091** | 0.464 | 2534 |
+
+Spostamento **0.258**, cioe' **~28 sigma**: indiscutibile. **Ma l'attesa era -1.03** (naive) **o
+-0.69** (stima onesta): misurata **-0.43**. Il criterio chiedeva almeno 0.3: **non ci arriva**.
+**Non ho una spiegazione della meta' mancante e non ne invento una.**
+
+**T4 FAIL a meta', ED E' UN REPERTO CHE TOCCA ANCHE LO STRATO 1.**
+`d -> 2d` da' **2.000000 esatto**: sulla geometria e' una legge. `cs -> 2cs` da' **1.000000**: non
+segue. La causa **non e' il cablaggio nuovo**: `_cs_nodo_prev` e' scritta in `step()` con l'`n` di
+quel momento, poi `mitosi()` fa crescere `n`, e al passo dopo `len(csp) >= n` e' **falso** -> la
+guardia ricade su `cs_nodo = CS_M`. **Misurato: cache usabile in 6 passi su 30 = 20%.**
+
+> **Nell'80% dei passi il `cs` locale non viene usato affatto** — e vale **anche per lo STRATO 1**,
+> sigillato 23/23, che usa la stessa funzione: il suo `tau = d/cs` e' in realta' **`d/CS_M`** quasi
+> sempre. Il ritardo esiste, ma **la parte che porta la curvatura e' inerte.**
+> **Ereditato, non introdotto oggi, e non era stato notato.**
+
+**T5 PASS** sulla stabilita' (`|nb|-1 = 2.2e-16`, zero NaN) ma con un numero da leggere: `theta` da
+**129.5 a 43.6 GIRI per passo**, fattore **0.336** contro lo 0.077 atteso. **L'ampiezza cala di 3x,
+non di 13x, e 43.6 giri/passo restano un settore massicciamente aliasato. Non e' una cura, e ora
+c'e' il numero misurato a dirlo.**
+
+**Tre cose da fare, NESSUNA "al volo" in questo commit** (§2): riscrivere T2; decidere sul reperto
+`_cs_nodo_prev` (**questione a se'**, tocca un meccanismo gia' sigillato); capire la meta' mancante
+di T3 **con un criterio scritto prima**.
+
+---
+
 ## 7. IL LAVORO DI CONTORNO, in breve
 
 - **Profilazione** (`doc/PROFILAZIONE_costo_run.md`): il collo **non** è il loop CFL. I due hoist

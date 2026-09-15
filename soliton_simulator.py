@@ -810,6 +810,39 @@ STEP2_OROLOGIO = False  # [STEP 2] AGGANCIO OROLOGIO <-> METRICA: omega_clk *= (
                         # tutto il resto legge snapshot t-1. Senza cache -> CS_M -> fattore 1.
                         # Richiede --campo-spinoriale + --deparam-orologio (e' li' che _phc vive).
                         # Default off = byte-identico.
+TAU_LUCE = False        # [FASE 2] IL RILASSAMENTO DI `omega_s` USA IL TEMPO-LUCE `d/cs` invece
+                        # della densita'. Sostituisce SOLO la riga ~1913
+                        # (`_tau = TAU_A*max(dens/dens_rif, 0.05)`) con `_tau = d_nodo/cs_nodo`,
+                        # cioe' con `_tempo_luce_nodo()` - lo STESSO `tau` gia' cablato nello
+                        # Strato 1. Default False = byte-identico.
+                        # PERCHE', su TRE piani e non uno:
+                        # 1. COERENZA DIMENSIONALE. `inerzia = |Psi|^2 = T^2 = (d/cs)^2`
+                        #    (doc/INERZIA_tempo_quadro.md): il tempo che COSTRUISCE l'inerzia e
+                        #    quello che la RILASSA devono essere LO STESSO. Oggi ce ne sono DUE
+                        #    DIVERSI nella stessa equazione (riga 1918): `(d/cs)^2` al denominatore
+                        #    della coppia e la DENSITA' nel termine dissipativo.
+                        # 2. PRINCIPIO. `d/cs` e' il tempo-luce: un sistema NON PUO' RICORDARE PIU'
+                        #    A LUNGO DI QUANTO IMPIEGHI A SAPERE DI SE'. E' esattamente la ragione
+                        #    per cui `tau = d/cs` e' gia' nello Strato 1.
+                        # 3. MISURA. `d/cs` e' PIATTO contro l'inerzia: pendenza +0.097 +- 0.0055
+                        #    (IC95 [+0.086, +0.108], n=2195), contro +1.176 +- 0.019 della riga
+                        #    attuale. Un `tau` piatto NON PUO' CANCELLARE il -1 della coppia, e la
+                        #    cancellazione che produce l'esponente -0.11 si rompe
+                        #    (doc/TAU_tempo_luce.md, doc/BARRE_ERRORE_pendenze.md).
+                        # E LA RIGA CHE SOSTITUISCE E' SOSPETTA DUE VOLTE: non ha un principio che
+                        # la imponga (scritta come ipotesi in assenza di parametri) E NON FA QUELLO
+                        # CHE DICHIARA (scritta proporzionale a dens, misurata rho^1.81, perche'
+                        # `dens_rif` e' la MEDIANA e il rapporto si auto-normalizza -> per il nodo
+                        # mediano `tau` resta ancorato a TAU_A a qualunque densita').
+                        # ZERO MANOPOLE: nessun coefficiente, nessun floor nuovo. `d`, `cs` e `LAM`
+                        # esistono gia', e le guardie anti-zero sono quelle EREDITATE dallo Strato 1.
+                        # ATTENZIONE A COSA NON FA: `|omega|_eq` va come `sqrt(tau)`, e `tau` passa
+                        # da ~44 unita' di tempo a ~0.25, quindi il fattore e' ~1/13: da ~112 a ~9
+                        # GIRI per passo. UN ORDINE DI GRANDEZZA NELLA DIREZIONE GIUSTA, **NON** la
+                        # soluzione dell'aliasing. Non va venduto come cura.
+                        # NON tocca la riga 1918 ne' la FORMA del termine dissipativo: se
+                        # `-omega/tau` debba essere un allineamento LLG e' questione SEPARATA e
+                        # aperta (par.1, un interruttore alla volta).
 GAMMA_TURBO = 1.0       # [DIAGNOSTICO, NON PERCORSO CERTIFICATO] amplificatore della SENSIBILITA'
                         # DI cs ALLA DENSITA'. Dentro `_cs_nodo` si usa GAMMA*GAMMA_TURBO al posto
                         # di GAMMA; OVUNQUE ALTROVE GAMMA resta ORIGINALE. Default 1.0 = nessun
@@ -1907,7 +1940,12 @@ class Rete:
         # nessun numero nuovo). IN VERIFICA: stabile, ma il guadagno sul decadimento lungo non e'
         # ancora confermato (manca il confronto lungo TAU_A-fisso vs locale). Reversibile: se
         # TAU_A_LOCALE=False torna al comportamento fisso.
-        if TAU_A_LOCALE:
+        if TAU_LUCE:
+            # [FASE 2] TEMPO-LUCE: il rilassamento usa la STESSA scala temporale che costruisce
+            # l'inerzia, `d/cs`. Nessun coefficiente, nessun floor nuovo: e' `_tempo_luce_nodo()`,
+            # l'unico posto in cui la legge e' scritta, gia' usato dallo Strato 1.
+            _tau = self._tempo_luce_nodo(i, j)[:, None]
+        elif TAU_A_LOCALE:
             _dens = np.abs(self.psi[:n])**2
             _dens_rif = max(float(np.median(_dens[_dens > 1e-6])), 1e-6) if np.any(_dens > 1e-6) else 1.0
             _tau = TAU_A * np.maximum(_dens / _dens_rif, 0.05)   # vita media locale, pavimento 0.05
@@ -2421,25 +2459,7 @@ class Rete:
         nbr = np.asarray(nbr, float)
 
         # --- tau = d/cs, per nodo -----------------------------------------------------------
-        dd = self.d
-        if len(ii) and len(dd) == len(ii):
-            grado = (np.bincount(ii, minlength=n) + np.bincount(jj, minlength=n)).astype(float)
-            somma = (np.bincount(ii, weights=dd, minlength=n) +
-                     np.bincount(jj, weights=dd, minlength=n))
-            d_nodo = somma / np.maximum(grado, 1.0)
-            d_nodo[grado <= 0] = LAM        # nodo isolato: nessun arco da cui leggere la scala
-        else:
-            d_nodo = np.full(n, LAM)        # fallback: LAM e' la scala gia' esistente (par.3)
-        d_nodo = np.maximum(d_nodo, 1e-12)
-        csp = getattr(self, "_cs_nodo_prev", None)
-        if csp is not None and len(csp) >= n:
-            cs_nodo = np.maximum(np.asarray(csp, float)[:n], 1e-12)   # cs di UN PASSO FA (e' un ritardo)
-        else:
-            # --cs-dinamico OFF (o primo passo): cs e' costante = CS_M. Alle densita' attuali cs e'
-            # comunque quasi-costante (I~0.05 contro soglia ~400), quindi tau ~ d/CS_M: il RITARDO
-            # esiste, ma la sua VARIAZIONE spaziale (la curvatura) e' debole finche' cs non e' vivo.
-            cs_nodo = np.full(n, CS_M)
-        tau = np.maximum(d_nodo / cs_nodo, 1e-30)
+        tau = self._tempo_luce_nodo(ii, jj)
         # Il tic con cui si rilassa e' il TEMPO PROPRIO del nodo, dt_n = DT*r, non DT. tau = d/cs e'
         # tempo proprio: rilassarlo col tempo di COORDINATA mescolerebbe due frame e cancellerebbe la
         # dipendenza dall'orologio locale, cioe' imporrebbe una foliazione globale sincrona a un
@@ -2480,6 +2500,53 @@ class Rete:
             out[pieno] = nb_cur[pieno]
         self._nb_ret = out
         return out
+
+    def _tempo_luce_nodo(self, ii, jj):
+        """TEMPO-LUCE per nodo: `tau = d_nodo / cs_nodo`. **E' una LEGGE, non un numero.**
+
+        UNICO punto del file in cui questa relazione e' scritta. La usano DUE meccanismi, per la
+        STESSA ragione causale:
+          * lo **STRATO 1** (`_bloch_ritardato`): la connessione nasce dai Bloch a `t - tau`;
+          * il **rilassamento di `omega_s`** sotto `TAU_LUCE` (riga ~1913).
+        Estratta da `_bloch_ritardato` il 2026-09-15 **senza cambiarne una virgola**: era gia'
+        cablata li', e duplicarla avrebbe significato avere due leggi che possono divergere. Il
+        sigillo T1 (flag OFF byte-identico) dimostra che l'estrazione non ha alterato nulla.
+
+        PERCHE' E' UNA LEGGE E NON UN NUMERO: `d_nodo/cs_nodo` **cambia con lo stato**. Se la
+        geometria si dilata, `tau` la segue; se `cs` cala nel pozzo, `tau` cresce. Un numero resta
+        fermo mentre l'universo cambia; una legge no. E' il senso forte del par.3 (zero manopole):
+        non "scegli bene il numero", ma **non scrivere numeri, scrivi relazioni**.
+
+        ZERO COSTANTI DI AGGIUSTAMENTO: il coefficiente e' **1**, l'unico che non si tara. Un
+        `K*d/cs` con `K` scelto sarebbe un numero travestito da legge.
+
+        I DUE GUARDIE NON SONO MANOPOLE, SONO EREDITATE da questo stesso blocco:
+          * nodo isolato (nessun arco da cui leggere la scala) -> `d_nodo = LAM`, la scala che
+            esiste gia' nel sistema;
+          * `1e-12` / `1e-30` sono le regolarizzazioni anti-zero gia' presenti, non soglie nuove.
+
+        PURE-READ: non scrive stato, non consuma `net.rng`.
+        """
+        n = self.n
+        dd = self.d
+        if len(ii) and len(dd) == len(ii):
+            grado = (np.bincount(ii, minlength=n) + np.bincount(jj, minlength=n)).astype(float)
+            somma = (np.bincount(ii, weights=dd, minlength=n) +
+                     np.bincount(jj, weights=dd, minlength=n))
+            d_nodo = somma / np.maximum(grado, 1.0)
+            d_nodo[grado <= 0] = LAM        # nodo isolato: nessun arco da cui leggere la scala
+        else:
+            d_nodo = np.full(n, LAM)        # fallback: LAM e' la scala gia' esistente (par.3)
+        d_nodo = np.maximum(d_nodo, 1e-12)
+        csp = getattr(self, "_cs_nodo_prev", None)
+        if csp is not None and len(csp) >= n:
+            cs_nodo = np.maximum(np.asarray(csp, float)[:n], 1e-12)   # cs di UN PASSO FA (e' un ritardo)
+        else:
+            # --cs-dinamico OFF (o primo passo): cs e' costante = CS_M. Alle densita' attuali cs e'
+            # comunque quasi-costante (I~0.05 contro soglia ~400), quindi tau ~ d/CS_M: il RITARDO
+            # esiste, ma la sua VARIAZIONE spaziale (la curvatura) e' debole finche' cs non e' vivo.
+            cs_nodo = np.full(n, CS_M)
+        return np.maximum(d_nodo / cs_nodo, 1e-30)
 
     def _coppia_interferenza(self, A, z):
         """[FASE 3] Coppia di fase sugli archi. Ramo OFF: interferenza SCALARE
@@ -4700,6 +4767,7 @@ def _applica_flag(a):
     global net
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
+    global TAU_LUCE
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
@@ -4810,6 +4878,14 @@ def _applica_flag(a):
               "Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il "
               "fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. "
               "NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.")
+    TAU_LUCE = bool(getattr(a, "tau_luce", False))   # [FASE 2] rilassamento col tempo-luce d/cs: default off
+    if TAU_LUCE:
+        print("[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo "
+              "STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: "
+              "inerzia = T^2 = (d/cs)^2, quindi il tempo che COSTRUISCE l'inerzia e quello che la "
+              "RILASSA devono essere lo stesso; oggi sono due diversi nella stessa equazione. Zero "
+              "coefficienti, zero floor nuovi. NB: |omega|_eq va come sqrt(tau), quindi theta cala di "
+              "~13x: UN ORDINE DI GRANDEZZA, NON la soluzione dell'aliasing.")
     GAMMA_TURBO = float(getattr(a, "gamma_turbo", 1.0) or 1.0)  # [DIAGNOSTICO] default 1.0 = byte-identico
     # NB: si legge `a.cs_dinamico` DAGLI ARGOMENTI, non il globale CS_DINAMICO: quest'ultimo viene
     # assegnato PIU' SOTTO (:4842), quindi qui varrebbe ancora il default False e il guard
@@ -5149,6 +5225,18 @@ def _cli():
                         "ritardato rilassa verso il corrente con slerp geodetico, alpha = 1-exp(-dt/tau) (passo esatto di "
                         "primo ordine, mai Verlet). A riposo, o per tau->0, torna allo Strato 0. Richiede --fork-su2. "
                         "Default off = byte-identico.")
+    p.add_argument("--tau-luce", action="store_true", dest="tau_luce",
+                   help="[FASE 2] IL RILASSAMENTO DI omega_s USA IL TEMPO-LUCE d/cs invece della densita'. "
+                        "Sostituisce SOLO `_tau = TAU_A*max(dens/dens_rif, 0.05)` con `d_nodo/cs_nodo`, "
+                        "cioe' con `_tempo_luce_nodo()` - lo STESSO tau gia' cablato nello Strato 1. "
+                        "MOTIVO su tre piani: (1) COERENZA - inerzia = T^2 = (d/cs)^2, quindi il tempo che "
+                        "costruisce l'inerzia e quello che la rilassa devono essere LO STESSO, e oggi sono "
+                        "due diversi nella stessa equazione; (2) PRINCIPIO - un sistema non puo' ricordare "
+                        "piu' a lungo di quanto impieghi a sapere di se'; (3) MISURA - d/cs e' PIATTO "
+                        "contro l'inerzia (+0.097 +- 0.0055) contro +1.176 +- 0.019 della riga attuale, "
+                        "quindi non puo' cancellare il -1 della coppia. Zero coefficienti, zero floor "
+                        "nuovi. NON e' la soluzione dell'aliasing: theta cala di ~13x, da ~112 a ~9 "
+                        "giri/passo. Default off = byte-identico.")
     p.add_argument("--gamma-turbo", type=float, default=1.0, dest="gamma_turbo", metavar="K",
                    help="[DIAGNOSTICO, NON PERCORSO CERTIFICATO] amplifica di K la SENSIBILITA' DI cs ALLA "
                         "DENSITA': dentro _cs_nodo si usa GAMMA*K al posto di GAMMA, e SOLO li'. Default K=1 "

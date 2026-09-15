@@ -1,0 +1,47 @@
+========================================================================================================
+T1 - flag OFF byte-identico al file PRIMA della modifica (copre anche l'ESTRAZIONE)
+========================================================================================================
+  TAU_LUCE nel modulo nuovo (deve essere False): False
+  PRESIDIO: uno zero con N DIVERSO e' MANCANZA DI CONFRONTO, non identita'.
+    n_A = 1718   n_B = 1718   ->  CONFRONTABILI
+    21 campi confrontati, PEGGIOR max|A-B| = 0.000e+00   stato RNG identico
+  T1: PASS
+
+========================================================================================================
+T2 - riduzione al limite: tau forzato al valore VECCHIO -> deve tornare al ramo OFF
+========================================================================================================
+  TAU_LUCE (deve essere True): True
+  `_tempo_luce_nodo` forzato a restituire TAU_A*max(dens/dens_rif, 0.05)
+  PRESIDIO: uno zero con N DIVERSO e' MANCANZA DI CONFRONTO, non identita'.
+    n_A = 1718   n_B = 1647   ->  NON CONFRONTABILI
+
+========================================================================================================
+T3 - LA PENDENZA di theta contro l'inerzia, con SE / r^2 / IC95 (mai una pendenza nuda)
+========================================================================================================
+  OFF  pendenza -0.1685 +- 0.0090   r^2 0.126   n 2417   IC95 [-0.1862, -0.1507]
+  ON   pendenza -0.4265 +- 0.0091   r^2 0.464   n 2534   IC95 [-0.4444, -0.4086]
+  attesa dalla FASE 1: -1.030    misurata ON: -0.4265 +- 0.0091   z dalla attesa: 66.19
+  T3 (la pendenza si ALLONTANA da zero rispetto a OFF, di almeno 0.3): FAIL
+
+========================================================================================================
+T4 - SIGILLO DI COVARIANZA: e' una LEGGE o un numero travestito?
+========================================================================================================
+  d -> 2d   : tau_nuovo/tau_vecchio = 2.000000   (atteso 2.000000)
+  cs -> 2cs : tau_nuovo/tau_vecchio = 1.000000   (atteso 0.500000)
+  CONTRASTO - la legge VECCHIA con d -> 2d: rapporto = 1.000000  (resta FERMA: non e' una
+              legge sulla geometria, e questo e' esattamente il punto)
+  T4: FAIL - tau non segue: e' un NUMERO
+
+========================================================================================================
+T5 - ampiezza e stabilita'
+========================================================================================================
+  OFF  |omega| mediana  8.137e+04   theta  4.662e+04 gradi/passo =  129.51 giri   n=3889
+  ON   |omega| mediana  2.737e+04   theta  1.568e+04 gradi/passo =   43.55 giri   n=3999
+  fattore su theta: 0.3363   (atteso ~1/13 = 0.077 dal rapporto sqrt(tau))
+  |nb| max scostamento da 1: 2.220e-16    NaN/inf: 0
+  T5: PASS
+
+========================================================================================================
+ESITO: T1=PASS   T2=FAIL   T3=FAIL   T4=FAIL   T5=PASS
+SIGILLO COMPLESSIVO: FAIL
+========================================================================================================
