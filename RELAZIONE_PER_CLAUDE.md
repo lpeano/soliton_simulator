@@ -357,6 +357,51 @@ Step 2 (fase globale, Bloch invariante a 3.3e-16). Mai testato.
 
 ---
 
+## 6-sexies. MATURAZIONE (2026-09-15) — **RAPPORTO INTERMEDIO, RUN IN VOLO**
+
+Documento: **`doc/MATURAZIONE_aliasing.md`**. Predizione scritta **prima** e committata prima
+(`doc/PREDIZIONE_maturazione.md`, commit `a8a0360`). **Dati fino al passo 425 su 2000: NON sono un
+risultato.** Relazione dovuta per §5-ter.
+
+**La domanda:** il `1e-7` dell'inerzia e' ETA'. Se lo e', l'aliasing (112 giri/passo) potrebbe
+sparire **da solo** per maturazione, e non ci sarebbe niente da riparare. Va accertato **prima** di
+cablare qualunque cura, perche' cablare su un sistema aliasato darebbe un risultato inattribuibile.
+
+**Sigillo PASS** (20 campi + RNG, `0.000e+00`, N confrontabile) e **flag confermati IN-RUN**:
+`GAMMA_TURBO = 1`, `STEP2_OROLOGIO = False`, fork+MEM attivi. Comportamento **naturale**, non forzato.
+
+**PRIMA META' DELLA PREDIZIONE: CONFERMATA.** La predizione diceva che `theta` non sarebbe sceso
+subito, perche' l'inerzia e' bloccata sul **pavimento `1e-6`**, e che la densita' mediana lo avrebbe
+attraversato **"poco dopo il passo 150-300"**. Misurato: attraversamento al passo **~245-250**,
+`rho` mediana da **1.5e-8** (passo 25) a **5.07e-6** (passo 425), e il pavimento passa dal vincolare
+il **100%** dei nodi al **14.7%**.
+
+**SECONDA META': NON CONFERMATA (ancora), ed e' il riscontro che conta.** `rho` e' cresciuta **4.5x
+oltre il pavimento** e **`theta` NON e' sceso**: piatto a **~4.6e4** gradi/passo, con la frazione
+aliasata ancora al **100%**. Se `theta` seguisse `1/inerzia`, sarebbe gia' a ~1.0e4.
+
+**COSA HO SBAGLIATO NELLA PREDIZIONE, dichiarato.** La catena `omega ∝ ramp^-4` tratta `omega` come
+se fosse **istantaneamente** uguale a `coppia/inerzia`. **Non lo e':** `omega_s` e' una **memoria**
+con rilassamento (riga 1918) e tempo caratteristico **gia' misurato**, `tau/DT ≈ 250 passi`. Dal
+ginocchio (250) a ora (425) e' passato **meno di un tempo di rilassamento**: siamo **dentro** il
+transitorio. **Il dato non falsifica ancora la predizione, ma non la conferma, e la predizione era
+incompleta.**
+
+**LA PREVISIONE CORRETTA, scritta ORA prima di vederla:** se `theta` insegue `1/rho` con ritardo
+`tau ≈ 250`, la discesa deve diventare visibile **dal passo ~500-600**. **Se al passo 800 `theta` e'
+ancora a 4.6e4, la lettura `omega ∝ 1/inerzia` e' sbagliata, non solo ritardata** — esito **(C)**.
+
+**UNA PROIEZIONE SCOMODA, detta ora e non fra due ore:** con `theta ∝ n^-4`, la soglia di 30
+gradi/passo sarebbe attraversata a **~2660 passi**, **oltre i 2000 del run**. E al passo 2000 `ramp`
+mediano sara' **~0.31**: **nessuna popolazione matura (`ramp > 0.9`)**, quindi la **seconda misura**
+prevista dal mandato (`chi` nella zona matura) **non sara' eseguibile su questo run**.
+Due strade, **decisione di Luca**: prolungare a ~3000 passi (altre ~2-3 h), oppure fermarsi a 2000 e
+riportare la **pendenza** di `theta(n)`, dichiarando l'attraversamento come **estrapolazione**.
+
+**Costo misurato:** 425 passi in 9.0 min (~1.3 s/passo a N≈4100); stima **2-3 h** per i 2000.
+
+---
+
 ## 7. IL LAVORO DI CONTORNO, in breve
 
 - **Profilazione** (`doc/PROFILAZIONE_costo_run.md`): il collo **non** è il loop CFL. I due hoist

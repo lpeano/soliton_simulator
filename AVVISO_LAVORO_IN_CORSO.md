@@ -5,7 +5,14 @@
 > snapshot vecchio o trovare il codice in uno stato intermedio.
 > **Aggiornato dopo la chiusura dello scan K=300 (esito B).**
 >
-> **NON C'E' NESSUN RUN IN VOLO.** I file `csv/_test_fork/_vuoto_k300_*` sono **risultati
+>
+> ## RUN IN VOLO (2026-09-15, dalle 12:24)
+> `csv/_test_fork/_maturazione_s1.txt` e' **IN SCRITTURA**: 2000 passi, seme 1, misura della
+> maturazione. **NON leggerlo come risultato.** Il rapporto intermedio committato
+> (`doc/MATURAZIONE_aliasing.md`) e' marcato come tale; il verdetto A/B/C arrivera' in un commit
+> dedicato a run finito.
+>
+> **NON C'E' NESSUN ALTRO RUN IN VOLO.** I file `csv/_test_fork/_vuoto_k300_*` sono **risultati
 > definitivi**, non intermedi: il verdetto e' in `doc/ESITO_scan_turbo_K300.md` ed e' committato
 > accanto ai dati. (La versione precedente di questo avviso diceva di non leggerli: quell'avviso
 > e' **superato**.)
