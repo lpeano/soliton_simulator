@@ -8,7 +8,7 @@
 
 ---
 
-## 0. L'ULTIMO GIRO (2026-09-15, sera) — in sei righe
+## 0. L'ULTIMO GIRO (2026-09-15, sera) — in sette righe
 
 > 1. **Trovato e curato un difetto silenzioso:** la cache `_cs_nodo_prev` veniva **scartata a ogni
 >    mitosi**, quindi nel **71.88 %** delle chiamate `tau = d/cs` calcolava `tau = d/CS_M`.
@@ -28,6 +28,10 @@
 >    **Non** è "tempo proprio stale": è **l'orologio scalare storico invece di quello dichiarato.**
 > 6. **`S4` di quella cura ha misurato la cosa sbagliata:** `median(r) = 1.0` **per costruzione**,
 >    con qualunque orologio. Secondo caso del **punto fisso auto-normalizzante**.
+> 7. **E la domanda aperta più utile non cerca un bug** (§6-quindecies): l'attesa `-0.69` assume che
+>    `sigma` sia indipendente da `tau`, ma c'è un **anello** che lo mette a valle. **Forse è il
+>    BERSAGLIO a essere mal calcolato.** Da provare **per prima**; **non lanciata**, e il numero
+>    **non è nei dati** come si credeva.
 
 ---
 
@@ -1042,6 +1046,72 @@ non misurato**. Per il presidio del paragrafo precedente, **non basta**.
 **Quindi l'attesa «`r` cambierà in modo significativo» non è confermata, e non è nemmeno smentita:
 `S4`, com'è costruito, NON PUÒ rispondere.** E **non dico che questo chiuda T3**: non è stato
 misurato, e un difetto grande non implica un effetto grande — la cache `cs` lo ha appena dimostrato.
+
+---
+
+## 6-quindecies. **L'ANELLO DI RETROAZIONE: e se il BERSAGLIO fosse mal calcolato?** (rilievo di Luca, 2026-09-15)
+
+È l'osservazione più utile della giornata, e **non propone un colpevole nuovo.**
+
+### Il rilievo
+
+L'attesa contro cui misuriamo da due giorni nasce da:
+
+```
+pendenza(theta) = pendenza(sigma) + pendenza(tau)/2
+                = -1.078          + 0.097/2          ~ -1.03   (naive)
+                -> -0.69 con la correzione del transitorio
+```
+
+**e assume che `sigma = coppia/inerzia` resti `-1.078` anche col nuovo `tau`.** Ma c'è un **anello**:
+
+```
+  tau  ->  omega  ->  fasi (phi)  ->  psi  ->  inerzia = |psi|^2  ->  sigma = coppia/inerzia
+   ^________________________________________________________________________|
+```
+
+Cambiando `tau` cambia `omega`; `omega` fa evolvere le fasi; le fasi costruiscono `psi`; **`psi` E'
+l'inerzia**. Quindi **`sigma` non è una costante indipendente: è A VALLE di `tau`.** Usare il `sigma`
+misurato nel braccio **vecchio** per predire il braccio **nuovo** presuppone che l'anello non ci sia.
+
+| | |
+|---|---|
+| se `sigma` nel braccio ON **non è più** `-1.078` | l'attesa **non era** `-0.69` → il "divario" è in parte **un artefatto della predizione**, non un bug da cercare |
+| se `sigma` è ancora `≈ -1.078` | l'anello è debole, **l'attesa regge e il divario è reale** |
+
+**Ciò che la rende seria:** non dice *«c'è un altro bug»*, dice *«il bersaglio contro cui misuriamo
+potrebbe essere mal calcolato»*. **È l'unica ipotesi sul tavolo che non richiede di trovare qualcosa
+di rotto**, e per questo va provata **per prima** fra le spiegazioni del residuo.
+
+### La mia correzione: **il numero NON è nei dati, e non costa zero**
+
+Il rilievo dice *«è un numero solo, già nei dati dei quattro bracci: costa zero»*. **Verificato, ed è
+falso.** `csv/_test_fork/_rimisura_t3.py` calcola **solo** la pendenza di `theta` contro l'inerzia:
+**zero occorrenze** di `coppia` o `sigma` in tutto lo script, e le reti non sono persistite.
+**`sigma` non è mai stato calcolato né salvato. Serve un run.**
+
+*(Lo scrivo perché è la stessa regola del registro: **un numero entra solo se è già nel repo.**
+Qui non c'è.)*
+
+### E un secondo motivo per non rifarlo com'era
+
+Quel `sigma` andrebbe misurato su un sistema che **è appena cambiato due volte** — e la seconda ha
+**acceso la FASE 5**, che sta **a monte di tutto l'anello**: `dt_n = DT*r` è il tic con cui `omega`
+si rilassa (§6-quaterdecies). Misurarlo sul sistema a 2π risponderebbe alla domanda di **ieri**.
+
+### La proposta, con il presidio di Luca incorporato **per costruzione**
+
+Un solo script, **3 semi × 2 bracci** (~50 min), che **nello stesso run** misura `sigma`, `tau`,
+`theta`, e **ricalcola l'attesa `sigma + tau/2` col `sigma` misurato IN QUEL BRACCIO**.
+
+Così il presidio — *«se `sigma` risultasse cambiato non basta dire «ecco perché»: va RICALCOLATA
+l'attesa e verificato che il divario si chiuda QUANTITATIVAMENTE, con le barre d'errore»* — **è
+soddisfatto per costruzione**, non a posteriori: l'attesa ricalcolata si confronta col misurato
+**contro la barra giusta (0.03, non 0.01 — §6-terdecies)**. Se non si avvicina, **l'anello non era
+la causa**, e lo dirà il numero.
+
+**Criterio scritto prima, come sempre. Registrato come fronte R** in `doc/RAMIFICAZIONI.md`.
+**Non lanciato**: aspetta il via libera.
 
 ---
 
