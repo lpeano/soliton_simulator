@@ -301,6 +301,62 @@ rigenera. Faro' entrambe, dichiarando la stratificazione per `eta` come **quarta
 
 ---
 
+## 6-quinquies. `inerzia` e' un **TEMPO^2** (2026-09-15) — la lettura di Luca chiude il buco
+
+Documento: **`doc/INERZIA_tempo_quadro.md`**. Relazione dovuta per **§5-ter**.
+
+Avevo riportato un buco dimensionale: `correzione/inerzia` e' adimensionale, ma la riga 1918
+richiede `1/T^2`. **La lettura di Luca lo chiude esattamente**, e discende dal principio fondativo
+(§8: *"lo spinore E' il tempo proprio della massa"*): se `Psi` porta **tempo**, allora
+`[inerzia] = [|Psi|^2] = T^2` e `[correzione/inerzia] = 1/T^2`. **La massa e' il modulo quadro di un
+tempo proprio.** Non e' una toppa: chiude al primo colpo, senza coefficienti.
+
+**QUALE tempo — e il codice lo decide.** NON l'orologio `dt_n = DT*r`, perche' `r` e' **derivato da
+`Psi`** (`ritmo()`: `a = angle(psi) - angle(psi_prec)`): sarebbe **circolare**. Resta il tempo
+**metrico**, l'unico definito indipendentemente da `Psi`.
+
+**DA DOVE entrerebbe — un solo slot.** In `F = mat(w) @ (amp * e^{i phi})`: `w = exp(-d/lam)*ramp*ramp`
+e' l'esponenziale di **rapporti**, `e^{i phi}` e' una fase. **L'unico slot e' `amp`** (riga 2176),
+oggi la costante `1.0`.
+
+**L'ESPONENTE, derivato.** Il solitone ha lunghezza d'onda ~`LAM` e le onde viaggiano a `cs`, quindi
+il suo periodo proprio e' `T_j = LAM/cs_j` — grandezze **gia' nel sistema**. Se l'ampiezza di
+emissione e' il tempo proprio dell'emettitore:
+
+> **inerzia ∝ cs^(-2)   <=>   omega = coppia/inerzia ∝ cs^2**
+
+**IL TEST DEL VERSO PASSA, e non per costruzione.** Nei pozzi `cs` e' piccolo -> inerzia grande ->
+omega piccola -> **la materia densa ruota piu' lentamente**. E' il verso del redshift
+gravitazionale, ed e' **lo STESSO esponente dello Step 2** gia' cablato e **sigillato 10/10**
+(`omega_clk *= (cs/CS_M)^2`), che fu derivato **prima** e **indipendentemente** dall'orologio di
+Compton. Due canali indipendenti — la **massa** e l'**orologio** — danno lo stesso `omega ∝ cs^2`.
+**Non e' una coincidenza costruita: e' una consistenza trovata.**
+
+**ESITO (b): IL FATTORE MANCA.** Ricerca esaustiva: **zero** occorrenze di `cs` in `calcola_psi`,
+`_pesi`, `_lam_archi`, `lambda_nodi`, `_rho_sorgente`, `satura`. La dipendenza **implicita** via `d`
+esiste (l'onda metrica muove `d`) ma **non puo' essere quella derivata, per costruzione**:
+`exp(-d/lam)` e' adimensionale **qualunque cosa faccia `d`**. **Esito (c) escluso rigorosamente.**
+**Non l'ho cablato:** sarebbe un pezzo, con flag e sigilli, e la decisione e' di Luca.
+
+**DA SAPERE PRIMA DI DECIDERE:** a densita' attuali `cs ~ CS_M`, quindi il fattore varrebbe una
+**costante** (`LAM/CS_M = 0.4`, inerzia x0.16). **NON risolverebbe il `1e-7`**, che resta **ETA'**.
+Due cose separate, tenute separate.
+
+**IL COSTO DELLA LETTURA, dichiarato.** Chiude il buco a 1918 ma **ne apre due** altrove: riga
+**1847** somma `amp ~ T` a un **versore adimensionale**; `scuoti_vuoto` (riga **534**) somma `T` a
+`phivel ~ 1/T`. E una che c'era gia' sotto **entrambe** le letture: `lambda_nodi` confronta `|psi|^2`
+con un **conteggio per volume**. **Il modello non e' dimensionalmente chiuso in nessuna delle due
+letture.** La lettura di Luca chiude quello che conta di piu' — il buco che produce i 112 giri — ma
+non e' globalmente consistente com'e' il codice oggi.
+**A favore**, pero': sotto la lettura `GAMMA ~ 1/T` **coerentemente in tutti e tre** i suoi usi
+(`satura`, `cs`, `psi_spin`), coerente col fatto gia' registrato che sia **condiviso**.
+
+**PISTA REGISTRATA, NON APERTA:** se il fattore c'e', **`cs` entra nello spin ATTRAVERSO LA MASSA**,
+non attraverso l'orologio — e **nessuna delle sei misure lo esclude**, perche' tutte riguardavano lo
+Step 2 (fase globale, Bloch invariante a 3.3e-16). Mai testato.
+
+---
+
 ## 7. IL LAVORO DI CONTORNO, in breve
 
 - **Profilazione** (`doc/PROFILAZIONE_costo_run.md`): il collo **non** è il loop CFL. I due hoist
