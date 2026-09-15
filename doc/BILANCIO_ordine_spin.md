@@ -2,7 +2,7 @@
 
 > **Scritto per Claude web.** Branch `fork-su2`, 2026-09-15. Blob sul disco **`f5887254`**
 > (gate in `CLAUDE.md` §0 su `c0803713`: disallineamento voluto, ramo turbo diagnostico).
-> **Nessuna modifica alla fisica.** Stato: **FASE A chiusa.** FASE B e C **non ancora fatte**.
+> **Nessuna modifica alla fisica.** Stato: **FASI A, B e C chiuse.**
 
 ---
 
@@ -140,32 +140,266 @@ non «aiuta o no».
 
 ---
 
-## 5. STATO E PROSSIMO PASSO
+---
 
-| fase | stato |
-|---|---|
-| **A** — verifica del fatto, adiacenza, parentela ricostruibile | **chiusa** |
-| **B** — i due tassi (`tau_dec` vs `tau_mit`) e il verdetto del bilancio | da fare |
-| **C** — classifica dei canali col confronto dei tempi | da fare |
+## 5. FASE B — I DUE TASSI
 
-**Lettura del verdetto B3, scritta PRIMA di misurare** (così non si adatta al risultato):
+### 5.0 Il sigillo, PRIMA della misura (§2.3)
 
-| esito | lettura |
-|---|---|
-| `tau_dec << tau_mit` | l'ordine muore prima che ne nasca altro: dominio della distruzione. **Coerente con chi = 90.** |
-| `tau_dec ~ tau_mit` | bilancio in bilico: un piccolo spostamento dei tassi sposterebbe il sistema. **Il caso interessante.** |
-| `tau_dec >> tau_mit` | l'ordine dovrebbe accumularsi, e allora `chi = 90` sarebbe **inspiegato**. **Un reperto.** |
+L'osservatore legge **solo** array di stato (`i`, `j`, `_nb`, `pos`, `d`, `n`): mai `calcola_psi()`,
+`ritmo()`, `_pesi()`, `_lam_archi()`, che mutano cache di continuità lette dalla dinamica. Il
+sigillo lo **dimostra**, confrontando due run identici con e senza osservatore:
 
-**Configurazione proposta per la FASE B:** scena reale `--nmasse 3 --sep 8 --seed 1`, campionamento
-a ogni passo per ~300-500 passi dopo il riscaldamento, per avere **centinaia** di nascite invece di
-sette. Da confermare, insieme all'eventuale secondo seme.
+```
+n senza osservatore = 1636   n con osservatore = 1636   ->  CONFRONTABILI
+19 campi su 19 (pos phi phi0 phivel eta d d0 vd peq tw twp i j perc_chi perc_tw
+                _nb _psi_spinor omega_s psi)      ->  max|A-B| = 0.000e+00
+stato RNG                                          ->  identico
+SIGILLO: PASS
+```
+
+> **Presidio applicato** (`CLAUDE.md` §9): la riga dei conteggi è stampata **per prima**. Uno zero
+> con `N` diverso sarebbe **mancanza di confronto**, non identità.
+
+### 5.1 B1 — il tasso di CREAZIONE
+
+Scena reale (3 masse, `sep 8`), **250 passi**, **due semi**.
+
+| | seme 1 | seme 2 |
+|---|---|---|
+| coppie padre-figlio registrate | **2402** | **1761** |
+| nascite per passo | media 9.61, mediana 8 | media 7.04, mediana 5 |
+| N finale / archi / grado medio | 3598 / 210530 / 117.0 | 2957 / 209677 / 141.8 |
+| **`tau_mit` LOCALE** | **187.2 passi** | **209.9 passi** |
+| `tau_mit` globale (raddoppio) | 374.5 passi | 419.8 passi |
+
+`tau_mit` locale `= 1/(grado_medio · nascite_per_arco_per_passo)`: è il tasso che compete col
+disordine **locale**, non quello globale, come richiesto dal mandato.
+
+### 5.2 B2 — il tasso di DISTRUZIONE, e il confondente **escluso**
+
+**Valore-null sempre accanto:** `chi` casuale = **90.000 ± 39.171**; bersaglio 1−1/e = **56.891**.
+
+**Seme 1** (2402 coppie):
+
+| età | `<chi>` gradi | n | distanza | d/LAM | arco diretto vivo |
+|---|---|---|---|---|---|
+| 0 | **0.000** | 2402 | 0.539 | 0.67 | **100.0%** |
+| **1** | **89.739** | 2401 | **0.540** | 0.68 | **100.0%** |
+| 2 | 90.362 | 2396 | 0.542 | 0.68 | 100.0% |
+| 10 | 90.659 | 2376 | 0.556 | 0.70 | 99.7% |
+| 40 | 90.622 | 2253 | 0.629 | 0.79 | 98.6% |
+| 80 | 89.641 | 2075 | 0.727 | 0.91 | 97.8% |
+
+**Seme 2** (1761 coppie): identico nella sostanza — età 1 → `chi` **90.715**, distanza **0.486**
+contro 0.485 alla nascita, arco vivo **100.0%**; età 80 → `chi` 89.462, distanza 0.664, arco 97.2%.
+
+> **`tau_dec` = 0.63 passi.** Identico sui due semi.
+
+**Il confondente è ESCLUSO, non stimato.** Alla prima età in cui `chi` è già al valore-null:
+- la **distanza è invariata** (0.540 contro 0.539; 0.486 contro 0.485) — i due non si sono mossi;
+- l'**arco diretto è vivo al 100.0%** — sono ancora accoppiati dal kernel.
+
+**Decorrelano da ADIACENTI e CONNESSI.** Non è disaccoppiamento geometrico: è **disordine**.
+Lo conferma la coda: a età 80 la distanza è cresciuta solo da 0.54 a 0.73 (`d/LAM` da 0.67 a 0.91)
+e l'arco è ancora vivo al 97.8%, mentre `chi` sta a 90 da **ottanta passi**. L'allontanamento è
+lentissimo, la decorrelazione istantanea: **due ordini di grandezza di separazione fra i due
+effetti.**
+
+### 5.3 B3 — IL VERDETTO DEL BILANCIO
+
+| | seme 1 | seme 2 |
+|---|---|---|
+| `tau_dec` | **0.63 passi** | **0.63 passi** |
+| `tau_mit` locale | 187.2 passi | 209.9 passi |
+| **rapporto `tau_mit`/`tau_dec`** | **295** | **335** |
+
+> **`tau_dec` ≪ `tau_mit`, di quasi TRE ORDINI DI GRANDEZZA. DOMINIO DELLA DISTRUZIONE.**
+> L'ordine muore ~300 volte più in fretta di quanto ne nasca.
+
+È la prima delle tre letture scritte **prima** di misurare, e spiega `chi = 90` ovunque **senza
+bisogno di un meccanismo mancante**: l'ordine c'è, nasce a ogni mitosi, e non sopravvive a un
+singolo tick.
 
 ---
 
-## 6. COSA NON È STATO TOCCATO
+## 6. FASE C — QUALI CANALI MERITANO MEMORIA
 
-`soliton_simulator.py` **non è stato modificato**: `git status` lo dà pulito e il blob sul disco è
-`f5887254`, lo stesso di prima di questo lavoro. Nessun flag nuovo, nessuna memoria aggiunta a
-nulla, nessuna costante di tempo nuova. `csv/_test_fork/_parentela_bloch.py` legge **solo array di
-stato** (`i`, `j`, `_nb`): non chiama `calcola_psi()` né `ritmo()`, che mutano le cache di
-continuità lette dalla dinamica, e non consuma `net.rng`.
+### 6.0 Il numero che decide tutto
+
+Sonda pure-read su stato evoluto (`csv/_test_fork/_canali_disordine.py`, passo 60, seme 1,
+n=2123, archi 208708). **`omega_s` letto DIRETTAMENTE dal simulatore**, non ricostruito:
+
+```
+|omega_s| (memoria hebbiana)   mediana  4.90e+04 rad/tempo   [5%..95%] 1.36e+04 .. 1.21e+05
+theta_vero = |omega_s| * dt_n  mediana  2.40e+04 GRADI per passo
+giri interi per passo (mediana)                : 66.7
+frazione di nodi con theta > 360 gradi         : 99.3%
+```
+
+> **Il Bloch non «diffonde»: fa ~67 GIRI COMPLETI per tick.**
+
+Non c'è alcun clamp su `theta` ([`:2033-2037`](../soliton_simulator.py#L2033)): la rotazione SU(2)
+viene applicata così com'è. Dopo 67 giri la direzione finale dipende dalla parte frazionaria di un
+numero enorme — una variazione di `omega` di una parte su 10^4 cambia del tutto il risultato.
+**Non è errore numerico** (in doppia precisione `cos` a ~400 rad è accurato): è **sensibilità
+amplificata di 67 giri per passo**. Il settore di spin **non è risolto nel tempo** dal passo `DT`.
+
+Questo spiega *meccanicamente* le sei misure negative: `chi = 90` non è «assenza di una forza
+ordinante», è **rimescolamento per sotto-risoluzione**. E si salda con la FASE B: `tau_dec = 0.63`
+passi non è un dato misterioso — è quello che si ottiene ruotando di 67 giri per tick.
+
+### 6.1 Da dove viene: l'inerzia è **sette ordini** sotto l'unità
+
+```
+|cross(B,nb)| (coppia nuda)   mediana  6.05e-02        <- ordinaria
+rho sorgente                  mediana  1.21e-07        <- SETTE ordini sotto 1
+inerzia = max(rho, 1e-6)      mediana  1.00e-06
+frazione di nodi col pavimento 1e-6 attivo : 99.7%
+|omega| = coppia/inerzia      mediana  6.02e+04
+```
+
+`omega = coppia / inerzia`, con l'inerzia posta uguale alla densità
+([`:1891`](../soliton_simulator.py#L1891)). La coppia è **ordinaria**; è **l'inerzia a essere
+minuscola**, e il rapporto esplode.
+
+> **ONESTÀ — il pavimento `1e-6` NON è la causa: la MITIGA.** Senza, l'inerzia sarebbe `1.21e-07`
+> e `omega` sarebbe **otto volte più grande**. La causa è che la densità vale ~1e-7 alle scale
+> simulabili.
+
+Ed è **la stessa famiglia** del problema già noto su `cs` (`CLAUDE.md` §6: *a densità reali cs è
+MORTO, I~0.05 contro soglia ~400*), con il segno opposto:
+
+| settore | grandezza | alle scale simulabili | effetto |
+|---|---|---|---|
+| metrica | `cs = CS_M/(1+GAMMA·sqrt(I))` | `I` troppo **bassa** | `cs` **congelato** a `CS_M` |
+| spin | `omega = coppia/densità` | densità troppo **bassa** | `omega` **esplosa** |
+
+**Una sola radice: la densità è minuscola alle scale simulabili.** Congela un settore e fa esplodere
+l'altro. Non è una congettura: sono i due numeri misurati, messi accanto.
+
+### 6.2 Il punto che ROVESCIA l'ipotesi
+
+Dalla riga [`:1918`](../soliton_simulator.py#L1918):
+
+```
+omega_new = omega_src + dt_n * (coppia/inerzia - omega_src/tau)
+```
+
+è un rilassamento del **primo ordine**, il cui **punto fisso** è
+
+> **omega_eq = tau · coppia / inerzia**
+
+cioè **omega è PROPORZIONALE alla memoria**. Misurato:
+
+```
+tau (TAU_A locale) / DT                        mediana  2.47e+03 PASSI   [5%..95%] 250 .. 8.7e+03
+tau_disordine (passi per ruotare di 90 gradi)  :        0.0030 PASSI
+```
+
+> `tau_memoria / tau_disordine` è circa **8·10^5**. Il canale che «dovrebbe essere filtrato dalla
+> memoria» **ha già la memoria più lunga del sistema — 2470 passi — e ruota di 67 giri per passo.**
+
+**L'ipotesi «dare memoria combatte il disordine» è REFUTATA su questo canale, e per un motivo
+strutturale, non accidentale:** la memoria vive sulla **velocità angolare**, non sulla direzione.
+Un rilassamento su `omega` **conserva la rotazione**, non la posizione — e per giunta ne **alza il
+punto fisso**. Dare *più* memoria qui farebbe girare il Bloch **più in fretta**.
+
+È coerente con la precisazione di partenza (la memoria non ordina, sposta il bilancio) e con lo
+Strato 1, memoria pura passata 23/23 **senza** ordinare i Bloch. Qui si vede il caso in cui la
+memoria sposta il bilancio **dalla parte sbagliata**.
+
+### 6.3 Il canale dei pesi: non è il collo
+
+```
+|B| MISURATO                  mediana  0.0694
+1/sqrt(k_eff) atteso casuale  mediana  0.0649        <- rapporto 1.07
+k_eff = (sum w)^2/sum w^2     mediana  237 vicini efficaci
+|B| NULL (vicini permutati)   mediana  0.124
+```
+
+Il campo misurato coincide col valore di **direzioni indipendenti casuali** entro il **7%**: quello
+che pilota la coppia è la media di ~237 vicini **scorrelati**. I pesi non producono coerenza —
+non c'è coerenza da pesare.
+
+> **Onestà sul null:** il null per **permutazione** (0.124) **non è pulito** e va letto con cautela.
+> Permutando i Bloch si rompe anche l'accoppiamento con il segno chirale (che **non** viene
+> permutato), quindi quel null misura due cose insieme. Il riferimento pulito è `1/sqrt(k_eff)`, ed
+> è quello che combacia. Lo riporto lo stesso perché l'ho misurato: non si nasconde un null che non
+> ha funzionato come previsto.
+
+### 6.4 LA CLASSIFICA — ogni voce col numero che la sostiene
+
+| canale | è porta d'ingresso del disordine per lo SPIN? | verdetto |
+|---|---|---|
+| **`omega_s`** | **SÌ, è LA porta.** Il rumore entra **solo** via `cross(B,nb)` e poi `omega` ([`:1895`](../soliton_simulator.py#L1895), [`:1918`](../soliton_simulator.py#L1918)) | **ha GIÀ memoria** `tau ≈ 2470` passi, e la memoria **PEGGIORA**: `omega_eq = tau·F`. Più memoria, più rotazione. **Da NON aumentare.** |
+| **densità** (`rho`) | entra come **divisore**, ma il **99.7%** dei nodi è **sotto il pavimento** | **escluso col numero**: darle memoria non cambia il divisore per il 99.7% dei nodi |
+| **`cs`** | **no**: raggiunge lo spin **solo** via `omega_clk`, che è una **fase globale**, quindi `nb` resta invariante (**3.3e-16**) | **escluso col numero**, e confermato dall'**esito B** a K=300 |
+| **pesi** (`w`) | entrano nel campo, ma il campo è al valore casuale entro il **7%** | **non è il collo**: il disordine è nei **vicini**, non nei pesi |
+| **`_psi_spinor`** | è lo **stato** disordinato, non la porta; evolve per rotazione unitaria, senza rilassamento | **non è il canale** |
+| **`_nb`** (Bloch) | è un **VINCOLO**, derivato dallo spinore ([`:2066-2069`](../soliton_simulator.py#L2066)) | **escluso per principio** |
+
+**Vincoli, esclusi per principio** — darebbero memoria a una **definizione**, non a una dinamica, e
+la romperebbero: la densità come modulo quadro del campo, il Bloch come proiezione dello spinore, la
+norma unitaria.
+
+> **Nessun canale merita più memoria.** Il solo che è davvero la porta del disordine ne ha già la
+> quantità massima del sistema, e aumentarla peggiorerebbe. L'ipotesi è **refutata con i numeri**,
+> non accantonata.
+
+---
+
+## 7. IL REPERTO, e la domanda che apre
+
+Il mandato prevedeva che `tau_dec >> tau_mit` sarebbe stato un reperto. Il reperto è arrivato
+dall'**altro estremo**, e non era previsto da nessuna delle tre letture:
+
+> **il settore di spin non è risolto nel tempo.** La rotazione per passo vale **~67 giri**, perché
+> `omega = coppia/densità` con una densità di ~1e-7.
+
+Le sei misure negative **restano valide** — nessuna è invalidata, e il disordine è reale nel sistema
+come gira oggi. Ma la loro **interpretazione cambia**: non dicono «non esiste una fisica ordinante»,
+dicono «**in questo regime numerico nessun ordine può sopravvivere a un tick**».
+
+**Due strade, entrambe decisioni di Luca — non le ho prese e non ho toccato nulla:**
+1. **risolvere il tempo dello spin:** un sotto-passo per il settore spinoriale, come già esiste
+   `nsub` per la metrica (il CFL delle onde). Sarebbe **lo stesso principio già nel sistema**, non
+   un meccanismo nuovo;
+2. **guardare la scala:** una densità di ~1e-7 è la stessa radice per cui `cs` è morto. Se è un
+   problema di scala, il settore di spin va provato dove la densità è O(1) — e allora **l'esito B
+   su `cs` e i sei lati andrebbero riletti in quel regime**, non in questo.
+
+**Il test decisivo che NON ho fatto** (richiederebbe di cambiare la fisica, quindi la tua
+autorizzazione): fissare `TAU_A` a due valori diversi a parità di tutto il resto, e verificare la
+predizione `omega_eq` proporzionale a `tau`. Se confermata, chiude il §6.2 per misura e non per
+derivazione. **Attenzione:** `--regime` **non** serve a questo — cambia `TAU_A` *insieme* a `G_PH`,
+`_CALORE_INIT` e `SCUOTIMENTO`: quattro interruttori insieme, contro §1.
+
+---
+
+## 8. STATO
+
+| fase | stato |
+|---|---|
+| **A** — il fatto, l'adiacenza, la parentela ricostruibile | **chiusa** |
+| **B** — i due tassi, confondente separato, verdetto | **chiusa** — dominio della distruzione, 2 semi |
+| **C** — classifica dei canali col confronto dei tempi | **chiusa** — nessun canale merita più memoria |
+
+**Caveat, interi:**
+1. La FASE C è misurata a **passo 60, un seme, una scena**. `tau_dec` è confermato su **due semi** e
+   4163 coppie; i **67 giri per passo no**: vanno rifatti su più semi e a tempi diversi prima di
+   trattarli come stabili.
+2. Il null per permutazione del campo **non ha funzionato come previsto** (§6.3): riportato con il
+   suo difetto, non scartato.
+3. **Nessuna implementazione**, come da mandato: nessun flag, nessuna memoria aggiunta, nessuna
+   costante di tempo nuova.
+
+---
+
+## 9. COSA NON È STATO TOCCATO
+
+`soliton_simulator.py` **non è stato modificato**: blob sul disco `f5887254`, lo stesso di prima di
+questo lavoro, `git status` pulito. I due diagnostici (`_parentela_bloch.py`, `_tassi_coppie.py`)
+leggono solo array di stato, e il secondo è **sigillato PASS** su 19 campi più lo stato dell'RNG.
+`_canali_disordine.py` lavora su una **copia profonda** della rete, così anche le mutazioni di cache
+delle funzioni del simulatore che usa restano confinate lì.

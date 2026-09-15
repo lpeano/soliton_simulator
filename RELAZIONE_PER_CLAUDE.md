@@ -139,33 +139,59 @@ relazione **non** vengono da lì: vengono dall'osservatore, che legge `_cs_nodo_
 
 ---
 
-## 6-bis. APERTO DA OGGI (2026-09-15) — la riformulazione: **un bilancio, non un meccanismo mancante**
+## 6-bis. IL BILANCIO DEI TASSI (2026-09-15) — **FASI A, B, C CHIUSE**, e un REPERTO
 
-Documento: **`doc/BILANCIO_ordine_spin.md`**. **FASE A chiusa, B e C da fare.**
+Documento: **`doc/BILANCIO_ordine_spin.md`**. Nessuna modifica al simulatore (blob `f5887254`).
 
-Dal codice e' emerso un fatto che **cambia la domanda**: alla mitosi il figlio eredita il padre per
-**copia esatta** (`_nb`, `_psi_spinor`, `omega_s`, `_nb_ret`, `_psi_prec` — nessun jitter), e nasce
-**adiacente** nello spazio e nella topologia. Quindi **ogni nascita crea una coppia con chi = 0**
-(misurato: `0.0000` esatto). Ma la misura dice `chi = 90` ovunque.
+**La riformulazione.** Alla mitosi il figlio eredita il padre per **copia esatta** e nasce
+**adiacente**: ogni nascita crea una coppia con `chi = 0` (misurato, `0.0000` esatto). Ma `chi = 90`
+ovunque. Quindi **l'ordine non manca: nasce di continuo e viene distrutto.** Non serve un meccanismo
+ordinante — serve misurare il **bilancio**.
 
-> **L'ordine non manca: nasce di continuo e viene DISTRUTTO.** Non serve cercare un meccanismo
-> ordinante (la strada che porterebbe a *imporre* un Kuramoto, gia' refutato): serve misurare il
-> **bilancio fra due tassi gia' presenti** — la mitosi che crea, il rumore + la precessione mutua
-> che distruggono.
+**FASE B — i due tassi** (osservatore **sigillato PASS**: 19 campi + stato RNG a `0.000e+00`, con N
+confrontabile). Scena reale, 250 passi, **due semi**, 4163 coppie padre-figlio:
 
-**Il numero che mi ha sorpreso**, e che va rifatto prima di crederci: nello **stesso passo** in cui
-nasce il figlio, il **padre** si sposta di **85.6 gradi in media** (mediana 95.8). Il Bloch
-decorrela **da se' stesso in un tick**, cioe' e' gia' sul valore-null. Se regge sulla statistica,
-`tau_dec` e' inferiore al passo e il bilancio e' dominato dalla distruzione. **Ma sono 7 campioni:
-un indizio, non un risultato.**
+| | seme 1 | seme 2 |
+|---|---|---|
+| `tau_dec` (decorrelazione della coppia) | **0.63 passi** | **0.63 passi** |
+| `tau_mit` locale (una mitosi nel vicinato) | 187 passi | 210 passi |
+| rapporto | **295** | **335** |
 
-**Due cose gia' utili per chi legge:**
-- l'**antinodo** Schwinger eredita `-psi`, ma `nb = psi^dag sigma psi` e' invariante per fase
-  globale: **anche l'antinodo nasce con chi = 0 in Bloch.** «Antichirale» riguarda il segno di
-  doppia copertura, non la direzione.
-- sotto `--spinore-corretto` il rumore **non** perturba il Bloch direttamente (quel ramo e' gated su
-  `SYNC_UPDATE`, spento): entra **solo** via `cross(B, nb) -> omega`. E' **rumore di COPPIA**, e
-  `omega_s` **ha gia' memoria** (`TAU_A`). Un canale che la memoria ce l'ha, e resta disordinato.
+> **`tau_dec` << `tau_mit` di quasi TRE ORDINI. Dominio della distruzione.**
+
+**E il confondente e' ESCLUSO, non stimato.** All'eta' 1, quando `chi` e' gia' 89.7 (nullo:
+90.000 +- 39.171), la **distanza e' invariata** (0.540 contro 0.539) e l'**arco diretto e' vivo al
+100%**. Decorrelano **da adiacenti e connessi**: e' disordine, non disaccoppiamento geometrico.
+
+**FASE C — l'ipotesi «dare memoria combatte il disordine» e' REFUTATA, e c'e' un reperto.**
+Leggendo `omega_s` **direttamente dal simulatore**:
+
+> **il Bloch fa ~67 GIRI COMPLETI per passo** (2.4e4 gradi/passo; 99.3% dei nodi oltre il giro
+> intero). **Il settore di spin NON e' risolto nel tempo dal passo DT.**
+
+Perche': `omega = coppia/inerzia`, la coppia e' **ordinaria** (0.06) ma l'inerzia e' la **densita'**,
+che vale **1.2e-7** — sette ordini sotto l'unita'. Il pavimento `1e-6` **non e' la causa: la
+mitiga** (senza, `omega` sarebbe otto volte piu' grande).
+
+**E' la stessa radice del problema noto su `cs`**, con segno opposto: la densita' e' minuscola alle
+scale simulabili, quindi **congela la metrica** (`cs` fermo a `CS_M`) **e fa esplodere lo spin**
+(`omega` divisa per quella densita').
+
+**Perche' piu' memoria peggiorerebbe:** il punto fisso del rilassamento e' `omega_eq = tau · F`,
+cioe' **omega e' proporzionale alla memoria**. Il canale ha gia' la memoria piu' lunga del sistema
+(2470 passi) e ruota di 67 giri per tick. La memoria vive sulla **velocita' angolare**: conserva la
+rotazione, non la direzione. **Nessun canale merita piu' memoria**, e ognuno e' escluso col suo
+numero (la densita': il 99.7% dei nodi e' sotto il pavimento; `cs`: fase globale, `nb` invariante a
+3.3e-16, piu' l'esito B; i pesi: il campo e' al valore casuale entro il 7%).
+
+**Cosa cambia per i sei lati.** Restano **validi** — nessuno e' invalidato. Cambia
+l'**interpretazione**: non dicono «non esiste una fisica ordinante», dicono «**in questo regime
+numerico nessun ordine puo' sopravvivere a un tick**». Due strade aperte, entrambe decisione di
+Luca: un **sotto-passo per lo spin** (lo stesso principio di `nsub` per la metrica), oppure
+**rileggere tutto dove la densita' e' O(1)**.
+
+**Caveat:** i 67 giri/passo sono misurati a **passo 60, un seme, una scena** — vanno rifatti prima
+di trattarli come stabili. `tau_dec` invece e' su due semi e 4163 coppie.
 
 ---
 

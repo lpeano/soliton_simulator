@@ -1,0 +1,45 @@
+stato: n=2123 archi=208708  dopo 60 passi (seme 1)
+costanti: TAU_A=50  TAU_A_LOCALE=True  DT=0.01  LAM=0.8  GAMMA=0.05  CS_M=2
+
+================================================================================================
+GLI INGREDIENTI, al punto in cui il disordine entra
+================================================================================================
+  |B| (media dei vicini)     mediana     0.0694   [5%..95%]     0.0204 .. 0.942       max          1 
+  rho sorgente               mediana   1.21e-07   [5%..95%]   1.53e-10 .. 5.75e-07    max   2.16e-06 
+  inerzia = max(rho,1e-6)    mediana      1e-06   [5%..95%]      1e-06 .. 1e-06       max   2.16e-06 
+  frazione di nodi col PAVIMENTO 1e-6 attivo (rho < 1e-6): 99.7%
+  |cross(B,nb)| (coppia nuda) mediana     0.0605   [5%..95%]     0.0113 .. 0.832       max      0.993 
+  |omega| = coppia/inerzia   mediana   6.02e+04   [5%..95%]   1.13e+04 .. 8.32e+05    max   9.93e+05 rad/tempo
+  dt_n = DT*r                mediana       0.01   [5%..95%]    0.00142 .. 0.0141      max     0.0141 
+
+  theta = |omega|*dt_n       mediana   2.97e+04   [5%..95%]   1.87e+03 .. 6.03e+05    max   8.04e+05 GRADI PER PASSO
+  frazione di nodi con theta > 90 gradi in UN passo : 98.7%
+  frazione con theta > 360 gradi (giro intero)      : 98.2%
+
+================================================================================================
+IL CANALE `w` — i pesi portano coerenza, o il disordine e' tutto nei VICINI?
+================================================================================================
+  |B| MISURATO               mediana     0.0694   [5%..95%]     0.0204 .. 0.942       max          1 
+  |B| NULL (vicini permutati) mediana      0.124   [5%..95%]     0.0428 .. 0.941       max          1 
+  k_eff = (sum w)^2/sum w^2  mediana        237   [5%..95%]        1.8 .. 300         max        334 vicini efficaci
+  1/sqrt(k_eff) atteso casuale mediana     0.0649   [5%..95%]     0.0577 .. 0.746       max      1e+15 
+  rapporto mediano |B|_misurato / |B|_null : 0.561   (1.000 = nessuna coerenza dai pesi)
+
+================================================================================================
+LO STATO VERO — `omega_s` LETTO DAL SIMULATORE (non ricostruito)
+================================================================================================
+  |omega_s| (memoria hebbiana) mediana    4.9e+04   [5%..95%]   1.36e+04 .. 1.21e+05    max   2.51e+05 rad/tempo
+  theta_vero = |omega_s|*dt_n mediana    2.4e+04   [5%..95%]   2.35e+03 .. 8.21e+04    max   2.02e+05 GRADI PER PASSO
+  giri interi per passo (mediana)                  : 66.7
+  frazione di nodi con theta_vero > 360 gradi      : 99.3%
+  PUNTO FISSO della memoria: omega_eq = tau * coppia/inerzia -> PIU' memoria = PIU' rotazione.
+
+================================================================================================
+I TEMPI A CONFRONTO (FASE C.2)
+================================================================================================
+  tau_disordine (passi per ruotare di 90 gradi, mediana) : 0.0030 passi
+  tau_memoria GIA' PRESENTE su omega_s (TAU_A)           : 50.0  [tempo proprio] = 5000 passi
+    TAU_A locale / DT        mediana   2.47e+03   [5%..95%]        250 .. 8.73e+03    max   1.92e+04 PASSI
+
+  Se theta e' dell'ordine di 90 gradi per passo, la memoria su omega NON trattiene il
+  Bloch: conserva la ROTAZIONE, non la DIREZIONE. E' il punto della FASE C.
