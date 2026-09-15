@@ -7,10 +7,9 @@
 >
 >
 > ## RUN IN VOLO (2026-09-15, dalle 12:24)
-> `csv/_test_fork/_maturazione_s1.txt` e' **IN SCRITTURA**: 2000 passi, seme 1, misura della
-> maturazione. **NON leggerlo come risultato.** Il rapporto intermedio committato
-> (`doc/MATURAZIONE_aliasing.md`) e' marcato come tale; il verdetto A/B/C arrivera' in un commit
-> dedicato a run finito.
+> `csv/_test_fork/_maturazione_s1.txt` e' **CONCLUSO** (2000 passi, esito C, committato).
+> E' **IN VOLO** invece `csv/_test_fork/_trasversale_s1.txt`: 700 passi, il **test trasversale**
+> del `doc/CRITERIO_omega_rho.md`. **NON leggerlo come risultato finche' non e' committato.**
 >
 > **NON C'E' NESSUN ALTRO RUN IN VOLO.** I file `csv/_test_fork/_vuoto_k300_*` sono **risultati
 > definitivi**, non intermedi: il verdetto e' in `doc/ESITO_scan_turbo_K300.md` ed e' committato

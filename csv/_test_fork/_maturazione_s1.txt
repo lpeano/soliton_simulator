@@ -1,0 +1,68 @@
+====================================================================================================
+CONFERMA DEI FLAG **IN-RUN** (lezione del falso O3c: non fidarsi della riga di comando)
+====================================================================================================
+  [calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+  [spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+  [deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+  [campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+  [fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+  [fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+  [verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+  [chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+  [cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+  GAMMA_TURBO = 1   (1.0 = NESSUN turbo)        STEP2_OROLOGIO = False   (deve essere False)
+  FORK_SU2 = True   FORK_SU2_MEM = True   CS_DINAMICO = True
+  TAU_A = 50   DT = 0.01   -> maturazione piena a 5000 passi
+
+scena: n=1196 archi=207563  (seme 1)  soglia di aliasing = 30 gradi/passo
+
+ passo      n    ramp_med  ramp_p95 |  rho_med    %sotto1e-6 |  theta_med   theta_p95  | %>soglia | giovani  maturi
+ ----------------------------------------------------------------------------------------------------------------------
+     1    1196     0.0002    0.0012 |  1.76e-11     100.0% |    0.01433        4096 |     6.7% |  0.01433      nan
+    25    1718     0.0039    0.0056 |  1.51e-08     100.0% |  1.797e+04    4.42e+04 |   100.0% | 1.797e+04      nan
+    50    2201     0.0073    0.0110 |  2.22e-08     100.0% |  2.665e+04   6.777e+04 |   100.0% | 2.665e+04      nan
+    75    2651     0.0104    0.0166 |  3.87e-08      83.7% |  3.296e+04   8.018e+04 |   100.0% | 3.296e+04      nan
+   100    2936     0.0136    0.0222 |  8.11e-08      71.8% |  3.827e+04   9.226e+04 |   100.0% | 3.827e+04      nan
+   125    3167     0.0169    0.0278 |  1.58e-07      64.7% |  4.113e+04   9.893e+04 |   100.0% | 4.113e+04      nan
+   150    3362     0.0201    0.0335 |   2.6e-07      66.6% |  4.348e+04   1.047e+05 |   100.0% | 4.348e+04      nan
+   175    3486     0.0236    0.0392 |  4.28e-07      61.0% |  4.438e+04   1.061e+05 |   100.0% | 4.438e+04      nan
+   200    3598     0.0269    0.0449 |   5.8e-07      57.6% |    4.6e+04   1.108e+05 |   100.0% |  4.6e+04      nan
+   225    3671     0.0305    0.0502 |  8.24e-07      53.3% |  4.653e+04   1.092e+05 |   100.0% | 4.653e+04      nan
+   250    3749     0.0349    0.0553 |  1.12e-06      47.6% |  4.706e+04   1.127e+05 |   100.0% | 4.706e+04      nan
+   275    3811     0.0392    0.0600 |  1.53e-06      42.2% |  4.693e+04   1.151e+05 |   100.0% | 4.693e+04      nan
+   300    3889     0.0439    0.0650 |  1.84e-06      37.9% |  4.662e+04    1.14e+05 |   100.0% | 4.662e+04      nan
+   325    3940     0.0482    0.0697 |  1.12e-06      47.7% |  4.578e+04   1.145e+05 |   100.0% | 4.578e+04      nan
+   350    3994     0.0527    0.0744 |  2.99e-06      27.4% |  4.553e+04   1.127e+05 |   100.0% | 4.553e+04      nan
+   375    4037     0.0571    0.0794 |  3.71e-06      22.4% |  4.614e+04   1.137e+05 |   100.0% | 4.607e+04      nan
+   400    4077     0.0614    0.0848 |  4.18e-06      19.4% |  4.631e+04   1.153e+05 |   100.0% | 4.631e+04      nan
+   425    4111     0.0657    0.0901 |  5.07e-06      14.7% |  4.681e+04   1.161e+05 |   100.0% | 4.697e+04      nan
+   450    4149     0.0698    0.0956 |  5.84e-06      12.8% |  4.708e+04   1.174e+05 |   100.0% | 4.746e+04      nan
+   475    4175     0.0741    0.1004 |  2.34e-06      29.5% |  4.742e+04   1.187e+05 |   100.0% | 4.77e+04      nan
+   500    4223     0.0783    0.1057 |  7.49e-06       9.4% |  4.785e+04   1.194e+05 |   100.0% |  4.8e+04      nan
+   525    4266     0.0827    0.1113 |  8.35e-06       7.8% |  4.836e+04   1.216e+05 |   100.0% | 4.858e+04      nan
+   550    4302     0.0870    0.1166 |  9.94e-06       7.2% |  4.954e+04    1.25e+05 |   100.0% | 5.044e+04      nan
+   575    4333     0.0913    0.1220 |  3.76e-06      17.3% |  4.966e+04   1.257e+05 |   100.0% | 5.133e+04      nan
+   600    4368     0.0956    0.1273 |  1.27e-05       5.7% |  4.978e+04   1.252e+05 |   100.0% | 5.197e+04      nan
+   700    4595     0.1127    0.1484 |  1.99e-05       4.8% |  4.945e+04   1.254e+05 |   100.0% | 6.089e+04      nan
+   800    4887     0.1289    0.1707 |  2.95e-05       5.3% |  4.815e+04   1.234e+05 |   100.0% | 5.516e+04      nan
+   900    5248     0.1433    0.1928 |  4.05e-05       5.2% |  4.807e+04   1.196e+05 |   100.0% | 5.247e+04      nan
+  1000    5595     0.1546    0.2166 |  5.46e-05       4.0% |   4.75e+04   1.157e+05 |   100.0% | 5.099e+04      nan
+  1100    5878     0.1654    0.2396 |  6.82e-05       3.2% |  4.724e+04   1.115e+05 |   100.0% | 5.137e+04      nan
+  1200    6195     0.1751    0.2608 |  8.58e-05       3.5% |  4.574e+04   1.083e+05 |   100.0% | 4.772e+04      nan
+  1300    6523     0.1845    0.2831 |  0.000121       2.8% |   4.47e+04   1.051e+05 |   100.0% | 4.615e+04      nan
+  1400    6787     0.1938    0.3066 |   8.3e-05       4.8% |  4.331e+04   1.016e+05 |   100.0% | 4.333e+04      nan
+  1500    7037     0.2048    0.3303 |  0.000294       2.5% |  4.125e+04   9.816e+04 |   100.0% | 4.098e+04      nan
+  1600    7292     0.2157    0.3522 |  0.000405       2.7% |  3.923e+04   9.462e+04 |   100.0% | 3.861e+04      nan
+  1700    7569     0.2268    0.3762 |  0.000308       6.4% |  3.733e+04   9.276e+04 |   100.0% | 3.659e+04      nan
+  1800    7839     0.2373    0.3993 |  0.000723       2.6% |  3.558e+04   9.152e+04 |   100.0% | 3.617e+04      nan
+  1900    8068     0.2488    0.4206 |   0.00049       6.5% |  3.407e+04    9.12e+04 |   100.0% | 3.549e+04 4.147e+04
+  2000    8395     0.2585    0.4412 |   0.00055       7.1% |  3.243e+04   8.881e+04 |   100.0% | 3.485e+04 4.088e+04
+
+====================================================================================================
+LETTURA (regola scritta PRIMA, doc/PREDIZIONE_maturazione.md)
+====================================================================================================
+  theta mediano: 0.01433 -> 3.243e+04 gradi/passo   (fattore 2.26e+06)
+  frazione aliasata (theta > 30): 6.7% -> 100.0%
+  ramp mediano: 0.0002 -> 0.2585      rho mediano: 1.76e-11 -> 0.00055   (pavimento 1e-6)
+
+  -> theta NON e' sceso sotto soglia: esito (C), aliasing STRUTTURALE.

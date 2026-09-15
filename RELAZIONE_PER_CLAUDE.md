@@ -357,11 +357,16 @@ Step 2 (fase globale, Bloch invariante a 3.3e-16). Mai testato.
 
 ---
 
-## 6-sexies. MATURAZIONE (2026-09-15) — **RAPPORTO INTERMEDIO, RUN IN VOLO**
+## 6-sexies. MATURAZIONE (2026-09-15) — **CONCLUSO: ESITO (C)**
 
 Documento: **`doc/MATURAZIONE_aliasing.md`**. Predizione scritta **prima** e committata prima
-(`doc/PREDIZIONE_maturazione.md`, commit `a8a0360`). **Dati fino al passo 425 su 2000: NON sono un
-risultato.** Relazione dovuta per §5-ter.
+(`doc/PREDIZIONE_maturazione.md`, commit `a8a0360`). **Run CONCLUSO, 2000 passi.**
+Relazione dovuta per §5-ter.
+
+> ### VERDETTO: **ESITO (C).** L'aliasing e' **STRUTTURALE, non transitorio.**
+> La maturazione **funziona** (`ramp` lineare, `rho` da 1.76e-11 a 5.5e-4, pavimento rilasciato dal
+> 100% al 7%) **ma non toglie l'aliasing: la frazione aliasata e' 100% a OGNI campione, l'ultimo
+> compreso.**
 
 **La domanda:** il `1e-7` dell'inerzia e' ETA'. Se lo e', l'aliasing (112 giri/passo) potrebbe
 sparire **da solo** per maturazione, e non ci sarebbe niente da riparare. Va accertato **prima** di
@@ -419,6 +424,32 @@ e `tau = TAU_A`, cioe' **`tau/DT = 5000`**. **La memoria si e' allungata di ~20x
 il sistema maturava.** Con `omega_eq = |F|·sqrt(dt·tau/2)`, se `|F| ∝ 1/rho` **e** `tau ∝ rho`,
 allora `omega_eq ∝ rho^(-1/2)` e anche quella discesa arriverebbe su 5000 passi. Da verificare
 aggiungendo la colonna `tau` alla sonda, senza toccare la fisica.
+
+**I NUMERI FINALI.** `theta` **non e' piatto** — ha un picco a 4.978e4 (passo 600) e cala a
+**3.243e4** (passo 2000), **-35%**. Ma la domanda era *"cala COME PREVISTO?"*, e la risposta e' no,
+di due ordini:
+
+| finestra | leva su `rho` | `d(log theta)/d(log rho)` | atteso |
+|---|---|---|---|
+| tutto post-pavimento (22 campioni) | **x309** | **-0.061** | -1 (o -0.5 raffinata) |
+| ultima parte (1300-2000) | x8.7 | -0.131 | idem |
+
+Dal picco di `theta` alla fine, con `rho` cresciuta **x43.3**: se seguisse `1/rho` sarebbe **1149**;
+se `rho^(-1/2)` sarebbe **7564**; **misurato 3.243e4** — **28x e 4.3x sopra**. La pendenza `-0.061`
+con leva `x309` cade nella banda `-0.2..+0.2`: **il criterio temporale posto da Luca e' soddisfatto,
+la lettura e' SBAGLIATA, non ritardata.**
+
+**Il limite dichiarato in anticipo si e' avverato:** `ramp` mediano finale **0.2585** (proiezione
+fatta al passo 425: ~0.31). **Nessuna popolazione matura**, quindi la seconda misura (`chi` nella
+zona matura) **non era eseguibile** — come avevo detto prima, non dopo.
+
+**E UN INDIZIO TRASVERSALE CHE PUNTA DALLA PARTE SBAGLIATA.** Alla stessa istantanea, negli ultimi
+campioni: nodi **giovani** (`ramp<0.1`) `theta = 3.485e4`; nodi **maturi** (`ramp>0.5`)
+`theta = 4.088e4`. **I maturi ruotano PIU' VELOCEMENTE.** Se `omega = coppia/inerzia` e l'inerzia
+cresce con la maturita', dovrebbe essere il contrario. **E' a un solo istante, quindi il ritardo non
+puo' spiegarlo** — ma e' grezzo (due classi, campione piccolo sui maturi): lo riporto come
+**indizio**, non come misura. Il test vero e' la regressione trasversale del
+`doc/CRITERIO_omega_rho.md` §4.1, **in corso**.
 
 **Costo misurato:** 425 passi in 9.0 min (~1.3 s/passo a N≈4100); stima **2-3 h** per i 2000.
 

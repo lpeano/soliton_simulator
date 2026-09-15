@@ -3,10 +3,10 @@
 > **Scritto per Claude web** (regola `CLAUDE.md` §5-ter: a ogni riscontro, una relazione, subito).
 > Branch `fork-su2`, 2026-09-15. Blob sul disco **`f5887254`**. **Nessuna modifica alla fisica.**
 >
-> ## ⚠ IL RUN È IN VOLO MENTRE SCRIVO
-> Dati fino al passo **1200 su 2000**. **NON sono un risultato**: sono un riscontro **intermedio**,
-> riportato perché §5-ter lo impone e perché **una metà della predizione è confermata e l'altra
-> no**. Il verdetto A/B/C arriverà in un commit dedicato, a run finito.
+> ## ✔ RUN CONCLUSO — 2000 passi, exit 0
+> **VERDETTO: ESITO (C).** L'aliasing è **strutturale, non transitorio**. Il dettaglio è nel §5-ter
+> in fondo; i §§1-5 restano come furono scritti **durante** il run, perché la sequenza in cui i
+> riscontri sono arrivati è essa stessa parte del risultato.
 
 ---
 
@@ -162,6 +162,66 @@ _dens_rif = median(_dens[_dens > 1e-6])
 **È un'ipotesi, e va marcata come tale:** `_maturazione.py` **non stampa `tau`**, quindi in questo
 run non l'ho misurata. Si verifica a costo quasi nullo aggiungendo la colonna, **dopo**, senza
 toccare la fisica.
+
+---
+
+## 5-ter. ⚑ VERDETTO FINALE — **ESITO (C)**, run concluso a 2000 passi
+
+```
+theta mediano:   0.01433 -> 3.243e+04 gradi/passo
+frazione aliasata (theta > 30 gradi/passo):   6.7% -> 100.0%
+ramp mediano:    0.0002 -> 0.2585        rho mediano: 1.76e-11 -> 5.5e-4
+-> theta NON e' sceso sotto soglia: esito (C), aliasing STRUTTURALE.
+```
+
+**La frazione aliasata è 100 % a OGNI campione, compreso l'ultimo.** Non c'è stato nessun momento,
+in 2000 passi, in cui anche un solo nodo sia uscito dall'aliasing.
+
+### 5-ter.1 `theta` scende — ma di un fattore sbagliato di due ordini
+
+Onestà: `theta` **non è piatto fino in fondo**. Ha un picco a **4.978e4** (passo 600) e poi cala a
+**3.243e4** (passo 2000): **−35 %**. Ma la domanda non era «cala?», era «**cala come previsto?**».
+
+| finestra | leva su `rho` | `d(log θ)/d(log ρ)` | atteso |
+|---|---|---|---|
+| tutto post-pavimento (22 campioni) | **×309** | **−0.061** | −1, o −0.5 nella lettura raffinata |
+| prima metà (425-1200) | ×36.7 | −0.006 | idem |
+| ultima parte (1300-2000) | ×8.7 | −0.131 | idem |
+
+E il confronto diretto, dal picco di `theta` alla fine, con `rho` cresciuta **×43.3**:
+
+| | `theta` |
+|---|---|
+| se `theta ∝ 1/rho` (lettura originale) | **1149** |
+| se `theta ∝ rho^(−1/2)` (lettura raffinata) | **7564** |
+| **MISURATO** | **3.243e4** |
+
+> **28× sopra la previsione originale, 4.3× sopra la raffinata.** La pendenza misurata su `rho`,
+> **−0.061 con una leva di ×309**, cade nella banda **−0.2…+0.2** del criterio.
+> **Il criterio temporale posto da Luca è soddisfatto: la lettura è sbagliata, non ritardata.**
+
+### 5-ter.2 Il limite dichiarato prima si è avverato
+
+`ramp` mediano a 2000 passi: **0.2585** — esattamente la proiezione (~0.31) fatta al passo 425.
+**Nessuna popolazione matura**: la colonna `ramp > 0.5` compare solo agli ultimi due campioni.
+La **seconda misura** prevista dal mandato (`chi` nella zona matura) **non era eseguibile**, come
+avevo detto in anticipo.
+
+### 5-ter.3 E un indizio trasversale che punta **dalla parte sbagliata**
+
+Agli ultimi due campioni, alla **stessa istantanea**:
+
+| | `theta` mediano |
+|---|---|
+| nodi **giovani** (`ramp < 0.1`) | 3.485e4 |
+| nodi **maturi** (`ramp > 0.5`) | **4.088e4** |
+
+> **I nodi maturi ruotano PIÙ VELOCEMENTE dei giovani.** Se `omega = coppia/inerzia` e l'inerzia
+> cresce con la maturità, dovrebbe essere il contrario.
+>
+> **È un confronto a un solo istante, quindi il ritardo non può spiegarlo.** Ma è grezzo (due sole
+> classi, campione piccolo sui maturi), quindi lo riporto come **indizio**, non come misura: il test
+> vero è la **regressione trasversale** del `doc/CRITERIO_omega_rho.md` §4.1, in corso.
 
 ---
 
