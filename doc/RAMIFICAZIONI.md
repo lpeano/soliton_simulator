@@ -24,6 +24,17 @@
 > **Condizione da riverificare col settore 4π in funzione**, e vale **anche per T3 e i suoi quattro
 > bracci**, cioè per il divario stesso che stiamo inseguendo.
 >
+> **⚠ TERZO MARCHIO — `cs` COSTANTE (2026-09-15, rilievo di Luca, verificato dal disco).**
+> Il **sigillo 23/23 dello STRATO 1** e le due misure del braccio OFF sono girati **senza
+> `--cs-dinamico`**: `cs = CS_M` costante, `_cs_nodo_prev` mai scritta, quindi `tau = d/CS_M`.
+> **Il meccanismo del ritardo regge** (S7 misura `r=2/r=1 = 1.9753`, che dipende da `r` non da `cs`);
+> **la dipendenza di `tau` da `cs` NON e' mai stata esercitata** — ed e' *proprio* la ragione per cui
+> `tau = d/cs` sarebbe piu' principiato di `tau ∝ rho`.
+> Vale **doppio** per lo Strato 1: quel sigillo e' del blob `2277e9a0`, **precedente alla cura della
+> cache**, quindi anche col flag acceso la cache sarebbe stata scartata a ogni mitosi.
+> **I quattro run in partenza sono la PRIMA VOLTA che quella dipendenza gira davvero: non e'
+> «rifare la misura meglio», e' MISURARE PER LA PRIMA VOLTA.**
+>
 > **Quattro chiusure (§B) sono MISURE fatte su un settore ALIASATO** — lo spin gira a ~112
 > giri/passo, quindi ogni misura su di esso e' presa su uno sfarfallio.
 > **Vanno rifatte quando `omega` rientra nel tetto.** Se questo non resta scritto, fra un mese

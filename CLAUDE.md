@@ -238,6 +238,17 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   `_cs_nodo_prev` e `_r_corrente` **scritte solo col flag ON** (da cui dipende la byte-identita'
   di S1: se un giorno servissero a ramo spento, il sigillo S1 va rifatto). Richiede `--fork-su2`;
   da solo viene IGNORATO con avviso. VERIFICATO dal sorgente sul blob 2277e9a0.
+  **⚠ MARCHIO (2026-09-15, rilievo di Luca, verificato dal disco): il sigillo 23/23 dello STRATO 1
+  NON HA MAI ESERCITATO LA DIPENDENZA DA `cs`.** L'argv di `_sigillo_strato1.py` (righe 380-386)
+  **non contiene `--cs-dinamico`**, quindi `cs = CS_M` costante e `_cs_nodo_prev` non veniva scritta:
+  il ritardo girava su **`tau = d/CS_M`**. E vale **due volte**: quel sigillo e' del blob `2277e9a0`,
+  **precedente alla cura della cache**, quindi anche col flag acceso la cache sarebbe stata
+  **scartata a ogni mitosi**.
+  **COSA RESTA VALIDO:** il **meccanismo** del ritardo (slerp geodetico, `alpha = 1-exp(-dt_n/tau)`)
+  e **S7**, che misura il rapporto `r=2 / r=1 = 1.9753` — quel rapporto dipende da **`r`**, non da
+  `cs`, quindi il presidio sul tempo proprio **tiene**.
+  **COSA NON E' MAI STATO TESTATO:** che `tau` **segua `cs`**. Ed e' proprio la ragione per cui
+  `tau = d/cs` sarebbe piu' principiato di `tau ∝ rho`. **Finora nessuno l'ha vista funzionare.**
 - **IL TIC DEI PROCESSI LOCALI E' `dt_n = DT*r`, NON `DT`** (fatto generale, non solo del fork).
   `DT` nudo e' il tempo di COORDINATA: usarlo dentro un rilassamento locale cancella la dipendenza
   dall'orologio del luogo, cioe' impone la foliazione sincrona globale = **un frame preferito, un
