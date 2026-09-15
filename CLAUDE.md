@@ -570,6 +570,23 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   che pero' e' un **esperimento** (`doc/COMPONENTI_PROMOSSE.md` C1), non fisica.
   **Cio' che NON dipende da `cs` e resta il valore vero dei quattro bracci: il GRADIENTE DI
   RISOLUZIONE**, `theta` da **~129** a **~39** giri/passo.
+- **PRESIDIO — DUE SEMI SODDISFANO IL MINIMO DEL par.2.7 MA NON PERMETTONO DI STIMARE UNA BARRA
+  FRA SEMI.** Con 2 semi la deviazione standard ha **UN grado di liberta'**, e `t(0.025, 1) = 12.706`:
+  l'IC95 diventa ~**12.7 volte** la `SE` della media, cioe' praticamente inutilizzabile.
+  CASO REALE (2026-09-15, `doc/REFERTO_4bracci_4pi.md`): `chi` materia e' **sotto 90 su entrambi i
+  semi OFF** (89.778, 89.876) e **sopra 90 su entrambi i semi ON** (90.048, 90.084) — segno concorde,
+  `z ~ 3.5` se preso ingenuamente. **Ma l'IC95 con 1 gdl e' largo 1.2 gradi e contiene lo zero.**
+  **Il segno concorde su 2 semi non e' una prova: e' un'ipotesi da rifare con 4.** Con 4 semi
+  `t(3) = 3.18`, quattro volte piu' stretto. **Per una barra FRA SEMI servono >= 4 semi.**
+- **PRESIDIO — UNA SOGLIA SU UNA GRANDEZZA DI UN SISTEMA CHE CRESCE VA DICHIARATA CON L'ISTANTE IN
+  CUI SI MISURA**, altrimenti si finisce per citare la piu' comoda. CASO REALE (2026-09-15):
+  `cs_std/cs` — il rapporto che decide se `tau = d/cs` e' distinguibile da `tau ∝ d` — vale
+  **0.0086%** al passo 50 (n~80), **0.096%** al passo 300, **0.19-0.24%** al passo 500:
+  **venti volte in 450 passi.** Avevo registrato il primo valore come se fosse una proprieta' del
+  sistema; era un'istantanea su 80 nodi appena seminati. Il margine sotto la soglia dell'1% e'
+  passato da **116x** a **~4x**. La conclusione regge, **la sua forza no** — e poiche' la traiettoria
+  e' **monotona crescente**, il regime **cambia con la maturazione**: il tempo-luce non e' «non
+  testabile mai», e' «non testabile a 500 passi».
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
 

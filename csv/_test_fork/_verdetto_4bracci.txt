@@ -1,0 +1,151 @@
+==============================================================================================================
+PARTE 1 - CHECKLIST DI CONFORMITA' (bloccante). Valori LETTI dal CSV, non dal nome file.
+==============================================================================================================
+--------------------------------------------------------------------------------------------------------------
+  csOFF_s1   campioni 11   passi finali 500   n 3538
+    blob           letto 08784685eeb17835389d248a2d1d07db4f0d1305   atteso 08784685...  OK
+    CS_DINAMICO    letto 1                                          atteso 1            OK
+    FORK_SU2       letto 1                                          atteso 1            OK
+    FORK_SU2_MEM   letto 1                                          atteso 1            OK
+    KURAMOTO_SU2   letto 0                                          atteso 0            OK
+    STEP2          letto 0                                          atteso 0            OK
+    TAU_LUCE       letto 0                                          atteso 0            OK
+    GAMMA_TURBO    letto 1.0                                        atteso 1.0          OK
+    seed           letto 1                                          atteso 1            OK
+    tag            letto csOFF                                      atteso csOFF        OK
+    cs_std (cache esiste?) letto 0.0038369                                  atteso non-nan      OK
+    cs: min 1.981585  max 2.000000  medio 1.990793   cs_std/cs_medio = 0.19273 %   <-- SOTTO l'1 %: cs quasi-costante, tau = d/cs e' praticamente tau ~ d
+  csOFF_s1: CONFORME
+--------------------------------------------------------------------------------------------------------------
+  csOFF_s2   campioni 11   passi finali 500   n 2801
+    blob           letto 08784685eeb17835389d248a2d1d07db4f0d1305   atteso 08784685...  OK
+    CS_DINAMICO    letto 1                                          atteso 1            OK
+    FORK_SU2       letto 1                                          atteso 1            OK
+    FORK_SU2_MEM   letto 1                                          atteso 1            OK
+    KURAMOTO_SU2   letto 0                                          atteso 0            OK
+    STEP2          letto 0                                          atteso 0            OK
+    TAU_LUCE       letto 0                                          atteso 0            OK
+    GAMMA_TURBO    letto 1.0                                        atteso 1.0          OK
+    seed           letto 2                                          atteso 2            OK
+    tag            letto csOFF                                      atteso csOFF        OK
+    cs_std (cache esiste?) letto 0.00424371                                 atteso non-nan      OK
+    cs: min 1.982104  max 2.000000  medio 1.991052   cs_std/cs_medio = 0.21314 %   <-- SOTTO l'1 %: cs quasi-costante, tau = d/cs e' praticamente tau ~ d
+  csOFF_s2: CONFORME
+--------------------------------------------------------------------------------------------------------------
+  csON_s1   campioni 11   passi finali 500   n 3538
+    blob           letto 08784685eeb17835389d248a2d1d07db4f0d1305   atteso 08784685...  OK
+    CS_DINAMICO    letto 1                                          atteso 1            OK
+    FORK_SU2       letto 1                                          atteso 1            OK
+    FORK_SU2_MEM   letto 1                                          atteso 1            OK
+    KURAMOTO_SU2   letto 0                                          atteso 0            OK
+    STEP2          letto 0                                          atteso 0            OK
+    TAU_LUCE       letto 1                                          atteso 1            OK
+    GAMMA_TURBO    letto 1.0                                        atteso 1.0          OK
+    seed           letto 1                                          atteso 1            OK
+    tag            letto csON                                       atteso csON         OK
+    cs_std (cache esiste?) letto 0.00394927                                 atteso non-nan      OK
+    cs: min 1.981520  max 2.000000  medio 1.990760   cs_std/cs_medio = 0.19838 %   <-- SOTTO l'1 %: cs quasi-costante, tau = d/cs e' praticamente tau ~ d
+  csON_s1: CONFORME
+--------------------------------------------------------------------------------------------------------------
+  csON_s2   campioni 11   passi finali 500   n 3004
+    blob           letto 08784685eeb17835389d248a2d1d07db4f0d1305   atteso 08784685...  OK
+    CS_DINAMICO    letto 1                                          atteso 1            OK
+    FORK_SU2       letto 1                                          atteso 1            OK
+    FORK_SU2_MEM   letto 1                                          atteso 1            OK
+    KURAMOTO_SU2   letto 0                                          atteso 0            OK
+    STEP2          letto 0                                          atteso 0            OK
+    TAU_LUCE       letto 1                                          atteso 1            OK
+    GAMMA_TURBO    letto 1.0                                        atteso 1.0          OK
+    seed           letto 2                                          atteso 2            OK
+    tag            letto csON                                       atteso csON         OK
+    cs_std (cache esiste?) letto 0.00484672                                 atteso non-nan      OK
+    cs: min 1.980738  max 2.000000  medio 1.990369   cs_std/cs_medio = 0.24351 %   <-- SOTTO l'1 %: cs quasi-costante, tau = d/cs e' praticamente tau ~ d
+  csON_s2: CONFORME
+==============================================================================================================
+CONFORMITA' COMPLESSIVA: PASS - i quattro run si contano
+==============================================================================================================
+
+==============================================================================================================
+LE FIRME, per run
+==============================================================================================================
+--------------------------------------------------------------------------------------------------------------
+  OFF_s1    N = 3538
+    chi (gradi), null 90.000 +- 39.171   [z con SE INTERNA al run]
+      MATERIA media  89.7779  std 39.1531  n  139891  SE 0.1047  scarto -0.2221  z  -2.12
+      VUOTO   media  89.9365  std 39.1136  n   70571  SE 0.1472  scarto -0.0635  z  -0.43
+      p90     media  89.9283  std 39.1299  n   68036  SE 0.1500  scarto -0.0717  z  -0.48
+    frazioni ai poli (controllo di SIMMETRIA, non dipende dalle barre):
+      <10 gradi  mat 0.00728  p90 0.00732      >170 gradi  mat 0.00747  p90 0.00739
+    |<n>|*sqrt(N) = 1.2373   contro il null EMPIRICO 0.9213 +- 0.3888 (p95 1.60)  ->  z +0.81
+    autocorrelazione 10 bin (0.61 - 14.99):  max|z| = 1.81   piatta a zero
+    theta mediana 101.22 GIRI/passo   frazione > 30 gradi/passo 0.9992   (ALIASATO)
+    r: dispersione std 0.393463  IQR 0.631393   (mediana 1.000000 = 1 per costruzione, NON e' una misura)
+    cs_std = 0.0038369
+--------------------------------------------------------------------------------------------------------------
+  OFF_s2    N = 2801
+    chi (gradi), null 90.000 +- 39.171   [z con SE INTERNA al run]
+      MATERIA media  89.8756  std 39.2236  n  208014  SE 0.0860  scarto -0.1244  z  -1.45
+      VUOTO   media  90.2258  std 39.7153  n    1468  SE 1.0366  scarto +0.2258  z  +0.22
+      p90     media  89.2991  std 39.1254  n   54163  SE 0.1681  scarto -0.7009  z  -4.17
+    frazioni ai poli (controllo di SIMMETRIA, non dipende dalle barre):
+      <10 gradi  mat 0.00765  p90 0.00740      >170 gradi  mat 0.00741  p90 0.00648
+    |<n>|*sqrt(N) = 0.7596   contro il null EMPIRICO 0.9213 +- 0.3888 (p95 1.60)  ->  z -0.42
+    autocorrelazione 10 bin (0.60 - 14.96):  max|z| = 2.04   piatta a zero
+    theta mediana 91.53 GIRI/passo   frazione > 30 gradi/passo 0.9996   (ALIASATO)
+    r: dispersione std 0.354211  IQR 0.430816   (mediana 1.000000 = 1 per costruzione, NON e' una misura)
+    cs_std = 0.00424371
+--------------------------------------------------------------------------------------------------------------
+  ON_s1    N = 3538
+    chi (gradi), null 90.000 +- 39.171   [z con SE INTERNA al run]
+      MATERIA media  90.0481  std 39.2112  n  209536  SE 0.0857  scarto +0.0481  z  +0.56
+      VUOTO   media  92.5723  std 38.2240  n     956  SE 1.2363  scarto +2.5723  z  +2.08
+      p90     media  89.9983  std 39.1994  n   68063  SE 0.1503  scarto -0.0017  z  -0.01
+    frazioni ai poli (controllo di SIMMETRIA, non dipende dalle barre):
+      <10 gradi  mat 0.00790  p90 0.00792      >170 gradi  mat 0.00766  p90 0.00735
+    |<n>|*sqrt(N) = 0.1467   contro il null EMPIRICO 0.9213 +- 0.3888 (p95 1.60)  ->  z -1.99
+    autocorrelazione 10 bin (0.60 - 14.93):  max|z| = 2.36   piatta a zero
+    theta mediana 16.46 GIRI/passo   frazione > 30 gradi/passo 0.9618   (ALIASATO)
+    r: dispersione std 0.428265  IQR 0.771273   (mediana 0.999999 = 1 per costruzione, NON e' una misura)
+    cs_std = 0.00394927
+--------------------------------------------------------------------------------------------------------------
+  ON_s2    N = 3004
+    chi (gradi), null 90.000 +- 39.171   [z con SE INTERNA al run]
+      MATERIA media  90.0845  std 39.1342  n  208999  SE 0.0856  scarto +0.0845  z  +0.99
+      VUOTO   media  92.0478  std 38.2207  n     757  SE 1.3892  scarto +2.0478  z  +1.47
+      p90     media  90.2239  std 39.0103  n   46178  SE 0.1815  scarto +0.2239  z  +1.23
+    frazioni ai poli (controllo di SIMMETRIA, non dipende dalle barre):
+      <10 gradi  mat 0.00755  p90 0.00717      >170 gradi  mat 0.00703  p90 0.00702
+    |<n>|*sqrt(N) = 0.8130   contro il null EMPIRICO 0.9213 +- 0.3888 (p95 1.60)  ->  z -0.28
+    autocorrelazione 10 bin (0.58 - 14.93):  max|z| = 2.20   piatta a zero
+    theta mediana 13.71 GIRI/passo   frazione > 30 gradi/passo 0.9780   (ALIASATO)
+    r: dispersione std 0.397911  IQR 0.689036   (mediana 1.000000 = 1 per costruzione, NON e' una misura)
+    cs_std = 0.00484672
+
+==============================================================================================================
+PARTE 2 - VERDETTO a DUE BRACCI (soglie da doc/PREDIZIONE_prima_misura_4pi.md, non ritoccate)
+==============================================================================================================
+  OFF_s1     -> (A)            |z_chi_mat| 2.12  |z_chi_p90| 0.48  |z_|<n>|| 0.81  max|z_ac| 1.81
+  OFF_s2     -> INDETERMINATO  |z_chi_mat| 1.45  |z_chi_p90| 4.17  |z_|<n>|| 0.42  max|z_ac| 2.04
+  ON_s1      -> (A)            |z_chi_mat| 0.56  |z_chi_p90| 0.01  |z_|<n>|| 1.99  max|z_ac| 2.36
+  ON_s2      -> (A)            |z_chi_mat| 0.99  |z_chi_p90| 1.23  |z_|<n>|| 0.28  max|z_ac| 2.20
+
+  NIENTE IN NESSUNO DEI DUE -> (A) NON CONCLUSIVO.
+    theta nel braccio MIGLIORE: 13.71 giri/passo -> il settore resta ALIASATO.
+    La frase 'lo spin non si organizza' resta INDICIBILE finche' theta non scende.
+
+  IL GRADIENTE DI RISOLUZIONE (ed e' il motivo dei due bracci):
+    theta OFF  ['101.22', '91.53']  ->  media 96.37 giri/passo
+    theta ON   ['16.46', '13.71']  ->  media 15.08 giri/passo
+
+  LA BARRA FRA SEMI (C10) - quella che conta per confrontare i bracci:
+    chi materia (gradi)    OFF  89.77792  89.87562   media 89.826770   dev.std FRA SEMI 0.069082
+    chi materia (gradi)    ON   90.04808  90.08447   media 90.066276   dev.std FRA SEMI 0.025728
+    |<n>|*sqrt(N)          OFF  1.23735  0.75961   media 0.998477   dev.std FRA SEMI 0.337813
+    |<n>|*sqrt(N)          ON   0.14671  0.81304   media 0.479872   dev.std FRA SEMI 0.471168
+    theta (giri/passo)     OFF  101.21913  91.52966   media 96.374396   dev.std FRA SEMI 6.851491
+    theta (giri/passo)     ON   16.46072  13.70853   media 15.084622   dev.std FRA SEMI 1.946090
+    dispersione di r       OFF  0.39346  0.35421   media 0.373837   dev.std FRA SEMI 0.027755
+    dispersione di r       ON   0.42827  0.39791   media 0.413088   dev.std FRA SEMI 0.021464
+    cs_std                 OFF  0.00384  0.00424   media 0.004040   dev.std FRA SEMI 0.000288
+    cs_std                 ON   0.00395  0.00485   media 0.004398   dev.std FRA SEMI 0.000635
+==============================================================================================================
