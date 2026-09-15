@@ -61,7 +61,8 @@ Se i due numeri vengono da run di Luca fuori dal repo, vanno committati per entr
 | **C5** | **`tau_luce = d/cs` e' PIATTO** ⇒ la sostituzione **rompe** la cancellazione | **+0.097 ± 0.0055**, IC95 [+0.086, +0.108] | `doc/TAU_tempo_luce.md` §7 |
 | **C6** | Il rumore **non** guida `omega` | `R_stoc = 0.041`, **sotto** l'errore atteso 0.097 | `doc/TRACING_omega.md` §6.1 |
 | **C7** | **La cache `_cs_nodo_prev` veniva scartata a ogni mitosi** ⇒ nel 72 % dei passi `tau = d/cs` calcolava `tau = d/CS_M`. **Curata** (il figlio eredita da `src`, sesta voce della stessa convenzione) | fallback **71.88 % → 0.00 %**; passi con cache inusabile **24/30 → 0/30**; sigillo **P1-P4 + P1b: 5/5 PASS** | `doc/FIX_cache_cs.md`, `csv/_seal_fork/_sigillo_fix_cache.txt` |
-| **C8** | **Ma `cs` varia solo dello 0.023 %** (`max/min = 1.000230`) ⇒ il difetto **non** disattivava `tau = d/cs`: congelava **solo** il fattore `cs`, mentre **`d` era vivo nel 100 % dei passi**. La premessa quantitativa «un effetto dimezzato» **non regge** | `cs \in [1.99954, 2]`, `CS_M = 2` | `doc/FIX_cache_cs.md` §5 (scritto **prima** della ri-misura) |
+| **C8** | **Ma il difetto spiega solo UN SESTO del divario di T3.** Non disattivava `tau = d/cs`: lo calcolava come `tau = d/CS_M`, e **`d` era vivo nel 100 % dei passi**. La premessa del mandato («un effetto dimezzato», ~50 %) **non regge**; la mia predizione opposta («effetto nullo») **e' pure smentita** | ON **-0.4265 ± 0.0091 → -0.4710 ± 0.0107**; `Delta = -0.0445 ± 0.0141`, **z = 3.16**; divario ancora aperto **-0.219** su -0.69 ⇒ **16.9 % recuperato** | `doc/FIX_cache_cs.md` §6, `csv/_test_fork/_rimisura_t3.txt` |
+| **C8-bis** | **⚠ IL METRO E' IN DUBBIO, e in entrambe le direzioni:** `z = 3.16` usa le `SE` **interne a un singolo run**, ma i due bracci sono due traiettorie di un sistema **caotico** (`N = 3999` contro `4100`). Il valore sotto ipotesi nulla **non e' zero** ed **e' ancora da misurare** (par.2.7: mai su un solo seme) | **controllo in corso:** i due bracci ON su semi 2 e 3 | `csv/_test_fork/_controllo_semi.py` |
 
 ---
 
@@ -84,7 +85,7 @@ Se i due numeri vengono da run di Luca fuori dal repo, vanno committati per entr
 
 | # | stato | criterio di chiusura |
 |---|---|---|
-| **A** | `--tau-luce` cablato, **SIGILLO FALLITO** (T2 difetto del test; T3 effetto reale ma meta' del predetto; T4 meta'). `doc/SIGILLO_tau_luce_FALLITO.md` | T1-T5 tutti PASS, **e** `theta` sotto il tetto `2π·cs/λ` |
+| **A** | `--tau-luce` cablato, **SIGILLO ANCORA FALLITO**. T2 resta da riscrivere (il monkeypatch colpiva il metodo **condiviso**). T3 **rifatto oggi** dopo la cura della cache (C7): **-0.4710 ± 0.0107** contro l'attesa **-0.69** — **il divario si e' ridotto di un sesto, non si e' chiuso**, e `theta` resta a **42.8 giri/passo**. `doc/SIGILLO_tau_luce_FALLITO.md`, `doc/FIX_cache_cs.md` §6 | T1-T5 tutti PASS, **e** `theta` sotto il tetto `2π·cs/λ` |
 | **B** | **non aperto.** Il nodo e' che il coefficiente di `−λ n×(n×B)` sarebbe una **scelta** (§3), a meno di derivarlo — e il FDT **non basta** (`doc/ANALISI_gilbert_fdt.md`: ~10⁴ volte troppo lento) | una derivazione del coefficiente **senza** taratura |
 | **E** | **non aperto**, e **non va aperto ora**: risolverebbe i giri **senza abbassare `omega`**, cioe' integrerebbe bene una rotazione che **viola il tetto di causalita' del modello**. Il fine non e' risolvere `omega`: e' **farlo rientrare nel tetto** | solo dopo A e B, e solo per un residuo modesto |
 

@@ -113,6 +113,64 @@ sarebbe in silenzio. Si ripara ora, mentre e' innocuo e dimostrabile.
 
 ---
 
-## 6. ESITO DELLA RI-MISURA T3
+## 6. ESITO DELLA RI-MISURA T3 — **LA MIA PREDIZIONE E' SMENTITA**
 
-*(Scritto DOPO il §5, e dopo il commit del §5. Vedi paragrafo aggiunto nel commit successivo.)*
+Quattro bracci, 300 passi, seme 1, scena 3 masse (`csv/_test_fork/_rimisura_t3.py`, committato
+**prima** del run in `22a7c41`; output `csv/_test_fork/_rimisura_t3.txt`).
+
+| braccio | pendenza | SE | r^2 | n | IC95 | theta mediana | fallback |
+|---|---|---|---|---|---|---|---|
+| **PRE  OFF** | **-0.1685** | 0.0090 | 0.126 | 2417 | [-0.1862, -0.1507] | 129.51 giri/passo | non strumentato |
+| **PRE  ON**  | **-0.4265** | 0.0091 | 0.464 | 2534 | [-0.4444, -0.4086] | 43.55 giri/passo | non strumentato |
+| **POST OFF** | **-0.1491** | 0.0085 | 0.109 | 2517 | [-0.1658, -0.1324] | 131.27 giri/passo | **0 / 302** |
+| **POST ON**  | **-0.4710** | 0.0107 | 0.417 | 2690 | [-0.4921, -0.4500] | 42.81 giri/passo | **2 / 608** |
+
+> **DIFFERENZA ON(post) - ON(pre) = -0.0445 +- 0.0141, z = 3.16.**
+> **La predizione del §5 era: `|Delta|` SOTTO il proprio SE. E' FALSA.** Lo scrivo prima di
+> qualunque commento: **ho predetto zero e ho misurato un effetto a 3 sigma.**
+
+**Il braccio di controllo ha fatto il suo lavoro:** `PRE ON = -0.4265` riproduce il **-0.43** gia'
+registrato in `doc/SIGILLO_tau_luce_FALLITO.md`, quindi la scena e' la stessa e i numeri sono
+confrontabili con quelli storici. Non e' un confronto fra scene diverse.
+
+### Cosa la patch ha e non ha recuperato
+
+| | |
+|---|---|
+| attesa FASE 1 (stima **onesta**) | **-0.69** |
+| ON prima della patch | **-0.4265** |
+| ON dopo la patch | **-0.4710** |
+| **frazione del divario recuperata** | **16.9 %** |
+| divario **ancora** aperto | **-0.219** |
+
+**Per la lettura fissata PRIMA dal mandato, questo e' il caso "valori intermedi": si riporta il
+numero e la frazione, senza forzare.** Non e' ne' *«la meta' mancante ERA il bug»* (sarebbe servito
+~50 %, e servirebbe una pendenza fra -0.7 e -1.0), ne' *«la pendenza resta ~ -0.43»*. **Il bug
+contribuiva, e contribuiva poco: un sesto.** La FASE 2 **non si chiude**, e **resta un residuo vero
+da capire** — che e' l'esito che il mandato prescrive di riportare **senza inventare spiegazioni**.
+
+### Dove il mio ragionamento del §5 ha sbagliato
+
+Avevo scritto: *«`cs` varia dello 0.023 %, quindi non puo' produrre uno spostamento di pendenza»*.
+**L'errore sta nell'aver confrontato l'escursione di `cs` con l'ampiezza della pendenza.** Non sono
+la stessa cosa: una pendenza trasversale non misura **quanto** `cs` varia, misura **come la sua
+variazione e' CORRELATA con l'inerzia**. Un fattore che cambia dello 0.023 % ma **sistematicamente
+nella stessa direzione** lungo l'asse dell'inerzia sposta la pendenza; uno che cambia del 50 % a caso
+non la sposta. **Ho applicato un argomento di AMPIEZZA a una domanda di CORRELAZIONE.** Resta vero
+che `d` era vivo nel 100 % dei passi e che quasi tutto l'effetto della FASE 2 sta in `d` — il **6/7**
+del divario tuttora aperto lo conferma — ma la conclusione *«non puo' muoverla affatto»* **era
+sbagliata**, e la misura la smentisce a 3 sigma.
+
+### ⚠ E UN DUBBIO SUL METRO, che vale in ENTRAMBE le direzioni
+
+`z = 3.16` e' costruito con le `SE` **interne a un singolo run** (l'errore di campionamento della
+retta **dentro** quel run). Ma i due bracci ON sono **due traiettorie diverse di un sistema
+caotico** — `N = 3999` contro `4100` — e la variabilita' **da run a run** non e' quella barra.
+**Il valore sotto ipotesi nulla qui non e' zero:** e' la dispersione fra due run che differiscono
+solo per una perturbazione numericamente irrilevante, e **quella non e' stata misurata.**
+
+Lo scrivo **contro** la mia stessa posizione, non a suo favore: e' un'obiezione che indebolirebbe
+allo stesso modo una conferma. E per `CLAUDE.md` par.2.7 (*mai su un solo seme*) va **misurata**, non
+discussa: **controllo in corso — i due bracci ON su un secondo seme.** Se `Delta` si ripete a ~-0.04,
+e' sistematico; se cambia segno o taglia, il `3.16` era dispersione di run e il numero da riportare
+e' un'altra cosa.
