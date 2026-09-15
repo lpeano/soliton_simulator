@@ -8,7 +8,7 @@
 
 ---
 
-## 0. L'ULTIMO GIRO (2026-09-15, sera) — in dieci righe
+## 0. L'ULTIMO GIRO (2026-09-15, sera) — in dodici righe
 
 > 1. **Trovato e curato un difetto silenzioso:** la cache `_cs_nodo_prev` veniva **scartata a ogni
 >    mitosi**, quindi nel **71.88 %** delle chiamate `tau = d/cs` calcolava `tau = d/CS_M`.
@@ -39,6 +39,14 @@
 > 9. **Due REGOLE nuove** (par.6-vicies): la **promozione delle componenti** (par.10) e **un dato
 >    deve portarsi dietro le proprie condizioni** (par.9). Dal primo e' uscito il reperto dei
 >    **10 flag gia' accesi** che non sono mai passati per nessun criterio.
+> 11. **I QUATTRO BRACCI, esito finale** (par.6-unvicies): **(A) NON conclusivo**. Nessuna firma
+>    emerge **nemmeno a risoluzione 6.4x migliore** (theta 96.4 -> 15.1 giri/passo). Le obiezioni
+>    "la FASE 5 non era attiva" e "cs era spento" sono **entrambe chiuse**: e' il negativo piu'
+>    pulito della sessione. Ma theta resta **oltre il giro per passo**, quindi la frase "lo spin non
+>    si organizza" resta **INDICIBILE**.
+> 12. **Due presidi di metodo, entrambi correzioni a me** (par.6-duovicies): **due semi non bastano
+>    per una barra fra semi** (t con 1 gdl = 12.7), e **una soglia su un sistema che cresce va
+>    dichiarata con l'istante** (cs_std/cs: venti volte in 450 passi).
 > 10. **E la domanda aperta più utile non cerca un bug** (§6-quindecies): l'attesa `-0.69` assume che
 >    `sigma` sia indipendente da `tau`, ma c'è un **anello** che lo mette a valle. **Forse è il
 >    BERSAGLIO a essere mal calcolato.** Da provare **per prima**; **non lanciata**, e il numero
@@ -1253,6 +1261,107 @@ sette flag corretti**, ma **non `TAU_LUCE`** — l'unica variabile che distingue
 Diagnosi **dal disco**: i CSV scritti alle `19:18:46`, la colonna aggiunta alle `19:23:32`,
 **cinque minuti dopo**. Sanato: ora il CSV porta `TAU_LUCE`, `CS_DINAMICO`, **blob** (calcolato come
 lo calcola git, senza subprocess) e **seme**.
+
+---
+
+## 6-unvicies. **I QUATTRO BRACCI — ESITO (A), non conclusivo. Gradiente di risoluzione 6.4×.**
+
+4 run · 2 bracci × 2 semi · 500 passi · blob `08784685` **scritto dentro ogni CSV**.
+Predizione e soglie committate **prima** (`c547294`, `b934445`). Referto: `doc/REFERTO_4bracci_4pi.md`.
+
+**Conformità: PASS su tutti e quattro, ogni campo, letto dal CSV** — `CS_DINAMICO = 1` ovunque,
+`TAU_LUCE = 0/0/1/1`, `seed = 1/2/1/2`, tutto il resto identico. **Un solo interruttore di
+differenza, e stavolta è nei dati e non nel nome del file.**
+
+### Il gradiente — il valore vero di questi run
+
+| braccio | `theta` s1 | s2 | media |
+|---|---|---|---|
+| **OFF** | 101.22 | 91.53 | **96.37 giri/passo** |
+| **ON** | 16.46 | 13.71 | **15.08 giri/passo** |
+
+> **Fattore 6.39.** Atteso dal T3 (`129 → 39`): **3.3**. Al passo 300: **4.3**. **Finale: 6.39.**
+> Il gradiente **cresce col tempo**, ed è il **doppio** di quanto la lettura T3 suggerisse.
+
+### Le firme, tutte al casuale
+
+| | `OFF_s1` | `OFF_s2` | `ON_s1` | `ON_s2` |
+|---|---|---|---|---|
+| `chi` **materia** | 89.7779 (`z −2.12`) | 89.8756 (`z −1.45`) | 90.0481 (`z +0.56`) | 90.0845 (`z +0.99`) |
+| `\|<n>\|·√N` | 1.2373 | 0.7596 | 0.1467 | 0.8130 |
+| autocorr. `max\|z\|` | 1.81 | 2.04 | 2.36 | 2.20 |
+
+**Autocorrelazione: `max|z|` fra 1.81 e 2.36 su QUARANTA bin.** Sotto ipotesi nulla il massimo di 40
+gaussiane vale ~2.2–2.5. **È esattamente il rumore.** E le **frazioni ai poli** (`<10°` e `>170°`)
+coincidono **entro il terzo decimale** in tutti e quattro: distribuzione simmetrica attorno a 90°,
+ed è il controllo che **non dipende dalle barre d'errore**.
+
+### ⚠ L'unico `z` grande NON si riproduce
+
+`OFF_s2` dà `chi_p90` con `z = −4.17` → lo script lo marca **INDETERMINATO**. Ma sull'**altro seme
+dello stesso braccio** vale **−0.07**: i due differiscono di **0.63°, quattro volte la `SE` interna**.
+**È dispersione di run** — la **terza volta oggi** che la `SE` interna produce un falso segnale, dopo
+il `16.9 %` e l'`11.0 %`.
+
+### Una domanda aperta si CHIUDE
+
+`|<n>|` **non pende più**. Stamattina 1.741 e 1.374 (`z +2.11`, `+1.16`), *sempre dallo stesso lato*,
+lasciata dichiaratamente aperta. Ora su quattro run: **1.237 / 0.760 / 0.147 / 0.813** — **due sotto
+e due sopra** il null empirico. **Non si riproduce: era rumore.** Chiusa **con più dati, non con una
+rilettura.**
+
+---
+
+## 6-duovicies. DUE PRESIDI DI METODO che questo run ha prodotto — e sono entrambi correzioni a me
+
+**① DUE SEMI NON BASTANO PER UNA BARRA FRA SEMI.** Con 2 semi la deviazione standard ha **un grado di
+libertà**, e `t(0.025, 1) = 12.706`: l'IC95 è **12.7 volte** la `SE` della media.
+
+E c'è un caso reale che **sembra un segnale**: `chi` materia è **sotto 90 su entrambi i semi OFF**
+(89.778, 89.876) e **sopra 90 su entrambi gli ON** (90.048, 90.084) — **segno concorde**, `z ≈ 3.5`
+preso ingenuamente. **Ma l'IC95 con 1 gdl è largo 1.2° e contiene lo zero.**
+
+> **Il segno concorde su due semi non è una prova: è un'ipotesi da rifare con quattro.**
+> Registrato come **fronte S**, non come risultato, con la sua soglia: **≥ 4 semi** (`t(3) = 3.18`).
+> Se reggesse, sarebbe **la prima firma non nulla del settore**.
+
+**② UNA SOGLIA SU UN SISTEMA CHE CRESCE VA DICHIARATA CON L'ISTANTE IN CUI SI MISURA.**
+
+```
+passo  50  (n ~ 80)     cs_std/cs = 0.0086 %     margine sotto l'1 % :  116x
+passo 300  (n ~ 3000)   cs_std/cs = 0.096  %                         :   10x
+passo 500  (n ~ 3200)   cs_std/cs = 0.19-0.24 %                      :  ~4x
+```
+
+**Venti volte in 450 passi.** Avevo registrato il primo valore in **C13** come se fosse una proprietà
+del sistema: era **un'istantanea su 80 nodi appena seminati**. **C13 regge** (siamo sotto l'1 %:
+`tau = d/cs` è `tau ∝ d`) **ma la sua forza è un quarantesimo di come l'avevo scritta** — e la
+traiettoria è **monotòna crescente**.
+
+> **Conseguenza nuova:** il tempo-luce non è *«non testabile mai»*, è **«non testabile a 500 passi»**.
+> A maturazione sufficiente `cs` potrebbe uscire dal regime degenere **senza turbo**.
+
+---
+
+## 6-tervicies. IL VERDETTO, e cosa rende dicibile
+
+> *«Con la doppia copertura a 4π attiva, `cs` dinamico cablato per la prima volta, e il settore
+> campionato a 13.7–16.5 giri per passo — **6.4 volte** meglio del braccio di riferimento — nessuna
+> delle firme misurabili si stacca dal valore casuale: `chi` in materia e nel p90, le frazioni ai
+> poli, `|<n>|` contro il null empirico, l'autocorrelazione su 40 bin. **Resta indeciso** se ciò
+> dipenda dall'assenza di ordine o dall'impossibilità di vederlo a questa risoluzione.»*
+
+**Ciò che (A) TOGLIE di mezzo:** le obiezioni *«ma la FASE 5 non era attiva»* e *«ma `cs` era
+spento»*. **Entrambe chiuse.** È **il negativo più pulito della sessione** — non perché le barre
+siano grandi, ma **perché sono piccole** (`SE ≈ 0.09°` su ~210 000 archi): un segnale **sarebbe
+visibile**.
+
+**Ciò che NON toglie:** `theta` è ancora **oltre il giro per passo**, col **96–98 %** dei nodi sopra
+i 30°/passo *(prima: 99.9 %)*. **La frase «lo spin non si organizza» resta INDICIBILE** finché
+`theta` non scende sotto il tetto `2π·cs/λ`.
+
+**E il braccio ON non ha testato il tempo-luce**: con `cs_std/cs = 0.19–0.24 %` ha confrontato
+**distanza contro densità** (C13), non tempo-luce contro densità.
 
 ---
 
