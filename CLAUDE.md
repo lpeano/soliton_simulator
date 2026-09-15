@@ -401,15 +401,25 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   in `_eredita_spinore_figli`, **sesta voce della stessa convenzione** di `_nb`/`_nb_prec`/`_nb_ret`/
   `omega_s`/`_psi_spinor`/`_psi_prec` — zero parametri. Misurato: fallback **71.88% -> 0.00%**,
   passi con cache inusabile **24/30 -> 0/30**.
-  **MA ATTENZIONE A COSA QUESTO NON DICE** (misurato nello stesso sigillo, P4): `cs` riparato varia
-  dello **0.023%** (`min 1.99954`, `max 2.0`, `CS_M = 2`, `max/min = 1.000230`). Quindi il difetto
-  **non disattivava** `tau = d/cs`: lo calcolava come `tau = d/CS_M`, e **il fattore `d` era vivo nel
-  100% dei passi**. Cio' che la FASE 2 sostituisce e' `TAU_A*max(dens/dens_rif, 0.05)` con `d/cs`, e
-  **quasi tutto quel cambiamento sta in `d`, non in `cs`.** Chi usa questo difetto per spiegare la
-  "meta' mancante" di T3 sta attribuendo un effetto di ordine 0.3 a una grandezza che varia di 2e-4.
-  **La cura resta giusta per una ragione indipendente:** `cs` e' quasi-costante **oggi** (par.6);
-  il giorno in cui sara' vivo, una cache scartata a ogni mitosi sarebbe un difetto **grande**, e lo
-  sarebbe **in silenzio**.
+  **MA ATTENZIONE A COSA QUESTO NON DICE — MISURATO, non argomentato** (`doc/FIX_cache_cs.md` par.6,
+  300 passi, seme 1, quattro bracci): la pendenza di `theta` contro l'inerzia col flag ON passa da
+  **-0.4265 +- 0.0091** a **-0.4710 +- 0.0107**, cioe' `Delta = -0.0445 +- 0.0141` (`z = 3.16`).
+  **Il difetto contribuiva, e contribuiva POCO: il 16.9% del divario verso l'attesa -0.69.** Restano
+  aperti **-0.219**, e `theta` resta a **42.8 giri/passo**: **la FASE 2 non si chiude.**
+  Le DUE previsioni opposte erano entrambe sbagliate: il mandato prevedeva ~50% ("un effetto
+  dimezzato"), io avevo previsto **zero**.
+  **IL MIO ERRORE, da non rifare:** avevo argomentato che `cs` riparato varia solo dello **0.023%**
+  (`min 1.99954`, `max 2.0`, `CS_M = 2`) e che quindi **non poteva** spostare la pendenza. **Avevo
+  confrontato l'AMPIEZZA di una variazione con l'ampiezza di una pendenza.** Una pendenza trasversale
+  non misura **quanto** una grandezza varia, misura **quanto la sua variazione e' CORRELATA** con
+  l'ascissa: un fattore che cambia dello 0.02% ma **sistematicamente nella stessa direzione** lungo
+  l'asse dell'inerzia **sposta la pendenza**; uno che cambia del 50% a caso non la sposta.
+  **Argomento di AMPIEZZA su una domanda di CORRELAZIONE: e' l'errore, e si ripete facile.**
+  Resta vero che `d` era vivo nel **100%** dei passi e che quasi tutto l'effetto della FASE 2 sta in
+  `d` — i **6/7** di divario ancora aperto lo confermano — ma *"non puo' muoverla affatto"* era falso.
+  **La cura resta giusta anche per una ragione indipendente:** `cs` e' quasi-costante **oggi**
+  (par.6); il giorno in cui sara' vivo, una cache scartata a ogni mitosi sarebbe un difetto
+  **grande**, e lo sarebbe **in silenzio**.
   NB — **la terza via di crescita dei nodi resta scoperta:** `semina()` (riga ~1600) **non** passa da
   `_eredita_spinore_figli`. In batch e' inerte (`semina_cont=False` di default, si accende **solo**
   dalla GUI, righe ~4610 e ~4753), quindi non tocca nessuna misura committata; registrata in
