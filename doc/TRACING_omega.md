@@ -3,8 +3,9 @@
 > **Scritto per Claude web** (regola §5-ter). Branch `fork-su2`, 2026-09-15. Blob **`f5887254`**.
 > **Nessuna modifica alla fisica.** Criterio scritto e committato **prima** dei dati
 > (`075a09f`, + esito (IV) in `457abe4`).
-> **Stato: run corretto IN VOLO.** I numeri qui sotto vengono dal run **INCOMPLETO**, conservato
-> come evidenza in `csv/_test_fork/_tracing_omega_INCOMPLETO.txt`.
+> **Stato: CONCLUSO. VERDETTO = ESITO (I), col meccanismo identificato e quantificato (§6).**
+> I §§1-4 restano come furono scritti **durante**, perché la sequenza in cui i riscontri sono
+> arrivati è parte del risultato.
 
 ---
 
@@ -80,6 +81,87 @@ R_stoc mediana = 2.785     cos(stoc,det) = +0.643     errore atteso ricostruzion
 Il verdetto stampato dal run incompleto era **(I)** — colpevole a valle. **Non lo dichiaro**: era
 calcolato con `coppia/inerzia` dimezzata, e il secondo termine può cambiarne la pendenza. Il run
 corretto è in volo, con il tracer **ri-sigillato PASS** dopo la modifica e **prima** dell'uso.
+
+## 6. ⚑ IL RUN CORRETTO — **ESITO (I)**, e il colpevole ha un nome
+
+Con il secondo termine della coppia al suo posto, il quadro cambia **e si chiude**.
+
+### 6.1 La ricostruzione ora è esatta — e (IV) è ESCLUSO
+
+```
+R_stoc = |stoc|/|det|  mediana = 0.0414
+errore ATTESO della ricostruzione (amp*sqrt2/sin ang) = 0.0974
+```
+
+> **Il residuo non spiegato è il 4 %, ed è SOTTO l'errore che la mia stessa approssimazione
+> prevedeva (10 %).** La formula della riga 1918 spiega il **96 %** dell'incremento.
+> **ESITO (IV) ESCLUSO**: il rumore è marginale.
+
+E questo **valida a posteriori** la diagnosi del §2: l'`R_stoc ≈ 2.8` di prima **era** il termine
+mancante, non il rumore. Il controllo aveva ragione.
+
+### 6.2 Le pendenze — la coppia porta ESATTAMENTE il −1 che la legge richiede
+
+| pendenza su `log inerzia` (passo 400, 2781 nodi) | valore | r |
+|---|---|---|
+| `\|B\|` | −0.534 | −0.858 |
+| `\|correzione\|` (completa) | **−0.056** | −0.260 |
+| **`coppia/inerzia`** | **−1.056** | **−0.981** |
+| `\|om_src\|/tau` | −1.980 | −0.935 |
+| **`theta`** | **−0.113** | −0.353 |
+
+> La coppia è **piatta** (−0.056): tutto il −1 viene dalla **divisione per l'inerzia**, ed esce
+> **−1.056 con r = −0.981** — praticamente esatto.
+> **La formula d'ingresso è giusta. `theta` è −0.113. L'esponente si perde DOPO.**
+
+Anche il rapporto fra i due termini deterministici è netto: **coppia / dissipativo = 188.9**.
+Il rilassamento **non domina** l'incremento — ma, come si vede subito, governa comunque il risultato.
+
+### 6.3 DOVE si perde il −1: **nel rilassamento, attraverso √τ**
+
+`omega` è un **random walk smorzato**: il suo equilibrio è `|omega|_eq = sigma · sqrt(tau/(2·dt))`,
+con `sigma` l'incremento per passo. Le due pendenze, **misurate**:
+
+| | pendenza su `log inerzia` | da dove |
+|---|---|---|
+| `sigma = \|coppia\|/inerzia` | **−1.056** | 2781 nodi, `r = −0.981` |
+| `tau` | **+1.812** | 20 nodi tracciati (indipendente: la via indiretta dà **+1.867**) |
+
+```
+pendenza attesa di |omega| = -1.056 + 1.812/2 = -0.150
+theta MISURATO                                = -0.113        scarto 0.037
+```
+
+> ### **Il −1 della coppia è cancellato dal +0.91 di √τ.**
+> `tau = TAU_A · max(dens/dens_rif, 0.05)` **cresce con la densità**, e il suo peso entra nel
+> plateau come **radice**. Coppia e memoria si annullano a vicenda, e resta **−0.11**.
+>
+> **Non c'è nessun bug.** Non c'è un termine che «fa qualcosa di diverso da quel che si crede»:
+> c'è un **rilassamento la cui costante di tempo dipende dalla stessa grandezza** che sta al
+> denominatore della coppia. È il sistema che si cancella da sé.
+
+### 6.4 ⚠ UNA COLONNA DA BUTTARE — e la (II-b) resta esclusa comunque
+
+Nel run corretto la colonna **`angolo` è INVALIDA**: la calcolo come `arcsin(|correzione|/|B|)`, che
+è un seno **solo** se `correzione = cross(B, nb)`. Col secondo termine sommato quel rapporto non è
+più un seno, satura, e stampa **90.00° per tutti**. **Va ignorata.**
+
+**Ma l'esclusione di (II-b) regge lo stesso**, e viene dal run *incompleto*, dove l'angolo era
+**esattamente** quello fra `B` e `nb`: **pendenza −0.006, r = −0.025, mediana 59.4°** — nessuna
+dipendenza dalla densità. È il caso in cui i dati «difettosi» misurano bene proprio la cosa che al
+run corretto sfugge.
+
+### 6.5 Il verdetto, contro il criterio scritto prima
+
+| esito | |
+|---|---|
+| **(I)** | **`coppia/inerzia` = −1.056 (≤ −0.6) MA `theta` = −0.113 (in [−0.35, +0.15])** → **CONFERMATO** |
+| (II-a) | escluso: `\|B\|` **decresce** (−0.534), non cresce |
+| (II-b) | escluso: angolo piatto (−0.006, r = −0.025) dal run incompleto |
+| (III) | non si applica |
+| (IV) | escluso: `R_stoc` = 0.041, sotto l'errore atteso 0.097 |
+
+---
 
 ## 5. COSA NON È STATO TOCCATO
 

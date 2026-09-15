@@ -517,7 +517,7 @@ popolazione, e vale il test per decili, non il confronto a due classi. **Indizio
 ## 6-octies. TRACING di `omega` (2026-09-15) — **il controllo ha stanato un termine mancante, ed era MIO**
 
 Documenti: `doc/PREDIZIONE_tracing_omega.md` (criterio, committato **prima**: `075a09f` + esito (IV)
-in `457abe4`) e **`doc/TRACING_omega.md`**. **Run corretto IN VOLO** mentre scrivo.
+in `457abe4`) e **`doc/TRACING_omega.md`**. **CONCLUSO: ESITO (I)**, col meccanismo identificato.
 
 **Il riscontro.** `correzione` ha **DUE** termini (righe 1895-1901) e io ne avevo ricostruito **uno**:
 ```
@@ -554,6 +554,49 @@ trasversale di ieri, misurato in modo indipendente. **Le due misure si conferman
 era calcolato con `coppia/inerzia` dimezzata. Il run corretto e' in volo, tracer **ri-sigillato PASS**
 dopo la modifica e **prima** dell'uso. Il run incompleto e' conservato come evidenza in
 `csv/_test_fork/_tracing_omega_INCOMPLETO.txt`.
+
+**IL RUN CORRETTO — ESITO (I), E IL COLPEVOLE HA UN NOME.**
+
+Con il secondo termine al suo posto, la ricostruzione spiega il **96%** dell'incremento:
+`R_stoc = 0.041`, **sotto** l'errore che la mia stessa approssimazione prevedeva (**0.097**).
+**(IV) ESCLUSO** — e questo **valida a posteriori** la diagnosi: l'`R_stoc ~ 2.8` di prima **era** il
+termine mancante, non il rumore.
+
+| pendenza su `log inerzia` (passo 400, 2781 nodi) | valore | r |
+|---|---|---|
+| `coppia` (completa) | **-0.056** | -0.260 |
+| **`coppia/inerzia`** | **-1.056** | **-0.981** |
+| **`theta`** | **-0.113** | -0.353 |
+
+La coppia e' **piatta**: tutto il `-1` viene dalla divisione per l'inerzia, ed esce **-1.056 con
+r = -0.981**, praticamente esatto. **La formula d'ingresso e' giusta; l'esponente si perde DOPO.**
+
+**DOVE si perde: nel rilassamento, attraverso `sqrt(tau)`.** `omega` e' un random walk smorzato, il
+cui equilibrio e' `|omega|_eq = sigma * sqrt(tau/(2 dt))`. Le due pendenze, **misurate**:
+
+```
+sigma = |coppia|/inerzia   pendenza  -1.056     (2781 nodi, r = -0.981)
+tau                        pendenza  +1.812     (20 nodi; via indiretta: +1.867)
+attesa per |omega|:  -1.056 + 1.812/2 = -0.150
+theta MISURATO                        = -0.113        scarto 0.037
+```
+
+> **Il `-1` della coppia e' cancellato dal `+0.91` di `sqrt(tau)`.** `tau = TAU_A*max(dens/dens_rif,
+> 0.05)` cresce con la densita', e il suo peso entra nel plateau come **radice**. Coppia e memoria si
+> annullano a vicenda e resta `-0.11`.
+> **NON C'E' NESSUN BUG:** non c'e' una riga che fa qualcosa di diverso da quel che si crede. C'e' un
+> **rilassamento la cui costante di tempo dipende dalla stessa grandezza** che sta al denominatore
+> della coppia. **E' il sistema che si cancella da se'.**
+
+**UNA COLONNA DA BUTTARE, dichiarata.** Nel run corretto la colonna `angolo` e' **invalida**: la
+calcolo come `arcsin(|correzione|/|B|)`, che e' un seno **solo** se `correzione = cross(B,nb)`; col
+secondo termine satura e stampa 90.00 per tutti. **Va ignorata.** L'esclusione di **(II-b) regge
+lo stesso** e viene dal run *incompleto*, dove l'angolo era esattamente quello fra `B` e `nb`:
+**-0.006, r = -0.025, mediana 59.4 gradi**. I dati "difettosi" misuravano bene proprio cio' che al
+run corretto sfugge.
+
+**Verdetto contro il criterio scritto prima:** **(I) confermato**; (II-a) escluso (`|B|` **decresce**,
+-0.534); (II-b) escluso (angolo piatto); (III) non si applica; (IV) escluso (`R_stoc` 0.041).
 
 **L'errore era nella MIA ricostruzione, non nel simulatore:** `soliton_simulator.py` non e' stato
 toccato, blob `f5887254`.
