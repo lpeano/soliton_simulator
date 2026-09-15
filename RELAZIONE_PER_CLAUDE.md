@@ -8,7 +8,7 @@
 
 ---
 
-## 0. L'ULTIMO GIRO (2026-09-15, sera) — in quattro righe
+## 0. L'ULTIMO GIRO (2026-09-15, sera) — in sei righe
 
 > 1. **Trovato e curato un difetto silenzioso:** la cache `_cs_nodo_prev` veniva **scartata a ogni
 >    mitosi**, quindi nel **71.88 %** delle chiamate `tau = d/cs` calcolava `tau = d/CS_M`.
@@ -17,8 +17,17 @@
 >    l'attesa **-0.69**: **16.9 % del divario**, non la meta'. `theta` resta a **42.8 giri/passo**.
 > 3. **Due predizioni opposte, entrambe sbagliate:** il mandato diceva ~50 %, **io dicevo zero**.
 >    L'errore mio e' spiegato al §6-duodecies ed e' di tipo generale.
-> 4. **Un controllo e' in volo** e puo' smentire il punto 2: quel `z = 3.16` usa barre d'errore
->    **interne a un singolo run** di un sistema **caotico**. Vedi il §8.
+> 4. **Il controllo sui semi ha SMENTITO il punto 2** (§6-terdecies): su 3 semi il segno di `Delta`
+>    **non è nemmeno concorde** (-0.0445 / **+0.0367** / -0.0635), `t = -0.77`. **Il "16.9 %" è
+>    ritirato.** E la scoperta collaterale vale più della vicenda: **la barra d'errore usata in tutto
+>    il programma è 3 volte troppo piccola** (dispersione fra semi **0.030** contro `SE` interna
+>    **0.010**).
+> 5. **SETTIMO difetto silenzioso, il più grosso** (§6-quaterdecies): `_psi_spin_prec` non era esteso
+>    alla mitosi → la guardia **esatta** di `ritmo()` scartava il ramo a **4π** nel **95.33 %** dei
+>    casi → **la FASE 5 (doppia copertura) non è MAI entrata in funzione.** Curato, **6/6 PASS**.
+>    **Non** è "tempo proprio stale": è **l'orologio scalare storico invece di quello dichiarato.**
+> 6. **`S4` di quella cura ha misurato la cosa sbagliata:** `median(r) = 1.0` **per costruzione**,
+>    con qualunque orologio. Secondo caso del **punto fisso auto-normalizzante**.
 
 ---
 
@@ -929,6 +938,110 @@ misurata su questa osservabile**. Per `CLAUDE.md` par.2.7 (*mai su un solo seme*
 scritta **dentro lo script prima dei dati**. Se il segno non e' concorde sui tre semi, **il
 `16.9 %` non e' un numero riportabile** e vanno corretti tutti i documenti che l'hanno gia' scritto,
 questo compreso.
+
+---
+
+## 6-terdecies. IL CONTROLLO SUI SEMI (2026-09-15) — **ritiro il "16.9 %". Era dispersione di run.**
+
+`csv/_test_fork/_controllo_semi.py`, 3 semi x 2 bracci, 300 passi.
+
+| seme | ON **pre** | ON **post** | `Delta` |
+|---|---|---|---|
+| 1 | -0.4265 ± 0.0091 | -0.4710 ± 0.0107 | **-0.0445** |
+| 2 | -0.4846 ± 0.0099 | -0.4479 ± 0.0082 | **+0.0367** ← **segno opposto** |
+| 3 | -0.4412 ± 0.0080 | -0.5047 ± 0.0116 | **-0.0635** |
+
+> `media = -0.0238`, `SE della media = 0.0307`, **`t = -0.77`**.
+> **`IC95 = [-0.156, +0.108]`**: contiene lo **zero** *e* il **-0.120** dell'ipotesi «~metà».
+> **Tre semi non decidono. Nessuna delle due ipotesi è esclusa.**
+
+**IL NULLO CHE NESSUNO AVEVA MISURATO**, ed è la parte che vale per tutto il programma:
+
+| | |
+|---|---|
+| `SE` **interna** a un singolo run | **~0.010** |
+| dispersione **FRA SEMI, a codice INVARIATO** | **0.0302** / **0.0286** |
+
+> **La barra giusta è TRE VOLTE quella usata.** Su questo sistema caotico la pendenza trasversale
+> cambia da run a run di **0.03 senza che il codice cambi**. **Tutte** le pendenze committate in
+> questo programma portano la barra piccola: le conclusioni sembrano reggere perché gli effetti sono
+> grandi (il **-1.056** del tracing, il **+0.097** di `d/cs` contro `-1`, il contrasto ON-OFF
+> **-0.32** = 11 volte la dispersione) **ma vanno ricontrollate una per una contro 0.03.**
+
+**REGGE:** la **FASE 2 non si chiude** — ON post medio **-0.4745** contro l'attesa `-0.69`, divario
+**-0.2155**, `SE` della media **0.0165** → **`z = 13.1`**; `theta` **30.7-44.9 giri/passo** su sei run.
+
+---
+
+## 6-quaterdecies. **`_psi_spin_prec`: la FASE 5 non è MAI entrata in funzione** — e questo tocca tutto ciò che è stato misurato
+
+Cercando altri casi del pattern *«snapshot cross-passo non esteso alla mitosi»* ne è emerso un
+**settimo**, e in un punto che non è diagnostico.
+
+**FASE A** (`doc/REPERTO_psi_spin_prec.md`, 150 passi): la guardia di `ritmo()` è un'uguaglianza
+**ESATTA**, quindi **un solo nodo di mitosi** la fa scartare.
+
+| esito di `ritmo()` | | |
+|---|---|---|
+| guardia 4π **FALLISCE** → ricade sul **ritmo scalare a 2π** | **143/150** | **95.33 %** |
+| guardia 4π passa | 6/150 | 4.00 % |
+| `return` anticipato su `_psi_prec` (`r = 1`) | 1/150 | 0.67 % |
+
+**La condizione che fallisce è una sola, in 143 casi su 143: `len(_psi_spin_prec) != n`.**
+`psi_spin`, che `calcola_psi` ricostruisce **dentro** il passo, era sempre lungo `n`. Il 4π girava
+**solo ai passi 2 e 3**, prima della prima mitosi.
+
+### ⚠ LA FORMULAZIONE CONTA, e quella corrente è sbagliata
+
+Circola già la frase *«la fisica ha integrato con un tempo proprio stale»*. **Non è vero, e l'ho
+verificato.** `signed` era **già calcolato** nella versione **scalare a 2π** poche righe sopra; la
+guardia decide solo se **sovrascriverlo**. `r` era **ricalcolato a ogni passo ed era valido** — il
+contatore registra `len(_psi_prec) == n` in **149 chiamate su 150**.
+
+> **La frase vera:** la fisica ha integrato con **l'orologio SCALARE STORICO**, e la doppia copertura
+> **non è mai entrata in funzione.** *"Integrate male"* implicherebbe **errore numerico**;
+> *"orologio diverso da quello dichiarato"* implica **modello diverso** — **e solo la seconda è vera.**
+> Le misure sono **valide per il sistema che è girato davvero**, e **non valide** come misure del
+> sistema col settore 4π attivo.
+
+**Marchio registrato** in `doc/RAMIFICAZIONI.md` (secondo marchio, in testa): *«misurate col ritmo
+scalare a 2π; la doppia copertura non era attiva. Da riverificare col settore 4π in funzione»* —
+**T3 e i suoi quattro bracci inclusi**, cioè il divario stesso che stiamo inseguendo.
+
+### FASE B — curato, **sigillo 6/6 PASS**
+
+Settima voce della stessa convenzione (`vstack`, perché `psi_spin` è `n × 2` **complesso**).
+Blob **`b298677a` → `08784685`**.
+
+| | | |
+|---|---|---|
+| **S1** OFF byte-identico | **PASS** | `n_A = n_B = 2501`, `max\|A-B\| = 0.000e+00`, RNG identico |
+| **S1b** con ON devono differire | **PASS** | `n` 2392 contro 2200 |
+| **S2** contatore | **PASS** | **88.33 % → 0.00 %** |
+| **S3** `len == n` | **PASS** | **54/60 → 0/60** |
+| **S5** stabilità | **PASS** | `\|nb\|-1 = 2.2e-16`, NaN/inf 0 |
+
+### ⚠⚠ E S4 HA MISURATO LA COSA SBAGLIATA — lo dice il codice, non il numero
+
+```
+PRIMA   r: mediana 1.000000    DOPO   r: mediana 0.999999    z = 0.00
+```
+
+**Quel `z = 0.00` non significa «la cura non cambia `r`»: significa che la mediana di `r` NON PUÒ
+cambiare.** In coda a `ritmo()`, `x = f / median(|f|)` e `r_normalized = r / r_unit` con `r_unit` il
+valore a `x = 1`: il nodo mediano ha `x = 1` **per definizione**, la mappa è **monotona**, quindi
+**`median(r) = 1.0` ESATTAMENTE, con qualunque orologio.**
+
+> **È il SECONDO caso dello stesso trabocchetto strutturale.** Il primo è `_tau = TAU_A *
+> max(_dens/_dens_rif, 0.05)` con `_dens_rif = median(_dens)`. **Una grandezza normalizzata sulla
+> propria mediana ha un punto fisso, e su quel punto non si misura nulla.** Presidio in `CLAUDE.md` §9.
+
+L'unico numero informativo è la **dispersione**: `0.4421 → 0.4257` (**−3.7 %**) — **un seme, nullo
+non misurato**. Per il presidio del paragrafo precedente, **non basta**.
+
+**Quindi l'attesa «`r` cambierà in modo significativo» non è confermata, e non è nemmeno smentita:
+`S4`, com'è costruito, NON PUÒ rispondere.** E **non dico che questo chiuda T3**: non è stato
+misurato, e un difetto grande non implica un effetto grande — la cache `cs` lo ha appena dimostrato.
 
 ---
 
