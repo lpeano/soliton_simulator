@@ -290,7 +290,20 @@ omega_new = omega_src + dt_n * (coppia/inerzia - omega_src/tau)
 
 > **omega_eq = tau · coppia / inerzia**
 
-cioè **omega è PROPORZIONALE alla memoria**. Misurato:
+cioè — **se la direzione della coppia fosse coerente**. **NON lo è**, e la misura del
+2026-09-15 lo ha stabilito.
+
+> ### ⚠ CORREZIONE (2026-09-15, `doc/ANALISI_gilbert_fdt.md`)
+> La traiettoria di `|omega_s|` su 150 passi dice che la crescita è **DIFFUSIVA**
+> (`omega/√n` costante entro il **4.6 %**; `omega/n` varia di 3.5×): è un **random walk smorzato**,
+> non una deriva coerente. Quindi l'equilibrio **non** è `tau·F` ma
+> **`omega_eq = |F|·√(dt_n·tau/2)`, cioè ∝ `√tau`**, e `tau·F` sovrastima di ~20×
+> (1.5e6 contro 7.1e4 previsto e **7.27e4 misurato**, scarto ×1.03).
+> **La conclusione di questo paragrafo RESTA** — omega cresce con la memoria, e la memoria conserva
+> la rotazione, non la direzione — ma **con esponente ½, non 1**. E soprattutto: **la dissipazione
+> non manca, produce già un plateau finito**, che vale comunque **112 giri per passo**.
+
+Misurato:
 
 ```
 tau (TAU_A locale) / DT                        mediana  2.47e+03 PASSI   [5%..95%] 250 .. 8.7e+03

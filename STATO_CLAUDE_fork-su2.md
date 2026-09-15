@@ -21,8 +21,9 @@
 
 ## Ultimo aggiornamento
 - Data: **2026-09-15**
-- Ultimo commit: **BILANCIO dei tassi, FASI A/B/C chiuse** (`doc/BILANCIO_ordine_spin.md`). Prima:
-  esito scan K=300 (B) + reperto `_pesi` + profilazione + fix guard `--gamma-turbo`.
+- Ultimo commit: **FASE 1 Gilbert/FDT — ipotesi NON confermata, nessun cablaggio**
+  (`doc/ANALISI_gilbert_fdt.md`). Prima: BILANCIO dei tassi FASI A/B/C, esito scan K=300 (B),
+  reperto `_pesi`, profilazione, fix guard `--gamma-turbo`.
 - Branch: **`fork-su2`**, allineato con `origin/fork-su2`. **Nessun run in volo.**
 - Blob `soliton_simulator.py` **SUL DISCO** = **`f5887254`** (turbo cablato + fix guard).
 - Blob **CERTIFICATO** in `CLAUDE.md` par.0 = **`c0803713`** (STEP 2, sigillo 10/10). **I DUE NON
@@ -82,6 +83,21 @@ Quindi **l'ordine non manca: nasce di continuo e viene DISTRUTTO.** Misurati i d
   "in questo regime numerico nessun ordine sopravvive a un tick".
 - **CAVEAT:** i 67 giri/passo sono UN seme, UNA scena, passo 60 — da riconfermare. `tau_dec` no,
   quello e' su due semi.
+
+**GILBERT / FDT (2026-09-15) — IPOTESI NON CONFERMATA, NESSUN CABLAGGIO.**
+`doc/ANALISI_gilbert_fdt.md`. Il mandato partiva da due premesse che **non reggono al codice**:
+- *"omega_s non rilassa"* (commenti alle righe **868** e **1803**): **FALSO**, la riga **1918** ha
+  `- omega_src/_tau`. **La dissipazione ESISTE.** I due commenti sono STALE e vanno corretti.
+- *"il calcio termico alimenta omega_s"* (riga ~1590): **FALSO**, e' dentro `semina()`, quindi e' il
+  punto zero ALLA NASCITA, non una sorgente per passo.
+Misurata la traiettoria (150 passi, 15 punti): la crescita e' **DIFFUSIVA** (`omega/sqrt(n)`
+costante entro il **4.6%**), **con PLATEAU**: previsto 7.06e4, misurato 7.27e4 (scarto x1.03).
+**La dissipazione non manca: c'e', funziona, e il plateau vale comunque 112 GIRI per passo.**
+Il coefficiente di Gilbert **si deriva dal FDT senza parametri** (`Lam` si cancella):
+`lambda = |B|/(2 dt)` -> allineamento in **28.8 passi** contro un rimescolamento di **0.0030 passi**:
+**~1e4 volte troppo lento. TERZO RAMO: reperto, non fallimento.** La FASE 2 non e' partita.
+**Correzione a un fatto MIO:** `CLAUDE.md` par.9 diceva `omega_eq = tau*F` (proporzionale a tau);
+e' il punto fisso deterministico e sovrastima di ~20x. Corretto: `omega_eq ~ sqrt(tau)`.
 
 **APERTO — nessun run in volo. Quattro decisioni di Luca, non dell'esecutore:**
 - **SOTTO-PASSO PER LO SPIN** (lo stesso principio di `nsub` per la metrica) oppure **rileggere

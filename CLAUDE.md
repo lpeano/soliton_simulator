@@ -231,11 +231,29 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   opposto:** la densita' minuscola CONGELA la metrica e FA ESPLODERE lo spin.
   CONSEGUENZA DI LETTURA: le misure negative sul settore di spin restano valide, ma NON dicono "non
   esiste una fisica ordinante": dicono "in questo regime numerico nessun ordine sopravvive a un tick".
-- **PIU' MEMORIA SU `omega_s` = PIU' ROTAZIONE, non piu' ordine** (derivato dal codice, riga 1918).
-  `omega_new = omega_src + dt_n*(coppia/inerzia - omega_src/tau)` ha punto fisso
-  **`omega_eq = tau * coppia/inerzia`**: omega e' PROPORZIONALE alla memoria. La memoria vive sulla
-  VELOCITA' ANGOLARE, quindi conserva la ROTAZIONE, non la DIREZIONE. Misurato: `tau` (TAU_A locale)
-  mediana **2470 passi**, il piu' lungo del sistema, e il Bloch ruota lo stesso di 67 giri/passo.
+- **ATTENZIONE, DUE COMMENTI STALE SU `omega_s`** (verificato 2026-09-15): le righe **868**
+  (*"motore conservativo: si conserva, non rilassa"*) e **1803** (*"omega si CONSERVA, non insegue
+  lo zero"*) dicono il FALSO. L'UNICO aggiornamento per passo e' la riga **1918**, che contiene
+  **`- omega_src/_tau`**: e' un rilassamento del primo ordine, con
+  `tau = TAU_A * max(rho/rho_rif, 0.05)`. **La dissipazione su `omega_s` ESISTE.** Chi legge solo i
+  commenti costruisce una diagnosi sbagliata (e' successo: vedi `doc/ANALISI_gilbert_fdt.md` par.1).
+  NB anche: il calcio termico `calcio_omega` (righe 1592-1594) e' DENTRO `semina()`, quindi e' il
+  punto zero ALLA NASCITA del nodo, **non** una sorgente di rumore per passo.
+- **PIU' MEMORIA SU `omega_s` = PIU' ROTAZIONE, non piu' ordine** (riga 1918; misurato 2026-09-15).
+  **CORRETTO il 2026-09-15** — la versione precedente di questo punto diceva
+  `omega_eq = tau * coppia/inerzia` (proporzionale a `tau`): e' il punto fisso DETERMINISTICO, che
+  varrebbe se la direzione della coppia fosse coerente. **Non lo e'.** La traiettoria misurata
+  (`csv/_test_fork/_crescita_omega.py`, 150 passi, 15 punti) dice che `|omega_s|` cresce come
+  **`sqrt(n)`** (`omega/sqrt(n)` costante entro il **4.6%**, mentre `omega/n` varia di 3.5x): e' un
+  **RANDOM WALK SMORZATO**, e il suo equilibrio e'
+  **`omega_eq = |F| * sqrt(dt_n * tau / 2)`, cioe' proporzionale a `sqrt(tau)`, non a `tau`**.
+  Misurato: previsto 7.06e4, osservato 7.27e4 al passo 150 (scarto x1.03), con la decelerazione
+  visibile (x1.138 da n=100 a n=150 contro x1.225 del puro sqrt(n)).
+  **LA CONCLUSIONE RESTA:** omega cresce con la memoria (come `sqrt(tau)`), la memoria vive sulla
+  VELOCITA' ANGOLARE e conserva la ROTAZIONE, non la DIREZIONE, e il plateau vale comunque
+  **112 giri per passo**. **L'ipotesi "dare memoria combatte il disordine" e' REFUTATA.**
+  **E LA DISSIPAZIONE NON MANCA: c'e', e' efficace, e un plateau finito lo produce gia'.** Il
+  problema e' DOVE sta quel plateau, e dipende dall'INGRESSO (coppia/inerzia), non dall'uscita.
   **L'ipotesi "dare memoria combatte il disordine" e' REFUTATA su questo canale.**
   NB: `--regime` NON serve a testare TAU_A: cambia TAU_A INSIEME a G_PH, _CALORE_INIT e SCUOTIMENTO
   (quattro interruttori insieme, contro par.1).
@@ -244,5 +262,22 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   -> rapporto **295 / 335**. **Dominio della distruzione.** Il confondente geometrico e' ESCLUSO,
   non stimato: all'eta' 1, con chi gia' a 89.7, la distanza e' INVARIATA (0.540 contro 0.539) e
   l'arco diretto e' vivo al **100%**. Decorrelano da ADIACENTI e CONNESSI.
+- **IL COEFFICIENTE DI GILBERT DAL FDT SI DERIVA (zero parametri) ED E' ~1e4 VOLTE TROPPO LENTO**
+  (`doc/ANALISI_gilbert_fdt.md`, 2026-09-15). Dal rumore sul Bloch (riga 1847, `amp`):
+  `D = 2*amp^2/dt`; imponendo che l'equilibrio di Langevin `<th^2> = D/(2 lambda)` coincida con
+  quello di Boltzmann `<th^2> = 2kT/|B|` si ottiene `lambda = amp^2*|B|/(2*dt*kT)`. Con l'unica
+  temperatura parameter-free del sistema (`kT = Lam`, l'energia del vuoto, da cui il rumore stesso
+  e' costruito) **`Lam` SI CANCELLA**: `lambda = |B|/(2*dt)` = 3.47/tempo, cioe' un tempo di
+  allineamento di **28.8 passi** — contro un rimescolamento misurato di **0.0030 passi**.
+  **Il FDT non licenzia uno smorzamento sufficiente**, e metterne uno piu' grande significherebbe
+  SCEGLIERLO (contro par.3) e mettere dissipazione senza fluttuazione: lo stesso errore, ribaltato.
+  Controllo: l'equipartizione con `I=1e-6` darebbe `kT = 800` contro `Lam = 4.4e-5` (rapporto ~2e7)
+  -> **non e' equilibrio termico ma equilibrio DINAMICO pilotato**, ed e' la ragione strutturale per
+  cui il FDT non puo' fissare il coefficiente: accoppia una dissipazione a una FLUTTUAZIONE, e qui
+  il termine dominante non e' una fluttuazione.
+- **IL TEMPO DI DISSIPAZIONE E' FISSATO DA UN PAVIMENTO, non dalla densita'** (misurato 2026-09-15).
+  Nella seconda meta' di un run `tau/DT` vale esattamente **250** = `TAU_A*0.05/DT`, cioe' il
+  pavimento di `max(rho/rho_rif, 0.05)` (riga 1913). Stessa famiglia del pavimento `1e-6`
+  sull'inerzia: alle scale simulabili **la regolarizzazione diventa il parametro fisico**.
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
