@@ -107,6 +107,19 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
 - Se un fatto in par.9 si rivela superato dal codice, CORREGGILO qui (non lasciare un fatto stale:
   e' esattamente l'errore del docstring "ORFANO").
 
+## 5-quater. IL REGISTRO DEI FRONTI APERTI (regola di Luca, 2026-09-15)
+- **Lo stato dei fronti aperti sta in `doc/RAMIFICAZIONI.md`**, ed e' uno **STATO, non una cronaca**
+  (la cronaca vive nei documenti di `doc/` e in `CLAUDECONNECT.md`).
+- **Si aggiorna nello STESSO commit del riscontro che lo cambia** (par.5-bis): un registro aggiornato
+  "dopo" e' un registro falso.
+- **Le chiuse per DIMOSTRAZIONE e le chiuse per MISURA non si mescolano mai.** Le prime sono
+  definitive; le seconde portano **sempre** la condizione che le renderebbe da rifare — e oggi
+  quattro di esse sono misurate su un **settore ALIASATO** (~112 giri/passo), quindi **da rifare**.
+- **Ogni voce ha un criterio di chiusura.** Una voce senza criterio non e' un fronte, e' un
+  desiderio: va in una sezione a parte.
+- **Un numero entra nel registro solo se e' gia' nel repo.** Il registro non e' il posto dove i
+  numeri nascono.
+
 ## 5-ter. RELAZIONE A CLAUDE WEB — A OGNI RISCONTRO (regola di Luca, 2026-09-15)
 - **A ogni riscontro di QUALSIASI tipo** — una misura, un'analisi, una simulazione, una lettura del
   codice, un sigillo che passa o che fallisce, una premessa che cade, un errore mio — **scrivi una
