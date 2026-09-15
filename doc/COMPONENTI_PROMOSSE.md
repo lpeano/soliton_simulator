@@ -54,8 +54,14 @@ compito della regola è stanarlo.**)*
 
 # A. FISICA CERTIFICATA — ON di default
 
-> **VUOTA.** Nessuna promozione in questo giro. La prima è una decisione di Luca, coi tre criteri
-> sul tavolo.
+> **VUOTA.** Nessuna promozione eseguita nel codice.
+>
+> **⚠ MA C'È UNA DECISIONE OPERATIVA IN VIGORE, presa da Luca il 2026-09-15:**
+> **`--cs-dinamico` va acceso in OGNI misura, sempre.** Non è (ancora) una promozione del default
+> nel codice — il criterio ② non è completo, manca un sigillo con controllo positivo — ma
+> **è vincolante per come si lanciano i run**, ed è scritta in `CLAUDE.md` §4.
+> *Distinzione che conta: una regola d'uso non è una promozione. La promozione si fa nel codice,
+> col suo sigillo e col suo criterio di retrocessione.*
 
 ---
 
@@ -76,7 +82,7 @@ decide**.
 | **B8** | **`--fork-su2-mem`** | sì — `tau = d/cs`, «nessun numero nuovo, `d` e `cs` esistono già» | **23/23 PASS**, S7 incluso (il presidio `dt_n` vs `DT`) | **ALTERNATIVA, oggi.** È il pezzo che **accende** il fork. Ma dire «senza è sbagliato» presuppone che il non-abeliano sia **stabilito**, e non lo è: la sua resa non è ancora dimostrata (le firme sono a valore casuale, `doc/ESITO_prima_misura_4pi.md`). **③ si potrà riempire quando il fork avrà prodotto qualcosa di misurabile, non prima.** |
 | **B9** | **`--step2-orologio`** | **SÌ** — orologio di Compton `omega ∝ cs²`; «fisica NECESSARIA e derivata: zero parametri nuovi, nessun floor, nessun coefficiente» | **10/10 PASS**, e include **S3.0**, il controllo che il test *veda* (`\|f(1)−f(0)\| > 1e-13` su 39/40 nodi) — **è un controllo positivo vero** | **PLAUSIBILE, ma BLOCCATO da ③ per una ragione fisica:** §6 dice che **a densità reali `cs` è MORTO** (`I ~ 0.05` contro soglia `~400`), quindi il fattore vale ~1 e **la sua assenza oggi non è misurabilmente un difetto**. Dimostrarlo richiederebbe il **turbo**, cioè un forzante. |
 | **B10** | **`--tau-luce`** | **SÌ** — `d/cs`, lo stesso `tau` già cablato nello Strato 1, coefficiente **1** | **NO — criterio ② NON SODDISFATTO.** I sigilli della FASE 2 **non sono passati** (T2 difetto del test, T3/T4). `doc/SIGILLO_tau_luce_FALLITO.md` | **NON VALUTABILE finché ② non passa.** ⚠ **Ma è la componente che ha generato la regola**: escluderla da una misura come se fosse il turbo è l'errore di categoria del §10. E **abbassa `theta` da ~96 a ~43 giri/passo**: è l'unica leva di risoluzione esistente. |
-| **B11** | **`--cs-dinamico`** | sì (`cs = CS_M/(1+GAMMA√I)`, stesso `GAMMA`) | A/B storico | **NON STABILITO, e oggi INERTE:** §6, a densità reali `cs` è morto. Nota: **le due misure del braccio OFF di oggi girano con `--cs-dinamico` OFF**, quindi la cura della cache `cs` non è nemmeno esercitata lì. |
+| **B11** | **`--cs-dinamico`** | sì (`cs = CS_M/(1+GAMMA√I)`, **stesso `GAMMA`** di `G(rho)`) | A/B storico; **nessun controllo positivo** | **⭐ DIFETTO — decisione di Luca, 2026-09-15: «CS DINAMICO SERVE E DEVE ESSERCI SEMPRE».** Senza, `_cs_nodo_prev` non viene **mai** scritta, quindi cade il `tau = d/cs` **dello STRATO 1**, non solo quello di `--tau-luce`: la memoria del fork gira su una legge amputata. **È la prima voce con il ③ pieno insieme a B1.** ⚠ Il ② resta da completare (serve un sigillo con controllo positivo) prima di poterla promuovere |
 
 ---
 

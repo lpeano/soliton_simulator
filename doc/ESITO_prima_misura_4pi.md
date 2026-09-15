@@ -143,9 +143,17 @@ Le misure sono: **`std` 0.4749 / 0.4218**, **`IQR` 0.8799 / 0.7658**. `r` **vari
 
 ## 7. COSA QUESTA MISURA NON DICE
 
-- **Non esercita la cura della cache `cs`.** Questi run hanno **`--cs-dinamico` OFF** (il default
-  dell'osservatore, ed è il sistema «naturale» richiesto): `_cs_nodo_prev` non viene mai scritta.
-  **Si sta esercitando l'orologio a 4π, non il tempo-luce.**
+- **⚠ `--cs-dinamico` era SPENTO, e ora è DIMOSTRATO, non dedotto** (`doc/REPERTO_cs_dinamico_spento.md`,
+  rilievo di Luca). Prova dai dati: `cs_std = cs_min = cs_max = **nan**` su tutti gli 11 campioni di
+  entrambi i semi — e `nan` è più forte di `0`: significa che la cache `_cs_nodo_prev` **non esiste
+  affatto**, e quella cache è scritta **solo** dentro `if CS_DINAMICO:`. Seconda prova indipendente:
+  `CS_DIN=False` nella riga `[osserva-flag]` letta **in-run** su entrambi i semi.
+  **Quindi `cs = CS_M` costante**, la cura della cache `cs` è **inerte** in questi run, e si è
+  esercitato **l'orologio a 4π**, non il tempo-luce.
+  **MA ATTENZIONE, e vale anche per i run futuri:** accendere il flag **non cambierebbe la sostanza**.
+  Dove `cs` era acceso, `cs ∈ [1.99954, 2.0]` mentre `tau = d/cs ∈ [0.0271, 1.0509]`: **`cs` pesa
+  `0.00629 %` della dispersione di `tau`, una parte su 15 898.** `tau = d/cs` è **`tau ∝ d`** a due
+  parti su diecimila, **anche col flag acceso**.
 - **Non dice che l'aliasing sia risolto.** Non lo è: ~96 giri/passo.
 - **Non chiude il fronte R** (l'anello di retroazione: forse è il bersaglio `−0.69` a essere mal
   calcolato). Richiede `sigma` misurato nello stesso run.

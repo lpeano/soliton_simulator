@@ -76,6 +76,16 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
   metrica). Per il RILASSAMENTO di primo ordine (xdot: memoria del gauge Strato 1/2) usa il passo
   ESATTO `U(t+dt) = U_target + (U-U_target) e^{-dt/tau}`, NON Verlet. Se ti chiedo Verlet su un
   rilassamento, segnalalo invece di eseguire.
+- **`--cs-dinamico` CI VA SEMPRE (decisione di Luca, 2026-09-15).** Non e' un'opzione di scenario:
+  **senza, `cs = CS_M` costante e `_cs_nodo_prev` non viene MAI scritta**, quindi cade anche il
+  `tau = d/cs` dello **STRATO 1** (`_bloch_ritardato`), non solo quello di `--tau-luce`: **tutta la
+  memoria del fork gira su una legge amputata.** Una misura senza `--cs-dinamico` **non misura il
+  sistema che si crede di misurare**, ed e' successo (`doc/REPERTO_cs_dinamico_spento.md`).
+  **NB, e non cambia la regola:** alle densita' simulabili `cs` varia pochissimo — misurato
+  `cs \in [1.99954, 2.0]`, cioe' **0.023%**, che pesa **0.00629%** della dispersione di `tau = d/cs`
+  (una parte su **15 898**). **Il punto non e' l'ampiezza: e' che la legge dev'essere CABLATA.**
+  Un `cs` costante non e' un `cs` piccolo: e' un `cs` **assente**, e rende `tau = d/cs` un
+  `tau ∝ d` travestito.
 - **Dipendenza di flag:** `--cs-dinamico` implica `--chi-core` e `--spinore-vivo` (senza, e' inerte/incoerente).
 - **Mai confronti a PASSO FISSO su un sistema che si espande/dilata:** genera ALIASING (una struttura
   che trasla o si dilata, campionata a intervalli costanti, sembra ferma o va a velocita' falsa).

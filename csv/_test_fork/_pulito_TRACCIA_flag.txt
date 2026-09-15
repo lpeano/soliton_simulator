@@ -1,0 +1,5 @@
+# TRACCIA DEI FLAG letti IN-RUN dai run del braccio OFF (2026-09-15).
+# I .log sono in .gitignore: questa e' la riga di certificazione estratta, committata.
+# NB: questi run hanno CS_DIN=False. Vedi doc/REPERTO_cs_dinamico_spento.md.
+[osserva-flag] tag=pulito1 seed=1  FORK_SU2=True FORK_SU2_MEM=True SCUOTIMENTO=True SYNC_UPDATE=False KURAMOTO_SU2=False STEP2=False CS_DIN=False GAMMA_TURBO=1   (letti DURANTE il run)
+[osserva-flag] tag=pulito2 seed=2  FORK_SU2=True FORK_SU2_MEM=True SCUOTIMENTO=True SYNC_UPDATE=False KURAMOTO_SU2=False STEP2=False CS_DIN=False GAMMA_TURBO=1   (letti DURANTE il run)
