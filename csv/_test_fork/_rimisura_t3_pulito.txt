@@ -1,0 +1,26 @@
+============================================================================================================
+RI-MISURA T3 - pendenza di theta contro l'inerzia, 4 bracci, 300 passi, seme 1
+============================================================================================================
+  PRE  OFF               pendenza -0.1685 +- 0.0090   r^2 0.126   n  2417   IC95 [-0.1862, -0.1507]
+                         theta mediana  4.662e+04 gradi/passo =   129.51 giri   N nodi 3889   fallback n/d/n/d
+
+  PRE  ON                pendenza -0.4265 +- 0.0091   r^2 0.464   n  2534   IC95 [-0.4444, -0.4086]
+                         theta mediana  1.568e+04 gradi/passo =    43.55 giri   N nodi 3999   fallback n/d/n/d
+
+  POST OFF               pendenza -0.1024 +- 0.0071   r^2 0.088   n  2146   IC95 [-0.1164, -0.0884]
+                         theta mediana   4.64e+04 gradi/passo =   128.88 giri   N nodi 3271   fallback 0/302
+
+  POST ON                pendenza -0.4555 +- 0.0082   r^2 0.567   n  2364   IC95 [-0.4715, -0.4394]
+                         theta mediana  1.404e+04 gradi/passo =    38.99 giri   N nodi 3489   fallback 2/608
+
+============================================================================================================
+IL NUMERO CHE DECIDE - quanto la PATCH ha spostato il braccio ON
+============================================================================================================
+  ON(pre)  -0.4265 +- 0.0091        ON(post) -0.4555 +- 0.0082
+  DIFFERENZA = -0.0290 +- 0.0122    z = 2.37
+  PREDIZIONE (scritta prima, commit 43e9a47): |differenza| SOTTO il proprio SE -> SMENTITA
+
+  effetto ON-OFF, prima: -0.2580      dopo: -0.3531
+  attesa FASE 1: -1.03 (naive) / -0.69 (onesta)
+  meta' mancante rispetto alla stima ONESTA: -0.2345   (frazione recuperata dalla patch: 11.0 %)
+============================================================================================================

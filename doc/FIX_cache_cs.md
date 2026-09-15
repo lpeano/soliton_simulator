@@ -227,3 +227,44 @@ Il difetto era **reale e misurato** (fallback **71.88 % -> 0.00 %**, cache inusa
 sigillo **5/5 PASS**): quelli restano. Cio' che si ritira e' l'**effetto fisico attribuito alla cura**,
 non la cura. E resta valida la ragione indipendente: `cs` e' quasi-costante **oggi**; quando sara'
 vivo, una cache scartata a ogni mitosi sarebbe un difetto **grande**, e lo sarebbe in silenzio.
+
+---
+
+## 9. T3 RIFATTO SUL SISTEMA PULITO (entrambe le cure) — **il numero, senza attribuirlo**
+
+`csv/_test_fork/_rimisura_t3_pulito.txt`, 4 bracci, 300 passi, seme **1**, **con `--cs-dinamico`**
+(riga 24 di `_rimisura_t3.py`), blob `08784685`.
+
+| braccio | pendenza | SE | r² | n | IC95 | `theta` | fallback cache |
+|---|---|---|---|---|---|---|---|
+| PRE OFF | -0.1685 | 0.0090 | 0.126 | 2417 | [-0.1862, -0.1507] | 129.51 giri/passo | n/d |
+| PRE ON | -0.4265 | 0.0091 | 0.464 | 2534 | [-0.4444, -0.4086] | 43.55 | n/d |
+| **POST OFF** | **-0.1024** | 0.0071 | 0.088 | 2146 | [-0.1164, -0.0884] | 128.88 | **0/302** |
+| **POST ON** | **-0.4555** | 0.0082 | 0.567 | 2364 | [-0.4715, -0.4394] | **38.99** | **2/608** |
+
+### ⚠ IL «11.0 %» STAMPATO DALLO SCRIPT **NON E' UN RISULTATO**
+
+Lo script calcola `Delta = -0.0290 +- 0.0122`, `z = 2.37`, e ne deriva «11.0 % recuperato».
+**Non si riporta come numero**, per la ragione **gia' misurata oggi** (**C10**): quella `SE` e'
+**interna a un singolo run**, mentre la dispersione **fra semi** su questa stessa osservabile vale
+**~0.030**. Con `Delta = 0.029` e barra `0.030`, **non c'e' effetto misurabile: c'e' un seme.**
+
+> **E' esattamente il 16.9 % di stamattina, con un'altra cifra.** Quel numero aveva `z = 3.16` su un
+> seme ed e' stato **ritirato** quando tre semi hanno dato segno **non concorde**
+> (-0.0445 / **+0.0367** / -0.0635, `t = -0.77`). **Non lo rifaccio.**
+> Il mandato lo dice con parole sue: *«dopo tre errori consecutivi sullo stesso numero, la
+> disciplina e' smettere di predirlo»*. **Aggiungo: e smettere di riportarlo su un seme.**
+
+### COSA REGGE, contro la barra giusta
+
+| affermazione | numero | contro 0.030 (fra semi) |
+|---|---|---|
+| **la FASE 2 NON si chiude** | divario POST ON verso `-0.69` = **-0.2345** | **z ≈ 7.8** |
+| `--tau-luce` ha un effetto **grande** | contrasto ON-OFF **-0.3531** | **~12 volte** |
+| `theta` resta **ALIASATO** | **38.99 giri/passo** nel braccio migliore | fuori scala |
+
+### Un dettaglio che il contatore rende visibile
+
+`fallback 2/608` nel braccio POST ON: la cache cade nel ramo `else` **2 volte su 608 chiamate
+(0.33 %)** — il primo passo di ciascun braccio, dove un passato **non esiste ancora**. E' il
+comportamento atteso **dopo** la cura, ed e' verificabile perche' il contatore c'e'.
