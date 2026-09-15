@@ -2,8 +2,8 @@
 
 > **Scritto per Claude web** (regola §5-ter). Branch `fork-su2`, 2026-09-15. Blob **`f5887254`**.
 > **Nessuna modifica alla fisica, nessun cablaggio.**
-> **Stato: misura IN VOLO.** Questo documento contiene **solo** il criterio e il setup, committati
-> **prima** dei dati. I numeri arriveranno in un commit dedicato.
+> **Stato: FASE 1 CONCLUSA.** I §§1-6 sono il criterio, committato **prima** dei dati (`288f601`).
+> Il §7 è l'esito. **Nessun cablaggio.**
 
 ---
 
@@ -82,6 +82,77 @@ La pendenza di `theta` è **prevedibile senza cablare nulla**:
 > Da **112 giri/passo** si scenderebbe a **~9**. **Un ordine di grandezza nella direzione giusta,
 > NON la soluzione dell'aliasing.** Questo va scritto **nella stessa riga** in cui si dà il numero,
 > non in una nota a piè di pagina.
+
+## 7. ⚑ ESITO DELLA FASE 1 — la cancellazione **si rompe**, ma prima una correzione a me stesso
+
+### 7.1 PRIMA DI TUTTO: la formula predittiva **non chiude**, e il numero che avevo dato ieri era fragile
+
+Il criterio poggia su `pendenza(theta) = pendenza(sigma) + pendenza(tau)/2`. **Va verificata sul caso
+attuale prima di usarla per estrapolare** — e non regge:
+
+| | `sigma` | `tau` | attesa | misurata | **scarto** |
+|---|---|---|---|---|---|
+| run 400 passi, `tau` su **20 nodi** | −1.056 | **+1.812** | −0.150 | −0.113 | **0.037** |
+| run 300 passi, `tau` su **2195 nodi** | −1.078 | **+1.176** | −0.490 | −0.152 | **0.338** |
+
+> **Le due misure di `pendenza(tau)` NON coincidono: +1.812 su 20 nodi, +1.176 su 2195.**
+> La seconda ha **110 volte** i campioni e `r = +0.796`: **è quella affidabile.**
+>
+> **Correzione a `doc/TRACING_omega.md` §6.3 e al commit `9713ddb`:** lì avevo scritto che la catena
+> «si chiude» con scarto **0.037**. Quel numero usava la pendenza di `tau` misurata su **20 nodi**.
+> Con la misura buona lo **scarto sale a 0.338**: **la catena NON si chiude.** Il meccanismo
+> qualitativo resta (√`tau` cancella **parte** del −1), ma **il conto quantitativo no**, e resta un
+> **residuo di ~0.34 nell'esponente che non so spiegare.**
+
+Lo scrivo per primo perché è una correzione a un mio risultato di poche ore fa, ed era proprio il
+numero che avevo presentato come «la catena si chiude».
+
+### 7.2 La misura che il criterio chiedeva
+
+```
+pendenza di tau_ATTUALE (TAU_A*dens/dens_rif)  = +1.176   (r = +0.796, 2195 nodi)
+pendenza di tau_LUCE    (d/cs)                 = +0.097   (r = +0.351, 2195 nodi)
+sigma = coppia/inerzia                         = -1.078
+```
+
+> **`d/cs` è PIATTO contro l'inerzia: +0.097.** Cade nella prima banda del criterio (`|p| ≤ 0.3`),
+> **fissata prima di misurare**. Un `tau` piatto **non può cancellare niente**, qualunque sia la
+> relazione precisa fra le grandezze.
+
+### 7.3 Quanto tornerebbe `theta` — due stime, e la differenza fra loro va dichiarata
+
+| stima | pendenza attesa di `theta` |
+|---|---|
+| **naive** (solo la formula) | **−1.030** |
+| **corretta**, se il residuo di 0.338 resta | **−0.692** |
+| **oggi, misurato** | **−0.152** |
+
+**La stima onesta è −0.69, non −1.03.** La formula sovrastima, e non ho motivo di credere che il
+residuo sparisca cambiando `tau`. Ma in **entrambe** le stime:
+
+> ### **La cancellazione si rompe.** Da −0.15 a fra −0.69 e −1.03: un fattore **4.5-7** sull'esponente.
+
+### 7.4 L'ampiezza — il caveat, con i numeri misurati
+
+```
+tau_attuale/DT = 6500 passi      tau_luce/DT = 66.5 passi      rapporto 0.0102
+|omega|_eq ∝ sqrt(tau)  ->  fattore 0.101
+theta da 4.56e4 a 4612 gradi/passo   =   da 126.7 a 12.8 GIRI per passo
+```
+
+> **Da 127 a 13 giri per passo. Un ordine di grandezza nella direzione giusta —
+> e il settore resta ALIASATO** (13 giri per tick sono ancora 13 giri per tick).
+> **Non è la soluzione dell'aliasing, e non va venduta come tale.**
+
+### 7.5 Cosa resta aperto, e che questa fase NON ha risolto
+
+1. **Il residuo di 0.338 nell'esponente**, che nessuna delle due letture di `tau` spiega. È la
+   ragione per cui la stima onesta è −0.69 e non −1.03, e **andrebbe stanato** prima di fidarsi di
+   qualunque predizione quantitativa su questa catena.
+2. **L'aliasing resterebbe** (13 giri/passo). Sanare l'incoerenza di `tau` è un guadagno di
+   **coerenza**, e un fattore 10 di ampiezza — **non una cura**.
+
+---
 
 ## 6. COSA QUESTA FASE NON FA
 

@@ -132,6 +132,13 @@ pendenza attesa di |omega| = -1.056 + 1.812/2 = -0.150
 theta MISURATO                                = -0.113        scarto 0.037
 ```
 
+> ### ⚠ CORREZIONE (2026-09-15, `doc/TAU_tempo_luce.md` §7.1)
+> **Quel `+1.812` è misurato su SOLI 20 NODI.** Rifatto su **2195 nodi** dà **+1.176** (`r = +0.796`).
+> Con la misura buona: attesa **−0.490** contro −0.152 misurata, cioè **scarto 0.338, non 0.037**.
+> **La catena NON si chiude come scritto qui.** Il meccanismo qualitativo regge — `√tau` cancella
+> **parte** del −1 — ma **resta un residuo di ~0.34 nell'esponente che non è spiegato**.
+> Questa riga è conservata com'era, con la correzione accanto.
+
 > ### **Il −1 della coppia è cancellato dal +0.91 di √τ.**
 > `tau = TAU_A · max(dens/dens_rif, 0.05)` **cresce con la densità**, e il suo peso entra nel
 > plateau come **radice**. Coppia e memoria si annullano a vicenda, e resta **−0.11**.

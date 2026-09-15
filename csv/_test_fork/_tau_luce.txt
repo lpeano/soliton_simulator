@@ -1,0 +1,59 @@
+CONFERMA FLAG IN-RUN: GAMMA_TURBO=1  STEP2=False  FORK_SU2=True  MEM=True  CS_DIN=True  TAU_A=50  DT=0.01
+scena: n=2201 archi=208797   nodi tracciati FISSI: 20 (5 per quartile di inerzia)
+
+C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\_core\fromnumeric.py:3859: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\_core\_methods.py:144: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+  passo    1  nodi     0 | |B| +nan  angolo +nan  |correzione| +nan  coppia/inerzia +nan  |om_src|/tau +nan  theta +nan | R_stoc      nan  cos +nan
+  passo   75  nodi   611 | |B| -0.031  angolo +0.003  |correzione| -0.027  coppia/inerzia -1.027  |om_src|/tau -0.299  theta +0.044 | R_stoc    0.024  cos -0.984
+  passo  150  nodi  1309 | |B| -0.519  angolo +0.020  |correzione| -0.079  coppia/inerzia -1.079  |om_src|/tau -1.155  theta -0.108 | R_stoc   0.0221  cos -0.982
+  passo  225  nodi  1736 | |B| -0.790  angolo +0.046  |correzione| -0.098  coppia/inerzia -1.098  |om_src|/tau -1.526  theta -0.191 | R_stoc   0.0205  cos -0.927
+  passo  300  nodi  2195 | |B| -0.569  angolo +0.040  |correzione| -0.078  coppia/inerzia -1.078  |om_src|/tau -1.330  theta -0.152 | R_stoc   0.0311  cos -0.536
+
+tracce per-nodo -> csv/_test_fork/_tau_luce.csv  (100 righe)
+
+========================================================================================================
+PENDENZE TRASVERSALI FINALI  d(log X)/d(log inerzia)   (passo 300, 2195 nodi)
+========================================================================================================
+  |B|              pendenza -0.569   (r = -0.752, 2195 nodi)
+  angolo           pendenza +0.040   (r = +0.194, 2195 nodi)
+  |correzione|     pendenza -0.078   (r = -0.223, 2195 nodi)
+  coppia/inerzia   pendenza -1.078   (r = -0.953, 2195 nodi)
+  |om_src|/tau     pendenza -1.330   (r = -0.792, 2195 nodi)
+  theta            pendenza -0.152   (r = -0.316, 2195 nodi)
+
+  rapporto mediano (coppia/inerzia) / (|om_src|/tau) = 28.06
+  angolo (B,nb) mediano = 90.00 gradi     amp (rumore su nb) mediana = 0.01533
+
+========================================================================================================
+ESITO (IV) — l'incremento e' DETERMINISTICO o STOCASTICO?  (criterio par. IV.3)
+========================================================================================================
+  R_stoc = |stoc|/|det|  mediana = 0.03114
+  cos(stoc, det) mediana = -0.536      [~0 = rumore isotropo ; ~+-1 = errore sistematico MIO]
+  errore ATTESO della ricostruzione (amp*sqrt2/sin ang) mediano = 0.02168
+  -> R_stoc <= 0.3 : il rumore e' marginale. (IV) ESCLUSO.
+
+========================================================================================================
+FASE 1 — `tau` DEVE essere il TEMPO-LUCE d/cs?  (test analitico, nessun cablaggio)
+========================================================================================================
+  pendenza di tau_ATTUALE (TAU_A*dens/dens_rif)  = +1.176   (r = +0.796, 2195 nodi)
+  pendenza di tau_LUCE    (d/cs)                 = +0.097   (r = +0.351, 2195 nodi)
+
+  pendenza(theta) = pendenza(sigma) + pendenza(tau)/2,  con sigma = coppia/inerzia = -1.078
+     con tau ATTUALE : attesa -0.490    MISURATA ORA -0.152
+     con tau_LUCE    : attesa -1.030    <- e' questo il numero che decide
+
+  VALORI ASSOLUTI:  tau_attuale/DT = 6500 passi     tau_luce/DT = 66.5 passi   (rapporto 0.01023)
+  |omega|_eq va come sqrt(tau)  ->  fattore 0.1011  ->  theta da 4.56e+04 a 4612 gradi/passo
+  cioe' da 126.7 a 12.8 GIRI per passo.  ATTENZIONE: e' un ordine di grandezza nella
+  direzione giusta, NON la soluzione dell'aliasing.
+
+  LETTURA (fissata PRIMA):
+  -> |pendenza(d/cs)| <= 0.3 : theta tornerebbe a -1.030. LA CANCELLAZIONE SI ROMPE.
+
+========================================================================================================
+VERDETTO secondo doc/PREDIZIONE_tracing_omega.md (criterio scritto PRIMA)
+========================================================================================================
+  (I)  coppia/inerzia -1.078 (~ -1) MA theta -0.152 (~ -0.106)
+  -> IL COLPEVOLE E' A VALLE del rapporto: rilassamento, dtn_c o commit.

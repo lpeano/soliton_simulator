@@ -640,6 +640,47 @@ risolve**, e va detto cosi'.
 `|omega|_eq ∝ sqrt(tau)` il fattore e' **~1/13**: da **112 giri/passo a ~9**.
 **Un ordine di grandezza nella direzione giusta, NON la soluzione dell'aliasing.**
 
+**ESITO DELLA FASE 1 — e prima una CORREZIONE A ME STESSO.**
+
+La formula del criterio (`pendenza(theta) = sigma + tau/2`) **va verificata sul caso attuale prima di
+usarla per estrapolare**, e **non regge**:
+
+| | `sigma` | `tau` | attesa | misurata | scarto |
+|---|---|---|---|---|---|
+| run 400 passi, `tau` su **20 nodi** | -1.056 | **+1.812** | -0.150 | -0.113 | **0.037** |
+| run 300 passi, `tau` su **2195 nodi** | -1.078 | **+1.176** | -0.490 | -0.152 | **0.338** |
+
+> **Correzione a `doc/TRACING_omega.md` §6.3 e al commit `9713ddb`:** lì avevo scritto che la catena
+> «si chiude» con scarto **0.037**. Quel numero usava `pendenza(tau)` su **20 nodi**. Su **2195**
+> (`r = +0.796`) lo scarto è **0.338**: **la catena NON si chiude.** Il meccanismo qualitativo regge
+> (√`tau` cancella **parte** del −1) ma il conto quantitativo no, e **resta un residuo di ~0.34
+> nell'esponente che non so spiegare.**
+
+**LA MISURA CHE IL CRITERIO CHIEDEVA:**
+```
+pendenza tau_ATTUALE  = +1.176   (r = +0.796, 2195 nodi)
+pendenza tau_LUCE     = +0.097   (r = +0.351, 2195 nodi)     <- PIATTO
+sigma = coppia/inerzia = -1.078
+```
+**`d/cs` è piatto (+0.097)**: prima banda del criterio, fissata prima di misurare. Un `tau` piatto
+**non può cancellare niente**.
+
+| stima per `theta` con `tau_luce` | |
+|---|---|
+| naive (solo formula) | **-1.030** |
+| **corretta, se il residuo 0.338 resta** | **-0.692** |
+| oggi, misurato | **-0.152** |
+
+> **La stima onesta è −0.69, non −1.03.** Ma in entrambe: **la cancellazione SI ROMPE**, un fattore
+> **4.5-7** sull'esponente.
+
+**L'AMPIEZZA, coi numeri misurati:** `tau/DT` da **6500** a **66.5** passi (rapporto 0.0102);
+`|omega|_eq ∝ √tau` → fattore **0.101** → `theta` da **126.7 a 12.8 GIRI per passo**.
+**Un ordine di grandezza nella direzione giusta, e il settore resta ALIASATO. Non è una cura.**
+
+**Restano aperti:** il **residuo di 0.338** (da stanare prima di fidarsi di qualunque predizione
+quantitativa su questa catena) e l'**aliasing** (13 giri/passo).
+
 **Cosa NON tocca:** la riga 1918, `inerzia`, e la **forma** del termine dissipativo — in particolare
 **non** apre la questione se `-omega/tau` debba essere un allineamento LLG `-lambda n x (n x B)`:
 e' **separata e aperta**, e mescolarla renderebbe inattribuibile qualunque risultato.
