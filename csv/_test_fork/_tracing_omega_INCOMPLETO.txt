@@ -1,0 +1,45 @@
+CONFERMA FLAG IN-RUN: GAMMA_TURBO=1  STEP2=False  FORK_SU2=True  MEM=True  CS_DIN=True  TAU_A=50  DT=0.01
+scena: n=2201 archi=208797   nodi tracciati FISSI: 20 (5 per quartile di inerzia)
+
+C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\_core\fromnumeric.py:3859: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\_core\_methods.py:144: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+  passo    1  nodi     0 | |B| +nan  angolo +nan  |correzione| +nan  coppia/inerzia +nan  |om_src|/tau +nan  theta +nan | R_stoc      nan  cos +nan
+  passo   50  nodi   324 | |B| +0.151  angolo -0.059  |correzione| +0.088  coppia/inerzia -0.912  |om_src|/tau -0.392  theta +0.129 | R_stoc     13.6  cos +0.348
+  passo  100  nodi   724 | |B| -0.137  angolo -0.044  |correzione| -0.169  coppia/inerzia -1.169  |om_src|/tau -0.638  theta -0.067 | R_stoc     12.5  cos +0.349
+  passo  150  nodi  1309 | |B| -0.519  angolo -0.018  |correzione| -0.533  coppia/inerzia -1.533  |om_src|/tau -1.155  theta -0.108 | R_stoc     12.9  cos +0.566
+  passo  200  nodi  1559 | |B| -0.554  angolo +0.007  |correzione| -0.550  coppia/inerzia -1.550  |om_src|/tau -1.175  theta -0.117 | R_stoc     12.2  cos +0.403
+  passo  250  nodi  1881 | |B| -0.886  angolo -0.004  |correzione| -0.889  coppia/inerzia -1.889  |om_src|/tau -1.623  theta -0.174 | R_stoc     10.4  cos +0.452
+  passo  300  nodi  2195 | |B| -0.569  angolo +0.006  |correzione| -0.565  coppia/inerzia -1.565  |om_src|/tau -1.330  theta -0.152 | R_stoc     4.96  cos +0.451
+  passo  350  nodi  2529 | |B| -0.660  angolo -0.001  |correzione| -0.661  coppia/inerzia -1.661  |om_src|/tau -2.472  theta -0.158 | R_stoc     3.53  cos +0.407
+  passo  400  nodi  2781 | |B| -0.534  angolo -0.006  |correzione| -0.538  coppia/inerzia -1.538  |om_src|/tau -1.980  theta -0.113 | R_stoc     2.79  cos +0.643
+
+tracce per-nodo -> csv\_test_fork\_tracing_omega.csv  (180 righe)
+
+========================================================================================================
+PENDENZE TRASVERSALI FINALI  d(log X)/d(log inerzia)   (passo 400, 2781 nodi)
+========================================================================================================
+  |B|              pendenza -0.534   (r = -0.858, 2781 nodi)
+  angolo           pendenza -0.006   (r = -0.025, 2781 nodi)
+  |correzione|     pendenza -0.538   (r = -0.820, 2781 nodi)
+  coppia/inerzia   pendenza -1.538   (r = -0.971, 2781 nodi)
+  |om_src|/tau     pendenza -1.980   (r = -0.935, 2781 nodi)
+  theta            pendenza -0.113   (r = -0.353, 2781 nodi)
+
+  rapporto mediano (coppia/inerzia) / (|om_src|/tau) = 73.88
+  angolo (B,nb) mediano = 59.38 gradi     amp (rumore su nb) mediana = 0.06887
+
+========================================================================================================
+ESITO (IV) — l'incremento e' DETERMINISTICO o STOCASTICO?  (criterio par. IV.3)
+========================================================================================================
+  R_stoc = |stoc|/|det|  mediana = 2.785
+  cos(stoc, det) mediana = +0.643      [~0 = rumore isotropo ; ~+-1 = errore sistematico MIO]
+  errore ATTESO della ricostruzione (amp*sqrt2/sin ang) mediano = 0.09902
+  -> 0.3 < R_stoc < 3 : regime MISTO. Si riporta e NON si sceglie (criterio par. IV.3).
+
+========================================================================================================
+VERDETTO secondo doc/PREDIZIONE_tracing_omega.md (criterio scritto PRIMA)
+========================================================================================================
+  (I)  coppia/inerzia -1.538 (~ -1) MA theta -0.113 (~ -0.106)
+  -> IL COLPEVOLE E' A VALLE del rapporto: rilassamento, dtn_c o commit.

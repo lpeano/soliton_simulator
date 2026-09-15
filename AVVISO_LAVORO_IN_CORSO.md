@@ -9,7 +9,11 @@
 > ## RUN IN VOLO (2026-09-15, dalle 12:24)
 > `csv/_test_fork/_maturazione_s1.txt` e' **CONCLUSO** (2000 passi, esito C, committato).
 > Anche `csv/_test_fork/_trasversale_s1.txt` e' **CONCLUSO** e committato (test trasversale).
-> **NON C'E' NESSUN RUN IN VOLO.**
+>
+> ## RUN IN VOLO
+> `csv/_test_fork/_tracing_omega.txt` e' **IN SCRITTURA** (tracing di omega, versione CORRETTA).
+> `csv/_test_fork/_tracing_omega_INCOMPLETO.txt` e' il run **con un termine mancante**, conservato
+> come evidenza: **NON usarlo come misura della fisica.**
 >
 > **NON C'E' NESSUN ALTRO RUN IN VOLO.** I file `csv/_test_fork/_vuoto_k300_*` sono **risultati
 > definitivi**, non intermedi: il verdetto e' in `doc/ESITO_scan_turbo_K300.md` ed e' committato

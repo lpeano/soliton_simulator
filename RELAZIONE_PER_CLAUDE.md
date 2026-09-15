@@ -514,6 +514,52 @@ popolazione, e vale il test per decili, non il confronto a due classi. **Indizio
 
 ---
 
+## 6-octies. TRACING di `omega` (2026-09-15) — **il controllo ha stanato un termine mancante, ed era MIO**
+
+Documenti: `doc/PREDIZIONE_tracing_omega.md` (criterio, committato **prima**: `075a09f` + esito (IV)
+in `457abe4`) e **`doc/TRACING_omega.md`**. **Run corretto IN VOLO** mentre scrivo.
+
+**Il riscontro.** `correzione` ha **DUE** termini (righe 1895-1901) e io ne avevo ricostruito **uno**:
+```
+correzione = cross(B, nb)
+if CAMPO_SPINORIALE:  correzione += cross(_nb_grav(), nb)      <- ATTIVO nei run del fork
+```
+Il secondo e' il torque verso il Bloch del **campo emesso spinoriale**. La mia catena lo ignorava.
+
+**Come e' stato stanato: dal controllo, non dall'occhio.** Nel criterio (§IV.4, scritto **prima**)
+avevo messo un controllo sulla **direzione** del residuo, perche' un `R_stoc` alto ha due cause:
+rumore genuino **oppure un mio errore**. Regola: `cos(stoc, det)` ~ 0 = rumore isotropo; ~ ±1 =
+**errore sistematico mio**, e allora **(IV) non si dichiara**.
+**Misurato `cos = +0.643`**, oltre la soglia 0.5, e **stabile su tutti e otto i campioni**
+(+0.348 … +0.643). Un residuo **allineato e persistente non e' rumore: e' formula che manca.**
+E l'ampiezza torna: con `R_stoc ~ 2.8` e `cos ~ 0.64`, il deterministico vero e' ~`1+R·cos` = **2.8x**
+quello ricostruito — **mancava un termine dello stesso ordine del primo**.
+
+> **Senza quel controllo avrei dichiarato l'ESITO (IV)** — *"e' il rumore che guida omega"* — con
+> `R_stoc` fra 13 e 2.8 a sostenerlo. **Sarebbe stato un falso positivo:** avrei attribuito al
+> rumore un effetto che e' **una riga di codice**.
+
+**Tre esiti che il termine mancante NON cambia** (perche' non dipendono da esso):
+1. **Il dissipativo NON domina:** rapporto coppia/dissipazione = **73.88**. L'ipotesi *"omega e'
+   governato dal rilassamento"* e' **esclusa**, non rinviata.
+2. **L'angolo (B,nb) e' PIATTO:** pendenza **-0.006** (`r = -0.025`), mediana **59.4 gradi**.
+   Nessun allineamento crescente con la densita' -> **(II-b) escluso**, e in modo robusto, perche'
+   `B` e' ricostruito **esatto** (il codice lo costruisce da `_nb_prec`, non dal `nb` rumoroso).
+3. **`|B|` DECRESCE** con l'inerzia (**-0.534**), non cresce -> **(II-a) escluso**.
+
+E una conferma incrociata: il `theta` misurato qui, **-0.113**, coincide col **-0.106** del test
+trasversale di ieri, misurato in modo indipendente. **Le due misure si confermano a vicenda.**
+
+**Cosa NON dichiaro.** Il run incompleto stampava **(I)**, colpevole a valle. **Non lo dichiaro:**
+era calcolato con `coppia/inerzia` dimezzata. Il run corretto e' in volo, tracer **ri-sigillato PASS**
+dopo la modifica e **prima** dell'uso. Il run incompleto e' conservato come evidenza in
+`csv/_test_fork/_tracing_omega_INCOMPLETO.txt`.
+
+**L'errore era nella MIA ricostruzione, non nel simulatore:** `soliton_simulator.py` non e' stato
+toccato, blob `f5887254`.
+
+---
+
 ## 7. IL LAVORO DI CONTORNO, in breve
 
 - **Profilazione** (`doc/PROFILAZIONE_costo_run.md`): il collo **non** è il loop CFL. I due hoist
