@@ -195,6 +195,66 @@ di trattarli come stabili. `tau_dec` invece e' su due semi e 4163 coppie.
 
 ---
 
+## 6-ter. GILBERT / FDT (2026-09-15) — **ipotesi NON confermata, nessun cablaggio**
+
+Documento: **`doc/ANALISI_gilbert_fdt.md`**. Mandato: *il termine mancante e' lo smorzamento di
+Gilbert, e il FDT ne fissa il coefficiente?* **Testato. Cade — e cade prima della derivazione.**
+
+**Due premesse del mandato sono COMMENTI STALE.** E' il caso d'uso di §0:
+- *"`omega_s` e' conservativo: si conserva, non rilassa"* (righe **868** e **1803**) -> **FALSO**.
+  L'unico aggiornamento per passo e' la riga **1918**, che contiene `- omega_src/_tau`:
+  **la dissipazione c'e' gia'.**
+- *"il calcio termico alimenta `omega_s`"* (riga ~1590) -> **FALSO**: e' dentro `semina()`, quindi e'
+  il punto zero **alla nascita del nodo**, non una sorgente per passo.
+
+Quindi lo schema *"accumulatore conservativo + rumore che lo alimenta = crescita illimitata"*
+**non descrive questo codice**: mancano entrambi i pezzi.
+
+**E la crescita non e' quella che avevo dedotto nemmeno io.** Da un solo campione avevo inferito
+crescita *balistica*; ho misurato la traiettoria **prima** di scrivere il verdetto (150 passi, 15
+punti) ed e' **DIFFUSIVA**: `omega/sqrt(n)` costante entro il **4.6%**, `omega/n` varia di 3.5x.
+
+**E c'e' un PLATEAU.** Random walk smorzato, `omega_eq = sigma*sqrt(tau/(2 dt))`:
+
+| | |
+|---|---|
+| previsto | **7.06e4** |
+| misurato al passo 150 | **7.27e4** (scarto x1.03) |
+| theta al plateau | **112 giri per passo** |
+
+> **La dissipazione non manca: c'e', funziona, e un equilibrio finito lo produce gia'.**
+> Il problema e' *dove* sta quel plateau — e dipende dall'**ingresso** (coppia/inerzia), non
+> dall'uscita. **La diagnosi corretta resta l'inerzia a 1e-7.**
+
+**Il coefficiente si deriva davvero, e a zero parametri.** Dal rumore sul Bloch: `D = 2 amp^2/dt`;
+imponendo che l'equilibrio di Langevin coincida con quello di Boltzmann,
+`lambda = amp^2 |B| / (2 dt kT)`. Con l'unica temperatura parameter-free (`kT = Lam`, l'energia del
+vuoto da cui il rumore stesso e' costruito) **`Lam` si cancella**: `lambda = |B|/(2 dt)`.
+
+| tempo | valore |
+|---|---|
+| `tau_smorzamento` (allineamento FDT **derivato**) | **28.8 passi** |
+| `tau_disordine` (rimescolamento **misurato**) | **0.0030 passi** |
+
+> **Terzo ramo della regola scritta prima: lo smorzamento FDT e' ~10^4 volte troppo lento.
+> REPERTO, non fallimento.** La FASE 2 **non e' partita**.
+
+**Controllo di consistenza:** l'equipartizione darebbe `kT = 800` contro `Lam = 4.4e-5` — rapporto
+~2e7. **Non e' equilibrio termico ma dinamico pilotato**, ed e' la ragione strutturale: il FDT
+accoppia una dissipazione a una **fluttuazione**, e qui il termine dominante non lo e'.
+
+**Non e' un fallimento dell'idea di Gilbert:** il termine LLG resta l'**unico** che allinea. Cade il
+fatto che il suo coefficiente FDT basti *a questa scala*. Metterne uno piu' grande sarebbe
+**sceglierlo** (§3) e mettere dissipazione senza fluttuazione: lo stesso errore, ribaltato.
+
+**Una correzione a un fatto MIO.** `CLAUDE.md` §9 diceva (scritto da me ieri)
+`omega_eq = tau * coppia/inerzia`, proporzionale a `tau`: e' il punto fisso **deterministico**, e
+sovrastima di ~20x. **Corretto in §9**: `omega_eq ~ sqrt(tau)`. La conclusione operativa resta
+(piu' memoria = piu' rotazione), ma l'esponente era sbagliato e la diagnosi *"manca la
+dissipazione"* era **falsa**.
+
+---
+
 ## 7. IL LAVORO DI CONTORNO, in breve
 
 - **Profilazione** (`doc/PROFILAZIONE_costo_run.md`): il collo **non** è il loop CFL. I due hoist
@@ -214,32 +274,38 @@ di trattarli come stabili. `tau_dec` invece e' su due semi e 4163 coppie.
 
 ## 8. DOVE SIAMO
 
-**Il quadro e' cambiato di natura, non di segno.**
+**Il quadro e' cambiato di natura, non di segno — e ora sappiamo anche cosa NON e'.**
 
-Fino a ieri: sei misure convergenti, *"il settore di spin non ha una forza organizzante emergente"*,
-e la conclusione implicita che **mancasse un meccanismo**. Da oggi sappiamo che **non manca**:
-l'ordine **nasce a ogni mitosi** (chi = 0 esatto) e viene **distrutto ~300 volte piu' in fretta di
-quanto nasca**. E sappiamo **perche'**: il Bloch fa **~67 giri per tick**, perche' la coppia e'
-ordinaria ma l'inerzia e' una densita' di **1.2e-7**.
+L'ordine di spin **non manca**: nasce a ogni mitosi (chi = 0 esatto) e viene distrutto ~300 volte
+piu' in fretta di quanto nasca. Il meccanismo e' che il Bloch fa **~67-112 giri per tick**, perche'
+la coppia e' ordinaria ma l'inerzia e' una densita' di **1.2e-7**.
+
+E oggi si e' chiusa anche la prima ipotesi di cura: **non e' dissipazione mancante.** La
+dissipazione c'e' (riga 1918), e' efficace, produce gia' un plateau — e il plateau e' comunque
+aliasato. Il coefficiente di Gilbert derivato dal FDT e' **10^4 volte troppo lento**.
 
 > **I sei lati restano validi. Cambia cio' che si puo' concludere da essi:** non *"non esiste una
 > fisica ordinante"*, ma *"in questo regime numerico nessun ordine sopravvive a un tick"*.
+> E ora sappiamo che **non si aggiusta aggiungendo attrito**: si aggiusta sulla **scala**.
 
 E' la **stessa radice** del fatto gia' noto in `CLAUDE.md` §6 (*a densita' reali cs e' MORTO*): la
 densita' minuscola alle scale simulabili **congela** un settore e **fa esplodere** l'altro. Un solo
-problema di scala, due sintomi opposti.
+problema di scala, due sintomi opposti — e ora anche una cura esclusa.
 
-**Nessun run in volo. Quattro cose aspettano te:**
-1. **sotto-passo per lo spin** (lo stesso principio di `nsub` per la metrica) **oppure** rileggere
-   tutto dove la densita' e' O(1);
-2. il **test decisivo su `TAU_A`** che non ho fatto (cambia la fisica): verificare
-   `omega_eq` proporzionale a `tau`. **`--regime` non serve**, muove quattro interruttori insieme;
-3. **`_pesi()`**: FASE B non eseguita, la premessa del mandato e' falsa (`doc/REPERTO_pesi_ricorsione.md`);
-4. **`:5318`**: il diaglog re-implementa `cs` inline — sotto turbo quella colonna mente.
+**Nessun run in volo. Cinque cose aspettano te:**
+1. **alzare l'inerzia**, cioe' rileggere tutto dove la densita' e' O(1): toglie la causa, non il
+   sintomo. E' la leva che il lavoro di oggi indica come la sola non-cosmetica;
+2. **sotto-passo per lo spin** (lo stesso principio di `nsub`): presidio numerico onesto, non una
+   cura. NB: con la crescita **diffusiva con plateau** misurata oggi il numero di sotto-passi
+   **non diverge** — ne servirebbero ~112, non "sempre di piu'";
+3. **correggere i due commenti stale** alle righe **868** e **1803** (un commit suo): sono loro ad
+   aver fatto partire il mandato di oggi da una diagnosi sbagliata;
+4. **`_pesi()`**: FASE B non eseguita, la premessa del mandato e' falsa (`doc/REPERTO_pesi_ricorsione.md`);
+5. **`:5318`**: il diaglog re-implementa `cs` inline — sotto turbo quella colonna mente.
 
-Il **gate** e' a `c0803713` in `CLAUDE.md` §0, il blob sul disco e' **`f5887254`** (cablaggio turbo
-+ i due fix). **Non ri-timbrato di proposito:** il turbo e' un ramo diagnostico, e si timbra a pezzo
-compiuto. `soliton_simulator.py` **non e' stato toccato** in tutto il lavoro del bilancio.
+Il **gate** e' a `c0803713` in `CLAUDE.md` §0, il blob sul disco e' **`f5887254`**. **Non
+ri-timbrato di proposito.** `soliton_simulator.py` **non e' stato toccato** in nessuno dei lavori
+del 14 e 15 settembre: bilancio, Gilbert/FDT, `_pesi`, profilazione.
 
 Dettagli: `doc/ESITO_scan_turbo_K300.md`, `doc/REPERTO_pesi_ricorsione.md`,
 `doc/PROFILAZIONE_costo_run.md`, `doc/REPERTO_gamma_condiviso.md`, `doc/PREDIZIONE_*.md`,
