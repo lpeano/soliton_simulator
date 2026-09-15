@@ -914,10 +914,6 @@ class Rete:
         # cs del passo PRECEDENTE, cachato per tau = d/cs: la coppia gira PRIMA del settore metrico,
         # quindi il cs del passo corrente non esiste ancora quando serve. E' un RITARDO: va bene.
         self._cs_nodo_prev = None
-        # contatori del FALLBACK cs = CS_M in _tempo_luce_nodo (diagnostici, mai letti dalla fisica).
-        self._cs_chiamate = 0
-        self._cs_fallback = 0
-        self._cs_fallback_ultimo = None
         # ritmo del tempo proprio locale del passo corrente (None = orologio globale), esposto da
         # step() perche' il rilassamento della memoria si misuri in dt_n = DT*r e non nel tic globale.
         self._r_corrente = None
@@ -1173,25 +1169,13 @@ class Rete:
         copertura opposta -> antichirale, coerente con perc_chi=-perc_chi[genitore]). Estende anche
         _psi_prec (evita il reset spurio globale in ritmo() su len!=n). No-op se --spinore-corretto off.
         Va chiamata DOPO la crescita di self.phi (self.n gia' nuovo): n0 = self.n - len(src)."""
+        if not (SPINORE_CORRETTO or CAMPO_SPINORIALE):   # [FASE 5] eredita' spinore attiva anche nei run --campo-spinoriale
+            return
         src = np.asarray(src, int); k = len(src)
         if k == 0:
             return
         n0 = self.n - k                                   # conteggio PRIMA della crescita
         if n0 <= 0:
-            return
-        # [FIX 2026-09-15] cs DEL PASSO PRECEDENTE: il figlio eredita dal padre, ESATTAMENTE come
-        # _nb_ret / _nb_prec / omega_s / _psi_spinor / _psi_prec. Senza, dopo ogni mitosi risulta
-        # len(_cs_nodo_prev) < n, la guardia di _tempo_luce_nodo fallisce e si cade nel fallback
-        # cs = CS_M: MISURATO, scattava nell'80% dei passi, cioe' `tau = d/cs` calcolava in realta'
-        # `tau = d/CS_M` -- e lo stesso valeva per lo STRATO 1, che usa lo stesso metodo.
-        # STA PRIMA della guardia sugli spinori di proposito: questa cache vive sotto
-        # CS_DINAMICO and (FORK_SU2_MEM or STEP2_OROLOGIO), NON sotto --spinore-corretto; metterla
-        # dopo lascerebbe il difetto vivo proprio nei run STEP 2. Se la cache non esiste (flag OFF)
-        # e' un no-op esatto: nessun valore nuovo, nessun parametro, nessun floor.
-        _csp_er = getattr(self, "_cs_nodo_prev", None)
-        if _csp_er is not None and len(_csp_er) >= n0:
-            self._cs_nodo_prev = np.concatenate([_csp_er, np.asarray(_csp_er, float)[src]])
-        if not (SPINORE_CORRETTO or CAMPO_SPINORIALE):   # [FASE 5] eredita' spinore attiva anche nei run --campo-spinoriale
             return
         if hasattr(self, "_nb") and self._nb is not None and len(self._nb) >= n0:
             self._nb = np.vstack([self._nb, self._nb[src]])
@@ -2541,10 +2525,7 @@ class Rete:
             esiste gia' nel sistema;
           * `1e-12` / `1e-30` sono le regolarizzazioni anti-zero gia' presenti, non soglie nuove.
 
-        PURE-READ SULLA FISICA: non consuma `net.rng` e non scrive nessuna grandezza che la fisica
-        rilegga. Scrive SOLO i tre accumulatori diagnostici `_cs_chiamate` / `_cs_fallback` /
-        `_cs_fallback_ultimo` (contatore del ramo else, 2026-09-15): un fallback non misurato e' un
-        comportamento sconosciuto, e questo ne scattava nell'80% dei passi.
+        PURE-READ: non scrive stato, non consuma `net.rng`.
         """
         n = self.n
         dd = self.d
@@ -2558,15 +2539,9 @@ class Rete:
             d_nodo = np.full(n, LAM)        # fallback: LAM e' la scala gia' esistente (par.3)
         d_nodo = np.maximum(d_nodo, 1e-12)
         csp = getattr(self, "_cs_nodo_prev", None)
-        # CONTATORE DEL FALLBACK (diagnostico, non fisico): quante volte questo ramo else e' davvero
-        # quello che gira? Un fallback mai misurato e' un comportamento sconosciuto. Non consuma RNG,
-        # non tocca nessuna grandezza letta dalla fisica: sono soli tre accumulatori.
-        self._cs_chiamate = getattr(self, "_cs_chiamate", 0) + 1
         if csp is not None and len(csp) >= n:
             cs_nodo = np.maximum(np.asarray(csp, float)[:n], 1e-12)   # cs di UN PASSO FA (e' un ritardo)
         else:
-            self._cs_fallback = getattr(self, "_cs_fallback", 0) + 1
-            self._cs_fallback_ultimo = (int(n), int(len(csp)) if csp is not None else -1)
             # --cs-dinamico OFF (o primo passo): cs e' costante = CS_M. Alle densita' attuali cs e'
             # comunque quasi-costante (I~0.05 contro soglia ~400), quindi tau ~ d/CS_M: il RITARDO
             # esiste, ma la sua VARIAZIONE spaziale (la curvatura) e' debole finche' cs non e' vivo.

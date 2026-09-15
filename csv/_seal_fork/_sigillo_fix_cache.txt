@@ -1,0 +1,50 @@
+========================================================================================================
+P1 - flag OFF (no --fork-su2-mem, no --step2-orologio, no --tau-luce): la cache non nasce
+========================================================================================================
+  nuovo: FORK_SU2_MEM=False  STEP2_OROLOGIO=False  TAU_LUCE=False
+  PRESIDIO: uno zero con N DIVERSO e' MANCANZA DI CONFRONTO, non identita'.
+    n_A = 1692   n_B = 1692   ->  CONFRONTABILI
+    21 campi, PEGGIOR max|A-B| = 0.000e+00   stato RNG identico
+  P1: PASS
+
+========================================================================================================
+P1b - CONTROLLO: col flag ON i due file DEVONO differire (una patch morta passerebbe P1)
+========================================================================================================
+  PRESIDIO: uno zero con N DIVERSO e' MANCANZA DI CONFRONTO, non identita'.
+    n_A = 1821   n_B = 1771   ->  NON CONFRONTABILI
+  P1b (devono DIFFERIRE): PASS   (peggior scarto nan)
+
+========================================================================================================
+P2 - IL CONTATORE del ramo else, PRIMA e DOPO, sugli STESSI passi
+========================================================================================================
+  PRIMA  (file pre-patch): fallback   23 su   32 chiamate =  71.88 %
+  DOPO   (file patchato) : fallback    0 su   32 chiamate =   0.00 %
+  contatori interni del file patchato: _cs_fallback=0  _cs_chiamate=32  ultimo(n,len)=None
+  P2 (prima > 50 %, dopo <= 5 %): PASS
+
+========================================================================================================
+P3 - coerenza della cache passo per passo: len(_cs_nodo_prev) == n
+========================================================================================================
+  passo |     n | len PRIMA | len DOPO | DOPO usabile?
+      1 |  1196 |      1196 |     1196 | SI
+      2 |  1196 |      1196 |     1196 | SI
+      6 |  1196 |      1196 |     1196 | SI
+     12 |  1355 |      1322 |     1355 | SI
+     20 |  1573 |      1543 |     1573 | SI
+     30 |  1771 |      1804 |     1771 | SI
+  passi con cache INUSABILE: PRIMA 24/30    DOPO 0/30
+  P3: PASS
+
+========================================================================================================
+P4 - stabilita'
+========================================================================================================
+  |nb| max scostamento da 1: 2.220e-16    NaN/inf su nb+psi: 0
+  cs cache: min 1.99954  max 2  finiti True   (CS_M = 2)
+  cs DISPERSIONE: max/min = 1.000230   -> cs VARIA davvero (il fallback lo appiattiva a CS_M)
+  tau = d/cs: min 0.0271257  max 1.05089  finiti True
+  P4: PASS
+
+========================================================================================================
+ESITO: P1=PASS   P1b=PASS   P2=PASS   P3=PASS   P4=PASS
+SIGILLO PATCH CACHE: PASS
+========================================================================================================
