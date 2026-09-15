@@ -1,0 +1,28 @@
+====================================================================================================
+CONTROLLO SUI SEMI - 3 semi x 2 bracci (ON pre-patch, ON post-patch), 300 passi
+====================================================================================================
+  seme 1   ON pre  -0.4265 +- 0.0091 (n 2534, N 3999,  43.55 giri)
+           ON post -0.4710 +- 0.0107 (n 2690, N 4100,  42.81 giri)    Delta = -0.0445
+  seme 2   ON pre  -0.4846 +- 0.0099 (n 2201, N 3183,  32.50 giri)
+           ON post -0.4479 +- 0.0082 (n 2154, N 3121,  30.70 giri)    Delta = +0.0367
+  seme 3   ON pre  -0.4412 +- 0.0080 (n 2568, N 3997,  44.85 giri)
+           ON post -0.5047 +- 0.0116 (n 2459, N 3768,  41.82 giri)    Delta = -0.0635
+
+====================================================================================================
+IL NULLO - dispersione della pendenza FRA SEMI, a codice invariato
+====================================================================================================
+  ON pre  : -0.4265  -0.4846  -0.4412   media -0.4508   dev.std FRA SEMI 0.0302
+  ON post : -0.4710  -0.4479  -0.5047   media -0.4745   dev.std FRA SEMI 0.0286
+  CONFRONTO: la SE INTERNA a un run vale ~0.010. La dispersione FRA SEMI vale 0.0302 / 0.0286.
+             -> la barra giusta e' PIU' grande di quella usata nel z = 3.16
+
+====================================================================================================
+IL TEST ONESTO - media dei Delta contro la SE della media, dai Delta stessi
+====================================================================================================
+  Delta per seme: -0.0445  +0.0367  -0.0635
+  media -0.0238   dev.std 0.0533   SE della media 0.0307   t = -0.77  (gdl 2)
+  segno concorde su tutti i semi: NO
+
+  LETTURA: il segno NON e' concorde. Il z = 3.16 del seme 1 era DISPERSIONE DI RUN,
+           e la frazione '16.9%% recuperato' NON e' un numero che si puo' riportare.
+====================================================================================================

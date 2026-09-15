@@ -171,6 +171,59 @@ solo per una perturbazione numericamente irrilevante, e **quella non e' stata mi
 
 Lo scrivo **contro** la mia stessa posizione, non a suo favore: e' un'obiezione che indebolirebbe
 allo stesso modo una conferma. E per `CLAUDE.md` par.2.7 (*mai su un solo seme*) va **misurata**, non
-discussa: **controllo in corso — i due bracci ON su un secondo seme.** Se `Delta` si ripete a ~-0.04,
-e' sistematico; se cambia segno o taglia, il `3.16` era dispersione di run e il numero da riportare
-e' un'altra cosa.
+discussa.
+
+---
+
+## 7. IL CONTROLLO SUI SEMI — **il `z = 3.16` era DISPERSIONE DI RUN. Il "16.9 %" si RITIRA.**
+
+`csv/_test_fork/_controllo_semi.py` (committato **prima** del run, `87f90d7`; output
+`csv/_test_fork/_controllo_semi.txt`), 3 semi x 2 bracci, 300 passi, stessa scena.
+
+| seme | ON **pre**-patch | ON **post**-patch | `Delta` |
+|---|---|---|---|
+| 1 | -0.4265 +- 0.0091 (N 3999, 43.55 giri) | -0.4710 +- 0.0107 (N 4100, 42.81 giri) | **-0.0445** |
+| 2 | -0.4846 +- 0.0099 (N 3183, 32.50 giri) | -0.4479 +- 0.0082 (N 3121, 30.70 giri) | **+0.0367** |
+| 3 | -0.4412 +- 0.0080 (N 3997, 44.85 giri) | -0.5047 +- 0.0116 (N 3768, 41.82 giri) | **-0.0635** |
+
+> **Il segno NON e' concorde.** Il seme 2 va **nella direzione opposta**.
+> `media(Delta) = -0.0238`, dev.std `0.0532`, **SE della media `0.0307`, `t = -0.77` (2 gdl)**.
+
+### Il nullo, che nessuno aveva misurato
+
+| | |
+|---|---|
+| `SE` **interna** a un singolo run (quella del `z = 3.16`) | **~0.010** |
+| dispersione **FRA SEMI** a codice invariato, ramo pre | **0.0302** |
+| dispersione **FRA SEMI** a codice invariato, ramo post | **0.0286** |
+
+> **La barra giusta e' TRE VOLTE quella che avevo usato.** Su un sistema caotico la pendenza
+> trasversale cambia da run a run di **0.03** *senza che il codice cambi*: e' il valore sotto
+> ipotesi nulla, ed era **zero solo nella mia testa**.
+
+### Cosa cade e cosa regge
+
+**CADE** — `z = 3.16` e **"16.9 % del divario recuperato"**: **non sono numeri riportabili.** Si
+ritirano dal par.6, da `RAMIFICAZIONI` C8, da `CLAUDE.md` par.9 e dalla relazione.
+
+**NON E' UNA CONFERMA DELLA MIA PREDIZIONE.** `IC95` su `Delta` (t, 2 gdl) = **[-0.1560, +0.1084]**,
+ampiezza **0.26**: contiene lo **zero** *e* contiene il **-0.1196** che l'ipotesi "~meta'" del
+mandato richiederebbe. **Tre semi non decidono niente su questa domanda.** L'unica frase onesta e':
+**l'esperimento non ha la potenza per distinguere un effetto della cura da zero.** Il mio errore di
+ragionamento del par.6 (ampiezza contro correlazione) **resta un errore**; semplicemente, la misura
+che sembrava dimostrarlo non lo dimostrava.
+
+**REGGE, e robustamente:**
+
+| affermazione | numero | contro la barra giusta (0.03) |
+|---|---|---|
+| **la FASE 2 non si chiude** | ON post medio **-0.4745**, divario verso -0.69 = **-0.2155**, SE della media **0.0165** | **z = 13.1** |
+| **`--tau-luce` fa qualcosa di grande** | contrasto ON-OFF **-0.3219** | **11 volte** la dispersione fra semi |
+| `theta` resta aliasato | **30.7 - 44.9 giri/passo** su tutti e sei i run | fuori scala |
+
+### La cura resta, per la ragione che non dipende da questa misura
+
+Il difetto era **reale e misurato** (fallback **71.88 % -> 0.00 %**, cache inusabile **24/30 -> 0/30**,
+sigillo **5/5 PASS**): quelli restano. Cio' che si ritira e' l'**effetto fisico attribuito alla cura**,
+non la cura. E resta valida la ragione indipendente: `cs` e' quasi-costante **oggi**; quando sara'
+vivo, una cache scartata a ogni mitosi sarebbe un difetto **grande**, e lo sarebbe in silenzio.
