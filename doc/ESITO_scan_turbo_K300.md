@@ -64,6 +64,31 @@ La differenza fra i due bracci sulla firma principale è **0.008°**, contro una
 
 **Nemmeno `chi_p90` si muove** — e quelli sono esattamente gli archi dove `cs` è crollato.
 
+### Due cose che rendono B **piu' forte**, non piu' debole
+
+**1. Il braccio OFF ha forzato DI PIU'.** `cs_min/CS_M` finale: **0.032 (OFF) contro 0.047 (ON)**.
+Cioe' il braccio **senza** Step 2 e' arrivato **piu' in fondo nel pozzo** — e non ha mostrato
+struttura comunque. Quindi il risultato non e' solo *"lo Step 2 non aggiunge nulla"*:
+
+> **nemmeno il gradiente di `cs` piu' estremo dei due produce ordine.**
+
+Il confronto non e' fra "forzato" e "non forzato": entrambi i bracci sono forzati all'osso, e
+quello forzato **di piu'** e' proprio quello **senza** l'aggancio.
+
+**2. «Ma state misurando il vuoto?» — no, e lo dicono i numeri stessi.** E' la prima obiezione che
+farebbe un lettore esterno, ed e' gia' chiusa dalla firma `chi_p90`: il p90 sono gli archi **piu'
+densi**, cioe' il **cuore delle masse**, non il vuoto attorno.
+
+| | `chi` materia | `chi` **p90** (archi piu' densi) |
+|---|---|---|
+| ON | 89.9865 | **90.0309** |
+| OFF | 89.9941 | **89.9609** |
+| nullo casuale | 90.000 | 90.000 |
+
+**Identico al nullo anche li'.** La misura copre **anche la materia piu' densa**, e anche li' i
+Bloch sono casuali. E' il punto che rende il risultato robusto, ed e' il motivo per cui `chi_p90`
+e' stata messa nell'osservatore fin dall'inizio: senza, l'obiezione sarebbe aperta.
+
 ### La terza firma, quella che discrimina
 
 L'autocorrelazione spaziale `⟨n_i · n_j⟩` è l'unica che separa **domini** da **collasso globale**
