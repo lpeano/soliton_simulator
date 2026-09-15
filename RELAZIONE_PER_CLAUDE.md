@@ -214,12 +214,32 @@ di trattarli come stabili. `tau_dec` invece e' su due semi e 4163 coppie.
 
 ## 8. DOVE SIAMO
 
-**Chiuso come negativo pulito, sei lati.** Lo scan del turbo era l'ultimo punto aperto e ora è
-chiuso. **Non c'è un run in volo.**
+**Il quadro e' cambiato di natura, non di segno.**
 
-Il **gate** è a `c0803713` in `CLAUDE.md` §0, mentre sul disco il blob è **`f5887254`**: la
-differenza sono il cablaggio del turbo e i due fix. **Non ri-timbrato di proposito**, per non
-timbrare a metà; da ri-timbrare a pezzo compiuto.
+Fino a ieri: sei misure convergenti, *"il settore di spin non ha una forza organizzante emergente"*,
+e la conclusione implicita che **mancasse un meccanismo**. Da oggi sappiamo che **non manca**:
+l'ordine **nasce a ogni mitosi** (chi = 0 esatto) e viene **distrutto ~300 volte piu' in fretta di
+quanto nasca**. E sappiamo **perche'**: il Bloch fa **~67 giri per tick**, perche' la coppia e'
+ordinaria ma l'inerzia e' una densita' di **1.2e-7**.
+
+> **I sei lati restano validi. Cambia cio' che si puo' concludere da essi:** non *"non esiste una
+> fisica ordinante"*, ma *"in questo regime numerico nessun ordine sopravvive a un tick"*.
+
+E' la **stessa radice** del fatto gia' noto in `CLAUDE.md` §6 (*a densita' reali cs e' MORTO*): la
+densita' minuscola alle scale simulabili **congela** un settore e **fa esplodere** l'altro. Un solo
+problema di scala, due sintomi opposti.
+
+**Nessun run in volo. Quattro cose aspettano te:**
+1. **sotto-passo per lo spin** (lo stesso principio di `nsub` per la metrica) **oppure** rileggere
+   tutto dove la densita' e' O(1);
+2. il **test decisivo su `TAU_A`** che non ho fatto (cambia la fisica): verificare
+   `omega_eq` proporzionale a `tau`. **`--regime` non serve**, muove quattro interruttori insieme;
+3. **`_pesi()`**: FASE B non eseguita, la premessa del mandato e' falsa (`doc/REPERTO_pesi_ricorsione.md`);
+4. **`:5318`**: il diaglog re-implementa `cs` inline — sotto turbo quella colonna mente.
+
+Il **gate** e' a `c0803713` in `CLAUDE.md` §0, il blob sul disco e' **`f5887254`** (cablaggio turbo
++ i due fix). **Non ri-timbrato di proposito:** il turbo e' un ramo diagnostico, e si timbra a pezzo
+compiuto. `soliton_simulator.py` **non e' stato toccato** in tutto il lavoro del bilancio.
 
 Dettagli: `doc/ESITO_scan_turbo_K300.md`, `doc/REPERTO_pesi_ricorsione.md`,
 `doc/PROFILAZIONE_costo_run.md`, `doc/REPERTO_gamma_condiviso.md`, `doc/PREDIZIONE_*.md`,
