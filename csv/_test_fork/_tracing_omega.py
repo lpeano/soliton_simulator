@@ -156,6 +156,26 @@ def _ingredienti(S, net):
     Lam = float(np.mean(dens))
     amp = np.sqrt(Lam) / (1.0 + dens / max(Lam, 1e-300))     # l'ampiezza del rumore su nb
 
+    # --- tau_LUCE = d/cs, costruito con la STESSA formula gia' nel file (`_bloch_ritardato`,
+    # Strato 1): d_nodo = media degli archi incidenti, cs_nodo dalla cache `_cs_nodo_prev`.
+    # Non e' una formula nuova: e' quella che il fork usa gia', per la stessa ragione causale.
+    ii_a, jj_a, dd = lav.i, lav.j, lav.d
+    if len(ii_a) and len(dd) == len(ii_a):
+        grado_a = (np.bincount(ii_a, minlength=n) + np.bincount(jj_a, minlength=n)).astype(float)
+        somma_a = (np.bincount(ii_a, weights=dd, minlength=n) +
+                   np.bincount(jj_a, weights=dd, minlength=n))
+        d_nodo = somma_a / np.maximum(grado_a, 1.0)
+        d_nodo[grado_a <= 0] = S.LAM
+    else:
+        d_nodo = np.full(n, S.LAM)
+    d_nodo = np.maximum(d_nodo, 1e-12)
+    csp = getattr(lav, "_cs_nodo_prev", None)
+    if csp is not None and len(csp) >= n:
+        cs_nodo = np.maximum(np.asarray(csp, float)[:n], 1e-12)
+    else:
+        cs_nodo = np.full(n, S.CS_M)
+    tau_luce = np.maximum(d_nodo / cs_nodo, 1e-30)
+
     om_vec = np.asarray(lav.omega_s[:n], float)
     om_src = np.linalg.norm(om_vec, axis=1)
     coppia_su_in = corm / inerzia
@@ -168,7 +188,8 @@ def _ingredienti(S, net):
     return dict(n=n, inerzia=inerzia, pavimento=pavimento, Bm=Bm, kvic=kvic, ang=ang,
                 corm=corm, coppia_su_in=coppia_su_in, tau=tau, om_src=om_src, diss=diss,
                 amp=amp, eta=np.asarray(lav.eta[:n], float),
-                om_vec=om_vec, det_vec=det_vec, dtn=dtn, err_att=err_att)
+                om_vec=om_vec, det_vec=det_vec, dtn=dtn, err_att=err_att,
+                d_nodo=d_nodo, cs_nodo=cs_nodo, tau_luce=tau_luce)
 
 
 def pend(x, y):
@@ -346,6 +367,48 @@ def main():
         print("  -> 0.3 < R_stoc < 3 : regime MISTO. Si riporta e NON si sceglie (criterio par. IV.3).")
     else:
         print("  -> R_stoc <= 0.3 : il rumore e' marginale. (IV) ESCLUSO.")
+    print("")
+    print("=" * 104)
+    print("FASE 1 — `tau` DEVE essere il TEMPO-LUCE d/cs?  (test analitico, nessun cablaggio)")
+    print("=" * 104)
+    v2 = ~g["pavimento"]
+    x2 = g["inerzia"][v2]
+    p_tl, n_tl, r_tl = pend(x2, g["tau_luce"][v2])
+    p_ta, n_ta, r_ta = pend(x2, g["tau"][v2])
+    p_si = u["coppia/inerzia"][0]
+    print("  pendenza di tau_ATTUALE (TAU_A*dens/dens_rif)  = %+.3f   (r = %+.3f, %d nodi)"
+          % (p_ta, r_ta, n_ta))
+    print("  pendenza di tau_LUCE    (d/cs)                 = %+.3f   (r = %+.3f, %d nodi)"
+          % (p_tl, r_tl, n_tl))
+    print("")
+    print("  pendenza(theta) = pendenza(sigma) + pendenza(tau)/2,  con sigma = coppia/inerzia = %+.3f"
+          % p_si)
+    print("     con tau ATTUALE : attesa %+.3f    MISURATA ORA %+.3f" % (p_si + p_ta / 2.0, u["theta"][0]))
+    print("     con tau_LUCE    : attesa %+.3f    <- e' questo il numero che decide" % (p_si + p_tl / 2.0))
+    print("")
+    ta_dt = float(np.median(g["tau"][v2])) / S.DT
+    tl_dt = float(np.median(g["tau_luce"][v2])) / S.DT
+    print("  VALORI ASSOLUTI:  tau_attuale/DT = %.4g passi     tau_luce/DT = %.4g passi   (rapporto %.4g)"
+          % (ta_dt, tl_dt, tl_dt / max(ta_dt, 1e-30)))
+    fatt = np.sqrt(tl_dt / max(ta_dt, 1e-30))
+    th_ora = float(np.median(np.degrees(np.linalg.norm(np.asarray(net.omega_s[:g["n"]]), axis=1) * S.DT)))
+    print("  |omega|_eq va come sqrt(tau)  ->  fattore %.4g  ->  theta da %.4g a %.4g gradi/passo"
+          % (fatt, th_ora, th_ora * fatt))
+    print("  cioe' da %.1f a %.1f GIRI per passo.  ATTENZIONE: e' un ordine di grandezza nella"
+          % (th_ora / 360.0, th_ora * fatt / 360.0))
+    print("  direzione giusta, NON la soluzione dell'aliasing.")
+    print("")
+    print("  LETTURA (fissata PRIMA):")
+    if abs(p_tl) <= 0.3:
+        print("  -> |pendenza(d/cs)| <= 0.3 : theta tornerebbe a %+.3f. LA CANCELLAZIONE SI ROMPE."
+              % (p_si + p_tl / 2.0))
+    elif abs(p_tl - p_ta) <= 0.4:
+        print("  -> pendenza(d/cs) ~ pendenza attuale: NON CAMBIA NULLA. La sostituzione e' piu'")
+        print("     coerente, ma NON risolve. Non va venduta come cura.")
+    else:
+        print("  -> valore INTERMEDIO (%+.3f): si riporta il numero e la pendenza attesa (%+.3f),"
+              % (p_tl, p_si + p_tl / 2.0))
+        print("     senza forzare.")
     print("")
     print("=" * 104)
     print("VERDETTO secondo doc/PREDIZIONE_tracing_omega.md (criterio scritto PRIMA)")

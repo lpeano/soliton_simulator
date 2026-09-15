@@ -603,6 +603,49 @@ toccato, blob `f5887254`.
 
 ---
 
+## 6-novies. `tau` deve essere il TEMPO-LUCE `d/cs`? (2026-09-15) — **criterio scritto, misura IN VOLO**
+
+Documento: **`doc/TAU_tempo_luce.md`**. Contiene **solo il criterio e il setup**, committati
+**prima** dei dati. **I numeri non ci sono ancora.**
+
+**La domanda nasce dal verdetto del tracing:** il `-1` della coppia e' cancellato dal `+0.91` di
+`sqrt(tau)`. L'aliasing viene dall'**interazione di DUE leggi**: `omega = coppia/inerzia`
+(riga 1918) e `tau = TAU_A*max(dens/dens_rif, 0.05)` (riga 1913).
+
+**Le due righe non sono pari, e la seconda ha gia' due fatti MISURATI contro:**
+1. **non fa quello che dichiara**: e' scritta come `tau ∝ dens` ma misurata da' **`rho^1.81`**
+   (via indiretta `+1.867`: due strade indipendenti, stesso scarto dall'unita');
+2. **il perche' e' strutturale**: `dens_rif` e' la **MEDIANA**, quindi per il nodo mediano
+   `dens/dens_rif ~ 1` **sempre** — `tau` del nodo tipico e' **ancorato a `TAU_A` per costruzione**
+   (rilievo di Luca, gia' in `CLAUDE.md` §9). **Punto fisso auto-normalizzante, non transitorio.**
+Una riga che non fa quello che dichiara e' la categoria che questo repo ha gia' pagato **tre volte**.
+
+**L'incoerenza da sanare:** se `inerzia = T² = (d/cs)²`, allora **il tempo che COSTRUISCE l'inerzia
+e quello che la RILASSA devono essere lo stesso**. Oggi sono **due diversi nella stessa equazione**.
+Il candidato `tau = d/cs` e' **imposto** (causalita': non si puo' ricordare piu' a lungo di quanto si
+impieghi a sapere di se'), **gia' cablato** (e' il `tau` dello Strato 1, messo li' per la stessa
+ragione) e a **zero manopole**.
+
+**Nota di metodo:** il tracer misura `tau_luce` con la **STESSA formula gia' nel file**
+(`_bloch_ritardato`: `d_nodo` = media degli archi incidenti con fallback `LAM`, `cs_nodo` dalla cache
+`_cs_nodo_prev`), non con una nuova. Misurare la proposta con una formula diversa da quella cablata
+sarebbe stato incoerente col suo stesso argomento.
+
+**IL CRITERIO, fissato prima:** `pendenza(theta) = -1.056 + pendenza(d/cs)/2`.
+`|pendenza(d/cs)| <= 0.3` -> `theta` torna a **~ -1.0**, la cancellazione si rompe;
+`pendenza(d/cs) ~ +1.8` -> **non cambia nulla**, la sostituzione resta piu' coerente ma **non
+risolve**, e va detto cosi'.
+
+**IL CAVEAT DI AMPIEZZA, da dire comunque:** `tau` passa da ~44 unita' di tempo a ~0.25, e poiche'
+`|omega|_eq ∝ sqrt(tau)` il fattore e' **~1/13**: da **112 giri/passo a ~9**.
+**Un ordine di grandezza nella direzione giusta, NON la soluzione dell'aliasing.**
+
+**Cosa NON tocca:** la riga 1918, `inerzia`, e la **forma** del termine dissipativo — in particolare
+**non** apre la questione se `-omega/tau` debba essere un allineamento LLG `-lambda n x (n x B)`:
+e' **separata e aperta**, e mescolarla renderebbe inattribuibile qualunque risultato.
+
+---
+
 ## 7. IL LAVORO DI CONTORNO, in breve
 
 - **Profilazione** (`doc/PROFILAZIONE_costo_run.md`): il collo **non** è il loop CFL. I due hoist

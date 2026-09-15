@@ -9,7 +9,11 @@
 > ## RUN IN VOLO (2026-09-15, dalle 12:24)
 > `csv/_test_fork/_maturazione_s1.txt` e' **CONCLUSO** (2000 passi, esito C, committato).
 > Anche `csv/_test_fork/_trasversale_s1.txt` e' **CONCLUSO** e committato (test trasversale).
-> **NON C'E' NESSUN RUN IN VOLO.**
+>
+> ## RUN IN VOLO
+> `csv/_test_fork/_tau_luce.txt` e' **IN SCRITTURA** (FASE 1: pendenza di `d/cs` contro l'inerzia).
+> **NON leggerlo come risultato finche' non e' committato.** Il criterio di lettura e' gia'
+> committato in `doc/TAU_tempo_luce.md`, PRIMA dei dati.
 > NB: `csv/_test_fork/_tracing_omega_INCOMPLETO.txt` e' un run **con un termine mancante**,
 > conservato come evidenza: **NON usarlo come misura della fisica** (vale `_tracing_omega.txt`).
 > E nel run CORRETTO la colonna `angolo` e' **invalida** (satura a 90 gradi): vedi
