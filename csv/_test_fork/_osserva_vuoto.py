@@ -56,6 +56,13 @@ def main():
                     help="accende --cs-dinamico: senza, cs = CS_M costante e il turbo e' ignorato.")
     ap.add_argument("--gamma-turbo", type=float, default=1.0, dest="gamma_turbo", metavar="K",
                     help="amplificatore DIAGNOSTICO della sensibilita' di cs a rho (solo _cs_nodo).")
+    ap.add_argument("--tau-luce", action="store_true", dest="tau_luce",
+                    help="accende --tau-luce: il rilassamento di omega_s usa il TEMPO-LUCE d/cs "
+                         "invece di TAU_A*max(dens/dens_rif, 0.05). NON e' un forzante come il "
+                         "turbo: e' una correzione di LEGGE, ed e' l'unica cosa che abbassa theta "
+                         "(da ~96 a ~43 giri/passo). Serve al braccio ON del gradiente di "
+                         "risoluzione. NB: i sigilli della FASE 2 NON sono passati, quindi il "
+                         "braccio OFF resta la baseline certificata.")
     ap.add_argument("--kuramoto", action="store_true", dest="kuramoto",
                     help="accende --kuramoto-su2 (allineamento locale alla media SU(2) dei vicini).")
     ap.add_argument("--regime-det", action="store_true", dest="regime_det",
@@ -92,6 +99,8 @@ def main():
         argv += ["--cs-dinamico"]
     if a.gamma_turbo != 1.0:
         argv += ["--gamma-turbo", str(a.gamma_turbo)]
+    if a.tau_luce:
+        argv += ["--tau-luce"]
     if a.kuramoto:
         argv += ["--kuramoto-su2"]
     if a.regime_det:
@@ -235,6 +244,7 @@ def main():
         r["KURAMOTO_SU2"] = int(S.KURAMOTO_SU2)
         r["STEP2"] = int(S.STEP2_OROLOGIO)
         r["GAMMA_TURBO"] = float(S.GAMMA_TURBO)
+        r["TAU_LUCE"] = int(getattr(S, "TAU_LUCE", False))
         # cs VIVO? se std ~ 0 il turbo non morde e il run e' nullo (verifica-scala in-run)
         _csp = getattr(net, "_cs_nodo_prev", None)
         if _csp is not None and len(_csp) >= n:
@@ -324,7 +334,8 @@ def main():
             # vedrebbe qui (l'insieme avrebbe piu' di un elemento).
             flag_visti.add((bool(S.FORK_SU2), bool(S.FORK_SU2_MEM),
                             bool(S.SCUOTIMENTO), bool(S.SYNC_UPDATE), bool(S.KURAMOTO_SU2),
-                            bool(S.STEP2_OROLOGIO), bool(S.CS_DINAMICO), float(S.GAMMA_TURBO)))
+                            bool(S.STEP2_OROLOGIO), bool(S.CS_DINAMICO), float(S.GAMMA_TURBO),
+                            bool(getattr(S, "TAU_LUCE", False))))
             if not a.no_osserva and (stato["k"] == 1 or stato["k"] % a.ogni == 0):
                 misura(self, stato["k"])
 
@@ -333,7 +344,7 @@ def main():
 
     for f in sorted(flag_visti):
         print("[osserva-flag] tag=%s seed=%d  FORK_SU2=%s FORK_SU2_MEM=%s SCUOTIMENTO=%s "
-              "SYNC_UPDATE=%s KURAMOTO_SU2=%s STEP2=%s CS_DIN=%s GAMMA_TURBO=%.4g"
+              "SYNC_UPDATE=%s KURAMOTO_SU2=%s STEP2=%s CS_DIN=%s GAMMA_TURBO=%.4g TAU_LUCE=%s"
               "   (letti DURANTE il run)" % ((a.tag, a.seed) + f), flush=True)
     if len(flag_visti) > 1:
         print("[osserva-flag] ATTENZIONE: i flag sono CAMBIATI durante il run.", flush=True)

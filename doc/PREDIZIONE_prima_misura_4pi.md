@@ -53,6 +53,42 @@ grossolano è un segnale **vero e sottostimato**. Un'assenza, no.
 
 ---
 
+## 1-bis. ⚠ AGGIORNAMENTO — **DUE BRACCI, non uno** (mandato corretto da Luca, 2026-09-15 sera)
+
+**Il mandato precedente escludeva `--tau-luce`**, mettendolo nella stessa casella del turbo. **Era un
+errore di categoria, e lo accolgo:** il turbo **amplifica un parametro** per rendere visibile un
+effetto; `--tau-luce` è una **correzione di LEGGE** (il rilassamento legato al tempo-luce `d/cs`
+invece che alla densità, coerente con `inerzia = T²`). E soprattutto **è l'unica cosa che abbassa
+`theta`**. Escluderlo significava fare la prima misura vera **alla risoluzione peggiore disponibile**.
+
+**Si corregge con due bracci, non con una scelta.**
+
+| braccio | cos'è | `theta` |
+|---|---|---|
+| **OFF** (`--tau-luce` spento) | la **baseline CERTIFICATA** — i sigilli della FASE 2 non sono passati, il gate **non è ri-timbrato di proposito** | **misurato: 92.8–98.7 giri/passo** |
+| **ON** (`--tau-luce` acceso) | la **migliore risoluzione disponibile oggi** | atteso **~43 giri/passo** |
+
+Tutto il resto **identico**: stessa scena, **stessi semi**, `≥ 2` semi, senza turbo / Step 2 /
+Kuramoto. **Non è «scegliere il braccio giusto»: è misurare lungo un GRADIENTE DI RISOLUZIONE.**
+
+### ⚠ E una correzione a un numero che avevo scritto io in questo stesso documento
+
+Il §1 diceva *«`theta` resta a ~43 giri/passo»* come se fosse il valore del sistema. **Falso: il 43
+è il valore del braccio ON**, cioè **con `--tau-luce` cablato**. Il valore **naturale** è
+**92.8–98.7** (misurato, 2 semi). Avevo trasportato un numero da una configurazione a un'altra.
+**Non cambia il verso del caveat: lo raddoppia.**
+
+## 3-bis. LA LETTURA A DUE BRACCI — fissata PRIMA del braccio ON
+
+| esito | lettura |
+|---|---|
+| **struttura in ON e NON in OFF** | **È REALE**, ed è emersa **abbassando l'aliasing**: la firma più forte ottenibile oggi. È anche il **controllo incrociato** che nessun braccio singolo può dare |
+| **struttura in ENTRAMBI** | ancora più forte: sopravvive **anche** al campionamento peggiore |
+| **niente in nessuno dei due** | **(A) NON conclusivo** — *«nessuna struttura visibile a questa risoluzione»*. La frase *«anche con la doppia copertura attiva lo spin non si organizza»* resta **INDICIBILE** finché `theta` non scende sotto la soglia di aliasing |
+| **struttura in OFF e non in ON** | **ANOMALIA.** L'aliasing non crea segnale: sarebbe un **reperto da capire**, non un risultato. Si riporta come tale e **ci si ferma** |
+
+**Le soglie numeriche restano quelle del §2, invariate**, applicate **separatamente a ogni braccio**.
+
 ## 2. I TRE ESITI — soglie fissate ADESSO
 
 **Valori sotto ipotesi nulla** (`CLAUDE.md` §9): `chi = 90.000° ± 39.171°` per direzioni di Bloch
