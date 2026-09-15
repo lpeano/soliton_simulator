@@ -417,6 +417,21 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   per `--cs-dinamico` OFF e per il primo passo. Niente NaN, niente runaway, nessuna byte-identita'
   violata. **Un difetto silenzioso non si trova guardando se il codice sbaglia: si trova contando
   quale strada prende.**
+- **PRESIDIO — SU QUESTO SISTEMA CAOTICO LA BARRA D'ERRORE DI UNA PENDENZA E' ~3 VOLTE LA `SE`
+  INTERNA AL RUN** (misurato 2026-09-15, `csv/_test_fork/_controllo_semi.txt`). La stessa pendenza
+  trasversale, **a codice INVARIATO**, cambia da seme a seme di **0.0302** (e 0.0286 sull'altro
+  ramo), mentre la `SE` di campionamento **dentro** un singolo run vale **~0.010**. Quindi:
+  **la `SE` interna e' la barra giusta per parlare di QUEL run, non del SISTEMA.** Per confrontare
+  due run (due flag, due versioni del codice) il **valore sotto ipotesi nulla NON e' zero**: e' 0.03,
+  e va misurato con piu' semi, non dedotto.
+  CASO REALE che ha generato la regola: `Delta = -0.0445 +- 0.0141`, `z = 3.16` su **un** seme
+  sembrava un effetto a 3 sigma. Su tre semi il **segno non e' nemmeno concorde**
+  (-0.0445 / **+0.0367** / -0.0635), `t = -0.77`. **Un'ora di lavoro e tre documenti da correggere.**
+  **CONSEGUENZA DA VERIFICARE, non ancora fatta:** tutte le pendenze committate in questo programma
+  portano una `SE` interna, cioe' **una barra ~3 volte troppo piccola**. Le conclusioni gia' tratte
+  sembrano reggere perche' gli effetti sono grandi (il **-1.056** del tracing, il **+0.097** di `d/cs`
+  contro `-1`, il contrasto ON-OFF **-0.32** = 11 volte la dispersione), ma **vanno ricontrollate una
+  per una contro 0.03, non contro 0.01.**
 - **LA CACHE `_cs_nodo_prev` VENIVA SCARTATA A OGNI MITOSI — CURATO il 2026-09-15** (commit
   `43e9a47`, `doc/FIX_cache_cs.md`, sigillo `csv/_seal_fork/_sigillo_fix_cache.py` **5/5 PASS**).
   La cache e' scritta a fine passo con l'`n` di quel passo (riga ~2918); la **mitosi aggiunge nodi**,
@@ -426,13 +441,15 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   in `_eredita_spinore_figli`, **sesta voce della stessa convenzione** di `_nb`/`_nb_prec`/`_nb_ret`/
   `omega_s`/`_psi_spinor`/`_psi_prec` — zero parametri. Misurato: fallback **71.88% -> 0.00%**,
   passi con cache inusabile **24/30 -> 0/30**.
-  **MA ATTENZIONE A COSA QUESTO NON DICE — MISURATO, non argomentato** (`doc/FIX_cache_cs.md` par.6,
-  300 passi, seme 1, quattro bracci): la pendenza di `theta` contro l'inerzia col flag ON passa da
-  **-0.4265 +- 0.0091** a **-0.4710 +- 0.0107**, cioe' `Delta = -0.0445 +- 0.0141` (`z = 3.16`).
-  **Il difetto contribuiva, e contribuiva POCO: il 16.9% del divario verso l'attesa -0.69.** Restano
-  aperti **-0.219**, e `theta` resta a **42.8 giri/passo**: **la FASE 2 non si chiude.**
-  Le DUE previsioni opposte erano entrambe sbagliate: il mandato prevedeva ~50% ("un effetto
-  dimezzato"), io avevo previsto **zero**.
+  **MA ATTENZIONE A COSA QUESTO NON DICE.** L'effetto FISICO della cura **non e' dimostrato**:
+  su **3 semi** (`doc/FIX_cache_cs.md` par.7) `Delta` vale **-0.0445 / +0.0367 / -0.0635** — **segno
+  NON concorde** — con `media -0.0238`, `SE 0.0307`, `t = -0.77`, e **`IC95 = [-0.156, +0.108]` che
+  contiene lo ZERO *e* il `-0.120` dell'ipotesi "~meta'"**. **Tre semi non decidono: l'esperimento
+  non ha potenza.** E' il fronte **P** di `doc/RAMIFICAZIONI.md`.
+  **CORREZIONE DI UNA VOCE CHE AVEVO SCRITTO IO STESSO OGGI:** qui c'era scritto *"il difetto
+  contribuiva il 16.9% del divario, `z = 3.16`"*, misurato su **UN** seme. **RITIRATO:** quel `z` usava
+  la `SE` **interna a un singolo run** (~0.010) mentre la dispersione **fra semi, a codice invariato**,
+  vale **0.030**. Era dispersione di run.
   **IL MIO ERRORE, da non rifare:** avevo argomentato che `cs` riparato varia solo dello **0.023%**
   (`min 1.99954`, `max 2.0`, `CS_M = 2`) e che quindi **non poteva** spostare la pendenza. **Avevo
   confrontato l'AMPIEZZA di una variazione con l'ampiezza di una pendenza.** Una pendenza trasversale
