@@ -33,7 +33,10 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
    ROADMAP_fork_SU2, PROTOCOLLO_test_olonomia, SYSTASIS. Sono nella cartella `doc/` del repo.
 3. Se esiste un `.github/copilot-instructions.md` (retaggio Copilot): CLAUDE.md lo **SOSTITUISCE**
    ed e' autorevole. Leggilo solo come contesto storico; in caso di conflitto vince CLAUDE.md.
-4. Dopo una compattazione/continuazione di sessione, **RILEGGI CLAUDE.md prima di agire**: il
+4. **Prima di ESCLUDERE un flag da una misura, leggi il par.10** (promozione delle componenti):
+   la domanda e' *«FORZA il sistema o lo CORREGGE?»*, e lo stato di ogni componente sta in
+   `doc/COMPONENTI_PROMOSSE.md`.
+5. Dopo una compattazione/continuazione di sessione, **RILEGGI CLAUDE.md prima di agire**: il
    riassunto di sessione NON contiene queste regole (limite noto di Claude Code). Se ti accorgi di
    averle perse, ricaricale da qui.
 
@@ -506,3 +509,58 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   cambiare?"*.
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
+
+## 10. PROMOZIONE DELLE COMPONENTI (regola di Luca, 2026-09-15)
+
+**Perche' esiste.** Finche' una legge validata resta un flag opzionale, puo' essere **dimenticata**,
+**esclusa per errore**, o **disattivata in silenzio**. Due casi reali, entrambi del 2026-09-15:
+`--tau-luce` stava per essere escluso dalla prima misura vera del settore spinoriale perche' messo
+nella stessa casella del turbo (**errore di categoria**: il turbo AMPLIFICA un parametro, `--tau-luce`
+CORREGGE una legge) - intercettato **per fortuna, non per struttura**; e la **FASE 5 / doppia
+copertura a 4pi** era cablata, sigillata e documentata, ed **inerte nel 95.33% delle chiamate**.
+
+**Una componente sotto flag PUO' diventare fisica di default solo se soddisfa TUTTI E TRE:**
+1. **DERIVATA, non tarata** - discende da un principio (causalita', coerenza dimensionale,
+   conservazione) **senza coefficienti scelti**. Se serve un `K != 1`, **non e' promuovibile**.
+2. **SIGILLATA** - byte-identita' a flag OFF, riduzione al limite, **e un sigillo che dimostri che FA
+   QUALCOSA** (controllo positivo: *«con ON DEVONO differire»*). Un sigillo che verifica solo la
+   byte-identita' a OFF **non prova che il flag serva**: passerebbe anche su codice morto.
+3. **LA SUA ASSENZA E' UN DIFETTO, NON UN'ALTERNATIVA.** E' il criterio che separa davvero:
+   *«il sistema senza X e' SBAGLIATO»* -> promuovibile;
+   *«il sistema senza X e' DIVERSO»* -> **resta flag, per sempre.**
+   **Non si riempie per inerzia:** *«e' sempre stato acceso»* **non e'** *«senza e' sbagliato»*.
+
+**COME si promuove - si cambia il DEFAULT, non si cancella il ramo:**
+- il flag diventa **ON di default**;
+- resta un `--senza-<nome>` marcato **«DIAGNOSTICO, non fisica alternativa»**, per gli A/B;
+- **il gate certifica il comportamento ON.**
+Cancellare il ramo vecchio farebbe perdere la capacita' di **misurare cosa fa quella legge**, che e'
+servita piu' volte (ogni sigillo di byte-identita' vive di quel ramo). Promuovere il default la
+conserva.
+
+**RETROCESSIONE:** una componente promossa torna a flag **solo** con un riscontro **committato** che
+ne mostri un difetto - **mai per ripensamento**. La voce nel registro porta il criterio che la
+farebbe retrocedere, scritto **al momento della promozione**, non dopo.
+
+**TRE CATEGORIE, e non si mescolano:**
+- **FISICA CERTIFICATA** - ON di default, spegnibile **solo** come diagnostico;
+- **ESPERIMENTI** - OFF di default **sempre**: turbo, Kuramoto, e ogni meccanismo **aggiunto a mano**
+  invece che derivato;
+- **CORREZIONI DI DIFETTO** - **nessun flag**, gia' nel codice. **Un bug curato non ha un
+  interruttore** (la cache `_cs_nodo_prev`, `_psi_spin_prec`). Metterle fra le candidate sarebbe un
+  errore di categoria: non sono leggi, sono riparazioni.
+
+- **PRESIDIO - PRIMA DI ESCLUDERE UN FLAG DA UNA MISURA, CHIEDITI: FORZA IL SISTEMA O LO CORREGGE?**
+  Escludere un **forzante** (turbo) protegge la misura; escludere una **correzione** significa
+  **misurare un sistema che si sa difettoso**. *(Precedente: `--tau-luce` escluso come se fosse il
+  turbo, 2026-09-15. La prima misura vera del settore spinoriale stava per essere fatta alla
+  risoluzione peggiore disponibile: `theta ~ 96` giri/passo invece di ~43.)*
+
+**LO STATO DI OGNI COMPONENTE STA IN `doc/COMPONENTI_PROMOSSE.md`**, e si aggiorna **nello stesso
+commit** del riscontro che lo cambia (par.5-bis).
+**NB verificato dal disco il 2026-09-15 (blob `08784685`): il file ha 51 flag booleani di modulo, di
+cui 10 gia' a `True`** - fra questi `TAU_A_LOCALE`, marcato **«IN VERIFICA»** nel suo stesso
+commento e **senza flag da riga di comando**. Cioe': **esiste gia' uno strato di componenti accese di
+default che non e' mai passato per questi tre criteri, perche' i tre criteri non esistevano.**
+Il registro serve prima di tutto a **rendere visibile quello strato**, non solo a governare le
+promozioni future.
