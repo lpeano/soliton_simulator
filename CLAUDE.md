@@ -179,6 +179,31 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
 (derivazione, non innesto), non una rivendicazione. Verbo onesto: "dovrebbe emergere", non "genera".
 
 ## 9. FATTI VERIFICATI DAL CODICE (per non rifare errori gia' fatti)
+- **LE RIGHE CITATE QUI SOTTO SONO SHIFTATE: il blob e' cambiato** (2026-09-15). Il cablaggio di
+  `TAU_LUCE` e il fix della cache hanno spostato tutto cio' che sta dopo la riga ~810. Vale il par.0
+  (*cerca per NOME di funzione/flag, non per riga*), ma poiche' le righe **sono** citate ovunque,
+  ecco la conversione **verificata dal disco sul blob `b298677a`**. I numeri storici **non sono stati
+  riscritti** nelle voci: li' dicono a quale blob si riferivano, ed e' un'informazione, non un errore.
+
+  | punto | riga VECCHIA (f5887254 / 7d484580) | riga **ATTUALE** (b298677a) |
+  |---|---|---|
+  | commento stale *"si conserva, non rilassa"* | 868 | **901** |
+  | commento stale *"omega si CONSERVA"* | 1803 | **1852** |
+  | rumore sul Bloch (`amp[:, None]`) | 1847 | **1896** |
+  | `nb_vic = self._nb_prec` | 1854 | **1905** |
+  | `inerzia = np.maximum(_rho_sorgente(), 1e-6)` | 1891 | **1940** |
+  | `correzione = np.cross(B, nb)` | 1895 | **1944** |
+  | `correzione += cross(_nb_grav(), nb)` | 1901 | **1950** |
+  | `_tau = TAU_A * max(_dens/_dens_rif, 0.05)` | 1913 | **1967** |
+  | **il rilassamento** `- omega_src/_tau` | 1918 | **1972** |
+  | `calcio_omega` dentro `semina()` | 1592-1594 | **1642-1643** |
+  | guardia `len(csp) >= n` in `_tempo_luce_nodo` | 2542 | **2565** |
+  | trasporto SCALARE `mat(A)@_a` / `@_b` | 2207-2208 (blob 4fc7a794) | **2623-2624** |
+  | `cs_floor` | 2187 | **2436** |
+  | scrittura della cache `_cs_nodo_prev` | 2893 | **2918** |
+  | `_eredita_spinore_figli` | ~1133 | **1166** |
+  | mitosi -> `_eredita_spinore_figli(a)` | ~3172 | **3192** |
+  | Schwinger -> `_eredita_spinore_figli(aa, -1)` | ~3242 | **3309** |
 - Trasporto forza = SCALARE: `_coppia_interferenza`, **righe 2207-2208**
   (`np.conj(_a)*(mat(A)@_a) + np.conj(_b)*(mat(A)@_b)`, stessa A su a e b) -> abeliano per
   struttura. VERIFICATO dal sorgente
