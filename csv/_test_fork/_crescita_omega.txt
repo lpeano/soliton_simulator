@@ -1,0 +1,25 @@
+CALORE_VETTORIALE=False  _CALORE_INIT=0.4  TAU_A=50  TAU_A_LOCALE=True  DT=0.01
+SCUOTIMENTO=True  SYNC_UPDATE=False  (il rumore sul Bloch vive a :1847 solo se SCUOTIMENTO e non SYNC)
+
+ passo      n   |omega_s| med   theta med      Lam        amp med    inerzia med  tau/DT med
+ --------------------------------------------------------------------------------------------------------
+     1    1196          0.025     0.01433 deg    7.45e-14    2.73e-07       1e-06         250
+    10    1295      1.709e+04        9792 deg    2.83e-07    0.000254       1e-06        1361
+    20    1561      2.752e+04   1.577e+04 deg    2.52e-06    0.000838       1e-06        3998
+    30    1692      3.436e+04   1.969e+04 deg    8.02e-06     0.00144       1e-06        3374
+    40    1864      3.991e+04   2.287e+04 deg    1.74e-05     0.00201       1e-06        3423
+    50    1999      4.559e+04   2.612e+04 deg    2.76e-05     0.00242       1e-06        3441
+    60    2123      4.901e+04   2.808e+04 deg    4.37e-05     0.00337       1e-06        2752
+    70    2301      5.426e+04   3.109e+04 deg    5.83e-05      0.0076       1e-06         250
+    80    2397      5.873e+04   3.365e+04 deg    7.08e-05      0.0084       1e-06         250
+    90    2518      6.201e+04   3.553e+04 deg    8.16e-05     0.00902       1e-06         250
+   100    2640      6.391e+04   3.662e+04 deg    9.33e-05     0.00965       1e-06         250
+   110    2774      6.676e+04   3.825e+04 deg    9.71e-05     0.00984       1e-06         250
+   120    2896      6.884e+04   3.944e+04 deg     0.00011      0.0105       1e-06         250
+   130    3025      6.911e+04    3.96e+04 deg    0.000117      0.0108       1e-06         250
+   140    3113      7.169e+04   4.108e+04 deg    0.000123      0.0111       1e-06         250
+   150    3180      7.271e+04   4.166e+04 deg    0.000132      0.0115       1e-06         250
+
+LETTURA: |omega|(n) ~ n  -> BALISTICO (coppia coerente, cresce verso il punto fisso tau*F)
+         |omega|(n) ~ sqrt(n) -> DIFFUSIVO (coppia scorrelata: e' un random walk smorzato)
+         plateau            -> gia' all'equilibrio: la dissipazione esistente BASTA
