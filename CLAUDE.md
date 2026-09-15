@@ -549,6 +549,27 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   memoria no. *(Nel caso reale: `CS_DINAMICO` off e' deducibile da `cs_std = nan` su tutti gli 11
   campioni, perche' la cache `_cs_nodo_prev` non viene scritta a flag spento. Deducibile, non
   scritto.)*
+- **IL TEMPO-LUCE `tau = d/cs` NON E' TESTABILE ALLE DENSITA' SIMULABILI — MISURATO, non dedotto**
+  (2026-09-15, rilievo di Luca). Con `--cs-dinamico` **acceso** e la cache **riparata**:
+  `cs ∈ [1.99893, 2.0]`, `cs_std = 1.72e-4`, cioe' **`cs_std/cs = 0.0086 %`** — **116 volte sotto**
+  la soglia dell'1% sotto la quale `d/cs` e' indistinguibile da `d`. E dentro `tau`, `cs` pesa
+  **0.00629 %** della dispersione (**1 parte su 15 898**).
+  **CONSEGUENZA, e va detta cosi':** `cs` non e' quasi-costante *per caso*, e' **MORTO PER DENSITA'**
+  (par.6, `I ~ 0.05` contro soglia `~400`). Quindi **`tau = d/cs` E' `tau ∝ d`**, e tutto il ramo di
+  lavoro su `--tau-luce` e' — **in questo regime** — un ramo su **`tau ∝ d`**:
+  **distanza contro densita'**, non tempo-luce contro densita'.
+  **E' un confronto sensato e informativo, ma NON e' quello che il nome del flag dice.**
+  **TRE COSE CHE NE DISCENDONO, da non rileggere male fra un mese:**
+  * il braccio ON **non testa il tempo-luce**;
+  * la giustificazione principale della sostituzione (`inerzia = T^2 = (d/cs)^2`, la causalita') vive
+    sul **`cs` locale**: resta vera **in linea di principio**, **non e' esercitata** in questo regime;
+  * il fix della cache `_cs_nodo_prev` era **giusto** (un bug e' un bug) ma **in questo regime muove
+    lo 0.009%**: **non poteva spiegare nulla** — ed e' il motivo strutturale per cui il «16.9%» e
+    l'«11.0%» sono caduti, al di la' della barra d'errore sbagliata.
+  **QUANDO SARA' TESTABILE:** solo con **`cs` VIVO** — alta densita', oppure il **turbo su GAMMA**,
+  che pero' e' un **esperimento** (`doc/COMPONENTI_PROMOSSE.md` C1), non fisica.
+  **Cio' che NON dipende da `cs` e resta il valore vero dei quattro bracci: il GRADIENTE DI
+  RISOLUZIONE**, `theta` da **~129** a **~39** giri/passo.
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
 
