@@ -319,5 +319,43 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   si esaurisce: e' un **punto fisso auto-normalizzante**. Conseguenza operativa: **far maturare il
   sistema non puo', per costruzione, accorciare la memoria del nodo tipico** — quindi "aspettare"
   non e' una strategia valida per uscire da un problema che dipende da quella memoria.
+- **`correzione` HA DUE TERMINI, NON UNO** (righe **1895-1901**, verificato 2026-09-15):
+  `correzione = cross(B, nb)`, e **se `CAMPO_SPINORIALE`** (ATTIVO in tutti i run del fork)
+  `correzione += cross(_nb_grav(), nb)` — il torque verso il Bloch del **campo emesso spinoriale**.
+  **Chi ricostruisce la catena di `omega` fuori dal simulatore e ne dimentica uno calcola meta'
+  coppia** (successo il 2026-09-15: il residuo non spiegato valeva ~2.8 volte il deterministico).
+  NB per la ricostruzione: `B` e' costruito da `nb_vic = self._nb_prec` (riga 1854), cioe' il Bloch
+  **committato**, mentre il `nb` del prodotto vettore e' quello **DOPO** il rumore di riga 1847.
+- **VERDETTO DEL TRACING DI `omega` (2026-09-15, `doc/TRACING_omega.md`): ESITO (I), NESSUN BUG.**
+  La formula d'ingresso e' **giusta**: `coppia/inerzia` ha pendenza trasversale **-1.056** con
+  `r = -0.981` su 2781 nodi — esattamente il `-1` che la legge richiede, e viene **tutto** dalla
+  divisione per l'inerzia (la coppia da sola e' **piatta**, -0.056). Ma `theta` ha **-0.113**:
+  **l'esponente si perde A VALLE**, nel rilassamento, attraverso `sqrt(tau)`.
+  Esclusi per misura: (II-a) `|B|` **decresce** (-0.534), non cresce; (II-b) l'angolo `(B,nb)` e'
+  **piatto** (-0.006, `r = -0.025`, mediana 59.4 gradi); (IV) `R_stoc = 0.041`, **sotto** l'errore
+  atteso della ricostruzione (0.097) -> il rumore e' **marginale**, non guida `omega`.
+  E il termine dissipativo **non domina**: rapporto coppia/dissipativo **= 188.9**.
+- **LA CATENA `pendenza(theta) = pendenza(sigma) + pendenza(tau)/2` NON CHIUDE** (2026-09-15).
+  **CORREZIONE a un numero scritto in questo repo poche ore prima:** `pendenza(tau)` vale **+1.176**
+  misurata su **2195 nodi** (`r = +0.796`), **non** `+1.812` come risultava da **20 nodi**. Con la
+  misura buona: attesa **-0.490** contro **-0.152** misurata -> **scarto 0.338**, non 0.037.
+  **Il meccanismo qualitativo regge** (`sqrt(tau)` cancella **parte** del -1) **ma il conto
+  quantitativo no**, e resta un **residuo di ~0.34 nell'esponente che NON e' spiegato.** Chi usa
+  quella formula per estrapolare deve portarsi dietro il residuo.
+- **`d/cs` E' PIATTO CONTRO L'INERZIA: pendenza +0.097** (`r = +0.351`, 2195 nodi; 2026-09-15,
+  `doc/TAU_tempo_luce.md`). Quindi sostituire `tau = TAU_A*max(dens/dens_rif, 0.05)` (riga 1913) con
+  il **tempo-luce `d/cs`** (lo stesso `tau` gia' cablato nello Strato 1) **romperebbe la
+  cancellazione**: `theta` passerebbe da **-0.152** a fra **-0.69** (stima onesta, col residuo) e
+  **-1.03** (stima naive). **MA L'AMPIEZZA NON RISOLVE:** `tau/DT` da **6500** a **66.5** passi, e
+  poiche' `|omega|_eq ∝ sqrt(tau)` il fattore e' **0.101**: da **126.7 a 12.8 GIRI per passo**.
+  **Un ordine di grandezza nella direzione giusta, e il settore resta ALIASATO. Non e' una cura.**
+- **PRESIDIO — UNA FORMULA PREDITTIVA SI VALIDA SUL CASO NOTO *PRIMA* DI USARLA PER ESTRAPOLARE**
+  (2026-09-15). La relazione `theta = sigma + tau/2` sembrava confermata (scarto 0.037) finche' non
+  si e' rifatta la misura di `tau` su un campione serio: **scarto 0.338**. Se avessi estrapolato
+  senza ri-verificare, avrei predetto `-1.03` invece di `-0.69`.
+  **E il corollario che l'ha causata: UNA PENDENZA MISURATA SU 20 NODI NON E' UNA PENDENZA.**
+  20 nodi contro 2195 hanno dato `+1.812` contro `+1.176`. Le regressioni trasversali si fanno su
+  **tutti** i nodi disponibili; il campione ridotto serve a **tracciare una catena**, non a misurare
+  un esponente.
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.

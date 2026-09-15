@@ -21,9 +21,9 @@
 
 ## Ultimo aggiornamento
 - Data: **2026-09-15**
-- Ultimo commit: **FASE 1 Gilbert/FDT — ipotesi NON confermata, nessun cablaggio**
-  (`doc/ANALISI_gilbert_fdt.md`). Prima: BILANCIO dei tassi FASI A/B/C, esito scan K=300 (B),
-  reperto `_pesi`, profilazione, fix guard `--gamma-turbo`.
+- Ultimo commit: **FASE 1 `tau = d/cs`: `d/cs` e' PIATTO (+0.097), la cancellazione si romperebbe**
+  (`doc/TAU_tempo_luce.md`). Prima: TRACING di `omega` (esito I), maturazione (esito C), test
+  trasversale, Gilbert/FDT, BILANCIO dei tassi, esito scan K=300 (B), reperto `_pesi`.
 - Branch: **`fork-su2`**, allineato con `origin/fork-su2`. **Nessun run in volo.**
 - Blob `soliton_simulator.py` **SUL DISCO** = **`f5887254`** (turbo cablato + fix guard).
 - Blob **CERTIFICATO** in `CLAUDE.md` par.0 = **`c0803713`** (STEP 2, sigillo 10/10). **I DUE NON
@@ -99,7 +99,36 @@ Il coefficiente di Gilbert **si deriva dal FDT senza parametri** (`Lam` si cance
 **Correzione a un fatto MIO:** `CLAUDE.md` par.9 diceva `omega_eq = tau*F` (proporzionale a tau);
 e' il punto fisso deterministico e sovrastima di ~20x. Corretto: `omega_eq ~ sqrt(tau)`.
 
-**APERTO — nessun run in volo. Quattro decisioni di Luca, non dell'esecutore:**
+**LA CATENA DI `omega`, STANATA (2026-09-15) — quattro lavori, un filo solo.**
+1. **MATURAZIONE (esito C):** l'aliasing e' **strutturale, non transitorio**. `ramp` cresce, `rho`
+   sale di 5 ordini, il pavimento `1e-6` si rilascia dal 100% al 7% — **e la frazione aliasata resta
+   100% a OGNI campione.** Pendenza di `theta` su `rho`: **-0.061** con leva **x309**.
+2. **TEST TRASVERSALE:** `omega = coppia/inerzia` come **legge di scala e' FALSIFICATA**: esponente
+   **-0.106** invece di -1, a **un solo istante** (leva x10.080), quindi **nessun ritardo la salva**.
+3. **TRACING (esito I):** la formula d'ingresso e' **giusta** — `coppia/inerzia` porta **-1.056**
+   (`r = -0.981`) — ma l'esponente **si perde a valle**, nel rilassamento, via `sqrt(tau)`.
+   Esclusi per misura: `|B|` che cresce, la geometria dell'angolo, e il rumore (`R_stoc = 0.041`).
+   **NESSUN BUG.** E il controllo di direzione ha stanato un **termine mancante nella MIA
+   ricostruzione** (`cross(_nb_grav(), nb)`, riga 1901): senza, avrei dichiarato un falso positivo.
+4. **`tau = d/cs`:** `d/cs` e' **piatto** contro l'inerzia (**+0.097**), quindi sostituirlo
+   **romperebbe la cancellazione** (`theta` da -0.15 a fra -0.69 e -1.03). **MA l'ampiezza non
+   risolve:** `tau/DT` da 6500 a 66.5, `|omega| ∝ sqrt(tau)` -> **da 127 a 13 giri/passo**.
+   **Un ordine di grandezza, NON una cura.** Nessun cablaggio fatto.
+
+**CORREZIONE A UN NUMERO DI OGGI:** la catena `theta = sigma + tau/2` sembrava chiudersi (scarto
+0.037) con `pendenza(tau) = +1.812` misurata su **20 nodi**. Su **2195** vale **+1.176**, e lo scarto
+sale a **0.338**: **la catena NON chiude**, e resta un **residuo di ~0.34 nell'esponente non
+spiegato**. Registrato in `CLAUDE.md` par.9 e in `doc/TAU_tempo_luce.md` par.7.1.
+
+**APERTO — nessun run in volo. Sei decisioni di Luca, non dell'esecutore:**
+- **IL RESIDUO 0.338**: nessuna lettura di `tau` lo spiega. Da stanare **prima** di fidarsi di
+  qualunque predizione quantitativa sulla catena di `omega`.
+- **CABLARE `tau = d/cs`** (flag `TAU_LUCE` OFF, sigilli T1-T4): sana un'**incoerenza** (il tempo che
+  costruisce l'inerzia e quello che la rilassa devono essere lo stesso) e da' un fattore 10.
+  **Non risolve l'aliasing**, e non va venduto come cura.
+- **QUESTIONE SEPARATA E APERTA:** se `-omega/tau` debba essere un **allineamento LLG**
+  `-lambda n x (n x B)`. **Non mescolarla** col punto sopra: renderebbe inattribuibile il risultato.
+
 - **SOTTO-PASSO PER LO SPIN** (lo stesso principio di `nsub` per la metrica) oppure **rileggere
   tutto dove la densita' e' O(1)**: sono le due strade aperte dal reperto.
 - **TEST DECISIVO NON FATTO** (cambia la fisica, serve autorizzazione): `TAU_A` a due valori a
