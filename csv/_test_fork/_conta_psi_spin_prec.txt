@@ -1,0 +1,37 @@
+========================================================================================================
+FASE A - contatore della guardia di `_psi_spin_prec`  (CAMPO_SPINORIALE = True)
+========================================================================================================
+  scena: 1196 nodi prima dei 150 passi contati, 3422 alla fine
+  chiamate a ritmo() nei 150 passi contati: 150  (1.00 per passo)
+
+  ESITO DI OGNI CHIAMATA
+    return ANTICIPATO su _psi_prec (r = 1 ovunque, il 4pi non e' raggiunto):     1  =   0.67 %
+    guardia 4pi PASSA  (ritmo spinoriale attivo)                           :     6  =   4.00 %
+    guardia 4pi FALLISCE (ricade sul ritmo SCALARE a 2pi)                  :   143  =  95.33 %
+
+  QUALE CONDIZIONE FALLISCE (fra le chiamate che arrivano alla guardia 4pi)
+    solo len(psi_spin) != n        : 0
+    solo len(_psi_spin_prec) != n  : 143
+    entrambe                       : 0
+    uno dei due ASSENTE (None)     : 0
+
+  CAMPIONE - n, len(_psi_prec), len(psi_spin), len(_psi_spin_prec) a piu' passi
+    passo |     n | len _psi_prec | len psi_spin | len _psi_spin_prec | esito
+        1 |  1196 |            80 |         1196 |                 80 | ANTICIPATO
+        2 |  1196 |          1196 |         1196 |               1196 | 4pi
+        3 |  1196 |          1196 |         1196 |               1196 | 4pi
+       10 |  1258 |          1258 |         1258 |               1231 | SCALARE 2pi
+       30 |  1746 |          1746 |         1746 |               1728 | SCALARE 2pi
+       60 |  2369 |          2369 |         2369 |               2343 | SCALARE 2pi
+      100 |  2967 |          2967 |         2967 |               2955 | SCALARE 2pi
+      150 |  3420 |          3420 |         3420 |               3413 | SCALARE 2pi
+
+  ORDINE REALE: _psi_spin_prec e' riscritto PRIMA di essere riletto?
+    a fine run: n = 3422, len(_psi_spin_prec) = 3420  -> DISALLINEATO
+    NB: la scrittura (riga ~2647) sta DENTRO step(), subito dopo la lettura (riga ~1829);
+        la mitosi gira DOPO step(). Il contatore dice se questo basta a chiudere il buco.
+
+========================================================================================================
+  IL NUMERO CHE DECIDE: la guardia 4pi FALLISCE nel 95.33 % delle chiamate.
+  LETTURA (fissata prima): > 10 %  ->  STESSO BUG DELLA CACHE cs. La cura e' giustificata.
+========================================================================================================
