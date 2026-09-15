@@ -1,11 +1,28 @@
-# RELAZIONE — per Claude web, 2026-09-14 (aggiornata: **scan K=300 CHIUSO, esito B**)
+# RELAZIONE — per Claude web · **aggiornata 2026-09-15, sera**
 
 > **Scritta per Claude web**, che legge il repo e deve pronunciarsi su una decisione di merito.
-> Branch `fork-su2`. Sostituisce la versione precedente, che si fermava a «scan in volo».
+> Branch `fork-su2`. **Blob sul disco `b298677a`**, gate in `CLAUDE.md` §0 a `c0803713`
+> (**non ri-timbrato di proposito**: i sigilli della FASE 2 non passano).
+> Il documento e' **cumulativo**: i paragrafi 1-7 sono nell'ordine in cui i fatti sono nati, e
+> l'ultimo lavoro sta in fondo. **Se leggi una cosa sola, leggi il blocco qui sotto e il §8.**
 
 ---
 
-## 1. IN UNA RIGA
+## 0. L'ULTIMO GIRO (2026-09-15, sera) — in quattro righe
+
+> 1. **Trovato e curato un difetto silenzioso:** la cache `_cs_nodo_prev` veniva **scartata a ogni
+>    mitosi**, quindi nel **71.88 %** delle chiamate `tau = d/cs` calcolava `tau = d/CS_M`.
+>    Colpiva anche **lo STRATO 1, gia' sigillato 23/23**. Sigillo della patch: **5/5 PASS**.
+> 2. **La cura NON chiude la FASE 2.** La pendenza T3 va da **-0.4265** a **-0.4710** contro
+>    l'attesa **-0.69**: **16.9 % del divario**, non la meta'. `theta` resta a **42.8 giri/passo**.
+> 3. **Due predizioni opposte, entrambe sbagliate:** il mandato diceva ~50 %, **io dicevo zero**.
+>    L'errore mio e' spiegato al §6-duodecies ed e' di tipo generale.
+> 4. **Un controllo e' in volo** e puo' smentire il punto 2: quel `z = 3.16` usa barre d'errore
+>    **interne a un singolo run** di un sistema **caotico**. Vedi il §8.
+
+---
+
+## 1. IN UNA RIGA (2026-09-14 — storico, resta valido)
 
 > **Lo scan del turbo è chiuso: ESITO B.** Con `cs` forzato fino al **5 % di `CS_M`**, lo Step 2
 > **non muove lo spin**: i due bracci sono indistinguibili su tutte e tre le firme.
@@ -952,20 +969,49 @@ E' la **stessa radice** del fatto gia' noto in `CLAUDE.md` §6 (*a densita' real
 densita' minuscola alle scale simulabili **congela** un settore e **fa esplodere** l'altro. Un solo
 problema di scala, due sintomi opposti — e ora anche una cura esclusa.
 
-**Nessun run in volo. Cinque cose aspettano te:**
+### ⚠ AGGIORNAMENTO 2026-09-15 sera — **tre affermazioni di questo paragrafo erano diventate FALSE**
+
+Le lascio visibili invece di cancellarle, perche' e' utile sapere **come** invecchia un documento:
+
+| diceva | oggi |
+|---|---|
+| *"Nessun run in volo"* | **falso:** `csv/_test_fork/_controllo_semi.py` sta girando |
+| *"il blob sul disco e' `f5887254`"* | **falso:** e' **`b298677a`** — era stale di **tre** blob |
+| *"`soliton_simulator.py` **non e' stato toccato**"* | **falso:** e' stato toccato due volte, `TAU_LUCE` e il fix della cache |
+
+**E TUTTI I NUMERI DI RIGA di questo repo sono shiftati.** La tabella di conversione verificata dal
+disco e' in `CLAUDE.md` §9, in testa (il rilassamento di `omega_s` **1918 -> 1972**, i due commenti
+stale **868 -> 901** e **1803 -> 1852**, e altri 14).
+
+**IL CONTROLLO IN VOLO, e perche' e' contro di me.** La ri-misura T3 dice `Delta = -0.0445 +- 0.0141`,
+`z = 3.16`. Quelle `SE` sono l'errore della retta **DENTRO un singolo run**, ma i due bracci sono
+**due traiettorie di un sistema caotico** (`N` 3999 contro 4100): **il valore sotto ipotesi nulla non
+e' zero**, ed e' la dispersione fra run — **mai misurata su questa osservabile**.
+`_controllo_semi.py` la misura su **3 semi x 2 bracci**, con la lettura scritta **dentro lo script
+prima dei dati**:
+
+- segno concorde **e** `|media| > 2*SE(media)` -> **sistematico**, il 16.9 % resta;
+- segno concorde ma non separato dal rumore -> **plausibile, NON dimostrato**, e il `z = 3.16` cade;
+- **segno non concorde** -> era **dispersione di run**, e **"16.9 %" non e' un numero riportabile**:
+  vanno corretti `doc/FIX_cache_cs.md` §6, `doc/RAMIFICAZIONI.md` C8/C8-bis, `CLAUDE.md` §9 e
+  **questa relazione**.
+
+**Cinque cose aspettano te** *(stato aggiornato al 2026-09-15 sera)*:
 1. **alzare l'inerzia**, cioe' rileggere tutto dove la densita' e' O(1): toglie la causa, non il
    sintomo. E' la leva che il lavoro di oggi indica come la sola non-cosmetica;
 2. **sotto-passo per lo spin** (lo stesso principio di `nsub`): presidio numerico onesto, non una
    cura. NB: con la crescita **diffusiva con plateau** misurata oggi il numero di sotto-passi
    **non diverge** — ne servirebbero ~112, non "sempre di piu'";
-3. **correggere i due commenti stale** alle righe **868** e **1803** (un commit suo): sono loro ad
-   aver fatto partire il mandato di oggi da una diagnosi sbagliata;
+3. **correggere i due commenti stale**, oggi alle righe **901** e **1852** (un commit suo):
+   **ANCORA NON FATTO**, e sono loro ad aver fatto partire un mandato da una diagnosi sbagliata;
 4. **`_pesi()`**: FASE B non eseguita, la premessa del mandato e' falsa (`doc/REPERTO_pesi_ricorsione.md`);
 5. **`:5318`**: il diaglog re-implementa `cs` inline — sotto turbo quella colonna mente.
 
-Il **gate** e' a `c0803713` in `CLAUDE.md` §0, il blob sul disco e' **`f5887254`**. **Non
-ri-timbrato di proposito.** `soliton_simulator.py` **non e' stato toccato** in nessuno dei lavori
-del 14 e 15 settembre: bilancio, Gilbert/FDT, `_pesi`, profilazione.
+Il **gate** e' a `c0803713` in `CLAUDE.md` §0, il blob sul disco e' **`b298677a`**. **Non
+ri-timbrato di proposito**, e oggi a maggior ragione: i sigilli della FASE 2 **non passano**.
+*(La frase precedente diceva `f5887254` e «il `.py` non e' stato toccato»: vera il 15 mattina,
+falsa dal cablaggio di `TAU_LUCE` in poi. Storia dei blob: `f5887254` -> `968c903` (estrazione di
+`_tempo_luce_nodo`) -> `7d484580` (`TAU_LUCE`) -> **`b298677a`** (fix cache + contatore).)*
 
 Dettagli: `doc/ESITO_scan_turbo_K300.md`, `doc/REPERTO_pesi_ricorsione.md`,
 `doc/PROFILAZIONE_costo_run.md`, `doc/REPERTO_gamma_condiviso.md`, `doc/PREDIZIONE_*.md`,
