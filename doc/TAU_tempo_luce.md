@@ -107,6 +107,15 @@ attuale prima di usarla per estrapolare** — e non regge:
 Lo scrivo per primo perché è una correzione a un mio risultato di poche ore fa, ed era proprio il
 numero che avevo presentato come «la catena si chiude».
 
+> ### ⚠⚠ CORREZIONE DELLA CORREZIONE (stesso giorno, `doc/BARRE_ERRORE_pendenze.md`)
+> **L'attribuzione qui sopra è SBAGLIATA.** La differenza fra `+1.812` e `+1.176` **non** è
+> 20-vs-2195 nodi: è **passo 400 vs passo 300**. A parità di passo le due strade concordano
+> (300: +1.176 contro +1.178, scarto **0.002**; 400: +1.812 contro +1.867, scarto **0.055**).
+> **La causa vera è il TRANSITORIO:** lo scarto cala da **0.979** (passo 50) a **0.010** (passo 400),
+> perché `tau ≈ 4425-6500 passi` e il run ne ha 300-400 — meno di un decimo di un rilassamento.
+> **Al passo 400 la catena CHIUDE**, e **non c'è nessun residuo da spiegare.**
+> La tabella e il testo sopra sono conservati com'erano: documentano come ci sono arrivato.
+
 ### 7.2 La misura che il criterio chiedeva
 
 ```

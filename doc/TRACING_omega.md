@@ -138,6 +138,14 @@ theta MISURATO                                = -0.113        scarto 0.037
 > **La catena NON si chiude come scritto qui.** Il meccanismo qualitativo regge — `√tau` cancella
 > **parte** del −1 — ma **resta un residuo di ~0.34 nell'esponente che non è spiegato**.
 > Questa riga è conservata com'era, con la correzione accanto.
+>
+> ### ⚠⚠ E LA CORREZIONE QUI SOPRA È A SUA VOLTA SBAGLIATA NELL'ATTRIBUZIONE
+> (`doc/BARRE_ERRORE_pendenze.md`, stesso giorno.) Non sono i 20 nodi: a parità di passo le due
+> strade di misura di `tau` **concordano** (passo 400: +1.812 contro +1.867). La differenza è il
+> **PASSO**, cioè il **transitorio**: lo scarto cala da 0.979 (passo 50) a **0.010 (passo 400)**,
+> perché `tau ≈ 4425-6500 passi` contro un run di 400.
+> **Quindi la riga ORIGINALE — «la catena si chiude, scarto 0.037» — era GIUSTA**, e lo è ancora di
+> più col conto rifatto (0.010). **Non c'è nessun residuo da spiegare.**
 
 > ### **Il −1 della coppia è cancellato dal +0.91 di √τ.**
 > `tau = TAU_A · max(dens/dens_rif, 0.05)` **cresce con la densità**, e il suo peso entra nel

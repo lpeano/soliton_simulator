@@ -687,6 +687,53 @@ e' **separata e aperta**, e mescolarla renderebbe inattribuibile qualunque risul
 
 ---
 
+## 6-decies. BARRE D'ERRORE (2026-09-15) — **il residuo e' REALE ma TRANSITORIO. E ho corretto due volte, sbagliando la prima correzione.**
+
+Documento: **`doc/BARRE_ERRORE_pendenze.md`**. **Nessun run**, solo statistica sui CSV su disco.
+
+**1. La premessa da verificare non reggeva, ma la verifica era giusta da chiedere.**
+L'ipotesi era: *"`r = 0.35` -> pendenza fragile, `SE ~ 0.3`"*. **`SE` non dipende quasi da `r`:
+dipende da `sqrt(n)`.** Stessa pendenza, stesso `r`: `SE` = **0.108** con 20 punti, **0.0097** con
+2195. `r^2` basso dice che la relazione **spiega poca varianza**, non che la pendenza sia incerta.
+
+| grandezza | pendenza | SE | r^2 | IC 95% |
+|---|---|---|---|---|
+| `sigma` | -1.0780 | 0.0073 | 0.908 | [-1.0923, -1.0637] |
+| `tau` attuale | +1.1760 | 0.0191 | 0.634 | [+1.1386, +1.2134] |
+| `tau` luce (`d/cs`) | +0.0970 | 0.0055 | 0.123 | [+0.0862, +0.1078] |
+| `theta` | -0.1520 | 0.0097 | 0.100 | [-0.1711, -0.1329] |
+
+**2. Propagazione: `z = 21.8`.** Lo scarto al passo 300 **non e' rumore**. Si passa al secondo check.
+
+**3. Il secondo check: e' TRANSITORIO, e si chiude.** Lo scarto cala di **due ordini**:
+
+```
+passo   50  100  150  200  250  300  350  400
+scarto 0.979 0.660 0.448 0.427 0.194 0.337 0.230 0.010
+pendenza su log(passo): -0.412
+```
+
+> **Al passo 400 la catena CHIUDE (scarto 0.010).** `tau ~ 4425-6500 passi` contro un run di 400: il
+> sistema ha vissuto **meno di un decimo** di un rilassamento, e la formula vale **all'equilibrio**.
+> **VERDETTO: TRANSITORIO, NON UN TERMINE MANCANTE. La ricerca non e' giustificata.**
+
+**4. E la mia correzione di stamattina aveva la CAUSA SBAGLIATA.** Avevo attribuito la differenza
+`0.037` vs `0.338` al campione (20 contro 2195 nodi), e l'avevo messo in `CLAUDE.md` §9 come fatto.
+**A parita' di passo le due strade CONCORDANO:** passo 300 -> +1.176 contro +1.178 (scarto **0.002**);
+passo 400 -> +1.812 contro +1.867 (scarto **0.055**). **La differenza e' il PASSO, non il campione.**
+
+> **Quindi il numero ORIGINALE — "la catena si chiude, scarto 0.037" — era GIUSTO**, e col conto
+> rifatto lo e' ancora di piu' (0.010). **Ho corretto una cosa giusta con una spiegazione sbagliata,
+> e me ne sono accorto solo facendo il check che Luca ha chiesto.**
+
+**Cosa resta e cosa no:** resta il presidio *"una pendenza si riporta col suo `SE`"* — ed e' proprio
+applicandolo che si e' visto che `SE = 0.0097`. **Non resta** *"una pendenza su 20 nodi non e' una
+pendenza"* **come spiegazione di questo caso**: qui i 20 nodi davano il numero giusto. Corretto in
+`CLAUDE.md` §9, in `doc/TRACING_omega.md` e in `doc/TAU_tempo_luce.md`, **in loco**, lasciando le
+righe originali visibili.
+
+---
+
 ## 7. IL LAVORO DI CONTORNO, in breve
 
 - **Profilazione** (`doc/PROFILAZIONE_costo_run.md`): il collo **non** è il loop CFL. I due hoist

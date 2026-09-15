@@ -335,13 +335,22 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   **piatto** (-0.006, `r = -0.025`, mediana 59.4 gradi); (IV) `R_stoc = 0.041`, **sotto** l'errore
   atteso della ricostruzione (0.097) -> il rumore e' **marginale**, non guida `omega`.
   E il termine dissipativo **non domina**: rapporto coppia/dissipativo **= 188.9**.
-- **LA CATENA `pendenza(theta) = pendenza(sigma) + pendenza(tau)/2` NON CHIUDE** (2026-09-15).
-  **CORREZIONE a un numero scritto in questo repo poche ore prima:** `pendenza(tau)` vale **+1.176**
-  misurata su **2195 nodi** (`r = +0.796`), **non** `+1.812` come risultava da **20 nodi**. Con la
-  misura buona: attesa **-0.490** contro **-0.152** misurata -> **scarto 0.338**, non 0.037.
-  **Il meccanismo qualitativo regge** (`sqrt(tau)` cancella **parte** del -1) **ma il conto
-  quantitativo no**, e resta un **residuo di ~0.34 nell'esponente che NON e' spiegato.** Chi usa
-  quella formula per estrapolare deve portarsi dietro il residuo.
+- **LA CATENA `pendenza(theta) = pendenza(sigma) + pendenza(tau)/2` CHIUDE, ma solo A TEMPI LUNGHI**
+  (2026-09-15, `doc/BARRE_ERRORE_pendenze.md`). Lo scarto fra attesa e misurata **CALA di due ordini
+  col tempo**: **0.979** al passo 50 -> **0.010** al passo 400 (pendenza su `log(passo)`: **-0.412**).
+  **E' un TRANSITORIO, non un termine mancante:** `tau ~ 4425-6500 passi` mentre i run ne hanno
+  300-400, quindi il sistema ha vissuto **meno di un decimo** di un tempo di rilassamento, e la
+  formula vale **all'EQUILIBRIO**.
+  **DOPPIA CORREZIONE, entrambe mie, entrambe dello stesso giorno:** prima avevo scritto che la
+  catena chiudeva (scarto 0.037); poi che NON chiudeva (0.338) **attribuendolo ai 20 nodi**; en-
+  trambe le letture erano parziali. **A parita' di passo le due strade di misura di `tau` CONCORDANO**
+  (passo 300: diretta +1.176 su 2195 contro indiretta +1.178, scarto **0.002**; passo 400: +1.812 su
+  20 contro +1.867 su 2781, scarto **0.055**). **La differenza e' il PASSO, non il campione.**
+- **PRESIDIO — `r^2` BASSO NON SIGNIFICA PENDENZA INCERTA** (2026-09-15). `SE_b = |b/r|*sqrt((1-r^2)/(n-2))`:
+  il fattore dominante e' **`sqrt(n)`**, non `r`. Stessa pendenza e stesso `r = 0.32`: `SE` vale
+  **0.108** con 20 punti, **0.0097** con 2195. Quindi una pendenza con `r^2 = 0.10` su 2195 nodi e'
+  determinata a **+-0.01**. `r^2` basso dice che la relazione **spiega poca varianza**, non che la
+  pendenza sia fragile. **Serve sempre `SE`, non `r`, per decidere se uno scarto e' significativo.**
 - **`d/cs` E' PIATTO CONTRO L'INERZIA: pendenza +0.097** (`r = +0.351`, 2195 nodi; 2026-09-15,
   `doc/TAU_tempo_luce.md`). Quindi sostituire `tau = TAU_A*max(dens/dens_rif, 0.05)` (riga 1913) con
   il **tempo-luce `d/cs`** (lo stesso `tau` gia' cablato nello Strato 1) **romperebbe la
@@ -353,9 +362,11 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   (2026-09-15). La relazione `theta = sigma + tau/2` sembrava confermata (scarto 0.037) finche' non
   si e' rifatta la misura di `tau` su un campione serio: **scarto 0.338**. Se avessi estrapolato
   senza ri-verificare, avrei predetto `-1.03` invece di `-0.69`.
-  **E il corollario che l'ha causata: UNA PENDENZA MISURATA SU 20 NODI NON E' UNA PENDENZA.**
-  20 nodi contro 2195 hanno dato `+1.812` contro `+1.176`. Le regressioni trasversali si fanno su
-  **tutti** i nodi disponibili; il campione ridotto serve a **tracciare una catena**, non a misurare
-  un esponente.
+  **NB (corretto il 2026-09-15 stesso):** avevo aggiunto qui il corollario *"una pendenza su 20
+  nodi non e' una pendenza"*, citando `+1.812` contro `+1.176` come prova. **Quella prova NON era
+  valida:** i due numeri sono a **passi diversi** (400 e 300), e a parita' di passo le due strade
+  concordano entro 0.055. Il corollario resta una **buona prudenza** (un campione ridotto ha `SE`
+  piu' grande, e infatti 20 nodi danno `SE = 0.108` contro 0.0097), ma **non era la causa di quel
+  caso**, e citarlo come tale era un errore.
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
