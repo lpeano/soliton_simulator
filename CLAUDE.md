@@ -381,5 +381,38 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   concordano entro 0.055. Il corollario resta una **buona prudenza** (un campione ridotto ha `SE`
   piu' grande, e infatti 20 nodi danno `SE = 0.108` contro 0.0097), ma **non era la causa di quel
   caso**, e citarlo come tale era un errore.
+- **PRESIDIO — OGNI RAMO `else` / FALLBACK / `getattr(..., default)` SU UN PERCORSO FISICO VA
+  STRUMENTATO CON UN CONTATORE: quante volte e' scattato?** Un fallback mai misurato e' un
+  comportamento **sconosciuto**, e uno che scatta il 72% delle volte **non e' un fallback, e' il
+  comportamento principale.** E' il gemello del presidio del "valore sotto ipotesi nulla": li'
+  *"quanto varrebbe se non ci fosse niente?"*, qui *"quante volte questo ramo e' davvero quello che
+  gira?"*. CASO REALE che ha generato la regola (2026-09-15): il ramo `else` di `_tempo_luce_nodo`
+  scattava nel **71.88%** delle chiamate (23 su 32, cache inusabile in **24 passi su 30**) senza che
+  nessun sigillo se ne accorgesse — perche' il ramo **non e' un errore**: e' il fallback legittimo
+  per `--cs-dinamico` OFF e per il primo passo. Niente NaN, niente runaway, nessuna byte-identita'
+  violata. **Un difetto silenzioso non si trova guardando se il codice sbaglia: si trova contando
+  quale strada prende.**
+- **LA CACHE `_cs_nodo_prev` VENIVA SCARTATA A OGNI MITOSI — CURATO il 2026-09-15** (commit
+  `43e9a47`, `doc/FIX_cache_cs.md`, sigillo `csv/_seal_fork/_sigillo_fix_cache.py` **5/5 PASS**).
+  La cache e' scritta a fine passo con l'`n` di quel passo (riga ~2918); la **mitosi aggiunge nodi**,
+  quindi al passo dopo la guardia `len(csp) >= n` falliva e `_tempo_luce_nodo` cadeva su
+  `cs_nodo = CS_M`. Ne risentivano **due** chiamanti: `_bloch_ritardato` (**lo STRATO 1**, gia'
+  sigillato 23/23) e il rilassamento sotto `--tau-luce`. Cura: il figlio **eredita `cs` dal padre**
+  in `_eredita_spinore_figli`, **sesta voce della stessa convenzione** di `_nb`/`_nb_prec`/`_nb_ret`/
+  `omega_s`/`_psi_spinor`/`_psi_prec` — zero parametri. Misurato: fallback **71.88% -> 0.00%**,
+  passi con cache inusabile **24/30 -> 0/30**.
+  **MA ATTENZIONE A COSA QUESTO NON DICE** (misurato nello stesso sigillo, P4): `cs` riparato varia
+  dello **0.023%** (`min 1.99954`, `max 2.0`, `CS_M = 2`, `max/min = 1.000230`). Quindi il difetto
+  **non disattivava** `tau = d/cs`: lo calcolava come `tau = d/CS_M`, e **il fattore `d` era vivo nel
+  100% dei passi**. Cio' che la FASE 2 sostituisce e' `TAU_A*max(dens/dens_rif, 0.05)` con `d/cs`, e
+  **quasi tutto quel cambiamento sta in `d`, non in `cs`.** Chi usa questo difetto per spiegare la
+  "meta' mancante" di T3 sta attribuendo un effetto di ordine 0.3 a una grandezza che varia di 2e-4.
+  **La cura resta giusta per una ragione indipendente:** `cs` e' quasi-costante **oggi** (par.6);
+  il giorno in cui sara' vivo, una cache scartata a ogni mitosi sarebbe un difetto **grande**, e lo
+  sarebbe **in silenzio**.
+  NB — **la terza via di crescita dei nodi resta scoperta:** `semina()` (riga ~1600) **non** passa da
+  `_eredita_spinore_figli`. In batch e' inerte (`semina_cont=False` di default, si accende **solo**
+  dalla GUI, righe ~4610 e ~4753), quindi non tocca nessuna misura committata; registrata in
+  `doc/RAMIFICAZIONI.md` sotto la voce **H** (percorso GUI).
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
