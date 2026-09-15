@@ -133,6 +133,20 @@ def main():
                 stato["hdr"] = True
             wcsv.writerow(r)
     orig_step = S.Rete.step
+    # [2026-09-15] SPIA SU `ritmo()`: registra `r` COSI' COM'E' restituito dal passo VERO, senza
+    # chiamarlo una seconda volta. Richiamarlo dal diagnostico NON sarebbe puro: sul ramo di return
+    # anticipato `ritmo()` riscrive `self._psi_prec`. Qui si legge soltanto il valore di ritorno.
+    orig_ritmo = S.Rete.ritmo
+    ultimo_r = {"v": None}
+
+    def spia_ritmo(self):
+        r = orig_ritmo(self)
+        ultimo_r["v"] = None if r is None else np.asarray(r, float).copy()
+        return r
+    S.Rete.ritmo = spia_ritmo
+    # RNG LOCALE del diagnostico: il campionamento delle coppie per l'autocorrelazione NON deve
+    # consumare `net.rng` (par.2.3). Seme fisso -> stesse coppie a ogni campione, confrontabili.
+    rng_diag = np.random.default_rng(20260915)
 
     def in_applica_flag():
         """_applica_flag gira 300 step di riscaldamento su un'ALTRA rete (quella interattiva
@@ -228,6 +242,73 @@ def main():
             r["cs_std"] = float(np.std(_c)); r["cs_min"] = float(np.min(_c)); r["cs_max"] = float(np.max(_c))
         else:
             r["cs_std"] = r["cs_min"] = r["cs_max"] = float("nan")
+        # ---- MISURA C: `theta = |omega_s| * dt_n` in GRADI/passo ----------------------------
+        # NON la sola mediana: anche la CODA (frazione sopra 30 gradi/passo), che e' cio' che decide
+        # se il settore e' campionato o aliasato. dt_n = DT*r con l'`r` del passo appena finito.
+        om = getattr(net, "omega_s", None)
+        rv = ultimo_r["v"]
+        if om is not None and len(om) >= n:
+            omn = np.linalg.norm(np.asarray(om, float)[:n], axis=1)
+            rr = rv[:n] if (rv is not None and len(rv) >= n) else np.ones(n)
+            th = np.degrees(omn * S.DT * rr)
+            r["theta_mediana"] = float(np.median(th))
+            r["theta_media"] = float(np.mean(th))
+            r["theta_p90"] = float(np.percentile(th, 90))
+            r["theta_giri_mediana"] = float(np.median(th) / 360.0)
+            r["theta_fr_gt30g"] = float(np.mean(th > 30.0))
+            r["theta_fr_gt360g"] = float(np.mean(th > 360.0))
+        else:
+            for k in ("theta_mediana", "theta_media", "theta_p90", "theta_giri_mediana",
+                      "theta_fr_gt30g", "theta_fr_gt360g"):
+                r[k] = float("nan")
+
+        # ---- MISURA D: DISPERSIONE di `r` (MAI la mediana) -----------------------------------
+        # `ritmo()` fa `x = f/median(|f|)` e normalizza su `r_unit` = il valore a x=1: il nodo
+        # mediano ha x=1 per definizione e la mappa e' monotona, quindi `median(r) = 1.0` ESATTA,
+        # con qualunque orologio. Misurarla per vedere se cambia e' un test VUOTO (errore commesso
+        # dal sigillo S4 il 2026-09-15). Si riporta la DISPERSIONE e i quantili.
+        if rv is not None and len(rv) >= n:
+            rr = rv[:n]
+            r["r_std"] = float(np.std(rr))
+            r["r_iqr"] = float(np.percentile(rr, 75) - np.percentile(rr, 25))
+            r["r_p05"] = float(np.percentile(rr, 5)); r["r_p95"] = float(np.percentile(rr, 95))
+            r["r_min"] = float(np.min(rr)); r["r_max"] = float(np.max(rr))
+            r["r_mediana"] = float(np.median(rr))   # solo come CONTROLLO che valga 1: non e' una misura
+        else:
+            for k in ("r_std", "r_iqr", "r_p05", "r_p95", "r_min", "r_max", "r_mediana"):
+                r[k] = float("nan")
+
+        # ---- MISURA E: AUTOCORRELAZIONE SPAZIALE <n_i . n_j> per bin di distanza -------------
+        # E' la firma che DISCRIMINA (B) da (A) e da (C): ~0 ovunque = nessuna struttura;
+        # decadimento a scala FINITA = struttura; ~1 ovunque = collasso globale.
+        # Coppie campionate con l'RNG LOCALE del diagnostico, mai `net.rng`.
+        pos = getattr(net, "pos", None)
+        if pos is not None and len(pos) >= n and n >= 100:
+            P = np.asarray(pos, float)[:n]
+            K = 200000
+            ia = rng_diag.integers(0, n, K); ib = rng_diag.integers(0, n, K)
+            keep = ia != ib
+            ia, ib = ia[keep], ib[keep]
+            dist = np.linalg.norm(P[ia] - P[ib], axis=1)
+            dot = np.sum(nb[ia] * nb[ib], axis=1)
+            bordi = np.percentile(dist, [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
+            idx = np.clip(np.digitize(dist, bordi[1:-1]), 0, 9)
+            for b in range(10):
+                m_b = idx == b
+                cnt = int(m_b.sum())
+                r["ac%d_n" % b] = cnt
+                if cnt > 1:
+                    v_b = dot[m_b]
+                    r["ac%d_d" % b] = float(np.mean(dist[m_b]))
+                    r["ac%d" % b] = float(np.mean(v_b))
+                    r["ac%d_se" % b] = float(np.std(v_b) / np.sqrt(cnt))
+                else:
+                    r["ac%d_d" % b] = r["ac%d" % b] = r["ac%d_se" % b] = float("nan")
+        else:
+            for b in range(10):
+                r["ac%d_n" % b] = 0
+                r["ac%d_d" % b] = r["ac%d" % b] = r["ac%d_se" % b] = float("nan")
+
         # La riga e' COMPLETA solo qui: flag e cs_* sono appena stati aggiunti. Scrivere prima
         # troncherebbe il CSV proprio sulle colonne di verifica (errore fatto e corretto il
         # 2026-09-14: il primo tentativo scriveva dopo `nan_psi`, e STEP2/cs_* sparivano).
