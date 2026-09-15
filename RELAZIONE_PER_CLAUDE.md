@@ -787,6 +787,90 @@ di T3 **con un criterio scritto prima**.
 
 ---
 
+## 6-duodecies. LA CACHE `_cs_nodo_prev` (2026-09-15) — **difetto REALE, curato, sigillo 5/5. Ma NON spiega la meta' mancante di T3, e lo dico PRIMA di ri-misurare**
+
+**IL DIFETTO.** `_cs_nodo_prev` e' scritta a **fine passo** con l'`n` di quel passo (riga ~2918). La
+**mitosi aggiunge nodi**, quindi al passo dopo la guardia `len(csp) >= n` di `_tempo_luce_nodo`
+fallisce e si cade nel ramo `else` -> **`cs_nodo = CS_M` costante**.
+
+**Misurato sul file PRIMA della patch** (seme 1, scena 3 masse, 30 passi):
+
+| | |
+|---|---|
+| passi con cache **inusabile** | **24 su 30** |
+| chiamate finite nel **fallback** | **23 su 32 = 71.88 %** |
+
+**Ne risentivano DUE chiamanti**, non uno: `_bloch_ritardato` (riga 2462, **lo STRATO 1, gia'
+sigillato 23/23**) e il rilassamento sotto `--tau-luce` (riga 1947).
+
+**PERCHE' NESSUN SIGILLO L'AVEVA VISTO.** Il ramo `else` **non e' un errore**: e' il fallback
+legittimo per `--cs-dinamico` OFF e per il primo passo. Il codice fa quello che dice. E' la
+**condizione** a essere sbagliata in presenza di mitosi. Niente NaN, niente runaway, nessuna
+byte-identita' violata. **Un difetto silenzioso non si trova guardando se il codice sbaglia: si
+trova contando quale strada prende.** Da qui il presidio nuovo in `CLAUDE.md` par.9:
+
+> **Ogni ramo `else` / fallback / `getattr(..., default)` su un percorso FISICO va strumentato con un
+> contatore.** Un fallback che scatta il 72 % delle volte **non e' un fallback: e' il comportamento
+> principale.** E' il gemello del presidio del *valore sotto ipotesi nulla*.
+
+**LA CURA.** Il figlio **eredita `cs` dal padre** in `_eredita_spinore_figli`: **sesta voce della
+stessa convenzione** gia' usata per `_nb`, `_nb_prec`, `_nb_ret`, `omega_s`, `_psi_spinor`,
+`_psi_prec`. Zero parametri, zero floor, zero valori nuovi. **Non toccati** la guardia, il ramo
+`else`, la scrittura a fine passo.
+
+**SIGILLO `csv/_seal_fork/_sigillo_fix_cache.py` — 5/5 PASS**
+
+| | esito | numeri |
+|---|---|---|
+| **P1** flag OFF byte-identico | PASS | `n_A = n_B = 1692` (**confrontabili**), 21 campi, `max\|A-B\| = 0.000e+00`, RNG identico |
+| **P1b** col flag ON devono DIFFERIRE | PASS | `n` 1821 contro 1771 |
+| **P2** il contatore | PASS | **71.88 % -> 0.00 %** |
+| **P3** `len(cache) == n` a ogni passo | PASS | **24/30 -> 0/30** |
+| **P4** stabilita' | PASS | `\|nb\|-1 = 2.2e-16`, NaN/inf **0** |
+
+**P1b non era nel mandato: l'ho aggiunto.** Senza, una patch che non fa **nulla** passerebbe P1, P3 e
+P4. Il controllo necessario e' che il risultato **fisico** cambi.
+
+### E QUI LA COSA CHE CONTA PER TE — **una premessa del mandato non regge**
+
+P4 misura anche la dispersione di `cs` **riparato**:
+
+```
+cs cache: min 1.99954   max 2.0   (CS_M = 2)      max/min = 1.000230
+```
+
+> **`cs` varia dello 0.023 %.**
+
+Il mandato argomentava: *«l'effetto di `tau = d/cs` puo' esistere solo quando `cs` varia, cioe' in un
+quinto dei passi; con la cache attiva 1/5 del tempo, un effetto dimezzato e' quello che deve
+succedere»* — e ne concludeva che la meta' mancante di T3 (misurato **-0.43** contro **-0.69**
+onesto / **-1.03** naive) era **questo bug**.
+
+**Non segue.** Il fallback **non disattivava** `tau = d/cs`: lo calcolava come **`tau = d/CS_M`**, e
+**il fattore `d` era vivo nel 100 % dei passi.** Cio' che la FASE 2 sostituisce e'
+`TAU_A*max(dens/dens_rif, 0.05)` con `d/cs`, e **quasi tutto quel cambiamento sta in `d`**, non in
+`cs`. Il difetto congelava **solo** il fattore `cs` — che ha **2.3e-4** di escursione totale.
+Attribuirgli uno spostamento di pendenza di ordine **0.3** significa chiedere a una grandezza che
+varia di 2e-4 di produrre un effetto tre ordini di grandezza piu' grande.
+
+**PREDIZIONE, scritta e committata PRIMA della ri-misura** (`doc/FIX_cache_cs.md` par.5, commit
+`43e9a47`): la pendenza T3 col flag ON **non si muovera' in modo misurabile**, `|Delta|` sotto il
+proprio `SE` (~0.01). Se e' cosi', vale la lettura gia' fissata dal mandato stesso: **«il bug non era
+la causa: resta un residuo vero da capire. Non inventare una spiegazione: riporta e fermati.»**
+
+**LA CURA RESTA GIUSTA COMUNQUE**, per una ragione indipendente dal residuo: `cs` e' quasi-costante
+**oggi**, alle densita' attuali (`CLAUDE.md` par.6, *«a densita' reali cs e' MORTO»*). Il giorno in cui
+`cs` sara' vivo, una cache scartata a ogni mitosi sarebbe un difetto **grande** — e lo sarebbe **in
+silenzio**. Si ripara adesso, mentre e' innocuo e dimostrabile.
+
+**COSA RESTA SCOPERTO.** Le vie di crescita dei nodi sono **tre**: mitosi (`:3192`), Schwinger
+(`:3309`) e **`semina()` (`:1600`)**. La terza **non** passa da `_eredita_spinore_figli`. In batch e'
+inerte (`semina_cont=False` di default, si accende **solo** dalla GUI), quindi **non tocca nessuna
+misura committata** — ma e' sul percorso GUI, lo stesso della voce **H** di `doc/RAMIFICAZIONI.md`,
+e li' e' registrata.
+
+---
+
 ## 7. IL LAVORO DI CONTORNO, in breve
 
 - **Profilazione** (`doc/PROFILAZIONE_costo_run.md`): il collo **non** è il loop CFL. I due hoist
