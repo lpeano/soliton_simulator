@@ -255,6 +255,52 @@ dissipazione"* era **falsa**.
 
 ---
 
+## 6-quater. `inerzia`: MASSA o FRAZIONE? (2026-09-15) — **FASE A chiusa: nessuna delle due**
+
+Documento: **`doc/INERZIA_massa_o_frazione.md`**. Prima relazione scritta sotto la regola nuova
+**§5-ter** (a ogni riscontro, una relazione, subito).
+
+Il mandato chiedeva di scegliere fra due ipotesi su `inerzia = |Psi|^2`: **frazione normalizzata**
+(scala come 1/N) o **massa vera**. **Dal codice non e' ne' l'una ne' l'altra.**
+
+- **Non e' normalizzata.** `F = mat(w) @ (1.0 * e^{i phi})` e' una **somma pesata sui vicini**: non
+  c'e' divisione per `N`, non esiste alcun vincolo `sum|psi|^2 = cost` in tutto il file, e `satura`
+  e' un **tetto morbido** (asintoto `1/GAMMA = 20`), non una normalizzazione. Il codice prevede il
+  **contrario** della firma (1): `|psi|` dovrebbe **crescere** col numero di vicini.
+- **Non e' una massa.** `inerzia = max(_rho_sorgente(), 1e-6)` (riga **1891**) e' **letteralmente**
+  il modulo quadro del campo: nessuna massa, nessun volume, nessun fattore. Solo il floor.
+
+**E allora perche' vale 1e-7? L'ETA', non la normalizzazione.** In `_pesi()`:
+`ramp = min(1, eta/TAU_A)`, con `eta += dt_n` (~0.01) per passo e **`TAU_A = 50`** nel regime
+deterministico, quindi un nodo raggiunge **peso pieno solo dopo ~5000 passi**. Al passo 150
+`ramp ~ 0.03`, e `w` va come `ramp_i*ramp_j ~ 9e-4`. **E i figli della mitosi nascono con `eta = 0`**,
+quindi una frazione stabile della popolazione resta **permanentemente immatura**. Coerente con la
+crescita gia' misurata di `Lam`: **7.45e-14 al passo 1 -> 1.32e-4 al passo 150**, nove ordini in 150
+passi. Il campo **si sta accendendo**, non e' a regime.
+
+**IL REPERTO — l'analisi dimensionale.** `w`, `F`, `psi`, `|psi|^2`, `B`, `nb`, `cross(B,nb)` sono
+**tutti adimensionali**, quindi **`correzione/inerzia` e' adimensionale**. Ma la riga **1918** e'
+`omega += dt_n*(correzione/inerzia - omega/tau)` e `theta = |omega|*dt_n` deve essere un **angolo**:
+servirebbe **`[correzione/inerzia] = 1/T^2`**. In un corpo rigido `dw/dt = tau/I` lo da' **da se'**,
+perche' coppia e momento d'inerzia portano entrambi `M L^2`. Qui il numeratore e' un puro prodotto
+vettoriale geometrico e il denominatore una pura intensita' di campo.
+
+> **Onestamente:** `CLAUDE.md` dice che `DT` e' un **contatore di tick**, quindi il modello potrebbe
+> lavorare di proposito in unita' adimensionali, e allora non c'e' un "errore" da dichiarare. Ma
+> resta la conseguenza: **non c'e' protezione dimensionale, e il valore di `omega` e' libero.**
+> Nulla lo lega a una frequenza propria del modello (`cs/LAM`). Il "4000x il tetto di Planck" non e'
+> un'affermazione fisica: **nel rapporto non c'e' alcuna scala di frequenza.** Ed e' anche il motivo
+> per cui **riparametrizzare non puo' aiutare**: non ci sono unita' da riscalare.
+
+**Per la FASE B cambia la variabile.** Il mandato chiede l'istogramma contro `N`; la lettura dice che
+la variabile giusta e' **`|Psi|^2` contro `eta`** (l'eta' del nodo). Se i piccoli sono i **giovani**,
+il `1e-7` e' **maturazione**, non normalizzazione — transitoria, se non fosse che la mitosi la
+rigenera. Faro' entrambe, dichiarando la stratificazione per `eta` come **quarta firma**, aggiunta.
+
+**FASE B e C non fatte.** Nessun run lanciato per la FASE A: e' sola lettura del sorgente.
+
+---
+
 ## 7. IL LAVORO DI CONTORNO, in breve
 
 - **Profilazione** (`doc/PROFILAZIONE_costo_run.md`): il collo **non** è il loop CFL. I due hoist
