@@ -111,6 +111,18 @@ def main():
     sys.argv = argv
     import soliton_simulator as S
 
+    # [2026-09-15] IL BLOB DEL CODICE CHE STA GIRANDO, calcolato come lo calcola git
+    # (sha1 di "blob <len>\0" + byte del file). Senza subprocess: deterministico e puro.
+    # PERCHE': un CSV senza blob non e' ri-eseguibile, e un file che si distingue dagli altri solo
+    # per il NOME non e' un dato ma un ricordo (CLAUDE.md par.9). Il blob e' l'unica identita' del
+    # codice che non puo' mentire: un commit puo', un blob no (par.2.6).
+    import hashlib
+    with open(os.path.join(ROOT, "soliton_simulator.py"), "rb") as _f:
+        _by = _f.read()
+    BLOB = hashlib.sha1(b"blob %d\0" % len(_by) + _by).hexdigest()
+    print("[osserva] blob soliton_simulator.py = %s   seed = %d   tag = %s"
+          % (BLOB, a.seed, a.tag), flush=True)
+
     arg = S._cli()
     S._applica_regime(arg)
     # I FLAG NON SI LEGGONO QUI. `_applica_regime` fissa solo SCUOTIMENTO; FORK_SU2 e FORK_SU2_MEM
@@ -245,6 +257,11 @@ def main():
         r["STEP2"] = int(S.STEP2_OROLOGIO)
         r["GAMMA_TURBO"] = float(S.GAMMA_TURBO)
         r["TAU_LUCE"] = int(getattr(S, "TAU_LUCE", False))
+        r["CS_DINAMICO"] = int(S.CS_DINAMICO)
+        # IDENTITA' DEL RUN: senza queste, due bracci si distinguono solo dal nome del file.
+        r["blob"] = BLOB
+        r["seed"] = int(a.seed)
+        r["tag"] = a.tag
         # cs VIVO? se std ~ 0 il turbo non morde e il run e' nullo (verifica-scala in-run)
         _csp = getattr(net, "_cs_nodo_prev", None)
         if _csp is not None and len(_csp) >= n:
