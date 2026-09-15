@@ -107,6 +107,23 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
 - Se un fatto in par.9 si rivela superato dal codice, CORREGGILO qui (non lasciare un fatto stale:
   e' esattamente l'errore del docstring "ORFANO").
 
+## 5-ter. RELAZIONE A CLAUDE WEB — A OGNI RISCONTRO (regola di Luca, 2026-09-15)
+- **A ogni riscontro di QUALSIASI tipo** — una misura, un'analisi, una simulazione, una lettura del
+  codice, un sigillo che passa o che fallisce, una premessa che cade, un errore mio — **scrivi una
+  RELAZIONE per Claude web con quello che hai VISTO, e committala e pushala.**
+- **Subito, non a fine giornata.** Il riscontro si relaziona **nel momento in cui c'e'**, prima di
+  passare al pezzo successivo. **Un riscontro non relazionato e' un riscontro perso:** chi legge il
+  repo da fuori non ha la conversazione, ha solo i file.
+- **Si scrive QUELLO CHE SI E' VISTO**, non quello che si spera: i NUMERI, con accanto il
+  **valore-null / il riferimento** (par.9), e la provenienza (quanti semi, quanti passi, quale scena).
+- **Valgono come riscontro anche, e soprattutto:** i risultati **negativi**, le ipotesi **refutate**,
+  le premesse di un mandato che **non reggono al codice**, i **propri errori** e le **correzioni a
+  fatti gia' scritti**. Non si relaziona solo quando funziona.
+- **Dove:** un documento dedicato in `doc/` quando il riscontro e' un pezzo di lavoro, **PIU'** un
+  paragrafo in `RELAZIONE_PER_CLAUDE.md`, cosi' chi legge solo quella e' comunque allineato.
+- Vale **in aggiunta** a par.5 (politiche di commit) e par.5-bis (documenti vivi), non al loro posto:
+  un riscontro che cambia un FATTO STABILE va **anche** in par.9, e lo stato **anche** nel file di STATO.
+
 ## 6. STATO E ORDINE DEL LAVORO
 Ordine: **prima il FORK (non-abeliano), poi il resto.** GAMMA / Step 2 (cs<->orologio) / verifica
 EM<->curvatura sono A VALLE: non toccarli finche' il fork non gira (a densita' reali cs e' MORTO,
