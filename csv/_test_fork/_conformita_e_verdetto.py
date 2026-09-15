@@ -96,9 +96,22 @@ def conformita():
         cmp("tag", ",".join(vt), tag, uguale=(len(vt) == 1 and vt[0] == tag))
 
         # cs: il controllo che NON dipende dai flag
+        # [CORRETTO 2026-09-15, DOPO aver visto i dati - dichiarato nel commit]
+        # BLOCCANTE = la cache ESISTE, cioe' cs_std non e' `nan`. E' la condizione che il mandato
+        # nomina come STOP ("se e' nan la cache non esiste"), ed e' cio' che era sbagliato nel giro
+        # perso. Il "> 0" era MIO e sbagliava al primo campione: al passo 1, con 80 nodi appena
+        # seminati e densita' trascurabile, cs vale ESATTAMENTE CS_M ovunque -> cs_std = 0.0 e
+        # cs_min = cs_max = 2.0, che e' fisica corretta, non un difetto di config. Un `0` dice
+        # "la cache c'e' e cs non varia ANCORA"; un `nan` dice "la cache non c'e'". Sono cose diverse.
+        # Il "cs varia davvero?" resta, ma come CONTROLLO INFORMATIVO (par.3 del mandato), non come
+        # blocco: il mandato stesso lo tratta cosi' ("se e' sotto l'1 %, dillo nel referto").
         css = val(u, "cs_std"); csmin = val(u, "cs_min"); csmax = val(u, "cs_max")
-        vivo = (css == css) and css > 0.0
-        cmp("cs_std", "%.6g" % css if css == css else "nan", "non-nan, > 0", uguale=vivo)
+        esiste = (css == css)                      # BLOCCANTE: non-nan
+        vivo = esiste and css > 0.0                # informativo
+        cmp("cs_std (cache esiste?)", "%.6g" % css if esiste else "nan", "non-nan", uguale=esiste)
+        if esiste and not vivo:
+            print("    NB cs_std = 0 esatto: la cache C'E' ma cs non varia ancora (tipico dei primi")
+            print("       passi, pochi nodi e densita' trascurabile). NON e' un difetto di config.")
         if vivo:
             csmed = 0.5 * (csmin + csmax)
             rap = 100.0 * css / max(csmed, 1e-300)
