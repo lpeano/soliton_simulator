@@ -507,6 +507,27 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   ancora a se stessa.** E' il gemello del presidio del valore sotto ipotesi nulla: li' *"quanto
   varrebbe se non ci fosse niente?"*, qui *"questa grandezza puo' anche solo in linea di principio
   cambiare?"*.
+- **PRESIDIO — UN DATO DEVE PORTARSI DIETRO LE PROPRIE CONDIZIONI. UN FILE CHE SI DISTINGUE DAGLI
+  ALTRI SOLO PER IL NOME NON E' UN DATO: E' UN RICORDO.** Ogni CSV di misura deve portare, in ogni
+  riga o in un blocco di testa: **il BLOB**, **il SEME**, e **TUTTI i flag che distinguono quel run
+  dagli altri bracci dello stesso esperimento** — non solo quelli che si pensava contassero.
+  **Non basta scriverli nel log:** il log si perde, il CSV resta.
+  CASO REALE (2026-09-15, rilievo di Luca): il braccio OFF della prima misura del settore spinoriale
+  ha 136 colonne e **sette** colonne di flag corrette (`FORK_SU2=1`, `FORK_SU2_MEM=1`,
+  `KURAMOTO_SU2=0`, `STEP2=0`, `GAMMA_TURBO=1.0`, `SCUOTIMENTO=1`, `SYNC_UPDATE=0`) — **ma NON ha
+  `TAU_LUCE`**, che e' l'**unica** variabile che distingue i due bracci di quell'esperimento, **ne'
+  `CS_DINAMICO`**, ne' il blob, ne' il seme. I due bracci erano distinguibili **solo dal nome del
+  file**. Il run **non era sbagliato** (il flag era davvero OFF, come doveva); era **non
+  certificabile dai dati**.
+  **E la diagnosi è stata fatta dal DISCO, non dalla memoria:** i CSV sono stati scritti alle
+  `19:18:46`, la colonna e' stata aggiunta al codice alle `19:23:32` — **cinque minuti dopo**.
+  *(Chi avesse "ricordato" che la colonna c'era avrebbe certificato un file che non la contiene.)*
+  **COROLLARIO OPERATIVO:** quando si aggiunge una colonna di certificazione, **i dati gia' scritti
+  non la acquisiscono**. O si rilancia, o si annota **esplicitamente nel documento** che la colonna
+  manca e **da dove si deduce lo stato** — e un'annotazione dichiarata vale, una ricostruzione a
+  memoria no. *(Nel caso reale: `CS_DINAMICO` off e' deducibile da `cs_std = nan` su tutti gli 11
+  campioni, perche' la cache `_cs_nodo_prev` non viene scritta a flag spento. Deducibile, non
+  scritto.)*
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
 
