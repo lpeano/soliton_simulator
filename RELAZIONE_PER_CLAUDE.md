@@ -869,6 +869,50 @@ inerte (`semina_cont=False` di default, si accende **solo** dalla GUI), quindi *
 misura committata** — ma e' sul percorso GUI, lo stesso della voce **H** di `doc/RAMIFICAZIONI.md`,
 e li' e' registrata.
 
+### ESITO DELLA RI-MISURA — **la mia predizione e' SMENTITA, e la scrivo per prima**
+
+Quattro bracci, 300 passi, seme 1 (`csv/_test_fork/_rimisura_t3.txt`; codice committato **prima** del
+run, `22a7c41`).
+
+| braccio | pendenza | SE | r^2 | n | theta mediana |
+|---|---|---|---|---|---|
+| PRE  OFF | -0.1685 | 0.0090 | 0.126 | 2417 | 129.51 giri/passo |
+| **PRE  ON** | **-0.4265** | 0.0091 | 0.464 | 2534 | 43.55 giri/passo |
+| POST OFF | -0.1491 | 0.0085 | 0.109 | 2517 | 131.27 giri/passo |
+| **POST ON** | **-0.4710** | 0.0107 | 0.417 | 2690 | 42.81 giri/passo |
+
+> **`Delta` = -0.0445 +- 0.0141, `z` = 3.16.** Avevo predetto `|Delta|` **sotto il proprio SE**.
+> **Ho predetto zero e ho misurato 3 sigma.**
+
+**Le DUE previsioni opposte erano entrambe sbagliate.** Il mandato diceva **~50 %** (*«un effetto
+dimezzato e' quello che deve succedere»*); io dicevo **zero**. **Misurato: 16.9 %** del divario verso
+l'attesa onesta `-0.69`. **Restano aperti `-0.219`, e `theta` resta a 42.8 giri/passo: la FASE 2 non
+si chiude.** E' il caso *«valori intermedi»* previsto dal mandato: si riporta il numero e la
+frazione, **senza forzare**.
+
+*(Controllo di validita' superato: `PRE ON = -0.4265` riproduce il `-0.43` gia' in
+`doc/SIGILLO_tau_luce_FALLITO.md`. Stessa scena, confronto col numero storico valido.)*
+
+**IL MIO ERRORE, perche' e' il tipo che si ripete.** Avevo argomentato: *«`cs` varia dello 0.023 %,
+quindi non puo' spostare la pendenza»*. **Ho confrontato l'AMPIEZZA di una variazione con l'ampiezza
+di una pendenza.** Una pendenza trasversale non misura **quanto** una grandezza varia, misura
+**quanto la sua variazione e' CORRELATA con l'ascissa**: un fattore che cambia dello 0.02 % ma
+**sistematicamente nella stessa direzione** lungo l'asse dell'inerzia **sposta la pendenza**; uno che
+cambia del 50 % a caso non la sposta. **Argomento di ampiezza su una domanda di correlazione.**
+Resta vero il resto — `d` era vivo nel 100 % dei passi, e i **6/7** di divario ancora aperto lo
+confermano — ma *«non puo' muoverla affatto»* era falso.
+
+### ⚠ E UN DUBBIO SUL METRO, che ti segnalo perche' vale CONTRO di me
+
+`z = 3.16` usa le `SE` **interne a un singolo run**. Ma i due bracci ON sono **due traiettorie di un
+sistema caotico** (`N` 3999 contro 4100): **il valore sotto ipotesi nulla non e' zero**, e' la
+dispersione della pendenza fra run che differiscono per una perturbazione irrilevante — **mai
+misurata su questa osservabile**. Per `CLAUDE.md` par.2.7 (*mai su un solo seme*) va **misurata**:
+**controllo in volo**, tre semi x due bracci, `csv/_test_fork/_controllo_semi.py`, con la lettura
+scritta **dentro lo script prima dei dati**. Se il segno non e' concorde sui tre semi, **il
+`16.9 %` non e' un numero riportabile** e vanno corretti tutti i documenti che l'hanno gia' scritto,
+questo compreso.
+
 ---
 
 ## 7. IL LAVORO DI CONTORNO, in breve

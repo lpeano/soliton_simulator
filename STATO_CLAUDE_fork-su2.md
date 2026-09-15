@@ -20,12 +20,25 @@
   sul nuovo blob** (altrimenti il guard di `csv/_test_53c/_run_batch.ps1` blocca ogni campagna).
 
 ## Ultimo aggiornamento
-- Data: **2026-09-15**
-- Ultimo commit: **FASE 1 `tau = d/cs`: `d/cs` e' PIATTO (+0.097), la cancellazione si romperebbe**
-  (`doc/TAU_tempo_luce.md`). Prima: TRACING di `omega` (esito I), maturazione (esito C), test
-  trasversale, Gilbert/FDT, BILANCIO dei tassi, esito scan K=300 (B), reperto `_pesi`.
-- Branch: **`fork-su2`**, allineato con `origin/fork-su2`. **Nessun run in volo.**
-- Blob `soliton_simulator.py` **SUL DISCO** = **`f5887254`** (turbo cablato + fix guard).
+- Data: **2026-09-15** (sera)
+- Ultimo commit: **CONTROLLO SUI SEMI** (`87f90d7`) — codice committato prima del run, **run IN
+  VOLO**. Prima, nell'ordine: `43e9a47` **FIX della cache `_cs_nodo_prev`** (il figlio eredita `cs`
+  dal padre; sigillo `_sigillo_fix_cache.py` **5/5 PASS**, fallback **71.88% -> 0.00%**), `22a7c41`
+  script della ri-misura, `346a907` par.9 (presidio del contatore sui rami `else`), `ac022fc`
+  relazione, `26f3d7f` **ESITO T3: la mia predizione SMENTITA** (ON **-0.4265 -> -0.4710**,
+  `z = 3.16`, **16.9%** del divario recuperato, **la FASE 2 NON si chiude**), `3c4439a` correzione in
+  par.9 di un fatto che avevo scritto io stesso poche ore prima.
+- Prima ancora: `fa42066` registro `doc/RAMIFICAZIONI.md`, `f7051c3` sigillo `--tau-luce` FALLITO,
+  `a20bdd0` barre d'errore, `8447f47` FASE 1 `tau = d/cs`.
+- Branch: **`fork-su2`**, allineato con `origin/fork-su2`.
+- **RUN IN VOLO: `csv/_test_fork/_controllo_semi.py`** (3 semi x 2 bracci, 300 passi). Serve a
+  decidere se il `z = 3.16` e' un effetto o **dispersione di run** su un sistema caotico: le `SE` di
+  quel `z` sono interne a un singolo run, e il valore sotto ipotesi nulla **non e' zero**. **Se il
+  segno non e' concorde sui tre semi, il "16.9%" NON e' riportabile** e vanno corretti
+  `doc/FIX_cache_cs.md` par.6, `doc/RAMIFICAZIONI.md` C8/C8-bis, `CLAUDE.md` par.9 e
+  `RELAZIONE_PER_CLAUDE.md` par.6-duodecies.
+- Blob `soliton_simulator.py` **SUL DISCO** = **`b298677a`** (TAU_LUCE + fix della cache + contatore
+  del fallback). **La voce precedente diceva `f5887254`: era stale di tre blob.**
 - Blob **CERTIFICATO** in `CLAUDE.md` par.0 = **`c0803713`** (STEP 2, sigillo 10/10). **I DUE NON
   COINCIDONO, ed e' VOLUTO:** il turbo e' un ramo DIAGNOSTICO, non il percorso certificato, e si
   ri-timbra a pezzo compiuto, non a meta'. Chi riprende deve sapere che il `.py` sul disco e'
