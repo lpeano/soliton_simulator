@@ -1,7 +1,8 @@
 # REPERTO — `_psi_spin_prec`: **l'orologio spinoriale a 4π è spento nel 95 % dei passi**
 
-**Data:** 2026-09-15 · **Branch:** `fork-su2` · **Blob:** `b298677a` (verificato dal disco)
-**FASE A soltanto — nessuna cura. Si aspetta il via libera.**
+**Data:** 2026-09-15 · **Branch:** `fork-su2` · **Blob:** `b298677a` → **`08784685`** (curato)
+**FASE A (§1-6) e FASE B (§7-8) — cura applicata col via libera, sigillo 6/6 PASS.**
+**⚠ Leggi il §8: `S4` ha misurato la cosa sbagliata, e il numero non lo diceva.**
 
 ---
 
@@ -104,10 +105,83 @@ viene preso, **non** quanto cambia la fisica quando lo si prende. Quello lo dire
 
 ## 6. STATO
 
-**FERMO in attesa del via libera** (§5 del mandato, e par.1 «un interruttore alla volta»).
-La FASE B — `_psi_spin_prec` esteso alla mitosi come le altre sei, `vstack` perché è `n x 2`
-complesso — è **scritta ma non applicata**.
+*(Paragrafo storico: qui la FASE A si è fermata in attesa del via libera, arrivato poi. La FASE B è
+nel §7.)* La cura: `_psi_spin_prec` esteso alla mitosi come le altre sei, `vstack` perché è `n x 2`
+complesso.
 
 ⚠ **A differenza della cache `cs`, questa cura CAMBIA LA FISICA per costruzione:** fa ripartire
 l'aggiornamento di `signed` dopo ogni mitosi, quindi il ramo ON **non sarà byte-identico**, ed è
 **atteso**. S1 (byte-identità) vale solo a `--campo-spinoriale` **OFF**.
+
+---
+
+## 7. FASE B — LA CURA, **sigillo 6/6 PASS**
+
+Via libera ricevuta. `_psi_spin_prec` esteso alla mitosi in `_eredita_spinore_figli`: **settima voce
+della stessa convenzione**, `np.vstack` perché è `n × 2` **complesso**. Zero parametri.
+Non toccati: la guardia, la scrittura a fine passo, `signed`, `r`, `dt_n`.
+Blob: **`b298677a` → `08784685`**. Sigillo: `csv/_seal_fork/_sigillo_psi_spin_prec.txt`.
+
+| | esito | numeri |
+|---|---|---|
+| **S1** byte-identità a `--campo-spinoriale` OFF | **PASS** | `n_A = n_B = 2501` (**confrontabili**), 21 campi, `max\|A-B\| = 0.000e+00`, RNG identico |
+| **S1b** con ON devono DIFFERIRE (aggiunto da me) | **PASS** | `n` **2392** contro **2200** |
+| **S2** il contatore | **PASS** | **88.33 % → 0.00 %** (53/60 → 0/60); *tutti* i fallimenti erano `len != n` |
+| **S3** `len(_psi_spin_prec) == n` | **PASS** | passi disallineati **54/60 → 0/60** |
+| **S4** di quanto cambia `r` | *quantificazione* | vedi sotto — **la misura era mal posta** |
+| **S5** stabilità | **PASS** | `\|nb\|-1 = 2.2e-16`, NaN/inf **0**, `r` finito e positivo |
+
+*(88.33 % qui contro 95.33 % in FASE A: run più corto, 60 passi contro 150 — più peso ai primi passi,
+quando la mitosi non ha ancora cominciato. Stesso regime.)*
+
+---
+
+## 8. ⚠ S4 HA MISURATO LA COSA SBAGLIATA — e non lo dice il numero, lo dice il codice
+
+```
+PRIMA   r: mediana 1.000000 +- 0.011330   dev.std fra nodi 0.442149   n 2392
+DOPO    r: mediana 0.999999 +- 0.011374   dev.std fra nodi 0.425661   n 2200
+scarto sulla mediana: -0.000001 +- 0.016054   ->  z = 0.00
+```
+
+**Quel `z = 0.00` non significa "la cura non cambia `r`". Significa che la mediana di `r` NON PUÒ
+CAMBIARE.** Dalla coda di `ritmo()`:
+
+```python
+f   = np.abs(signed)
+med = max(float(np.median(np.abs(f))), 1e-9)
+x   = f / med                       #  il nodo MEDIANO ha x = 1, sempre
+r   = x/np.sqrt(1+x**2) + 1e-6      #  x = 1  ->  r = 1/sqrt(2) + 1e-6
+r_normalized = r / (1/np.sqrt(2) + 1e-6)     #  = 1 ESATTAMENTE
+return 1.0 + TAU_LOC * (r_normalized - 1.0)  #  = 1.0 ESATTAMENTE
+```
+
+**`r` è normalizzato sulla PROPRIA mediana**, e la trasformazione è monotona in `f`: quindi
+**`median(r) = 1.0` identicamente, con qualunque orologio.** Cambiare da 2π a 4π cambia `f` nodo per
+nodo, ma **la mediana resta inchiodata a 1 per costruzione**. Confrontare le due mediane è come
+confrontare due termometri dopo averli entrambi azzerati sulla loro stessa lettura mediana.
+
+> **È IL SECONDO CASO DELLO STESSO TRABOCCHETTO STRUTTURALE.** Il primo è già in `CLAUDE.md` §9:
+> `_tau = TAU_A * max(_dens/_dens_rif, 0.05)` con `_dens_rif = median(_dens)` → `tau_mediano ≈ TAU_A`
+> **sempre**. Stessa forma: **una grandezza normalizzata sulla propria mediana ha un punto fisso
+> auto-normalizzante, e su quel punto NON si misura nulla.**
+
+**L'unico numero informativo di S4 è la DISPERSIONE:**
+
+| | PRIMA (2π) | DOPO (4π) | rapporto |
+|---|---|---|---|
+| dev.std di `r` fra nodi | **0.442149** | **0.425661** | **0.9627** (−3.7 %) |
+| `r` minimo | 0.001139 | **0.000020** | ×0.018 |
+| `r` massimo | 1.414209 | 1.347323 | 0.953 |
+
+**E non basta a concludere.** È **un seme**, e per **C10** (`doc/RAMIFICAZIONI.md`) il valore sotto
+ipotesi nulla di un confronto fra due run caotici **non è zero** e qui **non è stato misurato**: due
+run che divergono fino a `N = 2392` contro `2200` hanno una dispersione di `r` diversa **anche senza
+cambiare l'orologio**. **Il numero si riporta, non si interpreta.**
+
+**Quindi: l'attesa «r potrebbe cambiare in modo significativo» NON è confermata da questa misura —
+e non è nemmeno smentita. S4, così com'è costruito, non può rispondere.** Rifarlo richiede o un
+osservabile che non passi dalla normalizzazione (per esempio `signed` grezzo, oggi non esposto), o
+il confronto su più semi.
+
+**E non dico che questo chiuda T3.** Non è stato misurato qui.

@@ -11,6 +11,14 @@
 
 ## ⚠ LA COSA DA LEGGERE PER PRIMA
 
+> **⚠ SECONDO MARCHIO, aggiunto il 2026-09-15 sera — L'OROLOGIO.** Tutte le misure di questo repo
+> fino al blob `08784685` sono state prese con il **ritmo SCALARE a 2π**: la doppia copertura
+> (**FASE 5, 4π**) **non era attiva** (95.33 % di scarto della guardia, **C11**).
+> **Non erano «integrate male»** — `r` era ricalcolato a ogni passo e valido; erano misure di un
+> **modello diverso da quello che il flag dichiarava**.
+> **Condizione da riverificare col settore 4π in funzione**, e vale **anche per T3 e i suoi quattro
+> bracci**, cioè per il divario stesso che stiamo inseguendo.
+>
 > **Quattro chiusure (§B) sono MISURE fatte su un settore ALIASATO** — lo spin gira a ~112
 > giri/passo, quindi ogni misura su di esso e' presa su uno sfarfallio.
 > **Vanno rifatte quando `omega` rientra nel tetto.** Se questo non resta scritto, fra un mese
@@ -63,6 +71,8 @@ Se i due numeri vengono da run di Luca fuori dal repo, vanno committati per entr
 | **C7** | **La cache `_cs_nodo_prev` veniva scartata a ogni mitosi** ⇒ nel 72 % delle chiamate `tau = d/cs` calcolava `tau = d/CS_M`. **Curata** (il figlio eredita da `src`, sesta voce della stessa convenzione). **NB: e' chiuso il DIFETTO, non un effetto fisico** — vedi D.2/**P** | fallback **71.88 % → 0.00 %**; cache inusabile **24/30 → 0/30**; sigillo **P1-P4 + P1b: 5/5 PASS** | `doc/FIX_cache_cs.md`, `csv/_seal_fork/_sigillo_fix_cache.txt` |
 | **C8** | **LA FASE 2 NON SI CHIUDE.** Col tempo-luce cablato la pendenza resta **lontanissima** dall'attesa `-0.69`, e `theta` resta **aliasato** su tutti e sei i run misurati | ON post media **-0.4745**, divario **-0.2155**, SE della media **0.0165** ⇒ **z = 13.1**; `theta` **30.7-44.9 giri/passo** | `doc/FIX_cache_cs.md` §7, `csv/_test_fork/_controllo_semi.txt` |
 | **C9** | **`--tau-luce` ha un effetto GRANDE sulla pendenza** (che pero' non basta): il contrasto ON-OFF e' **11 volte** la dispersione fra semi | ON-OFF **-0.3219** contro dispersione fra semi **0.030** | `csv/_test_fork/_rimisura_t3.txt` |
+| **C11** | **`_psi_spin_prec` non era esteso alla mitosi ⇒ la guardia ESATTA di `ritmo()` scartava il ramo a **4π**: la **FASE 5 (orologio di doppia copertura) era INERTE in ogni run `--campo-spinoriale` mai girato**. `r` veniva dal ritmo **SCALARE a 2π**, quello storico — **non stale: diverso**. **CURATO**, settima voce della stessa convenzione | guardia 4π fallita nel **95.33 %** (143/150), condizione `len(_psi_spin_prec) != n` in **143/143**; dopo la cura **0.00 %** (0/60) e `len == n` **60/60**; sigillo **S1-S5 + S1b: 6/6 PASS**, `S1` `max\|A-B\| = 0.000e+00` con `n_A = n_B = 2501` | `doc/REPERTO_psi_spin_prec.md`, `csv/_seal_fork/_sigillo_psi_spin_prec.txt` |
+| **C12** | **⚠ SECONDO CASO DEL PUNTO FISSO AUTO-NORMALIZZANTE.** `r` è normalizzato sulla **propria mediana** (`x = f/median(f)`, monotona) ⇒ **`median(r) = 1.0` identicamente, con qualunque orologio.** Quindi `S4` — che confrontava le due mediane — **non poteva misurare nulla**, e il suo `z = 0.00` non significa «nessun effetto» | `median(r)` **1.000000** contro **0.999999**, `z = 0.00`, per costruzione. L'unico numero informativo è la **dispersione**: **0.4421 → 0.4257** (−3.7 %), **un seme, nullo non misurato → C10** | `doc/REPERTO_psi_spin_prec.md` §8; il primo caso e' `_tau`/`_dens_rif` in `CLAUDE.md` §9 |
 | **C10** | **⚠⚠ LA BARRA D'ERRORE USATA FINORA E' TRE VOLTE TROPPO PICCOLA.** Su questo sistema **caotico** la pendenza trasversale cambia da run a run di **0.03 a codice INVARIATO**; la `SE` interna a un singolo run vale **~0.010**. **Il valore sotto ipotesi nulla di un confronto fra due run non e' zero** | dispersione fra semi **0.0302** (ramo pre) / **0.0286** (post) contro `SE` interna **~0.010** | `csv/_test_fork/_controllo_semi.txt` |
 
 ---
@@ -96,7 +106,6 @@ Se i due numeri vengono da run di Luca fuori dal repo, vanno committati per entr
 |---|---|---|---|
 | **C** | il fattore **`cs^−2` mancante nell'inerzia** ⇒ `cs` entrerebbe nello spin **via la MASSA**, non via l'orologio | esito **(b)** di `doc/INERZIA_tempo_quadro.md`: il fattore **manca nel codice** (zero occorrenze di `cs` in tutto il percorso che costruisce `Psi`). Le sei misure riguardano **solo** lo Step 2, che e' fase globale | cablarlo con flag+sigilli **e** misurare a densita' dove `cs ≠ CS_M` |
 | **I** | **correlazione genealogica** (parentela → spin) | l'albero e' **ricostruibile** (FASE A del bilancio, 100% su 7/7 e poi 4163 coppie). **Misura mai fatta:** `<n_i·n_j>` per **grado di parentela**, non per distanza spaziale | l'osservabile esiste gia' (osservatore sigillato): serve solo farla |
-| **Q** | **`_psi_spin_prec` NON e' esteso alla mitosi ⇒ l'orologio spinoriale a 4π (FASE 5) e' di fatto INERTE.** FASE A fatta, **cura NON applicata**: si aspetta il via libera | guardia 4π **fallisce nel 95.33 %** delle chiamate (143/150); la condizione che fallisce e' **`len(_psi_spin_prec) != n` in 143 casi su 143**; il 4π gira **solo ai passi 2 e 3**, prima della prima mitosi. `psi_spin` e' sempre lungo `n`: e' **solo** lo snapshot cross-passo a restare indietro | `doc/REPERTO_psi_spin_prec.md`, `csv/_test_fork/_conta_psi_spin_prec.txt` |
 | **P** | **la cura della cache ha un effetto fisico?** — **INDECIDIBILE con 3 semi** | `Delta` per seme: **-0.0445 / +0.0367 / -0.0635** → **segno NON concorde**. `media -0.0238`, `SE 0.0307`, `t = -0.77`. **`IC95 = [-0.156, +0.108]` contiene lo ZERO *e* contiene il `-0.120` dell'ipotesi «~meta'» del mandato.** Nessuna delle due e' esclusa: l'esperimento **non ha potenza** | piu' semi (~12 per una `SE` di 0.015), **oppure** una misura che non passi da un confronto fra traiettorie caotiche |
 | **J** | **quantizzazione delle masse**: esistono taglie preferite? | `massa_critica_collasso()` e' una **soglia**, e le soglie **selezionano** | istogramma delle masse, coi **picchi verificati al cambio di binning** (un picco che sparisce non e' un picco) |
 

@@ -1217,18 +1217,6 @@ class Rete:
             self._spinor_lift = np.vstack([self._spinor_lift, el])
         if self._psi_prec is not None and len(self._psi_prec) >= n0:
             self._psi_prec = np.concatenate([self._psi_prec, self._psi_prec[src]])
-        # [FIX 2026-09-15] SNAPSHOT DEL RITMO SPINORIALE (4pi): stessa convenzione, settimo punto.
-        # `_psi_spin_prec` e' scritto a fine passo (riga ~2647) con l'`n` di QUEL passo; senza questa
-        # estensione, dopo ogni mitosi `len(_psi_spin_prec) != self.n` e la guardia ESATTA di `ritmo()`
-        # (riga ~1829) scarta il ramo a 4pi. MISURATO: scartava nel **95.33%** delle chiamate, e la
-        # condizione che falliva era `len(_psi_spin_prec) != n` in **143 casi su 143** — `psi_spin`,
-        # che `calcola_psi` ricostruisce dentro il passo, era sempre della lunghezza giusta.
-        # Conseguenza: la FASE 5 (orologio di doppia copertura) era **inerte** in ogni run
-        # `--campo-spinoriale`, e `r` veniva dal ritmo SCALARE a 2pi, quello storico.
-        # E' `n x 2` COMPLESSO, quindi `vstack` come `_nb`/`_psi_spinor`, non `concatenate` 1-D.
-        _pspr = getattr(self, "_psi_spin_prec", None)
-        if _pspr is not None and len(_pspr) >= n0:
-            self._psi_spin_prec = np.vstack([_pspr, np.asarray(_pspr)[src]])
 
     def olonomia_lift_ciclo(self, ciclo):
         """Misura il prodotto ciclico degli overlap del lift complesso trasportato."""

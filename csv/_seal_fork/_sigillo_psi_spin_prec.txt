@@ -1,0 +1,63 @@
+============================================================================================================
+S1 - --campo-spinoriale OFF: `_psi_spin_prec` non nasce, la cura e' un no-op esatto
+============================================================================================================
+  CAMPO_SPINORIALE nel modulo nuovo (deve essere False): False
+  PRESIDIO: uno zero con N DIVERSO e' MANCANZA DI CONFRONTO, non identita'.
+    n_A = 2501   n_B = 2501   ->  CONFRONTABILI
+    21 campi, PEGGIOR max|A-B| = 0.000e+00   stato RNG identico
+  S1: PASS
+
+============================================================================================================
+S1b - CONTROLLO: con --campo-spinoriale ON i due file DEVONO differire
+============================================================================================================
+  PRESIDIO: uno zero con N DIVERSO e' MANCANZA DI CONFRONTO, non identita'.
+    n_A = 2392   n_B = 2200   ->  NON CONFRONTABILI
+  S1b (devono DIFFERIRE): PASS   (peggior scarto nan)
+
+============================================================================================================
+S2 - IL CONTATORE della guardia 4pi, PRIMA e DOPO, sugli STESSI passi
+============================================================================================================
+  PRIMA  4pi passa    6   4pi FALLISCE   53 =  88.33 %   anticipato   1   (di cui len != n: 53)
+  DOPO   4pi passa   59   4pi FALLISCE    0 =   0.00 %   anticipato   1   (di cui len != n: 0)
+  S2 (prima > 50 %, dopo <= 5 %): PASS
+
+============================================================================================================
+S3 - coerenza passo per passo: len(_psi_spin_prec) == n
+============================================================================================================
+  passo |     n | len PRIMA | len DOPO
+      1 |  1196 |      1196 |     1196
+      2 |  1196 |      1196 |     1196
+      5 |  1196 |      1196 |     1196
+     20 |  1599 |      1547 |     1599
+     40 |  1907 |      1932 |     1907
+     60 |  2200 |      2369 |     2200
+  passi con len != n:  PRIMA 54/60    DOPO 0/60
+  S3: PASS
+
+============================================================================================================
+S4 - DI QUANTO CAMBIA `r` (e quindi dt_n = DT*r). LA FISICA CAMBIA, ED E' ATTESO.
+============================================================================================================
+  PRIMA      r: mediana 1.000000 +- 0.011330 (SE)   dev.std fra nodi 0.442149   n 2392   min 0.001139  max 1.414209
+  DOPO       r: mediana 0.999999 +- 0.011374 (SE)   dev.std fra nodi 0.425661   n 2200   min 0.000020  max 1.347323
+  scarto sulla mediana di r: -0.000001 +- 0.016054   ->  -0.000 % del valore, z = 0.00
+  dispersione fra nodi:  PRIMA 0.442149   DOPO 0.425661   (rapporto 0.9627)
+  traiettoria della mediana di r (ultimi 5 passi):
+    PRIMA 1.00000  1.00000  1.00000  1.00000  1.00000
+    DOPO  1.00000  1.00000  1.00000  1.00000  1.00000
+  NB: S4 non ha una soglia PASS/FAIL - e' una QUANTIFICAZIONE. Il numero qui sopra e' il
+      contenuto fisico della cura, e va riportato, non giudicato.
+
+============================================================================================================
+S5 - stabilita'
+============================================================================================================
+  |nb| max scostamento da 1: 2.220e-16    NaN/inf su nb+psi: 0
+  r: finito True   positivo True   min 0.000020
+  N nodi: PRIMA 2392   DOPO 2200
+  S5: PASS
+
+============================================================================================================
+ESITO: S1=PASS   S1b=PASS   S2=PASS   S3=PASS   S4=PASS   S5=PASS
+SIGILLO _psi_spin_prec: PASS
+PROMEMORIA: S4 non dice che questo chiuda T3. Non e' stato misurato qui, e un difetto
+            grande non implica un effetto grande (la cache cs lo ha appena dimostrato).
+============================================================================================================
