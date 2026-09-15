@@ -296,5 +296,28 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   Nella seconda meta' di un run `tau/DT` vale esattamente **250** = `TAU_A*0.05/DT`, cioe' il
   pavimento di `max(rho/rho_rif, 0.05)` (riga 1913). Stessa famiglia del pavimento `1e-6`
   sull'inerzia: alle scale simulabili **la regolarizzazione diventa il parametro fisico**.
+- **PRESIDIO — UN'IPOTESI CHE RIGENERA LA PROPRIA SCUSA NON E' UN'IPOTESI** (rilievo di Luca,
+  2026-09-15, `doc/CRITERIO_omega_rho.md`). Se ogni volta che l'effetto atteso non si vede la
+  spiegazione diventa "il ritardo e' piu' lungo di quanto credessi", e la grandezza che fissa quel
+  ritardo **cresce insieme** a quella che si sta misurando, allora **aspettare non chiudera' MAI la
+  questione**: il bersaglio si sposta a ogni misura. E' la forma classica della congettura
+  **non falsificabile**, e si riconosce dalla FORMA dell'argomento, non dal suo contenuto.
+  CASO REALE, preso su questo repo: "theta non scende perche' l'inerzia e' al pavimento" -> il
+  pavimento si rilascia e theta non scende -> "perche' insegue con tau=250" -> passano 775 passi e
+  theta non scende -> "perche' ora tau e' 5000". Tre scuse, ognuna generata dal fallimento della
+  precedente, e `tau ∝ rho` con `rho` crescente: l'attesa **non converge per costruzione**.
+  **PRESIDIO OPERATIVO:** quando una spiegazione e' temporale (un ritardo), il test che la decide
+  **non deve contenere il tempo**. Si misura la relazione **TRASVERSALE**, a un solo istante, fra
+  individui che in quel momento hanno valori diversi della variabile: se la relazione non c'e'
+  **allo stesso istante**, nessun ritardo puo' spiegarla. E il criterio si scrive **prima**, con una
+  soglia numerica, e **non si proroga**: se scatta, l'ipotesi si **RITIRA**, non si raffina.
+- **`_tau` DELLA MEMORIA SPINORIALE E' ANCORATO A `TAU_A` PER IL NODO MEDIANO, PER COSTRUZIONE**
+  (riga 1913, verificato 2026-09-15). `_tau = TAU_A * max(_dens/_dens_rif, 0.05)` con
+  `_dens_rif = median(_dens[_dens > 1e-6])`: poiche' il riferimento e' la **MEDIANA**, per il nodo
+  mediano `_dens/_dens_rif ~ 1` **sempre, a qualunque livello di maturazione**. Quindi
+  `tau_mediano ~ TAU_A` (= 50, cioe' **5000 passi**) e **non scende mai**. Non e' un transitorio che
+  si esaurisce: e' un **punto fisso auto-normalizzante**. Conseguenza operativa: **far maturare il
+  sistema non puo', per costruzione, accorciare la memoria del nodo tipico** — quindi "aspettare"
+  non e' una strategia valida per uscire da un problema che dipende da quella memoria.
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
