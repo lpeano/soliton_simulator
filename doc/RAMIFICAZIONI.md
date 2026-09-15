@@ -6,6 +6,11 @@
 >
 > **Si aggiorna nello STESSO commit del riscontro che lo cambia** (§5-bis). Un registro aggiornato
 > «dopo» e' un registro falso.
+>
+> **Registro GEMELLO:** questo file tiene i **fronti aperti**. Lo stato **promosso / candidato /
+> esperimento / correzione** delle **componenti** (cioe' dei flag) sta in
+> **`doc/COMPONENTI_PROMOSSE.md`**, e la regola che lo governa e' **`CLAUDE.md` §10**.
+> Non si mescolano: qui c'e' *cosa non sappiamo ancora*, li' c'e' *cosa e' fisica e cosa e' opzione*.
 
 ---
 
