@@ -204,5 +204,45 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   identita'. (Misurato: Strato 0 = 3209 nodi, Strato 1 = 3073, 32 shape su 32 divergenti.)
   E' il gemello speculare del falso positivo del 2026-09-13. **Guardare SEMPRE prima la riga delle
   shape / del conteggio nodi.**
+- **EREDITA' ALLA MITOSI = COPIA ESATTA (verificato dal codice, 2026-09-15, blob f5887254).**
+  `_eredita_spinore_figli` (righe ~1133-1170) copia dal padre `src` SENZA perturbazione: `_nb`,
+  `_nb_prec`, `_nb_ret`, `omega_s`, `_psi_spinor`, `_spinor_lift`, `_psi_prec`. Il figlio nasce al
+  PUNTO MEDIO dell'arco (riga ~3094) con ESATTAMENTE due archi, verso entrambi i genitori (righe
+  ~3172-3173). **Conseguenza: ogni nascita crea una coppia con chi = 0** (misurato 0.0000 esatto).
+  **La parentela NON e' registrata** (gli unici `parent` del file, righe ~949-982, sono lo
+  spanning-tree dei cicli, non genealogia) **ma e' RICOSTRUIBILE in volo**: il padre `a` sta nel
+  lato `i` dell'arco `(a, m)`. Misurato 100% su 7/7 e poi su 4163 coppie.
+  NB: l'antinodo Schwinger (riga ~3242) eredita `-psi`, ma `nb = psi^dag sigma psi` e' INVARIANTE
+  per fase globale: **anche l'antinodo nasce con chi = 0 in Bloch**. "Antichirale" riguarda il segno
+  di doppia copertura, NON la direzione.
+- **SOTTO `--spinore-corretto` IL RUMORE NON TOCCA IL BLOCH DIRETTAMENTE** (verificato dal codice,
+  2026-09-15). Il ramo additivo sul Bloch/spinore (righe ~2060, ~2085) e' gated su `SYNC_UPDATE`,
+  che e' SPENTO in tutti i run del fork; il `_nb` committato e' DERIVATO da `_psi_spinor` (righe
+  ~2066-2069, ~2088). Il rumore entra SOLO via `correzione = cross(B, nb)` -> `omega_new`: e'
+  **rumore di COPPIA, non di posizione sulla sfera**.
+- **IL SETTORE DI SPIN NON E' RISOLTO NEL TEMPO DAL PASSO DT** (misurato 2026-09-15,
+  `doc/BILANCIO_ordine_spin.md`; UN seme, UNA scena, passo 60: da riconfermare). `omega_s` letto
+  direttamente dal simulatore da `theta = |omega_s|*dt_n` mediana **2.4e4 GRADI per passo = ~67 giri
+  interi**, 99.3% dei nodi oltre il giro. Non c'e' clamp su `theta` (righe ~2033-2037).
+  CAUSA: `inerzia = np.maximum(_rho_sorgente(), 1e-6)` (riga 1891) con densita' mediana **1.21e-07**
+  -> il pavimento e' attivo sul **99.7%** dei nodi, e `omega = coppia/inerzia` ~ 6e4 mentre la coppia
+  e' ORDINARIA (0.06). **Il pavimento 1e-6 NON e' la causa: la MITIGA** (senza, omega sarebbe otto
+  volte maggiore). **E' LA STESSA RADICE di "a densita' reali cs e' MORTO" (par.6), con segno
+  opposto:** la densita' minuscola CONGELA la metrica e FA ESPLODERE lo spin.
+  CONSEGUENZA DI LETTURA: le misure negative sul settore di spin restano valide, ma NON dicono "non
+  esiste una fisica ordinante": dicono "in questo regime numerico nessun ordine sopravvive a un tick".
+- **PIU' MEMORIA SU `omega_s` = PIU' ROTAZIONE, non piu' ordine** (derivato dal codice, riga 1918).
+  `omega_new = omega_src + dt_n*(coppia/inerzia - omega_src/tau)` ha punto fisso
+  **`omega_eq = tau * coppia/inerzia`**: omega e' PROPORZIONALE alla memoria. La memoria vive sulla
+  VELOCITA' ANGOLARE, quindi conserva la ROTAZIONE, non la DIREZIONE. Misurato: `tau` (TAU_A locale)
+  mediana **2470 passi**, il piu' lungo del sistema, e il Bloch ruota lo stesso di 67 giri/passo.
+  **L'ipotesi "dare memoria combatte il disordine" e' REFUTATA su questo canale.**
+  NB: `--regime` NON serve a testare TAU_A: cambia TAU_A INSIEME a G_PH, _CALORE_INIT e SCUOTIMENTO
+  (quattro interruttori insieme, contro par.1).
+- **BILANCIO DEI TASSI (misurato, 2 semi, 4163 coppie, 2026-09-15):** `tau_dec` (decorrelazione di
+  una coppia padre-figlio) = **0.63 passi** su ENTRAMBI i semi; `tau_mit` locale = 187 / 210 passi
+  -> rapporto **295 / 335**. **Dominio della distruzione.** Il confondente geometrico e' ESCLUSO,
+  non stimato: all'eta' 1, con chi gia' a 89.7, la distanza e' INVARIATA (0.540 contro 0.539) e
+  l'arco diretto e' vivo al **100%**. Decorrelano da ADIACENTI e CONNESSI.
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.

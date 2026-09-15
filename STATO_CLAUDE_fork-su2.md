@@ -20,9 +20,9 @@
   sul nuovo blob** (altrimenti il guard di `csv/_test_53c/_run_batch.ps1` blocca ogni campagna).
 
 ## Ultimo aggiornamento
-- Data: **2026-09-14** (fine giornata)
-- Ultimo commit: **ESITO scan K=300 + reperto `_pesi` + relazione**. Prima: profilazione, fix guard
-  `--gamma-turbo`, osservatore incrementale.
+- Data: **2026-09-15**
+- Ultimo commit: **BILANCIO dei tassi, FASI A/B/C chiuse** (`doc/BILANCIO_ordine_spin.md`). Prima:
+  esito scan K=300 (B) + reperto `_pesi` + profilazione + fix guard `--gamma-turbo`.
 - Branch: **`fork-su2`**, allineato con `origin/fork-su2`. **Nessun run in volo.**
 - Blob `soliton_simulator.py` **SUL DISCO** = **`f5887254`** (turbo cablato + fix guard).
 - Blob **CERTIFICATO** in `CLAUDE.md` par.0 = **`c0803713`** (STEP 2, sigillo 10/10). **I DUE NON
@@ -63,10 +63,35 @@ il turbo ristretto e' un **ISOLAMENTO DIAGNOSTICO**, non il regime reale — GAM
 restringerlo a `_cs_nodo` rompe di proposito quella condivisione. La lettura e' **condizionale**, e
 un negativo in isolamento e' **piu' debole**, non piu' forte, di un negativo nel regime vero.
 
-**APERTO — nessun run in volo. Due decisioni di Luca, non dell'esecutore:**
+**IL BILANCIO DEI TASSI (2026-09-15) — la RIFORMULAZIONE, e un REPERTO.**
+`doc/BILANCIO_ordine_spin.md`. Alla mitosi il figlio eredita il padre per COPIA ESATTA e nasce
+adiacente: **ogni nascita crea una coppia con chi = 0** (misurato 0.0000). Ma chi = 90 ovunque.
+Quindi **l'ordine non manca: nasce di continuo e viene DISTRUTTO.** Misurati i due tassi:
+- `tau_dec` = **0.63 passi** (identico su DUE semi, 4163 coppie); `tau_mit` locale = 187 / 210 passi
+  -> rapporto **295 / 335**. **DOMINIO DELLA DISTRUZIONE.**
+- **Confondente geometrico ESCLUSO, non stimato:** all'eta' 1, con chi gia' a 89.7, la distanza e'
+  INVARIATA (0.540 contro 0.539) e l'arco diretto e' vivo al **100%**. Decorrelano da ADIACENTI e
+  CONNESSI: e' disordine, non disaccoppiamento.
+- **REPERTO (non previsto):** `theta = |omega_s|*dt_n` mediana **~67 GIRI INTERI per passo** (99.3%
+  dei nodi oltre il giro). **Il settore di spin NON e' risolto nel tempo dal passo DT.** Causa: la
+  coppia e' ordinaria (0.06) ma l'inerzia e' la densita', **1.2e-7**. Il pavimento 1e-6 non e' la
+  causa, la MITIGA. **Stessa radice di "cs e' morto a queste densita'", con segno opposto.**
+- **Ipotesi "dare memoria combatte il disordine": REFUTATA.** Punto fisso `omega_eq = tau*F` ->
+  piu' memoria = piu' rotazione. Nessun canale merita piu' memoria, ognuno escluso col suo numero.
+- **I SEI LATI RESTANO VALIDI**, cambia l'INTERPRETAZIONE: non "non esiste una fisica ordinante" ma
+  "in questo regime numerico nessun ordine sopravvive a un tick".
+- **CAVEAT:** i 67 giri/passo sono UN seme, UNA scena, passo 60 — da riconfermare. `tau_dec` no,
+  quello e' su due semi.
+
+**APERTO — nessun run in volo. Quattro decisioni di Luca, non dell'esecutore:**
+- **SOTTO-PASSO PER LO SPIN** (lo stesso principio di `nsub` per la metrica) oppure **rileggere
+  tutto dove la densita' e' O(1)**: sono le due strade aperte dal reperto.
+- **TEST DECISIVO NON FATTO** (cambia la fisica, serve autorizzazione): `TAU_A` a due valori a
+  parita' di tutto il resto, per verificare `omega_eq` proporzionale a `tau`. `--regime` NON serve:
+  muove quattro interruttori insieme.
 - **`_pesi()`**: FASE A fatta, FASE B **non eseguita** perche' la premessa del mandato e' falsa
   (`doc/REPERTO_pesi_ricorsione.md`): non e' ridondanza di `calcola_psi` (12.8%), e' una
-  **ricorsione** (43.6% del totale). Tre strade nel documento par.5.
+  **ricorsione** (43.6%). Tre strade nel documento par.5.
 - **`:5318`**: il diaglog re-implementa `cs` inline e non chiama `_cs_nodo` -> **sotto turbo quella
   colonna mente**. Dichiarato, non risolto.
 - **GATE**: `CLAUDE.md` par.0 dice `c0803713`, sul disco c'e' **`f5887254`** (cablaggio turbo + i due
@@ -74,7 +99,6 @@ un negativo in isolamento e' **piu' debole**, non piu' forte, di un negativo nel
   `csv/_test_53c/gate_cache.json` resta volutamente STALE su `4fc7a794`: la guardia di
   `_run_batch.ps1` rigira `_check_presidio.py` da sola al primo cache-miss. **Non si scrive un PASS
   a mano per un blob non verificato.**
-
 ## ⚑ STRATO 1 — FATTO, SIGILLO 23/23 PASS (2026-09-14). IL FORK NON E' PIU' INERTE.
 **Questo e' il pezzo che accende il fork.** Lo Strato 0 era inerte per TEOREMA (vedi sotto): la
 connessione costruita dagli stessi stati che trasporta, nello stesso istante, e' l'identita'
