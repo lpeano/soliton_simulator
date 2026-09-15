@@ -182,28 +182,30 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
 - **LE RIGHE CITATE QUI SOTTO SONO SHIFTATE: il blob e' cambiato** (2026-09-15). Il cablaggio di
   `TAU_LUCE` e il fix della cache hanno spostato tutto cio' che sta dopo la riga ~810. Vale il par.0
   (*cerca per NOME di funzione/flag, non per riga*), ma poiche' le righe **sono** citate ovunque,
-  ecco la conversione **verificata dal disco sul blob `b298677a`**. I numeri storici **non sono stati
+  ecco la conversione, **generata confrontando i TRE blob riga per riga** (`git cat-file`), non per aritmetica: un `-` significa che la stringa non esiste in quel blob. **RIGENERATA il 2026-09-15 dopo che tre righe, calcolate a mano per differenza, erano sbagliate.** I numeri storici **non sono stati
   riscritti** nelle voci: li' dicono a quale blob si riferivano, ed e' un'informazione, non un errore.
 
-  | punto | riga VECCHIA (f5887254 / 7d484580) | riga **ATTUALE** (b298677a) |
-  |---|---|---|
-  | commento stale *"si conserva, non rilassa"* | 868 | **901** |
-  | commento stale *"omega si CONSERVA"* | 1803 | **1852** |
-  | rumore sul Bloch (`amp[:, None]`) | 1847 | **1896** |
-  | `nb_vic = self._nb_prec` | 1854 | **1905** |
-  | `inerzia = np.maximum(_rho_sorgente(), 1e-6)` | 1891 | **1940** |
-  | `correzione = np.cross(B, nb)` | 1895 | **1944** |
-  | `correzione += cross(_nb_grav(), nb)` | 1901 | **1950** |
-  | `_tau = TAU_A * max(_dens/_dens_rif, 0.05)` | 1913 | **1967** |
-  | **il rilassamento** `- omega_src/_tau` | 1918 | **1972** |
-  | `calcio_omega` dentro `semina()` | 1592-1594 | **1642-1643** |
-  | guardia `len(csp) >= n` in `_tempo_luce_nodo` | 2542 | **2565** |
-  | trasporto SCALARE `mat(A)@_a` / `@_b` | 2207-2208 (blob 4fc7a794) | **2623-2624** |
-  | `cs_floor` | 2187 | **2436** |
-  | scrittura della cache `_cs_nodo_prev` | 2893 | **2918** |
-  | `_eredita_spinore_figli` | ~1133 | **1166** |
-  | mitosi -> `_eredita_spinore_figli(a)` | ~3172 | **3192** |
-  | Schwinger -> `_eredita_spinore_figli(aa, -1)` | ~3242 | **3309** |
+  | punto | `f5887254` | `b298677a` | **ORA (`08784685`)** |
+  |---|---|---|---|
+  | commento stale "si conserva, non rilassa" | 868 | 901 | **901** |
+  | commento stale "omega si CONSERVA" | 1803 | 1852 | **1864** |
+  | rumore sul Bloch (`amp[:, None]`) | 1847 | 1896 | **1908** |
+  | `nb_vic = self._nb_prec` | 1856 | 1905 | **1917** |
+  | `inerzia = np.maximum(_rho_sorgente(), 1e-6)` | 1891 | 1940 | **1952** |
+  | `correzione = np.cross(B, nb)` | 1895 | 1944 | **1956** |
+  | `correzione += cross(_nb_grav(), nb)` | 1901 | 1950 | **1962** |
+  | `_tau = TAU_A * max(_dens/_dens_rif, 0.05)` | 1913 | 1967 | **1979** |
+  | **il rilassamento** `- omega_src/_tau` | 1918 | 1972 | **1984** |
+  | `calcio_omega` dentro `semina()` | 1593 | 1642 | **1654** |
+  | **la guardia 4pi** `len(_ps) == self.n` | 1780 | 1829 | **1841** |
+  | scrittura di `_psi_spin_prec` | 2555 | 2647 | **2659** |
+  | guardia `len(csp) >= n` in `_tempo_luce_nodo` | 2435 | 2565 | **2577** |
+  | scrittura della cache `_cs_nodo_prev` | 2826 | 2918 | **2930** |
+  | trasporto SCALARE `mat(A)@_a` | 2531 | 2623 | **2635** |
+  | `cs_floor` | 2382 | 2436 | **2448** |
+  | `def _eredita_spinore_figli` | 1133 | 1170 | **1170** |
+  | mitosi -> `_eredita_spinore_figli(a)` | 3125 | 3217 | **3229** |
+  | Schwinger -> `_eredita_spinore_figli(aa, -1)` | 3242 | 3334 | **3346** |
 - Trasporto forza = SCALARE: `_coppia_interferenza`, **righe 2207-2208**
   (`np.conj(_a)*(mat(A)@_a) + np.conj(_b)*(mat(A)@_b)`, stessa A su a e b) -> abeliano per
   struttura. VERIFICATO dal sorgente
@@ -466,5 +468,41 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   `_eredita_spinore_figli`. In batch e' inerte (`semina_cont=False` di default, si accende **solo**
   dalla GUI, righe ~4610 e ~4753), quindi non tocca nessuna misura committata; registrata in
   `doc/RAMIFICAZIONI.md` sotto la voce **H** (percorso GUI).
+- **`_psi_spin_prec` NON ERA ESTESO ALLA MITOSI → LA FASE 5 (OROLOGIO A 4pi) E' STATA INERTE IN OGNI
+  RUN MAI GIRATO — CURATO il 2026-09-15** (commit `cc98ac0`, `doc/REPERTO_psi_spin_prec.md`, sigillo
+  `csv/_seal_fork/_sigillo_psi_spin_prec.py` **6/6 PASS**). La guardia di `ritmo()` e' un'uguaglianza
+  **ESATTA** (`len(_ps) == n and len(_psp) == n`), quindi bastava **un** nodo di mitosi per farla
+  scartare. **MISURATO: 95.33%** delle chiamate (143/150), e la condizione che falliva era
+  `len(_psi_spin_prec) != n` in **143 casi su 143** — `psi_spin`, ricostruito da `calcola_psi`
+  **dentro** il passo, era sempre lungo `n`. Il 4pi girava **solo ai passi 2 e 3**, prima della prima
+  mitosi. Dopo la cura: **0.00%**.
+  **ATTENZIONE ALLA FORMULAZIONE, perche' quella sbagliata circola gia':** **NON** e' vero che *"la
+  fisica ha integrato con un tempo proprio stale"*. `signed` era **gia' calcolato** nella versione
+  **SCALARE a 2pi** poche righe sopra; la guardia decide solo se **sovrascriverlo** col 4pi. `r` era
+  **ricalcolato a ogni passo ed era valido** (`len(_psi_prec) == n` in 149 chiamate su 150). La
+  frase vera e': **la fisica ha integrato con l'orologio SCALARE STORICO, e la doppia copertura non
+  e' mai entrata in funzione.** Le misure **non sono corrotte**: sono misure di un **modello diverso
+  da quello che il flag dichiarava**. *"Integrate male"* implicherebbe errore numerico; *"orologio
+  diverso da quello dichiarato"* implica modello diverso, **e solo la seconda e' vera.**
+  **Conseguenza:** tutte le misure fino al blob `08784685` portano il marchio *"prese col ritmo
+  scalare a 2pi; da riverificare col settore 4pi in funzione"* — **T3 e i suoi quattro bracci
+  inclusi** (`doc/RAMIFICAZIONI.md`, secondo marchio in testa).
+- **PRESIDIO — UNA GRANDEZZA NORMALIZZATA SULLA PROPRIA MEDIANA HA UN PUNTO FISSO: SU QUELLO NON SI
+  MISURA NULLA.** Se `x = f / median(f)` e la mappa `x -> y` e' **monotona**, allora `median(y)` vale
+  **una costante ESATTA**, sempre, qualunque cosa faccia `f`. Confrontare due configurazioni su
+  quella mediana e' **come confrontare due termometri dopo averli azzerati ciascuno sulla propria
+  lettura mediana**: si ottiene zero per costruzione, e lo zero non dice niente.
+  **DUE CASI REALI, entrambi su questo repo:**
+  * `_tau = TAU_A * max(_dens/_dens_rif, 0.05)` con `_dens_rif = median(_dens)` → `tau_mediano ~
+    TAU_A` **sempre**, a qualunque maturazione (voce sotto);
+  * `ritmo()`: `x = f/median(|f|)`, `r_normalized = r/r_unit` con `r_unit` = il valore a `x = 1`
+    → **`median(r) = 1.0 ESATTAMENTE`**, con qualunque orologio. Il sigillo `S4` della cura di
+    `_psi_spin_prec` confrontava proprio le due mediane e ha dato `z = 0.00`: **non "nessun
+    effetto", ma "nessuna misura"**. L'unico numero informativo era la **dispersione**
+    (`0.4421 -> 0.4257`, -3.7%, **un seme**, nullo non misurato → vedi il presidio su C10).
+  **REGOLA: prima di confrontare una statistica riassuntiva fra due rami, controlla se il codice la
+  ancora a se stessa.** E' il gemello del presidio del valore sotto ipotesi nulla: li' *"quanto
+  varrebbe se non ci fosse niente?"*, qui *"questa grandezza puo' anche solo in linea di principio
+  cambiare?"*.
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
