@@ -4,7 +4,7 @@
 > Branch `fork-su2`, 2026-09-15. Blob sul disco **`f5887254`**. **Nessuna modifica alla fisica.**
 >
 > ## ⚠ IL RUN È IN VOLO MENTRE SCRIVO
-> Dati fino al passo **425 su 2000**. **NON sono un risultato**: sono un riscontro **intermedio**,
+> Dati fino al passo **1200 su 2000**. **NON sono un risultato**: sono un riscontro **intermedio**,
 > riportato perché §5-ter lo impone e perché **una metà della predizione è confermata e l'altra
 > no**. Il verdetto A/B/C arriverà in un commit dedicato, a run finito.
 
@@ -106,6 +106,62 @@ Due strade, **decisione di Luca**, che riporto ora invece che fra due ore:
 1. **prolungare** a ~3000 passi (costo: altre ~2-3 h oltre le attuali);
 2. **fermarsi a 2000** e riportare la **pendenza** misurata di `theta(n)`, dichiarando
    l'attraversamento come **estrapolazione** e non come misura.
+
+---
+
+## 5-bis. ⚑ AGGIORNAMENTO AL PASSO 1200 — **IL CRITERIO DI FALSIFICAZIONE È SCATTATO**
+
+Avevo scritto, **prima di vederlo** (§4.2): *«se al passo 800 `theta` è ancora a 4.6e4, la lettura
+`omega ∝ 1/inerzia` è sbagliata, non solo ritardata — esito (C)»*. **È così.**
+
+| passo | `rho` med | `theta` misurato | `theta` atteso se ∝ 1/`rho` | scarto |
+|---|---|---|---|---|
+| 425 | 5.07e-6 | 4.681e4 | (riferimento) | — |
+| **800** | 2.95e-5 | **4.815e4** | 8045 | **×6.0** |
+| 1100 | 6.82e-5 | 4.724e4 | 3480 | **×13.6** |
+
+### La pendenza — la domanda vera, e la sua risposta
+
+Regressione su **14 campioni**, **solo dopo il rilascio del pavimento** (passi 425-1200):
+
+```
+d(log theta)/d(log n)    = -0.020        ATTESA dalla lettura:  -4
+d(log theta)/d(log rho)  = -0.006        ATTESA dalla lettura:  -1
+leva:  n x2.82    rho x16.9    theta x0.977
+```
+
+> **Entrambe le pendenze sono ZERO.** Con `rho` cresciuta di **quasi 17 volte**, `theta` è variato
+> del **−2 %**. Non è un ritardo: è **assenza di dipendenza**.
+
+> ### VERDETTO INDICATO: **ESITO (C)** — l'aliasing è **STRUTTURALE, non transitorio**.
+> La maturazione **funziona** (`ramp` lineare, `rho` +5 ordini, pavimento rilasciato dal 100 % al
+> 3.2 %) **ma non tocca `theta`.** E lo si sa **al passo 1200, non a 20 000** — che era lo scopo di
+> misurare la pendenza invece di aspettare la soglia.
+
+### Il meccanismo candidato — **ipotesi, non ancora misurata in questo run**
+
+Riga **1913**:
+```python
+_tau = TAU_A * np.maximum(_dens / _dens_rif, 0.05)
+_dens_rif = median(_dens[_dens > 1e-6])
+```
+
+- **Prima** della maturazione quasi tutti i nodi hanno `dens < 1e-6`, quindi `dens/dens_rif` è
+  minuscolo e **scatta il pavimento `0.05`**: `tau = TAU_A·0.05 = 2.5`, cioè **`tau/DT = 250` passi**
+  — il valore già misurato in `doc/ANALISI_gilbert_fdt.md` §3.
+- **Dopo**, con quasi tutti i nodi sopra `1e-6`, per il nodo mediano `dens/dens_rif ≈ 1`, quindi
+  `tau = TAU_A = 50`, cioè **`tau/DT = 5000` passi**.
+
+> **La memoria si è allungata di ~20× ESATTAMENTE mentre il sistema maturava.** La maturazione
+> abbassa il bersaglio (`|F| ∝ 1/inerzia`) **e insieme allunga l'inseguimento** (`tau ∝ rho`), e
+> sull'orizzonte del run vince l'inseguimento.
+>
+> Con `omega_eq = |F|·√(dt·tau/2)`, se `|F| ∝ 1/rho` **e** `tau ∝ rho`, allora
+> **`omega_eq ∝ rho^(−1/2)`**, non `rho^(−1)` — e anche quella discesa arriverebbe su **5000 passi**.
+
+**È un'ipotesi, e va marcata come tale:** `_maturazione.py` **non stampa `tau`**, quindi in questo
+run non l'ho misurata. Si verifica a costo quasi nullo aggiungendo la colonna, **dopo**, senza
+toccare la fisica.
 
 ---
 

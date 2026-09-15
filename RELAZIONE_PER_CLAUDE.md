@@ -398,6 +398,28 @@ prevista dal mandato (`chi` nella zona matura) **non sara' eseguibile su questo 
 Due strade, **decisione di Luca**: prolungare a ~3000 passi (altre ~2-3 h), oppure fermarsi a 2000 e
 riportare la **pendenza** di `theta(n)`, dichiarando l'attraversamento come **estrapolazione**.
 
+**AGGIORNAMENTO AL PASSO 1200 — IL CRITERIO E' SCATTATO.** Avevo scritto prima di vederlo: *"se al
+passo 800 theta e' ancora a 4.6e4, la lettura omega ∝ 1/inerzia e' SBAGLIATA, non solo ritardata"*.
+**E' cosi'.** Regressione su 14 campioni, solo dopo il rilascio del pavimento (passi 425-1200):
+
+```
+d(log theta)/d(log n)    = -0.020      attesa dalla lettura: -4
+d(log theta)/d(log rho)  = -0.006      attesa dalla lettura: -1
+leva:  n x2.82   rho x16.9   theta x0.977
+```
+
+> **Con `rho` cresciuta quasi 17 volte, `theta` e' variato del -2%. Non e' un ritardo: e' ASSENZA DI
+> DIPENDENZA. VERDETTO INDICATO: ESITO (C), l'aliasing e' STRUTTURALE, non transitorio.**
+> E lo si sa **al passo 1200, non a 20.000** — che era lo scopo di misurare la pendenza.
+
+**Meccanismo candidato (IPOTESI, non ancora misurata):** riga 1913,
+`_tau = TAU_A * max(dens/dens_rif, 0.05)`. Prima della maturazione quasi tutti i nodi sono sotto
+`1e-6`, scatta il **pavimento 0.05** e `tau/DT = 250`. Dopo, per il nodo mediano `dens/dens_rif ≈ 1`
+e `tau = TAU_A`, cioe' **`tau/DT = 5000`**. **La memoria si e' allungata di ~20x esattamente mentre
+il sistema maturava.** Con `omega_eq = |F|·sqrt(dt·tau/2)`, se `|F| ∝ 1/rho` **e** `tau ∝ rho`,
+allora `omega_eq ∝ rho^(-1/2)` e anche quella discesa arriverebbe su 5000 passi. Da verificare
+aggiungendo la colonna `tau` alla sonda, senza toccare la fisica.
+
 **Costo misurato:** 425 passi in 9.0 min (~1.3 s/passo a N≈4100); stima **2-3 h** per i 2000.
 
 ---
