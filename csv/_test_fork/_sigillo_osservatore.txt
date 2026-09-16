@@ -1,0 +1,30 @@
+============================================================================================
+SIGILLO OSSERVATORE — la misura del vuoto e' PURE-READ? (2 run veri, 150 passi)
+============================================================================================
+[PASS] O1.0 stesso numero di nodi (il confronto ESISTE) nodi: osservatore ON = 3020, OFF = 3020
+[PASS] O1 osservatore ON vs OFF: byte-identico        max|A-B| = 0.000e+00
+
+============================================================================================
+O2 — l'A/B dello scuotimento e' a VARIABILE SINGOLA?
+============================================================================================
+[regime] 'deterministico' da riga di comando: SCUOTIMENTO=False G_PH=0.003 TAU_A=50.0 calore_init=0.4
+   SCUOTIMENTO          True           -> False
+[PASS] O2 --regime deterministico cambia SOLO SCUOTIMENTO cambiati: ['SCUOTIMENTO']
+
+============================================================================================
+O3 — i due bracci hanno i flag giusti?
+============================================================================================
+   braccio ON : [osserva-flag] tag=sigON seed=1  FORK_SU2=True FORK_SU2_MEM=True SCUOTIMENTO=True SYNC_UPDATE=False KURAMOTO_SU2=False STEP2=False CS_DIN=True GAMMA_TURBO=1 TAU_LUCE=False   (letti DURANTE il run)
+   braccio OFF: [osserva-flag] tag=sigDET seed=1  FORK_SU2=True FORK_SU2_MEM=True SCUOTIMENTO=False SYNC_UPDATE=False KURAMOTO_SU2=False STEP2=False CS_DIN=True GAMMA_TURBO=1 TAU_LUCE=False   (letti DURANTE il run)
+[PASS] O3a braccio ON: SCUOTIMENTO=True               N=True GAMMA_TURBO=1 TAU_LUCE=False   (letti DURANTE il run)
+[PASS] O3b braccio OFF: SCUOTIMENTO=False             N=True GAMMA_TURBO=1 TAU_LUCE=False   (letti DURANTE il run)
+[PASS] O3c entrambi testano lo STRATO 1 (fork + memoria) fork+mem attivi su entrambi i bracci
+============================================================================================
+SIGILLO OSSERVATORE: 6/6 PASS -> PASS
+
+COSA QUESTO SIGILLO NON DICE
+----------------------------
+Che le misure siano CORRETTE, solo che non CONTAMINANO. Che chi e <n> misurino quel che si crede
+lo dice la loro definizione (arccos del prodotto scalare fra Bloch vicini; media vettoriale dei
+Bloch), non questo sigillo. E 150 passi non concludono nulla di fisico (par.2.7).
+
