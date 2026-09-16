@@ -217,66 +217,115 @@ class SpiaNascite(object):
         return False
 
 
-def corr_xi(M, seed, n_scena=20, n_dopo=1):
-    """corr(xi_figlio, xi_padre) subito dopo una mitosi. PRIMA della correzione dev'essere ~a^2,
-    DOPO ~0. E' il sigillo della correzione (1)."""
+def coppie_xi(M, seed, n_scena=20, cicli=12, dopo_step=True):
+    """Ritorna (xi_padre, xi_figlio) e i `xi` dei NEONATI, leggendoli nel momento GIUSTO.
+
+    IL MOMENTO CONTA, ed e' l'errore che ha fatto fallire M1b la prima volta: SUBITO dopo
+    `mitosi()` i figli NON HANNO ANCORA un `xi`, perche' l'estensione avviene dentro
+    `_passo_spinoriale`, cioe' all'inizio del passo DOPO. Misurare li' da' zero coppie.
+    Con `dopo_step=False` si legge SUBITO dopo la mitosi: serve al codice VECCHIO, dove il figlio
+    riceve la COPIA del padre proprio in quel momento."""
     net = scena(M, seed, n_scena)
-    coppie = []
-    for _ in range(12):
+    P, F, nuovi = [], [], []
+    for _ in range(cicli):
         with SpiaNascite(M) as sp:
-            passo(M, net)
+            M.scuoti_vuoto(net); net.step(); net.mitosi()
+            net.rilassa_disegno(); net.memoria_hebbiana_moto()
+        if dopo_step:
+            M.scuoti_vuoto(net); net.step()      # QUI i figli ricevono il loro campione fresco
         xi = getattr(net, "_xi_rumore", None)
-        if xi is None:
-            continue
-        xi = np.asarray(xi, float)
-        for src, n0, n1 in sp.eventi:
-            for k, pad in enumerate(src):
-                fig = n0 + k
-                if fig < len(xi) and pad < len(xi):
-                    coppie.append((xi[pad].copy(), xi[fig].copy()))
-        if len(coppie) >= 200:
+        if xi is not None:
+            xi = np.asarray(xi, float)
+            for src, n0, n1 in sp.eventi:
+                for k, pad in enumerate(src):
+                    fig = n0 + k
+                    if fig < len(xi) and pad < len(xi):
+                        P.append(xi[pad].copy()); F.append(xi[fig].copy()); nuovi.append(xi[fig].copy())
+        if dopo_step:
+            net.mitosi(); net.rilassa_disegno(); net.memoria_hebbiana_moto()
+        if len(P) >= 300:
             break
-    if not coppie:
-        return float("nan"), 0
-    P = np.array([c[0] for c in coppie]).ravel()
-    F = np.array([c[1] for c in coppie]).ravel()
-    if P.size < 3 or np.std(P) == 0 or np.std(F) == 0:
-        return float("nan"), len(coppie)
-    return float(np.corrcoef(P, F)[0, 1]), len(coppie)
+    return (np.array(P) if P else np.zeros((0, 3)),
+            np.array(F) if F else np.zeros((0, 3)),
+            np.array(nuovi) if nuovi else np.zeros((0, 3)))
 
 
 print()
-print("  M1 — correlazione `xi` PADRE-FIGLIO subito dopo la mitosi (serve `--rumore-colorato`)")
-print("     PRIMA della correzione: il figlio COPIA xi dal padre -> dopo un passo entrambi valgono")
-print("     a*xi_padre + b*g con g DIVERSI, quindi corr attesa ~ a^2 = %.4f." % (np.exp(-0.01/0.4)**2))
-print("     DOPO: il figlio ha un campione FRESCO e indipendente -> corr attesa ~ 0.")
+print("  M1 — il difetto ESISTEVA? (codice VECCHIO). CRITERIO CORRETTO: non «correlazione alta»,")
+print("     ma IDENTITA' ESATTA: alla mitosi il vecchio codice COPIAVA `xi` dal padre.")
 M_old = carica(OLD, "m_old_rc", ["--rumore-colorato"])
-c_old, n_old_c = corr_xi(M_old, 7)
+P0, F0, _ = coppie_xi(M_old, 7, dopo_step=False)
+d0 = float(np.max(np.abs(F0 - P0))) if len(P0) else float("nan")
+verdetto("M1 PRIMA: xi del figlio IDENTICO a quello del padre", len(P0) > 0 and d0 == 0.0,
+         "max|xi_figlio - xi_padre| = %s su %d coppie  (il difetto ESISTEVA, ed era MASSIMO)"
+         % ("n/d" if not len(P0) else "%.3e" % d0, len(P0)))
+
+print()
+print("  M1b — DOPO la correzione: INDIPENDENTI. E la soglia NON e' scelta, e' il VALORE SOTTO")
+print("     IPOTESI NULLA: la correlazione campionaria di variabili indipendenti ha")
+print("     sigma ~ 1/sqrt(3N) con N coppie di vettori a 3 componenti. Si chiede |corr| < 3 sigma.")
 M_new = carica(NEW, "m_new_rc", ["--rumore-colorato"])
-c_new, n_new_c = corr_xi(M_new, 7)
-print("     PRE-correzione : corr = %+.4f  su %d coppie padre-figlio" % (c_old, n_old_c))
-print("     POST-correzione: corr = %+.4f  su %d coppie padre-figlio" % (c_new, n_new_c))
-verdetto("M1 PRIMA il rumore padre-figlio era CORRELATO", np.isfinite(c_old) and abs(c_old) > 0.5,
-         "corr = %+.4f  (il difetto ESISTEVA: senza questo, M1b non proverebbe nulla)" % c_old)
-verdetto("M1b DOPO il rumore padre-figlio e' INDIPENDENTE",
-         np.isfinite(c_new) and abs(c_new) < 0.15,
-         "corr = %+.4f  su %d coppie" % (c_new, n_new_c))
+P1, F1, NUOVI = coppie_xi(M_new, 7, dopo_step=True)
+if len(P1) >= 3:
+    c1 = float(np.corrcoef(P1.ravel(), F1.ravel())[0, 1])
+    sigma_nulla = 1.0 / np.sqrt(3.0 * len(P1))
+else:
+    c1, sigma_nulla = float("nan"), float("nan")
+verdetto("M1b DOPO: xi padre-figlio INDIPENDENTE", np.isfinite(c1) and abs(c1) < 3 * sigma_nulla,
+         "corr = %+.4f su %d coppie;  nullo sigma = %.4f, soglia 3 sigma = %.4f;  scarto %.2f sigma"
+         % (c1, len(P1), sigma_nulla, 3 * sigma_nulla, abs(c1) / max(sigma_nulla, 1e-12)))
 
 print()
-print("  M3 — `len(_xi_rumore) == n` dopo ogni passo, e i contatori (P5)")
+print("  M1c — IL CRITERIO CHE MANCAVA. M1b da solo NON prova che la correzione sia giusta:")
+print("     un figlio con `xi = 0` passerebbe M1b a pieni voti, ed e' SBAGLIATO, perche' darebbe")
+print("     il transitorio che l'estrazione STAZIONARIA esiste per evitare. Qui si chiede che la")
+print("     varianza dei neonati sia ~1, col nullo sqrt(2/k) per k campioni.")
+if NUOVI.size:
+    k = NUOVI.size
+    v = float(np.var(NUOVI))
+    sig_v = np.sqrt(2.0 / k)
+else:
+    k, v, sig_v = 0, float("nan"), float("nan")
+verdetto("M1c i neonati ricevono xi dalla STAZIONARIA (var ~ 1)",
+         k > 0 and abs(v - 1.0) < 4 * sig_v,
+         "var(xi_neonati) = %.4f su %d campioni;  nullo 1 +- %.4f;  scarto %.2f sigma"
+         % (v, k, sig_v, abs(v - 1.0) / max(sig_v, 1e-12)))
+
+print("  M3 — allineamento, testa preservata, contatore. TRE criteri, e il primo era SBAGLIATO:")
+print("     controllavo `len(xi) == n` a FINE passo, cioe' DOPO `mitosi()`, dove l'array e'")
+print("     LEGITTIMAMENTE corto — l'estensione avviene dentro `_passo_spinoriale`, all'inizio del")
+print("     passo DOPO. Il momento giusto e' DOPO `step()`, cioe' QUANDO L'ARRAY VIENE USATO.")
 net3 = scena(M_new, 3, 5)
-ok3, nodi = True, []
+ok_dopo_step, ok_testa, nati_tot, fresh_tot = True, True, 0, 0
 for _ in range(25):
-    passo(M_new, net3)
-    nodi.append(net3.n)
-    if len(getattr(net3, "_xi_rumore", ())) != net3.n:
-        ok3 = False
-verdetto("M3 len(_xi_rumore) == n dopo OGNI passo", ok3,
-         "25 passi, n da %d a %d;  estensioni %s, nodi con xi fresco %s, chiamate %s"
-         % (nodi[0], nodi[-1], getattr(net3, "_xi_esteso", "n/d"),
-            getattr(net3, "_xi_nuovi", "n/d"), getattr(net3, "_xi_chiamate", "n/d")))
+    n_pre = net3.n
+    xi_pre = np.asarray(getattr(net3, "_xi_rumore", np.zeros((0, 3))), float).copy()
+    nuovi_pre = int(getattr(net3, "_xi_nuovi", 0))
+    M_new.scuoti_vuoto(net3); net3.step()
+    xi_post = np.asarray(getattr(net3, "_xi_rumore", np.zeros((0, 3))), float)
+    if len(xi_post) != net3.n:
+        ok_dopo_step = False
+    # LA TESTA: i nodi che c'erano gia' NON devono essere stati sostituiti da un'estrazione nuova.
+    # Il loro `xi` e' evoluto dalla ricorsione, quindi NON e' uguale a prima; cio' che si verifica
+    # e' che non sia INDIPENDENTE, cioe' che `a*xi_pre` sia ancora dentro (corr alta col passato).
+    if len(xi_pre) and len(xi_post) >= len(xi_pre):
+        m = len(xi_pre)
+        cc = float(np.corrcoef(xi_pre.ravel(), xi_post[:m].ravel())[0, 1])
+        if not (cc > 0.5):
+            ok_testa = False
+    fresh_tot += int(getattr(net3, "_xi_nuovi", 0)) - nuovi_pre
+    nati_tot += max(net3.n - n_pre, 0)
+    net3.mitosi(); net3.rilassa_disegno(); net3.memoria_hebbiana_moto()
+verdetto("M3 len(_xi_rumore) == n DOPO step() (cioe' quando viene USATO)", ok_dopo_step,
+         "25 passi, n finale %d;  estensioni %s, chiamate %s"
+         % (net3.n, getattr(net3, "_xi_esteso", "n/d"), getattr(net3, "_xi_chiamate", "n/d")))
+verdetto("M3b l'estensione NON tocca la TESTA (i nodi esistenti conservano xi)", ok_testa,
+         "corr(xi_prima, xi_dopo) sui nodi gia' presenti > 0.5 a ogni passo: la ricorsione lo fa")
+verdetto("M3c `_xi_nuovi` == numero di nodi NATI (contatore verificabile, P5)",
+         fresh_tot == nati_tot,
+         "xi freschi assegnati %d, nodi nati %d  -> %s"
+         % (fresh_tot, nati_tot, "coincidono" if fresh_tot == nati_tot else "NON coincidono"))
 
-print()
 print("  M4 — CONSERVAZIONE: `L_tot = somma(inerzia * |omega|)` e il suo salto per mitosi")
 print("     E' il test di conservazione MAI FATTO. Se L cresce col numero di nodi, la violazione")
 print("     e' MISURATA, non argomentata. Qui si confronta PRE e POST correzione (2).")
