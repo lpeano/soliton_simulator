@@ -1268,18 +1268,15 @@ class Rete:
         _pspr = getattr(self, "_psi_spin_prec", None)
         if _pspr is not None and len(_pspr) >= n0:
             self._psi_spin_prec = np.vstack([_pspr, np.asarray(_pspr)[src]])
-        # [CORREZIONE DI DIFETTO, 2026-09-16 - decisione di Luca] `_xi_rumore` **NON SI EREDITA**,
-        # e qui non c'e' nessun codice apposta: il figlio riceve un `xi` FRESCO dal ramo di
-        # estensione di `_passo_spinoriale`, che estrae dalla distribuzione stazionaria.
-        # PERCHE' L'EREDITA' ERA SBAGLIATA, e l'analogia che avevo usato era MIA ed era falsa:
-        # `_nb`, `_nb_prec`, `_nb_ret`, `omega_s`, `_psi_spinor`, `_psi_prec`, `_cs_nodo_prev`,
-        # `_psi_spin_prec` sono **PROPRIETA' DEL NODO**: e' giusto che il figlio le erediti.
-        # `xi` NO: e' un campione dell'AMBIENTE che spintona il nodo, un processo ESTERNO.
-        # Due nodi distinti NON ricevono lo stesso identico spintone. Ereditandolo, padre e figlio
-        # avevano rumore CORRELATO AL 100 % per ~40 passi (tau_c = LAM/CS_M) - una correlazione
-        # SPURIA fra oggetti che devono essere indipendenti, e per giunta proprio nella grandezza
-        # che serve a DECORRELARE.
-        # Nessun feedback sul padre: il rumore non e' una quantita' che si ripartisce.
+        # [2026-09-16] STATO DEL RUMORE COLORATO: il figlio eredita `xi` dal padre, STESSA
+        # convenzione di tutti gli altri snapshot cross-passo. Senza, dopo ogni mitosi
+        # `len(_xi_rumore) != n` e il ramo di reinizializzazione scatterebbe a ogni mitosi -
+        # cioe' il rumore tornerebbe BIANCO proprio dove il sistema evolve di piu'. E' lo stesso
+        # difetto di `_cs_nodo_prev` (C7) e di `_psi_spin_prec` (C11): la terza volta la si
+        # scrive PRIMA di misurarla, non dopo.
+        _xir = getattr(self, "_xi_rumore", None)
+        if _xir is not None and len(_xir) >= n0:
+            self._xi_rumore = np.vstack([np.asarray(_xir, float), np.asarray(_xir, float)[src]])
 
     def olonomia_lift_ciclo(self, ciclo):
         """Misura il prodotto ciclico degli overlap del lift complesso trasportato."""
@@ -1973,18 +1970,10 @@ class Rete:
                     _xi = getattr(self, "_xi_rumore", None)
                     self._xi_chiamate = getattr(self, "_xi_chiamate", 0) + 1
                     if _xi is None or len(_xi) < n:
-                        # ESTRAZIONE FRESCA DALLA DISTRIBUZIONE STAZIONARIA (N(0,1)) PER I NODI
-                        # NUOVI. Zero transitorio, zero parametri: partire da zero darebbe un
-                        # primo calcio attenuato di b = sqrt(1-a^2), cioe' un artefatto.
-                        # [2026-09-16] QUESTO NON E' UN FALLBACK: E' IL PERCORSO NORMALE della
-                        # mitosi. `xi` e' l'AMBIENTE, non una proprieta' del nodo, quindi il
-                        # figlio NON lo eredita (vedi `_eredita_spinore_figli`). I nodi ESISTENTI
-                        # conservano il proprio `xi` - il `vstack` tiene la testa intatta - e solo
-                        # i NUOVI ricevono un campione fresco, perche' un nodo appena nato non ha
-                        # un passato del rumore che lo ha spintonato.
-                        self._xi_esteso = getattr(self, "_xi_esteso", 0) + 1
-                        self._xi_nuovi = (getattr(self, "_xi_nuovi", 0)
-                                          + max(n - (0 if _xi is None else len(_xi)), 0))
+                        # INIZIALIZZAZIONE DALLA DISTRIBUZIONE STAZIONARIA (N(0,1)): zero
+                        # transitorio, zero parametri. Partire da zero darebbe un primo calcio
+                        # attenuato, cioe' un artefatto all'accensione.
+                        self._xi_fallback = getattr(self, "_xi_fallback", 0) + 1
                         _base = np.asarray(_xi, float) if _xi is not None else np.zeros((0, 3))
                         _manca = n - len(_base)
                         _xi = (np.vstack([_base, self.rng.normal(0, 1.0, (_manca, 3))])
@@ -2042,45 +2031,7 @@ class Rete:
             B = B + Bg
         # INERZIA = |Psi|^2 (la materia mantiene il moto), come in mem_mot
         if not hasattr(self, "psi") or len(self.psi) < n: self.calcola_psi()
-        # [CORREZIONE DI DIFETTO, 2026-09-16 - decisione di Luca] IL FATTORE `cs^-2` NELL'INERZIA.
-        # DERIVAZIONE, non taratura (doc/INERZIA_tempo_quadro.md, esito (b)):
-        #   `correzione` e' ADIMENSIONALE e `omega` e' `1/T`, quindi `correzione/inerzia` deve
-        #   dare `1/T^2`  =>  **`inerzia` E' UN TEMPO AL QUADRATO**. Il tempo proprio del nodo e'
-        #   `lunghezza/velocita' = d/cs`, quindi `inerzia ∝ (d/cs)^2 ∝ cs^-2`.
-        #   L'ESPONENTE E' DERIVATO (non scelto), IL VERSO E' CONFERMATO (Compton con c -> cs: nel
-        #   pozzo l'orologio rallenta, redshift), ed e' LO STESSO ESPONENTE dello Step 2
-        #   (`omega_clk *= (cs/CS_M)^2`), derivato PRIMA e INDIPENDENTEMENTE: consistenza TROVATA,
-        #   non costruita.
-        # FORMA: si moltiplica per `(CS_M/cs_nodo)^2`, che e' ADIMENSIONALE e vale ESATTAMENTE 1
-        # dove `cs = CS_M` -> riduzione al limite ESATTA (sigillo M2). Nessun coefficiente nuovo,
-        # nessun floor nuovo: il floor resta `1e-6` e si applica al RISULTATO, cioe' alla grandezza
-        # per cui si divide davvero.
-        # PERCHE' E' UNA CORREZIONE DI CONSERVAZIONE E NON UN'AGGIUNTA: alla mitosi il figlio
-        # riceve un'inerzia NUOVA e il padre non ne perde, quindi `L_tot = sum(I*omega)` CRESCE a
-        # ogni divisione. `omega` e' intensiva (un corpo rigido che si spezza mantiene `omega` in
-        # ogni frammento): e' l'INERZIA che deve ripartirsi. Con `inerzia ∝ cs^-2`, quando nasce un
-        # figlio la densita' locale sale, `cs` locale cala, e l'inerzia di PADRE E FIGLIO aumenta
-        # insieme: un feedback MEDIATO DAL CAMPO, che e' il modo in cui la fisica lo fa, e che non
-        # richiede di sottrarre nulla al padre (impossibile: `|psi|^2` e' ricalcolata dalle fasi,
-        # non e' una variabile di stato).
-        # ⚠ ATTESA QUANTITATIVA, scritta PRIMA: `cs_std/cs_medio` sta fra 0.0086 % e 0.24 % in
-        # questo regime (C13), quindi IL FATTORE SARA' QUASI 1 OVUNQUE e l'effetto OGGI sara'
-        # MINUSCOLO. Si fa perche' senza la legge e' SBAGLIATA, non per un effetto misurabile a
-        # questa densita'. Diventera' rilevante dove `cs` si sveglia davvero.
-        # NB - GEMELLO DA TENERE ALLINEATO: la stessa lettura di `_cs_nodo_prev` (cache + fallback
-        # a CS_M) sta in `_tempo_luce_nodo`. Sono due punti, non uno: se un giorno la legge di `cs`
-        # cambia, vanno cambiati ENTRAMBI. Non l'ho estratta in un metodo di proposito: oggi tre
-        # sigilli si sono rotti proprio perche' un metodo estratto non era nei gusci in-process.
-        _csp_in = getattr(self, "_cs_nodo_prev", None)
-        self._cs_in_chiamate = getattr(self, "_cs_in_chiamate", 0) + 1
-        if _csp_in is not None and len(_csp_in) >= n:
-            _cs_in = np.maximum(np.asarray(_csp_in, float)[:n], 1e-12)
-        else:
-            self._cs_in_fallback = getattr(self, "_cs_in_fallback", 0) + 1   # P5: si CONTA
-            _cs_in = np.full(n, CS_M)
-        _fatt_cs = (CS_M / _cs_in) ** 2                    # adimensionale, == 1 dove cs == CS_M
-        self._fatt_cs_ultimo = _fatt_cs                    # per la metrica (solo lettura a valle)
-        inerzia = np.maximum(self._rho_sorgente() * _fatt_cs, 1e-6)   # [FASE 4] rho_spin (ON) / |psi|^2 (OFF); limite identico
+        inerzia = np.maximum(self._rho_sorgente(), 1e-6)   # [FASE 4] rho_spin (ON) / |psi|^2 (OFF); limite identico
         dtn = dt_n if np.isscalar(dt_n) else np.asarray(dt_n)[:n]
         dtn_c = dtn if np.isscalar(dtn) else dtn[:, None]
         # MEMORIA HEBBIANA: omega si conserva + correzione dal campo (torsione B x n) - decadimento
