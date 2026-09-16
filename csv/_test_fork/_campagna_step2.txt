@@ -17,3 +17,18 @@ CAMPAGNA STEP 2 -- 8 run (4 semi x 2 bracci), 500 passi, campione ogni 50
 [FINE  ] s2ON   seme 3   rc=0   durata 26.7 min   (26.7 min dall'inizio)
 [avvio ] s2OFF  seme 3   (26.7 min dall'inizio)
 [avvio ] s2OFF  seme 4   (26.7 min dall'inizio)
+[FINE  ] s2OFF  seme 1   rc=0   durata 27.6 min   (51.3 min dall'inizio)
+[FINE  ] s2OFF  seme 2   rc=0   durata 26.6 min   (53.0 min dall'inizio)
+[FINE  ] s2OFF  seme 4   rc=0   durata 26.7 min   (53.3 min dall'inizio)
+[FINE  ] s2OFF  seme 3   rc=0   durata 27.1 min   (53.8 min dall'inizio)
+============================================================================================
+  s2OFF  seme 1   OK
+  s2OFF  seme 2   OK
+  s2OFF  seme 3   OK
+  s2OFF  seme 4   OK
+  s2ON   seme 1   OK
+  s2ON   seme 2   OK
+  s2ON   seme 3   OK
+  s2ON   seme 4   OK
+CAMPAGNA: 8/8 run OK in 53.8 minuti
+============================================================================================

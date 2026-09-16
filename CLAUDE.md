@@ -830,6 +830,23 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   spiega perche' esiste il suo sostituto** (`TW_SPINORE` esiste **perche'** `SPIN_LARMOR` fallisce:
   cancellare il secondo farebbe perdere il **perche'** del primo).
 
+- **PRESIDIO — UN RISULTATO NULLO SI LEGGE SOLO INSIEME ALLA RISOLUZIONE CHE LO HA PRODOTTO**
+  (2026-09-16, `doc/REFERTO_step2_U1.md`). *«L'IC95 contiene lo zero»* **non e' un risultato**
+  finche' non si dice **quale effetto quel test AVREBBE potuto vedere**. E' la versione statistica
+  del `max|A-B| = 0.000e+00` per **mancanza di confronto**: in entrambi i casi uno zero viene letto
+  come informazione mentre e' **assenza di informazione**.
+  **CASO REALE, nella STESSA tabella:** contrasto Step 2 ON/OFF, 4 semi appaiati — su `chi` la
+  risoluzione e' lo **0.213 %** (il nullo dice **molto**: `chi` non si sposta di piu' di 0.19 gradi),
+  su **`|<n>|` e' il 129 %** e sulla **coerenza di segno il 603 %** (il nullo dice **NIENTE**: la
+  barra e' **piu' larga del valore**). **Ventidue righe tutte «contiene lo zero», e non significano
+  la stessa cosa.**
+  **REGOLA OPERATIVA: un risultato negativo si scrive come LIMITE SUPERIORE** — *«X non si sposta di
+  piu' di Y»* — **non come «X non cambia».** E se il limite superiore e' piu' grande della grandezza
+  stessa, si scrive **«non misurato»**, non «nessun effetto».
+  **E la cura non e' sempre piu' passi:** dove la grandezza **vale gia' il suo nullo** (un Bloch
+  medio di versori casuali, una coerenza che vale 0) la barra percentuale **non puo'** essere
+  piccola. Li' servono **piu' SEMI**.
+
 ## 10. PROMOZIONE DELLE COMPONENTI (regola di Luca, 2026-09-15)
 
 **Perche' esiste.** Finche' una legge validata resta un flag opzionale, puo' essere **dimenticata**,

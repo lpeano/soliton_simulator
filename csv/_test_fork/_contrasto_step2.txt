@@ -1,0 +1,46 @@
+========================================================================================================
+CONTRASTO STEP 2 -- ON (default) contro OFF (--senza-step2), 4 semi APPAIATI
+  criterio SCRITTO PRIMA: IC95 fra semi con t(3) = 3.182 che ESCLUDA lo zero. Non si proroga.
+  blob a44adc31   ON: STEP2=1   OFF: STEP2=0   TAU_LUCE=0  TW=0  CS_DIN=1  passo 500
+========================================================================================================
+
+### A. FIRME DI SPIN -- e' QUI che si gioca la RETROCESSIONE
+--------------------------------------------------------------------------------------------------------
+  chi medio TUTTI (gradi)              Delta = -0.03502  IC95 +- 0.1918   contiene lo zero
+  chi medio MATERIA (gradi)            Delta = -0.03901  IC95 +- 0.1748   contiene lo zero
+  chi medio p90 (gradi)                Delta = -0.09805  IC95 +- 0.2785   contiene lo zero
+  chi std TUTTI (gradi)                Delta = -0.02063  IC95 +- 0.09954   contiene lo zero
+  frazione chi < 10 gradi              Delta = -0.0001924  IC95 +- 0.0003969   contiene lo zero
+  |<n>| TUTTI                          Delta = 0.002281  IC95 +- 0.02236   contiene lo zero
+  |<n>| MATERIA                        Delta = 0.0001913  IC95 +- 0.0306   contiene lo zero
+  |<n>| p90                            Delta = 0.0266  IC95 +- 0.03018   contiene lo zero
+  spin overlap d'arco                  Delta = 0.0002458  IC95 +- 0.001573   contiene lo zero
+  |omega_s| mediana                    Delta = -1730  IC95 +- 5218   contiene lo zero
+  theta giri/passo                     Delta = -1.773  IC95 +- 8.625   contiene lo zero
+
+### B. SETTORE U(1) / EM -- quello che lo Step 2 TOCCA
+--------------------------------------------------------------------------------------------------------
+  |Re<canon|psi>|                      Delta = 0.0008479  IC95 +- 0.01524   contiene lo zero
+  coerenza SEGNO d'arco                Delta = 0.001625  IC95 +- 0.005931   contiene lo zero
+    ... materia-materia                Delta = 0.004229  IC95 +- 0.007531   contiene lo zero
+    ... p90                            Delta = -0.002143  IC95 +- 0.004718   contiene lo zero
+  coerenza VERSO [nullo IGNOTO]        Delta = 0.1213  IC95 +- 0.1759   contiene lo zero
+
+### C. CONTROLLI -- il fattore dello Step 2 e' DAVVERO diverso fra i bracci?
+--------------------------------------------------------------------------------------------------------
+  max|fatt_cs - 1|                     Delta = -0.0003817  IC95 +- 0.001499   contiene lo zero
+  frazione nodi |fatt_cs-1| > 1%       Delta = 0.01331  IC95 +- 0.07535   contiene lo zero
+  cs dispersione                       Delta = 0.0002708  IC95 +- 0.0007248   contiene lo zero
+  n nodi                               Delta = -114.8  IC95 +- 366.2   contiene lo zero
+  Lam                                  Delta = 0.001284  IC95 +- 0.003931   contiene lo zero
+  L_tot                                Delta = 7891  IC95 +- 1.078e+04   contiene lo zero
+
+========================================================================================================
+VERDETTO col criterio scritto prima:
+  firme di SPIN che ESCLUDONO lo zero : 0 su 11
+  osservabili U(1) che ESCLUDONO lo zero : 0 su 5
+
+  NESSUNA firma di SPIN si muove oltre la barra: la predizione REGGE.
+  NB: 'regge' non vuol dire 'lo Step 2 non fa nulla'. Vuol dire che NON organizza lo
+      spin, che e' esattamente cio' che il suo stesso messaggio dichiara.
+========================================================================================================

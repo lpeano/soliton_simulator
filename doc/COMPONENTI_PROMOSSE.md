@@ -139,8 +139,27 @@ suo stesso messaggio dichiara di non fare (*«NON muove il Bloch e quindi NON or
 **Non retrocede per ripensamento, né perché un run "va peggio".**
 
 **COSA QUESTA PROMOZIONE NON DICE:** non dice che lo Step 2 **migliori** alcuna osservabile. Dice
-che la sua **assenza è un difetto**. Le sue conseguenze misurabili sul settore U(1) sono ancora da
-misurare — **è esattamente a quello che serve la MISURA U**, cablata nello stesso giro.
+che la sua **assenza è un difetto**.
+
+### ✅ IL DEBITO E' SALDATO — campagna a variabile singola, 2026-09-16 (`doc/REFERTO_step2_U1.md`)
+
+8 run, 500 passi, **4 semi appaiati** per braccio, `--cs-dinamico` acceso, criterio committato
+**prima** (`doc/PREDIZIONE_step2_U1.md`).
+
+> **IL CRITERIO DI RETROCESSIONE NON SCATTA: 0 firme di SPIN su 11 escludono lo zero**, e
+> **0 osservabili U(1) su 5**. La promozione **regge**, e regge per la ragione su cui poggiava:
+> `_phc` e' una **fase globale** e lascia il Bloch invariante.
+
+**Limiti superiori, che e' la forma onesta del risultato:** lo Step 2 **non sposta `chi` di piu' di
+0.19 gradi** (risoluzione **0.213 %**), ne' lo spin overlap di piu' di **0.0016** (0.315 %), ne'
+`|omega_s|` di piu' del **6.7 %**.
+
+> **⚠ MA NON PER TUTTE:** su **`|<n>|`** la risoluzione e' il **129 %** e sulla **coerenza di segno**
+> il **603 %** — **la barra e' piu' larga del valore**, quindi li' il «contiene lo zero» **non
+> misura nulla**. Servono piu' SEMI, non piu' passi.
+> **E nessuna colonna misura l'orologio DIRETTAMENTE** (nessuna fra 256): la campagna misura le
+> **conseguenze** di `omega_clk`, mai `omega_clk`. Il nullo su U(1) **non dice che l'orologio non e'
+> cambiato** — e infatti e' cambiato, il **10.8 %** dei nodi ha `|fatt_cs - 1| > 1 %`.
 
 ---
 

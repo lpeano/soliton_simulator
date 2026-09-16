@@ -98,6 +98,17 @@
 >     e `LS_AZIM` non pecca di «asse di laboratorio» ma di **baricentro GLOBALE** (§4) e **indice
 >     cablato** (§3). **Il codice delle escluse NON si cancella:** e' l'evidenza che spiega perche'
 >     esistono i loro sostituti.
+>
+> 17. **VERDETTO SULLO STEP 2: la RETROCESSIONE NON SCATTA** (§9.18). Campagna a variabile singola,
+>     **8/8 run**, 4 semi **appaiati**, criterio committato prima: **0 firme di SPIN su 11** e
+>     **0 osservabili U(1) su 5** escludono lo zero. La promozione **regge**, e per la ragione su cui
+>     poggiava: `_phc` e' una **fase globale**.
+>     **⚠ MA il punto vero e' un altro: meta' di quei nulli NON HA POTENZA.** La risoluzione varia di
+>     **tre ordini** — **0.213 %** su `chi`, **129 %** su `|<n>|`, **603 %** sulla coerenza di segno.
+>     **Ventidue righe tutte «contiene lo zero», e non significano la stessa cosa.** Il risultato si
+>     scrive come **limite superiore**, e dove la barra e' piu' larga del valore si scrive
+>     **«non misurato»**. Nuovo presidio in §9.
+>     **E una lacuna strutturale:** fra **256** colonne **nessuna** misura l'orologio direttamente.
 
 ---
 
@@ -2508,3 +2519,73 @@ misura nulla.**
 
 Resta spento, ed e' **l'evidenza che spiega perche' esistono i loro sostituti**: `TW_SPINORE` esiste
 **perche'** `SPIN_LARMOR` fallisce. **Cancellare il secondo farebbe perdere il perche' del primo.**
+
+
+---
+
+## 9.18 — VERDETTO SULLO STEP 2: la retrocessione **non scatta**, e meta' dei nulli **non ha potenza**
+
+> **2026-09-16, blob `a44adc31`.** 8 run, 500 passi, **4 semi appaiati** per braccio,
+> `--cs-dinamico` acceso, `--tau-luce` e `--tw-spinore` esclusi. **8/8 `rc=0` in 53.8 minuti.**
+> Predizione e soglia **committate prima** (`doc/PREDIZIONE_step2_U1.md`, `b7cb537`).
+> -> `doc/REFERTO_step2_U1.md`.
+
+### 9.18.1 — Il criterio di retrocessione **non scatta**
+
+| | |
+|---|---|
+| firme di **SPIN** che escludono lo zero | **0 su 11** |
+| osservabili **U(1)** che escludono lo zero | **0 su 5** |
+
+`chi` medio `Delta = -0.035 +- 0.192` gradi · `chi` std `-0.021 +- 0.100` · spin overlap
+`+2.5e-04 +- 1.6e-03` · `|omega_s|` `-1730 +- 5218` · coerenza di segno `+1.6e-03 +- 5.9e-03`.
+
+> **La promozione REGGE, e per la ragione su cui poggiava:** `_phc` moltiplica `a1` e `b1` per lo
+> **stesso** fattore (`:2212-2213`, uniche occorrenze), quindi il Bloch e' invariante per fase
+> globale. **Non e' fortuna: e' la proprieta' che il criterio sorvegliava, ed e' stata messa alla
+> prova.** Il debito contratto con la promozione (*«le conseguenze su U(1) sono da misurare»*) e'
+> **saldato, con esito negativo**.
+
+### 9.18.2 — ⚠ E QUI LA COSA CHE CONTA DAVVERO
+
+**«Contiene lo zero» non vale uguale per tutte le righe.** La risoluzione varia di **tre ordini**:
+
+| | risoluzione | il nullo dice… |
+|---|---|---|
+| `chi` medio / std, spin overlap | **0.21 – 0.32 %** | **molto** |
+| `|omega_s|` | 6.7 % | qualcosa |
+| `n`, `Lam` | 11 – 35 % | poco |
+| **`|<n>|`** | **129 %** | **NIENTE** |
+| **coerenza di segno** | **603 %** | **NIENTE** |
+
+> **Ventidue righe tutte «contiene lo zero», e non significano la stessa cosa.** E' la versione
+> **statistica** del `max|A-B| = 0.000e+00` per **mancanza di confronto**: uno zero letto come
+> informazione mentre e' **assenza** di informazione.
+>
+> **Forma onesta, cioe' LIMITI SUPERIORI:** lo Step 2 **non sposta `chi` di piu' di 0.19 gradi**, ne'
+> lo spin overlap di piu' di **0.0016**, ne' `|omega_s|` di piu' del **6.7 %**. **Su `|<n>|` e sulla
+> coerenza di segno non si sa nulla.**
+>
+> **E la cura non e' piu' passi:** dove la grandezza **vale gia' il suo nullo**, la barra percentuale
+> **non puo'** essere piccola. Li' servono **piu' SEMI**. -> presidio nuovo in `CLAUDE.md` §9.
+
+### 9.18.3 — Un controllo che vale, e una lacuna strutturale
+
+**Il controllo:** `fatt_cs`, `cs_std` e la frazione oltre l'1 % **non** differiscono fra i bracci —
+ed e' **giusto**, perche' `fatt_cs` e' il fattore dell'**inerzia**, una **correzione di difetto**,
+**non** gated su `STEP2`. **I due bracci sono identici in tutto tranne l'orologio.**
+
+> **LA LACUNA (voce `Y1`):** fra le **256** colonne dell'osservatore **nessuna** misura l'orologio —
+> niente `clk`, `orolog`, `fase`, `phc`. Si misurano le **conseguenze** di `omega_clk`, **mai
+> `omega_clk`**. Quindi il nullo su U(1) **non dice** *«l'orologio non e' cambiato»*: dice *«cio' che
+> sappiamo misurare non se ne accorge»*. **Ed e' cambiato:** il **10.8 %** dei nodi ha
+> `|fatt_cs - 1| > 1 %`.
+
+### 9.18.4 — E due nulli da correggere (voce `Y2`)
+
+`u1_segno_ov_nullo` scrive **`2/pi`** nei CSV ed e' **sbagliato** — `canon` viene da `_nb_grav()`,
+una direzione diversa, quindi il nullo e' **`(2/3)*(2/pi) = 0.42441`**. Col nullo giusto il misurato
+**0.4254 ± 0.0105** e' **il caso**. **Il valore sbagliato e' nei dati gia' scritti** e non lo
+acquisiranno: va **annotato**. E `u1_verso_arco_coer` **resta muta** finche' il suo nullo non e'
+misurato contro **coppie casuali** (`nb_grav` e' una media di vicinato: i nodi adiacenti sono
+correlati **per costruzione**).
