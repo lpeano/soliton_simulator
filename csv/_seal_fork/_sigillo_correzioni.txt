@@ -21,18 +21,27 @@ M2 — IL DECISIVO: con cs = CS_M il fattore vale ESATTAMENTE 1 -> BYTE-IDENTICO a
 M1, M3, M4, M5 — in-process, con spie PURE-READ su `_eredita_spinore_figli` e `rng`
 ==========================================================================================================
 
-  M1 — correlazione `xi` PADRE-FIGLIO subito dopo la mitosi (serve `--rumore-colorato`)
-     PRIMA della correzione: il figlio COPIA xi dal padre -> dopo un passo entrambi valgono
-     a*xi_padre + b*g con g DIVERSI, quindi corr attesa ~ a^2 = 0.9512.
-     DOPO: il figlio ha un campione FRESCO e indipendente -> corr attesa ~ 0.
-     PRE-correzione : corr = +1.0000  su 84 coppie padre-figlio
-     POST-correzione: corr = +nan  su 0 coppie padre-figlio
-[PASS] M1 PRIMA il rumore padre-figlio era CORRELATO      corr = +1.0000  (il difetto ESISTEVA: senza questo, M1b non proverebbe nulla)
-[FAIL] M1b DOPO il rumore padre-figlio e' INDIPENDENTE    corr = +nan  su 0 coppie
+  M1 — il difetto ESISTEVA? (codice VECCHIO). CRITERIO CORRETTO: non «correlazione alta»,
+     ma IDENTITA' ESATTA: alla mitosi il vecchio codice COPIAVA `xi` dal padre.
+[PASS] M1 PRIMA: xi del figlio IDENTICO a quello del padre max|xi_figlio - xi_padre| = 0.000e+00 su 84 coppie  (il difetto ESISTEVA, ed era MASSIMO)
 
-  M3 — `len(_xi_rumore) == n` dopo ogni passo, e i contatori (P5)
-[FAIL] M3 len(_xi_rumore) == n dopo OGNI passo            25 passi, n da 1196 a 1748;  estensioni 24, nodi con xi fresco 1734, chiamate 36
+  M1b — DOPO la correzione: INDIPENDENTI. E la soglia NON e' scelta, e' il VALORE SOTTO
+     IPOTESI NULLA: la correlazione campionaria di variabili indipendenti ha
+     sigma ~ 1/sqrt(3N) con N coppie di vettori a 3 componenti. Si chiede |corr| < 3 sigma.
+[PASS] M1b DOPO: xi padre-figlio INDIPENDENTE             corr = -0.0605 su 110 coppie;  nullo sigma = 0.0550, soglia 3 sigma = 0.1651;  scarto 1.10 sigma
 
+  M1c — IL CRITERIO CHE MANCAVA. M1b da solo NON prova che la correzione sia giusta:
+     un figlio con `xi = 0` passerebbe M1b a pieni voti, ed e' SBAGLIATO, perche' darebbe
+     il transitorio che l'estrazione STAZIONARIA esiste per evitare. Qui si chiede che la
+     varianza dei neonati sia ~1, col nullo sqrt(2/k) per k campioni.
+[PASS] M1c i neonati ricevono xi dalla STAZIONARIA (var ~ 1) var(xi_neonati) = 0.9756 su 330 campioni;  nullo 1 +- 0.0778;  scarto 0.31 sigma
+  M3 — allineamento, testa preservata, contatore. TRE criteri, e il primo era SBAGLIATO:
+     controllavo `len(xi) == n` a FINE passo, cioe' DOPO `mitosi()`, dove l'array e'
+     LEGITTIMAMENTE corto — l'estensione avviene dentro `_passo_spinoriale`, all'inizio del
+     passo DOPO. Il momento giusto e' DOPO `step()`, cioe' QUANDO L'ARRAY VIENE USATO.
+[PASS] M3 len(_xi_rumore) == n DOPO step() (cioe' quando viene USATO) 25 passi, n finale 1748;  estensioni 24, chiamate 36
+[PASS] M3b l'estensione NON tocca la TESTA (i nodi esistenti conservano xi) corr(xi_prima, xi_dopo) sui nodi gia' presenti > 0.5 a ogni passo: la ricorsione lo fa
+[FAIL] M3c `_xi_nuovi` == numero di nodi NATI (contatore verificabile, P5) xi freschi assegnati 538, nodi nati 0  -> NON coincidono
   M4 — CONSERVAZIONE: `L_tot = somma(inerzia * |omega|)` e il suo salto per mitosi
      E' il test di conservazione MAI FATTO. Se L cresce col numero di nodi, la violazione
      e' MISURATA, non argomentata. Qui si confronta PRE e POST correzione (2).
@@ -46,7 +55,7 @@ M1, M3, M4, M5 — in-process, con spie PURE-READ su `_eredita_spinore_figli` e `r
 [PASS] M5c nessun runaway di scala                        max|x| = 9.355
 
 ==========================================================================================================
-SIGILLO CORREZIONI: 11/13 PASS -> FAIL
+SIGILLO CORREZIONI: 15/16 PASS -> FAIL
 ==========================================================================================================
 COSA QUESTO SIGILLO NON DICE
 ---------------------------
