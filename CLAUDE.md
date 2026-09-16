@@ -196,6 +196,36 @@ perde, il CSV resta.
 - Se un fatto in par.9 si rivela superato dal codice, CORREGGILO qui (non lasciare un fatto stale:
   e' esattamente l'errore del docstring "ORFANO").
 
+## 5-quinquies. IL CODICE DI UNA MISURA DEV'ESSERE RECUPERABILE **PER COSTRUZIONE** (regola di Luca, 2026-09-16)
+
+- **`soliton_simulator.py` deve SEMPRE stare in uno di questi due stati, mai fuori:**
+  1. **il blob sul disco coincide con quello COMMITTATO nel branch su cui si lavora** — cioe' il
+     branch *e'* il codice che gira (**il caso normale, e quello da preferire**); **oppure**
+  2. **accanto ai dati resta una COPIA ESATTA del file che ha girato**, committata **insieme** a
+     quei dati.
+- **Non e' una raccomandazione: e' CABLATA**, perche' una regola che dipende dal ricordarsene non
+  e' un presidio. `csv/_test_fork/_osserva_vuoto.py` confronta il proprio blob con
+  **`git rev-parse HEAD:soliton_simulator.py`** e, se differiscono, **scrive da solo**
+  `<base>._sim.py` accanto all'output e lo dichiara nel log.
+  **Le due strade della guardia sono state PROVATE ENTRAMBE** (2026-09-16): il ramo «committato»
+  passa, e il ramo «non committato» scrive una copia il cui blob e' **identico** a quello del file
+  che ha girato (`a435ebb8` = `a435ebb8`). *(Un fallback mai visto scattare e' un comportamento
+  sconosciuto: par.9, presidio dei rami `else`.)*
+- **Si confronta col BLOB A HEAD, mai con `git status`.** Un file puo' risultare «modificato» per
+  sole newline e avere lo **stesso** blob; e puo' essere identico a un commit **vecchio** senza
+  esserlo a HEAD. **Il blob e' l'unica identita' che non mente** (par.2.6), e vale per i
+  **diagnostici** quanto per il simulatore -> `doc/INVENTARIO_strumenti.md`.
+- **Perche' la regola esiste, e il caso reale che l'ha generata (2026-09-16):** MISURA G e' rimasta
+  **non committata** mentre **quattro run la stavano gia' usando**. La riproducibilita' si e'
+  salvata **solo** perche' nessuno ha toccato il file nel frattempo — **un fatto che dovevo
+  ASSERIRE io**, mentre il par.5 esiste apposta perche' non debba asserirlo nessuno.
+  **La copia automatica toglie l'asserzione di mezzo.**
+- **Corollario, e va rispettato anche quando e' scomodo:** se un run e' partito col codice non
+  committato, **la copia `._sim.py` va committata insieme ai dati**, non cancellata «tanto poi lo
+  committo». Il file committato **dopo** ha lo stesso contenuto ma **non lo dimostra**.
+
+---
+
 ## 5-quater. IL REGISTRO DEI FRONTI APERTI (regola di Luca, 2026-09-15)
 - **Lo stato dei fronti aperti sta in `doc/RAMIFICAZIONI.md`**, ed e' uno **STATO, non una cronaca**
   (la cronaca vive nei documenti di `doc/` e in `CLAUDECONNECT.md`).

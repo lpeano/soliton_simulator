@@ -150,6 +150,41 @@ def main():
     print("[osserva] blob soliton_simulator.py = %s   seed = %d   tag = %s"
           % (BLOB, a.seed, a.tag), flush=True)
 
+    # [REGOLA DI LUCA, 2026-09-16 -- CLAUDE.md par.5-quinquies] IL CODICE DI UNA MISURA DEV'ESSERE
+    # RECUPERABILE, SEMPRE E PER COSTRUZIONE: o il blob sul disco e' QUELLO COMMITTATO nel branch
+    # (caso normale), oppure accanto ai dati resta una COPIA ESATTA del file che ha girato.
+    # NON e' una cosa da ricordarsi: e' cablata qui, perche' oggi (2026-09-16) e' successo il
+    # contrario -- MISURA G e' rimasta non committata mentre quattro run la stavano gia' usando,
+    # e la riproducibilita' e' stata salvata solo dal fatto che nessuno ha toccato il file nel
+    # frattempo. Un fatto che dovevo ASSERIRE io, mentre il par.5 esiste apposta perche' non debba
+    # asserirlo nessuno.
+    # NB: si confronta col blob a HEAD, NON con `git status`: un file puo' essere "modificato" per
+    # sole newline e restare lo stesso blob, e un file puo' essere identico a un commit VECCHIO
+    # senza esserlo a HEAD. Il blob e' l'unica identita' che non mente (par.2.6).
+    _atteso = None
+    try:
+        import subprocess as _sp
+        _r = _sp.run(["git", "rev-parse", "HEAD:soliton_simulator.py"], cwd=ROOT,
+                     capture_output=True, text=True, timeout=30)
+        if _r.returncode == 0:
+            _atteso = _r.stdout.strip()
+    except Exception as _e:                     # niente git, o repo assente: NON si blocca il run
+        print("[osserva] ATTENZIONE: impossibile interrogare git (%s). La copia di sicurezza "
+              "viene scritta comunque." % _e, flush=True)
+    if _atteso == BLOB:
+        print("[osserva] codice COMMITTATO: il blob sul disco coincide con HEAD. "
+              "Nessuna copia necessaria.", flush=True)
+    else:
+        _copia = base + "._sim.py"
+        with open(_copia, "wb") as _f:          # BINARIO: una riscrittura testuale cambierebbe il
+            _f.write(_by)                       # blob, e la copia non sarebbe piu' quel file
+        print("[osserva] *** IL CODICE CHE STA GIRANDO NON E' QUELLO COMMITTATO ***", flush=True)
+        print("[osserva]     disco %s   HEAD %s" % (BLOB[:12], (_atteso or "(ignoto)")[:12]),
+              flush=True)
+        print("[osserva]     COPIA ESATTA salvata accanto ai dati: %s" % _copia, flush=True)
+        print("[osserva]     COMMITTALA INSIEME AI DATI: senza, questa misura non e' rifacibile.",
+              flush=True)
+
     arg = S._cli()
     S._applica_regime(arg)
     # I FLAG NON SI LEGGONO QUI. `_applica_regime` fissa solo SCUOTIMENTO; FORK_SU2 e FORK_SU2_MEM

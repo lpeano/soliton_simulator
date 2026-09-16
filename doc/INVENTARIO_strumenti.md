@@ -71,6 +71,25 @@ cura.
 
 ---
 
+## 3-bis. LA GUARDIA DI IDENTITA' DEL CODICE (cablata il 2026-09-16, `CLAUDE.md` §5-quinquies)
+
+`_osserva_vuoto.py` confronta il proprio blob calcolato con **`git rev-parse
+HEAD:soliton_simulator.py`**, e si comporta in **due modi, entrambi provati**:
+
+| caso | cosa fa | provato? |
+|---|---|---|
+| blob disco **=** blob HEAD | stampa *«codice COMMITTATO»* e prosegue | **si'** — `08784685` = `08784685` |
+| blob disco **!=** blob HEAD | **scrive da solo** `<base>._sim.py`, copia **BINARIA** del file che sta girando, e lo dichiara nel log | **si'** — copia `a435ebb8` = disco `a435ebb8`, **byte-identica** |
+
+**Si confronta col blob a HEAD, non con `git status`:** un file puo' risultare «modificato» per
+sole newline e avere lo **stesso** blob, e puo' essere identico a un commit **vecchio** senza
+esserlo a HEAD.
+**La copia e' scritta in BINARIO** per la stessa ragione per cui lo sono le copie storiche del §4:
+una riscrittura testuale cambierebbe le newline, quindi il **blob**, e la copia non sarebbe piu'
+*quel* file.
+
+---
+
 ## 4. COSA *NON* E' UNO STRUMENTO DI MISURA (per non confondersi)
 
 `csv/_seal_fork/_old_sim_pre_*.py` sono **copie storiche del simulatore**, estratte da git
