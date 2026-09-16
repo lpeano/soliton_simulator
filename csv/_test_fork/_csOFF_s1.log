@@ -1,0 +1,36 @@
+[osserva] blob soliton_simulator.py = 08784685eeb17835389d248a2d1d07db4f0d1305   seed = 1   tag = csOFF
+[calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+[fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+[batch] condensazione: seed=1 passi=500 ogni=50 sep=8.0 nmasse=3
+[batch] leggi attive: GRAV_BIFASE=True SPIN_ORBITA(via SPINORE)=True COPPIA_MIT=1.0 lambda=0.800
+
+passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
+      0 |    0.0000 |    16.027 | r=5.2 c=0.208 n=5      | tot=2 NUOVI=2 | TRACK accr=1116 coppie=0 nuova=80
+     50 |    0.0000 |    16.027 | r=10.2 c=0.052 n=6     | tot=3 NUOVI=0 | TRACK accr=1744 coppie=192 nuova=80
+    100 |    0.0000 |    16.027 | r=14.2 c=0.232 n=608   | tot=2 NUOVI=0 | TRACK accr=2328 coppie=361 nuova=80
+    150 |    0.0000 |    16.027 | r=12.2 c=0.105 n=6     | tot=1 NUOVI=0 | TRACK accr=2512 coppie=427 nuova=81
+    200 |    0.0000 |    16.027 | r=0.8 c=0.067 n=455    | tot=1 NUOVI=0 | TRACK accr=2604 coppie=465 nuova=81
+    250 |    0.0000 |    16.027 | r=14.2 c=0.082 n=564   | tot=2 NUOVI=0 | TRACK accr=2652 coppie=484 nuova=81
+    300 |    0.0000 |    16.027 | r=0.8 c=0.161 n=509    | tot=3 NUOVI=0 | TRACK accr=2699 coppie=507 nuova=81
+    350 |    0.0000 |    16.027 | r=13.8 c=0.175 n=871   | tot=3 NUOVI=0 | TRACK accr=2748 coppie=533 nuova=81
+    400 |    0.0000 |    16.027 | r=8.2 c=0.116 n=9      | tot=2 NUOVI=0 | TRACK accr=2783 coppie=556 nuova=81
+    450 |    0.0000 |    16.027 | r=0.8 c=0.140 n=715    | tot=1 NUOVI=0 | TRACK accr=2825 coppie=580 nuova=81
+    500 |    0.0000 |    16.027 | r=0.8 c=0.050 n=557    | tot=1 NUOVI=0 | TRACK accr=2870 coppie=599 nuova=81
+
+[batch] completato in 1182.3s, 500 passi. CSV salvato in C:\Users\lpeano\soliton_simulator\csv\_test_fork\_vuoto_csOFF_s1.cond.csv
+[batch] LETTURA condensazione: se dens_centrale e n_centrali CRESCONO e frac_nati resta
+        ALTA mentre dist_masse NON crolla -> NUOVA massa dal vuoto (non accrescimento).
+[batch] LETTURA picchi_nuovi: se picchi_nuovi passa da 0 a >=1 a un certo passo, quello e'
+        il momento in cui una MASSA NUOVA si stacca dal vuoto (materia isolata che si crea).
+[batch] LETTURA antiguscio: se compare un anello a coerenza_min BASSA (antifase) e raggio
+        stabile oltre le masse, con nodi presenti -> GUSCIO DI ANTIFASE che avvolge i nuclei
+        = massa di scala superiore (il guscio del sistema e antifase, non materia).
+[osserva-flag] tag=csOFF seed=1  FORK_SU2=True FORK_SU2_MEM=True SCUOTIMENTO=True SYNC_UPDATE=False KURAMOTO_SU2=False STEP2=False CS_DIN=True GAMMA_TURBO=1 TAU_LUCE=False   (letti DURANTE il run)
+[osserva] 11 campioni -> C:\Users\lpeano\soliton_simulator\csv\_test_fork\_vuoto_csOFF_s1.vuoto.csv (scritti incrementalmente)

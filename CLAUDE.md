@@ -260,6 +260,10 @@ COMPLEMENTARE (fornisce stati di nodo variati da trasportare), non sostitutiva.
 (dove/come, formule, flag, sigilli) · `doc/ROADMAP_fork_SU2.md` (in-che-ordine) ·
 `doc/PROTOCOLLO_test_olonomia.md` (come misurare W(r)) · `doc/SYSTASIS_nota_concettuale.md`
 (il concetto). Leggili PRIMA di lavorare sul fork (vedi par.0-bis).
+**E i TRE REGISTRI, che sono STATO e non cronaca:** `doc/RAMIFICAZIONI.md` (i fronti aperti, par.5-quater) ·
+`doc/COMPONENTI_PROMOSSE.md` (cosa e' fisica e cosa e' opzione, par.10) ·
+**`doc/INVENTARIO_strumenti.md`** (QUALE script produce QUALE numero, **col blob di ogni script**:
+un commit puo' mentire, un blob no — e vale per i diagnostici quanto per il simulatore).
 NB: `ROADMAP_dev-spinoriale.md` (radice) e' la roadmap GAMMA/Step 2, A VALLE del fork (par.6).
 
 ## 8. PRINCIPIO GUIDA (per capire il "perche'")

@@ -1,0 +1,81 @@
+# INVENTARIO DEGLI STRUMENTI — quali script producono i numeri di questo programma
+
+> **2026-09-16.** Branch `fork-su2`. Blob del simulatore: **`08784685`**.
+> **Perche' esiste:** i numeri di questo repo non escono dal simulatore ma da **undici script**, e
+> finora l'unico modo di sapere **quale** script ha prodotto **quale** numero era leggere i commit
+> in ordine. Qui c'e' l'elenco, con **il blob di ogni script** — perche' un commit puo' mentire, un
+> blob no (§2.6), e **vale per i diagnostici quanto per il simulatore**.
+>
+> **Si aggiorna quando uno strumento nasce, cambia o viene sigillato**, nello stesso commit (§5-bis).
+> **Non e' una cronaca**: se uno script e' qui, e' perche' un numero committato dipende da lui.
+
+---
+
+## 0. LA REGOLA CHE QUESTO FILE RENDE VERIFICABILE
+
+> **Un diagnostico che contamina la fisica non misura il sistema: misura se stesso** (§2.3).
+> Percio' ogni riga qui sotto porta **il suo sigillo di purezza** — non «e' puro», ma **quale file
+> lo dimostra e con che numero**. Dove la colonna dice *«nessuno»*, quel numero **non e'
+> certificato puro**, e va detto da chi lo cita.
+
+---
+
+## 1. GLI STRUMENTI IN USO OGGI (2026-09-16)
+
+| script | blob | righe | cosa produce | sigillo di purezza |
+|---|---|---|---|---|
+| **`csv/_test_fork/_osserva_vuoto.py`** | `54faf42d` | 485 | **il driver della campagna.** Avvolge `Rete.step` e legge gli array **gia' committati**. MISURE A (`chi`), B (`\|<n>\|`), C (`theta`), D (dispersione di `r`), E (autocorrelazione), **F** (le tre pendenze trasversali), **G** (ingredienti FDT) | **`_sigillo_osservatore.py` 6/6 PASS** (2026-09-16, `d7bc21c`): `max\|A-B\| = 0.000e+00`, nodi **3020 = 3020** |
+| **`csv/_test_fork/_sigillo_osservatore.py`** | `64b2c894` | 156 | il sigillo qui sopra: O1.0, O1, O2, O3a-c | — *(e' lui il sigillo)* |
+| **`csv/_test_fork/_tracing_omega.py`** | `2d12f6e7` | 438 | **`ingredienti(S, net)`**, la ricostruzione della catena di `omega` su **copia profonda** con restore dell'RNG. **MISURA F la RIUSA invece di riscriverla** | sigillo interno `--sigillo`, piu' O1 sopra (che esercita la copia profonda **dentro** un run vero) |
+| **`csv/_test_fork/_verdetto_S_R.py`** | `e43b5911` | 397 | **l'analisi di oggi**: conformita' P6, voce **S**, l'INDETERMINATO `chi_p90`, voce **R**, dispersione di `r`, conto **FDT**. Barre **FRA SEMI** con il `t` di Student giusto per i gradi di liberta' | non serve: **legge CSV**, non tocca il simulatore |
+| **`csv/_seal_fork/_sigillo_strato1.py`** | `06f7e661` | 541 | i sigilli dello **STRATO 1**: S1.0/S1a/S1b, S2, S3, S4, S5, S6, S7, **S8 (nuovo oggi)**, S3b | — *(e' un sigillo)* |
+
+## 2. GLI STRUMENTI CHE HANNO PRODOTTO NUMERI ANCORA CITATI
+
+| script | blob | righe | numero che regge | dove e' citato |
+|---|---|---|---|---|
+| `csv/_test_fork/_verdetto_4pi.py` | `aec79357` | 157 | **ESITO (A)** dei quattro bracci; gradiente `theta` **96.37 -> 15.08 = 6.39x** | **C14** |
+| `csv/_test_fork/_rimisura_t3.py` | `b4a9775b` | 120 | le pendenze T3 sui quattro incroci PRE/POST x OFF/ON | **C8** |
+| `csv/_test_fork/_controllo_semi.py` | `1fa8dc56` | 134 | **la dispersione FRA SEMI = 0.030** contro la `SE` interna ~0.010 | **C10**, ed e' il numero che ha fatto ritirare il «16.9 %» |
+| `csv/_seal_fork/_sigillo_fix_cache.py` | `5858acf0` | 208 | fallback `_cs_nodo_prev` **71.88 % -> 0.00 %**, **5/5 PASS** | **C7** |
+| `csv/_seal_fork/_sigillo_psi_spin_prec.py` | `3834df9d` | 248 | guardia 4pi fallita **95.33 % -> 0.00 %**, **6/6 PASS** | **C11** |
+| `csv/_seal_fork/_sigillo_tau_luce.py` | `d11548cd` | 212 | **il sigillo che NON passa** (T2/T3/T4) | voce **A**, `doc/SIGILLO_tau_luce_FALLITO.md` |
+
+---
+
+## 3. ⚠ UN BUCO DI TRACCIABILITA', TROVATO OGGI
+
+> **I `.log` dei run NON SONO NEL REPO, e non si vedono nemmeno come «non tracciati».**
+
+`.gitignore` esclude `*.log` globalmente e ri-include **solo** `log/**/`, non `csv/**/*.log`.
+Quindi `csv/_test_fork/_csOFF_s1.log` e compagni sono **invisibili a `git status`**: non appaiono
+fra i file non tracciati, quindi nessuno si accorge che mancano.
+
+**Cosa si perde:** la riga **`[osserva-flag] ... (letti DURANTE il run)`**, che e' la
+certificazione **piu' diretta** dei flag — letta dai globali vivi **dentro** il ciclo, non da prima
+del run. *(E' proprio la distinzione che ha fatto fallire il sigillo O3c il 2026-09-15, commit
+`279c3b7`: leggere i flag prima di `_applica_flag` dava `False` su entrambi anche quando il run li
+usava.)*
+
+**Cosa NON si perde, e per questo il buco non e' urgente:** dal 2026-09-15 gli stessi flag sono
+**colonne del CSV** (`FORK_SU2`, `FORK_SU2_MEM`, `SCUOTIMENTO`, `SYNC_UPDATE`, `KURAMOTO_SU2`,
+`STEP2`, `GAMMA_TURBO`, `TAU_LUCE`, `CS_DINAMICO`, e da oggi `SPIN_LARMOR` e `TW_SPINORE`), **piu'
+`blob` e `seed`** — ed e' esattamente il **P6**. **Il CSV resta, il log si perde**: la ridondanza e'
+gia' dalla parte giusta.
+
+**Decisione presa oggi, e i suoi limiti:** i log della campagna di oggi sono stati aggiunti con
+`git add -f`, perche' sono la prova di una misura in corso. **Non ho toccato `.gitignore`**: e' una
+regola di progetto, e cambiarla e' una decisione di Luca. **Finche' non e' cambiata, ogni campagna
+futura ripetera' il buco a meno che qualcuno si ricordi del `-f`** — cioe' e' una toppa, non una
+cura.
+
+---
+
+## 4. COSA *NON* E' UNO STRUMENTO DI MISURA (per non confondersi)
+
+`csv/_seal_fork/_old_sim_pre_*.py` sono **copie storiche del simulatore**, estratte da git
+(`_old_sim_pre_strato1.py`, `_pre_step2.py`, `_pre_pezzo3.py`, `_pre_fixcache.py`,
+`_pre_psispin.py`, `_pre_tauluce.py`). **Non misurano: sono il termine di paragone** dei sigilli di
+byte-identita'. Si estraggono **in binario** (`git show`, non `text=True`), perche' con le newline
+universali il file riscritto avrebbe un **blob diverso** e il controllo che lo verifica non
+varrebbe piu' nulla.
