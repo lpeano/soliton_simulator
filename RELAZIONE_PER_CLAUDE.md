@@ -1,4 +1,4 @@
-# RELAZIONE — per Claude web · **aggiornata 2026-09-15, sera**
+# RELAZIONE — per Claude web · **aggiornata 2026-09-16** *(il giro del 16 e' il §9, in fondo)*
 
 > **Scritta per Claude web**, che legge il repo e deve pronunciarsi su una decisione di merito.
 > Branch `fork-su2`. **Blob sul disco `08784685`** *(corretto il 2026-09-16: qui c'era `b298677a`, superato dalle due cure C7 e C11)*, gate in `CLAUDE.md` §0 a `c0803713`
@@ -1494,3 +1494,173 @@ falsa dal cablaggio di `TAU_LUCE` in poi. Storia dei blob: `f5887254` -> `968c90
 Dettagli: `doc/ESITO_scan_turbo_K300.md`, `doc/REPERTO_pesi_ricorsione.md`,
 `doc/PROFILAZIONE_costo_run.md`, `doc/REPERTO_gamma_condiviso.md`, `doc/PREDIZIONE_*.md`,
 `doc/AUDIT_misurato_vs_asserito.md`, `STATO_CLAUDE_fork-su2.md`, `CLAUDECONNECT.md`.
+
+---
+
+# 9. IL GIRO DEL **2026-09-16** — blob `08784685`, invariato
+
+> **Nessuna riga di `soliton_simulator.py` e' stata toccata oggi.** Tutto quello che segue e'
+> lettura di codice, documentazione, strumenti diagnostici e sigilli. I quattro run della voce **S**
+> sono **in volo** mentre questo paragrafo viene scritto (passo ~100/500): **i loro numeri NON sono
+> qui**, e chi legge non deve aspettarseli.
+
+## 9.1 — I SEI PATTERN COMPORTAMENTALI sono ora nel repo (§0-ter)
+
+`P1..P6` stanno in **`CLAUDE.md` §0-ter** e, identici, in **§0-ter di questa relazione**.
+Prima vivevano solo nella conversazione: un Claude web nuovo doveva **farseli dare di nuovo** ogni
+volta. **Vanno letti prima di proporre qualsiasi cosa**, e in particolare **P1**: *l'associazione
+genera candidati, non conclusioni; prima di scrivere «manca X» si rilegge dal disco.*
+*(Precedenti che l'hanno generata: quattro errori dello stesso tipo in un solo giorno, elencati li'.)*
+
+## 9.2 — **A COSA SI ACCOPPIA LO SPIN: e' uscito un TERZO esito, che il mandato non prevedeva**
+
+`doc/MAPPA_accoppiamenti_spin.md`. Il mandato prevedeva due uscite — *«c'e' un accoppiamento,
+quindi `lambda` si deriva da li'»* oppure *«non c'e', lo spin e' isolato»*. **Nessuna delle due.**
+
+> ### **ACCOPPIATO MA SENZA BILANCIO. Lo spin parla con tutti e non deve niente a nessuno.**
+
+**Non e' isolato — e' uno dei settori piu' connessi del file.** Decide **dove la materia si divide**
+(`rho_spin` -> soglia di mitosi, `:3173`, e coppie di Schwinger, `:3316`), **quanto pesa**
+(sorgente di gravita', `:1787`), **quanta inerzia ha lui stesso** (`:1952`), e — l'accoppiamento
+piu' forte e il meno citato — **con che verso la gravita' tira**: in `memoria_hebbiana_moto`, che
+gira a **ogni passo**, la spinta di ogni arco e' **moltiplicata per `<nb_i . nb_j>`** (`:3583-3586`),
+dietro il solo `SPINORE`, che vale `True`. *Due nodi con spin antipodali si respingono invece di
+attrarsi; due ortogonali non si vedono.*
+
+**Ma nessuno di questi canali TRASFERISCE una grandezza conservata: sono MODULAZIONI.** E il punto
+che decide **si dimostra dalla formula, non si misura**:
+
+> **il torque `cross(B_i, nb_i)` NON e' azione-reazione.** Il contributo della coppia `(i,j)` vale
+> `(w_ij/deg_i)*cross(nb_j,nb_i)` su `i` e `(w_ij/deg_j)*cross(nb_i,nb_j)` su `j`: **opposti solo
+> se `deg_i == deg_j`** — e questo grafo non e' regolare. In piu', sui legami fra chiralita'
+> **uguali** il vicino entra **RIFLESSO** (`z -> -z`), e li' l'antisimmetria non e' rotta da una
+> normalizzazione: e' **rotta nella struttura**.
+
+E **nel file non esiste nessuna funzione di energia totale**: `grep -i energ` da' solo commenti,
+`lambda_vuoto` (una densita' locale) e il termostato Nose-Hoover (`:2767-2806`) — che e' gated su
+`REGIME == "deterministico"`, quindi **spento in tutti i run di questo programma**, e che comunque
+agirebbe su `phivel`, **non** su `omega_s`. Lo spinore poi e' normalizzato **`|psi| = 1` in modo
+atomico a ogni passo** (`:2128-2129`): **non ha ampiezza, quindi non ha energia** da scambiare.
+
+**Conseguenza diretta, ed e' la terza ragione indipendente dopo il FDT e la FASE 1:**
+**`lambda` NON SI DERIVA.** Non perche' manchi un canale: perche' **manca la grammatica**. Cablare
+Gilbert resterebbe una **manopola** (§3). La voce **B** del registro passa da *«non aperto»* a
+**CHIUSA COME NON DERIVABILE**.
+
+**`TW_SPINORE` non e' «un canale aperto in un verso solo»: e' CHIUSO IN ENTRAMBI.** `tw -> nb`
+esiste (`:1990-1996`) ma e' gated su `TW_SPINORE = False`, come `SPIN_LARMOR`; e **`nb -> tw` non
+esiste**: la dinamica di `tw` (`:2878-2883`) e' guidata da **`dph`**, la differenza di fase, e non
+contiene ne' `nb` ne' `omega_s`.
+**⚠ DA NON CONFONDERE CON C11:** li' era la **FASE 5**, l'**orologio** a 4pi in `ritmo()`, cablato e
+curato; qui e' `TW_SPINORE`, il **torque** a 4pi, **spento di proposito**. Due cose diverse con lo
+stesso «4pi» nel nome.
+
+**COSA QUESTO NON DICE (dichiarato):** che il torque non conservi si **dimostra**; **quanto** non
+conservi **non e' misurato**. La misura che lo chiuderebbe costa dieci righe e **zero run nuovi**:
+`|SOMMA_i cross(B_i,nb_i)| / SOMMA_i |cross(B_i,nb_i)|` — `~1/sqrt(n)` sarebbe rumore di somma,
+`O(1)` violazione grande. **Non fatta oggi.**
+
+## 9.3 — MISURA F e G nell'osservatore, e il **SIGILLO 6/6 PASS**
+
+Per rispondere alla voce **R** servivano `sigma`, `tau` e `theta` **nello stesso run**: sono state
+aggiunte all'osservatore come **MISURA F** (le tre pendenze trasversali, con `SE`, `r^2`, `n`, piu'
+`t3_attesa = b_sigma + b_tau/2` e `t3_divario`) e **MISURA G** (gli ingredienti del conto FDT).
+
+**La scelta di metodo che conta:** MISURA F **non ricostruisce** la catena di `omega`, **riusa**
+`_tracing_omega.ingredienti`. Riscriverla avrebbe riesposto all'errore del 15 — il termine
+`cross(_nb_grav(), nb)` omesso, che valeva **~2.8 volte** il deterministico. E poiche' quella
+ricostruzione **non contiene** `Bg` ne' `_otw`, e' valida **solo con `SPIN_LARMOR` e `TW_SPINORE`
+spenti**: per questo sono **colonne del CSV** (P6) e la conformita' li controlla.
+
+**Sigillo dell'osservatore rigirato, ora con `--cs-dinamico` anche nei suoi run: 6/6 PASS.**
+`O1.0` nodi **3020 = 3020** (il confronto **esiste**, prima di leggere lo zero) e `O1`
+**`max|A-B| = 0.000e+00`**. Contava davvero: MISURA F chiama `ritmo()`, `_pesi()`, `calcola_psi()` e
+`_nb_grav()` — **tutte funzioni che MUTANO cache lette dalla dinamica** — su una copia profonda.
+
+## 9.4 — IL GATE: **resta indietro, e ora c'e' scritto perche'**
+
+Blob sul disco **`08784685`**, gate **`c0803713`**. Fra i due ci sono **tre** cambiamenti e **non
+hanno lo stesso stato**: il cablaggio di **`--tau-luce`** ha il **sigillo FALLITO**, mentre le cure
+**C7** (5/5) e **C11** (6/6) sono sigillate. **Basta il primo a bloccare il timbro**: il gate
+certifica **un blob**, non un sottoinsieme dei suoi cambiamenti.
+**Lettura operativa, perche' «gate indietro» non vuol dire «codice non fidato»:** un run **senza**
+`--tau-luce` gira su un file il cui unico delta non sigillato e' **inerte**; un run **con**
+`--tau-luce` gira su un ramo **esplicitamente non certificato**, e va detto nel documento che lo usa.
+
+## 9.5 — DUE CORREZIONI AL MANDATO, ENTRAMBE SCRITTE **PRIMA** DI ESEGUIRE
+
+`doc/PREDIZIONE_risigillo_strato1.md`. Il §6.2 chiedeva di rilanciare il sigillo dello Strato 1
+*«con `--cs-dinamico`, resto identico»*.
+
+1. **«Resto identico» non e' possibile, e S1a/S1b FALLIRANNO — legittimamente.** Fra il blob di
+   riferimento (`968fba34`, pre-Strato 1) e `08784685` c'e' **C11**, che **non e' gated su
+   `FORK_SU2_MEM`**: gira in ogni run `--campo-spinoriale`. Nel codice nuovo la guardia esatta di
+   `ritmo()` passa, nel vecchio falliva nel **95.33 %** delle chiamate. Due orologi diversi -> due
+   `r` -> due `dt_n` -> **traiettorie diverse**. **Byte-identita' con un blob che ha un orologio
+   diverso sarebbe una CONTRADDIZIONE, non un successo.** *(C7 invece e' un no-op esatto con MEM
+   OFF: la cache non esiste.)* Va detto prima, o domani si legge «da 23/23 a N/23» e si conclude una
+   **regressione** dove c'e' una **cura che ha fatto il suo mestiere**.
+2. **Aggiungere `--cs-dinamico` all'argv NON BASTA a esercitare la dipendenza da `cs`.** Verificato
+   dal disco: nei sigilli **in-process** `_cs_nodo_prev` e' `None` (`:330`) oppure
+   `np.full(nodi, cs)` (`:224`) — **COSTANTE**. Un `cs` costante non esercita `tau = d/cs`: lo rende
+   indistinguibile da `tau ∝ d`. `--cs-dinamico` cambia solo i **tre run veri**; **S7**, il presidio
+   piu' fine del lotto, misura la dipendenza da **`r`**, non da **`cs`**.
+   **Rilanciare il sigillo com'era avrebbe lasciato il marchio esattamente dov'era.**
+
+**Percio' e' stato scritto il SIGILLO 8**, l'unico del lotto che fallirebbe se `cs` fosse ignorato:
+quattro nodi con **`cs = 1, 2, 4, 8`**, stessa `d`, **`r = 1` su tutti** — l'opposto esatto di S7,
+che varia `r` e tiene `cs` fisso — e si verifica `alpha = 1 - exp(-dt_n*cs/d)` **nodo per nodo**.
+Con `S8b` (il rapporto `cs=8 / cs=1`: se `cs` fosse ignorato varrebbe **esattamente 1.000000000**)
+e `S8d`, la controprova con `cs` costante, perche' S8 non possa passare per un artefatto dello slerp.
+**In volo mentre scrivo: l'esito non e' qui.**
+
+## 9.6 — IL MERGE IN `main`: piano scritto, **niente eseguito**
+
+`doc/PIANO_merge_main.md`. **Il fatto che cambia il quadro:**
+
+> ### **`main` NON HA MAI TOCCATO `soliton_simulator.py`.**
+> `blob: merge-base 194a9456 | main 194a9456 | fork-su2 08784685`
+
+I 20 commit che `main` ha in piu' sono **tutta documentazione** (`CLAUDECONNECT.md` +479 righe,
+`Checkpoint.md` +212, `CLAUDE.md` +26, e la cancellazione di 4 file spazzatura).
+**Non e' un merge di codice, e' un merge di RACCONTO**, e i conflitti reali — da prova a secco con
+`git merge-tree`, che non tocca il working tree — sono **due soli file**: `CLAUDE.md` e
+`CLAUDECONNECT.md`.
+
+**Due dei tre presidi del registro non erano dove si credeva:** il **rename dello STATO** e' **gia'
+risolto** (`main` non ha **nessun** file di STATO; quello a rischio e' di `dev-spinoriale`, e solo
+se si cancella quel branch), l'**AVVISO** e' **chiuso** oggi, e il **ri-timbro del gate** e' il vero
+blocco. **E c'e' una trappola operativa che nel registro non c'era:** `main` e' estratto in un
+**worktree separato** (`C:/Users/lpeano/st_main`), quindi un `git checkout main` dalla cartella
+principale **fallisce** finche' quel worktree esiste.
+
+**RACCOMANDAZIONE: non adesso.** `main` e' oggi **l'unico branch il cui codice coincide con un blob
+certificato**; portarci `08784685` significherebbe **perdere l'ultimo punto fermo** mentre la voce
+**A** e' aperta. Il pericolo vero non e' il merge mancante: e' che qualcuno **legga `main` e creda
+che sia lo stato del progetto**. Una riga in testa a `CLAUDE.md` **di `main`** — *«branch FERMO al
+2026-09-10, il lavoro vivo e' su `fork-su2`»* — toglie il 90 % del danno con lo 0 % del rischio.
+
+## 9.7 — UNA DISCREPANZA FRA IL MANDATO E IL DISCO
+
+Il TODO di oggi dice che `AVVISO_LAVORO_IN_CORSO.md` *«NON esiste piu': e' stato chiuso. Non
+cercarlo»*. **Esiste**: 8042 byte, ultimo commit `8447f47`, e il contenuto era **stale** (blob
+`f5887254`, gate `c0803713`, «nessun run in volo» al 15 a mezzogiorno).
+**L'ho SVUOTATO e marcato CHIUSO, non cancellato**, con la tabella di dove sta ora ciascuna cosa che
+conteneva: il contenuto era gia' tutto altrove, e cancellarlo avrebbe lasciato la **discrepanza**
+senza traccia. **Se Luca lo vuole rimosso e' una sua decisione, non mia.**
+*(L'unica cosa non replicata altrove e' stata conservata: le fonti auditate — `ROADMAP:46`/`:42`,
+`PROTOCOLLO:41-44`, `STATO:112`/`:433` — **non sono state corrette**, ed e' una decisione di Luca.)*
+
+## 9.8 — COSA E' ANCORA IN VOLO (e quindi cosa NON e' in questa relazione)
+
+| | stato |
+|---|---|
+| **voce S** — `chi` materia, 4 semi per braccio | **4 run in volo**, 500 passi, passo ~100 al momento della scrittura |
+| **voce R** — attesa `sigma + tau/2` ricalcolata | **negli stessi run** (MISURA F). Nessun numero ancora |
+| **dispersione di `r`** | idem. Su 2 semi era ~10 % piu' alta nell'ON; **serve la barra fra semi** |
+| **conto FDT rifatto** | idem (MISURA G). I tre numeri — `lambda`, `tau_smorz` vs `tau_disordine`, `kT/Lam` — **non ci sono ancora** |
+| **ri-sigillo Strato 1 + S8** | **in volo** |
+
+> **Quindi: oggi nessun numero fisico nuovo.** Quello che c'e' e' **una diagnosi strutturale
+> (`lambda` non si deriva)**, **due correzioni a un mandato fatte prima di eseguirlo**, **un sigillo
+> di purezza 6/6**, e **tre decisioni di igiene scritte invece che rimandate**.
