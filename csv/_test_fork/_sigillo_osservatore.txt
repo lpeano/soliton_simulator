@@ -1,7 +1,7 @@
 ============================================================================================
 SIGILLO OSSERVATORE — la misura del vuoto e' PURE-READ? (2 run veri, 150 passi)
 ============================================================================================
-[PASS] O1.0 stesso numero di nodi (il confronto ESISTE) nodi: osservatore ON = 3020, OFF = 3020
+[PASS] O1.0 stesso numero di nodi (il confronto ESISTE) nodi: osservatore ON = 3101, OFF = 3101
 [PASS] O1 osservatore ON vs OFF: byte-identico        max|A-B| = 0.000e+00
 
 ============================================================================================
