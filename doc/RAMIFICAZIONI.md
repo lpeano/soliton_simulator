@@ -24,6 +24,7 @@
 > **① `_xi_rumore` non si eredita** (blob `57681b9e`): `xi` e' un campione dell'**AMBIENTE**, non
 > una proprieta' del nodo. Prima, padre e figlio avevano rumore **correlato: misurato `+1.0000`**;
 > dopo, **`+0.0065` su 258 coppie**.
+> **SIGILLO DELLE DUE CORREZIONI: 16/16 PASS** (`csv/_seal_fork/_sigillo_correzioni.txt`).
 > **② `inerzia = max(rho*(CS_M/cs)^2, 1e-6)`** (blob `c57800c1`): il fattore che la derivazione
 > `inerzia = (d/cs)^2` impone e che **mancava**. Sigillo **M2 PASS**, `max|A-B| = 0.000e+00` con
 > nodi **3070 = 3070** dove `cs = CS_M`; **M2b PASS** (col `cs` vivo il fattore morde).

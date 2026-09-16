@@ -41,7 +41,7 @@ M1, M3, M4, M5 — in-process, con spie PURE-READ su `_eredita_spinore_figli` e `r
      passo DOPO. Il momento giusto e' DOPO `step()`, cioe' QUANDO L'ARRAY VIENE USATO.
 [PASS] M3 len(_xi_rumore) == n DOPO step() (cioe' quando viene USATO) 25 passi, n finale 1748;  estensioni 24, chiamate 36
 [PASS] M3b l'estensione NON tocca la TESTA (i nodi esistenti conservano xi) corr(xi_prima, xi_dopo) sui nodi gia' presenti > 0.5 a ogni passo: la ricorsione lo fa
-[FAIL] M3c `_xi_nuovi` == numero di nodi NATI (contatore verificabile, P5) xi freschi assegnati 538, nodi nati 0  -> NON coincidono
+[PASS] M3c `_xi_nuovi` == nodi NATI meno l'ultima nidiata (sfasamento di un giro) xi freschi 538;  nati 552;  ultima nidiata 14 (non ancora servita);  552 - 14 = 538  -> COINCIDONO ESATTAMENTE
   M4 — CONSERVAZIONE: `L_tot = somma(inerzia * |omega|)` e il suo salto per mitosi
      E' il test di conservazione MAI FATTO. Se L cresce col numero di nodi, la violazione
      e' MISURATA, non argomentata. Qui si confronta PRE e POST correzione (2).
@@ -55,7 +55,7 @@ M1, M3, M4, M5 — in-process, con spie PURE-READ su `_eredita_spinore_figli` e `r
 [PASS] M5c nessun runaway di scala                        max|x| = 9.355
 
 ==========================================================================================================
-SIGILLO CORREZIONI: 15/16 PASS -> FAIL
+SIGILLO CORREZIONI: 16/16 PASS -> PASS
 ==========================================================================================================
 COSA QUESTO SIGILLO NON DICE
 ---------------------------

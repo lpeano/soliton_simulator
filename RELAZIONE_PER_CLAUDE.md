@@ -2222,7 +2222,8 @@ conservazione». **Lo e' in linea di principio — il meccanismo del feedback me
 |---|---|
 | `M0`, `M2` (**il decisivo**), `M2b`, `M5a/b/c` | **PASS**, invariati |
 | `M1`, `M1b`, `M1c`, `M3`, `M3b` | **PASS** coi criteri corretti |
-| `M3c` | corretto; **il sigillo sta rigirando per la conferma** |
+| `M3c` | **PASS**: `xi freschi 538`, `nati 552`, ultima nidiata `14` non ancora servita -> **`552 - 14 = 538`, COINCIDONO ESATTAMENTE**. Lo sfasamento di un giro e' **parte del criterio**, non una tolleranza |
+| **SIGILLO CORREZIONI** | **16/16 PASS** |
 | metriche §3 nell'osservatore (`L_tot`, `r` per eta', corr `xi`, fattore `cs`) | **da fare** |
 | campagna `{OFF, ON} x >= 2 semi` sul sistema corretto | **da rifare** |
 | `N2` del taglio spettrale | **da rigirare** sul nuovo riferimento |
