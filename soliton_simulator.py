@@ -1960,7 +1960,12 @@ class Rete:
                     # `dt_n`, non `DT`: processo LOCALE, altrimenti frame preferito (par.9).
                     _tauc = LAM / max(CS_M, 1e-12)
                     _dtl = dt_n if np.isscalar(dt_n) else np.asarray(dt_n, float)[:n]
-                    _a = np.exp(-_dtl / _tauc)
+                    # VALORE ASSOLUTO, e non e' pignoleria: `_passo_spinoriale` riceve `dt_n_s`,
+                    # che sotto `--tempo-segno` (MOD 5.3a, Feynman-Stuckelberg) puo' essere
+                    # NEGATIVO per l'antimateria. Con `dt_n < 0` verrebbe `a > 1` e la ricorsione
+                    # DIVERGEREBBE IN SILENZIO. Il tempo di correlazione e' una durata, quindi
+                    # dipende dal MODULO del tic, non dal suo verso. Nessun numero nuovo.
+                    _a = np.exp(-np.abs(_dtl) / _tauc)
                     _b = np.sqrt(np.maximum(1.0 - _a * _a, 0.0))
                     _xi = getattr(self, "_xi_rumore", None)
                     self._xi_chiamate = getattr(self, "_xi_chiamate", 0) + 1
