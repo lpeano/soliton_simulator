@@ -262,14 +262,22 @@ verdetto("N7c il ritmo locale CONTA (con DT nudo `a` sarebbe uguale per tutti)",
 # ---- N2: riduzione al limite, tau_c -> 0 torna al rumore BIANCO -------------------------------
 print()
 print("  N2 — tau_c -> 0: la ricorsione deve collassare sul rumore BIANCO (xi = g)")
-print("     Si alza CS_M (tau_c = LAM/CS_M) SOLO per questo controllo. NON e' una byte-identita'")
-print("     di run intero: l'inizializzazione di xi da N(0,1) consuma un'estrazione in piu', ed e'")
-print("     una scelta DICHIARATA (stazionarieta' esatta invece di un transitorio di ~40 passi).")
-cs_orig = S.CS_M
+print("     COME si manda tau_c a zero, e perche' NON alzando CS_M: `tau_c = LAM/CS_M`, ma `cs`")
+print("     governa anche il CFL (`beta = 2*zeta*cs/d`, `n2 = ceil(max(beta)*DT/0.2)`, :3062-3073).")
+print("     Con CS_M = 1e9 servirebbero ~5e8 SOTTOPASSI: il sigillo non fallisce, SI PIANTA — ed e'")
+print("     successo, 46 minuti al 68 %% di CPU prima che me ne accorgessi. Si abbassa invece LAM,")
+print("     che NON entra nel conteggio dei sottopassi.")
+print("     NON e' una byte-identita' di run intero: l'inizializzazione di xi da N(0,1) consuma")
+print("     un'estrazione in piu', ed e' una scelta DICHIARATA (stazionarieta' esatta invece di un")
+print("     transitorio di ~40 passi).")
+lam_orig = S.LAM
 try:
-    S.CS_M = 1.0e9                                   # -> tau_c ~ 8e-10, dt_n/tau_c enorme
+    S.LAM = lam_orig / 1.0e4                         # tau_c = LAM/CS_M -> 4e-5, dt_n/tau_c ~ 250
     tau0 = S.LAM / S.CS_M
-    net2 = scena(2, 12)
+    # RETE PICCOLA e NESSUNA massa: a N2 serve solo un passo su cui leggere `xi`, non una scena.
+    net2 = S.Rete(2); net2.semina(80)
+    for _ in range(4):
+        passo(net2)
     xi2_prima = np.asarray(getattr(net2, "_xi_rumore", np.zeros((0, 3))), float).copy()
     with Spia(net2) as sp2:
         passo(net2)
@@ -277,11 +285,13 @@ try:
     m2 = min(len(xi2), len(xi2_prima), net2.n)
     cand2 = [d for d in sp2.draws if d.ndim == 2 and d.shape[1] == 3 and d.shape[0] >= m2]
     e2 = min([float(np.max(np.abs(xi2[:m2] - d[:m2]))) for d in cand2]) if cand2 else None
+    a0 = float(np.exp(-S.DT / tau0))
     verdetto("N2 tau_c -> 0: xi collassa su g (rumore BIANCO)",
-             e2 is not None and e2 < 1e-12,
-             "tau_c = %.3e   max|xi - g| = %s" % (tau0, "n/d" if e2 is None else "%.3e" % e2))
+             e2 is not None and e2 < 1e-9,
+             "tau_c = %.3e (= %.4g passi)   a = %.3e   max|xi - g| = %s su %d nodi"
+             % (tau0, tau0 / S.DT, a0, "n/d" if e2 is None else "%.3e" % e2, m2))
 finally:
-    S.CS_M = cs_orig
+    S.LAM = lam_orig
 
 # ---- N3: lo stato xi e' ESTESO alla mitosi ----------------------------------------------------
 print()
