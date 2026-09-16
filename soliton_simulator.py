@@ -843,6 +843,45 @@ TAU_LUCE = False        # [FASE 2] IL RILASSAMENTO DI `omega_s` USA IL TEMPO-LUC
                         # NON tocca la riga 1918 ne' la FORMA del termine dissipativo: se
                         # `-omega/tau` debba essere un allineamento LLG e' questione SEPARATA e
                         # aperta (par.1, un interruttore alla volta).
+RUMORE_COLORATO = False # [2026-09-16] TAGLIO SPETTRALE DEL RUMORE DEL VUOTO. Il calcio termico
+                        # (riga ~1908) e' `rng.normal` INDIPENDENTE a ogni passo, cioe' rumore
+                        # BIANCO: banda infinita, energia iniettata a TUTTE le frequenze, incluse
+                        # quelle che il passo non puo' risolvere, che aliasano per costruzione.
+                        # IN NATURA NON ESISTE: ogni rumore fisico ha uno spettro con un taglio
+                        # (e' la catastrofe ultravioletta in versione discreta).
+                        # LA LEGGE: processo di Ornstein-Uhlenbeck sul rumore stesso,
+                        #     xi(t) = xi(t-dt_n)*exp(-dt_n/tau_c) + sqrt(1-exp(-2 dt_n/tau_c))*g
+                        # con `tau_c = LAM/CS_M` = IL TEMPO-LUCE DEL SOLITONE. DERIVATO, non
+                        # scelto: LAM e CS_M sono gia' nel sistema. ZERO coefficienti nuovi.
+                        # `amp` NON SI TOCCA.
+                        # ATTENZIONE A COSA FA E COSA NON FA - misurato e scritto PRIMA, in
+                        # doc/PREDIZIONE_taglio_spettrale.md:
+                        #  * la ricorsione PRESERVA LA VARIANZA (b^2/(1-a^2) = 1.000000 analitico,
+                        #    0.997330 simulato): cambia SOLO la struttura temporale del rumore,
+                        #    NON la sua ampiezza. Il calcio per passo resta della stessa taglia,
+                        #    ma i calci successivi sono CORRELATI su tau_c (= 40 passi).
+                        #  * QUINDI NON ABBASSA `theta`, e se lo muove lo fa SALIRE (<=5%): una
+                        #    forzante correlata fa crescere omega stocastico come n invece che
+                        #    sqrt(n). Chi si aspetta un calo ha in mente un oggetto diverso (banda
+                        #    limitata a densita' spettrale COSTANTE), che richiederebbe di
+                        #    moltiplicare per sqrt(2*dt/tau_c), cioe' di toccare `amp`: manopola.
+                        #  * e il canale su cui agisce e' gia' misurato MARGINALE: il rumore vale
+                        #    R_stoc = 0.041 dell'incremento di omega, contro un errore atteso di
+                        #    0.097 (doc/TRACING_omega.md). E muove il Bloch fra lo 0.02% e lo
+                        #    0.22% (il resto lo muove omega).
+                        # SI CABLA PERCHE' IL RUMORE BIANCO E' FISICAMENTE SBAGLIATO, non perche'
+                        # si aspetti che risolva l'aliasing. Aspettarsi che NON cambi i numeri e'
+                        # parte della predizione, non una scusa dopo.
+                        # IL `dt` E' `dt_n = DT*r`, NON `DT`: il rumore e' un processo LOCALE del
+                        # nodo, e DT nudo imporrebbe la foliazione sincrona globale, cioe' un
+                        # frame preferito (par.9). E' l'errore gia' preso nello Strato 1, che
+                        # S1..S6 passavano IDENTICI e solo S7 ha stanato.
+                        # STATO: `_xi_rumore`, per nodo, ereditato alla mitosi con la STESSA
+                        # convenzione di _nb/_nb_prec/_nb_ret/omega_s/_psi_spinor/_psi_prec/
+                        # _cs_nodo_prev/_psi_spin_prec. Inizializzato da N(0,1), cioe' DALLA
+                        # DISTRIBUZIONE STAZIONARIA: zero transitorio, zero parametri.
+                        # NB: agisce solo sul percorso VIVO (`not SYNC_UPDATE`). Sotto
+                        # SYNC_UPDATE il flag e' INERTE, e lo dichiara a voce.
 GAMMA_TURBO = 1.0       # [DIAGNOSTICO, NON PERCORSO CERTIFICATO] amplificatore della SENSIBILITA'
                         # DI cs ALLA DENSITA'. Dentro `_cs_nodo` si usa GAMMA*GAMMA_TURBO al posto
                         # di GAMMA; OVUNQUE ALTROVE GAMMA resta ORIGINALE. Default 1.0 = nessun
@@ -1229,6 +1268,15 @@ class Rete:
         _pspr = getattr(self, "_psi_spin_prec", None)
         if _pspr is not None and len(_pspr) >= n0:
             self._psi_spin_prec = np.vstack([_pspr, np.asarray(_pspr)[src]])
+        # [2026-09-16] STATO DEL RUMORE COLORATO: il figlio eredita `xi` dal padre, STESSA
+        # convenzione di tutti gli altri snapshot cross-passo. Senza, dopo ogni mitosi
+        # `len(_xi_rumore) != n` e il ramo di reinizializzazione scatterebbe a ogni mitosi -
+        # cioe' il rumore tornerebbe BIANCO proprio dove il sistema evolve di piu'. E' lo stesso
+        # difetto di `_cs_nodo_prev` (C7) e di `_psi_spin_prec` (C11): la terza volta la si
+        # scrive PRIMA di misurarla, non dopo.
+        _xir = getattr(self, "_xi_rumore", None)
+        if _xir is not None and len(_xir) >= n0:
+            self._xi_rumore = np.vstack([np.asarray(_xir, float), np.asarray(_xir, float)[src]])
 
     def olonomia_lift_ciclo(self, ciclo):
         """Misura il prodotto ciclico degli overlap del lift complesso trasportato."""
@@ -1905,7 +1953,36 @@ class Rete:
                     self.calcola_psi()
                 I2 = np.abs(self.psi[:n]) ** 2
                 amp = np.sqrt(Lam) / (1.0 + I2 / Lam)   # sqrt(Lam)/(1+|Psi|^2/Lam): come lo scalare
-                self._nb = self._nb + self.rng.normal(0, 1.0, (n, 3)) * amp[:, None]
+                _g = self.rng.normal(0, 1.0, (n, 3))
+                if RUMORE_COLORATO:
+                    # TAGLIO SPETTRALE: il calcio non e' piu' indipendente fra un passo e l'altro,
+                    # ma correlato su `tau_c = LAM/CS_M` (il tempo-luce del solitone, DERIVATO).
+                    # `dt_n`, non `DT`: processo LOCALE, altrimenti frame preferito (par.9).
+                    _tauc = LAM / max(CS_M, 1e-12)
+                    _dtl = dt_n if np.isscalar(dt_n) else np.asarray(dt_n, float)[:n]
+                    _a = np.exp(-_dtl / _tauc)
+                    _b = np.sqrt(np.maximum(1.0 - _a * _a, 0.0))
+                    _xi = getattr(self, "_xi_rumore", None)
+                    self._xi_chiamate = getattr(self, "_xi_chiamate", 0) + 1
+                    if _xi is None or len(_xi) < n:
+                        # INIZIALIZZAZIONE DALLA DISTRIBUZIONE STAZIONARIA (N(0,1)): zero
+                        # transitorio, zero parametri. Partire da zero darebbe un primo calcio
+                        # attenuato, cioe' un artefatto all'accensione.
+                        self._xi_fallback = getattr(self, "_xi_fallback", 0) + 1
+                        _base = np.asarray(_xi, float) if _xi is not None else np.zeros((0, 3))
+                        _manca = n - len(_base)
+                        _xi = (np.vstack([_base, self.rng.normal(0, 1.0, (_manca, 3))])
+                               if _manca > 0 else _base[:n])
+                    else:
+                        _xi = np.asarray(_xi, float)[:n]
+                    _ac = _a if np.isscalar(_a) else _a[:, None]
+                    _bc = _b if np.isscalar(_b) else _b[:, None]
+                    _xi = _xi * _ac + _bc * _g
+                    self._xi_rumore = _xi
+                    _calcio = _xi
+                else:
+                    _calcio = _g
+                self._nb = self._nb + _calcio * amp[:, None]
                 self._nb = self._nb / np.maximum(np.linalg.norm(self._nb, axis=1, keepdims=True), 1e-9)
         nb = nb_t if SYNC_UPDATE else self._nb
         # CAUSALITA': campo dai vicini allo stato RITARDATO (Bloch del passo precedente)
@@ -4804,7 +4881,7 @@ def _applica_flag(a):
     global net
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
-    global TAU_LUCE
+    global TAU_LUCE, RUMORE_COLORATO
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
@@ -4916,6 +4993,24 @@ def _applica_flag(a):
               "fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. "
               "NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.")
     TAU_LUCE = bool(getattr(a, "tau_luce", False))   # [FASE 2] rilassamento col tempo-luce d/cs: default off
+    RUMORE_COLORATO = bool(getattr(a, "rumore_colorato", False))   # taglio spettrale: default off
+    if RUMORE_COLORATO:
+        print("[rumore-colorato] TAGLIO SPETTRALE: il calcio del vuoto non e' piu' bianco ma "
+              "correlato su tau_c = LAM/CS_M = %.4g (= %.0f passi), con un processo di "
+              "Ornstein-Uhlenbeck sul rumore stesso e `dt_n = DT*r` (non DT: e' un processo "
+              "LOCALE). `amp` INVARIATA. MOTIVO: il rumore bianco discreto inietta a tutte le "
+              "frequenze fino a Nyquist, incluse quelle che il passo non risolve; in natura non "
+              "esiste. ZERO coefficienti: LAM e CS_M sono gia' nel sistema. "
+              "ATTENZIONE: la ricorsione PRESERVA LA VARIANZA, quindi NON abbassa theta - se lo "
+              "muove lo fa SALIRE (<=5%%). Si cabla perche' il rumore bianco e' SBAGLIATO, non "
+              "perche' risolva l'aliasing (doc/PREDIZIONE_taglio_spettrale.md)."
+              % (LAM / max(CS_M, 1e-12), (LAM / max(CS_M, 1e-12)) / max(DT, 1e-12)))
+        if not SCUOTIMENTO:
+            print("[rumore-colorato] AVVISO: SCUOTIMENTO e' SPENTO, quindi il flag e' INERTE "
+                  "(non c'e' nessun calcio da colorare).")
+        if SYNC_UPDATE:
+            print("[rumore-colorato] AVVISO: SYNC_UPDATE e' ACCESO: il flag agisce solo sul "
+                  "percorso VIVO (`not SYNC_UPDATE`) ed e' quindi INERTE in questo run.")
     if TAU_LUCE:
         print("[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo "
               "STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: "
@@ -5262,6 +5357,17 @@ def _cli():
                         "ritardato rilassa verso il corrente con slerp geodetico, alpha = 1-exp(-dt/tau) (passo esatto di "
                         "primo ordine, mai Verlet). A riposo, o per tau->0, torna allo Strato 0. Richiede --fork-su2. "
                         "Default off = byte-identico.")
+    p.add_argument("--rumore-colorato", action="store_true", dest="rumore_colorato",
+                   help="TAGLIO SPETTRALE del calcio del vuoto: invece di rumore BIANCO "
+                        "(indipendente a ogni passo, banda infinita fino a Nyquist, che aliasa "
+                        "per costruzione e in natura non esiste), un processo di "
+                        "Ornstein-Uhlenbeck correlato su tau_c = LAM/CS_M, il tempo-luce del "
+                        "solitone. DERIVATO: LAM e CS_M sono gia' nel sistema, zero coefficienti "
+                        "nuovi, `amp` INVARIATA, `dt` = dt_n = DT*r (processo locale). "
+                        "ATTENZIONE, scritto PRIMA di misurare: la ricorsione PRESERVA LA "
+                        "VARIANZA, quindi NON abbassa theta e se lo muove lo fa SALIRE (<=5 %). "
+                        "Si cabla perche' il rumore bianco e' fisicamente SBAGLIATO, non perche' "
+                        "risolva l'aliasing. Default OFF.")
     p.add_argument("--tau-luce", action="store_true", dest="tau_luce",
                    help="[FASE 2] IL RILASSAMENTO DI omega_s USA IL TEMPO-LUCE d/cs invece della densita'. "
                         "Sostituisce SOLO `_tau = TAU_A*max(dens/dens_rif, 0.05)` con `d_nodo/cs_nodo`, "
