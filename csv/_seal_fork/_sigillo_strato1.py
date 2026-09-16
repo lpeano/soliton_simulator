@@ -203,6 +203,14 @@ class FintaRete(object):
     _link_su2_N = staticmethod(S.Rete._link_su2_N)
     _bloch_ritardato = S.Rete._bloch_ritardato
     _coppia_interferenza = S.Rete._coppia_interferenza
+    # [FIX 2026-09-16] SENZA QUESTA RIGA IL SIGILLO NON ARRIVA IN FONDO.
+    # `_bloch_ritardato` calcolava `tau = d/cs` INLINE; dal blob `f7051c3` (cablaggio di
+    # `--tau-luce`) la legge e' stata ESTRATTA nel metodo condiviso `_tempo_luce_nodo`, che
+    # `_bloch_ritardato` ora CHIAMA (`:2490`). `FintaRete` espone i metodi uno per uno, quindi da
+    # quel momento S2 muore con `AttributeError` e **S2..S8 non girano affatto**.
+    # NESSUNO SE N'E' ACCORTO PER UN GIORNO, perche' nessuno ha ri-eseguito il sigillo: un sigillo
+    # che non viene rigirato non protegge nulla, e questo non FALLIVA — si SCHIANTAVA.
+    _tempo_luce_nodo = S.Rete._tempo_luce_nodo
 
 
 def bloch(ps):

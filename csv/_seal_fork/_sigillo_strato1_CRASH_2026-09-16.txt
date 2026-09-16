@@ -1,0 +1,44 @@
+================================================================================================
+SIGILLO 1 — FLAG MEM OFF = BYTE-IDENTICO al codice pre-Strato 1 (run veri, 150 passi, seed 1)
+================================================================================================
+[PASS] S1.0 il riferimento e' il blob certificato del PEZZO 3 blob(_old_sim_pre_strato1.py) = 968fba34  (atteso 968fba34)
+[FAIL] S1a fork ON, MEM OFF vs codice pre-Strato 1      max|A-B| = 0.000e+00  DIVERGENTI: ['pos', 'phi', 'phi0', 'phivel', 'eta']
+[FAIL] S1b baseline (fork OFF) vs codice pre-Strato 1   max|A-B| = 0.000e+00  DIVERGENTI: ['pos', 'phi', 'phi0', 'phivel', 'eta']
+
+================================================================================================
+RUN CON MEMORIA ACCESA (150 passi, seed 1) — materiale per S4
+================================================================================================
+  nodi a fine run: Strato 0 = 3096, Strato 1 = 3020
+  array con SHAPE DIVERSA fra i due run: 32 su 32 confrontabili
+  max|Strato0 - Strato1| sugli array di shape UGUALE = 0.000e+00
+  ATTENZIONE ALLA LETTURA DI QUESTI NUMERI (trappola gia' scattata una volta, 2026-09-14):
+      se i due run divergono abbastanza da cambiare il NUMERO DI NODI, nessun array e' piu'
+      confrontabile per shape e "max|A-B|" resta 0.000e+00 per MANCANZA DI CONFRONTO, non per
+      identita'. Guardare sempre PRIMA la riga delle shape. E comunque:
+      questo NON e' un sigillo. Su 150 passi il sistema e' caotico e anche un arrotondamento a
+      1e-16 si amplifica fino a cambiare le mitosi (lezione del 2026-09-13). Le prove che il
+      meccanismo si e' acceso sono S3 (forza, orizzonte ZERO) e S3b (ciclo dinamico vero).
+
+================================================================================================
+SIGILLO 4 — |_nb_ret| = 1, nessun NaN/inf, nessun runaway (run con MEM ON)
+================================================================================================
+[PASS] S4a |_nb_ret| = 1 su tutti i nodi                max| |n_ret| - 1 | = 2.220e-16 su 3020 nodi
+[PASS] S4b norma |psi| = 1 sullo spinore                max| |psi| - 1 | = 3.331e-16 su 3020 nodi
+[PASS] S4c nessun NaN/inf in tutto lo stato             tutti finiti
+[PASS] S4d nessun runaway di scala nella finestra       max|x| = 9.585
+
+================================================================================================
+SIGILLI 2, 3, 5, 6 — in-process sui METODI REALI (_bloch_ritardato + _coppia_interferenza)
+================================================================================================
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_strato1.py", line 257, in <module>
+    c_t0 = coppia(r, A, z, fork=True, mem=True)
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_strato1.py", line 243, in coppia
+    return np.asarray(S.Rete._coppia_interferenza(r, A, z)).copy()
+                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\soliton_simulator.py", line 2623, in _coppia_interferenza
+    _nb_conn = self._bloch_ritardato(_nb, _ii, _jj)
+  File "C:\Users\lpeano\soliton_simulator\soliton_simulator.py", line 2490, in _bloch_ritardato
+    tau = self._tempo_luce_nodo(ii, jj)
+          ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'FintaRete' object has no attribute '_tempo_luce_nodo'
