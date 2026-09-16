@@ -1268,15 +1268,18 @@ class Rete:
         _pspr = getattr(self, "_psi_spin_prec", None)
         if _pspr is not None and len(_pspr) >= n0:
             self._psi_spin_prec = np.vstack([_pspr, np.asarray(_pspr)[src]])
-        # [2026-09-16] STATO DEL RUMORE COLORATO: il figlio eredita `xi` dal padre, STESSA
-        # convenzione di tutti gli altri snapshot cross-passo. Senza, dopo ogni mitosi
-        # `len(_xi_rumore) != n` e il ramo di reinizializzazione scatterebbe a ogni mitosi -
-        # cioe' il rumore tornerebbe BIANCO proprio dove il sistema evolve di piu'. E' lo stesso
-        # difetto di `_cs_nodo_prev` (C7) e di `_psi_spin_prec` (C11): la terza volta la si
-        # scrive PRIMA di misurarla, non dopo.
-        _xir = getattr(self, "_xi_rumore", None)
-        if _xir is not None and len(_xir) >= n0:
-            self._xi_rumore = np.vstack([np.asarray(_xir, float), np.asarray(_xir, float)[src]])
+        # [CORREZIONE DI DIFETTO, 2026-09-16 - decisione di Luca] `_xi_rumore` **NON SI EREDITA**,
+        # e qui non c'e' nessun codice apposta: il figlio riceve un `xi` FRESCO dal ramo di
+        # estensione di `_passo_spinoriale`, che estrae dalla distribuzione stazionaria.
+        # PERCHE' L'EREDITA' ERA SBAGLIATA, e l'analogia che avevo usato era MIA ed era falsa:
+        # `_nb`, `_nb_prec`, `_nb_ret`, `omega_s`, `_psi_spinor`, `_psi_prec`, `_cs_nodo_prev`,
+        # `_psi_spin_prec` sono **PROPRIETA' DEL NODO**: e' giusto che il figlio le erediti.
+        # `xi` NO: e' un campione dell'AMBIENTE che spintona il nodo, un processo ESTERNO.
+        # Due nodi distinti NON ricevono lo stesso identico spintone. Ereditandolo, padre e figlio
+        # avevano rumore CORRELATO AL 100 % per ~40 passi (tau_c = LAM/CS_M) - una correlazione
+        # SPURIA fra oggetti che devono essere indipendenti, e per giunta proprio nella grandezza
+        # che serve a DECORRELARE.
+        # Nessun feedback sul padre: il rumore non e' una quantita' che si ripartisce.
 
     def olonomia_lift_ciclo(self, ciclo):
         """Misura il prodotto ciclico degli overlap del lift complesso trasportato."""
@@ -1970,10 +1973,18 @@ class Rete:
                     _xi = getattr(self, "_xi_rumore", None)
                     self._xi_chiamate = getattr(self, "_xi_chiamate", 0) + 1
                     if _xi is None or len(_xi) < n:
-                        # INIZIALIZZAZIONE DALLA DISTRIBUZIONE STAZIONARIA (N(0,1)): zero
-                        # transitorio, zero parametri. Partire da zero darebbe un primo calcio
-                        # attenuato, cioe' un artefatto all'accensione.
-                        self._xi_fallback = getattr(self, "_xi_fallback", 0) + 1
+                        # ESTRAZIONE FRESCA DALLA DISTRIBUZIONE STAZIONARIA (N(0,1)) PER I NODI
+                        # NUOVI. Zero transitorio, zero parametri: partire da zero darebbe un
+                        # primo calcio attenuato di b = sqrt(1-a^2), cioe' un artefatto.
+                        # [2026-09-16] QUESTO NON E' UN FALLBACK: E' IL PERCORSO NORMALE della
+                        # mitosi. `xi` e' l'AMBIENTE, non una proprieta' del nodo, quindi il
+                        # figlio NON lo eredita (vedi `_eredita_spinore_figli`). I nodi ESISTENTI
+                        # conservano il proprio `xi` - il `vstack` tiene la testa intatta - e solo
+                        # i NUOVI ricevono un campione fresco, perche' un nodo appena nato non ha
+                        # un passato del rumore che lo ha spintonato.
+                        self._xi_esteso = getattr(self, "_xi_esteso", 0) + 1
+                        self._xi_nuovi = (getattr(self, "_xi_nuovi", 0)
+                                          + max(n - (0 if _xi is None else len(_xi)), 0))
                         _base = np.asarray(_xi, float) if _xi is not None else np.zeros((0, 3))
                         _manca = n - len(_base)
                         _xi = (np.vstack([_base, self.rng.normal(0, 1.0, (_manca, 3))])
