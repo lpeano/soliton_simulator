@@ -20,6 +20,28 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
     **`c0803713` (STEP 2, attuale)**.
     Cambiera' ancora a ogni pezzo del fork: **il blob e' un timbro, non una costante.** Quello che
     NON cambia e' l'obbligo di ri-timbrare il gate quando cambia.
+  - **⚠ IL GATE E' INDIETRO RISPETTO AL DISCO, E RESTA INDIETRO — DECISIONE MOTIVATA
+    (2026-09-16).** Blob sul disco: **`08784685`**. Gate: **`c0803713`**. **Non e' una svista, e
+    non si ri-timbra**, per la ragione del par.2.6 e del par.5: *un timbro si mette DOPO il
+    sigillo, mai prima.* Fra `c0803713` e `08784685` ci sono **tre** cambiamenti, e **non hanno
+    tutti lo stesso stato**:
+    | cambiamento | sigillo | timbrabile? |
+    |---|---|---|
+    | cablaggio di **`--tau-luce`** (FASE 2) | **FALLITO** (`doc/SIGILLO_tau_luce_FALLITO.md`) | **NO** |
+    | cura della cache **`_cs_nodo_prev`** (C7) | **5/5 PASS** | si' |
+    | cura di **`_psi_spin_prec`** (C11) | **6/6 PASS** | si' |
+    **Basta il primo a bloccare il timbro**: il gate certifica **un blob**, non un sottoinsieme
+    dei suoi cambiamenti, e in `08784685` il cablaggio della FASE 2 **c'e'** — anche se il flag e'
+    OFF di default. **Timbrare adesso direbbe «questo file e' certificato» di un file che
+    contiene un pezzo il cui sigillo non passa.**
+    **COSA SIGNIFICA OPERATIVAMENTE, perche' «gate indietro» non vuol dire «codice non fidato»:**
+    le due CURE sono sigillate e il loro effetto e' misurato; quello che **non** e' certificato e'
+    il ramo `--tau-luce`. Un run **senza** `--tau-luce` gira su codice il cui unico delta
+    non-sigillato e' **inerte** (il flag e' `False`); un run **con** `--tau-luce` gira su un ramo
+    **esplicitamente non certificato**, e va detto nel documento che lo usa.
+    **COSA LO SBLOCCHEREBBE:** riscrivere **T2** (il monkeypatch colpiva il metodo **condiviso**
+    `_tempo_luce_nodo`, quindi cambiava anche il `tau` dello Strato 1: `N` 1718 contro 1647) e far
+    passare T1-T5. **E' la voce A di `doc/RAMIFICAZIONI.md`, il collo di bottiglia del programma.**
   - **`csv/_test_53c/gate_cache.json` NON si timbra a mano.** E' ancorato al blob e oggi e'
     volutamente STALE (punta ancora a `4fc7a794`): la guardia di `_run_batch.ps1` rileva il
     cache-miss e rigira `_check_presidio.py` da sola prima di ogni campagna. Scrivere un `PASS`
