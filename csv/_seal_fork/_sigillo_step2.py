@@ -108,7 +108,11 @@ verdetto("S1.0 il riferimento e' il blob certificato", blob_old == BLOB_PRE,
          "blob = %s  (atteso %s)" % (blob_old[:8], BLOB_PRE[:8]))
 
 A = run(OLD, os.path.join(HERE, "_st2_old.pkl"))
-B = run(NEW, os.path.join(HERE, "_st2_off.pkl"))
+# [2026-09-16] DOPO LA PROMOZIONE A DEFAULT il braccio OFF si ottiene con
+# --senza-step2-orologio: l'ASSENZA del flag ora significa ON. Senza questa riga S2
+# confronterebbe ON contro ON e passerebbe SEMPRE -> falso PASS della classe
+# "max|A-B| = 0.000e+00 per mancanza di confronto" (CLAUDE.md par.9).
+B = run(NEW, os.path.join(HERE, "_st2_off.pkl"), extra=["--senza-step2-orologio"])
 confronta("S1 flag OFF vs codice pre-cablaggio", A, B)
 
 # ============================================================ S3/S2: in-process, PERCORSO REALE

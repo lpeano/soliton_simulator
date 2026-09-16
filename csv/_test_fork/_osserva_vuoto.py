@@ -78,7 +78,12 @@ def main():
     ap.add_argument("--ogni", type=int, default=100)
     ap.add_argument("--tag", default="on")
     ap.add_argument("--step2", action="store_true", dest="step2",
-                    help="accende --step2-orologio (omega_clk *= (cs/CS_M)^2, orologio di Compton).")
+                    help="NO-OP dal 2026-09-16: lo STEP 2 e' FISICA DI DEFAULT (par.10). Resta "
+                         "accettato per non rompere gli script esistenti.")
+    ap.add_argument("--senza-step2", action="store_true", dest="senza_step2",
+                    help="DIAGNOSTICO, non fisica alternativa. Passa --senza-step2-orologio al "
+                         "simulatore. ATTENZIONE: dal 2026-09-16 il braccio OFF si ottiene SOLO "
+                         "cosi'; l'ASSENZA di --step2 significa ORA ACCESO.")
     ap.add_argument("--cs-dinamico", action="store_true", dest="cs_dinamico",
                     help="accende --cs-dinamico: senza, cs = CS_M costante e il turbo e' ignorato.")
     ap.add_argument("--gamma-turbo", type=float, default=1.0, dest="gamma_turbo", metavar="K",
@@ -120,8 +125,8 @@ def main():
         print("[osserva] RESUME da %s" % a.riprendi_da, flush=True)
     else:
         argv += ["--db-cleanup"]
-    if a.step2:
-        argv += ["--step2-orologio"]
+    if a.senza_step2:
+        argv += ["--senza-step2-orologio"]   # braccio OFF: dal 2026-09-16 va CHIESTO
     if a.cs_dinamico:
         argv += ["--cs-dinamico"]
     if a.gamma_turbo != 1.0:

@@ -54,7 +54,97 @@ compito della regola è stanarlo.**)*
 
 # A. FISICA CERTIFICATA — ON di default
 
-> **VUOTA.** Nessuna promozione eseguita nel codice.
+## A1. **`STEP2_OROLOGIO`** — aggancio OROLOGIO ↔ METRICA · `omega_clk *= (cs/CS_M)²`
+
+> **PROMOSSA il 2026-09-16** (decisione di Luca, dopo la **FASE A**: `doc/REFERTO_faseA_sigilli.md`).
+> Blob al momento della promozione: **`c57800c1`** (quello su cui il sigillo è stato eseguito).
+> **È la PRIMA voce di questa sezione: fino a oggi nessuna componente era passata per i tre criteri.**
+
+### ① DERIVATA, non tarata — **SÌ**
+
+È l'**orologio di Compton**: `ω = m c²/ħ`, e nel modello `c` **è** `cs`. Quindi `ω ∝ cs²` non è una
+scelta, è **la sola forma dimensionalmente possibile**. **Zero parametri, zero floor, zero
+coefficienti.** Misurato dal sigillo: `omega_eff/omega_base = (cs/CS_M)²` a **`3.469e-18`** (`S3`),
+e a `cs = CS_M` il fattore vale **`1.000000000000000` esatto** (`S3c`) — cioè la riduzione al limite
+è **per costruzione**, non per taratura.
+
+> **CONSISTENZA TROVATA, NON COSTRUITA — e va detta perché è il vero argomento:** lo **stesso
+> esponente** `cs²` è stato derivato **per una strada indipendente** nel settore dell'inerzia
+> (`inerzia ∝ cs⁻²`, da `inerzia = T² = (d/cs)²`, `doc/INERZIA_tempo_quadro.md`, cablata il
+> 2026-09-16 come **correzione di difetto**). Due derivazioni che non si parlano, **stesso `cs²`**.
+
+### ② SIGILLATA **con controllo positivo** — **SÌ**, `csv/_seal_fork/_sigillo_step2.py`
+
+| test | cosa dimostra | misura |
+|---|---|---|
+| **`S3.0`** | **IL CONTROLLO POSITIVO**: il test **VEDE** l'effetto | **39/40 nodi** con `\|f(1)−f(0)\| > 1e-13` |
+| `S3` | la legge è quella dichiarata | `max\|mis − atteso\| = 3.469e-18` |
+| `S3b` | l'orologio **rallenta** dove `cs` è basso | `0.0100` volte a `cs = 0.1·CS_M` |
+| `S3c` | a `cs = CS_M` il fattore è 1 **esatto** | `1.000000000000000` |
+| **`S2`** | **riduzione al limite sul blob ATTUALE**: ON (`cs=CS_M`) vs OFF **byte-identico** | `0.000e+00` con **nodi 2924 = 2924** |
+| `S4a/b/c` | stabilità | `\|psi\|=1` a `4.441e-16`, nessun NaN, `max\|x\| = 9.254` |
+| **`S1`** | **FAIL ATTESO** — vs blob `2277e9a0`, di **quattro cambiamenti fa** | nodi **3164 contro 2924**, 32 shape |
+
+> **Si cita «9/10 + 1 FAIL ATTESO», MAI «10/10».** Il `S1` che fallisce è un
+> `max\|A−B\| = 0.000e+00` con **shape diverse** = **mancanza di confronto**, non identità
+> (`CLAUDE.md` §9). **Il confronto che conta è `S2`, ed esiste davvero: 2924 = 2924.**
+>
+> **E senza `S3.0` questo sigillo non basterebbe:** un sigillo di sola byte-identità a OFF
+> **passerebbe anche su codice morto** (§10 ②). `S3.0` è la ragione per cui questa voce è qui e le
+> altre tredici no.
+
+### ③ LA SUA ASSENZA È UN **DIFETTO**, non un'alternativa — **SÌ** (motivazione di Luca)
+
+> ### «**Un sistema in cui l'EM non risponde alla metrica è un sistema SBAGLIATO, non diverso.**»
+
+La fase U(1) **evolveva già** senza lo Step 2: ciò che mancava non era il moto dell'orologio, era che
+**rispondesse alla curvatura**. Un orologio che non rallenta nel pozzo non è un modello alternativo
+di gravità: è un modello **senza** redshift gravitazionale, cioè privo di un accoppiamento che in
+fisica **c'è sempre**. È il caso puro del criterio ③: *«il sistema senza X è SBAGLIATO»*.
+
+**E non è promossa per inerzia** (§10 lo vieta esplicitamente): fino a ieri era **OFF di default** e
+**non è mai stata accesa in una misura committata**. Il suo argomento è il ③, non l'abitudine.
+
+### COME è promossa, nel codice
+
+- `STEP2_OROLOGIO = True` di modulo (`:793`), col riscontro dei tre criteri **nel commento**;
+- resta **`--senza-step2-orologio`**, marcato **«DIAGNOSTICO, non fisica alternativa»**;
+- `--step2-orologio` **resta accettato come NO-OP** (avvisa e non fa nulla): non rompe gli script,
+  e chi lo passa lo legge a video;
+- il prerequisito (`--campo-spinoriale` + `--deparam-orologio`) **non è un no-op silenzioso**:
+  stampa un **AVVISO GRAVE** che dichiara che il run gira su **fisica amputata rispetto al default**;
+- la colonna CSV **`STEP2`** dell'osservatore scrive il valore **EFFETTIVO** (dopo il controllo del
+  prerequisito), non quello richiesto.
+
+> **⚠ DUE ADEGUAMENTI OBBLIGATI, e sarebbero stati errori gravi se dimenticati.**
+> Dal 2026-09-16 **l'assenza del flag significa ON**. Quindi:
+> - `_sigillo_step2.py` prende il braccio OFF con `--senza-step2-orologio` — **senza, `S2` avrebbe
+>   confrontato ON contro ON e sarebbe PASSATO SEMPRE**: un falso PASS della classe già catalogata
+>   in `CLAUDE.md` §9 (*«`0.000e+00` per mancanza di confronto»*);
+> - `_osserva_vuoto.py` ha ora **`--senza-step2`**, e il vecchio `--step2` è un no-op dichiarato.
+>
+> **Ogni altro braccio "OFF" ottenuto per OMISSIONE del flag, in qualunque script, da oggi è ON.**
+
+### RETROCESSIONE — il criterio, scritto **ORA** (§10)
+
+> **Torna a flag** se un riscontro **committato** mostra che `_phc` **non è una fase globale** —
+> cioè se una firma di **SPIN** (Bloch, `chi`, `spin_overlap`, olonomia) si muovesse per effetto
+> dello Step 2 **oltre la dispersione fra semi** (P3: **0.03** sulle pendenze, mai la `SE` interna).
+
+**Perché è questo il punto debole giusto da sorvegliare:** tutta la legittimità dello Step 2 come
+fisica *dell'orologio* poggia sul fatto che `_phc` moltiplichi `a1` e `b1` per lo **stesso** fattore
+(`:2212-2213`, **uniche occorrenze nel file**), lasciando `nb = ψ†σψ` invariante — misurato
+**`3.3e-16`**. Se quella proprietà cadesse, lo Step 2 starebbe **organizzando lo spin**, cosa che il
+suo stesso messaggio dichiara di non fare (*«NON muove il Bloch e quindi NON organizza lo spin»*).
+**Non retrocede per ripensamento, né perché un run "va peggio".**
+
+**COSA QUESTA PROMOZIONE NON DICE:** non dice che lo Step 2 **migliori** alcuna osservabile. Dice
+che la sua **assenza è un difetto**. Le sue conseguenze misurabili sul settore U(1) sono ancora da
+misurare — **è esattamente a quello che serve la MISURA U**, cablata nello stesso giro.
+
+---
+
+> **Il resto della sezione era VUOTO fino al 2026-09-16.**
 >
 > **⚠ MA C'È UNA DECISIONE OPERATIVA IN VIGORE, presa da Luca il 2026-09-15:**
 > **`--cs-dinamico` va acceso in OGNI misura, sempre.** Non è (ancora) una promozione del default

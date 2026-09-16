@@ -790,7 +790,35 @@ FORK_SU2_MEM = False    # [FORK SU(2) - STRATO 1] CONNESSIONE CON MEMORIA: N_ij 
                         # A RIPOSO n_ret = n_cur -> inerte -> si riduce allo Strato 0 (e quindi allo
                         # scalare): da fermo la memoria non inventa forza. Per tau->0, alpha->1, idem.
                         # Richiede --fork-su2 (da solo verrebbe IGNORATO con avviso). Default off = byte-identico.
-STEP2_OROLOGIO = False  # [STEP 2] AGGANCIO OROLOGIO <-> METRICA: omega_clk *= (cs/CS_M)^2.
+STEP2_OROLOGIO = True   # [PROMOSSO A FISICA DI DEFAULT il 2026-09-16, par.10 - decisione di Luca]
+                        # AGGANCIO OROLOGIO <-> METRICA: omega_clk *= (cs/CS_M)^2.
+                        # I TRE CRITERI DEL par.10, col riscontro di ciascuno:
+                        #  (1) DERIVATA, non tarata: orologio di Compton `omega = m c^2/hbar`
+                        #      con `c -> cs`, quindi `omega ∝ cs^2` e' NECESSARIA. Zero
+                        #      parametri, zero floor, zero coefficienti. Misurato:
+                        #      `omega_eff/omega_base = (cs/CS_M)^2` a 3.469e-18 (S3), e a
+                        #      cs = CS_M il fattore vale 1.000000000000000 ESATTO (S3c).
+                        #  (2) SIGILLATA CON CONTROLLO POSITIVO: S3.0 verifica che il test
+                        #      VEDA (39/40 nodi con |f(1)-f(0)| > 1e-13) - senza, un sigillo
+                        #      passerebbe anche su codice morto. E S2 e' la riduzione al
+                        #      limite sul blob ATTUALE: ON (cs=CS_M) vs OFF byte-identico,
+                        #      0.000e+00 con nodi 2924 = 2924 (il confronto ESISTE).
+                        #      Sigillo: 9/10 + 1 FAIL ATTESO (S1, contro un blob di quattro
+                        #      cambiamenti fa: mancanza di confronto, non identita').
+                        #  (3) LA SUA ASSENZA E' UN DIFETTO, NON UN'ALTERNATIVA (Luca):
+                        #      «un sistema in cui l'EM non risponde alla metrica e' un
+                        #      sistema SBAGLIATO, non diverso». La fase U(1) EVOLVE gia'
+                        #      senza Step 2: cio' che manca e' che RISPONDA alla curvatura,
+                        #      ed e' proprio l'accoppiamento che in fisica c'e' sempre.
+                        # CONSISTENZA TROVATA, non costruita: lo stesso esponente `cs^2`
+                        # e' derivato INDIPENDENTEMENTE per l'inerzia (`inerzia ∝ cs^-2`,
+                        # doc/INERZIA_tempo_quadro.md). Due strade, stesso esponente.
+                        # RETROCESSIONE (scritta ORA, par.10): torna a flag se un riscontro
+                        # COMMITTATO mostra che `_phc` NON e' una fase globale - cioe' se una
+                        # firma di SPIN si muovesse per lo Step 2 oltre la dispersione fra
+                        # semi. Oggi `_phc` moltiplica `a1` e `b1` per lo STESSO fattore
+                        # (righe 2212-2213, uniche occorrenze) e il Bloch e' invariante (3.3e-16).
+                        # DIAGNOSTICO per spegnerlo: `--senza-step2-orologio`.
                         # E' l'OROLOGIO DI COMPTON, omega = m c^2 / hbar: la frequenza propria di una
                         # massa va come c^2, e nel modello c e' cs. Quindi omega ∝ cs^2 non e' una
                         # manopola, e' fisica NECESSARIA e derivata: zero parametri nuovi, nessun
@@ -5035,11 +5063,21 @@ def _applica_flag(a):
               "quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp "
               "geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> "
               "riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.")
-    STEP2_OROLOGIO = bool(getattr(a, "step2_orologio", False)) # [STEP 2] orologio <-> metrica: default off
+    # [PROMOSSO 2026-09-16] Default ON. `--step2-orologio` resta accettato (no-op, per non
+    # rompere i comandi e gli script esistenti); `--senza-step2-orologio` lo spegne, ed
+    # e' un DIAGNOSTICO, non fisica alternativa.
+    STEP2_OROLOGIO = not bool(getattr(a, "senza_step2_orologio", False))
+    if bool(getattr(a, "step2_orologio", False)):
+        print("[step2-orologio] NB: --step2-orologio non serve piu', e' il DEFAULT dal "
+              "2026-09-16 (par.10). Il flag resta accettato e non fa nulla.")
     if STEP2_OROLOGIO and not (CAMPO_SPINORIALE and DEPARAM_OROLOGIO):
         # Stessa convenzione degli altri avvisi: si IGNORA, non si forza. _phc vive nel ramo
         # --deparam-orologio; senza, non c'e' nulla da moltiplicare e il flag sarebbe incoerente.
-        print("[step2-orologio] AVVISO: richiede --campo-spinoriale + --deparam-orologio (l'orologio _phc vive li'). IGNORATO, flag riportato a OFF.")
+        print("[step2-orologio] *** AVVISO GRAVE: lo STEP 2 e' FISICA DI DEFAULT dal 2026-09-16, "
+              "ma richiede --campo-spinoriale + --deparam-orologio (l'orologio _phc vive li'). "
+              "MANCANO, quindi e' SPENTO: questo run gira SENZA l'accoppiamento EM-metrica, "
+              "cioe' su una fisica AMPUTATA rispetto al default. NON e' un'opzione: e' un "
+              "prerequisito mancante. ***")
         STEP2_OROLOGIO = False
     if STEP2_OROLOGIO:
         print("[step2-orologio] STEP 2: omega_clk *= (cs/CS_M)^2 = OROLOGIO DI COMPTON (omega = m c^2/hbar, e nel modello c e' cs). "
@@ -5447,8 +5485,16 @@ def _cli():
                         "condivisione, quindi e' un ISOLAMENTO DIAGNOSTICO e NON il regime reale ad alta "
                         "densita'. Richiede --cs-dinamico. Il criterio di lettura non e' 'l'effetto appare' ma "
                         "'l'effetto SCALA con K ed ESTRAPOLA con continuita' verso K=1'.")
+    p.add_argument("--senza-step2-orologio", action="store_true", dest="senza_step2_orologio",
+                   help="DIAGNOSTICO, NON FISICA ALTERNATIVA. Spegne lo STEP 2 (orologio <-> "
+                        "metrica), che dal 2026-09-16 e' FISICA DI DEFAULT (par.10). Serve agli "
+                        "A/B per misurare COSA FA quella legge, non ai run di misura. Un run di "
+                        "misura con questo flag gira su un sistema in cui l'EM NON risponde alla "
+                        "curvatura, e va dichiarato nel documento che lo usa.")
     p.add_argument("--step2-orologio", action="store_true", dest="step2_orologio",
-                   help="[STEP 2] AGGANCIO OROLOGIO <-> METRICA: omega_clk *= (cs/CS_M)^2. E' l'OROLOGIO DI COMPTON "
+                   help="[NO-OP dal 2026-09-16: PROMOSSO A DEFAULT, par.10. Il flag resta accettato per non "
+                        "rompere comandi e script esistenti, ma non fa nulla; per spegnerlo serve "
+                        "--senza-step2-orologio.] AGGANCIO OROLOGIO <-> METRICA: omega_clk *= (cs/CS_M)^2. E' l'OROLOGIO DI COMPTON "
                         "(omega = m c^2 / hbar): la frequenza propria di una massa va come c^2, e nel modello c e' cs. "
                         "Non e' una manopola ma fisica NECESSARIA e derivata: zero parametri, nessun floor, nessun "
                         "coefficiente, e a cs = CS_M il fattore vale esattamente 1 (riduzione al limite per costruzione). "

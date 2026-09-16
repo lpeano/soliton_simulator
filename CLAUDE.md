@@ -781,6 +781,22 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
 
+- **⚠ `STEP2_OROLOGIO` E' ON DI DEFAULT dal 2026-09-16 (prima promozione eseguita, par.10).**
+  **CONSEGUENZA OPERATIVA CHE VALE PER OGNI SCRIPT: l'ASSENZA di `--step2-orologio` NON significa
+  piu' OFF, significa ON.** Il braccio OFF si ottiene **solo** con **`--senza-step2-orologio`**
+  (nell'osservatore: **`--senza-step2`**), ed e' un **DIAGNOSTICO, non fisica alternativa**.
+  `--step2-orologio` resta accettato come **NO-OP dichiarato** (stampa un avviso), per non rompere
+  comandi e script gia' scritti.
+  **PERCHE' E' UN PRESIDIO E NON UNA NOTA:** il sigillo `_sigillo_step2.py` prendeva il braccio OFF
+  **per omissione del flag**. Se non fosse stato adeguato nello stesso commit, **`S2` avrebbe
+  confrontato ON contro ON** e sarebbe **PASSATO SEMPRE** — un falso PASS esattamente della classe
+  gia' catalogata qui (*«`max|A-B| = 0.000e+00` puo' significare "nessun confronto"»*), **e stavolta
+  con le shape UGUALI**, quindi invisibile anche alla guardia delle shape. Adeguati nello stesso
+  commit: `csv/_seal_fork/_sigillo_step2.py` e `csv/_test_fork/_osserva_vuoto.py`.
+  **REGOLA GENERALE CHE NE DISCENDE: quando si ribalta un default, si cercano nello stesso commit
+  TUTTI i punti che ottenevano il vecchio comportamento per OMISSIONE.** Un default ribaltato non
+  rompe niente rumorosamente: **converte i rami di controllo in duplicati del ramo di prova.**
+
 ## 10. PROMOZIONE DELLE COMPONENTI (regola di Luca, 2026-09-15)
 
 **Perche' esiste.** Finche' una legge validata resta un flag opzionale, puo' essere **dimenticata**,
