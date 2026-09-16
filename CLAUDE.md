@@ -816,6 +816,20 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   **NESSUN SIGILLO E' STATO SCRITTO, di proposito:** il suo criterio naturale verrebbe **dalla
   descrizione invece che dal codice**, e sarebbe il **quarto** criterio stale in due giorni.
 
+- **PRESIDIO — SI MISURA PER PROMUOVERE, SI DIMOSTRA PER ESCLUDERE** (audit di lettura chiesto da
+  Luca, 2026-09-16, `doc/COMPONENTI_PROMOSSE.md` sezione **E**). Una misura dice *«questa legge
+  produce un effetto»*; **non dice se ha senso.** `SPIN_LARMOR` produceva un effetto ed era
+  **sbagliata**; il fattore `cs^-2` non ne produce quasi ed e' **necessario**.
+  **CONSEGUENZA OPERATIVA: escludere una legge perche' «non produce effetto» NON E' UN ARGOMENTO.**
+  Si deve dire **QUALE PROPRIETA' ROMPE** — antisimmetria su arco orientato, localita' (§4),
+  zero-manopole (§3), un'identita' misurata — **e citarne il punto nel codice.**
+  **E per questo le esclusioni per DIMOSTRAZIONE non si riaprono con una misura:** tornano in gioco
+  solo se cade la dimostrazione, cioe' se quella proprieta' non e' piu' richiesta o se il codice
+  cambia. E' la stessa distinzione che §5-quater impone gia' al registro dei fronti.
+  **IL CODICE DI UNA LEGGE ESCLUSA NON SI CANCELLA MAI:** resta spento, ed e' **l'evidenza che
+  spiega perche' esiste il suo sostituto** (`TW_SPINORE` esiste **perche'** `SPIN_LARMOR` fallisce:
+  cancellare il secondo farebbe perdere il **perche'** del primo).
+
 ## 10. PROMOZIONE DELLE COMPONENTI (regola di Luca, 2026-09-15)
 
 **Perche' esiste.** Finche' una legge validata resta un flag opzionale, puo' essere **dimenticata**,

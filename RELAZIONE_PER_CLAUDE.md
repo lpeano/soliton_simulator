@@ -88,6 +88,16 @@
 >     cablaggio**, e a chiuderlo sara' **una decisione di fisica**, non una misura in piu'. Il
 >     commento nel codice **resta falso**, quindi il presidio e' in **`CLAUDE.md` §9**: il rischio
 >     non e' dimenticarla, e' **riaccenderla credendo di aggiungere `tw/2`**.
+>
+> 16. **AUDIT DI LETTURA DELLE LEGGI, e una regola nuova: SI MISURA PER PROMUOVERE, SI DIMOSTRA PER
+>     ESCLUDERE** (§9.17). Una misura dice *«questa legge produce un effetto»*, **non dice se ha
+>     senso**: `SPIN_LARMOR` produceva un effetto ed era **sbagliata**, `cs^-2` non ne produce quasi
+>     ed e' **necessario**. **Nove leggi escluse per DIMOSTRAZIONE**, ognuna con **quale proprieta'
+>     rompe** e la riga che lo prova; **otto confermate sane**; e **DUE motivazioni della tabella
+>     proposta CORRETTE dal codice** — `SYNC_UPDATE` **non** accende lo scuotimento (lo **sposta**),
+>     e `LS_AZIM` non pecca di «asse di laboratorio» ma di **baricentro GLOBALE** (§4) e **indice
+>     cablato** (§3). **Il codice delle escluse NON si cancella:** e' l'evidenza che spiega perche'
+>     esistono i loro sostituti.
 
 ---
 
@@ -2403,3 +2413,98 @@ si legge a ogni sessione, e non solo nel referto.
 **E `soliton_simulator.py` non e' stato toccato nemmeno per annotarlo:** due run video stavano girando
 su quel blob, e cambiarlo avrebbe rotto la corrispondenza fra il file sul disco e quello che ha
 prodotto gli output (§5-quinquies). -> `doc/REFERTO_tw_spinore.md`, voce **W** del registro.
+
+
+---
+
+## 9.17 — AUDIT DI LETTURA DELLE LEGGI: **si misura per PROMUOVERE, si dimostra per ESCLUDERE**
+
+> **2026-09-16, blob `a44adc31`. Nessun run, nessuna modifica alla fisica, nessuna accensione.**
+> Mandato di Luca: *«quali leggi hanno senso fisico, quali no, quali vanno integrate meglio»*.
+> Registrato in `doc/COMPONENTI_PROMOSSE.md` **sezione E** (nuova), `doc/RAMIFICAZIONI.md` (**X1**,
+> **X2**, **X3**) e `CLAUDE.md` §9.
+
+### 9.17.1 — La regola, che e' il vero risultato
+
+> **Una MISURA dice *«questa legge produce un effetto»*. NON dice se ha senso.**
+> `SPIN_LARMOR` **produceva** un effetto ed era **sbagliata**. Il fattore `cs^-2` non ne produce
+> quasi, ed e' **necessario**. **Le due cose non coincidono.**
+
+**Conseguenza operativa, ed e' vincolante:** escludere una legge perche' *«non produce effetto»*
+**non e' un argomento**. Si deve dire **QUALE PROPRIETA' ROMPE** — antisimmetria su arco orientato,
+localita' (§4), zero-manopole (§3), un'identita' misurata — **citandone il punto nel codice**.
+**E per questo un'esclusione per dimostrazione NON si riapre con una misura:** torna in gioco solo
+se cade la dimostrazione.
+
+### 9.17.2 — Le nove escluse, con la proprieta' che rompono
+
+| flag | proprieta' rotta | riga |
+|---|---|---|
+| `SPIN_LARMOR` | l'asse `cross(nb_i, nb_j)` **si annulla all'allineamento**: nullo per costruzione **proprio dove servirebbe** | `:2065` |
+| `TW_SPINORE` | implementazione != legge dichiarata (**628.3 = 2π/DT**), e finisce nella **memoria** contro un divieto scritto nello stesso blocco | `:2149-2154`, `:2313` |
+| `POLO_MATURO` | `np.where(_twn[i] >= _twn[j], chi[i], chi[j])` e' **SIMMETRICO** dove serve **ANTIsimmetrico** (`tw` vive su arco **orientato**, e `dph` e' antisimmetrico). Il commento ammette: *«rompe il bilanciamento»* | `:3032` contro `:3034` |
+| `VERSO_CHI` | **no-op silenzioso** sotto `--chi-core`, che c'e' sempre | `:2881`/`:2884` |
+| `L_CONSERVA` | **azzera tutta** la rotazione rigida: distrugge la precessione **misurata** (`L_z ~ -0.9`, 84 % coerente) | `:549-553` |
+| `SYNC_SPINORE` | allineamento **imposto** (Kuramoto), non derivato — e su una **media di vicinato** | `:2161-2163` |
+| `ANTIFASE_ADD`, `COPPIA_DENSITA` | **il codice stesso** le marca *«esplorativa»* / *«ESPLORATIVO»* | `:554`, `:557` |
+| `TEMPO_SEGNO` | **NO-GO gia' registrato** | `:2829-2833` |
+| `GAMMA_TURBO` | non e' una legge: **amplificatore diagnostico** (§10-C) | — |
+
+### 9.17.3 — ⚠ DUE VOCI DELLA TABELLA PROPOSTA NON REGGEVANO
+
+**(a) `SYNC_UPDATE` — la motivazione era FALSA.** Si diceva *«accende lo scuotimento»*. Il codice
+dice il contrario: `:1980 if SCUOTIMENTO and not SYNC_UPDATE` lo **disattiva**, e `:2279`/`:2302`
+`if SYNC_UPDATE and SCUOTIMENTO` lo **riapplicano altrove**. **Non accende: SPOSTA.** E non sono
+«due variabili in un flag»: tutti i suoi effetti sono **una sola scelta coerente** — *ogni legge
+legge lo stato a `t-1`* — cioe' **Gauss-Seidel -> Jacobi**.
+> **RICLASSIFICATO: non e' una legge, e' uno SCHEMA DI INTEGRAZIONE**, stessa categoria di `VERLET`.
+> Non rompe una proprieta' fisica, e **non appartiene alle escluse**.
+
+**(b) `LS_AZIM` — l'obiezione era imprecisa, ma la voce resta esclusa per una ragione piu' forte.**
+Verificato: i centri delle masse stanno su un **cerchio nel piano `z = 0`** (`:5666-5668`), quindi
+`z` **e'** la normale geometrica della configurazione iniziale — **non** un asse arbitrario.
+**Ma:**
+1. **usa il BARICENTRO GLOBALE**, `_cen = self.pos[:self.n].mean(0)` (`:3773`) — precisamente cio'
+   che §4 vieta. **E nello stesso metodo ci sono QUATTRO annotazioni** *«LOCALE PURA: rimossa la
+   sottrazione di …»* (`:3721`, `:3747`, `:3783`, `:3799`): **quattro medie globali sono gia' state
+   tolte da li' per questa ragione**, e `LS_AZIM` ne reintroduce una quinta per un'altra via;
+2. **l'asse e' CABLATO, non DERIVATO**: `np.cross(_rhat, _spin)[:, 2]` (`:3777`) prende l'indice
+   **2** e basta — anche dove `z` e' giusto, **il codice non lo calcola: lo assume**. §3 vale anche
+   per un **indice** scelto.
+
+### 9.17.4 — I due fronti aperti che ne escono (non escluse, a rischio preciso)
+
+**`TEMPO_PROPRIO_ORIENTATO` (X1).** Il principio e' **giusto**. Ma con `r < 0` -> `dt_n < 0`, e
+**tre consumatori si rompono**: `:2143` il termine dissipativo **amplifica** invece di smorzare;
+`:2661` `alpha = 1 - exp(-dt_n/tau)` diventa **negativo** e lo slerp **estrapola via**; `:2834`
+`self.eta += dt_n` fa **diminuire l'ETA'**, che pilota `ramp`. **Protetto** solo il rumore OU
+(`:1993`, usa `np.abs`); **benigna** l'inversione della rotazione.
+> **IL FATTO NUOVO:** `--tempo-segno` mette il segno in **`dt_n_s`**, una variabile **separata**
+> (`:2829-2833`), cosi' `eta` resta sul `dt_n` non firmato; `--tempo-proprio-orientato` lo mette
+> **dentro `r`**, quindi dentro `dt_n` stesso, e **dilaga**. **Due meccanismi per la stessa idea,
+> con architetture opposte.**
+
+**`ZETA_LOC` (X2).** `med_rho = np.median(rho)` (`:3136`) e' **globale** -> lo smorzamento «locale»
+dipende da tutto il sistema. E c'e' il difetto piu' insidioso: per il nodo **mediano**
+`eccesso = 0` **sempre** -> `zeta_loc = ZETA_M` **per costruzione**. E' **lo stesso punto fisso
+auto-normalizzante** gia' registrato per `_tau`/`_dens_rif` (**C12**): **sulla mediana non si
+misura nulla.**
+
+### 9.17.5 — Otto confermate sane, e una cosa che vale la pena notare
+
+`PAV_COM` (la legge al posto del numero) · `GUSCIO_MORBIDO` (forma standard + clamp CFL) ·
+`ZETA_VIR` (`cos2 + sin2 = 1` **esatto**, e' una decomposizione ortogonale) · `CHI_BASC` (soglia =
+`PHI_CRIT`, **non** una mediana) · `PLAST_DIN` (stress saturato) · `VIRIALE` · `OLON_PART` ·
+`STEP2_OROLOGIO` (gia' promosso).
+
+> **`VIRIALE` costruisce `circ_nodo` ANTISIMMETRICAMENTE** — `np.add.at(circ_nodo, ii, twn_a)` e
+> `np.add.at(circ_nodo, jj, -twn_a)` (`:3755`): **l'opposto esatto del difetto di `POLO_MATURO`**,
+> nello stesso blocco. Il codice **sa** fare la cosa giusta: `POLO_MATURO` la disfa apposta.
+
+**Sane come COSTRUZIONE, non sigillate:** nessuna di esse ha un sigillo, restano spente, e la
+**FASE A resta valida**.
+
+### 9.17.6 — E il codice delle escluse NON si cancella
+
+Resta spento, ed e' **l'evidenza che spiega perche' esistono i loro sostituti**: `TW_SPINORE` esiste
+**perche'** `SPIN_LARMOR` fallisce. **Cancellare il secondo farebbe perdere il perche' del primo.**

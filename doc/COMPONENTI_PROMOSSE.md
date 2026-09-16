@@ -244,6 +244,125 @@ accumulo/divergenza»*. E, **unico fra i termini del blocco**, `_otw` **non e' d
 
 ---
 
+# E. ESCLUSE PER DIMOSTRAZIONE — **spente, e non si riaprono con una misura**
+
+> **Creata il 2026-09-16** dall'audit di lettura chiesto da Luca (*«quali leggi hanno senso fisico,
+> quali no, quali vanno integrate meglio»*). **Verificate riga per riga dal blob `a44adc31`.**
+>
+> ### LA REGOLA CHE QUESTA SEZIONE APPLICA
+> **Si MISURA per PROMUOVERE, si DIMOSTRA per ESCLUDERE.** Una misura dice *«questa legge produce
+> un effetto»*; **non dice se ha senso**. `SPIN_LARMOR` produceva un effetto ed era **sbagliata**;
+> il fattore `cs^-2` non ne produce quasi e **e' necessario**.
+> **Quindi:** per escludere una legge non basta *«non produce effetto»* — **si deve dire QUALE
+> PROPRIETA' ROMPE**, e la proprieta' va citata col suo punto nel codice.
+> **E per questo non si riaprono con una misura:** una voce chiusa qui torna in gioco solo se cade
+> la **dimostrazione**, cioe' se quella proprieta' non e' piu' richiesta o se il codice cambia.
+>
+> ### IL CODICE DELLE ESCLUSE NON SI CANCELLA
+> Resta spento, ed e' **l'evidenza che spiega perche' esistono i loro sostituti**: `TW_SPINORE`
+> esiste **perche'** `SPIN_LARMOR` fallisce. Cancellare il secondo farebbe perdere il **perche'**
+> del primo. *(Stessa ragione per cui si promuove il default invece di cancellare il ramo, §10.)*
+
+| flag | **quale proprieta' ROMPE** | riga | **cosa la RIAPRIREBBE** (scritto ora) |
+|---|---|---|---|
+| **`SPIN_LARMOR`** | **Si autoannulla dove servirebbe.** L'asse e' `cross_ij = np.cross(nb_vic[ii], nb_vic[jj])`: **si annulla esattamente all'allineamento**, cioe' quando l'ordine comincia. Non e' debole: e' **nullo per costruzione** proprio nel regime che dovrebbe sostenere | **`:2065`** | un asse che **non** sia il prodotto vettore dei due Bloch — cioe' una legge diversa, non una taratura di questa |
+| **`TW_SPINORE`** | **L'implementazione non e' la legge dichiarata.** Commento `tw/2` (un ANGOLO), codice `tw/(4π)` sommato a una **VELOCITA'**: **628.3 = 2π/DT** volte piu' debole. E finisce in `self.omega_s` (memoria persistente) contro il divieto scritto **nello stesso blocco** per `SYNC_SPINORE` (*«darebbe accumulo/divergenza»*). **Unico del blocco, non e' diviso per l'inerzia** | **`:2149-2154`**, `:2313`, divieto a `:724` | **PRINCIPIO BUONO, implementazione rotta:** riaprirebbe una **correzione del cablaggio** (e allora e' §10-D, *senza flag*). -> `doc/REFERTO_tw_spinore.md` |
+| **`POLO_MATURO`** | **Rende SIMMETRICO un termine che dev'essere ANTISIMMETRICO.** Sostituisce `chi[i] - chi[j]` con `np.where(_twn[i] >= _twn[j], chi[i], chi[j])`: il secondo seleziona il nodo a torsione maggiore, quindi **non cambia segno invertendo l'arco**, mentre `tw` e' una torsione su arco **ORIENTATO** e l'altro addendo (`dph`) e' antisimmetrico. La somma perde parita' definita. **Il commento ammette lo scopo:** *«rompe il bilanciamento»* -> **tattica, non legge** | **`:3032`** contro `:3034` | una costruzione **antisimmetrica** che selezioni comunque il polo maturo (p.es. `sign(twn[i]-twn[j]) * (chi[i]-chi[j])/2`): sarebbe **un'altra legge**, da sigillare |
+| **`VERSO_CHI`** | **No-op silenzioso.** `if CHI_CORE …` arriva **prima** di `elif VERSO_CHI …`, e `--chi-core` e' nella config di **ogni** run: il ramo **non e' mai raggiunto**. Accenderlo fa credere di aver aggiunto una legge senza aggiungere nulla | **`:2881`** / **`:2884`** | solo un run **senza** `--chi-core` — ma §4 lo richiede sempre. **Di fatto irraggiungibile** |
+| **`L_CONSERVA`** | **Distrugge una proprieta' MISURATA.** Non conserva `L`: **azzera tutta la rotazione rigida a ogni passo**, quindi cancella la **precessione fisica reale** (`L_z ~ -0.9`, verso coerente all'**84 %**). *«Conservare L != annullare la rotazione»*, e la fisica di base **conserva gia' `L` da sola** | **`:549-553`**, `:3611` | una rimozione della sola rotazione **spuria** del rilassamento che lasci intatta quella **fisica**: e' un problema aperto, non un flag da accendere |
+| **`SYNC_SPINORE`** | **Allineamento IMPOSTO, non derivato** (§3, zero manopole): e' un Kuramoto sugli spinori, `omega_sync = forza * cross(nb, nb_media)`. **E `nb_media` e' una media di VICINATO**, quindi introduce un termine che *decide* l'ordine invece di farlo emergere | **`:2161-2163`** | una derivazione da un principio (non da analogia col Kuramoto) che produca la **stessa** forma |
+| **`ANTIFASE_ADD`** · **`COPPIA_DENSITA`** | **Marcate dal codice stesso** *«LEGGE DI STABILITA' (esplorativa)»* e *«ESPLORATIVO»*. Sono **interventi sulla stabilita'**, non leggi derivate | `:554`, `:557` | una derivazione. Finche' il commento dice «esplorativa», l'autore stesso non le classifica come fisica |
+| **`TEMPO_SEGNO`** | **NO-GO gia' registrato** (MOD 5.3a / 5.3c) | `:2829-2833` | il NO-GO, se cade con un riscontro committato |
+| **`GAMMA_TURBO`** | **Non e' una legge: e' un AMPLIFICATORE diagnostico.** §10-C: si usa per **VEDERE**, mai per **CONCLUDERE** | `--gamma-turbo` | nulla: la sua categoria e' corretta e resta |
+
+---
+
+## ⚠ E.bis — **DUE VOCI DELLA TABELLA PROPOSTA NON REGGONO, e vanno corrette**
+
+*(P1: la tabella era una prima passata di Claude web sui corpi del codice. Verificata dal disco,
+due motivazioni sono sbagliate. Le correzioni **non** salvano i flag — li **riclassificano**.)*
+
+### E.bis.1 — **`SYNC_UPDATE`: la motivazione e' FALSA. Non accende lo scuotimento.**
+
+La tabella diceva: *«Cambia l'integratore **e accende lo scuotimento**: due variabili in un flag»*.
+**Verificato dal codice: e' il contrario.**
+
+```python
+:1980   if SCUOTIMENTO and not SYNC_UPDATE:      # il rumore pre-passo e' DISATTIVATO da SYNC_UPDATE
+:2279   if SYNC_UPDATE and SCUOTIMENTO:          # e RIAPPLICATO dopo la rotazione
+:2302   if SYNC_UPDATE and SCUOTIMENTO:
+```
+
+**`SYNC_UPDATE` non accende niente: SPOSTA il punto di iniezione del rumore.** `SCUOTIMENTO` e' un
+flag **indipendente**, e resta ON o OFF per conto suo.
+
+**E non sono «due variabili in un flag»:** tutti i suoi effetti — `dph` dalla snapshot (`:1969`),
+`nb_t` invece di `self._nb` (`:2031`), `omega_t` invece di `self.omega_s` (`:2142`), `psi_t`
+(`:2861`), e la rilocazione del rumore — sono **UNA sola scelta coerente**: *ogni legge del passo
+legge lo stato a `t-1`*. E' **Gauss-Seidel -> Jacobi**.
+
+> **RICLASSIFICATA: `SYNC_UPDATE` NON e' una legge, e' uno SCHEMA DI INTEGRAZIONE** — stessa
+> categoria di `VERLET`. Non appartiene a questa sezione: **non rompe una proprieta' fisica**, sceglie
+> un ordine di aggiornamento. Resta **OFF in tutti i run del fork** (fatto gia' in §9, ed e' la
+> ragione per cui sotto `--spinore-corretto` il rumore non tocca il Bloch direttamente).
+> **Cosa servirebbe per deciderlo:** una misura della **deriva** fra i due schemi — che **non
+> esiste**, esattamente come per `VERLET` (voce **B3**).
+
+### E.bis.2 — **`LS_AZIM`: `z` NON e' un asse di laboratorio arbitrario. Ma la voce resta esclusa, per una ragione PIU' FORTE.**
+
+La tabella chiedeva di accertarlo, e aveva ragione a dubitare. **Verificato:**
+
+```python
+:5666-5667   ang = 2*np.pi*k/nmasse ;  cx, cy = sep*np.cos(ang), sep*np.sin(ang)
+:5668        net.nuova_massa(..., centro=(cx, cy, 0.0), ...)      # <- le masse stanno sul piano z = 0
+```
+
+**I centri delle masse giacciono su un cerchio nel piano `z = 0`**, quindi `z` e' la **normale
+geometrica della configurazione iniziale**, non un asse arbitrario. **La motivazione originale era
+imprecisa.**
+
+**Ma l'esclusione regge, e per due ragioni piu' nette:**
+
+1. **⚠ USA IL BARICENTRO GLOBALE.** `_cen = self.pos[:self.n].mean(0)` (**`:3773`**) e' una **media
+   su TUTTO il sistema**, ed e' precisamente cio' che `CLAUDE.md` §4 vieta: *«LOCALE PURA — mai
+   togliere la media globale: introduce NON-LOCALITA', una scorciatoia che il sistema relazionale
+   non deve avere»*. **E l'ironia sta dieci righe sotto**, `:3783`:
+   `# --- LOCALE PURA: rimossa la sottrazione di spinta.mean() ---`
+   **E non e' un caso isolato: nello stesso metodo ci sono QUATTRO annotazioni identiche**
+   (`:3721` `proj.mean()`, `:3747` `grav.mean()`, `:3783` `spinta.mean()`, `:3799` `flusso.mean()`).
+   **Quattro medie globali sono state tolte da qui per questa ragione. `LS_AZIM` ne reintroduce una
+   quinta, per una via diversa: non una sottrazione, ma un CENTRO.** *(Questa e' la ragione decisiva, e non dipende da come e' fatta la scena.)*
+2. **L'asse e' CABLATO, non DERIVATO.** `np.cross(_rhat, _spin)[:, 2]` (**`:3777`**) prende l'indice
+   **2** e basta. Anche dove `z` e' la normale giusta, **il codice non la CALCOLA: la assume.** I
+   nodi sono seminati in **palle 3D isotrope** (`u = rng.normal(size=(n,3))`), il sistema evolve in
+   3D e puo' inclinarsi; una scena disposta altrimenti renderebbe la legge semplicemente **falsa**.
+   §3: *«nessun numero scelto»* vale anche per un **indice** scelto.
+
+> **VERDETTO: esclusa** — non per «asse di laboratorio», ma per **media globale (§4)** piu' **asse
+> cablato invece che derivato (§3)**.
+> **COSA LA RIAPRIREBBE:** una versione che (a) usi un centro **locale** (baricentro del vicinato,
+> non del sistema) e (b) **calcoli** la normale del piano dalla configurazione — p.es. dal momento
+> angolare locale — invece di prendere `[:, 2]`. **Sarebbe un'altra legge, e andrebbe sigillata.**
+
+---
+
+## E.ter — Le voci §3 **CONFERMATE sane**, con la riga che le sostiene
+
+| flag | perche' regge | riga |
+|---|---|---|
+| **`PAV_COM`** | sostituisce il **muro `0.05`** con `median(d0) - MAD(d0)`: **la legge al posto del numero**, e scala col sistema (§3) | `:621-623`, `:5165` |
+| **`GUSCIO_MORBIDO`** | `D = c_locale * spaziatura` — **forma standard** di una diffusione, *«nessun coeff. nuovo»*, con **clamp causale CFL** `|delta d0| <= cs*dt_e` | **`:3211-3216`** |
+| **`ZETA_VIR`** | `beta *= cos2`: dissipa il **radiale**, libera il **tangenziale**. E `cos2 + sin2 = 1` **esattamente** perche' `H = hypot(r_rad, t_tan)`: e' una **decomposizione ortogonale**, non una pesatura scelta | `:3765-3770` |
+| **`CHI_BASC`** | soglia = **`PHI_CRIT`**, il quanto di olonomia **gia' nel sistema** — e **non** una mediana globale | **`:3045-3050`** |
+| **`PLAST_DIN`** | plasticita' dallo **stress metrico** `\|d-d0\|/d0` per l'eccesso di torsione, **saturata** con `tanh` | **`:3423-3427`** |
+| **`VIRIALE`** | `circ_nodo` costruito **ANTISIMMETRICAMENTE**: `np.add.at(circ_nodo, ii, twn_a)` e `np.add.at(circ_nodo, jj, -twn_a)` — l'opposto esatto del difetto di `POLO_MATURO` | **`:3755`** |
+| **`OLON_PART`** | `hypot(\|circ_arc\|, \|twn_a\|)` = somma in quadratura di due contributi ortogonali, **la stessa regola usata due righe sotto** per `H = hypot(r_rad, t_tan)`: **derivata, non scelta** | **`:3761`** vs **`:3764`** |
+| **`STEP2_OROLOGIO`** | **gia' promosso**, sezione **A1** | `:793` |
+
+*(Sane **come costruzione**. Nessuna di esse ha un sigillo: restano spente, e la FASE A resta valida.)*
+
+---
+
 # D. CORREZIONI DI DIFETTO — **nessun flag, e non devono averne**
 
 > **Un bug curato non ha un interruttore.** Sono qui **per memoria**, non come candidate.
