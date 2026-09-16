@@ -1,0 +1,8 @@
+# DATI PARZIALI - CAMPAGNA INTERROTTA
+
+I file _vuoto_csrel_s?.* di questa cartella sono di una campagna FERMATA su ordine di Luca
+al passo 300 di 500: 7 campioni su 11 attesi.
+
+NON sono una campagna completa. P1 e P2 sono gia' decise (vedi il commit che li introduce),
+ma tutte le altre osservabili sono lette a 500 passi nelle campagne precedenti e a 300 NON
+sono confrontabili. Si riparte domani.

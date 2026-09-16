@@ -1,0 +1,10 @@
+============================================================================================
+CAMPAGNA cs_floor RELAZIONALE -- 4 run (4 semi, 1 braccio), 500 passi, campione ogni 50
+  braccio unico: --tau-luce ACCESA (marchio: sigillo fallito, voce A)
+  comune      : --cs-dinamico --tau-luce --rumore-colorato --pav-com --guscio-morbido --zeta-vir --chi-basc --plast-din --viriale --olon-part
+  concorrenza : 4 run per volta
+============================================================================================
+[avvio ] csrel  seme 1   (0.0 min dall'inizio)
+[avvio ] csrel  seme 2   (0.0 min dall'inizio)
+[avvio ] csrel  seme 3   (0.0 min dall'inizio)
+[avvio ] csrel  seme 4   (0.0 min dall'inizio)
