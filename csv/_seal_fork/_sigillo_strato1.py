@@ -50,10 +50,13 @@ OLD = os.path.join(HERE, "_old_sim_pre_strato1.py")
 PRE = "af003c2"                                   # ultimo commit PRIMA dello Strato 1
 BLOB_PRE = "968fba34dedfcfb7faf2209a15ebf145c21f52e8"
 PY = sys.executable
+# [2026-09-16] `--cs-dinamico` AGGIUNTO. Senza, `cs = CS_M` costante e `_cs_nodo_prev` non viene
+# MAI scritta: il ritardo girava su `tau = d/CS_M`, cioe' su `tau ∝ d`, e la dipendenza da `cs`
+# non era esercitata. E' il MARCHIO di CLAUDE.md par.9 sul 23/23 di questo stesso sigillo.
 BASE = ["--batch", "--nmasse", "3", "--sep", "8", "--seed", "1", "--passi", "150",
         "--ogni", "150", "--db-ogni", "150",
         "--campo-spinoriale", "--spinore-vivo", "--spinore-corretto", "--chi-core",
-        "--calore-scal", "--deparam-orologio", "--verlet"]
+        "--calore-scal", "--deparam-orologio", "--verlet", "--cs-dinamico"]
 
 esiti = []
 
@@ -366,6 +369,66 @@ verdetto("S7d orologio globale (r = None) -> alpha = 1-exp(-DT/tau)",
          float(np.max(np.abs(mis_g - bug))) < 1e-9,
          "max|alpha_mis - %.12f| = %.3e" % (bug, float(np.max(np.abs(mis_g - bug)))))
 
+# ============================================================ S8: `tau` SEGUE `cs` — MAI TESTATO
+# IL MARCHIO CHE QUESTO SIGILLO ESISTE PER TOGLIERE (CLAUDE.md par.9, 2026-09-15):
+#   «il sigillo 23/23 dello STRATO 1 NON HA MAI ESERCITATO LA DIPENDENZA DA `cs`».
+# E non e' stato un caso: l'argv di S1 non conteneva `--cs-dinamico` (quindi `cs = CS_M` costante
+# e `_cs_nodo_prev` non veniva nemmeno scritta), e in tutti i test in-process `_cs_nodo_prev` e'
+# `None` oppure `np.full(nodi, cs)` — cioe' **COSTANTE**. Un `cs` costante non esercita `tau = d/cs`:
+# lo rende indistinguibile da `tau ∝ d`. S7 misura la dipendenza da `r`, non quella da `cs`.
+# QUI si da' a ogni nodo un `cs` DIVERSO, a parita' di tutto il resto, e si verifica che `alpha`
+# lo segua nodo per nodo. E' l'unico sigillo del lotto che fallirebbe se `cs` fosse ignorato.
+print()
+print("=" * 96)
+print("SIGILLO 8 — `tau = d/cs` SEGUE `cs` PER NODO (la dipendenza mai esercitata)")
+print("=" * 96)
+NODI8 = 4
+CS_NODO = np.array([1.0, 2.0, 4.0, 8.0])     # velocita' metriche locali diverse, resto IDENTICO
+r8 = FintaRete()
+r8.n = NODI8
+_i8, _j8 = np.triu_indices(NODI8, 1)
+r8.i, r8.j = _i8, _j8
+r8._S = None
+r8.d = np.full(len(r8.i), float(S.LAM))       # stessa lunghezza d'arco: l'UNICA differenza e' cs
+r8._cs_nodo_prev = CS_NODO.copy()
+r8._psi_spinor = np.tile(np.array([1.0 + 0j, 0.0 + 0j]), (NODI8, 1))
+passato8 = np.tile(np.array([1.0, 0.0, 0.0]), (NODI8, 1))
+tau8 = S.LAM / CS_NODO                        # tau PER NODO
+att8 = 1.0 - np.exp(-S.DT / tau8)             # alpha atteso per nodo (r = 1 per tutti)
+bug8 = 1.0 - np.exp(-S.DT / (S.LAM / S.CS_M))  # alpha se `cs` fosse IGNORATO: uguale per tutti
+
+r8._nb_ret = passato8.copy()
+r8._r_corrente = np.ones(NODI8)               # ritmo IDENTICO: isola `cs` da `r` (S7 fa l'opposto)
+out8 = np.asarray(S.Rete._bloch_ritardato(r8, bloch(r8._psi_spinor), r8.i, r8.j), float)
+Om8 = np.pi / 2.0
+mis8 = np.arccos(np.clip(np.sum(out8 * passato8, axis=1), -1.0, 1.0)) / Om8
+print("  d = LAM = %.4g,  DT = %.4g,  r = 1 su TUTTI i nodi,  Omega = pi/2" % (S.LAM, S.DT))
+print("   cs      tau = d/cs    alpha atteso        alpha misurato      alpha se cs IGNORATO")
+for k in range(NODI8):
+    print("  %4.1f   %10.6f   %18.12f   %18.12f   %18.12f"
+          % (CS_NODO[k], tau8[k], att8[k], mis8[k], bug8))
+err8 = float(np.max(np.abs(mis8 - att8)))
+verdetto("S8 alpha = 1-exp(-dt_n*cs/d) PER NODO", err8 < 1e-9,
+         "max|alpha_mis - alpha_atteso| = %.3e" % err8)
+rap8_mis = float(mis8[3] / mis8[0])            # cs=8 contro cs=1
+rap8_att = float(att8[3] / att8[0])
+verdetto("S8b il rapporto cs=8 / cs=1 e' quello di d/cs",
+         abs(rap8_mis - rap8_att) < 1e-9,
+         "misurato %.9f, atteso %.9f  (se cs fosse ignorato sarebbe esattamente 1.000000000)"
+         % (rap8_mis, rap8_att))
+verdetto("S8c il `cs` LOCALE conta (con cs ignorato sarebbero tutti uguali)",
+         abs(rap8_mis - 1.0) > 1e-3,
+         "|rapporto - 1| = %.3e" % abs(rap8_mis - 1.0))
+# CONTROPROVA: con `cs` COSTANTE si deve tornare ESATTAMENTE al valore del "bug". Serve a
+# dimostrare che S8 non passa per un artefatto dello slerp: e' proprio `cs` a muoverlo.
+r8._nb_ret = passato8.copy()
+r8._cs_nodo_prev = np.full(NODI8, float(S.CS_M))
+out8c = np.asarray(S.Rete._bloch_ritardato(r8, bloch(r8._psi_spinor), r8.i, r8.j), float)
+mis8c = np.arccos(np.clip(np.sum(out8c * passato8, axis=1), -1.0, 1.0)) / Om8
+verdetto("S8d controprova: cs COSTANTE = CS_M -> alpha uguale per tutti",
+         float(np.max(np.abs(mis8c - bug8))) < 1e-9,
+         "max|alpha_mis - %.12f| = %.3e" % (bug8, float(np.max(np.abs(mis8c - bug8)))))
+
 # ============================================================ S3b: IL DECISIVO, NEL CICLO VERO
 # S3 misura la forza su stati SINTETICI. Qui la stessa domanda viene posta alla DINAMICA REALE:
 # si gira un batch vero con la memoria accesa e, a ogni passo, si calcolano ENTRAMBI i rami sullo
@@ -381,7 +444,8 @@ sys.argv = ["soliton_simulator.py",
             "--batch", "--nmasse", "3", "--sep", "8", "--seed", "1", "--passi", "30",
             "--ogni", "30", "--db-ogni", "30",
             "--campo-spinoriale", "--spinore-vivo", "--spinore-corretto", "--chi-core",
-            "--calore-scal", "--deparam-orologio", "--verlet", "--fork-su2", "--fork-su2-mem",
+            "--calore-scal", "--deparam-orologio", "--verlet", "--cs-dinamico",
+            "--fork-su2", "--fork-su2-mem",
             "--csv", os.path.join(HERE, "_s3b.csv"),
             "--sync-db", os.path.join(HERE, "_s3b.pkl"), "--db-cleanup"]
 _a = S._cli()
