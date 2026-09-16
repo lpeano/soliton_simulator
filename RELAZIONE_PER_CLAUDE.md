@@ -1,10 +1,60 @@
 # RELAZIONE — per Claude web · **aggiornata 2026-09-16** *(il giro del 16 e' il §9, in fondo)*
 
 > **Scritta per Claude web**, che legge il repo e deve pronunciarsi su una decisione di merito.
-> Branch `fork-su2`. **Blob sul disco `08784685`** *(corretto il 2026-09-16: qui c'era `b298677a`, superato dalle due cure C7 e C11)*, gate in `CLAUDE.md` §0 a `c0803713`
+> Branch `fork-su2`. **Blob sul disco `c57800c1`** *(oggi e' cambiato TRE volte: `08784685` ->
+> `a467fd9a` taglio spettrale -> `57681b9e` correzione (1) -> `c57800c1` correzione (2))*,
+> gate in `CLAUDE.md` §0 a `c0803713`
 > (**non ri-timbrato di proposito**: i sigilli della FASE 2 non passano).
 > Il documento e' **cumulativo**: i paragrafi 1-7 sono nell'ordine in cui i fatti sono nati, e
-> l'ultimo lavoro sta in fondo. **Se leggi una cosa sola, leggi il blocco qui sotto e il §8.**
+> l'ultimo lavoro sta in fondo. **Se leggi una cosa sola, leggi il §0-ante qui sotto** (il giro
+> del **16**); il §0 che lo segue e' quello del **15**, tenuto perche' la sequenza conti.
+
+---
+
+## 0-ante. **L'ULTIMO GIRO (2026-09-16) — in dodici righe.** Il dettaglio e' il §9
+
+> **Blob: `08784685` -> ... -> `c57800c1`.** `soliton_simulator.py` e' stato toccato **tre volte**
+> oggi, tutte e tre committate **prima** di qualunque run.
+>
+> 1. **`S` e' CHIUSA: rumore.** 4 semi per braccio, IC95 con `t(3)`: OFF `[89.722, 90.022]`,
+>    ON `[89.995, 90.103]` — **entrambi contengono 90**. E `OFF s3` vale **89.9999**, il null esatto.
+>    *(Resta aperta una domanda DIVERSA: il contrasto ON-OFF `+0.177` esclude lo zero, ma i due
+>    bracci differiscono anche di ~7x in RISOLUZIONE -> voce `S2`.)*
+> 2. **`R` e' REFUTATA**, dal dato piu' pulito del lotto: `tau` cambia di **due ordini** (+1.708 ->
+>    +0.020) e **`sigma` si muove di 0.0013**, contro una barra di sistema di 0.030.
+> 3. **`ESITO (I)` confermato QUATTRO volte**: `-1.0498 / -1.0592 / -1.0562 / -1.0554` contro il
+>    `-1.056` del tracing. Due bracci, due leggi di `tau`, l'esponente non si muove di 0.01.
+> 4. **Il FDT rifatto sul sistema pulito: CENTO volte meglio, MILLECINQUECENTO volte insufficiente.**
+>    `kT/Lam` da ~2e7 a **1.2e5**, ma il disordine resta **726-3081 volte** piu' veloce dello
+>    smorzamento. **NON SI CABLA.**
+> 5. **Lo spin e' ACCOPPIATO MA SENZA BILANCIO** (terzo esito, non previsto dal mandato): decide
+>    dove la materia si divide e con che verso la gravita' tira, ma **nessun canale trasferisce una
+>    grandezza conservata**. Il torque **non e' azione-reazione** (dimostrato dalla formula) e nel
+>    file **non esiste un'energia totale**. **Quindi `lambda` NON SI DERIVA**: manca la grammatica.
+> 6. **Il marchio dello STRATO 1 e' TOLTO: `tau` SEGUE `cs`, misurato per la prima volta.**
+>    Sigillo **25/27 + 2 FAIL ATTESI** (previsti e committati prima). **`S8b`: rapporto `cs=8/cs=1`
+>    = 7.660686976 = atteso** — se `cs` fosse ignorato varrebbe esattamente 1.000000000.
+> 7. **I DUE `theta` sono chiusi** (`C19`): `theta_coord = |omega|*DT` e `theta_prop = |omega|*dt_n`
+>    girano ora **insieme**, col controllo d'identita' a `4.6e-16`. **Differivano del 26 % sulla
+>    mediana.** E ne e' uscita una correzione: la catena `sigma + tau/2` **assumeva `pend(r) = 0`**,
+>    mai verificato.
+> 8. **Taglio spettrale CABLATO** (`--rumore-colorato`, flag OFF). **`N7` VINTO**: la ricorsione usa
+>    `dt_n = DT*r` **per nodo**, errore `0.000e+00`, contro `6.142e-01` col `DT` nudo. `N2` aperto.
+> 9. **DUE CORREZIONI DI DIFETTO, SENZA FLAG** (decisione di Luca, §9.12):
+>    **①** `_xi_rumore` **non si eredita** — `xi` e' l'AMBIENTE, non una proprieta' del nodo.
+>    Correlazione padre-figlio **da `+1.0000` a `+0.0065`** su 258 coppie.
+>    **②** `inerzia = max(rho*(CS_M/cs)^2, 1e-6)` — il fattore `cs^-2` che la derivazione impone e
+>    che **mancava**. **`M2` (il decisivo) PASS: `max|A-B| = 0.000e+00`, nodi 3070 = 3070.**
+>    **⚠ Ma l'effetto OGGI e' minuscolo — fattore mediano `1.0000048` — ed era scritto PRIMA.**
+> 10. **La trappola CRLF e' chiusa alla radice** (`.gitattributes`, `eol=lf`). Aveva morso **due
+>    volte**: la prima per un mio `git checkout`, la seconda **da sola**, fra due commit.
+> 11. **⚠ QUATTRO SIGILLI SI SONO ROTTI OGGI, E NESSUNO LO HA DETTO**: `AttributeError` a S2
+>    (metodo estratto assente dal guscio), `AttributeError` a N7 (`Generator.normal` read-only),
+>    **loop infinito** a N2 (46 minuti al 68 % di CPU), e **due criteri SCADUTI** che hanno prodotto
+>    FAIL falsi. **Una sola forma: un diagnostico che tocca i globali del simulatore, o ne elenca i
+>    metodi a mano, si rompe appena il simulatore cambia forma — in SILENZIO.**
+> 12. **⚠ E TUTTI I DATI DI OGGI PORTANO IL MARCHIO**: prodotti **prima** delle due correzioni,
+>    cioe' su un **sistema diverso** da quello corrente. **La campagna va RIFATTA.**
 
 ---
 
