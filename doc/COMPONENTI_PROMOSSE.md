@@ -176,6 +176,47 @@ decide**.
 
 ---
 
+## B-bis. **`TW_SPINORE` — CANDIDATA SOSPESA: la legge codificata non e' quella dichiarata**
+
+> **Aggiunta il 2026-09-16, nello stesso commit del riscontro** (§5-bis). Era **la prima candidata
+> indicata da Luca** per l'accensione dopo lo Step 2. **Non e' stata accesa, e non e' stato scritto
+> il suo sigillo.** -> `doc/REFERTO_tw_spinore.md`, voce **W** di `doc/RAMIFICAZIONI.md`.
+
+| criterio §10 | stato |
+|---|---|
+| ① **derivata, non tarata** | **SI', in linea di principio** — `tw/2` e' spin-1/2 geometrico, `PHI_CRIT` e' gia' nel sistema, nessun coefficiente nuovo. **Ma cio' che il codice implementa non e' quella formula** (sotto) |
+| ② **sigillata con controllo positivo** | **NO, e non si puo' scrivere adesso.** Il criterio naturale (*«ruota il Bloch di `tw/2`»*) **fallirebbe di 628** — non per un difetto del codice, ma perche' verrebbe **dalla descrizione invece che dal codice**. Sarebbe il **quarto** criterio stale in due giorni |
+| ③ **assenza = difetto?** | **NON VALUTABILE** finche' ① non e' chiuso: non si giudica l'indispensabilita' di una legge di cui non si sa quale sia |
+
+**IL RISCONTRO, in tre numeri** *(209 852 archi, 150 passi, seme 1, `--cs-dinamico` acceso)*:
+
+| | | valore |
+|---|---|---|
+| **(a)** | **DICHIARATO** dal commento: angolo/passo `= tw/2` | **9.827e-01 rad** |
+| **(b)** | **CODIFICATO** (`:2149`): `tw/(4π)` sommato a `omega_new` | **1.564e-01** |
+| **(c)** | l'angolo che (b) produce davvero `= (b)·dt_n` | **1.564e-03 rad** |
+| | **(a)/(c) `= 2π/DT`** | **628.3** |
+
+**E dove finisce:** in `self.omega_s` (`:2313`), la **memoria persistente** — mentre il commento di
+`SYNC_SPINORE` (`:724`), **dello stesso blocco**, dice che metterci un torque *«darebbe
+accumulo/divergenza»*. E, **unico fra i termini del blocco**, `_otw` **non e' diviso per l'inerzia**.
+
+> **COSA QUESTO NON DICE: che sia trascurabile.** Il peso in **ampiezza** e' **0.054 %**, ma la
+> domanda e' **direzionale** — l'asse TW e' **fisso e persistente**, `omega` e' un **random walk**.
+> Confondere le due cose e' l'errore **ampiezza-contro-correlazione** gia' commesso su `cs` allo
+> 0.023 % (§9): **non si rifa' al contrario.** *(Ed e' proprio la proprieta' per cui Luca l'aveva
+> scelta per prima: «l'unico meccanismo il cui asse non svanisce all'allineamento».)*
+
+**TRE STRADE, la scelta e' di Luca e non e' presa:**
+1. **correggere** il cablaggio -> allora e' una **CORREZIONE DI DIFETTO** (§10: *nessun flag*), e la
+   legge corretta si sigilla e si valuta da capo;
+2. **tenerlo com'e'** e sigillarlo **per quello che fa davvero**, riscrivendo il commento;
+3. **lasciarlo spento** e passare a un altro dei tredici.
+
+**Finche' non decide, resta OFF.**
+
+---
+
 # C. ESPERIMENTI — OFF **per sempre**
 
 | # | componente | perché è qui |

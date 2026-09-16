@@ -1,8 +1,9 @@
-# RELAZIONE — per Claude web · **aggiornata 2026-09-16** *(il giro del 16 e' il §9, in fondo)*
+# RELAZIONE — per Claude web · **aggiornata 2026-09-16 (sera)** *(il giro del 16 e' il §9, in fondo)*
 
 > **Scritta per Claude web**, che legge il repo e deve pronunciarsi su una decisione di merito.
-> Branch `fork-su2`. **Blob sul disco `c57800c1`** *(oggi e' cambiato TRE volte: `08784685` ->
-> `a467fd9a` taglio spettrale -> `57681b9e` correzione (1) -> `c57800c1` correzione (2))*,
+> Branch `fork-su2`. **Blob sul disco `a44adc31`** *(oggi e' cambiato QUATTRO volte: `08784685` ->
+> `a467fd9a` taglio spettrale -> `57681b9e` correzione (1) -> `c57800c1` correzione (2) ->
+> **`a44adc31` la PRIMA PROMOZIONE**)*,
 > gate in `CLAUDE.md` §0 a `c0803713`
 > (**non ri-timbrato di proposito**: i sigilli della FASE 2 non passano).
 > Il documento e' **cumulativo**: i paragrafi 1-7 sono nell'ordine in cui i fatti sono nati, e
@@ -11,7 +12,7 @@
 
 ---
 
-## 0-ante. **L'ULTIMO GIRO (2026-09-16) — in dodici righe.** Il dettaglio e' il §9
+## 0-ante. **L'ULTIMO GIRO (2026-09-16) — in quindici righe.** Il dettaglio e' il §9
 
 > **Blob: `08784685` -> ... -> `c57800c1`.** `soliton_simulator.py` e' stato toccato **tre volte**
 > oggi, tutte e tre committate **prima** di qualunque run.
@@ -60,6 +61,30 @@
 >    **non la chiude a questa densita'**, com'era scritto prima (fattore 1.0000048).
 > 14. **⚠ E TRE CRITERI DI SIGILLO SBAGLIATI, TUTTI MIEI, TUTTI LO STESSO GIORNO** (`N3b`, `M1b`/`M3`, `M3c`): scritti dal **modello mentale** del codice invece che da una
 >    **misura**. Presidio nuovo in §9. **Un FAIL falso costa piu' di un sigillo mancante.**
+>
+> 13. **LA PRIMA PROMOZIONE MAI FATTA: `STEP2_OROLOGIO` E' FISICA DI DEFAULT** (§9.15). La sezione
+>     A del registro delle componenti era **vuota**; ora ha la sua prima voce, coi tre criteri §10 e
+>     **il criterio di retrocessione scritto AL MOMENTO**, non dopo. Risigillo col braccio OFF vero:
+>     **9/10 PASS + 1 FAIL ATTESO**, `S2` = `0.000e+00` con **nodi 2924 = 2924, shape divergenti 0**.
+>     *(L'argomento non e' «funziona meglio»: e' «la sua assenza e' un DIFETTO» — un sistema in cui
+>     l'EM non risponde alla metrica e' sbagliato, non diverso. E lo stesso esponente `cs^2` era gia'
+>     stato derivato, per una strada indipendente, nell'inerzia: **consistenza trovata, non costruita**.)*
+>
+> 14. **⚠ E UN FALSO PASS INTERCETTATO PRIMA CHE ACCADESSE — vale piu' della promozione.**
+>     **Ribaltare un default converte ogni braccio di controllo ottenuto per OMISSIONE del flag in un
+>     duplicato del braccio di prova.** `_sigillo_step2.py` prendeva il braccio OFF cosi': senza
+>     l'adeguamento, **`S2` avrebbe confrontato ON contro ON e sarebbe PASSATO SEMPRE**, con le
+>     **shape UGUALI** — quindi invisibile **anche alla guardia delle shape**, che e' il presidio
+>     scritto apposta per quella classe di falso PASS. **Regola nuova in §9.**
+>
+> 15. **`TW_SPINORE` NON e' stato acceso: la legge CODIFICATA non e' quella DICHIARATA** (§9.16).
+>     Il commento dice «pilota il Bloch di `tw/2`» (un **ANGOLO**); il codice somma `tw/(4π)` a una
+>     **VELOCITA'** angolare, e l'angolo che ne esce e' **628.3 volte piu' piccolo** (`= 2π/DT`).
+>     Il termine finisce nella **memoria** `omega_s`, dove lo stesso file dichiara che darebbe
+>     «accumulo/divergenza», e **non e' diviso per l'inerzia** — unico del blocco.
+>     **Il mandato diceva «sigillato e poi acceso»: ho SEGNALATO invece di eseguire (P1).**
+>     **Non dico che sia trascurabile**: lo 0.054 % e' un'**ampiezza**, la domanda e' **direzionale**.
+>     **La decisione e' di Luca**, fra correggere / sigillare cio' che fa davvero / lasciarlo spento.
 
 ---
 
