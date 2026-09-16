@@ -1755,3 +1755,135 @@ passavano identici e solo **S7** ha stanato: **serve un sigillo tipo S7 fra N1 e
 invisibile come allora.
 
 **Serve il via di Luca su una cosa sola: quale delle due prescrizioni incompatibili vale.**
+
+---
+
+## 9.11 — **IL TAGLIO SPETTRALE E' CABLATO** (flag OFF), e il sigillo e' a meta': N1/N1b PASS, poi SI E' SCHIANTATO
+
+> **Via libera di Luca, 2026-09-16**, dopo aver letto e accettato le tre correzioni del §9.10:
+> *«il cablaggio resta legittimo, ma per la sola ragione onesta — e senza aspettarsi niente su
+> `theta`»*. **Risolve l'incompatibilita' del mandato in favore di `amp` INTOCCATA: rumore
+> DIVERSO, non rumore MINORE.**
+>
+> **Blob: `08784685` -> `c5e5088c` -> `a467fd9a`.** Due commit di codice, entrambi **prima** di
+> qualsiasi run (§5). **Il flag nasce OFF.**
+
+### 9.11.1 — Come e' cablato
+
+```
+tau_c = LAM / CS_M = 0.400  = 40 passi        # tempo-luce del solitone: DERIVATO
+a = exp(-|dt_n| / tau_c)      b = sqrt(1 - a^2)
+xi = xi*a + b*g                               # g = la STESSA rng.normal(0,1,(n,3)) del ramo bianco
+_nb += xi * amp                               # amp INVARIATA
+```
+
+Il ramo OFF e' **letteralmente invariato** (`_calcio = _g`), e **`g` e' estratto PRIMA del ramo**,
+nella stessa posizione di prima: cosi' il braccio spento consuma l'RNG **esattamente** come faceva.
+E' la condizione che rende possibile N1.
+
+**Tre scelte di costruzione, dichiarate:**
+1. **`dt_n = DT*r`, non `DT`** — il rumore e' un processo **locale** del nodo; `DT` nudo
+   imporrebbe la foliazione sincrona globale, cioe' **un frame preferito** (§9).
+2. **`xi` inizializzato da `N(0,1)`, cioe' dalla distribuzione STAZIONARIA.** Partire da zero
+   darebbe un primo calcio attenuato di `b = 0.22` per ~40 passi: **un artefatto all'accensione**.
+   Costo dichiarato: **un'estrazione RNG in piu'**, che rende impossibile una byte-identita' di
+   run intero per N2 — per questo N2 e' scritto come **controllo mirato**.
+3. **Eredita' di `_xi_rumore` alla mitosi**, stessa convenzione di `_nb`/`_nb_prec`/`_nb_ret`/
+   `omega_s`/`_psi_spinor`/`_psi_prec`/`_cs_nodo_prev`/`_psi_spin_prec`. **E' la terza volta**
+   (C7, C11): **stavolta scritta PRIMA di misurarla, non dopo.**
+
+### 9.11.2 — ⚠ UN DIFETTO TROVATO LEGGENDO IL CHIAMANTE, non aspettando che esplodesse
+
+> **`_passo_spinoriale` NON riceve `dt_n`: riceve `dt_n_s`** (`:2931`).
+
+E `dt_n_s` (`:2747-2751`), sotto **`--tempo-segno`** (MOD 5.3a, Feynman-Stuckelberg), vale
+`(1 + (perc_chi-1)*m_coer) * dt_n`, che per l'**antimateria coerente e' NEGATIVO**.
+Con `dt_n < 0` verrebbe `a = exp(+|dt|/tau_c) > 1` e la ricorsione **sarebbe divergita IN
+SILENZIO**: nessun NaN subito, solo `xi` che cresce di passo in passo finche' il Bloch smette di
+avere senso. Da qui **`|dt_n|`**: il tempo di correlazione e' una **durata**, dipende dal modulo
+del tic, non dal verso. **Nessun numero nuovo** — e' la stessa classe di guardia dei
+`np.maximum(..., 1e-9)` gia' nel file.
+
+**Oggi `TEMPO_SEGNO = False` e non cambia un bit.** Lo scrivo lo stesso perche' **un difetto che
+esiste solo in una combinazione di flag e' esattamente quello che salta fuori fra sei mesi**,
+quando nessuno ricorda che le due cose interagiscono.
+
+### 9.11.3 — ⚠⚠ LA TRAPPOLA CRLF HA MORSO **DA SOLA**
+
+Fra il commit `7f2af6c` e il cablaggio, `soliton_simulator.py` era tornato **CRLF** (442240 byte,
+6510 CRLF, sha1 grezzo `37c31630`) **senza che io avessi lanciato nessun `git checkout`**.
+L'ha fermata l'`assert '\r\n' not in s` che avevo messo in testa allo script di patch: **senza,
+avrei scritto un file misto.**
+
+> **E' la seconda volta in una giornata.** La prima l'avevo causata io con `git checkout`; questa
+> e' arrivata da sola. **Il `.gitattributes` con `soliton_simulator.py text eol=lf` non e'
+> cosmesi: e' l'unica cosa che toglie la trappola alla radice.** Resta una decisione di Luca.
+
+### 9.11.4 — IL SIGILLO: due PASS, poi uno SCHIANTO
+
+```
+[PASS] N1.0   il riferimento e' il blob PRE-cablaggio      blob = 08784685 (atteso 08784685)
+[PASS] N1.0b  stesso numero di nodi (il confronto ESISTE)  PRE = 3020, POST(OFF) = 3020
+[PASS] N1     flag OFF vs codice pre-cablaggio             max|A-B| = 0.000e+00
+[PASS] N1b    ON != OFF (il flag FA qualcosa)              35 array divergenti
+```
+
+**Il ramo OFF e' intatto e il flag non e' codice morto. Questo e' stabilito.**
+
+> **⚠ E N1b NON VA LETTO COME MISURA DI UN EFFETTO.** I nodi finali sono **3020 (OFF) contro 2449
+> (ON)**, ma il ramo ON consuma **un'estrazione RNG in piu'** all'inizializzazione, quindi le due
+> traiettorie divergono **completamente dal primo passo**: e' **caos con semi diversi**, non
+> l'ampiezza di un effetto fisico. N1b prova **solo** che il flag fa qualcosa.
+
+**POI LO SCHIANTO:**
+```
+AttributeError: 'numpy.random._generator.Generator' object attribute 'normal' is read-only
+```
+La spia di N7 monkeypatchava `net.rng.normal`, che in numpy e' **read-only**. **N2, N3, N6 e N7
+non sono girati.**
+
+> **E' lo stesso modo di fallire del sigillo dello STRATO 1 di stamattina: NON FALLISCE, SI
+> SCHIANTA** — la modalita' piu' facile da non notare. Due volte in un giorno, su due sigilli
+> diversi, per la stessa ragione strutturale: **un guscio in-process che tocca il simulatore
+> pezzo per pezzo si rompe appena il simulatore cambia forma.**
+> **Corretto:** la spia ora avvolge l'**oggetto** `rng` con un proxy che inoltra tutto e registra
+> solo `normal` (`net.rng` e' un attributo normale, quindi sostituibile). Resta pure-read: non
+> cambia ne' l'ordine ne' il numero delle estrazioni.
+
+### 9.11.5 — E IL CRITERIO SBAGLIATO ERA MIO — il contatore lo ha detto prima di schiantarsi
+
+`_xi_fallback = 2` su 36 chiamate nella costruzione della scena. **Non e' un difetto**, e il
+perche' conta: il ramo di estensione scatta quando i nodi crescono **senza passare da
+`_eredita_spinore_figli`**, cioe' su **`semina()` e `nuova_massa()` — LA TERZA VIA DI CRESCITA,
+la voce H del registro**. Li' l'estensione e' **corretta**: i nodi esistenti **conservano** il
+loro `xi` (vstack sulla testa) e **solo i nuovi** ricevono un'estrazione stazionaria, perche' un
+nodo appena nato non ha passato.
+
+> **Quindi il criterio di N3b che avevo scritto era SBAGLIATO:** *«fallback <= 1»* **in assoluto**
+> avrebbe fatto **fallire il sigillo per una ragione legittima**.
+> **Corretto in DELTA:** sui 25 passi di sola mitosi l'estensione **non deve scattare affatto**,
+> perche' li' l'eredita' deve bastare. **E' il criterio che misura la cosa giusta**, e la
+> differenza fra i due non e' stilistica: uno avrebbe prodotto un FAIL falso, e un FAIL falso
+> costa piu' di un sigillo mancante, perche' si porta dietro una diagnosi.
+
+### 9.11.6 — COSA E' ANCORA IGNOTO
+
+| | stato |
+|---|---|
+| **N2** — `tau_c -> 0` collassa sul rumore bianco | **non girato** |
+| **N3 / N3b** — `_xi_rumore` esteso alla mitosi | **non girato** |
+| **N6** — stabilita', `\|nb\| = 1`, no NaN/runaway | **non girato** |
+| **N7 / N7b / N7c** — **la ricorsione usa `dt_n = DT*r` per nodo, e col `DT` nudo NON tornerebbe** | **non girato — ED E' QUELLO CHE DECIDE** |
+| campagna `{OFF, ON} x >= 2 semi` | **non lanciata** |
+
+> **N7 e' il sigillo che conta, e la ragione non e' ovvia:** N1..N6 provano la **struttura** — ramo
+> OFF intatto, il flag fa qualcosa, lo stato si eredita, nulla esplode — e **passerebbero IDENTICI
+> anche se la ricorsione usasse `DT` nudo**, cioe' col tic di **coordinata** al posto del tempo
+> proprio del nodo. **E' esattamente il bug gia' preso nello Strato 1, dove S1..S6 passavano
+> identici e solo S7 lo ha stanato.**
+
+**E la predizione resta quella del §9.10, invariata:** `theta` **non scende**, e se si muove
+**sale** (<= 5 %). **Si e' cablato perche' il rumore bianco e' fisicamente sbagliato, non perche'
+risolva l'aliasing.** Se il verdetto dovesse mostrare un calo significativo, **il reperto sarebbe
+a mio carico**: vorrebbe dire che uno fra C6, il rapporto 0.02-0.22 % e la conservazione della
+varianza non regge.
