@@ -1,0 +1,57 @@
+==========================================================================================================
+M0 — IL RIFERIMENTO: blob PRE-correzioni, certificato sui BYTE GREZZI (non git hash-object)
+==========================================================================================================
+[PASS] M0 il riferimento e' il blob a467fd9a              sha1 grezzo = a467fd9a4862  (atteso a467fd9a4862);  444654 byte, 0 CRLF
+[PASS] M0b il codice corrente e' DIVERSO dal riferimento  corrente = c57800c1051c;  448943 byte, 0 CRLF
+[PASS] M0c nessuno dei due ha CRLF (.gitattributes in vigore) CRLF: riferimento 0, corrente 0
+
+==========================================================================================================
+M2 — IL DECISIVO: con cs = CS_M il fattore vale ESATTAMENTE 1 -> BYTE-IDENTICO al riferimento
+==========================================================================================================
+  Senza `--cs-dinamico` la cache `_cs_nodo_prev` non viene MAI scritta, quindi il fallback
+  da' cs = CS_M per tutti, `(CS_M/cs)^2 = 1.0` e `rho * 1.0 == rho` bit per bit.
+  E senza `--rumore-colorato` la correzione (1) e' un no-op: `_xi_rumore` non esiste.
+[PASS] M2.0 stesso numero di nodi (il confronto ESISTE)   nodi: PRE = 3070, POST = 3070
+[PASS] M2 cs = CS_M -> byte-identico al blob a467fd9a     max|A-B| = 0.000e+00
+
+  M2b — CONTROLLO POSITIVO: con `--cs-dinamico` il fattore NON e' 1 e i due DEVONO differire
+[PASS] M2b con cs VIVO il fattore MORDE (i due differiscono) nodi PRE = 3020, POST = 3101;  array divergenti 35;  max|A-B| = 0.000e+00
+
+==========================================================================================================
+M1, M3, M4, M5 — in-process, con spie PURE-READ su `_eredita_spinore_figli` e `rng`
+==========================================================================================================
+
+  M1 — correlazione `xi` PADRE-FIGLIO subito dopo la mitosi (serve `--rumore-colorato`)
+     PRIMA della correzione: il figlio COPIA xi dal padre -> dopo un passo entrambi valgono
+     a*xi_padre + b*g con g DIVERSI, quindi corr attesa ~ a^2 = 0.9512.
+     DOPO: il figlio ha un campione FRESCO e indipendente -> corr attesa ~ 0.
+     PRE-correzione : corr = +1.0000  su 84 coppie padre-figlio
+     POST-correzione: corr = +nan  su 0 coppie padre-figlio
+[PASS] M1 PRIMA il rumore padre-figlio era CORRELATO      corr = +1.0000  (il difetto ESISTEVA: senza questo, M1b non proverebbe nulla)
+[FAIL] M1b DOPO il rumore padre-figlio e' INDIPENDENTE    corr = +nan  su 0 coppie
+
+  M3 — `len(_xi_rumore) == n` dopo ogni passo, e i contatori (P5)
+[FAIL] M3 len(_xi_rumore) == n dopo OGNI passo            25 passi, n da 1196 a 1748;  estensioni 24, nodi con xi fresco 1734, chiamate 36
+
+  M4 — CONSERVAZIONE: `L_tot = somma(inerzia * |omega|)` e il suo salto per mitosi
+     E' il test di conservazione MAI FATTO. Se L cresce col numero di nodi, la violazione
+     e' MISURATA, non argomentata. Qui si confronta PRE e POST correzione (2).
+     PRE   eventi di crescita 20   Delta L / L per passo: mediana +0.0340   media +0.0413   nodi nati totali 517
+     POST  eventi di crescita 20   Delta L / L per passo: mediana +0.0355   media +0.0397   nodi nati totali 479
+[PASS] M4 la metrica di conservazione e' calcolabile      riportata sopra: NON e' un PASS/FAIL, e' una MISURA (vedi la nota in coda)
+
+  M5 — stabilita' sul run con `--cs-dinamico` (dal DB di M2b)
+[PASS] M5a |nb| = 1 su tutti i nodi                       max| |nb| - 1 | = 2.220e-16 su 3101 nodi
+[PASS] M5b nessun NaN/inf in tutto lo stato               tutti finiti
+[PASS] M5c nessun runaway di scala                        max|x| = 9.355
+
+==========================================================================================================
+SIGILLO CORREZIONI: 11/13 PASS -> FAIL
+==========================================================================================================
+COSA QUESTO SIGILLO NON DICE
+---------------------------
+Che le due correzioni CAMBINO qualcosa di misurabile OGGI. Per la (2) e' scritto PRIMA che NON lo
+fara': `cs_std/cs_medio` sta fra 0.0086 % e 0.24 % (C13), quindi `(CS_M/cs)^2` e' quasi 1 ovunque.
+Si sono fatte perche' senza le leggi sono SBAGLIATE, non per un effetto atteso.
+M4 non e' un PASS/FAIL: e' la PRIMA misura della conservazione di `L_tot` mai fatta su questo
+sistema, e il suo verdetto e' un numero, non un timbro.

@@ -16,6 +16,23 @@
 
 ## ⚠ LA COSA DA LEGGERE PER PRIMA
 
+> **⚠ QUARTO MARCHIO, il piu' esteso — 2026-09-16, DUE CORREZIONI DI DIFETTO SENZA FLAG.**
+> **Ogni misura di questo repo prodotta PRIMA del blob `c57800c1` e' «prodotta con `_xi_rumore`
+> EREDITATO alla mitosi e SENZA il fattore `cs^-2` nell'inerzia: misura di un sistema DIVERSO da
+> quello corrente».** Vale per gli **8 CSV della campagna a quattro bracci**, per **tutti i sigilli
+> del 2026-09-16** e per ogni voce di questo registro che li cita.
+> **① `_xi_rumore` non si eredita** (blob `57681b9e`): `xi` e' un campione dell'**AMBIENTE**, non
+> una proprieta' del nodo. Prima, padre e figlio avevano rumore **correlato: misurato `+1.0000`**;
+> dopo, **`+0.0065` su 258 coppie**.
+> **② `inerzia = max(rho*(CS_M/cs)^2, 1e-6)`** (blob `c57800c1`): il fattore che la derivazione
+> `inerzia = (d/cs)^2` impone e che **mancava**. Sigillo **M2 PASS**, `max|A-B| = 0.000e+00` con
+> nodi **3070 = 3070** dove `cs = CS_M`; **M2b PASS** (col `cs` vivo il fattore morde).
+> **⚠ MA L'EFFETTO OGGI E' MINUSCOLO, ed era scritto PRIMA:** il fattore vale **1.0000048** sul
+> nodo mediano (`cs_std/cs = 0.0333 %` a 150 passi). **Si e' fatta perche' senza la legge e'
+> sbagliata**, non per un effetto misurabile a questa densita'.
+> **Le voci di §B e §C NON sono state ri-misurate**: portano questo marchio in aggiunta ai tre
+> precedenti.
+
 > **⚠ SECONDO MARCHIO, aggiunto il 2026-09-15 sera — L'OROLOGIO.** Tutte le misure di questo repo
 > fino al blob `08784685` sono state prese con il **ritmo SCALARE a 2π**: la doppia copertura
 > (**FASE 5, 4π**) **non era attiva** (95.33 % di scarto della guardia, **C11**).

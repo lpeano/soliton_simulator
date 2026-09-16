@@ -1887,3 +1887,185 @@ nodo appena nato non ha passato.
 risolva l'aliasing.** Se il verdetto dovesse mostrare un calo significativo, **il reperto sarebbe
 a mio carico**: vorrebbe dire che uno fra C6, il rapporto 0.02-0.22 % e la conservazione della
 varianza non regge.
+
+---
+
+## 9.12 — **STOP AI TEST. DUE CORREZIONI DI DIFETTO, SENZA FLAG.** E `M2`, il sigillo decisivo, **PASSA**
+
+> **Decisione di Luca, 2026-09-16:** i test in corso si interrompono, e due difetti entrano nel
+> codice **senza flag**, come **correzioni di difetto** (categoria **D** del registro: *un bug
+> curato non ha un interruttore*).
+> **Blob: `a467fd9a` -> `57681b9e` -> `c57800c1`.** Due commit di codice, uno per correzione,
+> **entrambi prima di qualunque run** (§5).
+>
+> ### ⚠ MARCHIO SU TUTTI I DATI PRECEDENTI
+> **Ogni misura di questo repo prodotta prima del blob `c57800c1` e' «prodotta con `_xi_rumore`
+> EREDITATO alla mitosi e SENZA il fattore `cs^-2` nell'inerzia: misura di un sistema DIVERSO da
+> quello corrente».** Vale per gli 8 CSV della campagna, per i sigilli di oggi, e per tutto cio'
+> che sta in §9.1-9.11.
+
+### 9.12.1 — La trappola CRLF e' chiusa alla radice
+
+`.gitattributes` con `*.py|*.md|*.csv|*.txt|*.json text eol=lf` e i binari marcati `binary`.
+**Provato con lo stesso comando che aveva causato il danno stamattina:**
+```
+git checkout -- soliton_simulator.py  ->  444654 byte, 0 CRLF, sha1 a467fd9a   INVARIATO
+```
+*(La regola non riscrive nulla: fissa cio' che gia' c'e'. Verificato prima e dopo
+`git add --renormalize .`: byte identici.)*
+
+### 9.12.2 — CORREZIONE ① : `_xi_rumore` NON si eredita — **e l'analogia sbagliata era MIA**
+
+Stamattina avevo aggiunto l'eredita' di `_xi_rumore` alla mitosi, scrivendo che era *«la stessa
+convenzione di `_nb`/`_nb_prec`/`_nb_ret`/`omega_s`/`_psi_spinor`/`_psi_prec`/`_cs_nodo_prev`/
+`_psi_spin_prec`»* e **vantandomi di averla scritta PRIMA di misurarla** invece che dopo (C7, C11).
+
+> **L'analogia era FALSA, e averla applicata in anticipo non la rende giusta.**
+> Quegli otto sono **proprieta' del NODO**: e' corretto che il figlio le erediti.
+> **`xi` no: e' un campione dell'AMBIENTE che spintona il nodo, un processo ESTERNO.**
+> **Due nodi distinti non ricevono lo stesso identico spintone.**
+
+**Cosa produceva:** padre e figlio con rumore **correlato al 100 %** per ~40 passi
+(`tau_c = LAM/CS_M`) — una correlazione **spuria** fra oggetti che devono essere indipendenti, e
+**proprio nella grandezza che serve a decorrelare**.
+
+**La correzione e' una CANCELLAZIONE**: si toglie il blocco, e il figlio riceve un `xi` **fresco**
+dal ramo di estensione gia' presente, che estrae dalla **stazionaria** (`N(0,1)`, coerente con
+`b = sqrt(1-a^2)`) — non da zero, che sarebbe un transitorio artificiale. **Nessun feedback sul
+padre:** il rumore non e' una quantita' che si ripartisce.
+
+**E i contatori cambiano nome, perche' cambia il loro significato:** `_xi_fallback` ->
+`_xi_esteso` + `_xi_nuovi`. **L'estensione non e' piu' un fallback: e' IL PERCORSO NORMALE della
+mitosi.** Chiamarla «fallback» avrebbe fatto leggere come difetto il comportamento **corretto** —
+ed e' esattamente l'errore che avevo gia' fatto scrivendo il criterio di N3b, che avrebbe prodotto
+un **FAIL falso**.
+
+### 9.12.3 — CORREZIONE ② : il fattore `cs^-2` nell'inerzia
+
+`inerzia = max(rho, 1e-6)` **non aveva alcuna dipendenza da `cs`**. La derivazione la impone
+(`doc/INERZIA_tempo_quadro.md`, esito **(b)**): `correzione` e' adimensionale e `omega` e' `1/T`,
+quindi `correzione/inerzia` deve dare `1/T^2` -> **`inerzia` e' un TEMPO AL QUADRATO**, e il tempo
+proprio del nodo e' `d/cs` -> **`inerzia ∝ (d/cs)^2 ∝ cs^-2`**.
+**Esponente DERIVATO, verso CONFERMATO** (Compton con `c -> cs`), e **lo stesso esponente dello
+Step 2** (`omega_clk *= (cs/CS_M)^2`), derivato **prima e indipendentemente**: consistenza
+**trovata**, non costruita.
+
+**Forma:** `inerzia = max(rho * (CS_M/cs_nodo)^2, 1e-6)`. Adimensionale, **esattamente 1** dove
+`cs = CS_M`. Nessun coefficiente nuovo, nessun floor nuovo; `cs_nodo` dalla cache
+`_cs_nodo_prev` col fallback **contato** (P5).
+
+**Perche' e' una correzione di CONSERVAZIONE:** alla mitosi il figlio riceve un'inerzia nuova e il
+padre non ne perde, quindi **`L_tot = somma(I*omega)` cresce a ogni divisione**. `omega` e'
+intensiva — un corpo rigido che si spezza mantiene `omega` in ogni frammento — quindi **e'
+l'inerzia che deve ripartirsi, e non lo fa**. Con `inerzia ∝ cs^-2` la nascita di un figlio alza
+la densita' locale, abbassa `cs` locale, e **l'inerzia di padre e figlio aumenta insieme**: un
+feedback **mediato dal campo**, che non richiede di sottrarre nulla al padre — cosa peraltro
+impossibile, perche' `|psi|^2` e' **ricalcolata dalle fasi**, non e' una variabile di stato.
+
+**Una scelta di struttura, dichiarata:** la lettura di `_cs_nodo_prev` e' scritta **inline** e non
+estratta in un metodo, benche' gemella di quella in `_tempo_luce_nodo`. **Duplicazione
+consapevole:** oggi **tre sigilli si sono rotti** perche' un metodo estratto non era nei gusci
+in-process. Il commento marca i due punti come da tenere allineati.
+
+### 9.12.4 — ✅ `M2`, IL SIGILLO DECISIVO: **PASS**
+
+> `(CS_M/cs_nodo)^2` vale **esattamente 1** dove `cs = CS_M`, e **`rho * 1.0 == rho` bit per bit**
+> in IEEE. Quindi **senza `--cs-dinamico`** (cache mai scritta -> fallback a `CS_M`) il codice
+> NUOVO **deve** essere byte-identico al riferimento. Se non lo fosse, **la FORMA del fattore
+> sarebbe sbagliata**, e ci si ferma li'.
+
+```
+M2   nodi PRE = 3070, POST = 3070      <- il confronto ESISTE (le shape PRIMA dello zero)
+     34 array numerici confrontati
+     max|A-B| = 0.000e+00              array divergenti: 0          PASS
+M2b  con --cs-dinamico: 3020 contro 3101 nodi, 35 array divergenti  PASS (il fattore MORDE)
+```
+
+**`M2b` e' il controllo opposto e serve tanto quanto `M2`:** senza, `M2` passerebbe anche su un
+fattore **inerte**, cioe' su codice morto.
+
+### 9.12.5 — E IL NUMERO CHE IL MANDATO CHIEDEVA DI DICHIARARE PRIMA
+
+| | |
+|---|---|
+| `cs` | `[1.994899, 2.000000]` |
+| `cs_std / cs` | **0.0333 %** |
+| fattore `(CS_M/cs)^2`, **mediana** | **1.000004812** |
+| scarto **massimo** da 1 | **5.1e-03** |
+
+> **L'attesa scritta prima e' confermata:** il fattore vale **1.0000048** sul nodo mediano.
+> **L'effetto quantitativo OGGI e' minuscolo**, esattamente come dichiarato nel commit **prima** di
+> guardare i dati. **La correzione si e' fatta perche' senza la legge e' SBAGLIATA**, non per un
+> effetto misurabile a questa densita'.
+
+**E una precisazione che va fatta, perche' il numero non e' nessuno dei due gia' citati:** il
+`cs_std/cs` misurato qui e' **0.033 %**, mentre C13 riporta **0.0086 %** al passo 50 e **0.24 %**
+al passo 500. Questi run sono a **150 passi**, e la traiettoria di quel rapporto e' **monotona
+crescente**: il valore sta **dentro** la forbice, ma **non e' nessuno dei due estremi**, e citarlo
+come se lo fosse sarebbe stato sbagliato.
+
+### 9.12.6 — IL SIGILLO E' ATTERRATO: **11/13 PASS, due FAIL — ed entrambi sono CRITERI MIEI SCADUTI**
+
+```
+[PASS] M0   riferimento = blob a467fd9a         444654 byte, 0 CRLF (sha1 dei BYTE GREZZI)
+[PASS] M0b  il codice corrente e' DIVERSO       c57800c1, 448943 byte, 0 CRLF
+[PASS] M0c  nessuno dei due ha CRLF             .gitattributes in vigore
+[PASS] M2.0 il confronto ESISTE                 nodi PRE 3070 = POST 3070
+[PASS] M2   cs = CS_M -> BYTE-IDENTICO          max|A-B| = 0.000e+00        <- IL DECISIVO
+[PASS] M2b  con cs VIVO il fattore MORDE        3020 contro 3101, 35 array divergenti
+[PASS] M1   PRIMA il rumore era CORRELATO       corr = +1.0000
+[FAIL] M1b  DOPO dev'essere INDIPENDENTE        corr = nan su 0 coppie
+[FAIL] M3   len(_xi_rumore) == n a ogni passo   estensioni 24, nodi con xi fresco 1734
+[PASS] M4   la conservazione e' calcolabile     (misura, non timbro)
+[PASS] M5a  |nb| = 1                            max||nb|-1| = 2.220e-16 su 3101 nodi
+[PASS] M5b  nessun NaN/inf                      tutti finiti
+[PASS] M5c  nessun runaway                      max|x| = 9.355
+                                                SIGILLO CORREZIONI: 11/13 -> FAIL
+```
+
+**`M1` da' `corr = +1.0000`, non il `+0.951` che avevo previsto**, e il motivo e' che misuro al
+**momento dell'eredita'**, prima che il passo successivo li faccia divergere: il difetto era
+**massimo**, non attenuato. **Meglio cosi' per il sigillo:** un controllo positivo piu' netto.
+
+**I DUE FAIL: VERIFICATI, non spiegati via.** Ho misurato invece di argomentare:
+
+| | |
+|---|---|
+| `len(xi)` **dopo `step()`** | **allineato**: 1608=1608, 1652=1652, 1703=1703, 1750=1750 |
+| `len(xi)` **dopo `mitosi()`** | **corto**: 1608 contro 1652, 1652 contro 1703, 1703 contro 1750 |
+
+**`M3` controllava a FINE passo, cioe' DOPO `mitosi()`** — dove l'array e' legittimamente corto,
+**perche' con la correzione ① l'estensione avviene dentro `_passo_spinoriale`**, che e' la **prima**
+cosa del passo dopo. **L'array non e' mai stale quando viene USATO**: chi lo usa lo estende prima.
+**Il criterio giusto e' «allineato dopo `step()`», e il mio era scritto per la versione EREDITATA.**
+
+**`M1b` dava `0 coppie` per la stessa ragione**: subito dopo la mitosi i figli **non hanno ancora**
+un `xi`, quindi non c'era niente da correlare. Misurato **uno step dopo**, su una scena vera:
+
+> ### **corr(xi_padre, xi_figlio) = +0.0065 su 258 coppie** — contro **+1.0000** prima della correzione.
+> **La correzione ① funziona.** Il rumore di padre e figlio e' indipendente.
+
+**Ma il sigillo resta FAIL finche' non lo rigiro con i criteri giusti**, e il fallimento e'
+committato com'e' (§5). **Un criterio scaduto che produce un FAIL falso costa piu' di un sigillo
+mancante**, perche' si porta dietro una diagnosi — ed e' la **seconda volta oggi** che scrivo un
+criterio per una versione del codice che nel frattempo e' cambiata (la prima fu `N3b`,
+«fallback <= 1»).
+
+### 9.12.7 — Dove eravamo rimasti coi test, e cosa resta
+
+**Il sigillo del rumore colorato era a 12/13 prima dello STOP:**
+> **`N7` E' VINTO** — `max|xi_mis - xi_atteso(dt_n)| = **0.000e+00**` nodo per nodo, contro
+> **`6.142e-01`** col `DT` nudo, `std(a)` fra i nodi `1.133e-02`. **Il tic della ricorsione E' il
+> tempo proprio del nodo.**
+
+L'unico FAIL era **`N2`**, e la causa era **mia, tre volte diverse**: alzare `CS_M` piantava il
+**CFL** (46 minuti al 68 % di CPU: *non falliva, si piantava*); abbassare `LAM` **spegneva il
+campo** (`Lam = 0` -> la guardia saltava l'intero blocco del rumore -> `n/d`); la via giusta —
+alzare `CS_M` **solo dentro `_passo_spinoriale`** — e' scritta ma non ancora eseguita.
+
+| | stato |
+|---|---|
+| `M1b` e `M3` coi criteri corretti | **da rigirare** (il difetto e' nel criterio, ed e' misurato) |
+| metriche §3 nell'osservatore (`L_tot`, `r` per eta', corr `xi`, fattore `cs`) | **da fare** |
+| campagna `{OFF, ON} x >= 2 semi` sul sistema corretto | **da rifare** |
+| `N2` del rumore colorato | **da rigirare** sul nuovo riferimento |
