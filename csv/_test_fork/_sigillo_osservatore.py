@@ -36,8 +36,12 @@ def verdetto(nome, ok, misura):
 
 
 def run(tag, extra=()):
+    # [2026-09-16] `--cs-dinamico` AGGIUNTO: senza, `_cs_nodo_prev` non viene MAI scritta, quindi
+    # la MISURA F (le pendenze t3, che leggono la cache via `_tempo_luce_nodo`) girerebbe sul ramo
+    # di FALLBACK e il sigillo certificherebbe un percorso DIVERSO da quello della campagna.
+    # E' esattamente il marchio che ha colpito il sigillo 23/23 dello STRATO 1 (CLAUDE.md par.9).
     cmd = [PY, DRV, "--seed", "1", "--passi", str(PASSI), "--ogni", "50",
-           "--tag", tag, "--outdir", HERE] + list(extra)
+           "--tag", tag, "--cs-dinamico", "--outdir", HERE] + list(extra)
     r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
     if r.returncode != 0:
         print(r.stdout[-1200:])

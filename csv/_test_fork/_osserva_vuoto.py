@@ -43,6 +43,33 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
 
+# [2026-09-16] RIUSO della ricostruzione GIA' SIGILLATA della catena di omega (MISURA F piu' sotto).
+# Import per path: il file inizia con un underscore e non e' un pacchetto. L'import e' SICURO —
+# `_tracing_omega.py` a livello di modulo definisce soltanto, non esegue nulla (verificato).
+import importlib.util as _ilu
+_spec = _ilu.spec_from_file_location("_trac_omega", os.path.join(HERE, "_tracing_omega.py"))
+_TRAC = _ilu.module_from_spec(_spec)
+_spec.loader.exec_module(_TRAC)
+
+
+def _pend_se(x, y):
+    """Pendenza d(log y)/d(log x) fra NODI, con la sua SE. Stessa formula di `_rimisura_t3.py`.
+
+    NB (CLAUDE.md par.9): questa `SE` e' INTERNA AL RUN. Per confrontare due BRACCI si usa la
+    dispersione FRA SEMI (~0.03), non questa (~0.01). Si scrive comunque perche' dice quanto e'
+    determinata la pendenza DI QUESTO run, che e' un'informazione diversa e serve lo stesso."""
+    x = np.asarray(x, float); y = np.asarray(y, float)
+    ok = np.isfinite(x) & np.isfinite(y) & (x > 0) & (y > 0)
+    if int(ok.sum()) < 50:
+        return float("nan"), float("nan"), float("nan"), int(ok.sum())
+    lx, ly = np.log(x[ok]), np.log(y[ok])
+    b = float(np.polyfit(lx, ly, 1)[0])
+    rr = float(np.corrcoef(lx, ly)[0, 1])
+    n = int(ok.sum())
+    se = abs(b / rr) * np.sqrt((1 - rr * rr) / (n - 2)) if abs(rr) > 1e-12 else float("nan")
+    return b, float(se), rr * rr, n
+
+
 
 def main():
     ap = argparse.ArgumentParser()
@@ -336,6 +363,57 @@ def main():
                 r["ac%d_n" % b] = 0
                 r["ac%d_d" % b] = r["ac%d" % b] = r["ac%d_se" % b] = float("nan")
 
+        # ---- MISURA F: LE TRE PENDENZE TRASVERSALI, NELLO STESSO RUN (voce R del registro) ----
+        # PERCHE': l'attesa `-0.69` del divario T3 e' calcolata con il `sigma` del braccio VECCHIO
+        # (-1.078), ma l'anello `tau -> omega -> phi -> psi -> inerzia -> sigma` mette `sigma` A
+        # VALLE di `tau`: se cambiando `tau` cambia anche `sigma`, l'attesa va RICALCOLATA col
+        # `sigma` DI QUEL BRACCIO. Non propone un colpevole nuovo: mette in dubbio il BERSAGLIO.
+        # (`doc/RAMIFICAZIONI.md` D.2/R, marcata «va provata PER PRIMA».)
+        #
+        # NON si ricostruisce la catena qui: si RIUSA `_tracing_omega.ingredienti`, che e' gia'
+        # sigillato pure-read (copia profonda + restore dell'RNG) e che gia' contiene il termine
+        # `cross(_nb_grav(), nb)` la cui OMISSIONE fu l'errore del 2026-09-15. Duplicare la
+        # ricostruzione qui significherebbe riesporsi allo stesso errore.
+        # VALIDO SOLO SE `SPIN_LARMOR` e `TW_SPINORE` sono spenti (la ricostruzione non contiene
+        # `Bg` ne' `_otw`): per questo entrambi finiscono nel CSV, e l'analisi li deve leggere.
+        r["SPIN_LARMOR"] = int(getattr(S, "SPIN_LARMOR", False))
+        r["TW_SPINORE"] = int(getattr(S, "TW_SPINORE", False))
+        try:
+            g = _TRAC.ingredienti(S, net)
+            inz = np.asarray(g["inerzia"], float)
+            sig = np.asarray(g["coppia_su_in"], float)          # |correzione| / inerzia
+            # il `tau` CHE IL RUN USA DAVVERO, non quello di default:
+            tau_eff = np.asarray(g["tau_luce"] if int(r["TAU_LUCE"]) else g["tau"], float)
+            om_src = np.asarray(g["om_src"], float)
+            dtn_g = np.asarray(g["dtn"], float)
+            th_g = np.degrees(om_src * dtn_g)
+            # si esclude il PAVIMENTO dell'inerzia: li' l'ascissa e' COSTANTE per costruzione
+            # (una regressione su un'ascissa costante non e' una pendenza). STESSA soglia di
+            # `_rimisura_t3.py` — `rho > 1.0000001e-6` — e non `~pavimento`: un nodo con
+            # `rho == 1e-6` esatto non e' marcato pavimento ma ha comunque `inerzia` al floor.
+            liberi = inz > 1.0000001e-6
+            for nome, y in (("sigma", sig), ("tau", tau_eff), ("theta", th_g)):
+                b, se, r2, nn = _pend_se(inz[liberi], y[liberi])
+                r["t3_b_%s" % nome] = b
+                r["t3_se_%s" % nome] = se
+                r["t3_r2_%s" % nome] = r2
+                r["t3_n_%s" % nome] = nn
+            # LA CATENA: theta = sigma + tau/2 (equilibrio del random walk smorzato,
+            # |omega|_eq = |F|*sqrt(dt_n*tau/2) -> CLAUDE.md par.9)
+            r["t3_attesa"] = r["t3_b_sigma"] + 0.5 * r["t3_b_tau"]
+            r["t3_divario"] = r["t3_b_theta"] - r["t3_attesa"]
+            r["t3_n_liberi"] = int(liberi.sum())
+            r["t3_ok"] = 1
+        except Exception as _e:                      # P5: un fallback si CONTA, non si subisce
+            stato["t3_fail"] = stato.get("t3_fail", 0) + 1
+            stato["t3_perche"] = "%s: %s" % (type(_e).__name__, _e)
+            for nome in ("sigma", "tau", "theta"):
+                r["t3_b_%s" % nome] = r["t3_se_%s" % nome] = r["t3_r2_%s" % nome] = float("nan")
+                r["t3_n_%s" % nome] = 0
+            r["t3_attesa"] = r["t3_divario"] = float("nan")
+            r["t3_n_liberi"] = 0
+            r["t3_ok"] = 0
+
         # La riga e' COMPLETA solo qui: flag e cs_* sono appena stati aggiunti. Scrivere prima
         # troncherebbe il CSV proprio sulle colonne di verifica (errore fatto e corretto il
         # 2026-09-14: il primo tentativo scriveva dopo `nan_psi`, e STEP2/cs_* sparivano).
@@ -370,6 +448,9 @@ def main():
         # NON si riscrive il file: ogni campione e' gia' stato scritto da `_scrivi_incrementale`
         # mano a mano. Riscriverlo qui vanificherebbe la troncabilita' (un run ucciso perderebbe
         # tutto, che e' esattamente il difetto corretto).
+        print("[osserva] MISURA F (pendenze t3): %d campioni FALLITI su %d   %s"
+              % (stato.get("t3_fail", 0), len(righe),
+                 stato.get("t3_perche", "")), flush=True)
         print("[osserva] %d campioni -> %s (scritti incrementalmente)"
               % (len(righe), base + ".vuoto.csv"), flush=True)
 
