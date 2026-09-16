@@ -314,17 +314,29 @@ for _ in range(25):
         if not (cc > 0.5):
             ok_testa = False
     fresh_tot += int(getattr(net3, "_xi_nuovi", 0)) - nuovi_pre
-    nati_tot += max(net3.n - n_pre, 0)
+    n_prima_mitosi = net3.n
     net3.mitosi(); net3.rilassa_disegno(); net3.memoria_hebbiana_moto()
+    # I NODI NASCONO QUI, in `mitosi()`, NON in `step()`. La prima versione di questo criterio
+    # contava `net3.n - n_pre` DOPO `step()`, che e' ZERO PER COSTRUZIONE, e diceva «nodi nati 0»
+    # — un numero impossibile, che era il segnale che l'errore fosse nel criterio.
+    # E c'e' uno SFASAMENTO DI UN GIRO: chi nasce nella mitosi del giro k riceve il suo `xi` nello
+    # `step()` del giro k+1. Verificato: freschi[k] == nati[k-1] per ogni k, e la differenza finale
+    # e' ESATTAMENTE l'ultima nidiata, che non ha ancora avuto il suo turno.
+    nati_tot += max(net3.n - n_prima_mitosi, 0)
+    nati_ultima = max(net3.n - n_prima_mitosi, 0)
 verdetto("M3 len(_xi_rumore) == n DOPO step() (cioe' quando viene USATO)", ok_dopo_step,
          "25 passi, n finale %d;  estensioni %s, chiamate %s"
          % (net3.n, getattr(net3, "_xi_esteso", "n/d"), getattr(net3, "_xi_chiamate", "n/d")))
 verdetto("M3b l'estensione NON tocca la TESTA (i nodi esistenti conservano xi)", ok_testa,
          "corr(xi_prima, xi_dopo) sui nodi gia' presenti > 0.5 a ogni passo: la ricorsione lo fa")
-verdetto("M3c `_xi_nuovi` == numero di nodi NATI (contatore verificabile, P5)",
-         fresh_tot == nati_tot,
-         "xi freschi assegnati %d, nodi nati %d  -> %s"
-         % (fresh_tot, nati_tot, "coincidono" if fresh_tot == nati_tot else "NON coincidono"))
+# LO SFASAMENTO E' PARTE DEL CRITERIO, non una tolleranza: i freschi devono valere i nati MENO
+# l'ultima nidiata, che ricevera' il suo `xi` al giro dopo. Se non tornasse ESATTAMENTE, il
+# contatore mentirebbe.
+verdetto("M3c `_xi_nuovi` == nodi NATI meno l'ultima nidiata (sfasamento di un giro)",
+         fresh_tot == nati_tot - nati_ultima,
+         "xi freschi %d;  nati %d;  ultima nidiata %d (non ancora servita);  %d - %d = %d  -> %s"
+         % (fresh_tot, nati_tot, nati_ultima, nati_tot, nati_ultima, nati_tot - nati_ultima,
+            "COINCIDONO ESATTAMENTE" if fresh_tot == nati_tot - nati_ultima else "NON coincidono"))
 
 print("  M4 — CONSERVAZIONE: `L_tot = somma(inerzia * |omega|)` e il suo salto per mitosi")
 print("     E' il test di conservazione MAI FATTO. Se L cresce col numero di nodi, la violazione")

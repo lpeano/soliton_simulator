@@ -589,6 +589,26 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   concordano entro 0.055. Il corollario resta una **buona prudenza** (un campione ridotto ha `SE`
   piu' grande, e infatti 20 nodi danno `SE = 0.108` contro 0.0097), ma **non era la causa di quel
   caso**, e citarlo come tale era un errore.
+- **PRESIDIO — UN CRITERIO DI SIGILLO SI SCRIVE DA UNA MISURA, NON DAL PROPRIO MODELLO MENTALE
+  DEL CODICE** (2026-09-16, dopo **tre** casi nello stesso giorno). Prima di fissare la soglia o
+  la coppia di grandezze che un sigillo confronta, **si misura cosa fa davvero il codice** nel
+  punto in cui il criterio guarda. Costa meno della spiegazione che si darebbe senza.
+  **I TRE CASI, e la forma e' sempre la stessa:**
+  * **`N3b`** — *«il ramo di fallback scatta <= 1 volta»* **in assoluto**: ma l'estensione su
+    `semina()`/`nuova_massa()` e' **legittima** (voce **H**), quindi il criterio avrebbe prodotto
+    un **FAIL su un comportamento corretto**;
+  * **`M1b`/`M3`** — misurati **nel momento sbagliato**: subito dopo `mitosi()`, dove i figli
+    **non hanno ancora** un `xi` e l'array e' **legittimamente corto**, perche' l'estensione
+    avviene dentro `_passo_spinoriale`, cioe' all'inizio del passo **dopo**;
+  * **`M3c`** — confrontato con la **coppia sbagliata**: la crescita attraverso `step()`, che e'
+    **zero per costruzione** (i nodi nascono in `mitosi()`), contro i nodi nati. Stampava
+    **«nodi nati 0»**, e un numero **impossibile** e' il modo in cui un criterio sbagliato si
+    denuncia da solo.
+  **UN CRITERIO SCADUTO CHE PRODUCE UN FAIL FALSO COSTA PIU' DI UN SIGILLO MANCANTE**, perche' si
+  porta dietro **una diagnosi**: chi legge il FAIL cerca il difetto nel codice, e il difetto non
+  c'e'. **E la soglia si deriva dal VALORE SOTTO IPOTESI NULLA, non si sceglie:** `|corr| < 0.15`
+  era inventato; il nullo della correlazione campionaria di variabili indipendenti e'
+  `sigma ~ 1/sqrt(3N)`, che su 110 coppie da' `3 sigma = 0.165`.
 - **PRESIDIO — OGNI RAMO `else` / FALLBACK / `getattr(..., default)` SU UN PERCORSO FISICO VA
   STRUMENTATO CON UN CONTATORE: quante volte e' scattato?** Un fallback mai misurato e' un
   comportamento **sconosciuto**, e uno che scatta il 72% delle volte **non e' un fallback, e' il
