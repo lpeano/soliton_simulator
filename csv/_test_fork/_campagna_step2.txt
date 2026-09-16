@@ -1,0 +1,19 @@
+============================================================================================
+CAMPAGNA STEP 2 -- 8 run (4 semi x 2 bracci), 500 passi, campione ogni 50
+  braccio ON  : DEFAULT (nessun flag: dal 2026-09-16 l'assenza significa ACCESO)
+  braccio OFF : --senza-step2
+  comune      : --cs-dinamico
+  concorrenza : 4 run per volta
+============================================================================================
+[avvio ] s2ON   seme 1   (0.0 min dall'inizio)
+[avvio ] s2ON   seme 2   (0.0 min dall'inizio)
+[avvio ] s2ON   seme 3   (0.0 min dall'inizio)
+[avvio ] s2ON   seme 4   (0.0 min dall'inizio)
+[FINE  ] s2ON   seme 2   rc=0   durata 23.8 min   (23.8 min dall'inizio)
+[avvio ] s2OFF  seme 1   (23.8 min dall'inizio)
+[FINE  ] s2ON   seme 4   rc=0   durata 26.4 min   (26.4 min dall'inizio)
+[avvio ] s2OFF  seme 2   (26.4 min dall'inizio)
+[FINE  ] s2ON   seme 1   rc=0   durata 26.7 min   (26.7 min dall'inizio)
+[FINE  ] s2ON   seme 3   rc=0   durata 26.7 min   (26.7 min dall'inizio)
+[avvio ] s2OFF  seme 3   (26.7 min dall'inizio)
+[avvio ] s2OFF  seme 4   (26.7 min dall'inizio)

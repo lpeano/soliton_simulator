@@ -1,0 +1,108 @@
+========================================================================================================
+LETTURA DEL BRACCIO 's2ON' -- 4 semi, barra FRA SEMI con t(3) = 3.182
+  blob a44adc31   STEP2=1  TW_SPINORE=0  TAU_LUCE=0  CS_DIN=1  FORK_SU2=1/1  passo 500
+  semi: [1, 2, 3, 4]   nodi a fine run: [3476, 2893, 3619, 3272]
+========================================================================================================
+
+### 1. SPIN -- quanto ruota lo spinore in un passo (il settore e' RISOLTO o ALIASATO?)
+--------------------------------------------------------------------------------------------------------
+  theta COORD, giri/passo (mediana)   123.3  +- 12.24
+  theta PROPRIO, giri/passo (mediana)  97.8  +- 6.956
+  frazione nodi OLTRE il giro intero  0.9911  +- 0.0153
+  frazione nodi oltre 30 gradi        0.9993  +- 0.0013
+  > Il criterio di risoluzione NON e' statistico: >1 giro/passo = ALIASING (par.4).
+
+  |omega_s| mediana                   7.749e+04  +- 7690
+  omega / sqrt(n_passi)  [random walk]  1347  +- 48.26
+  inerzia mediana (floor = 1e-6)      3.359e-06  +- 6.452e-07
+  Lam (energia del vuoto)             0.01114  +- 0.003619
+  L_tot = somma(I*|omega|)            2.697e+04  +- 1.44e+04
+
+  -- LE PENDENZE TRASVERSALI (l'ESITO (I) del tracing: attesa -1.056) --
+  pendenza(theta) vs inerzia          -0.0221  +- 0.0451   | nullo -1.0560   FUORI dall'IC95
+  pendenza(sigma = coppia/inerzia)    -1.0555  +- 0.0023
+  pendenza(tau)                       1.7557  +- 0.1949
+  pendenza(r)  [assunta ZERO finora]  0.0610  +- 0.0339   | nullo 0.0000   FUORI dall'IC95
+  divario attesa - misurata           0.1556  +- 0.1009   | nullo 0.0000   FUORI dall'IC95
+  identita' prop - coord - r (deve essere 0)  -1.926e-16  +- 4.475e-16   | nullo 0.000e+00   compatibile
+
+  -- DINAMICA nel tempo (passo 50 / 150 / 300 / 500) --
+                                      p50           p150          p300          p500        
+  theta giri/passo                    56.36         87.48         98.72         97.8        
+  |omega_s| mediana                   4.446e+04     7.219e+04     7.902e+04     7.749e+04   
+  inerzia mediana                     1e-06         1e-06         1.315e-06     3.359e-06   
+  Lam                                 1.373e-05     0.0002429     0.001289      0.01114     
+  L_tot                               96.55         787.2         6396          2.697e+04   
+  pendenza(theta)                     -             0.1392        0.01801       -0.02211    
+  n nodi                              2018          2715          2985          3315        
+
+
+### 2. U(1) / EM -- il settore che lo Step 2 TOCCA (la FASE, non il Bloch)
+--------------------------------------------------------------------------------------------------------
+  |Re<canon|psi>| media               0.4254  +- 0.0105   | nullo 0.4244   compatibile
+  coerenza di SEGNO d'arco (tutti)    0.0010  +- 0.0035   | nullo 0.0000   compatibile
+    ... solo archi MATERIA-MATERIA    0.0021  +- 0.0065   | nullo 0.0000   compatibile
+    ... strato materia (I2 > Lam)     0.0010  +- 0.0033   | nullo 0.0000   compatibile
+    ... strato vuoto (I2 <= Lam)      -0.0027  +- 0.0715   | nullo 0.0000   compatibile
+    ... strato p90 (il piu' denso)    -0.0017  +- 0.0056   | nullo 0.0000   compatibile
+  coerenza VERSO d'arco [nullo NON verificato]  0.8438  +- 0.0815   | nullo 0.0000   FUORI dall'IC95
+  n archi materia-materia             55350.5  +- 4039.4
+
+  spin overlap d'arco (tutti)         0.4997  +- 0.0010   | nullo 0.5000   compatibile
+    ... strato materia                0.4997  +- 0.0010   | nullo 0.5000   compatibile
+    ... strato vuoto                  0.5040  +- 0.0528   | nullo 0.5000   compatibile
+    ... strato p90                    0.5003  +- 0.0019   | nullo 0.5000   compatibile
+
+  -- DINAMICA nel tempo --
+                                      p50           p150          p300          p500        
+  |Re<canon|psi>| (nullo 0.4244)      0.4372        0.4234        0.4252        0.4254      
+  coerenza segno (nullo 0)            -0.0009578    4.755e-05     -0.001316     0.0009837   
+    ... p90 (nullo 0)                 -0.001629     -0.001394     -0.001501     -0.001657   
+  spin overlap (nullo 0.5)            0.5006        0.5           0.4996        0.4997      
+  coerenza verso (nullo IGNOTO)       0.5637        0.5857        0.6672        0.8438      
+
+
+### 3. nb / BLOCH -- la direzione di spin. Nullo: chi = 90.000 +- 39.171 gradi
+--------------------------------------------------------------------------------------------------------
+  chi medio [TUTTI]                   90.0446  +- 0.1284   | nullo 90.0000   compatibile
+  chi medio [MATERIA]                 90.0431  +- 0.1249   | nullo 90.0000   compatibile
+  chi medio [VUOTO]                   90.2717  +- 4.2288   | nullo 90.0000   compatibile
+  chi medio [p90 (denso)]             89.9669  +- 0.2243   | nullo 90.0000   compatibile
+  chi medio [p10 (rarefatto)]         92.2266  +- 23.0469   | nullo 90.0000   compatibile
+
+  chi std [TUTTI]                     39.1749  +- 0.0788   | nullo 39.1710   compatibile
+  chi std [MATERIA]                   39.1727  +- 0.0816   | nullo 39.1710   compatibile
+  chi std [p90]                       39.1331  +- 0.0460   | nullo 39.1710   compatibile
+
+  frazione chi < 10 gradi [TUTTI]     0.00751  +- 0.00037   | nullo 0.00760   compatibile
+  frazione chi < 10 gradi [MATERIA]   0.00752  +- 0.00034   | nullo 0.00760   compatibile
+  frazione chi < 10 gradi [p90]       0.00771  +- 0.00056   | nullo 0.00760   compatibile
+
+  -- |<n>| : il Bloch MEDIO. Il nullo NON e' zero: e' il valore di N versori CASUALI --
+  |<n>| [TUTTI]                       0.0173 +- 0.0194   | atteso(casuale) 0.0174  sigma 0.9728  ->  z = -0.00   (N=3315)
+  |<n>| [MATERIA]                     0.0197 +- 0.0146   | atteso(casuale) 0.0299  sigma 0.6574  ->  z = -0.02   (N=1116)
+  |<n>| [VUOTO]                       0.0242 +- 0.0193   | atteso(casuale) 0.0215  sigma 1.1031  ->  z = +0.00   (N=2199)
+  |<n>| [p90]                         0.0597 +- 0.0189   | atteso(casuale) 0.0550  sigma 1.0848  ->  z = +0.00   (N=332)
+  |<n>| [p10]                         0.0568 +- 0.0290   | atteso(casuale) 0.0550  sigma 1.0259  ->  z = +0.00   (N=332)
+  > z e' in unita' della sigma ATTESA per N versori casuali, non della barra fra semi.
+
+  -- DINAMICA nel tempo --
+                                      p50           p150          p300          p500        
+  chi medio TUTTI (nullo 90)          89.95         90            90.05         90.04       
+  chi medio MATERIA (nullo 90)        89.93         89.98         90.05         90.04       
+  chi medio p90 (nullo 90)            89.83         90.03         90.05         89.97       
+  chi std (nullo 39.171)              39.23         39.19         39.17         39.17       
+  |<n>| TUTTI                         0.0205        0.02149       0.01442       0.01735     
+    atteso casuale                    0.02229       0.01926       0.01838       0.01741     
+
+
+### 4. CONTROLLI DI SANITA' e P4 (una grandezza ANCORATA non puo' muoversi)
+--------------------------------------------------------------------------------------------------------
+  r mediana [ANCORATA a 1 per costruzione]  1.000000  +- 0.000001   | nullo 1.000000   compatibile
+  r dispersione [questa SI muove]     0.4205  +- 0.0301
+  cs dispersione                      4.432e-03  +- 6.084e-04
+  max|fatt_cs - 1| (il fattore dello Step 2)  1.754e-02  +- 2.643e-03
+  frazione nodi con |fatt_cs-1| > 1%  0.10827  +- 0.04818
+  err norma |psi| (nullo = eps macchina)  3.886e-16  +- 1.020e-16   | nullo 2.220e-16   FUORI dall'IC95
+  NaN in psi                          0.0  +- 0.0   | nullo 0.0   compatibile
+========================================================================================================
