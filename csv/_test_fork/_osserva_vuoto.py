@@ -404,6 +404,28 @@ def main():
             r["t3_divario"] = r["t3_b_theta"] - r["t3_attesa"]
             r["t3_n_liberi"] = int(liberi.sum())
             r["t3_ok"] = 1
+            # ---- MISURA G: GLI INGREDIENTI DEL CONTO FDT, sul sistema PULITO -----------------
+            # Il conto che ha refutato Gilbert/FDT (`doc/ANALISI_gilbert_fdt.md`) e' stato fatto
+            # con la FASE 5 INERTE (C11) e senza `--cs-dinamico`: era una misura su un sistema
+            # DIVERSO da quello dichiarato, e va rifatto. Qui NON si rifa' il conto: si scrivono
+            # gli INGREDIENTI misurati, e il conto si fa nell'analisi, dove e' leggibile.
+            #   lambda = amp^2 * |B| / (2 * dt * kT)   con kT = Lam  (l'unica temperatura
+            #   parameter-free del sistema, quella da cui il rumore stesso e' costruito)
+            #   kT_equipartizione = I * <omega^2> / 3
+            # `Lam` e' gia' nella riga (colonna `Lam`), `DT` e' una costante del modulo.
+            _bm = np.asarray(g["Bm"], float); _amp = np.asarray(g["amp"], float)
+            for _nome, _v in (("B", _bm), ("amp", _amp), ("om", om_src),
+                              ("inerzia", inz), ("dtn", dtn_g)):
+                _f = _v[np.isfinite(_v)]
+                if _f.size:
+                    r["fdt_%s_mediana" % _nome] = float(np.median(_f))
+                    r["fdt_%s_p25" % _nome] = float(np.percentile(_f, 25))
+                    r["fdt_%s_p75" % _nome] = float(np.percentile(_f, 75))
+                else:
+                    r["fdt_%s_mediana" % _nome] = r["fdt_%s_p25" % _nome] =                         r["fdt_%s_p75" % _nome] = float("nan")
+            # <omega^2> serve alla equipartizione e NON e' il quadrato della mediana
+            r["fdt_om2_media"] = float(np.mean(om_src[np.isfinite(om_src)] ** 2))                 if np.any(np.isfinite(om_src)) else float("nan")
+            r["fdt_DT"] = float(S.DT)
         except Exception as _e:                      # P5: un fallback si CONTA, non si subisce
             stato["t3_fail"] = stato.get("t3_fail", 0) + 1
             stato["t3_perche"] = "%s: %s" % (type(_e).__name__, _e)
@@ -413,6 +435,10 @@ def main():
             r["t3_attesa"] = r["t3_divario"] = float("nan")
             r["t3_n_liberi"] = 0
             r["t3_ok"] = 0
+            for _nome in ("B", "amp", "om", "inerzia", "dtn"):
+                r["fdt_%s_mediana" % _nome] = r["fdt_%s_p25" % _nome] =                     r["fdt_%s_p75" % _nome] = float("nan")
+            r["fdt_om2_media"] = float("nan")
+            r["fdt_DT"] = float(S.DT)
 
         # La riga e' COMPLETA solo qui: flag e cs_* sono appena stati aggiunti. Scrivere prima
         # troncherebbe il CSV proprio sulle colonne di verifica (errore fatto e corretto il
