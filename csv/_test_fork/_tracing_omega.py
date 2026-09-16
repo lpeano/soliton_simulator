@@ -132,8 +132,21 @@ def _ingredienti(S, net):
 
     rs = getattr(lav, "rho_spin", None)
     rho = np.asarray(rs)[:n] if (rs is not None and len(rs) >= n) else np.abs(np.asarray(lav.psi[:n])) ** 2
-    inerzia = np.maximum(rho, 1e-6)
-    pavimento = rho < 1e-6
+    # [AGGIORNATO 2026-09-16] IL FATTORE `cs^-2`. Dalla correzione di difetto di oggi il simulatore
+    # calcola `inerzia = max(rho * (CS_M/cs_nodo)^2, 1e-6)`: la derivazione `inerzia = (d/cs)^2`
+    # lo impone. SENZA QUESTA RIGA la ricostruzione userebbe l'inerzia VECCHIA, e `sigma =
+    # |correzione|/inerzia` sarebbe la pendenza di un sistema che non esiste piu'.
+    # E' ESATTAMENTE il rischio che avevo dichiarato scegliendo di scrivere la lettura di `cs`
+    # INLINE invece che in un metodo condiviso: due punti da tenere allineati a mano, e questo
+    # e' il secondo. Se un giorno la legge di `cs` cambia, cambiano ENTRAMBI.
+    _csp_in = getattr(lav, "_cs_nodo_prev", None)
+    if _csp_in is not None and len(_csp_in) >= n:
+        _cs_in = np.maximum(np.asarray(_csp_in, float)[:n], 1e-12)
+    else:
+        _cs_in = np.full(n, S.CS_M)
+    fatt_cs = (S.CS_M / _cs_in) ** 2
+    inerzia = np.maximum(rho * fatt_cs, 1e-6)
+    pavimento = (rho * fatt_cs) < 1e-6
 
     # ATTENZIONE — `correzione` ha DUE termini, non uno (righe 1895-1901):
     #     correzione = cross(B, nb)
@@ -187,7 +200,8 @@ def _ingredienti(S, net):
     err_att = amp * np.sqrt(2.0) / np.maximum(sin_ang, 1e-12)
     return dict(n=n, inerzia=inerzia, pavimento=pavimento, Bm=Bm, kvic=kvic, ang=ang,
                 corm=corm, coppia_su_in=coppia_su_in, tau=tau, om_src=om_src, diss=diss,
-                amp=amp, eta=np.asarray(lav.eta[:n], float),
+                amp=amp, eta=np.asarray(lav.eta[:n], float), fatt_cs=fatt_cs,
+                cs_nodo_in=_cs_in, rho=rho,
                 om_vec=om_vec, det_vec=det_vec, dtn=dtn, err_att=err_att,
                 d_nodo=d_nodo, cs_nodo=cs_nodo, tau_luce=tau_luce)
 

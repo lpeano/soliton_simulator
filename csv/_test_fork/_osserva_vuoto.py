@@ -265,10 +265,31 @@ def main():
         passo 500 non c'era nulla da guardare: o si aspettavano tutti i 2000 passi (2.8 ore), o si
         uccideva il run perdendo tutto. Difetto di progetto, corretto qui.
         Costo: una riga di CSV per campione (cioe' ogni `--ogni` passi). Irrilevante."""
+        # [DIFETTO CURATO 2026-09-16] LE COLONNE SI DISALLINEAVANO IN SILENZIO.
+        # `DictWriter` veniva costruito A OGNI CHIAMATA con `fieldnames = list(r.keys())`, cioe'
+        # con l'ordine della RIGA CORRENTE, mentre l'intestazione era stata scritta UNA VOLTA con
+        # l'ordine della PRIMA riga. Se un blocco di misura inserisce le sue chiavi in un ORDINE
+        # DIVERSO fra il ramo `if` e il ramo `else` — e la prima riga prende quasi sempre il ramo
+        # `else`, perche' a passo 1 il sistema e' immaturo — tutte le righe successive finiscono
+        # SFASATE rispetto all'intestazione.
+        # MISURATO: `L_n_passi_con_mitosi` (un CONTEGGIO) valeva `0.513`, e
+        # `L_dL_senza_mitosi_mediana` (una FRAZIONE) valeva `18`. Due valori scambiati di posto.
+        # CURA: le `fieldnames` si fissano UNA VOLTA, dalla prima riga, e si riusano; e ogni riga
+        # successiva deve avere ESATTAMENTE lo stesso insieme di chiavi, altrimenti si ALZA un
+        # errore invece di scrivere un CSV che sembra a posto.
         out = base + ".vuoto.csv"
         modo = "a" if stato["hdr"] else "w"
+        if not stato["hdr"]:
+            stato["campi"] = list(r.keys())
+        else:
+            _manca = set(stato["campi"]) - set(r.keys())
+            _extra = set(r.keys()) - set(stato["campi"])
+            if _manca or _extra:
+                raise RuntimeError(
+                    "CSV: l'insieme delle colonne e' cambiato fra i campioni. "
+                    "MANCANTI: %s   IN PIU': %s" % (sorted(_manca)[:8], sorted(_extra)[:8]))
         with open(out, modo, newline="") as f:
-            wcsv = _csv.DictWriter(f, fieldnames=list(r.keys()))
+            wcsv = _csv.DictWriter(f, fieldnames=stato["campi"])
             if not stato["hdr"]:
                 wcsv.writeheader()
                 stato["hdr"] = True
@@ -453,6 +474,94 @@ def main():
             for k in ("r_std", "r_iqr", "r_p05", "r_p95", "r_min", "r_max", "r_mediana"):
                 r[k] = float("nan")
 
+        # ---- MISURA H: CONSERVAZIONE, `r` PER ETA', e il FATTORE `cs^-2` --------------------
+        # (1) `L_tot = somma(inerzia*|omega|)`: LA QUANTITA' CHE DOVREBBE CONSERVARSI, e il suo
+        #     SALTO attraverso le mitosi. Misurato per la prima volta il 2026-09-16 (voce C20):
+        #     cresce del ~3.4 % a ogni passo con crescita. Qui entra nella campagna, non solo nel
+        #     sigillo, cosi' il numero ha una barra FRA SEMI e non una sola scena.
+        if len(serie_L) >= 2:
+            _pa = np.array([x[0] for x in serie_L], float)
+            _nn = np.array([x[1] for x in serie_L], float)
+            _LL = np.array([x[2] for x in serie_L], float)
+            r["L_tot"] = float(_LL[-1])
+            r["L_fatt_cs_mediana"] = float(serie_L[-1][3])
+            r["L_fatt_cs_scarto_max"] = float(serie_L[-1][4])
+            _d = np.diff(_LL) / np.maximum(_LL[:-1], 1e-300)
+            _cresce = np.diff(_nn) > 0
+            _ok = np.isfinite(_d)
+            r["L_dL_su_L_mediana"] = float(np.median(_d[_ok])) if _ok.any() else float("nan")
+            _m = _ok & _cresce
+            r["L_dL_con_mitosi_mediana"] = float(np.median(_d[_m])) if _m.any() else float("nan")
+            r["L_dL_con_mitosi_media"] = float(np.mean(_d[_m])) if _m.any() else float("nan")
+            r["L_n_passi_con_mitosi"] = int(_m.sum())
+            _s = _ok & (~_cresce)
+            r["L_dL_senza_mitosi_mediana"] = float(np.median(_d[_s])) if _s.any() else float("nan")
+            r["L_n_passi_senza_mitosi"] = int(_s.sum())
+            r["L_nodi_nati"] = int(np.sum(np.maximum(np.diff(_nn), 0)))
+        else:
+            for k in ("L_tot", "L_fatt_cs_mediana", "L_fatt_cs_scarto_max", "L_dL_su_L_mediana",
+                      "L_dL_con_mitosi_mediana", "L_dL_con_mitosi_media", "L_dL_senza_mitosi_mediana"):
+                r[k] = float("nan")
+            r["L_n_passi_con_mitosi"] = r["L_n_passi_senza_mitosi"] = r["L_nodi_nati"] = 0
+
+        # (2) IL FATTORE `(CS_M/cs)^2` in questo istante: distribuzione, e QUANTO SI DISCOSTA DA 1.
+        #     E' il numero che dice se la correzione `cs^-2` ha un effetto in questo regime, e in
+        #     particolare se un run col TURBO ha davvero svegliato `cs` (se resta ~1, il test e' NULLO).
+        _csn = getattr(net, "_cs_nodo_prev", None)
+        if _csn is not None and len(_csn) >= n:
+            _c = np.maximum(np.asarray(_csn, float)[:n], 1e-12)
+            _f = (S.CS_M / _c) ** 2
+            r["fatt_cs_mediana"] = float(np.median(_f))
+            r["fatt_cs_media"] = float(np.mean(_f))
+            r["fatt_cs_min"] = float(np.min(_f)); r["fatt_cs_max"] = float(np.max(_f))
+            r["fatt_cs_p90"] = float(np.percentile(_f, 90))
+            r["fatt_cs_scarto_max"] = float(np.max(np.abs(_f - 1.0)))
+            r["fatt_cs_frac_oltre_1pc"] = float(np.mean(np.abs(_f - 1.0) > 0.01))
+        else:
+            for k in ("fatt_cs_mediana", "fatt_cs_media", "fatt_cs_min", "fatt_cs_max",
+                      "fatt_cs_p90", "fatt_cs_scarto_max", "fatt_cs_frac_oltre_1pc"):
+                r[k] = float("nan")
+
+        # (3) `r` STRATIFICATO PER ETA'. Oggi c'e' solo la dispersione sulla popolazione INTERA.
+        #     Serve alla domanda aperta: il figlio eredita `_psi_prec` dal padre, quindi il suo
+        #     PRIMO `r` confronta la propria fase con quella del PADRE. `eta` parte da zero ma
+        #     l'orologio no: il figlio e' «nato ora» per l'eta' e «in corsa da sempre» per la fase.
+        _eta = getattr(net, "eta", None)
+        if rv is not None and len(rv) >= n and _eta is not None and len(_eta) >= n:
+            _e = np.asarray(_eta, float)[:n]
+            _rr = np.asarray(rv, float)[:n]
+            _q = np.percentile(_e, [25, 50, 75])
+            for _et, _sel in (("q1", _e <= _q[0]), ("q2", (_e > _q[0]) & (_e <= _q[1])),
+                              ("q3", (_e > _q[1]) & (_e <= _q[2])), ("q4", _e > _q[2])):
+                if _sel.any():
+                    r["r_eta_%s_mediana" % _et] = float(np.median(_rr[_sel]))
+                    r["r_eta_%s_std" % _et] = float(np.std(_rr[_sel]))
+                    r["r_eta_%s_n" % _et] = int(_sel.sum())
+                else:
+                    r["r_eta_%s_mediana" % _et] = r["r_eta_%s_std" % _et] = float("nan")
+                    r["r_eta_%s_n" % _et] = 0
+            _giov = _e <= (2.0 * S.DT)          # «appena nati»: meno di due tic di coordinata
+            r["r_eta_neonati_mediana"] = float(np.median(_rr[_giov])) if _giov.any() else float("nan")
+            r["r_eta_neonati_n"] = int(_giov.sum())
+            r["eta_mediana"] = float(np.median(_e))
+        else:
+            for _et in ("q1", "q2", "q3", "q4"):
+                r["r_eta_%s_mediana" % _et] = r["r_eta_%s_std" % _et] = float("nan")
+                r["r_eta_%s_n" % _et] = 0
+            r["r_eta_neonati_mediana"] = r["eta_mediana"] = float("nan")
+            r["r_eta_neonati_n"] = 0
+
+        # (4) `omega/sqrt(n)`: LA FIRMA che dice se il sistema e' ancora in regime di RANDOM WALK.
+        #     Oggi e' costante entro il 4.6 % (CLAUDE.md par.9) — ed e' cio' che prova il regime
+        #     diffusivo. Se smettesse di esserlo, la forzante e' diventata COERENTE.
+        if om is not None and len(om) >= n and n > 0:
+            _omn = np.linalg.norm(np.asarray(om, float)[:n], axis=1)
+            r["omega_mediana"] = float(np.median(_omn))
+            r["omega_su_sqrtn"] = float(np.median(_omn) / np.sqrt(n))
+            r["omega_media_su_sqrtn"] = float(np.mean(_omn) / np.sqrt(n))
+        else:
+            r["omega_mediana"] = r["omega_su_sqrtn"] = r["omega_media_su_sqrtn"] = float("nan")
+
         # ---- MISURA E: AUTOCORRELAZIONE SPAZIALE <n_i . n_j> per bin di distanza -------------
         # E' la firma che DISCRIMINA (B) da (A) e da (C): ~0 ovunque = nessuna struttura;
         # decadimento a scala FINITA = struttura; ~1 ovunque = collasso globale.
@@ -592,11 +701,36 @@ def main():
         _scrivi_incrementale(r)
         righe.append(r)
 
+    def _L_tot(net):
+        """L = somma(inerzia * |omega|), con l'inerzia COME LA CALCOLA IL SIMULATORE (fattore
+        `cs^-2` incluso). E' la quantita' che DOVREBBE conservarsi: `omega` e' intensiva, quindi
+        alla mitosi e' l'INERZIA che dovrebbe ripartirsi.
+        Costa poco: legge array gia' committati, niente copia profonda, niente RNG."""
+        n = int(net.n)
+        om = getattr(net, "omega_s", None)
+        if om is None or len(om) < n or n == 0:
+            return float("nan"), float("nan"), float("nan")
+        rs = getattr(net, "rho_spin", None)
+        rho = (np.asarray(rs, float)[:n] if (rs is not None and len(rs) >= n)
+               else np.abs(np.asarray(net.psi, complex)[:n]) ** 2)
+        csp = getattr(net, "_cs_nodo_prev", None)
+        if csp is not None and len(csp) >= n:
+            f = (S.CS_M / np.maximum(np.asarray(csp, float)[:n], 1e-12)) ** 2
+        else:
+            f = np.ones(n)
+        inz = np.maximum(rho * f, 1e-6)
+        omn = np.linalg.norm(np.asarray(om, float)[:n], axis=1)
+        return float(np.sum(inz * omn)), float(np.median(f)), float(np.max(np.abs(f - 1.0)))
+
+    serie_L = []          # (passo, n, L_tot) a OGNI passo: serve al salto attraverso le mitosi
+
     def spia(self):
         mio = not in_applica_flag()
         orig_step(self)
         if mio:
             stato["k"] += 1
+            _L, _fm, _fd = _L_tot(self)
+            serie_L.append((stato["k"], int(self.n), _L, _fm, _fd))
             # i globali VIVI, campionati a ogni passo del batch: se cambiassero a meta' run lo si
             # vedrebbe qui (l'insieme avrebbe piu' di un elemento).
             flag_visti.add((bool(S.FORK_SU2), bool(S.FORK_SU2_MEM),
