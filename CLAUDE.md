@@ -220,6 +220,26 @@ perde, il CSV resta.
   salvata **solo** perche' nessuno ha toccato il file nel frattempo — **un fatto che dovevo
   ASSERIRE io**, mentre il par.5 esiste apposta perche' non debba asserirlo nessuno.
   **La copia automatica toglie l'asserzione di mezzo.**
+- **⚠ LA TRAPPOLA CRLF, trovata dalla guardia stessa il 2026-09-16 — TRE stati, non due.**
+  `core.autocrlf = true` e **nessun `.gitattributes`**: `git checkout` riscrive le newline
+  **LF -> CRLF** sul disco, e `git hash-object` **non lo mostra**, perche' applica proprio il
+  filtro `clean` che annulla la differenza. Quindi esiste un terzo stato:
+  **stesso CONTENUTO, byte DIVERSI.**
+  **Misurato:** un `git checkout -- soliton_simulator.py` ha portato il file da **435730 byte (LF)**
+  a **442240 (CRLF)**, cambiando lo **sha1 dei byte grezzi** da **`08784685`** a **`37c31630`** —
+  mentre `git hash-object`, `git rev-parse HEAD:` e persino `git diff` continuavano a dire
+  **`08784685` / nessuna differenza**. *(E `git status` diceva `M` con `git diff` VUOTO: la conferma
+  che `git status` non e' lo strumento giusto, come gia' scritto sopra.)*
+  **La fisica e' la stessa — Python ignora le newline — ma il file NON e' piu' byte-identico a
+  quello che i CSV citano col loro `blob`**, che e' calcolato sui **byte grezzi**.
+  **PER RIPRISTINARE I BYTE ESATTI non si usa `git checkout`:** si usa
+  `git cat-file -p HEAD:soliton_simulator.py`, scritto in **binario**. *(E' la stessa ragione per
+  cui le copie storiche `_old_sim_pre_*.py` si estraggono in binario — par.9.)*
+  **La guardia ora distingue i tre casi** e scrive il motivo in `<base>._sim.motivo.txt`, **su
+  file e non solo a stdout**: dentro un sigillo lo stdout e' **catturato**, ed e' cosi' che un
+  allarme vero diventa indistinguibile da uno spurio.
+  **DA DECIDERE (Luca):** un `.gitattributes` con `soliton_simulator.py text eol=lf` toglierebbe
+  la trappola alla radice. **Non l'ho aggiunto: cambia il comportamento di git su tutto il repo.**
 - **Corollario, e va rispettato anche quando e' scomodo:** se un run e' partito col codice non
   committato, **la copia `._sim.py` va committata insieme ai dati**, non cancellata «tanto poi lo
   committo». Il file committato **dopo** ha lo stesso contenuto ma **non lo dimostra**.

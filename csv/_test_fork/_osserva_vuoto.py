@@ -161,28 +161,86 @@ def main():
     # NB: si confronta col blob a HEAD, NON con `git status`: un file puo' essere "modificato" per
     # sole newline e restare lo stesso blob, e un file puo' essere identico a un commit VECCHIO
     # senza esserlo a HEAD. Il blob e' l'unica identita' che non mente (par.2.6).
-    _atteso = None
+    # [CORREZIONE 2026-09-16, dopo un FALSO POSITIVO] Il primo scatto vero di questa guardia,
+    # durante il sigillo dell'osservatore, ha scritto TRE copie il cui blob era `08784685`, cioe'
+    # ESATTAMENTE quello a HEAD: la guardia non aveva rilevato una differenza, aveva fallito a
+    # LEGGERE git. Causa probabile: `timeout=30` con sei processi pesanti sulla macchina.
+    # Tre correzioni, e la piu' importante e' la terza:
+    #   1. timeout 120s invece di 30, e UN RITENTATIVO;
+    #   2. si distingue «blob DIVERSO» da «git non interrogabile», perche' sono due cose diverse;
+    #   3. il MOTIVO viene scritto in un file accanto alla copia. Il `print` non basta: quando lo
+    #      script gira dentro un sigillo, lo stdout e' CATTURATO e il motivo si perde — che e'
+    #      esattamente come un falso positivo diventa indistinguibile da un allarme vero.
+    NL = chr(10)                             # a capo, per le note scritte su file
+    _atteso, _perche = None, None
+    for _tent in (1, 2):
+        try:
+            import subprocess as _sp
+            _r = _sp.run(["git", "rev-parse", "HEAD:soliton_simulator.py"], cwd=ROOT,
+                         capture_output=True, text=True, timeout=120)
+            if _r.returncode == 0:
+                _atteso = _r.stdout.strip()
+                break
+            _perche = "git rc=%d: %s" % (_r.returncode, _r.stderr.strip()[:200])
+        except Exception as _e:                 # niente git, o repo assente: NON si blocca il run
+            _perche = "%s: %s (tentativo %d)" % (type(_e).__name__, _e, _tent)
+    # TERZO CASO, scoperto il 2026-09-16 e da NON confondere con gli altri due: il file puo' avere
+    # lo STESSO CONTENUTO ma NON gli stessi BYTE, perche' `core.autocrlf = true` riscrive le
+    # newline a ogni `git checkout`. `git hash-object` applica il filtro `clean` e quindi VEDE
+    # uguale cio' che sul disco e' diverso; `BLOB` qui sopra e' lo sha1 dei BYTE GREZZI e non lo
+    # vede uguale. NON e' un dettaglio: un `git checkout -- soliton_simulator.py` e' bastato a
+    # portare il file da 435730 byte (LF) a 442240 (CRLF), cambiando lo sha1 grezzo da
+    # `08784685` a `37c31630` — e i CSV gia' scritti portano `08784685`.
+    _pulito = None
     try:
-        import subprocess as _sp
-        _r = _sp.run(["git", "rev-parse", "HEAD:soliton_simulator.py"], cwd=ROOT,
-                     capture_output=True, text=True, timeout=30)
-        if _r.returncode == 0:
-            _atteso = _r.stdout.strip()
-    except Exception as _e:                     # niente git, o repo assente: NON si blocca il run
-        print("[osserva] ATTENZIONE: impossibile interrogare git (%s). La copia di sicurezza "
-              "viene scritta comunque." % _e, flush=True)
-    if _atteso == BLOB:
-        print("[osserva] codice COMMITTATO: il blob sul disco coincide con HEAD. "
+        import subprocess as _sp2
+        _r2 = _sp2.run(["git", "hash-object", "--", "soliton_simulator.py"], cwd=ROOT,
+                       capture_output=True, text=True, timeout=120)
+        if _r2.returncode == 0:
+            _pulito = _r2.stdout.strip()
+    except Exception:
+        pass
+    if _atteso is not None and _atteso == BLOB:
+        print("[osserva] codice COMMITTATO e BYTE-IDENTICO all'oggetto a HEAD. "
               "Nessuna copia necessaria.", flush=True)
     else:
         _copia = base + "._sim.py"
         with open(_copia, "wb") as _f:          # BINARIO: una riscrittura testuale cambierebbe il
             _f.write(_by)                       # blob, e la copia non sarebbe piu' quel file
-        print("[osserva] *** IL CODICE CHE STA GIRANDO NON E' QUELLO COMMITTATO ***", flush=True)
+        if _atteso is not None and _pulito == _atteso:
+            _tit = ("*** STESSO CONTENUTO, BYTE DIVERSI: le newline sono state normalizzate "
+                    "(core.autocrlf) ***")
+            _nota = ("MOTIVO: contenuto IDENTICO all'oggetto a HEAD, byte DIVERSI." + NL +
+                     "  sha1 dei BYTE GREZZI sul disco : %s" + NL +
+                     "  git hash-object (filtro clean) : %s" + NL +
+                     "  oggetto a HEAD                 : %s" + NL +
+                     "Le due ultime coincidono, la prima no: il file sul disco ha newline diverse" + NL +
+                     " da quelle dell'oggetto (core.autocrlf le riscrive a ogni checkout)." + NL +
+                     "LA FISICA E' LA STESSA - Python ignora le newline - MA IL FILE NON E'" + NL +
+                     " BYTE-IDENTICO a quello che i CSV citano col loro `blob`." + NL +
+                     "NON cancellare questa copia credendola ridondante: `git hash-object` NON" + NL +
+                     " puo' mostrare la differenza, perche' applica proprio il filtro che la crea." + NL
+                     ) % (BLOB, _pulito, _atteso)
+        elif _atteso is None:
+            _tit = "*** GIT NON INTERROGABILE: copia scritta per PRUDENZA, non per una differenza ***"
+            _nota = ("MOTIVO: git non interrogabile (%s).\n"
+                     "Il blob sul disco e' %s. NON e' stato possibile confrontarlo con HEAD," + NL +
+                     " quindi questa copia NON dimostra che il codice fosse diverso:" + NL +
+                     " dimostra solo che non si e' potuto verificare." + NL +
+                     "Se `git rev-parse HEAD:soliton_simulator.py` da' %s, questa copia e'" + NL +
+                     " RIDONDANTE e si puo' cancellare." + NL) % (_perche, BLOB, BLOB)
+        else:
+            _tit = "*** IL CODICE CHE STA GIRANDO NON E' QUELLO COMMITTATO ***"
+            _nota = ("MOTIVO: blob DIVERSO da HEAD." + NL + "  disco %s" + NL +
+                     "  HEAD  %s" + NL +
+                     "COMMITTA QUESTA COPIA INSIEME AI DATI: senza, la misura non e'" + NL +
+                     " rifacibile." + NL) % (BLOB, _atteso)
+        with open(_copia[:-3] + ".motivo.txt", "w") as _f:
+            _f.write(_nota)                     # il motivo sopravvive anche se lo stdout e' catturato
+        print("[osserva] %s" % _tit, flush=True)
         print("[osserva]     disco %s   HEAD %s" % (BLOB[:12], (_atteso or "(ignoto)")[:12]),
               flush=True)
-        print("[osserva]     COPIA ESATTA salvata accanto ai dati: %s" % _copia, flush=True)
-        print("[osserva]     COMMITTALA INSIEME AI DATI: senza, questa misura non e' rifacibile.",
+        print("[osserva]     copia: %s   motivo: %s" % (_copia, _copia[:-3] + ".motivo.txt"),
               flush=True)
 
     arg = S._cli()
