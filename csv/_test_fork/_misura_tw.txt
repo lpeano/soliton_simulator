@@ -1,0 +1,13 @@
+================================================================================================
+MISURA TW — 150 passi, seme 1, --cs-dinamico ACCESO
+================================================================================================
+
+nodi:  OFF 2849   ON 3047
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\_test_fork\_misura_tw.py", line 58, in <module>
+    print("  \u26a0 SHAPE DIVERSE: il confronto punto-a-punto NON esiste (par.9). Si legge solo")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u26a0' in position 2: character maps to <undefined>

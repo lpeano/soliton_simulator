@@ -1,0 +1,42 @@
+============================================================================================
+ANALISI TW  --  150 passi, seme 1, --cs-dinamico ACCESO.  DT = 0.01, PHI_CRIT = 6.283185
+============================================================================================
+
+--- A. CONTROLLO POSITIVO: il flag FA QUALCOSA? ---
+  nodi OFF 2849   ON 3047   -> DIVERGONO (differenza 198 nodi, 6.9%)
+  Il flag NON e' codice morto. Ma ATTENZIONE: shape diverse = il confronto punto-a-punto
+  NON ESISTE, quindi da qui NON si legge 'di quanto' cambia omega. Si legge solo CHE cambia.
+
+--- C. LA LEGGE CODIFICATA CONTRO QUELLA DICHIARATA (dentro il SOLO run ON) ---
+  archi                                  : 209852
+  |tw| mediana                           : 1.965312e+00  rad
+  (a) DICHIARATO  angolo/passo = tw/2    : 9.826559e-01  rad   <- 'pilota il Bloch di tw/2'
+  (b) CODIFICATO  termine = tw/(4 pi)    : 1.563945e-01        <- sommato a omega_new (:2149-2154)
+  (c) angolo che (b) produce = (b)*dt_n  : 1.563945e-03  rad   (dt_n mediano = DT, perche' median(r)=1
+                                                         ESATTO per costruzione, presidio P4)
+  RAPPORTO (a)/(c) = 2 pi / DT           : 628.3
+
+  LETTURA: (a) e (c) differiscono di un fattore 2 pi/DT. Il commento descrive un ANGOLO, il codice
+  somma il numero a una VELOCITA' ANGOLARE (theta = |omega|*dt, :2210 e :2296). Non e' una
+  riformulazione: sono due leggi diverse, e quella che gira e' (c).
+
+--- D. E DOVE FINISCE: MEMORIA, non rotazione istantanea ---
+  Il risultato va in self.omega_s (:2313), cioe' nella MEMORIA persistente, dove ogni passo
+  riceve +tw/(4 pi) e perde -omega_s/tau. All'equilibrio quel termine da solo vale
+  omega_tw = tw/(4 pi) * tau/dt_n, cioe' AMPLIFICATO di tau/dt_n.
+  tau/dt_n al PAVIMENTO (TAU_A*0.05/DT, par.9)   : 250 passi
+  omega_tw d'equilibrio al pavimento             : 3.909864e+01
+  |omega_s| mediana MISURATA nel run ON          : 7.238712e+04
+  |omega_s| mediana MISURATA nel run OFF         : 7.319012e+04
+  peso del termine TW sul totale (equilibrio/misurato) : 0.0005401
+
+  CONFRONTO CHE RENDE IL PUNTO NON-TEORICO: il commento di SYNC_SPINORE (:724, :2157-2160) dice che
+  il torque di allineamento entra in omega_tot e NON in omega_s perche' la memoria 'darebbe
+  accumulo/divergenza'. TW_SPINORE fa ESATTAMENTE cio' che quel commento dichiara divergente.
+  E, unico fra i termini del blocco, _otw NON e' diviso per l'inerzia.
+
+--- stabilita' col flag ON (NON e' un sigillo: e' un controllo minimo) ---
+  max| |psi| - 1 | = 2.220e-16 su 3047 nodi
+  nessun NaN/inf in tutto lo stato : True
+  max|x| = 9.348
+============================================================================================
