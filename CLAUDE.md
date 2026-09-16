@@ -40,6 +40,60 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
    riassunto di sessione NON contiene queste regole (limite noto di Claude Code). Se ti accorgi di
    averle perse, ricaricale da qui.
 
+## 0-ter. PATTERN COMPORTAMENTALI IMPOSTI DA LUCA (2026-09-16)
+
+> **Sono REGOLE, non suggerimenti.** Nascono tutte da errori realmente commessi su questo repo, e
+> la maggior parte **nello stesso giorno** (2026-09-15). Stanno qui, in testa, perche' non sono
+> fisica: sono il **modo di lavorare** che rende affidabile tutto il resto.
+> **Sono ripetute anche in `RELAZIONE_PER_CLAUDE.md`**, cosi' un Claude web nuovo le riceve
+> leggendo la relazione, invece di doverle far dare di nuovo.
+
+**P1 — NON USARE L'ASSOCIAZIONE SENZA VERIFICARE LO STORICO.**
+Prima di proporre una diagnosi, una cura o un mandato, **rileggere dal DISCO** cio' che e' gia'
+stabilito su quel punto (`doc/RAMIFICAZIONI.md`, `RELAZIONE_PER_CLAUDE.md`, i documenti di reperto)
+e verificare di **non contraddire un fatto gia' misurato**. Se si contraddice: **o c'e' un dato
+nuovo che lo supera — e lo si dichiara — o la proposta cade.**
+L'associazione genera **candidati**, non conclusioni. Le frasi *«manca X»*, *«il problema e' Y»*,
+*«basta fare Z»* sono il **segnale d'allarme**: li', prima di scrivere, si controlla.
+Se rileggendo **non si trova nulla** sul punto, **dirlo**: *«non ho un fatto stabilito su questo,
+sto proponendo per analogia»*.
+*(Precedenti, tutti dello stesso giorno — 2026-09-15: `--tau-luce` messo nella casella del turbo
+(§10); `theta ~43` trasportato fra due configurazioni diverse; `--step2-orologio` messo fra gli
+esperimenti benche' **derivato e sigillato 10/10** (`doc/COMPONENTI_PROMOSSE.md` B9); «universo
+in accelerazione senza freni» quando il freno `−omega/tau` era **gia' misurato** e il ginocchio
+pure (§9: previsto `7.059e4` contro misurato `7.271e4`, scarto x1.03). **Quattro volte lo stesso
+errore in un giorno.**)*
+
+**P2 — PRIMA DI ESCLUDERE UN FLAG DA UNA MISURA: FORZA IL SISTEMA O LO CORREGGE?**
+Escludere un **forzante** (turbo) protegge la misura; escludere una **correzione** significa
+**misurare un sistema che si sa difettoso**. (E' il presidio gia' scritto in §10, promosso qui
+perche' e' comportamentale, non di componente.)
+
+**P3 — NESSUNA STATISTICA SENZA BARRA D'ERRORE**, e per confronti **fra bracci** si usa la
+**dispersione FRA SEMI**, mai la `SE` interna a un singolo run. Su questo sistema caotico la
+pendenza trasversale cambia di **0.03 a codice INVARIATO**, contro una `SE` interna di **~0.010**
+(§9, `doc/RAMIFICAZIONI.md` C10). **E per una barra fra semi servono >= 4 semi**: con 2,
+`t(0.025,1) = 12.706` e l'IC95 e' inutilizzabile.
+
+**P4 — PRIMA DI MISURARE SE UNA GRANDEZZA CAMBIA, VERIFICARE CHE SIA LIBERA DI CAMBIARE.**
+Una quantita' normalizzata sulla propria mediana **non puo' muoversi**: misurarla e' un test vuoto
+(§9, `doc/RAMIFICAZIONI.md` C12). Due casi reali: `_tau`/`_dens_rif` e `median(r)` in `ritmo()`.
+
+**P5 — OGNI RAMO `else` / FALLBACK / `getattr(..., default)` SU UN PERCORSO FISICO VA CONTATO.**
+Un fallback mai misurato e' un comportamento **sconosciuto**; uno che scatta l'80 % delle volte
+**non e' un fallback: e' il comportamento principale** (C7: 71.88 %; C11: 95.33 %).
+
+**P6 — OGNI CSV DI MISURA PORTA BLOB, SEME E TUTTI I FLAG** che distinguono quel run dagli altri
+bracci dello stesso esperimento — non solo quelli che si pensava contassero. **Un file che si
+distingue dagli altri solo per il NOME non e' un dato: e' un ricordo.** Non basta il log: il log si
+perde, il CSV resta.
+
+> **Come si usano.** P1 e' un **prerequisito di scrittura** (si applica prima di proporre); P2 e P6
+> sono **check di preparazione** di un run; P3, P4, P5 sono **check di lettura** di un risultato.
+> Se un run non soddisfa P6 in **ogni** campo, **non si conta**.
+
+---
+
 ## 1. LA REGOLA D'ORO — UN INTERRUTTORE ALLA VOLTA
 - **Tutto nel fork, tutti i flag nuovi OFF di default.** Un file, un branch. Completezza SENZA cecita'.
 - Si accende **UN SOLO meccanismo per volta**, si sigilla, poi il successivo. MAI tutto insieme:

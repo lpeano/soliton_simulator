@@ -1,7 +1,7 @@
 # RELAZIONE — per Claude web · **aggiornata 2026-09-15, sera**
 
 > **Scritta per Claude web**, che legge il repo e deve pronunciarsi su una decisione di merito.
-> Branch `fork-su2`. **Blob sul disco `b298677a`**, gate in `CLAUDE.md` §0 a `c0803713`
+> Branch `fork-su2`. **Blob sul disco `08784685`** *(corretto il 2026-09-16: qui c'era `b298677a`, superato dalle due cure C7 e C11)*, gate in `CLAUDE.md` §0 a `c0803713`
 > (**non ri-timbrato di proposito**: i sigilli della FASE 2 non passano).
 > Il documento e' **cumulativo**: i paragrafi 1-7 sono nell'ordine in cui i fatti sono nati, e
 > l'ultimo lavoro sta in fondo. **Se leggi una cosa sola, leggi il blocco qui sotto e il §8.**
@@ -51,6 +51,51 @@
 >    `sigma` sia indipendente da `tau`, ma c'è un **anello** che lo mette a valle. **Forse è il
 >    BERSAGLIO a essere mal calcolato.** Da provare **per prima**; **non lanciata**, e il numero
 >    **non è nei dati** come si credeva.
+
+---
+
+## 0-ter. **I SEI PATTERN COMPORTAMENTALI** (regole di Luca, 2026-09-16) — leggi questi prima di proporre qualsiasi cosa
+
+> **Sono REGOLE, non suggerimenti**, e stanno anche in `CLAUDE.md` §0-ter. Sono qui perche' un
+> Claude web nuovo le deve ricevere **leggendo questa relazione**, senza doverle far dare di nuovo.
+> Nascono tutte da errori realmente commessi su questo repo, quasi tutti **nello stesso giorno**.
+
+**P1 — NON USARE L'ASSOCIAZIONE SENZA VERIFICARE LO STORICO.**
+Prima di proporre una diagnosi, una cura o un mandato, **rileggere dal DISCO** cio' che e' gia'
+stabilito su quel punto (`doc/RAMIFICAZIONI.md`, questa relazione, i documenti di reperto) e
+verificare di **non contraddire un fatto gia' misurato**. Se si contraddice: **o c'e' un dato nuovo
+che lo supera — e lo si dichiara — o la proposta cade.**
+L'associazione genera **candidati**, non conclusioni. Le frasi *«manca X»*, *«il problema e' Y»*,
+*«basta fare Z»* sono il **segnale d'allarme**: li', prima di scrivere, si controlla.
+Se rileggendo **non si trova nulla**, **dirlo**: *«non ho un fatto stabilito su questo, sto
+proponendo per analogia»*.
+*(Quattro precedenti, tutti del 2026-09-15: `--tau-luce` messo nella casella del turbo; `theta ~43`
+trasportato fra due configurazioni; `--step2-orologio` fra gli esperimenti benche' derivato e
+sigillato 10/10; **«universo in accelerazione senza freni» quando il freno `−omega/tau` era gia'
+misurato** e anche il ginocchio — previsto `7.059e4`, misurato `7.271e4`, scarto x1.03.)*
+
+**P2 — PRIMA DI ESCLUDERE UN FLAG: forza il sistema o lo CORREGGE?**
+Escludere una **correzione** significa misurare un sistema che si sa difettoso.
+
+**P3 — NESSUNA STATISTICA SENZA BARRA D'ERRORE**, e per confronti **fra bracci** si usa la
+**dispersione FRA SEMI**, mai la `SE` interna a un singolo run (**C10**: la pendenza cambia di
+**0.03 a codice invariato**, contro `SE` interna ~**0.010**). **Per una barra fra semi servono
+>= 4 semi**: con 2, `t(0.025,1) = 12.706`.
+
+**P4 — PRIMA DI MISURARE SE UNA GRANDEZZA CAMBIA, VERIFICARE CHE SIA LIBERA DI CAMBIARE.**
+Una quantita' normalizzata sulla propria mediana non puo' muoversi: misurarla e' un test vuoto
+(**C12**).
+
+**P5 — OGNI RAMO `else` / fallback / `getattr(..., default)` su un percorso fisico VA CONTATO.**
+Un fallback mai misurato e' un comportamento sconosciuto; uno che scatta l'80 % delle volte **non
+e' un fallback: e' il comportamento principale** (**C7** 71.88 %, **C11** 95.33 %).
+
+**P6 — OGNI CSV DI MISURA porta BLOB, SEME e TUTTI i flag** che distinguono quel run dagli altri
+bracci. Un file che si distingue dagli altri **solo per il nome** non e' un dato: e' un ricordo.
+
+> **Uso:** P1 e' un prerequisito di **scrittura**; P2 e P6 sono check di **preparazione** di un run;
+> P3, P4, P5 sono check di **lettura** di un risultato. Un run che non soddisfa P6 in **ogni** campo
+> **non si conta**.
 
 ---
 
