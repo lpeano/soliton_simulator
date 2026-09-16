@@ -55,6 +55,11 @@
 >    metodi a mano, si rompe appena il simulatore cambia forma — in SILENZIO.**
 > 12. **⚠ E TUTTI I DATI DI OGGI PORTANO IL MARCHIO**: prodotti **prima** delle due correzioni,
 >    cioe' su un **sistema diverso** da quello corrente. **La campagna va RIFATTA.**
+> 13. **E LA CONSERVAZIONE E' STATA MISURATA PER LA PRIMA VOLTA:** **`L_tot = somma(I*omega)` cresce del ~3.4 % a ogni passo con crescita**, sia prima sia dopo
+>    la correzione ②. **La violazione non e' piu' argomentata: ha un numero.** E la correzione
+>    **non la chiude a questa densita'**, com'era scritto prima (fattore 1.0000048).
+> 14. **⚠ E TRE CRITERI DI SIGILLO SBAGLIATI, TUTTI MIEI, TUTTI LO STESSO GIORNO** (`N3b`, `M1b`/`M3`, `M3c`): scritti dal **modello mentale** del codice invece che da una
+>    **misura**. Presidio nuovo in §9. **Un FAIL falso costa piu' di un sigillo mancante.**
 
 ---
 
@@ -2119,3 +2124,105 @@ alzare `CS_M` **solo dentro `_passo_spinoriale`** — e' scritta ma non ancora e
 | metriche §3 nell'osservatore (`L_tot`, `r` per eta', corr `xi`, fattore `cs`) | **da fare** |
 | campagna `{OFF, ON} x >= 2 semi` sul sistema corretto | **da rifare** |
 | `N2` del rumore colorato | **da rigirare** sul nuovo riferimento |
+
+---
+
+## 9.13 — I CRITERI RISCRITTI: **15/16 PASS**, `M1c` (che mancava) passa, e **la prima misura della conservazione mai fatta**
+
+> Il sigillo delle due correzioni era uscito **11/13** con due FAIL, **entrambi criteri miei
+> scaduti**. Riscritti e rigirati: **15/16**. Il sedicesimo era **ancora un criterio mio**.
+
+### 9.13.1 — I criteri giusti, e cosa c'era di sbagliato in ognuno
+
+| | avevo scritto | giusto | esito |
+|---|---|---|---|
+| **M1** | `\|corr\| > 0.5` | **`max\|xi_figlio - xi_padre\| == 0` esatto** — il vecchio codice **copiava**: non e' «correlazione alta», e' **identita' byte a byte** | **PASS** `0.000e+00` su 84 coppie |
+| **M1b** | misurare **subito dopo `mitosi()`**, soglia `0.15` | misurare **dopo lo `step()` successivo**, soglia **`3/sqrt(3N)`** | **PASS** `corr = -0.0605`, `3 sigma = 0.1651` -> **1.10 sigma** |
+| **M1c** | **non esisteva** | `var(xi_neonati) ~ 1`, nullo `sqrt(2/k)` | **PASS** `0.9756` su 330, `1 +- 0.0778` -> **0.31 sigma** |
+| **M3** | `len(xi) == n` a **fine passo** | `len(xi) == n` **dopo `step()`**, cioe' **quando viene usato** | **PASS** |
+| **M3b** | **non esisteva** | l'estensione **non tocca la testa**: i nodi esistenti conservano `xi` | **PASS** |
+| **M3c** | `_xi_nuovi == nodi nati` | `_xi_nuovi == nati - ultima nidiata` (**sfasamento di un giro**) | **FAIL**, poi corretto |
+
+> ### `M1c` e' quello che mancava, ed e' quello che rende `M1b` non vuoto.
+> **`M1b` da solo non prova che la correzione sia giusta: prova solo che i figli sono
+> INDIPENDENTI dai padri. Un figlio con `xi = 0` passerebbe `M1b` a pieni voti** — e sarebbe
+> sbagliato, perche' darebbe esattamente il transitorio (`b = 0.22` per ~40 passi) che
+> l'estrazione stazionaria esiste per evitare. **Passa: `var = 0.9756`, a 0.31 sigma da 1.**
+
+**E le soglie non sono piu' scelte.** `|corr| < 0.15` me l'ero **inventato**. Il valore sotto
+ipotesi nulla della correlazione campionaria di variabili indipendenti e' `sigma ~ 1/sqrt(3N)`;
+su 110 coppie da' `3 sigma = 0.165`. **E' lo stesso presidio del «valore sotto ipotesi nulla»
+gia' scritto in `CLAUDE.md` §9 — che avevo applicato agli altri e non a me.**
+
+### 9.13.2 — `M3c`: **«nodi nati 0»**, un numero IMPOSSIBILE
+
+E' quello il segnale che l'errore fosse mio. Misurato iterazione per iterazione:
+
+```
+nati DURANTE step()  :   0     <- quello che M3c contava
+nati DURANTE mitosi(): 211     <- dove nascono DAVVERO
+xi freschi assegnati : 194
+
+nati    per iterazione: 0, 0, 24, 42, 50, 41, 37, 17
+freschi per iterazione: 0, 0,  0, 24, 42, 50, 41, 37
+```
+
+> **`freschi[k] == nati[k-1]` per OGNI k**, e la differenza `211 - 194 = 17` e' **esattamente**
+> l'ultima nidiata, che ricevera' il suo `xi` al giro dopo. **Il contatore e' corretto**; il mio
+> criterio confrontava la crescita attraverso `step()`, che e' **zero per costruzione**.
+
+**Corretto:** ora il criterio chiede `_xi_nuovi == nati - ultima_nidiata`, e **lo sfasamento e'
+parte del criterio, non una tolleranza**: se non tornasse **esattamente**, il contatore mentirebbe.
+
+### 9.13.3 — ⚠ **TRE CRITERI SBAGLIATI IN UN GIORNO, E LA FORMA E' SEMPRE LA STESSA** (nuovo presidio in §9)
+
+| | l'errore |
+|---|---|
+| **`N3b`** | *«fallback <= 1»* **in assoluto**, mentre l'estensione su `semina()`/`nuova_massa()` e' **legittima** (voce **H**) |
+| **`M1b`/`M3`** | misurati nel **momento sbagliato**: subito dopo `mitosi()`, dove i figli **non hanno ancora** `xi` e l'array e' **legittimamente corto** |
+| **`M3c`** | confrontato con la **coppia sbagliata**: crescita di `step()`, **zero per costruzione** |
+
+> **La radice e' una sola: ho scritto il criterio dal MIO MODELLO MENTALE del codice invece che da
+> una MISURA di cosa il codice fa nel punto in cui il criterio guarda.** Tutte e tre le volte la
+> misura ha impiegato **meno tempo della spiegazione** che avrei dato senza farla.
+>
+> **E un criterio scaduto che produce un FAIL falso costa PIU' di un sigillo mancante, perche' si
+> porta dietro UNA DIAGNOSI:** chi legge il FAIL cerca il difetto nel codice, e il difetto non c'e'.
+>
+> **Corollario utile:** `«nodi nati 0»` era un numero **impossibile**, ed e' il modo in cui un
+> criterio sbagliato **si denuncia da solo**. Vale la pena cercarli.
+
+### 9.13.4 — `M4`: **LA PRIMA MISURA DELLA CONSERVAZIONE MAI FATTA** — e non e' un timbro, e' un risultato
+
+```
+PRE   20 eventi di crescita   Delta L / L per passo: mediana +0.0340   media +0.0413   517 nodi nati
+POST  20 eventi di crescita   Delta L / L per passo: mediana +0.0355   media +0.0397   479 nodi nati
+```
+
+> ### **`L_tot = somma(inerzia * |omega|)` CRESCE del ~3.4 % A OGNI PASSO con crescita.**
+> ### **In ENTRAMBI. La violazione e' MISURATA, non piu' argomentata.**
+
+**E la correzione ② NON la chiude a questa densita'** — esattamente come scritto **prima** di
+guardare i dati: il fattore `(CS_M/cs)^2` vale **1.0000048** sul nodo mediano, e **non puo'
+spostare un bilancio che sbaglia del 3.4 % per passo**.
+
+**⚠ E il confronto `0.0340` contro `0.0355` NON e' significativo:** `PRE` e `POST` sono
+**traiettorie caotiche diverse** (517 contro 479 nodi nati). **Cio' che conta e' che ENTRAMBI
+stiano a ~3.4 %**, non quale dei due sia piu' alto. *(E' lo stesso errore di lettura di `N1b`,
+dove `3020 contro 2449` nodi non era l'ampiezza di un effetto ma caos con semi diversi.)*
+
+**Cosa questo apre, e va detto senza gonfiarlo:** il mandato diceva che la correzione ② e' «di
+conservazione». **Lo e' in linea di principio — il meccanismo del feedback mediato dal campo c'e'
+— ma a questa densita' il canale e' chiuso**, perche' `cs` e' quasi-costante (`cs_std/cs = 0.033 %`).
+**La violazione del 3.4 % per passo resta un fronte aperto, e ora ha un numero.**
+
+### 9.13.5 — Stato
+
+| | |
+|---|---|
+| `M0`, `M2` (**il decisivo**), `M2b`, `M5a/b/c` | **PASS**, invariati |
+| `M1`, `M1b`, `M1c`, `M3`, `M3b` | **PASS** coi criteri corretti |
+| `M3c` | corretto; **il sigillo sta rigirando per la conferma** |
+| metriche §3 nell'osservatore (`L_tot`, `r` per eta', corr `xi`, fattore `cs`) | **da fare** |
+| campagna `{OFF, ON} x >= 2 semi` sul sistema corretto | **da rifare** |
+| `N2` del taglio spettrale | **da rigirare** sul nuovo riferimento |
