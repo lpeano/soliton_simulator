@@ -173,15 +173,31 @@ class Spia(object):
         self.net = net
         self.draws = []          # tutte le estrazioni normal(), con la loro shape
         self.r = None
-        self._orig_normal = net.rng.normal
+        self._rng_vero = net.rng
         self._orig_ritmo = S.Rete.ritmo
 
     def __enter__(self):
-        def normal(*a, **k):
-            v = self._orig_normal(*a, **k)
-            self.draws.append(np.asarray(v).copy())
-            return v
-        self.net.rng.normal = normal
+        # `numpy.random.Generator.normal` e' READ-ONLY: non si puo' monkeypatchare il metodo.
+        # Si avvolge l'OGGETTO `rng`, che e' un attributo normale della rete: un proxy che
+        # inoltra TUTTO all'originale e registra solo le estrazioni `normal`. Pure-read: non
+        # cambia ne' l'ordine ne' il numero delle estrazioni, quindi lo stato dell'RNG evolve
+        # esattamente come senza spia.
+        _spia = self
+
+        class _Proxy(object):
+            def __init__(self, vero):
+                object.__setattr__(self, "_vero", vero)
+
+            def normal(self, *a, **k):
+                v = object.__getattribute__(self, "_vero").normal(*a, **k)
+                _spia.draws.append(np.asarray(v).copy())
+                return v
+
+            def __getattr__(self, nome):
+                return getattr(object.__getattribute__(self, "_vero"), nome)
+
+        self._rng_vero = self.net.rng
+        self.net.rng = _Proxy(self.net.rng)
 
         def ritmo(selfr):
             out = self._orig_ritmo(selfr)
@@ -192,7 +208,7 @@ class Spia(object):
         return self
 
     def __exit__(self, *exc):
-        self.net.rng.normal = self._orig_normal
+        self.net.rng = self._rng_vero
         S.Rete.ritmo = self._orig_ritmo
         return False
 
@@ -271,6 +287,17 @@ finally:
 print()
 print("  N3 — `_xi_rumore` esteso alla mitosi (il difetto di C7 e C11, scritto PRIMA stavolta)")
 net3 = scena(3, 5)
+# IL CONTATORE VA LETTO COME DELTA, NON IN ASSOLUTO. Il ramo di estensione scatta LEGITTIMAMENTE
+# quando i nodi crescono SENZA passare da `_eredita_spinore_figli`: e' il caso di `semina()` e di
+# `nuova_massa()`, cioe' della COSTRUZIONE DELLA SCENA (la terza via di crescita, voce H del
+# registro). Li' l'estensione e' CORRETTA: i nodi esistenti conservano il loro `xi` (vstack sulla
+# testa) e solo i NUOVI ricevono un'estrazione stazionaria — un nodo appena nato non ha passato.
+# Cio' che NON deve succedere e' che scatti sulla MITOSI, dove l'eredita' deve bastare.
+_fall0 = int(getattr(net3, "_xi_fallback", 0))
+_chiam0 = int(getattr(net3, "_xi_chiamate", 0))
+print("     alla fine della costruzione della scena: fallback %d su %d chiamate"
+      " (semina + 3 nuova_massa: LEGITTIMO, non passano da _eredita_spinore_figli)"
+      % (_fall0, _chiam0))
 lung, nodi, ok3 = [], [], True
 for _ in range(25):
     passo(net3)
@@ -284,9 +311,10 @@ cresciuti = sum(1 for k in range(1, len(nodi)) if nodi[k] != nodi[k - 1])
 verdetto("N3 len(_xi_rumore) == n dopo OGNI passo", ok3,
          "25 passi, n da %d a %d, passi con mitosi/potatura %d;  disallineamenti %d"
          % (nodi[0], nodi[-1], cresciuti, sum(1 for k in range(len(lung)) if lung[k] != nodi[k])))
-verdetto("N3b il ramo di re-inizializzazione scatta ~0 volte (P5)", fall <= 1,
-         "fallback %d su %d chiamate (%.2f %%) — 1 e' la creazione iniziale, >1 e' un difetto"
-         % (fall, chiam, 100.0 * fall / max(chiam, 1)))
+verdetto("N3b sulla MITOSI il ramo di estensione NON scatta (P5)", (fall - _fall0) == 0,
+         "estensioni durante i 25 passi: %d su %d chiamate (prima dei passi erano %d su %d, dalla "
+         "costruzione della scena). Se fosse > 0, l'eredita' alla mitosi non basterebbe."
+         % (fall - _fall0, chiam - _chiam0, _fall0, _chiam0))
 
 # ---- N6: stabilita' ---------------------------------------------------------------------------
 print()

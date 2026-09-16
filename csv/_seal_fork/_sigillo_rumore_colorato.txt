@@ -1,0 +1,32 @@
+========================================================================================================
+SIGILLO N1 — flag OFF = BYTE-IDENTICO al codice PRIMA del cablaggio (150 passi, seed 1)
+========================================================================================================
+  (creato _old_sim_pre_rumore.py dal blob 08784685 = codice PRIMA del taglio spettrale)
+[PASS] N1.0 il riferimento e' il blob PRE-cablaggio         blob(_old_sim_pre_rumore.py) = 08784685  (atteso 08784685)
+[PASS] N1.0b stesso numero di nodi (il confronto ESISTE)    nodi: PRE = 3020, POST(OFF) = 3020
+[PASS] N1 flag OFF vs codice pre-cablaggio: byte-identico   max|A-B| = 0.000e+00
+
+========================================================================================================
+SIGILLO N1b — CONTROLLO POSITIVO: con il flag ON i due run DEVONO differire
+========================================================================================================
+  Senza questo, N1 non prova che il flag SERVA: passerebbe identico anche su codice morto.
+[PASS] N1b ON != OFF (il flag FA qualcosa)                  nodi OFF = 3020, ON = 2449;  array divergenti 35 (di cui 35 per SHAPE);  max|OFF-ON| = 0.000e+00
+
+========================================================================================================
+SIGILLI N2, N3, N6, N7 — in-process sul PERCORSO REALE, con spie PURE-READ
+========================================================================================================
+  tau_c = LAM/CS_M = 0.4  = 40 passi     DT = 0.01     RUMORE_COLORATO = True
+  TEMPO_SEGNO = False (se True, dt_n_s puo' essere NEGATIVO: la guardia |dt| serve a quello)
+
+  costruzione della scena (30 passi)...
+  nodi 1598   len(_xi_rumore) = 1598   chiamate 36   fallback 2
+
+  N7 — un passo con le spie, per ricostruire la ricorsione NODO PER NODO
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_rumore_colorato.py", line 211, in <module>
+    with Spia(net) as sp:
+         ~~~~^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_rumore_colorato.py", line 184, in __enter__
+    self.net.rng.normal = normal
+    ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'numpy.random._generator.Generator' object attribute 'normal' is read-only
