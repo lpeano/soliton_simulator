@@ -1,0 +1,183 @@
+C:\Users\lpeano\soliton_simulator\csv\_test_fork\_scomposizione_L.py:2: SyntaxWarning: invalid escape sequence '\_'
+  """SCOMPOSIZIONE della crescita di `L_tot` — SUI DATI COMMITTATI, nessun run nuovo.
+================================================================================================================
+SCOMPOSIZIONE DELLA CRESCITA DI L_tot — dati committati, blob c57800c1, nessun run nuovo
+================================================================================================================
+
+3.2 — AGGREGAZIONE contro INTENSIFICAZIONE (controllo ESATTO, non serve birth-free)
+----------------------------------------------------------------------------------------------------------------
+  run              n        L_tot      L_tot/n    I mediana  |omega| med
+  OFF_s1        3790    1.993e+04        5.258    2.294e-06    8.432e+04
+  OFF_s2        2800    1.686e+04        6.021    4.122e-06    7.141e+04
+  ON_s1         3773        795.4       0.2108    2.583e-06    2.126e+04
+  ON_s2         3054         1012       0.3315    4.138e-06    1.499e+04
+
+  crescita dal PRIMO campione utile all'ULTIMO (fattore moltiplicativo):
+  run                n      L_tot    L_tot/n      I med   |om| med
+  OFF_s1         2.013    221.847    110.221      2.294      1.936
+  OFF_s2         1.511    189.851    125.640      4.122      1.633
+  ON_s1          1.973     12.664      6.417      2.583      0.695
+  ON_s2          1.594     16.023     10.052      4.138      0.506
+
+================================================================================================================
+1 — LA SCOMPOSIZIONE:  d log(L/n) = d log(I) + d log(|omega|)  (+ misto)
+================================================================================================================
+  Per ogni coppia di campioni consecutivi. A = contributo dell'INERZIA, B = di OMEGA.
+----------------------------------------------------------------------------------------------------------------
+  OFF_s1
+      passo d log(L/n)   A=dlog I  B=dlog om      misto A/(A+|B|)
+        100     0.6690     0.0000     0.3875     0.2815    0.000
+        150     0.8042     0.0000     0.1445     0.6597    0.000
+        200     0.4075     0.0000     0.0616     0.3458    0.000
+        250     1.0525     0.0000     0.0349     1.0177    0.000
+        300     0.6285     0.0000     0.0157     0.6128    0.000
+        350     0.1758     0.0673     0.0041     0.1044    0.942
+        400     0.2490     0.2676    -0.0116    -0.0070    0.958
+        450     1.0462     0.2597    -0.0047     0.7912    0.982
+        500    -0.3302     0.2355     0.0285    -0.5943    0.892
+     TOTALE   d log(L/n) = +4.7025   A = +0.8302   B = +0.6604   misto = +3.2119
+     -> A vale il 55.7 % di |A|+|B|;  A/B = 1.26
+
+  OFF_s2
+      passo d log(L/n)   A=dlog I  B=dlog om      misto A/(A+|B|)
+        100     0.5184     0.0000     0.4019     0.1165    0.000
+        150     1.0081     0.0000     0.0734     0.9347    0.000
+        200     0.8852     0.0000     0.0674     0.8178    0.000
+        250     0.6785     0.3232     0.0207     0.3346    0.940
+        300    -0.3075     0.4103    -0.0162    -0.7016    0.962
+        350     2.0112     0.2172    -0.0186     1.8127    0.921
+        400    -0.0126     0.1515    -0.0157    -0.1484    0.906
+        450     0.5667     0.1412    -0.0069     0.4323    0.953
+        500    -0.5144     0.1729    -0.0157    -0.6716    0.917
+     TOTALE   d log(L/n) = +4.8334   A = +1.4163   B = +0.4902   misto = +2.9269
+     -> A vale il 74.3 % di |A|+|B|;  A/B = 2.89
+
+  ON_s1
+      passo d log(L/n)   A=dlog I  B=dlog om      misto A/(A+|B|)
+        100     0.6879     0.0000     0.1222     0.5657    0.000
+        150     0.2003     0.0000    -0.0587     0.2590    0.000
+        200     0.5797     0.0000    -0.1129     0.6926    0.000
+        250    -0.1103     0.0000    -0.0713    -0.0390    0.000
+        300    -0.1564     0.0000    -0.0851    -0.0713    0.000
+        350     0.2211     0.1786    -0.0748     0.1174    0.705
+        400     0.0934     0.2225    -0.0093    -0.1198    0.960
+        450     0.6573     0.2794    -0.0367     0.4146    0.884
+        500    -0.3140     0.2683    -0.0367    -0.5457    0.880
+     TOTALE   d log(L/n) = +1.8590   A = +0.9488   B = -0.3634   misto = +1.2736
+     -> A vale il 72.3 % di |A|+|B|;  A/B = -2.61
+
+  ON_s2
+      passo d log(L/n)   A=dlog I  B=dlog om      misto A/(A+|B|)
+        100     0.3906     0.0000     0.1231     0.2674    0.000
+        150     0.4599     0.0000    -0.1492     0.6091    0.000
+        200     0.8932     0.0000    -0.1594     1.0526    0.000
+        250     0.2378     0.1471    -0.1846     0.2753    0.444
+        300    -0.9718     0.4129    -0.1630    -1.2216    0.717
+        350     1.1478     0.3284    -0.0026     0.8220    0.992
+        400     0.0897     0.1888    -0.0915    -0.0075    0.673
+        450     0.2919     0.2411    -0.1210     0.1719    0.666
+        500    -0.2314     0.1020     0.0667    -0.4001    0.605
+     TOTALE   d log(L/n) = +2.3078   A = +1.4203   B = -0.6815   misto = +1.5691
+     -> A vale il 67.6 % di |A|+|B|;  A/B = -2.08
+
+================================================================================================================
+ATTENZIONE: LA SCOMPOSIZIONE QUI SOPRA NON CHIUDE, ED E' UN DIFETTO DEL METODO, NON DEI DATI
+================================================================================================================
+  `L_tot/n` e' una MEDIA di `I*|omega|`; `I` e `omega` qui sopra sono MEDIANE.
+  LE MEDIANE NON SI MOLTIPLICANO PER DARE LA MEDIA: il termine misto assorbe tutto lo
+  scarto, ed e' infatti dell'ordine del totale. La scomposizione mediana NON e' leggibile,
+  e si conserva solo come tentativo dichiarato.
+  SERVONO STATISTICHE COMMENSURABILI, cioe' MEDIE. Nei CSV ce ne sono due:
+     Lam           = media di |psi|^2  -> proxy di media(inerzia), il fattore cs^2 e' ~1
+     fdt_om2_media = media di omega^2  -> RMS(omega) = sqrt(...)
+
+================================================================================================================
+1-bis — LA SCOMPOSIZIONE VERA, con statistiche MEDIE
+================================================================================================================
+  === OFF_s1 ===
+   passo         L/n   Lam ~ <I>  RMS(omega)     I MEDIANA
+      50      0.0477   1.845e-05   5.453e+04         1e-06  <- al FLOOR
+     100     0.09313   8.219e-05    7.85e+04         1e-06  <- al FLOOR
+     150      0.2081   0.0001457   9.156e+04         1e-06  <- al FLOOR
+     200      0.3128   0.0001877   9.763e+04         1e-06  <- al FLOOR
+     250      0.8962   0.0004072   1.031e+05         1e-06  <- al FLOOR
+     300        1.68    0.001307   1.042e+05         1e-06  <- al FLOOR
+     350       2.003      0.0022   1.052e+05      1.07e-06
+     400        2.57     0.00344   1.052e+05     1.398e-06
+     450       7.315     0.00477    1.06e+05     1.812e-06
+     500       5.258    0.007684   1.101e+05     2.294e-06
+  d log(L/n) = +4.7025   A = d log(Lam) = +6.0318   B = d log(RMS om) = +0.7021   misto = -2.0315
+  -> PESO DI A: 89.6 % di |A|+|B|   |   Lam x416, RMS(omega) x2.02
+
+  === OFF_s2 ===
+   passo         L/n   Lam ~ <I>  RMS(omega)     I MEDIANA
+      50     0.04792   9.888e-06   5.491e+04         1e-06  <- al FLOOR
+     100     0.08048   0.0001111   7.923e+04         1e-06  <- al FLOOR
+     150      0.2205    0.000481   8.937e+04         1e-06  <- al FLOOR
+     200      0.5344   0.0008843   9.545e+04         1e-06  <- al FLOOR
+     250       1.053    0.001252   9.917e+04     1.382e-06
+     300      0.7745    0.002169   1.001e+05     2.082e-06
+     350       5.787    0.003609   9.952e+04     2.587e-06
+     400       5.715    0.006052   9.727e+04     3.011e-06
+     450       10.07     0.00851   9.721e+04     3.467e-06
+     500       6.021     0.01396   9.505e+04     4.122e-06
+  d log(L/n) = +4.8334   A = d log(Lam) = +7.2526   B = d log(RMS om) = +0.5486   misto = -2.9678
+  -> PESO DI A: 93.0 % di |A|+|B|   |   Lam x1412, RMS(omega) x1.73
+
+  === ON_s1 ===
+   passo         L/n   Lam ~ <I>  RMS(omega)     I MEDIANA
+      50     0.03285   1.797e-05   3.732e+04         1e-06  <- al FLOOR
+     100     0.06536   6.616e-05   4.384e+04         1e-06  <- al FLOOR
+     150     0.07985   0.0001259   4.507e+04         1e-06  <- al FLOOR
+     200      0.1426   0.0002073   4.559e+04         1e-06  <- al FLOOR
+     250      0.1277    0.000271   4.697e+04         1e-06  <- al FLOOR
+     300      0.1092   0.0009598   4.637e+04         1e-06  <- al FLOOR
+     350      0.1362    0.002407   4.644e+04     1.195e-06
+     400      0.1496    0.003752    4.69e+04     1.493e-06
+     450      0.2886    0.005087   4.545e+04     1.975e-06
+     500      0.2108    0.006763   4.302e+04     2.583e-06
+  d log(L/n) = +1.8590   A = d log(Lam) = +5.9306   B = d log(RMS om) = +0.1423   misto = -4.2139
+  -> PESO DI A: 97.7 % di |A|+|B|   |   Lam x376, RMS(omega) x1.15
+
+  === ON_s2 ===
+   passo         L/n   Lam ~ <I>  RMS(omega)     I MEDIANA
+      50     0.03297    8.74e-06   3.726e+04         1e-06  <- al FLOOR
+     100     0.04873   8.999e-05   4.175e+04         1e-06  <- al FLOOR
+     150     0.07719   0.0002606    4.04e+04         1e-06  <- al FLOOR
+     200      0.1886   0.0006022   4.107e+04         1e-06  <- al FLOOR
+     250      0.2392     0.00105   4.102e+04     1.158e-06
+     300     0.09051    0.002218   4.209e+04     1.751e-06
+     350      0.2852    0.003414   4.229e+04     2.431e-06
+     400       0.312    0.005131   4.147e+04     2.936e-06
+     450      0.4178     0.00761   3.933e+04     3.737e-06
+     500      0.3315     0.01295   3.655e+04     4.138e-06
+  d log(L/n) = +2.3078   A = d log(Lam) = +7.3006   B = d log(RMS om) = -0.0192   misto = -4.9735
+  -> PESO DI A: 99.7 % di |A|+|B|   |   Lam x1481, RMS(omega) x0.98
+
+  IL MISTO E' GRANDE E NEGATIVO, e ha DUE cause note, entrambe nello stesso verso:
+   (1) `Lam` e' media di rho, ma l'inerzia ha un FLOOR 1e-6: finche' molti nodi sono al
+       floor, media(inerzia) > Lam, e converge verso Lam DALL'ALTO -> `Lam` SOVRASTIMA la
+       crescita di media(inerzia);
+   (2) `I` e `omega` sono ANTICORRELATI (pendenza -1.056, C1), quindi media(I*omega)
+       cresce MENO di media(I)*RMS(omega).
+  ATTENZIONE: QUINDI `A` E' SE MAI SOVRASTIMATO. MA `B` E' MISURATO DIRETTAMENTE ED E' ~0: la
+  conclusione «non e' omega che cresce» NON dipende dalla sovrastima di A.
+
+================================================================================================================
+IL NUMERO CHE DECIDE — dispersione FRA SEMI (P3), mai la SE interna
+================================================================================================================
+  OFF   A = +6.0318 / +7.2526   B = +0.7021 / +0.5486
+  OFF   peso di A: 89.6 % / 93.0 %   media 91.3 %  sd 2.4 %  IC95 [69.7, 112.8] (t(1)=12.706)
+  ON    A = +5.9306 / +7.3006   B = +0.1423 / -0.0192
+  ON    peso di A: 97.7 % / 99.7 %   media 98.7 %  sd 1.5 %  IC95 [85.5, 111.9] (t(1)=12.706)
+
+================================================================================================================
+CONTROLLO 3.1 — il confronto e' fra gli STESSI nodi? `n` CRESCE in ogni intervallo
+================================================================================================================
+  OFF_s1    n da 1883 a 3790;  intervalli con n in CALO (rimozioni/fusioni): 0
+  OFF_s2    n da 1853 a 2800;  intervalli con n in CALO (rimozioni/fusioni): 0
+  ON_s1     n da 1912 a 3773;  intervalli con n in CALO (rimozioni/fusioni): 0
+  ON_s2     n da 1916 a 3054;  intervalli con n in CALO (rimozioni/fusioni): 0
+  -> se e' 0, la popolazione non perde nodi: `Delta L` mescola crescita e AGGIUNTA, mai
+     crescita e RIMOZIONE. E' il caso piu' semplice da leggere, ma NON isola i birth-free.
+================================================================================================================
