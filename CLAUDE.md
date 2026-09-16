@@ -368,8 +368,35 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   `_cs_nodo_prev` e `_r_corrente` **scritte solo col flag ON** (da cui dipende la byte-identita'
   di S1: se un giorno servissero a ramo spento, il sigillo S1 va rifatto). Richiede `--fork-su2`;
   da solo viene IGNORATO con avviso. VERIFICATO dal sorgente sul blob 2277e9a0.
-  **⚠ MARCHIO (2026-09-15, rilievo di Luca, verificato dal disco): il sigillo 23/23 dello STRATO 1
-  NON HA MAI ESERCITATO LA DIPENDENZA DA `cs`.** L'argv di `_sigillo_strato1.py` (righe 380-386)
+  **✅ MARCHIO TOLTO IL 2026-09-16 — `tau` SEGUE `cs`, MISURATO. Il sigillo e' ora 25/27 PASS + 2
+  FAIL ATTESI** (`csv/_seal_fork/_sigillo_strato1_risigillo_2026-09-16.txt`, blob `08784685`,
+  **con `--cs-dinamico`**). Il marchio qui sotto e' **storico**: si legge per sapere **com'era** e
+  **cosa lo ha tolto**, non come stato attuale.
+  **COSA LO HA TOLTO: il SIGILLO 8, scritto apposta perche' rilanciare il sigillo com'era NON
+  SAREBBE BASTATO.** Nei test in-process `_cs_nodo_prev` era `None` o `np.full(nodi, cs)`, cioe'
+  **COSTANTE**: un `cs` costante non esercita `tau = d/cs`, lo rende indistinguibile da `tau ∝ d`.
+  S8 da' a quattro nodi **`cs = 1, 2, 4, 8`** con **tutto il resto identico** (stessa `d`, `r = 1`
+  su tutti — l'**opposto esatto** di S7, che varia `r` e tiene `cs` fisso):
+  * **S8** `alpha = 1-exp(-dt_n*cs/d)` per nodo -> `max|alpha_mis - alpha_atteso| = 2.550e-15`;
+  * **S8b** rapporto `cs=8 / cs=1` = **7.660686976** misurato = atteso — **se `cs` fosse ignorato
+    varrebbe ESATTAMENTE 1.000000000**, come il `r=2/r=1` col bug del `DT` nudo;
+  * **S8c** `|rapporto - 1| = 6.661`; **S8d** controprova con `cs` COSTANTE -> `alpha` uguale per
+    tutti (`3.816e-16`), cosi' S8 non puo' passare per un artefatto dello slerp.
+  **I DUE FAIL SONO S1a/S1b, PREVISTI E COMMITTATI PRIMA** (`doc/PREDIZIONE_risigillo_strato1.md`,
+  commit `2853b36`): fra il blob di riferimento `968fba34` e `08784685` c'e' **C11**, che **non e'
+  gated su `FORK_SU2_MEM`** — nel codice nuovo l'orologio a 4pi e' attivo, nel vecchio era inerte
+  al 95.33 %. Due orologi -> due `r` -> due `dt_n` -> traiettorie diverse -> `N` diverso (**3096
+  contro 3020, 32 array su 32 con shape diversa**). **Il `max|A-B| = 0.000e+00` stampato accanto a
+  quei FAIL e' MANCANZA DI CONFRONTO, non identita'.** **NON e' una regressione: e' una cura che ha
+  fatto il suo mestiere.** **E il sigillo si cita cosi': «25/27 PASS + 2 FAIL ATTESI», MAI «23/23».**
+  **⚠ E COSA S8 *NON* DICE:** che `tau = d/cs` sia **fisicamente** distinguibile da `tau ∝ d` nei
+  run veri. **Non lo e'** (C13: `cs_std/cs` fra **0.0086 %** e **0.24 %**, sempre sotto l'1 %).
+  **S8 prova che la LEGGE e' cablata e viva; C13 dice che alle densita' simulabili quella legge ha
+  poco da dire.** Due affermazioni diverse, nessuna sostituisce l'altra.
+  **Sullo stesso ri-sigillo e' emerso un difetto grosso: vedi la voce «IL SIGILLO SI SCHIANTAVA».**
+
+  **⚠ MARCHIO STORICO (2026-09-15, rilievo di Luca, verificato dal disco) — TOLTO il 2026-09-16,
+  vedi sopra: il sigillo 23/23 dello STRATO 1 NON AVEVA MAI ESERCITATO LA DIPENDENZA DA `cs`.** L'argv di `_sigillo_strato1.py` (righe 380-386)
   **non contiene `--cs-dinamico`**, quindi `cs = CS_M` costante e `_cs_nodo_prev` non veniva scritta:
   il ritardo girava su **`tau = d/CS_M`**. E vale **due volte**: quel sigillo e' del blob `2277e9a0`,
   **precedente alla cura della cache**, quindi anche col flag acceso la cache sarebbe stata
@@ -679,6 +706,20 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   memoria no. *(Nel caso reale: `CS_DINAMICO` off e' deducibile da `cs_std = nan` su tutti gli 11
   campioni, perche' la cache `_cs_nodo_prev` non viene scritta a flag spento. Deducibile, non
   scritto.)*
+- **IL SIGILLO DELLO STRATO 1 SI SCHIANTAVA DA UN GIORNO, E NESSUNO SE N'ERA ACCORTO PERCHE'
+  NESSUNO LO AVEVA RIGIRATO** (2026-09-16, `csv/_seal_fork/_sigillo_strato1_CRASH_2026-09-16.txt`).
+  `_bloch_ritardato` calcolava `tau = d/cs` **inline**; dal commit `f7051c3` (cablaggio di
+  `--tau-luce`) la legge e' stata **estratta** nel metodo condiviso `_tempo_luce_nodo`, che
+  `_bloch_ritardato` ora **chiama**. `FintaRete` — il guscio in-process del sigillo — espone i
+  metodi del simulatore **UNO PER UNO**, quindi da quel momento gli mancava il metodo:
+  `AttributeError` a S2, e **S2, S3, S5, S6, S7, S8 e S3b non giravano affatto**.
+  **NON FALLIVA: SI SCHIANTAVA** — la modalita' piu' facile da non notare.
+  **CONSEGUENZA PIU' FORTE DEL MARCHIO:** dal blob `f7051c3` in poi il «23/23» non era nemmeno
+  **RIPRODUCIBILE**. **Un sigillo che non viene rigirato non protegge nulla.**
+  **FRAGILITA' DI STRUTTURA, non caso singolo:** poiche' `FintaRete` elenca i metodi a mano,
+  **qualunque estrazione futura** di un metodo dentro `_bloch_ritardato` o `_coppia_interferenza`
+  rompera' il sigillo **allo stesso modo e in silenzio**. **Gli altri sigilli in-process non sono
+  stati controllati per lo stesso difetto** (2026-09-16).
 - **IL TEMPO-LUCE `tau = d/cs` NON E' TESTABILE ALLE DENSITA' SIMULABILI — MISURATO, non dedotto**
   (2026-09-15, rilievo di Luca). Con `--cs-dinamico` **acceso** e la cache **riparata**:
   `cs ∈ [1.99893, 2.0]`, `cs_std = 1.72e-4`, cioe' **`cs_std/cs = 0.0086 %`** — **116 volte sotto**

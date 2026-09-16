@@ -1,0 +1,97 @@
+================================================================================================
+SIGILLO 1 — FLAG MEM OFF = BYTE-IDENTICO al codice pre-Strato 1 (run veri, 150 passi, seed 1)
+================================================================================================
+[PASS] S1.0 il riferimento e' il blob certificato del PEZZO 3 blob(_old_sim_pre_strato1.py) = 968fba34  (atteso 968fba34)
+[FAIL] S1a fork ON, MEM OFF vs codice pre-Strato 1      max|A-B| = 0.000e+00  DIVERGENTI: ['pos', 'phi', 'phi0', 'phivel', 'eta']
+[FAIL] S1b baseline (fork OFF) vs codice pre-Strato 1   max|A-B| = 0.000e+00  DIVERGENTI: ['pos', 'phi', 'phi0', 'phivel', 'eta']
+
+================================================================================================
+RUN CON MEMORIA ACCESA (150 passi, seed 1) — materiale per S4
+================================================================================================
+  nodi a fine run: Strato 0 = 3096, Strato 1 = 3020
+  array con SHAPE DIVERSA fra i due run: 32 su 32 confrontabili
+  max|Strato0 - Strato1| sugli array di shape UGUALE = 0.000e+00
+  ATTENZIONE ALLA LETTURA DI QUESTI NUMERI (trappola gia' scattata una volta, 2026-09-14):
+      se i due run divergono abbastanza da cambiare il NUMERO DI NODI, nessun array e' piu'
+      confrontabile per shape e "max|A-B|" resta 0.000e+00 per MANCANZA DI CONFRONTO, non per
+      identita'. Guardare sempre PRIMA la riga delle shape. E comunque:
+      questo NON e' un sigillo. Su 150 passi il sistema e' caotico e anche un arrotondamento a
+      1e-16 si amplifica fino a cambiare le mitosi (lezione del 2026-09-13). Le prove che il
+      meccanismo si e' acceso sono S3 (forza, orizzonte ZERO) e S3b (ciclo dinamico vero).
+
+================================================================================================
+SIGILLO 4 — |_nb_ret| = 1, nessun NaN/inf, nessun runaway (run con MEM ON)
+================================================================================================
+[PASS] S4a |_nb_ret| = 1 su tutti i nodi                max| |n_ret| - 1 | = 2.220e-16 su 3020 nodi
+[PASS] S4b norma |psi| = 1 sullo spinore                max| |psi| - 1 | = 3.331e-16 su 3020 nodi
+[PASS] S4c nessun NaN/inf in tutto lo stato             tutti finiti
+[PASS] S4d nessun runaway di scala nella finestra       max|x| = 9.585
+
+================================================================================================
+SIGILLI 2, 3, 5, 6 — in-process sui METODI REALI (_bloch_ritardato + _coppia_interferenza)
+================================================================================================
+[PASS] S2 tau->0: MEM == Strato 0 (byte-identico)       max|MEM_tau0 - Strato0| = 0.000e+00
+[PASS] S2b tau->0: il ritardato E' il corrente          max|n_ret - n_cur| = 0.000e+00
+  contesto: d = 0.8, cs = 2 -> tau = 0.4, alpha = 0.02469 (memoria di ~41 tic); |coppia| ~ 13.3
+[PASS] S3.0 (controprova) Strato 0 e' INERTE, come da teorema max|Strato0 - scalare| = 4.441e-15
+[PASS] S3 LA FORZA CAMBIA: MEM != scalare               max|MEM - scalare| = 9.931e+00  (74.47% di |coppia|)
+
+[PASS] S5 somma coppia ~ 0 — ramo scalare               sum = +1.066e-14  (max|c| = 1.333e+01)
+[PASS] S5 somma coppia ~ 0 — Strato 0                   sum = +2.554e-15  (max|c| = 1.333e+01)
+[PASS] S5 somma coppia ~ 0 — Strato 1 (MEM)             sum = +6.439e-15  (max|c| = 9.312e+00)
+
+[PASS] S6 a riposo: MEM == scalare (nessuna forza inventata) max|MEM - scalare| = 5.329e-15 dopo 200 tic  (|coppia| ~ 10.2)
+[PASS] S6b a riposo: il ritardato resta sul corrente    max|n_ret - n_cur| = 2.220e-16
+[PASS] S6c |n_ret| = 1 dopo 200 tic                     max| |n_ret| - 1 | = 2.220e-16
+
+================================================================================================
+SIGILLO 7 — il rilassamento vive nel TEMPO PROPRIO dt_n = DT*r, non nel tic globale DT
+================================================================================================
+  tau = 0.4,  DT = 0.01,  Omega = pi/2
+   r      alpha atteso (dt_n)   alpha misurato        alpha col BUG (DT)
+   0.5       0.012422199506       0.012422199506       0.024690087972
+   1.0       0.024690087972       0.024690087972       0.024690087972
+   2.0       0.048770575499       0.048770575499       0.024690087972
+   4.0       0.095162581964       0.095162581964       0.024690087972
+[PASS] S7 alpha = 1-exp(-DT*r/tau) per nodo             max|alpha_mis - alpha_atteso| = 2.550e-15
+[PASS] S7b il rapporto r=2 / r=1 e' quello del tempo proprio misurato 1.975309912, atteso 1.975309912  (col BUG sarebbe esattamente 1.000000000)
+[PASS] S7c il ritmo locale CONTA (il bug darebbe tutti uguali) |rapporto - 1| = 9.753e-01
+[PASS] S7d orologio globale (r = None) -> alpha = 1-exp(-DT/tau) max|alpha_mis - 0.024690087972| = 3.816e-16
+
+================================================================================================
+SIGILLO 8 — `tau = d/cs` SEGUE `cs` PER NODO (la dipendenza mai esercitata)
+================================================================================================
+  d = LAM = 0.8,  DT = 0.01,  r = 1 su TUTTI i nodi,  Omega = pi/2
+   cs      tau = d/cs    alpha atteso        alpha misurato      alpha se cs IGNORATO
+   1.0     0.800000       0.012422199506       0.012422199506       0.024690087972
+   2.0     0.400000       0.024690087972       0.024690087972       0.024690087972
+   4.0     0.200000       0.048770575499       0.048770575499       0.024690087972
+   8.0     0.100000       0.095162581964       0.095162581964       0.024690087972
+[PASS] S8 alpha = 1-exp(-dt_n*cs/d) PER NODO            max|alpha_mis - alpha_atteso| = 2.550e-15
+[PASS] S8b il rapporto cs=8 / cs=1 e' quello di d/cs    misurato 7.660686976, atteso 7.660686976  (se cs fosse ignorato sarebbe esattamente 1.000000000)
+[PASS] S8c il `cs` LOCALE conta (con cs ignorato sarebbero tutti uguali) |rapporto - 1| = 6.661e+00
+[PASS] S8d controprova: cs COSTANTE = CS_M -> alpha uguale per tutti max|alpha_mis - 0.024690087972| = 3.816e-16
+
+================================================================================================
+SIGILLO 3b — LA FORZA CAMBIA ANCHE NEL CICLO DINAMICO REALE (batch vero, 30 passi)
+================================================================================================
+  passi misurati: 36   reset della memoria (len != n): 2 su 34 chiamate
+  max|n_ret - n_cur| (stacco passato/presente): mediana 1.990e+00  max 2.000e+00
+  |MEM - Strato0| / |coppia| : mediana 1.758e-01   negli ultimi 10 passi 2.135e-01   max 7.170e-01
+[PASS] S3b la forza cambia nel ciclo reale              max |MEM - Strato0|/|coppia| = 7.170e-01 su 36 passi
+[PASS] S3b2 la memoria NON viene resettata a ogni passo reset 2 su 34 chiamate (la mitosi deve EREDITARE _nb_ret, non azzerarlo)
+================================================================================================
+SIGILLO STRATO 1: 25/27 PASS -> FAIL
+
+COSA QUESTO SIGILLO NON DICE (par.8)
+------------------------------------
+S3 dice che la forza CAMBIA, non che sia FISICA. Il teorema di inerzia si rompe per COSTRUZIONE
+(era prevedibile); che la dinamica che ne esce sia sensata - olonomia W(r) non banale, stabilita'
+su orizzonti lunghi, verso corretto per la gravita' - lo dice un RUN, non l'algebra, e non sotto
+~2000 passi ne' su un solo seme (par.2.7).
+Inoltre: l'effetto e' proporzionale a quanto i Bloch cambiano ENTRO tau. Dove il sistema e'
+quasi-statico, n_ret ~ n_cur e l'inerzia quasi ritorna: la forza-memoria morde solo dove la
+configurazione evolve entro il tempo-luce. E finche' cs non e' vivo (I~0.05 contro soglia ~400),
+tau ~ d/CS_M: il ritardo c'e', ma la sua VARIAZIONE spaziale - la curvatura - e' debole.
+Il flag resta OFF di default.
+

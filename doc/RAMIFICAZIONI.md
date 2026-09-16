@@ -24,7 +24,20 @@
 > **Condizione da riverificare col settore 4π in funzione**, e vale **anche per T3 e i suoi quattro
 > bracci**, cioè per il divario stesso che stiamo inseguendo.
 >
-> **⚠ TERZO MARCHIO — `cs` COSTANTE (2026-09-15, rilievo di Luca, verificato dal disco).**
+> **✅ TERZO MARCHIO — TOLTO IL 2026-09-16. `tau` SEGUE `cs`, MISURATO.**
+> Il ri-sigillo dello STRATO 1 con **`--cs-dinamico`** e il nuovo **SIGILLO 8** da'
+> **25/27 PASS + 2 FAIL ATTESI** (S1a/S1b, previsti e committati **prima** in
+> `doc/PREDIZIONE_risigillo_strato1.md`). **S8b: rapporto `cs=8 / cs=1` = 7.660686976**
+> misurato = atteso — **se `cs` fosse ignorato varrebbe ESATTAMENTE 1.000000000**.
+> **Rilanciare il sigillo com'era NON sarebbe bastato:** nei test in-process
+> `_cs_nodo_prev` era `None` o **costante**, e un `cs` costante non esercita `tau = d/cs`.
+> **⚠ E NON SIGNIFICA che `tau = d/cs` sia distinguibile da `tau ∝ d` nei run veri:** C13
+> dice di no. **S8 prova che la LEGGE e' viva; C13 che a queste densita' ha poco da dire.**
+> **E sullo stesso ri-sigillo e' uscito un difetto grosso: il sigillo SI SCHIANTAVA da un
+> giorno** (`AttributeError` a S2, `_tempo_luce_nodo` mancante in `FintaRete`): **S2..S8 e
+> S3b non giravano affatto**, e dal blob `f7051c3` il «23/23» non era **riproducibile**.
+>
+> **⚠ TERZO MARCHIO, testo STORICO — `cs` COSTANTE (2026-09-15, rilievo di Luca).**
 > Il **sigillo 23/23 dello STRATO 1** e le due misure del braccio OFF sono girati **senza
 > `--cs-dinamico`**: `cs = CS_M` costante, `_cs_nodo_prev` mai scritta, quindi `tau = d/CS_M`.
 > **Il meccanismo del ritardo regge** (S7 misura `r=2/r=1 = 1.9753`, che dipende da `r` non da `cs`);
