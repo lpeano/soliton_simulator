@@ -1,7 +1,6 @@
 ========================================================================================================
 SIGILLO N1 — flag OFF = BYTE-IDENTICO al codice PRIMA del cablaggio (150 passi, seed 1)
 ========================================================================================================
-  (creato _old_sim_pre_rumore.py dal blob 08784685 = codice PRIMA del taglio spettrale)
 [PASS] N1.0 il riferimento e' il blob PRE-cablaggio         blob(_old_sim_pre_rumore.py) = 08784685  (atteso 08784685)
 [PASS] N1.0b stesso numero di nodi (il confronto ESISTE)    nodi: PRE = 3020, POST(OFF) = 3020
 [PASS] N1 flag OFF vs codice pre-cablaggio: byte-identico   max|A-B| = 0.000e+00
@@ -22,11 +21,40 @@ SIGILLI N2, N3, N6, N7 — in-process sul PERCORSO REALE, con spie PURE-READ
   nodi 1598   len(_xi_rumore) = 1598   chiamate 36   fallback 2
 
   N7 — un passo con le spie, per ricostruire la ricorsione NODO PER NODO
+     estrazioni normal() nel passo: 2   candidate di shape (n,3): 1   r: per nodo
+[PASS] N7 la ricorsione usa dt_n = DT*r PER NODO            max|xi_misurato - xi_atteso(dt_n)| = 0.000e+00   (estrazione #0 di 1)
+[PASS] N7b col BUG (DT nudo) NON tornerebbe                 max|xi_misurato - xi_atteso(DT nudo)| = 6.142e-01   (dev'essere GRANDE)
+[PASS] N7c il ritmo locale CONTA (con DT nudo `a` sarebbe uguale per tutti) std(a) fra i nodi = 1.133e-02   a in [0.967667537, 0.999999710]   a col bug = 0.975309912
+
+  N2 — tau_c -> 0: la ricorsione deve collassare sul rumore BIANCO (xi = g)
+     COME si manda tau_c a zero, e perche' NON alzando CS_M: `tau_c = LAM/CS_M`, ma `cs`
+     governa anche il CFL (`beta = 2*zeta*cs/d`, `n2 = ceil(max(beta)*DT/0.2)`, :3062-3073).
+     Con CS_M = 1e9 servirebbero ~5e8 SOTTOPASSI: il sigillo non fallisce, SI PIANTA — ed e'
+     successo, 46 minuti al 68 %% di CPU prima che me ne accorgessi. Si abbassa invece LAM,
+     che NON entra nel conteggio dei sottopassi.
+     NON e' una byte-identita' di run intero: l'inizializzazione di xi da N(0,1) consuma
+     un'estrazione in piu', ed e' una scelta DICHIARATA (stazionarieta' esatta invece di un
+     transitorio di ~40 passi).
+[FAIL] N2 tau_c -> 0: xi collassa su g (rumore BIANCO)      tau_c = 4.000e-05 (= 0.004 passi)   a = 2.669e-109   max|xi - g| = n/d su 80 nodi
+
+  N3 — `_xi_rumore` esteso alla mitosi (il difetto di C7 e C11, scritto PRIMA stavolta)
+     alla fine della costruzione della scena: fallback 2 su 11 chiamate (semina + 3 nuova_massa: LEGITTIMO, non passano da _eredita_spinore_figli)
+[PASS] N3 len(_xi_rumore) == n dopo OGNI passo              25 passi, n da 1196 a 1639, passi con mitosi/potatura 23;  disallineamenti 0
+[PASS] N3b sulla MITOSI il ramo di estensione NON scatta (P5) estensioni durante i 25 passi: 0 su 25 chiamate (prima dei passi erano 2 su 11, dalla costruzione della scena). Se fosse > 0, l'eredita' alla mitosi non basterebbe.
+
+  N6 — stabilita' sul run ON (dal DB del run N1b, 150 passi)
+[PASS] N6a |nb| = 1 su tutti i nodi (run ON)                max| |nb| - 1 | = 2.220e-16 su 2449 nodi
+[PASS] N6b nessun NaN/inf in tutto lo stato (run ON)        tutti finiti
+[PASS] N6c nessun runaway di scala (run ON)                 max|x| = 9.825
+
+========================================================================================================
+N4 / N5 — theta nelle DUE convenzioni e omega, ON vs OFF (dai DB dei run N1/N1b)
+========================================================================================================
 Traceback (most recent call last):
-  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_rumore_colorato.py", line 211, in <module>
-    with Spia(net) as sp:
-         ~~~~^^^^^
-  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_rumore_colorato.py", line 184, in __enter__
-    self.net.rng.normal = normal
-    ^^^^^^^^^^^^^^^^^^^
-AttributeError: 'numpy.random._generator.Generator' object attribute 'normal' is read-only
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_rumore_colorato.py", line 348, in <module>
+    print("  \u26a0 NON E' UN VERDETTO FISICO: 1 seme, %d passi, e la barra giusta e' la dispersione FRA" % PASSI)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u26a0' in position 2: character maps to <undefined>

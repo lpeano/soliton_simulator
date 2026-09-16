@@ -261,37 +261,52 @@ verdetto("N7c il ritmo locale CONTA (con DT nudo `a` sarebbe uguale per tutti)",
 
 # ---- N2: riduzione al limite, tau_c -> 0 torna al rumore BIANCO -------------------------------
 print()
-print("  N2 — tau_c -> 0: la ricorsione deve collassare sul rumore BIANCO (xi = g)")
-print("     COME si manda tau_c a zero, e perche' NON alzando CS_M: `tau_c = LAM/CS_M`, ma `cs`")
-print("     governa anche il CFL (`beta = 2*zeta*cs/d`, `n2 = ceil(max(beta)*DT/0.2)`, :3062-3073).")
-print("     Con CS_M = 1e9 servirebbero ~5e8 SOTTOPASSI: il sigillo non fallisce, SI PIANTA — ed e'")
-print("     successo, 46 minuti al 68 %% di CPU prima che me ne accorgessi. Si abbassa invece LAM,")
-print("     che NON entra nel conteggio dei sottopassi.")
-print("     NON e' una byte-identita' di run intero: l'inizializzazione di xi da N(0,1) consuma")
-print("     un'estrazione in piu', ed e' una scelta DICHIARATA (stazionarieta' esatta invece di un")
-print("     transitorio di ~40 passi).")
-lam_orig = S.LAM
+print("  N2: tau_c -> 0, la ricorsione deve collassare sul rumore BIANCO (xi = g)")
+print("     COME si manda tau_c a zero, dopo DUE tentativi sbagliati. `tau_c = LAM/CS_M`, ma:")
+print("      * ALZARE CS_M PIANTA IL SIGILLO: `cs` governa anche il CFL (beta = 2*zeta*cs/d,")
+print("        n2 = ceil(max(beta)*DT/0.2), :3062-3073). Con CS_M = 1e9 servono ~5e8 SOTTOPASSI.")
+print("        Misurato: 46 minuti al 68 % di CPU, output a zero byte. Non falliva: si piantava.")
+print("      * ABBASSARE LAM SPEGNE IL CAMPO: `filtro_portata = 1-tanh(d/LAM)` va a zero, i pesi")
+print("        d'arco si annullano, `Lam = <|Psi|^2>` diventa 0 e la guardia `if Lam > 0` salta")
+print("        l'INTERO blocco del rumore. Il sigillo dava `n/d`: non misurava nulla.")
+print("     LA VIA GIUSTA: si alza CS_M SOLO DENTRO `_passo_spinoriale`, con un wrapper che lo")
+print("     ripristina subito. Il CFL vive in `step()`, fuori da quel metodo, e non lo vede mai.")
+_cs_orig = S.CS_M
+_orig_ps = S.Rete._passo_spinoriale
+
+
+def _ps_tau0(selfn, *a, **k):
+    """tau_c -> 0 SOLO per la durata del passo spinoriale: fuori, CS_M resta quello vero."""
+    _vecchio = S.CS_M
+    S.CS_M = 1.0e9
+    try:
+        return _orig_ps(selfn, *a, **k)
+    finally:
+        S.CS_M = _vecchio
+
+
 try:
-    S.LAM = lam_orig / 1.0e4                         # tau_c = LAM/CS_M -> 4e-5, dt_n/tau_c ~ 250
-    tau0 = S.LAM / S.CS_M
-    # RETE PICCOLA e NESSUNA massa: a N2 serve solo un passo su cui leggere `xi`, non una scena.
     net2 = S.Rete(2); net2.semina(80)
     for _ in range(4):
         passo(net2)
     xi2_prima = np.asarray(getattr(net2, "_xi_rumore", np.zeros((0, 3))), float).copy()
+    S.Rete._passo_spinoriale = _ps_tau0
     with Spia(net2) as sp2:
         passo(net2)
+    S.Rete._passo_spinoriale = _orig_ps
     xi2 = np.asarray(net2._xi_rumore, float).copy()
     m2 = min(len(xi2), len(xi2_prima), net2.n)
     cand2 = [d for d in sp2.draws if d.ndim == 2 and d.shape[1] == 3 and d.shape[0] >= m2]
     e2 = min([float(np.max(np.abs(xi2[:m2] - d[:m2]))) for d in cand2]) if cand2 else None
-    a0 = float(np.exp(-S.DT / tau0))
+    tau0 = S.LAM / 1.0e9
     verdetto("N2 tau_c -> 0: xi collassa su g (rumore BIANCO)",
              e2 is not None and e2 < 1e-9,
-             "tau_c = %.3e (= %.4g passi)   a = %.3e   max|xi - g| = %s su %d nodi"
-             % (tau0, tau0 / S.DT, a0, "n/d" if e2 is None else "%.3e" % e2, m2))
+             "tau_c = %.3e (= %.3e passi)   candidate (n,3): %d   max|xi - g| = %s su %d nodi"
+             % (tau0, tau0 / S.DT, len(cand2),
+                "n/d (BLOCCO NON ESEGUITO)" if e2 is None else "%.3e" % e2, m2))
 finally:
-    S.LAM = lam_orig
+    S.Rete._passo_spinoriale = _orig_ps
+    S.CS_M = _cs_orig
 
 # ---- N3: lo stato xi e' ESTESO alla mitosi ----------------------------------------------------
 print()
@@ -345,7 +360,7 @@ print()
 print("=" * 104)
 print("N4 / N5 — theta nelle DUE convenzioni e omega, ON vs OFF (dai DB dei run N1/N1b)")
 print("=" * 104)
-print("  ⚠ NON E' UN VERDETTO FISICO: 1 seme, %d passi, e la barra giusta e' la dispersione FRA" % PASSI)
+print("  ATTENZIONE - NON E' UN VERDETTO FISICO: 1 seme, %d passi, e la barra giusta e' la dispersione FRA" % PASSI)
 print("    SEMI (~0.03, C10), non questa. Serve solo a vedere il SEGNO e l'ORDINE DI GRANDEZZA.")
 for eti, D in (("OFF", B), ("ON ", C)):
     om = np.asarray(D.get("omega_s"), float)
