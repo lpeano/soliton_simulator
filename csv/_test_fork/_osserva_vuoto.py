@@ -679,6 +679,73 @@ def main():
             # <omega^2> serve alla equipartizione e NON e' il quadrato della mediana
             r["fdt_om2_media"] = float(np.mean(om_src[np.isfinite(om_src)] ** 2))                 if np.any(np.isfinite(om_src)) else float("nan")
             r["fdt_DT"] = float(S.DT)
+            # ---- MISURA U: IL SETTORE U(1) / SEGNO -------------------------------------------
+            # PERCHE' ESISTE: nell'osservatore non c'era NESSUNA colonna di questo settore. Zero.
+            # E lo Step 2 e' il ponte METRICA -> OROLOGIO, e l'orologio pilota la FASE, che E' il
+            # settore U(1). Accendere il ponte senza misurarne l'uscita e' accendere AL BUIO.
+            # LE FORMULE SONO QUELLE DEL SIMULATORE (`diagnostica`, :5765-5792), non riscritte:
+            # stessi pesi d'arco, stessa canonizzazione, stessa selezione materia-materia.
+            # SI USANO GLI INGREDIENTI DELLA COPIA PROFONDA di MISURA F, perche' `_pesi()` MUTA
+            # cache lette dalla dinamica: chiamarlo sulla rete VERA contaminerebbe la fisica.
+            # OGNI OSSERVABILE PORTA IL SUO VALORE SOTTO IPOTESI NULLA (par.9):
+            #   segno_ov_absmedia   frustrato -> 2/pi = 0.6366   (media di |cos| uniforme)
+            #   segno_arco_coer     frustrato -> 0    (+1 concorde, -1 alternato)
+            #   segno_arco_coer_mat idem, ma SOLO archi materia-materia: distingue ORDINE VERO da
+            #                       SEPARAZIONE illusoria (il totale puo' salire solo escludendo
+            #                       gli archi materia-antimateria discordi)
+            #   spin_overlap_arco   casuale -> 0.5
+            #   verso_arco_coer     casuale -> 0
+            # NB: `berry_segno*` / `berry_spin*` NON si usano: la BUSSOLA le marca MORTE
+            # (telescopano, quindi sono cieche al segno-orologio).
+            _w = np.asarray(g["w"], float); _ii = np.asarray(g["ii"]); _jj = np.asarray(g["jj"])
+            _psp = np.asarray(g["psi_spinor"]); _canon = np.asarray(g["canon"])
+            _nbg = np.asarray(g["nb_grav"], float); _pcm = np.sign(np.asarray(g["perc_chi"], float))
+            _seg = np.real(np.sum(np.conj(_canon) * _psp, axis=1))     # Re<canon|psi> in [-1,1]
+            _sgn = np.sign(_seg)
+            _uu = _nbg / np.maximum(np.linalg.norm(_nbg, axis=1, keepdims=True), 1e-12)
+            r["u1_segno_ov_absmedia"] = float(np.mean(np.abs(_seg)))
+            r["u1_segno_ov_nullo"] = 2.0 / np.pi
+            _mk = (_ii < n) & (_jj < n)
+            if _mk.any():
+                _i2 = _ii[_mk]; _j2 = _jj[_mk]
+                _wa = _w[_mk] if len(_w) == len(_ii) else np.ones(int(_mk.sum()))
+                _ds = max(float(np.sum(_wa)), 1e-12)
+                r["u1_segno_arco_coer"] = float(np.sum(_wa * _sgn[_i2] * _sgn[_j2]) / _ds)
+                r["u1_verso_arco_coer"] = float(np.sum(_wa * np.sum(_uu[_i2] * _uu[_j2], axis=1)) / _ds)
+                _ovl = np.abs(np.sum(np.conj(_psp[_i2]) * _psp[_j2], axis=1)) ** 2
+                r["u1_spin_overlap_arco"] = float(np.sum(_wa * _ovl) / _ds)
+                # PRESIDIO: il settore materia si seleziona con l'etichetta STABILE `perc_chi > 0`,
+                # NON con `_sgn` stesso, che darebbe la tautologia `_sgn*_sgn = +1`.
+                _mm = (_pcm[_i2] > 0) & (_pcm[_j2] > 0)
+                r["u1_n_arco_materia"] = int(_mm.sum())
+                if _mm.any():
+                    _wm = _wa[_mm]; _dm = max(float(np.sum(_wm)), 1e-12)
+                    r["u1_segno_arco_coer_materia"] = float(
+                        np.sum(_wm * _sgn[_i2][_mm] * _sgn[_j2][_mm]) / _dm)
+                else:
+                    r["u1_segno_arco_coer_materia"] = float("nan")
+                # stratificazione materia / vuoto / p90, come per `chi`
+                _I2n = np.abs(np.asarray(psi)[:n]) ** 2
+                _Lam = float(np.mean(_I2n)); _p90 = float(np.percentile(_I2n, 90))
+                _I2a = 0.5 * (_I2n[_i2] + _I2n[_j2])
+                for _et, _sa in (("mat", _I2a > _Lam), ("vuo", _I2a <= _Lam), ("p90", _I2a >= _p90)):
+                    if _sa.any():
+                        _ws = _wa[_sa]; _dd = max(float(np.sum(_ws)), 1e-12)
+                        r["u1_segno_arco_coer_%s" % _et] = float(
+                            np.sum(_ws * _sgn[_i2][_sa] * _sgn[_j2][_sa]) / _dd)
+                        r["u1_spin_overlap_%s" % _et] = float(
+                            np.sum(_ws * _ovl[_sa]) / _dd)
+                    else:
+                        r["u1_segno_arco_coer_%s" % _et] = float("nan")
+                        r["u1_spin_overlap_%s" % _et] = float("nan")
+            else:
+                for k in ("u1_segno_arco_coer", "u1_verso_arco_coer", "u1_spin_overlap_arco",
+                          "u1_segno_arco_coer_materia"):
+                    r[k] = float("nan")
+                r["u1_n_arco_materia"] = 0
+                for _et in ("mat", "vuo", "p90"):
+                    r["u1_segno_arco_coer_%s" % _et] = r["u1_spin_overlap_%s" % _et] = float("nan")
+            r["STEP2_letto"] = int(S.STEP2_OROLOGIO)
         except Exception as _e:                      # P5: un fallback si CONTA, non si subisce
             stato["t3_fail"] = stato.get("t3_fail", 0) + 1
             stato["t3_perche"] = "%s: %s" % (type(_e).__name__, _e)
@@ -694,6 +761,14 @@ def main():
                 r["fdt_%s_mediana" % _nome] = r["fdt_%s_p25" % _nome] =                     r["fdt_%s_p75" % _nome] = float("nan")
             r["fdt_om2_media"] = float("nan")
             r["fdt_DT"] = float(S.DT)
+            for k in ("u1_segno_ov_absmedia", "u1_segno_arco_coer", "u1_verso_arco_coer",
+                      "u1_spin_overlap_arco", "u1_segno_arco_coer_materia"):
+                r[k] = float("nan")
+            r["u1_segno_ov_nullo"] = 2.0 / np.pi
+            r["u1_n_arco_materia"] = 0
+            for _et in ("mat", "vuo", "p90"):
+                r["u1_segno_arco_coer_%s" % _et] = r["u1_spin_overlap_%s" % _et] = float("nan")
+            r["STEP2_letto"] = int(S.STEP2_OROLOGIO)
 
         # La riga e' COMPLETA solo qui: flag e cs_* sono appena stati aggiunti. Scrivere prima
         # troncherebbe il CSV proprio sulle colonne di verifica (errore fatto e corretto il

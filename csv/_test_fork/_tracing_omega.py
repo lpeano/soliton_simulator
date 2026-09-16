@@ -202,6 +202,17 @@ def _ingredienti(S, net):
                 corm=corm, coppia_su_in=coppia_su_in, tau=tau, om_src=om_src, diss=diss,
                 amp=amp, eta=np.asarray(lav.eta[:n], float), fatt_cs=fatt_cs,
                 cs_nodo_in=_cs_in, rho=rho,
+                # [2026-09-16] INGREDIENTI DEL SETTORE U(1)/SEGNO. Si restituiscono da QUI e non
+                # si ricalcolano nell'osservatore, perche' `_pesi()` MUTA cache lette dalla
+                # dinamica (`psi`, `_S.data`, `_chi_core_nodi`): l'unico posto dove e' lecito
+                # chiamarlo e' questa COPIA PROFONDA, che il sigillo gia' certifica.
+                w=w, ii=np.asarray(i), jj=np.asarray(j),
+                psi_spinor=np.asarray(lav._psi_spinor[:n]).copy(),
+                nb_grav=np.asarray(lav._nb_grav()[:n], float).copy(),
+                perc_chi=(np.asarray(lav.perc_chi[:n], float).copy()
+                          if len(lav.perc_chi) >= n else np.ones(n)),
+                canon=np.asarray(lav._bloch_a_spinore(
+                    np.asarray(lav._nb_grav()[:n], float))).copy(),
                 om_vec=om_vec, det_vec=det_vec, dtn=dtn, err_att=err_att,
                 d_nodo=d_nodo, cs_nodo=cs_nodo, tau_luce=tau_luce)
 
