@@ -2227,3 +2227,140 @@ conservazione». **Lo e' in linea di principio — il meccanismo del feedback me
 | metriche §3 nell'osservatore (`L_tot`, `r` per eta', corr `xi`, fattore `cs`) | **da fare** |
 | campagna `{OFF, ON} x >= 2 semi` sul sistema corretto | **da rifare** |
 | `N2` del taglio spettrale | **da rigirare** sul nuovo riferimento |
+
+
+---
+
+## 9.14 — LA BASELINE CORRETTA, LA SCOMPOSIZIONE DI `L_tot`, E L'INVENTARIO DEI SIGILLI
+
+*(Tre riscontri che erano rimasti fuori da questa relazione. Li scrivo qui perche' chi legge solo
+questa dev'essere allineato — §5-ter — e perche' il terzo cambia il piano di lavoro.)*
+
+### 9.14.1 — `L_tot` cresce: **e' l'INERZIA, non `omega`**
+
+Predizione scritta e committata **prima** del calcolo (`doc/PREDIZIONE_scomposizione_L.md`, `5fe79cd`),
+**confermata**. Scomposizione `d log(L/n) = d log(I) + d log(|omega|) + misto` sui 4 run di baseline,
+dal passo 50 al 500:
+
+| run | `d log(L/n)` | **A = `d log(Lam)`** | **B = `d log RMS(omega)`** | **peso di A** |
+|---|---|---|---|---|
+| OFF s1 | +4.703 | **+6.032** | +0.702 | **89.6 %** |
+| OFF s2 | +4.833 | **+7.253** | +0.549 | **93.0 %** |
+| ON s1 | +1.859 | **+5.931** | +0.142 | **97.7 %** |
+| ON s2 | +2.308 | **+7.301** | **-0.019** | **99.7 %** |
+
+In fattori su 450 passi: `Lam` **x376-1481**, `RMS(omega)` **x0.98-2.02**. **Nel braccio ON `omega`
+e' piatto o in leggero CALO mentre l'inerzia cresce di tre ordini.**
+
+> **`L_tot` non e' una violazione di conservazione: e' un campo che si sta accendendo.** La domanda
+> *«si conserva?»* **e' mal posta prima del regime** — a 500 passi il sistema ha vissuto **un decimo**
+> della propria maturazione (`ramp = min(1, eta/TAU_A)`, pieno a ~5000 passi).
+
+**Prova indipendente:** l'inerzia **mediana** lascia il pavimento `1e-6` solo al passo **250-350**.
+Per meta' run il nodo **tipico** ha avuto un'inerzia che **non e' una massa, e' una regolarizzazione**.
+
+**E un fatto NON previsto:** `L_tot/n` cresce **x6.4-126** mentre il prodotto delle **mediane** non
+si avvicina -> **la crescita sta nella CODA, non nel nodo tipico**. Non e' spiegato.
+*(Due errori miei, dichiarati nel referto: la prima scomposizione usava le **mediane** contro una
+**media** e non chiudeva; e un `glob` di pulizia ha toccato i file-riferimento dei sigilli, ripristinati
+e verificati blob per blob.)*
+
+### 9.14.2 — FASE A: **14 flag su 16 non hanno NESSUN sigillo**
+
+Inventario per lettura del codice (`doc/REFERTO_faseA_sigilli.md`). **Tutti e 28 i nomi di flag
+esistono** nell'argv. Ma: **Tier 2 e Tier 3 sono a zero su dieci**; `RUMORE_COLORATO` ha `N2` FAIL;
+`TAU_LUCE` ha il sigillo **fallito**. **Passa solo `STEP2_OROLOGIO`.**
+
+**E due flag che sarebbero stati MUTI, e nessuno dei due lo dichiara:**
+- **`VERSO_CHI` e' MORTO sotto `CHI_CORE`** (`:2881` arriva prima di `:2884`, e `--chi-core` e' in
+  **ogni** run): accenderlo sarebbe stato un **no-op silenzioso**. **Esce dalla lista.**
+- **`LS_AZIM`, `OLON_PART` e `ZETA_VIR` vivono dentro `if VIRIALE:`** e non lo dicono. `ZETA_VIR` ha
+  un **secondo** punto d'uso dentro `if VERLET:`, quindi e' **parzialmente** condizionato — peggio che
+  esserlo del tutto, perche' **meta' dell'effetto sparirebbe in silenzio**.
+
+> **L'assenza di sigilli sta FORZANDO la metodologia migliore**, non impedendo il lavoro: con ~15
+> leggi accese insieme, nessun cambiamento sarebbe attribuibile a una sola.
+
+---
+
+## 9.15 — LA PRIMA PROMOZIONE (`STEP2_OROLOGIO`), E UN FALSO PASS INTERCETTATO PRIMA CHE ACCADESSE
+
+### 9.15.1 — Lo Step 2 e' **fisica di default** dal 2026-09-16
+
+E' la **prima** voce mai scritta nella sezione A di `doc/COMPONENTI_PROMOSSE.md`. I tre criteri §10,
+col riscontro di ciascuno:
+
+1. **DERIVATA:** orologio di Compton `omega = m c^2/hbar` con `c -> cs`, quindi `omega` va come
+   `cs^2` ed e' **l'unica forma possibile**. Zero parametri. **E lo stesso esponente `cs^2` e'
+   derivato per una strada INDIPENDENTE** nell'inerzia (`inerzia` come `cs^-2`):
+   **consistenza trovata, non costruita.**
+2. **SIGILLATA con controllo positivo:** `S3.0` dimostra che il test **VEDE** (39/40 nodi,
+   `|f(1)-f(0)|` mediana **1.279e-03**), senza il quale un sigillo passerebbe **anche su codice morto**.
+3. **ASSENZA = DIFETTO** (Luca): *«un sistema in cui l'EM non risponde alla metrica e' un sistema
+   SBAGLIATO, non diverso»*. La fase U(1) **evolveva gia'**; mancava che **rispondesse alla curvatura**.
+   **E non e' promossa per inerzia:** fino a ieri era OFF e **non e' mai stata accesa in una misura
+   committata**.
+
+**Criterio di RETROCESSIONE, scritto al momento della promozione:** torna a flag se un riscontro
+committato mostra che `_phc` **non e' una fase globale** — cioe' se una firma di **SPIN** si muovesse
+per lo Step 2 **oltre la dispersione fra semi** (0.03, mai la `SE` interna). Oggi `_phc` moltiplica
+`a1` e `b1` per lo **stesso** fattore (`:2212-2213`, uniche occorrenze) e il Bloch e' invariante a **3.3e-16**.
+
+### 9.15.2 — IL PEZZO CHE CONTA PIU' DELLA PROMOZIONE
+
+**Ribaltare un default converte ogni braccio di controllo ottenuto per OMISSIONE del flag in un
+duplicato del braccio di prova.** `_sigillo_step2.py` prendeva il suo braccio OFF **cosi'**:
+
+> senza l'adeguamento, **`S2` avrebbe confrontato ON contro ON e sarebbe PASSATO SEMPRE** — un falso
+> PASS della classe gia' catalogata (*«`0.000e+00` puo' significare "nessun confronto"»*), **ma con le
+> shape UGUALI**, quindi **invisibile anche alla guardia delle shape**.
+
+Adeguati nello stesso commit il sigillo (`--senza-step2-orologio`) e l'osservatore (`--senza-step2`).
+**Regola nuova in §9: quando si ribalta un default, si cercano NELLO STESSO COMMIT tutti i punti che
+ottenevano il vecchio comportamento per omissione.**
+
+**Risigillo eseguito dopo la promozione, col braccio OFF vero: 9/10 PASS + 1 FAIL ATTESO.**
+`S2` da' `0.000e+00` con **nodi 2924 = 2924, shape divergenti 0** — cioe' **il confronto esiste**, ed
+e' identico a prima: senza `--cs-dinamico` il fattore e' **1 esatto**, quindi **la riduzione al limite
+regge anche col braccio OFF vero**. *(`S1` fallisce contro un blob di quattro cambiamenti fa: 3164
+contro 2924 nodi = mancanza di confronto. Si cita «9/10 + 1 FAIL ATTESO», MAI «10/10».)*
+
+---
+
+## 9.16 — `TW_SPINORE`: **la legge CODIFICATA non e' quella DICHIARATA** — segnalo, non eseguo
+
+Il mandato diceva *«`TW_SPINORE` sigillato e poi acceso»*. **Non l'ho acceso e non ho scritto il
+sigillo** (P1). Misura trasversale, 209 852 archi, run ON, 150 passi, seme 1, `--cs-dinamico` acceso:
+
+| | grandezza | valore |
+|---|---|---|
+| **(a)** | **DICHIARATO** dal commento: angolo/passo `= tw/2` | **9.827e-01 rad** |
+| **(b)** | **CODIFICATO** (`:2149`): `tw/(4pi)` sommato a `omega_new` | **1.564e-01** |
+| **(c)** | l'angolo che (b) produce davvero `= (b)*dt_n` | **1.564e-03 rad** |
+| | **(a)/(c) `= 2pi/DT`** | **628.3** |
+
+`omega` **e' una velocita' angolare** (`theta = |omega|*dt`, `:2210` e `:2296`): il commento descrive
+un **angolo**. **Sono due leggi diverse, e quella che gira e' (c).**
+
+**E finisce nella MEMORIA** (`self.omega_s`, `:2313`), dove all'equilibrio vale `tw/(4pi)*tau/dt_n`
+= **3.910e+01** (a `tau/dt_n = 250`) contro una mediana di `|omega_s|` di **7.239e+04**.
+**Il commento di `SYNC_SPINORE` (`:724`) dice, dello stesso blocco, che un torque messo in `omega_s`
+«darebbe accumulo/divergenza».** E, **unico del blocco**, `_otw` **non e' diviso per l'inerzia**.
+
+> **QUELLO CHE NON DICO:** che sia **trascurabile**. Lo **0.054 %** e' un'**AMPIEZZA**, e la domanda
+> e' **DIREZIONALE** — l'asse TW e' **fisso e persistente**, `omega` e' un **random walk**. E' lo stesso
+> errore ampiezza-contro-correlazione che ho gia' fatto sul `cs` allo 0.023 %: **non lo rifaccio al
+> contrario.** *(Ed e' proprio la ragione per cui Luca lo aveva scelto per primo.)*
+
+**Controllo positivo, ed e' DEBOLE:** ON/OFF divergono (**2849 -> 3047** nodi, +6.9 %) **ma con shape
+diverse** -> dice *«che cambia»*, non *«di quanto»*.
+
+**Perche' non ho scritto il sigillo:** il suo criterio naturale (*«ruota il Bloch di `tw/2`»*)
+fallirebbe di **628** — non per un difetto del codice, ma perche' **verrebbe dalla DESCRIZIONE
+invece che dal codice**. Sarebbe il **quarto** criterio stale in due giorni. **Un sigillo scritto
+sulla descrizione di una legge che il codice non implementa e' un modo elaborato di certificare un
+malinteso.**
+
+**La decisione e' di Luca**, fra tre strade: **correggere** (e allora e' una **correzione di difetto**,
+quindi **senza flag**), **sigillare cio' che fa davvero**, o **lasciarlo spento**.
+**Finche' non decide, resta OFF.** -> `doc/REFERTO_tw_spinore.md`, voce **W** del registro.
