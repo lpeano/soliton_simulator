@@ -234,7 +234,10 @@ print("   non era la causa — e in quel caso NON si cerca un colpevole nuovo (P
 print("-" * 112)
 r_br = {}
 for eti, tag, _ in BRACCI:
-    col = {k: [] for k in ("t3_b_sigma", "t3_b_tau", "t3_b_theta", "t3_attesa", "t3_divario")}
+    col = {k: [] for k in ("t3_b_sigma", "t3_b_tau", "t3_b_theta", "t3_attesa", "t3_divario",
+                           "t3_b_r", "t3_b_theta_coord", "t3_b_theta_prop",
+                           "t3_attesa_coord", "t3_divario_coord",
+                           "t3_attesa_prop", "t3_divario_prop", "t3_identita")}
     visti = 0
     for s in SEMI:
         u = dati.get((eti, s))
@@ -258,8 +261,15 @@ for eti, tag, _ in BRACCI:
         print()
         continue
     r_br[eti] = {k: media_ic(col[k]) for k in col}
-    for k, nome in (("t3_b_sigma", "sigma "), ("t3_b_tau", "tau   "),
-                    ("t3_b_theta", "theta "), ("t3_attesa", "ATTESA"), ("t3_divario", "DIVARIO")):
+    for k, nome in (("t3_b_sigma", "sigma            "), ("t3_b_tau", "tau              "),
+                    ("t3_b_r", "r  (NUOVO)       "),
+                    ("t3_b_theta_coord", "theta_COORD      "),
+                    ("t3_b_theta_prop", "theta_PROP       "),
+                    ("t3_attesa_coord", "ATTESA_coord     "),
+                    ("t3_divario_coord", "DIVARIO_coord    "),
+                    ("t3_attesa_prop", "ATTESA_prop      "),
+                    ("t3_divario_prop", "DIVARIO_prop     "),
+                    ("t3_attesa", "ATTESA  (legacy) "), ("t3_divario", "DIVARIO (legacy) ")):
         print("   %-4s %s fra semi:%s" % (eti, nome, riga_ic(r_br[eti][k])))
     d = r_br[eti]["t3_divario"]
     if d["n"] >= 2:
@@ -392,6 +402,16 @@ for eti, tag, _ in BRACCI:
         u = dati.get((eti, s))
         if u is None:
             continue
-        print("   %-4s s%d   theta mediana %10.4g giri/passo   fr>360g %.4f   n %5d"
-              % (eti, s, num(u, "theta_giri_mediana"), num(u, "theta_fr_gt360g"), int(num(u, "n"))))
+        _tc = num(u, "theta_coord_giri_mediana")
+        _tp = num(u, "theta_prop_giri_mediana")
+        if np.isfinite(_tc):
+            print("   %-4s s%d   theta_COORD %9.4g   theta_PROP %9.4g giri/passo   rapporto %.4f"
+                  "   fr>360g(prop) %.4f   n %5d"
+                  % (eti, s, _tc, _tp, _tp / _tc if _tc else float("nan"),
+                     num(u, "theta_prop_fr_gt360g"), int(num(u, "n"))))
+        else:
+            print("   %-4s s%d   theta (LEGACY = prop) %10.4g giri/passo   fr>360g %.4f   n %5d"
+                  "   [CSV precedente alle due convenzioni]"
+                  % (eti, s, num(u, "theta_giri_mediana"), num(u, "theta_fr_gt360g"),
+                     int(num(u, "n"))))
 print("=" * 112)

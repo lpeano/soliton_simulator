@@ -1664,3 +1664,94 @@ senza traccia. **Se Luca lo vuole rimosso e' una sua decisione, non mia.**
 > **Quindi: oggi nessun numero fisico nuovo.** Quello che c'e' e' **una diagnosi strutturale
 > (`lambda` non si deriva)**, **due correzioni a un mandato fatte prima di eseguirlo**, **un sigillo
 > di purezza 6/6**, e **tre decisioni di igiene scritte invece che rimandate**.
+
+## 9.9 — **I DUE `theta` SONO CHIUSI** (C19): ora girano insieme, e ne e' uscita una correzione alla catena
+
+`theta` non era un'osservabile sola. `_rimisura_t3.py` `:73` usa `theta = |omega|*DT` (tempo di
+**COORDINATA** — la convenzione di **C8** e dell'attesa **`-0.69`**); MISURA F usa
+`theta = |omega|*dt_n` (tempo **PROPRIO**, quello giusto per §9). **Finche' ne girava una sola, un
+numero che si muoveva poteva essere fisica oppure l'unita' di misura che cambia** — ed era gia'
+successo.
+
+**Ora l'osservatore scrive ENTRAMBE, fianco a fianco, nello stesso campione:** `theta_coord_*`,
+`theta_prop_*` e **`r_ratio_*`**, il loro rapporto, che **e' `r`** (la FASE 5 agisce proprio li').
+In MISURA F: `t3_b_theta_coord`, `t3_b_theta_prop`, **`t3_b_r`**.
+**Nessuna delle due e' stata dismessa** — la giusta e' `prop`, ma tutto lo storico e' in `coord` e
+serve per rileggerlo. **`theta_*` senza suffisso resta come LEGACY ed E' `theta_prop`**: gli 8 CSV
+gia' committati e i due script di verdetto la leggono con quel nome, e rinominarla li avrebbe resi
+illeggibili. *(Deviazione dichiarata rispetto al mandato, che chiedeva «mai `theta` nudo».)*
+
+**E quanto conta? Al primo campione di prova, 120 passi: `theta_coord = 107.7` contro
+`theta_prop = 85.3` giri/passo — il 26 % di differenza sulla mediana.** Non e' un dettaglio.
+
+**Controllo di identita' cablato:** poiche' `theta_prop = theta_coord * r` sullo stesso campione,
+deve valere `pend(prop) - pend(coord) - pend(r) = 0` **esattamente**. La colonna `t3_identita`
+misura **`4.6e-16`**. Se un giorno non fosse ~`1e-12`, l'errore e' **nel codice, non nella fisica**.
+
+> ### E LA CORREZIONE CHE NE E' USCITA, che non era nel mandato
+> Da `|omega|_eq = |F|*sqrt(dt_n*tau/2)` con `dt_n = DT*r`:
+> ```
+> pend(theta_coord) = sigma + tau/2 +   r/2
+> pend(theta_prop)  = sigma + tau/2 + 3*r/2
+> ```
+> **La formula usata finora, `sigma + tau/2`, ASSUMEVA `pend(r) = 0` — in ENTRAMBE le convenzioni,
+> e non era mai stato verificato.** Ora `t3_b_r` lo misura.
+> *(Il **divario** resta pero' **indipendente dalla convenzione**: `divario_prop − divario_coord =
+> pend(r) − pend(r) = 0`, verificato nei dati. Quindi il residuo non spiegato della voce **R2**
+> non era un artefatto di convenzione.)*
+
+---
+
+## 9.10 — **TAGLIO SPETTRALE: predizione scritta, cablaggio NON fatto.** Tre premesse del mandato non reggono
+
+`doc/PREDIZIONE_taglio_spettrale.md`. Il mandato metteva **P1 in vigore** e chiedeva di segnalare,
+non eseguire, ogni affermazione in contrasto con un fatto misurato. **Ce ne sono tre.**
+
+**① LA RICORSIONE DATA NON RIDUCE L'AMPIEZZA: PRESERVA LA VARIANZA, esattamente.**
+Per `x' = a x + b g` la varianza stazionaria e' `b^2/(1-a^2)`; con `b^2 = 1-a^2` vale **1**, cioe'
+quella del rumore bianco. Verificato: **analitico `1.000000`, simulato `0.997330`** su 400 000
+passi, `tau_c = 0.400` = 40 passi. **Cambia solo la STRUTTURA TEMPORALE, non l'ampiezza.**
+La stima «varianza /20 -> ampiezza /4.47» descrive un oggetto **diverso** (banda limitata a densita'
+spettrale costante) e per ottenerlo servirebbe **moltiplicare per `sqrt(2 dt/tau_c)`**, cioe'
+**toccare `amp`** — che il mandato vieta e che sarebbe **un coefficiente scelto** (§3).
+**Le due prescrizioni del mandato sono incompatibili fra loro.**
+
+**② IL RUMORE NON MUOVE IL BLOCH. Lo muove `omega`, di tre ordini di grandezza.**
+Misurato sui quattro run di oggi:
+
+| run | calcio del rumore | moto del Bloch | rapporto |
+|---|---|---|---|
+| OFF s3 / s4 | **7.68 / 8.44** gradi/passo | 37 874 / 37 866 | **0.020 % / 0.022 %** |
+| ON s3 / s4 | **7.23 / 9.42** | 5 705 / 4 274 | **0.127 % / 0.220 %** |
+
+Il «kick da ~90 gradi» **non esiste**: vale **7-9 gradi**. Il `85.6` citato e' reale ma e' lo
+spostamento del **padre nel passo della nascita su n = 7** (`doc/BILANCIO_ordine_spin.md:97`, che
+scrive esso stesso *«se regge sulla statistica»*) — **non una misura del rumore**.
+E dal codice: sotto `--spinore-corretto` il `_nb` committato e' **derivato da `_psi_spinor`**, quindi
+il calcio del rumore viene **sovrascritto**: il rumore entra **solo nella COPPIA**, via
+`cross(B, nb)`.
+
+**③ E QUELLA COPPIA E' GIA' MISURATA MARGINALE: `R_stoc = 0.041` contro l'errore atteso `0.097`
+(C6).** Il taglio agisce su un canale che vale il **4 %** dell'ingresso di `omega`, **senza
+cambiarne l'ampiezza**. Non c'e' via per cui `theta` scenda di 4.5x.
+
+> **PREDIZIONE CORRETTA: `theta` NON SCENDE. Se si muove, SALE** (≲ 5 %). Una forzante **correlata**
+> su 40 passi fa crescere `omega` stocastico come **`n`** invece che `sqrt(n)` — fino a `sqrt(40)
+> ~ 6.3` **sulla sola componente stocastica**, che pero' vale il 4 %.
+> **E l'ipotesi qualitativa del mandato non puo' verificarsi:** richiede che il rumore domini la
+> decorrelazione del Bloch, e la domina allo **0.02-0.22 %**. `B` e' costruito da `_nb_prec`, il
+> Bloch committato, il cui moto e' `omega`. **Colorare il rumore non puo' stabilizzare `B`.**
+
+**COSA RESTA IN PIEDI, ed e' la parte che conta:** *«si fa perche' il rumore bianco e' fisicamente
+SBAGLIATO»*. **Questa giustificazione regge intatta** e non dipende da nessuna delle tre
+correzioni: `tau_c = LAM/CS_M` e' **derivato**, la ricorsione **non introduce coefficienti**.
+**Il cablaggio ha senso — ma per correggere una legge sbagliata, aspettandosi che NON cambi i
+numeri.**
+
+**E una correzione da fare comunque, se si cabla:** **il `dt` della ricorsione dev'essere
+`dt_n = DT*r`, non `DT`**. Il mandato non lo dice; §9 e' esplicito che `DT` nudo dentro un processo
+locale impone **un frame preferito**. **E' l'errore gia' preso nello Strato 1**, che S1..S6
+passavano identici e solo **S7** ha stanato: **serve un sigillo tipo S7 fra N1 e N6**, o passerebbe
+invisibile come allora.
+
+**Serve il via di Luca su una cosa sola: quale delle due prescrizioni incompatibili vale.**

@@ -1,0 +1,18 @@
+MOTIVO (scritto A MANO il 2026-09-16: questa copia e' stata prodotta dalla PRIMA versione della
+guardia par.5-quinquies, che non scriveva ancora il file di motivo -- difetto corretto in ebeb027).
+
+  sha1 dei BYTE GREZZI di questa copia : 37c31630977cb72d4873972507ed94726942cae7
+  oggetto a HEAD                       : 08784685eeb17835389d248a2d1d07db4f0d1305
+  byte 442240, di cui 6510 CRLF          (l'oggetto a HEAD ne ha 435730, tutti LF)
+
+CASO: STESSO CONTENUTO, BYTE DIVERSI. Un "git checkout -- soliton_simulator.py" (mio, per
+ripristinare il file dopo la prova della guardia) aveva riscritto le newline LF -> CRLF, perche'
+core.autocrlf = true e non esiste .gitattributes.
+
+LA FISICA E' LA STESSA -- Python ignora le newline, e infatti il sigillo ha dato 6/6 PASS -- MA IL
+FILE NON ERA BYTE-IDENTICO all'oggetto che i CSV citano con la loro colonna del blob.
+
+NON CANCELLARE QUESTA COPIA CREDENDOLA RIDONDANTE: e' esattamente l'errore che ho fatto io il
+2026-09-16, verificandola con "git hash-object" -- che applica il filtro "clean", cioe' PROPRIO il
+filtro che nasconde la differenza. (E il comando di cancellazione poi non e' nemmeno partito,
+perche' era in "&&" dopo un comando fallito: e' per quello che questa evidenza esiste ancora.)

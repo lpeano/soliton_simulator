@@ -397,7 +397,31 @@ def main():
         if om is not None and len(om) >= n:
             omn = np.linalg.norm(np.asarray(om, float)[:n], axis=1)
             rr = rv[:n] if (rv is not None and len(rv) >= n) else np.ones(n)
-            th = np.degrees(omn * S.DT * rr)
+            # [2026-09-16, C19] DUE CONVENZIONI, SCRITTE FIANCO A FIANCO. Non sono la stessa
+            # osservabile, e finche' ne gira una sola un numero che si muove puo' essere fisica
+            # oppure l'unita' di misura che cambia (e' gia' successo: theta_ON sembrava centrare
+            # l'attesa -0.69, ma anche il braccio OFF si muoveva, senza ragione).
+            #   theta_coord = |omega| * DT     tempo di COORDINATA  (la convenzione di C8 e del -0.69)
+            #   theta_prop  = |omega| * dt_n   tempo PROPRIO        (quella fisicamente giusta, par.9)
+            # NESSUNA DELLE DUE SI DISMETTE: la giusta e' `prop`, ma tutto lo storico e'in `coord`.
+            th_coord = np.degrees(omn * S.DT)
+            th_prop = np.degrees(omn * S.DT * rr)
+            for _et, _v in (("coord", th_coord), ("prop", th_prop)):
+                r["theta_%s_mediana" % _et] = float(np.median(_v))
+                r["theta_%s_media" % _et] = float(np.mean(_v))
+                r["theta_%s_p90" % _et] = float(np.percentile(_v, 90))
+                r["theta_%s_giri_mediana" % _et] = float(np.median(_v) / 360.0)
+                r["theta_%s_fr_gt30g" % _et] = float(np.mean(_v > 30.0))
+                r["theta_%s_fr_gt360g" % _et] = float(np.mean(_v > 360.0))
+            # IL RAPPORTO FRA LE DUE **E'** `r`, il tempo proprio locale: theta_prop/theta_coord = r.
+            # Si scrive perche' e' utile di per se' — la FASE 5 agisce proprio li' — e perche' e' un
+            # CONTROLLO: deve coincidere con `r_mediana` della MISURA D.
+            r["r_ratio_mediana"] = float(np.median(th_prop / np.maximum(th_coord, 1e-300)))
+            r["r_ratio_media"] = float(np.mean(th_prop / np.maximum(th_coord, 1e-300)))
+            # LEGACY, da non usare nei lavori nuovi: e' `theta_prop`, e sta qui solo perche' gli 8
+            # CSV gia' committati e `_verdetto_4pi.py` / `_verdetto_S_R.py` la leggono con questo
+            # nome. Rinominarla avrebbe reso illeggibili i dati gia' presi (par.5).
+            th = th_prop
             r["theta_mediana"] = float(np.median(th))
             r["theta_media"] = float(np.mean(th))
             r["theta_p90"] = float(np.percentile(th, 90))
@@ -405,6 +429,10 @@ def main():
             r["theta_fr_gt30g"] = float(np.mean(th > 30.0))
             r["theta_fr_gt360g"] = float(np.mean(th > 360.0))
         else:
+            for _et in ("coord", "prop"):
+                for k in ("mediana", "media", "p90", "giri_mediana", "fr_gt30g", "fr_gt360g"):
+                    r["theta_%s_%s" % (_et, k)] = float("nan")
+            r["r_ratio_mediana"] = r["r_ratio_media"] = float("nan")
             for k in ("theta_mediana", "theta_media", "theta_p90", "theta_giri_mediana",
                       "theta_fr_gt30g", "theta_fr_gt360g"):
                 r[k] = float("nan")
@@ -479,22 +507,45 @@ def main():
             tau_eff = np.asarray(g["tau_luce"] if int(r["TAU_LUCE"]) else g["tau"], float)
             om_src = np.asarray(g["om_src"], float)
             dtn_g = np.asarray(g["dtn"], float)
-            th_g = np.degrees(om_src * dtn_g)
+            # [2026-09-16, C19] LE DUE CONVENZIONI, ANCHE QUI. `dtn_g = DT*r`, quindi
+            # `theta_prop = theta_coord * r` e le due pendenze differiscono ESATTAMENTE di quella
+            # di `r` (il logaritmo di un prodotto e' la somma, e il campione e' lo stesso):
+            # e' un'IDENTITA', non un'approssimazione, e viene verificata sotto come controllo.
+            th_coord = np.degrees(om_src * S.DT)
+            th_prop = np.degrees(om_src * dtn_g)
+            r_loc = np.asarray(dtn_g, float) / S.DT          # il tempo proprio locale, per nodo
+            th_g = th_prop                                   # LEGACY: `t3_b_theta` E' la `prop`
             # si esclude il PAVIMENTO dell'inerzia: li' l'ascissa e' COSTANTE per costruzione
             # (una regressione su un'ascissa costante non e' una pendenza). STESSA soglia di
             # `_rimisura_t3.py` — `rho > 1.0000001e-6` — e non `~pavimento`: un nodo con
             # `rho == 1e-6` esatto non e' marcato pavimento ma ha comunque `inerzia` al floor.
             liberi = inz > 1.0000001e-6
-            for nome, y in (("sigma", sig), ("tau", tau_eff), ("theta", th_g)):
+            for nome, y in (("sigma", sig), ("tau", tau_eff), ("theta", th_g),
+                            ("theta_coord", th_coord), ("theta_prop", th_prop), ("r", r_loc)):
                 b, se, r2, nn = _pend_se(inz[liberi], y[liberi])
                 r["t3_b_%s" % nome] = b
                 r["t3_se_%s" % nome] = se
                 r["t3_r2_%s" % nome] = r2
                 r["t3_n_%s" % nome] = nn
-            # LA CATENA: theta = sigma + tau/2 (equilibrio del random walk smorzato,
-            # |omega|_eq = |F|*sqrt(dt_n*tau/2) -> CLAUDE.md par.9)
-            r["t3_attesa"] = r["t3_b_sigma"] + 0.5 * r["t3_b_tau"]
-            r["t3_divario"] = r["t3_b_theta"] - r["t3_attesa"]
+            # ---- LA CATENA, RIDERIVATA. E il termine in `r` NON c'era. -----------------------
+            # `|omega|_eq = |F| * sqrt(dt_n * tau / 2)` (random walk smorzato, CLAUDE.md par.9),
+            # e `dt_n = DT * r`. Passando ai logaritmi e derivando rispetto a log(inerzia):
+            #     pend(omega)       = sigma + tau/2 + r/2
+            #     pend(theta_coord) = pend(omega)        = sigma + tau/2 +   r/2     [theta = omega*DT]
+            #     pend(theta_prop)  = pend(omega) + r    = sigma + tau/2 + 3*r/2     [theta = omega*dt_n]
+            # LA FORMULA USATA FINORA, `sigma + tau/2`, ASSUME `pend(r) = 0` — in ENTRAMBE le
+            # convenzioni. Non e' stato verificato: ora `t3_b_r` lo misura. Se e' ~0 la vecchia
+            # attesa resta valida e questa e' solo una conferma; se non lo e', l'attesa `-0.69`
+            # e tutto C8 vanno riletti. NON si dismette la vecchia: si scrivono tutte e tre.
+            r["t3_attesa"] = r["t3_b_sigma"] + 0.5 * r["t3_b_tau"]          # LEGACY (assume r=0)
+            r["t3_divario"] = r["t3_b_theta"] - r["t3_attesa"]              # LEGACY
+            r["t3_attesa_coord"] = r["t3_b_sigma"] + 0.5 * r["t3_b_tau"] + 0.5 * r["t3_b_r"]
+            r["t3_divario_coord"] = r["t3_b_theta_coord"] - r["t3_attesa_coord"]
+            r["t3_attesa_prop"] = r["t3_b_sigma"] + 0.5 * r["t3_b_tau"] + 1.5 * r["t3_b_r"]
+            r["t3_divario_prop"] = r["t3_b_theta_prop"] - r["t3_attesa_prop"]
+            # CONTROLLO DI IDENTITA' (non un test fisico): pend(prop) - pend(coord) - pend(r) = 0
+            # ESATTAMENTE. Se non e' ~1e-12 c'e' un errore nel codice, non nella fisica.
+            r["t3_identita"] = (r["t3_b_theta_prop"] - r["t3_b_theta_coord"] - r["t3_b_r"])
             r["t3_n_liberi"] = int(liberi.sum())
             r["t3_ok"] = 1
             # ---- MISURA G: GLI INGREDIENTI DEL CONTO FDT, sul sistema PULITO -----------------
@@ -522,10 +573,12 @@ def main():
         except Exception as _e:                      # P5: un fallback si CONTA, non si subisce
             stato["t3_fail"] = stato.get("t3_fail", 0) + 1
             stato["t3_perche"] = "%s: %s" % (type(_e).__name__, _e)
-            for nome in ("sigma", "tau", "theta"):
+            for nome in ("sigma", "tau", "theta", "theta_coord", "theta_prop", "r"):
                 r["t3_b_%s" % nome] = r["t3_se_%s" % nome] = r["t3_r2_%s" % nome] = float("nan")
                 r["t3_n_%s" % nome] = 0
             r["t3_attesa"] = r["t3_divario"] = float("nan")
+            r["t3_attesa_coord"] = r["t3_divario_coord"] = float("nan")
+            r["t3_attesa_prop"] = r["t3_divario_prop"] = r["t3_identita"] = float("nan")
             r["t3_n_liberi"] = 0
             r["t3_ok"] = 0
             for _nome in ("B", "amp", "om", "inerzia", "dtn"):

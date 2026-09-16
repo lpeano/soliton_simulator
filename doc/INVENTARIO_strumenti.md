@@ -90,6 +90,49 @@ una riscrittura testuale cambierebbe le newline, quindi il **blob**, e la copia 
 
 ---
 
+## 3-ter. ⚠ QUALE SCRIPT PRODUCE QUALE `theta` — le DUE CONVENZIONI (C19, chiuso il 2026-09-16)
+
+**`theta` non e' un'osservabile sola.** Due script lo calcolano in due tempi diversi, e i numeri
+**non sono confrontabili fra loro**:
+
+| script | riga | formula | tempo | dove sta |
+|---|---|---|---|---|
+| `_rimisura_t3.py` | `:73` | `theta = \|omega\| * DT` | **COORDINATA** | i numeri di **C8**, e **l'attesa `-0.69`** |
+| `_osserva_vuoto.py` MISURA C/F | `:400`, `:482` | `theta = \|omega\| * dt_n` | **PROPRIO** | i numeri del **referto S/R/FDT** |
+
+**Dal 2026-09-16 l'osservatore scrive ENTRAMBE, fianco a fianco, nello stesso campione:**
+`theta_coord_*`, `theta_prop_*`, e **`r_ratio_*`** — il loro rapporto, che **e' `r`**, il tempo
+proprio locale (utile di per se': la FASE 5 agisce proprio li'). In MISURA F ci sono anche
+`t3_b_theta_coord`, `t3_b_theta_prop` e **`t3_b_r`**.
+**Nessuna delle due e' stata dismessa:** la **giusta** e' `prop` (`CLAUDE.md` §9, *il tic dei
+processi locali e' `dt_n = DT*r`*), ma **tutto lo storico e' in `coord`** e serve per rileggerlo.
+**`theta_*` senza suffisso resta come LEGACY ed E' `theta_prop`**: sta li' solo perche' gli **8 CSV
+gia' committati** e `_verdetto_4pi.py` / `_verdetto_S_R.py` la leggono con quel nome. **Rinominarla
+avrebbe reso illeggibili i dati gia' presi**, che e' un prezzo piu' alto del guadagno.
+*(Deviazione dichiarata rispetto al mandato, che chiedeva «mai `theta` nudo»: il nome nudo
+sopravvive come alias documentato, non come nome da usare.)*
+
+**IL CONTROLLO DI IDENTITA', cablato:** poiche' `theta_prop = theta_coord * r` e il campione e' lo
+stesso, deve valere **`pend(prop) - pend(coord) - pend(r) = 0` ESATTAMENTE**. La colonna
+`t3_identita` lo verifica: **misurato `4.6e-16`**. Se un giorno non fosse ~`1e-12`, l'errore e' nel
+codice, non nella fisica.
+
+**E UNA CORREZIONE ALLA CATENA, che e' venuta fuori scrivendo le due convenzioni.** Da
+`|omega|_eq = |F|*sqrt(dt_n*tau/2)` con `dt_n = DT*r`:
+
+```
+pend(omega)       = sigma + tau/2 +   r/2
+pend(theta_coord) = sigma + tau/2 +   r/2
+pend(theta_prop)  = sigma + tau/2 + 3*r/2
+```
+
+**La formula usata finora, `sigma + tau/2`, ASSUME `pend(r) = 0` — in ENTRAMBE le convenzioni, e
+non era mai stato verificato.** Ora `t3_b_r` lo misura. *(Il **divario** resta pero'
+**indipendente dalla convenzione**: `divario_prop - divario_coord = pend(r) - pend(r) = 0`, ed e'
+verificato nei dati.)*
+
+---
+
 ## 4. COSA *NON* E' UNO STRUMENTO DI MISURA (per non confondersi)
 
 `csv/_seal_fork/_old_sim_pre_*.py` sono **copie storiche del simulatore**, estratte da git
