@@ -95,6 +95,22 @@ def main():
                          "(da ~96 a ~43 giri/passo). Serve al braccio ON del gradiente di "
                          "risoluzione. NB: i sigilli della FASE 2 NON sono passati, quindi il "
                          "braccio OFF resta la baseline certificata.")
+    # [CAMPAGNA cs_floor, 2026-09-16] Le OTTO leggi che la campagna accende. Ognuna ha anche la
+    # sua COLONNA nel CSV (sotto): un flag passato ma non registrato viola P6, e un dato che non
+    # porta le proprie condizioni non e' un dato, e' un ricordo.
+    for _f, _d, _h in (
+        ("rumore-colorato", "rumore_colorato",
+         "taglio spettrale del rumore (OU). MARCHIO: sigillo INCOMPLETO, N2 FAIL (voce D)."),
+        ("pav-com", "pav_com", "pavimento comovente: median(d0)-MAD(d0) invece del muro 0.05."),
+        ("guscio-morbido", "guscio_morbido", "diffusione di superficie D = c_locale*spaziatura."),
+        ("zeta-vir", "zeta_vir", "freno anisotropo: beta *= cos2 della viriale."),
+        ("chi-basc", "chi_basc", "basculamento chirale con soglia PHI_CRIT."),
+        ("plast-din", "plast_din", "plasticita' da stress metrico, saturata."),
+        ("viriale", "viriale", "partizione viriale radiale/tangenziale."),
+        ("olon-part", "olon_part", "olonomia nella partizione (hypot di curl e twist)."),
+    ):
+        ap.add_argument("--" + _f, action="store_true", dest=_d,
+                        help="passa --%s al simulatore. %s" % (_f, _h))
     ap.add_argument("--kuramoto", action="store_true", dest="kuramoto",
                     help="accende --kuramoto-su2 (allineamento locale alla media SU(2) dei vicini).")
     ap.add_argument("--regime-det", action="store_true", dest="regime_det",
@@ -133,6 +149,12 @@ def main():
         argv += ["--gamma-turbo", str(a.gamma_turbo)]
     if a.tau_luce:
         argv += ["--tau-luce"]
+    for _f, _d in (("rumore-colorato", "rumore_colorato"), ("pav-com", "pav_com"),
+                   ("guscio-morbido", "guscio_morbido"), ("zeta-vir", "zeta_vir"),
+                   ("chi-basc", "chi_basc"), ("plast-din", "plast_din"),
+                   ("viriale", "viriale"), ("olon-part", "olon_part")):
+        if getattr(a, _d, False):
+            argv += ["--" + _f]
     if a.kuramoto:
         argv += ["--kuramoto-su2"]
     if a.regime_det:
@@ -404,6 +426,15 @@ def main():
         r["GAMMA_TURBO"] = float(S.GAMMA_TURBO)
         r["TAU_LUCE"] = int(getattr(S, "TAU_LUCE", False))
         r["CS_DINAMICO"] = int(S.CS_DINAMICO)
+        # [CAMPAGNA cs_floor] P6: le OTTO leggi accese da questa campagna. Si leggono dai GLOBALI
+        # del modulo DURANTE il run, non dagli argomenti: cosi' la colonna dice cosa ha davvero
+        # girato, non cosa e' stato chiesto (lo Step 2 insegna: un prerequisito mancante lo spegne).
+        for _nm in ("RUMORE_COLORATO", "PAV_COM", "GUSCIO_MORBIDO", "ZETA_VIR",
+                    "CHI_BASC", "PLAST_DIN", "VIRIALE", "OLON_PART", "ZETA_LOC"):
+            r[_nm] = int(bool(getattr(S, _nm, False)))
+        # e la SCALA del floor, che e' la grandezza modificata: senza, il run non certifica la
+        # correzione di difetto che sta testando.
+        r["cs_floor_scala_Lam"] = float(S.lambda_vuoto(net)) if net.n else float("nan")
         # IDENTITA' DEL RUN: senza queste, due bracci si distinguono solo dal nome del file.
         r["blob"] = BLOB
         r["seed"] = int(a.seed)
