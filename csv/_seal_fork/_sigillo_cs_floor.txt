@@ -1,0 +1,59 @@
+========================================================================================================
+SIGILLO cs_floor RELAZIONALE -- R0: i due file
+========================================================================================================
+  riferimento : a44adc31  452918 byte  CRLF 0
+  attuale     : 827d3bf8  455960 byte  CRLF 0
+[PASS] R0 il riferimento e' il blob PRE-modifica atteso     blob = a44adc31 (atteso a44adc31), byte grezzi, 0 CRLF
+[PASS] R0b i due file sono DIVERSI (il confronto ESISTE)    a44adc31 contro 827d3bf8
+
+  dati: 13316 nodi reali dai .pkl committati.  CS_M = 2  GAMMA = 0.05  Lam = 2.269520e-02
+
+========================================================================================================
+R1 -- RIDUZIONE AL LIMITE (IL DECISIVO): scala = 400.0 -> deve tornare la legge VECCHIA
+========================================================================================================
+  NB: si forza il LETTERALE 400.0, perche' 1.0/GAMMA**2 vale 399.99999999999994, NON 400
+  shape: vecchia 13316, nuova 13316   <- la riga dei conteggi PRIMA (par.9)
+[PASS] R1 scala=400 -> BYTE-IDENTICO alla legge vecchia     max|A-B| = 0.000e+00, elementi diversi 0 su 13316
+
+========================================================================================================
+R2 -- CONTROLLO POSITIVO: con la scala VERA (Lam) le due DEVONO differire
+========================================================================================================
+[PASS] R2.0 il test VEDE: la modifica cambia qualcosa       99.92% dei nodi con |vecchio - nuovo| > 1e-13  (mediana 3.6524e-02)
+[PASS] R2 cs_floor mediano SCENDE (la scala e' piu' bassa)  mediana 1.999718 -> 1.963194   (min 1.950005 -> 0.454161)
+[PASS] R2b la DISPERSIONE del floor cresce (e' lo scopo)    std/media 0.00614 -> 0.36338  (x59.1)
+
+========================================================================================================
+R3 -- il TURBO DIAGNOSTICO resta vivo
+========================================================================================================
+[PASS] R3a GAMMA_TURBO = 1.0 -> byte-identico alla forma senza turbo max|A-B| = 0.000e+00
+[PASS] R3b GAMMA_TURBO > 1 ABBASSA cs_floor                 mediana K=1 1.963194 -> K=4 1.860479
+
+========================================================================================================
+R4 -- stabilita'
+========================================================================================================
+[PASS] R4a 0 < cs_floor <= CS_M ovunque                     min 0.454161  max 2.000000  (CS_M = 2)
+[PASS] R4b nessun NaN/inf                                   tutti finiti su 13316 nodi
+[PASS] R4c Lam > 0 sui dati reali                           Lam = 2.269520e-02
+[PASS] R4d a sistema VUOTO (Lam = 0) il floor non esplode   cs_floor = 2 su I = 0
+
+========================================================================================================
+R5 -- GAMMA altrove INTATTO
+========================================================================================================
+[PASS] R5a GAMMA ha lo stesso valore nei due moduli         0.05 == 0.05
+[PASS] R5b satura() e' BYTE-IDENTICA fra i due blob         max|A-B| = 0.000e+00 su 2001 punti
+  righe ESEGUIBILI con GAMMA: riferimento 25, attuale 25
+    RIMOSSA : _g = GAMMA * GAMMA_TURBO
+    AGGIUNTA: _scala = max(_Lam, 1e-30) / (GAMMA_TURBO * GAMMA_TURBO)
+[PASS] R5c UNA sola riga eseguibile rimossa, ed e' quella di _cs_nodo rimosse 1, aggiunte 1
+[PASS] R5d TUTTE le altre righe eseguibili con GAMMA sono IDENTICHE 24 righe invariate su 25
+
+========================================================================================================
+SIGILLO cs_floor: 16/16 PASS -> PASS
+
+COSA QUESTO SIGILLO NON DICE
+----------------------------
+Che la modifica MIGLIORI qualcosa. Dice che e' la STESSA legge con una scala diversa (R1), che la
+scala nuova FA qualcosa (R2), che il turbo resta un amplificatore (R3) e che non esplode (R4).
+Se `cs_std/cs` salga davvero sopra l'1%% -- la predizione P1 -- lo dicono i RUN, non questo file.
+R1 e R2 girano sulla FORMULA con dati reali, non su run interi: e' voluto, perche' su 150 passi il
+caos amplifica 1 ulp e un R1 "a run" fallirebbe per ragioni numeriche, non fisiche.

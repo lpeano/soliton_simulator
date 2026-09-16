@@ -164,8 +164,22 @@ questo.** Sarebbe disonesto non dirlo.
 
 ## 4. LA CONFIGURAZIONE DEI RUN — e perche' **`--tau-luce` CI VA** (integrazione di Luca)
 
-> **DECISIONE DI LUCA, 2026-09-16: `--tau-luce` VA USATA.** I quattro run sono
-> `{--tau-luce OFF, ON} x {seme 1, seme 2}`, com'e' nel mandato.
+> **DECISIONE DI LUCA, 2026-09-16: `--tau-luce` VA USATA — e ACCESA IN TUTTI E QUATTRO I RUN.**
+> I quattro run sono quindi **4 SEMI di un unico braccio** (`--tau-luce` sempre ON), non un 2x2.
+>
+> **COSA SI GUADAGNA:** la barra **fra semi** con **4 semi** e `t(3) = 3.182`, invece dei 2 semi per
+> braccio del 2x2 (dove `t(0.025,1) = 12.706` rende l'IC95 inutilizzabile — P3).
+> **COSA SI PERDE, e va detto:** **non c'e' braccio di controllo interno.** L'effetto del tempo-luce
+> **non e' separabile** da quello del `cs_floor` nuovo in questa campagna.
+>
+> **PERCHE' LA PERDITA E' MINORE DI QUANTO SEMBRI:** le due predizioni che decidono — **P1**
+> (`cs_std/cs` sopra l'1 %) e **P2** (traiettoria piatta) — sono **misure ASSOLUTE con soglia
+> assoluta**, non contrasti: **non hanno bisogno di un braccio OFF.** E **P3** dichiarava gia' che
+> gli spostamenti di `theta` e `L_tot` **non sarebbero stati attribuibili** (tre canali a valle da
+> una sola modifica). **Quindi si perde un'attribuzione che P3 aveva gia' dichiarato impossibile.**
+>
+> **IL CONFRONTO COL PASSATO NON VALE COME CONTROLLO:** i run precedenti sono su un **blob diverso**
+> e con `--tau-luce` OFF. Si possono **citare**, non **sottrarre**.
 
 **E non e' una ripetizione di ieri: e' la prima volta che quel braccio ha senso.** `--tau-luce`
 sostituisce `_tau = TAU_A*max(dens/dens_rif, 0.05)` col **tempo-luce `d/cs`**. Finora quel braccio

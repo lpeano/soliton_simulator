@@ -2600,49 +2600,11 @@ class Rete:
         W_loc = self._mat(w)
         media_vicini = (W_loc @ I[:n]) / np.maximum(W_loc @ np.ones(n), 1e-9)
         u_nodo = I[:n] / np.maximum(media_vicini, 1e-9)
-        # [CORREZIONE DI DIFETTO, 2026-09-16 - categoria D del par.10: NESSUN FLAG]
-        # IL DIFETTO: la docstring qui sopra dichiara "senza costanti minime arbitrarie", ma la
-        # forma precedente era `CS_M / (1 + GAMMA*sqrt(I))` con GAMMA = 0.05 (:166), che FISSA una
-        # densita' critica ASSOLUTA: `GAMMA*sqrt(I) = 1` per `I = 1/GAMMA^2 = 400`. Quel 400 e'
-        # esattamente la costante arbitraria che la docstring nega (par.3), ed e' una SCALA ASSOLUTA
-        # in un modello RELAZIONALE, che per premessa non ne ha.
-        # LA CURA: la scala diventa `Lam`, l'ENERGIA DEL VUOTO, che il sistema CALCOLA da se'.
-        # `I/Lam` e' gia' il rapporto di densita' adimensionale del modello, con un significato
-        # fisico: sotto `Lam` sei vuoto, sopra sei materia. Il codice lo usa gia' cosi' in due
-        # punti (`amp = sqrt(Lam)/(1 + I2/Lam)`, :534 e :1986). Zero coefficienti nuovi.
-        #
-        # PERCHE' `np.mean(_I)` E NON `lambda_vuoto(self)`, che sarebbe lo stesso numero:
-        #   (a) `lambda_vuoto` contiene `calcola_psi()`, che SCRIVE `self.psi`: sarebbe una
-        #       mutazione di stato dentro una funzione di sola lettura, chiamata dentro `step`;
-        #   (b) `_cs_nodo` e' chiamata DUE volte, e a :2943 riceve lo SNAPSHOT `psi_t`, mentre
-        #       `lambda_vuoto(self)` leggerebbe `self.psi` -> scala e numeratore da DUE STATI
-        #       DIVERSI. Con `np.mean(_I)` la scala viene SEMPRE dagli stessi dati del numeratore.
-        #
-        # PERCHE' LA FORMA E' `sqrt(_I) * sqrt(1.0/_scala)` E NON `sqrt(_I/_scala)`:
-        #   sono matematicamente uguali ma NON bit-identiche. Con `_scala = 400.0` esatto:
-        #       sqrt(I/scala)            -> max|d| = 3.469e-18, 4601 elementi diversi
-        #       sqrt(I)/sqrt(scala)      -> max|d| = 3.469e-18, 4477 elementi diversi
-        #       sqrt(I)*sqrt(1.0/scala)  -> max|d| = 0.000e+00, ZERO elementi diversi
-        #   perche' `np.sqrt(1.0/400.0) == 0.05` ESATTAMENTE. Solo questa forma rende il sigillo
-        #   R1 (riduzione al limite: Lam = 400 -> la vecchia legge) una BYTE-IDENTITA' vera invece
-        #   di un criterio impossibile da soddisfare per un ulp. Misurato, non dedotto.
-        #   NB: `1.0/GAMMA**2` vale 399.99999999999994, NON 400 (0.05 non e' binario-esatto):
-        #   il sigillo deve forzare il LETTERALE 400.0.
-        #
-        # [TURBO DIAGNOSTICO] UNICO punto in cui la scala e' amplificata. Default GAMMA_TURBO = 1.0
-        # -> `_scala = _Lam / 1.0` -> byte-identico alla forma senza turbo (x/1.0 == x esatto).
-        # Per K > 1 la scala SCENDE, quindi `cs_floor` SCENDE: comportamento invariato.
-        # Ogni ALTRO uso di GAMMA nel file resta ORIGINALE: in particolare `satura()` e la
-        # saturazione del campo spinoriale NON sono toccate (sigillo T2). GAMMA sparisce da QUI e
-        # SOLO da qui.
-        _I = np.maximum(I[:n], 0.0)
-        _Lam = float(np.mean(_I)) if n > 0 else 0.0     # == lambda_vuoto(self) sugli stessi dati
-        # il clamp 1e-30 e' PROTEZIONE DI DIVISIONE, non un parametro: scatta solo a sistema vuoto
-        # (Lam = 0), dove qualunque valore darebbe cs_floor = CS_M. Contato (par.9, P5).
-        if not (_Lam > 1e-30):
-            self._cs_lam_degenere = getattr(self, "_cs_lam_degenere", 0) + 1
-        _scala = max(_Lam, 1e-30) / (GAMMA_TURBO * GAMMA_TURBO)
-        cs_floor = CS_M / (1.0 + np.sqrt(_I) * np.sqrt(1.0 / _scala))
+        # [TURBO DIAGNOSTICO] UNICO punto in cui GAMMA e' amplificato. Default GAMMA_TURBO = 1.0
+        # -> _g = GAMMA -> byte-identico. Ogni ALTRO uso di GAMMA nel file resta ORIGINALE: in
+        # particolare `satura()` e la saturazione del campo spinoriale NON sono toccate (sigillo T2).
+        _g = GAMMA * GAMMA_TURBO
+        cs_floor = CS_M / (1.0 + _g * np.sqrt(np.maximum(I[:n], 0.0)))
         cs_floor = np.minimum(cs_floor, CS_M)
         transizione = 0.5 * (1.0 + np.tanh(1.0 - u_nodo))
         return cs_floor + (CS_M - cs_floor) * transizione
