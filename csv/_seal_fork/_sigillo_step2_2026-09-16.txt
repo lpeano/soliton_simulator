@@ -1,0 +1,45 @@
+================================================================================================
+SIGILLO STEP 2 — omega_clk *= (cs/CS_M)^2  (orologio di Compton)
+================================================================================================
+[PASS] S1.0 il riferimento e' il blob certificato     blob = 2277e9a0  (atteso 2277e9a0)
+[FAIL] S1 flag OFF vs codice pre-cablaggio            max|A-B| = 0.000e+00   [nodi 3164 vs 2924, shape divergenti 32]
+
+================================================================================================
+SIGILLI 3 e 2 — in-process sul METODO VERO (_passo_spinoriale)
+================================================================================================
+  contributo dell'OROLOGIO isolato: |f(1) - f(0)| mediana = 1.279e-03 su 39/40 nodi misurabili
+[PASS] S3.0 l'orologio ha un contributo NON NULLO (il test VEDE) 39/40 nodi con |f(1)-f(0)| > 1e-13   [era QUESTO a mancare nel FAIL di 4f44c68]
+   cs/CS_M    rapporto MISURATO        atteso (cs/CS_M)^2      |differenza|
+     1.00        1.000000000000            1.000000000000        0.000e+00
+     0.50        0.250000000000            0.250000000000        0.000e+00
+     0.10        0.010000000000            0.010000000000        3.469e-18
+[PASS] S3 omega_eff/omega_base = (cs/CS_M)^2          max|misurato - atteso| = 3.469e-18 su cs/CS_M = 1.0, 0.5, 0.1
+[PASS] S3b l'orologio RALLENTA dove cs e' basso       contributo a cs=0.1*CS_M e' 0.0100 volte quello a cs=CS_M (deve essere < 1)
+[PASS] S3c a cs = CS_M il fattore e' 1 ESATTO         rapporto = 1.000000000000000
+
+================================================================================================
+SIGILLO 2 — riduzione al limite: ON senza --cs-dinamico (cs = CS_M ovunque) == OFF
+================================================================================================
+  Senza --cs-dinamico, _cs_nodo non viene mai calcolato -> la cache resta None -> fattore 1
+  esatto. Il ramo ON GIRA ma non deve cambiare NULLA: e' la riduzione al limite del par.2.2.
+[PASS] S2 ON (cs=CS_M) vs OFF: byte-identico          max|A-B| = 0.000e+00   [nodi 2924 vs 2924, shape divergenti 0]
+
+================================================================================================
+SIGILLO 4 — stabilita' col flag ON
+================================================================================================
+[PASS] S4a norma |psi| = 1                            max| |psi| - 1 | = 4.441e-16 su 2924 nodi
+[PASS] S4b nessun NaN/inf in tutto lo stato           tutti finiti
+[PASS] S4c nessun runaway di scala                    max|x| = 9.254
+================================================================================================
+SIGILLO STEP 2: 9/10 PASS -> FAIL
+
+COSA QUESTO SIGILLO NON DICE (doc/PREDIZIONE_step2.md par.2)
+------------------------------------------------------------
+S3 dice che il MECCANISMO risponde nel verso giusto e scala come cs^2. NON dice che l'effetto
+DINAMICO sia grande: alle densita' attuali cs e' quasi-costante (I~0.05 contro soglia ~400), quindi
+(cs/CS_M)^2 ~ 1 e qualunque effetto sara' piccolo PER COSTRUZIONE. E il profilo di dt_n e' un
+effetto INDIRETTO (omega_clk -> _phc -> psi_spin -> ritmo() -> dt_n): S3 PASS + dt_n piccolo
+significa CABLATO BENE, non fallito.
+E lo Step 2 NON deve organizzare lo spin: _phc e' una fase globale, il Bloch e' invariante (3.3e-16).
+Firme di spin invariate = conferma che fa il suo mestiere.
+
