@@ -1,0 +1,226 @@
+====================================================================================================================
+BASELINE DEL SISTEMA CORRETTO — blob c57800c1 (taglio spettrale + xi fresco + fattore cs^-2)
+====================================================================================================================
+
+CONFORMITA' P6 — letta dai DATI, non dal nome del file
+--------------------------------------------------------------------------------------------------------------------
+  OFF    s1  [PASS]  campioni  11  passo   500  n  3790  blob c57800c1
+  OFF    s2  [PASS]  campioni  11  passo   500  n  2800  blob c57800c1
+  ON     s1  [PASS]  campioni  11  passo   500  n  3773  blob c57800c1
+  ON     s2  [PASS]  campioni  11  passo   500  n  3054  blob c57800c1
+
+====================================================================================================================
+1. chi — l'angolo fra Bloch vicini.  NULLO: 90.000 +- 39.171 (direzioni casuali)
+====================================================================================================================
+   Scarto da 90 = il segnale. Con 2 semi NON si decide: si legge il SEGNO.
+--------------------------------------------------------------------------------------------------------------------
+   OFF    s1  chi materia                   90.1329
+   OFF    s2  chi materia                   90.1277
+   OFF    s1  chi vuoto                     90.5254
+   OFF    s2  chi vuoto                     90.1411
+   OFF    s1  chi p90                       90.1674
+   OFF    s2  chi p90                       90.0261
+   OFF    s1  frazione < 10 gradi          0.007489
+   OFF    s2  frazione < 10 gradi          0.007600
+   OFF    s1  frazione > 170 gradi         0.008001
+   OFF    s2  frazione > 170 gradi         0.007687
+   OFF    FRA SEMI  chi materia                 n=2  media   +90.1303   sd    +0.0037   IC95 [  +90.0970,   +90.1636]  (t(1)=12.706)
+   OFF    FRA SEMI  chi vuoto                   n=2  media   +90.3333   sd    +0.2718   IC95 [  +87.8914,   +92.7752]  (t(1)=12.706)
+   OFF    FRA SEMI  chi p90                     n=2  media   +90.0967   sd    +0.0999   IC95 [  +89.1990,   +90.9945]  (t(1)=12.706)
+   OFF    FRA SEMI  frazione < 10 gradi         n=2  media    +0.0075   sd    +0.0001   IC95 [   +0.0068,    +0.0083]  (t(1)=12.706)
+   OFF    FRA SEMI  frazione > 170 gradi        n=2  media    +0.0078   sd    +0.0002   IC95 [   +0.0058,    +0.0098]  (t(1)=12.706)
+
+   ON     s1  chi materia                   90.0457
+   ON     s2  chi materia                   89.9213
+   ON     s1  chi vuoto                     89.9565
+   ON     s2  chi vuoto                     87.6685
+   ON     s1  chi p90                       90.0877
+   ON     s2  chi p90                       89.8334
+   ON     s1  frazione < 10 gradi          0.007333
+   ON     s2  frazione < 10 gradi          0.007782
+   ON     s1  frazione > 170 gradi         0.007759
+   ON     s2  frazione > 170 gradi         0.007988
+   ON     FRA SEMI  chi materia                 n=2  media   +89.9835   sd    +0.0879   IC95 [  +89.1934,   +90.7735]  (t(1)=12.706)
+   ON     FRA SEMI  chi vuoto                   n=2  media   +88.8125   sd    +1.6179   IC95 [  +74.2765,  +103.3486]  (t(1)=12.706)
+   ON     FRA SEMI  chi p90                     n=2  media   +89.9605   sd    +0.1798   IC95 [  +88.3452,   +91.5759]  (t(1)=12.706)
+   ON     FRA SEMI  frazione < 10 gradi         n=2  media    +0.0076   sd    +0.0003   IC95 [   +0.0047,    +0.0104]  (t(1)=12.706)
+   ON     FRA SEMI  frazione > 170 gradi        n=2  media    +0.0079   sd    +0.0002   IC95 [   +0.0064,    +0.0093]  (t(1)=12.706)
+
+====================================================================================================================
+2. |<n>| — isotropia.  NULLO EMPIRICO: 0.9213 +- 0.3888 in unita' di 1/sqrt(N) (C15)
+====================================================================================================================
+--------------------------------------------------------------------------------------------------------------------
+   OFF    s1  |<n>| / (1/sqrt N)             0.4731
+   OFF    s2  |<n>| / (1/sqrt N)             0.8347
+   OFF    s1  |<n>| materia / atteso         0.3122
+   OFF    s2  |<n>| materia / atteso         0.5237
+   OFF    FRA SEMI  |<n>| / (1/sqrt N)          n=2  media    +0.6539   sd    +0.2558   IC95 [   -1.6439,    +2.9517]  (t(1)=12.706)
+   OFF    FRA SEMI  |<n>| materia / atteso      n=2  media    +0.4180   sd    +0.1496   IC95 [   -0.9259,    +1.7618]  (t(1)=12.706)
+
+   ON     s1  |<n>| / (1/sqrt N)             0.8934
+   ON     s2  |<n>| / (1/sqrt N)             0.9586
+   ON     s1  |<n>| materia / atteso         0.6362
+   ON     s2  |<n>| materia / atteso         1.4862
+   ON     FRA SEMI  |<n>| / (1/sqrt N)          n=2  media    +0.9260   sd    +0.0461   IC95 [   +0.5118,    +1.3403]  (t(1)=12.706)
+   ON     FRA SEMI  |<n>| materia / atteso      n=2  media    +1.0612   sd    +0.6010   IC95 [   -4.3388,    +6.4612]  (t(1)=12.706)
+
+====================================================================================================================
+3. theta — LE DUE CONVENZIONI (C19). MAI citare theta senza dire quale.
+====================================================================================================================
+   theta_coord = |omega|*DT (coordinata)   theta_prop = |omega|*dt_n (proprio, giusto).
+   omega/sqrt(n): se smette di essere costante, la forzante e' diventata COERENTE.
+--------------------------------------------------------------------------------------------------------------------
+   OFF    s1  theta_COORD giri/passo       134.2037
+   OFF    s2  theta_COORD giri/passo       113.6536
+   OFF    s1  theta_PROP  giri/passo       101.0234
+   OFF    s2  theta_PROP  giri/passo        91.7257
+   OFF    s1  frazione oltre il giro         0.9836
+   OFF    s2  frazione oltre il giro         0.9954
+   OFF    s1  omega/sqrt(n)                    1370
+   OFF    s2  omega/sqrt(n)                    1350
+   OFF    FRA SEMI  theta_COORD giri/passo      n=2  media  +123.9287   sd   +14.5311   IC95 [   -6.6260,  +254.4834]  (t(1)=12.706)
+   OFF    FRA SEMI  theta_PROP  giri/passo      n=2  media   +96.3746   sd    +6.5745   IC95 [  +37.3060,  +155.4431]  (t(1)=12.706)
+   OFF    FRA SEMI  frazione oltre il giro      n=2  media    +0.9895   sd    +0.0083   IC95 [   +0.9151,    +1.0639]  (t(1)=12.706)
+   OFF    FRA SEMI  omega/sqrt(n)               n=2  media +1359.6166   sd   +14.2573   IC95 [+1231.5219, +1487.7114]  (t(1)=12.706)
+
+   ON     s1  theta_COORD giri/passo        33.8352
+   ON     s2  theta_COORD giri/passo        23.8623
+   ON     s1  theta_PROP  giri/passo        21.7928
+   ON     s2  theta_PROP  giri/passo        12.5618
+   ON     s1  frazione oltre il giro         0.8232
+   ON     s2  frazione oltre il giro         0.7282
+   ON     s1  omega/sqrt(n)                   346.1
+   ON     s2  omega/sqrt(n)                   271.3
+   ON     FRA SEMI  theta_COORD giri/passo      n=2  media   +28.8488   sd    +7.0519   IC95 [  -34.5088,   +92.2064]  (t(1)=12.706)
+   ON     FRA SEMI  theta_PROP  giri/passo      n=2  media   +17.1773   sd    +6.5273   IC95 [  -41.4675,   +75.8221]  (t(1)=12.706)
+   ON     FRA SEMI  frazione oltre il giro      n=2  media    +0.7757   sd    +0.0672   IC95 [   +0.1722,    +1.3792]  (t(1)=12.706)
+   ON     FRA SEMI  omega/sqrt(n)               n=2  media  +308.7042   sd   +52.8899   IC95 [ -166.4849,  +783.8932]  (t(1)=12.706)
+
+====================================================================================================================
+4. r — la DISPERSIONE (mai la mediana: median(r) = 1 per costruzione, C12), e per ETA'
+====================================================================================================================
+   Il figlio eredita `_psi_prec` dal padre: il suo PRIMO `r` confronta la propria fase
+   con quella del PADRE. `eta` parte da zero ma l'orologio no.
+--------------------------------------------------------------------------------------------------------------------
+   OFF    s1  r_std (popolazione)            0.4837
+   OFF    s2  r_std (popolazione)            0.3954
+   OFF    s1  r mediana (controllo=1)      1.000000
+   OFF    s2  r mediana (controllo=1)      1.000000
+   OFF    s1  r mediana eta q1 (giovani)     0.6927
+   OFF    s2  r mediana eta q1 (giovani)     0.9438
+   OFF    s1  r mediana eta q4 (maturi)      1.2244
+   OFF    s2  r mediana eta q4 (maturi)      1.0701
+   OFF    s1  r mediana NEONATI              0.1456
+   OFF    s2  r mediana NEONATI              1.0925
+   OFF    FRA SEMI  r_std (popolazione)         n=2  media    +0.4395   sd    +0.0624   IC95 [   -0.1213,    +1.0003]  (t(1)=12.706)
+   OFF    FRA SEMI  r mediana (controllo=1)     n=2  media    +1.0000   sd    +0.0000   IC95 [   +1.0000,    +1.0000]  (t(1)=12.706)
+   OFF    FRA SEMI  r mediana eta q1 (giovani)    n=2  media    +0.8183   sd    +0.1776   IC95 [   -0.7770,    +2.4136]  (t(1)=12.706)
+   OFF    FRA SEMI  r mediana eta q4 (maturi)    n=2  media    +1.1472   sd    +0.1090   IC95 [   +0.1675,    +2.1270]  (t(1)=12.706)
+   OFF    FRA SEMI  r mediana NEONATI           n=2  media    +0.6190   sd    +0.6696   IC95 [   -5.3966,    +6.6346]  (t(1)=12.706)
+
+   ON     s1  r_std (popolazione)            0.4346
+   ON     s2  r_std (popolazione)            0.3738
+   ON     s1  r mediana (controllo=1)      1.000000
+   ON     s2  r mediana (controllo=1)      1.000000
+   ON     s1  r mediana eta q1 (giovani)     1.0468
+   ON     s2  r mediana eta q1 (giovani)     1.0609
+   ON     s1  r mediana eta q4 (maturi)      0.7417
+   ON     s2  r mediana eta q4 (maturi)      1.0000
+   ON     s1  r mediana NEONATI              0.6578
+   ON     s2  r mediana NEONATI              0.1610
+   ON     FRA SEMI  r_std (popolazione)         n=2  media    +0.4042   sd    +0.0430   IC95 [   +0.0183,    +0.7902]  (t(1)=12.706)
+   ON     FRA SEMI  r mediana (controllo=1)     n=2  media    +1.0000   sd    +0.0000   IC95 [   +1.0000,    +1.0000]  (t(1)=12.706)
+   ON     FRA SEMI  r mediana eta q1 (giovani)    n=2  media    +1.0539   sd    +0.0099   IC95 [   +0.9646,    +1.1431]  (t(1)=12.706)
+   ON     FRA SEMI  r mediana eta q4 (maturi)    n=2  media    +0.8709   sd    +0.1826   IC95 [   -0.7699,    +2.5117]  (t(1)=12.706)
+   ON     FRA SEMI  r mediana NEONATI           n=2  media    +0.4094   sd    +0.3513   IC95 [   -2.7465,    +3.5652]  (t(1)=12.706)
+
+====================================================================================================================
+5. L_tot = somma(inerzia*|omega|) — LA CONSERVAZIONE (C20: ~+3.4 %/passo nel sigillo)
+====================================================================================================================
+   `omega` e' intensiva: alla mitosi dovrebbe ripartirsi l'INERZIA, e non lo fa.
+   Il confronto FRA BRACCI e' fra traiettorie caotiche diverse: si legge l'ORDINE, non lo scarto.
+--------------------------------------------------------------------------------------------------------------------
+   OFF    s1  L_tot finale                1.993e+04
+   OFF    s2  L_tot finale                1.686e+04
+   OFF    s1  dL/L con mitosi (mediana)     0.02727
+   OFF    s2  dL/L con mitosi (mediana)     0.02293
+   OFF    s1  dL/L senza mitosi (mediana)    0.07918
+   OFF    s2  dL/L senza mitosi (mediana)    0.15908
+   OFF    s1  nodi nati                        3710
+   OFF    s2  nodi nati                        2720
+   OFF    FRA SEMI  L_tot finale                n=2  media +18393.6021   sd +2169.3678   IC95 [-1097.0806, +37884.2847]  (t(1)=12.706)
+   OFF    FRA SEMI  dL/L con mitosi (mediana)    n=2  media    +0.0251   sd    +0.0031   IC95 [   -0.0025,    +0.0527]  (t(1)=12.706)
+   OFF    FRA SEMI  dL/L senza mitosi (mediana)    n=2  media    +0.1191   sd    +0.0565   IC95 [   -0.3884,    +0.6267]  (t(1)=12.706)
+   OFF    FRA SEMI  nodi nati                   n=2  media +3215.0000   sd  +700.0357   IC95 [-3074.4700, +9504.4700]  (t(1)=12.706)
+
+   ON     s1  L_tot finale                    795.4
+   ON     s2  L_tot finale                     1012
+   ON     s1  dL/L con mitosi (mediana)     0.01759
+   ON     s2  dL/L con mitosi (mediana)     0.01891
+   ON     s1  dL/L senza mitosi (mediana)    0.13723
+   ON     s2  dL/L senza mitosi (mediana)    0.06681
+   ON     s1  nodi nati                        3693
+   ON     s2  nodi nati                        2974
+   ON     FRA SEMI  L_tot finale                n=2  media  +903.8458   sd  +153.3591   IC95 [ -474.0089, +2281.7005]  (t(1)=12.706)
+   ON     FRA SEMI  dL/L con mitosi (mediana)    n=2  media    +0.0182   sd    +0.0009   IC95 [   +0.0098,    +0.0266]  (t(1)=12.706)
+   ON     FRA SEMI  dL/L senza mitosi (mediana)    n=2  media    +0.1020   sd    +0.0498   IC95 [   -0.3453,    +0.5494]  (t(1)=12.706)
+   ON     FRA SEMI  nodi nati                   n=2  media +3333.5000   sd  +508.4098   IC95 [-1234.3070, +7901.3070]  (t(1)=12.706)
+
+====================================================================================================================
+6. IL FATTORE (CS_M/cs)^2 — quanto si discosta da 1?  E' il numero che dice se il TURBO
+   ha svegliato `cs` o se il test e' NULLO
+====================================================================================================================
+   SE `frazione oltre l'1 %` RESTA ~0 COL TURBO, IL TEST E' NULLO: si dice, non si forza.
+--------------------------------------------------------------------------------------------------------------------
+   OFF    s1  fattore mediano              1.00001978
+   OFF    s2  fattore mediano              1.00002519
+   OFF    s1  fattore max                  1.01935617
+   OFF    s2  fattore max                  1.01734573
+   OFF    s1  scarto max da 1               1.936e-02
+   OFF    s2  scarto max da 1               1.735e-02
+   OFF    s1  frazione oltre l'1 %             0.0625
+   OFF    s2  frazione oltre l'1 %             0.1607
+   OFF    s1  cs_std / cs                   3.878e-03
+   OFF    s2  cs_std / cs                   4.760e-03
+   OFF    FRA SEMI  fattore mediano             n=2  media    +1.0000   sd    +0.0000   IC95 [   +1.0000,    +1.0001]  (t(1)=12.706)
+   OFF    FRA SEMI  fattore max                 n=2  media    +1.0184   sd    +0.0014   IC95 [   +1.0056,    +1.0311]  (t(1)=12.706)
+   OFF    FRA SEMI  scarto max da 1             n=2  media    +0.0184   sd    +0.0014   IC95 [   +0.0056,    +0.0311]  (t(1)=12.706)
+   OFF    FRA SEMI  frazione oltre l'1 %        n=2  media    +0.1116   sd    +0.0694   IC95 [   -0.5121,    +0.7354]  (t(1)=12.706)
+   OFF    FRA SEMI  cs_std / cs                 n=2  media    +0.0043   sd    +0.0006   IC95 [   -0.0013,    +0.0099]  (t(1)=12.706)
+
+   ON     s1  fattore mediano              1.00002053
+   ON     s2  fattore mediano              1.00002597
+   ON     s1  fattore max                  1.01782458
+   ON     s2  fattore max                  1.01831171
+   ON     s1  scarto max da 1               1.782e-02
+   ON     s2  scarto max da 1               1.831e-02
+   ON     s1  frazione oltre l'1 %             0.0570
+   ON     s2  frazione oltre l'1 %             0.1310
+   ON     s1  cs_std / cs                   3.715e-03
+   ON     s2  cs_std / cs                   4.716e-03
+   ON     FRA SEMI  fattore mediano             n=2  media    +1.0000   sd    +0.0000   IC95 [   +1.0000,    +1.0001]  (t(1)=12.706)
+   ON     FRA SEMI  fattore max                 n=2  media    +1.0181   sd    +0.0003   IC95 [   +1.0150,    +1.0212]  (t(1)=12.706)
+   ON     FRA SEMI  scarto max da 1             n=2  media    +0.0181   sd    +0.0003   IC95 [   +0.0150,    +0.0212]  (t(1)=12.706)
+   ON     FRA SEMI  frazione oltre l'1 %        n=2  media    +0.0940   sd    +0.0523   IC95 [   -0.3761,    +0.5641]  (t(1)=12.706)
+   ON     FRA SEMI  cs_std / cs                 n=2  media    +0.0042   sd    +0.0007   IC95 [   -0.0021,    +0.0106]  (t(1)=12.706)
+
+====================================================================================================================
+7. AUTOCORRELAZIONE <n_i . n_j> per bin di distanza (10 bin, ultimo campione)
+====================================================================================================================
+   OFF    s1   max |ac|/SE sui 10 bin =   1.36   (il nullo empirico su 40 bin dava 2.2-2.5)
+        -0.003  -0.002  -0.004  -0.006  0.002  0.002  -0.005  0.002  0.005  -0.000
+   OFF    s2   max |ac|/SE sui 10 bin =   2.00   (il nullo empirico su 40 bin dava 2.2-2.5)
+        -0.004  -0.004  0.002  -0.001  0.000  -0.003  -0.002  0.004  -0.007  -0.008
+   ON     s1   max |ac|/SE sui 10 bin =   1.49   (il nullo empirico su 40 bin dava 2.2-2.5)
+        0.004  -0.006  -0.002  -0.001  0.001  -0.005  -0.001  -0.005  0.002  -0.003
+   ON     s2   max |ac|/SE sui 10 bin =   1.17   (il nullo empirico su 40 bin dava 2.2-2.5)
+        0.005  0.002  -0.003  -0.003  0.001  -0.002  0.004  -0.002  -0.003  0.002
+
+====================================================================================================================
+PROMEMORIA — come si legge tutto questo
+  * la barra fra BRACCI e' la dispersione FRA SEMI (0.03), MAI la SE interna a un run;
+  * con 2 semi t(0.025,1) = 12.706: NESSUN IC95 decide. Si legge SEGNO e ORDINE DI GRANDEZZA;
+  * `theta` non si cita senza dire quale convenzione (C19);
+  * finche' `theta` resta oltre il giro per passo, ogni esito negativo sullo spin e' quello
+    che l'ALIASING produrrebbe da solo (C14).
+====================================================================================================================
