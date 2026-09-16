@@ -143,7 +143,30 @@ e' un modo elaborato di certificare un malinteso.**
 
 ---
 
-## 7. LA DECISIONE E' DI LUCA — tre strade, nessuna presa
+## 7. LA DECISIONE — **PRESA: resta spento** (Luca, 2026-09-16)
+
+> ### **STRADA 3. `TW_SPINORE` resta OFF, e il cablaggio non si tocca in questo giro.**
+
+**Cosa significa, detto con precisione:**
+- la componente **non e' respinta** — il criterio ① e' plausibile in linea di principio;
+- **non e' promossa** — il criterio ② **non e' scrivibile** finche' codice e descrizione divergono;
+- **il fronte `W` NON si chiude:** resta aperto come **difetto di cablaggio**, e il suo criterio di
+  chiusura e' **una decisione di fisica** (quale delle due leggi e' quella voluta), **non una misura
+  in piu'**;
+- **il commento nel codice resta FALSO**, e questo e' il rischio vero: non che la componente venga
+  dimenticata, ma che **qualcuno la riaccenda credendo di aggiungere `tw/2`**. Per questo il fatto e'
+  scritto in **`CLAUDE.md` §9**, che si legge a ogni sessione — **non solo qui**.
+  *(Stessa classe di `VERSO_CHI`, muto sotto `CHI_CORE`: un flag che non fa cio' che dichiara e'
+  peggio di un flag assente.)*
+
+**E `soliton_simulator.py` NON e' stato toccato**, nemmeno per l'annotazione: **due run video stavano
+girando su quel blob** (`video_fisica_completa.mp4` e `-rete.mp4`), e cambiare il file avrebbe rotto
+la corrispondenza fra il blob sul disco e quello che ha prodotto gli output (§5-quinquies).
+**Il presidio e' andato dove non costa quella proprieta'.**
+
+---
+
+## 7-bis. LE TRE STRADE, per il verbale *(la 3 e' quella scelta)*
 
 1. **Correggere** il cablaggio (e allora e' una **correzione di difetto**, §10: *nessun flag*), poi
    sigillare la legge corretta e valutarne la promozione.

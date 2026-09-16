@@ -797,6 +797,25 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   TUTTI i punti che ottenevano il vecchio comportamento per OMISSIONE.** Un default ribaltato non
   rompe niente rumorosamente: **converte i rami di controllo in duplicati del ramo di prova.**
 
+- **`TW_SPINORE` RESTA SPENTO PER DECISIONE DI LUCA (2026-09-16), E IL SUO COMMENTO E' FALSO.**
+  Il commento (`:705-709`, `:2146-2148`) dice che la torsione *«pilota il Bloch di `tw/2`»*, cioe' un
+  **ANGOLO**. **Il codice (`:2149-2154`) somma `tw/(4 pi)` a `omega_new`, che e' una VELOCITA'
+  ANGOLARE** (`theta = |omega|*dt`, `:2210` e `:2296`): l'angolo effettivo e' **1.564e-03 rad/passo**
+  contro i **9.827e-01** dichiarati, **fattore 628.3 = 2 pi / DT** — *un'unita' di misura mancante,
+  non un'approssimazione*. E il termine finisce in **`self.omega_s`** (`:2313`), la **memoria
+  persistente**, mentre il commento di `SYNC_SPINORE` (`:724`, `:2157-2160`) dice, **dello stesso
+  blocco**, che metterci un torque *«darebbe accumulo/divergenza»*. **Unico fra i termini del blocco,
+  `_otw` NON e' diviso per l'inerzia.**
+  **CHI VOLESSE RIACCENDERLO LEGGA PRIMA `doc/REFERTO_tw_spinore.md`**: accenderlo **non** aggiunge
+  la legge che il commento descrive. *(Stessa classe di `VERSO_CHI`, muto sotto `CHI_CORE`: un flag
+  che non fa cio' che dichiara e' peggio di un flag assente.)*
+  **E NON E' ARCHIVIATO COME «TRASCURABILE»:** il peso in **ampiezza** e' **0.054 %**, ma la domanda
+  e' **DIREZIONALE** — l'asse TW e' **fisso e persistente**, `omega` e' un **random walk**. L'argomento
+  di ampiezza su una domanda di correlazione **e' l'errore gia' fatto su `cs` allo 0.023 %**, e vale
+  **anche al contrario**. **Resta il fronte `W` del registro.**
+  **NESSUN SIGILLO E' STATO SCRITTO, di proposito:** il suo criterio naturale verrebbe **dalla
+  descrizione invece che dal codice**, e sarebbe il **quarto** criterio stale in due giorni.
+
 ## 10. PROMOZIONE DELLE COMPONENTI (regola di Luca, 2026-09-15)
 
 **Perche' esiste.** Finche' una legge validata resta un flag opzionale, puo' essere **dimenticata**,

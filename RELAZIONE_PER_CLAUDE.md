@@ -84,7 +84,10 @@
 >     «accumulo/divergenza», e **non e' diviso per l'inerzia** — unico del blocco.
 >     **Il mandato diceva «sigillato e poi acceso»: ho SEGNALATO invece di eseguire (P1).**
 >     **Non dico che sia trascurabile**: lo 0.054 % e' un'**ampiezza**, la domanda e' **direzionale**.
->     **La decisione e' di Luca**, fra correggere / sigillare cio' che fa davvero / lasciarlo spento.
+>     **DECISO da Luca: RESTA SPENTO.** Il fronte **non si chiude** — resta aperto come **difetto di
+>     cablaggio**, e a chiuderlo sara' **una decisione di fisica**, non una misura in piu'. Il
+>     commento nel codice **resta falso**, quindi il presidio e' in **`CLAUDE.md` §9**: il rischio
+>     non e' dimenticarla, e' **riaccenderla credendo di aggiungere `tw/2`**.
 
 ---
 
@@ -2386,6 +2389,17 @@ invece che dal codice**. Sarebbe il **quarto** criterio stale in due giorni. **U
 sulla descrizione di una legge che il codice non implementa e' un modo elaborato di certificare un
 malinteso.**
 
-**La decisione e' di Luca**, fra tre strade: **correggere** (e allora e' una **correzione di difetto**,
-quindi **senza flag**), **sigillare cio' che fa davvero**, o **lasciarlo spento**.
-**Finche' non decide, resta OFF.** -> `doc/REFERTO_tw_spinore.md`, voce **W** del registro.
+### ✅ DECISIONE DI LUCA (2026-09-16): **resta spento** — strada 3 di tre
+
+Le altre due erano **correggere il cablaggio** (che per il §10 ne farebbe una **correzione di
+difetto**, quindi **senza flag**) e **sigillare cio' che fa davvero**, riscrivendo il commento.
+
+**Il fronte `W` NON si chiude:** resta aperto come **difetto di cablaggio**, e il suo criterio di
+chiusura e' **una decisione di fisica** su quale delle due leggi sia quella voluta — **non una misura
+in piu'**. **Il commento nel codice resta falso**, e il rischio vero non e' dimenticare la componente:
+e' **riaccenderla credendo di aggiungere `tw/2`**. Per questo il fatto sta in **`CLAUDE.md` §9**, che
+si legge a ogni sessione, e non solo nel referto.
+
+**E `soliton_simulator.py` non e' stato toccato nemmeno per annotarlo:** due run video stavano girando
+su quel blob, e cambiarlo avrebbe rotto la corrispondenza fra il file sul disco e quello che ha
+prodotto gli output (§5-quinquies). -> `doc/REFERTO_tw_spinore.md`, voce **W** del registro.

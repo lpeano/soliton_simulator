@@ -207,7 +207,16 @@ accumulo/divergenza»*. E, **unico fra i termini del blocco**, `_otw` **non e' d
 > 0.023 % (§9): **non si rifa' al contrario.** *(Ed e' proprio la proprieta' per cui Luca l'aveva
 > scelta per prima: «l'unico meccanismo il cui asse non svanisce all'allineamento».)*
 
-**TRE STRADE, la scelta e' di Luca e non e' presa:**
+### ✅ DECISIONE DI LUCA, 2026-09-16: **STRADA 3 — RESTA SPENTO.**
+
+> **La componente NON si accende e il cablaggio NON si tocca in questo giro.** Resta **candidata
+> SOSPESA**: non e' respinta (① e' plausibile in linea di principio), non e' promossa (② non e'
+> scrivibile finche' il codice e la descrizione dicono cose diverse).
+> **Cosa la riaprirebbe:** una decisione di fisica su quale delle due leggi sia quella voluta.
+> **Fino ad allora il flag resta OFF e il suo commento resta FALSO** — presidio in `CLAUDE.md` §9,
+> perche' il rischio vero non e' dimenticarla: e' **riaccenderla credendo di aggiungere `tw/2`**.
+
+**LE TRE STRADE, per il verbale** *(la 3 e' quella scelta)*:
 1. **correggere** il cablaggio -> allora e' una **CORREZIONE DI DIFETTO** (§10: *nessun flag*), e la
    legge corretta si sigilla e si valuta da capo;
 2. **tenerlo com'e'** e sigillarlo **per quello che fa davvero**, riscrivendo il commento;
