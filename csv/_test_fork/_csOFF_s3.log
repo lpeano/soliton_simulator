@@ -21,3 +21,17 @@ passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
     300 |    0.0000 |    16.024 | r=1.8 c=0.121 n=9      | tot=1 NUOVI=0 | TRACK accr=2919 coppie=615 nuova=81
     350 |    0.0000 |    16.024 | r=12.8 c=0.159 n=52    | tot=3 NUOVI=0 | TRACK accr=2972 coppie=637 nuova=81
     400 |    0.0000 |    16.024 | r=13.2 c=0.099 n=474   | tot=2 NUOVI=0 | TRACK accr=3011 coppie=643 nuova=81
+    450 |    0.0000 |    16.024 | r=14.2 c=0.109 n=902   | tot=3 NUOVI=0 | TRACK accr=3058 coppie=660 nuova=81
+    500 |    0.0000 |    16.024 | r=15.8 c=0.164 n=8     | tot=3 NUOVI=0 | TRACK accr=3100 coppie=682 nuova=81
+
+[batch] completato in 1223.8s, 500 passi. CSV salvato in C:\Users\lpeano\soliton_simulator\csv\_test_fork\_vuoto_csOFF_s3.cond.csv
+[batch] LETTURA condensazione: se dens_centrale e n_centrali CRESCONO e frac_nati resta
+        ALTA mentre dist_masse NON crolla -> NUOVA massa dal vuoto (non accrescimento).
+[batch] LETTURA picchi_nuovi: se picchi_nuovi passa da 0 a >=1 a un certo passo, quello e'
+        il momento in cui una MASSA NUOVA si stacca dal vuoto (materia isolata che si crea).
+[batch] LETTURA antiguscio: se compare un anello a coerenza_min BASSA (antifase) e raggio
+        stabile oltre le masse, con nodi presenti -> GUSCIO DI ANTIFASE che avvolge i nuclei
+        = massa di scala superiore (il guscio del sistema e antifase, non materia).
+[osserva-flag] tag=csOFF seed=3  FORK_SU2=True FORK_SU2_MEM=True SCUOTIMENTO=True SYNC_UPDATE=False KURAMOTO_SU2=False STEP2=False CS_DIN=True GAMMA_TURBO=1 TAU_LUCE=False   (letti DURANTE il run)
+[osserva] MISURA F (pendenze t3): 0 campioni FALLITI su 11   
+[osserva] 11 campioni -> C:\Users\lpeano\soliton_simulator\csv\_test_fork\_vuoto_csOFF_s3.vuoto.csv (scritti incrementalmente)
