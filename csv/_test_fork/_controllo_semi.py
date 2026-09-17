@@ -20,6 +20,15 @@ IL DISEGNO. Tre semi x due bracci (file PRE-patch ON, file POST-patch ON). Da qu
 NB: par.2.7 chiede almeno due semi per qualunque fatto pubblicabile. Il seme 1 c'e' gia' ma va
 rifatto qui, perche' i tre `Delta` devono venire dallo stesso identico codice di misura.
 """
+import sys as _sys_enc  # PRESIDIO ENCODING (CLAUDE.md): lo stdout di Windows e' cp1252 e
+# uccide qualunque print con un carattere non-ASCII. E' successo SETTE volte, l'ultima allo
+# script che stava CONTANDO le occorrenze. Il `# -*- coding: utf-8 -*-` NON basta: riguarda il
+# SORGENTE, non lo STDOUT. Questa riga lo risolve alla radice.
+try:
+    _sys_enc.stdout.reconfigure(encoding="utf-8")
+    _sys_enc.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 import contextlib, importlib.util, io, os, sys
 import numpy as np
 

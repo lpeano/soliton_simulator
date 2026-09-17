@@ -14,6 +14,15 @@ E c'e' una domanda che questi quattro casi possono DECIDERE: doc/ASSIOMI.md, APE
 se **A3 sia un caso particolare di A2**. Basta un caso che soddisfi A2 e violi A3 per rispondere no.
 Dati: i .pkl gia' committati. ASCII PURO. Nessun run.
 """
+import sys as _sys_enc  # PRESIDIO ENCODING (CLAUDE.md): lo stdout di Windows e' cp1252 e
+# uccide qualunque print con un carattere non-ASCII. E' successo SETTE volte, l'ultima allo
+# script che stava CONTANDO le occorrenze. Il `# -*- coding: utf-8 -*-` NON basta: riguarda il
+# SORGENTE, non lo STDOUT. Questa riga lo risolve alla radice.
+try:
+    _sys_enc.stdout.reconfigure(encoding="utf-8")
+    _sys_enc.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 import glob
 import os
 import pickle

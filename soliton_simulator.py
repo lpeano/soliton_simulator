@@ -3116,10 +3116,16 @@ class Rete:
             # che "qualcosa e' cambiato".
             _cm = float(np.median(np.abs(coppia))) if np.size(coppia) else 0.0
             _fm = float(np.median(np.abs(_fb))) if np.size(_fb) else 0.0
+            # A3c: il rapporto va riportato in forma CONFRONTABILE. Due MASSIMI presi in passi
+            # DIVERSI non hanno quoziente, e stamparli accanto a un rapporto massimo invita a
+            # dividerli: si accumula quindi la SOMMA dei rapporti per-passo e il loro CONTEGGIO,
+            # cosi' il referto puo' dare il rapporto MEDIO -- stesso statistico, stessa popolazione.
+            _r = (_fm / _cm) if _cm > 0 else 0.0
             self._sfb_amp_coppia = max(getattr(self, "_sfb_amp_coppia", 0.0), _cm)
             self._sfb_amp_fb = max(getattr(self, "_sfb_amp_fb", 0.0), _fm)
-            self._sfb_rapporto_max = max(getattr(self, "_sfb_rapporto_max", 0.0),
-                                         (_fm / _cm) if _cm > 0 else 0.0)
+            self._sfb_rapporto_max = max(getattr(self, "_sfb_rapporto_max", 0.0), _r)
+            self._sfb_rapporto_som = getattr(self, "_sfb_rapporto_som", 0.0) + _r
+            self._sfb_rapporto_n = getattr(self, "_sfb_rapporto_n", 0) + 1
             coppia += _fb
             
         # TERMINE DI HALL / FRAME-DRAGGING come LEGGE (non parametro): il twist, finora solo

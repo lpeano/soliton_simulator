@@ -33,6 +33,15 @@ USO
 python csv/_test_fork/_osserva_vuoto.py --seed 1 --passi 2000 --ogni 100 \\
        --tag on   [--regime-det]  [--no-osserva]
 """
+import sys as _sys_enc  # PRESIDIO ENCODING (CLAUDE.md): lo stdout di Windows e' cp1252 e
+# uccide qualunque print con un carattere non-ASCII. E' successo SETTE volte, l'ultima allo
+# script che stava CONTANDO le occorrenze. Il `# -*- coding: utf-8 -*-` NON basta: riguarda il
+# SORGENTE, non lo STDOUT. Questa riga lo risolve alla radice.
+try:
+    _sys_enc.stdout.reconfigure(encoding="utf-8")
+    _sys_enc.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 import argparse
 import csv as _csv
 import os

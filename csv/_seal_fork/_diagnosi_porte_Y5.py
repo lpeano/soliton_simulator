@@ -10,6 +10,15 @@ conteggi PER PRIMA: shape diverse = MANCANZA DI CONFRONTO, non identita').
 POI: la misura sul blob ATTUALE e su quello PRE-TEMPO 2, AFFIANCATI. Il confronto e' il dato.
 ASCII PURO.
 """
+import sys as _sys_enc  # PRESIDIO ENCODING (CLAUDE.md): lo stdout di Windows e' cp1252 e
+# uccide qualunque print con un carattere non-ASCII. E' successo SETTE volte, l'ultima allo
+# script che stava CONTANDO le occorrenze. Il `# -*- coding: utf-8 -*-` NON basta: riguarda il
+# SORGENTE, non lo STDOUT. Questa riga lo risolve alla radice.
+try:
+    _sys_enc.stdout.reconfigure(encoding="utf-8")
+    _sys_enc.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 import os
 import pickle
 import subprocess

@@ -13,6 +13,15 @@ LE SOGLIE, ricopiate dalla predizione e NON ritoccate qui:
 NB: `SE = std/sqrt(n)` e' la barra INTERNA al run. Per il confronto FRA SEMI si usa la dispersione
 dei due semi (C10: su questo sistema caotico la barra giusta e' ~3 volte quella interna).
 """
+import sys as _sys_enc  # PRESIDIO ENCODING (CLAUDE.md): lo stdout di Windows e' cp1252 e
+# uccide qualunque print con un carattere non-ASCII. E' successo SETTE volte, l'ultima allo
+# script che stava CONTANDO le occorrenze. Il `# -*- coding: utf-8 -*-` NON basta: riguarda il
+# SORGENTE, non lo STDOUT. Questa riga lo risolve alla radice.
+try:
+    _sys_enc.stdout.reconfigure(encoding="utf-8")
+    _sys_enc.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 import csv, glob, math, os, sys
 import numpy as np
 

@@ -7,6 +7,15 @@ Verifica la funzione ISOLATA `Rete._link_su2`, senza farla girare dentro la dina
 Verdetto secco: stampa PASS/FAIL per ogni sigillo ed esce 0 (tutti PASS) o 1 (almeno un FAIL).
 Riferimento: doc/ROADMAP_fork_SU2.md (PEZZO 1 e PEZZO 2) + CLAUDE.md par.2 (sigilli).
 """
+import sys as _sys_enc  # PRESIDIO ENCODING (CLAUDE.md): lo stdout di Windows e' cp1252 e
+# uccide qualunque print con un carattere non-ASCII. E' successo SETTE volte, l'ultima allo
+# script che stava CONTANDO le occorrenze. Il `# -*- coding: utf-8 -*-` NON basta: riguarda il
+# SORGENTE, non lo STDOUT. Questa riga lo risolve alla radice.
+try:
+    _sys_enc.stdout.reconfigure(encoding="utf-8")
+    _sys_enc.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 import os
 import sys
 

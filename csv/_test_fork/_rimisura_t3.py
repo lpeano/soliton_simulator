@@ -14,6 +14,15 @@ congelava SOLO il fattore `cs`, non `d`.
 
 Nessuna pendenza senza barra d'errore: si stampano b, SE, r^2, IC95, n (par.9).
 """
+import sys as _sys_enc  # PRESIDIO ENCODING (CLAUDE.md): lo stdout di Windows e' cp1252 e
+# uccide qualunque print con un carattere non-ASCII. E' successo SETTE volte, l'ultima allo
+# script che stava CONTANDO le occorrenze. Il `# -*- coding: utf-8 -*-` NON basta: riguarda il
+# SORGENTE, non lo STDOUT. Questa riga lo risolve alla radice.
+try:
+    _sys_enc.stdout.reconfigure(encoding="utf-8")
+    _sys_enc.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 import contextlib, importlib.util, io, os, sys
 import numpy as np
 

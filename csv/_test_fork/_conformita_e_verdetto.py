@@ -26,6 +26,15 @@ SE interna a un run (C10: e' l'errore che ha prodotto il "16.9 %" e l'"11.0 %", 
 Il valore-null di |<n>| NON e' 1/sqrt(N) (quella e' la SCALA): l'attesa misurata e'
 |<n>|*sqrt(N) = 0.92 +- 0.38, p95 ~ 1.60.
 """
+import sys as _sys_enc  # PRESIDIO ENCODING (CLAUDE.md): lo stdout di Windows e' cp1252 e
+# uccide qualunque print con un carattere non-ASCII. E' successo SETTE volte, l'ultima allo
+# script che stava CONTANDO le occorrenze. Il `# -*- coding: utf-8 -*-` NON basta: riguarda il
+# SORGENTE, non lo STDOUT. Questa riga lo risolve alla radice.
+try:
+    _sys_enc.stdout.reconfigure(encoding="utf-8")
+    _sys_enc.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 import csv, glob, math, os, sys
 import numpy as np
 

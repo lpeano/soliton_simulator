@@ -261,6 +261,25 @@ scritto in `doc/INVENTARIO_strumenti.md`:
 E' la stessa famiglia di P6 (*«un file che si distingue dagli altri solo per il nome non e' un dato:
 e' un ricordo»*), applicata a cio' che il repo non puo' contenere.
 
+### PRESIDIO ENCODING — **lo stdout di Windows e' cp1252, e uccide gli script**
+
+**Ogni script di sigillo o di misura DEVE cominciare con:**
+```python
+import sys as _sys_enc
+try:
+    _sys_enc.stdout.reconfigure(encoding="utf-8")
+    _sys_enc.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+```
+**`# -*- coding: utf-8 -*-` NON BASTA:** riguarda il **SORGENTE**, non lo **STDOUT**. Un singolo
+`⚠`, `→` o `Δ` in un `print` fa morire lo script con `UnicodeEncodeError` — **dopo aver girato**,
+buttando via il run.
+
+**Perche' e' una REGOLA e non una raccomandazione: e' successo SETTE volte**, e la settima **allo
+script che stava CONTANDO le occorrenze precedenti**. **Una nota che non impedisce il ripetersi non
+e' un presidio.** Applicato a **74 script su 74** il 2026-09-17.
+
 ---
 
 ## 5-quater. IL REGISTRO DEI FRONTI APERTI (regola di Luca, 2026-09-15)

@@ -13,6 +13,15 @@ P2  IL CONTATORE: % di chiamate che cadono nel fallback, PRIMA e DOPO, sugli ste
 P3  coerenza della cache: `len(_cs_nodo_prev) == n` a OGNI passo dopo il primo (verifica esplicita).
 P4  stabilita': niente NaN/inf, `cs_nodo` positivo e finito, |nb| = 1.
 """
+import sys as _sys_enc  # PRESIDIO ENCODING (CLAUDE.md): lo stdout di Windows e' cp1252 e
+# uccide qualunque print con un carattere non-ASCII. E' successo SETTE volte, l'ultima allo
+# script che stava CONTANDO le occorrenze. Il `# -*- coding: utf-8 -*-` NON basta: riguarda il
+# SORGENTE, non lo STDOUT. Questa riga lo risolve alla radice.
+try:
+    _sys_enc.stdout.reconfigure(encoding="utf-8")
+    _sys_enc.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 import contextlib, importlib.util, io, os, sys
 import numpy as np
 

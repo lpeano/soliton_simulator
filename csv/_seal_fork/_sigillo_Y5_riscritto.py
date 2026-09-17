@@ -19,6 +19,15 @@ COME PUO' FALLIRE, ed e' il punto: basta UN nodo maturo in fallback (Y5b), o UN 
 due invocazioni (Y5c). Nessuno dei due e' garantito dalla forma del codice.
 ASCII PURO.
 """
+import sys as _sys_enc  # PRESIDIO ENCODING (CLAUDE.md): lo stdout di Windows e' cp1252 e
+# uccide qualunque print con un carattere non-ASCII. E' successo SETTE volte, l'ultima allo
+# script che stava CONTANDO le occorrenze. Il `# -*- coding: utf-8 -*-` NON basta: riguarda il
+# SORGENTE, non lo STDOUT. Questa riga lo risolve alla radice.
+try:
+    _sys_enc.stdout.reconfigure(encoding="utf-8")
+    _sys_enc.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 import importlib.util
 import os
 import sys
