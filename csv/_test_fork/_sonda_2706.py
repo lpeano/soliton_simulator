@@ -31,6 +31,7 @@ import numpy as np
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 sys.path.insert(0, ROOT)
 os.chdir(ROOT)
+_ARGV = list(sys.argv)
 sys.argv = ["soliton_simulator.py"]
 import soliton_simulator as S
 
@@ -38,8 +39,15 @@ for _f in ("CS_DINAMICO", "CAMPO_SPINORIALE", "SPINORE_VIVO", "CHI_CORE",
            "FORK_SU2", "FORK_SU2_MEM", "SPINORE_CORRETTO", "SPIN_FEEDBACK"):
     setattr(S, _f, True)
 
+# TAU_A: l'esperimento girava a 2.0, il default del regime deterministico e' 50. Il rapporto
+# 2.706 viene da LI', quindi va riprodotto LI'. Un confronto fra due scene diverse non e' un
+# confronto (A3c).
+if "--tau-a" in _ARGV:
+    S.TAU_A = float(_ARGV[_ARGV.index("--tau-a") + 1])
+_TA = S.TAU_A
+
 print("=" * 118)
-print("SONDA DEL 2.706 -- |feedback| / |coppia|")
+print("SONDA DEL 2.706 -- |feedback| / |coppia|   [TAU_A = %s]" % _TA)
 print("=" * 118)
 
 # ---------------------------------------------------------------- 1.3 DAL SORGENTE
