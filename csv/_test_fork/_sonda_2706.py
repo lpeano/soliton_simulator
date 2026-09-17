@@ -181,8 +181,7 @@ for k in (0, 1, len(reg) // 4, len(reg) // 2, len(reg) - 1):
     print("  %-8d %-13.5g %-13.5g %-13.5g %-13.5g %-13.5g"
           % (k, x["ov_med"], x["wg_med"], x["fb_med"], x["cp_med"], rap))
 rr = np.array([x["fb_med"] / x["cp_med"] for x in reg if x["cp_med"] > 0])
-print("
-  IL RAPPORTO NON E' UNA COSTANTE: la sua DISTRIBUZIONE su %d invocazioni" % len(rr))
+print(chr(10) + "  IL RAPPORTO NON E' UNA COSTANTE: la sua DISTRIBUZIONE su %d invocazioni" % len(rr))
 print("     MEDIA      %.5g   <- dominata dai primi passi: e' lo statistico SBAGLIATO" % rr.mean())
 print("     MEDIANA    %.5g" % np.median(rr))
 print("     p25 / p75  %.5g / %.5g" % (np.percentile(rr, 25), np.percentile(rr, 75)))
