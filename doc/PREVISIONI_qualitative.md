@@ -116,3 +116,33 @@ leggere lo zero (§9, *«`0.000e+00` puo' significare "nessun confronto"»*).
 
 **Se la rimozione NON fosse inerte, la conclusione non sarebbe "ho rotto qualcosa": sarebbe che
 GATE C aveva torto**, cioe' che una via di chiamata esiste e non e' stata trovata.
+
+---
+
+# ① `inerzia` — previsioni *(ex ante, 2026-09-17)*
+
+**Scritte PRIMA di qualunque cablaggio, e il cablaggio NON e' avvenuto** (verifica preliminare
+fallita, `doc/REFERTO_inerzia_transitorio.md`). **Restano valide per quando avverra'**: scriverle
+adesso, prima che la via sia sbloccata, e' piu' forte che scriverle dopo.
+
+`inerzia = (rho_sorgente / peq_nodo) * (d_nodo / cs_nodo)**2`
+
+- **Il pavimento `1e-6` smette di essere il valore dominante.** Non perche' venga tolto — **resta** —
+  ma perche' l'inerzia lo supera da sola. **E' la FIRMA che la diagnosi dimensionale era giusta:**
+  se restasse dominante, la forma non avrebbe alzato l'inerzia e la causa sarebbe altrove.
+- **`sigma = coppia/inerzia` CALA**, e con essa l'ampiezza di `omega`.
+- **L'inerzia diventa PIU' GRANDE dove `cs` e' piu' basso**, cioe' **nei pozzi densi**: la materia
+  compressa resiste di piu' alla rotazione. *(Segue da `(d/cs)^2`: `cs` piccolo → `T` grande.)*
+- **Il lavoro sul `cs` relazionale arriva finalmente allo spin.** Oggi non ci arriva, ed e' misurato:
+  `_fatt_cs` vale fino a **6.43**, ma l'inerzia resta `1e-6` **sul 100.00 % dei nodi**. Il fattore
+  esiste e non serve a nulla.
+
+**COSA NON PREVEDO, e va scritto adesso perche' non sia rivendicato dopo:** **non prevedo che il
+settore di spin si ordini**, ne' che l'aliasing sia risolto. E' gia' stabilito che `omega` e' un
+random walk smorzato: **cambiare l'ingresso sposta il plateau, non lo abolisce**. Che il plateau si
+sposti abbastanza da uscire dall'aliasing **e' una domanda quantitativa**, e la risposta si scrive
+**a bonifica completa, contro una predizione numerica scritta prima** — non qui.
+
+**COSA LA FALSIFICHEREBBE:** se dopo il cablaggio il pavimento restasse dominante, **la forma non
+avrebbe fatto il suo lavoro** e la diagnosi dimensionale andrebbe riaperta, non raffinata.
+

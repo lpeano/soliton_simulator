@@ -1,0 +1,46 @@
+====================================================================================================================
+VERIFICHE PRELIMINARI DI (1) -- inerzia = (rho_sorgente/peq_nodo) * (d/cs)^2
+====================================================================================================================
+
+--- (4) `_fatt_cs_ultimo`: chi lo LEGGE? ---
+   self._fatt_cs_ultimo = _fatt_cs                    # per la metrica (solo lettura a valle)
+  occorrenze nel CODICE: 1  -> SOLO LA SCRITTURA: NESSUNO LO LEGGE
+  LETTURA: il commento dice "per la metrica (solo lettura a valle)", ma a valle NON C'E'
+  NESSUNO. E' il QUARTO caso della stessa famiglia (_passo_spinoriale "ORFANO" ma vivo, VERSO_CHI
+  cablato ma muto, spin_locale mai chiamata): lo stato di vita del codice non e' leggibile dal
+  codice. CONSEGUENZA OPERATIVA: togliere `_fatt_cs` dall'inerzia NON rompe nessun consumatore.
+
+--- (1)(2) `peq` NEL PUNTO IN CUI SI CALCOLA `inerzia` (dentro _passo_spinoriale) ---
+  NB dal codice: _passo_spinoriale e' chiamato a :3062, la CALIBRAZIONE di peq e' a :3147.
+  Quindi l'inerzia si calcola PRIMA che peq sia calibrato, nello stesso passo.
+
+  passo   n       archi    peq NaN   peq <=0     pn NaN    pn <=0      i/j ok   
+  0       360     14134    14134     0           0         360         True     
+  1       360     14134    0         14134       0         360         True     
+  2       360     14134    0         0           0         0           True     
+  3       360     14134    0         0           0         0           True     
+  4       360     14134    0         0           0         0           True     
+  5       360     14134    0         0           0         0           True     
+  6       360     14134    0         0           0         0           True     
+  7       360     14134    0         0           0         0           True     
+  ...
+  22      360     14134    0         0           0         0           True     
+  23      360     14134    0         0           0         0           True     
+  24      360     14134    0         0           0         0           True     
+
+  passi con peq NaN nel punto dell'inerzia : [0]
+  passi con peq_nodo <= 0                  : [0, 1]
+  i/j allineati agli archi in tutti i passi : True
+  _deg allineato ai nodi in tutti i passi   : True
+
+--- (3) `_tempo_luce_nodo` chiamabile nel punto dell'inerzia? ---
+  presente come metodo: True
+     passo 0    T = d/cs : min 0.7399  mediana 0.8169  max 0.921
+     passo 1    T = d/cs : min 0.7399  mediana 0.8169  max 0.921
+     passo 2    T = d/cs : min 0.7926  mediana 0.8663  max 0.9638
+     passo 23   T = d/cs : min 0.8813  mediana 1.04  max 1.821
+     passo 24   T = d/cs : min 0.8831  mediana 1.041  max 1.808
+
+--- (5) `_rho_sorgente()` e `peq` sono la STESSA grandezza? (voce Z1, gia' committata) ---
+  correlazione rho_sorgente <-> |psi|^2, per passo: ['1.000', '1.000', '0.992', '0.487', '0.612', '0.683', '0.718', '0.472']
+  (se rho_sorgente FOSSE |psi|^2, varrebbe 1.000 esatto a ogni passo)
