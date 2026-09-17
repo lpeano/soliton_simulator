@@ -2698,3 +2698,87 @@ non si perda — come quello dello Step 2, che è poi stato saldato (§9.18).
 cancellato**: resta marcato come inutilizzato, perché è l'evidenza che spiega perché esiste il suo
 sostituto (§9). Stessa cosa per la dottrina di `spin_locale`, trascritta in §F.4 prima di rimuovere
 il metodo.
+
+---
+
+## 9.20 — `peq` ALLA NASCITA: **la verifica preliminare ferma il cablaggio**, e il reperto si rilegge al contrario
+
+**Che cos'era.** Un mandato di bonifica su `peq`: il contatore cablato in `f405327` diceva che il
+vincolo causale scatta **99.91 %** delle volte su archi dove `peq` è degenere, e quindi — questa la
+lettura proposta — **non sta proteggendo il vuoto profondo, sta mascherando un `peq` non definito**.
+La cura proposta: inizializzare `peq` dai due nodi dell'arco invece che a `NaN`.
+
+Il mandato imponeva una **verifica preliminare prima del cablaggio**. **L'ha fermato.**
+
+### 1. `psi` è raggiungibile, ma è **identicamente zero**
+
+```
+DOPO la costruzione della scena:  len(psi) = 120 = n
+  psi tutti zero?  True       max|psi| = 0
+
+IL VALORE CHE LA CURA SCRIVEREBBE  ->  0.5*(I[a]+I[b]) :
+  min 0    mediana 0    max 0
+  degeneri lo stesso:  4555 su 4555   (100.00 %)
+```
+
+`psi` nasce `np.zeros(0, complex)` ed è popolato **solo dentro `step()`**. Quando gli archi nascono,
+**la densità non esiste come grandezza fisica**. La cura scriverebbe **`0` al posto di `NaN`**, e
+`0 <= 1e-30`: **il contatore resterebbe identico e il sigillo decisivo fallirebbe per costruzione.**
+Non è un dettaglio implementativo — **la cura sarebbe inerte rispetto al problema che dichiara di
+risolvere.** E uno snapshot non aiuta: non esiste un istante precedente da fotografare.
+
+### 2. Il reperto va riletto: **non è una finestra permanente, sono DUE PASSI**
+
+Ho cablato un secondo contatore per **deciderlo invece di argomentarlo** — quanti **passi distinti**
+hanno almeno un `peq` degenere:
+
+```
+RUN REALE, 60 passi:
+  _taup_peq_degenere  (archi-passo cumulativi) :  207520
+  _taup_peq_deg_passi (PASSI DISTINTI)         :       2
+```
+
+**Due passi su sessanta.** I 207520 archi-passo sono **~103 760 archi × 2 passi**: il **transitorio
+di accensione** moltiplicato per il numero di archi. **Un contatore cumulativo, da solo, non
+distingue «difetto sempre presente» da «transitorio moltiplicato»** — e senza il secondo si sceglie
+la diagnosi che si ha già in mente. *(È lo stesso presidio del valore sotto ipotesi nulla, applicato
+a un conteggio: «quanto varrebbe questo numero se il fenomeno fosse innocuo?».)*
+
+La sequenza misurata: costruzione → `NaN` al **100 %**; passo 1 → `psi` **ancora zero**, quindi
+`peq = rho = 0` **esatto**; passo 2 → **zero degeneri**; poi sempre zero. Coerente col già misurato:
+**0 %** nei dati maturi, **2.49 %** nel run giovane — che erano **2/60 passi** diluiti nel cumulativo.
+
+### 3. Il ribaltamento: **il `NaN` non è il difetto, è l'unica cosa onesta**
+
+Il mandato lo marca come *«IL PROBLEMA»*: *«`NaN` dice "non lo so" — ma si sa»*. **Alla costruzione
+della scena non si sa**: i nodi esistono come **posizioni**, ma la loro densità è **zero per
+costruzione**. Il `NaN` non nasconde un valore noto: dice, correttamente, che la grandezza **non è
+ancora definita**, e la delega alla calibrazione è il meccanismo che la definisce appena esiste.
+
+**Il difetto, se c'è, è a valle e di altra natura:** al passo 1 **l'intero campo** è zero, non solo
+`peq`. Il vincolo causale che scatta lì **non maschera un difetto numerico: attraversa un sistema
+che non è ancora partito.**
+
+**Questo non assolve tutto.** `pmed = median(self.peq)` nello Schwinger **viola A2** ed è un difetto
+vero, **indipendente dal transitorio**: lì il sistema è avviato e i due nodi dell'arco hanno una
+densità vera. **È cablabile** — ma il mandato la lega al sigillo che non può passare, e cablarla da
+sola significherebbe presentare quel fallimento come se fosse il suo verdetto.
+
+### 4. Cosa ne è degli assiomi
+
+Il corollario **A7b** — *«uno stato non nasce indefinito»* — è stato aggiunto, **col suo limite
+misurato accanto**: si applica **dopo** aver verificato che nel punto di nascita esista qualcosa da
+cui costruire. **Sostituire un indefinito con uno zero non è inizializzare: è nascondere.**
+
+E la domanda aperta **#2** degli assiomi è **risolta**: `u_nodo` soddisfa A2 e viola A3, quindi
+**A3 è indipendente da A2**.
+
+### 5. La speculazione registrata
+
+`doc/SPECULAZIONI_cs_acromatico.md` — linea di Luca, **commit dedicato, nessun codice**, e in
+`RAMIFICAZIONI.md` sta in **D.5**, la sezione delle voci **senza criterio di chiusura**, non fra i
+fronti. Ne ho verificate le affermazioni controllabili: *«il modello non ha espansione metrica»* è
+**vero** (`:3242`, nessun termine `∝ d`); *`cs_std/cs = 11 %`* è **committato** (`ef44b03`,
+`11.123 %`). **Il rinvio al «conto sul punto fisso dello scuotimento» (`I/Lam ~ 1/3`) NON l'ho
+trovato nel repo**: `doc/INDAGINE_scuotimento.md` esiste ma non contiene quel calcolo. Testo lasciato
+verbatim come ordinato, **con il rinvio mancante dichiarato**.

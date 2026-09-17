@@ -89,11 +89,42 @@ piu' usato, ma e' di natura diversa dagli altri.)*
 irreversibile.
 *Caso:* `spinta` — `rep` istantaneo, `d0 += spinta` irreversibile.
 
+### A7b — COROLLARIO: **uno stato non nasce indefinito** *(aggiunto 2026-09-17)*
+**Uno stato non deve mai nascere indefinito. O si eredita da chi lo genera, o si costruisce da cio'
+che esiste nel punto in cui nasce.** `NaN` dice *«non lo so»*, e quasi sempre **si sa**: un arco
+appena nato sta in un posto che esiste gia', coi suoi due nodi. **Lo sfondo non e' ignoto: e' quello
+che c'e' li'.**
+*Perche' discende da A7:* una grandezza che nasce indefinita **non ha stato**, e finche' non ce
+l'ha non puo' conservare nulla. Ogni lettura in quella finestra legge un buco, e **ogni copertura
+messa sopra ne nasconde un'altra** *(caso reale: `NaN` -> `np.maximum(peq, 1e-30)` -> il vincolo
+causale `max(t_luce, t_visco)`: **tre reti sopra lo stesso buco**)*.
+*Riferimento di stile, gia' nel codice:* `:3598`, dove i due archi figli **ereditano `peq` dall'arco
+padre** — locale, immediato, nessun `NaN`.
+
+**⚠ E IL LIMITE DEL COROLLARIO, MISURATO PRIMA DI APPLICARLO** (`doc/REFERTO_peq_nascita.md`).
+Il corollario dice *«si costruisce da cio' che esiste nel punto in cui nasce»*. **Ma va verificato
+che qualcosa esista davvero**, e in un caso reale **non esisteva**: alla costruzione della scena
+`self.psi` e' **identicamente zero** (viene popolato solo dentro `step()`), quindi
+`0.5*(I[a]+I[b])` vale **esattamente 0** su **4555 archi su 4555**. Inizializzare li' avrebbe
+scritto **uno zero al posto di un `NaN`**, cioe' **un valore degenere travestito da valore**.
+**In quel punto il `NaN` era l'unica cosa onesta**: la grandezza non era indefinita per
+trascuratezza, era **non ancora definita**.
+**QUINDI IL COROLLARIO SI APPLICA COSI':** prima si verifica **che cosa esiste** nel punto di
+nascita. Se esiste uno stato da cui costruire (i nodi hanno densita' vera, l'arco padre ha `peq`) →
+**si costruisce o si eredita, e il `NaN` e' un difetto.** **Se non esiste nulla, il `NaN` e'
+corretto e il difetto sta altrove** — nel fatto che qualcuno legga quella grandezza prima che
+esista. **Sostituire un indefinito con uno zero non e' inizializzare: e' nascondere.**
+
 ## APERTO — cosa manca perche' siano assiomi
 1. **Non sono generativi.** Serve **l'azione unica `S`**: allora diventerebbero **i vincoli che `S`
    deve soddisfare.**
-2. **Non sono indipendenti.** **A3 e' forse un caso particolare di A2.** **A4 e A5 sono in tensione**
-   su `cs`. **A2 e' violato da `Lam = mean(I)`, che funziona.**
+2. **Non sono indipendenti.** ~~**A3 e' forse un caso particolare di A2.**~~ **RISOLTO il
+   2026-09-17: A3 E' INDIPENDENTE**, per controesempio — `u_nodo = I / media_dei_VICINI` (`:2607`)
+   **soddisfa A2** (la media e' sui vicini topologici: nessuna scorciatoia globale) e **viola A3**
+   (che nomina esplicitamente «media dei primi vicini»). *(`u_nodo` non va percio' corretto: sta
+   dentro `_cs_nodo`, cioe' dentro cio' che **definisce** la causalita', e **A4** giudica quel
+   livello a parte. Voce **Z5** del registro.)* **A4 e A5 restano in tensione** su `cs`.
+   **A2 resta violato da `Lam = mean(I)`, che funziona.**
 3. **A6 e' un teorema.**
 4. **Nessuno e' derivato:** sono **regolarita' induttive**, e **potrebbero non valere fuori dai casi
    che le hanno generate.**

@@ -925,3 +925,15 @@ dimostrazione)* **A3 non discende da A2**.
 - **Sei criteri di sigillo sono stati corretti dopo l'esecuzione** in questo giro, tutti perché
   guardavano il proprio modello del codice invece della misura. È il presidio di §9, e continua a
   scattare.
+
+## AGGIORNAMENTO 2026-09-17 (2) — mandato `peq`: CABLAGGIO FERMATO dalla verifica preliminare
+- **(1) NON cablata:** `psi` e' **identicamente zero** quando gli archi nascono, quindi la cura
+  scriverebbe `0` al posto di `NaN` e il sigillo decisivo W1 fallirebbe **per costruzione**.
+- **(2) `pmed` nello Schwinger e' un difetto VERO (A2) ed e' PRONTA**, ma il mandato la lega a W1:
+  **serve una riga che la sganci da (1).**
+- **Il reperto si rilegge:** `_taup_peq_deg_passi = 2` su 60 -> **transitorio di accensione**, non
+  una finestra permanente. Il `NaN` **non e' il difetto**.
+- Aggiunti: corollario **A7b** (col suo limite misurato), voce **S** speculativa in D.5,
+  `doc/SPECULAZIONI_cs_acromatico.md`, `doc/REFERTO_peq_nascita.md`.
+- **Unica modifica al codice: due CONTATORI** (`_taup_peq_deg_passi`, `_taup_peq_deg_ultimo`).
+  Nessuna legge toccata.
