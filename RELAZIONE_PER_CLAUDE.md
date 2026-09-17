@@ -3305,3 +3305,54 @@ che gira, il grep ciò che è scritto: entrambe le misure sono giuste e servono 
 spento**, quindi **nessun sigillo può esercitarlo**, e il referto dovrà dirlo invece di contarlo fra
 i successi. *(È la classe di `VERSO_CHI`: cablato ma muto.)*
 
+---
+
+## 9.28 — **`Y5` rosso: la causa è `rho_sorgente ≤ 0`**, e non è nessuna delle due porte ipotizzate
+
+**Strumentazione byte-inerte** (`max|A-B| = 0.000e+00`, nodi 2025 = 2025) che separa le porte del
+fallback dello sfondo dell'inerzia. **Nessuna riparazione: il mandato chiedeva di misurare.**
+
+```
+PORTA A  (len(peq) != len(i))   :  0        MAI
+PORTA B  (peq NaN o <= 0)       :  4 / 66   ultima invocazione 8
+   -> _peq_nodo NON valido      :  2392     ultima 8
+   -> rho_sorgente NON valido   :  2019     ultima 66     <---
+fallback totale                 :  3215     ultima 66   (3215 CON archi, 0 senza)
+```
+
+**Nessuna delle tre letture fissate prima. È una quarta:**
+
+- **PORTA A non scatta mai** → nessun difetto di lunghezza, A8b in quella forma non si applica;
+- **PORTA B solo fino all'invocazione 8**, e il suo conteggio **2392** è **esattamente il fallback
+  totale del blob PRE-TEMPO 2** → **la componente `peq` è INVARIATA**;
+- **la causa permanente è `rho_sorgente ≤ 0`** — cioè **`rho_spin`, il campo EMESSO**. Il TEMPO 2 ha
+  cambiato `psi` (Q4: 1669 nodi contro 1850) e **ha prodotto nodi in cui il campo emesso si
+  annulla**, dove prima non accadeva.
+
+### I due rilievi del guardiano, verificati dal codice
+
+**① *«l'inerzia legge `peq` DOPO la diffusione di questo passo: è A5»* → FALSO.** L'ordine lo decide:
+`_peq_t` a `:2986`, l'inerzia legge a `:3217`, la **calibrazione** è a `:3302` e la **diffusione** a
+`:3320` — **cento righe dopo**. L'informazione dei vicini di questo passo **non è ancora entrata**.
+
+**② *«`_peq_t` esiste e l'inerzia non lo usa»* → VERO nella forma, senza conseguenza oggi**: fra
+`:2986` e `:3217` nulla modifica `self.peq`, quindi **lo stato vivo È la fotografia** e la
+sostituzione sarebbe **byte-identica**.
+**Ma il rilievo coglie una cosa vera:** la garanzia viene **dall'ORDINE, non dalla struttura**. Se
+`_passo_spinoriale` venisse spostato dopo `:3320`, **A6 si romperebbe in silenzio**. *(Ed è il limite
+di come l'avevo scritto io nel commento dell'inerzia: «A6 soddisfatto per costruzione» — è
+soddisfatto **dall'ordine**, che è più fragile.)*
+
+**③ Il parallelo con `_psi_spin_prec` e `_cs_nodo_prev` NON regge:** quelle erano **cache inerti**
+(**95.33 %** e **71.88 %** di fallback, la legge dichiarata non girava). **Qui lo snapshot è
+EQUIVALENTE, non mancante.** Chiamarla «la terza volta nello stesso settore» sovrappone **un
+meccanismo morto** e **una garanzia che dipende dall'ordine**: la seconda va irrobustita, la prima
+era un difetto.
+
+### Cosa resta aperto
+
+Quattro vie, tutte decisioni: **rimisurare `Y5`** (se i nodi a campo emesso nullo sono legittimi);
+**trattare `rho_sorgente ≤ 0` come caso a sé**; **revertire il TEMPO 2** (ma Q4 ha dimostrato che
+quel difetto era **reale**); oppure — indipendente da `Y5` — **far leggere `_peq_t`**, che oggi
+sarebbe byte-identico: **irrobustimento, non correzione**.
+

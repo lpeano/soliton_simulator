@@ -1,0 +1,59 @@
+======================================================================================================================
+DIAGNOSI DELLE DUE PORTE -- `Y5` rosso. MISURA, NON RIPARA.
+======================================================================================================================
+
+--- (1) LA STRUMENTAZIONE E' BYTE-INERTE?  [BLOCCANTE] ---
+  PRESIDIO, conteggi PER PRIMI: nodi SENZA strum. 2025, nodi CON strum. 2025
+  array con SHAPE UGUALI confrontati: 38   (shape diverse: 0)
+[PASS] 1a c'e' CONFRONTO (stesso N)                   38 array, nodi 2025 = 2025
+[PASS] 1b BYTE-INERTE: max|A-B| = 0.000e+00  [BLOCCANTE] max = 0.000e+00 (peggiore: -)
+
+--- (2) LE DUE PORTE, blob ATTUALE (dopo il TEMPO 2) ---
+  invocazioni totali del blocco inerzia : 66
+  PORTA A  (len(peq) != len(i))         : 0       (0.00 %)   ultima invocazione: None
+  PORTA B  (peq NaN o <= 0)             : 4       (6.06 %)   ultima invocazione: 8
+           di cui NaN 207509, <= 0 207509 (somma sui nodi-invocazione)
+  fallback sui NODI, totale             : 3215
+     di cui nodi CON archi (grado > 0)  : 3215   <- 'archi validi ma somma nulla'
+     di cui nodi SENZA archi            : 0   <- 'nessun arco da cui leggere'
+  ultima invocazione col fallback       : 66 su 66
+
+--- (3) IL CONFRONTO: blob PRE-TEMPO 2 (9dfd91c4) contro ATTUALE (b66e4c5c) ---
+                                           PRE TEMPO 2      ATTUALE         
+  fallback sfondo (nodi)                   2392             3215            
+  passi distinti col fallback              4                57              
+  ULTIMA invocazione col fallback          8                66              
+  invocazioni totali                       66               66              
+  nodi al pavimento 1e-6                   324              837             
+  nodi totali (inerzia)                    93710            98955           
+  nodi finali                              1774             2025            
+
+  NB: il blob PRE-TEMPO 2 NON ha i contatori delle due porte (sono stati aggiunti ora), quindi
+  la riga delle porte esiste solo per l'attuale. Il confronto qui e' sul FALLBACK, che c'era
+  in entrambi.
+
+======================================================================================================================
+IL VERDETTO, contro le TRE letture fissate PRIMA:
+  PORTA A (lunghezza) : 0       PORTA B (valore di peq) : 4, ultima invocazione 8
+  e la separazione delle DUE condizioni di `_ok_n`:
+     _peq_nodo NON valido    : 2392     ultima invocazione 8
+     rho_sorgente NON valido : 2019     ultima invocazione 66
+
+  -> NESSUNA DELLE TRE LETTURE DEL MANDATO. E' UNA QUARTA, e la misura la isola:
+
+     PORTA A non scatta MAI (0): le lunghezze combaciano sempre. Nessun difetto di LUNGHEZZA.
+     PORTA B scatta 4 volte su 66, ULTIMA ALL'INVOCAZIONE 8: e' il TRANSITORIO, e il conteggio
+             dei nodi (2392) e' ESATTAMENTE il fallback totale del blob PRE-TEMPO 2.
+             -> LA COMPONENTE `peq` E' INVARIATA dal TEMPO 2.
+     LA CAUSA DEL FALLBACK PERMANENTE E' LA TERZA CONDIZIONE: `rho_sorgente <= 0`, che cade fino
+             all'invocazione 66 su 2019 nodi-invocazione.
+
+     `rho_sorgente` e' `rho_spin` (il campo EMESSO) con CAMPO_SPINORIALE ON, e il TEMPO 2 ha
+     cambiato `psi` -- Q4 lo ha dimostrato (1669 nodi contro 1850). Quindi il TEMPO 2 ha prodotto
+     nodi in cui IL CAMPO EMESSO SI ANNULLA, dove prima non accadeva.
+
+     ESITO OPERATIVO: e' la LETTURA (2) del referto -- un difetto introdotto dal TEMPO 2 -- MA CON
+     UNA CAUSA DIVERSA da quella che il mandato ipotizzava (non `peq` letto prima della
+     calibrazione, ma `rho_spin` che si annulla). NON LO RIPARO: il mandato dice di misurare.
+
+byte-inerzia: 2/2 PASS -> PASS

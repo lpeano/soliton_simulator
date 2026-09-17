@@ -2159,6 +2159,27 @@ class Rete:
         # proiezione arco->nodo di `peq`: media sugli archi INCIDENTI -- la stessa forma gia' usata
         # per `den_w` (~:3151), e la grandezza su cui GATE A e' stato misurato.
         _peq_a = np.asarray(self.peq, float)
+        # [A8 - DIAGNOSI DELLE DUE PORTE, 2026-09-17] SOLO CONTATORI, nessuna logica toccata.
+        # Il fallback dello sfondo ha DUE porte, che portano a diagnosi OPPOSTE:
+        #   PORTA A  len(self.peq) != len(self.i)  -> `peq` e topologia sono di due momenti
+        #            diversi. E' un difetto di LUNGHEZZA (A8b: cache cross-passo letta con una
+        #            topologia che nel frattempo e' cambiata).
+        #   PORTA B  le lunghezze combaciano, ma `peq` e' NaN o <= 0 -> letto PRIMA della sua
+        #            calibrazione (~:3263). E' un difetto di VALORE.
+        # Un TOTALE non distingue le due, ed e' esattamente il numero che non serve.
+        self._por_invoc = getattr(self, "_por_invoc", 0) + 1
+        if len(_peq_a) != len(self.i):
+            self._porta_A = getattr(self, "_porta_A", 0) + 1
+            self._porta_A_ultima = self._por_invoc
+            self._porta_A_shape = (len(_peq_a), len(self.i))
+        else:
+            _nan = int(np.sum(~np.isfinite(_peq_a)))
+            _nonpos = int(np.sum(np.isfinite(_peq_a) & (_peq_a <= 0)))
+            if _nan or _nonpos:
+                self._porta_B = getattr(self, "_porta_B", 0) + 1
+                self._porta_B_ultima = self._por_invoc
+                self._porta_B_nan = getattr(self, "_porta_B_nan", 0) + _nan
+                self._porta_B_nonpos = getattr(self, "_porta_B_nonpos", 0) + _nonpos
         _ok_a = np.isfinite(_peq_a) & (_peq_a > 0) if len(_peq_a) == len(self.i) else np.zeros(len(self.i), bool)
         if _ok_a.any():
             _sp = (np.bincount(self.i[_ok_a], _peq_a[_ok_a], minlength=n) +
@@ -2187,6 +2208,24 @@ class Rete:
         self._inerzia_sfondo_chiamate = getattr(self, "_inerzia_sfondo_chiamate", 0) + int(n)
         self._inerzia_invocazioni = getattr(self, "_inerzia_invocazioni", 0) + 1
         if not bool(np.all(_ok_n)):
+            # [A8 - LA TERZA SEPARAZIONE, 2026-09-17] QUALE delle due condizioni di `_ok_n` cade?
+            # La diagnosi delle due porte ha escluso sia la LUNGHEZZA (porta A: 0) sia il VALORE di
+            # `peq` (porta B: solo nel transitorio, ultima invocazione 8 su 66). Resta `rho_s`.
+            # Senza questo contatore la causa si dedurrebbe invece di misurarla.
+            _ko_peq = int(np.sum(~(np.isfinite(_peq_nodo) & (_peq_nodo > 0))))
+            _ko_rho = int(np.sum(~(np.isfinite(_rho_s) & (_rho_s > 0))))
+            self._sfondo_ko_peq = getattr(self, "_sfondo_ko_peq", 0) + _ko_peq
+            self._sfondo_ko_rho = getattr(self, "_sfondo_ko_rho", 0) + _ko_rho
+            self._sfondo_ko_ultima_rho = self._por_invoc if _ko_rho else getattr(self, "_sfondo_ko_ultima_rho", 0)
+            self._sfondo_ko_ultima_peq = self._por_invoc if _ko_peq else getattr(self, "_sfondo_ko_ultima_peq", 0)
+            # [A8] i NODI che cadono nel fallback PUR AVENDO archi (grado > 0): distingue
+            # "nessun arco valido da cui leggere lo sfondo" da "archi validi ma somma nulla".
+            _grado_n = (np.bincount(self.i, minlength=n)[:n] +
+                        np.bincount(self.j, minlength=n)[:n]) if len(self.i) else np.zeros(n)
+            _con_archi = int(np.sum((~_ok_n) & (_grado_n > 0)))
+            self._sfondo_ko_con_archi = getattr(self, "_sfondo_ko_con_archi", 0) + _con_archi
+            self._sfondo_ko_senza_archi = (getattr(self, "_sfondo_ko_senza_archi", 0)
+                                           + int((~_ok_n).sum()) - _con_archi)
             self._inerzia_sfondo_fallback = getattr(self, "_inerzia_sfondo_fallback", 0) + int((~_ok_n).sum())
             self._inerzia_sfondo_passi = getattr(self, "_inerzia_sfondo_passi", 0) + 1
             # A8: non basta QUANTE volte scatta, serve QUANDO. Un fallback confinato alle prime
