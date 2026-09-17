@@ -195,3 +195,33 @@ tornasse byte-identico, la modifica avrebbe toccato piu' del previsto. E se `Q6`
 disallineato dagli archi in un punto, `w` non sarebbe valido li' — **misurato ora: topologia
 invariata nel 100 % di 40 chiamate, su entrambi i punti.**
 
+---
+
+# ESPERIMENTO `SPIN_FEEDBACK` con `TAU_A = 2.0` — previsioni *(ex ante, 2026-09-17)*
+
+**A/B a variabile singola:** il confronto e' contro il run gia' fatto `TAU_A = 2.0`, quindi **l'unica
+differenza e' `SPIN_FEEDBACK`.**
+
+**L'IPOTESI:** il **-32 % di nodi** osservato con `TAU_A = 2.0` dipende dal fatto che **lo spinore
+matura in fretta ma NON RETROAGISCE** sulla geometria — un motore acceso con la trasmissione
+staccata. Con la trasmissione attaccata, il sistema potrebbe reggere meglio.
+
+- **Se l'ipotesi regge**, la perdita di nodi **si riduce in modo netto**.
+- **Se cade**, la perdita **resta uguale**, e il candidato diventa **`Z10`**: `TAU_A` e' **anche** la
+  vita media della memoria spinoriale, e a `2.0` quella memoria muore **25 volte piu' in fretta**.
+  **Un numero per due leggi: una crescita e un decadimento.**
+- **Se peggiora o diverge**, la trasmissione e' staccata **per una ragione che nessuno aveva
+  scritto**, ed e' un reperto.
+
+**SULL'AMPIEZZA NON HO UNA PREVISIONE, ed e' il punto che decide se l'esperimento vale:** se il
+contributo del feedback fosse **trascurabile rispetto a `coppia`**, l'esperimento sarebbe **NULLO**,
+e qualunque differenza osservata andrebbe attribuita ad altro. **E' la misura E4, non un'attesa.**
+
+**COSA NON PREVEDO, e va scritto adesso:** **non prevedo che il sistema «stia bene».** Il run A
+regge ma con `psi x91` e `d0 x17`; **nulla fa pensare che il feedback li riporti a posto**, e se
+anche i nodi si stabilizzassero **quello resterebbe un altro sistema.**
+
+**E UNA COSA CHE VALE A PRESCINDERE DALL'ESITO:** **`SPIN_FEEDBACK` NON HA UN SIGILLO** — nessuna
+riduzione al limite, nessun controllo positivo. **Qualunque cosa esca, il passo successivo sarebbe
+SIGILLARLO, non accenderlo.**
+

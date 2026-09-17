@@ -1341,11 +1341,24 @@ class Rete:
         """
         out = np.zeros(self.n)
         self._spin_feedback_last = 0.0
-        if not SPIN_FEEDBACK or len(self._spinor_lift) < self.n:
+        # [A8 - ESPERIMENTO SPIN_FEEDBACK, 2026-09-17] SOLO CONTATORI, nessuna logica toccata.
+        # Le DUE guardie qui sotto escono restituendo ZERO: se scattassero, il feedback sarebbe
+        # INERTE IN SILENZIO e l'esperimento sarebbe nullo senza che nulla lo segnali. La seconda
+        # (`len(_spinor_lift) < n`) e' la stessa famiglia di `_psi_spin_prec`, che fu inerte nel
+        # 95.33 % delle chiamate per mesi.
+        self._sfb_chiamate = getattr(self, "_sfb_chiamate", 0) + 1
+        if not SPIN_FEEDBACK:
+            self._sfb_off = getattr(self, "_sfb_off", 0) + 1
+            return out
+        if len(self._spinor_lift) < self.n:
+            self._sfb_lift_corto = getattr(self, "_sfb_lift_corto", 0) + 1
+            self._sfb_lift_shape = (len(self._spinor_lift), self.n)
             return out
         mask = (i < self.n) & (j < self.n)
         if not mask.any():
+            self._sfb_mask_vuota = getattr(self, "_sfb_mask_vuota", 0) + 1
             return out
+        self._sfb_applicato = getattr(self, "_sfb_applicato", 0) + 1
         ii, jj, ww = i[mask], j[mask], w[mask]
         ov = np.sum(np.conj(self._spinor_lift[ii]) * self._spinor_lift[jj], axis=1)
         flusso = ww * np.imag(ov)
@@ -3097,7 +3110,17 @@ class Rete:
 
         # FEEDBACK SPINORE -> ARCHI: deve entrare prima dell'integrazione di delta_phivel.
         if SPINORE_VIVO and SPINORE and SPIN_FEEDBACK:
-            coppia += self._feedback_spinoriale_archi(i, j, w)
+            _fb = self._feedback_spinoriale_archi(i, j, w)
+            # [A8/E4] l'AMPIEZZA del contributo rispetto alla coppia che modifica: se fosse
+            # trascurabile, l'esperimento sarebbe NULLO -- e va detto, non dedotto dal fatto
+            # che "qualcosa e' cambiato".
+            _cm = float(np.median(np.abs(coppia))) if np.size(coppia) else 0.0
+            _fm = float(np.median(np.abs(_fb))) if np.size(_fb) else 0.0
+            self._sfb_amp_coppia = max(getattr(self, "_sfb_amp_coppia", 0.0), _cm)
+            self._sfb_amp_fb = max(getattr(self, "_sfb_amp_fb", 0.0), _fm)
+            self._sfb_rapporto_max = max(getattr(self, "_sfb_rapporto_max", 0.0),
+                                         (_fm / _cm) if _cm > 0 else 0.0)
+            coppia += _fb
             
         # TERMINE DI HALL / FRAME-DRAGGING come LEGGE (non parametro): il twist, finora solo
         # registrato, chiude il loop e agisce come coppia. La forza NON ha un coefficiente
