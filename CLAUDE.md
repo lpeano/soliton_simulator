@@ -278,7 +278,18 @@ buttando via il run.
 
 **Perche' e' una REGOLA e non una raccomandazione: e' successo SETTE volte**, e la settima **allo
 script che stava CONTANDO le occorrenze precedenti**. **Una nota che non impedisce il ripetersi non
-e' un presidio.** Applicato a **74 script su 74** il 2026-09-17.
+e' un presidio.**
+
+**COPERTURA REALE, e il numero va detto giusto perche' «74 su 74» suonava come «tutti»:** applicato
+il 2026-09-17 a **63 script su 95** tracciati sotto `csv/` (escluse le **copie del simulatore**
+`_old_sim_pre_*.py` e `*._sim.py`, che **non sono script** e non vanno toccate). I **74** erano le
+famiglie `_seal_fork/` e `_test_fork/`, cioe' **gli strumenti in uso**; i **32 mancanti** sono di
+campagne piu' vecchie (`_seal_53*`, `_seal_fase*`, `deparam_*`, `fase3_cov`). **Non e' copertura
+totale, e chiamarla tale era un errore mio.**
+
+> **⚠ QUESTO BLOCCO E' GIA' SUPERATO:** `csv/_presidio.py` (2026-09-17) fa la stessa cosa **piu'**
+> il **timbro git** dello script, in **una riga**: `_presidio.avvia(__file__)`. Nei nuovi script si
+> usa quello. La sostituzione nei 63 esistenti e' un **commit dedicato ancora da fare** (`Z22`).
 
 ---
 

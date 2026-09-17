@@ -48,6 +48,16 @@ ESTERNA al nodo tipico; la mediana E' il nodo tipico.**
 **⚠ E IL CONTRARIO E' ALTRETTANTO GRAVE — l'errore di POPOLAZIONE.** `rho_arco` (per ARCO) diviso
 `median(I_nodi)` (per NODO) **non da' 1**: da' **8830**, perche' gli archi sovracampionano il denso.
 **Un rapporto ha senso solo se numeratore e denominatore vivono sulla STESSA popolazione.**
+*Corollario A3c — **A3 VALE ANCHE PER I CRITERI, non solo per la fisica** (2026-09-17):*
+**prima di confrontare due numeri, verificare che vivano sulla STESSA POPOLAZIONE e nella STESSA
+UNITA'.** **Un RAPPORTO non si confronta con un MASSIMO; una MEDIA DI RAPPORTI non si confronta con
+un RAPPORTO DI MEDIE; una grandezza per ARCO non si confronta con una per NODO.**
+*Tre casi reali in due giorni:* la **media delle mediane per seme** dava **19** contro i **~4089**
+della popolazione unita · `rho_arco` (per ARCO) diviso `median(I_nodi)` (per NODO) dava **8830**,
+non 1 · e un **rapporto massimo** (115) stampato accanto a **due massimi presi in passi diversi**,
+come se fosse il loro quoziente. **Nessuno dei tre era un errore di fisica: erano errori di
+CONFRONTO, e producono diagnosi sbagliate con numeri giusti.**
+
 *Corollario A3b — i PAVIMENTI sono la stessa cosa dall'altro lato:* un clamp tarato **sopra** i
 valori tipici congela cio' che dovrebbe proteggere (`1e-6` sull'inerzia: **99.7 %**). **Un ramo di
 fallback che scatta quasi sempre non e' un fallback: e' il comportamento principale.**
