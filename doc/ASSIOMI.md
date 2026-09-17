@@ -115,6 +115,48 @@ nascita. Se esiste uno stato da cui costruire (i nodi hanno densita' vera, l'arc
 corretto e il difetto sta altrove** — nel fatto che qualcuno legga quella grandezza prima che
 esista. **Sostituire un indefinito con uno zero non e' inizializzare: e' nascondere.**
 
+## A8 — UN RAMO SILENZIOSO NON E' UN RAMO
+
+**Ogni fallback su un percorso fisico deve essere CONTATO.** Un ramo che scatta senza segnalarlo
+**non produce un errore: produce una FISICA DIVERSA, silenziosa, che sembra funzionare.**
+
+**Criterio di lettura:** **se un fallback scatta spesso, non e' un fallback — e' il comportamento
+principale.**
+
+*Casi che l'hanno generato, tutti MISURATI:*
+
+| grandezza | ramo | scattava | conseguenza |
+|---|---|---|---|
+| `_cs_nodo_prev` | cache scartata a ogni mitosi | **71.88 %** | `cs = CS_M` costante |
+| `_psi_spin_prec` | cache non estesa alla mitosi | **95.33 %** | **FASE 5 / 4pi inerte per mesi** |
+| `inerzia` | pavimento `1e-6` | **99.70 %** | il fattore `cs^-2` mangiato dal clamp |
+| `_tau` | ramo `dens/dens_rif` | — | il nodo mediano ancorato a `TAU_A` |
+
+**Perche' e' un assioma e non una buona pratica:** un ramo non contato rende il codice **NON
+VERIFICABILE**. **I sigilli passano** — il sistema gira, i test sono verdi — **e si misura un'altra
+fisica.** *(I sei lati sullo spin sono stati presi cosi'.)*
+
+**⚠ STATUS, dichiarato:** **A8 e' piu' DEBOLE degli altri.** A1-A5 dicono cosa una legge **puo'
+essere**; **A8 dice come va STRUMENTATA.** **E' metodologico, non fisico.** Sta qui perche' questo
+documento e' gia' dichiarato **codice deontologico**, non sistema generativo — **ed e' l'assioma che
+ne ha trovati di piu'.**
+
+### A8b — COROLLARIO: le cache CROSS-PASSO
+**Una cache cross-passo va estesa a TUTTI i punti di crescita, e l'estensione va verificata DOVE
+AVVIENE, non dove si usa.**
+*`_cs_nodo_prev` era estesa in un punto e scartata in un altro:* **il difetto non era nel consumo,
+era nella NASCITA.** **Un consumatore che trova la cache corta non si accorge di niente: prende il
+fallback.**
+
+> **NOTA DI MISURA, aggiunta dopo la stesura (2026-09-17) e NON parte dell'enunciato.**
+> La riga **`inerzia` / `99.70 %`** viene da `CLAUDE.md` §9 e resta valida per lo scenario su cui fu
+> presa. **Rimisurata dentro `_passo_spinoriale` sui valori veri** (`csv/_test_fork/
+> _verifiche_inerzia.txt`, commit `654aaea`, scena a 3 masse) la frazione al pavimento e'
+> **100.00 %, a ogni passo**, con `inerzia` = **`1e-6` esatto**. **Il caso e' piu' forte di come la
+> tabella lo scrive, non piu' debole** — ma i due numeri vengono da scenari diversi e **non si
+> sovrascrivono a vicenda**: si citano entrambi, con la loro provenienza. *(§9, presidio: una soglia
+> su un sistema che cresce va dichiarata con l'istante in cui si misura.)*
+
 ## APERTO — cosa manca perche' siano assiomi
 1. **Non sono generativi.** Serve **l'azione unica `S`**: allora diventerebbero **i vincoli che `S`
    deve soddisfare.**
@@ -125,7 +167,8 @@ esista. **Sostituire un indefinito con uno zero non e' inizializzare: e' nascond
    dentro `_cs_nodo`, cioe' dentro cio' che **definisce** la causalita', e **A4** giudica quel
    livello a parte. Voce **Z5** del registro.)* **A4 e A5 restano in tensione** su `cs`.
    **A2 resta violato da `Lam = mean(I)`, che funziona.**
-3. **A6 e' un teorema.**
+3. **A6 e' un teorema**, e **A8 e' metodologico** (dice come si STRUMENTA, non cosa una legge puo'
+   essere): **due voci su otto non sono assiomi nel senso degli altri sei.**
 4. **Nessuno e' derivato:** sono **regolarita' induttive**, e **potrebbero non valere fuori dai casi
    che le hanno generate.**
 
