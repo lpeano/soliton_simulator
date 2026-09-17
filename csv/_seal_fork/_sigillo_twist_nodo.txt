@@ -1,4 +1,4 @@
-[TIMBRO] _sigillo_twist_nodo.py  sha1-BYTE ed61e37e  committato e pulito
+[TIMBRO] _sigillo_twist_nodo.py  sha1-BYTE 9274ef75  committato e pulito
 ======================================================================================================================
 SIGILLO DELLA CURA SUL PUNTO 3 -- twist_nodo / FRAME_DRAG  (Z27)
 ======================================================================================================================
@@ -34,11 +34,13 @@ SIGILLO DELLA CURA SUL PUNTO 3 -- twist_nodo / FRAME_DRAG  (Z27)
   max|phivel| 14.065   max|omega_s| 12124   n finale 461   (pre-cura, stessa scena: 14.345 / 34778 / 548)
 
 --- H6: il commento corretto ---
-[FAIL] H6 le affermazioni smentite non sono piu' nel commento sopravvivono: ['mediato sugli archi del nodo', 'scala giusta (~0.2 della coppia principale) senza aggiustamenti']
-[FAIL] H6b il commento SPIEGA perche' erano false         cita la misura: True
+  marcatore di ritiro trovato a offset 2554 del blocco
+  le due frasi compaiono 2 volte in tutto, e devono stare TUTTE dopo il marcatore
+[PASS] H6 nessuna affermazione smentita e' ancora ASSERITA asserite fuori dal ritiro: nessuna
+[PASS] H6b il commento cita la MISURA che le ha smentite  cita 6.756: True   cita 0.000e+00: True
 
 ======================================================================================================================
-SIGILLO: 6/8 PASS
+SIGILLO: 8/8 PASS
 
 COME SI LEGGE -- le tre letture erano fissate PRIMA (doc/PREVISIONI_qualitative.md, 52823d4)
   H1 a zero E H5 verdi          -> la cura regge. Si riporta il rapporto di H4, misurato.

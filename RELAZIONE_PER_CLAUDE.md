@@ -4410,3 +4410,82 @@ scende di un **fattore 29**; al bulk sale del 27 %.
 
 Il mandato lo registrava come *«serve una topologia a grado basso o variabile»*. **C'è già:**
 bimodale, `2` contro `119`. La domanda **era** misurabile ed **è** misurata.
+
+---
+
+## 9.42 — **`Z24` chiusa: uno dei tre era un cricchetto ed è curato, due non lo erano.** E il §3 del mandato era un errore
+
+**Data:** 2026-09-18 · cura in `b376471`, sigillo **8/8** in `1d41a6c`→`_sigillo_twist_nodo.txt`
+· blob byte `da216e56`.
+
+### Il §3 del mandato si chiude, non si apre
+
+Il mandato chiedeva di registrare come **aperto** un fronte — *«serve una topologia a grado basso o
+variabile»* — **costruito sulla mia conclusione sbagliata del «77 %»**. Quel fronte **non esiste**:
+la topologia a grado variabile **c'è già** (bimodale, `2` contro `119`, escursione un fattore 60), e
+la domanda **era** misurabile ed **è** misurata. Registrato come **errore del mandato** (`Z28`).
+
+**Una precisazione che serve fra sei mesi.** Luca scrive che *«il ~77 % di grado 2 e il grado medio
+~121 non sono in contraddizione»*: **vero in generale, ma non salva il mio numero.** Il `77 %` era
+**aritmeticamente sbagliato** — `1018/1318` invece di `1018/5410` — e lo sarebbe stato anche su una
+distribuzione uniforme. Il valore vero è **19.85 %**.
+
+**È il quarto errore di popolazione in due giorni**, e il più istruttivo: **il denominatore
+sbagliato era visibile nella mia stessa tabella** (le colonne erano `g=2..9` e le ho sommate come se
+fossero il totale). **Presidio: il denominatore di una frazione si prende dalla POPOLAZIONE, mai
+dalla somma di ciò che si è scelto di stampare.**
+
+### I tre punti — **due non erano cricchetti, ed è un risultato**
+
+| punto | esito | ragione |
+|---|---|---|
+| **3 — `twist_nodo`** | **CURATO** | scambio `+twn`/`−twn` rotto dalla divisione; **attivo** (`FRAME_DRAG=True`) |
+| **1 — `B`/`correzione`** | **non curato** | **due rotture**: togliere il denominatore **peggiora** (2.266→2.622); la seconda è `refl`, **legge nuova** |
+| **2 — `_otw`** | **non curato** | **latente** (`TW_SPINORE=False`), e non è nemmeno uno scambio |
+
+### Il sigillo — **8/8**
+
+**`H1` [BLOCCANTE]: `|sum|/max|·|` mediana e MAX = `0.000e+00` su 66/66**, era **6.756 / 8.483**.
+**Zero esatto**, non «all'epsilon»: `twn` è sommato e sottratto senza passare per una divisione.
+`H2` al limite **grado topologico = 1** (non «gradi uguali»: dichiarato prima). `H3b`:
+`sum(nuova) = 2.2e-16` contro `sum(vecchia) = 2.2218`. `H5`: 0 NaN, **CFL 0.400**.
+
+### ⚠ `H4` — il rischio era scritto prima, e la previsione era giusta
+
+Qui `grado` è il **conteggio** (media ~80, mediana 119), **non** il grado pesato di `Z25`: la cura
+**moltiplica** il termine invece di dividerlo.
+
+```
+|twist_nodo| mediano :  0.231 -> 27.5    fattore 119
+max|twist_nodo|      :  0.5   -> 34      fattore 68
+previsione ex ante (52823d4): "~10^2 volte più grande"
+```
+
+**E il sistema regge comunque** (`max|phivel|` 14.065 contro 14.345 pre-cura): si applica la
+**prima** delle tre letture fissate prima. *(`n` finale 548 → 461 e `max|omega_s|` 34778 → 12124:
+**riportati, non attribuiti** — traiettorie divergenti, un seme, nessuna barra.)*
+
+**E il vecchio commento diceva che il termine *«emerge nella scala giusta (~0.2 della coppia
+principale) senza aggiustamenti»*: quella scala veniva PROPRIO dalla divisione. Era un
+aggiustamento, solo non dichiarato.**
+
+### ⚠ `H6` ha prodotto un **FAIL FALSO** — dodicesimo criterio scaduto
+
+Cercava le frasi smentite nel sorgente e falliva trovandole — **ma le trovava perché il commento
+nuovo LE CITA come ritirate**, che è esattamente la cosa giusta da fare. **Il criterio non
+distingueva «asserito» da «citato come ritirato».** *(E `H6b` cercava una sottostringa spezzata da
+un backtick: sbagliato due volte.)*
+
+**Committato col fallimento prima di toccarlo** (par.5), poi riscritto sul **marcatore di ritiro** —
+e **può ancora fallire**, se l'affermazione ricomparisse **fuori** dal ritiro.
+
+**Un FAIL falso costa più di un sigillo mancante**: chi legge cerca il difetto nel codice, e il
+difetto non c'è.
+
+### La decisione rinviata di proposito — `Z30`
+
+Coi valori veri, `linea` è la **meno estensiva** delle tre forme esatte (**16.9** contro **36.2** di
+`nudo`). **Non tocco `Z25`**: è sigillata 12/12, e cambiarla ora significherebbe rifare il sigillo
+**su un criterio diverso da quello con cui la scelta era stata fatta**. Si decide **insieme ai due
+punti, con lo stesso criterio** — *la coerenza fra i punti vale più che ottimizzarne uno solo*.
+**Ora che `Z24` è chiusa, la decisione è sbloccata.**
