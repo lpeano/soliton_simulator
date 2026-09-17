@@ -874,3 +874,54 @@ Obiettivo: EM e gravita' come 2 proiezioni dello STESSO campo spinoriale, con la
 ## Futuro concordato (non ora)
 - Refactor diaglog→messaging: produttore emette snapshot immutabile; consumer applica REGOLE PURE
   disaccoppiate da `net`, fa i conti pesanti a parte. Purezza per costruzione.
+
+---
+
+# STATO AL 2026-09-17 — **BONIFICA ESEGUITA.** Blob `241eefb`, byte grezzi `7775ac45`
+
+## Dove siamo
+Quattro delle sei correzioni della bonifica sono **cablate e sigillate**; due sono **sospese in
+attesa di una decisione di Luca**. Il sigillo bloccante `U7b`, che aveva fermato il giro precedente,
+è **risolto**: `dt_e/tau_p` da **34629** a **0.456** (**0.400** sul codice vivo).
+
+**Nessun run di misura è stato fatto**, come da mandato. I run brevi (40-60 passi) sono parte dei
+sigilli e vivono in scratchpad: **nessun dato di misura nuovo è entrato nel repo.**
+
+## Cablate (catena dei commit)
+| commit | cosa | sigillo |
+|---|---|---|
+| `804522b` | `doc/ASSIOMI.md` sul disco (BOZZA dichiarata) | — |
+| `00adcd9` | **`d_arco = self.d`** (era per-arco indicizzato con indici di nodo) | **V1 8/8** |
+| `5b60030` | `doc/PREVISIONI_qualitative.md` | — |
+| `f405327` | **plasticità viscoelastica causale** `tau_p = max(t_luce, t_visco)` | **V2-V5 8/8** |
+| `3ca7731` | **② `spinta` locale**, **③ `_rep` con memoria**, **⑤ codice morto rimosso** | **V6-V8,V10 12/12** + **V9 4/4** |
+| `ed26d14` | registri, analisi ⑦, proposta ⑥, relazione §9.19, correzione di CLAUDE.md §9 | — |
+
+**Tutti i sigilli sono stati RIGIRATI sul codice finale** (V1 8/8, V2-V5 8/8, V6-V10 12/12).
+**V9 no, ed è corretto così:** confronta col file pre-rimozione, e rigirarlo ora includerebbe ② e ③
+nella differenza. È stato eseguito **isolato**, nel momento in cui isolava davvero la rimozione.
+
+## Sospese — **servono decisioni di Luca, non altre misure**
+- **① `inerzia`** (voce **Z1**): `_rho_sorgente()` restituisce `rho_spin` (campo emesso), non
+  `|psi|²`, mentre `peq` insegue `|psi|²`. **GATE A aveva misurato l'altra grandezza.** Due strade:
+  **(A)** allineare le popolazioni → l'inerzia esce dalla FASE 2, **cambio di modello**;
+  **(B)** costruire un `peq_spin` che non esiste → **legge nuova**.
+- **⑥ `_floor_d0`** (voce **Z4**, `doc/PROPOSTA_floor_d0.md`): tre decisioni aperte.
+
+## Il debito contratto, scritto perché non si perda
+**Non è stato misurato quale fisica esca da una plasticità 288 000 volte più veloce** (`tau_p`
+mediano da `6.85e+05` a `2.376`). Serve una campagna. → `doc/COMPONENTI_PROMOSSE.md` §F.5.
+
+## Fronti aperti nuovi
+**Z1** inerzia sospesa · **Z2** il `0.02` di `spinta` viola ancora **A1** · **Z3** `peq` degenere è
+un fallback a **due regimi** (0 % maturo, 2.5 % giovane) · **Z4** `_floor_d0` · **Z5** *(chiusa per
+dimostrazione)* **A3 non discende da A2**.
+
+## Da non dimenticare al prossimo avvio
+- **`--elast-c` è un NO-OP dichiarato** che stampa un avviso. `ELAST_C` **non è cancellato**:
+  è marcato, ed è evidenza.
+- **CLAUDE.md §9 è stato corretto**: `_tau` **non** ha il punto fisso che quella voce gli
+  attribuiva. Chi ricorda la vecchia voce sta ricordando un fatto **ritirato**.
+- **Sei criteri di sigillo sono stati corretti dopo l'esecuzione** in questo giro, tutti perché
+  guardavano il proprio modello del codice invece della misura. È il presidio di §9, e continua a
+  scattare.
