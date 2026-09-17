@@ -3292,6 +3292,12 @@ class Rete:
             if not bool(np.all(_peq_ok)):
                 # P5: ogni protezione su un percorso fisico va CONTATA, non solo messa.
                 self._taup_peq_degenere = getattr(self, "_taup_peq_degenere", 0) + int((~_peq_ok).sum())
+                # ...e in QUANTI PASSI DISTINTI scatta. Il contatore cumulativo da solo non
+                # distingue "un difetto sempre presente" da "un transitorio di accensione
+                # moltiplicato per il numero di archi": sono diagnosi opposte, e senza questo
+                # secondo contatore si sceglie quella che si ha in mente. (2026-09-17)
+                self._taup_peq_deg_passi = getattr(self, "_taup_peq_deg_passi", 0) + 1
+                self._taup_peq_deg_ultimo = getattr(self, "_passo_corrente", -1)
             _peq = np.where(_peq_ok, self.peq, 1e-30)
             t_visco = t_luce * (rho_arco / _peq)                              # tempo viscoelastico
             tau_p_loc = np.maximum(t_luce, t_visco)                           # IL PIU' LENTO DEI DUE

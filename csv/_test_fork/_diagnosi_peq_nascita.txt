@@ -1,0 +1,30 @@
+================================================================================================================
+DIAGNOSI DEL `peq` DEGENERE -- NaN o decadimento dinamico?
+================================================================================================================
+  SUBITO DOPO LA COSTRUZIONE DELLA SCENA (cioe' dopo _allaccia, prima di ogni step):
+    archi 14009 | NaN 14009 (100.00 %) | <=1e-30 finiti 0 | psi lungo 360, n = 360
+    -> se qui i NaN sono TUTTI gli archi, `_allaccia` e' davvero la sorgente iniziale.
+
+  EVOLUZIONE (dopo ogni step, PRIMA che la calibrazione del passo dopo intervenga):
+  passo  archi     NaN            <=1e-30 finiti   degeneri tot   nuovi/passo
+  1      14009     0              14009            14009          14009     
+  2      14009     0              0                0              0         
+  3      14009     0              0                0              0         
+  4      14009     0              0                0              0         
+  5      14009     0              0                0              0         
+  6      14009     0              0                0              0         
+  12     14009     0              0                0              0         
+  18     14009     0              0                0              0         
+  24     14009     0              0                0              0         
+  30     14009     0              0                0              0         
+
+================================================================================================================
+VERDETTO
+  NaN residui            : 0  (0.0000 %)
+  finiti ma <= 1e-30     : 0  (0.0000 %)
+
+  -> NESSUN NaN e NESSUNO ZERO in questo scenario: la sorgente del degenere sta altrove.
+
+  valori piu' piccoli di peq (finiti): [9.06981713e-11 1.85448734e-10 1.96775405e-10 2.04790480e-10
+ 2.07507435e-10]
+  peq esattamente 0: 0
