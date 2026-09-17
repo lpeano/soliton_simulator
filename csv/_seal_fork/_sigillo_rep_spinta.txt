@@ -16,26 +16,26 @@ V6-V8, V10 -- (2) spinta LOCALE  e  (3) _rep CON MEMORIA
 [PASS] V7c e NON e' istantaneo (altrimenti la memoria sarebbe inerte) al primo passo senza causa vale ancora 0.7908, non 0
 
 --- (V8/V10) IL CODICE VIVO: 60 passi reali ---
-  archi 208556   len(_rep) 208556
-[PASS] V8a `_rep` e' allineato agli ARCHI ai tre punti di nascita len(_rep) 208556 == len(d0) 208556
-  _rep: min 0  mediana 0  max 0.0009604  non nulli 0.069 %
-  scarto massimo memoria-istantaneo: 0.013525406093953212
-[PASS] V8b CONTROLLO POSITIVO: la memoria NON e' l'istantaneo max|_rep - rep| = 0.0135254 (se fosse 0, (3) sarebbe inerte)
+  archi 208393   len(_rep) 208393
+[PASS] V8a `_rep` e' allineato agli ARCHI ai tre punti di nascita len(_rep) 208393 == len(d0) 208393
+  _rep: min 0  mediana 0  max 0.001043  non nulli 0.054 %
+  scarto massimo memoria-istantaneo: 0.012746062211638407
+[PASS] V8b CONTROLLO POSITIVO: la memoria NON e' l'istantaneo max|_rep - rep| = 0.0127461 (se fosse 0, (3) sarebbe inerte)
   P5 -- contatori dei rami:
      _rep_guardia_tot             66
      _rep_guardia_salti           None
      _rep_realloc                 None
      _rep_dte_fallback            None
      _taup_peq_degenere           207520
-     _taup_causale_scatti         215389
-     _taup_causale_tot            12490899
+     _taup_causale_scatti         224323
+     _taup_causale_tot            12482265
      _taup_causale_su_degenere    207520
-     _taup_cfl_max                0.4246546139565723
+     _taup_cfl_max                0.4711503819704894
 [PASS] V8c la guardia len(d0)==len(avv) e' ora CONTATA  66 chiamate, 0 salti (0.00 %)
 [PASS] V10a stabilita': d0 finito e > 0                 min 0.05, NaN 0
-[PASS] V10b stabilita': d finito e > 0                  min 0.0502481
+[PASS] V10b stabilita': d finito e > 0                  min 0.0512114
 [PASS] V10c norma di Bloch |nb| = 1                     max| |nb| - 1 | = 2.220e-16
-[PASS] V10d tau_p resta stabile anche con (2) e (3) attive _taup_cfl_max = 0.424655
+[PASS] V10d tau_p resta stabile anche con (2) e (3) attive _taup_cfl_max = 0.47115
 
 ======================================================================================================================
 V6-V8, V10: 12/12 PASS -> PASS

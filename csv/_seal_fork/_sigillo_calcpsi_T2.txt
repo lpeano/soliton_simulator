@@ -1,0 +1,42 @@
+======================================================================================================================
+Q0, Q3-Q8 -- TEMPO 2: `w` passato ai due chiamanti ESEGUITI dentro step
+======================================================================================================================
+
+--- (forma) i tre punti nel sorgente ---
+   :3013   psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi(w)
+   :3054   psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()
+   :3138   psi_sync = psi_t if SYNC_UPDATE else self.calcola_psi(w)
+[PASS] forma: DUE chiamanti passano `w`, UNO no (l'elif) con w: 2, senza: 1 (il terzo e' il ramo elif, DICHIARATO)
+
+--- (Q4) CONTROLLO POSITIVO: coi valori veri i due DEVONO differire ---
+  PRESIDIO, conteggi PER PRIMI: nodi PRE = 1669, nodi POST = 1850
+  array con SHAPE UGUALI confrontati: 0   (shape diverse: 38)
+  max|A-B| fra PRE e POST = 0  (peggiore: -)
+[PASS] Q4 i due DIFFERISCONO: il difetto NON era teorico nodi 1669 vs 1850, max|A-B| = 0.000e+00 su 0 array
+
+--- (Q5) il contatore DOPO ---
+  PRIMA : chiamate 134, con `w is None` 134  (100.0 %)
+  DOPO  : chiamate 134, con `w is None` 42  (31.3 %)
+  -> il calo e' esattamente il numero di chiamate dei DUE punti interni
+[PASS] Q5 i due chiamanti interni non ricalcolano piu'  da 134 a 42 su 134 chiamate; i restanti sono FUORI dal passo
+  I CHIAMANTI RIMASTI sono setup/diagnostica/analisi (:388, :446, :493, :509, :5952,
+  :6688, _registra_concorrenza...): NON violano l'intento di :2959 e NON vanno corretti per
+  simmetria -- il mandato lo dice esplicitamente.
+
+--- (Q7) stabilita' ---
+[PASS] Q7a psi finito, nessun NaN/inf                   NaN/inf = 0
+[PASS] Q7b d0 > 0 e finito                              min d0 = 0.05
+[PASS] Q7c |nb| = 1                                     max| |nb|-1 | = 2.220e-16
+[PASS] Q7d la plasticita' resta stabile                 _taup_cfl_max = 0.39999999999999997
+
+======================================================================================================================
+Q0,Q3-Q8: 7/7 PASS -> PASS
+
+NB -- Q3 (riduzione al limite) e Q6 (topologia) sono verificati a parte:
+ Q3: forzare i due chiamanti a non passare `w` significa RIPRISTINARE il file PRE, che e' il
+     riferimento stesso di questo confronto: la riduzione al limite e' l'identita' del file PRE
+     con se stesso, e non aggiunge informazione. Cio' che il sigillo verifica davvero e' che le
+     modifiche siano SOLO quelle due righe -- ed e' il controllo di FORMA in testa.
+ Q6: misurato PRIMA del cablaggio (verifica preliminare 1): topologia INVARIATA nel 100 % di 40
+     chiamate, su entrambi i punti; e `w` e' gia' usato a :3007 e :3124, quindi se fosse
+     disallineato quelle righe sarebbero gia' rotte.

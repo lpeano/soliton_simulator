@@ -3003,7 +3003,14 @@ class Rete:
         # dalla saturazione del campo). Segno MENO = opposto all'attrazione K_C. Nessun numero messo
         # li': Ncrit e coerenza sono grandezze di stato, la conversione e' dinamica.
         if REPULS_LEGGE:
-            psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()
+            # [Z13 - TEMPO 2, 2026-09-17] `w` PASSATO, non ricalcolato (categoria D: nessun flag).
+            # Era `self.calcola_psi()`, che ricalcolava i pesi al proprio interno mentre la riga
+            # SOTTO usa `self._mat(w)`, il `w` di questo passo: DUE INSIEMI DI PESI DIVERSI
+            # MOLTIPLICATI INSIEME. E' la "lettura mista t/t+1" che il commento a ~:2959 vieta,
+            # e stava una riga sopra la sua stessa cura. Il parametro esisteva gia'.
+            # ASSIOMA A8: il ramo `w is None` era un fallback silenzioso, preso nel 100 % delle
+            # chiamate (misurato: _calcpsi_w_none = 134/134) senza che nulla lo segnalasse.
+            psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi(w)
             MtPsi = self._mat(w) @ psi_forces
             dHdphi = 2.0 * np.imag(np.conj(z) * MtPsi)   # direzione: de-concentra l'interferenza
             zc = np.exp(1j * _phi_t[:self.n])  # <-- USA SNAPSHOT
@@ -3034,6 +3041,16 @@ class Rete:
             fattore = u * (u + 2.0)                       # (1+u)^2 - 1, la legge dalla saturazione
             coppia = coppia - fattore * dHdphi           # MENO = repulsivo, opposto all'attrazione
         elif MU_PSI != 0.0:
+            # ⚠ [Z13] QUESTO RAMO HA LO STESSO DIFETTO DI ~:3006 (letture miste t/t+1: `calcola_psi`
+            # ricalcola i pesi, la riga sotto usa `self._mat(w)`) ED E' STATO LASCIATO COM'E',
+            # DELIBERATAMENTE. Non e' codice morto: e' il comportamento ALTERNATIVO di un flag, ed
+            # e' escluso da `REPULS_LEGGE = True` (default). Non essendo eseguito, NESSUN SIGILLO
+            # PUO' VERIFICARNE LA CORREZIONE: cablarlo darebbe una verifica di FORMA spacciata per
+            # una di COMPORTAMENTO (la classe di `VERSO_CHI`, cablato ma muto).
+            # ⚠ SE QUALCUNO SPEGNE `REPULS_LEGGE`, IL DIFETTO DELLE LETTURE MISTE TORNA. Chi lo
+            # spegne deve saperlo: e' scritto qui e nella voce Z13 del registro.
+            # REGOLA GENERALE: un ramo sotto flag non si corregge e non si cancella -- SI DICHIARA,
+            # perche' il difetto e' LATENTE, non assente.
             psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()
             MtPsi = self._mat(w) @ psi_forces            # M simmetrica: M^T Psi = M Psi
             dHdphi = 2.0 * np.imag(np.conj(z) * MtPsi)  # d(sum|Psi|^2)/dphi_n
@@ -3115,7 +3132,10 @@ class Rete:
         delta_sync_phi = np.zeros(self.n)
         _forza_sync = _wI_sync = _uno_sync = None   # ingredienti del Kuramoto per il torque SU(2) (--sync-spinore)
         if K_SYNC != 0.0 and self.n > 2:
-            psi_sync = psi_t if SYNC_UPDATE else self.calcola_psi()
+            # [Z13 - TEMPO 2] `w` PASSATO: stessa ragione di ~:3006, e `w` e' usato poche righe
+            # sotto (`wI = self._mat(w)`). Topologia verificata INVARIATA fra il calcolo di `w` e
+            # questo punto: 100 % su 40 chiamate (csv/_test_fork, verifica preliminare 1).
+            psi_sync = psi_t if SYNC_UPDATE else self.calcola_psi(w)
             I2 = np.abs(psi_sync) ** 2
             cmv = (self.pos[:self.n] * I2[:, None]).sum(0) / max(I2.sum(), 1e-9)
             r_cm = np.linalg.norm(self.pos[:self.n] - cmv, axis=1) + LAM * 0.5
