@@ -1,5 +1,31 @@
 # `--tau-luce` — **SIGILLO FALLITO (T2, T3, T4). Ci si ferma.**
 
+> # ⚠ VERDETTO DA RIGIRARE PRIMA DI ESSERE CITATO (marcato il 2026-09-17)
+>
+> **FAIL preso sul blob `7d484580`** (commit `f7051c3`, 15 set 2026). Da allora, **verificato dal
+> disco: 14 commit** su `soliton_simulator.py` e **sette correzioni di legge sigillate** —
+> `cs_floor` relazionale · `_xi_rumore` non ereditato · il fattore `cs^-2` nell'inerzia · Step 2
+> promosso a default · `d_arco` · la plasticità viscoelastica causale · l'inerzia dimensionale.
+>
+> **E il punto specifico di `--tau-luce`:** il flag sostituisce `_tau` con **`d/cs`**, e il sigillo
+> fu preso quando **`cs_std/cs = 0.0079 %`** — cioè quando **`d/cs` era di fatto `∝ d`**, e la
+> grandezza che doveva variare **non variava**. Oggi, dopo `cs_floor` relazionale,
+> **`cs_std/cs = 11 %`** *(fattore ~1300)*.
+>
+> **`par.2.6` vale in entrambi i sensi: un timbro si mette DOPO il sigillo — e un SIGILLO SCADUTO
+> NON TIMBRA NULLA.** **Questo FAIL non è citabile come ostacolo finché non è rigirato.**
+>
+> ### ⚠ MA I TRE FAIL NON HANNO LA STESSA NATURA, e la marcatura non li copre allo stesso modo
+> | | natura del FAIL | il rigiro può cambiarlo? |
+> |---|---|---|
+> | **T2** | **difetto del TEST**, non del codice: il monkeypatch colpisce il metodo **condiviso** `_tempo_luce_nodo`, quindi cambia **anche** lo Strato 1 → `n` diverso → nessun confronto | **NO.** Non c'entra con `cs` quasi-costante: il test è sbagliato **oggi come allora**, e lo dice già il §T2 qui sotto (*«il test va riscritto»*) |
+> | **T3** | criterio quantitativo (spostamento ≥ 0.3, misurato 0.258) su una pendenza che dipende da `d/cs` | **SÌ, in linea di principio**: con `cs` vivo `d/cs` è una grandezza diversa |
+> | **T4** | `cs → 2cs` non seguiva, **perché la cache `_cs_nodo_prev` era scartata a ogni mitosi** (80 % dei passi con `cs = CS_M`) | **SÌ, ed è la più probabile**: quel difetto **è stato CURATO** (C7, commit `43e9a47`, fallback **71.88 % → 0.00 %**) |
+>
+> **Quindi la ragione «`cs` quasi-costante» spiega T4 e può toccare T3. NON spiega T2**, ed è
+> corretto dirlo invece di marcare i tre insieme.
+
+
 > **Scritto per Claude web** (§5-ter). Branch `fork-su2`, 2026-09-15.
 > Blob **prima** `f5887254` → **dopo** `7d484580`. **Gate NON ri-timbrato**: i sigilli non passano.
 > Il flag è **OFF di default** e **T1 dimostra la byte-identità**, quindi il comportamento di
