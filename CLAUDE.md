@@ -244,6 +244,23 @@ perde, il CSV resta.
   committato, **la copia `._sim.py` va committata insieme ai dati**, non cancellata «tanto poi lo
   committo». Il file committato **dopo** ha lo stesso contenuto ma **non lo dimostra**.
 
+### UN `.pkl` SENZA IL SUO COMANDO NON E' UN DATO
+
+I `.pkl` NON si committano (binari, ~18 MB l'uno: git non li dimenticherebbe piu').
+**Ma il sistema e' deterministico: il dato E' il comando che lo produce.**
+
+**REGOLA, senza eccezioni:** ogni volta che un run produce un `.pkl`, **nello STESSO commit** va
+scritto in `doc/INVENTARIO_strumenti.md`:
+- **il nome del `.pkl`**;
+- **la RIGA DI COMANDO COMPLETA** che lo rigenera, **verbatim**, tutti i flag inclusi;
+- **il BLOB** del simulatore (`sha1` dei byte grezzi, **non** `git hash-object`: trappola CRLF, C18);
+- **il BLOB dello script** che l'ha lanciato, se ce n'e' uno;
+- **il SEME**, il numero di passi, e la data.
+
+**Un `.pkl` prodotto e non documentato cosi' e' un dato che nessuno potra' rifare.**
+E' la stessa famiglia di P6 (*«un file che si distingue dagli altri solo per il nome non e' un dato:
+e' un ricordo»*), applicata a cio' che il repo non puo' contenere.
+
 ---
 
 ## 5-quater. IL REGISTRO DEI FRONTI APERTI (regola di Luca, 2026-09-15)

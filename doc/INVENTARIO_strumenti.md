@@ -141,3 +141,22 @@ verificato nei dati.)*
 byte-identita'. Si estraggono **in binario** (`git show`, non `text=True`), perche' con le newline
 universali il file riscritto avrebbe un **blob diverso** e il controllo che lo verifica non
 varrebbe piu' nulla.
+
+---
+
+## 5. **QUALE COMANDO PRODUCE QUALE `.pkl`** *(sezione aperta il 2026-09-17)*
+
+> **Perche' questa sezione esiste.** I `.pkl` sono **~36 file, ~18 MB l'uno, oltre 650 MB**: non
+> sono nel repo e **non devono esserci** — git non dimentica i binari, e ogni versione resterebbe
+> nella storia per sempre. **Ma il sistema e' DETERMINISTICO** (stesso seme, stesso blob, stesso
+> risultato: verificato decine di volte dalle byte-identita'), **quindi un `.pkl` non e' un dato
+> irripetibile: e' il RISULTATO DI UN COMANDO.**
+> **Se il comando non e' scritto, il dato e' perso come riproducibilita' anche se il file c'e'.**
+> Regola in `CLAUDE.md`, presidio *«un `.pkl` senza il suo comando non e' un dato»*.
+
+**Tre esiti, e si dichiarano:** **RICOSTRUITO** (comando completo, blob, seme, passi) ·
+**PARZIALE** (manca qualcosa: **si scrive cosa**, non si riempie con una supposizione) ·
+**NON RICOSTRUIBILE** (**si dice**: e' un reperto, non un imbarazzo).
+
+*(La tabella segue nei commit successivi, a blocchi, una campagna alla volta.)*
+
