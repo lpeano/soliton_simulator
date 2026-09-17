@@ -3232,11 +3232,24 @@ class Rete:
                 self.d = np.maximum(self.d + dts * self.vd, 0.05)
             
         if TAU_LOCALI:
+            # CORREZIONE DI DIFETTO (par.10, categoria D: nessun flag). ERRORE DI TIPO, non di legge.
+            # Era:  d_arco = 0.5 * (self.d[self.i] + self.d[self.j])
+            # `d` e `d0` sono PER ARCO (estesi con `dd`, lunghezze d'arco, riga ~1853), mentre
+            # `self.i`/`self.j` sono indici di NODO: si indicizzava un array per-arco con indici di
+            # nodo. Shape giusta (len(i) = n_archi), VALORI sbagliati: leggeva solo i primi `n`
+            # elementi (98.34 % degli archi mai letto) e produceva una grandezza ANTICORRELATA
+            # (r = -0.349) con la lunghezza vera dell'arco che pretendeva di rappresentare.
+            # `d` E' GIA' la lunghezza dell'arco: nessuna media serve.
+            # ASSIOMA A3, forma "popolazione": un rapporto ha senso solo se numeratore e
+            # denominatore vivono sulla STESSA popolazione. Zero parametri coinvolti.
+            # Il codice SA distinguere: a riga ~2350 usa `self.d` NUDO accanto a `ramp[self.i]`
+            # per nodo, nella stessa espressione. Qui non lo faceva.
+            # Sigillo: csv/_seal_fork/_sigillo_d_arco.py
             if TAU_USA_D0:
-                d_arco = 0.5 * (self.d0[self.i] + self.d0[self.j]) if len(self.d0) else self.d0
+                d_arco = self.d0
             else:
-                d_arco = 0.5 * (self.d[self.i] + self.d[self.j]) if len(self.d) else self.d
-            
+                d_arco = self.d
+
             I_nodi = np.abs(self.psi[:self.n])**2 if hasattr(self, "psi") and len(self.psi) >= self.n else np.ones(self.n)
             rho_arco = 0.5 * (I_nodi[self.i] + I_nodi[self.j])
             rho_med = max(float(np.median(I_nodi)), 1e-9)
