@@ -269,8 +269,10 @@ Il difetto e le quattro varianti sono in `doc/REFERTO_denominatore.md` e nel com
 ## Cosa la cura **NON** risolve, e va detto adesso
 
 - **Non restituisce al termine la proprietà che il docstring dichiara.** `out[k]` resta una **somma**
-  su un numero di termini che cresce col grado. **Se sia un difetto NON È STATO MISURABILE**: il
-  ~77 % dei nodi ha grado **esattamente 2** e le mediane per grado sono **non monotone**. Resta un
-  fronte aperto, non una cosa risolta.
+  su un numero di termini che cresce col grado. **~~Se sia un difetto NON È STATO MISURABILE~~ — RITIRATO il 2026-09-18.** Avevo scritto che il
+  ~77 % dei nodi ha grado 2: **errore di popolazione**, sono il **19.85 %** (la distribuzione è
+  **bimodale**, mediana **119**). **La misura aveva risoluzione, e la risposta è: il vecchio
+  `/grado` era INTENSIVO (pendenza −0.003) e nessuna cura lo è** (`nudo` +0.878). Conservazione e
+  intensività sono in **conflitto algebrico**. → `doc/REFERTO_Z24.md`.
 - **Non tocca gli altri tre punti con lo stesso schema** (`:2082`, `:2294`, `:3154`). Fronte nuovo.
 - **Non promuove nulla:** `SPIN_FEEDBACK` resta **OFF di default**.

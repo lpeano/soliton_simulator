@@ -4165,6 +4165,9 @@ numerosità per grado (2..9):   1018 | 20 | 10 | 20 | 50 | 30 | 80 | 90
 ```
 
 **Il ~77 % dei nodi ha grado esattamente 2** — sono i figli della mitosi, che nascono con due archi
+
+> **⚠ RITIRATO il 2026-09-18 — vedi §9.41.** Il «~77 %» e' un **errore di POPOLAZIONE** mio: il `1018` era su **5410** nodi-istanza e l'avevo diviso per **1318**, la somma delle sole colonne stampate. Il valore vero e' **19.85 %**, la distribuzione e' **BIMODALE** (mediana **119**, il **65.57 %** dei nodi ha grado >= 100), e **la misura aveva risoluzione**. Rifatta sul range giusto: il vecchio `/grado` era **INTENSIVO** (pendenza −0.003), `nudo` e' **ESTENSIVO** (+0.878). → `doc/REFERTO_Z24.md`
+
 (fatto già in CLAUDE.md par.9) — e le mediane di `|out|` per grado sono **non monotone** su tutte e
 quattro le varianti.
 
@@ -4226,7 +4229,7 @@ seme, senza nullo misurato. Lo riporto e **non lo interpreto**.
 ### Cosa la cura **non** fa
 
 - **Non restituisce la proprietà del vecchio docstring:** `out[k]` resta una **somma** su termini
-  che crescono col grado. **Se sia un difetto non è stato misurabile.** Fronte aperto.
+  che crescono col grado. **~~Se sia un difetto non è stato misurabile~~ — RITIRATO il 2026-09-18: era un errore di popolazione mio. È misurabile ed è misurato (§9.41): il vecchio `/grado` era INTENSIVO, `nudo` è ESTENSIVO, e conservazione e intensività sono in conflitto algebrico.**
 - **Non tocca gli altri tre punti con lo stesso schema** — `:2082` (`B`), `:2294` (`_otw`), `:3154`
   (twist) — **già dimostrati in forma** in `doc/MAPPA_accoppiamenti_spin.md` e **mai misurati**:
   è `Z24`.
@@ -4325,3 +4328,85 @@ dimostrazione di byte-identità**.
 Quattro semi sono il **minimo**: con 8 la risoluzione su δn passerebbe da 3.2 % a ~2 %, quindi **un
 effetto vero ma ≤ 1 % resterebbe invisibile a questo disegno**. 120 passi sono ~1/50 della
 maturazione di `ramp`. Una sola scena.
+
+---
+
+## 9.41 — **`Z24` misurata: uno dei tre è un cricchetto ATTIVO. E ritiro una mia conclusione: il «77 %» era un errore di POPOLAZIONE**
+
+**Data:** 2026-09-18 · `csv/_test_fork/_misura_Z24.py` · **Nessuna cura eseguita**: il mandato dice
+STOP dopo la misura.
+
+### I tre punti **non sono lo stesso schema** — verificato dal sorgente prima di misurare
+
+| punto | accumulo | è uno scambio? | gate | residuo | esito |
+|---|---|---|---|---|---|
+| **1 — `B`** | `+` su entrambi | **no**, è un **campo medio** | — | `correzione` **2.266** | cricchetto, **ma non per il denominatore** |
+| **2 — `_otw`** | `+` su entrambi | **no**, è un Δω | **`TW_SPINORE=False`** | — | **LATENTE** |
+| **3 — `twist_nodo`** | **`+twn` / `−twn`** | **sì** | **`FRAME_DRAG=True`** | **6.756** | **⚠ CRICCHETTO ATTIVO = `Z25`** |
+| 3-controllo, **nudo** | | | | **0.000e+00 esatto** | **la divisione è l'intera causa** |
+
+**Il ritrovamento è il punto 3:** `FRAME_DRAG = True` **di default**, quindi quel termine **gira in
+ogni run mai fatto**, e finisce in `coppia → delta_phivel / M_PH` con `M_PH` **uniforme** — dove
+`sum = 0` **è** la conservazione.
+
+**E il punto 1 non si cura col denominatore, misurato:** divisione senza `refl` **2.622**, `refl`
+senza divisione **6.507**, denominatore d'arco **3.060**, e **solo togliendo entrambe** si arriva a
+**1.379e-15**. **Togliere solo il denominatore peggiora.** La seconda rottura è `refl`, e toglierla
+**è una legge nuova**, non una bonifica. *(MAPPA le dichiarava entrambe **in forma**, col suo NB
+onesto «quanto non lo sia non è misurato»: ora è misurato.)*
+
+### ⚠ E ritiro una mia conclusione, propagata in cinque posti
+
+Avevo scritto — in `Z25`, nel docstring del simulatore, nelle previsioni, in §9.39 e nel referto dei
+semi — che *«il ~77 % dei nodi ha grado esattamente 2, quindi la domanda «|out| cresce col grado?»
+non ha risoluzione»*.
+
+**È un errore di POPOLAZIONE — quello che A3 chiama per nome — fatto sul mio stesso conteggio:** il
+`1018` era su **5410** nodi-istanza, e l'ho diviso per **1318**, cioè per la somma delle **sole
+colonne che avevo stampato** (gradi 2..9).
+
+```
+distribuzione VERA (passo 60, seme 5): 549 nodi, 22044 archi
+   grado  MEDIA 80.3   MEDIANA 119   MAX 122
+   grado == 2    : 19.85 %     grado >= 100 : 65.57 %      -> BIMODALE
+```
+
+**I bin che avevo guardato coprivano il 21 % dei nodi. La misura aveva risoluzione — un fattore
+60 — e io ho guardato dove non ce n'era.**
+
+### Rifatta sul range giusto, la domanda **ha** una risposta
+
+| variante | `\|out\|` a `g=2` | a `g≥100` | rapporto | pendenza |
+|---|---|---|---|---|
+| **attuale (pre-cura)** | 0.04885 | 0.04829 | **0.989** | **−0.003 → INTENSIVA** |
+| **nudo (cablata)** | 0.001694 | 0.06127 | **36.2** | **+0.878 → ESTENSIVA** |
+| media | 0.002333 | 0.04406 | 18.9 | +0.719 |
+| linea | 0.001372 | 0.02313 | 16.9 | +0.691 |
+
+**Il vecchio `/grado` rendeva `out` intensiva davvero — ciò che il docstring dichiarava — e nessuna
+delle tre cure lo fa.**
+
+### Il compromesso, che è **algebrico** e non negoziabile
+
+- `sum(out) = 0` richiede un denominatore **simmetrico sull'arco**;
+- l'indipendenza dal grado richiede il denominatore **del nodo che riceve**.
+
+**Non possono valere insieme.** Il vecchio codice sceglieva la seconda **rompendo** la prima, e non
+lo diceva.
+
+**La cura resta giusta su ciò che ripara** — un cricchetto è una violazione di A7, non una scelta di
+modello — **ma il suo costo non era «non misurabile»: è misurato ed è grande.** Ai neonati `|out|`
+scende di un **fattore 29**; al bulk sale del 27 %.
+
+### Due decisioni a Luca
+
+1. **Curare il punto 3** sapendo del compromesso — non come l'ho fatto io, credendo che la domanda
+   non avesse risposta.
+2. **Se riconsiderare `nudo`** per `SPIN_FEEDBACK`: coi dati veri `linea` è la **meno estensiva**
+   (16.9 contro 36.2). **Lo riporto, non lo propongo:** la cura è committata e sigillata 12/12, e
+   cambiarla è una decisione.
+
+### E il limite di §3 del mandato è **chiuso, non aperto**
+
+Il mandato lo registrava come *«serve una topologia a grado basso o variabile»*. **C'è già:**
+bimodale, `2` contro `119`. La domanda **era** misurabile ed **è** misurata.

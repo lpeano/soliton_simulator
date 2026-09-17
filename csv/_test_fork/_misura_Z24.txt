@@ -1,0 +1,36 @@
+[TIMBRO] _misura_Z24.py  sha1-BYTE 4b4af172  committato e pulito
+======================================================================================================================
+Z24 -- i tre punti collo 'stesso schema' sono davvero cricchetti?   [TW_SPINORE=False]
+======================================================================================================================
+
+--- LE RIGHE, sul blob ATTUALE (quelle del mandato sono PRE-CURA e shiftate) ---
+   :2116   punto 1 -- B           B = B / np.maximum(deg
+   :2328   punto 2 -- _otw        _otw / np.maximum(_degt
+   :3188   punto 3 -- twist_nodo  twist_nodo[:self.n] / np.maximum(grado
+   :685    il GATE del punto 3    FRAME_DRAG = True  <- ATTIVO DI DEFAULT
+   :712    il GATE del punto 2    TW_SPINORE = False <- LATENTE
+
+--- LA TABELLA: |sum| / max|.| contro l'epsilon macchina (~1e-16) ---
+  oggetto                  invocaz.   MEDIANA        MAX            verdetto                
+  -- punto 1 --
+  B (media di campo)       64         3.299e+01      7.627e+01      non e' uno scambio      
+  correzione = BxNB        64         2.266e+00      5.512e+00      CRICCHETTO (ordine 2.3) 
+    B SENZA divisione      64         6.507e+00      9.827e+00      CRICCHETTO (ordine 6.5) 
+    B con den. d'ARCO      64         3.060e+00      6.478e+00      CRICCHETTO (ordine 3.1) 
+    B nudo e SENZA refl    64         1.379e-15      3.893e-15      EPSILON: nessun cricchetto
+    B DIVISO e senza refl  64         2.622e+00      1.328e+01      CRICCHETTO (ordine 2.6) 
+  -- punto 2 --
+  _otw/_degt               -          -              -              LATENTE: TW_SPINORE=False
+  -- punto 3 --
+  twist_nodo/grado         66         6.756e+00      8.483e+00      CRICCHETTO (ordine 6.8) 
+    (lo stesso, NUDO)      66         0.000e+00      0.000e+00      EPSILON: nessun cricchetto
+
+======================================================================================================================
+COME SI LEGGE -- le letture erano fissate PRIMA, per ciascun punto
+  residuo all'EPSILON        -> non e' un cricchetto li'. Si dice e si passa oltre: «dimostrato in
+                                forma» puo' essere sbagliato in ENTRAMBE le direzioni.
+  residuo di ORDINE UNO      -> e' lo stesso difetto di Z25, e la cura e' quella: denominatore
+                                d'ARCO e simmetrico, oppure NESSUNO.
+  lo schema e' DIVERSO       -> si riporta senza forzare l'analogia.
+E la riga 'NUDO' del punto 3 e' il controllo: se il nudo e' all'epsilon e il diviso no, allora il
+difetto e' ESATTAMENTE la divisione, come in Z25.

@@ -1356,11 +1356,28 @@ class Rete:
           - `w` e' ESCLUSO: `flusso = w*imag(ov)`, dividere per `w` lo CANCELLA;
           - `(g_i+g_j)/2` e `g_i+g_j-2w` ripristinano l'antisimmetria ESATTAMENTE quanto il non
             averne (tutti e tre a ~1e-16): il criterio di correttezza NON discrimina;
-          - la domanda che li giustificherebbe -- «|out| cresce col grado?» -- **NON HA
-            RISOLUZIONE su questo grafo**: il ~77 % dei nodi ha grado ESATTAMENTE 2 (i figli
-            della mitosi nascono con due archi) e le mediane per grado sono NON MONOTONE;
-          - quindi restano solo A1 e par.3: **nessun denominatore ha ZERO SCELTE**, gli altri
-            sono una scelta fra forme equivalenti.
+          - restano A1 e par.3: **nessun denominatore ha ZERO SCELTE**, gli altri sono una
+            scelta fra forme equivalenti.
+
+        ⚠⚠ CORREZIONE DEL 2026-09-18, E CAMBIA UNA RAGIONE DI QUESTA SCELTA. Qui era scritto che
+        la domanda «|out| cresce col grado?» NON AVEVA RISOLUZIONE, perche' «il ~77 % dei nodi ha
+        grado 2». **ERA UN ERRORE DI POPOLAZIONE (A3), fatto sul mio stesso conteggio:** il 1018
+        era su **5410** nodi-istanza e l'avevo diviso per 1318, la somma delle SOLE colonne
+        stampate (gradi 2..9). La distribuzione vera e' **BIMODALE**: grado 2 = **19.85 %**,
+        grado >= 100 = **65.57 %**, mediana **119**. La misura aveva eccome risoluzione.
+        **RIFATTA SUL RANGE GIUSTO** (`doc/REFERTO_Z24.md`), `|out|` a `g=2` contro `g>=100`:
+            attuale (pre-cura)  0.0489 -> 0.0483   rapporto 0.989   pendenza -0.003  INTENSIVA
+            nudo   (cablata)    0.0017 -> 0.0613   rapporto 36.2    pendenza +0.878  ESTENSIVA
+            media               0.0023 -> 0.0441   rapporto 18.9    pendenza +0.719  ESTENSIVA
+            linea               0.0014 -> 0.0231   rapporto 16.9    pendenza +0.691  ESTENSIVA
+        **Il vecchio `/grado` rendeva `out` INTENSIVA davvero, e nessuna cura lo fa.**
+        **CONSERVAZIONE E INTENSIVITA' SONO IN CONFLITTO DIRETTO, per ragione algebrica:**
+        `sum(out) = 0` richiede un denominatore SIMMETRICO SULL'ARCO; l'indipendenza dal grado
+        richiede il denominatore DEL NODO CHE RICEVE. **Non possono valere insieme.** Il vecchio
+        codice sceglieva la seconda ROMPENDO la prima, e non lo diceva.
+        **La cura resta giusta su cio' che ripara** — un cricchetto e' una violazione di A7, non
+        una scelta di modello — **ma il suo costo NON era «non misurabile»: e' misurato, ed e'
+        grande** (ai neonati `|out|` scende di un fattore 29).
           - E l'ampiezza NON esplode: misurato `|out|` mediano **0.0400 -> 0.0223**,
             `max|out|` **0.816 -> 0.590**. E' PIU' PICCOLO di prima.
 
