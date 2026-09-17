@@ -225,3 +225,52 @@ anche i nodi si stabilizzassero **quello resterebbe un altro sistema.**
 riduzione al limite, nessun controllo positivo. **Qualunque cosa esca, il passo successivo sarebbe
 SIGILLARLO, non accenderlo.**
 
+
+---
+
+# CURA DEL DENOMINATORE DI `SPIN_FEEDBACK` — previsioni *(ex ante, 2026-09-17)*
+
+**Scritte PRIMA di toccare il codice.** Cura: si tolgono i due denominatori nodali asimmetrici
+(`/grado[ii]`, `/grado[jj]`) e **non si mette nulla al loro posto** — variante `nudo`, zero scelte.
+Il difetto e le quattro varianti sono in `doc/REFERTO_denominatore.md` e nel commit `eaa402b`.
+
+## Cosa mi aspetto, e con quale sicurezza
+
+**CERTO — perché è algebra, non statistica:**
+- **`G1`** `|sum(out)|/max|out|` passa da **mediana 1.112 / MAX 8.441** a **~1e-16**, su **ogni**
+  invocazione. Se non ci arriva, **la cura è sbagliata**: si committa e ci si ferma.
+- **`G5`** `+flusso` e `−flusso` esattamente opposti: banale una volta tolto il denominatore, ma va
+  verificato **esplicitamente** perché è la proprietà che `G1` misura in forma aggregata.
+
+**ATTESO, e già misurato su una variante in-process (un seme):**
+- **`G3` controllo positivo:** coi gradi veri la forma nuova **deve** differire. Sui numeri di
+  `eaa402b` differisce: `|out|` mediano `0.0400 → 0.0223`, `max|out|` `0.816 → 0.590`.
+- **Il termine NON esplode.** È il contrario dell'intuizione «senza denominatore accumula cento
+  volte»: misurato, è **più piccolo**. Ragione plausibile ma **non verificata**: `grado` è il grado
+  **pesato** (somma dei `w`), non il conteggio, e dividere per un numero minore di uno **amplifica**.
+  **Se questa spiegazione fosse giusta, il vecchio `/grado` non normalizzava affatto: amplificava.**
+  Non la do per buona: è una previsione, e `G3` la mette alla prova.
+
+**INCERTO, e lo dico prima invece di spiegarlo dopo:**
+- **`G2` (riduzione al limite).** Forzando `grado[i] = grado[j] = g`, la vecchia forma dà `±f/g` e la
+  nuova `±f`. **Non sono uguali: differiscono per il fattore `g`.** Quindi `G2` **NON può** essere
+  una byte-identità come scritto nel mandato — sarebbe tale solo per `g = 1`.
+  **Il limite giusto per `nudo` è `g = 1`**, e lo scriverò così. *(Per le varianti `media`/`linea`
+  il limite del mandato avrebbe avuto senso; per `nudo` no. Lo dichiaro **prima** di girare il
+  sigillo, non dopo averlo visto fallire.)*
+- **`G4` (conservazione).** `sum(phivel)` dovrebbe conservarsi meglio, **ma non so di quanto e non
+  lo predico**: le varianti **divergono** fra loro (n finale 548/564/539/543 su un seme), quindi il
+  confronto di ampiezza **non ha barra**. Riporterò i numeri **senza interpretarli**.
+- **`G6` (cucitura di fase).** **Non ho previsioni.** Nessuno ha mai misurato se `imag(ov)` sia
+  continuo fra passi consecutivi. **Entrambi gli esiti sono informativi**, e quello negativo — salti
+  di segno — sarebbe **il reperto più grosso di questo giro**, perché renderebbe il termine rumore
+  di gauge. **Non tifo per nessuno dei due.**
+
+## Cosa la cura **NON** risolve, e va detto adesso
+
+- **Non restituisce al termine la proprietà che il docstring dichiara.** `out[k]` resta una **somma**
+  su un numero di termini che cresce col grado. **Se sia un difetto NON È STATO MISURABILE**: il
+  ~77 % dei nodi ha grado **esattamente 2** e le mediane per grado sono **non monotone**. Resta un
+  fronte aperto, non una cosa risolta.
+- **Non tocca gli altri tre punti con lo stesso schema** (`:2082`, `:2294`, `:3154`). Fronte nuovo.
+- **Non promuove nulla:** `SPIN_FEEDBACK` resta **OFF di default**.
