@@ -968,3 +968,19 @@ dimostrazione)* **A3 non discende da A2**.
   risolta** — ① e' cablata **con quella riserva scritta**. E lo **0.35 %** di nodi ancora al
   pavimento **non e' caratterizzato** (voce **Z8**).
 
+## AGGIORNAMENTO 2026-09-17 (5) — **il cablaggio autorizzato NON e' stato fatto: sarebbe stato inerte**
+- **`psi` era GIA' calcolato** alla costruzione della scena (`nuova_massa` -> `semina` ->
+  `_registra_concorrenza` -> `calcola_psi`). **Aggiungere una chiamata sarebbe stata la QUINTA rete.**
+- **La causa di `psi = 0` e' `ramp = min(1, eta/TAU_A)` con `eta = 0`:** tutti i pesi a zero.
+  **Controprova: forzando `eta = TAU_A`, `max|psi| = 8.02`.** Lo zero e' il valore **CORRETTO** di
+  una legge, quindi **A7b non si applica**.
+- **Z9 - IL FATTO NUOVO:** `ramp` matura in **~5526 passi**; i run sono **300-500**. A 500 passi
+  `ramp` mediano **~0.09**, e il peso d'arco tipico e' **~1 %** di quello maturo. **NON e' un
+  difetto** (`ramp` e' una legge) **ma e' una condizione di REGIME mai dichiarata**, e le
+  conseguenze **non sono state misurate**.
+- **Dei tre argomenti che avevano prodotto il via libera, DUE sono caduti** (②
+  `omega_s`-memoria: al passo 0 non cambia di un bit; ③ A7b: non si applica). **Regge ①**, ma
+  «prima» era prima di una modifica inerte.
+- **A7b ha ora il suo CASO SPECULARE** in `doc/ASSIOMI.md`.
+- **Nessun codice toccato.** Blob invariato: `69ee540`.
+

@@ -2953,3 +2953,83 @@ fallback cessa e non torna.**
 - **Lo 0.3457 % di nodi ancora al pavimento non è caratterizzato** (voce **Z8**).
 - **`theta` non è stato guardato**, come il mandato impone. Si guarderà a bonifica finita, contro
   previsioni già committate **prima** del cablaggio.
+
+---
+
+## 9.23 — **`psi = 0` non era mancata inizializzazione: era il RAMP sull'età.** Tre argomenti, due caduti, e un cablaggio autorizzato che sarebbe stato inerte
+
+**Come si è arrivati qui.** Avevo raccomandato di rimandare a dopo la campagna il calcolo di `psi`
+alla costruzione della scena. **Il guardiano ha demolito quella raccomandazione, e aveva ragione:**
+*«la comparabilità è già rotta»* — quattro blob in un giro, tre correzioni di legge (`d_arco`,
+`tau_p` da `6.85e+05` a `2.376`, il pavimento dell'inerzia da 100 % a 0.35 %). **Non esisteva un
+regime da preservare.** Ho ritirato la raccomandazione, dato il via libera alla modifica — e poi
+**la verifica preliminare l'ha fermata.**
+
+### 1. `psi` era già calcolato
+
+```
+nuova_massa()  ->  semina(..., mass_id)  ->  _registra_concorrenza()  ->  calcola_psi()
+```
+
+**Misurato:** subito dopo `nuova_massa`, `len(psi) == n` (**è stato calcolato**) ma `max|psi| = 0`.
+**Aggiungere una chiamata lì sarebbe stato inerte** — e sarebbe stata la **quinta rete** sopra lo
+stesso buco.
+
+### 2. La causa è `ramp`, e lo zero è il valore GIUSTO
+
+```
+eta: min 0, max 0        ramp = min(1, eta/TAU_A) = 0        pesi: max 0   ->   psi = 0
+CONTROPROVA, forzando eta = TAU_A:                           max|psi| = 8.02
+```
+
+`_pesi()` fa `base = exp(-d/lam) · ramp[i] · ramp[j]`. Con `eta = 0` **tutti i pesi sono zero**,
+qualunque cosa faccia `calcola_psi`. **Il campo c'è: è il kernel che lo azzera.**
+
+> **Quindi `psi = 0` non è «l'assenza dell'inizializzazione»: è il valore corretto di una legge che
+> dice "un nodo appena nato non pesa ancora".** Nascere con `eta = 0` **è giusto**.
+
+### 3. Il fatto nuovo, ed è più grande della domanda che l'ha prodotto
+
+| passo | `ramp` mediano |
+|---|---|
+| 1 | **0.0002** |
+| 60 | **0.0106** |
+| 120 | **0.0217** |
+
+`eta` cresce di **~0.009 per passo** (è `eta += dt_n`, il **tempo proprio**) e `TAU_A = 50`:
+
+> **Per `ramp = 1` servono ~5526 passi. I run di questo programma sono 300-500.**
+> A 500 passi `ramp` mediano vale **~0.09**, e poiché `base ∝ ramp[i]·ramp[j]`, **il peso d'arco
+> tipico è ~1 % di quello maturo.**
+
+**Non è un difetto, ed è importante non chiamarlo così:** `ramp` è una **legge**. **Ma è una
+condizione di regime mai dichiarata** — tutte le misure di questo programma sono state prese su un
+sistema in cui **il kernel non ha mai finito di accendersi**. **E le conseguenze non sono state
+misurate:** dire *«quindi le misure sono sbagliate»* sarebbe l'errore ampiezza-contro-correlazione
+già catalogato in §9. **È stabilito il regime, non il suo effetto.** (Voce **Z9**.)
+
+### 4. I tre argomenti che avevano prodotto il via libera
+
+| | esito |
+|---|---|
+| **① la comparabilità è già rotta** | **REGGE** — ed è quello che ha demolito la mia raccomandazione |
+| **② `omega_s` è memoria persistente** | **CADUTO, misurato:** al passo 0 `omega_s` **non cambia di un bit** (campo zero → coppia zero → l'inerzia non conta); al passo 1 la variazione `0.0059` è **dentro l'intervallo di regime** (0.0060-0.0064) |
+| **③ `psi = 0` è un'incoerenza (A7b)** | **CADUTO:** è il valore corretto di `ramp = 0` |
+
+**Restava ① a sostenere «prima, non dopo». Ma «prima» era prima di una modifica che non avrebbe
+cambiato niente.**
+
+### 5. Cosa ne consegue per gli assiomi
+
+**A7b ha ora il suo caso speculare**, scritto accanto all'enunciato: **uno zero può essere il valore
+corretto di una legge, e allora A7b non si applica.** La domanda che distingue i due casi:
+***«esiste una legge per cui questo valore è quello giusto?»*** Se sì, non è un indefinito
+travestito: è uno stato. **Se no, è un buco.**
+
+### 6. E una nota sul metodo, perché è il punto
+
+Il guardiano ha corretto un mio argomento sbagliato; io ne ho verificati tre suoi e **due sono
+caduti**, incluso quello che aveva usato per spingere la decisione. **Nessuno dei due aveva ragione
+per intero, e la misura ha deciso entrambe le volte.** La misura su `omega_s` è stata committata
+**anche se indebolisce l'argomento di chi l'aveva chiesta** — e sono quelle che servono di più:
+impediscono a qualcuno, fra sei mesi, di rifare lo stesso ragionamento.

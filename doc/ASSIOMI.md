@@ -115,6 +115,14 @@ nascita. Se esiste uno stato da cui costruire (i nodi hanno densita' vera, l'arc
 corretto e il difetto sta altrove** — nel fatto che qualcuno legga quella grandezza prima che
 esista. **Sostituire un indefinito con uno zero non e' inizializzare: e' nascondere.**
 
+**⚠ E IL CASO SPECULARE, misurato il 2026-09-17** (`doc/REFERTO_psi_zero_ramp.md`): **uno ZERO puo'
+essere il valore CORRETTO di una legge, e allora A7b NON si applica.** `psi = 0` alla costruzione
+della scena sembrava «assenza di inizializzazione» — ed e' invece il valore giusto di
+`ramp = min(1, eta/TAU_A)` con `eta = 0`: **un nodo appena nato non pesa ancora**, e nascere con
+eta' zero e' **corretto**. *(`calcola_psi()` era gia' chiamato: la chiamata non mancava.)*
+**LA DOMANDA CHE DISTINGUE I DUE CASI:** *«esiste una legge per cui questo valore e' quello
+giusto?»* Se si', non e' un indefinito travestito: e' uno stato. **Se no, e' un buco.**
+
 ## A8 — UN RAMO SILENZIOSO NON E' UN RAMO
 
 **Ogni fallback su un percorso fisico deve essere CONTATO.** Un ramo che scatta senza segnalarlo
