@@ -3573,3 +3573,74 @@ sono inerti?" — ha già avuto risposta allora**, e oggi la stessa misura rispo
 
 **Non l'ho riscritto:** riscrivere un criterio va fatto **con un mandato proprio**, ed è la regola
 che questo stesso giro ha appena applicato a `Y5`.
+
+---
+
+## 9.32 — **`Z9` è ancora quella, e `R6` regge.** Il TEMPO 2 agiva sul 2.4 % delle chiamate
+
+**Due verdetti presi contro numeri di otto commit fa**, con la stessa disciplina che aveva rimesso in
+discussione il sigillo di `--tau-luce`: *un verdetto preso su un sistema cambiato non è un verdetto,
+è una voce da rigirare*.
+
+### `Z9` — sostanzialmente intatta
+
+**Due scene, e la distinzione è metodologica:** la misura originale usava una scena a **3 masse da
+120**; quella è **l'unica confrontabile coi suoi numeri**. La scena del **batch** è il sistema reale.
+**Riporto entrambe.**
+
+| passo | `ramp` mediano **oggi** (scena orig.) | **`cdc0e41`** |
+|---|---|---|
+| 1 | 0.0002 | 0.0002 |
+| 60 | **0.010179** | 0.0106 |
+| 120 | **0.020414** | 0.0217 |
+
+```
+eta/passo : 0.00849  (era ~0.009)      ramp = 1 a 5887  (era ~5526)
+scena del batch                        ramp = 1 a 5960
+```
+
+**I numeri vanno nella direzione che il mandato indicava come possibile — maturazione un po' più
+lenta — e la catena causale è plausibile:** i neonati ora pesano **zero** invece di `2e-4`,
+contribuiscono meno a `psi`, quindi `r` è più basso e `eta` cresce più piano.
+
+> **Ma è UN SOLO SEME, e P3 vieta di chiamarlo un effetto.** La dispersione di `ramp` fra semi **non
+> è mai stata misurata**, e uno scarto del **6-8 %** su un seme **non è distinguibile da essa**.
+> **La lettura onesta è la prima delle tre: `Z9` è intatta.**
+
+**E il fatto non cambia di una virgola:** il kernel matura in **~5900 passi**, i run sono **300-500**,
+a 500 passi `ramp` sta **sotto il 10 %**.
+
+### `R6` — **regge**, e il perché è istruttivo
+
+```
+                        OGGI        riferimento (8bfcf46)
+_pesi() per passo        12                 16
+   PRIMA della cache      7                  9
+   DOPO                   5                  7
+```
+
+**Il TEMPO 2 ha ridotto le chiamate da 16 a 12, ma `_pesi()` gira ANCORA a cavallo.** La lettura era
+fissata prima: **gira a cavallo → `R6` regge**. Valutare lì il `ramp` violerebbe **A6 sul 42 %** delle
+chiamate, a ogni passo.
+
+**E il quadro per chiamante spiega perché il TEMPO 2 non poteva bastare:**
+
+```
+stato_crossover = 1354      step = 123      calcola_psi = 37
+```
+
+**Il TEMPO 2 agiva su `calcola_psi`, che è il 2.4 % delle chiamate. L'89 % viene da
+`stato_crossover`**, attraverso `massa_critica_adattiva` — **la ricorsione indiretta già registrata
+il 14 settembre** (voce **M**). **Correggere `calcola_psi` non poteva sbloccare `R6`, e infatti non
+l'ha sbloccato.** *(Questo dà anche la misura giusta del TEMPO 2: era corretto e necessario, ma la
+sua portata era il 2.4 % — ed è coerente con ciò che il referto del TEMPO 1 aveva già scritto:
+«elimina 2 ricalcoli su 16».)*
+
+### Cosa resta
+
+**`Z9` va curata, e le due cure provate sono bocciate a ragione**: `TAU_A = LAM/cs` **sposta** il
+numero su `LAM`; `ramp = eta/(d/cs)` **viola A6** dove verrebbe valutato. **La via che `R6` indica**
+— valutare il `ramp` **una volta per passo** da uno snapshot — **resta la voce Z12, con il prezzo
+A8b**. **Oppure affrontare la ricorsione `stato_crossover → _pesi()`, l'89 %** — ma è la voce **M**,
+un fronte diverso.
+

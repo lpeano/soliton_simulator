@@ -1,0 +1,39 @@
+======================================================================================================================
+RIMISURA DI Z9 -- blob soliton_simulator.py
+======================================================================================================================
+
+--- (A) SCENA ORIGINALE (confrontabile con cdc0e41) ---
+  passo   n       eta med      RAMP med       ramp p05     ramp p95     ramp=0 %    
+  1       360     0.01         0.0002         0.0002       0.0002       0.00        
+  20      360     0.16497      0.0032995      0.0022263    0.0049356    0.00        
+  60      360     0.50896      0.010179       0.0068791    0.015529     0.00        
+  120     360     1.0207       0.020414       0.013396     0.031616     0.00        
+  crescita di eta per passo : 0.00849341      (riferimento cdc0e41: ~0.009)
+  passo estrapolato per ramp = 1 : 5887   (riferimento cdc0e41: ~5526)
+
+--- (B) SCENA DEL BATCH (il sistema che gira davvero) ---
+  passo   n       eta med      RAMP med       ramp p05     ramp p95     ramp=0 %    
+  1       440     0.01         0.0002         0.0002       0.0012473    0.00        
+  20      460     0.16901      0.0033802      0.0020338    0.0058581    0.87        
+  60      488     0.50408      0.010082       0.0060509    0.016321     0.00        
+  120     504     1.0083       0.020167       0.012849     0.031895     0.00        
+  crescita di eta per passo : 0.00838942      (riferimento cdc0e41: ~0.009)
+  passo estrapolato per ramp = 1 : 5960   (riferimento cdc0e41: ~5526)
+
+  R6 -- `_pesi()` per passo, e da che parte della scrittura della cache:
+     passo 4    totale 12     PRIMA 7      DOPO 5   
+     passo 5    totale 12     PRIMA 7      DOPO 5   
+     passo 6    totale 12     PRIMA 7      DOPO 5   
+     passo 7    totale 13     PRIMA 7      DOPO 6   
+     passo 8    totale 13     PRIMA 7      DOPO 6   
+     MEDIANA per passo: 12.0    (riferimento 8bfcf46: 16, con 9 PRIMA e 7 DOPO)
+     totale PRIMA 861, totale DOPO 653
+     per CHIAMANTE: stato_crossover=1354, step=123, calcola_psi=37
+     `_pesi()` come lettore di _cs_nodo_prev: fallback 18 su 1514 (1.1889 %)
+
+======================================================================================================================
+COME SI LEGGE
+ (A) e' l'UNICO confronto lecito coi numeri di cdc0e41: stessa scena, stesso metodo.
+ (B) e' il numero che vale per il sistema reale, ed e' quello da usare d'ora in poi.
+ R6 si legge da (B): se `_pesi()` gira tutta da un lato della scrittura della cache, l'ostacolo
+ e' caduto; se gira ancora a cavallo, regge.
