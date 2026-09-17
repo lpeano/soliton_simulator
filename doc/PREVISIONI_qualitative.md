@@ -172,3 +172,26 @@ condannerebbe.** *(Sigillo Y5.)*
 spin si ordini**, ne' che l'aliasing sia risolto. `omega` e' un random walk smorzato: cambiare
 l'ingresso **sposta il plateau, non lo abolisce**.
 
+---
+
+# `calcola_psi` TEMPO 2 — previsioni *(ex ante, 2026-09-17)*
+
+Passare `w` ai due chiamanti **eseguiti** dentro `step` (`:3006`, `:3118`).
+
+- **Il numero di ricalcoli dentro il passo va a ZERO**, e le letture diventano **coerenti `t`/`t+1`**
+  — come il commento a `:2959` gia' prescrive e come oggi non accade.
+- **Sull'EFFETTO NON HO UNA PREVISIONE, e lo scrivo prima.** Potrebbe **non cambiare nulla** (se i
+  pesi ricalcolati coincidono con quelli di `step`) **oppure cambiare molto** (se non coincidono).
+  **E' una MISURA — Q4 — non un'attesa.**
+  > **E se non cambia nulla, NON e' un fallimento:** significa che **il difetto era teorico**, e la
+  > correzione **resta giusta** perche' chiude un ramo il cui esito non era garantito. **Lo
+  > registrero' come tale, e non forzero' una differenza.**
+- **Il terzo punto (`:3037`) NON viene toccato:** e' l'`elif` sotto `REPULS_LEGGE`, **non eseguito**
+  col default. **Il difetto li' resta LATENTE**, e la previsione e' che **nessun sigillo possa
+  vederlo** — perche' quel ramo non gira.
+
+**COSA FALSIFICHEREBBE LA CORREZIONE:** se `Q3` (forzando i chiamanti a non passare `w`) **non**
+tornasse byte-identico, la modifica avrebbe toccato piu' del previsto. E se `Q6` trovasse `len(w)`
+disallineato dagli archi in un punto, `w` non sarebbe valido li' — **misurato ora: topologia
+invariata nel 100 % di 40 chiamate, su entrambi i punti.**
+
