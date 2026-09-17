@@ -8,9 +8,9 @@ I_nodi -> np.ones(n)  [FALLBACK PERICOLOSO]  :3277        _taup_Inodi_fallback (
                                                il fallback e' densita' 1 contro |psi|^2 ~ 1e-6: SEI ORDINI
 np.maximum(cs_taup, 1e-9)                    :3299        _taup_cs_clamp (NUOVO)         0.0000 %     legittimo         
                                                clamp sulla velocita' delle onde
-np.where(_peq_ok, peq, 1e-30)                :3305        _taup_peq_degenere (gia' c'era) 1.6588 %     REPERTO (1.7 %)   
+np.where(_peq_ok, peq, 1e-30)                :3305        _taup_peq_degenere (gia' c'era) 1.6615 %     REPERTO (1.7 %)   
                                                e _taup_peq_deg_passi = 2 PASSI distinti
-max(t_luce, t_visco)  [il vincolo causale]   :3318        _taup_causale_scatti (gia' c'era) 1.6653 %     REPERTO (1.7 %)   
+max(t_luce, t_visco)  [il vincolo causale]   :3318        _taup_causale_scatti (gia' c'era) 2.4039 %     REPERTO (2.4 %)   
                                                di cui su peq degenere: 207425
 TAU_USA_D0 / CS_DINAMICO                     :3288/:3298  FLAG, non fallback             n/d          NON ESERCITATO    
                                                scelta di configurazione, non un ramo silenzioso: A8 non si applica
@@ -24,7 +24,7 @@ d_arco = self.d  [nessuna guardia]           :3288        N/A: nessun ramo      
                                                la cura ha RIMOSSO la guardia `if len(self.d) else`: vedi la verifica sotto
 
 --- d_arco: la cura ha rimosso `if len(self.d) else self.d`. E' un rischio? ---
-  len(self.d) = 208977   len(self.i) = 208977   len(self.d0) = 208977
+  len(self.d) = 208421   len(self.i) = 208421   len(self.d0) = 208421
   allineati: True
   LETTURA: la guardia vecchia (`if len(self.d) else self.d`) proteggeva dal caso `len(d) == 0`,
   e restituiva `self.d` -- cioe' LA STESSA COSA. Era una guardia che, nel ramo di fallback, dava
@@ -34,7 +34,7 @@ d_arco = self.d  [nessuna guardia]           :3288        N/A: nessun ramo      
 
 --- A8b: LE CACHE CROSS-PASSO ---
   cache                  chiamate       fallback       frazione         verdetto
-  _cs_nodo_prev (tempo-luce) 62             0              0.0000 %         OK
+  _cs_nodo_prev (tempo-luce) 128            2              1.5625 %         REPERTO
   _cs_nodo_prev (inerzia) 66             2              3.0303 %         REPERTO
   _xi_rumore             0              -              -                RUMORE_COLORATO e' OFF: ramo non esercitato
   _psi_spin_prec         -              -              -                guardia dentro ritmo(), non toccata da queste correzioni
@@ -44,5 +44,5 @@ d_arco = self.d  [nessuna guardia]           :3288        N/A: nessun ramo      
 
 ==========================================================================================================================
 ESITO DELL'AUDIT: 2 reperti su 11 rami esaminati
-  REPERTO -> np.where(_peq_ok, peq, 1e-30) (:3305): 1.6588 %
-  REPERTO -> max(t_luce, t_visco)  [il vincolo causale] (:3318): 1.6653 %
+  REPERTO -> np.where(_peq_ok, peq, 1e-30) (:3305): 1.6615 %
+  REPERTO -> max(t_luce, t_visco)  [il vincolo causale] (:3318): 2.4039 %

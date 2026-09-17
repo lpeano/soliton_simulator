@@ -2119,9 +2119,84 @@ class Rete:
         else:
             self._cs_in_fallback = getattr(self, "_cs_in_fallback", 0) + 1   # P5: si CONTA
             _cs_in = np.full(n, CS_M)
+        # ⚠ `_fatt_cs` NON entra piu' nell'inerzia: la forma nuova contiene gia' `cs^-2` dentro
+        # `(d/cs)^2`, e lasciarlo darebbe `cs^-4`. Resta come DIAGNOSTICO, e va detto che non ha
+        # lettori: una sola occorrenza nel file, ed e' questa scrittura (voce Z7 del registro,
+        # quarto caso dopo _passo_spinoriale/VERSO_CHI/spin_locale).
         _fatt_cs = (CS_M / _cs_in) ** 2                    # adimensionale, == 1 dove cs == CS_M
-        self._fatt_cs_ultimo = _fatt_cs                    # per la metrica (solo lettura a valle)
-        inerzia = np.maximum(self._rho_sorgente() * _fatt_cs, 1e-6)   # [FASE 4] rho_spin (ON) / |psi|^2 (OFF); limite identico
+        self._fatt_cs_ultimo = _fatt_cs                    # DIAGNOSTICO: nessun lettore (Z7)
+
+        # ================= INERZIA DIMENSIONALE (par.10 categoria D: NESSUN FLAG) =================
+        # Era:  inerzia = max(rho_sorgente * (CS_M/cs)^2, 1e-6)
+        # IL DIFETTO ERA DIMENSIONALE, non una taratura. `coppia = cross(B, nb)` e' versore x
+        # versore, quindi ADIMENSIONALE e di ordine 1; `|psi|^2` grezzo e' ~1e-7. Sette ordini, e
+        # nessuna dimensione che li leghi. Ma da `omega = coppia/inerzia` con `omega ~ 1/T` segue
+        # che **l'inerzia E' UN TEMPO AL QUADRATO** (doc/INERZIA_tempo_quadro.md, confermato su tre
+        # punti: dimensione, esponente cs^-2, verso). MISURATO su questo codice: il pavimento 1e-6
+        # era attivo sul **100.00 %** dei nodi a ogni passo -- `inerzia` non era "quasi sempre al
+        # pavimento", ERA il pavimento -- mentre `_fatt_cs` saliva fino a 6.43 senza servire a
+        # nulla. Rapporto T^2/inerzia misurato: **1.03e+06**.
+        #
+        # ASSIOMA A6 (TEOREMA, residuo 1.57e-15) -- LA RAGIONE PRIMARIA, e non e' numerica:
+        # `omega_new = omega_src + dtn_c * (correzione/inerzia - omega_src/_tau)`. Se `inerzia`
+        # fosse calcolata dallo stato DI QUESTO PASSO, sarebbe una funzione istantanea di cio' che
+        # sta per essere modificato: **uno specchio, non una resistenza**. In meccanica la massa si
+        # valuta a `t`, non a `t+dt`.
+        # ⚠ E QUI A6 E' SODDISFATTO PER COSTRUZIONE, non da uno snapshot aggiunto: questo blocco
+        # gira a riga ~3062, mentre `peq` e' aggiornato a ~3147/3165, `d` a ~3243 e `_cs_nodo_prev`
+        # e' scritto a ~3138. **Tutte le grandezze lette qui sono gia' quelle del passo precedente.**
+        # (Verificato dal DISCO, non dedotto: csv/_test_fork/_verifiche_inerzia.txt.)
+        #
+        # ASSIOMI: A6 (primaria) - A1 (zero parametri: rho, peq, d, cs sono tutti di stato)
+        #          A2 (`peq` e' lo sfondo DIFFUSO LOCALE, Legge I :265; nessuna statistica globale)
+        #          A3 (dopo la proiezione arco->nodo numeratore e denominatore vivono entrambi
+        #              sui NODI: stessa popolazione) - A5 (`d/cs` e' il tempo causale)
+        #          A4 (nessun DT nudo introdotto) - A8 (il fallback sotto e' CONTATO).
+        # Sigillo: csv/_seal_fork/_sigillo_inerzia.py  (Y0-Y10)
+        _T = self._tempo_luce_nodo(i, j)                   # d_nodo/cs_nodo, UNICO punto della legge
+        _T2 = _T * _T                                      # = T^2, la dimensione dell'inerzia
+
+        # proiezione arco->nodo di `peq`: media sugli archi INCIDENTI -- la stessa forma gia' usata
+        # per `den_w` (~:3151), e la grandezza su cui GATE A e' stato misurato.
+        _peq_a = np.asarray(self.peq, float)
+        _ok_a = np.isfinite(_peq_a) & (_peq_a > 0) if len(_peq_a) == len(self.i) else np.zeros(len(self.i), bool)
+        if _ok_a.any():
+            _sp = (np.bincount(self.i[_ok_a], _peq_a[_ok_a], minlength=n) +
+                   np.bincount(self.j[_ok_a], _peq_a[_ok_a], minlength=n))
+            _cn = (np.bincount(self.i[_ok_a], minlength=n) +
+                   np.bincount(self.j[_ok_a], minlength=n))
+            _peq_nodo = np.where(_cn[:n] > 0, _sp[:n] / np.maximum(_cn[:n], 1), 0.0)
+        else:
+            _peq_nodo = np.zeros(n)
+
+        # IL FALLBACK DEL PRIMO PASSO, con la convenzione GIA' USATA SOPRA per `_cs_nodo_prev`:
+        # quando lo stato precedente non e' utilizzabile si prende il valore che rende il fattore
+        # NEUTRO -- li' `CS_M` (cioe' _fatt_cs = 1), qui **contrasto = 1**.
+        # NON E' UNA CONVENZIONE NUOVA, ed e' importante: il codice sostituisce gia' `peq` con
+        # `rho` quando `peq` e' NaN, in DUE punti (~:3544 e ~:3657,
+        # `np.where(np.isnan(peq_sel), rho_sel, peq_sel)`), e `rho/rho = 1`. Il neutro **e'** il
+        # limite di quella sostituzione, non un numero scelto (A1).
+        # PERCHE' SERVE: ai passi 0 e 1 `peq` non e' MAI stato calibrato (la calibrazione sta a
+        # ~:3147, DOPO questo punto) e vale NaN, poi 0 -- su TUTTI i nodi, misurato. Senza questo
+        # ramo `rho/peq = 0/0 = NaN` finirebbe in `self.omega_s`, **la memoria persistente**, e
+        # `np.maximum(NaN, 1e-6)` **e' NaN**: il pavimento non protegge.
+        # A8: si CONTA, e la previsione scritta prima dice che deve scattare solo nel transitorio.
+        _rho_s = self._rho_sorgente()
+        _ok_n = (np.isfinite(_peq_nodo) & (_peq_nodo > 0) &
+                 np.isfinite(_rho_s) & (_rho_s > 0))
+        self._inerzia_sfondo_chiamate = getattr(self, "_inerzia_sfondo_chiamate", 0) + int(n)
+        self._inerzia_invocazioni = getattr(self, "_inerzia_invocazioni", 0) + 1
+        if not bool(np.all(_ok_n)):
+            self._inerzia_sfondo_fallback = getattr(self, "_inerzia_sfondo_fallback", 0) + int((~_ok_n).sum())
+            self._inerzia_sfondo_passi = getattr(self, "_inerzia_sfondo_passi", 0) + 1
+            # A8: non basta QUANTE volte scatta, serve QUANDO. Un fallback confinato alle prime
+            # invocazioni e' un transitorio; uno sparso e' il comportamento principale, e i due
+            # casi danno lo stesso conteggio. (Criterio scritto da questa distinzione, par.9.)
+            self._inerzia_sfondo_ultima = self._inerzia_invocazioni
+        _contrasto = np.where(_ok_n, _rho_s / np.where(_ok_n, _peq_nodo, 1.0), 1.0)
+        inerzia = np.maximum(_contrasto * _T2, 1e-6)       # il pavimento RESTA: deve diventare inerte
+        self._inerzia_al_pavimento = getattr(self, "_inerzia_al_pavimento", 0) + int(np.sum(_contrasto * _T2 <= 1e-6))
+        self._inerzia_tot = getattr(self, "_inerzia_tot", 0) + int(n)
         dtn = dt_n if np.isscalar(dt_n) else np.asarray(dt_n)[:n]
         dtn_c = dtn if np.isscalar(dtn) else dtn[:, None]
         # MEMORIA HEBBIANA: omega si conserva + correzione dal campo (torsione B x n) - decadimento

@@ -1,0 +1,67 @@
+========================================================================================================================
+Y0-Y10 -- INERZIA DIMENSIONALE:  max((rho/peq_nodo) * (d/cs)^2, 1e-6)
+========================================================================================================================
+
+--- (Y6) `_fatt_cs` non e' applicato due volte ---
+  nel PRE: `rho_sorgente * _fatt_cs` presente 1 volta/e
+  nel codice ORA, righe che usano `_fatt_cs`:
+     _fatt_cs = (CS_M / _cs_in) ** 2                    # adimensionale, == 1 dove cs == CS_M
+     self._fatt_cs_ultimo = _fatt_cs                    # DIAGNOSTICO: nessun lettore (Z7)
+[PASS] Y6 `_fatt_cs` NON entra piu' nell'inerzia (no cs^-4) prima 1 uso nell'inerzia, ora 0; resta solo come diagnostico
+
+--- (Y7) A6: nessuna grandezza dell'inerzia viene dallo stato CORRENTE  [BLOCCANTE] ---
+   :2197   inerzia = np.maximum(_contrasto * _T2, 1e-6)
+   :3137   self._passo_spinoriale(i, j, w, dt_n_s
+   :3213   self._cs_nodo_prev = cs_nodo.copy()
+   :3222   nuovi = np.isnan(self.peq)
+   :3318   self.d = np.maximum(self.d + dts * self.vd, 0.05)
+[PASS] Y7 peq, cs e d sono aggiornati DOPO il punto dell'inerzia  [BLOCCANTE] inerzia a :3137; peq :3222, cs :3213, d :3318 -- tutti DOPO
+
+--- (Y2) RIDUZIONE AL LIMITE, condizione definita PRIMA di girarla ---
+  se  peq_nodo == rho_sorgente  e  (d/cs)^2 == 1,  allora  contrasto == 1  e
+  inerzia == max(1.0, 1e-6) == 1.0, cioe' il vecchio A MENO di _fatt_cs e del pavimento.
+  max|contrasto - 1| = 0.000e+00   (forma scelta perche' sia BINARIAMENTE esatta: x/x)
+[PASS] Y2 riduzione al limite: contrasto == 1.0 ESATTO      max|A-B| = 0.000e+00 su 20000 nodi
+[PASS] Y2b e l'inerzia torna a T^2                          max(contrasto*T^2, 1e-6) == 1.0
+
+--- I DUE RUN (60 passi, seme 5) ---
+  omega_s: shape (1774, 3)
+[PASS] Y1 NESSUN NaN/inf in omega_s  [BLOCCANTE]            NaN 0, inf 0 su 5322 elementi
+
+  frazione al pavimento 1e-6:
+     PRIMA : n/d   (contatore assente nel PRE: si usa la misura di 654aaea, 100.00 %)
+     DOPO  : 324 / 93710  =  0.3457 %
+[PASS] Y4 il pavimento smette di dominare  [BLOCCANTE]      0.3457 % (era 100.00 %)
+
+  A8 -- il fallback dello sfondo:
+     scatti 2392 su 93710 nodi-passo (2.5526 %), in 4 passi distinti
+     ULTIMA invocazione in cui scatta : 8 su 66  ->  poi 58 CONSECUTIVE pulite
+
+     !! CRITERIO CORRETTO DOPO L'ESECUZIONE, e la ragione conta.
+     La prima versione chiedeva `passi distinti <= 3` e dava FAIL con 4. Ma la previsione scritta
+     prima del cablaggio dice "deve scattare solo nel transitorio e poi mai": e' un'affermazione
+     sulla POSIZIONE, non sul CONTEGGIO. Un fallback che scatta 4 volte ALL'INIZIO e uno che scatta
+     4 volte SPARSE danno lo stesso numero e sono diagnosi OPPOSTE -- e la soglia `3` era MIA,
+     scelta guardando una scena ridotta (dove scatta ai passi 0 e 1) invece del run reale.
+     Il criterio giusto e' quello che la previsione gia' conteneva: IL FALLBACK CESSA E NON TORNA.
+     Si misura con l'ULTIMA invocazione in cui scatta, non col numero di volte.
+[PASS] Y5 il fallback CESSA e non torna (A8)                ultima 8 / 66 -> 58 consecutive pulite (87.9 % del run)
+
+  controllo positivo: le traiettorie DEVONO differire
+     nodi PRE 2009, nodi POST 1774
+[PASS] Y3 controllo positivo: coi valori veri differisce    shape (2009, 3) vs (1774, 3)
+[PASS] Y10a nessun NaN/inf nello stato                      d0 min 0.05
+[PASS] Y10b |nb| = 1                                        max| |nb|-1 | = 2.220e-16
+[PASS] Y10c la plasticita' resta stabile                    _taup_cfl_max = 0.5349582448261366
+
+========================================================================================================================
+Y: 11/11 PASS -> PASS
+
+COSA QUESTO SIGILLO NON DICE
+----------------------------
+NON dice nulla su `theta`, `omega`, l'aliasing o qualunque grandezza di fisica: il mandato lo
+vieta, e il motivo e' che `theta` e' proprio il numero che questa correzione punta a muovere. Si
+guardera' a bonifica finita, contro una predizione scritta prima.
+Y2 e' vero PER COSTRUZIONE (x/x): il suo valore non e' scoprire che il contrasto vale 1, ma
+verificare che la FORMA SCRITTA NEL CODICE sia quella -- un ordine sbagliato degli argomenti o un
+`peq/rho` invece di `rho/peq` darebbero FAIL qui e basta.

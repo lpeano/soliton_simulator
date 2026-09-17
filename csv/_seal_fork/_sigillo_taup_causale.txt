@@ -45,10 +45,10 @@ V2-V5 -- PLASTICITA' VISCOELASTICA CAUSALE:  tau_p = max(d/cs, (d/cs)*rho_arco/p
 
 --- (V4b) IL CODICE VIVO: il presidio interno `_taup_cfl_max` dopo un run breve ---
   40 passi reali. _taup_cfl_max = 0.39999999999999997
-  vincolo causale scattato: 207653 su 8319901 archi-passo (2.4959 %)
+  vincolo causale scattato: 301275 su 8321513 archi-passo (3.6204 %)
   peq degenere (P5, protezione 1e-30 scattata): 207563
-  di cui scatti causali SU archi con peq degenere: 207563  (99.96 % degli scatti)
-  -> scatti causali su archi con peq VALIDO: 90
+  di cui scatti causali SU archi con peq degenere: 207563  (68.89 % degli scatti)
+  -> scatti causali su archi con peq VALIDO: 93712
 [PASS] V4b codice VIVO: _taup_cfl_max < 1  [BLOCCANTE]    max = 0.4 su 40 passi reali
 [PASS] V4c stabilita': d0 finito e > 0 dopo 40 passi      min d0 = 0.05, NaN = 0
 
