@@ -1,0 +1,54 @@
+[TIMBRO] _sonda_2706.py  sha1-BYTE 388a0f19  committato e pulito
+======================================================================================================================
+SONDA DEL 2.706 -- |feedback| / |coppia|
+======================================================================================================================
+
+--- (1.3) LA CATENA DI `coppia`, dal sorgente ---
+   :3041   coppia = self._coppia_interferenza(A, z)       la coppia PRINCIPALE
+   :3094   coppia = coppia - fattore * dHdphi             repulsione (ramo REPULS_LEGGE)
+   :3109   coppia = coppia + MU_PSI * dHdphi              vecchia repulsione (ramo elif, MORTO)
+   :3117   _cm = float(np.median(np.abs(coppia)))         <-- QUI si MISURA `coppia`
+   :3129   coppia += _fb                                  <-- QUI si APPLICA il feedback
+   :3154   coppia = coppia + twist_nodo                   twist TW/Hall (DOPO la misura)
+   :3195   delta_phivel = dt_n_s * (coppia - self.xi_termo * _phivel_t) / M_PH  # <-- USA SNAPSHOT; dt_n_s = ve
+
+  LETTURA: `coppia` e `_fb` finiscono nella STESSA somma e attraversano la STESSA divisione.
+  Il divisore e' `M_PH` (1.0), una COSTANTE -- NON `inerzia`. Questo e' il settore della FASE
+  (`phivel`), non quello dello SPIN (`omega_s`): la correzione dell'inerzia di sei ordini vive
+  in `_passo_spinoriale` e NON tocca questa catena. La premessa del mandato su questo punto
+  va corretta.
+
+--- (1.1) STESSA POPOLAZIONE? STESSO STATISTICO? ---
+  len(feedback) = 484   len(coppia) = 484   n = 484   -> stessa lunghezza: True
+  entrambe per-NODO, entrambe misurate con `median(|.|)`: stesso statistico.
+  nodi con feedback ESATTAMENTE zero: mediana 0 su 484  (0.00 %)
+  -> se molti nodi hanno feedback zero, la MEDIANA del feedback e' abbassata, non alzata:
+     l'artefatto andrebbe nella direzione di SOTTOSTIMARE il rapporto, non di gonfiarlo.
+
+  LA NORMA DEL LIFT (se non e' 1, `imag(ov)` non e' limitato a [-1,1]):
+     min 1.000000   max 1.000000   su 64 invocazioni
+
+--- (1.2) DA COSA VIENE L'AMPIEZZA? Le tre distribuzioni ---
+  passo    |imag(ov)| med w/grado med   |feedback| med |coppia| med  rapporto     
+  0        0.0018011     0.050558      0.0012668     3.6955e-11    3.4278e+07   
+  1        0.0018011     0.05114       0.0012608     3.978e-11     3.1694e+07   
+  16       0.018084      0.0074284     0.014273      2.9497e-06    4838.9       
+  32       0.042472      0.007518      0.033765      3.4958e-05    965.88       
+  63       0.088323      0.0074681     0.063404      0.00024902    254.61       
+
+  rapporto MEDIO su 64 invocazioni : 1.2961e+06    (riferimento del referto: 2.706)
+  |imag(ov)| mediana, su tutto      : 0.041734   max 0.78841   <- limitato a [0,1]?
+  w/grado    mediana, su tutto      : 0.0074742   max 1
+  |coppia|   mediana, su tutto      : 3.301e-05   max 0.0030643
+  |feedback| mediana, su tutto      : 0.033133   max 0.44091
+
+  COME SI DISTINGUONO LE TRE DIAGNOSI -- il valore sotto ipotesi nulla:
+    se `imag(ov)` fosse in media ~0.5 (spinori scorrelati) e w/grado ~1/grado, il feedback
+    varrebbe ~0.5/grado. Con grado ~4-6 sarebbe ~0.1. Se il rapporto e' grande CON un feedback
+    di quell'ordine, allora e' `coppia` a essere piccola -- e il fatto NON e' sul feedback.
+
+--- (bonus, e' il futuro F3) LA SOMMA DEL FEEDBACK E' ZERO? (antisimmetria, A7) ---
+  |sum(out)| / max|out| :  mediana 6.270e-01   MAX 2.714e+00   su 64 invocazioni
+  (se la forma e' antisimmetrica per costruzione, deve stare all'errore macchina ~1e-14)
+
+======================================================================================================================

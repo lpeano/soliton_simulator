@@ -3886,3 +3886,134 @@ transitorio. `_psi_spin_prec` scattava nel **95.33 %** delle chiamate — con qu
 scrive **da una misura**, e la soglia si **deriva dal comportamento reale del codice nel punto in
 cui il criterio guarda** — non dal proprio modello mentale di come «dovrebbe» andare. *«Tutte le
 chiamate»* era il modello mentale; *«2 su 126 sono il transitorio»* è la misura.
+
+---
+
+## 9.37 — **Il `2.706` non è un fatto sul feedback. E `F3` fallisce prima ancora di essere scritto**
+
+**Data:** 2026-09-17 · sonda `csv/_test_fork/_sonda_2706.py`, 64 invocazioni, `TAU_A = 2.0`,
+scena del batch **in-process**. **Nessun run di misura, nessun sigillo, nessuna promozione.**
+
+### Perché questa misura viene prima del sigillo
+
+Il mandato di Luca la mette davanti a tutto con una frase che è il criterio stesso:
+**«non si certifica un componente di cui non si sa cosa sia».** Avevo scritto, nel referto
+precedente, che *«un termine chiamato feedback che vale quasi tre volte la coppia su cui
+retroagisce non è una correzione, è il motore»*. **Quella frase non regge**, e il modo in cui non
+regge è istruttivo.
+
+### (1.1) Il confronto è pulito su tre assi, sporco su un quarto — **che è quello temporale**
+
+Puliti e **verificati, non assunti**: stessa popolazione (`len = n = 484` entrambe, per-nodo),
+stesso statistico (`median(abs(·))` contro `median(abs(·))`), stesso istante, **zero** nodi con
+feedback esattamente nullo. E la premessa che il mandato *assumeva* — che `_spinor_lift` sia
+normalizzato, così che `imag(ov) ∈ [−1,1]` — **regge: norma ∈ [1.000000, 1.000000] su 64
+invocazioni.**
+
+Sporco il quarto:
+
+```
+|feedback| / |coppia|, 64 invocazioni
+   MEDIA        2086.2      <- dominata dai primi passi
+   MEDIANA         1.834
+   p25 / p75       1.113 / 9.507
+   min / max       0.698 / 54844     ->  4.9 ORDINI di escursione
+   ultimi 10 passi (il regime)        mediana  0.748
+   passi col rapporto < 1                      14 / 64  (21.9 %)
+```
+
+**Il rapporto scende SOTTO 1 a maturazione.** Il `2.706` era una media su una popolazione **non
+stazionaria**: descrive i primi campioni e **nessun passo reale**.
+
+**È l'undicesimo caso di A3c, e cade sul mio stesso rimedio.** Due giorni fa avevo sostituito
+*«due massimi presi in passi diversi»* con *«media dei rapporti per-passo»*, convinto di aver
+sistemato popolazione, istante e unità. **A3c dice «stessa POPOLAZIONE», e una popolazione che si
+muove di cinque ordini non è una popolazione.** La forma dell'errore è identica, spostata di un
+asse: dallo **spazio** al **tempo**.
+
+### (1.2) L'ampiezza viene dalla COPPIA, non dal feedback
+
+Da 0 a 63 passi: **`|coppia|` cresce di un fattore ~2.9 milioni** (`2.1e-8 → 6.0e-2`),
+**`|feedback|` di ~37** (`0.0011 → 0.042`).
+
+E le sotto-grandezze dicono che il feedback è **ordinario**: `|imag(ov)|` mediana **0.035**
+(max 0.852 — ben dentro `[0,1]`, e molto sotto lo 0.5 di spinori scorrelati: gli adiacenti sono
+quasi in fase, come deve essere dopo una mitosi che copia esattamente); `w/grado` mediana
+**0.0073**; `|feedback|` mediana **0.0228**, cioè **sotto il valore sotto ipotesi nulla che avevo
+stimato prima della misura** (~0.5/grado ≈ 0.1).
+
+**Terza lettura, con una precisazione che cambia la frase:** non *«la coppia è piccola»* — a regime
+i due termini sono dello **stesso ordine** (0.060 contro 0.042). **La coppia parte sei ordini sotto
+il suo valore di regime**, e il rapporto eredita quel transitorio.
+
+### (1.3) Una premessa del mandato va corretta
+
+Il feedback entra nella **stessa somma** della coppia (`coppia += _fb`, `:3129`) e attraversa la
+**stessa divisione** — che è per **`M_PH = 1.0`, una COSTANTE**, non per l'inerzia. Questa è la
+catena della **FASE** (`phivel`); la correzione dell'inerzia di sei ordini vive in
+`_passo_spinoriale`, nel settore dello **SPIN** (`omega_s`). **Due catene separate: quella
+correzione non tocca questo rapporto.**
+
+*(E una fragilità annotata: `_cm` misura la coppia **accumulata fin lì**; il twist di `:3154` viene
+dopo. Con `TW_SPINORE` spento non manca nulla, ma accendendolo `_cm` misurerebbe una coppia
+**parziale** senza che nulla lo segnali.)*
+
+### ⚠ (2) La cosa che non era fra le domande: **`F3` fallisce già adesso**
+
+Ho anticipato nella sonda il criterio `F3` del mandato (`sum(out) == 0`, l'antisimmetria), per
+sapere se valesse la pena scriverlo.
+
+```
+|sum(out)| / max|out| :   mediana 1.112     MAX 8.441     (errore macchina: ~1e-14)
+```
+
+**Non è rumore: è ordine unità.** E la causa è **algebrica, sulla riga**:
+
+```python
+np.add.at(out, ii, -flusso / np.maximum(grado[ii], 1e-9))
+np.add.at(out, jj,  flusso / np.maximum(grado[jj], 1e-9))
+```
+
+Per ogni arco `(a,b)`: `out[a] −= f/g_a`, `out[b] += f/g_b`. Somma = **`f·(1/g_b − 1/g_a)`**,
+**zero solo se `g_a == g_b`**. Verifica su un caso minimo (stella, gradi `[3,1,1,1]`, `f = 1`):
+previsto `3·(1−1/3) = 2.000000`, **misurato 2.000000**. Controprova con denominatore **simmetrico**
+sull'arco: somma **−2.2e-16**, antisimmetria recuperata. *(Il caso «grafo regolare» che avevo messo
+come controllo è **degenere** — `sum = 0` ma anche `max|out| = 0` — e non prova nulla: lo dico
+perché l'avevo scritto io.)*
+
+**Il docstring dice due cose:** *«coppia **antisimmetrica** ai nodi»* e *«la divisione per il grado
+pesato resta locale e **non introduce una manopola**»*.
+**La seconda è vera, ed è esattamente la ragione per cui la prima è falsa.** La normalizzazione
+messa per **non** introdurre un parametro **distrugge la proprietà che dà senso al termine**.
+
+Con `sum(out) ≠ 0` il termine **inietta coppia netta**, e il segno dell'iniezione dipende dalla
+**disomogeneità dei gradi** — una proprietà della **topologia**, non della fisica dello spin.
+**È il cricchetto che A7 esclude.**
+
+**Quinto membro della famiglia «un flag che non fa ciò che dichiara»**, dopo `_passo_spinoriale`,
+`VERSO_CHI`, `spin_locale`, `TW_SPINORE`. **E qui non è il commento a essere stale: è la PROPRIETÀ
+DICHIARATA a non esserci.**
+
+### Il limite di questa misura, dichiarato
+
+**La sonda non riproduce il `2.706`**: gira in-process, 60 passi, senza `--verlet`,
+`--calore-scal`, `--deparam-orologio`, e l'esperimento ne faceva 126. Dà media 2086, mediana 1.83.
+**Non so attribuire per intero la differenza fra 2086 e 2.706, e non la spiego con un'ipotesi.**
+
+Ma i tre fatti che questa misura stabilisce **non dipendono dalla configurazione**: la popolazione
+**non è stazionaria** (quindi la media è comunque lo statistico sbagliato); il rapporto **scende
+sotto 1** a maturazione; e **`sum(out) ≠ 0` si dimostra sulla riga**, quindi vale in ogni
+configurazione con gradi disomogenei.
+
+### Cosa resta a Luca
+
+1. **`E4b` va riscritto** su una statistica che rispetti la non-stazionarietà.
+2. **`F3` ha risposto prima di essere scritto, e ha risposto NO.** Il mandato diceva *«se non è
+   zero, la premessa cade»*: **non è zero.** Gli altri criteri misurerebbero un termine di cui già
+   sappiamo che non è quello che dichiara.
+3. **La domanda vera è cambiata:** se il termine **deve** essere antisimmetrico, il divisore per
+   grado va ripensato — e quella è una **legge nuova** (par.10), non una riparazione. Se **non**
+   deve esserlo, va corretto **il docstring**, e il termine va descritto per quello che è: una
+   **sorgente netta di coppia pilotata dalla disomogeneità dei gradi**.
+
+**`SPIN_FEEDBACK` resta OFF. Mi fermo qui, come ordinato.**
