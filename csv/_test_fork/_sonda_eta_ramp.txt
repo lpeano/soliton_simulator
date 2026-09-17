@@ -1,0 +1,31 @@
+================================================================================================================
+SONDA `eta` / `ramp` -- il figlio appena nato pesa zero PRIMA dell'incremento?
+  simulatore: soliton_simulator.py   TAU_A = 50.0   DT = 0.01
+================================================================================================================
+
+--- (1) IL TEST DIRETTO: ramp PRIMA e DOPO l'incremento di eta ---
+  passo   neo     eta PRIMA    ramp PRIMA     ramp DOPO      ramp DOPO=0?  
+  0       3       0            0              0.0002         0/3           
+  1       2       0            0              0.0002         0/2           
+  2       2       0            0              0.0002         0/2           
+  3       1       0            0              0.0002         0/1           
+  4       2       0            0              0.0002         0/2           
+  5       1       0            0              0.0002         0/1           
+  6       2       0            0              0.0002         0/2           
+  7       1       0            0              0.0002         0/1           
+  8       2       0            0              0.0002         0/2           
+  9       4       0            0              0.0002         0/4           
+
+  su 31 nodi-passo appena nati osservati:
+    ramp PRIMA dell'incremento ESATTAMENTE 0 : 31  (100.00 %)
+    ramp DOPO  l'incremento   ESATTAMENTE 0 : 0  (0.00 %)
+    ramp DOPO, valore minimo osservato       : 0.0002
+
+--- (3) IL CONTO DEI PESI: gli archi del neonato hanno peso zero? ---
+  archi incidenti ai neonati        : 62
+  di cui con peso ESATTAMENTE ZERO  : 62  (100.00 %)
+  peso massimo osservato su un arco di neonato: 0
+
+================================================================================================================
+IPOTESI CONFERMATA (1) e (3): ramp e' ZERO ESATTO prima dell'incremento e NON zero dopo,
+e TUTTI gli archi del neonato hanno peso esattamente zero.

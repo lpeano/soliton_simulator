@@ -3412,3 +3412,74 @@ la scena misura un altro sistema**, e il primo risultato era di quel sistema. Sc
 > **`Q8` non ha reso visibile un difetto preesistente: ha intercettato una REGRESSIONE**, e prima
 > che entrasse in una campagna. **È esattamente ciò per cui il rigiro dei sigilli esiste.**
 
+---
+
+## 9.30 — **Il TEMPO 2 non ha creato un difetto: ha tolto uno SFASAMENTO.** Per mesi il neonato ha pesato `2e-4` invece di zero
+
+**L'ipotesi era precisa e nasceva da una riga:**
+
+```python
+:3018   w = self._pesi(); self.eta += dt_n
+        ^^^^^^^^^^^^^^^   ^^^^^^^^^^^^^^^
+        usa eta VECCHIA   POI la incrementa
+```
+
+**Confermata su tutti e tre i punti.**
+
+### ① Il test diretto — 100 %
+
+```
+su 31 nodi-passo appena nati (grado 2, eta = 0):
+  ramp PRIMA dell'incremento ESATTAMENTE 0 :  31 / 31   (100.00 %)
+  ramp DOPO  l'incremento    ESATTAMENTE 0 :   0 / 31
+  ramp DOPO, minimo osservato              :  0.0002
+```
+
+### ③ Il conto dei pesi — 100 %
+
+```
+archi incidenti ai neonati       : 62
+di cui con peso ESATTAMENTE ZERO : 62   (100.00 %)
+```
+
+Entrambi gli archi del figlio hanno peso zero, perché **`ramp[figlio]` è un FATTORE di ogni suo
+arco** (`base ∝ ramp[i]·ramp[j]`). Quindi `psi = 0`, e `rho_sorgente = 0`.
+
+### ② La controprova — risolta leggendo il codice
+
+```
+VECCHIO :2979  w = self._pesi(); self.eta += dt_n
+        :3006  ... self.calcola_psi()     <- RICALCOLA _pesi(), DOPO l'incremento
+ATTUALE :3018  w = self._pesi(); self.eta += dt_n
+        :3052  ... self.calcola_psi(w)    <- usa `w`, eta VECCHIA
+```
+
+**Nel blob vecchio il ricalcolo avveniva dopo l'incremento**, e il neonato riceveva un peso
+**minuscolo ma non nullo** — confermato dalla misura indipendente di §9.29: sul blob vecchio i nodi
+con `rho ≤ 0` erano **zero**.
+
+### Il verdetto
+
+> **Il TEMPO 2 non ha introdotto un difetto: ha TOLTO uno sfasamento.**
+> **E il peso zero per un neonato è l'INTENTO DICHIARATO** — CLAUDE.md §9 e A7b dicono la stessa
+> cosa: *«un nodo appena nato non pesa ancora»*, e zero è il valore corretto di `ramp` con `eta = 0`.
+> **Il `2e-4` di prima era una PERDITA DI SINCRONIA, non una scelta di legge.**
+
+**`Y5` era scritto su quel comportamento sfasato: è l'ottavo criterio scaduto di questo giro.**
+**Non l'ho riscritto** — serve un mandato proprio, perché riscrivere un criterio è la cosa su cui
+questo repo ha già sbagliato otto volte.
+
+### Il fatto che va registrato, e non è piccolo
+
+> **Per tutto il tempo in cui quel codice è girato, il nodo appena nato ha pesato `~2e-4` invece di
+> `0`, e nessuno lo sapeva.**
+
+**È la QUARTA volta** che uno sfasamento temporale silenzioso viene alla luce: `_cs_nodo_prev`
+(**71.88 %**), `_psi_spin_prec` (**95.33 %**, FASE 5 inerte per mesi), **i due `theta`** (C19), e
+questo. **La famiglia è sempre la stessa: una grandezza letta in un momento del passo diverso da
+quello che il codice dichiara** — ed è ciò che A6 chiede di escludere, **col segno opposto**: non uno
+stato troppo nuovo, ma **due letture della stessa grandezza a istanti diversi**.
+
+**E le quattro sono emerse TUTTE per caso, indagando altro.** La scansione sistematica — *quali
+altre grandezze sono lette in più punti del passo?* — **non è mai stata fatta** (voce **Z19**).
+
