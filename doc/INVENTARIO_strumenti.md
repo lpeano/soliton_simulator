@@ -28,6 +28,8 @@
 | **`csv/_test_fork/_sigillo_osservatore.py`** | `64b2c894` | 156 | il sigillo qui sopra: O1.0, O1, O2, O3a-c | — *(e' lui il sigillo)* |
 | **`csv/_test_fork/_tracing_omega.py`** | `2d12f6e7` | 438 | **`ingredienti(S, net)`**, la ricostruzione della catena di `omega` su **copia profonda** con restore dell'RNG. **MISURA F la RIUSA invece di riscriverla** | sigillo interno `--sigillo`, piu' O1 sopra (che esercita la copia profonda **dentro** un run vero) |
 | **`csv/_test_fork/_verdetto_S_R.py`** | `e43b5911` | 397 | **l'analisi di oggi**: conformita' P6, voce **S**, l'INDETERMINATO `chi_p90`, voce **R**, dispersione di `r`, conto **FDT**. Barre **FRA SEMI** con il `t` di Student giusto per i gradi di liberta' | non serve: **legge CSV**, non tocca il simulatore |
+| **`csv/_test_fork/_esperimento_spin_feedback.py`** | `35ae8a55` | 165 | l'A/B su **`SPIN_FEEDBACK`** a `TAU_A = 2.0`: `E4` (gate A8 sul feedback), `E1` (stabilita'), `E2` (conteggio nodi contro il `-32 %`), `E3` (`psi`, `d0`, `ramp`). **Tre bracci:** `off` e `on` a `TAU_A = 2.0`, `rif` al default `TAU_A = 50` | — *(e' un esperimento, non un sigillo; `SPIN_FEEDBACK` NON e' sigillato)* |
+| **`csv/_test_fork/_esperimento_tau_a.py`** | `52ca4f68` | 151 | l'A/B **`TAU_A = 50` contro `TAU_A = 2.0`** nel deterministico: `S1` stabilita' [bloccante], `S2` la firma di `Z9`. Produce il **`-32 %`** su cui poggia `E2` dell'esperimento qui sopra | — *(esperimento)* |
 | **`csv/_seal_fork/_sigillo_strato1.py`** | `06f7e661` | 541 | i sigilli dello **STRATO 1**: S1.0/S1a/S1b, S2, S3, S4, S5, S6, S7, **S8 (nuovo oggi)**, S3b | — *(e' un sigillo)* |
 
 ## 2. GLI STRUMENTI CHE HANNO PRODOTTO NUMERI ANCORA CITATI
@@ -225,3 +227,34 @@ esiste, ma **come riproducibilita' e' gia' perso**, e saperlo vale piu' che fing
 | `_vuoto_stf_freeze_s1.pkl` | **PARZIALE** *(manca: BLOB del simulatore)* | 1 | 900 | `python soliton_simulator.py --batch --nmasse 3 --sep 8.0 --lam 0.8 --seed 1 --passi 900 --calore-scal --campo-spinoriale --chi-core --deparam-orologio --fork-su2 --fork-su2-mem --spinore-corretto --spinore-vivo --verlet --csv csv/_test_fork/_vuoto_stf_freeze_s1.cond.csv --sync-db csv/_test_fork/_vuoto_stf_freeze_s1.pkl --db-cleanup` |
 | `_vuoto_stf_shake_s1.pkl` | **PARZIALE** *(manca: BLOB del simulatore)* | 1 | 300 | `python soliton_simulator.py --batch --nmasse 3 --sep 8.0 --lam 0.8 --seed 1 --passi 300 --calore-scal --campo-spinoriale --chi-core --deparam-orologio --fork-su2 --fork-su2-mem --spinore-corretto --spinore-vivo --verlet --csv csv/_test_fork/_vuoto_stf_shake_s1.cond.csv --sync-db csv/_test_fork/_vuoto_stf_shake_s1.pkl --db-cleanup` |
 
+---
+
+## 4. I COMANDI ESATTI (2026-09-17) — regola dei `.pkl`: un dato senza il suo comando non e' un dato
+
+**`_esperimento_spin_feedback.py`** — lanciato dalla radice del repo, output su
+`csv/_test_fork/_esperimento_spin_feedback.txt`:
+
+```
+python csv/_test_fork/_esperimento_spin_feedback.py
+```
+
+Il driver lancia **tre** sottoprocessi. Le righe di comando effettive (`SCRATCH` = la cartella
+scratchpad di sessione, i `.pkl` sono `--db-cleanup` e **non** vengono committati):
+
+```
+python soliton_simulator.py --batch --nmasse 3 --sep 8 --seed 5 --passi 120 --ogni 120   --db-ogni 120 --campo-spinoriale --spinore-vivo --spinore-corretto --chi-core --calore-scal   --deparam-orologio --verlet --fork-su2 --fork-su2-mem --cs-dinamico --tau-a 2.0   --csv $SCRATCH/_sfb_off.csv --sync-db $SCRATCH/_sfb_off.pkl --db-cleanup
+            (braccio ON: + `--spin-feedback`, csv/db `_sfb_on`)
+            (braccio RIF: SENZA `--tau-a 2.0`, csv/db `_sfb_rif`  <- e' questo che mancava)
+```
+
+**`_esperimento_tau_a.py`** (i due bracci di §9.33):
+
+```
+python soliton_simulator.py --batch --nmasse 3 --sep 8 --seed 5 --passi 120 --ogni 120   --db-ogni 120 --campo-spinoriale --spinore-vivo --spinore-corretto --chi-core --calore-scal   --deparam-orologio --verlet --fork-su2 --fork-su2-mem --cs-dinamico   --csv $SCRATCH/_exp_tau50.csv --sync-db $SCRATCH/_exp_tau50.pkl --db-cleanup
+            (braccio 2.0: + `--tau-a 2.0`, csv/db `_exp_tau02`)
+```
+
+> **E il modo di verificare quale `TAU_A` ha girato NON e' rileggere questi comandi**, ma il blocco
+> **`# RUN_PARAMS`** in testa a ciascun CSV: `tau_a_over` + `leggi_attive.REGIME`.
+> **Il driver dice cosa si INTENDEVA lanciare; il CSV dice cosa E' STATO lanciato.**
+> Vedi `doc/REFERTO_driver_gira.md`.

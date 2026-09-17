@@ -1,0 +1,58 @@
+======================================================================================================================
+ESPERIMENTO SPIN_FEEDBACK con TAU_A = 2.0.  A/B A VARIABILE SINGOLA.
+======================================================================================================================
+!! SPIN_FEEDBACK NON HA UN SIGILLO. Esperimento su componente NON CERTIFICATO.
+  NON promuove nulla, il default NON cambia.
+
+--- E4 [A8]: il feedback e' DAVVERO applicato?  (la domanda che decide se l'esperimento vale) ---
+     _sfb_chiamate          OFF: None       ON: 126     
+     _sfb_applicato         OFF: None       ON: 124     
+     _sfb_off               OFF: None       ON: None    
+     _sfb_lift_corto        OFF: None       ON: 2       
+     _sfb_mask_vuota        OFF: None       ON: None    
+[PASS] E4a il feedback e' applicato (guardie solo nel transitorio) applicato 124 su 126 chiamate (98.4 %); lift_corto 2, mask_vuota 0
+     rapporto |feedback|/|coppia| (mediane dello STESSO passo):
+        MEDIO su 126 passi : 2.70562       <- e' questo il numero da leggere
+        MASSIMO           : 115.116       (un solo passo, non il tipico)
+     [A3c] i due MAX separati (coppia 0.2602, feedback 0.04145) sono presi in passi DIVERSI:
+           NON hanno quoziente, e non vanno divisi fra loro.
+[PASS] E4b il contributo NON e' trascurabile (rapporto MEDIO) feedback/coppia medio = 2.70562
+
+--- E1: STABILITA'  [BLOCCANTE] ---
+  rc: OFF=0  ON=0
+  campo      OFF (NaN, max|.|)          ON (NaN, max|.|)          
+  psi        0, 5.834                   0, 7.206                  
+  omega_s    0, 4.664e+04               0, 3.441e+04              
+  d          0, 35.37                   0, 35.56                  
+  d0         0, 50.22                   0, 77.83                  
+  phivel     0, 63.35                   0, 50.66                  
+[PASS] E1a nessun NaN/inf con feedback ON  [BLOCCANTE] NaN/inf: 0
+[PASS] E1b |nb| = 1                                   max| |nb|-1 | = 2.220e-16
+[PASS] E1c d0 > 0                                     min d0 0.05
+[PASS] E1d tau_p stabile                              _taup_cfl_max ON=0.5532155248630624  OFF=0.5626618843914434
+
+--- E2: IL CONTEGGIO DEI NODI  [il numero che decide] ---
+  TAU_A=50 (riferimento)     : 2577 nodi
+  TAU_A=2.0, feedback OFF    : 1754 nodi   (68.1 % del riferimento)
+  TAU_A=2.0, feedback ON     : 1833 nodi   (71.1 % del riferimento)
+  variazione contro il riferimento:  OFF -31.9 %    ON -28.9 %
+  -> la perdita si RIDUCE? SI', da -31.9 a -28.9
+
+--- E3: le stesse grandezze del run A ---
+  psi   max: TAU_A=50 0.064118   OFF 5.8338 (x91)   ON 7.2059 (x112)
+  d0    max: TAU_A=50 2.8776   OFF 50.22 (x17.5)   ON 77.832 (x27)
+  ramp OFF: mediana 0.47044   p05 0.16568   p95 0.64327
+  ramp ON : mediana 0.46606   p05 0.16632   p95 0.64386
+
+======================================================================================================================
+ESPERIMENTO: 6/6 PASS
+
+LE QUATTRO LETTURE, FISSATE PRIMA
+  la perdita di nodi si RIDUCE in modo netto  -> l'ipotesi REGGE. Ma NON promuovere: SPIN_FEEDBACK
+                                                va SIGILLATO prima.
+  la perdita resta UGUALE                     -> l'ipotesi CADE, e il candidato e' Z10: TAU_A e'
+                                                ANCHE la vita media della memoria spinoriale.
+  peggiora o diverge                          -> la trasmissione e' staccata per una ragione che
+                                                nessuno aveva scritto. REPERTO.
+  il contributo e' TRASCURABILE (E4)          -> ESPERIMENTO NULLO. Si dice, e non si interpretano
+                                                le altre differenze.
