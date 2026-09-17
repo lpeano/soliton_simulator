@@ -4231,3 +4231,97 @@ seme, senza nullo misurato. Lo riporto e **non lo interpreto**.
   (twist) — **già dimostrati in forma** in `doc/MAPPA_accoppiamenti_spin.md` e **mai misurati**:
   è `Z24`.
 - **Non promuove nulla.** `SPIN_FEEDBACK` resta **OFF di default**.
+
+---
+
+## 9.40 — **A quattro semi `SPIN_FEEDBACK` non produce effetto misurabile. E cadono ENTRAMBI i numeri che avevo citato**
+
+**Data:** 2026-09-18 · 8 run (4 semi × OFF/ON), `TAU_A = 2.0` in entrambi i bracci, 120 passi, con
+la cura del denominatore dentro (blob `11cf103f`). **Criterio scritto e committato PRIMA**
+(`4d4db99`), non prorogato.
+
+### P6 prima di guardare i numeri
+
+Otto run su otto conformi, `TAU_A` e `SPIN_FEEDBACK` letti **dal blocco `# RUN_PARAMS` di ciascun
+CSV**, non dal comando. Quattro semi con **entrambi** i bracci validi: il disegno appaiato ha i tre
+gradi di libertà che servono.
+
+### Il risultato: **il segno non è nemmeno concorde**
+
+| seme | n OFF | n ON | **δn** |
+|---|---|---|---|
+| 5 | 1754 | 1785 | **+31** |
+| 11 | 1947 | 1947 | **0** |
+| 17 | 1810 | 1813 | **+3** |
+| 23 | 1949 | 1890 | **−59** |
+
+```
+δ CONTEGGIO NODI :  media  −6.25    SD FRA SEMI  37.84    IC95 ±60.2    -> CONTIENE LO ZERO
+δ max|d0|        :  media +14.55    SD FRA SEMI 102.3     IC95 ±162.7   -> CONTIENE LO ZERO
+δ max|psi|       :  media +0.887    SD FRA SEMI  2.188    IC95 ±3.482   -> CONTIENE LO ZERO
+```
+
+**Recupero medio: `−0.34 %` del braccio OFF.** La media è **negativa**.
+
+È la firma di **C10**, nella sua forma più netta: su un seme un effetto apparente, su quattro il
+segno **cambia**.
+
+### I tre nulli **non si scrivono allo stesso modo**
+
+| | IC95 | risoluzione | come si scrive |
+|---|---|---|---|
+| **δ nodi** | ±60.2 su 1865 | **3.2 %** | **«non sposta il conteggio di più di ~66 nodi»** — il nullo **dice qualcosa** |
+| **δ `max\|d0\|`** | ±162.7 su 14.55 | barra **11×** il valore | **«NON MISURATO»** |
+| **δ `max\|psi\|`** | ±3.482 su 0.887 | barra **3.9×** il valore | **«NON MISURATO»** |
+
+**Tre righe che dicono «contiene lo zero» e significano due cose diverse.**
+
+### Cadono **entrambi** i numeri che avevo citato — anche quello che usavo *contro* l'ipotesi
+
+Il **`+3.0 punti`** era `1754 → 1833` su un seme, cioè **+79 nodi**: **sta fuori dall'IC95** della
+misura a quattro.
+
+E cade anche il **«costo» di +21 punti su `d0`**, anch'esso un seme. Qui `d0` fa
+`−7.5 / +160.2 / −79.2 / −15.3`: due semi migliorano, uno peggiora di 4.9 volte. La dispersione è
+tale che non si può dire niente — **il che toglie anche l'argomento contrario**: non ho una prova
+che il feedback peggiori `d0`.
+
+> **Il mio verdetto precedente — *«ha spostato il problema»* — era costruito su due numeri di un
+> seme solo, e nessuno dei due sopravvive.** La formulazione giusta è più povera e più onesta:
+> **a quattro semi, `SPIN_FEEDBACK` non produce un effetto misurabile su nessuna delle tre
+> grandezze.**
+
+### La lettura pre-registrata che si applica
+
+È la **seconda** delle quattro fissate il 2026-09-17: *«la perdita resta uguale → l'ipotesi cade.
+Candidato successivo: `TAU_A` è anche la vita media (`:2265`)»*.
+
+**L'ipotesi «il `−32 %` dipendeva dalla trasmissione staccata» CADE:** riattaccare il feedback — e
+riattaccarlo **riparato** — non lo recupera. **Il fronte si sposta su `Z10`**, che era già aperto.
+
+### ⭐ Un controllo gratis che non avevo programmato
+
+**Il braccio OFF del seme 5 dà `1754` nodi, esattamente come nell'esperimento PRE-CURA**
+(commit `1347246`). **La cura è inerte a flag spento su un run batch vero di 120 passi**, non solo
+nello stub del sigillo: il rito §2.1 confermato sul campo.
+
+*Onestà su cosa prova:* un conteggio identico dopo 120 passi su un sistema caotico è una condizione
+**necessaria e molto stringente** — basta `1e-16` per farlo divergere — **ma non è una
+dimostrazione di byte-identità**.
+
+### Cosa resta vero di questo giro
+
+**Il valore non è nel risultato dell'A/B: è nella bonifica.**
+
+1. **Il cricchetto è tolto**: `|sum(out)|/max|out|` da **1.112** a **6.5e-16**. Vale a prescindere
+   dall'A/B — **un cricchetto è un difetto anche se il termine non produce effetti misurabili**.
+2. **`G6`: la fase è cucita** (cambi di segno 0.35 % contro un nullo di 50 %).
+3. **`SPIN_FEEDBACK` ora ha un sigillo** (12/12) che prima non aveva.
+
+**Resta OFF di default.** L'A/B non dà nessuna ragione per cambiarlo.
+
+### I limiti, dichiarati
+
+Quattro semi sono il **minimo**: con 8 la risoluzione su δn passerebbe da 3.2 % a ~2 %, quindi **un
+effetto vero ma ≤ 1 % resterebbe invisibile a questo disegno**. 120 passi sono ~1/50 della
+maturazione di `ramp`. Una sola scena.

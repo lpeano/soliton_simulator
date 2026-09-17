@@ -1,0 +1,47 @@
+[TIMBRO] _semi_spin_feedback.py  sha1-BYTE a18cd12d  committato e pulito
+======================================================================================================================
+A/B `SPIN_FEEDBACK` a 4 SEMI, con la cura del denominatore. TAU_A = 2.0 in entrambi i bracci.
+======================================================================================================================
+
+--- P6: le condizioni LETTE DAI DATI (# RUN_PARAMS), non dal comando ---
+  seme     braccio  TAU_A      SPIN_FEEDBACK  seed     rc    
+  5        OFF      2.0        False          5        0      
+  5        ON       2.0        True           5        0      
+  11       OFF      2.0        False          11       0      
+  11       ON       2.0        True           11       0      
+  17       OFF      2.0        False          17       0      
+  17       ON       2.0        True           17       0      
+  23       OFF      2.0        False          23       0      
+  23       ON       2.0        True           23       0      
+
+  semi con ENTRAMBI i bracci validi: [5, 11, 17, 23]  (4)
+
+--- I NUMERI, per seme (appaiati) ---
+  seme   n OFF      n ON       delta n    d0 OFF       d0 ON        psi OFF      psi ON      
+  5      1754       1785       31         50.22        42.726       5.8338       5.3281      
+  11     1947       1947       0          41.512       201.71       6.363        9.3537      
+  17     1810       1813       3          111.39       32.164       7.1938       5.7567      
+  23     1949       1890       -59        99.629       84.374       6.2973       8.7966      
+
+--- IL CRITERIO, fissato PRIMA: IC95 appaiato, t(0.025, 3) = 3.182 ---
+  (la barra e' la dispersione FRA SEMI delle differenze appaiate, MAI la SE interna)
+  delta CONTEGGIO NODI   media      -6.25   SD FRA SEMI      37.84   IC95 +-     60.2   -> IC95 CONTIENE LO ZERO
+                           -> si scrive come LIMITE SUPERIORE: non si sposta di piu' di 66.45 nodi
+
+--- E L'ALTRO LATO DEL BILANCIO (il COSTO), con la stessa cura ---
+  delta max|d0|          media     +14.55   SD FRA SEMI      102.3   IC95 +-    162.7   -> IC95 CONTIENE LO ZERO
+                           -> si scrive come LIMITE SUPERIORE: non si sposta di piu' di 177.3 
+  delta max|psi|         media    +0.8868   SD FRA SEMI      2.188   IC95 +-    3.482   -> IC95 CONTIENE LO ZERO
+                           -> si scrive come LIMITE SUPERIORE: non si sposta di piu' di 4.368 
+
+  PER CONTESTO, e va ricordato: il `-32 %%` e' il divario TAU_A=50 -> TAU_A=2.0.
+  Qui entrambi i bracci sono a TAU_A = 2.0: si misura SOLO quanto il feedback recupera.
+  media n OFF = 1865.0 ; il recupero medio vale -0.34 % del braccio OFF
+
+======================================================================================================================
+COME SI LEGGE -- il criterio era scritto PRIMA e non si proroga
+  IC95 NON contiene lo zero -> l'effetto e' DICHIARATO, con la sua ampiezza.
+  IC95 CONTIENE lo zero     -> l'effetto NON C'E' come misurato, e si scrive come LIMITE SUPERIORE.
+                               «non si sposta di piu' di X» -- NON «nessun effetto».
+  E il bilancio si legge sui DUE lati: se il conteggio nodi migliora ma `d0` peggiora oltre la sua
+  barra, l'ipotesi non ha retto: ha spostato il problema.
