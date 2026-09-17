@@ -3033,3 +3033,62 @@ caduti**, incluso quello che aveva usato per spingere la decisione. **Nessuno de
 per intero, e la misura ha deciso entrambe le volte.** La misura su `omega_s` è stata committata
 **anche se indebolisce l'argomento di chi l'aveva chiesta** — e sono quelle che servono di più:
 impediscono a qualcuno, fra sei mesi, di rifare lo stesso ragionamento.
+
+---
+
+## 9.24 — **`TAU_A` governa DUE leggi**, e la cura proposta ne faceva una terza già bocciata da un sigillo
+
+**Il mandato voleva sostituire `TAU_A = 50` con `LAM/cs`**, il tempo-luce del solitone, per curare
+**Z9** (il kernel matura in ~5526 passi, i run sono 300-500). **La verifica preliminare l'ha
+fermato — la quarta volta su quattro.**
+
+### 1. La mappa: due tempi, un numero
+
+| riga | uso |
+|---|---|
+| `:2429` | `ramp = min(1, eta/TAU_A)` — **maturazione del kernel** (il difetto Z9) |
+| `:2226`/`:2229` | `_tau = TAU_A · max(dens/dens_rif, 0.05)` — **vita media della memoria spinoriale** |
+
+**Due tempi che non hanno nulla in comune se non il nome:** uno dice *quando un insieme di punti
+diventa un oggetto*, l'altro *quanto a lungo un nodo ricorda la propria rotazione*. **Condividono un
+numero per accidente storico.** Cambiarlo li tocca entrambi, e il secondo regge `omega_eq ∝
+sqrt(tau)`, il random walk smorzato, il plateau di `|omega_s|`.
+
+### 2. Il fatto che decide: **quella sostituzione esiste già, e il suo sigillo è FALLITO**
+
+```
+:2218   if TAU_LUCE:
+:2222       _tau = self._tempo_luce_nodo(i, j)      # d_nodo / cs_nodo
+```
+
+**`--tau-luce` fa esattamente questo.** È la **FASE 2**, il suo sigillo **non è passato**
+(`doc/SIGILLO_tau_luce_FALLITO.md`), è la voce **A** del registro e in CLAUDE.md §0 è dichiarata
+**«il collo di bottiglia del programma»** — la ragione per cui **il gate resta indietro rispetto al
+disco**.
+
+> **Cablare `TAU_A = LAM/cs` avrebbe applicato a `_tau` una sostituzione equivalente, ma senza
+> flag, senza sigillo, e dichiarata «correzione di difetto» — mentre la stessa cosa, fatta
+> esplicitamente, è un ramo non certificato.** È il presidio di §2.6: *un timbro si mette DOPO il
+> sigillo, mai prima.*
+
+### 3. Due premesse minori, corrette
+
+- **`LAM` non è «di stato»:** è `0.8` a `:146`, spostabile con `--lam`. `TAU_A = LAM/cs` **non
+  elimina il numero scelto: lo sposta.** Resta legittimo — CLAUDE.md §3 elenca `LAM` fra le scale
+  **già esistenti**, e A1 vieta le costanti **nuove** — **ma la formula corretta è «nessun parametro
+  NUOVO», non «zero parametri».**
+- **Il `git blame` non conferma la «compensazione scaduta»:** `TAU_A = 50` e la riga del `ramp`
+  vengono **dallo stesso commit** `670310fc`, messaggio generico. **Non c'è evidenza** che `TAU_A`
+  sia stato alzato per stabilizzare `omega`, quindi la modifica **non si può descrivere come
+  rimozione di una compensazione scaduta.**
+
+### 4. Cosa resta intatto
+
+**Z9 non è toccata da nulla di tutto questo.** Il `ramp` matura in ~5526 passi, i run sono 300-500,
+il peso d'arco tipico è ~1 % di quello maturo. **La diagnosi del mandato è giusta: è il VEICOLO
+della cura che non regge.**
+
+**Tre vie, tutte decisioni di regime** (`doc/REFERTO_tau_a_due_leggi.md` §6). La più pulita:
+**separare le due leggi**, con una scala distinta per la maturazione e `TAU_A` dov'è. **Ma separare
+significa stabilire che oggi due leggi condividono un numero per accidente — ed è una decisione.**
+

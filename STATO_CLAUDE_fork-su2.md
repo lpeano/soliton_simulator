@@ -984,3 +984,17 @@ dimostrazione)* **A3 non discende da A2**.
 - **A7b ha ora il suo CASO SPECULARE** in `doc/ASSIOMI.md`.
 - **Nessun codice toccato.** Blob invariato: `69ee540`.
 
+## AGGIORNAMENTO 2026-09-17 (6) — mandato `TAU_A`: **CABLAGGIO FERMATO dalla verifica preliminare 1**
+- **`TAU_A` governa DUE leggi:** il `ramp` (`:2429`, maturazione del kernel = Z9) **e** `_tau`
+  (`:2226`/`:2229`, **vita media della memoria spinoriale**). Cambiarlo le tocca entrambe.
+- **⚠ E la sostituzione su `_tau` ESISTE GIA' dietro `--tau-luce` (`:2218-2222`), il cui SIGILLO E'
+  FALLITO** (voce **A**, *«il collo di bottiglia del programma»*). Cablare `TAU_A = LAM/cs` lo
+  avrebbe fatto **senza flag e senza sigillo**.
+- **`LAM` NON e' di stato:** `0.8` a `:146`, spostabile con `--lam`. «nessun parametro NUOVO», non
+  «zero parametri».
+- **Il `git blame` NON conferma la «compensazione scaduta»:** stesso commit `670310fc`, messaggio
+  generico.
+- **Z9 RESTA APERTA e intatta.** Tre vie in `doc/REFERTO_tau_a_due_leggi.md` §6; la piu' pulita e'
+  **separare le due leggi**, ma e' una decisione di regime.
+- **Nessun codice toccato.** Blob invariato: `69ee540`.
+
