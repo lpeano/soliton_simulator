@@ -532,14 +532,35 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   individui che in quel momento hanno valori diversi della variabile: se la relazione non c'e'
   **allo stesso istante**, nessun ritardo puo' spiegarla. E il criterio si scrive **prima**, con una
   soglia numerica, e **non si proroga**: se scatta, l'ipotesi si **RITIRA**, non si raffina.
-- **`_tau` DELLA MEMORIA SPINORIALE E' ANCORATO A `TAU_A` PER IL NODO MEDIANO, PER COSTRUZIONE**
-  (riga 1913, verificato 2026-09-15). `_tau = TAU_A * max(_dens/_dens_rif, 0.05)` con
-  `_dens_rif = median(_dens[_dens > 1e-6])`: poiche' il riferimento e' la **MEDIANA**, per il nodo
-  mediano `_dens/_dens_rif ~ 1` **sempre, a qualunque livello di maturazione**. Quindi
-  `tau_mediano ~ TAU_A` (= 50, cioe' **5000 passi**) e **non scende mai**. Non e' un transitorio che
-  si esaurisce: e' un **punto fisso auto-normalizzante**. Conseguenza operativa: **far maturare il
-  sistema non puo', per costruzione, accorciare la memoria del nodo tipico** — quindi "aspettare"
-  non e' una strategia valida per uscire da un problema che dipende da quella memoria.
+- **⚠ CORRETTA il 2026-09-17 — `_tau` NON HA IL PUNTO FISSO CHE QUESTA VOCE GLI ATTRIBUIVA.**
+  **La versione precedente diceva:** *«poiche' il riferimento e' la MEDIANA, per il nodo mediano
+  `_dens/_dens_rif ~ 1` sempre... e' un punto fisso auto-normalizzante... far maturare il sistema
+  non puo', PER COSTRUZIONE, accorciare la memoria del nodo tipico»*.
+  **MISURATO** (`csv/_test_fork/_analisi7_assiomi.txt`, 4 semi, 300 passi, blob `a44adc31`):
+  `tau_mediano/TAU_A` vale **0.3698 / 0.0629 / 0.8024 / 0.7475** — un **fattore 13 fra semi**,
+  non 1.
+  **PERCHE', ed e' scritto nella voce stessa che lo negava:** `_dens_rif = median(_dens[_dens >
+  1e-6])` e' la mediana di un **SOTTOINSIEME** (il **78-88 %** dei nodi), non dell'insieme.
+  Numeratore e denominatore vivono su **popolazioni diverse**, ed e' esattamente la condizione che
+  il punto fisso di **C12** richiede e che qui **manca**. *(La stessa distinzione che
+  `doc/ASSIOMI.md` A3 chiama «errore di popolazione» — qui col segno opposto: **salva** la legge
+  invece di romperla, e la salva **per caso**.)*
+  **CONTROPROVA, che e' cio' che rende la correzione conclusiva:** ricalcolando con la mediana su
+  **tutti** i nodi, il rapporto vale **`1.000000` ESATTO su 4 semi su 4**. Il filtro e' l'**unica**
+  cosa che separa i due casi.
+  **COSA RESTA VERO:** il punto fisso **esatto** non c'e', ma il rapporto resta confinato entro un
+  fattore ~16: l'ancoraggio e' **attenuato, non abolito**.
+  **COSA NON E' PIU' SOSTENUTO:** la conseguenza operativa *«far maturare il sistema non puo', PER
+  COSTRUZIONE, accorciare la memoria del nodo tipico»*. **Non e' dimostrato il contrario** — non e'
+  stato misurato a tempi diversi — ma **la DIMOSTRAZIONE su cui poggiava non regge.**
+  **E IL PAVIMENTO `0.05` NON E' «QUASI TUTTI I NODI»:** misurato **19.58 %** in media (8.8-45.3 %)
+  a 300 passi. Il **250 = TAU_A*0.05/DT** citato altrove in questo paragrafo riguarda la **seconda
+  meta'** di un run: e' un'altra misura, e **non si trasporta a questa senza dirlo.**
+  **LEZIONE DI METODO, ed e' la ragione per cui la voce sbagliata e' sopravvissuta due giorni:**
+  la voce **citava il filtro** `[_dens > 1e-6]` e **concludeva comunque** per il punto fisso.
+  L'argomento algebrico era stato scritto **guardando la forma** `x/median(x)` e **non l'espressione
+  effettiva**. E' P1 applicato al proprio testo: **un'identita' algebrica va verificata sul codice
+  che gira, non sulla sua forma ricordata.**
 - **`correzione` HA DUE TERMINI, NON UNO** (righe **1895-1901**, verificato 2026-09-15):
   `correzione = cross(B, nb)`, e **se `CAMPO_SPINORIALE`** (ATTIVO in tutti i run del fork)
   `correzione += cross(_nb_grav(), nb)` — il torque verso il Bloch del **campo emesso spinoriale**.

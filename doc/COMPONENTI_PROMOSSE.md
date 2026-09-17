@@ -408,3 +408,68 @@ fisica alternativa — c'è un array della lunghezza sbagliata. Un `--senza-fix-
 5. **Un numero entra qui solo se è già nel repo** (stessa regola di `doc/RAMIFICAZIONI.md`).
 6. **Lo strato dei 10 già-`True`** va riesaminato voce per voce: oggi è **fisica di default non
    certificata**, ed è la parte di questo registro con più lavoro davanti.
+
+---
+
+## F — **LA BONIFICA DEL 2026-09-17**: cosa è stato corretto, cosa assolto, cosa sospeso
+
+> **Categoria D di §10 — CORREZIONI DI DIFETTO: nessun flag.** *«Un bug curato non ha un
+> interruttore.»* Nessuna di queste è una legge nuova, e nessuna è promuovibile o retrocedibile:
+> sono riparazioni. Ogni voce dichiara **quale assioma soddisfa** (`doc/ASSIOMI.md`, commit
+> `804522b`), come il mandato impone.
+
+### F.1 — BONIFICATE (cablate, con sigillo)
+
+| # | cosa | assiomi | sigillo |
+|---|---|---|---|
+| **①** | ~~`inerzia`~~ | — | **NON CABLATA**, vedi F.3 |
+| **②** | `spinta = 0.02 · self.d0 · _rep` — era `0.02 · median(d0) · rep` | **A2**, **A3** *(non A1: il `0.02` resta scelto)* | V6 2/2 |
+| **③** | `_rep`: stato **per arco** che rilassa su `tau_pp` — era istantaneo | **A5** (liv. 1), **A7** | V7 3/3, V8 3/3 |
+| **④** | plasticità viscoelastica causale `tau_p = max(t_luce, t_visco)` | **A1**, **A2**, **A3**, **A4**, **A5** | V2-V5 **8/8** |
+| **⑤** | `spin_locale()` rimossa | — (codice morto) | V9 **4/4**, byte-identico |
+| **d_arco** | `d_arco = self.d` — era `0.5·(d[i]+d[j])`, array per-arco con indici di nodo | **A3** (popolazione) | V1 **8/8** |
+
+**Il risultato che vale più degli altri:** `dt_e/tau_p` passa da **34629** a **0.456** (e **0.400**
+sul codice vivo). **`U7b`, che aveva fermato il giro precedente, è risolto** — e non con un clamp:
+con un limite posto **al confine causale**, che è la distinzione che A1 richiede.
+
+### F.2 — ASSOLTE (guardate, e lasciate stare)
+
+- **`u_nodo`** (`:2607`) — viola A3 ma **soddisfa A2**, e sta dentro `_cs_nodo`, cioè dentro ciò che
+  **definisce** la causalità (**A4**). Il suo punto fisso **non si forma** (mediana misurata `1e-4`,
+  non 1). **Non è un difetto: è il controesempio che dimostra che A3 non discende da A2** (voce
+  **Z5** del registro).
+- **mediana di `r`** in `ritmo()` — il punto fisso è **algebrico e già stabilito**. Misurarlo
+  sarebbe il test vuoto che **P4** vieta. **Non serve un run.**
+- **il `+1e-6` di `ritmo()`** e **il ramo `else` di `TAU_P`** — fuori mandato, non toccati.
+
+### F.3 — SOSPESE (la decisione non è mia)
+
+- **① `inerzia`** → voce **Z1**. Il gate che la autorizzava aveva misurato **un'altra grandezza**.
+- **⑥ `_floor_d0`** → voce **Z4** e `doc/PROPOSTA_floor_d0.md`. Tre decisioni aperte.
+
+### F.4 — LA DOTTRINA DI `spin_locale()`, trascritta perché non si perda
+
+**Questo paragrafo esiste per una ragione di regola**, non di archivio. CLAUDE.md §9 dice che *«il
+codice di una legge esclusa non si cancella mai: è l'evidenza che spiega perché esiste il suo
+sostituto»*. `spin_locale` **non era una legge esclusa** — era una misura mai cablata, che non ha
+mai prodotto un numero — ma la distinzione è sottile, e la sua parte di valore è **dottrinale**:
+
+> **Una frequenza DERIVATA si legge nel tempo proprio del luogo; la frequenza che DEFINISCE il
+> ritmo deve usare `DT`.** Lo spin è un processo che accade **dentro** la materia già formata,
+> immersa nel proprio tempo: leggerlo col tick globale lo mescolerebbe con la dilatazione
+> gravitazionale — *come misurare il decadimento di un muone col nostro orologio invece che col
+> suo*. La frequenza `f_i` di `ritmo()` è invece **fondamentale**, sta **a monte** del tempo
+> proprio, e deve usare `DT` come riferimento comune: altrimenti la dilatazione non è più
+> definibile.
+
+**È la stessa stratificazione che `A4` enuncia in forma generale**, trovata induttivamente e scritta
+in un docstring anni prima che gli assiomi esistessero. *(Il codice si recupera dal blob `87450f7`.)*
+
+### F.5 — COSA QUESTA BONIFICA **NON** HA FATTO
+
+- **Nessun run di misura, nessuna predizione numerica, nessun verdetto di fisica.** I run brevi
+  (40-60 passi) sono **parte dei sigilli** e stanno in scratchpad.
+- **Non è stato misurato quale fisica esca** da una plasticità **288 000 volte** più veloce. Serve
+  una campagna, e questo giro non la prevedeva. **È il debito che questa bonifica contrae**, ed è
+  registrato qui perché non si perda — come quello dello Step 2, che è poi stato saldato.

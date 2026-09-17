@@ -2589,3 +2589,112 @@ una direzione diversa, quindi il nullo e' **`(2/3)*(2/pi) = 0.42441`**. Col null
 acquisiranno: va **annotato**. E `u1_verso_arco_coer` **resta muta** finche' il suo nullo non e'
 misurato contro **coppie casuali** (`nb_grav` e' una media di vicinato: i nodi adiacenti sono
 correlati **per costruzione**).
+
+---
+
+## 9.19 — LA BONIFICA: **sei correzioni, quattro cablate, `U7b` risolto** — e **quattro numeri corretti, tre dei quali miei**
+
+**Che cos'era.** Un mandato di **bonifica, non di ricerca**: sei correzioni strutturali, **nessun
+run di misura**, **nessuna predizione numerica**. Il giro precedente si era **fermato** perché il
+sigillo bloccante `U7b` falliva (`dt_e/tau_p` massimo **34629** → divergenza su ~0.11 % degli
+archi). Questo giro lo risolve.
+
+**Il termine di paragone è ora sul disco.** `doc/ASSIOMI.md` **non esisteva**, e il mandato ordinava
+che ogni correzione dichiarasse quale assioma soddisfa. Ora esiste (commit `804522b`), e **si
+dichiara BOZZA**: non generativo, non indipendente, con una **violazione ammessa** (`Lam = mean(I)`
+è globale e A2 lo vieta, ma è una correzione che ha funzionato). Le sue citazioni di codice sono
+state **verificate dal disco**, non accettate: `Legge I` è davvero a `:265`.
+
+### Cosa è stato cablato, e con quale sigillo
+
+| correzione | assiomi | sigillo |
+|---|---|---|
+| **`d_arco = self.d`** — era un array **per-arco indicizzato con indici di nodo** | A3 (popolazione) | **V1 8/8** |
+| **`tau_p = max(t_luce, t_visco)`** — plasticità viscoelastica causale | A1, A2, A3, A4, A5 | **V2-V5 8/8** |
+| **`spinta = 0.02·d0·_rep`** — era `0.02·median(d0)·rep` | A2, A3 *(non A1)* | **V6 2/2** |
+| **`_rep` con memoria** su `tau_pp` — era istantaneo | A5 liv.1, A7 | **V7-V8 6/6** |
+| **`spin_locale()` rimossa** — codice morto | — | **V9 4/4**, byte-identico |
+
+**Il numero che conta: `dt_e/tau_p` da 34629 a 0.456** (**0.400** sul codice vivo). **`U7b` è
+risolto** — e non con un clamp. `tau_p >= d/cs` **non è un numero scelto**: sotto quel valore la
+forma di riposo si adatterebbe **più in fretta di quanto un segnale attraversi l'arco**. È l'unico
+valore possibile, perché oltre c'è una violazione di A5. **È la distinzione che A1 impone: «questo
+valore si può spostare?»** Il pavimento `1e-6` sull'inerzia sì (perché `1e-6` e non `1e-7`? nessuna
+ragione). Questo no.
+
+**E la plasticità era CONGELATA, non «spenta a metà»:** `tau_p` mediano passa da **6.85e+05** a
+**2.376**, cioè **288 000 volte** più corto. Il difetto era triplo in una riga sola: `ELAST_C = 100`
+è un numero scelto (A1), `median(I_nodi)` è globale (A2), e — il peggiore — `rho_arco` vive sugli
+**archi** mentre `median(I_nodi)` vive sui **nodi** (A3): su coda pesante l'arco tipico sta **8830
+volte sopra** la mediana nodale.
+
+### QUATTRO NUMERI CORRETTI DOPO L'ESECUZIONE, e **tre erano miei**
+
+Questo è il contenuto che vale di più, e va letto per primo.
+
+1. **Il `−0.349` di `d_arco` era MIO ed era UN SEME.** L'avevo scritto in `doc/REFERTO_U7_fallito.md`
+   come *«ANTICORRELATA»*, cioè come **il** fatto. Su quattro semi: **−0.3488 / +0.1444 / +0.0319 /
+   +0.3760**. **Il segno non è concorde.** Il vecchio `d_arco` non era anticorrelato: era
+   **scorrelato**. *(La diagnosi ne esce **più forte** — un'anticorrelazione stabile sarebbe comunque
+   informazione col segno sbagliato, questo è **rumore** — ma il numero non reggeva, ed è **P3**.)*
+2. **Il `+1.000 esatto` del criterio non regge attraverso `np.corrcoef`:** su un seme dà
+   `0.99999999999999978`. Non è un difetto della cura: è arrotondamento di un **calcolo**, e sotto
+   c'è un'**identità** (`d_arco` *è* `self.d`), esatta su 4/4 con `np.array_equal`. **Si testa
+   l'identità, non la sua immagine numerica.**
+3. **Il `19x` di V5b era un mio errore di AGGREGAZIONE:** facevo la media delle **mediane per seme**
+   invece della mediana della popolazione unita. Sulla popolazione unita: **4089x**, il referto
+   reggeva. **Ma aggregando si sarebbe perso un fatto:** il rapporto vale **8161 / 3 / 9384 /
+   23754**. **Su un seme su quattro gli archi sotto 1 non sono affatto il vuoto profondo.**
+   «Il vincolo scatta nel vuoto» è vero su **3 semi su 4**, non è una proprietà della forma.
+4. **E uno che corregge CLAUDE.md §9: `_tau` NON ha il punto fisso che quella voce gli attribuiva.**
+   La voce diceva *«per il nodo mediano `dens/dens_rif ~ 1` **sempre** … punto fisso
+   auto-normalizzante»*. **Misurato: 0.3698 / 0.0629 / 0.8024 / 0.7475** — fattore **13** fra semi.
+   **Perché:** `_dens_rif = median(_dens[_dens > 1e-6])` è la mediana di un **sottoinsieme** (il
+   78-88 %), quindi numeratore e denominatore vivono su popolazioni **diverse** — la condizione che
+   C12 richiede e che qui **manca**. **Controprova:** togliendo il filtro il rapporto vale
+   **`1.000000` esatto su 4 semi su 4**. **Il filtro è l'unica cosa che separa i due casi.**
+   *(Lezione: la voce **citava** il filtro e **concludeva comunque** per il punto fisso. L'argomento
+   era stato scritto guardando la **forma ricordata** `x/median(x)`, non l'espressione che gira.)*
+
+### Un contatore cablato apposta, e cosa ha trovato
+
+`peq` può essere degenere (`<= 1e-30`), e P5 impone di **contare** ogni protezione. Cablato anche il
+contatore dell'**intersezione** — *quanti scatti del vincolo causale cadono proprio lì* — invece di
+inferirla. Risultato: **0.0000 %** di `peq` degenere nei dati **maturi** (300 passi), **2.50 %** nel
+run **giovane** (40 passi), e **il 99.91 %** degli scatti causali del sistema giovane sta **proprio
+su quegli archi** (207563 su 207753). **Quindi il `max` ha due regimi:** nel maturo descrive il vuoto
+profondo, nel giovane descrive **il punto in cui `peq` non è definito**. Due cose diverse, e si
+distinguono **solo contandole**.
+
+### Due correzioni NON cablate, e perché
+
+- **① `inerzia` — il gate che la autorizzava aveva misurato un'altra grandezza.** `_rho_sorgente()`
+  **non** restituisce `|psi|²` con `CAMPO_SPINORIALE` ON (e lo è in **tutti** i run del fork):
+  restituisce `rho_spin`, il campo **emesso**. Ma `peq` insegue `|psi|²`. **Correlazione 0.80**,
+  rapporto da **0.005** a **8.8** fra p05 e p95, **massimo 7684**. GATE A aveva misurato
+  `|psi|²/peq_nodo`. **E togliendo il pavimento senza metterne uno derivato l'inerzia non "può"
+  annullarsi: si annulla** — `min = 0` esatto su 6 nodi. Le due strade (allineare le popolazioni, o
+  costruire un `peq_spin` che non esiste) sono **un cambio di modello** e **una legge nuova**:
+  entrambe eccedono una bonifica.
+- **⑥ `_floor_d0`** — i due rami violano assiomi **diversi** (`0.05` viola A1; `f·median(d0)` viola
+  A2 e A3), quindi **nessuno si salva aggiustando l'altro**, e sostituirli entrambi renderebbe
+  `PAV_COM` **inerte**. Tre decisioni aperte in `doc/PROPOSTA_floor_d0.md`.
+
+### Una domanda aperta degli assiomi, **risolta**
+
+`doc/ASSIOMI.md` chiedeva se **A3 sia un caso particolare di A2**. Il codice ha un controesempio:
+**`u_nodo = I / media_dei_vicini`** (`:2607`) **soddisfa A2** (nessuna scorciatoia globale: la media
+è sui vicini topologici) e **viola A3** (che nomina esplicitamente «media dei primi vicini»).
+**Quindi A3 è indipendente.** Ma `u_nodo` **non va corretto**: sta dentro `_cs_nodo`, cioè dentro
+ciò che **definisce** la causalità, e A4 giudica quel livello a parte.
+
+### Il debito che questa bonifica contrae
+
+**Non è stato misurato quale fisica esca da una plasticità 288 000 volte più veloce.** Serve una
+campagna, e questo giro non la prevedeva. È registrato in `doc/COMPONENTI_PROMOSSE.md` §F.5 perché
+non si perda — come quello dello Step 2, che è poi stato saldato (§9.18).
+
+**E `--elast-c` è ora un NO-OP dichiarato che stampa un avviso.** `ELAST_C` **non è stato
+cancellato**: resta marcato come inutilizzato, perché è l'evidenza che spiega perché esiste il suo
+sostituto (§9). Stessa cosa per la dottrina di `spin_locale`, trascritta in §F.4 prima di rimuovere
+il metodo.

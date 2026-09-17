@@ -1,0 +1,86 @@
+======================================================================================================================
+(7) ANALISI -- quattro grandezze contro A1/A2/A3. NESSUN CABLAGGIO.
+======================================================================================================================
+
+--- (a) `_tau` (:2150-2151)  TAU_A * max(dens/median(dens), 0.05) ---
+  ASSIOMI: A2 (median globale su percorso fisico) + A3 (normalizzata sulla PROPRIA mediana)
+           + A3b (pavimento 0.05).
+  tau_mediano / TAU_A  per seme: ['0.3698', '0.0629', '0.8024', '0.7475']
+  frazione AL PAVIMENTO (dens/rif <= 0.05): ['13.52 %', '45.31 %', '8.78 %', '10.73 %']   media 19.58 %
+  CONTROPROVA -- la stessa quantita' con la mediana su TUTTI i nodi: ['1.000000', '1.000000', '1.000000', '1.000000']
+
+  !! DUE COSE CHE AVEVO SCRITTO E CHE LA MISURA SMENTISCE. LA SECONDA CORREGGE CLAUDE.md par.9.
+
+  (1) "il pavimento e' il comportamento di quasi tutti i nodi": FALSO a 300 passi. Misurato
+      19.58 % in media (8.8 % - 45.3 %). E' una frazione grande, non la maggioranza. La voce di
+      par.9 che parla del pavimento riguarda la SECONDA META' di un run, ed e' un'altra misura:
+      non si trasporta a questa senza dirlo.
+
+  (2) IL PUNTO FISSO DI `_tau` NON SI FORMA, e par.9 dice che si forma. La voce dice:
+      "poiche' il riferimento e' la MEDIANA, per il nodo mediano dens/dens_rif ~ 1 SEMPRE ...
+       e' un PUNTO FISSO auto-normalizzante".
+      MISURATO: 0.3698 / 0.0629 / 0.8024 / 0.7475 -- un fattore 13 fra semi, non 1.
+      PERCHE', ed e' visibile nella riga :2150: il riferimento NON e' la mediana dell'insieme,
+      e' la mediana di un SOTTOINSIEME -- `median(_dens[_dens > 1e-6])`, cioe' il 78-88 % dei nodi.
+      Numeratore e denominatore vivono su popolazioni DIVERSE, ed e' esattamente la condizione che
+      il punto fisso di C12 richiede e che qui manca (la stessa distinzione che A3 chiama
+      "errore di popolazione", qui con segno opposto: qui SALVA invece di rompere).
+      LA CONTROPROVA SOPRA LO DIMOSTRA: togliendo il filtro il rapporto vale 1.000000 ESATTO su
+      4 semi su 4. Il filtro e' l'unica cosa che separa i due casi.
+      COSA RESTA VERO E COSA NO: il punto fisso ESATTO non c'e'. Ma il rapporto resta confinato
+      entro un fattore ~16, non libero su ordini di grandezza: l'ancoraggio e' ATTENUATO, non
+      abolito. E la conseguenza operativa di par.9 -- "far maturare il sistema non puo', PER
+      COSTRUZIONE, accorciare la memoria del nodo tipico" -- NON E' PIU' SOSTENUTA DA QUESTO
+      ARGOMENTO. Non sto affermando il contrario: non l'ho misurato. Sto dicendo che la
+      DIMOSTRAZIONE su cui poggiava non regge, e serve una misura a tempi diversi.
+
+--- (b) `ZETA_LOC` (:3185-3187)  ZETA_M / (1 + max(rho/median(rho) - 1, 0)) ---
+  ASSIOMI: A2 (median globale) + A3 (propria mediana) -- ma la POPOLAZIONE e' corretta:
+           `rho` e `median(rho)` vivono ENTRAMBI sugli archi. Cfr. il difetto di
+           `fattore_elasticita`, dove NON era cosi'.
+  zeta_loc mediano per seme: ['1.0000', '1.0000', '1.0000', '1.0000']   (ZETA_M = 1.0)
+  frazione con eccesso ESATTAMENTE 0 (zeta_loc = ZETA_M): ['50.00 %', '50.00 %', '50.00 %', '50.00 %']   media 50.00 %
+  LETTURA: per meta' degli archi lo smorzamento "locale" vale ESATTAMENTE il valore
+  globale ZETA_M -- e' il 50 % per DEFINIZIONE di mediana, non un fatto misurato. Su quella meta'
+  la legge non e' locale: e' la costante. NB: ZETA_LOC e' OFF di default (:250), quindi questo
+  NON tocca nessun run committato -- e' un difetto DORMIENTE.
+
+--- (c) `u_nodo` (:2607)  I / media_dei_VICINI  -- IL CASO CHE DECIDE UNA DOMANDA APERTA ---
+  ASSIOMI: A2 SODDISFATTO (la media e' sui vicini topologici: nessuna scorciatoia globale).
+           A3 VIOLATO (e' una statistica di POSIZIONE del proprio intorno, e A3 nomina
+           esplicitamente "media dei primi vicini").
+  u_nodo mediano per seme: ['0.0001', '0.0002', '0.0002', '0.0001']
+  frazione sopra 1       : ['0.1705', '0.2022', '0.1552', '0.1812']
+  LETTURA -- E' LA RISPOSTA ALLA DOMANDA "APERTO #2" DI doc/ASSIOMI.md:
+  la domanda era se **A3 sia un caso particolare di A2**. `u_nodo` SODDISFA A2 e VIOLA A3.
+  Quindi NO: A3 e' INDIPENDENTE da A2, e un solo controesempio basta a stabilirlo.
+  !!  MA `u_nodo` NON e' percio' un difetto da correggere: sta dentro `_cs_nodo`, cioe' dentro cio'
+  che DEFINISCE la struttura causale, e A4 dice che quel livello si giudica a parte. Inoltre la
+  mediana misurata NON e' 1 (il punto fisso di A3 non si forma, perche' la media dei vicini non e'
+  una statistica dello stesso insieme cui `I` appartiene). **Serve a decidere una questione sugli
+  assiomi, non a giustificare una modifica.**
+
+--- (d) mediana di `r` in `ritmo()` (:1939-1943) ---
+  ASSIOMI: A2 (`med = median(|f|)` globale) + A3 (punto fisso).
+  NON MISURABILE DAI .pkl: `f` e' la frequenza d'interferenza, interna al passo, e non e' salvata.
+  MA IL PUNTO FISSO E' ALGEBRICO, non statistico, ed e' GIA' STABILITO (par.9, presidio C12):
+  `x = f/median(|f|)` e `r_normalized = r/r_unit` con `r_unit` il valore a `x = 1` implicano
+  `median(r) = 1.0 ESATTAMENTE`, con qualunque orologio. Il sigillo S4 della cura di
+  `_psi_spin_prec` confronto' proprio quelle due mediane e diede `z = 0.00`: NON "nessun effetto",
+  ma NESSUNA MISURA.
+  NON SERVE UN RUN PER CONFERMARLO, e farne uno sarebbe il test vuoto che P4 vieta.
+
+======================================================================================================================
+SINTESI -- quattro casi, TRE esiti diversi, e la differenza conta:
+
+  _tau      DIFETTO ATTIVO      A2 (mediana globale) + A3b (pavimento al 19.6 %). MA il PUNTO
+                                FISSO di A3 NON si forma, contro quanto par.9 afferma: il filtro
+                                `_dens > 1e-6` salva la legge per caso. Vedi (a). Percorso VIVO.
+  ZETA_LOC  DIFETTO DORMIENTE   A2+A3, meta' degli archi al valore globale per definizione.
+                                Flag OFF di default: nessun run committato ne risente.
+  u_nodo    NON UN DIFETTO      viola A3 ma soddisfa A2 ed e' dentro `_cs_nodo` (A4).
+                                Il suo valore e' METODOLOGICO: dimostra che A3 NON discende da A2.
+  median r  GIA' STABILITO      punto fisso ALGEBRICO. Non serve misurarlo; misurarlo e' il test
+                                vuoto che P4 vieta.
+
+NESSUNA DI QUESTE E' STATA CABLATA. (7) era analisi, e resta analisi.
