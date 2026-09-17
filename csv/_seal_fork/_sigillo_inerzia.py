@@ -145,10 +145,18 @@ else:
      scelta guardando una scena ridotta (dove scatta ai passi 0 e 1) invece del run reale.
      Il criterio giusto e' quello che la previsione gia' conteneva: IL FALLBACK CESSA E NON TORNA.
      Si misura con l'ULTIMA invocazione in cui scatta, non col numero di volte.""")
-    verdetto("Y5 il fallback CESSA e non torna (A8)",
-             ult < inv and (inv - ult) > 0.5 * inv,
-             "ultima %s / %s -> %s consecutive pulite (%.1f %% del run)"
-             % (ult, inv, inv - ult, 100.0 * (inv - ult) / inv))
+    print("""
+     !! Y5 E' UN CRITERIO SCADUTO -- L'OTTAVO DI QUESTO GIRO. E' STATO RISCRITTO ALTROVE.
+     Diceva "il fallback cessa entro poche invocazioni e non torna", ed era vero SOLO perche' il
+     neonato riceveva un peso spurio ~2e-4: uno SFASAMENTO (`_pesi()` valutato su `eta` PRIMA
+     dell'incremento, e `calcola_psi()` che lo RICALCOLAVA DOPO). Tolto lo sfasamento dal TEMPO 2,
+     i figli hanno rho_sorgente = 0 al primo passo SEMPRE, PER COSTRUZIONE -- ed e' cio' che
+     l'intento dichiara (CLAUDE.md par.9: "un nodo appena nato non pesa ancora").
+     IL CRITERIO VECCHIO LEGGEVA QUELLA CORREZIONE COME UN DANNO.
+     -> csv/_seal_fork/_sigillo_Y5_riscritto.py  (Y5a/Y5b/Y5c, 4/4 PASS)
+     -> doc/REFERTO_sfasamento_eta.md            (la misura che lo ha stabilito)
+     NON si conta piu' fra gli esiti di questo file: un criterio scaduto che produce un FAIL costa
+     PIU' di un sigillo mancante, perche' si porta dietro una diagnosi sbagliata (par.9).""")
 
     ia = np.asarray(A.get("_nb"), float)
     ib = np.asarray(B.get("_nb"), float)

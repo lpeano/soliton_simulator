@@ -3483,3 +3483,93 @@ stato troppo nuovo, ma **due letture della stessa grandezza a istanti diversi**.
 **E le quattro sono emerse TUTTE per caso, indagando altro.** La scansione sistematica — *quali
 altre grandezze sono lette in più punti del passo?* — **non è mai stata fatta** (voce **Z19**).
 
+---
+
+## 9.31 — **`Y5` riscritto, `Q8` sbloccato.** E la quarta volta dello stesso difetto ha una voce propria
+
+**Il codice non è stato toccato.** Si è riscritto un **criterio** e registrato un **fatto**.
+
+### Perché il vecchio `Y5` era scaduto — l'ottavo di questo giro
+
+Diceva *«il fallback dello sfondo cessa entro poche invocazioni e non torna»*, **ed era vero solo
+perché il neonato riceveva un peso spurio `~2e-4`** — lo sfasamento `eta` misurato in §9.30. Tolto
+quello, i figli hanno `rho_sorgente = 0` al primo passo **sempre, per costruzione**, ed è **ciò che
+l'intento dichiara** (§9: *«un nodo appena nato non pesa ancora»*).
+
+> **Il criterio vecchio leggeva quella CORREZIONE come un danno.**
+> **`Q8` non ha intercettato un guasto: ha intercettato una correzione che il criterio non sapeva
+> riconoscere. Il presidio ha funzionato — anche nel dirci che il problema era lui.**
+
+### Il criterio nuovo, e **come può fallire**
+
+| | cosa misura | esito |
+|---|---|---|
+| **Y5.0** | gli indici dei nodi sono stabili (`n` monotono) | **PASS** — da 80 a 488, mai decrescente |
+| **Y5a** | il fallback scatta **solo** su nodi di grado 2 (firma mitosi) | **PASS** — grado min 2, mediana 2, **max 2** |
+| **Y5b** | **nessun nodo maturo** cade nel fallback | **PASS** — 0 nodi con `eta` sopra metà della mediana |
+| **Y5c** | ogni nodo resta in fallback **una sola invocazione** | **PASS** — «1 inv → 48 nodi», peggiore **1** |
+
+```
+ETA dei caduti : min 0.0022  mediana 0.0138  max 0.0141     (mediana di TUTTI: 0.2332)
+```
+
+**Diciassette volte più giovani, grado esattamente 2, e ciascuno per un solo passo.**
+
+**E il criterio PUÒ fallire**, che è la ragione per cui sostituisce il vecchio: basta **un** nodo
+maturo in fallback (`Y5b`) — nulla nella forma del codice lo impedisce — o **un** figlio che ci
+resti due invocazioni (`Y5c`), che significherebbe `eta` non cresciuta o campo non acceso al passo
+dopo. **Sarebbe un difetto nuovo.** Il vecchio `Y5` misurava invece *«quando cessa»*, che dipendeva
+**dallo sfasamento**: era un criterio scritto sul difetto, non sulla legge.
+
+### La voce nuova: **il tempo di valutazione è esso stesso una grandezza fisica**
+
+| caso | cosa era sfasato | quanto scattava | conseguenza |
+|---|---|---|---|
+| `_cs_nodo_prev` | cache scartata a ogni mitosi | **71.88 %** | `cs = CS_M` costante |
+| `_psi_spin_prec` | cache non estesa alla mitosi | **95.33 %** | FASE 5 / 4π inerte per mesi |
+| i due `theta` (C19) | tempo di coordinata vs proprio | — | un numero che si muove per la convenzione |
+| lo sfasamento `eta` | pesi valutati a un `eta` diverso | **sempre, sui neonati** | il neonato pesava `2e-4` invece di 0 |
+
+**Nessuno di questi produceva un errore.** Il sistema girava, i sigilli passavano, i numeri
+sembravano ragionevoli. **E ogni volta si stava misurando un'altra fisica.**
+
+**E il collegamento ad A6, che mancava:** **A6 si viola anche senza toccare la formula.** La
+violazione può stare nell'**ordine delle chiamate** invece che nella forma della legge — **e allora
+non si vede leggendo la formula**. Chi applica A6 non deve guardare solo *quali* grandezze entrano
+in una legge, ma **a quale tempo ciascuna è valutata, e se quel tempo è garantito dalla STRUTTURA o
+solo dall'ORDINE**. *(Caso reale: l'inerzia legge `peq`, `cs` e `d` prima che vengano aggiornati —
+corretto **oggi**, ma si romperebbe **in silenzio** se il blocco venisse spostato. Voce **Z17**.)*
+
+**Tutte e quattro sono emerse per caso, indagando altro. La scansione sistematica non è mai stata
+fatta** (**Z19**).
+
+### Cosa chiude questo giro
+
+**Un difetto che il codice si portava da mesi, chiuso senza toccare una riga di fisica** — perché la
+correzione era già stata fatta dal TEMPO 2, e mancava solo un criterio che sapesse riconoscerla.
+
+### ⚠ E il rigiro ha trovato la seconda cosa: **`Q1` è il NONO criterio scaduto**
+
+```
+V1 8/8 PASS · V2-V5 8/8 PASS · V6-V10 12/12 PASS · Y 10/10 PASS
+Q0,Q3-Q8 7/7 PASS · Y5 riscritto 4/4 PASS
+Q1-Q2  2/3  ->  FAIL
+```
+
+```
+[FAIL] Q1a c'e' CONFRONTO (stesso N)   0 array confrontati, 38 con shape diverse, nodi 1669 vs 1850
+[PASS] Q1b BYTE-IDENTICO: 0.000e+00    su 0 array     <- MANCANZA DI CONFRONTO
+```
+
+**Il presidio ha funzionato in modo esemplare:** `Q1b` avrebbe dato un **falso PASS** — uno zero su
+**zero array confrontati** — e **`Q1a` l'ha intercettato**, perché guarda le shape **prima** di
+leggere lo zero. *(È il caso catalogato in §9: «`max|A-B| = 0.000e+00` può significare "nessun
+confronto"».)*
+
+**Il riferimento di `Q1` è il blob `69ee5403`, cioè PRIMA del TEMPO 2**, e il TEMPO 2 **cambia le
+traiettorie per costruzione** (`Q4`: 1669 nodi contro 1850). **La domanda di `Q1` — "i contatori
+sono inerti?" — ha già avuto risposta allora**, e oggi la stessa misura risponde a un'altra domanda.
+**Identico a `T1` del sigillo `--tau-luce`.**
+
+**Non l'ho riscritto:** riscrivere un criterio va fatto **con un mandato proprio**, ed è la regola
+che questo stesso giro ha appena applicato a `Y5`.

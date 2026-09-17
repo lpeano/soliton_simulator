@@ -10,12 +10,12 @@ Y0-Y10 -- INERZIA DIMENSIONALE:  max((rho/peq_nodo) * (d/cs)^2, 1e-6)
 [PASS] Y6 `_fatt_cs` NON entra piu' nell'inerzia (no cs^-4) prima 1 uso nell'inerzia, ora 0; resta solo come diagnostico
 
 --- (Y7) A6: nessuna grandezza dell'inerzia viene dallo stato CORRENTE  [BLOCCANTE] ---
-   :2197   inerzia = np.maximum(_contrasto * _T2, 1e-6)
-   :3178   self._passo_spinoriale(i, j, w, dt_n_s
-   :3254   self._cs_nodo_prev = cs_nodo.copy()
-   :3263   nuovi = np.isnan(self.peq)
-   :3359   self.d = np.maximum(self.d + dts * self.vd, 0.05)
-[PASS] Y7 peq, cs e d sono aggiornati DOPO il punto dell'inerzia  [BLOCCANTE] inerzia a :3178; peq :3263, cs :3254, d :3359 -- tutti DOPO
+   :2236   inerzia = np.maximum(_contrasto * _T2, 1e-6)
+   :3217   self._passo_spinoriale(i, j, w, dt_n_s
+   :3293   self._cs_nodo_prev = cs_nodo.copy()
+   :3302   nuovi = np.isnan(self.peq)
+   :3398   self.d = np.maximum(self.d + dts * self.vd, 0.05)
+[PASS] Y7 peq, cs e d sono aggiornati DOPO il punto dell'inerzia  [BLOCCANTE] inerzia a :3217; peq :3302, cs :3293, d :3398 -- tutti DOPO
 
 --- (Y2) RIDUZIONE AL LIMITE, condizione definita PRIMA di girarla ---
   se  peq_nodo == rho_sorgente  e  (d/cs)^2 == 1,  allora  contrasto == 1  e
@@ -45,7 +45,18 @@ Y0-Y10 -- INERZIA DIMENSIONALE:  max((rho/peq_nodo) * (d/cs)^2, 1e-6)
      scelta guardando una scena ridotta (dove scatta ai passi 0 e 1) invece del run reale.
      Il criterio giusto e' quello che la previsione gia' conteneva: IL FALLBACK CESSA E NON TORNA.
      Si misura con l'ULTIMA invocazione in cui scatta, non col numero di volte.
-[FAIL] Y5 il fallback CESSA e non torna (A8)                ultima 66 / 66 -> 0 consecutive pulite (0.0 % del run)
+
+     !! Y5 E' UN CRITERIO SCADUTO -- L'OTTAVO DI QUESTO GIRO. E' STATO RISCRITTO ALTROVE.
+     Diceva "il fallback cessa entro poche invocazioni e non torna", ed era vero SOLO perche' il
+     neonato riceveva un peso spurio ~2e-4: uno SFASAMENTO (`_pesi()` valutato su `eta` PRIMA
+     dell'incremento, e `calcola_psi()` che lo RICALCOLAVA DOPO). Tolto lo sfasamento dal TEMPO 2,
+     i figli hanno rho_sorgente = 0 al primo passo SEMPRE, PER COSTRUZIONE -- ed e' cio' che
+     l'intento dichiara (CLAUDE.md par.9: "un nodo appena nato non pesa ancora").
+     IL CRITERIO VECCHIO LEGGEVA QUELLA CORREZIONE COME UN DANNO.
+     -> csv/_seal_fork/_sigillo_Y5_riscritto.py  (Y5a/Y5b/Y5c, 4/4 PASS)
+     -> doc/REFERTO_sfasamento_eta.md            (la misura che lo ha stabilito)
+     NON si conta piu' fra gli esiti di questo file: un criterio scaduto che produce un FAIL costa
+     PIU' di un sigillo mancante, perche' si porta dietro una diagnosi sbagliata (par.9).
 
   controllo positivo: le traiettorie DEVONO differire
      nodi PRE 2009, nodi POST 2025
@@ -55,7 +66,7 @@ Y0-Y10 -- INERZIA DIMENSIONALE:  max((rho/peq_nodo) * (d/cs)^2, 1e-6)
 [PASS] Y10c la plasticita' resta stabile                    _taup_cfl_max = 0.46677117340743
 
 ========================================================================================================================
-Y: 10/11 PASS -> FAIL
+Y: 10/10 PASS -> PASS
 
 COSA QUESTO SIGILLO NON DICE
 ----------------------------

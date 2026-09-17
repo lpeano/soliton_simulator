@@ -83,6 +83,18 @@ precedenza va motivata, non assunta.**
 connessione costruita dagli stessi stati che trasporta e' **uno specchio**. *(Sta qui perche' e' il
 piu' usato, ma e' di natura diversa dagli altri.)*
 
+**⚠ IL COLLEGAMENTO CHE MANCAVA (2026-09-17): A6 SI VIOLA ANCHE SENZA TOCCARE LA FORMULA.**
+A6 dice che una funzione **istantanea** di X non puo' agire su X. **Ma la violazione puo' stare
+nell'ORDINE DELLE CHIAMATE invece che nella forma della legge — e allora NON SI VEDE LEGGENDO LA
+FORMULA.** **Quattro casi misurati** (`doc/RAMIFICAZIONI.md`, *«il tempo di valutazione e' esso
+stesso una grandezza fisica»*): `_cs_nodo_prev` (**71.88 %**), `_psi_spin_prec` (**95.33 %**), i due
+`theta` (**C19**), lo **sfasamento `eta`** (il neonato pesava `2e-4` invece di 0).
+**Conseguenza per chi applica A6:** non basta guardare *quali* grandezze entrano in una legge.
+**Va guardato A QUALE TEMPO ciascuna e' valutata, e se quel tempo e' garantito dalla STRUTTURA o
+solo dall'ORDINE.** *(Un caso reale di garanzia d'ordine: l'inerzia legge `peq`, `cs` e `d` prima
+che vengano aggiornati — e' corretto **oggi**, ma si romperebbe **in silenzio** se il blocco venisse
+spostato. Voce **Z17**.)*
+
 ## A7 — CONSERVAZIONE E STATO
 **Una grandezza senza stato non puo' conservare nulla.** Un processo che **aggiunge** senza
 **togliere**, e senza memoria, e' un **cricchetto**: il rumore vi si integra in crescita

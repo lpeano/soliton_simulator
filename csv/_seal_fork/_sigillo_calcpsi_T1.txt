@@ -3,16 +3,16 @@ Q1-Q2 -- TEMPO 1: contare il fallback `w is None` di calcola_psi(). NESSUNA LEGG
 ======================================================================================================================
 
 --- (Q1) i contatori sono INERTI?  [BLOCCANTE] ---
-  chiavi nuove nel DB (i contatori): ['_calcpsi_chiamate', '_calcpsi_w_none']
-  PRESIDIO, riga dei conteggi PER PRIMA: nodi PRE 1669, nodi POST 1669
-  array con SHAPE UGUALI effettivamente confrontati: 38   (shape diverse: 0)
-[PASS] Q1a c'e' CONFRONTO (stesso N, shape uguali)        38 array confrontati
-[PASS] Q1b BYTE-IDENTICO: max|A-B| = 0.000e+00  [BLOCCANTE] max = 0.000e+00 (peggiore: -) su 38 array
+  chiavi nuove nel DB (i contatori): ['_calcpsi_chiamate', '_calcpsi_w_none', '_por_invoc', '_porta_B', '_porta_B_nan', '_porta_B_nonpos', '_porta_B_ultima', '_sfondo_ko_con_archi', '_sfondo_ko_peq', '_sfondo_ko_rho', '_sfondo_ko_senza_archi', '_sfondo_ko_ultima_peq', '_sfondo_ko_ultima_rho']
+  PRESIDIO, riga dei conteggi PER PRIMA: nodi PRE 1669, nodi POST 1850
+  array con SHAPE UGUALI effettivamente confrontati: 0   (shape diverse: 38)
+[FAIL] Q1a c'e' CONFRONTO (stesso N, shape uguali)        0 array confrontati
+[PASS] Q1b BYTE-IDENTICO: max|A-B| = 0.000e+00  [BLOCCANTE] max = 0.000e+00 (peggiore: -) su 0 array
 
 --- (Q2) il contatore LEGGE? (controllo positivo dello STRUMENTO) ---
   chiamate TOTALI a calcola_psi : 134
-  di cui con `w is None`        : 134   (100.00 %)
-[PASS] Q2 il contatore legge > 0                          _calcpsi_w_none = 134
+  di cui con `w is None`        : 42   (31.34 %)
+[PASS] Q2 il contatore legge > 0                          _calcpsi_w_none = 42
 
 --- LA TABELLA PER CHIAMANTE ---
   chiamante:riga                     volte      posizione   
@@ -25,10 +25,10 @@ Q1-Q2 -- TEMPO 1: contare il fallback `w is None` di calcola_psi(). NESSUNA LEGG
   (*"Non ricalcolare psi in punti diversi del passo: quello introdurrebbe letture miste t/t+1"*).
   Quelli FUORI - diagnostica, setup, analisi - possono restare, e vanno DICHIARATI tali, non
   corretti per simmetria.
-  media per passo: 3.35 chiamate, di cui 3.35 con w is None
+  media per passo: 3.35 chiamate, di cui 1.05 con w is None
 
 ======================================================================================================================
-Q1-Q2: 3/3 PASS -> PASS
+Q1-Q2: 2/3 PASS -> FAIL
 
 COSA QUESTO SIGILLO NON DICE
 ----------------------------

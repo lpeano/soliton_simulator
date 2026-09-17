@@ -3,9 +3,9 @@ Q0, Q3-Q8 -- TEMPO 2: `w` passato ai due chiamanti ESEGUITI dentro step
 ======================================================================================================================
 
 --- (forma) i tre punti nel sorgente ---
-   :3013   psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi(w)
-   :3054   psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()
-   :3138   psi_sync = psi_t if SYNC_UPDATE else self.calcola_psi(w)
+   :3052   psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi(w)
+   :3093   psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()
+   :3177   psi_sync = psi_t if SYNC_UPDATE else self.calcola_psi(w)
 [PASS] forma: DUE chiamanti passano `w`, UNO no (l'elif) con w: 2, senza: 1 (il terzo e' il ramo elif, DICHIARATO)
 
 --- (Q4) CONTROLLO POSITIVO: coi valori veri i due DEVONO differire ---
