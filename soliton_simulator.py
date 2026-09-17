@@ -941,9 +941,35 @@ GAMMA_TURBO = 1.0       # [DIAGNOSTICO, NON PERCORSO CERTIFICATO] amplificatore 
                         # NB: `:5318` (diaglog) RE-IMPLEMENTA cs inline e NON chiama `_cs_nodo`:
                         # sotto turbo quella colonna riporta il cs NON turboato. Non usarla.
                         # Richiede --cs-dinamico (senza, cs = CS_M costante e K non morde).
-SPIN_FEEDBACK = False   # FEEDBACK LOCALE SPINORE->ARCHI: usa l'overlap complesso dei lift sugli archi
-                        # come flusso di fase antisimmmetrico. Richiede --spinore-vivo; default off
-                        # per A/B. Non impone alcuna cucitura o olonomia: la misura deve emergere.
+SPIN_FEEDBACK = True    # FEEDBACK LOCALE SPINORE->ARCHI: usa l'overlap complesso dei lift sugli archi
+                        # come flusso di fase antisimmetrico. Il braccio OFF e' --senza-spin-feedback.
+                        # ⚠ ON DI DEFAULT dal 2026-09-18, PER DECISIONE DI LUCA E SU BASI DI FORMA,
+                        # NON perche' una misura lo abbia mostrato migliore. La distinzione va tenuta:
+                        # l'A/B a QUATTRO SEMI (`doc/REFERTO_semi_spin_feedback.md`) NON ha mostrato
+                        # effetto -- delta nodi media -6.25, SD fra semi 37.84, IC95 +-60.2, e il
+                        # segno NON era concorde (+31 / 0 / +3 / -59).
+                        # LE BASI DI FORMA, quelle si' misurate:
+                        #   - il cricchetto e' CURATO: antisimmetria da 1.112 a 6.5e-16, QUINDICI
+                        #     ordini, con due conferme indipendenti (|sum(ceduto)+sum(ricevuto)| =
+                        #     0.000e+00; imag<i|j>+imag<j|i> = 2.2e-16);
+                        #   - G6: LA FASE E' CUCITA -- `imag(ov)` e' CONTINUO fra passi consecutivi
+                        #     (cambi di segno 0.0035 contro un NULLO di 0.50): e' una CORRENTE
+                        #     orientata vera, non rumore di gauge. Nessuno l'aveva mai verificato;
+                        #   - il sigillo esiste: 12/12 (`csv/_seal_fork/_sigillo_denominatore.txt`).
+                        # E LA RAGIONE FISICA: un settore che evolve e da' il tempo ma non retroagisce
+                        # sulla geometria e' un motore acceso con la trasmissione staccata -- ed e'
+                        # l'unica trasmissione staccata senza una ragione sostanziale (TW_SPINORE ha
+                        # un difetto MISURATO; CHI_DA_SPINORE spegnerebbe CHI_BASC, che e' sana).
+                        # ⚠⚠ PREREQUISITO, E NON E' AUTOMATICO: richiede SPINORE_VIVO **e** SPINORE.
+                        # `SPINORE_VIVO` e' False di default, quindi in un run che non passa
+                        # --spinore-vivo questo flag e' ACCESO MA INERTE. Non in silenzio: l'avviso
+                        # e' a `_applica_flag` (cerca "[spin-feedback]").
+                        # REGOLA DI CONDOTTA (Luca, 2026-09-18): se un problema emerge col feedback
+                        # attivo, NON si spegne il feedback -- si isola, si misura, si corregge la
+                        # causa. Spegnerlo sarebbe curare il sintomo nascondendo la fisica.
+                        # CRITERIO DI RETROCESSIONE (par.10, scritto ORA e non dopo): torna a OFF di
+                        # default solo con un riscontro COMMITTATO che mostri un difetto DEL TERMINE
+                        # -- non con un run che va male, e non per ripensamento.
 SPIN_POSITIVI = False   # MISURA DELLO SPINORE DI GRUPPO POSITIVO: seleziona perc_chi=+1 solo nella
                         # diagnostica per-massa. Non modifica la dinamica dei solitoni.
 CHI_CORE = False        # CHIRALITA' DEL CORE LOCALE: il segno emerge da tutti i nodi sopra
@@ -5581,7 +5607,33 @@ def _applica_flag(a):
         print("[orologio-segno] AVVISO: _phc (orologio pura-fase) vive nel ramo --deparam-orologio; senza di esso la firma e' INERTE (no-op). Aggiungere --deparam-orologio per attivarla.")
     if OROLOGIO_SEGNO:
         print("[orologio-segno] MOD 5.3c: VERSO dell'orologio de Broglie interno _phc firmato da s_k=sign(perc_chi) STABILE (materia exp-, antimateria exp+, tempi speculari); |omega_clk| INVARIATA (S3b: solo verso). Fase globale: tocca SOLO il segno, non nb/gravita'/eta. OFF/tutta-materia = esatto.")
-    SPIN_FEEDBACK = bool(getattr(a, "spin_feedback", False)) # feedback locale overlap spinoriale: default off
+    # [PROMOZIONE 2026-09-18] ON di default. `--spin-feedback` resta accettato come NO-OP
+    # DICHIARATO (non rompe i comandi gia'scritti); il braccio OFF e' `--senza-spin-feedback`,
+    # che e' un DIAGNOSTICO. E' la stessa forma della promozione di STEP2_OROLOGIO: quando si
+    # ribalta un default si cercano TUTTI i punti che ottenevano il vecchio comportamento per
+    # OMISSIONE, altrimenti i rami di controllo diventano duplicati del ramo di prova.
+    SPIN_FEEDBACK = not bool(getattr(a, "senza_spin_feedback", False))
+    # ⚠ AVVISO ESPLICITO SUL PREREQUISITO -- MAI UN NO-OP MUTO (P5/A8, lezione dello Step 2 e della
+    # FASE 5 inerte al 95.33 % per mesi). Il ramo e' `if SPINORE_VIVO and SPINORE and SPIN_FEEDBACK`:
+    # con `SPINORE_VIVO` False il feedback e' ACCESO MA NON GIRA, e senza questo avviso non lo
+    # direbbe nulla -- il metodo non verrebbe nemmeno chiamato, quindi nemmeno i contatori A8
+    # scatterebbero. Un flag acceso che non gira e' peggio di un flag spento.
+    if SPIN_FEEDBACK and not (SPINORE_VIVO and SPINORE):
+        _manca = [_n for _n, _v in (("--spinore-vivo", SPINORE_VIVO), ("SPINORE", SPINORE)) if not _v]
+        print(f"[spin-feedback] AVVISO: il feedback spinore->archi e' ON di default dal 2026-09-18, "
+              f"ma il suo ramo richiede SPINORE_VIVO e SPINORE, e manca {_manca}. "
+              f"IL FEEDBACK NON GIRA IN QUESTO RUN. Non e' un errore: e' dichiarato perche' un flag "
+              f"acceso e inerte e' peggio di un flag spento.", flush=True)
+    elif SPIN_FEEDBACK:
+        print("[spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. "
+              "Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: "
+              "fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' "
+              "una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.",
+              flush=True)
+    else:
+        print("[spin-feedback] SPENTO da --senza-spin-feedback: DIAGNOSTICO, non fisica alternativa. "
+              "Un run di misura con questo flag gira senza la retroazione spinore->archi, e va "
+              "dichiarato nel documento che lo usa.", flush=True)
     SPIN_POSITIVI = bool(getattr(a, "spin_positivi", False)) # selezione diagnostica perc_chi=+1
     CHI_CORE = bool(getattr(a, "chi_core", False)) # chiralità emergente del core locale
     CS_DINAMICO = bool(getattr(a, "cs_dinamico", False)) # velocita' metrica locale: default off
@@ -5991,6 +6043,11 @@ def _cli():
                         "invariante (gravita'/direzione intatte); eta/geometria = magnitudine. Vive nel ramo "
                         "--deparam-orologio (orologio pura-fase). Richiede --campo-spinoriale + --spinore-corretto. "
                         "Default off = byte-identico.")
+    p.add_argument("--senza-spin-feedback", action="store_true", dest="senza_spin_feedback",
+                   help="DIAGNOSTICO, NON FISICA ALTERNATIVA. Spegne il feedback spinore->archi, "
+                        "che dal 2026-09-18 e' ON di default (par.10). Serve agli A/B e "
+                        "all'attribuzione, non ai run di misura. NB: e' acceso PER DECISIONE e su "
+                        "basi di FORMA -- l'A/B a quattro semi NON ha mostrato un effetto.")
     p.add_argument("--spin-feedback", action="store_true", dest="spin_feedback",
                    help="FEEDBACK LOCALE SPINORE->ARCHI: la parte immaginaria dell'overlap del lift "
                         "spinoriale aggiunge una coppia antisimmmetrica alle fasi. Richiede "

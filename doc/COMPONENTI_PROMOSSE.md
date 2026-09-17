@@ -510,3 +510,81 @@ già committate** (`9c9cc43`, `3c82177`), **scritte prima**.
 **Debito aperto:** lo **0.3457 %** di nodi ancora al pavimento **non è stato caratterizzato** — non
 si sa *quali* siano.
 
+
+---
+
+## H — ⚠ **`SPIN_FEEDBACK` È ON DI DEFAULT DAL 2026-09-18 — PER DECISIONE, SU BASI DI FORMA, *NON* PER MISURA**
+
+> **QUESTA VOCE NON È IN SEZIONE A, E NON DEVE ESSERCI.** La sezione A è per le componenti promosse
+> **perché una misura le ha mostrate necessarie**. Questa **non lo è**, e la distinzione è l'unica
+> cosa che impedisce, fra sei mesi, di leggere «promosso» e intendere «misurato».
+
+**Decisione di Luca, 2026-09-18.** Dicitura che accompagna la componente ovunque venga citata:
+
+> **`SPIN_FEEDBACK` è acceso PER DECISIONE DI LUCA, su basi di FORMA — non perché una misura lo
+> abbia mostrato migliore.**
+
+### La qualifica, che va letta PRIMA delle motivazioni
+
+**L'A/B a quattro semi NON ha mostrato un effetto** (`doc/REFERTO_semi_spin_feedback.md`, commit
+`26d01ba`):
+
+```
+δ CONTEGGIO NODI :  +31 / 0 / +3 / −59      <- il segno NON è concorde
+                    media −6.25   SD FRA SEMI 37.84   IC95 ±60.2  -> contiene lo zero
+δ max|d0|  : IC95 ±162.7 su media 14.55   -> la barra è 11× il valore  -> NON MISURATO
+δ max|psi| : IC95 ±3.482 su media 0.887   -> la barra è 3.9× il valore -> NON MISURATO
+```
+
+**Recupero medio: −0.34 % del braccio OFF.** La media è **negativa**.
+
+### Le basi di FORMA — queste sì, misurate
+
+1. **Il cricchetto è CURATO.** Antisimmetria da **1.112** a **6.5e-16** — **quindici ordini** — con
+   due conferme indipendenti: `|sum(ceduto)+sum(ricevuto)| = 0.000e+00`,
+   `imag<i|j>+imag<j|i> = 2.2e-16`.
+2. **`G6`: la fase è CUCITA.** `imag(ov)` è **continuo fra passi consecutivi**: cambi di segno
+   **0.0035** contro un **nullo di 0.50**. **È una corrente orientata vera, non rumore di gauge** —
+   ed è la misura che **non aveva mai fatto nessuno**. *(Da leggere accanto al marchio della BUSSOLA
+   sulle `berry_*`, morte perché **telescopano**: qui **non** telescopa.)*
+3. **Il sigillo esiste: 12/12** (`csv/_seal_fork/_sigillo_denominatore.txt`).
+4. **La ragione fisica di partenza:** *un settore che evolve e dà il tempo ma non retroagisce sulla
+   geometria è un motore acceso con la trasmissione staccata* — ed è **l'unica trasmissione staccata
+   senza una ragione sostanziale** (`TW_SPINORE` ha un **difetto misurato**; `CHI_DA_SPINORE`
+   spegnerebbe `CHI_BASC`, che l'audit giudica **sana**).
+
+### Contro i tre criteri di §10 — **onestamente, ne soddisfa due su tre**
+
+| criterio | esito |
+|---|---|
+| ① **derivata, non tarata** | **SÌ** — `imag(<ψ_i\|ψ_j>)`, zero coefficienti. Dopo la cura **zero denominatori** |
+| ② **sigillata, con controllo positivo** | **SÌ** — 12/12, `G3` è il controllo positivo |
+| ③ **la sua assenza è un DIFETTO, non un'alternativa** | **NON DIMOSTRATO DALLA MISURA.** È **argomentato** (la trasmissione staccata), non misurato: l'A/B non distingue i due sistemi |
+
+**Il ③ è quello che decide, e qui non è soddisfatto per misura.** È esattamente perché questa voce
+sta qui e non in A.
+
+### Come si è promossa — il default, non il ramo
+
+- **`SPIN_FEEDBACK = True`** (`:944`);
+- **resta `--senza-spin-feedback`**, marcato **«DIAGNOSTICO per A/B e attribuzione, non fisica
+  alternativa»**;
+- **`--spin-feedback` resta accettato come NO-OP dichiarato**, per non rompere i comandi già scritti;
+- **il prerequisito è ESPLICITO e non muto:** il ramo è
+  `if SPINORE_VIVO and SPINORE and SPIN_FEEDBACK`, e **`SPINORE_VIVO` è `False` di default**, quindi
+  in un run che non passa `--spinore-vivo` **il flag è acceso ma INERTE**. L'avviso `[spin-feedback]`
+  lo dichiara, e **i tre rami sono stati esercitati**, non dedotti.
+
+### ⚠ CRITERIO DI RETROCESSIONE — scritto ORA, al momento della promozione
+
+> **Torna a OFF di default SOLO con un riscontro COMMITTATO che mostri un difetto DEL TERMINE** —
+> non con un run che va male, e **mai per ripensamento**.
+
+**E la regola di condotta che l'accompagna (Luca, 2026-09-18):** *se un problema emerge col feedback
+attivo, **NON si spegne il feedback**: si isola, si misura, si corregge la causa.* Spegnerlo sarebbe
+curare il sintomo nascondendo la fisica.
+
+### Decisione ancora aperta su questa componente
+
+**`Z30`:** la forma del denominatore — `nudo` (attuale, zero scelte) contro `linea` (la **meno
+estensiva**: 16.9 contro 36.2). **Da decidere insieme al punto `Z27`, con lo stesso criterio.**
