@@ -212,6 +212,7 @@ Se i due numeri vengono da run di Luca fuori dal repo, vanno committati per entr
 
 | # | | |
 |---|---|---|
+| **S** | **SPECULATIVA — `cs` ACROMATICO e la cosmologia** (Luca, 2026-09-17) | **NON E' UN FRONTE E NON VA TRATTATA COME TALE.** Linea di pensiero registrata perche' contiene **una predizione falsificabile** (`cs` e `r` non dipendono dalla frequenza → **qualunque effetto di propagazione e' uguale in tutte le bande**) e perche' due obiezioni ovvie sono gia' esaminate: la variazione di `alpha` **non si applica** (e' costruita da processi che scalano tutti con `cs`) e il cromatismo **non si applica**. **Il falsificatore APERTO e' uno: la SFOCATURA angolare** — la deviazione viene da `grad(cs)`, un **vettore**, mentre `r` e' uno **scalare**: non e' «troppo piccolo», e' di **rango sbagliato**. **Nessun anello e' misurato; manca il termine di espansione metrica** (`acc = cs^2*lap + src - beta*vd`, **verificato a `:3242`: nessun termine `∝ d`**) | **NESSUN LAVORO PIANIFICATO.** Non ha un criterio di chiusura, quindi **per la regola di §5-quater non e' un fronte**: sta qui, nella sezione a parte, insieme a **L**. **Non aprire ramificazioni da questa voce.** → `doc/SPECULAZIONI_cs_acromatico.md` |
 | **L** | **l'azione unica / la lagrangiana** da cui derivare tutto, memorie incluse (Mori-Zwanzig) | E' cio' che renderebbe il modello **falsificabile** invece che soltanto coerente. **Non e' un task: e' la direzione.** Per la regola 3 non e' un fronte — non ha un osservabile che lo chiuda — ed e' qui per questo, in una sezione a parte |
 
 ---
