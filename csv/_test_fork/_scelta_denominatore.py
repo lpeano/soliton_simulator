@@ -145,26 +145,33 @@ print("  (epsilon macchina ~1e-16. 'attuale' e' il difetto: mediana 1.112, MAX 8
 # --------------------------------------------------------------- la pendenza contro il grado
 print("\n--- LA DOMANDA DEL MANDATO: |out| cresce col GRADO? pendenza di log|out| vs log(grado) ---")
 print("  nullo: +0.5 = somma di contributi a SEGNO CASUALE (random walk). 0.0 = INTENSIVA.")
-print("  %-10s %-12s %-12s %-10s %-34s" % ("variante", "pendenza", "r", "n nodi", "|out| mediano per grado 2/4/8"))
+print("  ⚠ LA PENDENZA DEL FIT NON SI CITA COME TITOLO: la distribuzione dei gradi e' DEGENERE")
+print("    (il ~77 % dei nodi ha grado ESATTAMENTE 2 -- i figli della mitosi nascono con due archi),")
+print("    quindi il fit e' dominato da una coda di poche decine di nodi. Si riportano ENTRAMBI.")
+print("")
+print("  %-9s %-9s %-7s %s" % ("variante", "pendenza", "r", "MEDIANA di |out| per grado topologico"))
+print("  %-9s %-9s %-7s %s" % ("", "", "", "".join("%-11s" % ("g=%d" % g) for g in range(2, 10))))
 for modo in MODI:
     r, reg = D[modo][0], D[modo][1]
     if r == "ERRORE":
-        print("  %-10s ESPLOSA" % modo); continue
-    # si usano le ULTIME 10 invocazioni: il regime, non il transitorio (lezione del 2.706)
+        print("  %-9s ESPLOSA" % modo); continue
     O = np.concatenate([x["out"] for x in reg[-10:]])
     G = np.concatenate([x["gtop"] for x in reg[-10:]])
     m = (O > 0) & (G > 0)
     x, y = np.log(G[m]), np.log(O[m])
     b = np.polyfit(x, y, 1)[0] if m.sum() > 10 else float("nan")
     rr = float(np.corrcoef(x, y)[0, 1]) if m.sum() > 10 else float("nan")
-    bins = []
-    for g in (2, 4, 8):
-        sel = m & (np.abs(G - g) < 0.5)
-        bins.append(float(np.median(O[sel])) if sel.sum() > 3 else float("nan"))
-    print("  %-10s %-12.4f %-12.4f %-10d %-34s"
-          % (modo, b, rr, int(m.sum()), "  ".join("%.4g" % v for v in bins)))
+    celle = []
+    for g in range(2, 10):
+        s = m & (G == g)
+        celle.append(("%-11.4g" % np.median(O[s])) if s.sum() > 3 else ("%-11s" % "-"))
+    print("  %-9s %-9.4f %-7.3f %s" % (modo, b, rr, "".join(celle)))
+cnt = [int(((np.concatenate([x["gtop"] for x in D["attuale"][1][-10:]])) == g).sum()) for g in range(2, 10)]
+print("  %-9s %-9s %-7s %s   <- NUMEROSITA' per grado" % ("(nodi)", "", "", "".join("%-11d" % c for c in cnt)))
+print("")
+print("  COME SI LEGGE: se le mediane sono NON MONOTONE, la domanda '|out| cresce col grado?'")
+print("  NON HA RISPOSTA su questo grafo, e la pendenza del fit e' un artefatto della coda.")
 
-# --------------------------------------------------------------- ampiezza e conservazione
 print("\n--- AMPIEZZA del termine e DERIVA di sum(phivel) ---")
 print("  %-10s %-16s %-16s %-14s %-9s" % ("variante", "|out| mediano", "max|out|", "deriva phivel", "n finale"))
 for modo in MODI:

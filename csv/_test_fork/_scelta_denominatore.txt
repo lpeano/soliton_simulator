@@ -1,0 +1,50 @@
+[TIMBRO] _scelta_denominatore.py  sha1-BYTE 4f4ad994  !! MODIFICATO rispetto a HEAD (blob-git 269f9cb8) -- i byte che girano NON sono quelli committati
+======================================================================================================================
+SCELTA DEL DENOMINATORE: d'arco o nessuno?   [TAU_A=2.0, 60 passi, 1 seme]
+======================================================================================================================
+
+--- (G1) |sum(out)| / max|out| -- L'ANTISIMMETRIA. E' la conservazione, non una forma ---
+  variante   mediana          MAX              invocaz.  
+  attuale    1.112e+00        8.441e+00        64        
+  nudo       6.475e-16        2.752e-15        64        
+  media      1.060e-15        5.131e-15        64        
+  linea      7.947e-16        4.247e-15        64        
+  (epsilon macchina ~1e-16. 'attuale' e' il difetto: mediana 1.112, MAX 8.441)
+
+--- LA DOMANDA DEL MANDATO: |out| cresce col GRADO? pendenza di log|out| vs log(grado) ---
+  nullo: +0.5 = somma di contributi a SEGNO CASUALE (random walk). 0.0 = INTENSIVA.
+  ⚠ LA PENDENZA DEL FIT NON SI CITA COME TITOLO: la distribuzione dei gradi e' DEGENERE
+    (il ~77 % dei nodi ha grado ESATTAMENTE 2 -- i figli della mitosi nascono con due archi),
+    quindi il fit e' dominato da una coda di poche decine di nodi. Si riportano ENTRAMBI.
+
+  variante  pendenza  r       MEDIANA di |out| per grado topologico
+                              g=2        g=3        g=4        g=5        g=6        g=7        g=8        g=9        
+  attuale   0.0307    0.041   0.04885    0.00861    0.03672    0.01402    0.006521   0.03211    0.01403    0.0133     
+  nudo      0.9759    0.742   0.001694   0.000117   0.001528   0.0006911  0.0002464  0.001933   0.0008847  0.0008361  
+  media     0.6798    0.652   0.002333   0.002713   0.03348    0.01431    0.004207   0.02934    0.01132    0.01233    
+  linea     0.6135    0.626   0.001372   0.00268    0.04385    0.02157    0.002527   0.01899    0.00921    0.006619   
+  (nodi)                      1018       20         10         20         50         30         80         90            <- NUMEROSITA' per grado
+
+  COME SI LEGGE: se le mediane sono NON MONOTONE, la domanda '|out| cresce col grado?'
+  NON HA RISPOSTA su questo grafo, e la pendenza del fit e' un artefatto della coda.
+
+--- AMPIEZZA del termine e DERIVA di sum(phivel) ---
+  variante   |out| mediano    max|out|         deriva phivel  n finale 
+  attuale    0.040037         0.81602          -70.41         548      
+  nudo       0.022306         0.58985          -118.14        564      
+  media      0.026576         0.29377          28.096         539      
+  linea      0.013216         0.1693           155.57         543      
+
+--- stabilita' ---
+  attuale    NaN/inf phivel 0  omega_s 0   max|phivel| 14.345
+  nudo       NaN/inf phivel 0  omega_s 0   max|phivel| 16.551
+  media      NaN/inf phivel 0  omega_s 0   max|phivel| 16.738
+  linea      NaN/inf phivel 0  omega_s 0   max|phivel| 11.298
+
+======================================================================================================================
+COME SI LEGGE
+  G1 decide la CORRETTEZZA: tutte le varianti d'arco e 'nudo' devono stare all'epsilon.
+  La PENDENZA decide se la cura conserva anche la FUNZIONE dichiarata dal docstring:
+    se 'media'/'linea' hanno pendenza vicina a quella di 'attuale', la funzione e' conservata;
+    se hanno la pendenza di 'nudo', il denominatore d'arco NON e' una normalizzazione: e' un
+    fattore di scala, e allora 'nudo' -- che non ha scelte -- e' preferibile (A1, par.3).
