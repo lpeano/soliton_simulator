@@ -3356,3 +3356,59 @@ Quattro vie, tutte decisioni: **rimisurare `Y5`** (se i nodi a campo emesso null
 quel difetto era **reale**); oppure — indipendente da `Y5` — **far leggere `_peq_t`**, che oggi
 sarebbe byte-identico: **irrobustimento, non correzione**.
 
+---
+
+## 9.29 — **I nodi senza campo non c'erano prima: il TEMPO 2 li ha creati.** E `Z9` non c'entra
+
+**La domanda era una sola:** i nodi con `rho_sorgente ≤ 0` c'erano già prima del TEMPO 2?
+**Sonda ESTERNA, identica sui due blob** — il vecchio non ha i contatori cablati, e strumentare solo
+uno dei due non sarebbe un confronto. Copia estratta con `git cat-file -p`, **mai `git checkout`**;
+`hash-object` verificato = `9dfd91c4`.
+
+| | **VECCHIO `9dfd91c4`** | **ATTUALE `a8f1b2f4`** |
+|---|---|---|
+| invocazioni con `rho ≤ 0` | **0** | **26** su 66 |
+| nodi-invocazione | **0** | **488** |
+| di cui **zero esatto** | 0 | **488** |
+| di cui denormali | 0 | **0** |
+
+> **Prima non ce n'era nessuno. È la seconda lettura: il TEMPO 2 li ha creati.**
+
+### Il sospetto `Z9` è smentito — da tre misure indipendenti
+
+1. **Sono ZERO ESATTO, non denormali** (488/488, zero sotto `1e-300`). **La maturazione lenta del
+   kernel lascerebbe valori piccolissimi ma non nulli.**
+2. **Il `ramp` dei loro vicini (0.0039742) è quello di tutti (0.0038639)**: non hanno vicini più
+   immaturi della media.
+3. **`ramp` è identico nei due blob** — il TEMPO 2 non lo tocca. **Se la causa fosse `Z9`, ci
+   sarebbero stati anche prima.**
+
+### Chi sono: **i figli della mitosi**
+
+```
+GRADO  senza campo :  2.00     con campo : 119.00
+ETA    senza campo : 0.0136    con campo : 0.1936
+```
+
+**Grado esattamente 2** — la firma della mitosi (§9: *«il figlio nasce con esattamente due archi»*)
+— **ed età 14 volte minore**. E la distribuzione lo conferma: dopo il setup, **un rivolo di 1-5 nodi
+per invocazione**, con `n` che cresce da 443 a 488.
+
+### ⚠ Cosa non dico: il meccanismo
+
+**So chi sono, quando, e che prima non c'erano. Non so PERCHÉ il TEMPO 2 li produca, e non lo
+invento.** L'ipotesi ovvia — *«`calcola_psi()` ricalcolava i pesi e popolava `psi_spin` per i nodi
+nuovi»* — **non è verificata**, e **confligge** con la verifica preliminare del TEMPO 2, che aveva
+misurato la topologia **invariata al 100 %** dentro `step` (la mitosi avviene **fuori**). **Le due
+cose non tornano da sole.**
+
+### E una correzione alla sonda, prima dei numeri
+
+La prima versione usava una **scena mia** e dava **60** invocazioni contro le **66** del batch: la
+differenza erano i **sei passi di riscaldamento** dopo `semina(80)`. **Una sonda che non riproduce
+la scena misura un altro sistema**, e il primo risultato era di quel sistema. Scena ora riprodotta
+**dal sorgente**, conteggi allineati.
+
+> **`Q8` non ha reso visibile un difetto preesistente: ha intercettato una REGRESSIONE**, e prima
+> che entrasse in una campagna. **È esattamente ciò per cui il rigiro dei sigilli esiste.**
+
