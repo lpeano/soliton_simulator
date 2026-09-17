@@ -276,3 +276,58 @@ Il difetto e le quattro varianti sono in `doc/REFERTO_denominatore.md` e nel com
   intensività sono in **conflitto algebrico**. → `doc/REFERTO_Z24.md`.
 - **Non tocca gli altri tre punti con lo stesso schema** (`:2082`, `:2294`, `:3154`). Fronte nuovo.
 - **Non promuove nulla:** `SPIN_FEEDBACK` resta **OFF di default**.
+
+---
+
+# CURA `nudo` SUL PUNTO 3 (`twist_nodo`, `FRAME_DRAG`) — previsioni *(ex ante, 2026-09-18)*
+
+**Scritte PRIMA di toccare il codice.** Cura decisa da Luca: si toglie `/ grado[k]` e **non si mette
+nulla al posto**. Difetto misurato in `Z27`: residuo **6.756** (MAX 8.483), controllo nudo
+**`0.000e+00` esatto**.
+
+## CERTO — è algebra, ed è già misurato
+
+- **Il residuo va a ZERO ESATTO**, non «all'epsilon»: il controllo di `Z27` ha già dato
+  `0.000e+00` su 66 invocazioni. Qui non c'è nemmeno l'errore di arrotondamento del caso `Z25`,
+  perché `twn` viene sommato e sottratto **senza passare per una divisione**.
+
+## ⚠ IL RISCHIO SPECIFICO, E NON È QUELLO DI `Z25` — **lo scrivo prima**
+
+**Qui `grado` è il CONTEGGIO degli archi** (`np.add.at(grado, i, 1.0)`), **non il grado pesato.**
+In `SPIN_FEEDBACK` era la somma dei `w`, spesso **minore di 1**, e togliere la divisione **rimpiccioliva**
+il termine. **Qui il grado medio è ~80 e la mediana 119.**
+
+> **Previsione: togliendo `/grado`, `twist_nodo` diventa ~10²  volte più grande.**
+
+E il commento del codice (`:3165-3171`) dice, di questo stesso termine, che *«emerge nella scala
+giusta (~0.2 della coppia principale) senza aggiustamenti»* — **e quella scala viene proprio dalla
+divisione che stiamo togliendo.** Se il commento è vero, dopo la cura il termine varrebbe **~16
+volte la coppia principale** invece di 0.2.
+
+**Le tre letture, fissate adesso:**
+- **il residuo va a zero E il sistema resta stabile** → la cura regge, e la scala del commento era
+  un'altra cosa. **Si riporta il nuovo rapporto termine/coppia, misurato.**
+- **il residuo va a zero MA il sistema si destabilizza** (NaN, runaway, CFL ≥ 1, o il termine
+  domina la coppia di ordini di grandezza) → **`nudo` NON basta qui, ed è una DIMOSTRAZIONE, non
+  una preferenza.** Si committa il fallimento e **ci si ferma** (par.5), senza scegliere al volo un
+  denominatore.
+- **il residuo NON va a zero** → ho sbagliato a ricostruire il punto: si riporta e ci si ferma.
+
+**Non tifo per nessuna delle tre.** La seconda sarebbe il caso in cui il mandato stesso prevede la
+deroga (*«se lo derivi, dimostra perché `nudo` non basta»*), e la dimostrazione sarebbe **misurata**.
+
+## INCERTO, dichiarato
+
+- **La riduzione al limite** vale **solo per grado topologico = 1** (ogni nodo con esattamente un
+  arco): con grado `g` la vecchia dà `tn/g` e la nuova `tn`. **Stessa correzione già fatta per
+  `G2` in `Z25`**, e per la stessa ragione.
+- **Non predico l'effetto su `sum(phivel)`**: le traiettorie divergono, e un confronto fra sistemi
+  diversi su un seme non ha barra.
+
+## Cosa la cura NON fa
+
+- **Non rende `twist_nodo` intensiva**: eredita lo stesso compromesso algebrico di `Z25`
+  (conservazione **o** indipendenza dal grado, non entrambe). **E qui il costo è più grande**,
+  perché il grado è il conteggio.
+- **Non tocca il punto 1** (due rotture, la seconda è `refl`: legge nuova) **né il punto 2**
+  (latente, `TW_SPINORE = False`).
