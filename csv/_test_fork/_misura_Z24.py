@@ -147,6 +147,10 @@ def spia_ps(self, i, j, w, dt_n, *a, **k):
             np.add.at(Br, ii, nb_vic[jj] * wl[:, None])
             np.add.at(Br, jj, nb_vic[ii] * wl[:, None])
             REG.setdefault("corr_norefl", []).append(rel(np.cross(Br, nb)))
+            # LA VARIANTE CHE SEPARA LE DUE ROTTURE: divisione SI, riflessione NO.
+            # Senza questa non si puo' dire se le rotture siano UNA o DUE.
+            Bd = Br / np.maximum(deg[:, None], 1e-9)
+            REG.setdefault("corr_div_norefl", []).append(rel(np.cross(Bd, nb)))
             if S.TW_SPINORE and len(self.tw) >= len(mask):
                 _twh = np.asarray(self.tw, float)[mask] / (2.0 * max(S.PHI_CRIT, 1e-9))
                 _axis = np.where(cl[:, None] > 0, np.array([1.0, 0.0, 0.0]), np.array([0.0, 0.0, 1.0]))
@@ -228,6 +232,7 @@ c1 = stampa("correzione", "correzione = BxNB", True)
 stampa("corr_nudo", "  B SENZA divisione", True)
 stampa("corr_simm", "  B con den. d'ARCO", True)
 stampa("corr_norefl", "  B nudo e SENZA refl", True)
+stampa("corr_div_norefl", "  B DIVISO e senza refl", True)
 print("  -- punto 2 --")
 if TW:
     c2 = stampa("otw", "_otw/_degt (TW forzato)", False)
