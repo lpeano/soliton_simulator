@@ -1013,3 +1013,16 @@ dimostrazione)* **A3 non discende da A2**.
 - **Z10** (`TAU_A` = due leggi) e **Z11** (rigiro dei sigilli storici) registrate.
 - **Nessun cablaggio, nessuna promozione, nessun flag acceso.** Blob invariato: `69ee540`.
 
+## AGGIORNAMENTO 2026-09-17 (8) — mandato Z9/`ramp`: **CABLAGGIO FERMATO da R6 (A8b)**
+- **Quattro verifiche su cinque passano**, e **la diagnosi di Z9 regge**: tempo-luce nodale **~0.82**
+  contro `TAU_A = 50` → maturità **entro un centinaio di passi**, dentro la durata dei run.
+  **Nodi isolati ZERO** → **`LAM` non entrerebbe mai**. **`TAU_A` non compare altrove.**
+- **⚠ R6 BLOCCA:** `_pesi()` è chiamata **16 volte per passo, 9 PRIMA e 7 DOPO** la scrittura di
+  `_cs_nodo_prev` (`:3213`). Il `ramp` violerebbe **A6 sul 44 % delle chiamate, a ogni passo, in
+  modo permanente** — e il valore dipenderebbe da **quale** chiamata lo calcola.
+- **Terzo lettore della cache: 7.8189 %** contro **0.0000 %** e **3.0303 %** dei due noti.
+- **Lo sblocco è una decisione su una riga:** uno **snapshot per-passo** del tempo-luce nodale
+  (risolve A6, l'ordine e il costo) — **ma è stato nuovo, da estendere ai cinque punti di crescita
+  e da contare** (A8b). **Non l'ho aggiunto.**
+- **Nessun codice toccato.** Blob invariato: `69ee540`.
+

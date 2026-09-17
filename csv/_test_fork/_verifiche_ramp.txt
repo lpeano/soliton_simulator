@@ -1,0 +1,50 @@
+======================================================================================================================
+VERIFICHE PRELIMINARI DI Z9 -- ramp = min(1, eta / (d_nodo/cs_nodo))
+======================================================================================================================
+
+--- (2.1) `_tempo_luce_nodo`: forma e dipendenze ---
+  chiama `_pesi()`?  NO   <- se SI' ci sarebbe RICORSIONE
+  usa `LAM`?         SI', in DUE rami: `d_nodo[grado <= 0] = LAM` e il fallback senza archi
+
+  !! IL MANDATO par.6 VIETA `LAM` NELLA NUOVA FORMA. Va distinto:
+     - la SCALA PRINCIPALE e' `d_nodo` = media degli archi incidenti -> NON e' LAM;
+     - `LAM` entra SOLO nel fallback per i NODI SENZA ARCHI.
+     Non e' l'errore bocciato (che era usare LAM/cs come scala), ma E' un uso di LAM nel percorso:
+     va CONTATO e dichiarato. La misura sotto dice quanto pesa.
+
+--- (2.5) A8b: `_pesi()` come TERZO LETTORE di `_cs_nodo_prev` ---
+  chiamate a `_pesi()` osservate: 243   (in 15 passi)
+  chiamate a `_pesi()` PER PASSO: [16, 19]   <- se >1, il contatore deve distinguerle
+  di cui DENTRO step(): 240   fuori (diagnostici/mitosi/init): 3
+  cache `_cs_nodo_prev` NON usabile in 19 chiamate su 243  ->  7.8189 %
+     passi in cui accade: [0]
+     esempio: n=120  len(cache)=-1
+  CONFRONTO coi due lettori gia' misurati (audit A8, commit 438a02c):
+     _tempo_luce_nodo   :  0.0000 %
+     _passo_spinoriale  :  3.0303 %
+     _pesi()            :  7.8189 %   <- QUESTO
+
+--- (2.2) `d` al primo passo, e i NODI ISOLATI (grado 0) ---
+  passo   n       archi     ISOLATI     d_nodo min   d_nodo med  
+  0       120     4872      0           1.4799       1.6198      
+  0       240     9642      0           1.4799       1.6293      
+  0       360     14134     0           1.4799       1.6338      
+  0       360     14134     0           1.4799       1.6338      
+  0       360     14134     0           1.4799       1.6338      
+  0       360     14134     0           1.4799       1.6338      
+  0       360     14134     0           1.4799       1.6338      
+  0       360     14134     0           1.4799       1.6338      
+  nodi isolati TOTALI su tutte le chiamate: 0   (su 87120 nodi-chiamata)
+  -> e' la frazione in cui `LAM` entrerebbe nella maturazione
+
+--- (2.3) A6: `d` e `cs` vengono dallo stato PRECEDENTE dove `_pesi()` gira? ---
+   :2429   ramp = np.minimum(1.0, self.eta / TAU_A)
+   :2958   self.eta += dt_n
+   :3213   self._cs_nodo_prev = cs_nodo.copy()
+   :3318   self.d = np.maximum(self.d + dts * self.vd, 0.05)
+
+  NB: `_pesi()` NON e' chiamata da una riga fissa: la chiama `calcola_psi()`, che gira in piu'
+  punti. Per A6 conta QUANDO, e la misura sopra (2.5) lo dice attraverso lo stato della cache.
+
+======================================================================================================================
+ESITO -- da leggere insieme, non una per una.

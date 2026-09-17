@@ -3168,3 +3168,63 @@ accolto il blocco.
   **T1 da PASS a FAIL**. Vale per Strato 1 (25/27), Step 2 (9/10), rumore colorato, e per i sigilli
   di questa bonifica quando il blob cambierà ancora.
 
+---
+
+## 9.26 — **Z9: la legge è giusta, il PUNTO in cui valutarla no.** `_pesi()` gira sedici volte per passo
+
+**La correzione proposta** — `ramp = min(1, eta / (d_nodo/cs_nodo))` al posto di `eta/TAU_A` —
+**separa le due leggi che `TAU_A` governava** e **fa sparire il numero** invece di spostarlo su
+`LAM`, che era l'errore bocciato. **Quattro verifiche preliminari su cinque passano. La quinta
+blocca.**
+
+### Il reperto
+
+```
+passo    _pesi() PRIMA della scrittura di _cs_nodo_prev    DOPO
+  1              9                                          7
+  2              9                                          7
+  5              9                                          7
+```
+
+**A ogni passo `_pesi()` è chiamata 16 volte, 9 prima che la cache sia aggiornata (`:3213`) e 7
+dopo.** Se il `ramp` leggesse `_tempo_luce_nodo`, **9 chiamate userebbero il `cs` precedente (A6 ✓)
+e 7 quello corrente (A6 ✗)**: **il 44 %, a ogni passo, in modo permanente** — non nel transitorio.
+E **il valore della maturazione dipenderebbe da quale delle sedici chiamate la calcola**: un
+dettaglio di implementazione, non la fisica.
+
+### Il terzo lettore, e perché A8b esiste
+
+```
+_cs_nodo_prev  letta da _tempo_luce_nodo   :  0.0000 %
+_cs_nodo_prev  letta da _passo_spinoriale  :  3.0303 %
+_cs_nodo_prev  letta da _pesi()            :  7.8189 %
+```
+
+I 19 fallback di `_pesi()` sono **tutti al passo 0**: la frazione alta viene dal **numero di
+chiamate**, non da un comportamento peggiore. **Ed è esattamente il punto di A8b: la frazione di un
+fallback non è una proprietà della cache, è una proprietà del CONSUMATORE** — finché ogni
+consumatore non è contato separatamente, quel numero non dice nulla.
+
+### Le altre quattro verifiche passano, **e la diagnosi di Z9 regge**
+
+- **`_tempo_luce_nodo`** è chiamabile, restituisce **per nodo**, **non chiama `_pesi()`** (nessuna
+  ricorsione), nessun ricalcolo.
+- **Nodi isolati: ZERO** su 87120 nodi-chiamata → **`LAM` non entrerebbe mai** nella maturazione. Il
+  divieto del mandato è rispettato **di fatto**, non solo di forma.
+- **L'ordine di grandezza conferma Z9:** `d_nodo ~ 1.63`, `cs ~ 2.0` → tempo-luce **~0.82** contro
+  `TAU_A = 50`; con `eta` a ~0.009/passo, `ramp = 1` arriverebbe **entro un centinaio di passi** —
+  **dentro la durata dei run**.
+- **`TAU_A` non compare altrove:** rienumerato sul blob attuale, nessun punto nuovo.
+
+### Cosa lo sbloccherebbe
+
+**Uno snapshot per-passo del tempo-luce nodale**, calcolato una volta all'inizio di `step()` e letto
+da tutte e sedici le chiamate: risolve **A6**, l'**ordine**, e il **costo** (16 valutazioni → 1).
+**Ma è stato nuovo, e A8b impone di estenderlo ai cinque punti di crescita e di contarlo** — il
+prezzo che questo repo ha già pagato **due volte** (`_cs_nodo_prev` 71.88 %, `_psi_spin_prec`
+95.33 %). **Aggiungere stato per una correzione non autorizzata sarebbe cablarla a metà**, e lo
+stato sopravviverebbe alla decisione di non farla.
+
+> **Il blocco non è sulla LEGGE — è sul PUNTO in cui verrebbe valutata.** La legge è quella giusta:
+> fa sparire il numero, separa le due scale, e non usa `LAM`.
+
