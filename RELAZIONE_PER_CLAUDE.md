@@ -3706,3 +3706,183 @@ questo risultato.)*
 quelli non si può dire se la terza combinazione sia fisicamente sensata** — si sa solo che non
 produce NaN. **Ed è un solo seme:** i rapporti (× 91, −32 %) **non hanno barra**, e su questo sistema
 la dispersione fra semi è grande. **Sono ordini di grandezza, non misure.**
+
+---
+
+## 9.34 — **Il riferimento del mio A/B non era un riferimento.** Verificato dai dati: il `−32 %` di §9.33 **regge**
+
+**Data:** 2026-09-17 · **Sollevato da Luca**, non trovato da me mentre lo usavo.
+
+### Il difetto, nella sua forma generale
+
+Il driver `csv/_test_fork/_esperimento_spin_feedback.py` costruisce i bracci come
+`lista_comune + variabile`. Io avevo scritto `--tau-a 2.0` **nella lista comune**. Quindi il terzo
+braccio — quello che doveva essere il **riferimento a `TAU_A = 50`** — lo riceveva anche lui.
+
+> **Un driver che forza un flag in tutti i bracci rende ogni A/B che lo usa non attribuibile, e
+> nessun messaggio lo dice.** Il test continua a **PASSARE**, perché confronta due cose identiche e
+> le trova identiche.
+
+È la stessa famiglia già catalogata in CLAUDE.md par.9 sotto *«quando si ribalta un default si
+cercano TUTTI i punti che ottenevano il vecchio comportamento per OMISSIONE»*: lì un default
+ribaltato **converte i rami di controllo in duplicati del ramo di prova**; qui lo fa una riga del
+driver.
+
+### La domanda che Luca ha posto, e che io non avevo posto
+
+**Il `−32 %` di §9.33 era misurato contro `TAU_A = 50`, o contro un altro run a `TAU_A = 2.0`?**
+
+E il modo in cui va risposta è il punto: **dai dati, non dal comando e non dalla memoria** (P6).
+Il simulatore scrive in testa a ogni CSV una riga `# RUN_PARAMS {...}` con `tau_a_over` e
+`leggi_attive.REGIME`.
+
+| file | REGIME | `tau_a_over` | **`TAU_A` effettivo** | seed |
+|---|---|---|---|---|
+| `_exp_tau50.csv` | deterministico | `null` | **50.0** | 5 |
+| `_exp_tau02.csv` | deterministico | `2.0` | **2.0** | 5 |
+
+**Il riferimento era `TAU_A = 50`. §9.33 REGGE, i suoi numeri valgono, la terza lettura resta.**
+
+E la controprova non era scontata: il `−32 %` ricalcolato dalla colonna `n_tot` dei CSV di ieri dà
+**2577 → 1754 = −31.9 %**, e il braccio `rif` **rigirato oggi da un processo diverso** dà **2577
+nodi esatti**. **Due riferimenti indipendenti, stesso numero.**
+
+### Gli altri esperimenti, e il limite della mia verifica
+
+Scansionati tutti i 34 driver che lanciano il simulatore in sottoprocesso. **Otto hanno più di un
+braccio; nessun altro porta il difetto.**
+
+**Ma il limite va dichiarato, perché altrimenti quella frase vale meno di quanto sembra.** La
+scansione guarda **il disco di oggi**, e il file difettoso **era già stato corretto**. Il mio primo
+rilevatore automatico — quello che cercava un flag presente sia nella lista comune sia fra le
+varianti — ha restituito **zero collisioni, compreso il file che aveva il bug**.
+**Un rilevatore che non trova il caso che lo ha generato non è un presidio.** La tabella è stata
+rifatta a mano sul criterio *«quanti bracci, e quale flag è la variabile»*.
+
+### Due lacune trovate strada facendo
+
+1. **P6: `# RUN_PARAMS` non contiene né `TAU_A` né `G_PH` né il `blob`.** `TAU_A` è solo
+   **deducibile** (`REGIME` + `tau_a_over`); il `blob` **nemmeno quello**, mentre CLAUDE.md par.9
+   lo chiede esplicitamente. Qui la verifica si è salvata perché `tau_a_over` c'era: se avessi
+   dovuto dedurre `TAU_A` dal solo `REGIME`, l'override sarebbe stato **invisibile nei dati** e
+   questa risposta **non sarebbe stata possibile.**
+2. **Par.5: il driver non era committato.** `_esperimento_spin_feedback.py` risulta `??` in
+   `git status`, benché il commit `d3874fd` si intitoli *«Committato PRIMA del run»* — quel commit
+   conteneva **il simulatore e le previsioni**, non il driver.
+
+→ `doc/REFERTO_driver_gira.md`, registro `Z20`.
+
+---
+
+## 9.35 — **`SPIN_FEEDBACK` con `TAU_A = 2.0`: esito MISTO**, e non ne scelgo una delle quattro letture
+
+**Un seme (5), 120 passi. `SPIN_FEEDBACK` NON HA UN SIGILLO: componente non certificato.
+Nessuna promozione, nessun cablaggio, il default non cambia.**
+
+### `E4` — il GATE: il feedback è applicato? **Sì**, e il numero dice più di quanto il gate chiedesse
+
+`_sfb_applicato` **124 su 126** chiamate (98.4 %); `_sfb_lift_corto` 2 (il transitorio iniziale);
+`_sfb_mask_vuota` **0**. **Nessuna traccia della famiglia `_psi_spin_prec`**, che fu inerte nel
+95.33 % delle chiamate per mesi — ed era la ragione per cui i contatori erano stati cablati prima
+del run.
+
+Ampiezza in forma confrontabile (**A3c**, mediane dello **stesso passo**):
+**rapporto |feedback|/|coppia| MEDIO su 126 passi = `2.706`.** *(Il massimo, 115, è un passo solo e
+non è il tipico; e i due max separati — coppia `0.2602`, feedback `0.04145` — **sono presi in passi
+diversi e non hanno quoziente**.)*
+
+**Il gate passa: l'esperimento non è nullo. Ma `2.706` non significa «il feedback contribuisce»:
+significa che il termine di feedback vale quasi TRE VOLTE la coppia su cui retroagisce. Un termine
+chiamato *feedback* che domina il termine primario non è una correzione: è il motore.** Questo non
+invalida l'esperimento, lo **qualifica**, e va davanti a qualunque lettura di `E2` ed `E3`.
+
+### `E1` — stabilità **[BLOCCANTE]: 4/4 PASS**
+
+0 NaN/inf · `max||nb|−1| = 2.220e-16` · `min d0 = 0.05 > 0` · `_taup_cfl_max` **0.5532** ON contro
+0.5627 OFF, entrambi **< 1**. **Non diverge, e il vincolo causale su `tau_p` regge da entrambi i lati.**
+
+### `E2` — il conteggio dei nodi, contro il `−32 %`
+
+```
+TAU_A = 50  (riferimento)   : 2577 nodi
+TAU_A = 2.0, feedback OFF   : 1754 nodi   −31.9 %
+TAU_A = 2.0, feedback ON    : 1833 nodi   −28.9 %
+```
+
+**La perdita si riduce di 3.0 punti** (+79 nodi, **+4.5 %**). **Direzione attesa. Ampiezza NON
+stabilita, e lo dico prima che qualcuno la citi:**
+
+- **un solo seme.** P3 chiede ≥ 4 semi per una barra fra semi;
+- **il nullo di questa differenza non è misurato.** Il nullo caotico noto sul conteggio nodi vale
+  ~1.4 % (`3164 → 3209`), ma è di **un'altra configurazione**, e `SPIN_FEEDBACK` **non è una
+  perturbazione a 1e-16**: vale 2.7 volte la coppia, quindi quel nullo **non è nemmeno quello
+  giusto da citare**.
+
+Si scrive così: **«la perdita di nodi si riduce di 3.0 punti su un seme; il nullo di questa
+differenza non è misurato»** — non «il feedback recupera il 4.5 % dei nodi».
+
+### `E3` — e questa è la parte che non va minimizzata
+
+| | `TAU_A=50` | OFF | ON |
+|---|---|---|---|
+| `psi` max | 0.0641 | 5.834 (×91) | **7.206 (×112)** |
+| `d0` max | 2.878 | 50.22 (×17.5) | **77.83 (×27)** |
+| `omega_s` max | — | 4.664e+04 | 3.441e+04 |
+| `phivel` max | — | 63.35 | 50.66 |
+| `ramp` mediana | — | 0.4704 | 0.4661 |
+
+**Gli indicatori di stress PEGGIORANO col feedback acceso**: sono le stesse due grandezze che in
+§9.33 avevano fatto scrivere *«non diverge non è sta bene»*, e con `SPIN_FEEDBACK` acceso **stanno
+peggio**. `omega_s` e `phivel` invece **calano**: **il quadro non è monotono** — il feedback sposta
+lo stress da un canale all'altro, non lo riduce. `ramp` è **indistinguibile** fra i due bracci, come
+deve essere (`TAU_A` è identico): **è il controllo negativo interno dell'A/B, ed è utile che sia
+piatto.**
+
+### Il verdetto contro le quattro letture fissate prima
+
+`(d)` contributo trascurabile → **escluso** da `E4`. `(c)` peggiora/diverge → **escluso** da `E1`.
+**Fra `(a)` «si riduce IN MODO NETTO → l'ipotesi regge» e `(b)` «resta uguale → l'ipotesi cade» NON
+scelgo**, e la ragione è la parola **«netto»**: sul conteggio nodi la direzione è quella di `(a)` ma
+su **un seme e senza nullo**; sulle grandezze di stress il risultato è **contrario** ad `(a)`.
+
+> **Un'ipotesi che guadagna 3 punti sul conteggio nodi mentre peggiora di 21 punti percentuali il
+> picco di `d0` non ha «retto»: ha spostato il problema.**
+
+**Per decidere servono, in quest'ordine: (1) un SIGILLO per `SPIN_FEEDBACK`; (2) ≥ 4 semi su `E2`;
+(3) `Z10` — separare le due leggi che `TAU_A` governa**, perché finché `TAU_A` è insieme la scala
+del `ramp` e la vita media della memoria spinoriale, *«cosa ha fatto `TAU_A = 2.0`»* non ha una
+risposta unica, e questo A/B ci poggia sopra.
+
+→ `doc/REFERTO_esperimento_spin_feedback.md`, registro `Z21`.
+
+---
+
+## 9.36 — **`E4a` è il DECIMO criterio scaduto**, e stavolta l'ho corretto *prima* che producesse il FAIL falso
+
+I nove precedenti sono in §9.31 (l'ottavo, `Y5`) e nel suo seguito (il nono, `Q1`).
+
+**Com'era scritto:** *«il feedback è applicato in **tutte** le chiamate»*, cioè
+`_sfb_applicato == _sfb_chiamate`.
+**Cosa fa davvero il codice:** `_spinor_lift` è più corto di `n` nei **primi due passi**, quindi la
+guardia `:1344` scatta **2 volte su 126** — **legittimamente**, ed è un **transitorio di
+inizializzazione**, non un fallback strutturale.
+
+**Il criterio avrebbe dato FAIL su un comportamento corretto**, e si sarebbe portato dietro **una
+diagnosi**: chi legge il FAIL cerca il difetto, e il difetto non c'è. È **esattamente** la forma di
+`N3b`, `M1b`/`M3` e `M3c` già catalogata in CLAUDE.md par.9.
+
+**Come è riscritto, e perché può ancora fallire:**
+
+```
+E4a:  _sfb_applicato >= 0.95 * _sfb_chiamate       (misurato: 124/126 = 98.4 %)
+```
+
+**Non è un criterio che passa sempre.** Fallirebbe esattamente nel caso che i contatori esistono per
+intercettare: se una delle due guardie diventasse il **comportamento principale** invece del
+transitorio. `_psi_spin_prec` scattava nel **95.33 %** delle chiamate — con questa soglia
+**avrebbe dato FAIL al primo giro**, invece di restare inerte per mesi.
+
+**La regola che ne esce, ed è la stessa di CLAUDE.md par.9 vista da un altro lato:** un criterio si
+scrive **da una misura**, e la soglia si **deriva dal comportamento reale del codice nel punto in
+cui il criterio guarda** — non dal proprio modello mentale di come «dovrebbe» andare. *«Tutte le
+chiamate»* era il modello mentale; *«2 su 126 sono il transitorio»* è la misura.
