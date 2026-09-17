@@ -141,3 +141,41 @@ misurata** (§2). **Quel limite non è più aperto: è chiuso, e la risposta è 
 
 Restano aperti gli altri limiti già dichiarati: **4 semi sono il minimo** (un effetto ≤ 1 % è
 invisibile), **120 passi sono ~1/50 della maturazione di `ramp`** (`Z9`), **una sola scena**.
+
+---
+
+## 6. AGGIORNAMENTO 2026-09-18 — **il §3 del mandato era un errore, e si chiude**
+
+La risposta di Luca accoglie il ritiro e **corregge il mandato**: il fronte che il §3 chiedeva di
+aprire — *«serve una topologia a grado basso o variabile»* — **non esiste**, perché era costruito
+sulla mia conclusione sbagliata. **La topologia a grado variabile c'è già** (bimodale, `2` contro
+`119`, un fattore 60 di escursione), **la domanda era misurabile ed è misurata.**
+**Registrato come errore del mandato**, non come fronte: voce `Z28`.
+
+### ⚠ Una precisazione, perché la risposta può essere letta male
+
+Luca scrive: *«il ~77 % di grado 2 e il grado medio ~121 non sono in contraddizione: sono due
+statistiche diverse su una distribuzione a coda pesante»*.
+
+**È vero in generale — ma non salva il mio numero.** Il `77 %` era **aritmeticamente sbagliato a
+prescindere**: avevo diviso `1018` per **1318** (la somma delle sole colonne che avevo stampato,
+`g=2..9`) invece che per **5410**. Il valore vero è **19.85 %**.
+
+**Le due cose vanno tenute separate:**
+1. una frazione alta a grado basso **può** coesistere con una media alta — vero, ed è la ragione per
+   cui la contraddizione apparente non bastava a rilevare l'errore;
+2. **la mia frazione era comunque errata**, e lo sarebbe stata anche su una distribuzione uniforme.
+
+*(Lo scrivo perché fra sei mesi «non erano in contraddizione» potrebbe leggersi come «il 77 % andava
+bene». Non andava bene.)*
+
+### Il quarto errore di popolazione in due giorni
+
+`rho_arco`/`median(I_nodi)` = **8830** · media-di-mediane **19 contro 4089** · **`A3c`** (un rapporto
+contro un massimo) · **questo**.
+
+**E questo è il più istruttivo, perché il denominatore sbagliato era visibile nella mia stessa
+tabella:** le colonne erano `g=2..9`, e io le ho sommate **come se fossero il totale**.
+
+> **PRESIDIO: quando si calcola una frazione, il denominatore si prende dalla POPOLAZIONE, mai dalla
+> somma di ciò che si è scelto di stampare.**
