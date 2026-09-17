@@ -3286,3 +3286,22 @@ topologia non cambia fra `:2979` e i due punti. **Elimina 2 ricalcoli su 16 (13 
 **E sull'effetto non ho una previsione:** se i pesi coincidono, il difetto è **teorico**. È **Q4** a
 deciderlo, non un'attesa.
 
+### 9.27-bis — la discrepanza «due o tre punti», sciolta
+
+**Rilievo del guardiano:** lui contava **tre** punti dentro `step`, il contatore ne registrava
+**due**. **Non era un disaccordo: unità diverse.** Dal codice:
+
+```python
+:3005   if REPULS_LEGGE:          # True di default  ->  :3006 GIRA
+:3036   elif MU_PSI != 0.0:       # elif ESCLUSO     ->  :3037 NON gira
+:3118   ...                                             GIRA (se K_SYNC != 0)
+```
+
+**`:3006` e `:3037` sono i due rami di un `if`/`elif` mutuamente esclusivi**, e il commento a
+`:3039` chiama il secondo *«vecchia repulsione a parametro, fallback»*. **Il contatore misura ciò
+che gira, il grep ciò che è scritto: entrambe le misure sono giuste e servono a cose diverse.**
+
+**Conseguenza per il TEMPO 2: i punti da toccare sono TRE, non due** — ma `:3037` è **su un ramo
+spento**, quindi **nessun sigillo può esercitarlo**, e il referto dovrà dirlo invece di contarlo fra
+i successi. *(È la classe di `VERSO_CHI`: cablato ma muto.)*
+

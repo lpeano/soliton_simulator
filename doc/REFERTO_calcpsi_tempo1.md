@@ -93,6 +93,49 @@ Stessa struttura a `:3118` (`psi_sync = psi_t if SYNC_UPDATE else self.calcola_p
 
 ---
 
+## 3-bis. ⚠ TRE PUNTI NEL SORGENTE, DUE A RUNTIME — la discrepanza, sciolta
+
+**Rilievo del guardiano:** *«io trovo TRE punti dentro `step`, lui ne dichiara DUE»*. **Ha ragione
+sui punti sorgente, e non e' un disaccordo: contavamo unita' diverse.** Dal codice:
+
+```python
+:3005   if REPULS_LEGGE:                      # <- True di DEFAULT (:544)
+:3006       psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()     GIRA
+:3007       MtPsi = self._mat(w) @ psi_forces
+        [...]
+:3036   elif MU_PSI != 0.0:                   # <- elif: ESCLUSO da REPULS_LEGGE = True
+:3037       psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()     NON GIRA
+:3038       MtPsi = self._mat(w) @ psi_forces
+        [...]
+:3118   psi_sync   = psi_t if SYNC_UPDATE else self.calcola_psi()         GIRA (se K_SYNC != 0)
+```
+
+> **`:3006` e `:3037` sono i due rami di un `if`/`elif` MUTUAMENTE ESCLUSIVI.** Il commento a
+> `:3039` chiama il secondo *«vecchia repulsione a parametro, fallback»*: con `REPULS_LEGGE = True`
+> **non viene mai preso**, e infatti il contatore non lo registra.
+
+**Il contatore misura CIO' CHE GIRA; il grep misura CIO' CHE E' SCRITTO. Entrambe le misure sono
+giuste, e servono a cose diverse:** *«due da correggere»* e' azionabile, *«tre punti»* e' la mappa
+completa.
+
+**E il terzo punto ha lo STESSO difetto flagrante:** `:3038` fa `self._mat(w) @ psi_forces`,
+identico a `:3007`.
+
+### Cosa cambia per il TEMPO 2
+
+**I punti da toccare sono TRE, non due**, e vanno trattati diversamente:
+
+| punto | gira? | cosa fare |
+|---|---|---|
+| `:3006` | **SI'** (`REPULS_LEGGE = True`) | passare `w`. **Q4 lo esercita.** |
+| `:3118` | **SI'** (se `K_SYNC != 0`) | passare `w`. **Q4 lo esercita.** |
+| `:3037` | **NO** (`elif` escluso) | passare `w` **per coerenza**, ma **NESSUN SIGILLO PUO' TESTARLO** in questa configurazione. **Va dichiarato**, non spacciato per verificato. |
+
+> **`:3037` NON e' un chiamante «fuori dal passo»** — quelli il mandato dice di non toccare per
+> simmetria. **E' dentro il passo, su un ramo spento da un flag.** Correggerlo e' legittimo (stesso
+> difetto, stesso blocco), **ma il suo esito resta non esercitato**, e il referto del TEMPO 2 dovra'
+> dirlo invece di contarlo fra i successi. *(E' la classe di `VERSO_CHI`: cablato ma muto.)*
+
 ## 4. VERIFICHE PRELIMINARI DEL TEMPO 2 — **la strada è aperta, su due punti**
 
 1. **`w` è ancora valido lì?** **SÌ**: `:3007` **lo sta già usando** (`self._mat(w)`). Se non fosse
@@ -109,7 +152,7 @@ Stessa struttura a `:3118` (`psi_sync = psi_t if SYNC_UPDATE else self.calcola_p
 
 ## 5. COSA CHIEDO — **il via libera al TEMPO 2, ridimensionato**
 
-**Il TEMPO 2 è realizzabile e riguarda DUE righe**, `:3006` e `:3118`: passare `w`, che è già lì.
+**Il TEMPO 2 riguarda TRE righe** — `:3006`, `:3118` (che girano) e `:3037` (ramo `elif` **spento**, vedi §3-bis): passare `w`, che e' gia' li'.
 
 **Ma la sua portata non è quella che il mandato prevedeva:**
 - **non elimina 16 ricalcoli**, ne elimina **2** (il **13 %**);
