@@ -5299,6 +5299,7 @@ def _applica_flag(a):
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
     global TAU_LUCE, RUMORE_COLORATO
+    global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
@@ -5321,6 +5322,13 @@ def _applica_flag(a):
     ZETA_LOC = bool(getattr(a, "zeta_loc", False))   # smorzamento locale (legge): default off = non-regressione
     VERLET = bool(getattr(a, "verlet", False))       # integratore metrico sperimentale: default off
     GUSCIO_MORBIDO = bool(getattr(a, "guscio_morbido", False))   # diffusione di superficie delle d0: default off
+    if getattr(a, "tau_a_over", None) is not None:
+        # A8: il ramo e' CONTATO -- qui basta un marcatore sul modulo, letto dal sigillo.
+        TAU_A = float(a.tau_a_over)
+        globals()["_TAU_A_OVERRIDE"] = TAU_A
+        print(f"[tau-a] ESPERIMENTO: TAU_A sovrascritto a {TAU_A} (default del regime "
+              f"'{REGIME}': {_TAU_A_REGIME}). NON e' una correzione, NON e' promosso, e la "
+              f"combinazione TAU_A={TAU_A} con G_PH={G_PH} NON e' mai stata validata.")
     if getattr(a, "elast_c", None) is not None:
         ELAST_C = float(a.elast_c)
         print(f"[elast] ATTENZIONE: --elast-c e' un NO-OP DICHIARATO dal 2026-09-17. ELAST_C={ELAST_C} "
@@ -5691,6 +5699,16 @@ def _cli():
                         "dei nuovi archi riceve un offset plastico emergente da stress metrico "
                         "|d-d0|/d0 ed eccesso di torsione (|tw|/PHI_CRIT-1), saturato via tanh e "
                         "non-negativo. Sostituisce PLAST_MIT statico. Default off = non-regressione.")
+    p.add_argument("--tau-a", type=float, default=None, dest="tau_a_over", metavar="V",
+                   help="ESPERIMENTO (par.10 categoria ESPERIMENTI, OFF di default): sovrascrive "
+                        "TAU_A. NON E' UNA CORREZIONE e NON si promuove. Serve a rispondere a una "
+                        "domanda: TAU_A = 50 nel ramo deterministico era una CURA (per non far "
+                        "divergere omega) o una scelta scaduta? Con --tau-a 2.0 si ottiene una "
+                        "TERZA combinazione, mai validata: il 2.0 e' il valore 'canonico', ma il "
+                        "canonico vuole anche G_PH = 0.15, e QUI G_PH resta 3e-3. "
+                        "Il ramo deterministico e' gia' vicino al limite di divergenza (il suo "
+                        "commento dice: '1e-4 e 0 divergono'), e TAU_A e' l'altro parametro dello "
+                        "stesso equilibrio. Se diverge, e' un RISULTATO.")
     p.add_argument("--elast-c", type=float, default=None, dest="elast_c",
                    help="NO-OP DICHIARATO dal 2026-09-17: ELAST_C non e' piu' letto da nessun "
                         "percorso fisico (la plasticita' usa la forma viscoelastica causale). "
