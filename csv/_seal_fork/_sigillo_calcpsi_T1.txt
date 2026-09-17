@@ -1,0 +1,37 @@
+======================================================================================================================
+Q1-Q2 -- TEMPO 1: contare il fallback `w is None` di calcola_psi(). NESSUNA LEGGE TOCCATA.
+======================================================================================================================
+
+--- (Q1) i contatori sono INERTI?  [BLOCCANTE] ---
+  chiavi nuove nel DB (i contatori): ['_calcpsi_chiamate', '_calcpsi_w_none']
+  PRESIDIO, riga dei conteggi PER PRIMA: nodi PRE 1669, nodi POST 1669
+  array con SHAPE UGUALI effettivamente confrontati: 38   (shape diverse: 0)
+[PASS] Q1a c'e' CONFRONTO (stesso N, shape uguali)        38 array confrontati
+[PASS] Q1b BYTE-IDENTICO: max|A-B| = 0.000e+00  [BLOCCANTE] max = 0.000e+00 (peggiore: -) su 38 array
+
+--- (Q2) il contatore LEGGE? (controllo positivo dello STRUMENTO) ---
+  chiamate TOTALI a calcola_psi : 134
+  di cui con `w is None`        : 134   (100.00 %)
+[PASS] Q2 il contatore legge > 0                          _calcpsi_w_none = 134
+
+--- LA TABELLA PER CHIAMANTE ---
+  chiamante:riga                     volte      posizione   
+  ------------------------------------------------------------
+  ------------------------------------------------------------
+  DENTRO il passo (violano :2959)    0         
+  fuori (non violano nulla)          0         
+
+  LA DISTINZIONE CHE DECIDE: solo i chiamanti DENTRO il passo violano l'intento scritto a :2959
+  (*"Non ricalcolare psi in punti diversi del passo: quello introdurrebbe letture miste t/t+1"*).
+  Quelli FUORI - diagnostica, setup, analisi - possono restare, e vanno DICHIARATI tali, non
+  corretti per simmetria.
+  media per passo: 3.35 chiamate, di cui 3.35 con w is None
+
+======================================================================================================================
+Q1-Q2: 3/3 PASS -> PASS
+
+COSA QUESTO SIGILLO NON DICE
+----------------------------
+NON dice che i pesi ricalcolati siano DIVERSI da quelli di `step()`. Dice quante volte vengono
+ricalcolati e da chi. **Se coincidessero, il difetto sarebbe teorico** - ed e' esattamente cio' che
+Q4 misurera' nel TEMPO 2, che NON e' in questo commit.

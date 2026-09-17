@@ -2472,6 +2472,27 @@ class Rete:
         return self._S
 
     def calcola_psi(self, w=None):
+        # [A8 - TEMPO 1, 2026-09-17] SOLO STRUMENTAZIONE, nessuna legge toccata.
+        # Il ramo `w is None` RICALCOLA i pesi. Ma `step()` li calcola GIA' una volta sola
+        # (riga ~2958), e il commento DUE RIGHE SOTTO prescrive l'opposto di cio' che accade:
+        #   "Non ricalcolare psi in punti diversi del passo: quello introdurrebbe letture miste
+        #    t/t+1."
+        # L'architettura giusta c'e' gia' (il parametro `w` esiste), ma ~19 chiamanti non lo
+        # passano. Un intento SCRITTO e non fatto rispettare dal codice e' esattamente cio' che
+        # A8 esiste per intercettare: prima di correggere, SI CONTA - e si conta CHI.
+        self._calcpsi_chiamate = getattr(self, "_calcpsi_chiamate", 0) + 1
+        if w is None:
+            self._calcpsi_w_none = getattr(self, "_calcpsi_w_none", 0) + 1
+            try:
+                _chi = _sys._getframe(1).f_code.co_name
+                _rig = _sys._getframe(1).f_lineno
+            except Exception:
+                _chi, _rig = "?", -1
+            _d = getattr(self, "_calcpsi_origini", None)
+            if _d is None:
+                _d = {}; self._calcpsi_origini = _d
+            _k = "%s:%d" % (_chi, _rig)
+            _d[_k] = _d.get(_k, 0) + 1
         if self.n == 0 or not len(self.i):
             self.psi = np.zeros(self.n, complex); return self.psi
         if w is None: w = self._pesi()

@@ -3228,3 +3228,61 @@ stato sopravviverebbe alla decisione di non farla.
 > **Il blocco non è sulla LEGGE — è sul PUNTO in cui verrebbe valutata.** La legge è quella giusta:
 > fa sparire il numero, separa le due scale, e non usa `LAM`.
 
+---
+
+## 9.27 — `calcola_psi(w=None)`: **il 100 % delle chiamate ricalcola i pesi. Ma «sedici violazioni» sono DUE**, e il resto era già misurato
+
+**TEMPO 1 — solo strumentazione, e i due sigilli passano:**
+```
+Q1b BYTE-IDENTICO: max|A-B| = 0.000e+00   (38 array, nodi 1669 = 1669)
+Q2  _calcpsi_w_none = 134 su 134  ->  il 100 % delle chiamate ricalcola i pesi
+```
+**Nessuno dei ~19 chiamanti passa `w`, benché il parametro esista.** Su questo la diagnosi è giusta.
+
+### La tabella ridimensiona la premessa
+
+```
+step:3006      1.00 per passo    DENTRO il passo
+step:3118      1.00 per passo    DENTRO il passo
+-------------------------------------------------
+DENTRO il passo (violano :2959):  2.00 per passo
+```
+
+**Il mandato dice *«le sedici volte sono sedici violazioni»*. Non lo sono: sono DUE.** Le sedici
+chiamate a `_pesi()` vengono per l'**80.5 %** da `stato_crossover`, raggiunto attraverso
+`massa_critica_adattiva` — **`_pesi()` chiama indirettamente sé stesso**, profondità **2**.
+
+### ⚠ E questo era già committato il 14 settembre
+
+`doc/REPERTO_pesi_ricorsione.md`, voce **M**. I numeri coincidono: allora `calcola_psi` **12.8 %** e
+`stato_crossover` **80.9 %**, oggi **13.3 %** e **80.5 %**. **E quel referto fermò un mandato per la
+stessa ragione**, con le stesse parole: *«il mandato assume che le 16 chiamate siano ricalcoli
+ridondanti da parte di `calcola_psi()`… la misura dice che la premessa è falsa.»*
+
+**La premessa di oggi è la stessa, e la misura la smentisce di nuovo.** *(È P1, e stavolta l'ho
+mancato io: il fatto era sul disco e non l'ho riletto prima di misurare. La misura ha confermato,
+non scoperto.)*
+
+### Ma il difetto esiste, ed è flagrante — **su due punti**
+
+```python
+:3006   psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()
+:3007   MtPsi = self._mat(w) @ psi_forces
+```
+
+**Nella stessa espressione:** `psi_forces` viene da `calcola_psi()`, che **ricalcola i pesi al suo
+interno**; `self._mat(w)` usa il **`w` di `step`**. **Due insiemi di pesi diversi, moltiplicati
+insieme** — esattamente la «lettura mista t/t+1» che il commento a `:2960` vieta, **una riga sotto**.
+Stessa struttura a `:3118`. **Entrambi i rami sono presi perché `SYNC_UPDATE` è FALSE** in tutti i
+run del fork: **con `SYNC_UPDATE` ON il difetto non esiste.**
+
+*(La domanda del 14 settembre era l'**ottimizzazione**; questa è la **correttezza**. Sono diverse, e
+la seconda è legittima anche se la prima era stata chiusa.)*
+
+### Il TEMPO 2 è realizzabile, e la sua portata è chiara
+
+**Due righe**: passare `w`, che a `:3007` **è già presente e già usato** — quindi valido, e la
+topologia non cambia fra `:2979` e i due punti. **Elimina 2 ricalcoli su 16 (13 %), non sedici.**
+**E sull'effetto non ho una previsione:** se i pesi coincidono, il difetto è **teorico**. È **Q4** a
+deciderlo, non un'attesa.
+

@@ -1026,3 +1026,19 @@ dimostrazione)* **A3 non discende da A2**.
   e da contare** (A8b). **Non l'ho aggiunto.**
 - **Nessun codice toccato.** Blob invariato: `69ee540`.
 
+## AGGIORNAMENTO 2026-09-17 (9) — `calcola_psi(w=None)`: **TEMPO 1 fatto, STOP come da mandato**
+- **Q1 BYTE-IDENTICO** (`0.000e+00`, 38 array, nodi 1669 = 1669) e **Q2: `_calcpsi_w_none = 134 su
+  134`** — **il 100 % delle chiamate ricalcola i pesi**. Nessuno dei ~19 chiamanti passa `w`.
+- **⚠ MA «sedici violazioni» sono DUE:** `step:3006` e `step:3118`, una per passo ciascuna. Le
+  sedici chiamate a `_pesi()` vengono per l'**80.5 %** da `stato_crossover` — **`_pesi()` chiama
+  indirettamente sé stesso**, profondità **2**.
+- **E questo era GIÀ COMMITTATO il 14 settembre** (`doc/REPERTO_pesi_ricorsione.md`, voce **M**),
+  con **gli stessi numeri**, e **aveva già fermato un mandato per la stessa ragione**. È P1, e
+  stavolta l'ho mancato io: il fatto era sul disco e non l'ho riletto prima di misurare.
+- **Il difetto però esiste ed è flagrante:** a `:3006-3007` `calcola_psi()` (che ricalcola i pesi)
+  è moltiplicato per `self._mat(w)`, il `w` di `step` — **due pesi diversi nella stessa
+  espressione**, una riga sotto il commento che lo vieta.
+- **TEMPO 2 realizzabile, DUE righe.** Elimina **2 ricalcoli su 16 (13 %)**, non sedici.
+  **Sull'effetto nessuna previsione: è Q4 a dirlo.** **In attesa del via libera.**
+- **Contatori cablati** (nessuna legge toccata). **`Z9` non toccata.**
+
