@@ -111,8 +111,12 @@ def rel(v):
 def spia_ps(self, i, j, w, dt_n, *a, **k):
     n = self.n
     try:
-        nb = np.asarray(self._nb, float)[:n]
-        nb_vic = np.asarray(getattr(self, "_nb_prec", self._nb), float)[:n]
+        _nbv = getattr(self, "_nb", None)
+        if _nbv is None or len(_nbv) < n:
+            REG.setdefault("salti_nb", []).append(1)   # P5: il ramo si CONTA, non e' un errore
+            return orig_ps(self, i, j, w, dt_n, *a, **k)
+        nb = np.asarray(_nbv, float)[:n]
+        nb_vic = np.asarray(getattr(self, "_nb_prec", _nbv), float)[:n]
         ii = np.asarray(i); jj = np.asarray(j); ww = np.asarray(w, float)
         mask = (ii < n) & (jj < n)
         ii, jj, wl = ii[mask], jj[mask], ww[mask]
@@ -126,6 +130,23 @@ def spia_ps(self, i, j, w, dt_n, *a, **k):
             B = B / np.maximum(deg[:, None], 1e-9)
             REG["B"].append(rel(B))
             REG["correzione"].append(rel(np.cross(B, nb)))
+            # LA DOMANDA CHE DECIDE SE LA CURA DI Z25 SI APPLICA QUI: il residuo dipende dal
+            # DENOMINATORE, o dalla STRUTTURA? Si rifa' `B` senza divisione e con un denominatore
+            # d'ARCO simmetrico, e si guarda se `sum(correzione)` va all'epsilon.
+            Bn = np.zeros((n, 3))
+            np.add.at(Bn, ii, nb_vic[jj] * wl[:, None] * refl)
+            np.add.at(Bn, jj, nb_vic[ii] * wl[:, None] * refl)
+            REG.setdefault("corr_nudo", []).append(rel(np.cross(Bn, nb)))
+            gs = np.sqrt(np.maximum(deg[ii], 1e-9) * np.maximum(deg[jj], 1e-9))
+            Bs = np.zeros((n, 3))
+            np.add.at(Bs, ii, nb_vic[jj] * wl[:, None] * refl / gs[:, None])
+            np.add.at(Bs, jj, nb_vic[ii] * wl[:, None] * refl / gs[:, None])
+            REG.setdefault("corr_simm", []).append(rel(np.cross(Bs, nb)))
+            # e il CONTROLLO che isola la RIFLESSIONE: stesso conto SENZA `refl`
+            Br = np.zeros((n, 3))
+            np.add.at(Br, ii, nb_vic[jj] * wl[:, None])
+            np.add.at(Br, jj, nb_vic[ii] * wl[:, None])
+            REG.setdefault("corr_norefl", []).append(rel(np.cross(Br, nb)))
             if S.TW_SPINORE and len(self.tw) >= len(mask):
                 _twh = np.asarray(self.tw, float)[mask] / (2.0 * max(S.PHI_CRIT, 1e-9))
                 _axis = np.where(cl[:, None] > 0, np.array([1.0, 0.0, 0.0]), np.array([0.0, 0.0, 1.0]))
@@ -204,6 +225,9 @@ def stampa(chiave, eti, atteso_zero):
 print("  -- punto 1 --")
 stampa("B", "B (media di campo)", False)
 c1 = stampa("correzione", "correzione = BxNB", True)
+stampa("corr_nudo", "  B SENZA divisione", True)
+stampa("corr_simm", "  B con den. d'ARCO", True)
+stampa("corr_norefl", "  B nudo e SENZA refl", True)
 print("  -- punto 2 --")
 if TW:
     c2 = stampa("otw", "_otw/_degt (TW forzato)", False)
