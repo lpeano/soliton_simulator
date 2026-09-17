@@ -3092,3 +3092,79 @@ della cura che non regge.**
 **separare le due leggi**, con una scala distinta per la maturazione e `TAU_A` dov'è. **Ma separare
 significa stabilire che oggi due leggi condividono un numero per accidente — ed è una decisione.**
 
+---
+
+## 9.25 — **Rigirato il sigillo di `--tau-luce`: T4 si ribalta, T1 è scaduto, e T3 ha CAMBIATO SEGNO**
+
+**La tesi era:** un sigillo preso su un sistema poi cambiato **quattordici volte** non è un ostacolo,
+è una voce da rigirare. **Verificata: è vera su un punto su tre, e il rigiro ne ha aperto uno nuovo.**
+
+### I due verdetti affiancati
+
+| | **allora** (`7d484580`, 15 set) | **oggi** (`69ee5403`) | |
+|---|---|---|---|
+| **T1** byte-identità a flag OFF | PASS | **FAIL** | **criterio SCADUTO** |
+| **T2** riduzione al limite | FAIL (`n` 1718 vs 1647) | FAIL (`n` 1682 vs 1680) | **stessa ragione** |
+| **T3** pendenza | FAIL (OFF −0.1685 → ON −0.4265) | FAIL (OFF **−1.7311** → ON **−1.2749**) | **RAGIONE DIVERSA** |
+| **T4** covarianza | FAIL (`cs→2cs` = `1.000000`) | **PASS** (`cs→2cs` = **`0.500000`**) | **ribaltato** |
+
+### ✅ T4 — il FAIL era l'artefatto di un difetto poi curato
+
+```
+allora :  cs -> 2cs : 1.000000   (atteso 0.500000)   <- NON SEGUE
+oggi   :  cs -> 2cs : 0.500000   (atteso 0.500000)   <- ESATTO
+```
+
+`_cs_nodo_prev` veniva scartata a ogni mitosi (**80 % dei passi con `cs = CS_M`**); la cura **C7**
+(`43e9a47`) ha portato il fallback da **71.88 %** a **0.00 %**. **`tau = d/cs` segue ora lo stato da
+solo su entrambe le grandezze, in modo esatto: è una LEGGE, non un numero travestito.** Il sigillo
+di allora **non poteva dirlo**.
+
+### T1 — scaduto, **e non è una regressione**
+
+T1 confronta il codice attuale, a flag OFF, con `_old_sim_pre_tauluce.py` — verificato dal disco:
+blob **`f5887254`**, cioè **`f7051c3~1`**, **quindici commit fa**. **Le differenze che rileva sono
+le sette correzioni di legge sigillate: T1 sta misurando che la bonifica è avvenuta.** Non ho
+riscritto il criterio: **lo dichiaro scaduto**, come il mandato ordina.
+
+### T2 — stessa ragione, **ed era previsto prima di girarlo**
+
+Il monkeypatch colpisce il metodo **condiviso** `_tempo_luce_nodo`, quindi cambia anche lo Strato 1.
+**È un difetto del test, non del codice, e il rigiro non poteva cambiarlo** — scritto nella
+marcatura (`b6c83c3`) **prima** dell'esecuzione. **Conseguenza che resta:** finché T2 non è
+riscritto, `--tau-luce` **non ha una riduzione al limite** — manca cioè il sigillo che dimostra che
+il flag *sostituisce* una legge invece di *aggiungerne* una.
+
+### ⚠ T3 — il reperto nuovo: **l'effetto ha cambiato verso**
+
+| | pendenza OFF | pendenza ON | effetto |
+|---|---|---|---|
+| allora | −0.1685 | −0.4265 | ON si **allontana** da zero di 0.258 |
+| oggi | **−1.7311 ± 0.0197** | **−1.2749 ± 0.0155** | ON si **avvicina** di 0.456 |
+
+**`IC95` disgiunti**, quindi non è il caso. **E anche il braccio OFF si è spostato di dieci volte**
+(−0.1685 → −1.7311): non per `--tau-luce`, ma per la **bonifica** — l'inerzia dimensionale entra
+proprio nella grandezza contro cui la pendenza è misurata. **I due esperimenti non misurano la
+stessa cosa**, e trattare i quattro numeri come commensurabili sarebbe un errore.
+
+**Non invento una spiegazione** — è il punto in cui, in una notte, ne sono state generate tre
+sbagliate. Il mandato fissa la lettura **prima**: *«fallisce per una ragione diversa → reperto nuovo,
+riporta e fermati.»*
+
+### Cosa ne è dell'ostacolo a `TAU_A`
+
+**Non cade, ma non regge più per le ragioni di allora.** E resta fermo il punto che il blocco aveva
+sollevato per primo, **che nessun rigiro tocca**: `TAU_A = LAM/cs` **non elimina il numero scelto —
+lo sposta su `LAM`** (`0.8` a `:146`, spostabile con `--lam`). Su quello il mandato stesso ha
+accolto il blocco.
+
+### Due voci nuove nel registro
+
+- **Z10** — **`TAU_A` è un solo numero per DUE leggi fisiche distinte**, e la loro coincidenza è
+  **accidentale, non derivata**: il `git blame` la conferma (stesso commit `670310fc`, messaggio
+  generico). **È un difetto di suo**, indipendente da Z9 e da `--tau-luce`.
+- **Z11** — **rigiro dei sigilli storici**, registrato come **lavoro previsto**: il caso
+  `--tau-luce` mostra che un sigillo può dire il falso **in entrambi i versi** — T4 da FAIL a PASS,
+  **T1 da PASS a FAIL**. Vale per Strato 1 (25/27), Step 2 (9/10), rumore colorato, e per i sigilli
+  di questa bonifica quando il blob cambierà ancora.
+

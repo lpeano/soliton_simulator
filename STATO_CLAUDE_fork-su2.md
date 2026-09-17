@@ -998,3 +998,18 @@ dimostrazione)* **A3 non discende da A2**.
   **separare le due leggi**, ma e' una decisione di regime.
 - **Nessun codice toccato.** Blob invariato: `69ee540`.
 
+## AGGIORNAMENTO 2026-09-17 (7) — **rigirato il sigillo di `--tau-luce`**
+- **T4 da FAIL a PASS:** `cs→2cs` ora **`0.500000`** esatto. Il FAIL era l'artefatto della cache
+  `_cs_nodo_prev` scartata a ogni mitosi, **poi curata** (C7). **`tau = d/cs` E' UNA LEGGE.**
+- **T1 da PASS a FAIL: criterio SCADUTO**, non regressione — il suo riferimento è
+  **`f5887254`, 15 commit fa**. Non riscritto: **dichiarato scaduto**.
+- **T2 FAIL per la stessa ragione** (difetto del test: monkeypatch sul metodo condiviso). **Finché
+  non è riscritto, `--tau-luce` non ha una riduzione al limite.**
+- **⚠ T3 FAIL per una RAGIONE DIVERSA: l'effetto ha CAMBIATO SEGNO** (allora ON si allontanava da
+  zero di 0.258, oggi si **avvicina** di 0.456; `IC95` disgiunti). **Reperto nuovo: riporto e mi
+  fermo**, come il mandato fissa.
+- **L'ostacolo a `TAU_A` non cade, ma non regge più per le ragioni di allora.** Resta fermo che
+  `LAM/cs` **sposta** il numero scelto invece di eliminarlo.
+- **Z10** (`TAU_A` = due leggi) e **Z11** (rigiro dei sigilli storici) registrate.
+- **Nessun cablaggio, nessuna promozione, nessun flag acceso.** Blob invariato: `69ee540`.
+

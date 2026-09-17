@@ -1,0 +1,52 @@
+12:import contextlib, importlib.util, io, os, sys
+13:import numpy as np
+26:    spec = importlib.util.spec_from_file_location(nome, percorso)
+27:    M = importlib.util.module_from_spec(spec); sys.modules[nome] = M
+--- lancio il rigiro ---
+========================================================================================================
+T1 - flag OFF byte-identico al file PRIMA della modifica (copre anche l'ESTRAZIONE)
+========================================================================================================
+  TAU_LUCE nel modulo nuovo (deve essere False): False
+  PRESIDIO: uno zero con N DIVERSO e' MANCANZA DI CONFRONTO, non identita'.
+    n_A = 1718   n_B = 1682   ->  NON CONFRONTABILI
+
+========================================================================================================
+T2 - riduzione al limite: tau forzato al valore VECCHIO -> deve tornare al ramo OFF
+========================================================================================================
+  TAU_LUCE (deve essere True): True
+  `_tempo_luce_nodo` forzato a restituire TAU_A*max(dens/dens_rif, 0.05)
+  PRESIDIO: uno zero con N DIVERSO e' MANCANZA DI CONFRONTO, non identita'.
+    n_A = 1682   n_B = 1680   ->  NON CONFRONTABILI
+
+========================================================================================================
+T3 - LA PENDENZA di theta contro l'inerzia, con SE / r^2 / IC95 (mai una pendenza nuda)
+========================================================================================================
+  OFF  pendenza -1.7311 +- 0.0197   r^2 0.818   n 1727   IC95 [-1.7696, -1.6925]
+  ON   pendenza -1.2749 +- 0.0155   r^2 0.798   n 1717   IC95 [-1.3052, -1.2445]
+  attesa dalla FASE 1: -1.030    misurata ON: -1.2749 +- 0.0155   z dalla attesa: 15.84
+  T3 (la pendenza si ALLONTANA da zero rispetto a OFF, di almeno 0.3): FAIL
+
+========================================================================================================
+T4 - SIGILLO DI COVARIANZA: e' una LEGGE o un numero travestito?
+========================================================================================================
+  d -> 2d   : tau_nuovo/tau_vecchio = 2.000000   (atteso 2.000000)
+  cs -> 2cs : tau_nuovo/tau_vecchio = 0.500000   (atteso 0.500000)
+  CONTRASTO - la legge VECCHIA con d -> 2d: rapporto = 1.000000  (resta FERMA: non e' una
+              legge sulla geometria, e questo e' esattamente il punto)
+  T4: PASS - tau SEGUE lo stato da solo: e' una LEGGE
+
+========================================================================================================
+T5 - ampiezza e stabilita'
+========================================================================================================
+  OFF  |omega| mediana      112.6   theta      64.51 gradi/passo =    0.18 giri   n=2948
+  ON   |omega| mediana      3.526   theta       2.02 gradi/passo =    0.01 giri   n=2956
+  fattore su theta: 0.0313   (atteso ~1/13 = 0.077 dal rapporto sqrt(tau))
+  |nb| max scostamento da 1: 2.220e-16    NaN/inf: 0
+  T5: PASS
+
+========================================================================================================
+ESITO: T1=FAIL   T2=FAIL   T3=FAIL   T4=PASS   T5=PASS
+SIGILLO COMPLESSIVO: FAIL
+========================================================================================================
+
+[exited with code 0]
