@@ -4128,3 +4128,106 @@ della cura**: non l'ho toccato.
 3. **Il fronte nuovo** dei tre punti gemelli.
 
 **`SPIN_FEEDBACK` resta OFF.**
+
+---
+
+## 9.39 — **Il denominatore era un ERRORE. Tolto, sigillo 12/12. E `G6` dice che la fase è CUCITA**
+
+**Data:** 2026-09-17 · cura in `c4eaded`, sigillo in `d2deb8f`, blob **`11cf103f`** (byte grezzi).
+**`SPIN_FEEDBACK` resta OFF di default:** è una **correzione di difetto** (categoria D, par.10),
+**non una promozione**.
+
+### Il difetto, e va letto come errore — non come scelta
+
+```python
+out[i] -= flusso / grado[i]
+out[j] += flusso / grado[j]     # DUE denominatori DIVERSI
+```
+
+La somma vale `f·(1/g_j − 1/g_i)`: **zero solo se i gradi coincidono**, e su un grafo disomogeneo
+non coincidono mai. Misurato **`|sum(out)|/max|out|` mediana 1.112, MAX 8.441** contro un errore
+macchina di `1e-16`. Il termine **iniettava coppia netta**, col verso pilotato dalla
+**disomogeneità dei gradi** — una proprietà della **topologia**, non della fisica dello spin.
+
+**`imag(<ψ_i|ψ_j>)` è antisimmetrico per costruzione: la legge era giusta, era la divisione ad
+averla rotta.**
+
+### Perché **nessun** denominatore, e non uno simmetrico
+
+Quattro varianti misurate (`eaa402b`). `nudo`, `(g_i+g_j)/2` e `g_i+g_j−2w` portano `G1`
+**tutte e tre** all'epsilon (`6.5e-16 / 1.1e-15 / 7.9e-16`): **la correttezza non discrimina.**
+
+E la domanda che giustificherebbe un denominatore d'arco — *«|out| cresce col grado?»* — **non ha
+risoluzione su questo grafo**:
+
+```
+numerosità per grado (2..9):   1018 | 20 | 10 | 20 | 50 | 30 | 80 | 90
+```
+
+**Il ~77 % dei nodi ha grado esattamente 2** — sono i figli della mitosi, che nascono con due archi
+(fatto già in CLAUDE.md par.9) — e le mediane di `|out|` per grado sono **non monotone** su tutte e
+quattro le varianti.
+
+**E la pendenza del fit era un artefatto:** dava `+0.03` per la forma attuale **mentre le mediane
+calavano**, perché dominata da una coda di poche decine di nodi. Ho corretto lo strumento perché
+riportasse **entrambi**: *una pendenza che contraddice le mediane binnate non si cita come titolo.*
+
+Restano **A1 e par.3**: **nessun denominatore ha zero scelte**; `(g_i+g_j)/2` è una fra quattro
+combinazioni, `g_i+g_j−2w` è un oggetto definito ma resta la scelta di quale oggetto usare.
+
+**E l'ampiezza non esplode — è il contrario dell'intuizione:** `|out|` mediano **0.0400 → 0.0223**,
+`max|out|` **0.816 → 0.590**. **È più piccolo di prima.** *(Spiegazione plausibile e **non
+verificata**: `grado` è il grado **pesato**, non il conteggio, e dividere per un numero minore di
+uno **amplifica**. Se fosse giusta, il vecchio `/grado` non normalizzava: amplificava.)*
+
+### Il sigillo — **12/12 PASS**
+
+| | esito |
+|---|---|
+| **`G1` [BLOCCANTE]** | mediana **6.475e-16**, MAX **2.752e-15** su 64 invocazioni — **era 1.112 / 8.441**: quindici ordini |
+| `G2` | al limite **grado pesato = 1**: `max\|A−B\| = 0.000e+00`, **shape uguali** |
+| `G3` | coi gradi veri differisce: `0.40874` |
+| `G5` / `G5b` | `0.000e+00` / `2.220e-16` |
+| `G7` | lift corto **2 su 66** (invocazioni 0 e 6): il transitorio |
+| `G8` | 0 NaN, `\|nb\|−1 = 2.2e-16`, CFL **0.400** |
+| `G9` | docstring riscritto **con i numeri che lo hanno smentito** |
+
+**`G2` non è scritto come nel mandato, ed era dichiarato prima** (`doc/PREVISIONI_qualitative.md`,
+`f3f1ab0`): con `grado[i] = grado[j] = g` la vecchia forma dà `±f/g` e la nuova `±f`, quindi la
+byte-identità vale **solo per `g = 1`**. **Col criterio del mandato avrebbe dato un FAIL falso** —
+l'undicesimo criterio scritto dal modello mentale invece che dalla misura, e stavolta intercettato
+**prima** di girarlo.
+
+### ⭐ `G6` — la cucitura di fase, **che non aveva mai fatto nessuno**
+
+```
+|Δ imag(ov)| mediano   : 0.0011042
+|imag(ov)| mediano     : 0.034603
+RAPPORTO |Δ| / |ov|    : 0.031911      -> la fase si muove del 3 % per passo
+CAMBI DI SEGNO         : 0.0035        -> lo 0.35 %, contro un NULLO di 0.50
+```
+
+**La fase è cucita.** `imag(ov)` è **continuo** fra passi consecutivi: il termine è una **corrente
+orientata vera**, non rumore di gauge travestito. **È la proprietà che rende significativo tutto il
+resto**, ed è la prima volta che qualcuno la verifica.
+
+**E il nullo non è zero, è 0.5**: se `imag(ov)` fosse rumore a media zero, **metà** degli archi
+sopravvissuti cambierebbe segno a ogni passo. Senza quel nullo, `0.0035` non direbbe niente.
+
+*(Vale la pena metterlo accanto al marchio della BUSSOLA sulle `berry_*`, che sono **morte perché
+telescopano**. Qui **non telescopa**: la grandezza sopravvive da un passo al successivo.)*
+
+### `G4` — riportato, **non giudicato**
+
+Deriva di `sum(phivel)` **−118.14** contro **−70.41** pre-cura. **Non è pass/fail:** le due
+traiettorie **divergono** (n finale diverso), quindi è un confronto **fra sistemi diversi**, su un
+seme, senza nullo misurato. Lo riporto e **non lo interpreto**.
+
+### Cosa la cura **non** fa
+
+- **Non restituisce la proprietà del vecchio docstring:** `out[k]` resta una **somma** su termini
+  che crescono col grado. **Se sia un difetto non è stato misurabile.** Fronte aperto.
+- **Non tocca gli altri tre punti con lo stesso schema** — `:2082` (`B`), `:2294` (`_otw`), `:3154`
+  (twist) — **già dimostrati in forma** in `doc/MAPPA_accoppiamenti_spin.md` e **mai misurati**:
+  è `Z24`.
+- **Non promuove nulla.** `SPIN_FEEDBACK` resta **OFF di default**.
