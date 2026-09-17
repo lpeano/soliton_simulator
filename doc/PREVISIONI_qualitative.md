@@ -146,3 +146,29 @@ sposti abbastanza da uscire dall'aliasing **e' una domanda quantitativa**, e la 
 **COSA LA FALSIFICHEREBBE:** se dopo il cablaggio il pavimento restasse dominante, **la forma non
 avrebbe fatto il suo lavoro** e la diagnosi dimensionale andrebbe riaperta, non raffinata.
 
+---
+
+# ① `inerzia` — **seconda stesura, con A6** *(ex ante, 2026-09-17)*
+
+**La prima stesura resta sopra e non si tocca.** Questa la integra col fatto nuovo: la cura del
+blocco non e' una rete, e' **A6** — *l'inerzia si valuta sullo stato PRECEDENTE*.
+
+- **Il `NaN` non raggiunge piu' la memoria persistente** — **e non perche' sia filtrato**, ma
+  perche' l'inerzia **non guarda piu' uno stato non calibrato**. *(Filtrare sarebbe stata la quarta
+  rete sopra lo stesso buco; diluire non funziona affatto, perche' `NaN` e' **assorbente**:
+  `0.9*x + 0.1*NaN = NaN`. Diluire cura un valore **cattivo**, non un valore **assente**.)*
+- **Il pavimento `1e-6` smette di essere il valore dominante** — resta, ma l'inerzia lo supera da
+  sola. **E' la firma che la diagnosi dimensionale era giusta.**
+- **`sigma = coppia/inerzia` CALA.**
+- **L'inerzia diventa piu' grande dove `cs` e' piu' basso** — nei pozzi densi.
+- **Il lavoro sul `cs` relazionale arriva finalmente allo spin.**
+
+**E una previsione sul FALLBACK, che e' la parte falsificabile in piu':** il ramo del primo passo
+(nessuno sfondo disponibile → contrasto neutro) **deve scattare solo nel transitorio e poi mai**.
+**Se scattasse a regime, non sarebbe un fallback: sarebbe il comportamento principale, e A8 lo
+condannerebbe.** *(Sigillo Y5.)*
+
+**COSA NON PREVEDO, ripetuto perche' non sia rivendicato dopo:** **non prevedo che il settore di
+spin si ordini**, ne' che l'aliasing sia risolto. `omega` e' un random walk smorzato: cambiare
+l'ingresso **sposta il plateau, non lo abolisce**.
+
