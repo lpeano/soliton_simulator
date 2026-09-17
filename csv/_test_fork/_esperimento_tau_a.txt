@@ -1,0 +1,39 @@
+======================================================================================================================
+ESPERIMENTO --tau-a 2.0 nel DETERMINISTICO.  G_PH e CALORE_INIT NON toccati.
+======================================================================================================================
+
+--- il flag e' arrivato? ---
+   [tau-a] ESPERIMENTO: TAU_A sovrascritto a 2.0 (default del regime 'deterministico': 50.0). NON e' una correzione, NON e' promosso, e la combinazione T
+
+--- S1: STABILITA'  [BLOCCANTE] ---
+  run TAU_A=50 : rc=0      run TAU_A=2.0 : rc=0
+  campo        TAU_A=50 (NaN, max|.|)       TAU_A=2.0 (NaN, max|.|)     
+  psi          0, 0.06412                   0, 5.834                    
+  omega_s      0, 7.133e+04                 0, 4.664e+04                
+  d            0, 6.019                     0, 35.37                    
+  d0           0, 2.878                     0, 50.22                    
+  phivel       0, 2.787                     0, 63.35                    
+[PASS] S1a nessun NaN/inf con TAU_A=2.0  [BLOCCANTE]    NaN/inf totali: 0
+[PASS] S1b |nb| = 1                                     max| |nb|-1 | = 2.220e-16
+[PASS] S1c d0 > 0 e d > 0                               min d0 0.05, min d 0.05
+[PASS] S1d tau_p stabile (dt_e/tau_p < 1)               _taup_cfl_max = 0.5626618843914434   (con TAU_A=50: 0.564409849276323)
+  |omega_s| mediana : TAU_A=50 -> 0.00121706     TAU_A=2.0 -> 0.00326898   (rapporto 2.69)
+  nodi finali       : TAU_A=50 -> 2577           TAU_A=2.0 -> 1754
+[PASS] S1e nessun RUNAWAY di omega_s (entro 100x)       rapporto 2.686
+
+--- S2: LA FIRMA DI Z9 ---
+  (calcolata da eta finale: ramp = min(1, eta/TAU_A))
+     TAU_A=50   eta med 0.73771   ramp med 0.014754   p05 0.00024336   p95 0.028191   ramp=1 al passo ~8133
+     TAU_A=2.0  eta med 0.94088   ramp med 0.47044   p05 0.16568   p95 0.64327   ramp=1 al passo ~255
+     riferimento Z9 (blob a8f1b2f4, TAU_A=50): ramp med 0.0202 al passo 120, ramp=1 a ~5960
+
+======================================================================================================================
+ESPERIMENTO: 5/5 PASS -> REGGE
+
+COME SI LEGGE -- le tre letture erano fissate PRIMA
+  DIVERGE                      -> la testimonianza di Luca e' CONFERMATA: TAU_A = 50 era una CURA,
+                                  e il difetto che curava ESISTE ANCORA. E' il risultato piu'
+                                  informativo dei tre, e NON e' un fallimento.
+  REGGE e ramp matura nei run  -> la compensazione e' SCADUTA. Si discute, NON si promuove.
+  REGGE con segni di STRESS    -> si riportano senza minimizzarli: "non esplode" non e' "sta bene".
+E in ogni caso questo NON e' categoria D, NON e' una correzione, e il DEFAULT NON CAMBIA.

@@ -3644,3 +3644,65 @@ numero su `LAM`; `ramp = eta/(d/cs)` **viola A6** dove verrebbe valutato. **La v
 A8b**. **Oppure affrontare la ricorsione `stato_crossover → _pesi()`, l'89 %** — ma è la voce **M**,
 un fronte diverso.
 
+---
+
+## 9.33 — **`TAU_A = 2.0` non diverge. Ma «non esplode» non è «sta bene»**
+
+**La domanda:** la testimonianza di Luca dice che `TAU_A = 50` fu scelto *«prima di creare il
+repository, per non far esplodere tutto»*. **Da git non è verificabile** — il valore c'è dal primo
+commit che aggiunge il file (**`670310f`**, 28 agosto; *non* `ca02af0`, che è del 13 settembre), e
+**`git log -S` trova un solo commit: nessuno lo ha mai cambiato**. È **assenza di prova**, non prova
+di assenza. **L'esperimento la mette alla prova.**
+
+### S1 — non diverge: 5/5 PASS
+
+```
+nessun NaN/inf · |nb|-1 = 2.2e-16 · d0>0 · _taup_cfl_max 0.5627 (vs 0.5644) · omega x2.69
+```
+
+### ⚠ Ma i segni di stress sono grossi
+
+| max | `TAU_A=50` | `TAU_A=2.0` | |
+|---|---|---|---|
+| `psi` | 0.064 | **5.834** | **× 91** |
+| `d0` | 2.878 | **50.22** | **× 17.4** |
+| `phivel` | 2.787 | **63.35** | **× 22.7** |
+| **nodi finali** | **2577** | **1754** | **−32 %** |
+
+> **Il sistema non diverge, ma non è lo stesso sistema.** «Regge» qui significa soltanto
+> **«l'aritmetica non produce NaN»**.
+
+### S2 — `Z9` sarebbe risolta, e non di poco
+
+```
+TAU_A=50   ramp med 0.0148   ramp=1 al passo ~8133
+TAU_A=2.0  ramp med 0.4704   ramp=1 al passo ~255
+```
+
+**Il kernel arriverebbe a maturità DENTRO la durata dei run.** *(Il `~8133` usa un metodo diverso
+dal `~5960` della rimisura — `eta/120` contro `(eta₁₂₀−eta₁)/119` — e va confrontato solo col `~255`
+della stessa tabella.)*
+
+### Il verdetto: la **terza** lettura
+
+**Due conseguenze opposte, da tenere insieme:** la compensazione **sembra scaduta** nel senso stretto
+(non diverge più — *plausibilmente per le correzioni di questo giro, ma non l'ho misurato*); **ma il
+prezzo non è un dettaglio**, e adottare `TAU_A = 2.0` **non sarebbe togliere una compensazione:
+sarebbe cambiare sistema.**
+
+**Non promosso, default invariato, flag OFF, `S3` byte-identico verificato prima del run.**
+
+### E un punto che vale per la prossima mossa
+
+**L'esperimento ha mosso ENTRAMBE le leggi che `TAU_A` governa** (**Z10**): la maturazione del
+kernel **e** la vita media della memoria spinoriale. **Parte dello stress osservato può venire dalla
+seconda, non dalla prima** — e **distinguerle richiede esattamente la separazione che `Z10`
+chiede.** *(Il che rende `Z10` non più un fronte collaterale, ma il prerequisito per interpretare
+questo risultato.)*
+
+### Cosa non ho guardato
+
+`chi`, `|<n>|`, `theta`, `L_tot`, MISURA U: **non misurati e non riportati**, come ordinato. **Senza
+quelli non si può dire se la terza combinazione sia fisicamente sensata** — si sa solo che non
+produce NaN. **Ed è un solo seme:** i rapporti (× 91, −32 %) **non hanno barra**, e su questo sistema
+la dispersione fra semi è grande. **Sono ordini di grandezza, non misure.**
