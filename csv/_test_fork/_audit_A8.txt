@@ -1,0 +1,48 @@
+==========================================================================================================================
+AUDIT A8 -- ogni ramo delle correzioni GIA' CABLATE. Contato? Quanto scatta?
+==========================================================================================================================
+
+RAMO                                         riga         contatore                      frazione     verdetto          
+--------------------------------------------------------------------------------------------------------------------------
+I_nodi -> np.ones(n)  [FALLBACK PERICOLOSO]  :3277        _taup_Inodi_fallback (NUOVO)   0.0000 %     legittimo         
+                                               il fallback e' densita' 1 contro |psi|^2 ~ 1e-6: SEI ORDINI
+np.maximum(cs_taup, 1e-9)                    :3299        _taup_cs_clamp (NUOVO)         0.0000 %     legittimo         
+                                               clamp sulla velocita' delle onde
+np.where(_peq_ok, peq, 1e-30)                :3305        _taup_peq_degenere (gia' c'era) 1.6588 %     REPERTO (1.7 %)   
+                                               e _taup_peq_deg_passi = 2 PASSI distinti
+max(t_luce, t_visco)  [il vincolo causale]   :3318        _taup_causale_scatti (gia' c'era) 1.6653 %     REPERTO (1.7 %)   
+                                               di cui su peq degenere: 207425
+TAU_USA_D0 / CS_DINAMICO                     :3288/:3298  FLAG, non fallback             n/d          NON ESERCITATO    
+                                               scelta di configurazione, non un ramo silenzioso: A8 non si applica
+getattr(_dt_e_ultimo, DT)  [DT NUDO]         :3451        _rep_dte_assente (NUOVO)       0.0000 %     legittimo         
+                                               se scattasse, sarebbe DT di COORDINATA (par.9)
+len(_dte) != len(rep)                        :3455        _rep_dte_fallback (gia' c'era) 0.0000 %     legittimo         
+len(self._rep) != len(rep)                   :3459        _rep_realloc (gia' c'era)      0.0000 %     legittimo         
+np.maximum(tau_pp, 1e-12)                    :3465        _rep_taupp_clamp (NUOVO)       0.0000 %     legittimo         
+len(self.d0) == len(avv)  [la guardia P5]    :3477        _rep_guardia_salti (gia' c'era) 0.0000 %     legittimo         
+d_arco = self.d  [nessuna guardia]           :3288        N/A: nessun ramo               n/d          NON ESERCITATO    
+                                               la cura ha RIMOSSO la guardia `if len(self.d) else`: vedi la verifica sotto
+
+--- d_arco: la cura ha rimosso `if len(self.d) else self.d`. E' un rischio? ---
+  len(self.d) = 208977   len(self.i) = 208977   len(self.d0) = 208977
+  allineati: True
+  LETTURA: la guardia vecchia (`if len(self.d) else self.d`) proteggeva dal caso `len(d) == 0`,
+  e restituiva `self.d` -- cioe' LA STESSA COSA. Era una guardia che, nel ramo di fallback, dava
+  l'identico risultato del ramo principale: NON proteggeva da nulla. Rimuoverla non ha tolto una
+  protezione. E se gli array si disallineassero, oggi il calcolo SOLLEVEREBBE un errore di
+  broadcast invece di proseguire in silenzio -- che secondo A8 e' il comportamento GIUSTO.
+
+--- A8b: LE CACHE CROSS-PASSO ---
+  cache                  chiamate       fallback       frazione         verdetto
+  _cs_nodo_prev (tempo-luce) 62             0              0.0000 %         OK
+  _cs_nodo_prev (inerzia) 66             2              3.0303 %         REPERTO
+  _xi_rumore             0              -              -                RUMORE_COLORATO e' OFF: ramo non esercitato
+  _psi_spin_prec         -              -              -                guardia dentro ritmo(), non toccata da queste correzioni
+  _peq_t                 -              -              -                snapshot locale a step, non cross-passo
+  _dt_e_ultimo (NUOVO)   66             0              vedi tabella sopra scritto in ENTRAMBI i rami dell'orologio
+  _rep (NUOVO, per arco) -              0              vedi tabella     esteso a 4 punti: :1015 :1868 :3572 :3651
+
+==========================================================================================================================
+ESITO DELL'AUDIT: 2 reperti su 11 rami esaminati
+  REPERTO -> np.where(_peq_ok, peq, 1e-30) (:3305): 1.6588 %
+  REPERTO -> max(t_luce, t_visco)  [il vincolo causale] (:3318): 1.6653 %

@@ -3261,7 +3261,14 @@ class Rete:
             else:
                 d_arco = self.d
 
-            I_nodi = np.abs(self.psi[:self.n])**2 if hasattr(self, "psi") and len(self.psi) >= self.n else np.ones(self.n)
+            # A8 (2026-09-17): questo ramo ha un FALLBACK PERICOLOSO -- `np.ones(self.n)`, cioe'
+            # densita' 1 al posto di |psi|^2, che vale ~1e-6. Se scattasse, `rho_arco` salirebbe di
+            # sei ordini e `t_visco` con lui. Non era contato: ora lo e'.
+            _I_ok = hasattr(self, "psi") and len(self.psi) >= self.n
+            if not _I_ok:
+                self._taup_Inodi_fallback = getattr(self, "_taup_Inodi_fallback", 0) + 1
+            self._taup_Inodi_chiamate = getattr(self, "_taup_Inodi_chiamate", 0) + 1
+            I_nodi = np.abs(self.psi[:self.n])**2 if _I_ok else np.ones(self.n)
             rho_arco = 0.5 * (I_nodi[self.i] + I_nodi[self.j])
 
             # PLASTICITA' VISCOELASTICA CAUSALE (par.10, categoria D: nessun flag).
@@ -3287,6 +3294,9 @@ class Rete:
             # oltre c'e' una violazione. E' la legge che dichiara il proprio dominio.
             # Sigillo: csv/_seal_fork/_sigillo_taup_causale.py  (V2-V5)
             cs_taup = (cs_arco if CS_DINAMICO else CS_M)
+            # A8: il clamp 1e-9 su cs e' un ramo silenzioso. CONTATO.
+            self._taup_cs_clamp = getattr(self, "_taup_cs_clamp", 0) + int(np.sum(np.asarray(cs_taup) < 1e-9))
+            self._taup_cs_clamp_tot = getattr(self, "_taup_cs_clamp_tot", 0) + int(np.size(cs_taup))
             t_luce = d_arco / np.maximum(cs_taup, 1e-9)                       # tempo-luce dell'arco
             _peq_ok = np.isfinite(self.peq) & (self.peq > 1e-30)
             if not bool(np.all(_peq_ok)):
@@ -3445,6 +3455,10 @@ class Rete:
         # NB su cosa questo NON fa: `d0` resta cumulativa. Chiudere il cricchetto significa che
         # l'INGRESSO puo' calare, non che d0 possa tornare indietro da sola. La previsione scritta
         # prima del cablaggio (doc/PREVISIONI_qualitative.md par.5) dice esattamente questo.
+        # A8: il `getattr(..., DT)` cade sul tick di COORDINATA se lo snapshot non esiste --
+        # esattamente il difetto che par.9 chiama "DT nudo dentro un processo locale". CONTATO.
+        if not hasattr(self, "_dt_e_ultimo"):
+            self._rep_dte_assente = getattr(self, "_rep_dte_assente", 0) + 1
         _dte = getattr(self, "_dt_e_ultimo", DT)
         if np.ndim(_dte) and len(np.asarray(_dte)) != len(rep):
             # P5: allineamento mancante -> si conta e si cade sul tick di coordinata.
@@ -3454,6 +3468,9 @@ class Rete:
             # P5: se lo stato non e' allineato agli archi, si riparte da zero e SI CONTA.
             self._rep_realloc = getattr(self, "_rep_realloc", 0) + 1
             self._rep = np.zeros(len(rep))
+        # A8: il clamp 1e-12 su tau_pp e' un ramo silenzioso. CONTATO.
+        self._rep_taupp_clamp = getattr(self, "_rep_taupp_clamp", 0) + int(np.sum(np.asarray(tau_pp) < 1e-12))
+        self._rep_taupp_tot = getattr(self, "_rep_taupp_tot", 0) + int(np.size(tau_pp))
         self._rep = self._rep + _dte * (rep - self._rep) / np.maximum(tau_pp, 1e-12)
         _rep_mem = self._rep
         # quanto la memoria si discosta dall'istantaneo: se fosse ~0 la cura sarebbe inerte.
