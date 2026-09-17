@@ -1,0 +1,42 @@
+================================================================================================================================
+GATE DELLA BONIFICA -- dati: 4 run committati (blob a44adc31, 500 passi, 4 semi)
+  ATTENZIONE: i .pkl sono del blob PRECEDENTE (a44adc31), non di 827d3bf8. La campagna
+  csrel e' stata fermata prima della scrittura del DB. Per una domanda STRUTTURALE
+  ('questo rapporto ha una distribuzione, o vale 1 per costruzione?') e' adeguato, ma
+  va DICHIARATO: il cs_floor relazionale cambia i valori, non la forma della domanda.
+================================================================================================================================
+
+### GATE A -- `rho_sorgente / peq_nodo` ha STRUTTURA?  (per la correzione (1), inerzia)
+--------------------------------------------------------------------------------------------------------------------------------
+  I / peq_nodo   (aggregato)       med  0.0007535 | p05  1.11e-05 p95      5.37 | p95/p05   4.859e+05 | IQR/med 2.19e+03 | >1:  34.9%
+
+  RIFERIMENTI, per sapere che faccia ha un SI' e che faccia ha un NO:
+  ------------------------------------------------------------
+  [SI' noto] I / Lam (media)       med  0.0003232 | p05  7.06e-06 p95      3.98 | p95/p05   5.633e+05 | IQR/med 7.44e+03 | >1:  33.5%
+  [NO noto ] I / median(I)         med          1 | p05    0.0231 p95  1.26e+04 | p95/p05   5.461e+05 | IQR/med 7.49e+03 | >1:  50.0%
+
+### GATE D -- `rho_arco / peq` ha STRUTTURA?  (per la correzione (6), elasticita')
+--------------------------------------------------------------------------------------------------------------------------------
+  rho_arco / peq   (aggregato)     med      3.338 | p05      1.24 p95      6.42 | p95/p05       5.184 | IQR/med    0.966 | >1:  99.7%
+
+  frazione di archi con fattore_elasticita = 1.0 ESATTO:
+      OGGI  (rho_arco / median(I_nodi)) :   0.13 %
+      CON   peq                          :   0.27 %
+      -> variazione: 0.14 punti percentuali
+
+### GATE C -- quanto scatta `maximum(r, 0.01)`?  (per la correzione (5))
+--------------------------------------------------------------------------------------------------------------------------------
+  _vuoto_s2ON_s1.vuoto   r_min  0.0009786   r_p05     0.1235   r_mediana   1.0000   r_min < 0.01? SI'
+  _vuoto_s2ON_s2.vuoto   r_min  0.0007608   r_p05     0.1156   r_mediana   1.0000   r_min < 0.01? SI'
+  _vuoto_s2ON_s3.vuoto   r_min  0.0001158   r_p05    0.03083   r_mediana   1.0000   r_min < 0.01? SI'
+  _vuoto_s2ON_s4.vuoto   r_min  0.0004347   r_p05     0.1371   r_mediana   1.0000   r_min < 0.01? SI'
+================================================================================================================================
+ELAST_C = 100.  fattore_elasticita = 1 + ELAST_C*max(rapporto - 1, 0)
+
+                                          p05    mediana        p95        max
+rho_arco/median(I_nodi)  OGGI            5676       8830  1.502e+04    2.3e+04
+fattore OGGI                        5.675e+05  8.829e+05  1.502e+06  2.299e+06
+fattore con peq                         24.87      234.8      543.2       1711
+
+  tau_p_loc e MOLTIPLICATO per questo fattore. Mediana OGGI: x8.829e+05 ; con peq: x234.8
+  archi col fattore = 1 esatto:  OGGI 0.13%   con peq 0.27%
