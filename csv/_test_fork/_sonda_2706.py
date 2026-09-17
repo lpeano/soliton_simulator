@@ -180,9 +180,18 @@ for k in (0, 1, len(reg) // 4, len(reg) // 2, len(reg) - 1):
     rap = x["fb_med"] / x["cp_med"] if x["cp_med"] > 0 else float("nan")
     print("  %-8d %-13.5g %-13.5g %-13.5g %-13.5g %-13.5g"
           % (k, x["ov_med"], x["wg_med"], x["fb_med"], x["cp_med"], rap))
-rr = [x["fb_med"] / x["cp_med"] for x in reg if x["cp_med"] > 0]
-print("\n  rapporto MEDIO su %d invocazioni : %.5g    (riferimento del referto: 2.706)"
-      % (len(rr), float(np.mean(rr))))
+rr = np.array([x["fb_med"] / x["cp_med"] for x in reg if x["cp_med"] > 0])
+print("
+  IL RAPPORTO NON E' UNA COSTANTE: la sua DISTRIBUZIONE su %d invocazioni" % len(rr))
+print("     MEDIA      %.5g   <- dominata dai primi passi: e' lo statistico SBAGLIATO" % rr.mean())
+print("     MEDIANA    %.5g" % np.median(rr))
+print("     p25 / p75  %.5g / %.5g" % (np.percentile(rr, 25), np.percentile(rr, 75)))
+print("     min / max  %.5g / %.5g   -> escursione di %.3g ORDINI di grandezza"
+      % (rr.min(), rr.max(), np.log10(rr.max() / max(rr.min(), 1e-300))))
+print("     ULTIMI 10 passi (il regime, non il transitorio): mediana %.5g" % np.median(rr[-10:]))
+print("     passi col rapporto < 1 (feedback PIU' PICCOLO della coppia): %d su %d (%.1f %%)"
+      % (int(np.sum(rr < 1.0)), len(rr), 100.0 * np.mean(rr < 1.0)))
+print("     (riferimento del referto, 'rapporto MEDIO su 126 passi': 2.706)")
 print("  |imag(ov)| mediana, su tutto      : %.5g   max %.5g   <- limitato a [0,1]?"
       % (float(np.median([x["ov_med"] for x in reg])), max(x["ov_max"] for x in reg)))
 print("  w/grado    mediana, su tutto      : %.5g   max %.5g"
