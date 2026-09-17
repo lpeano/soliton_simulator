@@ -3181,11 +3181,26 @@ class Rete:
             
         # TERMINE DI HALL / FRAME-DRAGGING come LEGGE (non parametro): il twist, finora solo
         # registrato, chiude il loop e agisce come coppia. La forza NON ha un coefficiente
-        # libero: e' il twist locale MEDIO normalizzato dalla scala critica del sistema
-        # (tw/PHI_CRIT, la stessa che definisce il tempo proprio), mediato sugli archi del nodo
-        # (la torsione che il nodo sente, non la somma che crescerebbe col grado). Emerge nella
-        # scala giusta (~0.2 della coppia principale) senza aggiustamenti. E' la forza non
+        # libero: e' il twist locale normalizzato dalla scala critica del sistema
+        # (tw/PHI_CRIT, la stessa che definisce il tempo proprio). E' la forza non
         # conservativa (frame-dragging, v x B con B=twist) che devia trasversalmente il moto.
+        #
+        # ⚠ IL COMMENTO PRECEDENTE DICEVA DUE COSE CHE LA MISURA HA SMENTITO (2026-09-18,
+        # `doc/REFERTO_Z24.md`, voce Z27):
+        #   - «mediato sugli archi del nodo (la torsione che il nodo SENTE, non la somma che
+        #     crescerebbe col grado)» -> quella media era `/ grado[k]`, col grado DEL NODO CHE
+        #     RICEVE, ed e' esattamente cio' che ROMPEVA l'antisimmetria. L'accumulo `+twn` a `i`
+        #     e `-twn` a `j` E' uno scambio esatto: misurato `|sum|/max|.| = 0.000e+00` SENZA la
+        #     divisione, contro **mediana 6.756, MAX 8.483** CON. La divisione era l'INTERA causa.
+        #   - «emerge nella scala giusta (~0.2 della coppia principale) senza aggiustamenti»
+        #     -> quella scala veniva PROPRIO dalla divisione, cioe' era un aggiustamento, solo
+        #     non dichiarato. Il rapporto REALE dopo la cura e' misurato dal sigillo, non asserito.
+        # `coppia` finisce in `delta_phivel / M_PH` con `M_PH = 1.0` UNIFORME: qui `sum = 0` non e'
+        # una verifica di forma, E' la conservazione di `sum(phivel)`.
+        # ⚠ E LA CURA NON RENDE IL TERMINE INTENSIVO: `sum(out) = 0` richiede un denominatore
+        # SIMMETRICO SULL'ARCO, l'indipendenza dal grado richiede quello DEL NODO CHE RICEVE, e le
+        # due cose NON possono valere insieme (compromesso algebrico, Z27). Si e' scelto `nudo`
+        # perche' e' l'unica forma esatta che non richiede NESSUNA scelta (A1, par.3).
         if FRAME_DRAG and len(_tw_t):
             if CHI_CORE and len(self.perc_chi) >= self.n:
                 chi_core = self.chiralita_core_locale()
@@ -3199,10 +3214,10 @@ class Rete:
             elif not (CHI_CORE and len(self.perc_chi) >= self.n):
                 twn = _tw_t / PHI_CRIT                 # twist adimensionale (scala di stato)  # <-- USA SNAPSHOT
             twist_nodo = np.zeros(self.n)
-            grado = np.zeros(self.n)
             np.add.at(twist_nodo, i, twn); np.add.at(twist_nodo, j, -twn)  # circolazione orientata
-            np.add.at(grado, i, 1.0);      np.add.at(grado, j, 1.0)
-            coppia = coppia + twist_nodo[:self.n] / np.maximum(grado[:self.n], 1.0)
+            # [CURA Z27, 2026-09-18] tolta `/ grado[k]`: rompeva l'antisimmetria dello scambio.
+            # Il calcolo di `grado` e' stato RIMOSSO perche' diventerebbe codice morto.
+            coppia = coppia + twist_nodo[:self.n]
         
         if REGIME == "deterministico":
             # TERMOSTATO NOSE-HOOVER con TEMPERATURA TARGET = LEGGE (dal vuoto di equilibrio P_eq).
