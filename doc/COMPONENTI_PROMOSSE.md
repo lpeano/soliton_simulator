@@ -473,3 +473,40 @@ in un docstring anni prima che gli assiomi esistessero. *(Il codice si recupera 
 - **Non è stato misurato quale fisica esca** da una plasticità **288 000 volte** più veloce. Serve
   una campagna, e questo giro non la prevedeva. **È il debito che questa bonifica contrae**, ed è
   registrato qui perché non si perda — come quello dello Step 2, che è poi stato saldato.
+
+---
+
+## G — **① `inerzia` DIMENSIONALE** (2026-09-17, categoria **D**)
+
+```
+era:  inerzia = max(rho_sorgente * (CS_M/cs)^2, 1e-6)
+ora:  inerzia = max((rho_sorgente / peq_nodo) * (d_nodo/cs_nodo)^2, 1e-6)
+```
+
+**Categoria D — correzione di difetto: nessun flag.** Sigillo `csv/_seal_fork/_sigillo_inerzia.py`,
+**Y0-Y10, 11/11 PASS**.
+
+### Assiomi applicati
+| assioma | come |
+|---|---|
+| **A6** *(ragione **primaria**)* | l'inerzia si valuta sullo stato **precedente**. Una funzione istantanea di ciò che sta per essere modificato è **uno specchio, non una resistenza**. **Ed è soddisfatto PER COSTRUZIONE**, non da uno snapshot aggiunto: l'inerzia è a `:3137`, `cs` è scritto a `:3213`, `peq` a `:3222`, `d` a `:3318` — **tutti dopo** (Y7, bloccante) |
+| **A1** | zero parametri: `rho`, `peq`, `d`, `cs` sono **tutti di stato**. Il `(d/cs)²` viene da `_tempo_luce_nodo`, l'unico punto in cui quella legge è scritta |
+| **A2** | `peq` è lo sfondo **diffuso locale** (Legge I, `:265`): nessuna statistica globale |
+| **A3** | dopo la proiezione arco→nodo, numeratore e denominatore vivono **entrambi sui nodi** |
+| **A5** | `d/cs` è il tempo causale |
+| **A8** | il fallback dello sfondo è **contato** — e non basta *quante* volte scatta: si registra **quando** (Y5) |
+
+### Il numero che conta
+**Il pavimento `1e-6` passa dal 100.00 % allo 0.3457 %.** Non è stato toccato: **è diventato inerte
+da solo**, ed è esattamente la **firma** che la previsione scritta prima chiedeva. Prima,
+`inerzia` **era** la costante `1e-6`, mentre `_fatt_cs` saliva fino a **6.43** senza servire a nulla
+(`T²/inerzia = 1.03e+06`).
+
+### Cosa NON dice
+**Nulla su `theta`, `omega` o l'aliasing.** Il mandato lo vieta, e la ragione è che `theta` è il
+numero che questa correzione punta a muovere: si guarderà **a bonifica finita, contro le previsioni
+già committate** (`9c9cc43`, `3c82177`), **scritte prima**.
+
+**Debito aperto:** lo **0.3457 %** di nodi ancora al pavimento **non è stato caratterizzato** — non
+si sa *quali* siano.
+

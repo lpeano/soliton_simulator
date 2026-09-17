@@ -951,3 +951,20 @@ dimostrazione)* **A3 non discende da A2**.
   sblocca entrambe (calcolare `psi` alla costruzione della scena) **non è una bonifica**.
 - **Z7: `_fatt_cs_ultimo` scritto e mai letto** (quarto caso della famiglia).
 - **Nessun codice toccato.** Blob invariato: `2d54ba3`.
+
+## AGGIORNAMENTO 2026-09-17 (4) — **A8, audit retroattivo, e ① CABLATA**
+- **A8 + A8b** negli assiomi (`145395c`): *un ramo silenzioso non e' un ramo*. **APERTO** ora dice
+  che **due voci su otto** non sono assiomi nel senso delle altre sei.
+- **AUDIT RETROATTIVO** (`438a02c`): **quattro rami non contati trovati e strumentati**, tutti a
+  **0.0000 %** — compreso il piu' pericoloso (`I_nodi -> np.ones(n)`, **sei ordini**). **A8b ha
+  trovato il reperto vero:** la stessa cache `_cs_nodo_prev` cade **0/62** da un consumatore e
+  **2/66** dall'altro.
+- **① CABLATA** (`6a4980a`), sigillo **Y 11/11 PASS**. **Il pavimento `1e-6` passa dal 100.00 %
+  allo 0.3457 %** — non e' stato toccato, **e' diventato inerte da solo**.
+- **Il blocco si e' sciolto con A6, per COSTRUZIONE:** l'inerzia e' a `:3137`, `cs`/`peq`/`d` sono
+  aggiornati a `:3213`/`:3222`/`:3318`. Nessuno snapshot aggiunto.
+- **Blob:** `69ee540`, byte grezzi `ee0c2a60`.
+- **APERTO:** la coerenza di grandezza (`rho_spin` contro `|psi|^2`) **resta dichiarata e non
+  risolta** — ① e' cablata **con quella riserva scritta**. E lo **0.35 %** di nodi ancora al
+  pavimento **non e' caratterizzato** (voce **Z8**).
+

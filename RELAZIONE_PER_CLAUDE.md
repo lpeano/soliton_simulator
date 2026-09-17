@@ -2866,3 +2866,90 @@ dall'inerzia — necessario in ①, o si avrebbe `cs⁻⁴` — **non rompe ness
 ① punta a muovere, e si guarderà **a bonifica finita, contro una predizione scritta prima** — che è
 già committata (`doc/PREVISIONI_qualitative.md`, commit `9c9cc43`, **scritta prima di un cablaggio
 che poi non è avvenuto**).
+
+---
+
+## 9.22 — A8, l'audit retroattivo, e **① cablata**: il pavimento passa dal 100 % allo 0.35 %
+
+**Tre fasi.** A8 negli assiomi → audit retroattivo delle correzioni già cablate → cablaggio di ①.
+
+### 1. A8: «un ramo silenzioso non è un ramo»
+
+**Ogni fallback su un percorso fisico deve essere contato.** Un ramo che scatta senza segnalarlo
+**non produce un errore: produce una fisica diversa, silenziosa, che sembra funzionare** — è così
+che `_psi_spin_prec` ha tenuto la FASE 5 inerte nel **95.33 %** delle chiamate senza che un solo
+sigillo se ne accorgesse. **A8 si dichiara più debole degli altri**: A1-A5 dicono cosa una legge
+*può essere*, A8 dice come va *strumentata*. È metodologico — e **APERTO** ora registra che **due
+voci su otto** non sono assiomi nel senso delle altre sei (A6 è un teorema, A8 è metodo).
+
+### 2. L'audit retroattivo: **quattro rami non contati, tutti a zero**
+
+`d_arco` e la plasticità causale erano state cablate **prima** che A8 esistesse. Riesaminate:
+
+| ramo | contatore | scatta |
+|---|---|---|
+| **`I_nodi → np.ones(n)`** | **aggiunto** | **0.0000 %** |
+| `np.maximum(cs_taup, 1e-9)` | **aggiunto** | 0.0000 % |
+| `np.maximum(tau_pp, 1e-12)` | **aggiunto** | 0.0000 % |
+| `getattr(_dt_e_ultimo, DT)` | **aggiunto** | 0.0000 % |
+
+**Il più pericoloso leggeva zero:** il fallback di `I_nodi` è **densità 1** contro `|psi|² ~ 1e-6` —
+**sei ordini di grandezza**, in silenzio. Non scatta mai. **Ma A8 vuole il contatore anche quando
+legge zero:** prima di oggi non si sapeva che leggesse zero, si sapeva solo che **non era esploso**.
+
+**E A8b ha trovato il reperto vero:** la **stessa** cache `_cs_nodo_prev`, letta in **due** punti,
+cade nel fallback **0 volte su 62** da `_tempo_luce_nodo` e **2 su 66** da `_passo_spinoriale`
+(**3.03 %**). È preesistente alla bonifica, ma diventa rilevante proprio ora, perché ① legge `cs`
+da lì.
+
+*(I due rami che superano l'1 % — `peq` degenere e il vincolo causale — sono il transitorio già
+registrato come Z3/Z6, non difetti nuovi: marcarli sarebbe contarli due volte.)*
+
+### 3. ① cablata — e il blocco si scioglie con **A6**, non con una rete
+
+```
+era:  inerzia = max(rho_sorgente * (CS_M/cs)^2, 1e-6)
+ora:  inerzia = max((rho_sorgente / peq_nodo) * (d_nodo/cs_nodo)^2, 1e-6)
+```
+
+**Il fatto che ha sbloccato tutto è di ordine di esecuzione, e si legge dal disco:** l'inerzia si
+calcola a `:3137`, mentre `cs` è scritto a `:3213`, `peq` a `:3222`, `d` a `:3318`. **Tutte le
+grandezze lette lì sono già quelle del passo precedente: A6 è soddisfatto per costruzione**, senza
+aggiungere nessuno snapshot. Il mandato temeva di doverne aggiungere; l'ordine li forniva già.
+
+**Il numero che conta — Y4, bloccante:**
+
+> **Il pavimento `1e-6` passa dal 100.00 % allo 0.3457 %.**
+
+**Non è stato toccato: è diventato inerte da solo**, ed è esattamente la **firma** che la previsione
+scritta prima chiedeva. Prima, `inerzia` **era** la costante `1e-6`, mentre `_fatt_cs` saliva fino a
+**6.43** senza servire a nulla (`T²/inerzia = 1.03e+06`).
+
+**Y1 (bloccante): zero NaN in `omega_s`.** E non perché filtrato — **filtrare sarebbe stata la
+quarta rete** sopra lo stesso buco, e **diluire non funzionerebbe affatto** perché `NaN` è
+**assorbente** (`0.9·x + 0.1·NaN = NaN`): diluire cura un valore *cattivo*, non un valore *assente*.
+
+**Il fallback del primo passo non è una convenzione nuova**, e questo era il punto delicato: il
+codice **sostituisce già `peq` con `rho` quando è NaN, in due punti** (`:3544`, `:3657`), e
+`rho/rho = 1`. Il neutro **è** il limite di una sostituzione già presente, non un numero scelto.
+
+### 4. Il settimo criterio corretto dopo l'esecuzione — **e stavolta di forma**
+
+Y5 chiedeva *«passi distinti ≤ 3»* e dava FAIL con 4. Il difetto era mio: la previsione scritta
+prima dice *«scatta solo nel transitorio e poi mai»*, che è un'affermazione sulla **posizione**, non
+sul **conteggio**. **Un fallback che scatta 4 volte all'inizio e uno che scatta 4 volte sparse danno
+lo stesso numero e sono diagnosi opposte.** E la soglia `3` l'avevo scelta guardando una **scena
+ridotta** invece del run reale.
+
+**Ho misurato la posizione invece di spostare la soglia:** ultima invocazione col fallback = **8 su
+66**, poi **58 consecutive pulite**. Il criterio è ora quello che la previsione già conteneva: **il
+fallback cessa e non torna.**
+
+### 5. Cosa resta aperto
+
+- **La coerenza di grandezza** (`rho_spin` contro `|psi|²`) **non è risolta**: ① è stata cablata
+  **con quella riserva scritta**, non perché sia caduta. Si chiuderebbe con un `peq_spin` che **non
+  esiste** — una legge nuova, non una bonifica.
+- **Lo 0.3457 % di nodi ancora al pavimento non è caratterizzato** (voce **Z8**).
+- **`theta` non è stato guardato**, come il mandato impone. Si guarderà a bonifica finita, contro
+  previsioni già committate **prima** del cablaggio.
