@@ -655,6 +655,13 @@ VERLET = False          # INTEGRATORE METRICO SPERIMENTALE: se True, il sottocic
 # invariato il comportamento canonico; attivare con --verlet per il confronto A/B.
 ELAST_C = 100.0         # COEFFICIENTE DEL NUCLEO ELASTICO: default storico, esposto solo per
 # esperimenti di ridondanza/sensibilita'. ELAST_C=0 disattiva il rinforzo elastico di d0.
+# >>> INUTILIZZATO dal 2026-09-17 (bonifica della plasticita'). NON E' STATO CANCELLATO DI
+# PROPOSITO: e' EVIDENZA. Il suo unico uso era `fattore_elasticita` in `step` (riga ~3244 del blob
+# 827d3bf8), sostituito dalla forma viscoelastica causale `max(t_luce, t_luce*rho_arco/peq)`.
+# Restava un NUMERO SCELTO ("default storico", A1) dentro un rapporto fra popolazioni diverse (A3):
+# con ELAST_C = 100 il fattore aveva mediana ~8.8e5, cioe' la plasticita' era CONGELATA.
+# Il codice di una legge esclusa non si cancella mai (CLAUDE.md par.9): resta qui a spiegare
+# PERCHE' esiste il suo sostituto. Vedi doc/COMPONENTI_PROMOSSE.md e doc/REFERTO_gate_bonifica.md.
 GUSCIO_MORBIDO = False   # DIFFUSIONE DI SUPERFICIE delle d0 (legge, zero parametri): se True, aggiunge
 # al rilassamento plastico un termine diffusivo D*lap(d0) con D = c_locale * spaziatura d'arco. Il
 # laplaciano e' ~0 nel nucleo uniforme e grande al bordo ripido -> smussa SOLO il guscio (tensione
@@ -3252,12 +3259,56 @@ class Rete:
 
             I_nodi = np.abs(self.psi[:self.n])**2 if hasattr(self, "psi") and len(self.psi) >= self.n else np.ones(self.n)
             rho_arco = 0.5 * (I_nodi[self.i] + I_nodi[self.j])
-            rho_med = max(float(np.median(I_nodi)), 1e-9)
-            
-            fattore_elasticita = 1.0 + ELAST_C * np.maximum(rho_arco / rho_med - 1.0, 0.0)
-            # cs-dinamico: il tempo plastico delle d0 scala con la c LOCALE dell'arco.
+
+            # PLASTICITA' VISCOELASTICA CAUSALE (par.10, categoria D: nessun flag).
+            # Era:  fattore_elasticita = 1.0 + ELAST_C * max(rho_arco/median(I_nodi) - 1, 0)
+            #       tau_p_loc          = (d_arco / cs) * fattore_elasticita
+            # TRE DIFETTI IN UNA RIGA, tutti misurati (doc/REFERTO_gate_bonifica.md):
+            #  - ELAST_C = 100 e' un numero SCELTO ("default storico"): A1 violato;
+            #  - median(I_nodi) e' una statistica GLOBALE su un percorso fisico: A2 violato
+            #    (Legge I, :265);
+            #  - ed e' un ERRORE DI POPOLAZIONE (A3): rho_arco vive sugli ARCHI, median(I_nodi)
+            #    sui NODI. Su coda pesante l'arco tipico sta MOLTO sopra la mediana nodale
+            #    (rapporto mediano misurato: 8830), quindi il fattore aveva mediana ~8.8e5:
+            #    la plasticita' non era "spenta a meta'", era CONGELATA quasi ovunque.
+            # LA FORMA NUOVA dice una cosa fisica: il rilassamento plastico e' IL PIU' LENTO fra
+            # il tempo-luce dell'arco e il suo tempo viscoelastico. Nel denso il mezzo si comporta
+            # da solido (ricorda la forma), nel rarefatto da fluido (la dimentica).
+            # `peq` e' il vuoto di sfondo LOCALE, per ARCO (A2 soddisfatto), e vive sulla STESSA
+            # popolazione di rho_arco (A3 soddisfatto). Zero parametri: d, cs, rho, peq sono tutti
+            # di stato (A1).
+            # IL `max` NON E' UN PAVIMENTO TARATO (A1/A3b): sotto t_luce la forma di riposo
+            # inseguirebbe la forma attuale PIU' IN FRETTA di quanto un segnale attraversi l'arco,
+            # cioe' violerebbe A5. Non e' un valore scelto fra molti: e' l'unico possibile, perche'
+            # oltre c'e' una violazione. E' la legge che dichiara il proprio dominio.
+            # Sigillo: csv/_seal_fork/_sigillo_taup_causale.py  (V2-V5)
             cs_taup = (cs_arco if CS_DINAMICO else CS_M)
-            tau_p_loc = (d_arco / np.maximum(cs_taup, 1e-9)) * fattore_elasticita
+            t_luce = d_arco / np.maximum(cs_taup, 1e-9)                       # tempo-luce dell'arco
+            _peq_ok = np.isfinite(self.peq) & (self.peq > 1e-30)
+            if not bool(np.all(_peq_ok)):
+                # P5: ogni protezione su un percorso fisico va CONTATA, non solo messa.
+                self._taup_peq_degenere = getattr(self, "_taup_peq_degenere", 0) + int((~_peq_ok).sum())
+            _peq = np.where(_peq_ok, self.peq, 1e-30)
+            t_visco = t_luce * (rho_arco / _peq)                              # tempo viscoelastico
+            tau_p_loc = np.maximum(t_luce, t_visco)                           # IL PIU' LENTO DEI DUE
+            # quante volte e' il VINCOLO CAUSALE a decidere, e non la viscoelasticita' (A3b: un
+            # limite che scatta quasi sempre non e' un limite, e' il comportamento principale).
+            _scatta = t_visco < t_luce
+            self._taup_causale_scatti = getattr(self, "_taup_causale_scatti", 0) + int(_scatta.sum())
+            self._taup_causale_tot = getattr(self, "_taup_causale_tot", 0) + int(len(tau_p_loc))
+            # E l'INTERSEZIONE: quanti degli scatti causali stanno su archi dove `peq` era gia'
+            # degenere. Se coincidessero, il vincolo causale non starebbe descrivendo il vuoto
+            # profondo, starebbe descrivendo il punto in cui `peq` smette di essere definito --
+            # due cose diverse, che si distinguono solo contandole (P5).
+            self._taup_causale_su_degenere = (getattr(self, "_taup_causale_su_degenere", 0)
+                                              + int((_scatta & ~_peq_ok).sum()))
+            # PRESIDIO DI STABILITA', permanente: il rilassamento d0 += dt_e*(d-d0)/tau_p e' un
+            # Eulero esplicito, e DIVERGE OSCILLANDO se dt_e/tau_p >= 1. Prima della bonifica il
+            # massimo misurato valeva 34629 sullo 0.11 % degli archi (csv/_seal_fork/
+            # _u7_separazione_scale.txt). Non basta che non produca NaN: va GUARDATO.
+            if len(tau_p_loc):
+                _cfl = float(np.max(dt_e / tau_p_loc)) if np.ndim(dt_e) else float(dt_e / tau_p_loc.min())
+                self._taup_cfl_max = max(getattr(self, "_taup_cfl_max", 0.0), _cfl)
             self.d0 += dt_e * (self.d - self.d0) / tau_p_loc
             if GUSCIO_MORBIDO:
                 # DIFFUSIONE DI SUPERFICIE: lap(d0) ~0 nel nucleo uniforme, grande al bordo ripido ->
@@ -5039,7 +5090,9 @@ def _applica_flag(a):
     GUSCIO_MORBIDO = bool(getattr(a, "guscio_morbido", False))   # diffusione di superficie delle d0: default off
     if getattr(a, "elast_c", None) is not None:
         ELAST_C = float(a.elast_c)
-        print(f"[elast] nucleo elastico C = {ELAST_C}")
+        print(f"[elast] ATTENZIONE: --elast-c e' un NO-OP DICHIARATO dal 2026-09-17. ELAST_C={ELAST_C} "
+              f"e' impostato ma NON E' LETTO da nessun percorso fisico: la plasticita' usa ora "
+              f"tau_p = max(d/cs, (d/cs)*rho_arco/peq), che non ha coefficienti. Il valore non ha effetto.")
     HAM_SRC = a.ham
     ALPHA_NAT = a.alfanat
     DIFF_RES = a.diffres
@@ -5406,7 +5459,11 @@ def _cli():
                         "|d-d0|/d0 ed eccesso di torsione (|tw|/PHI_CRIT-1), saturato via tanh e "
                         "non-negativo. Sostituisce PLAST_MIT statico. Default off = non-regressione.")
     p.add_argument("--elast-c", type=float, default=None, dest="elast_c",
-                   help="Coefficiente del nucleo elastico (default storico 100). 0 = spento; "
+                   help="NO-OP DICHIARATO dal 2026-09-17: ELAST_C non e' piu' letto da nessun "
+                        "percorso fisico (la plasticita' usa la forma viscoelastica causale). "
+                        "Il flag resta accettato per non rompere gli script gia' scritti, e "
+                        "STAMPA UN AVVISO. "
+                        "Coefficiente del nucleo elastico (default storico 100). 0 = spento; "
                         "30/100/300 = test di sensibilita'.")
     p.add_argument("--guscio-morbido", action="store_true", dest="guscio_morbido",
                    help="DIFFUSIONE DI SUPERFICIE delle d0 (legge, zero parametri): aggiunge D*lap(d0) "
