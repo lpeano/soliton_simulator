@@ -179,12 +179,40 @@ print("  max|phivel| %.5g   max|omega_s| %.5g   n finale %d   (pre-cura, stessa 
       % (np.max(np.abs(pv[np.isfinite(pv)])), np.max(np.abs(om[np.isfinite(om)])), r.n))
 
 print("\n--- H6: il commento corretto ---")
-smentite = ["mediato sugli archi del nodo", "scala giusta (~0.2 della coppia principale) senza aggiustamenti"]
-viva = [f for f in smentite if f in src.split("if FRAME_DRAG")[0][-3000:]]
-verdetto("H6 le affermazioni smentite non sono piu' nel commento", not viva,
-         "sopravvivono: %s" % (viva if viva else "nessuna"))
-verdetto("H6b il commento SPIEGA perche' erano false", "6.756" in src and "0.000e+00 SENZA la" in src,
-         "cita la misura: %s" % ("6.756" in src))
+# ⚠ H6 RISCRITTO il 2026-09-18, DODICESIMO criterio scaduto. La prima versione cercava le frasi
+# smentite nel sorgente e falliva se le trovava -- ma le trovava perche' il commento nuovo LE CITA,
+# come citazione di cio' che era falso, che e' esattamente la cosa giusta da fare. Il criterio non
+# distingueva AFFERMATO da CITATO COME RITIRATO, e ha prodotto un FAIL FALSO su codice corretto.
+# (E H6b cercava una sottostringa che nel commento e' spezzata da un backtick: sbagliata due volte.)
+# LA VERSIONE NUOVA guarda il BLOCCO del commento e chiede che ogni frase smentita compaia SOLO
+# dentro il paragrafo di ritiro -- quello che comincia con il marcatore. Puo' ancora fallire:
+# fallirebbe se qualcuno riscrivesse l'affermazione FUORI dal ritiro, che e' il caso che il
+# criterio esiste per intercettare.
+_blocco = src.split("if FRAME_DRAG")[0][-4000:]
+_MARK = "IL COMMENTO PRECEDENTE DICEVA DUE COSE CHE LA MISURA HA SMENTITO"
+_pos_mark = _blocco.find(_MARK)
+smentite = ["mediato sugli archi del nodo",
+            "scala giusta (~0.2 della coppia principale) senza aggiustamenti"]
+fuori = []
+for _f in smentite:
+    _p = 0
+    while True:
+        _p = _blocco.find(_f, _p)
+        if _p < 0:
+            break
+        if _pos_mark < 0 or _p < _pos_mark:      # compare PRIMA del ritiro = e' ancora AFFERMATA
+            fuori.append(_f)
+            break
+        _p += 1
+print("  marcatore di ritiro trovato a offset %s del blocco" % (_pos_mark if _pos_mark >= 0 else "ASSENTE"))
+print("  le due frasi compaiono %d volte in tutto, e devono stare TUTTE dopo il marcatore"
+      % sum(_blocco.count(x) for x in smentite))
+verdetto("H6 nessuna affermazione smentita e' ancora ASSERITA",
+         _pos_mark >= 0 and not fuori,
+         "asserite fuori dal ritiro: %s" % (fuori if fuori else "nessuna"))
+verdetto("H6b il commento cita la MISURA che le ha smentite",
+         "6.756" in _blocco and "0.000e+00" in _blocco,
+         "cita 6.756: %s   cita 0.000e+00: %s" % ("6.756" in _blocco, "0.000e+00" in _blocco))
 
 print("\n" + "=" * 118)
 print("SIGILLO: %d/%d PASS" % (sum(esiti), len(esiti)))
