@@ -1008,6 +1008,11 @@ class Rete:
         self.i = np.zeros(0, int); self.j = np.zeros(0, int)
         self.d = np.zeros(0); self.d0 = np.zeros(0); self.vd = np.zeros(0)
         self.peq = np.zeros(0); self.tw = np.zeros(0); self.twp = np.zeros(0)
+        # [(3) BONIFICA 2026-09-17] MEMORIA DELLA REPULSIONE, per ARCO. Vedi `mitosi()`.
+        # Nasce a 0: un arco appena creato non ha storia repulsiva. (NB: NON e' il pattern di
+        # `peq`, che nasce NaN perche' va CALIBRATO sul campo; qui lo zero e' il valore giusto,
+        # non un segnaposto.)
+        self._rep = np.zeros(0)
         self._sin2_vir = None                 # memoria per-arco della quota tangenziale della viriale (freno anisotropo)
         # MEMORIA HEBBIANA DEL MOTO (inerzia plastica). Per ogni nodo, un vettore che
         # ricorda la direzione di moto del baricentro d'interferenza locale. Si rinforza
@@ -1860,6 +1865,7 @@ class Rete:
         self.d = np.concatenate([self.d, dd]); self.d0 = np.concatenate([self.d0, dd])
         self.vd = np.concatenate([self.vd, np.zeros(len(dd))])
         self.peq = np.concatenate([self.peq, np.full(len(dd), np.nan)])  # da calibrare
+        self._rep = np.concatenate([self._rep, np.zeros(len(dd))])       # [(3)] nessuna storia
         self.tw = np.concatenate([self.tw, np.zeros(len(dd))])
         self.twp = np.concatenate([self.twp, np.zeros(len(dd))])
         self._grado()
@@ -2328,29 +2334,21 @@ class Rete:
         # rileggo phi_s (angolo polare) dal Bloch. phi (fase scalare U(1)) resta intatta.
         self.phi_s = np.arccos(np.clip(nb_new[:, 2], -1, 1))            # b = angolo polare [0,pi]
 
-    def spin_locale(self):
-        """MISURA dello spin nel TEMPO PROPRIO LOCALE. Lo spin (frequenza di rotazione della
-        fase del campo) e' una frequenza DERIVATA/IMMERSA: e' un processo che accade DENTRO la
-        materia gia' formata, immersa nel proprio tempo. Va dunque LETTO nel tempo proprio del
-        luogo, non nel tick fondamentale DT. Questo la distingue nettamente dalla frequenza
-        f_i che DEFINISCE il ritmo (metodo ritmo()): quella e' FONDAMENTALE, sta a monte del
-        tempo proprio, e deve usare DT come riferimento comune (senno' la dilatazione non e'
-        piu' definibile). Qui invece siamo A VALLE: lo spin e' conseguenza del processo gia'
-        immerso, e usare DT lo mescolerebbe con la dilatazione gravitazionale (come misurare
-        il decadimento di un muone col nostro orologio invece che col suo). Ritorna la
-        frequenza propria per nodo, letta nel tempo proprio locale dt_n = DT * r."""
-        n = self.n
-        if self._psi_prec is None or len(self._psi_prec) != n:
-            return np.zeros(n)
-        a = np.angle(self.psi[:n]) - np.angle(self._psi_prec[:n])
-        dphi = np.abs((a + np.pi) % (2 * np.pi) - np.pi)
-        r = self.ritmo()
-        if r is None:
-            r = np.ones(n)               # orologio globale: tempo proprio = tick
-        r = r[:n]
-        # spin = fase accumulata / tempo PROPRIO con cui e' avvenuta (dt_n = DT * r).
-        # Toglie la dilatazione: e' la rotazione vera nel tempo del luogo, non nel tick globale.
-        return dphi / (DT * np.maximum(r, 0.01))
+    # --- `spin_locale()` RIMOSSA il 2026-09-17 (correzione (5) della bonifica): CODICE MORTO. ---
+    # NON era una legge esclusa, era una MISURA MAI CABLATA: nessun chiamante nel file vivo ne'
+    # negli otto backup storici (GATE C, doc/REFERTO_gate_bonifica.md, commit 31922ff). Conteneva
+    # un clamp `np.maximum(r, 0.01)` che il mandato della bonifica riteneva responsabile di
+    # tagliare il tempo proprio: GATE C ha mostrato che la conseguenza temuta era FALSA, perche'
+    # `dt_n` si costruisce in `step()` senza alcun clamp. Il tempo proprio non e' mai stato tagliato.
+    # TERZO CASO DELLA STESSA FAMIGLIA: `_passo_spinoriale` con docstring "ORFANO" ma VIVO;
+    # `VERSO_CHI` cablato ma MUTO; `spin_locale` definita e MAI CHIAMATA. Lo stato di vita del
+    # codice non e' leggibile dal codice.
+    # DOVE RECUPERARLA: blob `87450f7` (e ogni blob precedente), metodo `spin_locale`. La sua parte
+    # di valore - la DOTTRINA sul perche' una frequenza DERIVATA si legge nel tempo proprio del
+    # luogo e non nel tick globale, mentre la frequenza che DEFINISCE il ritmo deve usare `DT` - e'
+    # trascritta in doc/COMPONENTI_PROMOSSE.md, sezione F. Cfr. CLAUDE.md par.9: il perche' non si
+    # perde, ed e' quella la ragione della regola.
+    # Sigillo: csv/_seal_fork/_sigillo_rimozione5.py  (byte-identita' ASSOLUTA, shape comprese)
 
     def _pesi(self):
         ramp = np.minimum(1.0, self.eta / TAU_A)
@@ -2861,6 +2859,12 @@ class Rete:
             self._psi_prec = self.psi.copy()
             if CAMPO_SPINORIALE and hasattr(self, "psi_spin") and len(getattr(self, "psi_spin", [])) == self.n:
                 self._psi_spin_prec = self.psi_spin.copy()   # [FASE 5] snapshot per il ritmo spinoriale (4pi)
+        # [(3) BONIFICA 2026-09-17] `dt_e` e' il tempo proprio dell'ARCO, e serve a `mitosi()`, che
+        # non lo riceve fra gli argomenti. Si porta su `self` invece di RICOSTRUIRLO li': una
+        # seconda scrittura della stessa legge e' due leggi che possono divergere (e' la ragione
+        # per cui `_tempo_luce_nodo` e' un metodo solo). A4: e' tempo PROPRIO, non il tick DT.
+        # Scritto in ENTRAMBI i rami dell'orologio, quindi mai stale e mai assente.
+        self._dt_e_ultimo = dt_e
         if FORK_SU2_MEM:
             # [FORK SU(2) - STRATO 1] il rilassamento della memoria vive nel TEMPO PROPRIO del nodo
             # (dt_n = DT*r), non nel tic di COORDINATA globale DT: tau = d/cs e' tempo proprio, e
@@ -3421,10 +3425,56 @@ class Rete:
         # localmente (pressione a corto raggio), invece di creare nodi. E' il confine
         # attivo dei nuclei super-densi: la materia compressa respinge invece di collassare.
         rep = np.clip(-resp, 0.0, 1.0)
-        if rep.any() and len(self.d0) == len(avv):
-            # spinta repulsiva proporzionale a rep: d0 cresce dove il tempo proprio e' estremo.
-            # limitata (2% per passo) e conservativa in media come nella memoria hebbiana.
-            spinta = 0.02 * np.median(self.d0) * rep
+
+        # ---- CORREZIONE (3) del 2026-09-17: MEMORIA DELLA REPULSIONE (par.10 categoria D) ----
+        # ASSIOMA A7: "una grandezza senza stato non puo' conservare nulla". `rep` era ISTANTANEO e
+        # `d0 += spinta` e' IRREVERSIBILE: un processo che AGGIUNGE senza TOGLIERE e senza memoria
+        # e' un CRICCHETTO, e il rumore vi si integra in crescita monotona. Non c'era modo di
+        # tornare indietro, nemmeno quando la condizione che aveva prodotto la spinta spariva.
+        # LA CURA: `_rep` diventa uno STATO PER ARCO che rilassa verso il `rep` istantaneo con
+        # tempo `tau_pp` -- il tempo proprio locale GIA' calcolato qui sopra, non un tempo nuovo.
+        # ASSIOMA A5, livello 1 (rilassamento esponenziale): lecito perche' `tau_pp` e' un tempo
+        # locale dello stesso arco. ZERO PARAMETRI: `tau_pp` e `dt_e` esistono gia'.
+        # Il contributo ORA PUO' ANCHE DECRESCERE: il cricchetto e' chiuso.
+        # NB su cosa questo NON fa: `d0` resta cumulativa. Chiudere il cricchetto significa che
+        # l'INGRESSO puo' calare, non che d0 possa tornare indietro da sola. La previsione scritta
+        # prima del cablaggio (doc/PREVISIONI_qualitative.md par.5) dice esattamente questo.
+        _dte = getattr(self, "_dt_e_ultimo", DT)
+        if np.ndim(_dte) and len(np.asarray(_dte)) != len(rep):
+            # P5: allineamento mancante -> si conta e si cade sul tick di coordinata.
+            self._rep_dte_fallback = getattr(self, "_rep_dte_fallback", 0) + 1
+            _dte = DT
+        if len(self._rep) != len(rep):
+            # P5: se lo stato non e' allineato agli archi, si riparte da zero e SI CONTA.
+            self._rep_realloc = getattr(self, "_rep_realloc", 0) + 1
+            self._rep = np.zeros(len(rep))
+        self._rep = self._rep + _dte * (rep - self._rep) / np.maximum(tau_pp, 1e-12)
+        _rep_mem = self._rep
+        # quanto la memoria si discosta dall'istantaneo: se fosse ~0 la cura sarebbe inerte.
+        if len(rep):
+            self._rep_scarto_max = max(getattr(self, "_rep_scarto_max", 0.0),
+                                       float(np.max(np.abs(_rep_mem - rep))))
+
+        # P5 (mandato (3)): questa guardia e' un FALLBACK NON CONTATO. Quando fallisce, l'INTERO
+        # blocco repulsivo non gira affatto - e un ramo mai misurato e' un comportamento
+        # sconosciuto. Si conta PRIMA di appoggiarci sopra qualsiasi cosa.
+        self._rep_guardia_tot = getattr(self, "_rep_guardia_tot", 0) + 1
+        if len(self.d0) != len(avv):
+            self._rep_guardia_salti = getattr(self, "_rep_guardia_salti", 0) + 1
+            self._rep_guardia_shape = (len(self.d0), len(avv))
+        if _rep_mem.any() and len(self.d0) == len(avv):
+            # CORREZIONE (2) del 2026-09-17 (par.10 categoria D: nessun flag).
+            # Era:  spinta = 0.02 * np.median(self.d0) * rep
+            # `median(self.d0)` e' una STATISTICA GLOBALE dentro un termine che si dichiara
+            # "Locale pura" nella riga sotto: A2 violato (Legge I, :265), e A3 - normalizzare
+            # sulla mediana del proprio insieme fissa il centro a 1 per identita'.
+            # CONSEGUENZA CONCRETA: ogni arco riceveva LA STESSA lunghezza di spinta,
+            # indipendentemente dalla propria scala. Ora la spinta e' proporzionale alla scala
+            # LOCALE dell'arco: un arco corto ne riceve poca, uno lungo molta.
+            # ⚠ A1 RESTA VIOLATO, E VA DETTO: il `0.02` e' un numero SCELTO ("limitata (2% per
+            # passo)"), non derivato. Questa correzione toglie A2 e A3, NON A1. Registrato fra i
+            # fronti aperti invece di essere risolto in silenzio con un numero diverso.
+            spinta = 0.02 * self.d0 * _rep_mem
             self.d0 = self.d0 + spinta                     # Locale pura
             self.d0 = np.maximum(self.d0, self._floor_d0())       # PAVIMENTO: la spinta non deve
             #   portare d0 sotto la scala minima, o lo stress |d-d0|/d0 diverge (bug rientrante)
@@ -3546,6 +3596,10 @@ class Rete:
         self.d0 = np.concatenate([self.d0[keep], d0new])
         self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])
         self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])
+        # [(3)] `_rep` segue la STESSA struttura degli altri array per-arco. NON si eredita da
+        # `src` come gli stati per-NODO (`_nb`, `omega_s`, ...): e' per ARCO, e i due archi figli
+        # ereditano la memoria dell'arco da cui nascono, che e' cio' che `[sel], [sel]` fa.
+        self._rep = np.concatenate([self._rep[keep], self._rep[sel], self._rep[sel]])
         zz = np.zeros(len(sel))
         self.tw = np.concatenate([self.tw[keep], zz, zz])
         self.twp = np.concatenate([self.twp[keep], self._w4(self.phi[a] - fm),
@@ -3624,6 +3678,7 @@ class Rete:
                 self.d0 = np.concatenate([self.d0, dd, dd])
                 self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])
                 self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])
+                self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])   # [(3)] archi nuovi
                 zz2 = np.zeros(nc)
                 self.tw = np.concatenate([self.tw, zz2, zz2])
                 self.twp = np.concatenate([self.twp, self._w4(self.phi[aa] - anti),

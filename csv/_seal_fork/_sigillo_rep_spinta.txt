@@ -1,0 +1,48 @@
+======================================================================================================================
+V6-V8, V10 -- (2) spinta LOCALE  e  (3) _rep CON MEMORIA
+======================================================================================================================
+
+--- (V6) LIMITE di (2): se tutte le d0 fossero uguali, la forma nuova = la vecchia ---
+[PASS] V6 riduzione al limite (d0 costante): byte-identico max|A-B| = 0.000e+00 su 5000 archi (shape (5000,) = (5000,))
+  e con d0 REALISTICHE (lognormale) il rapporto nuovo/vecchio va da 0.031 a 42.6
+[PASS] V6b fuori dal limite le due forme DIFFERISCONO (controllo positivo) max|A-B| = 1.439e-01
+
+--- (V7) LIMITE di (3): per dt_e/tau_pp -> 1 la memoria torna all'ISTANTANEO ---
+[PASS] V7 riduzione al limite (dt_e = tau_pp): _rep == rep max|A-B| = 0.000e+00
+  e il CRICCHETTO: si somministra rep=1 per 20 passi, poi rep=0 per 20.
+     istantaneo: sale a 1.000, poi cade a 0.000 IN UN PASSO
+     con memoria: sale a 0.988, poi decade a 0.791 (passo 21), 0.011 (passo 40)
+[PASS] V7b il contributo PUO' DECRESCERE (A7: il cricchetto e' chiuso) da 0.9885 a 0.0114 dopo che la causa e' sparita
+[PASS] V7c e NON e' istantaneo (altrimenti la memoria sarebbe inerte) al primo passo senza causa vale ancora 0.7908, non 0
+
+--- (V8/V10) IL CODICE VIVO: 60 passi reali ---
+  archi 208875   len(_rep) 208875
+[PASS] V8a `_rep` e' allineato agli ARCHI ai tre punti di nascita len(_rep) 208875 == len(d0) 208875
+  _rep: min 0  mediana 0  max 0.00111  non nulli 0.083 %
+  scarto massimo memoria-istantaneo: 0.013896009764576198
+[PASS] V8b CONTROLLO POSITIVO: la memoria NON e' l'istantaneo max|_rep - rep| = 0.013896 (se fosse 0, (3) sarebbe inerte)
+  P5 -- contatori dei rami:
+     _rep_guardia_tot             66
+     _rep_guardia_salti           None
+     _rep_realloc                 None
+     _rep_dte_fallback            None
+     _taup_peq_degenere           207520
+     _taup_causale_scatti         249017
+     _taup_causale_tot            12506124
+     _taup_causale_su_degenere    207520
+     _taup_cfl_max                0.4253102700921117
+[PASS] V8c la guardia len(d0)==len(avv) e' ora CONTATA  66 chiamate, 0 salti (0.00 %)
+[PASS] V10a stabilita': d0 finito e > 0                 min 0.05, NaN 0
+[PASS] V10b stabilita': d finito e > 0                  min 0.0623694
+[PASS] V10c norma di Bloch |nb| = 1                     max| |nb| - 1 | = 2.220e-16
+[PASS] V10d tau_p resta stabile anche con (2) e (3) attive _taup_cfl_max = 0.42531
+
+======================================================================================================================
+V6-V8, V10: 12/12 PASS -> PASS
+
+COSA QUESTO SIGILLO NON DICE
+----------------------------
+NON dice che il sistema smetta di espandersi. (3) chiude il cricchetto sull'INGRESSO: `_rep` puo'
+ora calare quando la causa sparisce. `d0` resta cumulativa, e nessuna di queste due correzioni la
+rende reversibile. E' scritto cosi' anche in doc/PREVISIONI_qualitative.md, PRIMA del cablaggio.
+E (2) NON risolve A1: il coefficiente `0.02` resta un numero SCELTO. Toglie A2 e A3, non A1.

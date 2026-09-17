@@ -1,0 +1,21 @@
+======================================================================================================================
+V9 -- RIMOZIONE DI `spin_locale()`: deve essere ESATTAMENTE INERTE
+======================================================================================================================
+  PRIMA : C:/Users/lpeano/AppData/Local/Temp/claude/c--Users-lpeano-soliton-simulator/b8f19b37-2df4-4b80-aeb5-bcea5fc7c4b8/scratchpad\_pre_rimozione5.py
+  DOPO  : C:\Users\lpeano\soliton_simulator\soliton_simulator.py
+  40 passi, seme 3, stessi flag.
+
+[PASS] V9a il metodo c'era ed e' sparito dal CODICE   prima: definito; dopo: 0 definizioni (resta solo il commento che spiega)
+  array nel DB: PRIMA 55, DOPO 55, comuni 55
+[PASS] V9b le CHIAVI del DB coincidono                solo prima: [] | solo dopo: []
+  array confrontati con SHAPE UGUALI: 36
+[PASS] V9c NESSUN array ha shape diversa (c'e' confronto) 36 array confrontati, 0 con shape diversa
+[PASS] V9d BYTE-IDENTICO: max|A-B| = 0.000e+00  [ASSOLUTO] max = 0.000e+00 (peggiore: -) su 36 array
+
+======================================================================================================================
+V9: 4/4 PASS -> PASS
+
+NB: V9d e' l'UNICO sigillo di questa bonifica in cui uno ZERO e' il risultato voluto, e proprio per
+questo V9c lo precede: senza la garanzia che le shape coincidano, `max|A-B| = 0.000e+00` puo'
+significare "nessun confronto" invece di "identico". Qui il numero di array effettivamente
+confrontati e' stampato accanto allo zero, perche' lo zero da solo non e' leggibile.
