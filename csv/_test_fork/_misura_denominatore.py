@@ -153,10 +153,11 @@ def gira(modo):
         n2 = r.n
         pv2 = float(np.sum(np.asarray(r.phivel, float)[:n2]))
         om = np.asarray(r.omega_s, float)
-        ine = np.asarray(getattr(r, "_inerzia_ultima", np.ones(n2)), float)
-        if len(ine) != n2:
-            ine = np.ones(n2)
-        L = float(np.sum(ine[:n2] * np.linalg.norm(om[:n2], axis=1))) if om.ndim == 2 else float("nan")
+        # NON si calcola `L_tot = sum(I*|omega|)`: il simulatore NON espone l'array
+        # dell'inerzia (e' una LOCALE di `_passo_spinoriale`; `L_tot` nasce dalle colonne
+        # CSV della campagna). Metterci `I = 1` darebbe un `sum(|omega|)` TRAVESTITO da
+        # L_tot: il fallback silenzioso che P5 vieta. Si riporta col PROPRIO nome.
+        L = float(np.sum(np.linalg.norm(om[:n2], axis=1))) if om.ndim == 2 else float("nan")
         tr.append(dict(passo=kk, n=n2, nati=n2 - n1,
                        pv_pre=pv0, pv_post=pv1, pv_fine=pv2,
                        d_step=pv1 - pv0, d_mit=pv2 - pv1, L=L))
@@ -207,8 +208,8 @@ print("""  NB: `d_mit` NON e' un difetto: la mitosi AGGIUNGE nodi, e un nodo nuo
   Va letto come TERMINE DI SORGENTE noto, non come violazione. Conta il confronto FRA varianti.""")
 
 # ------------------------------------------------------- L_tot, SECONDARIO
-print("\n--- L_tot = sum(I*|omega_s|) -- SECONDARIO (il feedback non entra in questo settore) ---")
-print("  %-10s %-16s %-16s %-16s" % ("variante", "L al passo 0", "L finale", "rapporto"))
+print(chr(10) + "--- sum(|omega_s|) -- SECONDARIO, e NON e' L_tot: manca l'inerzia ---")
+print("  %-10s %-16s %-16s %-16s" % ("variante", "al passo 0", "finale", "rapporto"))
 for modo in ("attuale", "senza", "simm"):
     v = ris[modo]
     if len(v) < 4:

@@ -4017,3 +4017,114 @@ configurazione con gradi disomogenei.
    **sorgente netta di coppia pilotata dalla disomogeneità dei gradi**.
 
 **`SPIN_FEEDBACK` resta OFF. Mi fermo qui, come ordinato.**
+
+---
+
+## 9.38 — **(A) o (B)? La misura non distingue. Ma (B) cade per dimostrazione, e l'«alternativa» è il codice attuale**
+
+**Data:** 2026-09-17 · `csv/_test_fork/_misura_denominatore.py`, tre varianti, `TAU_A = 2.0`,
+60 passi, **un seme**. **Nessuna cura cablata, nessun sigillo, nessun test a semi.**
+
+### La premessa di (B) non regge — dal sorgente, non dalla misura
+
+Il mandato fonda la lettura (B) su *«c'è già una divisione per l'inerzia a valle»*. **Dal disco:** il
+feedback ha **una sola** chiamata (`:3113`), finisce in `coppia`, e `coppia` va a `:3197` →
+`delta_phivel = … / **M_PH**`, con **`M_PH = 1.0`, una costante globale** (`:206`). L'**unica**
+`/inerzia` del file (`:2283`) divide **`correzione`**, un 3-vettore dentro `_passo_spinoriale`,
+**non `coppia`**.
+
+**Il feedback vive nel settore della FASE; `omega_s` e `inerzia` vivono in quello dello SPIN e non
+lo vedono mai.** Non c'è nessuna doppia divisione da togliere — e togliere `/grado` non toglierebbe
+una normalizzazione di due: toglierebbe **l'unica**.
+
+**(B) è esclusa per DIMOSTRAZIONE, non per misura**, che è la distinzione imposta da CLAUDE.md.
+
+### E il criterio cambia: qui `sum(out) = 0` **è** la conservazione
+
+L'avvertenza del mandato — *«`sum(coppia)` non è fisica, ciò che si conserva è `sum(I·ω)` e `I`
+varia per nodo»* — **vale per il settore dello spin**. In un settore a **massa uniforme**:
+
+```
+d/dt sum(phivel) = sum(coppia) / M_PH    =>    sum(out) = 0  <=>  sum(phivel) si conserva
+```
+
+Quindi `G1` non è un criterio di forma: **è la legge di conservazione stessa**. E `L_tot` non è lo
+strumento giusto, perché misura un settore in cui il termine non entra.
+
+*(Non l'ho calcolato: il simulatore **non espone l'array dell'inerzia** — è una locale di
+`_passo_spinoriale`. Metterci `I = 1` avrebbe dato un `sum(|ω|)` **travestito da `L_tot`**: il
+fallback silenzioso che P5 vieta. Riporto `sum(|omega_s|)` col suo nome.)*
+
+### La misura
+
+| | `G1` mediana | `sum\|d_step\|` | `\|deriva\|/scala` | n finale |
+|---|---|---|---|---|
+| **attuale** | **1.112e+00** | 298.14 | 1.0658 | **548** |
+| **senza** | **6.475e-16** | 293.51 | 1.0382 | **564** |
+| **simm** | **8.540e-16** | **243.16** | **0.92442** | **554** |
+
+**`G1`: quindici ordini di grandezza.** Il difetto è confermato **ed è il denominatore** — entrambe
+le cure lo tolgono esattamente. **Ma proprio per questo `G1` non discrimina.**
+
+`simm` è il migliore su tutte le colonne della conservazione. **E non lo uso per decidere:** guarda
+`n finale` — **548 / 564 / 554**. Le tre traiettorie **divergono**, quindi sto confrontando **tre
+sistemi diversi**, su **un seme**, senza nullo misurato; e il nullo caotico noto sul conteggio nodi
+vale già ~1.4 % mentre qui `n` differisce del **2.9 %**.
+
+> **La misura non distingue (A) da (B), e lo dico invece di sceglierne una.**
+
+### ⚠ L'«alternativa» del mandato è il codice attuale
+
+Il mandato propone *«accumulare `±flusso` senza denominatore, e dividere per il grado DOPO, sul
+totale del nodo»*. **È algebricamente identica**, perché `grado[k]` è lo stesso per tutti gli archi
+di `k` e **si raccoglie**:
+
+```
+out[k] = Σ (±f / g_k)  =  (Σ ±f) / g_k
+```
+
+Verificato: **`max|attuale − alternativa| = 5.551e-17`**, e `|sum|/max` vale **7.119e-01 in
+entrambe**, contro **2.365e-16** della forma simmetrica. **Lo scambio *sembra* esatto se si guarda
+la fase di accumulo, ma la normalizzazione successiva lo rompe di nuovo.**
+**L'unico modo di avere `sum(out) = 0` è un denominatore simmetrico sull'ARCO — o nessuno.**
+
+### ⚠⚠ E il difetto era **già dimostrato nel repo**, su un termine gemello
+
+`doc/MAPPA_accoppiamenti_spin.md` (88-96), già committato, dice di `B` (`:2080-2082`):
+
+> *«Il contributo della coppia `(i,j)` al torque su `i` è `(w_ij/deg_i)·cross(…)`; quello su `j` è
+> `(w_ij/deg_j)·cross(…)`. Sono opposti **solo se `deg_i == deg_j`**. […] **Quindi `Σ_i L_i` non è
+> conservata, per costruzione.** **NB ONESTO:** che non sia conservata si **dimostra**; **quanto**
+> non lo sia [non è misurato].»*
+
+**Stesso difetto, stessa causa, altro termine.** La mia `1.112` è la **prima misura di ampiezza** di
+qualcosa che nel repo era **già dimostrato in forma**.
+
+**È P1, e l'ho mancato io:** dovevo rileggere quel documento **prima** di trattare il difetto come
+nuovo. Il presidio *«quando si apre una domanda nuova, ri-interroga le misure vecchie»* esiste
+esattamente per questo caso.
+
+**E la conseguenza supera il termine in esame:** lo schema «dividi per il grado del nodo» compare in
+**almeno quattro punti** — `:1367-1368` (il feedback), `:2082` (`B`), `:2294` (`_otw`), `:3154` (il
+twist) — **e per il punto precedente «dentro» e «dopo» sono la stessa cosa**. **Non l'ho misurato
+sugli altri tre: è un fronte nuovo, e non lo apro dentro questo mandato.**
+
+### Il pregio smentito, e dove sta
+
+Cercato in tutto il repo: l'affermazione sta in **un solo posto**, il **docstring** (`:1336-1341`) —
+*«coppia **antisimmetrica** ai nodi»* e *«la divisione per il grado **non introduce una manopola**»*.
+**La seconda è vera ed è la ragione per cui la prima è falsa.** Riscriverlo è `G9`, cioè **parte
+della cura**: non l'ho toccato.
+
+### Cosa resta a Luca
+
+1. La misura è **indifferente**; ma §1 del mandato **pre-registra** che nel caso indifferente si
+   sceglie **(A)**, e (B) è **separatamente esclusa** per dimostrazione. **Se accetti entrambe, (A)
+   è quello che resta** — serve il via libera, perché §5.2 dice STOP.
+2. **Il denominatore simmetrico non ha oggi una derivazione.** Il candidato indicato, `w`, **non
+   funziona**: `flusso = w·imag(ov)`, quindi dividere per `w` lo **cancella** e il peso dell'arco
+   sparisce dalla legge. `(g_i+g_j)/2`, `min`, `max`, `sqrt(g_i·g_j)` sono **quattro scelte
+   arbitrarie (A1)**.
+3. **Il fronte nuovo** dei tre punti gemelli.
+
+**`SPIN_FEEDBACK` resta OFF.**

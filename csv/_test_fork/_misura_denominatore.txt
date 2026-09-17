@@ -1,0 +1,51 @@
+[TIMBRO] _misura_denominatore.py  sha1-BYTE 536494fe  !! MODIFICATO rispetto a HEAD (blob-git fbf80299) -- i byte che girano NON sono quelli committati
+======================================================================================================================
+DENOMINATORE DEL FEEDBACK: (A) normalizzazione o (B) inerzia mascherata?   [TAU_A=2.0, 60 passi]
+======================================================================================================================
+
+--- LA CATENA DEL FEEDBACK, dal sorgente (decide QUALE grandezza si conserva) ---
+   :3113   chiamata unica      _fb = self._feedback_spinoriale_archi(i, j, w)
+   :3129   applicazione        coppia += _fb
+   :3197   integrazione        delta_phivel = ... / M_PH
+   :206    M_PH = 1.0           <- COSTANTE GLOBALE, non una massa per nodo
+   :2283   l'unica /inerzia    omega_new = omega_src + dtn_c * (correzione / inerzia[:, None] - ...)
+
+  -> il feedback agisce su `phivel` (settore FASE, massa UNIFORME M_PH).
+  -> `omega_s` e `inerzia` (settore SPIN) NON lo vedono: `/inerzia` divide `correzione`, non `coppia`.
+  -> (B) «l'inerzia vera e' gia' a valle» NON REGGE: a valle c'e' una COSTANTE.
+  -> e in un settore a massa uniforme, `sum(coppia) = 0`  <=>  `sum(phivel)` si conserva.
+
+--- (G1) |sum(out)| / max|out| -- l'antisimmetria, per variante ---
+  variante   mediana          MAX              invocazioni     
+  attuale    1.112e+00        8.441e+00        64              
+  senza      6.475e-16        2.752e-15        64              
+  simm       8.540e-16        3.641e-15        64              
+  (l'epsilon macchina e' ~1e-16; 'attuale' misurato prima: mediana 1.112, MAX 8.441)
+
+--- IL CRITERIO FISICO DI QUESTO SETTORE: la deriva di sum(phivel) ---
+  (massa UNIFORME M_PH -> d/dt sum(phivel) = sum(coppia)/M_PH: se sum(out)=0, si conserva)
+  variante   sum|d_step|    sum|d_mit|     deriva TOT     |deriva|/scala n finale 
+  attuale    298.14         16.54          -70.41         1.0658         548      
+  senza      293.51         25.667         -118.14        1.0382         564      
+  simm       243.16         14.04          53.168         0.92442        554      
+  NB: `d_mit` NON e' un difetto: la mitosi AGGIUNGE nodi, e un nodo nuovo porta il suo phivel.
+  Va letto come TERMINE DI SORGENTE noto, non come violazione. Conta il confronto FRA varianti.
+
+--- sum(|omega_s|) -- SECONDARIO, e NON e' L_tot: manca l'inerzia ---
+  variante   al passo 0       finale           rapporto        
+  attuale    236.2            61638            260.96          
+  senza      236.2            70899            300.16          
+  simm       236.2            30423            128.8           
+
+--- stabilita' (nessuna variante deve esplodere) ---
+  attuale    NaN/inf: phivel 0  omega_s 0   max|phivel| 14.345   max|omega_s| 34778
+  senza      NaN/inf: phivel 0  omega_s 0   max|phivel| 16.551   max|omega_s| 36368
+  simm       NaN/inf: phivel 0  omega_s 0   max|phivel| 18.391   max|omega_s| 10478
+
+======================================================================================================================
+COME SI LEGGE -- le letture erano fissate PRIMA
+  'senza' conserva MEGLIO di 'attuale'   -> compatibile con (B). MA la premessa di (B) e' gia'
+                                            caduta dal sorgente: a valle non c'e' inerzia per nodo.
+  'simm'  conserva e 'senza' no          -> (A): il difetto e' l'ASIMMETRIA, non la divisione.
+  'senza' e 'simm' conservano UGUALE     -> la misura NON distingue: e allora si dice, e ci si ferma.
+E in ogni caso `sum(out)` (G1) e' una VERIFICA ALGEBRICA, non statistica: li' non c'e' da scegliere.
