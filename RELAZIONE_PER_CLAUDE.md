@@ -2782,3 +2782,87 @@ fronti. Ne ho verificate le affermazioni controllabili: *«il modello non ha esp
 `11.123 %`). **Il rinvio al «conto sul punto fisso dello scuotimento» (`I/Lam ~ 1/3`) NON l'ho
 trovato nel repo**: `doc/INDAGINE_scuotimento.md` esiste ma non contiene quel calcolo. Testo lasciato
 verbatim come ordinato, **con il rinvio mancante dichiarato**.
+
+---
+
+## 9.21 — ①: **la diagnosi dimensionale è confermata e vale 10⁶**, ma il transitorio blocca il cablaggio — e **due mie obiezioni si correggono**
+
+**Che cos'era.** Il mandato attacca l'unica correzione che tocca `sigma`, cioè la **sorgente** di
+`omega`: `inerzia = (rho_sorgente / peq_nodo) · (d/cs)²`. Tesi: `|psi|²` grezzo **non è un `T²`**, è
+una densità non normalizzata usata al posto di un tempo al quadrato, e il fattore `cs⁻²` già cablato
+**non arriva a destinazione** perché il pavimento `1e-6` lo mangia.
+
+### 1. La tesi è misurata, ed è **più severa** di come è scritta
+
+| passo | mediana `_fatt_cs` | max `_fatt_cs` | **al pavimento** | mediana `inerzia` | mediana `T²` |
+|---|---|---|---|---|---|
+| 2 | 1.126 | 1.168 | **100.00 %** | **1e-06** | 0.75 |
+| 12 | 1.535 | **6.430** | **100.00 %** | **1e-06** | 1.03 |
+| 24 | 1.588 | 5.585 | **100.00 %** | **1e-06** | 1.08 |
+
+**Il mandato dice 99.7 %. La misura dice 100.00 %, a ogni passo.** `inerzia` non è «quasi sempre al
+pavimento»: **è il pavimento** — la costante `1e-6`. `_fatt_cs` sale fino a **6.43** e **non serve a
+nulla**. E `T²/inerzia = 1.03e+06`: **un fattore un milione** fra ciò che l'inerzia è e ciò che, per
+dimensione, dovrebbe essere. **Questo risultato non dipende dal cablaggio, ed è il valore del giro.**
+
+### 2. Ma la verifica preliminare ② — che il mandato marca come bloccante — **fallisce**
+
+`_passo_spinoriale` (`:3062`) gira **prima** della calibrazione di `peq` (`:3147`):
+
+```
+passo   peq NaN        peq <= 0        peq_nodo <= 0
+  0     14134 (100%)        0            360 / 360     <- TUTTI
+  1          0        14134 (100%)       360 / 360     <- TUTTI
+  2+         0             0                  0        <- pulito
+```
+
+**Non sono «i nuovi archi»: sono tutti, per due passi.** `rho/peq_nodo` sarebbe `0/0` = **NaN**, e
+`inerzia` entra in **`omega_s`, la memoria persistente**: un NaN lì non è un valore sbagliato per due
+passi, **contamina il run per sempre**. **E il pavimento non protegge:** `np.maximum(NaN, 1e-6)` è
+**NaN**. Oggi il transitorio è salvato solo perché `rho·_fatt_cs` vale `0` e `max(0, 1e-6) = 1e-6`.
+
+### 3. **Due mie obiezioni del giro precedente vanno corrette**
+
+Nel referto di Z1 avevo dato due ragioni per non cablare ①. **Contro questo mandato, una cade e
+l'altra va rinominata:**
+
+1. **CADE.** Avevo scritto che togliendo il pavimento l'inerzia **si annulla** (`min = 0` su 6 nodi).
+   **Questo mandato non toglie il pavimento** — lo dichiara e ne dà la ragione giusta (`omega =
+   coppia/inerzia`: inerzia minore = omega **maggiore**; il pavimento è **il tappo, non il
+   colpevole**). L'obiezione era valida contro un'altra proposta, **non contro questa**.
+2. **VA RINOMINATA.** Avevo chiamato «errore di **popolazione** (A3)» il fatto che `rho_sorgente` sia
+   `rho_spin` mentre `peq` insegue `|psi|²`. **Non è A3:** dopo la proiezione arco→nodo le due
+   grandezze vivono **entrambe sui nodi**, e su questo **il mandato ha ragione**. È una questione di
+   **coerenza di grandezza**, **più debole** di come l'avevo scritta. *(Correlazione misurata per
+   passo: `1.000 / 1.000 / 0.992 / 0.487 / 0.612 / 0.683` — coincidono all'inizio, poi divergono.)*
+
+**Il blocco vero è un terzo, che non avevo visto:** l'ordine di chiamata `:3062` prima di `:3147`.
+
+### 4. Il transitorio è un **blocco strutturale**, non una curiosità
+
+| correzione | fermata da |
+|---|---|
+| `peq` alla nascita | `psi` è **zero** quando gli archi nascono |
+| **① `inerzia`** | `peq_nodo` è **zero su tutti i nodi** ai passi 0-1 |
+
+**Stessa radice:** `psi` non è calcolato prima del primo `step`, quindi nel transitorio **ogni
+grandezza derivata è zero**, e ogni correzione che costruisca un **rapporto fra grandezze di stato**
+ci inciampa. **Due correzioni ferme dallo stesso muro.** La via che le sblocca entrambe — calcolare
+`psi` una volta alla costruzione della scena — **è un cambio del percorso di inizializzazione, non
+una bonifica**, e cambia il seme di ogni run esistente.
+
+### 5. Un fatto nuovo: **`_fatt_cs_ultimo` è scritto e mai letto**
+
+Una sola occorrenza nel codice, ed è la scrittura. Il commento dice *«per la metrica (solo lettura a
+valle)»*: **a valle non c'è nessuno.** **Quarto caso della stessa famiglia** — `_passo_spinoriale`
+(docstring «ORFANO» ma vivo), `VERSO_CHI` (cablato ma muto), `spin_locale` (mai chiamata).
+**Lo stato di vita del codice non è leggibile dal codice.** Conseguenza utile: togliere `_fatt_cs`
+dall'inerzia — necessario in ①, o si avrebbe `cs⁻⁴` — **non rompe nessun consumatore**.
+
+### 6. Cosa non è stato guardato
+
+`chi`, `|<n>|`, autocorrelazione, **`theta`**, `omega/sqrt(n)`, `L_tot`, MISURA U, `cs_std/cs`:
+**non calcolati, non riportati**, come il mandato §5 impone. In particolare `theta` è il numero che
+① punta a muovere, e si guarderà **a bonifica finita, contro una predizione scritta prima** — che è
+già committata (`doc/PREVISIONI_qualitative.md`, commit `9c9cc43`, **scritta prima di un cablaggio
+che poi non è avvenuto**).

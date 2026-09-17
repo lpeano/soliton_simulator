@@ -937,3 +937,17 @@ dimostrazione)* **A3 non discende da A2**.
   `doc/SPECULAZIONI_cs_acromatico.md`, `doc/REFERTO_peq_nascita.md`.
 - **Unica modifica al codice: due CONTATORI** (`_taup_peq_deg_passi`, `_taup_peq_deg_ultimo`).
   Nessuna legge toccata.
+
+## AGGIORNAMENTO 2026-09-17 (3) — mandato ① INERZIA: **CABLAGGIO FERMATO, diagnosi CONFERMATA**
+- **La diagnosi dimensionale è MISURATA e più forte del previsto:** pavimento `1e-6` attivo sul
+  **100.00 %** (il mandato diceva 99.7 %), `inerzia` = **`1e-6` ESATTO** a ogni passo, `_fatt_cs`
+  sale a **6.43** e non serve a nulla, **`T²/inerzia` = 1.03e+06**.
+- **BLOCCO:** `_passo_spinoriale` (`:3062`) gira **PRIMA** della calibrazione di `peq` (`:3147`).
+  Ai passi 0-1 `peq_nodo` è **zero su TUTTI i nodi** → `rho/peq` = `0/0` = **NaN in `omega_s`**, la
+  memoria persistente. E `np.maximum(NaN, 1e-6)` **è NaN**: il pavimento non protegge.
+- **DUE MIE OBIEZIONI CORRETTE:** quella sulla divergenza **CADE** (questo mandato non toglie il
+  pavimento); quella sulla popolazione **va rinominata** (è coerenza di grandezza, non A3).
+- **Z6: il transitorio è un BLOCCO STRUTTURALE** — ha fermato **due** correzioni. La via che le
+  sblocca entrambe (calcolare `psi` alla costruzione della scena) **non è una bonifica**.
+- **Z7: `_fatt_cs_ultimo` scritto e mai letto** (quarto caso della famiglia).
+- **Nessun codice toccato.** Blob invariato: `2d54ba3`.
