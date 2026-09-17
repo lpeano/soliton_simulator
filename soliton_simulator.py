@@ -1333,11 +1333,42 @@ class Rete:
         return complex(np.prod(overlap))
 
     def _feedback_spinoriale_archi(self, i, j, w):
-        """Trasforma l'overlap spinoriale locale in una coppia antisimmmetrica ai nodi.
+        """Trasforma l'overlap spinoriale locale in uno SCAMBIO antisimmetrico SULL'ARCO.
 
         La parte immaginaria dell'overlap normalizzato e' un flusso orientato sull'arco;
-        il modulo pesa la coerenza. La divisione per il grado pesato resta locale e non
-        introduce una manopola. E' una legge sperimentale separata, default off.
+        il modulo pesa la coerenza. Cio' che `i` cede, `j` riceve: ESATTAMENTE, senza
+        denominatori in mezzo. E' una legge sperimentale separata, default off.
+
+        ⚠ IL DOCSTRING PRECEDENTE DICEVA DUE COSE, ED ERANO SMENTITE DALLA MISURA (2026-09-17,
+        `doc/REFERTO_denominatore.md`, `csv/_test_fork/_scelta_denominatore.txt`):
+          - «coppia ANTISIMMETRICA ai nodi» -> **era FALSO**: `|sum(out)|/max|out|` valeva
+            **mediana 1.112, MAX 8.441**, quando l'errore macchina e' ~1e-16. Il termine
+            INIETTAVA coppia netta nel sistema;
+          - «la divisione per il grado pesato non introduce una manopola» -> **era VERO, ed era
+            ESATTAMENTE LA RAGIONE per cui la prima frase era falsa**: `out[i] -= f/grado[i]` e
+            `out[j] += f/grado[j]` hanno DENOMINATORI DIVERSI, quindi la somma vale
+            `f*(1/g_j - 1/g_i)`, zero solo se i gradi coincidono. Su un grafo di grado
+            disomogeneo -- cioe' questo -- non coincidono mai.
+        Il verso dell'iniezione dipendeva dalla DISOMOGENEITA' DEI GRADI, cioe' da una proprieta'
+        della TOPOLOGIA, non della fisica dello spin: il cricchetto che A7 esclude.
+
+        PERCHE' NESSUN DENOMINATORE, e non uno simmetrico (scelta del 2026-09-17, misurata):
+          - `w` e' ESCLUSO: `flusso = w*imag(ov)`, dividere per `w` lo CANCELLA;
+          - `(g_i+g_j)/2` e `g_i+g_j-2w` ripristinano l'antisimmetria ESATTAMENTE quanto il non
+            averne (tutti e tre a ~1e-16): il criterio di correttezza NON discrimina;
+          - la domanda che li giustificherebbe -- «|out| cresce col grado?» -- **NON HA
+            RISOLUZIONE su questo grafo**: il ~77 % dei nodi ha grado ESATTAMENTE 2 (i figli
+            della mitosi nascono con due archi) e le mediane per grado sono NON MONOTONE;
+          - quindi restano solo A1 e par.3: **nessun denominatore ha ZERO SCELTE**, gli altri
+            sono una scelta fra forme equivalenti.
+          - E l'ampiezza NON esplode: misurato `|out|` mediano **0.0400 -> 0.0223**,
+            `max|out|` **0.816 -> 0.590**. E' PIU' PICCOLO di prima.
+
+        ⚠ COSA QUESTA CURA **NON** FA: `out[k]` resta una SOMMA su un numero di termini che
+        cresce col grado. Se questo sia un difetto **non e' stato misurabile** (vedi sopra):
+        e' un fronte APERTO, non una cosa risolta.
+        ⚠ E LO STESSO SCHEMA E' IN ALMENO TRE ALTRI PUNTI -- `:2082` (`B`), `:2294` (`_otw`),
+        `:3154` (twist) -- **non toccati e non misurati**: fronte separato.
         """
         out = np.zeros(self.n)
         self._spin_feedback_last = 0.0
@@ -1362,10 +1393,13 @@ class Rete:
         ii, jj, ww = i[mask], j[mask], w[mask]
         ov = np.sum(np.conj(self._spinor_lift[ii]) * self._spinor_lift[jj], axis=1)
         flusso = ww * np.imag(ov)
-        grado = np.zeros(self.n)
-        np.add.at(grado, ii, ww); np.add.at(grado, jj, ww)
-        np.add.at(out, ii, -flusso / np.maximum(grado[ii], 1e-9))
-        np.add.at(out, jj, flusso / np.maximum(grado[jj], 1e-9))
+        # [CURA DEL DENOMINATORE, 2026-09-17] LO SCAMBIO SULL'ARCO E' ESATTO: cio' che `i` cede e'
+        # cio' che `j` riceve, senza nulla in mezzo. `imag(<psi_i|psi_j>) = -imag(<psi_j|psi_i>)`
+        # e' antisimmetrico PER COSTRUZIONE: la legge era giusta, era la divisione ad averla rotta.
+        # Il calcolo di `grado` e' stato RIMOSSO perche' diventerebbe codice morto (la famiglia di
+        # `spin_locale`), non perche' fosse sbagliato calcolarlo.
+        np.add.at(out, ii, -flusso)
+        np.add.at(out, jj, flusso)
         self._spin_feedback_last = float(np.mean(np.abs(flusso))) if len(flusso) else 0.0
         return out
 
