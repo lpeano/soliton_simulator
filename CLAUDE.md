@@ -27,7 +27,7 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
     tutti lo stesso stato**:
     | cambiamento | sigillo | timbrabile? |
     |---|---|---|
-    | cablaggio di **`--tau-luce`** (FASE 2) | **FALLITO** (`doc/SIGILLO_tau_luce_FALLITO.md`) | **NO** |
+    | cablaggio di **`--tau-luce`** (FASE 2) | **SIGILLO RIPARATO il 2026-09-19: `6/7 PASS`, resta `T3=FAIL`** (`doc/REFERTO_sigillo_tau_luce_riparato.md`) | **ANCORA NO** |
     | cura della cache **`_cs_nodo_prev`** (C7) | **5/5 PASS** | si' |
     | cura di **`_psi_spin_prec`** (C11) | **6/6 PASS** | si' |
     **Basta il primo a bloccare il timbro**: il gate certifica **un blob**, non un sottoinsieme
@@ -39,9 +39,19 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
     il ramo `--tau-luce`. Un run **senza** `--tau-luce` gira su codice il cui unico delta
     non-sigillato e' **inerte** (il flag e' `False`); un run **con** `--tau-luce` gira su un ramo
     **esplicitamente non certificato**, e va detto nel documento che lo usa.
-    **COSA LO SBLOCCHEREBBE:** riscrivere **T2** (il monkeypatch colpiva il metodo **condiviso**
-    `_tempo_luce_nodo`, quindi cambiava anche il `tau` dello Strato 1: `N` 1718 contro 1647) e far
-    passare T1-T5. **E' la voce A di `doc/RAMIFICAZIONI.md`, il collo di bottiglia del programma.**
+    **⚠ COSA LO SBLOCCHEREBBE — AGGIORNATO IL 2026-09-19, e ne resta UNO SOLO.**
+    **`T2` E' STATO RISCRITTO E ORA PASSA** a `0.000e+00` esatto: il monkeypatch discrimina il
+    CHIAMANTE, e la riga del sito **non e' pinnata** (si trova cercando il FLAG, par.0).
+    *(E la diagnosi vecchia era INCOMPLETA: i chiamanti di `_tempo_luce_nodo` sono **TRE** — `:2337`
+    l'INERZIA, **non** gated su `TAU_LUCE`; `:2442` il rilassamento tau-luce; `:3027` lo Strato 1 —
+    e i primi due stanno **nella stessa funzione**, quindi `co_name` non basta.)*
+    **`T1` era un criterio SCADUTO** (confrontava il disco di OGGI con un blob di tre giorni fa, con
+    sette correzioni di legge in mezzo) **ed e' stato ancorato alla COPPIA DI BLOB che racchiude il
+    cambiamento**: ora `T1a` PASSA a `0.000e+00`, cioe' **il cablaggio NON cambio' il ramo OFF**.
+    **RESTA SOLO `T3`**, col criterio rifatto (nessuna direzione prescritta, nullo **MISURATO** fra
+    **4 semi appaiati**): **`IC95 = [-0.3280, +1.3540]`, CONTIENE LO ZERO.**
+    **Si legge come LIMITE, non come «nessun effetto»: risoluzione `±0.84`, stima puntuale `+0.51`
+    -> NON MISURATO.** **E' la voce A di `doc/RAMIFICAZIONI.md`, il collo di bottiglia del programma.**
   - **`csv/_test_53c/gate_cache.json` NON si timbra a mano.** E' ancorato al blob e oggi e'
     volutamente STALE (punta ancora a `4fc7a794`): la guardia di `_run_batch.ps1` rileva il
     cache-miss e rigira `_check_presidio.py` da sola prima di ogni campagna. Scrivere un `PASS`

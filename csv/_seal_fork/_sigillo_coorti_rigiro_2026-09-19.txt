@@ -1,0 +1,58 @@
+[TIMBRO] _sigillo_coorti.py  sha1-BYTE 93aaec70  committato e pulito
+======================================================================================================================
+SIGILLO COORTI -- S0..S6. S1 E' IL DECISIVO: BYTE-INERZIA DELLA FISICA.
+======================================================================================================================
+
+--- S0 -- i due blob ---
+  [PASS] S0     vecchio a1ae5090 (atteso a1ae5090)   nuovo b9e07c73  -> DEVONO DIFFERIRE
+
+--- S1 [DECISIVO] -- BYTE-INERZIA DELLA FISICA, con salva_stato CHIAMATO ai passi (20, 45) ---
+    vec/nuo      n: 454 contro 454   UGUALE
+      psi       shape (454,)         max|A-B| = 0.000e+00
+      phi       shape (454,)         max|A-B| = 0.000e+00
+      phivel    shape (454,)         max|A-B| = 0.000e+00
+      eta       shape (454,)         max|A-B| = 0.000e+00
+      d         shape (21930,)       max|A-B| = 0.000e+00
+      d0        shape (21930,)       max|A-B| = 0.000e+00
+      omega_s   shape (454, 3)       max|A-B| = 0.000e+00
+      _nb       shape (454, 3)       max|A-B| = 0.000e+00
+      pos       shape (454, 3)       max|A-B| = 0.000e+00
+  [PASS] S1     shape diverse = 0, campi confrontati = 9/9, max|A-B| = 0.000e+00
+
+--- S2 -- le coorti sopravvivono alla MITOSI? (si misura sui DUE bracci: era la lettura fissata) ---
+    VECCHIO  n = 454    len(conc_nodi) = 454     nodi con coorte NON VUOTA = 374  frazione = 0.8238
+    NUOVO    n = 454    len(conc_nodi) = 454     nodi con coorte NON VUOTA = 374  frazione = 0.8238
+  [PASS] S2     vecchio 0.8238 contro nuovo 0.8238 -> se UGUALI e ALTE, l'ereditarieta' c'era GIA' (par.1.1)
+
+--- S3 -- ROUND-TRIP: le coorti entrano nel .pkl e tornano intere? ---
+    VECCHIO  chiavi presenti in attrs: []
+    NUOVO    chiavi presenti in attrs: ['conc_nodi', 'conc_archi', 'masse_info']
+  [PASS] S3a    nel VECCHIO le tre chiavi sono ASSENTI -> il difetto e' DIMOSTRATO, non dedotto
+  [PASS] S3b    nel NUOVO ci sono tutte e tre
+    ricaricato: len(conc_nodi) = 454, n = 454, len(conc_archi) = 21930, masse_info = 3 voci
+  [PASS] S3c    contenuto IDENTICO al disco = True, len >= n = True
+
+--- S4 -- quante volte scatta `_ripara_tracking` (un fallback mai contato e' sconosciuto, P5) ---
+    vecchio 0 chiamate   nuovo 0 chiamate   su 60 passi per braccio
+  [PASS] S4     DEVONO essere uguali: se il nuovo ne chiama di piu', la dimensione non e' mantenuta
+
+--- S5 -- IL COSTO: dimensione del .pkl e tempo per passo (CPU libera) ---
+    .pkl  vecchio   2301395 byte   nuovo   2891381 byte   -> +25.636 %  (n = 454)
+    tempo vecchio    5.138 s      nuovo    4.762 s     -> x0.9268  (60 passi + 2 snapshot)
+    ATTENZIONE: il tempo su 60 passi include il rumore di sistema; e' un ORDINE DI GRANDEZZA,
+    non una misura fine. La lettura fissata prima era 'costo che ESPLODE', non 'costo diverso'.
+  [PASS] S5     il .pkl non raddoppia (soglia dichiarata: crescita < 100 %%)
+
+--- S6 -- il sigillo dell'ANELLO (`Z42`) regge sul blob NUOVO? ---
+    si rilancia `_sigillo_anello.py`, che e' ancorato al blob f8f46683 e confronta col DISCO.
+      
+      ==============================================================================================================
+      ESITO: 10/10 PASS
+      ==============================================================================================================
+      ESITO: 10/10 PASS
+  [PASS] S6     returncode 0, ESITO 10/10, marcatore [FAIL] presente = False
+
+======================================================================================================================
+ESITO: 9/9 PASS   S0=P S1=P S2=P S3a=P S3b=P S3c=P S4=P S5=P S6=P
+S1 e' il decisivo: se FALLISCE, la modifica e' sbagliata e si FERMA (lettura fissata in 695ced0).
+======================================================================================================================

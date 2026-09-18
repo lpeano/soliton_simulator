@@ -215,8 +215,42 @@ rovesciato dal 2026-09-15**, e **senza spiegazione inventata**.
 ## 3. TODO DEL NEXT STEP
 
 - [x] blob/branch dal disco · natura del fallimento diagnosticata · `Z31` verificato e SEPARATO
-- [ ] **committare il FALLIMENTO com'è, PRIMA di toccarlo** (par.5)
-- [ ] riparazione `T1a`/`T1b`, `T2`, `T3` + sigilli **`T1`-`T4` del §1.4** *(byte-identità della fisica BLOCCANTE)*
+- [x] **committato il FALLIMENTO com'è, PRIMA di toccarlo** (`38bd0a7`)
+- [x] riparazione `T1a`/`T1b`, `T2`, `T3` (`54c9730`) + sigilli **`T1`-`T4` del §1.4**
+- [x] referto + registro + relazione + `CLAUDE.md` par.0 **nello stesso commit**
+- [x] **⚠ NON toccato:** la legge `--tau-luce`, `TAU_A`, `ramp`, `_pesi()`, nessun default
 - [ ] **PARTE 2**: pilota per durata **e per il tasso di `eta`** → `STATO_RUN.md` → previsioni → run
-- [ ] referto + registro + relazione **nello stesso commit** + **CHECKPOINT**
-- [ ] **⚠ NON toccare:** la legge `--tau-luce`, `TAU_A`, `ramp`, `_pesi()`, nessun default
+
+### ⚠ ESITO — **`6/7 PASS`, e i due falsificatori del §2.4 NON sono scattati**
+
+```
+ESITO: T0=PASS  T1a=PASS  T1b=PASS  T2=PASS  T3=FAIL  T4=PASS  T5=PASS
+TEMPI: T1a=93s  T1b=35s  T2=68s  T3=2975s  T4=66s  T5=66s     TOTALE 3305 s
+```
+
+| cosa mi avrebbe fermato (§2.4) | esito |
+|---|---|
+| **`T1a` che NON dà byte-identità** → il cablaggio cambiò il ramo OFF: questione di LEGGE | **NON scattato: `0.000e+00` su 21 campi, `n = 1718` da entrambe le parti** |
+| **il blob della fisica che cambia** → ho toccato il simulatore | **NON scattato: `T0` lo misura prima e dopo, `b9e07c73`/`2a7207a4` identici** |
+| **`T3` che passa per un margine sottile** → lo dico invece di contarlo | **non applicabile: `T3` FALLISCE** |
+
+**I sigilli del giro (§1.4 `T4`) rigirano identici:** `_sigillo_coorti` **9/9**, `_sigillo_anello`
+**10/10** annidato, `62 s`.
+
+### ⚠ E UNA COSA CHE IL §1 NON AVEVA PREVISTO
+
+**La diagnosi esistente diceva DUE chiamanti di `_tempo_luce_nodo`. Sono TRE**, e il terzo è
+**l'INERZIA** (`:2337`), che **non è gated su `TAU_LUCE`** ed è legge promossa. **Il monkeypatch
+vecchio la toccava.** **Non l'avevo previsto: l'ho trovato cercando gli enclosing delle tre chiamate
+prima di scrivere il wrapper**, ed è la ragione per cui il discriminatore è per SITO e non per
+`co_name`.
+
+### TODO — il passo successivo
+
+- [ ] **PARTE 2**, e il pilota deve misurare **due** cose: la durata **e il tasso di `eta` nel batch**
+      *(se là `r` è al pavimento, il conto dei 6000 passi non vale e va detto)*
+- [ ] **`T3`**: chiuderlo richiede **più semi**, non un criterio più permissivo. Con `std = 0.69` e
+      un effetto di `+0.51`, servono **~19 semi** per un `IC95` che escluda lo zero *(stima da
+      `n ≈ (t·s/Δ)²`, da verificare, non da citare come misura)*
+- [ ] **`Z31`**: i quattro `_pre_*.py` MANCANO davvero e uno DEGRADA invece di rifiutare. **Fronte
+      SEPARATO, non toccato in questo giro.**

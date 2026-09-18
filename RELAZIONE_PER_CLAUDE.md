@@ -6914,3 +6914,93 @@ disponibile, non a memoria: il `.pkl` registra il BLOB, `git cat-file -p` lo apr
 blob è stato PROVATO, non asserito** (`carica_stato` → `RuntimeError: DB RIFIUTATO`).
 **Ho risposto all'altra delle due definizioni che il mandato nomina, e non la spaccio per la stessa
 domanda. Per la prima servirebbe RIGIRARE UNA SCENA col blob nuovo.**
+
+---
+
+## 9.69 — **Il sigillo di `--tau-luce` è riparato: `6/7 PASS`. Resta `T3`, e quel `FAIL` è un RISULTATO**
+
+**2026-09-19** · blob **`b9e07c73` INVARIATO — e il sigillo stesso lo DIMOSTRA (`T0`)**
+**Fallimento committato PRIMA:** `38bd0a7` · **Riparazione committata PRIMA della corsa:** `54c9730`
+**Referto:** `doc/REFERTO_sigillo_tau_luce_riparato.md` · **Task history:** `47b7804`
+
+```
+ESITO: T0=PASS  T1a=PASS  T1b=PASS  T2=PASS  T3=FAIL  T4=PASS  T5=PASS
+TEMPI: T1a=93s  T1b=35s  T2=68s  T3=2975s  T4=66s  T5=66s     TOTALE 3305 s
+```
+
+> **Si è riparato il SIGILLO. La LEGGE non è stata toccata, e non lo asserisco io: `T0` misura il
+> blob della fisica PRIMA e DOPO la corsa, e sono identici.**
+
+### La diagnosi: **due criteri scaduti e un difetto del test.** La terza lettura non scatta
+
+**`T1` asseriva «il flag OFF è byte-identico al comportamento PRIMA della modifica» ed ESEGUIVA «il
+disco di oggi è uguale al codice di tre giorni fa»** — con **sette correzioni di legge sigillate** in
+mezzo. **Falso per costruzione.** Riparato ancorando il confronto alla **coppia di blob che racchiude
+il cambiamento** (`f5887254` → `7d484580`), entrambi pinnati, estratti in **binario**, col blob
+**ricalcolato e verificato**, e con **rifiuto** se non estraibili — mai il `pre_src = ""` che degrada.
+
+> **`T1a`: `n_A = n_B = 1718`, 21 campi, `max|A-B| = 0.000e+00`, RNG identico.**
+> **IL CABLAGGIO NON CAMBIÒ IL RAMO OFF.** Era la condizione bloccante, e regge.
+
+**E la terza lettura — «la legge è sbagliata» — NON scatta, per `T4`:** `d→2d` dà `2.000000`,
+`cs→2cs` dà `0.500000`, la legge vecchia resta a `1.000000`. **`tau` è una LEGGE.**
+
+### ⚠ `T2` — riparato, e **la diagnosi esistente era incompleta**
+
+Il documento del fallimento dice che `_tempo_luce_nodo` è chiamato *«anche da `_bloch_ritardato`»*.
+**Verificato dal disco: i chiamanti sono TRE.**
+
+```
+:2337  _passo_spinoriale   L'INERZIA (_T2 = T^2)   -- NON gated su TAU_LUCE
+:2442  _passo_spinoriale   il rilassamento tau-luce, dentro `if TAU_LUCE:`
+:3027  _bloch_ritardato    lo STRATO 1
+```
+
+**I primi due stanno nella STESSA funzione, quindi `co_name` non basta: il monkeypatch vecchio
+cambiava TRE meccanismi, e uno dei tre è l'INERZIA, che è legge promossa e non c'entra col flag.**
+Il wrapper nuovo discrimina per riga del chiamante, **ma la riga non è pinnata**: si trova a runtime
+**cercando il flag** (par.0), e **se i siti non sono esattamente uno il sigillo rifiuta di girare**.
+
+> **Risultato: `0.000e+00` ESATTO**, dove prima c'erano residui fino a `6.063e-07` **sui soli campi
+> dello Strato 1** — che erano **la firma del difetto**.
+
+### ⚠ `T3` — il criterio è rifatto, e **fallisce su dati veri**
+
+Il criterio vecchio prendeva soglia **e direzione** da un'attesa (`-1.03`) calcolata quando `cs` era
+**morto**. Il nuovo non prescrive direzione e non sceglie soglia: **l'effetto deve superare il nullo
+MISURATO fra semi, su 4 semi appaiati** (`P3`).
+
+```
+DIFF ON-OFF per seme:  +0.1849   -0.0535   +1.0288   +0.8919
+media +0.5130   std 0.5286   SE 0.2643   IC95 = [-0.3280, +1.3540]   t(3) = 3.182
+NULLO MISURATO: std(OFF fra semi) = 0.6936      SE INTERNA tipica = 0.1129
+```
+
+**L'IC95 contiene lo zero.** **Si scrive come LIMITE (par.9): *l'effetto non è distinguibile da zero,
+risoluzione `±0.84`* — e la stima puntuale `+0.51` è SOTTO la risoluzione: è NON MISURATO, non
+«nessun effetto».**
+
+> **⚠ E `C10` è confermata con un numero PEGGIORE di quello che dice: il rapporto fra dispersione
+> FRA SEMI e `SE` INTERNA vale `6.1`, non `~3`.** **Il vecchio `T3` usava la `SE` interna e
+> dichiarava effetti a `28 sigma`.**
+
+**`T3-bis` riporta il rovesciamento del segno sui tre blob senza spiegarlo e senza incorporarlo** —
+riscrivere il criterio finché `T3` passa sarebbe aggiustarlo, non ripararlo. **E i quattro semi
+mostrano che parte di quella storia può essere dispersione fra semi, non evoluzione del codice: a
+codice invariato le pendenze `OFF` valgono `+0.337 / -0.950 / +0.005 / -1.059`. I tre numeri storici
+sono tutti su UN seme.**
+
+### Cosa resta, e cosa non cambia
+
+**Il SIGILLO COMPLESSIVO resta `FAIL`, e il gate resta a `c0803713`.** **`--tau-luce` è ancora un ramo
+NON CERTIFICATO**, e ogni referto che usa quelle scene continua a ereditare il limite.
+**Ma ciò che lo blocca è ora UNO SOLO (`T3`) invece di tre, e i due che sono caduti erano difetti del
+SIGILLO, non della legge.**
+
+**Il costo, misurato e NON pulito:** `3305 s`, di cui `T3` da solo `2975 s` — **e i primi ~22 minuti
+hanno condiviso la CPU con un rendering video**, proprio nel tratto di `T3`. **È un limite superiore.**
+Il costo sta quasi tutto nei semi: **otto** corse da 300 passi dove prima ne bastavano due. **È il
+prezzo di `P3`.**
+
+**I sigilli del giro rigirano identici:** `_sigillo_coorti` **9/9**, `_sigillo_anello` **10/10**
+annidato, `62 s`.

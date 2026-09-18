@@ -1,0 +1,106 @@
+# SIGILLO RIPARATO - blob b9e07c73 (git) / 2a7207a4 (byte grezzi) - 2026-09-19
+# durata MISURATA: 3305 s (55 min). ATTENZIONE: i primi ~22 min hanno CONDIVISO LA CPU con un
+# rendering video (PID 31048, fermato alle 23:45). NON e' un costo a macchina libera, e T3 -
+# che costa 2975 s dei 3305 - e' proprio il tratto che ha subito la concorrenza.
+[TIMBRO] _sigillo_tau_luce.py  sha1-BYTE f6eaaa6d  committato e pulito
+
+==============================================================================================================
+T0 - IL BLOB DELLA FISICA. Il sigillo NON deve toccarlo: si misura PRIMA e DOPO.
+==============================================================================================================
+  soliton_simulator.py   git-blob b9e07c73   byte grezzi 2a7207a4
+  sito del ramo tau-luce TROVATO CERCANDO IL FLAG (non pinnato): riga 2442
+    _tau = self._tempo_luce_nodo(i, j)[:, None]
+
+==============================================================================================================
+T1a - BYTE-IDENTITA' fra i DUE BLOB CHE RACCHIUDONO IL CAMBIAMENTO (flag OFF). BLOCCANTE.
+==============================================================================================================
+  f5887254 (PRE, senza TAU_LUCE)  contro  7d484580 (POST, TAU_LUCE presente ma OFF)
+  estratti con `git cat-file -p` IN BINARIO -- mai `git checkout` (trappola CRLF, C18)
+  TAU_LUCE nel POST (deve essere False): False
+  PRESIDIO: uno zero con N DIVERSO e' MANCANZA DI CONFRONTO, non identita'.
+    n_A = 1718   n_B = 1718   ->  CONFRONTABILI
+    21 campi confrontati, PEGGIOR max|A-B| = 0.000e+00   stato RNG identico
+  T1a: PASS
+
+==============================================================================================================
+T1b - SUL BLOB CORRENTE: a flag SPENTO il ramo tau-luce non dev'essere preso MAI (P5/A8).
+==============================================================================================================
+  TAU_LUCE nel modulo (deve essere False): False
+  chiamate a `_tempo_luce_nodo`, PER RIGA DEL CHIAMANTE:
+    riga 2337         31 chiamate
+    riga 3027         27 chiamate
+  sito tau-luce: 0 chiamate (deve essere 0)   altri siti: 58 (devono essere > 0, senno' il
+  contatore non sta funzionando e il PASS sarebbe VUOTO)
+  T1b: PASS
+
+==============================================================================================================
+T2 - RIDUZIONE AL LIMITE, col monkeypatch che DISCRIMINA IL CHIAMANTE.
+==============================================================================================================
+  TAU_LUCE (deve essere True): True
+  il tau VECCHIO e' iniettato SOLO alla riga 2442; inerzia (:2337) e Strato 1 (:3027)
+  ricevono la legge VERA. TAU_A_LOCALE = True (il ramo OFF che si deve ritrovare).
+  contatori del discriminatore: sito tau-luce 31   altri siti 58
+  PRESIDIO: uno zero con N DIVERSO e' MANCANZA DI CONFRONTO, non identita'.
+    n_A = 1484   n_B = 1484   ->  CONFRONTABILI
+    21 campi confrontati, PEGGIOR max|A-B| = 0.000e+00   stato RNG identico
+  T2 (confronto): PASS
+  T2: PASS
+
+==============================================================================================================
+T3 - IL FLAG PRODUCE UN EFFETTO PIU' GRANDE DEL NULLO **MISURATO**? (4 semi APPAIATI)
+==============================================================================================================
+  Il criterio vecchio chiedeva uno spostamento di 0.3 in una DIREZIONE prescritta. Soglia e
+  direzione venivano da un'attesa (-1.03) calcolata con `cs` MORTO. NON si usano piu'.
+  Il nullo si MISURA QUI come dispersione FRA SEMI (par.9 C10; P3: >= 4 semi).
+  seme   | OFF pendenza +- SE (r2, n) | ON  pendenza +- SE (r2, n) | DIFF ON-OFF
+  1      |  +0.3370 +- 0.0884 (0.031,  452) |  +0.5218 +- 0.1366 (0.031,  462) |    +0.1849
+  2      |  -0.9501 +- 0.2581 (0.142,   84) |  -1.0036 +- 0.1475 (0.372,   80) |    -0.0535
+  3      |  +0.0049 +- 0.0553 (0.000,  817) |  +1.0337 +- 0.1015 (0.114,  811) |    +1.0288
+  4      |  -1.0592 +- 0.0499 (0.344,  862) |  -0.1673 +- 0.0604 (0.009,  831) |    +0.8919
+
+  IL NULLO MISURATO -- dispersione FRA SEMI delle pendenze OFF (codice INVARIATO):
+    std(OFF) = 0.6936   (per confronto: la SE INTERNA tipica vale 0.1129 -- par.9 dice che e'
+     ~3 volte troppo piccola, e qui si vede)
+  L'EFFETTO APPAIATO:
+    media(ON-OFF) = +0.5130   std = 0.5286   SE = 0.2643   IC95 = [-0.3280, +1.3540]  (t(3) = 3.182)
+  T3 (l'IC95 dell'effetto appaiato ESCLUDE lo zero): FAIL
+
+==============================================================================================================
+T3-bis - IL ROVESCIAMENTO DEL SEGNO: si RIPORTA, non si giudica e non si spiega.
+==============================================================================================================
+  Storia della pendenza ON-OFF su tre blob (dal repo, non da questa corsa):
+    2026-09-15  blob 7d484580   OFF -0.1685   ON -0.4265   ON piu' LONTANO da zero (-0.258)
+    2026-09-17  blob 08784685+  OFF -1.7311   ON -1.2749   ON piu' VICINO  da zero (+0.456)
+    2026-09-18  blob b9e07c73   OFF +0.3370   ON +0.5218   segno POSITIVO, r2 = 0.031
+  QUESTA CORSA, seme 1:          OFF +0.3370   ON +0.5218
+  NON HO UNA MISURA CHE LO SPIEGHI, E NON LA INVENTO. Non e' un criterio: e' un riscontro.
+
+==============================================================================================================
+T4 - SIGILLO DI COVARIANZA: e' una LEGGE o un numero travestito? (NON TOCCATO)
+==============================================================================================================
+  d -> 2d   : tau_nuovo/tau_vecchio = 2.000000   (atteso 2.000000)
+  cs -> 2cs : tau_nuovo/tau_vecchio = 0.500000   (atteso 0.500000)
+  CONTRASTO - la legge VECCHIA con d -> 2d: rapporto = 1.000000  (resta FERMA)
+  T4: PASS - tau SEGUE lo stato da solo: e' una LEGGE
+
+==============================================================================================================
+T5 - ampiezza e stabilita' (NON TOCCATO). I numeri sono del seme 1.
+==============================================================================================================
+  OFF  |omega| mediana  2.923e-05   theta  1.675e-05 gradi/passo =    0.00 giri   n=2247
+  ON   |omega| mediana  5.311e-06   theta  3.043e-06 gradi/passo =    0.00 giri   n=2253
+  fattore su theta: 0.1817
+  |nb| max scostamento da 1: 1.110e-16    NaN/inf: 0
+  T5: PASS
+
+==============================================================================================================
+T0 (chiusura) - il blob della FISICA e' ancora quello? Il sigillo NON deve aver scritto.
+==============================================================================================================
+  PRIMA  git-blob b9e07c73  byte 2a7207a4
+  DOPO   git-blob b9e07c73  byte 2a7207a4
+  T0: PASS - il simulatore e' INTATTO
+
+==============================================================================================================
+TEMPI (misurati, non stimati): T1a=93s  T1b=35s  T2=68s  T3=2975s  T4=66s  T5=66s
+ESITO: T0=PASS   T1a=PASS   T1b=PASS   T2=PASS   T3=FAIL   T4=PASS   T5=PASS
+SIGILLO COMPLESSIVO: FAIL
+==============================================================================================================

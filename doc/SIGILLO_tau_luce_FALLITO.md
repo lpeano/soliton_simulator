@@ -1,3 +1,15 @@
+> # ✅ SUPERATO IL 2026-09-19 — **IL SIGILLO E' STATO RIPARATO E RIGIRATO**
+>
+> **Esito sul blob `b9e07c73`: `T0=PASS T1a=PASS T1b=PASS T2=PASS **T3=FAIL** T4=PASS T5=PASS`.**
+> **`T1` e `T2` NON falliscono piu': erano un criterio SCADUTO e un difetto del TEST, ed e' stato
+> riparato il SIGILLO -- la LEGGE non e' stata toccata (`T0` lo dimostra: blob identico prima e dopo).**
+> **Resta `T3`, col criterio RIFATTO: l'`IC95` dell'effetto appaiato su 4 semi CONTIENE LO ZERO.**
+> **-> `doc/REFERTO_sigillo_tau_luce_riparato.md`. Questo documento si legge come STORIA.**
+>
+> **⚠ E DUE COSE DI QUESTO DOCUMENTO SONO SUPERATE:** *«T2 ... il rigiro non puo' cambiarlo»*
+> (**e' stato riscritto e ora passa**) e i numeri di `T3`, presi con la **`SE` INTERNA** invece della
+> dispersione **FRA SEMI**, che qui misura `0.6936` contro `0.1129` -- **un fattore `6.1`.**
+
 # `--tau-luce` — **SIGILLO FALLITO (T2, T3, T4). Ci si ferma.**
 
 > # ⚠ VERDETTO DA RIGIRARE PRIMA DI ESSERE CITATO (marcato il 2026-09-17)
