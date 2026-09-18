@@ -6256,3 +6256,68 @@ coer INTERNA   : 0.204 -> 0.223 -> 0.204
 **Cerca i `.pkl` per NOME**, e il `400` non esiste *(il primo watcher li mislabellò: gli istanti veri
 sono `120/130/470/800/840/1200`)*. **`130`, `470` e `840` non sono stati letti.** Tre istanti bastano
 per dire «si sposta e si approfondisce», **ma la risoluzione è minore di quella disponibile.**
+
+---
+
+## 9.62 — **`Z48` qualificata, e il run della scena giusta è GIÀ in corso: l'inversione si vede già**
+
+**Data:** 2026-09-18 · blob **`a1ae5090` invariato** · **run IN CORSO** (frame 275/400)
+**Task history e previsioni:** questo stesso commit *(meccanismo par.5-octies + A9)*
+
+### ✅ `Z48` QUALIFICATA — e la prova era già nel mio referto
+
+Il mio referto concludeva *«il guscio coincide con l'anello delle masse seminate»*. **Vero PER IL
+BATCH.** **Ma non è la struttura osservata nel video**, e **la ragione per cui il batch non poteva
+contenerla è misurata nel referto stesso:**
+
+```
+batch 1200 :  8 nodi e 10 archi in 1200 passi   ->  LA MITOSI E' FERMA
+video      :  5112 mitosi,  n da 2391 a 7503
+```
+
+> **La struttura osservata è fatta di MATERIA NUOVA, e nel batch quella materia non nasce.**
+> **Nessuna misura sul batch poteva trovarla.** **`Z48` è QUALIFICATA, non corretta.**
+
+### ✅ Il run che il mandato chiede è già in corso — verificato, non assunto
+
+Il driver sigillato sta girando la config esatta **da `94e2ec0`**, e **traccia la tabella dei
+fotogrammi**: al frame 270 **`n = 5443`** contro `5465`, **`dil = +10.75 %`** contro `+10.3 %`.
+**È la stessa scena.** **Frame 275/400, `15.6 s/frame`, ~33 min alla fine.**
+**Non lo rilancio:** rilanciarlo costerebbe **1 h 45** per riavere gli stessi numeri.
+
+**⚠ E L'INVERSIONE È GIÀ VISIBILE, prima di qualunque analisi:**
+
+```
+frame 265 : dil = +10.967 %
+frame 275 : dil =  +8.593 %
+```
+
+### ⚠ La mia riserva sul §3: i raggi `4 / 8 / 12` sono ASSOLUTI su un sistema che DILATA
+
+Il sistema si dilata del `+19.6 %` e poi si ricomprime, e `d medio` va da `0.934` a `1.753` a
+`1.483` — **quasi un fattore 2.**
+
+> **CLAUDE.md par.4 lo vieta esplicitamente:** *«Mai confronti a PASSO FISSO su un sistema che si
+> espande/dilata: genera ALIASING… normalizza sulla scala (COMOVENTE), non su intervalli
+> assoluti.»*
+> **`r < 4` al frame 10 e `r < 4` al frame 375 non sono la stessa regione fisica.**
+
+**Riporterò ENTRAMBE le letture** — assoluta *(come chiesto)* **e comovente** *(normalizzata al
+raggio dell'anello misurato a ogni istante, non al `sep = 8` di semina)*. **Se concordano, la riserva
+cade e lo dico. Se divergono, la lettura assoluta è aliasata e si scarta, non si media.**
+
+### Le previsioni, e una è deliberatamente scomoda
+
+**Mi aspetto l'OPPOSTO di `Z48` sul punto ③**: lì i nodi della struttura erano **vecchi e fermi**;
+qui la mitosi è viva e mi aspetto **nodi NATI DOPO**. **Ma il discriminante è quello che ha
+funzionato due volte: se il loro `r` valesse `1.414212e-06`, sarebbero fermi come quelli di `Z46`, e
+«materia nuova» sarebbe sbagliato.**
+**E il quarto falsificatore è l'esito scomodo: se la struttura coincidesse con l'anello `r ≈ 8`,
+sarebbe la stessa cosa di `Z48` e la distinzione del mandato cadrebbe.**
+
+### Limiti dichiarati prima
+
+**Un seme. `--tau-luce` ha il SIGILLO FALLITO: ramo non certificato, ogni numero lo eredita.**
+**5 snapshot invece dei 20 chiesti**, e `d medio` ricostruito da quelli: **per l'istante
+dell'inversione la risoluzione è 5 frame, per il profilo radiale sono 5 punti.** **Lo dico prima
+invece di presentarlo come sufficiente.**

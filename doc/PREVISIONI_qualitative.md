@@ -453,3 +453,46 @@ fuori un segno netto, la spiegazione andrebbe cercata in `--chi-basc`, non nella
 
 **UN SEME, UNA SCENA.** **`--tau-luce` ha il sigillo FALLITO** (par.0): ramo **non certificato**.
 **Nessun verdetto di fisica, nessuna identificazione.**
+
+---
+
+## 2026-09-18 — **la struttura che si gonfia e si ricomprime** *(scritte PRIMA dell'analisi)*
+
+**① IL CICLO.** **Mi aspetto che l'inversione ci sia** — **è già nei miei dati** (`dil` da `+10.97 %`
+al frame 265 a `+8.59 %` al 275, prima di qualunque analisi). **Quello che NON so è se `d medio`
+inverta allo STESSO istante della dilatazione**: sono due grandezze diverse *(una è la distanza, una
+è lo scarto `d` vs `d0`)*, e **se invertissero in momenti diversi sarebbe il dato più informativo del
+giro**, perché direbbe che la ricompressione non è un semplice rimbalzo elastico.
+
+**② LA REGIONE INTERNA.** **Mi aspetto che esista** — la coerenza locale sale a `0.58` mentre nel
+batch stava a `0.20`. **Ma NON mi aspetto un bordo netto**: mi aspetto un gradiente, come nel batch.
+**Se il raggio della regione interna superasse davvero `r ≈ 8` e poi si ritraesse, sarebbe la misura
+diretta della descrizione** — e sarebbe la prima volta che una struttura di questo repo viene
+misurata come **processo** invece che come stato.
+
+**③ DI COSA È FATTA — e qui mi aspetto l'OPPOSTO di `Z48`.** Nel batch i nodi della struttura erano
+**vecchi e fermi**; qui la mitosi è viva (5112 eventi) e **mi aspetto che la regione interna sia fatta
+di nodi NATI DOPO, con `eta` più bassa perché giovani ma `r` NON al pavimento**.
+> **⚠ E il discriminante è quello che ha funzionato due volte: se il loro `r` valesse
+> `1.414212e-06`, sarebbero fermi come quelli di `Z46`, e «materia nuova» sarebbe sbagliato.**
+
+**④ `perc_chi`.** **Mi aspetto che il grosso venga da `chi_basc`, non dalla mitosi** — perché
+`chi_basc` riscrive **a ogni passo** su **tutti** i nodi, mentre la mitosi tocca solo i nuovi.
+**Se invece venisse dalla mitosi, l'antimateria sarebbe un fenomeno di GENERAZIONE e non di
+BASCULAMENTO** — e cambierebbe la domanda.
+
+### ⚠ E quattro cose che NON mi aspetto — i falsificatori
+
+1. **se raggio ASSOLUTO e COMOVENTE dessero risposte diverse**, la lettura assoluta è **aliasata**
+   (par.4: mai intervalli fissi su un sistema che dilata) **e va scartata, non mediata**;
+2. **se la regione interna avesse `r` al pavimento**, non è materia nuova: è di nuovo `Z46`;
+3. **se `d medio` non invertisse affatto** entro il frame 400, **il ciclo non è chiuso** e il run non
+   risponde alla domanda — **lo direi invece di estrapolare**;
+4. **se la struttura coincidesse con l'anello `r ≈ 8`**, allora è la stessa cosa di `Z48` e la
+   distinzione del mandato cade — **sarebbe l'esito scomodo, e va cercato.**
+
+### E i limiti, dichiarati prima
+
+**UN SEME. `--tau-luce` HA IL SIGILLO FALLITO** (par.0): ramo **non certificato**, e ogni numero lo
+eredita. **`--chi-basc` attivo.** **5 snapshot invece dei 20 chiesti**, e `d medio` ricostruito da
+quelli. **Nessun verdetto di fisica, nessuna identificazione.**
