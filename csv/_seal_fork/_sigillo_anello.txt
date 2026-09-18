@@ -1,0 +1,75 @@
+[TIMBRO] _sigillo_anello.py  sha1-BYTE 7145547e  committato e pulito
+======================================================================================================================
+SIGILLO ANELLO ISTANTANEO -- P0..P10
+======================================================================================================================
+
+--- P0 -- i due blob (sha1 dei BYTE GREZZI, non git hash-object) ---
+  [FAIL] P0     vecchio a1ae5090 (atteso f8f46683)   nuovo a1ae5090
+  TAU_A = 50.0   TAU_LOC = 1.0   DT = 0.01   (letti dal modulo, non dal comando: P6)
+
+--- P1 [BLOCCANTE] -- riduzione al limite: `med_prec := med_corrente` -> BYTE-IDENTICO ---
+    P1           n: 459 contro 444
+      psi       SHAPE DIVERSE (459,) contro (444,)  <- NESSUN CONFRONTO
+      phivel    SHAPE DIVERSE (459,) contro (444,)  <- NESSUN CONFRONTO
+      eta       SHAPE DIVERSE (459,) contro (444,)  <- NESSUN CONFRONTO
+      d         SHAPE DIVERSE (21936,) contro (21916,)  <- NESSUN CONFRONTO
+      d0        SHAPE DIVERSE (21936,) contro (21916,)  <- NESSUN CONFRONTO
+      omega_s   SHAPE DIVERSE (459, 3) contro (444, 3)  <- NESSUN CONFRONTO
+      _nb       SHAPE DIVERSE (459, 3) contro (444, 3)  <- NESSUN CONFRONTO
+  [FAIL] P1     shape divergenti 7, array confrontati 0, max|A-B| = 0.000e+00
+
+--- P2 -- controllo positivo: coi valori VERI DEVE differire ---
+    P2           n: 459 contro 459
+      psi       shape (459,)       max|A-B| = 0.000e+00
+      phivel    shape (459,)       max|A-B| = 0.000e+00
+      eta       shape (459,)       max|A-B| = 0.000e+00
+      d         shape (21936,)     max|A-B| = 0.000e+00
+      d0        shape (21936,)     max|A-B| = 0.000e+00
+      omega_s   shape (459, 3)     max|A-B| = 0.000e+00
+      _nb       shape (459, 3)     max|A-B| = 0.000e+00
+  [FAIL] P2     shape divergenti 0, max|A-B| = 0.000e+00 (0 con shape uguali = FAIL)
+
+--- P3 -- A3 SI SCIOGLIE: `median(x)` non vale piu' 1 per identita' ---
+    median(x) su 123 passi: p05 0.325981  mediana 0.975909  p95 2.99675   max|med-1| = 12.493
+  [PASS] P3     il punto fisso ESATTO (0.000e+00) e' sciolto
+
+--- P4 -- A6: `med` viene dallo STATO PRECEDENTE ---
+  [PASS] P4     ritmo() scrive _med_f_prec: False (deve essere False)   step() promuove: True
+
+--- P5 -- A8: i contatori ---
+    _ritmo_chiamate              126
+    _ritmo_med_assente           2
+    _ritmo_med_identico          0
+    _ritmo_med_non_promosso      2
+    _ritmo_f_tutto_nullo         1
+    _ritmo_med_sul_pavimento     2
+    _ritmo_sicurezza             2
+  [PASS] P5     `med` assente 2 su 126 chiamate = 1.59 % (atteso ~0 a regime: solo l'avvio)
+
+--- P6 -- `Z33` come conseguenza: il gauge degenere ---
+    f tutto nullo 1   med sul pavimento 2   med NON promosso 2   su 126 chiamate
+    (prima della cura: 1 passo su 31 = 3.2 %%. `med` NON promosso e' il presidio che impedisce
+     alla degenerazione di ROVESCIARSI in saturazione al passo dopo.)
+  [PASS] P6     ogni `med` sul pavimento NON e' stato promosso (2 >= 2 - 1)
+
+--- P7 -- IL GAUGE NON E' CAMBIATO: `r_unit` e il codominio di `r` ---
+    r: min 1.41421e-06  p05 0.108208  MEDIANA 0.985832  p95 1.40899  max 1.41421   (prima: p05 0.1108, med 1, max 1.41419)
+  [PASS] P7     `r_unit` invariato nel sorgente: True ; tetto 1.4142130 <= sqrt(2)
+
+--- P8 -- `Z9`: `ramp = min(1, eta/TAU_A)` mediano ai passi 1 / 60 / 120 ---
+    passo 1    eta mediano 0.01   ramp 0.0002
+    passo 60   eta mediano 0.490529   ramp 0.00981057
+    passo 120  eta mediano 0.981035   ramp 0.0196207
+    riferimento del mandato: 0.0002 / 0.0102 / 0.0212  (TAU_A = 50, scena STORICA).
+    ⚠ QUI TAU_A = 50.0: i due non sono confrontabili direttamente, e NON li confronto.
+  [PASS] P8     riportato, NON confrontato con numeri di un'altra scena (A3c)
+
+--- P9 -- stabilita' ---
+  [PASS] P9     no NaN/inf: True   r > 0: True   ||nb| - 1| < 1e-6: True
+
+======================================================================================================================
+ESITO: 7/10 PASS
+   FAIL: P0
+   FAIL: P1
+   FAIL: P2
+======================================================================================================================
