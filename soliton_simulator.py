@@ -2025,7 +2025,14 @@ class Rete:
             np.add.at(twn, ii[mi], aw[mi]); np.add.at(twn, jj[mj], aw[mj])
             np.add.at(deg, ii[mi], 1.0);    np.add.at(deg, jj[mj], 1.0)
             return 1.0 + (twn / np.maximum(deg, 1.0)) / max(PHI_CRIT, 1e-9)
+        # [A8 - Z33, 2026-09-18] SOLO CONTATORI, nessuna logica toccata. Questo ramo restituisce
+        # `r = 1` per TUTTI: la dilatazione temporale sparisce in quel passo. E' legittimo -- non
+        # esiste uno stato precedente con cui confrontarsi -- ma finora non lo diceva NESSUNO.
+        self._ritmo_chiamate = getattr(self, "_ritmo_chiamate", 0) + 1
         if self._psi_prec is None or len(self._psi_prec) != self.n:
+            self._ritmo_sicurezza = getattr(self, "_ritmo_sicurezza", 0) + 1
+            self._ritmo_sicurezza_shape = (
+                -1 if self._psi_prec is None else len(self._psi_prec), self.n)
             self._psi_prec = self.psi.copy() if len(self.psi) == self.n else np.ones(self.n, complex)
             return np.ones(self.n)
         a = np.angle(self.psi) - np.angle(self._psi_prec)
@@ -2035,12 +2042,36 @@ class Rete:
         # non entra nel ritmo (magnitudine); il legame orologio-segno vive nel de Broglie SU(2) (gia' 4pi,
         # TW_SPINORE = tw/4pi). Snapshot t-1 (Jacobi): psi_spin del passo precedente, _psi_spin_prec aggiornato in step.
         _ps = getattr(self, "psi_spin", None); _psp = getattr(self, "_psi_spin_prec", None)
+        # [A8 - Z33] il guard 4pi: se fallisce si cade sul ramo SCALARE 2pi, e nessuno lo dice.
+        # E' la stessa guardia che fu inerte nel 95.33 % delle chiamate PER MESI (C11).
+        if CAMPO_SPINORIALE:
+            if _ps is None or _psp is None or len(_ps) != self.n or len(_psp) != self.n:
+                self._ritmo_guard4pi_ko = getattr(self, "_ritmo_guard4pi_ko", 0) + 1
+                self._ritmo_guard4pi_shape = (-1 if _ps is None else len(_ps),
+                                              -1 if _psp is None else len(_psp), self.n)
+            elif _ps is _psp or np.array_equal(_ps, _psp):
+                # LO SNAPSHOT E' LO STESSO OGGETTO (o identico): `f` sara' ZERO per ogni nodo.
+                # Non e' un errore -- significa che `psi_spin` non e' cambiato dall'ultimo snapshot --
+                # ma senza questo contatore la degenerazione e' INVISIBILE.
+                self._ritmo_snap_identico = getattr(self, "_ritmo_snap_identico", 0) + 1
         if CAMPO_SPINORIALE and _ps is not None and _psp is not None and len(_ps) == self.n and len(_psp) == self.n:
             a = np.angle(_ps[:, 0]) - np.angle(_psp[:, 0])
             signed = ((a + 2 * np.pi) % (4 * np.pi) - 2 * np.pi) / DT   # wrapping su 4pi (l'otto)
         # FLAG 4 (--tempo-proprio-orientato): f mantiene il SEGNO (tempo proprio orientato);
         # off = modulo, byte-identico al comportamento storico. La scala gauge resta positiva.
         f = signed if TEMPO_PROPRIO_ORIENTATO else np.abs(signed)
+        # [A8 - Z33] LA FIRMA DEL DIFETTO: `f` identicamente nullo -> `x = 0` -> `r ~ 1.414e-06`,
+        # cioe' IL TEMPO PROPRIO SI FERMA PER TUTTI in quel passo. E il caso piu' debole:
+        # `median(|f|) = 0` con qualche `f` non nullo -> `med` cade sul PAVIMENTO e quelli ESPLODONO.
+        # Sono due regimi OPPOSTI e si contano separatamente.
+        _fa = np.abs(f)
+        if _fa.size:
+            if float(np.max(_fa)) == 0.0:
+                self._ritmo_f_tutto_nullo = getattr(self, "_ritmo_f_tutto_nullo", 0) + 1
+            elif float(np.median(_fa)) <= 0.0:
+                self._ritmo_f_mediana_nulla = getattr(self, "_ritmo_f_mediana_nulla", 0) + 1
+            if float(np.median(_fa)) <= 1e-9:
+                self._ritmo_med_sul_pavimento = getattr(self, "_ritmo_med_sul_pavimento", 0) + 1
         med = max(float(np.median(np.abs(f))), 1e-9)
         x = f / med
         r = x / np.sqrt(1.0 + x**2) + 1.0e-6           # bottleneck liscio, satura a 1 per x->inf
