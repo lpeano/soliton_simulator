@@ -149,8 +149,40 @@ sopra `0.5`/`0.9`**. **Chi legge `_pesi()`**: enumerato **dal disco**, non a mem
 ## 3. TODO DEL NEXT STEP
 
 - [x] blob/branch dal disco · `.pkl` verificati · **presidio del blob PROVATO**
-- [ ] previsioni qualitative → commit
-- [ ] ① → ② → ③ → ④
-- [ ] **`Z9` RISCRITTA** nel registro *(non «chiusa»: **riscritta in modo che si possa chiudere**)*
-- [ ] referto + relazione **nello stesso commit** + **CHECKPOINT**
-- [ ] **⚠ NON toccare:** `TAU_A`, `ramp`, `_pesi()`, il regime, nessuna promozione
+- [x] previsioni qualitative → commit *(`f3895aa`, nove voci)*
+- [x] ① → ② → ③ → ④
+- [x] **`Z9` RISCRITTA** nel registro, col testo vecchio conservato VERBATIM in appendice al referto
+- [x] referto + relazione **nello stesso commit**
+- [x] **⚠ NON toccato:** `TAU_A`, `ramp`, `_pesi()`, il regime — **nessuna promozione, nessun cablaggio**
+
+### ⚠ ESITO — **il falsificatore non scatta, e TRE previsioni mie cadono**
+
+**Il falsificatore del §2.5** *(«se `d(eta)/d(passo)` misurato non coincide con `DT·r` letto, mi
+fermo»)* **NON è scattato:** rapporto `0.9977` e `0.9966` negli ultimi due intervalli — **entro lo
+`0.3 %`**. **La derivazione del §1.2 regge, e tutto il resto poggia su di essa.**
+
+| previsione (`f3895aa`) | esito |
+|---|---|
+| **1** nessuna coorte a `ramp > 0.9` | **GIUSTA** (zero ovunque) |
+| **1-bis** «credo nemmeno a `ramp > 0.5`» | **SBAGLIATA: il `37.7 %` della coorte originale ci arriva** |
+| **2** la coorte più vecchia ha il `ramp` più alto *(controllo di sanità)* | **fallisce per un pelo** (`0.3214` contro `0.3212`) — **ma NON è un errore di assegnazione, verificato dal limite superiore della coorte giovane** |
+| **3** la coorte originale è la più larga | **non confermata come formulata**: in relativo è la più STRETTA (`2.99` contro `3.67`) |
+| **4** due popolazioni a ordini di distanza | **non verificabile qui: i FERMI sono ~0** |
+| **5** «la frazione di fermi sarà molto più bassa del `93 %`» | **GIUSTA, ed era l'unica marcata come "può cadere"** |
+| **6** il prodotto sarà più piccolo del quadrato | **SBAGLIATA NEL SEGNO** (`1.58×`, `1.13×`) |
+| **7** `base/base_maturo < 0.01` per la maggioranza | **SBAGLIATA**: il `99.51 %` è SOPRA |
+| **8** «non potrò decidere diverso-o-più-forte senza un run» | **avverata A METÀ**: la parte strutturale si decide, la fenomenologica no |
+| **9** qualunque criterio derivato dirà NON SODDISFATTO | **GIUSTA** (fattore `13`/`18`, archi maturi `0.000000`) |
+
+**E una cosa che NON avevo previsto affatto:** **i nati dopo sono il `70 %` dei NODI ma portano
+l'`1.37 %` degli ESTREMI D'ARCO** *(grado mediano `496.0` contro `2.0`)*. **È la ragione per cui la
+restrizione alla coorte originale, nel mio criterio, oggi è INERTE — e l'ho dichiarato (A9) invece di
+venderla come presidio.**
+
+### TODO — il passo successivo
+
+- [ ] **la coorte PER MASSA**: richiede di **rigirare una scena col blob `b9e07c73`**, perché
+      `conc_nodi` non è nei `.pkl` vecchi. **Non fatto, e dichiarato.**
+- [ ] **il difetto P6**: `TAU_A`/`G_PH`/`CALORE_INIT` in `RUN_PARAMS`. **È una riga, ma è un
+      CABLAGGIO e questo mandato lo vieta: va chiesto.**
+- [ ] **`Z9-b` a `1`** — il criterio di chiusura, che oggi vale `0.075`

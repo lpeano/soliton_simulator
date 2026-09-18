@@ -6773,3 +6773,144 @@ Il criterio nuovo **parsa la riga `ESITO: n/m PASS`** e richiede `passati == tot
   sei di `_g2m` vengono dal blob `a1ae5090`. **Per averle servirebbe rigirare le scene.**
 - **la separazione «coorte assegnata dalla MITOSI» contro «riscritta da `chi_basc`» resta da fare:**
   **non è ricavabile dai `.pkl` neanche adesso** — servirebbero **contatori DURANTE il run**.
+
+---
+
+## 9.68 — **`Z9` riscritta: il kernel gira al `7.5 %` del maturo, e `Z9` aveva scambiato un valore di `r` per una costante**
+
+**2026-09-18** · blob **`b9e07c73` INVARIATO** · **nessun run nuovo**, i dodici `.pkl` esistevano
+**Task history con la derivazione, committato PRIMA:** `efd7a34` · **Previsioni:** `f3895aa`
+**Referto:** `doc/REFERTO_Z9_coorti.md` · **Output:** `csv/_test_fork/_z9_coorti.txt`
+
+> **⚠ IN TESTA:** **`--tau-luce` HA IL SIGILLO FALLITO** (par.0): ramo **NON CERTIFICATO**, ogni numero
+> lo eredita. **`--chi-basc` attivo. UN SEME per scena. COORTE ANAGRAFICA, NON PER MASSA.**
+> **Si è MISURATO, non curato: `TAU_A`, `ramp` e `_pesi()` non sono stati toccati.**
+
+### Il difetto di `Z9` ha un nome, e si legge dal codice
+
+```
+:3236  self.eta += dt_n      :3038  dt_n = DT * r      :2649  ramp = min(1, eta/TAU_A)
+```
+
+> **`d(eta)/d(passo) = DT · r` ESATTAMENTE, per nodo → `passi(ramp = 1) = TAU_A/(DT·r) = 5000/r`.**
+> **Il `~0.009/passo` di `Z9` è il tasso di un nodo con `r ≈ 0.9`, scambiato per una costante.**
+> **Non esiste UN tempo di maturazione: ce n'è uno PER NODO.**
+
+**Il falsificatore fissato prima non scatta:** `d(eta)/d(passo)` misurato contro `DT·r` letto dà
+**`0.9977` e `0.9966`** negli ultimi due intervalli — **confermata entro lo `0.3 %`**. Nel primo dà
+`0.625`, **e la ragione è misurata:** al frame 10 `r` mediano vale **`1.414119 = √2`, il TETTO di
+`ritmo()`**, e scende a `~1.0`; `r` campionato ai due estremi non cattura un `r` che si muove.
+
+**E il fatto più pulito del giro:** al frame 10 tutti i `2391` nodi hanno la **stessa età anagrafica**
+(60 passi) ma `eta` va da **`0.2722` a `0.5049`** — **un fattore `1.85`**. **Stessa età, tempi propri
+diversi dell'85 %.**
+
+### Il rilievo di Luca, confermato con un numero
+
+```
+frame 400            ramp MED   fr(ramp>0.5)   fr(ramp>0.9)
+coorte ORIGINALE      0.3212      0.3768         0.0000        (TRE)
+TUTTA LA POPOLAZIONE  0.2171      0.1409         0.0000
+coorte ORIGINALE      0.3264      0.3821         0.0000        (DUE)
+TUTTA LA POPOLAZIONE  0.2207      0.1538         0.0000
+```
+
+> **La statistica di popolazione sottostima di `2.67` e `2.48` volte la maturità della coorte che
+> porta la struttura.** **`ramp > 0.9`: ZERO ovunque.**
+> **⚠ E la mia previsione 1 cade a metà: avevo scritto «credo nemmeno a `ramp > 0.5`». Falso —
+> oltre un terzo della coorte originale ci arriva. I NODI ORIGINALI MATURANO, quando il tempo c'è.**
+
+### Il `93 %` di `Z46` non si ripresenta — **ed è una proprietà della SCENA**
+
+```
+FERMI (r/r_floor < 2):  TRE  0 / 8 / 0 / 0 / 0 / 0     DUE  0 / 3 / 0 / 0 / 46 / 3
+```
+
+**Contro il `92.7 %` del batch di `Z46`.** **⚠ Sono SCENE DIVERSE e non si trasporta (A3c): quello che
+si può dire è che la frazione al pavimento non è una proprietà del SISTEMA, ma della SCENA — e questo
+QUALIFICA `Z46`, non lo smentisce.** *(Confermato indipendentemente dai contatori A8:
+`_ritmo_med_sul_pavimento = 2` su 2400 passi qui, contro `1202` su 1200 passi nel batch.)*
+
+**Estrapolazione:** `4667` passi (TRE) e `5345` (DUE) contro i `2400` fatti — **il `51.4 %` e il
+`44.9 %` del cammino.**
+
+### Il kernel — e **non è un'ampiezza pura**
+
+**`base/base_maturo = ramp[i]·ramp[j]` ESATTO** *(gli altri due fattori sono identici nel kernel
+acerbo e in quello maturo e si cancellano; l'assoluto NON è stato ricostruito, perché
+`_lam_archi → lambda_nodi → massa_critica_adattiva → i pesi` è una catena RICORSIVA e ricostruirla
+fuori è l'errore già fatto su `correzione`)*.
+
+```
+frame 400   p05        MEDIANA    p95        fr>0.01   fr>0.5   fr>0.9
+TRE         4.122e-02  7.454e-02  3.527e-01   0.9951   0.0000   0.0000
+DUE         3.367e-02  5.527e-02  2.893e-01   0.9943   0.0000   0.0000
+```
+
+**⚠ Previsione 7 SBAGLIATA:** avevo previsto `< 0.01` per la stragrande maggioranza; **il `99.51 %`
+è SOPRA `0.01`.**
+**⚠ Previsione 6 SBAGLIATA NEL SEGNO:** il prodotto mediano è `1.58×` e `1.13×` **il quadrato** del
+`ramp` mediano, non più piccolo. **Mi era venuta subito una spiegazione — *gli archi connettono
+coetanei* — e l'ho MISURATA invece di scriverla:**
+
+```
+corr(ramp[i], ramp[j]) = +0.8015 (TRE)  +0.8569 (DUE)
+NULLO (estremo j rimescolato, 5 volte)  = +0.0027 +0.0012 -0.0014 +0.0009 +0.0002
+```
+
+**Duecento volte il nullo: gli archi sono ASSORTATIVI PER ETÀ.** La spiegazione regge — **ma adesso
+è un numero.**
+
+**«Diverso o solo più forte»: risposta PARZIALE.** Se `ramp[i]·ramp[j]` fosse **costante** sarebbe
+un'ampiezza pura. **Non lo è: `p95/p05` passa da `2.31` (frame 10) a `8.56`/`8.59` (frame 400), e la
+variazione è correlata con l'età.** **Il kernel acerbo non riscala i pesi: li RIPESA, a favore dei
+legami vecchio-vecchio.** **⚠ Ma se la FENOMENOLOGIA sia diversa resta NON RISPOSTO: deciderlo
+richiederebbe `≥ 4667` passi o forzare `ramp = 1`, che è CABLARE.** *(Era la previsione 8, e si è
+avverata a metà.)*
+
+### Il criterio nuovo — **due pezzi, nessuna soglia scelta**
+
+**`Z9-a`, la condizione di regime da DICHIARARE in ogni referto che usi una scena:**
+`passi_mancanti = TAU_A/(DT · r̃_MOBILI) − passi_fatti`, con **`r` LETTO** da `_r_corrente` *(mai
+stimato da `eta`: sarebbe circolare)* e la mediana **sui soli MOBILI** (A3c).
+**Oggi `2267` (TRE) e `2945` (DUE).**
+
+**`Z9-b`, il criterio di chiusura:** **`Z9` si chiude quando `median(ramp[i]·ramp[j])` sugli archi
+INTERNI alla coorte originale vale `1`.** **Nessuna soglia scelta: `ramp` satura in un punto ESATTO,
+`eta = TAU_A`.** **Oggi `0.074950` e `0.055417` → NON SODDISFATTO di un fattore `13` e `18`**, e la
+frazione di archi maturi è **`0.000000` esatto**. **E può fallire davvero:** se `r` scendesse al
+pavimento il numero smetterebbe di crescere e il criterio resterebbe aperto per sempre — **ed è
+esattamente ciò che è successo nel batch di `Z46`.**
+
+### ⚠ E la parte del mio criterio che **oggi non fa lavoro** — A9
+
+**La restrizione «archi interni alla coorte originale» serviva a togliere la diluizione dei neonati.
+Misurata, non toglie niente:** `0.074950` contro `0.074540` su tutti gli archi — **quarta cifra.**
+
+```
+             nodi           grado MEDIANO   estremi d'arco
+ORIGINALI    2391 (29.8 %)      496.0          861330
+NATI DOPO    5627 (70.2 %)        2.0           11942     <- l'1.37 % degli estremi
+```
+
+**E il `2.0` è esattamente ciò che il codice prescrive** *(il figlio nasce con due archi verso i due
+genitori, par.9)*, **verificato dai dati.**
+
+> **A9: «un presidio che non impedisce non è un presidio».** **Quella restrizione oggi è INERTE, e lo
+> dichiaro invece di venderla come protezione.** **Quello che fa funzionare il criterio è che la
+> mediana è sugli ARCHI e non sui NODI** — ed è **quella** la differenza col criterio scaduto.
+
+### Il difetto **P6** registrato
+
+**`RUN_PARAMS` (`:6274-6296`) scrive `REGIME` e le costanti `LAM/GAMMA/SCALA_B/CS_M/K_C/PHI_CRIT` —
+ma NON `TAU_A`, NON `G_PH`, NON `CALORE_INIT`: i tre numeri che DEFINISCONO il regime sono gli unici
+che mancano.** Deducibili, non scritti — **e la deduzione è stata fatta con la catena più corta
+disponibile, non a memoria: il `.pkl` registra il BLOB, `git cat-file -p` lo apre, e da lì si leggono
+`REGIME = "deterministico"` e `_TAU_A_REGIME = 50.0`.**
+
+### Cosa resta senza risposta
+
+**«I nodi di QUESTA MASSA maturano?»** — `conc_nodi` non è nei `.pkl` (`Z53`), e **il presidio del
+blob è stato PROVATO, non asserito** (`carica_stato` → `RuntimeError: DB RIFIUTATO`).
+**Ho risposto all'altra delle due definizioni che il mandato nomina, e non la spaccio per la stessa
+domanda. Per la prima servirebbe RIGIRARE UNA SCENA col blob nuovo.**

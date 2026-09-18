@@ -313,7 +313,7 @@ sono.** Le coorti vanno ricostruite **dalla posizione**, e l'analisi lo dichiara
 | **durata misurata** | **6535 s (1h49)**, `16.34 s/frame` |
 | **`n`** | 2391 → 8018 |
 | **snapshot** | `frame_{10,115,190,270,375,400}.pkl` — **il `_db_step` dentro è il FRAME, non il passo** |
-| **analisi** | `csv/_test_fork/_struttura_video.py` (`6bb24e5e`) |
+| **analisi** | `csv/_test_fork/_struttura_video.py` (`6bb24e5e`) - `csv/_test_fork/_ab_due_tre.py` (`0889bcef`) - **`csv/_test_fork/_z9_coorti.py` (`16acd823`)** |
 
 **IL COMANDO, VERBATIM:**
 
@@ -348,7 +348,7 @@ lo eredita.** **`--chi-basc` riscrive `perc_chi` a ogni passo.**
 | **durata misurata** | **5357.8 s (1h29)**, `13.40 s/frame` |
 | **`n`** | 1894 → 5878 *(contro 2391 → 8018 a tre masse)* |
 | **snapshot** | `frame_{10,115,190,270,375,400}.pkl` — **il `_db_step` dentro è il FRAME, non il passo** |
-| **analisi** | `csv/_test_fork/_ab_due_tre.py` (`0889bcef`) e `csv/_test_fork/_struttura_video.py` (`16773e2f`) |
+| **analisi** | `csv/_test_fork/_ab_due_tre.py` (`0889bcef`) - `csv/_test_fork/_struttura_video.py` (`16773e2f`) - **`csv/_test_fork/_z9_coorti.py` (`16acd823`)** |
 
 **IL COMANDO, VERBATIM:**
 

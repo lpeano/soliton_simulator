@@ -1,0 +1,330 @@
+[TIMBRO] _z9_coorti.py  sha1-BYTE 16acd823  committato e pulito
+============================================================================================================================
+Z9 PER COORTE ANAGRAFICA -- la maturazione, il tasso, il kernel acerbo. NESSUN VERDETTO.
+============================================================================================================================
+  PRESIDI, IN TESTA:
+    * --tau-luce HA IL SIGILLO FALLITO (par.0): ramo NON CERTIFICATO, ogni numero lo eredita;
+    * --chi-basc attivo; UN SEME per scena; sei istanti; nessuna identificazione;
+    * COORTE ANAGRAFICA, NON PER MASSA: il tracking non e' nei .pkl (Z53). La domanda
+      'i nodi di QUESTA MASSA maturano?' RESTA SENZA RISPOSTA.
+
+--- IL REGIME: TAU_A NON E' NEI DATI, ma il .pkl REGISTRA IL BLOB -> si risale AL SORGENTE ---
+  (e' il corollario di par.9: 'deducibile, non scritto'. Qui la deduzione parte dal BLOB che
+   il .pkl porta con se', non dalla mia memoria di quale regime girava.)
+  TRE  (Z49)   blob nel .pkl = a1ae5090
+               REGIME = "deterministico"
+               _TAU_A_REGIME = 50.0       # alta persistenza memoria spinoriale
+               _TAU_A_REGIME = 2.0        # canonico
+               -> RAMO ATTIVO: deterministico   TAU_A = 50.0   passi(ramp=1) = TAU_A/(DT*r) = 5000 / r
+  DUE  (Z52)   blob nel .pkl = a1ae5090
+               REGIME = "deterministico"
+               _TAU_A_REGIME = 50.0       # alta persistenza memoria spinoriale
+               _TAU_A_REGIME = 2.0        # canonico
+               -> RAMO ATTIVO: deterministico   TAU_A = 50.0   passi(ramp=1) = TAU_A/(DT*r) = 5000 / r
+  ATTENZIONE: DIFETTO P6, VERIFICATO DAL DISCO: `RUN_PARAMS` (:6274-6296) scrive `leggi_attive` con
+    REGIME e `costanti_effettive` con LAM/GAMMA/SCALA_B/CS_M/K_C/PHI_CRIT -- ma NON TAU_A,
+    NON G_PH, NON CALORE_INIT. I TRE NUMERI CHE DEFINISCONO IL REGIME SONO GLI UNICI CHE
+    MANCANO. Sono DEDUCIBILI da REGIME, non SCRITTI: e una deduzione dichiarata vale, una
+    ricostruzione a memoria no.
+
+============================================================================================================================
+SCENA TRE  (Z49)   (csv\_test_fork\_gvideo)
+============================================================================================================================
+  istanti (FRAME; il passo di motore e' frame*6):
+    frame 10    = passo 60      n = 2391
+    frame 115   = passo 690     n = 3595
+    frame 190   = passo 1140    n = 4307
+    frame 270   = passo 1620    n = 5443
+    frame 375   = passo 2250    n = 7480
+    frame 400   = passo 2400    n = 8018
+
+  LE COORTI ANAGRAFICHE (l'indice E' l'ordine di nascita: i nodi si appendono in coda,
+  :3958, e nascono con eta = 0, :3961/:4082/:1849). Finestre ESATTE, non stimate:
+    presenti al f10        indici [     0,   2391)     2391 nodi
+    nati f10 -> f115       indici [  2391,   3595)     1204 nodi
+    nati f115 -> f190      indici [  3595,   4307)      712 nodi
+    nati f190 -> f270      indici [  4307,   5443)     1136 nodi
+    nati f270 -> f375      indici [  5443,   7480)     2037 nodi
+    nati f375 -> f400      indici [  7480,   8018)      538 nodi
+
+--- (1) LA MATURAZIONE PER COORTE -- eta e ramp = min(1, eta/50) ---
+
+  frame 10    (passo 60    , n = 2391)
+    coorte                 nodi    | eta min   eta p05   eta MED   eta p95   eta max   | ramp MED  ramp p95  fr>0.5    fr>0.9   
+    presenti al f10        2391    | 0.2722    0.3139    0.4738    0.5005    0.5049    | 0.009477  0.01001   0.0000    0.0000   
+    TUTTA LA POPOLAZIONE   2391    | 0.2722    0.3139    0.4738    0.5005    0.5049    | 0.009477  0.01001   0.0000    0.0000   
+
+  frame 115   (passo 690   , n = 3595)
+    coorte                 nodi    | eta min   eta p05   eta MED   eta p95   eta max   | ramp MED  ramp p95  fr>0.5    fr>0.9   
+    presenti al f10        2391    | 3.164     3.896     5.293     7.875     8.724     | 0.1059    0.1575    0.0000    0.0000   
+    nati f10 -> f115       1204    | 0.01414   0.2019    2.502     4.867     6.297     | 0.05004   0.09734   0.0000    0.0000   
+    TUTTA LA POPOLAZIONE   3595    | 0.01414   0.6451    4.731     7.775     8.724     | 0.09462   0.1555    0.0000    0.0000   
+
+  frame 190   (passo 1140  , n = 4307)
+    coorte                 nodi    | eta min   eta p05   eta MED   eta p95   eta max   | ramp MED  ramp p95  fr>0.5    fr>0.9   
+    presenti al f10        2391    | 4.397     6.134     8.273     13.27     14.62     | 0.1655    0.2653    0.0000    0.0000   
+    nati f10 -> f115       1204    | 1.129     3.146     7.307     10.61     12.56     | 0.1461    0.2121    0.0000    0.0000   
+    nati f115 -> f190      712     | 0.01414   0.1213    1.793     4.948     6.188     | 0.03586   0.09896   0.0000    0.0000   
+    TUTTA LA POPOLAZIONE   4307    | 0.01414   1.078     7.37      13.02     14.62     | 0.1474    0.2604    0.0000    0.0000   
+
+  frame 270   (passo 1620  , n = 5443)
+    coorte                 nodi    | eta min   eta p05   eta MED   eta p95   eta max   | ramp MED  ramp p95  fr>0.5    fr>0.9   
+    presenti al f10        2391    | 6.076     7.964     11.33     19.57     21.26     | 0.2266    0.3914    0.0000    0.0000   
+    nati f10 -> f115       1204    | 2.316     5.633     12.06     17.11     19.31     | 0.2411    0.3422    0.0000    0.0000   
+    nati f115 -> f190      712     | 1.015     2.715     6.333     11.57     12.92     | 0.1267    0.2314    0.0000    0.0000   
+    nati f190 -> f270      1136    | 0         0.123     1.73      5.677     6.594     | 0.0346    0.1135    0.0000    0.0000   
+    TUTTA LA POPOLAZIONE   5443    | 0         0.7403    9.403     19.14     21.26     | 0.1881    0.3828    0.0000    0.0000   
+
+  frame 375   (passo 2250  , n = 7480)
+    coorte                 nodi    | eta min   eta p05   eta MED   eta p95   eta max   | ramp MED  ramp p95  fr>0.5    fr>0.9   
+    presenti al f10        2391    | 7.771     9.841     15.24     28.46     30.14     | 0.3047    0.5691    0.3764    0.0000   
+    nati f10 -> f115       1204    | 3.823     7.408     15.54     25.82     28.18     | 0.3108    0.5163    0.0897    0.0000   
+    nati f115 -> f190      712     | 1.671     4.427     10.42     20.41     21.77     | 0.2084    0.4083    0.0000    0.0000   
+    nati f190 -> f270      1136    | 0.5409    2.08      7.289     14.41     15.46     | 0.1458    0.2882    0.0000    0.0000   
+    nati f270 -> f375      2037    | 0         0.1276    2.226     7.701     8.8       | 0.04451   0.154     0.0000    0.0000   
+    TUTTA LA POPOLAZIONE   7480    | 0         0.6486    10.74     27.75     30.14     | 0.2147    0.5551    0.1348    0.0000   
+
+  frame 400   (passo 2400  , n = 8018)
+    coorte                 nodi    | eta min   eta p05   eta MED   eta p95   eta max   | ramp MED  ramp p95  fr>0.5    fr>0.9   
+    presenti al f10        2391    | 8.05      10.22     16.06     30.55     32.24     | 0.3212    0.611     0.3768    0.0000   
+    nati f10 -> f115       1204    | 3.832     7.581     16.07     27.86     30.2      | 0.3214    0.5573    0.1902    0.0000   
+    nati f115 -> f190      712     | 1.835     4.619     11.06     22.42     23.88     | 0.2212    0.4484    0.0000    0.0000   
+    nati f190 -> f270      1136    | 0.5783    2.278     8.511     16.48     17.55     | 0.1702    0.3295    0.0000    0.0000   
+    nati f270 -> f375      2037    | 0.06032   0.5652    3.806     9.761     10.87     | 0.07613   0.1952    0.0000    0.0000   
+    nati f375 -> f400      538     | 0         0.03773   0.463     1.809     2.05      | 0.009261  0.03619   0.0000    0.0000   
+    TUTTA LA POPOLAZIONE   8018    | 0         0.5875    10.86     29.8      32.24     | 0.2171    0.5959    0.1409    0.0000   
+
+--- (2) IL TASSO -- `r` LETTO da `_r_corrente`, FERMI contro MOBILI (mai una mediana comune, A3c) ---
+    frame   len(r)   FERMI     MOBILI    | r MED fermi  r MED mobili | DT*r fermi   DT*r mobili 
+    10      2391     0         2391      | nan          1.414119e+00 | nan          1.4141e-02  
+    115     3595     8         3587      | 1.414212e-06 1.358463e+00 | 1.4142e-08   1.3585e-02  
+    190     4307     0         4307      | nan          1.174375e+00 | nan          1.1744e-02  
+    270     5439     0         5439      | nan          1.000894e+00 | nan          1.0009e-02  
+    375     7477     0         7477      | nan          1.011206e+00 | nan          1.0112e-02  
+    400     8013     0         8013      | nan          1.071354e+00 | nan          1.0714e-02  
+    (`_r_corrente` e' scritta PRIMA dell'ultima mitosi: len(r) < n. I nodi in eccesso sono
+     ESCLUSI, non riempiti.)
+
+  ATTENZIONE: IL FALSIFICATORE DELLA DERIVAZIONE: d(eta)/d(passo) MISURATO contro DT*r LETTO
+    intervallo       gruppo     | deta/dpasso   DT*r letto    | rapporto MED  rapporto p95  | nodi      
+    10->115          MOBILI     | 7.638987e-03  1.369281e-02  | 0.6250        0.9425        | 2391      
+    115->190         MOBILI     | 9.372440e-03  1.103467e-02  | 0.8123        1.4254        | 3595      
+    190->270         MOBILI     | 8.152807e-03  8.928902e-03  | 0.9679        2.0356        | 4307      
+    270->375         MOBILI     | 6.471637e-03  7.068339e-03  | 0.9977        6.0026        | 5439      
+    375->400         MOBILI     | 7.553361e-03  7.682694e-03  | 0.9966        12.4443       | 7477      
+    (il rapporto deve valere ~1: `r` e' campionato ai due ESTREMI e mediato, quindi uno
+     scarto MODERATO e' la curvatura di r nell'intervallo. Uno scarto di ORDINI romperebbe
+     la derivazione, ed e' il falsificatore fissato nel task history.)
+
+  L'ESTRAPOLAZIONE A `ramp = 1`, per gruppo: passi = TAU_A/(DT*r) = 5000 / r
+    MOBILI   r MED = 1.071354e+00  -> 4667           passi   (la scena ne ha 2400)
+
+--- (3) IL KERNEL ACERBO -- `base/base_maturo = ramp[i]*ramp[j]`, ESATTO (gli altri fattori si cancellano) ---
+    frame   archi      | min         p05         MEDIANA     p95         max         | fr>0.01   fr>0.5    fr>0.9   
+    10      429498     | 3.0611e-05  4.3450e-05  9.9070e-05  1.0016e-04  1.0175e-04  | 0.0000    0.0000    0.0000   
+    115     431022     | 3.8181e-06  6.4930e-03  9.3521e-03  2.2331e-02  2.9308e-02  | 0.4189    0.0000    0.0000   
+    190     431930     | 1.1149e-06  1.5176e-02  2.2365e-02  6.3129e-02  8.2575e-02  | 0.9969    0.0000    0.0000   
+    270     433380     | 0.0000e+00  2.5406e-02  4.0365e-02  1.4025e-01  1.7753e-01  | 0.9965    0.0000    0.0000   
+    375     435959     | 0.0000e+00  3.8774e-02  6.9066e-02  3.0484e-01  3.5885e-01  | 0.9954    0.0000    0.0000   
+    400     436636     | 0.0000e+00  4.1224e-02  7.4540e-02  3.5267e-01  4.1111e-01  | 0.9951    0.0000    0.0000   
+    (il prodotto pesa IL MINORE dei due: un arco fra un nodo maturo e un neonato e' ACERBO.)
+    PREVISIONE 6, all'ultimo istante: ramp MED nodi = 2.1711e-01 -> il suo QUADRATO = 4.7135e-02
+                                      base/base_maturo MEDIANO misurato = 7.4540e-02  (rapporto 1.5814)
+
+--- A8 -- i contatori GIA' CABLATI, letti e riportati (non commentati) ---
+    _cs_chiamate                   7198
+    _cs_fallback                   2
+    _inerzia_al_pavimento          608018
+    _inerzia_tot                   11253029
+    _ritmo_chiamate                2400
+    _ritmo_f_mediana_nulla         1
+    _ritmo_f_tutto_nullo           1
+    _ritmo_med_assente             3
+    _ritmo_med_non_promosso        2
+    _ritmo_med_sul_pavimento       2
+    _ritmo_sicurezza               1
+    _ritmo_snap_identico           1
+    coppie_nate                    1511
+    nati                           5627
+
+============================================================================================================================
+SCENA DUE  (Z52)   (csv\_test_fork\_g2m)
+============================================================================================================================
+  istanti (FRAME; il passo di motore e' frame*6):
+    frame 10    = passo 60      n = 1895
+    frame 115   = passo 690     n = 2909
+    frame 190   = passo 1140    n = 3350
+    frame 270   = passo 1620    n = 4083
+    frame 375   = passo 2250    n = 5463
+    frame 400   = passo 2400    n = 5878
+
+  LE COORTI ANAGRAFICHE (l'indice E' l'ordine di nascita: i nodi si appendono in coda,
+  :3958, e nascono con eta = 0, :3961/:4082/:1849). Finestre ESATTE, non stimate:
+    presenti al f10        indici [     0,   1895)     1895 nodi
+    nati f10 -> f115       indici [  1895,   2909)     1014 nodi
+    nati f115 -> f190      indici [  2909,   3350)      441 nodi
+    nati f190 -> f270      indici [  3350,   4083)      733 nodi
+    nati f270 -> f375      indici [  4083,   5463)     1380 nodi
+    nati f375 -> f400      indici [  5463,   5878)      415 nodi
+
+--- (1) LA MATURAZIONE PER COORTE -- eta e ramp = min(1, eta/50) ---
+
+  frame 10    (passo 60    , n = 1895)
+    coorte                 nodi    | eta min   eta p05   eta MED   eta p95   eta max   | ramp MED  ramp p95  fr>0.5    fr>0.9   
+    presenti al f10        1895    | 0.1043    0.3179    0.4699    0.517     0.5203    | 0.009399  0.01034   0.0000    0.0000   
+    TUTTA LA POPOLAZIONE   1895    | 0.1043    0.3179    0.4699    0.517     0.5203    | 0.009399  0.01034   0.0000    0.0000   
+
+  frame 115   (passo 690   , n = 2909)
+    coorte                 nodi    | eta min   eta p05   eta MED   eta p95   eta max   | ramp MED  ramp p95  fr>0.5    fr>0.9   
+    presenti al f10        1895    | 3.078     3.833     5.672     7.746     8.464     | 0.1134    0.1549    0.0000    0.0000   
+    nati f10 -> f115       1014    | 0         0.1846    2.418     4.702     6.425     | 0.04836   0.09404   0.0000    0.0000   
+    TUTTA LA POPOLAZIONE   2909    | 0         0.564     4.593     7.642     8.464     | 0.09186   0.1528    0.0000    0.0000   
+
+  frame 190   (passo 1140  , n = 3350)
+    coorte                 nodi    | eta min   eta p05   eta MED   eta p95   eta max   | ramp MED  ramp p95  fr>0.5    fr>0.9   
+    presenti al f10        1895    | 4.363     5.693     9.586     12.96     14.28     | 0.1917    0.2592    0.0000    0.0000   
+    nati f10 -> f115       1014    | 0.9286    2.793     7.065     10.59     12.72     | 0.1413    0.2117    0.0000    0.0000   
+    nati f115 -> f190      441     | 0         0.09262   1.497     4.887     6.078     | 0.02993   0.09774   0.0000    0.0000   
+    TUTTA LA POPOLAZIONE   3350    | 0         0.904     7.229     12.68     14.28     | 0.1446    0.2535    0.0000    0.0000   
+
+  frame 270   (passo 1620  , n = 4083)
+    coorte                 nodi    | eta min   eta p05   eta MED   eta p95   eta max   | ramp MED  ramp p95  fr>0.5    fr>0.9   
+    presenti al f10        1895    | 6.218     7.52      12.99     18.12     20.61     | 0.2598    0.3625    0.0000    0.0000   
+    nati f10 -> f115       1014    | 2.054     5.797     11.95     17.1      19.41     | 0.2391    0.3421    0.0000    0.0000   
+    nati f115 -> f190      441     | 0.6601    2.242     7.004     11.39     12.74     | 0.1401    0.2278    0.0000    0.0000   
+    nati f190 -> f270      733     | 0.01414   0.1149    2.212     5.169     6.616     | 0.04423   0.1034    0.0000    0.0000   
+    TUTTA LA POPOLAZIONE   4083    | 0.01414   0.9639    9.742     17.7      20.61     | 0.1948    0.354     0.0000    0.0000   
+
+  frame 375   (passo 2250  , n = 5463)
+    coorte                 nodi    | eta min   eta p05   eta MED   eta p95   eta max   | ramp MED  ramp p95  fr>0.5    fr>0.9   
+    presenti al f10        1895    | 6.838     8.856     15.89     26.5      29.4      | 0.3178    0.53      0.1710    0.0000   
+    nati f10 -> f115       1014    | 2.19      8.011     15.97     25.65     28.13     | 0.3194    0.5131    0.0789    0.0000   
+    nati f115 -> f190      441     | 1.41      4.646     13.15     19.96     21.27     | 0.263     0.3992    0.0000    0.0000   
+    nati f190 -> f270      733     | 0.3876    1.929     8.867     13.48     15.32     | 0.1773    0.2697    0.0000    0.0000   
+    nati f270 -> f375      1380    | 0         0.04431   1.899     7.452     8.52      | 0.03799   0.149     0.0000    0.0000   
+    TUTTA LA POPOLAZIONE   5463    | 0         0.26      11.07     25.55     29.4      | 0.2213    0.511     0.0740    0.0000   
+
+  frame 400   (passo 2400  , n = 5878)
+    coorte                 nodi    | eta min   eta p05   eta MED   eta p95   eta max   | ramp MED  ramp p95  fr>0.5    fr>0.9   
+    presenti al f10        1895    | 6.909     8.965     16.32     28.47     31.48     | 0.3264    0.5693    0.3821    0.0000   
+    nati f10 -> f115       1014    | 2.197     8.291     16.6      27.54     30.15     | 0.3319    0.5509    0.1775    0.0000   
+    nati f115 -> f190      441     | 1.591     4.918     15.02     21.79     23.32     | 0.3004    0.4357    0.0000    0.0000   
+    nati f190 -> f270      733     | 0.4118    2.035     10.79     15.49     17.41     | 0.2158    0.3098    0.0000    0.0000   
+    nati f270 -> f375      1380    | 0.02883   0.1067    3.597     9.43      10.58     | 0.07193   0.1886    0.0000    0.0000   
+    nati f375 -> f400      415     | 0         0.02896   0.4948    1.765     2.08      | 0.009896  0.0353    0.0000    0.0000   
+    TUTTA LA POPOLAZIONE   5878    | 0         0.2046    11.03     27.4      31.48     | 0.2207    0.548     0.1538    0.0000   
+
+--- (2) IL TASSO -- `r` LETTO da `_r_corrente`, FERMI contro MOBILI (mai una mediana comune, A3c) ---
+    frame   len(r)   FERMI     MOBILI    | r MED fermi  r MED mobili | DT*r fermi   DT*r mobili 
+    10      1895     0         1895      | nan          1.413954e+00 | nan          1.4140e-02  
+    115     2906     3         2903      | 1.414212e-06 7.968788e-01 | 1.4142e-08   7.9688e-03  
+    190     3347     0         3347      | nan          1.031851e+00 | nan          1.0319e-02  
+    270     4083     0         4083      | nan          1.406725e+00 | nan          1.4067e-02  
+    375     5461     46        5415      | 1.505207e-06 9.942350e-01 | 1.5052e-08   9.9423e-03  
+    400     5874     3         5871      | 2.035560e-06 9.354690e-01 | 2.0356e-08   9.3547e-03  
+    (`_r_corrente` e' scritta PRIMA dell'ultima mitosi: len(r) < n. I nodi in eccesso sono
+     ESCLUSI, non riempiti.)
+
+  ATTENZIONE: IL FALSIFICATORE DELLA DERIVAZIONE: d(eta)/d(passo) MISURATO contro DT*r LETTO
+    intervallo       gruppo     | deta/dpasso   DT*r letto    | rapporto MED  rapporto p95  | nodi      
+    10->115          MOBILI     | 8.254356e-03  1.026021e-02  | 0.8069        1.2924        | 1895      
+    115->190         MOBILI     | 9.731400e-03  8.301570e-03  | 1.0377        3.2531        | 2906      
+    190->270         MOBILI     | 8.855203e-03  1.152951e-02  | 0.7799        1.1863        | 3347      
+    270->375         MOBILI     | 6.470764e-03  1.191185e-02  | 0.7374        1.5595        | 4083      
+    375->400         MOBILI     | 1.120557e-02  7.068653e-03  | 0.9395        1.8850        | 5461      
+    (il rapporto deve valere ~1: `r` e' campionato ai due ESTREMI e mediato, quindi uno
+     scarto MODERATO e' la curvatura di r nell'intervallo. Uno scarto di ORDINI romperebbe
+     la derivazione, ed e' il falsificatore fissato nel task history.)
+
+  L'ESTRAPOLAZIONE A `ramp = 1`, per gruppo: passi = TAU_A/(DT*r) = 5000 / r
+    MOBILI   r MED = 9.354690e-01  -> 5345           passi   (la scena ne ha 2400)
+
+--- (3) IL KERNEL ACERBO -- `base/base_maturo = ramp[i]*ramp[j]`, ESATTO (gli altri fattori si cancellano) ---
+    frame   archi      | min         p05         MEDIANA     p95         max         | fr>0.01   fr>0.5    fr>0.9   
+    10      306243     | 1.4982e-05  4.5555e-05  8.9612e-05  1.0681e-04  1.0824e-04  | 0.0000    0.0000    0.0000   
+    115     307544     | 0.0000e+00  5.8805e-03  9.0958e-03  2.1761e-02  2.8397e-02  | 0.3770    0.0000    0.0000   
+    190     308097     | 0.0000e+00  1.3336e-02  1.9785e-02  5.9999e-02  7.9826e-02  | 0.9958    0.0000    0.0000   
+    270     309027     | 6.3786e-06  2.3846e-02  3.5954e-02  1.1560e-01  1.6618e-01  | 0.9970    0.0000    0.0000   
+    375     310767     | 0.0000e+00  3.3041e-02  5.3378e-02  2.4877e-01  3.3767e-01  | 0.9950    0.0000    0.0000   
+    400     311292     | 0.0000e+00  3.3671e-02  5.5270e-02  2.8927e-01  3.8801e-01  | 0.9943    0.0000    0.0000   
+    (il prodotto pesa IL MINORE dei due: un arco fra un nodo maturo e un neonato e' ACERBO.)
+    PREVISIONE 6, all'ultimo istante: ramp MED nodi = 2.2070e-01 -> il suo QUADRATO = 4.8707e-02
+                                      base/base_maturo MEDIANO misurato = 5.5270e-02  (rapporto 1.1347)
+
+--- A8 -- i contatori GIA' CABLATI, letti e riportati (non commentati) ---
+    _cs_chiamate                   7198
+    _cs_fallback                   2
+    _inerzia_al_pavimento          468367
+    _inerzia_tot                   8556050
+    _ritmo_chiamate                2400
+    _ritmo_f_mediana_nulla         1
+    _ritmo_f_tutto_nullo           1
+    _ritmo_med_assente             3
+    _ritmo_med_non_promosso        2
+    _ritmo_med_sul_pavimento       2
+    _ritmo_sicurezza               1
+    _ritmo_snap_identico           1
+    coppie_nate                    1066
+    nati                           3984
+
+============================================================================================================================
+
+============================================================================================================================
+(4) IL CRITERIO -- e la correlazione che il par.3 aveva lasciato come IPOTESI
+============================================================================================================================
+
+  SCENA TRE  (Z49) -- ultimo istante (frame 400 = passo 2400, n = 8018, n0 = 2391)
+    (4a) ASSORTATIVITA': corr(ramp[i], ramp[j]) sugli archi = +0.8015
+         NULLO (estremo j rimescolato, 5 ripetizioni)      = +0.0027 +0.0012 -0.0014 +0.0009 +0.0002
+         -> se la corr e' ALTA e il nullo e' ~0, gli archi sono ASSORTATIVI PER ETA',
+            ed E' QUELLO che rende il prodotto mediano piu' grande del quadrato della
+            mediana. Se la corr fosse ~0, la mia spiegazione e' SBAGLIATA e si scrive.
+    (4b) IL CRITERIO NECESSARIO -- archi INTERNI alla coorte ORIGINALE (nessuna diluizione
+         da neonati, e nessuna soglia scelta: `ramp` SATURA ESATTAMENTE a eta = TAU_A)
+         archi interni alla coorte originale : 427018 su 436636 (97.80 %)
+         median(base/base_maturo) SU QUELLI  : 0.074950      <- DEVE valere 1 per chiudere Z9
+         median(base/base_maturo) su TUTTI   : 0.074540
+         frazione di archi MATURI (entrambi gli estremi con eta >= TAU_A):
+            interni alla coorte originale    : 0.000000
+            su tutti gli archi               : 0.000000
+    (4c) LA CONDIZIONE DI REGIME (da dichiarare in OGNI referto che usi questa scena):
+         r MED dei MOBILI = 1.071354e+00   -> passi(ramp=1) = TAU_A/(DT*r) = 4667
+         passi FATTI = 2400   -> PASSI MANCANTI = 2267   (il 51.4 % del cammino e' fatto)
+
+  SCENA DUE  (Z52) -- ultimo istante (frame 400 = passo 2400, n = 5878, n0 = 1895)
+    (4a) ASSORTATIVITA': corr(ramp[i], ramp[j]) sugli archi = +0.8569
+         NULLO (estremo j rimescolato, 5 ripetizioni)      = +0.0024 +0.0006 +0.0012 -0.0009 +0.0042
+         -> se la corr e' ALTA e il nullo e' ~0, gli archi sono ASSORTATIVI PER ETA',
+            ed E' QUELLO che rende il prodotto mediano piu' grande del quadrato della
+            mediana. Se la corr fosse ~0, la mia spiegazione e' SBAGLIATA e si scrive.
+    (4b) IL CRITERIO NECESSARIO -- archi INTERNI alla coorte ORIGINALE (nessuna diluizione
+         da neonati, e nessuna soglia scelta: `ramp` SATURA ESATTAMENTE a eta = TAU_A)
+         archi interni alla coorte originale : 304671 su 311292 (97.87 %)
+         median(base/base_maturo) SU QUELLI  : 0.055417      <- DEVE valere 1 per chiudere Z9
+         median(base/base_maturo) su TUTTI   : 0.055270
+         frazione di archi MATURI (entrambi gli estremi con eta >= TAU_A):
+            interni alla coorte originale    : 0.000000
+            su tutti gli archi               : 0.000000
+    (4c) LA CONDIZIONE DI REGIME (da dichiarare in OGNI referto che usi questa scena):
+         r MED dei MOBILI = 9.354690e-01   -> passi(ramp=1) = TAU_A/(DT*r) = 5345
+         passi FATTI = 2400   -> PASSI MANCANTI = 2945   (il 44.9 % del cammino e' fatto)
+
+============================================================================================================================
+
+============================================================================================================================
+(5) IL GRADO PER COORTE -- perche' la mediana sugli ARCHI non e' diluita dai neonati
+============================================================================================================================
+  SCENA TRE  (Z49)   n = 8018   n0 = 2391   archi = 436636
+     ORIGINALI    2391 nodi ( 29.8 %)  grado MEDIANO   496.0  estremi d'arco    861330
+     NATI DOPO    5627 nodi ( 70.2 %)  grado MEDIANO     2.0  estremi d'arco     11942
+     -> i NATI DOPO sono il 70.2 % dei NODI ma portano il 1.37 % degli ESTREMI D'ARCO.
+        grado mediano dei neonati = 2.0: e' ESATTAMENTE cio' che il codice prescrive
+        (il figlio nasce con DUE archi, verso i due genitori, par.9) -- VERIFICATO dai dati.
+  SCENA DUE  (Z52)   n = 5878   n0 = 1895   archi = 311292
+     ORIGINALI    1895 nodi ( 32.2 %)  grado MEDIANO   496.0  estremi d'arco    614038
+     NATI DOPO    3983 nodi ( 67.8 %)  grado MEDIANO     2.0  estremi d'arco      8546
+     -> i NATI DOPO sono il 67.8 % dei NODI ma portano il 1.37 % degli ESTREMI D'ARCO.
+        grado mediano dei neonati = 2.0: e' ESATTAMENTE cio' che il codice prescrive
+        (il figlio nasce con DUE archi, verso i due genitori, par.9) -- VERIFICATO dai dati.
+
+============================================================================================================================
