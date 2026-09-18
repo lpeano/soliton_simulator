@@ -78,7 +78,8 @@ print("  ⚠ `--tau-luce` ha il SIGILLO FALLITO (CLAUDE.md par.0): ramo NON CERT
 print("  ⚠ `--chi-basc` RISCRIVE `perc_chi` a ogni passo: non e' un'etichetta di lignaggio.")
 
 S.avvia_test("N-MASSE")()    # il costruttore UFFICIALE della scena -> _semina_n_masse()
-print("\n  scena avviata: n = %d nodi alla semina (N_c*0.8 per massa, 3 masse)" % S.net.n)
+print("\n  scena avviata: n = %d nodi alla semina (N_c*0.8 per massa, %s masse)"
+      % (S.net.n, NMASSE))   # il NUMERO DI MASSE si STAMPA, non si assume: era cablato a "3"
 
 t0 = time.time()
 S.stato["nframe"] = 0
