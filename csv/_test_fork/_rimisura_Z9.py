@@ -46,6 +46,42 @@ for _f in ("CS_DINAMICO", "CAMPO_SPINORIALE", "SPINORE_VIVO", "CHI_CORE",
     setattr(M, _f, True)
 TA = M.TAU_A
 
+# ---------------------------------------------------------------- PASSO 0 (2026-09-18): la CONFIG
+# La lista di flag sopra NON contiene SPIN_FEEDBACK: questo script misura la configurazione NUOVA
+# SOLO PERCHE' il default e' stato promosso (2026-09-18). Va STAMPATO, non assunto -- e' la classe
+# di difetto che la promozione di STEP2_OROLOGIO aveva insegnato: quando si ribalta un default, i
+# punti che ottenevano il vecchio comportamento PER OMISSIONE diventano duplicati del ramo di prova.
+print("--- PASSO 0: la CONFIGURAZIONE che questo script misura davvero ---")
+for _f in ("SPINORE_VIVO", "SPINORE", "SPIN_FEEDBACK", "FRAME_DRAG", "CS_DINAMICO",
+           "CHI_CORE", "TEMPO_PROPRIO_ORIENTATO"):
+    print("   %-24s = %s" % (_f, getattr(M, _f, "ASSENTE")))
+_gira = bool(getattr(M, "SPINORE_VIVO", False) and getattr(M, "SPINORE", False)
+             and getattr(M, "SPIN_FEEDBACK", False))
+print("   -> il feedback GIRA in questa misura? %s" % ("SI'" if _gira else "NO"))
+print("   TAU_A = %s   <- le misure storiche di Z9 sono a 50. ramp = min(1, eta/TAU_A), quindi" % TA)
+print("      confrontare ramp fra TAU_A diversi sarebbe A3c puro.")
+
+# ------------------------------------------------- PASSO 1 (P4): l'ANCORAGGIO di median(ritmo())
+# ritmo() normalizza su median(|f|); con TEMPO_PROPRIO_ORIENTATO = False la mappa e' monotona su
+# f >= 0, quindi la MEDIANA di r vale 1.0 ESATTA per costruzione. Se e' vero, l'incremento MEDIANO
+# di eta e' PINNATO, e il meccanismo "psi cambia -> eta cresce diversamente" e' bloccato al primo
+# ordine. P4: SI VERIFICA, non si deduce.
+_RITMI = []
+_orig_ritmo = M.Rete.ritmo
+
+
+def _spia_ritmo(self):
+    out = _orig_ritmo(self)
+    if out is not None:
+        v = np.asarray(out, float)
+        if v.size > 3:
+            _RITMI.append((float(np.median(v)), float(np.min(v)), float(np.max(v))))
+    return out
+
+
+M.Rete.ritmo = _spia_ritmo
+
+
 # ------------------------------------------------------------------ R6: i lettori della cache
 pesi_reg = []
 orig_pesi = M.Rete._pesi
@@ -172,6 +208,23 @@ for eti, scena, batch in (("(A) SCENA ORIGINALE (confrontabile con cdc0e41)", sc
         tt = sum(1 for p, _, _, _ in pesi_reg if p > 3)
         print("     `_pesi()` come lettore di _cs_nodo_prev: fallback %d su %d (%.4f %%)"
               % (ko, tt, 100.0 * ko / max(tt, 1)))
+
+
+print("")
+print("--- PASSO 1 (P4): median(ritmo()) e' ancorato a 1.0 per costruzione? ---")
+if _RITMI:
+    _med = np.array([x[0] for x in _RITMI])
+    print("   chiamate a ritmo() osservate : %d" % len(_RITMI))
+    print("   median(r) : mediana %.12f   min %.12f   max %.12f"
+          % (np.median(_med), _med.min(), _med.max()))
+    print("   scarto MASSIMO da 1.0 : %.3e" % np.max(np.abs(_med - 1.0)))
+    print("      se e' all'epsilon, l'incremento MEDIANO di eta e' PINNATO per costruzione e il")
+    print("      meccanismo 'psi cambia -> eta cresce diversamente' e' bloccato al PRIMO ORDINE.")
+    print("      Resta la FORMA della distribuzione e la POPOLAZIONE (i neonati entrano con eta=0).")
+    print("   r min/max osservati : %.6g / %.6g   (la MEDIANA e' ancorata, la DISPERSIONE no)"
+          % (min(x[1] for x in _RITMI), max(x[2] for x in _RITMI)))
+else:
+    print("   NESSUNA chiamata a ritmo() osservata: P4 NON VERIFICATO.")
 
 print("\n" + "=" * 118)
 print("""COME SI LEGGE
