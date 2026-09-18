@@ -293,6 +293,47 @@ totale, e chiamarla tale era un errore mio.**
 
 ---
 
+## 5-octies. OGNI RESOCONTO SI COMMITTA E SI PUSHA, ANCHE A META' RUN (regola di Luca, 2026-09-18)
+
+> **Un run che gira senza un resoconto pushato e' un run che, se la macchina si riavvia, NESSUNO SA
+> CHE ESISTEVA.** **Non si aspetta la fine: se un run e' a meta', si committa quello che si sa a
+> meta'** — cosa gira, da quando, cosa ha gia' prodotto, cosa manca.
+
+**IL PRECEDENTE, ed e' di oggi:** il PC si e' riavviato durante il lavoro e **si e' perso SOLO il non
+committato**. **E il commit `b84702b` dice «RUN FERMATO» senza dire A CHE PASSO era, ne' se i dati
+parziali servissero** — ed e' esattamente il caso che questa prassi deve coprire.
+**Vale anche, e soprattutto, per i run FERMATI e FALLITI.**
+
+### IL MECCANISMO — `csv/_stato_run.py`, e cosa e' automatico e cosa NO
+
+**Il registro e' `doc/STATO_RUN.md`, append-only, scritto AUTOMATICAMENTE:**
+```python
+import _stato_run as R
+R.apri(nome, comando, note)     # ora + BLOB (sha1 byte grezzi, C18) + HEAD + COMANDO VERBATIM
+R.tappa(nome, "frame 170/400, n 2391 -> 4120")        # avanzamento
+R.chiudi(nome, "FINITO"|"FERMATO"|"FALLITO", "a che punto era, e se i dati parziali servono")
+```
+
+**⚠ DICHIARAZIONE ONESTA, e va letta PRIMA di chiamarlo presidio completo (Regola 9):**
+- **AUTOMATICA e' la SCRITTURA.** Il file esiste **sempre**, quindi **dopo un riavvio lo stato si
+  legge DAL DISCO invece che dalla memoria** — ed e' il 90 % del problema.
+- **IL COMMIT NON E' AUTOMATICO, E NON PUO' ESSERLO IN MODO SICURO:** committare da dentro un run
+  significherebbe fare operazioni git **mentre il run scrive**, e questo stesso file vieta
+  `git add -A` con un run attivo, per una ragione che resta valida.
+- **MA UN IMPEDIMENTO C'E', ed e' quello che rende la regola piu' di una nota:**
+  **`apri()` RIFIUTA di partire se l'ultima voce e' ancora APERTA** *(salvo `forza=True`,
+  che obbliga a dichiarare perche')*. **Non si puo' aprire un run nuovo lasciando il precedente
+  senza esito.**
+
+> **E' meno di un automatismo e piu' di un promemoria, e va detto cosi'** — la stessa onesta' che
+> par.5-septies applica all'ordine del task history.
+
+**REGOLA OPERATIVA:** `R.apri()` **prima** del lancio, `R.tappa()` a ogni snapshot/tappa,
+`R.chiudi()` **sempre** — e **`git add doc/STATO_RUN.md && git commit && git push`** al primo
+momento utile, **senza aspettare la fine del run**.
+
+---
+
 ## 5-quater. IL REGISTRO DEI FRONTI APERTI (regola di Luca, 2026-09-15)
 - **Lo stato dei fronti aperti sta in `doc/RAMIFICAZIONI.md`**, ed e' uno **STATO, non una cronaca**
   (la cronaca vive nei documenti di `doc/` e in `CLAUDECONNECT.md`).
