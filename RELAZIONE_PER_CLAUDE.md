@@ -5619,3 +5619,99 @@ Un seme, 120 passi, una scena. **`P8` non dimostra nulla su `Z9`**: `ramp` **0.0
 0.01962** con `TAU_A = 50`, **riportato e NON confrontato** con `0.0002/0.0102/0.0212`, che sono di
 un'altra scena (A3c); e la previsione 6 diceva di aspettarsi uno scarto **dentro la dispersione fra
 semi (~3 %)**, quindi **non interpretabile su un seme**.
+
+---
+
+## 9.55 — **Chi non ruota: non è «metà», non è la chiralità. È il transitorio di NASCITA — e `Z43` non ne è un sintomo**
+
+**Data:** 2026-09-18 · **blob `a1ae5090` INVARIATO** *(nessuna cura, strumentazione inerte)*
+1 seme (5), 120 passi · Task history pushato PRIMA: `0d9abac` · Sonda committata prima di girarla
+**Referto:** `doc/REFERTO_chi_non_ruota.md` · → **`Z44`**, **`Z45`**, e **`Z43` qualificata**
+
+### ⚠ Due premesse del mandato cadono prima ancora delle letture
+
+**1) «Metà dei nodi ha `f = 0`» NON esiste.** Misurato:
+
+```
+passi con almeno un nodo a f = 0 : 13 su 124
+frazione MEDIANA sui passi degeneri : 0.004357   <- UNO o DUE nodi su ~450
+passo 0  : 80/80   = 100 %    <- non esiste un prima
+passo 5  : 414/440 = 94.09 %  <- dopo l'iniezione di 360 nodi SENZA GENITORE
+altri 11 : 1 o 2 nodi
+```
+
+**Ci sono due passi di NASCITA e undici passi con 1-2 nodi. Nessun regime «a metà».**
+*(«Metà» era **aritmetica della mediana**, non una misura.)*
+
+**2) Il bilanciamento di `perc_chi` non viene dalla mitosi antichirale.** I tre rami, **contati**:
+
+```
+semina/nuova_massa (:1850, rng.choice([-1,1]))   4 chiamate   440 nodi   <- il 94.6 %
+mitosi UGUALE      (:3945)                     126 chiamate    19 nodi
+Schwinger OPPOSTO  (:4066)                       5 chiamate     6 nodi   <- l'1.3 %
+frazione +1 : 0.4375 (n=80) -> 0.5066 -> 0.5054 (n=459)
+```
+
+**L'universo è bilanciato entro lo 0.8 %, e il ramo Schwinger gira davvero** — ma è **l'1.3 %**.
+
+### ⑤b — l'ipotesi materia/antimateria CADE, e cade dove c'è potenza
+
+```
+passo  n fermi  frazione +1   NULLO (popolazione)   scarto
+0      80       0.437500      0.437500              +0.000000   <- TAUTOLOGIA intercettata dal nullo
+5      414      0.519324      0.506818              +0.012505
+16     1        0.000000      0.505643              -0.505643   <- ARITMETICA, non segnale
+```
+
+**I due soli passi con potenza dicono NO.** Al passo 0 lo scarto è **esattamente zero** — e non
+poteva essere altro: **tutti** i nodi sono fermi, quindi la popolazione dei fermi **è** la
+popolazione. **Il valore sotto ipotesi nulla ha intercettato una tautologia.**
+Gli altri undici passi hanno **1-2 nodi**: con `n = 1` la frazione **deve** valere 0 o 1, e i sei
+passi a `n = 1` danno **tre `+1` e tre `−1`**. **Bilanciati.**
+
+**⚠ E il canale esiste davvero — l'avevo mancato nel task history e l'ho dichiarato prima di
+misurare:** `CALORE_VETTORIALE = True` (`:270`), e `scuoti_vuoto` (`:538-540`) fa
+`phivel[:n] += rng.normal(0,1)*ampiezza * perc_chi` **a ogni passo**. **Ma è un SEGNO su un rumore
+SIMMETRICO:** la marginale di un `+1` e di un `−1` è **identica**; può agire **solo** per
+correlazione. **La misura conferma che sul singolo nodo non agisce.**
+
+### La catena si chiude, e ③ e ④ reggono INSIEME
+
+```
+nodo APPENA NATO -> eta ~ 0 -> ramp ~ 0 -> pesi ~ 0 -> psi_spin = 0 ESATTO
+                 -> angle(0) = 0 (CONVENZIONE numpy) -> f = 0 -> gauge degenere
+```
+
+**③, nella forma più forte:** `|psi_spin|` dei nodi fermi è **`0.0000e+00` anche nel MASSIMO**, in
+**12 passi su 13** *(eccezione il passo 32: `1.1e-06`, **600 volte** sotto la mediana)*.
+
+> **`f = 0` non dice «il tempo è fermo»: dice «la fase non è definita». Non è una misura, è un
+> valore di ritorno.**
+
+**④:** `ramp` dei fermi fino a **66 volte** sotto la popolazione (`eta` `0.0141` contro `0.9317` al
+passo 117), **e lo scarto CRESCE col tempo** (11 → 66): la popolazione matura, loro sono appena nati.
+
+**① NON regge, e il suo NO è informativo:** Jaccard ≈ **0** fra passi degeneri consecutivi — **non
+sono gli stessi nodi: non è congelamento, è un transitorio di nascita.**
+**② NON regge** (`|Δψ| = 0.0000e+00`) **ma non è un'ipotesi concorrente: è la CONSEGUENZA di ③.**
+**Era previsto nel task history: sono lo stesso fatto a due livelli.**
+
+### ⚠ Ma `Z43` NON è un sintomo di `Z9`
+
+La lettura ④ del mandato diceva *«`Z33`/`Z43` sono sintomi di `Z9`»*. **Per `Z33` è vero. Per `Z43`
+no:** i passi degeneri sono **13 su 124** e solo **2** hanno `median(|f|) = 0`, mentre il rapporto
+`med_t/med_{t-1}` ha **`p05 0.482` / `p95 2.097`** — percentili su 123 passi, che due estremi non
+possono spostare — e **l'11.4 % dei passi sta fuori da `[0.5, 2]`**.
+
+> **Curare `Z9` toglierebbe i 13 passi degeneri, NON l'oscillazione del gauge negli altri 111.**
+
+*(Limite dichiarato: non ho ricalcolato quei percentili escludendo esplicitamente i passi degeneri —
+l'argomento è di robustezza, non una misura dedicata.)*
+
+### Cosa resta a Luca
+
+1. **`Z33` risale a `Z9`**: è il transitorio di maturazione del kernel sui nodi nuovi, **non un
+   difetto del tempo**. La cura, se si vuole, è **a monte**.
+2. **`Z43` resta, ed è qualificata come chiesto: una DECISIONE SULLA DEFINIZIONE DEL TEMPO**, non una
+   questione tecnica.
+3. **Nessuna cura, nessun cablaggio, nessuna promozione, nessun cambio di default.** Blob invariato.

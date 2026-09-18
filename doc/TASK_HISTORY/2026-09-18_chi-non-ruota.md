@@ -113,13 +113,44 @@ di default.**
 
 ## 3. TODO DEL NEXT STEP
 
-- [ ] **⑤a** — `perc_chi` nel tempo + i contatori dei tre rami + lo stato dei flag
-- [ ] **⑤b** — `perc_chi` dei nodi fermi contro il nullo VERO (la frazione della popolazione)
-- [ ] **③** — `|psi_spin|` dei nodi fermi
-- [ ] **④** — `ramp`/`eta` dei nodi fermi *(il collegamento con `Z9`)*
-- [ ] **②** — lo stato evolve mentre `f = 0`?
-- [ ] **①** — sono sempre gli stessi?
-- [ ] **verdetto contro le sei letture**, **senza curare**
-- [ ] registro *(voci nuove + `Z43` qualificata come DECISIONE SULLA DEFINIZIONE DEL TEMPO)* +
+- [x] **⑤a** — `perc_chi` nel tempo + i contatori dei tre rami + lo stato dei flag
+- [x] **⑤b** — `perc_chi` dei nodi fermi contro il nullo VERO (la frazione della popolazione)
+- [x] **③** — `|psi_spin|` dei nodi fermi
+- [x] **④** — `ramp`/`eta` dei nodi fermi *(il collegamento con `Z9`)*
+- [x] **②** — lo stato evolve mentre `f = 0`?
+- [x] **①** — sono sempre gli stessi?
+- [x] **verdetto contro le sei letture**, **senza curare**
+- [x] registro *(voci nuove + `Z43` qualificata come DECISIONE SULLA DEFINIZIONE DEL TEMPO)* +
       relazione + **CHECKPOINT**
-- [ ] **⚠ NON toccare:** il gauge, il `+1e-6`, il `max(...,1e-9)`, la regolarizzazione appena cablata
+- [x] **⚠ NON toccato:** il gauge, il `+1e-6`, il `max(...,1e-9)`, la regolarizzazione appena cablata
+
+---
+
+## 4. ESITO
+
+**PRESO, e l'avevo scritto prima di misurare:**
+1. **il bilanciamento di `perc_chi` NON viene dalla Schwinger** ma da `rng.choice` alla nascita —
+   **misurato: 440 nodi su 465 contro 6**;
+2. **③ e ④ reggono INSIEME**, e non è un conflitto: **sono lo stesso fatto a due livelli**;
+3. **il valore sotto ipotesi nulla di ⑤b NON è `0.5`** — e **ha intercettato una tautologia** al
+   passo 0, dove i fermi *sono* la popolazione e lo scarto vale `+0.000000` per costruzione.
+
+**NON PRESO, e l'ho dichiarato PRIMA di vedere i numeri:** nel task history avevo scritto che per far
+dipendere `f` da `perc_chi` *«servirebbe un canale, e i due che esistono sono spenti»*. **Ne avevo
+mancato uno, ed è ACCESO di default:** `CALORE_VETTORIALE` firma il calcio termico con `perc_chi`
+a ogni passo. **La conclusione non cambia — è un segno su un rumore simmetrico, marginale identica —
+ma la premessa era sbagliata, e l'ho corretta prima della misura, non dopo.**
+
+**NON PREVISTO: «metà» non esiste affatto.** Mi aspettavo di correggere il *meccanismo*; la misura ha
+tolto il *fenomeno*: **0.4 %, cioè uno o due nodi.** I due passi grandi sono **nascite**.
+
+**E una cosa che non cercavo: `Z43` NON è un sintomo di `Z9`.** La lettura ④ del mandato le metteva
+insieme. **I numeri già in archivio le separano**, e vale la pena dirlo perché era l'esito *comodo*.
+
+## 5. TODO DEL PROSSIMO PASSO
+
+- [ ] **`Z33` è spiegata e risale a `Z9`:** se si vuole curare, la cura è **a monte** — e `Z9` non è
+      stata riaperta in questo giro
+- [ ] **`Z43` aspetta una decisione di Luca** sulla definizione del tempo
+- [ ] **la lacuna di `P10`**: manca il baseline di `_sigillo_step2` sul blob `f8f46683`
+- [ ] **⚠ NON toccato:** il gauge, il `+1e-6`, il `max(...,1e-9)`, la regolarizzazione di `Z42`
