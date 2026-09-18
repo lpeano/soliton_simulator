@@ -1,33 +1,33 @@
-[TIMBRO] _sigillo_anello.py  sha1-BYTE 7145547e  committato e pulito
+[TIMBRO] _sigillo_anello.py  sha1-BYTE 989a6992  committato e pulito
 ======================================================================================================================
 SIGILLO ANELLO ISTANTANEO -- P0..P10
 ======================================================================================================================
 
 --- P0 -- i due blob (sha1 dei BYTE GREZZI, non git hash-object) ---
-  [FAIL] P0     vecchio a1ae5090 (atteso f8f46683)   nuovo a1ae5090
+  [PASS] P0     vecchio f8f46683 (atteso f8f46683)   nuovo a1ae5090
   TAU_A = 50.0   TAU_LOC = 1.0   DT = 0.01   (letti dal modulo, non dal comando: P6)
 
 --- P1 [BLOCCANTE] -- riduzione al limite: `med_prec := med_corrente` -> BYTE-IDENTICO ---
-    P1           n: 459 contro 444
-      psi       SHAPE DIVERSE (459,) contro (444,)  <- NESSUN CONFRONTO
-      phivel    SHAPE DIVERSE (459,) contro (444,)  <- NESSUN CONFRONTO
-      eta       SHAPE DIVERSE (459,) contro (444,)  <- NESSUN CONFRONTO
-      d         SHAPE DIVERSE (21936,) contro (21916,)  <- NESSUN CONFRONTO
-      d0        SHAPE DIVERSE (21936,) contro (21916,)  <- NESSUN CONFRONTO
-      omega_s   SHAPE DIVERSE (459, 3) contro (444, 3)  <- NESSUN CONFRONTO
-      _nb       SHAPE DIVERSE (459, 3) contro (444, 3)  <- NESSUN CONFRONTO
-  [FAIL] P1     shape divergenti 7, array confrontati 0, max|A-B| = 0.000e+00
+    P1           n: 444 contro 444
+      psi       shape (444,)       max|A-B| = 0.000e+00
+      phivel    shape (444,)       max|A-B| = 0.000e+00
+      eta       shape (444,)       max|A-B| = 0.000e+00
+      d         shape (21916,)     max|A-B| = 0.000e+00
+      d0        shape (21916,)     max|A-B| = 0.000e+00
+      omega_s   shape (444, 3)     max|A-B| = 0.000e+00
+      _nb       shape (444, 3)     max|A-B| = 0.000e+00
+  [PASS] P1     shape divergenti 0, array confrontati 7, max|A-B| = 0.000e+00
 
 --- P2 -- controllo positivo: coi valori VERI DEVE differire ---
-    P2           n: 459 contro 459
-      psi       shape (459,)       max|A-B| = 0.000e+00
-      phivel    shape (459,)       max|A-B| = 0.000e+00
-      eta       shape (459,)       max|A-B| = 0.000e+00
-      d         shape (21936,)     max|A-B| = 0.000e+00
-      d0        shape (21936,)     max|A-B| = 0.000e+00
-      omega_s   shape (459, 3)     max|A-B| = 0.000e+00
-      _nb       shape (459, 3)     max|A-B| = 0.000e+00
-  [FAIL] P2     shape divergenti 0, max|A-B| = 0.000e+00 (0 con shape uguali = FAIL)
+    P2           n: 444 contro 459
+      psi       SHAPE DIVERSE (444,) contro (459,)  <- NESSUN CONFRONTO
+      phivel    SHAPE DIVERSE (444,) contro (459,)  <- NESSUN CONFRONTO
+      eta       SHAPE DIVERSE (444,) contro (459,)  <- NESSUN CONFRONTO
+      d         SHAPE DIVERSE (21916,) contro (21936,)  <- NESSUN CONFRONTO
+      d0        SHAPE DIVERSE (21916,) contro (21936,)  <- NESSUN CONFRONTO
+      omega_s   SHAPE DIVERSE (444, 3) contro (459, 3)  <- NESSUN CONFRONTO
+      _nb       SHAPE DIVERSE (444, 3) contro (459, 3)  <- NESSUN CONFRONTO
+  [PASS] P2     shape divergenti 7, max|A-B| = 0.000e+00 (0 con shape uguali = FAIL)
 
 --- P3 -- A3 SI SCIOGLIE: `median(x)` non vale piu' 1 per identita' ---
     median(x) su 123 passi: p05 0.325981  mediana 0.975909  p95 2.99675   max|med-1| = 12.493
@@ -68,8 +68,5 @@ SIGILLO ANELLO ISTANTANEO -- P0..P10
   [PASS] P9     no NaN/inf: True   r > 0: True   ||nb| - 1| < 1e-6: True
 
 ======================================================================================================================
-ESITO: 7/10 PASS
-   FAIL: P0
-   FAIL: P1
-   FAIL: P2
-======================================================================================================================
+ESITO: 10/10 PASS
+=======================================================================================================

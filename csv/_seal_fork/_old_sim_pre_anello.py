@@ -1033,12 +1033,6 @@ class Rete:
         self._cs_chiamate = 0
         self._cs_fallback = 0
         self._cs_fallback_ultimo = None
-        # [CURA DELL'ANELLO ISTANTANEO, 2026-09-18] il gauge di `ritmo()` del passo PRECEDENTE (uno
-        # SCALARE: niente lunghezza, niente estensione alla mitosi, A8b chiusa per costruzione).
-        # Nasce DICHIARATO a None, non implicito (A7b: uno stato non nasce indefinito); `_med_f_ultimo`
-        # e' il registro che `ritmo()` scrive e che SOLO `step()` promuove.
-        self._med_f_prec = None
-        self._med_f_ultimo = None
         # ritmo del tempo proprio locale del passo corrente (None = orologio globale), esposto da
         # step() perche' il rilassamento della memoria si misuri in dt_n = DT*r e non nel tic globale.
         self._r_corrente = None
@@ -2078,46 +2072,7 @@ class Rete:
                 self._ritmo_f_mediana_nulla = getattr(self, "_ritmo_f_mediana_nulla", 0) + 1
             if float(np.median(_fa)) <= 1e-9:
                 self._ritmo_med_sul_pavimento = getattr(self, "_ritmo_med_sul_pavimento", 0) + 1
-        # [CURA DELL'ANELLO ISTANTANEO, 2026-09-18 - categoria D del par.10: NESSUN FLAG]
-        # IL DIFETTO: `med` era `median(|f|)` DELLO STESSO ISTANTE, e veniva usato SU `f`. Due
-        # assiomi nella stessa riga: A6 (nessuna funzione istantanea di X agisce dinamicamente su X:
-        # `f` e `r` si determinavano a vicenda DENTRO il passo) e A3 (`median(x) = 1` per IDENTITA').
-        # MISURATO PRIMA DELLA CURA (`csv/_test_fork/_anello_sfasato.txt`, blob f8f46683):
-        #   `max|median(x) - 1| = 0.000e+00` su 122 passi -- il punto fisso non era "circa": era
-        #   ESATTO A MACCHINA. Col `med` sfasato di uno diventa 2.1097 / 0.9108 / 1.1727.
-        # LA CURA: si legge il `med` del passo PRECEDENTE. Il RIFERIMENTO non cambia (resta
-        # `median(|f|)`): cambia QUANDO lo si legge. Nessun gauge nuovo, nessun numero tarato.
-        #
-        # PERCHE' `ritmo()` NON SCRIVE `_med_f_prec`, ed e' il presidio che regge tutto: questo
-        # metodo ha TRE call-site, e DUE SONO DIAGNOSTICI (`:3124` la fisica, `_diag_completa` e il
-        # terzo). Se lo snapshot avanzasse qui, ogni chiamata diagnostica farebbe avanzare lo stato
-        # fisico -- par.2.3 (purezza pure-read) violato, e sarebbe il QUINTO difetto di questa
-        # famiglia. Quindi: qui si LEGGE e si REGISTRA; **`step()` PROMUOVE**, a `:3129-3131`,
-        # accanto a `_psi_prec` e `_psi_spin_prec`, che sono gli altri due snapshot consumati da qui.
-        # La contaminazione da diagnostico e' chiusa PER COSTRUZIONE: `step()` chiama `ritmo()`
-        # PRIMA di promuovere, quindi il valore promosso e' sempre quello della chiamata FISICA.
-        #
-        # PERCHE' UNO SCALARE E NON L'ARRAY `f`: uno scalare NON HA LUNGHEZZA, quindi l'intera
-        # classe A8b (cache cross-passo da estendere a ogni punto di crescita: mitosi, `semina`,
-        # `nuova_massa`) SPARISCE PER COSTRUZIONE. E' il presidio piu' forte disponibile, ed e' la
-        # ragione per cui `_cs_nodo_prev` e `_psi_spin_prec` hanno fatto difetto e questo non puo'.
-        # A3c/A8b (quarto livello): `med_prec` e `f` sono ENTRAMBI `Delta_angle/DT`, cioe' `[1/T]` -
-        # confrontabili, non solo presenti.
-        _med_corrente = max(float(np.median(np.abs(f))), 1e-9)
-        self._med_f_ultimo = _med_corrente             # REGISTRO, non snapshot: lo promuove step()
-        _medp = getattr(self, "_med_f_prec", None)
-        if _medp is None:
-            # NON ESISTE UN PRIMA. Si riusa la convenzione gia' presente in questo stesso metodo
-            # (`:2021-2026`, `_psi_prec` assente -> `np.ones`), NON se ne inventa una nuova: "nessun
-            # passato" significa "nessuna dilatazione", e si CONTA (A8).
-            # ⚠ E il fallback NON e' `median(|f|)` corrente: sarebbe il difetto stesso, al passo 1.
-            self._ritmo_med_assente = getattr(self, "_ritmo_med_assente", 0) + 1
-            return np.ones(self.n)
-        med = float(_medp)
-        if med == _med_corrente:
-            # il gauge non si e' mosso fra i due passi: legittimo, ma invisibile senza contatore
-            # (e' la forma che `Z33` prende qui).
-            self._ritmo_med_identico = getattr(self, "_ritmo_med_identico", 0) + 1
+        med = max(float(np.median(np.abs(f))), 1e-9)
         x = f / med
         r = x / np.sqrt(1.0 + x**2) + 1.0e-6           # bottleneck liscio, satura a 1 per x->inf
         r_unit = 1.0 / np.sqrt(2.0) + 1.0e-6           # valore al gauge x=1
@@ -3175,24 +3130,6 @@ class Rete:
             self._psi_prec = self.psi.copy()
             if CAMPO_SPINORIALE and hasattr(self, "psi_spin") and len(getattr(self, "psi_spin", [])) == self.n:
                 self._psi_spin_prec = self.psi_spin.copy()   # [FASE 5] snapshot per il ritmo spinoriale (4pi)
-            # [CURA DELL'ANELLO ISTANTANEO, 2026-09-18] LA PROMOZIONE del gauge di `ritmo()`, QUI e
-            # non dentro `ritmo()`: questo e' l'UNICO call-site FISICO (gli altri due sono
-            # diagnostici), quindi solo qui lo snapshot deve avanzare. Sta accanto a `_psi_prec` e
-            # `_psi_spin_prec` perche' e' la stessa cosa: uno snapshot CONSUMATO da `ritmo()`, e si
-            # promuove DOPO il consumo -- che e' cio' che fa valere A6 (misurato in `680d069`:
-            # promuoverlo PRIMA confronterebbe lo stato con se' stesso, `f = 0` per costruzione).
-            # ⚠ NON SI PROMUOVE UN `med` CHE STA SUL PAVIMENTO `1e-9`: quel valore non e' una
-            # misura, e' la protezione da divisione per zero. Promuoverlo renderebbe la
-            # REGOLARIZZAZIONE il gauge del passo dopo -- e la misura dice quanto costerebbe: il
-            # rapporto `med_t/med_(t-1)` ha `max = 4.81e+07`, ed e' ESATTAMENTE il passo che segue
-            # un gauge degenere (`Z33`). Senza questo ramo la degenerazione non sparirebbe: si
-            # ROVESCEREBBE, da "tutti sul pavimento" a "tutti in saturazione". Contato (A8).
-            _mu = getattr(self, "_med_f_ultimo", None)
-            if _mu is not None:
-                if _mu > 1e-9:
-                    self._med_f_prec = _mu
-                else:
-                    self._ritmo_med_non_promosso = getattr(self, "_ritmo_med_non_promosso", 0) + 1
         # [(3) BONIFICA 2026-09-17] `dt_e` e' il tempo proprio dell'ARCO, e serve a `mitosi()`, che
         # non lo riceve fra gli argomenti. Si porta su `self` invece di RICOSTRUIRLO li': una
         # seconda scrittura della stessa legge e' due leggi che possono divergere (e' la ragione
