@@ -3,6 +3,13 @@
 **Data:** 2026-09-18 · **Blob:** `a1ae5090` → **`b9e07c73`** · **Sigillo `_sigillo_coorti.py`: 9/9 PASS**
 **Verifica scritta PRIMA del codice:** `695ced0` · **Letture fissate PRIMA:** stesso commit, §2
 **Il FAIL intermedio è committato:** `a872383` *(era il criterio, non il codice)*
+**La catena dei commit:** `7d75432` la cura · `a872383` il FAIL com'era · **`600fe6c`** il
+criterio riscritto · `928cb62` l'esito `9/9`
+
+> **⚠ CORREZIONE A UN COMMIT GIÀ PUSHATO:** il messaggio di `928cb62` cita **`6b5cd0f`** per il
+> commit del criterio. **È un hash SBAGLIATO: quello giusto è `600fe6c`.** Il messaggio non si
+> riscrive *(sarebbe una riscrittura di storia già pushata)*, quindi la correzione vive **qui**.
+> **In un repo che ancora tutto agli hash, un hash inventato è un difetto, non un refuso.**
 
 > **CATEGORIA D del par.10 — correzione di difetto, NESSUN FLAG.** *Un bug curato non ha un
 > interruttore.* **Il gate NON si sposta: resta a `c0803713`** per la ragione del par.0
