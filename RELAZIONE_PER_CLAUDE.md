@@ -5806,3 +5806,61 @@ per chiamata, scritto con lo strumento di scrittura, mai due heredoc insieme.**
 `diag.csv`, `cond.csv`, `run.log` e `stato.pkl`.** CLAUDE.md vieta `git add -A` con un run attivo, e
 i `.pkl` **non si committano mai** (binari, 22 MB: il loro comando è in `INVENTARIO_strumenti.md`).
 **Si committano a run finito, con il referto.**
+
+### 9.56-bis — ⚠ **LA PROVA DELLA CONTINUITÀ C'È, ed è migliore della riga di log che avevo perso. E una mia falsa allarme, corretta**
+
+**Il `diaglog` ha 726 righe, una per passo**, e `eta_mean` è **monotona crescente senza un solo
+reset**:
+
+```
+step      eta_mean     eta_max     n_tot   n_naninf
+0         0.003748     0.06744     1196    0
+102       0.073014     1.30415     1199    0
+307       0.231682     3.88778     1200    0
+518       0.394475     6.42988     1203    0
+722       0.567138     9.19917     1203    0
+```
+
+> **Se il run fosse ripartito dalla semina, `eta_mean` sarebbe ricaduta a `~0.0037`. Non lo fa mai.**
+> **Questa è la prova diretta della continuità, ed è più forte della riga `[db]` che avevo buttato
+> via col `tail -3`.** Combacia con l'altra evidenza: **1 sola invocazione nel log, 0 righe di
+> resume.**
+
+**E la crescita è quasi ESATTAMENTE lineare:** da `0.0730` (step 102) a `0.5671` (step 722) è
+**×7.8 su ×7.1 di passi**. **Il controllo di Luca — *«`eta` a 1200 deve essere ~10 volte quella a
+120»* — REGGE.**
+
+### ⚠ MA SOLO SULLA MEDIA: sulla MEDIANA avrei dato un falso allarme, e l'avevo dato
+
+**Dagli snapshot per-nodo, `eta` MEDIANA:**
+
+```
+step 120 : 0.0100017      step 130 : 0.0100018
+step 470 : 0.0100066      step 680 : 0.0100096
+```
+
+**La mediana è PIANTATA sul valore di semina (`0.0100`) mentre media e massimo crescono di due
+ordini.** Avevo letto la mediana e stavo per concludere *«`eta` non si accumula»*: **era sbagliato, e
+lo correggo prima di usarlo.**
+
+> **IL FATTO VERO, ed è un dato su `Z9`: la maturazione è confinata a una MINORANZA di nodi.**
+> **Più della metà della popolazione resta al valore di nascita per 700 passi**, mentre una coda
+> matura e trascina la media. **`eta_max` arriva a `9.2` mentre la mediana non si muove dalla terza
+> cifra.**
+
+**E questo dice anche perché il criterio di Luca poteva ingannare:** *«se `eta` non cresce, il run
+non è continuo»* — **qui il run È continuo (provato) e la mediana NON cresce lo stesso.**
+**L'inferenza «mediana ferma ⟹ run non continuo» non vale**, e questo è il caso che lo mostra.
+
+### ⚠ E un difetto MIO nel watcher, trovato e corretto
+
+Il primo watcher faceva `shutil.copyfile` del `.pkl` mentre il run lo sostituiva con `os.replace`:
+**due file su tre portavano un `_db_step` DIVERSO dal loro nome** (`stato_400.pkl` conteneva il passo
+**130**, `stato_800.pkl` il passo **470**).
+**Li ho RINOMINATI col loro `_db_step` vero** — restano stati legittimi di un run continuo, solo a
+istanti diversi — **e ho riscritto il watcher perché RI-SCRIVA l'oggetto che ha letto invece di
+copiare il file, con verifica del `_db_step` dopo la scrittura.**
+> **Il nome di un file non è un dato: il `_db_step` dentro lo è.** *(Stessa famiglia di P6: «un file
+> che si distingue dagli altri solo per il nome non è un dato».)*
+
+**Stabilità a 722 passi: `n_naninf = 0` su tutte le righe, `n` da 1196 a 1203.**
