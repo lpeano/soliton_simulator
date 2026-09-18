@@ -6688,3 +6688,88 @@ masse; e **il discriminante di `Z46` non scatta in nessuno dei due** (`r/r_floor
 I miei `r` uscivano **esattamente la metà** di quelli già committati in `Z49`, e **è stato quel
 disaccordo con un numero già nel repo a farmelo vedere.** Corretto e rigirato: `r` interna a tre
 masse vale ora `1.409586` contro il `1.4096` di `Z49`. **Il numero committato ha fatto da presidio.**
+
+---
+
+## 9.67 — **Le coorti sopravvivevano già alla mitosi. Non sopravvivevano allo snapshot** *(sigillo 9/9)*
+
+**2026-09-18** · blob **`a1ae5090` → `b9e07c73`** · **CATEGORIA D del par.10: correzione di difetto,
+NESSUN FLAG** · **il gate NON si sposta, resta `c0803713`**
+**Verifica scritta PRIMA del codice:** `695ced0` · **FAIL intermedio committato:** `a872383`
+**Referto:** `doc/REFERTO_coorti_snapshot.md` · **Sigillo:** `csv/_seal_fork/_sigillo_coorti.py`
+
+### Il mandato chiedeva due cose, e **la prima era già fatta**
+
+Il mandato diceva *«alla mitosi il figlio nasce SENZA appartenenza»*. **Dal disco, `:3951-3954`, i
+figli ereditano una COPIA PROFONDA delle voci del genitore `a`, con la scelta di `a` già motivata nel
+commento**; il ramo Schwinger fa lo stesso (`:4076-4082`) e `conc_archi` è riallineato
+(`:3997-4001`). **`:1858` — l'`extend` con liste vuote che il mandato citava — è in `semina()`, non in
+`mitosi()`, ed è corretto lì.**
+
+> **E `S2` lo MISURA sui due bracci invece di asserirlo:** frazione di nodi con coorte non vuota
+> **`0.8238` nel vecchio contro `0.8238` nel nuovo — identica**, `374` su `454`.
+> **⚠ È l'`82.4 %`, non il «~100 %» della lettura fissata prima**, e il numero si riporta com'è: il
+> complemento sono **i nodi seminati**, che per costruzione non hanno lignaggio.
+
+### Il difetto vero — **una riga, e uno scarto silenzioso**
+
+```python
+:2865   if isinstance(v, (np.ndarray, int, float, bool, np.integer, np.floating, str)):
+:2866       stato['attrs'][k] = v
+```
+
+**`conc_nodi` e `conc_archi` sono `list`, `masse_info` è un `dict`: non matchano, e spariscono.**
+**E la docstring della funzione dichiara *«salva TUTTE le grandezze di stato … così non ne dimentica
+nessuna»*: per queste tre non è vero.** **Dopo un salva/ricarica il lignaggio riparte VUOTO**, e ogni
+misura di appartenenza su uno snapshot ricaricato **guarda un sistema senza storia.**
+
+**`S3a` lo DIMOSTRA:** nel `.pkl` vecchio le tre chiavi sono `[]`, nel nuovo ci sono tutte e tre.
+
+**La cura** aggiunge le tre chiavi **esplicitamente**, e **il filtro NON si allarga**: allargarlo
+farebbe entrare anche le cache derivate (`_S`, `_perm`, `_ker_cache`) **che `carica_stato` invalida
+apposta** — **e quello che entra va SAPUTO.**
+
+### Il sigillo — **9/9**, e `S1` è il decisivo
+
+```
+    vec/nuo      n: 454 contro 454   UGUALE
+      psi  phi  phivel  eta  d  d0  omega_s  _nb  pos   -> max|A-B| = 0.000e+00 su TUTTI
+  [PASS] S1     shape diverse = 0, campi confrontati = 9/9, max|A-B| = 0.000e+00
+```
+
+**Lo zero non è mancanza di confronto:** la riga delle shape è stampata **prima**, e *«9/9, shape
+diverse = 0»* **è parte del criterio** *(la trappola `C18`, chiusa per costruzione)*.
+**⚠ E `salva_stato` è stato CHIAMATO ai passi 20 e 45 in entrambi i bracci: senza, la funzione
+modificata non sarebbe stata esercitata e il PASS sarebbe stato vuoto.**
+**`S4`: `_ripara_tracking` scatta `0` volte in entrambi.** **`S6`: `_sigillo_anello.py` dà `10/10` sul
+blob nuovo — `Z42` regge.**
+
+### ⚠ Il FAIL intermedio era **il mio criterio**, ed è committato
+
+Il primo giro ha dato **`8/9`**. `S6` cercava la stringa `"FAIL"` nello stdout del sigillo figlio e
+**la trovava dentro il testo esplicativo di una riga che PASSA**:
+
+```
+[PASS] P2  shape divergenti 7, max|A-B| = 0.000e+00 (0 con shape uguali = FAIL)
+```
+
+**Il sigillo figlio riportava `10/10 PASS` e `returncode 0`. Era un FAIL FALSO.**
+**È par.9 alla lettera, ed è il quarto caso della stessa famiglia in questo repo** (`N3b`, `M1b`/`M3`,
+`M3c`): **il criterio guarda nel posto giusto con la chiave sbagliata.** **E il costo non è
+simmetrico: un FAIL falso costa più di un sigillo mancante, perché si porta dietro una diagnosi.**
+
+Il criterio nuovo **parsa la riga `ESITO: n/m PASS`** e richiede `passati == totali` **con
+`totali > 0`** *(riga mancante → `totali = -1` → **fallisce** invece di passare per assenza di prova)*,
+**più** `"[FAIL]"` **con le parentesi**. **`S1`-`S5` sono identici fra i due giri.**
+
+### Cosa resta aperto, e non è poco
+
+- **il costo a `n = 8000` NON è misurato:** `S5` dà **`+25.6 %`** sul `.pkl` a `n = 454` *(dove gli
+  archi sono già `21930`)*, **e non lo estrapolo**;
+- **il TEMPO non si legge affatto:** due esecuzioni dello stesso sigillo danno **`×1.0051`** e
+  **`×0.9245`** — *il nuovo più veloce del vecchio*, **che è impossibile.** **È rumore di sistema su
+  60 passi**, e serve a dire **una cosa sola**: il costo **non esplode**;
+- **nessuno snapshot esistente acquisisce le coorti retroattivamente:** i sei `.pkl` di `_gvideo` e i
+  sei di `_g2m` vengono dal blob `a1ae5090`. **Per averle servirebbe rigirare le scene.**
+- **la separazione «coorte assegnata dalla MITOSI» contro «riscritta da `chi_basc`» resta da fare:**
+  **non è ricavabile dai `.pkl` neanche adesso** — servirebbero **contatori DURANTE il run**.

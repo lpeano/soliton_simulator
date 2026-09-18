@@ -1,4 +1,4 @@
-[TIMBRO] _sigillo_coorti.py  sha1-BYTE ff7d6a3d  committato e pulito
+[TIMBRO] _sigillo_coorti.py  sha1-BYTE 93aaec70  committato e pulito
 ======================================================================================================================
 SIGILLO COORTI -- S0..S6. S1 E' IL DECISIVO: BYTE-INERZIA DELLA FISICA.
 ======================================================================================================================
@@ -37,23 +37,22 @@ SIGILLO COORTI -- S0..S6. S1 E' IL DECISIVO: BYTE-INERZIA DELLA FISICA.
   [PASS] S4     DEVONO essere uguali: se il nuovo ne chiama di piu', la dimensione non e' mantenuta
 
 --- S5 -- IL COSTO: dimensione del .pkl e tempo per passo (CPU libera) ---
-    .pkl  vecchio   2301353 byte   nuovo   2891381 byte   -> +25.638 %  (n = 454)
-    tempo vecchio    5.010 s      nuovo    5.036 s     -> x1.0051  (60 passi + 2 snapshot)
+    .pkl  vecchio   2301395 byte   nuovo   2891381 byte   -> +25.636 %  (n = 454)
+    tempo vecchio    5.527 s      nuovo    5.110 s     -> x0.9245  (60 passi + 2 snapshot)
     ATTENZIONE: il tempo su 60 passi include il rumore di sistema; e' un ORDINE DI GRANDEZZA,
     non una misura fine. La lettura fissata prima era 'costo che ESPLODE', non 'costo diverso'.
   [PASS] S5     il .pkl non raddoppia (soglia dichiarata: crescita < 100 %%)
 
 --- S6 -- il sigillo dell'ANELLO (`Z42`) regge sul blob NUOVO? ---
     si rilancia `_sigillo_anello.py`, che e' ancorato al blob f8f46683 e confronta col DISCO.
-      [PASS] P7     `r_unit` invariato nel sorgente: True ; tetto 1.4142130 <= sqrt(2)
-      --- P8 -- `Z9`: `ramp = min(1, eta/TAU_A)` mediano ai passi 1 / 60 / 120 ---
-      riferimento del mandato: 0.0002 / 0.0102 / 0.0212  (TAU_A = 50, scena STORICA).
-      [PASS] P8     riportato, NON confrontato con numeri di un'altra scena (A3c)
-      [PASS] P9     no NaN/inf: True   r > 0: True   ||nb| - 1| < 1e-6: True
+      
+      ==============================================================================================================
       ESITO: 10/10 PASS
-  [FAIL] S6     returncode 0, nessun FAIL nello stdout = False
+      ==============================================================================================================
+      ESITO: 10/10 PASS
+  [PASS] S6     returncode 0, ESITO 10/10, marcatore [FAIL] presente = False
 
 ======================================================================================================================
-ESITO: 8/9 PASS   S0=P S1=P S2=P S3a=P S3b=P S3c=P S4=P S5=P S6=F
+ESITO: 9/9 PASS   S0=P S1=P S2=P S3a=P S3b=P S3c=P S4=P S5=P S6=P
 S1 e' il decisivo: se FALLISCE, la modifica e' sbagliata e si FERMA (lettura fissata in 695ced0).
 ======================================================================================================================

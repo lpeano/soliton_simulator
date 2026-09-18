@@ -21,7 +21,7 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
     Cambiera' ancora a ogni pezzo del fork: **il blob e' un timbro, non una costante.** Quello che
     NON cambia e' l'obbligo di ri-timbrare il gate quando cambia.
   - **⚠ IL GATE E' INDIETRO RISPETTO AL DISCO, E RESTA INDIETRO — DECISIONE MOTIVATA
-    (2026-09-16).** Blob sul disco: **`08784685`**. Gate: **`c0803713`**. **Non e' una svista, e
+    (2026-09-16).** Blob sul disco: **`b9e07c73`** *(aggiornato il 2026-09-18; era `08784685`, e la riga era **STALE** da giorni)*. Gate: **`c0803713`**. **Non e' una svista, e
     non si ri-timbra**, per la ragione del par.2.6 e del par.5: *un timbro si mette DOPO il
     sigillo, mai prima.* Fra `c0803713` e `08784685` ci sono **tre** cambiamenti, e **non hanno
     tutti lo stesso stato**:
@@ -997,6 +997,26 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   passato da **116x** a **~4x**. La conclusione regge, **la sua forza no** — e poiche' la traiettoria
   e' **monotona crescente**, il regime **cambia con la maturazione**: il tempo-luce non e' «non
   testabile mai», e' «non testabile a 500 passi».
+- **`conc_nodi`/`conc_archi`/`masse_info` NON FINIVANO NELLO SNAPSHOT — CURATO il 2026-09-18**
+  (blob `a1ae5090` -> **`b9e07c73`**, `doc/REFERTO_coorti_snapshot.md`, sigillo
+  `csv/_seal_fork/_sigillo_coorti.py` **9/9 PASS**). Il filtro di `salva_stato` (`:2865-2866`) accetta
+  `ndarray`/scalari/`str`; **`conc_nodi` e `conc_archi` sono `list` e `masse_info` e' un `dict`: non
+  matchavano, e venivano SCARTATI IN SILENZIO** — mentre la docstring della funzione dichiara
+  *«salva TUTTE le grandezze di stato ... cosi' non ne dimentica nessuna»*. **Dopo un salva/ricarica
+  il lignaggio delle coorti ripartiva VUOTO.** **Cura: si aggiungono ESPLICITAMENTE dopo il ciclo su
+  `__dict__`; IL FILTRO NON SI ALLARGA** (allargarlo farebbe entrare le cache derivate `_S`, `_perm`,
+  `_ker_cache`, **che `carica_stato` INVALIDA apposta**). **CATEGORIA D del par.10: nessun flag.**
+  **⚠ E LA META' DEL MANDATO CHE NON SERVIVA:** l'**eredita' alla mitosi c'era GIA'** (`:3951-3954`,
+  copia profonda dal genitore `a`; ramo Schwinger `:4076-4082`; `conc_archi` riallineato
+  `:3997-4001`). **`:1858` — l'`extend` con liste vuote — e' in `semina()`, NON in `mitosi()`, ed e'
+  CORRETTO li'.** **Misurato sui DUE bracci: frazione di nodi con coorte non vuota `0.8238` contro
+  `0.8238`, identica** *(e' l'`82.4 %`, **non** il «~100 %» atteso: il complemento sono i nodi
+  **seminati**, che per costruzione non hanno lignaggio)*.
+  **⚠ COSA QUESTO NON DA': gli snapshot GIA' SCRITTI non acquisiscono le coorti retroattivamente.**
+  I sei `.pkl` di `_gvideo` e i sei di `_g2m` vengono dal blob `a1ae5090`: **per averle servirebbe
+  rigirare le scene.** **E il costo a `n = 8000` NON E' MISURATO:** `S5` da' **`+25.6 %`** sul `.pkl`
+  a `n = 454`, e **il tempo non si legge** (due esecuzioni: `x1.0051` e **`x0.9245`**, cioe' il nuovo
+  *piu' veloce* del vecchio — **rumore di sistema su 60 passi**).
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
 

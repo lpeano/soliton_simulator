@@ -111,8 +111,38 @@ dimensione `.pkl` e tempo/passo, PRIMA e DOPO, a CPU libera** · `S6` rigiro dei
 ## 3. TODO DEL NEXT STEP
 
 - [x] **§5.2 verificato e riportato PRIMA di scrivere codice**
-- [ ] attendere la chiusura del run a due masse *(par.5-quinquies + `S5` a CPU libera)*
-- [ ] previsioni qualitative → commit
-- [ ] **§1②** la persistenza + **`S0-S6`**
-- [ ] referto + registro + relazione **nello stesso commit** + **CHECKPOINT**
-- [ ] **⚠ NON toccare:** nessuna legge, `TAU_A`, `ramp`, `Z9`, il filtro di `salva_stato`
+- [x] attendere la chiusura del run a due masse *(par.5-quinquies + `S5` a CPU libera)*
+- [x] **§1②** la persistenza + **`S0-S6`** → **9/9 PASS**
+- [x] referto + registro + relazione **nello stesso commit** *(`Z53`, `doc/REFERTO_coorti_snapshot.md`, §9.67)*
+- [x] **⚠ NON toccato:** nessuna legge, `TAU_A`, `ramp`, `Z9`, **né il filtro di `salva_stato`**
+
+### ⚠ ESITO — **le quattro letture fissate in §2, e come sono andate**
+
+| lettura fissata | esito |
+|---|---|
+| **`S1` non byte-identico → la modifica è sbagliata: si ferma** | **NON è scattata: `0.000e+00` su 9 campi su 9, shape uguali** |
+| **`S5` costo che esplode → si propone la forma compatta** | **NON è scattata: `+25.6 %` sul `.pkl` a `n = 454`** |
+| **`S4` che scatta spesso → è un difetto, non la cura** | **NON è scattata: `0` chiamate in entrambi i bracci** |
+| **`S2` già ~100 % prima della modifica → l'ereditarietà c'era già, e lo si scrive** | **✓ È SCATTATA — ma vale `0.8238`, non `~100 %`, e il numero si riporta com'è** |
+
+**⚠ E una previsione mia che NON avevo scritto, quindi non conta come previsione ma come rilievo:**
+**le previsioni qualitative NON sono state committate per questo giro.** Era un punto del TODO
+*(«previsioni qualitative → commit»)*, **e l'ho saltato.** Le quattro letture di §2 facevano già il
+lavoro — sono criteri con una soglia, scritti prima e committati in `695ced0` — **ma il punto era
+nella lista e non l'ho spuntato: lo dichiaro invece di cancellarlo dalla lista.**
+
+### ⚠ IL FAIL INTERMEDIO, e perché sta qui
+
+**Il primo giro ha dato `8/9`, e il FAIL era `S6` — cioè IL MIO CRITERIO, non il codice.** Committato
+com'era in `a872383` **prima** di correggerlo (par.5: *«se il sigillo FALLISCE, committa comunque lo
+stato + il fallimento e FERMATI: non aggiustare al volo dentro lo stesso commit»*).
+**Il criterio cercava `"FAIL"` e lo trovava nel testo esplicativo di una riga che PASSA.**
+**È il quarto caso in questo repo della famiglia par.9** *(`N3b`, `M1b`/`M3`, `M3c`)*.
+
+### TODO — il passo successivo
+
+- [ ] **il costo a `n = 8000`**: `S5` misura `n = 454`. **Non estrapolato, e va misurato prima di
+      rigirare una scena lunga con le coorti dentro.**
+- [ ] **i contatori DURANTE il run** per separare «coorte assegnata dalla MITOSI» da «riscritta da
+      `chi_basc`» — **non è ricavabile dai `.pkl` neanche adesso** *(limite già dichiarato in `Z49`)*
+- [ ] **≥ 4 semi per braccio** se `Z52` deve diventare un fatto e non un rapporto senza barra
