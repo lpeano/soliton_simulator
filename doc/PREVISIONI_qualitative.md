@@ -364,3 +364,52 @@ deroga (*«se lo derivi, dimostra perché `nudo` non basta»*), e la dimostrazio
 7. **Il numero di nodi cambia.** Traiettorie diverse ⟹ `N` diverso ⟹ i confronti array-per-array
    che non siano `P1` avranno **shape diverse**: `max|A-B| = 0.000e+00` lì significherebbe
    **MANCANZA DI CONFRONTO**, e la riga delle shape va stampata **per prima**.
+
+---
+
+## 2026-09-18 — **la struttura a 1200 passi** *(scritte PRIMA del run, senza numeri)*
+
+**① LA MATURAZIONE.** Mi aspetto che **`ramp` cresca in modo SUPERLINEARE rispetto
+all'estrapolazione fatta a 120 passi**, non lineare: `eta` si accumula, e in questa configurazione
+**`n` è quasi fermo** — quindi non ci sono nodi nuovi che riabbassano la mediana. **Se invece `ramp`
+stesse *sotto* l'estrapolazione, sarebbe il risultato più interessante del blocco**, e vorrebbe dire
+che `eta` satura.
+**E la frazione con `f = 0`:** **mi aspetto che sia quasi NULLA**, molto più bassa che nelle scene
+sonda — **perché `Z44` dice che quei nodi sono APPENA NATI, e qui la mitosi è quasi ferma.**
+**È la verifica più diretta di `Z44` disponibile, ed è gratis.**
+
+**② IL GUSCIO.** Mi aspetto che **esista un minimo di `|psi|` a un raggio maggiore di quello delle
+masse**, e che **si approfondisca** nel tempo *(il contrasto dentro/fuori cresce)*. **Non so se si
+sposti**: potrebbe restare fermo o allargarsi.
+**NON mi aspetto** che il minimo sia **netto come una parete**: mi aspetto un **avvallamento largo**,
+perché nulla nel codice impone una superficie.
+
+**③ LE FASI.** **Non mi aspetto convergenza a `2π/3`.** La simmetria `D3` è nella GEOMETRIA della
+semina, non in una legge: nessun termine del codice premia quella configurazione. **Mi aspetto
+deriva**, con coerenza **interna** a ciascuna massa **più alta** di quella **fra** masse — e sarebbe
+già un fatto, perché direbbe che le masse sono oggetti e non una nube sola.
+**Se invece gli sfasamenti convergessero e ci restassero, sarebbe il risultato più forte del giro**,
+e andrebbe misurato contro il suo nullo *(tre fasi che derivano indipendentemente passano per `2π/3`
+ogni tanto: «convergere» significa RESTARCI)*.
+
+**④ IL CONTRASTO.** Mi aspetto che `rho_spin` al centro **cresca**, perché il kernel matura; **non
+so** se il rapporto centro/guscio saturi. **Mi aspetto lo stress `max|d−d0|/d0` PIÙ ALTO nel
+guscio**, se il guscio esiste.
+
+### ⚠ IL FALSIFICATORE — *cosa direbbe che NON è una parete*
+
+> **Se i nodi del guscio avessero `eta` sistematicamente più bassa di quelli del centro, il guscio
+> sarebbe il TRANSITORIO DI NASCITA di `Z44`, non una struttura.**
+
+**E ne aggiungo un secondo, perché il primo da solo non basta:** **se il minimo di `|psi|` coincide
+con i bin dove ci sono POCHI NODI**, non è un minimo del campo — **è un minimo di STATISTICA.**
+**Conterò i nodi per bin e lo dichiarerò.**
+
+**E un terzo, sul guscio come artefatto di bordo:** **se il minimo stesse sempre all'estremo del
+raggio popolato**, sarebbe il bordo della nube, non una parete dentro di essa.
+
+### ⚠ E DUE COSE CHE QUESTO RUN NON PUÒ DIRE, dichiarate prima
+
+1. **UN SEME.** Qualunque forma si veda, **non è un dato**: è un'osservazione da rifare.
+2. **`Z9` È APERTA:** tutto ciò che si vede è **su un kernel che non ha finito di accendersi**, e
+   **`--tau-luce` è un ramo il cui sigillo è FALLITO** (par.0). **Nessun verdetto di fisica.**
