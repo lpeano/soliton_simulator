@@ -262,3 +262,74 @@ for eti, D in SCENE:
 
 print("")
 print("=" * 124)
+
+# ============================================================== (4) IL CRITERIO -- aggiunto DOPO il
+# primo giro, e lo dichiaro: il primo giro ha mostrato che `base/base_maturo` MEDIANO e' PIU' GRANDE
+# del QUADRATO del `ramp` mediano (rapporto 1.58 e 1.13). Avevo una SPIEGAZIONE in testa -- "gli archi
+# connettono nodi coetanei" -- e una spiegazione in testa non e' una misura. Qui si MISURA.
+print("")
+print("=" * 124)
+print("(4) IL CRITERIO -- e la correlazione che il par.3 aveva lasciato come IPOTESI")
+print("=" * 124)
+for eti, D in SCENE:
+    S, F = leggi(D)
+    TA = TAU_A[eti]
+    A = {f: S[f]["attrs"] for f in F}
+    N = {f: len(A[f]["pos"]) for f in F}
+    f = F[-1]
+    a = A[f]
+    n = N[f]
+    n0 = N[F[0]]
+    et = np.asarray(a["eta"], float)
+    rp = np.minimum(1.0, et / TA)
+    ii = np.asarray(a["i"], int)
+    jj = np.asarray(a["j"], int)
+    msk = (ii < n) & (jj < n) & (ii < et.size) & (jj < et.size)
+    I2, J2 = ii[msk], jj[msk]
+    x, y = rp[I2], rp[J2]
+
+    print("")
+    print("  SCENA %s -- ultimo istante (frame %d = passo %d, n = %d, n0 = %d)"
+          % (eti, f, f * PPF, n, n0))
+
+    # (4a) ASSORTATIVITA' PER ETA': misurata, col NULLO accanto
+    c = float(np.corrcoef(x, y)[0, 1])
+    rng = np.random.default_rng(0)
+    nulli = [float(np.corrcoef(x, rp[rng.permutation(J2)])[0, 1]) for _ in range(5)]
+    print("    (4a) ASSORTATIVITA': corr(ramp[i], ramp[j]) sugli archi = %+.4f" % c)
+    print("         NULLO (estremo j rimescolato, 5 ripetizioni)      = %s"
+          % " ".join("%+.4f" % v for v in nulli))
+    print("         -> se la corr e' ALTA e il nullo e' ~0, gli archi sono ASSORTATIVI PER ETA',")
+    print("            ed E' QUELLO che rende il prodotto mediano piu' grande del quadrato della")
+    print("            mediana. Se la corr fosse ~0, la mia spiegazione e' SBAGLIATA e si scrive.")
+
+    # (4b) IL CRITERIO NECESSARIO: gli archi INTERNI alla coorte ORIGINALE
+    ori = (I2 < n0) & (J2 < n0)
+    b_ori = x[ori] * y[ori]
+    b_tot = x * y
+    mat_ori = float(np.mean((et[I2[ori]] >= TA) & (et[J2[ori]] >= TA))) if ori.sum() else np.nan
+    mat_tot = float(np.mean((et[I2] >= TA) & (et[J2] >= TA)))
+    print("    (4b) IL CRITERIO NECESSARIO -- archi INTERNI alla coorte ORIGINALE (nessuna diluizione")
+    print("         da neonati, e nessuna soglia scelta: `ramp` SATURA ESATTAMENTE a eta = TAU_A)")
+    print("         archi interni alla coorte originale : %d su %d (%.2f %%)"
+          % (int(ori.sum()), int(b_tot.size), 100.0 * ori.sum() / max(b_tot.size, 1)))
+    print("         median(base/base_maturo) SU QUELLI  : %.6f      <- DEVE valere 1 per chiudere Z9"
+          % float(np.median(b_ori)) if ori.sum() else "         (nessun arco interno)")
+    print("         median(base/base_maturo) su TUTTI   : %.6f" % float(np.median(b_tot)))
+    print("         frazione di archi MATURI (entrambi gli estremi con eta >= TAU_A):")
+    print("            interni alla coorte originale    : %.6f" % mat_ori)
+    print("            su tutti gli archi               : %.6f" % mat_tot)
+
+    # (4c) LA CONDIZIONE DI REGIME, da dichiarare: quanti passi mancano
+    rc = a.get("_r_corrente", None)
+    if rc is not None:
+        r = np.asarray(rc, float)
+        mob = r / R_FLOOR >= FERMO
+        rm = float(np.median(r[mob]))
+        att = TA / (DT * rm)
+        print("    (4c) LA CONDIZIONE DI REGIME (da dichiarare in OGNI referto che usi questa scena):")
+        print("         r MED dei MOBILI = %.6e   -> passi(ramp=1) = TAU_A/(DT*r) = %.0f" % (rm, att))
+        print("         passi FATTI = %d   -> PASSI MANCANTI = %.0f   (il %.1f %% del cammino e' fatto)"
+              % (f * PPF, att - f * PPF, 100.0 * f * PPF / att))
+print("")
+print("=" * 124)
