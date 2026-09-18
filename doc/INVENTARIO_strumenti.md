@@ -258,3 +258,45 @@ python soliton_simulator.py --batch --nmasse 3 --sep 8 --seed 5 --passi 120 --og
 > **`# RUN_PARAMS`** in testa a ciascun CSV: `tau_a_over` + `leggi_attive.REGIME`.
 > **Il driver dice cosa si INTENDEVA lanciare; il CSV dice cosa E' STATO lanciato.**
 > Vedi `doc/REFERTO_driver_gira.md`.
+
+---
+
+## 2026-09-18 — **la campagna a 1200 passi** (`csv/_test_fork/_g1200/`)
+
+**I `.pkl` NON sono committati** (binari, grandi): **il dato È il comando**, e il sistema è
+deterministico. Ecco tutto ciò che serve a rifarli.
+
+| cosa | valore |
+|---|---|
+| **BLOB del simulatore** | **`a1ae5090`** *(`sha1` dei BYTE GREZZI, non `git hash-object`: C18)* |
+| **HEAD alla partenza** | `fb87640` |
+| **SEME** | quello di default del batch — **letto DAI DATI** nell'intestazione `RUN_PARAMS` di `csv/_test_fork/_g1200/cond.csv` (P6) |
+| **passi** | **1200**, in quattro segmenti `120 → 400 → 800 → 1200` |
+| **durata misurata** | **127.5 s / 100 passi** sul pilota ⟹ **~26 min** totali (`n` piatto) |
+| **script di analisi** | `csv/_test_fork/_struttura_1200.py`, blob **`d3f954e3`** |
+| **data** | 2026-09-18 |
+
+**LA RIGA DI COMANDO, VERBATIM** *(ripetuta con `--passi` 120, 400, 800, 1200; il `.pkl` viene
+COPIATO in `stato_<P>.pkl` dopo ogni segmento, perché `--db-ogni` riscrive sempre lo stesso file)*:
+
+```
+python soliton_simulator.py --batch --nmasse 3 --sep 8 --ogni 10 \
+  --csv csv/_test_fork/_g1200/cond.csv --diaglog csv/_test_fork/_g1200/diag.csv \
+  --campo-spinoriale --spinore-vivo --spinore-corretto --chi-core \
+  --calore-scal --deparam-orologio --verlet --fork-su2 --fork-su2-mem \
+  --cs-dinamico --tau-luce --rumore-colorato \
+  --pav-com --guscio-morbido --zeta-vir --chi-basc --plast-din --viriale --olon-part \
+  --sync-db csv/_test_fork/_g1200/stato.pkl --db-ogni 10 --passi <P>
+```
+
+**⚠ DUE AVVERTENZE CHE VANNO CON IL DATO, NON DOPO:**
+1. **`--tau-luce` ha il SIGILLO FALLITO** (`doc/SIGILLO_tau_luce_FALLITO.md`, CLAUDE.md par.0): è
+   **un ramo esplicitamente NON CERTIFICATO**, ed è la ragione per cui il gate resta a `c0803713`.
+2. **`--chi-basc` RISCRIVE `perc_chi` in blocco a ogni passo** (`:3486`): in questo run `perc_chi`
+   **non è un'etichetta di lignaggio**, ed è una configurazione **diversa** da quella di `Z45`.
+
+**⚠ E UN LIMITE DEL `.pkl` STESSO, trovato leggendo `salva_stato` (`:2862-2866`):** salva solo
+`ndarray/int/float/bool/str`, quindi **`conc_nodi` e `masse_info` — il tracking delle masse — NON ci
+sono.** Le coorti vanno ricostruite **dalla posizione**, e l'analisi lo dichiara.
+
+**`--db` NON ESISTE come flag:** è ambiguo con `--db-cleanup`/`--db-ogni`. **Il flag è `--sync-db`.**
