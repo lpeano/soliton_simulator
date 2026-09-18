@@ -39,7 +39,7 @@ import numpy as np
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 os.chdir(ROOT)
-D = os.path.join("csv", "_test_fork", "_gvideo")
+D = sys.argv[1] if len(sys.argv) > 1 else os.path.join("csv", "_test_fork", "_gvideo")
 PPF = 6
 NB = 30
 R_FLOOR = 1e-6 / (1.0 / np.sqrt(2.0) + 1e-6)
