@@ -573,3 +573,59 @@ lettura COMOVENTE, che e' la meno generosa.**
 **FALSIFICATORE 3: NON scatta alla lettera** — `rho_spin` si accende anche a due masse (`x5512`).
 
 **UN SEME PER BRACCIO: nessuna barra d'errore. -> `doc/REFERTO_due_masse.md`, `Z52`.**
+
+---
+
+## 2026-09-18 — **`Z9` per COORTE ANAGRAFICA** · blob `b9e07c73` · HEAD `efd7a34`
+
+**Task history con la derivazione:** `efd7a34` · **committate PRIMA di aprire i `.pkl`.**
+**Sono previsioni MIE, non di Luca**, e servono a rendere falsificabile quello che sto per misurare.
+
+### ⚠ La previsione che NON conta, e va marcata come tale
+
+**`d(eta)/d(passo) = DT·r` e `passi(ramp=1) = 5000/r` NON sono previsioni: sono LETTE dal codice**
+(`:3236`, `:3038`, `:2649`). **Prevederle sarebbe barare.**
+**Quello che PREVEDO è che la misura le CONFERMI** — e se non lo fa, **la derivazione è sbagliata e
+mi fermo** (è il falsificatore §2.5 del task history).
+
+### ① La maturazione per coorte — **cosa mi aspetto**
+
+1. **NESSUNA coorte arriva a `ramp > 0.9`**, e credo **nemmeno a `ramp > 0.5`**, a nessun istante.
+   *Ragione: `5000/r` passi contro i `2400` della scena. Anche con `r = 1` servirebbe il doppio.*
+2. **La coorte più VECCHIA avrà il `ramp` più alto** a ogni istante — è quasi una tautologia
+   (`eta` è monotona non decrescente e i neonati partono da 0), **e serve da CONTROLLO DI SANITÀ:
+   se NON è così, ho sbagliato l'assegnazione delle coorti.**
+3. **⚠ MA credo che la coorte più vecchia NON sarà la più matura per MEDIANA**, perché
+   **contiene le tre masse ferme di `Z46`**. **Mi aspetto la coorte originale BIMODALE**, con `p95`
+   alto e `mediana` bassa, **e le coorti giovani più strette.**
+   **Se la coorte originale fosse UNIMODALE e alta, la previsione 3 è sbagliata** — e sarebbe il
+   risultato più interessante del giro.
+
+### ② Il tasso per regime di moto
+
+4. **Due popolazioni separate da ordini di grandezza, non da un fattore.** Mi aspetto i FERMI a
+   `d(eta)/d(passo) ~ 1.4e-08` e i MOBILI a `~1e-02`: **circa sette ordini.**
+5. **⚠ E QUI UNA PREVISIONE CHE PUÒ CADERE:** nel batch a 1200 passi il `93 %` era fermo. **Prevedo
+   che nella scena VIDEO la frazione di fermi sia MOLTO PIÙ BASSA**, perché `Z49` ha misurato
+   `r` interna `1.08 → 1.39` e `Z52` lo ha confermato su due bracci. **Se invece fosse ~93 % anche
+   qui, allora `Z46` non era una proprietà di quel batch ma del sistema, e va scritto.**
+
+### ③ Le conseguenze sul kernel
+
+6. **`ramp[i]·ramp[j]` sarà PIÙ PICCOLO del quadrato del `ramp` tipico**, perché **il prodotto pesa
+   il MINORE dei due** e gli archi connettono coorti diverse. **Quanto più piccolo, non lo so.**
+7. **Prevedo `base/base_maturo` sotto `0.01` per la stragrande maggioranza degli archi** — cioè
+   **il kernel sta girando a meno dell'1 % del suo valore maturo.**
+8. **⚠ E la domanda «diverso o solo più forte» credo di NON poterla decidere senza un run.**
+   **Lo scrivo PRIMA**, così se alla fine dico «non risposto» non sembra una ritirata: è la
+   previsione. *(Il mandato §0④ dice esattamente di dirlo invece di inventare un sostituto.)*
+
+### ④ Il criterio nuovo
+
+9. **Qualunque criterio derivato dirà NON SODDISFATTO su queste scene.** **Se dicesse
+   SODDISFATTO, il criterio è sbagliato** — perché un kernel all'1 % del suo valore maturo non può
+   essere dichiarato maturo. **È il modo in cui il criterio può fallire, e va scritto prima.**
+
+**LIMITI GIÀ NOTI E DICHIARATI:** **un seme per scena**, **`--tau-luce` col SIGILLO FALLITO**,
+**`--chi-basc` attivo**, **sei istanti**, **coorte ANAGRAFICA e non per massa** *(il tracking non è
+nei `.pkl`: `Z53`)*. **Nessuna identificazione di fisica, nessun verdetto.**
