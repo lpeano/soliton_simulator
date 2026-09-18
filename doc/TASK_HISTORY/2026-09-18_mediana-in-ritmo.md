@@ -101,10 +101,42 @@ due cablaggi sono già stati fermati da una verifica preliminare — **entrambe 
 
 ## 3. TODO DEL NEXT STEP
 
-- [ ] **2.1** — cos'è `f`: origine, dimensione, per-nodo, distribuzione
-- [ ] **2.2** — normalizzazione o gauge? **tre prove indipendenti** (dimensionale, strutturale, di
+- [x] **2.1** — cos'è `f`: origine, dimensione, per-nodo, distribuzione
+- [x] **2.2** — normalizzazione o gauge? **tre prove indipendenti** (dimensionale, strutturale, di
       consumo)
-- [ ] **2.3** — chi dipende da `median(r) = r(1)`: enumerare i consumatori dal sorgente
-- [ ] **2.4** — `median(|f|)` evolve nel tempo?
-- [ ] **STOP e riporta** col verdetto contro le **quattro** letture
+- [x] **2.3** — chi dipende da `median(r) = r(1)`: enumerare i consumatori dal sorgente
+- [x] **2.4** — `median(|f|)` evolve nel tempo?
+- [x] **STOP e riporta** col verdetto contro le **quattro** letture
 - [ ] **⚠ NON toccare:** `ramp`, `TAU_A`, il `+1e-6` di `ritmo()`. **Nessun cablaggio.**
+
+---
+
+## 4. ESITO — *cosa il ragionamento preliminare aveva preso, e cosa no*
+
+**PRESO, ed è stato il contributo principale:** **la quarta lettura.** Avevo scritto, prima di
+misurare, che *«le due cose possono essere entrambe vere, e allora la 2.2 è mal posta come
+alternativa secca»*. **È esattamente così**, e averlo dichiarato prima ha evitato che sembrasse una
+scappatoia trovata dopo.
+
+**PRESO anche:** l'argomento dimensionale (`f` ha unità `1/T` → la divisione **serve**), e il ramo
+`TEMPO_SEGNO` senza mediana, trovato leggendo la funzione invece di fermarsi alla riga citata.
+
+**NON PRESO — ed è un errore di configurazione, il secondo di questa classe:** la sonda ha misurato
+il **ramo scalare 2π**, `126/126`, perché non avevo acceso `CAMPO_SPINORIALE`. **Le campagne usano
+il 4π.** Stessa classe di `--cs-dinamico` spento. **E cambiava i numeri**: gli zeri passano da
+`11.1 %` a `3.2 %`, e la scala di `f` da `3.04` a `0.0280` — **un fattore 100**.
+**Nel task history avevo elencato cosa non sapevo, ma non avevo messo «con quale configurazione
+misuro»** — e quella è la domanda che viene prima di tutte.
+
+**NON PREVISTO AFFATTO:** il **gauge degenere 1 passo su 31**. Non lo cercavo, non è in nessuna voce
+del registro, ed è **indipendente dall'ancoraggio** che era l'oggetto del giro.
+
+## 5. TODO DEL PROSSIMO PASSO
+
+- [ ] **decisione di Luca:** `Z9` non si cura da `ritmo()` senza scegliere un **gauge nuovo** (A4).
+      **Confermare la chiusura di quella strada**, o aprire la decisione sul gauge.
+- [ ] **`Z34` da aprire?** il **gauge degenere** (`median(|f|) = 0` nel 3.2 % dei passi, `r` binario,
+      pavimento `1e-9` che diventa il parametro fisico) — **difetto nuovo, mai registrato**
+- [ ] **presidio da considerare:** ogni sonda dovrebbe **stampare la configurazione** come fa
+      `_rimisura_Z9.py` dal passo 0. **Due errori di questa classe in due giri.**
+- [ ] **⚠ NON toccare:** `ramp`, `TAU_A`, il `+1e-6`, `Z31`, il punto 1 di `Z24`

@@ -1,0 +1,47 @@
+[TIMBRO] _mediana_ritmo.py  sha1-BYTE d8f5c054  committato e pulito
+======================================================================================================================
+LA MEDIANA IN ritmo(): normalizzazione o GAUGE?   [120 passi, seme 5]
+======================================================================================================================
+  config: SPINORE_VIVO=True  SPIN_FEEDBACK=True  CAMPO_SPINORIALE=True  TEMPO_SEGNO=False  TAU_LOC=1.0
+  TEMPO_PROPRIO_ORIENTATO=False  -> f = |signed|
+
+  invocazioni di ritmo() : 126   di cui con `f` ricostruibile : 126
+  per RAMO: spinoriale 4pi=124, scalare 2pi=2
+
+--- (2.1) CHE COS'E' `f`: la SCALA, e come si muove ---
+  dal sorgente: `signed = Delta_angolo / DT`  ->  DIMENSIONE 1/T (una FREQUENZA), PER NODO.
+  quindi `x = f/med` e' ADIMENSIONALE, e la divisione SERVE a quello.
+
+  invoc.   n         median|f|     p05|f|        p95|f|        max|f|       
+  0        80        0             0             0             0            
+  31       443       0.029111      0.0025411     0.31658       1.2347       
+  63       443       0.021439      0.0023887     0.30623       0.94279      
+  94       444       0.040041      0.0034841     0.49253       3.0751       
+  125      444       0.06497       0.0055571     0.72919       2.8457       
+
+--- (2.4) `median(|f|)` EVOLVE nel tempo, o e' anch'essa pinnata? ---
+  ⚠ invocazioni con median(|f|) ESATTAMENTE ZERO : 4 su 126  (3.2 %)
+     quando accade, `med` cade sul PAVIMENTO 1e-9 e `x = f/1e-9` ESPLODE per i nodi non nulli:
+     r satura a sqrt(2) per quelli, e vale 1.414e-06 per gli altri. IL GAUGE E' DEGENERE LI'.
+  su quelle NON nulle (122): min 0.000947466   max 0.108337   mediana 0.0280272
+     escursione: 2.06 ORDINI di grandezza
+  per QUARTI del run (mediana delle mediane, zeri inclusi): 0.025365  0.020116  0.02276  0.035773
+
+  COME SI LEGGE: se `median(|f|)` si muove di ORDINI DI GRANDEZZA, allora `x` e' rapportato a una
+  scala che EVOLVE, e la normalizzazione non e' un ancoraggio statico: il difetto e' PARZIALE.
+  Se invece e' quasi costante, la scala e' di fatto una COSTANTE mascherata da statistica.
+
+--- L'ANCORAGGIO e cio' che RESTA LIBERO ---
+  median(r) : mediana 1.000000000   (r_unit e' fisso: la mediana di r e' pinnata -- C12)
+  DISPERSIONE di r (p95-p05) : min 0   max 1.34592   mediana 1.26698
+  IQR di r                   : min 0   max 0.920979   mediana 0.684491
+  NB: la MEDIANA di r vale 1.0 per identita', quindi una dispersione di ~1 significa che r
+      spazia su un intervallo LARGO QUANTO IL SUO PROPRIO VALORE CENTRALE.
+  per QUARTI (p95-p05): 1.2162  1.2671  1.2599  1.3022
+
+  ⚠ QUESTA E' LA DOMANDA CHE CONTA DAVVERO: la MEDIANA e' pinnata per identita', ma lo SPREAD no.
+  Se lo spread CRESCE, il sistema differenzia i tempi propri anche con la mediana ancorata, e il
+  difetto e' di AMPIEZZA, non di esistenza. Se lo spread e' PIATTO, il tempo proprio e' quasi
+  uniforme e l'ancoraggio e' l'intera storia.
+
+======================================================================================================================

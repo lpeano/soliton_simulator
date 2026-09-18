@@ -4882,3 +4882,77 @@ il confronto col valore della rimisura precedente. **Annotato come da verificare
 
 Un seme, 120 passi. **Le due scene non si mescolano** e danno `5680` contro `6049` (**+6.5 %**):
 è la differenza di metodo già registrata.
+
+---
+
+## 9.47 — **La mediana in `ritmo()` è ENTRAMBE: normalizzazione *e* gauge. `Z9` non si cura da lì (A4). E il gauge è DEGENERE un passo su 31**
+
+**Data:** 2026-09-18 · blob `72acd6aa` · un seme (5), 120 passi · **nessun cablaggio**
+**Task history scritto e pushato PRIMA:** `bb058c0` · `csv/_test_fork/_mediana_ritmo.py`
+
+### La domanda era: normalizzazione o gauge? — **tre prove, due risposte**
+
+| prova | esito |
+|---|---|
+| **(a) dimensionale** | `f = |Δangolo/DT|` ha dimensione **`1/T`** → la divisione **serve** all'adimensionalità, **non è eliminabile** → **normalizzazione** |
+| **(b) strutturale** | il ritorno è `1 + TAU_LOC·(r/r_unit − 1)`, **una deviazione da un riferimento**; e il docstring dice testualmente *«ancorata alla mediana globale come **gauge**»* → **gauge** |
+| **(c) di consumo** | `r` **non è mai** usato come rapporto fra nodi: `dt_n = DT·r`, `eta += dt_n`, `alpha = 1−exp(−dt_n/tau)`, `delta_phivel` — **tutti usi in valore assoluto**, e **nessuna soglia** usa `r` direttamente → **il gauge conta** |
+
+> **È ENTRAMBE.** La quarta lettura, quella che avevo aggiunto al mandato **prima** di misurare:
+> *«una normalizzazione che si è portata dietro un gauge»*. **La domanda come alternativa secca era
+> mal posta.**
+
+### Conseguenza — **`Z9` non si cura da `ritmo()`**
+
+`dt_n`/`dt_e` alimentano `eta` (cioè `Z9` stessa), `alpha` dello Strato 1, `delta_phivel`, `_rep`,
+il termostato. **Cambiare `r_unit` riscala TUTTI i tempi propri locali.** Toglierla rompe
+l'adimensionalità; sostituirla **cambia l'unità di misura del tempo**. **È A4, e va deciso come
+tale — non come una bonifica.**
+
+*(Se si volesse farlo: serve una scala **locale, derivata, di dimensione `1/T`**. Candidato `cs/d`,
+l'inverso del tempo-luce del nodo. **Riportato, non proposto:** sceglierlo **è** scegliere un gauge.
+E l'architettura lo ammette già — il ramo `TEMPO_SEGNO` a `:2027` ritorna `1 + (twn/deg)/PHI_CRIT`,
+locale e normalizzato da una costante derivata: **è il pattern di `cs_floor`/`Lam`**, anche se è una
+legge diversa.)*
+
+### `2.4` — **la terza lettura non si applica al ramo vero**
+
+`median(|f|)` per quarti, **ramo 4π (quello delle campagne)**: **0.0254 → 0.0201 → 0.0228 → 0.0358**
+— **×1.4 in 120 passi, quasi piatta.** È il caso che avevo scritto come **peggiore**: *«una costante
+mascherata da statistica»*. *(Sul ramo scalare 2π variava ×8.4 — ma quel ramo nessuno lo gira.)*
+
+### ⚠ Il reperto che non cercavo — **il gauge è degenere 1 passo su 31**
+
+```
+median(|f|) ESATTAMENTE ZERO : 4 invocazioni su 126  (3.2 %)   [ramo 4π]
+```
+
+**Accade anche a `n = 451`**: più della metà dei nodi ha variazione di fase **esattamente nulla** in
+quel passo. Allora `med` cade sul **pavimento `1e-9`**, `x` esplode, e **`r` diventa BINARIO** — `√2`
+per i non nulli, `1.414e-06` per gli altri.
+
+> **Il pavimento, messo come protezione, diventa il parametro fisico.** Stessa famiglia del `1e-6`
+> sull'inerzia e del `0.05` su `_tau`. **Difetto indipendente dall'ancoraggio, mai registrato.**
+
+### E ciò che resta libero — **lo spread è grande, ma piatto**
+
+`median(r) = 1.000000000` per identità. Ma la **dispersione `p95−p05` vale `1.267`** su una mediana
+di `1.0`: **`r` spazia su un intervallo largo quanto il suo stesso valore centrale** — e **non
+cresce** (per quarti `1.216 → 1.302`).
+
+> **È il CENTRO a essere fisso, non la fisica.** L'ancoraggio toglie che il *nodo tipico* acceleri
+> **rispetto a sé stesso**, non la differenza **fra** nodi.
+
+### ⚠ E un errore mio, il secondo di questa classe in due giri
+
+**La sonda ha misurato il ramo sbagliato:** `CAMPO_SPINORIALE = False`, **126/126 invocazioni sul
+ramo scalare 2π** — una configurazione che **le campagne non usano**. Stessa classe di
+`--cs-dinamico` spento (`doc/REPERTO_cs_dinamico_spento.md`).
+
+**E cambiava i numeri:** gli zeri da `11.1 %` a `3.2 %`, la scala di `f` da `3.04` a `0.0280` — **un
+fattore 100**. Rifatta sul ramo vero; il ramo 2π resta in
+`csv/_test_fork/_mediana_ritmo_ramo2pi.txt` perché **il confronto fra i due è informativo**.
+
+**Nel task history avevo elencato cosa non sapevo, ma non avevo messo «con quale configurazione
+misuro»** — ed è la domanda che viene prima di tutte. **`_rimisura_Z9.py` lo stampa dal passo 0:
+andrebbe fatto ovunque.**
