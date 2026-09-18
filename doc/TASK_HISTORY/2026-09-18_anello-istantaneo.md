@@ -140,10 +140,51 @@ array, non tocco `+1e-6` / `max(...,1e-9)` / `x/sqrt(1+x²)` / `TAU_LOC`, e **ne
 
 ## 3. TODO DEL NEXT STEP
 
-- [ ] **§1 A/B/C/D** — la misura preliminare → **riporta**
-- [ ] previsioni qualitative → commit
-- [ ] **§2** — la cura: `ritmo()` legge `_med_f_prec` e registra `_med_f_ultimo`; `step()` promuove
+- [x] **§1 A/B/C/D** — la misura preliminare → **riporta**
+- [x] previsioni qualitative → commit
+- [x] **§2** — la cura: `ritmo()` legge `_med_f_prec` e registra `_med_f_ultimo`; `step()` promuove
       a `:3129-3131`; contatori; fallback `np.ones(n)` contato
-- [ ] **§3** — `P0-P10`, con `P1`, `P3`, `P6`, `P7` decisivi
-- [ ] registro + relazione + **CHECKPOINT**
-- [ ] **⚠ NON toccare:** il riferimento, `+1e-6`, `max(...,1e-9)`, `x/sqrt(1+x²)`, `TAU_LOC`
+- [x] **§3** — `P0-P10`, con `P1`, `P3`, `P6`, `P7` decisivi
+- [x] registro + relazione + **CHECKPOINT**
+- [x] **⚠ NON toccato:** il riferimento, `+1e-6`, `max(...,1e-9)`, `x/sqrt(1+x²)`, `TAU_LOC`
+
+---
+
+## 4. ESITO
+
+**PRESO, ed erano tre correzioni al mandato, tutte dal disco:**
+1. **il blocco di snapshot non è a `:2944-2947`** (è un docstring) **ma a `:3116-3121`** — e la
+   distinzione contava: gli snapshot **consumati** da `ritmo()` si promuovono a **`:3129-3131`**,
+   cioè **dopo**;
+2. **il mandato citava `Z33` col segno rovesciato**, e l'avevo misurato io (`680d069`);
+3. **`ritmo()` ha TRE call-site, due diagnostici** — **nessuno l'aveva nominato, e ha DECISO il
+   progetto**: `ritmo()` legge, `step()` promuove.
+
+**PRESO, e ha cambiato la cura:** la previsione che **`Z33` si sarebbe ROVESCIATA** invece di
+sparire. **Il rapporto `med_t/med_{t-1}` ha `max = 4.81e+07`, ed è esattamente il passo dopo un
+gauge degenere.** **Da lì è nato il presidio «non si promuove un `med` sul pavimento», che non era
+nel mandato — e ha sparato 2 volte su 2.**
+
+**PRESO, §1.6 e previsione 5:** il metro sarebbe rimasto ballerino. **Confermato più forte della
+stima** (`0.326 / 2.997` contro `0.53 / 2.10` previsti) → **`Z43`**.
+
+**NON PRESO, ed è un errore mio nel SIGILLO:** estraevo il blob di riferimento con **`HEAD:`** invece
+che per SHA. `HEAD` era già il commit della cura: **ho confrontato il codice curato con sé stesso**,
+e `P2` ha dato **`max|A-B| = 0.000e+00` con shape UGUALI** — la trappola già catalogata **col segno
+rovesciato**. **Committato il fallimento PRIMA di aggiustare** (par.5, `c818208`).
+**È un difetto di STRUTTURA:** un riferimento ancorato a `HEAD` si sposta col lavoro.
+
+**E UNA SVISTA DI PROCESSO, la quarta volta:** ho usato `git commit -m` con dei backtick nel
+messaggio, e la shell ne ha eseguito uno (`b98c5d1` ha perso la parola «`f`» in una riga; i numeri
+sono intatti). **La regola «si usa `git commit -F` con un file scritto a parte» esiste già — ed è un
+caso di A9: una nota che non impedisce il ripetersi non è un presidio.** Da qui in avanti **`-F`
+sempre**, senza eccezioni per i messaggi corti.
+
+## 5. TODO DEL PROSSIMO PASSO
+
+- [ ] **`Z43` — DECIDE LUCA:** un gauge che oscilla del **62 % fra passi** è il metro che vogliamo?
+      Le strade assolute sono chiuse (`Z41`), la cucitura pure (`Z37`): **resta `f = Δangle/dt_n`**
+- [ ] **`Z9` su ≥ 4 semi:** `P8` su un seme non è interpretabile (previsione 6)
+- [ ] **il gate:** il blob certificato è ancora `c0803713` e resta indietro (par.0); `a1ae5090`
+      porta una cura **sigillata 10/10**, ma il gate si timbra **dopo** il rigiro completo
+- [ ] **⚠ NON toccato:** il riferimento, `+1e-6`, `max(...,1e-9)`, `x/sqrt(1+x^2)`, `TAU_LOC`, `r_unit`

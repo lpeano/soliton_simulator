@@ -5522,3 +5522,100 @@ cifre per passo.)*
    NOTA**, non per distrazione.
 
 **Non ho un criterio, scritto prima, che scelga fra le due.** → **`Z41`.**
+
+---
+
+## 9.54 — **L'anello istantaneo di `ritmo()` è rotto: `10/10`. E il metro resta ballerino**
+
+**Data:** 2026-09-18 · blob **`f8f46683` → `a1ae5090`** *(sha1 dei BYTE GREZZI, non `git hash-object`)*
+**Task history pushato PRIMA:** `fd198ba` · **Previsioni pushate PRIMA della cura:** `631ff15`
+**Cura:** `c6630fc` · **FAIL del sigillo committato:** `c818208` · **`10/10`:** `b98c5d1`
+**Referto:** `doc/REFERTO_anello_istantaneo.md` · **Categoria D: nessun flag.**
+
+### Il difetto era ESATTO, non approssimato
+
+```python
+med = max(float(np.median(np.abs(f))), 1e-9)     # calcolato DA f
+x   = f / med                                     # e usato SU f
+```
+
+**A6** (`f` e `r` si determinavano a vicenda dentro il passo) e **A3** (`median(x) = 1` per identità)
+**nella stessa riga**.
+
+```
+PRIMA  max|median(x) - 1| = 0.000e+00   su 122 passi
+DOPO   p05 0.3260   mediana 0.9759   p95 2.9968   max|med-1| = 12.493
+```
+
+> **Non era «quasi» un punto fisso: lo era A MACCHINA.**
+
+### La cura non cambia il gauge — cambia QUANDO lo si legge
+
+**⚠ E il presidio che regge tutto nessuno l'aveva nominato: `ritmo()` ha TRE call-site, e DUE sono
+DIAGNOSTICI** (`:3124` la fisica, `:6263` `_diag_completa`, `:6921`). **Se lo snapshot avanzasse
+dentro `ritmo()`, ogni chiamata diagnostica farebbe avanzare lo stato fisico** — par.2.3 violato, e
+**sarebbe il QUINTO difetto di questa famiglia**.
+
+| chi | cosa fa |
+|---|---|
+| `ritmo()` | **LEGGE** `_med_f_prec` *(mai lo scrive)* e **REGISTRA** `_med_f_ultimo` |
+| `step()` `:3129-3131` | **PROMUOVE**, accanto a `_psi_prec` e `_psi_spin_prec` |
+
+**La contaminazione è chiusa PER COSTRUZIONE:** `step()` chiama `ritmo()` **prima** di promuovere,
+quindi il valore promosso è **sempre** quello della chiamata fisica.
+
+**⚠ E il mandato citava `Z33` col segno rovesciato:** diceva *«`Z33` è nata dall'aggiornamento DOPO
+il consumo»*; **`680d069` ha misurato il contrario** — promuovere **dopo** è ciò che **fa valere
+A6**. **Il pattern di `:3129-3131` è quello da SEGUIRE.**
+
+**Uno SCALARE, non l'array: A8b chiusa per costruzione** — `med` non ha lunghezza, quindi
+l'estensione a mitosi/`semina`/`nuova_massa` **non serve**. È esattamente ciò che mancò a
+`_cs_nodo_prev` (**71.88 %**) e `_psi_spin_prec` (**95.33 %**).
+
+**⚠ E un presidio che la MISURA ha imposto:** `1e-9` **non è una misura, è la protezione da
+divisione per zero**, e promuoverlo renderebbe **la regolarizzazione il gauge del passo dopo**.
+Misurato **prima**: `med_t/med_{t-1}` ha `max = 4.81e+07`, **esattamente il passo che segue un gauge
+degenere**. **Senza quel ramo `Z33` non sarebbe sparita: si sarebbe ROVESCIATA**, da «tutti sul
+pavimento» a «tutti in saturazione». **Misurato dopo: sul pavimento 2, non promosso 2 — 2 su 2.**
+
+### Il sigillo — `10/10`, e `P1` è una byte-identità VERA
+
+`P1`: **`n: 444 CONTRO 444`**, 7 array su 7 con **shape uguali**, `max|A-B| = 0.000e+00`.
+**Non è «nessun confronto»: la riga delle shape lo dimostra** — **e valida anche il wrapper del
+sigillo: se avessi ricostruito `f` male, `P1` sarebbe fallito.**
+`P7`: **il tetto non si è spostato** (`1.4142130` contro `1.41419`).
+
+### ⚠ Il sigillo è FALLITO al primo giro, per un difetto MIO — committato prima di aggiustare
+
+`c818208`: **P0, P1, P2 FAIL.** Estraevo il blob di riferimento con
+`git cat-file -p HEAD:soliton_simulator.py`, **ma `HEAD` era già il commit della cura**: **ho
+confrontato il codice curato con sé stesso**, e `P2` dava **`max|A-B| = 0.000e+00` con SHAPE
+UGUALI** — **la trappola già catalogata, col segno ROVESCIATO** *(là lo zero era mancanza di
+confronto, qui identità perfetta per la ragione sbagliata)*.
+**La riga delle shape, stampata per prima, l'ha reso leggibile subito: `n: 459 contro 459`.**
+**È un difetto di STRUTTURA:** un riferimento ancorato a `HEAD` **si sposta col lavoro** — la stessa
+ragione per cui il gate è ancorato al **BLOB** (par.2.6).
+
+### ⚠ IL FRONTE NUOVO — `Z43`: il metro resta ballerino
+
+Previsto **prima di misurare** (`fd198ba` §1.6) e **prima di cablare** (previsione 5, `631ff15`), e
+**confermato più forte della stima**: avevo previsto `p05 ≈ 0.53 / p95 ≈ 2.10`; misurato sul codice
+curato **`0.326 / 2.997`** — **un fattore ~9.**
+
+> **L'anello è rotto, ma la dispersione del gauge (`62 %` fra passi) NON viene più divisa via: passa
+> dentro `r`.** E si vede nel codominio: **il pavimento `1.414e-06` ORA SI TOCCA** (prima
+> `min 1.293e-04`), mentre **il tetto resta fermo**.
+
+**Non è un'obiezione alla cura** — A6 non è negoziabile, e **un punto fisso esatto è peggio di un
+metro mobile** — **ma è la stessa domanda di `Z36`, spostata di un livello:** *un gauge che oscilla
+del 62 % fra passi è il metro che vogliamo?*
+**E le strade note sono già chiuse:** un riferimento assoluto non è cablabile (`Z41`) e la cucitura
+toglie il 98 % del segnale (`Z37`). **Resta la via che `Z41` ha nominato e che Luca non ha deciso:
+`f = Δangle/dt_n`.**
+
+### I limiti
+
+Un seme, 120 passi, una scena. **`P8` non dimostra nulla su `Z9`**: `ramp` **0.0002 / 0.00981 /
+0.01962** con `TAU_A = 50`, **riportato e NON confrontato** con `0.0002/0.0102/0.0212`, che sono di
+un'altra scena (A3c); e la previsione 6 diceva di aspettarsi uno scarto **dentro la dispersione fra
+semi (~3 %)**, quindi **non interpretabile su un seme**.
