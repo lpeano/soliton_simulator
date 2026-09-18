@@ -437,6 +437,13 @@ COMPLEMENTARE (fornisce stati di nodo variati da trasportare), non sostitutiva.
 (dove/come, formule, flag, sigilli) · `doc/ROADMAP_fork_SU2.md` (in-che-ordine) ·
 `doc/PROTOCOLLO_test_olonomia.md` (come misurare W(r)) · `doc/SYSTASIS_nota_concettuale.md`
 (il concetto). Leggili PRIMA di lavorare sul fork (vedi par.0-bis).
+**E IL TERMINE DI PARAGONE: `doc/ASSIOMI.md`** — **DIECI voci** (A1-A10, piu' i corollari
+A3b/A3c/A7b/A8b), aggiornato il 2026-09-18 con **A9** (*un presidio che non impedisce non e' un
+presidio*) e **A10** (*una sola grandezza puo' legare due domini*). **Era gia' citato nel par.0-bis
+di ogni mandato e NON era in questa lista: un documento che si deve leggere e che non compare fra i
+riferimenti e' esattamente il difetto che A9 descrive.** **Tre voci su dieci sono METODOLOGICHE**
+(A8, A9, e il corollario A3c) **e una e' un TEOREMA** (A6): la distinzione e' dichiarata nella
+sezione `APERTO` del documento, e **va tenuta**.
 **E i TRE REGISTRI, che sono STATO e non cronaca:** `doc/RAMIFICAZIONI.md` (i fronti aperti, par.5-quater) ·
 `doc/COMPONENTI_PROMOSSE.md` (cosa e' fisica e cosa e' opzione, par.10) ·
 **`doc/INVENTARIO_strumenti.md`** (QUALE script produce QUALE numero, **col blob di ogni script**:

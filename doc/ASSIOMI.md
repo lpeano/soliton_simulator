@@ -62,6 +62,20 @@ CONFRONTO, e producono diagnosi sbagliate con numeri giusti.**
 valori tipici congela cio' che dovrebbe proteggere (`1e-6` sull'inerzia: **99.7 %**). **Un ramo di
 fallback che scatta quasi sempre non e' un fallback: e' il comportamento principale.**
 
+*I CASI MISURATI, ognuno col suo numero* — **senza la tabella un assioma torna a essere
+un'opinione**, ed e' la ragione per cui **A8** ne ha trovati di piu': porta i suoi numeri.
+
+| caso | il numero | che cosa e' andato storto |
+|---|---|---|
+| `rho_arco / median(I_nodi)` | **8830**, non 1 | grandezza per **ARCO** su statistica per **NODO**: gli archi sovracampionano il denso |
+| media-di-mediane contro popolazione unita | **19** contro **4089** | la media delle mediane per seme **non e'** la mediana della popolazione |
+| **A3c** — un RAPPORTO confrontato con un MASSIMO | (115, accanto a due massimi di **passi diversi**) | grandezze **non commensurabili**, stampate come se fossero un quoziente |
+| l'estensivita' confusa con l'eta' | — | grado ed `eta` **correlati per costruzione**: il confronto non poteva dire niente |
+| **la mediana in `ritmo()`** | **`median(x) = 1` per IDENTITA'** | **il gauge del TEMPO e' pinnato**: il nodo tipico non puo' muoversi, e su di lui non si misura nulla |
+
+> **L'ultimo caso e' il piu' grave dei cinque, perche' non produce un numero sbagliato: produce un
+> numero GIUSTO che non significa niente.** *(Voci `Z9`, `Z38` del registro.)*
+
 ## A4 — STRATIFICAZIONE CAUSALE
 **Cio' che DEFINISCE la struttura causale non puo' evolvere DENTRO di essa**: avanza nel tempo di
 **coordinata** (il contatore di stati), non in tempo proprio.
@@ -187,6 +201,99 @@ fallback.**
 > sovrascrivono a vicenda**: si citano entrambi, con la loro provenienza. *(§9, presidio: una soglia
 > su un sistema che cresce va dichiarata con l'istante in cui si misura.)*
 
+## A9 — UN PRESIDIO CHE NON IMPEDISCE NON E' UN PRESIDIO
+
+**Una nota, un commento o una regola scritta che non impedisce STRUTTURALMENTE il ripetersi di un
+difetto non e' un presidio: e' una TESTIMONIANZA.**
+
+*Il criterio e' secco:* **se il difetto si e' ripetuto DOPO che la nota esisteva, la nota ha
+fallito.** Va sostituita da un **meccanismo** — non rafforzata, non ripetuta piu' in grande, non
+spostata piu' in alto nel documento.
+
+*Perche':* una regola che dipende dal fatto che qualcuno la ricordi, al momento giusto, sotto
+pressione, **non e' una regola: e' una speranza.** E chi la violera' non sara' distratto: **sara'
+impegnato.**
+
+*LA SOGLIA OPERATIVA:* **alla TERZA occorrenza dello stesso difetto si smette di scrivere e si cerca
+il meccanismo che lo rende IMPOSSIBILE** — un controllo automatico, un default che non si puo'
+sbagliare, un tipo che non compila, un test che fallisce.
+
+| caso | la regola esisteva? | quante volte si e' ripetuto |
+|---|---|---|
+| encoding cp1252 nei sigilli | si', *«ASCII PURO (tre script gia' morti)»* | **SEI** |
+| `par.5-quinquies` (il codice di una misura dev'essere recuperabile) | si', scritta | violata, e **il riavvio l'ha dimostrato** |
+| `:2959` *«non ricalcolare psi in punti diversi del passo»* | si', **nel codice** | **~20 chiamanti** |
+
+**⚠ E vale sul documento stesso:** *un termine di paragone disallineato non protegge.*
+
+> **A9 E' L'UNICO ASSIOMA CHE HA GIA' FALSIFICATO SE STESSO, e per questo e' il piu' solido:** la
+> **settima** occorrenza dell'encoding colpi' **lo script che stava CONTANDO le sei precedenti.**
+> **Una nota che non impedisce il ripetersi non e' un presidio — e la prova e' che ha ucciso il suo
+> stesso contatore.**
+
+**⚠ E A9 SI APPLICA A SE STESSO:** finche' resta **una riga in un documento**, **A9 e' una
+violazione di A9**. *(Per il suo caso capofila il meccanismo esiste gia': `csv/_presidio.py`
+— `avvia(__file__)` forza utf-8, timbra lo script con git, e **rifiuta di girare** se lo script non
+e' committato e pulito. E' un MECCANISMO, non una nota.)*
+
+**⚠ DICHIARAZIONE ONESTA — la soglia «alla TERZA» e' SCELTA, non derivata.** Non discende da nulla:
+e' il punto in cui, su questo repo, ripetere ha smesso di funzionare. **Nessun caso misurato la
+giustifica come numero**; i tre della tabella la superano tutti. **Va detto, altrimenti A9 diventa
+esso stesso un numero scelto — cioe' una violazione di A1.**
+
+## A10 — UNA SOLA GRANDEZZA PUO' LEGARE DUE DOMINI
+
+**Dove due domini devono parlarsi — materia e geometria, geometria e tempo — il PONTE dev'essere
+UNO SOLO, e le leggi che li collegano devono passare tutte da li'.**
+**Se due leggi collegano gli stessi due domini attraverso ponti DIVERSI, uno dei due e' sbagliato —
+anche quando entrambi funzionano.**
+
+*Perche':* due ponti fra gli stessi domini sono **una contraddizione**, non una ridondanza. Se
+entrambi funzionano, il sistema sta dando **due risposte diverse alla stessa domanda**, e la
+differenza si accumula in silenzio **dove i due si moltiplicano**.
+
+*IL CASO, misurato:*
+
+```
+r          ancorato a  median(|f|)   ->  LA MATERIA (il nodo tipico, x = 1 per identita')
+omega_clk  ancorato a  CS_M          ->  IL VUOTO   (cs -> CS_M dove I -> 0)
+e a `:2458` si MOLTIPLICANO:   omega_clk = coerenza * r_node
+```
+
+**Lo stesso orologio, due riferimenti incompatibili, nella stessa riga.**
+*(E `STEP2_OROLOGIO`, l'unica voce della sezione A di `doc/COMPONENTI_PROMOSSE.md`, usa gia'
+`(cs/CS_M)^2` a `:2502`: **il gauge del vuoto E' gia' nel sistema, ed e' gia' certificato. `r` e'
+l'unico che non lo usa.**)*
+
+**E LA DIFFERENZA FRA I DUE PONTI E' MISURATA, non solo argomentata** (`Z38`, 2026-09-18, blob
+`f8f46683`, 1 seme, 120 passi): il nodo mediano di `f` — cioe' **il punto a cui `r` e' ancorato** —
+ha **`cs/CS_M = 0.801`**, dunque **`(cs/CS_M)^2 = 0.64`** nel fattore di `STEP2`.
+**I due ponti non coincidono, e lo scarto ha un numero.**
+
+*PARENTI, non istanze:* `d_arco` (due popolazioni nello stesso prodotto) · `TAU_A` (un numero per
+una crescita **e** un decadimento) · il denominatore del feedback (normalizzazione **NODALE** su una
+grandezza d'**ARCO**).
+
+*RAPPORTO CON A3c:* **A3c e' sul CONFRONTO** — *«non confrontare grandezze di popolazioni diverse»*.
+**A10 e' sull'ARCHITETTURA** — *«non collegarle con ponti diversi»*. **A10 dice di piu'.**
+
+*COROLLARIO OPERATIVO:* **quando una legge nuova deve collegare due domini, la prima domanda non e'
+«quale forma» ma «QUALE PONTE ESISTE GIA', e perche' non lo sto usando?»** Se la risposta e'
+«nessuno», **stai creando un secondo ponte, e va giustificato.**
+
+*STATO DELLA VERIFICA EMPIRICA, dichiarato:* **il caso forte e' UNO**; gli altri tre sono **parenti,
+non istanze**. **L'assioma vale per la sua RAGIONE — come A1, che non e' vera perche' si sono trovate
+cinque costanti sbagliate — ma la tabella dice quanto lo si e' visto agire, ed e' onesto scriverlo.**
+
+**⚠ E UN LIMITE CHE LA MISURA HA AGGIUNTO, ed e' del 2026-09-18 (`Z38`):** A10 dice **che** uno dei
+due ponti e' sbagliato; **NON dice QUALE, e sceglierlo non e' una sua conseguenza.** Misurato: se si
+sposta `r` sul ponte del vuoto (`CS_M/d_nodo`), **la frazione di nodi nella banda utile del
+bottleneck passa da `87.1 %` a `15.1 %`**, e **`r` cambia SIGNIFICATO** — da *«ritmo relativo al
+nodo tipico»* a *«ritmo relativo al vuoto»*. **Sono due letture entrambe legittime — degenerazione
+o dilatazione gravitazionale reale — e la misura non le separa.**
+> **A10 e' una DIAGNOSI, non una prescrizione. Un assioma che dicesse anche quale ponte tenere
+> starebbe scegliendo la fisica, e non e' il suo mestiere.**
+
 ## APERTO — cosa manca perche' siano assiomi
 1. **Non sono generativi.** Serve **l'azione unica `S`**: allora diventerebbero **i vincoli che `S`
    deve soddisfare.**
@@ -196,9 +303,34 @@ fallback.**
    (che nomina esplicitamente «media dei primi vicini»). *(`u_nodo` non va percio' corretto: sta
    dentro `_cs_nodo`, cioe' dentro cio' che **definisce** la causalita', e **A4** giudica quel
    livello a parte. Voce **Z5** del registro.)* **A4 e A5 restano in tensione** su `cs`.
-   **A2 resta violato da `Lam = mean(I)`, che funziona.**
-3. **A6 e' un teorema**, e **A8 e' metodologico** (dice come si STRUMENTA, non cosa una legge puo'
-   essere): **due voci su otto non sono assiomi nel senso degli altri sei.**
+   **⚠ A2 RESTA VIOLATO DA `Lam = mean(I)`, CHE FUNZIONA — e il 2026-09-18 la tensione e'
+   diventata piu' forte, non piu' debole.** `_cs_nodo` (`:2914`, `:2921`) costruisce la scala di
+   `cs` come **`mean(I)`, una media sulla PROPRIA popolazione**: e' esattamente **la scorciatoia
+   globale che A2 vieta**. **E funziona:** `cs_std/cs` e' passato da **0.0086 %** (scala assoluta
+   `1/GAMMA^2 = 400`) a **17.6 %** — **un fattore ~2050** — cioe' **`cs` e' passato da inchiodato a
+   VIVO** *(`Z39`; il mandato che ha chiesto questa voce citava **1300**, da una misura precedente:
+   **e' lo stesso fatto letto su due misure diverse, e qui si riporta quella del blob `f8f46683`**)*.
+   **VA RISOLTO, e le due vie sono incompatibili:** **o A2 ammette le medie globali DERIVATE** —
+   dichiarando cosa distingue `mean(I)` da una scorciatoia — **oppure `cs_floor` va rifatto con
+   `peq`**, lo sfondo diffuso **locale**.
+   > **Un documento che nasconde le proprie contraddizioni non e' un termine di paragone.**
+   > **E questa e' la piu' scomoda che abbia: la violazione e' la ragione per cui il pezzo
+   > funziona.**
+3. **⚠ TRE VOCI SU DIECI NON SONO ASSIOMI NELLO STESSO SENSO DELLE ALTRE** *(aggiornato il
+   2026-09-18 con A9 e A10; prima diceva «due su otto»)*. **A6 e' un TEOREMA**, non un assioma.
+   **A8 e A9 sono METODOLOGICI**, e con loro il corollario **A3c**:
+
+   > **A1-A5, A7 e A10 dicono COME UN SISTEMA DEVE ESSERE FATTO.**
+   > **A8, A9 e A3c dicono come dev'essere OSSERVABILE (A8), come le sue regole vanno rese
+   > EFFICACI (A9), e come i suoi numeri vanno CONFRONTATI (A3c).**
+   > **E sono, in pratica, quelle che ne trovano di piu'.** *(A8 ha trovato `_cs_nodo_prev`,
+   > `_psi_spin_prec` e il pavimento dell'inerzia; A9 ha trovato sette volte l'encoding e il
+   > riavvio; A3c ha trovato cinque errori di popolazione in tre giorni.)*
+
+   **Non e' un difetto del documento, ed e' gia' dichiarato in testa:** questo e' un **codice
+   deontologico**, non un sistema generativo. **Ma la distinzione va tenuta visibile**, perche' il
+   giorno in cui esistesse l'azione unica `S`, **A1-A5/A7/A10 diventerebbero vincoli su `S`, e
+   A8/A9/A3c NO: resterebbero vincoli su CHI LA MISURA.**
 4. **Nessuno e' derivato:** sono **regolarita' induttive**, e **potrebbero non valere fuori dai casi
    che le hanno generate.**
 

@@ -5337,3 +5337,83 @@ richiede il **confronto**, non la dispersione. Dice che **la premessa che lo esc
 3. **`Z39` è un fronte suo:** rifare `tau = d/cs` contro `tau ∝ d` su ≥ 4 semi.
 4. **Limiti:** un seme, 120 passi, una scena; `cs_std/cs` **cresce col tempo**, quindi va citato con
    il passo. Fallback `cs = CS_M` scattato **2 volte su 248** (`0.8 %`).
+
+---
+
+## 9.52 — **`doc/ASSIOMI.md` è completo: A9 e A10 sono dentro. E la tensione più scomoda ora ha un numero**
+
+**Data:** 2026-09-18 · **SOLA DOCUMENTAZIONE — nessun codice toccato**, blob `f8f46683` invariato
+**Task history, pushato PRIMA:** `6ea24af` · Decisione di Luca: **sono assiomi, vanno tutti.**
+
+### Lo stato verificato dal disco, prima di accettare il mandato (P1)
+
+`doc/ASSIOMI.md` conteneva già **A1–A8** con i corollari **A3b, A3c, A7b, A8b**, e **APERTO #2 era
+già barrato** col controesempio `u_nodo`. **A9 e A10: zero occorrenze.** **Non era una riscrittura
+da fare: era un completamento** — e il mandato lo dice per primo, registrando che il mandato
+*precedente* chiedeva una riscrittura in buona parte già fatta. **Da 15.003 a 23.850 byte.**
+
+### A9 — *un presidio che non impedisce non è un presidio*
+
+Soglia operativa: **alla TERZA occorrenza si smette di scrivere e si cerca il meccanismo.**
+I tre casi (encoding cp1252 **sei volte**; par.5-quinquies violato e dimostrato dal riavvio;
+`:2959` con **~20 chiamanti**) la superano tutti.
+
+> **A9 è l'unico assioma che ha già FALSIFICATO SE STESSO:** la **settima** occorrenza
+> dell'encoding colpì **lo script che stava CONTANDO le sei precedenti.**
+
+**E si applica a se stesso:** finché resta una riga in un documento, **A9 è una violazione di A9**.
+Per il suo caso capofila il meccanismo **esiste**: `csv/_presidio.py`.
+**Dichiarato nel testo:** la soglia «alla terza» è **SCELTA, non derivata** — altrimenti A9
+diventerebbe esso stesso un numero scelto, cioè **una violazione di A1**.
+
+### A10 — *una sola grandezza può legare due domini*
+
+Il caso, **misurato oggi** (`Z38`): `r` ancorato a `median(|f|)` → **la materia**; `omega_clk`
+ancorato a `CS_M` → **il vuoto**; **e a `:2458` si moltiplicano.** Il nodo a cui `r` è ancorato ha
+**`cs/CS_M = 0.801`**, cioè **`(cs/CS_M)² = 0.64`** nel fattore di `STEP2`: **lo scarto fra i due
+ponti ha un numero, non è solo un argomento.**
+
+**⚠ E un limite che la misura ha aggiunto, e che ho messo dentro l'assioma:** A10 dice **CHE** uno
+dei due ponti è sbagliato; **non dice QUALE**, e sceglierlo **non è una sua conseguenza**. Spostando
+`r` sul ponte del vuoto la banda utile del bottleneck passa da `87.1 %` a `15.1 %` e **`r` cambia
+significato**. Le due letture — degenerazione o dilatazione gravitazionale reale — **la misura non
+le separa.**
+
+> **A10 è una DIAGNOSI, non una prescrizione. Un assioma che dicesse anche quale ponte tenere
+> starebbe scegliendo la fisica, e non è il suo mestiere.**
+
+### La tabella dei casi di A3 — cinque, ognuno col suo numero
+
+`rho_arco/median(I_nodi)` = **8830** · media-di-mediane **19** contro **4089** · **A3c** (un rapporto
+accanto a due massimi di passi diversi) · estensività confusa con l'età · **la mediana in `ritmo()`,
+`median(x) = 1` per identità.**
+
+> **L'ultimo è il più grave, perché non produce un numero sbagliato: produce un numero GIUSTO che
+> non significa niente.**
+
+### APERTO — due precisazioni, e una tensione che si è INASPRITA
+
+**La categoria è dichiarata:** **A1–A5, A7, A10 dicono come un sistema dev'essere FATTO; A8, A9 e
+A3c dicono come dev'essere OSSERVABILE, come le regole vanno rese EFFICACI, e come i numeri vanno
+CONFRONTATI.** Il conteggio è aggiornato: **tre voci su dieci** (prima «due su otto»), più **A6 che
+è un teorema**. E il perché la distinzione conta: **il giorno in cui esistesse l'azione unica `S`,
+A1–A5/A7/A10 diventerebbero vincoli su `S`; A8/A9/A3c no — resterebbero vincoli su CHI LA MISURA.**
+
+**E la tensione non è stata cancellata, è stata resa più forte** → **`Z40`**: `_cs_nodo` costruisce
+la scala di `cs` come **`mean(I)`, una media sulla propria popolazione** — **esattamente la
+scorciatoia globale che A2 vieta** — **e funziona**: `cs_std/cs` da **0.0086 %** a **17.6 %**,
+fattore **~2050** *(il mandato citava `1300`, da una misura precedente: stesso fatto, due misure;
+qui si riporta quella del blob `f8f46683`)*. **Le due vie sono incompatibili e nessuna è gratis:**
+o **A2 ammette le medie globali DERIVATE** — ma deve dichiarare cosa distingue `mean(I)` da una
+scorciatoia, e **quella distinzione oggi non esiste scritta** — **oppure `cs_floor` si rifà con
+`peq`**, che però **nasce `NaN`** e il cui fallback ricade su `rho`, **una grandezza diversa**.
+
+> **Non si chiude «tanto funziona»: è precisamente l'argomento che A2 esiste per rifiutare.**
+
+### Due riferimenti incrociati corretti nello stesso commit
+
+- **`Z5` portava una nota STALE:** *«va riportata in `doc/ASSIOMI.md` alla prossima revisione»* —
+  **lo era già** (APERTO #2 barrato). Corretta.
+- **`doc/ASSIOMI.md` NON era nella lista dei documenti di riferimento di `CLAUDE.md` par.7**, pur
+  essendo citato nel §0-bis di ogni mandato. **Un documento che si deve leggere e che non compare
+  fra i riferimenti è esattamente il difetto che A9 descrive.** Aggiunto.
