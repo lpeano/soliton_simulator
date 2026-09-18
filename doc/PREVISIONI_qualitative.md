@@ -413,3 +413,43 @@ raggio popolato**, sarebbe il bordo della nube, non una parete dentro di essa.
 1. **UN SEME.** Qualunque forma si veda, **non è un dato**: è un'osservazione da rifare.
 2. **`Z9` È APERTA:** tutto ciò che si vede è **su un kernel che non ha finito di accendersi**, e
    **`--tau-luce` è un ramo il cui sigillo è FALLITO** (par.0). **Nessun verdetto di fisica.**
+
+---
+
+## 2026-09-18 — **la scena del VIDEO** *(scritte PRIMA del run, senza numeri)*
+
+**① CHI NON RUOTA.** **Mi aspetto che la frazione sia MINORE che nel batch**, per una ragione
+strutturale e non per ottimismo: **lì la popolazione non si rinnovava** (quattro nodi nuovi), **qui
+si rinnova in continuazione**, e ogni nodo nuovo entra con `eta` di semina ma **dentro un campo già
+acceso**. **Non so se questo basti a farlo ripartire.**
+**E NON mi aspetto `Jaccard = 1.0000`:** con la mitosi attiva l'insieme dei fermi **deve** cambiare
+almeno per i nuovi arrivi. **Se fosse ancora `1.0000`, sarebbe il risultato più forte del giro**, e
+vorrebbe dire che chi è fermo lo è **indipendentemente da cosa fa il resto.**
+
+**② IL RAGGIO — la misura che decide.** **Mi aspetto che NON siano le masse seminate**, perché qui
+le masse **si disgregano e generano** (5112 mitosi). **Mi aspetto i fermi distribuiti**, e **se
+coincidessero col guscio sarebbe la risposta alla domanda del video.**
+
+**③ IL GUSCIO.** Mi aspetto che **abbia `eta` più bassa dell'interno** — perché è dove nasce materia
+— **e questo è il falsificatore, non una conferma**: se è così, **il guscio è il fronte di nascita,
+non una parete**, e la lettura del video va corretta. **Lo scrivo prima proprio perché è l'esito
+scomodo.**
+
+**④ `perc_chi`.** **Mi aspetto MISTO fra i fermi**, come in `Z45`. **Ma con due differenze
+dichiarate:** qui `CALORE_VETTORIALE` è **spento** (`--calore-scal`) e `--chi-basc` è **acceso**,
+quindi **`perc_chi` non è un'etichetta di lignaggio ma una variabile della torsione**. **Se venisse
+fuori un segno netto, la spiegazione andrebbe cercata in `--chi-basc`, non nella genealogia.**
+
+### ⚠ E TRE COSE CHE NON MI ASPETTO — i falsificatori
+
+1. **se i fermi fossero di nuovo esattamente `1116`** o comunque **gli stessi indici del batch**,
+   sarebbe un artefatto di costruzione, non un fatto fisico;
+2. **se `eta` dei fermi crescesse di `DT·r_floor` per passo** *(il discriminante che ha funzionato su
+   `Z46`)*, allora **è di nuovo il pavimento di `ritmo()`**, e la scena non c'entra;
+3. **se la distribuzione di `x` fosse di nuovo bimodale a otto ordini**, **non riporterò mediane**:
+   una mediana fra due popolazioni distinte non descrive nessuna delle due.
+
+### E due limiti dichiarati prima
+
+**UN SEME, UNA SCENA.** **`--tau-luce` ha il sigillo FALLITO** (par.0): ramo **non certificato**.
+**Nessun verdetto di fisica, nessuna identificazione.**
