@@ -43,7 +43,11 @@ MODO = _ARGV[4] if len(_ARGV) > 4 else "fisica"
 os.makedirs(DEST, exist_ok=True)
 
 # gli STESSI flag del comando del mandato. `--test` fa scegliere Agg a `:132`: nessuna finestra.
-sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", "3", "--sep", "8",
+# [A/B a variabile singola, 2026-09-18] `--nmasse` e' l'UNICA cosa che cambia fra il run a tre
+# masse (`Z49`) e quello di controllo a due. Si passa da riga di comando come 5o argomento; il
+# default resta 3, cosi' il comando di `Z49` resta riproducibile VERBATIM.
+NMASSE = _ARGV[5] if len(_ARGV) > 5 else "3"
+sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--sep", "8",
             "--giri", "0", "--campo-spinoriale", "--spinore-vivo", "--spinore-corretto",
             "--chi-core", "--calore-scal", "--deparam-orologio", "--verlet", "--fork-su2",
             "--fork-su2-mem", "--cs-dinamico", "--tau-luce", "--rumore-colorato",
