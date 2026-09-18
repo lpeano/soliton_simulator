@@ -701,10 +701,25 @@ GRAV_BIFASE = True       # LEGGE gravitazionale bifase unica (sciolta-1, direzio
 SPINORE = True          # Flag del settore spinoriale a 4pi. NB: l'EVOLUZIONE e' orfana (vedi
                         # sopra) - _nb resta all'init planare. Richiede COMPAT_CHI=False per i due
                         # generatori SU(2). Il costo raddoppia gli archi (la non-abelianita' stessa).
-SPINORE_VIVO = False    # REINNESTO dell'evoluzione SU(2) nell'ordine ETC: se True, _passo_spinoriale
-                        # viene chiamato dentro step() PRIMA del commit atomico delle fasi, cosi' legge
-                        # lo snapshot t (self.phi non ancora committata). Default off = spinore congelato
-                        # (comportamento attuale). Reversibile, per A/B; richiede rimisura di Berry.
+SPINORE_VIVO = True     # REINNESTO dell'evoluzione SU(2) nell'ordine ETC: _passo_spinoriale viene
+                        # chiamato dentro step() PRIMA del commit atomico delle fasi, cosi' legge lo
+                        # snapshot t (self.phi non ancora committata). Il braccio OFF e'
+                        # --senza-spinore-vivo. Con False lo spinore e' CONGELATO.
+                        # ⚠ ON DI DEFAULT dal 2026-09-18, E IL PERCHE' NON E' UNA PROMOZIONE SUA:
+                        # e' il PREREQUISITO di SPIN_FEEDBACK. Il ramo del feedback e'
+                        #     if SPINORE_VIVO and SPINORE and SPIN_FEEDBACK
+                        # quindi con SPINORE_VIVO=False accendere SPIN_FEEDBACK lo lascerebbe
+                        # ACCESO MA INERTE -- e inerte IN SILENZIO, perche' il metodo non verrebbe
+                        # nemmeno chiamato e nemmeno i contatori A8 (che stanno DENTRO quel blocco)
+                        # scatterebbero. E' la famiglia «cablato ma muto» (VERSO_CHI, _passo_spinoriale
+                        # «ORFANO», spin_locale, TW_SPINORE, la FASE 5 inerte al 95.33 % per mesi),
+                        # intercettata PRIMA che accadesse dall'audit csv/_test_fork/_audit_default.py.
+                        # ⚠⚠ E VA DETTO CHIARO: `SPINORE_VIVO = True` NON E' MAI STATO VALIDATO
+                        # COME DEFAULT. Tutte le campagne lo passavano DA FUORI (--spinore-vivo), quindi
+                        # la configurazione era la stessa, ma NESSUN SIGILLO e' mai stato girato con
+                        # questo valore come DEFAULT DI MODULO. E' un cambio NON CERTIFICATO finche' il
+                        # rigiro completo non e' chiuso.
+                        # Reversibile: --senza-spinore-vivo. Richiede rimisura di Berry.
 SPIN_LARMOR = False     # CAMPO TRASVERSO GEOMETRICO sullo spinore (legge, zero parametri). Se True,
                         # al campo effettivo B si somma B_geo = <|tw|/PHI_CRIT * (n_i x n_j)>, termine
                         # non-abeliano perpendicolare a n che sostiene la precessione di Larmor senza
@@ -5471,7 +5486,10 @@ def _applica_flag(a):
     ZETA_VIR = bool(getattr(a, "zeta_vir", False)) # freno anisotropo (legge): default off = non-regressione
     PAV_COM = bool(getattr(a, "pav_com", False))   # pavimento comovente (legge): default off = muro assoluto 0.05
     SYNC_UPDATE = bool(getattr(a, "sync", False)) # aggiornamento sincrono (transazionale): default off
-    SPINORE_VIVO = bool(getattr(a, "spinore_vivo", False)) # reinnesto evoluzione SU(2) nell'ETC: default off
+    # [PROMOZIONE 2026-09-18] ON di default come PREREQUISITO di SPIN_FEEDBACK (vedi :704).
+    # `--spinore-vivo` resta accettato come NO-OP DICHIARATO (non rompe i comandi gia' scritti);
+    # il braccio OFF e' `--senza-spinore-vivo`, che e' un DIAGNOSTICO.
+    SPINORE_VIVO = not bool(getattr(a, "senza_spinore_vivo", False))
     SPIN_LARMOR = bool(getattr(a, "spin_larmor", False))   # campo trasverso geometrico (Larmor): default off
     TW_SPINORE = bool(getattr(a, "tw_spinore", False))     # torsione 4pi -> Bloch (doppia copertura): default off
     SPINORE_CORRETTO = bool(getattr(a, "spinore_corretto", False)) # master: orologio proprio + spinore primario complesso
@@ -5619,7 +5637,11 @@ def _applica_flag(a):
     # direbbe nulla -- il metodo non verrebbe nemmeno chiamato, quindi nemmeno i contatori A8
     # scatterebbero. Un flag acceso che non gira e' peggio di un flag spento.
     if SPIN_FEEDBACK and not (SPINORE_VIVO and SPINORE):
-        _manca = [_n for _n, _v in (("--spinore-vivo", SPINORE_VIVO), ("SPINORE", SPINORE)) if not _v]
+        # ⚠ il nome da stampare e' quello che CAUSA l'assenza, non quello che la risolveva PRIMA:
+        # dal 2026-09-18 `--spinore-vivo` e' un NO-OP dichiarato, e a spegnere e' `--senza-spinore-vivo`.
+        # Un avviso che indica il flag sbagliato manda chi legge a cercare la causa dove non e'.
+        _manca = [_n for _n, _v in (("--senza-spinore-vivo (spegne SPINORE_VIVO)", SPINORE_VIVO),
+                                    ("SPINORE (flag di modulo)", SPINORE)) if not _v]
         print(f"[spin-feedback] AVVISO: il feedback spinore->archi e' ON di default dal 2026-09-18, "
               f"ma il suo ramo richiede SPINORE_VIVO e SPINORE, e manca {_manca}. "
               f"IL FEEDBACK NON GIRA IN QUESTO RUN. Non e' un errore: e' dichiarato perche' un flag "
@@ -5893,6 +5915,11 @@ def _cli():
                         "legge la fase dallo snapshot di inizio passo, coerente coi pesi materia. "
                         "Jacobi invece di Gauss-Seidel: il passo diventa indipendente dall'ordine. "
                         "Il simplettico resta intatto. Default off = non-regressione.")
+    p.add_argument("--senza-spinore-vivo", action="store_true", dest="senza_spinore_vivo",
+                   help="DIAGNOSTICO, NON FISICA ALTERNATIVA. CONGELA lo spinore: spegne "
+                        "_passo_spinoriale, che dal 2026-09-18 e' ON di default come prerequisito "
+                        "di SPIN_FEEDBACK. Spegne quindi ANCHE il feedback, e l'avviso lo dichiara. "
+                        "Serve agli A/B e all'attribuzione, non ai run di misura.")
     p.add_argument("--spinore-vivo", action="store_true", dest="spinore_vivo",
                    help="REINNESTO EVOLUZIONE SU(2): richiama _passo_spinoriale (rotazione del Bloch "
                         "+ eccitazione del vuoto) dentro step(), PRIMA del commit atomico (legge lo "

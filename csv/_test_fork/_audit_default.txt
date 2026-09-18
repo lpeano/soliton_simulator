@@ -5,45 +5,41 @@ AUDIT DEI DEFAULT -- cosa gira in un run che non passa nessun flag
 
   cura                                 nel file  flag che governa default   sigillo         
   --------------------------------------------------------------------------------------------------------------
-  d_arco (bug di indicizzazione)       SI' :3510 nessuno (cat. D) -         V1 8/8          
-  plasticita' viscoelastica causale    SI' :3563 nessuno (cat. D) -         V2-V5 8/8       
-  inerzia dimensionale                 SI' :2300 nessuno (cat. D) -         Y 11/11         
-  (2) spinta LOCALE                    SI' :3750 nessuno (cat. D) -         V6-V10 12/12    
-  (3) _rep come MEMORIA                SI' :3724 nessuno (cat. D) -         V6-V10 12/12    
+  d_arco (bug di indicizzazione)       SI' :3536 nessuno (cat. D) -         V1 8/8          
+  plasticita' viscoelastica causale    SI' :3589 nessuno (cat. D) -         V2-V5 8/8       
+  inerzia dimensionale                 SI' :2326 nessuno (cat. D) -         Y 11/11         
+  (2) spinta LOCALE                    SI' :3776 nessuno (cat. D) -         V6-V10 12/12    
+  (3) _rep come MEMORIA                SI' :3750 nessuno (cat. D) -         V6-V10 12/12    
   (5) spin_locale RIMOSSA              ASSENTE   nessuno (cat. D) -         V9 4/4  (assenza = curato)
-  TEMPO 2 (calcola_psi con w)          SI' :3116 nessuno (cat. D) -         Q 7/7           
-  Z25  denominatore del feedback       SI' :1419 SPIN_FEEDBACK    False     F/G 12/12       
-  Z27  /grado tolta da twist_nodo      SI' :3220 FRAME_DRAG       True      H 8/8           
-  contatori A8 del feedback            SI' :1397 SPIN_FEEDBACK    False     -               
+  TEMPO 2 (calcola_psi con w)          SI' :3142 nessuno (cat. D) -         Q 7/7           
+  Z25  denominatore del feedback       SI' :1445 SPIN_FEEDBACK    True      F/G 12/12       
+  Z27  /grado tolta da twist_nodo      SI' :3246 FRAME_DRAG       True      H 8/8           
+  contatori A8 del feedback            SI' :1423 SPIN_FEEDBACK    True      -               
   presidio ENCODING + timbro git       -         nessuno (cat. D) -         -               
 
 --- I FLAG DI MODULO CITATI, coi loro default (argv vuoto) ---
   SPINORE            = True      :701
   SPINORE_VIVO       = False     :704
-  SPIN_FEEDBACK      = False     :944
+  SPIN_FEEDBACK      = True      :944
   FRAME_DRAG         = True      :685
   REPULS_LEGGE       = True      :544
-  CHI_CORE           = False     :949
+  CHI_CORE           = False     :975
   TAU_A_LOCALE       = True      :274
-  PAV_COM            = False     :5446
+  PAV_COM            = False     :5472
   TW_SPINORE         = False     :712
   CHI_DA_SPINORE     = False     :724
   STEP2_OROLOGIO     = True      :800
 
 --- ⚠ LA CATENA DI GATE DEL FEEDBACK (la lezione «cablato ma muto») ---
-  :3163   if SPINORE_VIVO and SPINORE and SPIN_FEEDBACK:
-  SPINORE_VIVO = False    SPINORE = True     SPIN_FEEDBACK = False 
+  :3189   if SPINORE_VIVO and SPINORE and SPIN_FEEDBACK:
+  SPINORE_VIVO = False    SPINORE = True     SPIN_FEEDBACK = True  
   -> il feedback GIRA nel default? NO
-     manca: ['SPINORE_VIVO', 'SPIN_FEEDBACK']
+     manca: ['SPINORE_VIVO']
 
   ⚠ CONSEGUENZA OPERATIVA, ED E' IL PUNTO DEL par.2.3 DEL MANDATO:
      mettere `SPIN_FEEDBACK = True` NON BASTA. Con `SPINORE_VIVO = False` il ramo resta SPENTO,
      e resta spento IN SILENZIO -- nessun avviso, nessun contatore che scatti, perche' il metodo
      non viene nemmeno chiamato. Sarebbe ESATTAMENTE la famiglia «cablato ma muto» che questo
      audit esiste per intercettare.
-
---- CURE DIETRO UN FLAG SPENTO (una cura che non gira e' una cura che non esiste) ---
-  Z25  denominatore del feedback         dietro SPIN_FEEDBACK    = False
-  contatori A8 del feedback              dietro SPIN_FEEDBACK    = False
 
 ======================================================================================================================
