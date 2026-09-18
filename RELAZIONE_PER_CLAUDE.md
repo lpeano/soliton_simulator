@@ -6040,3 +6040,69 @@ di nuovo il pavimento di `ritmo()` e la scena non c'entra.**
 1200 passi)*, `archi` `429 724`, `coer_l` `0.286`, `dil` `+25.1 %`, **`14.1 s/frame`** — leggermente
 **meno** della stima, perché il pilota includeva l'avvio. **Nessun verdetto: i numeri arrivano col
 referto.**
+
+---
+
+## 9.59 — **Tre verifiche prima del run: il rendering NON tocca la fisica (verificato), e `--chi-basc` cambia una misura**
+
+**Data:** 2026-09-18 · blob **`a1ae5090` invariato** · **run a 400 frame FERMATO e RIFATTO**
+**Sigillo:** `csv/_seal_fork/_sigillo_driver_video.py` · **PASS**
+
+### ① ⚠ «Il rendering non è fisica» era una DEDUZIONE — ora è una misura
+
+Avevo concluso che *«l'unica cosa che manca è il rendering, che non è fisica»*. **Era un argomento,
+non una verifica** — e il precedente di `lambda_vuoto` *(che sembrava di sola lettura e chiamava
+`calcola_psi()`, che SCRIVE `self.psi`)* dice che non basta.
+
+**Enumerato dal sorgente:** `update()` chiama, oltre al ciclo fisico, **`net.diagnostica()`
+(`:5104`, OGNI frame — il driver la chiamava solo ogni 5)**, **`net.campo_spaziale()` (`:5136`)**,
+**`net.pozzo_grafo()` (`:5218`)**, **`net.intensita()` (`:5267`)** — **tutte assenti dal driver.**
+
+**⚠ E una distinzione che mi ero perso:** il commento a `:7168` — *«le funzioni diagnostiche
+aggiornano cache che la DINAMICA legge»* — riguarda **`_diag_completa`** (`:6255`, che chiama
+`net.calcola_psi()` e `net.ritmo()`), **NON `net.diagnostica()`. Sono due funzioni diverse, e il
+batch protegge la PRIMA** con snapshot+restore. **E `update()` non avvolge `diagnostica` in
+nessuna protezione.**
+
+**LA PROVA, non la lettura:** due run identici di 12 frame, uno **solo-fisica** e uno che chiama
+**anche** le quattro funzioni di disegno a ogni frame, **nello stesso ordine di `update()`**:
+
+```
+n: 2391 contro 2391
+psi / phi / phivel / eta / d / d0 / tw / omega_s / _nb / psi_spin / _psi_spinor / _psi_prec /
+perc_chi / pos        ->  TUTTI  max|A-B| = 0.000e+00   con SHAPE UGUALI
+[PASS] shape divergenti 0, array confrontati 14, max|A-B| = 0.000e+00
+```
+
+> **Il driver È equivalente — e lo dichiaro con la verifica accanto, non con l'argomento.**
+> *(La riga delle shape è stampata per prima: `max|A-B| = 0` può significare «nessun confronto».)*
+
+**Il run a 400 frame era arrivato al frame ~50: l'ho FERMATO e i dati CANCELLATI**, perché giravano
+su una traiettoria la cui equivalenza non era ancora provata. **Rifatto dopo il PASS.**
+
+### ② ⚠ `--chi-basc` riscrive `perc_chi`: **la misura ④ va riformulata**
+
+**Se `chi_basc` riscrive `perc_chi` a ogni passo, contare «quale ramo di mitosi gira» NON BASTA:
+qualunque cosa la mitosi assegni, il basculamento può sovrascriverla al passo dopo.**
+
+**La misura diventa TRE numeri per passo, non uno:**
+1. **quanti `perc_chi` assegnati dalla MITOSI**, e **da quale ramo** (`:3945` eredita UGUALE,
+   `:4066` eredita OPPOSTO) — **contati** (A8);
+2. **quanti RISCRITTI da `chi_basc`**, e **con quale segno**;
+3. **il BILANCIO NETTO**: la frazione `+1` nel tempo.
+
+> **Senza questa separazione non si sa se l'antimateria emerga dalla MITOSI o dal BASCULAMENTO.**
+> **Sono due meccanismi diversi, e la domanda riguarda il primo.**
+
+### ③ ⚠ `--tau-luce` ha il sigillo FALLITO — **e va nel REFERTO, non solo in testa all'output**
+
+**La scena del video include una legge NON CERTIFICATA** (`doc/SIGILLO_tau_luce_FALLITO.md`,
+CLAUDE.md par.0), **ed ogni numero che ne esce lo eredita.** *(E vale anche per il video già girato:
+la tabella dei fotogrammi porta la stessa qualifica.)*
+
+### ④ E una correzione a un numero MIO: `PASSI_PER_FRAME = 6`
+
+**La scena è `400 frame = 2400 PASSI DI MOTORE`**, e la tabella letta dai fotogrammi **va
+RIMAPPATA**: **frame 375 = passo `2250`**, non 375.
+**Senza questa conversione i confronti con `Z46` (che è a `1200 passi`) sbagliano di un fattore 2**,
+e va scritto nel referto.

@@ -1,0 +1,43 @@
+[TIMBRO] _sigillo_driver_video.py  sha1-BYTE 7d5ec03a  committato e pulito
+================================================================================================================
+SIGILLO DRIVER VIDEO -- il rendering scrive sullo stato? 12 frame per braccio
+================================================================================================================
+
+  braccio fisica   -> csv\_seal_fork\_sig_drv_A
+    frame 1     n=2391    archi=429498   coer_l=0.6394   dil= +7.876%   [14.2 s, 14.220 s/frame]
+    frame 5     n=2391    archi=429498   coer_l=0.6076   dil=+19.202%   [68.3 s, 13.662 s/frame]
+    frame 10    n=2391    archi=429498   coer_l=0.5616   dil=+19.159%   [135.7 s, 13.570 s/frame]
+    SNAPSHOT frame 12    (passi 72    ) n=2391    -> csv\_seal_fork\_sig_drv_A\frame_12.pkl
+
+  braccio fedele   -> csv\_seal_fork\_sig_drv_B
+    frame 1     n=2391    archi=429498   coer_l=0.6394   dil= +7.876%   [14.5 s, 14.466 s/frame]
+    frame 5     n=2391    archi=429498   coer_l=0.6076   dil=+19.202%   [71.9 s, 14.378 s/frame]
+    frame 10    n=2391    archi=429498   coer_l=0.5616   dil=+19.159%   [142.2 s, 14.225 s/frame]
+    SNAPSHOT frame 12    (passi 72    ) n=2391    -> csv\_seal_fork\_sig_drv_B\frame_12.pkl
+
+--- IL CONFRONTO -- la riga delle SHAPE per PRIMA ---
+    n: 2391 contro 2391
+      psi           shape (2391,)        max|A-B| = 0.000e+00
+      phi           shape (2391,)        max|A-B| = 0.000e+00
+      phivel        shape (2391,)        max|A-B| = 0.000e+00
+      eta           shape (2391,)        max|A-B| = 0.000e+00
+      d             shape (429498,)      max|A-B| = 0.000e+00
+      d0            shape (429498,)      max|A-B| = 0.000e+00
+      tw            shape (429498,)      max|A-B| = 0.000e+00
+      omega_s       shape (2391, 3)      max|A-B| = 0.000e+00
+      _nb           shape (2391, 3)      max|A-B| = 0.000e+00
+      psi_spin      shape (2391, 2)      max|A-B| = 0.000e+00
+      _psi_spinor   shape (2391, 2)      max|A-B| = 0.000e+00
+      _psi_prec     shape (2391,)        max|A-B| = 0.000e+00
+      perc_chi      shape (2391,)        max|A-B| = 0.000e+00
+      pos           shape (2391, 3)      max|A-B| = 0.000e+00
+
+  [PASS] shape divergenti 0, array confrontati 14, max|A-B| = 0.000e+00
+
+  COME SI LEGGE -- fissato PRIMA:
+    0.000e+00 CON SHAPE UGUALI su >= 10 array -> il rendering NON tocca la fisica: il driver E'
+                                                 EQUIVALENTE, e lo si dichiara CON QUESTA VERIFICA
+                                                 accanto, non con l'argomento 'non e' fisica'.
+    differenza != 0 o shape diverse           -> NON equivalente: si dichiara QUALE funzione e si
+                                                 corregge il driver chiamandola.
+================================================================================================================
