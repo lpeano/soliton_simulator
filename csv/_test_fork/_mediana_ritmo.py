@@ -118,6 +118,7 @@ print("\n--- (2.4) `median(|f|)` EVOLVE nel tempo, o e' anch'essa pinnata? ---")
 med = np.array([float(np.median(np.abs(x["f"]))) for x in buoni])
 # ⚠ IL RAPPORTO ULTIMA/PRIMA E' UN ARTEFATTO SE LA PRIMA E' ZERO (dava 2.4e+300). E lo ZERO non e'
 #   un caso limite trascurabile: e' un RISULTATO. Si conta, si isola, e si riportano i QUARTI.
+q = max(len(med) // 4, 1)          # i QUARTI: la statistica giusta, non il rapporto ultima/prima
 _zero = int(np.sum(med <= 0.0))
 print("  ⚠ invocazioni con median(|f|) ESATTAMENTE ZERO : %d su %d  (%.1f %%)"
       % (_zero, len(med), 100.0 * _zero / len(med)))
