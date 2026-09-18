@@ -5119,3 +5119,113 @@ flag.**
    oscilla davvero così» da «la fase non è confrontabile fra passi».** Non ho una misura che le
    separi.
 3. **`Z9` non va rimisurata**: `eta` non cresce in **2 passi su 126 = 1.6 %**, impatto ≤ ~2 %.
+
+---
+
+## 9.50 — **`Z36`: la cucitura fallisce su ENTRAMBI i fronti, e si DIMOSTRA perché. NON cablata. E `Z36` stesso va ri-letto**
+
+**Data:** 2026-09-18 · blob `f8f46683` (git) / `94b6cc29` (byte) · un seme (5), 120 passi
+**Strumento:** `csv/_test_fork/_Z36_cucitura.py` (committato **prima** di girarlo, `5b6d140`)
+**Task history con l'obiezione, scritto e pushato PRIMA della misura:** `02ac909`
+**Referto:** `doc/REFERTO_Z36_cucitura.md` · **NESSUNA CURA CABLATA**
+
+### Il mandato, e l'obiezione scritta prima
+
+Il mandato diceva: *«la forma è identica a quella che `_spinor_lift` usa già, misurata a `0.35 %`.
+Non stai inventando una cura: stai applicando una che funziona, allo stesso tipo di oggetto.»*
+
+**Ho scritto nel task history, prima di misurare, che i due oggetti NON sono lo stesso tipo:** il
+lift è una **parametrizzazione** del Bloch, definita a meno di una fase globale — quella fase è
+**gauge**; `psi_spin` è un **campo calcolato** la cui fase **è l'orologio**. E il conto:
+`a_curato = a_originale − angle(overlap)`, quindi per rotazione rigida di `φ` verrebbe `φ − φ = 0`:
+**l'orologio si fermerebbe esattamente nel caso che deve misurare.**
+
+### (A) Il candidato del mandato è ESCLUSO
+
+```
+|psi_spin[:,0]| / |psi_spin|   (13320 nodi-istanza, ultimi 30 passi)
+   mediana 0.999881   p05 0.990825   p01 0.976511   MIN 0.899377
+   frazione sotto 1e-1 / 1e-2 / 1e-3 / 1e-6 / 1e-9 :  0.000000  su TUTTE
+```
+
+**La prima componente non passa MAI vicino a zero: è sempre almeno il 90 % del modulo.**
+`angle(psi_spin[:,0])` **non è mal definito.** Lo spinore **non ruota** fra le componenti.
+
+### (C) Gli stati consecutivi sono QUASI IDENTICI
+
+```
+|<psi_prec|psi>| normalizzato :  mediana 1   p05 0.999957   frazione > 0.99 = 1.0000
+```
+
+**Il 100 % delle coppie consecutive ha overlap > 0.99.**
+
+### (B) Nessuna correlazione
+
+```
+corr( log(comp0/|psi|), log(salto relativo) ) = -0.0017     su 52149 nodi-coppia
+tutti i 52145 stanno nella fascia comp0 > 1e-1
+```
+
+**Il candidato cade due volte: per assenza della causa e per assenza di correlazione.**
+
+### (D) ⚠ LA CURA FALLISCE SU ENTRAMBI GLI ASSI
+
+| | `a` ORIGINALE | `a` CURATO |
+|---|---|---|
+| **LIVELLO** `median\|a\|` | **3.94e-04** | **7.03e-06** |
+| **SALTO** `\|Δa\|/\|a\|` | **0.712** | **0.786** |
+| rapporto livello curato/originale | | **0.0179** |
+
+**Il livello crolla di 56 volte — la cura toglie il 98 % del segnale** (era la lettura prevista).
+**E il salto NON scende, PEGGIORA.** **Non è un compromesso «meno segnale ma più stabile»: è peggio
+su entrambi gli assi.**
+
+### ⚠ E si dimostra perché — dalla STRUTTURA dell'oggetto, non da un seme
+
+Poiché la componente 0 è il **99.99 %** dello spinore:
+
+```
+overlap ~ conj(psp[:,0])*ps[:,0]   =>   angle(overlap) ~ a_originale
+=>  a_curato = a_or - angle(overlap) ~ 0  +  CANCELLAZIONE CATASTROFICA
+```
+
+**La cura sottrae `a` a sé stessa**, ed è per questo che il salto **relativo aumenta**.
+**Il conto nel task history era giusto nella conclusione e INCOMPLETO nella ragione:** avevo detto
+*«per rotazione rigida»*; la misura dice che **basta che una componente domini**.
+
+**E perché nel lift funziona e qui no:** là le due componenti sono **entrambe vive** e la fase globale
+è **gauge**; qui **una ne porta il 99.99 %** e la sua fase **è il segnale**. **Lo stesso codice, su
+oggetti diversi, fa cose opposte.**
+
+### ⚠ E `L1` da solo sarebbe stato un FALSO PASS
+
+Il sigillo del mandato guardava **un numero solo** (il salto). **Se il salto fosse sceso, avrei
+cablato una cura che toglie il 98 % dell'orologio.** **La coppia salto+livello era necessaria**, ed
+era nel task history perché ce l'ho messa io — **il mandato non la chiedeva.**
+
+### ⚠ E `Z36` STESSO VA RI-LETTO — il `64.7 %` è un rapporto su una grandezza minuscola
+
+Gli stati consecutivi hanno overlap **> 0.99 nel 100 % dei casi**, e il livello di `a` è
+**3.94e-04 rad/passo**. Quindi *«il tempo proprio salta del 65 %»* significa: una fase che avanza di
+`4e-04` per passo **varia di ~2.8e-04** — **in valore assoluto MENO del salto del feedback
+(`1.1e-03`)**.
+
+> **È la stessa forma dell'errore del `2.706`: un rapporto grande perché il denominatore è piccolo.**
+> **L'ho trovata addosso a me per la seconda volta.**
+
+La mia frase *«il tempo proprio non è cucito, venti volte peggio del feedback»* (§9.49) **resta vera
+SUL RAPPORTO, ma va qualificata: NON è «il tempo proprio è rumore».** *(E non è rumore numerico:
+`4e-04` è dodici ordini sopra la precisione di `angle`.)*
+
+### Cosa resta a Luca
+
+1. **La cucitura è esclusa PER DIMOSTRAZIONE**, non per misura su un seme: torna in gioco **solo** se
+   cade la dimostrazione, cioè se lo spinore smettesse di stare al 99.99 % su una componente.
+2. **`Z36` resta aperta con la domanda AFFINATA:** non *«la fase è confrontabile?»* — **lo è** — ma
+   ***«un avanzamento di fase di `4e-04` per passo, che fluttua del 65 %, è l'orologio che
+   vogliamo?»*** E si ricollega a `Z9`: con un avanzamento così piccolo **la maturazione è lenta per
+   costruzione**.
+3. **Niente cablato:** `psi_spin` non toccato, `f` non ridefinito, gauge non toccato.
+   **`Z9` non rimisurata**: il §5 del mandato la prevede **dopo** la cura, e la cura non c'è.
+4. **LIMITE dichiarato:** un seme, 120 passi, una scena. La dominanza al 99.99 % **potrebbe essere di
+   questa configurazione** (`_psi_spinor` nasce da `exp(i·φ)` sull'asse 0, `:2657`).

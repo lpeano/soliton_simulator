@@ -119,10 +119,44 @@ gauge.
 
 ## 3. TODO DEL NEXT STEP
 
-- [ ] **A** — `|psi_spin[:,0]| / |psi_spin|`: distribuzione e frazioni sotto soglia
-- [ ] **B** — i salti di `f` correlano con la componente piccola?
-- [ ] **C** — `|<psi_prec|psi>|` dove `f` salta
-- [ ] **D** — ⚠ `a_curato`: il salto scende **e il livello resta**? *(la coppia, non un numero solo)*
-- [ ] **STOP e riporta** col verdetto contro le quattro letture
-- [ ] *(solo se D è verde)* previsioni → cura → sigilli `L0-L10` → `Z9` rimisurata
+- [x] **A** — `|psi_spin[:,0]| / |psi_spin|`: distribuzione e frazioni sotto soglia
+- [x] **B** — i salti di `f` correlano con la componente piccola?
+- [x] **C** — `|<psi_prec|psi>|` dove `f` salta
+- [x] **D** — ⚠ `a_curato`: il salto scende **e il livello resta**? *(la coppia, non un numero solo)*
+- [x] **STOP e riporta** col verdetto contro le quattro letture
+- [x] ~~*(solo se D è verde)*~~ — **D è ROSSO: non si cabla** previsioni → cura → sigilli `L0-L10` → `Z9` rimisurata
 - [ ] **⚠ NON toccare:** `psi_spin`, la definizione di `f`, `median(|f|)`, `max(...,1e-9)`, `+1e-6`
+
+---
+
+## 4. ESITO — *cosa il ragionamento preliminare aveva preso, e cosa no*
+
+**PRESO, ed era il contributo del giro:** **l'obiezione.** Avevo scritto, **prima di misurare**, che
+la cura avrebbe potuto **togliere il segnale invece del rumore**, con il conto
+`a_curato = a_or − angle(overlap)`. **Misurato: il livello crolla di 56 volte.**
+**Se avessi eseguito il mandato alla lettera, `L1` sarebbe passato e avrei cablato una cura che
+toglie il 98 % dell'orologio.**
+
+**E la coppia salto+livello** — che il mandato non chiedeva e che ho aggiunto — **è ciò che lo ha
+reso visibile.** `L1` da solo guarda un numero.
+
+**NON PRESO — due cose, e la seconda è più importante:**
+
+1. **non avevo previsto che il salto PEGGIORASSE** (`0.712 → 0.786`). Pensavo a un compromesso;
+   è peggio su entrambi gli assi.
+2. **la ragione del fallimento non era quella che avevo scritto.** Avevo detto *«per rotazione
+   rigida»*. **La misura dice che basta che una componente domini** — ed è il **99.99 %**. **La mia
+   conclusione era giusta, la mia spiegazione era più stretta del vero.**
+
+**E una cosa che non cercavo:** `|<ψ_prec|ψ>| ≈ 1` nel **100 %** dei casi. **Questo ri-legge `Z36`
+stesso**: il `64.7 %` è un rapporto su `4e-04`, ed è **la stessa forma dell'errore del `2.706`**.
+**L'ho trovata addosso a me per la seconda volta.**
+
+## 5. TODO DEL PROSSIMO PASSO
+
+- [ ] **decisione di Luca:** la cucitura è **esclusa per dimostrazione**. `Z36` resta aperta con la
+      **domanda affinata**: *un avanzamento di fase di `4e-04` per passo è l'orologio che vogliamo?*
+- [ ] **da ricontrollare quando lo spinore ruoterà davvero fra le componenti:** il candidato del
+      mandato **tornerebbe in gioco**. Oggi `comp0 ≥ 0.899` sempre.
+- [ ] **`Z9` non rimisurata**: la cura non c'è, e il §5 la prevede dopo
+- [ ] **⚠ NON toccare:** `psi_spin`, la definizione di `f`, il gauge

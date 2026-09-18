@@ -1,0 +1,43 @@
+[TIMBRO] _Z36_cucitura.py  sha1-BYTE 1f0bf98e  committato e pulito
+C:\Users\lpeano\soliton_simulator\csv\_test_fork\_Z36_cucitura.py:70: RuntimeWarning: invalid value encountered in divide
+  ovn=np.abs(ov) / (nps * npp)))             # C: overlap NORMALIZZATO
+======================================================================================================================
+Z36 -- quale candidato domina, e la CUCITURA conserva il segnale?   [120 passi, seme 5]
+======================================================================================================================
+  config: CAMPO_SPINORIALE=True SPINORE_VIVO=True SPIN_FEEDBACK=True TEMPO_PROPRIO_ORIENTATO=False
+
+  invocazioni utilizzabili: 124 su 126
+
+--- (A) `|psi_spin[:,0]| / |psi_spin|` -- la componente si annulla? ---
+  su 13320 nodi-istanza (ultimi 30 passi):
+    mediana 0.999881   p05 0.990825   p01 0.976511   min 0.899377
+    frazione sotto 1e-01    : 0.000000
+    frazione sotto 1e-02    : 0.000000
+    frazione sotto 1e-03    : 0.000000
+    frazione sotto 1e-06    : 0.000000
+    frazione sotto 1e-09    : 0.000000
+  (se una frazione non trascurabile e' sotto 1e-3, `angle` su quella componente e' rumore)
+
+--- (C) `|<psi_prec|psi>|` NORMALIZZATO -- gli stati erano vicini? ---
+    mediana 1   p05 0.999957   frazione > 0.99 : 1.0000   > 0.9 : 1.0000
+  (vicino a 1 = stati VICINI: allora un salto di `f` e' un artefatto della parametrizzazione)
+
+--- (B) i salti di `f` correlano con la componente piccola? ---
+  corr( log|comp0/|psi||, log(salto relativo) ) = -0.0017   su 52149 nodi-coppia
+    > 1e-1         : salto relativo MEDIANO 0.6789   (n = 52145)
+  (se il salto e' MOLTO piu' grande dove comp0 e' piccola, domina la PARAMETRIZZAZIONE)
+
+--- (D) ⚠ LA CUCITURA CONSERVA IL SEGNALE? Serve LA COPPIA: salto E livello ---
+                             a ORIGINALE      a CURATO        
+  LIVELLO  median|a|         0.000393536      7.02971e-06     
+  SALTO  |delta a|/|a|       0.711504         0.785549        
+  rapporto LIVELLO cu/or                      0.0178629       
+
+  COME SI LEGGE -- le letture erano fissate PRIMA (task history 02ac909):
+    salto SCENDE e livello RESTA   -> la cura funziona: si cabla.
+    salto SCENDE ma livello CROLLA -> LA CURA TOGLIE IL SEGNALE, non il rumore. NON si cabla,
+                                      e `L1` da solo sarebbe un FALSO PASS.
+    salto NON scende               -> la cucitura non e' il meccanismo: reperto, e si ferma.
+  Riferimento: il lift CUCITO (G6) salta dello 0.35 %; `f` non cucito salta del 64.7 %.
+
+======================================================================================================================
