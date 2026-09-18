@@ -1,0 +1,62 @@
+--- PASSO 0: la CONFIGURAZIONE che questo script misura davvero ---
+   SPINORE_VIVO             = True
+   SPINORE                  = True
+   SPIN_FEEDBACK            = True
+   FRAME_DRAG               = True
+   CS_DINAMICO              = True
+   CHI_CORE                 = True
+   TEMPO_PROPRIO_ORIENTATO  = False
+   -> il feedback GIRA in questa misura? SI'
+   TAU_A = 50.0   <- le misure storiche di Z9 sono a 50. ramp = min(1, eta/TAU_A), quindi
+      confrontare ramp fra TAU_A diversi sarebbe A3c puro.
+======================================================================================================================
+RIMISURA DI Z9 -- blob soliton_simulator.py
+======================================================================================================================
+
+--- (A) SCENA ORIGINALE (confrontabile con cdc0e41) ---
+  passo   n       eta med      RAMP med       ramp p05     ramp p95     ramp=0 %    
+  1       360     0.01         0.0002         0.0002       0.0002       0.00        
+  20      360     0.16566      0.0033133      0.0021518    0.004959     0.00        
+  60      360     0.51158      0.010232       0.0071071    0.015086     0.00        
+  120     360     1.0575       0.021151       0.01469      0.028702     0.00        
+  crescita di eta per passo : 0.0088029      (riferimento cdc0e41: ~0.009)
+  passo estrapolato per ramp = 1 : 5680   (riferimento cdc0e41: ~5526)
+
+--- (B) SCENA DEL BATCH (il sistema che gira davvero) ---
+  passo   n       eta med      RAMP med       ramp p05     ramp p95     ramp=0 %    
+  1       440     0.01         0.0002         0.0002       0.0012476    0.00        
+  20      442     0.1628       0.003256       0.0026088    0.0058777    0.00        
+  60      443     0.49597      0.0099195      0.0082362    0.016473     0.00        
+  120     444     0.99361      0.019872       0.016556     0.032478     0.00        
+  crescita di eta per passo : 0.00826561      (riferimento cdc0e41: ~0.009)
+  passo estrapolato per ramp = 1 : 6049   (riferimento cdc0e41: ~5526)
+
+  R6 -- `_pesi()` per passo, e da che parte della scrittura della cache:
+     passo 4    totale 12     PRIMA 7      DOPO 5   
+     passo 5    totale 12     PRIMA 7      DOPO 5   
+     passo 6    totale 12     PRIMA 7      DOPO 5   
+     passo 7    totale 13     PRIMA 7      DOPO 6   
+     passo 8    totale 12     PRIMA 7      DOPO 5   
+     MEDIANA per passo: 12.0    (riferimento 8bfcf46: 16, con 9 PRIMA e 7 DOPO)
+     totale PRIMA 861, totale DOPO 624
+     per CHIAMANTE: stato_crossover=1354, step=123, calcola_psi=8
+     `_pesi()` come lettore di _cs_nodo_prev: fallback 18 su 1485 (1.2121 %)
+
+--- PASSO 1 (P4): median(ritmo()) e' ancorato a 1.0 per costruzione? ---
+   chiamate a ritmo() osservate : 246
+   median(r) : mediana 0.999999450168   min 0.000001414212   max 1.000000000000
+   chiamate con median(r) = 1.0 all'epsilon : 130 su 246  (52.85 %)
+   le altre (TRANSITORIO DEGENERE, f tutto zero -> med sul pavimento 1e-9):
+      quante 116   valori distinti [1.00000e-06 9.99857e-01 9.99898e-01 9.99900e-01 9.99902e-01 9.99919e-01]
+   scarto da 1.0 sulle chiamate NON degeneri : MAX 8.266e-07
+      se e' all'epsilon, l'incremento MEDIANO di eta e' PINNATO per costruzione e il
+      meccanismo 'psi cambia -> eta cresce diversamente' e' bloccato al PRIMO ORDINE.
+      Resta la FORMA della distribuzione e la POPOLAZIONE (i neonati entrano con eta=0).
+   r min/max osservati : 1.41421e-06 / 1.41421   (la MEDIANA e' ancorata, la DISPERSIONE no)
+
+======================================================================================================================
+COME SI LEGGE
+ (A) e' l'UNICO confronto lecito coi numeri di cdc0e41: stessa scena, stesso metodo.
+ (B) e' il numero che vale per il sistema reale, ed e' quello da usare d'ora in poi.
+ R6 si legge da (B): se `_pesi()` gira tutta da un lato della scrittura della cache, l'ostacolo
+ e' caduto; se gira ancora a cavallo, regge.

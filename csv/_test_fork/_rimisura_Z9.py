@@ -217,7 +217,19 @@ if _RITMI:
     print("   chiamate a ritmo() osservate : %d" % len(_RITMI))
     print("   median(r) : mediana %.12f   min %.12f   max %.12f"
           % (np.median(_med), _med.min(), _med.max()))
-    print("   scarto MASSIMO da 1.0 : %.3e" % np.max(np.abs(_med - 1.0)))
+    # ⚠ IL MASSIMO E' LO STATISTICO SBAGLIATO, e il primo giro l'ha mostrato: dava 1.000e+00
+    #   perche' nel TRANSITORIO `f` e' degenere (tutti zero) -> med cade sul pavimento 1e-9,
+    #   x -> 0 oppure -> inf, e median(r) vale 1.414e-06 oppure 1.41421 invece di 1. Riportare solo
+    #   il MAX mescola quel transitorio col regime. Si riporta la FRAZIONE, che li separa.
+    _vicino = np.abs(_med - 1.0) < 1e-6
+    print("   chiamate con median(r) = 1.0 all'epsilon : %d su %d  (%.2f %%)"
+          % (int(_vicino.sum()), len(_med), 100.0 * _vicino.mean()))
+    _deg = _med[~_vicino]
+    if len(_deg):
+        print("   le altre (TRANSITORIO DEGENERE, f tutto zero -> med sul pavimento 1e-9):")
+        print("      quante %d   valori distinti %s" % (len(_deg), np.unique(np.round(_deg, 6))[:6]))
+    print("   scarto da 1.0 sulle chiamate NON degeneri : MAX %.3e"
+          % (np.max(np.abs(_med[_vicino] - 1.0)) if _vicino.any() else float("nan")))
     print("      se e' all'epsilon, l'incremento MEDIANO di eta e' PINNATO per costruzione e il")
     print("      meccanismo 'psi cambia -> eta cresce diversamente' e' bloccato al PRIMO ORDINE.")
     print("      Resta la FORMA della distribuzione e la POPOLAZIONE (i neonati entrano con eta=0).")

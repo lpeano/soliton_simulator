@@ -4809,3 +4809,76 @@ Un seme, 60 passi, una scena. **PRE e POST divergono**: i valori assoluti non si
 due giri — **ciò che si confronta è il rapporto fra le mode DENTRO ciascun giro**, ed è per questo
 che la misura è disegnata così. E `omega_s` a `g=2` vale 42-56 contro 0.43 nel bulk: i neonati
 ruotano in un regime completamente diverso, **non interpretato** — è il settore aliasato, `Z9`.
+
+---
+
+## 9.46 — **`Z9` rimisurata sul blob attuale: INTATTA (+2.8 %). E il meccanismo che poteva cambiarla è bloccato da una normalizzazione**
+
+**Data:** 2026-09-18 · blob `72acd6aa` · un seme (5), 120 passi, **due scene** ·
+**task history scritto e pushato PRIMA:** `93308af` · strumento `csv/_test_fork/_rimisura_Z9.py`,
+**lo stesso usato le due volte precedenti**.
+
+### Il rilievo di Luca era corretto
+
+Il numero di `Z9` era del blob `a8f1b2f4` — **prima** di `Z25`, `Z24/Z27` e dei due default. **E il
+meccanismo che descriveva esiste tutto:** `eta += dt_n`, `dt_n = DT·r`, `r = ritmo()` dipende da
+`psi`, e il feedback ora gira e cambia `psi`.
+
+### Il numero — **`Z9` regge**
+
+| | `ramp` a 1 / 60 / 120 | `ramp = 1` al passo |
+|---|---|---|
+| **storico** | 0.0002 / 0.0106 / 0.0217 | **~5526** |
+| **(A) scena originale** *(l'unico confronto lecito)* | **0.0002 / 0.010232 / 0.021151** | **5680** → **+2.8 %** |
+| **(B) scena del batch** *(il sistema che gira davvero)* | 0.0002 / 0.0099 / 0.0199 | **6049** |
+
+**La previsione ex ante era «invariato entro un fattore ~2»: è entro il 3 %.**
+**E il numero da citare d'ora in poi è quello della scena (B).**
+
+### ⭐ Il perché non si è mosso — **P4, verificato non dedotto**
+
+`ritmo()` (`:2043-2049`) normalizza su `median(|f|)`, e con `TEMPO_PROPRIO_ORIENTATO = False`
+(default) `f = |signed| ≥ 0`, quindi `median(x) = 1` esatto e la mappa `x → r` è monotona.
+
+**Misurato: `median(r) = 1.0` a meno di `~1.4e-4` in 245 chiamate su 246.** *(L'unica eccezione è il
+primo passo, `f` identicamente nullo, dove `med` cade sul pavimento `1e-9`.)*
+
+> **`median(dt_n) = DT` esattamente ⟹ l'incremento MEDIANO di `eta` è PINNATO PER COSTRUZIONE, e il
+> meccanismo è bloccato al PRIMO ORDINE.**
+
+È **C12 — ma la condizione andava verificata, non citata**: con `--tempo-proprio-orientato`
+l'ancoraggio **cadrebbe**, perché `f` sarebbe firmato mentre `med` resta `median(|f|)`.
+**Ciò che resta libero è la forma della distribuzione di `r` e la popolazione: insieme valgono
+`+2.8 %`.**
+
+### ⚠ E due correzioni ai miei stessi criteri, **in due giri consecutivi**
+
+1. Avevo scritto il criterio P4 col **MASSIMO**: dava `scarto MAX da 1.0 = 1.000e+00`, che letto da
+   solo direbbe *«l'ancoraggio non c'è»* mentre i numeri accanto lo smentivano. **Il massimo
+   descriveva la coda, non la popolazione** — stessa forma di `A3c` e della pendenza di `Z27`.
+2. Corretto in **frazione**, ho messo la soglia a `1e-6` e ho etichettato **116 chiamate su 246**
+   come *«transitorio degenere»*. **Sono `0.999857 … 0.999919`: `1.0` a quattro cifre.** La soglia
+   era troppo stretta e l'etichetta sbagliata.
+
+**In un giro dedicato a verificare un ancoraggio, ho sbagliato due volte lo statistico con cui lo
+verificavo.** È la famiglia che continuo a catalogare, e stavolta è mia due volte di fila.
+
+### `R6` regge, e un numero annotato
+
+`_pesi()` **12 per passo** (rif. 16), **861 PRIMA / 624 DOPO** la scrittura della cache → **gira
+ancora a cavallo: `R6` regge.** Per chiamante: `stato_crossover` 1354, `step` 123, `calcola_psi` 8.
+
+**Fallback su `_cs_nodo_prev`: 1.2121 %** — **piccolo ma non nullo, e non l'ho interpretato**: manca
+il confronto col valore della rimisura precedente. **Annotato come da verificare.**
+
+### Cosa ne segue
+
+- **`Z9` non cambia nessuna conclusione**: resta che i run da 120-500 passi vivono nel transitorio —
+  a 120 passi il sistema ha vissuto **~1/50** della maturazione;
+- **`Z9` non precludeva `Z30`**, e ora si può dirlo con un numero misurato sul blob attuale invece
+  che su uno di due generazioni fa.
+
+### I limiti
+
+Un seme, 120 passi. **Le due scene non si mescolano** e danno `5680` contro `6049` (**+6.5 %**):
+è la differenza di metodo già registrata.

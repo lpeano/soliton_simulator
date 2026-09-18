@@ -119,10 +119,42 @@ conseguenza è di Luca.
 
 ## 3. TODO DEL NEXT STEP
 
-- [ ] **passo 0** — verificare che `_rimisura_Z9.py` misuri la config **nuova** *(lo fa solo perché
+- [x] **passo 0** — verificare che `_rimisura_Z9.py` misuri la config **nuova** *(lo fa solo perché
       il default è stato promosso: va stampato)*
-- [ ] **passo 1** — `median(ritmo())` è `1.0` all'epsilon? *(P4: la grandezza è libera di cambiare?)*
-- [ ] **passo 2** — `ramp` mediano a **1 / 60 / 120**, **`TAU_A = 50`**, **due scene separate**
-- [ ] **passo 3** — se cambia: separare *crescita di `eta`* da *frazione di neonati*
-- [ ] referto + `Z9` aggiornata **col blob e la data** + relazione + riportare a Luca
+- [x] **passo 1** — `median(ritmo())` è `1.0` all'epsilon? *(P4: la grandezza è libera di cambiare?)*
+- [x] **passo 2** — `ramp` mediano a **1 / 60 / 120**, **`TAU_A = 50`**, **due scene separate**
+- [x] **passo 3** — se cambia: separare *crescita di `eta`* da *frazione di neonati*
+- [x] referto + `Z9` aggiornata **col blob e la data** + relazione + riportare a Luca
 - [ ] **⚠ NON toccare:** `Z30` (decisione di Luca), `Z31`, il punto 1 di `Z24`
+
+---
+
+## 4. ESITO — *cosa il ragionamento preliminare aveva preso, e cosa no*
+
+**PRESO, ed era il contributo principale:** il rilievo **P4** — *la grandezza è libera di cambiare?*
+La risposta è **no al primo ordine**, e questo **spiega** il risultato invece di limitarsi a
+riportarlo. Senza quel passo avrei scritto *«Z9 non è cambiata»* senza sapere **perché**, e il
+prossimo che cambia `psi` si sarebbe rifatto la stessa domanda da capo.
+
+**PRESO anche:** il difetto dello strumento (la lista di flag senza `SPIN_FEEDBACK`) e il rischio
+`A3c` su `TAU_A`, entrambi trovati **prima** di misurare.
+
+**E la previsione era giusta:** *«invariato entro un fattore ~2»* → **entro il 3 %**.
+
+**NON PRESO:** **ho scritto male il criterio P4 due volte di fila.** Prima col **massimo** — che
+dava `1.000e+00` e avrebbe detto il contrario del vero. Poi con una soglia di `1e-6` che ha
+etichettato **116 chiamate su 246** come «degeneri» quando sono `1.0` a quattro cifre.
+**In un giro dedicato a verificare un ancoraggio, ho sbagliato due volte lo statistico con cui lo
+verificavo.** È la stessa famiglia che continuo a catalogare negli altri, e stavolta è mia due
+volte di seguito.
+
+**E una cosa che non avevo previsto:** il fallback su `_cs_nodo_prev` è **1.21 %**, non zero.
+**Piccolo ma non nullo, e non l'ho interpretato** — manca il confronto con la rimisura precedente.
+
+## 5. TODO DEL PROSSIMO PASSO *(aggiornato)*
+
+- [ ] **il numero da citare d'ora in poi è quello della scena (B): `ramp = 1` a `~6049` passi**
+- [ ] **`Z9` NON precludeva `Z30`**: la decisione su `nudo`/`linea` è di Luca, sui due punti insieme
+- [ ] **da verificare:** il fallback `_cs_nodo_prev` all'**1.21 %** — era zero nella rimisura
+      precedente? *(non ho il numero sottomano: va ripreso dal referto di allora)*
+- [ ] **⚠ NON toccare:** `Z31`, il punto 1 di `Z24` (`refl` = legge nuova)
