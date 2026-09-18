@@ -4736,3 +4736,76 @@ che una preferenza.** È la domanda che mi interessa di più, ed è aperta a Cla
   fuori. I sei gruppi sani lo coprono, i quattro rotti **no**.
 - **Il punto 1 di `Z24`** (`refl`): **legge nuova**, non bonifica.
 - **4 semi sono il minimo**: un effetto vero ≤ 1 % è **invisibile** a questo disegno.
+
+---
+
+## 9.45 — **La premessa di Luca è vera e la compensazione esiste. Ma la scelta del denominatore NON si vede a valle**
+
+**Data:** 2026-09-18 · un seme (5), 60 passi, una scena · `csv/_test_fork/_estensivita_grado.py`
+**Task history scritto e pushato PRIMA della misura:** `75a15bc`.
+
+### La speculazione, e cosa ne è rimasto
+
+Luca: *«il grado è un proxy della densità; un nodo denso ha inerzia alta, quindi ruota di meno a
+parità di coppia; l'estensività è già compensata dall'inerzia, e normalizzare anche il feedback la
+compenserebbe due volte. Quindi `nudo` — ma va misurato.»*
+
+**Tre risultati, e il terzo cambia la domanda.**
+
+### ① «grado alto = regione densa» — **confermato, e non era un fatto stabilito**
+
+`corr(grado, rho_sorgente) = +0.79`; fra le due mode il rapporto è **637×** (`0.00228` a `g=2`
+contro `1.453` a `g≥100`). **Era una premessa. Adesso è misurata.**
+
+### ② La compensazione **esiste ed è grande — nel settore dello SPIN**
+
+Contrasto `rho/peq`: **×295** verso il bulk. E `omega_s` **decresce col grado di un fattore ~130**
+(`56.2` a `g=2` contro `0.428` a `g≥100`). **È esattamente il segno che l'argomento prevede: più
+denso → più inerzia → ruota meno.**
+
+*(Nota di metodo: su `rho/peq` la correlazione di Pearson dà `+0.20`, che sembra debole, **ma è la
+statistica sbagliata** — su una distribuzione bimodale con code pesanti è dominata dalla varianza
+dentro il bulk. **Il rapporto fra le mode, `295×`, è quella giusta.** È la lezione già pagata in
+`Z27`.)*
+
+### ③ ⚠ **Ma la scelta del denominatore non arriva all'osservabile**
+
+| `phivel` *(la catena dove il feedback ENTRA)* | `g=2` | `g≥100` | rapporto |
+|---|---|---|---|
+| **PRE** (`/grado`, termine **intensivo** 0.989) | 1.938 | 9.478 | **4.891** |
+| **POST** (`nudo`, termine **estensivo ×36.2**) | 1.893 | 9.186 | **4.853** |
+
+**0.8 % di differenza** — e il confronto è fra i **due estremi disponibili**: un fattore **37** sul
+termine produce **0.8 %** sull'osservabile.
+
+> **Il bias di grado di `phivel` precede la cura, sopravvive alla cura, e non è il denominatore a
+> produrlo.** La spiegazione più semplice, e la do come tale: `coppia` contiene altri termini —
+> `_coppia_interferenza`, la repulsione, `twist_nodo` — **e sono quelli a dominarne la struttura in
+> grado**. Coerente con l'A/B a quattro semi, che non mostrava effetto.
+
+### Cosa ne segue per `Z30` — **e correggo come l'avevo posta**
+
+**Avevo portato a Luca `36.2` contro `16.9` come la posta in gioco. Quei numeri sono sul TERMINE; a
+valle valgono `0.8 %`.** La scelta andava presentata dicendo **su cosa** si misurano.
+
+- **il criterio «quale forma è meno estensiva» NON discrimina**: l'osservabile non lo vede;
+- **restano `A1` e §3 — `nudo` non richiede nessuna scelta** — ma ora non è solo un principio:
+  **è una misura che dice che l'alternativa non compra niente**;
+- **`linea` non è «più sicuro»: è una scelta in più senza un guadagno misurabile.**
+
+**La speculazione regge, con una precisazione:** la compensazione è **reale e misurata**, ma agisce
+sul settore dello **spin**, non su quello in cui il feedback entra. **Il feedback non ha bisogno di
+essere normalizzato — non perché l'inerzia lo compensi, ma perché la sua forma non arriva
+all'osservabile.**
+
+### La domanda nuova che ne nasce, **non misurata**
+
+**Il bias di grado di `phivel` (`×4.9`) è esso stesso un difetto? Da dove viene?** Candidati:
+`_coppia_interferenza`, la repulsione, `twist_nodo`. **Aperta.**
+
+### I limiti
+
+Un seme, 60 passi, una scena. **PRE e POST divergono**: i valori assoluti non si confrontano fra i
+due giri — **ciò che si confronta è il rapporto fra le mode DENTRO ciascun giro**, ed è per questo
+che la misura è disegnata così. E `omega_s` a `g=2` vale 42-56 contro 0.43 nel bulk: i neonati
+ruotano in un regime completamente diverso, **non interpretato** — è il settore aliasato, `Z9`.

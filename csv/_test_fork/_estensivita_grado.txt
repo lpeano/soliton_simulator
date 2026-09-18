@@ -1,0 +1,60 @@
+[TIMBRO] _estensivita_grado.py  sha1-BYTE c1f66b33  committato e pulito
+======================================================================================================================
+L'ESTENSIVITA' E' UN DIFETTO?  [TAU_A=2.0, 60 passi, seme 5]
+======================================================================================================================
+
+--- PASSO 0: LA CATENA. Il feedback passa per l'INERZIA o per M_PH? ---
+   :3204   il gate del feedback                         if SPINORE_VIVO and SPINORE and SPIN_FEEDBACK
+   :3221   il feedback entra in `coppia`                coppia += _fb
+   :3261   e anche twist_nodo (Z27)                     coppia = coppia + twist_nodo[:self.n]
+   :3304   `coppia` -> delta_phivel / M_PH              delta_phivel = dt_n_s * (coppia - G_PH
+   :206    M_PH, il divisore di QUELLA catena           M_PH     =
+   :2375   l'UNICA /inerzia: divide `correzione`, non `coppia` omega_new = omega_src + dtn_c
+  M_PH = 1.0   -> COSTANTE GLOBALE: nessuna inerzia a valle del feedback
+
+  ESITO PASSO 0: la lettura committata in a15716c REGGE. Due catene separate:
+    feedback + twist_nodo  ->  `coppia`  ->  / M_PH (uniforme)  ->  phivel      [settore FASE]
+    correzione = B x nb    ->  / inerzia (per nodo)             ->  omega_s     [settore SPIN]
+  Quindi la 'doppia compensazione' NON puo' avvenire sul canale del feedback: a valle c'e' una
+  COSTANTE. Resta aperta la via INDIRETTA (phivel -> phi -> psi -> rho -> inerzia), mai misurata.
+
+--- giro POST-CURA (nudo, lo stato cablato) e giro PRE-CURA (/grado) ---
+  nodi: POST 468   PRE 465   (traiettorie diverse: i confronti di AMPIEZZA fra i due non hanno barra)
+
+--- PASSO 1: la premessa di Luca -- `grado` e' un proxy della DENSITA' locale? ---
+  POST  grado vs rho       : corr +0.7923   mediana a g=2 0.0022817 (n=27)  a g>=100 1.453 (n=360)  rapporto 636.8
+  POST  grado vs peq_nodo  : corr +0.7629   mediana a g=2 0.34022 (n=27)  a g>=100 0.66593 (n=360)  rapporto 1.957
+  PRE   grado vs rho       : corr +0.7881   mediana a g=2 0.0018852 (n=25)  a g>=100 1.3968 (n=360)  rapporto 740.9
+  PRE   grado vs peq_nodo  : corr +0.7323   mediana a g=2 0.34431 (n=25)  a g>=100 0.64151 (n=360)  rapporto 1.863
+  (su un grafo costruito per PROSSIMITA' una correlazione positiva e' ATTESA: il valore
+   informativo e' QUANTO, e se il rapporto fra le due mode e' grande o vicino a 1)
+
+--- PASSO 2: la compensazione ESISTE? `inerzia` cresce col grado? ---
+  inerzia = max( (rho_sorgente / peq_nodo) * (d_nodo/cs_nodo)^2 , 1e-6 )
+  POST  contrasto rho/peq vs grado : corr +0.1999   g=2 0.0076347   g>=100 2.2489   rapporto 294.6
+  PRE   contrasto rho/peq vs grado : corr +0.2521   g=2 0.0050962   g>=100 2.2872   rapporto 448.8
+  ⚠ NB: si riporta il CONTRASTO `rho/peq`, non l'inerzia piena: il fattore `(d/cs)^2` e' una
+     LOCALE di _passo_spinoriale e il simulatore non lo espone. Ricostruirlo qui sarebbe una
+     RI-IMPLEMENTAZIONE, e chiamarlo 'inerzia' sarebbe un fallback silenzioso (P5). Il contrasto e'
+     il fattore che l'argomento di Luca chiama in causa ('rho/peq alto'), quindi e' quello giusto.
+
+--- PASSO 3: LA MISURA CHIESTA -- omega contro il grado, PRIMA e DOPO ---
+  ⚠ DUE osservabili in DUE catene: `phivel` e' dove il feedback ENTRA; `omega_s` e' la catena
+    dell'inerzia, dove entra solo INDIRETTAMENTE.
+
+  osservab.  variante  g = 2         g >= 100      rapporto    corr(grado)
+  phivel     PRE       1.9378        9.4784        4.891       +0.4817
+  phivel     POST      1.8929        9.1863        4.853       +0.4834
+
+  omega_s    PRE       56.231        0.42838       0.007618    -0.2146
+  omega_s    POST      42.044        0.44611       0.01061     -0.1435
+
+======================================================================================================================
+COME SI LEGGE -- le tre letture erano fissate PRIMA (task history, commit 75a15bc)
+  |omega| PIATTO col grado DOPO  -> l'estensivita' e' compensata a valle: la speculazione REGGE, e
+                                    `nudo` e' giustificato da una MISURA, non solo da A1.
+  CRESCE dopo, era piatto prima  -> la cura ha introdotto un BIAS DI GRADO nell'osservabile: e' un
+                                    costo reale, e va messo accanto al guadagno.
+  Cresceva ANCHE PRIMA           -> il bias PRECEDE la cura: il denominatore non e' cio' che lo
+                                    decide. Sarebbe il risultato piu' interessante.
+E le due mode NON si mediano: se danno verdetti opposti si riportano separate.

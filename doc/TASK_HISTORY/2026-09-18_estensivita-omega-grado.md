@@ -117,12 +117,40 @@ decisione resta di Luca, e va presa **sui due punti insieme** (`Z25` e `Z27`) co
 
 ## 3. TODO DEL NEXT STEP
 
-- [ ] **passo 0** — ri-verificare la catena del feedback dal sorgente *(se smentisce il committato,
+- [x] **passo 0** — ri-verificare la catena del feedback dal sorgente *(se smentisce il committato,
       si riporta per primo)*
-- [ ] **passo 1** — `grado` vs densità locale: la premessa di Luca è un fatto?
-- [ ] **passo 2** — `inerzia` vs grado: la compensazione ha una base misurata?
-- [ ] **passo 3** — `|phivel|` e `|omega_s|` vs grado, **prima e dopo**, **sulle due mode**
-- [ ] referto + voce `Z30` aggiornata col risultato + relazione (par.5-ter) + **riportare a Luca
+- [x] **passo 1** — `grado` vs densità locale: la premessa di Luca è un fatto?
+- [x] **passo 2** — `inerzia` vs grado: la compensazione ha una base misurata?
+- [x] **passo 3** — `|phivel|` e `|omega_s|` vs grado, **prima e dopo**, **sulle due mode**
+- [x] referto + voce `Z30` aggiornata col risultato + relazione (par.5-ter) + **riportare a Luca
       senza decidere**
 - [ ] **⚠ NON toccare:** `Z9`, il punto 1 di `Z24` (`refl` = legge nuova), `Z31` (meccanismo
       proposto, non cablato), e **non cambiare `Z25` in questo giro**
+
+---
+
+## 4. ESITO — *cosa il ragionamento preliminare aveva preso, e cosa no*
+
+**PRESO:** il rilievo sulla catena era **giusto e decisivo** — la doppia compensazione non può
+avvenire sul canale del feedback, e il passo 0 l'ha confermato. E la scelta di misurare **due**
+osservabili invece di una «ω» ha prodotto **due verdetti opposti**: senza quella separazione avrei
+riportato una risposta sola, e sbagliata per metà.
+
+**NON PRESO — e questa è la parte che il ragionamento preliminare non aveva:** non avevo previsto
+che **la scelta del denominatore non si vedesse a valle**. Avevo fissato tre letture su *«|ω| cresce
+o no col grado»*, e la risposta è **«cresce, ma non per via del denominatore»** — la terza lettura,
+che avevo chiamato «la più interessante» e che infatti lo è: **cambia la domanda invece di
+rispondere a quella posta.**
+
+**E un errore mio che il risultato corregge:** avevo portato a Luca `36.2` contro `16.9` come **la
+posta in gioco**. Sono numeri sul **termine**; **a valle valgono 0.8 %.** La scelta andava presentata
+dicendo **su cosa** quei numeri si misurano.
+
+## 5. TODO DEL PROSSIMO PASSO *(aggiornato)*
+
+- [ ] **`Z30` è decidibile, e ora con una misura**: il criterio dell'estensività **non discrimina**
+      → restano `A1` e §3, che indicano `nudo`. **Decisione di Luca, sui due punti insieme.**
+- [ ] **DOMANDA NUOVA, non misurata:** il bias di grado di `phivel` (`×4.9`) è esso stesso un
+      difetto? **Da dove viene?** *(candidati: `_coppia_interferenza`, la repulsione, `twist_nodo`)*
+- [ ] `Z31`: meccanismo **proposto, non cablato**
+- [ ] `Z9`, il punto 1 di `Z24` (`refl` = legge nuova): **non toccati**
