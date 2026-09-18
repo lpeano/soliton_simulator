@@ -120,10 +120,45 @@ che qualunque sostituzione è una decisione di Luca, e il mio stesso verdetto di
 
 ## 3. TODO DEL NEXT STEP
 
-- [ ] **A** — il CHIAMANTE delle invocazioni degeneri *(la domanda che viene prima di tutte)*
-- [ ] **B (2.1)** — cosa collassa: `f` tutto nullo / metà zero / mediana piccola
-- [ ] **C (2.2)** — quando: transitorio o regime, e coincidenza con le mitosi
-- [ ] **D (2.3)** — `r` e `std(dt_n)` nei degeneri contro i sani, **entrambe le code**
-- [ ] **STOP e riporta** col verdetto contro le **cinque** letture
+- [x] **A** — il CHIAMANTE delle invocazioni degeneri *(la domanda che viene prima di tutte)*
+- [x] **B (2.1)** — cosa collassa: `f` tutto nullo / metà zero / mediana piccola
+- [x] **C (2.2)** — quando: transitorio o regime, e coincidenza con le mitosi
+- [x] **D (2.3)** — `r` e `std(dt_n)` nei degeneri contro i sani, **entrambe le code**
+- [x] **STOP e riporta** col verdetto contro le **cinque** letture
 - [ ] **⚠ NON toccare:** il gauge, il `+1e-6`, `ramp`, `TAU_A`. **Nessuna cura.**
-- [ ] *(dopo, solo con via libera)* `Z9` rimisurata — **ma solo se `Z33` risulta nel percorso fisico**
+- [x] ~~*(dopo)* `Z9` rimisurata~~ — **NON SERVE**: impatto <= ~2 %, calcolato — **ma solo se `Z33` risulta nel percorso fisico**
+
+---
+
+## 4. ESITO — *cosa il ragionamento preliminare aveva preso, e cosa no*
+
+**PRESO, ed erano le tre cose che contavano:**
+
+1. **la causa (1)** — lo snapshot confrontato con sé stesso — trovata **leggendo `step()` prima di
+   misurare**: confermata **3 su 4**;
+2. **la causa (2)** — le lunghezze disallineate dopo una crescita di `n` — confermata **sul passo 6**
+   (`440/80`), ed è il **terzo membro** della famiglia `C11`/`C7`;
+3. **il segno del collasso.** Avevo scritto che il sospetto del mandato era *«probabilmente
+   sbagliato»*, perché con `f` identicamente nullo `x = 0` e non `∞`. **Misurato: `fraz r>1.4 =
+   0.0000`, `fraz r<1e-5 = 0.49`.** **Il mandato aveva il segno sbagliato, e averlo scritto prima è
+   ciò che rende la correzione credibile.**
+
+**E la quinta lettura che avevo aggiunto ha funzionato a metà, nella metà giusta:** la prima parte
+(*«è un artefatto della sonda»*) è **falsa** — tutte le chiamate vengono da `step()`. La seconda
+(*«se `f` è identicamente nullo la causa è l'ORDINE, non il gauge, e cambierebbe tutto il quadro»*)
+è **esatta**, ed è il risultato del giro.
+
+**NON PRESO:** **non avevo previsto che i quattro eventi si dividessero in DUE regimi opposti** —
+`r = 1.0` (ramo di sicurezza) e `r = 1.4e-06` (`f` nullo). Avevo pensato a un solo modo di
+degenerare. **Sono due, con cause diverse, e uno dei due è il ramo di sicurezza che fa il suo
+mestiere.**
+
+## 5. TODO DEL PROSSIMO PASSO
+
+- [ ] **decisione di Luca:** `Z33` è **transitorio e confinato**, la cura è **opzionale** e **non
+      tocca il gauge**. Curare o registrare e chiudere?
+- [ ] se si cura: **è la cura di `C7`/`C11`** (estendere lo snapshot con la popolazione) **più una
+      guardia A8** che dichiari `psi_spin == _psi_spin_prec`. **Nessuna delle due è una decisione di
+      gauge.**
+- [ ] **`Z9` NON va rimisurata**: impatto ≤ ~2 %, calcolato, dentro il rumore già misurato
+- [ ] **⚠ NON toccare:** il gauge, il `+1e-6`, `ramp`, `TAU_A`

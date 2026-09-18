@@ -1,0 +1,42 @@
+[TIMBRO] _gauge_degenere.py  sha1-BYTE b1ca7968  committato e pulito
+======================================================================================================================
+Z33 -- IL GAUGE DEGENERE: cosa collassa, quando, e cosa succede a r   [120 passi, seme 5]
+======================================================================================================================
+  config: CAMPO_SPINORIALE=True  SPINORE_VIVO=True  SPIN_FEEDBACK=True  CS_DINAMICO=True  TAU_LOC=1.0
+
+--- (A) IL CHIAMANTE -- le degeneri sono nel PERCORSO FISICO? ---
+  TUTTE le invocazioni, per chiamante : step=126
+  le DEGENERI, per chiamante          : step=4
+  -> se le degeneri vengono SOLO da un diagnostico, `eta` non le vede mai (solo la chiamata
+     dentro `step()` alimenta `dt_n`), e Z33 NON e' un difetto della fisica.
+
+--- (B / 2.1) COSA COLLASSA: `f` tutto nullo, meta' zero, o mediana piccola? ---
+  invocazioni con `f` ricostruibile : 126   di cui DEGENERI (median = 0) : 4  (3.2 %)
+
+  passo   n       nati    ramo    fraz f=0    p95|f|      max|f|      snap==    len ps/psp
+  0       80      0       2pi     1.0000      0           0           True      80/-1
+  1       80      0       4pi     1.0000      0           0           True      80/80
+  6       440     0       2pi     1.0000      0           0           True      440/80
+  7       440     0       4pi     0.9818      0           3.5527e-13  False     440/440
+
+  con `f` IDENTICAMENTE NULLO (max = 0) : 3 su 4
+  con META' zero ma altri NON nulli      : 1 su 4
+  con snapshot IDENTICO a psi_spin       : 3 su 4   <- causa candidata (1)
+
+--- (C / 2.2) QUANDO: transitorio o regime? e coincidono con le MITOSI? ---
+  passi degeneri : [0, 1, 6, 7]
+  su 126 passi totali -> primi 10 passi: 4   dopo il passo 20: 0
+  NODI NATI nel passo: degeneri [0, 0, 0, 0]   |   sani: mediana 0.0, frazione con nati>0 0.02
+  -> se i degeneri hanno nati>0 e i sani no, la causa candidata (2) e' confermata
+
+--- (D / 2.3) COSA SUCCEDE a `r` e a `dt_n` -- ENTRAMBE le code ---
+  gruppo     quanti  median(r)     std(r)        p95-p05       fraz r>1.4    fraz r<1e-5  
+  DEGENERI   4       0.500001      0             0             0.0000        0.4909       
+  SANI       122     1             0.414558      1.26777       0.0926        0.0000       
+
+  `dt_n = DT * r`, quindi std(dt_n) = DT * std(r): se std(r) COLLASSA nei degeneri, la DILATAZIONE
+  TEMPORALE E' SPARITA in quei passi -- tutti i nodi allo stesso ritmo.
+  ⚠ E si guardano ENTRAMBE le code: il mandato prevede `r -> +-1` (x -> inf), ma se `f` e'
+  IDENTICAMENTE nullo allora `x = 0` e `r -> 1.414e-06`. Sono due regimi OPPOSTI.
+
+======================================================================================================================

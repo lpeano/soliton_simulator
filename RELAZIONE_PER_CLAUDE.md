@@ -4956,3 +4956,84 @@ fattore 100**. Rifatta sul ramo vero; il ramo 2π resta in
 **Nel task history avevo elencato cosa non sapevo, ma non avevo messo «con quale configurazione
 misuro»** — ed è la domanda che viene prima di tutte. **`_rimisura_Z9.py` lo stampa dal passo 0:
 andrebbe fatto ovunque.**
+
+---
+
+## 9.48 — **`Z33` non è un difetto del GAUGE: è un difetto di ORDINE/SNAPSHOT. E il mandato aveva il segno sbagliato**
+
+**Data:** 2026-09-18 · blob `72acd6aa` · un seme (5), 126 passi, **nessuna cura**
+**Task history scritto e pushato PRIMA:** `aff0df6` · `csv/_test_fork/_gauge_degenere.py`
+
+### (A) Sono nel percorso fisico — **la lettura «artefatto» è esclusa**
+
+`126/126` invocazioni vengono da **`step()`**, nessun diagnostico; le 4 degeneri **alimentano `dt_n`
+e quindi `eta`**.
+
+### (B) Ma `f` non ha mediana piccola: **è IDENTICAMENTE NULLO**
+
+| passo | n | ramo | frazione `f=0` | `max\|f\|` | `snap ==` | `len ps/psp` |
+|---|---|---|---|---|---|---|
+| 0 | 80 | 2π | **1.0000** | 0 | **True** | 80 / −1 |
+| 1 | 80 | 4π | **1.0000** | 0 | **True** | 80 / 80 |
+| 6 | 440 | 2π | **1.0000** | 0 | **True** | **440 / 80** |
+| 7 | 440 | 4π | 0.9818 | 3.55e-13 | False | 440 / 440 |
+
+**Non c'è una statistica che collassa: non c'è variazione da misurare. Il pavimento `1e-9` non
+c'entra.**
+
+**Due cause, entrambe confermate, entrambe trovate leggendo `step()` prima di misurare:**
+
+1. **snapshot confrontato con sé stesso (3/4)** — `_psi_spin_prec` si aggiorna a `:3099-3101`, cioè
+   **dopo** `ritmo()`;
+2. **lunghezze disallineate (passo 6)** — `440/80` dopo l'iniezione delle masse: il guard di `:2038`
+   fallisce, si cade sul 2π, e lì anche `_psi_prec` è corto → scatta il **ramo di sicurezza `:2028`**
+   (`np.ones(n)`). **Terzo membro della famiglia `C11`/`C7`.**
+
+### (C) Transitorio, senza ambiguità
+
+Passi **0, 1, 6, 7**. **Zero dopo il passo 20.** **Non coincidono con le mitosi** (nati = 0):
+coincidono con le **due discontinuità della popolazione** — l'avvio e l'iniezione delle tre masse.
+
+### (D) La dilatazione sparisce — **ma verso il BASSO**
+
+| gruppo | `std(r)` | `fraz r>1.4` | `fraz r<1e-5` |
+|---|---|---|---|
+| **DEGENERI** | **0 ESATTO** | **0.0000** | **0.4909** |
+| SANI | 0.4146 | 0.0926 | 0.0000 |
+
+**`std(r) = 0` esatto: tutti i nodi allo stesso ritmo.** Ma **il mandato prevedeva `r → ±1`
+(`x → ∞`)**: misurato il contrario. Se `f` è **identicamente nullo**, `x = 0`, quindi
+`r ≈ 1.414e-06`.
+
+I quattro si dividono in **due regimi opposti**: passi 0 e 6 → `r = 1.0` (ramo di sicurezza);
+**passi 1 e 7 → `dt_n = DT × 1.4e-06`, cioè il tempo proprio si ferma per tutti.**
+
+**Lo avevo previsto nel task history, prima di misurare.** Averlo scritto prima è ciò che rende la
+correzione al mandato credibile invece che comoda.
+
+### Verdetto — **la seconda lettura, e la seconda metà della quinta**
+
+`Z33` è **transitorio, confinato, con cura opzionale**. E la quinta lettura che avevo aggiunto
+diceva: *«se `f` è identicamente nullo e la causa è lo snapshot → è un difetto di ORDINE, non di
+gauge, e cambierebbe tutto il quadro»*. **È esattamente così.**
+
+> **`Z33` va spostata fuori dalla famiglia `A3` in cui l'avevo messa io.**
+
+### Il §4 del mandato cade, **e con un numero**
+
+`eta` non cresce in **2 passi su 126 = 1.6 %**, tutti nel transitorio iniziale. **Impatto su `Z9`
+≤ ~2 %** — dentro il `+2.8 %` già misurato e dentro il `+6.5 %` fra le due scene.
+**Rimisurare `Z9` non cambierebbe nulla di leggibile.**
+
+### Se si curasse — **e non è il gauge**
+
+1. una guardia che **rilevi e DICHIARI** `psi_spin == _psi_spin_prec` (A8);
+2. **estendere lo snapshot con la popolazione** — **la stessa cura di `C7`/`C11`**.
+
+**Nessuna delle due è una decisione di gauge**, quindi non ricade nel §3 del mandato. **Riportate,
+non proposte**, e la cura resta **opzionale**: 4 passi su 126, tutti nel transitorio.
+
+### Il limite
+
+I quattro eventi sono legati a **due discontinuità specifiche di questa scena**. **Il `3.2 %` è
+della scena, non del sistema.**
