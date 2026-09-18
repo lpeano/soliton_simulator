@@ -36,6 +36,10 @@ _ARGV = list(sys.argv)
 NFRAME = int(_ARGV[1]) if len(_ARGV) > 1 else 20
 DEST = _ARGV[2] if len(_ARGV) > 2 else os.path.join("csv", "_test_fork", "_gvideo")
 SNAP = set(int(x) for x in _ARGV[3].split(",")) if len(_ARGV) > 3 else set()
+# [SIGILLO 2026-09-18] `fedele` chiama ANCHE le quattro funzioni che `update()` usa per
+# DISEGNARE, nello STESSO ordine (:5104, :5136, :5218, :5267). Serve a PROVARE che il
+# rendering non tocca la fisica, invece di dedurlo. Default: solo fisica.
+MODO = _ARGV[4] if len(_ARGV) > 4 else "fisica"
 os.makedirs(DEST, exist_ok=True)
 
 # gli STESSI flag del comando del mandato. `--test` fa scegliere Agg a `:132`: nessuna finestra.
@@ -82,6 +86,18 @@ for k in range(NFRAME):
         S.net.rilassa_disegno(); S.net.memoria_hebbiana_moto()
     S.stato["nframe"] += 1
     fr = k + 1
+    if MODO == "fedele":
+        # l'ORDINE e' quello di `update()`: diagnostica -> campo_spaziale -> pozzo_grafo -> intensita
+        S.net.diagnostica()
+        try:
+            S.net.campo_spaziale()
+        except Exception:
+            pass
+        try:
+            _Iv = S.net.intensita()[:S.net.n]
+            S.net.pozzo_grafo(_Iv)
+        except Exception:
+            pass
     if fr in SNAP or fr == NFRAME:
         S.net._db_step = fr          # ⚠ e' il FRAME, non il passo di motore. DICHIARATO.
         p = os.path.join(DEST, "frame_%d.pkl" % fr)
