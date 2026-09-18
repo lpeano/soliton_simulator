@@ -5417,3 +5417,108 @@ scorciatoia, e **quella distinzione oggi non esiste scritta** — **oppure `cs_f
 - **`doc/ASSIOMI.md` NON era nella lista dei documenti di riferimento di `CLAUDE.md` par.7**, pur
   essendo citato nel §0-bis di ogni mandato. **Un documento che si deve leggere e che non compare
   fra i riferimenti è esattamente il difetto che A9 descrive.** Aggiunto.
+
+---
+
+## 9.53 — **La frequenza di riferimento: il numero c'è, e la legge NON si può cablare. `median(|f|)` fa TRE mestieri**
+
+**Data:** 2026-09-18 · blob `f8f46683` · 1 seme (5), 120 passi, ramo **4pi** su 124/126
+**Task history pushato PRIMA:** `b6308d1` · **Sonde:** `8088ce4` + `_retroazione_r`, committate
+prima di girarle · **Referto:** `doc/REFERTO_frequenza_riferimento.md`
+**NESSUNA CURA CABLATA, NESSUN NUMERO NEL SIMULATORE.**
+
+### Il numero chiesto
+
+| riferimento `[1/tempo]` | mediana | **std/med nel TEMPO** | `median(x)` = pinnato? |
+|---|---|---|---|
+| `median(\|f\|)` **ATTUALE** | 0.0394 | **0.6234** | **SÌ, `1` a dieci cifre** (identità) |
+| `cs_nodo/d_nodo` | 1.776 | **0.0974** | no (`0.017 / 0.011 / 0.032`) |
+| `CS_M/d_nodo` | 2.271 | **0.0986** | no |
+| `CS_M/LAM` | 2.5 | **0 esatto** | — |
+
+**Passando a `cs_nodo/d_nodo`, `x` si moltiplica per `0.01503`.** Poiché **`TAU_LOC = 1.0`**
+(`:251`, nessuno smorzamento) **`r` andrebbe da `1.000` a `≈ 0.021`: `dt_n = DT·r` scenderebbe di
+~47 volte**, e non uniformemente (il fattore varia di 4 fra passi).
+
+**`CS_M/LAM` è squalificato senza girare niente:** `LAM` è **fisso** (`:146`, riassegnato solo da
+CLI) → **`CS_M/LAM = 2.5` è un numero**, varianza nel tempo **0**.
+*(Da non confondere con `lambda_vuoto(net) = mean(|psi|²)`, `:486`, che è **dinamica**: due nomi
+quasi uguali, due nature opposte.)*
+
+> **⚠ E il dato più informativo non è quello cercato: il riferimento ATTUALE è SEI VOLTE più
+> volatile dei candidati** (`0.62` contro `0.097`). **Oggi `r` è misurato contro un metro che oscilla
+> del 62 % da un passo all'altro, e quell'oscillazione è divisa via per costruzione.**
+
+**E la riserva del giro scorso è chiusa:** nodi isolati (`d_nodo → LAM`, il ramo vietato) = **0 su
+124 invocazioni**. *(P5: contato, non assunto.)*
+
+### ⚠ La strada si chiude, e non per una scelta fra candidati: per una RETROAZIONE
+
+**Verificato dal sorgente**, non dedotto:
+
+```
+:3389   self.phi = (_phi_t + (dt_n_s * self.phivel) + delta_sync_phi) % (4*np.pi)
+:2972   dt_n = DT * r
+        f = Δangle(psi_spin) / DT        <- diviso per il tempo di COORDINATA
+```
+
+**`Δphi ∝ dt_n = DT·r` ⟹ al prim'ordine `f ∝ r`.** L'anello: `r ↓ → dt_n ↓ → la fase avanza meno →
+f ↓ → x ↓ → r ↓`.
+
+| | guadagno dell'anello |
+|---|---|
+| **oggi** `x = f/median(\|f\|)` | riscalando tutti gli `f` di λ, **`x` non cambia** → **guadagno 1, PER COSTRUZIONE** |
+| riferimento **assoluto** `R` | `r ≈ √2·x` nel tratto lineare → **guadagno `√2·x_misurato ≈ 0.021–0.035`** |
+
+> **Guadagno ≪ 1 ⟹ `x → 0` di ~50 volte per passo: l'orologio si fermerebbe.** E un `R` scelto
+> perché il guadagno valga 1 sarebbe **un filo di rasoio e un numero tarato** (A1).
+
+**Ecco il terzo mestiere:** `median(|f|)` è normalizzazione (adimensionalità), **gauge** (il punto di
+riferimento) **e ROMPI-ANELLO** (rende `r` indipendente dalla deriva comune di `f`).
+*(Nel verdetto su `e342ae8` avevo scritto «la mediana è ENTRAMBE». **Sono TRE.**)*
+
+### ⚠ E su A10 il vincolo 5 del mandato va ROVESCIATO
+
+`omega_clk = coerenza * r` (`:2458`), **poi** `* (cs/CS_M)²` (`:2502`).
+
+- con **`r = f·d/cs`**: *(coerenza) × (ritmo **proprio** del nodo, nessun riferimento esterno) ×
+  (dilatazione vs vuoto)* → **UN SOLO ponte verso il vuoto** ✓
+- con `r = f·d/CS_M`: **DUE confronti col vuoto moltiplicati** → **il doppio conteggio che A10
+  vieta** ✗
+
+> **È un riscontro su A10 stesso, aggiunto ieri: l'assioma non dice se il «ponte» sia l'ANCORA o la
+> GRANDEZZA che attraversa, e le due letture danno candidati OPPOSTI. Va disambiguato.**
+
+**Il riferimento derivabile quindi ESISTE — `cs_nodo/d_nodo`:** passa **A1** (nessuna costante:
+tutto stato), **A3**, **A6** (`_tempo_luce_nodo` legge già `_cs_nodo_prev`), **A10**; unica tensione
+**A2** (`cs` importa `mean(I)`), **già registrata in `Z40`**. È **già calcolato** (`1/tempo_luce`) e
+**già sigillato** (`S8`, `max|err| = 2.55e-15`). **Ma non è sostituibile finché `f` è misurato in
+tempo di coordinata.**
+
+### ⚠ Una misura l'ho sbagliata, e la ritiro prima di usarla
+
+```
+        E1  f(t+1) vs r(t)     E2  NULLO: vs f(t)     E3  PARZIALE
+MEDIANA   +0.4755  sd 0.174      +0.4727  sd 0.129      -0.9193  sd 0.409
+```
+
+**E1 ed E2 coincidono: la correlazione grezza con `r` è spiegata interamente
+dall'autocorrelazione di `f`** — il controllo nullo ha fatto il suo mestiere.
+**`E3` invece non si può leggere:** dentro un passo **`r` è una funzione deterministica di `f`**,
+quindi a `f` fissato **non ha varianza residua**: la regressione a due regressori è **degenere per
+costruzione**, e il `−0.92` con `sd 0.41` è **collinearità, non fisica**. **La ritiro come prova.**
+**La domanda non è decidibile trasversalmente — la decide il codice (`:3389`).**
+
+*(E una seconda svista mia, dichiarata: la colonna riassuntiva `max|median(x)−1|` vale `1` per tutte
+e quattro le righe perché **dominata dai passi degeneri di `Z33`**. Non separa niente: separano le
+cifre per passo.)*
+
+### Cosa resta a Luca — **due strade, ed è una decisione di fisica**
+
+1. **Si taglia l'anello alla radice:** `f = Δangle/dt_n` (tempo **proprio**). Rende A1 realizzabile
+   ed è **la regola permanente di CLAUDE.md par.9** sul tic locale. **Ma cambia la definizione di
+   `f`, che era stata esclusa in `Z36`.**
+2. **Si tiene `median(|f|)`**, e si dichiara che **il difetto A10 resta aperto per una ragione ORA
+   NOTA**, non per distrazione.
+
+**Non ho un criterio, scritto prima, che scelga fra le due.** → **`Z41`.**

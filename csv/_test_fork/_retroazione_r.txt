@@ -1,0 +1,31 @@
+[TIMBRO] _retroazione_r.py  sha1-BYTE c27e279a  committato e pulito
+======================================================================================================================
+LA RETROAZIONE -- `f` dipende da `r` del passo prima?   [120 passi, seme 5]
+======================================================================================================================
+  TAU_LOC = 1  (se 1.0, r = r_normalized SENZA smorzamento)   DT = 0.01
+
+  invocazioni utilizzabili: 124 su 126
+  `r` COME LO RESTITUISCE IL CODICE (30 passi): min 0.000129319  p05 0.110786  MEDIANA 1  p95 1.40951  max 1.41419
+  (e' il numero che moltiplica DT: dt_n = DT*r. La mediana deve valere 1 PER COSTRUZIONE.)
+
+--- E1/E2/E3 -- `f(t+1)` contro `r(t)`, e il controllo nullo `f(t+1)` contro `f(t)` ---
+  istante  n       | E1  d log f(t+1)/d log r(t) | E2  NULLO: vs log f(t) | E3  PARZIALE  
+  2        80      |  +0.1220  SE 0.1279    |  +0.1072  SE 0.0972    |  -0.1840
+  17       442     |  +0.3869  SE 0.0877    |  +0.4697  SE 0.0524    |  -1.4281
+  32       443     |  +0.5070  SE 0.0662    |  +0.4816  SE 0.0363    |  -0.8319
+  47       443     |  +0.2578  SE 0.0812    |  +0.4112  SE 0.0391    |  -1.5114
+  62       443     |  +0.4439  SE 0.0729    |  +0.4757  SE 0.0363    |  -1.1024
+  77       443     |  +0.5379  SE 0.0754    |  +0.5045  SE 0.0333    |  -1.0066
+  92       444     |  +0.5186  SE 0.0682    |  +0.4654  SE 0.0387    |  -0.6976
+  107      444     |  +0.7311  SE 0.0840    |  +0.5522  SE 0.0429    |  -0.6238
+  MEDIANA  8       |  +0.4755  sd 0.1740    |  +0.4727  sd 0.1287    |  -0.9193  sd 0.4085
+
+  COME SI LEGGE -- fissato PRIMA (task history b6308d1):
+    E3 (la PARZIALE) ~ +1  -> `f` E' PROPORZIONALE al tic locale: L'ANELLO C'E', e con un
+                              riferimento ASSOLUTO `r` non avrebbe piu' nulla che lo stabilizza.
+    E3 ~ 0                 -> `f` non vede `r`: l'anello NON c'e', il candidato e' stabile.
+  E1 DA SOLA NON DECIDE: `r` e' una funzione di `f(t)`, quindi l'autocorrelazione di `f` (E2) puo'
+  produrre una pendenza positiva DA SOLA. La barra buona e' la dispersione FRA ISTANTI, non la SE
+  interna (P3/C10: la SE interna e' ~3 volte troppo piccola su questo sistema).
+
+======================================================================================================================

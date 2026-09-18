@@ -129,10 +129,49 @@ alla misura sta **nella sonda**. Non tocco `median(|f|)` senza sostituirlo, né 
 
 ## 3. TODO DEL NEXT STEP
 
-- [ ] **A** — la tabella del §1, quattro righe, stessa unità, con la varianza nel tempo
-- [ ] **B** — il test del punto fisso per ciascun candidato, con le cifre
-- [ ] **C** — il rapporto fra i riferimenti: di quanto si sposterebbe `r`
-- [ ] **D** — `d_nodo` si muove?
-- [ ] **riporta la tabella a Luca** *(è il numero che ha chiesto: dove siamo)*
-- [ ] **§2 — la legge, coi sei vincoli verificati UNO PER UNO** → **STOP e riporta**
-- [ ] **⚠ NON cablare** prima della via libera; **nessun numero nel simulatore**
+- [x] **A** — la tabella del §1, quattro righe, stessa unità, con la varianza nel tempo
+- [x] **B** — il test del punto fisso per ciascun candidato, con le cifre
+- [x] **C** — il rapporto fra i riferimenti: di quanto si sposterebbe `r`
+- [x] **D** — `d_nodo` si muove?
+- [x] **riporta la tabella a Luca** *(è il numero che ha chiesto: dove siamo)*
+- [x] **§2 — la legge, coi sei vincoli verificati UNO PER UNO** → **STOP e riporta**
+- [x] **⚠ NON cablato** prima della via libera; **nessun numero nel simulatore**
+
+---
+
+## 4. ESITO
+
+**PRESO, e ha deciso un vincolo senza girare niente:** **`LAM` è fisso** (`:146`). `CS_M/LAM = 2.5`
+non è «un numero travestito»: **è un numero**, e la sua varianza nel tempo è **0 esatta**.
+
+**PRESO, ed era la cosa giusta da dire:** ho nominato **anche** che `CS_M` è fisso, invece di
+squalificare `LAM` e tacere sull'altro. La distinzione che li separa (`CS_M` è **il limite di un
+campo calcolato**, `LAM` non è il limite di niente) **regge, ma è argomentativa**, e l'ho dichiarata
+come tale.
+
+**PRESO, §1.3:** avevo scritto che *«si muove / non si muove»* **taglia in due direzioni**, e che la
+distinzione vera è **costante-per-costruzione contro costante-per-stato**. **Serviva:** solo
+l'ATTUALE è pinnato, **a dieci cifre**, e i candidati fluttuano di un fattore 3.
+
+**PRESO, §1.4 — il ginocchio:** con un riferimento assoluto `x = 1` diventa **una condizione
+fisica**, non un numero. Regge.
+
+**NON PRESO, ed è il risultato del giro: la RETROAZIONE.** Non l'avevo vista scrivendo il
+ragionamento preliminare — è emersa **leggendo `TAU_LOC = 1.0` mentre controllavo tutt'altro**, e si
+è chiusa su `:3389`. **`median(|f|)` fa TRE mestieri, non due.** **Se avessi eseguito il mandato
+alla lettera avrei raccomandato un riferimento che ferma l'orologio.**
+
+**E UN ERRORE MIO, nella sonda che avevo disegnato per decidere proprio quello:** la regressione
+parziale `E3` è **degenere per costruzione** — dentro un passo `r` è funzione deterministica di `f`.
+**Il controllo nullo `E2` ha funzionato** (E1 ≈ E2: tutta autocorrelazione), **il regressore
+parziale no.** L'ho ritirato invece di usarlo, ed è la differenza fra una diagnosi e un numero.
+
+## 5. TODO DEL PROSSIMO PASSO
+
+- [ ] **DECIDE LUCA:** *(1)* `f = Δangle/dt_n` — taglia l'anello, **ma cambia la definizione di `f`**
+      *(esclusa in `Z36`, in un altro contesto)*; *(2)* si tiene `median(|f|)` e **A10 resta aperto
+      per una ragione ora NOTA**
+- [ ] **`A10` va DISAMBIGUATO:** ancora o grandezza? Le due letture danno candidati **opposti**
+- [ ] **`Z40` resta:** `cs` importa `mean(I)`, e il candidato forte ne eredita la tensione
+- [ ] **⚠ NON toccato:** `median(|f|)`, `+1e-6`, `x/sqrt(1+x^2)`, `psi_spin`, il gauge, `LAM`, e i
+      numeri tarati (`TAU_A`/`TAU_DIFF`/`PHI_CRIT`/`TAU_BG`)

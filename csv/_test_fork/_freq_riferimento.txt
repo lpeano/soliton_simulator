@@ -1,0 +1,44 @@
+[TIMBRO] _freq_riferimento.py  sha1-BYTE 4e3a84a8  committato e pulito
+======================================================================================================================
+LA FREQUENZA DI RIFERIMENTO -- il numero, e i vincoli   [120 passi, seme 5]
+======================================================================================================================
+  config: CAMPO_SPINORIALE=True SPINORE_VIVO=True SPIN_FEEDBACK=True STEP2_OROLOGIO=True CS_DINAMICO=True
+  CS_M = 2   LAM = 0.8   DT = 0.01   ->   CS_M/LAM = 2.5  (COSTANTE: LAM e' fisso, :146)
+
+  invocazioni utilizzabili: 124 su 126
+  nodi ISOLATI (d_nodo -> LAM, il ramo che il mandato vieta): 0 su 124 invocazioni con >0
+
+--- (A) LA TABELLA -- quattro riferimenti, tutti in [1/tempo] ---
+  riferimento                p05 nodi    MEDIANA     p95 nodi    | t=primo     t=1/4       t=meta'     t=ultimo    | std/med T 
+  median(|f|)      ATTUALE   0.023947    0.039354    0.070953    | 1e-09       0.032708    0.019526    0.06497     | 0.6234    
+  cs_nodo/d_nodo   tempo-luce 1.0608      1.776       2.3069      | 1.1291      1.8899      1.7922      1.8296      | 0.09738   
+  CS_M/d_nodo      vuoto+locale 1.1096      2.2714      2.8955      | 1.1291      2.2587      2.2556      2.2799      | 0.09864   
+  CS_M/LAM         costante  2.5         2.5         2.5         | 2.5         2.5         2.5         2.5         | 0         
+  NB: `median(|f|)` e' UNO SCALARE per passo -> la sua distribuzione ATTRAVERSO I NODI e'
+      COSTANTE PER COSTRUZIONE (p05 = mediana = p95). Non e' una cella vuota: e' il punto.
+  NB: `CS_M/LAM` ha std/med = 0 ESATTO. LAM e' fisso (:146, riassegnato solo da CLI): E' UN NUMERO.
+
+--- (B) ⚠ IL PUNTO FISSO (vincolo 3): `median(x)` con x = f/R, passo per passo ---
+  riferimento                t=primo       t=1/4         t=meta'       t=ultimo      | max|med-1|   std/med   
+  median(|f|)      ATTUALE   0             1             1             1             | 1            0.126     
+  cs_nodo/d_nodo   tempo-luce 0             0.0171494778  0.01097883113 0.03211666255 | 1            0.724     
+  CS_M/d_nodo      vuoto+locale 0             0.01378116042 0.0084363883  0.02647152823 | 1            0.7302    
+  CS_M/LAM         costante  0             0.01308326399 0.00781051937 0.02598816305 | 1            0.6234    
+  COME SI LEGGE -- e distingue due cose che 'si muove / non si muove' confonde:
+    max|med-1| ~ 0 A DIECI CIFRE  -> COSTANTE PER COSTRUZIONE: punto fisso, A3 VIOLATO;
+    max|med-1| grande e fluttuante -> COSTANTE PER STATO (o nemmeno): LEGITTIMO.
+
+--- (C) IL NUMERO CHIESTO: di quanto si sposterebbe `r`? rapporto median(|f|)/R ---
+  riferimento                MEDIANA fra T min fra T     max fra T     | std/med     
+  cs_nodo/d_nodo   tempo-luce 0.015033      0             0.0617498     | 0.7033      
+  CS_M/d_nodo      vuoto+locale 0.0122795     0             0.0478543     | 0.7107      
+  CS_M/LAM         costante  0.0111148     0             0.0433347     | 0.6234      
+  (il rapporto e' il FATTORE per cui `x` verrebbe moltiplicato passando al nuovo riferimento)
+
+--- (D) `d_nodo` SI MUOVE? (se no, CS_M/d_nodo e' CS_M/LAM travestito) ---
+    d_nodo MEDIANO : t=primo 1.77135   t=1/4 0.885479   t=meta' 0.886698   t=ultimo 0.87724
+    std/mediana fra passi 0.1974    min 0.87724   max 1.77135   rapporto max/min 2.019
+    d_nodo ATTRAVERSO I NODI (30 passi): p05 0.690731   mediana 0.880533   p95 1.8024   (LAM = 0.8)
+    per confronto, cs/CS_M: p05 0.528252   mediana 0.8265   p95 0.992235
+
+======================================================================================================================
