@@ -115,6 +115,69 @@ MISURATO: NESSUNO dei quattro file `_pre_*.py` esiste, né in TMP né in csv/_se
 
 ---
 
+## 1-bis. ⚠ ANNOTAZIONE — **il rigiro FRESCO sul blob corrente cambia DUE dei numeri che ho citato sopra**
+
+**par.5-septies: il ragionamento preliminare NON si riscrive quando si rivela parziale — SI ANNOTA.**
+**Il §1 qui sopra cita il rigiro del 2026-09-17. Il rigiro sul blob CORRENTE (`b9e07c73`, durata
+MISURATA `1297 s`) dice cose diverse su `T2` e su `T3`, e la diagnosi ne esce CAMBIATA IN PARTE.**
+
+### `T2` — **ora è CONFRONTABILE, e il difetto si vede MEGLIO**
+
+```
+2026-09-17   n_A = 1682   n_B = 1680   ->  NON CONFRONTABILI
+2026-09-18   n_A = 1484   n_B = 1484   ->  CONFRONTABILI
+             d0 2.220e-16 · vd 1.588e-22 · _nb 7.144e-09 · _nb_prec 7.144e-09
+             _nb_ret 7.502e-10 · _psi_spinor 4.565e-09 · omega_s 6.063e-07
+             PEGGIOR max|A-B| = 6.063e-07   stato RNG IDENTICO
+```
+
+> **La DIAGNOSI non cambia — il monkeypatch tocca il metodo condiviso e quindi anche lo Strato 1 —
+> ma l'EVIDENZA sì: non è più «shape diverse», è un RESIDUO PICCOLO e MISURABILE.**
+> **E questo rende la riparazione VERIFICABILE: dopo il patch discriminante, `T2` deve dare
+> `0.000e+00` ESATTO. Prima non c'era nemmeno il confronto.**
+> **⚠ E i campi che differiscono sono ESATTAMENTE quelli dello Strato 1** (`_nb_ret`, `_nb`,
+> `_psi_spinor`, `omega_s`): **è la firma del difetto, non un rumore generico.**
+
+### `T3` — **il criterio è ancora più chiaramente scaduto, e il segno è cambiato DI NUOVO**
+
+```
+              OFF                      ON                       n      r^2
+2026-09-15    -0.1685 +- 0.0090        -0.4265 +- 0.0091        2417   0.126 / 0.464
+2026-09-17    -1.7311 +- 0.0197        -1.2749 +- 0.0155        1727   0.818 / 0.798
+2026-09-18    +0.3370 +- 0.0884        +0.5218 +- 0.1366         452   0.031 / 0.031
+```
+
+> **Tre blob, tre risultati incommensurabili: il segno è passato da negativo a POSITIVO, `r²` da
+> `0.46` a `0.031`, e il campione da `2417` a `452` nodi.**
+> **La soglia `0.3` e l'attesa `-1.03` non hanno più NIENTE a cui appoggiarsi.**
+> **⚠ E il «rovesciamento» che avevo isolato al §1.4 NON è un evento singolo: è la terza lettura
+> diversa in tre blob. NON LO SPIEGO, e la sua natura di RISCONTRO APERTO si rafforza.**
+
+### ⚠ E UN TERZO FATTO, che NON è di questo mandato ma va scritto (par.5-ter)
+
+```
+T5   |omega| mediana        theta gradi/passo
+     2026-09-15   8.137e+04       4.662e+04  = 129.5 giri/passo
+     2026-09-17   1.126e+02       6.451e+01  =   0.18 giri/passo
+     2026-09-18   2.923e-05       1.675e-05  =   0.00 giri/passo
+```
+
+> **Il settore di spin NON È PIÙ ALIASATO: `theta` è sceso di NOVE ordini di grandezza in tre blob.**
+> **Non so a quale cambiamento attribuirlo e NON lo attribuisco.** **Ma decine di voci del repo
+> citano «43.6 giri/passo», «112 giri/passo», «settore massicciamente aliasato» come FATTO
+> CORRENTE, e su questo blob quel fatto NON VALE PIÙ.**
+> **È un riscontro, va relazionato, e NON si tocca in questo giro.**
+
+### Cosa di `T1` **non** cambia
+
+```
+2026-09-18   n_A = 1718   n_B = 1484   ->  NON CONFRONTABILI
+```
+**Il divario si è ALLARGATO** (`1682 → 1484`): **la diagnosi «il criterio confronta due fisiche
+diverse» regge, e con più margine di prima.**
+
+---
+
 ## 2. PROGETTAZIONE — *la riparazione, e cosa decide ciascun pezzo*
 
 ### 2.1 `T1` — **si ancora alla COPPIA DI BLOB che racchiude il cambiamento**

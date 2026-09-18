@@ -1,0 +1,57 @@
+# RIGIRO sul blob b9e07c73 (git blob) / 2a7207a4 (byte grezzi) - 2026-09-18
+# durata MISURATA: 1297 s (21.6 min). exit code 1 (= FAIL, non crash).
+# Committato COSI' COM'E' PRIMA di toccare il sigillo (CLAUDE.md par.5).
+========================================================================================================
+T1 - flag OFF byte-identico al file PRIMA della modifica (copre anche l'ESTRAZIONE)
+========================================================================================================
+  TAU_LUCE nel modulo nuovo (deve essere False): False
+  PRESIDIO: uno zero con N DIVERSO e' MANCANZA DI CONFRONTO, non identita'.
+    n_A = 1718   n_B = 1484   ->  NON CONFRONTABILI
+
+========================================================================================================
+T2 - riduzione al limite: tau forzato al valore VECCHIO -> deve tornare al ramo OFF
+========================================================================================================
+  TAU_LUCE (deve essere True): True
+  `_tempo_luce_nodo` forzato a restituire TAU_A*max(dens/dens_rif, 0.05)
+  PRESIDIO: uno zero con N DIVERSO e' MANCANZA DI CONFRONTO, non identita'.
+    n_A = 1484   n_B = 1484   ->  CONFRONTABILI
+    d0             max|A-B| = 2.220e-16  FAIL
+    vd             max|A-B| = 1.588e-22  FAIL
+    _nb            max|A-B| = 7.144e-09  FAIL
+    _nb_prec       max|A-B| = 7.144e-09  FAIL
+    _nb_ret        max|A-B| = 7.502e-10  FAIL
+    _psi_spinor    max|A-B| = 4.565e-09  FAIL
+    omega_s        max|A-B| = 6.063e-07  FAIL
+    21 campi confrontati, PEGGIOR max|A-B| = 6.063e-07   stato RNG identico
+  T2: FAIL
+
+========================================================================================================
+T3 - LA PENDENZA di theta contro l'inerzia, con SE / r^2 / IC95 (mai una pendenza nuda)
+========================================================================================================
+  OFF  pendenza +0.3370 +- 0.0884   r^2 0.031   n 452   IC95 [+0.1638, +0.5102]
+  ON   pendenza +0.5218 +- 0.1366   r^2 0.031   n 462   IC95 [+0.2540, +0.7896]
+  attesa dalla FASE 1: -1.030    misurata ON: +0.5218 +- 0.1366   z dalla attesa: 11.35
+  T3 (la pendenza si ALLONTANA da zero rispetto a OFF, di almeno 0.3): FAIL
+
+========================================================================================================
+T4 - SIGILLO DI COVARIANZA: e' una LEGGE o un numero travestito?
+========================================================================================================
+  d -> 2d   : tau_nuovo/tau_vecchio = 2.000000   (atteso 2.000000)
+  cs -> 2cs : tau_nuovo/tau_vecchio = 0.500000   (atteso 0.500000)
+  CONTRASTO - la legge VECCHIA con d -> 2d: rapporto = 1.000000  (resta FERMA: non e' una
+              legge sulla geometria, e questo e' esattamente il punto)
+  T4: PASS - tau SEGUE lo stato da solo: e' una LEGGE
+
+========================================================================================================
+T5 - ampiezza e stabilita'
+========================================================================================================
+  OFF  |omega| mediana  2.923e-05   theta  1.675e-05 gradi/passo =    0.00 giri   n=2247
+  ON   |omega| mediana  5.311e-06   theta  3.043e-06 gradi/passo =    0.00 giri   n=2253
+  fattore su theta: 0.1817   (atteso ~1/13 = 0.077 dal rapporto sqrt(tau))
+  |nb| max scostamento da 1: 1.110e-16    NaN/inf: 0
+  T5: PASS
+
+========================================================================================================
+ESITO: T1=FAIL   T2=FAIL   T3=FAIL   T4=PASS   T5=PASS
+SIGILLO COMPLESSIVO: FAIL
+========================================================================================================
