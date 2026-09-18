@@ -232,11 +232,30 @@ print("--- S6 -- il sigillo dell'ANELLO (`Z42`) regge sul blob NUOVO? ---")
 print("    si rilancia `_sigillo_anello.py`, che e' ancorato al blob f8f46683 e confronta col DISCO.")
 q = subprocess.run([sys.executable, os.path.join(QUI, "_sigillo_anello.py")],
                    capture_output=True, text=True)
-coda = [l for l in q.stdout.splitlines() if "PASS" in l or "FAIL" in l or "/" in l][-6:]
-for l in coda:
+# [CORREZIONE 2026-09-18, dopo il FAIL FALSO committato in a872383]
+# IL CRITERIO PRECEDENTE cercava la stringa "FAIL" nello stdout del sigillo figlio. La trovava
+# DENTRO IL TESTO ESPLICATIVO DI UNA RIGA CHE PASSA:
+#     [PASS] P2  shape divergenti 7, max|A-B| = 0.000e+00 (0 con shape uguali = FAIL)
+# cioe' un FAIL FALSO su un sigillo che riportava 10/10 PASS e returncode 0. E' par.9: "un criterio
+# di sigillo si scrive DA UNA MISURA, non dal proprio modello mentale del codice" -- e un criterio
+# scaduto che produce un FAIL falso costa PIU' di un sigillo mancante, perche' si porta dietro una
+# diagnosi: chi lo legge cerca un difetto che non c'e'.
+# IL CRITERIO NUOVO E' LETTO DALL'OUTPUT VERO: il sigillo figlio stampa una riga
+#     ESITO: 10/10 PASS   P0=P P1=P ...
+# e si parsa QUELLA, richiedendo passati == totali. In piu' si cerca "[FAIL]" CON LE PARENTESI,
+# che e' il marcatore di riga e non puo' comparire in un testo esplicativo.
+riga_esito = [l for l in q.stdout.splitlines() if l.startswith("ESITO:")]
+passati = totali = -1
+if riga_esito:
+    import re as _re
+    _m = _re.search(r"(\d+)\s*/\s*(\d+)", riga_esito[-1])
+    if _m:
+        passati, totali = int(_m.group(1)), int(_m.group(2))
+for l in (q.stdout.splitlines()[-4:] + riga_esito):
     print("      %s" % l.strip()[:110])
-ok("S6", q.returncode == 0 and "FAIL" not in q.stdout,
-   "returncode %d, nessun FAIL nello stdout = %s" % (q.returncode, "FAIL" not in q.stdout))
+marcatore = "[FAIL]" in q.stdout
+ok("S6", q.returncode == 0 and totali > 0 and passati == totali and not marcatore,
+   "returncode %d, ESITO %d/%d, marcatore [FAIL] presente = %s" % (q.returncode, passati, totali, marcatore))
 
 # ------------------------------------------------------------------ esito
 print("")
