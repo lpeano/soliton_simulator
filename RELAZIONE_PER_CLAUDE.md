@@ -6424,3 +6424,79 @@ separate, non si mediano.**
 2. **Il MECCANISMO non è misurato** — perché l'anello perda i legami e il centro si accenda.
 3. **Limiti:** un seme, `--tau-luce` non certificato, **5 punti** per il profilo e **5 frame** di
    risoluzione per il ciclo.
+
+---
+
+## 9.64 — **Non è una Y: nella regione interna il modo dominante è il DIPOLO, e l'`A_3 = 0.97` sono le tre masse**
+
+**Data:** 2026-09-18 · blob **`a1ae5090` invariato** · **nessun run nuovo** *(i sei `.pkl` esistevano)*
+**Letture fissate PRIMA:** `4cf1817` · **Referto:** `doc/REFERTO_forma_Y.md` → **`Z50`**
+
+> **⚠ `--tau-luce` HA IL SIGILLO FALLITO: ramo non certificato, ogni numero lo eredita.** Un seme.
+> **L'osservazione «forma una Y» è VISIVA: qui è stata messa alla prova, non confermata.**
+
+### ⚠ Prima del risultato, un difetto MIO — trovato perché il suo esito era assurdo
+
+Avevo derivato la soglia di «regione densa» **per analogia** con `lambda_vuoto = mean(|psi|²)`,
+applicandola a `rho_spin`. **L'analogia non regge:**
+
+```
+rho_spin al frame 400:   MEDIA 1.4432e+01   MEDIANA 6.4175e-03   ->  RAPPORTO 2249
+```
+
+**La media di `rho_spin` non è il livello di vuoto: è una statistica della CODA.** Selezionava
+**1479 nodi tutti a `r ≈ 7.7`** — **l'anello** — e dava *«nodi interni densi = 0»* a ogni istante.
+**Non era un fatto sul sistema: era la soglia.**
+**Controprova:** con la **mediana**, i nodi interni selezionati sono **623 su 811**, con `rho_spin`
+mediana **8.7 volte** quella globale. **La regione interna densa esiste: era la soglia a non
+vederla.**
+
+> **È P1 applicato a una soglia: un'analogia va verificata sulla DISTRIBUZIONE che seleziona, non
+> sulla forma della formula.** *(La media resta nell'output come **controesempio dichiarato**.)*
+
+### Il risultato — col NULLO accanto, senza cui l'istogramma è un disegno
+
+```
+soglia 10x la mediana       A_1      A_2      A_3      A_6    | NULLO
+frame 400  CON L'ANELLO    0.0756   0.2169   0.9652   0.8744  | 0.0292
+frame 400  SOLO INTERNI    0.4001   0.3242   0.2310   0.1358  | 0.1198
+```
+
+- **Con l'anello `A_3 = 0.965` contro un nullo di `0.029` — 33 volte. Ma sono le tre masse seminate,
+  che stanno a `0°/120°/240°` PER COSTRUZIONE.**
+- **Dentro: `A_3 = 0.231` contro nullo `0.120` — meno di due volte — mentre `A_1 = 0.400` è 3.3
+  volte il nullo.**
+
+> **Il modo dominante nella regione interna è il DIPOLO, non il tre.**
+> **Scatta la terza lettura: «`A_3` grande solo includendo l'anello → artefatto delle tre masse».**
+
+### L'istogramma lo mostra direttamente: **un picco, non tre**
+
+```
+ +52.5°  3.254  #################################################################
+ +67.5°  3.998  ######################################################################
+(il resto fra 0.23 e 0.86; un rialzo secondario a +172.5° = 1.35)
+```
+
+**Un lobo dominante, e il picco NON è su una massa: è FRA due masse (`0°` e `120°`).**
+**Tre bracci a `0/120/240` non ci sono.**
+
+### Robustezza e limiti
+
+Fra soglia `10×` e `100×` la mediana i valori cambiano (`A_1` `0.400 → 0.611`, `A_3` `0.231 →
+0.437`) **ma l'ORDINE no: `A_1 > A_3` in entrambe.**
+**⚠ La statistica interna è DEBOLE:** `N_eff` scende a **21** (nullo `0.22`), e al frame 375 vale
+**10.9** (nullo `0.30`): **lì non si misura nulla, e non lo leggo.**
+**E la regione interna densa compare TARDI:** `0/0/0/0/18/370` nodi ai sei istanti — **coerente con
+`Z49`**, e tutto ciò che si dice sulla forma riguarda **gli ultimi 150 frame**.
+
+### Cosa questo NON dice
+
+- **NON dice che il video sia sbagliato.** Dice che **la firma a tre bracci non è misurabile nella
+  regione interna con questa definizione di «densa»**, e che `A_3 = 0.97` **è spiegato dalle tre
+  masse**. **E il modo trovato — il dipolo — è comunque una struttura ANISOTROPA, non un disco.**
+- **NON è un verdetto sulla predizione di Luca**, che riguarda il **CICLO** e si decide col run a due
+  masse — **in corso, frame 30/400**. **Questa misura toglie UN meccanismo candidato (la Y
+  topologica), non la predizione.**
+- **Nessuna identificazione.** *(La Y a 120° è Fermat-Steiner e compare ovunque: era scritto nel task
+  history PRIMA, proprio perché se fosse uscita non sarebbe stata una spiegazione.)*
