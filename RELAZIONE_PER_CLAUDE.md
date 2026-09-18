@@ -6566,3 +6566,125 @@ nel vuoto**, dove è al nullo.
 bracci nella distribuzione angolare dei nodi in `rho_spin`.**
 **Non è un verdetto sulla predizione di Luca**, che riguarda il **CICLO** e si decide col run a due
 masse — **in corso, frame 80/400.**
+
+---
+
+## 9.66 — **La predizione di Luca è sbagliata nella forma forte. Ma il ciclo si spezza in due fenomeni, e uno dei due dipende davvero dal numero di masse**
+
+**2026-09-18** · blob `a1ae5090` **invariato** · **A/B a variabile singola su `--nmasse` (3 → 2)**
+**Predizione committata PRIMA del run:** `a4fbe42` · **Sonda committata prima di girarla:** `7f81634`
+**Referto:** `doc/REFERTO_due_masse.md` · **Output:** `csv/_test_fork/_ab_due_tre.txt`
+
+> **⚠ IN TESTA:** **`--tau-luce` HA IL SIGILLO FALLITO** (par.0): **entrambi** i bracci girano su un
+> ramo **NON CERTIFICATO**, e ogni numero lo eredita. **`--chi-basc` attivo in entrambi.**
+> **UN SEME PER BRACCIO. NESSUNA IDENTIFICAZIONE DI FISICA.**
+
+### La predizione, e cosa è successo
+
+> **«Con DUE masse questa dinamica NON ci sarà più. Sarà completamente differente.
+> Ed è dovuto all'INTERAZIONE FRA TRE MASSE, contro l'interazione fra due.»**
+
+**Non è così, e lo scrivo perché era scritto nel mandato che si dovesse scrivere.**
+**La curva che decideva era nominata prima — `nodi(regione interna)`, con la regione definita
+`r < R_anello(t)/2` e `R_anello(t)` MISURATO:**
+
+```
+COMOVENTE (r < R_anello(t)/2)   f10    f115   f190   f270   f375   f400  | min/f10  f400/min
+TRE  (Z49)                      883    268    222    222    497    811   | 0.2514   3.6532
+DUE  (ctrl)                     867    242    191    216    274    332   | 0.2203   1.7382
+```
+
+**La U c'è in entrambi. Il minimo cade allo STESSO istante (`f190`). E la DISCESA è la stessa:
+`min/f10` vale `0.246` e `0.269` in assoluta, `0.251` e `0.220` in comovente — quattro numeri, due
+bracci, stesso valore entro il 20 %.**
+
+### ⚠ Ma non scatta nemmeno la lettura ② secca: scatta **la terza**, quella tenuta aperta
+
+**Il RECUPERO è tutt'altro.** Fra il minimo e la fine `n` **quasi raddoppia in entrambi**
+(`4307 → 8018` e `3350 → 5878`), quindi un conteggio che cresce può voler dire *«la regione si
+riempie»* **oppure** *«il sistema cresce e la regione lo segue»*. **Il rapporto fra i due tassi
+separa i due casi:**
+
+```
+braccio      f_min   int_min  int_f400  n_min   n_f400  | recupero / crescita
+TRE  (Z49)    190      222      811     4307     8018   |      1.9624
+DUE  (ctrl)   190      191      332     3350     5878   |      0.9906
+```
+
+> **A TRE masse la regione interna si riempie DUE VOLTE più in fretta del sistema.**
+> **A DUE cresce ESATTAMENTE come il sistema: `0.9906`. In senso relativo NON si riempie affatto, e
+> la «risalita» del conteggio nudo È la crescita della popolazione.**
+
+**⚠ E questa normalizzazione è POST-HOC, e lo dichiaro:** la lettura fissata prima è il **conteggio
+nudo**, e quella **dà una U in entrambi.** **Riporto entrambe perché chi legge possa pesarle
+diversamente** — non per scegliere quella che mi conviene.
+
+### L'accensione — il falsificatore 3, e **non scatta alla lettera**
+
+```
+rho_spin med (interna COMOVENTE)
+             f10         f115        f190        f270        f375        f400       | escursione
+TRE  (Z49)   3.7728e-07  6.5691e-06  3.4709e-07  5.0703e-07  4.0612e-03  5.5564e-02 | x1.601e+05
+DUE  (ctrl)  4.4894e-07  3.3742e-04  7.5504e-05  1.0729e-06  2.6102e-04  2.4743e-03 | x5512
+                                                 -> RAPPORTO TRE/DUE all'ultimo istante: x22.46
+                                                 -> lo stesso su |psi|:                 x14.5
+```
+
+**`rho_spin` SI accende anche a due masse (`×5512`): *«ciclo sì, accensione no»* è FALSO, e il
+falsificatore come era scritto NON scatta.** **Ma l'accensione finale è `22.46` volte più debole.**
+
+**E la forma è diversa, ed è la cosa che il rapporto finale nasconde:**
+- **a TRE masse** `rho_spin` resta **piatta e bassa** per quattro istanti su sei e poi **esplode** fra
+  `f270` e `f400`: **un evento TARDIVO e BRUSCO**;
+- **a DUE masse** si accende **PRESTO** — `3.37e-04` al `f115`, cioè **51 volte** il valore a tre masse
+  **nello stesso istante** — poi **SI SPEGNE** (`1.07e-06` al `f270`, un fattore `315` in giù), e poi
+  risale più debole.
+
+> **La separabilità che il falsificatore 3 anticipava c'è, ma lungo una cucitura diversa da quella
+> prevista: non «ciclo sì, accensione no», ma LO SVUOTAMENTO È DEL SISTEMA e IL RIEMPIMENTO CON
+> L'ACCENSIONE DIPENDONO DAL NUMERO DI MASSE.**
+
+### ⚠ E una conclusione di `Z49` **non si trasporta**
+
+```
+r ANELLO   TRE   0.7090  0.7831  0.7219  0.5233  0.3877   <- SCENDE
+           DUE   0.8196  0.9823  0.8928  0.6206  1.0035   <- finisce SOPRA il valore iniziale
+```
+
+**`Z49` aveva scritto *«il centro accelera mentre l'anello rallenta»*. Il centro accelera in entrambi.
+L'ANELLO RALLENTA SOLO A TRE MASSE.**
+
+**Dove invece i due bracci sono indistinguibili, e conta quanto il resto:** `d` mediano cresce
+**monotono** in entrambi (`×1.57` e `×1.41`, **nessuna ricompressione nella mediana** — coerente con
+`Z49`, dove il ciclo era **nella coda**); la decoerenza del Bloch è la **stessa curva**
+(`0.9953 → 0.1900` contro `0.9935 → 0.1754`); `perc_chi` è **persino leggermente più alto** a due
+masse; e **il discriminante di `Z46` non scatta in nessuno dei due** (`r/r_floor ~ 10⁶`, non `1.0000`).
+**La nube gonfia e si ricomprime in ENTRAMBI**, a due masse più grande e col picco più tardi.
+
+### I due falsificatori del confronto, e come sono stati trattati
+
+- **FALSIFICATORE 2 — SCATTA.** `R_anello` varia il **`20.1 %`** a due masse contro il **`9.1 %`** a
+  tre: **più del doppio della soglia dell'8 % fissata prima.** **Quindi la lettura assoluta è
+  ALIASATA e vale la COMOVENTE** — che è **la meno generosa** (`1.74` invece di `2.31`).
+  **Non ho scelto la più comoda.**
+- **FALSIFICATORE 1 — era già scattato nel pilota, e resta.** `n0 = 1895` contro `2391`: il
+  **`79.3 %`**, non il `66.7 %` proporzionale.
+
+### ⚠ Cosa questo **non** dice
+
+- **Non dice che sia l'interazione a TRE CORPI.** **`--nmasse` cambia TRE cose insieme** — numero di
+  masse, **popolazione**, geometria della semina — **e le cause non sono separate.** Servirebbe un
+  braccio a **due masse con la popolazione di tre**, e **non è stato fatto.** È un **limite di
+  progetto**, dichiarato prima del run e non scoperto dopo.
+- **Non dice che il meccanismo nominato nella lettura ② sia quello.** `lambda_nodi` che accorcia la
+  portata dove la densità cresce è **un candidato NOMINATO, non MISURATO**: questo A/B **non lo tocca.**
+- **Non dice niente sulla barra d'errore. UN SEME PER BRACCIO.** `×22.46` e `1.96 contro 0.99` sono
+  rapporti grandi, **ma non hanno una barra e con un seme non possono averla.** **Per farne un fatto
+  servono ≥ 4 semi per braccio** (par.9, `P3`).
+
+### Un errore mio, corretto prima di usarlo
+
+**La prima versione della sonda aveva `DT = 0.02`; il simulatore ha `DT = 0.01` (`:189`).**
+I miei `r` uscivano **esattamente la metà** di quelli già committati in `Z49`, e **è stato quel
+disaccordo con un numero già nel repo a farmelo vedere.** Corretto e rigirato: `r` interna a tre
+masse vale ora `1.409586` contro il `1.4096` di `Z49`. **Il numero committato ha fatto da presidio.**

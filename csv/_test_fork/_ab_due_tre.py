@@ -30,7 +30,7 @@ import numpy as np
 ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 os.chdir(ROOT)
 PPF = 6
-DT = 0.02
+DT = 0.01   # dal simulatore, :189 -- VERIFICATO dal sorgente, non assunto
 R_FLOOR = 1e-6 / (1.0 / np.sqrt(2.0) + 1e-6)
 BRACCI = [("TRE  (Z49)", os.path.join("csv", "_test_fork", "_gvideo")),
           ("DUE  (ctrl)", os.path.join("csv", "_test_fork", "_g2m"))]
@@ -182,3 +182,29 @@ for et, _ in BRACCI:
 print("  (Z46: i nodi fermi avevano r/r_floor = 1.0000. Qui vale ~1e6 in ENTRAMBI i bracci:")
 print("   la regione interna NON e' ferma, e il discriminante di Z46 NON scatta ne' a due ne' a tre.)")
 print("=" * 122)
+
+# ----------------------------------------------------- IL RECUPERO NORMALIZZATO -- POST HOC
+print("")
+print("--- IL RECUPERO NORMALIZZATO SULLA CRESCITA DEL SISTEMA ---")
+print("  ATTENZIONE, DICHIARATO: la lettura FISSATA PRIMA (a4fbe42) e' il CONTEGGIO nudo.")
+print("  QUESTA e' una lettura che aggiungo DOPO aver visto i numeri, e va pesata come tale.")
+print("  Motivo: fra il minimo e la fine n cresce di quasi il doppio in ENTRAMBI i bracci, quindi")
+print("  un conteggio che raddoppia puo' voler dire 'la regione si riempie' oppure 'il sistema")
+print("  cresce e la regione lo segue'. Il rapporto fra i due tassi separa i due casi.")
+print("  %-13s %-10s %-10s %-10s %-10s %-10s | %-12s"
+      % ("braccio", "f_min", "int_min", "int_f400", "n_min", "n_f400", "recup/cresc"))
+for et, _ in BRACCI:
+    Ff, _, S = D[et]
+    v = []
+    for f in Ff:
+        c = S[f]
+        v.append(int((c["R"] < c["ra"] / 2.0).sum()))
+    k = int(np.argmin(v))
+    nmin = S[Ff[k]]["n"]
+    nfin = S[Ff[-1]]["n"]
+    rec = v[-1] / float(v[k])
+    cre = nfin / float(nmin)
+    print("  %-13s %-10d %-10d %-10d %-10d %-10d | %-12.4f"
+          % (et, Ff[k], v[k], v[-1], nmin, nfin, rec / cre))
+print("  -> 1.0 significa: la regione interna cresce ESATTAMENTE come il sistema, cioe' NON si")
+print("     riempie in senso relativo. > 1 significa che si riempie piu' in fretta del sistema.")

@@ -332,3 +332,39 @@ CERTIFICATO**, ed è la ragione per cui il gate resta a `c0803713`. **Ogni numer
 lo eredita.** **`--chi-basc` riscrive `perc_chi` a ogni passo.**
 
 **I `.pkl` (48 MB l'uno) NON sono committati: il dato è il comando, e il sistema è deterministico.**
+
+## 2026-09-18 — **il CONTROLLO a DUE masse** (`csv/_test_fork/_g2m/`) — *A/B a variabile singola contro `_gvideo`*
+
+> **⚠ VOCE SCRITTA IN RITARDO, e lo dichiaro:** la regola dice **«nello STESSO commit»** del run che
+> produce i `.pkl`. **Questa voce è stata scritta DOPO la chiusura del run**, insieme al referto
+> `Z52`. **I dati sono rigenerabili — il comando è qui sotto, verbatim, e il blob non è cambiato — ma
+> fra la nascita dei `.pkl` e la loro documentazione c'è stata una finestra in cui non lo erano.**
+
+| cosa | valore |
+|---|---|
+| **BLOB del simulatore** | **`a1ae5090`** *(`sha1` dei BYTE GREZZI, non `git hash-object`: C18)* — **lo STESSO del braccio a tre masse** |
+| **driver** | `csv/_test_fork/_scena_video.py`, **SIGILLATO** (`_sigillo_driver_video.py`) |
+| **frame / passi** | **400 frame = 2400 passi** *(`PASSI_PER_FRAME = 6`)* |
+| **durata misurata** | **5357.8 s (1h29)**, `13.40 s/frame` |
+| **`n`** | 1894 → 5878 *(contro 2391 → 8018 a tre masse)* |
+| **snapshot** | `frame_{10,115,190,270,375,400}.pkl` — **il `_db_step` dentro è il FRAME, non il passo** |
+| **analisi** | `csv/_test_fork/_ab_due_tre.py` (`0889bcef`) e `csv/_test_fork/_struttura_video.py` (`16773e2f`) |
+
+**IL COMANDO, VERBATIM:**
+
+```
+python csv/_test_fork/_scena_video.py 400 csv/_test_fork/_g2m 10,115,190,270,375 fisica 2
+```
+
+*(l'ultimo argomento è `--nmasse 2`: **è l'UNICA differenza** dal comando del braccio a tre masse.
+Tutti gli altri flag sono quelli della voce `_gvideo` qui sopra, applicati dallo stesso driver.)*
+
+**HEAD all'avvio:** `8f94cf4` · **avvio** `2026-09-18 19:40:56` · **chiuso** `2026-09-18 21:10:45`
+
+**⚠ `--tau-luce` HA IL SIGILLO FALLITO** (`doc/SIGILLO_tau_luce_FALLITO.md`): **ramo NON
+CERTIFICATO**, e **ogni numero di questo run lo eredita** — **esattamente come il braccio a tre
+masse**, il che è la ragione per cui l'A/B resta interpretabile: **il difetto è comune ai due bracci.**
+
+**⚠ `--chi-basc` attivo:** `perc_chi` **non è un'etichetta di lignaggio.**
+
+**I `.pkl` NON si committano** (binari). **Il dato è il comando.**

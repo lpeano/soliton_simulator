@@ -554,3 +554,22 @@ generale, e con due masse va riverificato.**)*
 **Limiti già noti e dichiarati:** **un seme**, **`--tau-luce` col SIGILLO FALLITO** (ramo non
 certificato, ogni numero lo eredita), **`--chi-basc` attivo**, **5 punti di profilo**, **5 frame di
 risoluzione**. **Nessuna identificazione di fisica.**
+
+### ⚠ ESITO, misurato il 2026-09-18 — **LA PREDIZIONE E' SBAGLIATA NELLA SUA FORMA FORTE**
+
+**Il ciclo C'E' anche a due masse**, e la **discesa** e' la stessa entro il 20 % su quattro letture
+(`min/f10` = `0.246` / `0.269` assoluta, `0.251` / `0.220` comovente), **col minimo allo stesso
+istante** (`f190`). **Quindi la lettura ① non scatta.**
+
+**Ma non scatta nemmeno la ② secca: scatta la TERZA.** Il **recupero** vale `3.65` contro `1.74`, e
+**normalizzato sulla crescita del sistema** `1.9624` contro **`0.9906`**: **a due masse la regione
+interna cresce esattamente come il sistema, cioe' in senso relativo NON si riempie.** L'accensione
+finale e' **`x22.46`** piu' debole. **Il ciclo si spezza in due fenomeni: lo SVUOTAMENTO e' del
+sistema, il RIEMPIMENTO e l'ACCENSIONE dipendono dal numero di masse.**
+
+**FALSIFICATORE 1: scattato** (`n0 = 1895` = il `79.3 %`, non il `66.7 %`).
+**FALSIFICATORE 2: scattato** (`R_anello` varia il `20.1 %` contro la soglia dell'8 %) -> **si usa la
+lettura COMOVENTE, che e' la meno generosa.**
+**FALSIFICATORE 3: NON scatta alla lettera** — `rho_spin` si accende anche a due masse (`x5512`).
+
+**UN SEME PER BRACCIO: nessuna barra d'errore. -> `doc/REFERTO_due_masse.md`, `Z52`.**

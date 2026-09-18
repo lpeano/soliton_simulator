@@ -79,9 +79,31 @@ la dilatazione · **il grado dell'anello** · **`r` da `eta += DT·r`**, interno
 ## 3. TODO DEL NEXT STEP
 
 - [x] **la predizione committata PRIMA del run** (§1 del mandato)
-- [ ] pilota per la durata → `STATO_RUN.md` all'avvio
-- [ ] il run: 400 frame, `--nmasse 2`, **tutto il resto identico**
-- [ ] la regione ridefinita (§1.3) + le misure agli stessi istanti
-- [ ] **verdetto contro le TRE letture** — **e se la predizione è sbagliata, si scrive**
-- [ ] referto + registro + relazione **nello stesso commit** + **CHECKPOINT**
-- [ ] **⚠ NON toccare:** niente cure, niente default, nessuna identificazione
+- [x] pilota per la durata → `STATO_RUN.md` all'avvio
+- [x] il run: 400 frame, `--nmasse 2`, **tutto il resto identico** *(chiuso, 1h29, `n` 1894 → 5878)*
+- [x] la regione ridefinita (§1.3) + le misure agli stessi istanti
+- [x] **verdetto contro le TRE letture** — **la predizione è SBAGLIATA nella forma forte, ed è scritto**
+- [x] referto + registro + relazione **nello stesso commit** *(`Z52`, `doc/REFERTO_due_masse.md`, §9.66)*
+- [x] **⚠ NON toccato:** nessuna cura, nessun default, nessuna identificazione
+
+### ⚠ ESITO — **scatta la TERZA lettura, e il §1.3 si è rivelato NECESSARIO**
+
+- **la predizione è sbagliata nella forma forte:** il ciclo **c'è** anche a due masse, e la **discesa**
+  è la stessa entro il 20 % su quattro letture, **col minimo allo stesso istante**;
+- **ma non scatta nemmeno la ② secca:** `recupero/crescita` vale **`1.9624` contro `0.9906`**, e
+  l'accensione finale **`×22.46`**. **Lo svuotamento è del sistema, il riempimento e l'accensione
+  dipendono dal numero di masse.**
+- **la MIA lettura (§2, il falsificatore 3) NON scatta alla lettera:** `rho_spin` **si accende** anche
+  a due masse (`×5512`). **La separabilità c'è, ma lungo una cucitura diversa da quella che avevo
+  previsto** — ed è un errore di previsione mio, non della misura;
+- **il §1.3 non era una formalità:** `R_anello` varia il **`20.1 %`** a due masse contro il `9.1 %` a
+  tre. **La riserva scritta prima — «in `Z49` coincidevano solo perché variava dell'8 %, e con due
+  masse va RIVERIFICATO» — era giusta**, e senza la lettura comovente avrei riportato un recupero di
+  `2.31` invece di `1.74`.
+
+### TODO — il passo successivo
+
+- [ ] **§1② del mandato coorti: la persistenza di `conc_nodi`/`conc_archi`/`masse_info` nello
+      snapshot** + sigilli **`S0-S6`** — **ora SBLOCCATO: il run è chiuso e la CPU è libera** *(era
+      il vincolo del `2026-09-18_coorti-tracking.md` §1.4)*
+- [ ] **≥ 4 semi per braccio** se `Z52` deve diventare un fatto e non un rapporto senza barra

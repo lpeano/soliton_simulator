@@ -1,0 +1,88 @@
+[TIMBRO] _ab_due_tre.py  sha1-BYTE 0889bcef  !! MODIFICATO rispetto a HEAD (blob-git 135edde2) -- i byte che girano NON sono quelli committati
+==========================================================================================================================
+A/B SU --nmasse: TRE MASSE (Z49) CONTRO DUE. La predizione di Luca e' in a4fbe42, PRIMA del run.
+==========================================================================================================================
+  PRESIDI, IN TESTA:
+    * --tau-luce HA IL SIGILLO FALLITO (par.0): ENTRAMBI i bracci su ramo NON CERTIFICATO;
+    * --chi-basc attivo in entrambi; UN SEME per braccio; nessuna identificazione;
+    * A/B su --nmasse, NON su 'tre corpi': masse, POPOLAZIONE e geometria cambiano INSIEME.
+
+--- FALSIFICATORE 1 (fissato PRIMA): la POPOLAZIONE e' confrontabile? ---
+  n0 TRE = 2391   n0 DUE = 1895   atteso proporzionale 2/3 = 1594   MISURATO = 79.3 % (non il 66.7 %)
+
+--- FALSIFICATORE 2 (fissato PRIMA): R_anello varia piu' dell'8 %% -> lettura ASSOLUTA aliasata ---
+  TRE  (Z49)   R_anello 7.672 7.557 7.944 8.039 7.445 7.371   escursione (max-min)/min = 9.1 %
+  DUE  (ctrl)  R_anello 7.432 6.731 7.126 7.495 6.549 6.239   escursione (max-min)/min = 20.1 %
+  -> si riportano ENTRAMBE le letture, e la COMOVENTE e' quella che decide se divergono.
+
+--- LA CURVA CHE DECIDE -- nodi(regione interna), lettura ASSOLUTA  (r < 4) ---
+  braccio       f10      f115     f190     f270     f375     f400     | min/f10   f400/min 
+  TRE  (Z49)    900      291      224      221      559      907      | 0.2456    4.1041   
+  DUE  (ctrl)   901      323      242      245      414      559      | 0.2686    2.3099   
+  (frazione sulla popolazione n dello stesso istante)
+  TRE  (Z49)    0.3764   0.0809   0.0520   0.0406   0.0747   0.1131  
+  DUE  (ctrl)   0.4755   0.1110   0.0722   0.0600   0.0758   0.0951  
+
+--- LA CURVA CHE DECIDE -- nodi(regione interna), lettura COMOVENTE (r < R_anello(t)/2) ---
+  braccio       f10      f115     f190     f270     f375     f400     | min/f10   f400/min 
+  TRE  (Z49)    883      268      222      222      497      811      | 0.2514    3.6532   
+  DUE  (ctrl)   867      242      191      216      274      332      | 0.2203    1.7382   
+  (frazione sulla popolazione n dello stesso istante)
+  TRE  (Z49)    0.3693   0.0745   0.0515   0.0408   0.0664   0.1011  
+  DUE  (ctrl)   0.4575   0.0832   0.0570   0.0529   0.0502   0.0565  
+
+--- L'ACCENSIONE (falsificatore 3: ciclo SI ma rho_spin NON si accende?) -- interna COMOVENTE ---
+  rho_spin med  f10         f115        f190        f270        f375        f400        | escursione
+  TRE  (Z49)    3.7728e-07  6.5691e-06  3.4709e-07  5.0703e-07  4.0612e-03  5.5564e-02  | x1.601e+05
+  DUE  (ctrl)   4.4894e-07  3.3742e-04  7.5504e-05  1.0729e-06  2.6102e-04  2.4743e-03  | x5512
+    -> RAPPORTO TRE/DUE all'ultimo istante: x22.46
+  |psi| med     f10         f115        f190        f270        f375        f400        | escursione
+  TRE  (Z49)    9.9998e-05  3.2389e-04  5.8846e-05  3.2026e-03  7.5722e-02  6.7782e-01  | x1.152e+04
+  DUE  (ctrl)   1.1506e-04  2.6294e-03  1.0196e-03  1.2889e-04  2.2785e-02  4.6735e-02  | x406.2
+    -> RAPPORTO TRE/DUE all'ultimo istante: x14.5
+
+--- LE STESSE GRANDEZZE DI Z49, AGLI STESSI ISTANTI ---
+  braccio       frame   n        d MEDIANO  R_anello   R p95      coer|<nb>|  frac +1   
+  TRE  (Z49)    10      2391     0.86258    7.67248    8.47546    0.99528     0.00000   
+  TRE  (Z49)    115     3595     0.96355    7.55679    9.22453    0.67783     0.02921   
+  TRE  (Z49)    190     4307     1.01257    7.94450    9.84270    0.48383     0.03692   
+  TRE  (Z49)    270     5443     1.11907    8.03889    9.83421    0.26879     0.08341   
+  TRE  (Z49)    375     7480     1.31907    7.44462    9.36792    0.19945     0.14679   
+  TRE  (Z49)    400     8018     1.35143    7.37070    9.41869    0.19004     0.16450   
+
+  DUE  (ctrl)   10      1895     0.89552    7.43162    8.48775    0.99350     0.00106   
+  DUE  (ctrl)   115     2909     0.97693    6.73097    9.81127    0.63480     0.03369   
+  DUE  (ctrl)   190     3350     1.01588    7.12553    10.24184   0.50191     0.05164   
+  DUE  (ctrl)   270     4083     1.14332    7.49484    10.64430   0.34283     0.09797   
+  DUE  (ctrl)   375     5463     1.25349    6.54925    10.37452   0.18431     0.15925   
+  DUE  (ctrl)   400     5878     1.26642    6.23892    10.30180   0.17541     0.18510   
+
+--- r RICAVATO da eta += DT*r (il discriminante di Z46) -- interna COMOVENTE contro ANELLO ---
+  braccio       intervallo     r INTERNA      r ANELLO       r int / r_floor
+  TRE  (Z49)    10->115        1.078301e+00   7.089958e-01   762475.3      
+  TRE  (Z49)    115->190       1.072888e+00   7.830717e-01   758647.6      
+  TRE  (Z49)    190->270       1.273427e+00   7.219096e-01   900450.1      
+  TRE  (Z49)    270->375       1.409586e+00   5.232852e-01   996729.2      
+  TRE  (Z49)    375->400       1.392188e+00   3.876864e-01   984426.9      
+
+  DUE  (ctrl)   10->115        1.057884e+00   8.196445e-01   748037.8      
+  DUE  (ctrl)   115->190       1.035985e+00   9.822902e-01   732553.1      
+  DUE  (ctrl)   190->270       9.519098e-01   8.927691e-01   673102.8      
+  DUE  (ctrl)   270->375       1.199271e+00   6.206207e-01   848014.2      
+  DUE  (ctrl)   375->400       1.309581e+00   1.003478e+00   926014.7      
+
+  (Z46: i nodi fermi avevano r/r_floor = 1.0000. Qui vale ~1e6 in ENTRAMBI i bracci:
+   la regione interna NON e' ferma, e il discriminante di Z46 NON scatta ne' a due ne' a tre.)
+==========================================================================================================================
+
+--- IL RECUPERO NORMALIZZATO SULLA CRESCITA DEL SISTEMA ---
+  ATTENZIONE, DICHIARATO: la lettura FISSATA PRIMA (a4fbe42) e' il CONTEGGIO nudo.
+  QUESTA e' una lettura che aggiungo DOPO aver visto i numeri, e va pesata come tale.
+  Motivo: fra il minimo e la fine n cresce di quasi il doppio in ENTRAMBI i bracci, quindi
+  un conteggio che raddoppia puo' voler dire 'la regione si riempie' oppure 'il sistema
+  cresce e la regione lo segue'. Il rapporto fra i due tassi separa i due casi.
+  braccio       f_min      int_min    int_f400   n_min      n_f400     | recup/cresc 
+  TRE  (Z49)    190        222        811        4307       8018       | 1.9624      
+  DUE  (ctrl)   190        191        332        3350       5878       | 0.9906      
+  -> 1.0 significa: la regione interna cresce ESATTAMENTE come il sistema, cioe' NON si
+     riempie in senso relativo. > 1 significa che si riempie piu' in fretta del sistema.
