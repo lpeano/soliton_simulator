@@ -331,3 +331,36 @@ deroga (*«se lo derivi, dimostra perché `nudo` non basta»*), e la dimostrazio
   perché il grado è il conteggio.
 - **Non tocca il punto 1** (due rotture, la seconda è `refl`: legge nuova) **né il punto 2**
   (latente, `TW_SPINORE = False`).
+
+---
+
+## 2026-09-18 — **lo snapshot di `med` in `ritmo()`** *(scritte PRIMA di cablare, `fd198ba` + §1 misurato)*
+
+**Cosa cambia:** `med` viene letto dal passo **precedente**. Il riferimento resta `median(|f|)`.
+
+1. **`P1` (byte-identità al limite) PASSA.** Forzando `med_prec = med_corrente` la legge torna
+   letteralmente quella di prima: **`max|A-B| = 0.000e+00`**. Se fallisse, ho scritto la cura male.
+2. **`P3` PASSA e A3 si scioglie.** Misurato in anticipo (§1 B): oggi
+   **`max|median(x)−1| = 0.000e+00` su 122 passi** *(il punto fisso è **esatto**, non «circa»)*;
+   sfasato, `median(x)` vale `2.11 / 0.911 / 1.17`. **Si staccherà da 1, e di molto.**
+3. **`P7` (il tetto) NON si sposta.** `r_unit`, il `+1e-6` e `x/sqrt(1+x²)` non sono toccati: il
+   **codominio** resta `[1.414e-06, √2]`. **Ma la POPOLAZIONE dentro quel codominio si sposterà**, e
+   il tetto sarà **raggiunto più spesso** *(vedi 5)*.
+4. **⚠ `P6` — `Z33` NON sparirà: cambierà FORMA, e si ROVESCIA.** Con `f` tutto nullo, `med_prec` è
+   ancora buono → `x = 0` per tutti → **`r` cade sul pavimento lo stesso**. **E il passo DOPO è
+   peggio:** in quel passo `med` è caduto sul pavimento `1e-9`, quindi il passo successivo avrebbe
+   `x = f/1e-9` → **tutti in SATURAZIONE, `r ≈ √2`**. **Misurato in anticipo: il rapporto
+   `med_t/med_{t-1}` ha `max = 4.81e+07`, ed è esattamente quel passo.**
+   → **prevedo che la cura debba portarsi dietro un presidio: NON si promuove un `med` che sta sul
+   pavimento**, perché `1e-9` **non è una misura, è una protezione da divisione per zero** — e
+   promuoverlo significherebbe *«la regolarizzazione diventa il parametro fisico»* (par.9).
+5. **⚠ IL METRO RESTA BALLERINO — e lo avevo scritto prima di misurare.** `median(|f|)` oscilla del
+   **62 %** fra passi; `median(x)` sfasato avrà `p05 ≈ 0.53`, `p95 ≈ 2.10`. **L'anello si rompe, ma
+   la dispersione non viene più divisa via: passa dentro `r`.** **Non è un'obiezione alla cura**
+   (A6 viene prima) **ma è un fronte nuovo, e va aperto nello stesso commit.**
+6. **`P8` (`Z9`)**: **non prevedo un miglioramento sistematico.** `ramp` dipende dall'accumulo di
+   `eta`, e questa cura sposta il *momento* del gauge, non l'ampiezza media di `r`. **Mi aspetto uno
+   scarto dentro la dispersione fra semi (~3 %), quindi NON interpretabile su un seme.**
+7. **Il numero di nodi cambia.** Traiettorie diverse ⟹ `N` diverso ⟹ i confronti array-per-array
+   che non siano `P1` avranno **shape diverse**: `max|A-B| = 0.000e+00` lì significherebbe
+   **MANCANZA DI CONFRONTO**, e la riga delle shape va stampata **per prima**.

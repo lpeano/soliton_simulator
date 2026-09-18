@@ -1,0 +1,39 @@
+[TIMBRO] _anello_sfasato.py  sha1-BYTE 555b5763  committato e pulito
+======================================================================================================================
+ANELLO ISTANTANEO -- misura preliminare: `med` del passo PRIMA   [120 passi, seme 5]
+======================================================================================================================
+  config: CAMPO_SPINORIALE=True SPINORE_VIVO=True SPIN_FEEDBACK=True STEP2_OROLOGIO=True
+  NESSUNA CURA CABLATA: la sonda OSSERVA, il simulatore e' il blob invariato.
+
+  invocazioni utilizzabili: 124 su 126
+
+--- (A) il rapporto `median(|f|)_t / median(|f|)_(t-1)` ---
+    min 2.41968e-08   p05 0.482301   MEDIANA 1.03799   p95 2.09706   max 4.81023e+07   (n = 123 passi)
+    traiettoria: t=1 4.81023e+07   t=1/4 2.10968   t=meta' 0.910779   t=ultimo 1.17268
+    frazione fuori da [0.5, 2] : 0.1138      std/mediana : 4.386e+06
+  (se il rapporto fosse ~1 con dispersione trascurabile, la cura sarebbe COSMETICA)
+
+--- (B) ⚠ `median(x)` col `med` SFASATO: il punto fisso A3 si scioglie? ---
+                   t=1             t=1/4           t=meta'         t=ultimo        | max|med-1|  
+  ATTUALE          1               1               1               1               | 1           
+  SFASATO          48102278.43     2.109675504     0.9107787197    1.17268093      | 4.81023e+07 
+  ATTUALE, esclusi i passi degeneri (`Z33`, median(x) = 0): max|med-1| = 0.000e+00  su 122 passi
+  SFASATO, esclusi gli stessi passi              : max|med-1| = 4.81023e+07  su 122 passi
+  (il punto fisso A3 e' `median(x) = 1` ESATTO. Si guardano LE CIFRE, non un si'/no.)
+
+--- (C) quanti nodi CAMBIANO REGIME (attraversano `x = 1`)? ---
+    frazione di nodi che cambiano lato di `x = 1` : mediana 0.0655   p05 0.0025   p95 0.4045   max 0.5000
+
+--- (D) ⚠ il metro resta BALLERINO? dispersione di `median(x)` FRA PASSI ---
+    median(x) ATTUALE      : mediana 1   p05 1   p95 1   std/med 0
+    median(x) SFASATO      : mediana 1.03825   p05 0.531216   p95 2.10337   std/med 4.402e+06
+    median(|f|) (il metro) : mediana 0.027787                                  std/med 0.6234
+
+  COME SI LEGGE -- fissato PRIMA (task history fd198ba):
+    rapporto ~1, dispersione trascurabile -> cura COSMETICA: si dice e ci si ferma.
+    median(x) resta 1 a dieci cifre       -> L'ANELLO NON E' ROTTO: fermarsi e capire perche'.
+    median(x) si stacca da 1              -> A3 si scioglie: si procede alla cura.
+    median(x) oscilla quanto median(|f|)  -> si procede LO STESSO (A6 viene prima) ma si DICHIARA
+                                             che il metro resta ballerino: e' un fronte nuovo.
+
+======================================================================================================================
