@@ -1,0 +1,42 @@
+========================================================================================================================
+Y0-Y10 -- INERZIA DIMENSIONALE:  max((rho/peq_nodo) * (d/cs)^2, 1e-6)
+========================================================================================================================
+
+--- (Y6) `_fatt_cs` non e' applicato due volte ---
+  nel PRE: `rho_sorgente * _fatt_cs` presente 0 volta/e
+  nel codice ORA, righe che usano `_fatt_cs`:
+     _fatt_cs = (CS_M / _cs_in) ** 2                    # adimensionale, == 1 dove cs == CS_M
+     self._fatt_cs_ultimo = _fatt_cs                    # DIAGNOSTICO: nessun lettore (Z7)
+[FAIL] Y6 `_fatt_cs` NON entra piu' nell'inerzia (no cs^-4) prima 1 uso nell'inerzia, ora 0; resta solo come diagnostico
+
+--- (Y7) A6: nessuna grandezza dell'inerzia viene dallo stato CORRENTE  [BLOCCANTE] ---
+   :2341   inerzia = np.maximum(_contrasto * _T2, 1e-6)
+   :3353   self._passo_spinoriale(i, j, w, dt_n_s
+   :3429   self._cs_nodo_prev = cs_nodo.copy()
+   :3438   nuovi = np.isnan(self.peq)
+   :3534   self.d = np.maximum(self.d + dts * self.vd, 0.05)
+[PASS] Y7 peq, cs e d sono aggiornati DOPO il punto dell'inerzia  [BLOCCANTE] inerzia a :3353; peq :3438, cs :3429, d :3534 -- tutti DOPO
+
+--- (Y2) RIDUZIONE AL LIMITE, condizione definita PRIMA di girarla ---
+  se  peq_nodo == rho_sorgente  e  (d/cs)^2 == 1,  allora  contrasto == 1  e
+  inerzia == max(1.0, 1e-6) == 1.0, cioe' il vecchio A MENO di _fatt_cs e del pavimento.
+  max|contrasto - 1| = 0.000e+00   (forma scelta perche' sia BINARIAMENTE esatta: x/x)
+[PASS] Y2 riduzione al limite: contrasto == 1.0 ESATTO      max|A-B| = 0.000e+00 su 20000 nodi
+[PASS] Y2b e l'inerzia torna a T^2                          max(contrasto*T^2, 1e-6) == 1.0
+
+--- I DUE RUN (60 passi, seme 5) ---
+  [run pre FALLITO rc=2]
+C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe: can't open file 'C:\\Users\\lpeano\\soliton_simulator\\csv\\_seal_fork\\_pre_inerzia.py': [Errno 2] No such file or directory
+
+
+========================================================================================================================
+Y: 3/5 PASS -> FAIL
+
+COSA QUESTO SIGILLO NON DICE
+----------------------------
+NON dice nulla su `theta`, `omega`, l'aliasing o qualunque grandezza di fisica: il mandato lo
+vieta, e il motivo e' che `theta` e' proprio il numero che questa correzione punta a muovere. Si
+guardera' a bonifica finita, contro una predizione scritta prima.
+Y2 e' vero PER COSTRUZIONE (x/x): il suo valore non e' scoprire che il contrasto vale 1, ma
+verificare che la FORMA SCRITTA NEL CODICE sia quella -- un ordine sbagliato degli argomenti o un
+`peq/rho` invece di `rho/peq` darebbero FAIL qui e basta.

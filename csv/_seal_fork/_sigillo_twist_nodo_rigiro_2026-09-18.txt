@@ -1,0 +1,49 @@
+[TIMBRO] _sigillo_twist_nodo.py  sha1-BYTE 9274ef75  committato e pulito
+======================================================================================================================
+SIGILLO DELLA CURA SUL PUNTO 3 -- twist_nodo / FRAME_DRAG  (Z27)
+======================================================================================================================
+
+--- H0: sha1 dei BYTE GREZZI = aa84755b   (496962 byte) ---
+  FRAME_DRAG = True   <- il gate: se fosse False la misura sarebbe vuota
+
+--- H2: riduzione al limite. Il limite VERO e' GRADO TOPOLOGICO = 1 ---
+  grado topologico per nodo: min 1  max 1  (deve essere 1 su tutti)
+[PASS] H2 al limite grado=1 la nuova == la vecchia        max|A-B| = 0.000e+00   (shape (8,) vs (8,))
+
+--- H3: controllo positivo -- coi gradi VERI le due forme DEVONO differire ---
+  gradi topologici: [3 3 1 1 1 1]
+[PASS] H3 coi gradi veri le due forme DIFFERISCONO        max|nuova-vecchia| = 1.7922
+[PASS] H3b la NUOVA ha somma zero, la VECCHIA no          sum(nuova) = 2.220e-16   sum(vecchia) = 2.2218
+
+--- il run: scena del batch, TAU_A = 2.0, 60 passi, seme 5 ---
+
+--- H1 [BLOCCANTE]: l'antisimmetria su OGNI invocazione ---
+  invocazioni con termine non nullo: 66 su 66
+  |sum|/max|.| : mediana 0.000e+00   MAX 0.000e+00   (era: mediana 6.756, MAX 8.483)
+[PASS] H1 antisimmetria ESATTA su OGNI invocazione  [BLOCCANTE] MAX = 0.000e+00
+
+--- H4: IL RISCHIO SCRITTO PRIMA -- di quanto cresce il termine? ---
+  |twist_nodo| mediano : vecchio 0.23109  ->  nuovo 27.5   (fattore 119)
+  max|twist_nodo|      : vecchio 0.5  ->  nuovo 34   (fattore 68)
+  previsione ex ante (52823d4): '~10^2 volte piu' grande'
+  NB: NON e' un criterio PASS/FAIL -- e' la grandezza che decide se la lettura 2 si applica.
+
+--- H5 [BLOCCANTE]: stabilita' ---
+[PASS] H5a nessun NaN/inf  [BLOCCANTE]                    phivel 0, omega_s 0
+[PASS] H5b CFL < 1                                        _taup_cfl_max = 0.39999999999999997
+  max|phivel| 14.319   max|omega_s| 87.741   n finale 462   (pre-cura, stessa scena: 14.345 / 34778 / 548)
+
+--- H6: il commento corretto ---
+  marcatore di ritiro trovato a offset 2554 del blocco
+  le due frasi compaiono 2 volte in tutto, e devono stare TUTTE dopo il marcatore
+[PASS] H6 nessuna affermazione smentita e' ancora ASSERITA asserite fuori dal ritiro: nessuna
+[PASS] H6b il commento cita la MISURA che le ha smentite  cita 6.756: True   cita 0.000e+00: True
+
+======================================================================================================================
+SIGILLO: 8/8 PASS
+
+COME SI LEGGE -- le tre letture erano fissate PRIMA (doc/PREVISIONI_qualitative.md, 52823d4)
+  H1 a zero E H5 verdi          -> la cura regge. Si riporta il rapporto di H4, misurato.
+  H1 a zero MA H5 rosso         -> `nudo` NON basta qui: e' una DIMOSTRAZIONE, non una preferenza.
+                                   Si committa il fallimento e CI SI FERMA, senza scegliere al volo.
+  H1 non a zero                 -> ricostruzione sbagliata: si riporta e stop.

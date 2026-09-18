@@ -4489,3 +4489,99 @@ Coi valori veri, `linea` è la **meno estensiva** delle tre forme esatte (**16.9
 **su un criterio diverso da quello con cui la scelta era stata fatta**. Si decide **insieme ai due
 punti, con lo stesso criterio** — *la coerenza fra i punti vale più che ottimizzarne uno solo*.
 **Ora che `Z24` è chiusa, la decisione è sbloccata.**
+
+---
+
+## 9.43 — **I default cambiati erano DUE righe, non una. E il rigiro ha trovato quattro sigilli non ri-girabili**
+
+**Data:** 2026-09-18 · blob `aa84755b` · **Ripresa dopo un riavvio del PC.**
+
+### Lo stato dal disco — due premesse del mandato erano sbagliate
+
+| atteso | **misurato dal disco** |
+|---|---|
+| HEAD `38975bd` | **`6b045c0`** — la promozione di `SPIN_FEEDBACK` **era già committata** |
+| blob `bcb9db5f` | **`cce15c46`** — è il blob **post-promozione** |
+| «il cambio dei default non era stato committato» | **lo era**, e il disco era **identico a HEAD** |
+
+**Nessuna modifica a metà sopravvissuta.** I non tracciati erano **solo output** di sigilli, più
+`_sigillo_rimozione5_rigiro….txt` a **zero byte** — residuo del job ucciso dal riavvio. Rimossi
+perché rigenerabili, **non committati come risultati**.
+
+### I due default — e il secondo è il reperto
+
+```
+SPIN_FEEDBACK = False -> True    (già fatto, 6b045c0)
+SPINORE_VIVO  = False -> True    (mancava)
+```
+
+**L'audit sul codice già committato lo diceva:**
+
+```
+:3189   if SPINORE_VIVO and SPINORE and SPIN_FEEDBACK:
+        SPINORE_VIVO = False   SPINORE = True   SPIN_FEEDBACK = True
+   -> il feedback GIRA nel default?  NO      manca: ['SPINORE_VIVO']
+```
+
+**Accendere solo `SPIN_FEEDBACK` lo lasciava ACCESO MA INERTE — e inerte in silenzio:** il metodo non
+veniva nemmeno chiamato, quindi **nemmeno i contatori A8 sarebbero scattati**, perché stanno **dentro**
+quel blocco. È la famiglia «cablato ma muto» (`VERSO_CHI`, `_passo_spinoriale` «ORFANO»,
+`spin_locale`, `TW_SPINORE`, la FASE 5 inerte al 95.33 % **per mesi**) — **stavolta intercettata
+prima che accadesse**, e da uno strumento scritto apposta.
+
+**I quattro rami dell'avviso sono stati esercitati**, non dedotti: default nudo → *gira*;
+`--senza-spinore-vivo` → *non gira*; `--senza-spin-feedback` → *diagnostico*; `--spinore-vivo` →
+*no-op dichiarato che non rompe i comandi già scritti*.
+
+**E ho corretto un difetto nel mio stesso avviso:** stampava *«manca `--spinore-vivo`»*, ma quel flag
+è ora un **no-op** e a spegnere è `--senza-spinore-vivo`. **Un avviso che indica il flag sbagliato
+manda chi legge a cercare la causa dove non è.**
+
+> ⚠ **E va detto chiaro: `SPINORE_VIVO = True` non è mai stato validato COME DEFAULT.** Le campagne
+> lo passavano **da fuori**, quindi la *configurazione* era la stessa, **ma nessun sigillo è mai stato
+> girato con questo valore come default di modulo.** È scritto nel commento del flag.
+
+### Il rigiro — **52 PASS, 0 FAIL nei sei gruppi sani**
+
+| gruppo | esito |
+|---|---|
+| `V1` `_sigillo_d_arco` | **8/8** |
+| `V2-V5` `_sigillo_taup_causale` | **8/8** |
+| `V6-V10` `_sigillo_rep_spinta` | **12/12** |
+| `Y5` `_sigillo_Y5_riscritto` | **4/4** |
+| `F/G` `_sigillo_denominatore` | **12/12** |
+| `H` `_sigillo_twist_nodo` | **8/8** |
+
+### ⚠ E quattro sigilli non sono più ri-girabili — **una sola causa**
+
+`_sigillo_inerzia`, `_sigillo_calcpsi_T1`, `_sigillo_calcpsi_T2`, `_sigillo_rimozione5` caricano una
+copia **PRE** del simulatore da `SC = os.environ.get("SCRATCH", HERE)` — **lo scratchpad di sessione,
+che non è nel repo.** Il riavvio l'ha cancellato.
+
+- **`_sigillo_inerzia`: `Y6` FAIL FALSO** — legge un PRE vuoto, conta `0` usi, **fallisce su codice
+  corretto**;
+- **`_sigillo_calcpsi_T1`: `[run pre FALLITO rc=2]` → 0/1 FAIL**;
+- **`_sigillo_calcpsi_T2`: modalità ridotta** — un solo verdetto, `Q3` e `Q6` dipendono dal PRE;
+- **`_sigillo_rimozione5`: SI SCHIANTA** (`FileNotFoundError`) — **la modalità peggiore**, già
+  catalogata col caso dello Strato 1: *«NON FALLIVA: SI SCHIANTAVA»*.
+
+> **È `par.5-quinquies` applicato ai riferimenti dei sigilli stessi, e il riavvio l'ha DIMOSTRATO
+> invece che argomentato.** Un sigillo che non si può rigirare non protegge nulla.
+
+**E il difetto non è solo il file mancante: tre di essi DEGRADANO IN SILENZIO** —
+`pre_src = "" if not exists` trasforma un riferimento assente in **un confronto contro il vuoto**,
+che poi produce un FAIL su codice sano. **Un riferimento mancante deve RIFIUTARE, non degradare.**
+
+**Meccanismo proposto** (`Z31`) — e **dichiaro che finché non è cablato resta una proposta, non un
+presidio**: il PRE **non si conserva, si DERIVA** con `git cat-file -p <commit>:soliton_simulator.py`
+in **binario**, tramite un helper in `csv/_presidio.py` che **esce con errore** se quel commit non è
+nel repo. Il riferimento resta pinnato da **un hash — l'unica identità che non mente** — e non costa
+500 KB per sigillo. *(La convenzione esiste già: `_old_sim_pre_*.py` sono committate. Questi quattro
+non l'hanno seguita.)*
+
+**Non riparati in questo giro, per ordine del mandato. Nessuno dei quattro è una regressione fisica.**
+
+### Aperto per Luca — `Z30`
+
+`nudo` (**36.2**) contro `linea` (**16.9**) per il denominatore di `SPIN_FEEDBACK`. **Ora che `Z24` è
+chiusa è decidibile. Riportata, non decisa.**

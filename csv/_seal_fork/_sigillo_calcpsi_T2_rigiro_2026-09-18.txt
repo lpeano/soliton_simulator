@@ -1,0 +1,26 @@
+======================================================================================================================
+Q0, Q3-Q8 -- TEMPO 2: `w` passato ai due chiamanti ESEGUITI dentro step
+======================================================================================================================
+
+--- (forma) i tre punti nel sorgente ---
+   :3157   psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi(w)
+   :3198   psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()
+   :3313   psi_sync = psi_t if SYNC_UPDATE else self.calcola_psi(w)
+[PASS] forma: DUE chiamanti passano `w`, UNO no (l'elif) con w: 2, senza: 1 (il terzo e' il ramo elif, DICHIARATO)
+
+--- (Q4) CONTROLLO POSITIVO: coi valori veri i due DEVONO differire ---
+  [run pre FALLITO rc=2]
+C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe: can't open file 'C:\\Users\\lpeano\\soliton_simulator\\csv\\_seal_fork\\_pre_T2.py': [Errno 2] No such file or directory
+
+
+======================================================================================================================
+Q0,Q3-Q8: 1/2 PASS -> FAIL
+
+NB -- Q3 (riduzione al limite) e Q6 (topologia) sono verificati a parte:
+ Q3: forzare i due chiamanti a non passare `w` significa RIPRISTINARE il file PRE, che e' il
+     riferimento stesso di questo confronto: la riduzione al limite e' l'identita' del file PRE
+     con se stesso, e non aggiunge informazione. Cio' che il sigillo verifica davvero e' che le
+     modifiche siano SOLO quelle due righe -- ed e' il controllo di FORMA in testa.
+ Q6: misurato PRIMA del cablaggio (verifica preliminare 1): topologia INVARIATA nel 100 % di 40
+     chiamate, su entrambi i punti; e `w` e' gia' usato a :3007 e :3124, quindi se fosse
+     disallineato quelle righe sarebbero gia' rotte.

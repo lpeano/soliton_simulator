@@ -1,0 +1,12 @@
+======================================================================================================================
+V9 -- RIMOZIONE DI `spin_locale()`: deve essere ESATTAMENTE INERTE
+======================================================================================================================
+  PRIMA : C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_pre_rimozione5.py
+  DOPO  : C:\Users\lpeano\soliton_simulator\soliton_simulator.py
+  40 passi, seme 3, stessi flag.
+
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_rimozione5.py", line 69, in <module>
+    pre_src = open(PRE, encoding="utf-8", errors="replace").read()
+              ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\lpeano\\soliton_simulator\\csv\\_seal_fork\\_pre_rimozione5.py'

@@ -1,0 +1,54 @@
+======================================================================================================================
+V1 -- SIGILLO `d_arco`: l'array per-ARCO non si indicizza con indici di NODO
+======================================================================================================================
+
+--- (a) il SORGENTE: il difetto c'era nel riferimento e non c'e' piu' ---
+  (si contano le occorrenze nel CODICE, escludendo i commenti: il commento della cura cita
+   la riga vecchia, ed e' evidenza voluta -- par.9, 'il codice di una legge esclusa non si
+   cancella mai')
+  nel blob 827d3bf8 (riferimento): ramo `d` = 1   ramo `d0` = 1
+  sul disco ORA                  : ramo `d` = 0   ramo `d0` = 0
+  nel COMMENTO sul disco, come evidenza  : 1 citazione/i
+[PASS] V1a il difetto e' SPARITO da entrambi i rami         riferimento 1+1 nel codice; disco 0+0
+  assegnazioni di d_arco sul disco: ['self.d0', 'self.d']
+[PASS] V1b la cura e' ESATTAMENTE `self.d` / `self.d0`      trovate 2 assegnazioni: ['self.d0', 'self.d']
+
+--- (c) i DATI: correlazione con la lunghezza VERA dell'arco ---
+  correlazione d_arco(VECCHIO) <-> lunghezza vera, per seme:
+    ['-0.3488', '+0.1444', '+0.0319', '+0.3760']      media +0.0509
+  il valore che avrebbe se rappresentasse cio' che dichiara: +1.0000 (identita')
+
+  ATTENZIONE, CORREZIONE A UN NUMERO CHE HO SCRITTO IO (doc/REFERTO_U7_fallito.md, commit fb9c8e4):
+  li' avevo scritto "correlazione -0.349, ANTICORRELATA" come se fosse IL fatto. Era UN SEME.
+  Su quattro semi il SEGNO NON E' NEMMENO CONCORDE. Il difetto quindi non e' "informazione col
+  segno sbagliato" (che sarebbe comunque informazione): e' RUMORE. La diagnosi ne esce PIU' forte,
+  non piu' debole -- ma il numero che avevo scritto non reggeva, ed e' P3: mai una statistica
+  senza barra, e per una barra fra semi servono >= 4 semi.
+[PASS] V1c il VECCHIO d_arco non rappresenta la lunghezza d'arco segno NON concorde fra semi (-1/+1), |r|max = 0.3760 contro 1.0 atteso
+[PASS] V1d il NUOVO d_arco E' la lunghezza dell'arco  [BLOCCANTE] np.array_equal(d_arco, d) = True su 4/4 semi (IDENTITA', non correlazione)
+
+--- (e) la LOCALIZZAZIONE: quanti archi il ramo vecchio leggeva davvero ---
+  frazione di archi il cui indice era raggiungibile da i/j: 1.5839 %  -> mai letti 98.42 %
+[PASS] V1e il ramo vecchio ignorava >90 %% degli archi      mai letti 98.42 % (referto: 98.34 %)
+
+--- (f) CONTROLLO POSITIVO: la cura NON e' inerte, e non rompe nulla ---
+  tau_p_loc PRIMA : mediana 685126   min 0.631299   max 2.89555e+06
+  tau_p_loc DOPO  : mediana 644749   min 0.0328812   max 2.68845e+06
+  archi in cui tau_p_loc CAMBIA: 100.0000 %
+[PASS] V1f controllo positivo: tau_p_loc cambia             cambia sul 100.00 % degli archi
+[PASS] V1g stabilita': tau_p_loc DOPO finito e > 0          min = 0.0328812, NaN/inf = 0
+[PASS] V1h la SHAPE non cambia (il difetto era nei VALORI)  840604 = 840604 elementi
+
+======================================================================================================================
+V1: 8/8 PASS -> PASS
+
+COSA QUESTO SIGILLO NON DICE
+----------------------------
+NON dice che la plasticita' ora sia giusta: `fattore_elasticita` e' rimasto quello vecchio, di
+proposito (una correzione alla volta, par.1). Dice solo che il PRIMO fattore di tau_p_loc ha
+smesso di essere la lunghezza di un altro arco.
+NON e' un sigillo di byte-identita': la correzione CAMBIA il comportamento su ogni arco, ed e' cio'
+che V1f verifica. Una byte-identita' qui sarebbe un FALLIMENTO, non un successo.
+EFFETTO COLLATERALE DICHIARATO: `d_arco` e' usato anche dal ramo GUSCIO_MORBIDO (:3257), che e'
+OFF di default (:658). Con quel flag ON, anche quel termine cambia -- non perche' sia stato
+toccato, ma perche' condivide la variabile corretta.

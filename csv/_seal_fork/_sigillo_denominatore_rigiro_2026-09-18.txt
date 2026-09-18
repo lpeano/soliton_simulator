@@ -1,0 +1,71 @@
+[TIMBRO] _sigillo_denominatore.py  sha1-BYTE 0dee44c5  committato e pulito
+======================================================================================================================
+SIGILLO DELLA CURA DEL DENOMINATORE -- G0-G9
+======================================================================================================================
+
+--- G0: identita' del file ---
+  sha1 dei BYTE GREZZI : aa84755b   (496962 byte)
+  blob GIT a HEAD      : 72acd6aa   <- spazio di hash DIVERSO, non confrontabile col precedente
+  riferimento del mandato: 425e4aaa (blob git, pre-cura)
+
+--- G2: riduzione al limite. Il limite VERO per 'nudo' e' GRADO PESATO = 1 ---
+  grado pesato per nodo: min 1.000000  max 1.000000  (deve essere 1 su tutti)
+[PASS] G2 al limite grado=1 la nuova == la vecchia          max|A-B| = 0.000e+00 (shape (6,) vs (6,))
+  NB: la riga delle SHAPE e' stampata PRIMA del massimo apposta -- uno zero su shape diverse
+      sarebbe MANCANZA DI CONFRONTO, non identita' (CLAUDE.md par.9).
+
+--- G3: controllo positivo -- coi gradi VERI le due forme DEVONO differire ---
+  gradi pesati: [1.9 1.1 0.3 0.9 0.4]   (disomogenei per costruzione)
+[PASS] G3 coi gradi veri le due forme DIFFERISCONO          max|nuova-vecchia| = 0.40874
+
+--- G5: A7 SULL'ARCO -- cio' che `i` cede e' cio' che `j` riceve? ---
+[PASS] G5 +flusso e -flusso esattamente opposti             |sum(ceduto) + sum(ricevuto)| = 0.000e+00
+[PASS] G5b imag<i|j> = -imag<j|i> (la legge e' antisimmetrica) max|imag<i|j> + imag<j|i>| = 2.220e-16
+
+--- il run: scena del batch, TAU_A = 2.0, 60 passi, seme 5 ---
+
+--- G1 [BLOCCANTE]: l'antisimmetria su OGNI invocazione ---
+  invocazioni con feedback non nullo: 64 su 66
+  |sum(out)|/max|out| : mediana 6.037e-16   MAX 3.254e-15   (era: mediana 1.112, MAX 8.441)
+[PASS] G1 antisimmetria all'epsilon su OGNI invocazione  [BLOCCANTE] MAX = 3.254e-15
+
+--- G7 (A8b): len(_spinor_lift) >= n dopo ogni crescita ---
+  invocazioni col lift CORTO: 2 su 66  (3.03 %)   contatore _sfb_lift_corto = 2
+  quando: alle invocazioni [0, 6]
+[PASS] G7 il lift corto e' solo il transitorio iniziale     2 invocazioni su 66
+
+--- G4: conservazione di sum(phivel) (cio' che sum(coppia)=0 conserva, M_PH uniforme) ---
+  sum(phivel) iniziale 4.0963   finale -26.436   deriva -30.533   |deriva|/scala 1.155
+  riferimento PRE-CURA (stessa scena, commit ac0ee16): deriva -70.41, |deriva|/scala 1.0658
+  ⚠ NON E' UN CRITERIO PASS/FAIL: le due traiettorie DIVERGONO (n finale diverso), quindi
+     e' un confronto fra SISTEMI DIVERSI, un seme, senza nullo misurato. Si RIPORTA.
+
+--- G6: LA CUCITURA DI FASE -- `imag(ov)` e' CONTINUO fra passi consecutivi? ---
+  (mai verificata da nessuno. NULLO: se fosse rumore di gauge a media zero, i CAMBI DI SEGNO
+   sarebbero il 50 % degli archi sopravvissuti, e |delta| sarebbe dell'ordine di |ov| stesso.)
+  coppie di passi confrontabili: 62
+  |delta imag(ov)| mediano  : 0.0010918
+  |imag(ov)| mediano         : 0.036137
+  RAPPORTO |delta| / |ov|    : 0.030213   <- se ~1 o piu', NON c'e' cucitura
+  frazione di CAMBI DI SEGNO : 0.0025   (nullo del rumore di gauge: 0.5)
+[PASS] G6 la fase e' CUCITA (cambi di segno ben sotto il nullo 0.5) cambi di segno 0.0025 contro nullo 0.50
+
+--- G8: stabilita' ---
+[PASS] G8a nessun NaN/inf                                   phivel 0, omega_s 0
+[PASS] G8b |nb| = 1                                         max||nb|-1| = 2.220e-16
+[PASS] G8c CFL < 1                                          _taup_cfl_max = 0.39999999999999997
+  max|phivel| 14.319   max|omega_s| 87.741   n finale 462
+
+--- G9: il docstring corretto ---
+[PASS] G9 l'affermazione smentita non e' piu' nel docstring 'antisimmmetrica ai nodi' presente: False
+[PASS] G9b il docstring SPIEGA perche' era falsa            cita la misura (1.112) e il cricchetto: True / True
+
+======================================================================================================================
+SIGILLO: 12/12 PASS
+
+COME SI LEGGE
+  G1 e' BLOCCANTE: se non e' all'epsilon su OGNI invocazione, la cura e' sbagliata e ci si ferma.
+  G2 e' scritto sul limite VERO (grado pesato = 1), non su quello del mandato: dichiarato PRIMA
+     in doc/PREVISIONI_qualitative.md, commit f3f1ab0.
+  G4 NON e' pass/fail: due traiettorie che divergono non si confrontano con una soglia.
+  G6 e' la misura che non aveva mai fatto nessuno, e il suo NULLO e' 0.5, non 0.

@@ -1,0 +1,15 @@
+======================================================================================================================
+Q1-Q2 -- TEMPO 1: contare il fallback `w is None` di calcola_psi(). NESSUNA LEGGE TOCCATA.
+======================================================================================================================
+  [run pre FALLITO rc=2]
+C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe: can't open file 'C:\\Users\\lpeano\\soliton_simulator\\csv\\_seal_fork\\_pre_calcpsi.py': [Errno 2] No such file or directory
+
+
+======================================================================================================================
+Q1-Q2: 0/1 PASS -> FAIL
+
+COSA QUESTO SIGILLO NON DICE
+----------------------------
+NON dice che i pesi ricalcolati siano DIVERSI da quelli di `step()`. Dice quante volte vengono
+ricalcolati e da chi. **Se coincidessero, il difetto sarebbe teorico** - ed e' esattamente cio' che
+Q4 misurera' nel TEMPO 2, che NON e' in questo commit.

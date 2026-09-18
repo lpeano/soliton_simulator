@@ -1,0 +1,32 @@
+======================================================================================================================
+Y5 RISCRITTO -- il fallback dello sfondo, sul comportamento VERO
+======================================================================================================================
+  invocazioni osservate: 66   di cui col fallback: 4
+[PASS] Y5.0 gli indici dei nodi sono STABILI (n monotono)   n da 80 a 443, mai decrescente: True
+
+  Le prime 7 invocazioni sono il SETUP (semina + riscaldamento + creazione masse):
+  li' TUTTI i nodi sono nuovi e il campo non e' ancora calcolato. ESCLUSE, e dichiarato.
+  invocazioni col fallback DOPO il setup: 2
+
+--- Y5a/Y5b: CHI cade nel fallback? ---
+  nodi-invocazione in fallback : 3
+  GRADO  : min 2  mediana 2  max 2
+  ETA    : min 0.0121447  mediana 0.0121447  max 0.0141354   (eta mediana di TUTTI: 0.134004)
+[PASS] Y5a fallback SOLO su nodi di grado 2 (firma mitosi)  0 nodi-invocazione con grado != 2 (max grado 2)
+[PASS] Y5b nessun nodo MATURO cade nel fallback  [deve restare 0] 0 nodi con eta > meta' della mediana (0.067)
+
+--- Y5c: per QUANTE invocazioni consecutive ciascun nodo resta in fallback? ---
+  nodi distinti che cadono nel fallback: 3
+  distribuzione (quante invocazioni ciascuno): 1 inv -> 3 nodi
+[PASS] Y5c ogni nodo resta in fallback UNA SOLA invocazione peggiore: 1 invocazioni; nodi con piu' di una: 0
+
+======================================================================================================================
+Y5 RISCRITTO: 4/4 PASS -> PASS
+
+COME QUESTO CRITERIO PUO' FALLIRE -- ed e' la ragione per cui sostituisce il vecchio
+  Y5b fallisce se UN SOLO nodo maturo cade nel fallback: nulla nella forma del codice lo impedisce,
+      e sarebbe il segnale che il campo si annulla dove NON dovrebbe.
+  Y5c fallisce se un figlio resta in fallback DUE invocazioni: significherebbe che `eta` non e'
+      cresciuta, o che il campo non si e' acceso al passo dopo. Sarebbe un difetto NUOVO.
+  Il vecchio Y5 invece misurava "quando cessa", che dipendeva dallo SFASAMENTO: era un criterio
+  scritto sul difetto, non sulla legge.

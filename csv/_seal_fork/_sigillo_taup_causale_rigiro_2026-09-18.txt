@@ -1,0 +1,66 @@
+======================================================================================================================
+V2-V5 -- PLASTICITA' VISCOELASTICA CAUSALE:  tau_p = max(d/cs, (d/cs)*rho_arco/peq)
+======================================================================================================================
+
+--- (V2) SEPARABILITA': le due modifiche si possono isolare ---
+  forzando d_arco VECCHIO e rho_arco/peq := fattore_elasticita VECCHIO,
+  la forma NUOVA riproduce il tau_p VECCHIO con scarto massimo: 0.000e+00
+[PASS] V2 byte-identico al vecchio se si forzano i vecchi max|A-B| = 0.000e+00 su 840604 archi (shape UGUALI: 840604 = 840604)
+
+--- (V3) A5 PER COSTRUZIONE: tau_p_loc / t_luce non scende mai sotto 1 ---
+  min = 1    mediana = 3.33785    max = 18.0958
+[PASS] V3 min(tau_p_loc / t_luce) == 1.0 ESATTO  [BLOCCANTE] min = 1
+
+--- (V4) U7b: l'integrazione non diverge. dt_e / tau_p_loc < 1 OVUNQUE ---
+  PRIMA (vecchio)  : max 0.0205522   p99 3.094e-08   mediana 1.292e-08   frazione >=1 0.0000 %
+  DOPO  (nuovo)    : max 0.45622   p99 0.01374   mediana 0.003483   frazione >=1 0.0000 %
+[PASS] V4 max(dt_e / tau_p_loc) < 1  [BLOCCANTE]          max = 0.45622   (era 34629)
+
+--- (V5) DOVE SCATTA IL VINCOLO: nel vuoto, non nel corpo ---
+  frazione di archi con rho_arco/peq < 1 (il max sceglie t_luce): 0.2655 %
+  POPOLAZIONE UNITA -- densita' mediana  SOTTO 1: 1.333e-05   SOPRA 1: 0.05452   rapporto: 4089 x
+  PER SEME (frazione sotto 1, rapporto di densita'):
+     seme 1 :  0.2357 %         8161 x
+     seme 2 :  0.5209 %            3 x
+     seme 3 :  0.1321 %         9384 x
+     seme 4 :  0.1742 %        23754 x
+
+  ATTENZIONE, DUE COSE, E LA SECONDA E' UN FATTO NUOVO CHE NON VA AGGREGATO VIA:
+  (1) il criterio di questo sigillo, nella sua PRIMA versione, faceva `np.mean` delle MEDIANE PER
+      SEME e dava 19 x, contro i ~4000 x del referto U7. Non era un difetto della correzione:
+      era MIO, ed e' un errore di AGGREGAZIONE -- una media di rapporti con dispersione di quattro
+      ordini e' dominata dal termine anomalo. Sulla popolazione unita il rapporto e' ~4089, cioe'
+      il referto regge. Sesto criterio corretto dopo l'esecuzione (par.9).
+  (2) MA il rapporto NON E' UNIFORME FRA SEMI: su tre semi vale 8161 / 9384 / 23754, su UNO vale
+      3. Su quel seme gli archi sotto 1 NON sono il vuoto profondo, e la frazione e' doppia.
+      Quindi "il vincolo scatta nel vuoto" e' vero su 3 semi su 4, NON e' una proprieta' della
+      forma. Il criterio sotto usa la popolazione unita, ma la dispersione resta DICHIARATA:
+      aggregarla via la farebbe sparire, ed e' esattamente cio' che P3 vieta.
+[PASS] V5a scatta su una frazione PICCOLA (non e' un pavimento) 0.2655 % (A3b: un limite che scatta quasi sempre non e' un limite)
+[PASS] V5b scatta nel VUOTO (popolazione unita, >100x)    4089 x   MA per seme: 8161 / 3 / 9384 / 23754 -- NON uniforme
+
+--- (contesto) quanto si e' mossa la plasticita' ---
+  tau_p_loc PRIMA : mediana 685126    DOPO : mediana 2.37604    rapporto 288347.7 volte piu' corto
+[PASS] V5c la plasticita' si e' SCONGELATA (controllo positivo) tau_p mediano da 6.851e+05 a 2.376
+
+--- (V4b) IL CODICE VIVO: il presidio interno `_taup_cfl_max` dopo un run breve ---
+  40 passi reali. _taup_cfl_max = 0.46100842557427407
+  vincolo causale scattato: 1022723 su 8310582 archi-passo (12.3063 %)
+  peq degenere (P5, protezione 1e-30 scattata): 207563
+  di cui scatti causali SU archi con peq degenere: 207563  (20.30 % degli scatti)
+  -> scatti causali su archi con peq VALIDO: 815160
+[PASS] V4b codice VIVO: _taup_cfl_max < 1  [BLOCCANTE]    max = 0.461008 su 40 passi reali
+[PASS] V4c stabilita': d0 finito e > 0 dopo 40 passi      min d0 = 0.05, NaN = 0
+
+======================================================================================================================
+V2-V5: 8/8 PASS -> PASS
+
+COSA QUESTO SIGILLO NON DICE
+----------------------------
+NON dice che la nuova plasticita' produca una fisica migliore: dice che la sua FORMA e' lecita
+(A1 zero parametri, A2/A3 stessa popolazione e locale, A5 causale per costruzione) e che
+l'integrazione non diverge. Quale fisica ne esca si vede solo con una campagna, che questo giro
+NON prevede.
+V3 e' vero PER COSTRUZIONE (e' un max): il suo valore non e' scoprire che tau_p >= t_luce, ma
+verificare che la forma SCRITTA NEL CODICE sia davvero quella - un `min` al posto del `max`, o un
+ordine sbagliato degli argomenti, darebbero FAIL qui e basta.
