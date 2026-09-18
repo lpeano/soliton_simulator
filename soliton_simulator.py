@@ -2864,6 +2864,25 @@ class Rete:
                 continue
             if isinstance(v, (np.ndarray, int, float, bool, np.integer, np.floating, str)):
                 stato['attrs'][k] = v
+        # [CORREZIONE DI DIFETTO, 2026-09-18 - categoria D del par.10: NESSUN FLAG]
+        # IL DIFETTO: il filtro qui sopra accetta ndarray/scalari/str. `conc_nodi` e `conc_archi`
+        # sono LIST e `masse_info` e' un DICT: non matchano nessuno di quei tipi e vengono SCARTATI
+        # IN SILENZIO. La docstring dice "salva TUTTE le grandezze di stato ... cosi' non ne
+        # dimentica nessuna": per queste tre NON e' vero. Conseguenza misurabile: dopo un
+        # salva/ricarica il lignaggio delle coorti RIPARTE VUOTO, e ogni misura di appartenenza
+        # fatta su uno snapshot ricaricato guarda un sistema SENZA storia.
+        # LA CURA: si aggiungono ESPLICITAMENTE, e NON si allarga il filtro - allargarlo farebbe
+        # entrare anche altro (cache derivate, `_S`, kernel), e quello che entra va SAPUTO.
+        # PERCHE' NON TOCCA LA FISICA: sono strutture di MISURA PURA. Enumerati dal disco tutti i
+        # lettori - `indici_massa_vivi`, `aggiorna_pesi_concorrenza`, `tracking_masse`,
+        # `_registra_concorrenza`, `_ripara_tracking` - NESSUNO e' chiamato da `step()`, `mitosi()`
+        # o `scuoti_vuoto()`. E `salva_stato` non e' sul percorso di integrazione.
+        # NB: l'eredita' alla mitosi c'era GIA' (:3951-3954, e il ramo Schwinger :4076-4082):
+        # mancava SOLO la persistenza.
+        for _k_track in ('conc_nodi', 'conc_archi', 'masse_info'):
+            _v_track = getattr(self, _k_track, None)
+            if _v_track is not None:
+                stato['attrs'][_k_track] = _v_track
         tmp = path + '.tmp'
         pickle.dump(stato, open(tmp, 'wb'), protocol=pickle.HIGHEST_PROTOCOL)
         os.replace(tmp, path)   # scrittura atomica: o il DB e' completo o non c'e'
