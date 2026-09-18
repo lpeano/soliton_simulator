@@ -5959,3 +5959,84 @@ mobili     0.0583 -> 0.175  0.0000                    5.8e+07 -> 1.7e+08    9.8e
 3. **Il mandato sull'embedding**: la NOTA diceva *«se metà dei nodi non invecchia, l'oscillazione del
    62 % potrebbe venire da lì»*. **Misurato: il nodo mediano è un nodo mai maturato, ed è una delle
    masse.** **La precedenza va decisa da te.**
+
+---
+
+## 9.58 — **La scena del VIDEO: `--sync-db` non salva, un frame è sei passi, e `CALORE_VETTORIALE` è spento**
+
+**Data:** 2026-09-18 · blob **`a1ae5090` invariato** · **run IN CORSO** alla scrittura
+**Task history e previsioni pushati PRIMA del run:** `904e823` · **Driver:** `56d1b4e`
+
+> **⚠ QUESTO PARAGRAFO ARRIVA IN RITARDO, e lo dico.** I fatti qui sotto erano nel task history da un
+> commit, **ma non in questa relazione** — e il par.5-ter chiede **entrambi**, *«così chi legge solo
+> questa è comunque allineato»*. **Me l'ha dovuto chiedere Luca, ed è la seconda volta.**
+> **Il meccanismo, non la nota (A9): da qui in avanti il paragrafo di relazione va NELLO STESSO
+> COMMIT del task history, non in uno successivo.**
+
+### ① `--sync-db` nel ramo VIDEO **carica e basta: non salva mai**
+
+```python
+:5836   _db_v = getattr(a, "sync_db", None)
+:5837   if _db_v and os.path.exists(_db_v):
+:5839       net.carica_stato(_db_v)      # <- SOLO LETTURA
+```
+
+**In tutto `esegui_headless` non c'è nessuna chiamata a `salva_stato`**, e il commento lo dice da sé:
+*«se `--sync-db` e il file esiste, **CARICA** lo stato … renderizzo **IN AVANTI** da lì»*.
+
+> **Il comando previsto per questa scena NON avrebbe prodotto nessun `.pkl`, e le misure non si
+> sarebbero potute fare.**
+> **La via, senza forzare:** un driver che riproduce la scena **col percorso ufficiale del
+> programma** — `_cli()` → `_applica_regime` → `_applica_flag` → `avvia_test("N-MASSE")` — e **il
+> ciclo per frame COPIATO da `update()` (`:5091-5100`), senza il rendering.** *(Il rendering non è
+> fisica, ed è anche la ragione per cui costa meno.)*
+
+### ② `PASSI_PER_FRAME = 6`: la scena è **2400 passi**, non 400
+
+`:686`, e `update()` fa **sei** `step()` per frame. `N-MASSE` dura `dur=120 + dur=280` = **400
+frame = 2400 passi di motore.** **Il conto della durata va fatto su questo, non sui frame.**
+
+### ③ La durata, **misurata** su un pilota di 15 frame
+
+```
+scena avviata: n = 2391   (N_c*0.8 per massa, N_c = 621, tre masse)
+frame  1  n=2391  archi=429498  coer_l=0.639  dil= +7.88%   [16.97 s/frame]
+frame 15  n=2391  archi=429498  coer_l=0.515  dil=+20.40%   [16.57 s/frame medio]
+```
+
+**`n = 2391` alla semina coincide ESATTAMENTE col frame 10 della tabella di riferimento**, e
+`coer_l`/`dil` sono nello stesso intorno: **è la scena giusta, verificata e non assunta.**
+**Stima dichiarata prima del lancio: 3-4 ore**, con l'avvertenza che **il costo cresce coi nodi e
+una estrapolazione lineare sottostima.**
+
+### ④ ⚠ Una differenza di configurazione che nessuno aveva nominato
+
+Letto dal modulo **dopo** `_applica_flag` (P6: dai dati, non dal comando):
+
+```
+CALORE_VETTORIALE = False      <- perche' il comando ha `--calore-scal`
+CHI_BASC          = True
+```
+
+**Nel giro di `Z45` `CALORE_VETTORIALE` era l'UNICO canale vivo fra `perc_chi` e la dinamica**
+(`scuoti_vuoto` firma il calcio termico con `perc_chi`). **Qui è SPENTO.** **E `--chi-basc` è
+ACCESO**, quindi **`perc_chi` non è un'etichetta di lignaggio ma una variabile della torsione.**
+
+> **Due differenze OPPOSTE rispetto a `Z45`: il canale è spento e l'etichetta è dinamica.**
+> **`Z45` non si trasporta a questa scena** — e nemmeno `Z46`, che è del batch: **le due scene
+> differiscono in TRE cose** (masse a `N_c·0.8` invece di `N_c·0.6`, **mitosi attiva**, canale
+> spento). **`Z46` andrà QUALIFICATA «vale per il batch», non corretta.**
+
+### Le previsioni, committate prima del run
+
+La più importante è **scomoda di proposito**: *se il guscio ha `eta` più bassa dell'interno, **è il
+fronte di nascita, non una parete**, e la lettura del video va corretta*. Più tre falsificatori,
+incluso il discriminante che ha funzionato su `Z46`: **se `eta` dei fermi cresce di `DT·r_floor`, è
+di nuovo il pavimento di `ritmo()` e la scena non c'entra.**
+
+### Stato del run
+
+**In corso.** Al frame 50: `n` da `2391` a `2576` *(la mitosi si è accesa: nel batch erano 4 nodi in
+1200 passi)*, `archi` `429 724`, `coer_l` `0.286`, `dil` `+25.1 %`, **`14.1 s/frame`** — leggermente
+**meno** della stima, perché il pilota includeva l'avvio. **Nessun verdetto: i numeri arrivano col
+referto.**
