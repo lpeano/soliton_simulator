@@ -496,3 +496,61 @@ BASCULAMENTO** — e cambierebbe la domanda.
 **UN SEME. `--tau-luce` HA IL SIGILLO FALLITO** (par.0): ramo **non certificato**, e ogni numero lo
 eredita. **`--chi-basc` attivo.** **5 snapshot invece dei 20 chiesti**, e `d medio` ricostruito da
 quelli. **Nessun verdetto di fisica, nessuna identificazione.**
+
+---
+
+## 2026-09-18 — **PREDIZIONE DI LUCA, prima del run a DUE masse** · blob `a1ae5090` · HEAD `4f56730`
+
+> **«Con DUE masse questa dinamica NON ci sarà più. Sarà completamente differente.**
+> **Ed è dovuto all'INTERAZIONE FRA TRE MASSE, contro l'interazione fra due.»**
+
+**Committata PRIMA del run.** *(Se il run partisse prima, il risultato sarebbe un'OSSERVAZIONE e non
+una PREDIZIONE, e varrebbe molto meno.)*
+
+### ⚠ LA LETTURA CHE LA FALSIFICA, scritta con lo stesso peso
+
+> **Se con due masse il ciclo appare UGUALE** — la regione centrale che si svuota, tocca un minimo e
+> si riempie accendendosi — **allora NON dipende dalle tre masse: è un OSCILLATORE DI RILASSAMENTO
+> del sistema.**
+> **Il candidato è già nominato:** `lambda_nodi` **accorcia la portata dove la densità cresce** → i
+> legami si rompono → la densità cala → la portata torna lunga → si riempie.
+> **In quel caso la predizione è SBAGLIATA, e va scritto che è sbagliata.**
+
+### La terza lettura, da tenere aperta
+
+**Ciclo presente ma con FORMA o PERIODO diversi** → **né conferma né smentita secca**: dipende dalla
+scala, **e va riportato come tale**, non forzato in una delle due caselle.
+
+### La misura che decide — **una sola curva**
+
+```
+TRE MASSE (Z49):  nodi(r<4)  900 → 291 → 224 → 221 → 559 → 907      <- il ciclo, a U
+                  rho_spin   3.7e-07 ..................... 5.6e-02   (cinque ordini)
+                  |psi|      1.0e-04 → 0.666
+                  d MEDIA massima (1.754, frame 270) COINCIDE col minimo di popolazione
+```
+
+**Con due masse: `nodi(regione interna)` è MONOTONA o a U?** **È quella curva a decidere**, non
+un'impressione sul profilo.
+
+### ⚠ E una cosa che dichiaro PRIMA, perché non falsi il confronto
+
+**Con tre masse il centro è equidistante da tutte e tre; con due è il punto medio di un segmento: la
+geometria è diversa, e `r < 4` NON significa la stessa cosa.**
+**La regione interna sarà `r < R_anello(t)/2`, con `R_anello(t)` MISURATO**, e riporterò
+`R_anello(t)` a ogni istante **e entrambe le letture, assoluta e comovente.**
+*(In `Z49` davano gli stessi numeri, ma solo perché `R_anello` variava dell'8 %: **non è una licenza
+generale, e con due masse va riverificato.**)*
+
+### E cosa NON mi aspetto — i falsificatori del confronto
+
+1. **se il pilota desse un `n` iniziale molto diverso da `2391·2/3 ≈ 1594`**, la scena non è
+   confrontabile per popolazione e va detto;
+2. **se `R_anello` con due masse variasse molto più dell'8 %**, la lettura assoluta è **aliasata** e
+   si scarta (par.4);
+3. **se il ciclo ci fosse ma con `rho_spin` che NON si accende**, allora «ciclo» e «accensione» sono
+   due fenomeni separabili — **e sarebbe più informativo di entrambe le letture del §1.**
+
+**Limiti già noti e dichiarati:** **un seme**, **`--tau-luce` col SIGILLO FALLITO** (ramo non
+certificato, ogni numero lo eredita), **`--chi-basc` attivo**, **5 punti di profilo**, **5 frame di
+risoluzione**. **Nessuna identificazione di fisica.**
