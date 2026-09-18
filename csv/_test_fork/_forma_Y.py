@@ -78,9 +78,18 @@ for f in F:
     print("  %-8d %-14.5g %-14.5g %-14.5g" % (f, np.median(z), np.median(r),
                                               np.median(z) / max(np.median(r), 1e-12)))
 
-for K in (1.0, 10.0):
+# [CORREZIONE 2026-09-18, dopo il primo giro] LA SOGLIA SULLA MEDIA E' INUTILIZZABILE PER
+# `rho_spin`: MISURATO al frame 400, `media = 1.44e+01` contro `mediana = 6.42e-03`, cioe' un
+# RAPPORTO 2249. La media NON e' il livello di vuoto di questo campo: E' UNA STATISTICA DELLA CODA,
+# e selezionava SOLO i 1479 nodi estremi -- tutti a `r ~ 7.7`, cioe' L'ANELLO. Ecco perche' i nodi
+# "interni densi" risultavano ZERO: non e' un fatto sul sistema, era la soglia.
+# LA SOGLIA GIUSTA E' SULLA MEDIANA, che per questo campo E' il valore tipico. Si riportano TRE
+# decadi (1x, 10x, 100x la mediana) PIU' la media come CONTROESEMPIO dichiarato.
+for K, BASE in ((1.0, "med"), (10.0, "med"), (100.0, "med"), (1.0, "media")):
     print("\n" + "=" * 116)
-    print("SOGLIA  rho_spin > %.0f x mean(rho_spin)   (DERIVATA: il livello di vuoto della stessa grandezza)" % K)
+    print("SOGLIA  rho_spin > %.0f x %s(rho_spin)%s" % (
+        K, "median" if BASE == "med" else "mean",
+        "" if BASE == "med" else "   <- ⚠ CONTROESEMPIO: la media e' dominata dalla CODA (media/mediana ~ 2249)"))
     print("=" * 116)
     print("  %-7s %-7s %-8s %-8s %-9s | %-9s %-9s %-9s %-9s | %-9s %-10s"
           % ("frame", "densi", "interni", "R_anel", "N_eff", "A_1", "A_2", "A_3", "A_6", "NULLO", "contrasto"))
@@ -90,7 +99,7 @@ for K in (1.0, 10.0):
         R = np.linalg.norm(P[:, :2], axis=1)
         th = np.arctan2(P[:, 1], P[:, 0])
         rs = np.asarray(a.get("rho_spin", np.zeros(n)), float)[:n]
-        mrs = float(np.mean(rs))
+        mrs = float(np.median(rs)) if BASE == "med" else float(np.mean(rs))
         dens = rs > K * mrs
         RA = float(np.median(R[:N0]))
         interni = dens & (R < RA / 2.0)
@@ -111,7 +120,7 @@ f = F[-1]; a = S[f]; n = len(a["pos"])
 P = np.asarray(a["pos"])[:n]; R = np.linalg.norm(P[:, :2], axis=1)
 th = np.arctan2(P[:, 1], P[:, 0]); rs = np.asarray(a["rho_spin"], float)[:n]
 RA = float(np.median(R[:N0]))
-sel = (rs > np.mean(rs)) & (R < RA / 2.0)
+sel = (rs > 10.0 * np.median(rs)) & (R < RA / 2.0)   # 10x la MEDIANA, non la media
 if sel.sum() >= 10:
     h, b = np.histogram(th[sel], bins=NBIN, range=(-np.pi, np.pi), weights=rs[sel])
     hm = h / max(h.mean(), 1e-30)
@@ -132,7 +141,7 @@ for f in F:
     P = np.asarray(a["pos"])[:n, :2]; R = np.linalg.norm(P, axis=1)
     rs = np.asarray(a.get("rho_spin", np.zeros(n)), float)[:n]
     RA = float(np.median(R[:N0]))
-    sel = (rs > np.mean(rs)) & (R < RA / 2.0)
+    sel = (rs > 10.0 * np.median(rs)) & (R < RA / 2.0)
     if sel.sum() < 10:
         continue
     Q = P[sel]; w = rs[sel]
