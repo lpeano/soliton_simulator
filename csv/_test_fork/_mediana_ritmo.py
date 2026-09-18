@@ -116,11 +116,20 @@ for k in idx:
 # ---------------------------------------------------------------- 2.4 median(|f|) evolve?
 print("\n--- (2.4) `median(|f|)` EVOLVE nel tempo, o e' anch'essa pinnata? ---")
 med = np.array([float(np.median(np.abs(x["f"]))) for x in buoni])
-print("  median(|f|) : prima %.6g   ultima %.6g   -> rapporto %.4g" % (med[0], med[-1], med[-1] / max(med[0], 1e-300)))
-print("  min %.6g   max %.6g   -> escursione %.4g ordini di grandezza"
-      % (med.min(), med.max(), np.log10(med.max() / max(med.min(), 1e-300))))
-q = len(med) // 4
-print("  per QUARTI del run: %s" % "  ".join("%.5g" % np.median(med[i * q:(i + 1) * q]) for i in range(4)))
+# ⚠ IL RAPPORTO ULTIMA/PRIMA E' UN ARTEFATTO SE LA PRIMA E' ZERO (dava 2.4e+300). E lo ZERO non e'
+#   un caso limite trascurabile: e' un RISULTATO. Si conta, si isola, e si riportano i QUARTI.
+_zero = int(np.sum(med <= 0.0))
+print("  ⚠ invocazioni con median(|f|) ESATTAMENTE ZERO : %d su %d  (%.1f %%)"
+      % (_zero, len(med), 100.0 * _zero / len(med)))
+print("     quando accade, `med` cade sul PAVIMENTO 1e-9 e `x = f/1e-9` ESPLODE per i nodi non nulli:")
+print("     r satura a sqrt(2) per quelli, e vale 1.414e-06 per gli altri. IL GAUGE E' DEGENERE LI'.")
+_nz = med[med > 0]
+if len(_nz):
+    print("  su quelle NON nulle (%d): min %.6g   max %.6g   mediana %.6g"
+          % (len(_nz), _nz.min(), _nz.max(), np.median(_nz)))
+    print("     escursione: %.3g ORDINI di grandezza" % np.log10(_nz.max() / _nz.min()))
+print("  per QUARTI del run (mediana delle mediane, zeri inclusi): %s"
+      % "  ".join("%.5g" % np.median(med[i * q:(i + 1) * q]) for i in range(4)))
 print("""
   COME SI LEGGE: se `median(|f|)` si muove di ORDINI DI GRANDEZZA, allora `x` e' rapportato a una
   scala che EVOLVE, e la normalizzazione non e' un ancoraggio statico: il difetto e' PARZIALE.
@@ -133,10 +142,13 @@ mr = np.array([float(np.median(v)) for v in rr])
 print("  median(r) : mediana %.9f   (r_unit e' fisso: la mediana di r e' pinnata -- C12)" % np.median(mr))
 disp = np.array([float(np.percentile(v, 95) - np.percentile(v, 5)) for v in rr])
 iqr = np.array([float(np.percentile(v, 75) - np.percentile(v, 25)) for v in rr])
-print("  DISPERSIONE di r (p95-p05) : prima %.6g   ultima %.6g   -> rapporto %.4g"
-      % (disp[0], disp[-1], disp[-1] / max(disp[0], 1e-300)))
-print("  IQR di r                   : prima %.6g   ultima %.6g   -> rapporto %.4g"
-      % (iqr[0], iqr[-1], iqr[-1] / max(iqr[0], 1e-300)))
+# stesso artefatto: la prima invocazione ha dispersione 0 (f tutto nullo). Si riportano i QUARTI.
+print("  DISPERSIONE di r (p95-p05) : min %.6g   max %.6g   mediana %.6g"
+      % (disp.min(), disp.max(), np.median(disp)))
+print("  IQR di r                   : min %.6g   max %.6g   mediana %.6g"
+      % (iqr.min(), iqr.max(), np.median(iqr)))
+print("  NB: la MEDIANA di r vale 1.0 per identita', quindi una dispersione di ~1 significa che r")
+print("      spazia su un intervallo LARGO QUANTO IL SUO PROPRIO VALORE CENTRALE.")
 print("  per QUARTI (p95-p05): %s" % "  ".join("%.5g" % np.median(disp[i * q:(i + 1) * q]) for i in range(4)))
 print("""
   ⚠ QUESTA E' LA DOMANDA CHE CONTA DAVVERO: la MEDIANA e' pinnata per identita', ma lo SPREAD no.
