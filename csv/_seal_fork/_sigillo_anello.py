@@ -29,7 +29,7 @@ QUI = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(QUI, "..", ".."))
 os.chdir(ROOT)
 
-BLOB_RIF = "f8f46683"
+BLOB_RIF = "f8f46683"   # sha1 dei BYTE GREZZI del blob PRE-CURA. ANCORATO, non "HEAD".
 PASSI = 120
 SEME = 5
 ESITI = []
@@ -68,7 +68,13 @@ print("=" * 118)
 # ------------------------------------------------------------------ P0
 vecchio = os.path.join(QUI, "_old_sim_pre_anello.py")
 with open(vecchio, "wb") as fh:
-    fh.write(subprocess.check_output(["git", "cat-file", "-p", "HEAD:soliton_simulator.py"]))
+    # [CORREZIONE 2026-09-18, dopo il FAIL committato in c818208] SI ESTRAE PER SHA DEL BLOB, MAI
+    # PER `HEAD:`. `HEAD` si sposta col lavoro: al primo commit della cura il "vecchio" e' diventato
+    # il NUOVO, e il sigillo ha confrontato il codice curato CON SE STESSO (P2 dava
+    # `max|A-B| = 0.000e+00` con shape UGUALI: identita' perfetta per la ragione sbagliata).
+    # E' la stessa ragione per cui il gate e' ancorato al BLOB e non al commit (par.2.6): un
+    # riferimento che si muove non e' un riferimento.
+    fh.write(subprocess.check_output(["git", "cat-file", "-p", BLOB_RIF]))
 sv = sha_byte(vecchio); sn = sha_byte(os.path.join(ROOT, "soliton_simulator.py"))
 print("\n--- P0 -- i due blob (sha1 dei BYTE GREZZI, non git hash-object) ---")
 ok("P0", sv[:8] == BLOB_RIF, "vecchio %s (atteso %s)   nuovo %s" % (sv[:8], BLOB_RIF, sn[:8]))
