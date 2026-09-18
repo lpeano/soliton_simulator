@@ -5715,3 +5715,94 @@ l'argomento è di robustezza, non una misura dedicata.)*
 2. **`Z43` resta, ed è qualificata come chiesto: una DECISIONE SULLA DEFINIZIONE DEL TEMPO**, non una
    questione tecnica.
 3. **Nessuna cura, nessun cablaggio, nessuna promozione, nessun cambio di default.** Blob invariato.
+
+---
+
+## 9.56 — **La campagna a 1200 passi: la domanda sui segmenti, e cosa ho dovuto rispondere «non verificato»**
+
+**Data:** 2026-09-18 · blob **`a1ae5090` invariato** · **run IN CORSO al momento della scrittura**
+**Task history e previsioni pushati PRIMA del run:** `fb87640` · **Sonda + inventario:** `35a5786`
+
+### La domanda di Luca, e la risposta onesta
+
+Luca ha chiesto, prima di lasciarmi analizzare: **«i quattro segmenti CONTINUANO lo stesso stato, o
+sono quattro run separati che ripartono dalla semina?»**
+
+> **Risposta: NON VERIFICATO — e non lo asserisco.**
+
+Li **avevo progettati** per riprendere (`--sync-db` carica lo stato se il blob combacia, `:7111`,
+e il `.pkl` contiene `rng_state`). **Ma la prova diretta me la sono buttata via io:** nel mio script
+il comando python era piped a **`| tail -3`**, che ha scartato proprio la riga
+`[db] stato CARICATO … riprendo da step interno N`. **L'unica evidenza dell'avvenuto resume era
+quella, e non l'ho conservata.**
+
+**Non ho difeso il disegno: ho fermato il run segmentato e ne ho lanciato UNO CONTINUO**, con la riga
+di comando del mandato e **`--passi 1200` in una sola invocazione**. Verificato **dal log**, non
+dedotto:
+
+```
+run.log:  "[batch] condensazione: seed=900 passi=1200 ogni=10 sep=8.0 nmasse=3"
+invocazioni di python nel log      : 1      <- UNA SOLA
+righe "[db] stato CARICATO"        : 0      <- nessun resume: parte dalla semina
+```
+
+**E il `.pkl` vecchio è stato cancellato + `--db-cleanup`:** senza, il run nuovo **avrebbe ripreso da
+quello stale**, cioè esattamente il difetto da togliere.
+
+*(I quattro istanti `120/400/800/1200` sono ora **punti di campionamento dentro quel run**: un
+watcher copia il `.pkl` quando `_db_step` li tocca.)*
+
+### ✅ `n` piatto NON è un artefatto del tetto — verificato
+
+```
+MAX_NODI = 4000000      (:1000, "GUARDIA DI MEMORIA, non di fisica")
+n misurato ~ 1199
+```
+
+**Il tetto è 3300 volte lontano.** In questa configurazione **la mitosi è davvero quasi ferma**
+(3 nodi in 100 passi, contro 19 in 126 delle scene-sonda).
+
+### ⚠ Il controllo su `eta`, e il riferimento giusto
+
+Dallo snapshot a 120 passi *(del run poi interrotto)*: **`eta` mediana = `0.0100`**, `_db_step = 120`,
+blob salvato `a1ae5090`, `dirty = False`.
+
+> **⚠ È CENTO VOLTE più piccola dell'`eta` che le scene-sonda avevano a 120 passi (`~0.98`).**
+> **Non è una contraddizione: è una scena diversa** — qui si parte da `n ≈ 1196` già seminati, là da
+> 80 che crescevano a 459. **Ma significa che in questa configurazione il kernel matura molto più
+> lentamente**, e il controllo *«`eta(1200) ≈ 10 × eta(120)`»* **va fatto DENTRO questa scena**:
+> confrontarlo coi numeri delle sonde sarebbe un errore di popolazione (**A3c**).
+
+### Tre limiti trovati dal disco, e uno è diventato irrilevante
+
+1. **`--db` NON ESISTE:** argparse lo rifiuta come ambiguo con `--db-cleanup`/`--db-ogni`.
+   **Il flag è `--sync-db`.** Il primo lancio è fallito così; la correzione è in
+   `doc/INVENTARIO_strumenti.md` perché il prossimo non ci ricada.
+2. **Il `.pkl` non contiene il tracking delle masse:** `salva_stato` (`:2862-2866`) salva solo
+   `ndarray/int/float/bool/str`, e `conc_nodi`/`masse_info` sono **liste e dizionari**.
+3. **⚠ Ma il punto 2 è diventato IRRILEVANTE, e in meglio:** il `--diaglog` ha **231 colonne, una
+   riga per passo su tutti i 1200**, e contiene già — **calcolate dal batch col tracking VERO** —
+   **`coer_01`, `coer_02`, `coer_12`** (coerenza FRA le masse), **`m0_coer`/`m1_coer`/`m2_coer`**
+   (interna), e **`centro_coer` / `guscio_coer`** (il contrasto centro/guscio), più
+   `eta_min/mean/max`, `cs_eff_*`, `rho0_core_max`, `n_naninf`, `d_min/max/mean`.
+   **Il blocco ③ non ha più bisogno della mia ricostruzione per posizione.**
+
+### ⚠ Due cose che dichiaro invece di scoprirle dopo
+
+**Il watcher è partito quando il run era già al passo 290: il `.pkl` a 120 NON c'è.** Prenderà
+**400, 800, 1200**. **Non rilancio nulla per recuperarlo** — sarebbe un run separato, cioè ciò che
+Luca ha appena escluso — e la traiettoria continua di `centro_coer`/`guscio_coer` **copre tutti i
+1200 passi, incluso il 120**. Solo il *profilo radiale* a 120 manca, e tre istanti bastano per dire
+se il minimo si sposta e si approfondisce.
+
+**E un errore di processo, la TERZA volta: due heredoc nella stessa chiamata di shell non
+funzionano** in questo ambiente, e la seconda volta ha ucciso il watcher senza che il run se ne
+accorgesse. **È un caso di `A9`: la nota non ha impedito il ripetersi.** **Il meccanismo è: un file
+per chiamata, scritto con lo strumento di scrittura, mai due heredoc insieme.**
+
+### Cosa NON è ancora committato, e perché
+
+**I dati di `csv/_test_fork/_g1200/` sono ESCLUSI da questo commit: il run è ATTIVO e sta scrivendo
+`diag.csv`, `cond.csv`, `run.log` e `stato.pkl`.** CLAUDE.md vieta `git add -A` con un run attivo, e
+i `.pkl` **non si committano mai** (binari, 22 MB: il loro comando è in `INVENTARIO_strumenti.md`).
+**Si committano a run finito, con il referto.**
