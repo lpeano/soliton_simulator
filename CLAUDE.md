@@ -356,6 +356,53 @@ varianti del denominatore, le due rotture del punto 1, i tre nulli letti con ris
 
 ---
 
+## 5-septies. IL TASK HISTORY — **il ragionamento si scrive PRIMA, e si committa PRIMA** (regola di Luca, 2026-09-18)
+
+> **Quando si lavora a un task si seguono TRE passi, in quest'ordine:**
+> **① RAGIONAMENTO PRELIMINARE · ② PROGETTAZIONE DEL RAGIONAMENTO · ③ entrambi scritti in un
+> TASK HISTORY, col TODO del next step, COMMITTATO E PUSHATO.**
+
+**Dove:** `doc/TASK_HISTORY/<AAAA-MM-GG>_<slug>.md`. La convenzione completa, col template e con
+cio' che la regola NON e', sta in **`doc/TASK_HISTORY/README.md`**.
+
+**Le tre sezioni, e cosa ciascuna deve contenere:**
+1. **RAGIONAMENTO PRELIMINARE** — *cosa credo prima di guardare*: le premesse, cosa mi aspetto, e
+   **cosa NON so**. **Non si riscrive quando si rivela sbagliato: si ANNOTA** con cio' che l'ha
+   smentito. *(Un ragionamento riscritto a posteriori e' una ricostruzione, non un impegno.)*
+2. **PROGETTAZIONE DEL RAGIONAMENTO** — *come intendo arrivarci*: i passi, **cosa decide ciascuno**,
+   e **cosa mi farebbe FERMARE**. Le letture si fissano **qui**, prima di vedere i numeri.
+3. **TODO DEL NEXT STEP** — la lista **operativa** del passo successivo, non un riassunto. **Si
+   aggiorna nello stesso commit del riscontro che la cambia** (par.5-bis).
+
+**IL RITO, ed e' il punto della regola: il task history si committa e si pusha PRIMA del lavoro**,
+non insieme e non dopo. **Cosi' l'ordine e' VERIFICABILE DA GIT** — il commit del task history
+dev'essere **antenato** dei commit del lavoro che descrive — **invece che asserito da me.**
+E' **par.5 applicato al PENSIERO invece che al codice**: *«il codice che genera un output dev'essere
+gia' committato quando l'output nasce»*.
+
+**PERCHE' ESISTE, e sono casi di questo repo, non principi generali:**
+- **la strada SCARTATA e' risultata piu' informativa di quella presa** — le quattro varianti del
+  denominatore, le **due** rotture del punto 1 di `Z24`, i tre nulli letti con risoluzioni diverse;
+- **un riavvio del PC** ha cancellato lo scratchpad e con esso il termine di paragone di **quattro
+  sigilli** (`Z31`);
+- **quattro errori di POPOLAZIONE in due giorni** sono stati trovati **rileggendo il proprio
+  ragionamento**, non i risultati.
+
+**NON duplica `doc/PREVISIONI_qualitative.md`:** le previsioni riguardano **l'esito di una misura**,
+il task history riguarda **il PERCORSO** — e copre anche i task che **non hanno una misura**.
+
+**⚠ DICHIARAZIONE ONESTA, per Regola 9:** la verifica da git e' un **CONTROLLO, non un
+IMPEDIMENTO**. Non impedisce di scrivere il task history dopo e antidatarlo nel testo: impedisce di
+farlo **senza che git lo mostri**. **E' meno di un meccanismo e piu' di una nota, e va detto cosi'**
+invece di chiamarlo presidio.
+
+**⚠ E UN LIMITE DA RIVERIFICARE:** non e' noto se la regola regga ai **task corti**. Un task da due
+comandi potrebbe non meritare tre sezioni, e allora verrebbe **aggirata** — che e' il modo in cui le
+regole muoiono. **CRITERIO: se in tre giri consecutivi un task salta il task history, la regola va
+RIVISTA, non ignorata.**
+
+---
+
 ## 6. STATO E ORDINE DEL LAVORO
 Ordine: **prima il FORK (non-abeliano), poi il resto.** GAMMA / Step 2 (cs<->orologio) / verifica
 EM<->curvatura sono A VALLE: non toccarli finche' il fork non gira (a densita' reali cs e' MORTO,
