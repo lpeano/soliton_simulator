@@ -143,7 +143,7 @@ print("   -> passi con un tempo proprio DEGENERE: %d su %d = %.2f %%" % (deg, to
 # ---------------------------------------------------------------- K7: la confrontabilita'
 print("\n--- K7: `f` e' CONFRONTABILE fra passi consecutivi? (G6 su `_psi_spin_prec`) ---")
 print("  NULLO: se fosse rumore di gauge a media zero, i CAMBI DI SEGNO sarebbero il 50 %.")
-salti, segni, scale = [], [], []
+salti, segni, scale, salti_mod = [], [], [], []
 prec = None
 for x in REG:
     cur = x.get("ov")
@@ -155,7 +155,12 @@ for x in REG:
         a, b = prec[:m], cur[:m]
         vivi = (np.abs(a) > 0) & (np.abs(b) > 0)
         if vivi.sum() > 10:
+            # ⚠ DUE GRANDEZZE DIVERSE, e confonderle sarebbe un overclaim:
+            #   `signed` ha il SEGNO; `f = |signed|` e' cio' che il codice USA davvero
+            #   (TEMPO_PROPRIO_ORIENTATO = False). Un cambio di segno gonfia |b-a| a ~2|a| sul
+            #   primo, e NON tocca il secondo. Si riportano ENTRAMBI.
             salti.append(float(np.median(np.abs(b[vivi] - a[vivi]))))
+            salti_mod.append(float(np.median(np.abs(np.abs(b[vivi]) - np.abs(a[vivi])))))
             scale.append(float(np.median(np.abs(a[vivi]))))
             segni.append(float(np.mean(np.sign(a[vivi]) * np.sign(b[vivi]) < 0)))
     prec = cur
@@ -166,6 +171,14 @@ if salti:
     print("  RAPPORTO |delta f| / |f|      : %.6g   <- se ~1 o piu', NON c'e' cucitura"
           % (np.median(salti) / max(np.median(scale), 1e-300)))
     print("  frazione di CAMBI DI SEGNO    : %.4f   (nullo del rumore di gauge: 0.5)" % np.median(segni))
+    print("")
+    print("  E LA GRANDEZZA CHE IL CODICE USA DAVVERO, `f = |signed|`:")
+    print("     |delta f| mediano        : %.6g" % np.median(salti_mod))
+    
+    print("     RAPPORTO |delta f| / |f| : %.6g   <- QUESTO e' il numero che conta per ritmo()"
+          % (np.median(salti_mod) / max(np.median(scale), 1e-300)))
+    print("     (il rapporto sul SEGNATO e' gonfiato dai cambi di segno, che il codice SCARTA")
+    print("      prendendo il modulo: le due cose NON si confondono)")
     print("""
   ⚠ NB: qui `f` e' confrontato NODO PER NODO fra passi consecutivi, e i nodi cambiano (mitosi).
      Il confronto e' sui PRIMI min(len) indici, che restano gli stessi nodi perche' i nuovi si
