@@ -6181,3 +6181,78 @@ dell'ORIENTAMENTO** fra passi.
 **Errore piccolo e orientamento stabile → il guadagno è TEORICO: si dichiara il limite e non si
 riscrive niente. Errore grande o orientamento che sobbalza → la motivazione è MISURATA**, e
 spiegherebbe anche **`Z43`** *(il metro che oscilla del 62 %)*. **La misura non è stata fatta qui.**
+
+---
+
+## 9.61 — **Il referto mancante del batch a 1200: il guscio esiste, ma è fatto dei nodi che non maturano. E il gauge è sul pavimento nel 99.76 % delle chiamate**
+
+**Data:** 2026-09-18 · blob **`a1ae5090` invariato** · run **finito** (passo 1200, 21662 righe)
+**Previsioni scritte PRIMA del run:** `fb87640` · **Referto:** `doc/REFERTO_struttura_1200.md` → **`Z48`**
+
+> **⚠ `--tau-luce` HA IL SIGILLO FALLITO: la scena include una legge NON CERTIFICATA, e ogni numero
+> qui sotto lo eredita.** `--chi-basc` attivo, `Z9` aperta, **un seme**, **nessun verdetto di
+> fisica**.
+
+### ⚠ Il numero che viene prima di tutti — i contatori A8
+
+```
+_ritmo_chiamate 2886   _ritmo_med_sul_pavimento 2879   ->   il 99.76 %
+_ritmo_med_non_promosso 1202     _ritmo_f_tutto_nullo 5
+```
+
+> **`median(|f|)` cade sulla costante `1e-9` in `2879` chiamate su `2886`. Non è un caso degli
+> istanti campionati: è tutto il run.** **Il gauge del tempo proprio, in questa scena, non è una
+> statistica del sistema: è un numero.**
+
+**E la cura di `Z42` ha lavorato 1202 volte:** milleduecento volte il pavimento **non** è stato
+promosso a gauge del passo dopo.
+
+### ① Maturazione — `Z46` vista da un'altra grandezza
+
+`p05 = ramp MEDIANO = 0.000200`, **identici e fermi** ai passi 120/800/1200, mentre il **`p95` cresce
+di 15 volte** (`0.0177 → 0.2607`) e `Lam` di **1300**. **Nessun nodo con `|psi| = 0`** — la
+previsione diceva «quasi nulla», ed è **zero**.
+
+### ② Il guscio — esiste, si stabilizza, si approfondisce
+
+```
+passo 120 : minimo di |psi| a r = 8.55   (179 nodi)   bin oltre: 0   <- AL BORDO
+passo 800 : r = 7.21  (31 nodi)   bin oltre: 4   |psi| dentro/fuori ~2200
+passo 1200: r = 7.21  (36 nodi)   bin oltre: 4   |psi| dentro/fuori ~4300
+```
+
+**I tre falsificatori, applicati PRIMA di descrivere:** **(b)** non è un minimo di *statistica* (il
+bin ha **più** nodi della mediana per bin); **(c)** al passo 120 era **al bordo**, a 800 e 1200 c'è
+popolazione oltre; **⚠ (a) SCATTA e peggiora:** `eta` del bin minimo / `eta` interna =
+**`0.0095 → 0.0012 → 0.00073`**.
+
+> **La previsione diceva: *«se il guscio ha `eta` più bassa, è il FRONTE DI NASCITA, non una
+> parete»*. La prima metà è vera, la seconda NO — e la ragione è misurata: la mitosi qui è FERMA
+> (8 nodi in 1200 passi).**
+> **Quei nodi non sono nati da poco: sono i nodi che NON HANNO MAI MATURATO — gli stessi `1116` di
+> `Z46`, a raggio mediano `8.004`.**
+> **Il «guscio» coincide con l'anello delle masse seminate ferme al pavimento di `ritmo()`.**
+
+### ③ ⚠ Le fasi — **la mia previsione era rovesciata**
+
+Gli sfasamenti **non convergono a `2π/3`** *(previsto, regge)* ma **si stabilizzano**.
+**Ma avevo previsto coerenza INTERNA > coerenza FRA masse, e il misurato è l'opposto:**
+
+```
+coer FRA masse : 0.235 -> 0.779 -> 0.807
+coer INTERNA   : 0.204 -> 0.223 -> 0.204
+```
+
+> **Quattro volte più alta FRA le masse che DENTRO ciascuna. Le tre masse si allineano fra loro più
+> di quanto ciascuna sia coerente al proprio interno. Non so spiegarlo, e non lo spiego.**
+
+### ④ Il contrasto
+
+`rho` al centro **×3400**; `rho` al guscio **piatta**; **rapporto centro/guscio da `3.3e+03` a
+`1.36e+07`** — quattro ordini in 1080 passi. Stress `max|d−d0|/d0` da `18.9` a `50.2`. **Nessun NaN.**
+
+### Un limite della sonda, dichiarato
+
+**Cerca i `.pkl` per NOME**, e il `400` non esiste *(il primo watcher li mislabellò: gli istanti veri
+sono `120/130/470/800/840/1200`)*. **`130`, `470` e `840` non sono stati letti.** Tre istanti bastano
+per dire «si sposta e si approfondisce», **ma la risoluzione è minore di quella disponibile.**

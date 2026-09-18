@@ -1,0 +1,140 @@
+[TIMBRO] _struttura_1200.py  sha1-BYTE e1751a7e  committato e pulito
+======================================================================================================================
+LA STRUTTURA A 1200 PASSI -- i numeri e la forma. NESSUN VERDETTO DI FISICA.
+======================================================================================================================
+  ⚠ PRESIDI, IN TESTA:
+    * `Z9` e' APERTA: il kernel non ha finito di accendersi;
+    * `--tau-luce` ha il SIGILLO FALLITO (CLAUDE.md par.0): ramo NON CERTIFICATO;
+    * UN SEME: non e' un dato.
+
+  MANCA csv\_test_fork\_g1200\stato_400.pkl -- il run non e' arrivato a 400 passi. DICHIARATO.
+
+  snapshot presenti: [120, 800, 1200]
+  blob dello stato salvato: a1ae5090   dirty: False   (P6: letto DAI DATI)
+
+--- (1) LA MATURAZIONE: `ramp = min(1, eta/TAU_A)` e la frazione con `f = 0` ---
+  passo    n       eta med     ramp p05    RAMP MED    ramp p95    frac ramp=0   Lam        
+  120      1199    0.0100017   0.000200034 0.000200034 0.0177163   0.000000      3.36941e-09
+  800      1203    0.0100113   0.000200226 0.000200226 0.166599    0.000000      9.26511e-07
+  1200     1204    0.010017    0.000200339 0.000200339 0.260698    0.000000      4.40759e-06
+    riferimento a 120 passi (ALTRA SCENA, n~450): ramp 0.0002 / 0.0102 / 0.0212 ai passi 1/60/120
+    ⚠ NON si confrontano direttamente: scena diversa, n diverso (A3c). Si guarda LA FORMA.
+
+  `f = 0` (la verifica diretta di `Z44`: qui la mitosi e' quasi ferma)
+  passo    n         nodi |psi|=0  frazione     
+  120      1199      0             0.000000     
+  800      1203      0             0.000000     
+  1200     1204      0             0.000000     
+  (a 120 passi, scena-sonda con mitosi viva: 0.44 %. La previsione era: QUASI NULLA qui.)
+
+--- (2) IL GUSCIO: profilo RADIALE dal baricentro (l'origine) ---
+    (i tre centri stanno a 2pi*k/3 su un cerchio di raggio sep = 8.0 -> baricentro = origine)
+
+  passo 120   (n = 1199, r99.5 = 8.71)
+    r        nodi     |psi| med    rho_spin     cs/CS_M    |<n>|      eta med    psi=0
+    0.17     1        4.2048e-05   4.859e-08    0.9447     1          0.80992    0
+    0.50     4        9.5453e-05   8.5918e-08   0.88751    1          0.9547     0
+    0.84     1        0.00021113   1.0269e-07   0.75439    1          1.5401     0
+    1.17     5        9.8106e-05   9.4072e-08   0.84419    1          1.0569     0
+    1.51     5        0.00017622   1.2199e-07   0.7928     1          1.0996     0
+    1.84     10       0.00021754   2.4985e-07   0.57364    1          0.99059    0
+    2.18     8        0.00024524   2.1325e-07   0.76419    1          1.1484     0
+    2.51     13       0.00012699   1.1075e-07   0.86465    1          0.92494    0
+    2.85     11       0.00014417   1.6692e-07   0.81255    1          1.0644     0
+    3.18     10       0.00017916   1.8088e-07   0.72824    1          1.2846     0
+    3.52     8        0.00018508   1.0297e-07   0.85249    1          1.2034     0
+    3.85     7        0.00013782   1.5941e-07   0.85185    1          1.2294     0
+    7.21     29       1.2215e-06   2.7885e-11   0.99754    1          0.010002   0
+    7.54     233      1.368e-06    3.4667e-11   0.99725    1          0.010002   0
+    7.88     338      1.3304e-06   4.262e-11    0.99732    1          0.010002   0
+    8.21     331      1.2451e-06   3.9846e-11   0.99749    1          0.010002   0
+    8.55     179      1.2091e-06   3.3198e-11   0.99756    1          0.010002   0
+
+  passo 800   (n = 1203, r99.5 = 8.72)
+    r        nodi     |psi| med    rho_spin     cs/CS_M    |<n>|      eta med    psi=0
+    0.50     1        0.0057645    3.0885e-05   0.41047    1          9.5987     0
+    0.84     4        0.0018192    7.1707e-05   0.84892    0.57695    8.1316     0
+    1.17     10       0.0030691    6.8643e-05   0.61563    1          8.4314     0
+    1.51     6        0.0020506    4.8813e-05   0.82723    0.99944    8.3249     0
+    1.84     4        0.0025083    0.00021462   0.62635    1          9.3049     0
+    2.18     17       0.0021831    0.00010613   0.8514     0.74474    8.6612     0
+    2.51     2        0.002794     6.6404e-05   0.73292    1          9.2467     0
+    2.85     6        0.0027499    7.0553e-05   0.74663    1          8.4661     0
+    3.18     11       0.0032984    6.0401e-05   0.77012    1          8.3617     0
+    3.52     9        0.0029417    0.00011361   0.76915    1          8.8532     0
+    3.85     7        0.0025896    9.0663e-05   0.84359    0.79393    8.8537     0
+    4.19     7        0.0033533    5.8401e-05   0.77451    0.99983    8.5394     0
+    4.53     2        0.0025608    7.8553e-05   0.85426    1          8.6226     0
+    4.86     1        0.0018228    1.5539e-05   0.83123    1          8.3646     0
+    7.21     31       1.177e-06    2.799e-11    0.99985    1          0.010011   0
+    7.54     231      1.3209e-06   3.3814e-11   0.99984    1          0.010011   0
+    7.88     342      1.2907e-06   4.1677e-11   0.99984    1          0.010011   0
+    8.21     331      1.2917e-06   3.9329e-11   0.99984    1          0.010011   0
+    8.55     174      1.2467e-06   3.2531e-11   0.99985    1          0.010011   0
+
+  passo 1200   (n = 1204, r99.5 = 8.72)
+    r        nodi     |psi| med    rho_spin     cs/CS_M    |<n>|      eta med    psi=0
+    0.84     6        0.0096657    0.00044007   0.54298    0.8019     14.162     0
+    1.17     7        0.0039774    0.00030755   0.88308    1          12.666     0
+    1.51     6        0.0048892    0.00013115   0.78346    0.8753     14.25      0
+    1.84     9        0.0061105    0.00057192   0.76937    1          13.726     0
+    2.18     11       0.0056714    0.00054781   0.74975    0.80454    13.92      0
+    2.52     9        0.0061148    0.00067666   0.80722    0.92104    13.012     0
+    2.85     7        0.0053213    0.00037947   0.85078    0.99982    13.243     0
+    3.19     8        0.0066166    0.00035411   0.72432    0.99992    13.732     0
+    3.52     7        0.0075788    0.00067501   0.70158    0.99999    13.555     0
+    3.86     9        0.0049367    0.00034801   0.74117    0.81758    14.023     0
+    4.19     4        0.0068811    0.00057971   0.68155    0.96003    13.816     0
+    4.53     5        0.0030411    0.00022515   0.89348    0.99999    13.184     0
+    7.21     36       1.2002e-06   2.7921e-11   0.99993    1          0.010017   0
+    7.55     230      1.3356e-06   3.4011e-11   0.99992    1          0.010017   0
+    7.88     340      1.2954e-06   4.1637e-11   0.99993    1          0.010017   0
+    8.22     331      1.3146e-06   3.9529e-11   0.99993    1          0.010017   0
+    8.55     172      1.2194e-06   3.2605e-11   0.99993    1          0.010017   0
+
+--- ⚠ I TRE FALSIFICATORI, PRIMA di descrivere il guscio ---
+  passo 120   minimo di |psi| a r = 8.55     (|psi| = 1.2091e-06, nodi 179 = 15.1 % del totale)
+      (a) eta del bin minimo 0.010002  contro eta mediana INTERNA 1.0569   -> rapporto 0.00946
+      (b) nodi nel bin minimo 179 ; mediana dei nodi per bin 10   -> popolazione confrontabile
+      (c) bin oltre il minimo: 0   -> IL MINIMO E' AL BORDO: non e' una parete
+  passo 800   minimo di |psi| a r = 7.21     (|psi| = 1.177e-06, nodi 31 = 2.6 % del totale)
+      (a) eta del bin minimo 0.010011  contro eta mediana INTERNA 8.5027   -> rapporto 0.00118
+      (b) nodi nel bin minimo 31 ; mediana dei nodi per bin 11   -> popolazione confrontabile
+      (c) bin oltre il minimo: 4   -> c'e' popolazione OLTRE il minimo
+      contrasto: |<n>| dentro 0.99991 / fuori 1   |psi| dentro 0.0028458 / fuori 1.2912e-06
+  passo 1200  minimo di |psi| a r = 7.21     (|psi| = 1.2002e-06, nodi 36 = 3.0 % del totale)
+      (a) eta del bin minimo 0.010017  contro eta mediana INTERNA 13.726   -> rapporto 0.00073
+      (b) nodi nel bin minimo 36 ; mediana dei nodi per bin 9   -> popolazione confrontabile
+      (c) bin oltre il minimo: 4   -> c'e' popolazione OLTRE il minimo
+      contrasto: |<n>| dentro 0.99982 / fuori 1   |psi| dentro 0.0056714 / fuori 1.305e-06
+
+--- (3) LE FASI DELLE TRE MASSE (coorti PER POSIZIONE: il tracking NON e' nel .pkl) ---
+  passo    n1        n2        n3        | d(1-2)      d(2-3)      d(3-1)      | coer INT   coer FRA  
+  120      400       399       400       |    -1.50672    -1.94096    -2.83551 | 0.2043     0.23511   
+  800      404       397       402       |    +0.92176    -1.67322    +0.75145 | 0.22317    0.7793    
+  1200     403       399       402       |    +0.81827    -1.56090    +0.74264 | 0.20351    0.80692   
+    (2pi/3 = 2.09440. «Convergere» significa RESTARCI: tre fasi che derivano passano di li' ogni tanto.)
+
+--- (4) IL CONTRASTO e la SANITA' ---
+  passo    n         rho centro   rho guscio   centro/gusc  max|d-d0|/d0   NaN/inf     
+  120      1199      1.1075e-07   3.3198e-11   3336         18.9           no          
+  800      1203      6.9598e-05   2.799e-11    2.4865e+06   49.781         no          
+  1200     1204      0.00037947   2.7921e-11   1.3591e+07   50.198         no          
+
+--- I CONTATORI (A8) a fine run ---
+    _ritmo_chiamate              2886
+    _ritmo_med_assente           3
+    _ritmo_med_identico          assente
+    _ritmo_med_non_promosso      1202
+    _ritmo_f_tutto_nullo         5
+    _ritmo_med_sul_pavimento     2879
+    _ritmo_sicurezza             4
+    _ritmo_guard4pi_ko           3
+    _cs_chiamate                 3614
+    _cs_fallback                 4
+    _sfondo_ko_peq               2392
+    _cs_lam_degenere             2
+
+======================================================================================================================
+NESSUN VERDETTO DI FISICA. I numeri e la forma, un seme, Z9 aperta, --tau-luce non certificato.
+======================================================================================================================
