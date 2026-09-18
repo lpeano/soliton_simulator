@@ -294,6 +294,54 @@ o dilatazione gravitazionale reale — e la misura non le separa.**
 > **A10 e' una DIAGNOSI, non una prescrizione. Un assioma che dicesse anche quale ponte tenere
 > starebbe scegliendo la fisica, e non e' il suo mestiere.**
 
+## ⚠ DICHIARAZIONE — **dove il modello ha ancora uno SFONDO** *(2026-09-18)*
+
+> **Il modello e' relazionale nella DINAMICA. La nascita della TOPOLOGIA e le DIREZIONI usano un
+> embedding euclideo in 3D (`self.pos`) come ausilio computazionale. In quel punto NON e'
+> background-independent. L'errore dell'embedding NON e' misurato.**
+
+**Va scritta perche' oggi il repo non la dice da nessuna parte**, ed e' emersa da una domanda di
+Luca — *«ma io posso evitare questa retroazione?»* — non da un difetto trovato in una misura.
+**Detta cosi' e' onesta, e non e' squalificante.**
+
+**COSA E' RELAZIONALE, e non e' poco:** `psi`, `cs`, `d`, `phi`, le forze, il tempo proprio, la
+mitosi e il settore spinoriale **non leggono MAI `pos`**. La dinamica gira sulle **distanze
+relazionali `d`** e sul grafo.
+
+**COSA PASSA DALL'EMBEDDING — quattro punti VIVI, verificati riga per riga dal disco:**
+
+| punto | cosa fa | conseguenza |
+|---|---|---|
+| `:1958` `_allaccia` | `cKDTree(self.pos)` | **decide LA TOPOLOGIA** |
+| `:4230` / `:4267` `memoria_hebbiana_moto` | `v = pos[j] - pos[i]` → `dirarc`, `grad_tw` | **scrive `mem_mot` e `_nb`** |
+| `:4425` `memoria_hebbiana_moto` | `v_rel` → `dir_radiale`, `dir_laterale` | **gravita', frame-drag** |
+| `:1498-1499` `chiralita_core_locale` | **sfera EUCLIDEA** di raggio `r` | il core locale (`--chi-core` attivo) |
+| `:3409-3410` Kuramoto | `cmv`, `r_cm` dal centro di massa | **sotto `K_SYNC != 0`, e `K_SYNC = 1.0` di DEFAULT (`:199`): E' VIVO** |
+
+*(Davvero inerti: `:4338` sotto `LS_AZIM = False` e `:4199` sotto `L_CONSERVA = False`, quest'ultimo
+marcato **«ERRATA, NON usare»**.)*
+
+**E `pos` INSEGUE `d`** (`rilassa_disegno`, `EMB_IT = 3`): **esiste un ANELLO**
+
+```
+d  ->  pos (approssimato, 3D, 3 iterazioni)  ->  topologia + direzioni  ->  d
+```
+
+**TRE CONSEGUENZE, e la prima sorprende:**
+1. **la DIMENSIONE 3 e' FISICAMENTE RILEVANTE:** `_allaccia` cerca per **RAGGIO**, non per `k`
+   vicini, e `N_vicini ~ densita' * rc^D`. **In 6D il grado esploderebbe.** *(Con un `k`-NN la
+   dimensione sarebbe stata indifferente: non lo e'.)*
+2. **VIOLA `A5`:** due nodi si allacciano perche' **vicini NEL DISEGNO**, anche se sul grafo sono
+   lontanissimi. **Un legame puo' nascere fra punti che non si sono MAI parlati.**
+3. **un grafo arbitrario NON si rappresenta esattamente in 3D** *(gia' a cinque nodi le distanze
+   sono sovradeterminate)*: **l'errore dell'embedding RIENTRA nella fisica.**
+
+**Il progetto che la toglierebbe — la geometria ricostruita dalle sole `d` — e' REGISTRATO e NON
+INIZIATO**, col suo costo e col criterio che deciderebbe se farlo: **`doc/RAMIFICAZIONI.md`, voce
+`Z47`.** **Il criterio e' una MISURA** *(«quanto mente l'embedding?»)*, **non un'opinione.**
+
+---
+
 ## APERTO — cosa manca perche' siano assiomi
 1. **Non sono generativi.** Serve **l'azione unica `S`**: allora diventerebbero **i vincoli che `S`
    deve soddisfare.**

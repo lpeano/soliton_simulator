@@ -6106,3 +6106,78 @@ la tabella dei fotogrammi porta la stessa qualifica.)*
 RIMAPPATA**: **frame 375 = passo `2250`**, non 375.
 **Senza questa conversione i confronti con `Z46` (che è a `1200 passi`) sbagliano di un fattore 2**,
 e va scritto nel referto.
+
+---
+
+## 9.60 — **`Z47` registrata: `pos` è l'unico SFONDO rimasto, e nessuno lo aveva scritto**
+
+**Data:** 2026-09-18 · **SOLA DOCUMENTAZIONE** — nessun codice toccato, blob **`a1ae5090`** invariato
+**→ `doc/RAMIFICAZIONI.md` voce `Z47`** *(progetto di lungo periodo, NON iniziato)* **e la
+DICHIARAZIONE in `doc/ASSIOMI.md`.**
+
+### La dichiarazione, che oggi il repo non faceva da nessuna parte
+
+> **Il modello è relazionale nella DINAMICA. La nascita della TOPOLOGIA e le DIREZIONI usano un
+> embedding euclideo in 3D (`self.pos`) come ausilio computazionale. In quel punto NON è
+> background-independent. L'errore dell'embedding NON è misurato.**
+
+**Non è un difetto nascosto: è una scelta di implementazione che nessuno aveva reso esplicita**, ed è
+emersa da una domanda di Luca — *«ma io posso evitare questa retroazione?»*.
+
+**E cosa È relazionale non è poco:** `psi`, `cs`, `d`, `phi`, le forze, il tempo proprio, la mitosi e
+il settore spinoriale **non leggono MAI `pos`**.
+
+### ⚠ Verificato riga per riga: i punti VIVI sono QUATTRO, non tre
+
+| punto | cosa fa |
+|---|---|
+| `:1958` `_allaccia` | `cKDTree(self.pos)` → **decide LA TOPOLOGIA** |
+| `:4230`/`:4267` `memoria_hebbiana_moto` | `v = pos[j]−pos[i]` → `dirarc`, `grad_tw` → **scrive `mem_mot` e `_nb`** |
+| `:4425` | `v_rel` → `dir_radiale`, `dir_laterale` (gravità, frame-drag) |
+| `:1498-1499` `chiralita_core_locale` | **sfera EUCLIDEA** di raggio `r` |
+| **`:3409-3410` Kuramoto** | `cmv`, `r_cm` dal centro di massa |
+
+> **⚠ Il quinto rigo è la correzione:** il mandato lo dava come condizionale — *«`:3409` solo se
+> `K_SYNC != 0`»* — **ma `K_SYNC = 1.0` di DEFAULT (`:199`): è VIVO.**
+> *(Davvero inerti solo `:4338` sotto `LS_AZIM = False` e `:4199` sotto `L_CONSERVA = False`,
+> quest'ultimo marcato **«ERRATA, NON usare»**.)*
+
+**E `pos` INSEGUE `d`** (`rilassa_disegno`, `EMB_IT = 3`): **c'è un anello**
+`d → pos (approssimato, 3D) → topologia + direzioni → d`.
+
+### Le tre conseguenze, e la prima sorprende
+
+1. **La DIMENSIONE 3 è fisicamente rilevante:** `_allaccia` cerca per **RAGGIO**, non per `k` vicini,
+   e `N_vicini ~ densità·rc^D`. **In 6D il grado esploderebbe.** *(Con un `k`-NN la dimensione
+   sarebbe stata indifferente: non lo è.)*
+2. **Viola `A5`:** due nodi si allacciano perché **vicini NEL DISEGNO**. **Un legame può nascere fra
+   punti che non si sono MAI parlati.**
+3. **Un grafo arbitrario non si rappresenta esattamente in 3D** *(già a cinque nodi le distanze sono
+   sovradeterminate)*: **l'errore dell'embedding rientra nella fisica.**
+
+### Il progetto, e il suo costo — registrato, **non iniziato**
+
+**La geometria ricostruita dalle sole `d`:** tre distanze fissano un triangolo, quindi **gli angoli
+fra gli archi di un nodo si ricostruiscono senza coordinate**; un **riferimento locale** per nodo;
+una **connessione** per confrontare riferimenti vicini — **e il precedente esiste già nel codice:
+`_spinor_lift` fa la cucitura di fase per lo spinore, misurata a `0.35 %`: è trasporto parallelo.**
+**Servirebbe l'analogo per la GEOMETRIA.**
+
+**Il costo, scritto perché è ciò che decide:** **quattro settori** da riscrivere *(`_allaccia`,
+`memoria_hebbiana_moto`, `chiralita_core_locale`, e il `cmv` del Kuramoto)*; **la connessione non
+esiste e ogni scelta lì dentro è una LEGGE da derivare (A1)**; **due riferimenti vicini possono
+essere incompatibili — quella È la curvatura**, e **non si ottiene uno spazio globale ma una
+connessione locale**; **e sarebbe un SISTEMA NUOVO: tutto ciò che è stato misurato NON si
+trasporta.** **Settimane, non ore.**
+
+### Il criterio di avvio — **una misura, non un'opinione**
+
+**«Quanto mente l'embedding?»** → `|pos_i − pos_j| / d_ij` per arco **e la stabilità
+dell'ORIENTAMENTO** fra passi.
+> **⚠ La seconda conta più della prima: le direzioni sono NORMALIZZATE (`v/L`), quindi l'errore
+> sulla LUNGHEZZA si cancella e resta quello sull'ORIENTAMENTO — ed è quello che entra in `grad_tw`
+> e in `_nb`.**
+
+**Errore piccolo e orientamento stabile → il guadagno è TEORICO: si dichiara il limite e non si
+riscrive niente. Errore grande o orientamento che sobbalza → la motivazione è MISURATA**, e
+spiegherebbe anche **`Z43`** *(il metro che oscilla del 62 %)*. **La misura non è stata fatta qui.**
