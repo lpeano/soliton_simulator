@@ -1,0 +1,59 @@
+[TIMBRO] _Z33_due_vie.py  sha1-BYTE 7d1f6717  committato e pulito
+======================================================================================================================
+Z33 -- LE DUE VIE COI NUMERI, e K7
+======================================================================================================================
+  config: CAMPO_SPINORIALE=True SPINORE_VIVO=True SPIN_FEEDBACK=True TAU_LOC=1.0
+
+--- VIA (1): spostare l'aggiornamento PRIMA del consumo -- verifica dell'ORDINE (A6) ---
+   :2693   psi_spin e' assegnato QUI, ed e' l'UNICO punto
+   :2649   ...dentro `calcola_psi()`
+   :3124   `ritmo()` consuma lo snapshot, all'INIZIO di step()
+   :3132   lo snapshot si aggiorna DOPO il consumo
+
+  -> il consumo a :3124 legge un `psi_spin` prodotto dal passo PRECEDENTE (l'ultimo `calcola_psi`),
+     e lo confronta con lo snapshot preso alla fine di QUEL passo. L'ORDINE RISPETTA A6.
+  -> spostare l'aggiornamento PRIMA del consumo confronterebbe `psi_spin` CON SE' STESSO:
+     `f = 0` per costruzione, SEMPRE. LA VIA (1) E' IL DIFETTO, NON LA CURA.
+
+--- VIA (2): estendere lo snapshot -- il CONTO che decide ---
+   :1812   `semina()` -- e NON estende `_psi_spin_prec` (verificato: voce H)
+   :1351   `_eredita_spinore_figli` LO ESTENDE, ma solo per la MITOSI (cura C11)
+
+   all'iniezione delle masse: n 80 -> 440   NODI NUOVI 360 = 81.8 % della popolazione
+
+  ⚠ E QUI IL PUNTO: i nodi di `nuova_massa` NON HANNO UN GENITORE. Estendere lo snapshot significa
+  INVENTARE una fase precedente (A1: un numero scelto; A7b: una storia che non c'e').
+  E se li si estendesse col valore CORRENTE -- l'unica scelta che non inventa un moto -- avrebbero
+  `f = 0` ESATTO. Essendo il 81.8 % della popolazione, LA MEDIANA RESTEREBBE ZERO:
+  **LA VIA (2) NON CURA IL CASO CHE DOVREBBE CURARE.**
+
+--- I CONTATORI A8 (dal codice, non dalla sonda) ---
+   _ritmo_chiamate            = 126
+   _ritmo_sicurezza           = 2
+   _ritmo_guard4pi_ko         = 0
+   _ritmo_snap_identico       = 1
+   _ritmo_f_tutto_nullo       = 1
+   _ritmo_f_mediana_nulla     = 1
+   _ritmo_med_sul_pavimento   = 2
+   _ritmo_sicurezza_shape     = (80, 440)
+   -> passi con un tempo proprio DEGENERE: 4 su 126 = 3.17 %
+
+--- K7: `f` e' CONFRONTABILE fra passi consecutivi? (G6 su `_psi_spin_prec`) ---
+  NULLO: se fosse rumore di gauge a media zero, i CAMBI DI SEGNO sarebbero il 50 %.
+  coppie di passi confrontabili : 120
+  |delta f| mediano             : 0.0259141
+  |f| mediano                   : 0.027787
+  RAPPORTO |delta f| / |f|      : 0.932601   <- se ~1 o piu', NON c'e' cucitura
+  frazione di CAMBI DI SEGNO    : 0.3420   (nullo del rumore di gauge: 0.5)
+
+  E LA GRANDEZZA CHE IL CODICE USA DAVVERO, `f = |signed|`:
+     |delta f| mediano        : 0.017987
+     RAPPORTO |delta f| / |f| : 0.647317   <- QUESTO e' il numero che conta per ritmo()
+     (il rapporto sul SEGNATO e' gonfiato dai cambi di segno, che il codice SCARTA
+      prendendo il modulo: le due cose NON si confondono)
+
+  ⚠ NB: qui `f` e' confrontato NODO PER NODO fra passi consecutivi, e i nodi cambiano (mitosi).
+     Il confronto e' sui PRIMI min(len) indici, che restano gli stessi nodi perche' i nuovi si
+     APPENDONO in coda. E' un'approssimazione, ed e' dichiarata.
+
+======================================================================================================================

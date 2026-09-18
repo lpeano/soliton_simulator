@@ -112,10 +112,44 @@ applicata a `_psi_spin_prec`, e non l'ha fatto nessuno.** *Decide:* se sotto c'�
 
 ## 3. TODO DEL NEXT STEP
 
-- [ ] **1** — il CONTATORE (A8), byte-inerte → commit **prima** di tutto il resto
-- [ ] **2** — i punti di crescita di `n`, enumerati **dal disco**, e chi estende lo snapshot
-- [ ] **3** — il QUARTO caso: zero numerico o reperto separato?
-- [ ] **4** — `K7`: `f` è confrontabile fra passi consecutivi?
-- [ ] **le due vie coi numeri + dichiarare quale cablare e perché** → **STOP e riporta**
+- [x] **1** — il CONTATORE (A8), byte-inerte → commit **prima** di tutto il resto
+- [x] **2** — i punti di crescita di `n`, enumerati **dal disco**, e chi estende lo snapshot
+- [x] **3** — il QUARTO caso: zero numerico o reperto separato?
+- [x] **4** — `K7`: `f` è confrontabile fra passi consecutivi?
+- [x] **le due vie coi numeri + dichiarare quale cablare e perché** → **STOP e riporta**
 - [ ] *(solo con via libera)* previsioni → cura → sigilli `K0-K9` → `Z9` rimisurata
 - [ ] **⚠ NON toccare:** il gauge (`median(|f|)`, `max(...,1e-9)`, `+1e-6`)
+
+---
+
+## 4. ESITO — *cosa il ragionamento preliminare aveva preso, e cosa no*
+
+**PRESO, ed erano le due cose che decidevano il giro:**
+
+1. **la via (1) romperebbe A6** — trovato leggendo `calcola_psi()` e `step()` **prima** di cablare.
+   **Verificato: l'ordine attuale è corretto.** Se avessi eseguito il mandato alla lettera avrei
+   *introdotto* il difetto che dovevo curare.
+2. **la via (2) inventerebbe un passato** — e il conto lo conferma: **81.8 %** di nodi nuovi, quindi
+   **estenderli col valore corrente lascia la mediana a zero lo stesso**. Non è nemmeno una scelta
+   fra «inventare» e «funzionare»: **non funziona comunque.**
+
+**E il sospetto di fondo era giusto:** *«non c'è un difetto da curare, c'è un difetto da
+dichiarare»*. I quattro casi sono legittimi uno per uno, e **la cura è il contatore.**
+
+**NON PRESO — e i contatori hanno corretto me:** avevo scritto che al passo dell'iniezione *«il
+guard 4π fallisce»*. **`_ritmo_guard4pi_ko = 0`: non fallisce mai.** Il ramo di sicurezza `:2028`
+viene prima. **La mia sonda ricostruiva i rami nell'ordine sbagliato, e il contatore nel codice vero
+mi ha smentito.** *(Ed è esattamente perché il contatore serve.)*
+
+**NON PREVISTO AFFATTO:** **`K7`.** Cercavo se `f` fosse *confrontabile*, e la risposta è **no**:
+`0.647` contro `0.032` del feedback. **Il difetto che ho aperto è più grande di quello che stavo
+curando**, ed è `Z36`.
+
+## 5. TODO DEL PROSSIMO PASSO
+
+- [ ] **decisione di Luca:** `Z33` è **dichiarata** (contatore dentro, byte-inerte) — chiudere?
+- [ ] **`Z36` è il fronte nuovo**, e **più grande**: il tempo proprio non è cucito. **Criterio di
+      chiusura: distinguere «il campo oscilla davvero» da «la fase non è confrontabile».**
+- [ ] **avviso da registrare:** `--tempo-proprio-orientato` alimenterebbe una grandezza **non
+      cucita** (34.2 % di cambi di segno)
+- [ ] **⚠ NON toccare:** il gauge, il `+1e-6`, `ramp`, `TAU_A`

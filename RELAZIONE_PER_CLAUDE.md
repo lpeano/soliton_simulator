@@ -5037,3 +5037,85 @@ non proposte**, e la cura resta **opzionale**: 4 passi su 126, tutti nel transit
 
 I quattro eventi sono legati a **due discontinuità specifiche di questa scena**. **Il `3.2 %` è
 della scena, non del sistema.**
+
+---
+
+## 9.49 — **Nessuna delle due vie cura `Z33`. La cura è il contatore. E `K7` apre un difetto più grande del primo**
+
+**Data:** 2026-09-18 · blob byte `94b6cc29` · un seme (5), 126 passi · **nessuna cura cablata**
+**Task history scritto e pushato PRIMA** · `csv/_test_fork/_Z33_due_vie.py`
+
+### La via (1) è il difetto, non la cura — **verificato dal sorgente**
+
+`psi_spin` è assegnato in **un solo punto** (`:2693`, dentro `calcola_psi()`); `ritmo()` consuma a
+`:3124`, **all'inizio di `step()`**, e lo snapshot si aggiorna a `:3132`, **dopo**.
+
+> **Il consumo legge già uno stato `t−1`: l'ordine attuale rispetta A6.** Spostare l'aggiornamento
+> confronterebbe `psi_spin` **con sé stesso** → `f = 0` per costruzione, sempre.
+> **Se avessi eseguito il mandato alla lettera avrei *introdotto* il difetto che dovevo curare.**
+
+### La via (2) non cura, **e il conto lo dice**
+
+`semina()` non estende `_psi_spin_prec` (voce **H**); `_eredita_spinore_figli` lo estende **solo per
+la mitosi**, ed è giustificato — il figlio nasce dal padre. **Ma `nuova_massa` crea nodi senza
+genitore.**
+
+```
+all'iniezione:  n 80 -> 440    NODI NUOVI 360 = 81.8 % della popolazione
+```
+
+Estenderli col **valore corrente** (l'unica scelta che non inventa un moto) darebbe loro `f = 0`
+esatto: essendo l'**81.8 %**, **la mediana resterebbe zero**. Estenderli con altro **inventa una
+fase precedente** — **A1** + **A7b**.
+
+> **Non è una scelta fra «inventare» e «funzionare»: non funziona comunque.**
+
+### La cura è il CONTATORE, ed è già dentro
+
+`800fb24`, **byte-inerte verificata** contro `aa84755b` estratto in binario:
+`max|A−B| = 0.000e+00` su `psi`/`phivel`/`eta`/`d`/`d0`/`omega_s`/`_nb`, **shape identiche**.
+
+```
+_ritmo_chiamate 126   _ritmo_sicurezza 2 (shape 80/440)   _ritmo_guard4pi_ko 0
+_ritmo_snap_identico 1   _ritmo_f_tutto_nullo 1   _ritmo_f_mediana_nulla 1
+-> passi con tempo proprio DEGENERE: 4 su 126 = 3.17 %
+```
+
+**E i quattro casi sono legittimi, uno per uno:** al passo 0 **non esiste un prima**; all'iniezione i
+360 nodi nuovi **non hanno un passato**; negli altri due **il campo davvero non si è mosso**.
+**Il codice fa la cosa giusta: mancava solo che lo dicesse.**
+
+### ⚠ E i contatori hanno corretto me
+
+Avevo scritto che all'iniezione *«il guard 4π fallisce, si cade sul 2π»*. **`_ritmo_guard4pi_ko = 0`:
+non fallisce mai** — il ramo di sicurezza `:2028` viene **prima**. **La mia sonda ricostruiva i rami
+nell'ordine sbagliato; il contatore, che sta nel codice vero, è autoritativo.**
+
+E il quarto caso **non era «escluso»**: `_ritmo_f_mediana_nulla = 1` esiste davvero (valori a
+`3.5e-13`, rumore numerico) — **ma il contatore li distingue, ed è il suo mestiere.**
+
+### ⚠⚠ `K7` — **il tempo proprio non è cucito**, ed è più grande di `Z33`
+
+| | `\|Δ\|/\|·\|` | cambi di segno |
+|---|---|---|
+| **`f = \|signed\|`** *(quella che il codice usa)* | **0.647** | — |
+| `signed` | 0.933 | **0.342** *(nullo 0.50)* |
+| **`imag(ov)` del feedback (`G6`)** | **0.032** | **0.0035** |
+
+**`f` salta del `64.7 %` del proprio valore fra passi consecutivi. Venti volte peggio del feedback.**
+
+> **Il tempo proprio è costruito su una grandezza che non è cucita**, e `Z33` — 4 passi su 126 con
+> `f` nullo — **è un caso particolare di un problema che c'è in TUTTI i passi.**
+
+**Due precisazioni contro l'overclaim:** il codice prende `|signed|`, quindi **i cambi di segno sono
+già scartati** (il `0.933` è gonfiato da quelli, il numero che conta è `0.647`); **ma proprio per
+questo `--tempo-proprio-orientato` alimenterebbe una grandezza NON cucita — è un avviso per quel
+flag.**
+
+### Cosa resta a Luca
+
+1. **`Z33` è dichiarata** (contatore dentro): chiudere?
+2. **`Z36` è il fronte nuovo, e più grande.** **Criterio di chiusura scritto: distinguere «il campo
+   oscilla davvero così» da «la fase non è confrontabile fra passi».** Non ho una misura che le
+   separi.
+3. **`Z9` non va rimisurata**: `eta` non cresce in **2 passi su 126 = 1.6 %**, impatto ≤ ~2 %.
