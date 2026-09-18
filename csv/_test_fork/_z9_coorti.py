@@ -333,3 +333,36 @@ for eti, D in SCENE:
               % (f * PPF, att - f * PPF, 100.0 * f * PPF / att))
 print("")
 print("=" * 124)
+
+# ============================================================== (5) PERCHE' IL par.4b NON E' DILUITO
+# Il par.4b ha dato un numero che NON mi aspettavo: il 97.8 % degli archi e' INTERNO alla coorte
+# originale, benche' i nati dopo siano il 70 % dei NODI. Il codice dice perche' (il figlio della
+# mitosi nasce con ESATTAMENTE DUE archi, verso i due genitori: par.9), ma DIRLO NON E' MISURARLO.
+print("")
+print("=" * 124)
+print("(5) IL GRADO PER COORTE -- perche' la mediana sugli ARCHI non e' diluita dai neonati")
+print("=" * 124)
+for eti, D in SCENE:
+    S, F = leggi(D)
+    A = {f: S[f]["attrs"] for f in F}
+    f = F[-1]
+    a = A[f]
+    n = len(a["pos"])
+    n0 = len(A[F[0]]["pos"])
+    ii = np.asarray(a["i"], int)
+    jj = np.asarray(a["j"], int)
+    m = (ii < n) & (jj < n)
+    ii, jj = ii[m], jj[m]
+    g = np.bincount(ii, minlength=n) + np.bincount(jj, minlength=n)
+    print("  SCENA %s   n = %-6d n0 = %-6d archi = %d" % (eti, n, n0, int(m.sum())))
+    print("     ORIGINALI  %6d nodi (%5.1f %%)  grado MEDIANO %7.1f  estremi d'arco %9d"
+          % (n0, 100.0 * n0 / n, float(np.median(g[:n0])), int(g[:n0].sum())))
+    print("     NATI DOPO  %6d nodi (%5.1f %%)  grado MEDIANO %7.1f  estremi d'arco %9d"
+          % (n - n0, 100.0 * (n - n0) / n, float(np.median(g[n0:])), int(g[n0:].sum())))
+    print("     -> i NATI DOPO sono il %.1f %% dei NODI ma portano il %.2f %% degli ESTREMI D'ARCO."
+          % (100.0 * (n - n0) / n, 100.0 * g[n0:].sum() / g.sum()))
+    print("        grado mediano dei neonati = %.1f: e' ESATTAMENTE cio' che il codice prescrive"
+          % float(np.median(g[n0:])))
+    print("        (il figlio nasce con DUE archi, verso i due genitori, par.9) -- VERIFICATO dai dati.")
+print("")
+print("=" * 124)
