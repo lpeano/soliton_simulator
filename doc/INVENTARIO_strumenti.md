@@ -300,3 +300,35 @@ python soliton_simulator.py --batch --nmasse 3 --sep 8 --ogni 10 \
 sono.** Le coorti vanno ricostruite **dalla posizione**, e l'analisi lo dichiara.
 
 **`--db` NON ESISTE come flag:** è ambiguo con `--db-cleanup`/`--db-ogni`. **Il flag è `--sync-db`.**
+
+---
+
+## 2026-09-18 — **la scena VIDEO a 400 frame** (`csv/_test_fork/_gvideo/`)
+
+| cosa | valore |
+|---|---|
+| **BLOB del simulatore** | **`a1ae5090`** *(`sha1` dei BYTE GREZZI, non `git hash-object`: C18)* |
+| **driver** | `csv/_test_fork/_scena_video.py`, **SIGILLATO** (`_sigillo_driver_video.py`: 14 array, `max\|A-B\| = 0.000e+00`) |
+| **frame / passi** | **400 frame = 2400 passi** *(`PASSI_PER_FRAME = 6`)* |
+| **durata misurata** | **6535 s (1h49)**, `16.34 s/frame` |
+| **`n`** | 2391 → 8018 |
+| **snapshot** | `frame_{10,115,190,270,375,400}.pkl` — **il `_db_step` dentro è il FRAME, non il passo** |
+| **analisi** | `csv/_test_fork/_struttura_video.py` (`6bb24e5e`) |
+
+**IL COMANDO, VERBATIM:**
+
+```
+python csv/_test_fork/_scena_video.py 400 csv/_test_fork/_gvideo 10,115,190,270,375
+```
+
+*(il driver applica internamente la config: `--test N-MASSE --nmasse 3 --sep 8 --giri 0
+--campo-spinoriale --spinore-vivo --spinore-corretto --chi-core --calore-scal --deparam-orologio
+--verlet --fork-su2 --fork-su2-mem --cs-dinamico --tau-luce --rumore-colorato --pav-com
+--guscio-morbido --zeta-vir --chi-basc --plast-din --viriale --olon-part`, **col percorso ufficiale
+`_cli()` → `_applica_regime` → `_applica_flag`**)*
+
+**⚠ `--tau-luce` HA IL SIGILLO FALLITO** (`doc/SIGILLO_tau_luce_FALLITO.md`): **ramo NON
+CERTIFICATO**, ed è la ragione per cui il gate resta a `c0803713`. **Ogni numero di questa campagna
+lo eredita.** **`--chi-basc` riscrive `perc_chi` a ogni passo.**
+
+**I `.pkl` (48 MB l'uno) NON sono committati: il dato è il comando, e il sistema è deterministico.**

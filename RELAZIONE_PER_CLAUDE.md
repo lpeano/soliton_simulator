@@ -6321,3 +6321,106 @@ sarebbe la stessa cosa di `Z48` e la distinzione del mandato cadrebbe.**
 **5 snapshot invece dei 20 chiesti**, e `d medio` ricostruito da quelli: **per l'istante
 dell'inversione la risoluzione è 5 frame, per il profilo radiale sono 5 punti.** **Lo dico prima
 invece di presentarlo come sufficiente.**
+
+---
+
+## 9.63 — **Il ciclo c'è, ma non è nel corpo: è nella CODA. E l'anello si sfalda mentre il centro si accende**
+
+**Data:** 2026-09-18 · blob **`a1ae5090` invariato** · scena VIDEO, **400 frame = 2400 passi**, 1h49
+**Previsioni scritte PRIMA:** `515ed53` · **Referto:** `doc/REFERTO_struttura_video.md` → **`Z49`**
+
+> **⚠ `--tau-luce` HA IL SIGILLO FALLITO: la scena include una legge NON CERTIFICATA e ogni numero
+> qui sotto lo eredita.** `--chi-basc` attivo. **Un seme. Nessun verdetto di fisica.**
+
+### La scena è la stessa — confermato a quattro cifre
+
+`d MEDIA` misurata `0.9275 / 1.4502 / 1.6739 / 1.7537 / 1.4871` contro `0.934 / 1.454 / 1.676 /
+1.753 / 1.483` della tabella dei fotogrammi.
+
+### ⚠ Il ciclo non è dove sembrava
+
+```
+frame      10       115      190      270      375      400
+d MEDIA    0.9275   1.4502   1.6739   1.7537   1.4871   1.4004    <- sale poi SCENDE
+d MEDIANA  0.8626   0.9636   1.0126   1.1191   1.3191   1.3514    <- SALE SEMPRE
+d p95      1.9709   4.6983   6.1655   6.3985   3.6234   2.9533    <- sale poi CROLLA
+```
+
+> **La distanza TIPICA non si ricomprime mai. È il `p95` a dimezzarsi, e con lui la media.**
+> **La «ricompressione» è il RIASSORBIMENTO DELLA CODA LUNGA, non una contrazione del corpo.**
+
+**È la trappola del §4 del mandato** *(«se bimodale, non riportare mediane»)*: **media e mediana
+dicono cose opposte, e solo la coppia descrive il fenomeno.** **Non l'avevo previsto: l'ho trovato
+solo perché il presidio imponeva di non fidarsi delle mediane.**
+
+**E la dilatazione RIMBALZA:** `−7.44 %` (370) → `−2.70 %` (375) → `−4.21 %` (380) → **`+2.80 %`**
+(385) → `−1.13 %` (400). **La tabella si fermava al 375.**
+
+### ⚠ La regione interna si svuota, si riempie, e si accende di cinque ordini
+
+```
+nodi(r<4):  900 -> 291 -> 224 -> 221 -> 559 -> 907
+rho_spin :  3.7e-07 ....................-> 5.6e-02     (CINQUE ORDINI)
+|psi|    :  1.0e-04 ....................-> 0.666
+```
+
+**Il minimo di popolazione (frame 270) coincide col massimo di `d MEDIA`: riempimento e
+ricompressione sono lo stesso intervallo.**
+
+### ⚠ E l'anello si sfalda — grado da `496` a `2`
+
+```
+grado ANELLO   496 -> 160 -> 87 -> 2 -> 2 -> 2
+grado INTERNA  127 -> 157 -> 143 -> 121 -> 127 -> 109
+```
+
+> **Non è che la struttura «ingloba» le masse: le masse si DISGREGANO e la materia si concentra al
+> centro.** *(Descrizione dei numeri, non un meccanismo: il meccanismo non è misurato.)*
+
+### ⚠ Di cosa è fatta — **l'OPPOSTO di `Z48`**, e il discriminante lo conferma
+
+`eta` interna **`28.60`** contro anello **`9.81`** *(tre volte più matura)*, e **i nodi NUOVI stanno
+più nell'ANELLO (`76 %`) che al centro (`38 %`)**.
+
+```
+r ricavato da eta += DT*r :  INTERNA 1.08 -> 1.41      ANELLO 0.71 -> 0.37
+r/r_floor (interna)       :  ~1e+06
+```
+
+> **La previsione diceva: *«se il loro `r` valesse `1.414212e-06`, "materia nuova" sarebbe
+> sbagliato»*. NON lo vale — è `10⁶` volte il pavimento. È l'opposto di `Z46`/`Z48`.**
+> **E l'anello RALLENTA (`0.71 → 0.37`) mentre il centro accelera.**
+
+### ⚠ `perc_chi`: la separazione si ottiene **senza contatori**
+
+```
+frac +1 :  0.000 (frame 10) -> 0.0292 -> 0.0369 -> 0.0834 -> 0.1468 -> 0.1645
+```
+
+**Alla semina `rng.choice([-1,1])` darebbe `~0.50`. Al frame 10 vale `0.000`.**
+
+> **⟹ `chi_basc` ha già riscritto TUTTI i 2391 nodi entro il frame 10.** **L'antimateria di questa
+> scena viene dal BASCULAMENTO, non dalla generazione** — e la separazione che avevo chiesto **si
+> ottiene per deduzione, non serve strumentare.**
+> **⚠ Ma è una deduzione da due numeri, non un conteggio: un conteggio diretto richiederebbe
+> contatori durante il run, e non è stato fatto.**
+
+### ✅ E la mia riserva sui raggi assoluti **CADE, e lo dico**
+
+`R_anello` **misurato** varia solo dell'**8 %** (`7.67 → 8.04 → 7.37`): **assoluto e comovente danno
+gli stessi numeri.** **La riserva era legittima — par.4 vieta gli intervalli fissi su un sistema che
+dilata — ma qui non morde.** **⚠ Vale solo perché l'anello non si è spostato abbastanza: non è una
+licenza generale.**
+**E `R_anello` fa il ciclo da solo:** `7.56 → 8.04 → 7.37`.
+
+### La coerenza globale crolla mentre quella locale sale
+
+`|<nb>|` globale `0.995 → 0.190`; `coer_l` locale `→ 0.669`. **Due grandezze diverse: si citano
+separate, non si mediano.**
+
+### Cosa resta a Luca
+
+1. **Nessuna identificazione**, come chiesto: i numeri e la forma.
+2. **Il MECCANISMO non è misurato** — perché l'anello perda i legami e il centro si accenda.
+3. **Limiti:** un seme, `--tau-luce` non certificato, **5 punti** per il profilo e **5 frame** di
+   risoluzione per il ciclo.
