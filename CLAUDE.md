@@ -323,6 +323,39 @@ totale, e chiamarla tale era un errore mio.**
 - Vale **in aggiunta** a par.5 (politiche di commit) e par.5-bis (documenti vivi), non al loro posto:
   un riscontro che cambia un FATTO STABILE va **anche** in par.9, e lo stato **anche** nel file di STATO.
 
+## 5-sexies. UNA DOMANDA SI COMMITTA COL SUO RAGIONAMENTO (regola di Luca, 2026-09-18)
+
+> **Ogni volta che si pone una domanda a Luca — o si lascia una decisione aperta — TUTTO IL
+> RAGIONAMENTO che ci porta va COMMITTATO E PUSHATO, nello stesso giro in cui la domanda viene
+> posta.**
+
+**Non e' un'estensione di par.5-ter, e' il suo caso piu' stretto.** par.5-ter dice di relazionare
+ogni **riscontro**; questa dice che anche una **domanda** e' un atto da relazionare, perche':
+
+- **la domanda arriva a Luca IN CHAT, ma la risposta si dara' fra ore o giorni, e in chat non c'e'
+  piu' il ragionamento.** Chi risponde deve poter leggere **dal repo** perche' la domanda esiste,
+  quali alternative sono state misurate, e con che numeri;
+- **le domande sono ANCHE per Claude web**, che **non ha la conversazione: ha solo i file.** Una
+  domanda che vive solo in chat, per lui, **non e' mai stata posta**;
+- **e una decisione presa senza il ragionamento sotto e' una decisione presa al buio**, anche
+  quando chi decide e' Luca.
+
+**OPERATIVAMENTE, per ogni domanda o decisione lasciata aperta:**
+1. **una voce nel registro** (`doc/RAMIFICAZIONI.md`) con **il criterio di chiusura** — cosa
+   esattamente la deciderebbe (par.5-quater: una voce senza criterio non e' un fronte, e' un
+   desiderio);
+2. **un paragrafo in `RELAZIONE_PER_CLAUDE.md`** con **i numeri e le alternative gia' misurate**,
+   non solo la domanda;
+3. **commit + push nello stesso giro.** **Una domanda posta in chat e non pushata e' un riscontro
+   perso**, esattamente come un risultato non relazionato.
+
+**E vale anche per le domande che si RISPONDONO da soli:** se durante il lavoro nasce una domanda e
+poi si trova la risposta, **va committato anche il percorso**, non solo l'esito. *(E' successo piu'
+volte in questo repo che la strada scartata fosse piu' informativa della strada presa: le quattro
+varianti del denominatore, le due rotture del punto 1, i tre nulli letti con risoluzioni diverse.)*
+
+---
+
 ## 6. STATO E ORDINE DEL LAVORO
 Ordine: **prima il FORK (non-abeliano), poi il resto.** GAMMA / Step 2 (cs<->orologio) / verifica
 EM<->curvatura sono A VALLE: non toccarli finche' il fork non gira (a densita' reali cs e' MORTO,

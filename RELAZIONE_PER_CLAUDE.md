@@ -4585,3 +4585,154 @@ non l'hanno seguita.)*
 
 `nudo` (**36.2**) contro `linea` (**16.9**) per il denominatore di `SPIN_FEEDBACK`. **Ora che `Z24` è
 chiusa è decidibile. Riportata, non decisa.**
+
+---
+
+# 9.44 — **RELAZIONE COMPLETA A CLAUDE WEB: dal giro di `Z24` al riavvio, e la DOMANDA aperta**
+
+**Data:** 2026-09-18 · **Branch** `fork-su2` · **HEAD** `a2a0445` · **blob byte** `aa84755b`
+**Scritto perché una domanda senza il suo ragionamento, per chi legge solo il repo, non è mai stata
+posta** (nuova regola `par.5-sexies` in `CLAUDE.md`).
+
+> **Claude web non ha la conversazione: ha i file.** Questo paragrafo esiste per dargli l'arco
+> intero senza doverlo ricostruire dai commit.
+
+---
+
+## 1. L'ARCO, in ordine
+
+### 1.1 — `Z24`: i tre punti «collo stesso schema» — **due non lo erano**
+
+Il giro precedente aveva curato `SPIN_FEEDBACK` (`Z25`: tolto un denominatore che rompeva
+l'antisimmetria). `Z24` chiedeva se lo stesso difetto fosse in altri tre punti. **Misurato, non
+assunto:**
+
+| punto | accumulo | esito |
+|---|---|---|
+| **1 — `B`/`correzione`** | `+` su entrambi → **non è uno scambio** | cricchetto (**2.266**) **ma non per il denominatore** |
+| **2 — `_otw`** | `+` su entrambi, ed è un Δω | **LATENTE** (`TW_SPINORE=False`) |
+| **3 — `twist_nodo`** | **`+twn`/`−twn`** | **CRICCHETTO ATTIVO** (`FRAME_DRAG=True`) |
+
+**Il punto 1 ha DUE rotture indipendenti**, e la misura lo dimostra: togliere solo il denominatore
+**peggiora** (2.266 → 2.622); un denominatore d'arco **peggiora** (3.060); solo togliendo **anche**
+la riflessione `refl` si arriva a **1.379e-15**. **Toglierla è una legge nuova, non una bonifica.**
+
+**Il punto 3 è stato curato** (`nudo`), **sigillo 8/8**, con `H1 = 0.000e+00` esatto su 66/66.
+
+### 1.2 — **Un mio errore, ritirato: il «77 %»**
+
+Avevo scritto, in cinque posti, che *«il ~77 % dei nodi ha grado 2, quindi la domanda «|out| cresce
+col grado?» non ha risoluzione»*. **Errore di POPOLAZIONE:** `1018/1318` invece di `1018/5410` — il
+denominatore era **la somma delle sole colonne che avevo stampato**.
+
+**Distribuzione vera: 19.85 % a grado 2, 65.57 % a grado ≥ 100, mediana 119. È BIMODALE.**
+**La misura aveva risoluzione — un fattore 60 — e io avevo guardato dove non ce n'era.**
+
+**Quarto errore di popolazione in due giorni.** Presidio che ne discende: *il denominatore di una
+frazione si prende dalla POPOLAZIONE, mai dalla somma di ciò che si è scelto di stampare.*
+
+### 1.3 — **Il compromesso che ne è emerso, ed è algebrico**
+
+Rifatta sul range giusto, la domanda ha una risposta netta:
+
+| variante | `\|out\|` a `g=2` | a `g≥100` | rapporto | lettura |
+|---|---|---|---|---|
+| **pre-cura** (`/grado`) | 0.04885 | 0.04829 | **0.989** | **INTENSIVA** |
+| **`nudo`** (cablata) | 0.001694 | 0.06127 | **36.2** | ESTENSIVA |
+| `media` | 0.002333 | 0.04406 | 18.9 | ESTENSIVA |
+| **`linea`** (`g_i+g_j−2w`) | 0.001372 | 0.02313 | **16.9** | ESTENSIVA |
+
+> **`sum(out) = 0` richiede un denominatore SIMMETRICO SULL'ARCO; l'indipendenza dal grado richiede
+> quello DEL NODO CHE RICEVE. Non possono valere insieme.**
+> Il vecchio codice sceglieva la seconda **rompendo** la prima, **e non lo diceva**.
+
+### 1.4 — I default: **erano DUE righe, non una**
+
+`SPIN_FEEDBACK = True` **da solo non basta**. Il ramo è
+`if SPINORE_VIVO and SPINORE and SPIN_FEEDBACK`, e `SPINORE_VIVO` era `False`: il feedback sarebbe
+stato **acceso e inerte, in silenzio** — nemmeno i contatori A8 sarebbero scattati, perché stanno
+**dentro** quel blocco. **Famiglia «cablato ma muto», intercettata prima che accadesse** da uno
+strumento scritto apposta (`csv/_test_fork/_audit_default.py`).
+
+**Promosso in `COMPONENTI_PROMOSSE.md` sezione H — NON in A** — con la dicitura:
+**«attivo per DECISIONE, su basi di FORMA — l'A/B a quattro semi NON ha mostrato un effetto»**, e
+con l'ammissione che **dei tre criteri di §10 ne soddisfa due**: il ③ («la sua assenza è un
+difetto») è **argomentato, non misurato**.
+
+### 1.5 — Il riavvio, e cosa ha dimostrato
+
+**Niente di committato è andato perso.** Ma ha cancellato lo **scratchpad di sessione**, e con esso
+il termine di paragone di **quattro sigilli**:
+
+- **`_sigillo_inerzia`: `Y6` FAIL FALSO** (legge un PRE vuoto, fallisce su codice corretto);
+- **`_sigillo_calcpsi_T1`: `[run pre FALLITO rc=2]`**;
+- **`_sigillo_calcpsi_T2`: modalità ridotta**;
+- **`_sigillo_rimozione5`: SI SCHIANTA.**
+
+> **Il riavvio ha DIMOSTRATO `par.5-quinquies` sui riferimenti dei sigilli invece di argomentarlo:
+> un sigillo il cui termine di paragone sta in una cartella temporanea non è ri-girabile, e un
+> sigillo che non si può rigirare non protegge nulla.**
+
+**E tre di essi degradano in silenzio** (`pre_src = ""`): un riferimento assente diventa **un
+confronto contro il vuoto**. **Deve rifiutare, non degradare.**
+
+**Il rigiro dei sei gruppi sani: 52 PASS, 0 FAIL, 0 crash.** Ma **la copertura è PARZIALE**, e non
+dico «sigilli passati».
+
+---
+
+## 2. ⚠ LA DOMANDA APERTA — **`Z30`, e adesso è decidibile**
+
+**Domanda, in una riga:**
+
+> **Il denominatore dei termini d'arco dev'essere `nudo` (zero scelte, ma ESTENSIVO 36.2×) oppure
+> `linea` = `g_i+g_j−2w` (una scelta, ma il MENO estensivo: 16.9×)?**
+
+### Perché non l'ho decisa io
+
+Perché **le due scelte vanno fatte insieme, con lo stesso criterio** — `SPIN_FEEDBACK` (`Z25`) e
+`twist_nodo` (`Z27`) — e perché la cura di `Z25` è **committata e sigillata 12/12**: cambiarla ora
+significherebbe **rifare il sigillo su un criterio diverso da quello con cui la scelta era stata
+fatta**. *La coerenza fra i punti vale più che ottimizzarne uno solo.*
+
+### Cosa pesa da una parte e dall'altra — **tutto già misurato**
+
+| | **`nudo`** (attuale) | **`linea`** = `g_i+g_j−2w` |
+|---|---|---|
+| antisimmetria (`G1`/`H1`) | **esatta** | **esatta** — non discrimina |
+| scelte arbitrarie (A1, §3) | **ZERO** | **una**: quale oggetto d'arco usare |
+| estensività (`g=2` → `g≥100`) | **36.2×** | **16.9×** ← il meno peggio |
+| ampiezza `max\|out\|` | 0.590 | **0.169** |
+| derivazione | «nessun denominatore» non richiede derivazione | **è il grado dell'arco nel grafo linea**: un oggetto definito, non una combinazione scelta fra media/min/max |
+
+**Nessuna delle due recupera l'intensività** che il pre-cura aveva (0.989): quella richiede un
+denominatore **nodale**, che **rompe la conservazione**. Il compromesso non si aggira.
+
+### Il criterio di chiusura, scritto adesso
+
+> **Una decisione esplicita fra *«esattezza senza scelte»* e *«esattezza + minima estensività»*,
+> presa con un criterio dichiarato PRIMA, e applicata a ENTRAMBI i punti (`Z25` e `Z27`) nello
+> stesso giro** — con il rigiro dei due sigilli, `F/G` e `H`.
+
+### ⚠ E una cosa che NON so, e che potrebbe cambiare la risposta
+
+**Non è stato misurato se l'estensività sia un difetto.** Sappiamo *quanto* i termini crescono col
+grado; **non sappiamo se crescere col grado sia sbagliato.** In un modello relazionale un nodo più
+connesso partecipa a più relazioni: **potrebbe essere la fisica.**
+
+**Se qualcuno sa rispondere a questo, la scelta fra `nudo` e `linea` diventa una conseguenza invece
+che una preferenza.** È la domanda che mi interessa di più, ed è aperta a Claude web quanto a Luca.
+
+---
+
+## 3. GLI ALTRI FRONTI CHE RESTANO APERTI, con la loro condizione
+
+- **`Z31`** — i quattro sigilli non ri-girabili. **Meccanismo proposto** (derivare il PRE da
+  `git cat-file` in binario, con rifiuto esplicito se il commit manca) **ma NON cablato: finché non
+  lo è, resta una proposta, non un presidio.**
+- **`Z9`** — `ramp` arriva al pieno a **~5000 passi**, i run ne fanno 120-500: **ogni misura di
+  questo tipo vive nel transitorio.** Non toccata per ordine.
+- **`SPINORE_VIVO = True` non è mai stato validato COME DEFAULT** — le campagne lo passavano da
+  fuori. I sei gruppi sani lo coprono, i quattro rotti **no**.
+- **Il punto 1 di `Z24`** (`refl`): **legge nuova**, non bonifica.
+- **4 semi sono il minimo**: un effetto vero ≤ 1 % è **invisibile** a questo disegno.
