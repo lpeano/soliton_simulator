@@ -6500,3 +6500,69 @@ Fra soglia `10×` e `100×` la mediana i valori cambiano (`A_1` `0.400 → 0.611
   topologica), non la predizione.**
 - **Nessuna identificazione.** *(La Y a 120° è Fermat-Steiner e compare ovunque: era scritto nel task
   history PRIMA, proprio perché se fosse uscita non sarebbe stata una spiegazione.)*
+
+---
+
+## 9.65 — **La Y non c'è: né nel denso, né nel vuoto, né nella variazione. Il dipolo sì**
+
+**Data:** 2026-09-18 · blob **`a1ae5090` invariato** · **nessun run nuovo**
+**Letture fissate PRIMA:** `0f7cea6` · **Referto:** `doc/REFERTO_Y_nel_vuoto.md` → **`Z51`**
+**`Z50` QUALIFICATA:** vale **per la regione densa**.
+
+> **⚠ `--tau-luce` HA IL SIGILLO FALLITO: ramo non certificato, ogni numero lo eredita.** Un seme.
+
+### Il rilievo era giusto — ma nel posto giusto la Y non c'è lo stesso
+
+`Z50` aveva misurato `A_m` **sul denso**; se i bracci sono **ciano** — interferenza distruttiva,
+`|psi|` basso — **stavano nel complemento.** **Misurato il complemento:**
+
+**① IL VUOTO INTERNO È ISOTROPO**
+
+```
+A_3/nullo ai sei istanti:  1.14 · 0.68 · 0.36 · 0.70 · 1.31 · 1.71     -> MAI due volte il nullo
+frame 10 (883 nodi, la statistica migliore):  A_3/nullo = 1.14
+istogramma del vuoto (f115, 268 nodi): tutti e 24 i bin fra 0.448 e 1.343, media 1
+                                        (nel DENSO il picco arrivava a 3.998)
+```
+
+**Il controllo pesato sul DEFICIT concorda ovunque** *(terza cifra)*: **il risultato non dipende
+dalla scelta del peso** — era la riserva che avevo scritto prima.
+
+**② LA VARIAZIONE — la misura che doveva rispondere, e risponde NO**
+
+```
+intervallo     nodi  N_eff | A_3/nullo   A_1/nullo
+f10 -> 115      215  187.9 |   1.66        0.69
+f190 -> 270     157   14.9 |   0.99        1.34    <- N_eff 15: NON SI LEGGE
+f270 -> 375     413   43.4 |   1.57        0.66
+f375 -> 400     733   76.3 |   1.92        3.37
+```
+
+> **`A_3` non supera `1.92` in nessun intervallo. Il campo NON si accende lungo tre bracci.**
+> **⚠ Ma nell'ultimo `A_1/nullo = 3.37`: si accende lungo UNA direzione.**
+
+**③ IL TEMPO:** il vuoto **resta al nullo per tutti e sei gli istanti**. **Non c'è nessun «alto
+presto e poi cala»: non c'è mai stato niente da calare.**
+
+### Verdetto contro le quattro letture
+
+**Scatta la SECONDA** — *«`A_3` al nullo in tutte e tre le varianti → artefatto della colormap»* —
+**e la TERZA a metà**: `A_1` domina nella **variazione** (`3.37×`) e nel **denso** (`3.3×`), **ma non
+nel vuoto**, dove è al nullo.
+
+> **Con TRE definizioni diverse di «dove cercare» e col nullo accanto a ogni numero, `A_3` non
+> supera MAI due volte il nullo.** **`A_1` sì, in due varianti su tre.**
+> **Il sistema si accende lungo UNA direzione, non tre.**
+
+### ⚠ E un limite VERO della misura, non una scusa
+
+**`A_m` sui NODI pesa i PUNTATORI; il fotogramma mostra IL CAMPO INTERPOLATO fra di essi**
+(`campo_spaziale`, kernel FFT). **Sono due oggetti diversi, e questa misura ha guardato il secondo.**
+**Per chiudere davvero servirebbe `A_m` sulla GRIGLIA, e NON è stato fatto.**
+
+### Cosa non dice
+
+**Non dice che nel video non si veda niente**: dice che **ciò che si vede non ha una firma a tre
+bracci nella distribuzione angolare dei nodi in `rho_spin`.**
+**Non è un verdetto sulla predizione di Luca**, che riguarda il **CICLO** e si decide col run a due
+masse — **in corso, frame 80/400.**

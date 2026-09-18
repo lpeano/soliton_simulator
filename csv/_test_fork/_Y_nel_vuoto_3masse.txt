@@ -1,0 +1,89 @@
+[TIMBRO] _Y_nel_vuoto.py  sha1-BYTE b7ec7f46  committato e pulito
+======================================================================================================================
+LA Y NEL VUOTO E NELLA VARIAZIONE   [csv/_test_fork/_gvideo, 3 masse]   -- NESSUN RUN NUOVO
+======================================================================================================================
+  ⚠ `--tau-luce` HA IL SIGILLO FALLITO (par.0). UN SEME. NESSUN VERDETTO DI FISICA.
+  ⚠ L'ispezione dei fotogrammi e' VISIVA: qui si FALSIFICA, non si conferma.
+
+  istanti: [10, 115, 190, 270, 375, 400]   n0 = 2391   (angoli delle masse: 0, 120, 240)
+
+--- ① IL VUOTO: `A_m` sui nodi RAREFATTI della regione interna ---
+  caso                       nodi     N_eff     | A_1      A_2      A_3      A_6      | NULLO     rapporti
+  f10 vuoto<1x med NONpes    883      883.0     | 0.0125   0.0349   0.0385   0.0243   | 0.0337    A_3/nullo 1.14  A_1/nullo 0.37
+  f10   (controllo DEFICIT)  883      883.0     | 0.0124   0.0349   0.0384   0.0244   | 0.0337    A_3/nullo 1.14  A_1/nullo 0.37
+  f10 vuoto<0.1x med NONpes  883      883.0     | 0.0125   0.0349   0.0385   0.0243   | 0.0337    A_3/nullo 1.14  A_1/nullo 0.37
+  f10   (controllo DEFICIT)  883      883.0     | 0.0124   0.0349   0.0384   0.0244   | 0.0337    A_3/nullo 1.14  A_1/nullo 0.37
+  f115 vuoto<1x med NONpes   268      268.0     | 0.0472   0.0868   0.0417   0.0406   | 0.0611    A_3/nullo 0.68  A_1/nullo 0.77
+  f115   (controllo DEFICIT) 268      266.6     | 0.0480   0.0932   0.0391   0.0347   | 0.0612    A_3/nullo 0.64  A_1/nullo 0.78
+  f115 vuoto<0.1x med NONpes 107      107.0     | 0.1418   0.1771   0.1166   0.0934   | 0.0967    A_3/nullo 1.21  A_1/nullo 1.47
+  f115   (controllo DEFICIT) 107      106.8     | 0.1394   0.1811   0.1196   0.0939   | 0.0967    A_3/nullo 1.24  A_1/nullo 1.44
+  f190 vuoto<1x med NONpes   222      222.0     | 0.0649   0.0407   0.0243   0.0506   | 0.0671    A_3/nullo 0.36  A_1/nullo 0.97
+  f190   (controllo DEFICIT) 222      222.0     | 0.0650   0.0408   0.0243   0.0507   | 0.0671    A_3/nullo 0.36  A_1/nullo 0.97
+  f190 vuoto<0.1x med NONpes 222      222.0     | 0.0649   0.0407   0.0243   0.0506   | 0.0671    A_3/nullo 0.36  A_1/nullo 0.97
+  f190   (controllo DEFICIT) 222      222.0     | 0.0650   0.0408   0.0243   0.0507   | 0.0671    A_3/nullo 0.36  A_1/nullo 0.97
+  f270 vuoto<1x med NONpes   222      222.0     | 0.0461   0.0152   0.0473   0.0770   | 0.0671    A_3/nullo 0.70  A_1/nullo 0.69
+  f270   (controllo DEFICIT) 222      222.0     | 0.0457   0.0154   0.0471   0.0771   | 0.0671    A_3/nullo 0.70  A_1/nullo 0.68
+  f270 vuoto<0.1x med NONpes 222      222.0     | 0.0461   0.0152   0.0473   0.0770   | 0.0671    A_3/nullo 0.70  A_1/nullo 0.69
+  f270   (controllo DEFICIT) 222      222.0     | 0.0457   0.0154   0.0471   0.0771   | 0.0671    A_3/nullo 0.70  A_1/nullo 0.68
+  f375 vuoto<1x med NONpes   224      224.0     | 0.1154   0.1751   0.0875   0.0362   | 0.0668    A_3/nullo 1.31  A_1/nullo 1.73
+  f375   (controllo DEFICIT) 224      184.9     | 0.0956   0.1892   0.0858   0.0779   | 0.0736    A_3/nullo 1.17  A_1/nullo 1.30
+  f375 vuoto<0.1x med NONpes 106      106.0     | 0.0876   0.2292   0.1095   0.1193   | 0.0971    A_3/nullo 1.13  A_1/nullo 0.90
+  f375   (controllo DEFICIT) 106      105.9     | 0.0880   0.2275   0.1108   0.1194   | 0.0972    A_3/nullo 1.14  A_1/nullo 0.91
+  f400 vuoto<1x med NONpes   188      188.0     | 0.1328   0.1450   0.0692   0.1008   | 0.0729    A_3/nullo 0.95  A_1/nullo 1.82
+  f400   (controllo DEFICIT) 188      170.9     | 0.1438   0.1499   0.1019   0.0820   | 0.0765    A_3/nullo 1.33  A_1/nullo 1.88
+  f400 vuoto<0.1x med NONpes 113      113.0     | 0.1790   0.1174   0.1611   0.0605   | 0.0941    A_3/nullo 1.71  A_1/nullo 1.90
+  f400   (controllo DEFICIT) 113      112.9     | 0.1799   0.1190   0.1604   0.0633   | 0.0941    A_3/nullo 1.70  A_1/nullo 1.91
+
+--- ② LA VARIAZIONE: `A_m` pesato su `Delta rho_spin > 0`, regione interna ---
+  intervallo                 nodi     N_eff     | A_1      A_2      A_3      A_6      | NULLO     rapporti
+  f10->115  D>0  (comuni 2391) 215      187.9     | 0.0500   0.0484   0.1213   0.1024   | 0.0730    A_3/nullo 1.66  A_1/nullo 0.69
+  f115->190                  20        (meno di 30: NON SI LEGGE)
+  f190->270  D>0  (comuni 4307) 157      14.9      | 0.3476   0.2252   0.2566   0.2399   | 0.2595    A_3/nullo 0.99  A_1/nullo 1.34
+  f270->375  D>0  (comuni 5443) 413      43.4      | 0.1007   0.2452   0.2380   0.0171   | 0.1518    A_3/nullo 1.57  A_1/nullo 0.66
+  f375->400  D>0  (comuni 7480) 733      76.3      | 0.3864   0.3151   0.2196   0.1350   | 0.1145    A_3/nullo 1.92  A_1/nullo 3.37
+
+--- ③ L'ANDAMENTO NEL TEMPO: `A_1` e `A_3`, DENSO contro VUOTO, col nullo ---
+  frame    | DEN A_1   DEN A_3   DEN null  DEN N_ef  | VUO A_1   VUO A_3   VUO null  VUO N_ef 
+10       | -         -         -         0         0.0125    0.0385    0.0337    883.0    
+115      | -         -         -         0         0.0472    0.0417    0.0611    268.0    
+190      | -         -         -         0         0.0649    0.0243    0.0671    222.0    
+270      | -         -         -         0         0.0461    0.0473    0.0671    222.0    
+375      | -         -         -         18        0.1154    0.0875    0.0668    224.0    
+400      | 0.4001    0.2310    0.1198    69.6      0.1328    0.0692    0.0729    188.0    
+
+--- L'ISTOGRAMMA ANGOLARE DEL VUOTO INTERNO (rho_spin < mediana), al frame 115 ---
+  268 nodi. Angoli delle masse: 0, 120, 240
+     -172.5 deg  1.343   #############################
+     -157.5 deg  1.075   #######################
+     -142.5 deg  1.343   #############################
+     -127.5 deg  0.985   #####################
+     -112.5 deg  1.075   #######################
+      -97.5 deg  0.537   ###########
+      -82.5 deg  0.985   #####################
+      -67.5 deg  1.075   #######################
+      -52.5 deg  1.164   #########################
+      -37.5 deg  1.075   #######################
+      -22.5 deg  0.985   #####################
+       -7.5 deg  1.164   #########################
+       +7.5 deg  0.985   #####################
+      +22.5 deg  1.343   #############################
+      +37.5 deg  0.627   #############
+      +52.5 deg  0.896   ###################
+      +67.5 deg  0.985   #####################
+      +82.5 deg  1.075   #######################
+      +97.5 deg  0.716   ###############
+     +112.5 deg  0.448   #########
+     +127.5 deg  0.985   #####################
+     +142.5 deg  0.806   #################
+     +157.5 deg  0.985   #####################
+     +172.5 deg  1.343   #############################
+
+  COME SI LEGGE -- le quattro letture erano fissate PRIMA (task history 0f7cea6):
+    A_3 alto sul VUOTO ai frame precoci E sulla VARIAZIONE -> la Y esiste come struttura del campo
+        rarefatto e come canale di accensione. E' UN RISULTATO.
+    A_3 al NULLO in tutte e tre le varianti -> ARTEFATTO DELLA COLORMAP: l'osservazione visiva era
+        sbagliata, e Z50 resta la conclusione.
+    A_1 domina anche sul vuoto e sulla variazione -> IL DIPOLO E' LA STRUTTURA VERA, e la domanda
+        cambia: da dove viene un dipolo in una configurazione a TRE?
+    N_eff troppo basso -> NON SI LEGGE, e si dichiara.
+======================================================================================================================
