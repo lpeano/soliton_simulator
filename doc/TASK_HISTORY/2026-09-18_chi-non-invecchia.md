@@ -105,11 +105,45 @@ run nuovo, `EMB_IT`/`TAU_A`/`ramp` non si toccano.**
 
 ## 3. TODO DEL NEXT STEP
 
-- [ ] **①** distribuzione di `eta` e frazione alla semina, ai cinque istanti
-- [ ] **②** sono sempre gli stessi? (Jaccard) e **chi sono** (grado, raggio)
-- [ ] **③** il falsificatore della mitosi: età anagrafica dall'indice
-- [ ] **④** `r` dei fermi contro la popolazione, e **il confronto con `f = 0` di `Z44`**
-- [ ] **verdetto contro le cinque letture**, **senza curare**
-- [ ] se regge la prima: **proporre il TESTO di `Z9` riscritta, NON cablarlo**
-- [ ] registro + relazione + **CHECKPOINT**
-- [ ] **⚠ NON toccare:** `EMB_IT`, `TAU_A`, `ramp`, il gauge, il `+1e-6`
+- [x] **①** distribuzione di `eta` e frazione alla semina, ai cinque istanti
+- [x] **②** sono sempre gli stessi? (Jaccard) e **chi sono** (grado, raggio)
+- [x] **③** il falsificatore della mitosi: età anagrafica dall'indice
+- [x] **④** `r` dei fermi contro la popolazione, e **il confronto con `f = 0` di `Z44`**
+- [x] **verdetto contro le cinque letture**, **senza curare**
+- [x] se regge la prima: **proporre il TESTO di `Z9` riscritta, NON cablarlo**
+- [x] registro + relazione + **CHECKPOINT**
+- [x] **⚠ NON toccato:** `EMB_IT`, `TAU_A`, `ramp`, il gauge, il `+1e-6`
+
+---
+
+## 4. ESITO
+
+**PRESO, ed era il contributo del giro: il conto fatto PRIMA di aprire i `.pkl`.**
+Avevo previsto `r_fermi/r_floor = 1.0025` dalla sola crescita di `eta`; **misurato `1.0000`, su
+quattro intervalli su quattro, p95 incluso.** **La quinta lettura — la mia — era quella giusta: la
+causa non è `eta` né `ramp`, è il pavimento di `ritmo()`.**
+
+**PRESO: il falsificatore della mitosi**, escluso in modo totale (4 nodi nuovi, **zero** fermi fra
+loro), e l'età anagrafica ricavata **esattamente** dall'indice invece che stimata.
+
+**PRESO: la distinzione «mediana bassa» contro «mediana pinnata».** La risposta è **nessuna delle
+due**: `p05 = p25 = mediana = p75` **identici** — **non una mediana bassa, un BLOCCO.**
+
+**NON PRESO — e sono due, entrambe più grandi di quanto mi aspettassi:**
+1. **la frazione: prevedevo «~50 %», è il `93 %`**, e **non cala** in 1200 passi;
+2. **CHI sono.** Non l'avevo previsto affatto: **sono LE TRE MASSE** (grado `371`, raggio
+   `8.00 = sep`), e i mobili sono **il centro** (grado `9`). **La domanda «metà dei nodi non
+   invecchia?» aveva una risposta strutturale, non statistica.**
+
+**E UNA COSA CHE NON SO SPIEGARE, e non la invento:** perché i nodi a grado **371** abbiano
+`|psi_spin|` **mille volte più debole** di quelli a grado **9**. **È il fatto più strano della
+misura.** La quinta lettura diceva *«nessuna regge → si dice, senza inventare»*: **lo dico.**
+
+## 5. TODO DEL PROSSIMO PASSO
+
+- [ ] **`Z9` riscritta: il testo è PROPOSTO nel referto §8, decide Luca.** Il punto chiave è il
+      criterio di chiusura: **non «`ramp` mediano cresce»**, perché quel `ramp` è di un nodo fermo
+- [ ] **`Z43` va rovesciata:** in questa configurazione il metro **è `1e-9`**, non oscilla del 62 %
+- [ ] **la domanda aperta:** perché grado alto ⟹ `|psi_spin|` mille volte più debole?
+- [ ] **la precedenza col mandato sull'embedding la decide Luca**
+- [ ] **⚠ NON toccato:** `EMB_IT`, `TAU_A`, `ramp`, il gauge, il `+1e-6`, il `max(...,1e-9)`

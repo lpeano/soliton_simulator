@@ -5864,3 +5864,98 @@ copiare il file, con verifica del `_db_step` dopo la scrittura.**
 > che si distingue dagli altri solo per il nome non è un dato».)*
 
 **Stabilità a 722 passi: `n_naninf = 0` su tutte le righe, `n` da 1196 a 1203.**
+
+---
+
+## 9.57 — **Non è metà: è il 93 %, sono SEMPRE GLI STESSI, e sono LE TRE MASSE. E il gauge del tempo è la costante `1e-9`**
+
+**Data:** 2026-09-18 · **blob `a1ae5090` INVARIATO** — nessuna cura, nessun run nuovo
+**Dati:** i `.pkl` del run **continuo** a 1200 passi (seed 900, 1 invocazione, 0 resume)
+**Task history col conto fatto PRIMA:** `49c0c28` · **Referto:** `doc/REFERTO_chi_non_invecchia.md`
+**⚠ In testa:** `--tau-luce` **ha il sigillo FALLITO**, `--chi-basc` attivo, **un seme**, `Z9` aperta.
+
+### Il conto scritto PRIMA di aprire i `.pkl`: previsto `1.0025`, misurato `1.0000`
+
+Da `eta += DT·r` si ricava `r` dalla sola crescita di `eta`. Il pavimento di `ritmo()` vale
+`1e-6/(1/√2+1e-6) = 1.414212e-06`, che in 560 passi accumula `7.92e-06` — **contro `7.90e-06`
+misurati.** Misurato poi dai `.pkl`, su **quattro intervalli su quattro**:
+
+```
+r FERMI mediana 1.414213e-06     r FERMI p95 1.414222e-06     r/r_floor = 1.0000
+```
+
+> **Non sono «lenti»: sono al PAVIMENTO ASSOLUTO, e lo è anche il loro 95° percentile.**
+
+### ① Non è metà — è il 93 %, e non cala
+
+```
+step    n      p05/p25/MEDIANA/p75 (IDENTICI)   p95        max       | FERMI  FRAZ.
+120     1199   0.010001683                      0.885813   1.54005   | 1116   0.9308
+800     1203   0.0100113                        8.329932  10.28641   | 1116   0.9277
+1200    1204   0.010016956                     13.034878  15.91664   | 1116   0.9269
+```
+
+**`p05 = p25 = mediana = p75`, identici.** **Tre quarti della popolazione allo stesso valore**, e si
+muove **solo il `p95`**. **Non è «mediana bassa»: è un blocco.**
+
+### ② Sempre gli stessi — `Jaccard = 1.0000` ovunque
+
+`120→130→470→800→840`: **1.0000 a ogni transizione**, primo contro ultimo **1.0000**, `|B\A| = 0`.
+**Gli stessi identici 1116 nodi per 720 passi. Nessuno entra, nessuno esce.**
+
+### ③ Il falsificatore della mitosi: **escluso in modo totale**
+
+**4 nodi nuovi in 1200 passi, e ZERO di loro è fermo.** *(Età anagrafica esatta: i nodi si appendono
+in coda, quindi l'indice è l'ordine di nascita.)* **Non è il transitorio di nascita.**
+
+### ⚠ CHI SONO — e qui la voce cambia natura
+
+```
+           n      grado p25/med/p75     raggio p25/med/p75
+FERMI     1116    371 / 371 / 371       7.732 / 8.004 / 8.281
+mobili      87      7 /   9 /  12       1.739 / 2.504 / 3.518
+```
+
+> **Raggio mediano `8.004` = `sep`: i «fermi» SONO le tre masse seminate. I «mobili» sono il
+> centro.** **Grado `371` contro `9`: un fattore 41.** *(Conferma indipendente dal tracking del
+> batch: `TRACK accr=1116`, lo stesso numero.)*
+
+### ⚠ IL ROVESCIAMENTO — il gauge del tempo non è più una mediana
+
+```
+median(|f|) = 1.000000e-09  a TUTTI gli istanti   <- il PAVIMENTO max(median, 1e-9) E' ATTIVO
+
+           f mediana        frazione f == 0 ESATTO    x = f/med mediana     |psi_spin|
+FERMI      0.0000e+00       0.4928 -> 0.6102          0.0000e+00            6.03e-06 PIATTO
+mobili     0.0583 -> 0.175  0.0000                    5.8e+07 -> 1.7e+08    9.8e-03  (x27)
+```
+
+**Il 49-61 % dei nodi ha `f` esattamente zero ⟹ `median(|f|) = 0` ⟹ `med` cade sulla costante.**
+
+> **Il gauge del tempo proprio non è una statistica del sistema: è il numero `1e-9`.**
+> È alla lettera l'avvertimento di CLAUDE.md par.9: *«alle scale simulabili la regolarizzazione
+> diventa il parametro fisico»*.
+
+**E il sistema si separa in due popolazioni che non si parlano: il 93 % a `x = 0` e il 7 % a
+`x ≈ 10⁸`. Non c'è più nessuno in mezzo.**
+
+### Cosa questo NON dice
+
+- **`Z44` non è smentita: NON SI TRASPORTA.** Là i `f = 0` erano **1-2 su 450** ed erano **neonati**;
+  qui sono **il 53-61 %** e sono **le masse**. **Due popolazioni diverse, entrambe da citare con la
+  loro scena** (A3c).
+- **NON so perché** i nodi a grado **371** abbiano `|psi_spin|` **mille volte più debole** di quelli
+  a grado **9**. **È il fatto più strano della misura e non ho una spiegazione misurata. Non la
+  invento** — era la quinta lettura, *«nessuna regge → si dice»*.
+- **Non dico che sia un difetto del codice o della fisica.**
+
+### Cosa resta a Luca
+
+1. **`Z9` va riscritta**, e **il testo proposto è nel referto §8 — NON cablato.** Il punto chiave:
+   **il criterio di chiusura non può essere «`ramp` mediano cresce», perché il `ramp` mediano è
+   quello di un nodo che non si muove.**
+2. **`Z43` va rovesciata:** non è che il metro oscilla del 62 % — **in questa configurazione il metro
+   è `1e-9`.**
+3. **Il mandato sull'embedding**: la NOTA diceva *«se metà dei nodi non invecchia, l'oscillazione del
+   62 % potrebbe venire da lì»*. **Misurato: il nodo mediano è un nodo mai maturato, ed è una delle
+   masse.** **La precedenza va decisa da te.**

@@ -1,0 +1,77 @@
+[TIMBRO] _chi_non_invecchia.py  sha1-BYTE 44611f63  committato e pulito
+======================================================================================================================
+CHI NON INVECCHIA -- dai .pkl del run continuo. NESSUN RUN NUOVO, NESSUNA CURA.
+======================================================================================================================
+  r al PAVIMENTO di ritmo() : 1.414212e-06   ->  dt_n = DT*r_floor = 1.414212e-08
+
+  istanti disponibili (dal `_db_step`, non dal nome): [120, 130, 470, 800, 840, 1200]
+    step 120    n = 1199    file stato_120.pkl
+    step 130    n = 1199    file stato_130.pkl
+    step 470    n = 1203    file stato_470.pkl
+    step 800    n = 1203    file stato_800.pkl
+    step 840    n = 1203    file stato_840.pkl
+    step 1200   n = 1204    file stato_1200.pkl
+
+  valore di semina di `eta` (mediana al primo istante): 0.010001683
+  TOLLERANZA DICHIARATA: `eta <= semina + 3 * DT*r_floor*step` -- cioe' TRE VOLTE cio' che il
+  pavimento accumulerebbe. Chi sta sotto NON ha accumulato piu' del pavimento: e' FERMO.
+
+--- (1) LA DISTRIBUZIONE DI `eta`, e quanti sono ancora al valore di semina ---
+  step    n       p05         p25         MEDIANA      p75         p95         max         | n FERMI   FRAZIONE 
+  120     1199    0.010001683 0.010001683 0.010001683  0.010001683 0.88581345  1.5400601   | 1116      0.9308   
+  130     1199    0.010001824 0.010001824 0.010001824  0.010001824 0.9938182   1.6708981   | 1116      0.9308   
+  470     1203    0.010006633 0.010006633 0.010006633  0.010006633 4.7791408   5.8166958   | 1116      0.9277   
+  800     1203    0.0100113   0.0100113   0.0100113    0.0100113   8.3299318   10.286408   | 1116      0.9277   
+  840     1203    0.010011865 0.010011865 0.010011865  0.010011865 8.7390917   10.850185   | 1116      0.9277   
+  1200    1204    0.010016956 0.010016956 0.010016956  0.010016957 13.034878   15.916638   | 1116      0.9269   
+  (frazione ~0.5 che NON cala -> meta' del sistema e' ferma. Se cala -> e' una coda.)
+
+--- (3) ⚠ IL FALSIFICATORE DELLA MITOSI, applicato PRIMA di descrivere ---
+  step    n         nati dopo t0  fermi NATI dopo fermi PRESENTI a t0
+  120     1199      0             0               1116           
+  130     1199      0             0               1116           
+  470     1203      4             0               1116           
+  800     1203      4             0               1116           
+  840     1203      4             0               1116           
+  1200    1204      5             0               1116           
+  (se i fermi fossero i NEONATI, il loro numero sarebbe <= 'nati dopo t0'.)
+
+--- (2) SONO SEMPRE GLI STESSI? (Jaccard, lo stesso metodo di `Z44`) ---
+  step 120    -> 130    : |A| 1116   |B| 1116    intersezione 1116    JACCARD 1.0000  |B\A| 0
+  step 130    -> 470    : |A| 1116   |B| 1116    intersezione 1116    JACCARD 1.0000  |B\A| 0
+  step 470    -> 800    : |A| 1116   |B| 1116    intersezione 1116    JACCARD 1.0000  |B\A| 0
+  step 800    -> 840    : |A| 1116   |B| 1116    intersezione 1116    JACCARD 1.0000  |B\A| 0
+  step 840    -> 1200   : |A| 1116   |B| 1116    intersezione 1116    JACCARD 1.0000  |B\A| 0
+  PRIMO (120) contro ULTIMO (1200): intersezione 1116 su |primo| 1116 = 1.0000
+
+  CHI SONO (all'ultimo istante): grado e raggio, fermi contro tutti
+    FERMI    n 1116   | grado p25 371     mediana 371     p75 371     | raggio p25 7.731   mediana 8.004   p75 8.279  
+    mobili   n 88     | grado p25 6.75    mediana 9       p75 12      | raggio p25 1.733   mediana 2.522   p75 3.522  
+
+--- (4) ⚠ `r` DEI FERMI, ricavato da `eta += DT*r`, contro il PAVIMENTO ---
+  intervallo         r FERMI med   r FERMI p95   r/r_floor     | r tutti med   r tutti p95  
+  120 -> 130         1.414213e-06  1.414222e-06  1.0000        | 1.414214e-06  7.369922e-01 
+  130 -> 470         1.414214e-06  1.414224e-06  1.0000        | 1.414215e-06  1.045433e+00 
+  470 -> 800         1.414213e-06  1.414224e-06  1.0000        | 1.414213e-06  1.079480e+00 
+  800 -> 840         1.414213e-06  1.414225e-06  1.0000        | 1.414213e-06  1.138791e+00 
+  840 -> 1200        1.414215e-06  1.414231e-06  1.0000        | 1.414215e-06  1.197165e+00 
+  (r/r_floor ~ 1 -> i fermi sono AL PAVIMENTO ASSOLUTO di `ritmo()`, non 'lenti'.)
+
+  E QUANTI DI LORO HANNO `f = 0` ESATTO? (il confronto diretto con `Z44`)
+    step 120     fermi 1116     |psi_spin| = 0 ESATTO: 0        fermi CON psi_spin=0: 0
+    step 130     fermi 1116     |psi_spin| = 0 ESATTO: 0        fermi CON psi_spin=0: 0
+    step 470     fermi 1116     |psi_spin| = 0 ESATTO: 0        fermi CON psi_spin=0: 0
+    step 800     fermi 1116     |psi_spin| = 0 ESATTO: 0        fermi CON psi_spin=0: 0
+    step 840     fermi 1116     |psi_spin| = 0 ESATTO: 0        fermi CON psi_spin=0: 0
+    step 1200    fermi 1116     |psi_spin| = 0 ESATTO: 0        fermi CON psi_spin=0: 0
+
+  COME SI LEGGE -- le cinque letture erano fissate PRIMA (task history 49c0c28):
+    frazione ~50 %, sempre gli stessi, n quasi costante -> META' DEL SISTEMA CONGELATA: Z9 va
+                                                           RISCRITTA. Riporta e FERMATI.
+    flusso che riparte            -> transitorio di nascita (ma con 8 nodi nuovi NON torna).
+    mediana bassa ma frazione piccola -> CODA, non congelamento.
+    nessuna regge                 -> si dice, senza inventare la quinta.
+    ⚠ LA MIA: r dei fermi = PAVIMENTO -> la causa non e' `eta` ne' `ramp`, e' IL BOTTLENECK di
+      `ritmo()`, e la voce giusta e' Z43, non Z9. L'ordine dei due mandati si inverte.
+
+======================================================================================================================
