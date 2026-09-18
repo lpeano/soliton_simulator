@@ -35,6 +35,14 @@ import soliton_simulator as S
 
 PASSI = int(_ARGV[_ARGV.index("--passi") + 1]) if "--passi" in _ARGV else 120
 
+# ⚠ LE CAMPAGNE PASSANO --campo-spinoriale, e con quello `f` viene da `psi_spin[:,0]` con wrapping
+#   su 4pi invece che da `psi` su 2pi: e' un RAMO DIVERSO della stessa funzione. Misurare solo il
+#   ramo scalare direbbe qualcosa su una configurazione che le campagne non usano.
+for _f in ("CAMPO_SPINORIALE", "CS_DINAMICO", "CHI_CORE", "FORK_SU2", "FORK_SU2_MEM",
+           "SPINORE_CORRETTO"):
+    if ("--senza-" + _f.lower().replace("_", "-")) not in _ARGV:
+        setattr(S, _f, True)
+
 print("=" * 118)
 print("LA MEDIANA IN ritmo(): normalizzazione o GAUGE?   [%d passi, seme 5]" % PASSI)
 print("=" * 118)
