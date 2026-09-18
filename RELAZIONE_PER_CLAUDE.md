@@ -5229,3 +5229,111 @@ SUL RAPPORTO, ma va qualificata: NON è «il tempo proprio è rumore».** *(E no
    **`Z9` non rimisurata**: il §5 del mandato la prevede **dopo** la cura, e la cura non c'è.
 4. **LIMITE dichiarato:** un seme, 120 passi, una scena. La dominanza al 99.99 % **potrebbe essere di
    questa configurazione** (`_psi_spinor` nasce da `exp(i·φ)` sull'asse 0, `:2657`).
+
+---
+
+## 9.51 — **Il §1 del mandato «gauge del vuoto»: il gauge è nella materia, la MIA obiezione è REFUTATA, e `cs` è VIVO**
+
+**Data:** 2026-09-18 · blob `f8f46683` · 1 seme (5), 120 passi, ramo **4pi** su 124/126 invocazioni
+**Strumento:** `csv/_test_fork/_gauge_vuoto.py` (`dd48ec0`, committato **prima** di girarlo)
+**Task history con l'obiezione, pushato PRIMA:** `0e571b4` · **Referto:** `doc/REFERTO_gauge_vuoto.md`
+**NESSUNA CURA CABLATA.**
+
+### Il reperto del mandato, verificato dal sorgente
+
+`r` (in `ritmo()`, `:2076`) è ancorato a **`median(|f|)`** — la materia, e `median(x) = 1` per
+identità. `omega_clk` (in `STEP2_OROLOGIO`, `:2502`) è ancorato a **`CS_M`** — il vuoto. **E a
+`:2458` si moltiplicano.** Il reperto **è reale**.
+
+### (B) Il gauge attuale sta NELLA MATERIA — ma non «più degli altri»
+
+```
+cs/CS_M dei nodi x~1   : p05 0.5267  MEDIANA 0.8012  p95 0.9768   (n = 866)
+cs/CS_M di TUTTI       : p05 0.5283  MEDIANA 0.8265  p95 0.9922   (n = 13320)
+rho/peq  x~1 / TUTTI   : MEDIANA 1.272 / 1.354
+```
+
+Il nodo mediano di `f` ha **`cs/CS_M = 0.80`**, cioè **`(cs/CS_M)² = 0.64`** nel fattore di `STEP2`:
+**i due riferimenti non coincidono, la lettura «cura cosmetica» non scatta.** **Ma i nodi a `x ~ 1`
+non si distinguono dalla popolazione:** il nodo mediano di `f` è **un nodo tipico**. Non è che il
+gauge sia finito in un posto strano — **è che tutta la popolazione sta nella materia.**
+
+### (C) ⚠ LA MIA OBIEZIONE È REFUTATA DALLA MISURA
+
+Avevo scritto **prima di guardare** che `cs/CS_M` non è ancorato al vuoto ma a **`mean(I)`**
+(`_Lam = np.mean(_I)`, `:2914`), e che avrebbe avuto **un punto fisso della famiglia C12**.
+
+```
+median(I)/mean(I) :  0.145 (1/4)   0.653 (metà)   0.462 (ultimo)      -> FATTORE 4.5
+cs/CS_M mediano   :  1 -> 0.871 -> 0.823 -> 0.841
+```
+
+**Il nodo tipico NON è inchiodato.** **Dove avevo ragione:** la scala **è** `mean(I)`, ed è nel
+codice. **Dove avevo torto, ed è tutta la differenza:** `median(|f|)` inchioda **la mediana**, che
+**è** il nodo tipico, **per identità, sempre**; `mean(I)` inchioda **la media**, che su una
+distribuzione asimmetrica **non è il nodo tipico**.
+
+> **È P1 applicato a un'identità algebrica: avevo trasportato la FORMA di C12 senza guardare QUALE
+> statistica. È lo stesso errore della voce su `_tau`, che ho corretto io due giorni fa.**
+> **E l'esito è un argomento A FAVORE del mandato, che avevo scritto per metterlo in dubbio:** il
+> gauge proposto è **genuinamente meno auto-referenziale** di quello attuale.
+
+### (D) ⚠ Il punto che NON decido da solo
+
+```
+                          MEDIANA     x<1e-3    x>1e3    in [0.1,10]
+f*d/CS_M  (candidato)      0.0188     0.0394    0.0000     0.1510
+f*d/cs    (tempo-luce)     0.0244     0.0286    0.0000     0.1786
+f/median|f| (ATTUALE)      1.0000     0.0005    0.0000     0.8712
+```
+
+**Il criterio che avevo FISSATO non scatta:** avevo scritto *«fuori da O(1) di più di 3 ordini»*, e
+**sono 1.7**. **Non lo sposto a posteriori.** **Ma la frazione nella banda utile passa da `87.1 %` a
+`15.1 %`**, e poiché nessun nodo supera `x = 10`, **l'`84.9 %` finirebbe sotto `r_norm = 0.141`,
+cioè nel decimo inferiore della dilatazione** (oggi ≤ `12.9 %`). **Il tetto NON si apre** (`1.358`
+contro `√2 = 1.414`): **è la popolazione che scivola in fondo.** *(Aritmetica sulla distribuzione
+misurata, non una predizione di run.)*
+
+**DUE LETTURE LEGITTIME, e la misura NON le separa:** *(1)* **difetto** — col tipico a `0.019` il
+bottleneck lavora nel tratto **lineare** e la saturazione **non morde per nessuno**; *(2)* **fisica**
+— *«il nodo tipico ha un orologio 53 volte più lento del vuoto»* è **ciò che una dilatazione
+gravitazionale deve dire**, e con `median(|f|)` era **invisibile per costruzione**.
+
+> **Non è un «allineamento di gauge»: è un CAMBIO DI SIGNIFICATO di `r`**, da *«ritmo relativo al
+> nodo tipico»* a *«ritmo relativo al vuoto»*. **Non ho un criterio, scritto prima, che separi le
+> due letture, e non me lo invento adesso. DECIDE LUCA.**
+
+### ⚠ E UNA COSA CHE NON CERCAVO: **un fatto stabile di CLAUDE.md è caduto**
+
+```
+cs/CS_M            : min 0.2834   p05 0.5283   MEDIANA 0.8265   max 0.9998
+cs_std/cs per passo: MEDIANA 17.6 %   (min 16.6 %, max 19.4 %)
+frazione cs/CS_M > 0.99 : 6.3 %
+```
+
+CLAUDE.md par.9 dice, come **fatto stabile**: *«`cs_std/cs` fra 0.0086 % e 0.24 %, sempre sotto
+l'1 % … `tau = d/cs` **E'** `tau ∝ d` … il braccio ON non testa il tempo-luce»*.
+**È superato di ~2000 volte rispetto allo 0.0086 %, e sta SOPRA la soglia dell'1 % di 17 volte.**
+
+**E si sa perché, dal codice:** la cura di `cs_floor` del 2026-09-16 (**categoria D, nessun flag**)
+ha sostituito la scala **assoluta** `1/GAMMA² = 400` con la scala **relazionale** `mean(I)`. Con
+`400` e `I ~ 1e-7`, `sqrt(I/400) ~ 1e-5` — **`cs` era inchiodato**. Con `mean(I)`, `I/mean(I)` è
+**O(1) per costruzione, a qualunque densità**.
+
+> **`cs` non è vivo perché il sistema è maturato: è vivo perché la SCALA è diventata relazionale.**
+> **Una correzione di difetto senza flag ha riaperto un fronte che il registro dava per chiuso.**
+
+**Cosa NON dice:** non dice che `tau = d/cs` sia **fisicamente distinguibile** da `tau ∝ d` — quello
+richiede il **confronto**, non la dispersione. Dice che **la premessa che lo escludeva è caduta**.
+**Il giudizio «il braccio ON non testa il tempo-luce» va rifatto**, e con esso la parte del fronte
+**A** che vi si appoggiava. → **`Z39`**.
+
+### Cosa resta a Luca
+
+1. **Le due letture del (D)** — degenerazione o fisica. **Serve una regola, scritta prima.**
+2. **Se via libera: `CS_M/d_nodo`** — l'unico dei due candidati **senza statistica di popolazione al
+   suo interno**, e la stessa ancora già certificata in sezione A. **Ma prima va CONTATO il ramo
+   `d_nodo → LAM`** (`:3041`, `:3043`): il mandato vieta `LAM`, e per quella via rientrerebbe. **P5.**
+3. **`Z39` è un fronte suo:** rifare `tau = d/cs` contro `tau ∝ d` su ≥ 4 semi.
+4. **Limiti:** un seme, 120 passi, una scena; `cs_std/cs` **cresce col tempo**, quindi va citato con
+   il passo. Fallback `cs = CS_M` scattato **2 volte su 248** (`0.8 %`).

@@ -128,9 +128,53 @@ cucio `f`, non correggo `TAU_A`/`TAU_DIFF`/`PHI_CRIT`/`TAU_BG`.
 
 ## 3. TODO DEL NEXT STEP
 
-- [ ] **A** — distribuzione di `cs/CS_M` e `cs_std/cs` sul blob **attuale**
-- [ ] **B** — dove sta il nodo mediano di `f`: il suo `cs/CS_M` e il suo `rho/peq`
-- [ ] **C** — ⚠ `I/mean(I)` del nodo mediano a due istanti: il gauge proposto è ancorato a sé?
-- [ ] **D** — ⚠ `f·d/CS_M` è O(1)? frazione a pavimento e in saturazione
-- [ ] **STOP e riporta** col verdetto contro le cinque letture
-- [ ] *(solo con via libera)* §2 del mandato — i candidati, **derivati**
+- [x] **A** — distribuzione di `cs/CS_M` e `cs_std/cs` sul blob **attuale**
+- [x] **B** — dove sta il nodo mediano di `f`: il suo `cs/CS_M` e il suo `rho/peq`
+- [x] **C** — ⚠ `I/mean(I)` del nodo mediano a due istanti: il gauge proposto è ancorato a sé?
+- [x] **D** — ⚠ `f·d/CS_M` è O(1)? frazione a pavimento e in saturazione
+- [x] **STOP e riporta** col verdetto contro le cinque letture
+- [ ] **IN ATTESA DI LUCA** — *(solo con via libera)* §2 del mandato — i candidati, **derivati**
+
+---
+
+## 4. ESITO — *cosa il ragionamento preliminare aveva preso, e cosa no*
+
+**NON PRESO, ed e' la cosa piu' importante del giro: LA MIA OBIEZIONE E' REFUTATA.**
+Avevo scritto che `cs/CS_M`, essendo costruito su `mean(I)`, avrebbe avuto **un punto fisso della
+famiglia C12** e che la cura avrebbe **spostato il problema invece di risolverlo**.
+**Misurato: `median(I)/mean(I)` varia di un fattore 4.5 fra istanti.** Il nodo **tipico** non e'
+inchiodato.
+
+**E la ragione dell'errore e' precisa, non generica:** avevo trasportato la forma di C12
+(*«normalizzare sulla propria statistica inchioda il nodo tipico»*) **senza guardare QUALE
+statistica**. `median(|f|)` inchioda **la mediana**, che **e'** il nodo tipico, per identita'.
+`mean(I)` inchioda **la media**, che su una distribuzione asimmetrica **non e' il nodo tipico**.
+**E' P1 applicato a un'identita' algebrica — lo stesso errore della voce su `_tau`, e l'avevo
+scritto io stesso in CLAUDE.md due giorni fa.**
+
+**PRESO, e serviva:** la parte **strutturale** dell'obiezione resta vera e va nel referto — la scala
+**e'** `mean(I)`, il vuoto sta **solo nel numeratore**. Ma **la conseguenza operativa era sbagliata**,
+ed e' la conseguenza che decideva.
+
+**PRESO, e questo ha retto:** il rischio §1.4 (*la mediana e' ANCHE la normalizzazione*). **La banda
+utile passa da `87.1 %` a `15.1 %`.** **Se avessi guardato solo M4 («la scala si apre») avrei letto
+un PASS**, perche' il tetto e' quasi identico (`1.358` contro `1.414`) — **mentre l'`84.9 %` dei
+nodi scivola nel decimo inferiore.**
+
+**MA LA SOGLIA CHE AVEVO SCRITTO NON SCATTA:** avevo fissato *«piu' di 3 ordini»*, e sono **1.7**.
+**Non la sposto a posteriori.** **Il numero che decide l'ho trovato DOPO averlo cercato, e questo
+va detto: la lettura pre-fissata era la coppia giusta ma la soglia sbagliata.**
+
+**E una cosa che non cercavo:** **`cs_std/cs = 17.6 %`** — **un fatto stabile di CLAUDE.md e'
+caduto**, e la causa e' **una cura di categoria D fatta due giorni fa**. *(`Z39`.)*
+
+## 5. TODO DEL PROSSIMO PASSO
+
+- [ ] **DECIDE LUCA, e non io:** le due letture del §4 — **degenerazione** o **fisica** — e non ho
+      un criterio scritto prima che le separi
+- [ ] **se via libera:** `CS_M/d_nodo` (il principio), **ma PRIMA contare il ramo `d_nodo -> LAM`**
+      (`:3041`, `:3043`): il mandato vieta `LAM` e per quella via rientrerebbe. **P5.**
+- [ ] **`Z39` apre un fronte suo:** rifare `tau = d/cs` contro `tau ∝ d` su >= 4 semi, ora che `cs`
+      ha varianza. **Tocca il fronte `A`.**
+- [ ] **⚠ NON toccato:** `median(|f|)`, il `+1e-6`, `x/sqrt(1+x^2)`, `psi_spin`, il gauge, e nessun
+      numero tarato (`TAU_A`/`TAU_DIFF`/`PHI_CRIT`/`TAU_BG`)

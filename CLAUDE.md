@@ -888,6 +888,29 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   **qualunque estrazione futura** di un metodo dentro `_bloch_ritardato` o `_coppia_interferenza`
   rompera' il sigillo **allo stesso modo e in silenzio**. **Gli altri sigilli in-process non sono
   stati controllati per lo stesso difetto** (2026-09-16).
+- **⚠ SUPERATA il 2026-09-18 — `cs` E' VIVO: `cs_std/cs = 17.6 %`, non `0.0086-0.24 %`.**
+  **MISURATO** (`doc/REFERTO_gauge_vuoto.md` par.1, `csv/_test_fork/_gauge_vuoto.py`, blob
+  `f8f46683`, 1 seme, 120 passi, ramo 4pi): `cs/CS_M` ha **mediana 0.8265**, `p05` **0.528**, **min
+  0.283**; **`cs_std/cs` per passo vale 17.6 %** (min 16.6 %, max 19.4 %), e la frazione con
+  `cs/CS_M > 0.99` e' solo il **6.3 %**.
+  **La voce qui sotto dice, come fatto stabile, «sempre sotto l'1 %»: e' superata di un fattore
+  ~2000 rispetto allo 0.0086 % e ~73 rispetto allo 0.24 %, ed e' SOPRA la soglia dell'1 % di
+  DICIASSETTE volte.** La voce resta scritta perche' dice **com'era** e **a quale blob**: e' un'
+  informazione, non un errore (stessa convenzione dei marchi storici dello Strato 1).
+  **PERCHE', dal codice e non da una congettura:** la cura di `cs_floor` del 2026-09-16 (categoria D,
+  nessun flag) ha sostituito la scala **ASSOLUTA** `1/GAMMA^2 = 400` con la scala **RELAZIONALE**
+  `_Lam = mean(I)` (`:2914`, `:2921`). Con `400`, `I ~ 1e-7` dava `sqrt(I/400) ~ 1e-5` e **`cs` era
+  inchiodato a `CS_M`**; con `mean(I)` il rapporto `I/mean(I)` e' **O(1) per costruzione, a
+  QUALUNQUE densita'**.
+  > **`cs` non e' vivo perche' il sistema e' maturato: e' vivo perche' la SCALA e' diventata
+  > relazionale.** **Una correzione di difetto senza flag ha riaperto un fronte che il registro dava
+  > per chiuso «alle densita' simulabili».**
+  **⚠ E COSA QUESTO NON DICE:** **non** dice che `tau = d/cs` sia **fisicamente distinguibile** da
+  `tau ∝ d` nei run veri — quello richiede il **confronto**, non la dispersione. Dice che **la
+  premessa che lo escludeva e' caduta**. **Il giudizio «il braccio ON non testa il tempo-luce» VA
+  RIFATTO**, e con esso la parte del fronte **A** che vi si appoggiava. **-> `Z39` del registro.**
+  **LIMITE: un seme, 120 passi, una scena** — e il presidio sull'istante (poco sotto) vale anche qui:
+  quel rapporto **cresce col tempo**, quindi va citato **con il passo a cui e' misurato.**
 - **IL TEMPO-LUCE `tau = d/cs` NON E' TESTABILE ALLE DENSITA' SIMULABILI — MISURATO, non dedotto**
   (2026-09-15, rilievo di Luca). Con `--cs-dinamico` **acceso** e la cache **riparata**:
   `cs ∈ [1.99893, 2.0]`, `cs_std = 1.72e-4`, cioe' **`cs_std/cs = 0.0086 %`** — **116 volte sotto**

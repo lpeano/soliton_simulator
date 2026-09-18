@@ -1,0 +1,51 @@
+[TIMBRO] _gauge_vuoto.py  sha1-BYTE 72c4c39e  committato e pulito
+======================================================================================================================
+GAUGE DEL VUOTO -- la misura preliminare BLOCCANTE   [120 passi, seme 5]
+======================================================================================================================
+  config: CAMPO_SPINORIALE=True SPINORE_VIVO=True SPIN_FEEDBACK=True STEP2_OROLOGIO=True CS_DINAMICO=True
+  CS_M = 2   LAM = 0.8   DT = 0.01
+
+  invocazioni utilizzabili: 124 su 126   (rami: 4pi)
+  fallback cs=CS_M in _tempo_luce_nodo: 2 su 248 chiamate
+
+--- (A) `cs / CS_M`: il gauge proposto ha varianza? ---
+    cs/CS_M (30 passi)       : min 0.28336   p05 0.528252   MEDIANA 0.8265   p95 0.992235   max 0.999835   (n = 13320)
+    frazione > 0.99 : 0.063213     > 0.9 : 0.278604     < 0.5 : 0.036862
+    cs_std/cs per passo    : mediana 0.176142   min 0.165775   max 0.194487
+  (il registro dice 0.0086 % PRIMA di cs_floor; il mandato dice 11 % oggi. Questo e' il blob attuale.)
+
+--- (B) DOVE STA IL NODO MEDIANO di `f` (cioe' x ~ 1, il gauge ATTUALE)? ---
+    cs/CS_M dei nodi x~1     : min 0.310686   p05 0.52674   MEDIANA 0.801208   p95 0.976818   max 0.999361   (n = 866)
+    cs/CS_M di TUTTI         : min 0.28336   p05 0.528252   MEDIANA 0.8265   p95 0.992235   max 0.999835   (n = 13320)
+    rho/peq dei nodi x~1     : min 0.00341493   p05 0.277966   MEDIANA 1.27203   p95 2.81652   max 7.03346   (n = 866)
+    rho/peq di TUTTI         : min 3.14228e-05   p05 0.212592   MEDIANA 1.35412   p95 3.29607   max 14.4576   (n = 13320)
+  (cs/CS_M del mediano ~ 1  -> i due gauge quasi coincidono: cura COSMETICA.
+   cs/CS_M del mediano << 1 -> il gauge e' DENTRO la materia: l'allineamento vale.)
+
+--- (C) ⚠ IL GAUGE PROPOSTO E' ESSO STESSO ANCORATO? `I / mean(I)` a DUE istanti ---
+  passo      mean(I)        median(I)      median/mean    frac I>mean   
+  primo      0              0              0              0             
+  1/4        1.22494e-07    1.77809e-08    0.145157       0.264108      
+  meta'      2.09719e-06    1.37017e-06    0.653338       0.343115      
+  ultimo     2.49265e-05    1.15266e-05    0.462422       0.310811      
+  (mean(I/mean(I)) = 1 per IDENTITA'. La domanda e' se il nodo TIPICO -- la MEDIANA -- sia
+   anch'esso inchiodato: se median/mean e' stabile fra istanti, l'ancoraggio morde davvero.)
+    cs/CS_M MEDIANO nel tempo: primo 1   1/4 0.871125   meta' 0.822722   ultimo 0.841146
+
+--- (D) ⚠ `f * d_nodo / CS_M` E' O(1)? (se no, il bottleneck degenera PER TUTTI) ---
+    f*d/CS_M   (candidato)   : min 1.34566e-06   p05 0.00131405   MEDIANA 0.0188326   p95 0.449795   max 3.42613   (n = 13320)
+    f*d/cs     (tempo-luce)  : min 1.63875e-06   p05 0.00167696   MEDIANA 0.0244282   p95 0.471975   max 3.51089   (n = 13320)
+    f/median|f| (ATTUALE)    : min 9.04427e-05   p05 0.0785782   MEDIANA 1   p95 12.2263   max 190.493   (n = 13320)
+    f*d/CS_M     : frazione x < 1e-3 (pavimento) 0.039414   x > 1e3 (saturazione) 0.000000   in [0.1,10] 0.150976
+    f*d/cs       : frazione x < 1e-3 (pavimento) 0.028604   x > 1e3 (saturazione) 0.000000   in [0.1,10] 0.178604
+    f/median|f|  : frazione x < 1e-3 (pavimento) 0.000450   x > 1e3 (saturazione) 0.000000   in [0.1,10] 0.871246
+
+  COME SI LEGGE -- le letture erano fissate PRIMA (task history 0e571b4):
+    cs/CS_M mediano ~ 1            -> i due gauge quasi coincidono: cura COSMETICA, ci si ferma.
+    cs/CS_M mediano << 1           -> il gauge e' nella materia: l'allineamento vale.
+    cs_std/cs trascurabile         -> `cs` non puo' fare da gauge: la via CADE.
+    median(I)/mean(I) stabile ~ 1  -> il gauge PROPOSTO ha il proprio ancoraggio: si RIFORMULA.
+    f*d/CS_M fuori da O(1) di >3   -> NON CABLABILE: il bottleneck degenera per tutti, e M4 da solo
+    ordini                            sarebbe un FALSO PASS.
+
+======================================================================================================================
