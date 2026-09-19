@@ -7385,3 +7385,54 @@ fermo, **dall'esterno e senza toccarlo**, e non è installato.
 **Cosa resta salvabile: tutto.** 45 snapshot, 1.3 GB, cadenza 60, **nessun buco**, blob `7c4dec1d`
 ovunque. **Le misure del §3 si possono fare su metà run senza rigirare niente** — ed è esattamente
 il motivo per cui l'archivio è stato costruito. La ripresa è sigillata `5/5`.
+
+## I TRE CRICCHETTI — **una premessa cade, un'ipotesi cade, e l'errore della premessa è MIO** (2026-09-19)
+
+**`doc/REFERTO_tre_cricchetti.md`** · 45 snapshot del run fermato al 2700 · blob `7c4dec1d` ·
+seme **42** · **un seme, una scena**, `--tau-luce` **6/7**. **Nessun run, nessuna cura.**
+
+**① `chi_basc` — NON è una monocoltura che si ribalta.**
+
+```
+fr(perc_chi == +1):  0.0000 -> 0.1705     l'83 % e' ancora -1 al passo 2700
+transizione GRADUALE: 25 snapshot su 45 fra 0.05 e 0.95, passi 1260-2700, NON finita
+```
+
+> **La premessa opposta veniva da un difetto del MIO dump:** applicava il **modulo a tutto**, e su
+> `±1` il modulo dà `1` ovunque — `min = max = 1` significava *«tutti ±1»*, non *«tutti +1»*.
+> **Corretto alla fonte (`c56d992`) e rigenerato**, perché il file era già uscito dal repo.
+> **Seconda volta nella stessa giornata** che quella funzione mi si ritorce contro.
+
+**E la spiegazione non vale:** il controllo di consistenza fissato *prima* — `twn` ricostruito deve
+riprodurre `perc_chi` — **dà `0.972` contro la soglia `0.999`**. Quindi *«si ribalta perché `twn`
+supera `PHI_CRIT`»* **non lo scrivo**. Il fatto vale; la spiegazione no.
+
+**② `omega_s` — non è un cricchetto puro.** Mediana `0 → 51.22`, **ma 13 intervalli su 44
+scendono**: la lettura *«monotono ⇒ cricchetto (A7)»* **non scatta**. Cresce la **coda**: `p90` da
+`0.52` a **`1.5 × 10⁴`**.
+**E il `_tau` del mandato non è quello che gira:** con `--tau-luce` ON il ramo è
+`_tempo_luce_nodo`, non `TAU_A·max(dens/dens_rif, 0.05)`. Misurato **`tau/TAU_A ≈ 0.0138`**:
+settanta volte più piccolo. **Il punto fisso di `A3` qui non è in gioco.**
+
+**③ LA PORTATA — l'ipotesi CADE.** Misurato chiamando `lambda_nodi()` **dal codice vero**:
+
+```
+med(lambda) = 0.60917 COSTANTE su tutti i 2700 passi   (il pavimento sarebbe 0.12)
+rc = 1.8275 IMMOBILE        rc/d da 2.119 a 1.379  ->  MAI sotto 1
+ma il GRADO si separa: p50 496 -> 2,  p75 496 -> 68
+```
+
+> **La condizione che avrebbe dovuto reggerla non si verifica mai.** La separazione del grado c'è,
+> **per un'altra ragione**: non è la portata che si accorcia, **sono le distanze che crescono**
+> (`d` mediano `0.86 → 1.33`). **Il raggio di connessione resta fermo mentre il sistema si dilata.**
+
+**④ L'inerzia al pavimento cresce, e il cumulato sottostima**: per **intervallo** va a `0.1152`
+(30 intervalli su 43 in crescita), contro il `6.2 %` **cumulato**.
+
+**`Z9` è RIQUALIFICATA, non chiusa** (`Z9-ter`): `eta` max `36.37` su `TAU_A = 50` → **`ramp =
+0.73`**. **Il kernel stava maturando, e il sistema si è fermato mentre maturava.** La domanda non è
+più *«come lo faccio maturare»* ma *«cosa succede quando matura»*.
+
+**E le cure di ieri tengono**, in un sistema che degenera: `_ritmo_chiamate 2700` con
+`f_tutto_nullo 1`, `med_sul_pavimento 2`, `snap_identico 1` — **uno o due casi su 2700**.
+**`Z33`, `Z42`, `Z43` reggono.**
