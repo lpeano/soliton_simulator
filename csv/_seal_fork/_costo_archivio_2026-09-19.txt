@@ -1,0 +1,25 @@
+[TIMBRO] _costo_archivio.py  sha1-BYTE 4efcc767  committato e pulito
+snapshot: csv\_test_fork\_pilota6000\pilota.pkl
+dimensione NON compressa: 27.73 MB
+
+LETTURA (pickle.load, non compresso): 0.156 s  [min 0.148, max 0.255]
+  chiavi di testa: ['code_hash', 'content_hash', 'blob', 'committed_blob', 'commit', 'branch']
+  blob nel file: 'b9e07c733fe0031989ac300e1a88fc0c986534e2'   _db_step: 300
+
+COSTO DELLA SCANSIONE COMPLETA = N * t_load  (il blob e' una CHIAVE di un dizionario:
+un dizionario non si legge a meta', quindi oggi non c'e' modo di leggerlo piu' in fretta)
+   serie  6000 passi @ ogni 250 ->   24 snapshot ->     3.8 s di SOLO CONTROLLO all'avvio
+   serie  6000 passi @ ogni  50 ->  120 snapshot ->    18.8 s di SOLO CONTROLLO all'avvio
+   serie  2400 passi @ ogni  10 ->  240 snapshot ->    37.5 s di SOLO CONTROLLO all'avvio
+
+SCRITTURA non compressa: 0.129 s  ->  27.73 MB
+
+livello   scrittura    dimens.   rapporto    lettura
+1             0.82s     16.08MB     1.725x      0.32s
+6             1.27s     15.81MB     1.755x      0.31s
+9             4.42s     15.77MB     1.759x      0.32s
+
+NB: l'implementazione committata usa gzip.open SENZA compresslevel, cioe' il
+DEFAULT 9 -- la riga piu' lenta della tabella.
+NB: lettura a livello 9 misurata UNA volta sola (n=1) per non spendere: e' un
+    numero piu' rumoroso degli altri, e va letto come tale.

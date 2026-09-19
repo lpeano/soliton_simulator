@@ -7051,3 +7051,53 @@ dalla lettura, **senza vedere che la causa fosse la divergenza dal mandato**.
 **Cosa NON prova questa prova:** la serie è fatta di **nomi**, non di snapshot veri, quindi **il
 caricamento non è esercitato**. La rigiocata che *funziona* — dopo la correzione — va provata su
 **snapshot VERI**, e quella prova non è ancora stata fatta.
+
+## Il COSTO dell'archivio, misurato su uno snapshot vero (2026-09-19)
+
+**`csv/_seal_fork/_costo_archivio_2026-09-19.txt`**, script `4efcc767` committato e pulito,
+snapshot `csv/_test_fork/_pilota6000/pilota.pkl` — **27.73 MB** *(il task history diceva 26.45: è
+lo stesso file, `MB` contro `MiB`)*.
+
+**① La scansione del blob NON è cara, quindi il controllo si fa COMPLETO.** È la domanda che il
+mandato poneva prima della correzione di `D2`:
+
+```
+pickle.load di uno snapshot: 0.156 s
+  24 snapshot (6000 passi @ 250) ->  3.8 s di solo controllo all'avvio
+ 120 snapshot (6000 passi @  50) -> 18.8 s
+ 240 snapshot (2400 passi @  10) -> 37.5 s
+```
+
+> Su un run che dura **ore**, `3.8 s` all'avvio non sono un costo. **Quindi NON serve l'header né
+> alcuna lettura parziale: si carica ogni snapshot e si confronta il blob**, che è ciò che il
+> mandato chiedeva. *(Per curiosità: `blob` è la **terza** chiave del dizionario, quindi un header
+> sarebbe stato tecnicamente possibile — ma una soluzione non necessaria è solo un modo in più di
+> sbagliare.)*
+
+**② `gzip` comprime POCO e, al livello che ho committato, costa MOLTO.**
+
+| livello | scrittura | dimensione | rapporto | lettura |
+|---|---|---|---|---|
+| — (nessuno) | **0.129 s** | 27.73 MB | 1.000x | 0.156 s |
+| 1 | 0.82 s | 16.08 MB | 1.725x | 0.32 s |
+| 6 | 1.27 s | 15.81 MB | 1.755x | 0.31 s |
+| **9 (il default, ed è quello che ho committato)** | **4.42 s** | 15.77 MB | 1.759x | 0.32 s |
+
+> **⚠ Il livello 9 è irrazionale su questi dati, e non l'ha scelto nessuno: è il default di
+> `gzip.open`.** Costa **5.4 volte** il livello 1 per guadagnare il **2 %** di spazio
+> *(15.77 contro 16.08 MB)*, ed è **34 volte** più lento dello scrivere non compresso.
+> **Su float64 densi `gzip` dà `1.76x` e basta** — era l'incognita dichiarata nel task history
+> (*«potrebbe comprimere poco»*): **comprime poco.**
+
+**Cosa significa su una campagna vera**, ed è il numero che serve per decidere: `2400` passi con
+`--db-ogni 10` = **240 snapshot** → **17.7 minuti** di sola compressione al livello 9 contro
+**31 s** senza, per passare da `6.65 GB` a `3.78 GB`.
+
+> **NON HO SCELTO IL LIVELLO, e non lo scelgo: un livello è UN NUMERO SCELTO (par.3).** Il default
+> resta `9` finché Luca non decide. **Lo riporto con i numeri, che è ciò che il mandato chiede al
+> punto 5.**
+
+**⚠ E questo NON è `V8`, è `V8` PARZIALE, dichiarato tale nello script stesso:** qui c'è **una**
+scrittura e **una** lettura su **un** file. **`V8` vero deve misurare l'overhead PER PASSO dentro
+un run**, cioè quanto rallenta la simulazione. Questi numeri sono un **limite inferiore onesto**,
+non il costo di campagna.
