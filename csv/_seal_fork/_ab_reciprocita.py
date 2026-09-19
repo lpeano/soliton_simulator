@@ -53,7 +53,12 @@ sys.path.insert(0, _QUI)
 from _sigillo_archivio import uguale_contenuto
 
 DRIVER = os.path.join(RADICE, "csv", "_test_fork", "_scena_video_ripresa.py")
-ARCH = os.path.join(RADICE, "csv", "_test_fork", "_g6000")
+# ⚠ L'ARCHIVIO DI RIFERIMENTO E' _fin_B, NON _g6000: il passo 192 NON ESISTE in _g6000, che ha
+# cadenza 60 (60, 120, 180, 240...). Il 192 e' nella rigiocata fine a 6 passi -- e quella
+# rigiocata e' SIGILLATA 3/3: il suo snapshot 240 e' gia' stato verificato BYTE-IDENTICO a
+# quello di _g6000 (voce SB di _rigioca_finestre.txt). Quindi il confronto del ramo A contro
+# _fin_B/scena_000240 e' equivalente al confronto contro l'archivio, e lo e' PER MISURA.
+ARCH = os.path.join(RADICE, "csv", "_test_fork", "_fin_B")
 PPF = 6
 DA, A_ = 192, 240
 esiti = []
