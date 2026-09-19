@@ -7436,3 +7436,39 @@ più *«come lo faccio maturare»* ma *«cosa succede quando matura»*.
 **E le cure di ieri tengono**, in un sistema che degenera: `_ritmo_chiamate 2700` con
 `f_tutto_nullo 1`, `med_sul_pavimento 2`, `snap_identico 1` — **uno o due casi su 2700**.
 **`Z33`, `Z42`, `Z43` reggono.**
+
+## LA CRONOLOGIA — **`r` non cresce: parte saturo e oscilla. E `omega_s` salta di 5 ordini in 60 passi** (2026-09-19)
+
+**`doc/REFERTO_cronologia.md`** · 45 snapshot, passi 60-2700 · blob `7c4dec1d` · seme 42 ·
+strumento `csv/_test_fork/_cronologia.py`, letture fissate **prima** in `8def0af`.
+
+**Il fatto più netto dell'intera cronologia:**
+
+```
+passo 180:  omega_s max = 0.35        nati = 2
+passo 240:  omega_s max = 7.58e+04    nati = 26
+```
+
+**Cinque ordini di grandezza in 60 passi, al 9 % del run** — e **nello stesso intervallo `r` p25
+crolla** da `1.2094` a `0.2991`.
+
+**E `r` non degenera affatto: parte già saturo.** Al primo snapshot (passo 60) `r` p25/p50/p75 vale
+`1.4126 / 1.4141 / 1.4142`: **tutta la distribuzione è al tetto `√2`**. Poi crolla, e **oscilla
+violentemente** — `p25` salta fra `0.05` e `1.24` fra snapshot consecutivi.
+
+> **⚠ Il verdetto automatico dice «lettura B, candidata `r p75`», ed è FRAGILE per un difetto del
+> mio criterio.** `t50` presuppone una crescita **monotona**: su una grandezza che **parte al
+> massimo**, `t50 = 60` significa *«era già sopra soglia quando abbiamo iniziato a guardare»*, non
+> *«si muove per prima»*. E il ritardo che fa scattare `B` è **esattamente il minimo** richiesto.
+> **Non ho cambiato il criterio a posteriori**: riporto ciò che produce e perché non basta.
+
+**Osservazione, non causa:** nello stesso intervallo la **mitosi comincia a correre** (`nati` 0 / 2
+/ 26 / 185 ai passi 120 / 180 / 240 / 300). **Che coincidano è un fatto; che una causi l'altra non
+l'ho misurato.**
+
+**La bimodalità non compare di colpo:** `_deg` p25 tocca il grado di nascita al passo **540**, p50
+al **1500** — si apre in **mille passi**.
+
+**Cosa non ho fatto:** la rigiocata `--db-rigioca 180 240 --db-ogni 5`, che darebbe **dodici
+istanti invece di due** dentro la finestra dell'evento. **Le quattro letture fissate prima non la
+indicano — è la lettura dei dati a indicarla — e la differenza conta.**
