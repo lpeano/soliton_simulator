@@ -1,0 +1,62 @@
+[TIMBRO] _somme.py  sha1-BYTE 5ec2372f  committato e pulito
+passo 240   soglia 'coincidono' = 5 %   (fissata PRIMA)
+
+=== PRESIDIO: n IDENTICO? (le somme sono ESTENSIVE) ===
+   A (nessuna cura)   n = 2417
+   B  coppia-recipr   n = 2426
+   B' grav-ampiezza   n = 2420
+   -> *** NO: le somme NON sono confrontabili senza normalizzare ***
+
+=== PRESIDIO: quanti nodi hanno rho <= 1e-6 (il PAVIMENTO dell'inerzia) ===
+   A (nessuna cura)   26 nodi su 2417  (1.076 %)
+   B  coppia-recipr   35 nodi su 2426  (1.443 %)
+   B' grav-ampiezza   29 nodi su 2420  (1.198 %)
+   una somma pesata sull'inerzia e' pesata su 1e-6 per QUESTI nodi: un numero SCELTO
+
+================================================================================================================
+LE SOMME
+================================================================================================================
+ramo               | sum|omega|     sum|omega|^2   | mediana       max          
+A (nessuna cura)   | 252021         1.32522e+10    | 4.92796e-11   75845.8      
+B  coppia-recipr   | 312637         5.59019e+09    | 0.00188275    29500.7      
+B' grav-ampiezza   | 217558         3.35634e+09    | 0.00180895    26069.3      
+
+ramo               | sum(omega_s) VETTORIALE  -- il momento NETTO, altra grandezza
+A (nessuna cura)   | [      165700        74128     -12657.3]   |v| = 181966
+B  coppia-recipr   | [    -29110.1     -38798.2     -9838.92]   |v| = 49492.4
+B' grav-ampiezza   | [     45220.2     -16692.2     -6486.12]   |v| = 48637.1
+
+=== GLI SCARTI RELATIVI CONTRO IL RAMO A ===
+ramo               | sum|omega|     sum|omega|^2   |sum(omega)|  
+B  coppia-recipr   | +24.05 %       +57.82 %       +72.80 %      
+B' grav-ampiezza   | +13.67 %       +74.67 %       +73.27 %      
+
+=== LA CONCENTRAZIONE: frazione di sum|omega| detenuta dai primi k nodi ===
+ramo               | top 10     top 100    top 1000   tutti     
+A (nessuna cura)   | 0.9973     0.9998     1.0000     2417      
+B  coppia-recipr   | 0.6797     0.9998     1.0000     2426      
+B' grav-ampiezza   | 0.7705     0.9998     1.0000     2420      
+
+=== L'ISTOGRAMMA di log10(|omega_s|), STESSI BIN ===
+ramo               |    -20    -18    -16    -14    -12    -10     -8     -6     -4     -2      0      2      4
+A (nessuna cura)   |      0      0      0    619    836     24      9      3     10    904      0      7      5
+B  coppia-recipr   |      0      0      0      0      0      0      0     19   1477    900      0     18     12
+B' grav-ampiezza   |      0      0      0      0      0      0      0     23   1472    900      0     15     10
+
+=== I NODI SOPRA 1e2: sono gli STESSI fra i rami? (Jaccard) ===
+   A (nessuna cura)   vs B  coppia-recipr   |X|=12   |Y|=30    J = 0.4000
+   A (nessuna cura)   vs B' grav-ampiezza   |X|=12   |Y|=25    J = 0.4800
+   B  coppia-recipr   vs B' grav-ampiezza   |X|=30   |Y|=25    J = 0.8333
+
+================================================================================================================
+IL VERDETTO, secondo le quattro letture fissate PRIMA
+================================================================================================================
+   sum|omega|     scarti: +24.05 %  +13.67 %   -> non coincide
+   sum|omega|^2   scarti: +57.82 %  +74.67 %   -> non coincide
+   |sum(omega)|   scarti: +72.80 %  +73.27 %   -> non coincide
+
+-> NESSUNA DELLE QUATTRO: le due cure non concordano nemmeno fra loro.
+   Si riporta COSI', senza inventarne una quinta.
+
+NESSUNA IDENTIFICAZIONE: si riporta SE una somma coincide e QUALE, non cosa significhi.
+UN SEME, UNA SCENA, mezzo run, override del blob. --tau-luce sigillo 6/7.

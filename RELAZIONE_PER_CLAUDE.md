@@ -7561,3 +7561,38 @@ rapporto **senza chiedermi se il denominatore fosse un numero**. Non l'ho cambia
 
 **Cosa NON ho misurato:** **la coppia** su quei nodi — l'ultimo anello della catena. È coerente con
 tutto il resto, ma non è misurato, e non lo scrivo come se lo fosse.
+
+## LE SOMME — **il fondo si solleva di otto ordini, e il momento netto converge** (2026-09-20)
+
+**`doc/REFERTO_somme.md`** · blob `775ceab7` · passo 240 · tre rami · snapshot **ricostruiti e
+verificati** *(ramo A: `113 campi, 0 diversi` contro l'archivio, in entrambi gli esperimenti)*.
+
+**Nessuna delle quattro letture scatta**, e `sum|omega|/n` va in **direzioni opposte**:
+**`+23.6 %`** con `COPPIA_RECIPROCA`, **`−13.8 %`** con `GRAV_AMPIEZZA`. **Le due cure non
+concordano nemmeno nel segno.**
+
+**Il reperto è un altro, e le somme non lo catturavano** — l'istogramma sì:
+
+```
+log10|omega|   -14    -12    -10     -8     -6     -4     -2
+A              619    836     24      9      3     10    904
+B                0      0      0      0      0   1477    900
+B'               0      0      0      0      0   1472    900
+```
+
+> **Nel ramo A ci sono 1455 nodi fra `10⁻¹⁴` e `10⁻¹²`. Nei curati NON CE N'È NEMMENO UNO: sono
+> tutti risaliti a `~10⁻⁴`.** Mediana `4.93e-11 → 1.88e-03` (**otto ordini**), `p25` **nove ordini**.
+> **E i due rami curati sono quasi indistinguibili fra loro** (Jaccard `B` vs `B'` = `0.8333`,
+> contro `0.40`/`0.48` verso A).
+
+**E il momento netto converge:** `|sum(omega)|/n` da **`75.286`** a **`20.401`** e **`20.098`** —
+**−72.9 % e −73.3 %, con i due valori a `1.73 %` l'uno dall'altro**. **Non è conservazione** *(scende
+del 73 %)*: **è convergenza a un valore comune, da due punti diversi della catena.**
+
+**Tre cose dichiarate:** `n` **non** è identico (2417/2426/2420) e le somme sono estensive, quindi
+tutto è **normalizzato per `n`** · `sum(inerzia·|omega|²)` — l'energia vera — **non l'ho calcolata**,
+richiede `_T2` che non è negli snapshot · e **`rel()` usava `abs()`: ha perso il SEGNO**, ed è quel
+segno a contenere il reperto.
+
+**Cosa resta aperto:** perché `1455` nodi stiano a `10⁻¹³` nel ramo A, e perché **qualunque**
+perturbazione del termine di coppia li accenda.
