@@ -1123,6 +1123,27 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   trovato**, e va detto invece di scrivere l'ennesima nota: ogni riga di prosa contiene numeri
   (date, percentuali, numeri di riga), e un controllo che segnala tutto non lo legge nessuno.
 
+- **PRESIDIO — DURANTE UN RUN, NESSUN FILE DEL PERCORSO IN USO SI MODIFICA: non solo il simulatore,
+  ma anche il DRIVER e ogni script che il processo ha importato** (regola di Luca, 2026-09-19).
+  **Il mandato del 19/9 diceva «NON toccare il simulatore finche' il run non e' finito»: il DRIVER
+  era in uso e NON era coperto**, e la patch della ripresa gli e' stata applicata **mentre il run a
+  6000 passi girava** (poi ripristinata, `228eb07`). **E' rispettare la LETTERA superando
+  l'INTENZIONE**, ed e' il modo in cui un vincolo scritto bene viene aggirato in buona fede.
+  **LA PROVA DICE CHE STAVOLTA NON C'E' STATO DANNO, NON CHE FOSSE SICURO** (`23f783e`, **3/3**:
+  ripartendo dal passo 1800 si riottiene **identico** lo snapshot 1860, scritto durante la finestra
+  della patch; 113 campi confrontati, 0 diversi, e il controllo positivo ne trova 84 diversi contro
+  un altro istante, quindi lo zero significa *identico* e non *criterio cieco*).
+  **PERCHE' E' ANDATA BENE, e perche' non basta:** Python compila il sorgente **una sola volta**,
+  all'avvio, e non lo rilegge; il `.pyc` del driver era del giorno prima e **nessuno lo importa**
+  (viene solo eseguito come `__main__`); gli snapshot sono scritti **dall'immagine in memoria**.
+  **MA SE QUEL DRIVER LEGGESSE UNA CONFIGURAZIONE A RUNTIME, O FACESSE UN RELOAD, LA STESSA MOSSA
+  AVREBBE ROTTO UN RUN DA SETTE ORE E MEZZA** — e non ci sarebbe stato modo di accorgersene se non
+  dai numeri, alla fine.
+  **REGOLA OPERATIVA: finche' un run e' in corso, il file sul disco deve restare quello che lo ha
+  lanciato.** Il punto **non** e' se il processo se ne accorge: e' che per tutta la durata del run
+  il repo direbbe una cosa diversa da quella che sta girando. Se serve modificare uno strumento in
+  uso, si lavora su una **COPIA** e si porta la modifica sul file vero **a run chiuso**.
+
 ## 10. PROMOZIONE DELLE COMPONENTI (regola di Luca, 2026-09-15)
 
 **Perche' esiste.** Finche' una legge validata resta un flag opzionale, puo' essere **dimenticata**,

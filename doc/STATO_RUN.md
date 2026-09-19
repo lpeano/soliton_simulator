@@ -92,3 +92,30 @@ quindi dopo un riavvio lo stato si legge **dal disco**, non dalla memoria.
 - **attesa** ~**7.5 h** col modello lineare, **che SOTTOSTIMA** (il costo per frame cresce con `n`).
 - **Z9-a all'avvio**: `passi(ramp=1) = 5098` sui mobili, contro i 6000 del run — **margine 18 %**,
   e `r` si e' mosso del **+149 % in 120 passi**: e' un'istantanea, non una previsione.
+
+### ⚠ DA FARE A RUN FINITO — **la patch della ripresa, e la verifica che la precede**
+
+> **A RUN FINITO: portare la patch della ripresa sul driver vero** (`csv/_test_fork/_scena_video.py`,
+> da **`f14ea4bd`** a **`7a02c5c3`**, la versione **sigillata 5/5** in
+> `csv/_seal_fork/_sigillo_ripresa_scena.txt`). **NON prima che il run sia chiuso.**
+>
+> *(La patch era già stata applicata il 2026-09-19 alle ~15:55 **mentre il run girava**, e
+> **ripristinata** alle 15:57:52 — commit `228eb07`. Non c'è stato danno, ed è **misurato**:
+> `23f783e`, `3/3`, ripartendo dal passo 1800 si riottiene identico lo snapshot 1860 scritto
+> durante quella finestra. **Ma «stavolta è andata bene» non è «era sicuro».**)*
+
+> **PRIMA di applicare la patch, verificare DAL CODICE — non assumere — che gli snapshot di QUESTO
+> run restino caricabili dopo che il driver è cambiato.**
+>
+> **Il ragionamento dice di sì:** `carica_stato` verifica il blob di **`soliton_simulator.py`**, non
+> quello del driver, e il simulatore è **intatto** (`7c4dec1d` per tutta la sequenza).
+> **Ma va CONFERMATO:** cercare dove viene usato il **blob del driver** (`f14ea4bd` → `7a02c5c3`) e
+> se **BLOCCA** qualcosa.
+>
+> **Se esiste un controllo che include il driver e rifiuta:** il discriminante va riportato al blob
+> del **SIMULATORE**, perché è quello che definisce la **FISICA** — e **solo perché** il sigillo del
+> driver esteso ha dato **PASS** (`14 array, max|A-B| = 0.000e+00`). **Senza quel sigillo, NON si
+> accetta.**
+>
+> **E la prova finale, dopo la patch:** ricaricare uno snapshot **di questo run** e riprendere.
+> **Deve funzionare.**
