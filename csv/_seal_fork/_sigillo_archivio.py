@@ -146,11 +146,28 @@ def dettaglio_diff(k, va, vb, max_elem=3):
             #     riferimenti allo STESSO oggetto e pickle lo memoizza.
             da, db_ = pickle.dumps(va, 5), pickle.dumps(vb, 5)
             righe.append("   *** CONTENUTO IDENTICO ELEMENTO PER ELEMENTO, SERIALIZZAZIONE NO ***")
-            righe.append("   pickle: len A=%d  len B=%d" % (len(da), len(db_)))
-            i = next((j for j, (x, y) in enumerate(zip(da, db_)) if x != y), min(len(da), len(db_)))
-            righe.append("   primo byte diverso all'offset %d (su %d)" % (i, min(len(da), len(db_))))
-            righe.append("   contesto A: %r" % da[max(0, i - 24):i + 24])
-            righe.append("   contesto B: %r" % db_[max(0, i - 24):i + 24])
+            righe.append("   pickle p5: len A=%d  len B=%d" % (len(da), len(db_)))
+            # IL "primo byte diverso" DEL GIRO PRECEDENTE ERA UN ARTEFATTO DEL MIO STRUMENTO:
+            # cadeva all'offset 3, cioe' dentro il campo LUNGHEZZA del FRAME del protocollo 5
+            # (\x80\x05\x95 + 8 byte di lunghezza). Due pickle di lunghezza diversa differiscono
+            # SEMPRE li', e quel byte non dice NIENTE su dove stia la differenza vera. Si salta
+            # l'header e si cerca il primo byte diverso NEI DATI.
+            TESTA = 11
+            i = next((j for j in range(TESTA, min(len(da), len(db_))) if da[j] != db_[j]),
+                     min(len(da), len(db_)))
+            righe.append("   primo byte diverso NEI DATI (saltato l'header di frame): offset %d "
+                         "su %d" % (i, min(len(da), len(db_))))
+            righe.append("   contesto A: %r" % da[max(TESTA, i - 24):i + 24])
+            righe.append("   contesto B: %r" % db_[max(TESTA, i - 24):i + 24])
+            # TEST DECISIVO: il protocollo 0 e' ASCII e NON ha framing binario. Se a p0 i due
+            # pickle COINCIDONO mentre a p5 no, la differenza NON e' nei dati ne' nell'aliasing:
+            # e' nella FORMA che il protocollo 5 sceglie per scriverli.
+            try:
+                d0a, d0b = pickle.dumps(va, 0), pickle.dumps(vb, 0)
+                righe.append("   pickle p0 (ASCII, senza frame): len A=%d  len B=%d  UGUALI? %s"
+                             % (len(d0a), len(d0b), d0a == d0b))
+            except Exception as e:
+                righe.append("   pickle p0 non calcolabile (%s)" % type(e).__name__)
             righe.append("   repr(A) == repr(B) ?  %s" % (repr(va) == repr(vb)))
             ida, idb = set(id(x) for x in va), set(id(x) for x in vb)
             righe.append("   oggetti DISTINTI per identita': A=%d  B=%d  su %d celle"
