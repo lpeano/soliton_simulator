@@ -6304,28 +6304,80 @@ def _db_serie_esistenti(base):
     return sorted(out)
 
 
-def _db_serie_verifica(base, db_ogni):
-    """RIFIUTA una serie che non e' di QUESTO run. La regola e' DICHIARATA, non implicita (A8):
-      (a) ogni passo dev'essere multiplo di `db_ogni`  -> cadenza diversa = altra configurazione;
-      (b) i passi devono essere CONTIGUI (k, 2k, 3k...) -> un buco significa due serie mescolate.
-    ⚠ E IL BUCO DEL PRESIDIO, dichiarato invece di essere taciuto: due run con lo STESSO blob e la
-    STESSA cadenza ma SEME DIVERSO **non sono distinguibili dai .pkl**, perche' il seme NON e' fra
-    gli `attrs` (c'e' `rng_state`, che e' lo stato DOPO N passi, non il seme). Il blob invece e'
-    verificato da `carica_stato` sullo snapshot che si carica davvero.
-    E' un presidio PARZIALE, e chiamarlo totale sarebbe il difetto che A9 descrive."""
+def _db_identita_snapshot(stato, ver):
+    """Il verdetto di identita' di UNO snapshot, con la STESSA REGOLA di `carica_stato`: il git
+    BLOB dei byte se entrambi ce l'hanno, altrimenti il fallback sha256 (DB legacy / git assente).
+    Ritorna `None` se compatibile, altrimenti il MOTIVO del rifiuto.
+
+    ⚠ E' una SECONDA COPIA di quella regola, e lo dichiaro invece di tacerlo. `carica_stato` non si
+    tocca (vincolo esplicito del mandato) e non si puo' riusare per una scansione, perche' APPLICA
+    lo stato alla rete invece di limitarsi a leggerlo. Due copie di una regola possono DIVERGERE:
+    se una cambia, cambiano entrambe."""
+    db_blob = stato.get('blob')
+    if db_blob is not None and ver.get('blob') is not None:
+        if db_blob != ver['blob']:
+            return ("blob %s, mentre il codice ORA e' %s -- ALTRA FISICA"
+                    % (str(db_blob)[:8], str(ver['blob'])[:8]))
+        return None
+    db_hash = stato.get('content_hash', stato.get('code_hash'))
+    if db_hash != ver.get('content_hash'):
+        return ("sha256 %s, mentre il codice ORA e' %s [fallback: DB legacy o git assente]"
+                % (db_hash, ver.get('content_hash')))
+    return None
+
+
+def _db_serie_verifica(base, ver):
+    """RIFIUTA una serie che non e' di QUESTA FISICA. **Il discriminante e' IL BLOB, e nient'altro.**
+
+    ⚠ STORIA DI QUESTA FUNZIONE, che e' il motivo per cui e' scritta cosi' (2026-09-19).
+    La prima versione controllava la CADENZA: che ogni passo fosse multiplo di `--db-ogni` e che
+    i passi fossero CONTIGUI. **Era un criterio AGGIUNTO rispetto al mandato, e rifiutava proprio
+    il caso d'uso di `--db-rigioca`:** infittire un archivio SIGNIFICA rigirare con `--db-ogni` piu'
+    piccolo, e una serie 250/500/750 non e' contigua a cadenza 50. **Dimostrato, non dedotto:**
+    `csv/_seal_fork/_prova_D2_rigiocata_2026-09-19.txt`, 7/7, commit `edab9d4`.
+    **CADENZE DIVERSE NELLA STESSA SERIE SONO LEGITTIME: e' il senso dell'archivio. Il rischio vero
+    e' mescolare due FISICHE, non due cadenze.**
+    E la vecchia versione sbagliava anche dalla parte opposta: **accettava file VUOTI, 0 byte, senza
+    alcun blob** (`P4`), perche' guardava solo i NOMI. **Rifiutava il legittimo e accettava l'ignoto.**
+
+    COSTO, misurato e non stimato (`csv/_seal_fork/_costo_archivio_2026-09-19.txt`): `0.156 s` per
+    snapshot non compresso, `0.32 s` compresso -> **3.8 s per una serie da 24**, su un run che dura
+    ore. **Per questo si controllano TUTTI gli snapshot e non solo quello che si carica**, che era
+    cio' che il mandato chiedeva e che la prima versione delegava a `carica_stato`.
+
+    ⚠ IL BUCO DEL PRESIDIO, dichiarato invece di essere taciuto: due run con lo STESSO blob ma
+    SEME DIVERSO **non sono distinguibili dai `.pkl`**, perche' il seme NON e' fra gli `attrs`
+    (c'e' `rng_state`, che e' lo stato DOPO N passi, non il seme).
+    **E' un presidio PARZIALE, e chiamarlo totale sarebbe il difetto che A9 descrive.**"""
+    import gzip as _gz, os as _o, pickle as _pk, time as _t
     ser = _db_serie_esistenti(base)
     if not ser:
         return ser, None
-    passi = [s for s, _ in ser]
-    fuori = [s for s in passi if s % db_ogni != 0]
-    if fuori:
-        return ser, ("passi non multipli di --db-ogni=%d: %s -- la serie e' di un ALTRO run"
-                     % (db_ogni, fuori[:5]))
-    atteso = list(range(passi[0], passi[-1] + 1, db_ogni))
-    if passi != atteso:
-        mancanti = sorted(set(atteso) - set(passi))
-        return ser, ("serie NON CONTIGUA: mancano %s (attesi %d passi, trovati %d)"
-                     % (mancanti[:5], len(atteso), len(passi)))
+    guai = []
+    _t0 = _t.perf_counter()
+    for _passo_n, p in ser:
+        nome = _o.path.basename(p)
+        try:
+            _apri = _gz.open if str(p).endswith('.gz') else open
+            with _apri(p, 'rb') as _fh:
+                st = _pk.load(_fh)
+        except Exception as e:
+            # UN FILE CHE NON SI APRE NON E' UNO SNAPSHOT. La vecchia versione non se ne accorgeva
+            # nemmeno, perche' non apriva niente.
+            guai.append("%s: ILLEGGIBILE (%s: %s)" % (nome, type(e).__name__, e))
+            continue
+        if not isinstance(st, dict):
+            guai.append("%s: non e' uno snapshot (contiene %s)" % (nome, type(st).__name__))
+            continue
+        motivo = _db_identita_snapshot(st, ver)
+        if motivo:
+            guai.append("%s: %s" % (nome, motivo))
+    _dt = _t.perf_counter() - _t0
+    print("[db] serie: verificato il blob di %d snapshot su %d in %.1f s (TUTTI, non solo quello "
+          "che si carica)" % (len(ser) - len(guai), len(ser), _dt))
+    if guai:
+        return ser, ("%d snapshot su %d NON sono di questa fisica:\n       %s"
+                     % (len(guai), len(ser), "\n       ".join(guai[:5])))
     return ser, None
 
 
@@ -7213,11 +7265,13 @@ def batch_condensazione(a):
         raise SystemExit("[db] --db-rigioca richiede --db-serie: senza la serie non c'e' archivio "
                          "da infittire, e si sovrascriverebbe l'unico file.")
     if _db and _db_serie:
-        _ser, _guaio = _db_serie_verifica(_db, _db_ogni)
+        # IL DISCRIMINANTE E' IL BLOB: si verifica la FISICA di ogni snapshot, non la cadenza.
+        _ser, _guaio = _db_serie_verifica(_db, net._versione_codice())
         if _guaio:
             raise SystemExit("[db] RIFIUTO DI PARTIRE: %s\n"
-                             "     Mescolare due serie renderebbe l'archivio non interpretabile. "
-                             "Usa una cartella pulita o --db-cleanup." % _guaio)
+                             "     Mescolare due FISICHE renderebbe l'archivio non interpretabile. "
+                             "Usa una cartella pulita, --db-cleanup, o la versione del codice che "
+                             "ha scritto quegli snapshot." % _guaio)
         if _db_rig:
             _da, _aa = int(_db_rig[0]), int(_db_rig[1])
             _p = _db_serie_path(_db, _da)
@@ -7443,6 +7497,16 @@ def batch_condensazione(a):
     with open(a.csv, "w") as f:
         f.write("\n".join(righe) + "\n")
     print(f"\n[batch] completato in {dt:.1f}s, {passi} passi. CSV salvato in {a.csv}")
+    # [ARCHIVIO, 2026-09-19] IL CONTEGGIO SI DICHIARA. Era gia' contato e MAI STAMPATO: il commento
+    # diceva "si dichiara a fine run" e non lo faceva (difetto D1, commit 312a3b4). Un ramo
+    # silenzioso non e' un ramo (A8), e con il disco al 96 % un salvataggio fallito che non si
+    # vede e' il difetto peggiore possibile per un archivio: te ne accorgeresti a run finito.
+    if _db and (_db_scritti or _db_saltati or _db_falliti):
+        print(f"[db] ARCHIVIO: {_db_scritti} snapshot scritti, {_db_saltati} saltati "
+              f"(gia' presenti), {_db_falliti} FALLITI.")
+        if _db_falliti:
+            print(f"[db] *** ATTENZIONE: {_db_falliti} SALVATAGGI SONO FALLITI. L'ARCHIVIO E' "
+                  f"INCOMPLETO: i passi mancanti NON sono recuperabili senza rigirare. ***")
     print("[batch] LETTURA condensazione: se dens_centrale e n_centrali CRESCONO e frac_nati resta")
     print("        ALTA mentre dist_masse NON crolla -> NUOVA massa dal vuoto (non accrescimento).")
     print("[batch] LETTURA picchi_nuovi: se picchi_nuovi passa da 0 a >=1 a un certo passo, quello e'")
