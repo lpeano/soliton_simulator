@@ -666,6 +666,13 @@ GUSCIO_MORBIDO = False   # DIFFUSIONE DI SUPERFICIE delle d0 (legge, zero parame
 # al rilassamento plastico un termine diffusivo D*lap(d0) con D = c_locale * spaziatura d'arco. Il
 # laplaciano e' ~0 nel nucleo uniforme e grande al bordo ripido -> smussa SOLO il guscio (tensione
 # superficiale), non tocca la rigidita' del core. Clamp causale (CFL). Default off = non-regressione.
+GRAV_AMPIEZZA = False   # L'AMPIEZZA NELLA CORREZIONE GRAVITAZIONALE (2026-09-19). OFF = byte-identico.
+                        # Se True, `cross(_nb_grav(), nb)` viene moltiplicato per `_rho_sorgente()`,
+                        # l'ampiezza che `_nb_grav()` divide via. UNA DIREZIONE NON E' UNA FORZA:
+                        # |_nb_grav| = 1.000000 ovunque, e l'ampiezza del campo NON entra nel
+                        # numeratore -- mentre `rho_spin` sta al DENOMINATORE dentro l'inerzia.
+                        # Verificato dal disco: `_pesi()` non contiene rho, e gli altri fattori
+                        # sono tutti versori. Nessun numero nuovo, nessun tetto, nessun clamp.
 COPPIA_RECIPROCA = False  # RECIPROCITA' DELLA COPPIA SPINORIALE (2026-09-19). OFF = byte-identico.
                         # Se True, il torque `cross(_nb_grav(), nb)` viene pesato per `ramp[k]`,
                         # LO STESSO peso che il nodo ha come SORGENTE. Cura un'ASIMMETRIA MISURATA:
@@ -2451,6 +2458,24 @@ class Rete:
             #   (n,3) per NODO e non hanno indici d'arco. Deciso DAL CODICE, non scelto.
             # NON si toccano: il pavimento 1e-6, `A7b`, il peso zero alla nascita, il termine 1.
             _tq = np.cross(self._nb_grav(), nb)
+            if GRAV_AMPIEZZA:
+                # [GRAV_AMPIEZZA, 2026-09-19 -- flag OFF di default, byte-identico a spento]
+                # UNA DIREZIONE NON E' UNA FORZA. `_nb_grav()` divide per `rho_spin` (la norma di
+                # Bloch E' rho_spin per identita'), quindi e' un VERSORE: |_nb_grav| = 1.000000 a
+                # p05, p50 e p95. Il suo docstring lo dice -- "DIREZIONE di Bloch per la gravita'"
+                # -- ed e' nato per dare un VERSO: qualcuno ha assunto che l'ampiezza arrivasse da
+                # un'altra parte. VERIFICATO DAL DISCO (ee80c7d) che non arriva:
+                #   `_pesi()` contiene d, ramp, tw -- NON rho_spin; nb_vic/nb/_nb_grav sono tutti
+                #   VERSORI; e `rho_spin` compare UNA SOLA VOLTA nella catena, AL DENOMINATORE
+                #   (`_contrasto = rho_s/peq_nodo`, `inerzia = max(_contrasto*_T2, 1e-6)`).
+                #   Quindi piu' il campo e' debole, piu' `omega` e' grande: l'opposto di una forza.
+                # SI RIMOLTIPLICA QUI E NON DENTRO `_nb_grav()`: l'altro consumatore (:4384) la usa
+                # per un PRODOTTO INTERNO fra versori, cioe' un COSENO, dove la normalizzazione e'
+                # corretta e voluta. Togliere la divisione la' romperebbe quel punto.
+                # `_rho_sorgente()` e NON `rho_spin` diretto: e' LO STESSO metodo che alimenta
+                # `_contrasto`, quindi numeratore e denominatore parlano della STESSA grandezza.
+                # NESSUN numero nuovo, NESSUN tetto, NESSUN clamp, NESSUNA saturazione.
+                _tq = _tq * self._rho_sorgente()[:, None]
             if COPPIA_RECIPROCA:
                 # la STESSA riga di `_pesi()` (:2649): nessun numero nuovo
                 _tq = _tq * np.minimum(1.0, self.eta[:n] / TAU_A)[:, None]
@@ -5606,7 +5631,7 @@ def _applica_flag(a):
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
     global TAU_LUCE, RUMORE_COLORATO
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
-    global COPPIA_RECIPROCA
+    global COPPIA_RECIPROCA, GRAV_AMPIEZZA
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
@@ -5653,6 +5678,7 @@ def _applica_flag(a):
     MITMAX = a.mitmax
     K_FRANGE = a.kfrange   # canale ORBITALE tangenziale (moto lungo le frange). 0 = spento (non-regressione)
     VIRIALE = bool(getattr(a, "viriale", False))   # conversione viriale (legge): default off = non-regressione
+    GRAV_AMPIEZZA = bool(getattr(a, "grav_ampiezza", False))      # ampiezza nella correzione grav: default off = byte-identico
     COPPIA_RECIPROCA = bool(getattr(a, "coppia_reciproca", False))  # reciprocita' del torque spinoriale: default off = byte-identico
     CHI_BASC = bool(getattr(a, "chi_basc", False)) # basculamento chirale (legge): default off = non-regressione
     ZETA_VIR = bool(getattr(a, "zeta_vir", False)) # freno anisotropo (legge): default off = non-regressione
@@ -6022,6 +6048,11 @@ def _cli():
                         "ripartisce fra cadere (cos^2) e girare (sin^2) secondo l'angolo fra "
                         "pozzo e flusso di fase. Conservativa (non additiva come kfrange). "
                         "Default off = non-regressione.")
+    p.add_argument("--grav-ampiezza", action="store_true", dest="grav_ampiezza",
+                   help="UNA DIREZIONE NON E' UNA FORZA: moltiplica cross(_nb_grav, nb) per "
+                        "_rho_sorgente(), l'ampiezza che _nb_grav() divide via. Oggi il termine e' "
+                        "un VERSORE (|_nb_grav| = 1 ovunque) e rho compare SOLO al denominatore "
+                        "dentro l'inerzia. Zero numeri nuovi, nessun tetto. OFF = byte-identico.")
     p.add_argument("--coppia-reciproca", action="store_true", dest="coppia_reciproca",
                    help="RECIPROCITA': pesa il torque spinoriale cross(_nb_grav, nb) per ramp[k], "
                         "lo STESSO peso che il nodo ha come sorgente. Cura l'asimmetria misurata "
