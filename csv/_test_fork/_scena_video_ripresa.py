@@ -67,12 +67,28 @@ _ARGV = list(sys.argv)
 SERIE = None
 CSVPROG = None
 RIPRENDI = False
+OVERRIDE = False
+EXTRA = []
 _resti = []
 for _x in _ARGV[1:]:
     if _x.startswith("--serie="):
         SERIE = int(_x.split("=", 1)[1])
     elif _x.startswith("--csv-progresso="):
         CSVPROG = _x.split("=", 1)[1]
+    elif _x.startswith("--extra="):
+        # flag AGGIUNTIVI per il simulatore (es. --extra=--coppia-reciproca). Servono all'A/B:
+        # i due rami devono differire per UNA VARIABILE, e l'unica differenza dev'essere questa.
+        EXTRA.extend(_x.split("=", 1)[1].split(","))
+    elif _x == "--override-blob":
+        # [OVERRIDE DEL BLOB -- strada B, decisa da Luca, 2026-09-19]
+        # Serve SOLO all'esperimento A/B: il codice e' cambiato (COPPIA_RECIPROCA), quindi
+        # `carica_stato` RIFIUTEREBBE gli snapshot prodotti dal blob precedente.
+        # *** LO USANO ENTRAMBI I RAMI, ALLO STESSO MODO ***: se solo il ramo curato saltasse
+        # `carica_stato`, la differenza fra i rami potrebbe venire DA LI'. La simmetria e' il
+        # pezzo che rende l'A/B valido.
+        # ⚠ DUPLICA la logica di caricamento di `carica_stato` MENO la verifica del blob, e lo
+        # dichiara a video. NON tocca il simulatore, e sparisce con questo script.
+        OVERRIDE = True
     elif _x == "--riprendi":
         # LA RIPRESA E' UNA SCELTA ESPLICITA, MAI UN RIPIEGO AUTOMATICO: senza questo flag il
         # comportamento resta quello dell'originale (cartella sporca -> RIFIUTO).
@@ -99,7 +115,7 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--
             "--chi-core", "--calore-scal", "--deparam-orologio", "--verlet", "--fork-su2",
             "--fork-su2-mem", "--cs-dinamico", "--tau-luce", "--rumore-colorato",
             "--pav-com", "--guscio-morbido", "--zeta-vir", "--chi-basc", "--plast-din",
-            "--viriale", "--olon-part"]
+            "--viriale", "--olon-part"] + EXTRA
 import soliton_simulator as S
 
 print("=" * 112)
@@ -142,7 +158,11 @@ FRAME0 = 0          # da quale frame si parte: 0 = da zero, >0 = RIPRESA
 if SERIE:
     print("  SERIE ATTIVA: uno snapshot ogni %d frame = %d passi di motore -> %s"
           % (SERIE, SERIE * int(S.PASSI_PER_FRAME), BASE_SERIE))
-    _pre, _guaio = S._db_serie_verifica(BASE_SERIE, S.net._versione_codice())
+    if OVERRIDE:
+        _pre, _guaio = S._db_serie_esistenti(BASE_SERIE), None
+        print("  (override: la verifica del blob della serie e' SALTATA, dichiarato)")
+    else:
+        _pre, _guaio = S._db_serie_verifica(BASE_SERIE, S.net._versione_codice())
     if _guaio:
         raise SystemExit("[serie] RIFIUTO DI PARTIRE: %s" % _guaio)
     if _pre and not RIPRENDI:
@@ -153,7 +173,25 @@ if SERIE:
         # LA RIPRESA. `_db_serie_verifica` ha GIA' controllato il BLOB di OGNI snapshot: se il
         # codice fosse cambiato saremmo usciti sopra. Qui si carica il piu' RECENTE.
         _passo0, _path0 = _pre[-1]
-        S.net.carica_stato(_path0)
+        if OVERRIDE:
+            # la logica di `carica_stato` MENO la verifica del blob. Dichiarata, non silenziosa.
+            import gzip as _gz, pickle as _pk
+            _ap = _gz.open if str(_path0).endswith(".gz") else open
+            with _ap(_path0, "rb") as _fh:
+                _st = _pk.load(_fh)
+            _bs = str(_st.get("blob"))[:8]
+            _bc = str((S.net._versione_codice() or {}).get("blob"))[:8]
+            print("  *** OVERRIDE DEL BLOB, DICHIARATO: snapshot %s contro codice %s. "
+                  "carica_stato e' SALTATO. Vale per QUESTO esperimento, e per ENTRAMBI i rami. ***"
+                  % (_bs, _bc))
+            for _k, _v in _st["attrs"].items():
+                setattr(S.net, _k, _v)
+            S.net.rng.bit_generator.state = _st["rng_state"]
+            S.net._S = None
+            if hasattr(S.net, "_perm"): S.net._perm = None
+            if hasattr(S.net, "_ker_cache"): S.net._ker_cache = {}
+        else:
+            S.net.carica_stato(_path0)
         _dentro = int(getattr(S.net, "_db_step", -1))
         if _dentro != _passo0:
             raise SystemExit("[serie] RIFIUTO: il passo NEL FILE (%d) non e' quello NEL NOME (%d). "
