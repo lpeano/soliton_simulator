@@ -61,6 +61,8 @@ DRIVER = os.path.join(RADICE, "csv", "_test_fork", "_scena_video_ripresa.py")
 ARCH = os.path.join(RADICE, "csv", "_test_fork", "_fin_B")
 PPF = 6
 DA, A_ = 192, 240
+# il flag da provare nel ramo B: si passa da argv, cosi' lo stesso A/B serve per piu' cure
+FLAG = sys.argv[1] if len(sys.argv) > 1 else "--coppia-reciproca"
 esiti = []
 
 
@@ -97,7 +99,20 @@ def stat(at):
     d0 = np.asarray(at["d0"], float)
     f = np.asarray(at.get("_fatt_cs_ultimo", []), float)
     pav = at.get("_inerzia_al_pavimento", 0); tot = max(at.get("_inerzia_tot", 1), 1)
-    return dict(n=n, om50=float(np.median(om)), om95=float(np.percentile(om, 95)),
+    # IL LIMITE CAUSALE: omega*d <= cs, cioe' omega*d/cs <= 1. `d` e' per ARCO e `omega` per NODO:
+    # si usa la MEDIANA degli archi incidenti (bincount di d, diviso il grado), e il `cs` del nodo.
+    i = np.asarray(at["i"], np.int64); j = np.asarray(at["j"], np.int64)
+    dd = np.asarray(at["d"], float)
+    sd = np.bincount(i, dd, minlength=n)[:n] + np.bincount(j, dd, minlength=n)[:n]
+    cnt = np.bincount(i, minlength=n)[:n] + np.bincount(j, minlength=n)[:n]
+    d_nodo = sd / np.maximum(cnt, 1)
+    cs = np.asarray(at.get("_cs_nodo_prev", []), float)
+    cs = cs[:n] if cs.size >= n else np.full(n, np.nan)
+    caus = om * d_nodo / np.where(np.isfinite(cs) & (cs > 0), cs, np.nan)
+    caus = caus[np.isfinite(caus)]
+    return dict(
+        caus_sopra1=int(np.sum(caus > 1.0)), caus_p50=float(np.median(caus)) if caus.size else float("nan"),
+        caus_max=float(caus.max()) if caus.size else float("nan"),n=n, om50=float(np.median(om)), om95=float(np.percentile(om, 95)),
                 ommax=float(om.max()), sopra=int(np.sum(om > 1e2)),
                 deg50=float(np.median(deg)), r50=float(np.median(r)) if r.size else float("nan"),
                 d0max=float(d0.max()), fcsmax=float(f.max()) if f.size else float("nan"),
@@ -135,10 +150,10 @@ def main():
             return 1
 
         print("")
-        print("RAMO B: blob NUOVO, flag ON (--coppia-reciproca)")
-        prB, tB = gira(B, "--coppia-reciproca")
+        print("RAMO B: blob NUOVO, flag ON (%s)" % FLAG)
+        prB, tB = gira(B, FLAG)
         print("   rc=%s in %.0f s" % (prB.returncode, tB))
-        att = [r for r in (prB.stdout or "").splitlines() if "coppia-reciproca" in r.lower()]
+        att = [r for r in (prB.stdout or "").splitlines() if FLAG.strip("-").split("-")[0] in r.lower()]
         print("   flag letto dal modulo: %s" % (att[0].strip()[:100] if att else "(nessun avviso)"))
         pb = os.path.join(B, "scena_%06d.pkl.gz" % A_)
         if not os.path.exists(pb):
@@ -152,17 +167,18 @@ def main():
         print("=" * 116)
         print("IL CONFRONTO, passo %d -> %d" % (DA, A_))
         print("=" * 116)
-        print("%-10s | %-11s %-11s %-11s %-8s | %-8s %-8s %-9s %-9s %-8s"
-              % ("ramo", "om p50", "om p95", "om MAX", "n>1e2", "deg p50", "r p50",
-                 "d0 max", "fcs max", "pav/tot"))
+        print("%-10s | %-11s %-11s %-11s %-8s | %-8s %-9s %-8s | %-11s %-11s %-9s"
+              % ("ramo", "om p50", "om p95", "om MAX", "n>1e2", "r p50", "d0 max", "pav/tot",
+                 "om*d/cs p50", "om*d/cs max", "n(>1)"))
         fs = {"A (OFF)": os.path.join(A, "scena_%06d.pkl.gz" % A_),
               "B (ON)": pb, "archivio": os.path.join(ARCH, "scena_%06d.pkl.gz" % A_)}
         S = {}
         for nome, p in fs.items():
             s = stat(carica(p)["attrs"]); S[nome] = s
-            print("%-10s | %-11.4g %-11.4g %-11.4g %-8d | %-8.0f %-8.4f %-9.4g %-9.4g %-8.4f"
+            print("%-10s | %-11.4g %-11.4g %-11.4g %-8d | %-8.4f %-9.4g %-8.4f | %-11.4g %-11.4g %-9d"
                   % (nome, s["om50"], s["om95"], s["ommax"], s["sopra"],
-                     s["deg50"], s["r50"], s["d0max"], s["fcsmax"], s["pav"]))
+                     s["r50"], s["d0max"], s["pav"],
+                     s["caus_p50"], s["caus_max"], s["caus_sopra1"]))
         # il nodo 2393
         print("")
         print("IL NODO 2393 (il neonato che parte al 198)")
@@ -183,6 +199,8 @@ def main():
         print("omega_s MAX:  A = %.4g   B = %.4g   ->  B/A = %.4g" % (a["ommax"], b["ommax"], rap))
         print("nodi > 1e2 :  A = %d      B = %d" % (a["sopra"], b["sopra"]))
         print("inerzia pav:  A = %.4f   B = %.4f" % (a["pav"], b["pav"]))
+        print("LIMITE CAUSALE omega*d/cs > 1:  A = %d nodi   B = %d nodi   (p50: %.4g -> %.4g)"
+              % (a["caus_sopra1"], b["caus_sopra1"], a["caus_p50"], b["caus_p50"]))
         print("")
         if rap > 0.1:
             print("-> LETTURA BETA: omega_s max resta dello stesso ordine (B/A = %.3g)." % rap)
