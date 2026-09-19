@@ -588,3 +588,44 @@ curare il sintomo nascondendo la fisica.
 
 **`Z30`:** la forma del denominatore — `nudo` (attuale, zero scelte) contro `linea` (la **meno
 estensiva**: 16.9 contro 36.2). **Da decidere insieme al punto `Z27`, con lo stesso criterio.**
+
+---
+
+## G — **L'ARCHIVIO A SERIE (`--db-serie`) NON È PROMUOVIBILE, e non perché sia debole: perché NON È UNA LEGGE** (2026-09-19)
+
+**La domanda è stata posta esplicitamente** — *«se l'archivio va promosso, con quale dicitura»* —
+**e la risposta è che il §10 non si applica**, perché il §10 governa **componenti della fisica**.
+**Va detto invece di lasciare la casella vuota:** una casella vuota si rilegge come *«non ci ho
+pensato»*.
+
+### Perché non è promuovibile — **il criterio ③, che è quello che decide**
+
+> *«il sistema senza X è SBAGLIATO»* → promuovibile · *«il sistema senza X è DIVERSO»* → **resta
+> flag, per sempre.**
+
+**Senza `--db-serie` il comportamento è «un solo file di checkpoint, sovrascritto».** **Non è un
+difetto: è un'alternativa legittima**, ed è anzi quella giusta quando si vuole solo poter riprendere
+un run interrotto. **Il ③ non è soddisfatto, e non lo sarà mai** — non per una misura mancante, ma
+**per la natura della cosa**. `--db-serie` **resta OFF di default, per sempre.**
+
+**E non è nemmeno un ESPERIMENTO** *(la seconda categoria del §10)*: non è un meccanismo aggiunto
+alla dinamica. **Non tocca la fisica affatto**, ed è misurato: `V1`/`V2` del sigillo danno **97
+campi byte-identici** contro il codice pre-archivio e fra flag ON e flag OFF.
+
+> **Dicitura: INFRASTRUTTURA DI PERSISTENZA — fuori dalle tre categorie del §10.**
+> Il §10 ne ha tre perché parla di **leggi**; questa è **I/O**. Forzarla dentro una delle tre
+> sarebbe l'errore di categoria che il §10 stesso vieta.
+
+### ⚠ Ma UNA cosa dentro l'archivio È una correzione di difetto — **categoria D, nessun flag**
+
+`salva_stato` scriveva `pickle.dump(stato, open(tmp,'wb'), …)` **senza mai chiudere il file**,
+affidandosi al refcount di CPython. **Con un file normale funziona** *(il buffer viene scaricato
+alla distruzione)*; **con `gzip` no: un `GzipFile` non chiuso può lasciare il TRAILER INCOMPLETO e
+il file ILLEGGIBILE.**
+
+**È stato corretto con un `with`, e non ha un flag** — come `_cs_nodo_prev` e `_psi_spin_prec`
+prima di lui: **un bug curato non ha un interruttore.** *(§10, categoria «correzioni di difetto».)*
+
+> **E la compressione l'ha portato a galla senza causarlo:** il difetto c'era già, **silenzioso**,
+> e sarebbe rimasto tale finché qualcuno non avesse scritto un `.gz`. **Il modo peggiore di
+> scoprirlo sarebbe stato un archivio di campagna illeggibile.**

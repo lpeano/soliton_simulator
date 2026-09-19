@@ -368,3 +368,63 @@ masse**, il che è la ragione per cui l'A/B resta interpretabile: **il difetto �
 **⚠ `--chi-basc` attivo:** `perc_chi` **non è un'etichetta di lignaggio.**
 
 **I `.pkl` NON si committano** (binari). **Il dato è il comando.**
+
+---
+
+## 2026-09-19 — **L'ARCHIVIO A SERIE** (`--db-serie`, `--db-rigioca`, `gzip`)
+
+> **Blob del simulatore sigillato: `7c4dec1d`** *(byte grezzi `5216c891`)*. **Sigillo `12/12`.**
+> **`Z54` del registro.** I `.pkl` non si committano: **qui ci sono i comandi che li rigenerano.**
+
+### Gli strumenti
+
+| script | blob | cosa produce | esito |
+|---|---|---|---|
+| **`csv/_seal_fork/_sigillo_archivio.py`** | `6c039a43` | **il sigillo `V0`-`V9` + `V6b`** dell'archivio. Gira anche **una voce sola**: `python … _sigillo_archivio.py V6` | **`12/12`**, `csv/_seal_fork/_sigillo_archivio_2026-09-19.txt` |
+| **`csv/_seal_fork/_prova_D2_rigiocata.py`** | `b6297465` | la **prova del difetto `D2`** e, sullo stesso script, la prova della cura. Rileva la firma di `_db_serie_verifica` e **rovescia le attese** | **`7/7` prima** (`_prova_D2_rigiocata_2026-09-19.txt`, script `a3fad1a4`), **`8/8` dopo** (`_prova_D2_rigiocata_DOPO_2026-09-19.txt`) |
+| **`csv/_seal_fork/_costo_archivio.py`** | `4efcc767` | il **costo**: `pickle.load` per snapshot, e `gzip` ai livelli 1/6/9 su uno snapshot **vero** | `csv/_seal_fork/_costo_archivio_2026-09-19.txt` |
+
+### I comandi, verbatim
+
+```
+python csv/_seal_fork/_sigillo_archivio.py                    # il sigillo COMPLETO (12/12, ~6 min)
+python csv/_seal_fork/_sigillo_archivio.py V6                 # una voce sola -- NON e' un sigillo
+python csv/_seal_fork/_prova_D2_rigiocata.py                  # difetto D2 + cura, end-to-end
+python csv/_seal_fork/_costo_archivio.py                      # il costo, su _pilota6000/pilota.pkl
+```
+
+**Un archivio a serie si produce così** *(il `.pkl` non si committa: questo comando È il dato)*:
+
+```
+python soliton_simulator.py --batch --sep 8 --seed 900 --passi 100 --ogni 50 \
+    --csv <out>.csv --sync-db <dir>/stato.pkl --db-ogni 25 --db-serie
+```
+→ `stato_000025.pkl`, `…_000050`, `…_000075`, `…_000100`. **Con `.pkl.gz` lo snapshot è compresso**
+*(livello 1)*. **Per INFITTIRE** senza rifare il run, **da 50 a 100 a cadenza 10**:
+
+```
+python soliton_simulator.py --batch --sep 8 --seed 900 --passi 100 --ogni 50 \
+    --csv <out>.csv --sync-db <dir>/stato.pkl --db-ogni 10 --db-serie --db-rigioca 50 100
+```
+→ scrive `…_000060/70/80/90`, **salta `…_000100` che già esiste e lo CONTA**. A fine run:
+`[db] ARCHIVIO: 4 snapshot scritti, 1 saltati (gia' presenti), 0 FALLITI.`
+
+### I numeri, e quello che NON dicono
+
+```
+pickle.load di uno snapshot da 27.73 MB        0.156 s   (0.32 s se .gz)
+gzip livello 1    0.82 s   16.08 MB   1.725x       <- CABLATO, per decisione di Luca
+gzip livello 6    1.27 s   15.81 MB   1.755x
+gzip livello 9    4.42 s   15.77 MB   1.759x       <- il default di gzip.open, mai scelto da nessuno
+overhead DENTRO un run (V8):  +0.82 s/snapshot, +5.7 %   al livello 1
+                              +2.66 s/snapshot, +16.1 %  al livello 9
+```
+
+> **`1.76x` è IL LIMITE DEL DATO, non del formato** *(float64 densi)*. **Per questo la proposta
+> ibrida `pickle`+HDF5 è CHIUSA:** comprimerebbe gli stessi byte con gli stessi algoritmi.
+> *(HDF5 era già stato scartato per due ragioni indipendenti: perde l'atomicità di `os.replace` e
+> non serializza `rng_state`/`conc_nodi`.)*
+
+**⚠ `V8` è misurato su una scena BREVE e NON si estrapola:** `+0.82 s` per snapshot qui contro i
+`0.82 s` di una scrittura isolata da 27.73 MB — **coincidono per caso**, perché la rete a 100 passi
+è piccola. Su una campagna il costo per snapshot **cresce col numero di nodi**.
