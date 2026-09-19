@@ -124,8 +124,61 @@ COMBACIA** · `V7` retrocompatibilità · `V8` costo MISURATO · `V9` rigiro dei
 ## 3. TODO DEL NEXT STEP
 
 - [x] blob/branch · **§1 il generatore È uno solo** (e la riserva su `V6` dichiarata)
-- [ ] §2 serie + §3 gzip → **COSTO MISURATO** → riporta
-- [ ] §4 rigiocata + sigilli **V0-V9**
+- [x] §2 serie + §3 gzip → **COSTO MISURATO** *(`eed2ce5`)* → **riportato a Luca: manca la sua
+      decisione sul livello di compressione**
+- [x] §4 rigiocata — **implementata, e il suo primo criterio era SBAGLIATO: vedi §4-bis**
+- [ ] sigilli **V0-V9** *(nessuno scritto; la prova di `D2` ne anticipa un pezzo, non li sostituisce)*
 - [ ] registro + `INVENTARIO_strumenti.md` + relazione + **CHECKPOINT**
 - [ ] **⚠ NON toccare:** la fisica, `os.replace`, la verifica del blob, il filtro di `salva_stato`,
       i default di `--sync-db`/`--db-ogni`
+
+---
+
+## 4-bis. ⚠ CORREZIONE — **la §1.4 di questo documento era SBAGLIATA, e il commit `2c92b9d` con essa**
+
+**Scritto il 2026-09-19 dopo la prova, e messo QUI perché un documento di progettazione che resta
+sbagliato è peggio di un documento assente: qualcuno lo rileggerà per capire perché il codice è
+così.** *(`par.5-bis`: un fatto che si rivela superato si CORREGGE, non si lascia stale.)*
+
+### Cosa diceva la §1.4, e cosa è successo
+
+La §1.4 decideva di rifiutare una serie se **(a)** un blob differisce oppure **(b)** un `_db_step`
+non è multiplo di `--db-ogni`. **L'implementazione ha fatto una terza cosa, mai decisa da nessuno:
+ha preteso che i passi fossero CONTIGUI**, e ha **delegato (a)** a `carica_stato` sul solo snapshot
+caricato.
+
+> **La contiguità rifiutava proprio il caso d'uso di `--db-rigioca`:** infittire significa rigirare
+> con `--db-ogni` più piccolo, e una serie `250/500/750` **non è contigua** a cadenza `50`.
+> **Dimostrato, non dedotto:** `csv/_seal_fork/_prova_D2_rigiocata_2026-09-19.txt`, `7/7`,
+> commit `edab9d4`.
+
+### E il criterio **(b)** era sbagliato per la STESSA ragione
+
+**Il rilievo di Luca:** *«cadenze diverse nella stessa serie sono legittime: è il senso
+dell'archivio. Il rischio vero è mescolare due FISICHE, non due cadenze.»* **Il criterio (b) è un
+criterio di cadenza**: infittire a `30` una serie scritta a `250` sarebbe stato rifiutato allo
+stesso modo. **Quindi è caduto anche lui**, e questa è una decisione **oltre la lettera del
+mandato**, dichiarata in `ba759c6` perché possa essere ribaltata.
+
+### Cosa vale ADESSO — e questa riga è quella da credere
+
+> **Il discriminante è IL BLOB, e si verifica su TUTTI gli snapshot della serie.** Un file che non
+> si apre, o che non è un dizionario, è **rifiutato**: non è uno snapshot. **Nessun vincolo di
+> cadenza, di contiguità o di allineamento.**
+
+**Il costo è misurato** *(`eed2ce5`)*: `0.156 s` per snapshot non compresso, `0.32 s` compresso —
+**`3.8 s` per una serie da 24**, su un run che dura ore. **Per questo NON serve l'header** che la
+§1.4 ipotizzava come ripiego: *(per curiosità, `blob` è la **terza** chiave del dizionario, quindi
+sarebbe stato possibile — ma una soluzione non necessaria è solo un modo in più di sbagliare)*.
+
+### Il buco del presidio resta quello dichiarato, e resta aperto
+
+**Due run con lo stesso blob ma SEME DIVERSO non sono distinguibili dai `.pkl`**, perché il seme
+non è fra gli `attrs`. **La §1.4 lo dichiarava e aveva ragione: quella parte non è cambiata.**
+
+### La lezione, che è la stessa di ieri
+
+**Un test può fallire perché il codice è sbagliato, o perché il criterio chiede la cosa sbagliata.**
+Qui era **il criterio** — ed era un criterio **aggiunto** rispetto a un mandato che invece era
+chiaro. **È il tredicesimo criterio scaduto in tre giorni**, e il primo che non veniva da una
+descrizione stale ma da un'**aggiunta silenziosa**.
