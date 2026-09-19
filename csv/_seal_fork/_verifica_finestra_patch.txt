@@ -1,0 +1,16 @@
+[TIMBRO] _verifica_finestra_patch.py  sha1-BYTE 56946ffd  committato e pulito
+[TIMBRO] _sigillo_archivio.py  sha1-BYTE 6c039a43  committato e pulito
+partenza : scena_001800.pkl.gz   (15:54:16)
+bersaglio: scena_001860.pkl.gz   (15:57:06)  <- scritto DURANTE la finestra
+comando  : C:\Users\lpeano\soliton_simulator\csv\_test_fork\_scena_video_ripresa.py 310 C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_finestra_tmp --serie=10 --riprendi
+  RIPRESA: caricato scena_001800.pkl.gz (passo 1800 = frame 300). Si riparte dal frame 301, n=5938, archi=434010.
+W1   PASS   rigiocata 1800 -> 1860 in 183 s, rc=0
+W2   PASS   113 campi confrontati, 0 diversi  -> IDENTICO
+W3   PASS   contro scena_000060.pkl.gz: 84 campi diversi -- il confronto NON e' cieco
+
+ESITO: 3/3
+
+VERDETTO: LA TRAIETTORIA E' INTATTA. Ripartendo da uno snapshot scritto PRIMA
+  che toccassi i file, si riottiene ESATTAMENTE lo snapshot che il run ha
+  scritto DURANTE la finestra. Toccare il sorgente non ha contaminato il run.
+  NB: prova UNA finestra, quella misurata. Non e' un teorema su ogni caso.
