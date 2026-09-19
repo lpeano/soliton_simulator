@@ -141,3 +141,33 @@ L'analizzatore è pronto: `csv/_test_fork/_misure_run6000.py`.
 
 **E la ripresa è sigillata `5/5`:** si può ripartire dal passo 2700 — **ma prima va capito perché
 si è fermato**, altrimenti si riparte verso lo stesso muro.
+
+---
+
+## CHECKPOINT 2026-09-20 — **chiusa la topologia (`Z65`). Il simulatore non è stato toccato.**
+
+**HEAD `3a02819` · blob `775ceab7` · albero pulito · nessun processo in esecuzione.**
+
+**Fatto oggi, tutto sui 45 snapshot già in archivio, senza rigirare niente:** le somme (`Z63`), `f`
+e `median(|f|)` (`Z64`), e **la topologia (`Z65`)** — quattro componenti connesse che in 2700 passi
+non si scambiano **nemmeno un arco**, i due picchi del grado che sono **la semina** (tre grafi
+**completi** da 497 nodi al passo 6) e non una forma emersa, e il **grado 2 permanente** (84 % dopo
+2100 passi). → `doc/REFERTO_topologia.md`.
+
+**Un presidio che prima era un'assunzione, ora misurato:** `eta[k]` non diminuisce in **nessuna**
+delle 44 transizioni → **gli indici dei nodi sono stabili**, e ogni misura di coorte fatta finora
+poggiava su quello senza averlo verificato.
+
+### Cosa resta da fare quando il run è definitivamente chiuso
+
+1. **riapplicare la patch di ripresa** a `csv/_test_fork/_scena_video.py` (`f14ea4bd` → `7a02c5c3`),
+   **dopo** aver verificato dal codice che gli snapshot dell'archivio restano caricabili col blob
+   del driver cambiato; poi rigirare il sigillo del driver e **provare davvero** un ricarico +
+   ripresa da uno snapshot reale;
+2. **togliere `--override-blob`** dal driver: è un presidio **deliberatamente indebolito**,
+   accettabile solo finché gli esperimenti su `COPPIA_RECIPROCA` / `GRAV_AMPIEZZA` sono aperti;
+3. **i fronti aperti che nessuna misura di oggi ha chiuso:** perché il run si sia fermato al 2700;
+   perché la catena `f → x → r` non riproduca `r` dal passo 24 (`Z64`, famiglia `Z19`); perché 1455
+   nodi stiano a `10⁻¹³` nel ramo A e qualunque perturbazione della coppia li accenda (`Z63`); se
+   il profilo identico delle due cure sia **divergenza caotica** — servirebbe un terzo braccio con
+   perturbazione nulla, o un secondo seme.

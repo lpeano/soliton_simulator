@@ -428,3 +428,28 @@ overhead DENTRO un run (V8):  +0.82 s/snapshot, +5.7 %   al livello 1
 **⚠ `V8` è misurato su una scena BREVE e NON si estrapola:** `+0.82 s` per snapshot qui contro i
 `0.82 s` di una scrittura isolata da 27.73 MB — **coincidono per caso**, perché la rete a 100 passi
 è piccola. Su una campagna il costo per snapshot **cresce col numero di nodi**.
+
+---
+
+## Gli strumenti della TOPOLOGIA (2026-09-20) — **quale script produce quale numero**
+
+Tutti e tre leggono **solo** gli snapshot già in archivio: **nessun run, nessun `.pkl` nuovo**.
+Simulatore blob `775ceab7`, seme 42, scena video a 3 masse.
+
+| script | blob (byte grezzi) | esito | che numeri produce |
+|---|---|---|---|
+| `csv/_test_fork/_topologia_neonati.py` | `81b7be15` | `_topologia_neonati.txt` | **P0/P1** su 45 snapshot; le due coorti di grado-2 (`t0 = 600`, `1800`) seguite nel tempo col **controllo** dei grado≥3; il grado contro l'età ai passi 600/1800/2700 |
+| `csv/_test_fork/_topologia.py` | `bae1313b` | `_topologia.txt` | istogramma completo dei gradi **con la valle vuota**; clustering **esatto** per quattro gruppi di grado; lunghezze e punti d'appoggio delle catene; la quinta misura (grado alto ⟷ nodi del passo 60) |
+| `csv/_test_fork/_topologia_blocchi.py` | `40ab9e31` | `_topologia_blocchi.txt` | componenti del sottografo denso a **tre soglie**, densità interna, **archi diretti fra componenti**, e **la casella che decide**: capi della catena nello stesso pezzo o in due diversi |
+
+> **⚠ `_topologia.py` e `_topologia_blocchi.py` NON sono ridondanti, e la distinzione è il reperto:**
+> il primo misura che il **100 %** delle catene ha due punti d'appoggio **distinti**; il secondo che
+> lo **0.00 %** ne ha due in **pezzi diversi**. **Sono compatibili, e solo il secondo risponde alla
+> domanda del mandato.** Chi cita il primo da solo conclude l'opposto del vero.
+
+**Le due componenti connesse del grafo intero e la densità al passo 6** *(riportate in
+`doc/REFERTO_topologia.md` §1-2)* **non vengono da uno script committato**: sono due letture dirette
+con `connected_components` sugli snapshot di `_g6000` e `_fin_A`, e **lo dichiaro invece di
+attribuirle a uno strumento**. I numeri sono riproducibili da quegli snapshot in poche righe; il
+fatto che il grafo abbia **4 componenti a tutti i passi** è comunque **ricalcolato da
+`_topologia_blocchi.py`** sul sottografo denso, dove dà le stesse 4 componenti.
