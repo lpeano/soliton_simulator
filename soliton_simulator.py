@@ -666,6 +666,13 @@ GUSCIO_MORBIDO = False   # DIFFUSIONE DI SUPERFICIE delle d0 (legge, zero parame
 # al rilassamento plastico un termine diffusivo D*lap(d0) con D = c_locale * spaziatura d'arco. Il
 # laplaciano e' ~0 nel nucleo uniforme e grande al bordo ripido -> smussa SOLO il guscio (tensione
 # superficiale), non tocca la rigidita' del core. Clamp causale (CFL). Default off = non-regressione.
+COPPIA_RECIPROCA = False  # RECIPROCITA' DELLA COPPIA SPINORIALE (2026-09-19). OFF = byte-identico.
+                        # Se True, il torque `cross(_nb_grav(), nb)` viene pesato per `ramp[k]`,
+                        # LO STESSO peso che il nodo ha come SORGENTE. Cura un'ASIMMETRIA MISURATA:
+                        # un neonato ha peso ESATTAMENTE zero negli archi (A7b) ma riceve una coppia
+                        # di 0.3809, cioe' 4.9 VOLTE la mediana dei maturi, perche' `_nb_grav()`
+                        # divide per `rho_spin` ed e' un VERSORE: l'ampiezza del campo non entra.
+                        # Nessun numero nuovo, nessuna soglia: e' `ramp`, gia' la legge del peso.
 CHI_BASC = False        # BASCULAMENTO CHIRALE (legge, zero parametri): se True, la chiralita'
 # di ogni nodo NON resta piu' fissa dalla nascita, ma vira secondo la TORSIONE LOCALE rispetto
 # al QUANTO DI OLONOMIA (PHI_CRIT = 2pi): chi=+1 dove la torsione ha COMPLETATO il giro (materia
@@ -2426,7 +2433,28 @@ class Rete:
             # spinoriale (porta il segno relativo dei vicini via interferenza). Identita': cross(nb_campo, nb)
             # = cross(nb_campo - nb, nb) (perche' cross(nb,nb)=0) -> ZERO nel limite (nb_campo=nb=polo) ->
             # riduzione esatta. Mantiene i generatori chirali di B; nessun parametro (peso 1.0); snapshot t-1.
-            correzione = correzione + np.cross(self._nb_grav(), nb)
+            # [RECIPROCITA', 2026-09-19 -- flag OFF di default, byte-identico a spento]
+            # ⚠ IL DIFETTO CHE CURA, MISURATO (doc/REFERTO_verifica_reciprocita.md):
+            #   `A7b` dice che un nodo appena nato NON PESA. NON dice cosa RICEVE.
+            #   Il TERMINE 1, cross(B, nb), e' gia' reciproco DA SOLO: B = somma(nb*w)/somma(w), e
+            #   per un neonato i pesi sono ESATTAMENTE zero -> deg = 0 -> B = 0.
+            #   Il TERMINE 2 no: `_nb_grav()` divide per `rho_spin`, quindi e' un VERSORE
+            #   (|_nb_grav| = 1.000000 a p05, p50 e p95) e l'ampiezza del campo NON entra.
+            #   MISURATO sul nodo 2393 (neonato, peso [0. 0.], rho 5.7e-10): coppia = 0.3809,
+            #   cioe' 4.9 VOLTE la mediana dei nodi maturi. Non riceve "come gli altri": riceve
+            #   CINQUE VOLTE -- e piu' il nodo e' debole, piu' il versore e' "puro".
+            # LA FORMA: si MOLTIPLICA per il peso che gia' esiste. NIENTE `if`, NIENTE soglie:
+            #   un `if ramp < X` introdurrebbe un numero scelto (A1) e una DISCONTINUITA'.
+            #   `ramp` cresce con `eta`, quindi il neonato entra GRADUALMENTE come sorgente E come
+            #   ricevente: non e' escluso, e' PESATO.
+            # E' `ramp[k]`, NODALE, perche' la coppia e' nodale: cross(B, nb) e cross(nbg, nb) sono
+            #   (n,3) per NODO e non hanno indici d'arco. Deciso DAL CODICE, non scelto.
+            # NON si toccano: il pavimento 1e-6, `A7b`, il peso zero alla nascita, il termine 1.
+            _tq = np.cross(self._nb_grav(), nb)
+            if COPPIA_RECIPROCA:
+                # la STESSA riga di `_pesi()` (:2649): nessun numero nuovo
+                _tq = _tq * np.minimum(1.0, self.eta[:n] / TAU_A)[:, None]
+            correzione = correzione + _tq
         # VITA MEDIA LOCALE (ispirata al decadimento atomico / regola d'oro di Fermi): TAU_A non e'
         # piu' un numero fisso ma una PROPRIETA' DELLO STATO. Come ogni isotopo ha la sua vita media,
         # ogni nodo ha la sua: stati fortemente legati (|Psi|^2 grande, nucleo coerente) decadono
@@ -5578,6 +5606,7 @@ def _applica_flag(a):
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
     global TAU_LUCE, RUMORE_COLORATO
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
+    global COPPIA_RECIPROCA
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
@@ -5624,6 +5653,7 @@ def _applica_flag(a):
     MITMAX = a.mitmax
     K_FRANGE = a.kfrange   # canale ORBITALE tangenziale (moto lungo le frange). 0 = spento (non-regressione)
     VIRIALE = bool(getattr(a, "viriale", False))   # conversione viriale (legge): default off = non-regressione
+    COPPIA_RECIPROCA = bool(getattr(a, "coppia_reciproca", False))  # reciprocita' del torque spinoriale: default off = byte-identico
     CHI_BASC = bool(getattr(a, "chi_basc", False)) # basculamento chirale (legge): default off = non-regressione
     ZETA_VIR = bool(getattr(a, "zeta_vir", False)) # freno anisotropo (legge): default off = non-regressione
     PAV_COM = bool(getattr(a, "pav_com", False))   # pavimento comovente (legge): default off = muro assoluto 0.05
@@ -5992,6 +6022,11 @@ def _cli():
                         "ripartisce fra cadere (cos^2) e girare (sin^2) secondo l'angolo fra "
                         "pozzo e flusso di fase. Conservativa (non additiva come kfrange). "
                         "Default off = non-regressione.")
+    p.add_argument("--coppia-reciproca", action="store_true", dest="coppia_reciproca",
+                   help="RECIPROCITA': pesa il torque spinoriale cross(_nb_grav, nb) per ramp[k], "
+                        "lo STESSO peso che il nodo ha come sorgente. Cura l'asimmetria misurata "
+                        "(un neonato non pesa ma riceve 4.9 volte la coppia di un maturo). "
+                        "Zero numeri nuovi, nessuna soglia. OFF di default = byte-identico.")
     p.add_argument("--chi-basc", action="store_true", dest="chi_basc",
                    help="BASCULAMENTO CHIRALE (legge, zero parametri): la chiralita' dei nodi "
                         "vira secondo la torsione locale rispetto al quanto PHI_CRIT (2pi): "
