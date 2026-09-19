@@ -1,0 +1,72 @@
+[TIMBRO] _pilota_scena6000.py  sha1-BYTE 91da82d5  committato e pulito
+costanti LETTE dal modulo: TAU_A=50.0  DT=0.01  PASSI_PER_FRAME=6
+
+=== 2. IL PESO, e come cresce ===
+  passo 120    n=2391     archi=429498      28.675 MB   (11.9928 MB per 1000 nodi)
+  passo 240    n=2417     archi=429532      29.578 MB   (12.2375 MB per 1000 nodi)
+  passo 360    n=2851     archi=430072      29.824 MB   (10.4608 MB per 1000 nodi)
+  blob negli snapshot: ['7c4dec1d']
+  CRESCITA MISURATA: +460 nodi -> +574 archi  =  1.25 archi per nodo nuovo
+     (il codice ne prescrive 2: il figlio nasce con due archi verso i genitori. Meno di 2
+      significa che qualche arco viene anche RIMOSSO -- si misura, non si assume)
+  peso per arco: 0.0693 kB   |  peso osservato: da 28.67 a 29.82 MB (+4.0 %) mentre n fa +19.2 %
+  -> IL PESO E' DOMINATO DAGLI ARCHI, CHE CRESCONO POCO: non da n.
+
+=== 1. LA DURATA, e come cresce ===
+  costo per frame contro n:
+     n~2391       14.57 s/frame
+     n~2391       14.92 s/frame
+     n~2391       14.04 s/frame
+     n~2391       14.20 s/frame
+     n~2391       14.10 s/frame
+     n~2392       14.10 s/frame
+     n~2395       14.34 s/frame
+     n~2407       14.84 s/frame
+     n~2452       14.86 s/frame
+     n~2532       15.32 s/frame
+     n~2652       15.66 s/frame
+     n~2790       15.88 s/frame
+  MODELLO costo(s/frame) = 0.00422296*n + 4.328
+
+=== 3. IL TASSO d(eta)/d(passo), FERMI e MOBILI SEPARATI (A3c) ===
+    la legge DERIVATA (Z9, dal codice) e': d(eta)/d(passo) = DT*r  ->  passi(ramp=1) = TAU_A/(DT*r)
+  r: min 1.108125e-04  mediana 9.796914e-01  max 1.414213e+00   (n=2849)
+  LA SOGLIA NON E' SCELTA -- frazione 'ferma' al variare del margine su r_min:
+     r <= r_min*(1+1e-06   )   fermi =   0.04 %
+     r <= r_min*(1+10      )   fermi =   0.53 %
+     r <= r_min*(1+100     )   fermi =   4.91 %
+     r <= r_min*(1+1000    )   fermi =  22.82 %
+  -> FERMI 1 (0.04 %)   MOBILI 2848 (99.96 %)
+  FERMI    r mediano 1.108125e-04   d(eta)/d(passo) = DT*r = 1.108125e-06   passi(ramp=1) = 4.512e+07
+  MOBILI   r mediano 9.807964e-01   d(eta)/d(passo) = DT*r = 9.807964e-03   passi(ramp=1) = 5098
+  Z9-a  passi_mancanti = TAU_A/(DT*r_MED_MOBILI) - passi_fatti = 5098 - 360 = 4738
+        -> a 6000 passi il run SUPERA la maturazione dei mobili
+  CONTROPROVA (Z9: il falsificatore): d(eta)/d(passo) MISURATO / DT*r LETTO = 1.1682
+     (Z9 dava 0.9977 e 0.9966 negli ultimi due intervalli: entro lo 0.3 %)
+     r mediano: 0.352865 al passo 240  ->  0.878013 al passo 360   (+148.82 %)
+     se `r` scende, usare l'ESTREMO FINALE SOTTOSTIMA: rapporto atteso con la
+     media dei due estremi = 0.7009   contro il 1.1682 misurato
+     -> ATTENZIONE: lo scarto NON e' spiegato dal movimento di `r`.
+        NON lo spiego altrimenti: va riportato cosi'.
+
+=== LA CADENZA, DERIVATA dal budget dichiarato PRIMA (5.0 GB) ===
+  n a 1000 frame:  LINEARE 8436    ESPONENZIALE 25217   <- DUE MODELLI, range DICHIARATO
+  (riferimento STORICO, scena a 2400 passi: n = 8018 a 400 frame. Blob DIVERSO: e' un
+   riferimento, non un dato di questo run -- A3c)
+     archi attesi a fine run: 437041 (+1.6 %)
+  [lineare] n_fin=8436 -> snapshot finale ~30.3 MB;  picco doppia copia ~60.6 MB
+     cadenza  snapshot   spazio stimato (media peso lineare in n)
+        60        100          2.95 GB   OK
+       120         50          1.47 GB   OK
+       300         20          0.59 GB   OK
+       600         10          0.29 GB   OK
+      1200          5          0.15 GB   OK
+     archi attesi a fine run: 457981 (+6.5 %)
+  [esponenziale] n_fin=25217 -> snapshot finale ~31.8 MB;  picco doppia copia ~63.5 MB
+     cadenza  snapshot   spazio stimato (media peso lineare in n)
+        60        100          3.02 GB   OK
+       120         50          1.51 GB   OK
+       300         20          0.60 GB   OK
+       600         10          0.30 GB   OK
+      1200          5          0.15 GB   OK
+  DURATA stimata (modello LINEARE di n, che SOTTOSTIMA): 27177 s = 7.5 h
