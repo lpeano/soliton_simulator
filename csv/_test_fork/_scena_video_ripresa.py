@@ -1,5 +1,27 @@
 # -*- coding: utf-8 -*-
-"""LA SCENA DEL VIDEO, SENZA IL RENDERING -- riproduce `--test N-MASSE` e SALVA lo stato.
+"""LA SCENA DEL VIDEO CON LA RIPRESA -- copia di `_scena_video.py` piu' `--riprendi`.
+
+*** PERCHE' E' UNA COPIA E NON UNA MODIFICA (decisione di Luca, 2026-09-19) ***
+  `_scena_video.py` e' IN USO da un run a 6000 passi che sta girando adesso. Modificarlo non
+  fermerebbe quel processo -- Python ha gia' caricato il modulo in memoria -- ma cambierebbe il
+  FILE SU DISCO: il run ha gia' timbrato il blob vecchio, e se poi si volesse riprendere si
+  userebbe un file DIVERSO da quello che ha prodotto i dati. Separare i due file toglie
+  l'ambiguita' invece di doverla spiegare dopo.
+
+*** COSA AGGIUNGE, E COSA NON CAMBIA ***
+  `--riprendi`: se la cartella contiene gia' una serie DI QUESTA FISICA, carica il piu' recente e
+  continua da li'. SENZA il flag il comportamento e' IDENTICO all'originale: cartella sporca ->
+  RIFIUTO. La ripresa e' una scelta ESPLICITA, mai un ripiego automatico.
+  Il blob di OGNI snapshot e' gia' verificato da `_db_serie_verifica` PRIMA del carico: riprendere
+  da una fisica diversa e' impossibile, non sconsigliato.
+
+*** LA CONSISTENZA NON E' DICHIARATA QUI: E' SIGILLATA ALTROVE ***
+  `csv/_seal_fork/_sigillo_ripresa_scena.py` confronta un run CONTINUO con uno INTERROTTO E
+  RIPRESO. Se lo stato finale non e' identico, LA RIPRESA NON SI USA: un run che SEMBRA continuo
+  e non lo e' e' peggio di un run interrotto, perche' non te ne accorgi.
+
+---
+LA SCENA DEL VIDEO, SENZA IL RENDERING -- riproduce `--test N-MASSE` e SALVA lo stato.
 
 ⚠ PERCHE' ESISTE, e NON e' una scorciatoia:
   nel ramo headless `--sync-db` **CARICA soltanto** (`:5836-5844`; il commento lo dice:
@@ -44,12 +66,17 @@ _ARGV = list(sys.argv)
 #   `batch_condensazione`, dove questo percorso non passa. Verificato dal sorgente, non dedotto.
 SERIE = None
 CSVPROG = None
+RIPRENDI = False
 _resti = []
 for _x in _ARGV[1:]:
     if _x.startswith("--serie="):
         SERIE = int(_x.split("=", 1)[1])
     elif _x.startswith("--csv-progresso="):
         CSVPROG = _x.split("=", 1)[1]
+    elif _x == "--riprendi":
+        # LA RIPRESA E' UNA SCELTA ESPLICITA, MAI UN RIPIEGO AUTOMATICO: senza questo flag il
+        # comportamento resta quello dell'originale (cartella sporca -> RIFIUTO).
+        RIPRENDI = True
     else:
         _resti.append(_x)
 _ARGV = [_ARGV[0]] + _resti
@@ -111,15 +138,43 @@ BASE_SERIE = os.path.join(DEST, "scena.pkl.gz")     # `.gz` -> compressione a li
 _n_scritti = _n_saltati = _n_falliti = 0
 _peso_tot = 0
 print("\n  SEME EFFETTIVO (letto da Rete.__init__): %s    BLOB: %s" % (SEME_EFFETTIVO, BLOB_RUN))
+FRAME0 = 0          # da quale frame si parte: 0 = da zero, >0 = RIPRESA
 if SERIE:
     print("  SERIE ATTIVA: uno snapshot ogni %d frame = %d passi di motore -> %s"
           % (SERIE, SERIE * int(S.PASSI_PER_FRAME), BASE_SERIE))
     _pre, _guaio = S._db_serie_verifica(BASE_SERIE, S.net._versione_codice())
     if _guaio:
         raise SystemExit("[serie] RIFIUTO DI PARTIRE: %s" % _guaio)
-    if _pre:
-        raise SystemExit("[serie] RIFIUTO: la cartella contiene gia' %d snapshot di QUESTA fisica. "
-                         "Il mandato dice DA ZERO: usa una cartella pulita." % len(_pre))
+    if _pre and not RIPRENDI:
+        raise SystemExit("[serie] RIFIUTO: la cartella contiene gia' %d snapshot di QUESTA fisica, "
+                         "e --riprendi NON e' stato chiesto. O usi una cartella pulita, o dichiari "
+                         "di voler RIPRENDERE." % len(_pre))
+    if _pre and RIPRENDI:
+        # LA RIPRESA. `_db_serie_verifica` ha GIA' controllato il BLOB di OGNI snapshot: se il
+        # codice fosse cambiato saremmo usciti sopra. Qui si carica il piu' RECENTE.
+        _passo0, _path0 = _pre[-1]
+        S.net.carica_stato(_path0)
+        _dentro = int(getattr(S.net, "_db_step", -1))
+        if _dentro != _passo0:
+            raise SystemExit("[serie] RIFIUTO: il passo NEL FILE (%d) non e' quello NEL NOME (%d). "
+                             "Non riprendo da uno snapshot che non sa dire dove si trova."
+                             % (_dentro, _passo0))
+        if _passo0 % int(S.PASSI_PER_FRAME):
+            raise SystemExit("[serie] RIFIUTO: il passo %d non e' un multiplo di PASSI_PER_FRAME=%d, "
+                             "quindi cadrebbe DENTRO un frame e la ripresa non sarebbe allineata."
+                             % (_passo0, int(S.PASSI_PER_FRAME)))
+        FRAME0 = _passo0 // int(S.PASSI_PER_FRAME)
+        if FRAME0 >= NFRAME:
+            raise SystemExit("[serie] NIENTE DA FARE: l'archivio arriva gia' al frame %d di %d."
+                             % (FRAME0, NFRAME))
+        print("  RIPRESA: caricato %s (passo %d = frame %d). Si riparte dal frame %d, "
+              "n=%d, archi=%d." % (os.path.basename(_path0), _passo0, FRAME0, FRAME0 + 1,
+                                   S.net.n, len(S.net.i)))
+        print("  ATTENZIONE: il COPIONE della scena riparte dalla fase 0. NON tocca la fisica -- la")
+        print("  sua unica azione, _semina_n_masse, e' gia' avvenuta all'avvio ed e' stata")
+        print("  SOVRASCRITTA dal carica_stato. Lo dimostra il sigillo della ripresa, non questo commento.")
+    elif RIPRENDI:
+        print("  --riprendi chiesto ma la cartella e' VUOTA: si parte da zero (non e' un errore).")
 
 csv_f = None
 if CSVPROG:
@@ -139,7 +194,7 @@ if CSVPROG:
 t0 = time.time()
 S.stato["nframe"] = 0
 prog = []
-for k in range(NFRAME):
+for k in range(FRAME0, NFRAME):
     S.passo_test()
     for _ in range(int(S.PASSI_PER_FRAME)):
         S.scuoti_vuoto(S.net); S.net.step(); S.net.mitosi()
@@ -193,16 +248,17 @@ for k in range(NFRAME):
         prog.append((fr, S.net.n, el))
         print("  frame %-5d n=%-7d archi=%-8d coer_l=%-8.4g dil=%+7.3f%%   [%.1f s, %.3f s/frame]"
               % (fr, S.net.n, len(S.net.i), dg.get("coer_l", float("nan")),
-                 100 * dg.get("dil", float("nan")), el, el / fr), flush=True)
+                 100 * dg.get("dil", float("nan")), el, el / max(fr - FRAME0, 1)), flush=True)
         if csv_f is not None:
             csv_f.write("%d,%d,%d,%d,%.6g,%.6g,%.1f,%.3f\n"
                         % (fr, fr * int(S.PASSI_PER_FRAME), S.net.n, len(S.net.i),
                            dg.get("coer_l", float("nan")), dg.get("dil", float("nan")),
-                           el, el / fr))
+                           el, el / max(fr - FRAME0, 1)))
             csv_f.flush()
 
 el = time.time() - t0
-print("\n  TOTALE %.1f s per %d frame -> %.3f s/frame medio" % (el, NFRAME, el / max(NFRAME, 1)))
+print("\n  TOTALE %.1f s per %d frame (dal %d al %d) -> %.3f s/frame medio"
+      % (el, NFRAME - FRAME0, FRAME0 + 1, NFRAME, el / max(NFRAME - FRAME0, 1)))
 if len(prog) >= 2:
     (f1, n1, t1), (f2, n2, t2) = prog[0], prog[-1]
     c1 = t1 / f1; c2 = (t2 - t1) / max(f2 - f1, 1)
