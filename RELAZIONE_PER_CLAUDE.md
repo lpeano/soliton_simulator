@@ -7004,3 +7004,50 @@ prezzo di `P3`.**
 
 **I sigilli del giro rigirano identici:** `_sigillo_coorti` **9/9**, `_sigillo_anello` **10/10**
 annidato, `62 s`.
+
+---
+
+## `D2` — **il criterio di rifiuto della serie era un criterio AGGIUNTO, e rifiutava il caso d'uso** (2026-09-19)
+
+**Riscontro: `7/7`, `csv/_seal_fork/_prova_D2_rigiocata_2026-09-19.txt`, blob del simulatore
+`1d42c733`, script `a3fad1a4` committato e pulito.**
+
+Il mandato dell'archivio chiedeva di rifiutare *«una serie di un ALTRO RUN»*, e **«un altro run»
+significa un'altra FISICA: il discriminante è il BLOB.** L'implementazione ha invece introdotto un
+criterio di **CONTIGUITÀ** dei passi alla cadenza `--db-ogni` corrente — **mai chiesto** — e la
+conseguenza è che **`--db-rigioca` non può fare la cosa per cui esiste**: infittire un archivio
+significa rigirare con `--db-ogni` più piccolo, e una serie `250/500/750` **non è contigua** a
+cadenza `50`.
+
+```
+P2   cadenza 50 -> 'serie NON CONTIGUA: mancano [300, 350, 400, 450, 550] (attesi 11, trovati 3)'
+P3   END-TO-END: returncode=1 in 19.2 s -- il programma RIFIUTA di infittire
+P3b  nessuno snapshot creato ne' toccato
+```
+
+> **⚠ E IL PUNTO CHE RENDE LA PROVA CONCLUSIVA È `P2b`, non `P2`.** Con `db_ogni = 50` i passi
+> `250/500/750` **sono tutti multipli di 50**, quindi il criterio **(b)** che il commit `2c92b9d`
+> dichiarava **non può scattare**. Il rifiuto viene **esclusivamente** dalla contiguità: non c'è una
+> seconda spiegazione possibile, ed è **verificato**, non assunto.
+
+**`P4` è il rovesciamento esatto del mandato, e vale più di `P2`:** gli snapshot della prova sono
+**file VUOTI, 0 byte** — non sono pickle, **non hanno un blob** — e la verifica alla cadenza
+legittima **li accetta**. **Il criterio implementato RIFIUTA una cadenza legittima e ACCETTA
+l'ignoto**, mentre doveva fare l'opposto.
+
+**Questo difetto non nasce da una svista di programmazione: nasce da un criterio AGGIUNTO rispetto
+al mandato.** È la stessa famiglia dei criteri scaduti già catalogati in `CLAUDE.md` par.9
+(*«un test può fallire perché il codice è sbagliato, o perché il criterio chiede la cosa
+sbagliata»*) — **qui era il criterio**, e **il rilievo è di Luca**: io l'avevo visto come sospetto
+dalla lettura, **senza vedere che la causa fosse la divergenza dal mandato**.
+
+**Due osservazioni incidentali, dichiarate perché viste:**
+- **il rifiuto costa `19.2 s`**: arriva **dopo** la semina della rete, non prima. Nessun passo è
+  girato (`P3b`), ma la verifica potrebbe stare prima di costruire la scena;
+- **`--nmasse 1` diventa `2` in silenzio** (`max(2, ...)` a `:6345` e `:6385`). **Non è un difetto
+  nascosto**: il valore effettivo è scritto nei dati come `nmasse_effettive` (`:6352`) e stampato.
+  Lo annoto perché **chi legge il comando della prova vede `1` e i dati dicono `2`**.
+
+**Cosa NON prova questa prova:** la serie è fatta di **nomi**, non di snapshot veri, quindi **il
+caricamento non è esercitato**. La rigiocata che *funziona* — dopo la correzione — va provata su
+**snapshot VERI**, e quella prova non è ancora stata fatta.

@@ -1,0 +1,30 @@
+[TIMBRO] _prova_D2_rigiocata.py  sha1-BYTE a3fad1a4  committato e pulito
+serie costruita: ['stato_000250.pkl', 'stato_000500.pkl', 'stato_000750.pkl']
+dimensioni (byte): [0, 0, 0]
+
+P1    PASS   cadenza 250: 3 snapshot, guaio=None
+P2b   PASS   passi [250, 500, 750] tutti multipli di 50 -> il criterio (b) del mandato NON scatta; se P2 rifiuta, e' SOLO la contiguita'
+P2    PASS   cadenza 50 (infittimento): guaio='serie NON CONTIGUA: mancano [300, 350, 400, 450, 550] (attesi 11 passi, trovati 3)'
+P2c   PASS   il motivo del rifiuto e' la CONTIGUITA' (non il blob, non la cadenza)
+P4    PASS   gli snapshot sono 0 byte -- nessun pickle, nessun blob -- e P1 LI ACCETTA: il criterio implementato non guarda cio' che il mandato chiedeva
+
+P3 comando: C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe C:\Users\lpeano\soliton_simulator\soliton_simulator.py --batch --nmasse 1 --sep 8 --passi 300 --ogni 50 --seed 900 --sync-db C:\Users\lpeano\AppData\Local\Temp\provaD2_qmbngbvy\stato.pkl --db-ogni 50 --db-serie --db-rigioca 250 500
+P3    PASS   returncode=1 in 19.2 s -- il programma RIFIUTA di infittire
+P3b   PASS   nessuno snapshot creato ne' toccato: ['stato_000250.pkl', 'stato_000500.pkl', 'stato_000750.pkl']
+
+--- ultime righe dell'output di P3 ---
+   [step2-orologio] *** AVVISO GRAVE: lo STEP 2 e' FISICA DI DEFAULT dal 2026-09-16, ma richiede --campo-spinoriale + --deparam-orologio (l'orologio _phc vive li'). MANCANO, quindi e' SPENTO: questo run gira SENZA l'accoppiamento EM-metrica, cioe' su una fisica AMPUTATA rispetto al default. NON e' un'opzione: e' un prerequisito mancante. ***
+   [spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.
+   [batch] condensazione: seed=900 passi=300 ogni=50 sep=8.0 nmasse=2
+   [batch] leggi attive: GRAV_BIFASE=True SPIN_ORBITA(via SPINORE)=True COPPIA_MIT=1.0 lambda=0.800
+   passo | dens_centr | dist_masse | ANTIGUSCIO(r,c,n) | PICCHI(tot,NUOVI)
+   [db] RIFIUTO DI PARTIRE: serie NON CONTIGUA: mancano [300, 350, 400, 450, 550] (attesi 11 passi, trovati 3)
+        Mescolare due serie renderebbe l'archivio non interpretabile. Usa una cartella pulita o --db-cleanup.
+
+ESITO: 7/7
+
+VERDETTO: D2 E' PRESENTE E DIMOSTRATO.
+  Una serie scritta a cadenza 250 NON puo' essere infittita a cadenza 50:
+  il rifiuto scatta per CONTIGUITA', che e' un criterio AGGIUNTO rispetto al
+  mandato, e scatta PRIMA che --db-rigioca faccia qualunque cosa.
+  Il difetto NON e' un errore di programmazione: e' una DIVERGENZA DAL MANDATO.
