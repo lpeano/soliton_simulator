@@ -119,3 +119,25 @@ quindi dopo un riavvio lo stato si legge **dal disco**, non dalla memoria.
 >
 > **E la prova finale, dopo la patch:** ricaricare uno snapshot **di questo run** e riprendere.
 > **Deve funzionare.**
+
+**chiuso 2026-09-19 19:05 — FERMATO DA LUCA, dopo 2h30 di stallo.** **`450` frame su 1000 =
+`2700` passi su 6000**, in `7013 s` di progresso utile più **~2h30 in cui il processo era VIVO e
+non avanzava** (`15 817 s` di CPU totali, `99.6 %` su **un solo core**, nessuna scrittura dopo le
+`16:35:05`).
+
+**L'ARCHIVIO È INTATTO E COMPLETO fino al passo 2700**, verificato dopo l'arresto:
+**45 snapshot su 45** si aprono, il `_db_step` **nel file** coincide con quello **nel nome**, serie
+**contigua** da 60 a 2700 a cadenza 60, **nessun buco**, **nessun `.tmp`** lasciato a metà
+*(`os.replace` è atomico: o il file c'è completo, o non c'è)*. **1.3 GB**, blob `7c4dec1d` ovunque.
+
+**Il blocco NON è spiegato.** Escluso misurando: memoria *(287 MB usati, 11.5 GB liberi)*, disco
+*(17 GB)*, CFL *(`_taup_cfl_max` fermo a `0.5657`, zero clamp)*, `MAX_NODI` *(9511 su 4 000 000)*,
+`NaN`/`inf` *(zero su tutti gli array)*. → `doc/REFERTO_blocco_run6000.md`, dati grezzi in
+`csv/_test_fork/_dump_2700.txt`.
+
+**COSA RESTA FATTIBILE, e non è poco:** le misure del §3 del mandato — `Z9-b`, `ramp` per coorte,
+`p95/p05`, le conseguenze, il ciclo — **si fanno su questi 45 snapshot senza rigirare niente**.
+L'analizzatore è pronto: `csv/_test_fork/_misure_run6000.py`.
+
+**E la ripresa è sigillata `5/5`:** si può ripartire dal passo 2700 — **ma prima va capito perché
+si è fermato**, altrimenti si riparte verso lo stesso muro.
