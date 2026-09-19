@@ -49,7 +49,13 @@ sys.path.insert(0, RADICE)
 sys.path.insert(0, _QUI)
 from _sigillo_archivio import uguale_contenuto      # IL criterio, non una sua copia
 
-DRIVER = os.path.join(RADICE, "csv", "_test_fork", "_scena_video_ripresa.py")
+# IL DRIVER VERO, non una copia: la ripresa e' stata portata in `_scena_video.py` il
+# 2026-09-19 e la copia e' stata rimossa. Si puo' passare un altro percorso da argv, cosi'
+# questo sigillo resta rigirabile su un driver diverso invece di essere legato a un nome
+# (Z31: quattro sigilli non erano piu' rigirabili perche' il loro termine di paragone era
+# sparito).
+DRIVER = sys.argv[1] if len(sys.argv) > 1 else os.path.join(
+    RADICE, "csv", "_test_fork", "_scena_video.py")
 NF = 12            # frame totali per braccio
 OGNI = 3           # snapshot ogni 3 frame = 18 passi
 META = NF // 2     # dove si "rompe" il braccio B
