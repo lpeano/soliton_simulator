@@ -7512,3 +7512,52 @@ ciò che potrebbe essere **aliasing** (§4).
 > **E il sigillo ha dato una cosa non richiesta:** `SA` mostra che **ripartendo da zero si
 > riottiene byte-identico lo snapshot 60**. **Il run è riproducibile da capo** — finora era solo
 > argomentato.
+
+## IL PASSO 198 — **non è un artefatto numerico: è UN NODO NEONATO sotto il pavimento dell'inerzia** (2026-09-19)
+
+**`doc/REFERTO_passo198.md`** · 11 snapshot a **6 passi**, rigiocata sigillata 3/3 · blob
+`7c4dec1d` · seme 42 · **un seme, una scena**.
+
+**① Non è la popolazione.** Mentre `omega_s` max fa **`×1295`**, i percentili **CALANO**:
+
+```
+        p75        p95      p99      max     | n>1e2
+192   0.08953    0.1744   0.2266   0.3097   |   0
+198   0.08438    0.1646   0.2144   401      |   1      <- UNO su 2394
+```
+
+**② I tre candidati numerici cadono tutti, e sono DATATI:** `_cs_lam_degenere` **`+0` in tutti e
+dieci gli intervalli** *(le due occorrenze sono prima del passo 180)*; `_fatt_cs_ultimo` **fermo**
+a `p50 = 1.48`; **`NaN`/`inf` ZERO** su 8 campi × 11 istanti, e zero valori oltre `1e10`/`1e15`.
+
+**③ Chi è:** **indice 2393 su n = 2394 — l'ultimo.**
+
+```
+                questo nodo    mediana pop.
+eta             0.0607         1.4968      <- NEONATO, ~8 passi
+_deg            2              496         <- IL GRADO DI NASCITA
+rho_spin        5.70e-10       0.0123      <- venti MILIONI di volte sotto
+```
+
+**E il pavimento dell'inerzia è `1e-6`: questo nodo sta MILLE VOLTE SOTTO.** Sei passi prima il
+massimo era un altro nodo: **non era anomalo.**
+
+**④ Vale per tutti, a ogni istante:** i nodi con `omega > 1e2` hanno **sempre** `eta` `0.04-0.16`,
+**`_deg` mediano `2`**, `rho ~10⁻⁹`. E **`_sfondo_ko_rho` scatta per la prima volta esattamente al
+passo 198** — è il contatore dei nodi che cadono nel fallback dello sfondo **per `rho`**.
+
+**⑤ È un contagio:** Jaccard `1.0000` per 12 passi *(resta solo lui)*, poi `1 → 4 → 5 → 8 → 10 →
+12` con Jaccard `0.62-0.83`: **nessuno guarisce.**
+
+> **⚠ NON è un candidato nuovo: è il meccanismo che `CLAUDE.md` §9 descrive già** *(`inerzia =
+> max(rho_sorgente, 1e-6)`, `omega = coppia/inerzia`)* — **ma con la natura cambiata.** Là il
+> pavimento era attivo sul **99.7 %** dei nodi; **qui la densità mediana è `~10⁻²` e il pavimento è
+> attivo SOLO SUI NEONATI.** **Non è più una proprietà del regime: è un difetto dei nodi appena
+> nati.**
+
+**⚠ E un difetto del mio criterio, dichiarato:** la lettura `B` non è scattata per un **rapporto
+fra due mediane che valgono `~10⁻¹⁵`, cioè zero macchina**. Avevo scritto un criterio su un
+rapporto **senza chiedermi se il denominatore fosse un numero**. Non l'ho cambiato a posteriori.
+
+**Cosa NON ho misurato:** **la coppia** su quei nodi — l'ultimo anello della catena. È coerente con
+tutto il resto, ma non è misurato, e non lo scrivo come se lo fosse.
