@@ -53,8 +53,16 @@ def passo_di(p):
     return int(re.search(r"_(\d{6})\.", p).group(1))
 
 
+def _mod(v):
+    """MODULO, e per i COMPLESSI si prende PRIMA il modulo: `asarray(v, float)` su un complex
+    SCARTA LA PARTE IMMAGINARIA (ComplexWarning), e le statistiche sarebbero sulla sola parte
+    reale. `psi` e `psi_spin` sono complex128, quindi non e' un caso di scuola: e' meta' del dato."""
+    a = np.asarray(v)
+    return np.abs(a).ravel().astype(float) if a.dtype.kind == "c" else np.abs(a.astype(float)).ravel()
+
+
 def stat(v):
-    a = np.abs(np.asarray(v, float)).ravel()
+    a = _mod(v)
     fin = np.isfinite(a)
     a = a[fin]
     if not a.size:
@@ -118,7 +126,7 @@ def main():
         v = at.get(k)
         if not isinstance(v, np.ndarray):
             continue
-        a = np.abs(np.asarray(v, float)).ravel()
+        a = _mod(v)
         a = a[np.isfinite(a)]
         if not a.size:
             continue
@@ -136,7 +144,7 @@ def main():
                                            "rho_sp MAX", "r MIN", "fr r<1e-4", "eta MAX"))))
     for p in fs[-N_TREND:]:
         a2 = carica(p)["attrs"]
-        g = lambda k: np.abs(np.asarray(a2[k], float)).ravel()
+        g = lambda k: _mod(a2[k])
         r = np.asarray(a2["_r_corrente"], float)
         r = r[np.isfinite(r)]
         print("%-8d %-8d %-9d %-11.4g %-11.4g %-11.4g %-11.4g %-11.4g %-11.4g %-11.4f %-11.4g" %
