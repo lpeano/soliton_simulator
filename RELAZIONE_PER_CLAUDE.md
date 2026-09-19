@@ -7312,3 +7312,40 @@ TOTALE 151 voci, 38 col blob (25 %), e 69 CITANO NUMERI DI MISURA SENZA BLOB
 
 **Il gate del programma resta `c0803713`:** questo `12/12` certifica **l'archivio** sul blob
 `7c4dec1d`, **non il fork**.
+
+## Il run a 6000 passi, letto a METÀ — `doc/REFERTO_run6000_parziale.md` (2026-09-19)
+
+**Frame 450 su 1000**, blob `7c4dec1d`, seme **42**, dal solo CSV di progresso *(nessuno snapshot
+aperto: il run sta ancora girando)*.
+
+**Il fatto strutturale:** il sistema **aggiunge nodi e quasi non aggiunge archi**.
+
+```
+n           x3.98    (2391 -> 9511)
+archi       x1.021   (429498 -> 438532)
+grado medio x0.26    (359.3 -> 92.2)
+```
+
+**È l'estensione nel tempo di ciò che `Z9` aveva misurato a un istante** *(«i nati dopo sono il
+70.2 % dei nodi ma portano l'1.37 % degli estremi d'arco»)*. E spiega perché il costo per frame sia
+cresciuto solo del **10 %** mentre `n` quadruplicava: **il costo è sugli archi, non sui nodi.**
+
+**Il fatto nuovo, ed è oltre dove `Z49` si fermava:** la dilatazione **non rimbalza più**.
+`−1.13 %` (frame 400) → `−4.89` (425) → **`−13.25`** (450). `Z49` aveva visto un rimbalzo
+(`−7.44 → −2.70 → −4.21 → +2.80 → −1.13`) e si fermava lì. **Da 2400 passi in poi accelera verso il
+basso**, mentre la coerenza locale **sale** al massimo del run (`0.6867`, e ancora in salita).
+
+> **⚠ E una coincidenza che vale la pena guardare:** al frame 400 questo run dà `n = 8018`,
+> `coer_l = 0.6691`, `dil = −1.132 %` — **identici a `Z49`**, che girava sul blob `a1ae5090`.
+> **Le cure entrate fra i due blob non hanno spostato questa scena di una cifra.** Osservazione,
+> non misura controllata: sono blob diversi, ed è la situazione in cui `A3c` vieta di trasportare.
+
+**Cosa NON dice:** `Z9-b`, `ramp`, `p95/p05` e il ciclo dei nodi interni **stanno negli snapshot**,
+e non li ho aperti per non rubare CPU al run. L'analizzatore è pronto e committato.
+**E `P10` non è decidibile da `dil`:** parla di **nodi interni in unità comoventi**, e usare la
+dilatazione al suo posto sarebbe cambiare la grandezza dopo aver visto i dati.
+
+**Un mio errore già visibile:** l'estrapolazione dal pilota dava `n ≈ 8400` a 1000 frame; al **450**
+siamo già a **9511**. Sbagliata di un fattore 3-5, per la ragione che avevo dichiarato — il pilota
+misurava i primi 60 frame, dove `n` **non cresceva affatto**. Le stime nuove (`24 000` / `48 000`)
+vengono dallo stesso tipo di estrapolazione e **meritano la stessa diffidenza**.
