@@ -7349,3 +7349,39 @@ dilatazione al suo posto sarebbe cambiare la grandezza dopo aver visto i dati.
 siamo già a **9511**. Sbagliata di un fattore 3-5, per la ragione che avevo dichiarato — il pilota
 misurava i primi 60 frame, dove `n` **non cresceva affatto**. Le stime nuove (`24 000` / `48 000`)
 vengono dallo stesso tipo di estrapolazione e **meritano la stessa diffidenza**.
+
+## ⚠ IL RUN A 6000 SI È FERMATO AL PASSO 2700, E IL PROCESSO È VIVO (2026-09-19)
+
+**Referto: `doc/REFERTO_blocco_run6000.md` · dati grezzi: `csv/_test_fork/_dump_2700.txt`**
+*(238 righe, tutte le 113 chiavi dello snapshot; script `043922cc`)*.
+
+```
+ultimo progresso : frame 450, passo 2700, ore 16:35:05     -> FERMO DA 2h08
+processo         : VIVO, 12015 s di CPU su 12060 di orologio = 99.6 %, SU UN SOLO CORE
+ritmo precedente : 15.6 s/frame, stabile per 450 frame
+```
+
+**Escluso misurando:** memoria *(287 MB usati, 11.5 GB liberi)*, disco *(17 GB)*, CFL
+*(`_taup_cfl_max` fermo a `0.5657`, zero clamp)*, `MAX_NODI` *(9511 su 4 000 000 = **0.24 %**)*,
+`NaN`/`inf` *(**zero** su tutti gli array)*. **Lo stato al passo 2700 non è rotto.**
+
+**Cosa stava degenerando**, negli ultimi 420 passi: `d0` massimo da **43 a 395**, `d` massimo
+raddoppiato, `phivel` massimo quasi triplicato. E `d0` **non è un outlier isolato**: `p50 = 1.305`,
+**1227 archi sopra 10×p50**, e l'arco peggiore ha `d0 = 394.65` contro `d = 0.0899` →
+**`d/d0 = 2.3e-04`**.
+
+> **Un dato che riguarda `Z9`, non il blocco:** `_r_corrente` ha `p90 = p99 = MAX = 1.414213`,
+> cioè **oltre il 10 % dei nodi è ESATTAMENTE al tetto √2 di `ritmo()`**. E `eta` massimo vale
+> `36.37` su `TAU_A = 50`: **il nodo più vecchio è al 73 % della maturazione, a metà run.**
+> **Nessuno è ancora maturo**, quindi `fr(ramp > 0.9)` è ancora zero.
+> **E il rischio di `P3` si sta manifestando:** i nodi con `r < 1e-4` sono passati da `0.0004` a
+> `0.0026`, **sei volte in 420 passi** — è il meccanismo che farebbe **smettere di crescere `Z9-b`**.
+
+**NON HO UNA SPIEGAZIONE DEL BLOCCO, e la dico così.** Il consumo single-core con memoria stabile
+indica **un loop Python**, non numpy; ma il candidato ovvio — il CFL — **è fermo**, quindi o il
+meccanismo è un altro o esiste un ciclo che il CFL non conta. `py-spy` direbbe su quale riga è
+fermo, **dall'esterno e senza toccarlo**, e non è installato.
+
+**Cosa resta salvabile: tutto.** 45 snapshot, 1.3 GB, cadenza 60, **nessun buco**, blob `7c4dec1d`
+ovunque. **Le misure del §3 si possono fare su metà run senza rigirare niente** — ed è esattamente
+il motivo per cui l'archivio è stato costruito. La ripresa è sigillata `5/5`.
