@@ -134,6 +134,30 @@ def dettaglio_diff(k, va, vb, max_elem=3):
                          % (chi, n, list(piu[n:n + max_elem])))
             righe.append("   coda NON VUOTA?  %s"
                          % any(bool(x) for x in list(piu[n:])))
+        elif not div:
+            # LO STRUMENTO NON PUO' FERMARSI QUI. "stessa lunghezza, ZERO elementi diversi" accanto
+            # a un FAIL e' un output che si CONTRADDICE: chi lo legge deve indovinare, ed e' il
+            # difetto che questa funzione esiste per togliere. Se il contenuto coincide elemento
+            # per elemento ma la SERIALIZZAZIONE no, la differenza e' nella FORMA del pickle, e
+            # le due cose che la producono si MISURANO invece di supporle:
+            #   - il `repr`, che e' insensibile all'aliasing;
+            #   - quanti oggetti DISTINTI PER IDENTITA' contengono le due liste: `[[]]*3` e
+            #     `[[], [], []]` hanno elementi uguali e pickle DIVERSI, perche' il primo e' tre
+            #     riferimenti allo STESSO oggetto e pickle lo memoizza.
+            da, db_ = pickle.dumps(va, 5), pickle.dumps(vb, 5)
+            righe.append("   *** CONTENUTO IDENTICO ELEMENTO PER ELEMENTO, SERIALIZZAZIONE NO ***")
+            righe.append("   pickle: len A=%d  len B=%d" % (len(da), len(db_)))
+            i = next((j for j, (x, y) in enumerate(zip(da, db_)) if x != y), min(len(da), len(db_)))
+            righe.append("   primo byte diverso all'offset %d (su %d)" % (i, min(len(da), len(db_))))
+            righe.append("   contesto A: %r" % da[max(0, i - 24):i + 24])
+            righe.append("   contesto B: %r" % db_[max(0, i - 24):i + 24])
+            righe.append("   repr(A) == repr(B) ?  %s" % (repr(va) == repr(vb)))
+            ida, idb = set(id(x) for x in va), set(id(x) for x in vb)
+            righe.append("   oggetti DISTINTI per identita': A=%d  B=%d  su %d celle"
+                         % (len(ida), len(idb), la))
+            righe.append("   -> se questi due numeri differiscono, la differenza e' ALIASING")
+            righe.append("      (condivisione di oggetti), NON contenuto: due strutture con gli")
+            righe.append("      stessi valori e aliasing diverso danno pickle diversi.")
     else:
         righe.append("   A = %r" % (va,))
         righe.append("   B = %r" % (vb,))
