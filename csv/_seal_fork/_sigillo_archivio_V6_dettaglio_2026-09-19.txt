@@ -1,0 +1,42 @@
+[TIMBRO] _sigillo_archivio.py  sha1-BYTE 648017f9  committato e pulito
+V0   PASS   simulatore: byte grezzi a937a098, git-blob d62801ab (pre-archivio b9e07c73)
+       > conc_nodi: len A=876  len B=876
+       >    elementi confrontabili 876, DIVERSI 0  (primi indici: [])
+       >    *** CONTENUTO IDENTICO ELEMENTO PER ELEMENTO, SERIALIZZAZIONE NO ***
+       >    pickle p5: len A=21710  len B=21717
+       >    primo byte diverso NEI DATI (saltato l'header di frame): offset 21642 su 21710
+       >    contesto A: b'\x94]\x94(K\x00G\x00\x00\x00\x00\x00\x00\x00\x00G?\xe56\xd9\xfb\x05\xbe\xf0j=\x06\x00\x00ea]\x94]\x94(K\x01G\x00\x00\x00\x00\x00\x00\x00\x00G'
+       >    contesto B: b'\x94]\x94(K\x00G\x00\x00\x00\x00\x00\x00\x00\x00G?\xe56\xd9\xfb\x05\xbe\xf0\x8c\tschwinger\x94ea]\x94]\x94(K\x01G\x00\x00'
+       >    pickle p0 (ASCII, senza frame): len A=39152  len B=39163  UGUALI? False
+       >    repr(A) == repr(B) ?  True
+       >    oggetti DISTINTI per identita': A=876  B=876  su 876 celle
+       >    -> se questi due numeri differiscono, la differenza e' ALIASING
+       >       (condivisione di oggetti), NON contenuto: due strutture con gli
+       >       stessi valori e aliasing diverso danno pickle diversi.
+     [V6@75] confrontati 97 campi, 1 guai
+       > conc_nodi: len A=879  len B=879
+       >    elementi confrontabili 879, DIVERSI 0  (primi indici: [])
+       >    *** CONTENUTO IDENTICO ELEMENTO PER ELEMENTO, SERIALIZZAZIONE NO ***
+       >    pickle p5: len A=21796  len B=21803
+       >    primo byte diverso NEI DATI (saltato l'header di frame): offset 21642 su 21796
+       >    contesto A: b'\x94]\x94(K\x00G\x00\x00\x00\x00\x00\x00\x00\x00G?\xe56\xd9\xfb\x05\xbe\xf0j=\x06\x00\x00ea]\x94]\x94(K\x01G\x00\x00\x00\x00\x00\x00\x00\x00G'
+       >    contesto B: b'\x94]\x94(K\x00G\x00\x00\x00\x00\x00\x00\x00\x00G?\xe56\xd9\xfb\x05\xbe\xf0\x8c\tschwinger\x94ea]\x94]\x94(K\x01G\x00\x00'
+       >    pickle p0 (ASCII, senza frame): len A=39306  len B=39317  UGUALI? False
+       >    repr(A) == repr(B) ?  True
+       >    oggetti DISTINTI per identita': A=879  B=879  su 879 celle
+       >    -> se questi due numeri differiscono, la differenza e' ALIASING
+       >       (condivisione di oggetti), NON contenuto: due strutture con gli
+       >       stessi valori e aliasing diverso danno pickle diversi.
+     [V6@100] confrontati 97 campi, 1 guai
+V6   FAIL   rigiocata da 50: rigenerati i passi [75, 100] in 40 s, 194 campi confrontati, ['passo 75: conc_nodi: DIVERSO (dettaglio sotto)', 'passo 100: conc_nodi: DIVERSO (dettaglio sotto)']
+
+ESITO: 1/2   *** GIRO PARZIALE (V6): NON E' UN SIGILLO ***
+
+ATTENZIONE: GIRO PARZIALE su V6: le voci non girate NON sono state verificate, e
+  l'assenza di un FAIL non e' un PASS. Per timbrare serve il giro COMPLETO.
+
+VERDETTO: SIGILLO FALLITO sui DECISIVI: V6
+  V1/V2 che cadono significano CHE HO TOCCATO LA FISICA: si torna indietro.
+  V6 che cade significa che la riproduzione NON funziona, e il par.1 del task
+  history ha gia' escluso la causa piu' ovvia (un secondo generatore): si
+  RIPORTA, senza inventare la spiegazione.

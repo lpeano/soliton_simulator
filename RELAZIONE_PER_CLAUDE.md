@@ -7194,3 +7194,51 @@ V9 _sigillo_coorti.py rigira: 9/9 PASS in 62 s                               PAS
 **⚠ `V8` è su una scena BREVE e NON si estrapola:** `+2.66 s` per snapshot qui contro i `4.42 s`
 misurati su uno snapshot del pilota, **perché la rete a 100 passi è piccola**. Il `+16.1 %` sul run
 è il numero di *questa* scena, non di una campagna.
+
+## `V6` — **lo strumento ha parlato: la differenza è la stringa `"schwinger"`, e non è una differenza di CONTENUTO** (2026-09-19)
+
+**`csv/_seal_fork/_sigillo_archivio_V6_dettaglio_2026-09-19.txt`**, sigillo `c56ab4df` →
+terza iterazione, simulatore **invariato** `d62801ab`. **Tre giri dello strumento, e i primi due
+hanno detto cose sbagliate — le riporto entrambe perché erano mie.**
+
+**① Il dettaglio si contraddiceva:** `len A = len B = 876`, **`DIVERSI 0`**, accanto a un `FAIL`.
+**② «primo byte diverso all'offset 3» era un artefatto mio:** l'offset 3 cade dentro il **campo
+lunghezza del FRAME** del protocollo 5 (`\x80\x05\x95` + 8 byte). Due pickle di lunghezza diversa
+differiscono **sempre** lì, e quel byte non dice **niente** su dove sia la differenza vera.
+
+**③ Saltato l'header, la differenza è a `offset 21642` — identica ai due passi:**
+
+```
+A: ... \xf0  j=\x06\x00\x00       e a ]     <- LONG_BINGET: riferimento al MEMO
+B: ... \xf0  \x8c\tschwinger\x94  e a ]     <- SHORT_BINUNICODE "schwinger" + MEMOIZE
+```
+
+> **È la stessa stringa `"schwinger"`.** In `A` era già nel memo *(stesso oggetto, riusato)*; in `B`
+> è un **oggetto distinto con lo stesso valore**, quindi pickle la riscrive per esteso. **I 7 byte
+> di differenza sono esattamente questo.**
+
+**Quello che è MISURATO, non dedotto:**
+
+| | |
+|---|---|
+| `repr(A) == repr(B)` | **True**, a entrambi i passi |
+| oggetti distinti per identità, 1º livello | `A = 876`, `B = 876` — **uguali** |
+| `pickle` p5 | `21710` contro `21717` |
+| `pickle` p0 (ASCII, **senza framing**) | `39152` contro `39163` → **non è il framing** |
+
+**La differenza è ALIASING, ma al SECONDO livello** — dentro le sotto-liste, non fra di esse. **Il
+mio contatore guardava solo il primo livello e per questo diceva `876 = 876`: era una misura giusta
+della cosa sbagliata.**
+
+> **CONSEGUENZA: `conc_nodi` ha lo STESSO CONTENUTO nei due rami.** Ciò che differisce è **l'identità
+> degli oggetti stringa Python**, non lo stato. **E il criterio di `V6` — confronto dei byte della
+> serializzazione — è sensibile a quella identità.** Per gli `ndarray` il confronto sui byte è
+> giusto; **per le strutture Python cattura anche l'aliasing, che non è stato.**
+
+**NON cambio il criterio da solo.** Lo avevo scritto prima di vedere il numero, ed è la ragione per
+cui lo scrivo anche adesso: **riscriverlo ora lo riscriverei per far passare la mia stessa
+modifica**, e sarebbe il **quattordicesimo** criterio riscritto. **La decisione è di Luca.**
+
+**⚠ E resta una domanda che i dati NON chiudono, quindi la lascio aperta invece di risolverla:**
+*perché* nella rigiocata quella stringa sia un oggetto diverso è una spiegazione che **non ho
+misurato**. Il fatto misurato è che **il contenuto coincide**; il meccanismo no.
