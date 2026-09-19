@@ -7596,3 +7596,37 @@ segno a contenere il reperto.
 
 **Cosa resta aperto:** perché `1455` nodi stiano a `10⁻¹³` nel ramo A, e perché **qualunque**
 perturbazione del termine di coppia li accenda.
+
+## `f` E `median(|f|)` — **l'algebra è falsificata, `f` CROLLA, e la catena non riproduce `r`** (2026-09-20)
+
+**`doc/REFERTO_f_e_median.md`** · blob `775ceab7` · le due finestre a 6 passi · **nessun run: i dati
+bastavano** *(`psi_spin`, `_psi_spin_prec` e `_med_f_prec` sono tutti negli snapshot)*.
+
+**① L'algebra è falsificata, con un margine enorme:**
+
+```
+passo     x DEDOTTO     x RICALCOLATO     rapporto
+12          1.6            0.72065         0.45
+18          4.35           0.0807754       0.019
+24        224              0.0051151       2.3e-05     <- fattore 44 000
+```
+
+**② E `f` non cresce: CROLLA.** `|f|` mediana da `0.1794` a `0.00304` nella finestra `0→60`
+(**−98 %**), mentre il `med` usato **sale** del `12 %`. **Nessuna delle quattro letture scatta come
+scritta** — e il pavimento **non scatta mai** (`+0` in tutte e venti le transizioni, coerente col
+`2 su 2700`: il contatore non conta un'altra cosa).
+
+**③ ⚠ Il reperto nuovo:** ricalcolando `r` dalla formula di `ritmo()` nodo per nodo, **la
+ricostruzione riproduce `r` al passo 6** (scarto `0.032`) **e non lo riproduce più dal 24**
+(`0.0072` contro `1.4141`, scarto `1.406`).
+
+> Due spiegazioni possibili, **nessuna misurata**: il `med` salvato non è quello usato in quel passo,
+> **oppure `_r_corrente` è scritto in un momento del passo diverso** da quello in cui `psi_spin` e
+> `_psi_spin_prec` hanno i valori salvati — **famiglia `Z19`, quarta occorrenza**.
+> **Conseguenza: non posso concludere se sia `f` a muoversi o il metro ad accorciarsi.** Quello che
+> misuro è vero di `f` **come lo ricostruisco io**.
+
+**④ Un fatto che NON dipende dalla ricostruzione:** `_med_f_prec`, letto **direttamente** dagli
+snapshot, **oscilla dell'`802 %`** fra passi consecutivi nella finestra dell'evento, contro il
+**`19.1 %`** della finestra iniziale. **`Z43` dava il `62 %`: qui è tredici volte tanto, e solo
+durante l'evento.**
