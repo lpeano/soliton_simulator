@@ -7242,3 +7242,73 @@ modifica**, e sarebbe il **quattordicesimo** criterio riscritto. **La decisione 
 **⚠ E resta una domanda che i dati NON chiudono, quindi la lascio aperta invece di risolverla:**
 *perché* nella rigiocata quella stringa sia un oggetto diverso è una spiegazione che **non ho
 misurato**. Il fatto misurato è che **il contenuto coincide**; il meccanismo no.
+
+## ✅ L'ARCHIVIO È SIGILLATO — `12/12` sul blob `7c4dec1d` (2026-09-19)
+
+**`csv/_seal_fork/_sigillo_archivio_2026-09-19.txt`**, sigillo `6c039a43`, byte grezzi del
+simulatore `5216c891`. **I quattro decisivi passano.**
+
+```
+V1  PRE-ARCHIVIO (b9e07c73) vs flag OFF : 97 campi, IDENTICI     PASS  [bloccante]
+V2  flag ON vs flag OFF                 : 97 campi, IDENTICI     PASS  [bloccante]
+V6  rigiocata da 50 -> [75, 100]        : 194 campi, IDENTICI    PASS  [decisivo]
+V6b il criterio PRENDE ancora le differenze vere: 4 casi su 4    PASS  [decisivo]
+V0 V1b V3 V4 V5 V7 V8 V9                                         PASS
+```
+
+### `V6` passa, e **non perché ho allentato il criterio**
+
+**È l'unica cosa che conta di questo giro**, e la dimostra `V6b`, non `V6`:
+
+```
+aliasing rotto (deepcopy), valori intatti  -> uguale=True    atteso=True
+un valore cambiato ([80][0][0]: 0 -> 1)    -> uguale=False   atteso=False
+una voce aggiunta (len 879 -> 880)         -> uguale=False   atteso=False
+un ndarray float64 con UN elemento cambiato-> uguale=False   atteso=False
+```
+
+**Senza `V6b`, un `PASS` dopo la riscrittura di un criterio non è distinguibile da un criterio
+disattivato.** *(Quattordicesimo criterio riscritto del programma — registrato come tale in
+`Z55`, e la ragione è **misurata**: l'aliasing di `pickle` non è stato del sistema.)*
+
+**E la fisica resta il vincolo duro:** gli `ndarray` si confrontano ancora sui **byte**; i `float`
+con `struct.pack` e non con `==`, così `NaN` combacia con sé stesso e **`-0.0` non passa per
+`0.0`**; il **tipo** deve coincidere.
+
+### La compressione, e la proposta HDF5 che si chiude
+
+**`V8` misura la decisione di Luca:** `+5.7 %` sul run al **livello 1**, contro `+16.1 %` al
+livello 9 — stessi 100 passi @25. **`1.76x` su float64 densi è il limite del DATO, non del
+formato**, e per questo **l'ibrido `pickle`+HDF5 è chiuso**: comprimerebbe gli stessi byte con gli
+stessi algoritmi.
+
+### Il buco dei blob, **misurato invece che stimato**
+
+```
+doc/RAMIFICAZIONI.md         119 voci,  36 col blob  (30 %)
+doc/COMPONENTI_PROMOSSE.md    23 voci,   0 col blob  ( 0 %)
+doc/INVENTARIO_strumenti.md    9 voci,   2 col blob  (22 %)
+TOTALE 151 voci, 38 col blob (25 %), e 69 CITANO NUMERI DI MISURA SENZA BLOB
+```
+
+**L'impressione era *«alcune ce l'hanno, la maggioranza no»*. Il numero è `25 %`, e
+`COMPONENTI_PROMOSSE` è a ZERO su 23** — cioè proprio il registro dove si decide cosa è fisica.
+
+> **⚠ E IL PRESIDIO ATTIVO NON L'HO TROVATO, quindi lo dico invece di scrivere l'ennesima nota.**
+> Un controllo che **rifiuti** una voce nuova senza blob è possibile solo sulle **tabelle**, dove
+> c'è una struttura. Su prosa libera ogni riga contiene numeri — date, percentuali, numeri di riga
+> — e **un controllo che segnala tutto non lo legge nessuno.** Quello che ho scritto è una
+> **misura**: non fallisce, non blocca, e **non verifica che il blob citato sia quello GIUSTO**.
+
+### Cosa NON è stato dimostrato, e va riletto così fra sei mesi
+
+- **il sigillo dice che la fisica NON È CAMBIATA, non che sia GIUSTA.** `V1`/`V2` confrontano il
+  codice con sé stesso prima e dopo;
+- **`V6` gira su UNA scena e UN seme:** dimostra che il meccanismo non perde stato, **non** che la
+  rigiocata combaci su tutti i semi;
+- **`V8` è su una scena BREVE:** su una campagna il costo per snapshot **cresce col numero di nodi**;
+- **`Z55` resta APERTA:** *perché* nella rigiocata `"schwinger"` sia un oggetto diverso **non è
+  misurato**. Il contenuto coincide; il meccanismo no.
+
+**Il gate del programma resta `c0803713`:** questo `12/12` certifica **l'archivio** sul blob
+`7c4dec1d`, **non il fork**.
