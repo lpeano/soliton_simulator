@@ -2895,8 +2895,20 @@ class Rete:
         # alla distruzione. Con `gzip` NO: un `GzipFile` non chiuso puo' lasciare il TRAILER
         # INCOMPLETO e il file ILLEGGIBILE. Senza il `with`, la compressione produrrebbe archivi
         # rotti in modo silenzioso, che e' il difetto peggiore possibile qui.
+        # [ARCHIVIO, 2026-09-19] LIVELLO 1, PER DECISIONE DI LUCA E SU NUMERI MISURATI.
+        # `gzip.open` usa `compresslevel=9` DI DEFAULT, e quel 9 non lo aveva scelto nessuno.
+        # MISURATO su uno snapshot vero di 27.73 MB (csv/_seal_fork/_costo_archivio_2026-09-19.txt):
+        #     nessuna compressione  0.129 s   27.73 MB   1.000x
+        #     livello 1             0.82  s   16.08 MB   1.725x
+        #     livello 9             4.42  s   15.77 MB   1.759x
+        # Il livello 9 costa 5.4 VOLTE il livello 1 per il 2 % di spazio in piu', ed e' 34 volte
+        # piu' lento dello scrivere non compresso. "Indefendibile" (Luca, 2026-09-19).
+        # E IL NUMERO CHIUDE ANCHE LA PROPOSTA IBRIDA pickle+HDF5: 1.76x su float64 densi e' IL
+        # LIMITE DEL DATO, non del formato, quindi HDF5 con compressione non farebbe molto meglio.
+        # NB: il default resta NON COMPRESSO -- gzip si attiva solo se il path finisce in `.gz`.
         _apri = gzip.open if str(path).endswith('.gz') else open
-        with _apri(tmp, 'wb') as _fh:
+        _kw = {'compresslevel': 1} if str(path).endswith('.gz') else {}
+        with _apri(tmp, 'wb', **_kw) as _fh:
             pickle.dump(stato, _fh, protocol=pickle.HIGHEST_PROTOCOL)
         os.replace(tmp, path)   # scrittura atomica: o il DB e' completo o non c'e'
         return ver['blob'] or ver['content_hash']
