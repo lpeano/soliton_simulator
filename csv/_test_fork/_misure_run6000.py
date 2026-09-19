@@ -107,9 +107,14 @@ def main():
         # (4) conseguenze
         psi = np.abs(np.asarray(at["psi"]))
         rho = np.asarray(at["rho_spin"], float)
+        # ⚠ NON SI TRATTIENE `at`: 100 snapshot x ~50 MB decompressi = ~5 GB di RAM, e lo script
+        # morirebbe di OOM DOPO aver letto mezzo archivio. Si tengono solo i NUMERI; i blocchi 4 e
+        # 5 rileggono i file uno alla volta. Costa I/O, non memoria.
         serie.append(dict(passo=passo, n=len(ramp), archi=len(i), z9b=z9b, f05=f05, f09=f09,
-                          rap=rap, rampmed=float(np.median(ro)), at=at, prod=prod,
+                          rap=rap, rampmed=float(np.median(ro)), file=p,
+                          maturi=float(np.mean(prod >= 1.0)),
                           psi=float(np.median(psi)), rho=float(np.median(rho))))
+        del at, st, ramp, i, j, prod, psi, rho
         print("%-8d %-8d %-9d | %-9.6f %-9.4f %-8.4f | %-8.3f %-8.4f | %-9.3e %-9.3e"
               % (passo, len(ramp), len(i), z9b, f05, f09, rap, float(np.median(ro)),
                  float(np.median(psi)), float(np.median(rho))))
@@ -119,7 +124,7 @@ def main():
     print("=== VERDETTO su Z9-b (il criterio di chiusura di Z9) ===")
     print("  a 2400 passi valeva 0.074950 (TRE masse, blob a1ae5090 -- RIFERIMENTO, blob diverso: A3c)")
     print("  ORA, al passo %d: %.6f   -> x%.2f" % (u["passo"], u["z9b"], u["z9b"] / 0.074950))
-    print("  frazione di archi MATURI (prod == 1): %.6f" % float(np.mean(u["prod"] >= 1.0)))
+    print("  frazione di archi MATURI (prod == 1): %.6f" % u["maturi"])
     if u["z9b"] >= 1.0:
         print("  *** Z9-b == 1: IL CRITERIO E' SODDISFATTO. Z9 SI CHIUDE. ***")
     else:
@@ -140,7 +145,7 @@ def main():
     print("%-8s %-11s %-11s %-11s %-10s %-9s %-10s %-10s"
           % ("passo", "|psi| med", "rho_spin", "cs med", "cs_std/cs%", "grado med", "r med mob", "passi(r=1)"))
     for s in serie:
-        at = s["at"]
+        at = carica(s["file"])["attrs"]          # RILETTO, non trattenuto
         cs = np.asarray(at.get("_cs_nodo_prev", []), float)
         cs = cs[np.isfinite(cs)]
         csm = float(np.median(cs)) if cs.size else float("nan")
@@ -174,7 +179,7 @@ def main():
     print("  raggio assoluto: un sistema che si espande campionato a raggio fisso ALIASA (par.4).")
     print("%-8s %-10s %-10s | %s" % ("passo", "R_anello", "n", "nodi interni per frazione " + str(FRAZ_INTERNA)))
     for s in serie:
-        at = s["at"]
+        at = carica(s["file"])["attrs"]          # RILETTO, non trattenuto
         pos = np.asarray(at["pos"], float)
         deg = np.asarray(at.get("_deg", []), float)
         m = min(len(pos), len(deg))
