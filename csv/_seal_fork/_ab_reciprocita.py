@@ -120,7 +120,17 @@ def stat(at):
 
 
 def main():
-    base = os.path.join(RADICE, "csv", "_seal_fork", "_ab_tmp")
+    # ⚠ NON E' PIU' UNA CARTELLA TEMPORANEA, ED E' UNA CORREZIONE (2026-09-20).
+    # La prima versione faceva `rmtree` nel `finally`: i due A/B sono stati girati, hanno prodotto
+    # il loro verdetto, e GLI SNAPSHOT SONO SPARITI. Quando e' servito misurarci sopra le SOMME,
+    # non c'era piu' niente da misurare.
+    # E' ESATTAMENTE `Z31` -- *"quattro sigilli non sono piu' rigirabili perche' il loro termine di
+    # paragone viveva in una cartella temporanea"* -- che avevo citato DUE VOLTE la sera prima,
+    # nello stesso lavoro, e poi ho rifatto. Una regola che si cita e non si applica non e' una
+    # regola: e' una citazione.
+    # Il nome porta il FLAG, cosi' due cure diverse non si sovrascrivono.
+    base = os.path.join(RADICE, "csv", "_seal_fork",
+                        "_ab_" + (FLAG.lstrip("-").replace("-", "_") or "base"))
     shutil.rmtree(base, ignore_errors=True)
     A = os.path.join(base, "A"); B = os.path.join(base, "B")
     try:
@@ -217,7 +227,10 @@ def main():
         print("NESSUN NUMERO DEL RAMO B E' UN RISULTATO DI FISICA: esperimento su META' RUN.")
         return 0
     finally:
-        shutil.rmtree(base, ignore_errors=True)
+        # GLI SNAPSHOT RESTANO: vedi la nota in testa a main(). I .pkl.gz non si committano
+        # (sono ~30 MB l'uno) ma restano SUL DISCO, e il comando che li rigenera e' questo script.
+        print("")
+        print("gli snapshot dei due rami restano in %s  (NON cancellati: Z31)" % base)
 
 
 if __name__ == "__main__":
