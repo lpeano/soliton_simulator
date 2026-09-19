@@ -1,0 +1,47 @@
+[TIMBRO] _pilota_eta.py  sha1-BYTE d5c69ee0  committato e pulito
+====================================================================================================================
+PILOTA DEL RUN A 6000 -- il batch matura, o `r` e' al pavimento? (seme 900, come Z46)
+====================================================================================================================
+  IN TESTA: --tau-luce ha il SIGILLO COMPLESSIVO ancora FAIL (resta T3): ramo NON CERTIFICATO.
+            UN SEME. NESSUN VERDETTO DI FISICA.
+
+  .pkl       : csv\_test_fork\_pilota6000\pilota.pkl   26.45 MB
+  blob nel DB: b9e07c73   passo = 300   n = 1200   n0 = 1196 (dal CSV)
+  len(_r_corrente) = 1200 (scritta prima dell'ultima mitosi: i 0 in eccesso sono ESCLUSI)
+
+--- (1) `r` NEL BATCH: e' al pavimento? (r_floor = 1.414212e-06) ---
+    FERMI    1116 nodi ( 93.0 %)   r mediana 1.414215e-06   r/r_floor 1.0000
+    MOBILI     84 nodi (  7.0 %)   r mediana 1.177213e+00   r/r_floor 8.324e+05
+    (Z46, STESSO seme e STESSA scena, a 120-1200 passi: 92.7 %% FERMI con r/r_floor = 1.0000)
+
+--- (2) IL TASSO d(eta)/d(passo), FERMI e MOBILI SEPARATI (A3c: mai una mediana comune) ---
+    gruppo                 nodi     eta MEDIANA     d(eta)/d(passo) passi a ramp=1 
+    ORIGINALI FERMI        1116     1.000423e-02    3.334743e-05    1.499e+06      
+    ORIGINALI MOBILI       80       3.190807e+00    1.063602e-02    4701           
+    NATI DOPO              4        1.648544e+00    5.495147e-03    9099           
+    (per gli ORIGINALI eta/T e' ESATTAMENTE la media di DT*r sul run: nessuna stima.)
+    CONTROLLO: DT * r mediano dei MOBILI = 1.177213e-02   contro il tasso misurato qui sopra.
+
+--- (3) `ramp = min(1, eta/50)` ADESSO, e dove arriva a 6000 ---
+    gruppo                 nodi     ramp MED     ramp p95     fr>0.5     fr>0.9     ramp a 6000   
+    ORIGINALI FERMI        1116     0.000200085  0.000200085  0.0000     0.0000     0.004002      
+    ORIGINALI MOBILI       80       0.0638161    0.0739132    0.0000     0.0000     1             
+    NATI DOPO              4        0.0329709    0.0338549    0.0000     0.0000     0.6594        
+    TUTTI                  1200     0.000200085  0.0595228    0.0000     0.0000     0.004002      
+    (`ramp a 6000` e' una PROIEZIONE LINEARE del tasso misurato: vale se il tasso resta
+     costante, e il tasso dipende da `r`, che NON e' garantito costante. E' una stima.)
+
+--- (4) IL CRITERIO `Z9-b`: median(ramp[i]*ramp[j]) sugli archi INTERNI alla coorte ORIGINALE ---
+    archi totali 207415   interni alla coorte originale 207407 (100.00 %)
+    median(base/base_maturo) SU QUELLI : 0.00000004     <- DEVE valere 1 per chiudere Z9
+    p05 0.00000004   p95 0.00000004   p95/p05 1.0000
+    median su TUTTI gli archi          : 0.00000004
+    frazione di archi MATURI (entrambi gli estremi eta >= TAU_A): 0.000000
+
+--- (5) IL COSTO DEL RUN VERO ---
+    un .pkl pesa 26.45 MB  ->  30 snapshot = 0.77 GB   (liberi sul disco: 20 GB, 96 % pieno)
+    durata MISURATA sul pilota: 371 s per 300 passi = 123.7 s/100 passi
+    -> 6000 passi = 7422 s = 2.06 h   SE il costo per passo resta costante.
+    (`Z46` dice che nel batch `n` e' PIATTO: se regge, l'estrapolazione tiene. Se `n` cresce,
+     il costo cresce con lui ed e' un LIMITE INFERIORE.)
+====================================================================================================================
