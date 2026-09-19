@@ -2851,7 +2851,7 @@ class Rete:
         (git blob dei byte attuali + metadati commit/branch/dirty). Al ricarico il blob viene
         verificato e RIFIUTATO se diverso: il DB non puo' iniettare uno stato vecchio in una
         fisica cambiata. `code_hash` (sha256) resta scritto per retro-compatibilita' col fallback."""
-        import pickle, os
+        import pickle, os, gzip
         ver = self._versione_codice()
         stato = {'code_hash': ver['content_hash'],   # LEGACY/fallback (retro-compat DB vecchi + no-git)
                  'content_hash': ver['content_hash'],
@@ -2884,7 +2884,20 @@ class Rete:
             if _v_track is not None:
                 stato['attrs'][_k_track] = _v_track
         tmp = path + '.tmp'
-        pickle.dump(stato, open(tmp, 'wb'), protocol=pickle.HIGHEST_PROTOCOL)
+        # [ARCHIVIO, 2026-09-19] COMPRESSIONE PER ESTENSIONE. Il CONTENUTO non cambia di un byte:
+        # cambia solo il TRASPORTO. `os.replace` resta, quindi l'ATOMICITA' e' INTATTA, e restano
+        # intatti `rng_state`, le tre strutture di tracking di Z53 e la verifica del blob.
+        # HDF5 e' stato SCARTATO: perderebbe l'atomicita' e non serializza `rng_state`/`conc_nodi`.
+        #
+        # ⚠ E IL `with` NON E' UN ABBELLIMENTO, E' UNA CORREZIONE NECESSARIA: la forma precedente
+        # (`open(tmp,'wb')` passato direttamente a `pickle.dump`) NON CHIUDEVA MAI IL FILE, si
+        # affidava al refcount di CPython. Con un file normale funziona -- il buffer viene scaricato
+        # alla distruzione. Con `gzip` NO: un `GzipFile` non chiuso puo' lasciare il TRAILER
+        # INCOMPLETO e il file ILLEGGIBILE. Senza il `with`, la compressione produrrebbe archivi
+        # rotti in modo silenzioso, che e' il difetto peggiore possibile qui.
+        _apri = gzip.open if str(path).endswith('.gz') else open
+        with _apri(tmp, 'wb') as _fh:
+            pickle.dump(stato, _fh, protocol=pickle.HIGHEST_PROTOCOL)
         os.replace(tmp, path)   # scrittura atomica: o il DB e' completo o non c'e'
         return ver['blob'] or ver['content_hash']
 
@@ -2893,10 +2906,14 @@ class Rete:
         cambiato (protezione fisica-vecchia/fisica-nuova). Chiave di rifiuto = git BLOB dei byte
         (branch/commit sono solo metadati: branch diverso -> avviso, non rifiuto). Fallback su
         sha256 del contenuto se git non e' disponibile o per i DB legacy. Ripristina anche l'RNG."""
-        import pickle, os
+        import pickle, os, gzip
         if not os.path.exists(path):
             return False
-        stato = pickle.load(open(path, 'rb'))
+        # [ARCHIVIO, 2026-09-19] SI ACCETTANO ENTRAMBI I FORMATI. Senza questo i `.pkl` gia' scritti
+        # diventerebbero illeggibili al primo run compresso -- e' il sigillo V7.
+        _apri = gzip.open if str(path).endswith('.gz') else open
+        with _apri(path, 'rb') as _fh:
+            stato = pickle.load(_fh)
         ver = self._versione_codice()
         db_blob = stato.get('blob')
         if db_blob is not None and ver['blob'] is not None:
@@ -6221,6 +6238,17 @@ def _cli():
     p.add_argument("--db-ogni", dest="db_ogni", type=int, default=250,
                    help="ogni quanti passi salvare il DB di stato (default 250). Piu' basso = piu' "
                         "sicuro contro le interruzioni, ma piu' scritture su disco.")
+    p.add_argument("--db-serie", dest="db_serie", action="store_true",
+                   help="ARCHIVIO: i salvataggi che avvengono ogni --db-ogni passi vengono NUMERATI "
+                        "(<stem>_000250.pkl...) invece che sovrascritti. OFF di default: senza, il "
+                        "comportamento e' quello di sempre (un solo file, checkpoint di ripresa). "
+                        "Se il path finisce in .gz lo snapshot e' compresso.")
+    p.add_argument("--db-rigioca", dest="db_rigioca", nargs=2, type=int, default=None,
+                   metavar=("DA", "A"),
+                   help="ARCHIVIO: ricarica lo snapshot DA della serie, rigira fino ad A salvando "
+                        "ogni --db-ogni passi. INFITTISCE l'archivio senza rifare il run. NON "
+                        "sovrascrive gli snapshot che gia' esistono: li SALTA e li conta. Richiede "
+                        "--db-serie.")
     p.add_argument("--batch", action="store_true",
                    help="processo batch: due masse, evoluzione lunga, misura la CONDENSAZIONE "
                         "nel vuoto fra le masse (ordine, densita', nuovo nucleo). Output numerico.")
@@ -6251,6 +6279,54 @@ def _cli():
     if a.out is None and a.test is not None:
         a.out = f"{a.test.lower().replace(' ', '_')}.mp4"
     return a
+
+
+def _db_serie_path(base, step):
+    """<stem>_%06d<ext>. Padding a SEI cifre: l'ordine alfabetico E' quello temporale.
+    Funzione PURA sui path: nessuno stato, nessuna fisica."""
+    import os as _o
+    d, f = _o.path.split(base)
+    stem, ext = (f[:-7], ".pkl.gz") if f.endswith(".pkl.gz") else _o.path.splitext(f)
+    return _o.path.join(d, "%s_%06d%s" % (stem, step, ext))
+
+
+def _db_serie_esistenti(base):
+    """Gli snapshot gia' presenti della serie, ORDINATI per passo: [(passo, path), ...].
+    Accetta sia `.pkl` sia `.pkl.gz` (retrocompatibilita')."""
+    import glob as _g, os as _o, re as _re
+    d, f = _o.path.split(base)
+    stem = f[:-7] if f.endswith(".pkl.gz") else _o.path.splitext(f)[0]
+    out = []
+    for p in _g.glob(_o.path.join(d, stem + "_??????.pkl*")):
+        m = _re.search(r"_(\d{6})\.pkl(\.gz)?$", p)
+        if m:
+            out.append((int(m.group(1)), p))
+    return sorted(out)
+
+
+def _db_serie_verifica(base, db_ogni):
+    """RIFIUTA una serie che non e' di QUESTO run. La regola e' DICHIARATA, non implicita (A8):
+      (a) ogni passo dev'essere multiplo di `db_ogni`  -> cadenza diversa = altra configurazione;
+      (b) i passi devono essere CONTIGUI (k, 2k, 3k...) -> un buco significa due serie mescolate.
+    ⚠ E IL BUCO DEL PRESIDIO, dichiarato invece di essere taciuto: due run con lo STESSO blob e la
+    STESSA cadenza ma SEME DIVERSO **non sono distinguibili dai .pkl**, perche' il seme NON e' fra
+    gli `attrs` (c'e' `rng_state`, che e' lo stato DOPO N passi, non il seme). Il blob invece e'
+    verificato da `carica_stato` sullo snapshot che si carica davvero.
+    E' un presidio PARZIALE, e chiamarlo totale sarebbe il difetto che A9 descrive."""
+    ser = _db_serie_esistenti(base)
+    if not ser:
+        return ser, None
+    passi = [s for s, _ in ser]
+    fuori = [s for s in passi if s % db_ogni != 0]
+    if fuori:
+        return ser, ("passi non multipli di --db-ogni=%d: %s -- la serie e' di un ALTRO run"
+                     % (db_ogni, fuori[:5]))
+    atteso = list(range(passi[0], passi[-1] + 1, db_ogni))
+    if passi != atteso:
+        mancanti = sorted(set(atteso) - set(passi))
+        return ser, ("serie NON CONTIGUA: mancano %s (attesi %d passi, trovati %d)"
+                     % (mancanti[:5], len(atteso), len(passi)))
+    return ser, None
 
 
 def batch_condensazione(a):
@@ -7126,7 +7202,44 @@ def batch_condensazione(a):
         _os.remove(_db); print(f"[db] --db-cleanup: rimosso {_db}, riparto pulito")
     _db_step0 = 0
     _db_ogni = max(1, int(getattr(a, "db_ogni", 250)))
-    if _db and _os.path.exists(_db):
+    # [ARCHIVIO, 2026-09-19] Le opzioni si leggono QUI, dal namespace degli argomenti, e NON
+    # diventano globali di modulo: cosi' la FISICA non puo' vederle nemmeno in linea di principio,
+    # e la byte-identita' (V1/V2) e' vera per COSTRUZIONE oltre che per misura.
+    _db_serie = bool(getattr(a, "db_serie", False))
+    _db_rig = getattr(a, "db_rigioca", None)
+    _db_scritti = _db_saltati = _db_falliti = 0
+    _db_passi_fine = int(passi)
+    if _db_rig and not _db_serie:
+        raise SystemExit("[db] --db-rigioca richiede --db-serie: senza la serie non c'e' archivio "
+                         "da infittire, e si sovrascriverebbe l'unico file.")
+    if _db and _db_serie:
+        _ser, _guaio = _db_serie_verifica(_db, _db_ogni)
+        if _guaio:
+            raise SystemExit("[db] RIFIUTO DI PARTIRE: %s\n"
+                             "     Mescolare due serie renderebbe l'archivio non interpretabile. "
+                             "Usa una cartella pulita o --db-cleanup." % _guaio)
+        if _db_rig:
+            _da, _aa = int(_db_rig[0]), int(_db_rig[1])
+            _p = _db_serie_path(_db, _da)
+            if not _os.path.exists(_p):
+                raise SystemExit("[db] RIFIUTO: lo snapshot di partenza %s non esiste." % _p)
+            net.carica_stato(_p)
+            _db_step0 = int(getattr(net, "_db_step", 0))
+            _db_passi_fine = _aa
+            if _db_step0 != _da:
+                raise SystemExit("[db] RIFIUTO: il passo NEL FILE (%d) non e' quello NEL NOME (%d)."
+                                 % (_db_step0, _da))
+            print(f"[db] RIGIOCA: caricato {_p} (passo {_db_step0}), rigioco fino a {_aa}. "
+                  f"Gli snapshot esistenti NON si sovrascrivono: si saltano e si contano.")
+        elif _ser:
+            _s, _p = _ser[-1]
+            net.carica_stato(_p)
+            _db_step0 = int(getattr(net, "_db_step", 0))
+            print(f"[db] serie: {len(_ser)} snapshot presenti, riprendo dal piu' alto {_p} "
+                  f"(passo {_db_step0}), nodi={net.n}")
+        else:
+            print(f"[db] serie: nessuno snapshot presente, parto da zero. Cadenza --db-ogni={_db_ogni}.")
+    elif _db and _os.path.exists(_db):
         try:
             net.carica_stato(_db)
             _db_step0 = int(getattr(net, "_db_step", 0))
@@ -7171,7 +7284,7 @@ def batch_condensazione(a):
         print(f"[trace-segno] dump per-passo (pure-read) -> {trace_path}")
     # RESUME CORRETTO: se ripreso dal DB a _db_step0, fai solo i passi RIMANENTI per arrivare al
     # totale 'passi' (non altri 'passi' interi), e numera il diaglog in CONTINUO (_db_step0 + step).
-    _rimanenti = max(0, passi - _db_step0)
+    _rimanenti = max(0, _db_passi_fine - _db_step0)
     if _db_step0 > 0:
         print(f"[db] resume: {_db_step0} passi gia' fatti, ne mancano {_rimanenti} per arrivare a {passi}")
     for step in range(_rimanenti + 1):
@@ -7182,7 +7295,19 @@ def batch_condensazione(a):
         # un run interrotto e' riprendibile senza perdere troppo lavoro.
         if _db and step > 0 and _step_glob % _db_ogni == 0:
             net._db_step = _step_glob
-            net.salva_stato(_db)
+            # [ARCHIVIO] UNA RIGA AL PUNTO DI CHIAMATA: `salva_stato` non sa niente della serie.
+            _p_db = _db_serie_path(_db, _step_glob) if _db_serie else _db
+            if _db_rig and _os.path.exists(_p_db):
+                # LA RIGIOCATA NON DISTRUGGE L'ARCHIVIO: salta e conta (A8, si dichiara a fine run).
+                _db_saltati += 1
+            else:
+                try:
+                    net.salva_stato(_p_db)
+                    _db_scritti += 1
+                except Exception as _e_db:
+                    # UN SALVATAGGIO CHE FALLISCE IN SILENZIO E' IL DIFETTO PEGGIORE QUI.
+                    _db_falliti += 1
+                    print(f"[db] ⚠ SALVATAGGIO FALLITO a {_p_db}: {_e_db}", flush=True)
         if diag_f is not None:
             # IL DIAGLOG E' SOLO LETTURA: non deve mutare lo stato fisico. Le funzioni diagnostiche
             # ricalcolano/aggiornano cache di CONTINUITA' che la DINAMICA legge: self.psi (da _pesi ->
