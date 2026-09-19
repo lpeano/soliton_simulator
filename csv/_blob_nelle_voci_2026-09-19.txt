@@ -1,0 +1,52 @@
+[TIMBRO] _blob_nelle_voci.py  sha1-BYTE ba989c19  committato e pulito
+doc/RAMIFICAZIONI.md               voci 119   col blob  36   (30 %)
+doc/COMPONENTI_PROMOSSE.md         voci  23   col blob   0   (0 %)
+doc/INVENTARIO_strumenti.md        voci   9   col blob   2   (22 %)
+
+TOTALE: 151 voci, 38 col blob (25 %), 69 SENZA blob ma CON numeri di misura
+
+Le voci senza blob che citano numeri (le prime 40):
+   doc/RAMIFICAZIONI.md               A1
+   doc/RAMIFICAZIONI.md               A2
+   doc/RAMIFICAZIONI.md               A3
+   doc/RAMIFICAZIONI.md               B4
+   doc/RAMIFICAZIONI.md               B6
+   doc/RAMIFICAZIONI.md               B7
+   doc/RAMIFICAZIONI.md               C1
+   doc/RAMIFICAZIONI.md               C2
+   doc/RAMIFICAZIONI.md               C3
+   doc/RAMIFICAZIONI.md               C5
+   doc/RAMIFICAZIONI.md               C6
+   doc/RAMIFICAZIONI.md               C7
+   doc/RAMIFICAZIONI.md               C8
+   doc/RAMIFICAZIONI.md               C9
+   doc/RAMIFICAZIONI.md               C11
+   doc/RAMIFICAZIONI.md               C12
+   doc/RAMIFICAZIONI.md               C13
+   doc/RAMIFICAZIONI.md               C14
+   doc/RAMIFICAZIONI.md               C15
+   doc/RAMIFICAZIONI.md               C16
+   doc/RAMIFICAZIONI.md               C17
+   doc/RAMIFICAZIONI.md               C18
+   doc/RAMIFICAZIONI.md               C19
+   doc/RAMIFICAZIONI.md               C20
+   doc/RAMIFICAZIONI.md               C22
+   doc/RAMIFICAZIONI.md               C24
+   doc/RAMIFICAZIONI.md               C23
+   doc/RAMIFICAZIONI.md               C26
+   doc/RAMIFICAZIONI.md               C27
+   doc/RAMIFICAZIONI.md               C10
+   doc/RAMIFICAZIONI.md               I
+   doc/RAMIFICAZIONI.md               R
+   doc/RAMIFICAZIONI.md               R2
+   doc/RAMIFICAZIONI.md               S
+   doc/RAMIFICAZIONI.md               P
+   doc/RAMIFICAZIONI.md               W
+   doc/RAMIFICAZIONI.md               G
+   doc/RAMIFICAZIONI.md               X2
+   doc/RAMIFICAZIONI.md               Y1
+   doc/RAMIFICAZIONI.md               Y2
+   ... e altre 29
+
+NB: questa e' una MISURA, non una guardia. Non fallisce e non blocca niente, e non
+    verifica che il blob citato sia QUELLO GIUSTO: verifica che ce ne sia UNO.

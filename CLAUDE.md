@@ -21,7 +21,8 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
     Cambiera' ancora a ogni pezzo del fork: **il blob e' un timbro, non una costante.** Quello che
     NON cambia e' l'obbligo di ri-timbrare il gate quando cambia.
   - **⚠ IL GATE E' INDIETRO RISPETTO AL DISCO, E RESTA INDIETRO — DECISIONE MOTIVATA
-    (2026-09-16).** Blob sul disco: **`b9e07c73`** *(aggiornato il 2026-09-18; era `08784685`, e la riga era **STALE** da giorni)*. Gate: **`c0803713`**. **Non e' una svista, e
+    (2026-09-16).** Blob sul disco: **`7c4dec1d`** *(2026-09-19; prima `b9e07c73` il 2026-09-18, prima
+    ancora `08784685`, e quella riga era **STALE da giorni**)*. Gate: **`c0803713`**. **Non e' una svista, e
     non si ri-timbra**, per la ragione del par.2.6 e del par.5: *un timbro si mette DOPO il
     sigillo, mai prima.* Fra `c0803713` e `08784685` ci sono **tre** cambiamenti, e **non hanno
     tutti lo stesso stato**:
@@ -1095,6 +1096,32 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   **E la cura non e' sempre piu' passi:** dove la grandezza **vale gia' il suo nullo** (un Bloch
   medio di versori casuali, una coerenza che vale 0) la barra percentuale **non puo'** essere
   piccola. Li' servono **piu' SEMI**.
+
+- **ARCHIVIO A SERIE — `--db-serie` e `--db-rigioca` (2026-09-19, sigillo 12/12 sul blob `7c4dec1d`).**
+  `--db-serie` NUMERA gli snapshot (`<stem>_000250.pkl`) invece di sovrascriverli; `--db-rigioca DA A`
+  ricarica lo snapshot `DA` e rigioca fino ad `A` **INFITTENDO** l'archivio, **senza sovrascrivere**
+  cio' che esiste (salta e conta). Con path `.gz` lo snapshot e' compresso a **livello 1**.
+  **Entrambi OFF di default. NON sono fisica** (`doc/COMPONENTI_PROMOSSE.md` **G**): sono
+  **infrastruttura di persistenza**, e il par.10 non si applica perche' il par.10 governa **leggi**.
+  **`V1`/`V2`: 97 campi byte-identici** contro il codice pre-archivio e fra ON e OFF.
+  **⚠ IL DISCRIMINANTE PER RIFIUTARE UNA SERIE E' IL BLOB, NON LA CADENZA**, e il perche' e' un
+  errore gia' fatto: il primo criterio pretendeva la **contiguita'** dei passi e **rifiutava proprio
+  il caso d'uso di `--db-rigioca`** (infittire = cadenza piu' piccola = serie non contigua).
+  **Cadenze diverse nella stessa serie sono LEGITTIME: e' il senso dell'archivio.**
+- **`gzip` SU QUESTI DATI COMPRIME `1.76x` E BASTA, ed e' IL LIMITE DEL DATO** (float64 densi;
+  misurato su uno snapshot vero da 27.73 MB, `csv/_seal_fork/_costo_archivio_2026-09-19.txt`).
+  Il livello **9** — che e' il **default di `gzip.open`**, mai scelto da nessuno — costa **4.42 s**
+  per snapshot contro **0.82 s** del livello 1, per il **2 %** di spazio in piu'. **Cablato il
+  livello 1** (decisione di Luca). **E questo numero CHIUDE la proposta ibrida `pickle`+HDF5:**
+  HDF5 comprimerebbe gli stessi byte con gli stessi algoritmi.
+- **IL 75 % DELLE VOCI DEI REGISTRI NON PORTA IL BLOB DEL CODICE CHE LE HA PRODOTTE — MISURATO**
+  (2026-09-19, `csv/_blob_nelle_voci.py`, output `csv/_blob_nelle_voci_2026-09-19.txt`):
+  **151 voci, 38 col blob (25 %), e 69 citano NUMERI DI MISURA senza blob.**
+  `RAMIFICAZIONI` 36/119, `COMPONENTI_PROMOSSE` **0/23**, `INVENTARIO` 2/9.
+  **Non e' un presidio: e' una MISURA** — non impedisce niente e **non verifica che il blob citato
+  sia quello GIUSTO**, solo che ce ne sia uno. **Un presidio ATTIVO su prosa libera NON e' stato
+  trovato**, e va detto invece di scrivere l'ennesima nota: ogni riga di prosa contiene numeri
+  (date, percentuali, numeri di riga), e un controllo che segnala tutto non lo legge nessuno.
 
 ## 10. PROMOZIONE DELLE COMPONENTI (regola di Luca, 2026-09-15)
 
