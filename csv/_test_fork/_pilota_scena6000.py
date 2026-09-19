@@ -84,14 +84,26 @@ def main():
               % (passo, n, na, mb, 1000.0 * mb / max(n, 1)))
     print("  blob negli snapshot: %s" % sorted(set(r["blob"][:8] for r in righe if r["blob"])))
 
-    # peso ~ a*archi + b*n : gli archi dominano (d, d0, tw sono per ARCO)
-    A = np.array([[r["archi"], r["n"], 1.0] for r in righe], float)
-    y = np.array([r["mb"] for r in righe], float)
-    coef, *_ = np.linalg.lstsq(A, y, rcond=None)
-    print("  MODELLO peso(MB) = %.6g*archi + %.6g*n + %.4g   (minimi quadrati su %d punti)"
-          % (coef[0], coef[1], coef[2], len(righe)))
-    ra = righe[-1]["archi"] / max(righe[-1]["n"], 1)
-    print("  archi per nodo all'ultimo snapshot: %.2f" % ra)
+    # ⚠ IL MODELLO A TRE PARAMETRI E' DEGENERE SU QUESTI DATI, E IL PRIMO GIRO L'HA DIMOSTRATO:
+    # con 3 punti e 3 incognite il fit INTERPOLA esattamente, e poiche' `archi` varia dello 0.13 %
+    # mentre il peso varia del 4 %, il coefficiente per arco ESPLODE -> estrapolava 450 GB per
+    # snapshot. Era un artefatto del MIO strumento, non un dato.
+    # SI MISURA INVECE CIO' CHE SI PUO' MISURARE:
+    #   (a) quanti ARCHI porta un nodo nuovo, dalla crescita osservata;
+    #   (b) il peso per ARCO, che e' il termine dominante (d, d0, tw sono float64 PER ARCO).
+    d_n = righe[-1]["n"] - righe[0]["n"]
+    d_a = righe[-1]["archi"] - righe[0]["archi"]
+    archi_per_nodo_nuovo = d_a / d_n if d_n else float("nan")
+    mb_per_arco = righe[-1]["mb"] / max(righe[-1]["archi"], 1)
+    print("  CRESCITA MISURATA: +%d nodi -> +%d archi  =  %.2f archi per nodo nuovo"
+          % (d_n, d_a, archi_per_nodo_nuovo))
+    print("     (il codice ne prescrive 2: il figlio nasce con due archi verso i genitori. Meno di 2")
+    print("      significa che qualche arco viene anche RIMOSSO -- si misura, non si assume)")
+    print("  peso per arco: %.4f kB   |  peso osservato: da %.2f a %.2f MB (%+.1f %%) mentre n fa %+.1f %%"
+          % (1000 * mb_per_arco, righe[0]["mb"], righe[-1]["mb"],
+             100 * (righe[-1]["mb"] / righe[0]["mb"] - 1), 100 * (righe[-1]["n"] / righe[0]["n"] - 1)))
+    print("  -> IL PESO E' DOMINATO DAGLI ARCHI, CHE CRESCONO POCO: non da n.")
+    ra = archi_per_nodo_nuovo
 
     print("")
     print("=== 1. LA DURATA, e come cresce ===")
@@ -163,9 +175,30 @@ def main():
         atteso = DT * r[:m]
         ok = np.isfinite(d_eta) & np.isfinite(atteso) & (atteso > 0)
         if ok.any():
+            rap = float(np.median(d_eta[ok] / atteso[ok]))
             print("  CONTROPROVA (Z9: il falsificatore): d(eta)/d(passo) MISURATO / DT*r LETTO = %.4f"
-                  % float(np.median(d_eta[ok] / atteso[ok])))
-            print("     (Z9 dava 0.9977 e 0.9966 negli ultimi due intervalli: la derivazione regge entro lo 0.3 %)")
+                  % rap)
+            print("     (Z9 dava 0.9977 e 0.9966 negli ultimi due intervalli: entro lo 0.3 %)")
+            # ⚠ SE IL RAPPORTO NON E' ~1 NON SI SPIEGA: SI MISURA. Z9 aveva gia' visto 0.625 nel
+            # primo intervallo e la ragione era che `r` SI MUOVE dentro l'intervallo, quindi `r`
+            # campionato all'ESTREMO non rappresenta la media. Qui si verifica proprio quello,
+            # confrontando `r` ai due estremi -- se `r` e' sceso, il rapporto DEVE essere > 1.
+            r0 = pre["at"].get("_r_corrente")
+            if r0 is not None:
+                r0 = np.asarray(r0, float)
+                mm = min(r0.size, r.size)
+                med0, med1 = float(np.median(r0[:mm])), float(np.median(r[:mm]))
+                print("     r mediano: %.6f al passo %d  ->  %.6f al passo %d   (%+.2f %%)"
+                      % (med0, pre["passo"], med1, ultimo["passo"], 100 * (med1 / med0 - 1)))
+                atteso_rap = 0.5 * (med0 + med1) / med1 if med1 else float("nan")
+                print("     se `r` scende, usare l'ESTREMO FINALE SOTTOSTIMA: rapporto atteso con la")
+                print("     media dei due estremi = %.4f   contro il %.4f misurato" % (atteso_rap, rap))
+                if abs(atteso_rap - rap) < 0.1:
+                    print("     -> LO SCARTO E' SPIEGATO DAL MOVIMENTO DI `r`, ed e' MISURATO: il")
+                    print("        falsificatore di Z9 NON scatta. (Stesso effetto del suo 0.625.)")
+                else:
+                    print("     -> ATTENZIONE: lo scarto NON e' spiegato dal movimento di `r`.")
+                    print("        NON lo spiego altrimenti: va riportato cosi'.")
 
     print("")
     print("=== LA CADENZA, DERIVATA dal budget dichiarato PRIMA (%.1f GB) ===" % BUDGET_GB)
@@ -183,7 +216,11 @@ def main():
     print("  (riferimento STORICO, scena a 2400 passi: n = 8018 a 400 frame. Blob DIVERSO: e' un")
     print("   riferimento, non un dato di questo run -- A3c)")
     for nomeM, nfin in (("lineare", n_lin), ("esponenziale", n_exp)):
-        mb_fin = coef[0] * (nfin * ra) + coef[1] * nfin + coef[2]
+        # peso finale = peso attuale scalato sugli ARCHI attesi, che e' il termine dominante
+        archi_fin = righe[-1]["archi"] + ra * max(nfin - righe[-1]["n"], 0)
+        mb_fin = righe[-1]["mb"] * archi_fin / max(righe[-1]["archi"], 1)
+        print("     archi attesi a fine run: %.0f (%+.1f %%)"
+              % (archi_fin, 100 * (archi_fin / righe[-1]["archi"] - 1)))
         print("  [%s] n_fin=%.0f -> snapshot finale ~%.1f MB;  picco doppia copia ~%.1f MB"
               % (nomeM, nfin, mb_fin, 2 * mb_fin))
         print("     cadenza  snapshot   spazio stimato (media peso lineare in n)")
