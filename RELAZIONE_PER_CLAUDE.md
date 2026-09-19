@@ -7101,3 +7101,44 @@ pickle.load di uno snapshot: 0.156 s
 scrittura e **una** lettura su **un** file. **`V8` vero deve misurare l'overhead PER PASSO dentro
 un run**, cioè quanto rallenta la simulazione. Questi numeri sono un **limite inferiore onesto**,
 non il costo di campagna.
+
+## `D2` e `D1` — **curati, e la cura è provata END-TO-END** (2026-09-19)
+
+**`8/8`, `csv/_seal_fork/_prova_D2_rigiocata_DOPO_2026-09-19.txt`**, script `b6297465`, simulatore
+`d62801ab`. **Lo stesso script del «prima»**, che rileva la firma e **rovescia le proprie attese**.
+
+```
+R1  run 100 passi @25            -> snapshot [25, 50, 75, 100]            61 s
+R2  la stessa serie a cadenza 10 -> guaio=None        (PRIMA: 'serie NON CONTIGUA')
+R3  --db-rigioca 50 100 @10      -> NUOVI [60, 70, 80, 90]   rc=0         44 s
+R4  gli snapshot preesistenti INTATTI (mtime+dimensione): 4 su 4
+R5  [db] ARCHIVIO: 4 snapshot scritti, 1 saltati (gia' presenti), 0 FALLITI.
+```
+
+**Il discriminante ora è IL BLOB**, e si verifica su **tutti** gli snapshot: `0.4 s` per quattro,
+e la funzione **stampa quanto è costata** *(un controllo che costa e non lo dice è un controllo che
+qualcuno un giorno toglie senza sapere cosa gli costava)*.
+
+**`P1` si è rovesciato ed è il rovesciamento che conta di più:** i file da **0 byte** che la
+versione vecchia **accettava** ora sono `ILLEGGIBILE (EOFError)` → **RIFIUTATI**. Prima il criterio
+rifiutava il legittimo e accettava l'ignoto; ora fa l'opposto.
+
+> **⚠ Ho tolto ANCHE il criterio dei MULTIPLI della cadenza, che il mandato non nominava.** La
+> ragione è una frase del mandato stesso — *«cadenze diverse nella stessa serie sono legittime»* —
+> e il criterio dei multipli **è** un criterio di cadenza: infittire a `30` una serie scritta a
+> `250` sarebbe stato rifiutato allo stesso modo, per la stessa ragione sbagliata. **Toglierne uno
+> e lasciare l'altro avrebbe curato il caso provato e lasciato il difetto.** **È una decisione mia
+> oltre la lettera del mandato, ed è dichiarata perché possa essere ribaltata: è una riga.**
+
+**Due cose che ho considerato e NON ho fatto, perché sarebbero CRITERI AGGIUNTI** — cioè l'errore
+appena corretto: il controllo *«passo nel nome == passo nei dati»* dentro la verifica *(è `V4`, un
+**sigillo**, non un presidio d'avvio)*, e l'anticipo del rifiuto **prima** della semina *(la prova
+ha misurato che il rifiuto costa `19.2 s` perché arriva dopo la costruzione della scena: è un
+fastidio, non un difetto)*.
+
+**⚠ Cosa questa prova NON è: non è `V6`.** Qui si prova che la rigiocata **gira e non distrugge**,
+**non** che riproduca la stessa traiettoria. **Una scena, un seme, 150 passi.**
+
+**Un difetto residuo, piccolo e dichiarato:** con `--db-rigioca 50 80` il messaggio di resume dice
+*«ne mancano … per arrivare a `--passi`»*, cioè il totale del run, **non** il `80` della rigiocata.
+Il conteggio è giusto, **la frase no**.

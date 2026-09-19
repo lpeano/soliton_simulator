@@ -1,0 +1,33 @@
+[TIMBRO] _prova_D2_rigiocata.py  sha1-BYTE b6297465  committato e pulito
+criterio rilevato: firma ('base', 'ver') -> codice CURATO
+
+serie di soli NOMI: ['stato_000250.pkl', 'stato_000500.pkl', 'stato_000750.pkl']  dimensioni [0, 0, 0]
+[db] serie: verificato il blob di 0 snapshot su 3 in 0.0 s (TUTTI, non solo quello che si carica)
+P1    PASS   ROVESCIATO: i file da 0 byte sono RIFIUTATI -> '3 snapshot su 3 NON sono di questa fisica:\n       stato_000250.pkl: ILLEGGIBILE (EOFError:'
+P2b   PASS   passi [250, 500, 750] tutti multipli di 50 -> un rifiuto per CADENZA sarebbe ingiustificato
+[db] serie: verificato il blob di 0 snapshot su 3 in 0.0 s (TUTTI, non solo quello che si carica)
+P2    PASS   ROVESCIATO: nessun rifiuto per CONTIGUITA' -> '3 snapshot su 3 NON sono di questa fisica:\n       stato_000250.pkl: ILLEGGIBILE (EOFError:'
+
+R1 comando: --batch --sep 8 --seed 900 --csv C:\Users\lpeano\AppData\Local\Temp\provaD2R_i2hxn32y\out.csv --sync-db C:\Users\lpeano\AppData\Local\Temp\provaD2R_i2hxn32y\stato.pkl --db-serie --passi 100 --ogni 50 --db-ogni 25
+R1    PASS   run 100 passi @25 in 61 s -> snapshot [25, 50, 75, 100] (attesi [25, 50, 75, 100])
+[db] serie: verificato il blob di 4 snapshot su 4 in 0.4 s (TUTTI, non solo quello che si carica)
+R2    PASS   serie [25, 50, 75, 100] verificata a cadenza 10 -> guaio=None  (PRIMA: 'serie NON CONTIGUA')
+
+R3 comando: --batch --sep 8 --seed 900 --csv C:\Users\lpeano\AppData\Local\Temp\provaD2R_i2hxn32y\out.csv --sync-db C:\Users\lpeano\AppData\Local\Temp\provaD2R_i2hxn32y\stato.pkl --db-serie --passi 100 --ogni 50 --db-ogni 10 --db-rigioca 50 100
+R3    PASS   rigiocata 50->100 @10 in 44 s, rc=0 -> NUOVI [60, 70, 80, 90] (attesi [60, 70, 80, 90])
+R4    PASS   gli snapshot preesistenti sono INTATTI (mtime+dimensione): 4 su 4
+R5    PASS   il riepilogo dei contatori COMPARE: [db] ARCHIVIO: 4 snapshot scritti, 1 saltati (gia' presenti), 0 FALLITI.
+
+--- righe [db] della rigiocata ---
+   [db] serie: verificato il blob di 4 snapshot su 4 in 0.5 s (TUTTI, non solo quello che si carica)
+   [db] RIGIOCA: caricato C:\Users\lpeano\AppData\Local\Temp\provaD2R_i2hxn32y\stato_000050.pkl (passo 50), rigioco fino a 100. Gli snapshot esistenti NON si sovrascrivono: si saltano e si contano.
+   [db] resume: 50 passi gia' fatti, ne mancano 50 per arrivare a 100
+   [db] ARCHIVIO: 4 snapshot scritti, 1 saltati (gia' presenti), 0 FALLITI.
+
+ESITO: 8/8
+
+VERDETTO: D2 E' CURATO, e la cura e' provata END-TO-END su snapshot VERI.
+  Una serie a cadenza 25 si infittisce a cadenza 10, gli snapshot preesistenti
+  NON vengono sovrascritti, e il conteggio si DICHIARA (D1).
+  NON e' V6: qui si prova che la rigiocata GIRA e non distrugge, NON che riproduca
+  la stessa traiettoria. Quello e' un altro sigillo.
