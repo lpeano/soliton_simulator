@@ -73,6 +73,15 @@ META = ("code_hash", "content_hash", "blob", "committed_blob", "commit", "branch
 
 esiti = []
 
+# GIRO PARZIALE: `python _sigillo_archivio.py V6` rigira una voce sola invece di tutte.
+# ATTENZIONE: UN GIRO PARZIALE NON E' UN SIGILLO, ed e' dichiarato come tale nell'intestazione e nel
+# verdetto: serve a far parlare una voce che ha gia' fallito, non a timbrare.
+SOLO = set(x.upper() for x in sys.argv[1:] if not x.startswith("-"))
+
+
+def attivo(v):
+    return (not SOLO) or (v in SOLO)
+
 
 def segna(nome, ok, dettaglio):
     esiti.append((nome, ok, dettaglio))
@@ -84,6 +93,51 @@ def carica(path):
     _apri = gzip.open if str(path).endswith(".gz") else open
     with _apri(path, "rb") as fh:
         return pickle.load(fh)
+
+
+def dettaglio_diff(k, va, vb, max_elem=3):
+    """CHE due strutture differiscono NON BASTA: serve COME.
+
+    Il primo giro di questo sigillo (2026-09-19) ha dato `V6 FAIL su conc_nodi` con il `repr`
+    TRONCATO a 60 caratteri: diceva CHE differivano e non COME -- lunghezza, contenuto o ordine.
+    **Un sigillo che non dice cosa ha visto costringe a indovinare**, ed e' il modo in cui una
+    diagnosi sbagliata entra in un referto. Quindi qui si riporta: le due LUNGHEZZE, QUANTI
+    elementi differiscono, e il CONTENUTO INTEGRALE dei primi che differiscono -- NON troncato.
+    (Rilievo di Luca: "non e' ancora il momento di indagare, e' il momento di far parlare lo
+    strumento".)"""
+    righe = []
+    la = len(va) if hasattr(va, "__len__") else None
+    lb = len(vb) if hasattr(vb, "__len__") else None
+    righe.append("%s: len A=%s  len B=%s%s"
+                 % (k, la, lb, "   <<< LUNGHEZZE DIVERSE" if la != lb else ""))
+    if isinstance(va, dict) and isinstance(vb, dict):
+        ka, kb = set(va), set(vb)
+        righe.append("   chiavi solo in A: %s" % sorted(ka - kb)[:20])
+        righe.append("   chiavi solo in B: %s" % sorted(kb - ka)[:20])
+        div = [x for x in sorted(ka & kb, key=repr)
+               if pickle.dumps(va[x], 5) != pickle.dumps(vb[x], 5)]
+        righe.append("   chiavi comuni %d, con VALORE diverso %d: %s" % (len(ka & kb), len(div), div[:20]))
+        for x in div[:max_elem]:
+            righe.append("   [%r] A = %r" % (x, va[x]))
+            righe.append("   [%r] B = %r" % (x, vb[x]))
+    elif la is not None and lb is not None:
+        n = min(la, lb)
+        div = [i for i in range(n) if pickle.dumps(va[i], 5) != pickle.dumps(vb[i], 5)]
+        righe.append("   elementi confrontabili %d, DIVERSI %d  (primi indici: %s)"
+                     % (n, len(div), div[:20]))
+        for i in div[:max_elem]:
+            righe.append("   [%d] A = %r" % (i, va[i]))
+            righe.append("   [%d] B = %r" % (i, vb[i]))
+        if la != lb:
+            piu, chi = (va, "A") if la > lb else (vb, "B")
+            righe.append("   la piu' LUNGA e' %s; sua coda oltre %d: %r"
+                         % (chi, n, list(piu[n:n + max_elem])))
+            righe.append("   coda NON VUOTA?  %s"
+                         % any(bool(x) for x in list(piu[n:])))
+    else:
+        righe.append("   A = %r" % (va,))
+        righe.append("   B = %r" % (vb,))
+    return righe
 
 
 def confronta_attrs(a, b, etichetta):
@@ -123,7 +177,9 @@ def confronta_attrs(a, b, etichetta):
                 guai.append("%s: NON CONFRONTABILE (%s)" % (k, type(e).__name__))
                 continue
             if diverso:
-                guai.append("%s: %.60r != %.60r" % (k, va, vb))
+                guai.append("%s: DIVERSO (dettaglio sotto)" % k)
+                for r in dettaglio_diff(k, va, vb):
+                    print("       > " + r, flush=True)
     if a.get("rng_state") != b.get("rng_state"):
         guai.append("rng_state DIVERSO")
     else:
@@ -169,8 +225,10 @@ def main():
               % (grezzo, gito, BLOB_PRE_ARCHIVIO))
 
         # ---- V1 [BLOCCANTE]: flag OFF == codice PRE-ARCHIVIO --------------------------
-        vecchio = estrai_vecchio(tmp)
-        if vecchio is None:
+        vecchio = estrai_vecchio(tmp) if attivo("V1") else None
+        if not attivo("V1"):
+            pass
+        elif vecchio is None:
             segna("V1", False, "NON ESEGUITO: git cat-file %s fallito" % BLOB_PRE_ARCHIVIO)
         else:
             db_old, t_old, pr_old = run(vecchio, tmp, "v1_old", [])
@@ -195,41 +253,46 @@ def main():
                       % (diversi or "NESSUNO"))
 
         # ---- V2 [BLOCCANTE]: flag ON == flag OFF --------------------------------------
-        db_off = os.path.join(tmp, "v1_new.pkl")
-        if not os.path.exists(db_off):
-            db_off, _, _ = run(SIM, tmp, "v2_off", [])
-        db_on_base = os.path.join(tmp, "v2_on.pkl")
-        _, t_on, pr_on = run(SIM, tmp, "v2_on", ["--db-serie"], ogni_db=PASSI_AB)
-        ser_on = S._db_serie_esistenti(db_on_base)
-        if not ser_on:
-            segna("V2", False, "il run con --db-serie non ha prodotto snapshot")
-        else:
-            A, B = carica(db_off), carica(ser_on[-1][1])
-            n, guai = confronta_attrs(A, B, "V2")
-            segna("V2", n > 0 and not guai,
-                  "flag OFF vs flag ON, %d passi: %d campi confrontati, %s"
-                  % (PASSI_AB, n, "IDENTICI" if not guai else guai[:3]))
+        if attivo("V2"):
+            db_off = os.path.join(tmp, "v1_new.pkl")
+            if not os.path.exists(db_off):
+                db_off, _, _ = run(SIM, tmp, "v2_off", [])
+            db_on_base = os.path.join(tmp, "v2_on.pkl")
+            _, t_on, pr_on = run(SIM, tmp, "v2_on", ["--db-serie"], ogni_db=PASSI_AB)
+            ser_on = S._db_serie_esistenti(db_on_base)
+            if not ser_on:
+                segna("V2", False, "il run con --db-serie non ha prodotto snapshot")
+            else:
+                A, B = carica(db_off), carica(ser_on[-1][1])
+                n, guai = confronta_attrs(A, B, "V2")
+                segna("V2", n > 0 and not guai,
+                      "flag OFF vs flag ON, %d passi: %d campi confrontati, %s"
+                      % (PASSI_AB, n, "IDENTICI" if not guai else guai[:3]))
 
         # ---- V3/V4: la serie esiste, e il nome dice il vero ---------------------------
-        base = os.path.join(tmp, "serie.pkl")
-        _, t_serie, pr_s = run(SIM, tmp, "serie", ["--db-serie"],
-                               passi=PASSI_SERIE, ogni_db=OGNI_SERIE)
-        ser = S._db_serie_esistenti(base)
+        # LA SERIE SERVE ANCHE A V5, V6 e V8: si produce se una qualunque di loro e' attiva.
+        ser, t_serie, base = [], None, os.path.join(tmp, "serie.pkl")
+        if any(attivo(v) for v in ("V3", "V4", "V5", "V6", "V8")):
+            _, t_serie, pr_s = run(SIM, tmp, "serie", ["--db-serie"],
+                                   passi=PASSI_SERIE, ogni_db=OGNI_SERIE)
+            ser = S._db_serie_esistenti(base)
         attesi = list(range(OGNI_SERIE, PASSI_SERIE + 1, OGNI_SERIE))
-        segna("V3", [s for s, _ in ser] == attesi,
-              "%d passi @ %d -> %d file ai passi %s (attesi %s)"
-              % (PASSI_SERIE, OGNI_SERIE, len(ser), [s for s, _ in ser], attesi))
-        guai4 = []
-        for passo, p in ser:
-            dentro = (carica(p).get("attrs") or {}).get("_db_step")
-            if dentro is None or int(dentro) != passo:
-                guai4.append("%s: nel file %r" % (os.path.basename(p), dentro))
-        segna("V4", bool(ser) and not guai4,
-              "passo nel NOME == _db_step nei DATI su %d file: %s"
-              % (len(ser), "OK" if not guai4 else guai4))
+        if attivo("V3"):
+            segna("V3", [s for s, _ in ser] == attesi,
+                  "%d passi @ %d -> %d file ai passi %s (attesi %s)"
+                  % (PASSI_SERIE, OGNI_SERIE, len(ser), [s for s, _ in ser], attesi))
+        if attivo("V4"):
+            guai4 = []
+            for passo, p in ser:
+                dentro = (carica(p).get("attrs") or {}).get("_db_step")
+                if dentro is None or int(dentro) != passo:
+                    guai4.append("%s: nel file %r" % (os.path.basename(p), dentro))
+            segna("V4", bool(ser) and not guai4,
+                  "passo nel NOME == _db_step nei DATI su %d file: %s"
+                  % (len(ser), "OK" if not guai4 else guai4))
 
         # ---- V5: round-trip delle tre strutture di Z53 --------------------------------
-        if ser:
+        if attivo("V5") and ser:
             st = carica(ser[-1][1])
             presenti = [k for k in ("conc_nodi", "conc_archi", "masse_info") if k in st["attrs"]]
             net = S.Rete(seed=SEED)
@@ -245,11 +308,11 @@ def main():
             segna("V5", bool(presenti) and len(uguali) == len(presenti),
                   "round-trip GZIP delle strutture di Z53: %d su %d identiche %s"
                   % (len(uguali), len(presenti), presenti or "NESSUNA PRESENTE -> nulla da provare"))
-        else:
+        elif attivo("V5"):
             segna("V5", False, "NON ESEGUITO: nessuna serie da cui prendere lo stato")
 
         # ---- V6 [DECISIVO]: la rigiocata COMBACIA -------------------------------------
-        if len(ser) >= 3:
+        if attivo("V6") and len(ser) >= 3:
             tmp6 = os.path.join(tmp, "rig")
             os.makedirs(tmp6)
             base6 = os.path.join(tmp6, "serie.pkl")
@@ -278,52 +341,63 @@ def main():
                   "rigiocata da %d: rigenerati i passi %s in %.0f s, %d campi confrontati, %s"
                   % (meta_da, rigenerati, dt6, n6,
                      "BYTE-IDENTICI" if not guai6 else guai6[:3]))
-        else:
+        elif attivo("V6"):
             segna("V6", False, "NON ESEGUITO: serie troppo corta (%d snapshot)" % len(ser))
 
         # ---- V7: retrocompatibilita' dei due formati ----------------------------------
-        net7 = S.Rete(seed=SEED)
-        net7._db_step = 777
-        pa, pb = os.path.join(tmp, "v7.pkl"), os.path.join(tmp, "v7.pkl.gz")
-        net7.salva_stato(pa)
-        net7.salva_stato(pb)
-        A7, B7 = carica(pa), carica(pb)
-        n7, guai7 = confronta_attrs(A7, B7, "V7")
-        letti = S.Rete(seed=SEED).carica_stato(pa) and S.Rete(seed=SEED).carica_stato(pb)
-        segna("V7", n7 > 0 and not guai7 and letti,
-              ".pkl (%d B) e .pkl.gz (%d B): stesso contenuto su %d campi, entrambi RICARICABILI"
-              % (os.path.getsize(pa), os.path.getsize(pb), n7))
+        if attivo("V7"):
+            net7 = S.Rete(seed=SEED)
+            net7._db_step = 777
+            pa, pb = os.path.join(tmp, "v7.pkl"), os.path.join(tmp, "v7.pkl.gz")
+            net7.salva_stato(pa)
+            net7.salva_stato(pb)
+            A7, B7 = carica(pa), carica(pb)
+            n7, guai7 = confronta_attrs(A7, B7, "V7")
+            letti = S.Rete(seed=SEED).carica_stato(pa) and S.Rete(seed=SEED).carica_stato(pb)
+            segna("V7", n7 > 0 and not guai7 and letti,
+                  ".pkl (%d B) e .pkl.gz (%d B): stesso contenuto su %d campi, entrambi RICARICABILI"
+                  % (os.path.getsize(pa), os.path.getsize(pb), n7))
 
         # ---- V8: il COSTO dentro un run ------------------------------------------------
-        _, t_gz, _ = run(SIM, tmp, "v8gz", ["--db-serie"],
-                         passi=PASSI_SERIE, ogni_db=OGNI_SERIE, ext=".pkl.gz")
-        n_snap = max(1, PASSI_SERIE // OGNI_SERIE)
-        over = (t_gz - t_serie) / n_snap
-        segna("V8", True,
-              "run %d passi @%d: %.1f s senza gzip, %.1f s con gzip -> %+.2f s per snapshot "
-              "(%+.1f %% sul run). MISURATO, non stimato."
-              % (PASSI_SERIE, OGNI_SERIE, t_serie, t_gz, over,
-                 100.0 * (t_gz - t_serie) / t_serie if t_serie else float("nan")))
+        if attivo("V8") and t_serie is not None:
+            _, t_gz, _ = run(SIM, tmp, "v8gz", ["--db-serie"],
+                             passi=PASSI_SERIE, ogni_db=OGNI_SERIE, ext=".pkl.gz")
+            n_snap = max(1, PASSI_SERIE // OGNI_SERIE)
+            over = (t_gz - t_serie) / n_snap
+            segna("V8", True,
+                  "run %d passi @%d: %.1f s senza gzip, %.1f s con gzip -> %+.2f s per snapshot "
+                  "(%+.1f %% sul run). MISURATO, non stimato."
+                  % (PASSI_SERIE, OGNI_SERIE, t_serie, t_gz, over,
+                     100.0 * (t_gz - t_serie) / t_serie if t_serie else float("nan")))
 
         # ---- V9: i sigilli del giro rigirano -------------------------------------------
-        altro = os.path.join(_QUI, "_sigillo_coorti.py")
-        if os.path.exists(altro):
-            t0 = time.time()
-            pr9 = subprocess.run([sys.executable, altro], cwd=RADICE, capture_output=True,
-                                 text=True, encoding="utf-8", errors="replace", timeout=3600)
-            dt9 = time.time() - t0
-            coda = [r for r in (pr9.stdout or "").splitlines() if r.strip()][-3:]
-            segna("V9", pr9.returncode == 0,
-                  "_sigillo_coorti.py rc=%s in %.0f s | %s" % (pr9.returncode, dt9, " / ".join(coda)))
-        else:
-            segna("V9", False, "NON ESEGUITO: _sigillo_coorti.py assente")
+        if attivo("V9"):
+            altro = os.path.join(_QUI, "_sigillo_coorti.py")
+            if os.path.exists(altro):
+                t0 = time.time()
+                pr9 = subprocess.run([sys.executable, altro], cwd=RADICE, capture_output=True,
+                                     text=True, encoding="utf-8", errors="replace", timeout=3600)
+                dt9 = time.time() - t0
+                coda = [r for r in (pr9.stdout or "").splitlines() if r.strip()][-3:]
+                segna("V9", pr9.returncode == 0,
+                      "_sigillo_coorti.py rc=%s in %.0f s | %s"
+                      % (pr9.returncode, dt9, " / ".join(coda)))
+            else:
+                segna("V9", False, "NON ESEGUITO: _sigillo_coorti.py assente")
 
         # ---- VERDETTO -------------------------------------------------------------------
         print("")
         ok = sum(1 for _, o, _ in esiti if o)
-        print("ESITO: %d/%d" % (ok, len(esiti)))
+        print("ESITO: %d/%d%s" % (ok, len(esiti),
+                                  "   *** GIRO PARZIALE (%s): NON E' UN SIGILLO ***"
+                                  % ",".join(sorted(SOLO)) if SOLO else ""))
         bloccanti = [n for n, o, _ in esiti if not o and n in ("V1", "V2", "V6")]
         print("")
+        if SOLO:
+            print("ATTENZIONE: GIRO PARZIALE su %s: le voci non girate NON sono state verificate, e"
+                  % ",".join(sorted(SOLO)))
+            print("  l'assenza di un FAIL non e' un PASS. Per timbrare serve il giro COMPLETO.")
+            print("")
         if bloccanti:
             print("VERDETTO: SIGILLO FALLITO sui DECISIVI: %s" % ", ".join(bloccanti))
             print("  V1/V2 che cadono significano CHE HO TOCCATO LA FISICA: si torna indietro.")
