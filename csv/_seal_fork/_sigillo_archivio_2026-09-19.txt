@@ -1,0 +1,25 @@
+[TIMBRO] _sigillo_archivio.py  sha1-BYTE dece5b2d  committato e pulito
+V0   PASS   simulatore: byte grezzi a937a098, git-blob d62801ab (pre-archivio b9e07c73)
+     [V1] confrontati 97 campi, 0 guai
+V1   PASS   PRE-ARCHIVIO vs flag OFF, 60 passi: 97 campi confrontati, IDENTICI (48 s vs 50 s)
+V1b  PASS   i due DB vengono da codici DIVERSI (metadati che differiscono: ['code_hash', 'content_hash', 'blob', 'committed_blob', 'commit', 'branch', 'dirty']) -- senza questo, V1 potrebbe aver confrontato un codice con se stesso
+     [V2] confrontati 97 campi, 0 guai
+V2   PASS   flag OFF vs flag ON, 60 passi: 97 campi confrontati, IDENTICI
+V3   PASS   100 passi @ 25 -> 4 file ai passi [25, 50, 75, 100] (attesi [25, 50, 75, 100])
+V4   PASS   passo nel NOME == _db_step nei DATI su 4 file: OK
+V5   PASS   round-trip GZIP delle strutture di Z53: 3 su 3 identiche ['conc_nodi', 'conc_archi', 'masse_info']
+     [V6@75] confrontati 97 campi, 1 guai
+     [V6@100] confrontati 97 campi, 1 guai
+V6   FAIL   rigiocata da 50: rigenerati i passi [75, 100] in 44 s, 194 campi confrontati, ['passo 75: conc_nodi: [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], != [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [],', 'passo 100: conc_nodi: [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], != [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [],']
+     [V7] confrontati 36 campi, 0 guai
+V7   PASS   .pkl (1504 B) e .pkl.gz (712 B): stesso contenuto su 36 campi, entrambi RICARICABILI
+V8   PASS   run 100 passi @25: 66.2 s senza gzip, 76.9 s con gzip -> +2.66 s per snapshot (+16.1 % sul run). MISURATO, non stimato.
+V9   PASS   _sigillo_coorti.py rc=0 in 62 s | ESITO: 9/9 PASS   S0=P S1=P S2=P S3a=P S3b=P S3c=P S4=P S5=P S6=P / S1 e' il decisivo: se FALLISCE, la modifica e' sbagliata e si FERMA (lettura fissata in 695ced0). / ======================================================================================================================
+
+ESITO: 10/11
+
+VERDETTO: SIGILLO FALLITO sui DECISIVI: V6
+  V1/V2 che cadono significano CHE HO TOCCATO LA FISICA: si torna indietro.
+  V6 che cade significa che la riproduzione NON funziona, e il par.1 del task
+  history ha gia' escluso la causa piu' ovvia (un secondo generatore): si
+  RIPORTA, senza inventare la spiegazione.

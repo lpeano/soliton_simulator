@@ -7142,3 +7142,55 @@ fastidio, non un difetto)*.
 **Un difetto residuo, piccolo e dichiarato:** con `--db-rigioca 50 80` il messaggio di resume dice
 *«ne mancano … per arrivare a `--passi`»*, cioè il totale del run, **non** il `80` della rigiocata.
 Il conteggio è giusto, **la frase no**.
+
+## ⚠ `V6` FALLISCE — **la rigiocata riproduce la FISICA byte per byte, ma non `conc_nodi`** (2026-09-19)
+
+**`10/11`, `csv/_seal_fork/_sigillo_archivio_2026-09-19.txt`**, sigillo `dece5b2d`, simulatore
+`d62801ab` *(byte grezzi `a937a098`)*. **I due BLOCCANTI PASSANO. Il DECISIVO no.**
+
+```
+V1  PRE-ARCHIVIO (b9e07c73) vs flag OFF : 97 campi confrontati, IDENTICI     PASS
+V1b i due DB vengono da codici DIVERSI (7 metadati differiscono)             PASS
+V2  flag OFF vs flag ON                 : 97 campi confrontati, IDENTICI     PASS
+V6  rigiocata da 50 -> passi [75, 100]  : 194 campi confrontati, 2 guai      FAIL
+      [V6@75]  97 campi, 1 guaio -> conc_nodi
+      [V6@100] 97 campi, 1 guaio -> conc_nodi
+```
+
+**Quello che i dati dicono, e mi fermo qui perché il mandato dice di fermarsi:**
+
+- **la FISICA è riprodotta byte per byte.** Su `97` campi, `96` combaciano esattamente a **entrambi**
+  i passi rigenerati — tutti gli `ndarray`, e `rng_state`. **L'unico campo che differisce è
+  `conc_nodi`**, e differisce a tutti e due i passi;
+- **`conc_archi` e `masse_info` NON sono fra i guai**: delle tre strutture di `Z53` ne diverge
+  **una sola**;
+- **`V5` PASSA**: salva → ricarica restituisce tutte e tre le strutture identiche, **compressa**.
+  Quindi **non è la persistenza**;
+- `conc_nodi` è una **struttura di MISURA** (il lignaggio delle coorti), **non di fisica**: nessuno
+  dei suoi lettori è chiamato da `step()`/`mitosi()`/`scuoti_vuoto()` — è scritto nel commento della
+  cura del 2026-09-18.
+
+> **NON HO UNA SPIEGAZIONE, e non la invento.** Il task history aveva dichiarato in anticipo che
+> `V6` è *il test empirico* della riserva su §1 (*«un solo generatore garantisce che la CASUALITÀ
+> sia riproducibile, non che lo sia ogni sorgente di non-determinismo»*). **Ma quella riserva
+> riguardava la traiettoria, e la traiettoria è IDENTICA.** Il fallimento è in un posto diverso da
+> quello che la riserva prevedeva.
+
+**Cosa NON so, e serve per decidere:** il diff è **troncato a 60 caratteri** nel referto
+(`conc_nodi: [[], [], [], ... != [[], [], [], ...`), quindi **non so in che cosa differiscano** —
+lunghezza, contenuto, o ordine. **Il sigillo ha detto CHE differiscono, non COME.**
+
+**Le altre voci, per completezza:**
+
+```
+V3 4 file ai passi [25,50,75,100]                                            PASS
+V4 passo nel NOME == _db_step nei DATI, 4 file su 4                          PASS
+V5 round-trip GZIP delle 3 strutture di Z53: 3 su 3                          PASS
+V7 .pkl (1504 B) e .pkl.gz (712 B): stesso contenuto, entrambi ricaricabili  PASS
+V8 100 passi @25: 66.2 s senza gzip, 76.9 s con -> +2.66 s/snapshot, +16.1%  PASS
+V9 _sigillo_coorti.py rigira: 9/9 PASS in 62 s                               PASS
+```
+
+**⚠ `V8` è su una scena BREVE e NON si estrapola:** `+2.66 s` per snapshot qui contro i `4.42 s`
+misurati su uno snapshot del pilota, **perché la rete a 100 passi è piccola**. Il `+16.1 %` sul run
+è il numero di *questa* scena, non di una campagna.
