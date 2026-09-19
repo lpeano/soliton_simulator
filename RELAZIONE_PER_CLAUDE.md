@@ -7472,3 +7472,43 @@ al **1500** — si apre in **mille passi**.
 **Cosa non ho fatto:** la rigiocata `--db-rigioca 180 240 --db-ogni 5`, che darebbe **dodici
 istanti invece di due** dentro la finestra dell'evento. **Le quattro letture fissate prima non la
 indicano — è la lettura dei dati a indicarla — e la differenza conta.**
+
+## LE DUE FINESTRE A 6 PASSI — **due letture precedenti cadono, e il run è riproducibile da capo** (2026-09-19)
+
+**`doc/REFERTO_finestre_fini.md`** · rigiocata **sigillata 3/3** · blob `7c4dec1d` · seme 42 ·
+risoluzione **6 passi** *(il driver campiona in frame: `--db-ogni 5` non è rappresentabile, e l'ho
+dichiarato prima di misurare)*.
+
+**① `ritmo()` NON nasce saturo.**
+
+```
+passo  6: r p50 = 0.8569      passo 18: 1.3783
+passo 12: r p50 = 1.2004      passo 24: 1.4141   <- AL TETTO, e non lo lascia piu'
+```
+
+> **`r` satura in 24 passi.** La lettura *«nasce fuori scala, difetto di forma»* **non è
+> sostenuta**: c'è una **transizione vera e datata**. In quella finestra `omega_s` max
+> **decresce** (`1.61 → 1.12`), con **zero mitosi**.
+
+**② L'evento è al passo 198, e la mitosi NON c'entra.**
+
+```
+passo 192:  om max = 0.31   nati = 3
+passo 198:  om max = 401    nati = 3      <- x1300 in SEI passi, NESSUN nodo nuovo
+```
+
+> **A 60 passi mitosi ed evento coincidevano (`Z60`). A 6 passi si separano**, e l'osservazione
+> precedente **cade: era un artefatto della risoluzione.** Dopo il 198 i picchi non tornano più
+> indietro — **×190 in 42 passi**.
+
+**③ Uno schema che avevo visto, misurato e scartato.** L'apparente **antifase** fra `r` e
+`omega_s`: `corr = −0.58` sulle variazioni, nullo `σ ≈ 0.316` su 10 intervalli → **1.8 σ**, e
+**5 segni opposti su 10, esattamente il caso**. **Non è sostenuta e non la scrivo.**
+
+**④ Un limite dichiarato:** `r` cambia **fra campioni adiacenti** (6 passi), quindi il periodo è
+**≤ 12 passi e non risolto** — **Nyquist**. Non dichiaro un periodo, e non chiamo *oscillazione*
+ciò che potrebbe essere **aliasing** (§4).
+
+> **E il sigillo ha dato una cosa non richiesta:** `SA` mostra che **ripartendo da zero si
+> riottiene byte-identico lo snapshot 60**. **Il run è riproducibile da capo** — finora era solo
+> argomentato.

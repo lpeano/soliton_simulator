@@ -1,0 +1,71 @@
+[TIMBRO] _cronologia.py  sha1-BYTE 2634c749  committato e pulito
+snapshot: 11, passi 180-240, cadenza 6
+soglie DERIVATE: tetto di ritmo() = 1.41421356   pavimento = 1.414e-06   grado di nascita = 2
+
+====================================================================================================================================
+LA CRONOLOGIA
+====================================================================================================================================
+passo  n      archi   nati   | om p50    om max    | d0 p50   d0 max   | fcs p50 fcs max | r p25  r p50  r p75  | dg25  dg50  dg75  
+180    2393   429501  2      | 9.52e-19  0.35      | 0.846    1.52     | 1.495   9.909   | 1.2094 1.2731 1.3180 | 151   496   496   
+186    2393   429501  2      | 6.02e-17  0.329     | 0.848    1.53     | 1.489   11.53   | 1.4102 1.4110 1.4116 | 151   496   496   
+192    2394   429502  3      | 5.04e-16  0.31      | 0.854    1.54     | 1.485   14.33   | 1.4078 1.4092 1.4101 | 150   496   496   
+198    2394   429502  3      | 1.53e-15  401       | 0.855    1.55     | 1.481   12.97   | 0.3194 0.4919 1.3291 | 150   496   496   
+204    2395   429503  4      | 3.78e-15  371       | 0.859    1.56     | 1.479   14.75   | 0.2422 0.3539 0.8386 | 150   496   496   
+210    2397   429506  6      | 1.1e-14   334       | 0.862    1.61     | 1.476   12.98   | 1.1836 1.3084 1.3612 | 150   496   496   
+216    2400   429510  9      | 2.38e-14  7.47e+03  | 0.868    1.58     | 1.468   11.42   | 0.3885 0.4973 0.6764 | 150   496   496   
+222    2400   429510  9      | 2.65e-13  3.07e+04  | 0.876    1.59     | 1.465   11.53   | 0.1965 1.0156 1.2307 | 150   496   496   
+228    2405   429516  14     | 4.09e-12  3.53e+04  | 0.881    1.59     | 1.463   12.58   | 1.0632 1.2905 1.3625 | 149   496   496   
+234    2414   429528  23     | 1.79e-11  5.77e+04  | 0.885    1.64     | 1.458   13.61   | 0.2421 0.2771 0.5052 | 148   496   496   
+240    2417   429532  26     | 4.93e-11  7.58e+04  | 0.89     1.61     | 1.449   14.11   | 0.2991 0.3529 0.4958 | 148   496   496   
+
+====================================================================================================================================
+I PUNTI DI ATTRAVERSAMENTO  t50  (regola fissata PRIMA: meta' escursione, in LOG se min>0)
+====================================================================================================================================
+grandezza          t50        soglia       min          max          scala     
+omega_s p50        210        6.849e-15    9.518e-19    4.928e-11    log       
+omega_s max        198        153.3        0.3097       7.585e+04    log       
+d0 p50             216        0.8676       0.8457       0.89         log       
+d0 max             210        1.58         1.518        1.645        log       
+fatt_cs max        192        12.09        9.909        14.75        log       
+peq p50            210        0.001451     0.000981     0.002147     log       
+tw max             180        25.2         23.62        26.89        log       
+r p75              180        0.8366       0.4958       1.412        log       
+inerzia pav/tot    204        9.837e-05    1.859e-05    0.0005206    log       
+
+====================================================================================================================================
+GLI EVENTI STRUTTURALI (soglie DERIVATE dal codice, non scelte)
+====================================================================================================================================
+  _deg p50 scende al GRADO DI NASCITA (2): passo None
+  _deg p25 scende al grado di nascita:     passo None
+  _r_corrente p75 raggiunge il TETTO sqrt(2): passo None
+  _r_corrente p50 raggiunge il tetto:      passo None
+  _r_corrente p25 scende verso il PAVIMENTO: passo None
+
+====================================================================================================================================
+IL VERDETTO, secondo le quattro letture fissate PRIMA
+====================================================================================================================================
+  ordine cronologico dei t50:
+     passo 180      r p75
+     passo 180      tw max
+     passo 192      fatt_cs max
+     passo 198      omega_s max
+     passo 204      inerzia pav/tot
+     passo 210      d0 max
+     passo 210      omega_s p50
+     passo 210      peq p50
+     passo 216      d0 p50
+
+  finestra dei t50: dal passo 180 al 216  = 6 snapshot
+  ritardo fra il PRIMO e il SECONDO: 2 snapshot (12 passi)
+
+  -> LETTURA D: NESSUNA DELLE TRE.
+     span 6 snapshot (A vuole <=2), ritardo 2 (B vuole >=3), gradualita' NO:
+        omega_s p50 (10% nei primi 3: False, salto max 0.64)
+        omega_s max (10% nei primi 3: False, salto max 0.31)
+        d0 max (10% nei primi 3: True, salto max 0.44)
+        fatt_cs max (10% nei primi 3: True, salto max 0.58)
+        tw max (10% nei primi 3: True, salto max 0.72)
+        r p75 (10% nei primi 3: True, salto max 0.61)
+     Si riporta COSI', senza inventarne una quinta.
+
+UN SEME, UNA SCENA. --tau-luce sigillo 6/7. Nessuna identificazione, nessun verdetto di fisica.
