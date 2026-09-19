@@ -1,4 +1,4 @@
-[TIMBRO] _dump_snapshot.py  sha1-BYTE 160be607  committato e pulito
+[TIMBRO] _dump_snapshot.py  sha1-BYTE 0974b224  !! MODIFICATO rispetto a HEAD (blob-git 70ad8d44) -- i byte che girano NON sono quelli committati
 ====================================================================================================
 DUMP DELLO SNAPSHOT  scena_002700.pkl.gz
 archivio: csv\_test_fork\_g6000   snapshot presenti: 45  (dal passo 60 al 2700)
@@ -20,7 +20,7 @@ chiave                     shape            dtype             min         p01   
 _calcolo_schermatura                        bool        False
 _calcpsi_chiamate                           int         7499
 _calcpsi_w_none                             int         2099
-_chi_core_nodi             (9510,)          float64             1           1           1           1           1
+_chi_core_nodi             (9510,)          float64            -1          -1          -1           1           1
 _chi_core_raggio           (9510,)          float64             0           0           0           0           0
 _chi_core_rho0             (9510,)          float64     6.952e-07   0.0009677       7.384       92.32       92.32
 _chi_core_rhoc                              float       289.92406752749395
@@ -43,9 +43,9 @@ _inerzia_sfondo_ultima                      int         2700
 _inerzia_tot                                int         13865503
 _med_f_prec                                 float       0.3871769312928208
 _med_f_ultimo                               float       0.3871769312928208
-_nb                        (9511, 3)        float64     1.526e-08   2.695e-05      0.4668           1           1
-_nb_prec                   (9511, 3)        float64     1.526e-08   2.695e-05      0.4668           1           1
-_nb_ret                    (9511, 3)        float64     9.906e-08   1.791e-05      0.4504           1           1
+_nb                        (9511, 3)        float64       -0.9999     -0.9772   0.0005478           1           1
+_nb_prec                   (9511, 3)        float64       -0.9999     -0.9772   0.0005478           1           1
+_nb_ret                    (9511, 3)        float64            -1     -0.9797    0.002417           1           1
 _next_mass_id                               int         0
 _perm                      (877064,)        int64               0        8771   4.385e+05   8.683e+05   8.771e+05
 _por_invoc                                  int         2700
@@ -53,9 +53,9 @@ _porta_B                                    int         2
 _porta_B_nan                                int         429498
 _porta_B_nonpos                             int         429498
 _porta_B_ultima                             int         2
-_psi_prec                  (9511,)          complex128           0   0.0001937     0.07915       5.552       10.09
-_psi_spin_prec             (9511, 2)        complex128           0   1.398e-07     0.02916       12.26        15.6
-_psi_spinor                (9511, 2)        complex128   2.508e-06   5.411e-05      0.7071           1           1
+_psi_prec                  (9511,)          complex128           0   0.0001937     0.07915       5.552       10.09   [MODULO: complesso]
+_psi_spin_prec             (9511, 2)        complex128           0   1.398e-07     0.02916       12.26        15.6   [MODULO: complesso]
+_psi_spinor                (9511, 2)        complex128   2.508e-06   5.411e-05      0.7071           1           1   [MODULO: complesso]
 _r_corrente                (9510,)          float64     2.105e-06   0.0003814       1.003       1.414       1.414
 _rep                       (438532,)        float64             0           0           0   8.768e-06    0.002833
 _rep_guardia_tot                            int         2700
@@ -86,7 +86,7 @@ _sfondo_ko_ultima_peq                       int         2
 _sfondo_ko_ultima_rho                       int         2700
 _sin2_vir                  (438532,)        float64      1.49e-07   0.0008889      0.2228      0.9997           1
 _spin_feedback_last                         float       0.013221705837776604
-_spinor_lift               (9511, 2)        complex128   2.508e-06   5.411e-05      0.7071           1           1
+_spinor_lift               (9511, 2)        complex128   2.508e-06   5.411e-05      0.7071           1           1   [MODULO: complesso]
 _taup_Inodi_chiamate                        int         2700
 _taup_causale_scatti                        int         560500304
 _taup_causale_su_degenere                   int         429498
@@ -100,7 +100,7 @@ _taup_peq_degenere                          int         429498
 _xi_chiamate                                int         2699
 _xi_esteso                                  int         2098
 _xi_nuovi                                   int         9510
-_xi_rumore                 (9510, 3)        float64     6.493e-05     0.01286      0.6712       2.543       4.112
+_xi_rumore                 (9510, 3)        float64        -4.112      -2.294   0.0006923       2.297       3.786
 conc_archi                                  list        len=0  elementi vuoti=0
 conc_nodi                                   list        len=9511  elementi vuoti=9511
 coppie_nate                                 int         1914
@@ -110,47 +110,47 @@ eta                        (9511,)          float64             0     0.05964   
 i                          (438532,)        int64               0          34        1475        5291        9510
 j                          (438532,)        int64               2         242        1664        5318        9510
 masse_info                                  dict        len=0
-mem_mot                    (9511, 3)        float64     2.178e-06    0.001507      0.2191        5.47       15.78
+mem_mot                    (9511, 3)        float64        -15.78      -4.283   0.0005588       4.324       15.61
 nati                                        int         7120
 negate                                      int         0
-omega_s                    (9511, 3)        float64     1.766e-08   1.751e-06       14.96    1.21e+05   7.975e+05
+omega_s                    (9511, 3)        float64    -7.721e+05  -6.338e+04  -4.197e-06   6.051e+04   7.975e+05
 peq                        (438532,)        float64     0.0005345      0.8138       3.143       17.52       48.46
-perc_chi                   (9511,)          int64               1           1           1           1           1
+perc_chi                   (9511,)          int64              -1          -1          -1           1           1
 perc_tw                    (9511,)          float64             0           0           0           0           0
 phi                        (9511,)          float64     0.0009917      0.1018       6.284       12.44       12.57
 phi0                       (9511,)          float64     4.452e-06    0.007032       6.136       12.56       12.57
 phi_s                      (9511,)          float64     5.017e-06   6.982e-05       1.353       2.941       3.098
-phivel                     (9511,)          float64     8.056e-06     0.04982       3.257       52.41       213.7
-pos                        (9511, 3)        float64     2.339e-05     0.02028       2.331       9.591       12.77
-psi                        (9511,)          complex128           0   0.0001963     0.07828       5.629       10.03
-psi_spin                   (9511, 2)        complex128           0   1.567e-07     0.02878       12.27       15.61
+phivel                     (9511,)          float64        -213.7      -40.56     0.04821       38.86       159.8
+pos                        (9511, 3)        float64        -10.62      -8.117     -0.2787       9.579       12.77
+psi                        (9511,)          complex128           0   0.0001963     0.07828       5.629       10.03   [MODULO: complesso]
+psi_spin                   (9511, 2)        complex128           0   1.567e-07     0.02878       12.27       15.61   [MODULO: complesso]
 rho_spin                   (9511,)          float64             0   6.333e-08    0.006729       176.3       243.5
-tw                         (438532,)        float64             0     0.04192       2.247       8.632       44.18
-twp                        (438532,)        float64     6.231e-06     0.05838       3.118        6.23       9.422
+tw                         (438532,)        float64        -44.18      -7.951     0.01811         7.9       35.45
+twp                        (438532,)        float64         -9.41      -6.171    0.004516       6.167       9.422
 ultima_prob_coppia                          float       0.41746053200482425
-vd                         (438532,)        float64     3.775e-08    0.002665      0.2516       4.803       16.89
+vd                         (438532,)        float64        -16.89      -3.043    -0.02227        4.29       15.14
 xi_termo                                    float       2.0
 
 --- 3. PERCENTILI delle grandezze che possono degenerare ---
                       p50        p90        p99      p99.9        MAX    MAX/p50   n>10*p50
 d                   1.325      2.911      6.955      10.35      16.79      12.67         38
 d0                  1.305      4.181      8.325      22.27      394.7      302.5       1227
-tw                  2.247      5.549      8.632      17.93      44.18      19.66        220
-twp                 3.118      5.685       6.23      6.283      9.422      3.022          0
-phivel              3.257      14.86      52.41      97.39      213.7      65.63        285
-omega_s             14.96       5329   1.21e+05   4.11e+05  7.975e+05   5.33e+04       8720
+tw                0.01811      4.201        7.9      12.61      35.45       1957     210856
+twp              0.004516      5.057      6.167      6.278      9.422       2087     217746
+phivel            0.04821      8.621      38.86      78.29      159.8       3314       4344
+omega_s        -4.197e-06      652.5  6.051e+04   3.37e+05  7.975e+05   -1.9e+11      15484
 peq                 3.143      9.058      17.52      27.54      48.46      15.42        135
-vd                 0.2516      1.583      4.803      8.339      16.89      67.12      20019
+vd               -0.02227       1.21       4.29      8.145      15.14     -680.1     342290
 _rep                    0          0  8.768e-06  0.0005137   0.002833        inf         -1
 rho_spin         0.006729      70.53      176.3      220.2      243.5  3.619e+04       3100
 _r_corrente         1.003      1.414      1.414      1.414      1.414      1.411          0
 eta                 10.66      31.76      34.64      35.41      36.37      3.411          0
-pos                 2.331      7.829      9.591      10.64      12.77      5.479          0
+pos               -0.2787       7.44      9.579      10.63      12.77     -45.81      20915
 psi               0.07828      2.384      5.629      8.158      10.03      128.1       2297
 psi_spin          0.02878      1.813      12.27      14.47      15.61      542.2       3848
 _sin2_vir          0.2228     0.8645     0.9997          1          1      4.488          0
-_xi_rumore         0.6712      1.619      2.543      3.197      4.112      6.127          0
-mem_mot            0.2191      1.811       5.47       9.64      15.78      72.01       2188
+_xi_rumore      0.0006923      1.272      2.297      2.999      3.786       5469      14207
+mem_mot         0.0005588      1.021      4.324      8.802      15.61  2.793e+04      13801
 
 --- 4. TREND sugli ultimi 10 snapshot ---
 passo    n        archi     d0 MAX      d MAX       phivel MAX  omega MAX   rho_sp MAX  r MIN       fr r<1e-4   eta MAX    

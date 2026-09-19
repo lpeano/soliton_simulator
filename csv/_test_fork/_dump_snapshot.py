@@ -53,22 +53,36 @@ def passo_di(p):
     return int(re.search(r"_(\d{6})\.", p).group(1))
 
 
-def _mod(v):
-    """MODULO, e per i COMPLESSI si prende PRIMA il modulo: `asarray(v, float)` su un complex
-    SCARTA LA PARTE IMMAGINARIA (ComplexWarning), e le statistiche sarebbero sulla sola parte
-    reale. `psi` e `psi_spin` sono complex128, quindi non e' un caso di scuola: e' meta' del dato."""
+def _val(v):
+    """I VALORI, COL LORO SEGNO. Per i COMPLESSI si prende il MODULO (e si dichiara): li' il segno
+    non esiste e `asarray(v, float)` scarterebbe la parte immaginaria.
+
+    *** PERCHE' QUESTA FUNZIONE E' STATA RISCRITTA, 2026-09-19 ***
+    La prima versione prendeva il MODULO DI TUTTO. Su `perc_chi`, che vale +-1, il modulo da' 1
+    ovunque: il dump stampava `min = max = 1`, che e' stato letto come "TUTTI +1" e ha prodotto una
+    premessa FALSA in un mandato ("una monocoltura che si ribalta"). MISURATO invece: al passo 2700
+    il 17.05 % dei nodi e' +1 e L'83 % E' ANCORA -1.
+    Un dump che nasconde il SEGNO non e' un dump: e' una proiezione, e chi lo legge non ha modo di
+    saperlo. Vale per `perc_chi` come per `phivel`, `pos`, `omega_s`."""
     a = np.asarray(v)
-    return np.abs(a).ravel().astype(float) if a.dtype.kind == "c" else np.abs(a.astype(float)).ravel()
+    if a.dtype.kind == "c":
+        return np.abs(a).ravel().astype(float), True
+    return a.astype(float).ravel(), False
+
+
+def _mod(v):
+    """Solo dove serve davvero il MODULO (ampiezze, norme): lo dichiara chi lo chiama."""
+    return np.abs(_val(v)[0])
 
 
 def stat(v):
-    a = _mod(v)
+    a, e_mod = _val(v)
     fin = np.isfinite(a)
     a = a[fin]
     if not a.size:
         return None
     return dict(nonfin=int(np.sum(~fin)), mn=a.min(), p01=np.percentile(a, 1),
-                med=np.median(a), p99=np.percentile(a, 99), mx=a.max())
+                med=np.median(a), p99=np.percentile(a, 99), mx=a.max(), mod=e_mod)
 
 
 def main():
@@ -107,6 +121,8 @@ def main():
                 print("%-26s %-16s %-9s   (vuoto)" % (k, str(v.shape), v.dtype))
                 continue
             flag = "  <<< %d NON FINITI" % s["nonfin"] if s["nonfin"] else ""
+            if s["mod"]:
+                flag += "   [MODULO: complesso]"
             print("%-26s %-16s %-9s %11.4g %11.4g %11.4g %11.4g %11.4g%s" %
                   (k, str(v.shape), v.dtype, s["mn"], s["p01"], s["med"], s["p99"], s["mx"], flag))
         elif isinstance(v, (list, tuple)):
@@ -126,7 +142,7 @@ def main():
         v = at.get(k)
         if not isinstance(v, np.ndarray):
             continue
-        a = _mod(v)
+        a, _ = _val(v)
         a = a[np.isfinite(a)]
         if not a.size:
             continue
