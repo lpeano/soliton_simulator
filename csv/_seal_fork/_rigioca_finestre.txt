@@ -1,0 +1,21 @@
+[TIMBRO] _rigioca_finestre.py  sha1-BYTE d4b32fae  committato e pulito
+[TIMBRO] _sigillo_archivio.py  sha1-BYTE 6c039a43  committato e pulito
+risoluzione: 1 frame = 6 passi (il driver campiona in FRAME; --db-ogni 5 non e' rappresentabile)
+
+FINESTRA A: dal passo 0 al 60, DA ZERO (nessuna ripresa). 10 frame.
+   passi prodotti: [6, 12, 18, 24, 30, 36, 42, 48, 54, 60]   in 154 s   rc=0
+SA    PASS   113 campi confrontati, 0 diversi  -> IDENTICO
+
+FINESTRA B: dal passo 180 al 240, RIPRESA dallo snapshot 180. fino al frame 40.
+   passi prodotti: [180, 186, 192, 198, 204, 210, 216, 222, 228, 234, 240]   in 160 s   rc=0
+   RIPRESA: caricato scena_000180.pkl.gz (passo 180 = frame 30). Si riparte dal frame 31, n=2393, archi=429501.
+SB    PASS   113 campi confrontati, 0 diversi  -> IDENTICO
+
+SC    PASS   due istanti DIVERSI risultano diversi: il confronto NON e' cieco
+
+ESITO: 3/3
+
+VERDETTO: LE DUE FINESTRE SONO RIPRODOTTE FEDELMENTE.
+  A: ripartendo DA ZERO si riottiene lo snapshot 60 -- il run e' riproducibile da capo.
+  B: ripartendo dal 180 si riottiene lo snapshot 240.
+  I dati fini sono in csv/_test_fork/_fin_A e _fin_B, e si leggono con _cronologia.py.
