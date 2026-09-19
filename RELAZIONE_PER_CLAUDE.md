@@ -7630,3 +7630,70 @@ ricostruzione riproduce `r` al passo 6** (scarto `0.032`) **e non lo riproduce p
 snapshot, **oscilla dell'`802 %`** fra passi consecutivi nella finestra dell'evento, contro il
 **`19.1 %`** della finestra iniziale. **`Z43` dava il `62 %`: qui è tredici volte tanto, e solo
 durante l'evento.**
+
+---
+
+## 2026-09-20 — **LA TOPOLOGIA: nessuna delle quattro letture. Il grafo è in QUATTRO PEZZI che non si toccano mai** (`Z65`)
+
+**Blob `775ceab7`, seme 42, i 45 snapshot di `_g6000` più i 10 di `_fin_A`. Nessun run, nessuna
+cura, il simulatore non è stato toccato.** Clustering **esatto, non campionato** (costo misurato:
+`0.75 s` per 9511 nodi e 438 532 archi). Letture fissate prima in
+`doc/TASK_HISTORY/2026-09-20_topologia.md`. → `doc/REFERTO_topologia.md`
+
+**⚠ E il nome non si usa: si riporta la forma, coi numeri.**
+
+**① I due presidi, e uno non era mai stato misurato.** Il grado ricalcolato da `i`/`j` coincide con
+`_deg` su **45 snapshot su 45**, con zero auto-anelli e zero archi duplicati. E **`eta[k]` non
+diminuisce mai**, in nessuna delle 44 transizioni: **la stabilità degli indici era un'assunzione di
+`CLAUDE.md` §9** (*«i nodi si appendono in coda»*) e adesso è una misura. Tutto il seguire-le-coorti
+poggiava su quella.
+
+**② La quarta lettura — quella data per più probabile — è falsificata.** Seguendo per **2100 passi**
+i 1025 nodi di grado 2 del passo 600: l'**84.0 %** è ancora di grado 2, la **mediana non si muove di
+un'unità**, il massimo passa da 2 a **6**. E il test **trasversale** (che non contiene il tempo) dice
+che il **36.5 %** dei nodi con `eta ≥ 16` è ancora di grado 2. **Non è un transitorio demografico: il
+grado 2 è permanente.**
+
+**③ Il fatto centrale, che nessuna delle quattro letture prevedeva.** Il grafo **intero** ha
+**quattro componenti connesse, dal passo 6 al passo 2700**: `900 + 497×3 = 2391` alla semina,
+`2899/2815/2119/1678` al 2700. **Non si fondono, non si spezzano.**
+
+```
+archi DIRETTI fra componenti diverse:            0
+catene che uniscono due componenti diverse:      0 su 5167
+```
+
+**Zero, a tutte e tre le soglie di grado provate (`≥11`, `≥41`, `≥101`) e a entrambi i passi.**
+
+**④ E non è una forma emersa: è la semina.** `_semina_n_masse` costruisce
+`int(massa_critica_collasso()*0.8) = 497` nodi per massa, e **al passo 6 la densità interna dei tre
+pezzi da 497 è `1.0000` esatta — nascono grafi COMPLETI**. In 2700 passi si diluiscono dello `0.8 %`.
+Il quarto pezzo è `SEME_INIZIALE = 900` a `0.1476`, e resta a `0.1472`.
+
+**⑤ L'istogramma è bimodale con una valle VUOTA:** su 9511 nodi **nessuno** ha grado fra `226` e
+`495` (**270 valori consecutivi**), e nessuno fra `11` e `40`. **Il clustering è una dicotomia, non
+un gradiente:** `C = 0` **esatto sul 100 %** dei 7120 nodi di grado ≤ 10, e **mai zero** sui 2391 di
+grado ≥ 11. **Le catene sono corte e tutte interne:** l'**85 %** è lunga 1, il massimo è 11, e non
+c'è nessuna scala caratteristica (decadimento monotono, nessun picco).
+
+**⑥ Le due popolazioni non si mescolano mai.** Tutti e **2126** i nodi di grado > 100 erano presenti
+al passo 60 (`1.0000`); dei **7120** nati dopo, **nessuno** supera mai grado 100 (`0.0000`); dei 2391
+iniziali, **nessuno** scende mai a grado 2. Gli archi crescono del **2.1 %** mentre i nodi crescono
+del **298 %**.
+
+> **Nessuna delle quattro letture scatta:** `A` cade sulle catene fra pezzi diversi (`0.0000`), `B`
+> sulla valle vuota, `C` perché il clustering dei grado-2 è **esattamente** zero, `D` perché il grado
+> 2 è permanente. **Non ne invento una quinta.**
+> **Quello che si vede non è una struttura che si è formata: è la condizione iniziale, più una regola
+> di nascita che aggiunge nodi senza mai collegarli fra loro.**
+
+**⑦ ⚠ Una correzione a una misura mia, dichiarata.** Il primo strumento aveva misurato che **il
+100 % delle catene ha due punti d'appoggio DISTINTI** — il numero è giusto, ma **la domanda era
+un'altra**: il mandato chiedeva se i due capi stessero in **pezzi** diversi, e **due nodi distinti
+possono benissimo stare nello stesso pezzo**. Ho scritto un secondo strumento per prendere la
+distinzione al livello del blocco, ed è lì che esce lo `0.0000`. **La misura al livello del nodo
+rispondeva a una domanda che non era stata fatta.**
+
+**Cosa questo NON dice:** non dice che la fisica non produca struttura — dice che **in questa scena,
+con questa semina, la connettività non si muove**. Una scena con una semina diversa è **una misura
+diversa, e non è stata fatta**. **Un seme, una scena, nessuna barra d'errore fra semi.**

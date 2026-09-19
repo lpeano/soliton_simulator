@@ -1,0 +1,80 @@
+[TIMBRO] _topologia_blocchi.py  sha1-BYTE 40ab9e31  committato e pulito
+======================================================================================================================
+PASSO 600   n = 3433   archi = 430813
+======================================================================================================================
+-- 1  ADDENSAMENTI a soglia grado >= 11: 2391 nodi, 4 componenti
+   comp   nodi     archi int.  possibili   densita'  grado p50
+   0      900      59680       404550      0.1475    127      
+   1      497      123181      123256      0.9994    496      
+   2      497      122832      123256      0.9966    496      
+   3      497      123095      123256      0.9987    496      
+-- 2  archi DIRETTI fra nodi di addensamenti DIVERSI: 0   (dentro lo stesso: 428788)
+-- 3  LE 984 CATENE, soglia >= 11:
+      capi nello STESSO addensamento : 952     (0.9675)
+      capi in DUE addensamenti DIVERSI: 0       (0.0000)
+      almeno un capo FUORI da ogni addensamento: 32      (0.0325)
+
+-- 1  ADDENSAMENTI a soglia grado >= 41: 2391 nodi, 4 componenti
+   comp   nodi     archi int.  possibili   densita'  grado p50
+   0      900      59680       404550      0.1475    127      
+   1      497      123181      123256      0.9994    496      
+   2      497      122832      123256      0.9966    496      
+   3      497      123095      123256      0.9987    496      
+-- 2  archi DIRETTI fra nodi di addensamenti DIVERSI: 0   (dentro lo stesso: 428788)
+-- 3  LE 984 CATENE, soglia >= 41:
+      capi nello STESSO addensamento : 952     (0.9675)
+      capi in DUE addensamenti DIVERSI: 0       (0.0000)
+      almeno un capo FUORI da ogni addensamento: 32      (0.0325)
+
+-- 1  ADDENSAMENTI a soglia grado >= 101: 2125 nodi, 4 componenti
+   comp   nodi     archi int.  possibili   densita'  grado p50
+   0      634      40523       200661      0.2019    148      
+   1      497      123181      123256      0.9994    496      
+   2      497      122832      123256      0.9966    496      
+   3      497      123095      123256      0.9987    496      
+-- 2  archi DIRETTI fra nodi di addensamenti DIVERSI: 0   (dentro lo stesso: 409631)
+-- 3  LE 984 CATENE, soglia >= 101:
+      capi nello STESSO addensamento : 928     (0.9431)
+      capi in DUE addensamenti DIVERSI: 0       (0.0000)
+      almeno un capo FUORI da ogni addensamento: 56      (0.0569)
+
+======================================================================================================================
+PASSO 2700   n = 9511   archi = 438532
+======================================================================================================================
+-- 1  ADDENSAMENTI a soglia grado >= 11: 2391 nodi, 4 componenti
+   comp   nodi     archi int.  possibili   densita'  grado p50
+   0      900      59555       404550      0.1472    127      
+   1      497      122491      123256      0.9938    497      
+   2      497      122331      123256      0.9925    497      
+   3      497      122210      123256      0.9915    498      
+-- 2  archi DIRETTI fra nodi di addensamenti DIVERSI: 0   (dentro lo stesso: 426587)
+-- 3  LE 5167 CATENE, soglia >= 11:
+      capi nello STESSO addensamento : 3690    (0.7141)
+      capi in DUE addensamenti DIVERSI: 0       (0.0000)
+      almeno un capo FUORI da ogni addensamento: 1477    (0.2859)
+
+-- 1  ADDENSAMENTI a soglia grado >= 41: 2391 nodi, 4 componenti
+   comp   nodi     archi int.  possibili   densita'  grado p50
+   0      900      59555       404550      0.1472    127      
+   1      497      122491      123256      0.9938    497      
+   2      497      122331      123256      0.9925    497      
+   3      497      122210      123256      0.9915    498      
+-- 2  archi DIRETTI fra nodi di addensamenti DIVERSI: 0   (dentro lo stesso: 426587)
+-- 3  LE 5167 CATENE, soglia >= 41:
+      capi nello STESSO addensamento : 3690    (0.7141)
+      capi in DUE addensamenti DIVERSI: 0       (0.0000)
+      almeno un capo FUORI da ogni addensamento: 1477    (0.2859)
+
+-- 1  ADDENSAMENTI a soglia grado >= 101: 2126 nodi, 4 componenti
+   comp   nodi     archi int.  possibili   densita'  grado p50
+   0      635      40511       201295      0.2013    148      
+   1      497      122491      123256      0.9938    497      
+   2      497      122331      123256      0.9925    497      
+   3      497      122210      123256      0.9915    498      
+-- 2  archi DIRETTI fra nodi di addensamenti DIVERSI: 0   (dentro lo stesso: 407543)
+-- 3  LE 5167 CATENE, soglia >= 101:
+      capi nello STESSO addensamento : 3634    (0.7033)
+      capi in DUE addensamenti DIVERSI: 0       (0.0000)
+      almeno un capo FUORI da ogni addensamento: 1533    (0.2967)
+
+UN SEME, UNA SCENA. Nessun nome: si riportano componenti, densita' e conteggi.
