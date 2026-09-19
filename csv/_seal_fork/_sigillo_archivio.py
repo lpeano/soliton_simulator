@@ -5,6 +5,15 @@ Progettazione fissata PRIMA: doc/TASK_HISTORY/2026-09-19_archivio-serie.md par.2
 corretto in 0ed3386). I tre DECISIVI sono V1, V2 (byte-identita', BLOCCANTI) e V6 (la rigiocata
 combacia).
 
+IL CRITERIO E' STATO CORRETTO IL 2026-09-19 (QUATTORDICESIMO criterio riscritto del programma).
+  Prima confrontava `pickle.dumps` anche per le strutture Python, e i byte del pickle dipendono dal
+  MEMO: cosi' catturava l'ALIASING, che NON e' stato del sistema. MISURATO, non congetturato: la
+  stringa "schwinger" era nel memo in un ramo e scritta per esteso nell'altro, con repr IDENTICO
+  (_sigillo_archivio_V6_dettaglio_2026-09-19.txt). Ora le strutture si confrontano sul CONTENUTO
+  (`uguale_contenuto`) e gli ndarray restano sui BYTE: la fisica non cambia criterio.
+  E resta APERTA, registrata e non spiegata, la domanda: PERCHE' nella rigiocata quella stringa sia
+  un oggetto diverso. Il contenuto coincide; il meccanismo NON e' stato misurato.
+
 IL CONFRONTO E' SUI BYTE, E SI CONTA QUANTI ARRAY SONO STATI CONFRONTATI.
   "max|A-B| = 0.000e+00 puo' significare NESSUN CONFRONTO" (par.9, successo davvero: 3209 nodi
   contro 3073, 32 shape su 32 divergenti, e lo zero era il massimo di un insieme VUOTO).
@@ -29,6 +38,10 @@ COSA MISURA
       BYTE-IDENTICI a quelli del run originale. E' il sigillo della RIPRODUCIBILITA', ed e' il
       test empirico della riserva dichiarata nel task history par.1.1 ("un solo generatore
       garantisce la casualita', non ogni sorgente di non-determinismo").
+  V6b IL CRITERIO DI V6 DEVE ANCORA POTER FALLIRE: quattro casi di cui si sa la risposta --
+      aliasing rotto e valori intatti (DEVE dire uguale), un valore cambiato, una voce in piu',
+      un ndarray con un elemento cambiato (DEVONO essere presi). Senza questo, il criterio
+      corretto sarebbe solo un criterio ALLENTATO.
   V7  retrocompatibilita': .pkl e .pkl.gz si leggono ENTRAMBI, e danno lo stesso stato.
   V8  IL COSTO, misurato DENTRO un run: quanto rallenta la simulazione, con e senza gzip.
       (csv/_seal_fork/_costo_archivio_2026-09-19.txt ha gia' misurato il costo di UNA scrittura
@@ -93,6 +106,71 @@ def carica(path):
     _apri = gzip.open if str(path).endswith(".gz") else open
     with _apri(path, "rb") as fh:
         return pickle.load(fh)
+
+
+def uguale_contenuto(a, b):
+    """CONFRONTO DI CONTENUTO, insensibile all'IDENTITA' degli oggetti Python.
+
+    ATTENZIONE: QUATTORDICESIMO CRITERIO RISCRITTO (2026-09-19), e la ragione e' MISURATA, non congetturale.
+    Il criterio precedente confrontava `pickle.dumps`, e i byte del pickle dipendono anche dal
+    MEMO: due strutture con gli STESSI VALORI ma aliasing diverso danno pickle diversi. Misurato
+    (`_sigillo_archivio_V6_dettaglio_2026-09-19.txt`): la stringa "schwinger" era gia' nel memo in
+    un ramo (`j=\\x06\\x00\\x00`, LONG_BINGET) e scritta per esteso nell'altro
+    (`\\x8c\\tschwinger\\x94`), a fronte di `repr(A) == repr(B) == True`.
+    **L'ALIASING DI pickle NON E' STATO DEL SISTEMA**, e un criterio che lo cattura chiede la cosa
+    sbagliata.
+
+    COSA RESTA DURO, e non si allenta:
+      - gli `ndarray` si confrontano sui BYTE (shape, dtype e `tobytes()`): la FISICA non cambia
+        criterio;
+      - i `float` si confrontano sui BYTE (`struct.pack`), non con `==`: cosi' `NaN` combacia con
+        se' stesso e `-0.0` NON passa per `0.0`;
+      - il TIPO deve coincidere: un `int` che diventa `float` e' un cambiamento, non un dettaglio.
+
+    E QUESTO CRITERIO DEVE ANCORA POTER FALLIRE: lo dimostra `V6b`, che gli sottopone una
+    differenza VERA e verifica che la prenda. Senza quella prova avrei solo ALLENTATO un criterio."""
+    import struct
+    if isinstance(a, np.ndarray) or isinstance(b, np.ndarray):
+        if not (isinstance(a, np.ndarray) and isinstance(b, np.ndarray)):
+            return False
+        return a.shape == b.shape and a.dtype == b.dtype and a.tobytes() == b.tobytes()
+    if isinstance(a, dict) or isinstance(b, dict):
+        if not (isinstance(a, dict) and isinstance(b, dict)) or set(a) != set(b):
+            return False
+        return all(uguale_contenuto(a[k], b[k]) for k in a)
+    if isinstance(a, (list, tuple)) or isinstance(b, (list, tuple)):
+        if type(a) is not type(b) or len(a) != len(b):
+            return False
+        return all(uguale_contenuto(x, y) for x, y in zip(a, b))
+    if type(a) is not type(b):
+        return False
+    if isinstance(a, float):
+        return struct.pack("<d", a) == struct.pack("<d", b)
+    return bool(a == b)
+
+
+def muta_un_valore(o, _dove=""):
+    """Cambia UN solo valore in profondita'. Serve a `V6b`: un criterio che non si dimostra capace
+    di fallire non e' un criterio. Ritorna la descrizione della mutazione, o None."""
+    if isinstance(o, list):
+        for i, x in enumerate(o):
+            if isinstance(x, bool):
+                continue
+            if isinstance(x, (int, float)):
+                o[i] = x + 1
+                return "%s[%d]: %r -> %r" % (_dove, i, x, o[i])
+            if isinstance(x, str):
+                o[i] = x + "_MUTATO"
+                return "%s[%d]: %r -> %r" % (_dove, i, x, o[i])
+            d = muta_un_valore(x, "%s[%d]" % (_dove, i))
+            if d:
+                return d
+    elif isinstance(o, dict):
+        for k in sorted(o, key=repr):
+            d = muta_un_valore(o[k], "%s[%r]" % (_dove, k))
+            if d:
+                return d
+    return None
 
 
 def dettaglio_diff(k, va, vb, max_elem=3):
@@ -208,12 +286,12 @@ def confronta_attrs(a, b, etichetta):
             # NON si usa `!=`: `conc_nodi`/`conc_archi`/`masse_info` sono liste e dict che possono
             # contenere ndarray, e li' `!=` SOLLEVA ValueError ("truth value is ambiguous") invece
             # di dare un verdetto -- cioe' il sigillo SI SCHIANTEREBBE anziche' fallire, che e' la
-            # modalita' piu' facile da non notare (par.9, FintaRete). Si confrontano i BYTE della
-            # serializzazione: e' esatto per strutture prodotte dallo stesso codice deterministico,
-            # e un eventuale falso FAIL e' preferibile a un crash.
+            # modalita' piu' facile da non notare (par.9, FintaRete).
+            # E NON SI USA PIU' `pickle.dumps`: i suoi byte dipendono dal MEMO, quindi cattura
+            # l'ALIASING, che NON e' stato del sistema (misurato, vedi `uguale_contenuto`).
             n += 1
             try:
-                diverso = pickle.dumps(va, 5) != pickle.dumps(vb, 5)
+                diverso = not uguale_contenuto(va, vb)
             except Exception as e:
                 guai.append("%s: NON CONFRONTABILE (%s)" % (k, type(e).__name__))
                 continue
@@ -313,7 +391,7 @@ def main():
         # ---- V3/V4: la serie esiste, e il nome dice il vero ---------------------------
         # LA SERIE SERVE ANCHE A V5, V6 e V8: si produce se una qualunque di loro e' attiva.
         ser, t_serie, base = [], None, os.path.join(tmp, "serie.pkl")
-        if any(attivo(v) for v in ("V3", "V4", "V5", "V6", "V8")):
+        if any(attivo(v) for v in ("V3", "V4", "V5", "V6", "V6B", "V8")):
             _, t_serie, pr_s = run(SIM, tmp, "serie", ["--db-serie"],
                                    passi=PASSI_SERIE, ogni_db=OGNI_SERIE)
             ser = S._db_serie_esistenti(base)
@@ -385,6 +463,54 @@ def main():
         elif attivo("V6"):
             segna("V6", False, "NON ESEGUITO: serie troppo corta (%d snapshot)" % len(ser))
 
+        # ---- V6b: IL CRITERIO DI V6 DEVE ANCORA POTER FALLIRE -------------------------
+        # Un criterio che si corregge dopo un FAIL va dimostrato capace di fallire ANCORA, se no
+        # non l'ho corretto: l'ho ALLENTATO. Si sottopongono a `uguale_contenuto` quattro casi di
+        # cui si sa gia' la risposta -- due che DEVONO passare e due che DEVONO essere presi.
+        if attivo("V6B") and ser:
+            import copy as _copy
+            src = (carica(ser[-1][1]).get("attrs") or {})
+            cn = src.get("conc_nodi")
+            arr = next((v for v in src.values()
+                        if isinstance(v, np.ndarray) and v.size and v.dtype.kind in "fiu"), None)
+            casi, guai6b = [], []
+            if cn is not None:
+                # (1) CONTROLLO POSITIVO: deepcopy ROMPE ogni condivisione di oggetti ma NON tocca
+                #     i valori. Se questo desse "diverso", il criterio sarebbe ancora sensibile
+                #     all'aliasing, cioe' non avrei corretto niente.
+                casi.append(("aliasing rotto (deepcopy), valori intatti",
+                             uguale_contenuto(cn, _copy.deepcopy(cn)), True))
+                # (2) UN VALORE CAMBIATO: deve essere PRESO.
+                mut = _copy.deepcopy(cn)
+                desc = muta_un_valore(mut)
+                casi.append(("un valore cambiato in profondita' (%s)" % (desc or "NESSUNO TROVATO"),
+                             uguale_contenuto(cn, mut), False))
+                if desc is None:
+                    guai6b.append("non ho trovato alcun valore da mutare in conc_nodi: "
+                                  "il caso (2) NON HA PROVATO NIENTE")
+                # (3) UNA VOCE IN PIU': lunghezza diversa, deve essere PRESA.
+                piu = _copy.deepcopy(cn)
+                piu.append(["VOCE_AGGIUNTA"])
+                casi.append(("una voce aggiunta (len %d -> %d)" % (len(cn), len(piu)),
+                             uguale_contenuto(cn, piu), False))
+            if arr is not None:
+                # (4) LA FISICA RESTA VINCOLO DURO: un solo elemento cambiato dev'essere preso.
+                a2 = arr.copy()
+                a2.flat[0] = a2.flat[0] + 1
+                casi.append(("un ndarray (%s) con UN elemento cambiato" % (arr.dtype,),
+                             uguale_contenuto(arr, a2), False))
+            for nome, ottenuto, atteso in casi:
+                print("       > %-56s -> uguale=%s  atteso=%s  %s"
+                      % (nome, ottenuto, atteso, "ok" if ottenuto == atteso else "<<< SBAGLIATO"))
+                if ottenuto != atteso:
+                    guai6b.append(nome)
+            segna("V6b", bool(casi) and not guai6b and len(casi) >= 4,
+                  "il criterio corretto PRENDE ancora le differenze vere: %d casi, %d sbagliati%s"
+                  % (len(casi), len(guai6b),
+                     "" if len(casi) >= 4 else "  <<< MENO DI 4 CASI: prova incompleta"))
+        elif attivo("V6B"):
+            segna("V6b", False, "NON ESEGUITO: nessuna serie da cui prendere conc_nodi")
+
         # ---- V7: retrocompatibilita' dei due formati ----------------------------------
         if attivo("V7"):
             net7 = S.Rete(seed=SEED)
@@ -432,7 +558,7 @@ def main():
         print("ESITO: %d/%d%s" % (ok, len(esiti),
                                   "   *** GIRO PARZIALE (%s): NON E' UN SIGILLO ***"
                                   % ",".join(sorted(SOLO)) if SOLO else ""))
-        bloccanti = [n for n, o, _ in esiti if not o and n in ("V1", "V2", "V6")]
+        bloccanti = [n for n, o, _ in esiti if not o and n in ("V1", "V2", "V6", "V6b")]
         print("")
         if SOLO:
             print("ATTENZIONE: GIRO PARZIALE su %s: le voci non girate NON sono state verificate, e"
