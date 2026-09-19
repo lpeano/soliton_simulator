@@ -33,6 +33,26 @@ sys.path.insert(0, ROOT)
 os.chdir(ROOT)
 
 _ARGV = list(sys.argv)
+# [ARCHIVIO, 2026-09-19] OPZIONI DEL DRIVER, tolte da argv PRIMA che il parser del simulatore lo
+# veda. Sono NOMINALI e non posizionali di proposito: aggiungere un 6o argomento posizionale
+# avrebbe costretto a passare anche i precedenti, e il comando di `Z49` deve restare riproducibile
+# VERBATIM.
+#   --serie=K            salva uno snapshot ogni K frame, come SERIE numerata col PASSO DI MOTORE
+#   --csv-progresso=P    scrive il progresso in un CSV, con blob/seme/flag (P6)
+# ⚠ SENZA QUESTE DUE, IL DRIVER FA ESATTAMENTE QUELLO CHE FACEVA. Lo prova il rigiro del sigillo.
+# ⚠ E `--db-serie`/`--db-ogni` del simulatore NON servono qui: quella logica vive in
+#   `batch_condensazione`, dove questo percorso non passa. Verificato dal sorgente, non dedotto.
+SERIE = None
+CSVPROG = None
+_resti = []
+for _x in _ARGV[1:]:
+    if _x.startswith("--serie="):
+        SERIE = int(_x.split("=", 1)[1])
+    elif _x.startswith("--csv-progresso="):
+        CSVPROG = _x.split("=", 1)[1]
+    else:
+        _resti.append(_x)
+_ARGV = [_ARGV[0]] + _resti
 NFRAME = int(_ARGV[1]) if len(_ARGV) > 1 else 20
 DEST = _ARGV[2] if len(_ARGV) > 2 else os.path.join("csv", "_test_fork", "_gvideo")
 SNAP = set(int(x) for x in _ARGV[3].split(",")) if len(_ARGV) > 3 else set()
@@ -81,6 +101,41 @@ S.avvia_test("N-MASSE")()    # il costruttore UFFICIALE della scena -> _semina_n
 print("\n  scena avviata: n = %d nodi alla semina (N_c*0.8 per massa, %s masse)"
       % (S.net.n, NMASSE))   # il NUMERO DI MASSE si STAMPA, non si assume: era cablato a "3"
 
+# [ARCHIVIO] IL SEME SI LEGGE, NON SI ASSUME. `net = Rete()` (:4531) usa il DEFAULT della classe;
+# `SEME_INIZIALE = 900` e' il NUMERO DI NODI seminati (:4532), non il seme -- e nel batch lo stesso
+# 900 viene riusato COME seme (:6407). Scrivere "seed 900" qui sarebbe FALSO.
+import inspect as _insp
+SEME_EFFETTIVO = _insp.signature(S.Rete.__init__).parameters["seed"].default
+BLOB_RUN = (S.net._versione_codice() or {}).get("blob")
+BASE_SERIE = os.path.join(DEST, "scena.pkl.gz")     # `.gz` -> compressione a livello 1
+_n_scritti = _n_saltati = _n_falliti = 0
+_peso_tot = 0
+print("\n  SEME EFFETTIVO (letto da Rete.__init__): %s    BLOB: %s" % (SEME_EFFETTIVO, BLOB_RUN))
+if SERIE:
+    print("  SERIE ATTIVA: uno snapshot ogni %d frame = %d passi di motore -> %s"
+          % (SERIE, SERIE * int(S.PASSI_PER_FRAME), BASE_SERIE))
+    _pre, _guaio = S._db_serie_verifica(BASE_SERIE, S.net._versione_codice())
+    if _guaio:
+        raise SystemExit("[serie] RIFIUTO DI PARTIRE: %s" % _guaio)
+    if _pre:
+        raise SystemExit("[serie] RIFIUTO: la cartella contiene gia' %d snapshot di QUESTA fisica. "
+                         "Il mandato dice DA ZERO: usa una cartella pulita." % len(_pre))
+
+csv_f = None
+if CSVPROG:
+    os.makedirs(os.path.dirname(os.path.abspath(CSVPROG)) or ".", exist_ok=True)
+    csv_f = open(CSVPROG, "w", encoding="utf-8")
+    # P6: BLOB, SEME e TUTTI i flag che distinguono questo run. Nel CSV, non solo nel log.
+    _flag = ("CAMPO_SPINORIALE", "SPINORE_VIVO", "SPINORE_CORRETTO", "CHI_CORE", "CS_DINAMICO",
+             "TAU_LUCE", "CHI_BASC", "FORK_SU2", "FORK_SU2_MEM", "STEP2_OROLOGIO", "SPIN_FEEDBACK",
+             "PLAST_DIN", "VERLET", "RUMORE_COLORATO", "PAV_COM", "GUSCIO_MORBIDO", "ZETA_VIR",
+             "VIRIALE", "OLON_PART", "CALORE_VETTORIALE")
+    csv_f.write("# blob=%s seme_effettivo=%s nmasse=%s sep=%s PASSI_PER_FRAME=%s DT=%s TAU_A=%s\n"
+                % (BLOB_RUN, SEME_EFFETTIVO, NMASSE, S._sep_video(), S.PASSI_PER_FRAME, S.DT, S.TAU_A))
+    csv_f.write("# " + " ".join("%s=%s" % (f, int(bool(getattr(S, f, False)))) for f in _flag) + "\n")
+    csv_f.write("frame,passo,n,archi,coer_l,dil,elapsed_s,s_per_frame\n")
+    csv_f.flush()
+
 t0 = time.time()
 S.stato["nframe"] = 0
 prog = []
@@ -103,7 +158,30 @@ for k in range(NFRAME):
             S.net.pozzo_grafo(_Iv)
         except Exception:
             pass
-    if fr in SNAP or fr == NFRAME:
+    if SERIE and (fr % SERIE == 0 or fr == NFRAME):
+        # ⚠ QUI `_db_step` E' IL PASSO DI MOTORE, non il frame: la serie numera per PASSO, e `V4`
+        # del sigillo dell'archivio verifica "il passo nel NOME == `_db_step` nei DATI".
+        _pm = fr * int(S.PASSI_PER_FRAME)
+        S.net._db_step = _pm
+        _p = S._db_serie_path(BASE_SERIE, _pm)
+        if os.path.exists(_p):
+            _n_saltati += 1
+        else:
+            try:
+                _ts = time.time()
+                S.net.salva_stato(_p)
+                _dts = time.time() - _ts
+                _n_scritti += 1
+                _mb = os.path.getsize(_p) / 1e6
+                _peso_tot += os.path.getsize(_p)
+                print("  SNAPSHOT passo %-7d n=%-8d %7.2f MB in %5.1f s -> %s"
+                      % (_pm, S.net.n, _mb, _dts, os.path.basename(_p)), flush=True)
+            except Exception as _e:
+                # A8: UN SALVATAGGIO CHE FALLISCE IN SILENZIO E' IL DIFETTO PEGGIORE QUI,
+                # e col disco al 96 % non e' un'ipotesi teorica.
+                _n_falliti += 1
+                print("  *** SALVATAGGIO FALLITO al passo %d: %s ***" % (_pm, _e), flush=True)
+    if fr in SNAP or (fr == NFRAME and not SERIE):
         S.net._db_step = fr          # ⚠ e' il FRAME, non il passo di motore. DICHIARATO.
         p = os.path.join(DEST, "frame_%d.pkl" % fr)
         S.net.salva_stato(p)
@@ -116,6 +194,12 @@ for k in range(NFRAME):
         print("  frame %-5d n=%-7d archi=%-8d coer_l=%-8.4g dil=%+7.3f%%   [%.1f s, %.3f s/frame]"
               % (fr, S.net.n, len(S.net.i), dg.get("coer_l", float("nan")),
                  100 * dg.get("dil", float("nan")), el, el / fr), flush=True)
+        if csv_f is not None:
+            csv_f.write("%d,%d,%d,%d,%.6g,%.6g,%.1f,%.3f\n"
+                        % (fr, fr * int(S.PASSI_PER_FRAME), S.net.n, len(S.net.i),
+                           dg.get("coer_l", float("nan")), dg.get("dil", float("nan")),
+                           el, el / fr))
+            csv_f.flush()
 
 el = time.time() - t0
 print("\n  TOTALE %.1f s per %d frame -> %.3f s/frame medio" % (el, NFRAME, el / max(NFRAME, 1)))
@@ -124,4 +208,14 @@ if len(prog) >= 2:
     c1 = t1 / f1; c2 = (t2 - t1) / max(f2 - f1, 1)
     print("  n da %d a %d;  costo per frame da %.3f a %.3f s  (x%.2f)" % (n1, n2, c1, c2, c2 / max(c1, 1e-9)))
     print("  ⚠ IL COSTO CRESCE COL NUMERO DI NODI: un'estrapolazione LINEARE SOTTOSTIMA.")
+if csv_f is not None:
+    csv_f.close()
+    print("  progresso CSV -> %s" % CSVPROG)
+if SERIE:
+    # A8: il conteggio SI DICHIARA. Un contatore che non si stampa non e' un contatore.
+    print("  ARCHIVIO: %d snapshot scritti, %d saltati, %d FALLITI   (%.2f GB in totale)"
+          % (_n_scritti, _n_saltati, _n_falliti, _peso_tot / 1e9))
+    if _n_falliti:
+        print("  *** ATTENZIONE: %d SALVATAGGI SONO FALLITI. L'ARCHIVIO E' INCOMPLETO: i passi "
+              "mancanti NON sono recuperabili senza rigirare. ***" % _n_falliti)
 print("=" * 112)
