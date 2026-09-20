@@ -7836,3 +7836,77 @@ della lettura `C` ha fermato il pilota prima dei 300 passi, **come doveva**.
 > **Mi fermo qui, come ordina il §1 del mandato, perché la scelta non è più mia:** il mandato
 > descrive una scena con **masse separate che si toccano**, e **quella scena non esiste in questa
 > geometria**. Le opzioni misurate sono tre, e sono nel paragrafo del referto.
+
+---
+
+## 2026-09-20 — **il pilota a `sep = 4.0`: la scena è quella (lettura `A`). Il vincolo è il DISCO**
+
+**Blob `775ceab7`**, seme 42, scena N-MASSE 3 masse, **300 passi**. Strumento
+`csv/_test_fork/_pilota_sep.py`, esito `csv/_test_fork/_pilota_sep4.txt`. Letture fissate prima in
+`doc/TASK_HISTORY/2026-09-20_run-sep4-mediato.md` (`01946c6`).
+**Il pilota non è il run: questi numeri decidono se lanciare, non entrano in un referto.**
+
+### La scena regge — lettura `A`
+
+```
+             archi m-m   archi m-vuoto   componenti   nodi MISTI   n      rc
+semina           0           97590            1            0       2391   2.400
+passo 30         0           97504            1          119       2556   1.828
+passo 150        0           97459            1          180       2647   1.828
+passo 300        0           97447            1          196       2687   1.828
+```
+
+- **archi massa-massa: ZERO a ogni istante** — le masse non si toccano mai, **come la scena vuole**;
+- **archi massa-vuoto: `97590 → 97447`, cioè `−0.15 %` in 300 passi.** **Non crollano: il contatto
+  col vuoto REGGE** *(lettura `B` esclusa)*;
+- **una sola componente, sempre** *(lettura `D` esclusa)*;
+- **e una popolazione nuova: 196 nodi `MISTO`**, nati da archi fra gruppi diversi. **Nel run vecchio
+  non potevano esistere: i gruppi non si toccavano.**
+
+### ⚠ Il verdetto STAMPATO dal pilota è del mandato VECCHIO, e va detto
+
+Lo script ha stampato *«QUINTA CASELLA: le masse non si parlano fra loro... è una scena diversa da
+quella descritta»*. **Quella casella l'avevo scritta quando l'obiettivo era il contatto DIRETTO.**
+Col mandato nuovo **l'interazione mediata dal vuoto è l'obiettivo**, quindi `mm = 0` è **la lettura
+`A`, non una casella di allarme**.
+> **È la terza volta in due giorni che un criterio sopravvive al mandato che lo ha generato.** Lo
+> dichiaro invece di reinterpretare il numero in silenzio: **i numeri sono giusti, l'etichetta che
+> lo script ci ha messo sopra no.**
+
+### ⚠ Un'osservazione che non ho misurato, e che segnalo perché è strana
+
+**`median(lambda_nodi())` vale `0.6092` — identico a quattro decimali — dal passo 30 al 300**,
+mentre `n` cresce da 2556 a 2687. Cala una volta sola (`0.8 → 0.6092`) e **poi non si muove più**.
+**Non è il pavimento** (`0.15·LAM = 0.12`). **Non so perché, e non lo invento:** è la famiglia di
+`P4` — *prima di misurare se una grandezza cambia, verificare che sia libera di cambiare*.
+
+### Il costo — **e qui il mandato va rivisto**
+
+```
+DURATA misurata:  876.6 s per 300 passi  =  2.922 s/passo  =  17.5 s/frame
+                  (misurata a 100 passi: 3.03 s/passo, quindi NON sta accelerando molto)
+10.000 passi a ritmo costante:  29 220 s  =  8.1 ORE    <- LIMITE INFERIORE
+SNAPSHOT:  36.40 MB compresso a n = 2687  (il vecchio ne faceva ~29 a n piu' grande:
+           qui pesano di piu' perche' gli archi sono 527 mila contro 430 mila)
+```
+
+**⚠ IL DISCO: `15 GB` liberi su `476`, cioè il `97 %` occupato.** È il vincolo che decide, non il
+tempo.
+
+```
+--db-ogni 60   ->  166 snapshot   6.0 - 9.1 GB     lascerebbe 6-9 GB su un disco al 97 %
+--db-ogni 120  ->   83 snapshot   3.0 - 4.5 GB     <- proposto
+--db-ogni 200  ->   50 snapshot   1.8 - 2.7 GB
+```
+
+**Propongo `--db-ogni 120`** *(uno snapshot ogni 20 frame)*: **83 snapshot contro i 45 del run
+vecchio, su 3.7 volte più passi**, e `3-4.5 GB` invece di `6-9`. **Non si tagliano i passi: si dirada
+la cadenza**, come ordina il mandato.
+
+### E un rischio che va detto prima, non dopo
+
+**Il run vecchio si è bloccato al passo 2700 dopo 3h30, e la causa non è mai stata trovata**
+*(`doc/REFERTO_blocco_run6000.md`: memoria, disco, CFL, `MAX_NODI`, `NaN` tutti esclusi)*. **Questo
+run ne chiede almeno 8.** **`--db-serie` e la ripresa sigillata `5/5` sono ciò che rende il blocco
+recuperabile invece che fatale** — ma la patch della ripresa **non è ancora stata riapplicata al
+driver** *(`doc/STATO_RUN.md`)*. **Va fatta prima, insieme al commit di `--sep`.**
