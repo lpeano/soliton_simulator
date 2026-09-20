@@ -1,0 +1,20 @@
+[TIMBRO] _sigillo_sep_driver.py  sha1-BYTE 012f6a49  committato e pulito
+[TIMBRO] _sigillo_archivio.py  sha1-BYTE 6c039a43  committato e pulito
+driver PRIMA (2a6e83c): sha1 grezzo 7a02c5c3
+driver ORA            : sha1 grezzo 15d01956
+
+braccio A: driver VECCHIO, default
+braccio B: driver NUOVO,   default
+braccio C: driver NUOVO,   --sep=4.0
+
+S0   PASS   i tre bracci hanno gli STESSI passi: [12, 24]
+S1   PASS   default: 113 campi confrontati, 0 diversi  -> IDENTICO
+S2   PASS   --sep=4.0 contro default: 78 campi diversi su 108 -> il flag FA QUALCOSA
+S3   PASS   estensione radiale: default 8.708 (atteso ~8.72) | --sep=4.0 4.720 (atteso ~4.72)
+
+ESITO: 4/4
+
+VERDETTO: `--sep` e' INERTE A DEFAULT e FA QUALCOSA quando si passa.
+  Il comando di `Z49` resta riproducibile VERBATIM.
+NB: UNA scena, UN seme, 4 frame. Prova che il DEFAULT non e' cambiato,
+  non che ogni valore di sep si comporti bene.

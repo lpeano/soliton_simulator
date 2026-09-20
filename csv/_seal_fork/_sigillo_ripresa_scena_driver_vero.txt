@@ -1,0 +1,23 @@
+[TIMBRO] _sigillo_ripresa_scena.py  sha1-BYTE fe0eb6f2  committato e pulito
+[TIMBRO] _sigillo_archivio.py  sha1-BYTE 6c039a43  committato e pulito
+braccio A: 12 frame di fila
+braccio B: 6 frame, poi STOP
+braccio B: RIPRESA fino a 12 frame
+
+  A: passi [18, 36, 54, 72]
+  B: passi [18, 36, 54, 72]
+  RIPRESA: caricato scena_000036.pkl.gz (passo 36 = frame 6). Si riparte dal frame 7, n=2391, archi=429498.
+  tempi: A 175 s | B 89 + 107 s
+
+R0   PASS   i due bracci hanno gli STESSI passi: [18, 36, 54, 72]
+R1   PASS   stato finale al passo 72: 113 campi confrontati, 0 diversi  -> IDENTICO
+R2   PASS   3 snapshot intermedi confrontati, 0 con differenze
+R3   PASS   gli snapshot scritti PRIMA dell'interruzione sono INTATTI: 2 su 2
+R4   PASS   due passi DIVERSI (18 contro 72) danno 57 campi diversi: il criterio NON e' cieco
+
+ESITO: 5/5
+
+VERDETTO: LA RIPRESA E' CONSISTENTE. Un run interrotto e ripreso da uno snapshot
+  da' lo STESSO stato di un run continuo, e non distrugge l'archivio esistente.
+  NB: provato su UNA scena, UN seme, 12 frame. Dimostra che il MECCANISMO non
+  perde stato, NON che ogni ripresa possibile combaci.
