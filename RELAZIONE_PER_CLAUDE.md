@@ -8642,3 +8642,266 @@ classificatore ne dava **17**. Una **seconda misura indipendente** dice che **16
 in un messaggio di commit** e il diciassettesimo ha il suo `.txt` accanto: **ZERO reperti.**
 > **Se mi fossi fermato alla prima misura avrei scritto nel registro cinque «reperti» che non
 > esistono -- cioe' avrei creato lavoro fantasma DENTRO il documento che serve a toglierlo.**
+
+---
+
+# LA FUGA DEL RAMO B — **tutto quello che si e' misurato, 2026-09-20 sera**
+
+**Per Claude web.** Questo blocco e' autosufficiente: chi legge solo questa relazione non ha la
+conversazione, ha solo i file. **Ogni numero qui sotto e' misurato e ha il suo file di provenienza.**
+**Simulatore `edb8f844` (byte grezzi) / `b44f50ce` (git-blob) — INVARIATO per tutto l'arco: nessuna
+modifica al codice, i due run non sono mai stati fermati.**
+
+---
+
+## 0. IL CONTESTO IN QUATTRO RIGHE
+
+Due run A/B a `sep = 4.0`, 3000 passi, in parallelo, partiti il 2026-09-20 alle 16:26:50.
+**Un interruttore solo**: `chi_basc` ACCESO in A, SPENTO in B. Stesso seme (`42`), stessa geometria,
+snapshot ogni 120 passi. **Il ramo A e' sano. Il ramo B e' esploso**, e il resto di questo documento
+e' la diagnosi.
+
+---
+
+## 1. IL FATTO — **il costo di B esplode, quello di A no**
+
+```
+costo PER INTERVALLO (derivata di elapsed, non media cumulata)
+ramo A   26.9  26.8  28.0  26.4  26.8  26.9  26.9  27.2 ... 29.4     PIATTO su 320 frame
+ramo B   25.1  40.5  84.2  41.0  130   121   274   ... 121 (media)   x11 e oltre
+```
+
+> **⚠ UNA PARTE DEL PRIMO PICCO E' MIA, e va detto per primo perche' altrimenti tutto il resto e'
+> sospetto:** i valori `40.5` e `84.2` cadono nella finestra in cui stavo girando `scipy` su 527k
+> archi e un `git log -S` su tutto il repo. **Ho rubato CPU ai run.**
+> **Cio' che viene DOPO non e' mio, e la prova e' che il ramo A e' rimasto PIATTO**: un contendente
+> di CPU avrebbe rallentato **entrambi**.
+
+---
+
+## 2. DOVE — **lo stack, letto a run VIVO**
+
+`py-spy dump` legge lo stack di un processo vivo **dall'esterno, senza toccarlo**. Sei campioni sul
+ramo B: **tutti e sei dentro il corpo del ciclo `for _ in range(nsub)` di `:3931`** — i **sottopassi
+CFL** del ramo `VERLET` — e nessun frame piu' profondo.
+
+> **Il processo non e' bloccato: sta ITERANDO.** E' la differenza fra *«fermo»* e *«lento»*, e
+> **l'unico modo di saperlo era guardare lo stack.**
+
+**⚠ E `py-spy` non c'era:** `doc/REFERTO_blocco_run6000.md` §5 diceva *«quello che servirebbe e'
+banale e non ce l'ho»*. **Installato il 2026-09-20 ed esercitato su un run VIVO** — non su un test.
+
+---
+
+## 3. PERCHE' — **`nsub` LETTO DAL VIVO, e il colpevole e' isolato**
+
+`py-spy dump --locals` stampa le variabili locali di ogni frame. **Tre campioni per ramo:**
+
+```
+ramo A    n1=1   n2=1   n3=1     ->  nsub =   4      (il PAVIMENTO di max(4, ...))
+ramo B    n1=1   n2=3   n3=206   ->  nsub = 206      n3 VINCE DA SOLO
+```
+
+`nsub = int(max(4, n1, n2, n3))` (`:3920`), e **il costo di un passo e' PROPORZIONALE a `nsub`**.
+**`n1` (la sorgente) e `n2` (`beta`) sono INERTI.** **La fuga e' governata da `|vd|` e basta** — e
+non e' piu' una deduzione: e' letto dal processo.
+
+**E una differenza QUALITATIVA:** in A **6 campioni su 8 cadono FUORI** dal blocco CFL (`_pesi`,
+`chiralita_core_locale`, `_passo_spinoriale`); in B **tutti dentro**.
+> **A spende il tempo nella fisica. B lo spende a tenere insieme l'integratore.**
+
+**Coerenza:** `206/4 = 51.5` contro un rapporto di costo `>21`. **Stesso ordine, non uguali** —
+perche' il ciclo CFL non e' il 100 % di un passo. **Che differiscano cosi' e' l'atteso.**
+
+---
+
+## 4. COSA ESPLODE — **NON un collasso: uno STIRAMENTO**
+
+```
+#{|vd| >     1      3     10     30    100}            ramo B
+passo 120  17279     0      0      0      0
+passo 240   2897    93     52     27      0
+passo 360    586   347    231    135     61
+```
+**Il grosso GELA** (`17279 -> 586`) **mentre la coda si POPOLA** (`0 -> 52 -> 231` sopra 10).
+**Non e' UN arco scappato: e' una popolazione che cresce.**
+
+**I 20 archi peggiori di B al passo 360:**
+
+| | valore | contro la popolazione |
+|---|---|---|
+| `d` mediana | **30.12** | mediana di TUTTI: `1.024` |
+| `d0` mediana | **0.855** | mediana di TUTTI: `0.899` — **NORMALE** |
+| **`d/d0`** | **38.52**, max **178.6** | popolazione p50 `1.046` |
+
+> **UN COLLASSO COMPRIME (`d/d0 < 1`). QUI `d/d0 = 38.5`.**
+> **Quegli archi non si concentrano: si STIRANO di trentotto volte la lunghezza a riposo — e `d0` e'
+> normale, quindi non e' la lunghezza a riposo ad essere cambiata: e' `d` ad essere schizzata.**
+
+**Il meccanismo:** una molla con `d0 = 0.855` tesa a `d = 30` richiama con forza `∝ (d-d0) ≈ 29`;
+accelera, supera, riparte piu' ampia. **Oscillazione ad ampiezza crescente — sovraelongazione
+dell'integratore, non una struttura che si forma.**
+
+---
+
+## 5. CHI — **un NUCLEO CHE RECLUTA, e sono i nodi piu' connessi**
+
+A livello di **archi** l'insieme dei peggiori si rinnova (`0/20`, `2/20`). **A livello di NODI no:**
+
+```
+passo 240 -> 360   nodi in comune 5   Jaccard 0.217   NULLO calcolato: 0.005   -> 43x il caso
+      persistenti:  16, 481, 621, 627, 837
+
+l'HUB RUOTA:  passo 240  nodo 481 -> 11 archi su 20
+              passo 360  nodo 867 -> 11 archi su 20   (481 scende a 6, 16 resta a 4)
+```
+**E il passo 120 non fa parte del fenomeno: ZERO nodi in comune col 240. L'evento NASCE fra i due.**
+
+**⚠ E UN REPERTO CHE SMENTISCE LA MIA ASPETTATIVA SCRITTA PRIMA:** avevo previsto i **NATI** al
+centro della fuga *(hanno grado basso)*. **Misurato: nei venti archi peggiori, ai tre istanti, i
+nati sono ZERO.** Tutti **originali**, grado `569`-`663`. **La fuga vive nel CUORE DENSO.**
+
+---
+
+## 6. L'INNESCO — **erano GIA' diversi, e lo STIRAMENTO precede la VELOCITA'**
+
+Su **undici** campi, al passo 120, **due** erano gia' al vertice della popolazione:
+
+```
+_deg      p98.5  p99.7  p98.7  p99.8  p98.7     <- GIA' anomalo, e NON si muove di un'unita' al 240
+phivel    p99.3  p99.8  p97.2  p99.6  p98.3     <- GIA' anomalo
+|omega_s| p67.1  p67.7  p62.5  p65.9  p67.4     <- normale
+eta       p86.3  p73.5  p43.9  p48.2  p58.6     <- normale
+rho_spin  p57.8  p67.5  p55.7  p52.0  p50.7     <- normale AL 120, p81-p99 al 240: e' CONSEGUENZA
+```
+
+**E la geometria, che e' il reperto principale:**
+```
+passo 120      popolazione              i cinque (mediana dei loro archi)
+d/d0           p50 = 1.025              1.44 - 1.76      <- GIA' TESI del 44-76 %
+|vd|           max = 2.923              max 1.46 - 1.68  <- SOTTO il massimo della popolazione
+
+arco 16-481    passo 120:  d/d0 = 8.113   |vd| =  0.7297     teso, LENTO
+               passo 240:  d/d0 = 10.9    |vd| = 79.15       il peggiore del sistema
+                           d/d0  x1.34    |vd|  x108
+```
+
+> **L'ORDINE CAUSALE: prima la TENSIONE, poi la velocita'.**
+> **Non e' una velocita' che stira un arco: e' un arco teso che, quando la molla lo richiama, genera
+> la velocita'.**
+
+**E una cosa che nessuna lettura prevedeva — da MOLTI POCO tesi a POCHI MOLTISSIMO:**
+```
+d/d0 MEDIANA dei loro archi:  120: 1.44-1.76  ->  240: 1.05-1.14     SCENDE
+d/d0 MASSIMO dei loro archi:  120: 10.8-31.3  ->  240:  6.9-68.0     SALE
+```
+**Fra il 120 e il 240 la tensione si e' CONCENTRATA.** Stesso profilo del `p99` che scende mentre il
+massimo sale — ma misurato sulla **GEOMETRIA** invece che sulla velocita'.
+
+**⚠ CONSEGUENZA OPERATIVA: se al 120 la tensione E' GIA' LI', una rigiocata `120 -> 240` mostrerebbe
+l'ESCALATION, non l'ORIGINE. L'origine sta PRIMA del 120.**
+
+---
+
+## 7. IL SECONDO REPERTO, indipendente dal primo — **i NATI hanno grado 2, e sono la maggioranza**
+
+```
+ramo A passo 1680   ORIGINALI n=2391  _deg p50 551   nessuno sotto 59
+                    NATI      n=4932  _deg p50   2   nessuno sopra 6
+```
+**Distribuzione BIMODALE, separazione NETTA: `2` contro `549`.**
+**`4932` su `7323`: il `67 %` del sistema ha DUE archi.**
+**`archi/nodo` in A: da `197.40` (passo 120) a `72.84` (passo 1680)** — i nodi **triplicano**, gli
+archi crescono dell'**`1.1 %`**. **Stesso profilo in B: NON dipende da `chi_basc`.**
+
+**⚠ MA «grado 2» NON E' «senza archi»:** un nato **e'** connesso, ai suoi due genitori (la mitosi lo
+crea al punto medio dell'arco). **Cio' che non ha e' il VICINATO DENSO.** **Se questo lo renda
+inerte NON e' misurato**, ed e' il criterio di chiusura di `Z76`.
+
+**E un TERZO reperto, non spiegato:** fra i venti archi piu' veloci del ramo **A** compaiono **4
+nati di grado 2 con `|omega_s|` fra `3.4e+03` e `3.5e+04`** contro `~0.01` degli originali — **sei
+ordini di grandezza** — e i loro archi hanno **`d/d0 = 1.000` esatto, cioe' a RIPOSO**.
+**Non e' la fuga di `vd`: e' un'altra cosa, e va misurata a parte.**
+
+---
+
+## 8. TRE COSE CHE QUESTO ARCO HA CORRETTO, E DUE SONO MIE
+
+**① `chi_basc` NON BLOCCA LA MITOSI — `Z73` ritirata una SECONDA volta.**
+L'A/B corto diceva *«con `chi_basc` acceso, in 60 passi non nasce niente»*. Il ramo A gira **con
+`chi_basc` acceso** ed e' andato da `n = 2672` a `n = 8704`. **Il secondo ritiro vale piu' del
+primo:** quello spostava la **finestra** e restava su una scena a **quattro componenti scollegate**;
+questo viene da **1920 passi su una scena CONNESSA**. **Delle tre conclusioni forti originarie non
+ne resta in piedi nessuna.**
+
+**② LA DIVISIONE PER ZERO NON C'E' — l'ipotesi era di Luca ed e' REFUTATA dal codice.**
+`acc = cs_arco**2*lap + src - beta*vd`, e `lap` contiene `med = sm / self._deg`. **Ma `_grado()`
+(`:1171`) definisce `_deg = np.maximum(bincount+bincount, 1)`: il pavimento e' gia' dentro.**
+*(Incoerenza registrata, non difetto: **sei** siti dividono per `np.maximum(_deg,1)` e **cinque** per
+`_deg` nudo. Oggi equivalenti — finche' `_grado()` resta com'e'.)*
+
+**③ UNA MISURA CHE NON DISCRIMINA, e lo si sa SOLO grazie al controllo.**
+Il Jaccard dei primi 100 archi valeva `0.04` in B — che da solo si legge come **contagio**. **Ma in
+A vale `0.047`-`0.163`: lo stesso intervallo.** **Senza la controprova su A avrei chiamato
+«contagio» il ricambio NORMALE del sistema.**
+
+**④ E DUE ERRORI MIEI, dichiarati dove stanno:**
+- **il primo classificatore dei «reperti» sbagliava quasi due su tre.** Dava **17** strumenti con
+  misure mai scritte; una seconda misura indipendente *(«e' nominato in un commit?»)* dice **16 su
+  17 lo sono**. **ZERO reperti.** Se mi fossi fermato alla prima misura **avrei scritto cinque
+  reperti inesistenti dentro il documento che serve a togliere il lavoro fantasma**;
+- **la voce dei `.pkl` dei due run MANCAVA da due ore.** `par.5-quinquies` la vuole **nello stesso
+  commit** in cui il `.pkl` nasce. **E' la classe di difetto che il `par.5-novies` — la regola che
+  ho scritto io stamattina — dovrebbe impedire, e che ho violato lo stesso.** **Prova pratica di
+  `A9`: una regola scritta, da sola, non impedisce niente.**
+
+---
+
+## 9. LE VOCI NUOVE DEL REGISTRO
+
+| voce | cosa dice | chi decide |
+|---|---|---|
+| **`Z74`** | il ramo B rallenta `x11`: `nsub` esplode, lo tira `\|vd\|.max()` su pochissimi archi | **LUCA** *(che fare del ramo B)* |
+| **`Z75`** | **`nsub` governa il costo dell'intero sistema ed e' INVISIBILE**: variabile locale, mai registrata. `A8` applicato a un **CICLO** invece che a un `else` | **LUCA** *(se e come strumentarlo — **non prima che i run chiudano**)* |
+| **`Z76`** | **i nati hanno grado `2` e sono il `67 %`**: distribuzione bimodale, `2` contro `549`, senza sovrapposizione | **LUCA** *(la cura toccherebbe `_allaccia`, cioe' una LEGGE)* |
+
+**E `Z75` spiega un buco vecchio:** il referto del blocco al passo 2700 aveva escluso i sottopassi
+*«perche' il contatore del CFL e' fermo»* — **ma quel contatore era `_taup_cfl_max`, che NON e'
+`nsub`.** **Si era guardato l'unico numero registrato, e non era quello giusto.**
+
+---
+
+## 10. COSA QUESTO ARCO **NON** DICE — e sono limiti, non modestia
+
+- **UN SEME PER RAMO.** Su questo sistema il nullo di un confronto fra bracci **non e' zero**: e' la
+  dispersione **FRA SEMI**, che questo esperimento **non misura**. **Nessuna differenza fra A e B e'
+  dichiarata significativa**, e **la fuga NON e' attribuita a `chi_basc`**;
+- **NON si estende al blocco del passo 2700.** Li' il processo era **fermo e non scriveva**; qui
+  **avanza**. Due fenomeni distinti, e restano separati;
+- **NON dice PERCHE' quei cinque avessero grado `~620` e `phivel` al `p99`** alla semina. **E' la
+  domanda aperta**, e chiuderla richiede una rigiocata `0 -> 120`;
+- **NON dice se `A` sia sano o MORTO.** `A` ha `671` nodi `+1` su `5906` (l'`11 %`): **monocoltura
+  chirale**, contro un `B` bilanciato `1633/1596`. **«A e' stabile» convive con «A e' monocolturale»,
+  e quale sia causa dell'altra non e' misurato.**
+
+---
+
+## 11. I FILE — **tutto e' sul disco e pushato**
+
+```
+doc/REFERTO_ramoB_sottopassi_CFL.md       la prima diagnosi, a run vivo
+doc/REFERTO_fuga_vd_ramoB.md              serie nel tempo, coda, identita'
+doc/REFERTO_venti_archi_e_nsub.md         nsub dal vivo, nucleo che recluta, grado dei nati
+doc/REFERTO_innesco_cinque.md             i cinque al passo 120: erano gia' diversi
+doc/RAMIFICAZIONI.md                      Z73 corretta IN LOCO, + Z74 Z75 Z76
+doc/INVENTARIO_strumenti.md               i .pkl dei due run, col comando verbatim e il seme
+
+csv/_test_fork/_fuga_vd.py       .txt     serie, percentili, conteggi a 5 soglie, Jaccard
+csv/_test_fork/_venti_archi.py   .txt     le 20 righe + il grado ORIGINALI/NATI
+csv/_test_fork/_venti_archi_nodi.txt      l'identita' a livello di NODI (l'hub che ruota)
+csv/_test_fork/_innesco_cinque.py .txt    i cinque nodi, col RANGO PERCENTILE di ogni campo
+csv/_test_fork/_diag_B/                   gli STACK grezzi: stack_B_*.txt, locals_*.txt
+```
+**Ogni strumento e' stato committato PRIMA di produrre un numero** — lo impone `csv/_presidio.py`,
+che **rifiuta di girare** uno script il cui blob non e' committato. **L'ordine non e' asserito da
+me: e' imposto.**
