@@ -3740,13 +3740,25 @@ class Rete:
         # `shape` vale -1 al primo posto quando `_sin2_vir` e' None: le DUE cause di fallimento
         # (memoria assente / lunghezza diversa) sono cose diverse e vanno distinte, non sommate.
         self._g_zeta_vir_a_tot = getattr(self, "_g_zeta_vir_a_tot", 0) + 1
-        if ZETA_VIR and not (self._sin2_vir is not None and len(self._sin2_vir) == len(beta)):
+        if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta):
+            beta = beta * (1.0 - self._sin2_vir)
+        elif ZETA_VIR:
+            # [A8/A9, 2026-09-20] IL RAMO CHE PRIMA TACEVA, ORA DICHIARA -- e NON cambia un bit.
+            # MISURATO (sigillo 3/3, commit 4edfab2): questo ramo scatta 1 volta su 12 qui e 11 su
+            # 55 nel gemello Verlet, e `shape[0] = -1` dice PERCHE': `_sin2_vir` e' None, NON di
+            # lunghezza sbagliata. E i salti sono i PRIMI, consecutivi -- dimostrato: 11 indici
+            # distinti, tutti >= 1, il massimo vale 11, quindi sono esattamente {1..11}.
+            # LA CAUSA E' L'ORDINE, non la lunghezza: `_sin2_vir` lo scrive `memoria_hebbiana_moto`,
+            # che nel ciclo gira DOPO `step`. Al primo giro non esiste ancora.
+            # PERCHE' NON SI INIZIALIZZA `_sin2_vir`: `0` significa freno PIENO, `1` freno NULLO, e
+            # qualunque valore in mezzo e' un NUMERO SCELTO (A1). Non c'e' niente da cui derivarlo:
+            # al primo giro `sin2` non esiste PERCHE' NON E' ANCORA STATO CALCOLATO. Inventare un
+            # valore iniziale farebbe credere che la legge abbia girato quando non poteva.
+            # QUINDI: al primo giro NON C'E' FRENO ANISOTROPO, ed e' corretto che sia cosi'.
             self._g_zeta_vir_a_salti = getattr(self, "_g_zeta_vir_a_salti", 0) + 1
             self._g_zeta_vir_a_shape = (-1 if self._sin2_vir is None else len(self._sin2_vir),
                                         len(beta))
             self._g_zeta_vir_a_quando = self._g_zeta_vir_a_tot
-        if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta):
-            beta = beta * (1.0 - self._sin2_vir)
             
         if VERLET:
             n1 = np.ceil(np.abs(src).max() * DT / (0.02 * cs_max_corrente))
@@ -3787,14 +3799,17 @@ class Rete:
                 # ragione. Ha il SUO contatore, non quello di sopra: sapere QUALE dei due salta
                 # e' il punto, e un contatore condiviso lo nasconderebbe.
                 self._g_zeta_vir_b_tot = getattr(self, "_g_zeta_vir_b_tot", 0) + 1
-                if ZETA_VIR and not (self._sin2_vir is not None
-                                     and len(self._sin2_vir) == len(beta_new)):
+                if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta_new):
+                    beta_new = beta_new * (1.0 - self._sin2_vir)
+                elif ZETA_VIR:
+                    # [A8/A9, 2026-09-20] LO STESSO RAMO, nel gemello Verlet: stessa causa (ORDINE,
+                    # non lunghezza) e stessa scelta (nessun valore iniziale inventato, A1).
+                    # Qui scatta 11 volte su 55 perche' il ramo gira a SOTTOPASSI CFL: ~4.6 per
+                    # passo. La frazione e' piu' alta, il transitorio e' lo stesso.
                     self._g_zeta_vir_b_salti = getattr(self, "_g_zeta_vir_b_salti", 0) + 1
                     self._g_zeta_vir_b_shape = (-1 if self._sin2_vir is None
                                                 else len(self._sin2_vir), len(beta_new))
                     self._g_zeta_vir_b_quando = self._g_zeta_vir_b_tot
-                if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta_new):
-                    beta_new = beta_new * (1.0 - self._sin2_vir)
                 acc_next = cs_arco ** 2 * lap_new + src - beta_new * vd_half
                 self.vd = vd_half + 0.5 * dts * acc_next
                 self.d = d_new

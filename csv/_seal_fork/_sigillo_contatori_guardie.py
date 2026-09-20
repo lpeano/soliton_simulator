@@ -30,7 +30,14 @@ _presidio.avvia(__file__)
 RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
 SIM_ORA = os.path.join(RADICE, "soliton_simulator.py")
 BASE = os.path.join(RADICE, "csv", "_seal_fork", "_sig_contatori")
-COMMIT_PRIMA = "93e1628"      # l'ultimo commit PRIMA dei contatori (la task history)
+# Il commit di RIFERIMENTO si passa da riga di comando: lo stesso sigillo serve per PIU' cure
+# byte-inerti (i contatori, poi i tre gruppi del PASSO 2), e ognuna va confrontata col commit che
+# la PRECEDE. Cablarlo qui avrebbe costretto a modificare il sigillo a ogni cura -- e un sigillo
+# che cambia a ogni giro non certifica piu' la stessa cosa.
+COMMIT_PRIMA = "93e1628"
+for _x in sys.argv[1:]:
+    if _x.startswith("--commit-prima="):
+        COMMIT_PRIMA = _x.split("=", 1)[1]
 PASSI = 12
 CAMPI = ("psi", "d", "phi", "eta", "n", "pos", "tw")
 SITI = ("kernel_alpha", "tempo_luce", "zeta_vir_a", "zeta_vir_b", "tors4pi")
