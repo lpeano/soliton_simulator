@@ -85,9 +85,51 @@ def estende(rami, nomi):
     return False
 
 
+def ripara(corpo, nomi):
+    """il ramo RIPARA la precondizione invece di saltare la legge?
+    `if len(psi) < n: self.calcola_psi()` NON salta niente: rimedia e prosegue."""
+    for x in corpo:
+        for sub in ast.walk(x):
+            if isinstance(sub, ast.Call) and isinstance(sub.func, ast.Attribute) \
+                    and sub.func.attr in ("calcola_psi", "_grado", "_costruisci_struttura",
+                                          "_riallinea_tracking", "_estendi_psi_spinor"):
+                return True
+            if isinstance(sub, ast.Assign):
+                try:
+                    if ast.unparse(sub.targets[0]) in nomi:
+                        return True
+                except Exception:
+                    pass
+    return False
+
+
 def classifica(nodo, nomi):
     if isinstance(nodo, ast.IfExp):
         return "TERNARIO"
+    # ---- le famiglie di FALSO POSITIVO trovate al PRIMO giro, e ognuna ha il suo perche'.
+    # Le elenco invece di correggerle in silenzio: un classificatore che cambia senza dirlo
+    # produce tabelle che non si possono confrontare fra un giro e il successivo.
+    corpo0, alt0 = nodo.body, nodo.orelse
+    # (1) CONTROLLO DI CICLO: `if len(cicli) >= massimo: break` non e' una guardia su una legge.
+    if any(isinstance(x, (ast.Break, ast.Continue)) for x in corpo0):
+        return "CICLO"
+    # (2) TRONCAMENTO con `del`: `if len(conc_nodi) > n: del conc_nodi[n:]` e' ESTENSIONE
+    #     (la stessa cura ad A8b, scritta in senso opposto). `estende()` non vedeva il `del`.
+    if any(isinstance(x, ast.Delete) for x in corpo0):
+        return "ESTENSIONE"
+    # (3) IL RAMO RIPARA la precondizione invece di saltare: non e' un salto.
+    if ripara(corpo0, nomi):
+        return "RIPARA"
+    # (4) VACUITA': `if len(proj):` senza confronto -- "c'e' qualcosa da fare?". Se l'insieme e'
+    #     vuoto non c'e' NIENTE da decidere, e nessun default viene preso.
+    if isinstance(nodo.test, ast.Call) and isinstance(nodo.test.func, ast.Name) \
+            and nodo.test.func.id == "len":
+        return "VACUITA'"
+    if isinstance(nodo.test, ast.BoolOp) and any(
+            isinstance(v, ast.Call) and isinstance(v.func, ast.Name) and v.func.id == "len"
+            for v in nodo.test.values) and not any(
+            isinstance(v, ast.Compare) for v in nodo.test.values):
+        return "VACUITA'"
     corpo, alt = nodo.body, nodo.orelse
     if estende([corpo], nomi) or estende([alt], nomi):
         # l'estensione puo' stare in uno dei due rami a seconda di come e' scritta la condizione
@@ -147,7 +189,11 @@ def main():
 
     # gia' curati: la riga o le due precedenti contengono un contatore `_g_`
     def curata(L):
-        return any("_g_" in righe[k] for k in range(max(0, L - 4), min(len(righe), L + 3)))
+        # ⚠ anche `_rep_guardia_`: e' IL MODELLO (`:3972`), non un difetto. Al primo giro il
+        # controllo cercava solo `_g_` e lo classificava come SALTO -- falso positivo su quello
+        # che il mandato indica ESPLICITAMENTE come esempio da imitare.
+        return any(("_g_" in righe[k] or "_rep_guardia_" in righe[k])
+                   for k in range(max(0, L - 4), min(len(righe), L + 4)))
 
     cache = {}
     per_classe = defaultdict(list)

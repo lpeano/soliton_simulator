@@ -1,0 +1,192 @@
+[TIMBRO] _classifica_guardie.py  sha1-BYTE 1139bb0a  committato e pulito
+[TIMBRO] _scansione_schemi.py  sha1-BYTE 27d9e2db  committato e pulito
+sorgente: sha1 GREZZO f81c4fe1   (7836 righe)   funzioni FISICA dichiarate: 37
+
+======================================================================================================================================
+LE GUARDIE `len(...)` SU PERCORSO FISICO -- classe, riga, e COMMIT CHE L'HA INTRODOTTA
+======================================================================================================================================
+classe      riga   funzione                 introdotta da              codice
+PRECONDIZ.  :536   scuoti_vuoto             eb6283f|2026-08-31|Aggiorn if not SCUOTIMENTO or net.n == 0 or not len(net.i):
+SALTO       :544   scuoti_vuoto             670310f|2026-08-28|Impleme if not hasattr(net, "psi") or len(net.psi) < net.n:
+SALTO       :574   scuoti_vuoto             3fb5143|2026-09-10|fix cal if CALORE_VETTORIALE and hasattr(net, "perc_chi") and len(
+ESTENSIONE  :1198  _base_cicli_topologici   1b6bae1|2026-09-03|Aggiung if len(ciclo) > 2:
+SALTO       :1200  _base_cicli_topologici   1b6bae1|2026-09-03|Aggiung if len(cicli) >= massimo: break
+PRECONDIZ.  :1231  _aggiorna_lift_spinorial d2c76f3|2026-09-02|Add sim if not hasattr(self, "_nb") or self._nb is None or len(sel
+SALTO       :1238  _aggiorna_lift_spinorial 2bd7ec8|2026-09-04|Add cor if nb_precedente is not None and len(precedente) == 0:
+ESTENSIONE  :1338  _estendi_psi_spinor      5769a12|2026-09-06|spinore if cur is None or len(cur) == 0:
+ESTENSIONE  :1340  _estendi_psi_spinor      5769a12|2026-09-06|spinore elif len(cur) < n:
+SALTO       :1343  _estendi_psi_spinor      5769a12|2026-09-06|spinore elif len(cur) > n:
+ESTENSIONE  :1368  _eredita_spinore_figli   43e9a47|2026-09-15|FIX cac if _csp_er is not None and len(_csp_er) >= n0:
+ESTENSIONE  :1372  _eredita_spinore_figli   5769a12|2026-09-06|spinore if hasattr(self, "_nb") and self._nb is not None and len(s
+ESTENSIONE  :1374  _eredita_spinore_figli   5769a12|2026-09-06|spinore if hasattr(self, "_nb_prec") and self._nb_prec is not None
+ESTENSIONE  :1380  _eredita_spinore_figli   94c2609|2026-09-14|PEZZO 4 if _nbr_er is not None and len(_nbr_er) >= n0:
+ESTENSIONE  :1382  _eredita_spinore_figli   5769a12|2026-09-06|spinore if len(self.omega_s) >= n0:
+ESTENSIONE  :1384  _eredita_spinore_figli   5769a12|2026-09-06|spinore if len(self._psi_spinor) >= n0:
+ESTENSIONE  :1389  _eredita_spinore_figli   5769a12|2026-09-06|spinore if len(self._spinor_lift) >= n0:
+ESTENSIONE  :1394  _eredita_spinore_figli   5769a12|2026-09-06|spinore if self._psi_prec is not None and len(self._psi_prec) >= n
+ESTENSIONE  :1406  _eredita_spinore_figli   cc98ac0|2026-09-15|FASE B  if _pspr is not None and len(_pspr) >= n0:
+PRECONDIZ.  :1498  _feedback_spinoriale_arc 2bd7ec8|2026-09-04|Add cor if len(self._spinor_lift) < self.n:
+TERNARIO    :1517  _feedback_spinoriale_arc 2bd7ec8|2026-09-04|Add cor self._spin_feedback_last = float(np.mean(np.abs(flusso))) 
+ESTENSIONE  :1522  chiralita_core_locale    670310f|2026-08-28|Impleme if self.n == 0 or not len(self.i):
+SALTO       :1524  chiralita_core_locale    670310f|2026-08-28|Impleme if not hasattr(self, "psi") or len(self.psi) < self.n:
+TERNARIO    :1542  chiralita_core_locale    2bd7ec8|2026-09-04|Add cor rho0[k] = float(np.max(intensita)) if len(intensita) else 
+PRECONDIZ.  :1860  _costruisci_struttura    670310f|2026-08-28|Impleme if not len(self.i): self._S = None; return
+TERNARIO    :1902  semina                   670310f|2026-08-28|Impleme self.mem_mot = np.vstack([self.mem_mot, np.zeros((n, 3))])
+TERNARIO    :1907  semina                   670310f|2026-08-28|Impleme self.omega_s = np.vstack([self.omega_s, calcio_omega]) if 
+PRECONDIZ.  :1928  _registra_concorrenza    670310f|2026-08-28|Impleme if len(idx_nodi) == 0: return
+TERNARIO    :1931  _registra_concorrenza    670310f|2026-08-28|Impleme w = float(np.abs(self.psi[k])) if k < len(self.psi) else 0
+SALTO       :1955  _riallinea_tracking      670310f|2026-08-28|Impleme if len(self.conc_nodi) > self.n: del self.conc_nodi[self.n
+SALTO       :1958  _riallinea_tracking      670310f|2026-08-28|Impleme if len(self.conc_archi) > na: del self.conc_archi[na:]
+TERNARIO    :2009  _allaccia                5198938|2026-09-03|Mantien rc = R_CONN() if not len(self.i) else \
+SALTO       :2021  _allaccia                670310f|2026-08-28|Impleme if COMPAT_CHI and len(a) and len(self.perc_chi) >= self.n:
+PRECONDIZ.  :2024  _allaccia                670310f|2026-08-28|Impleme if not len(a): self._grado(); return
+ESTENSIONE  :2036  lambda_nodi              670310f|2026-08-28|Impleme if (not SCHERMATURA) or (not len(self.i)):
+ESTENSIONE  :2038  lambda_nodi              670310f|2026-08-28|Impleme if not hasattr(self, "psi") or len(self.psi) < self.n:
+ESTENSIONE  :2074  ritmo                    0639ba2|2026-09-10|MOD 5.3 if TEMPO_SEGNO and len(getattr(self, "tw", [])):
+ESTENSIONE  :2088  ritmo                    670310f|2026-08-28|Impleme if self._psi_prec is None or len(self._psi_prec) != self.n
+TERNARIO    :2092  ritmo                    670310f|2026-08-28|Impleme self._psi_prec = self.psi.copy() if len(self.psi) == self.
+ALTRO       :2104  ritmo                    800fb24|2026-09-18|CONTATO if _ps is None or _psp is None or len(_ps) != self.n or le
+SALTO       :2113  ritmo                    4ea6f0c|2026-09-10|FASE 5: if CAMPO_SPINORIALE and _ps is not None and _psp is not No
+ESTENSIONE  :2197  _passo_spinoriale        670310f|2026-08-28|Impleme if len(self.omega_s) < n:
+ESTENSIONE  :2199  _passo_spinoriale        670310f|2026-08-28|Impleme elif len(self.omega_s) > n:
+TERNARIO    :2202  _passo_spinoriale        670310f|2026-08-28|Impleme b0 = self.phi_s if len(self.phi_s) == n else np.zeros(n)
+ESTENSIONE  :2204  _passo_spinoriale        670310f|2026-08-28|Impleme elif len(self._nb) < n:
+ESTENSIONE  :2208  _passo_spinoriale        670310f|2026-08-28|Impleme elif len(self._nb) > n:
+TERNARIO    :2215  _passo_spinoriale        c2175ee|2026-09-04|Documen nb_prec_t = (self._nb_prec.copy()
+SALTO       :2227  _passo_spinoriale        670310f|2026-08-28|Impleme if not hasattr(self, "psi") or len(self.psi) < n:
+ESTENSIONE  :2247  _passo_spinoriale        5f6334b|2026-09-16|CABLATO if _xi is None or len(_xi) < n:
+DEFAULT     :2279  _passo_spinoriale        c2175ee|2026-09-04|Documen elif not hasattr(self, "_nb_prec") or self._nb_prec is Non
+DEFAULT     :2285  _passo_spinoriale        2bd7ec8|2026-09-04|Add cor if CHI_CORE and len(self.perc_chi) >= n:
+SALTO       :2316  _passo_spinoriale        670310f|2026-08-28|Impleme if not hasattr(self, "psi") or len(self.psi) < n: self.cal
+ESTENSIONE  :2348  _passo_spinoriale        2043a5d|2026-09-16|CORREZI if _csp_in is not None and len(_csp_in) >= n:
+DEFAULT     :2402  _passo_spinoriale        4f2a6b7|2026-09-17|Y5 ROSS if len(_peq_a) != len(self.i):
+TERNARIO    :2414  _passo_spinoriale        6a4980a|2026-09-17|FASE 3  _ok_a = np.isfinite(_peq_a) & (_peq_a > 0) if len(_peq_a) 
+TERNARIO    :2454  _passo_spinoriale        4f2a6b7|2026-09-17|Y5 ROSS _grado_n = (np.bincount(self.i, minlength=n)[:n] +
+ESTENSIONE  :2571  _passo_spinoriale        5769a12|2026-09-06|spinore if psi_snapshot is not None and len(psi_snapshot) >= n:
+ESTENSIONE  :2573  _passo_spinoriale        5769a12|2026-09-06|spinore elif len(self.psi) >= n:
+TERNARIO    :2624  _passo_spinoriale        77c83e5|2026-09-11|MOD 5.3 _sk = (np.where(np.asarray(self.perc_chi[:n]) >= 0.0, 1.0,
+ESTENSIONE  :2632  _passo_spinoriale        4f44c68|2026-09-14|STEP 2  if _csp2 is not None and len(_csp2) >= n:
+GIA' CURATA :2760  _pesi                    4edfab2|2026-09-20|PASSO 1 if KERNEL_ALPHA != 0.0 and len(self.tw) != len(self.d):
+GIA' CURATA :2764  _pesi                    670310f|2026-08-28|Impleme if KERNEL_ALPHA != 0.0 and len(self.tw) == len(self.d):
+ESTENSIONE  :2829  calcola_psi              670310f|2026-08-28|Impleme if self.n == 0 or not len(self.i):
+ESTENSIONE  :2845  calcola_psi              954549f|2026-09-09|[dev-sp if _psp is None or len(_psp) < _n:
+PRECONDIZ.  :2864  _rho_sorgente            59af724|2026-09-09|[dev-sp if _rs is not None and len(_rs) >= n:
+ESTENSIONE  :2875  _nb_grav                 59af724|2026-09-09|[dev-sp if _ps is not None and len(_ps) >= n:
+PRECONDIZ.  :3161  _bloch_ritardato         94c2609|2026-09-14|PEZZO 4 if nbr is None or len(nbr) != n:
+ESTENSIONE  :3177  _bloch_ritardato         94c2609|2026-09-14|PEZZO 4 if r_loc is None or len(r_loc) < n:
+GIA' CURATA :3252  _tempo_luce_nodo         94c2609|2026-09-14|PEZZO 4 if len(ii) and len(dd) == len(ii):
+ESTENSIONE  :3272  _tempo_luce_nodo         94c2609|2026-09-14|PEZZO 4 if csp is not None and len(csp) >= n:
+ESTENSIONE  :3295  _coppia_interferenza     59af724|2026-09-09|[dev-sp if _ps is not None and len(_ps) >= n:
+PRECONDIZ.  :3298  _coppia_interferenza     6d66887|2026-09-13|PEZZO 3 if FORK_SU2 and len(self.i):
+PRECONDIZ.  :3335  step                     670310f|2026-08-28|Impleme if self.n < 2 or not len(self.i): return
+SALTO       :3353  step                     4ea6f0c|2026-09-10|FASE 5: if CAMPO_SPINORIALE and hasattr(self, "psi_spin") and len(
+SALTO       :3390  step                     0639ba2|2026-09-10|MOD 5.3 if TEMPO_SEGNO and not np.isscalar(dt_n) and len(self.perc
+ESTENSIONE  :3516  step                     d2c76f3|2026-09-02|Add sim if FRAME_DRAG and len(_tw_t):
+ALTRO       :3517  step                     2bd7ec8|2026-09-04|Add cor if CHI_CORE and len(self.perc_chi) >= self.n:
+ALTRO       :3520  step                     2bd7ec8|2026-09-04|Add cor elif VERSO_CHI and len(self.perc_chi) >= self.n:
+SALTO       :3526  step                     2bd7ec8|2026-09-04|Add cor elif not (CHI_CORE and len(self.perc_chi) >= self.n):
+TERNARIO    :3546  step                     670310f|2026-08-28|Impleme P_eq = float(np.median(self.d0[:self.n])) if self.n > 0 an
+TERNARIO    :3550  step                     48310e0|2026-09-05|cs-dina _psi_ct = psi_t if psi_t is not None else (self.psi if len
+TERNARIO    :3595  step                     5198938|2026-09-03|Mantien pv = self.phivel[:self.n] if len(self.phivel) >= self.n el
+SALTO       :3623  step                     2dd0756|2026-09-03|Aggiung if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.ph
+ESTENSIONE  :3633  step                     670310f|2026-08-28|Impleme if TORS_4PI and len(self.perc_chi) >= self.n:
+TERNARIO    :3634  step                     2bd7ec8|2026-09-04|Add cor chi_torsione = (self._chi_core_nodi if CHI_CORE and
+TERNARIO    :3642  step                     eb6283f|2026-08-31|Aggiorn _twn = _twn / np.maximum(self._deg[:self.n] if len(self._d
+ESTENSIONE  :3656  step                     5769a12|2026-09-06|spinore if CHI_BASC and not CHI_DA_SPINORE and len(self.perc_chi) 
+SALTO       :3669  step                     5769a12|2026-09-06|spinore if (CHI_DA_SPINORE and SPINORE_CORRETTO and len(self.perc_
+TERNARIO    :3704  step                     6e5495d|2026-09-04|Align d cs_max_corrente = float(np.max(cs_arco)) if len(cs_arco) e
+TERNARIO    :3724  step                     93ab032|2026-08-31|DB CACH r_nodo = np.abs(_pv_src[:self.n]) if len(_pv_src) >= self.
+GIA' CURATA :3764  step                     53f885b|2026-08-31|TestApe if ZETA_VIR and self._sin2_vir is not None and len(self._s
+GIA' CURATA :3823  step                     7946c46|2026-09-03|Aggiung if ZETA_VIR and self._sin2_vir is not None and len(self._s
+SALTO       :3932  step                     f405327|2026-09-17|BONIFIC if len(tau_p_loc):
+PRECONDIZ.  :3951  mitosi                   670310f|2026-08-28|Impleme if self.n >= MAX_NODI or not len(self.tw): return 0
+GIA' CURATA :3996  mitosi                   4edfab2|2026-09-20|PASSO 1 if TORS_4PI and len(self.i) != len(avv):
+GIA' CURATA :4000  mitosi                   670310f|2026-08-28|Impleme if TORS_4PI and len(self.i) == len(avv):
+SALTO       :4084  mitosi                   3ca7731|2026-09-17|BONIFIC if np.ndim(_dte) and len(np.asarray(_dte)) != len(rep):
+ESTENSIONE  :4088  mitosi                   3ca7731|2026-09-17|BONIFIC if len(self._rep) != len(rep):
+SALTO       :4098  mitosi                   3ca7731|2026-09-17|BONIFIC if len(rep):
+SALTO       :4106  mitosi                   3ca7731|2026-09-17|BONIFIC if len(self.d0) != len(avv):
+SALTO       :4109  mitosi                   3ca7731|2026-09-17|BONIFIC if _rep_mem.any() and len(self.d0) == len(avv):
+PRECONDIZ.  :4126  mitosi                   670310f|2026-08-28|Impleme if not len(c): return 0
+PRECONDIZ.  :4132  mitosi                   670310f|2026-08-28|Impleme if not len(sel): return 0
+TERNARIO    :4173  mitosi                   670310f|2026-08-28|Impleme self.ultima_frac_antifase = float(flip.mean()) if len(flip
+TERNARIO    :4183  mitosi                   670310f|2026-08-28|Impleme self.mem_mot = np.vstack([self.mem_mot, self.mem_mot[a]]) 
+TERNARIO    :4189  mitosi                   670310f|2026-08-28|Impleme eredita = [v[:] for v in self.conc_nodi[kk]] if kk < len(s
+TERNARIO    :4237  mitosi                   670310f|2026-08-28|Impleme self.conc_archi = ([self.conc_archi[e] if e < len(self.con
+TERNARIO    :4284  mitosi                   670310f|2026-08-28|Impleme self.ultima_prob_coppia = float(prob_coppia.mean()) if len
+TERNARIO    :4304  mitosi                   670310f|2026-08-28|Impleme self.mem_mot = np.vstack([self.mem_mot, np.zeros((nc, 3))]
+TERNARIO    :4314  mitosi                   670310f|2026-08-28|Impleme eredita = [v[:] for v in self.conc_nodi[gk]] if gk < len(s
+TERNARIO    :4317  mitosi                   670310f|2026-08-28|Impleme eredita = [[v[0], v[1], v[2], "schwinger"] if len(v) == 3 
+PRECONDIZ.  :4397  rilassa_disegno          670310f|2026-08-28|Impleme if self.n < 2 or not len(self.i): return
+SALTO       :4425  _togli_rotazione_rigida  670310f|2026-08-28|Impleme if not hasattr(self, "psi") or len(self.psi) < n:
+PRECONDIZ.  :4485  memoria_hebbiana_moto    670310f|2026-08-28|Impleme if not MEM_HEBB or self.n < 2 or not len(self.i):
+SALTO       :4488  memoria_hebbiana_moto    670310f|2026-08-28|Impleme if not hasattr(self, "psi") or len(self.psi) < n:
+ESTENSIONE  :4495  memoria_hebbiana_moto    670310f|2026-08-28|Impleme if len(self.mem_mot) < n:
+SALTO       :4521  memoria_hebbiana_moto    670310f|2026-08-28|Impleme if len(proj):
+ESTENSIONE  :4528  memoria_hebbiana_moto    670310f|2026-08-28|Impleme if GRAV_BIFASE and len(proj):
+TERNARIO    :4568  memoria_hebbiana_moto    dcb776a|2026-09-20|LA CURA _den = np.full(len(dpozzo), (max(float(np.median(_ad)), 1e
+TERNARIO    :4580  memoria_hebbiana_moto    dcb776a|2026-09-20|LA CURA self._diag_amp_med = float(np.median(ampiezza)) if len(amp
+ESTENSIONE  :4582  memoria_hebbiana_moto    d2c76f3|2026-09-02|Add sim if not hasattr(self, "_nb") or self._nb is None or len(sel
+TERNARIO    :4583  memoria_hebbiana_moto    d2c76f3|2026-09-02|Add sim b0 = self.phi_s if len(self.phi_s) == self.n else np.zeros
+SALTO       :4586  memoria_hebbiana_moto    670310f|2026-08-28|Impleme if SPINORE and self._nb is not None and len(self._nb) >= s
+TERNARIO    :4612  memoria_hebbiana_moto    dcb776a|2026-09-20|LA CURA self._diag_sin2_med = float(np.median(sin2)) if len(sin2) 
+TERNARIO    :4613  memoria_hebbiana_moto    dcb776a|2026-09-20|LA CURA self._diag_sin2_p95 = (float(np.percentile(sin2, 95)) if l
+GIA' CURATA :4639  memoria_hebbiana_moto    eb6283f|2026-08-31|Aggiorn if LS_AZIM and self._nb is not None and len(self._nb) >= s
+SALTO       :4661  memoria_hebbiana_moto    670310f|2026-08-28|Impleme if K_FRANGE != 0.0 and len(proj):
+ESTENSIONE  :4673  memoria_hebbiana_moto    df64406|2026-09-01|Modific if len(mask) and mask.any():
+ESTENSIONE  :4714  memoria_hebbiana_moto    8ab827e|2026-09-02|Soliton if len(self.tw) and len(self.i) and self.n > 0:
+TERNARIO    :4720  memoria_hebbiana_moto    8ab827e|2026-09-02|Soliton I_nodi = np.abs(self.psi[:n]) ** 2 if hasattr(self, "psi")
+
+======================================================================================================================================
+RIEPILOGO PER CLASSE
+======================================================================================================================================
+  ESTENSIONE    41
+  TERNARIO      33
+  SALTO         27
+  PRECONDIZ.    15
+  GIA' CURATA    8
+  ALTRO          3
+  DEFAULT        3
+  TOTALE       130
+
+======================================================================================================================================
+I COMMIT D'ORIGINE, raggruppati: una ragione DICHIARATA si vede dal messaggio
+======================================================================================================================================
+  49  siti  670310f|2026-08-28|Implement code changes to enhance functionality and improve performance
+  13  siti  5769a12|2026-09-06|spinore-corretto (master, default off): orologio proprio de Broglie + spinore primario comp
+  9   siti  2bd7ec8|2026-09-04|Add core-aware chirality dynamics
+  5   siti  94c2609|2026-09-14|PEZZO 4 / STRATO 1: connessione con MEMORIA (ritardazione tau=d/cs). Sigillo 23/23 PASS.
+  5   siti  3ca7731|2026-09-17|BONIFICA (3/n): (2) spinta LOCALE, (3) _rep CON MEMORIA (A7: cricchetto chiuso), (5) codice
+  4   siti  d2c76f3|2026-09-02|Add simulation script and ignore video outputs
+  4   siti  dcb776a|2026-09-20|LA CURA DI scala_p: dalla MEDIANA GLOBALE al POZZO LOCALE. Committata PRIMA del sigillo.
+  3   siti  eb6283f|2026-08-31|Aggiornato .gitignore per escludere i video di output
+  3   siti  59af724|2026-09-09|[dev-spinoriale] FASE 2: il campo spinoriale PILOTA densita' e gravita'. Helper _rho_sorgen
+  2   siti  1b6bae1|2026-09-03|Aggiungi diagnostica della circolazione topologica
+  2   siti  4ea6f0c|2026-09-10|FASE 5: aggancio del CAMPO SPINORIALE alla dinamica (tempo proprio 4pi, mitosi/coppie su rh
+  2   siti  0639ba2|2026-09-10|MOD 5.3a+5.3b (--tempo-segno): tempo proprio DEPURATO — verso da materia/antimateria coeren
+  2   siti  8ab827e|2026-09-02|Soliton post accoppiamento elastico lamda
+  2   siti  5198938|2026-09-03|Mantieni solo codice, script e documentazione
+  2   siti  c2175ee|2026-09-04|Document snapshot sync and prepare dynamic speed campaigns
+  2   siti  4f2a6b7|2026-09-17|Y5 ROSSO: la causa e' `rho_sorgente <= 0`, NON `peq`. Nessuna delle due porte ipotizzate. M
+  2   siti  4edfab2|2026-09-20|PASSO 1: I CONTATORI DELLE CINQUE GUARDIE, E IL LORO SIGILLO. Committati PRIMA di girarlo.
+  1   siti  6d66887|2026-09-13|PEZZO 3 cablato ma INERTE: sigillo S2b FALLISCE. Non e' un bug, e' un teorema. STOP.
+  1   siti  3fb5143|2026-09-10|fix calore vettoriale: scuoti_vuoto rispetta CALORE_VETTORIALE (calcio per-passo SCALARE co
+  1   siti  2dd0756|2026-09-03|Aggiungi flag --spinore-vivo: reinnesta l'evoluzione SU(2) nell'ordine ETC
+  1   siti  f405327|2026-09-17|BONIFICA (2/n): la PLASTICITA' VISCOELASTICA CAUSALE. U7b RISOLTO: da 34629 a 0.456. Sigill
+  1   siti  43e9a47|2026-09-15|FIX cache _cs_nodo_prev: il figlio eredita cs dal padre. SIGILLO 5/5 PASS (fallback 71.88% 
+  1   siti  cc98ac0|2026-09-15|FASE B - _psi_spin_prec esteso alla mitosi: SIGILLO 6/6 PASS (guardia 4pi 88.33% -> 0.00%).
+  1   siti  5f6334b|2026-09-16|CABLATO --rumore-colorato (taglio spettrale), FLAG OFF. Commit PRIMA di ogni run, sigilli a
+  1   siti  2043a5d|2026-09-16|CORREZIONE DI DIFETTO (2/2): il fattore `cs^-2` nell'INERZIA. Nessun flag (categoria D).
+  1   siti  4f44c68|2026-09-14|STEP 2 cablato, ma il SIGILLO FALLISCE: S3 e' CIECO (omega_clk = 0 nel test). Commit del fa
+  1   siti  954549f|2026-09-09|[dev-spinoriale] FASE 1: il campo EMESSO dallo spinore (calcola_psi spinoriale). Flag --cam
+  1   siti  df64406|2026-09-01|Modifica attrazzione a breve raggio
+  1   siti  6a4980a|2026-09-17|FASE 3 - (1) INERZIA DIMENSIONALE CABLATA. Sigillo Y 11/11 PASS. Il pavimento 1e-6 passa da
+  1   siti  77c83e5|2026-09-11|MOD 5.3c (--orologio-segno): firma il VERSO dell'orologio de Broglie INTERNO _phc con s_k=s
+  1   siti  48310e0|2026-09-05|cs-dinamico: c locale nell'intero settore metrico (sorgente/tau_p/termostato); spin_core + 
+  1   siti  6e5495d|2026-09-04|Align dynamic wave speed with local lattice density
+  1   siti  93ab032|2026-08-31|DB CACHE
+  1   siti  800fb24|2026-09-18|CONTATORI A8 su ritmo() (Z33): byte-inerti, e correggono una MIA ricostruzione precedente.
+  1   siti  53f885b|2026-08-31|TestAperti
+  1   siti  7946c46|2026-09-03|Aggiungi integratore metrico Velocity-Verlet
+
+LO SCRIPT CLASSIFICA, NON GIUDICA. Il giudizio caso per caso viene dopo, e va dichiarato.
