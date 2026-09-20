@@ -196,6 +196,63 @@ perde, il CSV resta.
   (byte-identico OFF? riduzione al limite? stabilita'?). Se il sigillo FALLISCE, committa comunque
   lo stato + il fallimento e FERMATI: non "aggiustare al volo" dentro lo stesso commit.
 
+## 5-novies. LE TRE COSE CHE SI AGGIORNANO **NELLO STESSO COMMIT** (regola di Luca, 2026-09-20)
+
+> **① INVENTARIO · ② README · ③ FISICA.** **Nello stesso commit del cambiamento, mai «poi».**
+
+**LA MISURA CHE LE MOTIVA, rifatta dal disco il 2026-09-20** *(e i numeri sono PEGGIORI di quelli
+da cui il mandato partiva — `81/34/47` — perche' quel conto non includeva i sigilli)*:
+
+```
+strumenti  csv/_test_fork/*.py      79      in INVENTARIO   19   (24 %)   ->  60 MANCANTI
+sigilli    csv/_seal_fork/*.py      45      in INVENTARIO    8   (18 %)   ->  37 MANCANTI
+                                                                     TOTALE  97 MANCANTI
+flag CLI   add_argument()           93      nel README      38   (41 %)   ->  55 MANCANTI
+```
+*(dai 79 strumenti sono escluse 5 COPIE del simulatore/driver — `*._sim.py`, `_driver_prima_*` —
+che non sono strumenti e non vanno inventariate.)*
+
+**L'inventario NON e' abbandonato: e' VIVO, aggiornato stamattina.** **Il difetto non e'
+l'incuria, e' che l'aggiornamento dipende dal RICORDARSENE** — e `A9` dice che un presidio che
+dipende dal ricordarsene non e' un presidio. **`Z31` e' gia' successo TRE volte, l'ultima dopo
+essere stato citato due volte nella stessa sessione.**
+
+### ① INVENTARIO — ogni strumento creato o modificato, nello stesso commit
+Ogni file in **`csv/_test_fork/`** e **`csv/_seal_fork/`** che nasce o cambia aggiorna la sua voce
+in **`doc/INVENTARIO_strumenti.md`**, con **quattro** cose:
+- **il file**; - **il COMANDO che lo rigira, verbatim**; - **cosa misura**;
+- **il BLOB su cui e' stato girato l'ultima volta** *(sha1 dei byte grezzi — **non**
+  `git hash-object`: sono due numeri diversi per lo stesso file, par.5-quinquies)*.
+
+**⚠ E IL TRIAGE NON E' BUROCRAZIA — inventariare una sonda come un sigillo GONFIA IL CONTO E
+NASCONDE I SIGILLI VERI:**
+```
+SIGILLO                  -> voce COMPLETA: comando + blob + se e' ancora RI-GIRABILE
+SONDA usa-e-getta        -> UNA riga che dice DOVE sta il referto
+SONDA SENZA referto      -> ⚠ e' un REPERTO: una misura fatta e mai scritta
+SIGILLO NON ri-girabile  -> ⚠ e' un `Z31` NUOVO, non un'omissione di inventario
+```
+
+### ② README — ogni flag o switch nuovo o modificato, nello stesso commit
+Va nel **`README`** con: **cosa fa**, **il DEFAULT**, e **se e' byte-inerte a default spento**.
+**Il default conta piu' della descrizione:** quando `STEP2_OROLOGIO` e' passato a ON di default,
+*«l'assenza del flag»* ha smesso di significare OFF — e un `README` che non lo dice **converte i
+rami di controllo in duplicati del ramo di prova**.
+
+### ③ FISICA — ogni legge nuova, curata o riqualificata, nello stesso commit
+Va riflessa nella **documentazione di fisica/matematica**: **la forma, la derivazione, il perche'**
+— **non solo il registro dei difetti.** Il registro dice *«questo era rotto»*; la documentazione
+di fisica dice *«questa e' la legge»*, e le due cose non si sostituiscono.
+**Il rischio e' gia' occorso:** `62a03c7` — *«la relazione aveva la testa ferma al 16 SETTEMBRE»*,
+**quattro giorni**, sul file che una sessione nuova rilegge **per primo**.
+
+> **⚠ STATO DI QUESTE TRE REGOLE, e va detto qui perche' `A9` lo impone:**
+> **oggi sono REGOLE SCRITTE, non presidi.** Nessuna di esse impedisce nulla.
+> Il meccanismo che le renderebbe presidi e' **proposto e NON cablato**, in attesa di decisione:
+> vedi **`doc/PROPOSTA_presidi_inventario.md`**.
+
+---
+
 ## 5-bis. AUTO-MANUTENZIONE (tieni aggiornati i documenti vivi)
 - **Aggiorna CLAUDE.md** quando cambia un FATTO stabile: un nuovo flag, un blob nuovo certificato,
   un fatto verificato dal codice, una regola nuova. CLAUDE.md deve restare vero. NON aggiornarlo per
