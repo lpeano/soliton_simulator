@@ -704,3 +704,5 @@ python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie
 - **`--chi-basc=on` e' il DEFAULT**: il ramo A si ottiene **omettendo** l'opzione. *(Il sigillo
   `_sigillo_chibasc_driver.py` prova che a default il driver e' byte-identico a quello di `bb1d727`:
   `C1`, 142 campi confrontati, 0 diversi.)*
+
+| `csv/_test_fork/_rigiocata_0_120.py` | `402e95d6` | `python csv/_test_fork/_rigiocata_0_120.py` | rigioca la SEMINA del ramo B per 120 passi campionando a OGNI PASSO: l arco 16-481 con d e d0 SEPARATI, i cinque nodi con _deg/phivel/tensione, i percentili della popolazione, n3 ricostruito, e la GEOMETRIA alla semina (correlazione _deg contro distanza dal baricentro). Porta un SIGILLO INTERNO BLOCCANTE: al passo 120 lo stato dev essere identico a _ab_B/scena_000120.pkl.gz. | `doc/REFERTO_rigiocata_0_120.md` |
