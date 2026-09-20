@@ -205,11 +205,20 @@ def main():
                  sep - cen[0][1] - cen[1][1] if 0 in cen and 1 in cen else float("nan"),
                  m0["rc"], m0["n"], m0["archi"]))
         return 0
-    if m0["nc"] == 1:
-        print("\n  *** LETTURA C: UNA SOLA COMPONENTE GIA' ALLA SEMINA -- le masse si sono")
-        print("      COMPENETRATE. Non sono tre masse, e' un blocco solo. sep TROPPO PICCOLO.")
-        print("      Mi fermo: si risale.")
+    # IL CRITERIO E' CAMBIATO PER MANDATO DI LUCA, non da me dopo aver visto i dati, e
+    # l'osservabile sostitutivo e' MIGLIORE. Prima era `nc == 1`, che NON separa "masse
+    # compenetrate" da "masse dentro il vuoto": a sep=1.8 scatto' con i bordi massa-massa a
+    # +1.72, cioe' su masse NON compenetrate, e a sep=4.0 scatterebbe su una scena corretta.
+    # L'osservabile giusto e' il SEGNO del bordo massa-massa.
+    bordo_mm = min((float(np.linalg.norm(cen[a][0] - cen[b][0])) - cen[a][1] - cen[b][1])
+                   for a in cen for b in cen if b > a and a >= 1 and b >= 1)
+    if bordo_mm < 0:
+        print("\n  *** COMPENETRAZIONE: il bordo massa-massa piu' stretto vale %.3f, NEGATIVO."
+              % bordo_mm)
+        print("      Non sono tre masse, e' un blocco solo. sep TROPPO PICCOLO. Mi fermo.")
         return 3
+    print("  bordo massa-massa piu' stretto: %+.3f  ->  le masse NON sono compenetrate."
+          % bordo_mm)
     print("")
 
     nframe = max(1, PASSI // int(S.PASSI_PER_FRAME))
