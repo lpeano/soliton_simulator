@@ -8,8 +8,11 @@ di `--serie=` e `--csv-progresso=`. Il rito del par.2 chiede DUE cose, e qui ci 
       driver VECCHIO (il blob committato PRIMA del cambiamento), a parita' di tutto il resto.
   S2  CONTROLLO POSITIVO: con `--sep=4.0` gli stati DEVONO differire. Un sigillo che verifica solo
       la byte-identita' a default passerebbe anche su codice morto (par.10.2).
-  S3  E LA GEOMETRIA E' QUELLA CHIESTA, non una qualunque: a `--sep=4.0` le distanze fra i centri
-      delle tre masse devono valere `4.0*sqrt(3) = 6.928`, non `8*sqrt(3)`.
+  S3  E LA GEOMETRIA E' QUELLA CHIESTA, non una qualunque: si misura l'ESTENSIONE RADIALE, che a
+      `sep` dato vale `sep + raggio_massa` (le masse stanno su un cerchio di raggio `sep` e hanno
+      raggio ~0.72 misurato) -- attesa ~8.72 a default e ~4.72 a `--sep=4.0`. Non si importa il
+      simulatore e non si cablano gli indici delle coorti: nessuna assunzione.
+      S2 dice che il flag cambia QUALCOSA, S3 che cambia LA COSA GIUSTA.
 
 Il criterio di confronto e' `uguale_contenuto` di `_sigillo_archivio.py`: IL criterio, non una sua
 copia.
@@ -82,7 +85,10 @@ def gira(driver, dest, extra=()):
 
 def main():
     os.makedirs(BASE, exist_ok=True)
-    vecchio = os.path.join(BASE, "_driver_prima.py")
+    # IL DRIVER ESTRATTO VA MESSO DOVE IL DRIVER VIVE, non in una cartella di comodo: fa
+    # `sys.path.insert(0, <suo_dir>/..)` per trovare `_presidio`, quindi fuori da `csv/_test_fork/`
+    # muore con ModuleNotFoundError. Misurato, non previsto.
+    vecchio = os.path.join(RADICE, "csv", "_test_fork", "_driver_prima_sep.py")
     q = subprocess.run(["git", "cat-file", "-p", "%s:csv/_test_fork/_scena_video.py" % COMMIT_PRIMA],
                        cwd=RADICE, capture_output=True)
     if q.returncode != 0:
