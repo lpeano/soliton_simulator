@@ -8905,3 +8905,87 @@ csv/_test_fork/_diag_B/                   gli STACK grezzi: stack_B_*.txt, local
 **Ogni strumento e' stato committato PRIMA di produrre un numero** — lo impone `csv/_presidio.py`,
 che **rifiuta di girare** uno script il cui blob non e' committato. **L'ordine non e' asserito da
 me: e' imposto.**
+
+---
+
+# `d0` E' MOSSO DAL SUO CLIP — la chiusura dell'arco (2026-09-20 sera)
+
+**Per Claude web.** Autosufficiente. Simulatore `edb8f844 -> d06219de` *(l'unica modifica dell'arco:
+la strumentazione `TRACCIA_D0`, **`False` di default**, sigillata)*.
+
+## Il reperto, in tre righe
+
+```python
+:4877   stress = |d - d0| / d0
+        tasso  = tanh(stress) * d0
+        d0    += clip(coesione_relazionale, -tasso, +tasso)
+```
+**VERIFICATO su 11 campioni, in entrambe le direzioni:** `|mossa osservata| / tasso` sta fra
+**`0.999971`** e **`1.000019`** *(scostamento massimo da `1.0`: **`2.92e-05`**)*.
+
+> **IL CLIP E' SATURO SEMPRE. `coesione_relazionale` decide solo il SEGNO; l'AMPIEZZA e' il clip.**
+> **`d0` non e' mosso dalla coesione: e' mosso dal suo LIMITE.**
+
+**E il meccanismo della fuga si legge da li':** `stress = |d-d0|/d0`, quindi **quando `d0` cala lo
+stress CRESCE, `tanh -> 1`, e il passo consentito tende a `d0` STESSO** — misurato: **23 %** del
+valore a `d0 = 1.00`, **62 %** a `d0 = 1.03`, **96 %** a `d0 = 0.51`.
+**Il limite che dovrebbe frenare la variazione cresce insieme alla variazione che deve frenare.**
+E' la famiglia dei **punti fissi** gia' trovata quattro volte *(`scala_p`, `median(|f|)` in
+`ritmo()`, `_dens_rif` in `_tau`, `u_nodo`)* — **qui col segno peggiore: non azzera una misura, la
+fa DIVERGERE.**
+
+## Due letture diverse, entrambe vere — e conta il metodo
+
+```
+RIASSUNTO (3100 archi)   COMPETIZIONE:  giu' S12 -3684, S09 -2063, S03 -174
+                                        su   S02 +2128, S08 +1125      netto -2668
+ARCO 16-481              UN COLPEVOLE:  S12 vale il 96-98 % del movimento,
+                                        gli altri quattro stanno a ~+-0.01
+```
+> **Popolazione e singolo arco rispondono a DOMANDE DIVERSE.** **Guardando solo il riassunto avrei
+> scritto «competizione»: sarebbe stato vero e fuorviante.**
+
+## Tutto il resto cade, e per misura
+
+| candidato | esito |
+|---|---|
+| **mitosi** | `S06` somma **`0`**: non tocca `d0` degli archi vivi *(conferma la refutazione per dimostrazione)* |
+| **rilassamento viscoelastico** | spinge **IN SU** (`+2128`), non in giu' |
+| **i sette pavimenti** | **trascurabili**: il piu' attivo da' `+1.06` contro `-3684`, e taglia `185` archi su `372 735` tocchi |
+
+**E quattro siti su 19 non sono MAI scattati** in 120 passi (`A8`).
+
+## I sigilli
+```
+Z0  blob BYTE GREZZI  edb8f844 -> d06219de        (NON `git hash-object`: C18)
+Z1  [BLOCCANTE] flag spento -> 10/10 byte-identici                        PASS
+Z1b flag acceso -> la fisica non cambia comunque                          PASS
+Z2  positivo: 404 voci, 15 siti, 8 con somma non nulla                    PASS
+Z2b la traccia NON entra nello snapshot (0 campi passano il filtro)       PASS
+Z3  [BLOCCANTE] la rigiocata resta fedele: 138/138 COL FLAG ACCESO        PASS
+```
+
+## Tre correzioni mie, in questo solo arco
+
+1. **`d0` ha DODICI scrittori, non dieci** *(`Z78` corretta in loco)*: mi erano sfuggiti `:4078`
+   e la distinzione fra `:4812` e `:4816`. **Coi sette pavimenti: DICIANNOVE punti;**
+2. **`--traccia` si leggeva DOPO aver sovrascritto `sys.argv`**, quindi era **sempre `False`**: una
+   rigiocata da nove minuti e' girata senza traccia, **e il sigillo e' passato lo stesso** *(senza
+   traccia la fisica e' identica per costruzione)*. **Il PASS era vero e inutile;**
+3. **il dettaglio per-arco usciva VUOTO in silenzio**: `_passo_corrente` non e' impostato da nessuno
+   nel percorso batch, valeva `-1`, e **`-1 % 10 == 9` in Python** filtrava ogni riga.
+
+> **Per (2) e (3) la cura non e' stata la correzione: e' la GUARDIA.** Ora lo script **esce con
+> errore** se si chiede la traccia e il log e' vuoto, o se la tabella per-arco non ha righe.
+> **Due volte lo stesso difetto — qualcosa che non gira e non lo dice — e la seconda l'ho trovata
+> solo perche' guardavo i numeri, non perche' qualcosa avvisasse.** **`A8` applicato a me stesso.**
+
+## Cosa manca PRIMA di qualunque cura
+
+**`coesione_relazionale` NON e' tracciata**: si vede che viene **tagliata**, non **quanto varrebbe**.
+> **Senza quel numero non si sa se il clip stia PROTEGGENDO da un termine enorme — e allora
+> toglierlo sarebbe peggio — o se stia LUI producendo il movimento.**
+**Costa un sito di traccia e una rigiocata: ~10 minuti.** **E' il criterio di chiusura di `Z79`.**
+
+**LIMITI: un seme, UN arco, 120 passi.** E `16-481` e' stato scelto **perche' e' il peggiore del
+sistema**: e' un **caso estremo, non un campione.**
