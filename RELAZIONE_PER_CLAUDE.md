@@ -32,7 +32,7 @@ i nodi**, non sugli archi. **Il pannello non mentiva: la lettura si'.**
 |---|---|---|
 | **`scala_p`** *(`Z67`)* | **`5/5`** | il punto fisso **`median(ampiezza) = tanh(1)` e' SCIOLTO** (`0.7616 -> 0.1423`); `sin2` non e' piu' **saturo a 1**; **`ZETA_VIR` adesso frena del `19 %`**, prima non frenava quasi nulla |
 | **`PASSO 2`, tre gruppi** *(`Z68`)* | **`3/3`** | la diagnosi del mandato era **sbagliata**: non la lunghezza, **l'ORDINE** |
-| **`PASSO 1` sui dieci** *(`Z69`)* | **`3/4 + 1 FAIL ATTESO`** | **sei guardie proteggono da un difetto GIA' CURATO** |
+| **`PASSO 1` sui dieci** *(`Z69`)* | **`3/4 + 1 FAIL ATTESO`** | **sei guardie proteggono da un difetto GIA' CURATO.** Il `FAIL` e' la riclassificazione di `nb_grav_proiez` da `(a)` a `(c)`, **predetta prima del sigillo e APPROVATA da Luca** |
 | **driver: `--sep` + ripresa** | **`4/4`** e **`5/5`** | pronti per il run, non usati |
 
 **③ IL REPERTO DI METODO, ed e' il piu' trasportabile:** **cinque volte in due giorni un criterio e'
