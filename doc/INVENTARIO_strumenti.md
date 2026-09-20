@@ -652,3 +652,10 @@ Il mio classificatore l'aveva messo fra i reperti: **errore di categoria, corret
 | strumento | blob (byte) | comando | cosa fa | esito |
 |---|---|---|---|---|
 | `csv/_seal_fork/_runner_sim.py` | `368e6caa` | `python csv/_seal_fork/_runner_sim.py` | (nessun docstring) | **nessun esito accanto** |
+
+
+## Aggiunto il 2026-09-20 -- par.5-novies regola (1): NELLO STESSO COMMIT dello strumento
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_fuga_vd.py` | `2035429e` | `python csv/_test_fork/_fuga_vd.py` | serie nel tempo di `|vd|` (p50/p99/p999/max), `n3`, conteggi a cinque soglie, **identita' Jaccard** dei primi 100 archi veloci, e dove stanno (`d/d0`, `perc_chi`, `eta`). SONDA: un `.pkl` alla volta, solo numpy per-arco. | par.2 di `doc/TASK_HISTORY/2026-09-20_fuga-vd-ramoB.md` |
