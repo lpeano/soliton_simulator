@@ -154,6 +154,7 @@ def main():
           % ("passo", "n", "16-481 d", "16-481 d0", "d/d0", "|vd|",
              "pop d/d0", "pop |vd|", "pop d0", "n3", "pop dmax"))
     S.stato["nframe"] = 0
+    _stato_al_salvataggio = {}      # lo stato NEL PUNTO in cui il driver salva, non a fine giro
     serie = [misura(0)]
     r = serie[0]
     print("  %-6d %-6d | %9.4g %9.4g %9.4g %9.4g | %8.4g %8.4g %8.4g | %6.0f %8.4g"
@@ -182,10 +183,25 @@ def main():
         # ⚠ NON HO ALLARGATO IL CRITERIO DOPO AVER VISTO IL RISULTATO: ho corretto il ciclo.
         # E `_db_step` lo scrive il driver quando salva la serie (`fr % SERIE == 0`).
         _fr = _frame + 1
-        if _fr % 5 == 0 or _fr == 1:
-            net.diagnostica()
+        # ⚠ L'ORDINE E' QUELLO DEL DRIVER, e NON e' indifferente: il blocco che SALVA
+        # (`if SERIE and ...`) sta PRIMA del blocco che chiama `diagnostica()`
+        # (`if fr % 5 == 0 or fr == 1`). Quindi lo snapshot del passo 120 e' scattato PRIMA
+        # della diagnostica del frame 20.
+        # MISURATO con una sonda: `diagnostica()` costa **5** chiamate a `_pesi()`
+        # (non una), e `salva_stato()` ne costa **0**. Da cui i conti tornano:
+        #   riferimento 1554 = fisica 1534 + 4 diagnostiche x5   (frame 1, 5, 10, 15)
+        #   prima versione 1559 = fisica 1534 + 5 diagnostiche x5 (avevo contato anche il fr 20)
+        # LA FISICA COINCIDE ESATTAMENTE: 1534 = 1534. L'errore era di ORDINE, non di fisica.
         if _fr % 20 == 0:
             net._db_step = _fr * int(S.PASSI_PER_FRAME)
+            _stato_al_salvataggio.clear()
+            for _k, _v in net.__dict__.items():
+                if _k == "rng":
+                    continue
+                if isinstance(_v, (np.ndarray, int, float, bool, np.integer, np.floating, str)):
+                    _stato_al_salvataggio[_k] = _v.copy() if isinstance(_v, np.ndarray) else _v
+        if _fr % 5 == 0 or _fr == 1:
+            net.diagnostica()
     print("  [%d passi in %.1f s = %.2f s/passo]" % (passo, time.time() - t0,
                                                      (time.time() - t0) / max(passo, 1)))
 
@@ -212,12 +228,10 @@ def main():
     from _sigillo_archivio import uguale_contenuto
     with gzip.open("csv/_test_fork/_ab_B/scena_000120.pkl.gz", "rb") as f:
         rif = pickle.load(f)["attrs"]
-    mio = {}
-    for kk, vv in net.__dict__.items():
-        if kk == "rng":
-            continue
-        if isinstance(vv, (np.ndarray, int, float, bool, np.integer, np.floating, str)):
-            mio[kk] = vv
+    # ⚠ SI CONFRONTA LO STATO AL PUNTO DI SALVATAGGIO, non quello a fine funzione:
+    # il driver scatta lo snapshot PRIMA della `diagnostica()` del frame 20.
+    mio = _stato_al_salvataggio
+    print("  (stato catturato nel punto in cui il driver chiama `salva_stato`, %d campi)" % len(mio))
     com = sorted(set(rif) & set(mio))
     diff = [kk for kk in com if not uguale_contenuto(rif[kk], mio[kk])]
     # ⚠ L'INTERSEZIONE NASCONDE LE ASSENZE: un campo che sta solo da una parte non viene
