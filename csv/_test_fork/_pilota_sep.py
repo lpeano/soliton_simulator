@@ -48,6 +48,10 @@ RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
 SEP = "1.8"
 PASSI = 300
 OGNI = 5          # ogni quanti FRAME si misura
+# --solo-semina: misura la SEMINA e basta, senza i 300 passi e senza la fermata sulla lettura C.
+# Serve per SCANSIONARE sep: la domanda "a quale sep le masse si toccano" si decide alla semina,
+# perche' e' li' che `_allaccia` collega, e spendere 300 passi per ogni valore sarebbe sprecato.
+SOLO_SEMINA = "--solo-semina" in sys.argv
 DEST = None
 for _x in sys.argv[1:]:
     if _x.startswith("--sep="):
@@ -167,6 +171,12 @@ def main():
 
     m0 = misura(gruppo, n_sem)
     riga("SEMINA", m0)
+    if SOLO_SEMINA:
+        print("SCAN sep=%s nc=%d mm=%d mv=%d bordi_mm=%.4f bordi_mv=%.4f rc=%.4f n=%d archi=%d"
+              % (SEP, m0["nc"], m0["mm"], m0["mv"], sep * np.sqrt(3) - 2 * r,
+                 sep - cen[0][1] - cen[1][1] if 0 in cen and 1 in cen else float("nan"),
+                 m0["rc"], m0["n"], m0["archi"]))
+        return 0
     if m0["nc"] == 1:
         print("\n  *** LETTURA C: UNA SOLA COMPONENTE GIA' ALLA SEMINA -- le masse si sono")
         print("      COMPENETRATE. Non sono tre masse, e' un blocco solo. sep TROPPO PICCOLO.")
