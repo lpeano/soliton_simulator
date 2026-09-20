@@ -7697,3 +7697,75 @@ rispondeva a una domanda che non era stata fatta.**
 **Cosa questo NON dice:** non dice che la fisica non produca struttura — dice che **in questa scena,
 con questa semina, la connettività non si muove**. Una scena con una semina diversa è **una misura
 diversa, e non è stata fatta**. **Un seme, una scena, nessuna barra d'errore fra semi.**
+
+---
+
+## 2026-09-20 — **il video rigenerato dagli snapshot: le quattro componenti, guardate**
+
+**Blob `775ceab7`, seme 42, i 45 snapshot di `_g6000` (passi 60→2700). NESSUNA FISICA ESEGUITA.**
+Strumento `csv/_test_fork/_video_da_snapshot.py`, uscita `csv/_test_fork/_video_g6000/`.
+Scelte fissate prima in `doc/TASK_HISTORY/2026-09-20_video-da-snapshot.md` (`d20a3ea`).
+
+> **⚠ È UN'ISPEZIONE, NON UNA MISURA.** Nessun numero di questo paragrafo entra in un referto come
+> risultato: ciò che è misurato sta in `Z65`. **E il rischio era scritto prima: il rischio è di
+> LEGGERE il video.**
+
+**① Il blob, risolto senza toccare il simulatore.** Gli stati sono del blob `7c4dec1d`, il codice è
+`775ceab7`, e `carica_stato` li rifiuta. Si è usata la strada già provata: nello **script** la
+logica di `carica_stato` **meno** la verifica del blob, **compresa l'invalidazione delle cache
+derivate** (`_S`, `_perm`, `_ker_cache`). **Nessun flag nuovo nel simulatore, nessuna riscrittura
+degli snapshot**, e il blob di ogni snapshot è stampato accanto al suo frame.
+
+**② E le funzioni di disegno non sono cambiate fra i due blob — verificato, non assunto.** Estratte
+una per una da `git cat-file -p 7c4dec1d`: `campo_spaziale`, `pozzo_grafo`, `diagnostica`,
+`rilassa_disegno`, `carica_stato`, `salva_stato`, `lambda_nodi`, `_allaccia`, `intensita` sono
+**tutte identiche**. L'intero delta fra i due blob è **70 righe in 5 punti** (i due flag
+sperimentali, il sito della coppia, il cablaggio CLI): **nessuno tocca il rendering.** È scritto
+anche in testa a ogni frame.
+
+**③ Il presidio sui flag ha girato e passa.** I 20 flag del modulo, applicati col percorso ufficiale
+(`_cli` + `_applica_regime` + `_applica_flag`), sono stati **confrontati uno per uno** con quelli
+che il run stesso ha scritto nell'intestazione di `prog.csv`: **tutti uguali**. *(Se uno solo
+avesse differito lo script si sarebbe fermato senza disegnare: il rendering dipende da
+`SCHERMATURA`, `CAMPO_SPINORIALE`, `GAMMA`, `LAM`.)*
+
+**④ La verifica visiva del reperto è passata su tutti e 45 i frame:**
+
+```
+componenti: 4 su 45 frame su 45
+ARCHI FRA COMPONENTI DIVERSE: 0 su 45 frame su 45
+P0 (grado dalla matrice contro `_deg`): 0 nodi discordanti, su tutti i frame
+indici-ancora delle quattro componenti: [0, 900, 1397, 1894] — MAI cambiati
+```
+
+**Le taglie, dal primo all'ultimo frame:**
+
+```
+passo 60     900 / 497 / 497 / 497
+passo 2700  1678 / 2119 / 2899 / 2815
+```
+
+**⑤ Cosa si vede — e lo scrivo come descrizione, non come conclusione.** Il pezzo che nasce da
+`SEME_INIZIALE` *(il primo, indice-àncora `0`)* **si espande fino a occupare lo stesso spazio delle
+tre masse e a circondarle**, mentre i tre pezzi da 497 restano **compatti e densi**. **Nel campo, a
+sinistra, questo appare come materia che si addensa fra le masse.** **Nella topologia, a destra,
+quei nodi sono di un altro colore e non condividono nemmeno un arco.**
+
+> **Quindi: ciò che era stato descritto come «condensazione fra le masse» è spazialmente reale e
+> topologicamente disgiunto.** **Sovrapposizione nello spazio non è connessione**, ed è la cosa che
+> il video permette di distinguere e che il campo da solo non permetteva.
+> **Non dico che sia «il vuoto che si struttura»: dico che sono nodi della PRIMA componente, e che
+> non toccano le altre tre.** Il perché non è misurato qui.
+
+**⑥ Un numero che lo strumento ha fatto emergere e che NON è una misura: `max|pos|` non è
+monotono.** Cresce da `8.75` (passo 60) a **`16.40` al passo 1500**, poi **ritorna a `11.32`** al
+2640 e risale a `12.77` al 2700. **Lo stampo perché l'ho usato per fissare l'inquadratura**, e
+perché una non-monotonia dell'estensione spaziale **non era stata notata prima** — ma viene da una
+pre-passata di rendering, **su un seme e una scena, e andrebbe misurata a parte prima di
+significare qualcosa.**
+
+**⑦ I limiti, dichiarati anche in testa a ogni frame:** cadenza **60 passi/frame** contro i **6**
+dell'originale — **dieci volte più a scatti**, 2.2 s a 20 fps; **vista fissa** e **inquadratura
+fissa** *(una camera rotante confonderebbe la lettura della separazione; un'inquadratura
+ri-normalizzata a ogni frame nasconderebbe l'espansione)*; **costo misurato 1.12 s/frame**, 50 s in
+tutto. **Un seme, una scena.**

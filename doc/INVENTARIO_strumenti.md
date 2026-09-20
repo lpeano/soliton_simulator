@@ -453,3 +453,32 @@ con `connected_components` sugli snapshot di `_g6000` e `_fin_A`, e **lo dichiar
 attribuirle a uno strumento**. I numeri sono riproducibili da quegli snapshot in poche righe; il
 fatto che il grafo abbia **4 componenti a tutti i passi** è comunque **ricalcolato da
 `_topologia_blocchi.py`** sul sottografo denso, dove dà le stesse 4 componenti.
+
+---
+
+## Il VIDEO rigenerato dagli snapshot (2026-09-20) — **il `.mp4` non è committabile: ecco il comando**
+
+`*.mp4` è ignorato da `.gitignore:6`, e **la regola non si forza**. Vale allora la stessa politica
+dei `.pkl` (§5-quinquies): **il dato è il comando che lo produce**, e il sistema è deterministico —
+qui ancora di più, perché **non c'è fisica**: si legge e si disegna.
+
+| voce | valore |
+|---|---|
+| **comando, verbatim** | `python csv/_test_fork/_video_da_snapshot.py` *(aggiungere `--solo-primo` per il solo primo frame e il costo)* |
+| **script** | `csv/_test_fork/_video_da_snapshot.py`, blob dei byte grezzi **`32606239`** |
+| **simulatore** | blob **`775ceab7`** *(il disegno)* |
+| **stati letti** | i 45 snapshot di `csv/_test_fork/_g6000`, blob **`7c4dec1d`** |
+| **seme** | 42 · **scena** N-MASSE, `--nmasse 3 --sep 8` |
+| **uscita** | `csv/_test_fork/_video_g6000/` — 45 `frame_%03d.png` + `video_g6000.mp4` (0.8 MB, 20 fps, 2.2 s) |
+| **costo misurato** | pre-passata `10.9 s` + **`1.12 s/frame`** → **50 s** in tutto |
+| **data** | 2026-09-20 |
+
+**Committati: `frame_001.png` e `frame_045.png`** *(il primo e l'ultimo, cioè il confronto che
+conta)*. **Gli altri 43 PNG no** — 8.5 MB che il comando rigenera in 50 secondi.
+
+> **Cosa produce, e cosa NON è:** due pannelli per frame — il **campo** (`campo_spaziale`) e il
+> **grafo** coi nodi colorati per **componente connessa**, luminosità dal pozzo `phi_g`
+> (`pozzo_grafo`). **È uno strumento di ISPEZIONE: nessun numero che ne esce entra in un referto
+> come risultato.** I numeri misurati stanno in `Z65`.
+> **I controlli che stampa su ogni frame — 4 componenti, `0` archi fra componenti, `P0` su `0`
+> nodi — sono controlli, e il testo diventa ROSSO se il conteggio non è zero.**
