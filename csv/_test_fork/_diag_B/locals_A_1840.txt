@@ -1,0 +1,9 @@
+=== RAMO A: piu' campioni, per pescarlo DENTRO il ciclo dei sottopassi ===
+  campione 1: (fuori dal blocco CFL) _pesi (soliton_simulator.py:2868)
+  campione 2: (fuori dal blocco CFL) chiralita_core_locale (soliton_simulator.py:1569)
+  campione 3: (fuori dal blocco CFL) _passo_spinoriale (soliton_simulator.py:2382)
+  campione 4: (fuori dal blocco CFL) _mat (soliton_simulator.py:2874)
+  campione 5: (fuori dal blocco CFL) step (soliton_simulator.py:3769)
+  campione 6: (fuori dal blocco CFL) step (soliton_simulator.py:3936)
+  campione 7:             n1: 1             n2: 1             n3: 1             nsub: 4 
+  campione 8:             n1: 1             n2: 1             n3: 1             nsub: 4 

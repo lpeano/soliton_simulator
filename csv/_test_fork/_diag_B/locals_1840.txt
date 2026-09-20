@@ -1,0 +1,72 @@
+########## CAMPIONE 1  18:40:02 ##########
+--- ramo B (PID 30996) ---
+Thread 24936 (active): "MainThread"
+    step (soliton_simulator.py:3941)
+        Locals:
+            dt_e: <numpy.ndarray at 0x1b26356fed0>
+            cs_max_corrente: 1.997190593216676
+            beta: <numpy.ndarray at 0x1b2635acab0>
+            n1: 1
+            n2: 3
+            n3: 206
+            nsub: 206
+            dts: <numpy.ndarray at 0x1b2635acd50>
+            beta_new: <numpy.ndarray at 0x1b2635acab0>
+--- ramo A (PID 9264) ---
+Thread 31792 (active): "MainThread"
+        Locals:
+        Locals:
+        Locals:
+        Locals:
+    memoria_hebbiana_moto (soliton_simulator.py:4771)
+        Locals:
+            sin2: <numpy.ndarray at 0x253d20dcc90>
+########## CAMPIONE 2  18:40:03 ##########
+--- ramo B (PID 30996) ---
+Thread 24936 (active): "MainThread"
+    step (soliton_simulator.py:3949)
+        Locals:
+            dt_e: <numpy.ndarray at 0x1b26356fed0>
+            cs_max_corrente: 1.997190593216676
+            beta: <numpy.ndarray at 0x1b2635ac690>
+            n1: 1
+            n2: 3
+            n3: 206
+            nsub: 206
+            dts: <numpy.ndarray at 0x1b2635acd50>
+            beta_new: <numpy.ndarray at 0x1b2635ac690>
+--- ramo A (PID 9264) ---
+Thread 31792 (active): "MainThread"
+    memoria_hebbiana_moto (soliton_simulator.py:4893)
+        Locals:
+            sin2: <numpy.ndarray at 0x253d20dcc90>
+########## CAMPIONE 3  18:40:03 ##########
+--- ramo B (PID 30996) ---
+Thread 24936 (active): "MainThread"
+    step (soliton_simulator.py:3943)
+        Locals:
+            dt_e: <numpy.ndarray at 0x1b26356fed0>
+            cs_max_corrente: 1.997190593216676
+            beta: <numpy.ndarray at 0x1b2635ac870>
+            n1: 1
+            n2: 3
+            n3: 206
+            nsub: 206
+            dts: <numpy.ndarray at 0x1b2635acd50>
+            beta_new: <numpy.ndarray at 0x1b2635ac870>
+--- ramo A (PID 9264) ---
+Thread 31792 (active): "MainThread"
+    _lam_archi (soliton_simulator.py:2121)
+        Locals:
+    _pesi (soliton_simulator.py:2824)
+        Locals:
+    stato_crossover (soliton_simulator.py:473)
+    massa_critica_adattiva (soliton_simulator.py:420)
+    lambda_nodi (soliton_simulator.py:2104)
+        Locals:
+    _lam_archi (soliton_simulator.py:2120)
+    _pesi (soliton_simulator.py:2824)
+        Locals:
+    step (soliton_simulator.py:3500)
+        Locals:
+            dt_e: <numpy.ndarray at 0x253d209f8d0>
