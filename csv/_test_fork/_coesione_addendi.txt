@@ -1,0 +1,16 @@
+I TRE ADDENDI DI `coesione_relazionale`, misurati -- e come SCALANO con `d`
+
+  forza_campo       = -(grad_I_relativo - peso_shear * lap_arco)
+     grad_I_relativo = (I[j]-I[i]) / d       ->  scala come  1/d
+     lap_arco        = media di (I[j]-I[i])  ->  scala come  d^0  (NESSUNA divisione per lunghezza)
+  richiamo_elastico = -(d0 - LAM)/LAM        ->  scala come  d^0  (adimensionale)
+  e i tre vengono SOMMATI.
+
+  ramo passo   |grad_I_rel| p50   |lap_arco| p50   |richiamo| p50     grad/lap
+  B    120           5.6744e-05       3.8531e-05       1.5691e-01   1.4727e+00
+  B    360           6.0953e-04       4.0690e-04       1.6615e-01   1.4980e+00
+  A    120           4.1338e-05       2.4014e-05       1.7648e-01   1.7214e+00
+  A    3000          2.6248e-01       9.0914e-01       9.0456e-01   2.8871e-01
+
+  LETTURA: i tre addendi vengono SOMMATI ma NON scalano allo stesso modo con `d`.
+  Se uno domina di ordini, la somma E' quello, e gli altri due sono decorativi.
