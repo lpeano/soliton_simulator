@@ -1,0 +1,113 @@
+[TIMBRO] _video_da_snapshot.py  sha1-BYTE 03b5abaf  committato e pulito
+[calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+[fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+[step2-orologio] STEP 2: omega_clk *= (cs/CS_M)^2 = OROLOGIO DI COMPTON (omega = m c^2/hbar, e nel modello c e' cs). Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.
+[rumore-colorato] TAGLIO SPETTRALE: il calcio del vuoto non e' piu' bianco ma correlato su tau_c = LAM/CS_M = 0.4 (= 40 passi), con un processo di Ornstein-Uhlenbeck sul rumore stesso e `dt_n = DT*r` (non DT: e' un processo LOCALE). `amp` INVARIATA. MOTIVO: il rumore bianco discreto inietta a tutte le frequenze fino a Nyquist, incluse quelle che il passo non risolve; in natura non esiste. ZERO coefficienti: LAM e CS_M sono gia' nel sistema. ATTENZIONE: la ricorsione PRESERVA LA VARIANZA, quindi NON abbassa theta - se lo muove lo fa SALIRE (<=5%). Si cabla perche' il rumore bianco e' SBAGLIATO, non perche' risolva l'aliasing (doc/PREDIZIONE_taglio_spettrale.md).
+[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: inerzia = T^2 = (d/cs)^2, quindi il tempo che COSTRUISCE l'inerzia e quello che la RILASSA devono essere lo stesso; oggi sono due diversi nella stessa equazione. Zero coefficienti, zero floor nuovi. NB: |omega|_eq va come sqrt(tau), quindi theta cala di ~13x: UN ORDINE DI GRANDEZZA, NON la soluzione dell'aliasing.
+[spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+================================================================================================================
+IL VIDEO DAGLI SNAPSHOT -- si legge e si disegna. NESSUNA FISICA.
+================================================================================================================
+  i 20 flag scritti dal RUN, contro quelli del MODULO adesso:
+    CALORE_VETTORIALE      run=0        modulo=0        
+    CAMPO_SPINORIALE       run=1        modulo=1        
+    CHI_BASC               run=1        modulo=1        
+    CHI_CORE               run=1        modulo=1        
+    CS_DINAMICO            run=1        modulo=1        
+    DT                     run=0.01     modulo=0.01     
+    FORK_SU2               run=1        modulo=1        
+    FORK_SU2_MEM           run=1        modulo=1        
+    GUSCIO_MORBIDO         run=1        modulo=1        
+    OLON_PART              run=1        modulo=1        
+    PASSI_PER_FRAME        run=6        modulo=6        
+    PAV_COM                run=1        modulo=1        
+    PLAST_DIN              run=1        modulo=1        
+    RUMORE_COLORATO        run=1        modulo=1        
+    SPINORE_CORRETTO       run=1        modulo=1        
+    SPINORE_VIVO           run=1        modulo=1        
+    SPIN_FEEDBACK          run=1        modulo=1        
+    STEP2_OROLOGIO         run=1        modulo=1        
+    TAU_A                  run=50.0     modulo=50.0     
+    TAU_LUCE               run=1        modulo=1        
+    VERLET                 run=1        modulo=1        
+    VIRIALE                run=1        modulo=1        
+    ZETA_VIR               run=1        modulo=1        
+  -> i flag del modulo combaciano con quelli scritti dal run. (P6)
+
+  45 snapshot, passi 60 -> 2700 (cadenza 60)
+
+  PRE-PASSATA: max|pos| per snapshot (l'inquadratura e' FISSA per tutti i frame)
+     60:8.75  120:8.79  180:8.81  240:8.82  300:8.93
+     360:9.21  420:9.29  480:9.43  540:9.51  600:9.70
+     660:10.42  720:10.86  780:11.33  840:11.99  900:12.38
+     960:12.79  1020:13.09  1080:13.31  1140:13.54  1200:13.88
+     1260:14.09  1320:14.18  1380:14.09  1440:15.52  1500:16.40
+     1560:15.41  1620:14.09  1680:14.01  1740:14.72  1800:15.51
+     1860:14.98  1920:13.66  1980:14.74  2040:13.42  2100:12.89
+     2160:12.42  2220:12.56  2280:12.53  2340:12.36  2400:11.81
+     2460:11.41  2520:11.66  2580:11.47  2640:11.32  2700:12.77
+     -> max|pos| 8.75 -> 12.77, monotona crescente: NO;  R FISSO = 18.370   [9.7 s]
+
+  I FRAME
+     indici-ancora delle componenti (criterio del colore): [0, 900, 1397, 1894]
+     frame 1   passo 60     n=2391    comp=4 taglie=900/497/497/497              fra=0  blob=7c4dec1d  [1.05 s]
+     frame 2   passo 120    n=2391    comp=4 taglie=900/497/497/497              fra=0  blob=7c4dec1d  [1.06 s]
+     frame 3   passo 180    n=2393    comp=4 taglie=900/497/499/497              fra=0  blob=7c4dec1d  [0.98 s]
+     frame 4   passo 240    n=2417    comp=4 taglie=907/499/506/505              fra=0  blob=7c4dec1d  [1.08 s]
+     frame 5   passo 300    n=2576    comp=4 taglie=914/524/613/525              fra=0  blob=7c4dec1d  [1.03 s]
+     frame 6   passo 360    n=2851    comp=4 taglie=933/537/832/549              fra=0  blob=7c4dec1d  [1.17 s]
+     frame 7   passo 420    n=2987    comp=4 taglie=949/548/915/575              fra=0  blob=7c4dec1d  [1.17 s]
+     frame 8   passo 480    n=3177    comp=4 taglie=966/555/1007/649             fra=0  blob=7c4dec1d  [1.11 s]
+     frame 9   passo 540    n=3295    comp=4 taglie=975/561/1059/700             fra=0  blob=7c4dec1d  [1.15 s]
+     frame 10  passo 600    n=3433    comp=4 taglie=982/602/1114/735             fra=0  blob=7c4dec1d  [1.17 s]
+     frame 11  passo 660    n=3544    comp=4 taglie=988/622/1172/762             fra=0  blob=7c4dec1d  [1.11 s]
+     frame 12  passo 720    n=3654    comp=4 taglie=998/635/1203/818             fra=0  blob=7c4dec1d  [1.19 s]
+     frame 13  passo 780    n=3735    comp=4 taglie=1002/657/1217/859            fra=0  blob=7c4dec1d  [1.20 s]
+     frame 14  passo 840    n=3826    comp=4 taglie=1009/677/1242/898            fra=0  blob=7c4dec1d  [1.15 s]
+     frame 15  passo 900    n=3907    comp=4 taglie=1014/691/1269/933            fra=0  blob=7c4dec1d  [1.19 s]
+     frame 16  passo 960    n=4002    comp=4 taglie=1025/709/1298/970            fra=0  blob=7c4dec1d  [1.17 s]
+     frame 17  passo 1020   n=4120    comp=4 taglie=1034/730/1339/1017           fra=0  blob=7c4dec1d  [1.14 s]
+     frame 18  passo 1080   n=4218    comp=4 taglie=1042/758/1362/1056           fra=0  blob=7c4dec1d  [1.17 s]
+     frame 19  passo 1140   n=4307    comp=4 taglie=1046/794/1385/1082           fra=0  blob=7c4dec1d  [1.17 s]
+     frame 20  passo 1200   n=4445    comp=4 taglie=1060/840/1418/1127           fra=0  blob=7c4dec1d  [1.14 s]
+     frame 21  passo 1260   n=4566    comp=4 taglie=1068/873/1431/1194           fra=0  blob=7c4dec1d  [1.20 s]
+     frame 22  passo 1320   n=4701    comp=4 taglie=1073/905/1478/1245           fra=0  blob=7c4dec1d  [1.22 s]
+     frame 23  passo 1380   n=4855    comp=4 taglie=1084/952/1519/1300           fra=0  blob=7c4dec1d  [1.13 s]
+     frame 24  passo 1440   n=4991    comp=4 taglie=1094/988/1560/1349           fra=0  blob=7c4dec1d  [1.17 s]
+     frame 25  passo 1500   n=5143    comp=4 taglie=1102/1045/1600/1396          fra=0  blob=7c4dec1d  [1.18 s]
+     frame 26  passo 1560   n=5296    comp=4 taglie=1118/1075/1658/1445          fra=0  blob=7c4dec1d  [1.26 s]
+     frame 27  passo 1620   n=5443    comp=4 taglie=1130/1118/1711/1484          fra=0  blob=7c4dec1d  [1.22 s]
+     frame 28  passo 1680   n=5630    comp=4 taglie=1149/1175/1764/1542          fra=0  blob=7c4dec1d  [1.21 s]
+     frame 29  passo 1740   n=5784    comp=4 taglie=1163/1210/1819/1592          fra=0  blob=7c4dec1d  [1.15 s]
+     frame 30  passo 1800   n=5938    comp=4 taglie=1181/1246/1864/1647          fra=0  blob=7c4dec1d  [1.21 s]
+     frame 31  passo 1860   n=6106    comp=4 taglie=1204/1280/1927/1695          fra=0  blob=7c4dec1d  [1.18 s]
+     frame 32  passo 1920   n=6294    comp=4 taglie=1236/1325/1970/1763          fra=0  blob=7c4dec1d  [1.07 s]
+     frame 33  passo 1980   n=6486    comp=4 taglie=1273/1366/2021/1826          fra=0  blob=7c4dec1d  [1.13 s]
+     frame 34  passo 2040   n=6708    comp=4 taglie=1299/1430/2079/1900          fra=0  blob=7c4dec1d  [1.07 s]
+     frame 35  passo 2100   n=6924    comp=4 taglie=1335/1483/2137/1969          fra=0  blob=7c4dec1d  [1.17 s]
+     frame 36  passo 2160   n=7162    comp=4 taglie=1362/1556/2203/2041          fra=0  blob=7c4dec1d  [1.16 s]
+     frame 37  passo 2220   n=7382    comp=4 taglie=1393/1601/2278/2110          fra=0  blob=7c4dec1d  [1.09 s]
+     frame 38  passo 2280   n=7583    comp=4 taglie=1415/1643/2337/2188          fra=0  blob=7c4dec1d  [1.09 s]
+     frame 39  passo 2340   n=7778    comp=4 taglie=1441/1691/2390/2256          fra=0  blob=7c4dec1d  [1.14 s]
+     frame 40  passo 2400   n=8018    comp=4 taglie=1468/1750/2463/2337          fra=0  blob=7c4dec1d  [1.10 s]
+     frame 41  passo 2460   n=8273    comp=4 taglie=1500/1821/2538/2414          fra=0  blob=7c4dec1d  [1.14 s]
+     frame 42  passo 2520   n=8550    comp=4 taglie=1543/1887/2614/2506          fra=0  blob=7c4dec1d  [1.11 s]
+     frame 43  passo 2580   n=8816    comp=4 taglie=1571/1945/2707/2593          fra=0  blob=7c4dec1d  [1.11 s]
+     frame 44  passo 2640   n=9145    comp=4 taglie=1620/2030/2803/2692          fra=0  blob=7c4dec1d  [1.15 s]
+     frame 45  passo 2700   n=9511    comp=4 taglie=1678/2119/2899/2815          fra=0  blob=7c4dec1d  [1.14 s]
+
+  COMPOSIZIONE (ffmpeg, 20 fps -> 2.2 s di video)
+     -> C:\Users\lpeano\soliton_simulator\csv\_test_fork\_video_g6000\video_g6000.mp4  (1.3 MB)
+
+  E' UN'ISPEZIONE: nessun numero di qui entra in un referto come risultato.

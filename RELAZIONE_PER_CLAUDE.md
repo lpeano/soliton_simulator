@@ -8315,3 +8315,53 @@ difficile farla fallire: **non è raggiungibile.**
 > codice; `spinore_vivo` è protetta solo da un'INVARIANTE che tre funzioni mantengono.**
 
 **Bilancio: `(a)` 2 · `(c)` 6 · `(b)` 2.**
+
+---
+
+## 2026-09-20 — **il pannello fedele: e il nucleo NON è il colpevole. La sovrapposizione è VERA**
+
+**Simulatore `27f1ab03` INVARIATO** *(è rendering)* · strumento `csv/_test_fork/_video_da_snapshot.py`
+(`3a7df5a`), 45 frame dai soliti snapshot · **costo del pannello nuovo: `0.01 s/frame`**, contro
+`1.14 s` del frame intero. **Nessun run.**
+
+### Cosa fa, e perché è la stessa legge
+
+`campo_spaziale` calcola `|conv(S, K)|² − conv(n, K²)`: **il nucleo `K` sparge ogni nodo su una
+portata `λ`, ed è quello che RICOSTRUISCE il campo fra i nodi.** Il pannello nuovo prende
+**`K = δ`** — nessuna spargitura — e la stessa formula diventa, cella per cella,
+`|Σz|² − Σ|z|²`: **l'interferenza fra i nodi che stanno davvero lì.**
+**Non è un'approssimazione diversa: è la stessa legge a risoluzione piena.**
+**E i buchi sono TRASPARENTI, non neri:** *«campo nullo»* e *«nessun dato»* sono due cose diverse.
+
+### ⚠ IL REPERTO, ed è l'opposto di quello che mi aspettavo
+
+**Al passo 60** il pannello col nucleo mostra una nuvola diffusa **fra** le masse; il fedele mostra
+il vuoto come **un blocco compatto al centro**. **Lì il nucleo spargeva davvero.**
+
+**Al passo 2700 no:** il fedele mostra le quattro popolazioni **sovrapposte nello spazio**,
+esattamente come il pannello col nucleo. **La sovrapposizione è VERA, non un artefatto del
+rendering.**
+
+> **Quindi l'errore di lettura non era «il pannello inventa struttura».** **Era: il pannello non
+> può distinguere SOVRAPPOSIZIONE da CONNESSIONE — e nessun pannello di campo può.**
+> **Quella distinzione la fa solo la topologia, ed è per questo che i tre pannelli stanno insieme:**
+> **continuità · fedeltà · topologia.** Al passo 2700 i primi due dicono *«un'unica struttura»* e il
+> terzo dice **`4` componenti, `0` archi fra loro.**
+
+### I numeri, dichiarati su ogni frame
+
+```
+passo    n      celle 3D vuote   colonne vuote   celle con >= 2 nodi   (% delle OCCUPATE)
+60      2391      99.77 %          95.58 %            228                  26.9 %
+600     3433      99.71 %          88.31 %            120                  11.0 %
+1800    5938      99.51 %          82.25 %            495                  27.0 %
+2700    9511      99.31 %          86.77 %           1200                  46.6 %
+```
+
+**`celle con >= 2 nodi` è il numero che decide:** l'interferenza richiede **due** contributi, quindi
+**è DEFINITA solo lì**. **Al passo 600 lo è nell'`11 %` delle celle occupate; al 2700 nel `47 %`.**
+**Tutto il resto, nel pannello di sinistra, è il nucleo.**
+
+**E il sistema occupa meno dell'`1 %` del volume inquadrato** *(celle 3D vuote fra `99.3` e
+`99.8 %`)*: **l'inquadratura fissa, scelta per non nascondere l'espansione, mostra soprattutto
+vuoto** — ed è corretto che lo faccia.
