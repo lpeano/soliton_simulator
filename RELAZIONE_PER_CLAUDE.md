@@ -7910,3 +7910,88 @@ la cadenza**, come ordina il mandato.
 run ne chiede almeno 8.** **`--db-serie` e la ripresa sigillata `5/5` sono ciò che rende il blocco
 recuperabile invece che fatale** — ma la patch della ripresa **non è ancora stata riapplicata al
 driver** *(`doc/STATO_RUN.md`)*. **Va fatta prima, insieme al commit di `--sep`.**
+
+---
+
+## 2026-09-20 — **la scansione dei quattro schemi, e ⚠ l'anomalia ① NON è quella descritta**
+
+**Blob `775ceab7`** (sha1 dei byte grezzi) · strumento `csv/_test_fork/_scansione_schemi.py`,
+esito `csv/_test_fork/_scansione_schemi.txt` · mandato in
+`doc/TASK_HISTORY/2026-09-20_anomalie-viriale-zetavir.md` (`7398f94`).
+**Run e test fermi. Nessuna cura applicata. Il simulatore non è stato toccato.**
+
+### L'elenco completo, con la triage per ruolo
+
+```
+SCHEMA                                            totale   di cui FISICA
+A  guardie `len(X) == len(Y)` in un `if`             91          64
+B  default da `np.zeros`/`np.full` su maschera        9           7
+C  saturazioni VERE (`tanh`, `clip`, `x/sqrt`)       59          35
+   + clip al DOMINIO di arccos/arcsin                 8           -      (esatti, NON scale)
+D  memorie `self._*` fra funzioni diverse            10           -
+```
+
+**La triage è nel codice e il criterio è dichiarato**, non lasciato all'impressione: `P5` parla di
+**percorso fisico**, e una guardia dentro `_diag_completa` non sta sullo stesso piano di una dentro
+`step`. **Nessuna riga sparisce dall'elenco: ogni riga porta il suo ruolo.**
+
+**E una separazione dentro `C`:** `np.clip(x, -1, 1)` **prima di `arccos`** non è una scala — il
+coseno fra due versori vive in `[-1,1]` per costruzione e il clip toglie solo l'arrotondamento.
+Sono **8**, e contarli con le saturazioni vere le avrebbe sepolte.
+
+**Delle 10 memorie di `D`, quattro sono CACHE** esplicitamente invalidate da `carica_stato`
+(`_S`, `_perm`, `_ker_cache`, `_r3`); **sei portano stato fisico**: `_chi_core_nodi`, `_deg`,
+`_nb`, `_psi_spinor`, `_sin2_vir`, `_spinor_lift`.
+
+### ⚠ IL REPERTO: l'anomalia ① non è «una scala nascosta». È **un'autonormalizzazione**
+
+**Il mandato dice: `r_rad = ampiezza` NON limitata, quindi `tanh` la confronta contro `1`.**
+**Dal codice, `ampiezza` È LIMITATA — ed è essa stessa l'uscita di un `tanh`:**
+
+```python
+:4399   scala_p  = max(float(np.median(np.abs(dpozzo))), 1e-9)
+:4401   ampiezza = np.tanh(np.abs(dpozzo) / scala_p)      # in [0,1)
+...
+:4425   r_rad = ampiezza                                   # NON riassegnata fra 4401 e 4425
+:4427   t_tan = np.tanh(...)                               # in [0,1)
+```
+
+> **Quindi `r_rad` e `t_tan` sono ENTRAMBI in `[0,1)`: il confronto «ampiezza contro uno» non
+> avviene, e la premessa dell'anomalia ① come scritta NON REGGE.**
+
+**Ma al suo posto ce n'è una diversa, e appartiene a una famiglia che questo repo conosce:**
+
+```
+scala_p = median(|dpozzo|)        ->   ampiezza = tanh(|dpozzo| / median(|dpozzo|))
+```
+
+**È una normalizzazione sul PROPRIO insieme — `A3`.** E ha la conseguenza esatta del presidio
+`P4`/`C12`: **`median(ampiezza) = tanh(1) = 0.76159` PER COSTRUZIONE**, sempre, qualunque cosa
+faccia il pozzo. *(Stessa forma di `median(r) = 1` in `ritmo()` e di `_tau`/`_dens_rif`: due
+precedenti già misurati.)*
+
+**E l'asimmetria è il punto:**
+
+```
+r_rad  normalizzato sulla PROPRIA MEDIANA        (A3, si muove col sistema)
+t_tan  normalizzato su PHI_CRIT                  (una costante del modello, dichiarata)
+```
+
+> **`cos2` e `sin2` ripartiscono confrontando una grandezza AUTONORMALIZZATA con una
+> ASSOLUTA.** **La ripartizione virale è ancorata a `tanh(1)` sul lato radiale.**
+> **Non l'ho misurato sui dati e non lo invento:** è un'algebra letta dal codice, e va **verificata
+> sui percentili di `ampiezza` e `sin2`** prima di curare — è il PASSO 3 del mandato, e ora si sa
+> **cosa** misurare.
+
+### Perché mi fermo qui, come ordina il §5.2
+
+**`A` ha 64 occorrenze su percorso fisico e `C` ne ha 35.** Curarle in un commit violerebbe il
+par.1 *(un interruttore alla volta)*, e la mia stessa task history dice di riportare e aspettare
+quando una famiglia è numerosa. **Servono due decisioni prima di procedere:**
+
+1. **l'ordine di attacco delle famiglie** — la mia proposta: **`D` (dichiarazione, zero
+   comportamento) → contatori su `②③` → `①` alla luce del reperto qui sopra → poi `A` e `C` a
+   blocchi**, perché le prime tre sono chiuse e le ultime due sono programmi;
+2. **se `①` vada curata come «autonormalizzazione da sostituire»** *(e allora la scala va
+   **derivata**, e `median(|dpozzo|)` **non** è derivazione ma `A3`)* **oppure dichiarata e
+   lasciata**, come è stato fatto per altri punti fissi già trovati.

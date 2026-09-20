@@ -1,196 +1,189 @@
-[TIMBRO] _scansione_schemi.py  sha1-BYTE 7d64b305  committato e pulito
+[TIMBRO] _scansione_schemi.py  sha1-BYTE 27d9e2db  committato e pulito
 sorgente: soliton_simulator.py   sha1 GREZZO 0a488348   (7635 righe)
 
 ==============================================================================================================================
 SCHEMA A -- GUARDIE CHE SALTANO UNA LEGGE: `len(X) == len(Y)` o `len(X) >= len(Y)` in un if
 ==============================================================================================================================
-  :445   _righe_stato_universo      if not hasattr(net, "psi") or len(net.psi) < n:
-  :1195  _aggiorna_lift_spinoriale  if not hasattr(self, "_nb") or self._nb is None or len(self._nb) < self.n:
-  :1304  _estendi_psi_spinor        elif len(cur) < n:
-  :1307  _estendi_psi_spinor        elif len(cur) > n:
-  :1387  olonomia_lift_ciclo        if len(self._spinor_lift) < self.n:
-  :1462  _feedback_spinoriale_archi if len(self._spinor_lift) < self.n:
-  :1488  chiralita_core_locale      if not hasattr(self, "psi") or len(self.psi) < self.n:
-  :1540  misura_spin_picco_massa    if not hasattr(self, "psi") or len(self.psi) < self.n:
-  :1542  misura_spin_picco_massa    if not hasattr(self, "_nb") or len(self._nb) < self.n:
-  :1546  misura_spin_picco_massa    if len(self._spinor_lift) < self.n:
-  :1554  misura_spin_picco_massa    if len(pesi) != len(idx):
-  :1575  misura_spin_picco_massa    chi = self.perc_chi[dominio].astype(float) if len(self.perc_chi) >= self.n else np.zeros(len(dominio))
-  :1576  misura_spin_picco_massa    nb = self._nb[dominio] if hasattr(self, "_nb") and len(self._nb) >= self.n else np.zeros((len(dominio), 3))
-  :1581  misura_spin_picco_massa    if len(self._spinor_lift) < self.n and hasattr(self, "_nb") and len(self._nb) >= self.n:
-  :1584  misura_spin_picco_massa    if len(self._spinor_lift) >= self.n
-  :1652  misura_spin_picco_positivi if len(self.perc_chi) < self.n:
-  :1710  circolazione_topologica    if not hasattr(self, "psi") or len(self.psi) < self.n:
-  :1756  circolazione_topologica    if _psp is not None and len(_psp) >= self.n:
-  :1785  circolazione_topologica    if ha_spin and len(self.perc_chi) >= self.n:
-  :1919  _riallinea_tracking        if len(self.conc_nodi) > self.n: del self.conc_nodi[self.n:]
-  :1985  _allaccia                  if COMPAT_CHI and len(a) and len(self.perc_chi) >= self.n:
-  :2002  lambda_nodi                if not hasattr(self, "psi") or len(self.psi) < self.n:
-  :2052  ritmo                      if self._psi_prec is None or len(self._psi_prec) != self.n:
-  :2056  ritmo                      self._psi_prec = self.psi.copy() if len(self.psi) == self.n else np.ones(self.n, complex)
-  :2068  ritmo                      if _ps is None or _psp is None or len(_ps) != self.n or len(_psp) != self.n:
-  :2077  ritmo                      if CAMPO_SPINORIALE and _ps is not None and _psp is not None and len(_ps) == self.n and len(_psp) == self.n:
-  :2161  _passo_spinoriale          if len(self.omega_s) < n:
-  :2163  _passo_spinoriale          elif len(self.omega_s) > n:
-  :2166  _passo_spinoriale          b0 = self.phi_s if len(self.phi_s) == n else np.zeros(n)
-  :2168  _passo_spinoriale          elif len(self._nb) < n:
-  :2172  _passo_spinoriale          elif len(self._nb) > n:
-  :2191  _passo_spinoriale          if not hasattr(self, "psi") or len(self.psi) < n:
-  :2211  _passo_spinoriale          if _xi is None or len(_xi) < n:
-  :2243  _passo_spinoriale          elif not hasattr(self, "_nb_prec") or self._nb_prec is None or len(self._nb_prec) != n:
-  :2249  _passo_spinoriale          if CHI_CORE and len(self.perc_chi) >= n:
-  :2280  _passo_spinoriale          if not hasattr(self, "psi") or len(self.psi) < n: self.calcola_psi()
-  :2312  _passo_spinoriale          if _csp_in is not None and len(_csp_in) >= n:
-  :2366  _passo_spinoriale          if len(_peq_a) != len(self.i):
-  :2378  _passo_spinoriale          _ok_a = np.isfinite(_peq_a) & (_peq_a > 0) if len(_peq_a) == len(self.i) else np.zeros(len(self.i), bool)
-  :2535  _passo_spinoriale          if psi_snapshot is not None and len(psi_snapshot) >= n:
-  :2537  _passo_spinoriale          elif len(self.psi) >= n:
-  :2589  _passo_spinoriale          if (OROLOGIO_SEGNO and hasattr(self, "perc_chi") and len(self.perc_chi) >= n) else 1.0)
-  :2596  _passo_spinoriale          if _csp2 is not None and len(_csp2) >= n:
-  :2704  _pesi                      if KERNEL_ALPHA != 0.0 and len(self.tw) == len(self.d):
-  :2804  _rho_sorgente              if _rs is not None and len(_rs) >= n:
-  :2815  _nb_grav                   if _ps is not None and len(_ps) >= n:
-  :3101  _bloch_ritardato           if nbr is None or len(nbr) != n:
-  :3117  _bloch_ritardato           if r_loc is None or len(r_loc) < n:
-  :3182  _tempo_luce_nodo           if len(ii) and len(dd) == len(ii):
-  :3196  _tempo_luce_nodo           if csp is not None and len(csp) >= n:
-  :3219  _coppia_interferenza       if _ps is not None and len(_ps) >= n:
-  :3314  step                       if TEMPO_SEGNO and not np.isscalar(dt_n) and len(self.perc_chi) >= self.n and len(self.psi) >= self.n:
-  :3441  step                       if CHI_CORE and len(self.perc_chi) >= self.n:
-  :3444  step                       elif VERSO_CHI and len(self.perc_chi) >= self.n:
-  :3450  step                       elif not (CHI_CORE and len(self.perc_chi) >= self.n):
-  :3470  step                       P_eq = float(np.median(self.d0[:self.n])) if self.n > 0 and len(self.d0) >= self.n else 1.0
-  :3474  step                       _psi_ct = psi_t if psi_t is not None else (self.psi if len(self.psi) >= self.n else None)
-  :3519  step                       pv = self.phivel[:self.n] if len(self.phivel) >= self.n else np.zeros(self.n)
-  :3547  step                       if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) == self.n:
-  :3557  step                       if TORS_4PI and len(self.perc_chi) >= self.n:
-  :3566  step                       _twn = _twn / np.maximum(self._deg[:self.n] if len(self._deg) >= self.n else 1.0, 1.0)
-  :3580  step                       if CHI_BASC and not CHI_DA_SPINORE and len(self.perc_chi) >= self.n and len(self.tw):
-  :3593  step                       if (CHI_DA_SPINORE and SPINORE_CORRETTO and len(self.perc_chi) >= self.n
-  :3648  step                       r_nodo = np.abs(_pv_src[:self.n]) if len(_pv_src) >= self.n else np.ones(self.n)
-  :3678  step                       if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta):
-  :3715  step                       if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta_new):
-  :3865  mitosi                     if TORS_4PI and len(self.i) == len(avv):
-  :3953  mitosi                     if len(self._rep) != len(rep):
-  :3971  mitosi                     if len(self.d0) != len(avv):
-  :3974  mitosi                     if _rep_mem.any() and len(self.d0) == len(avv):
-  :4290  _togli_rotazione_rigida    if not hasattr(self, "psi") or len(self.psi) < n:
-  :4329  pozzo_grafo                I = (np.abs(self.psi[:n]) ** 2 if intensita is None and len(self.psi) >= n
-  :4353  memoria_hebbiana_moto      if not hasattr(self, "psi") or len(self.psi) < n:
-  :4360  memoria_hebbiana_moto      if len(self.mem_mot) < n:
-  :4403  memoria_hebbiana_moto      if not hasattr(self, "_nb") or self._nb is None or len(self._nb) < self.n:
-  :4404  memoria_hebbiana_moto      b0 = self.phi_s if len(self.phi_s) == self.n else np.zeros(self.n)
-  :4407  memoria_hebbiana_moto      if SPINORE and self._nb is not None and len(self._nb) >= self.n:
-  :4438  memoria_hebbiana_moto      if LS_AZIM and self._nb is not None and len(self._nb) >= self.n:
-  :4519  memoria_hebbiana_moto      I_nodi = np.abs(self.psi[:n]) ** 2 if hasattr(self, "psi") and len(self.psi) >= n else np.ones(n)
-  :5027  _render_vista_rete_sola    if hasattr(net, "psi") and len(net.psi) >= n:
-  :5032  _render_vista_rete_sola    chi = (net.perc_chi[:n] if hasattr(net, "perc_chi") and len(net.perc_chi) >= n
-  :6606  _diag_completa             cols['d_min'], cols['d_max'], cols['d_mean'], _ = _stat(net.d[:n] if len(net.d) >= n else net.d)
-  :6607  _diag_completa             cols['d0_min'], cols['d0_max'], cols['d0_mean'], _ = _stat(net.d0[:n] if len(net.d0) >= n else net.d0)
-  :6608  _diag_completa             cols['eta_min'], cols['eta_max'], cols['eta_mean'], _ = _stat(net.eta[:n] if len(net.eta) >= n else net.eta)
-  :6648  _diag_completa             if _nb_g is not None and len(_nb_g) >= n and n > 0:
-  :6665  _diag_completa             if (_nb_g is not None and _psp is not None and len(_psp) >= n and len(_nb_g) >= n and n > 0 and len(net.i)):
-  :6684  _diag_completa             _pcm = np.sign(np.asarray(net.perc_chi[:n])) if len(net.perc_chi) >= n else np.ones(n)
-  :6799  _diag_completa             if _nbm is not None and len(_nbm) >= n and nuc.sum() >= 3:
-  :6806  _diag_completa             if _omm is not None and len(_omm) >= n and nuc.sum() >= 3:
-  :7053  _diag_completa             if len(net.phivel) >= n and len(ii):
-  :7070  _diag_completa             if len(net.perc_chi) >= n and n > 10:
-  -> 91 occorrenze
+  DIAGN.  :445   _righe_stato_universo      if not hasattr(net, "psi") or len(net.psi) < n:
+  FISICA  :1195  _aggiorna_lift_spinoriale  if not hasattr(self, "_nb") or self._nb is None or len(self._nb) < self.n:
+  FISICA  :1304  _estendi_psi_spinor        elif len(cur) < n:
+  FISICA  :1307  _estendi_psi_spinor        elif len(cur) > n:
+  DIAGN.  :1387  olonomia_lift_ciclo        if len(self._spinor_lift) < self.n:
+  FISICA  :1462  _feedback_spinoriale_archi if len(self._spinor_lift) < self.n:
+  FISICA  :1488  chiralita_core_locale      if not hasattr(self, "psi") or len(self.psi) < self.n:
+  DIAGN.  :1540  misura_spin_picco_massa    if not hasattr(self, "psi") or len(self.psi) < self.n:
+  DIAGN.  :1542  misura_spin_picco_massa    if not hasattr(self, "_nb") or len(self._nb) < self.n:
+  DIAGN.  :1546  misura_spin_picco_massa    if len(self._spinor_lift) < self.n:
+  DIAGN.  :1554  misura_spin_picco_massa    if len(pesi) != len(idx):
+  DIAGN.  :1575  misura_spin_picco_massa    chi = self.perc_chi[dominio].astype(float) if len(self.perc_chi) >= self.n else np.zeros(len(dominio))
+  DIAGN.  :1576  misura_spin_picco_massa    nb = self._nb[dominio] if hasattr(self, "_nb") and len(self._nb) >= self.n else np.zeros((len(dominio), 3))
+  DIAGN.  :1581  misura_spin_picco_massa    if len(self._spinor_lift) < self.n and hasattr(self, "_nb") and len(self._nb) >= self.n:
+  DIAGN.  :1584  misura_spin_picco_massa    if len(self._spinor_lift) >= self.n
+  DIAGN.  :1652  misura_spin_picco_positivi if len(self.perc_chi) < self.n:
+  DIAGN.  :1710  circolazione_topologica    if not hasattr(self, "psi") or len(self.psi) < self.n:
+  DIAGN.  :1756  circolazione_topologica    if _psp is not None and len(_psp) >= self.n:
+  DIAGN.  :1785  circolazione_topologica    if ha_spin and len(self.perc_chi) >= self.n:
+  FISICA  :1919  _riallinea_tracking        if len(self.conc_nodi) > self.n: del self.conc_nodi[self.n:]
+  FISICA  :1985  _allaccia                  if COMPAT_CHI and len(a) and len(self.perc_chi) >= self.n:
+  FISICA  :2002  lambda_nodi                if not hasattr(self, "psi") or len(self.psi) < self.n:
+  FISICA  :2052  ritmo                      if self._psi_prec is None or len(self._psi_prec) != self.n:
+  FISICA  :2056  ritmo                      self._psi_prec = self.psi.copy() if len(self.psi) == self.n else np.ones(self.n, complex)
+  FISICA  :2068  ritmo                      if _ps is None or _psp is None or len(_ps) != self.n or len(_psp) != self.n:
+  FISICA  :2077  ritmo                      if CAMPO_SPINORIALE and _ps is not None and _psp is not None and len(_ps) == self.n and len(_psp) == self.n:
+  FISICA  :2161  _passo_spinoriale          if len(self.omega_s) < n:
+  FISICA  :2163  _passo_spinoriale          elif len(self.omega_s) > n:
+  FISICA  :2166  _passo_spinoriale          b0 = self.phi_s if len(self.phi_s) == n else np.zeros(n)
+  FISICA  :2168  _passo_spinoriale          elif len(self._nb) < n:
+  FISICA  :2172  _passo_spinoriale          elif len(self._nb) > n:
+  FISICA  :2191  _passo_spinoriale          if not hasattr(self, "psi") or len(self.psi) < n:
+  FISICA  :2211  _passo_spinoriale          if _xi is None or len(_xi) < n:
+  FISICA  :2243  _passo_spinoriale          elif not hasattr(self, "_nb_prec") or self._nb_prec is None or len(self._nb_prec) != n:
+  FISICA  :2249  _passo_spinoriale          if CHI_CORE and len(self.perc_chi) >= n:
+  FISICA  :2280  _passo_spinoriale          if not hasattr(self, "psi") or len(self.psi) < n: self.calcola_psi()
+  FISICA  :2312  _passo_spinoriale          if _csp_in is not None and len(_csp_in) >= n:
+  FISICA  :2366  _passo_spinoriale          if len(_peq_a) != len(self.i):
+  FISICA  :2378  _passo_spinoriale          _ok_a = np.isfinite(_peq_a) & (_peq_a > 0) if len(_peq_a) == len(self.i) else np.zeros(len(self.i), bool)
+  FISICA  :2535  _passo_spinoriale          if psi_snapshot is not None and len(psi_snapshot) >= n:
+  FISICA  :2537  _passo_spinoriale          elif len(self.psi) >= n:
+  FISICA  :2589  _passo_spinoriale          if (OROLOGIO_SEGNO and hasattr(self, "perc_chi") and len(self.perc_chi) >= n) else 1.0)
+  FISICA  :2596  _passo_spinoriale          if _csp2 is not None and len(_csp2) >= n:
+  FISICA  :2704  _pesi                      if KERNEL_ALPHA != 0.0 and len(self.tw) == len(self.d):
+  FISICA  :2804  _rho_sorgente              if _rs is not None and len(_rs) >= n:
+  FISICA  :2815  _nb_grav                   if _ps is not None and len(_ps) >= n:
+  FISICA  :3101  _bloch_ritardato           if nbr is None or len(nbr) != n:
+  FISICA  :3117  _bloch_ritardato           if r_loc is None or len(r_loc) < n:
+  FISICA  :3182  _tempo_luce_nodo           if len(ii) and len(dd) == len(ii):
+  FISICA  :3196  _tempo_luce_nodo           if csp is not None and len(csp) >= n:
+  FISICA  :3219  _coppia_interferenza       if _ps is not None and len(_ps) >= n:
+  FISICA  :3314  step                       if TEMPO_SEGNO and not np.isscalar(dt_n) and len(self.perc_chi) >= self.n and len(self.psi) >= self.n:
+  FISICA  :3441  step                       if CHI_CORE and len(self.perc_chi) >= self.n:
+  FISICA  :3444  step                       elif VERSO_CHI and len(self.perc_chi) >= self.n:
+  FISICA  :3450  step                       elif not (CHI_CORE and len(self.perc_chi) >= self.n):
+  FISICA  :3470  step                       P_eq = float(np.median(self.d0[:self.n])) if self.n > 0 and len(self.d0) >= self.n else 1.0
+  FISICA  :3474  step                       _psi_ct = psi_t if psi_t is not None else (self.psi if len(self.psi) >= self.n else None)
+  FISICA  :3519  step                       pv = self.phivel[:self.n] if len(self.phivel) >= self.n else np.zeros(self.n)
+  FISICA  :3547  step                       if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) == self.n:
+  FISICA  :3557  step                       if TORS_4PI and len(self.perc_chi) >= self.n:
+  FISICA  :3566  step                       _twn = _twn / np.maximum(self._deg[:self.n] if len(self._deg) >= self.n else 1.0, 1.0)
+  FISICA  :3580  step                       if CHI_BASC and not CHI_DA_SPINORE and len(self.perc_chi) >= self.n and len(self.tw):
+  FISICA  :3593  step                       if (CHI_DA_SPINORE and SPINORE_CORRETTO and len(self.perc_chi) >= self.n
+  FISICA  :3648  step                       r_nodo = np.abs(_pv_src[:self.n]) if len(_pv_src) >= self.n else np.ones(self.n)
+  FISICA  :3678  step                       if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta):
+  FISICA  :3715  step                       if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta_new):
+  FISICA  :3865  mitosi                     if TORS_4PI and len(self.i) == len(avv):
+  FISICA  :3953  mitosi                     if len(self._rep) != len(rep):
+  FISICA  :3971  mitosi                     if len(self.d0) != len(avv):
+  FISICA  :3974  mitosi                     if _rep_mem.any() and len(self.d0) == len(avv):
+  FISICA  :4290  _togli_rotazione_rigida    if not hasattr(self, "psi") or len(self.psi) < n:
+  DIAGN.  :4329  pozzo_grafo                I = (np.abs(self.psi[:n]) ** 2 if intensita is None and len(self.psi) >= n
+  FISICA  :4353  memoria_hebbiana_moto      if not hasattr(self, "psi") or len(self.psi) < n:
+  FISICA  :4360  memoria_hebbiana_moto      if len(self.mem_mot) < n:
+  FISICA  :4403  memoria_hebbiana_moto      if not hasattr(self, "_nb") or self._nb is None or len(self._nb) < self.n:
+  FISICA  :4404  memoria_hebbiana_moto      b0 = self.phi_s if len(self.phi_s) == self.n else np.zeros(self.n)
+  FISICA  :4407  memoria_hebbiana_moto      if SPINORE and self._nb is not None and len(self._nb) >= self.n:
+  FISICA  :4438  memoria_hebbiana_moto      if LS_AZIM and self._nb is not None and len(self._nb) >= self.n:
+  FISICA  :4519  memoria_hebbiana_moto      I_nodi = np.abs(self.psi[:n]) ** 2 if hasattr(self, "psi") and len(self.psi) >= n else np.ones(n)
+  RENDER  :5027  _render_vista_rete_sola    if hasattr(net, "psi") and len(net.psi) >= n:
+  RENDER  :5032  _render_vista_rete_sola    chi = (net.perc_chi[:n] if hasattr(net, "perc_chi") and len(net.perc_chi) >= n
+  DIAGN.  :6606  _diag_completa             cols['d_min'], cols['d_max'], cols['d_mean'], _ = _stat(net.d[:n] if len(net.d) >= n else net.d)
+  DIAGN.  :6607  _diag_completa             cols['d0_min'], cols['d0_max'], cols['d0_mean'], _ = _stat(net.d0[:n] if len(net.d0) >= n else net.d0)
+  DIAGN.  :6608  _diag_completa             cols['eta_min'], cols['eta_max'], cols['eta_mean'], _ = _stat(net.eta[:n] if len(net.eta) >= n else net.eta)
+  DIAGN.  :6648  _diag_completa             if _nb_g is not None and len(_nb_g) >= n and n > 0:
+  DIAGN.  :6665  _diag_completa             if (_nb_g is not None and _psp is not None and len(_psp) >= n and len(_nb_g) >= n and n > 0 and len(net.i)):
+  DIAGN.  :6684  _diag_completa             _pcm = np.sign(np.asarray(net.perc_chi[:n])) if len(net.perc_chi) >= n else np.ones(n)
+  DIAGN.  :6799  _diag_completa             if _nbm is not None and len(_nbm) >= n and nuc.sum() >= 3:
+  DIAGN.  :6806  _diag_completa             if _omm is not None and len(_omm) >= n and nuc.sum() >= 3:
+  DIAGN.  :7053  _diag_completa             if len(net.phivel) >= n and len(ii):
+  DIAGN.  :7070  _diag_completa             if len(net.perc_chi) >= n and n > 10:
+  -> 91 occorrenze:  DIAGN. 25  FISICA 64  RENDER 2
 
 ==============================================================================================================================
 SCHEMA B -- DEFAULT FISICO DA `np.zeros`/`np.full` POI RIEMPITO SU UNA MASCHERA PARZIALE
 ==============================================================================================================================
-  :1126  _base_cicli_topologici     visitato = np.zeros(n, bool); parent = np.full(n, -1, int)
+  FISICA  :1126  _base_cicli_topologici     visitato = np.zeros(n, bool); parent = np.full(n, -1, int)
         -> :1131  riempita solo su [radice]   visitato[radice] = True; pila = [radice]
-  :1127  _base_cicli_topologici     parent_e = np.full(n, -1, int); profondita = np.zeros(n, int)
+  FISICA  :1127  _base_cicli_topologici     parent_e = np.full(n, -1, int); profondita = np.zeros(n, int)
         -> :1136  riempita solo su [v]   visitato[v] = True; parent[v] = u; parent_e[v] = e
-  :1207  _aggiorna_lift_spinoriale  fase = np.ones(n_comuni, complex)
+  FISICA  :1207  _aggiorna_lift_spinoriale  fase = np.ones(n_comuni, complex)
         -> :1209  riempita solo su [validi]   fase[validi] = np.exp(-1j * np.angle(overlap[validi]))
-  :1502  chiralita_core_locale      chi_core = chi.copy(); r_core = np.zeros(self.n); rho0 = I2.copy()
+  FISICA  :1502  chiralita_core_locale      chi_core = chi.copy(); r_core = np.zeros(self.n); rho0 = I2.copy()
         -> :1509  riempita solo su [k]   r_core[k] = r
-  :3564  step                       _twn = np.zeros(self.n)
+  FISICA  :3564  step                       _twn = np.zeros(self.n)
         -> :3567  riempita solo su [i]   _chi_mat = np.where(_twn[i] >= _twn[j], chi_torsione[i], chi_torsione[j])
-  :4372  memoria_hebbiana_moto      grad_tw = np.zeros((self.n, 3))                    # gradiente torsione per nodo
+  FISICA  :4372  memoria_hebbiana_moto      grad_tw = np.zeros((self.n, 3))                    # gradiente torsione per nodo
         -> :4374  riempita solo su [:, k]   grad_tw[:, k] = (np.bincount(ii, dtw * dirarc[:, k], minlength=self.n) +
-  :4434  memoria_hebbiana_moto      s2full = np.zeros(len(self.i))
+  FISICA  :4434  memoria_hebbiana_moto      s2full = np.zeros(len(self.i))
         -> :4435  riempita solo su [mask]   s2full[mask] = sin2
-  :5151  _render_grafo_topologico   indice = np.full(n, -1, dtype=int); indice[sel] = np.arange(len(sel))
+  RENDER  :5151  _render_grafo_topologico   indice = np.full(n, -1, dtype=int); indice[sel] = np.arange(len(sel))
         -> :5154  riempita solo su [net.i[archi]   ia = indice[net.i[archi]]; ja = indice[net.j[archi]]
-  :7287  _picchi_nuovi              grid = np.zeros((G, G, G))
+  DIAGN.  :7287  _picchi_nuovi              grid = np.zeros((G, G, G))
         -> :7290  riempita solo su [gi[k,0]   grid[gi[k,0], gi[k,1], gi[k,2]] += I2[k]
-  -> 9 occorrenze
+  -> 9 occorrenze:  DIAGN. 1  FISICA 7  RENDER 1
 
 ==============================================================================================================================
 SCHEMA C -- SATURAZIONI: `tanh`, `clip`, `x/sqrt(1+x**2)`  (il punto di saturazione E' una scala)
 ==============================================================================================================================
-  :1198  _aggiorna_lift_spinoriale  th = np.arccos(np.clip(nb[:, 2], -1.0, 1.0))
-  :1217  _bloch_a_spinore           th = np.arccos(np.clip(nb[:, 2], -1.0, 1.0))
-  :1735  circolazione_topologica    th = np.arccos(np.clip(nb[:, 2], -1.0, 1.0))
-  :1779  circolazione_topologica    omega_S = float(np.arccos(np.clip(float(np.dot(shat, self._shat_prec)), -1.0, 1.0)))
-  :1793  circolazione_topologica    omega_N = float(np.arccos(np.clip(float(np.dot(nhat, self._nhat_prec)), -1.0, 1.0)))
-  :2016  lambda_nodi                softplus = np.log1p(np.exp(np.clip(u - 1.0, -30, 30)))
-  :2136  ritmo                      r = x / np.sqrt(1.0 + x**2) + 1.0e-6           # bottleneck liscio, satura a 1 per x->inf
-  :2481  _passo_spinoriale          _tq = _tq * np.minimum(1.0, self.eta[:n] / TAU_A)[:, None]
-  :2631  _passo_spinoriale          _amp = np.arcsin(np.clip(_sink, 0.0, 1.0))                  # angolo geodetico verso nb_bar
-  :2683  _passo_spinoriale          self.phi_s = np.arccos(np.clip(nb_new[:, 2], -1, 1))            # b = angolo polare [0,pi]
-  :2702  _pesi                      ramp = np.minimum(1.0, self.eta / TAU_A)
-  :3069  _cs_nodo                   transizione = 0.5 * (1.0 + np.tanh(1.0 - u_nodo))
-  :3124  _bloch_ritardato           dot = np.clip(np.sum(nbr * nb_cur, axis=1), -1.0, 1.0)
-  :3315  step                       _mcoer = np.clip(np.cos(self.phi[:self.n] - np.angle(self.psi[:self.n] + 1e-12)), 0.0, 1.0)
-  :3366  step                       coerenza = np.clip(coerenza, 0.0, 1.0)       # solo il nucleo costruttivo alimenta la repulsione
-  :3496  step                       self.xi_termo = float(np.clip(self.xi_termo, -2.0, 2.0))   # guardia: attrito fisico limitato
-  :3827  step                       self.d0 += np.clip(dt_e * cs_taup * d_arco * _lap_d0, -_cfl, _cfl)
-  :3876  mitosi                     soglia = soglia0 * (1.0 - 0.3 * np.tanh(grad_tau))
-  :3905  mitosi                     discesa = np.clip(1.0 - avv / TW_TETTO, 0.0, 1.0) # -> 0 quando tw -> 4pi (spegnimento)
-  :3919  mitosi                     segno = -np.tanh(3.0 * (tau_pp - centro))
-  :3924  mitosi                     prob = np.clip(resp, 0.0, 1.0)
-  :3929  mitosi                     rep = np.clip(-resp, 0.0, 1.0)
-  :4014  mitosi                     bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
-  :4035  mitosi                     p_anti = np.where(s > 0, np.tanh(s), 0.0)          # prob antifase, 0 sotto equilibrio
-  :4088  mitosi                     fattore_plastico = np.tanh(np.maximum(sciolta_ecc * stress_arco, 0.0))
-  :4129  mitosi                     eccesso_torsione = np.maximum(0.0, sciolta - 1.0)
-  :4144  mitosi                     anom = np.maximum(0.0, (rho_sel - peq_sel) / np.maximum(peq_sel, 1e-6))
-  :4214  campo_spaziale             idx = tuple(np.clip(((P[:, k] + R) / h).astype(int), 0, G - 1) for k in range(3))
-  :4273  rilassa_disegno            self.pos += EMB_ETA * np.clip(acc, -0.5, 0.5)
-  :4379  memoria_hebbiana_moto      plast = np.tanh(np.linalg.norm(grad_tw, axis=1))[:, None]   # in [0,1), dallo stato
-  :4389  memoria_hebbiana_moto      proj = np.clip(proj, -passo_max, passo_max)
-  :4401  memoria_hebbiana_moto      ampiezza = np.tanh(np.abs(dpozzo) / scala_p)  # scala dal pozzo, in [0,1), dallo stato
-  :4406  memoria_hebbiana_moto      grav = -np.tanh(s) * ampiezza                 # bifase: -s = verso (attrae/respinge), firmato
-  :4427  memoria_hebbiana_moto      t_tan = np.tanh(np.hypot(np.abs(circ_arc), np.abs(twn_a)))
-  :4429  memoria_hebbiana_moto      t_tan = np.tanh(np.abs(circ_arc))
-  :4452  memoria_hebbiana_moto      spinta = np.clip(spinta, -passo_causale, passo_causale)
-  :4456  memoria_hebbiana_moto      grav = np.clip(grav, -passo_causale, passo_causale)
-  :4467  memoria_hebbiana_moto      flusso = np.clip(flusso, -passo_max, passo_max)
-  :4489  memoria_hebbiana_moto      filtro_portata = 1.0 - np.tanh(rapporto_portata)
-  :4494  memoria_hebbiana_moto      peso_dinamico_shear = np.tanh(delta_relativo_arco)
-  :4508  memoria_hebbiana_moto      tasso_dinamico = np.tanh(stress_metrico) * self.d0[mask]
-  :4510  memoria_hebbiana_moto      self.d0[mask] += np.clip(coesione_relazionale, -tasso_dinamico, tasso_dinamico)
-  :4546  memoria_hebbiana_moto      shift_fase_dinamico = np.clip(shift_fase_dinamico, -np.pi * 0.25, np.pi * 0.25)
-  :4564  diagnostica                coer_l=float(np.mean(np.clip(num / den, 0, 1))) if self.n else 0.0,
-  :4620  _dbg_init                  sp = float(np.mean(np.arccos(np.clip(net._nb[:mm, 2], -1, 1))))
-  :5052  _render_vista_rete_sola    dimensione_nodi = 18.0 + 38.0 * np.sqrt(np.clip(phi_g / phi_max, 0.0, 1.0))
-  :5059  _render_vista_rete_sola    lc.set_array(np.clip(dpozzo / dphi_max, 0.0, 1.0)); ax.add_collection(lc)
-  :5074  _render_vista_rete_sola    lc3.set_array(np.clip(dpozzo / dphi_max, 0.0, 1.0)); ax3d.add_collection3d(lc3)
-  :5090  _render_vista_rete_sola    lc_yz.set_array(np.clip(dpozzo / dphi_max, 0.0, 1.0)); ax2.add_collection(lc_yz)
-  :5162  _render_grafo_topologico   lc.set_array(np.clip(dp / dpmax, 0.0, 1.0)); ax.add_collection(lc)
-  :5189  update                     dn = np.clip(dens / d_rif, 0.0, 1.0)
-  :5254  update                     q = np.clip(campo.T / vm, -1, 1)
-  :5259  update                     gamma_rend = float(np.clip(0.30 + 0.5 * contrasto, 0.30, 0.60))  # adattivo, dallo stato
-  :5266  update                     q = np.clip(q, 0, 1)      # taglia il ciano (q<0 -> 0 = nero), tiene solo il fuoco
-  :5291  update                     soglia_vuoto = float(np.clip(0.06 + 0.30 * contrasto, 0.06, 0.30))
-  :5292  update                     alpha = np.clip((np.abs(q) - soglia_vuoto) / max(1.0 - soglia_vuoto, 1e-6), 0.0, 1.0)
-  :5333  update                     Zdef = -prof_scala * np.sqrt(np.clip(phi_w / scala, 0, 1)) if pm > 0 else np.zeros_like(GXm)
-  :5360  update                     tw_norm = np.clip(tw_render / max(PHI_CRIT, 1e-9), 0.0, 2.0)
-  :5370  update                     alpha_nodo = np.clip(Ivis / Iref, 0.03, 1.0)       # vuoto ~0.03 (quasi invisibile), masse ~1
-  :5429  _f                         stato["elev"] = float(np.clip(stato["elev"] + dph, -1.45, 1.45))
-  :5453  _muovi                     stato["elev"] = float(np.clip(stato["elev"] + 3.0 * (ev.ydata - t[1]) / (2 * R), -1.45, 1.45))
-  :5494  _f                         def _f(_=None): stato["zoom"] = float(np.clip(stato["zoom"] * v, 0.3, 4))
-  :5597  _f                         stato["raggio_semina"] = float(np.clip(stato["raggio_semina"] + delta, 0.3, 6.0))
-  :5602  _f                         stato["num_masse"] = int(np.clip(stato["num_masse"] + delta, 1, 12))
-  :6567  _diag_completa             trans_diag = 0.5 * (1.0 + np.tanh(1.0 - u_diag))
-  :6782  _diag_completa             wpos = np.clip(pesi_m, 0.0, None)              # peso solo dai nodi coerenti (nucleo)
-  :6973  _diag_completa             spin=float(np.sum(net.phivel[idxA]*np.clip(pesA,0,None))/max(np.clip(pesA,0,None).sum(),1e-9)),
-  -> 67 occorrenze in 22 funzioni
+  FISICA  :2016  lambda_nodi                softplus = np.log1p(np.exp(np.clip(u - 1.0, -30, 30)))
+  FISICA  :2136  ritmo                      r = x / np.sqrt(1.0 + x**2) + 1.0e-6           # bottleneck liscio, satura a 1 per x->inf
+  FISICA  :2481  _passo_spinoriale          _tq = _tq * np.minimum(1.0, self.eta[:n] / TAU_A)[:, None]
+  FISICA  :2702  _pesi                      ramp = np.minimum(1.0, self.eta / TAU_A)
+  FISICA  :3069  _cs_nodo                   transizione = 0.5 * (1.0 + np.tanh(1.0 - u_nodo))
+  FISICA  :3124  _bloch_ritardato           dot = np.clip(np.sum(nbr * nb_cur, axis=1), -1.0, 1.0)
+  FISICA  :3315  step                       _mcoer = np.clip(np.cos(self.phi[:self.n] - np.angle(self.psi[:self.n] + 1e-12)), 0.0, 1.0)
+  FISICA  :3366  step                       coerenza = np.clip(coerenza, 0.0, 1.0)       # solo il nucleo costruttivo alimenta la repulsione
+  FISICA  :3496  step                       self.xi_termo = float(np.clip(self.xi_termo, -2.0, 2.0))   # guardia: attrito fisico limitato
+  FISICA  :3827  step                       self.d0 += np.clip(dt_e * cs_taup * d_arco * _lap_d0, -_cfl, _cfl)
+  FISICA  :3876  mitosi                     soglia = soglia0 * (1.0 - 0.3 * np.tanh(grad_tau))
+  FISICA  :3905  mitosi                     discesa = np.clip(1.0 - avv / TW_TETTO, 0.0, 1.0) # -> 0 quando tw -> 4pi (spegnimento)
+  FISICA  :3919  mitosi                     segno = -np.tanh(3.0 * (tau_pp - centro))
+  FISICA  :3924  mitosi                     prob = np.clip(resp, 0.0, 1.0)
+  FISICA  :3929  mitosi                     rep = np.clip(-resp, 0.0, 1.0)
+  FISICA  :4014  mitosi                     bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
+  FISICA  :4035  mitosi                     p_anti = np.where(s > 0, np.tanh(s), 0.0)          # prob antifase, 0 sotto equilibrio
+  FISICA  :4088  mitosi                     fattore_plastico = np.tanh(np.maximum(sciolta_ecc * stress_arco, 0.0))
+  FISICA  :4129  mitosi                     eccesso_torsione = np.maximum(0.0, sciolta - 1.0)
+  FISICA  :4144  mitosi                     anom = np.maximum(0.0, (rho_sel - peq_sel) / np.maximum(peq_sel, 1e-6))
+  DIAGN.  :4214  campo_spaziale             idx = tuple(np.clip(((P[:, k] + R) / h).astype(int), 0, G - 1) for k in range(3))
+  FISICA  :4273  rilassa_disegno            self.pos += EMB_ETA * np.clip(acc, -0.5, 0.5)
+  FISICA  :4379  memoria_hebbiana_moto      plast = np.tanh(np.linalg.norm(grad_tw, axis=1))[:, None]   # in [0,1), dallo stato
+  FISICA  :4389  memoria_hebbiana_moto      proj = np.clip(proj, -passo_max, passo_max)
+  FISICA  :4401  memoria_hebbiana_moto      ampiezza = np.tanh(np.abs(dpozzo) / scala_p)  # scala dal pozzo, in [0,1), dallo stato
+  FISICA  :4406  memoria_hebbiana_moto      grav = -np.tanh(s) * ampiezza                 # bifase: -s = verso (attrae/respinge), firmato
+  FISICA  :4427  memoria_hebbiana_moto      t_tan = np.tanh(np.hypot(np.abs(circ_arc), np.abs(twn_a)))
+  FISICA  :4429  memoria_hebbiana_moto      t_tan = np.tanh(np.abs(circ_arc))
+  FISICA  :4452  memoria_hebbiana_moto      spinta = np.clip(spinta, -passo_causale, passo_causale)
+  FISICA  :4456  memoria_hebbiana_moto      grav = np.clip(grav, -passo_causale, passo_causale)
+  FISICA  :4467  memoria_hebbiana_moto      flusso = np.clip(flusso, -passo_max, passo_max)
+  FISICA  :4489  memoria_hebbiana_moto      filtro_portata = 1.0 - np.tanh(rapporto_portata)
+  FISICA  :4494  memoria_hebbiana_moto      peso_dinamico_shear = np.tanh(delta_relativo_arco)
+  FISICA  :4508  memoria_hebbiana_moto      tasso_dinamico = np.tanh(stress_metrico) * self.d0[mask]
+  FISICA  :4510  memoria_hebbiana_moto      self.d0[mask] += np.clip(coesione_relazionale, -tasso_dinamico, tasso_dinamico)
+  FISICA  :4546  memoria_hebbiana_moto      shift_fase_dinamico = np.clip(shift_fase_dinamico, -np.pi * 0.25, np.pi * 0.25)
+  DIAGN.  :4564  diagnostica                coer_l=float(np.mean(np.clip(num / den, 0, 1))) if self.n else 0.0,
+  RENDER  :5052  _render_vista_rete_sola    dimensione_nodi = 18.0 + 38.0 * np.sqrt(np.clip(phi_g / phi_max, 0.0, 1.0))
+  RENDER  :5059  _render_vista_rete_sola    lc.set_array(np.clip(dpozzo / dphi_max, 0.0, 1.0)); ax.add_collection(lc)
+  RENDER  :5074  _render_vista_rete_sola    lc3.set_array(np.clip(dpozzo / dphi_max, 0.0, 1.0)); ax3d.add_collection3d(lc3)
+  RENDER  :5090  _render_vista_rete_sola    lc_yz.set_array(np.clip(dpozzo / dphi_max, 0.0, 1.0)); ax2.add_collection(lc_yz)
+  RENDER  :5162  _render_grafo_topologico   lc.set_array(np.clip(dp / dpmax, 0.0, 1.0)); ax.add_collection(lc)
+  RENDER  :5189  update                     dn = np.clip(dens / d_rif, 0.0, 1.0)
+  RENDER  :5254  update                     q = np.clip(campo.T / vm, -1, 1)
+  RENDER  :5259  update                     gamma_rend = float(np.clip(0.30 + 0.5 * contrasto, 0.30, 0.60))  # adattivo, dallo stato
+  RENDER  :5266  update                     q = np.clip(q, 0, 1)      # taglia il ciano (q<0 -> 0 = nero), tiene solo il fuoco
+  RENDER  :5291  update                     soglia_vuoto = float(np.clip(0.06 + 0.30 * contrasto, 0.06, 0.30))
+  RENDER  :5292  update                     alpha = np.clip((np.abs(q) - soglia_vuoto) / max(1.0 - soglia_vuoto, 1e-6), 0.0, 1.0)
+  RENDER  :5333  update                     Zdef = -prof_scala * np.sqrt(np.clip(phi_w / scala, 0, 1)) if pm > 0 else np.zeros_like(GXm)
+  RENDER  :5360  update                     tw_norm = np.clip(tw_render / max(PHI_CRIT, 1e-9), 0.0, 2.0)
+  RENDER  :5370  update                     alpha_nodo = np.clip(Ivis / Iref, 0.03, 1.0)       # vuoto ~0.03 (quasi invisibile), masse ~1
+  RENDER  :5429  _f                         stato["elev"] = float(np.clip(stato["elev"] + dph, -1.45, 1.45))
+  RENDER  :5453  _muovi                     stato["elev"] = float(np.clip(stato["elev"] + 3.0 * (ev.ydata - t[1]) / (2 * R), -1.45, 1.45))
+  RENDER  :5494  _f                         def _f(_=None): stato["zoom"] = float(np.clip(stato["zoom"] * v, 0.3, 4))
+  RENDER  :5597  _f                         stato["raggio_semina"] = float(np.clip(stato["raggio_semina"] + delta, 0.3, 6.0))
+  RENDER  :5602  _f                         stato["num_masse"] = int(np.clip(stato["num_masse"] + delta, 1, 12))
+  DIAGN.  :6567  _diag_completa             trans_diag = 0.5 * (1.0 + np.tanh(1.0 - u_diag))
+  DIAGN.  :6782  _diag_completa             wpos = np.clip(pesi_m, 0.0, None)              # peso solo dai nodi coerenti (nucleo)
+  DIAGN.  :6973  _diag_completa             spin=float(np.sum(net.phivel[idxA]*np.clip(pesA,0,None))/max(np.clip(pesA,0,None).sum(),1e-9)),
+  -> 59 saturazioni VERE (DIAGN. 5  FISICA 35  RENDER 19)  +  8 clip al DOMINIO di arccos/arcsin (esatti, non scale)
+     totale grezzo 67 in 22 funzioni
 
 ==============================================================================================================================
 SCHEMA D -- MEMORIE `self._*` SCRITTE IN UNA FUNZIONE E LETTE IN UN'ALTRA
@@ -208,7 +201,7 @@ SCHEMA D -- MEMORIE `self._*` SCRITTE IN UNA FUNZIONE E LETTE IN UN'ALTRA
   -> 10 memorie con scrittura e lettura in funzioni DIVERSE
 
 ==============================================================================================================================
-TOTALI:  A 91 guardie | B 9 default su maschera | C 67 saturazioni | D 10 memorie
+TOTALI:  A 91 guardie (FISICA 64) | B 9 default (FISICA 7) | C 59 saturazioni vere (FISICA 35) | D 10 memorie
 ==============================================================================================================================
 LO SCRIPT NON GIUDICA: ELENCA. Un'occorrenza in elenco non e' un difetto finche' non la
 si guarda -- ma una NON in elenco non si guardera' mai, ed e' quello il punto.
