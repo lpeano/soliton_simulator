@@ -1,0 +1,127 @@
+[TIMBRO] _fuga_vd.py  sha1-BYTE 2035429e  committato e pulito
+======================================================================================================================
+LA FUGA DI |vd| -- criteri FISSATI PRIMA in doc/TASK_HISTORY/2026-09-20_fuga-vd-ramoB.md
+======================================================================================================================
+  ramo A: 25 snapshot
+  ramo B: 3 snapshot
+
+--- par.2.1  RAMO A: LA SERIE NEL TEMPO ---
+  passo   n         |vd|.p50   |vd|.p99  |vd|.p999   |vd|.MAX     n3      r_k
+  120     2672        0.5394      1.334      1.796      3.354      1       --
+  240     2706         0.512       1.42      1.766      3.413      1     1.02
+  360     2751        0.3632      1.256       1.71       4.03      1     1.18
+  480     2791        0.2675      1.013      1.385      3.166      1     0.79
+  600     2856         0.213     0.7863      1.167      3.767      1     1.19
+  720     2985          0.17     0.7401      1.131      3.914      1     1.04
+  840     3162        0.1541     0.7035      1.015      3.085      1     0.79
+  960     3521        0.1403     0.6443      1.007      2.685      1     0.87
+  1080    3963        0.1265     0.6169     0.9895      3.091      1     1.15
+  1200    4598        0.1213      0.651      1.056       2.62      1     0.85
+  1320    5228        0.1296     0.7069      1.173       3.07      1     1.17
+  1440    5906        0.1438     0.7819      1.308      2.661      1     0.87
+  1560    6675          0.16     0.8763      1.505      3.699      1     1.39
+  1680    7323        0.1724      1.007      1.676      3.333      1     0.90
+  1800    7999        0.1867      1.129      1.913      4.729      1     1.42
+  1920    8704        0.1984      1.204      2.151      4.631      1     0.98
+  2040    9536        0.2115      1.264      2.381      6.097      1     1.32
+  2160    10355       0.2295       1.41      2.667      7.694      1     1.26
+  2280    11257       0.2498      1.575      2.972      7.769      1     1.01
+  2400    12221       0.2591      1.666      3.203      10.18      1     1.31
+  2520    13137       0.2672      1.755      3.403       11.4      1     1.12
+  2640    14274       0.2755       1.85      3.801      11.85      1     1.04
+  2760    15486       0.2782      1.951      4.241      14.22      1     1.20
+  2880    16730        0.286      2.063      4.872      16.92      1     1.19
+  3000    18000       0.2944      2.201      5.606      18.95      1     1.12
+  conteggi  #{|vd| > 1.0, 3.0, 10.0, 30.0, 100.0}:
+    passo 120     [34238, 3, 0, 0, 0]
+    passo 240     [51526, 4, 0, 0, 0]
+    passo 360     [19841, 15, 0, 0, 0]
+    passo 480     [5868, 1, 0, 0, 0]
+    passo 600     [1265, 7, 0, 0, 0]
+    passo 720     [991, 6, 0, 0, 0]
+    passo 840     [563, 1, 0, 0, 0]
+    passo 960     [551, 0, 0, 0, 0]
+    passo 1080    [515, 1, 0, 0, 0]
+    passo 1200    [724, 0, 0, 0, 0]
+    passo 1320    [1167, 1, 0, 0, 0]
+    passo 1440    [1969, 0, 0, 0, 0]
+    passo 1560    [3273, 2, 0, 0, 0]
+    passo 1680    [5477, 8, 0, 0, 0]
+    passo 1800    [8166, 47, 0, 0, 0]
+    passo 1920    [10129, 85, 0, 0, 0]
+    passo 2040    [12319, 193, 0, 0, 0]
+    passo 2160    [18055, 347, 0, 0, 0]
+    passo 2280    [24966, 525, 0, 0, 0]
+    passo 2400    [29534, 661, 1, 0, 0]
+    passo 2520    [34035, 784, 7, 0, 0]
+    passo 2640    [37802, 1043, 21, 0, 0]
+    passo 2760    [41103, 1343, 43, 0, 0]
+    passo 2880    [44705, 1798, 57, 0, 0]
+    passo 3000    [48280, 2401, 82, 0, 0]
+
+--- par.2.1  RAMO B: LA SERIE NEL TEMPO ---
+  passo   n         |vd|.p50   |vd|.p99  |vd|.p999   |vd|.MAX     n3      r_k
+  120     2998        0.1921      1.176       1.54      2.923      1       --
+  240     3130        0.1712     0.8226       1.88      79.15      9    27.08
+  360     3229        0.1011     0.4926      1.072      531.6     52     6.72
+  conteggi  #{|vd| > 1.0, 3.0, 10.0, 30.0, 100.0}:
+    passo 120     [17279, 0, 0, 0, 0]
+    passo 240     [2897, 93, 52, 27, 0]
+    passo 360     [586, 347, 231, 135, 61]
+
+--- par.2.2  RAMO A: gli archi veloci sono GLI STESSI? (primi 100 per |vd|) ---
+  (verificato: `n` non cala mai -> l'identita' per coppia di nodi e' valida)
+  NULLO: due insiemi indipendenti di 100 archi su 546792 -> sovrapposizione attesa 1.83e-04
+  passo 120    -> 240      comuni  24/100   Jaccard 0.136   (nullo 1.83e-04)
+  passo 240    -> 360      comuni   9/100   Jaccard 0.047   (nullo 1.83e-04)
+  passo 360    -> 480      comuni  25/100   Jaccard 0.143   (nullo 1.83e-04)
+  passo 480    -> 600      comuni  13/100   Jaccard 0.070   (nullo 1.83e-04)
+  passo 600    -> 720      comuni  21/100   Jaccard 0.117   (nullo 1.83e-04)
+  passo 720    -> 840      comuni  28/100   Jaccard 0.163   (nullo 1.83e-04)
+  passo 840    -> 960      comuni  17/100   Jaccard 0.093   (nullo 1.83e-04)
+  passo 960    -> 1080     comuni  14/100   Jaccard 0.075   (nullo 1.83e-04)
+  passo 1080   -> 1200     comuni  18/100   Jaccard 0.099   (nullo 1.83e-04)
+  passo 1200   -> 1320     comuni  13/100   Jaccard 0.070   (nullo 1.83e-04)
+  passo 1320   -> 1440     comuni  11/100   Jaccard 0.058   (nullo 1.83e-04)
+  passo 1440   -> 1560     comuni   9/100   Jaccard 0.047   (nullo 1.83e-04)
+  passo 1560   -> 1680     comuni  18/100   Jaccard 0.099   (nullo 1.83e-04)
+  passo 1680   -> 1800     comuni  11/100   Jaccard 0.058   (nullo 1.83e-04)
+  passo 1800   -> 1920     comuni  20/100   Jaccard 0.111   (nullo 1.83e-04)
+  passo 1920   -> 2040     comuni  32/100   Jaccard 0.190   (nullo 1.83e-04)
+  passo 2040   -> 2160     comuni  39/100   Jaccard 0.242   (nullo 1.83e-04)
+  passo 2160   -> 2280     comuni  55/100   Jaccard 0.379   (nullo 1.83e-04)
+  passo 2280   -> 2400     comuni  68/100   Jaccard 0.515   (nullo 1.83e-04)
+  passo 2400   -> 2520     comuni  78/100   Jaccard 0.639   (nullo 1.83e-04)
+  passo 2520   -> 2640     comuni  86/100   Jaccard 0.754   (nullo 1.83e-04)
+  passo 2640   -> 2760     comuni  87/100   Jaccard 0.770   (nullo 1.83e-04)
+  passo 2760   -> 2880     comuni  85/100   Jaccard 0.739   (nullo 1.83e-04)
+  passo 2880   -> 3000     comuni  84/100   Jaccard 0.724   (nullo 1.83e-04)
+
+--- par.2.2  RAMO B: gli archi veloci sono GLI STESSI? (primi 100 per |vd|) ---
+  (verificato: `n` non cala mai -> l'identita' per coppia di nodi e' valida)
+  NULLO: due insiemi indipendenti di 100 archi su 528158 -> sovrapposizione attesa 1.89e-04
+  passo 120    -> 240      comuni   9/100   Jaccard 0.047   (nullo 1.89e-04)
+  passo 240    -> 360      comuni   8/100   Jaccard 0.042   (nullo 1.89e-04)
+
+--- par.2.3  RAMO A: DOVE STANNO i 100 archi piu' veloci (passo 3000) ---
+  |vd|      p50 11.67      max 18.95     
+  d         p50 11.78        contro la mediana di TUTTI gli archi 2.786     
+  d0        p50 16.49        contro TUTTI 1.222     
+  d/d0      p50 0.7357      min 0.3767      max 73.56        (<1 = COMPRESSO)
+  nodi coinvolti: 108 distinti su 100 archi  (1.08 nodi per arco = REGIONE LOCALIZZATA)
+  perc_chi dei nodi: +1 1   -1 107   0 0   |  nel sistema: +1 6240  -1 11760
+  eta dei nodi:     p50 16.04        contro TUTTI 7.682        (bassa = NEONATI)
+
+--- par.2.3  RAMO B: DOVE STANNO i 100 archi piu' veloci (passo 360) ---
+  |vd|      p50 114.1      max 531.6     
+  d         p50 30.12        contro la mediana di TUTTI gli archi 1.024     
+  d0        p50 0.855        contro TUTTI 0.899     
+  d/d0      p50 38.52       min 7.235       max 388.3        (<1 = COMPRESSO)
+  nodi coinvolti: 61 distinti su 100 archi  (0.61 nodi per arco = REGIONE LOCALIZZATA)
+  perc_chi dei nodi: +1 22   -1 39   0 0   |  nel sistema: +1 1633  -1 1596
+  eta dei nodi:     p50 2.966        contro TUTTI 2.803        (bassa = NEONATI)
+
+======================================================================================================================
+UN SEME PER RAMO. Nessuna differenza fra i bracci e' dichiarata significativa:
+  il nullo di un confronto fra bracci NON e' zero, e' la dispersione FRA SEMI (par.9),
+  che questo esperimento non misura. E NON e' un verdetto: e' una misura.
