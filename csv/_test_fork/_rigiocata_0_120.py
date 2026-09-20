@@ -161,7 +161,7 @@ def main():
              r["pd50"], r["pv50"], r["pd0"], r["n3"], r["pdmax"]))
     t0 = time.time()
     passo = 0
-    for fr in range(NPASSI // int(S.PASSI_PER_FRAME)):
+    for _frame in range(NPASSI // int(S.PASSI_PER_FRAME)):
         S.passo_test()
         for _ in range(int(S.PASSI_PER_FRAME)):
             S.scuoti_vuoto(net); net.step(); net.mitosi()
@@ -174,6 +174,18 @@ def main():
                       % (passo, r["n"], r["ad"], r["ad0"], r["arap"], r["avd"],
                          r["pd50"], r["pv50"], r["pd0"], r["n3"], r["pdmax"]), flush=True)
         S.stato["nframe"] += 1
+        # [CORREZIONE dopo il FALLIMENTO del sigillo, 2026-09-20] IL DRIVER CHIAMA `diagnostica()`
+        # PER LA SUA RIGA DI PROGRESSO (`_scena_video.py:277`, `if fr % 5 == 0 or fr == 1`), e
+        # `diagnostica()` chiama `self._pesi()`, che incrementa `_g_kernel_alpha_tot` (`:2834`).
+        # Saltandola, la mia rigiocata era PIU' PURA del driver -- e il sigillo l'ha PRESO:
+        # 136 campi su 137 identici, e l'unico diverso era proprio quel contatore.
+        # ⚠ NON HO ALLARGATO IL CRITERIO DOPO AVER VISTO IL RISULTATO: ho corretto il ciclo.
+        # E `_db_step` lo scrive il driver quando salva la serie (`fr % SERIE == 0`).
+        _fr = _frame + 1
+        if _fr % 5 == 0 or _fr == 1:
+            net.diagnostica()
+        if _fr % 20 == 0:
+            net._db_step = _fr * int(S.PASSI_PER_FRAME)
     print("  [%d passi in %.1f s = %.2f s/passo]" % (passo, time.time() - t0,
                                                      (time.time() - t0) / max(passo, 1)))
 
@@ -208,7 +220,13 @@ def main():
             mio[kk] = vv
     com = sorted(set(rif) & set(mio))
     diff = [kk for kk in com if not uguale_contenuto(rif[kk], mio[kk])]
+    # ⚠ L'INTERSEZIONE NASCONDE LE ASSENZE: un campo che sta solo da una parte non viene
+    # confrontato e non comparirebbe fra i "diversi". Si stampa, se no lo zero mente.
+    solo_rif = sorted(set(rif) - set(mio))
+    solo_mio = sorted(set(mio) - set(rif))
     print("  campi confrontati: %d   DIVERSI: %d" % (len(com), len(diff)))
+    print("  solo nel RIFERIMENTO: %d %s   |   solo nella RIGIOCATA: %d %s"
+          % (len(solo_rif), solo_rif[:5], len(solo_mio), solo_mio[:5]))
     if diff:
         print("  *** FALLITO. Primi diversi: %s ***" % diff[:8])
         print("  *** LA RIGIOCATA NON RIPRODUCE IL RAMO B: i numeri qui sopra NON VALGONO. ***")
