@@ -7995,3 +7995,90 @@ quando una famiglia è numerosa. **Servono due decisioni prima di procedere:**
 2. **se `①` vada curata come «autonormalizzazione da sostituire»** *(e allora la scala va
    **derivata**, e `median(|dpozzo|)` **non** è derivazione ma `A3`)* **oppure dichiarata e
    lasciata**, come è stato fatto per altri punti fissi già trovati.
+
+---
+
+## 2026-09-20 — **`scala_p`: il punto fisso è MISURATO ed è ESATTO. E la via della cura REGGE**
+
+**Blob `0a488348`** (sha1 dei byte grezzi; git `775ceab7`) · seme 42 · **13 istanti** dei 45
+snapshot di `_g6000` (`sep = 8`) **più** lo snapshot del pilota a `sep = 4.0` · strumento
+`csv/_test_fork/_misure_scala_p.py`, esito `_misure_scala_p.txt` · letture fissate **prima** in
+`doc/TASK_HISTORY/2026-09-20_scala-p-punto-fisso.md` (`f90fc1b`).
+**NESSUN RUN. Nessuna cura applicata. Il simulatore non è stato toccato.**
+
+### M3 — **il punto fisso c'è, ed è ESATTO**
+
+```
+median(ampiezza) = 0.761594 = tanh(1)   su 14 istanti su 14
+scarto massimo |median(ampiezza) - tanh(1)| = 2.343e-11
+```
+
+> **Non era una deduzione: adesso è una misura.** *(E `M3` esisteva proprio come controllo su me
+> stesso, dopo che stamattina un'algebra letta e non misurata mi aveva ingannato.)*
+
+### M1 — **perché il punto fisso è così saldo: la scala insegue la grandezza**
+
+```
+passo      |dpozzo| p50        scala_p
+60           0.01095           0.0109542
+540          0.8732            0.873171
+1500       198.4             198.366
+2700      1499              1498.84
+```
+
+**`|dpozzo|` mediano cresce di un fattore `137 000` in 2700 passi, e `scala_p` lo segue cifra per
+cifra** — perché **è** quella mediana. **Il metro si dilata esattamente quanto la cosa misurata:
+per questo il nodo mediano resta inchiodato a `tanh(1)`, sempre.**
+
+### M4 — **la firma che il punto fisso morde**
+
+```
+sin2 p50   0.0266 -> 0.255 -> 0.223        sin2 p95 = 1 (SATURO) per quasi tutto l'archivio
+```
+
+### M2 — **la misura che poteva far cadere la cura: `phi_g` NON si annulla**
+
+```
+phi_arc (per ARCO), snapshot del pilota:   min 5.004e-05
+   <= 0 : 0      <= 1e-12 : 0      <= 1e-9 : 0      <= 1e-6 : 0   (0.0000 %)
+phi_g  (per NODO):                          min 1.275e-07
+   <= 0 : 0      <= 1e-12 : 0      <= 1e-9 : 0      <= 1e-6 : 1   (0.0372 %)
+```
+
+**⚠ E UNA CORREZIONE ALLA MIA PRIMA LETTURA, perché il blocco `M2` guarda un solo istante:** sugli
+altri istanti dell'archivio **`min(phi_arc)` scende fino a `1.5e-11`** (passo 1500) e `2.4e-11`
+(passo 1260). **Non è zero, ma è undici ordini sotto la mediana.**
+
+**Eppure la divisione è SICURA, e non per un pavimento: per costruzione.**
+
+```
+phi_g >= 0 per definizione (somma di I[k]/L con I = |psi|^2 >= 0)
+=>  |dpozzo| = |phi_g[j] - phi_g[i]|  <=  phi_g[i] + phi_g[j]  =  2 * phi_arc
+=>  |dpozzo| / phi_arc  <=  2   SEMPRE
+```
+
+**Misurato: `max = 2` esatto, `p99 = 1.898`, zero valori non finiti su 527 452 archi.**
+> **Il numeratore si annulla almeno tanto in fretta quanto il denominatore.** **Non serve un
+> pavimento, quindi `A1` non viene violato, e la via REGGE.**
+> **Resta un solo caso da definire, ed è una DEFINIZIONE e non una scala:** `phi_arc = 0` esatto
+> implica `dpozzo = 0` esatto, cioè `0/0`. **Va scritto `0` e dichiarato**, non lasciato a un
+> `np.maximum` di comodo.
+
+### ⚠ `Y3` in anticipo — **il nuovo rapporto SI MUOVE**
+
+```
+median(tanh(|dpozzo| / phi_arc)) ai 14 istanti:
+0.1353  0.1013  0.0916  0.0736  0.0947  0.1533  0.2166  0.2940  0.3336  0.3917  0.4329  0.4398  0.4398  0.1231
+min 0.0736   max 0.4398   escursione 0.3662        (il VECCHIO e' 0.761594, FISSO)
+```
+
+> **Non è un punto fisso spostato: è un punto fisso SCIOLTO.** **E la traiettoria è monotona
+> crescente sull'archivio** *(0.09 → 0.44 fra il passo 780 e il 2700)*, **cioè la grandezza che
+> oggi non può muoversi, con la cura, si muoverebbe — e nella direzione del maturare del sistema.**
+> **È il sigillo `Y3` misurato PRIMA di scrivere la cura**, e non sostituisce `Y3`: lo rende
+> prevedibile.
+
+### Cosa NON è misurato
+
+`L` *(il momento angolare netto)* e l'effetto su `beta` di `ZETA_VIR`: **sono `Y5` e `Y6`, e
+richiedono la cura applicata.** **E un seme, una scena.**
