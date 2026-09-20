@@ -95,6 +95,9 @@ quindi dopo un riavvio lo stato si legge **dal disco**, non dalla memoria.
 
 ### ⚠ DA FARE A RUN FINITO — **la patch della ripresa, e la verifica che la precede**
 
+> **✅ ASSORBITA il 2026-09-20 nella sezione «IL SOSPESO — LA LISTA UNICA» (voce `C`), e CHIUSA:**
+> la ripresa **è** sul driver vero. Il testo resta per la cronaca, non come cosa da fare.
+
 > **A RUN FINITO: portare la patch della ripresa sul driver vero** (`csv/_test_fork/_scena_video.py`,
 > da **`f14ea4bd`** a **`7a02c5c3`**, la versione **sigillata 5/5** in
 > `csv/_seal_fork/_sigillo_ripresa_scena.txt`). **NON prima che il run sia chiuso.**
@@ -159,6 +162,10 @@ delle 44 transizioni → **gli indici dei nodi sono stabili**, e ogni misura di 
 poggiava su quello senza averlo verificato.
 
 ### Cosa resta da fare quando il run è definitivamente chiuso
+
+> **✅ ASSORBITA il 2026-09-20 in «IL SOSPESO — LA LISTA UNICA»:** il punto 1 è **CHIUSO**
+> (voce `C`), il punto 2 puntava al **bersaglio sbagliato** (voce `B10`), il punto 3 è la voce
+> `B9`. Il testo resta per la cronaca.
 
 1. **riapplicare la patch di ripresa** a `csv/_test_fork/_scena_video.py` (`f14ea4bd` → `7a02c5c3`),
    **dopo** aver verificato dal codice che gli snapshot dell'archivio restano caricabili col blob
@@ -236,6 +243,9 @@ appese DOPO `chi_basc` nel ciclo, quindi sopravvivono ESATTAMENTE ZERO passi com
 
 ### La voce TODO del ② — il pannello fedele
 
+> **✅ ASSORBITA il 2026-09-20 in «IL SOSPESO — LA LISTA UNICA», voce `A5`.**
+> Il testo resta: contiene i VINCOLI, che la lista non ripete.
+
 **Il problema, misurato:** `campo_spaziale` somma su **tutti i nodi** con la FFT; `calcola_psi`
 solo **sugli archi**. Nel run a `sep = 8` il pannello mostrava interferenza **fra masse in quattro
 componenti con zero archi fra loro**.
@@ -245,6 +255,133 @@ restano** — `campo_spaziale` dà **continuità**, l'interpolazione dà **fedel
 **Vincoli:** non si tocca `campo_spaziale` né la FFT · **il blob del simulatore NON cambia: è
 rendering** · **l'interpolazione LEGGE `psi`, non lo RICALCOLA** *(precedente `lambda_vuoto`)* · i
 buchi si **dichiarano** · uno smoothing, se serve, ha la scala **derivata** · **si misura il costo.**
+
+---
+
+# IL SOSPESO — **LA LISTA UNICA** (censita il 2026-09-20, verificata DAL DISCO)
+
+> **Questa è LA lista.** Le tre liste parziali che esistevano prima — *«DA FARE A RUN FINITO»*,
+> *«Cosa resta da fare quando il run è definitivamente chiuso»*, *«La voce TODO del ② — il pannello
+> fedele»* — **sono ASSORBITE qui** e portano un rimando. **Non se ne apre una quarta.**
+
+**⚠ COME È STATA FATTA, perché cambia quanto ci si può fidare:** l'elenco di partenza veniva dalla
+conversazione. **Ogni voce è stata verificata dal disco**, e la verifica ha prodotto **tre
+correzioni all'elenco di partenza e due miei errori** *(§ «Cosa la verifica ha cambiato»)*.
+
+### La legenda della validità — **il presidio contro le tre ritrattazioni di oggi**
+
+```
+VALE SEMPRE            un difetto di codice, una legge, un fatto letto dal sorgente
+VALE PER QUELLA SCENA  un numero misurato su sep = 8 / quattro componenti / una finestra
+DA RIVERIFICARE        la premessa sotto è cambiata (scena nuova, blob nuovo, cura applicata)
+```
+**Il discriminante è una domanda sola:** *«se rigirassi questo su un'altra scena, il numero
+cambierebbe?»* Se sì → `VALE PER QUELLA SCENA`. Se la domanda non ha senso perché non c'è un numero
+(è una lettura del codice) → `VALE SEMPRE`.
+
+---
+
+## A — LASCIATE A METÀ OGGI (2026-09-20)
+
+| # | la voce | dove sta | a che punto è | cosa manca | chi decide | validità |
+|---|---|---|---|---|---|---|
+| **A1** | **la catena a TRE VIE di `step`** — `if CHI_CORE… / elif VERSO_CHI… / elif not(…)` | **`:3623` · `:3626` · `:3632`** *(⚠ era citata `:3517`-`:3526`: **slittata di 106 righe**, ritrovata per CONTENUTO)*; `doc/REFERTO_classifica_18_guardie.md` righe 25-27, 90-91 | **né applicata né scartata.** Verificato: **nessun contatore** sulla catena, mentre la gemella `:2366` ne ha quattro | **la FORMA**: tre contatori `_salti` (uno per ramo) **oppure** uno con tre conteggi «quale ramo». Io avevo già dichiarato di preferire **nessuno dei due** *(un contatore per ramo su una scelta a tre vie non misura un fallimento, misura una selezione)* — e l'avevo dichiarata come **mia deviazione dal mandato** | **LUCA** | `VALE SEMPRE` |
+| **A2** | **l'anello `A6` di `Z70`** — periodo 2, via `chiralita_core_locale`/`CHI_CORE` | `doc/RAMIFICAZIONI.md` `Z70` | **registrato, NON curato.** `A6` nella sua *lettera* non è violato (ogni gamba legge lo snapshot d'inizio passo), ma `perc_chi` è **schiava** di `tw` | la cura è **un giro a sé** e non è stata fatta | **LUCA** *(è una cura, non una misura)* | `VALE SEMPRE` |
+| **A3** | **`Z71` — la carica chirale non si conserva** | `doc/RAMIFICAZIONI.md` `Z71` | **APERTA.** I due punti di scrittura sono verificati dal codice: **`:4294`** eredita UGUALE *(rompe)*, **`:4415`** antinodo OPPOSTO *(conserva)* | **una decisione di FISICA**: *la carica chirale deve conservarsi?* Se sì `:4294` è un difetto; se no, è il meccanismo. **Non si cura senza quella decisione** | **LUCA** | `VALE SEMPRE` |
+| **A4** | **le METRICHE DEL SETTORE CHIRALE** | **`doc/TASK_HISTORY/2026-09-20_metriche-settore-chirale.md`** *(⚠ il documento **ESISTE**: vedi i miei errori, §E)* | **punto 1 del TODO fatto** *(il §1 verificato dal codice)*; **punti 2-5 aperti** | il pannello fedele **viene prima** *(è `A5`)*, poi le metriche byte-inerti, il sigillo, la voce nel registro | **io** | **`DA RIVERIFICARE`** — la metrica ④ era *«flip di `chi_basc`»* e **non è misurabile così**; ma **nel ramo B del run in corso `chi_basc` è SPENTO, quindi `perc_chi` È una carica** e la metrica torna misurabile nella forma «confronto di `perc_chi` prima/dopo» |
+| **A5** | **il PANNELLO FEDELE** *(interpolazione di `psi` accanto a `campo_spaziale`)* | la **ex-LISTA 3** di questo file | **non iniziato** | un pannello **in più**, che **legge** `psi` e non lo ricalcola; i buchi dichiarati; il costo misurato. Il blob del simulatore **non cambia: è rendering** | **io** | `VALE SEMPRE` |
+
+---
+
+## B — APERTE DA PRIMA
+
+| # | la voce | dove sta | a che punto è | cosa manca | chi decide | validità |
+|---|---|---|---|---|---|---|
+| **B1** | **`Z47` — `pos` nella fisica: l'ultimo SFONDO** | `doc/RAMIFICAZIONI.md` `Z47`, `doc/ASSIOMI.md` | **NON INIZIATO**, e il registro lo qualifica già *«progetto di lungo periodo»* | **il costo DECIDE**: non è una modifica, è la **riscrittura di QUATTRO settori** | **LUCA** | `VALE SEMPRE` |
+| **B2** | **`Z31` — i sigilli non ri-girabili** | `Z31`, citata in **17 file** | **rifatta TRE volte**, l'ultima ieri | il recupero sistematico → **è il §2.2 del mandato di oggi**, in corso | **io** | `VALE SEMPRE` |
+| **B3** | **i rami di `memoria_hebbiana_moto`** | `soliton_simulator.py:4616-4918` | **mai guardati** | ⚠ **sono `25`, non `23`** *(contati dal codice: `if`/`elif`/`else`/`try`/`except` nel corpo della funzione, 303 righe)*. Quanti siano su un **percorso fisico** non è misurato | **io** | `VALE SEMPRE` |
+| **B4** | **i `np.zeros`** | tutto il simulatore | **mai guardati** | ⚠ **sono `116`, non `~10`**. Il numero utile non è questo: serve **restringere al percorso fisico**, e quel conto **non esiste ancora** | **io** | `VALE SEMPRE` |
+| **B5** | **`theta` / l'aliasing del settore di spin** | `CLAUDE.md` §9, registro `C14`, fronte `A` | **aperto e noto**: `theta` ~ 39-129 giri/passo | `C14` chiude solo con `theta` sotto il tetto `2π·cs/λ`. **È il collo di bottiglia del programma** | **LUCA** *(è la voce `A`)* | `VALE SEMPRE` |
+| **B6** | **le due cure OFF: `COPPIA_RECIPROCA` e `GRAV_AMPIEZZA`** | `:739` e `:732` *(entrambe `= False`)*, `doc/REFERTO_somme.md`, due task history del 19/9 | **A/B NEGATIVI** — ma fatti su **QUATTRO COMPONENTI SCOLLEGATE** | **rifare gli A/B sulla scena connessa `sep = 4.0`** | **io** | **`DA RIVERIFICARE`** |
+| **B7** | **i reperti DA RIMISURARE sulla scena nuova** | `Z43`, `Z46`, `Z48`-`Z52`, `coer_g` | **misurati su `sep = 8`** | rimisura sulla scena connessa. **Marcatura già presente su 4 su 7**: `Z48`/`Z50`/`Z51` portano «QUALIFICATA», `Z49` dice «scena VIDEO»; **`Z46` non porta NESSUNA marcatura** | **io** | **`VALE PER QUELLA SCENA`** |
+| **B8** | **⚠ IL BLOCCO DEL RUN A 6000 AL PASSO 2700** | **`doc/REFERTO_blocco_run6000.md`** *(131 righe)*, `csv/_test_fork/_dump_2700.txt` | ⚠ **NON «mai diagnosticato»: PARZIALMENTE diagnosticato.** **Sei** ipotesi **escluse misurandole** *(memoria, disco, CFL, `MAX_NODI`, `NaN`, contatori)*; la degenerazione documentata *(`d0` max `43 → 395`, `1227` archi sopra `10×p50`)*; lo **stato al 2700 CATTURATO** (45 snapshot + dump di 113 chiavi). **Ciò che NON fu catturato è lo STACK** | **la causa resta ③ «non lo so»**, dichiarata come tale nel referto | **io** | `VALE PER QUELLA SCENA` *(i numeri)* + `VALE SEMPRE` *(le esclusioni)* |
+| **B9** | **`Z63` / `Z64`** — i 1455 nodi a `10⁻¹³`; la catena `f → x → r` che non riproduce `r` | registro, **ex-LISTA 2 punto 3** | aperti | vedi le rispettive voci | **io** | `VALE PER QUELLA SCENA` |
+| **B10** | **⚠ `--override-blob` e la COPIA del driver** | `csv/_test_fork/_scena_video_ripresa.py` *(`e68bb8c5`, 17466 byte)* e `csv/_seal_fork/_ab_reciprocita.py` | ⚠ **DUE fatti nuovi.** ① **`--override-blob` NON è nel driver vero** *(`0` occorrenze in `_scena_video.py`)*: la ex-LISTA 2 punto 2 **puntava al bersaglio sbagliato**. ② **la COPIA `_scena_video_ripresa.py` ESISTE ANCORA ed è tracciata da git**, mentre il docstring del driver vero dice *«la copia è stata rimossa»* | **un docstring STALE** *(la classe di difetto che `CLAUDE.md` §0 chiama per nome)*, e **un secondo driver nel repo che porta un presidio deliberatamente indebolito** | **io** *(il docstring)* · **LUCA** *(se la copia va tolta)* | `VALE SEMPRE` |
+
+---
+
+## C — CHIUSE DALLA VERIFICA DI OGGI *(tolte dalla lista, e si dice perché)*
+
+| la voce | era | ora | la prova |
+|---|---|---|---|
+| **ex-LISTA 1** e **ex-LISTA 2 punto 1** — *«riapplicare la patch della ripresa al driver vero»* | **DA FARE A RUN FINITO** | **✅ CHIUSA** | la ripresa **è** nel driver vero *(`10` occorrenze di `--riprendi`/`RIPRENDI` in `_scena_video.py`)*, e il driver attuale `9aee4fc2` la contiene |
+| **ex-LISTA 2 punto 2** — *«togliere `--override-blob` dal driver»* | DA FARE | **✅ CHIUSA PER IL DRIVER VERO** *(0 occorrenze)* — **ma resta aperta altrove: → `B10`** | `grep` sul disco |
+
+---
+
+## D — IL CONTO
+
+```
+voci sospese CENSITE          15      (5 lasciate a meta' oggi + 10 aperte da prima)
+  di cui DECIDE LUCA           5      A1, A2, A3, B1, B5   (+ meta' di B10)
+  di cui decido io            10
+voci CHIUSE dalla verifica     2      le due ex-liste sulla patch della ripresa
+```
+
+**E il registro, misurato nello stesso giro** *(`doc/RAMIFICAZIONI.md`)*:
+```
+righe-voce                   138
+  con un segnale ESPLICITO di apertura      24
+  con un segnale ESPLICITO di chiusura      22
+  con ENTRAMBI (ambigue)                    19
+  MUTE (nessuno dei due)                    73      <- il 53 %
+```
+> **⚠ Le `73` mute non sono «73 voci aperte»: sono voci il cui stato NON SI LEGGE senza leggerle
+> tutte.** È la misura, non il verdetto — e dice che **il registro non è interrogabile
+> meccanicamente**.
+
+---
+
+## E — COSA LA VERIFICA HA CAMBIATO, **inclusi due errori miei**
+
+**Tre correzioni all'elenco di partenza:**
+1. **il blocco al 2700 NON è «mai diagnosticato»** — c'è un referto di 131 righe con sei ipotesi
+   escluse **per misura**. Quello che manca è **lo stack**, non la diagnosi *(→ `B8`)*;
+2. **i rami di `memoria_hebbiana_moto` sono `25`, non `23`**, e i `np.zeros` sono **`116`, non
+   `~10`** — contati dal codice *(→ `B3`, `B4`)*;
+3. **`--override-blob` non è nel driver vero**: il punto della ex-lista puntava al bersaglio
+   sbagliato, e il bersaglio giusto è una **copia del driver che doveva essere stata rimossa**
+   *(→ `B10`)*.
+
+**Due errori MIEI, dichiarati:**
+- ho riportato *«metriche chirali: 0 file»* e *«23 rami: 0 file»*. **Falso in entrambi i casi:** il
+  mio `grep` usava `-e "a|b"` **senza `-E`**, quindi l'alternanza era cercata come testo letterale.
+  **`doc/TASK_HISTORY/2026-09-20_metriche-settore-chirale.md` ESISTE** *(→ `A4`)*;
+- le righe `:3517`-`:3526` che avevo citato **erano slittate di 106 righe** — è il §0 di
+  `CLAUDE.md` *(«cerca per NOME, non per riga»)* applicato contro me stesso *(→ `A1`)*.
+
+---
+
+## F — UN PRESIDIO CHE ORA ESISTE DAVVERO: `py-spy`
+
+`doc/REFERTO_blocco_run6000.md` §5 diceva: *«quello che servirebbe è banale e non ce l'ho:
+`py-spy dump` legge lo stack di un processo vivo dall'esterno, senza toccarlo. Non è installato.»*
+
+> **Installato oggi (`0.4.2`) ed ESERCITATO su un run VIVO**, non su un test:
+> ```
+> py-spy dump --pid 9264      (ramo A, mentre gira)
+>   chiralita_core_locale (soliton_simulator.py:1556)
+>   step (soliton_simulator.py:3624)
+>   <module> (_scena_video.py:231)
+> ```
+> **`A9`: un presidio provato quando NON serve è un presidio; uno scritto e mai esercitato è una
+> nota.** La volta scorsa il processo fu ucciso senza catturare lo stack, **e non si saprà mai**.
+
+**PID dei due run in corso: ramo A `9264`, ramo B `30996`.**
+**Se uno si pianta — soglia: più di ~1500 s senza uno snapshot nuovo — `py-spy dump` PRIMA di
+qualunque altra cosa, e NON si uccide.**
+
+---
 
 ## APERTO ab_sep4_A_e_B
 
