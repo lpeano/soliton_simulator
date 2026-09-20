@@ -55,6 +55,9 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", "3", "--sep
             "--fork-su2-mem", "--cs-dinamico", "--tau-luce", "--rumore-colorato",
             "--pav-com", "--guscio-morbido", "--zeta-vir", "--chi-basc", "--plast-din",
             "--viriale", "--olon-part"]
+# come fa il driver: la radice in sys.path e cwd sulla radice, cosi' `_versione_codice()` trova git
+sys.path.insert(0, RADICE)
+os.chdir(RADICE)
 import soliton_simulator as S
 
 _a = S._cli()
