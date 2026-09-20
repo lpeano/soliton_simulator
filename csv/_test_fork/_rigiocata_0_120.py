@@ -185,6 +185,12 @@ def main():
             S.scuoti_vuoto(net); net.step(); net.mitosi()
             net.rilassa_disegno(); net.memoria_hebbiana_moto()
             passo += 1
+            # ⚠ `_passo_corrente` NON viene impostato da nessuno nel percorso batch: `_traccia_d0`
+            # lo legge con `getattr(..., -1)` e restava SEMPRE `-1`. Il riassunto aggregato non ne
+            # risentiva, ma il DETTAGLIO per-arco filtrava su `passo % 10` e `-1 % 10 == 9` in
+            # Python: TUTTE le righe venivano saltate, e la tabella usciva VUOTA senza un errore.
+            # Lo imposta la rigiocata, che il passo lo sa.
+            net._passo_corrente = passo
             r = misura(passo)
             serie.append(r)
             if passo % 5 == 0 or passo <= 3:
@@ -281,13 +287,18 @@ def main():
         print("")
         print("  L'ARCO 16-481, sito per sito. `prima -> dopo` (e `d` accanto):")
         print("  %-6s %-22s %12s %12s %12s" % ("passo", "sito", "d0 prima", "d0 dopo", "d"))
+        _righe_arco = 0
         for v in log:
             t = v.get("16-481")
             if not t or v["passo"] % 10:
                 continue
             if t[0] == t[1]:
                 continue
+            _righe_arco += 1
             print("  %-6d %-22s %12.6f %12.6f %12.6f" % (v["passo"], v["sito"], t[0], t[1], t[2]))
+        if not _righe_arco:
+            raise SystemExit("*** la tabella per-arco e' VUOTA: o il passo non e' registrato, o "
+                             "l'arco non e' stato trovato. Non pubblico una tabella vuota. ***")
 
     # ---- IL SIGILLO INTERNO [BLOCCANTE]  (= `Z3` del mandato quando TRACCIA e' acceso)
     print("")
