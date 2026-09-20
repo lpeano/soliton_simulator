@@ -255,6 +255,27 @@ perde, il CSV resta.
   committato, **la copia `._sim.py` va committata insieme ai dati**, non cancellata «tanto poi lo
   committo». Il file committato **dopo** ha lo stesso contenuto ma **non lo dimostra**.
 
+### ⚠ DUE CONVENZIONI DI HASH, E NON SONO LO STESSO NUMERO (2026-09-20)
+
+**`csv/_presidio.py` stampa `hashlib.sha1(byte_grezzi)` — SENZA l'intestazione git.**
+**`git hash-object` calcola `sha1("blob <len> " + contenuto)`.**
+**Sono DUE NUMERI DIVERSI PER LO STESSO FILE**, ed entrambi compaiono nei documenti di questo repo.
+
+| file | sha1 GREZZO (timbro del presidio) | blob GIT |
+|---|---|---|
+| `_scena_video.py` prima della ripresa | **`f14ea4bd`** | `14d6f2c7` |
+| `_scena_video.py` con la ripresa | **`7a02c5c3`** | `6d290089` |
+
+**COME SI RICONOSCE L'ERRORE:** `git cat-file -t 7a02c5c3` risponde **`Not a valid object name`** —
+non perche' il file non esista, ma perche' **quel numero non e' un oggetto git.**
+**Per recuperare un file da un timbro del presidio si passa dal COMMIT, non dal numero:**
+`git cat-file -p <commit>:<path>`.
+
+**NON e' un difetto del presidio: e' la convenzione che il par.5-quinquies IMPONE**, perche'
+`git hash-object` applica il filtro `clean` e puo' dire «nessuna differenza» su due file con byte
+diversi (la trappola CRLF misurata il 2026-09-16). **Il presidio guarda i byte veri.**
+**Quando si cita un blob, si dice QUALE DELLE DUE.**
+
 ### UN `.pkl` SENZA IL SUO COMANDO NON E' UN DATO
 
 I `.pkl` NON si committano (binari, ~18 MB l'uno: git non li dimenticherebbe piu').
