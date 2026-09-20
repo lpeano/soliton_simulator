@@ -61,6 +61,17 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", "3", "--sep
             "--viriale", "--olon-part"]
 import soliton_simulator as S
 
+# [TRACCIA_D0, 2026-09-20] `--traccia` accende la strumentazione dei 19 punti che toccano `d0`.
+# ⚠ SI ACCENDE QUI, PRIMA di `avvia_test`, perche' la semina stessa scrive `d0` (`:2083`).
+# ⚠ E il SIGILLO INTERNO in fondo diventa il criterio `Z3` del mandato: se la strumentazione
+#   avesse toccato il PERCORSO, la rigiocata smetterebbe di riprodurre il ramo B e si vedrebbe li'.
+TRACCIA = "--traccia" in sys.argv
+if TRACCIA:
+    if not hasattr(S, "TRACCIA_D0"):
+        raise SystemExit("questo simulatore non ha TRACCIA_D0")
+    S.TRACCIA_D0 = True
+    print("TRACCIA_D0 = True   (19 siti strumentati)")
+
 a = S._cli()
 S._applica_regime(a)
 S._applica_flag(a)
@@ -219,7 +230,55 @@ def main():
                          % (r["deg_%d" % x], r["pv_%d" % x], r["pvr_%d" % x], r["rapmax_%d" % x]))
         print("  %-6d | %s" % (r["passo"], " | ".join(pezzi)))
 
-    # ---- IL SIGILLO INTERNO [BLOCCANTE]
+    # ---- LA TRACCIA: chi ha scritto `d0`, quanto, e chi ha tagliato
+    if TRACCIA:
+        log = getattr(net, "_traccia_d0_log", [])
+        glob = getattr(net, "_g_traccia_d0", {})
+        print("")
+        print("=" * 118)
+        print("CHI SCRIVE `d0` -- %d voci su %d siti, in %d passi" % (len(log), len(glob), NPASSI))
+        print("=" * 118)
+        agg = {}
+        for v in log:
+            k = v["sito"]
+            e = agg.setdefault(k, {"n": 0, "somma": 0.0, "maxass": 0.0, "tocc": 0,
+                                   "tagl": 0, "len_cambia": 0})
+            e["n"] += 1
+            if v.get("tocc", -1) >= 0:
+                e["somma"] += v.get("somma", 0.0)
+                e["tocc"] += v.get("tocc", 0)
+                e["maxass"] = max(e["maxass"], v.get("maxass", 0.0))
+            else:
+                e["len_cambia"] += 1
+            e["tagl"] += v.get("tagliati_tracc", 0)
+        print("  %-22s %6s %8s %16s %12s %8s" %
+              ("sito", "giri", "tocchi", "SOMMA ALGEBRICA", "max|delta|", "tagliati"))
+        for k in sorted(agg, key=lambda x: agg[x]["somma"]):
+            e = agg[k]
+            print("  %-22s %6d %8d %+16.6e %12.4e %8d%s" %
+                  (k, e["n"], e["tocc"], e["somma"], e["maxass"], e["tagl"],
+                   "   (len cambia %d volte)" % e["len_cambia"] if e["len_cambia"] else ""))
+        mai = [k for k in ("S01_archi_nuovi", "S02_rilass_visco", "S03_diff_guscio",
+                           "S04_rilass_TAU_P", "S05_spinta_locale", "S06_mitosi", "S07_schwinger",
+                           "S08_proj", "S09_spinta_med", "S10_grav_med", "S11_flusso",
+                           "S12_coesione", "P1_dopo_rilass", "P2_dopo_spinta", "P3_dopo_proj",
+                           "P4_dopo_grav", "P5_dopo_flusso", "P6_dopo_coesione", "P7_dopo_4917")
+               if k not in agg]
+        print("  ⚠ SITI MAI SCATTATI in %d passi (A8: un ramo che non gira e' comportamento"
+              " sconosciuto): %s" % (NPASSI, mai if mai else "nessuno"))
+        # l'arco 16-481, sito per sito, ai passi dei SALTI
+        print("")
+        print("  L'ARCO 16-481, sito per sito. `prima -> dopo` (e `d` accanto):")
+        print("  %-6s %-22s %12s %12s %12s" % ("passo", "sito", "d0 prima", "d0 dopo", "d"))
+        for v in log:
+            t = v.get("16-481")
+            if not t or v["passo"] % 10:
+                continue
+            if t[0] == t[1]:
+                continue
+            print("  %-6d %-22s %12.6f %12.6f %12.6f" % (v["passo"], v["sito"], t[0], t[1], t[2]))
+
+    # ---- IL SIGILLO INTERNO [BLOCCANTE]  (= `Z3` del mandato quando TRACCIA e' acceso)
     print("")
     print("=" * 118)
     print("SIGILLO INTERNO [BLOCCANTE]: la rigiocata riproduce il ramo B?")
