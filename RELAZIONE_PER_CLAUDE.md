@@ -8203,3 +8203,69 @@ invocazione saltata, gli indici sono distinti e `>= 1`, quindi **11 indici disti
 `A` **91** guardie *(64 su percorso fisico)* · `B` **9** default su maschera *(7)* · `C` **59**
 saturazioni vere *(35)* · `D` **10** memorie fra funzioni *(6 con stato fisico)*.
 **In questo giro ne sono state curate 7.**
+
+---
+
+## 2026-09-20 — **PASSO 1 sui dieci: `3/4 PASS + 1 FAIL ATTESO`. E il FAIL è il reperto**
+
+**Simulatore `f81c4fe1 → dbadb71f`** *(byte grezzi; git `af8a96f1 → 5fc5bfdf`)*, commit `93421eb` ·
+sigillo `csv/_seal_fork/_sigillo_passo1_dieci.py` (`849dd25`), esito `_sigillo_passo1_dieci.txt` ·
+**nessun run.**
+
+```
+W1  PASS         7 campi (psi, d, phi, eta, n, pos, tw): TUTTI IDENTICI -> contabilità INERTE
+W2  PASS         i dieci contatori si leggono: 10 su 10
+W4  PASS         le due (b) sono SPENTE al 100 % (flag/costante off), come atteso
+W3  FAIL ATTESO  una (a) non scatta -> ed è la riclassificazione, non un difetto
+```
+
+### La misura, su 12 passi
+
+```
+nb_prec           1 salto su 12    shape (-1, 2391)    quando = 1
+tutti gli altri   0 salti
+```
+
+**`shape[0] = -1` significa `_nb_prec is None`**, e `quando = 1` dice che è **solo la prima
+invocazione**. **È lo stesso transitorio d'avvio di `zeta_vir` (`Z68`), e la stessa causa:
+l'ORDINE** — `_nb_prec` è scritto **dentro** `_passo_spinoriale`, quindi alla prima chiamata non
+esiste. **La diagnosi che avevo dato è confermata da un numero.**
+
+### ⚠ `W3` — e il criterio era diverso per classe, scritto PRIMA
+
+```
+(a) nb_prec           SCATTA
+(a) snap_psispin      SCATTA
+(a) nb_grav_proiez    NON forzabile   <- il FAIL
+(c) chicore_passo     SCATTA corrompendo perc_chi
+(c) temposegno        SCATTA corrompendo perc_chi
+(c) spinore_vivo      SCATTA corrompendo phi_s
+(c) calore_chi        NON forzabile
+(c) chi_da_spinore    NON forzabile
+```
+
+**`:4586` va RICLASSIFICATA da `(a)` a `(c)`, ed è la più forte delle sei:** quattro righe sopra la
+guardia c'è una **riparazione di `_nb`** che gira sotto **lo stesso flag `SPINORE`**. Non è che sia
+difficile farla fallire: **non è raggiungibile.**
+
+> **⚠ E la predizione è in `849dd25`, il commit che introduce il sigillo — ANTENATO del run.**
+> *«nb_grav_proiez potrebbe NON scattare, perché quattro righe sopra la guardia c'è una riparazione
+> di `_nb` che gira sotto lo stesso flag SPINORE. Se così fosse, quella (a) andrebbe
+> RICLASSIFICATA (c) — e sarebbe un reperto, non un errore.»*
+> **Il `FAIL` si cita così: `3/4 PASS + 1 FAIL ATTESO`, mai `4/4`.** *(Stessa convenzione di
+> `S1a`/`S1b` nel ri-sigillo dello Strato 1.)*
+
+### E le `(c)` si spaccano in due, il che non era previsto
+
+- **`(c)` FORTI — non forzabili nemmeno corrompendo lo stato:** `calore_chi`, `chi_da_spinore`,
+  **e ora `nb_grav_proiez`**. **La guardia non è raggiungibile: il contatore vale solo come
+  sentinella di regressione;**
+- **`(c)` DEBOLI — scattano se si corrompe `perc_chi`/`phi_s`:** `chicore_passo`, `temposegno`,
+  `spinore_vivo`. **La guardia È raggiungibile da uno stato malformato**, anche se nessun percorso
+  del codice lo produce oggi. **Lì il contatore serve davvero.**
+
+> **La distinzione non esisteva prima di questa misura, ed è più utile della classificazione
+> originale:** *«ridondante»* non è una proprietà unica. **`calore_chi` è protetta dalla forma del
+> codice; `spinore_vivo` è protetta solo da un'INVARIANTE che tre funzioni mantengono.**
+
+**Bilancio: `(a)` 2 · `(c)` 6 · `(b)` 2.**
