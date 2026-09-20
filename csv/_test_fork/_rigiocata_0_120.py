@@ -229,6 +229,16 @@ def main():
           % (len(solo_rif), solo_rif[:5], len(solo_mio), solo_mio[:5]))
     if diff:
         print("  *** FALLITO. Primi diversi: %s ***" % diff[:8])
+        # ⚠ SENZA I VALORI, un FAIL non dice NIENTE su cosa correggere: si stampano.
+        for kk in diff[:10]:
+            va, vb = rif[kk], mio[kk]
+            if np.isscalar(va) or isinstance(va, (int, float, np.integer, np.floating)):
+                print("      %-28s riferimento %-14s rigiocata %-14s  delta %s"
+                      % (kk, va, vb, (vb - va) if isinstance(va, (int, float,
+                         np.integer, np.floating)) else "n/d"))
+            else:
+                print("      %-28s (array) shape %s contro %s"
+                      % (kk, getattr(va, "shape", None), getattr(vb, "shape", None)))
         print("  *** LA RIGIOCATA NON RIPRODUCE IL RAMO B: i numeri qui sopra NON VALGONO. ***")
         return 1
     print("  PASS -- %d campi IDENTICI. La rigiocata E' il ramo B, e la serie vale." % len(com))
