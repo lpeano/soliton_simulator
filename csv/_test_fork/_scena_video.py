@@ -72,6 +72,15 @@ RIPRENDI = False
 # non resterebbe riproducibile VERBATIM. A default il driver fa ESATTAMENTE quello che faceva:
 # lo prova `csv/_seal_fork/_sigillo_sep_driver.py`, non questo commento.
 SEP = "8"
+# [A/B chi_basc, 2026-09-20] --chi-basc=on|off NOMINALE, DEFAULT `on`.
+# ⚠ IL DEFAULT E' `on` E NON `off`, ED E' UNA SCELTA: il driver ha SEMPRE passato `--chi-basc`
+#   (era cablato poche righe sotto), quindi `on` e' l'unico default che riproduce il comportamento
+#   attuale VERBATIM -- e senza quello la byte-identita' del sigillo non avrebbe niente da
+#   dimostrare. Il default seguira' la decisione su `chi_basc`, NON la anticipa: la decisione e'
+#   proprio cio' che il run A/B di oggi serve a prendere (`Z73`).
+# ⚠ E NON E' UNA MODIFICA AL SIMULATORE: `CHI_BASC = False` e' gia' il default di MODULO (`:746`).
+#   Era il DRIVER ad accenderlo. Qui si rende esplicito un interruttore che c'era gia'.
+CHIBASC = "on"
 
 _resti = []
 for _x in _ARGV[1:]:
@@ -81,6 +90,12 @@ for _x in _ARGV[1:]:
         CSVPROG = _x.split("=", 1)[1]
     elif _x.startswith("--sep="):
         SEP = _x.split("=", 1)[1]
+    elif _x.startswith("--chi-basc="):
+        # NOMINALE con `=`, quindi NON collide col `--chi-basc` nudo del simulatore: quello, se
+        # qualcuno lo passasse a mano, finirebbe in `_resti` e resterebbe un flag del simulatore.
+        CHIBASC = _x.split("=", 1)[1].strip().lower()
+        if CHIBASC not in ("on", "off"):
+            raise SystemExit("--chi-basc vuole `on` o `off`, non %r" % CHIBASC)
     elif _x == "--riprendi":
         # LA RIPRESA E' UNA SCELTA ESPLICITA, MAI UN RIPIEGO AUTOMATICO: senza questo flag il
         # comportamento resta quello dell'originale (cartella sporca -> RIFIUTO).
@@ -106,8 +121,12 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--
             "--giri", "0", "--campo-spinoriale", "--spinore-vivo", "--spinore-corretto",
             "--chi-core", "--calore-scal", "--deparam-orologio", "--verlet", "--fork-su2",
             "--fork-su2-mem", "--cs-dinamico", "--tau-luce", "--rumore-colorato",
-            "--pav-com", "--guscio-morbido", "--zeta-vir", "--chi-basc", "--plast-din",
-            "--viriale", "--olon-part"]
+            "--pav-com", "--guscio-morbido", "--zeta-vir"] \
+    + (["--chi-basc"] if CHIBASC == "on" else []) \
+    + ["--plast-din", "--viriale", "--olon-part"]
+# ⚠ IL FLAG SI INSERISCE NELLA STESSA POSIZIONE IN CUI ERA CABLATO. A default la lista e' IDENTICA
+#   ELEMENTO PER ELEMENTO a quella di prima: non "equivalente", identica. Lo prova
+#   `csv/_seal_fork/_sigillo_chibasc_driver.py`, non questo commento.
 import soliton_simulator as S
 
 print("=" * 112)
@@ -130,7 +149,11 @@ for f in ("CAMPO_SPINORIALE", "SPINORE_VIVO", "SPINORE_CORRETTO", "CHI_CORE", "C
 print("  PASSI_PER_FRAME = %s   DT = %s   TAU_A = %s   N_c(collasso) = %d"
       % (S.PASSI_PER_FRAME, S.DT, S.TAU_A, int(S.massa_critica_collasso())))
 print("  ⚠ `--tau-luce` ha il SIGILLO FALLITO (CLAUDE.md par.0): ramo NON CERTIFICATO.")
-print("  ⚠ `--chi-basc` RISCRIVE `perc_chi` a ogni passo: non e' un'etichetta di lignaggio.")
+if CHIBASC == "on":
+    print("  ⚠ `--chi-basc` RISCRIVE `perc_chi` a ogni passo: non e' un'etichetta di lignaggio.")
+else:
+    print("  ⚠ `--chi-basc` e' SPENTO (--chi-basc=off): `perc_chi` e' scritta SOLO dalle nascite,")
+    print("    `:4294` (eredita UGUALE) e `:4415` (antinodo OPPOSTO). E' il braccio B dell'A/B.")
 
 S.avvia_test("N-MASSE")()    # il costruttore UFFICIALE della scena -> _semina_n_masse()
 print("\n  scena avviata: n = %d nodi alla semina (N_c*0.8 per massa, %s masse)"
