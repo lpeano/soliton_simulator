@@ -659,3 +659,5 @@ Il mio classificatore l'aveva messo fra i reperti: **errore di categoria, corret
 | strumento | blob (byte) | comando | cosa fa | esito |
 |---|---|---|---|---|
 | `csv/_test_fork/_fuga_vd.py` | `2035429e` | `python csv/_test_fork/_fuga_vd.py` | serie nel tempo di `|vd|` (p50/p99/p999/max), `n3`, conteggi a cinque soglie, **identita' Jaccard** dei primi 100 archi veloci, e dove stanno (`d/d0`, `perc_chi`, `eta`). SONDA: un `.pkl` alla volta, solo numpy per-arco. | par.2 di `doc/TASK_HISTORY/2026-09-20_fuga-vd-ramoB.md` |
+
+| `csv/_test_fork/_venti_archi.py` | `cee10eb5` | `python csv/_test_fork/_venti_archi.py` | i 20 archi con `|vd|` massimo (indice, nodi, `d`, `d0`, `d/d0`, e per ogni nodo `_deg`/`eta`/`perc_chi`/`|psi|`/`|omega_s|`); la loro INTERSEZIONE fra istanti (per coppia di nodi, non per indice); e la distribuzione di `_deg` separata ORIGINALI/NATI. SONDA. | par.2 di `doc/TASK_HISTORY/2026-09-20_venti-archi-e-nsub.md` |
