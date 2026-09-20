@@ -1,0 +1,64 @@
+[TIMBRO] _sigillo_passo1_dieci.py  sha1-BYTE 4876f063  committato e pulito
+simulatore PRIMA (a6cd7d6): sha1 grezzo f81c4fe1
+simulatore ORA            : sha1 grezzo 27f1ab03
+
+braccio A: simulatore PRIMA
+braccio B: simulatore ORA
+W1    PASS   7 campi: TUTTI IDENTICI
+W2    PASS   i dieci si leggono: 10 attesi presenti
+      GUARDIA calore_chi     tot=10       salti=0        frazione=0.000000   shape=None           quando=None
+      GUARDIA chi_da_spinore tot=12       salti=0        frazione=0.000000   shape=None           quando=None
+      GUARDIA chicore_passo  tot=12       salti=0        frazione=0.000000   shape=None           quando=None
+      GUARDIA compat_chi_SPENTO tot=4        salti=4        frazione=1.000000   shape=None           quando=None
+      GUARDIA k_frange_SPENTO tot=12       salti=12       frazione=1.000000   shape=None           quando=None
+      GUARDIA kernel_alpha   tot=145      salti=0        frazione=0.000000   shape=None           quando=None
+      GUARDIA nb_grav_proiez tot=12       salti=0        frazione=0.000000   shape=None           quando=None
+      GUARDIA nb_prec        tot=12       salti=1        frazione=0.083333   shape=(-1, 2391)     quando=1
+      GUARDIA s2full_default tot=12       salti=0        frazione=0.000000   shape=(0, 0)         quando=None
+      GUARDIA snap_psispin   tot=12       salti=0        frazione=0.000000   shape=None           quando=None
+      GUARDIA spinore_vivo   tot=12       salti=0        frazione=0.000000   shape=None           quando=None
+      GUARDIA tempo_luce     tot=34       salti=0        frazione=0.000000   shape=None           quando=None
+      GUARDIA temposegno     tot=12       salti=0        frazione=0.000000   shape=None           quando=None
+      GUARDIA tors4pi        tot=12       salti=0        frazione=0.000000   shape=None           quando=None
+      GUARDIA zeta_vir_a     tot=12       salti=1        frazione=0.083333   shape=(-1, 429498)   quando=1
+      GUARDIA zeta_vir_b     tot=55       salti=11       frazione=0.200000   shape=(-1, 429498)   quando=11
+W4    PASS   le due (b): il ramo e' SPENTO al 100 % (flag/costante off), come atteso
+
+W3 -- si prova a far SCATTARE ciascun contatore, corrompendo lo stato
+[calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+[fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+[step2-orologio] STEP 2: omega_clk *= (cs/CS_M)^2 = OROLOGIO DI COMPTON (omega = m c^2/hbar, e nel modello c e' cs). Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.
+[rumore-colorato] TAGLIO SPETTRALE: il calcio del vuoto non e' piu' bianco ma correlato su tau_c = LAM/CS_M = 0.4 (= 40 passi), con un processo di Ornstein-Uhlenbeck sul rumore stesso e `dt_n = DT*r` (non DT: e' un processo LOCALE). `amp` INVARIATA. MOTIVO: il rumore bianco discreto inietta a tutte le frequenze fino a Nyquist, incluse quelle che il passo non risolve; in natura non esiste. ZERO coefficienti: LAM e CS_M sono gia' nel sistema. ATTENZIONE: la ricorsione PRESERVA LA VARIANZA, quindi NON abbassa theta - se lo muove lo fa SALIRE (<=5%). Si cabla perche' il rumore bianco e' SBAGLIATO, non perche' risolva l'aliasing (doc/PREDIZIONE_taglio_spettrale.md).
+[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: inerzia = T^2 = (d/cs)^2, quindi il tempo che COSTRUISCE l'inerzia e quello che la RILASSA devono essere lo stesso; oggi sono due diversi nella stessa equazione. Zero coefficienti, zero floor nuovi. NB: |omega|_eq va come sqrt(tau), quindi theta cala di ~13x: UN ORDINE DI GRANDEZZA, NON la soluzione dell'aliasing.
+[spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+      classe  sito                incremento
+      (a)     nb_prec              1   <- SCATTA
+      (a)     snap_psispin         1   <- SCATTA
+      (a)     nb_grav_proiez       0   <- NON forzabile
+      (c)     calore_chi           0   <- NON forzabile
+      (c)     chicore_passo        1   <- SCATTA
+      (c)     temposegno           1   <- SCATTA
+      (c)     spinore_vivo         1   <- SCATTA
+      (c)     chi_da_spinore       0   <- NON forzabile
+
+      *** (a) nb_grav_proiez NON scatta: sarebbe CODICE MORTO, e va detto. ***
+      (c) calore_chi         non si fa scattare NEMMENO corrompendo lo stato:
+          e' la prova PIU' FORTE della (c), non un fallimento. Criterio fissato PRIMA.
+      (c) chi_da_spinore     non si fa scattare NEMMENO corrompendo lo stato:
+          e' la prova PIU' FORTE della (c), non un fallimento. Criterio fissato PRIMA.
+W3    FAIL   almeno una (a) NON scatta: vedi sopra
+
+ESITO: 3/4
+
+NB: UNA scena, UN seme, 12 passi.
