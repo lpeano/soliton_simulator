@@ -1,0 +1,18 @@
+L'ERRORE DI POPOLAZIONE DENTRO `coesione_relazionale` -- misurato, non dedotto
+
+  coesione = scala_statale * (...) * filtro * d0^2 * (I_arco / I_med)
+  scala_statale = CS_M**2 / I_med     ->   I_med compare AL QUADRATO al denominatore
+  I_arco = 0.5*(I_nodi[i] + I_nodi[j])   ARCHI      (:4975)
+  I_med  = mean(I_nodi)                  NODI       (:4976)
+
+  ramo passo   mean(I_nodi)   I_arco p50   I_arco/I_med (I_arco/I_med)/I_med
+  B    120       2.5029e-04   1.3883e-04     5.5466e-01     2.2161e+03
+  B    360       1.0442e-03   1.1430e-03     1.0946e+00     1.0483e+03
+  A    120       3.0378e-04   1.0919e-04     3.5943e-01     1.1832e+03
+  A    3000      2.1627e-01   1.3642e+00     6.3077e+00     2.9166e+01
+
+  ⚠ E il PRECEDENTE e' nello STESSO FILE, curato a `:4072` (categoria D, nessun flag):
+    «ed e' un ERRORE DI POPOLAZIONE (A3): rho_arco vive sugli ARCHI, median(I_nodi) sui
+     NODI. Su coda pesante l'arco tipico sta MOLTO sopra la mediana nodale (rapporto
+     mediano misurato: 8830)»
+  Stessa struttura, altro sito -- e QUI `I_med` compare AL QUADRATO.
