@@ -364,6 +364,28 @@ def massa_critica_collasso(lam=None, gamma=None, s=None):
     return geom * ((1.0 + s) ** DENS_CRIT_THETA)
 
 
+def rapporto_guardie(net):
+    """[A8, 2026-09-20] I CONTATORI DELLE GUARDIE SILENZIOSE, in forma leggibile.
+
+    Esiste perche' `V2` chiede che i contatori SI LEGGANO a fine run, e perche' metterli in un
+    `print` dentro il simulatore avrebbe richiesto di toccare anche il driver -- che e' sigillato.
+    E' PURA LETTURA: non tocca nulla.
+
+    Per ogni sito: invocazioni, salti, frazione, la FORMA al fallimento e QUANDO (l'indice
+    dell'ultima invocazione saltata). `shape[0] == -1` significa memoria ASSENTE, non lunghezza 0.
+    """
+    siti = ("kernel_alpha", "tempo_luce", "zeta_vir_a", "zeta_vir_b", "tors4pi")
+    fuori = {}
+    for k in siti:
+        tot = int(getattr(net, "_g_%s_tot" % k, 0))
+        sal = int(getattr(net, "_g_%s_salti" % k, 0))
+        fuori[k] = dict(tot=tot, salti=sal,
+                        frazione=(sal / tot if tot else float("nan")),
+                        shape=getattr(net, "_g_%s_shape" % k, None),
+                        quando=getattr(net, "_g_%s_quando" % k, None))
+    return fuori
+
+
 def massa_critica_adattiva(net):
     """Densita' critica adattiva calcolata sullo stato CORRENTE della rete: misura
     s=gamma|F| dal campo reale e applica la legge di crossover. Sempre attiva: e' la
@@ -2701,6 +2723,20 @@ class Rete:
     def _pesi(self):
         ramp = np.minimum(1.0, self.eta / TAU_A)
         base = np.exp(-self.d / self._lam_archi()) * ramp[self.i] * ramp[self.j]
+        # [A8, 2026-09-20] CONTABILITA' DELLA GUARDIA -- byte-inerte: si CONTA, non si cambia.
+        # Un ramo che salta in silenzio e' un comportamento SCONOSCIUTO (A8), e questa forma ha
+        # gia' prodotto due volte mesi di dati sbagliati: `_cs_nodo_prev` (71.88 %) e
+        # `_psi_spin_prec` (95.33 %). Si registrano QUATTRO cose, non una: le invocazioni, i
+        # salti, LA FORMA al fallimento (le due lunghezze) e QUANDO -- l'indice dell'ultima
+        # invocazione saltata. Il conteggio da solo non distingue un TRANSITORIO delle prime
+        # chiamate da un comportamento PRINCIPALE sparso su tutto il run: danno lo stesso numero.
+        # NB: il salto si registra SOLO col flag ACCESO. A flag spento la legge NON DEVE girare,
+        # e contarlo come fallimento sarebbe un falso positivo -- la classe di `N3b` (par.9).
+        self._g_kernel_alpha_tot = getattr(self, "_g_kernel_alpha_tot", 0) + 1
+        if KERNEL_ALPHA != 0.0 and len(self.tw) != len(self.d):
+            self._g_kernel_alpha_salti = getattr(self, "_g_kernel_alpha_salti", 0) + 1
+            self._g_kernel_alpha_shape = (len(self.tw), len(self.d))
+            self._g_kernel_alpha_quando = self._g_kernel_alpha_tot
         if KERNEL_ALPHA != 0.0 and len(self.tw) == len(self.d):
             # KERNEL BILANCIATO DAL TEMPO PROPRIO con HAMILTONIANA RAZIONALE (cutoff UV).
             # tau = |torsione| in unita' del quanto di olonomia (l'energia torsionale locale).
@@ -3179,6 +3215,20 @@ class Rete:
         """
         n = self.n
         dd = self.d
+        # [A8, 2026-09-20] CONTABILITA' DELLA GUARDIA -- byte-inerte: si CONTA, non si cambia.
+        # Un ramo che salta in silenzio e' un comportamento SCONOSCIUTO (A8), e questa forma ha
+        # gia' prodotto due volte mesi di dati sbagliati: `_cs_nodo_prev` (71.88 %) e
+        # `_psi_spin_prec` (95.33 %). Si registrano QUATTRO cose, non una: le invocazioni, i
+        # salti, LA FORMA al fallimento (le due lunghezze) e QUANDO -- l'indice dell'ultima
+        # invocazione saltata. Il conteggio da solo non distingue un TRANSITORIO delle prime
+        # chiamate da un comportamento PRINCIPALE sparso su tutto il run: danno lo stesso numero.
+        # QUI IL FALLBACK C'E' GIA', esplicito e derivato (`np.full(n, LAM)`): manca solo il
+        # CONTEGGIO. Mezza cura, si completa -- non si cambia il comportamento.
+        self._g_tempo_luce_tot = getattr(self, "_g_tempo_luce_tot", 0) + 1
+        if not (len(ii) and len(dd) == len(ii)):
+            self._g_tempo_luce_salti = getattr(self, "_g_tempo_luce_salti", 0) + 1
+            self._g_tempo_luce_shape = (len(ii), len(dd))
+            self._g_tempo_luce_quando = self._g_tempo_luce_tot
         if len(ii) and len(dd) == len(ii):
             grado = (np.bincount(ii, minlength=n) + np.bincount(jj, minlength=n)).astype(float)
             somma = (np.bincount(ii, weights=dd, minlength=n) +
@@ -3675,6 +3725,21 @@ class Rete:
         else:
             beta = 2.0 * ZETA_M * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(self.d, 1e-6)
             
+        # [A8, 2026-09-20] CONTABILITA' DELLA GUARDIA -- byte-inerte: si CONTA, non si cambia.
+        # Un ramo che salta in silenzio e' un comportamento SCONOSCIUTO (A8), e questa forma ha
+        # gia' prodotto due volte mesi di dati sbagliati: `_cs_nodo_prev` (71.88 %) e
+        # `_psi_spin_prec` (95.33 %). Si registrano QUATTRO cose, non una: le invocazioni, i
+        # salti, LA FORMA al fallimento (le due lunghezze) e QUANDO -- l'indice dell'ultima
+        # invocazione saltata. Il conteggio da solo non distingue un TRANSITORIO delle prime
+        # chiamate da un comportamento PRINCIPALE sparso su tutto il run: danno lo stesso numero.
+        # `shape` vale -1 al primo posto quando `_sin2_vir` e' None: le DUE cause di fallimento
+        # (memoria assente / lunghezza diversa) sono cose diverse e vanno distinte, non sommate.
+        self._g_zeta_vir_a_tot = getattr(self, "_g_zeta_vir_a_tot", 0) + 1
+        if ZETA_VIR and not (self._sin2_vir is not None and len(self._sin2_vir) == len(beta)):
+            self._g_zeta_vir_a_salti = getattr(self, "_g_zeta_vir_a_salti", 0) + 1
+            self._g_zeta_vir_a_shape = (-1 if self._sin2_vir is None else len(self._sin2_vir),
+                                        len(beta))
+            self._g_zeta_vir_a_quando = self._g_zeta_vir_a_tot
         if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta):
             beta = beta * (1.0 - self._sin2_vir)
             
@@ -3712,6 +3777,17 @@ class Rete:
                     beta_new = 2.0 * zeta_loc * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(d_new, 1e-6)
                 else:
                     beta_new = 2.0 * ZETA_M * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(d_new, 1e-6)
+                # [A8, 2026-09-20] LA STESSA GUARDIA, DUPLICATA NEL RAMO VERLET. Introdotta il
+                # 2026-09-03 da `7946c46` copiandola dal ramo di sopra, senza dichiararne la
+                # ragione. Ha il SUO contatore, non quello di sopra: sapere QUALE dei due salta
+                # e' il punto, e un contatore condiviso lo nasconderebbe.
+                self._g_zeta_vir_b_tot = getattr(self, "_g_zeta_vir_b_tot", 0) + 1
+                if ZETA_VIR and not (self._sin2_vir is not None
+                                     and len(self._sin2_vir) == len(beta_new)):
+                    self._g_zeta_vir_b_salti = getattr(self, "_g_zeta_vir_b_salti", 0) + 1
+                    self._g_zeta_vir_b_shape = (-1 if self._sin2_vir is None
+                                                else len(self._sin2_vir), len(beta_new))
+                    self._g_zeta_vir_b_quando = self._g_zeta_vir_b_tot
                 if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta_new):
                     beta_new = beta_new * (1.0 - self._sin2_vir)
                 acc_next = cs_arco ** 2 * lap_new + src - beta_new * vd_half
@@ -3862,6 +3938,18 @@ class Rete:
         # La modulazione e' LIMITATA a una frazione (tanh, ampiezza <0.3 della soglia):
         # la soglia non si annulla mai (mitosi che esplode) ne' diverge (mitosi che muore).
         soglia = np.full(len(avv), soglia0, float)
+        # [A8, 2026-09-20] CONTABILITA' DELLA GUARDIA -- byte-inerte: si CONTA, non si cambia.
+        # Un ramo che salta in silenzio e' un comportamento SCONOSCIUTO (A8), e questa forma ha
+        # gia' prodotto due volte mesi di dati sbagliati: `_cs_nodo_prev` (71.88 %) e
+        # `_psi_spin_prec` (95.33 %). Si registrano QUATTRO cose, non una: le invocazioni, i
+        # salti, LA FORMA al fallimento (le due lunghezze) e QUANDO -- l'indice dell'ultima
+        # invocazione saltata. Il conteggio da solo non distingue un TRANSITORIO delle prime
+        # chiamate da un comportamento PRINCIPALE sparso su tutto il run: danno lo stesso numero.
+        self._g_tors4pi_tot = getattr(self, "_g_tors4pi_tot", 0) + 1
+        if TORS_4PI and len(self.i) != len(avv):
+            self._g_tors4pi_salti = getattr(self, "_g_tors4pi_salti", 0) + 1
+            self._g_tors4pi_shape = (len(self.i), len(avv))
+            self._g_tors4pi_quando = self._g_tors4pi_tot
         if TORS_4PI and len(self.i) == len(avv):
             # gradiente di tempo proprio LUNGO l'arco: differenza del tempo proprio nodale
             # fra i due estremi. tau_nodo alto = tempo lento = materia. Dove il gradiente
