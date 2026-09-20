@@ -1,0 +1,12 @@
+SCAN sep=1.0 nc=1 mm=668921 mv=303774 bordi_mm=0.3321 bordi_mv=-3.6350 rc=2.4000 n=2391 archi=1402193
+SCAN sep=1.4 nc=1 mm=308591 mv=297715 bordi_mm=1.0249 bordi_mv=-3.2350 rc=2.4000 n=2391 archi=1035804
+SCAN sep=1.8 nc=1 mm=31850 mv=285446 bordi_mm=1.7177 bordi_mv=-2.8350 rc=2.4000 n=2391 archi=746794
+SCAN sep=2.0 nc=1 mm=2345 mv=274541 bordi_mm=2.0641 bordi_mv=-2.6350 rc=2.4000 n=2391 archi=706384
+SCAN sep=2.19 nc=1 mm=0 mv=261454 bordi_mm=2.3932 bordi_mv=-2.4450 rc=2.4000 n=2391 archi=690952
+SCAN sep=2.4 nc=1 mm=0 mv=244239 bordi_mm=2.7569 bordi_mv=-2.2350 rc=2.4000 n=2391 archi=673737
+SCAN sep=2.8 nc=1 mm=0 mv=206217 bordi_mm=3.4497 bordi_mv=-1.8350 rc=2.4000 n=2391 archi=635715
+SCAN sep=3.2 nc=1 mm=0 mv=167362 bordi_mm=4.1426 bordi_mv=-1.4350 rc=2.4000 n=2391 archi=596860
+SCAN sep=4.0 nc=1 mm=0 mv=97590 bordi_mm=5.5282 bordi_mv=-0.6350 rc=2.4000 n=2391 archi=527088
+SCAN sep=4.7 nc=1 mm=0 mv=48286 bordi_mm=6.7406 bordi_mv=0.0650 rc=2.4000 n=2391 archi=477784
+SCAN sep=5.5 nc=1 mm=0 mv=13013 bordi_mm=8.1263 bordi_mv=0.8650 rc=2.4000 n=2391 archi=442511
+SCAN sep=8.0 nc=4 mm=0 mv=0 bordi_mm=12.4564 bordi_mv=3.3650 rc=2.4000 n=2391 archi=429498

@@ -7769,3 +7769,70 @@ dell'originale — **dieci volte più a scatti**, 2.2 s a 20 fps; **vista fissa*
 fissa** *(una camera rotante confonderebbe la lettura della separazione; un'inquadratura
 ri-normalizzata a ogni frame nasconderebbe l'espansione)*; **costo misurato 1.12 s/frame**, 50 s in
 tutto. **Un seme, una scena.**
+
+---
+
+## 2026-09-20 — **il pilota di `sep`: la soglia è misurata, e le due finestre NON si sovrappongono**
+
+**Blob `775ceab7`, seme 42, scena N-MASSE a 3 masse. Solo SEMINA** *(la domanda si decide lì: è
+`_allaccia` a collegare)*. Strumento `csv/_test_fork/_pilota_sep.py`, esito
+`csv/_test_fork/_pilota_scan_sep.txt`. Letture fissate prima in
+`doc/TASK_HISTORY/2026-09-20_run-masse-interagenti.md` (`eb94a48`).
+
+**⚠ PRIMA: una premessa del mandato non reggeva, e l'ho misurata.** `sep` è il **raggio del
+cerchio**, non la distanza fra le masse: con `nm = 3` la distanza a coppie è `sep·√3`. Col vecchio
+`sep = 8` i bordi massa-massa stavano a **12.46**, non a `8 − 1.4 = 6.6`. **Non erano tre volte
+troppo lontane: erano cinque volte troppo lontane.**
+
+### La scansione, alla semina
+
+```
+sep    bordi mm   archi mm   bordi mv   archi mv   componenti   archi totali
+1.0      0.332     668921     -3.635     303774        1          1402193
+1.4      1.025     308591     -3.235     297715        1          1035804
+1.8      1.718      31850     -2.835     285446        1           746794
+2.0      2.064       2345     -2.635     274541        1           706384
+2.19     2.393          0     -2.445     261454        1           690952
+2.4      2.757          0     -2.235     244239        1           673737
+4.0      5.528          0     -0.635      97590        1           527088
+4.7      6.741          0     +0.065      48286        1           477784
+5.5      8.126          0     +0.865      13013        1           442511
+8.0     12.456          0     +3.365          0        4           429498
+```
+
+**① La soglia del contatto massa-massa è misurata e coincide col conto:** gli archi massa-massa
+esistono per `sep ≤ 2.0` e sono **zero da `sep = 2.19`**. Il conto diceva
+`sep < (rc + 1.4)/√3 = 2.194`, con `rc = 3·median(lambda_nodi()) = 2.400`. **Coincide.**
+
+**② ⚠ E IL FATTO CHE DECIDE IL MANDATO: le due finestre non si sovrappongono.**
+
+```
+perche' le masse si tocchino fra loro      ->  sep <= 2.19
+perche' le masse stiano FUORI dal vuoto    ->  sep >= 5.6 circa
+```
+
+> **Non esiste un `sep` in cui le tre masse si parlano DIRETTAMENTE e restano fuori dal vuoto.**
+> Il vuoto è una sfera di raggio `3.94` (p95) con code fino oltre `5`: **finché le masse sono
+> abbastanza vicine da toccarsi, sono anche dentro il vuoto** — e il grafo è **una sola
+> componente**, non quattro.
+
+**③ La lettura `C` è scattata sulla LETTERA, non nella sostanza.** A `sep = 1.8` c'è **una sola
+componente alla semina**, che è la condizione di `C` — ma `C` diagnosticava *«le masse si sono
+compenetrate»*, e **la misura dice il contrario**: i bordi massa-massa stanno a **`+1.72`**, i
+centri a `3.13`, e le tre masse restano **tre addensamenti distinti** che si collegano con
+**31 850 archi diretti**. **La componente unica viene dal VUOTO**, che a `sep = 1.8` le contiene
+tutte e tre (bordi a `−2.84`).
+> **Il criterio era scritto sull'osservabile sbagliato: il conteggio delle componenti non separa
+> «masse compenetrate» da «masse dentro il vuoto».** L'osservabile giusto è il **segno del bordo
+> massa-massa**, ed è positivo. **Non ho cambiato il criterio dopo aver visto i dati: lo riporto
+> com'è e dico perché non regge.**
+
+**④ Il costo, che va nella decisione:** gli archi alla semina passano da **429 498** (`sep = 8`) a
+**746 794** (`sep = 1.8`): **×1.74**. A `sep = 1.0` sono **×3.26**. **Il run precedente faceva
+`16.34 s/frame` e si è fermato a 2700 passi:** partire con il 74 % di archi in più **peggiora quel
+punto di partenza**, e la durata a `sep = 1.8` **non è ancora misurata** — il mio stesso presidio
+della lettura `C` ha fermato il pilota prima dei 300 passi, **come doveva**.
+
+> **Mi fermo qui, come ordina il §1 del mandato, perché la scelta non è più mia:** il mandato
+> descrive una scena con **masse separate che si toccano**, e **quella scena non esiste in questa
+> geometria**. Le opzioni misurate sono tre, e sono nel paragrafo del referto.
