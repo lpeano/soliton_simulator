@@ -207,3 +207,41 @@ e le masse stavano in **quattro componenti connesse con ZERO archi fra loro** *(
 pannello non mentiva — `campo_spaziale` somma su **tutti i nodi**, non sugli archi — **ma la
 lettura sì.** Il tool del video (`csv/_test_fork/_video_da_snapshot.py`) stampa il conteggio degli
 archi fra componenti **su ogni frame**, proprio per questo.
+
+---
+
+## 2026-09-20 (sera) — **L'ORDINE SI ALLUNGA: ① → ② → ③ → ④**
+
+```
+①  LE GUARDIE                      CHIUSO   Z67 (5/5) · Z68 (3/3) · Z69 (3/4 + 1 atteso)
+②  IL PANNELLO FEDELE              prossimo
+③  LE METRICHE DEL SETTORE CHIRALE + un giro breve a sep = 4.0
+④  IL RUN LUNGO a sep = 4.0        per ultimo
+```
+
+**Le metriche vanno PRIMA del run: otto ore senza i dati che servono sarebbero da rifare.**
+
+### ⚠ E l'`83 %` a `-1` del passo 2700 NON VALE — ma non per la ragione che sembrava
+
+**Non è (solo) che il grafo fosse in quattro componenti scollegate.** È che **`perc_chi` non è un
+lignaggio**: con `CHI_BASC = 1` *(ed era `1` nel run)* la riga `:3765` **riscrive l'intero array a
+ogni passo** da `twn > PHI_CRIT`.
+
+> **Quell'`83 %` è la frazione di nodi che NON hanno completato un giro di olonomia.**
+> **È un dato sulla TORSIONE, letto come se fosse un dato sulla CHIRALITÀ.**
+
+**E l'eredità chirale della mitosi (`:4294`) e la coppia opposta di Schwinger (`:4415`) sono
+appese DOPO `chi_basc` nel ciclo, quindi sopravvivono ESATTAMENTE ZERO passi completi.**
+*(Dettaglio e righe in `doc/TASK_HISTORY/2026-09-20_metriche-settore-chirale.md`.)*
+
+### La voce TODO del ② — il pannello fedele
+
+**Il problema, misurato:** `campo_spaziale` somma su **tutti i nodi** con la FFT; `calcola_psi`
+solo **sugli archi**. Nel run a `sep = 8` il pannello mostrava interferenza **fra masse in quattro
+componenti con zero archi fra loro**.
+**Cosa fare:** **un pannello IN PIÙ** che **interpola `psi`** sulla stessa griglia. **Entrambi
+restano** — `campo_spaziale` dà **continuità**, l'interpolazione dà **fedeltà**, il grafo dà la
+**topologia**.
+**Vincoli:** non si tocca `campo_spaziale` né la FFT · **il blob del simulatore NON cambia: è
+rendering** · **l'interpolazione LEGGE `psi`, non lo RICALCOLA** *(precedente `lambda_vuoto`)* · i
+buchi si **dichiarano** · uno smoothing, se serve, ha la scala **derivata** · **si misura il costo.**
