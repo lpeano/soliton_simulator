@@ -2738,6 +2738,16 @@ class Rete:
         # NB: il salto si registra SOLO col flag ACCESO. A flag spento la legge NON DEVE girare,
         # e contarlo come fallimento sarebbe un falso positivo -- la classe di `N3b` (par.9).
         self._g_kernel_alpha_tot = getattr(self, "_g_kernel_alpha_tot", 0) + 1
+        # [A8/A9, 2026-09-20] IL RAMO ALTERNATIVO, DICHIARATO. Se le lunghezze non combaciano il
+        # kernel NON viene rinforzato dal tempo proprio: `base` resta quello esponenziale puro,
+        # che e' la forma da cui il rinforzo parte. NON e' un errore, ed e' il comportamento
+        # giusto -- ma finora era SILENZIOSO, e un ramo silenzioso non e' un ramo (A8).
+        # MISURATO: 0 salti su 145 invocazioni (sigillo 3/3, 4edfab2). Si dichiara lo stesso:
+        # e' un difetto di FORMA, non di frequenza -- precedente Z25, tenuto benche' l'A/B non
+        # mostrasse alcun effetto.
+        # ⚠ PERCHE' UN `if` NEGATO E NON UN `else`: il corpo del ramo buono e' lungo ~40 righe,
+        # e un `else` finirebbe lontanissimo dalla condizione. Qui il ramo alternativo sta
+        # ACCANTO alla guardia, dove si legge. E' la stessa cosa, scritta dove si vede.
         if KERNEL_ALPHA != 0.0 and len(self.tw) != len(self.d):
             self._g_kernel_alpha_salti = getattr(self, "_g_kernel_alpha_salti", 0) + 1
             self._g_kernel_alpha_shape = (len(self.tw), len(self.d))
@@ -3230,10 +3240,6 @@ class Rete:
         # QUI IL FALLBACK C'E' GIA', esplicito e derivato (`np.full(n, LAM)`): manca solo il
         # CONTEGGIO. Mezza cura, si completa -- non si cambia il comportamento.
         self._g_tempo_luce_tot = getattr(self, "_g_tempo_luce_tot", 0) + 1
-        if not (len(ii) and len(dd) == len(ii)):
-            self._g_tempo_luce_salti = getattr(self, "_g_tempo_luce_salti", 0) + 1
-            self._g_tempo_luce_shape = (len(ii), len(dd))
-            self._g_tempo_luce_quando = self._g_tempo_luce_tot
         if len(ii) and len(dd) == len(ii):
             grado = (np.bincount(ii, minlength=n) + np.bincount(jj, minlength=n)).astype(float)
             somma = (np.bincount(ii, weights=dd, minlength=n) +
@@ -3242,6 +3248,12 @@ class Rete:
             d_nodo[grado <= 0] = LAM        # nodo isolato: nessun arco da cui leggere la scala
         else:
             d_nodo = np.full(n, LAM)        # fallback: LAM e' la scala gia' esistente (par.3)
+            # [A8, 2026-09-20] IL FALLBACK C'ERA GIA', esplicito e derivato: mancava il CONTEGGIO.
+            # Mezza cura completata -- il comportamento non cambia di un bit.
+            # MISURATO: 0 salti su 34 invocazioni (sigillo 3/3, 4edfab2).
+            self._g_tempo_luce_salti = getattr(self, "_g_tempo_luce_salti", 0) + 1
+            self._g_tempo_luce_shape = (len(ii), len(dd))
+            self._g_tempo_luce_quando = self._g_tempo_luce_tot
         d_nodo = np.maximum(d_nodo, 1e-12)
         csp = getattr(self, "_cs_nodo_prev", None)
         # CONTATORE DEL FALLBACK (diagnostico, non fisico): quante volte questo ramo else e' davvero
@@ -3966,6 +3978,12 @@ class Rete:
         # invocazione saltata. Il conteggio da solo non distingue un TRANSITORIO delle prime
         # chiamate da un comportamento PRINCIPALE sparso su tutto il run: danno lo stesso numero.
         self._g_tors4pi_tot = getattr(self, "_g_tors4pi_tot", 0) + 1
+        # [A8/A9, 2026-09-20] IL RAMO ALTERNATIVO, DICHIARATO. Se le lunghezze non combaciano la
+        # soglia di mitosi NON viene modulata dal gradiente di tempo proprio: resta `soglia0`
+        # su tutti gli archi, cioe' la soglia non modulata. NON e' un errore -- ma era silenzioso.
+        # MISURATO: 0 salti su 12 invocazioni (sigillo 3/3, 4edfab2). Si dichiara lo stesso.
+        # ⚠ `if` negato e non `else` per la stessa ragione di `_pesi`: il corpo del ramo buono e'
+        # lungo, e il ramo alternativo va scritto ACCANTO alla guardia, dove si legge.
         if TORS_4PI and len(self.i) != len(avv):
             self._g_tors4pi_salti = getattr(self, "_g_tors4pi_salti", 0) + 1
             self._g_tors4pi_shape = (len(self.i), len(avv))
