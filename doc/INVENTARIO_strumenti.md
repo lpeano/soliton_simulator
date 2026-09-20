@@ -663,3 +663,44 @@ Il mio classificatore l'aveva messo fra i reperti: **errore di categoria, corret
 | `csv/_test_fork/_venti_archi.py` | `cee10eb5` | `python csv/_test_fork/_venti_archi.py` | i 20 archi con `|vd|` massimo (indice, nodi, `d`, `d0`, `d/d0`, e per ogni nodo `_deg`/`eta`/`perc_chi`/`|psi|`/`|omega_s|`); la loro INTERSEZIONE fra istanti (per coppia di nodi, non per indice); e la distribuzione di `_deg` separata ORIGINALI/NATI. SONDA. | par.2 di `doc/TASK_HISTORY/2026-09-20_venti-archi-e-nsub.md` |
 
 | `csv/_test_fork/_innesco_cinque.py` | `7e0ec88f` | `python csv/_test_fork/_innesco_cinque.py` | PARTE 1 della caccia all innesco: i cinque nodi persistenti (16, 481, 621, 627, 837) al passo 120 contro il 240 del ramo B, con il RANGO PERCENTILE di ogni campo nella popolazione, e i loro archi (d/d0, |vd|, tau derivato). SOLO LETTURA di due .pkl. | `doc/REFERTO_innesco_cinque.md` |
+
+
+---
+
+## ⚠ I `.pkl` DEI DUE RUN A/B a `sep = 4.0` — **aggiunti il 2026-09-20, e la voce ERA MANCANTE**
+
+> **`CLAUDE.md` par.5-quinquies: «un `.pkl` senza il suo comando non e' un dato».** La regola chiede
+> che la voce sia scritta **NELLO STESSO COMMIT** in cui il `.pkl` nasce.
+> **⚠ NON L'HO FATTO: i due run giravano da oltre due ore e questa voce non esisteva.**
+> **E' un'omissione mia, non una scelta**, ed e' esattamente la classe di difetto che il par.5-novies
+> che ho scritto stamattina dovrebbe impedire — **e che una REGOLA SCRITTA, da sola, non impedisce
+> (`A9`).**
+
+**I `.pkl` non si committano** (binari, ~35 MB l'uno; **`16` in A + `3` in B = `673 MB` finora**).
+**Ma il sistema e' DETERMINISTICO: il dato E' il comando che lo produce.**
+
+| | |
+|---|---|
+| **archivi** | `csv/_test_fork/_ab_A/scena_??????.pkl.gz` · `csv/_test_fork/_ab_B/scena_??????.pkl.gz` |
+| **cadenza** | uno ogni **20 frame = 120 passi** di motore (`--serie=20`), numerati **col passo** |
+| **SEME** | **`42`** *(letto dal blocco di testa del `prog.csv`, non assunto)* |
+| **BLOB del simulatore** | **`edb8f844`** *(sha1 dei BYTE GREZZI — **non** `git hash-object`)* · git-blob `b44f50ce` |
+| **BLOB del driver** | **`9aee4fc2`** *(`csv/_test_fork/_scena_video.py`, con `--chi-basc=on\|off`)* |
+| **passi previsti** | **3000** per ramo (500 frame x 6) |
+| **data** | avvio **2026-09-20 16:26:50** *(`doc/STATO_RUN.md`, voce `ab_sep4_A_e_B`)* |
+
+**LE DUE RIGHE DI COMANDO, VERBATIM:**
+```
+ramo A  (chi_basc ACCESO, il default)
+python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_A --sep=4.0 --serie=20 --csv-progresso=csv/_test_fork/_ab_A/prog.csv
+
+ramo B  (chi_basc SPENTO)
+python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie=20 --csv-progresso=csv/_test_fork/_ab_B/prog.csv --chi-basc=off
+```
+
+**⚠ E DUE COSE CHE SERVONO PER RIFARLI DAVVERO, e che il comando da solo non dice:**
+- **il `prog.csv` di ciascun ramo PORTA GIA' blob, seme e venti flag nel suo blocco di testa (P6)** —
+  quindi **quello** e' il file che certifica il run, non il nome della cartella;
+- **`--chi-basc=on` e' il DEFAULT**: il ramo A si ottiene **omettendo** l'opzione. *(Il sigillo
+  `_sigillo_chibasc_driver.py` prova che a default il driver e' byte-identico a quello di `bb1d727`:
+  `C1`, 142 campi confrontati, 0 diversi.)*
