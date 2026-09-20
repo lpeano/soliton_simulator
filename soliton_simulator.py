@@ -380,6 +380,7 @@ def rapporto_guardie(net):
     dell'ultima invocazione saltata). `shape[0] == -1` significa memoria ASSENTE, non lunghezza 0.
     """
     siti = ("kernel_alpha", "tempo_luce", "zeta_vir_a", "zeta_vir_b", "tors4pi")
+    # il GRUPPO C non e' una guardia ma un DEFAULT: ha contatori diversi, e si riporta a parte
     fuori = {}
     for k in siti:
         tot = int(getattr(net, "_g_%s_tot" % k, 0))
@@ -388,6 +389,14 @@ def rapporto_guardie(net):
                         frazione=(sal / tot if tot else float("nan")),
                         shape=getattr(net, "_g_%s_shape" % k, None),
                         quando=getattr(net, "_g_%s_quando" % k, None))
+    fuori["s2full_default"] = dict(
+        tot=int(getattr(net, "_g_s2full_tot", 0)),
+        salti=int(getattr(net, "_g_s2full_conmask", 0)),
+        frazione=(int(getattr(net, "_g_s2full_conmask", 0))
+                  / max(int(getattr(net, "_g_s2full_tot", 0)), 1)),
+        shape=(int(getattr(net, "_g_s2full_fuori", 0)),
+               int(getattr(net, "_g_s2full_fuori_max", 0))),
+        quando=getattr(net, "_g_s2full_quando", None))
     return fuori
 
 
@@ -4604,9 +4613,28 @@ class Rete:
                 self._diag_sin2_p95 = (float(np.percentile(sin2, 95)) if len(sin2)
                                        else float("nan"))
                 if ZETA_VIR:
+                    # [A8, 2026-09-20] IL DEFAULT FUORI DAL `mask` E' UNA DECISIONE FISICA, e va
+                    # dichiarata e CONTATA invece di restare in un'allocazione.
+                    # `sin2 = 0` significa `beta * (1 - 0) = beta`, cioe' FRENO PIENO: gli archi
+                    # fuori dal `mask` vengono frenati SENZA la correzione anisotropa.
+                    # PERCHE' E' GIUSTO COSI', e non e' un ripiego: il `mask` e' `(i < n) & (j < n)`
+                    # -- gli archi esclusi sono quelli che puntano a nodi che NON ESISTONO, per cui
+                    # `sin2` non e' calcolabile. Frenarli come se non avessero conversione virale e'
+                    # il comportamento CONSERVATIVO, e l'alternativa (`1`, freno nullo) darebbe a un
+                    # arco non calcolabile il trattamento piu' favorevole.
+                    # SI CONTA quanti restano fuori: se fossero molti, questo default smetterebbe
+                    # di essere una formalita' e diventerebbe una legge, da DERIVARE.
                     s2full = np.zeros(len(self.i))
                     s2full[mask] = sin2
                     self._sin2_vir = s2full
+                    self._g_s2full_tot = getattr(self, "_g_s2full_tot", 0) + 1
+                    _fuori = int(len(self.i) - int(np.count_nonzero(mask)))
+                    self._g_s2full_fuori = _fuori
+                    self._g_s2full_fuori_max = max(int(getattr(self, "_g_s2full_fuori_max", 0)),
+                                                   _fuori)
+                    if _fuori:
+                        self._g_s2full_conmask = getattr(self, "_g_s2full_conmask", 0) + 1
+                        self._g_s2full_quando = self._g_s2full_tot
                 radiale = grav * cos2
                 if LS_AZIM and self._nb is not None and len(self._nb) >= self.n:
                     _cen = self.pos[:self.n].mean(0)
