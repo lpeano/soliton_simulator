@@ -482,3 +482,173 @@ conta)*. **Gli altri 43 PNG no** — 8.5 MB che il comando rigenera in 50 second
 > come risultato.** I numeri misurati stanno in `Z65`.
 > **I controlli che stampa su ogni frame — 4 componenti, `0` archi fra componenti, `P0` su `0`
 > nodi — sono controlli, e il testo diventa ROSSO se il conteggio non è zero.**
+
+---
+
+# RECUPERO DEL 2026-09-20 — **le 97 voci che mancavano**
+
+> **Il conto PRIMA:** `79` strumenti in `csv/_test_fork/` + `45` sigilli in `csv/_seal_fork/`,
+> **`27` in inventario** *(19 + 8)* = **il 22 %**. **`97` mancanti.**
+> **⚠ E il conto da cui il mandato partiva — `81 / 34 / 47` — NON includeva `_seal_fork/`,**
+> cioe' proprio i **sigilli**, che sono la categoria dove l'omissione costa di piu'.
+
+> **IL TRIAGE E' QUELLO DEL par.5-novies, e NON e' burocrazia:** inventariare una sonda come
+> un sigillo **gonfia il conto e nasconde i sigilli veri**.
+
+> **⚠ ONESTA' SUL «COMANDO», e va letta prima di fidarsi:** dove lo strumento **non** legge
+> `argv`, il comando e' **completo e verificato**. Dove lo legge, e' marcato
+> **`+ ARGOMENTI DA VERIFICARE`**: **scrivere un comando inventato sarebbe peggio di non
+> scriverlo**, perche' il prossimo lo rigirerebbe sbagliato credendolo giusto.
+
+> **Il `blob` e' lo `sha1` dei BYTE GREZZI** *(mai `git hash-object`: par.5-quinquies)*,
+> **al 2026-09-20**, ed e' il blob **del file**, non quello su cui e' stato girato l'ultima
+> volta — **quello non e' recuperabile a posteriori, e lo dico invece di inventarlo**.
+
+
+## SIGILLI (30) — voce COMPLETA
+
+**⚠ LA RI-GIRABILITA' NON E' STATA VERIFICATA UNO PER UNO** *(e' la famiglia di `Z31`:
+riferimenti in cartelle temporanee, snapshot cancellati nel `finally`, blob spariti)*.
+**Dichiararla senza averla provata sarebbe un timbro falso.** Resta come lavoro aperto.
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_seal_fork/_ab_chi_basc.py` | `c40cf1c6` | `python csv/_seal_fork/_ab_chi_basc.py` | (nessun docstring) | `_ab_chi_basc.txt` |
+| `csv/_seal_fork/_ab_reciprocita.py` | `655a9f40` | `python csv/_seal_fork/_ab_reciprocita.py` **+ ARGOMENTI DA VERIFICARE** | (nessun docstring) | `_ab_reciprocita.txt` |
+| `csv/_seal_fork/_sigillo_N.py` | `1b69f06a` | `python csv/_seal_fork/_sigillo_N.py` | ) | **nessun esito accanto** |
+| `csv/_seal_fork/_sigillo_Y5_riscritto.py` | `adab8c60` | `python csv/_seal_fork/_sigillo_Y5_riscritto.py` **+ ARGOMENTI DA VERIFICARE** | (nessun docstring) | `_sigillo_Y5_riscritto.txt` |
+| `csv/_seal_fork/_sigillo_anello.py` | `989a6992` | `python csv/_seal_fork/_sigillo_anello.py` | la STESSA legge di `ritmo()`, righe per righe. Se sbaglio, P1 FALLISCE: non passa in silenzio. | `_sigillo_anello.txt` |
+| `csv/_seal_fork/_sigillo_calcpsi_T1.py` | `c1137f31` | `python csv/_seal_fork/_sigillo_calcpsi_T1.py` | (nessun docstring) | `_sigillo_calcpsi_T1.txt` |
+| `csv/_seal_fork/_sigillo_calcpsi_T2.py` | `c71ab853` | `python csv/_seal_fork/_sigillo_calcpsi_T2.py` | (nessun docstring) | `_sigillo_calcpsi_T2.txt` |
+| `csv/_seal_fork/_sigillo_chibasc_driver.py` | `bee78272` | `python csv/_seal_fork/_sigillo_chibasc_driver.py` | I flag come il MODULO li ha DOPO `_applica_flag`, non come il comando li chiedeva. | `_sigillo_chibasc_driver.txt` |
+| `csv/_seal_fork/_sigillo_contatori_guardie.py` | `2ffef151` | `python csv/_seal_fork/_sigillo_contatori_guardie.py` | (nessun docstring) | `_sigillo_contatori_guardie.txt` |
+| `csv/_seal_fork/_sigillo_coorti.py` | `93aaec70` | `python csv/_seal_fork/_sigillo_coorti.py` | LA RIGA DELLE SHAPE PRIMA DI TUTTO: max/A-B/ = 0 puo' significare NESSUN CONFRONTO. | `_sigillo_coorti.txt` |
+| `csv/_seal_fork/_sigillo_correzioni.py` | `7e14d5c0` | `python csv/_seal_fork/_sigillo_correzioni.py` | Ritorna (xi_padre, xi_figlio) e i `xi` dei NEONATI, leggendoli nel momento GIUSTO. | `_sigillo_correzioni.txt` |
+| `csv/_seal_fork/_sigillo_cs_floor.py` | `485829e2` | `python csv/_seal_fork/_sigillo_cs_floor.py` | righe ESEGUIBILI che usano GAMMA: niente commenti, niente stringhe di help. | `_sigillo_cs_floor.txt` |
+| `csv/_seal_fork/_sigillo_d_arco.py` | `6ba08d61` | `python csv/_seal_fork/_sigillo_d_arco.py` | Occorrenze nel CODICE ESEGUIBILE, non nei commenti. | `_sigillo_d_arco.txt` |
+| `csv/_seal_fork/_sigillo_denominatore.py` | `0dee44c5` | `python csv/_seal_fork/_sigillo_denominatore.py` | La forma PRE-CURA, ricostruita esplicitamente: e' il termine di paragone. | `_sigillo_denominatore.txt` |
+| `csv/_seal_fork/_sigillo_inerzia.py` | `5f317518` | `python csv/_seal_fork/_sigillo_inerzia.py` | (nessun docstring) | `_sigillo_inerzia.txt` |
+| `csv/_seal_fork/_sigillo_passo1_dieci.py` | `4876f063` | `python csv/_seal_fork/_sigillo_passo1_dieci.py` | (nessun docstring) | `_sigillo_passo1_dieci.txt` |
+| `csv/_seal_fork/_sigillo_pesi.py` | `a0509686` | `python csv/_seal_fork/_sigillo_pesi.py` | ) | **nessun esito accanto** |
+| `csv/_seal_fork/_sigillo_pezzo1.py` | `5071113f` | `python csv/_seal_fork/_sigillo_pezzo1.py` | Bloch di uno spinore (mappa di Pauli), stessa forma di _nb_grav. | **nessun esito accanto** |
+| `csv/_seal_fork/_sigillo_pezzo2.py` | `23eb8330` | `python csv/_seal_fork/_sigillo_pezzo2.py` | ) | **nessun esito accanto** |
+| `csv/_seal_fork/_sigillo_pezzo3.py` | `f03f67f0` | `python csv/_seal_fork/_sigillo_pezzo3.py` | ) | **nessun esito accanto** |
+| `csv/_seal_fork/_sigillo_rep_spinta.py` | `7263607f` | `python csv/_seal_fork/_sigillo_rep_spinta.py` | (nessun docstring) | `_sigillo_rep_spinta.txt` |
+| `csv/_seal_fork/_sigillo_rimozione5.py` | `1d67209e` | `python csv/_seal_fork/_sigillo_rimozione5.py` | (nessun docstring) | `_sigillo_rimozione5.txt` |
+| `csv/_seal_fork/_sigillo_ripresa_scena.py` | `fe0eb6f2` | `python csv/_seal_fork/_sigillo_ripresa_scena.py` | (nessun docstring) | `_sigillo_ripresa_scena.txt` |
+| `csv/_seal_fork/_sigillo_rumore_colorato.py` | `9e7dc7a5` | `python csv/_seal_fork/_sigillo_rumore_colorato.py` | tau_c -> 0 SOLO per la durata del passo spinoriale: fuori, CS_M resta quello vero. | `_sigillo_rumore_colorato.txt` |
+| `csv/_seal_fork/_sigillo_scala_p.py` | `a0dae4e9` | `python csv/_seal_fork/_sigillo_scala_p.py` | (nessun docstring) | `_sigillo_scala_p.txt` |
+| `csv/_seal_fork/_sigillo_sep_driver.py` | `012f6a49` | `python csv/_seal_fork/_sigillo_sep_driver.py` | (nessun docstring) | `_sigillo_sep_driver.txt` |
+| `csv/_seal_fork/_sigillo_step2.py` | `1d12dd2b` | `python csv/_seal_fork/_sigillo_step2.py` | ) | **nessun esito accanto** |
+| `csv/_seal_fork/_sigillo_taup_causale.py` | `2506052c` | `python csv/_seal_fork/_sigillo_taup_causale.py` | (nessun docstring) | `_sigillo_taup_causale.txt` |
+| `csv/_seal_fork/_sigillo_turbo.py` | `02c7b0e4` | `python csv/_seal_fork/_sigillo_turbo.py` | ) | **nessun esito accanto** |
+| `csv/_seal_fork/_sigillo_twist_nodo.py` | `9274ef75` | `python csv/_seal_fork/_sigillo_twist_nodo.py` | (nessun docstring) | `_sigillo_twist_nodo.txt` |
+
+## SONDE con esito committato accanto (61) — UNA riga
+
+**Il risultato ESISTE accanto allo strumento.** Per queste il par.5-novies chiede
+**una riga che dica DOVE sta l'esito**, non una voce completa.
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_seal_fork/_diagnosi_porte_Y5.py` | `32561762` | `python csv/_seal_fork/_diagnosi_porte_Y5.py` | (nessun docstring) | `_diagnosi_porte_Y5.txt` |
+| `csv/_seal_fork/_fdt_scuotimento.py` | `a9bf1dc3` | `python csv/_seal_fork/_fdt_scuotimento.py` | ESATTAMENTE `:2016-2021` (Rodrigues): ruota n ATTORNO a omega. Conserva /n/ e l'angolo n-omega. | **nessun esito accanto** |
+| `csv/_seal_fork/_reperto_inerzia.py` | `480d9a34` | `python csv/_seal_fork/_reperto_inerzia.py` | ) | **nessun esito accanto** |
+| `csv/_seal_fork/_rigioca_finestre.py` | `d4b32fae` | `python csv/_seal_fork/_rigioca_finestre.py` | (nessun docstring) | `_rigioca_finestre.txt` |
+| `csv/_seal_fork/_u7_separazione_scale.py` | `664724c2` | `python csv/_seal_fork/_u7_separazione_scale.py` | (nessun docstring) | `_u7_separazione_scale.txt` |
+| `csv/_seal_fork/_verifica_finestra_patch.py` | `56946ffd` | `python csv/_seal_fork/_verifica_finestra_patch.py` **+ ARGOMENTI DA VERIFICARE** | (nessun docstring) | `_verifica_finestra_patch.txt` |
+| `csv/_test_fork/_Y_nel_vuoto.py` | `b7ec7f46` | `python csv/_test_fork/_Y_nel_vuoto.py` **+ ARGOMENTI DA VERIFICARE** | (nessun docstring) | **nessun esito accanto** |
+| `csv/_test_fork/_Z33_due_vie.py` | `7d1f6717` | `python csv/_test_fork/_Z33_due_vie.py` | (nessun docstring) | `_Z33_due_vie.txt` |
+| `csv/_test_fork/_Z36_cucitura.py` | `1f0bf98e` | `python csv/_test_fork/_Z36_cucitura.py` | (nessun docstring) | `_Z36_cucitura.txt` |
+| `csv/_test_fork/_analisi7_assiomi.py` | `c356bbc1` | `python csv/_test_fork/_analisi7_assiomi.py` | (nessun docstring) | `_analisi7_assiomi.txt` |
+| `csv/_test_fork/_analisi_tw.py` | `a3b092e9` | `python csv/_test_fork/_analisi_tw.py` | (nessun docstring) | `_analisi_tw.txt` |
+| `csv/_test_fork/_anello_sfasato.py` | `555b5763` | `python csv/_test_fork/_anello_sfasato.py` | (nessun docstring) | `_anello_sfasato.txt` |
+| `csv/_test_fork/_audit_A8.py` | `c7b058f6` | `python csv/_test_fork/_audit_A8.py` | (nessun docstring) | `_audit_A8.txt` |
+| `csv/_test_fork/_audit_default.py` | `3ef9ff63` | `python csv/_test_fork/_audit_default.py` | (nessun docstring) | `_audit_default.txt` |
+| `csv/_test_fork/_campagna_csfloor.py` | `1c74b90d` | `python csv/_test_fork/_campagna_csfloor.py` | (nessun docstring) | `_campagna_csfloor.txt` |
+| `csv/_test_fork/_campagna_step2.py` | `d05a6749` | `python csv/_test_fork/_campagna_step2.py` | (nessun docstring) | `_campagna_step2.txt` |
+| `csv/_test_fork/_canali_disordine.py` | `cec06613` | `python csv/_test_fork/_canali_disordine.py` **+ ARGOMENTI DA VERIFICARE** | (nessun docstring) | **nessun esito accanto** |
+| `csv/_test_fork/_chi_non_invecchia.py` | `44611f63` | `python csv/_test_fork/_chi_non_invecchia.py` | (nessun docstring) | `_chi_non_invecchia.txt` |
+| `csv/_test_fork/_chi_non_ruota.py` | `135ac307` | `python csv/_test_fork/_chi_non_ruota.py` | nodi FERMI contro TUTTI, nello STESSO istante e sulla STESSA popolazione (A3c). | `_chi_non_ruota.txt` |
+| `csv/_test_fork/_classifica_guardie.py` | `318d6cd1` | `python csv/_test_fork/_classifica_guardie.py` | il commit che ha INTRODOTTO la riga: `git log -S`, PRIMA riga dell'output. | `_classifica_guardie.txt` |
+| `csv/_test_fork/_conta_psi_spin_prec.py` | `7b7fd5fc` | `python csv/_test_fork/_conta_psi_spin_prec.py` | (nessun docstring) | `_conta_psi_spin_prec.txt` |
+| `csv/_test_fork/_contrasto_step2.py` | `98f787f3` | `python csv/_test_fork/_contrasto_step2.py` | (nessun docstring) | `_contrasto_step2.txt` |
+| `csv/_test_fork/_crescita_omega.py` | `cfb77b43` | `python csv/_test_fork/_crescita_omega.py` **+ ARGOMENTI DA VERIFICARE** | (nessun docstring) | `_crescita_omega.txt` |
+| `csv/_test_fork/_cronologia.py` | `2634c749` | `python csv/_test_fork/_cronologia.py` **+ ARGOMENTI DA VERIFICARE** | Il punto di attraversamento, con la regola fissata PRIMA. | `_cronologia.txt` |
+| `csv/_test_fork/_diagnosi_peq_nascita.py` | `2adb1c29` | `python csv/_test_fork/_diagnosi_peq_nascita.py` | (nessun docstring) | `_diagnosi_peq_nascita.txt` |
+| `csv/_test_fork/_dump_snapshot.py` | `0974b224` | `python csv/_test_fork/_dump_snapshot.py` **+ ARGOMENTI DA VERIFICARE** | Solo dove serve davvero il MODULO (ampiezze, norme): lo dichiara chi lo chiama. | **nessun esito accanto** |
+| `csv/_test_fork/_estensivita_grado.py` | `c1f66b33` | `python csv/_test_fork/_estensivita_grado.py` | Le DUE MODE separate: mai un fit, mai una media fra popolazioni distinte. | `_estensivita_grado.txt` |
+| `csv/_test_fork/_f_e_median.py` | `cd1ad7e4` | `python csv/_test_fork/_f_e_median.py` | (nessun docstring) | `_f_e_median.txt` |
+| `csv/_test_fork/_forma_Y.py` | `180f36c2` | `python csv/_test_fork/_forma_Y.py` **+ ARGOMENTI DA VERIFICARE** | (nessun docstring) | **nessun esito accanto** |
+| `csv/_test_fork/_freq_riferimento.py` | `4e3a84a8` | `python csv/_test_fork/_freq_riferimento.py` | la STESSA formula di _tempo_luce_nodo (:3036-3044): media di `d` sugli archi incidenti. | `_freq_riferimento.txt` |
+| `csv/_test_fork/_gate_bonifica.py` | `5289eec4` | `python csv/_test_fork/_gate_bonifica.py` | La domanda e' sempre la stessa: e' concentrata su 1, o ha struttura? | `_gate_bonifica.txt` |
+| `csv/_test_fork/_gauge_degenere.py` | `b1ca7968` | `python csv/_test_fork/_gauge_degenere.py` | (nessun docstring) | `_gauge_degenere.txt` |
+| `csv/_test_fork/_gauge_vuoto.py` | `72c4c39e` | `python csv/_test_fork/_gauge_vuoto.py` | proiezione arco->nodo di `peq`: la STESSA forma gia' usata a :2295-2297. | `_gauge_vuoto.txt` |
+| `csv/_test_fork/_lettura_braccio_ON.py` | `f83ec9d1` | `python csv/_test_fork/_lettura_braccio_ON.py` **+ ARGOMENTI DA VERIFICARE** | valore della colonna all'ultimo campione, o al passo chiesto. | `_lettura_braccio_ON.txt` |
+| `csv/_test_fork/_letture_ab.py` | `4e14a227` | `python csv/_test_fork/_letture_ab.py` | olonomia FIRMATA, berry, e `coer_l`. IMPORTA IL SIMULATORE: si gira a run FINITI. | **nessun esito accanto** |
+| `csv/_test_fork/_maturazione.py` | `b8f5708d` | `python csv/_test_fork/_maturazione.py` **+ ARGOMENTI DA VERIFICARE** | (nessun docstring) | **nessun esito accanto** |
+| `csv/_test_fork/_mediana_ritmo.py` | `d8f5c054` | `python csv/_test_fork/_mediana_ritmo.py` | (nessun docstring) | `_mediana_ritmo.txt` |
+| `csv/_test_fork/_misura_Z24.py` | `4b4af172` | `python csv/_test_fork/_misura_Z24.py` | /sum/ / max/./ su un array (n,) o (n,3): per i vettori si usa la NORMA della somma. | `_misura_Z24.txt` |
+| `csv/_test_fork/_misura_denominatore.py` | `536494fe` | `python csv/_test_fork/_misura_denominatore.py` | (nessun docstring) | `_misura_denominatore.txt` |
+| `csv/_test_fork/_misura_tw.py` | `1316b5ca` | `python csv/_test_fork/_misura_tw.py` **+ ARGOMENTI DA VERIFICARE** | (nessun docstring) | `_misura_tw.txt` |
+| `csv/_test_fork/_misure_run6000.py` | `718cd94d` | `python csv/_test_fork/_misure_run6000.py` **+ ARGOMENTI DA VERIFICARE** | ramp = min(1, eta/TAU_A). LA LEGGE E' DEL CODICE (:2649), non una definizione mia. | **nessun esito accanto** |
+| `csv/_test_fork/_misure_scala_p.py` | `c10f3464` | `python csv/_test_fork/_misure_scala_p.py` | median(tanh(/dpozzo/ / phi_arc)) -- quello che la CURA produrrebbe. | `_misure_scala_p.txt` |
+| `csv/_test_fork/_parentela_bloch.py` | `d8174393` | `python csv/_test_fork/_parentela_bloch.py` **+ ARGOMENTI DA VERIFICARE** | Angolo fra due direzioni, in gradi. Nessuna normalizzazione assunta. | **nessun esito accanto** |
+| `csv/_test_fork/_passo198.py` | `5267eaf0` | `python csv/_test_fork/_passo198.py` **+ ARGOMENTI DA VERIFICARE** | (nessun docstring) | `_passo198.txt` |
+| `csv/_test_fork/_pilota_sep.py` | `631ebf44` | `python csv/_test_fork/_pilota_sep.py` | Il LIGNAGGIO dei nodi nati dopo la semina, e dichiaro come. | **nessun esito accanto** |
+| `csv/_test_fork/_retroazione_r.py` | `c27e279a` | `python csv/_test_fork/_retroazione_r.py` | pendenza PARZIALE su x1 tenendo x2 fisso (due regressori + intercetta). | `_retroazione_r.txt` |
+| `csv/_test_fork/_rimisura_Z9.py` | `cd2c76b7` | `python csv/_test_fork/_rimisura_Z9.py` **+ ARGOMENTI DA VERIFICARE** | Restituisce la traiettoria di ramp/eta. `scena` costruisce e restituisce la rete. | `_rimisura_Z9.txt` |
+| `csv/_test_fork/_scansione_schemi.py` | `27d9e2db` | `python csv/_test_fork/_scansione_schemi.py` | Mappa riga -> nome della funzione che la contiene (la piu' interna). | `_scansione_schemi.txt` |
+| `csv/_test_fork/_scelta_denominatore.py` | `4f4ad994` | `python csv/_test_fork/_scelta_denominatore.py` | (nessun docstring) | `_scelta_denominatore.txt` |
+| `csv/_test_fork/_scena_video_ripresa.py` | `e68bb8c5` | `python csv/_test_fork/_scena_video_ripresa.py` | (nessun docstring) | **nessun esito accanto** |
+| `csv/_test_fork/_scomposizione_L.py` | `580fbb05` | `python csv/_test_fork/_scomposizione_L.py` | (nessun docstring) | `_scomposizione_L.txt` |
+| `csv/_test_fork/_semi_spin_feedback.py` | `a18cd12d` | `python csv/_test_fork/_semi_spin_feedback.py` | (nessun docstring) | `_semi_spin_feedback.txt` |
+| `csv/_test_fork/_somme.py` | `5ec2372f` | `python csv/_test_fork/_somme.py` | (nessun docstring) | `_somme.txt` |
+| `csv/_test_fork/_sonda_2706.py` | `b350f651` | `python csv/_test_fork/_sonda_2706.py` | (nessun docstring) | `_sonda_2706.txt` |
+| `csv/_test_fork/_sonda_eta_ramp.py` | `c4ca14ac` | `python csv/_test_fork/_sonda_eta_ramp.py` **+ ARGOMENTI DA VERIFICARE** | Chiamata da step:3018 PRIMA dell'incremento di eta: e' li' che si misura. | `_sonda_eta_ramp.txt` |
+| `csv/_test_fork/_tassi_coppie.py` | `9b152fc4` | `python csv/_test_fork/_tassi_coppie.py` **+ ARGOMENTI DA VERIFICARE** | Prima eta' in cui <chi> raggiunge 1-1/e del percorso verso 90 gradi, con interpolazione | **nessun esito accanto** |
+| `csv/_test_fork/_tre_cricchetti.py` | `07ececc0` | `python csv/_test_fork/_tre_cricchetti.py` **+ ARGOMENTI DA VERIFICARE** | (nessun docstring) | `_tre_cricchetti.txt` |
+| `csv/_test_fork/_verdetto_baseline.py` | `d063f797` | `python csv/_test_fork/_verdetto_baseline.py` | (nessun docstring) | `_verdetto_baseline.txt` |
+| `csv/_test_fork/_verifica_inerzia1.py` | `480b6f02` | `python csv/_test_fork/_verifica_inerzia1.py` | (nessun docstring) | `_verifica_inerzia1.txt` |
+| `csv/_test_fork/_verifiche_inerzia.py` | `18012f00` | `python csv/_test_fork/_verifiche_inerzia.py` | (nessun docstring) | `_verifiche_inerzia.txt` |
+| `csv/_test_fork/_verifiche_ramp.py` | `ba371915` | `python csv/_test_fork/_verifiche_ramp.py` | (nessun docstring) | `_verifiche_ramp.txt` |
+
+## ⚠ STRUMENTI SENZA ESITO REPERIBILE (5)
+
+**⚠ E NESSUNO DI QUESTI E' UN REPERTO — la parola giusta conta, e la prima che avevo usato era
+SBAGLIATA.**
+
+Il mandato chiama **REPERTO** *«una misura fatta e mai scritta»*. **Sono andato a cercarli, e non
+ce ne sono.**
+
+**DUE MISURE INDIPENDENTI, e la seconda ha corretto la prima:**
+- **la veloce** — *«esiste un file di esito accanto allo strumento?»* — dava **17** candidati, poi
+  **11 falsi positivi**, quindi **6**;
+- **la lenta** — *«lo strumento e' nominato in un messaggio di commit?»* — dice che **16 dei 17 lo
+  sono**, e il diciassettesimo (`_verifica_finestra_patch.py`) ha il suo `.txt` accanto.
+
+> **Per il criterio «esito accanto OPPURE nominato in un commit»: ZERO reperti su 17.**
+> **Nessun risultato e' andato perduto.**
+
+**Quello che manca a questi `5` e' il FILE DI ESITO accanto allo strumento, non il risultato.**
+**E la lezione di metodo e' la piu' utile del giro:** il classificatore veloce sbagliava **quasi
+due su tre**, e **se mi fossi fermato alla prima misura avrei scritto nel registro cinque «reperti»
+che non esistono** — cioe' avrei creato lavoro fantasma **dentro il documento che serve a togliere
+il lavoro fantasma.**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_autocorr_bloch.py` | `5681f628` | `python csv/_test_fork/_autocorr_bloch.py` | (nessun docstring) | **nessun esito accanto** |
+| `csv/_test_fork/_conformita_e_verdetto.py` | `8c378f03` | `python csv/_test_fork/_conformita_e_verdetto.py` | (nessun docstring) | **nessun esito accanto** |
+| `csv/_test_fork/_pilota_eta.py` | `d5c69ee0` | `python csv/_test_fork/_pilota_eta.py` | (nessun docstring) | **nessun esito accanto** |
+| `csv/_test_fork/_pilota_scena6000.py` | `91da82d5` | `python csv/_test_fork/_pilota_scena6000.py` **+ ARGOMENTI DA VERIFICARE** | (nessun docstring) | **nessun esito accanto** |
+| `csv/_test_fork/_sonda_rho_zero.py` | `8efca84e` | `python csv/_test_fork/_sonda_rho_zero.py` **+ ARGOMENTI DA VERIFICARE** | (nessun docstring) | **nessun esito accanto** |
+
+## INFRASTRUTTURA (1) — non e' ne' sigillo ne' sonda
+
+**Non produce una misura propria:** e' un modulo che altri sigilli caricano.
+Il mio classificatore l'aveva messo fra i reperti: **errore di categoria, corretto a mano**.
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_seal_fork/_runner_sim.py` | `368e6caa` | `python csv/_seal_fork/_runner_sim.py` | (nessun docstring) | **nessun esito accanto** |
