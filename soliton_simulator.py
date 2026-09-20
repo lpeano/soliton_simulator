@@ -145,6 +145,19 @@ from scipy.ndimage import gaussian_filter
 
 LAM      = 0.8
 LAM_BASE = 0.8   # lunghezza d'onda del solitone fondamentale (~2 lunghezze di Planck)
+
+# [TRACCIA_D0, 2026-09-20] STRUMENTAZIONE DEI DICIANNOVE PUNTI CHE TOCCANO `d0`. OFF di default.
+# ⚠ PERCHE' ESISTE: `d0` e' scritto in DODICI punti e limitato da SETTE pavimenti, e NESSUNO era
+#   contato. La domanda «chi fa gli otto salti sull'arco 16-481» non ha risposta senza questo.
+# ⚠ E PERCHE' UN CONTATORE GLOBALE NON BASTA: direbbe QUANTE VOLTE, non SU QUALE ARCO. Qui si
+#   registra il `d0` PRIMA e DOPO ogni sito per un insieme di archi DICHIARATO, piu' la somma
+#   ALGEBRICA del delta -- il conteggio da solo non dice chi spinge IN GIU'.
+# ⚠ I PAVIMENTI SONO SITI A PIENO TITOLO, non un dettaglio: un pavimento non spinge, TAGLIA, e
+#   produce esattamente un profilo a scatti. Per loro si registra QUANTI ARCHI HA TAGLIATO e il
+#   VALORE del pavimento -- che NON e' una costante: `_floor_d0` e' COMOVENTE, `f*median(d0)`.
+TRACCIA_D0 = False
+TRACCIA_D0_COPPIE = ((16, 481),)          # dettaglio PIENO: le coppie di nodi seguite una per una
+TRACCIA_D0_NODI = (16, 481, 621, 627, 837)  # riassunto: tutti gli archi di questi nodi
 # COARSE-GRAINING (dettare la scala): un solitone-blocco rappresenta SCALA_B solitoni
 # fini. Regole di scala derivate imponendo la conservazione delle tre leggi al continuo
 # (Poisson, bilancio gravita'/espansione, precessione), e verificate numericamente:
@@ -2080,7 +2093,9 @@ class Rete:
             a, b, dd = a[opposti], b[opposti], dd[opposti]
         if not len(a): self._grado(); return
         self.i = np.concatenate([self.i, a]); self.j = np.concatenate([self.j, b])
+        if TRACCIA_D0: _tr_pre = self.d0.copy()
         self.d = np.concatenate([self.d, dd]); self.d0 = np.concatenate([self.d0, dd])
+        if TRACCIA_D0: self._traccia_d0('S01_archi_nuovi', _tr_pre)
         self.vd = np.concatenate([self.vd, np.zeros(len(dd))])
         self.peq = np.concatenate([self.peq, np.full(len(dd), np.nan)])  # da calibrare
         self._rep = np.concatenate([self._rep, np.zeros(len(dd))])       # [(3)] nessuna storia
@@ -2991,6 +3006,53 @@ class Rete:
     # avvolgimento su ±4pi: permette alla torsione di vivere sul dominio DOPPIO (4pi)
     # invece che su 2pi. Usato dalla torsione a doppia copertura (flag TORS_4PI),
     # motivato dai legami dipolari che uniscono due antichirali (due mezzi-twist).
+
+    def _traccia_d0(self, sito, prima, pavimento=None):
+        """Registra il contributo di UN sito a `d0`. PURE-READ sulla fisica: scrive solo la traccia.
+
+        ⚠ TRE LIVELLI, dichiarati: (a) DETTAGLIO PIENO sulle coppie di `TRACCIA_D0_COPPIE`, con il
+        valore PRIMA e DOPO -- la coppia, non il delta, cosi' un `max()` si distingue da una somma;
+        (b) RIASSUNTO sugli archi dei nodi di `TRACCIA_D0_NODI`: quanti toccati, SOMMA ALGEBRICA
+        del delta, max |delta|; (c) GLOBALE: quante volte il sito e' girato.
+        ⚠ I siti che CONCATENANO (`:2083`, mitosi, Schwinger) cambiano la LUNGHEZZA di `d0`: li'
+        il delta elemento-per-elemento non esiste e si registra il cambio di lunghezza, dichiarato.
+        """
+        import numpy as _np
+        reg = getattr(self, "_traccia_d0_log", None)
+        if reg is None:
+            reg = self._traccia_d0_log = []
+        dopo = self.d0
+        passo = int(getattr(self, "_passo_corrente", -1))
+        voce = {"passo": passo, "sito": sito, "n": self.n, "archi": len(dopo),
+                "len_prima": len(prima), "pavimento": (float(pavimento)
+                                                       if pavimento is not None else None)}
+        ii, jj = self.i, self.j
+        # (a) DETTAGLIO PIENO -- l'arco si cerca per COPPIA DI NODI, mai per indice (gli archi si
+        #     aggiungono, la posizione non e' stabile)
+        for (a, b) in TRACCIA_D0_COPPIE:
+            k = _np.flatnonzero(((ii == a) & (jj == b)) | ((ii == b) & (jj == a)))
+            if not len(k):
+                voce["%d-%d" % (a, b)] = None
+                continue
+            k = int(k[0])
+            pr = float(prima[k]) if k < len(prima) and len(prima) == len(dopo) else float("nan")
+            voce["%d-%d" % (a, b)] = (pr, float(dopo[k]), float(self.d[k]))
+        # (b)+(c) RIASSUNTO e GLOBALE
+        if len(prima) == len(dopo):
+            sel = _np.isin(ii, TRACCIA_D0_NODI) | _np.isin(jj, TRACCIA_D0_NODI)
+            dl = dopo[sel] - prima[sel]
+            nz = dl != 0.0
+            voce["tocc"] = int(nz.sum()); voce["somma"] = float(dl.sum())
+            voce["maxass"] = float(_np.abs(dl).max()) if len(dl) else 0.0
+            if pavimento is not None:
+                voce["tagliati_glob"] = int((prima < pavimento).sum())
+                voce["tagliati_tracc"] = int((prima[sel] < pavimento).sum())
+        else:
+            voce["tocc"] = -1; voce["somma"] = float("nan"); voce["maxass"] = float("nan")
+            voce["nota"] = "lunghezza cambiata: %d -> %d" % (len(prima), len(dopo))
+        reg.append(voce)
+        self._g_traccia_d0 = getattr(self, "_g_traccia_d0", {})
+        self._g_traccia_d0[sito] = self._g_traccia_d0.get(sito, 0) + 1
 
     def _floor_d0(self):
         # PAVIMENTO di d0. Assoluto (0.05) di default; COMOVENTE se PAV_COM: f*median(d0), con
@@ -4064,7 +4126,9 @@ class Rete:
             if len(tau_p_loc):
                 _cfl = float(np.max(dt_e / tau_p_loc)) if np.ndim(dt_e) else float(dt_e / tau_p_loc.min())
                 self._taup_cfl_max = max(getattr(self, "_taup_cfl_max", 0.0), _cfl)
+            if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0 += dt_e * (self.d - self.d0) / tau_p_loc
+            if TRACCIA_D0: self._traccia_d0('S02_rilass_visco', _tr_pre)
             if GUSCIO_MORBIDO:
                 # DIFFUSIONE DI SUPERFICIE: lap(d0) ~0 nel nucleo uniforme, grande al bordo ripido ->
                 # smussa SOLO il guscio. D = c_locale * spaziatura (lunghezza^2/tempo), nessun coeff.
@@ -4073,11 +4137,17 @@ class Rete:
                 _med0 = _sm0 / np.maximum(self._deg, 1)
                 _lap_d0 = 0.5 * (_med0[self.i] + _med0[self.j]) - self.d0
                 _cfl = cs_taup * dt_e
+                if TRACCIA_D0: _tr_pre = self.d0.copy()
                 self.d0 += np.clip(dt_e * cs_taup * d_arco * _lap_d0, -_cfl, _cfl)
+                if TRACCIA_D0: self._traccia_d0('S03_diff_guscio', _tr_pre)
         else:
+            if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0 += dt_e * (self.d - self.d0) / TAU_P
+            if TRACCIA_D0: self._traccia_d0('S04_rilass_TAU_P', _tr_pre)
             
+        if TRACCIA_D0: _tr_pre = self.d0.copy()
         self.d0 = np.maximum(self.d0, self._floor_d0())
+        if TRACCIA_D0: self._traccia_d0('P1_dopo_rilass', _tr_pre, pavimento=self._floor_d0())
         
     def mitosi(self):
         if self.n >= MAX_NODI or not len(self.tw): return 0
@@ -4251,8 +4321,12 @@ class Rete:
             # passo)"), non derivato. Questa correzione toglie A2 e A3, NON A1. Registrato fra i
             # fronti aperti invece di essere risolto in silenzio con un numero diverso.
             spinta = 0.02 * self.d0 * _rep_mem
+            if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0 = self.d0 + spinta                     # Locale pura
+            if TRACCIA_D0: self._traccia_d0('S05_spinta_locale', _tr_pre)
+            if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0 = np.maximum(self.d0, self._floor_d0())       # PAVIMENTO: la spinta non deve
+            if TRACCIA_D0: self._traccia_d0('P2_dopo_spinta', _tr_pre, pavimento=self._floor_d0())
             #   portare d0 sotto la scala minima, o lo stress |d-d0|/d0 diverge (bug rientrante)
         c = np.where(nasce)[0]
         if not len(c): return 0
@@ -4376,7 +4450,9 @@ class Rete:
             self.conc_archi = ([self.conc_archi[e] if e < len(self.conc_archi) else []
                                 for e in keep_idx] + [[] for _ in range(2 * len(a))])
         self.d = np.concatenate([self.d[keep], dh, dh])
+        if TRACCIA_D0: _tr_pre = self.d0.copy()
         self.d0 = np.concatenate([self.d0[keep], d0new])
+        if TRACCIA_D0: self._traccia_d0('S06_mitosi', _tr_pre)
         self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])
         self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])
         # [(3)] `_rep` segue la STESSA struttura degli altri array per-arco. NON si eredita da
@@ -4463,7 +4539,9 @@ class Rete:
                 self.i = np.concatenate([self.i, aa, k])
                 self.j = np.concatenate([self.j, k, bb])
                 self.d = np.concatenate([self.d, dd, dd])
+                if TRACCIA_D0: _tr_pre = self.d0.copy()
                 self.d0 = np.concatenate([self.d0, dd, dd])
+                if TRACCIA_D0: self._traccia_d0('S07_schwinger', _tr_pre)
                 self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])
                 self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])
                 self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])   # [(3)] archi nuovi
@@ -4666,8 +4744,12 @@ class Rete:
             # --- LOCALE PURA: rimossa la sottrazione di proj.mean() ---
             passo_max = 0.01 * float(np.median(self.d0[mask])) if mask.any() else 0.0
             proj = np.clip(proj, -passo_max, passo_max)
+            if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0[mask] += proj
+            if TRACCIA_D0: self._traccia_d0('S08_proj', _tr_pre)
+            if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0 = np.maximum(self.d0, self._floor_d0())          # PAVIMENTO
+            if TRACCIA_D0: self._traccia_d0('P3_dopo_proj', _tr_pre, pavimento=self._floor_d0())
             
         if GRAV_BIFASE and len(proj):
             s = np.abs(self.tw[mask]) / PHI_CRIT - 1.0    # grandezza FIRMATA: segno = direzione
@@ -4809,12 +4891,18 @@ class Rete:
                 
                 passo_causale = c_sistema * DT
                 spinta = np.clip(spinta, -passo_causale, passo_causale)
+                if TRACCIA_D0: _tr_pre = self.d0.copy()
                 self.d0[mask] += spinta * float(np.median(self.d0[mask]))
+                if TRACCIA_D0: self._traccia_d0('S09_spinta_med', _tr_pre)
             else:
                 # --- LOCALE PURA ---
                 grav = np.clip(grav, -passo_causale, passo_causale)
+                if TRACCIA_D0: _tr_pre = self.d0.copy()
                 self.d0[mask] += grav * float(np.median(self.d0[mask]))
+                if TRACCIA_D0: self._traccia_d0('S10_grav_med', _tr_pre)
+            if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0 = np.maximum(self.d0, self._floor_d0())
+            if TRACCIA_D0: self._traccia_d0('P4_dopo_grav', _tr_pre, pavimento=self._floor_d0())
             
         # [A8, 2026-09-20] (b) RAGIONE VALIDA: `K_FRANGE = 0.0`, quindi il ramo e' morto per
         # COSTANTE, non per condizione. Come per COMPAT_CHI il contatore si chiama `_spento` e non
@@ -4832,8 +4920,12 @@ class Rete:
             # --- LOCALE PURA: rimossa la sottrazione di flusso.mean() ---
             
             flusso = np.clip(flusso, -passo_max, passo_max)
+            if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0[mask] += flusso
+            if TRACCIA_D0: self._traccia_d0('S11_flusso', _tr_pre)
+            if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0 = np.maximum(self.d0, self._floor_d0())
+            if TRACCIA_D0: self._traccia_d0('P5_dopo_flusso', _tr_pre, pavimento=self._floor_d0())
             
         # --- COESIONE RELAZIONALE CON ANCORA ELASTICA VERSO LA SCALA NATIVA (LAM) ---
         if len(mask) and mask.any():
@@ -4874,8 +4966,12 @@ class Rete:
             stress_metrico = np.abs(self.d[mask] - self.d0[mask]) / np.maximum(self.d0[mask], 1e-6)
             tasso_dinamico = np.tanh(stress_metrico) * self.d0[mask]
             
+            if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0[mask] += np.clip(coesione_relazionale, -tasso_dinamico, tasso_dinamico)
+            if TRACCIA_D0: self._traccia_d0('S12_coesione', _tr_pre)
+            if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0 = np.maximum(self.d0, self._floor_d0())
+            if TRACCIA_D0: self._traccia_d0('P6_dopo_coesione', _tr_pre, pavimento=self._floor_d0())
         #--- ACCOPPIAMENTO LATERALE DINAMICO E RELATIVO (Senza costanti improprie) ---
         if len(self.tw) and len(self.i) and self.n > 0:
             mask = (self.i < n) & (self.j < n)
@@ -4914,7 +5010,9 @@ class Rete:
                 
                 # Applica lo shift al campo di fase senza alterare le coordinate fisse dei puntatori (net.pos)
                 self.phi[ii] = (self.phi[ii] + shift_fase_dinamico) % (4 * np.pi)
+                if TRACCIA_D0: _tr_pre = self.d0.copy()
                 self.d0 = np.maximum(self.d0, self._floor_d0())
+                if TRACCIA_D0: self._traccia_d0('P7_dopo_4917', _tr_pre, pavimento=self._floor_d0())
 
     def diagnostica(self):
         I = self.intensita()
