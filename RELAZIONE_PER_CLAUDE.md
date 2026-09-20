@@ -8989,3 +8989,88 @@ Z3  [BLOCCANTE] la rigiocata resta fedele: 138/138 COL FLAG ACCESO        PASS
 
 **LIMITI: un seme, UN arco, 120 passi.** E `16-481` e' stato scelto **perche' e' il peggiore del
 sistema**: e' un **caso estremo, non un campione.**
+
+---
+
+# ⚠ DOMANDE APERTE PER CLAUDE WEB — **lo stato al 2026-09-21, e quattro decisioni che aspettano**
+
+**Questo blocco è scritto per essere letto DA SOLO.** Chi legge il repo da fuori non ha la
+conversazione: ha i file. **Ogni numero qui sotto ha il suo referto di provenienza.**
+**Simulatore `01146a16`. Nessuna cura applicata: tutto ciò che segue è MISURATO e REGISTRATO.**
+
+## Il filo, in sei righe
+
+1. due run A/B a `sep = 4.0`: **A arriva intatto ai 3000 passi, B esplode e viene fermato al 390**;
+2. la fuga di B è `|vd|` che scappa su pochi archi, e il costo esplode perché `nsub` va a `15 594`;
+3. la causa prossima è **`d0` che crolla** su quegli archi — e `d0` è mosso al `96-98 %` da **un
+   solo sito**, `:4995` *(la coesione relazionale)*;
+4. ma quel sito **non muove `d0` con la sua forza: lo muove col suo CLIP**, che è **saturo nel
+   `98.86 %` dei casi** e **scala con `d0` stesso** → oscillazione ad ampiezza crescente;
+5. e la forza che il clip taglia vale **da `10³` a `10⁶` volte il clip**, per via di **`1/I_med²`**;
+6. **il sistema dichiara una «scala minima» per `d0` e non la fa rispettare.**
+
+---
+
+## LE QUATTRO DOMANDE — **tutte di FISICA, nessuna di codice**
+
+### `Z83` — **`d0` deve stare sopra `LAM`?** *(la più grossa)*
+
+**IL FATTO:** `d0 < LAM = 0.8` sul **`26`-`55 %`** degli archi, **a tutti gli istanti, in entrambi i
+rami**, e **la mediana di `d0` STA su `LAM`** (`0.80`-`1.22`). **Il sistema nasce così.**
+
+**IL GUADAGNO SE SI IMPONESSE:** lo stress `|d-d0|/d0` passerebbe da un limite di `59.7` a `3.0`
+(A/120) — **da `11x` a `21x` meglio**. **Reale.**
+
+**⚠ IL COSTO, ed è la ragione della domanda:** qualunque mappa liscia che valga `LAM` a `d0 -> 0`
+distorce **massimamente a `LAM`** (`+41 %` con `sqrt(d0²+LAM²)`, `+50 %` con `LAM + d0²/(LAM+d0)`)
+— **e lì c'è la mediana.** Un pavimento netto invece **inchioderebbe il `26-55 %` degli archi**,
+moltiplicando per dieci l'ammucchiamento `A3b` che oggi c'è al `5 %`.
+
+> **TRE STRADE:** *(a)* saturare verso una scala **più bassa** di `LAM` — **ma quale? non ne ho una
+> DERIVATA**; *(b)* accettare lo spostamento del bulk come **conseguenza voluta** — e allora
+> **metà del sistema oggi non è fisica**; *(c)* **chiedersi se `LAM` sia la scala giusta PER `d0`**:
+> `LAM` è la lunghezza d'onda del **solitone**, `d0` la lunghezza di riposo di un **arco**, e che
+> coincidano **è un'assunzione, non una misura.**
+
+### `Z80` — **`scala_statale`: `I_med` al quadrato**
+
+`coesione = (CS_M²/I_med) · (...) · d0² · (I_arco/I_med)` → **`I_med` al denominatore DUE volte**,
+e vale `mean(|psi|²) = 2.5e-04` → **`1/I_med² ≈ 1.6e+07`**.
+
+**E la storia lo qualifica:** `(I_arco/I_med)` **non c'era nell'originale** (`df64406`, dove
+`scala_statale` è dichiarata *«fattore di scala DIMENSIONALE»*); è stato aggiunto da `d57561a` come
+*«densità di riferimento LOCALE»*. **Due scopi diversi, la stessa media GLOBALE, una sopra
+l'altra.** **È un difetto di COMPOSIZIONE, documentato dai commenti dei due commit.**
+
+**⚠ E c'è di più, misurato:** dei tre addendi sommati in `(forza_campo + richiamo_elastico)`,
+**`richiamo_elastico` domina di `270`-`2800` volte** nel ramo B. **Quindi la «dinamica di campo»
+che `d57561a` voleva introdurre è DECORATIVA: la somma È il richiamo elastico verso `LAM`.**
+E i tre **non scalano allo stesso modo con `d`** (`grad ~ 1/d`, `lap ~ d⁰`, `richiamo` adimensionale).
+
+### `Z81` — **il fratello `S09` non è del tutto causale**
+
+Clippa a `±c·DT` e **poi moltiplica per `median(d0)`**: il tetto effettivo è `c·DT·median(d0)`,
+proporzionale a una **mediana globale**. Non diverge per arco come `Z79`, **ma resta una
+normalizzazione su una media.**
+
+### `Z82` — **`n3` normalizza su `median(d)`: sospetto NON verificato**
+
+Nel ramo A `|vd|.max` fa `x5.65` e `median(d)` fa `x2.35`, quindi **`n3` è rimasto `1`**: il vincolo
+si è **allentato mentre il sistema accelerava**. **Ma un CFL è per natura relativo alla spaziatura**,
+quindi lì la normalizzazione **potrebbe essere corretta**. **Registrato come sospetto, non come
+difetto.**
+
+---
+
+## E una lezione di metodo che vale oltre queste voci
+
+**Due volte oggi fermarsi è valso più che procedere.**
+1. la cura del clip era autorizzata; **la misura messa PRIMA** ha mostrato che avrebbe fallito il
+   suo criterio bloccante **per costruzione**;
+2. la cura della scala minima è autorizzata; **la misura messa PRIMA** mostra che sposterebbe la
+   mediana del sistema del `40-50 %`.
+
+**E una che riguarda come si legge una misura:** sul riassunto di `~3100` archi la diagnosi era
+**«competizione fra cinque scrittori»**; sul **singolo arco** era **«un colpevole solo al `96-98 %`»**.
+**Erano vere entrambe.** *Guardando solo il riassunto avrei scritto «competizione»: vero, e
+fuorviante.*
