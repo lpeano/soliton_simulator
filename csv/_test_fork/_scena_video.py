@@ -67,12 +67,20 @@ _ARGV = list(sys.argv)
 SERIE = None
 CSVPROG = None
 RIPRENDI = False
+# [2026-09-20] --sep=X NOMINALE, DEFAULT 8. Stessa ragione delle altre due opzioni qui sopra: se
+# fosse posizionale, passarlo costringerebbe a passare anche i precedenti e il comando di `Z49`
+# non resterebbe riproducibile VERBATIM. A default il driver fa ESATTAMENTE quello che faceva:
+# lo prova `csv/_seal_fork/_sigillo_sep_driver.py`, non questo commento.
+SEP = "8"
+
 _resti = []
 for _x in _ARGV[1:]:
     if _x.startswith("--serie="):
         SERIE = int(_x.split("=", 1)[1])
     elif _x.startswith("--csv-progresso="):
         CSVPROG = _x.split("=", 1)[1]
+    elif _x.startswith("--sep="):
+        SEP = _x.split("=", 1)[1]
     elif _x == "--riprendi":
         # LA RIPRESA E' UNA SCELTA ESPLICITA, MAI UN RIPIEGO AUTOMATICO: senza questo flag il
         # comportamento resta quello dell'originale (cartella sporca -> RIFIUTO).
@@ -94,7 +102,7 @@ os.makedirs(DEST, exist_ok=True)
 # masse (`Z49`) e quello di controllo a due. Si passa da riga di comando come 5o argomento; il
 # default resta 3, cosi' il comando di `Z49` resta riproducibile VERBATIM.
 NMASSE = _ARGV[5] if len(_ARGV) > 5 else "3"
-sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--sep", "8",
+sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--sep", SEP,
             "--giri", "0", "--campo-spinoriale", "--spinore-vivo", "--spinore-corretto",
             "--chi-core", "--calore-scal", "--deparam-orologio", "--verlet", "--fork-su2",
             "--fork-su2-mem", "--cs-dinamico", "--tau-luce", "--rumore-colorato",
