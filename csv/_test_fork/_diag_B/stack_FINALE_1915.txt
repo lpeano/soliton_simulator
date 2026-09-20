@@ -1,0 +1,22 @@
+### STACK FINALE del ramo B, 2026-09-20 19:15:25, PRIMA della chiusura ###
+Thread 24936 (active): "MainThread"
+    step (soliton_simulator.py:3949)
+            n1: 15594
+            n2: 2
+            n3: 205
+            nsub: 15594
+---
+Thread 24936 (active): "MainThread"
+    step (soliton_simulator.py:3949)
+            n1: 15594
+            n2: 2
+            n3: 205
+            nsub: 15594
+---
+Thread 24936 (active): "MainThread"
+    step (soliton_simulator.py:3966)
+            n1: 15594
+            n2: 2
+            n3: 205
+            nsub: 15594
+---
