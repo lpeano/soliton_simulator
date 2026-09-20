@@ -379,7 +379,10 @@ def rapporto_guardie(net):
     Per ogni sito: invocazioni, salti, frazione, la FORMA al fallimento e QUANDO (l'indice
     dell'ultima invocazione saltata). `shape[0] == -1` significa memoria ASSENTE, non lunghezza 0.
     """
-    siti = ("kernel_alpha", "tempo_luce", "zeta_vir_a", "zeta_vir_b", "tors4pi")
+    siti = ("kernel_alpha", "tempo_luce", "zeta_vir_a", "zeta_vir_b", "tors4pi",
+            # [2026-09-20] i DIECI del secondo giro: cinque (c), tre (a), due (b).
+            "calore_chi", "chicore_passo", "temposegno", "spinore_vivo", "chi_da_spinore",
+            "nb_prec", "snap_psispin", "nb_grav_proiez")
     # il GRUPPO C non e' una guardia ma un DEFAULT: ha contatori diversi, e si riporta a parte
     fuori = {}
     for k in siti:
@@ -389,6 +392,16 @@ def rapporto_guardie(net):
                         frazione=(sal / tot if tot else float("nan")),
                         shape=getattr(net, "_g_%s_shape" % k, None),
                         quando=getattr(net, "_g_%s_quando" % k, None))
+    # ⚠ le DUE (b) hanno un contatore DIVERSO -- `_spento`, non `_salti` -- perche' misurano un
+    # ramo che non gira per SCELTA (flag/costante off), non una legge saltata. Mescolarle con le
+    # altre produrrebbe una "frazione di fallimento" che e' una frequenza di selezione: il numero
+    # che si porta dietro una diagnosi falsa.
+    for _k in ("compat_chi", "k_frange"):
+        _t = int(getattr(net, "_g_%s_tot" % _k, 0))
+        _sp = int(getattr(net, "_g_%s_spento" % _k, 0))
+        fuori[_k + "_SPENTO"] = dict(tot=_t, salti=_sp,
+                                     frazione=(_sp / _t if _t else float("nan")),
+                                     shape=None, quando=None)
     fuori["s2full_default"] = dict(
         tot=int(getattr(net, "_g_s2full_tot", 0)),
         salti=int(getattr(net, "_g_s2full_conmask", 0)),
@@ -571,6 +584,17 @@ def scuoti_vuoto(net):
 
     # Inietta l'agitazione vettoriale di fase firmata dalla chiralità
     calcio = net.rng.normal(0.0, 1.0, net.n) * ampiezza
+    # [A8, 2026-09-20] (c) RAGIONE SCADUTA -- si conta per DIMOSTRARLO, non per fiducia.
+    # `perc_chi` e' estesa da TUTTE E TRE le vie di crescita di `n` (semina :1900, mitosi :4181,
+    # Schwinger :4302), e `n` e' `len(self.phi)`, che cresce SOLO li'. Quindi questa guardia non
+    # PUO' fallire. Il contatore serve a provarlo con un numero, e a farlo scattare il giorno in
+    # cui qualcuno aggiungesse una quarta via di crescita.
+    # NB: il salto si conta solo col FLAG ACCESO (la classe di `N3b`).
+    net._g_calore_chi_tot = getattr(net, "_g_calore_chi_tot", 0) + 1
+    if CALORE_VETTORIALE and not (hasattr(net, "perc_chi") and len(net.perc_chi) == net.n):
+        net._g_calore_chi_salti = getattr(net, "_g_calore_chi_salti", 0) + 1
+        net._g_calore_chi_shape = (len(getattr(net, "perc_chi", [])), net.n)
+        net._g_calore_chi_quando = net._g_calore_chi_tot
     if CALORE_VETTORIALE and hasattr(net, "perc_chi") and len(net.perc_chi) == net.n:
         calcio = calcio * net.perc_chi  # Firma antichirale (rompe simmetria speculare); SCALARE se --calore-scal
         
@@ -2018,6 +2042,15 @@ class Rete:
         # Due mezzi-twist di pi opposti si completano in un giro chiuso. Attiva col flag
         # COMPAT_CHI (default off, per non alterare i risultati esistenti finche' non
         # e' verificata). Versione assoluta come primo passo: legami fra uguali proibiti.
+        # [A8, 2026-09-20] (b) RAGIONE DICHIARATA E VALIDA: il commento qui sopra dice
+        # `default off, per non alterare i risultati esistenti finche' non e' verificata`.
+        # ⚠ IL CONTATORE MISURA UN'ALTRA COSA, e il nome lo dice: `_spento`, non `_salti`.
+        # Conta quante volte il ramo NON gira perche' il FLAG e' spento -- oggi il 100 % per
+        # costruzione. Non e' una frazione di fallimento, ed e' un presidio contro
+        # un'ACCENSIONE SILENZIOSA: il giorno in cui qualcuno accende COMPAT_CHI, il numero cambia.
+        self._g_compat_chi_tot = getattr(self, "_g_compat_chi_tot", 0) + 1
+        if not COMPAT_CHI:
+            self._g_compat_chi_spento = getattr(self, "_g_compat_chi_spento", 0) + 1
         if COMPAT_CHI and len(a) and len(self.perc_chi) >= self.n:
             opposti = self.perc_chi[a] != self.perc_chi[b]
             a, b, dd = a[opposti], b[opposti], dd[opposti]
@@ -2274,17 +2307,37 @@ class Rete:
                 self._nb = self._nb / np.maximum(np.linalg.norm(self._nb, axis=1, keepdims=True), 1e-9)
         nb = nb_t if SYNC_UPDATE else self._nb
         # CAUSALITA': campo dai vicini allo stato RITARDATO (Bloch del passo precedente)
+        self._g_nb_prec_tot = getattr(self, "_g_nb_prec_tot", 0) + 1
         if SYNC_UPDATE:
             nb_vic = nb_prec_t
         elif not hasattr(self, "_nb_prec") or self._nb_prec is None or len(self._nb_prec) != n:
+            # [A8, 2026-09-20] (a) NESSUNA RAGIONE DICHIARATA, e il fallback NON e' innocuo.
+            # Due righe sopra il codice dichiara `CAUSALITA': campo dai vicini allo stato
+            # RITARDATO (Bloch del passo precedente)`, e qui si usa `nb`, cioe' il Bloch
+            # CORRENTE: quando questo ramo gira, la causalita' dichiarata NON vale.
+            # MISURATO che NON e' un difetto di lunghezza: `_nb_prec` e' scritto a :2712 DENTRO
+            # `_passo_spinoriale`, quindi alla PRIMA chiamata non esiste ancora. E' lo STESSO
+            # transitorio di avvio di `zeta_vir` (Z68), e la stessa causa: l'ORDINE.
+            self._g_nb_prec_salti = getattr(self, "_g_nb_prec_salti", 0) + 1
+            self._g_nb_prec_shape = (-1 if getattr(self, "_nb_prec", None) is None
+                                     else len(self._nb_prec), n)
+            self._g_nb_prec_quando = getattr(self, "_g_nb_prec_tot", 0)
             nb_vic = nb
         else:
             nb_vic = self._nb_prec
         # campo effettivo B_i = somma dei vicini, con segno SU(2) dalla chiralita' del legame.
         # Il segno chirale (opposti/uguali) da' i due generatori non commutanti.
+        # [A8, 2026-09-20] (c) RAGIONE SCADUTA: `perc_chi` e' estesa da tutte e tre le vie di
+        # crescita di `n`, quindi `len(perc_chi) >= n` non puo' essere falso. Si conta per
+        # DIMOSTRARLO. L'`else` qui c'e' gia' ed e' esplicito: manca solo il numero.
+        self._g_chicore_passo_tot = getattr(self, "_g_chicore_passo_tot", 0) + 1
         if CHI_CORE and len(self.perc_chi) >= n:
             chi_nodi = self.chiralita_core_locale()
         else:
+            if CHI_CORE:
+                self._g_chicore_passo_salti = getattr(self, "_g_chicore_passo_salti", 0) + 1
+                self._g_chicore_passo_shape = (len(self.perc_chi), n)
+                self._g_chicore_passo_quando = self._g_chicore_passo_tot
             chi_nodi = self.perc_chi[:n].astype(float)
         chi = (chi_nodi[i] * chi_nodi[j]).astype(float)  # +1 uguali / -1 opposti
         B = np.zeros((n, 3)); deg = np.zeros(n)
@@ -3350,6 +3403,15 @@ class Rete:
             dt_n = DT * r                      # per nodo
             dt_e = DT * 0.5 * (r[i] + r[j])    # per arco
             self._psi_prec = self.psi.copy()
+            # [A8, 2026-09-20] (a) NESSUNA RAGIONE DICHIARATA, ed e' LA CAUSA di un sintomo
+            # gia' contato: se questo ramo non gira, `_psi_spin_prec` NON avanza e `ritmo()`
+            # registra `_ritmo_snap_identico` (Z33). Il sintomo era contato, la causa no.
+            self._g_snap_psispin_tot = getattr(self, "_g_snap_psispin_tot", 0) + 1
+            if CAMPO_SPINORIALE and not (hasattr(self, "psi_spin")
+                                         and len(getattr(self, "psi_spin", [])) == self.n):
+                self._g_snap_psispin_salti = getattr(self, "_g_snap_psispin_salti", 0) + 1
+                self._g_snap_psispin_shape = (len(getattr(self, "psi_spin", [])), self.n)
+                self._g_snap_psispin_quando = self._g_snap_psispin_tot
             if CAMPO_SPINORIALE and hasattr(self, "psi_spin") and len(getattr(self, "psi_spin", [])) == self.n:
                 self._psi_spin_prec = self.psi_spin.copy()   # [FASE 5] snapshot per il ritmo spinoriale (4pi)
             # [CURA DELL'ANELLO ISTANTANEO, 2026-09-18] LA PROMOZIONE del gauge di `ritmo()`, QUI e
@@ -3387,6 +3449,14 @@ class Rete:
         # s_k = 1+(perc_chi-1)*m_coer, m_coer = coerenza col campo locale (materia coerente inverte col segno;
         # vuoto incoerente -> +1 avanti). Da stato committato t-1 (perc_chi, phi, Psi). Firma solo #3-6.
         dt_n_s = dt_n
+        # [A8, 2026-09-20] (c) RAGIONE SCADUTA sulla parte `len(perc_chi) >= n` (le tre vie la
+        # estendono). Il default e' gia' esplicito: `dt_n_s = dt_n` una riga sopra.
+        self._g_temposegno_tot = getattr(self, "_g_temposegno_tot", 0) + 1
+        if TEMPO_SEGNO and not (not np.isscalar(dt_n) and len(self.perc_chi) >= self.n
+                                and len(self.psi) >= self.n):
+            self._g_temposegno_salti = getattr(self, "_g_temposegno_salti", 0) + 1
+            self._g_temposegno_shape = (len(self.perc_chi), len(self.psi), self.n)
+            self._g_temposegno_quando = self._g_temposegno_tot
         if TEMPO_SEGNO and not np.isscalar(dt_n) and len(self.perc_chi) >= self.n and len(self.psi) >= self.n:
             _mcoer = np.clip(np.cos(self.phi[:self.n] - np.angle(self.psi[:self.n] + 1e-12)), 0.0, 1.0)
             _pc = np.sign(self.perc_chi[:self.n]).astype(float); _pc[_pc == 0] = 1.0
@@ -3620,6 +3690,18 @@ class Rete:
         # REINNESTO ETC DEL SETTORE SPINORIALE: evolve _nb leggendo lo snapshot t (self.phi non e'
         # ancora stata committata, quindi calcola_psi() usa _phi_t). Deve stare PRIMA del commit
         # atomico per non leggere le fasi t+1 (sfasamento che l'ETC deve evitare).
+        # [A8, 2026-09-20] (c) RAGIONE SCADUTA, E QUESTA E' LA PIU' GRAVE DELLE CINQUE: se
+        # fallisse, l'INTERO `_passo_spinoriale` non girerebbe -- il cuore del settore spinoriale,
+        # con SPINORE_VIVO acceso nel run. Sarebbe `C11` un'altra volta.
+        # NON PUO' FALLIRE: `phi_s` e' esteso da semina (:1882), mitosi (:4176) e Schwinger
+        # (:4297), e la RIASSEGNAZIONE di :2719 gli da' lunghezza `n` ESATTA, perche' `nb_new`
+        # deriva da `self._nb` che `_passo_spinoriale` normalizza a `n` incondizionatamente.
+        # Si conta per DIMOSTRARLO con un numero invece che con un ragionamento.
+        self._g_spinore_vivo_tot = getattr(self, "_g_spinore_vivo_tot", 0) + 1
+        if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) != self.n:
+            self._g_spinore_vivo_salti = getattr(self, "_g_spinore_vivo_salti", 0) + 1
+            self._g_spinore_vivo_shape = (len(self.phi_s), self.n)
+            self._g_spinore_vivo_quando = self._g_spinore_vivo_tot
         if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) == self.n:
             self._passo_spinoriale(i, j, w, dt_n_s, psi_snapshot=psi_t,
                                    forza_sync=_forza_sync, wI_sync=_wI_sync, uno_sync=_uno_sync)
@@ -3666,6 +3748,15 @@ class Rete:
         # il commit di _psi_spinor (regola A/B: mai durante). Confronto col rappresentante canonico
         # del Bloch corrente: +1 = allineato, -1 = ha accumulato il segno -1 di un giro 2pi. CHI_BASC
         # e' gia' disattivato sopra. Richiede --spinore-corretto (garantito in _applica_flag).
+        # [A8, 2026-09-20] (c) RAGIONE SCADUTA sulla parte `len(perc_chi) >= n`.
+        self._g_chi_da_spinore_tot = getattr(self, "_g_chi_da_spinore_tot", 0) + 1
+        if CHI_DA_SPINORE and SPINORE_CORRETTO and not (
+                len(self.perc_chi) >= self.n
+                and len(getattr(self, "_psi_spinor", [])) >= self.n):
+            self._g_chi_da_spinore_salti = getattr(self, "_g_chi_da_spinore_salti", 0) + 1
+            self._g_chi_da_spinore_shape = (len(self.perc_chi),
+                                            len(getattr(self, "_psi_spinor", [])), self.n)
+            self._g_chi_da_spinore_quando = self._g_chi_da_spinore_tot
         if (CHI_DA_SPINORE and SPINORE_CORRETTO and len(self.perc_chi) >= self.n
                 and len(getattr(self, "_psi_spinor", [])) >= self.n):
             _canon = self._bloch_a_spinore(self._nb[:self.n])
@@ -4583,6 +4674,16 @@ class Rete:
                     b0 = self.phi_s if len(self.phi_s) == self.n else np.zeros(self.n)
                     self._nb = np.stack([np.sin(b0), np.zeros(self.n), np.cos(b0)], axis=1)
             grav = -np.tanh(s) * ampiezza                 # bifase: -s = verso (attrae/respinge), firmato
+            # [A8, 2026-09-20] (a) NESSUNA RAGIONE DICHIARATA: se questo ramo non gira, `grav`
+            # NON viene proiettata sul campo spinoriale e la gravita' bifase cambia forma.
+            # NON E' INDIPENDENTE da :3623: `_nb` e' rinormalizzato a `n` da `_passo_spinoriale`
+            # (:2204-:2209), che gira PRIMA nel ciclo -- quindi questo puo' fallire solo se
+            # `_passo_spinoriale` NON ha girato, cioe' se e' scattata la guardia :3623.
+            self._g_nb_grav_proiez_tot = getattr(self, "_g_nb_grav_proiez_tot", 0) + 1
+            if SPINORE and not (self._nb is not None and len(self._nb) >= self.n):
+                self._g_nb_grav_proiez_salti = getattr(self, "_g_nb_grav_proiez_salti", 0) + 1
+                self._g_nb_grav_proiez_shape = (-1 if self._nb is None else len(self._nb), self.n)
+                self._g_nb_grav_proiez_quando = self._g_nb_grav_proiez_tot
             if SPINORE and self._nb is not None and len(self._nb) >= self.n:
                 _nbg = self._nb_grav()                     # [FASE 2] _nb (off) o direzione NATIVA dal campo emesso (on)
                 prod_interno = np.sum(_nbg[ii] * _nbg[jj], axis=1)
@@ -4658,6 +4759,13 @@ class Rete:
                 self.d0[mask] += grav * float(np.median(self.d0[mask]))
             self.d0 = np.maximum(self.d0, self._floor_d0())
             
+        # [A8, 2026-09-20] (b) RAGIONE VALIDA: `K_FRANGE = 0.0`, quindi il ramo e' morto per
+        # COSTANTE, non per condizione. Come per COMPAT_CHI il contatore si chiama `_spento` e non
+        # `_salti`: misura un ramo che non gira per scelta, ed e' un presidio contro
+        # un'accensione silenziosa.
+        self._g_k_frange_tot = getattr(self, "_g_k_frange_tot", 0) + 1
+        if K_FRANGE == 0.0:
+            self._g_k_frange_spento = getattr(self, "_g_k_frange_spento", 0) + 1
         if K_FRANGE != 0.0 and len(proj):
             dphi_arc = np.angle(np.exp(1j * (self.phi[jj] - self.phi[ii])))
             wI = 0.5 * (I[ii] + I[jj]) / Imed
