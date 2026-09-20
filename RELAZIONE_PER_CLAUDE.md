@@ -8082,3 +8082,58 @@ min 0.0736   max 0.4398   escursione 0.3662        (il VECCHIO e' 0.761594, FISS
 
 `L` *(il momento angolare netto)* e l'effetto su `beta` di `ZETA_VIR`: **sono `Y5` e `Y6`, e
 richiedono la cura applicata.** **E un seme, una scena.**
+
+---
+
+## 2026-09-20 — **PASSO 1 chiuso, sigillo 3/3: e il difetto NON è la lunghezza, è l'ORDINE**
+
+**Simulatore `7aa72c4a`** (sha1 dei byte grezzi; git `2a369526`) — **il blob È cambiato**: i
+contatori sono committati in `4edfab2`. Sigillo `csv/_seal_fork/_sigillo_contatori_guardie.py`,
+esito `_sigillo_contatori_guardie.txt`. Mandato in
+`doc/TASK_HISTORY/2026-09-20_tre-guardie-silenziose.md` (`93e1628`).
+
+```
+V1  PASS   7 campi (psi, d, phi, eta, n, pos, tw): TUTTI IDENTICI   -> la contabilita' e' INERTE
+V2  PASS   i contatori si leggono a fine run: 5 siti su 5
+V3  PASS   tutti e 5 scattano quando devono (forzando una lunghezza sbagliata)
+```
+
+### I numeri, e il quarto è quello che decide
+
+```
+sito            invocazioni   salti   frazione   shape al fallimento   QUANDO (ultimo salto)
+kernel_alpha         145        0      0.0 %          -                    -
+tempo_luce            34        0      0.0 %          -                    -
+tors4pi               12        0      0.0 %          -                    -
+zeta_vir_a            12        1      8.3 %     (-1, 429498)              1  di 12
+zeta_vir_b            55       11     20.0 %     (-1, 429498)             11  di 55
+```
+
+**① Tre guardie su cinque non saltano MAI** *(su 145, 34 e 12 invocazioni)*. **Restano difetti di
+FORMA** — un ramo silenzioso non è un ramo — **ma non sono difetti ATTIVI.**
+
+**② Le due `ZETA_VIR` saltano, e `shape[0] = -1` dice PERCHÉ: `_sin2_vir` è `None`, non di
+lunghezza sbagliata.** **Non è un problema di lunghezza: è l'ORDINE.** `_sin2_vir` lo scrive
+`memoria_hebbiana_moto`, che nel ciclo gira **dopo** `step`: alle prime invocazioni la memoria
+**non esiste ancora**. **È l'anomalia ④ del mandato precedente, misurata invece che congetturata.**
+
+**③ ⚠ E IL «QUANDO» CAMBIA LA DIAGNOSI, che è la ragione per cui l'ho aggiunto.** `zeta_vir_b`
+salta il **20 %** delle invocazioni — un numero che da solo suona come difetto sistemico. **Ma
+l'ultimo salto è all'invocazione `11` di `55`:** i salti sono **confinati all'inizio**, e dopo
+**non accade mai più**.
+> **Transitorio, non comportamento principale.** **`A8` chiede esattamente questo, e i due casi
+> danno lo STESSO conteggio:** senza il `quando`, avrei riportato un `20 %` che significa un'altra
+> cosa.
+
+*(`zeta_vir_b` ha 55 invocazioni contro 12 passi perché il ramo Verlet gira a sottopassi CFL.)*
+
+### Lo stato, e cosa resta
+
+**Il `PASSO 2` è ACCODATO per decisione di Luca:** si torna a `scala_p`, che è più avanti.
+**Nulla si perde:** i contatori sono **byte-inerti e sigillati**, e restano come **presidio
+permanente**. **Ma il riferimento dei sigilli successivi non è più `775ceab7`: è `7aa72c4a`.**
+
+**E il mandato delle guardie va corretto dove sbagliava:** `ca02af0` non è il primo commit
+*(è `0ebaa4a`, 28 agosto)* e **nessuno dei siti viene da lì**. **Il criterio che regge è
+*«nessuna ragione dichiarata nella storia»***, confermato dai messaggi d'origine
+*(«Implement code changes…», «TestAperti»)*.
