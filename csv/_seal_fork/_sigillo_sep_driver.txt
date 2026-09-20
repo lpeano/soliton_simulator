@@ -8,9 +8,9 @@ braccio B: driver NUOVO,   default
 braccio C: driver NUOVO,   --sep=4.0
 
 S0   PASS   i tre bracci hanno gli STESSI passi: [12, 24]
-S1   PASS   default: 113 campi confrontati, 0 diversi  -> IDENTICO
-S2   PASS   --sep=4.0 contro default: 78 campi diversi su 108 -> il flag FA QUALCOSA
-S3   PASS   estensione radiale: default 8.708 (atteso ~8.72) | --sep=4.0 4.720 (atteso ~4.72)
+S1   PASS   default: 125 campi confrontati, 0 diversi  -> IDENTICO
+S2   PASS   --sep=4.0 contro default: 81 campi diversi su 120 -> il flag FA QUALCOSA
+S3   PASS   estensione radiale: default 8.709 (atteso ~8.72) | --sep=4.0 4.726 (atteso ~4.72)
 
 ESITO: 4/4
 

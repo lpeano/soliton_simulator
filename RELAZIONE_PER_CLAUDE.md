@@ -8137,3 +8137,69 @@ permanente**. **Ma il riferimento dei sigilli successivi non è più `775ceab7`:
 *(è `0ebaa4a`, 28 agosto)* e **nessuno dei siti viene da lì**. **Il criterio che regge è
 *«nessuna ragione dichiarata nella storia»***, confermato dai messaggi d'origine
 *(«Implement code changes…», «TestAperti»)*.
+
+---
+
+## 2026-09-20 — **`scala_p` curata (5/5) e `PASSO 2` chiuso (3/3). E il freno anisotropo adesso frena**
+
+**Simulatore `f81c4fe1`** (sha1 dei byte grezzi; git `af8a96f1`) · **nessun run lanciato** ·
+`Z67` e `Z68` nel registro.
+
+### `scala_p` — il punto fisso è sciolto
+
+```
+Y1  PASS   riduzione al limite A==B: 7 campi BYTE-IDENTICI
+Y2  PASS   controllo positivo: 6 campi su 7 differiscono
+Y3  PASS   median(ampiezza)  0.761594156 (= tanh(1))  ->  0.142251920
+Y4  PASS   sin2  mediana 0.007224 -> 0.197120     p95 1.000000 (SATURO) -> 0.980561
+Y6         moltiplicatore di beta (1-sin2)  0.992776 -> 0.802880   (-19.13 %)
+Y5         |L|  157.81 -> 154.80   (rapporto 0.9809)
+Y7  PASS   zero NaN,  max||nb|-1| = 1.11e-16
+Y8         rigirati: _sigillo_sep_driver 4/4,  _sigillo_ripresa_scena 5/5 -> nessuno si muove
+```
+
+**`Y1` è la prova che la forma algebrica è esatta:** `np.divide(ad, den, where=den>0)` con
+denominatore positivo riduce **bit per bit** alla vecchia espressione. **`Y3` è il sigillo della
+cura:** `tanh(1)` a nove cifre con la scala vecchia, `0.1423` con quella nuova.
+
+**E `Y6` è la conseguenza che conta:** il moltiplicatore di `beta` passa da `0.993` a `0.803`.
+**Prima `ZETA_VIR` era acceso e non frenava quasi nulla** — perché `sin2` era schiacciato dal punto
+fisso. **Adesso frena del 19 %.**
+
+### `PASSO 2` — la diagnosi era sbagliata, e il `PASSO 1` è servito a questo
+
+**Il mandato diceva «guardie che saltano per lunghezza sbagliata».** La misura dice **`-1`**, cioè
+**`_sin2_vir is None`**: **è l'ORDINE, non la lunghezza.** **Estendere un array non avrebbe
+risolto niente, e avrebbe aggiunto codice che sembra una cura.**
+
+**E i salti sono i primi, consecutivi — dimostrato, non assunto:** `quando` è l'indice dell'ultima
+invocazione saltata, gli indici sono distinti e `>= 1`, quindi **11 indici distinti col massimo
+`11` sono esattamente `{1..11}`**. Transitorio di avvio.
+
+**Le tre cure sono tutte byte-inerti** (`V1`: 7 campi identici), e nessuna introduce un numero:
+- **A** — `else` che **dichiara** che al primo giro non c'è freno anisotropo. **Non si inizializza
+  `_sin2_vir`**: `0` è freno pieno, `1` è freno nullo, **qualunque valore è `A1`**, e non c'è
+  niente da cui derivarlo. **La frazione di salti resta quella, ed è dichiarata invece che
+  azzerata;**
+- **B** — le tre inerti dichiarano il ramo alternativo. **Si curano benché non scattino:** difetti
+  di **forma**, non di frequenza;
+- **C** — il default `np.zeros` è dichiarato **e contato**: **`0` archi fuori dal `mask` su 12
+  invocazioni**.
+
+### ⚠ Tre difetti miei, in un giro
+
+1. **il cast a `float`** per riportare lo scarto massimo **scartava la parte immaginaria di `psi`**
+   — **lo stesso errore di `_mod()` di stamattina, la seconda volta in un giorno**. Non ha falsato
+   verdetti *(il confronto è `np.array_equal`)*, ma su una differenza immaginaria avrebbe stampato
+   `0` su un campo diverso;
+2. **`V2` era un criterio scaduto** e ha prodotto un **FAIL falso** quando `C` ha aggiunto
+   legittimamente un sesto contatore. **La domanda giusta è «ci sono tutti quelli attesi», non
+   «quanti sono»;**
+3. **tre messaggi di commit bucati dai backtick** in `git commit -m`. **Salvato come regola: sempre
+   `-F`.**
+
+### Cosa resta aperto, col conto
+
+`A` **91** guardie *(64 su percorso fisico)* · `B` **9** default su maschera *(7)* · `C` **59**
+saturazioni vere *(35)* · `D` **10** memorie fra funzioni *(6 con stato fisico)*.
+**In questo giro ne sono state curate 7.**

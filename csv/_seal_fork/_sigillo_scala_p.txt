@@ -1,0 +1,24 @@
+[TIMBRO] _sigillo_scala_p.py  sha1-BYTE a0dae4e9  committato e pulito
+Y0  simulatore PRIMA (b9a546d): sha1 grezzo 7aa72c4a
+Y0  simulatore ORA            : sha1 grezzo 7e6b839b
+
+braccio A: PRIMA della cura, default
+braccio B: ORA, SCALA_P_MEDIANA=True (la scala vecchia, FORZATA)
+braccio C: ORA, default (LA CURA)
+
+Y1    PASS   riduzione al limite A==B su 7 campi: BYTE-IDENTICI
+Y2    PASS   controllo positivo A!=C: 6 campi su 7 differiscono -> la cura FA QUALCOSA
+Y3    PASS   median(ampiezza):  scala VECCHIA 0.761594156 (tanh(1) = 0.761594156)   CURATA 0.142251920   -> PUNTO FISSO SCIOLTO
+Y4    PASS   sin2  mediana 0.007224 -> 0.197120    p95 1.000000 -> 0.980561
+Y6         il moltiplicatore di beta E' (1 - sin2):  mediana 0.992776 -> 0.802880  (-19.13 %)
+Y5         L (somma di (pos-baricentro) x mem_mot, definizione DICHIARATA):
+             scala VECCHIA  [-2.0083e+01 -5.3560e+01  1.4707e+02]  |L| = 1.578063e+02
+             CURATA         [-2.1783e+01 -4.6661e+01  1.4598e+02]  |L| = 1.547972e+02
+             |L| CURATA / |L| VECCHIA = 0.9809
+Y7    PASS   stabilita': nan psi/d/pos = 0/0/0   max||nb|-1| = 1.110e-16
+
+ESITO: 5/5
+
+VERDETTO: la cura RIDUCE ESATTAMENTE alla vecchia scala quando la si forza, FA
+  QUALCOSA quando non la si forza, e SCIOGLIE il punto fisso di median(ampiezza).
+NB: UNA scena, UN seme, 12 passi. Y5 e Y6 sono MISURE, non verdetti di fisica.
