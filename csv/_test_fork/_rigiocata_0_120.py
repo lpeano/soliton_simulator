@@ -52,6 +52,13 @@ COPPIA = (16, 481)          # l'arco che al 120 e' gia' il piu' teso, e al 240 i
 NPASSI = 120
 DT, CS_M = 0.01, 2.0        # dichiarati, per `n3`
 
+# ⚠ L'OPZIONE SI LEGGE PRIMA CHE `sys.argv` VENGA SOVRASCRITTO, e il perche' e' un bug che ho
+# GIA' FATTO: qui sotto `sys.argv` viene rimpiazzato con l'argv del SIMULATORE, quindi leggere
+# `--traccia` DOPO significa leggerlo da una lista che non lo contiene piu'. Il flag risultava
+# SEMPRE False, la rigiocata girava senza traccia, e NIENTE lo segnalava: il sigillo interno
+# passava lo stesso, perche' senza traccia la fisica e' identica per costruzione.
+TRACCIA = "--traccia" in sys.argv
+
 # ---- l'argv del RAMO B, copiato dal driver (senza `--chi-basc`)
 sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", "3", "--sep", "4.0",
             "--giri", "0", "--campo-spinoriale", "--spinore-vivo", "--spinore-corretto",
@@ -65,7 +72,6 @@ import soliton_simulator as S
 # ⚠ SI ACCENDE QUI, PRIMA di `avvia_test`, perche' la semina stessa scrive `d0` (`:2083`).
 # ⚠ E il SIGILLO INTERNO in fondo diventa il criterio `Z3` del mandato: se la strumentazione
 #   avesse toccato il PERCORSO, la rigiocata smetterebbe di riprodurre il ramo B e si vedrebbe li'.
-TRACCIA = "--traccia" in sys.argv
 if TRACCIA:
     if not hasattr(S, "TRACCIA_D0"):
         raise SystemExit("questo simulatore non ha TRACCIA_D0")
@@ -234,6 +240,11 @@ def main():
     if TRACCIA:
         log = getattr(net, "_traccia_d0_log", [])
         glob = getattr(net, "_g_traccia_d0", {})
+        # ⚠ GUARDIA: chiedere la traccia e non ottenerla dev'essere un ERRORE, non un silenzio.
+        # Senza questa riga il bug dell'argv sarebbe passato inosservato una seconda volta.
+        if not log:
+            raise SystemExit("*** --traccia chiesto ma il log e' VUOTO: la traccia NON si e' "
+                             "accesa. Non pubblico numeri che non ho. ***")
         print("")
         print("=" * 118)
         print("CHI SCRIVE `d0` -- %d voci su %d siti, in %d passi" % (len(log), len(glob), NPASSI))
