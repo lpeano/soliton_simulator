@@ -106,8 +106,23 @@ def main():
 
     # ---------------------------------------------------------------- V2
     righe = [r for r in outB.split("\n") if r.startswith("GUARDIA")]
-    segna("V2", len(righe) == len(SITI),
-          "i contatori si leggono a fine run: %d siti su %d" % (len(righe), len(SITI)))
+    # ⚠ CRITERIO CORRETTO IL 2026-09-20, ed era SCADUTO: prima chiedeva
+    # `len(righe) == len(SITI)`, cioe' un'uguaglianza ESATTA su una lista CABLATA. Il GRUPPO C ha
+    # aggiunto LEGITTIMAMENTE un sesto contatore (`s2full_default`, che non e' una guardia ma un
+    # DEFAULT), e il sigillo ha prodotto un FAIL su un comportamento CORRETTO -- esattamente la
+    # classe gia' catalogata in CLAUDE.md par.9 (`N3b`, `M1b`, `M3c`): un criterio scaduto costa
+    # piu' di un sigillo mancante, perche' si porta dietro una DIAGNOSI sbagliata.
+    # LA DOMANDA GIUSTA NON E' "quanti sono" MA "ci sono TUTTI QUELLI ATTESI": un contatore in piu'
+    # e' informazione, uno in MENO e' un difetto. Il criterio chiede la PRESENZA, e gli extra li
+    # STAMPA invece di bocciarli.
+    _visti = set(r.split()[1] for r in righe if len(r.split()) > 1)
+    _manc = [k for k in SITI if k not in _visti]
+    _extra = sorted(_visti - set(SITI))
+    segna("V2", not _manc,
+          ("i contatori si leggono: tutti e %d gli attesi sono presenti%s"
+           % (len(SITI), ("   (+%d in piu': %s)" % (len(_extra), ", ".join(_extra)))
+              if _extra else ""))
+          if not _manc else "MANCANO: %s" % _manc)
     for r in righe:
         print("      " + r)
 
