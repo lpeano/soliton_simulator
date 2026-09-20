@@ -147,6 +147,49 @@ def componenti(n, i, j, deg_sal):
     return lab, dim, ancore, fra, p0, deg
 
 
+def campo_fedele(pos, psi, R, G=72):
+    """IL CAMPO COME IL SISTEMA LO HA, senza ricostruzione. LEGGE `psi` e `pos`, NON li ricalcola.
+
+    ⚠ LA TRAPPOLA DICHIARATA: questa funzione NON chiama `calcola_psi()` ne' nient'altro che
+    SCRIVA uno stato. E' il precedente di `lambda_vuoto`, che sembrava di sola lettura e scriveva
+    `self.psi`. Qui entrano due array gia' letti dallo snapshot, ed esce un'immagine.
+
+    LA STESSA ALGEBRA DI `campo_spaziale`, CON IL NUCLEO TOLTO. `campo_spaziale` calcola
+    `|conv(S, K)|^2 - conv(n, K^2)`: il nucleo `K` SPARGE ogni nodo su una portata `lambda`, ed e'
+    quello che RICOSTRUISCE il campo fra i nodi. Qui si prende `K = delta`, cioe' nessuna
+    spargitura, e la stessa formula diventa, cella per cella:
+
+        interf_cella = |somma di z sui nodi della cella|^2  -  (numero di nodi della cella)
+
+    che e' l'interferenza fra i nodi CHE STANNO DAVVERO LI'. Con meno di due nodi in una cella vale
+    ZERO per costruzione -- non per convenzione: due contributi servono per interferire.
+
+    Ritorna anche i numeri che il mandato chiede di DICHIARARE: quante celle sono vuote, quante
+    colonne, e quante celle hanno almeno DUE nodi (cioe' dove l'interferenza e' DEFINITA).
+    """
+    n_nodi = len(pos)
+    h = 2.0 * R / G
+    idx = tuple(np.clip(((pos[:, k] + R) / h).astype(int), 0, G - 1) for k in range(3))
+    z = psi[:n_nodi]
+    S3 = np.zeros((G, G, G), complex)
+    C3 = np.zeros((G, G, G))
+    np.add.at(S3, idx, z)
+    np.add.at(C3, idx, 1.0)
+    # |somma z|^2 - somma |z|^2, cella per cella: il FONDO e' la somma dei moduli quadri, non il
+    # conteggio -- i nodi non hanno tutti lo stesso |psi|, e usare `C3` darebbe un fondo sbagliato.
+    M3 = np.zeros((G, G, G))
+    np.add.at(M3, idx, np.abs(z) ** 2)
+    interf = np.abs(S3) ** 2 - M3
+    # l'INTENSITA' depositata, che e' la grandezza leggibile anche dove l'interferenza e' zero
+    img = M3.sum(axis=2)
+    vuote3d = float(np.mean(C3 == 0))
+    colonne = C3.sum(axis=2)
+    vuote2d = float(np.mean(colonne == 0))
+    almeno2 = int(np.sum(C3 >= 2))
+    return img.T, interf.sum(axis=2).T, dict(vuote3d=vuote3d, vuote2d=vuote2d,
+                                             almeno2=almeno2, celle=G ** 3, nodi=n_nodi)
+
+
 def disegna(fr, passo, lab, dim, ancore, fra, p0, R, vmax_mem, nfr_tot):
     n = int(S.net.n)
     campo, Rc, massa3d = S.net.campo_spaziale(mezzo=R, M=None)
@@ -167,8 +210,8 @@ def disegna(fr, passo, lab, dim, ancore, fra, p0, R, vmax_mem, nfr_tot):
     soglia = float(np.clip(0.06 + 0.30 * contrasto, 0.06, 0.30))
     rgba[..., 3] = np.clip((np.abs(q) - soglia) / max(1.0 - soglia, 1e-6), 0.0, 1.0)
 
-    fig = plt.figure(figsize=(16, 8.4), facecolor="#0b0b0f")
-    ax1 = fig.add_axes([0.005, 0.050, 0.49, 0.84])
+    fig = plt.figure(figsize=(22.5, 8.4), facecolor="#0b0b0f")
+    ax1 = fig.add_axes([0.004, 0.050, 0.325, 0.84])
     ax1.set_facecolor("#000000")
     ax1.imshow(rgba, origin="lower", extent=[-Rc, Rc, -Rc, Rc], interpolation="bilinear")
     ax1.set_xlim(-Rc, Rc)
@@ -180,7 +223,7 @@ def disegna(fr, passo, lab, dim, ancore, fra, p0, R, vmax_mem, nfr_tot):
                   fontsize=10, color="#cfcfd6")
 
     # ---- pannello destro: il GRAFO, colore = componente, luminosita' = pozzo phi_g
-    ax2 = fig.add_axes([0.505, 0.050, 0.49, 0.84])
+    ax2 = fig.add_axes([0.671, 0.050, 0.325, 0.84])
     ax2.set_facecolor("#000000")
     Iv = S.net.intensita()[:n]
     phi_g, _m, _p = S.net.pozzo_grafo(Iv)
@@ -206,11 +249,44 @@ def disegna(fr, passo, lab, dim, ancore, fra, p0, R, vmax_mem, nfr_tot):
     ax2.set_title("IL GRAFO -- un colore per COMPONENTE CONNESSA\n"
                   "(luminosita' dal pozzo phi_g di pozzo_grafo())", fontsize=10, color="#cfcfd6")
 
+    # ---- pannello CENTRALE: IL CAMPO FEDELE -- si AGGIUNGE, non sostituisce.
+    # `campo_spaziale` da' CONTINUITA' (campo liscio fra i nodi, ma in parte RICOSTRUITO dal
+    # nucleo); questo da' FEDELTA' (solo dove ci sono nodi, ma e' il campo VERO); il grafo da' la
+    # TOPOLOGIA. I tre servono a domande diverse e si tengono tutti e tre.
+    axf = fig.add_axes([0.3375, 0.050, 0.325, 0.84])
+    axf.set_facecolor("#000000")
+    t_fed = time.time()
+    _fed, _fint, _q = campo_fedele(np.asarray(S.net.pos)[:n], np.asarray(S.net.psi)[:n], Rc)
+    dt_fed = time.time() - t_fed
+    _pos = _fed > 0
+    if _pos.any():
+        _lv = np.log10(np.maximum(_fed, 1e-30))
+        _lo = float(np.percentile(_lv[_pos], 5))
+        _hi = float(np.percentile(_lv[_pos], 99.5))
+        _q01 = np.clip((_lv - _lo) / max(_hi - _lo, 1e-9), 0.0, 1.0)
+    else:
+        _q01 = np.zeros_like(_fed)
+    _rgbaf = S.CMAP_INTERF((_q01 + 1.0) / 2.0)
+    # ⚠ I BUCHI SI DICHIARANO: dove NON c'e' nessun nodo il pannello e' TRASPARENTE, non nero.
+    # Un pixel nero direbbe "campo nullo"; un pixel trasparente dice "nessun dato". Sono due cose
+    # diverse, ed e' esattamente la distinzione che il pannello di sinistra non puo' fare.
+    _rgbaf[..., 3] = np.where(_pos, 1.0, 0.0)
+    axf.imshow(_rgbaf, origin="lower", extent=[-Rc, Rc, -Rc, Rc], interpolation="nearest")
+    axf.set_xlim(-Rc, Rc)
+    axf.set_ylim(-Rc, Rc)
+    axf.set_aspect("equal")
+    axf.axis("off")
+    axf.set_title("IL CAMPO FEDELE -- |psi|^2 DEPOSITATO, nessun nucleo, nessuna ricostruzione\n"
+                  "trasparente = NESSUN NODO (non 'campo nullo')", fontsize=10, color="#cfcfd6")
+
     testo = ("passo %-6d  (frame %d/%d)    n = %-7d archi = %-8d\n"
              "componenti: %d    taglie: %s\n"
-             "ARCHI FRA COMPONENTI DIVERSE: %d        [P0: deg != _deg su %d nodi]"
+             "ARCHI FRA COMPONENTI DIVERSE: %d        [P0: deg != _deg su %d nodi]\n"
+             "FEDELE: celle 3D vuote %.2f %%   colonne vuote %.2f %%   "
+             "celle con >= 2 nodi: %d su %d   [%.2f s]"
              % (passo, fr, nfr_tot, n, len(S.net.i), len(dim),
-                " / ".join(str(int(x)) for x in dim), fra, p0))
+                " / ".join(str(int(x)) for x in dim), fra, p0,
+                100 * _q["vuote3d"], 100 * _q["vuote2d"], _q["almeno2"], _q["celle"], dt_fed))
     fig.text(0.5, 0.012, testo, ha="center", va="bottom", fontsize=11,
              color="#ffffff" if fra == 0 else "#ff4444", family="monospace")
     fig.text(0.5, 0.995,
