@@ -1,0 +1,61 @@
+[TIMBRO] _misure_scala_p.py  sha1-BYTE e8a63a7e  committato e pulito
+[calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+[fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+[step2-orologio] STEP 2: omega_clk *= (cs/CS_M)^2 = OROLOGIO DI COMPTON (omega = m c^2/hbar, e nel modello c e' cs). Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.
+[rumore-colorato] TAGLIO SPETTRALE: il calcio del vuoto non e' piu' bianco ma correlato su tau_c = LAM/CS_M = 0.4 (= 40 passi), con un processo di Ornstein-Uhlenbeck sul rumore stesso e `dt_n = DT*r` (non DT: e' un processo LOCALE). `amp` INVARIATA. MOTIVO: il rumore bianco discreto inietta a tutte le frequenze fino a Nyquist, incluse quelle che il passo non risolve; in natura non esiste. ZERO coefficienti: LAM e CS_M sono gia' nel sistema. ATTENZIONE: la ricorsione PRESERVA LA VARIANZA, quindi NON abbassa theta - se lo muove lo fa SALIRE (<=5%). Si cabla perche' il rumore bianco e' SBAGLIATO, non perche' risolva l'aliasing (doc/PREDIZIONE_taglio_spettrale.md).
+[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: inerzia = T^2 = (d/cs)^2, quindi il tempo che COSTRUISCE l'inerzia e quello che la RILASSA devono essere lo stesso; oggi sono due diversi nella stessa equazione. Zero coefficienti, zero floor nuovi. NB: |omega|_eq va come sqrt(tau), quindi theta cala di ~13x: UN ORDINE DI GRANDEZZA, NON la soluzione dell'aliasing.
+[spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+OLON_PART = True   PHI_CRIT = 6.283185   tanh(1) = 0.761594
+
+==============================================================================================================================
+M1 / M3 / M4 -- |dpozzo|, il PUNTO FISSO di median(ampiezza), e sin2
+==============================================================================================================================
+passo     | |dp| p05   |dp| p50   |dp| p95   | scala_p     med(amp)  amp p95   | sin2 p05  sin2 p50  sin2 p95 
+passo 60  | 3.183e-07  0.01095    0.04448    | 0.0109542   0.761594  0.999405  | 0.002739  0.02662   1        
+passo 300 | 0.0007683  0.4994     3.721      | 0.499425    0.761594  0.999999  | 0.01052   0.1249    1        
+passo 540 | 3.191e-06  0.8732     10.43      | 0.873171    0.761594  1.000000  | 0.008876  0.2554    1        
+passo 780 | 2.56e-07   7.858      28.82      | 7.85793     0.761594  0.998698  | 0.01262   0.27      1        
+passo 1020 | 8.809e-06  39.1       145.7      | 39.1032     0.761594  0.998839  | 0.006359  0.2518    1        
+passo 1260 | 4.078e-06  70.12      418.9      | 70.1232     0.761594  0.999987  | 0.005902  0.2592    1        
+passo 1500 | 4.182e-05  198.4      869.4      | 198.366     0.761594  0.999688  | 0.006151  0.261     1        
+passo 1740 | 0.0005504  448.8      2169       | 448.802     0.761594  0.999873  | 0.006376  0.2572    1        
+passo 1980 | 0.01016    463.8      2099       | 463.78      0.761594  0.999766  | 0.005247  0.2528    1        
+passo 2220 | 0.1724     766.1      3811       | 766.092     0.761594  0.999905  | 0.005232  0.2567    1        
+passo 2460 | 54.07      917.8      5014       | 917.787     0.761594  0.999964  | 0.005323  0.2311    0.9752   
+passo 2700 | 98.57      1499       6128       | 1498.84     0.761594  0.999438  | 0.005635  0.2228    0.9693   
+passo 2700 | 98.57      1499       6128       | 1498.84     0.761594  0.999438  | 0.005635  0.2228    0.9693   
+PIL 300   | 0.01406    0.306      3.248      | 0.306034    0.761594  1.000000  | 0.01367   0.3338    0.9861   
+
+  M3 -- scarto |median(ampiezza) - tanh(1)|:  max 2.343e-11   su 14 istanti
+     -> IL PUNTO FISSO C'E', ESATTO. median(ampiezza) = tanh(1) a ogni istante.
+
+==============================================================================================================================
+M2 -- phi_g: IL CANDIDATO DENOMINATORE. Si annulla?
+==============================================================================================================================
+  phi_g  per NODO    n=2687      min 1.27485e-07   p01 0.000635491   p05 0.00353548   p50 0.649408   max 18.9555
+       <= 0e+00    : 0        (0.0000 %)
+       <= 1e-12    : 0        (0.0000 %)
+       <= 1e-09    : 0        (0.0000 %)
+       <= 1e-06    : 1        (0.0372 %)
+  phi_arc per ARCO   n=527452    min 5.00436e-05   p01 0.0210521   p05 0.189817   p50 2.83294   max 18.8015
+       <= 0e+00    : 0        (0.0000 %)
+       <= 1e-12    : 0        (0.0000 %)
+       <= 1e-09    : 0        (0.0000 %)
+       <= 1e-06    : 0        (0.0000 %)
+
+  IL RAPPORTO DELLA CURA  |dpozzo| / phi_arc:
+     p01 0.002166   p05 0.01067   p50 0.1237   p95 1.473   p99 1.898   max 2   non-finiti 0
+     -> median(tanh(rapporto)) = 0.123113    (il vecchio e' 0.761594, e NON si muove mai)
+
+UN SEME, UNA SCENA. Il pilota e' a sep=4.0, l'archivio a sep=8.

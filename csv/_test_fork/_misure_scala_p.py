@@ -120,11 +120,19 @@ def misura():
                 t_tan=t_tan)
 
 
+def nuovo_med(m):
+    """median(tanh(|dpozzo| / phi_arc)) -- quello che la CURA produrrebbe.
+    Se anche questo fosse costante nel tempo, avrei solo SPOSTATO il punto fisso, non sciolto."""
+    r = m["ad"] / np.maximum(m["phi_arc"], 1e-300)
+    return float(np.median(np.tanh(r))), float(np.min(m["phi_arc"]))
+
+
 def riga(et, m):
-    print("%-9s | %-10.4g %-10.4g %-10.4g | %-11.6g %-9.6f %-9.6f | %-9.4g %-9.4g %-9.4g"
+    nm, pmin = nuovo_med(m)
+    print("%-10s | %-10.4g %-10.4g %-10.4g | %-11.6g %-9.6f | %-9.4g %-9.4g | %-9.6f %-10.4g"
           % (et, q(m["ad"], 5), q(m["ad"], 50), q(m["ad"], 95),
-             m["scala_p"], float(np.median(m["ampiezza"])), q(m["ampiezza"], 95),
-             q(m["sin2"], 5), q(m["sin2"], 50), q(m["sin2"], 95)))
+             m["scala_p"], float(np.median(m["ampiezza"])),
+             q(m["sin2"], 50), q(m["sin2"], 95), nm, pmin))
 
 
 def main():
@@ -138,9 +146,10 @@ def main():
     print("=" * 126)
     print("M1 / M3 / M4 -- |dpozzo|, il PUNTO FISSO di median(ampiezza), e sin2")
     print("=" * 126)
-    print("%-9s | %-10s %-10s %-10s | %-11s %-9s %-9s | %-9s %-9s %-9s"
-          % ("passo", "|dp| p05", "|dp| p50", "|dp| p95", "scala_p",
-             "med(amp)", "amp p95", "sin2 p05", "sin2 p50", "sin2 p95"))
+    print("%-10s | %-10s %-10s %-10s | %-11s %-9s | %-9s %-9s | %-9s %-10s"
+          % ("passo", "|dp| p05", "|dp| p50", "|dp| p95", "scala_p", "med(amp)",
+             "sin2 p50", "sin2 p95", "NUOVO med", "min phi_arc"))
+    nuovi = []
     scarti = []
     ultimo = None
     for p in fs[::4] + [fs[-1]]:
@@ -148,6 +157,7 @@ def main():
         carica(p)
         m = misura()
         riga("passo %d" % passo, m)
+        nuovi.append(nuovo_med(m)[0])
         scarti.append(abs(float(np.median(m["ampiezza"])) - TANH1))
         ultimo = m
     for p in pil:
@@ -155,6 +165,7 @@ def main():
         carica(p)
         m = misura()
         riga("PIL %d" % passo, m)
+        nuovi.append(nuovo_med(m)[0])
         scarti.append(abs(float(np.median(m["ampiezza"])) - TANH1))
         ultimo = m
     print("")
@@ -167,6 +178,16 @@ def main():
         print("        centrali). Resta un ancoraggio, e va detto cosi'.")
     else:
         print("     *** IL PUNTO FISSO NON C'E': la mia algebra e' SBAGLIATA. Mi fermo e riporto. ***")
+
+    print("")
+    print("  Y3 IN ANTICIPO -- il NUOVO median(tanh(|dp|/phi_arc)) SI MUOVE nel tempo?")
+    print("     valori: %s" % "  ".join("%.4f" % x for x in nuovi))
+    print("     min %.6f   max %.6f   escursione %.4f   (il VECCHIO e' 0.761594 FISSO)"
+          % (min(nuovi), max(nuovi), max(nuovi) - min(nuovi)))
+    if max(nuovi) - min(nuovi) < 1e-6:
+        print("     *** E' ANCORA UN PUNTO FISSO, solo a un altro valore: la cura NON scioglie. ***")
+    else:
+        print("     -> SI MUOVE: non e' un punto fisso. La cura fa quello che deve.")
 
     # ---------------------------------------------------------------- M2, la misura che decide
     print("")
