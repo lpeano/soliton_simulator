@@ -273,6 +273,11 @@ CALORE_VETTORIALE = True   # calcio termico: True=vettoriale+chirale DI DEFAULT 
                        # False = costanti fisse (comportamento precedente). Reversibile.
 TAU_A_LOCALE = True     # vita media spinoriale LOCALE ~|Psi|^2 (decadimento atomico). IN VERIFICA.
                        # False = TAU_A fisso (comportamento precedente). Reversibile.
+SCALA_P_MEDIANA = False  # DIAGNOSTICO, NON FISICA ALTERNATIVA. Ripristina la vecchia scala di
+                         # `ampiezza` (la MEDIANA GLOBALE di |dpozzo|) al solo scopo della
+                         # RIDUZIONE AL LIMITE del sigillo `Y1`. NON ha un flag da riga di
+                         # comando, di proposito: non deve poter essere acceso per sbaglio da un
+                         # comando. Il sigillo lo accende IN PROCESSO e lo rispegne.
 PHI_CRIT = 2 * np.pi    # QUANTO DI OLONOMIA. Un giro, non due: il sistema e'
                         # abeliano (settore U(1) varieta' invariante esatta, misurato),
                         # quindi il quanto naturale e' 2pi; il 4pi veniva dall'intuizione
@@ -4484,9 +4489,53 @@ class Rete:
             # Guardia: durante una variazione topologica puo' esistere un passo
             # senza differenze di pozzo valide. np.median([]) genera un warning
             # e poi un errore NumPy (median usa mean internamente).
-            scala_p = (max(float(np.median(np.abs(dpozzo))), 1e-9)
-                       if len(dpozzo) else 1e-9)
-            ampiezza = np.tanh(np.abs(dpozzo) / scala_p)  # scala dal pozzo, in [0,1), dallo stato
+            # [CORREZIONE DI DIFETTO, 2026-09-20 -- par.10 categoria D: nessun flag di scenario]
+            #
+            # IL DIFETTO, ed era A3: la scala era `median(|dpozzo|)`, cioe' LA MEDIANA DI CIO' CHE
+            # SI STA NORMALIZZANDO. Conseguenza ESATTA, non congetturata:
+            #     median(ampiezza) = tanh(1) = 0.761594   PER COSTRUZIONE, sempre.
+            # MISURATO su 14 istanti su 14, scarto massimo 2.343e-11 -- il nodo mediano ha SEMPRE
+            # quel valore, qualunque cosa faccia il sistema. E' il quarto caso della stessa
+            # famiglia su questo repo (`median(|f|)` in `ritmo()`, `_dens_rif` in `_tau`,
+            # `u_nodo`), ed e' il presidio P4/C12: una grandezza normalizzata sulla propria
+            # mediana NON PUO' MUOVERSI, e su quella non si misura nulla.
+            # E l'asimmetria era il punto: `r_rad` autonormalizzato, `t_tan` normalizzato su
+            # PHI_CRIT, cioe' una costante DICHIARATA. La ripartizione virale confrontava una
+            # grandezza che si muove col sistema contro una che non lo fa.
+            #
+            # LA CURA: la scala e' il POZZO LOCALE. Quanto e' RIPIDO il pozzo dove sei, rispetto a
+            # quanto e' PROFONDO -- un GRADIENTE RELATIVO, adimensionale per costruzione e LOCALE.
+            # E' la stessa forma di `u_nodo = I / media_dei_vicini`, che `Z5` ha mostrato
+            # soddisfare A2. Il denominatore d'arco e' `0.5*(phi_g[ii] + phi_g[jj])`: NON una
+            # scelta libera, ma la stessa media d'arco che questa funzione usa gia' per `circ_arc`.
+            #
+            # ⚠ NESSUN PAVIMENTO, E NON PERCHE' SI SPERI CHE BASTI: il rapporto e' LIMITATO A 2 PER
+            # COSTRUZIONE. `phi_g >= 0` per definizione (somma di `I[k]/L` con `I = |psi|^2 >= 0`),
+            # quindi |phi_g[j] - phi_g[i]| <= phi_g[i] + phi_g[j] = 2*phi_arc. MISURATO: max = 2
+            # esatto, p99 = 1.898, zero valori non finiti su 527452 archi. Il numeratore si annulla
+            # almeno tanto in fretta quanto il denominatore, quindi A1 non viene violata.
+            # L'unico caso residuo e' `phi_arc == 0` ESATTO, che implica `dpozzo == 0` ESATTO:
+            # 0/0 vale ZERO, ed e' una DEFINIZIONE dichiarata, non una scala.
+            #
+            # FORMA ALGEBRICA: la divisione e' scritta con `np.divide(..., out=, where=)` perche'
+            # con denominatore tutto positivo essa e' BINARIAMENTE IDENTICA a `ad / den`. E' cio'
+            # che rende esatta la riduzione al limite di `Y1` (lezione R1: la forma conta).
+            _ad = np.abs(dpozzo)
+            if SCALA_P_MEDIANA:
+                # DIAGNOSTICO: la scala VECCHIA, per la riduzione al limite. Non e' fisica.
+                _den = np.full(len(dpozzo), (max(float(np.median(_ad)), 1e-9)
+                                             if len(dpozzo) else 1e-9))
+            else:
+                _den = 0.5 * (phi_g[ii] + phi_g[jj])       # il POZZO LOCALE dell'arco
+            _rap = np.zeros(len(dpozzo))
+            np.divide(_ad, _den, out=_rap, where=(_den > 0.0))   # 0/0 := 0, dichiarato
+            ampiezza = np.tanh(_rap)                       # in [0,1), dalla RIPIDEZZA RELATIVA
+            # [DIAGNOSTICO, 2026-09-20] TRE SCALARI, byte-inerti: servono ai sigilli `Y3` e `Y4`,
+            # che devono misurare `median(ampiezza)` e `sin2` SUL PERCORSO VERO. Ricalcolarli
+            # fuori sarebbe una REPLICA, e una replica puo' divergere dal codice che gira -- e'
+            # esattamente il difetto che questo repo ha gia' preso quattro volte coi commenti
+            # stale. Non sono stato fisico: non entrano in nessuna legge.
+            self._diag_amp_med = float(np.median(ampiezza)) if len(ampiezza) else float("nan")
             if SPINORE:
                 if not hasattr(self, "_nb") or self._nb is None or len(self._nb) < self.n:
                     b0 = self.phi_s if len(self.phi_s) == self.n else np.zeros(self.n)
@@ -4518,6 +4567,9 @@ class Rete:
                 H = np.maximum(np.hypot(r_rad, t_tan), 1e-9)
                 cos2 = (r_rad / H) ** 2
                 sin2 = (t_tan / H) ** 2
+                self._diag_sin2_med = float(np.median(sin2)) if len(sin2) else float("nan")
+                self._diag_sin2_p95 = (float(np.percentile(sin2, 95)) if len(sin2)
+                                       else float("nan"))
                 if ZETA_VIR:
                     s2full = np.zeros(len(self.i))
                     s2full[mask] = sin2
