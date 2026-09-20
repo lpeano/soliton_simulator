@@ -1,0 +1,91 @@
+[TIMBRO] _rigiocata_0_120.py  sha1-BYTE 7c816420  committato e pulito
+[calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+[fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+[step2-orologio] STEP 2: omega_clk *= (cs/CS_M)^2 = OROLOGIO DI COMPTON (omega = m c^2/hbar, e nel modello c e' cs). Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.
+[rumore-colorato] TAGLIO SPETTRALE: il calcio del vuoto non e' piu' bianco ma correlato su tau_c = LAM/CS_M = 0.4 (= 40 passi), con un processo di Ornstein-Uhlenbeck sul rumore stesso e `dt_n = DT*r` (non DT: e' un processo LOCALE). `amp` INVARIATA. MOTIVO: il rumore bianco discreto inietta a tutte le frequenze fino a Nyquist, incluse quelle che il passo non risolve; in natura non esiste. ZERO coefficienti: LAM e CS_M sono gia' nel sistema. ATTENZIONE: la ricorsione PRESERVA LA VARIANZA, quindi NON abbassa theta - se lo muove lo fa SALIRE (<=5%). Si cabla perche' il rumore bianco e' SBAGLIATO, non perche' risolva l'aliasing (doc/PREDIZIONE_taglio_spettrale.md).
+[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: inerzia = T^2 = (d/cs)^2, quindi il tempo che COSTRUISCE l'inerzia e quello che la RILASSA devono essere lo stesso; oggi sono due diversi nella stessa equazione. Zero coefficienti, zero floor nuovi. NB: |omega|_eq va come sqrt(tau), quindi theta cala di ~13x: UN ORDINE DI GRANDEZZA, NON la soluzione dell'aliasing.
+[spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+CHI_BASC dal MODULO (dev'essere False): False
+semina: n = 2391  archi = 527088
+
+--- par.2  LA GEOMETRIA ALLA SEMINA: `_deg` e' la distanza dal baricentro? ---
+  baricentro = [-0.029 -0.007 -0.026]   |r| p50 3.812  p99 4.604  max 4.694
+  CORRELAZIONE fra distanza dal baricentro e `_deg`, su tutti i 2391 nodi: +0.5086
+  (il NULLO per variabili indipendenti su n=2391 e' ~1/sqrt(n) = 0.0205; 3 sigma = 0.0614)
+  nodo           |r|  rango |r|       _deg  rango deg
+  16            2.59      10.6%        604      98.1%
+  481          2.711      12.4%        639      99.5%
+  621          3.324      21.5%        610      98.5%
+  627          2.608      10.7%        648      99.7%
+  837          3.077      17.4%        610      98.5%
+  i 20 nodi PIU' connessi: |r| p50 2.731 (contro 3.812 di tutti) -> rango medio 12.2%
+
+--- LA SERIE `0 -> 120`, campionata a OGNI PASSO ---
+  arco 16-481: si segue per COPPIA DI NODI. Indice alla semina: 55688
+
+  passo  n      |  16-481 d 16-481 d0      d/d0      |vd| | pop d/d0 pop |vd|   pop d0 |     n3 pop dmax
+  0      2391   |    0.7344    0.7344         1         0 |        1        0   0.8801 |      0        1
+  1      2460   |    0.7344    0.7662    0.9586 3.152e-12 |        1 3.744e-12   0.8679 |      1    1.047
+  2      2516   |    0.7345    0.8273    0.8878  0.001868 |        1  0.00042   0.8452 |      1    1.152
+  3      2547   |    0.7345    0.7352    0.9991  0.009424 |        1  0.00174   0.8335 |      1     1.42
+  5      2606   |    0.7348    0.7537    0.9749   0.02122 |        1  0.01201   0.7987 |      1    18.18
+  10     2725   |    0.7381    0.7381         1    0.1486 |        1  0.03218   0.7729 |      1    49.68
+  15     2782   |    0.7486    0.7486         1    0.3029 |        1  0.04229   0.7755 |      1    49.49
+  20     2799   |    0.7728    0.7728         1    0.4988 |        1  0.05824   0.7652 |      1    49.95
+  25     2802   |     0.808     0.808         1    0.6849 |    1.002  0.07313   0.7651 |      1    49.61
+  30     2814   |    0.8428    0.8427         1    0.7965 |    1.004  0.08527   0.7698 |      1    49.24
+  35     2820   |    0.8861    0.8612     1.029    0.9147 |    1.005  0.09526   0.7749 |      1    48.52
+  40     2828   |    0.9455    0.8119     1.165     1.053 |    1.006   0.1046   0.7744 |      1    48.26
+  45     2840   |     1.012     0.996     1.016     1.149 |    1.004   0.1124   0.7753 |      1    47.73
+  50     2847   |     1.078    0.9806     1.099     1.267 |    1.007   0.1216   0.7774 |      1    47.25
+  55     2866   |     1.152    0.7364     1.564     1.306 |    1.009   0.1302    0.778 |      1    45.86
+  60     2885   |     1.232     1.001     1.231     1.352 |    1.008   0.1372   0.7804 |      1    44.68
+  65     2894   |     1.296    0.4679     2.769     1.386 |    1.008   0.1447   0.7827 |      1     42.4
+  70     2904   |      1.36     1.173      1.16     1.381 |    1.014   0.1523   0.7829 |      1    38.06
+  75     2919   |     1.427     1.258     1.134     1.372 |    1.013   0.1578   0.7851 |      1    33.02
+  80     2926   |      1.49    0.4949     3.012      1.39 |    1.015   0.1648   0.7865 |      1    34.67
+  85     2935   |     1.574     1.167     1.349     1.336 |    1.016   0.1697    0.789 |      1    35.18
+  90     2946   |     1.661     1.159     1.433     1.311 |    1.018   0.1738   0.7902 |      1    40.24
+  95     2954   |      1.72    0.5035     3.416      1.25 |    1.019   0.1788   0.7929 |      1    40.72
+  100    2960   |     1.765     1.031     1.711     1.219 |    1.022   0.1827   0.7939 |      1    47.97
+  105    2968   |      1.83    0.7919     2.311     1.077 |    1.022   0.1867   0.7976 |      1    48.79
+  110    2975   |     1.875     0.361     5.195    0.9718 |    1.024   0.1894   0.7989 |      1    44.74
+  115    2982   |     1.925    0.4258     4.521    0.8604 |    1.024   0.1912   0.8002 |      1    50.11
+  120    2998   |     1.968    0.2425     8.113    0.7297 |    1.025   0.1921   0.8021 |      1    54.18
+  [120 passi in 518.2 s = 4.32 s/passo]
+
+--- I CINQUE: `_deg`, `phivel` (col rango), e la tensione dei loro archi ---
+  passo  | nodo 16: deg  pv(rango) d/d0max | nodo 481: deg  pv(rango) d/d0max | nodo 621: deg  pv(rango) d/d0max
+  0      |  604    0.2(p29.7)       1 |  639    0.4(p57.5)       1 |  610    0.1(p13.2)       1
+  10     |  605   13.2(p64.8)   46.66 |  643   15.2(p98.2)   49.01 |  610   15.2(p98.1)   49.22
+  20     |  605   26.6(p99.3)   49.95 |  643   26.5(p99.2)   45.96 |  610   24.5(p98.0)   46.67
+  30     |  605   35.7(p99.3)   43.52 |  643   37.3(p99.7)   37.79 |  610   32.7(p97.8)   45.36
+  40     |  605   43.6(p99.5)   46.38 |  643   46.0(p99.8)   26.75 |  610   36.9(p94.5)   38.34
+  50     |  605   51.0(p99.6)   28.07 |  643   52.2(p99.7)   16.77 |  610   43.0(p95.9)   23.56
+  60     |  605   56.4(p99.6)   29.34 |  643   58.0(p99.8)   19.65 |  610   48.1(p96.4)   18.55
+  70     |  605   59.7(p99.4)   27.05 |  643   61.8(p99.8)   19.11 |  610   53.1(p97.5)   17.71
+  80     |  605   63.3(p99.5)   20.81 |  643   64.0(p99.7)   12.74 |  610   56.8(p97.6)   12.82
+  90     |  605   66.1(p99.6)   21.34 |  643   67.8(p99.8)   11.18 |  610   59.9(p97.7)    11.8
+  100    |  605   67.7(p99.5)    17.7 |  643   69.5(p99.7)   10.35 |  610   62.2(p97.5)   10.56
+  110    |  605   69.3(p99.4)   13.56 |  643   71.2(p99.7)   11.09 |  610   64.1(p97.3)    10.5
+  120    |  605   70.6(p99.3)   31.33 |  643   72.9(p99.8)   13.07 |  610   65.8(p97.2)   10.76
+
+======================================================================================================================
+SIGILLO INTERNO [BLOCCANTE]: la rigiocata riproduce il ramo B?
+======================================================================================================================
+[TIMBRO] _sigillo_archivio.py  sha1-BYTE 6c039a43  committato e pulito
+  (stato catturato nel punto in cui il driver chiama `salva_stato`, 138 campi)
+  campi confrontati: 138   DIVERSI: 0
+  solo nel RIFERIMENTO: 3 ['conc_archi', 'conc_nodi', 'masse_info']   |   solo nella RIGIOCATA: 0 []
+  PASS -- 138 campi IDENTICI. La rigiocata E' il ramo B, e la serie vale.
+  (e lo zero non e' mancanza di confronto: 138 campi confrontati, n=2998 in entrambi)

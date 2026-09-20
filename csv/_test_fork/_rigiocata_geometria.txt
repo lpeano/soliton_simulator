@@ -1,0 +1,22 @@
+LA CORRELAZIONE |r| CONTRO _deg: GLOBALE contro PER POPOLAZIONE
+  (A3: una correlazione su DUE popolazioni diverse non parla di nessuna delle due)
+
+  popolazione                       n       corr    |r| p50    deg p50    deg max
+  TUTTI (il numero di prima)     2998    +0.2828      3.743        536        681
+  solo VUOTO (0-899)              900    +0.0705      2.989        180        681
+  solo MASSE (900-2390)          1491    -0.9797      3.962        561        603
+  solo NATI (2391+)               607    -0.0273      3.844          2          3
+  originali = vuoto+masse        2391    +0.5928      3.707        549        681
+
+  NULLO per variabili indipendenti: ~1/sqrt(n). Su 900 = 0.0333 (3 sigma 0.1000)
+
+  I CINQUE (tutti indice < 900 -> VUOTO):
+  nodo          |r| rango nel VUOTO     _deg  rango VUOTO che cos'e'
+  16          2.751        41.0%      605        94.9%  VUOTO
+  481         2.816        44.0%      643        99.1%  VUOTO
+  621         3.268        64.1%      610        95.8%  VUOTO
+  627         2.754        41.2%      649        99.3%  VUOTO
+  837         3.123        55.9%      610        95.8%  VUOTO
+
+  e il grado MEDIANO delle tre popolazioni dice se il vuoto sia piu' connesso della materia:
+    vuoto     180   masse    561   nati      2
