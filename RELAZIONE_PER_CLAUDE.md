@@ -8477,3 +8477,86 @@ dalla **condizione iniziale ereditata**, non dalla legge.
 > **L'A/B rifatto misura la DINAMICA successiva, non la CARICA.** Per misurare la carica servirebbe
 > una rigiocata **da zero** in entrambi i rami, lunga abbastanza da superare l'assestamento — che è
 > un run, non una finestra.
+
+---
+
+## DUE RUN COMPLETI A/B a `sep = 4.0` SONO PARTITI (2026-09-20 16:26:43)
+
+**Chi legge solo questa relazione deve sapere che cosa sta girando adesso, e perche' i numeri di
+`chi_basc` che ha letto stamattina NON sono quelli che decideranno.**
+
+### Perche' i due A/B corti non bastavano -- e il difetto e' lo STESSO in entrambi
+
+Li ho fatti due volte e la seconda ha ribaltato la prima. Ma **avevano in comune un difetto che
+nessuno dei due poteva togliersi da solo: partivano entrambi da una scena a `sep = 8`**, cioe' da
+`Z65` -- **QUATTRO componenti connesse, ZERO archi fra loro, dal passo 6 al 2700.**
+
+> **Misuravano `chi_basc` su tre masse che non si sono MAI toccate.**
+
+**Un A/B su un sistema che non interagisce non vale per il sistema vero**, e non c'e' finestra
+temporale che lo aggiusti.
+
+### Che cosa gira
+
+```
+ramo A:  --chi-basc        (come tutti i run finora)      500 frame = 3000 passi
+ramo B:  --chi-basc=off                                    500 frame = 3000 passi
+```
+**Un interruttore solo; tutto il resto identico.** Snapshot ogni 120 passi -> **25 per ramo**,
+in `csv/_test_fork/_ab_A` e `_ab_B`. Simulatore `edb8f844` (blob git `b44f50ce`), driver `9aee4fc2`,
+`HEAD 0f12645`.
+
+### Le tre verifiche fatte PRIMA di lanciare, tutte con numeri
+
+**LA GEOMETRIA, e la verifica era BLOCCANTE:** alla semina `n = 2391`, `archi = 527088`,
+**componenti = 1**, **archi massa-vuoto = 97590**, **archi massa-massa = 0**. I centri dei gruppi
+0-1 distano `4.043` e i **bordi si compenetrano** (`-0.592`).
+> **Masse separate fra loro e tutte connesse al vuoto: l'interazione e' MEDIATA DAL CAMPO.**
+> **E' l'opposto esatto della scena a `sep = 8`, dove i bordi stavano a `12.46` contro `rc = 2.4`.**
+
+**IL DISCO:** `14 GB` liberi su 476 (**98 % pieno**). Snapshot **misurato** a `sep = 4.0`:
+**36.42 MB** al passo 60. Stima **~1.95 GB** per i due run -> **ci sta**. E il motivo per cui cresce
+poco e' controintuitivo e va detto: **la taglia e' dominata dagli ARCHI, non dai nodi** -- nel run a
+`sep = 8`, `n` e' andato da `2391` a `9511` (**x4**) e gli archi da `429498` a `438532` (**+2.1 %**),
+con lo snapshot da `27.20` a `31.22 MB`.
+
+**LA CPU, misurata e non dedotta:** 6 core fisici / 12 logici. **Un processo solo: `19.574 s/frame`.
+Due in parallelo: `26.032 s/frame` ciascuno** -> rallentamento **x1.330**, resa **x1.50**. Quindi
+**3.6 h in parallelo contro 5.4 h in sequenza**, e con la crescita di `n` la stima onesta e'
+**3.8-4.5 h**. *(A run partiti, misurati `26.2` e `26.5 s/frame`: la stima regge.)*
+
+### Il braccio B NON e' una modifica al simulatore, ed e' importante che si capisca perche'
+
+`CHI_BASC = False` **e' gia' il default di MODULO** (`:746`). Era **il DRIVER** ad accenderlo,
+cablato dentro l'argv. Ho aggiunto al **driver** l'opzione `--chi-basc=on|off`, **default `on`**,
+nell'idioma che il driver gia' usa per `--sep=` e `--serie=`.
+
+**Il default e' `on` e non `off`, ed e' una scelta:** nel giro precedente avevo progettato `off`,
+quando la decisione su `chi_basc` sembrava presa. **Non lo e' piu' -- questo run serve a prenderla.**
+Finche' non c'e', il default deve riprodurre il comportamento attuale **verbatim**.
+
+**Sigillo `_sigillo_chibasc_driver.py`: 5/5.** `C1` (bloccante) **142 campi confrontati, 0 diversi**
+contro il driver estratto da `bb1d727`; `C2` ne trova **76 diversi su 142** con `off`, quindi lo
+zero di `C1` **non e' mancanza di confronto**; `C3` legge `CHI_BASC` **dal modulo** (`True` /
+`True` / `False`) e `C4` verifica che **gli altri 14 flag non si siano mossi**.
+*(Verificato anche sui log dei run VIVI: il `diff` fra le due tabelle dei flag e' **una riga sola**.)*
+
+### E una cosa che si vede gia' e che NON e' una conclusione
+
+**A `sep = 4.0` la mitosi parte SUBITO**: in 60 passi `n` va da `2391` a `2622` (**+9.7 %**). Nel run
+a `sep = 8`, `n` era ancora `2391` al passo 6 e `2576` al passo 300.
+> **L'artefatto di finestra che aveva viziato il primo A/B -- "con `chi_basc` acceso non nasce
+> niente" -- a questa geometria NON si ripresenta: il ramo A cresce dal primo frame.**
+
+### Cosa questo run NON potra' dire, e lo scrivo PRIMA
+
+**Un seme per ramo.** Su questo sistema il nullo di un confronto fra bracci **non e' zero**: e' la
+dispersione **FRA SEMI**, che questo esperimento **non misura**. **Quindi nessuna differenza fra A e
+B sara' dichiarata significativa.** Si potranno dichiarare le differenze **grandi e monotone**,
+dicendo che il termine di paragone manca. **E 3000 passi non sono l'asintoto.**
+
+**Le sei letture sono fissate PRIMA** in `doc/TASK_HISTORY/2026-09-20_due-run-ab-sep4.md` (`bb1d727`,
+committato prima del lancio), e lo strumento che le applica e' committato **prima di aver prodotto
+un numero** (`csv/_test_fork/_letture_ab.py`, `3c0b934`). **Fra queste c'e' il presidio di `Z65`:
+le COMPONENTI CONNESSE a OGNI snapshot** -- se il grafo si scollega, il run perde validita' e va
+saputo subito.
