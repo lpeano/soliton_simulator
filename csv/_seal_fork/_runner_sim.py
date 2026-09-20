@@ -18,6 +18,7 @@ import numpy as np
 PASSI = 12
 MEDIANA = False
 SENZA_CHI_BASC = False
+DA_SNAPSHOT = None
 SIM = None
 OUT = None
 for _x in sys.argv[1:]:
@@ -31,6 +32,8 @@ for _x in sys.argv[1:]:
         MEDIANA = True
     elif _x == "--senza-chi-basc":
         SENZA_CHI_BASC = True
+    elif _x.startswith("--da-snapshot="):
+        DA_SNAPSHOT = os.path.abspath(_x.split("=", 1)[1])
 if not SIM or not OUT:
     raise SystemExit("uso: --sim=<path> --out=<npz> [--passi=N]")
 
@@ -65,6 +68,31 @@ S._NMASSE_VIDEO["n"] = 3
 S._NMASSE_VIDEO["sep"] = 8.0
 S._NMASSE_VIDEO["size"] = None
 S.avvia_test("N-MASSE")()
+if DA_SNAPSHOT:
+    # ⚠ SI RIPARTE DA UNO SNAPSHOT, non dalla semina: la finestra 0->60 non prova niente sulla
+    # mitosi, perche' in QUELLA finestra non nasce nulla nemmeno nel run vero (n fermo a 2391 fino
+    # al passo 120). Si riparte da dove la mitosi e' GIA' ATTIVA.
+    # OVERRIDE DEL BLOB, DICHIARATO: la logica di `carica_stato` MENO la verifica, piu'
+    # l'invalidazione delle cache derivate. Gli snapshot sono di un blob precedente.
+    import gzip as _gz, pickle as _pk
+    _ap = _gz.open if str(DA_SNAPSHOT).endswith(".gz") else open
+    with _ap(DA_SNAPSHOT, "rb") as _fh:
+        _st = _pk.load(_fh)
+    for _k, _v in _st["attrs"].items():
+        setattr(S.net, _k, _v)
+    S.net.rng.bit_generator.state = _st["rng_state"]
+    S.net._S = None
+    if hasattr(S.net, "_perm"):
+        S.net._perm = None
+    if hasattr(S.net, "_ker_cache"):
+        S.net._ker_cache = {}
+    # i contatori dei nati ripartono da ZERO: si contano le nascite DI QUESTA FINESTRA
+    for _k in ("_g_nati_mitosi", "_g_nati_mitosi_ev", "_g_nati_schwinger", "_g_nati_schwinger_ev"):
+        if hasattr(S.net, _k):
+            delattr(S.net, _k)
+    print("DASNAP %s  passo_nel_file=%s  n=%d  blob=%s"
+          % (os.path.basename(DA_SNAPSHOT), getattr(S.net, "_db_step", "?"), S.net.n,
+             str(_st.get("blob"))[:8]))
 
 for _ in range(PASSI):
     S.scuoti_vuoto(S.net)

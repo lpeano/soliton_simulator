@@ -39,6 +39,14 @@ SIM_ORA = os.path.join(RADICE, "soliton_simulator.py")
 BASE = os.path.join(RADICE, "csv", "_seal_fork", "_ab_chibasc")
 COMMIT_PRIMA = "e9f5d70"          # il simulatore PRIMA dei contatori e di `olonomia_media`
 PASSI = 60
+# --da-snapshot=<path>: la finestra si sposta dove la mitosi e' GIA' ATTIVA. Senza, si parte dalla
+# semina, e la finestra 0->60 NON prova nulla sulla mitosi (nel run vero n resta 2391 fino al 120).
+DA_SNAP = None
+for _x in sys.argv[1:]:
+    if _x.startswith("--da-snapshot="):
+        DA_SNAP = _x.split("=", 1)[1]
+    elif _x.startswith("--passi="):
+        PASSI = int(_x.split("=", 1)[1])
 CAMPI = ("psi", "d", "phi", "eta", "n", "pos", "tw")
 
 esiti = []
@@ -52,6 +60,8 @@ def segna(nome, ok, det):
 def gira(sim, out, extra=()):
     cmd = [sys.executable, os.path.join(_QUI, "_runner_sim.py"),
            "--sim=%s" % sim, "--out=%s" % out, "--passi=%d" % PASSI] + list(extra)
+    if DA_SNAP:
+        cmd.append("--da-snapshot=%s" % DA_SNAP)
     pr = subprocess.run(cmd, cwd=RADICE, capture_output=True, text=True,
                         encoding="utf-8", errors="replace")
     if pr.returncode != 0:
@@ -91,7 +101,9 @@ def main():
     print("Z0  simulatore PRIMA (%s): sha1 grezzo %s"
           % (COMMIT_PRIMA, hashlib.sha1(q.stdout).hexdigest()[:8]))
     print("Z0  simulatore ORA           : sha1 grezzo %s" % hashlib.sha1(dn).hexdigest()[:8])
-    print("Z0  %d passi per braccio" % PASSI)
+    print("Z0  %d passi per braccio   finestra: %s"
+          % (PASSI, ("dallo snapshot %s" % os.path.basename(DA_SNAP)) if DA_SNAP
+             else "DALLA SEMINA (passo 0)"))
     print("")
 
     oR, oA, oB = (os.path.join(BASE, x) for x in ("RIF.npz", "A.npz", "B.npz"))
