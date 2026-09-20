@@ -171,3 +171,39 @@ poggiava su quello senza averlo verificato.
    nodi stiano a `10⁻¹³` nel ramo A e qualunque perturbazione della coppia li accenda (`Z63`); se
    il profilo identico delle due cure sia **divergenza caotica** — servirebbe un terzo braccio con
    perturbazione nulla, o un secondo seme.
+
+---
+
+## 2026-09-20 — **L'ORDINE DEL LAVORO, deciso da Luca: ① → ② → ③**
+
+**HEAD `e403e15` · simulatore `f81c4fe1`** *(sha1 byte grezzi; blob git `af8a96f1`)* · albero
+pulito · **nessun run in esecuzione.**
+
+```
+①  LE GUARDIE DI PRECONDIZIONE          <- in corso
+②  IL PANNELLO FEDELE                   <- dopo ①
+③  IL RUN LUNGO a sep = 4.0             <- PER ULTIMO
+```
+
+**Nessun run parte finché ① e ② non sono chiusi.**
+
+### Cosa è già pronto per ③, e resta sigillato
+
+- **il driver** `csv/_test_fork/_scena_video.py`: `--sep=X` nominale *(sigillo `4/4`)* e la
+  **ripresa** `--riprendi` *(sigillo `5/5` sul driver VERO)*;
+- **il pilota a `sep = 4.0`**: archi massa-massa **0**, archi massa-vuoto **97 447** stabili
+  *(−0.15 % in 300 passi)*, **una componente**, **196 nodi `MISTO`**;
+- **la cadenza proposta**: `--serie=20` *(= `--db-ogni 120` passi)* → **83 snapshot, 3.0-4.5 GB**
+  su **15 GB liberi** *(disco al 97 %)*;
+- **il costo misurato**: `2.922 s/passo` → **8.1 ore come LIMITE INFERIORE** per 10.000 passi.
+
+### ⚠ E una regola che sarebbe servita due giorni fa
+
+> **Prima di interpretare QUALUNQUE struttura vista in un pannello, verificare che ci siano ARCHI
+> in quella regione.**
+
+**Il caso reale:** nel run a `sep = 8` il pannello del campo mostrava interferenza **fra le masse**,
+e le masse stavano in **quattro componenti connesse con ZERO archi fra loro** *(`Z65`)*. Il
+pannello non mentiva — `campo_spaziale` somma su **tutti i nodi**, non sugli archi — **ma la
+lettura sì.** Il tool del video (`csv/_test_fork/_video_da_snapshot.py`) stampa il conteggio degli
+archi fra componenti **su ogni frame**, proprio per questo.
