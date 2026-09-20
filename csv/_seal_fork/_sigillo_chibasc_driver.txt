@@ -1,0 +1,21 @@
+[TIMBRO] _sigillo_chibasc_driver.py  sha1-BYTE bee78272  committato e pulito
+[TIMBRO] _sigillo_archivio.py  sha1-BYTE 6c039a43  committato e pulito
+driver PRIMA (bb1d727): sha1 grezzo 15d01956
+driver ORA              : sha1 grezzo 9aee4fc2
+
+braccio A: driver VECCHIO, default          (`--chi-basc` cablato)
+braccio B: driver NUOVO,   default          (atteso: identico ad A)
+braccio C: driver NUOVO,   --chi-basc=off   (atteso: DIVERSO)
+
+C0   PASS   i tre bracci hanno gli STESSI passi: [12, 24]
+C1   PASS   default: 142 campi confrontati, 0 diversi  -> IDENTICO
+C2   PASS   --chi-basc=off contro default: 76 campi diversi su 142 -> il flag FA QUALCOSA
+C3   PASS   CHI_BASC DAL MODULO: vecchio=True  nuovo-default=True  nuovo-off=False
+C4   PASS   gli altri 14 flag sono identici nei TRE bracci: si'
+
+ESITO: 5/5
+
+VERDETTO: `--chi-basc=` e' INERTE A DEFAULT, FA QUALCOSA con `off`, e la cosa che fa
+  e' spegnere CHI_BASC e NIENT'ALTRO. Il driver si puo' usare per i due run.
+NB: UNA scena, UN seme, 4 frame. Prova che il DEFAULT non e' cambiato e che l'opzione
+  agisce sul flag giusto, NON che `chi_basc` spento produca una fisica migliore.
