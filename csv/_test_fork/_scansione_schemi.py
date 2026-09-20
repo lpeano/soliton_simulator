@@ -38,6 +38,35 @@ RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
 SORG = os.path.join(RADICE, "soliton_simulator.py")
 
 
+# ---------------------------------------------------------------------------------------------
+# LA TRIAGE PER RUOLO, e il criterio e' DICHIARATO invece che lasciato all'impressione.
+# P5 dice "ogni ramo else su un PERCORSO FISICO va contato": una guardia dentro `_diag_completa`
+# o dentro `update` non e' sullo stesso piano di una dentro `step`. L'elenco resta COMPLETO --
+# nessuna riga sparisce -- ma ogni riga porta il suo ruolo, cosi' l'ordine di cura e' visibile.
+#
+# FISICA = le funzioni che `step()` / `mitosi()` / il ciclo del driver attraversano davvero.
+# L'elenco e' scritto a mano DAL CODICE e va riletto se il file cambia: e' una DICHIARAZIONE,
+# non una deduzione automatica, e dichiararla e' il punto.
+FISICA = {
+    "step", "mitosi", "memoria_hebbiana_moto", "_passo_spinoriale", "_pesi", "_cs_nodo",
+    "_cs_nodo_campo", "_bloch_ritardato", "_tempo_luce_nodo", "_coppia_interferenza",
+    "_rho_sorgente", "_nb_grav", "ritmo", "lambda_nodi", "_allaccia", "semina",
+    "_eredita_spinore_figli", "scuoti_vuoto", "calcola_psi", "_grado", "_riallinea_tracking",
+    "_aggiorna_lift_spinoriale", "_feedback_spinoriale_archi", "_estendi_psi_spinor",
+    "chiralita_core_locale", "_bloch_a_spinore", "_mat", "_mat2", "_costruisci_struttura",
+    "rilassa_disegno", "_togli_rotazione_rigida", "_base_cicli_topologici", "__init__",
+    "carica_stato", "salva_stato", "_registra_concorrenza", "_agg_voce",
+}
+
+
+def ruolo(nome):
+    if nome in FISICA:
+        return "FISICA"
+    if nome.startswith("_render") or nome.startswith("_dbg") or nome in ("update", "_f", "_muovi"):
+        return "RENDER"
+    return "DIAGN."
+
+
 def funzioni(albero):
     """Mappa riga -> nome della funzione che la contiene (la piu' interna)."""
     m = {}
@@ -71,6 +100,7 @@ def main():
     print("=" * 126)
     pat_a = re.compile(r"\blen\s*\([^()]*\)\s*(==|>=|<=|!=|>|<)\s*(len\s*\(|self\.n\b|\bn\b)")
     a_tot = 0
+    a_ruoli = defaultdict(int)
     for i, r in enumerate(righe):
         s = r.strip()
         if not (s.startswith("if ") or s.startswith("elif ") or " if " in s):
@@ -78,8 +108,11 @@ def main():
         if not pat_a.search(s):
             continue
         a_tot += 1
-        print("  :%-5d %-26s %s" % (i + 1, fn.get(i + 1, "<modulo>"), ctx(i)))
-    print("  -> %d occorrenze" % a_tot)
+        f = fn.get(i + 1, "<modulo>")
+        a_ruoli[ruolo(f)] += 1
+        print("  %-7s :%-5d %-26s %s" % (ruolo(f), i + 1, f, ctx(i)))
+    print("  -> %d occorrenze:  %s"
+          % (a_tot, "  ".join("%s %d" % (k, v) for k, v in sorted(a_ruoli.items()))))
     print("")
 
     # ------------------------------------------------------------------ B: default su maschera
@@ -88,6 +121,7 @@ def main():
     print("=" * 126)
     alloc = re.compile(r"(\w+)\s*=\s*np\.(zeros|full|zeros_like|full_like|ones)\s*\(")
     b_tot = 0
+    b_ruoli = defaultdict(int)
     for i, r in enumerate(righe):
         m = alloc.search(r)
         if not m:
@@ -101,11 +135,14 @@ def main():
                 dentro = righe[k][mm.end():righe[k].find("]", mm.end())]
                 if dentro.strip() and dentro.strip() not in (":", "...",):
                     b_tot += 1
-                    print("  :%-5d %-26s %s" % (i + 1, fn.get(i + 1, "<modulo>"), ctx(i)))
+                    f = fn.get(i + 1, "<modulo>")
+                    b_ruoli[ruolo(f)] += 1
+                    print("  %-7s :%-5d %-26s %s" % (ruolo(f), i + 1, f, ctx(i)))
                     print("        -> :%-5d riempita solo su [%s]   %s"
                           % (k + 1, dentro.strip()[:30], ctx(k)))
                     break
-    print("  -> %d occorrenze" % b_tot)
+    print("  -> %d occorrenze:  %s"
+          % (b_tot, "  ".join("%s %d" % (k, v) for k, v in sorted(b_ruoli.items()))))
     print("")
 
     # ------------------------------------------------------------------ C: saturazioni
@@ -113,18 +150,32 @@ def main():
     print("SCHEMA C -- SATURAZIONI: `tanh`, `clip`, `x/sqrt(1+x**2)`  (il punto di saturazione E' una scala)")
     print("=" * 126)
     pat_c = re.compile(r"np\.tanh\s*\(|np\.clip\s*\(|/\s*np\.sqrt\s*\(\s*1(\.0)?\s*\+|np\.minimum\s*\(\s*1\.0|np\.maximum\s*\(\s*0\.0")
-    c_tot = 0
+    c_tot = c_vere = c_dominio = 0
     per_fn = defaultdict(int)
+    c_ruoli = defaultdict(int)
     for i, r in enumerate(righe):
         if r.lstrip().startswith("#"):
             continue
         if not pat_c.search(r):
             continue
-        c_tot += 1
         f = fn.get(i + 1, "<modulo>")
+        # UN CLIP AL DOMINIO DI arccos NON E' UNA SCALA: clip(x, -1, 1) prima di arccos e' esatto
+        # per costruzione (il coseno fra due versori VIVE in [-1,1], e il clip toglie solo
+        # l'errore di arrotondamento). Si separa, perche' metterlo in elenco con le saturazioni
+        # vere -- quelle in cui un tanh incontra una grandezza NON limitata, che e' l'anomalia (1)
+        # del mandato -- annegherebbe le seconde sotto le prime.
+        dominio = ("arccos" in r or "arcsin" in r) and "clip" in r
+        c_tot += 1
         per_fn[f] += 1
-        print("  :%-5d %-26s %s" % (i + 1, f, ctx(i)))
-    print("  -> %d occorrenze in %d funzioni" % (c_tot, len(per_fn)))
+        if dominio:
+            c_dominio += 1
+            continue
+        c_vere += 1
+        c_ruoli[ruolo(f)] += 1
+        print("  %-7s :%-5d %-26s %s" % (ruolo(f), i + 1, f, ctx(i)))
+    print("  -> %d saturazioni VERE (%s)  +  %d clip al DOMINIO di arccos/arcsin (esatti, non scale)"
+          % (c_vere, "  ".join("%s %d" % (k, v) for k, v in sorted(c_ruoli.items())), c_dominio))
+    print("     totale grezzo %d in %d funzioni" % (c_tot, len(per_fn)))
     print("")
 
     # ------------------------------------------------------------------ D: memorie fra funzioni
@@ -156,8 +207,9 @@ def main():
     print("")
 
     print("=" * 126)
-    print("TOTALI:  A %d guardie | B %d default su maschera | C %d saturazioni | D %d memorie"
-          % (a_tot, b_tot, c_tot, d_tot))
+    print("TOTALI:  A %d guardie (FISICA %d) | B %d default (FISICA %d) | "
+          "C %d saturazioni vere (FISICA %d) | D %d memorie"
+          % (a_tot, a_ruoli["FISICA"], b_tot, b_ruoli["FISICA"], c_vere, c_ruoli["FISICA"], d_tot))
     print("=" * 126)
     print("LO SCRIPT NON GIUDICA: ELENCA. Un'occorrenza in elenco non e' un difetto finche' non la")
     print("si guarda -- ma una NON in elenco non si guardera' mai, ed e' quello il punto.")
