@@ -4357,8 +4357,8 @@ class Rete:
             if TRACCIA_D0: self._traccia_d0('S05_spinta_locale', _tr_pre)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0 = np.maximum(self.d0, self._floor_d0())       # PAVIMENTO: la spinta non deve
-            if TRACCIA_D0: self._traccia_d0('P2_dopo_spinta', _tr_pre, pavimento=self._floor_d0())
             #   portare d0 sotto la scala minima, o lo stress |d-d0|/d0 diverge (bug rientrante)
+            if TRACCIA_D0: self._traccia_d0('P2_dopo_spinta', _tr_pre, pavimento=self._floor_d0())
         c = np.where(nasce)[0]
         if not len(c): return 0
         c = c if MITMAX == 0 else c[np.argsort(avv[c])[::-1]][:MITMAX]

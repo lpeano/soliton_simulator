@@ -1,0 +1,45 @@
+QUANTO IL SISTEMA VIVE GIA' SOTTO LA PROPRIA SCALA MINIMA (`LAM = 0.80`)
+  pavimento di oggi: f*median(d0) con f = 0.05/LAM_BASE = 0.0625   -> COMOVENTE
+
+  ramo passo   archi       min(d0)    p05(d0)    p50(d0)    max(d0)  pavim. oggi         <LAM
+  A    120     527441       0.0525     0.4544     0.8401      1.532      0.05250 201233 (38.2%)
+  A    360     527539      0.04935     0.1862     0.7897      2.834      0.04935 292708 (55.5%)
+  A    600     527668      0.05004      0.691     0.8006       2.57      0.05004 256880 (48.7%)
+  A    1200    529905      0.05635     0.4857     0.9016      3.521      0.05635 140404 (26.5%)
+  A    1800    534236      0.06293    0.06293      1.007       7.47      0.06293 152167 (28.5%)
+  A    2400    539575      0.06959    0.06959      1.113      22.72      0.06959 179323 (33.2%)
+  A    3000    546792      0.07635    0.07635      1.222      101.6      0.07635 185299 (33.9%)
+
+  B    120     527857      0.05013     0.4638     0.8021      1.514      0.05013 260102 (49.3%)
+  B    240     528031      0.05506      0.603      0.881      1.527      0.05506 145952 (27.6%)
+  B    360     528158      0.05619     0.5842      0.899      1.639      0.05619 137768 (26.1%)
+
+  E LO STRESS, che e' il criterio vero: |d-d0|/d0
+  ramo passo     stress p50   stress p99   stress MAX archi d0<LAM
+  A    120           0.2288        5.028        51.73       201233
+  A    1200           1.852        20.37        61.77       140404
+  A    3000           1.288        44.61        174.7       185299
+  B    120           0.0901        4.974        53.18       260102
+  B    240          0.05015        3.954           67       145952
+  B    360          0.08048        2.435        387.3       137768
+
+====================================================================================================
+VERIFICA ANALITICA (par.7.2): imporre `d0 >= LAM` rende lo STRESS piccolo?
+====================================================================================================
+  stress = |d - d0| / d0.  Con d0 >= X il limite superiore e'  (d_max - X)/X = d_max/X - 1
+
+  ramo passo        d max  pavim. oggi    limite OGGI limite con LAM   guadagno
+  A    120          3.185      0.05250           59.7            3.0       20.0x
+  A    1200         4.583      0.05635           80.3            4.7       17.0x
+  A    3000         20.13      0.07635          262.6           24.2       10.9x
+  B    120           3.15      0.05013           61.8            2.9       21.1x
+  B    360          149.1      0.05619         2652.7          185.4       14.3x
+
+  ⚠ IL LIMITE RESTA GRANDE perche' e' proporzionale a `d_max`, che CRESCE:
+     nel ramo A `d` arriva a 101.6 al passo 3000, quindi anche con `d0 >= LAM = 0.8`
+     lo stress puo' valere 126. FINITO si', PICCOLO no.
+
+  E LA DISTRIBUZIONE DI `d0` E' CENTRATA SU `LAM`, non sopra:
+     ramo A passo 120    median(d0) = 0.8401  contro LAM = 0.80   -> sotto: 38.2%
+     ramo B passo 120    median(d0) = 0.8021  contro LAM = 0.80   -> sotto: 49.3%
+     ramo A passo 3000   median(d0) = 1.2216  contro LAM = 0.80   -> sotto: 33.9%
