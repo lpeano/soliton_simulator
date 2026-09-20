@@ -95,32 +95,60 @@ def adiacenza():
     return n, i, j, A
 
 
+MISTO = 4     # etichetta dei nodi nati da un arco fra due gruppi DIVERSI
+
+
+def propaga(n, A, gruppo, n_sem):
+    """Il LIGNAGGIO dei nodi nati dopo la semina, e dichiaro come.
+
+    `conc_nodi` e' VUOTO in questa scena (verificato: `semina()` registra la concorrenza solo se
+    `mass_id is not None`, e `_massa()` non lo passa), quindi la via del mandato non esiste.
+    Ma un nodo nasce al PUNTO MEDIO di un arco, con esattamente due archi verso i due genitori,
+    ENTRAMBI DI INDICE MINORE (CLAUDE.md par.9): una sola passata in ordine di indice basta.
+
+    Se i due genitori hanno etichette DIVERSE il nodo e' MISTO e si conta A PARTE. Non se ne
+    sceglie una: un nodo nato da un arco massa-vuoto non appartiene a nessuna delle due, e
+    attribuirlo gonfierebbe proprio il numero che decide."""
+    g = np.full(n, -1, np.int64)
+    m = min(n_sem, n)
+    g[:m] = gruppo[:m]
+    ip, ix = A.indptr, A.indices
+    for k in range(m, n):
+        vic = ix[ip[k]:ip[k + 1]]
+        et = set(int(x) for x in np.unique(g[vic[vic < k]]) if x >= 0)
+        if len(et) == 1:
+            g[k] = et.pop()
+        elif len(et) > 1:
+            g[k] = MISTO
+    return g
+
+
 def misura(gruppo, n_sem):
     n, i, j, A = adiacenza()
     nc, lab = connected_components(A, directed=False)
     dim = np.sort(np.bincount(lab))[::-1]
     fra = int(np.sum(lab[i] != lab[j]))
-    # archi classificati: SOLO fra nodi seminati, dove il gruppo e' certo
-    g = np.full(n, -1, np.int64)
-    g[:min(n_sem, n)] = gruppo[:min(n_sem, n)]
-    ok = (g[i] >= 0) & (g[j] >= 0)
-    gi, gj = g[i][ok], g[j][ok]
-    mm = int(np.sum((gi > 0) & (gj > 0) & (gi != gj)))      # massa A - massa B
-    mv = int(np.sum(((gi == 0) & (gj > 0)) | ((gj == 0) & (gi > 0))))   # massa - vuoto
-    nuovi = int(np.sum(~ok))
+    g = propaga(n, A, gruppo, n_sem)
+    gi, gj = g[i], g[j]
+    massa_i = (gi >= 1) & (gi <= 3)
+    massa_j = (gj >= 1) & (gj <= 3)
+    mm = int(np.sum(massa_i & massa_j & (gi != gj)))                    # massa A - massa B
+    mv = int(np.sum((massa_i & (gj == 0)) | (massa_j & (gi == 0))))     # massa - vuoto
+    mis = int(np.sum((gi == MISTO) | (gj == MISTO)))                    # tocca un MISTO
+    senza = int(np.sum((gi < 0) | (gj < 0)))                            # non etichettabile
     li = S.net.lambda_nodi()
     rc = 3.0 * float(np.median(li))
-    return dict(n=n, archi=len(i), nc=nc, dim=dim, fra=fra, mm=mm, mv=mv, nuovi=nuovi,
+    return dict(n=n, archi=len(i), nc=nc, dim=dim, fra=fra, mm=mm, mv=mv, nuovi=mis,
+                n_misto=int(np.sum(g == MISTO)), senza=senza,
                 lam_med=float(np.median(li)), lam_min=float(li.min()), lam_max=float(li.max()),
                 rc=rc)
 
 
 def riga(et, m):
-    print("%-9s n=%-6d archi=%-7d comp=%-3d taglie=%-26s | fra=%-7d mm=%-6d mv=%-7d nati=%-7d | "
-          "lam_med=%.4f rc=%.4f"
-          % (et, m["n"], m["archi"], m["nc"],
-             "/".join(str(int(x)) for x in m["dim"][:6]),
-             m["fra"], m["mm"], m["mv"], m["nuovi"], m["lam_med"], m["rc"]))
+    print("%-11s n=%-6d archi=%-8d comp=%-3d | mm=%-7d mv=%-8d | archi_misti=%-8d "
+          "nodi_misti=%-6d senza=%-5d | lam_med=%.4f rc=%.4f"
+          % (et, m["n"], m["archi"], m["nc"], m["mm"], m["mv"], m["nuovi"],
+             m["n_misto"], m["senza"], m["lam_med"], m["rc"]))
 
 
 def main():
