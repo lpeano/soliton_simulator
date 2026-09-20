@@ -78,8 +78,11 @@ def confronta(a, b):
         if x.shape != y.shape:
             fuori.append("%s(shape %s vs %s)" % (k, x.shape, y.shape))
         elif not np.array_equal(x, y):
-            fuori.append("%s(max|A-B|=%.3e)"
-                         % (k, float(np.nanmax(np.abs(np.asarray(x, float) - np.asarray(y, float))))))
+            # ⚠ NON si castano a `float`: `psi` e' COMPLESSO, e il cast SCARTA LA PARTE
+            # IMMAGINARIA -- lo stesso errore gia' preso oggi con `_mod()`, dove una differenza
+            # complessa veniva riportata come se fosse reale. `np.abs` di una differenza
+            # complessa E' il modulo, ed e' cio' che serve.
+            fuori.append("%s(max|A-B|=%.3e)" % (k, float(np.nanmax(np.abs(x - y)))))
     return fuori
 
 

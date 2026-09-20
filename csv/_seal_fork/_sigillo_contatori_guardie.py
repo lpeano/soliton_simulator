@@ -86,8 +86,9 @@ def main():
         if a.shape != b.shape:
             diversi.append("%s(shape %s vs %s)" % (k, a.shape, b.shape))
         elif not np.array_equal(a, b):
-            m = float(np.nanmax(np.abs(np.asarray(a, float) - np.asarray(b, float))))
-            diversi.append("%s(max|A-B|=%.3e)" % (k, m))
+            # ⚠ NON si casta a `float`: `psi` e' COMPLESSO e il cast scarta la parte
+            # immaginaria. `np.abs` della differenza complessa E' il modulo.
+            diversi.append("%s(max|A-B|=%.3e)" % (k, float(np.nanmax(np.abs(a - b)))))
     segna("V1", not diversi,
           "%d campi confrontati (%s): %s"
           % (len(CAMPI), ", ".join(CAMPI),
