@@ -590,6 +590,9 @@ def scuoti_vuoto(net):
     # PUO' fallire. Il contatore serve a provarlo con un numero, e a farlo scattare il giorno in
     # cui qualcuno aggiungesse una quarta via di crescita.
     # NB: il salto si conta solo col FLAG ACCESO (la classe di `N3b`).
+        # ✅ MISURATO (sigillo `3/4 + 1 atteso`, 2d018e7): **0 salti su 12 invocazioni**, e in `W3`
+    # NON si fa scattare NEMMENO corrompendo `perc_chi`. CLASSE: **(c) FORTE** -- la guardia non e'
+    # RAGGIUNGIBILE, e il contatore resta solo come sentinella di regressione.
     net._g_calore_chi_tot = getattr(net, "_g_calore_chi_tot", 0) + 1
     if CALORE_VETTORIALE and not (hasattr(net, "perc_chi") and len(net.perc_chi) == net.n):
         net._g_calore_chi_salti = getattr(net, "_g_calore_chi_salti", 0) + 1
@@ -2048,6 +2051,8 @@ class Rete:
         # Conta quante volte il ramo NON gira perche' il FLAG e' spento -- oggi il 100 % per
         # costruzione. Non e' una frazione di fallimento, ed e' un presidio contro
         # un'ACCENSIONE SILENZIOSA: il giorno in cui qualcuno accende COMPAT_CHI, il numero cambia.
+                # ✅ MISURATO: ramo SPENTO 12 volte su 12 (frazione 1.000). CLASSE: **(b)**, e il contatore
+        # e' un presidio contro un'accensione silenziosa, non una frazione di fallimento.
         self._g_compat_chi_tot = getattr(self, "_g_compat_chi_tot", 0) + 1
         if not COMPAT_CHI:
             self._g_compat_chi_spento = getattr(self, "_g_compat_chi_spento", 0) + 1
@@ -2318,6 +2323,10 @@ class Rete:
             # MISURATO che NON e' un difetto di lunghezza: `_nb_prec` e' scritto a :2712 DENTRO
             # `_passo_spinoriale`, quindi alla PRIMA chiamata non esiste ancora. E' lo STESSO
             # transitorio di avvio di `zeta_vir` (Z68), e la stessa causa: l'ORDINE.
+            # ✅ MISURATO (sigillo `3/4 + 1 atteso`, 2d018e7): **1 salto su 12**, `shape (-1, 2391)`
+            # cioe' `_nb_prec is None`, e `quando = 1` -- SOLO la prima invocazione. CLASSE: **(a)**,
+            # ed e' l'UNICA dei dieci che scatta davvero in un run. Transitorio d'avvio, stessa
+            # causa di `Z68`: l'ORDINE.
             self._g_nb_prec_salti = getattr(self, "_g_nb_prec_salti", 0) + 1
             self._g_nb_prec_shape = (-1 if getattr(self, "_nb_prec", None) is None
                                      else len(self._nb_prec), n)
@@ -2330,6 +2339,10 @@ class Rete:
         # [A8, 2026-09-20] (c) RAGIONE SCADUTA: `perc_chi` e' estesa da tutte e tre le vie di
         # crescita di `n`, quindi `len(perc_chi) >= n` non puo' essere falso. Si conta per
         # DIMOSTRARLO. L'`else` qui c'e' gia' ed e' esplicito: manca solo il numero.
+                # ✅ MISURATO: **0 salti su 12**, ma in `W3` SCATTA corrompendo `perc_chi`. CLASSE:
+        # **(c) DEBOLE** -- la guardia E' raggiungibile da uno stato malformato, anche se nessun
+        # percorso del codice lo produce oggi. Qui il contatore ha valore OPERATIVO, non solo di
+        # sentinella: e' protetta da un'INVARIANTE che tre funzioni mantengono, non dalla forma.
         self._g_chicore_passo_tot = getattr(self, "_g_chicore_passo_tot", 0) + 1
         if CHI_CORE and len(self.perc_chi) >= n:
             chi_nodi = self.chiralita_core_locale()
@@ -3406,6 +3419,8 @@ class Rete:
             # [A8, 2026-09-20] (a) NESSUNA RAGIONE DICHIARATA, ed e' LA CAUSA di un sintomo
             # gia' contato: se questo ramo non gira, `_psi_spin_prec` NON avanza e `ritmo()`
             # registra `_ritmo_snap_identico` (Z33). Il sintomo era contato, la causa no.
+                        # ✅ MISURATO: **0 salti su 12**, ma in `W3` SCATTA. CLASSE: **(a)** confermata -- la
+            # guardia e' raggiungibile, e questa e' la CAUSA di cui `ritmo()` conta il SINTOMO.
             self._g_snap_psispin_tot = getattr(self, "_g_snap_psispin_tot", 0) + 1
             if CAMPO_SPINORIALE and not (hasattr(self, "psi_spin")
                                          and len(getattr(self, "psi_spin", [])) == self.n):
@@ -3451,6 +3466,8 @@ class Rete:
         dt_n_s = dt_n
         # [A8, 2026-09-20] (c) RAGIONE SCADUTA sulla parte `len(perc_chi) >= n` (le tre vie la
         # estendono). Il default e' gia' esplicito: `dt_n_s = dt_n` una riga sopra.
+                # ✅ MISURATO: **0 salti su 12**, ma in `W3` SCATTA corrompendo `perc_chi`. CLASSE:
+        # **(c) DEBOLE** -- raggiungibile da uno stato malformato.
         self._g_temposegno_tot = getattr(self, "_g_temposegno_tot", 0) + 1
         if TEMPO_SEGNO and not (not np.isscalar(dt_n) and len(self.perc_chi) >= self.n
                                 and len(self.psi) >= self.n):
@@ -3697,6 +3714,9 @@ class Rete:
         # (:4297), e la RIASSEGNAZIONE di :2719 gli da' lunghezza `n` ESATTA, perche' `nb_new`
         # deriva da `self._nb` che `_passo_spinoriale` normalizza a `n` incondizionatamente.
         # Si conta per DIMOSTRARLO con un numero invece che con un ragionamento.
+                # ✅ MISURATO: **0 salti su 12**, ma in `W3` SCATTA corrompendo `phi_s`. CLASSE:
+        # **(c) DEBOLE**, ed e' la piu' importante delle deboli: se scattasse davvero, l'INTERO
+        # `_passo_spinoriale` non girerebbe. E' protetta da un'invariante, non dalla forma.
         self._g_spinore_vivo_tot = getattr(self, "_g_spinore_vivo_tot", 0) + 1
         if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) != self.n:
             self._g_spinore_vivo_salti = getattr(self, "_g_spinore_vivo_salti", 0) + 1
@@ -3749,6 +3769,8 @@ class Rete:
         # del Bloch corrente: +1 = allineato, -1 = ha accumulato il segno -1 di un giro 2pi. CHI_BASC
         # e' gia' disattivato sopra. Richiede --spinore-corretto (garantito in _applica_flag).
         # [A8, 2026-09-20] (c) RAGIONE SCADUTA sulla parte `len(perc_chi) >= n`.
+                # ✅ MISURATO: **0 salti su 12**, e in `W3` NON si fa scattare nemmeno corrompendo
+        # `perc_chi`. CLASSE: **(c) FORTE** -- non raggiungibile.
         self._g_chi_da_spinore_tot = getattr(self, "_g_chi_da_spinore_tot", 0) + 1
         if CHI_DA_SPINORE and SPINORE_CORRETTO and not (
                 len(self.perc_chi) >= self.n
@@ -4679,6 +4701,10 @@ class Rete:
             # NON E' INDIPENDENTE da :3623: `_nb` e' rinormalizzato a `n` da `_passo_spinoriale`
             # (:2204-:2209), che gira PRIMA nel ciclo -- quindi questo puo' fallire solo se
             # `_passo_spinoriale` NON ha girato, cioe' se e' scattata la guardia :3623.
+                        # ✅ MISURATO: **0 salti su 12**, e in `W3` NON si fa scattare. CLASSE: **(c) FORTE**,
+            # ⚠ RICLASSIFICATA da `(a)` -- la predizione e' in `849dd25` (ANTENATO del run) e
+            # l'approvazione di Luca in `dd6953b`. La riparazione di `_nb` quattro righe sopra gira
+            # sotto lo STESSO flag `SPINORE`: questa guardia non e' raggiungibile.
             self._g_nb_grav_proiez_tot = getattr(self, "_g_nb_grav_proiez_tot", 0) + 1
             if SPINORE and not (self._nb is not None and len(self._nb) >= self.n):
                 self._g_nb_grav_proiez_salti = getattr(self, "_g_nb_grav_proiez_salti", 0) + 1
@@ -4763,6 +4789,7 @@ class Rete:
         # COSTANTE, non per condizione. Come per COMPAT_CHI il contatore si chiama `_spento` e non
         # `_salti`: misura un ramo che non gira per scelta, ed e' un presidio contro
         # un'accensione silenziosa.
+                # ✅ MISURATO: ramo SPENTO 12 volte su 12. CLASSE: **(b)** -- morto per COSTANTE.
         self._g_k_frange_tot = getattr(self, "_g_k_frange_tot", 0) + 1
         if K_FRANGE == 0.0:
             self._g_k_frange_spento = getattr(self, "_g_k_frange_spento", 0) + 1
