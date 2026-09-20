@@ -3054,6 +3054,37 @@ class Rete:
         self._g_traccia_d0 = getattr(self, "_g_traccia_d0", {})
         self._g_traccia_d0[sito] = self._g_traccia_d0.get(sito, 0) + 1
 
+    def _traccia_coesione(self, coes, tetto, mask):
+        """Il valore di `coesione_relazionale` PRIMA del clip, e il tetto che lo taglia.
+
+        ⚠ LA DOMANDA A CUI RISPONDE: il clip PROTEGGE o PRODUCE?
+          `|coes| >> tetto`  -> il termine e' enorme e il clip lo sta contenendo: stringere il
+                                tetto NON basta, il difetto e' nel termine;
+          `|coes| ~ tetto`   -> e' il clip a produrre il movimento, e il tetto e' la cura giusta.
+        PURE-READ sulla fisica: scrive solo la traccia. Byte-inerte (gira sotto `TRACCIA_D0`).
+        """
+        import numpy as _np
+        reg = getattr(self, "_traccia_coes_log", None)
+        if reg is None:
+            reg = self._traccia_coes_log = []
+        ii, jj = self.i[mask], self.j[mask]
+        ac = _np.abs(_np.asarray(coes, float))
+        at = _np.abs(_np.asarray(tetto, float))
+        rap = ac / _np.maximum(at, 1e-300)
+        voce = {"passo": int(getattr(self, "_passo_corrente", -1)),
+                "n_archi": int(ac.size),
+                "sat": int((ac >= at).sum()),          # quanti SATURANO il clip
+                "rap_p50": float(_np.median(rap)) if ac.size else float("nan"),
+                "rap_p99": float(_np.percentile(rap, 99)) if ac.size else float("nan"),
+                "rap_max": float(rap.max()) if ac.size else float("nan")}
+        # e l'arco seguito, per COPPIA DI NODI (mai per indice: gli archi si aggiungono)
+        for (a, b) in TRACCIA_D0_COPPIE:
+            k = _np.flatnonzero(((ii == a) & (jj == b)) | ((ii == b) & (jj == a)))
+            voce["%d-%d" % (a, b)] = (None if not len(k)
+                                      else (float(_np.asarray(coes, float)[k[0]]),
+                                            float(_np.asarray(tetto, float)[k[0]])))
+        reg.append(voce)
+
     def _floor_d0(self):
         # PAVIMENTO di d0. Assoluto (0.05) di default; COMOVENTE se PAV_COM: f*median(d0), con
         # f = 0.05/LAM_BASE = il RAPPORTO DI NASCITA (il vecchio pavimento assoluto diviso la
@@ -4966,6 +4997,12 @@ class Rete:
             stress_metrico = np.abs(self.d[mask] - self.d0[mask]) / np.maximum(self.d0[mask], 1e-6)
             tasso_dinamico = np.tanh(stress_metrico) * self.d0[mask]
             
+            # [2026-09-20] LA MISURA CHE MANCAVA: `coesione_relazionale` PRIMA del clip.
+            # ⚠ Senza questo numero non si sa se il clip stia PROTEGGENDO da un termine enorme
+            # (e allora stringerlo non basta: il difetto e' nel TERMINE) oppure se sia LUI a
+            # produrre il movimento (e allora la cura e' il tetto). E' il criterio di chiusura
+            # scritto in `Z79`. Byte-inerte: gira solo con `TRACCIA_D0`.
+            if TRACCIA_D0: self._traccia_coesione(coesione_relazionale, tasso_dinamico, mask)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0[mask] += np.clip(coesione_relazionale, -tasso_dinamico, tasso_dinamico)
             if TRACCIA_D0: self._traccia_d0('S12_coesione', _tr_pre)

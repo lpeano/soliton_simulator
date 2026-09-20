@@ -300,6 +300,32 @@ def main():
             raise SystemExit("*** la tabella per-arco e' VUOTA: o il passo non e' registrato, o "
                              "l'arco non e' stato trovato. Non pubblico una tabella vuota. ***")
 
+    # ---- par.4: `coesione_relazionale` PRIMA del clip. IL CLIP PROTEGGE O PRODUCE?
+    if TRACCIA:
+        cl = getattr(net, "_traccia_coes_log", [])
+        if not cl:
+            raise SystemExit("*** il log della coesione e' VUOTO. Non pubblico numeri che non ho. ***")
+        print("")
+        print("=" * 118)
+        print("par.4  `coesione_relazionale` PRIMA DEL CLIP -- il clip PROTEGGE o PRODUCE?")
+        print("=" * 118)
+        print("  criterio, fissato prima:  |coes| >> tetto -> il clip PROTEGGE, il difetto e' nel")
+        print("  TERMINE;  |coes| ~ tetto -> il clip PRODUCE il movimento, e il tetto e' la cura.")
+        print("")
+        print("  %-6s %9s %9s %11s %11s %11s | %s" %
+              ("passo", "archi", "saturi", "|c|/t p50", "|c|/t p99", "|c|/t max", "arco 16-481: coes / tetto"))
+        for v in cl:
+            if v["passo"] % 10:
+                continue
+            t = v.get("16-481")
+            det = ("%12.6g / %-10.6g  rap %.4g" % (t[0], t[1], abs(t[0]) / max(abs(t[1]), 1e-300))
+                   ) if t else "(arco assente)"
+            print("  %-6d %9d %9d %11.4g %11.4g %11.4g | %s" %
+                  (v["passo"], v["n_archi"], v["sat"], v["rap_p50"], v["rap_p99"], v["rap_max"], det))
+        tot = sum(v["n_archi"] for v in cl); sat = sum(v["sat"] for v in cl)
+        print("")
+        print("  SATURI su TUTTI i campioni: %d su %d = %.2f %%" % (sat, tot, 100.0 * sat / max(tot, 1)))
+
     # ---- IL SIGILLO INTERNO [BLOCCANTE]  (= `Z3` del mandato quando TRACCIA e' acceso)
     print("")
     print("=" * 118)
