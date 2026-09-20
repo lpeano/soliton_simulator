@@ -1761,6 +1761,15 @@ class Rete:
                  "circolazione_media_assoluta": 0.0, "circolazione_rms": 0.0,
                  "corrente_arco_max": 0.0, "gradiente_rho_arco_media_assoluta": 0.0,
                  "olonomia_max": 0.0, "olonomia_media_assoluta": 0.0,
+                 # le due chiavi NUOVE anche nel ramo VUOTO: un chiamante che le legge non deve
+                 # trovarle assenti solo perche' non ci sono cicli. Un `KeyError` in un diagnostico
+                 # e' un ramo silenzioso che si scopre al peggior momento.
+                 # ⚠ `circolazione_media` MANCAVA nel ramo vuoto mentre quello pieno la
+                 # restituisce: un chiamante che la legge prendeva `KeyError` solo quando non ci
+                 # sono cicli -- cioe' nel caso raro, che e' il peggiore in cui scoprirlo.
+                 # Stessa cosa per i TRE ARRAY GREZZI, che il ramo pieno restituisce e questo no.
+                 "olonomia_media": 0.0, "circolazione_media": 0.0,
+                 "circolazione": np.zeros(0), "olonomia": np.zeros(0), "berry_spin": np.zeros(0),
                  "olonomia_rms": 0.0, "berry_spin_max": 0.0,
                  "berry_spin_media_assoluta": 0.0, "berry_spin_rms": 0.0,
                  "berry_spin_media": 0.0, "spin_cluster_modulo": 0.0,
@@ -1863,6 +1872,16 @@ class Rete:
                 "gradiente_rho_arco_media_assoluta": float(np.mean(np.abs(gradiente_rho))) if len(gradiente_rho) else 0.0,
                 "olonomia_max": float(np.max(np.abs(olonomia))) if len(olonomia) else 0.0,
                 "olonomia_media_assoluta": float(np.mean(np.abs(olonomia))) if len(olonomia) else 0.0,
+                # [2026-09-20] LA MEDIA COL SEGNO, accanto a quelle assolute e non al loro posto.
+                # Le assolute non possono dire se l'olonomia si SOMMA (ordine, verso netto) o si
+                # CANCELLA (frustrazione): `olonomia_rms` vale lo stesso in entrambi i casi. Il
+                # commento di questa funzione parla gia' di "olonomia netta != 0 = ordine", ma quel
+                # numero NON era esposto. Aggiunto, non sostituito: sono due domande diverse.
+                # ⚠ SOLO `olonomia_media`: `circolazione_media` ESISTE GIA' in fondo a questo
+                # stesso dict (era sfuggita). Averla aggiunta qui avrebbe creato una CHIAVE
+                # DUPLICATA nello stesso letterale: Python tiene l'ULTIMA, quindi la mia sarebbe
+                # stata codice morto -- e nessun errore lo avrebbe segnalato.
+                "olonomia_media": float(np.mean(olonomia)) if len(olonomia) else 0.0,
                 "olonomia_rms": float(np.sqrt(np.mean(olonomia ** 2))) if len(olonomia) else 0.0,
                 "berry_spin_max": float(np.max(np.abs(berry))) if len(berry) else 0.0,
                 "berry_spin_media_assoluta": float(np.mean(np.abs(berry))) if len(berry) else 0.0,
@@ -4292,6 +4311,13 @@ class Rete:
         # profilo di percorrenza del figlio: eredita la chiralita' del genitore a
         # (dormiente, non ancora accoppiato). Salto a 0.
         self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])
+        # [A8/A7, 2026-09-20] I NATI PER RAMO, byte-inerti. QUESTO ramo eredita la chiralita'
+        # UGUALE al genitore, quindi AGGIUNGE un nodo del suo stesso segno e ROMPE la
+        # conservazione di `N(+1) - N(-1)`. L'altro ramo (Schwinger, antinodo) nasce OPPOSTO e la
+        # conserva. Un contatore TOTALE dei nati non distingue le due cose, ed e' esattamente il
+        # numero che non serve: per sapere da dove viene la carica servono DUE conteggi.
+        self._g_nati_mitosi = getattr(self, "_g_nati_mitosi", 0) + int(len(a))
+        self._g_nati_mitosi_ev = getattr(self, "_g_nati_mitosi_ev", 0) + 1
         self.perc_tw = np.concatenate([self.perc_tw, np.zeros(len(sel))])
         self.mem_mot = np.vstack([self.mem_mot, self.mem_mot[a]]) if len(self.mem_mot) else np.zeros((len(sel), 3))
         self._eredita_spinore_figli(a, segno=1)   # regola D: figlio eredita lo spinore COMPLESSO del genitore
@@ -4413,6 +4439,11 @@ class Rete:
                 # l'antiparticella nasce con chiralita' OPPOSTA al genitore (antichirale).
                 # Coerente con la creazione di coppia. Dormiente.
                 self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])
+                # [A8/A7, 2026-09-20] L'ALTRO RAMO: l'antinodo nasce OPPOSTO al genitore, quindi la
+                # coppia e' NEUTRA e `N(+1) - N(-1)` NON cambia -- come le coppie nel vuoto
+                # quantistico. E' il ramo che CONSERVA.
+                self._g_nati_schwinger = getattr(self, "_g_nati_schwinger", 0) + int(nc)
+                self._g_nati_schwinger_ev = getattr(self, "_g_nati_schwinger_ev", 0) + 1
                 self.perc_tw = np.concatenate([self.perc_tw, np.zeros(nc)])
                 self.mem_mot = np.vstack([self.mem_mot, np.zeros((nc, 3))]) if len(self.mem_mot) else np.zeros((nc, 3))
                 self._eredita_spinore_figli(aa, segno=-1)   # antinodo: doppia-copertura opposta (antichirale)
