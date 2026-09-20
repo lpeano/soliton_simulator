@@ -1,0 +1,60 @@
+[TIMBRO] _ab_chi_basc.py  sha1-BYTE c40cf1c6  committato e pulito
+Z0  simulatore PRIMA (e9f5d70): sha1 grezzo 27f1ab03
+Z0  simulatore ORA           : sha1 grezzo edb8f844
+Z0  120 passi per braccio   finestra: dallo snapshot scena_000192.pkl.gz
+
+riferimento: simulatore PRIMA, --chi-basc acceso
+ramo A     : simulatore ORA,   --chi-basc acceso
+ramo B     : simulatore ORA,   CHI_BASC = False
+
+Z1    PASS   riduzione al limite RIF==A su 7 campi: BYTE-IDENTICI
+Z2    PASS   controllo positivo A!=B: 7 campi su 7 differiscono
+
+================================================================================================================
+LA CARICA CHIRALE
+================================================================================================================
+                   A (chi_basc ON)        B (OFF)
+  n                        2609.0         2654.0
+  Np1                        34.0           67.0
+  Nm1                      2575.0         2587.0
+  diff                    -2541.0        -2520.0
+  nati_mitosi               168.0          193.0
+  ev_mitosi                  73.0           78.0
+  nati_schw                  47.0           67.0
+  ev_schw                    35.0           42.0
+Z3    PASS   in B `perc_chi` e' scritta SOLO dalle nascite: 193 da mitosi + 67 da Schwinger
+
+================================================================================================================
+L'OLONOMIA -- la FIRMATA accanto alle ASSOLUTE, e L
+================================================================================================================
+  n_cicli                       256            256
+  olon_media                1.80957         1.2696
+  olon_media_ass            8.50178         9.7551
+  olon_rms                  10.6602        11.7381
+  circ_media            5.53231e-10    1.16311e-10
+  berry_media           -0.00340584      -0.011111
+  berry_segno_media     -0.00340584      -0.011111
+  L  (A)             [1.854e+01 7.153e+00 -8.681e+01]  |L| = 8.905439e+01
+  L  (B)             [2.510e+02 2.139e+02 6.847e+01]  |L| = 3.368040e+02
+  |L| B/A = 3.7820
+
+================================================================================================================
+I PERCENTILI E LA DIAGNOSTICA
+================================================================================================================
+  tw50              1.36683        1.36083
+  tw95              4.89855        4.75469
+  twn50             1.78804        1.79117
+  twn95             4.05088        4.06457
+  om50          5.99672e-09    4.14302e-09
+  om95            0.0893213        0.08297
+  deg50                 496            496
+  coer_l                nan            nan
+  coer_g                nan            nan
+  dil                   nan            nan
+Z5    PASS   stabilita' in B: nan 0/0/0  max||nb|-1| = 2.220e-16
+
+ESITO: 4/4
+
+Z4 NON E' UN NUMERO: l'anello si verifica DAL CODICE (`Z70`). Con `chi_basc` spento cade
+   la gamba `perc_chi <- tw`, quindi l'anello si rompe per costruzione.
+UN SEME, UNA SCENA, 120 passi. NON E' UN VERDETTO: e' una misura.

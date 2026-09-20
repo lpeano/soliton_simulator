@@ -8427,3 +8427,53 @@ per nodo 0.415  ->  0.0264    quindi NON e' un effetto di taglia
 `coer_l`, `coer_g` e `dil` tornano **`nan` in entrambi i bracci**, mentre **nel CSV del run vero
 valgono `0.64`-`0.69`**. È un **artefatto del mio ordine di chiamata** *(`diagnostica()` dopo
 `circolazione_topologica()`)*, **non del codice**: quei tre numeri sono **non misurati** qui.
+
+---
+
+## 2026-09-20 — **⚠ RITRATTAZIONE: l'A/B di `chi_basc` era la FINESTRA. Rifatto, si ribalta**
+
+**La verifica chiesta da Luca ha morso, e il mio esito precedente era un artefatto.**
+
+### La causa: **l'A/B partiva dal passo ZERO**
+
+Il runner fa `avvia_test("N-MASSE")()` e poi i passi: **semina e va**. E nel run vero, **con
+`chi_basc` ACCESO**, `n` resta **`2391` fino al passo `120`** — le prime nascite sono fra `120` e
+`180`. **La finestra `0→60` è l'assestamento di semina, non il regime.**
+
+### Rifatto dal passo `192`, `120` passi: **tutte e tre le conclusioni forti cadono**
+
+```
+                        finestra 0->60          finestra 192->312
+                        A (ON)    B (OFF)       A (ON)    B (OFF)
+nati totali                0        103           215       260      (+21 %, non 0 contro 103)
+  di cui mitosi            0         70           168       193
+  di cui Schwinger         0         33            47        67      (-30 % con chi_basc)
+tw mediana             0.648      2.288         1.367     1.361      IDENTICI (0.4 %)
+olonomia netta         -0.158    -1.366         1.810     1.270      SEGNO OPPOSTO fra finestre
+|L|                     993.4      65.8         89.05    336.80      x0.066  ->  x3.78
+```
+
+**① La mitosi NON è bloccata:** `+21 %` di nascite senza `chi_basc`, non `0` contro `103`.
+**② `tw` è IDENTICO** *(`1.367` contro `1.361`)*: **il fattore `3.5` della prima misura era
+l'assestamento di semina**, non la legge.
+**③ ⚠ L'olonomia netta e `|L|` si INVERTONO cambiando finestra.** Erano `×8.7` su e `×15` giù;
+adesso sono `−30 %` e `×3.78` su. **Due grandezze che si invertono cambiando finestra non sono
+misurate: sono rumore di transitorio.**
+
+> **Quindi la «divergenza fra olonomia e `L`» che avevo registrato come REPERTO non è un reperto:
+> è la stessa instabilità, vista due volte.** **La ritiro.**
+
+### Cosa resta, e non è poco
+
+**A regime, `chi_basc` acceso dà meno nascite: `−17 %` in totale e `−30 %` sulle sole coppie di
+Schwinger** *(`47` contro `67`)*. **È l'unico effetto stabile fra le due finestre**, e tocca
+proprio il ramo che **conserva** la carica *(`Z71`)*.
+
+### ⚠ E un limite della finestra rifatta, che va dichiarato
+
+**Lo snapshot di partenza è stato prodotto CON `chi_basc` acceso**, che aveva già omogeneizzato
+`perc_chi` a `−1`. Quindi **anche il ramo B parte da `Nm1 ≈ 2580`**, e la `differenza` è dominata
+dalla **condizione iniziale ereditata**, non dalla legge.
+> **L'A/B rifatto misura la DINAMICA successiva, non la CARICA.** Per misurare la carica servirebbe
+> una rigiocata **da zero** in entrambi i rami, lunga abbastanza da superare l'assestamento — che è
+> un run, non una finestra.
