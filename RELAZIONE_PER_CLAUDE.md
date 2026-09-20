@@ -8560,3 +8560,85 @@ committato prima del lancio), e lo strumento che le applica e' committato **prim
 un numero** (`csv/_test_fork/_letture_ab.py`, `3c0b934`). **Fra queste c'e' il presidio di `Z65`:
 le COMPONENTI CONNESSE a OGNI snapshot** -- se il grafo si scollega, il run perde validita' e va
 saputo subito.
+
+---
+
+## IL CENSIMENTO DEL SOSPESO e i TRE PRESIDI (2026-09-20, a run VIVI)
+
+**Due lavori di solo testo, fatti mentre i due run A/B a `sep = 4.0` giravano.** Nessun file del
+percorso in uso e' stato toccato.
+
+### Il censimento -- e la verifica ha corretto cinque cose
+
+**C'e' UNA lista sola, ora:** `doc/STATO_RUN.md`, sezione «IL SOSPESO -- LA LISTA UNICA».
+Ne esistevano **tre parziali** e nessuna era quella; sono **assorbite**, non duplicate.
+
+```
+15 voci sospese     5 le decide LUCA     10 le decido io     2 chiuse dalla verifica
+```
+
+**Le cinque che decide Luca:** la **forma del contatore** della catena a tre vie di `step`; la
+**cura dell'anello `A6`** (`Z70`); la **conservazione della carica chirale** (`Z71`); il **costo di
+`Z47`** (riscrittura di quattro settori); e **`theta`**, il collo di bottiglia del programma.
+
+**Tre correzioni all'elenco di partenza, tutte dal disco:**
+1. **il blocco del run a 6000 al passo 2700 NON e' «mai diagnosticato»:** `doc/REFERTO_blocco_run6000.md`
+   ha **131 righe**, **sei** ipotesi escluse **misurandole**, e lo stato al 2700 **catturato**
+   (45 snapshot + dump di 113 chiavi). **Cio' che non fu catturato e' lo STACK;**
+2. **i rami di `memoria_hebbiana_moto` sono `25`, non `23`; i `np.zeros` sono `116`, non `~10`;**
+3. **`--override-blob` non e' nel driver vero** *(0 occorrenze)*: la voce puntava al bersaglio
+   sbagliato. Il bersaglio e' **`_scena_video_ripresa.py`, LA COPIA DEL DRIVER, CHE ESISTE ANCORA**
+   mentre il docstring del driver dice che fu rimossa -- **un docstring stale piu' un secondo driver
+   nel repo con un presidio deliberatamente indebolito.**
+
+**E due errori miei**, dichiarati: avevo riportato «metriche chirali: 0 file» -- **falso**, il
+`grep` usava `-e "a|b"` **senza `-E`**; e le righe `:3517`-`:3526` che citavo **erano slittate di
+106 righe** *(la catena vive a `:3623`/`:3626`/`:3632`)*.
+
+### La marcatura di validita' -- con il suo tasso di errore, misurato
+
+Tutte e **138** le righe-voce del registro portano ora `VALE SEMPRE` / `VALE PER QUELLA SCENA` /
+`DA RIVERIFICARE`. **La regola e' MECCANICA e lo dice.** Sulle **15** voci verificate a mano ne
+azzecca **13** e ne sbaglia **due** (`Z47`, `Z70`, corrette).
+> **Quindi sulle altre 123 la marca e' un INDIZIO, non un timbro.**
+
+**E il registro e' stato misurato:** `138` righe-voce, `24` con un segnale esplicito di apertura,
+`22` di chiusura, `19` con **entrambi**, e **`73` MUTE (il 53 %)**. Non significa «73 aperte»:
+significa che **il registro non e' interrogabile meccanicamente**.
+
+### I presidi -- e il numero era peggiore di quello da cui si partiva
+
+```
+strumenti  csv/_test_fork/*.py   79   in inventario 19   |   sigilli csv/_seal_fork/*.py  45  ->  8
+                                                       TOTALE MANCANTI  97   (non 47)
+flag CLI   add_argument()        93   nel README    38   ->  55 mancanti
+```
+**Il conto del mandato (`81/34/47`) non includeva `_seal_fork/`, cioe' proprio i SIGILLI** -- la
+categoria dove l'omissione costa di piu': **un sigillo non inventariato e' un sigillo che nessuno
+rigirera'**, ed e' la definizione di `Z31`. **Le 97 voci sono state recuperate col triage.**
+
+**Le tre regole sono in `CLAUDE.md` par.5-novies, e portano scritto che OGGI NON SONO PRESIDI.**
+
+**Il meccanismo e' PROPOSTO e NON cablato** (`doc/PROPOSTA_presidi_inventario.md`), e **il candidato
+che sembrava migliore e' quello scartato:** un controllo che **blocca** dentro `_presidio.avvia()`
+impedirebbe davvero, ma **bloccherebbe uno strumento perche' non e' documentato** -- e uno strumento
+spesso si scrive, si gira, e **solo dopo** si capisce cosa valga la pena scrivere.
+**La forma sopravvissuta: `_presidio.avvia()` che SCRIVE invece di bloccare**, facendo compilare da
+sola la meta' **meccanica** dell'inventario. **E per la terza regola -- la fisica -- NON C'E' un
+meccanismo, e lo dico invece di proporne uno finto.**
+
+### `py-spy`: un presidio che ora esiste, ed e' stato ESERCITATO
+
+`doc/REFERTO_blocco_run6000.md` diceva «quello che servirebbe e' banale e non ce l'ho».
+**Installato e provato su un run VIVO** -- e ha gia' risposto a una domanda vera: il ramo B sembrava
+fermo, **tre campioni dello stack in pochi secondi hanno mostrato tre posizioni diverse.**
+**Non e' piantato: e' piu' lento, perche' ha piu' nodi.** L'altra volta la stessa domanda resto'
+aperta **due ore** e il processo fu ucciso senza catturare nulla.
+
+### E una lezione di metodo, che e' la cosa piu' utile del giro
+
+Il mandato chiede di segnalare i **REPERTI** -- «una misura fatta e mai scritta». Il mio primo
+classificatore ne dava **17**. Una **seconda misura indipendente** dice che **16 su 17 sono nominati
+in un messaggio di commit** e il diciassettesimo ha il suo `.txt` accanto: **ZERO reperti.**
+> **Se mi fossi fermato alla prima misura avrei scritto nel registro cinque «reperti» che non
+> esistono -- cioe' avrei creato lavoro fantasma DENTRO il documento che serve a toglierlo.**

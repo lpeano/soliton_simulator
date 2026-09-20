@@ -137,13 +137,39 @@ al passo 2700 non si sapra' mai perche' fu ucciso senza catturare lo stato.
 
 ## 3. TODO DEL NEXT STEP
 
-- [x] verificare se una lista esiste -> **TRE parziali in `STATO_RUN.md`, nessuna e' quella**
-- [ ] verificare **dal disco** le 11 voci del mandato, una per una
-- [ ] cercare le voci **non elencate** dal mandato
-- [ ] la sezione unica in `doc/STATO_RUN.md`, che **assorbe e cita** le tre parziali
-- [ ] la marcatura di validita' -> **riportare quante marcate e quante no**
-- [ ] **riportare il conto**: quante voci, quante decide Luca
-- [ ] le tre regole in `CLAUDE.md`
-- [ ] **proporre il meccanismo del par.2.3 e FERMARSI** -- non cablare
-- [ ] il triage dei 47 + il conto dei flag contro il `README`
-- [ ] controlli periodici sui due run (soglia **~1500 s** senza snapshot nuovo)
+### Fatto in questo giro
+- [x] verificare se una lista esiste -> **TRE parziali in `STATO_RUN.md`, nessuna era quella**
+- [x] verificare **dal disco** le voci del mandato -> **3 correzioni + 2 errori miei**
+- [x] la sezione unica in `doc/STATO_RUN.md`, che **assorbe e cita** le tre parziali
+- [x] la marcatura di validita' -> **tutte e 138**, con regola meccanica **dichiarata** e
+      **tasso di errore misurato** (13/15 sul campione verificato a mano; `Z47` e `Z70` corrette)
+- [x] il conto -> **15 voci sospese, 5 le decide LUCA, 2 chiuse dalla verifica**
+- [x] le tre regole in `CLAUDE.md` -> **par.5-novies**
+- [x] **meccanismo PROPOSTO e NON cablato** -> `doc/PROPOSTA_presidi_inventario.md`
+- [x] il triage + il recupero -> **97 voci**, e **ZERO reperti su 17 candidati**
+- [x] il conto dei flag -> **93 CLI, 38 nel `README`, 55 mancanti**
+- [x] **`py-spy` installato ed ESERCITATO su un run vivo** *(non era previsto: e' nato dal referto
+      del blocco al 2700, che diceva "non ce l'ho")*
+
+### ANNOTAZIONI AL RAGIONAMENTO PRELIMINARE -- non si riscrive, si annota (par.5-septies)
+- **par.1.1 -- previsione CENTRATA:** *"mi aspetto almeno una voce gia' CHIUSA e almeno una
+  mancante"*. **Entrambe vere:** due ex-liste erano **gia' chiuse**, e `--override-blob` puntava al
+  **bersaglio sbagliato**.
+- **par.1.2 -- previsione SBAGLIATA:** avevo scritto *"mi aspetto di dover usare l'autorizzazione a
+  marcare solo le recenti"*. **Non si poteva usare:** `91` voci datate su `91` **sono** recenti,
+  perche' il registro ha sette giorni. **La scorciatoia non esisteva.**
+- **par.1.4 -- previsione SBAGLIATA, e nella direzione ottimistica:** avevo scritto *"mi aspetto che
+  i 47 siano in maggioranza sonde, quindi il problema e' sovrastimato"*. **Erano `97`, non `47`**,
+  perche' il conto di partenza **non contava i sigilli**. **Il problema era SOTTOSTIMATO.**
+- **par.2.4 -- il candidato che avevo indicato come migliore e' quello che ho SCARTATO.** Avevo
+  scritto *"un controllo dentro `_presidio.avvia()` e' il candidato che mi aspetto migliore"*.
+  Scrivendo la proposta ho visto che **bloccherebbe uno strumento per un difetto di prosa**. La
+  forma sopravvissuta e' la stessa funzione che **SCRIVE invece di bloccare**.
+
+### Aperto
+- [ ] **la ri-girabilita' dei 30 sigilli, UNO PER UNO** *(famiglia `Z31`)* -- dichiarata **non
+      verificata** nella voce d'inventario, e messa nella lista del sospeso
+- [ ] le **tre domande per Luca** di `doc/PROPOSTA_presidi_inventario.md` -> **nessun cablaggio
+      prima della risposta, e comunque non prima che i run chiudano** (`_presidio.py` e' importato)
+- [ ] controlli periodici sui due run (soglia **~1500 s** senza snapshot nuovo; `py-spy dump`
+      PRIMA di qualunque cosa, e **non si uccide**)
