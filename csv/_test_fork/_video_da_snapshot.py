@@ -168,7 +168,7 @@ def disegna(fr, passo, lab, dim, ancore, fra, p0, R, vmax_mem, nfr_tot):
     rgba[..., 3] = np.clip((np.abs(q) - soglia) / max(1.0 - soglia, 1e-6), 0.0, 1.0)
 
     fig = plt.figure(figsize=(16, 8.4), facecolor="#0b0b0f")
-    ax1 = fig.add_axes([0.005, 0.045, 0.49, 0.90])
+    ax1 = fig.add_axes([0.005, 0.050, 0.49, 0.84])
     ax1.set_facecolor("#000000")
     ax1.imshow(rgba, origin="lower", extent=[-Rc, Rc, -Rc, Rc], interpolation="bilinear")
     ax1.set_xlim(-Rc, Rc)
@@ -180,7 +180,7 @@ def disegna(fr, passo, lab, dim, ancore, fra, p0, R, vmax_mem, nfr_tot):
                   fontsize=10, color="#cfcfd6")
 
     # ---- pannello destro: il GRAFO, colore = componente, luminosita' = pozzo phi_g
-    ax2 = fig.add_axes([0.505, 0.045, 0.49, 0.90])
+    ax2 = fig.add_axes([0.505, 0.050, 0.49, 0.84])
     ax2.set_facecolor("#000000")
     Iv = S.net.intensita()[:n]
     phi_g, _m, _p = S.net.pozzo_grafo(Iv)
@@ -197,7 +197,7 @@ def disegna(fr, passo, lab, dim, ancore, fra, p0, R, vmax_mem, nfr_tot):
         # trasparenza dice il pozzo. Due scatter sovrapposti falserebbero la luminosita'.
         rgba_n = np.tile(np.array(col + (1.0,)), (int(m.sum()), 1))
         rgba_n[:, 3] = alpha[m]
-        ax2.scatter(P[m, 0], P[m, 1], s=3.0, c=rgba_n, linewidths=0,
+        ax2.scatter(P[m, 0], P[m, 1], s=4.5, c=rgba_n, linewidths=0,
                     edgecolors="none", rasterized=True)
     ax2.set_xlim(-Rc, Rc)
     ax2.set_ylim(-Rc, Rc)
@@ -213,11 +213,11 @@ def disegna(fr, passo, lab, dim, ancore, fra, p0, R, vmax_mem, nfr_tot):
                 " / ".join(str(int(x)) for x in dim), fra, p0))
     fig.text(0.5, 0.012, testo, ha="center", va="bottom", fontsize=11,
              color="#ffffff" if fra == 0 else "#ff4444", family="monospace")
-    fig.text(0.5, 0.975,
+    fig.text(0.5, 0.995,
              "RIGENERATO DAGLI SNAPSHOT -- nessuna fisica eseguita.  stati blob 7c4dec1d, "
              "disegno blob 775ceab7 (funzioni di rendering IDENTICHE).  "
              "cadenza 60 passi/frame contro i 6 dell'originale: dieci volte piu' a scatti.",
-             ha="center", va="top", fontsize=8.5, color="#8a8a93")
+             ha="center", va="top", fontsize=8.5, color="#8a8a93", linespacing=1.4)
     out = os.path.join(DEST, "frame_%03d.png" % fr)
     fig.savefig(out, dpi=100, facecolor=fig.get_facecolor())
     plt.close(fig)
