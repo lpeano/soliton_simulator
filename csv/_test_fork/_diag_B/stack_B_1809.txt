@@ -1,0 +1,34 @@
+=== CATTURA DELLO STACK DEL RAMO B -- 2026-09-20 18:09:20 ===
+PID 30996 | ultima scrittura 17:36:49 | costo per intervallo 41 -> 130 -> 121 -> 274 s/frame
+ramo A nello stesso momento: frame 215, 28.0 s/frame, STABILE
+
+--- campione 1 (18:09:20) ---
+Process 30996: C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie=20 --csv-progresso=csv/_test_fork/_ab_B/prog.csv --chi-basc=off
+Thread 24936 (active): "MainThread"
+    step (soliton_simulator.py:3967)
+    <module> (_scena_video.py:231)
+--- campione 2 (18:09:21) ---
+Process 30996: C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie=20 --csv-progresso=csv/_test_fork/_ab_B/prog.csv --chi-basc=off
+Thread 24936 (active): "MainThread"
+    step (soliton_simulator.py:3937)
+    <module> (_scena_video.py:231)
+--- campione 3 (18:09:21) ---
+Process 30996: C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie=20 --csv-progresso=csv/_test_fork/_ab_B/prog.csv --chi-basc=off
+Thread 24936 (active): "MainThread"
+    step (soliton_simulator.py:3935)
+    <module> (_scena_video.py:231)
+--- campione 4 (18:09:21) ---
+Process 30996: C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie=20 --csv-progresso=csv/_test_fork/_ab_B/prog.csv --chi-basc=off
+Thread 24936 (active): "MainThread"
+    step (soliton_simulator.py:3943)
+    <module> (_scena_video.py:231)
+--- campione 5 (18:09:21) ---
+Process 30996: C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie=20 --csv-progresso=csv/_test_fork/_ab_B/prog.csv --chi-basc=off
+Thread 24936 (active): "MainThread"
+    step (soliton_simulator.py:3936)
+    <module> (_scena_video.py:231)
+--- campione 6 (18:09:21) ---
+Process 30996: C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie=20 --csv-progresso=csv/_test_fork/_ab_B/prog.csv --chi-basc=off
+Thread 24936 (active): "MainThread"
+    step (soliton_simulator.py:3933)
+    <module> (_scena_video.py:231)
