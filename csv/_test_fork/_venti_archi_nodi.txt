@@ -1,0 +1,13 @@
+L'IDENTITA' A LIVELLO DI NODI (l'arco cambia, il nodo puo' restare)
+  criterio dichiarato: si confrontano gli INSIEMI DI NODI toccati dai 20 archi peggiori.
+  NULLO: 16 nodi estratti a caso su ~3200 -> sovrapposizione attesa ~16/3200 = 0.005
+
+  passo 120    -> 240      nodi 38 -> 12   IN COMUNE 0   (Jaccard 0.000)
+      persistenti: []
+  passo 240    -> 360      nodi 12 -> 16   IN COMUNE 5   (Jaccard 0.217)
+      persistenti: [16, 481, 621, 627, 837]
+
+CHI E' L'HUB: quante volte ogni nodo compare nei 20 archi peggiori
+  passo 120     ['nodo 556: 3 archi', 'nodo 149: 1 archi', 'nodo 657: 1 archi', 'nodo 424: 1 archi']
+  passo 240     ['nodo 481: 11 archi', 'nodo 332: 7 archi', 'nodo 16: 4 archi', 'nodo 6: 3 archi']
+  passo 360     ['nodo 867: 11 archi', 'nodo 481: 6 archi', 'nodo 16: 4 archi', 'nodo 465: 3 archi']
