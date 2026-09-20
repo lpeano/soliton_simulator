@@ -1049,6 +1049,27 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   rigirare le scene.** **E il costo a `n = 8000` NON E' MISURATO:** `S5` da' **`+25.6 %`** sul `.pkl`
   a `n = 454`, e **il tempo non si legge** (due esecuzioni: `x1.0051` e **`x0.9245`**, cioe' il nuovo
   *piu' veloce* del vecchio — **rumore di sistema su 60 passi**).
+- **`scala_p` E' CURATA (2026-09-20, `Z67`, sigillo 5/5, categoria D: nessun flag).** La scala di
+  `ampiezza` in `memoria_hebbiana_moto` **non e' piu' `median(|dpozzo|)`** — che era **`A3`** e
+  inchiodava **`median(ampiezza) = tanh(1) = 0.761594` PER COSTRUZIONE** *(misurato su 14 istanti
+  su 14, scarto `2.3e-11`)*. **Ora e' il POZZO LOCALE `0.5*(phi_g[ii]+phi_g[jj])`**: un gradiente
+  relativo, adimensionale e locale. **NESSUN PAVIMENTO, e non per fiducia: il rapporto e' `<= 2`
+  PER COSTRUZIONE** *(`phi_g >= 0` -> `|phi_g[j]-phi_g[i]| <= 2*phi_arc`; max misurato `2` esatto)*.
+  **`0/0` e' definito ZERO, dichiarato.** **CONSEGUENZA MISURATA: `sin2` non e' piu' saturo
+  (`p95` da `1.000000` a `0.980561`) e il moltiplicatore di `beta` passa da `0.9928` a `0.8029`:
+  `ZETA_VIR` era acceso e NON FRENAVA QUASI NULLA.**
+  **⚠ `SCALA_P_MEDIANA` e' una costante DIAGNOSTICA senza flag da riga di comando**, di proposito:
+  serve solo alla riduzione al limite del sigillo, e non deve poter essere accesa da un comando.
+- **ESISTONO I CONTATORI DELLE GUARDIE, e si leggono con `rapporto_guardie(net)`** (2026-09-20,
+  `Z68`/`Z69`). **Sono BYTE-INERTI** *(verificato: 7 campi identici contro il blob precedente)* e
+  coprono **quindici siti**. **Ogni sito ha QUATTRO numeri, non uno:** invocazioni, salti, **la
+  FORMA al fallimento** *(le due lunghezze; `-1` significa memoria ASSENTE, non lunghezza 0)* e
+  **QUANDO** — l'indice dell'ULTIMA invocazione saltata. **Il `quando` non e' un lusso:** `20 %` di
+  salti **confinati alle prime 11 invocazioni su 55** e `20 %` **sparsi su tutto il run** danno lo
+  **stesso conteggio** e sono due diagnosi opposte (`A8`).
+  **⚠ E I CONTATORI DELLE `(b)` SI CHIAMANO `_spento`, NON `_salti`:** misurano un ramo che non gira
+  **per scelta** (flag o costante a zero), non una legge saltata. Mescolarli produrrebbe una
+  «frazione di fallimento» che e' una **frequenza di selezione**.
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
 

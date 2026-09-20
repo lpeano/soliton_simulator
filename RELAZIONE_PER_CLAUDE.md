@@ -1,14 +1,60 @@
-# RELAZIONE — per Claude web · **aggiornata 2026-09-16 (sera)** *(il giro del 16 e' il §9, in fondo)*
+# RELAZIONE — per Claude web · **aggiornata 2026-09-20 (sera)**
 
-> **Scritta per Claude web**, che legge il repo e deve pronunciarsi su una decisione di merito.
-> Branch `fork-su2`. **Blob sul disco `a44adc31`** *(oggi e' cambiato QUATTRO volte: `08784685` ->
-> `a467fd9a` taglio spettrale -> `57681b9e` correzione (1) -> `c57800c1` correzione (2) ->
-> **`a44adc31` la PRIMA PROMOZIONE**)*,
-> gate in `CLAUDE.md` §0 a `c0803713`
-> (**non ri-timbrato di proposito**: i sigilli della FASE 2 non passano).
-> Il documento e' **cumulativo**: i paragrafi 1-7 sono nell'ordine in cui i fatti sono nati, e
-> l'ultimo lavoro sta in fondo. **Se leggi una cosa sola, leggi il §0-ante qui sotto** (il giro
-> del **16**); il §0 che lo segue e' quello del **15**, tenuto perche' la sequenza conti.
+> **Scritta per Claude web**, che legge il repo e non ha la conversazione.
+> Branch `fork-su2`. **Simulatore sul disco: `dbadb71f`** *(sha1 dei BYTE GREZZI, convenzione
+> `csv/_presidio.py`; il blob **git** dello stesso file e' `5fc5bfdf` — **sono due numeri diversi
+> per lo stesso file**, vedi `CLAUDE.md` §5-quinquies)*. Gate in `CLAUDE.md` §0 a `c0803713`,
+> **non ri-timbrato di proposito**.
+> Il documento e' **cumulativo e append-only**: i fatti stanno nell'ordine in cui sono nati, e
+> l'ultimo lavoro e' **in fondo**.
+> **⚠ SE LEGGI UNA COSA SOLA, LEGGI IL §0-OGGI QUI SOTTO.** Sotto di esso restano il §0-ante del
+> **16 settembre** e il §0 del **15**, tenuti perche' la sequenza conti — **ma NON sono lo stato
+> attuale.**
+
+---
+
+## 0-OGGI. **DOVE SIAMO IL 2026-09-20 (sera)** — il dettaglio e' nelle nove sezioni del 20/9, in fondo
+
+> **NESSUN RUN E' IN ESECUZIONE. Nessun dato nuovo di fisica e' stato prodotto oggi.**
+> **La giornata e' stata di MISURA e di CURA, e il simulatore e' cambiato quattro volte, tutte
+> sigillate.**
+
+**① IL FATTO PIU' GRANDE: il run a `sep = 8` girava su QUATTRO SISTEMI SEPARATI.** Il grafo era in
+**quattro componenti connesse con ZERO archi fra loro**, dal passo 6 al 2700, e i due picchi del
+grado erano **la semina**, non una forma emersa *(`Z65`)*. **Tutto cio' che e' stato osservato
+finora e' avvenuto in quattro sistemi che giravano nello stesso programma.**
+**E il pannello del campo mostrava interferenza FRA le masse** — `campo_spaziale` somma su **tutti
+i nodi**, non sugli archi. **Il pannello non mentiva: la lettura si'.**
+
+**② QUATTRO CURE, tutte sigillate, nessuna con numeri scelti:**
+
+| cosa | sigillo | esito |
+|---|---|---|
+| **`scala_p`** *(`Z67`)* | **`5/5`** | il punto fisso **`median(ampiezza) = tanh(1)` e' SCIOLTO** (`0.7616 -> 0.1423`); `sin2` non e' piu' **saturo a 1**; **`ZETA_VIR` adesso frena del `19 %`**, prima non frenava quasi nulla |
+| **`PASSO 2`, tre gruppi** *(`Z68`)* | **`3/3`** | la diagnosi del mandato era **sbagliata**: non la lunghezza, **l'ORDINE** |
+| **`PASSO 1` sui dieci** *(`Z69`)* | **`3/4 + 1 FAIL ATTESO`** | **sei guardie proteggono da un difetto GIA' CURATO** |
+| **driver: `--sep` + ripresa** | **`4/4`** e **`5/5`** | pronti per il run, non usati |
+
+**③ IL REPERTO DI METODO, ed e' il piu' trasportabile:** **cinque volte in due giorni un criterio e'
+sopravvissuto alla ragione che l'aveva generato.** Quattro erano criteri di **sigillo**
+*(`N3b`, `M1b`, `M3c`, e il mio `V2` che ha bocciato un comportamento corretto)*; **la quinta e' una
+famiglia di sei guardie NEL CODICE**, che proteggono da difetti curati mesi fa. **La forma e' la
+stessa, e non si riconosce dal contenuto: si riconosce dalla forma.**
+
+**④ E COSA NON E' STATO FATTO, per essere espliciti:** il **`PASSO 2`** del secondo giro *(gli
+`else` dichiarativi sui dieci siti)*; il **PANNELLO FEDELE** *(un pannello che interpola `psi`
+invece di ricostruirlo con la FFT)*; e **IL RUN a `sep = 4.0`**, che e' **l'ultimo dei tre** per
+decisione di Luca. **L'ordine e' `① guardie -> ② pannello -> ③ run`, ed e' scritto in
+`doc/STATO_RUN.md`.**
+
+**⑤ DUE DECISIONI FERME, che aspettano Luca:** la forma del contatore sulla catena
+`:3517`-`:3526` *(tre contatori di «salti» o uno con tre conteggi etichettato «quale ramo»)*, e il
+via libera al `PASSO 2`.
+
+**⑥ E TRE DIFETTI MIEI, dichiarati perche' si ripetono:** il cast a `float` che **scartava la parte
+immaginaria di `psi`** *(lo stesso errore di `_mod()`, due volte in un giorno)*; un mio criterio di
+sigillo **scaduto** che ha prodotto un FAIL falso; e **tre messaggi di commit bucati dai backtick**
+in `git commit -m` — da cui la regola, ora permanente: **sempre `-F`.**
 
 ---
 
