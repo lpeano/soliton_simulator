@@ -8365,3 +8365,65 @@ passo    n      celle 3D vuote   colonne vuote   celle con >= 2 nodi   (% delle 
 **E il sistema occupa meno dell'`1 %` del volume inquadrato** *(celle 3D vuote fra `99.3` e
 `99.8 %`)*: **l'inquadratura fissa, scelta per non nascondere l'espansione, mostra soprattutto
 vuoto** — ed è corretto che lo faccia.
+
+---
+
+## 2026-09-20 — **`chi_basc` fa l'OPPOSTO del suo scopo: blocca la mitosi e dimezza l'olonomia netta**
+
+**A/B `csv/_seal_fork/_ab_chi_basc.py`, sigillo `4/4`** · simulatore `edb8f844` *(byte grezzi)* ·
+**60 passi per braccio, un seme, una scena** · **due CONFIG, lo stesso codice** *(il default di
+modulo è già `CHI_BASC = False`: è il driver che lo accende)*.
+**`Z1` byte-identico** contro il simulatore pre-contatori → **la strumentazione non tocca la fisica.**
+
+### ① Con `chi_basc` acceso, in 60 passi **non nasce niente**
+
+```
+                      A (chi_basc ON)     B (OFF)
+n                          2391            2494
+N(+1)                         0            1267
+N(-1)                      2391            1227
+differenza                -2391              40
+nati da mitosi                0              70   (27 eventi)
+nati da Schwinger             0              33   (17 eventi)
+```
+
+### ② E il meccanismo si legge
+
+`chi_basc` rende `perc_chi` **uniforme** — in A **tutti e 2391 a `−1`** — quindi **le differenze
+chirali si annullano**, quindi `twist_dip = π/2·(chi[i] − chi[j]) = 0`, quindi **`tw` non cresce**:
+
+```
+tw  mediana    0.648  ->  2.288          twn mediana   0.748  ->  2.783
+```
+
+**Senza torsione la soglia di mitosi non si abbassa.** **`chi_basc` non «rompe la simmetria»:
+la IMPONE.**
+
+### ③ L'olonomia netta va nella direzione **opposta** a quella dichiarata
+
+```
+olonomia_media (FIRMATA)   -0.158  ->  -1.366        x8.7 PIU' GRANDE senza chi_basc
+olonomia_media_assoluta     7.168  ->   7.217        (le assolute non vedono niente)
+```
+
+Lo scopo dichiarato era *«senza, le chiralità 50/50 si bilanciano e azzerano l'olonomia netta»*.
+**Misurato: accade il contrario.** *(E le medie assolute non lo avrebbero mai mostrato — è
+esattamente il motivo per cui la media firmata andava aggiunta.)*
+
+### ④ ⚠ Ma `L` va nell'altro verso, e le due grandezze **divergono**
+
+```
+|L|      993.4  ->  65.8      rapporto 0.066
+per nodo 0.415  ->  0.0264    quindi NON e' un effetto di taglia
+```
+
+> **Olonomia netta `×8.7` SU, `|L|` `×15` GIÙ.** **Non le concilio: è il reperto.**
+> **E le due letture fissate prima NON coprono questo caso:** `α` *(l'olonomia sopravvive →
+> ridondante)* e `β` *(si azzera → serviva)* **presupponevano che olonomia e `L` andassero
+> insieme.** **Non ci vanno.**
+
+### ⚠ E un difetto della mia misura, dichiarato
+
+`coer_l`, `coer_g` e `dil` tornano **`nan` in entrambi i bracci**, mentre **nel CSV del run vero
+valgono `0.64`-`0.69`**. È un **artefatto del mio ordine di chiamata** *(`diagnostica()` dopo
+`circolazione_topologica()`)*, **non del codice**: quei tre numeri sono **non misurati** qui.
