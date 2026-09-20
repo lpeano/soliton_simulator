@@ -1,0 +1,52 @@
+CHI MUOVE `d0`: i contatori che il codice TIENE GIA', letti dagli snapshot
+  SOGLIA DICHIARATA DAL CODICE (`:4061`), non scelta da me:
+  `d0 += dt_e*(d-d0)/tau_p` e' un Eulero esplicito e DIVERGE OSCILLANDO se dt_e/tau_p >= 1
+
+--- ramo A ---
+  passo    n        taup_cfl_max    peq_deg  caus_scatti     caus/tot
+  120      2672           0.4000    assente      2757125       0.0436
+  360      2751           0.5402    assente     23267129       0.1225
+  600      2856           0.5550    assente    108630622       0.3432
+  1200     4598           0.5550    assente    240148210       0.3790
+  1800     7999           0.5550    assente    362068526       0.3800
+  2400     12221          0.5654    assente    559907359       0.4392
+  3000     18000          0.5656    assente    771947600       0.4823
+
+--- ramo B ---
+  passo    n        taup_cfl_max    peq_deg  caus_scatti     caus/tot
+  120      2998           0.5647    assente     25868965       0.4085
+  240      3130           0.5650    assente     61678925       0.4869
+  360      3229           0.5650    assente     94755790       0.4986
+
+========================================================================================================
+TUTTI i contatori `_taup_*` presenti nello snapshot B al passo 360:
+   _taup_Inodi_chiamate           360
+   _taup_causale_scatti           94755790
+   _taup_causale_su_degenere      527088
+   _taup_causale_tot              190046206
+   _taup_cfl_max                  0.5650384166592602
+   _taup_cs_clamp                 0
+   _taup_cs_clamp_tot             190046206
+   _taup_peq_deg_passi            30
+   _taup_peq_deg_ultimo           -1
+   _taup_peq_degenere             527580
+
+========================================================================================================
+I CONTATORI `peq` COL NOME GIUSTO (_taup_peq_degenere, non _taup_peq_deg)
+========================================================================================================
+  ramo passo   n       peq_degenere   su archi  deg_passi  caus_scatti   caus/tot
+  A    120     2672          527088      99.9%          1      2757125     0.0436
+  A    360     2751          527088      99.9%          1     23267129     0.1225
+  A    600     2856          527088      99.9%          1    108630622     0.3432
+  A    1200    4598          527088      99.5%          1    240148210     0.3790
+  A    1800    7999          527088      98.7%          1    362068526     0.3800
+  A    2400    12221         527088      97.7%          1    559907359     0.4392
+  A    3000    18000         527088      96.4%          1    771947600     0.4823
+  B    120     2998          527088      99.9%          1     25868965     0.4085
+  B    240     3130          527191      99.8%         14     61678925     0.4869
+  B    360     3229          527580      99.9%         30     94755790     0.4986
+
+  LETTURA: `peq_degenere` e' CUMULATIVO su tutti i passi; `su archi` lo rapporta agli archi
+  di QUEL momento, quindi ~100 % significa «circa una volta per arco», non «tutti insieme».
+  `deg_passi` e' il numero di PASSI DISTINTI in cui e' scattato: e' quello che distingue
+  un transitorio da un difetto permanente (A3b, ed e' il codice stesso a dirlo a :4038).
