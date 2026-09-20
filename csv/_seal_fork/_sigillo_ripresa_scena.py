@@ -49,7 +49,14 @@ sys.path.insert(0, RADICE)
 sys.path.insert(0, _QUI)
 from _sigillo_archivio import uguale_contenuto      # IL criterio, non una sua copia
 
-DRIVER = os.path.join(RADICE, "csv", "_test_fork", "_scena_video_ripresa.py")
+# IL SIGILLO SEGUE IL CODICE CHE GIRERA', non la copia su cui la ripresa fu sviluppata.
+# La patch e' stata portata sul driver VERO (blob grezzo f14ea4bd -> 7a02c5c3), quindi e' QUELLO
+# che va certificato: un sigillo che certifica una copia non certifica il file che il run usa.
+# `--driver=<path>` resta, per poter rigirare il sigillo sulla copia storica se serve.
+DRIVER = os.path.join(RADICE, "csv", "_test_fork", "_scena_video.py")
+for _x in sys.argv[1:]:
+    if _x.startswith("--driver="):
+        DRIVER = os.path.abspath(_x.split("=", 1)[1])
 NF = 12            # frame totali per braccio
 OGNI = 3           # snapshot ogni 3 frame = 18 passi
 META = NF // 2     # dove si "rompe" il braccio B
