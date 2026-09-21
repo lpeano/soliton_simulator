@@ -38,9 +38,12 @@ RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
 sys.path.insert(0, RADICE)
 
 DA = 1080
+FINO = None      # ⚠ `--fino=N`: si misura l'ingresso del passo N e SI ESCE SENZA INTEGRARLO.
 for _a in sys.argv[1:]:
     if _a.startswith("--da="):
         DA = int(_a.split("=", 1)[1])
+    if _a.startswith("--fino="):
+        FINO = int(_a.split("=", 1)[1])
 SNAP = os.path.join(RADICE, "csv", "_test_fork", "_ab_D", "scena_%06d.pkl.gz" % DA)
 OUT = os.path.join(RADICE, "csv", "_test_fork", "_diag_D", "ARCO_INNESCO_%06d.txt" % DA)
 SOGLIA_N1 = 100      # la STESSA soglia della rigiocata, e qui si applica PRIMA di integrare
@@ -111,10 +114,43 @@ def main():
                 rho[km], peq[km], anom[km]),
              float(np.min(peq)), float(np.median(peq))))
         o.flush()
-        if n1 > SOGLIA_N1:
+        if n1 > SOGLIA_N1 or passo == FINO:
             innesco = passo
-            W("\n*** INNESCO AL PASSO %d: n1 = %.0f SUPERA LA SOGLIA %d.\n" % (passo, n1, SOGLIA_N1))
+            if n1 > SOGLIA_N1:
+                W("\n*** INNESCO AL PASSO %d: n1 = %.0f SUPERA LA SOGLIA %d.\n"
+                  % (passo, n1, SOGLIA_N1))
+            else:
+                W("\n*** PASSO %d RAGGIUNTO (`--fino`): si misura l'INGRESSO e NON si integra.\n"
+                  % passo)
             W("*** MI FERMO QUI SENZA INTEGRARE IL PASSO: la misura e' gia' fatta.\n\n")
+
+            # ⚠ L'ARCO COL `peq` PIU' BASSO -- e' LUI il candidato, non quello di `|anom|` massimo.
+            #   `min(peq)` decade GEOMETRICAMENTE mentre `median(peq)` SALE: un arco esce dalla
+            #   popolazione. Il suo `anom` non e' ancora grande PERCHE' anche il suo `rho` e'
+            #   piccolo -- esplode quando `rho` risale con `peq` rimasto indietro.
+            kp = int(np.argmin(peq))
+            W("L'ARCO COL `peq` PIU' BASSO -- il candidato:\n")
+            W("  arco %d-%d (%s%s)   peq=%.6e   rho=%.6e   anom=%.6e\n"
+              % (int(ii[kp]), int(jj[kp]), orig(int(ii[kp])), orig(int(jj[kp])),
+                 peq[kp], rho[kp], anom[kp]))
+            _n = net.n
+            _I = np.abs(net.psi[:_n]) ** 2
+            W("  I dei due nodi: I[%d]=%.6e  I[%d]=%.6e\n"
+              % (int(ii[kp]), _I[int(ii[kp])], int(jj[kp]), _I[int(jj[kp])]))
+            W("  eta dei due nodi: %.3f  %.3f   (TAU_A = %s)\n\n"
+              % (float(np.asarray(net.eta)[int(ii[kp])]),
+                 float(np.asarray(net.eta)[int(jj[kp])]), S.TAU_A))
+
+            W("I %d ARCHI COL `peq` PIU' BASSO:\n" % N_TOP)
+            W("%4s | %14s | %12s %12s %14s | %8s\n"
+              % ("#", "arco", "peq", "rho", "anom", "origine"))
+            W("-" * 78 + "\n")
+            for r, c in enumerate(np.argsort(peq)[:N_TOP]):
+                c = int(c)
+                W("%4d | %6d-%-7d | %12.4e %12.4e %14.4e | %8s\n"
+                  % (r + 1, int(ii[c]), int(jj[c]), peq[c], rho[c], anom[c],
+                     orig(int(ii[c])) + orig(int(jj[c]))))
+            W("\n")
             ordine = np.argsort(-np.abs(anom))[:N_TOP]
             W("I %d ARCHI CON |anom| PIU' GRANDE, in quell'istante:\n" % N_TOP)
             W("%4s | %14s | %12s %12s %14s | %10s\n"
