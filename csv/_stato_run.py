@@ -7,7 +7,8 @@ parziali servano**: e' esattamente il caso che questo presidio deve coprire.
 
 COSA FA, ed e' AUTOMATICO:
   `apri(nome, comando, note)`   scrive in `doc/STATO_RUN.md` una riga APERTO con ora, blob del
-                               simulatore (sha1 dei BYTE GREZZI, non `git hash-object`: C18),
+                               simulatore in ENTRAMBE le convenzioni, ciascuna col suo nome
+                               (`git` e `byte grezzi`: sono due numeri diversi, C18),
                                HEAD, e il COMANDO VERBATIM;
   `tappa(nome, testo)`          aggiunge una riga di avanzamento (snapshot, frame, passo);
   `chiudi(nome, esito, testo)`  chiude la voce con FINITO / FERMATO / FALLITO **e il punto esatto**.
@@ -35,9 +36,26 @@ _REG = _os.path.join("doc", "STATO_RUN.md")
 
 
 def _blob_byte(p="soliton_simulator.py"):
+    """⚠ CORRETTA IL 2026-09-21: STAMPAVA UNA CONVENZIONE E NE DICHIARAVA UN'ALTRA.
+
+    Il corpo calcolava `sha1("blob <len>\\0" + contenuto)`, che e' ESATTAMENTE `git hash-object`,
+    mentre il nome della funzione e la docstring del modulo dichiaravano *«sha1 dei BYTE GREZZI,
+    non git hash-object: C18»*. **Diceva l'opposto di cio' che faceva**, ed e' la trappola `C18`
+    in forma speculare -- quella che `CLAUDE.md` chiude con *«quando si cita un blob, si dice
+    QUALE DELLE DUE»*.
+    MISURATO sul simulatore `4954fe5b`: la funzione dava `26fa354d`, e
+    `git hash-object soliton_simulator.py` da' `26fa354d`. Identici: era il blob GIT.
+    ⚠ OGNI VOCE GIA' SCRITTA in `doc/STATO_RUN.md` porta quindi il blob GIT con l'etichetta
+    sbagliata. **Nessun dato e' perso** -- un blob git e' recuperabile con `git cat-file` -- ma
+    l'etichetta era falsa, e una voce che dice `byte grezzi` e ne mostra un altro manda chi
+    verifica a cercare un oggetto che non trovera' mai nella convenzione dichiarata.
+    ORA SI STAMPANO ENTRAMBE, ciascuna col suo nome.
+    """
     try:
         b = open(p, "rb").read()
-        return _hl.sha1(b"blob %d\0" % len(b) + b).hexdigest()[:8]
+        return "%s (git) / %s (byte grezzi)" % (
+            _hl.sha1(b"blob %d\0" % len(b) + b).hexdigest()[:8],
+            _hl.sha1(b).hexdigest()[:8])
     except Exception:
         return "?"
 
