@@ -835,6 +835,74 @@ SPINORE_CORRETTO = False # MASTER: gestione corretta dello spinore. Accende (1) 
                         # separato) ne' toglie |.| dal ritmo (flag 4 separato): quelli chiudono loop/cambiano leggi.
 CHI_DA_SPINORE = False  # FLAG 3 (separato, NON nel master): perc_chi = segno di doppia-copertura di _psi_spinor
                         # DOPO il commit di psi, e CHI_BASC disattivato. RICHIEDE --spinore-corretto (sennò loop).
+SCALA_MIN = False       # NESSUNA LUNGHEZZA SOTTO `LAM` (2026-09-21). `LAM` e' la scala minima
+                        # del sistema: sotto, un solitone non esiste -- vincolo GIA' dichiarato
+                        # nel file e affidato a un pavimento COMOVENTE (`f*median(d0)`) che
+                        # SCENDE INSIEME a cio' che dovrebbe trattenere.
+                        #
+                        # ⚠ NON SI RIMAPPA IL VALORE: SI SMORZA LA DISCESA.
+                        #   incremento >= 0  ->  INTATTO, bit per bit
+                        #   incremento <  0  ->  moltiplicato per max(0, 1 - LAM/x),
+                        #                        con `x` il valore PRIMA di QUELLA scrittura
+                        #
+                        # ⚠ PERCHE' NON UNA RIMAPPATURA, ed e' il difetto che ha ucciso la
+                        #   prima forma proposta: `LAM + x*exp(-LAM/x)` e `sqrt(x^2+LAM^2)`
+                        #   soddisfano tutti i criteri di forma MA NON SONO IDEMPOTENTI --
+                        #   danno `L(x) > x` anche per `x >> LAM` (a `3*LAM`: +4.98%). I
+                        #   pavimenti girano SETTE volte per passo: ogni lunghezza sarebbe
+                        #   stata gonfiata sette volte a passo per tremila passi, cioe'
+                        #   un'ESPANSIONE ARTIFICIALE FABBRICATA DAL VINCOLO -- e l'espansione
+                        #   e' la grandezza che il run deve misurare. Lo smorzamento non ha
+                        #   quel difetto perche' NON TOCCA NULLA quando la lunghezza non scende.
+                        #
+                        # LE PROPRIETA', dimostrate e non asserite:
+                        #  (1) IDENTITA' ESATTA per ogni incremento >= 0: non un bit cambia;
+                        #  (2) NESSUNA INFLAZIONE: il vincolo non aumenta MAI una lunghezza,
+                        #      quindi non puo' produrre espansione da solo;
+                        #  (3) APPROCCIO ASINTOTICO. Con `x > LAM` e `dx < 0`:
+                        #        nuovo - LAM = (x - LAM) * (1 + dx/x)
+                        #      la DISTANZA da `LAM` si MOLTIPLICA per `(1 + dx/x)`, positivo
+                        #      finche' `x + dx > 0`: `nuovo > LAM` SEMPRE, avvicinamento
+                        #      GEOMETRICO, `LAM` mai toccato;
+                        #  (4) ZERO COEFFICIENTI: c'e' solo `LAM`.
+                        #
+                        # ⚠ IL `max(0, .)` NON E' UNA SCELTA, E' UN OBBLIGO DI SEGNO: per
+                        #   `x < LAM` il fattore `1 - LAM/x` e' NEGATIVO e trasformerebbe una
+                        #   discesa in una SALITA. A zero, una lunghezza gia' sotto `LAM` NON
+                        #   SCENDE PIU': si congela, non si teletrasporta.
+                        # ⚠ IL CASO PATOLOGICO E' CONTATO, NON TAPPATO: se `dx <= -x` la (3)
+                        #   non vale. NIENTE pavimento scelto: `_g_sm_patol` lo CONTA e `Z4`
+                        #   lo legge. Se non scatta mai, l'invariante tiene; se scatta, e' un
+                        #   riscontro.
+                        # ⚠ I SETTE PAVIMENTI VECCHI SPARISCONO a flag acceso: la discesa e'
+                        #   gia' smorzata alla scrittura, e due leggi sovrapposte darebbero un
+                        #   pavimento comovente che continua a mordere.
+                        # ⚠ LE NASCITE sono CONCATENAZIONI, non discese: il troncone sotto
+                        #   `LAM` si porta A `LAM` ALLA NASCITA, e da li' vale lo smorzamento.
+                        # ⚠ PER `d` la regola va sull'INCREMENTO del Verlet, non sul valore
+                        #   finale: `dts*vd_half` e `dts*vd`, non `d + dts*vd`.
+                        # OFF = byte-identico.
+COES_ADIM = False       # LA COESIONE CON DIMENSIONI GIUSTE E DENSITA' LOCALE (2026-09-21).
+                        # OGGI: `dI/d` ha dimensioni [I]/[L] e `lap_arco` ha [I], E SI SOMMANO;
+                        # e `I_med` (MEDIA GLOBALE, A2) compare AL QUADRATO al denominatore.
+                        # NUOVA:  F_adim = tanh( -(dI/I_arco - tanh(|dI/I_arco|)*lap/I_arco)
+                        #                        + richiamo ) * filtro_portata
+                        #         d0 += passo_causale * F_adim,  passo_causale = LAM*sqrt(K_C)*DT
+                        # `|F_adim| <= 1` PER COSTRUZIONE, non per clip: |tanh|<=1 e
+                        # filtro_portata in (0,1). Per questo SOSTITUISCE il clip
+                        # `tanh(stress)*d0`, che `Z79` ha misurato SATURO.
+                        # `d0^2` SI TOGLIE: col passo causale davanti lo spostamento e' GIA'
+                        #   una lunghezza; per `d0^2` sarebbe una lunghezza al CUBO.
+                        # `filtro_portata` SI TIENE: adimensionale, in [0,1], non rompe il
+                        #   limite, e la sua ragione e' FISICA (corto raggio), non dimensionale.
+                        # `I_arco` NEL VUOTO, NESSUN PAVIMENTO: `0/0 := 0` come dichiarato per
+                        #   `scala_p` in `Z67`; e dove `I_arco` e' minuscolo ma non nullo il
+                        #   rapporto e' enorme MA IL `tanh` LO LIMITA A 1 -- la limitatezza e'
+                        #   STRUTTURALE, non messa a mano.
+                        # ⚠ RESTA APERTO, dichiarato: `passo_causale*tanh(...)` fissa la
+                        #   MAGNITUDINE al passo causale. Il tetto causale e' un LIMITE giusto,
+                        #   ma usarlo come SCALA della forza e' una scelta, non una derivazione.
+                        # OFF = byte-identico.
 CHI_COOP = False        # COOPERAZIONE (decisione di Luca, 2026-09-21): chi_basc NON si spegne; scrive la
                         # GEOMETRIA in `perc_geom` (il giro e' compiuto o no, dalla torsione) mentre lo
                         # SPINORE scrive la CARICA in `perc_chi` (segno di doppia copertura). I due fanno
@@ -2145,6 +2213,7 @@ class Rete:
         if not len(a): self._grado(); return
         self.i = np.concatenate([self.i, a]); self.j = np.concatenate([self.j, b])
         if TRACCIA_D0: _tr_pre = self.d0.copy()
+        dd = self._nasce(dd)          # [SCALA_MIN] nascita: il troncone parte da LAM
         self.d = np.concatenate([self.d, dd]); self.d0 = np.concatenate([self.d0, dd])
         if TRACCIA_D0: self._traccia_d0('S01_archi_nuovi', _tr_pre)
         self.vd = np.concatenate([self.vd, np.zeros(len(dd))])
@@ -3176,6 +3245,61 @@ class Rete:
                                             float(_np.asarray(tetto, float)[k[0]])))
         reg.append(voce)
 
+    def _smorza(self, prima, dx, quale):
+        """SCALA MINIMA: ritorna l'incremento EFFETTIVO, smorzando solo la DISCESA.
+
+        `dx >= 0` -> INTATTO (identita' esatta). `dx < 0` -> `dx * max(0, 1 - LAM/prima)`.
+        Invariante: `nuovo - LAM = (prima - LAM) * (1 + dx/prima)`."""
+        prima = np.asarray(prima, dtype=float)
+        dx = np.asarray(dx, dtype=float)
+        scende = dx < 0.0
+        pos = prima > 0.0
+        base = np.where(pos, prima, 1.0)          # il fittizio NON entra nel risultato
+        fatt = np.where(pos, np.maximum(0.0, 1.0 - LAM / base), 0.0)
+        self._g_sm_tot = getattr(self, '_g_sm_tot', 0) + 1
+        setattr(self, '_g_sm_' + quale, getattr(self, '_g_sm_' + quale, 0) + 1)
+        self._g_sm_discese = getattr(self, '_g_sm_discese', 0) + int(np.sum(scende))
+        # il patologico: la scrittura GREZZA avrebbe portato la lunghezza a <= 0
+        self._g_sm_patol = (getattr(self, '_g_sm_patol', 0)
+                            + int(np.sum(scende & ((prima + dx) <= 0.0))))
+        eff = np.where(scende, dx * fatt, dx)
+        # ⚠ I DUE NUMERI CHE DIMOSTRANO CHE IL VINCOLO NON CREA MOVIMENTO, misurati a OGNI
+        # scrittura di TUTTO il run e non solo al primo passo:
+        #   `_g_sm_max_su`  = il massimo di `eff - dx`. DEVE restare <= 0: il vincolo non
+        #                     AUMENTA mai un incremento, quindi non puo' produrre espansione.
+        #   `_g_sm_viol_id` = quante volte un incremento >= 0 e' stato toccato. DEVE essere 0:
+        #                     una lunghezza che non scende non cambia DI UN BIT.
+        # Sono il criterio di `Z4b`/`Z4c`, e sono byte-inerti (solo contatori).
+        if len(np.atleast_1d(dx)):
+            self._g_sm_max_su = max(getattr(self, '_g_sm_max_su', -np.inf),
+                                    float(np.max(eff - dx)))
+            self._g_sm_viol_id = (getattr(self, '_g_sm_viol_id', 0)
+                                  + int(np.sum((~scende) & (eff != dx))))
+        return eff
+
+    def _sd0(self, dx, mask=None):
+        """L'incremento effettivo su `d0`. A flag spento e' l'incremento stesso."""
+        if not SCALA_MIN:
+            return dx
+        return self._smorza(self.d0 if mask is None else self.d0[mask], dx, 'd0')
+
+    def _pav_d0(self, v):
+        """⚠ A `SCALA_MIN` ACCESO IL PAVIMENTO SPARISCE: la discesa e' gia' stata smorzata
+        alla scrittura, e lasciare anche il pavimento comovente vorrebbe dire DUE leggi
+        sovrapposte, con la vecchia che continua a mordere."""
+        if SCALA_MIN:
+            self._g_sm_pav_saltati = getattr(self, '_g_sm_pav_saltati', 0) + 1
+            return v
+        return np.maximum(v, self._floor_d0())
+
+    def _nasce(self, v):
+        """NASCITA (concatenazione): il troncone sotto `LAM` si porta A `LAM`. Da li' in poi
+        vale lo smorzamento. Non e' una regola di arresto nuova: e' il punto di partenza."""
+        if not SCALA_MIN:
+            return v
+        self._g_sm_nascite = getattr(self, '_g_sm_nascite', 0) + 1
+        return np.maximum(v, LAM)
+
     def _floor_d0(self):
         # PAVIMENTO di d0. Assoluto (0.05) di default; COMOVENTE se PAV_COM: f*median(d0), con
         # f = 0.05/LAM_BASE = il RAPPORTO DI NASCITA (il vecchio pavimento assoluto diviso la
@@ -4145,7 +4269,9 @@ class Rete:
                 if TRACCIA_VD:
                     self._traccia_vd(cs_arco ** 2 * lap, src, -beta * self.vd, beta, cs_arco)
                 vd_half = self.vd + 0.5 * dts * acc_t
-                d_new = np.maximum(self.d + dts * vd_half, 0.05)
+                # [SCALA_MIN] la regola va sull'INCREMENTO del Verlet, non sul valore finale.
+                d_new = (self.d + self._smorza(self.d, dts * vd_half, 'd') if SCALA_MIN
+                         else np.maximum(self.d + dts * vd_half, 0.05))
 
                 q_new = d_new - self.d0
                 sm_new = np.bincount(i, q_new, minlength=self.n) + np.bincount(j, q_new, minlength=self.n)
@@ -4185,7 +4311,8 @@ class Rete:
                 med = sm / self._deg
                 lap = 0.5 * (med[i] + med[j]) - q
                 self.vd = self.vd + dts * (cs_arco ** 2 * lap + src - beta * self.vd)
-                self.d = np.maximum(self.d + dts * self.vd, 0.05)
+                self.d = (self.d + self._smorza(self.d, dts * self.vd, 'd') if SCALA_MIN
+                          else np.maximum(self.d + dts * self.vd, 0.05))
             
         if TAU_LOCALI:
             # CORREZIONE DI DIFETTO (par.10, categoria D: nessun flag). ERRORE DI TIPO, non di legge.
@@ -4275,7 +4402,7 @@ class Rete:
                 _cfl = float(np.max(dt_e / tau_p_loc)) if np.ndim(dt_e) else float(dt_e / tau_p_loc.min())
                 self._taup_cfl_max = max(getattr(self, "_taup_cfl_max", 0.0), _cfl)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0 += dt_e * (self.d - self.d0) / tau_p_loc
+            self.d0 += self._sd0(dt_e * (self.d - self.d0) / tau_p_loc)
             if TRACCIA_D0: self._traccia_d0('S02_rilass_visco', _tr_pre)
             if GUSCIO_MORBIDO:
                 # DIFFUSIONE DI SUPERFICIE: lap(d0) ~0 nel nucleo uniforme, grande al bordo ripido ->
@@ -4286,15 +4413,15 @@ class Rete:
                 _lap_d0 = 0.5 * (_med0[self.i] + _med0[self.j]) - self.d0
                 _cfl = cs_taup * dt_e
                 if TRACCIA_D0: _tr_pre = self.d0.copy()
-                self.d0 += np.clip(dt_e * cs_taup * d_arco * _lap_d0, -_cfl, _cfl)
+                self.d0 += self._sd0(np.clip(dt_e * cs_taup * d_arco * _lap_d0, -_cfl, _cfl))
                 if TRACCIA_D0: self._traccia_d0('S03_diff_guscio', _tr_pre)
         else:
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0 += dt_e * (self.d - self.d0) / TAU_P
+            self.d0 += self._sd0(dt_e * (self.d - self.d0) / TAU_P)
             if TRACCIA_D0: self._traccia_d0('S04_rilass_TAU_P', _tr_pre)
             
         if TRACCIA_D0: _tr_pre = self.d0.copy()
-        self.d0 = np.maximum(self.d0, self._floor_d0())
+        self.d0 = self._pav_d0(self.d0)
         if TRACCIA_D0: self._traccia_d0('P1_dopo_rilass', _tr_pre, pavimento=self._floor_d0())
         
     def mitosi(self):
@@ -4470,10 +4597,10 @@ class Rete:
             # fronti aperti invece di essere risolto in silenzio con un numero diverso.
             spinta = 0.02 * self.d0 * _rep_mem
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0 = self.d0 + spinta                     # Locale pura
+            self.d0 = self.d0 + self._sd0(spinta)          # Locale pura
             if TRACCIA_D0: self._traccia_d0('S05_spinta_locale', _tr_pre)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0 = np.maximum(self.d0, self._floor_d0())       # PAVIMENTO: la spinta non deve
+            self.d0 = self._pav_d0(self.d0)       # PAVIMENTO: la spinta non deve
             #   portare d0 sotto la scala minima, o lo stress |d-d0|/d0 diverge (bug rientrante)
             if TRACCIA_D0: self._traccia_d0('P2_dopo_spinta', _tr_pre, pavimento=self._floor_d0())
         c = np.where(nasce)[0]
@@ -4600,6 +4727,8 @@ class Rete:
             keep_idx = np.where(keep)[0]
             self.conc_archi = ([self.conc_archi[e] if e < len(self.conc_archi) else []
                                 for e in keep_idx] + [[] for _ in range(2 * len(a))])
+        dh = self._nasce(dh)          # [SCALA_MIN] i tronconi d/2 della mitosi
+        d0new = self._nasce(d0new)
         self.d = np.concatenate([self.d[keep], dh, dh])
         if TRACCIA_D0: _tr_pre = self.d0.copy()
         self.d0 = np.concatenate([self.d0[keep], d0new])
@@ -4655,7 +4784,8 @@ class Rete:
                 anti = (fm[pick] + 2 * np.pi) % (4 * np.pi)
                 nc = len(pick)   # fase opposta (fm+pi)
                 k = self.n + np.arange(nc)
-                dd = np.maximum(0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05)
+                dd = self._nasce(np.maximum(
+                    0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05))
                 pmed = float(np.median(self.peq))
                 self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])
                 self.phi = np.concatenate([self.phi, anti])
@@ -4900,10 +5030,10 @@ class Rete:
             passo_max = 0.01 * float(np.median(self.d0[mask])) if mask.any() else 0.0
             proj = np.clip(proj, -passo_max, passo_max)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0[mask] += proj
+            self.d0[mask] += self._sd0(proj, mask)
             if TRACCIA_D0: self._traccia_d0('S08_proj', _tr_pre)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0 = np.maximum(self.d0, self._floor_d0())          # PAVIMENTO
+            self.d0 = self._pav_d0(self.d0)          # PAVIMENTO
             if TRACCIA_D0: self._traccia_d0('P3_dopo_proj', _tr_pre, pavimento=self._floor_d0())
             
         if GRAV_BIFASE and len(proj):
@@ -5047,16 +5177,16 @@ class Rete:
                 passo_causale = c_sistema * DT
                 spinta = np.clip(spinta, -passo_causale, passo_causale)
                 if TRACCIA_D0: _tr_pre = self.d0.copy()
-                self.d0[mask] += spinta * float(np.median(self.d0[mask]))
+                self.d0[mask] += self._sd0(spinta * float(np.median(self.d0[mask])), mask)
                 if TRACCIA_D0: self._traccia_d0('S09_spinta_med', _tr_pre)
             else:
                 # --- LOCALE PURA ---
                 grav = np.clip(grav, -passo_causale, passo_causale)
                 if TRACCIA_D0: _tr_pre = self.d0.copy()
-                self.d0[mask] += grav * float(np.median(self.d0[mask]))
+                self.d0[mask] += self._sd0(grav * float(np.median(self.d0[mask])), mask)
                 if TRACCIA_D0: self._traccia_d0('S10_grav_med', _tr_pre)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0 = np.maximum(self.d0, self._floor_d0())
+            self.d0 = self._pav_d0(self.d0)
             if TRACCIA_D0: self._traccia_d0('P4_dopo_grav', _tr_pre, pavimento=self._floor_d0())
             
         # [A8, 2026-09-20] (b) RAGIONE VALIDA: `K_FRANGE = 0.0`, quindi il ramo e' morto per
@@ -5076,10 +5206,10 @@ class Rete:
             
             flusso = np.clip(flusso, -passo_max, passo_max)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0[mask] += flusso
+            self.d0[mask] += self._sd0(flusso, mask)
             if TRACCIA_D0: self._traccia_d0('S11_flusso', _tr_pre)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0 = np.maximum(self.d0, self._floor_d0())
+            self.d0 = self._pav_d0(self.d0)
             if TRACCIA_D0: self._traccia_d0('P5_dopo_flusso', _tr_pre, pavimento=self._floor_d0())
             
         # --- COESIONE RELAZIONALE CON ANCORA ELASTICA VERSO LA SCALA NATIVA (LAM) ---
@@ -5120,6 +5250,41 @@ class Rete:
             
             stress_metrico = np.abs(self.d[mask] - self.d0[mask]) / np.maximum(self.d0[mask], 1e-6)
             tasso_dinamico = np.tanh(stress_metrico) * self.d0[mask]
+
+            # --- [COES_ADIM] LA FORMA ADIMENSIONALE, ACCANTO ALLA VECCHIA ---------------
+            # I tre addendi diventano adimensionali con la densita' LOCALE dell'arco, e
+            # `I_med` sparisce da ENTRAMBE le posizioni (era una MEDIA GLOBALE, A2).
+            # `|F_adim| <= 1` PER COSTRUZIONE: |tanh| <= 1 e filtro_portata in (0,1). NON e'
+            # un clip -- ed e' per questo che questa forma SOSTITUISCE `tanh(stress)*d0`,
+            # che `Z79` ha misurato SATURO.
+            if COES_ADIM:
+                _dI = I_nodi[jj[mask]] - I_nodi[ii[mask]]
+                # NESSUN PAVIMENTO su `I_arco`: dove e' ESATTAMENTE zero il rapporto e' `0/0`
+                # e si definisce ZERO (precedente dichiarato: `scala_p`, `Z67`); dove e'
+                # minuscolo ma non nullo il rapporto e' enorme MA IL `tanh` LO LIMITA A 1.
+                # La limitatezza e' STRUTTURALE, non messa a mano.
+                _ok = I_arco > 0.0
+                _ia = np.where(_ok, I_arco, 1.0)
+                _grad_adim = np.where(_ok, _dI / _ia, 0.0)
+                _lap_adim = np.where(_ok, lap_arco / _ia, 0.0)
+                _peso_adim = np.tanh(np.abs(_grad_adim))
+                _forza_adim = -(_grad_adim - _peso_adim * _lap_adim)
+                # `richiamo_elastico` era GIA' adimensionale: -(d0-LAM)/LAM. Invariato.
+                _F_adim = np.tanh(_forza_adim + richiamo_elastico) * filtro_portata
+                # IL TETTO CAUSALE, ricalcolato in loco e NON preso dalla variabile di sopra,
+                # che sta dentro un `if`: usarla sarebbe dipendere da un ramo. Stessa
+                # espressione dei due siti fratelli (la spinta e la gravita').
+                _passo_causale = LAM * np.sqrt(K_C) * DT
+                _delta_coes = _passo_causale * _F_adim
+                self._g_coes_adim_usi = getattr(self, '_g_coes_adim_usi', 0) + 1
+                self._g_coes_tetto = float(_passo_causale)
+                self._g_coes_max = max(getattr(self, '_g_coes_max', 0.0),
+                                       float(np.max(np.abs(_delta_coes)))
+                                       if len(_delta_coes) else 0.0)
+                self._g_coes_satura = (getattr(self, '_g_coes_satura', 0)
+                                       + int(np.sum(np.abs(_F_adim) > 0.99)))
+                self._g_coes_archi = getattr(self, '_g_coes_archi', 0) + int(len(_F_adim))
+            # ---------------------------------------------------------------------------
             
             # [2026-09-20] LA MISURA CHE MANCAVA: `coesione_relazionale` PRIMA del clip.
             # ⚠ Senza questo numero non si sa se il clip stia PROTEGGENDO da un termine enorme
@@ -5128,10 +5293,14 @@ class Rete:
             # scritto in `Z79`. Byte-inerte: gira solo con `TRACCIA_D0`.
             if TRACCIA_D0: self._traccia_coesione(coesione_relazionale, tasso_dinamico, mask)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0[mask] += np.clip(coesione_relazionale, -tasso_dinamico, tasso_dinamico)
+            if COES_ADIM:
+                self.d0[mask] += self._sd0(_delta_coes, mask)
+            else:
+                self.d0[mask] += self._sd0(
+                    np.clip(coesione_relazionale, -tasso_dinamico, tasso_dinamico), mask)
             if TRACCIA_D0: self._traccia_d0('S12_coesione', _tr_pre)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0 = np.maximum(self.d0, self._floor_d0())
+            self.d0 = self._pav_d0(self.d0)
             if TRACCIA_D0: self._traccia_d0('P6_dopo_coesione', _tr_pre, pavimento=self._floor_d0())
         #--- ACCOPPIAMENTO LATERALE DINAMICO E RELATIVO (Senza costanti improprie) ---
         if len(self.tw) and len(self.i) and self.n > 0:
@@ -5172,7 +5341,7 @@ class Rete:
                 # Applica lo shift al campo di fase senza alterare le coordinate fisse dei puntatori (net.pos)
                 self.phi[ii] = (self.phi[ii] + shift_fase_dinamico) % (4 * np.pi)
                 if TRACCIA_D0: _tr_pre = self.d0.copy()
-                self.d0 = np.maximum(self.d0, self._floor_d0())
+                self.d0 = self._pav_d0(self.d0)
                 if TRACCIA_D0: self._traccia_d0('P7_dopo_4917', _tr_pre, pavimento=self._floor_d0())
 
     def diagnostica(self):
@@ -6258,7 +6427,7 @@ def _applica_flag(a):
     global TAU_LUCE, RUMORE_COLORATO
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, SCALA_MIN, COES_ADIM, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
     if getattr(a, "tau_d0", False):
@@ -6320,6 +6489,8 @@ def _applica_flag(a):
     CHI_DA_SPINORE = bool(getattr(a, "chi_da_spinore", False))     # flag 3: perc_chi da doppia-copertura di _psi_spinor
     TEMPO_PROPRIO_ORIENTATO = bool(getattr(a, "tempo_proprio_orientato", False)) # flag 4: r con segno (toglie |.|)
     SYNC_SPINORE = bool(getattr(a, "sync_spinore", False))         # Kuramoto SU(2) sugli spinori: default off
+    SCALA_MIN = bool(getattr(a, "scala_min", False))               # nessuna lunghezza sotto LAM
+    COES_ADIM = bool(getattr(a, "coes_adim", False))               # coesione adimensionale e causale
     CHI_COOP = bool(getattr(a, "chi_coop", False))                 # cooperazione: chi_basc -> perc_geom, spinore -> perc_chi
     if CHI_DA_SPINORE and not SPINORE_CORRETTO:
         raise SystemExit("[errore] --chi-da-spinore richiede --spinore-corretto (senno' loop di feedback perc_chi->spinore->perc_chi)")
@@ -6331,6 +6502,16 @@ def _applica_flag(a):
         print("[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)")
     if CHI_DA_SPINORE:
         print("[chi-da-spinore] perc_chi dal segno di doppia-copertura di _psi_spinor (post-commit); CHI_BASC disattivato")
+    if SCALA_MIN:
+        print("[scala-min] NESSUNA LUNGHEZZA SOTTO LAM: non si rimappa il valore, si SMORZA LA "
+              "DISCESA -- incremento >= 0 intatto bit per bit, incremento < 0 moltiplicato per "
+              "max(0, 1-LAM/x). I sette pavimenti di d0 SPARISCONO; le nascite partono da LAM; "
+              "per d la regola va sull incremento del Verlet. Zero coefficienti.")
+    if COES_ADIM:
+        print("[coes-adim] COESIONE ADIMENSIONALE: i tre addendi normalizzati sulla densita' "
+              "LOCALE dell'arco (I_med sparisce, era una media globale), e lo spostamento e' "
+              "passo_causale * tanh(...) * filtro_portata, con |F| <= 1 PER COSTRUZIONE. "
+              "Sostituisce il clip tanh(stress)*d0.")
     if CHI_COOP:
         print("[chi-coop] COOPERAZIONE: chi_basc SCRIVE perc_geom (geometria, letta dalla catena della "
               "torsione) e lo spinore scrive perc_chi (carica, letta dal campo B, dalla mitosi e da "
@@ -6786,6 +6967,18 @@ def _cli():
     p.add_argument("--chi-da-spinore", action="store_true", dest="chi_da_spinore",
                    help="FLAG 3 (separato): perc_chi = segno di doppia-copertura di _psi_spinor DOPO il commit "
                         "di psi, e CHI_BASC disattivato. RICHIEDE --spinore-corretto (senno' loop). Default off.")
+    p.add_argument("--scala-min", action="store_true", dest="scala_min",
+                   help="NESSUNA LUNGHEZZA SOTTO LAM. Non rimappa il valore: SMORZA LA DISCESA. Un "
+                        "incremento >= 0 resta intatto bit per bit; uno < 0 e' moltiplicato per "
+                        "max(0, 1-LAM/x) col valore x PRIMA di quella scrittura. Vale per i dodici "
+                        "scrittori di d0 e per l incremento del Verlet su d; i sette pavimenti di d0 "
+                        "spariscono; le nascite partono da LAM. Zero coefficienti. Default off = "
+                        "byte-identico.")
+    p.add_argument("--coes-adim", action="store_true", dest="coes_adim",
+                   help="COESIONE ADIMENSIONALE E CAUSALE: i tre addendi normalizzati sulla densita' "
+                        "LOCALE dell'arco invece che su I_med (media globale, A2), e lo spostamento e' "
+                        "passo_causale * tanh(...) * filtro_portata, con |F| <= 1 per costruzione invece "
+                        "che per clip. Sostituisce il clip tanh(stress)*d0. Default off = byte-identico.")
     p.add_argument("--chi-coop", action="store_true", dest="chi_coop",
                    help="COOPERAZIONE chi_basc + spinore: `chi_basc` NON si spegne e scrive la GEOMETRIA in "
                         "perc_geom (letta dalla catena della torsione CHI_CORE/FRAME_DRAG/TORS_4PI), mentre "

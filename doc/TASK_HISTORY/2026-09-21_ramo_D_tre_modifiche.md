@@ -60,7 +60,26 @@ gradino: `max(x, LAM)` ha un angolo nella derivata)*, che valga **`L(x) -> x` pe
 > con `d`.** **Il mandato chiede la forma in cui lo stress resta FINITO: questa e' la forma in cui
 > DIVERGE.** **Respinta per misura del proprio criterio, non per gusto.**
 
-### LA FORMA SCELTA — **compressione dell'avvicinamento**
+### ⚠⚠ ANNOTAZIONE DEL 2026-09-21 — **LA FORMA QUI SOTTO E' STATA RESPINTA DA LUCA,
+###    E IL DIFETTO E' REALE. Non la riscrivo: la ANNOTO** (par.5-septies).
+
+> **`L(x) = LAM + x*exp(-LAM/x)` NON E' IDEMPOTENTE: `L(x) > x` anche per `x >> LAM`.**
+> A `3*LAM` gonfia del **`+4.98 %`**. **E i pavimenti si applicano SETTE VOLTE PER PASSO:**
+> ogni lunghezza sarebbe stata spinta in su sette volte a passo per **tremila passi**, cioe'
+> **un'ESPANSIONE ARTIFICIALE FABBRICATA DAL VINCOLO** — **ed e' esattamente la grandezza che
+> il ramo D deve misurare.** **Lo stesso difetto ha `sqrt(x^2 + LAM^2)`**, che avevo indicato
+> come alternativa: **cadono ENTRAMBE, e per la stessa ragione.**
+>
+> **COSA NON AVEVO VISTO, e va detto perche' e' il tipo di errore che si ripete:** avevo
+> verificato la forma **come CURVA** — monotona, liscia, asintotica, zero coefficienti, tutto
+> vero — **e non come OPERATORE APPLICATO RIPETUTAMENTE.** Il criterio che mancava non e'
+> sulla forma: e' **`L(L(x)) == L(x)`**. **Una mappa che non e' idempotente non puo' fare il
+> pavimento, perche' un pavimento viene applicato ogni volta.**
+>
+> **LA FORMA IN VIGORE E' IL §2-bis.** Quella qui sotto si legge per sapere **cosa e' stato
+> provato e perche' e' caduto**, non come legge.
+
+### ~~LA FORMA SCELTA — compressione dell'avvicinamento~~ **(RESPINTA, vedi sopra)**
 ```
 L(x) = LAM + x * exp(-LAM / x)            (x > 0;  L(0) := LAM)
 ```
@@ -84,11 +103,77 @@ scala del sistema, lo stesso carattere di `filtro_portata = 1 - tanh(d/LAM)` gia
 
 ### ⚠ E CIO' CHE LA FORMA COSTA, scritto PRIMA di vederlo
 **Non esiste un pavimento liscio che non gonfi anche il corpo della distribuzione.** A `x = 3 LAM`
-la lunghezza sale del **3.6 %**; a `x = 0.3 LAM` sale da `0.3 LAM` a **`1.011 LAM`**, cioe'
+la lunghezza sale del **4.98 %**; a `x = 0.3 LAM` sale da `0.3 LAM` a **`1.011 LAM`**, cioe'
 **3.4 volte**. **Il mandato lo mette in conto** *(«sposta fino a meta' degli archi. E' voluto»)*,
 **e va letto come una RIFONDAZIONE delle lunghezze, non come una correzione.**
 
-### DOVE SI APPLICA — **una sola legge per TUTTE le lunghezze**
+---
+
+## 2-bis. LA FORMA IN VIGORE — **si SMORZA LA DISCESA, non si rimappa il valore**
+
+**Decisa da Luca dopo che la prima e' caduta.** A **ogni scrittura**, con `x` il valore
+**prima di QUELLA scrittura**:
+```
+incremento >= 0  ->  INTATTO, bit per bit
+incremento <  0  ->  moltiplicato per max(0, 1 - LAM/x)
+```
+
+### LE QUATTRO PROPRIETA', e sono DIMOSTRATE, non asserite
+**(1) IDENTITA' ESATTA per ogni incremento `>= 0`.** Misurato su sei ordini di grandezza:
+**`max|dx_eff - dx| = 0.0`**, lo zero **esatto**, non `1e-16`.
+
+**(2) NESSUNA INFLAZIONE.** Il vincolo **non aumenta MAI** una lunghezza ⟹ **non puo'
+produrre espansione da solo.** E' il difetto della prima forma, eliminato **per struttura**.
+
+**(3) APPROCCIO ASINTOTICO.** Con `x > LAM` e `dx < 0`, sostituendo:
+```
+nuovo - LAM = (x - LAM) + dx*(1 - LAM/x) = (x - LAM) + dx*(x - LAM)/x
+            = (x - LAM) * (1 + dx/x)
+```
+> **La DISTANZA da `LAM` si MOLTIPLICA per `(1 + dx/x)`**, positivo finche' `x + dx > 0`:
+> **`nuovo > LAM` SEMPRE**, l'avvicinamento e' **GEOMETRICO**, e **`LAM` non si tocca mai.**
+
+**Verificato numericamente:** invariante a **`2.2e-15`**; **200 dimezzamenti** partendo da
+`x = 5` danno `x = 0.800000000000` **e `x > LAM` resta VERO**.
+
+**(4) ZERO COEFFICIENTI:** c'e' solo `LAM`.
+
+### Le tre cose che DICHIARO invece di nasconderle
+- **il `max(0, .)` NON e' una scelta, e' un OBBLIGO DI SEGNO:** per `x < LAM` il fattore
+  `1 - LAM/x` e' **negativo** e trasformerebbe una discesa in una **salita**. A zero, una
+  lunghezza gia' sotto `LAM` **non scende piu'**: **si congela, non si teletrasporta.**
+  *(Misurato: `dx_eff = 0` su tutti i casi sotto `LAM`.)*
+- **il caso `dx <= -x` NON E' TAPPATO, E' CONTATO.** La proprieta' (3) non vale li'. **Niente
+  pavimento scelto:** `_g_sm_patol` lo conta e **`Z4` lo legge**. Se non scatta mai
+  l'invariante tiene; **se scatta e' un riscontro, non qualcosa da coprire;**
+- **LE NASCITE sono CONCATENAZIONI, non discese** *(`S01` archi nuovi, `S06` mitosi, `S07`
+  Schwinger)*: il troncone sotto `LAM` **si porta A `LAM` alla nascita**, e da li' vale lo
+  smorzamento. **Non e' una regola di arresto nuova: e' il punto di partenza.**
+
+### DOVE SI APPLICA — **e i sette pavimenti SPARISCONO**
+| sito | oggi | con `SCALA_MIN` |
+|---|---|---|
+| i **nove** scrittori di discesa di `d0` *(`S02`-`S05`, `S08`-`S12`)* | `d0 += dx` | `d0 += smorza(d0, dx)` |
+| i **sette** pavimenti `P1`-`P7` | `max(d0, f*median(d0))` | **SPARISCONO** — la discesa e' gia' smorzata alla scrittura |
+| `d`, mezzo passo Verlet | `max(d + dts*vd_half, 0.05)` | `d + smorza(d, dts*vd_half)` — **sull'INCREMENTO** |
+| `d`, passo di Eulero | `max(d + dts*vd, 0.05)` | `d + smorza(d, dts*vd)` |
+| le **tre** nascite | `max(., 0.05)` / concat | `max(., LAM)` |
+
+> **⚠ I PAVIMENTI DEVONO SPARIRE, non affiancare la regola nuova:** due leggi sovrapposte
+> lascerebbero il pavimento **comovente** a mordere, e `f*median(d0)` e' proprio cio' che
+> `SCALA_MIN` sostituisce.
+
+### IL SIGILLO DECISIVO, e come l'ho reso misurabile OVUNQUE
+Luca chiede: *«con solo la scala minima accesa, le lunghezze sopra `LAM` non devono cambiare
+di un bit»*. **Un confronto al passo 1 lo proverebbe in un istante solo.** Due contatori
+byte-inerti dentro `_smorza` lo provano **a OGNI scrittura di TUTTO il run**:
+- **`_g_sm_max_su`** = `max(dx_eff - dx)` su tutte le chiamate ⟹ **deve restare `<= 0`**: il
+  vincolo non aumenta mai un incremento;
+- **`_g_sm_viol_id`** = quante volte un incremento `>= 0` e' stato toccato ⟹ **deve valere `0`**.
+
+---
+
+### ~~DOVE SI APPLICA — una sola legge per TUTTE le lunghezze~~ **(della forma RESPINTA)**
 | sito | oggi | con `SCALA_MIN` |
 |---|---|---|
 | i **sette** pavimenti di `d0` | `_floor_d0()` = `f * median(d0)`, comovente | `L(d0)` |

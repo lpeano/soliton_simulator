@@ -88,6 +88,11 @@ CHIBASC = "on"
 #   `off` e' l'unico default che lascia l'argv identico elemento per elemento.
 #   Lo prova `csv/_seal_fork/_sigillo_chicoop_driver.py`, non questo commento.
 CHICOOP = "off"
+# [RAMO D, 2026-09-21] --scala-min=on|off e --coes-adim=on|off, DEFAULT `off` entrambi, per la
+# stessa ragione di `--chi-coop`: il default e' quello che lascia l'argv IDENTICO elemento per
+# elemento a quello di prima. Lo prova il sigillo, non questo commento.
+SCALAMIN = "off"
+COESADIM = "off"
 
 _resti = []
 for _x in _ARGV[1:]:
@@ -109,6 +114,14 @@ for _x in _ARGV[1:]:
         CHICOOP = _x.split("=", 1)[1].strip().lower()
         if CHICOOP not in ("on", "off"):
             raise SystemExit("--chi-coop vuole `on` o `off`, non %r" % CHICOOP)
+    elif _x.startswith("--scala-min="):
+        SCALAMIN = _x.split("=", 1)[1].strip().lower()
+        if SCALAMIN not in ("on", "off"):
+            raise SystemExit("--scala-min vuole `on` o `off`, non %r" % SCALAMIN)
+    elif _x.startswith("--coes-adim="):
+        COESADIM = _x.split("=", 1)[1].strip().lower()
+        if COESADIM not in ("on", "off"):
+            raise SystemExit("--coes-adim vuole `on` o `off`, non %r" % COESADIM)
     elif _x == "--riprendi":
         # LA RIPRESA E' UNA SCELTA ESPLICITA, MAI UN RIPIEGO AUTOMATICO: senza questo flag il
         # comportamento resta quello dell'originale (cartella sporca -> RIFIUTO).
@@ -157,7 +170,7 @@ S._NMASSE_VIDEO["size"] = None
 
 print("\n  FLAG ATTIVI, letti dal MODULO dopo `_applica_flag` (P6: dai dati, non dal comando):")
 for f in ("CAMPO_SPINORIALE", "SPINORE_VIVO", "SPINORE_CORRETTO", "CHI_CORE", "CS_DINAMICO",
-          "TAU_LUCE", "CHI_BASC", "CHI_COOP", "FORK_SU2", "FORK_SU2_MEM", "STEP2_OROLOGIO",
+          "TAU_LUCE", "CHI_BASC", "CHI_COOP", "SCALA_MIN", "COES_ADIM", "FORK_SU2", "FORK_SU2_MEM", "STEP2_OROLOGIO",
           "SPIN_FEEDBACK", "CALORE_VETTORIALE", "PLAST_DIN", "VERLET", "TAU_LOC"):
     print("    %-20s %s" % (f, getattr(S, f, "ASSENTE")))
 print("  PASSI_PER_FRAME = %s   DT = %s   TAU_A = %s   N_c(collasso) = %d"
