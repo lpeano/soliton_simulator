@@ -55,10 +55,17 @@ def opzioni_dal_sorgente():
     """Le opzioni booleane del driver, SCOPERTE dal codice. Sono quelle il cui parsing impone
     `("on", "off")`: e' la firma di un interruttore, e distingue `--chi-basc=` da `--sep=`."""
     src = open(DRIVER, encoding="utf-8").read()
+    # ⚠ IL BLOCCO SI DELIMITA AL PROSSIMO RAMO, NON A UNA FINESTRA DI CARATTERI.
+    #   Prima usavo 600 caratteri fissi: la finestra SCONFINAVA nel ramo successivo e faceva
+    #   sembrare booleane `--sep=` e `--serie=`, perche' il `("on","off")` del ramo DOPO cadeva
+    #   dentro. Il sigillo e' morto al primo giro passando `--sep=on`. Preso subito, e va detto:
+    #   un euristico su finestra fissa e' un criterio scritto a occhio, non dal codice.
+    tagli = [m.start() for m in re.finditer(r'\n    (?:el)?if _x[ .]', src)] + [len(src)]
     opz = {}
     for m in re.finditer(r'_x\.startswith\("--([a-z0-9-]+)="\)\s*:', src):
         nome = m.group(1)
-        coda = src[m.end():m.end() + 600]
+        fine = next((t for t in tagli if t > m.end()), len(src))
+        coda = src[m.end():fine]                       # SOLO questo ramo
         mv = re.search(r'([A-Z_0-9]+)\s*=\s*_x\.split', coda)
         if not mv:
             continue
