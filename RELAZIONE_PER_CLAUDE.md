@@ -10004,3 +10004,58 @@ con la somma per scrittore **separata in SALITE e DISCESE** e **`Σ(dx_eff − d
 
 **Il cricchetto NON era sbagliato:** il run S lo ha escluso **come causa da solo**, e questa ipotesi
 dice **perche' quell'esclusione non lo assolve**.
+
+---
+
+## ⛔ LA RIGIOCATA `1200 -> 1230` **NON RIPRODUCE L'ESPLOSIONE** — e due ipotesi cadono
+
+**Riscontro relazionato nello stesso commit.** File: `csv/_test_fork/_diag_D/RIGIOCATA_1200_1230.txt`.
+Soglia **dichiarata prima**: ci si ferma se `n1 > 100`.
+
+```
+51 passi rigiocati dal 1200:   n1 = 1 in TUTTI E 51.
+il run vero, al passo ~1230:   n1 = 22591  (py-spy, processo vivo)
+```
+
+> **La lettura era fissata PRIMA:** *«in 30 passi `n1` non sale → o la rigiocata non e' fedele, o
+> l'innesco e' piu' avanti: DILLO».* **Lo dico: non sale.**
+
+### ⚠ Il candidato `2773-4158` e' SMENTITO
+```
+passo 1201   arco |anom| MASSIMO:  255-668 (vuoto-vuoto)   anom = +3.68
+             candidato 2773-4158:  rho = 4.77e-89   peq = 1.15e-14   anom = -1.15e-05
+```
+**L'arco candidato ha `anom` NEGATIVO e minuscolo**, perche' `rho ~ 1e-89`: con il pavimento `1e-9`
+al denominatore, `anom = -peq/1e-9`, cioe' **niente**.
+**E l'arco che domina `|anom|` non e' un nato:** e' **vuoto-vuoto** (`255-668`, `668-855`), poi
+massa-massa (`1980-1983`), con `anom` fra **2.3 e 5.7** — **valori ordinari, mai vicini ai `1.8e6`
+che servirebbero per `n1 = 22591`.**
+
+**L'ho registrato SEMPRE, non solo quando confermava:** era il presidio scritto nel mandato, ed e'
+servito — **il colpevole non e' comparso, e questo E' l'informazione.**
+
+### Cosa il meccanismo conferma comunque
+```
+nati piu' giovani:  eta = 0.014   I = 0.0e+00   ramp = 0.000      (TAU_A = 50)
+```
+**`ramp = min(1, eta/TAU_A)`, letto dal codice a `:2958`** — non dedotto. **I neonati hanno peso
+ZERO e densita' ZERO:** il meccanismo *«un nato non pesa ancora»* **c'e'**. **Ma in 51 passi
+nessuno si e' acceso abbastanza da far esplodere `anom`.**
+
+### ⚠ E UN DIFETTO DELLA RIGIOCATA CHE HO TROVATO E CORRETTO
+La **prima** versione **non chiamava `passo_test()`**, che il driver (`:35-37`) e la rigiocata gia'
+sigillata (`_rigiocata_0_120.py:188`) chiamano **una volta ogni `PASSI_PER_FRAME` passi**.
+**Trovato leggendo la rigiocata sigillata, NON dai numeri** — quelli sembravano ragionevoli, ed e'
+esattamente il punto. **Corretta e rilanciata.** **I numeri qui sopra vengono dalla versione
+corretta.**
+
+### Le tre spiegazioni possibili, e non ne scelgo una senza misurarla
+1. **la rigiocata NON e' fedele** anche dopo la correzione — **si decide rigirando il sigillo della
+   rigiocata**, che esiste (`138/138`) e va adattato a questo punto di partenza;
+2. **l'innesco e' oltre il passo 1251** — ma il run vero era gia' esploso al **1230**, quindi
+   questa spiegazione **richiede che la traiettoria sia diversa**, cioe' ricade nella 1;
+3. **la mia ricostruzione di `n1` e' sbagliata** — uso `cs_max = CS_M = 2.0` mentre il codice usa
+   `max(cs_arco)`. **Ma un `cs_max` piu' piccolo darebbe `n1` PIU' GRANDE**, quindi la stima e'
+   conservativa **e non spiega un fattore 22591.**
+
+**La 1 e' la piu' probabile, e non e' una conclusione: e' cio' che resta.**
