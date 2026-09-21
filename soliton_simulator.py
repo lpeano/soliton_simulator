@@ -951,6 +951,26 @@ PEQ_ESATTO = False      # IL RILASSAMENTO DI `peq` IN FORMA ESATTA (2026-09-21, 
                         #   piu' un SEGNO ma solo lo zero, e toglierlo richiede la forma
                         #   simmetrica, che e' UN'ALTRA cura e ha IL SUO POLO.
                         # OFF = byte-identico.
+PEQ_NASCITA_LOCALE = False  # UNA SOLA LEGGE DI NASCITA PER `peq`, E LOCALE (2026-09-21, C2).
+                        # DIFETTO CURATO: `peq` nasce in TRE MODI INCOERENTI.
+                        #   (a) `_allaccia` scrive `nan` e `step` (`:4189`) lo CALIBRA sulla
+                        #       `rho` DELL'ARCO STESSO -> `anom = 0` ESATTO alla nascita;
+                        #   (b) la mitosi lo EREDITA dall'arco che si divide -- ed e' giusto:
+                        #       un arco che si spezza in due NON e' una nascita, e' una
+                        #       CONTINUAZIONE, e i due tronconi hanno la storia del padre;
+                        #   (c) Schwinger scrive `median(self.peq)`, LA MEDIANA GLOBALE.
+                        # (c) VIOLA `A2`: una statistica GLOBALE entra in una legge locale, e
+                        #   quei nodi NON hanno alcun rapporto con la mediana della rete.
+                        # LA CURA NON INVENTA NIENTE: usa il meccanismo GIA' ESISTENTE di (a).
+                        #   Schwinger scrive `nan`, e `:4189` lo calibra sulla `rho` del suo
+                        #   arco, ESATTAMENTE come `_allaccia`. UNA sola legge di nascita.
+                        # ⚠ VERIFICATO CHE E' SICURO, non assunto: fra la `mitosi()` e la
+                        #   calibrazione di `:4189` girano `rilassa_disegno`,
+                        #   `memoria_hebbiana_moto` e `scuoti_vuoto`, e NESSUNA delle tre
+                        #   legge `peq` -- controllato dal sorgente, zero occorrenze.
+                        # ⚠ E (b) NON SI TOCCA: l'eredita' della mitosi e' COERENTE, perche'
+                        #   non e' una nascita. Cambiarla sarebbe curare cio' che non e' rotto.
+                        # OFF = byte-identico.
 CHI_COOP = False        # COOPERAZIONE (decisione di Luca, 2026-09-21): chi_basc NON si spegne; scrive la
                         # GEOMETRIA in `perc_geom` (il giro e' compiuto o no, dalla torsione) mentre lo
                         # SPINORE scrive la CARICA in `perc_chi` (segno di doppia copertura). I due fanno
@@ -4948,7 +4968,15 @@ class Rete:
                 k = self.n + np.arange(nc)
                 dd = self._nasce(np.maximum(
                     0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05))
-                pmed = float(np.median(self.peq))
+                # [PEQ_NASCITA_LOCALE, C2] `nan` = «da calibrare sulla `rho` del PROPRIO
+                # arco», ed e' la STESSA convenzione di `_allaccia`: `:4189` lo fa
+                # all'inizio del passo dopo, e da' `anom = 0` ESATTO alla nascita.
+                # Il ramo storico prende `median(self.peq)`, una statistica GLOBALE (`A2`).
+                pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))
+                if PEQ_NASCITA_LOCALE:
+                    self._g_peqn_archi = getattr(self, '_g_peqn_archi', 0) + int(2 * nc)
+                    self._g_peqn_ev = getattr(self, '_g_peqn_ev', 0) + 1
+                    self._g_peqn_mediana = float(np.median(self.peq))   # cio' che si EVITA
                 self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])
                 self.phi = np.concatenate([self.phi, anti])
                 self.phi0 = np.concatenate([self.phi0, anti])
@@ -6589,7 +6617,7 @@ def _applica_flag(a):
     global TAU_LUCE, RUMORE_COLORATO
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
-    global PEQ_ESATTO
+    global PEQ_ESATTO, PEQ_NASCITA_LOCALE
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, SCALA_MIN, COES_ADIM, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
@@ -6655,6 +6683,7 @@ def _applica_flag(a):
     SCALA_MIN = bool(getattr(a, "scala_min", False))               # nessuna lunghezza sotto LAM
     COES_ADIM = bool(getattr(a, "coes_adim", False))               # coesione adimensionale e causale
     PEQ_ESATTO = bool(getattr(a, "peq_esatto", False))             # rilassamento esatto di peq (C1)
+    PEQ_NASCITA_LOCALE = bool(getattr(a, "peq_nascita_locale", False))  # nascita locale di peq (C2)
     CHI_COOP = bool(getattr(a, "chi_coop", False))                 # cooperazione: chi_basc -> perc_geom, spinore -> perc_chi
     if CHI_DA_SPINORE and not SPINORE_CORRETTO:
         raise SystemExit("[errore] --chi-da-spinore richiede --spinore-corretto (senno' loop di feedback perc_chi->spinore->perc_chi)")
@@ -6671,6 +6700,14 @@ def _applica_flag(a):
               "DISCESA -- incremento >= 0 intatto bit per bit, incremento < 0 moltiplicato per "
               "max(0, 1-LAM/x). I sette pavimenti di d0 SPARISCONO; le nascite partono da LAM; "
               "per d la regola va sull incremento del Verlet. Zero coefficienti.")
+    if PEQ_NASCITA_LOCALE:
+        print("[peq-nascita-locale] UNA SOLA LEGGE DI NASCITA PER `peq`: gli archi della "
+              "creazione di coppia alla Schwinger nascono con `nan` e vengono CALIBRATI da "
+              "step() sulla `rho` DEL LORO ARCO, esattamente come quelli di `_allaccia`. "
+              "Prima prendevano `median(peq)`, LA MEDIANA GLOBALE: una statistica globale "
+              "dentro una legge locale (A2), e quei nodi non hanno alcun rapporto con la "
+              "mediana della rete. Zero parametri: il meccanismo esisteva gia'. L'eredita' "
+              "della MITOSI non si tocca: un arco che si spezza non nasce, CONTINUA.")
     if PEQ_ESATTO:
         print("[peq-esatto] IL RILASSAMENTO DI `peq` IN FORMA ESATTA: "
               "peq <- rho + (peq-rho)*exp(-dt_e/tau_bg), piu' lo stesso passo esatto per la "
@@ -7169,6 +7206,13 @@ def _cli():
                         "LOCALE dell'arco invece che su I_med (media globale, A2), e lo spostamento e' "
                         "passo_causale * tanh(...) * filtro_portata, con |F| <= 1 per costruzione invece "
                         "che per clip. Sostituisce il clip tanh(stress)*d0. Default off = byte-identico.")
+    p.add_argument("--peq-nascita-locale", action="store_true", dest="peq_nascita_locale",
+                   help="UNA SOLA LEGGE DI NASCITA PER peq, E LOCALE: gli archi della creazione "
+                        "di coppia alla Schwinger nascono con nan e vengono calibrati da step() "
+                        "sulla rho del LORO arco, come quelli di _allaccia, invece di prendere "
+                        "median(peq) -- una statistica GLOBALE dentro una legge locale (A2). "
+                        "Zero parametri: il meccanismo esisteva gia'. L'eredita' della mitosi "
+                        "NON si tocca. Default off = byte-identico.")
     p.add_argument("--peq-esatto", action="store_true", dest="peq_esatto",
                    help="RILASSAMENTO ESATTO DI peq: peq <- rho + (peq-rho)*exp(-dt_e/tau_bg), "
                         "piu' lo stesso passo esatto per la diffusione (Lie-Trotter). E' una "
