@@ -138,14 +138,16 @@ if "--lavoro" in sys.argv:
     dn = np.asarray(disp_nascita) if disp_nascita else np.zeros(0)
     print("C2 eventi=%d attesi=%d nan_mitosi=%d nan_residui=%d nan_altrove=%d "
           "n_ev=%d disp_dopo=%.6e n_nasc=%d disp_nascita=%.6e nasc_zero=%.4f "
-          "uguali_med=%d tot_nati=%d ident_male=%d cal=%d uguali_rho=%d vs_med=%d scarto_max=%.6e"
+          "uguali_med=%d tot_nati=%d ident_male=%d cal=%d uguali_rho=%d vs_med=%d "
+          "scarto_max=%.6e nan_fine=%d"
           % (getattr(net, "_g_nati_schwinger_ev", 0), attesi, nan_dopo_mitosi, nan_residui,
              nan_altrove, len(sc), float(np.median(sc)) if len(sc) else -1.0,
              len(dn), float(np.median(dn)) if len(dn) else -1.0,
              float(np.mean(dn == 0.0)) if len(dn) else -1.0,
              uguali_med, tot_nati, ident_male,
              getattr(net, "_g_peqn_cal", 0), getattr(net, "_g_peqn_uguali_rho", 0),
-             getattr(net, "_g_peqn_vs_med", 0), getattr(net, "_g_peqn_scarto_max", -1.0)))
+             getattr(net, "_g_peqn_vs_med", 0), getattr(net, "_g_peqn_scarto_max", -1.0),
+             int(np.sum(~np.isfinite(np.asarray(net.peq, dtype=float))))))
     raise SystemExit(0)
 
 
@@ -164,8 +166,8 @@ def leggi(out):
     m = re.search(r"C2 eventi=(\d+) attesi=(\d+) nan_mitosi=(\d+) nan_residui=(\d+) "
                   r"nan_altrove=(\d+) n_ev=(\d+) disp_dopo=(\S+) n_nasc=(\d+) "
                   r"disp_nascita=(\S+) nasc_zero=(\S+) uguali_med=(\d+) tot_nati=(\d+) "
-                  r"ident_male=(\d+) cal=(\d+) uguali_rho=(\d+) vs_med=(\d+) scarto_max=(\S+)",
-                  out)
+                  r"ident_male=(\d+) cal=(\d+) uguali_rho=(\d+) vs_med=(\d+) "
+                  r"scarto_max=(\S+) nan_fine=(\d+)", out)
     if not m:
         raise SystemExit("output del lavoratore non riconosciuto:\n%s" % out[-800:])
     return dict(eventi=int(m.group(1)), attesi=int(m.group(2)), nan_mit=int(m.group(3)),
@@ -175,7 +177,7 @@ def leggi(out):
                 ug_med=int(m.group(11)), tot_nati=int(m.group(12)),
                 ident_male=int(m.group(13)), cal=int(m.group(14)),
                 ug_rho=int(m.group(15)), vs_med=int(m.group(16)),
-                scarto_max=float(m.group(17)))
+                scarto_max=float(m.group(17)), nan_fine=int(m.group(18)))
 
 
 def main():
@@ -265,17 +267,22 @@ def main():
     #              globale (`vs_med == cal`);
     #   SPENTO  -> il valore E' la mediana globale, su TUTTI gli archi (`ug_med == tot_nati`).
     # Nessun fattore scelto, nessuna soglia: sono uguaglianze e conteggi.
-    ok6 = (C_["cal"] == C_["attesi"] and C_["attesi"] > 0
+    # ⚠ L'EFFETTO DI BORDO, misurato invece che ignorato: gli archi dell'ULTIMO evento
+    #   nascono dopo l'ultimo `step()` e **non sono ancora stati calibrati**. Restano `nan` a
+    #   fine finestra, e il criterio li CONTA: `cal + nan_fine == attesi`. Senza, il sigillo
+    #   avrebbe detto `86 su 88` e sarei andato a cercare un difetto che non c'e'.
+    ok6 = (C_["cal"] + C_["nan_fine"] == C_["attesi"] and C_["attesi"] > 0
            and C_["ug_rho"] == C_["cal"] and C_["vs_med"] == C_["cal"]
            and B_["tot_nati"] > 0 and B_["ug_med"] == B_["tot_nati"]
            and B_["cal"] == 0 and C_["ident_male"] == 0 and B_["ident_male"] == 0)
     esiti.append(("Q6", ok6,
-                  "DIRETTO -- ACCESO: calibrati LOCALMENTE %d su %d attesi, di cui %d uguali alla "
-                  "`rho` del PROPRIO arco e %d DIVERSI dalla mediana globale (scarto max %.3e). "
-                  "SPENTO: %d su %d valori uguali alla MEDIANA. Identificazione sbagliata in %d+%d "
-                  "eventi (deve essere 0)."
-                  % (C_["cal"], C_["attesi"], C_["ug_rho"], C_["vs_med"], C_["scarto_max"],
-                     B_["ug_med"], B_["tot_nati"], C_["ident_male"], B_["ident_male"])))
+                  "DIRETTO -- ACCESO: calibrati LOCALMENTE %d + %d ancora in attesa a fine "
+                  "finestra = %d attesi; di cui %d uguali alla `rho` del PROPRIO arco e %d "
+                  "DIVERSI dalla mediana globale (scarto max %.3e). SPENTO: %d su %d valori "
+                  "uguali alla MEDIANA. Identificazione sbagliata in %d+%d eventi (deve essere 0)."
+                  % (C_["cal"], C_["nan_fine"], C_["attesi"], C_["ug_rho"], C_["vs_med"],
+                     C_["scarto_max"], B_["ug_med"], B_["tot_nati"], C_["ident_male"],
+                     B_["ident_male"])))
 
     print("-" * 94)
     for nome, ok, testo in esiti:
