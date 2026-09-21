@@ -106,6 +106,18 @@ perso**, perche' chi legge il repo da fuori — Claude web, una sessione nuova, 
 lettura del codice, un sigillo che passa o che fallisce, una premessa che cade, **un proprio
 errore** — allora **quel commit tocca anche `RELAZIONE_PER_CLAUDE.md`**. Se non lo tocca, il
 riscontro non e' stato relazionato.
+**⚠ E LA FORMA E' PIU' LARGA DI «OGNI RISCONTRO» — PRECISATA DA LUCA IL 2026-09-21:**
+**TUTTO CIO' CHE SI DICE A LUCA VA ANCHE NEL REPO, COMMITTATO E PUSHATO NELLO STESSO GIRO.**
+Non solo le misure: **ogni RIEPILOGO, ogni CORREZIONE di una cosa gia' scritta, ogni DOMANDA, ogni
+CHECKPOINT.** Se una cosa vive solo in chat, **per Claude web e per una sessione nuova NON E' MAI
+STATA DETTA** — e Luca risponde **ore o giorni dopo**, quando la chat non c'e' piu'.
+**IL SEGNALE D'ALLARME E' LA FRASE «appena finisce, committo»:** il riscontro c'e' **ADESSO**, e
+rimandare e' esattamente cio' che par.5-ter vieta.
+*(CASO REALE, 2026-09-21: l'arco d'innesco `2773-4158` era MISURATO, e con esso DUE correzioni a
+mie affermazioni precedenti — la smentita sbagliata del candidato di Claude web e la
+localizzazione sbagliata del salto. **Le ho dette in chat e lasciate fuori dal repo per mezz'ora**,
+dicendo che avrei committato a fine rigiocata. **Ha dovuto ricordarmelo Luca.**)*
+
 **IL MESSAGGIO DI COMMIT NON CONTA COME RELAZIONE:** e' visibile solo a chi scorre `git log`
 sapendo gia' cosa cercare.
 **⚠ MISURATO DUE VOLTE, e la seconda e' peggio:** il 2026-09-20, **7 relazioni su 52 commit**, e
