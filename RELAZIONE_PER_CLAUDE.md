@@ -10264,3 +10264,59 @@ passi `peq` raggiunge `rho` e `nsub` torna a 4.**
 **NON E' MISURATO che `rho` salga davvero** (servirebbe `rho ~ 5.1e-3` contro il `2.4e-63`
 dell'ingresso: **61 ordini**). Per vederlo serve la misura **dentro `step()`**, che **non esiste** e
 che **richiede di toccare il simulatore**: vietato in questo giro, **e la chiedo a Luca.**
+
+### ⑧ L'ESITO: **passo `1126`, arco `3352-506`, e `peq` E' NEGATIVO**
+
+**La rigiocata dal 1080 e' finita, la soglia e' scattata, lo strumento si e' fermato come promesso.**
+
+```
+ 1125 |           1     1      3           4 |     3.1 s | 1286-244(MV) rho=5.75e-01 peq=1.42e-01 anom=3.064e+00
+ 1126 |       22591     1     15       22591 |  2032.2 s | 3352-506(NV) rho=1.32e-03 peq=-4.85e-04 anom=1.807e+06
+```
+
+**IL PASSO E' IL `1126`. L'ARCO E' `3352-506`, NATO-VUOTO. `peq = -4.85e-04`: NEGATIVO.**
+Quel solo passo e' costato **2032 secondi** contro i `3.1` dei vicini.
+
+> **⚠ RITIRO IL §⑦ QUI SOPRA.** Avevo scritto che l'arco era `2773-4158` e che **la mia smentita del
+> candidato di Claude web era sbagliata**. **Era sbagliata la ritrattazione:** nella stessa riga
+> `1126` quell'arco ha `peq = 2.81e-09` e **`anom = -1.000`**, cioe' e' **innocuo**. **Il candidato
+> resta smentito.**
+> **L'errore non e' l'arco, e' il metodo: ho dedotto il colpevole da `min(peq)` ALL'INGRESSO invece
+> di misurare `argmax|anom|` AL PASSO CHE ESPLODE** — un **surrogato** al posto della grandezza
+> stessa. E non poteva funzionare: **il `peq` del colpevole diventa negativo DENTRO il passo**, e
+> all'ingresso non era affatto il minimo. *(La traiettoria geometrica del §⑦, col suo `tau ~ 5.7`
+> passi, resta giusta: era la conclusione a non seguirne.)*
+
+### LA CAUSA RADICE — **e il difetto era gia' noto, su un'ALTRA grandezza**
+
+**`peq` e' aggiornato con un Eulero esplicito senza guardia** (`:4204-4206`):
+```python
+tau_bg_loc = np.maximum(1.0 / np.maximum(r_arco, 1e-3), 1e-3)
+self.peq += dt_e * ((rho - self.peq) / tau_bg_loc + flusso / TAU_DIFF)
+```
+Se `dt_e/tau_bg_loc > 1` il rilassamento **scavalca il bersaglio**; con `rho < peq`, **sotto zero**.
+
+**Lo stesso identico difetto e' gia' diagnosticato, guardato e CONTATO — su `d0`, sessanta righe piu'
+sotto** (`:4412-4419`): *«il rilassamento `d0 += dt_e*(d-d0)/tau_p` e' un Eulero esplicito, e DIVERGE
+OSCILLANDO se `dt_e/tau_p >= 1`»*, col contatore `_taup_cfl_max` *(misurato `0.0354` nel ramo D,
+comodamente sotto 1)*. **Su `peq` non c'e' ne' la guardia ne' il contatore.**
+
+**E il pavimento `max(peq, 1e-9)` non protegge: e' l'AMPLIFICATORE** (`:4215`).
+
+| | denominatore | `anom` | `n1` |
+|---|---|---:|---:|
+| **col pavimento** *(il codice)* | `max(-4.85e-4, 1e-9) = 1e-9` | **`+1.805e+06`** | **22 591** |
+| senza pavimento | `-4.85e-04` | **`-3.72`** | **1** |
+
+**Un `peq` negativo darebbe un'anomalia NEGATIVA, di richiamo. Il pavimento le RIBALTA IL SEGNO e la
+moltiplica per `3.7e5`.**
+
+**E questo spiega la guarigione:** `nsub = 22591` rende `dts` minuscolo, quindi al passo dopo `peq`
+rientra sopra zero. **Il meccanismo che produce il picco e' anche quello che lo spegne.**
+
+**NON MISURATO, e non lo invento:** **quanti** archi abbiano `peq < 0` *(la rigiocata stampa solo il
+massimo)*; **quale** dei due termini di `:4206` scavalchi *(non sono separati)*; **il valore di
+`dt_e/tau_bg_loc`** su quell'arco *(non esiste un contatore che lo registri, a differenza di `d0`)*.
+**Nessuna cura applicata: il mandato la vieta in questo giro.** **E la cura non e' ovvia:** alzare il
+pavimento maschererebbe il sintomo — **il difetto e' che `peq` esce dal dominio fisico, e una
+grandezza che deve restare `>= 0` non si ripara nel punto in cui la si DIVIDE.**

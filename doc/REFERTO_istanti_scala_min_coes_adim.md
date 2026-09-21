@@ -333,7 +333,16 @@ lo dichiaro invece di aggirarlo.**
 
 ---
 
-## ②-ter — **L'ARCO E' `2773-4158`, ed e' QUELLO CHE AVEVO DICHIARATO REFUTATO**
+## ②-ter — ⚠ **RITIRATA: l'arco NON e' `2773-4158`. Si legge solo col §②-quater**
+
+> **⚠⚠ QUESTA SEZIONE E' SBAGLIATA NELLA CONCLUSIONE e resta leggibile per il METODO che
+> l'ha prodotta.** La rigiocata, finita dopo, dice che l'arco e' **`3352-506`** e che
+> `2773-4158` al passo `1126` ha **`anom = -1.000`**, cioe' e' **innocuo**: il candidato di
+> Claude web **resta smentito**, e la mia ritrattazione era a sua volta sbagliata.
+> **L'errore non e' l'arco, e' il metodo: ho dedotto il colpevole da `min(peq)` ALL'INGRESSO
+> invece di misurare `argmax|anom|` AL PASSO CHE ESPLODE.** Vedi il **§②-quater**.
+
+### *(testo originale, non riscritto)*
 
 > **MISURATO** con `csv/_test_fork/_arco_innesco.py --da=1080 --fino=1126`
 > *(blob `9c22c0f6`; output `csv/_test_fork/_diag_D/ARCO_INNESCO_001080.txt`)*, all'**INGRESSO**
@@ -426,4 +435,96 @@ ordinario**, ma **61 ordini di grandezza sopra** il `2.4e-63` dell'ingresso.
 > **⚠ NON E' MISURATO che `rho` salga davvero cosi'**: per vederlo serve la misura **dentro**
 > `step()`, fra `:4206` e `:4264`, che **oggi non esiste** e che richiederebbe di toccare il
 > simulatore — **cosa che il mandato vieta in questo giro.**
+
+---
+
+## ②-quater — **L'ESITO: passo `1126`, arco `3352-506`, e `peq` E' NEGATIVO**
+
+> **LA RIGIOCATA E' FINITA.** `csv/_test_fork/_rigiocata_1200_1230.py --da=1080`, blob `9c22c0f6`
+> del simulatore `4954fe5b`. **La soglia dichiarata e' scattata e lo strumento si e' fermato, come
+> promesso.**
+
+```
+passo |          n1    n2     n3        nsub | secondi | ARCO con |anom| MASSIMO
+ 1124 |           1     1      3           4 |     3.1 | 1286-244(MV) rho=5.37e-01 peq=1.33e-01 anom=3.028e+00
+ 1125 |           1     1      3           4 |     3.1 | 1286-244(MV) rho=5.75e-01 peq=1.42e-01 anom=3.064e+00
+ 1126 |       22591     1     15       22591 |  2032.2 | 3352-506(NV) rho=1.32e-03 peq=-4.85e-04 anom=1.807e+06
+
+*** n1 = 22591 SUPERA LA SOGLIA 100 AL PASSO 1126: MI FERMO QUI, come dichiarato.
+```
+
+**IL PASSO E' IL `1126`. L'ARCO E' `3352-506`, NATO-VUOTO. E `peq` VALE `-4.85e-04`: E' NEGATIVO.**
+*(Il costo reale di quel solo passo: **2032 secondi**, contro i `3.1` dei passi vicini.)*
+
+### ⚠ RITIRO IL §②-ter: L'ARCO NON E' `2773-4158`, E CLAUDE WEB RESTA SMENTITO
+
+Nel §②-ter avevo scritto che l'arco era **`2773-4158`** e che **la mia smentita del candidato di
+Claude web era sbagliata**. **Era sbagliata la ritrattazione.** Nella stessa riga `1126`, la colonna
+dedicata a quell'arco dice:
+```
+2773-4158:  rho=1.38e-81   peq=2.81e-09   anom=-1.000
+```
+**`anom = -1.000`: innocuo.** *(E il `2.81e-09` e' esattamente il `3.41e-09` dell'ingresso moltiplicato
+per il `0.825` previsto: la traiettoria del §②-ter era giusta, la CONCLUSIONE no.)*
+
+> **L'ERRORE, e non e' l'arco: e' il METODO.** Ho dedotto il colpevole da `min(peq)` **all'ingresso**
+> invece di misurare `argmax|anom|` **al passo che esplode**. **Ho usato un SURROGATO al posto della
+> grandezza stessa** — e il surrogato non poteva funzionare, perche' **il `peq` del colpevole diventa
+> negativo DENTRO il passo**: all'ingresso non era affatto il minimo.
+> **Stessa famiglia dei due errori precedenti su questo stesso punto: misurare accanto invece che
+> dove.**
+
+### LA CAUSA RADICE: **`peq` scavalca lo zero, e il PAVIMENTO lo trasforma in un'esplosione**
+
+**① `peq` E' AGGIORNATO CON UN EULERO ESPLICITO SENZA GUARDIA** (`:4200-4208`):
+```python
+tau_bg_loc = np.maximum(1.0 / np.maximum(r_arco, 1e-3), 1e-3)          # :4204
+self.peq += dt_e * ((rho - self.peq) / tau_bg_loc + flusso / TAU_DIFF)  # :4206
+```
+`tau_bg_loc = 1/r_arco`, **con pavimento `1e-3`**. Se `dt_e/tau_bg_loc` supera `1`, il rilassamento
+**scavalca il bersaglio**; con `rho < peq` lo scavalca **sotto zero**.
+
+**② E LO STESSO IDENTICO DIFETTO E' GIA' DIAGNOSTICATO, GUARDATO E CONTATO — SU `d0`** (`:4412-4419`):
+```python
+# PRESIDIO DI STABILITA', permanente: il rilassamento d0 += dt_e*(d-d0)/tau_p e' un
+# Eulero esplicito, e DIVERGE OSCILLANDO se dt_e/tau_p >= 1. Prima della bonifica il
+# massimo misurato valeva 34629 sullo 0.11 % degli archi.
+...
+self._taup_cfl_max = max(getattr(self, "_taup_cfl_max", 0.0), _cfl)
+```
+> **Stesso schema, stessa modalita' di rottura, stesso file, sessanta righe piu' sotto — e su `peq`
+> NON c'e' ne' la guardia ne' il contatore.** *(`_taup_cfl_max` misurato negli snapshot del ramo D:
+> `0.0354`, comodamente sotto `1`. **Su `peq` quel numero non esiste.**)*
+
+**③ IL PAVIMENTO `max(peq, 1e-9)` NON PROTEGGE: E' L'AMPLIFICATORE.** (`:4215`)
+```python
+anom = (rho - _peq_src) / np.maximum(_peq_src, 1e-9)
+```
+Coi numeri misurati, `rho = 1.32e-03` e `peq = -4.85e-04`:
+
+| | denominatore | `anom` | `n1` |
+|---|---|---:|---:|
+| **col pavimento** *(il codice)* | `max(-4.85e-4, 1e-9) = 1e-9` | **`+1.805e+06`** | **22 591** |
+| senza pavimento | `-4.85e-04` | **`-3.72`** | **1** |
+
+**Il pavimento non attenua: RIBALTA IL SEGNO e moltiplica per `3.7e5`.** Un `peq` negativo darebbe
+una anomalia **negativa** — cioe' di richiamo — e il pavimento la trasforma in una sorgente
+**positiva e gigantesca**.
+*(Verifica: `(1.32e-3 + 4.85e-4)/1e-9 = 1.805e6`, contro il `1.807e6` stampato. Torna.)*
+
+### PERCHE' IL RUN GUARISCE DA SOLO
+
+`nsub = 22591` **rende `dts = dt_e/nsub` minuscolo**, quindi il passo successivo integra con
+`dt_e/tau_bg_loc` di nuovo piccolo e `peq` **rientra sopra zero**. **Il meccanismo che produce il
+picco e' anche quello che lo spegne** — ed e' per questo che il ramo D ha attraversato la finestra
+`1080 -> 1200` in 34 minuti invece di piantarsi.
+
+### COSA NON E' MISURATO, e non lo invento
+
+- **QUANTI archi abbiano `peq < 0`** in quell'istante: la rigiocata stampa **solo il massimo**, e
+  contarli richiede di rigirare il passo *(34 minuti)*. **Non e' noto se sia uno o mille.**
+- **QUALE dei due termini** di `:4206` scavalchi — il rilassamento `(rho-peq)/tau_bg_loc` o la
+  diffusione `flusso/TAU_DIFF`. **Servono separati, e oggi non lo sono.**
+- **il valore di `dt_e/tau_bg_loc`** su quell'arco: e' il numero che deciderebbe se e' un difetto
+  `CFL` puro. **Non esiste un contatore che lo registri** — a differenza di `d0`.
 
