@@ -172,6 +172,99 @@ FERMA_DOPO_NSUB = False   # alza `StopDopoNsub` appena calcolato `nsub`, per NON
                           # un passo esplosivo: il numero si vuole, i 22591 sotto-passi no.
 
 
+class DominioViolato(Exception):
+    """[C5] Una grandezza di stato e' uscita dal suo DOMINIO FISICO.
+
+    Porta **tutto quello che serve per rigiocarla**: la grandezza, la regola violata, il passo,
+    **gli indici** *(arco `i-j` o nodo)*, i **valori**, e la funzione in cui il controllo e'
+    scattato. **Un errore rumoroso vale piu' di uno silenzioso.**
+    """
+
+    def __init__(self, quale, regola, passo, indici, valori, dove, extra=None):
+        self.quale, self.regola, self.passo = quale, regola, passo
+        self.indici, self.valori, self.dove = indici, valori, dove
+        self.extra = extra or {}
+        _idx = ', '.join(str(x) for x in list(indici)[:8])
+        _val = ', '.join('%.6e' % v for v in list(valori)[:8])
+        super().__init__(
+            "[INVARIANTE] `%s` VIOLA `%s` al passo %s, in `%s`.\n"
+            "  quanti: %d\n  indici (primi 8): %s\n  valori (primi 8): %s\n  %s"
+            % (quale, regola, passo, dove, len(indici), _idx, _val,
+               ' '.join('%s=%s' % kv for kv in sorted(self.extra.items()))))
+
+
+# ============================================================================================
+# [C5] IL REGISTRO UNICO DEI DOMINI -- una riga per OGNI grandezza di stato.
+#
+# ⚠ I CONFINI SONO IL DOMINIO FISICO, NON SOGLIE SCELTE (`A11`, corollario 1).
+# ⚠ ANCHE «nessun vincolo, solo FINITO» E' SCRITTO: una grandezza senza regola dichiarata
+#   sarebbe una grandezza di cui nessuno ha pensato il dominio.
+# ⚠ LA COMPLETEZZA SI VERIFICA DAL CODICE, NON DALLA MEMORIA: il sigillo `I3` confronta questo
+#   registro con gli attributi ARRAY dello SNAPSHOT. **Chi aggiunge una grandezza di stato e'
+#   OBBLIGATO a dichiararne il dominio, o il sigillo fallisce.**
+#
+# Forme:  'finito'      nessun NaN, nessun inf
+#         'pos'         > 0        'nonneg'   >= 0
+#         'segno'       in {-1, +1}
+#         'lam'         >= LAM con la scala minima accesa, altrimenti > 0
+#         'indice'      intero in [0, n)
+#         'fase'        in [0, 4*pi)
+#         'unita'       vettore/spinore di norma 1
+DOMINI = {
+    # --- per ARCO
+    'd':        ('lam',    'la lunghezza VERA di un arco'),
+    'd0':       ('lam',    'la lunghezza di RIPOSO di un arco'),
+    'vd':       ('finito', 'velocita di `d`: nessun vincolo di segno, e non deve esserci'),
+    # ⚠ `peq` HA UN'ECCEZIONE DICHIARATA, ed e' un INVARIANTE PIU' FORTE, non piu' debole:
+    #   con `PEQ_NASCITA_LOCALE` gli archi di Schwinger nascono `nan` e vengono CALIBRATI
+    #   all'inizio del passo dopo. Fra la `mitosi()` e quella calibrazione il `nan` e'
+    #   LEGITTIMO -- ma **SOLO sugli archi che `C2` ha marcato**. Un `nan` ALTROVE, o un `nan`
+    #   che SOPRAVVIVE a un passo, e' una VIOLAZIONE.
+    #   **Trovato dall'invariante stesso al PRIMO passo in cui e' stato acceso:** e' il
+    #   mestiere di `C5`, e la risposta giusta non e' allargare la regola ma PRECISARLA.
+    'peq':      ('peq',    'la pressione di equilibrio: >= 0, e `nan` SOLO sugli archi marcati'),
+    'tw':       ('finito', 'torsione d arco: puo essere di entrambi i segni'),
+    'twp':      ('finito', 'torsione precedente'),
+    '_rep':     ('finito', 'memoria di repulsione d arco'),
+    '_sin2_vir':('finito', 'sin^2 della viriale: in [0,1] per costruzione, si verifica FINITO'),
+    '_dt_e_ultimo': ('pos', 'il passo di tempo efficace d arco: un tempo e POSITIVO'),
+    'i':        ('indice', 'indice di NODO del lato i di ogni arco'),
+    'j':        ('indice', 'indice di NODO del lato j di ogni arco'),
+    # --- per NODO
+    'psi':      ('finito', 'campo di materia complesso'),
+    'phi':      ('fase',   'fase, a doppia copertura: il dominio E [0, 4pi)'),
+    'phi0':     ('fase',   'fase di riferimento'),
+    'phi_s':    ('finito', 'fase spinoriale: nessun vincolo dichiarato oltre la finitezza'),
+    'phivel':   ('finito', 'velocita di fase: entrambi i segni'),
+    'eta':      ('nonneg', 'eta di un nodo: un ETA non e negativa'),
+    'pos':      ('finito', 'posizione di DISEGNO: nessun vincolo fisico'),
+    'perc_chi': ('segno',  'la CARICA: segno di doppia copertura, in {-1,+1}'),
+    'perc_geom':('segno',  'la GEOMETRIA: il giro e compiuto o no, in {-1,+1}'),
+    'perc_tw':  ('finito', 'percentuale di torsione'),
+    'rho_spin': ('nonneg', 'densita spinoriale: una DENSITA non e negativa'),
+    'omega_s':  ('finito', 'velocita angolare spinoriale: entrambi i segni'),
+    'mem_mot':  ('finito', 'memoria di moto'),
+    '_deg':     ('nonneg', 'grado di un nodo: un CONTEGGIO non e negativo'),
+    '_cs_nodo_prev': ('pos', 'velocita delle onde metriche: una VELOCITA e positiva'),
+    '_r_corrente':   ('pos', 'ritmo dell orologio locale: un RITMO e positivo'),
+    '_fatt_cs_ultimo': ('pos', 'fattore di cs: positivo per costruzione'),
+    '_psi_prec':  ('finito', 'psi del passo precedente'),
+    '_psi_spinor':('unita',  'lo spinore primario: |psi| = 1'),
+    '_psi_spin_prec': ('finito', 'spinore del passo precedente'),
+    'psi_spin':   ('finito', 'spinore ricostruito nel passo'),
+    '_spinor_lift': ('finito', 'sollevamento spinoriale'),
+    '_nb':      ('unita',  'versore di Bloch: |n| = 1'),
+    '_nb_prec': ('unita',  'versore di Bloch committato'),
+    '_nb_ret':  ('unita',  'versore di Bloch RITARDATO'),
+    '_xi_rumore': ('finito', 'rumore colorato'),
+    '_chi_core_nodi':   ('finito', 'chiralita del core locale'),
+    '_chi_geom_nodi':   ('finito', 'chiralita GEOMETRICA, cache separata (CHI_COOP)'),
+    '_chi_core_rho0':   ('finito', 'densita di riferimento del core'),
+    '_chi_core_raggio': ('nonneg', 'raggio del core: un RAGGIO non e negativo'),
+    '_perm':    ('finito', 'permutazione di cache: non e fisica, si verifica finita'),
+}
+
+
 class StopDopoNsub(Exception):
     """DIAGNOSTICO: interrompe `step()` subito dopo il calcolo di `nsub`.
 
@@ -951,6 +1044,17 @@ PEQ_ESATTO = False      # IL RILASSAMENTO DI `peq` IN FORMA ESATTA (2026-09-21, 
                         #   piu' un SEGNO ma solo lo zero, e toglierlo richiede la forma
                         #   simmetrica, che e' UN'ALTRA cura e ha IL SUO POLO.
                         # OFF = byte-identico.
+INVARIANTI = True       # GLI INVARIANTI: il programma si FERMA quando una grandezza esce dal
+                        # suo dominio, e dice DOVE (2026-09-21, C5, decisione di Luca).
+                        # ⚠ ACCESO DI DEFAULT. **Legge soltanto: su un run sano non cambia un
+                        #   bit.** Si spegne con `--invarianti=off`, che serve a RIGIOCARE i run
+                        #   dell'epoca 1 e 2, i quali violano regole oggi note *(il `peq`
+                        #   negativo al passo 1126)* e che si vogliono riprodurre COM'ERANO.
+                        # PERCHE' DUE LIVELLI, e il primo da solo NON BASTA:
+                        #   l'esplosione del 2026-09-21 **NON era un overflow** -- `1.8e6` e' un
+                        #   numero normale per il computer. Un controllo sui soli errori
+                        #   NUMERICI non l'avrebbe vista. **L'avrebbe vista una regola FISICA:
+                        #   `peq` non puo' essere negativo.**
 ANOM_SIMM = False       # L'ANOMALIA SIMMETRICA, SENZA PAVIMENTO (2026-09-21, C1-bis).
                         # FORMA:  anom = 2*(rho - peq) / (rho + peq),  e `0/0 := 0`.
                         # DIFETTO CURATO: `(rho-peq)/max(peq, 1e-9)` usa un PAVIMENTO SCELTO
@@ -3434,6 +3538,99 @@ class Rete:
                                    + int(np.sum(_s & (_e < _d))))
         return eff
 
+    def verifica_invarianti(self, dove='fine passo', passo=None):
+        """[C5] Ogni grandezza di stato dentro il suo DOMINIO. Alza `DominioViolato`.
+
+        **Legge soltanto.** Operazioni vettoriali su tutto lo stato: il costo e' piccolo e va
+        MISURATO, non stimato -- il sigillo `I1` lo fa.
+
+        ⚠ SI FERMA AL PRIMO DOMINIO VIOLATO, e riporta **gli indici**: senza quelli si saprebbe
+          *che* e' successo ma non *dove*, e la rigiocata non avrebbe un bersaglio.
+        """
+        if not INVARIANTI:
+            return 0
+        self._g_inv_giri = getattr(self, '_g_inv_giri', 0) + 1
+        passo = self._g_inv_giri if passo is None else passo
+        n = self.n
+        _lam_attivo = SCALA_MIN or SCALA_MIN_PASSO
+        controllate = 0
+        for quale, (forma, _perche) in DOMINI.items():
+            v = getattr(self, quale, None)
+            if v is None:
+                continue
+            v = np.asarray(v)
+            if v.size == 0:
+                continue
+            controllate += 1
+            # --- il livello FISICO
+            if forma == 'peq':
+                vf = v.astype(float, copy=False)
+                _nan = ~np.isfinite(vf)
+                _amm = np.zeros(len(vf), dtype=bool)
+                _marca = getattr(self, '_peqn_idx', None)
+                if PEQ_NASCITA_LOCALE and _marca is not None and len(_marca):
+                    _m = np.asarray(_marca)
+                    _amm[_m[_m < len(vf)]] = True
+                self._g_inv_peq_nan_ok = (getattr(self, '_g_inv_peq_nan_ok', 0)
+                                          + int(np.sum(_nan & _amm)))
+                cattivo = (_nan & ~_amm) | (np.isfinite(vf) & (vf < 0.0))
+                regola = ('>= 0, e `nan` SOLO sugli archi marcati da PEQ_NASCITA_LOCALE '
+                          '(ammessi ora: %d)' % int(np.sum(_amm)))
+            elif forma == 'indice':
+                cattivo = (v < 0) | (v >= n)
+                regola = '0 <= x < n (n = %d)' % n
+            elif np.iscomplexobj(v):
+                cattivo = ~np.isfinite(v.real) | ~np.isfinite(v.imag)
+                regola = 'finito (complesso)'
+            else:
+                vf = v.astype(float, copy=False)
+                fin = np.isfinite(vf)
+                if forma == 'finito':
+                    cattivo = ~fin; regola = 'finito'
+                elif forma == 'pos':
+                    cattivo = ~fin | (vf <= 0.0); regola = '> 0'
+                elif forma == 'nonneg':
+                    cattivo = ~fin | (vf < 0.0); regola = '>= 0'
+                elif forma == 'segno':
+                    cattivo = ~np.isin(v, (-1, 1)); regola = 'in {-1, +1}'
+                elif forma == 'fase':
+                    cattivo = ~fin | (vf < 0.0) | (vf >= 4.0 * np.pi)
+                    regola = 'in [0, 4*pi)'
+                elif forma == 'lam':
+                    if _lam_attivo:
+                        # ⚠ la tolleranza e' l'ARROTONDAMENTO di `LAM`, non un numero scelto
+                        cattivo = ~fin | (vf < LAM * (1.0 - 1e-12))
+                        regola = '>= LAM (= %.6f), con la scala minima accesa' % LAM
+                    else:
+                        cattivo = ~fin | (vf <= 0.0); regola = '> 0 (scala minima SPENTA)'
+                elif forma == 'unita':
+                    nrm = np.sqrt(np.sum(np.abs(v) ** 2, axis=-1)) if v.ndim > 1 \
+                        else np.abs(v)
+                    cattivo = ~np.isfinite(nrm) | (np.abs(nrm - 1.0) > 1e-6)
+                    regola = '|x| = 1 (tolleranza 1e-6)'
+                else:
+                    cattivo = ~fin; regola = 'finito'
+            cattivo = np.asarray(cattivo)
+            if cattivo.ndim > 1:
+                cattivo = np.any(cattivo, axis=tuple(range(1, cattivo.ndim)))
+            if not np.any(cattivo):
+                continue
+            idx = np.where(cattivo)[0]
+            vals = np.asarray(v)[idx]
+            if vals.ndim > 1:
+                vals = vals.reshape(len(idx), -1)[:, 0]
+            extra = dict(quanti=int(len(idx)), su=int(len(cattivo)))
+            # ⚠ se e' una grandezza per ARCO, si riportano anche i due NODI: un indice d'arco
+            #   da solo non dice DOVE, perche' gli archi si riordinano a ogni mitosi.
+            if len(cattivo) == len(self.d) and len(self.i) == len(self.d):
+                k0 = int(idx[0])
+                extra['arco'] = '%d-%d' % (int(self.i[k0]), int(self.j[k0]))
+            self._g_inv_violati = getattr(self, '_g_inv_violati', 0) + 1
+            raise DominioViolato(quale, regola, passo, idx,
+                                 np.abs(vals).astype(float), dove, extra)
+        self._g_inv_controllate = controllate
+        return controllate
+
     def _smp_apri(self):
         """[SCALA_MIN_PASSO] Fotografa `d0` a INIZIO PASSO. Da qui si misurera' la variazione
         TOTALE, una volta sola."""
@@ -5834,6 +6031,9 @@ class Rete:
         # [SCALA_MIN_PASSO, C3] IL FRENO SU `d0`, UNA VOLTA SOLA, a fine ciclo. `memoria_
         # hebbiana_moto` e' l'ULTIMA chiamata del passo nel driver e nelle rigiocate sigillate.
         self._smp_chiudi()
+        # [C5] IL CONTROLLO GIRA A FINE PASSO, su TUTTO lo stato. `memoria_hebbiana_moto` e'
+        #   l'ULTIMA chiamata del ciclo nel driver e nelle rigiocate sigillate.
+        self.verifica_invarianti(dove='memoria_hebbiana_moto')
 
     def diagnostica(self):
         I = self.intensita()
@@ -6919,6 +7119,7 @@ def _applica_flag(a):
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
     global PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO, COES_CAUSALE, ANOM_SIMM
+    global INVARIANTI
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, SCALA_MIN, COES_ADIM, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
@@ -6988,6 +7189,7 @@ def _applica_flag(a):
     SCALA_MIN_PASSO = bool(getattr(a, "scala_min_passo", False))   # freno una volta per passo (C3)
     COES_CAUSALE = bool(getattr(a, "coes_causale", False))         # coesione causale (C4)
     ANOM_SIMM = bool(getattr(a, "anom_simm", False))               # anomalia simmetrica (C1-bis)
+    INVARIANTI = (str(getattr(a, "invarianti", "on")).lower() != "off")   # gli invarianti (C5)
     CHI_COOP = bool(getattr(a, "chi_coop", False))                 # cooperazione: chi_basc -> perc_geom, spinore -> perc_chi
     if CHI_DA_SPINORE and not SPINORE_CORRETTO:
         raise SystemExit("[errore] --chi-da-spinore richiede --spinore-corretto (senno' loop di feedback perc_chi->spinore->perc_chi)")
@@ -7004,6 +7206,23 @@ def _applica_flag(a):
               "DISCESA -- incremento >= 0 intatto bit per bit, incremento < 0 moltiplicato per "
               "max(0, 1-LAM/x). I sette pavimenti di d0 SPARISCONO; le nascite partono da LAM; "
               "per d la regola va sull incremento del Verlet. Zero coefficienti.")
+    if not INVARIANTI:
+        print("[invarianti] *** SPENTI su richiesta (--invarianti=off). Il programma NON si "
+              "fermera' quando una grandezza esce dal suo dominio fisico. Serve a RIGIOCARE i "
+              "run delle epoche 1 e 2, che violano regole oggi note (il peq negativo al passo "
+              "1126) e che si vogliono riprodurre COM'ERANO. ***")
+    else:
+        # LIVELLO NUMERICO: un'eccezione con la RIGA ESATTA, invece di un `nan` che viaggia.
+        # ⚠ L'UNDERFLOW **NON** si ferma: densita' come `1e-81` di un nodo neonato sono
+        #   LEGITTIME. Si conta e basta.
+        np.seterr(over='raise', divide='raise', invalid='raise', under='ignore')
+        print("[invarianti] ACCESI (default). DUE LIVELLI: NUMERICO -- overflow, divisione per "
+              "zero e valori non validi alzano un'eccezione con la riga esatta; l'UNDERFLOW NON "
+              "ferma niente, perche' densita' come 1e-81 di un nodo neonato sono LEGITTIME. "
+              "FISICO -- ogni grandezza di stato dentro il suo dominio, a fine passo, con gli "
+              "INDICI e i valori. L'esplosione del 21/9 NON era un overflow (1.8e6 e' un numero "
+              "normale): l'avrebbe presa solo la regola FISICA `peq >= 0`. Legge soltanto: su "
+              "un run sano non cambia un bit.")
     if ANOM_SIMM:
         print("[anom-simm] L'ANOMALIA SIMMETRICA, SENZA PAVIMENTO: "
               "anom = 2*(rho-peq)/(rho+peq), con `0/0 := 0` DEFINITO (precedente: scala_p, "
@@ -7542,6 +7761,16 @@ def _cli():
                         "LOCALE dell'arco invece che su I_med (media globale, A2), e lo spostamento e' "
                         "passo_causale * tanh(...) * filtro_portata, con |F| <= 1 per costruzione invece "
                         "che per clip. Sostituisce il clip tanh(stress)*d0. Default off = byte-identico.")
+    p.add_argument("--invarianti", dest="invarianti", default="on",
+                   choices=["on", "off"],
+                   help="GLI INVARIANTI (C5). ACCESI DI DEFAULT: il programma si FERMA al primo "
+                        "passo in cui una grandezza esce dal suo DOMINIO FISICO, e dice DOVE "
+                        "(grandezza, regola, passo, INDICI, valori, funzione). Due livelli: "
+                        "NUMERICO (overflow/divisione per zero/valori non validi) e FISICO (il "
+                        "registro DOMINI). L underflow NON ferma niente: densita come 1e-81 di "
+                        "un nodo neonato sono legittime. Legge soltanto: su un run sano non "
+                        "cambia un bit. --invarianti=off serve a RIGIOCARE i run delle epoche 1 "
+                        "e 2, che violano regole oggi note e si vogliono riprodurre COM ERANO.")
     p.add_argument("--anom-simm", action="store_true", dest="anom_simm",
                    help="ANOMALIA SIMMETRICA SENZA PAVIMENTO: anom = 2*(rho-peq)/(rho+peq), con "
                         "0/0 := 0 DEFINITO. Toglie il pavimento max(peq,1e-9), che e' un numero "
