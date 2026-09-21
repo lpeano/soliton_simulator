@@ -35,6 +35,12 @@ _presidio.avvia(__file__)
 
 RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
 SIM_ORA = os.path.join(RADICE, "soliton_simulator.py")
+# ⚠ IL TERMINE DI PARAGONE E' IL COMMIT *PRIMA* DELLA PATCH, NON `HEAD`.
+#   Col codice gia' committato, `HEAD` E' il file sul disco: `T1` passerebbe per TAUTOLOGIA
+#   -- la stessa classe del falso PASS gia' catalogata (*«max|A-B| = 0 puo' significare
+#   nessun confronto»*, par.9). Il blob atteso si VERIFICA, non si assume.
+COMMIT_PRIMA = "f94cd42"
+BLOB_PRIMA = "4954fe5b"      # sha1 dei BYTE GREZZI, non `git hash-object`
 PASSI = 30
 CAMPI = ("d0", "d", "vd", "psi", "phi", "eta", "peq", "perc_chi", "perc_geom",
          "tw", "omega_s", "pos")
@@ -118,23 +124,28 @@ def main():
     base = os.path.join(RADICE, "csv", "_seal_fork", "_sig_traccia_peq")
     os.makedirs(base, exist_ok=True)
 
-    q = subprocess.run(["git", "cat-file", "-p", "HEAD:soliton_simulator.py"],
+    q = subprocess.run(["git", "cat-file", "-p",
+                        "%s:soliton_simulator.py" % COMMIT_PRIMA],
                        cwd=RADICE, capture_output=True)
     if q.returncode != 0:
-        raise SystemExit("non riesco a estrarre il simulatore committato")
+        raise SystemExit("non riesco a estrarre il simulatore di %s" % COMMIT_PRIMA)
+    _bp = hashlib.sha1(q.stdout).hexdigest()[:8]
+    if _bp != BLOB_PRIMA:
+        raise SystemExit("[sigillo] il blob di %s e' %s, atteso %s: il termine di paragone"
+                         " NON e' quello dichiarato." % (COMMIT_PRIMA, _bp, BLOB_PRIMA))
     prima = os.path.join(base, "_sim_committato.py")
     with open(prima, "wb") as fh:
         fh.write(q.stdout)
     with open(SIM_ORA, "rb") as fh:
         ora = fh.read()
-    print("sim COMMITTATO (HEAD) : sha1 GREZZO %s" % hashlib.sha1(q.stdout).hexdigest()[:8])
+    print("sim PRIMA (%s)   : sha1 GREZZO %s" % (COMMIT_PRIMA, _bp))
     print("sim SUL DISCO         : sha1 GREZZO %s" % hashlib.sha1(ora).hexdigest()[:8])
     print("(byte grezzi, NON `git hash-object`: sono due numeri diversi, C18)\n")
 
     pA = os.path.join(base, "A_committato.npz")
     pB = os.path.join(base, "B_disco_spento.npz")
     pC = os.path.join(base, "C_disco_sonda.npz")
-    print("braccio A   simulatore COMMITTATO, argv del ramo D")
+    print("braccio A   simulatore di PRIMA della patch, argv del ramo D")
     gira(prima, pA)
     print("braccio B   simulatore SUL DISCO,  diagnostici SPENTI")
     gira(SIM_ORA, pB)
@@ -147,13 +158,13 @@ def main():
     f1, c1 = confronta(pA, pB)
     ok1 = (not f1) and c1 >= 10
     esiti.append(("T1", ok1,
-                  "diagnostici SPENTI = committato: %d campi confrontati -> %s"
+                  "diagnostici SPENTI = PRIMA della patch: %d campi -> %s"
                   % (c1, "BYTE-IDENTICI" if not f1 else "DIVERSI: %s" % f1[:5])))
 
     f2, c2 = confronta(pA, pC)
     ok2 = (not f2) and c2 >= 10
     esiti.append(("T2", ok2,
-                  "TRACCIA_PEQ ACCESO = committato: %d campi -> %s   [PURE-READ]"
+                  "TRACCIA_PEQ ACCESO = PRIMA della patch: %d campi -> %s  [PURE-READ]"
                   % (c2, "BYTE-IDENTICI" if not f2 else "DIVERSI: %s" % f2[:5])))
 
     import re
