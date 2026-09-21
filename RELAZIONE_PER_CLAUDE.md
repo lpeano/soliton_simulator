@@ -3,6 +3,37 @@
 > **Ogni numero misurato PRIMA appartiene all'EPOCA 1 e NON si confronta con l'epoca 2.**
 > `EPOCA 2 = blob del simulatore del tag (`4954fe5b`, byte grezzi) + configurazione con `CHI_COOP`, `SCALA_MIN`, `COES_ADIM` ACCESI`. **Un run a flag spenti su quel blob e' ancora EPOCA 1**, e non e' un'opinione: lo provano `Z1` e `Z1c`, byte-identici.
 
+> ### ⚠ CORREZIONE DEL 2026-09-21 — **la frase qui sopra e' IMPRECISA, e la lascio leggibile**
+> **Cio' che avevo scritto:** *«un run a flag spenti su quel blob e' ancora EPOCA 1, lo provano `Z1`
+> e `Z1c`».* **VALE SOLO CON L'ARGV NUDO.**
+> **Perche' e' sbagliata:** `Z1c` confronta contro **«PRIMA + la cura del mondo»**, non contro
+> **«PRIMA»** — la cura e' innestata su ENTRAMBI i bracci di proposito, senno' il sigillo misurerebbe
+> LEI invece dei tre flag. **Quindi `Z1c` NON dice nulla sull'equivalenza con l'epoca 1.** A dirlo e'
+> `Z1b`, che misura la differenza: **`n` 2569 -> 2580, archi 527 308 -> 526 202.** La cura e'
+> **categoria D** e fa finalmente agire gli **otto** flag sul vuoto.
+>
+> **LA CLASSIFICAZIONE CORRETTA, in quattro righe:**
+> ```
+> EPOCA 1       blob PRECEDENTE al tag, qualunque configurazione
+>
+> EPOCA 1       blob del tag, argv NUDO, tre flag spenti
+>               -> byte-identico, lo prova Z1
+>
+> EPOCA 1-bis   blob del tag, argv del FORK, tre flag spenti
+>               -> NON e' epoca 1: e' epoca 1 CON LA CURA DEL MONDO.
+>                  Il vuoto nasce coi flag del run invece che coi default. Lo misura Z1b.
+>
+> EPOCA 2       blob del tag + CHI_COOP, SCALA_MIN, COES_ADIM ACCESI
+> ```
+>
+> **⚠ LA CONSEGUENZA PRATICA, ed e' operativa:** **i run del FORK di epoca 1 NON si riproducono sul
+> blob nuovo, nemmeno a flag spenti** — **e NON E' UN DIFETTO.** Chi vuole rigirarli deve usare il
+> **blob PRECEDENTE** (`git cat-file -p <commit>:soliton_simulator.py`, scritto in BINARIO).
+>
+> **Il tag NON si sposta e NON si riscrive:** un tag pubblicato che cambia sotto i piedi e' peggio
+> dell'imprecisione. La correzione vive qui e in una `git notes` sul commit del tag.
+
+
 # RELAZIONE — per Claude web · **aggiornata 2026-09-20 (sera)**
 
 > **Scritta per Claude web**, che legge il repo e non ha la conversazione.
