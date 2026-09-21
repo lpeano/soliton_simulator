@@ -9846,3 +9846,36 @@ un NATO, contro lo **0.04 %** di quelli massa-massa.
 **⚠ NON e' dimostrato che sia QUESTA la causa dell'esplosione di `n1`**: la catena
 *«nato -> `peq` piccolo -> `anom` grande -> `n1` grande»* e' **plausibile e non misurata**, e al
 passo 1200 `anom` vale ancora `7.33`.
+
+---
+
+## §1 — **il run S dice che il CRICCHETTO da solo NON fa scappare `d0`**
+
+**Riscontro relazionato nello stesso commit.** `SCALA_MIN` acceso, **`COES_ADIM` SPENTO**,
+`CHI_COOP` acceso — **flag verificati DAL MODULO all'avvio**. 300 passi, 5 snapshot, 0 falliti.
+
+```
+ passo |     med d    med d0    d/d0    d<LAM
+    60 |    1.0215    0.8905  1.0705        0
+   120 |    1.3548    0.8101  1.6300        0
+   180 |    1.6233    0.8046  1.9565        0
+   240 |    1.8094    0.8035  2.2158        0
+   300 |    2.0324    0.8083  2.4834        0
+```
+
+### Il confronto fra i tre, alla stessa base di EPOCA 2
+| | `SCALA_MIN` | `COES_ADIM` | `med d0` | `d/d0` | archi sotto `LAM` |
+|---|---|---|---|---|---|
+| **C** | off | off | **~0.83, piatto** | sale a **3.55** | **55 909 -> 35** |
+| **S** | **ON** | off | **~0.80, piatto** | sale a **2.48** | **ZERO, sempre** |
+| **D** | **ON** | **ON** | **2.0 -> 30.3** | **scende a 0.82** | **ZERO, sempre** |
+
+> **`d0` NON scappa con `SCALA_MIN` da solo.** La lettura fissata prima diceva: *se `d0` scappa
+> solo in S -> e' il cricchetto*. **Non scappa: il cricchetto da solo e' ESCLUSO.**
+
+**E c'e' un risultato positivo per `SCALA_MIN`, isolato per la prima volta:** **elimina i 55 909
+archi sotto `LAM` del ramo C — e lo fa SENZA far scappare `d0`.** Fa esattamente cio' che dichiara,
+e nient'altro.
+
+**Resta da girare il run K** *(solo `COES_ADIM`)*: se `d0` scappa li', il colpevole e' il
+contrappeso perso; se non scappa nemmeno li', **e' l'INTERAZIONE fra i due**, e va detto cosi'.

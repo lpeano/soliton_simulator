@@ -583,3 +583,14 @@ ramo B (chi_basc OFF):
 - *2026-09-21 12:57:51* — ⚠ DIVERGENZA: nsub = 22591 contro il pavimento 4, catturato con py-spy dump --locals sul PID 19912 (PROCESSO NON UCCISO). Il vincolo vincente e' n1 = 22591 (la SORGENTE), mentre n3 = 3 e n2 = 1: NON e' |vd| a esplodere. Stessa firma del ramo B, ma li' chi_basc era SPENTO e qui e' ACCESO con le tre modifiche attive. Il processo calcola (8.4 s CPU su 12 s reali): e' LENTO, non morto. Ultimo dato pulito: frame 185 a 20.537 s/frame; ultimo snapshot su disco: passo 1080 (9 file). A questo nsub i 315 frame restanti sono GIORNI. Referto: doc/REFERTO_nsub_ramoD.md, voce Z90.
 
 **chiuso 2026-09-21 13:14:20 — FERMATO** Fermato al frame 205 di 500 (passo 1230) dopo py-spy dump. nsub = 22591 con n1 = 22591 (la SORGENTE), n2 = 1, n3 = 3: a quel ritmo i 295 frame restanti erano GIORNI. ARCHIVIO INTATTO: 10 snapshot (120..1200), tutti apribili, zero .tmp orfani, ed e arrivato anche il 1200 che al momento della diagnosi mancava. I DATI SERVONO e sono gia analizzati: csv/_analisi_ramoD.py, output in csv/_test_fork/_diag_D/ANALISI_ramoD_2026-09-21.txt. RISULTATO PRINCIPALE: i due flag hanno INVERTITO il regime rispetto al solo CHI_COOP -- da TENSIONE con d0 inchiodato a 0.83 e 55909 archi sotto LAM, a COMPRESSIONE con d0 a 30 e ZERO archi sotto LAM. E peq CROLLA di 14 ordini (1.38e-14 al passo 1200) subito prima dell esplosione di n1.
+
+## APERTO run_S_solo_scalamin
+
+- **avvio** `2026-09-21 13:25:11` · **blob** `26fa354d (git) / 4954fe5b (byte grezzi)` · **HEAD** `5ab29e6`
+- **comando**
+  ```
+  python csv/_test_fork/_scena_video.py 50 csv/_test_fork/_run_S --sep=4.0 --serie=10 --csv-progresso=csv/_test_fork/_run_S/prog.csv --chi-coop=on --scala-min=on --coes-adim=off
+  ```
+- **note** §1 del mandato: CHI DEI DUE fa scappare d0. RUN S = SOLO SCALA_MIN (COES_ADIM SPENTO), 50 frame = 300 passi. TRACCIA_D0 va acceso a mano nel driver? NO: si accende dal simulatore, e il driver non lo passa -- verificato, quindi questo run misura d0 SENZA la traccia per scrittore. LETTURE FISSATE PRIMA: se d0 scappa solo in S -> e' il CRICCHETTO di SCALA_MIN; solo in K -> e' il contrappeso perso di COES_ADIM; in entrambi -> tutte e due; in nessuno -> e' l'INTERAZIONE. Uno alla volta, MAI in parallelo.
+
+**chiuso 2026-09-21 14:31:19 — FINITO** 50 frame = 300 passi, 17.340 s/frame, 5 snapshot su 5, 0 falliti, 0.18 GB. RISULTATO: d0 NON SCAPPA con SCALA_MIN da solo -- med d0 resta 0.89, 0.81, 0.80, 0.80, 0.81 mentre med d cresce da 1.02 a 2.03 e d/d0 sale a 2.48 (TENSIONE). E ZERO archi sotto LAM a ogni snapshot, contro i 55909 del ramo C senza i due flag: SCALA_MIN fa il suo mestiere SENZA far scappare d0. Il cricchetto DA SOLO non spiega la fuga del ramo D.
