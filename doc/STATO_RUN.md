@@ -7,8 +7,8 @@
 |---|---|---|---|
 | 1 | `CHI_COOP` (carica dallo spinore, geometria da `chi_basc`) | perentorio ① | ✅ **FATTO**, sigillo `8/8` |
 | 2 | `SCALA_MIN` + `COES_ADIM`, codice e driver | perentorio ②③ | ✅ **FATTO**, `11b6431` |
-| 3 | **sigillo unico `Z0`-`Z7`** | perentorio | ⛔ **`8/9`** — `Z4a` **CORRETTO e PASSATO** *(`Z86` chiusa)*; **resta `Z4b`** *(`min(d) = 0.076` contro `LAM = 0.8`)*, **causa TROVATA** *(`Z87`: il vuoto nasce all'`import`, prima che la fisica sia configurata)* ma **cura NON applicata: e' una decisione di STRUTTURA che aspetta Luca.** **FERMO QUI.** |
-| 4 | **lancio del ramo D** | perentorio | ⏸ **BLOCCATO** dal punto 3 |
+| 3 | **sigillo unico `Z0`-`Z8`** | perentorio | ✅ **`11/11`** — `d69e5bae` sul simulatore `4954fe5b`. `Z1` **ri-ancorata all'argv NUDO** *(piu' severa: e' il caso in cui la cura non PUO' avere effetto)*; `Z8` nuovo: la ricostruzione del mondo e' **neutra**. |
+| 4 | **lancio del ramo D** | perentorio | ▶ **IN CORSO** — presidi verificati: componenti = **1**, `min(d) = min(d0) = LAM`, `d/d0 = 1.000000`, ⚠ **disco 5.9 GB liberi (99% pieno)** |
 | 5 | tag `epoca-2` + righe di stato + regola in `CLAUDE.md` | EPOCA | ⏸ dopo il punto 4 *(le etichette del registro: ✅ fatte, 150/150)* |
 | 6 | strumento cosmologico `M1`-`M4`, e `M1`/`M4` **leggeri** durante il run | COSMOLOGICO | ⏸ dopo il punto 4 |
 | 7 | **`Z47` PARTE ①** — ricognizione di `pos` nella fisica *(sola lettura)* | `MANDATO_Z47_coda` | ⏸ condizione d'avvio: D lanciato **e** punti 5-6 fatti |

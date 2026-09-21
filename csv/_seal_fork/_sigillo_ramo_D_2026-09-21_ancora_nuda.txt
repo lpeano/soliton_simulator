@@ -1,0 +1,45 @@
+[TIMBRO] _sigillo_ramo_D.py  sha1-BYTE d69e5bae  committato e pulito
+Z0  simulatore PRIMA (0f4fc1e): sha1 GREZZO 54623593
+Z0  simulatore ORA            : sha1 GREZZO 4954fe5b
+Z0  (NB: NON e' `git hash-object`. Sono due numeri diversi per lo stesso file, C18.)
+
+Z8    PASS   LA RICOSTRUZIONE DEL MONDO E' NEUTRA: con ogni flag al DEFAULT, il mondo ricostruito e' BYTE-IDENTICO a quello dell'import (9 campi, 900 nodi, 59730 archi) -> nessuno
+
+braccio A_prima        flag: (nessuno)
+braccio B_spenti       flag: (nessuno)
+braccio C1_scalamin    flag: scala-min
+braccio C2_coesadim    flag: coes-adim
+braccio C3_chicoop     flag: chi-coop
+braccio D_tutti        flag: scala-min, coes-adim, chi-coop
+
+braccio A0_nudo        simulatore PRIMA, ARGV NUDO (nessun flag)
+braccio B0_nudo        simulatore ORA,   ARGV NUDO (nessun flag)
+
+Z1    PASS   ARGV NUDO (ogni flag al default): 10 campi -> BYTE-IDENTICI
+Z1b   PASS   [INFORMATIVO, NON CRITERIO] con l'argv del FORK la differenza c'e' ed e' ATTESA -- e' L'EFFETTO DELLA CURA, cioe' gli otto flag che finalmente agiscono sul vuoto: ['d0(shape (527308,) vs (526202,))', 'd(shape (527308,) vs (526202,))', 'vd(shape (527308,) vs (526202,))', 'psi(shape (2569,) vs (2580,))']
+      scala-min    da solo: 10 campi su 10 differiscono da tutto-spento
+      coes-adim    da solo: 10 campi su 10 differiscono da tutto-spento
+      chi-coop     da solo: 10 campi su 10 differiscono da tutto-spento
+Z2    PASS   ogni flag DA SOLO produce un effetto (nessuno e' codice morto)
+Z3    PASS   torsione su perc_geom 30, campo B su perc_chi 30; chi_basc -> perc_geom 30 volte e perc_chi 0; carica == doppia copertura in 30 passi su 30
+Z4a   PASS   IL VINCOLO NON CREA MOVIMENTO: incrementi >= 0 toccati 0 volte (0); max(dx_eff) sulle DISCESE = -0.0 (<= 0: non spinge mai verso l'alto); discese APPROFONDITE 0 (0)
+Z4b   PASS   min(d) = 0.800000000, min(d0) = 0.800168050, LAM = 0.800000000
+Z4c   PASS   stress |d-d0|/d0 massimo: 2.105091e+00
+Z4d   PASS   [SI RIPORTA SEMPRE] casi patologici dx <= -x: 0; pavimenti vecchi SALTATI: 175
+Z5    PASS   |delta d0| massimo 1.050075e-02  <=  passo_causale 1.131371e-02   (saturi: 0 su 15783816 = 0.00%)
+Z6    PASS   tutti accesi: array con lunghezza != n -> nessuno ; NaN/inf -> nessuno
+
+  (informazione, non criterio) con tutti e tre accesi:
+    min(d) = 0.8   min(d0) = 0.801567279929   stress max = 5.084397e-01
+    _g_sm_patol = 0   _g_sm_viol_id = 0   max(dx_eff sulle discese) = -0.0
+
+ESITO: 11/11
+
+VERDETTO: i tre flag sono INERTI a default, ognuno FA QUALCOSA da solo, la scala
+  minima NON CREA MOVIMENTO (nessun incremento non-negativo toccato), le lunghezze
+  restano sopra LAM, la coesione non supera il passo causale, e tutti e tre accesi
+  insieme non producono NaN. Il ramo D si puo' lanciare.
+
+⚠ LIMITI: UN seme, UNA scena, 30 passi. In 30 passi la coppia di SCHWINGER puo' non
+  essere MAI scattata: la terza via di nascita puo' essere NON ESERCITATA.
+⚠ E Z7 NON E' QUI: e' il sigillo interno della rigiocata, e si gira a parte.
