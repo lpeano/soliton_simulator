@@ -10714,3 +10714,43 @@ il risultato EFFETTIVO e'    +1.661120e+05
 portano `n/d`. **Il loro contributo resta non misurato, e non lo deduco.**
 **E non e' una cura:** che fare del freno asimmetrico **e' una decisione di Luca**, e ogni forma
 simmetrica dovra' passare per `A11` corollario 7, **dove tre forme morbide sono gia' cadute**.
+
+### ⑲ **COSA GENERA LA SPINTA CHE PORTA SU `d0`? NIENTE. E' LA DISCESA CANCELLATA**
+
+Domanda di Luca dopo la misura `D0`. **La risposta si legge dal codice, in forma chiusa**, e non
+serve una misura nuova per la parte algebrica.
+
+`_smorza` fa, per un incremento in DISCESA *(`dx < 0`)*:
+```
+fatt = max(0, 1 - LAM/d0)          eff = dx * fatt
+```
+quindi cio' che il freno **aggiunge** rispetto alla fisica e'
+```
+eff - dx = dx*(fatt - 1) = |dx| * (1 - fatt) = |dx| * min(1, LAM/d0)
+```
+> **NON c'e' nessuna forza che spinge in su. C'e' una FRAZIONE DI OGNI DISCESA CHE VIENE
+> CANCELLATA**, e quella frazione e' **`min(1, LAM/d0)`** — **grande dove `d0` e' vicino a `LAM`,
+> piccola dove `d0` e' gia' grande.**
+
+**Quanto vale, sui numeri gia' misurati:**
+
+| passo | `median(d0)` | `LAM/d0` | frazione di OGNI discesa cancellata |
+|---:|---:|---:|---:|
+| 1 | `0.883` | `0.906` | **91 %** |
+| 40 | `1.163` | `0.688` | 69 % |
+| 120 | `1.415` | `0.565` | **57 %** |
+| **600** *(validazione)* | `3.318` | `0.241` | **24 %** |
+
+**⚠ E QUI C'E' UNA COSA CHE NON MI ASPETTAVO, e va detta perche' cambia la prognosi:**
+**il cricchetto SI INDEBOLISCE DA SOLO man mano che `d0` cresce** — dal `91 %` al `24 %`. **Non e'
+una spirale che accelera: e' una spinta che si spegne.** Il che rende `d0` **non divergente ma
+ASINTOTICO**, e spiega perche' nella validazione il rapporto fra snapshot consecutivi vale `1.232`
+e non cresce.
+**MA NON VUOL DIRE CHE SI FERMI A UN VALORE UTILE:** si ferma dove le discese non bastano piu' a
+essere cancellate, e **dove sia quel punto NON E' MISURATO.**
+
+**⚠ E COSA RESTA DA MISURARE, un numero solo:** la **somma dei soli incrementi in DISCESA** al
+punto del freno, `Σ|dx⁻|`. Oggi ho il **netto** (`-1.543e+05`) e l'**aggiunto**
+(`+3.205e+05`), ma non il lordo delle discese: con quello la formula
+`aggiunto = Σ|dx⁻| · min(1, LAM/d0)` si **verifica** invece di essere solo derivata.
+**Una riga nello strumento, e si misura in sei minuti.** *(Non lanciata stanotte: il PC si riavvia.)*
