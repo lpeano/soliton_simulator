@@ -9471,3 +9471,42 @@ accettarlo.** Ora stampa entrambe.
 > **Due presidi che dicevano una cosa e ne facevano un'altra, in un giorno** — il mio criterio
 > `Z4a` e l'hash di `_stato_run`. **Un presidio che mente costa piu' di un presidio assente,
 > perche' chi lo legge smette di controllare.**
+
+---
+
+## `Z89` — **`1755 MB` di `.pkl` non hanno il comando che li rigenera** (2026-09-21)
+
+**Riscontro relazionato NELLO STESSO COMMIT** *(P1-bis, la regola appena cablata)*.
+Censimento per lo spostamento su `E:`. **Nessun byte copiato o cancellato.**
+
+```
+309 file .pkl in 42 cartelle, 7328 MB    (esclusa la cartella del ramo D in corsa)
+.pkl TRACCIATI da git: ZERO
+
+  ARCHIVIO documentato in INVENTARIO   202 file   5430 MB
+  ARCHIVIO NON documentato             100 file   1755 MB   <-- il gruppo che pesa
+  SCRATCH rigenerabile dai sigilli       7 file    144 MB
+```
+
+### La riga che conta e' la seconda
+**`1755 MB` in `24` cartelle non hanno il comando che li rigenera** — il par.5-quinquies li chiama
+*«un dato che nessuno potra' rifare»*. Fra queste `_ab_grav_ampiezza` e `_ab_coppia_reciproca`
+(`506 MB` ciascuna) e `_fin_B` (`308 MB`).
+
+> **Per questi lo spostamento non e' liberare spazio: e' l'unica forma di conservazione
+> disponibile.** Per i `5430 MB` documentati e' una comodita', perche' il comando c'e'.
+
+### E la terza categoria non andrebbe spostata affatto
+`144 MB` di scratch che un sigillo committato **ricrea da solo**: spostarlo significa
+**archiviare per sempre cio' che si rifa' in due minuti**. **Proposta: cancellarlo. NON eseguita.**
+
+### Due domande aperte, che il mandato non decide
+- **le cartelle di lavoro dei sigilli:** il mandato dice sia *«si sposta ogni `.pkl`»* sia *«le
+  cartelle di lavoro dei sigilli restano dove sono»* — si contraddicono su **`1156 MB`**;
+- **`_ab_C_solo_chicoop_FERMATO` (`346 MB`):** non e' vecchio, e' di **stamattina**, ed e' il ramo D
+  fermato per configurazione sbagliata. **Mai letto da nessuno.**
+
+### ⚠ Il costo del metodo, detto PRIMA di pagarlo
+`copia -> verifica sha1 + caricamento -> cancella` su `7.2 GB` significa **decomprimere `7.2 GB` di
+gzip mentre il ramo D gira**. **E' lo stesso carico che il 20/9 porto' il ramo B da `25` a
+`84 s/frame`.** **Il modo per non pagarlo e' farlo a run finito.**
