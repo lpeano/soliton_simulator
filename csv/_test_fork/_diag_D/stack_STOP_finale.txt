@@ -1,0 +1,17 @@
+Process 19912: C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_D --sep=4.0 --serie=20 --csv-progresso=csv/_test_fork/_ab_D/prog.csv --chi-coop=on --scala-min=on --coes-adim=on
+Python v3.13.2 (C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe)
+
+Thread 37248 (active): "MainThread"
+    rilassa_disegno (soliton_simulator.py:4922)
+        Arguments:
+            self: <Rete at 0x1f4602a25d0>
+            it: 3
+        Locals:
+            pos0: None
+            _: 1
+            v: <numpy.ndarray at 0x1f46029b990>
+            L: <numpy.ndarray at 0x1f46029ba50>
+            corr: <numpy.ndarray at 0x1f46029b930>
+            acc: <numpy.ndarray at 0x1f46029bf90>
+            k: 2
+    <module> (_scena_video.py:270)

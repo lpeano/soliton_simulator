@@ -9719,3 +9719,81 @@ attacco', in silenzio.** Le altre due volte: **il driver** *(`--scala-min` parsa
 ### Il limite, dichiarato
 **I hook NON sono versionati da git.** Un clone nuovo **non ce l'ha** finche' non lo installa.
 **E' meno di un presidio completo, e va detto invece di chiamarlo tale.**
+
+---
+
+## ⚠⚠ CORREZIONE — **`994f0ed` conteneva una tabella con le righe SLITTATE e una conclusione su `peq` ROVESCIATA**
+
+**L'errore e' mio ed e' di metodo: ho RICOPIATO A MANO una tabella dal mio stesso file grezzo.**
+Rilievo di Claude web, **che aveva letto il file e non il commit.** La frase sbagliata resta
+leggibile in `Z90`, con accanto la correzione.
+
+**Avevo scritto:** *«`peq` CRESCE, non e' degenere, il sospetto su `src ~ 1/peq` NON e' confermato».*
+**Il file dice il contrario.**
+
+### LA TABELLA VERA — **generata da `csv/_analisi_ramoD.py`, non ricopiata**
+```
+ passo      n    archi |   med d   med d0    d/d0 | stress99 stressMAX | |vd|p50  |vd|max | d<LAM |   peq min
+   120   2663   526306 |  1.2692   2.0181  0.6873 |   0.7308     1.208 |  0.4442    3.783 |     0 | 1.028e-07
+   240   2713   526370 |  1.7025   3.2100  0.5607 |   0.8247     1.914 |  0.7705    7.876 |     0 | 1.352e-06
+   360   2760   526429 |  1.9132   4.7273  0.4863 |   0.8864     7.620 |  1.7450    23.29 |     0 | 3.122e-06
+   480   2817   526496 |  2.3972   5.8210  0.5551 |   1.6450     12.46 |  2.6950    38.81 |     0 | 1.119e-05
+   600   2986   526709 |  3.6842   8.1221  0.6589 |   2.2900     21.09 |  4.0370    45.34 |     0 | 1.996e-04
+   720   3346   527163 |  5.5839  10.4954  0.7375 |   4.1000     41.81 |  5.0430    50.23 |     0 | 1.037e-04
+   840   3737   527663 |  7.6329  13.4481  0.7615 |   7.3310     45.24 |  6.8400    86.73 |     0 | 8.093e-05
+   960   4020   528027 |  9.8962  17.5570  0.7855 |   8.2720     75.05 |  9.4140    110.5 |     0 | 3.328e-05
+  1080   4261   528331 | 14.8736  23.3073  0.8097 |   9.9500     96.66 | 12.3800    149.6 |     0 | 8.348e-08
+  1200   4499   528638 | 21.1163  30.2858  0.8248 |  13.3300     171.5 | 15.5000    653.5 |     0 | 1.385e-14
+```
+
+### ⚠ `peq` NON cresce: **CROLLA di 14 ordini di grandezza**
+Sale fino al passo 600 (`2.00e-04`) e poi **precipita**: `8.09e-05`, `3.33e-05`, **`8.35e-08`**,
+**`1.38e-14`**. Il rapporto fra snapshot consecutivi vale **`1.7e-07` nell'intervallo
+`1080 -> 1200`** — **il crollo piu' violento e' subito prima dell'esplosione di `n1`.**
+
+> **Il sospetto `src ~ 1/peq` NON e' smentito: e' SOSTENUTO.** **Resta un SOSPETTO, non una causa
+> misurata**, perche' l'esplosione avviene **dopo** il passo 1200 e **nessuno snapshot la copre**.
+> **E c'e' un dato che NON quadra col racconto facile:** al passo 1200 `(rho − peq)/peq`, il
+> fattore che entra in `src`, ha **`p50 = 1.04` e `max = 7.33`** su tutti gli archi — **e sull'1 %
+> con `peq` piu' basso e' addirittura `p50 = −0.094`.** **L'anomalia NON e' ancora esplosa a 1200.**
+
+### ⚠ E correggo anche una lettura di Claude web, coi numeri generati
+*«L'espansione ACCELERA»* **non e' quello che dicono i rapporti.** `med d` fra snapshot
+consecutivi: **`1.34, 1.12, 1.25, 1.54, 1.52, 1.37, 1.30, 1.50, 1.42`** — **oscilla attorno a
+~`1.35` senza tendenza.** **Un rapporto COSTANTE e' crescita ESPONENZIALE, non accelerazione.**
+E' grave lo stesso — `16.6` volte in 1080 passi — **ma e' un'altra cosa.**
+
+---
+
+## 🔬 `T5` — **il confronto LEGITTIMO dentro l'epoca 2, e ribalta la lettura**
+
+`_ab_D` *(`SCALA_MIN` + `COES_ADIM` + `CHI_COOP`)* contro `_ab_C_solo_chicoop_FERMATO`
+*(stessa base di epoca 2, **solo `CHI_COOP`**)*:
+```
+ passo |   D med d  D med d0  D d/d0  D d<LAM |   C med d  C med d0  C d/d0   C d<LAM
+   120 |    1.2692    2.0181  0.6873        0 |    1.2693    0.8461  1.3086     55909
+   360 |    1.9132    4.7273  0.4863        0 |    2.2401    0.7974  3.0884       427
+   720 |    5.5839   10.4954  0.7375        0 |    3.0019    0.8012  3.9529       159
+  1200 |   21.1163   30.2858  0.8248        0 |    3.1221    0.8310  3.5541        35
+```
+
+> **I due flag hanno INVERTITO IL REGIME, non attenuato un difetto.**
+> **SENZA:** `d0` resta **inchiodato a ~0.83**, `d` si ferma a **~3.1**, e i legami vanno in
+> **TENSIONE** (`d/d0` fino a **4.0**) — con **55 909 archi sotto `LAM`** al passo 120.
+> **CON:** `d0` **scappa a 30**, `d` la insegue a **21**, i legami sono **COMPRESSI**
+> (`d/d0 ~ 0.82`), e **zero archi sotto `LAM`, sempre**.
+
+### E la coesione e' ESCLUSA come motore di `d0` — **dai numeri**
+`_g_coes_max = 0.0026972542239708987` **identico in tutti e 10 gli snapshot**, con tetto
+`0.0113` e **zero archi saturi**, mentre `med d0` va da `2.02` a `30.29`.
+**Un termine costante a `0.0027` per passo non puo' produrre quella crescita.** **`COES_ADIM` fa
+il suo mestiere e non e' lui a spingere `d0`.**
+
+> **IL CANDIDATO, e lo scrivo come candidato:** restano gli scrittori che moltiplicano per
+> **`median(d0)`** — `S09` *(la spinta)* e `S10` *(la gravita')*. **Sono auto-amplificanti: piu'
+> `d0` cresce, piu' spingono.** **`S09` e' gia' nel registro come difetto «NON toccato: ATTIVO».**
+> **NON e' misurato per sito**, e senza quella misura resta un sospetto.
+
+### `peq` basso vive sui NATI
+All'ultimo snapshot, l'1 % piu' basso di `peq`: **`15.19 %` degli archi che coinvolgono un NATO**,
+**`7.69 %` vuoto-vuoto**, **`0.04 %` massa-massa**. **I nodi appena nati sono dove `peq` degenera.**

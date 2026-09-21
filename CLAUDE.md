@@ -130,6 +130,25 @@ fine giornata»*. Recuperare a sera significa che per tutto il giorno il repo ha
 quello che si sapeva. **Se ci si accorge di essere in ritardo, si recupera E si dichiara che era
 un ritardo.**
 
+**P1-ter — UNA TABELLA DI NUMERI SI GENERA DA CODICE, MAI SI RICOPIA A MANO.**
+Ogni tabella in un commit, in un referto o nel registro **si produce con uno script che legge il
+file di dati, e se ne incolla l'output**. **Ricopiare a mano e' un'operazione senza presidio.**
+**CASO REALE, 2026-09-21:** ricopiando a mano dal MIO STESSO file grezzo ho fatto **slittare due
+righe** — al passo 600 i valori del 360, al 1080 quelli del 600 — **e su quella tabella ho scritto
+una conclusione ROVESCIATA su `peq`** *(«cresce, non e' degenere» mentre CROLLA di 14 ordini)*.
+**Se ne e' accorto chi ha letto il FILE invece del commit.** **Un numero ricopiato non ha
+provenienza: uno generato ce l'ha.**
+
+**P1-quater — OGNI SOSTITUZIONE DI TESTO SI ASSERISCE PER SE', MAI IN BLOCCO.**
+Gli script che modificano file usano un helper che **conta l'ancora e fallisce se non e' unica**,
+**una sostituzione alla volta**. **Un `assert` globale del tipo `t != originale` e' soddisfatto
+dalle ALTRE sostituzioni e lascia passare in silenzio quella che non ha attaccato.**
+**TRE VOLTE IN UN GIORNO, 2026-09-21:** ① **il driver** — `--scala-min` e `--coes-adim` parsati e
+**mai inoltrati**, e il ramo D e' girato **1230 passi** con la configurazione sbagliata;
+② **il sigillo dei flag**, nato con un euristico su finestra fissa; ③ **il hook di `P1-bis`**,
+la cui correzione non ha attaccato mentre l'`assert` passava. **Riconoscerlo non e' bastato le
+prime due volte: serve l'helper, non l'attenzione.**
+
 **P2 — PRIMA DI ESCLUDERE UN FLAG DA UNA MISURA: FORZA IL SISTEMA O LO CORREGGE?**
 Escludere un **forzante** (turbo) protegge la misura; escludere una **correzione** significa
 **misurare un sistema che si sa difettoso**. (E' il presidio gia' scritto in §10, promosso qui
