@@ -919,6 +919,38 @@ COES_ADIM = False       # LA COESIONE CON DIMENSIONI GIUSTE E DENSITA' LOCALE (2
                         #   MAGNITUDINE al passo causale. Il tetto causale e' un LIMITE giusto,
                         #   ma usarlo come SCALA della forza e' una scelta, non una derivazione.
                         # OFF = byte-identico.
+PEQ_ESATTO = False      # IL RILASSAMENTO DI `peq` IN FORMA ESATTA (2026-09-21, cura C1).
+                        # DIFETTO CURATO: `peq += dt_e*(rho-peq)/tau_bg + ...` e' un EULERO
+                        #   ESPLICITO. Per `x = dt_e/tau_bg > 1` SCAVALCA il bersaglio, e con
+                        #   `rho < peq` lo scavalca SOTTO ZERO. MISURATO (`Z94`): al passo 1126
+                        #   del ramo D, `x = 1.2018` porta `peq` da `1.060e-02` a `-4.854e-04`,
+                        #   e il pavimento `max(peq,1e-9)` di `:4215` RIBALTA IL SEGNO
+                        #   dell'anomalia moltiplicandola per `3.7e5`: `nsub = 22591`.
+                        # LA FORMA, DERIVATA e non scelta: da `dpeq/dt = (rho-peq)/tau` con
+                        #   `rho` e `tau` costanti SUL PASSO -- l'ipotesi che l'Eulero gia' fa --
+                        #   la soluzione e' ESATTA:  peq <- rho + (peq-rho)*exp(-dt/tau).
+                        # POSITIVITA' DIMOSTRATA, non sperata: posto `a = exp(-dt/tau)` in
+                        #   `(0,1]`, si ha `peq_new = a*peq + (1-a)*rho`, una COMBINAZIONE
+                        #   CONVESSA, quindi `min(peq,rho) <= peq_new <= max(peq,rho)` per
+                        #   QUALUNQUE `dt`. Con `peq>=0` e `rho = 0.5*(I_i+I_j) >= 0` sempre,
+                        #   `peq_new >= 0` SEMPRE, SENZA PAVIMENTI.
+                        # LA DIFFUSIONE si tratta con uno SPLITTING DI LIE-TROTTER: i due
+                        #   rilassamenti si applicano IN SEQUENZA, ciascuno in forma esatta.
+                        #   Il PUNTO FISSO del termine di diffusione e' `peq + flusso` in
+                        #   ENTRAMBI i rami di `DIFF_RES` (verificato algebricamente), quindi
+                        #   non serve nessuna grandezza nuova.
+                        #   ⚠ L'ordine di accuratezza resta 1, come l'Eulero di oggi: NON
+                        #   peggiora nulla, e non introduce numeri.
+                        #   ⚠ LA POSITIVITA' DEL SECONDO PASSO richiede `peq+flusso >= 0`:
+                        #   con `DIFF_RES == 0` (il caso di TUTTI i run) il bersaglio e'
+                        #   `c_arco`, una MEDIA PESATA dei `peq` dei vicini, quindi `>= 0`.
+                        #   Con `DIFF_RES != 0` il bersaglio e' `rho - c_arco` e PUO' essere
+                        #   negativo: li' la dimostrazione NON vale, ed e' CONTATO.
+                        # ⚠ COSA QUESTA CURA *NON* FA: non toglie il pavimento `max(peq,1e-9)`
+                        #   di `:4215`. Con `peq>=0` garantito quel pavimento non regolarizza
+                        #   piu' un SEGNO ma solo lo zero, e toglierlo richiede la forma
+                        #   simmetrica, che e' UN'ALTRA cura e ha IL SUO POLO.
+                        # OFF = byte-identico.
 CHI_COOP = False        # COOPERAZIONE (decisione di Luca, 2026-09-21): chi_basc NON si spegne; scrive la
                         # GEOMETRIA in `perc_geom` (il giro e' compiuto o no, dalla torsione) mentre lo
                         # SPINORE scrive la CARICA in `perc_chi` (segno di doppia copertura). I due fanno
@@ -3331,6 +3363,42 @@ class Rete:
         self._g_sm_nascite = getattr(self, '_g_sm_nascite', 0) + 1
         return np.maximum(v, LAM)
 
+    def _peq_esatto(self, rho, flusso, dt_e, tau_bg):
+        """[PEQ_ESATTO] Il rilassamento di `peq` in forma ESATTA, in due passi di Lie-Trotter.
+
+        ① verso `rho` con `tau_bg`:   `peq <- rho + (peq-rho)*exp(-dt_e/tau_bg)`
+        ② verso il punto fisso della diffusione, che e' **`peq + flusso`** in ENTRAMBI i rami
+           di `DIFF_RES`:             `peq <- b + (peq-b)*exp(-dt_e/TAU_DIFF)`,  `b = peq+flusso`
+
+        Ciascun passo e' una COMBINAZIONE CONVESSA fra il valore e il suo bersaglio, quindi
+        **non puo' uscire dall'intervallo fra i due, per QUALUNQUE `dt`**. Con bersagli `>= 0`
+        il risultato e' `>= 0` **senza pavimenti**.
+        """
+        peq = np.asarray(self.peq, dtype=float)
+        dte = np.asarray(dt_e, dtype=float)
+        a1 = np.exp(-dte / np.asarray(tau_bg, dtype=float))
+        p1 = rho + (peq - rho) * a1
+        bers = peq + flusso
+        a2 = np.exp(-dte / TAU_DIFF)
+        p2 = bers + (p1 - bers) * a2
+        # CONTATORI (solo a flag ACCESO: non toccano il ramo spento).
+        # `_g_peqx_salvati` e' il CONTROLLO POSITIVO CABLATO: quante volte l'Eulero sarebbe
+        # andato sotto zero e la forma esatta NO. Se restasse 0 su un run che esplode, la cura
+        # sarebbe inerte -- e si vedrebbe dal numero, non da un ragionamento.
+        self._g_peqx_usi = getattr(self, '_g_peqx_usi', 0) + 1
+        if len(peq):
+            eul = peq + dte * ((rho - peq) / np.asarray(tau_bg, dtype=float)
+                               + flusso / TAU_DIFF)
+            self._g_peqx_salvati = (getattr(self, '_g_peqx_salvati', 0)
+                                    + int(np.sum((eul < 0.0) & (p2 >= 0.0))))
+            self._g_peqx_neg = getattr(self, '_g_peqx_neg', 0) + int(np.sum(p2 < 0.0))
+            # il bersaglio della diffusione NEGATIVO e' l'unico caso in cui la dimostrazione
+            # non vale (`DIFF_RES != 0`): si CONTA invece di assumere che non capiti.
+            self._g_peqx_bers_neg = (getattr(self, '_g_peqx_bers_neg', 0)
+                                     + int(np.sum(bers < 0.0)))
+            self._g_peqx_min = min(getattr(self, '_g_peqx_min', float('inf')), float(p2.min()))
+        return p2
+
     def _traccia_peq(self, rho, flusso, dt_e, tau_bg, i, j):
         """[TRACCIA_PEQ] I TRE NUMERI CHE MANCANO sull'aggiornamento di `peq` (`:4206`).
 
@@ -4265,10 +4333,16 @@ class Rete:
             r_arco = 0.5 * (r_nodo[i] + r_nodo[j])
             tau_bg_loc = np.maximum(1.0 / np.maximum(r_arco, 1e-3), 1e-3)   
             if TRACCIA_PEQ: self._traccia_peq(rho, flusso, dt_e, tau_bg_loc, i, j)
-            self.peq += dt_e * ((rho - self.peq) / tau_bg_loc + flusso / TAU_DIFF)
+            if PEQ_ESATTO:
+                self.peq = self._peq_esatto(rho, flusso, dt_e, tau_bg_loc)
+            else:
+                self.peq += dt_e * ((rho - self.peq) / tau_bg_loc + flusso / TAU_DIFF)
         else:
             if TRACCIA_PEQ: self._traccia_peq(rho, flusso, dt_e, TAU_BG, i, j)
-            self.peq += dt_e * ((rho - self.peq) / TAU_BG + flusso / TAU_DIFF)
+            if PEQ_ESATTO:
+                self.peq = self._peq_esatto(rho, flusso, dt_e, TAU_BG)
+            else:
+                self.peq += dt_e * ((rho - self.peq) / TAU_BG + flusso / TAU_DIFF)
             
         if HAM_SRC == 0.0:
             # Gli archi nuovi non hanno ancora un peq storico: per loro il valore appena
@@ -6515,6 +6589,7 @@ def _applica_flag(a):
     global TAU_LUCE, RUMORE_COLORATO
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
+    global PEQ_ESATTO
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, SCALA_MIN, COES_ADIM, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
@@ -6579,6 +6654,7 @@ def _applica_flag(a):
     SYNC_SPINORE = bool(getattr(a, "sync_spinore", False))         # Kuramoto SU(2) sugli spinori: default off
     SCALA_MIN = bool(getattr(a, "scala_min", False))               # nessuna lunghezza sotto LAM
     COES_ADIM = bool(getattr(a, "coes_adim", False))               # coesione adimensionale e causale
+    PEQ_ESATTO = bool(getattr(a, "peq_esatto", False))             # rilassamento esatto di peq (C1)
     CHI_COOP = bool(getattr(a, "chi_coop", False))                 # cooperazione: chi_basc -> perc_geom, spinore -> perc_chi
     if CHI_DA_SPINORE and not SPINORE_CORRETTO:
         raise SystemExit("[errore] --chi-da-spinore richiede --spinore-corretto (senno' loop di feedback perc_chi->spinore->perc_chi)")
@@ -6595,6 +6671,15 @@ def _applica_flag(a):
               "DISCESA -- incremento >= 0 intatto bit per bit, incremento < 0 moltiplicato per "
               "max(0, 1-LAM/x). I sette pavimenti di d0 SPARISCONO; le nascite partono da LAM; "
               "per d la regola va sull incremento del Verlet. Zero coefficienti.")
+    if PEQ_ESATTO:
+        print("[peq-esatto] IL RILASSAMENTO DI `peq` IN FORMA ESATTA: "
+              "peq <- rho + (peq-rho)*exp(-dt_e/tau_bg), piu' lo stesso passo esatto per la "
+              "diffusione (splitting di Lie-Trotter, punto fisso `peq+flusso`). E' una "
+              "COMBINAZIONE CONVESSA, quindi `min(peq,rho) <= peq_new <= max(peq,rho)` per "
+              "QUALUNQUE passo: `peq` NON PUO' PIU' SCAVALCARE SOTTO ZERO. L'Eulero esplicito "
+              "di prima scavalcava per dt_e/tau_bg > 1, misurato 1.2018 al passo 1126 del ramo "
+              "D. Zero coefficienti nuovi: e' la stessa forma gia' imposta dal par.4 per i "
+              "rilassamenti di primo ordine. NON toglie il pavimento di :4215.")
     if COES_ADIM:
         print("[coes-adim] COESIONE ADIMENSIONALE: i tre addendi normalizzati sulla densita' "
               "LOCALE dell'arco (I_med sparisce, era una media globale), e lo spostamento e' "
@@ -7084,6 +7169,14 @@ def _cli():
                         "LOCALE dell'arco invece che su I_med (media globale, A2), e lo spostamento e' "
                         "passo_causale * tanh(...) * filtro_portata, con |F| <= 1 per costruzione invece "
                         "che per clip. Sostituisce il clip tanh(stress)*d0. Default off = byte-identico.")
+    p.add_argument("--peq-esatto", action="store_true", dest="peq_esatto",
+                   help="RILASSAMENTO ESATTO DI peq: peq <- rho + (peq-rho)*exp(-dt_e/tau_bg), "
+                        "piu' lo stesso passo esatto per la diffusione (Lie-Trotter). E' una "
+                        "combinazione convessa, quindi peq resta SEMPRE fra peq e rho e non puo' "
+                        "scavalcare sotto zero per nessun passo. Cura il difetto misurato in Z94 "
+                        "(Eulero esplicito con dt_e/tau_bg = 1.2018 -> peq negativo -> il pavimento "
+                        "di :4215 ribalta il segno dell'anomalia e nsub esplode a 22591). Zero "
+                        "coefficienti. Default off = byte-identico.")
     p.add_argument("--chi-coop", action="store_true", dest="chi_coop",
                    help="COOPERAZIONE chi_basc + spinore: `chi_basc` NON si spegne e scrive la GEOMETRIA in "
                         "perc_geom (letta dalla catena della torsione CHI_CORE/FRAME_DRAG/TORS_4PI), mentre "
