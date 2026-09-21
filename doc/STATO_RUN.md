@@ -137,7 +137,8 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | 1 | `CHI_COOP` (carica dallo spinore, geometria da `chi_basc`) | perentorio ① | ✅ **FATTO**, sigillo `8/8` |
 | 2 | `SCALA_MIN` + `COES_ADIM`, codice e driver | perentorio ②③ | ✅ **FATTO**, `11b6431` |
 | 3 | **sigillo unico `Z0`-`Z8`** | perentorio | ✅ **`11/11`** — `d69e5bae` sul simulatore `4954fe5b`. `Z1` **ri-ancorata all'argv NUDO** *(piu' severa: e' il caso in cui la cura non PUO' avere effetto)*; `Z8` nuovo: la ricostruzione del mondo e' **neutra**. **+ `Z1c` PASS** *(argv del FORK, tre flag spenti: byte-identico, e la controprova dice che il test ATTRAVERSA la catena -- 60 chiamate a `chiralita_core_locale` contro le ZERO dell'argv nudo)*. |
-| 4 | **lancio del ramo D** | perentorio | ▶ **IN CORSO, SECONDO lancio** *(il primo, 10:15-11:05, girava con `SCALA_MIN` e `COES_ADIM` SPENTI: il driver non li inoltrava — difetto riparato e coperto da `_sigillo_flag_driver.py` `3/3`)*. **Flag verificati DAL MODULO all'avvio: tutti e quattro `True`.** Archivio del primo lancio conservato su `E:` come `_ab_C_solo_chicoop_FERMATO`. |
+| 4 | **lancio del ramo D** | perentorio | ✅ **CHIUSO il 2026-09-21: FERMATO al passo 1230**, archivio INTATTO *(10 snapshot 120-1200, tutti apribili, zero `.tmp` orfani)*. **NON ha raggiunto i 3000 passi.** Il criterio assoluto ha risposta **NO per questo lancio**, ma **la ragione scritta in `Z90` era SBAGLIATA**: non e' una divergenza, sono **picchi transitori di `n1`** che il run **attraversa** *(22591 al passo 1126, 76948 al 1252, con `n1=1` e `nsub=4..6` in mezzo)*. |
+| **4-bis** | **DIAGNOSI DEI PICCHI DI `n1`** — rigiocata dal **1080** *(il 1200 era il punto sbagliato)* + lettura degli ISTANTI di `SCALA_MIN`/`COES_ADIM` | mandato 2026-09-21 | ▶ **IN CORSO.** Lettura ✅ *(`Z91`, `Z92`, `doc/REFERTO_istanti_scala_min_coes_adim.md`)*; rigiocata ▶ in corso, deve dare **il passo e l'ARCO** del picco. **Nessuna cura, da mandato.** |
 | 5 | tag `epoca-2` + righe di stato + regola in `CLAUDE.md` | EPOCA | ✅ **tag annotato su `01eda44`** *(certifica `4954fe5b`, il simulatore su cui gira D)*, **pushato**; righe di stato in cima a `STATO_RUN.md` e `RELAZIONE_PER_CLAUDE.md`; regola in `CLAUDE.md`. |
 | 6 | strumento cosmologico `M1`-`M4`, e `M1`/`M4` **leggeri** durante il run | COSMOLOGICO | ⏸ dopo il punto 4 |
 | 7 | **`Z47` PARTE ①** — ricognizione di `pos` nella fisica *(sola lettura)* | `MANDATO_Z47_coda` | ⏸ condizione d'avvio: D lanciato **e** punti 5-6 fatti |
@@ -146,8 +147,13 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | 9 | **CHECKPOINT a Luca** | — | ⏸ |
 | 10 | `Z47` PARTE ② — lo stacco | `MANDATO_Z47_coda` | 🔒 **NON parte senza il via libera di Luca** |
 
-> **⚠ Se una voce si blocca, le successive ASPETTANO: non si passa avanti.** **Oggi e' bloccata la
-> `3`.**
+> **⚠ Se una voce si blocca, le successive ASPETTANO: non si passa avanti.**
+>
+> **⚠⚠ SEGNALAZIONE A LUCA, come la coda stessa impone — IL MANDATO DEL 2026-09-21 CONTRADDICE QUESTA CODA, E LA CODA DICE DI SEGNALARLO.**
+> **La coda** mette il **CHECKPOINT** alla voce **9**, cioe' **dopo** il cosmologico `M1`-`M4` (6), `Z47` parte ① (7), `M2`/`M3` (8) e l'archivio a rotazione (8-bis).
+> **Il mandato** dice *«ORDINE: 1 lancia la rigiocata, 2 la lettura, 3 commit e push, 4 FERMATI: checkpoint a Luca»* — cioe' **checkpoint SUBITO, saltando 6, 7, 8 e 8-bis**.
+> **Cosa ho fatto:** ho eseguito il mandato *(la diagnosi e' la voce **4-bis**, e la voce 4 era la prima non spuntata, quindi la diagnosi del suo esito sta al posto giusto)*, **e mi fermo al checkpoint senza toccare 6, 7, 8 e 8-bis**.
+> **Cosa serve da te:** dire se dopo il checkpoint si riprende **dalla 6** com'e' scritto, oppure se la coda va riordinata. **Non decido io l'ordine.**
 
 ---
 
