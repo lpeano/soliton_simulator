@@ -1,0 +1,24 @@
+[TIMBRO] _sigillo_anom_simm.py  sha1-BYTE 80f12c9f  committato e pulito
+sim PRIMA (eeb31ec): sha1 GREZZO e844871d
+sim SUL DISCO      : sha1 GREZZO 80ebcbc9
+
+braccio A (prima della cura)...
+braccio B (disco, SPENTO)...
+braccio C (disco, ACCESO)...
+
+--------------------------------------------------------------------------------------------------------
+U1   PASS flag SPENTO = prima della cura: 12 campi -> BYTE-IDENTICI
+U2   PASS CONTROLLO POSITIVO: ACCESO vs SPENTO differiscono su 12 campi
+U3   PASS RIDUZIONE AL LIMITE: (vecchia-simm)/vecchia diviso il valore ESATTO `e/(2+e)` vale ['1.000000000000', '1.000000000000', '1.000000000000', '0.999999999999'] -- deve fare 1 a precisione di macchina. Le due forme coincidono al primo ordine, e lo scarto e' NOTO in forma chiusa, non solo «piccolo»
+U4   PASS LIMITATA IN [-2,+2]: 0 archi-scrittura fuori su 12626500, e max|anom| = 1.999960 -- il limite E' RAGGIUNTO (se fosse lontano da 2 non sarebbe esercitato e la prova non direbbe nulla)
+U5   PASS IL POLO: 0 occorrenze con `PEQ_ESATTO` acceso (min(peq) = 8.885e-13, mai negativo). E NON E' un «non e' capitato»: con `peq = -rho` il denominatore vale ESATTAMENTE 0.0, e oltre il polo l'anomalia vale -68.00 -- IL SEGNO SI ROVESCIA. La dipendenza da C1 e' REALE, non prudenziale
+U6   PASS `0/0` E' DEFINITO ZERO E SUCCEDE DAVVERO: 525973 archi-scrittura su 12626500 (4.17%) -- e' il VUOTO su VUOTO. Se non capitasse mai, quella definizione sarebbe codice morto
+--------------------------------------------------------------------------------------------------------
+SIGILLO ANOM_SIMM: 6/6
+
+VERDETTO: il pavimento `max(peq,1e-9)` e' TOLTO, l'anomalia e' limitata PER
+  COSTRUZIONE, e `0/0` e' una DEFINIZIONE che si esercita davvero.
+
+LIMITI: UN seme, UNA scena, 24 passi. E la configurazione porta `--peq-esatto`: questo
+  sigillo NON prova che `ANOM_SIMM` sia sicura DA SOLA -- il codice stesso stampa un
+  avviso grave se la si accende senza `C1`, e `U5` dice perche'.

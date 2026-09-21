@@ -14,8 +14,8 @@
 | **assioma `A11`** | ✅ scritto, coi sette corollari | `doc/ASSIOMI.md` · `CLAUDE.md` `P1-quinquies` |
 | **`C3 SCALA_MIN_PASSO`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_scala_min_passo_2026-09-21.txt` · `Z97` |
 | **`C4 COES_CAUSALE`** | ✅ **sigillo `5/5`** | `csv/_seal_fork/_sigillo_coes_causale_2026-09-21.txt` · `Z98` |
-| **`C1-bis ANOM_SIMM`** | ⏳ **IN CORSO -- e' il prossimo** *(deciso da Luca il 21/9)* | derivazione in `csv/_deriva_anom_simm.py` |
-| `C5 INVARIANTI` | ⏸ | mandato `C5` |
+| **`C1-bis ANOM_SIMM`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_anom_simm_2026-09-21.txt` · `Z99` |
+| **`C5 INVARIANTI`** | ⏳ **IN CORSO -- e' il prossimo** | mandato `C5` |
 | **validazione 600 passi** | ⏸ **CHECKPOINT 2: ci si FERMA** | — |
 
 ## COME SI RIPARTE — **i comandi esatti, verbatim**

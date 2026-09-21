@@ -10593,3 +10593,33 @@ utenti)*; il tetto diventa **`cs_arco*DT`** col `cs` del nodo **piu' lento**. **
 una svista — **`psi` e' quella che `step()` ha appena committato, quindi le tre sono gia' coerenti
 fra loro**, e l'unico ingresso fuori istante era `d0`. Portare anche `psi` a inizio passo vuole una
 fotografia **per nodo** con la sua chirurgia: **e' un'altra cura**.
+
+### ⑯ **CURA `C1-bis` -- `ANOM_SIMM`, sigillata `6/6`. Il pavimento e' TOLTO**
+
+**Perche' anche dopo `C1`** *(rilievo di Luca)*: `PEQ_ESATTO` garantisce `peq >= 0`, ma `peq` puo'
+ancora scendere a **`~1e-9`** dove `rho` e' quasi nulla — **in `P5b` il minimo era `8.71e-09`, a un
+soffio dal pavimento** — e se `rho` risale in fretta **l'anomalia torna enorme**. **Con `peq >= 0`
+garantito il POLO della forma simmetrica non esiste piu'.**
+
+`anom = 2(rho-peq)/(rho+peq)`, con **`0/0 := 0` DEFINITO** *(precedente: `scala_p`, `Z67`)*.
+**Nessun numero scelto** (`A11`, corollario 1).
+
+| | esito |
+|---|---|
+| **U1** | flag spento **byte-identico** |
+| **U2** | acceso vs spento differiscono su 12 campi |
+| **U3** | `(vecchia-simm)/vecchia` diviso il valore **esatto** `e/(2+e)` fa **`1.000000000000`** |
+| **U4** | **ZERO** archi fuori da `[-2,+2]` su **`12 626 500`**, con **`max|anom| = 1.999960`**: **il limite e' RAGGIUNTO** |
+| **U5** | il **polo** vale **zero** in esercizio, **ma e' dimostrato possibile**: a `peq = -rho` il denominatore e' esattamente `0`, e oltre il polo l'anomalia vale **`-68`** |
+| **U6** | **`0/0` succede davvero**: `525 973` su `12 626 500`, il **`4.17 %`** — e' il **vuoto su vuoto** |
+
+**⚠ Dipende da `C1`, e non e' prudenza:** senza `PEQ_ESATTO` questa cura **sostituisce un pavimento
+con un polo**. Il codice stampa un **avviso grave** se la si accende da sola, e il caso e'
+**contato**, non assunto impossibile. **I due contatori sono separati di proposito:** `0/0` e' il
+vuoto su vuoto *(legittimo)*, `rho+peq < 0` e' il polo. **Sommarli nasconderebbe il secondo.**
+
+**⚠ E `U3` e' stato corretto: il criterio era il mio SVILUPPO `e/2`, non il valore esatto
+`e/(2+e)`.** A `e = 0.1` sbaglia del `4.8 %`, e il sigillo aveva stampato **`0.952380952`** — che e'
+**esattamente `2/2.1`**. **Il numero era gia' la prova che il codice era giusto, e l'ho letto come
+un fallimento.** *(Quinta volta oggi che un FAIL e' del criterio e non della cura: `Q6` due volte,
+`R3`, `R5`, `U3`.)*
