@@ -951,6 +951,30 @@ PEQ_ESATTO = False      # IL RILASSAMENTO DI `peq` IN FORMA ESATTA (2026-09-21, 
                         #   piu' un SEGNO ma solo lo zero, e toglierlo richiede la forma
                         #   simmetrica, che e' UN'ALTRA cura e ha IL SUO POLO.
                         # OFF = byte-identico.
+ANOM_SIMM = False       # L'ANOMALIA SIMMETRICA, SENZA PAVIMENTO (2026-09-21, C1-bis).
+                        # FORMA:  anom = 2*(rho - peq) / (rho + peq),  e `0/0 := 0`.
+                        # DIFETTO CURATO: `(rho-peq)/max(peq, 1e-9)` usa un PAVIMENTO SCELTO
+                        #   (`A11`, corollario 1) che non esprime nessun vincolo fisico: sta li'
+                        #   per non dividere per zero. E `Z94` ha misurato cosa costa: con
+                        #   `peq` negativo RIBALTA IL SEGNO e moltiplica per `3.7e5`.
+                        # PERCHE' LA FORMA SIMMETRICA E' MEGLIO, derivato PRIMA di scriverla
+                        #   (`csv/_deriva_anom_simm.py`):
+                        #   * coincide con la vecchia per anomalie PICCOLE (`0.25` contro
+                        #     `0.2222`): e' la riduzione al limite;
+                        #   * il caso che oggi ESPLODE -- `peq -> 0` con `rho` ordinario --
+                        #     passa da `1e+08` a ESATTAMENTE `+2`. **Li' il pavimento diventa
+                        #     INUTILE, ed e' il punto della cura.**
+                        #   * e' limitata in `[-2, +2]` **SE E SOLO SE** `rho >= 0` E `peq >= 0`.
+                        # ⚠ DIPENDE DA `C1`, E NON E' UN DETTAGLIO: con `peq < 0` il
+                        #   denominatore `rho+peq` SI ANNULLA in `peq = -rho` -- **e' un POLO,
+                        #   non un limite** -- e oltre il polo il SEGNO SI ROVESCIA. Senza
+                        #   `PEQ_ESATTO` questa cura SOSTITUISCE UN PAVIMENTO CON UN POLO.
+                        #   Il caso e' CONTATO (`_g_as_polo`), non assunto impossibile.
+                        # ⚠ `0/0 := 0` E' UNA DEFINIZIONE, NON UNA REGOLARIZZAZIONE: non c'e'
+                        #   nessun numero da scegliere, e il valore e' quello giusto -- **dove
+                        #   non c'e' densita' non c'e' anomalia**. Precedente dichiarato nello
+                        #   stesso file: `scala_p`, `Z67`.
+                        # OFF = byte-identico.
 COES_CAUSALE = False    # LA COESIONE CHE RISPETTA L'ISTANTE E IL CONO LOCALE (2026-09-21, C4).
                         # DUE DIFETTI CURATI, entrambi misurati in `Z92`:
                         #   (a) ISTANTI MISTI: nella stessa `tanh` convivono `_forza_adim`,
@@ -4523,7 +4547,30 @@ class Rete:
             # inizializzato è il dato di t. Gli altri usano esclusivamente lo snapshot.
             _peq_src = (np.where(np.isfinite(_peq_t), _peq_t, self.peq)
                         if SYNC_UPDATE else self.peq)
-            anom = (rho - _peq_src) / np.maximum(_peq_src, 1e-9)
+            if ANOM_SIMM:
+                # [C1-bis] LA FORMA SIMMETRICA. Il denominatore e' `rho + peq`, che con
+                #   `rho >= 0` e `peq >= 0` e' `>= 0` e si annulla SOLO quando sono ENTRAMBI
+                #   nulli -- e li' `0/0 := 0` e' la DEFINIZIONE giusta, non una toppa.
+                _den_s = rho + _peq_src
+                anom = np.where(_den_s > 0.0, 2.0 * (rho - _peq_src)
+                                / np.where(_den_s > 0.0, _den_s, 1.0), 0.0)
+                # ⚠ I DUE CASI SI CONTANO SEPARATI, perche' sono cose DIVERSE:
+                #   `_g_as_zero` e' `0/0`, cioe' vuoto su vuoto -- LEGITTIMO;
+                #   `_g_as_polo` e' `rho + peq < 0`, che richiede `peq < 0` -- IL POLO, e
+                #   puo' capitare SOLO senza `PEQ_ESATTO`. Sommarli nasconderebbe il secondo.
+                self._g_as_usi = getattr(self, '_g_as_usi', 0) + 1
+                self._g_as_zero = (getattr(self, '_g_as_zero', 0)
+                                   + int(np.sum(_den_s == 0.0)))
+                self._g_as_polo = (getattr(self, '_g_as_polo', 0)
+                                   + int(np.sum(_den_s < 0.0)))
+                self._g_as_archi = getattr(self, '_g_as_archi', 0) + int(len(anom))
+                if len(anom):
+                    self._g_as_max = max(getattr(self, '_g_as_max', 0.0),
+                                         float(np.max(np.abs(anom))))
+                self._g_as_fuori = (getattr(self, '_g_as_fuori', 0)
+                                    + int(np.sum(np.abs(anom) > 2.0 + 1e-12)))
+            else:
+                anom = (rho - _peq_src) / np.maximum(_peq_src, 1e-9)
             # cs-dinamico: la sorgente in unita' naturali usa la c LOCALE dell'arco.
             cs2_src = (cs_arco ** 2 if CS_DINAMICO else CS_M ** 2)
             src = (ALPHA_M * anom if ALPHA_NAT == 0.0
@@ -6871,7 +6918,7 @@ def _applica_flag(a):
     global TAU_LUCE, RUMORE_COLORATO
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
-    global PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO, COES_CAUSALE
+    global PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO, COES_CAUSALE, ANOM_SIMM
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, SCALA_MIN, COES_ADIM, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
@@ -6940,6 +6987,7 @@ def _applica_flag(a):
     PEQ_NASCITA_LOCALE = bool(getattr(a, "peq_nascita_locale", False))  # nascita locale di peq (C2)
     SCALA_MIN_PASSO = bool(getattr(a, "scala_min_passo", False))   # freno una volta per passo (C3)
     COES_CAUSALE = bool(getattr(a, "coes_causale", False))         # coesione causale (C4)
+    ANOM_SIMM = bool(getattr(a, "anom_simm", False))               # anomalia simmetrica (C1-bis)
     CHI_COOP = bool(getattr(a, "chi_coop", False))                 # cooperazione: chi_basc -> perc_geom, spinore -> perc_chi
     if CHI_DA_SPINORE and not SPINORE_CORRETTO:
         raise SystemExit("[errore] --chi-da-spinore richiede --spinore-corretto (senno' loop di feedback perc_chi->spinore->perc_chi)")
@@ -6956,6 +7004,20 @@ def _applica_flag(a):
               "DISCESA -- incremento >= 0 intatto bit per bit, incremento < 0 moltiplicato per "
               "max(0, 1-LAM/x). I sette pavimenti di d0 SPARISCONO; le nascite partono da LAM; "
               "per d la regola va sull incremento del Verlet. Zero coefficienti.")
+    if ANOM_SIMM:
+        print("[anom-simm] L'ANOMALIA SIMMETRICA, SENZA PAVIMENTO: "
+              "anom = 2*(rho-peq)/(rho+peq), con `0/0 := 0` DEFINITO (precedente: scala_p, "
+              "Z67). Toglie il pavimento max(peq,1e-9), che e' un numero SCELTO e non esprime "
+              "nessun vincolo fisico (A11): con peq negativo RIBALTAVA IL SEGNO e moltiplicava "
+              "per 3.7e5 (Z94). Il caso peq->0 con rho ordinario passa da 1e+08 a ESATTAMENTE "
+              "+2, e per anomalie piccole le due forme coincidono. "
+              "*** RICHIEDE --peq-esatto: con peq < 0 il denominatore si annulla in peq = -rho "
+              "ed e' un POLO, non un limite. Senza C1 questa cura sostituisce un pavimento con "
+              "un polo. Il caso e' CONTATO, non assunto impossibile. ***")
+        if not PEQ_ESATTO:
+            print("[anom-simm] *** AVVISO GRAVE: --anom-simm SENZA --peq-esatto. `peq` puo' "
+                  "andare negativo (Z94 lo ha misurato a -4.85e-04) e li' la forma simmetrica "
+                  "HA UN POLO. Configurazione DICHIARATAMENTE non sicura. ***")
     if COES_CAUSALE:
         print("[coes-causale] LA COESIONE RISPETTA L'ISTANTE E IL CONO LOCALE: `d0` e `d` si "
               "leggono dalla fotografia di INIZIO PASSO invece che da un `d0` gia' spostato da "
@@ -7480,6 +7542,14 @@ def _cli():
                         "LOCALE dell'arco invece che su I_med (media globale, A2), e lo spostamento e' "
                         "passo_causale * tanh(...) * filtro_portata, con |F| <= 1 per costruzione invece "
                         "che per clip. Sostituisce il clip tanh(stress)*d0. Default off = byte-identico.")
+    p.add_argument("--anom-simm", action="store_true", dest="anom_simm",
+                   help="ANOMALIA SIMMETRICA SENZA PAVIMENTO: anom = 2*(rho-peq)/(rho+peq), con "
+                        "0/0 := 0 DEFINITO. Toglie il pavimento max(peq,1e-9), che e' un numero "
+                        "SCELTO e non esprime nessun vincolo fisico (A11): con peq negativo "
+                        "ribaltava il segno e moltiplicava per 3.7e5 (Z94). Il caso peq->0 passa "
+                        "da 1e+08 a ESATTAMENTE +2, e per anomalie piccole le due forme "
+                        "coincidono. RICHIEDE --peq-esatto: con peq < 0 la forma simmetrica ha un "
+                        "POLO in peq = -rho. Default off = byte-identico.")
     p.add_argument("--coes-causale", action="store_true", dest="coes_causale",
                    help="LA COESIONE CHE RISPETTA L'ISTANTE E IL CONO LOCALE: d0 e d si leggono "
                         "dalla fotografia di INIZIO PASSO (prima erano MISTI: densita' di fine "
