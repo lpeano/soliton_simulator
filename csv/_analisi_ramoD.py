@@ -15,8 +15,9 @@ COSA CALCOLA, tutto dagli snapshot e niente a memoria:
   T5  il CRICCHETTO: `d/d0` contro `_ab_C_solo_chicoop_FERMATO` (stessa base di epoca 2, ma
       `SCALA_MIN` e `COES_ADIM` SPENTI) -- il confronto LEGITTIMO dentro l'epoca 2
 
-REGIONI, per origine: vuoto = nodi `< 900` (la semina), masse = `900..N0-1`, nati = `>= N0`,
-dove `N0` e' l'`n` del primo snapshot. Un arco e' del vuoto se ENTRAMBI i capi lo sono, di massa se
+REGIONI, per origine: vuoto = nodi `< 900`, masse = `900..2390`, nati = `>= 2391`.
+⚠ `N0 = 2391` e' l'`n` ALLA SEMINA, MISURATO dal disco -- NON l'`n` del primo snapshot, che e'
+gia' cresciuto. Quell'errore c'era, e le percentuali per regione di `T3` erano sbagliate. Un arco e' del vuoto se ENTRAMBI i capi lo sono, di massa se
 entrambi lo sono, altrimenti CONFINE.
 ASCII PURO.
 """
@@ -41,6 +42,11 @@ C_EXT = r"E:\soliton_archivio\csv\_test_fork\_ab_C_solo_chicoop_FERMATO"
 OUT = os.path.join(RADICE, "csv", "_test_fork", "_diag_D", "ANALISI_ramoD_2026-09-21.txt")
 LAM = 0.8
 N_VUOTO = 900
+# ⚠ CORRETTO IL 2026-09-21, stesso difetto dell'estrattore: `N0` veniva dal PRIMO SNAPSHOT
+#   (passo 120, n = 2663) invece che dalla SEMINA, quindi i nati con indice 2391-2662
+#   risultavano MASSA e le percentuali per regione di `T3` erano sbagliate.
+#   MISURATO DAL DISCO: n = 2391 alla semina.
+N0_SEMINA = 2391
 
 
 def carica(p):
@@ -66,14 +72,11 @@ def main():
     F = serie(D_LOC)
     if not F:
         W("NESSUNO SNAPSHOT\n"); o.close(); return 1
-    N0 = None
     righe = []
     for p in F:
         a = carica(p)
         d = np.asarray(a["d"]); d0 = np.asarray(a["d0"]); vd = np.asarray(a["vd"])
         peq = np.asarray(a["peq"]); n = len(np.asarray(a["phi"]))
-        if N0 is None:
-            N0 = n
         st = np.abs(d - d0) / np.maximum(d0, 1e-300)
         pf = peq[np.isfinite(peq)]
         righe.append(dict(passo=passo(p), n=n, archi=len(d),
@@ -124,7 +127,7 @@ def main():
             continue
         k = int(np.argmin(np.where(fin, peq, np.inf)))
         def reg(x):
-            return "vuoto" if x < N_VUOTO else ("massa" if x < N0 else "nato")
+            return "vuoto" if x < N_VUOTO else ("massa" if x < N0_SEMINA else "nato")
         W("%6d %12.4e %10d | arco %d-%d  (%s - %s)\n"
           % (passo(p), peq[k], int((~fin).sum()), i[k], j[k], reg(i[k]), reg(j[k])))
     # la coda bassa di peq all'ultimo snapshot, per regione
@@ -135,8 +138,8 @@ def main():
     bassi = fin & (peq <= q)
     def regione_arco(ii, jj):
         rv = (ii < N_VUOTO) & (jj < N_VUOTO)
-        rm = (ii >= N_VUOTO) & (jj >= N_VUOTO) & (ii < N0) & (jj < N0)
-        rn = (ii >= N0) | (jj >= N0)
+        rm = (ii >= N_VUOTO) & (jj >= N_VUOTO) & (ii < N0_SEMINA) & (jj < N0_SEMINA)
+        rn = (ii >= N0_SEMINA) | (jj >= N0_SEMINA)
         return rv, rm, rn
     rv, rm, rn = regione_arco(i, j)
     W("\nall'ultimo snapshot (passo %d), l'1%% piu' BASSO di `peq` (%d archi, peq <= %.3e):\n"
@@ -149,7 +152,7 @@ def main():
     try:
         psi = np.asarray(a["psi"]); I = np.abs(psi) ** 2
         rho_arc = 0.5 * (I[i] + I[j])
-        anom = (rho_arc - peq) / np.maximum(peq, 1e-300)
+        anom = (rho_arc - peq) / np.maximum(peq, 1e-9)   # IL PAVIMENTO DEL CODICE, :4215
         W("\n(rho_arco - peq)/peq  -- il fattore che entra in `src`:\n")
         W("   su TUTTI gli archi:      p50=%.4g  p99=%.4g  max=%.4g\n"
           % (np.percentile(anom[fin], 50), np.percentile(anom[fin], 99), anom[fin].max()))

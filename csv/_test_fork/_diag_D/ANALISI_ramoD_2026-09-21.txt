@@ -43,24 +43,24 @@ T3  `peq`: la traiettoria del minimo, e DOVE vive
 ========================================================================================================
  passo      peq min   non fin. | dove vive il minimo
    120   1.0278e-07          0 | arco 250-802  (vuoto - vuoto)
-   240   1.3518e-06          0 | arco 2597-2675  (massa - nato)
+   240   1.3518e-06          0 | arco 2597-2675  (nato - nato)
    360   3.1218e-06          0 | arco 2675-2672  (nato - nato)
    480   1.1190e-05          0 | arco 2675-2672  (nato - nato)
    600   1.9964e-04          0 | arco 2675-2841  (nato - nato)
    720   1.0373e-04          0 | arco 2675-2841  (nato - nato)
    840   8.0930e-05          0 | arco 2836-3499  (nato - nato)
-   960   3.3284e-05          0 | arco 2521-2699  (massa - nato)
+   960   3.3284e-05          0 | arco 2521-2699  (nato - nato)
   1080   8.3482e-08          0 | arco 3573-3664  (nato - nato)
   1200   1.3849e-14          0 | arco 2773-4158  (nato - nato)
 
 all'ultimo snapshot (passo 1200), l'1% piu' BASSO di `peq` (5287 archi, peq <= 8.670e-03):
    vuoto-vuoto            4582 archi bassi su   59569 della regione  ( 7.69%)
-   massa-massa             153 archi bassi su  369344 della regione  ( 0.04%)
-   coinvolge un NATO       509 archi bassi su    3350 della regione  (15.19%)
+   massa-massa             136 archi bassi su  369167 della regione  ( 0.04%)
+   coinvolge un NATO       538 archi bassi su    3780 della regione  (14.23%)
 
 (rho_arco - peq)/peq  -- il fattore che entra in `src`:
    su TUTTI gli archi:      p50=1.04  p99=3.817  max=7.332
-   sull'1% con peq basso:   p50=-0.0944  p99=1.714  max=4.08
+   sull'1% con peq basso:   p50=-0.09365  p99=1.714  max=4.08
 
 ========================================================================================================
 T4  LA COESIONE E' IL MOTORE DI `d0`?
