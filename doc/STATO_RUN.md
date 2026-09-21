@@ -1,7 +1,7 @@
 <!-- PUNTO-DI-RIPRESA:INIZIO -->
 # ⚠⚠ PUNTO DI RIPRESA — **si legge PER PRIMO dopo un riavvio**
 
-> **Aggiornato 2026-09-21 19:47 · HEAD `b5d526f` · branch `fork-su2`, tutto committato e pushato.**
+> **Aggiornato 2026-09-21 20:10 · HEAD `308b3dd` · branch `fork-su2`, tutto committato e pushato.**
 > **Il PC si riavvia fra mezzanotte e le due** *(vincolo di Luca, 2026-09-21)*. **Questo blocco e'
 > RIGENERATO per intero a ogni aggiornamento**, fra due marcatori HTML: non si accumulano versioni
 > e non c'e' niente da cancellare a mano.
@@ -13,8 +13,8 @@
 | **`C1 PEQ_ESATTO`** | ✅ **sigillo `7/7`** | `csv/_seal_fork/_sigillo_peq_esatto_2026-09-21.txt` · `Z95` |
 | **`C2 PEQ_NASCITA_LOCALE`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_peq_nascita_2026-09-21.txt` · `Z96` |
 | **assioma `A11`** | ✅ scritto, coi sette corollari | `doc/ASSIOMI.md` · `CLAUDE.md` `P1-quinquies` |
-| **`C3 SCALA_MIN_PASSO`** | ⏳ **IN CORSO — e' il prossimo** | — |
-| `C4 COES_CAUSALE` | ⏸ | — |
+| **`C3 SCALA_MIN_PASSO`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_scala_min_passo_2026-09-21.txt` · `Z97` |
+| **`C4 COES_CAUSALE`** | ⏳ **IN CORSO — e' il prossimo** | — |
 | **`C1-bis ANOM_SIMM`** | ⏸ **dopo `C4`, prima di `C5`** *(deciso da Luca il 21/9)* | derivazione in `csv/_deriva_anom_simm.py` |
 | `C5 INVARIANTI` | ⏸ | mandato `C5` |
 | **validazione 600 passi** | ⏸ **CHECKPOINT 2: ci si FERMA** | — |

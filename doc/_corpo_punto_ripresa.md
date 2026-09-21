@@ -12,8 +12,8 @@
 | **`C1 PEQ_ESATTO`** | ✅ **sigillo `7/7`** | `csv/_seal_fork/_sigillo_peq_esatto_2026-09-21.txt` · `Z95` |
 | **`C2 PEQ_NASCITA_LOCALE`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_peq_nascita_2026-09-21.txt` · `Z96` |
 | **assioma `A11`** | ✅ scritto, coi sette corollari | `doc/ASSIOMI.md` · `CLAUDE.md` `P1-quinquies` |
-| **`C3 SCALA_MIN_PASSO`** | ⏳ **IN CORSO — e' il prossimo** | — |
-| `C4 COES_CAUSALE` | ⏸ | — |
+| **`C3 SCALA_MIN_PASSO`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_scala_min_passo_2026-09-21.txt` · `Z97` |
+| **`C4 COES_CAUSALE`** | ⏳ **IN CORSO — e' il prossimo** | — |
 | **`C1-bis ANOM_SIMM`** | ⏸ **dopo `C4`, prima di `C5`** *(deciso da Luca il 21/9)* | derivazione in `csv/_deriva_anom_simm.py` |
 | `C5 INVARIANTI` | ⏸ | mandato `C5` |
 | **validazione 600 passi** | ⏸ **CHECKPOINT 2: ci si FERMA** | — |

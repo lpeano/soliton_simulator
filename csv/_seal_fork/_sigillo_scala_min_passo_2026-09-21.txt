@@ -1,0 +1,26 @@
+[TIMBRO] _sigillo_scala_min_passo.py  sha1-BYTE ad010403  committato e pulito
+sim PRIMA (2a0e908): sha1 GREZZO d30bb0b9
+sim SUL DISCO      : sha1 GREZZO 716d43b9
+
+braccio A (prima della cura)...
+braccio B (disco, tutto SPENTO)...
+braccio C (disco, SCALA_MIN_PASSO)...
+braccio D (disco, SCALA_MIN per-scrittura)...
+
+----------------------------------------------------------------------------------------------------
+R1   PASS flag SPENTO = prima della cura: 12 campi -> BYTE-IDENTICI
+R2   PASS CONTROLLO POSITIVO: ACCESO vs SPENTO differiscono su 12 campi
+R3   PASS COMPOSIZIONE (spinte opposte a somma NULLA dentro un passo): C3 -> bias = 4.441e-16 contro un arrotondamento INEVITABILE di 4.441e-16 (dev'essere <=); freno per-scrittura -> bias = 7.273e-02, cioe' 6.2093% della mediana di `d0` e 163767256668255 VOLTE l'arrotondamento (DEVE essere enormemente sopra, senno' il test non distingue)
+R4   PASS IL VINCOLO TIENE: con C3 min(d) = 0.800000 contro LAM = 0.8000
+R5   PASS LA CHIRURGIA E' ALLINEATA: 24 aperture, 24 chiusure su 24 passi, 34 chirurgie attraverso la mitosi, 0 disallineamenti (deve essere 0)
+R6   PASS `nsub` NON MOLTIPLICA PIU' IL BIAS: il freno su `d` gira 24 volte in 24 passi (una per passo), col `nsub` massimo osservato = 4. Prima girava `nsub` volte.
+----------------------------------------------------------------------------------------------------
+SIGILLO SCALA_MIN_PASSO: 6/6
+
+VERDETTO: il CRICCHETTO e' curato. Con spinte a somma nulla `d0` resta INTATTO, il
+  vincolo `LAM` tiene, la chirurgia attraverso la mitosi e' allineata, e `nsub` non
+  moltiplica piu' il bias.
+
+LIMITI: UN seme, UNA scena, 24 passi. `R3` inietta spinte COSTRUITE (10% di `d0`), non
+  le spinte vere delle sei leggi: prova che l'OPERATORE compone bene, non che nel run
+  vero le spinte si compensino.

@@ -10526,3 +10526,39 @@ CONTINUA** — i due tronconi hanno la storia del padre. Curarla sarebbe curare 
 - il contatore contava **anche le calibrazioni della SEMINA** — **`526059` invece di `88`** —
   perche' avevo verificato che `_allaccia` e' chiamata solo da `semina()` e **concluso male** che
   fosse inerte in batch: **inerte e' la semina CONTINUA, non quella INIZIALE.**
+
+### ⑭ **CURA `C3` -- `SCALA_MIN_PASSO`, sigillata `6/6`. Il cricchetto e' curato**
+
+Il freno guardava il valore lasciato dalla scrittura **precedente** — **sei** su `d0`, **`nsub`** su
+`d` — quindi **dipendeva dall'ordine**, e frenando solo le **discese** produceva un **cricchetto**.
+**La cura:** si fotografa `d0` e `d` a **inizio passo**, le scritture passano **senza freno**, e a
+**fine passo** `_smorza` si applica **una volta sola** su `fine - inizio`.
+
+**IL NUMERO DI `R3`, ed e' il cuore del sigillo.** Iniettando spinte opposte del **10 %** di `d0`,
+**a somma nulla**, dentro un passo:
+
+| regime | quanto si sposta `d0` |
+|---|---:|
+| **`C3`, freno una volta sul totale** | **`4.441e-16`** — *esattamente l'arrotondamento inevitabile di `(x+s)-s`* |
+| freno **per-scrittura** | **`7.273e-02`** — **il `6.21 %` della mediana di `d0`, dal nulla** |
+
+> **`1.6e14` volte l'arrotondamento.** E il metro **non e' una soglia scelta**: e' il residuo di
+> virgola mobile **misurato** facendo `(d0 + s) - s` **senza alcun freno** (`A11`, corollario 1).
+
+**Gli altri cinque:** `R1` byte-identico a flag spento · `R2` acceso vs spento differiscono su 12
+campi · **`R4` il vincolo tiene: `min(d) = 0.800000` contro `LAM = 0.8`** · **`R5` la chirurgia
+attraverso la mitosi e' allineata — 24 aperture, 24 chiusure, 34 chirurgie, ZERO disallineamenti** ·
+**`R6` il freno su `d` gira 24 volte in 24 passi, UNA per passo** *(prima girava `nsub` volte:
+**22 591** in un solo passo al picco del ramo D)*.
+
+**⚠ La parte delicata e' la chirurgia, ed e' cablata invece che assunta.** La mitosi **cambia il
+numero di archi**: un confronto `fine - inizio` fatto **per posizione** confronterebbe **archi
+diversi**. Lo snapshot subisce **le stesse operazioni** ai **quattro** siti di ristrutturazione, e
+gli archi **nati** nel passo entrano col **proprio valore di nascita** — variazione zero, non
+frenati, perche' **una nascita non e' una discesa**. Se le lunghezze non tornassero, **non si frena
+a caso: si CONTA**.
+
+**⚠ E due criteri del sigillo erano sbagliati, non la cura.** `R3` pretendeva `bias == 0.0` **esatto**
+e falliva su **due ulp**; `R5` contava **25 aperture su 24 passi** perche' **l'iniezione del test
+apre e chiude il freno lei stessa** — *uno strumento che misura anche se stesso*, la stessa famiglia
+del contatore di `C2` che contava anche la semina.
