@@ -136,16 +136,25 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 |---|---|---|---|
 | 1 | `CHI_COOP` (carica dallo spinore, geometria da `chi_basc`) | perentorio ① | ✅ **FATTO**, sigillo `8/8` |
 | 2 | `SCALA_MIN` + `COES_ADIM`, codice e driver | perentorio ②③ | ✅ **FATTO**, `11b6431` |
-| 3 | **sigillo unico `Z0`-`Z8`** | perentorio | ✅ **`11/11`** — `d69e5bae` sul simulatore `4954fe5b`. `Z1` **ri-ancorata all'argv NUDO** *(piu' severa: e' il caso in cui la cura non PUO' avere effetto)*; `Z8` nuovo: la ricostruzione del mondo e' **neutra**. **+ `Z1c` PASS** *(argv del FORK, tre flag spenti: byte-identico, e la controprova dice che il test ATTRAVERSA la catena -- 60 chiamate a `chiralita_core_locale` contro le ZERO dell'argv nudo)*. |
-| 4 | **lancio del ramo D** | perentorio | ✅ **CHIUSO il 2026-09-21: FERMATO al passo 1230**, archivio INTATTO *(10 snapshot 120-1200, tutti apribili, zero `.tmp` orfani)*. **NON ha raggiunto i 3000 passi.** Il criterio assoluto ha risposta **NO per questo lancio**, ma **la ragione scritta in `Z90` era SBAGLIATA**: non e' una divergenza, sono **picchi transitori di `n1`** che il run **attraversa** *(22591 al passo 1126, 76948 al 1252, con `n1=1` e `nsub=4..6` in mezzo)*. |
-| **4-bis** | **DIAGNOSI DEI PICCHI DI `n1`** — rigiocata dal **1080** *(il 1200 era il punto sbagliato)* + lettura degli ISTANTI di `SCALA_MIN`/`COES_ADIM` | mandato 2026-09-21 | ▶ **IN CORSO.** Lettura ✅ *(`Z91`, `Z92`, `doc/REFERTO_istanti_scala_min_coes_adim.md`)*; rigiocata ▶ in corso, deve dare **il passo e l'ARCO** del picco. **Nessuna cura, da mandato.** |
-| 5 | tag `epoca-2` + righe di stato + regola in `CLAUDE.md` | EPOCA | ✅ **tag annotato su `01eda44`** *(certifica `4954fe5b`, il simulatore su cui gira D)*, **pushato**; righe di stato in cima a `STATO_RUN.md` e `RELAZIONE_PER_CLAUDE.md`; regola in `CLAUDE.md`. |
-| 6 | strumento cosmologico `M1`-`M4`, e `M1`/`M4` **leggeri** durante il run | COSMOLOGICO | ⏸ dopo il punto 4 |
-| 7 | **`Z47` PARTE ①** — ricognizione di `pos` nella fisica *(sola lettura)* | `MANDATO_Z47_coda` | ⏸ condizione d'avvio: D lanciato **e** punti 5-6 fatti |
-| 8 | a run finito: `M2`/`M3` cosmologici *(pesanti)* | COSMOLOGICO | ⏸ |
-| **8-bis** | **ARCHIVIO A ROTAZIONE** — il run scrive su `C:`, ogni snapshot **completo** viene spedito su `E:`, verificato con `sha1` dei byte compressi, e **solo allora** tolto dal locale | `MANDATO_archivio_rotazione` | ⏸ **condizione d'avvio: il ramo D e' FINITO.** Il driver e i presidi sono **in uso da D**: prima di allora non si toccano. Poi: task history → modifica → sigillo `R1`-`R5`. **Il run successivo la usa.** |
+| 3 | **sigillo unico `Z0`-`Z8`** | perentorio | ✅ **`11/11`** — `d69e5bae` sul simulatore `4954fe5b`, piu' `Z1c` |
+| 4 | **lancio del ramo D** | perentorio | ✅ **CHIUSO: FERMATO al passo 1230**, archivio INTATTO. **NON ha raggiunto i 3000 passi**, e la ragione scritta in `Z90` era sbagliata: **picchi TRANSITORI**, non divergenza |
+| 5 | tag `epoca-2` + righe di stato + regola in `CLAUDE.md` | EPOCA | ✅ **FATTO**, piu' la `git notes` con la correzione `EPOCA 1-bis` |
+| **4-bis** | **DIAGNOSI DEI PICCHI DI `n1`** | mandato 21/9 §1 §2 | ✅ **PASSO `1126`, ARCO `3352-506`, `peq = -4.85e-04` NEGATIVO** (`Z93`, `Z94`). **Resta il §2 del mandato, col BERSAGLIO CORRETTO** *(non «da dove viene `rho`»: **quanti archi hanno `peq < 0`**, **quale dei due termini di `:4206` scavalca**, e **`dt_e/tau_bg_loc`**)* |
+| **NUOVA a** | **CURA ① — `SCALA_MIN_PASSO`**: il freno UNA VOLTA per passo, sulla variazione TOTALE, dal valore di INIZIO passo | mandato 21/9 §3① | ⏸ dopo la 4-bis. **Sigillo NUOVO sulla COMPOSIZIONE**, che oggi non esiste |
+| **NUOVA b** | **CURA ② — `ANOM_SIMM`**: `anom = 2(rho−peq)/(rho+peq)`, niente pavimento `1e-9` | mandato 21/9 §3② | ⏸ **⚠ DA DERIVARE PRIMA: con `peq < 0` la forma simmetrica ha un POLO in `peq = −rho` e NON e' limitata in `[−2,2]`** *(coi numeri misurati vale `4.32`)*. **Segnalato a Luca** |
+| **8-bis** | **ARCHIVIO A ROTAZIONE** — il run scrive su `C:`, ogni snapshot completo va su `E:` con `sha1` dei byte compressi | mandato archivio | ⏸ **condizione d'avvio SODDISFATTA**. Va **PRIMA** del nuovo ramo D |
+| **NUOVA c** | **IL NUOVO RAMO D COMPLETO** — le tre modifiche + le due cure accese, 3000 passi, `sep = 4.0`, stesso seme | mandato 21/9 §4 | ⏸ **Letture: criteri ASSOLUTI**, compreso **`d/d0` vicino a 1** *(trasparenza)* e **nessun picco di `nsub`** |
+| 6 | strumento cosmologico `M1`-`M4` | COSMOLOGICO | ⏸ **SPOSTATA QUI DA LUCA: DOPO il nuovo ramo D, sui suoi snapshot** |
+| 7 | **`Z47` PARTE ①** — ricognizione di `pos` nella fisica *(sola lettura)* | `MANDATO_Z47_coda` | ⏸ |
+| 8 | `M2`/`M3` cosmologici *(pesanti)* | COSMOLOGICO | ⏸ |
 | 9 | **CHECKPOINT a Luca** | — | ⏸ |
 | 10 | `Z47` PARTE ② — lo stacco | `MANDATO_Z47_coda` | 🔒 **NON parte senza il via libera di Luca** |
+
+> **⚠ PERCHE' IL COSMOLOGICO E' SCESO, e la ragione va letta insieme all'ordine:**
+> **le misure cosmologiche su un run che esplode NON misurano la cosmologia.** `M1`-`M4` chiedono se
+> l'espansione sia senza centro e localmente trasparente; un run che attraversa picchi di `nsub` a
+> `22591` con `peq` che esce dal dominio fisico **non e' il sistema di cui si vuole sapere questo.**
+> **Prima si cura, poi si misura.** *(Decisione di Luca, 2026-09-21.)*
 
 > **⚠ Se una voce si blocca, le successive ASPETTANO: non si passa avanti.**
 >
@@ -153,7 +162,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 > **La coda** mette il **CHECKPOINT** alla voce **9**, cioe' **dopo** il cosmologico `M1`-`M4` (6), `Z47` parte ① (7), `M2`/`M3` (8) e l'archivio a rotazione (8-bis).
 > **Il mandato** dice *«ORDINE: 1 lancia la rigiocata, 2 la lettura, 3 commit e push, 4 FERMATI: checkpoint a Luca»* — cioe' **checkpoint SUBITO, saltando 6, 7, 8 e 8-bis**.
 > **Cosa ho fatto:** ho eseguito il mandato *(la diagnosi e' la voce **4-bis**, e la voce 4 era la prima non spuntata, quindi la diagnosi del suo esito sta al posto giusto)*, **e mi fermo al checkpoint senza toccare 6, 7, 8 e 8-bis**.
-> **Cosa serve da te:** dire se dopo il checkpoint si riprende **dalla 6** com'e' scritto, oppure se la coda va riordinata. **Non decido io l'ordine.**
+> **✅ RISOLTA il 2026-09-21: Luca ha RIORDINATO la coda lui**, ed e' l'ordine scritto qui sopra. La segnalazione resta leggibile perche' mostra che il meccanismo ha funzionato: **la coda ha vinto sul mandato, e' stato segnalato, e l'ordine l'ha deciso Luca.**
 
 ---
 

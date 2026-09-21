@@ -10320,3 +10320,45 @@ massimo)*; **quale** dei due termini di `:4206` scavalchi *(non sono separati)*;
 **Nessuna cura applicata: il mandato la vieta in questo giro.** **E la cura non e' ovvia:** alzare il
 pavimento maschererebbe il sintomo — **il difetto e' che `peq` esce dal dominio fisico, e una
 grandezza che deve restare `>= 0` non si ripara nel punto in cui la si DIVIDE.**
+
+### ⑨ **`ANOM_SIMM` derivata PRIMA di scriverla: fa cio' che promette, ma ha un POLO dove serve**
+
+> Mandato del 2026-09-21 §3②, che chiede esplicitamente di **derivarla prima**.
+> Generata da codice, non ricopiata (`P1-ter`): `csv/_deriva_anom_simm.py`, blob `5215a7e2`.
+
+| caso | `rho` | `peq` | `anom` VECCHIA | `anom` SIMM |
+|---|---:|---:|---:|---:|
+| anomalia piccola | `1e-1` | `8e-2` | `0.25` | `0.2222` |
+| **`peq -> 0`** | `1e-1` | `0` | **`1e+08`** | **`+2`** |
+| `rho -> 0` | `0` | `1e-1` | `-1` | `-2` |
+| **`0/0`** | `0` | `0` | `0` | **`nan`** |
+| **MISURATO `3352-506`** | `1.32e-3` | **`-4.85e-4`** | `1.805e+06` | **`4.32`** |
+| **POLO, `peq = -rho`** | `1.32e-3` | `-1.32e-3` | `2.64e+06` | **`inf`** |
+| oltre il polo | `1.32e-3` | `-1.4e-3` | `2.72e+06` | **`-68`** |
+
+**(1) DOVE `peq >= 0`, LA CURA FA CIO' CHE PROMETTE.** Coincide con la vecchia per anomalie piccole,
+e il caso che oggi esplode — `peq -> 0` con `rho` ordinario — passa da `1e+08` a **esattamente `+2`**.
+**Li' il pavimento `1e-9` diventa inutile, ed e' il punto della cura.**
+
+**(2) ⚠ MA IL LIMITE `[-2,+2]` VALE SOLO SE `rho >= 0` *E* `peq >= 0`.** `rho = 0.5(I_i+I_j)` con
+`I = |psi|^2` e' **sempre** `>= 0`; **`peq` no — `Z94` lo misura NEGATIVO.** Allora `rho + peq` si
+annulla in `peq = -rho`: **e' un POLO, non un limite.** Sul caso **misurato** la forma vale **4.32**,
+cioe' **gia' fuori da `[-2,+2]`**; al polo **`inf`**; oltre il polo **`-68`, col segno rovesciato**.
+> **Non e' un'obiezione teorica: il punto in cui la forma si rompe e' ESATTAMENTE la regione che la
+> cura vuole coprire.**
+> **CONSEGUENZA SUL DISEGNO: le due cure NON sono indipendenti.** `ANOM_SIMM` e' corretta **solo a
+> valle** di una garanzia `peq >= 0`. **Accesa da sola, sostituisce un pavimento con un polo.**
+
+**(3) ⚠ IL CASO `0/0` E' UNA REGRESSIONE SE NON LO SI DEFINISCE.** Oggi `rho = peq = 0` da'
+`0/1e-9 = 0`: il pavimento, per quanto arbitrario, **definisce** quel caso; la forma simmetrica da'
+**`nan`**. E non e' un caso di scuola — l'arco `2773-4158` ha `rho = 1.38e-81`, e archi di soli nodi
+**neonati** (`A7b`) hanno `I` numericamente nulla.
+**PROPOSTA, senza pavimenti scelti: `0/0` si DEFINISCE ZERO**, col precedente gia' in questo stesso
+file — `scala_p`, `Z67`: *«`0/0` e' definito ZERO, dichiarato»*. **E' una definizione, non una
+regolarizzazione: non c'e' nessun numero da scegliere, e il valore e' quello giusto** — dove non c'e'
+densita' non c'e' anomalia.
+```python
+anom = np.where(rho + peq > 0.0, 2.0*(rho - peq)/(rho + peq), 0.0)
+```
+**⚠ E quel `> 0` (non `!= 0`) copre anche il denominatore NEGATIVO — ma lo copre MASCHERANDOLO**, il
+che e' accettabile **solo se `peq >= 0` e' gia' garantito**. Senno' si sta zittendo il sintomo di (2).
