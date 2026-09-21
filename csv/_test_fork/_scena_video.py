@@ -150,7 +150,18 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--
             "--pav-com", "--guscio-morbido", "--zeta-vir"] \
     + (["--chi-basc"] if CHIBASC == "on" else []) \
     + (["--chi-coop"] if CHICOOP == "on" else []) \
+    + (["--scala-min"] if SCALAMIN == "on" else []) \
+    + (["--coes-adim"] if COESADIM == "on" else []) \
     + ["--plast-din", "--viriale", "--olon-part"]
+# ⚠⚠ QUESTE DUE RIGHE MANCAVANO, e il ramo D e' girato per 1200 passi con SCALA_MIN e COES_ADIM
+#   SPENTI mentre il comando li chiedeva ACCESI. Le opzioni erano PARSATE (`--scala-min=on` non
+#   finiva in `_resti` e non dava errore) ma non arrivavano MAI al simulatore: un'opzione che si
+#   accetta e si ignora e' peggio di un'opzione che non esiste, perche' non si lamenta.
+#   CAUSA: la patch che doveva aggiungerle usava `str.replace()` con un solo `assert t != o`
+#   GLOBALE, soddisfatto dalle ALTRE sostituzioni. L'ancora di QUESTA non ha attaccato, in
+#   silenzio. Ogni sostituzione va asserita PER SE', non in blocco.
+#   PRESIDIO: `csv/_seal_fork/_sigillo_flag_driver.py` verifica che OGNI opzione `=on` del driver
+#   arrivi davvero al MODULO -- e' l'unico test che attraversa il percorso del driver.
 # ⚠ IL FLAG SI INSERISCE NELLA STESSA POSIZIONE IN CUI ERA CABLATO. A default la lista e' IDENTICA
 #   ELEMENTO PER ELEMENTO a quella di prima: non "equivalente", identica. Lo prova
 #   `csv/_seal_fork/_sigillo_chibasc_driver.py`, non questo commento.

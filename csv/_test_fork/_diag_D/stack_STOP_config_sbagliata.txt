@@ -1,0 +1,72 @@
+Process 30788: C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_D --sep=4.0 --serie=20 --csv-progresso=csv/_test_fork/_ab_D/prog.csv --chi-coop=on --scala-min=on --coes-adim=on
+Python v3.13.2 (C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe)
+
+Thread 13912 (active+gil): "MainThread"
+    memoria_hebbiana_moto (soliton_simulator.py:5266)
+        Arguments:
+            self: <Rete at 0x277ff1025d0>
+        Locals:
+            n: 4161
+            I: <numpy.ndarray at 0x277fbadccf0>
+            Imed: 0.0011300936532959536
+            mask: <numpy.ndarray at 0x277fefe88d0>
+            ii: <numpy.ndarray at 0x277fefe8810>
+            jj: <numpy.ndarray at 0x277fefe87b0>
+            twabs: <numpy.ndarray at 0x277fefe8cf0>
+            twn: <numpy.ndarray at 0x277fefe8db0>
+            v: <numpy.ndarray at 0x277fefe9b90>
+            L: <numpy.ndarray at 0x277fefea370>
+            dirarc: <numpy.ndarray at 0x277fefe96b0>
+            dtw: <numpy.ndarray at 0x277fefe9830>
+            grad_tw: <numpy.ndarray at 0x277fefe9c50>
+            k: 2
+            plast: <numpy.ndarray at 0x277fefe9b30>
+            memedge: <numpy.ndarray at 0x277fefe99b0>
+            proj: <numpy.ndarray at 0x277fefea310>
+            passo_max: 0.00825469268712915
+            s: <numpy.ndarray at 0x277fefe93b0>
+            phi_g: <numpy.ndarray at 0x277ff041950>
+            _: <numpy.ndarray at 0x277fbb39350>
+            dpozzo: <numpy.ndarray at 0x277ff0fba50>
+            _ad: <numpy.ndarray at 0x277ff0fbed0>
+            _den: <numpy.ndarray at 0x277ff0fbb70>
+            _rap: <numpy.ndarray at 0x277ff0fbc90>
+            ampiezza: <numpy.ndarray at 0x277ff0fb930>
+            grav: <numpy.ndarray at 0x277ff0fbe70>
+            _nbg: <numpy.ndarray at 0x277ff1319b0>
+            prod_interno: <numpy.ndarray at 0x277ff0fbdb0>
+            proiez: <numpy.ndarray at 0x277ff0fb990>
+            c_sistema: 1.1313708498984762
+            passo_causale: 0.011313708498984762
+            twn_a: <numpy.ndarray at 0x277e30fed30>
+            circ_nodo: <numpy.ndarray at 0x277ff1305d0>
+            grado_c: <numpy.ndarray at 0x277ff0fbab0>
+            circ_arc: <numpy.ndarray at 0x277ff1310b0>
+            r_rad: <numpy.ndarray at 0x277ff0fb930>
+            t_tan: <numpy.ndarray at 0x277ff0fbf90>
+            H: <numpy.ndarray at 0x277ff1307b0>
+            cos2: <numpy.ndarray at 0x277ff131110>
+            sin2: <numpy.ndarray at 0x277ff131890>
+            s2full: <numpy.ndarray at 0x277ff130d50>
+            _fuori: 0
+            radiale: <numpy.ndarray at 0x277e53419b0>
+            tangenz: <numpy.ndarray at 0x277ff1320d0>
+            spinta: <numpy.ndarray at 0x277ff130390>
+            I_nodi: <numpy.ndarray at 0x277fbb393b0>
+            d_archi: <numpy.ndarray at 0x277ff1317d0>
+            grad_I_relativo: <numpy.ndarray at 0x277ff131470>
+            lap_I: <numpy.ndarray at 0x277ff131530>
+            deg_loc: <numpy.ndarray at 0x277ff131a70>
+            lap_arco: <numpy.ndarray at 0x277ff130870>
+            I_arco: <numpy.ndarray at 0x277ff1314d0>
+            I_med: 0.05228356482215726
+            rapporto_portata: <numpy.ndarray at 0x277ff131e90>
+            filtro_portata: <numpy.ndarray at 0x277ff131830>
+            scala_statale: 76.50587739390026
+            delta_relativo_arco: <numpy.ndarray at 0x277ff130210>
+            peso_dinamico_shear: <numpy.ndarray at 0x277ff1322b0>
+            forza_campo: <numpy.ndarray at 0x277ff131350>
+            scostamento_scala: <numpy.ndarray at 0x277ff130510>
+            richiamo_elastico: <numpy.ndarray at 0x277ff131cb0>
+            coesione_relazionale: <numpy.ndarray at 0x277ff132490>
+    <module> (_scena_video.py:259)
