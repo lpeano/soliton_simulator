@@ -79,14 +79,20 @@ if "--lavoro" in sys.argv:
     # ESATTAMENTE nulla attraverso `_sd0`, e si chiude. Con `C3` il freno vede `dx = 0` -- che
     # non e' una discesa -- e il valore resta intatto. Col freno per-scrittura ogni meta' viene
     # frenata da sola, e la somma NON torna.
+    # ⚠ il braccio A gira sul simulatore di PRIMA della cura, che i tre metodi non li ha: li' non
+    #   si inietta niente e il bias resta `nan`, cosi' non lo si confonde con uno ZERO MISURATO.
+    #   (`nan` != 0.0, quindi un criterio scritto male fallisce invece di passare di nascosto.)
     d0_prima = np.array(net.d0, dtype=float, copy=True)
-    spinta = 0.10 * np.maximum(d0_prima, 1e-12)
-    net._smp_apri()
-    net.d0 = net.d0 + net._sd0(+spinta)
-    net.d0 = net.d0 + net._sd0(-spinta)
-    net._smp_chiudi()
-    scarto = float(np.max(np.abs(np.asarray(net.d0, dtype=float) - d0_prima)))
-    rel = scarto / max(float(np.median(d0_prima)), 1e-12)
+    if hasattr(net, "_smp_apri"):
+        spinta = 0.10 * np.maximum(d0_prima, 1e-12)
+        net._smp_apri()
+        net.d0 = net.d0 + net._sd0(+spinta)
+        net.d0 = net.d0 + net._sd0(-spinta)
+        net._smp_chiudi()
+        scarto = float(np.max(np.abs(np.asarray(net.d0, dtype=float) - d0_prima)))
+        rel = scarto / max(float(np.median(d0_prima)), 1e-12)
+    else:
+        scarto = rel = float("nan")
 
     print("C3 modo=%s passi=%d aperture=%d chiusure=%d chirurgie=%d disall=%d dchius=%d "
           "passanti=%d mind=%.6f mind0=%.6f LAM=%.4f bias=%.6e biasrel=%.6e nsubmax=%d"
