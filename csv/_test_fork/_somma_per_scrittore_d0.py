@@ -93,6 +93,29 @@ def main():
 
     S.Rete._traccia_d0 = traccia
 
+    # ⚠ E IL FRENO: QUANTO AGGIUNGE. `_smorza` restituisce `eff` al posto di `dx`, e per
+    #   costruzione attenua SOLO le discese: **`sum(eff - dx)` e' esattamente cio' che il VINCOLO
+    #   mette dentro e che la fisica non aveva messo**, ed e' `>= 0` per costruzione.
+    #   Serve perche' la prima misura ha dato un fatto che va spiegato: **gli scrittori hanno
+    #   saldo NEGATIVO e `median(d0)` SALE lo stesso.** La differenza deve stare qui o nelle
+    #   NASCITE, e non si indovina: si misura.
+    #   PURE-READ: si chiama l'originale e si somma il risultato.
+    _orig_sm = S.Rete._smorza
+    FRENO = {}
+
+    def smorza(self, prima, dx, quale):
+        eff = _orig_sm(self, prima, dx, quale)
+        c = FRENO.setdefault(quale, dict(agg=0.0, dx=0.0, giri=0, n=0))
+        _e = np.atleast_1d(np.asarray(eff, dtype=float))
+        _d = np.atleast_1d(np.asarray(dx, dtype=float))
+        if _e.shape == _d.shape:
+            c["agg"] += float(np.sum(_e - _d))
+            c["dx"] += float(np.sum(_d))
+            c["n"] += int(_d.size)
+        c["giri"] += 1
+        return eff
+    S.Rete._smorza = smorza
+
     S._NMASSE_VIDEO["n"] = 3; S._NMASSE_VIDEO["sep"] = 4.0; S._NMASSE_VIDEO["size"] = None
     S.avvia_test("N-MASSE")()
     net = S.net
@@ -193,10 +216,37 @@ def main():
         else:
             W("  *** meno di 3 punti utili: la pendenza NON si misura, e non la invento. ***\n")
     W("\n")
-    W("LIMITI: UN seme, UNA scena, %d passi. Questa e' la somma di cio' che ogni scrittore\n" % fatti)
-    W("  SPINGE, NON di cio' che sopravvive: con `SCALA_MIN_PASSO` il freno agisce UNA VOLTA a\n")
-    W("  fine passo, quindi la somma qui e' quella GREZZA, prima del freno. E' cio' che serve per\n")
-    W("  sapere CHI spinge -- ma non dice quanto ne resta.\n")
+    # ---------------------------------------------------------------- IL FRENO
+    W("=" * 112 + "\n")
+    W("IL FRENO DELLA SCALA MINIMA: QUANTO AGGIUNGE\n")
+    W("`_smorza` attenua SOLO le discese, quindi `sum(eff - dx)` e' ESATTAMENTE cio' che il\n")
+    W("VINCOLO mette dentro e che la fisica non aveva messo. E' `>= 0` per costruzione.\n")
+    W("=" * 112 + "\n\n")
+    W("%-14s %18s %18s %18s | %7s %12s\n"
+      % ("grandezza", "AGGIUNTO dal freno", "somma dx GREZZA", "somma EFFETTIVA",
+         "giri", "elementi"))
+    W("-" * 96 + "\n")
+    for q in sorted(FRENO):
+        c = FRENO[q]
+        W("%-14s %18.6e %18.6e %18.6e | %7d %12d\n"
+          % (q, c["agg"], c["dx"], c["dx"] + c["agg"], c["giri"], c["n"]))
+    W("\n")
+    _f = FRENO.get("d0_passo")
+    if _f is not None:
+        W("SU `d0`: gli scrittori spingono per %.6e, il freno AGGIUNGE %.6e,\n"
+          % (_f["dx"], _f["agg"]))
+        W("  e il risultato EFFETTIVO e' %.6e.\n" % (_f["dx"] + _f["agg"]))
+        if _f["dx"] < 0.0 < _f["dx"] + _f["agg"]:
+            W("  *** IL SEGNO SI RIBALTA: LA FISICA SPINGE GIU', IL VINCOLO PORTA SU. ***\n")
+        W("  rapporto |aggiunto| / |grezzo| = %.4f\n"
+          % (abs(_f["agg"]) / max(abs(_f["dx"]), 1e-300)))
+    else:
+        W("*** `d0_passo` non compare: il freno una-volta-per-passo NON ha girato. ***\n")
+    W("\n")
+    W("LIMITI: UN seme, UNA scena, %d passi. La tabella degli scrittori e' la somma di cio' che\n" % fatti)
+    W("  ciascuno SPINGE, PRIMA del freno; la tabella del freno dice quanto il vincolo AGGIUNGE.\n")
+    W("  Insieme dicono CHI spinge e CHI porta su. NON dicono cosa fanno le NASCITE, che\n")
+    W("  concatenano e per le quali il delta elemento-per-elemento non esiste.\n")
     o.close()
     print(io.open(OUT, encoding="utf-8").read())
     return 0
