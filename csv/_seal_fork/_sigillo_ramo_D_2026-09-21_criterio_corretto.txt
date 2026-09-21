@@ -1,0 +1,36 @@
+[TIMBRO] _sigillo_ramo_D.py  sha1-BYTE a1d92a39  committato e pulito
+Z0  simulatore PRIMA (0f4fc1e): sha1 GREZZO 54623593
+Z0  simulatore ORA            : sha1 GREZZO 3552d118
+Z0  (NB: NON e' `git hash-object`. Sono due numeri diversi per lo stesso file, C18.)
+
+braccio A_prima        flag: (nessuno)
+braccio B_spenti       flag: (nessuno)
+braccio C1_scalamin    flag: scala-min
+braccio C2_coesadim    flag: coes-adim
+braccio C3_chicoop     flag: chi-coop
+braccio D_tutti        flag: scala-min, coes-adim, chi-coop
+
+Z1    PASS   tutti i flag spenti: 10 campi -> BYTE-IDENTICI
+      scala-min    da solo: 10 campi su 10 differiscono da tutto-spento
+      coes-adim    da solo: 10 campi su 10 differiscono da tutto-spento
+      chi-coop     da solo: 10 campi su 10 differiscono da tutto-spento
+Z2    PASS   ogni flag DA SOLO produce un effetto (nessuno e' codice morto)
+Z3    PASS   torsione su perc_geom 30, campo B su perc_chi 30; chi_basc -> perc_geom 30 volte e perc_chi 0; carica == doppia copertura in 30 passi su 30
+Z4a   PASS   IL VINCOLO NON CREA MOVIMENTO: incrementi >= 0 toccati 0 volte (0); max(dx_eff) sulle DISCESE = -0.0 (<= 0: non spinge mai verso l'alto); discese APPROFONDITE 0 (0)
+Z4b   FAIL   min(d) = 0.075759598, min(d0) = 0.078622064, LAM = 0.800000000
+Z4c   PASS   stress |d-d0|/d0 massimo: 2.071926e+00
+Z4d   PASS   [SI RIPORTA SEMPRE] casi patologici dx <= -x: 0; pavimenti vecchi SALTATI: 175
+Z5    PASS   |delta d0| massimo 1.052725e-02  <=  passo_causale 1.131371e-02   (saturi: 0 su 15818181 = 0.00%)
+Z6    PASS   tutti accesi: array con lunghezza != n -> nessuno ; NaN/inf -> nessuno
+
+  (informazione, non criterio) con tutti e tre accesi:
+    min(d) = 0.075759597561   min(d0) = 0.07862206438   stress max = 9.011406e-01
+    _g_sm_patol = 0   _g_sm_viol_id = 0   max(dx_eff sulle discese) = -0.0
+
+ESITO: 8/9
+
+VERDETTO: IL SIGILLO NON PASSA. Il ramo D NON si lancia.
+
+⚠ LIMITI: UN seme, UNA scena, 30 passi. In 30 passi la coppia di SCHWINGER puo' non
+  essere MAI scattata: la terza via di nascita puo' essere NON ESERCITATA.
+⚠ E Z7 NON E' QUI: e' il sigillo interno della rigiocata, e si gira a parte.

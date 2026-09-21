@@ -9356,3 +9356,19 @@ l'ipotesi che avevo scritto: a sbagliare non era il DOVE, era il QUANDO.**
 
 **NON applico la cura:** cambiare *quando* il mondo viene costruito tocca **ogni** flag, non solo i
 tre del ramo D. E' una decisione di struttura.
+
+### ✅ `Z4a` corretto e PASSATO — il sigillo sale a **`8/9`**
+
+Sigillo `a1d92a39` sul simulatore `3552d118`:
+```
+Z4a  PASS   incrementi >= 0 toccati 0 volte;
+            max(dx_eff) sulle DISCESE = -0.0   (<= 0: non spinge mai verso l'alto);
+            discese APPROFONDITE 0
+```
+**Il `-0.0` non e' un arrotondamento, e' informativo:** il massimo su **tutte** le discese e' uno
+zero **negativo** — le discese piu' attenuate sono state portate **esattamente a zero** *(il
+fattore `max(0, 1-LAM/x)` vale 0 per `x <= LAM`)* **e nessuna e' mai diventata positiva**.
+
+**Resta solo `Z4b`**, e deve restare: la causa e' trovata *(il vuoto nasce all'`import`)* ma
+**la cura non e' applicata**, perche' cambiare *quando* il mondo viene costruito tocca **ogni**
+flag. **Il ramo D resta bloccato alla voce `3` della coda unica.**

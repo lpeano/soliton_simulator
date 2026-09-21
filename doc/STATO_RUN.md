@@ -7,7 +7,7 @@
 |---|---|---|---|
 | 1 | `CHI_COOP` (carica dallo spinore, geometria da `chi_basc`) | perentorio ① | ✅ **FATTO**, sigillo `8/8` |
 | 2 | `SCALA_MIN` + `COES_ADIM`, codice e driver | perentorio ②③ | ✅ **FATTO**, `11b6431` |
-| 3 | **sigillo unico `Z0`-`Z7`** | perentorio | ⛔ **FALLITO `7/9`**: `Z4a` (criterio MIO sbagliato) e `Z4b` (`min(d) < LAM`, difetto VERO). **FERMO QUI.** |
+| 3 | **sigillo unico `Z0`-`Z7`** | perentorio | ⛔ **`8/9`** — `Z4a` **CORRETTO e PASSATO** *(`Z86` chiusa)*; **resta `Z4b`** *(`min(d) = 0.076` contro `LAM = 0.8`)*, **causa TROVATA** *(`Z87`: il vuoto nasce all'`import`, prima che la fisica sia configurata)* ma **cura NON applicata: e' una decisione di STRUTTURA che aspetta Luca.** **FERMO QUI.** |
 | 4 | **lancio del ramo D** | perentorio | ⏸ **BLOCCATO** dal punto 3 |
 | 5 | tag `epoca-2` + righe di stato + regola in `CLAUDE.md` | EPOCA | ⏸ dopo il punto 4 *(le etichette del registro: ✅ fatte, 150/150)* |
 | 6 | strumento cosmologico `M1`-`M4`, e `M1`/`M4` **leggeri** durante il run | COSMOLOGICO | ⏸ dopo il punto 4 |
