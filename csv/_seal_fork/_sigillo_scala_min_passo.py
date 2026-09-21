@@ -82,9 +82,22 @@ if "--lavoro" in sys.argv:
     # ⚠ il braccio A gira sul simulatore di PRIMA della cura, che i tre metodi non li ha: li' non
     #   si inietta niente e il bias resta `nan`, cosi' non lo si confonde con uno ZERO MISURATO.
     #   (`nan` != 0.0, quindi un criterio scritto male fallisce invece di passare di nascosto.)
+    # ⚠ I CONTATORI SI LEGGONO **PRIMA** DELL'INIEZIONE: l'iniezione stessa apre e chiude il freno,
+    #   e li' gonfierebbe di 1. *(E' successo: `25` aperture su `24` passi, e il FAIL era MIO.)*
+    cont = dict(ap=getattr(net, "_g_smp_aperture", 0), ch=getattr(net, "_g_smp_chiusure", 0),
+                chir=getattr(net, "_g_smp_chirurgie", 0),
+                dis=getattr(net, "_g_smp_disallineati", 0),
+                dch=getattr(net, "_g_smp_d_chiusure", 0),
+                pas=getattr(net, "_g_smp_passanti", 0),
+                nsub=getattr(net, "_g_smp_d_nsub", 0))
     d0_prima = np.array(net.d0, dtype=float, copy=True)
+    # ⚠ IL RESIDUO DI ARROTONDAMENTO SI **MISURA**, NON SI SCEGLIE UNA SOGLIA.
+    #   `(x + s) - s` non torna `x` in virgola mobile, e quel residuo e' INEVITABILE: e' il
+    #   metro con cui si giudica il bias della cura. Nessun numero inventato (`A11`, corollario 1).
+    spinta = 0.10 * np.maximum(d0_prima, 1e-12)
+    _puro = (d0_prima + spinta) - spinta
+    arrot = float(np.max(np.abs(_puro - d0_prima)))
     if hasattr(net, "_smp_apri"):
-        spinta = 0.10 * np.maximum(d0_prima, 1e-12)
         net._smp_apri()
         net.d0 = net.d0 + net._sd0(+spinta)
         net.d0 = net.d0 + net._sd0(-spinta)
@@ -95,12 +108,11 @@ if "--lavoro" in sys.argv:
         scarto = rel = float("nan")
 
     print("C3 modo=%s passi=%d aperture=%d chiusure=%d chirurgie=%d disall=%d dchius=%d "
-          "passanti=%d mind=%.6f mind0=%.6f LAM=%.4f bias=%.6e biasrel=%.6e nsubmax=%d"
-          % (modo, PASSI, getattr(net, "_g_smp_aperture", 0), getattr(net, "_g_smp_chiusure", 0),
-             getattr(net, "_g_smp_chirurgie", 0), getattr(net, "_g_smp_disallineati", 0),
-             getattr(net, "_g_smp_d_chiusure", 0), getattr(net, "_g_smp_passanti", 0),
-             float(np.min(net.d)), float(np.min(d0_prima)), S.LAM, scarto, rel,
-             getattr(net, "_g_smp_d_nsub", 0)))
+          "passanti=%d mind=%.6f mind0=%.6f LAM=%.4f bias=%.6e biasrel=%.6e nsubmax=%d "
+          "arrot=%.6e"
+          % (modo, PASSI, cont["ap"], cont["ch"], cont["chir"], cont["dis"], cont["dch"],
+             cont["pas"], float(np.min(net.d)), float(np.min(d0_prima)), S.LAM, scarto, rel,
+             cont["nsub"], arrot))
     raise SystemExit(0)
 
 
@@ -118,14 +130,14 @@ def leggi(out):
     import re
     m = re.search(r"C3 modo=(\S+) passi=(\d+) aperture=(\d+) chiusure=(\d+) chirurgie=(\d+) "
                   r"disall=(\d+) dchius=(\d+) passanti=(\d+) mind=(\S+) mind0=(\S+) LAM=(\S+) "
-                  r"bias=(\S+) biasrel=(\S+) nsubmax=(\d+)", out)
+                  r"bias=(\S+) biasrel=(\S+) nsubmax=(\d+) arrot=(\S+)", out)
     if not m:
         raise SystemExit("output non riconosciuto:\n%s" % out[-900:])
     return dict(modo=m.group(1), passi=int(m.group(2)), ap=int(m.group(3)), ch=int(m.group(4)),
                 chir=int(m.group(5)), dis=int(m.group(6)), dch=int(m.group(7)),
                 pas=int(m.group(8)), mind=float(m.group(9)), mind0=float(m.group(10)),
                 lam=float(m.group(11)), bias=float(m.group(12)), biasrel=float(m.group(13)),
-                nsub=int(m.group(14)))
+                nsub=int(m.group(14)), arrot=float(m.group(15)))
 
 
 def main():
@@ -177,12 +189,19 @@ def main():
                   % (len(dif), "" if dif else "   *** IL FLAG E' INERTE ***")))
 
     # R3 -- e le DUE meta' insieme, o non prova niente
-    ok3 = (C_["bias"] == 0.0) and (D_["bias"] > 0.0)
+    # ⚠ IL METRO E' L'ARROTONDAMENTO MISURATO, non una soglia scelta (`A11`, corollario 1).
+    #   `(x + s) - s` non torna `x` in virgola mobile: quel residuo e' INEVITABILE, e il bias
+    #   della cura non puo' essere piu' piccolo di lui. La prima versione chiedeva `== 0.0`
+    #   ESATTO e falliva su `4.441e-16`, che sono DUE ulp: **il FAIL era del criterio.**
+    ok3 = (C_["bias"] <= C_["arrot"] and D_["bias"] > 1000.0 * max(D_["arrot"], 1e-300))
     esiti.append(("R3", ok3,
-                  "COMPOSIZIONE (spinte opposte a somma NULLA dentro un passo): "
-                  "C3 -> bias = %.3e (dev'essere ZERO ESATTO); freno per-scrittura -> bias = "
-                  "%.3e, cioe' %.4f%% della mediana di `d0` (DEVE essere > 0, senno' il test non "
-                  "distingue)" % (C_["bias"], D_["bias"], 100.0 * D_["biasrel"])))
+                  "COMPOSIZIONE (spinte opposte a somma NULLA dentro un passo): C3 -> bias = "
+                  "%.3e contro un arrotondamento INEVITABILE di %.3e (dev'essere <=); freno "
+                  "per-scrittura -> bias = %.3e, cioe' %.4f%% della mediana di `d0` e %.0f "
+                  "VOLTE l'arrotondamento (DEVE essere enormemente sopra, senno' il test non "
+                  "distingue)"
+                  % (C_["bias"], C_["arrot"], D_["bias"], 100.0 * D_["biasrel"],
+                     D_["bias"] / max(D_["arrot"], 1e-300))))
 
     esiti.append(("R4", C_["mind"] >= C_["lam"] - 1e-12,
                   "IL VINCOLO TIENE: con C3 min(d) = %.6f contro LAM = %.4f"
