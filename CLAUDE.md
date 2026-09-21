@@ -97,6 +97,26 @@ in accelerazione senza freni» quando il freno `−omega/tau` era **gia' misurat
 pure (§9: previsto `7.059e4` contro misurato `7.271e4`, scarto x1.03). **Quattro volte lo stesso
 errore in un giorno.**)*
 
+**P1-bis — LA RELAZIONE SI SCRIVE NELLO STESSO COMMIT DEL RISCONTRO. SEMPRE, FINCHE' E' POSSIBILE.**
+**E' la prima regola da rispettare, non l'ultima:** un riscontro non relazionato **e' un riscontro
+perso**, perche' chi legge il repo da fuori — Claude web, una sessione nuova, Luca fra tre giorni —
+**non ha la conversazione: ha solo i file.** E `RELAZIONE_PER_CLAUDE.md` e' il file che si legge
+**per primo**.
+**OPERATIVAMENTE, e non ammette «poi»:** se un commit contiene un riscontro — una misura, una
+lettura del codice, un sigillo che passa o che fallisce, una premessa che cade, **un proprio
+errore** — allora **quel commit tocca anche `RELAZIONE_PER_CLAUDE.md`**. Se non lo tocca, il
+riscontro non e' stato relazionato.
+**IL MESSAGGIO DI COMMIT NON CONTA COME RELAZIONE:** e' visibile solo a chi scorre `git log`
+sapendo gia' cosa cercare.
+**⚠ MISURATO DUE VOLTE, e la seconda e' peggio:** il 2026-09-20, **7 relazioni su 52 commit**, e
+due solo perche' Luca le aveva chieste. Il 2026-09-21, **10 su 32 in un giorno solo — 22 riscontri
+saltati**, e fra questi i piu' grossi: il ramo D che girava con la configurazione sbagliata, il
+sigillo `11/11`, la cura del mondo, il presidio che mentiva sull'hash.
+**⚠ E UN BLOCCO DI RECUPERO NON SANA LA VIOLAZIONE: LA CONFERMA.** par.5-ter dice *«subito, non a
+fine giornata»*. Recuperare a sera significa che per tutto il giorno il repo ha detto meno di
+quello che si sapeva. **Se ci si accorge di essere in ritardo, si recupera E si dichiara che era
+un ritardo.**
+
 **P2 — PRIMA DI ESCLUDERE UN FLAG DA UNA MISURA: FORZA IL SISTEMA O LO CORREGGE?**
 Escludere un **forzante** (turbo) protegge la misura; escludere una **correzione** significa
 **misurare un sistema che si sa difettoso**. (E' il presidio gia' scritto in §10, promosso qui

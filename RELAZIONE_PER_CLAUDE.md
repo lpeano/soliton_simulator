@@ -9408,3 +9408,66 @@ fattore `max(0, 1-LAM/x)` vale 0 per `x <= LAM`)* **e nessuna e' mai diventata p
 **Resta solo `Z4b`**, e deve restare: la causa e' trovata *(il vuoto nasce all'`import`)* ma
 **la cura non e' applicata**, perche' cambiare *quando* il mondo viene costruito tocca **ogni**
 flag. **Il ramo D resta bloccato alla voce `3` della coda unica.**
+
+---
+
+## ⚠ RECUPERO DEL 2026-09-21 — **ventidue riscontri non relazionati, e il recupero E' GIA' la violazione**
+
+**Misurato, non stimato:** **32 commit oggi, 10 toccano questo file, 22 NO.** Il par.5-ter dice
+*«subito, non a fine giornata»*: **un blocco di recupero e' esattamente cio' che la regola vieta**,
+e lo scrivo cosi' invece di presentarlo come diligenza. Rilievo di Luca, **secondo** sullo stesso
+punto.
+
+### `Z86` — il criterio `Z4a` era mio ed era FALSO PER COSTRUZIONE
+Chiedevo `max(dx_eff - dx) <= 0`. Ma per `dx < 0` la legge fa `dx_eff = dx*f` con `f in [0,1]`,
+quindi `dx_eff >= dx` **sempre**: il sigillo era **impossibile da passare**. Misurato `+0.772`.
+**Corretto guardando il SEGNO invece della DIFFERENZA** — `dx < 0 -> dx <= dx_eff <= 0` — e col
+criterio giusto passa: **incrementi `>= 0` toccati `0` volte, `max(dx_eff)` sulle discese `-0.0`,
+discese approfondite `0`.** *(Il `-0.0` e' informativo: le discese piu' attenuate finiscono
+esattamente a zero, nessuna diventa positiva.)*
+
+### La CURA DEL MONDO — il vuoto nasceva prima della fisica
+`net = Rete(); net.semina(SEME_INIZIALE)` girava all'**`import`**, e la ricostruzione era
+**condizionata** a `--seed`/`--nodi`: nel caso normale **non scattava mai**. **Ora e'
+incondizionata** (categoria D, nessun flag). **`Z8` PASS:** con ogni flag al default il mondo
+ricostruito e' **byte-identico** a quello dell'import — **9 campi, 900 nodi, 59 730 archi, zero
+differenze**. E' cio' che rende leggibile `Z1b`: la differenza vista con l'argv del fork
+(`n` 2569 -> 2580) e' **interamente** gli otto flag che ora toccano il vuoto.
+
+### `Z1` RI-ANCORATA, e `Z1c` — il test che non attraversava il codice
+Con l'argv del FORK il mondo nuovo e' **legittimamente** diverso, quindi li' non si misura la
+byte-identita': si misura **l'effetto della cura**. `Z1` e' passata all'**argv NUDO**, dove la cura
+**non puo'** avere effetto — **piu' severa, non piu' comoda**.
+**Ma `Z1` nudo non esercita la catena `CHI_CORE` ne' il campo `B`**, cioe' i punti toccati. Rilievo
+di Luca: **mancava `Z1c`**, argv del FORK e tre flag spenti. **PASS**, e la controprova e' il pezzo
+che conta: **60 chiamate a `chiralita_core_locale` contro le ZERO dell'argv nudo.**
+
+### Il sigillo del ramo D: **`11/11`**
+`min(d) = 0.800000000` esatto su `LAM`, `min(d0) = 0.800168050`. **Prima erano `0.076` e `0.079`.**
+Stress massimo `2.105` (finito), `|delta d0| <= passo_causale`, **zero archi saturi su 15 783 816**,
+nessun `NaN`.
+
+### ⚠ IL RAMO D GIRAVA CON LA CONFIGURAZIONE SBAGLIATA — il riscontro piu' grosso del giorno
+Letto **DAL MODULO**: `CHI_COOP True` ma **`SCALA_MIN False` e `COES_ADIM False`**, mentre il
+comando li chiedeva accesi. **Il driver le parsava e non le inoltrava.** Nessun errore, nessun
+avviso: **un'opzione che si accetta e si ignora e' peggio di una che non esiste.**
+**Causa mia, di metodo:** la patch al driver usava `str.replace()` con **un solo `assert` globale**,
+soddisfatto dalle ALTRE sostituzioni; la terza non ha attaccato **in silenzio**. Lo stesso giorno,
+per il simulatore, usavo un helper che asserisce **ogni** ancora.
+**E nessun sigillo poteva prenderlo:** quelli esistenti costruiscono `sys.argv` da soli e **non
+passano dal driver**. **Stessa forma del buco di `Z1c`, due volte in un giorno.**
+**Run fermato al passo 1230** *(py-spy catturato prima, archivio intatto: 10 snapshot leggibili)*,
+driver riparato, **presidio nuovo `_sigillo_flag_driver.py` `3/3`** — che **scopre le opzioni dal
+sorgente** invece di elencarle a mano. *(E al primo giro e' morto da solo: il mio euristico usava
+una finestra fissa che sconfinava nel ramo successivo. Corretto.)*
+
+### Il presidio dei run MENTIVA sull'hash
+`_stato_run._blob_byte()` calcolava **`git hash-object`** dichiarando di calcolare i **byte
+grezzi**. `26fa354d` contro `4954fe5b`. **Ogni voce mai scritta** in `STATO_RUN.md` porta
+l'etichetta sbagliata — **nessun dato perso**, ma chi verifica cercava nella convenzione sbagliata.
+**Trovato perche' il numero del presidio non coincideva col mio e l'ho verificato invece di
+accettarlo.** Ora stampa entrambe.
+
+> **Due presidi che dicevano una cosa e ne facevano un'altra, in un giorno** — il mio criterio
+> `Z4a` e l'hash di `_stato_run`. **Un presidio che mente costa piu' di un presidio assente,
+> perche' chi lo legge smette di controllare.**
