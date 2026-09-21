@@ -951,6 +951,27 @@ PEQ_ESATTO = False      # IL RILASSAMENTO DI `peq` IN FORMA ESATTA (2026-09-21, 
                         #   piu' un SEGNO ma solo lo zero, e toglierlo richiede la forma
                         #   simmetrica, che e' UN'ALTRA cura e ha IL SUO POLO.
                         # OFF = byte-identico.
+SCALA_MIN_PASSO = False # IL FRENO UNA VOLTA PER PASSO, SULLA VARIAZIONE TOTALE (2026-09-21, C3).
+                        # DIFETTO CURATO (`Z91`): `SCALA_MIN` frena OGNI SCRITTURA guardando il
+                        #   valore lasciato dalla precedente NELLO STESSO PASSO -- sei scritture
+                        #   su `d0` e `nsub` su `d`. Quindi il risultato DIPENDE DALL'ORDINE
+                        #   delle leggi, e poiche' frena solo le DISCESE produce un CRICCHETTO:
+                        #   con `a > 0`, `b < 0`, `a+b = 0` il risultato NON e' zero.
+                        # LA FORMA, gia' DIMOSTRATA nel referto: applicato UNA VOLTA SOLA sulla
+                        #   variazione TOTALE, `dx = a+b = 0` non e' una discesa, quindi il
+                        #   valore e' INTATTO e il bias e' ZERO ESATTO. E non contiene l'ordine.
+                        # COSA CAMBIA, in concreto:
+                        #   * `_sd0` diventa PASSANTE: le sei scritture di `d0` non frenano;
+                        #   * dentro i sotto-passi del Verlet `d` non frena e non ha pavimento;
+                        #   * a FINE PASSO si applica `_smorza` UNA VOLTA su `fine - inizio`.
+                        # ⚠ LA MITOSI CAMBIA IL NUMERO DI ARCHI, quindi lo SNAPSHOT DI INIZIO
+                        #   PASSO subisce LE STESSE operazioni di `d0`/`d` ai quattro siti di
+                        #   ristrutturazione, e gli archi NATI nel passo entrano con il PROPRIO
+                        #   valore di nascita: la loro variazione e' zero e non vengono frenati.
+                        #   **E' la parte delicata, ed e' cablata invece che assunta.**
+                        # ⚠ LE NASCITE restano a `LAM` (`_nasce`): una concatenazione non e' una
+                        #   discesa, e il punto di partenza non e' un freno.
+                        # OFF = byte-identico.
 PEQ_NASCITA_LOCALE = False  # UNA SOLA LEGGE DI NASCITA PER `peq`, E LOCALE (2026-09-21, C2).
                         # DIFETTO CURATO: `peq` nasce in TRE MODI INCOERENTI.
                         #   (a) `_allaccia` scrive `nan` e `step` (`:4189`) lo CALIBRA sulla
@@ -2282,6 +2303,7 @@ class Rete:
         self.i = np.concatenate([self.i, a]); self.j = np.concatenate([self.j, b])
         if TRACCIA_D0: _tr_pre = self.d0.copy()
         dd = self._nasce(dd)          # [SCALA_MIN] nascita: il troncone parte da LAM
+        self._smp_chirurgia(nuovi=dd)   # [C3] `_allaccia` (semina): archi nuovi in coda
         self.d = np.concatenate([self.d, dd]); self.d0 = np.concatenate([self.d0, dd])
         if TRACCIA_D0: self._traccia_d0('S01_archi_nuovi', _tr_pre)
         self.vd = np.concatenate([self.vd, np.zeros(len(dd))])
@@ -3360,8 +3382,62 @@ class Rete:
                                    + int(np.sum(_s & (_e < _d))))
         return eff
 
+    def _smp_apri(self):
+        """[SCALA_MIN_PASSO] Fotografa `d0` a INIZIO PASSO. Da qui si misurera' la variazione
+        TOTALE, una volta sola."""
+        if SCALA_MIN_PASSO:
+            self._smp_d0 = np.array(self.d0, dtype=float, copy=True)
+            self._g_smp_aperture = getattr(self, '_g_smp_aperture', 0) + 1
+
+    def _smp_chirurgia(self, keep=None, nuovi=None):
+        """[SCALA_MIN_PASSO] Lo snapshot subisce LE STESSE operazioni di `d0`.
+
+        ⚠ E' LA PARTE DELICATA DELLA CURA, e va cablata invece che assunta: la `mitosi()`
+        CAMBIA IL NUMERO DI ARCHI *(ne toglie con `[keep]`, ne aggiunge in coda)*, quindi un
+        confronto `fine - inizio` fatto per posizione confronterebbe **archi diversi**.
+        Gli archi NATI nel passo entrano con il **proprio valore di nascita**: la loro
+        variazione e' ZERO e non vengono frenati -- e' giusto, perche' una nascita non e' una
+        discesa."""
+        if not SCALA_MIN_PASSO or getattr(self, '_smp_d0', None) is None:
+            return
+        v = self._smp_d0
+        if keep is not None:
+            v = v[keep]
+        if nuovi is not None and len(nuovi):
+            v = np.concatenate([v, np.asarray(nuovi, dtype=float)])
+        self._smp_d0 = v
+        self._g_smp_chirurgie = getattr(self, '_g_smp_chirurgie', 0) + 1
+
+    def _smp_chiudi(self):
+        """[SCALA_MIN_PASSO] IL FRENO, UNA VOLTA SOLA, sulla variazione TOTALE del passo.
+
+        `d0 <- inizio + _smorza(inizio, fine - inizio)`. Con spinte opposte di somma nulla
+        `dx = 0`, che NON e' una discesa: il valore resta **intatto**, e il bias e' **zero
+        esatto**. Non contiene l'ordine delle leggi."""
+        v = getattr(self, '_smp_d0', None)
+        if not SCALA_MIN_PASSO or v is None:
+            return
+        self._smp_d0 = None
+        if len(v) != len(self.d0):
+            # NON si frena a caso su lunghezze diverse: si CONTA e si lascia stare.
+            self._g_smp_disallineati = getattr(self, '_g_smp_disallineati', 0) + 1
+            self._g_smp_shape = (len(v), len(self.d0))
+            return
+        dx = np.asarray(self.d0, dtype=float) - v
+        self.d0 = v + self._smorza(v, dx, 'd0_passo')
+        self._g_smp_chiusure = getattr(self, '_g_smp_chiusure', 0) + 1
+        self._g_smp_discese = (getattr(self, '_g_smp_discese', 0) + int(np.sum(dx < 0.0)))
+        self._g_smp_salite = (getattr(self, '_g_smp_salite', 0) + int(np.sum(dx > 0.0)))
+        self._g_smp_nulli = (getattr(self, '_g_smp_nulli', 0) + int(np.sum(dx == 0.0)))
+
     def _sd0(self, dx, mask=None):
         """L'incremento effettivo su `d0`. A flag spento e' l'incremento stesso."""
+        # [SCALA_MIN_PASSO, C3] PASSANTE: la singola scrittura NON si frena. Il freno si
+        # applica UNA VOLTA a fine passo, sulla variazione TOTALE -- e' l'intero punto della
+        # cura, perche' frenare scrittura per scrittura fa dipendere il risultato dall'ORDINE.
+        if SCALA_MIN_PASSO:
+            self._g_smp_passanti = getattr(self, '_g_smp_passanti', 0) + 1
+            return dx
         if not SCALA_MIN:
             return dx
         return self._smorza(self.d0 if mask is None else self.d0[mask], dx, 'd0')
@@ -3370,7 +3446,7 @@ class Rete:
         """⚠ A `SCALA_MIN` ACCESO IL PAVIMENTO SPARISCE: la discesa e' gia' stata smorzata
         alla scrittura, e lasciare anche il pavimento comovente vorrebbe dire DUE leggi
         sovrapposte, con la vecchia che continua a mordere."""
-        if SCALA_MIN:
+        if SCALA_MIN or SCALA_MIN_PASSO:
             self._g_sm_pav_saltati = getattr(self, '_g_sm_pav_saltati', 0) + 1
             return v
         return np.maximum(v, self._floor_d0())
@@ -3378,7 +3454,9 @@ class Rete:
     def _nasce(self, v):
         """NASCITA (concatenazione): il troncone sotto `LAM` si porta A `LAM`. Da li' in poi
         vale lo smorzamento. Non e' una regola di arresto nuova: e' il punto di partenza."""
-        if not SCALA_MIN:
+        # [C3] anche con `SCALA_MIN_PASSO`: una NASCITA e' una concatenazione, non una discesa,
+        # e il punto di partenza non e' un freno.
+        if not (SCALA_MIN or SCALA_MIN_PASSO):
             return v
         self._g_sm_nascite = getattr(self, '_g_sm_nascite', 0) + 1
         return np.maximum(v, LAM)
@@ -3890,6 +3968,10 @@ class Rete:
 
     def step(self):
         if self.n < 2 or not len(self.i): return
+        # [SCALA_MIN_PASSO, C3] la fotografia di INIZIO PASSO. Il passo, per il freno, e' il
+        # ciclo INTERO del driver -- `step` + `mitosi` + `memoria_hebbiana_moto` -- perche' e'
+        # li' che stanno le sei scritture di `d0`.
+        self._smp_apri()
         i, j = self.i, self.j
         
         # --- EVALUATE-THEN-COMMIT: Snapshot rigoroso di inizio passo (tempo t) ---
@@ -4471,6 +4553,10 @@ class Rete:
                 raise StopDopoNsub('nsub=%d n1=%.0f n2=%.0f n3=%.0f'
                                    % (nsub, n1, n2, n3))
         dts = dt_e / nsub
+        # [SCALA_MIN_PASSO, C3] la fotografia di `d` PRIMA del ciclo dei sotto-passi.
+        # `d` non viene ristrutturato dentro `step()`, quindi qui la lunghezza e' costante e
+        # non serve nessuna chirurgia: basta una copia.
+        _smp_d_ini = (np.array(self.d, dtype=float, copy=True) if SCALA_MIN_PASSO else None)
 
         if VERLET:
             # --- VELOCITY-VERLET METRICO (2 ordine) ---
@@ -4485,8 +4571,15 @@ class Rete:
                     self._traccia_vd(cs_arco ** 2 * lap, src, -beta * self.vd, beta, cs_arco)
                 vd_half = self.vd + 0.5 * dts * acc_t
                 # [SCALA_MIN] la regola va sull'INCREMENTO del Verlet, non sul valore finale.
-                d_new = (self.d + self._smorza(self.d, dts * vd_half, 'd') if SCALA_MIN
-                         else np.maximum(self.d + dts * vd_half, 0.05))
+                # [SCALA_MIN_PASSO, C3] dentro il sotto-passo NON si frena e NON c'e' pavimento:
+                #   il freno e' UNO SOLO, dopo il ciclo, sulla variazione TOTALE. Cosi'
+                #   `nsub` non moltiplica piu' il bias.
+                if SCALA_MIN_PASSO:
+                    d_new = self.d + dts * vd_half
+                elif SCALA_MIN:
+                    d_new = self.d + self._smorza(self.d, dts * vd_half, 'd')
+                else:
+                    d_new = np.maximum(self.d + dts * vd_half, 0.05)
 
                 q_new = d_new - self.d0
                 sm_new = np.bincount(i, q_new, minlength=self.n) + np.bincount(j, q_new, minlength=self.n)
@@ -4526,9 +4619,21 @@ class Rete:
                 med = sm / self._deg
                 lap = 0.5 * (med[i] + med[j]) - q
                 self.vd = self.vd + dts * (cs_arco ** 2 * lap + src - beta * self.vd)
-                self.d = (self.d + self._smorza(self.d, dts * self.vd, 'd') if SCALA_MIN
-                          else np.maximum(self.d + dts * self.vd, 0.05))
+                if SCALA_MIN_PASSO:
+                    self.d = self.d + dts * self.vd
+                elif SCALA_MIN:
+                    self.d = self.d + self._smorza(self.d, dts * self.vd, 'd')
+                else:
+                    self.d = np.maximum(self.d + dts * self.vd, 0.05)
             
+        # [SCALA_MIN_PASSO, C3] IL FRENO SU `d`, UNA VOLTA SOLA, dopo TUTTI i sotto-passi.
+        #   Prima girava `nsub` volte -- 22591 in un solo passo al picco del ramo D -- e ogni
+        #   applicazione aggiungeva il suo bias. Qui `nsub` non moltiplica piu' niente.
+        if SCALA_MIN_PASSO and _smp_d_ini is not None and len(_smp_d_ini) == len(self.d):
+            _dxd = np.asarray(self.d, dtype=float) - _smp_d_ini
+            self.d = _smp_d_ini + self._smorza(_smp_d_ini, _dxd, 'd_passo')
+            self._g_smp_d_chiusure = getattr(self, '_g_smp_d_chiusure', 0) + 1
+            self._g_smp_d_nsub = max(getattr(self, '_g_smp_d_nsub', 0), int(nsub))
         if TAU_LOCALI:
             # CORREZIONE DI DIFETTO (par.10, categoria D: nessun flag). ERRORE DI TIPO, non di legge.
             # Era:  d_arco = 0.5 * (self.d[self.i] + self.d[self.j])
@@ -4946,6 +5051,7 @@ class Rete:
         d0new = self._nasce(d0new)
         self.d = np.concatenate([self.d[keep], dh, dh])
         if TRACCIA_D0: _tr_pre = self.d0.copy()
+        self._smp_chirurgia(keep=keep, nuovi=d0new)   # [C3] lo snapshot segue la mitosi
         self.d0 = np.concatenate([self.d0[keep], d0new])
         if TRACCIA_D0: self._traccia_d0('S06_mitosi', _tr_pre)
         self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])
@@ -5048,6 +5154,7 @@ class Rete:
                 self.j = np.concatenate([self.j, k, bb])
                 self.d = np.concatenate([self.d, dd, dd])
                 if TRACCIA_D0: _tr_pre = self.d0.copy()
+                self._smp_chirurgia(nuovi=np.concatenate([dd, dd]))   # [C3] Schwinger
                 self.d0 = np.concatenate([self.d0, dd, dd])
                 if TRACCIA_D0: self._traccia_d0('S07_schwinger', _tr_pre)
                 self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])
@@ -5218,6 +5325,10 @@ class Rete:
             (inerzia hebbiana), la correzione lo piega lungo la geodetica. Cosi' non insegue
             lo zero: genera e protegge il moto, assecondando la curvatura."""
         if not MEM_HEBB or self.n < 2 or not len(self.i):
+            # [SCALA_MIN_PASSO, C3] ANCHE SUL RITORNO ANTICIPATO il freno va chiuso: senno' lo
+            # snapshot resterebbe aperto e il passo DOPO confronterebbe `d0` con quello del passo
+            # PRIMA -- una variazione di DUE passi frenata come se fosse di uno.
+            self._smp_chiudi()
             return
         n = self.n
         if not hasattr(self, "psi") or len(self.psi) < n:
@@ -5571,6 +5682,9 @@ class Rete:
                 if TRACCIA_D0: _tr_pre = self.d0.copy()
                 self.d0 = self._pav_d0(self.d0)
                 if TRACCIA_D0: self._traccia_d0('P7_dopo_4917', _tr_pre, pavimento=self._floor_d0())
+        # [SCALA_MIN_PASSO, C3] IL FRENO SU `d0`, UNA VOLTA SOLA, a fine ciclo. `memoria_
+        # hebbiana_moto` e' l'ULTIMA chiamata del passo nel driver e nelle rigiocate sigillate.
+        self._smp_chiudi()
 
     def diagnostica(self):
         I = self.intensita()
@@ -6655,7 +6769,7 @@ def _applica_flag(a):
     global TAU_LUCE, RUMORE_COLORATO
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
-    global PEQ_ESATTO, PEQ_NASCITA_LOCALE
+    global PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, SCALA_MIN, COES_ADIM, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
@@ -6722,6 +6836,7 @@ def _applica_flag(a):
     COES_ADIM = bool(getattr(a, "coes_adim", False))               # coesione adimensionale e causale
     PEQ_ESATTO = bool(getattr(a, "peq_esatto", False))             # rilassamento esatto di peq (C1)
     PEQ_NASCITA_LOCALE = bool(getattr(a, "peq_nascita_locale", False))  # nascita locale di peq (C2)
+    SCALA_MIN_PASSO = bool(getattr(a, "scala_min_passo", False))   # freno una volta per passo (C3)
     CHI_COOP = bool(getattr(a, "chi_coop", False))                 # cooperazione: chi_basc -> perc_geom, spinore -> perc_chi
     if CHI_DA_SPINORE and not SPINORE_CORRETTO:
         raise SystemExit("[errore] --chi-da-spinore richiede --spinore-corretto (senno' loop di feedback perc_chi->spinore->perc_chi)")
@@ -6738,6 +6853,16 @@ def _applica_flag(a):
               "DISCESA -- incremento >= 0 intatto bit per bit, incremento < 0 moltiplicato per "
               "max(0, 1-LAM/x). I sette pavimenti di d0 SPARISCONO; le nascite partono da LAM; "
               "per d la regola va sull incremento del Verlet. Zero coefficienti.")
+    if SCALA_MIN_PASSO:
+        print("[scala-min-passo] IL FRENO UNA VOLTA PER PASSO: le sei scritture di `d0` e i "
+              "sotto-passi di `d` NON frenano piu'; a fine passo si applica `_smorza` UNA "
+              "VOLTA sulla VARIAZIONE TOTALE, dal valore di INIZIO passo. Cura il CRICCHETTO "
+              "di Z91: frenare ogni scrittura separatamente rende il risultato dipendente "
+              "dall'ORDINE delle leggi e, poiche' frena solo le discese, con spinte opposte di "
+              "somma nulla NON da' zero. Applicato una volta sola sul totale il bias e' ZERO "
+              "ESATTO. Lo snapshot di inizio passo segue la mitosi ai quattro siti di "
+              "ristrutturazione; gli archi NATI nel passo non vengono frenati, e le nascite "
+              "restano a LAM. Zero coefficienti.")
     if PEQ_NASCITA_LOCALE:
         print("[peq-nascita-locale] UNA SOLA LEGGE DI NASCITA PER `peq`: gli archi della "
               "creazione di coppia alla Schwinger nascono con `nan` e vengono CALIBRATI da "
@@ -7244,6 +7369,14 @@ def _cli():
                         "LOCALE dell'arco invece che su I_med (media globale, A2), e lo spostamento e' "
                         "passo_causale * tanh(...) * filtro_portata, con |F| <= 1 per costruzione invece "
                         "che per clip. Sostituisce il clip tanh(stress)*d0. Default off = byte-identico.")
+    p.add_argument("--scala-min-passo", action="store_true", dest="scala_min_passo",
+                   help="IL FRENO DELLA SCALA MINIMA UNA VOLTA PER PASSO, sulla VARIAZIONE "
+                        "TOTALE di d0 e di d, dal valore di INIZIO passo. Le sei scritture di d0 "
+                        "e i sotto-passi di d non frenano piu'. Cura il CRICCHETTO di Z91: "
+                        "frenare ogni scrittura separatamente rende il risultato dipendente "
+                        "dall'ORDINE delle leggi, e con spinte opposte di somma nulla non da' "
+                        "zero. Applicato una volta sola il bias e' ZERO ESATTO. Le nascite "
+                        "restano a LAM. Zero coefficienti. Default off = byte-identico.")
     p.add_argument("--peq-nascita-locale", action="store_true", dest="peq_nascita_locale",
                    help="UNA SOLA LEGGE DI NASCITA PER peq, E LOCALE: gli archi della creazione "
                         "di coppia alla Schwinger nascono con nan e vengono calibrati da step() "
