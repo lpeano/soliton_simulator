@@ -163,6 +163,22 @@ TRACCIA_D0 = False
 # ⚠ SI REGISTRANO I TRE TERMINI SEPARATI E NON LA LORO SOMMA: la somma e' `acc`, che si vedrebbe
 #   gia' da `vd`. La domanda e' la RIPARTIZIONE.
 TRACCIA_VD = False
+# --- [§1 MANDATO GLOBALE 2026-09-21] DIAGNOSTICI SU `peq`. NESSUN FLAG DA RIGA DI COMANDO,
+#     di proposito: sono sonde, non fisica, e non devono poter essere accese da un comando.
+#     Si impostano direttamente sul modulo, come `TRACCIA_D0` (`_rigiocata_0_120.py:79`).
+#     BYTE-INERTI a `False`: aggiungono solo due `if` che non toccano stato ne' RNG.
+TRACCIA_PEQ = False       # contatori sull'aggiornamento di `peq` (`:4204-4208`)
+FERMA_DOPO_NSUB = False   # alza `StopDopoNsub` appena calcolato `nsub`, per NON integrare
+                          # un passo esplosivo: il numero si vuole, i 22591 sotto-passi no.
+
+
+class StopDopoNsub(Exception):
+    """DIAGNOSTICO: interrompe `step()` subito dopo il calcolo di `nsub`.
+
+    Alzata SOLO se `FERMA_DOPO_NSUB`. Porta i quattro numeri (`nsub`, `n1`, `n2`, `n3`) sia nel
+    messaggio sia in `self._g_nsub_stop`, perche' chi la cattura non debba parsare una stringa.
+    """
+
 TRACCIA_D0_COPPIE = ((16, 481),)          # dettaglio PIENO: le coppie di nodi seguite una per una
 TRACCIA_D0_NODI = (16, 481, 621, 627, 837)  # riassunto: tutti gli archi di questi nodi
 # COARSE-GRAINING (dettare la scala): un solitone-blocco rappresenta SCALA_B solitoni
@@ -3315,6 +3331,51 @@ class Rete:
         self._g_sm_nascite = getattr(self, '_g_sm_nascite', 0) + 1
         return np.maximum(v, LAM)
 
+    def _traccia_peq(self, rho, flusso, dt_e, tau_bg, i, j):
+        """[TRACCIA_PEQ] I TRE NUMERI CHE MANCANO sull'aggiornamento di `peq` (`:4206`).
+
+        PURE-READ: calcola e registra, non modifica `self.peq` ne' lo stato ne' l'RNG.
+
+        Il numero di stabilita' e' `x = dt_e / tau_bg`: **un Eulero esplicito SCAVALCA il
+        bersaglio per `x > 1` e OSCILLA DIVERGENDO per `x > 2`**. E' lo stesso criterio gia'
+        cablato su `d0` con `_taup_cfl_max` (`:4412-4419`), e su `peq` non c'era.
+
+        I TRE ESITI SONO CONTROFATTUALI E CALCOLATI A PARTE -- ed e' il punto: sommati non si
+        saprebbe QUALE termine porta sotto zero.
+        """
+        peq = np.asarray(self.peq, dtype=float)
+        if not len(peq):
+            return
+        dte = np.broadcast_to(np.asarray(dt_e, dtype=float), peq.shape)
+        tb = np.broadcast_to(np.asarray(tau_bg, dtype=float), peq.shape)
+        x = dte / tb
+        self._g_peq_cfl_max = max(getattr(self, '_g_peq_cfl_max', 0.0), float(x.max()))
+        self._g_peq_cfl_sopra1 = (getattr(self, '_g_peq_cfl_sopra1', 0)
+                                  + int(np.sum(x >= 1.0)))
+        self._g_peq_cfl_sopra2 = (getattr(self, '_g_peq_cfl_sopra2', 0)
+                                  + int(np.sum(x >= 2.0)))
+        solo_ril = peq + dte * (rho - peq) / tb
+        solo_dif = peq + dte * (flusso / TAU_DIFF)
+        insieme = peq + dte * ((rho - peq) / tb + flusso / TAU_DIFF)
+        self._g_peq_neg = getattr(self, '_g_peq_neg', 0) + int(np.sum(insieme < 0.0))
+        self._g_peq_neg_ril = (getattr(self, '_g_peq_neg_ril', 0)
+                               + int(np.sum(solo_ril < 0.0)))
+        self._g_peq_neg_dif = (getattr(self, '_g_peq_neg_dif', 0)
+                               + int(np.sum(solo_dif < 0.0)))
+        self._g_peq_archi = getattr(self, '_g_peq_archi', 0) + int(len(peq))
+        self._g_peq_passi = getattr(self, '_g_peq_passi', 0) + 1
+        # l'ARCO PEGGIORE: si tiene il minimo ASSOLUTO di tutto il run, col suo dettaglio.
+        k = int(np.argmin(insieme))
+        if float(insieme[k]) < getattr(self, '_g_peq_min', float('inf')):
+            self._g_peq_min = float(insieme[k])
+            self._g_peq_min_arco = (int(i[k]), int(j[k]))
+            self._g_peq_min_quando = self._g_peq_passi
+            self._g_peq_min_dett = dict(
+                peq_prima=float(peq[k]), rho=float(rho[k]), flusso=float(flusso[k]),
+                dt_e=float(dte[k]), tau_bg=float(tb[k]), x=float(x[k]),
+                solo_rilassamento=float(solo_ril[k]), solo_diffusione=float(solo_dif[k]),
+                insieme=float(insieme[k]))
+
     def _floor_d0(self):
         # PAVIMENTO di d0. Assoluto (0.05) di default; COMOVENTE se PAV_COM: f*median(d0), con
         # f = 0.05/LAM_BASE = il RAPPORTO DI NASCITA (il vecchio pavimento assoluto diviso la
@@ -4203,8 +4264,10 @@ class Rete:
             r_nodo = np.abs(_pv_src[:self.n]) if len(_pv_src) >= self.n else np.ones(self.n)
             r_arco = 0.5 * (r_nodo[i] + r_nodo[j])
             tau_bg_loc = np.maximum(1.0 / np.maximum(r_arco, 1e-3), 1e-3)   
+            if TRACCIA_PEQ: self._traccia_peq(rho, flusso, dt_e, tau_bg_loc, i, j)
             self.peq += dt_e * ((rho - self.peq) / tau_bg_loc + flusso / TAU_DIFF)
         else:
+            if TRACCIA_PEQ: self._traccia_peq(rho, flusso, dt_e, TAU_BG, i, j)
             self.peq += dt_e * ((rho - self.peq) / TAU_BG + flusso / TAU_DIFF)
             
         if HAM_SRC == 0.0:
@@ -4265,11 +4328,21 @@ class Rete:
             n2 = np.ceil(np.max(beta) * DT / 0.2)
             n3 = np.ceil(np.abs(self.vd).max() * DT / (0.05 * max(np.median(self.d), 0.1) * cs_max_corrente / CS_M))
             nsub = int(max(4, n1, n2, n3))
+            if FERMA_DOPO_NSUB:
+                self._g_nsub_stop = dict(nsub=int(nsub), n1=float(n1), n2=float(n2),
+                                         n3=float(n3), ramo='VERLET')
+                raise StopDopoNsub('nsub=%d n1=%.0f n2=%.0f n3=%.0f'
+                                   % (nsub, n1, n2, n3))
         else:
             n1 = np.ceil(np.abs(src).max() * DT / (0.05 * cs_max_corrente))
             n2 = np.ceil(np.max(beta) * DT / 0.5)
             n3 = np.ceil(np.abs(self.vd).max() * DT / (0.1 * max(np.median(self.d), 0.1) * cs_max_corrente / CS_M))
             nsub = int(max(1, n1, n2, n3))
+            if FERMA_DOPO_NSUB:
+                self._g_nsub_stop = dict(nsub=int(nsub), n1=float(n1), n2=float(n2),
+                                         n3=float(n3), ramo='EULERO')
+                raise StopDopoNsub('nsub=%d n1=%.0f n2=%.0f n3=%.0f'
+                                   % (nsub, n1, n2, n3))
         dts = dt_e / nsub
 
         if VERLET:
