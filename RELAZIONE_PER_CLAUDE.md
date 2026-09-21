@@ -9907,3 +9907,24 @@ e su 300 passi × 12 siti sono ~3600 voci per run.)*
 **Cio' che S e K DECIDONO comunque** e' la domanda del §1 — *quale dei due flag fa scappare `d0`* —
 perche' quella si legge dalla **mediana di `d0` nel tempo**, che c'e'.
 **Cio' che NON decidono e' QUALE SCRITTORE la spinge**, e quella resta aperta.
+
+### ⚠⚠ CORREZIONE, POCHE ORE DOPO — **il limite era del DRIVER, non della CATENA DI STRUMENTI**
+
+**Rilievo di Luca, e ha ragione.** Avevo scritto che per la somma per scrittore servivano *«un flag
+nuovo nel simulatore e altri due run»*. **E' FALSO, e la prova e' in uno strumento che ho scritto
+IO:**
+
+> **`csv/_test_fork/_rigiocata_0_120.py` accende gia' la traccia**, e non con un flag del driver ma
+> **impostando la costante DIRETTAMENTE sul modulo**: `:79` fa `S.TRACCIA_D0 = True` dopo aver
+> caricato il simulatore con `exec_module`. **E' cosi' che e' stata trovata la coesione dominante
+> sull'arco `16-481`.**
+
+**Quindi non serve nessun flag nuovo e nessun run nuovo:** basta **parametrizzare la rigiocata
+sull'argv di S e di K** e rigiocare dalla semina per ~120 passi con la traccia accesa.
+
+**L'errore mio, e vale la pena nominarlo:** ho dichiarato un limite **guardando UNA strada** — il
+driver — **e l'ho presentato come limite del sistema**. **Stavo per proporre una modifica al
+simulatore che non serve.** *(E' la forma di `P1`: l'associazione genera candidati, non
+conclusioni — qui il candidato era «non si puo' fare» e bastava rileggere un mio strumento.)*
+
+**Il paragrafo qui sopra resta leggibile**: dice cosa avevo concluso e dove ho guardato troppo poco.
