@@ -68,7 +68,18 @@ precedente non guardava affatto, e non copre il fallimento: lo sposta dove la pr
 
 ---
 
-## 3. ⚠ `Z4b` — **QUESTO E' UN DIFETTO VERO, e la sua causa NON E' TROVATA**
+## 3. ⚠ `Z4b` — ~~la sua causa NON E' TROVATA~~ **SUPERATO DAL §5, E LA SEZIONE RESTA**
+
+> **⚠ QUESTA SEZIONE E' STORICA: la causa E' stata trovata poche ore dopo, ed e' nel §5.**
+> **Non la cancello**, per la stessa convenzione dei marchi storici di `CLAUDE.md`: si legge per
+> sapere **cosa era stato escluso e con quale ragionamento** — e soprattutto perche'
+> **l'ipotesi che avevo lasciato in piedi era QUELLA SBAGLIATA.**
+> **Avevo concluso *«esiste uno scrittore fuori dai DODICI di `Z78`»*. E' FALSO: il censimento
+> era giusto. A sbagliare non era il DOVE, era il QUANDO.**
+> **L'errore di ragionamento e' identificabile: avevo elencato le ipotesi sul MECCANISMO della
+> scrittura e nessuna sul MOMENTO in cui il mondo viene costruito.** Il dato che lo diceva era
+> gia' nei numeri — `min(d) = min(d0)` a nove cifre — **e non l'ho letto.**
+
 
 **`min(d) = 0.0758` con `LAM = 0.8`: DIECI VOLTE SOTTO.** E `min(d0) = 0.0786`.
 
@@ -110,3 +121,85 @@ scritto quel valore. La strumentazione `TRACCIA_D0` esiste gia' e copre i dodici
   mai scattata, quindi **la terza via di nascita puo' essere NON ESERCITATA**, e la riga «esclusa»
   della tabella sopra vale per `_allaccia` e per la mitosi con certezza, **per Schwinger solo se e'
   scattata**. **Si legge da `_g_nati_schwinger`, e in questo giro non l'ho letto.**
+
+---
+
+## 5. ✅ **`Z4b`: LA CAUSA E' TROVATA — ed e' un problema di ORDINE, non una via di scrittura mancante**
+
+> **L'indizio che ha aperto la diagnosi e' di Luca**, e non lo avevo sfruttato: `min(d)` e `min(d0)`
+> erano **identici a nove cifre** (`0.075759598` entrambi). **Una discesa dinamica li
+> SEPAREREBBE**, perche' `d` e `d0` sono mossi da leggi diverse. **Due valori identici sono la
+> firma di un arco NATO cosi'.**
+
+### 5.1 La misura al passo 0
+```
+subito dopo la semina:  n = 2391   archi = 527 088   LAM = 0.8000
+    archi con d  < LAM:  2848  (0.54 %)      min(d)  = 0.075759598
+    archi con d0 < LAM:  2848  (0.54 %)      min(d0) = 0.075759598
+    su quegli archi:  max|d - d0| = 0.000e+00  ESATTO      <- NATI uguali
+    i loro indici: da 3 a 59 729
+    percentili di d: p01 = 0.8000   p50 = 0.8801   p99 = 2.3720
+```
+**`p01 = 0.8000` esatto: `_nasce` ha davvero sollevato a `LAM` una parte della popolazione.**
+
+### 5.2 `_allaccia` FUNZIONA — tracciato per chiamata
+```
+_nasce      156 768 archi   min PRIMA 0.014273  ->  min DOPO 0.800000
+_allaccia   156 768 archi aggiunti   min 0.800000   sotto LAM: 0
+_nasce      154 373 archi   min PRIMA 0.016586  ->  min DOPO 0.800000
+_allaccia   154 373 archi aggiunti   min 0.800000   sotto LAM: 0
+_nasce      156 217 archi   min PRIMA 0.015176  ->  min DOPO 0.800000
+_allaccia   156 217 archi aggiunti   min 0.800000   sotto LAM: 0
+                                    TOTALE AGGIUNTI: 467 358
+```
+> **Tre invocazioni, `467 358` archi, ZERO sotto `LAM`.** **Ma al passo 0 gli archi sono
+> `527 088`: ne mancano `59 730` — ESATTAMENTE l'intervallo `3..59729` in cui vivono tutti quelli
+> sotto `LAM`.**
+
+### 5.3 ⚠ DOVE NASCONO: **`:5379-5380`, a livello di MODULO**
+```python
+net = Rete()                    # :5379   <- gira all' `import`
+net.semina(SEME_INIZIALE)       # :5380
+```
+**Il vuoto — `59 730` archi — e' costruito quando `import soliton_simulator` viene eseguito**,
+cioe' **PRIMA di `_cli()` e di `_applica_flag()`**, quando **ogni flag da riga di comando e'
+ancora al suo default di modulo** e `SCALA_MIN` vale `False`.
+
+`_applica_flag` accende `SCALA_MIN` a **`:6492`**, ma la ricostruzione della rete a **`:6713`** e'
+**CONDIZIONALE**:
+```python
+if a.seed is not None or a.nodi != SEME_INIZIALE:
+    net = Rete(...); net.semina(a.nodi); ...
+```
+**e in questa configurazione NON SCATTA.** **Il vuoto costruito all'import SOPRAVVIVE.**
+
+**Verificato direttamente: dopo `_applica_flag` e PRIMA di `avvia_test`, la rete ha gia'
+`59 730` archi.**
+
+### 5.4 Il sospetto DI METODO e' ESCLUSO dal disco
+| controllo | esito |
+|---|---|
+| scritture `out=` su `d`/`d0` | **ZERO occorrenze** |
+| alias che scrivono | **nessuno**: i quattro trovati (`:3144 dopo`, `:3634 dd`, `:4332`/`:4334` `d_arco`) sono **tutti in sola lettura** |
+| siti dove `self.i` cresce | **TRE soli**: `:2214` `_allaccia`, `:4722` mitosi, `:4824` Schwinger — **tutti coperti** |
+
+> **Quindi `Z78` NON e' incompleta: il censimento degli scrittori era GIUSTO.**
+> **RITIRO l'ipotesi che avevo scritto** — *«uno scrittore fuori dai dodici»* — **era il candidato
+> sbagliato. A sbagliare non era il DOVE, era il QUANDO.**
+
+### 5.5 ⚠ E LA CONSEGUENZA E' PIU' GRANDE DI `SCALA_MIN`
+
+> **Il VUOTO — il substrato di tutto — e' costruito PRIMA che la fisica sia configurata.**
+> **Qualunque flag che dovrebbe agire al momento della semina e' INERTE per il vuoto**, e lo e'
+> **in silenzio**: nessun errore, nessun avviso, solo un mondo nato con leggi diverse da quelle
+> che il comando chiedeva.
+
+**E il sistema parte SOTTO la propria scala minima fin dal primo istante:** `0.54 %` degli archi,
+il minimo **dieci volte** sotto `LAM`, la mediana della popolazione sotto-`LAM` a `0.63 LAM`.
+**`SCALA_MIN` poi funziona correttamente — li CONGELA, non li fa scendere oltre — ma non puo'
+sollevarli**, perche' sollevarli sarebbe l'inflazione che la forma e' fatta apposta per evitare.
+
+### 5.6 COSA **NON** FACCIO
+**NON applico la cura.** Cambiare **quando** il mondo viene costruito e' una decisione di
+struttura, non un ritocco: tocca **ogni** flag, non solo i tre del ramo D. **Si riporta e si
+aspetta Luca** *(voce `3` della coda unica)*.

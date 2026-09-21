@@ -9329,3 +9329,30 @@ registrare **quale sito** ha scritto quel valore. `TRACCIA_D0` copre i dodici si
 **LIMITE che indebolisce l'esclusione della prima riga, dichiarato:** in 30 passi la coppia di
 **Schwinger** puo' non essere mai scattata, quindi quella via e' esclusa con certezza **solo** per
 `_allaccia` e per la mitosi. **Si legge da `_g_nati_schwinger`, e in questo giro non l'ho letto.**
+
+### ✅ `Z4b`: **la causa e' TROVATA — il vuoto nasce PRIMA che la fisica sia configurata**
+
+**L'indizio e' di Luca:** `min(d) = min(d0) = 0.075759598`, **identici a nove cifre**. Una discesa
+dinamica li separerebbe; **due valori identici sono la firma di un arco NATO cosi'**.
+
+**Misurato al passo 0:** `2848` archi (0.54 %) gia' sotto `LAM`, con **`max|d-d0| = 0.000e+00`
+esatto**, indici **da 3 a 59 729**.
+**`_allaccia` funziona:** tre invocazioni, `467 358` archi, `min PRIMA` `0.014`-`0.017` ->
+**`min DOPO 0.800000`, ZERO sotto `LAM`**. **Ma gli archi totali sono `527 088`: ne mancano
+`59 730`, esattamente l'intervallo degli indici sotto `LAM`.**
+
+> **⚠ `:5379-5380`, A LIVELLO DI MODULO:** `net = Rete()` e `net.semina(SEME_INIZIALE)` girano
+> **all'`import`**, prima di `_cli()` e `_applica_flag()`, quando ogni flag e' al default di
+> modulo. La ricostruzione a `:6713` e' **condizionale** (`a.seed is not None or a.nodi !=
+> SEME_INIZIALE`) e **non scatta**: il vuoto dell'import sopravvive.
+
+**Il sospetto di METODO e' escluso dal disco:** zero `out=`, i quattro alias sono in sola lettura,
+e `self.i` cresce in tre soli siti, tutti coperti. **Quindi `Z78` NON e' incompleta e RITIRO
+l'ipotesi che avevo scritto: a sbagliare non era il DOVE, era il QUANDO.**
+
+> **E la conseguenza supera `SCALA_MIN`: il substrato di tutto e' costruito prima che la fisica sia
+> configurata, quindi QUALUNQUE flag che dovrebbe agire alla semina e' inerte per il vuoto — e lo e'
+> in silenzio.** **Il sistema parte sotto la propria scala minima fin dal primo istante.**
+
+**NON applico la cura:** cambiare *quando* il mondo viene costruito tocca **ogni** flag, non solo i
+tre del ramo D. E' una decisione di struttura.
