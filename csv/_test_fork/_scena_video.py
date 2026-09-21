@@ -93,6 +93,15 @@ CHICOOP = "off"
 # elemento a quello di prima. Lo prova il sigillo, non questo commento.
 SCALAMIN = "off"
 COESADIM = "off"
+# [LE CINQUE CURE, 2026-09-21] stesso schema NOMINALE `=on|off`, DEFAULT `off`.
+# ⚠ `--invarianti=on|off` NON si parsa qui DI PROPOSITO: e' un'opzione VALORIZZATA del
+#   simulatore, quindi cade in `_resti` e ci arriva TALE E QUALE. Aggiungerla qui creerebbe
+#   un secondo posto in cui puo' divergere.
+PEQESATTO = "off"
+PEQNASCITA = "off"
+SCALAMINPASSO = "off"
+COESCAUSALE = "off"
+ANOMSIMM = "off"
 
 _resti = []
 for _x in _ARGV[1:]:
@@ -122,6 +131,26 @@ for _x in _ARGV[1:]:
         COESADIM = _x.split("=", 1)[1].strip().lower()
         if COESADIM not in ("on", "off"):
             raise SystemExit("--coes-adim vuole `on` o `off`, non %r" % COESADIM)
+    elif _x.startswith("--peq-esatto="):
+        PEQESATTO = _x.split("=", 1)[1].strip().lower()
+        if PEQESATTO not in ("on", "off"):
+            raise SystemExit("--peq-esatto vuole `on` o `off`, non %r" % PEQESATTO)
+    elif _x.startswith("--peq-nascita-locale="):
+        PEQNASCITA = _x.split("=", 1)[1].strip().lower()
+        if PEQNASCITA not in ("on", "off"):
+            raise SystemExit("--peq-nascita-locale vuole `on` o `off`, non %r" % PEQNASCITA)
+    elif _x.startswith("--scala-min-passo="):
+        SCALAMINPASSO = _x.split("=", 1)[1].strip().lower()
+        if SCALAMINPASSO not in ("on", "off"):
+            raise SystemExit("--scala-min-passo vuole `on` o `off`, non %r" % SCALAMINPASSO)
+    elif _x.startswith("--coes-causale="):
+        COESCAUSALE = _x.split("=", 1)[1].strip().lower()
+        if COESCAUSALE not in ("on", "off"):
+            raise SystemExit("--coes-causale vuole `on` o `off`, non %r" % COESCAUSALE)
+    elif _x.startswith("--anom-simm="):
+        ANOMSIMM = _x.split("=", 1)[1].strip().lower()
+        if ANOMSIMM not in ("on", "off"):
+            raise SystemExit("--anom-simm vuole `on` o `off`, non %r" % ANOMSIMM)
     elif _x == "--riprendi":
         # LA RIPRESA E' UNA SCELTA ESPLICITA, MAI UN RIPIEGO AUTOMATICO: senza questo flag il
         # comportamento resta quello dell'originale (cartella sporca -> RIFIUTO).
@@ -152,6 +181,11 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--
     + (["--chi-coop"] if CHICOOP == "on" else []) \
     + (["--scala-min"] if SCALAMIN == "on" else []) \
     + (["--coes-adim"] if COESADIM == "on" else []) \
+    + (["--peq-esatto"] if PEQESATTO == "on" else []) \
+    + (["--peq-nascita-locale"] if PEQNASCITA == "on" else []) \
+    + (["--scala-min-passo"] if SCALAMINPASSO == "on" else []) \
+    + (["--coes-causale"] if COESCAUSALE == "on" else []) \
+    + (["--anom-simm"] if ANOMSIMM == "on" else []) \
     + ["--plast-din", "--viriale", "--olon-part"]
 # ⚠⚠ QUESTE DUE RIGHE MANCAVANO, e il ramo D e' girato per 1200 passi con SCALA_MIN e COES_ADIM
 #   SPENTI mentre il comando li chiedeva ACCESI. Le opzioni erano PARSATE (`--scala-min=on` non
@@ -181,7 +215,9 @@ S._NMASSE_VIDEO["size"] = None
 
 print("\n  FLAG ATTIVI, letti dal MODULO dopo `_applica_flag` (P6: dai dati, non dal comando):")
 for f in ("CAMPO_SPINORIALE", "SPINORE_VIVO", "SPINORE_CORRETTO", "CHI_CORE", "CS_DINAMICO",
-          "TAU_LUCE", "CHI_BASC", "CHI_COOP", "SCALA_MIN", "COES_ADIM", "FORK_SU2", "FORK_SU2_MEM", "STEP2_OROLOGIO",
+          "TAU_LUCE", "CHI_BASC", "CHI_COOP", "SCALA_MIN", "COES_ADIM",
+          "PEQ_ESATTO", "PEQ_NASCITA_LOCALE", "SCALA_MIN_PASSO", "COES_CAUSALE", "ANOM_SIMM",
+          "INVARIANTI", "FORK_SU2", "FORK_SU2_MEM", "STEP2_OROLOGIO",
           "SPIN_FEEDBACK", "CALORE_VETTORIALE", "PLAST_DIN", "VERLET", "TAU_LOC"):
     print("    %-20s %s" % (f, getattr(S, f, "ASSENTE")))
 print("  PASSI_PER_FRAME = %s   DT = %s   TAU_A = %s   N_c(collasso) = %d"
