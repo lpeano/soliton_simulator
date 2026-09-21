@@ -1243,6 +1243,34 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   il repo direbbe una cosa diversa da quella che sta girando. Se serve modificare uno strumento in
   uso, si lavora su una **COPIA** e si porta la modifica sul file vero **a run chiuso**.
 
+## 9-bis. OGNI NUMERO PORTA LA SUA EPOCA (regola di Luca, 2026-09-21)
+
+> **Ogni numero citato — in un referto, in un mandato, nel registro — porta la sua EPOCA.**
+> **Un numero dell'epoca 1 non si usa come premessa per l'epoca 2.**
+> **E' la stessa regola dei commenti scaduti, applicata ai DATI.**
+
+**`EPOCA 2` = il blob del tag `epoca-2` (`4954fe5b`, byte grezzi) PIU' la configurazione con
+`CHI_COOP`, `SCALA_MIN`, `COES_ADIM` ACCESI.** Sono **due** cose insieme: **un run a flag spenti
+su quel blob e' ancora EPOCA 1**, e lo provano `Z1` e `Z1c` (byte-identici al simulatore di prima).
+
+**DUE COROLLARI, entrambi nati da difetti misurati oggi:**
+- **un'espansione che si vede come TENSIONE locale (`d/d0` che cresce) non e' espansione: e' un
+  difetto.** **Un'espansione che dipende dal punto di riferimento ha un CENTRO: e' un difetto.**
+- **l'epoca ritira le MISURE, non i DIFETTI.** Un difetto trovato leggendo il codice resta un
+  difetto in epoca 2 **finche' il percorso che lo contiene gira ancora**. Nessuno si archivia
+  perche' *«era del sistema vecchio»*.
+
+**⚠ E IL CASO CHE HA GENERATO LA REGOLA, perche' non e' un principio astratto:** fino al
+2026-09-21 il **vuoto** nasceva all'`import`, **prima** che i flag fossero applicati, e la
+ricostruzione della rete era **condizionata** a `--seed`/`--nodi` — quindi non scattava mai nel
+caso normale. **OTTO grandezze che la semina legge** *(`CALORE_VETTORIALE`, `CAMPO_SPINORIALE`,
+`GAMMA`, `LAM`, `MAX_NODI`, `SCALA_AMP`, `SCALA_MIN`, `TAU_A`)* **sono state INERTI SUL VUOTO in
+OGNI run di epoca 1, in silenzio.** Fra queste **`LAM` fissa `R_CONN = 3*LAM`, il raggio con cui
+il vuoto si allaccia**, e **`CALORE_VETTORIALE` decide il calcio termico alla nascita** — e
+`--calore-scal` e' in **ogni** comando del fork. **-> `Z88` del registro.**
+
+---
+
 ## 10. PROMOZIONE DELLE COMPONENTI (regola di Luca, 2026-09-15)
 
 **Perche' esiste.** Finche' una legge validata resta un flag opzionale, puo' essere **dimenticata**,

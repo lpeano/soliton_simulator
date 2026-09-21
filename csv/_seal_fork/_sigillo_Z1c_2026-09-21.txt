@@ -1,0 +1,20 @@
+[TIMBRO] _sigillo_Z1c.py  sha1-BYTE f885e27e  committato e pulito
+Z1c  simulatore PRIMA (0f4fc1e)          : sha1 GREZZO 54623593
+Z1c  PRIMA + la sola cura del mondo  : sha1 GREZZO 5d54658d
+Z1c  simulatore ORA                  : sha1 GREZZO 4954fe5b
+Z1c  (byte grezzi, NON `git hash-object`: sono due numeri diversi, C18)
+
+braccio A   PRIMA + cura, argv del FORK, i tre flag SPENTI
+braccio B   ORA,          argv del FORK, i tre flag SPENTI
+
+     CONTROPROVA che il test ATTRAVERSA il codice toccato:
+       chiamate a `chiralita_core_locale`:  A = 60   B = 60
+
+Z1c  PASS   argv del FORK, tre flag SPENTI: 10 campi -> BYTE-IDENTICI
+
+VERDETTO: i tre flag sono INERTI anche nella CONFIGURAZIONE VERA, dove la catena
+  CHI_CORE e il campo B del passo spinoriale girano davvero. Il ramo D puo'
+  continuare.
+
+LIMITI: UN seme, UNA scena, 30 passi. Prova la byte-identita' a flag SPENTI, NON che i
+  flag accesi producano una fisica migliore.

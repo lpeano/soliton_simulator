@@ -1,3 +1,8 @@
+> ## ⚠ DAL TAG `epoca-2`: **SISTEMA D**
+> **Nuova carica (dallo spinore), scala minima `LAM` su `d` e `d0`, coesione adimensionale e causale** — piu' la **cura del mondo-dopo-i-flag**, che cambia ogni run.
+> **Ogni numero misurato PRIMA appartiene all'EPOCA 1 e NON si confronta con l'epoca 2.**
+> `EPOCA 2 = blob del simulatore del tag (`4954fe5b`, byte grezzi) + configurazione con `CHI_COOP`, `SCALA_MIN`, `COES_ADIM` ACCESI`. **Un run a flag spenti su quel blob e' ancora EPOCA 1**, e non e' un'opinione: lo provano `Z1` e `Z1c`, byte-identici.
+
 # RELAZIONE — per Claude web · **aggiornata 2026-09-20 (sera)**
 
 > **Scritta per Claude web**, che legge il repo e non ha la conversazione.

@@ -1,3 +1,8 @@
+> ## ⚠ DAL TAG `epoca-2`: **SISTEMA D**
+> **Nuova carica (dallo spinore), scala minima `LAM` su `d` e `d0`, coesione adimensionale e causale** — piu' la **cura del mondo-dopo-i-flag**, che cambia ogni run.
+> **Ogni numero misurato PRIMA appartiene all'EPOCA 1 e NON si confronta con l'epoca 2.**
+> `EPOCA 2 = blob del simulatore del tag (`4954fe5b`, byte grezzi) + configurazione con `CHI_COOP`, `SCALA_MIN`, `COES_ADIM` ACCESI`. **Un run a flag spenti su quel blob e' ancora EPOCA 1**, e non e' un'opinione: lo provano `Z1` e `Z1c`, byte-identici.
+
 # ⚠ LA CODA UNICA — **l'ordine del lavoro, e l'UNICA fonte dell'ordine**
 
 > **Decisione di Luca, 2026-09-21.** **Se un mandato sembra contraddire questa coda, VINCE LA CODA
@@ -7,9 +12,9 @@
 |---|---|---|---|
 | 1 | `CHI_COOP` (carica dallo spinore, geometria da `chi_basc`) | perentorio ① | ✅ **FATTO**, sigillo `8/8` |
 | 2 | `SCALA_MIN` + `COES_ADIM`, codice e driver | perentorio ②③ | ✅ **FATTO**, `11b6431` |
-| 3 | **sigillo unico `Z0`-`Z8`** | perentorio | ✅ **`11/11`** — `d69e5bae` sul simulatore `4954fe5b`. `Z1` **ri-ancorata all'argv NUDO** *(piu' severa: e' il caso in cui la cura non PUO' avere effetto)*; `Z8` nuovo: la ricostruzione del mondo e' **neutra**. |
+| 3 | **sigillo unico `Z0`-`Z8`** | perentorio | ✅ **`11/11`** — `d69e5bae` sul simulatore `4954fe5b`. `Z1` **ri-ancorata all'argv NUDO** *(piu' severa: e' il caso in cui la cura non PUO' avere effetto)*; `Z8` nuovo: la ricostruzione del mondo e' **neutra**. **+ `Z1c` PASS** *(argv del FORK, tre flag spenti: byte-identico, e la controprova dice che il test ATTRAVERSA la catena -- 60 chiamate a `chiralita_core_locale` contro le ZERO dell'argv nudo)*. |
 | 4 | **lancio del ramo D** | perentorio | ▶ **IN CORSO** — presidi verificati: componenti = **1**, `min(d) = min(d0) = LAM`, `d/d0 = 1.000000`, ⚠ **disco 5.9 GB liberi (99% pieno)** |
-| 5 | tag `epoca-2` + righe di stato + regola in `CLAUDE.md` | EPOCA | ⏸ dopo il punto 4 *(le etichette del registro: ✅ fatte, 150/150)* |
+| 5 | tag `epoca-2` + righe di stato + regola in `CLAUDE.md` | EPOCA | ✅ **tag annotato su `01eda44`** *(certifica `4954fe5b`, il simulatore su cui gira D)*, **pushato**; righe di stato in cima a `STATO_RUN.md` e `RELAZIONE_PER_CLAUDE.md`; regola in `CLAUDE.md`. |
 | 6 | strumento cosmologico `M1`-`M4`, e `M1`/`M4` **leggeri** durante il run | COSMOLOGICO | ⏸ dopo il punto 4 |
 | 7 | **`Z47` PARTE ①** — ricognizione di `pos` nella fisica *(sola lettura)* | `MANDATO_Z47_coda` | ⏸ condizione d'avvio: D lanciato **e** punti 5-6 fatti |
 | 8 | a run finito: `M2`/`M3` cosmologici *(pesanti)* | COSMOLOGICO | ⏸ |
