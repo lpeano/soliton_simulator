@@ -82,6 +82,31 @@ ls csv/_test_fork/_val600/scena_*.pkl.gz
 ```
 **e `doc/STATO_RUN.md` porta la voce del run col COMANDO VERBATIM** *(par.5-octies)*.
 
+## IL VIDEO DELLA VALIDAZIONE — **due strade, la scelta e' di Luca**
+
+> **NON lanciato stasera:** alle `00:06` si era gia' dentro la finestra di riavvio, e il mandato
+> diceva *«se non finisce entro le 23:30, NON lanciarlo»*.
+
+**⚠ E IL MIO `§0` ERA SBAGLIATO:** avevo risposto *«il video non c'e'»* dopo aver cercato **solo**
+dentro `_scena_video.py`. **Esiste gia' `csv/_test_fork/_video_da_snapshot.py`**, che ha prodotto
+`csv/_test_fork/_video_g6000/video_g6000.mp4` *(46 fotogrammi, 1.28 MB)*. **Lo ha trovato Luca.**
+
+| strada | fotogrammi | fisica | tempo | nota |
+|---|---:|---|---|---|
+| **`_video_da_snapshot.py`** *(esiste, task history `d20a3ea`)* | **5** | **NESSUNA** — legge gli snapshot e chiama solo le funzioni di **disegno** | subito | **`0.25 s` di video a 20 fps.** E' **hardcodato su `_g6000`**: vanno parametrizzati `ARCHIVIO`, `DEST` e l'argv *(`--sep 8` invece di `4.0`)* |
+| **`_video_val600.py`** *(scritto stanotte, MAI girato)* | **100** | **RIESEGUITA** *(rigiocata dalla semina)* | **~35 min + disegno** | **Dimostra di essere QUEL run** confrontando lo stato al passo 600 con `scena_000600.pkl.gz`: se non coincide **non monta** |
+
+**Per averne 100 senza rigiocare servirebbero 100 snapshot da ~36 MB = `~3.6 GB`.** E' il vero
+motivo per cui la seconda strada esiste.
+
+```
+python csv/_test_fork/_video_val600.py --prova      (12 passi: si vede che monta)
+python csv/_test_fork/_video_val600.py              (600 passi, 100 fotogrammi)
+```
+**Esce su `E:\soliton_archivio\video_val600\`, NON in git.** `ffmpeg 8.1.1` e `matplotlib 3.10.7`
+sono presenti *(verificato dal disco)*.
+
+
 ## ⚠ COSA NON SI DEVE FARE AL RIAVVIO
 - **NON usare `--db-cleanup`**: **CANCELLA il `.pkl`**. L'archivio del ramo D *(10 snapshot,
   ~370 MB, irriproducibili senza rigirare 1200 passi)* non si tocca.

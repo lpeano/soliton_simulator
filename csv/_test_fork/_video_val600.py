@@ -1,6 +1,25 @@
 # -*- coding: utf-8 -*-
 """IL VIDEO DEL RUN DI VALIDAZIONE -- **per guardarlo, non per misurarlo**.
 
+⚠⚠ **ESISTE GIA' UNO STRUMENTO VIDEO, E VA LETTO PRIMA DI USARE QUESTO:**
+  **`csv/_test_fork/_video_da_snapshot.py`** *(task history `2026-09-20_video-da-snapshot.md`,
+  commit `d20a3ea`)*, che ha gia' prodotto `video_g6000.mp4` da 46 fotogrammi.
+  **Quello ha un pregio che QUESTO non ha: NON ESEGUE NESSUNA FISICA.** Legge gli snapshot e
+  chiama **solo** le funzioni di disegno -- `diagnostica()`, `campo_spaziale()`,
+  `pozzo_grafo()`, `intensita()` -- verificate dal sorgente come pure di rendering.
+  **E' la strada piu' sicura, e se bastano pochi fotogrammi si usa QUELLA.**
+
+  **PERCHE' ALLORA QUESTO ESISTE, ed e' l'unica ragione:** la validazione ha **CINQUE**
+  snapshot *(uno ogni 120 passi)*, quindi `_video_da_snapshot.py` su `_val600` darebbe
+  **5 fotogrammi = 0.25 s di video a 20 fps**. Per averne 100 servirebbero 100 snapshot da
+  ~36 MB, cioe' **~3.6 GB**. Questo strumento li ottiene **rigiocando**, al costo di
+  **rieseguire la fisica** *(~35 minuti)* e di dover **DIMOSTRARE** che la rigiocata e'
+  quel run -- che e' cio' che fa il confronto al passo 600.
+
+  **LA SCELTA FRA I DUE E' DI LUCA, e i numeri per deciderla sono questi:**
+  `_video_da_snapshot.py` -> **5 fotogrammi, ZERO fisica, subito**;
+  `_video_val600.py`      -> **100 fotogrammi, fisica rieseguita, ~35 min + disegno**.
+
 ⚠⚠ LE POSIZIONI SONO UN DISEGNO, NON FISICA (`Z47`), E IL VIDEO NON DEVE FAR CREDERE IL CONTRARIO.
   `pos` e' prodotta da `rilassa_disegno()`, che e' un LAYOUT: serve a vedere il grafo, non e' la
   geometria del sistema. **Ogni fotogramma porta la riga fissa
