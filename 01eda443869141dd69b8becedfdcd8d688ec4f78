@@ -1,0 +1,24 @@
+CORREZIONE alla definizione dell'epoca, 2026-09-21 -- il tag NON si sposta.
+
+Il messaggio del tag epoca-2 dice che un run a flag spenti su questo blob e' ancora EPOCA 1,
+citando Z1 e Z1c. VALE SOLO CON L'ARGV NUDO.
+
+Z1c confronta contro PRIMA + LA CURA DEL MONDO, non contro PRIMA: la cura e' innestata su
+entrambi i bracci di proposito, senno' il sigillo misurerebbe lei invece dei tre flag. Quindi
+Z1c NON dice nulla sull'equivalenza con l'epoca 1. A dirlo e' Z1b, che misura la differenza:
+n da 2569 a 2580, archi da 527308 a 526202.
+
+LA CLASSIFICAZIONE CORRETTA
+
+  EPOCA 1       blob PRECEDENTE al tag, qualunque configurazione
+  EPOCA 1       blob del tag, argv NUDO, tre flag spenti        -> byte-identico (Z1)
+  EPOCA 1-bis   blob del tag, argv del FORK, tre flag spenti    -> epoca 1 CON la cura del mondo:
+                il vuoto nasce coi flag del run invece che coi default (Z1b)
+  EPOCA 2       blob del tag + CHI_COOP, SCALA_MIN, COES_ADIM accesi
+
+CONSEGUENZA PRATICA: i run del FORK di epoca 1 NON si riproducono su questo blob, nemmeno a flag
+spenti, e NON E' UN DIFETTO. Chi vuole rigirarli deve usare il blob PRECEDENTE, estratto con
+git cat-file -p <commit>:soliton_simulator.py in BINARIO.
+
+Correzione anche in CLAUDE.md par. 9-bis, doc/STATO_RUN.md e RELAZIONE_PER_CLAUDE.md, in loco:
+la frase imprecisa resta leggibile, con accanto la correzione e il perche'.
