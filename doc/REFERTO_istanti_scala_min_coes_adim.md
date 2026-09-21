@@ -255,3 +255,79 @@ numerico.**
   tabella e' **derivazione**. Gli unici NUMERI MISURATI sono i contatori, e vengono da snapshot
   **gia' su disco**.
 - **NON tocca il codice.** Nessuna modifica, nessuna cura, come da mandato.
+
+---
+
+## ②-bis — **DOVE NASCE IL PICCO DI `n1`: la localizzazione, e un candidato REFUTATO**
+
+### La localizzazione, da due misure allo STESSO passo e a DUE ISTANTI DIVERSI
+
+| misura | istante | valore |
+|---|---|---|
+| riga `1125` della rigiocata | **subito dopo `step()`**, prima di `mitosi()` | **`n1 = 1`, `nsub = 4`** |
+| `py-spy dump --locals` dentro `step()` del passo `1126` | **all'INGRESSO di `step()`** | **`n1 = nsub = 22591`** |
+
+**Fra i due istanti girano SOLO quattro cose**, ed e' l'ordine del ciclo della rigiocata
+*(identico a quello del driver)*:
+```
+net.step()            <- [misura della rigiocata: n1 = 1]
+net.mitosi()
+net.rilassa_disegno()
+net.memoria_hebbiana_moto()
+S.scuoti_vuoto(net)
+net.step()            <- [nsub interno calcolato QUI: 22591]
+```
+> **Il salto di `|src|` NON e' prodotto da `step()`: e' prodotto da una di quelle quattro.**
+> E `memoria_hebbiana_moto` **non scrive ne' `peq` ne' `psi`** — scrive `d0` — quindi non puo'
+> muovere `anom` direttamente. **Restano `mitosi`, `rilassa_disegno` e `scuoti_vuoto`.**
+
+**Gli scrittori di `peq` nel file sono CINQUE, e solo DUE stanno fuori da `step()`:**
+
+| riga | dove | cosa scrive |
+|---|---|---|
+| `:2220` | `_allaccia` | **`NaN`** — da calibrare |
+| `:4189` | `step` | `self.peq[nuovi] = rho[nuovi]` — **calibra i soli `NaN`**, quindi `anom = 0` esatto |
+| `:4206` / `:4208` | `step` | rilassamento verso `rho` |
+| **`:4752`** | **`mitosi`** | **EREDITATO** dall'arco che si divide |
+| **`:4846`** | **`mitosi`** (Schwinger) | **`np.full(2*nc, median(self.peq))`** — la MEDIANA GLOBALE, che **viola `A2`** |
+
+**`:4189` calibra solo i `NaN`, quindi gli archi di Schwinger NON vengono ricalibrati.** Era il
+candidato naturale: un arco che nasce con un `peq` che non e' il suo.
+
+### ⚠ IL CANDIDATO SCHWINGER E' REFUTATO — dai numeri, non da un'opinione
+
+Se un arco di Schwinger nasce con `peq = median(peq)` e un `rho` ordinario, il suo `anom` vale
+`(rho - median(peq)) / max(median(peq), 1e-9)`. **Misurato dagli snapshot su disco:**
+
+| passo | `median(peq)` | `min(peq)` | `median(rho)` | `anom` di un arco Schwinger | **`n1` che ne verrebbe** |
+|---:|---:|---:|---:|---:|---:|
+| 120 | `1.056e-04` | `1.028e-07` | `9.252e-04` | `+7.77` | **1** |
+| 600 | `1.019e-01` | `1.996e-04` | `1.652e-01` | `+0.62` | **1** |
+| 960 | `8.863e-02` | `3.328e-05` | `1.253e-01` | `+0.41` | **1** |
+| 1080 | `6.033e-02` | `8.348e-08` | `3.146e-02` | `-0.48` | **1** |
+| 1200 | `7.808e-02` | `1.385e-14` | `1.454e-01` | `+0.86` | **1** |
+
+> **`median(peq)` non si avvicina MAI al pavimento `1e-9`: resta fra `1e-1` e `1e-4`.**
+> **Un arco di Schwinger nasce con un `peq` SANO e da' `anom` di ordine UNO, cioe' `n1 = 1`.**
+> **Il difetto `A2` di `:4846` e' REALE e resta a registro, ma NON e' questo picco.**
+
+### COSA DICONO INVECE I NUMERI: **e' UN ARCO SOLO, e il suo `peq` e' SOTTO il pavimento**
+
+**A crollare non e' la mediana: e' il MINIMO** — `1.03e-07` al 120, `8.35e-08` al 1080, e
+**`1.385e-14` al 1200: CINQUE ordini SOTTO il pavimento `1e-9`.**
+
+**L'aritmetica inversa dice quanto serve**, e si legge dal codice (`:4218`, `:4264`):
+```
+n1 = 22591  ->  |src| = 22591 * 0.02 * cs_max / DT = 90364
+             ->  anom  = |src| / ALPHA_M = 1.807e6
+             ->  con peq AL PAVIMENTO 1e-9:   rho - peq = 1.807e-3
+```
+**Serve un arco con `rho ~ 1.8e-3` — del tutto ordinario — e `peq` schiacciato AL PAVIMENTO.**
+**Non e' una deriva di popolazione: e' UN ARCO.** *(E il pavimento `max(peq, 1e-9)` non protegge:
+**limita il denominatore, quindi limita `anom` A 1e9 VOLTE `rho`** invece di lasciarlo divergere —
+e `1e9 * 1.8e-3` e' esattamente l'ordine misurato.)*
+
+**QUAL E' QUELL'ARCO NON E' ANCORA MISURATO:** la rigiocata registra l'arco di `|anom|` massimo
+**dopo `step()`**, mentre l'innesco vive nell'istante **prima**. **E' un limite dello strumento, e
+lo dichiaro invece di aggirarlo.**
+

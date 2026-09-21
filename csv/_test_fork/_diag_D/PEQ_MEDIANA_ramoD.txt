@@ -1,0 +1,11 @@
+[TIMBRO] _peq_mediana_ramoD.py  sha1-BYTE 3aef0b51  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
+ passo  median(peq)     min(peq)  median(rho) | anom se Schwinger          |src|         n1
+------------------------------------------------------------------------------------------------
+   120   1.0555e-04   1.0278e-07   9.2521e-04 |     7.7656e+00     3.8828e-01          1
+   600   1.0188e-01   1.9964e-04   1.6518e-01 |     6.2139e-01     3.1069e-02          1
+   960   8.8633e-02   3.3284e-05   1.2531e-01 |     4.1375e-01     2.0687e-02          1
+  1080   6.0326e-02   8.3482e-08   3.1455e-02 |    -4.7858e-01     2.3929e-02          1
+  1200   7.8075e-02   1.3849e-14   1.4542e-01 |     8.6255e-01     4.3127e-02          1
+
+LETTURA: `anom` cresce SOLO quando la mediana scende SOTTO il pavimento 1e-9.
+Finche' median(peq) >> 1e-9, un arco di Schwinger da' anom ~ rho/peq, grande ma non enorme.

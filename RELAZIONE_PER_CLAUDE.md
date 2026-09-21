@@ -10178,3 +10178,40 @@ offset 4 e il risultato aveva **dodici** spazi. `py_compile` passava.
 > **`P1-quater` va precisata: asserire che l'ancora sia UNICA non dice DOVE cade il match, se
 > l'ancora e' un frammento di riga. L'ancora dev'essere una RIGA INTERA, col suo `\n` iniziale.**
 Ora un controllo **sull'AST** verifica che la `W()` sia **figlia diretta del `for`**.
+
+### ⑥ IL PICCO NON E' PRODOTTO DA `step()`, E IL CANDIDATO SCHWINGER E' REFUTATO
+
+**Due misure allo STESSO passo, a DUE istanti diversi:** la riga `1125` della rigiocata *(subito
+dopo `step()`, prima di `mitosi()`)* da' **`n1 = 1`, `nsub = 4`**; il `py-spy dump` **dentro
+`step()` del passo 1126** *(cioe' all'INGRESSO)* da' **`n1 = nsub = 22591`**.
+Fra i due istanti girano solo `mitosi()`, `rilassa_disegno()`, `memoria_hebbiana_moto()` e
+`scuoti_vuoto()`. **Il salto di `|src|` non nasce in `step()`.** E `memoria_hebbiana_moto` **non
+scrive ne' `peq` ne' `psi`** (scrive `d0`): restano **`mitosi`, `rilassa_disegno`, `scuoti_vuoto`.**
+
+**Gli scrittori di `peq` sono CINQUE e solo DUE stanno fuori da `step()`:** `:4752` (ereditato dalla
+mitosi) e **`:4846`, Schwinger, che scrive `median(self.peq)` -- la MEDIANA GLOBALE, che viola
+`A2`**. E poiche' `:4189` calibra **solo i `NaN`** di `_allaccia`, **gli archi di Schwinger non
+vengono ricalibrati.** Era il candidato naturale.
+
+**REFUTATO, dai numeri** *(`csv/_peq_mediana_ramoD.py`)*:
+
+| passo | `median(peq)` | `min(peq)` | `anom` di un arco Schwinger | `n1` che ne verrebbe |
+|---:|---:|---:|---:|---:|
+| 120 | `1.056e-04` | `1.028e-07` | `+7.77` | **1** |
+| 600 | `1.019e-01` | `1.996e-04` | `+0.62` | **1** |
+| 960 | `8.863e-02` | `3.328e-05` | `+0.41` | **1** |
+| 1080 | `6.033e-02` | `8.348e-08` | `-0.48` | **1** |
+| 1200 | `7.808e-02` | `1.385e-14` | `+0.86` | **1** |
+
+**`median(peq)` non si avvicina mai al pavimento `1e-9`.** Un arco di Schwinger nasce con un `peq`
+**sano**. **Il difetto `A2` di `:4846` resta reale e a registro, ma NON e' questo picco.**
+
+**A crollare e' il MINIMO, non la mediana**, e l'aritmetica inversa dice quanto serve:
+`n1 = 22591` -> `|src| = 90364` -> `anom = 1.807e6` -> **con `peq` al pavimento, `rho ~ 1.8e-3`**,
+del tutto ordinario. **Non e' una deriva di popolazione: e' UN ARCO SOLO.**
+*(E il pavimento `max(peq, 1e-9)` non protegge: limita `anom` a `1e9` volte `rho` invece di
+lasciarlo divergere -- e `1e9 * 1.8e-3` e' esattamente l'ordine misurato.)*
+
+**QUALE arco non e' ancora misurato:** la rigiocata registra l'arco di `|anom|` massimo **dopo
+`step()`**, mentre l'innesco vive nell'istante **prima**. **E' un limite dello strumento, dichiarato
+e non aggirato.**
