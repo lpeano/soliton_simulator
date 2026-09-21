@@ -331,3 +331,99 @@ e `1e9 * 1.8e-3` e' esattamente l'ordine misurato.)*
 **dopo `step()`**, mentre l'innesco vive nell'istante **prima**. **E' un limite dello strumento, e
 lo dichiaro invece di aggirarlo.**
 
+---
+
+## ②-ter — **L'ARCO E' `2773-4158`, ed e' QUELLO CHE AVEVO DICHIARATO REFUTATO**
+
+> **MISURATO** con `csv/_test_fork/_arco_innesco.py --da=1080 --fino=1126`
+> *(blob `9c22c0f6`; output `csv/_test_fork/_diag_D/ARCO_INNESCO_001080.txt`)*, all'**INGRESSO**
+> del passo `1126`, cioe' nel punto esatto in cui il codice calcola `nsub`.
+
+### ⚠ PRIMA DI TUTTO: CLAUDE WEB AVEVA RAGIONE, E IO LO AVEVO SMENTITO
+
+**`2773-4158` e' il candidato proposto da Claude web.** In `26adb95` ho scritto che era
+**SMENTITO**, perche' nella rigiocata `1200 -> 1230` quell'arco aveva `anom = -1.15e-05`.
+**La smentita era sbagliata per DUE ragioni indipendenti, e nessuna delle due riguarda l'arco:**
+1. **finestra sbagliata** — misuravo **dal 1200**, cioe' **DOPO** il fatto: il picco e' al **1126**;
+2. **istante sbagliato** — misuravo **dopo `step()`**, mentre `nsub` si calcola **all'ingresso**.
+
+> **Un candidato non si smentisce con una misura presa fuori dalla finestra e fuori dall'istante.
+> Quella non e' una smentita: e' un'assenza di misura**, ed e' la stessa classe di errore del
+> `max|A-B| = 0.000e+00` per mancanza di confronto (par.9).
+
+### IL DATO, all'ingresso del passo 1126
+
+```
+L'ARCO COL `peq` PIU' BASSO -- il candidato:
+  arco 2773-4158 (NN)   peq=3.405722e-09   rho=2.427133e-63   anom=-1.000000e+00
+  I dei due nodi: I[2773]=1.892035e-63  I[4158]=2.962231e-63
+  eta dei due nodi: 6.933  1.361   (TAU_A = 50.0)
+```
+
+| # | arco | `peq` | `rho` | `anom` | origine |
+|---:|---|---:|---:|---:|:--:|
+| **1** | **`2773-4158`** | **`3.4057e-09`** | `2.4271e-63` | `-1.0000e+00` | **NN** |
+| 2 | `3885-3389` | `4.3802e-07` | `1.2855e-28` | `-1.0000e+00` | NN |
+| 3 | `2761-3366` | `3.0926e-06` | `1.9130e-07` | `-9.3814e-01` | NN |
+| 4 | `3697-3709` | `1.1063e-05` | `4.5584e-17` | `-1.0000e+00` | NN |
+
+**Il primo sta `128` volte sotto il secondo**, e **tutti e otto i piu' bassi sono `NATO-NATO`.**
+**Archi con `peq <= 1e-9` all'ingresso: ZERO su 528 447.** *(Quindi al pavimento non ci e' ancora
+arrivato nessuno: ci arriva DENTRO il passo.)*
+
+### LA TRAIETTORIA — **un arco esce dalla popolazione mentre la popolazione SALE**
+
+| passo | `min(peq)` | `median(peq)` |
+|---:|---:|---:|
+| 1116 | `2.3074e-08` | `6.9998e-02` |
+| 1121 | `8.9272e-09` | `7.8166e-02` |
+| 1123 | `6.0829e-09` | `8.0624e-02` |
+| 1125 | `4.1367e-09` | `8.1955e-02` |
+| **1126** | **`3.4057e-09`** | `8.2431e-02` |
+
+**Il rapporto fra passi consecutivi vale `~0.825`, COSTANTE: e' un decadimento ESPONENZIALE**, e
+`:4206` lo spiega senza aggiungere niente:
+```python
+self.peq += dt_e * ((rho - self.peq) / tau_bg_loc + flusso / TAU_DIFF)     # :4206
+```
+con `rho ~ 0` questo e' `peq *= (1 - dt_e/tau_bg_loc)`, e **`0.825` da' `dt_e/tau_bg_loc = 0.175`,
+cioe' un tempo di rilassamento di `~5.7` passi.**
+
+### ⚠ CORREZIONE DEL §②-bis: **il salto NASCE DENTRO `step()`**, non fuori
+
+Nel §②-bis avevo scritto, da due misure a istanti diversi, che *«il salto di `|src|` NON e' prodotto
+da `step()`»*. **E' SBAGLIATO, e la sonda lo mostra:**
+
+| misura | istante | `n1` |
+|---|---|---:|
+| riga `1125` della rigiocata | **dopo** `step()` | **1** |
+| **sonda `_arco_innesco`, passo 1126** | **all'INGRESSO di `step()`** | **1** |
+| `py-spy dump --locals` | **DENTRO `step()`**, al `:4264` del passo 1126 | **22 591** |
+
+**Ingresso e uscita danno entrambi `1`. Il `22591` vive SOLO all'interno del passo**, fra
+l'aggiornamento di `peq` (`:4206`/`:4208`) e il calcolo di `nsub` (`:4264`).
+**La terna dei candidati del §②-bis — `mitosi`, `rilassa_disegno`, `scuoti_vuoto` — CADE.**
+
+### IL MECCANISMO, e lo scrivo separando cio' che e' misurato da cio' che e' derivato
+
+**MISURATO:** un arco fra **due nodi NATI** *(`eta` 6.9 e 1.4 contro `TAU_A = 50`, quindi
+`ramp = eta/TAU_A` vale `0.139` e `0.027` — **A7b**: un neonato ha peso e densita' quasi nulli)*,
+con `I ~ 1e-63` su entrambi, vede il proprio `peq` **rilassare verso `rho ~ 0`** con `tau ~ 5.7`
+passi. In `~45` passi scende di **un fattore `1e4`**, fino a `3.4e-9`, mentre la **mediana della
+popolazione SALE**.
+
+**DERIVATO dall'aritmetica inversa di `:4218`/`:4264`, non misurato sull'arco:**
+`n1 = 22591` richiede `|src| = 90364`, cioe' `anom = 1.807e6`. Con `peq` dopo un ulteriore
+decadimento (`3.41e-9 * 0.825 = 2.81e-9`) servirebbe **`rho ~ 5.1e-3`** — un valore **del tutto
+ordinario**, ma **61 ordini di grandezza sopra** il `2.4e-63` dell'ingresso.
+
+> **La lettura che ne segue, e la marco come IPOTESI:** `anom` e' una deviazione **RELATIVA** con un
+> denominatore che ha **memoria** (`tau ~ 5.7` passi). Se la densita' di un nodo neonato **si
+> accende** piu' in fretta di quanto `peq` riesca a seguirla, il rapporto esplode **non perche' la
+> fisica diverga, ma perche' il denominatore e' RIMASTO INDIETRO.**
+> **E questo spiega anche perche' il run guarisce da solo:** in `~6` passi `peq` raggiunge `rho`, e
+> `nsub` torna a `4`. **Un transitorio, con la sua durata gia' scritta nella legge.**
+> **⚠ NON E' MISURATO che `rho` salga davvero cosi'**: per vederlo serve la misura **dentro**
+> `step()`, fra `:4206` e `:4264`, che **oggi non esiste** e che richiederebbe di toccare il
+> simulatore — **cosa che il mandato vieta in questo giro.**
+

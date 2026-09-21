@@ -10215,3 +10215,52 @@ lasciarlo divergere -- e `1e9 * 1.8e-3` e' esattamente l'ordine misurato.)*
 **QUALE arco non e' ancora misurato:** la rigiocata registra l'arco di `|anom|` massimo **dopo
 `step()`**, mentre l'innesco vive nell'istante **prima**. **E' un limite dello strumento, dichiarato
 e non aggirato.**
+
+### ⑦ L'ARCO E' `2773-4158` — **e Claude web aveva ragione: la mia smentita era sbagliata**
+
+**MISURATO** con `csv/_test_fork/_arco_innesco.py --da=1080 --fino=1126`, all'**INGRESSO** del passo
+`1126`, cioe' nel punto in cui il codice calcola `nsub`:
+
+```
+arco 2773-4158 (NATO-NATO)   peq=3.405722e-09   rho=2.427133e-63   anom=-1.000000e+00
+I[2773]=1.892035e-63   I[4158]=2.962231e-63
+eta 6.933 e 1.361   (TAU_A = 50)
+```
+
+**E' il piu' basso di 528 447 archi, 128 volte sotto il secondo**, e **gli otto piu' bassi sono
+TUTTI `NATO-NATO`**. **Archi con `peq <= 1e-9`: ZERO** — al pavimento ci si arriva **dentro** il
+passo.
+
+**`min(peq)` decade GEOMETRICAMENTE** (rapporto `~0.825` costante: `2.31e-08` al 1116, `8.93e-09` al
+1121, `3.41e-09` al 1126) **mentre `median(peq)` SALE** (`7.00e-02` -> `8.24e-02`): **un arco esce
+dalla popolazione.** `:4206` lo spiega senza aggiungere niente — con `rho ~ 0` il rilassamento e'
+`peq *= (1 - dt_e/tau_bg_loc)`, e `0.825` da' **`tau ~ 5.7` passi**.
+
+> **⚠ E IO AVEVO SCRITTO CHE QUESTO ARCO ERA SMENTITO.** In `26adb95`: *«il candidato `2773-4158`
+> e' SMENTITO, ha `anom = -1.15e-05`»*. **Sbagliato per DUE ragioni indipendenti, e nessuna
+> riguarda l'arco:** **(a) finestra sbagliata** — misuravo **dal 1200**, cioe' **dopo** il fatto,
+> mentre il picco e' al **1126**; **(b) istante sbagliato** — misuravo **dopo `step()`**, mentre
+> `nsub` si calcola **all'ingresso**.
+> **Un candidato non si smentisce con una misura presa fuori dalla finestra e fuori dall'istante:
+> quella non e' una smentita, e' un'ASSENZA DI MISURA.**
+
+**⚠ E CORREGGO ANCHE IL §⑥ QUI SOPRA, scritto da me un'ora fa:** dicevo che *«il salto non e'
+prodotto da `step()`»*. **Falso.** La sonda misura `n1 = 1` **anche all'ingresso** di `step()`:
+
+| misura | istante | `n1` |
+|---|---|---:|
+| riga `1125` della rigiocata | dopo `step()` | **1** |
+| sonda, passo 1126 | **all'ingresso** di `step()` | **1** |
+| `py-spy dump` | **dentro** `step()`, al `:4264` | **22 591** |
+
+**Il `22591` vive SOLO all'interno del passo**, fra `:4206` (l'aggiornamento di `peq`) e `:4264`.
+**La terna `mitosi` / `rilassa_disegno` / `scuoti_vuoto` CADE.**
+
+**L'IPOTESI, e la marco come tale:** `anom` e' una deviazione **relativa** con un denominatore che
+ha **memoria** (`tau ~ 5.7` passi). Se la densita' di un nodo **neonato** si accende piu' in fretta
+di quanto `peq` riesca a seguirla, il rapporto esplode **non perche' la fisica diverga, ma perche'
+il denominatore e' rimasto indietro** — **e questo spiega perche' il run guarisce da solo: in ~6
+passi `peq` raggiunge `rho` e `nsub` torna a 4.**
+**NON E' MISURATO che `rho` salga davvero** (servirebbe `rho ~ 5.1e-3` contro il `2.4e-63`
+dell'ingresso: **61 ordini**). Per vederlo serve la misura **dentro `step()`**, che **non esiste** e
+che **richiede di toccare il simulatore**: vietato in questo giro, **e la chiedo a Luca.**
