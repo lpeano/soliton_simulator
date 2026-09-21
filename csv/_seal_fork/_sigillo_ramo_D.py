@@ -14,11 +14,16 @@ committato PRIMA del codice (`11b6431`): l'ordine e' verificabile da git, non as
       `perc_chi`.
   Z4  [BLOCCANTE] `SCALA_MIN`, e qui ci sono QUATTRO numeri, non uno:
       Z4a  IL SIGILLO DECISIVO -- il vincolo NON CREA MOVIMENTO. Misurato a OGNI scrittura di
-           TUTTO il run, non al solo primo passo:
-             `_g_sm_viol_id == 0`   un incremento >= 0 non e' MAI stato toccato: le lunghezze
-                                    che non scendono non cambiano DI UN BIT;
-             `_g_sm_max_su <= 0`    il vincolo non AUMENTA mai un incremento, quindi non puo'
-                                    produrre espansione da solo.
+           TUTTO il run, non al solo primo passo. ⚠ CRITERIO CORRETTO IL 2026-09-21 (`Z86`): la
+           prima versione chiedeva `max(eff - dx) <= 0`, FALSO PER COSTRUZIONE perche' attenuare
+           una discesa rende l'incremento MENO negativo. La proprieta' vera e' che il nuovo
+           valore stia sempre in `[x + dx, x]`:
+             `_g_sm_viol_id == 0`    un incremento >= 0 non e' MAI stato toccato: le lunghezze
+                                     che non scendono non cambiano DI UN BIT;
+             `_g_sm_max_giu <= 0`    il massimo di `eff` sulle sole DISCESE: il vincolo non
+                                     spinge MAI verso l'alto, quindi niente inflazione;
+             `_g_sm_viol_giu == 0`   il vincolo non APPROFONDISCE mai una discesa.
+           ⚠ NON E' UN ALLARGAMENTO: il vecchio guardava la DIFFERENZA, il nuovo il SEGNO.
       Z4b  `min(d0) >= LAM` e `min(d) >= LAM`.
       Z4c  lo stress `|d-d0|/d0` resta FINITO.
       Z4d  `_g_sm_patol` -- il caso `dx <= -x`, CONTATO e non tappato. Si RIPORTA sempre; se
@@ -125,10 +130,11 @@ if "--lavoro" in sys.argv:
     print("LAM %.12f" % LAMv)
     print("MIN d=%.12f d0=%.12f" % (min_d, min_d0))
     print("STRESS max=%s" % ("inf" if not np.isfinite(max_stress) else "%.6e" % max_stress))
-    print("SM tot=%d discese=%d patol=%d pav_saltati=%d viol_id=%d nascite=%d"
+    print("SM tot=%d discese=%d patol=%d pav_saltati=%d viol_id=%d viol_giu=%d nascite=%d"
           % (g("_g_sm_tot"), g("_g_sm_discese"), g("_g_sm_patol"),
-             g("_g_sm_pav_saltati"), g("_g_sm_viol_id"), g("_g_sm_nascite")))
-    print("SMSU max_su=%s" % repr(g("_g_sm_max_su", None)))
+             g("_g_sm_pav_saltati"), g("_g_sm_viol_id"), g("_g_sm_viol_giu"),
+             g("_g_sm_nascite")))
+    print("SMGIU max_giu=%s" % repr(g("_g_sm_max_giu", None)))
     print("COES usi=%d tetto=%.12e max=%.12e satura=%d archi=%d"
           % (g("_g_coes_adim_usi"), g("_g_coes_tetto", 0.0), g("_g_coes_max", 0.0),
              g("_g_coes_satura"), g("_g_coes_archi")))
@@ -245,10 +251,12 @@ def main():
     # --------------------------------------------------------------- Z4a (IL DECISIVO)
     oC1 = out["C1_scalamin"]
     vi = num(oC1, "SM", "viol_id")
-    ms = num(oC1, "SMSU", "max_su", float)
-    segna("Z4a", vi == 0 and ms is not None and ms <= 0.0,
-          "IL VINCOLO NON CREA MOVIMENTO: incrementi >= 0 toccati %s volte (dev'essere 0); "
-          "max(dx_eff - dx) = %s (dev'essere <= 0)" % (vi, ms))
+    vg = num(oC1, "SM", "viol_giu")
+    mg = num(oC1, "SMGIU", "max_giu", float)
+    segna("Z4a", vi == 0 and vg == 0 and (mg is None or mg <= 0.0),
+          "IL VINCOLO NON CREA MOVIMENTO: incrementi >= 0 toccati %s volte (0); max(dx_eff) "
+          "sulle DISCESE = %s (<= 0: non spinge mai verso l'alto); discese APPROFONDITE %s (0)"
+          % (vi, mg, vg))
 
     # ------------------------------------------------------------------ Z4b/c/d
     lam = float(re.search(r"^LAM (\S+)", oC1, re.M).group(1))
@@ -289,9 +297,9 @@ def main():
     print("    min(d) = %s   min(d0) = %s   stress max = %s"
           % (num(oD, "MIN", "d", float), num(oD, "MIN", "d0", float),
              num(oD, "STRESS", "max", str)))
-    print("    _g_sm_patol = %s   _g_sm_viol_id = %s   max(dx_eff-dx) = %s"
+    print("    _g_sm_patol = %s   _g_sm_viol_id = %s   max(dx_eff sulle discese) = %s"
           % (num(oD, "SM", "patol"), num(oD, "SM", "viol_id"),
-             num(oD, "SMSU", "max_su", float)))
+             num(oD, "SMGIU", "max_giu", float)))
 
     print("")
     n_pass = sum(1 for _, o in esiti if o)

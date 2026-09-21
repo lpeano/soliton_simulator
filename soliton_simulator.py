@@ -3263,18 +3263,33 @@ class Rete:
         self._g_sm_patol = (getattr(self, '_g_sm_patol', 0)
                             + int(np.sum(scende & ((prima + dx) <= 0.0))))
         eff = np.where(scende, dx * fatt, dx)
-        # ⚠ I DUE NUMERI CHE DIMOSTRANO CHE IL VINCOLO NON CREA MOVIMENTO, misurati a OGNI
-        # scrittura di TUTTO il run e non solo al primo passo:
-        #   `_g_sm_max_su`  = il massimo di `eff - dx`. DEVE restare <= 0: il vincolo non
-        #                     AUMENTA mai un incremento, quindi non puo' produrre espansione.
-        #   `_g_sm_viol_id` = quante volte un incremento >= 0 e' stato toccato. DEVE essere 0:
-        #                     una lunghezza che non scende non cambia DI UN BIT.
-        # Sono il criterio di `Z4b`/`Z4c`, e sono byte-inerti (solo contatori).
-        if len(np.atleast_1d(dx)):
-            self._g_sm_max_su = max(getattr(self, '_g_sm_max_su', -np.inf),
-                                    float(np.max(eff - dx)))
+        # ⚠ I NUMERI CHE DIMOSTRANO CHE IL VINCOLO NON CREA MOVIMENTO, misurati a OGNI scrittura
+        # di TUTTO il run e non al solo primo passo. Byte-inerti: solo contatori.
+        #
+        # ⚠ IL CRITERIO E' STATO CORRETTO IL 2026-09-21, ED ERA MIO L'ERRORE (`Z86`). La prima
+        #   versione chiedeva `max(eff - dx) <= 0`, che e' FALSO PER COSTRUZIONE: per `dx < 0`
+        #   si ha `eff = dx*f` con `f in [0,1]`, quindi `eff >= dx` e la differenza arriva fino
+        #   a `|dx|`. ATTENUARE UNA DISCESA RENDE L'INCREMENTO MENO NEGATIVO: quel numero non
+        #   poteva essere <= 0, e il sigillo era matematicamente impossibile da passare.
+        #
+        # LA PROPRIETA' VERA e' che il nuovo valore stia SEMPRE in `[x + dx, x]`:
+        #   `_g_sm_viol_id`  quante volte un incremento >= 0 e' stato toccato -> DEVE essere 0
+        #                    (una lunghezza che non scende non cambia DI UN BIT);
+        #   `_g_sm_max_giu`  il massimo di `eff` sulle sole DISCESE -> DEVE restare <= 0
+        #                    (il vincolo non spinge mai verso l'ALTO: niente inflazione);
+        #   `_g_sm_viol_giu` quante volte `eff < dx` -> DEVE essere 0 (il vincolo non puo'
+        #                    APPROFONDIRE una discesa).
+        # ⚠ NON E' UN ALLARGAMENTO: il vecchio guardava la DIFFERENZA `eff - dx`, il nuovo
+        #   guarda il SEGNO di `eff` -- un punto che il vecchio non guardava affatto.
+        _e = np.atleast_1d(eff); _d = np.atleast_1d(dx); _s = np.atleast_1d(scende)
+        if len(_d) or len(_e):
             self._g_sm_viol_id = (getattr(self, '_g_sm_viol_id', 0)
-                                  + int(np.sum((~scende) & (eff != dx))))
+                                  + int(np.sum((~_s) & (_e != _d))))
+            if np.any(_s):
+                self._g_sm_max_giu = max(getattr(self, '_g_sm_max_giu', -np.inf),
+                                         float(np.max(_e[np.broadcast_to(_s, _e.shape)])))
+            self._g_sm_viol_giu = (getattr(self, '_g_sm_viol_giu', 0)
+                                   + int(np.sum(_s & (_e < _d))))
         return eff
 
     def _sd0(self, dx, mask=None):
