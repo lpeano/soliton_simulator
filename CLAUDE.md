@@ -112,6 +112,19 @@ sapendo gia' cosa cercare.
 due solo perche' Luca le aveva chieste. Il 2026-09-21, **10 su 32 in un giorno solo — 22 riscontri
 saltati**, e fra questi i piu' grossi: il ramo D che girava con la configurazione sbagliata, il
 sigillo `11/11`, la cura del mondo, il presidio che mentiva sull'hash.
+**✅ E DAL 2026-09-21 NON E' PIU' UNA NOTA: E' UN IMPEDIMENTO.**
+`csv/_hook_relazione.py` installa un hook **`commit-msg`** che **RIFIUTA** un commit che tocca
+`doc/RAMIFICAZIONI.md`, un `doc/REFERTO_*.md`, l'output di un sigillo o dati diagnostici
+**senza toccare anche `RELAZIONE_PER_CLAUDE.md`**. Si installa con
+`python csv/_hook_relazione.py --installa`.
+**LA VIA D'USCITA ESISTE MA OBBLIGA A DICHIARARE:** `[SENZA-RELAZIONE: <motivo>]` nel messaggio
+— stessa forma di `_stato_run.apri(forza=True)`. **Un'eccezione resta possibile, ma lascia una
+traccia leggibile in `git log` invece di passare in silenzio.**
+**PROVATO IN ENTRAMBI I RAMI** *(rifiuta senza relazione; passa con eccezione dichiarata)*:
+un presidio non provato e' una nota.
+**⚠ E IL LIMITE, per `A9`: i hook NON sono versionati da git.** Un clone nuovo **non ce l'ha**
+finche' non lo installa. **Meno di un presidio completo, e va detto invece di chiamarlo tale.**
+
 **⚠ E UN BLOCCO DI RECUPERO NON SANA LA VIOLAZIONE: LA CONFERMA.** par.5-ter dice *«subito, non a
 fine giornata»*. Recuperare a sera significa che per tutto il giorno il repo ha detto meno di
 quello che si sapeva. **Se ci si accorge di essere in ritardo, si recupera E si dichiara che era

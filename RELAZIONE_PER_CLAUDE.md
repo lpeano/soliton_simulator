@@ -9689,3 +9689,33 @@ geometria perc_geom: N(+1)   60   N(-1) 2603   ->   diversi da perc_chi: 2586 su
   — due grandezze separate — ma NON avevo previsto che divergessero cosi' tanto.**
 
 **⚠ Nessuna di queste righe e' una conclusione: sono letture. Il «perche'» non e' misurato.**
+
+---
+
+## ✅ `P1-bis` non e' piu' una nota: e' un IMPEDIMENTO (2026-09-21)
+
+**Tre volte Luca ha dovuto chiedere la stessa cosa.** `CLAUDE.md` aveva gia' il par.5-ter, e poi
+`P1-bis`: **due regole SCRITTE non hanno cambiato il numero** *(7/52 il 20/9, 10/32 il 21/9)*.
+**`A9` dice che un presidio che non impedisce non e' un presidio.**
+
+**`csv/_hook_relazione.py`** installa un hook **`commit-msg`** che **RIFIUTA** un commit che tocca
+`doc/RAMIFICAZIONI.md`, un `doc/REFERTO_*.md`, l'output di un sigillo o dati diagnostici **senza
+toccare anche `RELAZIONE_PER_CLAUDE.md`**.
+**Via d'uscita che obbliga a dichiarare:** `[SENZA-RELAZIONE: <motivo>]` nel messaggio.
+
+### ⚠ E il primo hook era SBAGLIATO — trovato provandolo
+Stava in **`pre-commit`**, che gira **PRIMA** che git scriva il messaggio: li' `COMMIT_EDITMSG`
+contiene ancora quello del commit **precedente**, quindi **la via d'uscita non poteva funzionare**
+— bloccava anche quando era dichiarata. **Spostato in `commit-msg`, che il messaggio ce l'ha.**
+**Provato in entrambi i rami:** rifiuta senza relazione, passa con eccezione dichiarata.
+
+### ⚠ E TERZA VOLTA OGGI DELLO STESSO ERRORE MIO
+La patch che doveva correggere il hook usava `str.replace()` con **un `assert` globale**,
+soddisfatto da **un'altra** sostituzione dello stesso script: **la correzione di `installa()` non
+attacco', in silenzio.** Le altre due volte: **il driver** *(`--scala-min` parsato e mai inoltrato,
+1230 passi di ramo D buttati)* e **il sigillo dei flag** *(euristico su finestra fissa)*.
+**OGNI SOSTITUZIONE VA ASSERITA PER SE', NON IN BLOCCO.**
+
+### Il limite, dichiarato
+**I hook NON sono versionati da git.** Un clone nuovo **non ce l'ha** finche' non lo installa.
+**E' meno di un presidio completo, e va detto invece di chiamarlo tale.**
