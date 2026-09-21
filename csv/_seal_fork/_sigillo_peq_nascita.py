@@ -73,7 +73,8 @@ if "--lavoro" in sys.argv:
     attesi = 0               # Q3: quanti ne erano attesi (2*nc)
     nan_residui = 0          # Q4: quanti ne restano dopo il passo dopo
     nan_altrove = 0          # Q5
-    scarti = []              # Q6: |valore - mediana| / mediana, sugli archi di Schwinger
+    scarti = []              # Q6: dispersione DOPO la calibrazione, un valore per evento
+    disp_nascita = []        # Q6: dispersione ALLA NASCITA, un valore per evento
     pend = None
     prec_nc = 0
     for _f in range(PASSI // int(S.PASSI_PER_FRAME)):
@@ -87,8 +88,12 @@ if "--lavoro" in sys.argv:
                 idx = idx[idx < len(net.peq)]
                 v = np.asarray(net.peq)[idx]
                 nan_residui += int(np.sum(~np.isfinite(v)))
-                if med > 0:
-                    scarti.extend(list(np.abs(v - med) / med))
+                # ⚠ LA DISPERSIONE FRA GLI ARCHI DELLO STESSO EVENTO, dopo la calibrazione.
+                #   E' QUESTO il contrasto fra legge GLOBALE e legge LOCALE:
+                #     globale -> UN SOLO numero per tutti  -> dispersione ZERO alla nascita
+                #     locale  -> UN numero CIASCUNO        -> dispersione PIENA
+                if len(v) > 1 and med > 0 and np.all(np.isfinite(v)):
+                    scarti.append(float(np.std(v)) / med)
                 pend = None
             net.mitosi()
             nc = getattr(net, "_g_nati_schwinger", 0) - prec_nc
@@ -98,6 +103,14 @@ if "--lavoro" in sys.argv:
                 k = np.arange(len(p) - 2 * nc, len(p))          # gli archi di Schwinger
                 nan_dopo_mitosi += int(np.sum(~np.isfinite(p[k])))
                 attesi += int(2 * nc)
+                # ⚠ LA DISPERSIONE ALLA NASCITA, misurata NELL'ISTANTE GIUSTO: subito dopo la
+                #   `mitosi()`, PRIMA che il rilassamento di `:4206` muova qualunque cosa.
+                #   A legge GLOBALE vale ZERO ESATTO (un solo numero per tutti); a legge LOCALE
+                #   i valori sono `nan` e la dispersione si misura DOPO la calibrazione.
+                if len(k) > 1 and np.all(np.isfinite(p[k])):
+                    _m = float(np.nanmedian(p))
+                    if _m > 0:
+                        disp_nascita.append(float(np.std(p[k])) / _m)
                 for nome in PULITI:
                     x = np.asarray(getattr(net, nome, np.zeros(0)), dtype=float)
                     nan_altrove += int(np.sum(~np.isfinite(x)))
@@ -105,12 +118,13 @@ if "--lavoro" in sys.argv:
             net.rilassa_disegno(); net.memoria_hebbiana_moto()
     np.savez(outp, **{k: np.asarray(getattr(net, k)) for k in CAMPI if hasattr(net, k)})
     sc = np.asarray(scarti) if scarti else np.zeros(0)
+    dn = np.asarray(disp_nascita) if disp_nascita else np.zeros(0)
     print("C2 eventi=%d attesi=%d nan_mitosi=%d nan_residui=%d nan_altrove=%d "
-          "n_scarti=%d scarto_med=%.6e scarto_max=%.6e frazione_diversi=%.4f"
+          "n_ev=%d disp_dopo=%.6e n_nasc=%d disp_nascita=%.6e nasc_zero=%.4f"
           % (getattr(net, "_g_nati_schwinger_ev", 0), attesi, nan_dopo_mitosi, nan_residui,
              nan_altrove, len(sc), float(np.median(sc)) if len(sc) else -1.0,
-             float(sc.max()) if len(sc) else -1.0,
-             float(np.mean(sc > 1e-12)) if len(sc) else -1.0))
+             len(dn), float(np.median(dn)) if len(dn) else -1.0,
+             float(np.mean(dn == 0.0)) if len(dn) else -1.0))
     raise SystemExit(0)
 
 
@@ -127,13 +141,14 @@ def gira(*extra):
 def leggi(out):
     import re
     m = re.search(r"C2 eventi=(\d+) attesi=(\d+) nan_mitosi=(\d+) nan_residui=(\d+) "
-                  r"nan_altrove=(\d+) n_scarti=(\d+) scarto_med=(\S+) scarto_max=(\S+) "
-                  r"frazione_diversi=(\S+)", out)
+                  r"nan_altrove=(\d+) n_ev=(\d+) disp_dopo=(\S+) n_nasc=(\d+) "
+                  r"disp_nascita=(\S+) nasc_zero=(\S+)", out)
     if not m:
         raise SystemExit("output del lavoratore non riconosciuto:\n%s" % out[-800:])
     return dict(eventi=int(m.group(1)), attesi=int(m.group(2)), nan_mit=int(m.group(3)),
                 nan_res=int(m.group(4)), nan_alt=int(m.group(5)), n_sc=int(m.group(6)),
-                sc_med=float(m.group(7)), sc_max=float(m.group(8)), fraz=float(m.group(9)))
+                disp_dopo=float(m.group(7)), n_nasc=int(m.group(8)),
+                disp_nasc=float(m.group(9)), nasc_zero=float(m.group(10)))
 
 
 def main():
@@ -197,11 +212,24 @@ def main():
 
     # Q6: la LEGGE e' cambiata. A flag SPENTO il valore E' la mediana (scarto ~0 su tutti);
     #     a flag ACCESO se ne discosta.
-    ok6 = C_["fraz"] > 0.5 and B_["fraz"] < 0.5 and C_["sc_med"] > 1e-6
+    # ⚠ IL CRITERIO E' STATO CORRETTO, ED ERA MIO L'ERRORE, non della cura. La prima versione
+    #   confrontava i valori DOPO il passo successivo, quando il rilassamento di `:4206` li ha
+    #   gia' mossi in ENTRAMBI i rami: dava `1.0000` contro `1.0000`, cioe' ASSENZA DI CONTRASTO
+    #   letta come assenza di effetto. E' il presidio del par.9: **un criterio si scrive DA UNA
+    #   MISURA, non dal proprio modello mentale del codice** -- ed e' la quarta volta in questo
+    #   repo.
+    #   LA DIFFERENZA VERA fra legge GLOBALE e legge LOCALE e':
+    #     globale -> UN SOLO numero per TUTTI gli archi dell'evento -> dispersione ZERO ESATTO
+    #     locale  -> UN numero CIASCUNO                             -> dispersione PIENA
+    #   e si misura ALLA NASCITA per il ramo spento, DOPO LA CALIBRAZIONE per quello acceso.
+    ok6 = (B_["nasc_zero"] == 1.0 and B_["n_nasc"] > 0
+           and C_["disp_dopo"] > 100.0 * max(B_["disp_dopo"], 1e-12))
     esiti.append(("Q6", ok6,
-                  "LOCALE contro GLOBALE -- frazione di archi il cui `peq` DIFFERISCE dalla "
-                  "mediana: ACCESO %.4f, SPENTO %.4f; scarto relativo mediano ACCESO %.4e "
-                  "(max %.3e)" % (C_["fraz"], B_["fraz"], C_["sc_med"], C_["sc_max"])))
+                  "UN NUMERO PER TUTTI contro UNO CIASCUNO -- dispersione relativa fra gli archi "
+                  "dello STESSO evento: SPENTO alla nascita %.3e su %d eventi (frazione a ZERO "
+                  "ESATTO: %.4f), dopo un passo %.3e; ACCESO dopo la calibrazione %.3e -> x%.0f"
+                  % (B_["disp_nasc"], B_["n_nasc"], B_["nasc_zero"], B_["disp_dopo"],
+                     C_["disp_dopo"], C_["disp_dopo"] / max(B_["disp_dopo"], 1e-12))))
 
     print("-" * 94)
     for nome, ok, testo in esiti:
