@@ -94,9 +94,15 @@ CHICOOP = "off"
 SCALAMIN = "off"
 COESADIM = "off"
 # [LE CINQUE CURE, 2026-09-21] stesso schema NOMINALE `=on|off`, DEFAULT `off`.
-# ⚠ `--invarianti=on|off` NON si parsa qui DI PROPOSITO: e' un'opzione VALORIZZATA del
-#   simulatore, quindi cade in `_resti` e ci arriva TALE E QUALE. Aggiungerla qui creerebbe
-#   un secondo posto in cui puo' divergere.
+# ⚠⚠ `--invarianti=on|off` SI PARSA QUI, E LA PRIMA VERSIONE NON LO FACEVA -- ERRORE MIO.
+#   Il ragionamento era: *e' un'opzione VALORIZZATA del simulatore, quindi cade in `_resti` e ci
+#   arriva tale e quale*. **FALSO:** `_resti` diventa il NUOVO `_ARGV`, e il driver legge
+#   `_ARGV[3]` come **la lista degli snapshot**. Il lancio della validazione e' morto con
+#     ValueError: invalid literal for int() with base 10: '--invarianti=on'
+#   **Un'opzione che «passa dritta» passa dritta anche nei POSIZIONALI.**
+#   Si parsa e si inoltra **VERBATIM**, senza tradurla in booleano: cosi' non esiste nessuna
+#   traduzione che possa divergere -- che era la ragione vera della scelta iniziale.
+INVARIANTI_OPT = None
 PEQESATTO = "off"
 PEQNASCITA = "off"
 SCALAMINPASSO = "off"
@@ -151,6 +157,11 @@ for _x in _ARGV[1:]:
         ANOMSIMM = _x.split("=", 1)[1].strip().lower()
         if ANOMSIMM not in ("on", "off"):
             raise SystemExit("--anom-simm vuole `on` o `off`, non %r" % ANOMSIMM)
+    elif _x.startswith("--invarianti="):
+        _v = _x.split("=", 1)[1].strip().lower()
+        if _v not in ("on", "off"):
+            raise SystemExit("--invarianti vuole `on` o `off`, non %r" % _v)
+        INVARIANTI_OPT = _v      # si INOLTRA verbatim, non si traduce in booleano
     elif _x == "--riprendi":
         # LA RIPRESA E' UNA SCELTA ESPLICITA, MAI UN RIPIEGO AUTOMATICO: senza questo flag il
         # comportamento resta quello dell'originale (cartella sporca -> RIFIUTO).
@@ -186,6 +197,7 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--
     + (["--scala-min-passo"] if SCALAMINPASSO == "on" else []) \
     + (["--coes-causale"] if COESCAUSALE == "on" else []) \
     + (["--anom-simm"] if ANOMSIMM == "on" else []) \
+    + ([] if INVARIANTI_OPT is None else ["--invarianti=%s" % INVARIANTI_OPT]) \
     + ["--plast-din", "--viriale", "--olon-part"]
 # ⚠⚠ QUESTE DUE RIGHE MANCAVANO, e il ramo D e' girato per 1200 passi con SCALA_MIN e COES_ADIM
 #   SPENTI mentre il comando li chiedeva ACCESI. Le opzioni erano PARSATE (`--scala-min=on` non
