@@ -137,17 +137,24 @@ def main():
                   % (len(dif), "" if dif else "   *** IL FLAG E' INERTE ***")))
 
     # U3 -- la PREVISIONE con un numero: (vecchia - simm)/vecchia -> e/2
+    # ⚠ IL CRITERIO ERA IL MIO SVILUPPO, NON IL VALORE ESATTO, e il FAIL era suo.
+    #   Con `r = p*(1+e)`:  vecchia = e,  simmetrica = 2e/(2+e), quindi
+    #       (vecchia - simm)/vecchia = 1 - 2/(2+e) = e/(2+e)     <-- ESATTO
+    #   `e/2` e' solo il PRIMO ORDINE, e a `e = 0.1` sbaglia del 4.8 % (`2/2.1 = 0.952380952`,
+    #   che e' esattamente cio' che il sigillo ha stampato). **Un criterio approssimato applicato
+    #   a un'identita' esatta**: si confronta col valore VERO, non col suo sviluppo.
     righe = []
     for e in (1e-1, 1e-2, 1e-3, 1e-4):
         p0, r0 = 1.0, 1.0 * (1.0 + e)
         vec = (r0 - p0) / max(p0, 1e-9)
         sim = 2.0 * (r0 - p0) / (r0 + p0)
-        righe.append((e, (vec - sim) / vec, (vec - sim) / vec / (e / 2.0)))
-    ok3 = max(abs(z - 1.0) for _, _, z in righe) < 1e-6
+        righe.append((e, (vec - sim) / vec, ((vec - sim) / vec) / (e / (2.0 + e))))
+    ok3 = max(abs(z - 1.0) for _, _, z in righe) < 1e-12
     esiti.append(("U3", ok3,
-                  "RIDUZIONE AL LIMITE: (vecchia-simm)/vecchia diviso `e/2` vale %s -- deve fare 1, "
-                  "cioe' la differenza relativa e' ESATTAMENTE META' dell'anomalia"
-                  % ["%.9f" % z for _, _, z in righe]))
+                  "RIDUZIONE AL LIMITE: (vecchia-simm)/vecchia diviso il valore ESATTO `e/(2+e)` "
+                  "vale %s -- deve fare 1 a precisione di macchina. Le due forme coincidono al "
+                  "primo ordine, e lo scarto e' NOTO in forma chiusa, non solo «piccolo»"
+                  % ["%.12f" % z for _, _, z in righe]))
 
     ok4 = (fuori == 0 and archi > 0 and maxan > 1.9)
     esiti.append(("U4", ok4,
