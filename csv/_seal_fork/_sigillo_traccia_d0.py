@@ -35,7 +35,7 @@ _presidio.avvia(__file__)
 
 RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
 SIM_ORA = os.path.join(RADICE, "soliton_simulator.py")
-COMMIT_PRIMA = "1e6448a"        # l'ultimo commit PRIMA della strumentazione
+COMMIT_PRIMA = "77ed65c"        # l ultimo commit PRIMA della strumentazione TRACCIA_VD
 PASSI = 30
 CAMPI = ("d0", "d", "vd", "psi", "phi", "eta", "perc_chi", "tw", "omega_s", "pos")
 
