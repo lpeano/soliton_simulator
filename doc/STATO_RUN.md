@@ -1,7 +1,7 @@
 <!-- PUNTO-DI-RIPRESA:INIZIO -->
 # ⚠⚠ PUNTO DI RIPRESA — **si legge PER PRIMO dopo un riavvio**
 
-> **Aggiornato 2026-09-21 21:05 · HEAD `183fb02` · branch `fork-su2`, tutto committato e pushato.**
+> **Aggiornato 2026-09-21 21:15 · HEAD `691b7e9` · branch `fork-su2`, tutto committato e pushato.**
 > **Il PC si riavvia fra mezzanotte e le due** *(vincolo di Luca, 2026-09-21)*. **Questo blocco e'
 > RIGENERATO per intero a ogni aggiornamento**, fra due marcatori HTML: non si accumulano versioni
 > e non c'e' niente da cancellare a mano.
@@ -16,10 +16,11 @@
 | **`C3 SCALA_MIN_PASSO`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_scala_min_passo_2026-09-21.txt` · `Z97` |
 | **`C4 COES_CAUSALE`** | ✅ **sigillo `5/5`** | `csv/_seal_fork/_sigillo_coes_causale_2026-09-21.txt` · `Z98` |
 | **`C1-bis ANOM_SIMM`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_anom_simm_2026-09-21.txt` · `Z99` |
-| **`C5 INVARIANTI`** | ⏳ **sigillo in corso** *(`I2` paga il passo 1126 per intero: ~34 min)* | `csv/_seal_fork/_sigillo_invarianti_2026-09-21.txt` |
+| **`C5 INVARIANTI`** | ✅ codice + `I1` e `I3` PASS; **`I2` rigirato** *(il primo criterio pretendeva l'arco sbagliato)* | `csv/_seal_fork/_sigillo_invarianti_2026-09-21.txt` |
 | **il DRIVER inoltra le cure** | ✅ **sigillo dei flag `3/3`**, 9 opzioni su 9 in entrambi i versi | `csv/_seal_fork/_sigillo_flag_driver.py` |
 | **strumento delle LETTURE** | ✅ criteri fissati PRIMA, tabella generata da codice | `csv/_test_fork/_letture_validazione.py` |
-| **validazione 600 passi** | ⏸ **CHECKPOINT 2: ci si FERMA** | il comando e' al punto ④ |
+| **validazione 600 passi** | ▶ **IN CORSO dalle 21:14**, ~17.7 s/frame, 100 frame | `csv/_test_fork/_val600/log.txt` · `prog.csv` · voce in `STATO_RUN` |
+| **CHECKPOINT 2** | ⏸ **QUI CI SI FERMA e si aspetta Luca** | — |
 
 ## COME SI RIPARTE — **i comandi esatti, verbatim**
 
@@ -56,6 +57,20 @@ python csv/_test_fork/_letture_validazione.py --dir=csv/_test_fork/_val600
 ```
 
 **⑤ SE LA VALIDAZIONE ERA IN CORSO AL RIAVVIO — si RIPRENDE, non si rilancia**
+**⚠ IL DRIVER HA `--riprendi`, ED E' LA VIA GIUSTA: stesso comando del punto ④ PIU' `--riprendi`.**
+Senza quel flag, una cartella non vuota viene **RIFIUTATA** *(ed e' giusto: la ripresa e' una
+scelta esplicita, mai un ripiego automatico)*.
+```
+python csv/_test_fork/_scena_video.py 100 csv/_test_fork/_val600 --sep=4.0 --serie=20 --riprendi --chi-basc=on --chi-coop=on --scala-min=off --coes-adim=on --peq-esatto=on --peq-nascita-locale=on --scala-min-passo=on --coes-causale=on --anom-simm=on --invarianti=on --csv-progresso=csv/_test_fork/_val600/prog.csv
+```
+**Per vedere a che punto era:**
+```
+ls csv/_test_fork/_val600/scena_*.pkl.gz
+tail -5 csv/_test_fork/_val600/prog.csv
+tail -3 csv/_test_fork/_val600/log.txt
+```
+
+**⑤-bis LA VIA ALTERNATIVA, dal simulatore invece che dal driver**
 ```
 python soliton_simulator.py --db-rigioca <ULTIMO_SNAPSHOT> 600 ...   (stessi flag)
 ```
