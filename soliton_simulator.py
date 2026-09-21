@@ -4343,20 +4343,32 @@ class Rete:
         #   Il numero che CONTA e' `_g_peqn_vs_med`: quanti di quei valori sono DIVERSI dalla
         #   mediana globale, cioe' quante volte la legge locale ha dato un risultato che la legge
         #   globale NON avrebbe dato. Se fossero zero, la cura sarebbe indistinguibile.
-        if PEQ_NASCITA_LOCALE and nuevos:
-            _vec = np.asarray(self.peq, dtype=float)
-            _mask_v = ~nuovi
-            _med_g = float(np.median(_vec[_mask_v])) if np.any(_mask_v) else 0.0
-            _assegn = np.asarray(rho, dtype=float)[nuovi]
-            self._g_peqn_cal = getattr(self, '_g_peqn_cal', 0) + int(nuovi.sum())
-            self._g_peqn_vs_med = (getattr(self, '_g_peqn_vs_med', 0)
-                                   + int(np.sum(_assegn != _med_g)))
-            self._g_peqn_uguali_rho = (getattr(self, '_g_peqn_uguali_rho', 0)
-                                       + int(np.sum(_vec[nuovi] == _assegn)))
-            if _med_g > 0 and len(_assegn):
-                self._g_peqn_scarto_max = max(
-                    getattr(self, '_g_peqn_scarto_max', 0.0),
-                    float(np.max(np.abs(_assegn - _med_g) / _med_g)))
+        # ⚠ SI CONTANO SOLO GLI ARCHI CHE `C2` HA MARCATO, non tutti i `nan`.
+        #   `_allaccia` scrive `nan` pure lei, e **la SEMINA la chiama**: al primo passo di una
+        #   scena TUTTI gli archi sono `nan` e vengono calibrati. Contarli insieme dava
+        #   `526059` invece di `88`. *(Avevo letto giusto che `_allaccia` e' chiamata solo da
+        #   `semina()`, e concluso male che fosse inerte in batch: inerte e' la semina CONTINUA,
+        #   non quella INIZIALE.)*
+        _idx_n = getattr(self, '_peqn_idx', None)
+        if PEQ_NASCITA_LOCALE and nuevos and _idx_n is not None and len(_idx_n):
+            _idx_n = _idx_n[_idx_n < len(self.peq)]
+            _sel_n = _idx_n[nuovi[_idx_n]]
+            if len(_sel_n):
+                _vec = np.asarray(self.peq, dtype=float)
+                _altri = np.ones(len(_vec), dtype=bool)
+                _altri[_sel_n] = False
+                _med_g = float(np.median(_vec[_altri])) if np.any(_altri) else 0.0
+                _assegn = np.asarray(rho, dtype=float)[_sel_n]
+                self._g_peqn_cal = getattr(self, '_g_peqn_cal', 0) + int(len(_sel_n))
+                self._g_peqn_vs_med = (getattr(self, '_g_peqn_vs_med', 0)
+                                       + int(np.sum(_assegn != _med_g)))
+                self._g_peqn_uguali_rho = (getattr(self, '_g_peqn_uguali_rho', 0)
+                                           + int(np.sum(_vec[_sel_n] == _assegn)))
+                if _med_g > 0:
+                    self._g_peqn_scarto_max = max(
+                        getattr(self, '_g_peqn_scarto_max', 0.0),
+                        float(np.max(np.abs(_assegn - _med_g) / _med_g)))
+            self._peqn_idx = None      # consumata: vale per UNA calibrazione sola
 
         # --- VUOTO DI SFONDO LOCALE, che DIFFONDE sulla topologia (Legge I) ---
         den_w = np.maximum(np.bincount(i, w, minlength=self.n) +
@@ -5040,6 +5052,11 @@ class Rete:
                 if TRACCIA_D0: self._traccia_d0('S07_schwinger', _tr_pre)
                 self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])
                 self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])
+                if PEQ_NASCITA_LOCALE:
+                    # ⚠ LA MARCA VA QUI, DOPO il `concatenate`: gli indici si riferiscono
+                    #   all'array FINALE. Serve a distinguere QUESTI `nan` da quelli di
+                    #   `_allaccia`, che la SEMINA scrive su TUTTI gli archi al primo passo.
+                    self._peqn_idx = np.arange(len(self.peq) - 2 * nc, len(self.peq))
                 self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])   # [(3)] archi nuovi
                 zz2 = np.zeros(nc)
                 self.tw = np.concatenate([self.tw, zz2, zz2])
