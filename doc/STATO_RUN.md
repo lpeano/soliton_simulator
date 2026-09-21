@@ -137,11 +137,12 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | 1 | `CHI_COOP` (carica dallo spinore, geometria da `chi_basc`) | perentorio ① | ✅ **FATTO**, sigillo `8/8` |
 | 2 | `SCALA_MIN` + `COES_ADIM`, codice e driver | perentorio ②③ | ✅ **FATTO**, `11b6431` |
 | 3 | **sigillo unico `Z0`-`Z8`** | perentorio | ✅ **`11/11`** — `d69e5bae` sul simulatore `4954fe5b`. `Z1` **ri-ancorata all'argv NUDO** *(piu' severa: e' il caso in cui la cura non PUO' avere effetto)*; `Z8` nuovo: la ricostruzione del mondo e' **neutra**. **+ `Z1c` PASS** *(argv del FORK, tre flag spenti: byte-identico, e la controprova dice che il test ATTRAVERSA la catena -- 60 chiamate a `chiralita_core_locale` contro le ZERO dell'argv nudo)*. |
-| 4 | **lancio del ramo D** | perentorio | ⛔ **FERMATO al passo 1230: CONFIGURAZIONE SBAGLIATA.** Il driver non inoltrava `--scala-min` e `--coes-adim` *(parsate e IGNORATE, in silenzio)*. Driver riparato, presidio `_sigillo_flag_driver.py` scritto. **DA RILANCIARE da zero dopo che il sigillo passa.** |
+| 4 | **lancio del ramo D** | perentorio | ▶ **IN CORSO, SECONDO lancio** *(il primo, 10:15-11:05, girava con `SCALA_MIN` e `COES_ADIM` SPENTI: il driver non li inoltrava — difetto riparato e coperto da `_sigillo_flag_driver.py` `3/3`)*. **Flag verificati DAL MODULO all'avvio: tutti e quattro `True`.** Archivio del primo lancio conservato su `E:` come `_ab_C_solo_chicoop_FERMATO`. |
 | 5 | tag `epoca-2` + righe di stato + regola in `CLAUDE.md` | EPOCA | ✅ **tag annotato su `01eda44`** *(certifica `4954fe5b`, il simulatore su cui gira D)*, **pushato**; righe di stato in cima a `STATO_RUN.md` e `RELAZIONE_PER_CLAUDE.md`; regola in `CLAUDE.md`. |
 | 6 | strumento cosmologico `M1`-`M4`, e `M1`/`M4` **leggeri** durante il run | COSMOLOGICO | ⏸ dopo il punto 4 |
 | 7 | **`Z47` PARTE ①** — ricognizione di `pos` nella fisica *(sola lettura)* | `MANDATO_Z47_coda` | ⏸ condizione d'avvio: D lanciato **e** punti 5-6 fatti |
 | 8 | a run finito: `M2`/`M3` cosmologici *(pesanti)* | COSMOLOGICO | ⏸ |
+| **8-bis** | **ARCHIVIO A ROTAZIONE** — il run scrive su `C:`, ogni snapshot **completo** viene spedito su `E:`, verificato con `sha1` dei byte compressi, e **solo allora** tolto dal locale | `MANDATO_archivio_rotazione` | ⏸ **condizione d'avvio: il ramo D e' FINITO.** Il driver e i presidi sono **in uso da D**: prima di allora non si toccano. Poi: task history → modifica → sigillo `R1`-`R5`. **Il run successivo la usa.** |
 | 9 | **CHECKPOINT a Luca** | — | ⏸ |
 | 10 | `Z47` PARTE ② — lo stacco | `MANDATO_Z47_coda` | 🔒 **NON parte senza il via libera di Luca** |
 
