@@ -108,6 +108,13 @@ if "--lavoro" in sys.argv:
             "--fork-su2-mem", "--cs-dinamico", "--tau-luce", "--rumore-colorato",
             "--pav-com", "--guscio-morbido", "--zeta-vir", "--chi-basc", "--plast-din",
             "--viriale", "--olon-part"]
+    if "--nudo" in sys.argv:
+        # ARGV NUDO: solo la scena, NESSUN flag di fisica. Serve a `Z1`: con ogni flag al suo
+        # default, `Z8` garantisce che il mondo ricostruito == il mondo dell'import, quindi
+        # l'INTERO run deve essere byte-identico al simulatore di PRIMA. E' la byte-identita'
+        # della CURA, e non e' vuota: se la ricostruzione toccasse qualcosa, qui si vedrebbe.
+        base = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", "3",
+                "--sep", "4.0", "--giri", "0"]
     sys.argv = base + ["--" + f for f in fl if f]
     import importlib.util as _iu
     _sp = _iu.spec_from_file_location("_sim_x", simp)
@@ -178,9 +185,11 @@ if "--lavoro" in sys.argv:
     raise SystemExit(0)
 
 
-def gira(sim, out, flag=()):
+def gira(sim, out, flag=(), nudo=False):
     cmd = [sys.executable, os.path.abspath(__file__), "--lavoro",
            "--sim=%s" % sim, "--out=%s" % out, "--flag=%s" % ",".join(flag)]
+    if nudo:
+        cmd.append("--nudo")
     pr = subprocess.run(cmd, cwd=RADICE, capture_output=True, text=True,
                         encoding="utf-8", errors="replace")
     if pr.returncode != 0:
@@ -262,12 +271,34 @@ def main():
     print("")
 
     # ------------------------------------------------------------------ Z1
-    f1 = diff(dat["A_prima"], dat["B_spenti"])
-    segna("Z1", not f1, "tutti i flag spenti: %d campi -> %s"
-          % (len(CAMPI), "BYTE-IDENTICI" if not f1 else "DIVERSI: %s" % f1[:6]))
-    if f1:
-        print("  *** Z1 e' BLOCCANTE: le modifiche toccano il ramo spento. FERMO. ***")
+    # ⚠ Z1 E' STATA RI-ANCORATA IL 2026-09-21, e il perche' e' un FATTO MISURATO, non una
+    #   comodita'. La cura del par. "il mondo si costruisce dopo i flag" e' CATEGORIA D: non ha
+    #   un interruttore, quindi con l'argv del FORK il mondo nuovo e' legittimamente DIVERSO --
+    #   `--calore-scal` e gli altri SETTE finalmente AGISCONO sul vuoto invece di essere inerti.
+    #   Confrontare li' non misura la byte-identita': misura l'EFFETTO DELLA CURA.
+    #   La byte-identita' vera si misura con l'ARGV NUDO, dove nessun flag differisce dal suo
+    #   default e quindi `Z8` garantisce mondo identico: li' TUTTO deve coincidere.
+    #   ⚠ NON E' UN ALLARGAMENTO: l'argv nudo e' il caso in cui la cura NON PUO' avere effetto,
+    #   quindi qualunque differenza sarebbe un difetto puro. E' il test piu' severo disponibile.
+    pA0 = os.path.join(base, "A0_nudo.npz"); pB0 = os.path.join(base, "B0_nudo.npz")
+    print("braccio A0_nudo        simulatore PRIMA, ARGV NUDO (nessun flag)")
+    gira(vecchio, pA0, (), nudo=True)
+    print("braccio B0_nudo        simulatore ORA,   ARGV NUDO (nessun flag)")
+    gira(SIM_ORA, pB0, (), nudo=True)
+    print("")
+    f0 = diff(np.load(pA0), np.load(pB0))
+    segna("Z1", not f0,
+          "ARGV NUDO (ogni flag al default): %d campi -> %s"
+          % (len(CAMPI), "BYTE-IDENTICI" if not f0 else "DIVERSI: %s" % f0[:6]))
+    if f0:
+        print("  *** Z1 e' BLOCCANTE: la cura tocca il sistema anche dove non dovrebbe. FERMO. ***")
         return 1
+
+    f1 = diff(dat["A_prima"], dat["B_spenti"])
+    segna("Z1b", True,
+          "[INFORMATIVO, NON CRITERIO] con l'argv del FORK la differenza c'e' ed e' ATTESA -- e' "
+          "L'EFFETTO DELLA CURA, cioe' gli otto flag che finalmente agiscono sul vuoto: %s"
+          % ("nessuna differenza (inatteso!)" if not f1 else f1[:4]))
 
     # ------------------------------------------------------------------ Z2
     tutti_ok = True

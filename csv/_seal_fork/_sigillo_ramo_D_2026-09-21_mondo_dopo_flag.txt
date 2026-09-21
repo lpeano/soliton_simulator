@@ -1,0 +1,16 @@
+[TIMBRO] _sigillo_ramo_D.py  sha1-BYTE 3cf11f1a  committato e pulito
+Z0  simulatore PRIMA (0f4fc1e): sha1 GREZZO 54623593
+Z0  simulatore ORA            : sha1 GREZZO 4954fe5b
+Z0  (NB: NON e' `git hash-object`. Sono due numeri diversi per lo stesso file, C18.)
+
+Z8    PASS   LA RICOSTRUZIONE DEL MONDO E' NEUTRA: con ogni flag al DEFAULT, il mondo ricostruito e' BYTE-IDENTICO a quello dell'import (9 campi, 900 nodi, 59730 archi) -> nessuno
+
+braccio A_prima        flag: (nessuno)
+braccio B_spenti       flag: (nessuno)
+braccio C1_scalamin    flag: scala-min
+braccio C2_coesadim    flag: coes-adim
+braccio C3_chicoop     flag: chi-coop
+braccio D_tutti        flag: scala-min, coes-adim, chi-coop
+
+Z1    FAIL   tutti i flag spenti: 10 campi -> DIVERSI: ['d0(shape (527308,) vs (526202,))', 'd(shape (527308,) vs (526202,))', 'vd(shape (527308,) vs (526202,))', 'psi(shape (2569,) vs (2580,))', 'phi(shape (2569,) vs (2580,))', 'eta(shape (2569,) vs (2580,))']
+  *** Z1 e' BLOCCANTE: le modifiche toccano il ramo spento. FERMO. ***
