@@ -81,6 +81,13 @@ SEP = "8"
 # ⚠ E NON E' UNA MODIFICA AL SIMULATORE: `CHI_BASC = False` e' gia' il default di MODULO (`:746`).
 #   Era il DRIVER ad accenderlo. Qui si rende esplicito un interruttore che c'era gia'.
 CHIBASC = "on"
+# [RAMO C a cooperazione, 2026-09-21] --chi-coop=on|off NOMINALE, DEFAULT `off`.
+# ⚠ QUI IL DEFAULT E' `off` E NON `on`, ed e' l'opposto di `--chi-basc`: la ragione e' la
+#   stessa in entrambi i casi -- il default e' quello che riproduce il comportamento
+#   ATTUALE VERBATIM. Il driver non ha MAI passato `--chi-coop` (il flag nasce oggi), quindi
+#   `off` e' l'unico default che lascia l'argv identico elemento per elemento.
+#   Lo prova `csv/_seal_fork/_sigillo_chicoop_driver.py`, non questo commento.
+CHICOOP = "off"
 
 _resti = []
 for _x in _ARGV[1:]:
@@ -96,6 +103,12 @@ for _x in _ARGV[1:]:
         CHIBASC = _x.split("=", 1)[1].strip().lower()
         if CHIBASC not in ("on", "off"):
             raise SystemExit("--chi-basc vuole `on` o `off`, non %r" % CHIBASC)
+    elif _x.startswith("--chi-coop="):
+        # NOMINALE con `=`, come `--chi-basc=`: non collide col `--chi-coop` nudo del
+        # simulatore, che finirebbe in `_resti` e resterebbe un flag del simulatore.
+        CHICOOP = _x.split("=", 1)[1].strip().lower()
+        if CHICOOP not in ("on", "off"):
+            raise SystemExit("--chi-coop vuole `on` o `off`, non %r" % CHICOOP)
     elif _x == "--riprendi":
         # LA RIPRESA E' UNA SCELTA ESPLICITA, MAI UN RIPIEGO AUTOMATICO: senza questo flag il
         # comportamento resta quello dell'originale (cartella sporca -> RIFIUTO).
@@ -123,6 +136,7 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--
             "--fork-su2-mem", "--cs-dinamico", "--tau-luce", "--rumore-colorato",
             "--pav-com", "--guscio-morbido", "--zeta-vir"] \
     + (["--chi-basc"] if CHIBASC == "on" else []) \
+    + (["--chi-coop"] if CHICOOP == "on" else []) \
     + ["--plast-din", "--viriale", "--olon-part"]
 # ⚠ IL FLAG SI INSERISCE NELLA STESSA POSIZIONE IN CUI ERA CABLATO. A default la lista e' IDENTICA
 #   ELEMENTO PER ELEMENTO a quella di prima: non "equivalente", identica. Lo prova

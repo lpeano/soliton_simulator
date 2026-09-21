@@ -685,7 +685,7 @@ Il mio classificatore l'aveva messo fra i reperti: **errore di categoria, corret
 | **cadenza** | uno ogni **20 frame = 120 passi** di motore (`--serie=20`), numerati **col passo** |
 | **SEME** | **`42`** *(letto dal blocco di testa del `prog.csv`, non assunto)* |
 | **BLOB del simulatore** | **`edb8f844`** *(sha1 dei BYTE GREZZI — **non** `git hash-object`)* · git-blob `b44f50ce` |
-| **BLOB del driver** | **`9aee4fc2`** *(`csv/_test_fork/_scena_video.py`, con `--chi-basc=on\|off`)* |
+| **BLOB del driver** | **`9aee4fc2`** *(`csv/_test_fork/_scena_video.py`, con `--chi-basc=on\|off`)* — **⚠ SUPERATO il 2026-09-21: il driver e' ora `4d31ddee`**, con `--chi-coop=on\|off` (default `off`). **I due run A/B qui sotto restano riproducibili VERBATIM**: a default l'argv e' identico elemento per elemento, e lo prova `csv/_seal_fork/_sigillo_chicoop_driver.py`, non questa nota. |
 | **passi previsti** | **3000** per ramo (500 frame x 6) |
 | **data** | avvio **2026-09-20 16:26:50** *(`doc/STATO_RUN.md`, voce `ab_sep4_A_e_B`)* |
 

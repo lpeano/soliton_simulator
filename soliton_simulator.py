@@ -835,6 +835,16 @@ SPINORE_CORRETTO = False # MASTER: gestione corretta dello spinore. Accende (1) 
                         # separato) ne' toglie |.| dal ritmo (flag 4 separato): quelli chiudono loop/cambiano leggi.
 CHI_DA_SPINORE = False  # FLAG 3 (separato, NON nel master): perc_chi = segno di doppia-copertura di _psi_spinor
                         # DOPO il commit di psi, e CHI_BASC disattivato. RICHIEDE --spinore-corretto (sennò loop).
+CHI_COOP = False        # COOPERAZIONE (decisione di Luca, 2026-09-21): chi_basc NON si spegne; scrive la
+                        # GEOMETRIA in `perc_geom` (il giro e' compiuto o no, dalla torsione) mentre lo
+                        # SPINORE scrive la CARICA in `perc_chi` (segno di doppia copertura). I due fanno
+                        # lavori DIVERSI e devono COOPERARE, non escludersi: spegnere chi_basc per
+                        # accendere lo spinore toglierebbe la geometria INSIEME alla carica, e un
+                        # confronto con due variabili cambiate insieme non si legge.
+                        # LETTORI: catena della torsione (CHI_CORE/FRAME_DRAG/TORS_4PI) -> perc_geom;
+                        # campo B del passo spinoriale, mitosi, Schwinger, TEMPO_SEGNO -> perc_chi.
+                        # RICHIEDE --spinore-corretto (stesso SystemExit di CHI_DA_SPINORE).
+                        # OFF = byte-identico: i rami nuovi sono IRRAGGIUNGIBILI, non solo inerti.
 TEMPO_PROPRIO_ORIENTATO = False # FLAG 4 (separato, profondo): toglie |.| da f in ritmo() -> r con SEGNO
                         # (tempo proprio orientato). Cambia una legge di base; default off.
 SYNC_SPINORE = False    # KURAMOTO SU(2) SUGLI SPINORI (sotto-flag): tira ogni spinore verso l'allineamento
@@ -1147,7 +1157,13 @@ class Rete:
         # e' lo stato del mezzo-twist (0 = prima del mediano, pi = dopo il salto).
         # Introdotto DORMIENTE: non accoppiato ancora a Psi ne' alla dinamica, finche'
         # non e' verificato che la struttura non rompe le leggi esistenti.
-        self.perc_chi = np.zeros(0, int)     # verso di percorrenza / antichiralita' (+1/-1)
+        self.perc_chi = np.zeros(0, int)     # verso di percorrenza / antichiralita' (+1/-1) = CARICA
+        # [CHI_COOP] LA GEOMETRIA, separata dalla carica: "il giro e' compiuto o no", scritta da
+        # `chi_basc` dalla torsione locale. A flag spento NESSUNO la legge (byte-inerte), ma viene
+        # ESTESA sempre dalle tre vie di crescita, cosi' `len(perc_geom) == n` e' un'INVARIANTE e non
+        # una speranza (Z4). Finisce nello snapshot da se': `salva_stato` accetta gli ndarray di
+        # __dict__ -- verificato dal disco, non assunto.
+        self.perc_geom = np.zeros(0, int)    # [CHI_COOP] geometria: giro compiuto o no (+1/-1)
         self.perc_tw  = np.zeros(0)          # stato del salto di pi al mediano (0 o pi)
         self.i = np.zeros(0, int); self.j = np.zeros(0, int)
         self.d = np.zeros(0); self.d0 = np.zeros(0); self.vd = np.zeros(0)
@@ -1564,14 +1580,35 @@ class Rete:
         self._spin_feedback_last = float(np.mean(np.abs(flusso))) if len(flusso) else 0.0
         return out
 
-    def chiralita_core_locale(self):
-        """Calcola la chiralità emergente del core locale per ogni nodo."""
+    def chiralita_core_locale(self, sorgente=None, geom=False):
+        """Calcola la chiralità emergente del core locale per ogni nodo.
+
+        [CHI_COOP, 2026-09-21] LA FONTE ERA UNICA PER DUE PADRONI. Questa funzione e' chiamata
+        sia dalla CATENA DELLA TORSIONE (FRAME_DRAG, e la cache letta da TORS_4PI) sia dal CAMPO
+        `B` del passo spinoriale: dirottarla su `perc_geom` avrebbe portato sulla geometria ANCHE
+        il campo dello spinore, che invece dev'essere generato dalle CARICHE. Percio' l'array
+        arriva come ARGOMENTO.
+          `sorgente is None` -> `self.perc_chi`  (LEGACY: byte-identico, il caso di CHI_COOP off)
+          `geom=False`       -> scrive `_chi_core_nodi` + i tre diagnostici   (LEGACY)
+          `geom=True`        -> scrive `_chi_geom_nodi`, e SOLO quella        (solo con CHI_COOP)
+        LA CACHE LA SCRIVE IL RAMO CHE LA POSSIEDE, ed e' il punto delicato: l'ordine dentro
+        `step()` e' FRAME_DRAG -> `_passo_spinoriale` -> TORS_4PI, quindi TORS_4PI legge la cache
+        scritta PER ULTIMA, cioe' quella del passo spinoriale. Con una cache sola riceverebbe la
+        CARICA in silenzio: nessun errore, nessun NaN, solo l'array sbagliato.
+        I TRE DIAGNOSTICI (`_chi_core_rho0`, `_chi_core_rhoc`, `_chi_core_raggio`) NON dipendono
+        da `chi`: sono calcolati da `I2` e da `lam_loc`. Verificato dal codice, non assunto --
+        percio' il ramo `geom` non li riscrive, e il loro valore non cambia."""
+        self._g_ccl_tot = getattr(self, "_g_ccl_tot", 0) + 1
+        if geom:
+            self._g_ccl_geom = getattr(self, "_g_ccl_geom", 0) + 1
+        else:
+            self._g_ccl_chi = getattr(self, "_g_ccl_chi", 0) + 1
         if self.n == 0 or not len(self.i):
             return np.zeros(self.n)
         if not hasattr(self, "psi") or len(self.psi) < self.n:
             self.calcola_psi()
         I2 = np.abs(self.psi[:self.n]) ** 2
-        chi = self.perc_chi[:self.n].astype(float)
+        chi = (self.perc_chi if sorgente is None else sorgente)[:self.n].astype(float)
         vicini = [[] for _ in range(self.n)]
         for a, b in zip(self.i, self.j):
             a, b = int(a), int(b)
@@ -1597,10 +1634,14 @@ class Rete:
             wloc = intensita[dentro]
             if np.sum(wloc) > 1e-12:
                 chi_core[k] = float(np.sum(wloc * chi[gruppo[dentro]]) / np.sum(wloc))
-        self._chi_core_nodi = chi_core
-        self._chi_core_rho0 = rho0
-        self._chi_core_rhoc = rho_c
-        self._chi_core_raggio = r_core
+        if geom:
+            # [CHI_COOP] LA CACHE DELLA GEOMETRIA, separata: la legge solo TORS_4PI.
+            self._chi_geom_nodi = chi_core
+        else:
+            self._chi_core_nodi = chi_core
+            self._chi_core_rho0 = rho0
+            self._chi_core_rhoc = rho_c
+            self._chi_core_raggio = r_core
         return chi_core
 
     def misura_spin_picco_massa(self, idx_massa, pesi=None):
@@ -1964,6 +2005,9 @@ class Rete:
             self.phivel = np.concatenate([self.phivel, np.zeros(n)])
         self.eta = np.concatenate([self.eta, np.zeros(n)])
         self.perc_chi = np.concatenate([self.perc_chi, chi_nuovi])
+        # [CHI_COOP] VIA 1 di 3 (semina). Alla nascita la geometria COPIA la carica: nel ramo A al
+        # passo 0 sono la stessa cosa, e `chi_basc` la riscrive al passo dopo comunque.
+        self.perc_geom = np.concatenate([self.perc_geom, chi_nuovi])
         self.perc_tw = np.concatenate([self.perc_tw, np.zeros(n)])
         self.mem_mot = np.vstack([self.mem_mot, np.zeros((n, 3))]) if len(self.mem_mot) else np.zeros((n, 3))
         # CALCIO al MOMENTO ANGOLARE SPINORIALE: invece di omega_s=(0,0,0), il punto zero eccita il
@@ -3761,14 +3805,20 @@ class Rete:
         # perche' e' l'unica forma esatta che non richiede NESSUNA scelta (A1, par.3).
         if FRAME_DRAG and len(_tw_t):
             if CHI_CORE and len(self.perc_chi) >= self.n:
-                chi_core = self.chiralita_core_locale()
+                # [CHI_COOP] LA TORSIONE LEGGE LA GEOMETRIA. Le guardie di lunghezza restano su
+                # `perc_chi` di proposito: i due array hanno la stessa lunghezza per costruzione
+                # (le tre vie di crescita estendono entrambi) e `Z4` lo VERIFICA invece di assumerlo.
+                chi_core = (self.chiralita_core_locale(self.perc_geom, geom=True)
+                            if CHI_COOP else self.chiralita_core_locale())
                 twn = (np.pi * 0.5 * (chi_core[i] - chi_core[j])) / PHI_CRIT
             elif VERSO_CHI and len(self.perc_chi) >= self.n:
                 # AGGANCIO AL VERSO STABILE: FRAME_DRAG pilotato dalla circolazione del solo
                 # twist_dip CHIRALE (segno fisso, gradiente vecchio/nuovo), NON dal tw pieno che
                 # e' dominato da dph=phi[i]-phi[j] (oscilla col battito delle fasi -> inverte il
                 # verso). Le chiralita' non battono come le fasi: il verso non si inverte.
-                twn = (np.pi * 0.5 * (self.perc_chi[i] - self.perc_chi[j])) / PHI_CRIT
+                # [CHI_COOP] VERSO_CHI e' il fallback della TORSIONE: segue la geometria.
+                _pc_vc = self.perc_geom if CHI_COOP else self.perc_chi
+                twn = (np.pi * 0.5 * (_pc_vc[i] - _pc_vc[j])) / PHI_CRIT
             elif not (CHI_CORE and len(self.perc_chi) >= self.n):
                 twn = _tw_t / PHI_CRIT                 # twist adimensionale (scala di stato)  # <-- USA SNAPSHOT
             twist_nodo = np.zeros(self.n)
@@ -3892,10 +3942,17 @@ class Rete:
         # Calcolo della differenza di fase sull'arco basato rigorosamente sullo stato al tempo t
         dph = self._w4(_phi_t[i] - _phi_t[j])
         if TORS_4PI and len(self.perc_chi) >= self.n:
-            chi_torsione = (self._chi_core_nodi if CHI_CORE and
-                            len(getattr(self, '_chi_core_nodi', [])) == self.n
-                            else (self.chiralita_core_locale() if CHI_CORE else
-                                  self.perc_chi[:self.n].astype(float)))
+            # [CHI_COOP] TORS_4PI E' TORSIONE: legge la cache della GEOMETRIA, non quella della
+            # carica. Senza la cache separata riceverebbe `_chi_core_nodi`, che con la cooperazione
+            # e' scritta dal PASSO SPINORIALE (l'ultimo chiamante nell'ordine di `step()`): avrebbe
+            # ricevuto la CARICA in silenzio -- nessun errore, solo l'array sbagliato.
+            _cache_tors = '_chi_geom_nodi' if CHI_COOP else '_chi_core_nodi'
+            chi_torsione = (getattr(self, _cache_tors) if CHI_CORE and
+                            len(getattr(self, _cache_tors, [])) == self.n
+                            else ((self.chiralita_core_locale(self.perc_geom, geom=True)
+                                   if CHI_COOP else self.chiralita_core_locale()) if CHI_CORE else
+                                  (self.perc_geom if CHI_COOP
+                                   else self.perc_chi)[:self.n].astype(float)))
             if POLO_MATURO:
                 _twabs = np.abs(self.tw)
                 _twn = np.zeros(self.n)
@@ -3914,14 +3971,22 @@ class Rete:
             self.twp = dph
             
         # --- BASCULAMENTO CHIRALE ---
-        if CHI_BASC and not CHI_DA_SPINORE and len(self.perc_chi) >= self.n and len(self.tw):
+        # [CHI_COOP] `chi_basc` NON SI SPEGNE PIU' quando lo spinore scrive la carica: continua a
+        # girare e scrive la GEOMETRIA. I contatori qui sotto sono il criterio di `Z3`: con la
+        # cooperazione `chi_basc` non deve toccare `perc_chi` NEMMENO UNA VOLTA.
+        if CHI_BASC and (CHI_COOP or not CHI_DA_SPINORE) and len(self.perc_chi) >= self.n and len(self.tw):
             _tw_src = _tw_t  
             twabs = np.abs(_tw_src)
             twn = np.zeros(self.n)
             np.add.at(twn, i, twabs); np.add.at(twn, j, twabs)
             twn = twn / np.maximum(self._deg, 1)          
             soglia = PHI_CRIT   # soglia = QUANTO di olonomia (2pi), locale: +1 solo dove il giro e' completato. NON la mediana globale (imponeva 50/50)
-            self.perc_chi[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_chi.dtype)
+            if CHI_COOP:
+                self._g_chibasc_su_geom = getattr(self, "_g_chibasc_su_geom", 0) + 1
+                self.perc_geom[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_geom.dtype)
+            else:
+                self._g_chibasc_su_chi = getattr(self, "_g_chibasc_su_chi", 0) + 1
+                self.perc_chi[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_chi.dtype)
 
         # --- FLAG 3 (--chi-da-spinore): perc_chi dal SEGNO di doppia-copertura del primario, DOPO
         # il commit di _psi_spinor (regola A/B: mai durante). Confronto col rappresentante canonico
@@ -3930,15 +3995,18 @@ class Rete:
         # [A8, 2026-09-20] (c) RAGIONE SCADUTA sulla parte `len(perc_chi) >= n`.
                 # ✅ MISURATO: **0 salti su 12**, e in `W3` NON si fa scattare nemmeno corrompendo
         # `perc_chi`. CLASSE: **(c) FORTE** -- non raggiungibile.
+        # [CHI_COOP] lo scrittore della CARICA e' lo stesso di FLAG 3: sotto cooperazione gira
+        # INSIEME a `chi_basc` invece che al suo posto.
+        _chi_da_psi = CHI_DA_SPINORE or CHI_COOP
         self._g_chi_da_spinore_tot = getattr(self, "_g_chi_da_spinore_tot", 0) + 1
-        if CHI_DA_SPINORE and SPINORE_CORRETTO and not (
+        if _chi_da_psi and SPINORE_CORRETTO and not (
                 len(self.perc_chi) >= self.n
                 and len(getattr(self, "_psi_spinor", [])) >= self.n):
             self._g_chi_da_spinore_salti = getattr(self, "_g_chi_da_spinore_salti", 0) + 1
             self._g_chi_da_spinore_shape = (len(self.perc_chi),
                                             len(getattr(self, "_psi_spinor", [])), self.n)
             self._g_chi_da_spinore_quando = self._g_chi_da_spinore_tot
-        if (CHI_DA_SPINORE and SPINORE_CORRETTO and len(self.perc_chi) >= self.n
+        if (_chi_da_psi and SPINORE_CORRETTO and len(self.perc_chi) >= self.n
                 and len(getattr(self, "_psi_spinor", [])) >= self.n):
             _canon = self._bloch_a_spinore(self._nb[:self.n])
             _ov = np.sum(np.conj(_canon) * self._psi_spinor[:self.n], axis=1)
@@ -4465,6 +4533,9 @@ class Rete:
         # profilo di percorrenza del figlio: eredita la chiralita' del genitore a
         # (dormiente, non ancora accoppiato). Salto a 0.
         self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])
+        # [CHI_COOP] VIA 2 di 3 (mitosi). Il figlio copia la GEOMETRIA del genitore come ne copia
+        # la carica: la geometria non e' coniugata, e' un giro compiuto o no, e si eredita tale.
+        self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[a]])
         # [A8/A7, 2026-09-20] I NATI PER RAMO, byte-inerti. QUESTO ramo eredita la chiralita'
         # UGUALE al genitore, quindi AGGIUNGE un nodo del suo stesso segno e ROMPE la
         # conservazione di `N(+1) - N(-1)`. L'altro ramo (Schwinger, antinodo) nasce OPPOSTO e la
@@ -4595,6 +4666,10 @@ class Rete:
                 # l'antiparticella nasce con chiralita' OPPOSTA al genitore (antichirale).
                 # Coerente con la creazione di coppia. Dormiente.
                 self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])
+                # [CHI_COOP] VIA 3 di 3 (Schwinger). La CARICA nasce OPPOSTA (e' antimateria); la
+                # GEOMETRIA no: copiata tale e quale, perche' non e' una carica e non si coniuga.
+                # SCELTA DICHIARATA, non ovvia -- e `chi_basc` la riscrive al passo dopo.
+                self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[aa]])
                 # [A8/A7, 2026-09-20] L'ALTRO RAMO: l'antinodo nasce OPPOSTO al genitore, quindi la
                 # coppia e' NEUTRA e `N(+1) - N(-1)` NON cambia -- come le coppie nel vuoto
                 # quantistico. E' il ramo che CONSERVA.
@@ -6183,7 +6258,7 @@ def _applica_flag(a):
     global TAU_LUCE, RUMORE_COLORATO
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
     if getattr(a, "tau_d0", False):
@@ -6245,14 +6320,22 @@ def _applica_flag(a):
     CHI_DA_SPINORE = bool(getattr(a, "chi_da_spinore", False))     # flag 3: perc_chi da doppia-copertura di _psi_spinor
     TEMPO_PROPRIO_ORIENTATO = bool(getattr(a, "tempo_proprio_orientato", False)) # flag 4: r con segno (toglie |.|)
     SYNC_SPINORE = bool(getattr(a, "sync_spinore", False))         # Kuramoto SU(2) sugli spinori: default off
+    CHI_COOP = bool(getattr(a, "chi_coop", False))                 # cooperazione: chi_basc -> perc_geom, spinore -> perc_chi
     if CHI_DA_SPINORE and not SPINORE_CORRETTO:
         raise SystemExit("[errore] --chi-da-spinore richiede --spinore-corretto (senno' loop di feedback perc_chi->spinore->perc_chi)")
+    if CHI_COOP and not SPINORE_CORRETTO:
+        raise SystemExit("[errore] --chi-coop richiede --spinore-corretto (lo scrittore della carica e' il segno di doppia copertura di _psi_spinor)")
     if SPINORE_CORRETTO and not SPINORE_VIVO:
         raise SystemExit("[errore] --spinore-corretto richiede --spinore-vivo (il settore SU(2) dev'essere nel percorso vivo)")
     if SPINORE_CORRETTO:
         print("[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)")
     if CHI_DA_SPINORE:
         print("[chi-da-spinore] perc_chi dal segno di doppia-copertura di _psi_spinor (post-commit); CHI_BASC disattivato")
+    if CHI_COOP:
+        print("[chi-coop] COOPERAZIONE: chi_basc SCRIVE perc_geom (geometria, letta dalla catena della "
+              "torsione) e lo spinore scrive perc_chi (carica, letta dal campo B, dalla mitosi e da "
+              "Schwinger). L'anello carica -> campo -> spinore -> carica e' quello NORMALE della "
+              "fisica, sfasato di un passo.")
     if TEMPO_PROPRIO_ORIENTATO:
         print("[tempo-proprio-orientato] ritmo() con segno: r orientato (toglie |.| da f)")
     if SYNC_SPINORE:
@@ -6703,6 +6786,12 @@ def _cli():
     p.add_argument("--chi-da-spinore", action="store_true", dest="chi_da_spinore",
                    help="FLAG 3 (separato): perc_chi = segno di doppia-copertura di _psi_spinor DOPO il commit "
                         "di psi, e CHI_BASC disattivato. RICHIEDE --spinore-corretto (senno' loop). Default off.")
+    p.add_argument("--chi-coop", action="store_true", dest="chi_coop",
+                   help="COOPERAZIONE chi_basc + spinore: `chi_basc` NON si spegne e scrive la GEOMETRIA in "
+                        "perc_geom (letta dalla catena della torsione CHI_CORE/FRAME_DRAG/TORS_4PI), mentre "
+                        "lo spinore scrive la CARICA in perc_chi (letta dal campo B del passo spinoriale, "
+                        "dalla mitosi, da Schwinger e da TEMPO_SEGNO). RICHIEDE --spinore-corretto. "
+                        "Default off = byte-identico.")
     p.add_argument("--tempo-proprio-orientato", action="store_true", dest="tempo_proprio_orientato",
                    help="FLAG 4 (separato, profondo): toglie |.| da f in ritmo() -> r con SEGNO (tempo proprio "
                         "orientato, non solo modulo). Cambia una legge di base. Default off.")

@@ -139,6 +139,8 @@ per i batch.
 | `--zeta-loc` | rende lo smorzamento più debole nella materia densa | A/B dello smorzamento |
 | `--chi-basc` | organizza la chiralità secondo la torsione locale | A/B della separazione chirale |
 | `--polo-maturo` | usa il polo più maturo per dare un verso al twist | da usare con `--chi-basc` |
+| `--chi-coop` | **DEFAULT OFF, byte-inerte a default.** `chi_basc` **non si spegne più** quando lo spinore scrive la carica: scrive la **geometria** in `perc_geom` (letta dalla catena della torsione `CHI_CORE`/`FRAME_DRAG`/`TORS_4PI`), mentre lo **spinore** scrive la **carica** in `perc_chi` (letta dal campo `B` del passo spinoriale, dalla mitosi, da Schwinger e da `TEMPO_SEGNO`). **Richiede `--spinore-corretto`** (`SystemExit`, non un avviso). | ramo C: geometria e carica **cooperano** invece di escludersi |
+| `--chi-da-spinore` | **DEFAULT OFF, byte-inerte a default.** `perc_chi` = segno di doppia copertura di `_psi_spinor` dopo il commit, e **`CHI_BASC` viene disattivato nel codice** (`if CHI_BASC and not CHI_DA_SPINORE`). **Richiede `--spinore-corretto`.** ⚠ È l'alternativa **esclusiva** a `--chi-coop`: sostituisce invece di separare. | ramo C **esclusivo**, superato dalla cooperazione |
 | `--verso-chi` | aggancia il frame-dragging al verso chirale stabile | A/B del verso |
 | `--olon-part` | include twist coerente e curl nella partizione tangenziale | da usare con viriale/polo |
 | `--ls-azim` | ricava il verso tangenziale da radiale × spinore | da usare con `--viriale` |
