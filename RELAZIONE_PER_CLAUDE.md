@@ -9074,3 +9074,48 @@ difetto.**
 **«competizione fra cinque scrittori»**; sul **singolo arco** era **«un colpevole solo al `96-98 %`»**.
 **Erano vere entrambe.** *Guardando solo il riassunto avrei scritto «competizione»: vero, e
 fuorviante.*
+
+---
+
+## `d` — l'enumerazione, e una premessa del mandato che CADE (2026-09-21)
+
+**Riscontro, relazionato nello stesso commit** *(par.5-ter: subito, non a fine arco)*.
+
+### ⚠ L'asimmetria del pavimento Verlet/Eulero NON ESISTE
+Il mandato dava per verificato che *«`:4071` (Eulero) ha il pavimento `0.05`; `:4061` (Verlet) NO»*.
+**Falso.** `:4061` e' solo `self.d = d_new`, e **`d_new` nasce gia' col pavimento** a `:4031`:
+```python
+:4031   d_new = np.maximum(self.d + dts * vd_half, 0.05)     # VERLET, col pavimento
+:4071   self.d = np.maximum(self.d + dts * self.vd, 0.05)    # EULERO, col pavimento
+```
+**Entrambi i rami hanno `0.05`. Nessuna asimmetria.**
+
+### `d` NON viene da `pos` — **confermato, con UNA qualifica**
+Quattro scrittori: `:4061` *(Verlet)*, `:4071` *(Eulero)*, `:4483` *(mitosi: dimezza)*,
+`:4572` *(Schwinger)*. **`d` e' INTEGRATO da `vd`.**
+**La qualifica:** a `:4538` gli archi **NUOVI** di Schwinger prendono
+`dd = max(0.5*norm(pos[aa]-pos[bb]), 0.05)` — **geometrico** — ma solo alla nascita.
+
+### `acc` ha ESATTAMENTE tre termini — **e due si amplificano da soli**
+```
+acc = cs_arco^2 * lap  +  src  -  beta * vd
+```
+*(verificato su tutte e tre le occorrenze: `acc_t` `:4029`, `acc_next` `:4059`, Eulero `:4070`)*
+
+- **`lap = 0.5*(med[i]+med[j]) - q`, con `q = d - d0`** -> e' il laplaciano **dell'ALLUNGAMENTO**,
+  non di `d`: una diffusione della tensione lungo il grafo;
+- **`src = ALPHA_M * anom`** *(ramo attivo: `HAM_SRC = 0.0`, `ALPHA_NAT = 0.0`, `ALPHA_M = 0.05`)*,
+  con **`anom = (rho - peq) / max(peq, 1e-9)`**.
+  > **⚠ `peq` E' AL DENOMINATORE, ed e' la stessa `peq` che DEGENERA:** misurato **30 passi
+  > distinti su 360 nel ramo B contro UNO solo in A** *(il transitorio di accensione)*.
+  > **Quando `peq` degenera, `anom` esplode — ed e' l'aggancio diretto alla SECONDA FASE di B,
+  > dove `n1` (il CFL sulla SORGENTE) arrivo' a `15 594` mentre `n3` si fermava a `205`.**
+- **`beta = 2 * ZETA_M * cs / max(d, 1e-6)`**, con `ZETA_M = 0.75`.
+  > **⚠⚠ `beta` E' INVERSAMENTE PROPORZIONALE A `d`: piu' l'arco si allunga, MENO e' smorzato.**
+  > **Non e' un'ipotesi: e' la formula.** E' la quarta lettura che il mandato prevedeva
+  > *(«manca il FRENO, il sistema e' sottosmorzato»)* — **e si legge dal codice prima di misurare.**
+
+> **DUE DEI TRE TERMINI hanno un'amplificazione STRUTTURALE nella direzione del guaio:**
+> **`src` esplode quando `peq` degenera; `beta` si indebolisce quando `d` cresce.**
+> **Il terzo, `lap`, diffonde l'allungamento invece di opporvisi.**
+> **Nessuno dei tre e' misurato ancora: questo e' cio' che il CODICE dice, e la misura viene dopo.**
