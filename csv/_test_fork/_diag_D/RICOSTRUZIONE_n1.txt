@@ -1,0 +1,20 @@
+# §2 -- RICOSTRUZIONE DI `src` E `n1` DALLO SNAPSHOT, COME LO FA IL CODICE
+#   rho  = 0.5*(I[i]+I[j])                    :4167
+#   anom = (rho - peq)/max(peq, 1e-9)         :4215   <- PAVIMENTO 1e-9, non zero
+#   src  = ALPHA_M * anom                     :4218   (ALPHA_NAT == 0)
+#   n1   = ceil(|src|max * DT/(0.02*cs_max))  :4264   ramo VERLET
+# cs_max NON e' nello snapshot: si usa CS_M = 2.0 come LIMITE SUPERIORE, e si DICHIARA.
+# Un cs_max piu' PICCOLO darebbe un n1 PIU' GRANDE: la stima e' quindi CONSERVATIVA.
+
+ passo |      peq min     anom max    |src| max |   n1 ric. | archi peq<1e-9
+   600 |   1.9964e-04   8.0194e+00   4.0097e-01 |         1 |              0
+  1080 |   8.3482e-08   1.7039e+00   8.5193e-02 |         1 |              0
+  1200 |   1.3849e-14   7.3324e+00   3.6662e-01 |         1 |              1
+
+n1 MISURATO sul processo VIVO (py-spy, passo ~1230): 22591
+n1 RICOSTRUITO al passo 1200:                        1
+
+VERDETTO: il termine e' QUELLO GIUSTO -- la formula e le costanti coincidono col codice --
+  ma lo snapshot 1200 NON contiene ancora l'esplosione: n1 vale 1, cioe' il PAVIMENTO.
+  L'esplosione nasce nei ~30 passi fra il 1200 e il 1230, e NESSUNO SNAPSHOT LA COPRE.
+  Per vederla servirebbe un run rigiocato da 1200 con archivio FITTO (--db-rigioca).

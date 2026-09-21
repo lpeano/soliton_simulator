@@ -9797,3 +9797,52 @@ il suo mestiere e non e' lui a spingere `d0`.**
 ### `peq` basso vive sui NATI
 All'ultimo snapshot, l'1 % piu' basso di `peq`: **`15.19 %` degli archi che coinvolgono un NATO**,
 **`7.69 %` vuoto-vuoto**, **`0.04 %` massa-massa**. **I nodi appena nati sono dove `peq` degenera.**
+
+---
+
+## §2 — **l'incoerenza su `n1` e' RISOLTA: il termine e' giusto, lo snapshot e' PRIMA**
+
+Ricostruzione **generata da codice** *(`csv/_test_fork/_diag_D/RICOSTRUZIONE_n1.txt`)*, con la
+stessa `rho`, lo stesso pavimento e le stesse costanti del sorgente:
+```
+ passo |      peq min     anom max    |src| max |  n1 ric. | archi peq<1e-9
+   600 |   1.9964e-04   8.0194e+00   4.0097e-01 |        1 |              0
+  1080 |   8.3482e-08   1.7039e+00   8.5193e-02 |        1 |              0
+  1200 |   1.3849e-14   7.3324e+00   3.6662e-01 |        1 |              1
+
+n1 MISURATO sul processo vivo (py-spy, passo ~1230):  22591
+n1 RICOSTRUITO al passo 1200:                             1
+```
+
+> **Il termine e' QUELLO GIUSTO** — formula e costanti coincidono col codice — **ma lo snapshot
+> 1200 non contiene ancora l'esplosione: `n1` vale `1`, cioe' il pavimento.**
+> **L'esplosione nasce nei ~30 passi fra il 1200 e il 1230, e NESSUNO SNAPSHOT LA COPRE.**
+> Per vederla servirebbe una **rigiocata da 1200 con archivio fitto** (`--db-rigioca`).
+
+**E un dettaglio che cambia la lettura di `peq`:** al passo 1200 **UN SOLO ARCO** ha `peq < 1e-9`.
+**Il crollo del minimo non e' un fenomeno di popolazione: e' un singolo arco.**
+*(E con quel pavimento, `anom` su quell'arco vale `rho/1e-9`, non `rho/1.4e-14`.)*
+
+---
+
+## §3 — **`peq` alla nascita: TRE vie, e TRE LEGGI DIVERSE** *(lette dal codice)*
+
+| via | dove | cosa riceve |
+|---|---|---|
+| **`_allaccia`** *(archi nuovi)* | `:2220` nasce `nan`, **calibrato a `:4189`** | **`peq = rho` dell'arco stesso** — quindi `anom = 0` ESATTO alla nascita |
+| **mitosi** | `:4752` | **eredita** `peq` dell'arco genitore, duplicato sui due figli |
+| **Schwinger** | `:4846` | **`median(self.peq)` — LA MEDIANA GLOBALE** |
+
+> **⚠ LA TERZA VIOLA `A2` (locale pura): una nascita che legge una statistica GLOBALE.**
+> **E le tre leggi non sono coerenti fra loro:** una prende il valore LOCALE, una EREDITA, una
+> prende una MEDIA DI TUTTO IL SISTEMA. **La stessa grandezza nasce in tre modi diversi.**
+
+### E il meccanismo che mette `peq` minuscolo sui NATI
+`:4189` calibra `peq = rho = 0.5*(I[i]+I[j])`. **Per un nodo appena nato `I = |psi|^2` e' minuscola**,
+quindi **l'arco nasce con `peq` minuscolo** e ci resta finche' il rilassamento non lo muove.
+**E' coerente con la misura:** l'1 % piu' basso di `peq` e' il **15.19 %** degli archi che toccano
+un NATO, contro lo **0.04 %** di quelli massa-massa.
+
+**⚠ NON e' dimostrato che sia QUESTA la causa dell'esplosione di `n1`**: la catena
+*«nato -> `peq` piccolo -> `anom` grande -> `n1` grande»* e' **plausibile e non misurata**, e al
+passo 1200 `anom` vale ancora `7.33`.
