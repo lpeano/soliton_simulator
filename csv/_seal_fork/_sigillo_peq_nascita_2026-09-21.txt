@@ -1,0 +1,23 @@
+[TIMBRO] _sigillo_peq_nascita.py  sha1-BYTE cc3a7fb1  committato e pulito
+sim PRIMA (8227917): sha1 GREZZO d972a517
+sim SUL DISCO      : sha1 GREZZO d30bb0b9
+
+braccio A (prima della cura)...
+braccio B (disco, flag SPENTO)...
+braccio C (disco, flag ACCESO)...
+
+----------------------------------------------------------------------------------------------
+Q1   PASS flag SPENTO = prima della cura: 12 campi -> BYTE-IDENTICI
+Q2   PASS CONTROLLO POSITIVO: ACCESO vs SPENTO differiscono su 12 campi
+Q3   PASS `nan` dopo mitosi: ACCESO 88 su 88 attesi, SPENTO 0 (deve essere 0). Eventi Schwinger: 17
+Q4   PASS dopo il passo dopo restano 0 `nan` (deve essere 0) su 15 archi verificati: la CALIBRAZIONE di `:4189` HA GIRATO
+Q5   PASS `nan` altrove (d, d0, vd, psi, tw, phi): 0 (deve essere 0)
+Q6   PASS DIRETTO -- ACCESO: calibrati LOCALMENTE 86 + 2 ancora in attesa a fine finestra = 88 attesi; di cui 86 uguali alla `rho` del PROPRIO arco e 86 DIVERSI dalla mediana globale (scarto max 2.088e+02). SPENTO: 94 su 94 valori uguali alla MEDIANA. Identificazione sbagliata in 0+0 eventi (deve essere 0).
+----------------------------------------------------------------------------------------------
+SIGILLO PEQ_NASCITA_LOCALE: 6/6
+
+VERDETTO: la cura C2 e' INERTE a flag spento, NON e' codice morto, il `nan` e' una
+  CONSEGNA e non una perdita, e la nascita di `peq` e' diventata LOCALE.
+
+LIMITI: UN seme, UNA scena, 36 passi. Prova che la LEGGE e' cambiata e che il
+  meccanismo e' pulito, NON che la fisica risultante sia migliore.

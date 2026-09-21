@@ -10491,3 +10491,38 @@ cio' che dichiara**, **non** che la fisica risultante sia migliore: quello lo di
 600 passi. **E `DIFF_RES != 0` resta scoperto** — li' il bersaglio della diffusione puo' essere
 negativo e la dimostrazione non vale. Oggi vale `0.0` ovunque, **e il caso e' CONTATO**
 (`_g_peqx_bers_neg`, misurato **0**) invece che assunto.
+
+### ⑬ **CURA `C2` -- `PEQ_NASCITA_LOCALE`, sigillata `6/6`**
+
+`peq` nasceva in **tre modi incoerenti**: `_allaccia`+`:4189` lo calibra sulla **`rho` dell'arco
+stesso**, la mitosi lo **eredita**, e **Schwinger scriveva `median(self.peq)`** — una statistica
+**globale** dentro una legge locale (**`A2`**). **La cura non inventa niente:** Schwinger scrive
+`nan` e `:4189` lo calibra come gli altri. **Zero parametri.**
+
+**⚠ La mitosi NON si tocca, ed e' una decisione motivata:** un arco che si spezza **non nasce,
+CONTINUA** — i due tronconi hanno la storia del padre. Curarla sarebbe curare cio' che non e' rotto.
+
+| | esito |
+|---|---|
+| **Q1** | flag spento **byte-identico** |
+| **Q2** | acceso vs spento differiscono su 12 campi |
+| **Q3** | **88 `nan` su 88 attesi** a flag acceso, **ZERO** a flag spento, su **17** eventi Schwinger |
+| **Q4** | dopo il passo dopo **non resta nessun `nan`**: il `nan` e' una **CONSEGNA**, non una perdita |
+| **Q5** | **zero `nan`** in `d`, `d0`, `vd`, `psi`, `tw`, `phi` |
+| **Q6** | **`86 + 2` in attesa `= 88`; tutti e 86 uguali alla `rho` del PROPRIO arco, tutti e 86 DIVERSI dalla mediana globale** *(scarto max `2.088e+02`)*; a flag spento **`94 su 94` uguali ALLA MEDIANA** |
+
+> **⚠ `Q6` E' STATO SCRITTO TRE VOLTE, e le prime due erano difettose.** La prima confrontava i
+> valori **dopo** il passo, quando il rilassamento li ha gia' mossi in **entrambi** i rami: dava
+> `1.0000` contro `1.0000`, cioe' **assenza di CONTRASTO letta come assenza di effetto**. La
+> seconda chiedeva *«>= 100 volte»* una dispersione che a flag spento e' **ZERO ESATTO** —
+> **`100 * 0 = 0`, quindi sarebbe passata con qualunque valore, anche nullo.** **Rilievo di Luca.**
+> **Un criterio che non puo' fallire non e' un criterio.** La terza e' fatta di **uguaglianze e
+> conteggi**, senza soglie.
+
+**⚠ E due difetti della MISURA, trovati dai numeri e non dal ragionamento:**
+- gli archi erano identificati come *«gli ultimi `2*nc`»* — **un'assunzione sull'ORDINE degli
+  append**, sbagliata in **1 evento su 17**. Ora si identificano **dagli ANTINODI**, con la
+  controprova *(due archi per antinodo)* **cablata nel sigillo**;
+- il contatore contava **anche le calibrazioni della SEMINA** — **`526059` invece di `88`** —
+  perche' avevo verificato che `_allaccia` e' chiamata solo da `semina()` e **concluso male** che
+  fosse inerte in batch: **inerte e' la semina CONTINUA, non quella INIZIALE.**
