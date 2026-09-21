@@ -1,0 +1,12 @@
+# §1 -- I DUE RUN BREVI, tabella GENERATA DA CODICE (P1-ter)
+# S = solo SCALA_MIN   K = solo COES_ADIM   entrambi con CHI_COOP, 300 passi, stessa base
+
+ passo |   S med d  S med d0  S d/d0  S d<LAM |   K med d  K med d0  K d/d0  K d<LAM
+    60 |    1.0215    0.8905  1.0705        0 |    0.9769    0.9728  1.1794   173069
+   120 |    1.3548    0.8101  1.6300        0 |    1.1469    0.9966  1.3028   111789
+   180 |    1.6233    0.8046  1.9565        0 |    1.3430    1.0819  1.2678    87591
+   240 |    1.8094    0.8035  2.2158        0 |    1.4401    1.1805  1.2356    75172
+   300 |    2.0324    0.8083  2.4834        0 |    1.5275    1.3124  1.2064    71114
+
+med d0:  S da 0.8905 a 0.8083  (x0.91)      K da 0.9728 a 1.3124  (x1.35)
+med d :  S da 1.0215 a 2.0324  (x1.99)      K da 0.9769 a 1.5275  (x1.56)

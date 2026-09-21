@@ -603,3 +603,5 @@ ramo B (chi_basc OFF):
   python csv/_test_fork/_scena_video.py 50 csv/_test_fork/_run_K --sep=4.0 --serie=10 --csv-progresso=csv/_test_fork/_run_K/prog.csv --chi-coop=on --scala-min=off --coes-adim=on
   ```
 - **note** §1 del mandato, SECONDO run: K = SOLO COES_ADIM (SCALA_MIN SPENTO), 300 passi. Il run S ha gia' ESCLUSO il cricchetto da solo: con SCALA_MIN acceso e COES_ADIM spento, med d0 resta ~0.80 piatto. LETTURA FISSATA PRIMA: se d0 scappa in K -> e' il CONTRAPPESO PERSO di COES_ADIM; se non scappa nemmeno in K -> e' l'INTERAZIONE fra i due, e va detto cosi'. Uno alla volta.
+
+**chiuso 2026-09-21 15:20:16 — FINITO** 50 frame = 300 passi, 20.711 s/frame, 5 snapshot su 5, 0 falliti, 0.18 GB. RISULTATO: d0 in K CRESCE ma piano -- da 0.9728 a 1.3124, cioe' x1.35 su 300 passi -- mentre in S resta piatto (x0.91) e in D scappa (x15 su 1080 passi, e gia' a 2.02 al passo 120 quando K e' a 0.997). NESSUNO DEI DUE FLAG DA SOLO RIPRODUCE LA FUGA: e' l'INTERAZIONE, ed e' la terza possibilita' fissata PRIMA. E K ha d/d0 ~1.2, il piu' vicino alla trasparenza fra tutte le configurazioni, ma con 71114 archi sotto LAM perche' SCALA_MIN e' spento.

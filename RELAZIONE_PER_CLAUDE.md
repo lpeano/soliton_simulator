@@ -9928,3 +9928,47 @@ simulatore che non serve.** *(E' la forma di `P1`: l'associazione genera candida
 conclusioni — qui il candidato era «non si puo' fare» e bastava rileggere un mio strumento.)*
 
 **Il paragrafo qui sopra resta leggibile**: dice cosa avevo concluso e dove ho guardato troppo poco.
+
+---
+
+## §1 CHIUSO — **nessuno dei due flag DA SOLO fa scappare `d0`: e' l'INTERAZIONE**
+
+**Tabella generata da codice** *(`csv/_test_fork/_diag_D/RUN_S_K.txt`)*. 300 passi ciascuno, stessa
+base di epoca 2, `CHI_COOP` acceso in entrambi, **uno alla volta**.
+
+```
+ passo |   S med d  S med d0  S d/d0  S d<LAM |   K med d  K med d0  K d/d0  K d<LAM
+    60 |    1.0215    0.8905  1.0705        0 |    0.9769    0.9728  1.1794   173069
+   120 |    1.3548    0.8101  1.6300        0 |    1.1469    0.9966  1.3028   111789
+   180 |    1.6233    0.8046  1.9565        0 |    1.3430    1.0819  1.2678    87591
+   240 |    1.8094    0.8035  2.2158        0 |    1.4401    1.1805  1.2356    75172
+   300 |    2.0324    0.8083  2.4834        0 |    1.5275    1.3124  1.2064    71114
+
+med d0:  S  x0.91  (PIATTO, anzi cala)      K  x1.35  (cresce, ma PIANO)
+```
+
+### La lettura era fissata PRIMA, e cade sulla TERZA possibilita'
+- *d0 scappa solo in S* → cricchetto. **NO:** in S `d0` **cala** (`x0.91`);
+- *d0 scappa solo in K* → contrappeso perso. **NO:** in K cresce, **ma `x1.35` su 300 passi**;
+- *in nessuno dei due* → **e' l'INTERAZIONE.** **E' questo il caso.**
+
+**Il confronto che lo rende netto:** al passo 120, `med d0` vale **`0.81` in S**, **`1.00` in K**, e
+**`2.02` in D**. **D e' gia' scappato quando i due flag da soli non si sono quasi mossi.**
+**La fuga non e' la somma dei due effetti: nasce dalla loro combinazione.**
+
+### Due cose che i run dicono e che non erano state chieste
+- **`COES_ADIM` da solo e' il piu' VICINO alla trasparenza:** `d/d0 ~ 1.21`, contro `2.48` di S,
+  `3.55` del ramo senza flag e `0.82` di D. **Il criterio cosmologico non e' soddisfatto da
+  nessuno, ma K e' quello che gli si avvicina di piu';**
+- **e lo fa con `71 114` archi sotto `LAM`**, perche' `SCALA_MIN` e' spento. **I due flag curano
+  difetti diversi, e messi insieme si rinforzano in una direzione che nessuno dei due prende da
+  solo.**
+
+### ⚠ E nessuna configurazione e' TRASPARENTE, in entrambi i versi
+```
+C  (nessun flag)     d/d0 -> 3.55    TENSIONE
+S  (solo SCALA_MIN)  d/d0 -> 2.48    TENSIONE
+K  (solo COES_ADIM)  d/d0 ~  1.21    la piu' vicina, ma non 1
+D  (tutti e due)     d/d0 -> 0.82    COMPRESSIONE
+```
+**Il criterio `d/d0 ~ 1` fallisce in TUTTE E QUATTRO, e in DUE VERSI OPPOSTI.**
