@@ -382,6 +382,73 @@ INIZIATO**, col suo costo e col criterio che deciderebbe se farlo: **`doc/RAMIFI
 4. **Nessuno e' derivato:** sono **regolarita' induttive**, e **potrebbero non valere fuori dai casi
    che le hanno generate.**
 
+## A11 — UN LIMITE E' UNA LEGGE, NON UNA TOPPA
+
+> **Decisione di Luca, 2026-09-21.** **Nasce da cinque difetti trovati in due giorni, tutti della
+> stessa famiglia: un `clip`, un pavimento o un tetto messi per proteggere da un errore invece che
+> per esprimere un vincolo.**
+
+**Un clip, un pavimento o un tetto e' ammesso SOLO se esprime un VINCOLO FISICO DICHIARATO.**
+**Se protegge da un errore, l'errore va corretto DOVE NASCE.**
+
+### I SETTE COROLLARI, ciascuno col difetto REALE da cui nasce
+
+**1. ORIGINE FISICA.** `LAM` e il limite di causalita' lo sono; **un numero scelto per non dividere
+per zero NO.**
+> **Da `Z94`:** `max(peq, 1e-9)` non e' un vincolo fisico su `peq` — e' una difesa dalla divisione.
+> **Il vincolo fisico vero e' `peq >= 0`, e sta nell'aggiornamento, non nella divisione.**
+
+**2. NON DIPENDE DA CIO' CHE LIMITA.** **Un pavimento che scende con la cosa che trattiene, o un
+tetto che cresce con essa, la INSEGUE invece di fermarla.**
+> **Da `Z79`:** il clip `tanh(stress)*d0` **cresce con `d0`** — a `d0 = 30` vale `8.7`, **770 volte**
+> il tetto causale — quindi **piu' `d0` scappa, piu' il clip glielo consente.**
+> **E dalla scala minima (`Z91`):** il pavimento comovente `f*median(d0)` **si muove con la
+> popolazione che dovrebbe ancorare.**
+
+**3. NON RIBALTA SEGNI E NON AMPLIFICA.** **Un limite puo' solo RIDURRE la distanza dal dominio, mai
+trasformare un valore sbagliato in uno ENORME.**
+> **Da `Z94`, ed e' il caso piu' netto:** con `peq = -4.85e-04`, il pavimento sostituisce un
+> denominatore **negativo** con `1e-9`. L'anomalia vera sarebbe **`-3.72`** *(di richiamo)*; il
+> pavimento la fa diventare **`+1.805e+06`**. **Ribalta il segno e moltiplica per `3.7e5`.**
+
+**4. SIMMETRICO, SE LA FISICA LO E'.** **Frenare in un verso solo trasforma il RUMORE in DERIVA.**
+> **Da `Z91`:** `SCALA_MIN` frena le **discese** e lascia intatte le **salite**. Con spinte opposte
+> di **somma nulla** il risultato **non e' zero**: e' un **cricchetto**, e vicino a `LAM` annulla il
+> **96 %** di ogni discesa.
+
+**5. SI RIPARA ALL'ORIGINE, NON NEL PUNTO D'USO.** **Una grandezza che deve restare positiva si
+tiene positiva DOVE VIENE AGGIORNATA, non dove la si DIVIDE.**
+> **Da `Z94` e `Z95`:** il pavimento stava a `:4215` *(la divisione)*; il difetto stava a `:4206`
+> *(l'Eulero esplicito che scavalca)*. **La cura `PEQ_ESATTO` agisce sull'aggiornamento, e li' la
+> positivita' e' DIMOSTRATA** — combinazione convessa — **invece che imposta.**
+
+**6. SE SATURA, E' UN ALLARME.** **Ogni limite ha un CONTATORE; in un sistema sano un limite tecnico
+non scatta mai.**
+> **Da `Z79`:** il clip era saturo nel **`98.86 %`** dei casi. **Un limite che morde quasi sempre
+> non e' un limite: e' la legge**, e nessuno l'aveva scelta.
+
+**7. UN LIMITE SECCO E' SOSPETTO, E SI IMPONE IN MODO MORBIDO. MA LA MORBIDEZZA HA TRE OBBLIGHI:**
+**(a)** lontano dal confine e' l'**IDENTITA'**; **(b)** non crea **DERIVA** su spinte simmetriche;
+**(c)** la sua **LARGHEZZA** viene dalla fisica, non da un numero scelto.
+**Un limite morbido che viola uno dei tre e' PEGGIO di uno secco, perche' sbaglia OVUNQUE invece che
+in un punto.**
+> **Dal task history del ramo D** *(`doc/TASK_HISTORY/2026-09-21_ramo_D_tre_modifiche.md`)*, **tre
+> forme morbide provate e CADUTE, una per ciascun obbligo:**
+> * **`tanh`** come saturazione — **satura anche in ALTO**, dove non c'e' nessun vincolo: viola **(a)**;
+> * **`LAM + x*exp(-LAM/x)`** — **non e' idempotente**: `L(x) > x` anche per `x >> LAM` *(+4.98 % a
+>   `3*LAM`)*, e applicata **sette volte per passo** avrebbe **fabbricato l'espansione da misurare**:
+>   viola **(a)**;
+> * **`1 - LAM/x`** *(la forma in vigore)* — agisce su **tutta la fascia**, non solo al confine, e
+>   frena **solo le discese**: viola **(b)**. **E' il cricchetto del corollario 4.**
+
+### COSA A11 NON DICE
+- **non dice che i limiti vadano tolti.** Dice che **ognuno deve dichiarare quale legge esprime**, e
+  che **quelli che non ne esprimono nessuna sono lavoro arretrato**, non fisica;
+- **non e' una scansione fatta:** il **censimento** di tutti i `clip`, pavimenti e tetti del
+  simulatore **e' in CODA** *(mandato del 2026-09-21 §2)*. Finche' non e' fatto, **non si sa quante
+  toppe ci siano ancora dentro** — e va detto cosi', non stimato.
+
+
 ## SCANSIONI MAI FATTE
 **A5** (grandezze istantanee che mediano a distanza: `w`, `psi`, `B`, `lambda_nodi`) ·
 **A7** (altri cricchetti senza stato) · **A1** (enumerazione di TUTTE le costanti nei percorsi

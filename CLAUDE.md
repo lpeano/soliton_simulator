@@ -176,6 +176,15 @@ dalle ALTRE sostituzioni e lascia passare in silenzio quella che non ha attaccat
 la cui correzione non ha attaccato mentre l'`assert` passava. **Riconoscerlo non e' bastato le
 prime due volte: serve l'helper, non l'attenzione.**
 
+**P1-quinquies — PRIMA DI SCRIVERE UN CLIP, UN PAVIMENTO O UN TETTO: `A11`.**
+**Se protegge da un ERRORE, cerca l'errore.** Un limite e' ammesso solo se esprime un
+**vincolo fisico dichiarato**; se sta li' per non dividere per zero, per non andare
+negativo o per non esplodere, **il difetto e' altrove e il limite lo nasconde**.
+**I sette corollari stanno in `doc/ASSIOMI.md`, `A11`**, ciascuno col difetto reale da cui
+nasce. **Il piu' caro, misurato:** `max(peq, 1e-9)` ha trasformato un'anomalia di
+**`-3.72`** in una di **`+1.805e+06`** *(`Z94`)* — **ribaltando il segno** — e ci sono
+volute ore per trovarlo.
+
 **P2 — PRIMA DI ESCLUDERE UN FLAG DA UNA MISURA: FORZA IL SISTEMA O LO CORREGGE?**
 Escludere un **forzante** (turbo) protegge la misura; escludere una **correzione** significa
 **misurare un sistema che si sa difettoso**. (E' il presidio gia' scritto in §10, promosso qui
