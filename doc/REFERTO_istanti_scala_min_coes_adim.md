@@ -528,3 +528,86 @@ picco e' anche quello che lo spegne** — ed e' per questo che il ramo D ha attr
 - **il valore di `dt_e/tau_bg_loc`** su quell'arco: e' il numero che deciderebbe se e' un difetto
   `CFL` puro. **Non esiste un contatore che lo registri** — a differenza di `d0`.
 
+---
+
+## ②-quinquies — **I TRE NUMERI. E' UN SOLO ARCO, e' il RILASSAMENTO, e lo scavalcamento e' `x = 1.20`**
+
+> **MISURATO** con `csv/_test_fork/_peq_dentro_1126.py --da=1080 --fino=1126`, sonda `TRACCIA_PEQ`
+> **sigillata `4/4`** *(`T2`: **PURE-READ**, byte-identica anche accesa)*.
+> **Il passo 1126 NON e' stato integrato:** `FERMA_DOPO_NSUB` ferma `step()` appena calcolato
+> `nsub`. **Costo: 2 minuti invece dei 2032 secondi della rigiocata.**
+
+```
+passo |      max(x)      x>=1      x>=2 |      neg neg SOLO neg SOLO |     archi
+                                                      rilass.  diffus.
+ 1121 |       1.205         5         0 |        0        0        0 |    528430
+ 1125 |       1.208         5         0 |        0        0        0 |    528441
+ 1126 |       1.208         5         0 |        2        3        0 |    528447
+
+*** FERMATO AL PASSO 1126 SENZA INTEGRARLO: nsub=22591 n1=22591 n2=1 n3=3 (ramo VERLET)
+```
+
+### ① `max(dt_e / tau_bg_loc) = 1.208` — **sopra 1, ma NON sopra 2**
+
+**`x >= 1` su `159` archi-scrittura** in tutta la finestra, **`x >= 2` su ZERO.**
+> **Non e' una divergenza oscillante: e' UNO SCAVALCAMENTO SINGOLO.** Per `x > 2` l'Eulero
+> esplicito oscilla amplificando; qui `x` sta **fra 1 e 2**, dove **scavalca una volta e basta**.
+> **E' il difetto piu' lieve della famiglia, e produce comunque un `nsub` di 22 591.**
+*(Il gemello su `d0`, `_taup_cfl_max`, vale `0.0354`: **trentaquattro volte piu' al sicuro.**
+Lo stesso codice, la stessa forma, due grandezze — **e la guardia l'ha avuta solo una.**)*
+
+### ② **E' UN ARCO. DUE, per la precisione — su 528 447**
+
+**`peq < 0` su `2` archi al passo 1126, e su ZERO in tutti i 45 passi precedenti.**
+> **Non e' una deriva di popolazione: e' un incidente puntuale.** E la domanda *«uno o mille?»*,
+> che cambiava la diagnosi, **ha risposta: DUE.**
+
+### ③ **E' IL RILASSAMENTO, non la diffusione** — dai controfattuali
+
+Sull'arco colpevole `3352-506`, i tre esiti calcolati **a parte**:
+
+| termine applicato | esito |
+|---|---:|
+| **solo il rilassamento** `(rho-peq)/tau_bg` | **`-5.508e-04`** ⬅ **NEGATIVO** |
+| solo la diffusione `flusso/TAU_DIFF` | `+1.067e-02` *(positivo)* |
+| **insieme** *(il codice)* | **`-4.854e-04`** |
+
+> **La diffusione non solo non e' colpevole: ATTENUA.** Da sola lascerebbe `peq` **sopra il valore
+> di partenza**; insieme, il risultato e' **meno negativo** di quello del solo rilassamento.
+> **La cura ① colpisce esattamente il termine giusto.**
+
+### IL DETTAGLIO DELL'ARCO, e ribalta il racconto del §②-ter
+
+```
+arco 3352-506      peq_prima = 1.060302e-02      rho = 1.321787e-03
+                   dt_e      = 1.410604e-02      tau_bg = 1.173779e-02
+                   x         = 1.201763          ->  peq_dopo = -4.854207e-04
+```
+**`peq` NON stava decadendo da 45 passi: valeva `1.06e-02`, cioe' un valore SANO** *(la mediana
+della popolazione e' `8.2e-02`)*. **E' stato ribaltato in UN SOLO PASSO.**
+> **⚠ Cio' smonta anche l'ultima traccia del §②-ter**, dove avevo legato il picco alla lenta
+> discesa geometrica di `min(peq)`. **Quella discesa esiste ed e' su un ALTRO arco (`2773-4158`),
+> e non e' il meccanismo.**
+
+### IL CRITERIO ESATTO DI SCAVALCAMENTO — **derivato, e spiega i 159 contro 2**
+
+Con l'Eulero `peq_new = peq + x*(rho - peq)`, il segno si ribalta quando
+```
+x  >  peq / (peq - rho)  =  1 / (1 - rho/peq)            [valido per rho < peq]
+```
+Sull'arco: `rho/peq = 0.12466` ⇒ **soglia `1.1425`**, e **`x = 1.2018` la supera.**
+> **`x > 1` e' NECESSARIO ma NON SUFFICIENTE**, ed e' per questo che `159` archi hanno `x >= 1` e
+> **solo `2`** vanno sotto zero: serve **anche** che `rho` sia abbastanza sotto `peq`.
+
+### CONTROPROVA DELLA CURA ①, calcolabile PRIMA di scriverla
+
+```
+PEQ_ESATTO:  peq_new = rho + (peq - rho) * exp(-x)
+           = 1.321787e-03 + 9.281233e-03 * exp(-1.201763)
+           = 1.321787e-03 + 9.281233e-03 * 0.300628
+           = +4.112e-03        POSITIVO, e compreso fra `rho` e `peq` come la convessita' impone
+```
+**Su questo arco, con questo `x`, la cura ① produce `+4.1e-03` invece di `-4.9e-04`.**
+**Il picco non si formerebbe.** *(E' una PREVISIONE, scritta prima del sigillo `P5` che la
+verifichera' sul passo vero.)*
+

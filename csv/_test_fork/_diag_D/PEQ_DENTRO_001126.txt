@@ -1,0 +1,86 @@
+# I TRE NUMERI SULL'AGGIORNAMENTO DI `peq` -- dal passo 1081 al 1126
+# sonda TRACCIA_PEQ, sigillo 4/4 (T2: PURE-READ). Il passo 1126 NON viene integrato.
+# x = dt_e / tau_bg_loc: un Eulero esplicito SCAVALCA per x > 1, OSCILLA per x > 2.
+# su `d0` lo stesso numero esiste da sempre (`_taup_cfl_max`, misurato 0.0354); su `peq` no.
+# stato di partenza: n = 4261, archi = 528331
+#
+# ⚠ OVERRIDE DICHIARATO della guardia di `carica_stato`: lo snapshot e' scritto dal blob
+#   git 26fa354d, il simulatore di oggi e' un altro. LA GUARDIA E' GIUSTA, e NON si aggira
+#   con `--db-cleanup`, che CANCELLA il `.pkl`. Si sblocca perche' `T1` e `T2` del sigillo
+#   hanno MISURATO il codice byte-identico, anche con la sonda ACCESA -- e lo sblocco e'
+#   CONDIZIONATO a quella prova: lo strumento LEGGE l'output del sigillo e rifiuta di
+#   partire se non dice `4/4`. La guardia e' ripristinata subito dopo il caricamento.
+
+passo |      max(x)      x>=1      x>=2 |      neg neg SOLO neg SOLO |     archi
+      |      cumul. in questo in questo | in questo  rilass.  diffus. | in questo
+--------------------------------------------------------------------------------------
+ 1081 |      0.8347         0         0 |        0        0        0 |    528331
+ 1082 |       1.069         3         0 |        0        0        0 |    528335
+ 1083 |       1.144         3         0 |        0        0        0 |    528344
+ 1084 |       1.144         3         0 |        0        0        0 |    528347
+ 1085 |       1.144         3         0 |        0        0        0 |    528351
+ 1086 |        1.15         4         0 |        0        0        0 |    528352
+ 1087 |        1.15         1         0 |        0        0        0 |    528352
+ 1088 |       1.155         4         0 |        0        0        0 |    528357
+ 1089 |       1.155         0         0 |        0        0        0 |    528357
+ 1090 |       1.155         4         0 |        0        0        0 |    528363
+ 1091 |       1.155         0         0 |        0        0        0 |    528363
+ 1092 |       1.159         4         0 |        0        0        0 |    528365
+ 1093 |       1.159         4         0 |        0        0        0 |    528366
+ 1094 |       1.166         4         0 |        0        0        0 |    528367
+ 1095 |       1.166         1         0 |        0        0        0 |    528367
+ 1096 |       1.172         4         0 |        0        0        0 |    528372
+ 1097 |       1.172         4         0 |        0        0        0 |    528376
+ 1098 |       1.172         4         0 |        0        0        0 |    528380
+ 1099 |       1.172         4         0 |        0        0        0 |    528381
+ 1100 |       1.172         0         0 |        0        0        0 |    528382
+ 1101 |       1.172         4         0 |        0        0        0 |    528384
+ 1102 |       1.178         4         0 |        0        0        0 |    528388
+ 1103 |       1.178         4         0 |        0        0        0 |    528389
+ 1104 |       1.184         4         0 |        0        0        0 |    528395
+ 1105 |       1.184         0         0 |        0        0        0 |    528395
+ 1106 |        1.19         5         0 |        0        0        0 |    528396
+ 1107 |       1.191         5         0 |        0        0        0 |    528397
+ 1108 |       1.193         5         0 |        0        0        0 |    528400
+ 1109 |       1.193         5         0 |        0        0        0 |    528403
+ 1110 |       1.193         5         0 |        0        0        0 |    528408
+ 1111 |       1.193         2         0 |        0        0        0 |    528408
+ 1112 |       1.199         5         0 |        0        0        0 |    528410
+ 1113 |       1.199         5         0 |        0        0        0 |    528413
+ 1114 |       1.199         0         0 |        0        0        0 |    528413
+ 1115 |         1.2         5         0 |        0        0        0 |    528416
+ 1116 |         1.2         4         0 |        0        0        0 |    528418
+ 1117 |         1.2         5         0 |        0        0        0 |    528423
+ 1118 |         1.2         4         0 |        0        0        0 |    528426
+ 1119 |         1.2         4         0 |        0        0        0 |    528430
+ 1120 |         1.2         0         0 |        0        0        0 |    528430
+ 1121 |       1.205         5         0 |        0        0        0 |    528430
+ 1122 |       1.208         5         0 |        0        0        0 |    528431
+ 1123 |       1.208         5         0 |        0        0        0 |    528434
+ 1124 |       1.208         5         0 |        0        0        0 |    528437
+ 1125 |       1.208         5         0 |        0        0        0 |    528441
+ 1126 |       1.208         5         0 |        2        3        0 |    528447
+
+*** FERMATO AL PASSO 1126 SENZA INTEGRARLO: nsub=22591 n1=22591 n2=1 n3=3 (ramo VERLET)
+    nsub = 22591, n1 = 22591, n2 = 1, n3 = 3
+
+L'ARCO PEGGIORE DI TUTTA LA FINESTRA -- il minimo ASSOLUTO di `peq` dopo l'aggiornamento:
+  arco 3352-506   al passo 46 della finestra   peq_dopo = -4.854207e-04
+    dt_e                 1.410604e-02
+    flusso               4.636598e-03
+    insieme              -4.854207e-04
+    peq_prima            1.060302e-02
+    rho                  1.321787e-03
+    solo_diffusione      1.066843e-02
+    solo_rilassamento    -5.508247e-04
+    tau_bg               1.173779e-02
+    x                    1.201763e+00
+
+  LETTURA, e la scrivo separando cio' che il numero DICE da cio' che non dice:
+    x = dt_e/tau_bg = 1.202  ->  SOPRA 1: l'Eulero SCAVALCA
+    solo rilassamento -> -5.508247e-04   (NEGATIVO)
+    solo diffusione   -> 1.066843e-02   (positivo)
+    insieme           -> -4.854207e-04   (NEGATIVO)
+
+TOTALI DI FINESTRA: 24305970 archi-scrittura in 46 passi, max(x) = 1.20803,
+  archi con x >= 1: 159   con x >= 2: 0   con peq < 0: 2

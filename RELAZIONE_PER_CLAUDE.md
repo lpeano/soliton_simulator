@@ -10396,3 +10396,56 @@ essere accese da un comando.
 tautologia — e con le shape uguali, **invisibile anche alla guardia delle shape**. Ora il paragone e'
 **`f94cd42`** col blob **verificato** `4954fe5b`: se non corrisponde, lo script **muore** invece di
 confrontare a caso.
+
+### ⑪ **I TRE NUMERI: e' UN ARCO, e' il RILASSAMENTO, e lo scavalcamento vale `x = 1.20`**
+
+> **CHECKPOINT 1 del MANDATO GLOBALE.** Misurati con `csv/_test_fork/_peq_dentro_1126.py`, sonda
+> **sigillata `4/4`**, e **senza integrare il passo**: `FERMA_DOPO_NSUB` ferma `step()` appena
+> calcolato `nsub`. **Due minuti invece dei 2032 secondi della rigiocata.**
+
+```
+*** FERMATO AL PASSO 1126 SENZA INTEGRARLO: nsub=22591 n1=22591 n2=1 n3=3 (ramo VERLET)
+```
+
+**① `max(dt_e/tau_bg_loc) = 1.208`** — `x >= 1` su **159** archi-scrittura, **`x >= 2` su ZERO**.
+> **Non e' una divergenza oscillante: e' UNO SCAVALCAMENTO SINGOLO.** Per `x > 2` l'Eulero
+> oscillerebbe amplificando; fra 1 e 2 **scavalca una volta e basta**. **E' il difetto piu' lieve
+> della famiglia, e produce comunque `nsub = 22 591`.**
+> *(Il gemello su `d0`, `_taup_cfl_max`, vale **`0.0354`**: **trentaquattro volte piu' al sicuro.**
+> Stesso codice, stessa forma, due grandezze — **e la guardia l'ha avuta solo una.**)*
+
+**② E' UN ARCO — due, su 528 447.** `peq < 0` su **2** archi al passo 1126, e su **ZERO** nei 45
+passi precedenti. **La domanda «uno o mille?» ha risposta: DUE.** Incidente puntuale, non deriva.
+
+**③ E' IL RILASSAMENTO**, dai controfattuali calcolati **a parte**:
+
+| termine, applicato da solo | esito |
+|---|---:|
+| **rilassamento** `(rho-peq)/tau_bg` | **`-5.508e-04`** ⬅ NEGATIVO |
+| diffusione `flusso/TAU_DIFF` | `+1.067e-02` *(positivo)* |
+| insieme *(il codice)* | `-4.854e-04` |
+
+> **La diffusione non e' colpevole: ATTENUA.** **La cura ① colpisce il termine giusto.**
+
+**IL DETTAGLIO RIBALTA IL RACCONTO DEL §⑦.**
+```
+arco 3352-506   peq_prima = 1.060302e-02   rho = 1.321787e-03
+                dt_e = 1.410604e-02        tau_bg = 1.173779e-02       x = 1.201763
+```
+**`peq` NON stava decadendo da 45 passi: valeva `1.06e-02`, un valore SANO** *(la mediana e'
+`8.2e-02`)*. **E' stato ribaltato in UN SOLO PASSO.** *(La discesa geometrica che avevo descritto
+esiste, ma e' su un ALTRO arco — `2773-4158` — e non e' il meccanismo.)*
+
+**IL CRITERIO ESATTO, derivato — e spiega i 159 contro 2:**
+```
+il segno si ribalta per   x > peq/(peq - rho) = 1/(1 - rho/peq)
+qui  rho/peq = 0.12466  ->  soglia 1.1425,  e  x = 1.2018 la supera
+```
+**`x > 1` e' NECESSARIO ma NON SUFFICIENTE:** serve anche che `rho` sia abbastanza sotto `peq`.
+
+**CONTROPROVA DELLA CURA ①, calcolata PRIMA di scriverla:**
+```
+peq_new = rho + (peq-rho)*exp(-x) = 1.3218e-3 + 9.2812e-3*0.300628 = +4.112e-03
+```
+**Positivo, e fra `rho` e `peq` come la convessita' impone. Su questo arco il picco non si
+formerebbe.** *(E' una PREVISIONE, e il sigillo `P5` la verifichera' sul passo vero.)*
