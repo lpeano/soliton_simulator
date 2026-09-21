@@ -9119,3 +9119,45 @@ acc = cs_arco^2 * lap  +  src  -  beta * vd
 > **`src` esplode quando `peq` degenera; `beta` si indebolisce quando `d` cresce.**
 > **Il terzo, `lap`, diffonde l'allungamento invece di opporvisi.**
 > **Nessuno dei tre e' misurato ancora: questo e' cio' che il CODICE dice, e la misura viene dopo.**
+
+---
+
+## `Z84` — **è `cs²·lap` che allunga, e `d`/`d0` sono un ANELLO** (2026-09-21)
+
+**Riscontro, relazionato nello stesso commit.** Strumentati i tre termini di
+`acc = cs²·lap + src − beta·vd`, separati e col segno. Sigillo `4/4`, `Z1` byte-identico a flag
+spento.
+
+```
+CHI DOMINA sull'arco 16-481, su 488 sotto-passi:
+   cs2*lap    409  (83.8 %)   ->  spinge VERSO L'ESTERNO
+   -beta*vd    79  (16.2 %)   ->  e' SEMPRE un freno
+   src          0  ( 0.0 %)   ->  MAI. `src` come motore e' REFUTATO
+```
+
+**IL MECCANISMO:** `lap` è il laplaciano di **`q = d − d0`**, l'ALLUNGAMENTO — non di `d`.
+**`lap > 0` vuol dire «i vicini sono più tesi di me»**, e `acc += cs²·lap` allunga finché non li
+raggiungo. **L'arco parte NON teso (`q ≈ 0`, `d = d0 = 0.738`) in un vicinato TESO, e viene tirato**
+con `cs²·lap = +3.73`.
+
+**⚠ E IL SEGNO SI RIBALTA QUANDO `d0` CROLLA:**
+```
+passo 70   d0 1.173   q 0.187   lap +2.25
+passo 80   d0 0.495   q 0.995   lap -0.92
+passo 110  d0 0.361   q 1.514   lap -3.03
+```
+> **Il crollo di `d0` rientra in `lap` e ne inverte la spinta. `d` e `d0` NON sono due problemi
+> separati: sono un ANELLO che si chiude dentro lo stesso passo.**
+> **E questo tocca `Z83`: curare la scala minima di `d0` cambierebbe anche `lap`, e l'effetto sul
+> numeratore non è prevedibile senza rimisurare.**
+
+**E IL FRENO SI INDEBOLISCE**, misurato: `beta` da **`1.740`** (passo 10, `d = 0.738`) a
+**`0.186`** (passo 110, `d = 1.875`) — **`9.4x`**. Era nella formula; ora è un numero.
+
+**⚠ E DI NUOVO POPOLAZIONE E ARCO SI CONTRADDICONO:** sulla popolazione `cs²·lap` ha mediana
+**negativa** (`−0.846 → −0.368`: il grosso si comprime), sull'arco è **positiva** per 70 passi.
+**Terza volta in due giorni che le due letture divergono, seconda in cui il riassunto da solo
+avrebbe dato la risposta sbagliata.**
+
+**LA DOMANDA CHE RESTA:** *perché il vicinato era già teso al passo 10?* **Non è misurato**, ed è
+il criterio di chiusura di `Z84`.
