@@ -10059,3 +10059,122 @@ corretta.**
    conservativa **e non spiega un fattore 22591.**
 
 **La 1 e' la piu' probabile, e non e' una conclusione: e' cio' che resta.**
+
+---
+
+## 2026-09-21 — **DA QUALE ISTANTE leggono `SCALA_MIN` e `COES_ADIM`, e dov'e' DAVVERO il picco**
+
+> **Referto completo: `doc/REFERTO_istanti_scala_min_coes_adim.md`. Registro: `Z90` corretta in
+> loco, `Z91` e `Z92` aperte.** Simulatore **`4954fe5b`** *(sha1 dei byte grezzi)*.
+> **Sola lettura del codice e di dati gia' su disco. Nessuna cura, nessuna modifica al simulatore.**
+
+### ① L'ESPLOSIONE NON ERA DOVE AVEVO SCRITTO, E LA PROVA CE L'AVEVO IN TRE POSTI
+
+Avevo scritto, in `Z90` e in `26adb95`, che *«l'esplosione e' DOPO il passo 1200 e nessuno snapshot
+la copre»*, e avevo costruito la rigiocata `1200 -> 1230` su quella premessa. **Falso.** Rilievo di
+Luca. **L'esplosione e' fra il 1110 e il 1200, e il run si e' ripreso DA SOLO.**
+
+**Tre prove, tutte da dati che erano gia' sul disco quando scrivevo il contrario:**
+
+1. **`stack_STOP_finale.txt` — catturato da me e mai letto.** Allo stop il processo era in
+   `rilassa_disegno` (`:4922`), cioe' **fuori dal ciclo dei sotto-passi**, mentre le tredici
+   catture precedenti erano in `_smorza`/`step`. **Avevo fatto un `grep` di `nsub`, non trovato
+   nulla, e tirato dritto: l'ASSENZA di quelle variabili diceva che il processo era altrove.**
+2. **I timestamp degli snapshot**, visti in ogni `ls`: `0960` alle `12:27`, `1080` alle `12:34`
+   — **sette minuti**, come ogni altro intervallo di 120 passi — e **`1200` alle `13:08`:
+   trentaquattro minuti, cinque volte tanto, e lo snapshot arriva.**
+3. **⚠ IL NUMERO CHE LO CHIUDE, dal contatore `_g_sm_d`** *(conta una chiamata a `_smorza` per
+   SOTTO-PASSO, quindi vale `nsub` per passo)*, letto dagli snapshot:
+
+   | intervallo | `_g_sm_d` | **`nsub` medio per passo** |
+   |---|---:|---:|
+   | 120 -> 600 | +1920 | **4.00** |
+   | 600 -> 960 | +1440 | **4.00** |
+   | 960 -> 1080 | +480 | **4.00** |
+   | **1080 -> 1200** | **+23613** | **196.8** |
+
+   **Per 1080 passi `nsub` e' inchiodato al pavimento `max(4, ...)`. Nei 120 passi fra 1080 e 1200
+   vale 197 in media, e poi il run prosegue.**
+
+**E IL PICCO NON E' UNICO — fatto nuovo.** La rigiocata dal 1200, catturata con `py-spy dump
+--locals` prima di fermarla, era al **passo 1252 con `n1 = nsub = 76948`** (`n2 = 1`, `n3 = 6`),
+**tre volte il 22591**, dopo aver attraversato i passi `1201-1251` con `n1 = 1` e `nsub = 6`.
+**Sono EPISODI RICORRENTI su un fondo tranquillo, non una divergenza monotona** — e cade con essi
+la conclusione *«i 315 frame restanti sono giorni»*.
+
+**E la rigiocata dal 1080, catturata al primo passo lento, dice il passo: `1126`, con
+`n1 = nsub = 22591`, `n2 = 1`, `n3 = 3` — esattamente il numero del run vero.** L'ARCO e' cio' che
+la tabella deve ancora dare.
+
+### ② `SCALA_MIN` FRENA OGNI SCRITTURA SEPARATAMENTE — quindi l'ordine conta, e c'e' un CRICCHETTO
+
+`_sd0` (`:3295-3299`) legge `self.d0` **dentro la chiamata**: mai una copia di inizio passo.
+Gli scrittori attivi sono **SEI per passo — misurato** (`_g_sm_d0`: `+720` su 120 passi = `6.000`
+esatte), e **ognuno legge il valore lasciato dal precedente.**
+
+**La dimostrazione, algebra esatta.** Due incrementi dello stesso passo, `a > 0` e `b < 0` con
+`a + b = 0`, da `x > LAM`:
+
+| come si applica | risultato |
+|---|---|
+| **una volta, sul totale** | `dx = 0` -> non e' discesa -> **`x` intatto, bias ZERO** |
+| separatamente, prima la salita | **`x + LAM*|b|/(x+a)`** |
+| separatamente, prima la discesa | **`x + LAM*|b|/x`** |
+
+**Tre risultati diversi per la stessa fisica, due dei quali maggiori di `x`.** Bias per passo
+`~= LAM * somma(|dx| sulle discese) / d0`, e **a `d0 ~ LAM` il fattore vale `0.036`: il 96 % di
+ogni discesa viene annullato mentre ogni salita passa intatta** — e `0.83` e' proprio il valore a
+cui `d0` resta inchiodato nei rami senza i flag.
+
+**⚠ E IL SIGILLO NON LO VEDE, senza che il sigillo sia sbagliato.** I contatori dicono
+`_g_sm_viol_id = 0`, `_g_sm_viol_giu = 0`, `_g_sm_patol = 0`, **`_g_sm_max_giu = -0`** su tutti e
+cinque gli snapshot: **una singola scrittura non spinge MAI verso l'alto.** Il bias vive nella
+**composizione** di sei, e **nessun criterio guarda la composizione** (`A9`).
+
+**Su `d` il freno gira `nsub` volte per passo** (`:4288`, dentro `for _ in range(nsub)` a `:4277`).
+**Derivato e non misurato per sito: un raffinamento puramente NUMERICO del passo moltiplica il bias
+FISICO verso l'alto.** Al picco il freno e' stato applicato **22 591 volte in un solo passo**
+invece di 4.
+
+### ③ `COES_ADIM` legge istanti MISTI, e il suo tetto e' GLOBALE — ma NON e' stato esercitato
+
+Nella stessa `tanh` (`:5291`) convivono `_forza_adim`, costruito su densita' di **fine `step`**
+(`:5232`, `:5242`, `:5244`), e **`richiamo_elastico` (`:5259`), che legge un `d0` gia' spostato da
+SETTE scritture** dello stesso passo.
+
+Il tetto `_passo_causale = LAM*sqrt(K_C)*DT` (`:5292`) e' costruito su **costanti di modulo**:
+`c_sistema = 1.1314`, contro un cono LOCALE piu' lento misurato a **`0.566`**. **Strutturalmente ne
+permette il doppio, e viola `A5`.** **Ma non e' stato esercitato:** `_g_coes_max = 0.00269725`
+**identico in tutti e cinque gli snapshot** (il **24 %** del tetto, il **48 %** del cono piu'
+lento), e **`_g_coes_satura = 0`** su `6.3e8` archi-scrittura. **Il difetto e' reale e DORMIENTE:
+va corretto perche' e' sbagliato, non perche' abbia prodotto questo.**
+
+**Cosa `COES_ADIM` cambia davvero, come LETTURA e non come causa:** il ramo vecchio (`:5314`) e'
+clippato a `tanh(|d-d0|/d0)*d0`, **un tetto che CRESCE con `d0`** — a `d0 = 30`, `d = 21` vale
+**`8.7`, cioe' 770 volte il tetto nuovo** — e il termine che lascia passare e' **negativo**
+(`richiamo_elastico = -36.5`): **tira `d0` giu'**.
+> **`COES_ADIM` non aggiunge una spinta: toglie un freno che cresceva insieme alla fuga.**
+> **⚠ NON E' MISURATO CHE PESI:** entrambi i rami sono moltiplicati per
+> `filtro_portata = 1-tanh(d/LAM)`, che a `d = 21` vale **`~1e-23`**: a grande `d` sono **entrambi
+> spenti**, e la differenza vive **solo sugli archi corti**.
+
+### ④ LA CURA CANDIDATA — derivata, NON applicata (il mandato vieta le cure)
+
+**Frenare `d0` una volta per passo, sulla variazione TOTALE, dal valore di INIZIO passo.**
+La prima riga della tabella del §② da' **bias zero esatto** e **non contiene l'ordine**: le salite e
+le discese dello stesso passo si compensano **prima** del freno. Per `d`, la stessa cura significa
+frenare **a fine `step`**, non dentro il ciclo dei sotto-passi — e toglie anche la dipendenza da
+`nsub`.
+**Prima di applicarla servono:** la **somma per scrittore** (rigiocate tracciate con `TRACCIA_D0`,
+separando SALITE e DISCESE), **un sigillo sulla COMPOSIZIONE** — oggi non esiste — e la
+**riduzione al limite** a variazione netta negativa.
+
+### ⑤ UN MIO ERRORE DI STRUMENTO, perche' vale come riscontro quanto gli altri
+
+La rigiocata ha girato **45 passi senza scrivere UNA riga**: la `W(...)` della tabella era finita
+**dentro un ramo `else:`**. L'ancora della sostituzione era `    W("%5d | ...` a **quattro** spazi,
+**sottostringa** della riga vera a **otto**: `count == 1` era soddisfatto, ma il match cadeva a
+offset 4 e il risultato aveva **dodici** spazi. `py_compile` passava.
+> **`P1-quater` va precisata: asserire che l'ancora sia UNICA non dice DOVE cade il match, se
+> l'ancora e' un frammento di riga. L'ancora dev'essere una RIGA INTERA, col suo `\n` iniziale.**
+Ora un controllo **sull'AST** verifica che la `W()` sia **figlia diretta del `for`**.
