@@ -951,6 +951,34 @@ PEQ_ESATTO = False      # IL RILASSAMENTO DI `peq` IN FORMA ESATTA (2026-09-21, 
                         #   piu' un SEGNO ma solo lo zero, e toglierlo richiede la forma
                         #   simmetrica, che e' UN'ALTRA cura e ha IL SUO POLO.
                         # OFF = byte-identico.
+COES_CAUSALE = False    # LA COESIONE CHE RISPETTA L'ISTANTE E IL CONO LOCALE (2026-09-21, C4).
+                        # DUE DIFETTI CURATI, entrambi misurati in `Z92`:
+                        #   (a) ISTANTI MISTI: nella stessa `tanh` convivono `_forza_adim`,
+                        #       costruito su densita' di FINE `step`, e `richiamo_elastico`,
+                        #       che legge un `d0` GIA' SPOSTATO DA SETTE SCRITTURE dello
+                        #       stesso passo. Due istanti in una somma.
+                        #   (b) TETTO GLOBALE: `LAM*sqrt(K_C)*DT` e' costruito su COSTANTI DI
+                        #       MODULO. `c_sistema = 1.1314` non conosce il cono del luogo in
+                        #       cui scrive, e il cono locale misurato scende fino a `0.566`:
+                        #       li' il tetto globale ne permette il DOPPIO (`A5`).
+                        # LA CURA:
+                        #   (a) `d0` e `d` si leggono dalla FOTOGRAFIA DI INIZIO PASSO, la
+                        #       stessa di `C3` -- una sola macchina, due utenti;
+                        #   (b) il tetto diventa `cs_arco * DT`, con `cs_arco` il piu' LENTO
+                        #       dei due nodi: la scelta CONSERVATIVA, e non e' un parametro
+                        #       perche' `_cs_nodo_prev` esiste gia'.
+                        # ⚠ COSA QUESTA CURA *NON* FA, e va detto: `I_nodi`, `I_arco` e
+                        #   `lap_arco` restano di FINE `step`. NON e' una svista: `psi` e' la
+                        #   stessa che `step()` ha appena committato, quindi **quelle tre sono
+                        #   gia' coerenti fra loro**; l'unico ingresso fuori istante era `d0`.
+                        #   Portare anche `psi` a inizio passo richiederebbe una fotografia PER
+                        #   NODO con la sua chirurgia, ed e' un'altra cura.
+                        # ⚠ E IL TETTO LOCALE NON E' SEMPRE PIU' STRETTO: col cono mediano
+                        #   (`cs ~ 1.65`) e' piu' LARGO di `c_sistema = 1.1314`. Il punto non e'
+                        #   stringere: e' che il tetto DEVE essere quello del LUOGO. Dove il
+                        #   cono e' lento stringe, dove e' veloce allarga -- ed e' causalita',
+                        #   non prudenza. **Si CONTA in quale verso agisce.**
+                        # OFF = byte-identico.
 SCALA_MIN_PASSO = False # IL FRENO UNA VOLTA PER PASSO, SULLA VARIAZIONE TOTALE (2026-09-21, C3).
                         # DIFETTO CURATO (`Z91`): `SCALA_MIN` frena OGNI SCRITTURA guardando il
                         #   valore lasciato dalla precedente NELLO STESSO PASSO -- sei scritture
@@ -3385,8 +3413,10 @@ class Rete:
     def _smp_apri(self):
         """[SCALA_MIN_PASSO] Fotografa `d0` a INIZIO PASSO. Da qui si misurera' la variazione
         TOTALE, una volta sola."""
-        if SCALA_MIN_PASSO:
+        # [C4] la stessa fotografia serve alla coesione causale: UNA macchina, DUE utenti.
+        if SCALA_MIN_PASSO or COES_CAUSALE:
             self._smp_d0 = np.array(self.d0, dtype=float, copy=True)
+            self._smp_d = np.array(self.d, dtype=float, copy=True)
             self._g_smp_aperture = getattr(self, '_g_smp_aperture', 0) + 1
 
     def _smp_chirurgia(self, keep=None, nuovi=None):
@@ -3398,14 +3428,18 @@ class Rete:
         Gli archi NATI nel passo entrano con il **proprio valore di nascita**: la loro
         variazione e' ZERO e non vengono frenati -- e' giusto, perche' una nascita non e' una
         discesa."""
-        if not SCALA_MIN_PASSO or getattr(self, '_smp_d0', None) is None:
+        if (not (SCALA_MIN_PASSO or COES_CAUSALE)
+                or getattr(self, '_smp_d0', None) is None):
             return
-        v = self._smp_d0
-        if keep is not None:
-            v = v[keep]
-        if nuovi is not None and len(nuovi):
-            v = np.concatenate([v, np.asarray(nuovi, dtype=float)])
-        self._smp_d0 = v
+        for _nome in ('_smp_d0', '_smp_d'):
+            v = getattr(self, _nome, None)
+            if v is None:
+                continue
+            if keep is not None:
+                v = v[keep]
+            if nuovi is not None and len(nuovi):
+                v = np.concatenate([v, np.asarray(nuovi, dtype=float)])
+            setattr(self, _nome, v)
         self._g_smp_chirurgie = getattr(self, '_g_smp_chirurgie', 0) + 1
 
     def _smp_chiudi(self):
@@ -3415,9 +3449,14 @@ class Rete:
         `dx = 0`, che NON e' una discesa: il valore resta **intatto**, e il bias e' **zero
         esatto**. Non contiene l'ordine delle leggi."""
         v = getattr(self, '_smp_d0', None)
-        if not SCALA_MIN_PASSO or v is None:
+        # ⚠ la fotografia si CHIUDE sempre (anche se serve solo a `C4`), senno' resterebbe
+        #   aperta e il passo dopo leggerebbe quella del passo prima. Ma si FRENA solo con `C3`.
+        if v is None:
             return
         self._smp_d0 = None
+        self._smp_d = None
+        if not SCALA_MIN_PASSO:
+            return
         if len(v) != len(self.d0):
             # NON si frena a caso su lunghezze diverse: si CONTA e si lascia stare.
             self._g_smp_disallineati = getattr(self, '_g_smp_disallineati', 0) + 1
@@ -5568,7 +5607,25 @@ class Rete:
             I_arco = 0.5 * (I_nodi[ii[mask]] + I_nodi[jj[mask]])
             I_med = max(float(np.mean(I_nodi)), 1e-9)
             
-            rapporto_portata = self.d[mask] / LAM
+            # [COES_CAUSALE, C4] `d` e `d0` dall'ISTANTE DI INIZIO PASSO. Il fallback e'
+            #   CONTATO, non silenzioso: se la fotografia manca o ha la lunghezza sbagliata si
+            #   usa il valore corrente e si REGISTRA, invece di far finta di niente (`P5`).
+            _cc_d, _cc_d0 = self.d, self.d0
+            if COES_CAUSALE:
+                _f_d = getattr(self, '_smp_d', None)
+                _f_d0 = getattr(self, '_smp_d0', None)
+                self._g_cc_tot = getattr(self, '_g_cc_tot', 0) + 1
+                if (_f_d is not None and _f_d0 is not None
+                        and len(_f_d) == len(self.d) and len(_f_d0) == len(self.d0)):
+                    _cc_d, _cc_d0 = _f_d, _f_d0
+                    self._g_cc_usi = getattr(self, '_g_cc_usi', 0) + 1
+                    self._g_cc_scarto_d0 = max(
+                        getattr(self, '_g_cc_scarto_d0', 0.0),
+                        float(np.max(np.abs(np.asarray(self.d0, dtype=float) - _f_d0))))
+                else:
+                    self._g_cc_salti = getattr(self, '_g_cc_salti', 0) + 1
+                    self._g_cc_shape = (-1 if _f_d0 is None else len(_f_d0), len(self.d0))
+            rapporto_portata = _cc_d[mask] / LAM
             filtro_portata = 1.0 - np.tanh(rapporto_portata)
             
             scala_statale = (CS_M ** 2) / I_med
@@ -5581,7 +5638,9 @@ class Rete:
             
             # 2. Ancora elastica verso la scala nativa LAM (potenziale armonico di richiamo)
             # Penalizza lo scostamento di d0 dalla lunghezza d'onda fondamentale LAM
-            scostamento_scala = (self.d0[mask] - LAM) / LAM
+            # [C4] il richiamo elastico e' l'ingresso che stava FUORI ISTANTE: leggeva un
+            #   `d0` gia' spostato da SETTE scritture dello stesso passo.
+            scostamento_scala = (_cc_d0[mask] - LAM) / LAM
             richiamo_elastico = -scostamento_scala
             
             # Composizione della coesione totale con il bilancio elastico
@@ -5613,10 +5672,53 @@ class Rete:
                 # IL TETTO CAUSALE, ricalcolato in loco e NON preso dalla variabile di sopra,
                 # che sta dentro un `if`: usarla sarebbe dipendere da un ramo. Stessa
                 # espressione dei due siti fratelli (la spinta e la gravita').
-                _passo_causale = LAM * np.sqrt(K_C) * DT
+                # [COES_CAUSALE, C4] IL TETTO DAL CONO LOCALE DELL'ARCO.
+                #   `LAM*sqrt(K_C)*DT` e' costruito su COSTANTI DI MODULO: `c_sistema = 1.1314`
+                #   non conosce il cono del luogo in cui scrive, e il cono locale misurato
+                #   scende fino a `0.566` -- li' il tetto globale ne permette il DOPPIO (`A5`).
+                #   Si prende il `cs` del nodo PIU' LENTO dei due: la scelta CONSERVATIVA.
+                #   ⚠ NON e' sempre piu' stretto: col cono mediano e' piu' LARGO. Il punto non
+                #   e' stringere, e' che il tetto sia quello del LUOGO -- e si CONTA in quale
+                #   verso agisce, invece di sperare che stringa.
+                if COES_CAUSALE:
+                    _csn = getattr(self, '_cs_nodo_prev', None)
+                    self._g_cct_tot = getattr(self, '_g_cct_tot', 0) + 1
+                    if _csn is not None and len(_csn) >= self.n:
+                        _csa = np.minimum(np.asarray(_csn, dtype=float)[ii[mask]],
+                                          np.asarray(_csn, dtype=float)[jj[mask]])
+                        self._g_cct_usi = getattr(self, '_g_cct_usi', 0) + 1
+                    else:
+                        # fallback DICHIARATO e CONTATO: senza `--cs-dinamico` la cache non
+                        # esiste, e il cono e' quello nominale.
+                        _csa = np.full(int(np.sum(mask)), float(CS_M))
+                        self._g_cct_salti = getattr(self, '_g_cct_salti', 0) + 1
+                    _passo_causale = _csa * DT
+                    _glob = LAM * np.sqrt(K_C) * DT
+                    self._g_cct_stringe = (getattr(self, '_g_cct_stringe', 0)
+                                           + int(np.sum(_passo_causale < _glob)))
+                    self._g_cct_allarga = (getattr(self, '_g_cct_allarga', 0)
+                                           + int(np.sum(_passo_causale > _glob)))
+                    self._g_cct_archi = (getattr(self, '_g_cct_archi', 0)
+                                         + int(len(_passo_causale)))
+                    self._g_cct_min = min(getattr(self, '_g_cct_min', float('inf')),
+                                          float(np.min(_passo_causale)))
+                else:
+                    _passo_causale = LAM * np.sqrt(K_C) * DT
                 _delta_coes = _passo_causale * _F_adim
+                if COES_CAUSALE:
+                    # [C4] IL CRITERIO, contato invece che sperato: nessuno spostamento piu'
+                    #   veloce del cono LOCALE. `|F_adim| <= 1` per costruzione, quindi la
+                    #   violazione dovrebbe essere IMPOSSIBILE -- e proprio per questo va
+                    #   CONTATA: un invariante che nessuno misura non e' un invariante (`A9`).
+                    self._g_cct_viol = (getattr(self, '_g_cct_viol', 0)
+                                        + int(np.sum(np.abs(_delta_coes)
+                                                     > _passo_causale * (1.0 + 1e-12))))
+                    _rap = np.abs(_delta_coes) / np.maximum(_passo_causale, 1e-300)
+                    self._g_cct_rapmax = max(getattr(self, '_g_cct_rapmax', 0.0),
+                                             float(np.max(_rap)) if len(_rap) else 0.0)
                 self._g_coes_adim_usi = getattr(self, '_g_coes_adim_usi', 0) + 1
-                self._g_coes_tetto = float(_passo_causale)
+                self._g_coes_tetto = float(np.min(_passo_causale)) \
+                    if np.ndim(_passo_causale) else float(_passo_causale)
                 self._g_coes_max = max(getattr(self, '_g_coes_max', 0.0),
                                        float(np.max(np.abs(_delta_coes)))
                                        if len(_delta_coes) else 0.0)
@@ -6769,7 +6871,7 @@ def _applica_flag(a):
     global TAU_LUCE, RUMORE_COLORATO
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
-    global PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO
+    global PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO, COES_CAUSALE
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, SCALA_MIN, COES_ADIM, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
@@ -6837,6 +6939,7 @@ def _applica_flag(a):
     PEQ_ESATTO = bool(getattr(a, "peq_esatto", False))             # rilassamento esatto di peq (C1)
     PEQ_NASCITA_LOCALE = bool(getattr(a, "peq_nascita_locale", False))  # nascita locale di peq (C2)
     SCALA_MIN_PASSO = bool(getattr(a, "scala_min_passo", False))   # freno una volta per passo (C3)
+    COES_CAUSALE = bool(getattr(a, "coes_causale", False))         # coesione causale (C4)
     CHI_COOP = bool(getattr(a, "chi_coop", False))                 # cooperazione: chi_basc -> perc_geom, spinore -> perc_chi
     if CHI_DA_SPINORE and not SPINORE_CORRETTO:
         raise SystemExit("[errore] --chi-da-spinore richiede --spinore-corretto (senno' loop di feedback perc_chi->spinore->perc_chi)")
@@ -6853,6 +6956,14 @@ def _applica_flag(a):
               "DISCESA -- incremento >= 0 intatto bit per bit, incremento < 0 moltiplicato per "
               "max(0, 1-LAM/x). I sette pavimenti di d0 SPARISCONO; le nascite partono da LAM; "
               "per d la regola va sull incremento del Verlet. Zero coefficienti.")
+    if COES_CAUSALE:
+        print("[coes-causale] LA COESIONE RISPETTA L'ISTANTE E IL CONO LOCALE: `d0` e `d` si "
+              "leggono dalla fotografia di INIZIO PASSO invece che da un `d0` gia' spostato da "
+              "sette scritture, e il tetto e' `cs_arco*DT` col `cs` del nodo PIU' LENTO invece "
+              "di `LAM*sqrt(K_C)*DT`, che e' costruito su costanti di modulo e non conosce il "
+              "cono del luogo (A5). Zero parametri: `_cs_nodo_prev` esiste gia'. NB: il tetto "
+              "locale non e' sempre piu' stretto -- dove il cono e' veloce ALLARGA -- ed e' "
+              "causalita', non prudenza.")
     if SCALA_MIN_PASSO:
         print("[scala-min-passo] IL FRENO UNA VOLTA PER PASSO: le sei scritture di `d0` e i "
               "sotto-passi di `d` NON frenano piu'; a fine passo si applica `_smorza` UNA "
@@ -7369,6 +7480,13 @@ def _cli():
                         "LOCALE dell'arco invece che su I_med (media globale, A2), e lo spostamento e' "
                         "passo_causale * tanh(...) * filtro_portata, con |F| <= 1 per costruzione invece "
                         "che per clip. Sostituisce il clip tanh(stress)*d0. Default off = byte-identico.")
+    p.add_argument("--coes-causale", action="store_true", dest="coes_causale",
+                   help="LA COESIONE CHE RISPETTA L'ISTANTE E IL CONO LOCALE: d0 e d si leggono "
+                        "dalla fotografia di INIZIO PASSO (prima erano MISTI: densita' di fine "
+                        "step sommata a un d0 gia' spostato da sette scritture), e il tetto "
+                        "diventa cs_arco*DT col cs del nodo PIU' LENTO invece di LAM*sqrt(K_C)*DT, "
+                        "che e' costruito su costanti di modulo e non conosce il cono del luogo "
+                        "(A5). Zero parametri. Default off = byte-identico.")
     p.add_argument("--scala-min-passo", action="store_true", dest="scala_min_passo",
                    help="IL FRENO DELLA SCALA MINIMA UNA VOLTA PER PASSO, sulla VARIAZIONE "
                         "TOTALE di d0 e di d, dal valore di INIZIO passo. Le sei scritture di d0 "
