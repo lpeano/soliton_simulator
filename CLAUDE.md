@@ -142,6 +142,21 @@ fine giornata»*. Recuperare a sera significa che per tutto il giorno il repo ha
 quello che si sapeva. **Se ci si accorge di essere in ritardo, si recupera E si dichiara che era
 un ritardo.**
 
+**P1-bis-bis — OGNI MESSAGGIO A LUCA FINISCE CON `PUSHATO: <hash>`.**
+**Decisione di Luca, 2026-09-21.** L'ultima riga di **ogni** messaggio e':
+```
+PUSHATO: <hash>        (oppure: NIENTE DA PUSHARE, e il perche')
+```
+**L'hash e' quello del commit che contiene CIO' CHE SI E' APPENA DETTO.**
+**Se non c'e' un hash, quello che si e' detto per Claude web NON ESISTE.**
+**Nessun «appena finisce, committo».**
+**PERCHE' E' UNA RIGA E NON UNA NOTA:** il hook `commit-msg` di `P1-bis` guarda **i file toccati**,
+non la chat — **sulla forma allargata non puo' impedire nulla** (`A9`). **Questa riga e' il presidio
+che Luca vede a colpo d'occhio**, e un messaggio che ne e' privo si riconosce senza leggere il resto.
+**NON e' un automatismo e va detto cosi':** e' un obbligo di forma, verificabile dal destinatario,
+non dal sistema.
+
+
 **P1-ter — UNA TABELLA DI NUMERI SI GENERA DA CODICE, MAI SI RICOPIA A MANO.**
 Ogni tabella in un commit, in un referto o nel registro **si produce con uno script che legge il
 file di dati, e se ne incolla l'output**. **Ricopiare a mano e' un'operazione senza presidio.**
