@@ -75,6 +75,9 @@ if "--lavoro" in sys.argv:
     nan_altrove = 0          # Q5
     scarti = []              # Q6: dispersione DOPO la calibrazione, un valore per evento
     disp_nascita = []        # Q6: dispersione ALLA NASCITA, un valore per evento
+    uguali_med = 0           # Q6 ramo SPENTO: quanti valori sono ESATTAMENTE la mediana
+    tot_nati = 0             # Q6: su quanti archi di Schwinger
+    ident_male = 0           # controprova: eventi in cui gli archi non sono 2 per antinodo
     pend = None
     prec_nc = 0
     for _f in range(PASSI // int(S.PASSI_PER_FRAME)):
@@ -100,9 +103,20 @@ if "--lavoro" in sys.argv:
             prec_nc = getattr(net, "_g_nati_schwinger", 0)
             if nc > 0:
                 p = np.asarray(net.peq)
-                k = np.arange(len(p) - 2 * nc, len(p))          # gli archi di Schwinger
+                # ⚠ GLI ARCHI DI SCHWINGER SI IDENTIFICANO DAGLI ANTINODI, NON DALLA POSIZIONE.
+                #   La prima versione prendeva «gli ultimi `2*nc`» e sbagliava in 1 evento su 17
+                #   (`nasc_zero = 0.9412` invece di `1.0`): un'assunzione sull'ORDINE degli
+                #   append, non un fatto. Gli antinodi sono gli ULTIMI `nc` NODI (`k = self.n +
+                #   arange(nc)` nel blocco Schwinger) e ciascuno ha ESATTAMENTE due archi.
+                anti = np.arange(net.n - nc, net.n)
+                ii_, jj_ = np.asarray(net.i), np.asarray(net.j)
+                msk = np.isin(ii_, anti) | np.isin(jj_, anti)
+                k = np.where(msk)[0]
                 nan_dopo_mitosi += int(np.sum(~np.isfinite(p[k])))
                 attesi += int(2 * nc)
+                # la controprova dell'identificazione: due archi per antinodo, ne' uno di piu'
+                if len(k) != 2 * nc:
+                    ident_male += 1
                 # ⚠ LA DISPERSIONE ALLA NASCITA, misurata NELL'ISTANTE GIUSTO: subito dopo la
                 #   `mitosi()`, PRIMA che il rilassamento di `:4206` muova qualunque cosa.
                 #   A legge GLOBALE vale ZERO ESATTO (un solo numero per tutti); a legge LOCALE
@@ -111,6 +125,9 @@ if "--lavoro" in sys.argv:
                     _m = float(np.nanmedian(p))
                     if _m > 0:
                         disp_nascita.append(float(np.std(p[k])) / _m)
+                    # e il criterio DIRETTO del ramo SPENTO: il valore E' la mediana, per tutti
+                    uguali_med += int(np.sum(p[k] == _m))
+                    tot_nati += int(len(k))
                 for nome in PULITI:
                     x = np.asarray(getattr(net, nome, np.zeros(0)), dtype=float)
                     nan_altrove += int(np.sum(~np.isfinite(x)))
@@ -120,11 +137,15 @@ if "--lavoro" in sys.argv:
     sc = np.asarray(scarti) if scarti else np.zeros(0)
     dn = np.asarray(disp_nascita) if disp_nascita else np.zeros(0)
     print("C2 eventi=%d attesi=%d nan_mitosi=%d nan_residui=%d nan_altrove=%d "
-          "n_ev=%d disp_dopo=%.6e n_nasc=%d disp_nascita=%.6e nasc_zero=%.4f"
+          "n_ev=%d disp_dopo=%.6e n_nasc=%d disp_nascita=%.6e nasc_zero=%.4f "
+          "uguali_med=%d tot_nati=%d ident_male=%d cal=%d uguali_rho=%d vs_med=%d scarto_max=%.6e"
           % (getattr(net, "_g_nati_schwinger_ev", 0), attesi, nan_dopo_mitosi, nan_residui,
              nan_altrove, len(sc), float(np.median(sc)) if len(sc) else -1.0,
              len(dn), float(np.median(dn)) if len(dn) else -1.0,
-             float(np.mean(dn == 0.0)) if len(dn) else -1.0))
+             float(np.mean(dn == 0.0)) if len(dn) else -1.0,
+             uguali_med, tot_nati, ident_male,
+             getattr(net, "_g_peqn_cal", 0), getattr(net, "_g_peqn_uguali_rho", 0),
+             getattr(net, "_g_peqn_vs_med", 0), getattr(net, "_g_peqn_scarto_max", -1.0)))
     raise SystemExit(0)
 
 
@@ -142,13 +163,19 @@ def leggi(out):
     import re
     m = re.search(r"C2 eventi=(\d+) attesi=(\d+) nan_mitosi=(\d+) nan_residui=(\d+) "
                   r"nan_altrove=(\d+) n_ev=(\d+) disp_dopo=(\S+) n_nasc=(\d+) "
-                  r"disp_nascita=(\S+) nasc_zero=(\S+)", out)
+                  r"disp_nascita=(\S+) nasc_zero=(\S+) uguali_med=(\d+) tot_nati=(\d+) "
+                  r"ident_male=(\d+) cal=(\d+) uguali_rho=(\d+) vs_med=(\d+) scarto_max=(\S+)",
+                  out)
     if not m:
         raise SystemExit("output del lavoratore non riconosciuto:\n%s" % out[-800:])
     return dict(eventi=int(m.group(1)), attesi=int(m.group(2)), nan_mit=int(m.group(3)),
                 nan_res=int(m.group(4)), nan_alt=int(m.group(5)), n_sc=int(m.group(6)),
                 disp_dopo=float(m.group(7)), n_nasc=int(m.group(8)),
-                disp_nasc=float(m.group(9)), nasc_zero=float(m.group(10)))
+                disp_nasc=float(m.group(9)), nasc_zero=float(m.group(10)),
+                ug_med=int(m.group(11)), tot_nati=int(m.group(12)),
+                ident_male=int(m.group(13)), cal=int(m.group(14)),
+                ug_rho=int(m.group(15)), vs_med=int(m.group(16)),
+                scarto_max=float(m.group(17)))
 
 
 def main():
@@ -222,14 +249,33 @@ def main():
     #     globale -> UN SOLO numero per TUTTI gli archi dell'evento -> dispersione ZERO ESATTO
     #     locale  -> UN numero CIASCUNO                             -> dispersione PIENA
     #   e si misura ALLA NASCITA per il ramo spento, DOPO LA CALIBRAZIONE per quello acceso.
-    ok6 = (B_["nasc_zero"] == 1.0 and B_["n_nasc"] > 0
-           and C_["disp_dopo"] > 100.0 * max(B_["disp_dopo"], 1e-12))
+    # ⚠⚠ E LA SECONDA VERSIONE ERA **VUOTA** -- rilievo di Luca, ed e' esatto.
+    #   Diceva *«a flag acceso la dispersione dev'essere >= 100 volte quella a flag spento»*, ma a
+    #   flag spento quella dispersione **e' ZERO ESATTO alla nascita**: `100 * 0 = 0`, quindi
+    #   **sarebbe passata con QUALUNQUE valore, anche nullo.** Un criterio che non puo' fallire
+    #   non e' un criterio.
+    #   ⚠ E nel giro in cui e' stata provata NON ha fallito per quel motivo: il confronto usava la
+    #     dispersione DOPO UN PASSO (`2.434e-01`), non quella alla nascita. **Era vuota in linea di
+    #     principio e fuorviante in pratica: due difetti, non uno.**
+    #
+    # LA TERZA VERSIONE E' DIRETTA, e misura quello che la cura DICHIARA:
+    #   ACCESO  -> ogni arco di Schwinger passa dalla legge LOCALE (`cal == attesi`), il valore
+    #              assegnato E' la `rho` del PROPRIO arco (`uguali_rho == cal`, uguaglianza
+    #              ESATTA, misurata NEL punto di calibrazione), e DIFFERISCE dalla mediana
+    #              globale (`vs_med == cal`);
+    #   SPENTO  -> il valore E' la mediana globale, su TUTTI gli archi (`ug_med == tot_nati`).
+    # Nessun fattore scelto, nessuna soglia: sono uguaglianze e conteggi.
+    ok6 = (C_["cal"] == C_["attesi"] and C_["attesi"] > 0
+           and C_["ug_rho"] == C_["cal"] and C_["vs_med"] == C_["cal"]
+           and B_["tot_nati"] > 0 and B_["ug_med"] == B_["tot_nati"]
+           and B_["cal"] == 0 and C_["ident_male"] == 0 and B_["ident_male"] == 0)
     esiti.append(("Q6", ok6,
-                  "UN NUMERO PER TUTTI contro UNO CIASCUNO -- dispersione relativa fra gli archi "
-                  "dello STESSO evento: SPENTO alla nascita %.3e su %d eventi (frazione a ZERO "
-                  "ESATTO: %.4f), dopo un passo %.3e; ACCESO dopo la calibrazione %.3e -> x%.0f"
-                  % (B_["disp_nasc"], B_["n_nasc"], B_["nasc_zero"], B_["disp_dopo"],
-                     C_["disp_dopo"], C_["disp_dopo"] / max(B_["disp_dopo"], 1e-12))))
+                  "DIRETTO -- ACCESO: calibrati LOCALMENTE %d su %d attesi, di cui %d uguali alla "
+                  "`rho` del PROPRIO arco e %d DIVERSI dalla mediana globale (scarto max %.3e). "
+                  "SPENTO: %d su %d valori uguali alla MEDIANA. Identificazione sbagliata in %d+%d "
+                  "eventi (deve essere 0)."
+                  % (C_["cal"], C_["attesi"], C_["ug_rho"], C_["vs_med"], C_["scarto_max"],
+                     B_["ug_med"], B_["tot_nati"], C_["ident_male"], B_["ident_male"])))
 
     print("-" * 94)
     for nome, ok, testo in esiti:

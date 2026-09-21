@@ -4336,6 +4336,27 @@ class Rete:
 
         nuovi = np.isnan(self.peq)
         if nuevos := nuovi.any(): self.peq[nuovi] = rho[nuovi]
+        # [PEQ_NASCITA_LOCALE, C2] IL CONTATORE STA QUI, E NON ALTROVE, PERCHE' QUESTO E' L'ISTANTE
+        # in cui la legge di nascita si applica. Dopo, il rilassamento di `:4206` muove tutto e la
+        # domanda «ha preso la `rho` del PROPRIO arco?» non e' piu' osservabile dall'esterno.
+        # ⚠ `_g_peqn_cal` da solo sarebbe TAUTOLOGICO (`peq[nuovi] = rho[nuovi]` e' la riga stessa).
+        #   Il numero che CONTA e' `_g_peqn_vs_med`: quanti di quei valori sono DIVERSI dalla
+        #   mediana globale, cioe' quante volte la legge locale ha dato un risultato che la legge
+        #   globale NON avrebbe dato. Se fossero zero, la cura sarebbe indistinguibile.
+        if PEQ_NASCITA_LOCALE and nuevos:
+            _vec = np.asarray(self.peq, dtype=float)
+            _mask_v = ~nuovi
+            _med_g = float(np.median(_vec[_mask_v])) if np.any(_mask_v) else 0.0
+            _assegn = np.asarray(rho, dtype=float)[nuovi]
+            self._g_peqn_cal = getattr(self, '_g_peqn_cal', 0) + int(nuovi.sum())
+            self._g_peqn_vs_med = (getattr(self, '_g_peqn_vs_med', 0)
+                                   + int(np.sum(_assegn != _med_g)))
+            self._g_peqn_uguali_rho = (getattr(self, '_g_peqn_uguali_rho', 0)
+                                       + int(np.sum(_vec[nuovi] == _assegn)))
+            if _med_g > 0 and len(_assegn):
+                self._g_peqn_scarto_max = max(
+                    getattr(self, '_g_peqn_scarto_max', 0.0),
+                    float(np.max(np.abs(_assegn - _med_g) / _med_g)))
 
         # --- VUOTO DI SFONDO LOCALE, che DIFFONDE sulla topologia (Legge I) ---
         den_w = np.maximum(np.bincount(i, w, minlength=self.n) +
