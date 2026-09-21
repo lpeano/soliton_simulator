@@ -15,8 +15,10 @@
 | **`C3 SCALA_MIN_PASSO`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_scala_min_passo_2026-09-21.txt` · `Z97` |
 | **`C4 COES_CAUSALE`** | ✅ **sigillo `5/5`** | `csv/_seal_fork/_sigillo_coes_causale_2026-09-21.txt` · `Z98` |
 | **`C1-bis ANOM_SIMM`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_anom_simm_2026-09-21.txt` · `Z99` |
-| **`C5 INVARIANTI`** | ⏳ **IN CORSO -- e' il prossimo** | mandato `C5` |
-| **validazione 600 passi** | ⏸ **CHECKPOINT 2: ci si FERMA** | — |
+| **`C5 INVARIANTI`** | ⏳ **sigillo in corso** *(`I2` paga il passo 1126 per intero: ~34 min)* | `csv/_seal_fork/_sigillo_invarianti_2026-09-21.txt` |
+| **il DRIVER inoltra le cure** | ✅ **sigillo dei flag `3/3`**, 9 opzioni su 9 in entrambi i versi | `csv/_seal_fork/_sigillo_flag_driver.py` |
+| **strumento delle LETTURE** | ✅ criteri fissati PRIMA, tabella generata da codice | `csv/_test_fork/_letture_validazione.py` |
+| **validazione 600 passi** | ⏸ **CHECKPOINT 2: ci si FERMA** | il comando e' al punto ④ |
 
 ## COME SI RIPARTE — **i comandi esatti, verbatim**
 
@@ -40,16 +42,17 @@ python csv/_seal_fork/_sigillo_peq_nascita.py
 python csv/_test_fork/_peq_dentro_1126.py --da=1080 --fino=1126
 ```
 
-**④ LA VALIDAZIONE, QUANDO SI ARRIVERA' — e va lanciata COSI', con l'archivio a SERIE**
+**④ LA VALIDAZIONE — il comando ESATTO, e il driver ORA inoltra le cure** *(sigillo `3/3`)*
 **⚠ Senza `--serie` NON E' RIPRENDIBILE**, e un riavvio la farebbe ricominciare da zero.
 ```
-python csv/_test_fork/_scena_video.py 600 csv/_test_fork/_val600 --sep=4.0 --serie=20 ^
-  --csv-progresso=csv/_test_fork/_val600/prog.csv ^
-  --chi-basc=on --chi-coop=on --scala-min=on --coes-adim=on
+python csv/_test_fork/_scena_video.py 100 csv/_test_fork/_val600 --sep=4.0 --serie=20 --chi-basc=on --chi-coop=on --scala-min=off --coes-adim=on --peq-esatto=on --peq-nascita-locale=on --scala-min-passo=on --coes-causale=on --anom-simm=on --invarianti=on --csv-progresso=csv/_test_fork/_val600/prog.csv
 ```
-**⚠ LE OPZIONI DELLE CURE NON SONO ANCORA CABLATE NEL DRIVER** *(`C1`-`C4` hanno i flag nel
-simulatore ma il driver non li inoltra)*: **prima della validazione va fatto, e il sigillo dei flag
-del driver lo verifica da solo** — `python csv/_seal_fork/_sigillo_flag_driver.py`.
+**`100` frame x `6` passi = `600` passi.** **`--scala-min=off` perche' `SCALA_MIN_PASSO` lo
+SOSTITUISCE** *(precedenza dichiarata: col nuovo acceso, il freno per-scrittura diventa passante)*.
+**Le letture si generano poi con:**
+```
+python csv/_test_fork/_letture_validazione.py --dir=csv/_test_fork/_val600
+```
 
 **⑤ SE LA VALIDAZIONE ERA IN CORSO AL RIAVVIO — si RIPRENDE, non si rilancia**
 ```
