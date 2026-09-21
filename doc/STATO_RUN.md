@@ -697,3 +697,12 @@ ramo B (chi_basc OFF):
 - **note** §1 del mandato, SECONDO run: K = SOLO COES_ADIM (SCALA_MIN SPENTO), 300 passi. Il run S ha gia' ESCLUSO il cricchetto da solo: con SCALA_MIN acceso e COES_ADIM spento, med d0 resta ~0.80 piatto. LETTURA FISSATA PRIMA: se d0 scappa in K -> e' il CONTRAPPESO PERSO di COES_ADIM; se non scappa nemmeno in K -> e' l'INTERAZIONE fra i due, e va detto cosi'. Uno alla volta.
 
 **chiuso 2026-09-21 15:20:16 — FINITO** 50 frame = 300 passi, 20.711 s/frame, 5 snapshot su 5, 0 falliti, 0.18 GB. RISULTATO: d0 in K CRESCE ma piano -- da 0.9728 a 1.3124, cioe' x1.35 su 300 passi -- mentre in S resta piatto (x0.91) e in D scappa (x15 su 1080 passi, e gia' a 2.02 al passo 120 quando K e' a 0.997). NESSUNO DEI DUE FLAG DA SOLO RIPRODUCE LA FUGA: e' l'INTERAZIONE, ed e' la terza possibilita' fissata PRIMA. E K ha d/d0 ~1.2, il piu' vicino alla trasparenza fra tutte le configurazioni, ma con 71114 archi sotto LAM perche' SCALA_MIN e' spento.
+
+## APERTO validazione-600
+
+- **avvio** `2026-09-21 21:10:40` · **blob** `f2628c16 (git) / 9557a867 (byte grezzi)` · **HEAD** `92fe29e`
+- **comando**
+  ```
+  python csv/_test_fork/_scena_video.py 100 csv/_test_fork/_val600 --sep=4.0 --serie=20 --chi-basc=on --chi-coop=on --scala-min=off --coes-adim=on --peq-esatto=on --peq-nascita-locale=on --scala-min-passo=on --coes-causale=on --anom-simm=on --invarianti=on --csv-progresso=csv/_test_fork/_val600/prog.csv
+  ```
+- **note** VALIDAZIONE delle SEI cure (C1, C2, C3, C4, C1-bis, C5) + le tre modifiche di epoca 2. 600 passi, sep=4.0, stesso seme, invarianti ACCESI, archivio a SERIE ogni 20 frame (RIPRENDIBILE: il PC si riavvia fra mezzanotte e le due). --scala-min=off perche' SCALA_MIN_PASSO lo SOSTITUISCE. CHECKPOINT 2: a run finito ci si FERMA e si aspetta Luca.
