@@ -1,0 +1,25 @@
+[TIMBRO] _sigillo_peq_esatto.py  sha1-BYTE c3e67f56  committato e pulito
+sim PRIMA (bbeb9f3): sha1 GREZZO 3b9e75bf
+sim SUL DISCO      : sha1 GREZZO d972a517
+
+P1  braccio A (prima della cura) e B (disco, flag SPENTO)...
+P3  braccio C (disco, flag ACCESO)...
+P5a stesso stato, cura accesa SOLO al passo 1126...
+P5b finestra intera a cura ACCESA...
+
+------------------------------------------------------------------------------------------
+P1    PASS flag SPENTO = prima della cura: 12 campi -> BYTE-IDENTICI
+P2    PASS riduzione al limite: scarto/x^2 = ['0.36281', '0.37375', '0.37488', '0.37499']  (atteso |p-r|/2 = 0.3750) -> l'ESPONENTE e' 2
+P4    PASS CONTROLLO POSITIVO x=1.5: Eulero -> -0.5000 (NEGATIVO), esatto -> +0.2231 (positivo)
+P3    PASS run col flag ACCESO: min(peq) = 0.000000e+00, usi = 30, peq<0 = 0, bersaglio<0 = 0
+P3b   PASS CONTROLLO POSITIVO sul flag: ACCESO vs SPENTO differiscono su 12 campi
+P5a   PASS passo 1126: nsub = 4 (era 22591), min(peq) = 3.4057e-09, salvati dall'Eulero = 2
+P5b   PASS passo 1126: nsub = 4 (era 22591), min(peq) = 8.7132e-09, salvati dall'Eulero = 1
+------------------------------------------------------------------------------------------
+SIGILLO PEQ_ESATTO: 7/7
+
+VERDETTO: la cura C1 e' INERTE a flag spento, si riduce all'Eulero come O(x^2),
+  tiene `peq >= 0`, NON e' codice morto, e SUL PASSO VERO il picco NON SI FORMA.
+
+LIMITI: UN seme, UNA scena. P3 gira 30 passi; P5 una sola finestra del ramo D.
+  Prova che la cura fa cio' che dichiara, NON che la fisica risultante sia migliore.

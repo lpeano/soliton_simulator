@@ -10449,3 +10449,45 @@ peq_new = rho + (peq-rho)*exp(-x) = 1.3218e-3 + 9.2812e-3*0.300628 = +4.112e-03
 ```
 **Positivo, e fra `rho` e `peq` come la convessita' impone. Su questo arco il picco non si
 formerebbe.** *(E' una PREVISIONE, e il sigillo `P5` la verifichera' sul passo vero.)*
+
+### ⑫ **CURA `C1` -- `PEQ_ESATTO`, sigillata `7/7`. Sul passo vero: `nsub = 4` invece di `22591`**
+
+> Simulatore **`3b9e75bf` -> `d972a517`** *(sha1 dei byte grezzi)*, flag `--peq-esatto`, **spento di
+> default**. Sigillo `csv/_seal_fork/_sigillo_peq_esatto.py`.
+
+**LA FORMA, DERIVATA e non scelta.** Da `dpeq/dt = (rho-peq)/tau` con `rho` e `tau` costanti sul
+passo — **l'ipotesi che l'Eulero gia' fa** — la soluzione e' **esatta**:
+```
+peq <- rho + (peq - rho) * exp(-dt/tau)
+```
+**Positivita' DIMOSTRATA:** `peq_new = a*peq + (1-a)*rho` con `a = exp(-dt/tau)` in `(0,1]` e' una
+**combinazione convessa**, quindi `min(peq,rho) <= peq_new <= max(peq,rho)` **per qualunque `dt`**.
+**Zero coefficienti nuovi:** e' la forma che il **par.4 gia' impone** ai rilassamenti di primo
+ordine — **e a `peq` non era applicata.**
+La **diffusione** usa uno **splitting di Lie-Trotter**, col punto fisso `peq+flusso`, che vale in
+**entrambi** i rami di `DIFF_RES`. L'ordine di accuratezza resta **1**, come oggi.
+
+| | esito |
+|---|---|
+| **P1** | flag SPENTO = prima della cura: **12 campi byte-identici** |
+| **P2** | `scarto/x^2` = `0.36281, 0.37375, 0.37488, 0.37499` contro `|p-r|/2 = 0.3750` -> **l'esponente e' 2** |
+| **P4** | controllo positivo a `x = 1.5`: Eulero **`-0.5000`**, esatto **`+0.2231`** |
+| **P3** | run col flag acceso: **`min(peq) = 0.0`**, `peq<0` **zero**, bersaglio negativo **zero** |
+| **P3b** | acceso vs spento differiscono su **12 campi**: **non e' codice morto** |
+| **P5a** | **il passo 1126 vero, SULLO STESSO STATO: `nsub = 4` contro `22591`** |
+| **P5b** | finestra intera a cura accesa: **`nsub = 4`**, `min(peq) = 8.71e-09`, nessun picco nuovo |
+
+> **`P2` misura l'ESPONENTE, non l'ampiezza**, ed e' il punto: *«piccolo»* non e' un criterio,
+> l'esponente si'.
+> **E il contatore cablato `_g_peqx_salvati` vale `2` in `P5a`** — **esattamente i DUE archi che
+> `Z94` aveva contato andare sotto zero, con uno strumento DIVERSO.** Due misure indipendenti, lo
+> stesso numero.
+
+**⚠ COSA NON FA:** **non toglie il pavimento `max(peq,1e-9)`.** Con `peq >= 0` garantito quel
+pavimento non regolarizza piu' un **segno** ma solo lo **zero**; toglierlo richiede la forma
+simmetrica, che e' **un'altra cura e ha il suo polo**.
+**⚠ LIMITI:** un seme, una scena; `P3` 30 passi, `P5` **una sola finestra**. Prova che la cura **fa
+cio' che dichiara**, **non** che la fisica risultante sia migliore: quello lo dira' la validazione a
+600 passi. **E `DIFF_RES != 0` resta scoperto** — li' il bersaglio della diffusione puo' essere
+negativo e la dimostrazione non vale. Oggi vale `0.0` ovunque, **e il caso e' CONTATO**
+(`_g_peqx_bers_neg`, misurato **0**) invece che assunto.
