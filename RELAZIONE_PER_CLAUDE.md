@@ -9214,3 +9214,51 @@ proprio della massa»*: l'oggetto **fondamentale**.
 ### E manca un pezzo operativo
 **Il driver non sa passare il flag**: `--chi-da-spinore` **non esiste** in `_scena_video.py`.
 Serve l'opzione nominale col suo sigillo di byte-identità a default, come per `--chi-basc=on|off`.
+
+---
+
+## `Z85` — **i lettori di `perc_chi`: UN punto per la torsione, e CINQUE fuori tabella** (2026-09-21)
+
+**Riscontro, relazionato nello stesso commit. Lettura del codice, ZERO run.** Simulatore
+`b46835bd`; **i flag sono letti A RUNTIME** con l'argv del ramo A, non dedotti dai default.
+
+### Il fatto che decide il disegno del ramo C
+
+Con **`CHI_CORE = True`** (il ramo A) **tutta la catena della torsione passa da
+`chiralita_core_locale()`**, e le letture dirette di `perc_chi` sono rami `else` **irraggiungibili**:
+
+| sito | con `CHI_CORE=True` |
+|---|---|
+| `:2388-2395` `_passo_spinoriale` | chiama la funzione; l'`else` `perc_chi[:n]` **non gira** — contato `A8`, **0 salti su 12** |
+| `:3763` `FRAME_DRAG` | chiama la funzione |
+| `:3894` `TORS_4PI` | usa `_chi_core_nodi`, **la cache scritta a `:1600` dalla stessa funzione** |
+| `:3766` `VERSO_CHI`, `:3772` | `elif` **irraggiungibili** |
+
+> **E dentro `chiralita_core_locale()` la lettura è UNA: `:1574`.**
+> **Dirottare `:1574` su `perc_geom` dirotta l'INTERA catena — un punto, non quattro**, ed è
+> esattamente ciò che `Z2` misura.
+
+### ⚠ Cinque lettori fuori dalla tabella del mandato — **non assegnati, riportati**
+
+| sito | gate | **ramo A** | cosa fa |
+|---|---|---|---|
+| `:622` `scuoti_vuoto` | `CALORE_VETTORIALE` | **OFF** (`--calore-scal`) | firma antichirale del calcio termico |
+| `:2099` `_allaccia` | `COMPAT_CHI` | **OFF** | allaccia **solo** archi fra chiralità opposte |
+| `:2731` `_passo_spinoriale` | `OROLOGIO_SEGNO` | **OFF** | verso dell'orologio de Broglie |
+| **`:4493` `mitosi`** | **`REGIME=="deterministico"`** | **⚠ ACCESO** | calcio di fase **antisimmetrico** ai due figli |
+| `:1878` | — | diagnostico | già refutato (`Z70`) |
+
+**Tre sono spenti** ⟹ la loro assegnazione è **byte-inerte in questo run**. **Resta `:4493`, ed è
+l'unico su cui la decisione cambia i numeri adesso.**
+
+### ⚠ E `:4493` è vivo mentre il suo stesso commento dice il contrario
+
+`:4489` chiama l'altro ramo *«REGIME STOCASTICO (canonico, validato) … **DEFAULT**»*. **È falso:**
+`:115` dice `REGIME = "deterministico"`, e **letto a runtime con l'argv del ramo A vale
+`'deterministico'`** (`KICK_TW = 0.35`). **Verificato dall'esecuzione, non dal commento** (par.0).
+
+### La scelta di struttura che ho già preso, e la dichiaro
+
+I tre rami `else` (`:2395`, `:3772`, `:3898`) **vanno dirottati lo stesso**, benché irraggiungibili:
+hanno lo stesso ruolo semantico, e lasciarli su `perc_chi` significherebbe che il giorno in cui
+`CHI_CORE` si spegne **la geometria tornerebbe a leggere la carica in silenzio**.
