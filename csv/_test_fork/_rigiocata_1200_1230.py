@@ -83,9 +83,18 @@ def main():
          "arco candidato 2773-4158", "nati piu' giovani (eta | I | ramp)"))
     W("-" * 190 + "\n")
 
+    # ⚠ IL CICLO DEV'ESSERE QUELLO DEL DRIVER, E LA PRIMA VERSIONE NON LO ERA.
+    #   Il driver (`:35-37`) e la rigiocata gia' sigillata (`_rigiocata_0_120.py:188-192`) chiamano
+    #   `passo_test()` UNA VOLTA OGNI `PASSI_PER_FRAME` passi -- *«una volta per frame: fa avanzare
+    #   le fasi»*. **Io non lo chiamavo**, quindi la rigiocata NON ERA FEDELE e i suoi numeri non
+    #   erano confrontabili col run vero. Trovato leggendo la rigiocata sigillata, non dai numeri:
+    #   quelli sembravano ragionevoli.
+    PPF = int(S.PASSI_PER_FRAME)
     fermato = None
     for k in range(1, MAX_PASSI + 1):
         passo = 1200 + k
+        if (k - 1) % PPF == 0:
+            S.passo_test()
         S.scuoti_vuoto(net)
         net.step()
         n = net.n
