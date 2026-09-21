@@ -157,8 +157,8 @@ S._NMASSE_VIDEO["size"] = None
 
 print("\n  FLAG ATTIVI, letti dal MODULO dopo `_applica_flag` (P6: dai dati, non dal comando):")
 for f in ("CAMPO_SPINORIALE", "SPINORE_VIVO", "SPINORE_CORRETTO", "CHI_CORE", "CS_DINAMICO",
-          "TAU_LUCE", "CHI_BASC", "FORK_SU2", "FORK_SU2_MEM", "STEP2_OROLOGIO", "SPIN_FEEDBACK",
-          "CALORE_VETTORIALE", "PLAST_DIN", "VERLET", "TAU_LOC"):
+          "TAU_LUCE", "CHI_BASC", "CHI_COOP", "FORK_SU2", "FORK_SU2_MEM", "STEP2_OROLOGIO",
+          "SPIN_FEEDBACK", "CALORE_VETTORIALE", "PLAST_DIN", "VERLET", "TAU_LOC"):
     print("    %-20s %s" % (f, getattr(S, f, "ASSENTE")))
 print("  PASSI_PER_FRAME = %s   DT = %s   TAU_A = %s   N_c(collasso) = %d"
       % (S.PASSI_PER_FRAME, S.DT, S.TAU_A, int(S.massa_critica_collasso())))
