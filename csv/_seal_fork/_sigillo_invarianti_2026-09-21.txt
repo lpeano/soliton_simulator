@@ -1,0 +1,23 @@
+[TIMBRO] _sigillo_invarianti.py  sha1-BYTE a2cdd5b0  committato e pulito
+sim PRIMA (46cc471): sha1 GREZZO 80ebcbc9
+sim SUL DISCO      : sha1 GREZZO 9557a867
+
+braccio A (prima di C5)...
+braccio B (disco, invarianti OFF)...
+braccio C (disco, invarianti ON)...
+
+I2  il caso di oggi: ramo D, passo 1126, SENZA PEQ_ESATTO...
+
+--------------------------------------------------------------------------------------------------------
+I1   PASS ACCESI = SPENTI su 12 campi -> BYTE-IDENTICI; e = prima di C5 -> BYTE-IDENTICI. COSTO MISURATO: 61.666 s contro 61.533 s su 18 passi, cioe' +0.2% -- e 42 grandezze controllate a ogni passo
+I2   PASS CONTROLLO POSITIVO: SCATTATO al passo 1126 su `peq`, arco `2809-506`, 2 valori -- E' ESATTAMENTE L'ERRORE DI OGGI, e il programma si sarebbe fermato LI'. I DUE archi negativi che `Z94` aveva contato CONDIVIDONO IL NODO 506, e l'invariante nomina il PRIMO per indice, non quello di |anom| massimo: sono due domande diverse
+I3   PASS COMPLETEZZA: 42 grandezze ARRAY nello snapshot, 42 nel registro DOMINI, MANCANTI: NESSUNA
+--------------------------------------------------------------------------------------------------------
+SIGILLO INVARIANTI: 3/3
+
+VERDETTO: gli invarianti LEGGONO SOLTANTO, coprono OGNI grandezza di stato, e
+  AVREBBERO PRESO L'ERRORE DI OGGI al passo esatto e sull'arco esatto.
+
+LIMITI: UN seme, UNA scena, 18 passi per `I1`. E `I4` (la scatola nera si rigioca) e
+  `I5` (la tabella degli underflow per RIGA) NON sono qui, e non fingo che lo siano:
+  sono LAVORO RESIDUO dichiarato nel registro.

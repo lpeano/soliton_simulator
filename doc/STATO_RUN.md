@@ -1,7 +1,7 @@
 <!-- PUNTO-DI-RIPRESA:INIZIO -->
 # ⚠⚠ PUNTO DI RIPRESA — **si legge PER PRIMO dopo un riavvio**
 
-> **Aggiornato 2026-09-21 21:15 · HEAD `691b7e9` · branch `fork-su2`, tutto committato e pushato.**
+> **Aggiornato 2026-09-21 22:30 · HEAD `5188756` · branch `fork-su2`, tutto committato e pushato.**
 > **Il PC si riavvia fra mezzanotte e le due** *(vincolo di Luca, 2026-09-21)*. **Questo blocco e'
 > RIGENERATO per intero a ogni aggiornamento**, fra due marcatori HTML: non si accumulano versioni
 > e non c'e' niente da cancellare a mano.
@@ -16,11 +16,12 @@
 | **`C3 SCALA_MIN_PASSO`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_scala_min_passo_2026-09-21.txt` · `Z97` |
 | **`C4 COES_CAUSALE`** | ✅ **sigillo `5/5`** | `csv/_seal_fork/_sigillo_coes_causale_2026-09-21.txt` · `Z98` |
 | **`C1-bis ANOM_SIMM`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_anom_simm_2026-09-21.txt` · `Z99` |
-| **`C5 INVARIANTI`** | ✅ codice + `I1` e `I3` PASS; **`I2` rigirato** *(il primo criterio pretendeva l'arco sbagliato)* | `csv/_seal_fork/_sigillo_invarianti_2026-09-21.txt` |
+| **`C5 INVARIANTI`** | ✅ **sigillo `3/3`** | `csv/_seal_fork/_sigillo_invarianti_2026-09-21.txt` · `Z100` |
 | **il DRIVER inoltra le cure** | ✅ **sigillo dei flag `3/3`**, 9 opzioni su 9 in entrambi i versi | `csv/_seal_fork/_sigillo_flag_driver.py` |
 | **strumento delle LETTURE** | ✅ criteri fissati PRIMA, tabella generata da codice | `csv/_test_fork/_letture_validazione.py` |
-| **validazione 600 passi** | ▶ **IN CORSO dalle 21:14**, ~17.7 s/frame, 100 frame | `csv/_test_fork/_val600/log.txt` · `prog.csv` · voce in `STATO_RUN` |
-| **CHECKPOINT 2** | ⏸ **QUI CI SI FERMA e si aspetta Luca** | — |
+| **validazione 600 passi** | ✅ **FINITA**: 6 criteri su 8 REGGONO. `nsub` max = **4**, `peq >= 0`, zero sotto `LAM`, zero violazioni. **NON reggono `d0` (esponenziale, x1.232 per snapshot) e `d/d0` (0.69-0.84 = COMPRESSIONE)** | `csv/_test_fork/_val600/LETTURE.txt` · `Z101` |
+| **CHECKPOINT 2** | ⚠ **RAGGIUNTO: si aspetta LUCA. IL RUN LUNGO NON SI LANCIA** | — |
+| **il prossimo giro** | ⏸ **la fuga di `d0`: `S09`/`S10`** *(auto-amplificanti, mai misurati PER SITO)* | `Z101`, e il mandato globale §6 li aveva esclusi da questo giro |
 
 ## COME SI RIPARTE — **i comandi esatti, verbatim**
 
@@ -721,3 +722,5 @@ ramo B (chi_basc OFF):
   python csv/_test_fork/_scena_video.py 100 csv/_test_fork/_val600 --sep=4.0 --serie=20 --chi-basc=on --chi-coop=on --scala-min=off --coes-adim=on --peq-esatto=on --peq-nascita-locale=on --scala-min-passo=on --coes-causale=on --anom-simm=on --invarianti=on --csv-progresso=csv/_test_fork/_val600/prog.csv
   ```
 - **note** VALIDAZIONE delle SEI cure (C1, C2, C3, C4, C1-bis, C5) + le tre modifiche di epoca 2. 600 passi, sep=4.0, stesso seme, invarianti ACCESI, archivio a SERIE ogni 20 frame (RIPRENDIBILE: il PC si riavvia fra mezzanotte e le due). --scala-min=off perche' SCALA_MIN_PASSO lo SOSTITUISCE. CHECKPOINT 2: a run finito ci si FERMA e si aspetta Luca.
+
+**chiuso 2026-09-21 22:30:54 — FINITO** 600 passi completati in 2100.5 s (21.0 s/frame). 5 snapshot, 0.18 GB, 0 falliti. SEI criteri su OTTO REGGONO: nsub massimo 4 (il pavimento, contro 22591 del ramo D), peq >= 0 sempre (min 2.04e-07), zero archi sotto LAM, ZERO violazioni di dominio, stress finito 7.87, coesione al massimo al 23.8% del cono locale. NON REGGONO: d0 scappa ancora (med d0 da 1.4150 a 3.3180, rapporto COSTANTE 1.2320 = ESPONENZIALE) e d/d0 sta fra 0.69 e 0.84, cioe' COMPRESSIONE. I due criteri che cadono NON sono quelli che le cure dovevano curare: la fuga di d0 e' il fronte S09/S10, escluso da questo giro dal mandato globale. IL RUN LUNGO NON SI LANCIA. I dati servono: sono la base del prossimo giro.

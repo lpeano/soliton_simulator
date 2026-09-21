@@ -10623,3 +10623,45 @@ vuoto su vuoto *(legittimo)*, `rho+peq < 0` e' il polo. **Sommarli nasconderebbe
 **esattamente `2/2.1`**. **Il numero era gia' la prova che il codice era giusto, e l'ho letto come
 un fallimento.** *(Quinta volta oggi che un FAIL e' del criterio e non della cura: `Q6` due volte,
 `R3`, `R5`, `U3`.)*
+
+### ⑰ **CHECKPOINT 2 -- la validazione a 600 passi: `6` criteri su `8`**
+
+> **Sei cure accese** *(`C1`, `C2`, `C3`, `C4`, `C1-bis`, `C5`)*, 600 passi, `sep = 4.0`, stesso
+> seme, **invarianti ACCESI**, archivio a serie. Tabella **generata da codice**, criteri fissati
+> **prima** di vedere i numeri. **Nessun confronto con le epoche precedenti.**
+
+**CIO' CHE LE CURE DOVEVANO CURARE, E' CURATO:**
+
+| criterio | esito | |
+|---|---|---|
+| nessun picco di `nsub` | **REGGE** | **massimo `4`, cioe' IL PAVIMENTO** — contro `22 591` del ramo D |
+| `peq >= 0` sempre | **REGGE** | minimo `2.0436e-07` |
+| nessun arco sotto `LAM` | **REGGE** | `0` archi, `min(d) = 0.800000` |
+| invarianti mai scattati | **REGGE** | `0` violazioni di dominio |
+| stress finito | **REGGE** | massimo `7.87` |
+| tetto di `COES_CAUSALE` | **REGGE** | tocca al massimo il **`23.8 %`** del cono locale |
+
+**CIO' CHE NON REGGE, ED E' IL PROBLEMA VECCHIO:**
+
+| criterio | esito | |
+|---|---|---|
+| **`d0` NON scappa** | **NON REGGE** | `med d0` da `1.4150` a `3.3180`, **rapporto COSTANTE `1.2320`** fra snapshot |
+| **`d/d0` vicino a 1** | **NON REGGE** | fra **`0.69` e `0.84`**: **COMPRESSIONE**, non trasparenza |
+
+> **⚠ I due criteri che cadono NON sono quelli che le cure dovevano curare.** Le sei cure
+> riguardano `peq`, il cricchetto della scala minima, l'istante e il cono della coesione, e il
+> pavimento dell'anomalia. **La fuga di `d0` e' un fronte SEPARATO e gia' a registro**, e il
+> mandato globale §6 lo aveva **escluso esplicitamente da questo giro**: **`S09`** *(la spinta
+> moltiplicata per `median(d0)`)* e **`S10`** *(la gravita', idem)* sono **auto-amplificanti per
+> costruzione** e **non sono mai stati misurati per sito**.
+>
+> **⚠ E un numero da non leggere male:** un rapporto **costante** e' crescita **esponenziale**,
+> **non accelerazione**. E' lo stesso errore gia' preso oggi su `med d`.
+
+**Un numero interessante:** il termine di coesione tocca al massimo il **`23.8 %`** del cono locale,
+mentre nella prova a 24 passi arrivava al **`92.7 %`**. **Su archi piu' maturi sta molto piu'
+lontano dal tetto** — il che ridimensiona, ma non annulla, la sorveglianza che Luca ha chiesto.
+**E resta vero che e' un MASSIMO: quanto spesso ci si avvicini non e' misurabile senza i contatori
+a bucket, che non esistono.**
+
+**IL RUN LUNGO NON SI LANCIA**, come il mandato impone quando qualcosa non regge.
