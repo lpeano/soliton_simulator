@@ -9972,3 +9972,35 @@ K  (solo COES_ADIM)  d/d0 ~  1.21    la piu' vicina, ma non 1
 D  (tutti e due)     d/d0 -> 0.82    COMPRESSIONE
 ```
 **Il criterio `d/d0 ~ 1` fallisce in TUTTE E QUATTRO, e in DUE VERSI OPPOSTI.**
+
+---
+
+## 🔮 IPOTESI SULL'INTERAZIONE — **registrata PRIMA di misurarla**
+
+**Proposta da Luca dopo l'esito di `K`.** **Non e' ancora un riscontro: e' una previsione, e sta
+qui perche' una previsione scritta DOPO la misura non e' una previsione.**
+
+> **Il cricchetto di `SCALA_MIN` diventa decisivo SOLO quando manca il contrappeso.**
+
+| run | il contrappeso verso il BASSO | il freno sulle discese | esito su `d0` |
+|---|---|---|---|
+| **S** | **`S12`, la vecchia coesione: FORTE** | c'e' | **vince comunque: `d0` piatta** |
+| **K** | `COES_ADIM`: **debole** *(`0.0027`/passo)* | **assente** | **cresce piano** |
+| **D** | `COES_ADIM`: **debole** | **c'e'** | **le discese deboli sono ANCHE frenate -> `d0` schizza** |
+
+**Il meccanismo quantitativo:** il fattore `max(0, 1 - LAM/x)` **vicino a `LAM` e' minuscolo** — con
+`d0 ~ 0.9` vale `1 - 0.8/0.9 = 0.11`, cioe' **una discesa passa per un DECIMO**, mentre **le salite
+passano INTERE**. **E il sistema vive proprio li' all'inizio.**
+
+**FIRMA ATTESA, fissata ORA:** **il salto di `d0` e' concentrato nei primi ~100 passi di D**, e
+nella rigiocata tracciata **`Σ(dx_eff − dx)` domina all'inizio**.
+
+**COME SI VERIFICA:** rigiocata tracciata di **D**, **S** e **K** dalla semina per **120 passi**,
+con la somma per scrittore **separata in SALITE e DISCESE** e **`Σ(dx_eff − dx)` per passo**.
+
+> **⚠ E se la firma non c'e' — se il salto non e' nei primi 100 passi, o se la lunghezza iniettata
+> dal freno e' trascurabile — l'ipotesi CADE**, e va detto invece di raffinarla. *(E' il presidio
+> dell'ipotesi che rigenera la propria scusa, par.9.)*
+
+**Il cricchetto NON era sbagliato:** il run S lo ha escluso **come causa da solo**, e questa ipotesi
+dice **perche' quell'esclusione non lo assolve**.
