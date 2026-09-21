@@ -9547,3 +9547,40 @@ D che sta girando.
 ### E cosa resta aperto
 **I `1755 MB` di `.pkl` senza comando in inventario (`Z89`) restano un fronte anche ora:
 spostarli li CONSERVA, non li DOCUMENTA.**
+
+---
+
+## 🗃 In coda: **ARCHIVIO A ROTAZIONE** — voce `8-bis` (2026-09-21)
+
+**Non e' un riscontro: e' lavoro MESSO IN CODA**, e sta qui perche' chi legge il repository deve
+saperlo **prima** che accada. **Condizione d'avvio: il ramo D e' FINITO** — driver, presidi e
+simulatore sono **in uso da lui**, e finche' gira non si toccano.
+
+### Lo schema, e il rischio che risolve
+**`E:` e' exFAT ed ESTERNO: niente journaling, e puo' staccarsi.** Scriverci un run vivo espone a
+una **scrittura interrotta**, che su un file system senza journal puo' rovinare **il file system**,
+non solo un file.
+
+```
+1. il run scrive lo snapshot su C:  (.tmp -> os.replace)   <- scrittura sicura, NTFS fisso
+2. SOLO quando il file e' COMPLETO entra in coda di spedizione
+3. copia su E:\soliton_archivio\, stessa struttura di cartelle
+4. sha1 dei byte COMPRESSI, originale contro copia   (nessuna decompressione)
+5. solo se coincide -> si cancella la copia locale
+6. se non coincide, o E: non c'e' -> NON si cancella, resta in coda, si riprova
+```
+
+> **`E:` riceve solo file GIA' CHIUSI.** Se si disconnette durante una copia, **si rovina al
+> massimo quella copia**: l'originale e' ancora su `C:`.
+
+### Le tre cose che si sbaglierebbero piu' facilmente, annotate ORA
+- **quanti snapshot restano in locale va DERIVATO** da cio' che serve a `--riprendi` e alla
+  rigiocata, **non scelto a occhio**;
+- **se `E:` manca, il run CONTINUA.** La spedizione e' un **servizio accessorio**: non deve mai
+  fermare ne' rallentare un run, e va cablata come tale — **non come dipendenza**;
+- **il costo per frame si MISURA** (`R5`), non si assume. Lo spostamento manuale di oggi e'
+  costato **`+0.45 %`**, **ma girava UNA volta a run avviato**; la rotazione gira **a ogni
+  snapshot**, ed e' un'altra cosa.
+
+**Sigillo previsto `R1`-`R5`**, con `R3` che simula `E:` assente e `R4` che verifica che **un file
+ancora `.tmp` non venga MAI spedito**.
