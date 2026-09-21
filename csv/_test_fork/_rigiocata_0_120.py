@@ -58,6 +58,7 @@ DT, CS_M = 0.01, 2.0        # dichiarati, per `n3`
 # SEMPRE False, la rigiocata girava senza traccia, e NIENTE lo segnalava: il sigillo interno
 # passava lo stesso, perche' senza traccia la fisica e' identica per costruzione.
 TRACCIA = "--traccia" in sys.argv
+TRACCIA_VD = "--traccia-vd" in sys.argv
 
 # ---- l'argv del RAMO B, copiato dal driver (senza `--chi-basc`)
 sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", "3", "--sep", "4.0",
@@ -77,6 +78,11 @@ if TRACCIA:
         raise SystemExit("questo simulatore non ha TRACCIA_D0")
     S.TRACCIA_D0 = True
     print("TRACCIA_D0 = True   (19 siti strumentati)")
+if TRACCIA_VD:
+    if not hasattr(S, "TRACCIA_VD"):
+        raise SystemExit("questo simulatore non ha TRACCIA_VD")
+    S.TRACCIA_VD = True
+    print("TRACCIA_VD = True   (i tre termini di `acc`, separati)")
 
 a = S._cli()
 S._applica_regime(a)
@@ -325,6 +331,52 @@ def main():
         tot = sum(v["n_archi"] for v in cl); sat = sum(v["sat"] for v in cl)
         print("")
         print("  SATURI su TUTTI i campioni: %d su %d = %.2f %%" % (sat, tot, 100.0 * sat / max(tot, 1)))
+
+    # ---- CHI SPINGE `d`: i tre termini di `acc`, separati
+    if TRACCIA_VD:
+        vl = getattr(net, "_traccia_vd_log", [])
+        if not vl:
+            raise SystemExit("*** --traccia-vd chiesto ma il log e' VUOTO. Non pubblico numeri "
+                             "che non ho. ***")
+        print("")
+        print("=" * 124)
+        print("CHI SPINGE `d` -- i TRE termini di `acc = cs^2*lap + src - beta*vd`, SEPARATI e col SEGNO")
+        print("=" * 124)
+        print("  RIASSUNTO sugli archi dei cinque nodi (mediane col segno, e massimi in valore assoluto)")
+        print("  %-6s %12s %12s %12s | %11s %11s %11s" %
+              ("passo", "cs2*lap p50", "src p50", "-beta*vd p50",
+               "|cs2lap|max", "|src|max", "|betavd|max"))
+        for v in vl:
+            if v["passo"] % 10:
+                continue
+            print("  %-6d %12.4e %12.4e %12.4e | %11.4e %11.4e %11.4e" %
+                  (v["passo"], v["lap_p50"], v["src_p50"], v["bet_p50"],
+                   v["lap_max"], v["src_max"], v["bet_max"]))
+        print("")
+        print("  DETTAGLIO sull'arco 16-481 (cercato per COPPIA DI NODI):")
+        print("  %-6s %12s %12s %12s | %9s %9s %9s %9s" %
+              ("passo", "cs2*lap", "src", "-beta*vd", "d", "d0", "vd", "beta"))
+        _n = 0
+        for v in vl:
+            t = v.get("16-481")
+            if not t or v["passo"] % 10:
+                continue
+            _n += 1
+            print("  %-6d %12.4e %12.4e %12.4e | %9.4g %9.4g %9.4g %9.4g" %
+                  (v["passo"], t[0], t[1], t[2], t[3], t[4], t[5], t[6]))
+        if not _n:
+            raise SystemExit("*** la tabella per-arco e' VUOTA. Non pubblico una tabella vuota. ***")
+        # CHI DOMINA, contato invece che guardato a occhio
+        vinc = {"cs2*lap": 0, "src": 0, "-beta*vd": 0}
+        for v in vl:
+            t = v.get("16-481")
+            if not t:
+                continue
+            a = [abs(t[0]), abs(t[1]), abs(t[2])]
+            vinc[["cs2*lap", "src", "-beta*vd"][a.index(max(a))]] += 1
+        tot = sum(vinc.values())
+        print("")
+        print("  CHI DOMINA sull'arco, passo per passo (su %d passi): %s" % (tot, vinc))
 
     # ---- IL SIGILLO INTERNO [BLOCCANTE]  (= `Z3` del mandato quando TRACCIA e' acceso)
     print("")

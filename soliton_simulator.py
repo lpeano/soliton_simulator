@@ -156,6 +156,13 @@ LAM_BASE = 0.8   # lunghezza d'onda del solitone fondamentale (~2 lunghezze di P
 #   produce esattamente un profilo a scatti. Per loro si registra QUANTI ARCHI HA TAGLIATO e il
 #   VALORE del pavimento -- che NON e' una costante: `_floor_d0` e' COMOVENTE, `f*median(d0)`.
 TRACCIA_D0 = False
+# [TRACCIA_VD, 2026-09-21] I TRE TERMINI DI `acc` SEPARATI, COL SEGNO. OFF di default.
+# ⚠ PERCHE': imporre `d0 >= LAM` limita lo stress a `d_max/LAM - 1`, e nel ramo B al passo 360
+#   vale ancora `185` perche' `d_max = 149`. La cura ferma il DENOMINATORE; il NUMERATORE cresce.
+#   La domanda «chi spinge `d`» non era mai stata posta.
+# ⚠ SI REGISTRANO I TRE TERMINI SEPARATI E NON LA LORO SOMMA: la somma e' `acc`, che si vedrebbe
+#   gia' da `vd`. La domanda e' la RIPARTIZIONE.
+TRACCIA_VD = False
 TRACCIA_D0_COPPIE = ((16, 481),)          # dettaglio PIENO: le coppie di nodi seguite una per una
 TRACCIA_D0_NODI = (16, 481, 621, 627, 837)  # riassunto: tutti gli archi di questi nodi
 # COARSE-GRAINING (dettare la scala): un solitone-blocco rappresenta SCALA_B solitoni
@@ -3054,6 +3061,46 @@ class Rete:
         self._g_traccia_d0 = getattr(self, "_g_traccia_d0", {})
         self._g_traccia_d0[sito] = self._g_traccia_d0.get(sito, 0) + 1
 
+    def _traccia_vd(self, t_lap, t_src, t_beta, beta, cs_arco):
+        """I TRE termini di `acc` SEPARATI, col SEGNO. PURE-READ: scrive solo la traccia.
+
+        `acc = cs_arco^2*lap + src - beta*vd`, e qui arrivano i tre gia' calcolati: NON si
+        ricalcola niente, si LEGGE. Byte-inerte (gira sotto `TRACCIA_VD`).
+        ⚠ Si registrano i tre SEPARATI e non la somma: la somma e' `acc`, che si vedrebbe gia'
+        da `vd`. La domanda e' la RIPARTIZIONE.
+        """
+        import numpy as _np
+        reg = getattr(self, "_traccia_vd_log", None)
+        if reg is None:
+            reg = self._traccia_vd_log = []
+        ii, jj = self.i, self.j
+        d, d0, vd = self.d, self.d0, self.vd
+        m = min(len(ii), len(jj), len(d), len(d0), len(vd), len(_np.atleast_1d(t_lap)))
+        sel = _np.isin(ii[:m], TRACCIA_D0_NODI) | _np.isin(jj[:m], TRACCIA_D0_NODI)
+        def _a(x):
+            x = _np.atleast_1d(_np.asarray(x, float))
+            return x[:m] if x.size >= m else _np.full(m, float(x.ravel()[0]))
+        L, S, B = _a(t_lap), _a(t_src), _a(t_beta)
+        voce = {"passo": int(getattr(self, "_passo_corrente", -1)), "archi": m,
+                "lap_p50": float(_np.median(L[sel])) if sel.any() else float("nan"),
+                "src_p50": float(_np.median(S[sel])) if sel.any() else float("nan"),
+                "bet_p50": float(_np.median(B[sel])) if sel.any() else float("nan"),
+                "lap_max": float(_np.abs(L[sel]).max()) if sel.any() else float("nan"),
+                "src_max": float(_np.abs(S[sel]).max()) if sel.any() else float("nan"),
+                "bet_max": float(_np.abs(B[sel]).max()) if sel.any() else float("nan")}
+        # DETTAGLIO: l'arco cercato per COPPIA DI NODI, mai per indice
+        for (a, b) in TRACCIA_D0_COPPIE:
+            k = _np.flatnonzero(((ii[:m] == a) & (jj[:m] == b)) | ((ii[:m] == b) & (jj[:m] == a)))
+            if not len(k):
+                voce["%d-%d" % (a, b)] = None
+                continue
+            k = int(k[0])
+            voce["%d-%d" % (a, b)] = (float(L[k]), float(S[k]), float(B[k]),
+                                      float(d[k]), float(d0[k]), float(vd[k]),
+                                      float(_a(beta)[k]), float(_a(cs_arco)[k]))
+        reg.append(voce)
+        self._g_traccia_vd = getattr(self, "_g_traccia_vd", 0) + 1
+
     def _traccia_coesione(self, coes, tetto, mask):
         """Il valore di `coesione_relazionale` PRIMA del clip, e il tetto che lo taglia.
 
@@ -4027,6 +4074,8 @@ class Rete:
                 med = sm / self._deg
                 lap = 0.5 * (med[i] + med[j]) - q
                 acc_t = cs_arco ** 2 * lap + src - beta * self.vd
+                if TRACCIA_VD:
+                    self._traccia_vd(cs_arco ** 2 * lap, src, -beta * self.vd, beta, cs_arco)
                 vd_half = self.vd + 0.5 * dts * acc_t
                 d_new = np.maximum(self.d + dts * vd_half, 0.05)
 
