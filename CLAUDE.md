@@ -185,6 +185,29 @@ nasce. **Il piu' caro, misurato:** `max(peq, 1e-9)` ha trasformato un'anomalia d
 **`-3.72`** in una di **`+1.805e+06`** *(`Z94`)* — **ribaltando il segno** — e ci sono
 volute ore per trovarlo.
 
+**P1-sexies — UN CRITERIO DI SIGILLO SI COLLAUDA SU UN CASO SINTETICO A RISPOSTA NOTA, PRIMA DI
+APPLICARLO AL CODICE VERO.**
+**Decisione di Luca, 2026-09-21.** Si costruiscono **due** casi con l'esito gia' noto — **uno che
+DEVE passare e uno che DEVE fallire** — si verifica che il criterio dia quelle due risposte, e
+**solo allora** lo si punta sul codice.
+**PERCHE' E' UNA REGOLA E NON UNA RACCOMANDAZIONE: CINQUE CRITERI SBAGLIATI IN UN GIORNO**, e
+**ogni volta il FAIL era del criterio, non della cura**:
+| criterio | cosa sbagliava |
+|---|---|
+| **`Q6` (1a)** | confrontava i valori **dopo** il passo, quando il rilassamento li ha gia' mossi in **entrambi** i rami: `1.0000` contro `1.0000`, **assenza di CONTRASTO letta come assenza di effetto** |
+| **`Q6` (2a)** | *«>= 100 volte»* una dispersione che a flag spento e' **ZERO ESATTO**: `100*0 = 0`, **passava con qualunque valore** |
+| **`R3`** | pretendeva `bias == 0.0` **esatto** e falliva su **due ulp** di arrotondamento |
+| **`R5`** | contava **25 aperture su 24 passi**: **l'iniezione del test apriva il freno lei stessa** |
+| **`U3`** | confrontava con il mio **sviluppo** `e/2` invece del valore **esatto** `e/(2+e)`; il numero stampato, `0.952380952`, **era gia' `2/2.1`, cioe' la prova che il codice era giusto** |
+**Il par.9 diceva gia' *«un criterio si scrive DA UNA MISURA, non dal proprio modello mentale»*.
+Non e' bastato: `A9` dice che un presidio che non impedisce non e' un presidio.** Il collaudo su un
+caso a risposta nota **impedisce**, perche' un criterio vuoto o troppo stretto **si denuncia sul
+caso sintetico**, dove la risposta e' nota in anticipo.
+**⚠ E IL CASO CHE DEVE FALLIRE E' IL PIU' IMPORTANTE:** quattro dei cinque errori qui sopra
+sarebbero stati presi da un controllo *«questo criterio, su un caso che DEVE fallire, fallisce
+davvero?»*.
+
+
 **P2 — PRIMA DI ESCLUDERE UN FLAG DA UNA MISURA: FORZA IL SISTEMA O LO CORREGGE?**
 Escludere un **forzante** (turbo) protegge la misura; escludere una **correzione** significa
 **misurare un sistema che si sa difettoso**. (E' il presidio gia' scritto in §10, promosso qui
