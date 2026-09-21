@@ -9161,3 +9161,56 @@ avrebbe dato la risposta sbagliata.**
 
 **LA DOMANDA CHE RESTA:** *perché il vicinato era già teso al passo 10?* **Non è misurato**, ed è
 il criterio di chiusura di `Z84`.
+
+---
+
+## `CHI_DA_SPINORE` — **il flag è vivo, e l'anello non si rompe: si INVERTE** (2026-09-21)
+
+**Riscontro, relazionato nello stesso commit.** Lettura dal codice, **nessun run lanciato.**
+
+### Il flag è integro — verificato, non citato dal suo commento
+
+Il commento di `CHI_DA_SPINORE` è dell'era pre-bonifica (*«FLAG 3, separato, NON nel master»*), e la
+regola dice di **verificare, non citare**. Verificato:
+- **agisce a `:3941-3945`**: `_canon = _bloch_a_spinore(_nb)`, `_ov = Σ conj(_canon)·_psi_spinor`,
+  **`perc_chi = where(Re(_ov) ≥ 0, +1, −1)`** — **è davvero il segno di doppia copertura**;
+- **ha i suoi contatori `A8`** (`_g_chi_da_spinore_*`), classificati **(c) FORTE** nel giro delle
+  guardie: `0` salti su `12`. **È sopravvissuto a tutte le modifiche di questi giorni;**
+- **spegne `CHI_BASC` NEL CODICE**, non a messaggio: `:3917` recita `if CHI_BASC and not
+  CHI_DA_SPINORE`;
+- il prerequisito `--spinore-corretto` è un **`SystemExit`** a `:6248`, non un avviso.
+
+### ⚠ Il candidato del mandato è REFUTATO
+
+`:1878` (`chi_n = perc_chi * _nb`) sta dentro **`circolazione_topologica()`**, è **diagnostico**, e
+`chi_n` ha **due occorrenze in tutto il file** — definizione e uso immediato per `N_stag`.
+**Non scrive fisica.**
+
+### L'anello VERO, tracciato dal codice
+
+```
+perc_chi  ->  :2389/:2395  chi_nodi dentro _passo_spinoriale, che costruisce B
+          ->  omega_s
+          ->  :2821        self._psi_spinor = psi_sp_new     (il commit)
+          ->  :3941        perc_chi riscritto dal segno di doppia copertura
+```
+**E l'ordine dentro `step()` è `:3885` (la chiamata) PRIMA di `:3941` (la scrittura)**, quindi:
+
+> **`perc_chi(t+1) = f(_psi_spinor(t+1))`** e **`_psi_spinor(t+1) = g(perc_chi(t))`**
+> ⟹ **`perc_chi(t+1) = f(g(perc_chi(t)))`: un anello CHIUSO, con UN passo di ritardo.**
+
+**`A6` nella lettera non è violato** (nessuna auto-referenza istantanea), **ma l'anello resta — ed è
+più STRETTO di quello di oggi: si chiude in un passo invece che in due.**
+
+### ⚠ Quindi il guadagno non è la rottura dell'anello: **è il VERSO**
+
+Oggi è **`tw`, un CAMPO, a riscrivere la carica** — la direzione invertita rispetto alla fisica.
+Con `CHI_DA_SPINORE` è **lo SPINORE** a scriverla, e il par.8 dice che *«lo spinore È il tempo
+proprio della massa»*: l'oggetto **fondamentale**.
+
+> **La carica deriverebbe dall'oggetto primario invece che dal campo che quell'oggetto genera.**
+> **Questo si può dichiarare. «L'anello si rompe» NO**, e scriverlo sarebbe stato comodo e falso.
+
+### E manca un pezzo operativo
+**Il driver non sa passare il flag**: `--chi-da-spinore` **non esiste** in `_scena_video.py`.
+Serve l'opzione nominale col suo sigillo di byte-identità a default, come per `--chi-basc=on|off`.
