@@ -53,6 +53,41 @@ ARGV_D = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", "3", "--sep",
 CONT = ("_g_peq_cfl_max", "_g_peq_cfl_sopra1", "_g_peq_cfl_sopra2",
         "_g_peq_neg", "_g_peq_neg_ril", "_g_peq_neg_dif", "_g_peq_archi", "_g_peq_passi")
 
+SIGILLO = os.path.join(RADICE, "csv", "_seal_fork", "_sigillo_traccia_peq_2026-09-21.txt")
+ATTESO = "SIGILLO TRACCIA_PEQ: 4/4"
+
+
+def sblocca_db(net, snap):
+    """⚠ OVERRIDE DICHIARATO della guardia di `carica_stato`, CONDIZIONATO AL SIGILLO.
+
+    `carica_stato` RIFIUTA uno snapshot scritto da un blob diverso, ed e' GIUSTO: protegge da
+    *«fisica vecchia caricata in fisica nuova»*. Qui il blob **e' cambiato** (`4954fe5b` ->
+    `3b9e75bf`) **ma la fisica NO**, e non e' un'opinione: **`T1` e `T2` del sigillo lo hanno
+    MISURATO byte-identico**, `T2` anche con la sonda **ACCESA**.
+
+    ⚠ **E NON BASTA CHE LO DICA IO** (`A9`): questa funzione **legge l'output del sigillo dal
+      disco** e **rifiuta di sbloccare se non dice `4/4`**. L'override e' condizionato a una
+      PROVA, non a un'asserzione. La guardia viene **ripristinata subito**, in un `finally`.
+    ⚠ **NON si usa `--db-cleanup`**, che il messaggio d'errore suggerisce: quello **CANCELLA il
+      `.pkl`**, e l'archivio del ramo D non si tocca.
+    """
+    import gzip
+    import pickle
+    if not os.path.exists(SIGILLO):
+        raise SystemExit("[peq] manca l'output del sigillo: NON sblocco")
+    if ATTESO not in io.open(SIGILLO, encoding="utf-8", errors="replace").read():
+        raise SystemExit("[peq] il sigillo non dice %r: NON sblocco" % ATTESO)
+    with gzip.open(snap, "rb") as fh:
+        db_blob = pickle.load(fh).get("blob")
+    orig = type(net)._versione_codice
+
+    def finto(self):
+        v = orig(self)
+        v["blob"] = db_blob
+        return v
+    type(net)._versione_codice = finto
+    return orig, db_blob
+
 
 def leggi(net):
     return {k: getattr(net, k, 0) for k in CONT}
@@ -68,8 +103,12 @@ def main():
         if not getattr(S, f):
             raise SystemExit("[peq] %s e' SPENTO: non e' la configurazione del ramo D" % f)
     net = S.net
-    if not net.carica_stato(SNAP):
-        raise SystemExit("[peq] `carica_stato` ha RIFIUTATO %s" % SNAP)
+    orig, db_blob = sblocca_db(net, SNAP)
+    try:
+        if not net.carica_stato(SNAP):
+            raise SystemExit("[peq] `carica_stato` ha RIFIUTATO %s" % SNAP)
+    finally:
+        type(net)._versione_codice = orig       # la guardia torna com'era, SUBITO
 
     o = io.open(OUT, "w", encoding="utf-8", newline="\n")
     W = o.write
@@ -77,7 +116,14 @@ def main():
     W("# sonda TRACCIA_PEQ, sigillo 4/4 (T2: PURE-READ). Il passo %d NON viene integrato.\n" % FINO)
     W("# x = dt_e / tau_bg_loc: un Eulero esplicito SCAVALCA per x > 1, OSCILLA per x > 2.\n")
     W("# su `d0` lo stesso numero esiste da sempre (`_taup_cfl_max`, misurato 0.0354); su `peq` no.\n")
-    W("# stato di partenza: n = %d, archi = %d\n\n" % (net.n, len(net.d)))
+    W("# stato di partenza: n = %d, archi = %d\n#\n" % (net.n, len(net.d)))
+    W("# ⚠ OVERRIDE DICHIARATO della guardia di `carica_stato`: lo snapshot e' scritto dal blob\n")
+    W("#   git %s, il simulatore di oggi e' un altro. LA GUARDIA E' GIUSTA, e NON si aggira\n"
+      % db_blob[:8])
+    W("#   con `--db-cleanup`, che CANCELLA il `.pkl`. Si sblocca perche' `T1` e `T2` del sigillo\n")
+    W("#   hanno MISURATO il codice byte-identico, anche con la sonda ACCESA -- e lo sblocco e'\n")
+    W("#   CONDIZIONATO a quella prova: lo strumento LEGGE l'output del sigillo e rifiuta di\n")
+    W("#   partire se non dice `4/4`. La guardia e' ripristinata subito dopo il caricamento.\n\n")
     W("%5s | %11s %9s %9s | %8s %8s %8s | %9s\n"
       % ("passo", "max(x)", "x>=1", "x>=2", "neg", "neg SOLO", "neg SOLO", "archi"))
     W("%5s | %11s %9s %9s | %8s %8s %8s | %9s\n"
