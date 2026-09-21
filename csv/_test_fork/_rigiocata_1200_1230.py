@@ -170,7 +170,15 @@ def main():
         else:
             sgio = "(nessun nato)"
 
-            W("%5d | %11.0f %5d %6.0f %11d | %7.1f | %-40s | %-30s | %s\n"
+        # ⚠ QUESTA RIGA E' FINITA DENTRO L'`else:` QUI SOPRA, E PER 45 PASSI NON HA SCRITTO NULLA.
+        #   L'ancora della sostituzione era `    W("%5d | ...` -- **una SOTTOSTRINGA** della riga
+        #   vera, indentata a OTTO spazi. `t.count(v) == 1` era soddisfatto, ma il match cadeva a
+        #   offset 4, e il risultato aveva DODICI spazi: sintatticamente valido, semanticamente nel
+        #   ramo sbagliato. `py_compile` passava.
+        #   **P1-quater, QUARTA OCCORRENZA, e in una forma NUOVA:** asserire che l'ancora sia UNICA
+        #   non basta se l'ancora e' un FRAMMENTO di riga. **L'ancora dev'essere una RIGA INTERA,
+        #   col suo `\n` iniziale**, altrimenti l'unicita' non dice dove cade il match.
+        W("%5d | %11.0f %5d %6.0f %11d | %7.1f | %-40s | %-30s | %s\n"
           % (passo, n1, 1, n3, nsub, time.time() - _t0, smax, scan, sgio))
         o.flush()
         if n1 > SOGLIA_N1:

@@ -1,0 +1,169 @@
+Process 6344: C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe csv/_test_fork/_rigiocata_1200_1230.py --da=1080
+Python v3.13.2 (C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe)
+
+Thread 41648 (active+gil): "MainThread"
+    step (soliton_simulator.py:4286)
+        Arguments:
+            self: <Rete at 0x21ee20aa5d0>
+        Locals:
+            i: <numpy.ndarray at 0x21ee20a3d50>
+            j: <numpy.ndarray at 0x21ee1fa25b0>
+            _phi_t: <numpy.ndarray at 0x21ee1f95050>
+            _tw_t: <numpy.ndarray at 0x21ee1f958f0>
+            _phivel_t: <numpy.ndarray at 0x21ee1f945d0>
+            _peq_t: <numpy.ndarray at 0x21ee1f95110>
+            r: <numpy.ndarray at 0x21ee20a3e70>
+            dt_n: <numpy.ndarray at 0x21ee1fed5f0>
+            dt_e: <numpy.ndarray at 0x21ee1f94870>
+            _mu: 0.05928953418115057
+            dt_n_s: <numpy.ndarray at 0x21ee1fed5f0>
+            w: <numpy.ndarray at 0x21ee1f94ab0>
+            psi_t: None
+            A: <numpy.ndarray at 0x21ee1f94a50>
+            z: <numpy.ndarray at 0x21ee1f95290>
+            coppia: <numpy.ndarray at 0x21ee20a3810>
+            psi_forces: <numpy.ndarray at 0x21ee20a3f90>
+            MtPsi: <numpy.ndarray at 0x21ee1f957d0>
+            dHdphi: <numpy.ndarray at 0x21ee20a3cf0>
+            zc: <numpy.ndarray at 0x21ee20a38d0>
+            psi_loc: <numpy.ndarray at 0x21ee20a3750>
+            fase_campo: <numpy.ndarray at 0x21ee20a3b10>
+            coerenza: <numpy.ndarray at 0x21ee20a39f0>
+            deg: <numpy.ndarray at 0x21ee20a3a50>
+            somma_vic: <numpy.ndarray at 0x21ee20a3c90>
+            n_vic_coer: <numpy.ndarray at 0x21ee20a3f30>
+            Ncrit_ad: 621.7144019692686
+            riempimento: <numpy.ndarray at 0x21ee20a3870>
+            u: <numpy.ndarray at 0x21ee20a3690>
+            fattore: <numpy.ndarray at 0x21ee20a3bd0>
+            _fb: <numpy.ndarray at 0x21ee20a3ed0>
+            _cm: 0.013293965918729994
+            _fm: 0.0211897836836822
+            _r: 1.5939399734602686
+            chi_core: <numpy.ndarray at 0x21ee20a3c30>
+            twn: <numpy.ndarray at 0x21ee1fa0b10>
+            twist_nodo: <numpy.ndarray at 0x21ee20a3ab0>
+            E_cin: 82.21273344854993
+            P_eq: 23.027864632357836
+            _psi_ct: <numpy.ndarray at 0x21ee20a3f90>
+            cs_rappr: 1.9379615589427832
+            T_target: 86.48563615115164
+            Tt: 86.48563615115164
+            err_rel: -0.049405923257983854
+            tau_termo: 0.10752959445494267
+            dt_scal: 0.010188400378598807
+            delta_phivel: <numpy.ndarray at 0x21ee20a3b70>
+            delta_sync_phi: <numpy.ndarray at 0x21ee1fa17d0>
+            _forza_sync: None
+            _wI_sync: None
+            _uno_sync: None
+            psi_sync: <numpy.ndarray at 0x21ee1fa0bd0>
+            I2: <numpy.ndarray at 0x21ee20a3990>
+            cmv: <numpy.ndarray at 0x21ee1f944b0>
+            r_cm: <numpy.ndarray at 0x21ee20a3630>
+            pozzo: <numpy.ndarray at 0x21ee1fa18f0>
+            wI: <csr_matrix at 0x21ee20bb450>
+            uno: <numpy.ndarray at 0x21ee1fa22b0>
+            media_p: <numpy.ndarray at 0x21ee1fa2a30>
+            pv: <numpy.ndarray at 0x21ee20a3e10>
+            media_pv: <numpy.ndarray at 0x21ee1fa0270>
+            disp_shear: <numpy.ndarray at 0x21ee1fa14d0>
+            prof_rel: <numpy.ndarray at 0x21ee1fa0630>
+            scala_shear_locale: <numpy.ndarray at 0x21ee1fa2a90>
+            rinforzo_shear: <numpy.ndarray at 0x21ee1fa2550>
+            forza: <numpy.ndarray at 0x21ee1fa23d0>
+            zc_sync: <numpy.ndarray at 0x21ee1fa1110>
+            media: <numpy.ndarray at 0x21ee1fa0ed0>
+            dph: <numpy.ndarray at 0x21ee20a36f0>
+            _cache_tors: "_chi_geom_nodi"
+            chi_torsione: <numpy.ndarray at 0x21ee20a3c30>
+            twist_dip: <numpy.ndarray at 0x21ee20a35d0>
+            _ttw: <numpy.ndarray at 0x21ee1fa0570>
+            _tw_src: <numpy.ndarray at 0x21ee1f958f0>
+            twabs: <numpy.ndarray at 0x21ee1f95650>
+            soglia: 6.283185307179586
+            _chi_da_psi: True
+            _canon: <numpy.ndarray at 0x21ee1fa09f0>
+            _ov: <numpy.ndarray at 0x21ee20a3930>
+            Mw: <csr_matrix at 0x21ee20bb450>
+            F: <numpy.ndarray at 0x21ee1fa1350>
+            I: <numpy.ndarray at 0x21ee1fa2130>
+            rho: <numpy.ndarray at 0x21ee1fa19b0>
+            cs_nodo: <numpy.ndarray at 0x21ee1fa0930>
+            cs_arco: <numpy.ndarray at 0x21ee1f94450>
+            cs_max_corrente: 2
+            nuovi: <numpy.ndarray at 0x21ee1fa2fd0>
+            nuevos: false
+            den_w: <numpy.ndarray at 0x21ee1fa0390>
+            campo: <numpy.ndarray at 0x21ee1fa1170>
+            sp: <numpy.ndarray at 0x21ee1fa2790>
+            cn: <numpy.ndarray at 0x21ee1fa1410>
+            c_arco: <numpy.ndarray at 0x21ee1fa2d90>
+            flusso: <numpy.ndarray at 0x21ee1fa13b0>
+            _pv_src: <numpy.ndarray at 0x21ee1f945d0>
+            r_nodo: <numpy.ndarray at 0x21ee1fa0e10>
+            r_arco: <numpy.ndarray at 0x21ee1fa0870>
+            tau_bg_loc: <numpy.ndarray at 0x21ee1fa1c50>
+            _peq_src: <numpy.ndarray at 0x21ee1fa1170>
+            anom: <numpy.ndarray at 0x21ee1fa2df0>
+            cs2_src: <numpy.ndarray at 0x21ee1fa04b0>
+            src: <numpy.ndarray at 0x21ee1fa1e90>
+            beta: <numpy.ndarray at 0x21ee1fa0db0>
+            n1: 22591
+            n2: 1
+            n3: 3
+            nsub: 22591
+            dts: <numpy.ndarray at 0x21ee1fa2f70>
+            _: 1823
+            q: <numpy.ndarray at 0x21ee1fa11d0>
+            sm: <numpy.ndarray at 0x21ee1fa1cb0>
+            med: <numpy.ndarray at 0x21ee1fa1530>
+            lap: <numpy.ndarray at 0x21ee1fa31b0>
+            acc_t: <numpy.ndarray at 0x21ee1fa28b0>
+            vd_half: <numpy.ndarray at 0x21ee1fa0c90>
+            d_new: <numpy.ndarray at 0x21ee1fa1d10>
+            q_new: <numpy.ndarray at 0x21ee1fa2310>
+            sm_new: <numpy.ndarray at 0x21ee1fa0090>
+            med_new: <numpy.ndarray at 0x21ee1fa2610>
+            lap_new: <numpy.ndarray at 0x21ee1fa07b0>
+            beta_new: <numpy.ndarray at 0x21ee1fa0db0>
+            acc_next: <numpy.ndarray at 0x21ee1fa2430>
+    main (_rigiocata_1200_1230.py:131)
+        Locals:
+            S: <module at 0x21eb0a73650>
+            a: <Namespace at 0x21ee1fd5d30>
+            f: "COES_ADIM"
+            net: <Rete at 0x21ee20aa5d0>
+            o: <_io.TextIOWrapper at 0x21ee1f7d8c0>
+            W: <builtin_function_or_method at 0x21ecbc68a90>
+            orig: <function at 0x21ec8b73ce0>
+            PPF: 6
+            fermato: None
+            k: 46
+            passo: 1126
+            _t0: 1790002615.2096858
+            n: 4348
+            i: <numpy.ndarray at 0x21ee1f94990>
+            j: <numpy.ndarray at 0x21ee1fa0690>
+            m: <numpy.ndarray at 0x21eb0a27750>
+            rho: <numpy.ndarray at 0x21ee1f95530>
+            peq: <numpy.ndarray at 0x21ee1edfe10>
+            anom: <numpy.ndarray at 0x21ee1f95fb0>
+            src: <numpy.ndarray at 0x21ee1f94930>
+            cs_max: 2
+            n1: 1
+            beta_max: 214.47709810055147
+            n3: 3
+            nsub: 4
+            km: 209579
+            ii: 1286
+            jj: 244
+            smax: "1286-244(MV) rho=5.75e-01 peq=1.42e-01 anom=3.064e+00"
+            sel: <numpy.ndarray at 0x21ee1f95950>
+            c: 528066
+            scan: "rho=2.19e-81 peq=3.41e-09 anom=-1.000e+00"
+            nati: <numpy.ndarray at 0x21ee1f946f0>
+            idx: <numpy.ndarray at 0x21ee1f94570>
+            gio: <numpy.ndarray at 0x21ee1f947b0>
+            sgio: "4345:0.014|0.0e+00|0.000 4347:0.014|0.0e+00|0.000 4346:0.014|0.0e+00|0.000 4343:0.028|1.0e-11|0.001 4344:0.028|2.7e-28|0.00..."
+    <module> (_rigiocata_1200_1230.py:194)
