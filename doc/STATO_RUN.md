@@ -34,6 +34,67 @@
 > dell'imprecisione. La correzione vive qui e in una `git notes` sul commit del tag.
 
 
+
+---
+
+## ⓪ LE CANCELLAZIONI DEL 2026-09-21 — **l'elenco completo, prima di spostare qualunque cosa**
+
+**Criterio applicato:** nessun file tracciato da git; scratch ricreato dagli script stessi.
+**Verificato DOPO:** `git status` non segnala **nessun** file tracciato mancante.
+
+### Dentro il repository — **611 MB**, scratch di sigilli
+| cartella | MB | chi la ricrea | verdetto salvato? |
+|---|---|---|---|
+| `csv/_seal_fork/_sig_sep` | 180 | `_sigillo_sep_driver.py` | `_sigillo_sep_driver.txt` |
+| `csv/_seal_fork/_sig_chibasc` | 167 | `_sigillo_chibasc_driver.py` | `_sigillo_chibasc_driver.txt` |
+| `csv/_seal_fork/_sig_ramo_D` | 131 | `_sigillo_ramo_D.py` | `_sigillo_ramo_D_2026-09-21_*.txt` |
+| `csv/_seal_fork/_sig_chicoop` | 50 | `_sigillo_chicoop.py` | ⚠ **NESSUNO** — vedi sotto |
+| `csv/_seal_fork/_sig_traccia_d0` | 50 | `_sigillo_traccia_d0.py` | ⚠ **NESSUNO** — vedi sotto |
+| `csv/_seal_fork/_sig_z1c` | 34 | `_sigillo_Z1c.py` | `_sigillo_Z1c_2026-09-21.txt` |
+
+**Piu' due copie del driver, MAI tracciate e rigenerate a ogni giro del sigillo:**
+`csv/_test_fork/_driver_prima_chibasc.py` · `csv/_test_fork/_driver_prima_sep.py`.
+
+### ⚠ UN ERRORE, e il file e' stato RIPRISTINATO
+`csv/_seal_fork/_sig_traccia_d0/` conteneva **`_sim_prima.py`, che ERA TRACCIATO** — ed e' una
+**copia del simulatore**, cioe' esattamente cio' che il par.5-quinquies impone di conservare.
+**Ripristinato** con `git cat-file -p HEAD:` scritto in **binario** *(mai `git checkout`: trappola
+CRLF)*, `sha1` byte grezzi **`01146a16`**.
+**Perche' e' sfuggito:** il mio censimento contava i file tracciati **solo** per le cartelle sopra
+i 40 MB della tabella; per gli scratch dei sigilli mi sono fidato della **regola generale**
+*(«sono usa-e-getta»)* invece di ricontrollare cartella per cartella. **La regola era giusta per
+sei cartelle su sette.**
+
+### ⚠ DUE SIGILLI SENZA OUTPUT COMMITTATO, ed e' un debito aperto
+`_sigillo_chicoop` (**8/8**) e `_sigillo_traccia_d0` (**4/4**): il par.5 dice *«committa gli output
+col verdetto»* e **non l'ho fatto** — i numeri vivono solo nei messaggi di commit. **Lo scratch non
+li conteneva** (sono `.npz`, non stdout), quindi cancellarlo non ha perso nulla: **i due sigilli
+vanno RIGIRATI e i loro output committati.**
+
+### Fuori dal repository — **1.2 GB**
+| percorso | MB | cosa era |
+|---|---|---|
+| `%TEMP%/claude/c--Users-lpeano-soliton-simulator/b8f19b37-.../` | 1100 | scratchpad di una **sessione morta**, file piu' recente del **2026-09-19** |
+| `%TEMP%/claude/bash-edit-diff` | 106 | cache temporanea dell'editor |
+
+**Verificato prima di cancellare:** l'unico processo `python` vivo era il ramo D — **nessuna
+sessione parallela**.
+
+### ⚠ E IL CONSUMATORE VERO NON ERA NESSUNO DI QUESTI
+Il disco continuava a scendere anche dopo le pulizie. **E' il PAGEFILE**, cresciuto da **18.7 a
+19.7 GB** sotto i run pesanti. **E' gestito da Windows e non lo tocco**, ma spiega i cali che
+attribuivo al repo.
+
+### Cosa NON e' stato cancellato, e perche'
+| cartella | MB | motivo |
+|---|---|---|
+| `_ab_grav_ampiezza` · `_ab_coppia_reciproca` | 506 + 506 | **NON in `INVENTARIO`**: senza il comando documentato sono **gia' irrecuperabili**. Cancellarle perderebbe cio' che nessuno puo' rifare |
+| `_g6000` | 1314 | in inventario, rigenerabile — ma **ore di CPU** |
+| `_ab_A` · `_ab_B` | 923 + 105 | i dati dell'A/B di `chi_basc`, dietro `Z73`-`Z77` |
+| `_ab_C_solo_chicoop_FERMATO` | 346 | l'archivio del primo lancio di D, **conservato** |
+
+---
+
 # ⚠ LA CODA UNICA — **l'ordine del lavoro, e l'UNICA fonte dell'ordine**
 
 > **Decisione di Luca, 2026-09-21.** **Se un mandato sembra contraddire questa coda, VINCE LA CODA
@@ -477,3 +538,12 @@ ramo B (chi_basc OFF):
 - *2026-09-21 11:29:33* — ⚠ FERMATO alle 11:05 al frame 205 di 500 (passo 1230) -- CONFIGURAZIONE SBAGLIATA, non una scelta: il driver NON inoltrava --scala-min e --coes-adim al simulatore. Letto DAL MODULO: CHI_COOP True ma SCALA_MIN False e COES_ADIM False. Le opzioni erano PARSATE e IGNORATE, in silenzio. py-spy dump catturato PRIMA dello stop (csv/_test_fork/_diag_D/stack_STOP_config_sbagliata.txt). Archivio parziale INTATTO e verificato: 10 snapshot (120..1200), tutti caricabili, 0 .tmp orfani.
 
 **chiuso 2026-09-21 11:29:33 — FERMATO** NON E' IL RAMO D: e' un run con CHI_COOP acceso e SCALA_MIN/COES_ADIM spenti, su blob di epoca 2 -- cioe' la COOPERAZIONE da sola. I dati parziali NON si buttano (10 snapshot leggibili, 120..1200 passi) ma NON rispondono alla domanda del mandato perentorio, che chiede le TRE modifiche insieme. CAUSA: la patch al driver usava str.replace con un solo assert GLOBALE, soddisfatto dalle ALTRE sostituzioni; la terza non ha attaccato in silenzio. Nessun sigillo poteva prenderlo: quelli esistenti costruiscono sys.argv da soli e NON passano dal driver. Presidio nuovo: csv/_seal_fork/_sigillo_flag_driver.py. IL RAMO D VA RILANCIATO DA ZERO dopo che il sigillo passa.
+
+## APERTO ramo_D_epoca2_bis
+
+- **avvio** `2026-09-21 11:32:04` · **blob** `26fa354d (git) / 4954fe5b (byte grezzi)` · **HEAD** `ec41deb`
+- **comando**
+  ```
+  python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_D --sep=4.0 --serie=20 --csv-progresso=csv/_test_fork/_ab_D/prog.csv --chi-coop=on --scala-min=on --coes-adim=on
+  ```
+- **note** RAMO D, SECONDO LANCIO -- il primo (10:15-11:05) girava con SCALA_MIN e COES_ADIM SPENTI perche' il driver non li inoltrava: difetto trovato, riparato, e coperto dal presidio nuovo csv/_seal_fork/_sigillo_flag_driver.py (3/3: ogni opzione arriva al MODULO in entrambi i versi, e l'elenco delle opzioni e' SCOPERTO dal sorgente invece che scritto a mano). Il driver e' ora 5544f3b9 -> riparato. L'archivio del primo lancio e' conservato in csv/_test_fork/_ab_C_solo_chicoop_FERMATO (10 snapshot, 120..1200, tutti leggibili): NON e' il ramo D, e' la COOPERAZIONE da sola su blob di epoca 2. Questa volta il primo controllo dopo l'avvio e' il blocco FLAG ATTIVI letto DAL MODULO.

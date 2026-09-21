@@ -1,0 +1,26 @@
+[TIMBRO] _sigillo_flag_driver.py  sha1-BYTE 9346bc1d  committato e pulito
+opzioni booleane SCOPERTE dal sorgente del driver: 4
+   --chi-basc=      variabile CHIBASC    cablata nell'argv: si'
+   --chi-coop=      variabile CHICOOP    cablata nell'argv: si'
+   --coes-adim=     variabile COESADIM   cablata nell'argv: si'
+   --scala-min=     variabile SCALAMIN   cablata nell'argv: si'
+
+F3   PASS   ogni opzione PARSATA e' anche CABLATA nell'argv: si'
+
+braccio ON   tutte le opzioni a `on`
+braccio OFF  tutte le opzioni a `off`
+
+F1   PASS   con `=on` ogni flag e' True nel MODULO: si' (4 su 4)
+F2   PASS   con `=off` ogni flag e' False nel MODULO: si' (4 su 4)
+
+   il quadro completo, letto DAL MODULO (P6: dai dati, non dal comando):
+     --chi-basc=      CHI_BASC           on=True     off=False
+     --chi-coop=      CHI_COOP           on=True     off=False
+     --coes-adim=     COES_ADIM          on=True     off=False
+     --scala-min=     SCALA_MIN          on=True     off=False
+
+ESITO: 3/3
+
+VERDETTO: ogni opzione del driver ARRIVA al modulo, in entrambi i versi.
+
+NB: UN frame. Qui non si misura fisica: si verifica che un interruttore sia collegato.
