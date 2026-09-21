@@ -9584,3 +9584,49 @@ non solo un file.
 
 **Sigillo previsto `R1`-`R5`**, con `R3` che simula `E:` assente e `R4` che verifica che **un file
 ancora `.tmp` non venga MAI spedito**.
+
+---
+
+## ⛔ `Z90` — **il ramo D diverge: `nsub = 22591`, e il vincolo vincente e' `n1` (la SORGENTE)** (2026-09-21)
+
+**Riscontro relazionato NELLO STESSO COMMIT** (`P1-bis`). **Processo NON ucciso.**
+`py-spy dump --locals` sul `PID 19912`, simulatore `4954fe5b`. **EPOCA 2.**
+
+```
+nsub = 22591        n1 = 22591        n2 = 1        n3 = 3       (pavimento: 4)
+dove: _smorza (:3290) da step (:4288), quale="d" -> dentro il sotto-passo del Verlet
+```
+
+**Il processo NON e' piantato: sta calcolando.** `8.4 s` di CPU in `12 s` reali. **E' LENTO, non
+MORTO** — e la distinzione conta, perche' un processo fermo si diagnostica diversamente.
+
+### ⚠ Non e' `|vd|` a esplodere: e' la SORGENTE
+**`n3` vale TRE**, `n2` vale **uno**. A esplodere e' **`n1`**, che nasce da `|src|` — il termine con
+**`peq` al DENOMINATORE** *(`anom = (rho - peq)/max(peq, 1e-9)`)*. **E' esattamente il difetto che
+il mandato dell'epoca elencava fra quelli «NON toccati: ATTIVI».**
+
+### La firma e' quella del ramo B, e NON e' una ripetizione
+```
+ramo B (20/9, EPOCA 1)   nsub 206 -> 15594    n3 fermo a 205,  n1 esploso
+ramo D (oggi, EPOCA 2)   nsub = 22591         n3 = 3,          n1 = 22591
+```
+**Nel ramo B `chi_basc` era SPENTO; qui e' ACCESO**, con in piu' le tre modifiche e la cura del
+mondo. **Lo stesso canale esplode in entrambe le configurazioni.**
+
+> **NON dice che le tre modifiche abbiano fallito.** `SCALA_MIN` governa le lunghezze, `COES_ADIM`
+> la coesione, `CHI_COOP` la carica: **nessuna tocca `src` ne' `peq`**, e i loro sigilli tengono
+> (`11/11` piu' `Z1c`). **Il difetto era gia' catalogato ATTIVO, ed era PREVISTO che lo restasse.**
+
+### Cosa NON so, e non lo invento
+- **QUANDO e' esploso:** ultimo dato pulito **frame 185 a `20.537 s/frame`**, poi **18 minuti senza
+  log**. Lo snapshot che lo daterebbe e' quello a **passo 1200, NON ancora scritto** *(l'ultimo su
+  disco e' `1080`)*;
+- **se si stabilizza o sale:** **un solo campione non e' una traiettoria;**
+- **se `peq` sia degenere:** sospetto naturale, **NON misurato**. Scriverlo come causa sarebbe una
+  congettura travestita da riscontro.
+
+### Conseguenza sul run
+A `nsub = 22591` un frame costa **~5000 volte** il normale: i **315 frame restanti sono GIORNI**.
+**Il criterio assoluto «arrivo ai 3000 passi» ha gia' la sua risposta: NO.**
+**I 9 snapshot sani (fino al passo 1080) sono la finestra in cui misurare QUANDO e PERCHE' e'
+cambiato regime.**
