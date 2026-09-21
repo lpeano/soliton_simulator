@@ -40,6 +40,7 @@ import _presidio
 _presidio.avvia(__file__)
 
 RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
+sys.path.insert(0, RADICE)   # il simulatore vive nella RADICE, non qui
 SNAP = os.path.join(RADICE, "csv", "_test_fork", "_ab_D", "scena_001200.pkl.gz")
 OUT = os.path.join(RADICE, "csv", "_test_fork", "_diag_D", "RIGIOCATA_1200_1230.txt")
 SOGLIA_N1 = 100      # ⚠ SOGLIA DICHIARATA: sopra questa ci si ferma. Non si integra l'esplosione.
