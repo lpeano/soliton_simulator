@@ -1,7 +1,7 @@
 <!-- PUNTO-DI-RIPRESA:INIZIO -->
 # ⚠⚠ PUNTO DI RIPRESA — **si legge PER PRIMO dopo un riavvio**
 
-> **Aggiornato 2026-09-21 22:37 · HEAD `bc940ff` · branch `fork-su2`, tutto committato e pushato.**
+> **Aggiornato 2026-09-21 22:57 · HEAD `7d7aa79` · branch `fork-su2`, tutto committato e pushato.**
 > **Il PC si riavvia fra mezzanotte e le due** *(vincolo di Luca, 2026-09-21)*. **Questo blocco e'
 > RIGENERATO per intero a ogni aggiornamento**, fra due marcatori HTML: non si accumulano versioni
 > e non c'e' niente da cancellare a mano.
@@ -21,7 +21,8 @@
 | **strumento delle LETTURE** | ✅ criteri fissati PRIMA, tabella generata da codice | `csv/_test_fork/_letture_validazione.py` |
 | **validazione 600 passi** | ✅ **FINITA**: 6 criteri su 8 REGGONO. `nsub` max = **4**, `peq >= 0`, zero sotto `LAM`, zero violazioni. **NON reggono `d0` (esponenziale, x1.232 per snapshot) e `d/d0` (0.69-0.84 = COMPRESSIONE)** | `csv/_test_fork/_val600/LETTURE.txt` · `Z101` |
 | **CHECKPOINT 2** | ⚠ **RAGGIUNTO: si aspetta LUCA. IL RUN LUNGO NON SI LANCIA** | — |
-| **il prossimo giro** | ⏸ **`D0`: chi fa scappare `d0`** -- `S09`/`S10`, auto-amplificanti e **mai misurati PER SITO**. **E' l'UNICA cosa che blocca il run lungo** | `Z101` · la somma per scrittore con `TRACCIA_D0` |
+| **misura `D0`** | ✅ **FATTA: e' IL FRENO.** Scrittori `-1.543e+05`, il vincolo aggiunge `+3.205e+05`, effettivo `+1.661e+05`. **`S10` inerte, `S09` verso il BASSO** | `csv/_test_fork/_diag_D/SOMMA_PER_SCRITTORE_d0.txt` · `Z102` |
+| **il prossimo giro** | ⏸ **DECISIONE DI LUCA sul freno asimmetrico** *(`A11` corollario 4)*. **Nessuna cura fatta stasera: il mandato chiedeva solo la misura** | `Z102` · `A11` corollario 7: tre forme morbide sono gia' cadute |
 | **poi** | ⏸ **i residui di `C5`**: `I4` scatola nera, `I5` underflow per riga, **modalita' FINE** -- **dopo `d0`, PRIMA del run lungo** | `Z100` · deciso da Luca il 21/9 alle 22:30 |
 
 ## COME SI RIPARTE — **i comandi esatti, verbatim**

@@ -10677,3 +10677,40 @@ senza una violazione**. **Cio' che manca serve al RUN LUNGO, non alla diagnosi d
 calcolo in cui, se qualcosa va storto, **si vuole sapere subito DOVE**.
 **E la modalita' FINE si e' gia' dimostrata utile stasera stessa:** per scattare sul passo `1126`
 l'invariante ha dovuto **aspettare la fine del passo intero, circa mezz'ora**.
+
+### ⑱ **CHI FA SCAPPARE `d0`: E' IL FRENO. La previsione e' REFUTATA su tutti e tre i punti**
+
+> **SOLA MISURA**, nessuna cura. 120 passi dalla semina, **configurazione della validazione**
+> *(sei cure accese)*, `TRACCIA_D0` acceso. Lo strumento **non tocca il simulatore**: sostituisce
+> `_traccia_d0` e `_smorza` con due funzioni **pure-read** allo stesso punto di chiamata.
+
+**LA PREVISIONE ERA:** *«`S09` + `S10` hanno saldo netto verso l'alto e crescono con
+`median(d0)`»*. **E' refutata su tutti e tre i punti:**
+
+| | esito |
+|---|---|
+| **`S10_grav_med`** | **NON HA MAI GIRATO.** Saldo `0.000000e+00`, zero invocazioni: **e' INERTE** |
+| **`S09_spinta_med`** | saldo **VERSO IL BASSO**: `-1.268e+05`, con **pendenza NEGATIVA** contro `median(d0)` *(`-390.6`, `r = -0.41`)* |
+| **il saldo di TUTTI gli scrittori** | **NEGATIVO: `-1.543e+05`** — eppure **`median(d0)` SALE**, da `0.883` a `1.415` |
+
+**IL NUMERO CHE CHIUDE LA DOMANDA.** `_smorza` attenua **solo le discese**, quindi `sum(eff - dx)`
+e' **esattamente cio' che il vincolo mette dentro** e che la fisica non aveva messo:
+
+```
+gli scrittori spingono per   -1.543428e+05
+il FRENO aggiunge            +3.204548e+05      <- 2.08 volte il modulo della spinta grezza
+il risultato EFFETTIVO e'    +1.661120e+05
+```
+
+> **⚠ IL SEGNO SI RIBALTA: LA FISICA SPINGE GIU', IL VINCOLO PORTA SU.**
+> **E' `A11` corollario 4, MISURATO:** *«frenare in un verso solo trasforma il rumore in deriva»*.
+> **`C3` ha curato la dipendenza dall'ORDINE, NON l'ASIMMETRIA:** il freno una-volta-per-passo
+> attenua ancora **solo le discese**, e su un saldo grezzo negativo **ne ribalta il segno**.
+
+**E lo scrittore piu' positivo non e' `S09`: e' `S08_proj`** *(`+8.65e+04`)*.
+
+**⚠ COSA QUESTA MISURA NON DICE:** **cosa fanno le NASCITE.** `S01`, `S06` *(mitosi)* e `S07`
+*(Schwinger)* **concatenano**, quindi il delta elemento-per-elemento **non esiste** e nella tabella
+portano `n/d`. **Il loro contributo resta non misurato, e non lo deduco.**
+**E non e' una cura:** che fare del freno asimmetrico **e' una decisione di Luca**, e ogni forma
+simmetrica dovra' passare per `A11` corollario 7, **dove tre forme morbide sono gia' cadute**.
