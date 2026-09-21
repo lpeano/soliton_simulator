@@ -1,0 +1,22 @@
+[TIMBRO] _sigillo_traccia_peq.py  sha1-BYTE a6f3fc5e  committato e pulito
+sim PRIMA (f94cd42)   : sha1 GREZZO 4954fe5b
+sim SUL DISCO         : sha1 GREZZO 3b9e75bf
+(byte grezzi, NON `git hash-object`: sono due numeri diversi, C18)
+
+braccio A   simulatore di PRIMA della patch, argv del ramo D
+braccio B   simulatore SUL DISCO,  diagnostici SPENTI
+braccio C   simulatore SUL DISCO,  TRACCIA_PEQ ACCESO
+
+------------------------------------------------------------------------------
+T1   PASS diagnostici SPENTI = PRIMA della patch: 12 campi -> BYTE-IDENTICI
+T2   PASS TRACCIA_PEQ ACCESO = PRIMA della patch: 12 campi -> BYTE-IDENTICI  [PURE-READ]
+T3   PASS CONTROLLO POSITIVO: la sonda ha attraversato 15783913 archi in 30 passi
+T4   PASS FERMA_DOPO_NSUB alza e porta i numeri: STOP ok nsub=4 n1=0 ramo=VERLET msg=nsub=4 n1=0 n2=1 n3=0
+------------------------------------------------------------------------------
+SIGILLO TRACCIA_PEQ: 4/4
+
+VERDETTO: i contatori sono BYTE-INERTI *e* PURE-READ, e NON sono codice morto.
+  Si puo' misurare.
+
+LIMITI: UN seme, UNA scena, 30 passi. Prova la byte-identita' e la purezza,
+  NON che i numeri che la sonda produce siano interpretati bene.

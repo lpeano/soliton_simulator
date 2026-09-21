@@ -10362,3 +10362,37 @@ anom = np.where(rho + peq > 0.0, 2.0*(rho - peq)/(rho + peq), 0.0)
 ```
 **⚠ E quel `> 0` (non `!= 0`) copre anche il denominatore NEGATIVO — ma lo copre MASCHERANDOLO**, il
 che e' accettabile **solo se `peq >= 0` e' gia' garantito**. Senno' si sta zittendo il sintomo di (2).
+
+### ⑩ La sonda su `peq` e' sigillata **`4/4`**, e `T2` prova che e' **PURE-READ**
+
+> MANDATO GLOBALE §1. Simulatore **`4954fe5b` -> `3b9e75bf`** *(sha1 dei byte grezzi)*,
+> sigillo `csv/_seal_fork/_sigillo_traccia_peq.py`, output committato.
+
+Due costanti diagnostiche di modulo — **`TRACCIA_PEQ`** e **`FERMA_DOPO_NSUB`**, **senza flag da
+riga di comando**, come `TRACCIA_D0` e `SCALA_P_MEDIANA`: sono sonde, non fisica, e non devono poter
+essere accese da un comando.
+
+| | esito | |
+|---|---|---|
+| **T1** | PASS | diagnostici SPENTI = simulatore di PRIMA della patch: **12 campi byte-identici** |
+| **T2** | PASS | **`TRACCIA_PEQ` ACCESO = ancora byte-identico** — **PURE-READ** (par.2.3) |
+| **T3** | PASS | controllo positivo: la sonda ha attraversato **15 783 913 archi** in 30 passi |
+| **T4** | PASS | `FERMA_DOPO_NSUB` alza `StopDopoNsub` e porta i quattro numeri |
+
+> **`T2` conta piu' di `T1`.** `T1` dice solo che a flag spento non cambia niente — **quasi una
+> tautologia: un ramo spento non gira.** `T2` dice che la sonda **ACCESA** non cambia **un bit**
+> dello stato. **Senza `T2`, «byte-inerte» significherebbe soltanto «spento».**
+> E `T3` impedisce che `T1` e `T2` passino **su codice morto**.
+
+**Due dubbi del task history CHIUSI leggendo il disco, non ricordando:**
+- **`DIFF_RES = 0.0`** (`:233`) ⇒ `campo = peq` e `flusso = c_arco - peq`: **il bersaglio della
+  diffusione e' `>= 0`, quindi la dimostrazione di positivita' di `PEQ_ESATTO` VALE.** *(Avevo
+  scritto «se `DIFF_RES != 0` la dimostrazione non vale»: non e' il caso.)*
+- **`dt_e = DT * 0.5*(r[i]+r[j])`** (`:3759`): e' **per ARCO**, non scalare.
+
+**E un difetto dello strumento, trovato PRIMA di girarlo:** il sigillo estraeva
+`HEAD:soliton_simulator.py`, ma **il codice si committa prima dei sigilli** (par.5), quindi `HEAD`
+**era** il file sul disco: **`T1` avrebbe confrontato il file con se stesso**, passando per
+tautologia — e con le shape uguali, **invisibile anche alla guardia delle shape**. Ora il paragone e'
+**`f94cd42`** col blob **verificato** `4954fe5b`: se non corrisponde, lo script **muore** invece di
+confrontare a caso.
