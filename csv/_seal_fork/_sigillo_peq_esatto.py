@@ -163,9 +163,9 @@ def gira(*extra, **kw):
     # ⚠ SI RESTITUISCE ANCHE LO STDERR: senza, un lavoratore che MUORE produce un FAIL che
     #   dice "nessuno stop" invece della causa vera. E' successo, e mi ha fatto cercare nel
     #   posto sbagliato.
-    return pr.stdout + ("
-[stderr]
-" + pr.stderr if pr.returncode != 0 else "")
+    if pr.returncode == 0:
+        return pr.stdout
+    return pr.stdout + os.linesep + "[stderr]" + os.linesep + pr.stderr
 
 
 def main():
@@ -258,12 +258,11 @@ def main():
         mm = re.search(r"P5%s STOP passo=(\d+) nsub=(\d+) n1=(\S+) n3=(\S+) peqmin=(\S+) "
                        r"salvati=(\d+)" % modo, out)
         if not mm:
+            # ⚠ la CAUSA, non solo il fatto: un FAIL che non dice perche' fa cercare nel posto
+            #   sbagliato -- e' successo, ed e' costato un giro.
+            _coda = out.strip()[-600:].replace(os.linesep, os.linesep + "      ")
             esiti.append(("P5%s" % modo, False,
-                          "nessuno stop -- ECCO PERCHE':
-      %s"
-                          % out.strip()[-600:].replace("
-", "
-      ")))
+                          "nessuno stop -- ECCO PERCHE':" + os.linesep + "      " + _coda))
             continue
         nsub = int(mm.group(2)); pmin = float(mm.group(5)); salv = int(mm.group(6))
         ok = nsub < 100 and pmin >= 0.0
