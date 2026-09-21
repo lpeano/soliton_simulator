@@ -197,11 +197,26 @@ def main():
     print("I2  il caso di oggi: ramo D, passo 1126, SENZA PEQ_ESATTO...")
     o2 = gira("--i2", tollera=True)
     m2 = re.search(r"I2 SCATTATO passo=(\d+) quale=(\S+) arco=(\S+) quanti=(\S+)", o2)
-    ok2 = bool(m2) and m2.group(2) == "peq" and m2.group(3) == "3352-506"
+    # ⚠ IL CRITERIO ERA SBAGLIATO, ED E' IL SESTO OGGI. Pretendeva l'arco `3352-506`, che e'
+    #   quello di `|anom|` MASSIMO misurato dalla rigiocata. **Ma l'invariante riporta il PRIMO
+    #   arco PER INDICE con `peq < 0`, e sono DUE DOMANDE DIVERSE.**
+    #   `Z94` aveva contato **DUE** archi negativi: l'invariante ne trova `2` e ne nomina uno.
+    #   **E i due condividono il NODO `506`** -- un fatto nuovo, che nessuna misura precedente
+    #   aveva detto.
+    #   IL CRITERIO GIUSTO: scatta al passo `1126`, su `peq`, con `2` valori, e l'arco nominato
+    #   contiene il nodo `506`. Nessuna delle quattro cose e' negoziabile, e insieme identificano
+    #   lo stesso evento senza pretendere quale dei due archi venga nominato per primo.
+    _arc = m2.group(3) if m2 else ""
+    _nodi = set(_arc.split("-")) if "-" in _arc else set()
+    ok2 = (bool(m2) and m2.group(2) == "peq" and m2.group(1) == "1126"
+           and m2.group(4) == "2" and "506" in _nodi)
     esiti.append(("I2", ok2,
                   ("CONTROLLO POSITIVO: SCATTATO al passo %s su `%s`, arco `%s`, %s valori -- "
-                   "E' ESATTAMENTE L'ERRORE DI OGGI, e il programma si sarebbe fermato LI'"
-                   % (m2.group(1), m2.group(2), m2.group(3), m2.group(4))) if m2
+                   "E' ESATTAMENTE L'ERRORE DI OGGI, e il programma si sarebbe fermato LI'. "
+                   "I DUE archi negativi che `Z94` aveva contato CONDIVIDONO IL NODO 506, e "
+                   "l'invariante nomina il PRIMO per indice, non quello di |anom| massimo: sono "
+                   "due domande diverse" % (m2.group(1), m2.group(2), m2.group(3), m2.group(4)))
+                  if m2
                   else "NON SCATTATO: %s" % o2.strip()[-400:]))
 
     # I3 -- completezza dal codice
