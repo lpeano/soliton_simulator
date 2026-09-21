@@ -10562,3 +10562,34 @@ a caso: si CONTA**.
 e falliva su **due ulp**; `R5` contava **25 aperture su 24 passi** perche' **l'iniezione del test
 apre e chiude il freno lei stessa** — *uno strumento che misura anche se stesso*, la stessa famiglia
 del contatore di `C2` che contava anche la semina.
+
+### ⑮ **CURA `C4` -- `COES_CAUSALE`, sigillata `5/5`. E `Z92` va riletta**
+
+**I due difetti** *(`Z92`)*: nella stessa `tanh` convivevano densita' di **fine `step`** e un `d0`
+**gia' spostato da sette scritture**; e il tetto `LAM*sqrt(K_C)*DT` e' costruito su **costanti di
+modulo**, quindi non conosce il cono del luogo (**`A5`**).
+**La cura:** `d0` e `d` dalla **fotografia di inizio passo — la stessa di `C3`** *(una macchina, due
+utenti)*; il tetto diventa **`cs_arco*DT`** col `cs` del nodo **piu' lento**. **Zero parametri.**
+
+| | esito |
+|---|---|
+| **S1** | flag spento **byte-identico** |
+| **S2** | acceso vs spento differiscono su 12 campi |
+| **S3** | fotografia usata **24 su 24**, zero fallback, **e lo scarto dal `d0` di prima vale `9.4653e-02`** |
+| **S4** | tetto minimo locale **`5.274e-03`** contro il globale **`1.131e-02`** *(`0.47` volte)*; **stringe** su `799 064` archi-scrittura, **allarga** su `11 827 638` |
+| **S5** | **zero violazioni**, rapporto massimo `|delta|/(cs_arco*DT) = 0.926873` |
+
+> **⚠ IL NUMERO CHE CAMBIA LA LETTURA DI `Z92`.** Li' avevo scritto che il termine di coesione
+> stava al **`24 %`** del tetto e che il difetto era **dormiente**. **Col tetto GIUSTO — quello
+> locale — arriva al `92.7 %`.** **Il margine non era grande: era MAL MISURATO**, perche'
+> confrontato con un tetto che nei luoghi lenti vale **il doppio** del cono vero.
+>
+> **⚠ E il tetto locale NON e' sempre piu' stretto**, e il sigillo lo **riporta** invece di
+> pretendere il contrario: dove il cono e' veloce **allarga** *(`11.8` milioni di archi-scrittura
+> contro `0.8`)*. **Il punto non e' stringere: e' che il tetto sia quello del LUOGO.** Un criterio
+> *«stringe sempre»* misurerebbe la **prudenza**, non la causalita'.
+
+**⚠ Cosa non fa, dichiarato:** `I_nodi`, `I_arco` e `lap_arco` restano di **fine `step`**. Non e'
+una svista — **`psi` e' quella che `step()` ha appena committato, quindi le tre sono gia' coerenti
+fra loro**, e l'unico ingresso fuori istante era `d0`. Portare anche `psi` a inizio passo vuole una
+fotografia **per nodo** con la sua chirurgia: **e' un'altra cura**.

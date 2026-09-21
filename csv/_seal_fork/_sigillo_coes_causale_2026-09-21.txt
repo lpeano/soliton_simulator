@@ -1,0 +1,22 @@
+[TIMBRO] _sigillo_coes_causale.py  sha1-BYTE ff82a982  committato e pulito
+sim PRIMA (4f39828): sha1 GREZZO 716d43b9
+sim SUL DISCO      : sha1 GREZZO e844871d
+
+braccio A (prima della cura)...
+braccio B (disco, SPENTO)...
+braccio C (disco, ACCESO)...
+
+--------------------------------------------------------------------------------------------------------
+S1   PASS flag SPENTO = prima della cura: 12 campi -> BYTE-IDENTICI
+S2   PASS CONTROLLO POSITIVO: ACCESO vs SPENTO differiscono su 12 campi
+S3   PASS L'ISTANTE: fotografia usata 24 volte su 24, 0 fallback. E LO SCARTO dal `d0` che si leggeva prima vale 9.4653e-02 -- cioe' i due istanti ERANO diversi davvero (se fosse 0, il difetto non ci sarebbe mai stato e il test non proverebbe nulla)
+S4   PASS IL CONO E' LOCALE: tetto da `_cs_nodo_prev` 24 volte su 24, 0 fallback; tetto minimo locale 5.2740e-03 contro il globale 1.1314e-02 (0.47 volte). STRINGE su 799064 archi-scrittura e ALLARGA su 11827638, su 12626702 -- e non e' un difetto: il tetto dev'essere quello del LUOGO, non il piu' prudente
+S5   PASS NESSUNO SPOSTAMENTO PIU' VELOCE DEL CONO LOCALE: 0 violazioni, rapporto massimo |delta|/(cs_arco*DT) = 0.926873
+--------------------------------------------------------------------------------------------------------
+SIGILLO COES_CAUSALE: 5/5
+
+VERDETTO: la coesione legge un solo ISTANTE e rispetta il CONO DEL LUOGO.
+
+LIMITI: UN seme, UNA scena, 24 passi. `I_nodi`, `I_arco` e `lap_arco` restano di FINE
+  `step`, DICHIARATO: `psi` e' quella che `step()` ha appena committato, quindi le tre
+  sono gia' coerenti fra loro. L'unico ingresso fuori istante era `d0`.
