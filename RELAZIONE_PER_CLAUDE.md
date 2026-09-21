@@ -9630,3 +9630,62 @@ A `nsub = 22591` un frame costa **~5000 volte** il normale: i **315 frame restan
 **Il criterio assoluto «arrivo ai 3000 passi» ha gia' la sua risposta: NO.**
 **I 9 snapshot sani (fino al passo 1080) sono la finestra in cui misurare QUANDO e PERCHE' e'
 cambiato regime.**
+
+---
+
+## 📄 DATI GREZZI DEL RAMO D + campionamento dello stack (2026-09-21)
+
+**Riscontro relazionato NELLO STESSO COMMIT** (`P1-bis`). **Processo NON ucciso.**
+File: `csv/_test_fork/_diag_D/DATI_ramoD_2026-09-21.txt` (233 KB, **9 snapshot, passi 120-1080**,
+ogni scalare col suo valore e ogni array con forma + 9 percentili) e
+`csv/_test_fork/_diag_D/stack_120s_2026-09-21.txt` (88 KB, **13 campioni in 124 s**).
+**Sono GREZZI: nessun numero e' interpretato.** Quello che segue e' lettura diretta, non analisi.
+
+### Lo stack: in 124 secondi NON ha lasciato lo stesso `step()`
+`nsub = 22591` e `E_cin = 82.21273344854993` **identici in tutti e 13 i campioni**.
+Posizione in cima allo stack:
+```
+_smorza  (:3264, :3265, :3290)   5 campioni su 13   = 38 %
+step     (:4283 ... :4317)       8 campioni su 13
+```
+
+> **⚠ E questo e' un dato CONTRO la mia modifica, e va detto: `_smorza` e' la funzione che
+> `SCALA_MIN` aggiunge, e sta DENTRO il ciclo dei sotto-passi.** Con `nsub = 22591` il suo costo
+> viene moltiplicato **22591 volte per passo**. **Non ha CAUSATO l'esplosione** — quella e' `n1`,
+> la sorgente — **ma ne AMPLIFICA il costo**, e al momento pesa il **38 %** del tempo campionato.
+
+### I criteri ASSOLUTI, dai 9 snapshot
+```
+archi sotto LAM:  d=0  d0=0   A OGNI SNAPSHOT        min(d) = 0.800000000 esatto, sempre
+```
+**`SCALA_MIN` fa esattamente cio' che dichiara.** Il criterio *«frazione di archi sotto `LAM`:
+zero, a ogni snapshot»* **e' soddisfatto**.
+
+```
+passo    mediana d   mediana d0   d/d0     stress p99   |vd| p50   |vd| max
+ 120      1.269       2.018       0.687      0.731       0.444      3.78
+ 360      1.702       3.210       0.561      0.825       0.771      7.88
+ 600      1.913       4.727       0.486      0.886       1.745     23.29
+ 840      2.397       5.821       0.555      1.645       2.695     38.81
+1080      3.684       8.122       0.659      2.290       4.037     45.34
+```
+
+> **⚠ `d0` cresce PIU' IN FRETTA di `d`: la lunghezza di RIPOSO scappa davanti a quella VERA.**
+> `d/d0` sta fra **0.49 e 0.69**, cioe' **i legami sono COMPRESSI**, non tesi.
+> **Il criterio di trasparenza del mandato cosmologico chiede `d/d0` vicino a 1: NON e'
+> soddisfatto** — e la direzione e' **l'opposta** di quella temuta *(non tensione: compressione)*.
+
+### E due letture grezze che non mi aspettavo
+```
+peq:  non finiti = 0,  <=0: 0,  min finito  1.03e-07 -> 2.00e-04   (CRESCE)
+carica perc_chi:     N(+1) 2634   N(-1)   29   ->   N(+1) 2709  N(-1) 277
+geometria perc_geom: N(+1)   60   N(-1) 2603   ->   diversi da perc_chi: 2586 su 2663
+```
+- **`peq` NON e' degenere** nella finestra sana, e il suo minimo **cresce**. Il sospetto naturale
+  su `src ~ 1/peq` **non e' confermato da questi snapshot** — e l'esplosione di `n1` e' DOPO il
+  passo 1080, che questi dati **non coprono**;
+- **`perc_chi` e `perc_geom` sono quasi OPPOSTI**: la carica e' `+1` al 99 %, la geometria e' `-1`
+  al 98 %, e differiscono su **2586 nodi su 2663**. **E' cio' che la cooperazione doveva produrre
+  — due grandezze separate — ma NON avevo previsto che divergessero cosi' tanto.**
+
+**⚠ Nessuna di queste righe e' una conclusione: sono letture. Il «perche'» non e' misurato.**
