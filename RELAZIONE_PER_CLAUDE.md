@@ -9879,3 +9879,31 @@ e nient'altro.
 
 **Resta da girare il run K** *(solo `COES_ADIM`)*: se `d0` scappa li', il colpevole e' il
 contrappeso perso; se non scappa nemmeno li', **e' l'INTERAZIONE fra i due**, e va detto cosi'.
+
+---
+
+## ⚠ Il run K e' APERTO nel registro — **e una cosa che il §1 chiede NON e' ottenibile da S e K**
+
+**Run K in corso** *(`SCALA_MIN` **off**, `COES_ADIM` **on**, `CHI_COOP` on — verificati DAL
+MODULO all'avvio)*. **La voce di apertura e' committata MENTRE il run gira**, non dopo: un run vivo
+deve esistere nel repository.
+
+### ⚠ La somma algebrica PER SCRITTORE non c'e', e va detto ORA
+Il mandato chiede *«la SOMMA ALGEBRICA PER SCRITTORE di `TRACCIA_D0`»* per S e per K.
+**Non e' ottenibile da questi due run**, e la ragione e' strutturale:
+
+> **`TRACCIA_D0 = False` a `:158` e' una COSTANTE DI MODULO: non ha un flag da riga di comando, e
+> `_applica_flag` non la tocca.** *(Verificato: compare fra i nomi letti dal codice ma NON fra
+> quelli riassegnabili da un comando.)* **Il driver non puo' accenderla.**
+
+**Quindi S e K misurano `d0` come popolazione, non per sito.** **Non e' un'omissione del mandato:
+e' un limite dello strumento che il mandato non poteva conoscere.**
+
+**Cosa servirebbe, e NON lo faccio senza via libera perche' e' una modifica al simulatore:**
+un flag `--traccia-d0` — **byte-inerte a default**, come le altre strumentazioni — e **un terzo e
+quarto run** con la traccia accesa. *(La traccia non e' gratis: scrive una riga per sito per passo,
+e su 300 passi × 12 siti sono ~3600 voci per run.)*
+
+**Cio' che S e K DECIDONO comunque** e' la domanda del §1 — *quale dei due flag fa scappare `d0`* —
+perche' quella si legge dalla **mediana di `d0` nel tempo**, che c'e'.
+**Cio' che NON decidono e' QUALE SCRITTORE la spinge**, e quella resta aperta.

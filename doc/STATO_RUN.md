@@ -594,3 +594,12 @@ ramo B (chi_basc OFF):
 - **note** §1 del mandato: CHI DEI DUE fa scappare d0. RUN S = SOLO SCALA_MIN (COES_ADIM SPENTO), 50 frame = 300 passi. TRACCIA_D0 va acceso a mano nel driver? NO: si accende dal simulatore, e il driver non lo passa -- verificato, quindi questo run misura d0 SENZA la traccia per scrittore. LETTURE FISSATE PRIMA: se d0 scappa solo in S -> e' il CRICCHETTO di SCALA_MIN; solo in K -> e' il contrappeso perso di COES_ADIM; in entrambi -> tutte e due; in nessuno -> e' l'INTERAZIONE. Uno alla volta, MAI in parallelo.
 
 **chiuso 2026-09-21 14:31:19 — FINITO** 50 frame = 300 passi, 17.340 s/frame, 5 snapshot su 5, 0 falliti, 0.18 GB. RISULTATO: d0 NON SCAPPA con SCALA_MIN da solo -- med d0 resta 0.89, 0.81, 0.80, 0.80, 0.81 mentre med d cresce da 1.02 a 2.03 e d/d0 sale a 2.48 (TENSIONE). E ZERO archi sotto LAM a ogni snapshot, contro i 55909 del ramo C senza i due flag: SCALA_MIN fa il suo mestiere SENZA far scappare d0. Il cricchetto DA SOLO non spiega la fuga del ramo D.
+
+## APERTO run_K_solo_coesadim
+
+- **avvio** `2026-09-21 14:31:36` · **blob** `26fa354d (git) / 4954fe5b (byte grezzi)` · **HEAD** `6981a0f`
+- **comando**
+  ```
+  python csv/_test_fork/_scena_video.py 50 csv/_test_fork/_run_K --sep=4.0 --serie=10 --csv-progresso=csv/_test_fork/_run_K/prog.csv --chi-coop=on --scala-min=off --coes-adim=on
+  ```
+- **note** §1 del mandato, SECONDO run: K = SOLO COES_ADIM (SCALA_MIN SPENTO), 300 passi. Il run S ha gia' ESCLUSO il cricchetto da solo: con SCALA_MIN acceso e COES_ADIM spento, med d0 resta ~0.80 piatto. LETTURA FISSATA PRIMA: se d0 scappa in K -> e' il CONTRAPPESO PERSO di COES_ADIM; se non scappa nemmeno in K -> e' l'INTERAZIONE fra i due, e va detto cosi'. Uno alla volta.
