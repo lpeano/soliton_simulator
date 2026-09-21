@@ -1,10 +1,24 @@
 # -*- coding: utf-8 -*-
-"""LA RIGIOCATA `1200 -> 1230` DEL RAMO D -- il nodo che si accende, se c'e'.
+"""LA RIGIOCATA DEL RAMO D DA UNO SNAPSHOT -- il nodo che si accende, se c'e'.
 
-⚠ PERCHE' ESISTE: il ramo D e' stato fermato al passo ~1230 con `nsub = 22591`, ma **l'ultimo
-  snapshot e' il 1200 e li' `n1` vale 1**. **L'innesco vive nei ~30 passi in mezzo, e NESSUNO
-  SNAPSHOT LO COPRE.** Il sistema e' deterministico e lo snapshot porta anche lo stato dell'RNG:
-  ripartire dal 1200 ricostruisce esattamente cio' che ha preceduto l'esplosione.
+⚠⚠ IL NOME DEL FILE DICE `1200_1230` ED E' STORICO: LA PREMESSA DI ALLORA ERA SBAGLIATA.
+  **L'esplosione NON e' dopo il passo 1200.** Cronologia dal registro dei run e dal disco:
+  ```
+  12:40   ultimo frame pulito, il 185                       passo 1110
+  12:58   `nsub = 22591` catturato                          ultimo snapshot su disco: 1080
+  13:02-13:14  compare lo snapshot 1200                     -> il run HA SUPERATO il 1200
+  13:14   fermato al frame 205 (passo 1230)                 stack in `rilassa_disegno`,
+                                                            cioe' FUORI dal ciclo dei sotto-passi
+  ```
+  **E' un PICCO TRANSITORIO fra il 1110 e il 1200, e il run si e' ripreso DA SOLO.**
+  **La conferma indipendente sta nei TIMESTAMP degli snapshot:** ogni intervallo di 120 passi costa
+  **7 minuti**; il `1080 -> 1200` ne e' costato **34** -- cinque volte tanto -- **e lo snapshot
+  1200 e' arrivato lo stesso**.
+
+⚠ PERCHE' ESISTE: il sistema e' deterministico e lo snapshot porta anche lo stato dell'RNG,
+  quindi ripartire dal 1080 ricostruisce **esattamente** la finestra in cui l'esplosione vive --
+  che **nessuno snapshot copre**, perche' fra 1080 e 1200 non ce n'e' nessuno.
+  Il punto di partenza e' l'opzione **`--da=<passo>`** (default **1080**).
 
 ⚠ CI SI FERMA ALL'INNESCO, NON SI INTEGRA L'ESPLOSIONE: quando `n1` supera `SOGLIA_N1` si
   registra lo stato di quel passo e si esce. **Senza, questa rigiocata si pianterebbe come il ramo
@@ -26,10 +40,10 @@ COSA REGISTRA, a OGNI passo:
   quantita' che quel passo ha usato.
 ASCII PURO.
 """
-import glob
 import io
 import os
 import sys
+import time
 
 import numpy as np
 
@@ -41,10 +55,26 @@ _presidio.avvia(__file__)
 
 RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
 sys.path.insert(0, RADICE)   # il simulatore vive nella RADICE, non qui
-SNAP = os.path.join(RADICE, "csv", "_test_fork", "_ab_D", "scena_001200.pkl.gz")
-OUT = os.path.join(RADICE, "csv", "_test_fork", "_diag_D", "RIGIOCATA_1200_1230.txt")
-SOGLIA_N1 = 100      # ⚠ SOGLIA DICHIARATA: sopra questa ci si ferma. Non si integra l'esplosione.
-MAX_PASSI = 60       # oltre il 1260 non si va: l'innesco misurato e' prima del 1230
+# ⚠ IL PUNTO DI PARTENZA E' PARAMETRICO, E IL 1200 ERA SBAGLIATO -- rilievo di Luca.
+#   L'esplosione NON e' dopo il 1200: e' un PICCO TRANSITORIO fra il 1110 e il 1200, e **il
+#   run si e' ripreso da solo**. LA PROVA C'ERA IN DUE POSTI, E NON E' STATA LETTA:
+#     (a) `stack_STOP_finale.txt` mostra il processo in `rilassa_disegno`, cioe' FUORI dal
+#         ciclo dei sotto-passi. Era stato fatto un `grep` di `nsub`, non trovato nulla, e
+#         tirato dritto: **l'ASSENZA di quelle variabili diceva che era in un'altra funzione**;
+#     (b) i TIMESTAMP degli snapshot: `0960 -> 1080` in SETTE minuti, come ogni altro
+#         intervallo, e **`1080 -> 1200` in TRENTAQUATTRO** -- cinque volte tanto -- **e lo
+#         snapshot 1200 arriva lo stesso**. Il run ha ATTRAVERSATO l'esplosione.
+DA = 1080
+for _a in sys.argv[1:]:
+    if _a.startswith("--da="):
+        DA = int(_a.split("=", 1)[1])
+SNAP = os.path.join(RADICE, "csv", "_test_fork", "_ab_D", "scena_%06d.pkl.gz" % DA)
+OUT = os.path.join(RADICE, "csv", "_test_fork", "_diag_D",
+                   "RIGIOCATA_%06d_avanti.txt" % DA)
+SOGLIA_N1 = 100      # ⚠ SOGLIA DICHIARATA, e RESTA: il mandato chiede *la stessa* soglia.
+#   Non si integra l'esplosione: si vuole il PASSO in cui scatta e l'ARCO su cui vive, non la
+#   sua evoluzione. Se scatta, ci si ferma li'.
+MAX_PASSI = 125      # dal 1080 si arriva al 1200 e oltre: la finestra dev'essere COPERTA
 N_GIOVANI = 5
 CAND = (2773, 4158)
 N_VUOTO, N0_SEMINA = 900, 2391
@@ -69,7 +99,8 @@ def main():
 
     o = io.open(OUT, "w", encoding="utf-8", newline="\n")
     W = o.write
-    W("# RIGIOCATA `1200 -> 1230` DEL RAMO D -- l'innesco che nessuno snapshot copre\n")
+    W("# RIGIOCATA `%d -> %d` DEL RAMO D -- il picco TRANSITORIO che il run ha attraversato\n"
+      % (DA, DA + MAX_PASSI))
     W("# soglia DICHIARATA: ci si ferma quando n1 > %d. Max %d passi.\n" % (SOGLIA_N1, MAX_PASSI))
     W("# ramp = min(1, eta/TAU_A), letto dal codice a :2958. TAU_A = %s\n" % S.TAU_A)
     W("# origine: vuoto < %d, massa < %d, nato >= %d\n" % (N_VUOTO, N0_SEMINA, N0_SEMINA))
@@ -78,10 +109,10 @@ def main():
     def orig(x):
         return "V" if x < N_VUOTO else ("M" if x < N0_SEMINA else "N")
 
-    W("%5s | %8s %5s %5s %8s | %-34s | %-30s | %s\n"
-      % ("passo", "n1", "n2", "n3", "nsub", "ARCO con |anom| MASSIMO",
+    W("%5s | %11s %5s %6s %11s | %7s | %-40s | %-30s | %s\n"
+      % ("passo", "n1", "n2", "n3", "nsub", "secondi", "ARCO con |anom| MASSIMO",
          "arco candidato 2773-4158", "nati piu' giovani (eta | I | ramp)"))
-    W("-" * 190 + "\n")
+    W("-" * 215 + "\n")
 
     # ⚠ IL CICLO DEV'ESSERE QUELLO DEL DRIVER, E LA PRIMA VERSIONE NON LO ERA.
     #   Il driver (`:35-37`) e la rigiocata gia' sigillata (`_rigiocata_0_120.py:188-192`) chiamano
@@ -92,7 +123,8 @@ def main():
     PPF = int(S.PASSI_PER_FRAME)
     fermato = None
     for k in range(1, MAX_PASSI + 1):
-        passo = 1200 + k
+        passo = DA + k
+        _t0 = time.time()
         if (k - 1) % PPF == 0:
             S.passo_test()
         S.scuoti_vuoto(net)
@@ -138,8 +170,8 @@ def main():
         else:
             sgio = "(nessun nato)"
 
-        W("%5d | %8.0f %5d %5.0f %8d | %-34s | %-30s | %s\n"
-          % (passo, n1, 1, n3, nsub, smax, scan, sgio))
+            W("%5d | %11.0f %5d %6.0f %11d | %7.1f | %-40s | %-30s | %s\n"
+          % (passo, n1, 1, n3, nsub, time.time() - _t0, smax, scan, sgio))
         o.flush()
         if n1 > SOGLIA_N1:
             fermato = passo
@@ -149,8 +181,10 @@ def main():
         net.mitosi(); net.rilassa_disegno(); net.memoria_hebbiana_moto()
 
     if fermato is None:
-        W("\n*** In %d passi `n1` NON ha superato %d. O la rigiocata non e' fedele, o l'innesco\n"
-          "    e' piu' avanti. Va detto, non raffinato.\n" % (MAX_PASSI, SOGLIA_N1))
+        W("\n*** In %d passi (da %d a %d) `n1` NON ha superato %d.\n"
+          % (MAX_PASSI, DA + 1, DA + MAX_PASSI, SOGLIA_N1))
+        W("    La finestra 1110-1200 E' COPERTA: se il picco non compare, allora la FEDELTA'\n"
+          "    della rigiocata va SIGILLATA, e va detto. Non si raffina la soglia.\n")
     o.close()
     print(io.open(OUT, encoding="utf-8").read())
     return 0
