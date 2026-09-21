@@ -6724,10 +6724,27 @@ def _applica_flag(a):
               f"{SCALA_B:.0f} fini | lambda_eff={LAM:.3f} | gamma_eff={GAMMA:.4f} | "
               f"R_conn={3.0*LAM:.2f} (scala con lambda). NB: la regione FISICA di semina "
               f"resta la stessa — i blocchi occupano lo spazio dei fini, piu' grossolanamente.")
-    # se richiesto un seme/numero nodi diverso, rigenero la rete
+    # ⚠⚠ IL MONDO SI COSTRUISCE SEMPRE QUI, DOPO I FLAG -- MAI AL CARICAMENTO.
+    #   (Decisione di Luca, 2026-09-21; diagnosi in `Z87`. CATEGORIA D del par.10: e' la CURA di
+    #    un difetto, quindi NESSUN FLAG -- un bug curato non ha un interruttore.)
+    #
+    #   PRIMA questa ricostruzione era CONDIZIONATA a `--seed`/`--nodi` e nel caso normale NON
+    #   SCATTAVA: sopravviveva il vuoto costruito all'`import` (`net = Rete(); net.semina(...)`),
+    #   cioe' in un momento in cui OGNI flag da riga di comando e' ancora al suo default di
+    #   MODULO. **OTTO grandezze che la semina legge erano percio' INERTI sul vuoto, in
+    #   silenzio** -- trovate con la chiusura transitiva su 20 funzioni a partire da
+    #   `semina`/`_allaccia`, non a occhio:
+    #       CALORE_VETTORIALE, CAMPO_SPINORIALE, GAMMA, LAM, MAX_NODI, SCALA_AMP, SCALA_MIN, TAU_A
+    #   Fra queste `LAM` fissa il raggio di connessione `R_CONN = 3*LAM` CON CUI IL VUOTO SI
+    #   ALLACCIA, e `CALORE_VETTORIALE` decide il calcio termico ALLA NASCITA dei nodi.
+    #
+    # ⚠ I 300 PASSI E IL RILASSAMENTO RESTANO CONDIZIONATI, e NON e' una dimenticanza: la
+    #   costruzione dell'import NON li faceva, quindi eseguirli sempre cambierebbe il mondo di
+    #   partenza di OGNI run -- che e' l'opposto di cio' che questa cura vuole. Restano dov'erano.
+    #   L'ASIMMETRIA E' DICHIARATA, non subita.
+    net = Rete(a.seed if a.seed is not None else 42)
+    net.semina(a.nodi)
     if a.seed is not None or a.nodi != SEME_INIZIALE:
-        net = Rete(a.seed if a.seed is not None else 42)
-        net.semina(a.nodi)
         for _ in range(300): net.step()
         net.rilassa_disegno(30)
 

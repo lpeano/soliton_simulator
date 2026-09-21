@@ -67,6 +67,34 @@ def segna(nome, ok, det):
     print("%-5s %-6s %s" % (nome, "PASS" if ok else "FAIL", det))
 
 
+# ------------------------------------------------- il lavoratore di Z8 (neutralita')
+if "--z8" in sys.argv:
+    # Z8: LA RICOSTRUZIONE DEL MONDO E' NEUTRA? Con OGNI flag al default di MODULO, il mondo
+    # ricostruito dev'essere BYTE-IDENTICO a quello dell' `import`. Isola il MECCANISMO dalla
+    # FISICA: se qui passa, la cura non aggiunge NIENTE da sola, e ogni differenza vista altrove
+    # e' un flag che finalmente AGISCE sul vuoto invece di essere inerte.
+    os.chdir(RADICE)
+    sys.argv = ["soliton_simulator.py"]
+    import importlib.util as _iu8
+    _sp8 = _iu8.spec_from_file_location("_sim_z8", SIM_ORA)
+    S8 = _iu8.module_from_spec(_sp8); sys.modules["_sim_z8"] = S8
+    _sp8.loader.exec_module(S8)
+    _k = ("d", "d0", "i", "j", "pos", "phi", "eta", "omega_s", "perc_chi")
+    _imp = {k: np.array(getattr(S8.net, k), copy=True) for k in _k}
+    _r = S8.Rete(42); _r.semina(S8.SEME_INIZIALE)
+    _df = []
+    for k, v in _imp.items():
+        w = np.asarray(getattr(_r, k))
+        if v.shape != w.shape:
+            _df.append("%s(shape)" % k)
+        elif not np.array_equal(v, w):
+            _df.append("%s(max|d|=%.3e)" % (k, float(np.nanmax(np.abs(v - w)))))
+    print("Z8DATI campi=%d diversi=%d nodi=%d archi=%d dettaglio=%s"
+          % (len(_imp), len(_df), S8.net.n, len(S8.net.i),
+             ("|".join(_df[:5]) if _df else "nessuno")))
+    raise SystemExit(0)
+
+
 # ----------------------------------------------------------------- il lavoratore
 if "--lavoro" in sys.argv:
     simp = [x.split("=", 1)[1] for x in sys.argv if x.startswith("--sim=")][0]
@@ -201,6 +229,21 @@ def main():
           % (COMMIT_PRIMA, hashlib.sha1(q.stdout).hexdigest()[:8]))
     print("Z0  simulatore ORA            : sha1 GREZZO %s" % hashlib.sha1(dn).hexdigest()[:8])
     print("Z0  (NB: NON e' `git hash-object`. Sono due numeri diversi per lo stesso file, C18.)")
+    print("")
+
+    prz8 = subprocess.run([sys.executable, os.path.abspath(__file__), "--z8"], cwd=RADICE,
+                          capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if prz8.returncode != 0:
+        print(prz8.stdout[-800:]); print(prz8.stderr[-1500:])
+        raise SystemExit("il lavoratore Z8 e' uscito con %d" % prz8.returncode)
+    z8 = prz8.stdout
+    z8d = num(z8, "Z8DATI", "diversi")
+    segna("Z8", z8d == 0,
+          "LA RICOSTRUZIONE DEL MONDO E' NEUTRA: con ogni flag al DEFAULT, il mondo ricostruito "
+          "e' %s a quello dell'import (%s campi, %s nodi, %s archi) -> %s"
+          % ("BYTE-IDENTICO" if z8d == 0 else "DIVERSO", num(z8, "Z8DATI", "campi"),
+             num(z8, "Z8DATI", "nodi"), num(z8, "Z8DATI", "archi"),
+             num(z8, "Z8DATI", "dettaglio", str)))
     print("")
 
     bracci = [("A_prima", vecchio, ()),
