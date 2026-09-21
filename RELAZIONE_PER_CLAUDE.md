@@ -10665,3 +10665,15 @@ lontano dal tetto** — il che ridimensiona, ma non annulla, la sorveglianza che
 a bucket, che non esistono.**
 
 **IL RUN LUNGO NON SI LANCIA**, come il mandato impone quando qualcosa non regge.
+
+**⚠ E L'ORDINE DEL PROSSIMO GIRO, deciso da Luca il 2026-09-21 alle 22:30:**
+> **I residui di `C5` — `I4` scatola nera, `I5` underflow per riga, modalita' FINE — vanno in coda
+> DOPO la cura di `d0` e PRIMA del run lungo. Stasera no.**
+
+**Perche' in quest'ordine, e non prima:** **gli invarianti ci sono gia' nella parte che conta** —
+accesi di default, **42 grandezze a ogni passo**, completezza verificata, e **hanno dimostrato che
+avrebbero preso il caso del passo 1126**. La validazione di stasera e' girata **con loro accesi e
+senza una violazione**. **Cio' che manca serve al RUN LUNGO, non alla diagnosi di `d0`:** tre ore di
+calcolo in cui, se qualcosa va storto, **si vuole sapere subito DOVE**.
+**E la modalita' FINE si e' gia' dimostrata utile stasera stessa:** per scattare sul passo `1126`
+l'invariante ha dovuto **aspettare la fine del passo intero, circa mezz'ora**.

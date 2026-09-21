@@ -1,7 +1,7 @@
 <!-- PUNTO-DI-RIPRESA:INIZIO -->
 # ⚠⚠ PUNTO DI RIPRESA — **si legge PER PRIMO dopo un riavvio**
 
-> **Aggiornato 2026-09-21 22:30 · HEAD `5188756` · branch `fork-su2`, tutto committato e pushato.**
+> **Aggiornato 2026-09-21 22:37 · HEAD `bc940ff` · branch `fork-su2`, tutto committato e pushato.**
 > **Il PC si riavvia fra mezzanotte e le due** *(vincolo di Luca, 2026-09-21)*. **Questo blocco e'
 > RIGENERATO per intero a ogni aggiornamento**, fra due marcatori HTML: non si accumulano versioni
 > e non c'e' niente da cancellare a mano.
@@ -21,7 +21,8 @@
 | **strumento delle LETTURE** | ✅ criteri fissati PRIMA, tabella generata da codice | `csv/_test_fork/_letture_validazione.py` |
 | **validazione 600 passi** | ✅ **FINITA**: 6 criteri su 8 REGGONO. `nsub` max = **4**, `peq >= 0`, zero sotto `LAM`, zero violazioni. **NON reggono `d0` (esponenziale, x1.232 per snapshot) e `d/d0` (0.69-0.84 = COMPRESSIONE)** | `csv/_test_fork/_val600/LETTURE.txt` · `Z101` |
 | **CHECKPOINT 2** | ⚠ **RAGGIUNTO: si aspetta LUCA. IL RUN LUNGO NON SI LANCIA** | — |
-| **il prossimo giro** | ⏸ **la fuga di `d0`: `S09`/`S10`** *(auto-amplificanti, mai misurati PER SITO)* | `Z101`, e il mandato globale §6 li aveva esclusi da questo giro |
+| **il prossimo giro** | ⏸ **`D0`: chi fa scappare `d0`** -- `S09`/`S10`, auto-amplificanti e **mai misurati PER SITO**. **E' l'UNICA cosa che blocca il run lungo** | `Z101` · la somma per scrittore con `TRACCIA_D0` |
+| **poi** | ⏸ **i residui di `C5`**: `I4` scatola nera, `I5` underflow per riga, **modalita' FINE** -- **dopo `d0`, PRIMA del run lungo** | `Z100` · deciso da Luca il 21/9 alle 22:30 |
 
 ## COME SI RIPARTE — **i comandi esatti, verbatim**
 
@@ -224,20 +225,38 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 
 | # | voce | mandato | stato |
 |---|---|---|---|
-| 1-5 | `CHI_COOP` · `SCALA_MIN`+`COES_ADIM` · sigillo `11/11`+`Z1c` · lancio ramo D · tag `epoca-2` | perentorio, EPOCA | ✅ **FATTE** *(il ramo D **fermato al 1230**: non e' una divergenza, sono **picchi transitori** — `Z90` corretta)* |
-| **4-bis** | **DIAGNOSI DEI PICCHI DI `n1`** — i tre numeri che mancano | GLOBALE §1 | ▶ **passo `1126`, arco `3352-506`, `peq = -4.85e-04` NEGATIVO gia' misurati** (`Z93`, `Z94`). **Restano: `max(dt_e/tau_bg_loc)`, QUANTI archi con `peq < 0`, QUALE termine di `:4206` li porta sotto** |
-| **C1** | **CURA ① `PEQ_ESATTO`** — rilassamento in forma esatta esponenziale, `peq` non scavalca mai | GLOBALE §2① | ⏸ |
-| **C2** | **CURA ② `PEQ_NASCITA_LOCALE`** — Schwinger (`:4846`) prende `rho` del SUO arco, non la mediana globale | GLOBALE §2② | ⏸ *(`A2`, `A10`)* |
-| **C3** | **CURA ③ `SCALA_MIN_PASSO`** — il freno UNA VOLTA per passo, sulla variazione TOTALE, dal valore di INIZIO passo | GLOBALE §2③ | ⏸ **col SIGILLO NUOVO sulla COMPOSIZIONE**, che oggi non esiste (`A9`) |
-| **C4** | **CURA ④ `COES_CAUSALE`** — ingressi di INIZIO passo e tetto dal cono LOCALE dell'arco | GLOBALE §2④ | ⏸ *(`A5`)* |
-| **V** | **VALIDAZIONE BREVE** — tre modifiche + quattro cure, 600 passi, `sep = 4.0`, stesso seme | GLOBALE §3 | ⏸ **⚠ CHECKPOINT 2: QUI CI SI FERMA E SI ASPETTA LUCA** |
-| **8-bis** | **ARCHIVIO A ROTAZIONE** — si scrive su `C:`, ogni snapshot completo va su `E:` con `sha1` dei byte compressi, sigilli `R1`-`R5` | archivio | 🔒 **dopo il via libera del CHECKPOINT 2** |
-| **E3** | **EPOCA 3 + NUOVO RAMO D COMPLETO** — tag `epoca-3`, 3000 passi, `M1`/`M4` leggere durante il run | GLOBALE §4 | 🔒 **dopo il via libera.** **NESSUN confronto con le epoche precedenti** |
+| 1-5 | `CHI_COOP` · `SCALA_MIN`+`COES_ADIM` · sigillo `11/11`+`Z1c` · ramo D · tag `epoca-2` | perentorio, EPOCA | ✅ **FATTE** |
+| **4-bis** | **DIAGNOSI DEI PICCHI DI `n1`** | GLOBALE §1 | ✅ **passo `1126`, arco `3352-506`, `peq = -4.85e-04`**; i tre numeri misurati *(`Z93`, `Z94`)* |
+| **C1** | `PEQ_ESATTO` — rilassamento in forma esatta | GLOBALE §2① | ✅ **`7/7`** *(`Z95`)* |
+| **C2** | `PEQ_NASCITA_LOCALE` — nascita locale di `peq` | GLOBALE §2② | ✅ **`6/6`** *(`Z96`)* |
+| **C3** | `SCALA_MIN_PASSO` — il freno una volta per passo | GLOBALE §2③ | ✅ **`6/6`** *(`Z97`)* |
+| **C4** | `COES_CAUSALE` — istante unico e cono locale | GLOBALE §2④ | ✅ **`5/5`** *(`Z98`)* |
+| **C1-bis** | `ANOM_SIMM` — il pavimento `1e-9` tolto | 21/9 §② | ✅ **`6/6`** *(`Z99`)* |
+| **C5** | `INVARIANTI` — 42 domini, due livelli | mandato `C5` | ✅ **`3/3`** *(`Z100`)*; **accesi di default** |
+| **driver** | inoltra tutte le cure | 21/9 §① | ✅ **`3/3`**, 9 opzioni su 9 in entrambi i versi |
+| **V** | **VALIDAZIONE a 600 passi** | GLOBALE §3 | ⚠ **`6` criteri su `8`** *(`Z101`)*. **`nsub` max `4`**, `peq >= 0`, zero sotto `LAM`, **zero violazioni**. **NON reggono `d0` e `d/d0`** |
+| **CHK2** | **CHECKPOINT 2** | GLOBALE §3 | ✅ **raggiunto e riferito a Luca.** **IL RUN LUNGO NON SI LANCIA** |
+| **D0** | **⚠ LA CURA DI `d0`: CHI LO FA SCAPPARE** — `S09` *(spinta × `median(d0)`)* e `S10` *(gravita', idem)*, **auto-amplificanti per costruzione e MAI misurati PER SITO** | decisione di Luca, 21/9 | ▶ **E' LA PROSSIMA, ed e' l'UNICA cosa che blocca il run lungo.** Prima la **somma per scrittore** con `TRACCIA_D0`, separando **SALITE e DISCESE** |
+| **C5-res** | **I RESIDUI DI `C5`** — **`I4`** la scatola nera *(rigiocare da solo il passo in cui scatta un invariante)*, **`I5`** la tabella degli underflow **per RIGA**, e la **MODALITA' FINE** *(controllo dopo OGNI scrittura invece che a fine passo)* | mandato `C5`, decisione di Luca 21/9 | ⏸ **DOPO la cura di `d0` e PRIMA del run lungo. Stasera no.** |
+| **8-bis** | **ARCHIVIO A ROTAZIONE** — si scrive su `C:`, ogni snapshot completo va su `E:` con `sha1` dei byte compressi, sigilli `R1`-`R5` | archivio | 🔒 prima del run lungo |
+| **E3** | **EPOCA 3 + RUN LUNGO** — tag `epoca-3`, 3000 passi, `M1`/`M4` leggere durante il run | GLOBALE §4 | 🔒 **solo dopo che i criteri REGGONO.** Nessun confronto con le epoche precedenti |
 | 6 | strumento cosmologico `M1`-`M4`, **sul nuovo D** | COSMOLOGICO | ⏸ |
 | 7 | **`Z47` PARTE ①** — ricognizione di `pos` nella fisica *(sola lettura)* | `MANDATO_Z47_coda` | ⏸ |
 | 8 | `M2`/`M3` cosmologici *(pesanti)* | COSMOLOGICO | ⏸ |
 | 9 | **CHECKPOINT FINALE a Luca** | — | ⏸ |
 | 10 | `Z47` PARTE ② — lo stacco | `MANDATO_Z47_coda` | 🔒 **NON parte senza il via libera di Luca** |
+
+> **⚠ PERCHE' I RESIDUI DI `C5` VANNO PRIMA DEL RUN LUNGO E NON PRIMA DELLA CURA DI `d0`**
+> *(decisione di Luca, 2026-09-21, 22:30)*:
+> **gli invarianti CI SONO GIA' nella parte che conta** — accesi di default, 42 grandezze a ogni
+> passo, completezza verificata, e **hanno dimostrato che avrebbero preso il caso del passo 1126**.
+> La validazione di stasera e' girata **con loro accesi e senza una violazione**.
+> **Cio' che manca serve al RUN LUNGO, non alla diagnosi di `d0`:** tre ore di calcolo in cui, se
+> qualcosa va storto, **si vuole sapere SUBITO DOVE**.
+> **E la modalita' FINE si e' gia' dimostrata utile STASERA STESSA:** per scattare sul passo 1126
+> l'invariante ha dovuto **aspettare la fine del passo intero, circa mezz'ora**. **La modalita'
+> fine l'avrebbe preso subito.**
+
 
 > **⚠ PERCHE' IL COSMOLOGICO E' IN FONDO:** **le misure cosmologiche su un run che esplode NON
 > misurano la cosmologia.** `M1`-`M4` chiedono se l'espansione sia senza centro e localmente

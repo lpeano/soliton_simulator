@@ -20,7 +20,8 @@
 | **strumento delle LETTURE** | ✅ criteri fissati PRIMA, tabella generata da codice | `csv/_test_fork/_letture_validazione.py` |
 | **validazione 600 passi** | ✅ **FINITA**: 6 criteri su 8 REGGONO. `nsub` max = **4**, `peq >= 0`, zero sotto `LAM`, zero violazioni. **NON reggono `d0` (esponenziale, x1.232 per snapshot) e `d/d0` (0.69-0.84 = COMPRESSIONE)** | `csv/_test_fork/_val600/LETTURE.txt` · `Z101` |
 | **CHECKPOINT 2** | ⚠ **RAGGIUNTO: si aspetta LUCA. IL RUN LUNGO NON SI LANCIA** | — |
-| **il prossimo giro** | ⏸ **la fuga di `d0`: `S09`/`S10`** *(auto-amplificanti, mai misurati PER SITO)* | `Z101`, e il mandato globale §6 li aveva esclusi da questo giro |
+| **il prossimo giro** | ⏸ **`D0`: chi fa scappare `d0`** -- `S09`/`S10`, auto-amplificanti e **mai misurati PER SITO**. **E' l'UNICA cosa che blocca il run lungo** | `Z101` · la somma per scrittore con `TRACCIA_D0` |
+| **poi** | ⏸ **i residui di `C5`**: `I4` scatola nera, `I5` underflow per riga, **modalita' FINE** -- **dopo `d0`, PRIMA del run lungo** | `Z100` · deciso da Luca il 21/9 alle 22:30 |
 
 ## COME SI RIPARTE — **i comandi esatti, verbatim**
 
