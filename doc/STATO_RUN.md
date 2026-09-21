@@ -134,27 +134,30 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 
 | # | voce | mandato | stato |
 |---|---|---|---|
-| 1 | `CHI_COOP` (carica dallo spinore, geometria da `chi_basc`) | perentorio ① | ✅ **FATTO**, sigillo `8/8` |
-| 2 | `SCALA_MIN` + `COES_ADIM`, codice e driver | perentorio ②③ | ✅ **FATTO**, `11b6431` |
-| 3 | **sigillo unico `Z0`-`Z8`** | perentorio | ✅ **`11/11`** — `d69e5bae` sul simulatore `4954fe5b`, piu' `Z1c` |
-| 4 | **lancio del ramo D** | perentorio | ✅ **CHIUSO: FERMATO al passo 1230**, archivio INTATTO. **NON ha raggiunto i 3000 passi**, e la ragione scritta in `Z90` era sbagliata: **picchi TRANSITORI**, non divergenza |
-| 5 | tag `epoca-2` + righe di stato + regola in `CLAUDE.md` | EPOCA | ✅ **FATTO**, piu' la `git notes` con la correzione `EPOCA 1-bis` |
-| **4-bis** | **DIAGNOSI DEI PICCHI DI `n1`** | mandato 21/9 §1 §2 | ✅ **PASSO `1126`, ARCO `3352-506`, `peq = -4.85e-04` NEGATIVO** (`Z93`, `Z94`). **Resta il §2 del mandato, col BERSAGLIO CORRETTO** *(non «da dove viene `rho`»: **quanti archi hanno `peq < 0`**, **quale dei due termini di `:4206` scavalca**, e **`dt_e/tau_bg_loc`**)* |
-| **NUOVA a** | **CURA ① — `SCALA_MIN_PASSO`**: il freno UNA VOLTA per passo, sulla variazione TOTALE, dal valore di INIZIO passo | mandato 21/9 §3① | ⏸ dopo la 4-bis. **Sigillo NUOVO sulla COMPOSIZIONE**, che oggi non esiste |
-| **NUOVA b** | **CURA ② — `ANOM_SIMM`**: `anom = 2(rho−peq)/(rho+peq)`, niente pavimento `1e-9` | mandato 21/9 §3② | ⏸ **⚠ DA DERIVARE PRIMA: con `peq < 0` la forma simmetrica ha un POLO in `peq = −rho` e NON e' limitata in `[−2,2]`** *(coi numeri misurati vale `4.32`)*. **Segnalato a Luca** |
-| **8-bis** | **ARCHIVIO A ROTAZIONE** — il run scrive su `C:`, ogni snapshot completo va su `E:` con `sha1` dei byte compressi | mandato archivio | ⏸ **condizione d'avvio SODDISFATTA**. Va **PRIMA** del nuovo ramo D |
-| **NUOVA c** | **IL NUOVO RAMO D COMPLETO** — le tre modifiche + le due cure accese, 3000 passi, `sep = 4.0`, stesso seme | mandato 21/9 §4 | ⏸ **Letture: criteri ASSOLUTI**, compreso **`d/d0` vicino a 1** *(trasparenza)* e **nessun picco di `nsub`** |
-| 6 | strumento cosmologico `M1`-`M4` | COSMOLOGICO | ⏸ **SPOSTATA QUI DA LUCA: DOPO il nuovo ramo D, sui suoi snapshot** |
+| 1-5 | `CHI_COOP` · `SCALA_MIN`+`COES_ADIM` · sigillo `11/11`+`Z1c` · lancio ramo D · tag `epoca-2` | perentorio, EPOCA | ✅ **FATTE** *(il ramo D **fermato al 1230**: non e' una divergenza, sono **picchi transitori** — `Z90` corretta)* |
+| **4-bis** | **DIAGNOSI DEI PICCHI DI `n1`** — i tre numeri che mancano | GLOBALE §1 | ▶ **passo `1126`, arco `3352-506`, `peq = -4.85e-04` NEGATIVO gia' misurati** (`Z93`, `Z94`). **Restano: `max(dt_e/tau_bg_loc)`, QUANTI archi con `peq < 0`, QUALE termine di `:4206` li porta sotto** |
+| **C1** | **CURA ① `PEQ_ESATTO`** — rilassamento in forma esatta esponenziale, `peq` non scavalca mai | GLOBALE §2① | ⏸ |
+| **C2** | **CURA ② `PEQ_NASCITA_LOCALE`** — Schwinger (`:4846`) prende `rho` del SUO arco, non la mediana globale | GLOBALE §2② | ⏸ *(`A2`, `A10`)* |
+| **C3** | **CURA ③ `SCALA_MIN_PASSO`** — il freno UNA VOLTA per passo, sulla variazione TOTALE, dal valore di INIZIO passo | GLOBALE §2③ | ⏸ **col SIGILLO NUOVO sulla COMPOSIZIONE**, che oggi non esiste (`A9`) |
+| **C4** | **CURA ④ `COES_CAUSALE`** — ingressi di INIZIO passo e tetto dal cono LOCALE dell'arco | GLOBALE §2④ | ⏸ *(`A5`)* |
+| **V** | **VALIDAZIONE BREVE** — tre modifiche + quattro cure, 600 passi, `sep = 4.0`, stesso seme | GLOBALE §3 | ⏸ **⚠ CHECKPOINT 2: QUI CI SI FERMA E SI ASPETTA LUCA** |
+| **8-bis** | **ARCHIVIO A ROTAZIONE** — si scrive su `C:`, ogni snapshot completo va su `E:` con `sha1` dei byte compressi, sigilli `R1`-`R5` | archivio | 🔒 **dopo il via libera del CHECKPOINT 2** |
+| **E3** | **EPOCA 3 + NUOVO RAMO D COMPLETO** — tag `epoca-3`, 3000 passi, `M1`/`M4` leggere durante il run | GLOBALE §4 | 🔒 **dopo il via libera.** **NESSUN confronto con le epoche precedenti** |
+| 6 | strumento cosmologico `M1`-`M4`, **sul nuovo D** | COSMOLOGICO | ⏸ |
 | 7 | **`Z47` PARTE ①** — ricognizione di `pos` nella fisica *(sola lettura)* | `MANDATO_Z47_coda` | ⏸ |
 | 8 | `M2`/`M3` cosmologici *(pesanti)* | COSMOLOGICO | ⏸ |
-| 9 | **CHECKPOINT a Luca** | — | ⏸ |
+| 9 | **CHECKPOINT FINALE a Luca** | — | ⏸ |
 | 10 | `Z47` PARTE ② — lo stacco | `MANDATO_Z47_coda` | 🔒 **NON parte senza il via libera di Luca** |
 
-> **⚠ PERCHE' IL COSMOLOGICO E' SCESO, e la ragione va letta insieme all'ordine:**
-> **le misure cosmologiche su un run che esplode NON misurano la cosmologia.** `M1`-`M4` chiedono se
-> l'espansione sia senza centro e localmente trasparente; un run che attraversa picchi di `nsub` a
-> `22591` con `peq` che esce dal dominio fisico **non e' il sistema di cui si vuole sapere questo.**
-> **Prima si cura, poi si misura.** *(Decisione di Luca, 2026-09-21.)*
+> **⚠ PERCHE' IL COSMOLOGICO E' IN FONDO:** **le misure cosmologiche su un run che esplode NON
+> misurano la cosmologia.** `M1`-`M4` chiedono se l'espansione sia senza centro e localmente
+> trasparente; un run che attraversa picchi di `nsub` a `22591`, con `peq` fuori dal dominio fisico,
+> **non e' il sistema di cui si vuole sapere questo.** **Prima si cura, poi si misura.**
+
+> **⚠ REGISTRATI E NON CURATI IN QUESTO GIRO** *(GLOBALE §6, restano nel SOSPESO)*: **`n3`
+> normalizzato su `median(d)`** · **la spinta `S09` moltiplicata per `median(d0)`** · **`Z47`** ·
+> **la carica che non produce forze.**
+
 
 > **⚠ Se una voce si blocca, le successive ASPETTANO: non si passa avanti.**
 >
