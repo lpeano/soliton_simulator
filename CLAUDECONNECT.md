@@ -967,3 +967,156 @@ sistema, o la struttura vive altrove?* A registra una pista non interpretata: ne
 raggio della regione centrale salta da 0.8 a 13.2 fra due campioni **mentre tutte le firme di spin
 restavano piatte**. Se la struttura vive altrove, e' nel settore **metrico/densita'** che se ne
 vedrebbe traccia — e li' non si e' mai guardato con lo stesso rigore.
+
+---
+
+## Sessione 2026-09-21 — **EPOCA 2: la cooperazione, la scala minima, e un run che non arriva**
+
+> **⚠ QUESTA CRONACA ERA FERMA AL 14 SETTEMBRE — sette giorni.** Lo **stato**
+> (`RAMIFICAZIONI`, `STATO_RUN`) e la **relazione** sono stati tenuti aggiornati commit per commit;
+> **la cronaca no.** Rilievo di **L**. *(La distinzione del par.5-quater — stato contro cronaca —
+> non autorizza a lasciar morire la seconda.)*
+
+### §59 — `CHI_COOP`: geometria e carica COOPERANO invece di escludersi — ESEGUITO
+Il mandato iniziale voleva un ramo C con `CHI_DA_SPINORE`, che **spegne** `chi_basc`. **L** corregge
+in corsa: spegnere il primo per accendere il secondo **toglierebbe la geometria INSIEME alla
+carica**, e un confronto con due variabili cambiate insieme **non si legge**.
+
+**A** censisce i **45 siti** di `perc_chi` (`Z85`) e trova il fatto che decide il disegno: con
+`CHI_CORE` acceso **tutta la catena della torsione passa da UNA funzione**, `chiralita_core_locale`,
+riga `:1574`. **Un punto, non quattro.** Ma la stessa funzione serve **DUE padroni** — la torsione
+*e* il campo `B` del passo spinoriale — quindi l'array arriva come **argomento**, e **la cache la
+scrive il ramo che la possiede**: senza la separazione `TORS_4PI` avrebbe ricevuto **la carica in
+silenzio**, perche' nell'ordine di `step()` legge la cache scritta **per ultima**.
+
+Sigillo `8/8`, col controllo positivo che lo rende non vuoto: *se i due array non differiscono mai,
+il test non ha distinto niente e vale **FAIL**, non PASS*.
+
+### §60 — `SCALA_MIN`: la prima forma e' CADUTA, e il perche' e' il punto
+**A** deriva `L(x) = LAM + x*exp(-LAM/x)`: monotona, liscia, asintotica a `LAM`, identita' a grande
+scala, zero coefficienti. **Tutto vero, e tutto inutile.**
+
+**L** la respinge: **NON E' IDEMPOTENTE.** `L(x) > x` anche per `x >> LAM`, e **un pavimento viene
+applicato SETTE VOLTE PER PASSO**: su tremila passi sarebbe uscita **un'espansione fabbricata dal
+vincolo**, cioe' **proprio la grandezza da misurare**. **Lo stesso difetto ha `sqrt(x^2+LAM^2)`.**
+
+> **Il criterio mancante non era sulla FORMA, era sull'OPERATORE: `L(L(x)) == L(x)`.**
+> **A** aveva verificato la curva, non l'operatore applicato ripetutamente.
+
+**La forma in vigore SMORZA LA DISCESA:** incremento `>= 0` intatto **bit per bit**, incremento
+`< 0` moltiplicato per `max(0, 1 - LAM/x)`. Invariante: **`nuovo - LAM = (x - LAM)*(1 + dx/x)`** —
+la distanza da `LAM` si **moltiplica**, quindi `LAM` non si tocca mai. Misurato: identita' a `0.0`
+**esatto**, invariante a `2.2e-15`, 200 dimezzamenti che convergono restando sopra.
+
+### §61 — Il difetto piu' grosso: **il VUOTO nasceva prima della FISICA**
+Il sigillo dava `min(d) = 0.076` con `LAM = 0.8` **a vincolo acceso**. **A** esclude tre ipotesi dal
+disco e conclude che *«esiste uno scrittore fuori dai DODICI censiti»*. **E' FALSO.**
+
+**L'indizio decisivo e' di L:** `min(d)` e `min(d0)` erano **identici a nove cifre** — *«una discesa
+dinamica li SEPAREREBBE: due valori identici sono la firma di un arco NATO cosi'»*.
+
+**Misurato:** `net = Rete(); net.semina(...)` gira **all'`import`**, e la ricostruzione della rete
+era **condizionata** a `--seed`/`--nodi`, quindi **non scattava mai**. **OTTO grandezze che la
+semina legge sono state INERTI SUL VUOTO in ogni run mai fatto** (`Z88`) — fra cui **`LAM`**, che
+fissa il raggio di allacciamento, e **`CALORE_VETTORIALE`**, mentre `--calore-scal` e' in **ogni**
+comando del fork.
+
+> **A sbagliare non era il DOVE, era il QUANDO.** Cura: la ricostruzione diventa **incondizionata**
+> (categoria D, nessun flag). Sigillo `Z8`: **a flag di default il mondo ricostruito e'
+> byte-identico a quello dell'import**, zero differenze.
+
+### §62 — L'EPOCA 2 si dichiara, e `Z1` si ri-ancora
+Tag annotato **`epoca-2`** su `01eda44`, che certifica il blob **`4954fe5b`**. **L** precisa che il
+tag deve comprendere **anche la cura del mondo**, perche' cambia tutti i run.
+
+**`Z1` si sposta all'argv NUDO** — l'unico caso in cui la cura **non puo'** avere effetto, quindi
+**piu' severo**. E **L** trova il buco che restava: **`Z1c` mancava**, cioe' la byte-identita' con
+l'**argv del FORK**. **A** la scrive, e la controprova e' il numero che conta: **60 chiamate a
+`chiralita_core_locale` contro le ZERO dell'argv nudo.** *«Un test che non attraversa il codice non
+prova niente su quel codice.»* Sigillo finale **`11/11`**.
+
+**E nasce `EPOCA 1-bis`:** il blob del tag con l'argv del fork e i tre flag spenti **non e' epoca
+1** — il vuoto nasce coi flag del run. **I run del fork di epoca 1 NON si riproducono sul blob
+nuovo, e non e' un difetto.**
+
+### §63 — Il ramo D girava con la CONFIGURAZIONE SBAGLIATA
+Andando a estrarre i dati, **A** legge i flag **dal modulo** e trova `SCALA_MIN False`,
+`COES_ADIM False` **mentre il comando li chiedeva accesi**. **Il driver li parsava e non li
+inoltrava.** **1230 passi buttati.**
+
+**Causa:** una patch con **un `assert` globale**, soddisfatto dalle *altre* sostituzioni. **Terza
+volta nello stesso giorno** (il driver, il sigillo dei flag, il hook di `P1-bis`).
+Da qui **`P1-quater`**: *ogni sostituzione si asserisce per se', mai in blocco.*
+E il presidio nuovo `_sigillo_flag_driver.py`, che **scopre le opzioni dal sorgente** invece di
+elencarle: se una viene aggiunta e non cablata, la trova da solo.
+
+### §64 — Il ramo D diverge, e il vincolo vincente e' `n1`
+Rilanciato correttamente, D arriva al passo ~1230 e poi **`nsub = 22591`** contro il pavimento `4`.
+**Non e' `|vd|`: `n3` vale TRE.** E' **`n1`, la SORGENTE** — il termine con `peq` al denominatore,
+gia' a registro come *«NON toccato: ATTIVO»*.
+
+**La firma e' quella del ramo B, ma li' `chi_basc` era SPENTO e qui e' ACCESO:** **lo stesso canale
+esplode in entrambe le configurazioni.**
+
+### §65 — Una tabella RICOPIATA A MANO rovescia una conclusione
+**A** ricopia a mano una tabella dal **proprio** file grezzo, fa **slittare due righe**, e scrive
+che *«`peq` cresce, non e' degenere»*. **Se ne accorge Claude web leggendo il FILE invece del
+commit.** **`peq` non cresce: CROLLA di quattordici ordini** — `1.38e-14` al passo 1200, col crollo
+piu' violento **subito prima** dell'esplosione.
+
+Da qui **`P1-ter`**: *una tabella si GENERA da codice, mai si ricopia.* **Un numero ricopiato non ha
+provenienza; uno generato ce l'ha.**
+
+**E la ri-analisi, generata da codice, ribalta la lettura principale** (`T5`): confrontando D con
+**solo `CHI_COOP`**, i due flag **non attenuano un difetto: INVERTONO IL REGIME.** Senza, `d0`
+resta a `0.83` e i legami vanno in **tensione** con **55 909 archi sotto `LAM`**; con, `d0` scappa a
+`30` e i legami si **comprimono**, con **zero archi sotto `LAM`**.
+
+### §66 — L'estratto grezzo, e l'errore che lo giustifica
+**A** pubblica su un ramo separato `dati-grezzi` tre snapshot in `.npz`, perche' Claude web possa
+**rifare i conti** invece di fidarsi. **Claude web li rifa e trova un errore nell'estratto:**
+`nodo_origine` etichettava come MASSA i primi **595 NATI**, perche' `N0` veniva dal **primo snapshot
+esportato** invece che dallo **stato iniziale**.
+
+> **Stessa famiglia dell'errore della tabella: un valore DEDOTTO da cio' che si aveva sotto mano
+> invece che DALLA SUA DEFINIZIONE. Due volte nello stesso giorno.**
+> E ripubblicando, **A** stava per pushare l'estratto **ancora sbagliato**, perche' il ramo conteneva
+> lo **script vecchio**: visto solo grazie a una riga di controllo stampata dopo la generazione.
+
+Col criterio corretto il quadro si **rafforza**: in **9 snapshot su 10** il minimo di `peq` vive su
+un arco **NATO-NATO**.
+
+### §67 — `peq` nasce in TRE MODI DIVERSI
+Letto dal codice: `_allaccia` lo calibra a **`rho` dell'arco stesso** *(quindi `anom = 0` esatto)*;
+la mitosi lo **eredita**; **Schwinger prende `median(self.peq)` — la MEDIANA GLOBALE**, che **viola
+`A2`**. **La stessa grandezza nasce in tre modi incoerenti fra loro.**
+
+E il meccanismo sui nati torna: `peq = rho`, e per un nodo appena nato `|psi|^2` e' minuscola.
+
+### §68 — `P1-bis` diventa un IMPEDIMENTO
+**L** deve chiedere **tre volte** che ogni riscontro sia relazionato. Misurato: **7 su 52** il 20/9,
+**10 su 32** il 21/9. **Due regole SCRITTE non hanno cambiato il numero**, e `A9` dice che un
+presidio che non impedisce non e' un presidio.
+
+Nasce un hook **`commit-msg`** che **RIFIUTA** un commit con un riscontro e senza relazione, con via
+d'uscita che **obbliga a dichiarare** (`[SENZA-RELAZIONE: motivo]`). **Il primo hook era sbagliato**
+— stava in `pre-commit`, che gira **prima** che git scriva il messaggio — **e lo ha rivelato la
+prova**, non il ragionamento.
+
+### §69 — I due run brevi, e cosa resta aperto
+**Run S** *(solo `SCALA_MIN`)*: **`d0` NON scappa**, resta a `~0.80` piatto, e **zero archi sotto
+`LAM`** contro i 55 909 del ramo senza flag. **Il cricchetto da solo e' ESCLUSO**, e `SCALA_MIN` fa
+esattamente cio' che dichiara.
+**Run K** *(solo `COES_ADIM`)*: **in corso** al momento in cui questa cronaca si scrive.
+
+**E un limite dichiarato male, corretto da L:** **A** aveva detto che la somma per scrittore
+richiedeva *«un flag nuovo e altri due run»*. **Falso:** la rigiocata `_rigiocata_0_120.py` imposta
+`TRACCIA_D0` **direttamente sul modulo** (`:79`) — **uno strumento scritto da A stesso**.
+*«Un limite dichiarato guardando UNA strada e presentato come limite del sistema.»*
+
+### Cosa resta aperto a fine sessione
+- **la rigiocata `1200 -> 1230`**: l'unico modo di vedere l'innesco, che **nessuno snapshot copre**;
+- **`n1`/`src`/`peq`**, `S09`/`S10` come motori di `d0` *(candidati, non misurati per sito)*;
+- **nessuna configurazione e' trasparente**: `d/d0` fallisce in **entrambi i versi** — tensione
+  senza i flag, compressione con;
+- `Z47`, il cosmologico `M1`-`M4`, l'archivio a rotazione.
