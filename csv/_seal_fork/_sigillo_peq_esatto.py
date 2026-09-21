@@ -113,6 +113,10 @@ if "--p5" in sys.argv:
     # P5a: stesso stato, la cura accesa SOLO al passo 1126. P5b: cura accesa da subito.
     modo = [x.split("=", 1)[1] for x in sys.argv if x.startswith("--modo=")][0]
     os.chdir(RADICE)
+    # ⚠ il simulatore vive nella RADICE, non in `csv/_seal_fork/`: senza questa riga
+    #   l'`import` muore, e con lo stderr non catturato il sigillo diceva "nessuno stop"
+    #   invece di "non parte". Un FAIL che nasconde la sua causa e' peggio di un FAIL.
+    sys.path.insert(0, RADICE)
     sys.argv = list(ARGV_D) + (["--peq-esatto"] if modo == "b" else [])
     import soliton_simulator as S
     a = S._cli(); S._applica_regime(a); S._applica_flag(a)
@@ -156,7 +160,12 @@ def gira(*extra, **kw):
     if pr.returncode != 0 and not kw.get("tollera"):
         print(pr.stdout[-1500:]); print(pr.stderr[-2500:])
         raise SystemExit("lavoratore uscito con %d" % pr.returncode)
-    return pr.stdout
+    # ⚠ SI RESTITUISCE ANCHE LO STDERR: senza, un lavoratore che MUORE produce un FAIL che
+    #   dice "nessuno stop" invece della causa vera. E' successo, e mi ha fatto cercare nel
+    #   posto sbagliato.
+    return pr.stdout + ("
+[stderr]
+" + pr.stderr if pr.returncode != 0 else "")
 
 
 def main():
@@ -249,7 +258,12 @@ def main():
         mm = re.search(r"P5%s STOP passo=(\d+) nsub=(\d+) n1=(\S+) n3=(\S+) peqmin=(\S+) "
                        r"salvati=(\d+)" % modo, out)
         if not mm:
-            esiti.append(("P5%s" % modo, False, "nessuno stop: %s" % out.strip()[-200:]))
+            esiti.append(("P5%s" % modo, False,
+                          "nessuno stop -- ECCO PERCHE':
+      %s"
+                          % out.strip()[-600:].replace("
+", "
+      ")))
             continue
         nsub = int(mm.group(2)); pmin = float(mm.group(5)); salv = int(mm.group(6))
         ok = nsub < 100 and pmin >= 0.0
