@@ -685,7 +685,7 @@ Il mio classificatore l'aveva messo fra i reperti: **errore di categoria, corret
 
 | | |
 |---|---|
-| **archivi** | `csv/_test_fork/_ab_A/scena_??????.pkl.gz` · `csv/_test_fork/_ab_B/scena_??????.pkl.gz` |
+| **archivi** | ⚠ **SPOSTATI SU `E:` il 2026-09-21** *(archivio freddo, `Z89`)*: `E:\soliton_archivio\csv\_test_fork\_ab_A\scena_??????.pkl.gz`. `_ab_B` e' sotto i 300 MB e **resta su `C:`**: `csv/_test_fork/_ab_B/scena_??????.pkl.gz`. **⚠ IL COMANDO QUI SOTTO NON E' STATO CAMBIATO, di proposito:** e' la riga che RIGENERA l'archivio, e un run scrive su `C:`. Cambiarla la renderebbe sbagliata. **La posizione dell'archivio e il comando che lo produce sono due cose diverse.** |
 | **cadenza** | uno ogni **20 frame = 120 passi** di motore (`--serie=20`), numerati **col passo** |
 | **SEME** | **`42`** *(letto dal blocco di testa del `prog.csv`, non assunto)* |
 | **BLOB del simulatore** | **`edb8f844`** *(sha1 dei BYTE GREZZI — **non** `git hash-object`)* · git-blob `b44f50ce` |

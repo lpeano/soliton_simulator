@@ -9510,3 +9510,40 @@ Censimento per lo spostamento su `E:`. **Nessun byte copiato o cancellato.**
 `copia -> verifica sha1 + caricamento -> cancella` su `7.2 GB` significa **decomprimere `7.2 GB` di
 gzip mentre il ramo D gira**. **E' lo stesso carico che il 20/9 porto' il ramo B da `25` a
 `84 s/frame`.** **Il modo per non pagarlo e' farlo a run finito.**
+
+---
+
+## 🗃 Gli archivi `.pkl` grossi sono su `E:` (2026-09-21)
+
+**Riscontro relazionato NELLO STESSO COMMIT** (`P1-bis`).
+
+```
+187 file su 187 spostati, ZERO falliti, 4.85 GB liberati
+C:  2.7 GB -> 7.6 GB liberi          E:  633 MB -> 5.5 GB usati
+```
+
+**Radice nuova: `E:\soliton_archivio\`, con la stessa struttura di cartelle del repository.**
+**La tabella di corrispondenza vecchio -> nuovo e' in `doc/STATO_RUN.md`**, e il registro
+riga-per-riga con ogni `sha1` in **`doc/SPOSTAMENTO_archivi.tsv`**.
+
+### Il metodo, e la correzione di Luca che lo ha reso leggero
+Avevo proposto **copia + `sha1` + CARICAMENTO** (gzip + pickle). **Luca ha tolto il caricamento**,
+e aveva ragione: **se i byte del `.gz` coincidono, il contenuto dentro coincide PER FORZA.**
+Decomprimere non aggiunge informazione, **aggiunge solo CPU** — e quella CPU la pagherebbe il ramo
+D che sta girando.
+
+> **Misurato: `19.850` -> `19.939 s/frame`, cioe' `+0.45 %`.** Con la decompressione sarebbe stato
+> il carico che il 20/9 porto' il ramo B **da 25 a 84 s/frame**. **La correzione non era un
+> dettaglio: era la differenza fra un'operazione gratuita e una che rovina un run.**
+
+### Cosa NON e' stato cambiato, e perche'
+- **i documenti STORICI non sono stati riscritti**: referti, task history, voci del registro
+  citano ancora i percorsi `C:`, **ed e' corretto** — un referto del 19 settembre riscritto con un
+  percorso del 21 diventa un documento che non e' mai esistito. **La tabella e' il ponte;**
+- **i COMANDI di `INVENTARIO_strumenti.md` NON sono stati toccati.** **La posizione di un archivio
+  e il comando che lo produce sono due cose diverse:** un run scrive su `C:`, e solo dopo
+  l'archivio si sposta. Cambiare i comandi li renderebbe **sbagliati**.
+
+### E cosa resta aperto
+**I `1755 MB` di `.pkl` senza comando in inventario (`Z89`) restano un fronte anche ora:
+spostarli li CONSERVA, non li DOCUMENTA.**

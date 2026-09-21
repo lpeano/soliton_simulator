@@ -95,6 +95,38 @@ attribuivo al repo.
 
 ---
 
+
+---
+
+## 🗃 TABELLA DI CORRISPONDENZA — **gli archivi `.pkl` spostati su `E:` il 2026-09-21**
+
+> **I documenti STORICI non sono stati riscritti** — referti, task history, voci del registro
+> continuano a citare i percorsi `C:`, **ed e' corretto cosi'**: un referto del 19 settembre
+> riscritto con un percorso del 21 diventa un documento che non e' mai esistito.
+> **Questa tabella e' il ponte.** Radice nuova: **`E:\soliton_archivio\`**, con la **stessa
+> struttura di cartelle** del repository.
+> **Verifica:** `sha1` dei byte del file **compresso**, originale contro copia, **187 file su 187**.
+> Il registro riga-per-riga, con ogni `sha1`, e' in **`doc/SPOSTAMENTO_archivi.tsv`**.
+
+| percorso VECCHIO (citato nei documenti storici) | percorso NUOVO | file | MB |
+|---|---|---:|---:|
+| `csv/_test_fork/_g6000/` | `E:\soliton_archivio\csv\_test_fork\_g6000\` | 45 | 1313.6 |
+| `csv/_test_fork/_ab_A/` | `E:\soliton_archivio\csv\_test_fork\_ab_A\` | 25 | 923.0 |
+| `csv/_test_fork/` | `E:\soliton_archivio\csv\_test_fork\` | 36 | 631.7 |
+| `csv/_seal_fork/` | `E:\soliton_archivio\csv\_seal_fork\` | 24 | 428.7 |
+| `csv/_test_fork/_ab_C_solo_chicoop_FERMATO/` | `E:\soliton_archivio\csv\_test_fork\_ab_C_solo_chicoop_FERMATO\` | 10 | 345.8 |
+| `csv/_test_fork/_fin_B/` | `E:\soliton_archivio\csv\_test_fork\_fin_B\` | 11 | 308.3 |
+| `csv/_seal_fork/_ab_grav_ampiezza/B/` | `E:\soliton_archivio\csv\_seal_fork\_ab_grav_ampiezza\B\` | 9 | 253.5 |
+| `csv/_seal_fork/_ab_coppia_reciproca/B/` | `E:\soliton_archivio\csv\_seal_fork\_ab_coppia_reciproca\B\` | 9 | 253.5 |
+| `csv/_seal_fork/_ab_coppia_reciproca/A/` | `E:\soliton_archivio\csv\_seal_fork\_ab_coppia_reciproca\A\` | 9 | 252.7 |
+| `csv/_seal_fork/_ab_grav_ampiezza/A/` | `E:\soliton_archivio\csv\_seal_fork\_ab_grav_ampiezza\A\` | 9 | 252.7 |
+
+**⚠ E il COMANDO che rigenera un archivio NON e' stato cambiato da nessuna parte.**
+La **posizione** di un archivio e il **comando** che lo produce sono due cose diverse:
+un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi in
+`INVENTARIO_strumenti.md` li renderebbe **sbagliati**.
+
+---
 # ⚠ LA CODA UNICA — **l'ordine del lavoro, e l'UNICA fonte dell'ordine**
 
 > **Decisione di Luca, 2026-09-21.** **Se un mandato sembra contraddire questa coda, VINCE LA CODA
