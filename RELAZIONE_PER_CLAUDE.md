@@ -9262,3 +9262,70 @@ l'unico su cui la decisione cambia i numeri adesso.**
 I tre rami `else` (`:2395`, `:3772`, `:3898`) **vanno dirottati lo stesso**, benché irraggiungibili:
 hanno lo stesso ruolo semantico, e lasciarli su `perc_chi` significherebbe che il giorno in cui
 `CHI_CORE` si spegne **la geometria tornerebbe a leggere la carica in silenzio**.
+
+---
+
+## ⛔ Il sigillo del ramo D **non passa: `7/9`** — e i due fallimenti sono OPPOSTI (2026-09-21)
+
+**Riscontro, relazionato nello stesso commit.** Simulatore **`43972024`**, sigillo **`f884eff0`**,
+confronto contro **`54623593`**. Output: `csv/_seal_fork/_sigillo_ramo_D_FALLITO_2026-09-21.txt`.
+**Nessuna cura applicata, nessun run lanciato, nessun criterio allargato.**
+**⚠ EPOCA 2** — i tre flag esistono; qui sono esercitati uno per uno e tutti insieme.
+
+```
+Z1   PASS   tutti i flag spenti -> 10 campi BYTE-IDENTICI
+Z2   PASS   ogni flag DA SOLO cambia qualcosa (nessuno e' codice morto)
+Z3   PASS   torsione su perc_geom 30, campo B su perc_chi 30,
+            chi_basc -> perc_chi ZERO, carica == doppia copertura 30/30
+Z4a  FAIL   max(dx_eff - dx) = +0.772
+Z4b  FAIL   min(d) = 0.075760   min(d0) = 0.078622   LAM = 0.800000
+Z4c  PASS   stress massimo 2.071926 -- finito
+Z4d  PASS   casi patologici 0 ; pavimenti vecchi saltati 175
+Z5   PASS   |delta d0| max 1.0527e-02 <= passo_causale 1.1314e-02 ; saturi 0 su 15 818 181
+Z6   PASS   nessun NaN, tutte le lunghezze = n
+```
+
+### `Z4a` — **il criterio e' sbagliato, non il codice, e l'errore e' mio**
+
+Avevo scritto *«`max(dx_eff - dx)` deve restare `<= 0`»*. **E' falso PER COSTRUZIONE:** per
+`dx < 0` la legge fa `dx_eff = dx*f` con `f in [0,1]`, quindi `dx_eff >= dx` e la differenza arriva
+fino a `|dx|`. **Attenuare una discesa rende l'incremento meno negativo: il `+0.772` non e' un
+difetto, e' la DEFINIZIONE dello smorzamento.**
+
+> **E' l'errore che `CLAUDE.md` par.9 cataloga** — *«un criterio di sigillo si scrive da una MISURA,
+> non dal proprio modello mentale del codice»* — **commesso sul criterio che doveva dimostrare la
+> proprieta' piu' importante della modifica. Quarto caso della stessa famiglia: `N3b`, `M1b`/`M3`,
+> `M3c`, e ora `Z4a`.**
+
+**La meta' che conta HA PASSATO:** `_g_sm_viol_id = 0` — **nessun incremento `>= 0` e' mai stato
+toccato**, in tutto il run. **Le lunghezze che non scendono non cambiano di un bit.**
+
+**Il criterio giusto si STRINGE, non si allarga:** `dx < 0 -> dx <= dx_eff <= 0`, cioe'
+`max(dx_eff su dx<0) <= 0`. **Il vecchio guardava la DIFFERENZA, il nuovo guarda il SEGNO** — ed e'
+un punto che il vecchio non guardava affatto. *(La distinzione conta: un criterio riscritto dopo un
+FAIL e' sempre sospetto di essere stato ammorbidito, e qui si puo' verificare che non lo e'.)*
+
+### ⚠ `Z4b` — **un difetto VERO, e la causa NON e' trovata**
+
+**`min(d) = 0.076` con `LAM = 0.8`: dieci volte sotto**, col vincolo acceso.
+
+| ipotesi | esito |
+|---|---|
+| un arco NASCE sotto `LAM` | **ESCLUSO** — le tre vie di creazione passano tutte per `_nasce = max(., LAM)` |
+| una discesa scavalca l'invariante | **ESCLUSO** — `_g_sm_patol = 0`, il caso `dx <= -x` non e' mai scattato |
+| il pavimento comovente li tiene giu' | **ESCLUSO** — i sette pavimenti sono saltati 175 volte |
+| **uno scrittore fuori dalla legge** | **⚠ NON ESCLUSO, ed e' l'unica rimasta** |
+
+> **Se ogni arco nasce `>= LAM` e nessuna discesa puo' portarlo sotto, esiste una TERZA VIA che non
+> ho trovato: o uno scrittore di `d`/`d0` FUORI dai DODICI censiti in `Z78`, o uno dei dodici che
+> non passa da dove credo.**
+> **E' un riscontro sul CENSIMENTO, non solo sulla modifica** — e `Z78` fu gia' corretta in loco
+> una volta, da «dieci» a «dodici». **Il dodici potrebbe essere ancora incompleto.**
+
+**Si chiude strumentando la caduta**, non a ragionamento: al primo passo con `min(d) < LAM`,
+registrare **quale sito** ha scritto quel valore. `TRACCIA_D0` copre i dodici siti di `d0`;
+**per `d` non esiste un equivalente e va aggiunto**, byte-inerte e gated.
+
+**LIMITE che indebolisce l'esclusione della prima riga, dichiarato:** in 30 passi la coppia di
+**Schwinger** puo' non essere mai scattata, quindi quella via e' esclusa con certezza **solo** per
+`_allaccia` e per la mitosi. **Si legge da `_g_nati_schwinger`, e in questo giro non l'ho letto.**
