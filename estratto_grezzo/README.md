@@ -73,6 +73,33 @@ n1    = np.ceil(np.abs(src).max() * cost_DT / (0.02 * cs_max))   # :4264, ramo V
 - `cost_PAVIMENTO_PEQ` = `1e-09`
 - `cost_VERLET` = `1`
 
+## ⚠⚠ CORREZIONE DEL 2026-09-21 — **la prima pubblicazione aveva `nodo_origine` SBAGLIATO**
+
+**Trovato da Claude web rifacendo i conti su questo stesso estratto** — che e' esattamente il
+motivo per cui esiste.
+
+**Cosa era sbagliato:** `N0`, il confine fra masse e nati, era preso dal **primo snapshot
+esportato** (passo 600, `n = 2986`) invece che dallo **stato iniziale**. Cosi' i **595 nodi con
+indice 2391-2985** — che sono **NATI** prima del passo 600 — risultavano **MASSA**:
+```
+             PRIMA (sbagliato)        ORA (corretto)
+passo  600   vuoto 900  masse 2086  nati    0   |  vuoto 900  masse 1491  nati  595
+passo 1080   vuoto 900  masse 2986  nati 1275   |  vuoto 900  masse 1491  nati 1870
+passo 1200   vuoto 900  masse 2986  nati 1513   |  vuoto 900  masse 1491  nati 2108
+```
+**Al passo 600 nessun nodo risultava nato, mentre 595 lo erano.**
+
+**Il valore giusto e' MISURATO dal disco, non ricordato:** `avvia_test('N-MASSE')` con `nmasse=3`,
+`sep=4.0` da **`n = 2391`** alla semina, e `SEME_INIZIALE = 900`.
+**Quindi: vuoto `[0,900)`, masse `[900,2391)`, nati `>= 2391`.**
+
+> **E' la stessa famiglia dell'errore della tabella ricopiata a mano:** un valore **dedotto da cio'
+> che avevo sotto mano** invece che **dalla sua definizione**. Due volte nello stesso giorno.
+
+**La stessa correzione e' stata applicata a `csv/_analisi_ramoD.py`**, dove il difetto rendeva
+sbagliate le percentuali per regione di `T3` *(e due archi erano etichettati «massa-nato» mentre
+sono «nato-nato»)*.
+
 ## ⚠ COSA QUESTO ESTRATTO NON E'
 - **NON e' un'analisi.** Nessun numero e' interpretato;
 - **NON contiene lo stato completo:** mancano gli spinori, le fasi, `pos`, le cache. **Non si puo'
