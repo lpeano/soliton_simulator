@@ -1,3 +1,33 @@
+# ⚠ LA CODA UNICA — **l'ordine del lavoro, e l'UNICA fonte dell'ordine**
+
+> **Decisione di Luca, 2026-09-21.** **Se un mandato sembra contraddire questa coda, VINCE LA CODA
+> e lo si SEGNALA a Luca.** Ogni voce si spunta quando e' fatta.
+
+| # | voce | mandato | stato |
+|---|---|---|---|
+| 1 | `CHI_COOP` (carica dallo spinore, geometria da `chi_basc`) | perentorio ① | ✅ **FATTO**, sigillo `8/8` |
+| 2 | `SCALA_MIN` + `COES_ADIM`, codice e driver | perentorio ②③ | ✅ **FATTO**, `11b6431` |
+| 3 | **sigillo unico `Z0`-`Z7`** | perentorio | ⛔ **FALLITO `7/9`**: `Z4a` (criterio MIO sbagliato) e `Z4b` (`min(d) < LAM`, difetto VERO). **FERMO QUI.** |
+| 4 | **lancio del ramo D** | perentorio | ⏸ **BLOCCATO** dal punto 3 |
+| 5 | tag `epoca-2` + righe di stato + regola in `CLAUDE.md` | EPOCA | ⏸ dopo il punto 4 *(le etichette del registro: ✅ fatte, 150/150)* |
+| 6 | strumento cosmologico `M1`-`M4`, e `M1`/`M4` **leggeri** durante il run | COSMOLOGICO | ⏸ dopo il punto 4 |
+| 7 | **`Z47` PARTE ①** — ricognizione di `pos` nella fisica *(sola lettura)* | `MANDATO_Z47_coda` | ⏸ condizione d'avvio: D lanciato **e** punti 5-6 fatti |
+| 8 | a run finito: `M2`/`M3` cosmologici *(pesanti)* | COSMOLOGICO | ⏸ |
+| 9 | **CHECKPOINT a Luca** | — | ⏸ |
+| 10 | `Z47` PARTE ② — lo stacco | `MANDATO_Z47_coda` | 🔒 **NON parte senza il via libera di Luca** |
+
+> **⚠ Se una voce si blocca, le successive ASPETTANO: non si passa avanti.** **Oggi e' bloccata la
+> `3`.**
+
+---
+
+## SOSPESO
+
+- **`Z47`, RICOGNIZIONE in coda:** parte dopo il lancio del ramo D (vedi `MANDATO_Z47_coda`), voce
+  `7` della coda unica. **Sola lettura, nessuna CPU al run.**
+
+---
+
 # STATO DEI RUN — registro append-only
 
 **Scritto AUTOMATICAMENTE da `csv/_stato_run.py`.** Il commit NON è
