@@ -58,7 +58,12 @@ if "--lavoro" in sys.argv:
     outp = [x.split("=", 1)[1] for x in sys.argv if x.startswith("--out=")][0]
     inv = [x.split("=", 1)[1] for x in sys.argv if x.startswith("--inv=")][0]
     os.chdir(RADICE)
-    sys.argv = list(ARGV) + CURE + ["--invarianti=%s" % inv]
+    # ⚠ il braccio A gira sul simulatore di PRIMA di `C5`, che `--invarianti` NON la
+    #   conosce: `argparse` muore con "unrecognized arguments". L'opzione si aggiunge SOLO
+    #   se il SORGENTE la contiene -- letto dal file, non dedotto dal nome del braccio.
+    _sorg = io.open(simp, encoding="utf-8", errors="replace").read()
+    _opt = ["--invarianti=%s" % inv] if "--invarianti" in _sorg else []
+    sys.argv = list(ARGV) + CURE + _opt
     import importlib.util as _iu
     _sp = _iu.spec_from_file_location("_sim_c5", simp)
     S = _iu.module_from_spec(_sp)
