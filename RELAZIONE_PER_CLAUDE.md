@@ -11263,3 +11263,29 @@ bracci **nello stesso processo** e `avvia_test` e' un **interruttore a levetta**
 trattava un'assenza **strutturale e attesa** *(i siti che concatenano)* come un **dato mancante**;
 ③ la **stampa** del dettaglio assumeva che ogni record fosse una firma.
 **`T0` ha preso i primi due. Il terzo si e' preso da solo, schiantandosi.**
+
+> **⚠ E UN QUARTO, TROVATO DA LUCA E NON DA ME.** Per i siti che **concatenano** il criterio
+> confrontava **solo la coppia di lunghezze**: due bracci potevano allungare `d0` **della stessa
+> quantita' con valori diversi** e sarebbero passati per identici. **Il criterio guardava i CONTI,
+> non il CONTENUTO.**
+> **Corretto, e con DUE firme invece di una:** la **coda nuova** *(i valori oltre la vecchia
+> lunghezza)* **e l'intero `d0`** dopo la scrittura. Servono entrambe, perche' `S06` fa
+> `concatenate([d0[keep], d0new])` (`:5338`) — **toglie** archi e poi appende, quindi **la
+> parte conservata non e' un prefisso di `prima`**, e un cambiamento **li'** non si vedrebbe
+> guardando solo la coda.
+> **Due collaudi nuovi, entrambi casi che DEVONO fallire:** `K11` *(stesse lunghezze, coda
+> diversa)* e `K12` *(stessa coda, cambia la parte conservata)*. **Ora i collaudi sono dodici, e
+> sei sono casi che devono fallire.**
+
+**IL SIGILLO E' STATO RIGIRATO COL CRITERIO PIU' STRETTO** *(blob `cb506019`)* **e resta `7/7`.**
+Il referto mostra ora le firme su cui si basa il verdetto:
+
+```
+S06_mitosi    CONCATENA ON 525973->526019 OFF 525973->526019
+              coda 9459ff102ff5/9459ff102ff5   tutto b5bf8744f5a2/b5bf8744f5a2   IDENTICO
+S07_schwinger CONCATENA ON 526019->526047 OFF 526019->526047
+              coda 9f9aec9bfbd9/9f9aec9bfbd9   tutto 48852982857a/48852982857a   IDENTICO
+```
+
+**Il `7/7` di `9829f84` era stato ottenuto col criterio VECCHIO e non valeva piu': questo vale.**
+

@@ -22,6 +22,8 @@ K6 FORME DIVERSE -> firme diverse, MAI identita' per mancanza di confronto -> OK
 K8 i siti che CONCATENANO: stessa coppia di lunghezze -> IDENTICI -> OK
 K9 lunghezze DIVERSE (100->104 contro 100->106) -> NON identici -> OK
 K10 un CONCATENA contro una FIRMA -> NON identici -> OK
+K11 IL CASO DI LUCA: STESSE LUNGHEZZE (100->104), CODA DIVERSA -> NON identici -> OK
+K12 stesse lunghezze e stessa coda, ma cambia la parte CONSERVATA -> NON identici -> OK
 K7 due ASSENZE non sono un'identita' -> OK
 ----------------------------------------------------------------------------------------------------
   -> i criteri PASSANO: si sigilla
@@ -49,8 +51,8 @@ T3    PASS BYTE-IDENTITA' A MONTE al passo 1: siti confrontati=7, con firma DIVE
       P1_dopo_rilass       sha1 d49dcd13b466  forma [525973]  somma +0.000000e+00  IDENTICO
       S05_spinta_locale    non invocato al passo 1
       P2_dopo_spinta       non invocato al passo 1
-      S06_mitosi           CONCATENA  ON 525973->526019   OFF 525973->526019   IDENTICO
-      S07_schwinger        CONCATENA  ON 526019->526047   OFF 526019->526047   IDENTICO
+      S06_mitosi           CONCATENA ON 525973->526019 OFF 525973->526019  coda 9459ff102ff5/9459ff102ff5  tutto b5bf8744f5a2/b5bf8744f5a2  IDENTICO
+      S07_schwinger        CONCATENA ON 526019->526047 OFF 526019->526047  coda 9f9aec9bfbd9/9f9aec9bfbd9  tutto 48852982857a/48852982857a  IDENTICO
       S08_proj             sha1 3137c8abe7b6  forma [526047]  somma +3.640635e+02  IDENTICO
       P3_dopo_proj         sha1 dc07c64451aa  forma [526047]  somma +0.000000e+00  IDENTICO
 T4    PASS MEMORIA DEL MOTO intatta: mem_mot ON sha1 5a90926566f6 forma [2451, 3]  vs OFF sha1 5a90926566f6 -> IDENTICO

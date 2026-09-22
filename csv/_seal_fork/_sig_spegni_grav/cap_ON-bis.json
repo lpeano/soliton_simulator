@@ -59,12 +59,60 @@
   "S06_mitosi": {
    "concatena": true,
    "da": 525973,
-   "a": 526019
+   "a": 526019,
+   "coda": {
+    "sha1": "9459ff102ff5",
+    "forma": [
+     46
+    ],
+    "dtype": "float64",
+    "somma": 47.96030510667578,
+    "somma_abs": 47.96030510667578,
+    "min": 0.8,
+    "max": 1.2033520995333742,
+    "n_non_finiti": 0
+   },
+   "tutto": {
+    "sha1": "b5bf8744f5a2",
+    "forma": [
+     526019
+    ],
+    "dtype": "float64",
+    "somma": 605084.7900876328,
+    "somma_abs": 605084.7900876328,
+    "min": 0.8,
+    "max": 2.3807965585458053,
+    "n_non_finiti": 0
+   }
   },
   "S07_schwinger": {
    "concatena": true,
    "da": 526019,
-   "a": 526047
+   "a": 526047,
+   "coda": {
+    "sha1": "9f9aec9bfbd9",
+    "forma": [
+     28
+    ],
+    "dtype": "float64",
+    "somma": 29.73508646012441,
+    "somma_abs": 29.73508646012441,
+    "min": 0.8,
+    "max": 1.185172571749756,
+    "n_non_finiti": 0
+   },
+   "tutto": {
+    "sha1": "48852982857a",
+    "forma": [
+     526047
+    ],
+    "dtype": "float64",
+    "somma": 605114.5251740929,
+    "somma_abs": 605114.5251740929,
+    "min": 0.8,
+    "max": 2.3807965585458053,
+    "n_non_finiti": 0
+   }
   },
   "S08_proj": {
    "sha1": "3137c8abe7b6",
