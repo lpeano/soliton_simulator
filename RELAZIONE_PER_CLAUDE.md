@@ -10991,3 +10991,49 @@ gira, *«saturi in tutti e 120 i passi»* resta una **verifica aritmetica**
 `median(d0)` da `0.883` a `1.415`)*, **non una misura**. — **`Z106`**
 
 **⚠ E NESSUNA CURA SI DERIVA QUI.** Il mandato dice che le cure si derivano al `CHK3`.
+
+### ⑸ **`G2` chiuso: i 20 archi sono NEL VUOTO, non sul confine — e il confine e' DIFFUSO**
+
+> **Tabella GENERATA DA CODICE** (`P1-ter`): `csv/_test_fork/_diag_D/G2_20_ARCHI.csv` e `.md`.
+> Blob simulatore `9557a867`, seme `42`, 120 passi dalla semina, configurazione della validazione.
+> **Archi identificati per chiave `(i, j)`**, non per posizione. **doppioni `0`, risurrezioni `0`,
+> chiavi distinte `526 439`.**
+
+**I 20 archi col `|saldo|` piu' grande sono TUTTI UGUALI E TUTTI NEL VUOTO:**
+
+| | |
+|---|---|
+| regione | **`vuoto-vuoto`, 20 su 20** |
+| saldo | **`+1.663184e+00`**, identico su tutti e venti |
+| somma salite | **`1.663184e+00`** |
+| somma discese | **`0.000000e+00` ESATTE** |
+| passi in cui esiste | **`120` su `120`** |
+
+> **Questo CHIUDE una deduzione e la trasforma in misura:** quegli archi **salgono a OGNI singolo
+> passo e non scendono MAI**. Nel commento precedente *«saturi in tutti e 120 i passi»* era una
+> verifica aritmetica; **ora e' letto dalla colonna `passi` e dalla colonna `discese`.**
+
+**LE TRE RIGHE DI RISCONTRO, nell'ordine chiesto:**
+
+1. **I 20 stanno sul confine? `0 su 20`.** **La mia aspettativa era sbagliata**, ed e' annotata nel
+   task history invece che riscritta (`par.5-septies`).
+2. **Quanta parte del saldo di confine fanno i 20? ZERO** — non essendocene nessuno sul confine.
+   **Il saldo del confine e' DIFFUSO:** `-1.363076e+05` spalmato su **`96 429`** archi, cioe'
+   **`-1.4136` per arco**. **Il nullo era `20/96429 = 0.000207`.**
+   > **E il numero che lega le due meta': `1.4136 / 1.663184 = 0.85`. L'arco di confine MEDIO sta
+   > all'85 % del plateau.** Non ci sono pochi archi patologici: **c'e' un'intera regione che
+   > preme contro il tetto**, verso il basso, mentre il vuoto ci preme verso l'alto.
+3. **Il saldo per regione rifatto PER CHIAVE coincide con `Z105`? SI'**, scarto relativo peggiore
+   **`3.072e-13`** su tutte e sei le classi. **`Z105` NON va corretto, e nemmeno
+   `doc/IPOTESI_gravita_a_spinta.md`.**
+   **Perche' il riordino non la toccava:** quella tabella non ha mai cumulato sull'**identita'** di
+   un arco — somma il `dx` di ogni passo con la classe di **quel** passo, e la classe di un arco
+   non cambia *(dipende solo dall'indice del nodo, e i nodi non si rinumerano)*.
+   **Era un'aspettativa, scritta prima, e l'ho MISURATA invece di asserirla.**
+
+**LA CONTROPROVA A PASSO SINGOLO CONCORDA:** al passo 120 i primi dieci valgono **tutti**
+`-1.607642e-02`, e la concentrazione delle discese vale **`0.01075`** contro un nullo di `0.01`.
+
+> **⚠ COSA RESTA APERTO, ed e' il numero ovvio: QUANTI archi stanno sul plateau.** La
+> strumentazione (`satura()`) e' scritta e **non ancora esercitata da un criterio**. — `Z106`
+> **⚠ E NESSUNA CURA SI DERIVA QUI:** il mandato dice che si derivano al `CHK3`.

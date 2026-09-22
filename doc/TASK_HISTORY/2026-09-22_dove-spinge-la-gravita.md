@@ -30,6 +30,21 @@ disegno**, e che la differenza **cresce** e **dipende dal centro**.
 globale. **Un saldo globale non dice DOVE.** Due sistemi con lo stesso saldo — uno che spinge in
 modo uniforme, uno che spinge tutto su mille archi — sono **due fisiche diverse**.
 
+> **⚠ ANNOTAZIONE DEL 2026-09-22, A MISURA FATTA. `par.5-septies`: il ragionamento
+> preliminare NON si riscrive quando si rivela sbagliato, SI ANNOTA.**
+> **① «mi aspetto che sia piu' forte nelle masse» — SBAGLIATO.** Il saldo vive
+> sul **CONFINE vuoto-massa** *(`-1.4150` per arco contro `+0.0304` di `massa-massa`)*, `Z105`.
+> **② «salite e discese entrambe grandi che quasi si cancellano» — GIUSTO, ma
+> SOLO FUORI DAL CONFINE:** si elidono al **98 %** nel vuoto e nelle masse, e **NON si elidono sul
+> confine** *(`|saldo|/tot = 0.885`)*.
+> **③ «non so se i 20 archi piu' spinti siano pochi archi patologici o la coda di una
+> distribuzione liscia» — LA RISPOSTA E' NESSUNA DELLE DUE: sono un PLATEAU DI
+> SATURAZIONE.** Quaranta archi con **un solo numero**, `±1.663184`, e concentrazione
+> `0.01925` contro un nullo di `0.01`. **E i 20 col `|saldo|` maggiore sono `20 su 20` NEL VUOTO,
+> non sul confine: anche questa aspettativa e' caduta.**
+> **④ L'ASSUNZIONE CHE NON AVEVO NEMMENO SCRITTO COME TALE** — che la mitosi APPENDESSE
+> archi senza riordinare — **era falsa in 61 passi su 120**, e l'ha presa la guardia.
+
 ---
 
 ## ② PROGETTAZIONE DEL RAGIONAMENTO — *come intendo arrivarci*
@@ -80,9 +95,9 @@ importante e' quello che DEVE fallire**:
 ## ③ TODO DEL NEXT STEP
 
 - [x] task history committato **prima** del lavoro
-- [ ] `csv/_test_fork/_dove_spinge_la_gravita.py` + voce di inventario, **committato prima di
+- [x] `csv/_test_fork/_dove_spinge_la_gravita.py` + voce di inventario, **committato prima di
       girarlo** (par.5)
-- [ ] rigiocata 120 passi, `TRACCIA_D0`, configurazione della validazione
-- [ ] esito -> `Z104`, `RELAZIONE_PER_CLAUDE.md`, commit e push
+- [x] rigiocata 120 passi, `TRACCIA_D0`, configurazione della validazione *(tre giri: `Z105` per regione, poi l'accumulatore per chiave, poi le colonne complete)*
+- [x] esito -> **`Z105`** *(per regione)* e **`Z106`** *(il plateau)*, `RELAZIONE_PER_CLAUDE.md`, commit e push
 - [ ] **poi `G3`**: `GRAV_BIFASE = False` impostato **dalla rigiocata sul modulo**, 600 passi,
       invarianti accesi, **stessi criteri assoluti** della validazione
