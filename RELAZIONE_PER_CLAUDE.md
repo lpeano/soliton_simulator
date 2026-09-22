@@ -11760,3 +11760,34 @@ esteso, e' gli **archivi delle cure** — `_val600` e `_g3_senza_bifase` *(simul
 > **Sono DUE blob diversi**, e si confrontano **solo** perche' il secondo e' **byte-inerte**
 > rispetto al primo a `MEM_MOTO` acceso — `206` campi identici, sigillo `T7`.
 > **Senza quel sigillo sarebbero due sistemi, e nessun numero passerebbe dall'uno all'altro.**
+
+### ㉛ **`G4` riferimento: IL BILANCIO CHIUDE, e il motore di `d0` E' IL FRENO**
+
+> **600 passi, braccio ACCESO**, `2076.7 s`. Strumento blob `b9642633`, simulatore `ab685eac`,
+> seme `42`. **Il bilancio chiude a `1.138e-13`**, col criterio fissato **prima**.
+
+```
+Delta(somma d0)   +1.731054e+06
+scritture         -3.016804e+05    ( -17.43 %)   <- LE LEGGI FISICHE TIRANO GIU'
+FRENO             +2.032480e+06    (+117.41 %)   <- IL MOTORE
+nascite - morti   +2.543929e+02    (   0.01 %)
+salto fra i passi  0.000000e+00    <- NESSUNA scrittura fuori dal ciclo
+```
+
+> **Il `117 %` della crescita di `d0` viene da `_smp_chiudi`**, che **riscrive tutto `d0` a fine
+> passo senza nessun `_traccia_d0` attorno** (`:3677`). **E' il buco di `Z107`, ora chiuso.**
+
+**✅ `S02` E' PROMOSSO A DIFETTO `D31`.** `Z102` lo misurava a **120** passi; qui a **600**,
+**con un bilancio che chiude**, il freno vale **`+117.41 %`**. **Non e' piu' un sospetto.**
+
+**❌ E `S04` CADE, non per argomento ma per numero:** **nascite meno morti valgono lo
+`0.01 %`**. *«Nascono lunghi e muoiono corti»* **non spiega niente**: la crescita **non
+e' nucleazione**.
+
+**E c'e' un terzo fatto che vale quanto i primi due:** **gli scrittori FISICI tirano GIU'**
+(`-17.43 %`). **Nessuna legge del modello sta gonfiando `d0`. Lo gonfia il VINCOLO.**
+
+**⚠ QUESTO E' IL BRACCIO ACCESO.** Lo spegnimento di `MEM_MOTO` — **partito alle
+13:59:29, PID `15750`** — dira' se la memoria del moto cambi qualcosa. **Ma il motore e'
+gia' identificato, e non e' lei.**
+**⚠ LIMITI: UN seme, UNA scena, 600 passi.**
