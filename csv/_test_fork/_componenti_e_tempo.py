@@ -65,6 +65,36 @@ def componenti(ii, jj, n):
     return inv, len(_u)
 
 
+def fermi_assoluti(r):
+    """Quanti nodi NON integrano, contro il riferimento ESTERNO `r = 1`.
+
+    ⚠ `r = 1` e' il nodo il cui tempo proprio vale il tempo di coordinata `DT`: **non e' una
+      soglia scelta, e' l'unita' della grandezza**.
+    ⚠ NON si usa la mediana. Se i fermi sono la MAGGIORANZA, **la mediana e' essa stessa un nodo
+      fermo** e il rapporto `r/med` non vede niente: e' il difetto del 2026-09-22, catalogato in
+      `CLAUDE.md` come `P4` e `C12`.
+    """
+    r = np.asarray(r, float)
+    r = r[np.isfinite(r)]
+    if r.size == 0:
+        return float("nan"), float("nan"), float("nan")
+    tot = float(np.sum(r))
+    fermi = r < 0.1
+    return (float(np.mean(r < 0.01)), float(np.mean(fermi)),
+            (float(np.sum(r[fermi]) / tot) if tot else float("nan")))
+
+
+def fermi_mediana(r):
+    """IL CRITERIO VECCHIO, tenuto APPOSTA: serve al collaudo `K4`, che deve mostrarlo SBAGLIARE
+    sulla distribuzione che conta. Non si usa per misurare."""
+    r = np.asarray(r, float)
+    r = r[np.isfinite(r)]
+    if r.size == 0:
+        return float("nan")
+    med = float(np.median(r))
+    return float(np.mean(r < 0.1 * med))
+
+
 def collaudo(W):
     """`P1-sexies`: le componenti su grafi a risposta NOTA, e il caso che DEVE fallire."""
     W("COLLAUDO (`P1-sexies`), PRIMA di misurare\n")
@@ -94,6 +124,27 @@ def collaudo(W):
     W("K3 un arco e tre nodi ISOLATI su 5 -> atteso 4 componenti, ottenuto %d -> %s\n"
       % (k3, "OK" if ok3 else "*** i nodi isolati spariscono ***"))
     e.append(ok3)
+
+    # --- D25: la distribuzione che CONTA, col 93 % dei nodi fermo
+    rr = np.concatenate([np.full(930, 1e-6), np.full(70, 1.0)])   # 93 % fermi, 7 % a r = 1
+    q1, q2, quota = fermi_assoluti(rr)
+    ok4 = abs(q2 - 0.93) < 0.005
+    W("K4 `D25` con il riferimento ESTERNO `r = 1`, su una distribuzione col **93 %% fermo**\n")
+    W("     atteso `r < 0.1` = 0.93, ottenuto %.4f -> %s\n"
+      % (q2, "OK" if ok4 else "*** NON vede i fermi ***"))
+    W("     e la quota del tempo che portano: %.6f (quasi zero, come dev'essere)\n" % quota)
+    e.append(ok4)
+
+    vecchio = fermi_mediana(rr)
+    ok5 = (vecchio < 0.05)
+    W("K5 IL CASO CHE DEVE FALLIRE: **il criterio VECCHIO, sulla mediana**, sulla STESSA "
+      "distribuzione\n")
+    W("     ottenuto %.4f invece di 0.93 -> %s\n"
+      % (vecchio, "OK: il criterio vecchio E' CIECO, e il collaudo lo dimostra"
+         if ok5 else "*** il criterio vecchio non sbaglia: il collaudo non prova niente ***"))
+    W("     **perche': la mediana di quella distribuzione E' UN NODO FERMO (`1e-06`), quindi\n")
+    W("     `r < 0.1*med` = `r < 1e-07` non seleziona NESSUNO.**\n")
+    e.append(ok5)
 
     ok = all(e)
     W("-" * 96 + "\n")
@@ -180,11 +231,17 @@ def main():
         W("\n")
 
     # ---------------------------------------------------------------- D25
-    W("## `D25` — IL TEMPO CHE NON SCORRE: la distribuzione di `_r_corrente`\n\n")
+    W("## `D25` — IL TEMPO CHE NON SCORRE: `_r_corrente` contro il riferimento ESTERNO `r = 1`\n\n")
     W("> `dt_n = DT * r` e' **il tic dei processi locali** *(`CLAUDE.md` par.9)*. Un nodo con `r`\n")
-    W("> trascurabile **non integra**: le leggi che vivono in `dt_n` non lo toccano.\n")
-    W("> **Il confronto e' col nodo MEDIANO, non con una soglia scelta.**\n\n")
-    W("| archivio | passo | nodi | `med r` | `r/med` < 0.01 | < 0.1 | quota del tempo nei fermi |\n")
+    W("> trascurabile **non integra**: le leggi che vivono in `dt_n` non lo toccano.\n>\n")
+    W("> **⚠ IL RIFERIMENTO E' `r = 1`, ED E' ESTERNO ALLA DISTRIBUZIONE.** `r = 1` e' il nodo il\n")
+    W("> cui tempo proprio vale **il tempo di coordinata `DT`**: non e' una soglia scelta, e'\n")
+    W("> **l'unita' della grandezza stessa**.\n>\n")
+    W("> **⚠ PERCHE' NON LA MEDIANA, e l'errore era mio:** se i fermi sono la MAGGIORANZA, **la\n")
+    W("> mediana e' essa stessa un nodo fermo**, e `r/med` non vede niente — i fermi sembrano\n")
+    W("> normali e quelli che scorrono sembrano anomalie. **Il criterio sarebbe cieco proprio sul\n")
+    W("> caso che deve misurare** *(`CLAUDE.md` `P4`, `C12`; reperto in `944064a`)*.\n\n")
+    W("| archivio | passo | nodi | `med r` | `r < 0.01` | `r < 0.1` | quota del tempo nei fermi |\n")
     W("|---|--:|--:|--:|--:|--:|--:|\n")
     for eti, dirn in ARCHIVI:
         d = os.path.join(RADICE, "csv", "_test_fork", dirn)
@@ -198,14 +255,34 @@ def main():
                 continue
             r = np.asarray(r, float)
             r = r[np.isfinite(r)]
-            med = float(np.median(r)) if r.size else float("nan")
-            q1 = float(np.mean(r < 0.01 * med)) if med else float("nan")
-            q2 = float(np.mean(r < 0.1 * med)) if med else float("nan")
-            fermi = r < 0.1 * med
-            quota = float(np.sum(r[fermi]) / np.sum(r)) if np.sum(r) else float("nan")
+            q1, q2, quota = fermi_assoluti(r)
             W("| %s | %d | %d | `%.4e` | `%.4f` | `%.4f` | `%.6f` |\n"
-              % (eti, int(a.get("_db_step", -1)), r.size, med, q1, q2, quota))
+              % (eti, int(a.get("_db_step", -1)), r.size,
+                 float(np.median(r)) if r.size else float("nan"), q1, q2, quota))
     W("\n")
+    W("### Le MASSE: lette dalla semina, **non supposte**\n\n")
+    W("> Chiesto da Luca: *«quante sono e quali nodi appartengono a ciascuna, dal codice che\n")
+    W("> semina la scena»*. **Non si puo', e lo dichiaro invece di aggirarlo.**\n\n")
+    for eti, dirn in ARCHIVI:
+        d = os.path.join(RADICE, "csv", "_test_fork", dirn)
+        files = sorted(glob.glob(os.path.join(d, "scena_*.pkl.gz")))
+        for p in files[-1:]:
+            with gzip.open(p, "rb") as f:
+                a = pickle.load(f)["attrs"]
+            mi = a.get("masse_info")
+            cn = a.get("conc_nodi")
+            npieni = sum(1 for x in (cn or []) if x)
+            W("- **%s**: `masse_info` ha **%s** voci · `conc_nodi` ha **%d** nodi con una "
+              "coorte su %d.\n" % (eti, len(mi) if isinstance(mi, dict) else "—",
+                                   npieni, len(cn) if cn is not None else 0))
+    W("\n**LA CAUSA, dal sorgente (`:6209`):** `_massa` chiama\n")
+    W("`net.semina(n, raggio=r, centro=centro, fase=fase)` **SENZA `mass_id`**, quindi\n")
+    W("`masse_info` **non viene mai popolato** e `_registra_concorrenza` **non parte**. La coorte\n")
+    W("finisce in `test[\"dati\"]`, un dizionario **di modulo** che **non sta nello snapshot**.\n")
+    W("**→ difetto `D30`.**\n\n")
+    W("> **✅ MA LA DOMANDA «le tre masse stanno in componenti diverse?» HA COMUNQUE\n")
+    W("> RISPOSTA, e non dipende da nessuna assunzione:** poiche' **la componente e' UNA SOLA**,\n")
+    W("> **qualunque** partizione dei nodi finisce dentro quella. **La risposta e' NO.**\n\n")
     W("## ⚠ COSA LA MISURA HA DETTO, **prima** delle domande\n\n")
     W("**Le due premesse vanno verificate PRIMA di trarne conseguenze** *(par.9-bis: ogni\n")
     W("numero porta la sua epoca)*. Le tabelle qui sopra dicono **quante componenti** e **quanti\n")
