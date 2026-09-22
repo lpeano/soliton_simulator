@@ -12934,3 +12934,45 @@ in `Z117`**, dove a 120 passi il gauge risultava **invariato** *(`1.000000`)*. *
 l'ho rimisurato, e con un seme la direzione non è attribuibile.**
 
 **Il default resta SPENTO. La decisione è tua** *(voce `E3`)*.
+
+### ㉾ **La lettura di Luca su `Z123`, che è più netta della mia**
+
+> **«La quota di nodi al tetto SALE dopo aver tolto un meccanismo che ce li spingeva. Vuol dire
+> che il tetto è raggiunto per un'altra via, che non conosciamo.»**
+
+**La mia ipotesi** — *togliendo le frequenze spurie si abbassa il gauge, quindi `x = f/med`
+sale per tutti* — **è UNA candidata, e presuppone un meccanismo.** **La lettura di Luca non
+lo presuppone:** se togliendo una causa l'effetto **cresce**, **la causa vera è un'altra.**
+**È più forte perché chiede meno.** `S09` è riscritto così.
+
+**E aggancia `A11` corollario 6:** *un limite che lavora tanto è un allarme*. **È lo stesso
+schema del freno** — lì il vincolo di `LAM` porta il `105`–`218 %` della crescita, qui il
+pavimento/tetto di `r` è raggiunto da una via ignota. **Due limiti, lo stesso sintomo.**
+
+**E sul resto siamo d'accordo:** la correzione è giusta **perché il difetto è dimostrato**,
+non perché migliora i numeri; il peggioramento **non è un argomento contro**, perché cambiano
+i ritmi dei nodi e quindi la dinamica; **con un seme non si attribuisce niente**, e lo avevo
+scritto prima. **Flag corretto, spento, decisione all'epoca 3 nella prova combinata.**
+
+### ㉿ **⚠ `A12` e l'ordine delle due cure: una cosa che devo dire invece di decidere da solo**
+
+**`A12` regola 3 dice: si cura per GRANDEZZA DELL'EFFETTO MISURATO, non per ordine di
+scoperta.** L'ordine che mi hai dato è `FASE_2PI` → `TEMPO_UNICO`. **Messi accanto agli
+effetti misurati, l'ordine non coincide:**
+
+| difetto | effetto MISURATO | cura | stato |
+|---|---|---|---|
+| **`D31`** il freno | **`+105 %` … `+218 %` del `Δ(Σd0)`**, dimostrato sulla formula *(`Z113`)* | **DA DERIVARE** *(tre candidati, scheda ①)* | ⏸ |
+| `D35` + dominio | l'antiparticella **identica** alla particella; `31` righe su `31` | `FASE_2PI` | ✅ in codice |
+| `D32` i tre tempi | correlazioni `~0`; **`tau_pp` letto da UNA funzione** | `TEMPO_UNICO` | ⏸ |
+
+> **`D31` è l'effetto più grande misurato nel sistema, e per `A12` verrebbe PRIMA di
+> `TEMPO_UNICO`.**
+> **Non lo riordino da solo** — `A12` dice come ordinare, **non chi decide** — ma sarebbe
+> incoerente scrivere l'assioma e poi non applicarlo senza dirlo.
+> **⚠ E c'è una ragione per NON metterlo primo, e la dico contro me stesso:** la cura di
+> `D31` è **l'unica delle tre che NON è derivata** — tre candidati, tutti con domande aperte.
+> **`A12` regola 4 copre esattamente questo caso:** *un difetto che non si sa curare si dichiara
+> tale, con la domanda che manca, e non blocca gli altri.*
+> **Quindi l'ordine che hai dato è compatibile con `A12`**, e lo seguo. **Ma `D31` non deve
+> restare senza una data**, ed è questo che volevo mettere nero su bianco.
