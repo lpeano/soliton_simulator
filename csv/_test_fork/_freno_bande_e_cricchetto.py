@@ -10,9 +10,18 @@ IL CRITERIO, SCRITTO PRIMA DI VEDERE I NUMERI:
 
   (b1) Con rumore a media ESATTAMENTE nulla e `x0 >> LAM`, la somma dopo `P` passi deve
        **CRESCERE**. La deriva attesa per passo, derivata e non tarata:
-           deriva = E[-dx | dx<0] * P(dx<0) * LAM/x
+           deriva = E[-dx | dx<0] * P(dx<0) * E[LAM/x] = sigma/sqrt(2 pi) * E[LAM/x]
        perche' ogni discesa perde la frazione `LAM/x` e ogni salita passa intatta.
        **PASSA se la deriva misurata sta entro il `10 %` di quella attesa.**
+       ⚠ CORRETTO dopo un FAIL: l'attesa usa **`E[LAM/x]` accumulato sull'insieme VERO**, non
+         `LAM/x0`. `LAM/x` e' **CONVESSA**, quindi per Jensen `E[LAM/x] > LAM/E[x]`: con `LAM/x0`
+         l'attesa sottostimava dell'`11 %` a `x0 = 100*LAM`.
+
+  (b0) **LA PREMESSA SI VERIFICA, NON SI ASSUME.** Si stampa `min(x)/LAM` raggiunto nel giro, e
+       **se scende sotto `3` il caso NON si legge e FALLISCE**. ⚠ E' il difetto del primo giro:
+       con `amp = 2 %` e `P = 400` la camminata arrivava SOTTO ZERO, dove scatta la guardia
+       `pos = prima > 0` -- **un SECONDO cricchetto**, che non c'entra con `LAM`, e che `b2` e
+       `b3` stavano misurando al posto suo.
   (b2) **IL CASO CHE DEVE FALLIRE: con `LAM = 0` la deriva dev'essere ESATTAMENTE ZERO.**
        Se il test mostra deriva anche a `LAM = 0`, la deriva non viene dal freno ma dal banco
        di prova, e **tutto il resto non si legge**.
@@ -87,11 +96,19 @@ def cricchetto(W, lam_vero):
     W("> **Nessun simulatore, nessuno snapshot.** Rumore a media **esattamente** nulla "
       "*(antitetico: ogni `+a` ha il suo `-a`)*, **lontano dal confine**.\n\n")
     rng = np.random.default_rng(20260922)
-    N, P = 200000, 400
-    amp = 0.02
+    # ⚠ CORRETTO il 2026-09-22 dopo un FAIL 1/4 (reperto `FRENO_CRICCHETTO_FALLITO.md`).
+    #   Il primo giro usava `amp = 2 %` e `P = 400`: la camminata ha deviazione
+    #   `sigma*sqrt(P) ~ 32` su `x0 = 8`, quindi `x` FINIVA SOTTO `LAM` e in alcuni cammini
+    #   SOTTO ZERO. Li' scatta la guardia `pos = prima > 0`, che e' un SECONDO cricchetto e
+    #   non c'entra con `LAM`: `b2` e `b3` misuravano QUELLO.
+    #   **La premessa "lontano dal confine" era SCRITTA e non IMPOSTA.** Ora e' imposta:
+    #   ampiezza e passi tali che `sigma*sqrt(P) << x0 - LAM`, **e la condizione si VERIFICA**.
+    N, P = 200000, 100
+    amp = 0.005
     esiti = []
-    W("| caso | `x0/LAM` | `LAM` | deriva MISURATA per passo | deriva ATTESA | scarto | esito |\n")
-    W("|---|--:|--:|--:|--:|--:|---|\n")
+    W("| caso | `x0/LAM` | `LAM` | deriva MISURATA | attesa `E[LAM/x]` | scarto | "
+      "`min(x)/LAM` | esito |\n")
+    W("|---|--:|--:|--:|--:|--:|--:|---|\n")
     prove = [("b1 il freno VERO, `x0 = 10*LAM`", 10.0, lam_vero, smorza, True),
              ("b1 il freno VERO, `x0 = 100*LAM`", 100.0, lam_vero, smorza, True),
              ("**b2 IL CASO CHE DEVE FALLIRE: `LAM = 0`**", 10.0, 0.0, smorza, False),
@@ -101,17 +118,27 @@ def cricchetto(W, lam_vero):
         x0 = mult * lam_vero
         x = np.full(N, x0)
         meta = N // 2
+        sig = amp * x0
+        # ⚠ L'ATTESA SI ACCUMULA SULL'INSIEME VERO, non su `x0`: `LAM/x` e' CONVESSA, quindi
+        #   `E[LAM/x] > LAM/E[x]` (Jensen). Usare `LAM/x0` sottostimava dell'11 % a `x0 = 100*LAM`,
+        #   ed era il secondo errore del primo giro.
+        att_acc = 0.0
+        xmin = x0
         for _k in range(P):
-            a = rng.normal(0.0, amp * x0, meta)
+            a = rng.normal(0.0, sig, meta)
             dx = np.concatenate([a, -a])          # media ESATTAMENTE zero, per costruzione
             rng.shuffle(dx)
+            att_acc += (sig / np.sqrt(2 * np.pi)) * float(np.mean(lam / np.maximum(x, 1e-300)))
             x = x + fn(x, dx, lam)
+            xmin = min(xmin, float(np.min(x)))
         mis = (float(np.mean(x)) - x0) / P
-        # l'attesa, DERIVATA: ogni discesa perde la frazione LAM/x, le salite passano intatte
-        sig = amp * x0
-        att = (sig / np.sqrt(2 * np.pi)) * (lam / x0) if fn is smorza else 0.0
+        att = (att_acc / P) if fn is smorza else 0.0
         sc = abs(mis - att) / max(abs(att), 1e-300) if att else abs(mis)
-        if deve_derivare:
+        # ⚠ LA PREMESSA SI VERIFICA: se `x` si e' avvicinato al confine, il caso NON si legge.
+        lontano = (xmin / lam_vero) >= 3.0
+        if not lontano:
+            ok, txt = False, "*** FAIL: `x` e' ARRIVATO AL CONFINE: il caso non si legge ***"
+        elif deve_derivare:
             ok = (mis > 0) and (sc <= 0.10)
             txt = "PASS" if ok else "*** FAIL ***"
         else:
@@ -119,8 +146,8 @@ def cricchetto(W, lam_vero):
             txt = ("PASS: nessuna deriva, come DEVE essere" if ok
                    else "*** FAIL: deriva SENZA il freno asimmetrico ***")
         esiti.append(ok)
-        W("| %s | %.0f | %.4f | **%+.6e** | %+.6e | %.1f %% | %s |\n"
-          % (eti, mult, lam, mis, att, 100 * sc, txt))
+        W("| %s | %.0f | %.4f | **%+.6e** | %+.6e | %.1f %% | %.2f | %s |\n"
+          % (eti, mult, lam, mis, att, 100 * sc, xmin / lam_vero, txt))
     W("\n> **`b1` — l'attesa e' DERIVATA, non tarata:** per rumore gaussiano simmetrico\n")
     W("> `E[-dx | dx<0]*P(dx<0) = sigma/sqrt(2 pi)`, e ogni discesa perde la frazione `LAM/x`.\n")
     W("> **deriva per passo = `sigma/sqrt(2 pi) * LAM/x`.**\n")
