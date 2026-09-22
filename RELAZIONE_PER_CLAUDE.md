@@ -11480,3 +11480,35 @@ chiamarla «spegnere la memoria del moto» sarebbe impreciso.**
 
 > **DECISIONE DI LUCA, gia' in CODA come `G4-bis`: se `d0` cresce lo stesso, PRIMA del CHECKPOINT
 > si aggiunge un SECONDO BRACCIO che spegne TUTTO IL BLOCCO**, per escludere l'effetto indiretto.
+
+### ㉓ **DIFETTI APERTI e SOSPETTI: due sezioni nella CODA UNICA, e un hook che le impone**
+
+> **Decisione di Luca, 2026-09-22.** **Due delle cure piu' sicure — `SPINTA_LOCALE` e
+> `POZZO_D` — vivevano solo nella relazione e nei mandati, NON come voci della coda.**
+> **Dopo una compattazione si sarebbero perse.**
+
+**LA DEFINIZIONE, ed e' stretta.** Un difetto e' **ACCLARATO** quando e' sostenuto, **e
+committato**, da almeno una fra: una **MISURA** · una **LETTURA DEL SORGENTE** con la riga
+citata e verificata sul blob corrente · una **VIOLAZIONE DIMOSTRATA di un assioma** con la
+riga. **Un SOSPETTO non e' un difetto**, va in una sezione separata, e si **promuove** solo con la
+prova.
+
+**IL RECUPERO, ricostruito DAI FILE e non da memoria** *(commit, `RAMIFICAZIONI.md`, relazione)*:
+**`19` difetti** — **`15` APERTI**, **`1` con CURA DERIVATA** *(`MEM_ARCO`)*, **`4` CURATI**
+che **restano** col commit della cura — e **`5` SOSPETTI**, ciascuno con **la misura che lo
+decidera'**.
+
+**I quattro che il mandato chiedeva per nome:** `D01` **`SPINTA_LOCALE`** *(`G2`: `85.05 %`
+saturi, `99.69 %` del saldo dal tetto)* · `D02` **`POZZO_D`** *(`G1`/`Z103`: il pozzo calcola
+`L` dal disegno e il docstring dichiara il contrario)* · `D03` **`MEM_ARCO`** *(`Z104`)* ·
+`D04` **la scrittura non tracciata di `_smp_chiudi()`** *(`:3677`, `0989b78`)*.
+**E `D04` e' registrato per quello che E': un difetto dello STRUMENTO DI TRACCIA.** **Che sia il
+motore di `d0` resta `S02`, un SOSPETTO**, finche' il bilancio di `G4` non lo dice.
+
+**E LA REGOLA NON E' SOLO SCRITTA: E' IMPEDITA.** `csv/_hook_relazione.py` **rifiuta** un commit
+il cui messaggio contiene `DIFETTO ACCLARATO:`, `SOSPETTO:` o `PROMOSSO:` **senza** toccare
+`doc/STATO_RUN.md`.
+**PROVATO IN TUTTI E TRE I RAMI**, perche' un presidio non provato e' una nota (`A9`):
+**rifiuta** quando la coda manca · **passa** quando c'e' · **passa** quando non c'e'
+nessuna dichiarazione. **E il limite di sempre va ridetto: i hook non sono versionati da git**, un
+clone nuovo non ce l'ha finche' non lo installa.

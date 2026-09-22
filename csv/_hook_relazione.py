@@ -40,6 +40,14 @@ RISCONTRO = (
 RELAZIONE = "RELAZIONE_PER_CLAUDE.md"
 FUGA = re.compile(r"\[SENZA-RELAZIONE:\s*(.+?)\]", re.I)
 
+# [2026-09-22, regola di Luca] OGNI DIFETTO ACCLARATO SI REGISTRA SUBITO NELLA CODA UNICA.
+#   Un commit che DICHIARA un difetto, un sospetto o una promozione ma NON tocca la coda sta
+#   perdendo esattamente cio' che la regola vuole salvare: dopo una compattazione quel
+#   difetto non esiste piu'. Due cure sicure -- SPINTA_LOCALE e POZZO_D -- sono vissute per
+#   giorni solo nella relazione e nei mandati. Qui si IMPEDISCE, non si raccomanda (A9).
+CODA = "doc/STATO_RUN.md"
+DIFETTO = re.compile(r"^\s*(DIFETTO ACCLARATO|SOSPETTO|PROMOSSO)\s*:", re.I | re.M)
+
 
 def installa():
     """⚠ IL HOOK E' `commit-msg`, NON `pre-commit`, e il perche' e' un difetto trovato PROVANDOLO.
@@ -88,17 +96,32 @@ def controlla():
             if re.search(pat, f):
                 motivi.append((f, perche))
                 break
+    # il messaggio serve a DUE controlli: si legge UNA volta sola.
+    msg0 = ""
+    _arg = [x for x in sys.argv[1:] if not x.startswith("--")]
+    if _arg and os.path.exists(_arg[0]):
+        msg0 = io.open(_arg[0], encoding="utf-8", errors="replace").read()
+
+    # --- IL CONTROLLO DELLA CODA: chi DICHIARA un difetto deve REGISTRARLO.
+    _d = DIFETTO.search(msg0)
+    if _d and CODA not in st:
+        sys.stderr.write(
+            "\n[DIFETTI] *** COMMIT RIFIUTATO: il messaggio dichiara `" + _d.group(1)
+            + "` ma\n"
+            "           `" + CODA + "` NON e' nel commit. ***\n\n"
+            "  Un difetto acclarato che non entra nella CODA UNICA si PERDE alla prima\n"
+            "  compattazione, ed e' esattamente cio' che la regola del 2026-09-22 impedisce.\n\n"
+            "  CHE FARE: aggiungi la riga nella sezione DIFETTI APERTI (o SOSPETTI) di\n"
+            "  " + CODA + " e mettila nel commit.\n\n")
+        return 1
+
     if not motivi:
         return 0
     if RELAZIONE in st:
         return 0
     # la via d'uscita, che obbliga a DICHIARARE. Il messaggio arriva come argomento del hook
     # `commit-msg`: e' l'unico punto in cui git lo ha gia' scritto (vedi `installa`).
-    msg = ""
-    arg = [x for x in sys.argv[1:] if not x.startswith("--")]
-    if arg and os.path.exists(arg[0]):
-        msg = io.open(arg[0], encoding="utf-8", errors="replace").read()
-    m = FUGA.search(msg)
+    m = FUGA.search(msg0)
     if m:
         sys.stderr.write("[P1-bis] eccezione DICHIARATA: %s\n" % m.group(1).strip())
         return 0

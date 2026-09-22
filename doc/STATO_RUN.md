@@ -332,6 +332,57 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 > **Le letture sono gli STESSI OTTO CRITERI ASSOLUTI della validazione.** Nessun confronto fra
 > epoche.
 
+---
+
+## DIFETTI APERTI — **ogni difetto ACCLARATO, con la sua prova**
+
+> **REGOLA (Luca, 2026-09-22).** Un difetto e' **ACCLARATO** quando e' sostenuto, **e committato**,
+> da **almeno una** fra: una **MISURA** · una **LETTURA DEL SORGENTE** con la riga citata e
+> verificata sul blob corrente · una **VIOLAZIONE DIMOSTRATA di un assioma** con la riga.
+> **Entra qui NELLO STESSO COMMIT in cui diventa acclarato**, con la riga
+> `DIFETTO ACCLARATO: Dxx` nel messaggio. **Un SOSPETTO non e' un difetto:** va nella sezione
+> sotto, e si **promuove** solo con la prova (`PROMOSSO: Sxx -> Dyy`).
+> **ID stabili, mai riusati. Un difetto CURATO non si cancella: resta, col commit della cura.**
+> **Stato, uno solo:** `APERTO` · `CURA DERIVATA` · `CURA IN CODICE` · `CURATO`
+> · `NON E' UN DIFETTO`.
+> **⚠ RICOSTRUITA DAI FILE, NON DA MEMORIA** *(commit, `RAMIFICAZIONI.md`, relazione)*.
+
+| ID | il difetto, in una riga | la prova | cura | stato |
+|---|---|---|---|---|
+| **D01** | **`S09` clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica per `median(d0)`: statistica GLOBALE e lunghezza AL QUADRATO** | `G2` `fedda6c`: **`85.05 %`** degli archi-passo saturi, **`99.69 %`** del saldo da incrementi saturi · `Z81`, `Z106` · `A2`, `A5`, `A11` cor.6 | **`SPINTA_LOCALE`** | `APERTO` |
+| **D02** | **`pozzo_grafo` calcola `L` da `self.pos` — IL DISEGNO — mentre il suo docstring dichiara «la distanza REALE»** | `G1` `3c03223`, `Z103`: mediana `L/d` `0.98`→`1.22`, **un arco su quattro oltre il doppio** al passo 600, e **dipendenza dal centro su 5 snapshot su 5** · `A1` · il pavimento `1e-9` su `L` e' `A11` cor.1 | **`POZZO_D`** | `APERTO` |
+| **D03** | **La memoria del moto prende le direzioni da `pos`, normalizza su `Imed` GLOBALE, e ha un tetto `0.01*median(d0)`** | `Z104` `f80503c`, letto da `:5631-5648` · `A1` + `A2` + `A11` cor.2 e 7 | **`MEM_ARCO`** | `CURA DERIVATA` *(derivata, non scritta)* |
+| **D04** | **`_smp_chiudi()` RISCRIVE tutto `d0` a fine passo e NON ha nessun `_traccia_d0` attorno: e' una scrittura invisibile alla traccia** | lettura del sorgente `:3677`, commit `0989b78` · e' il buco che in `Z107` lasciava il bilancio aperto | **un sito di traccia** *(o il bilancio come presidio)* | `APERTO` *(nel runner di `G4` e' aggirato avvolgendo `_smorza`, ma il SIMULATORE resta senza sito)* |
+| **D05** | **I residui di `C5`: `I4` scatola nera, `I5` underflow per riga, modalita' fine** | il mandato `C5` e la coda | — | `APERTO` |
+| **D06** | **`_fatt_cs_ultimo` e' SCRITTO e MAI LETTO** *(quarto caso della stessa famiglia)* | `Z7`, letto dal codice | — | `APERTO` |
+| **D07** | **`TAU_A` e' UN SOLO numero per DUE leggi fisiche distinte** | `Z10`, `Z9-bis` | — | `APERTO` |
+| **D08** | **Il terzo ramo di `calcola_psi` (`elif` sotto `REPULS_LEGGE`) e' DICHIARATO, non corretto** | `Z14`, letto dal codice | — | `APERTO` |
+| **D09** | **`chi_basc` BLOCCA la mitosi e DIMEZZA l'olonomia netta: fa l'OPPOSTO del suo scopo dichiarato** | `Z73` | — | `APERTO` |
+| **D10** | **`nsub` governa il costo dell'intero sistema ed e' INVISIBILE: nessun contatore, nessuna colonna** | `Z75` | — | `APERTO` |
+| **D11** | **`d` scende DIECI VOLTE sotto `LAM` mentre `SCALA_MIN` e' acceso, e la causa NON e' trovata** | `Z87` | — | `APERTO` |
+| **D12** | **`1755 MB` di `.pkl` non hanno il comando che li rigenera** *(par.5-quinquies: «un dato che nessuno potra' rifare»)* | `Z89` | — | `APERTO` |
+| **D13** | **I sigilli storici non sono stati rigirati sul blob corrente** | `Z11` | — | `APERTO` |
+| **D14** | **`median(\|f\|)` fa TRE mestieri, non due: e' anche il rompi-anello** | `Z41` | — | `APERTO` |
+| **D15** | **`A7`: la carica chirale NON si conserva** | `Z71`, letto dal codice | — | `APERTO` |
+| **D16** | **`SCALA_MIN` frenava OGNI scrittura separatamente: il risultato dipendeva dall'ORDINE delle leggi** | `Z91` | `SCALA_MIN_PASSO` *(`C3`)* | **`CURATO`** |
+| **D17** | **`peq` diventava NEGATIVO e il pavimento `max(peq, 1e-9)` NE RIBALTAVA IL SEGNO** *(da `-3.72` a `+1.8e+06`)* | `Z94` | `PEQ_ESATTO` + `ANOM_SIMM` *(`C1`, `C1-bis`)* | **`CURATO`** |
+| **D18** | **`COES_ADIM` leggeva ISTANTI MISTI e il suo tetto era GLOBALE** | `Z92` · `A5` | `COES_CAUSALE` *(`C4`)* | **`CURATO`** |
+| **D19** | **OTTO grandezze che la semina legge erano INERTI SUL VUOTO in ogni run di epoca 1** | `Z88` | la cura del mondo-dopo-i-flag | **`CURATO`** |
+
+## SOSPETTI — **registrati, NON promossi**
+
+> Un sospetto porta **la misura che lo decidera'**, non una prova. **Si promuove solo con la prova
+> committata**, e la promozione si dichiara con `PROMOSSO: Sxx -> Dyy`.
+
+| ID | il sospetto | la misura che lo decidera' | stato |
+|---|---|---|---|
+| **S01** | **Chi fa crescere `d0`**: in `G3` gli scrittori sommano `-1.6e+03` e `med d0` RADDOPPIA lo stesso | **il BILANCIO COMPLETO di `G4`** *(scritture + freno + nascite−morti)*, che dira' la percentuale di ciascuno | in attesa |
+| **S02** | **Il freno di `SCALA_MIN` e' il motore di `d0`** | `Z102` lo misura a **120** passi *(`+3.205e+05`, `2.08x` la spinta grezza)*; **il bilancio di `G4` a 600** lo decide | in attesa |
+| **S03** | **La memoria del moto fa scappare `d0`** *(`S08_proj` e' il maggior scrittore positivo in `G3`, `+1.746e+06`)* | **`G4`**, lo spegnimento | in attesa |
+| **S04** | **La crescita e' NUCLEAZIONE, non stiramento**: la mediana sale perche' **nascono lunghi e muoiono corti** | le tre mediane *(nati, morti, vivi)* del bilancio di `G4` | in attesa |
+| **S05** | **La compressione `d/d0 < 1` e' un difetto** e non una fase | `G3` dice che **peggiora** senza gravita' *(`0.7489`→`0.6258`)*: serve una misura che ne trovi la CAUSA | in attesa |
+
+
 > **⚠⚠ IL MANDATO DEI PATTERN DI PROVA (2026-09-22), col §3 GIA' SOSTITUITO
 > DALL'INTEGRAZIONE DI LUCA.**
 > **PERCHE' ESISTE:** in `G3` sono emersi **cinque** pattern che hanno salvato la misura, e

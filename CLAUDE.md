@@ -5,6 +5,9 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
 
 ---
 
+> **Ogni difetto ACCLARATO** *(misura, riga di sorgente verificata o violazione di assioma, **committate**)* **entra nella sezione DIFETTI APERTI della CODA UNICA NELLO STESSO COMMIT**, con ID, prova e stato, e con la riga `DIFETTO ACCLARATO: Dxx` nel messaggio.
+> **I sospetti vanno in SOSPETTI. Nessun difetto si cancella: si chiude col commit della cura.**
+
 > **Prima di scrivere un sigillo, una prova o un confronto: leggi `doc/PATTERN_DI_PROVA.md`.**
 > **Ogni errore nuovo di metodo diventa una voce li', con il suo commit.**
 
