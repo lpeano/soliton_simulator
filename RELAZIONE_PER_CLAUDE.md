@@ -12133,3 +12133,51 @@ discesa = clip(1 - |tw|/4pi, 0, 1)            ZERO ESATTO    da  4 pi
 **QUANTO PESA, misurato e non aggettivato:** la spinta `0.02*d0*_rep` somma **`2.6e-03`–`1.3e-02`**
 per snapshot; il saldo di `S05_spinta_locale` su 600 passi vale **`+3.57`** *(`Z108`)* contro
 **`-2.6e+05`** di `S09`: **un fattore `~1e-5`.** **Non scrivo «inerte»: scrivo quanto vale.**
+
+### ㉤ **Scheda ② del registro: la memoria del moto — e l'ipotesi della compressione, misurata**
+
+**✅ LA PARTE «`d` NON SEGUE» REGGE, nettamente.** Fra i due bracci di `G4`, allo **stesso**
+passo, spegnendo `S08_proj`:
+
+| passo | `Δd0/d0` | `Δd/d` | **rapporto delle sensibilita'** |
+|--:|--:|--:|--:|
+| 120 | `−11.42 %` | `−1.37 %` | **`8.35`** |
+| 240 | `−16.53 %` | `−5.69 %` | **`2.91`** |
+| 360 | `−27.94 %` | `−3.11 %` | **`8.97`** |
+| 480 | `−32.13 %` | `−5.83 %` | **`5.52`** |
+| 600 | `−32.01 %` | `−12.97 %` | **`2.47`** |
+
+**Il criterio chiedeva `>= 2` ovunque: c'e'.** **`d0` e' da `2.5` a `9` volte piu' sensibile di `d`.**
+
+**⚠ LA PARTE «VERSO L'ALTO» NON REGGE COME SCRITTA, e lo dico perche' e' il punto
+interessante.** La frazione di archi con `proj > 0` **DECRESCE**: `57.7 %` · `64.3 %` ·
+`58.6 %` · `51.4 %` · **`47.4 %`** — e **al passo 600 la somma di `proj` e' NEGATIVA**
+*(`−8.4e+02`)*. **Ma la correlazione trasversale e' `−0.19`…`−0.44` su tutti e
+cinque gli istanti**, contro un nullo `1/√N = 1.4e-03`: **da `140` a `310` volte il nullo**.
+
+> **COME SI LEGGONO INSIEME, e il limite l'avevo dichiarato PRIMA di guardare:** `proj` e'
+> l'incremento **istantaneo**, `d/d0` e' una **storia**. **Al passo 600 l'istantaneo e' gia'
+> girato in negativo mentre `d0` resta alto.**
+> **L'ipotesi regge nella SOSTANZA — `S08_proj` e' la causa della compressione — ma il
+> meccanismo non e' «spinge sempre in su»: e' «ha spinto in su, e `d0` non
+> torna».** **E quello e' il CRICCHETTO DEL FRENO** *(`D31`)*. **Le due schede si toccano
+> esattamente li'.**
+
+#### ⚠ E LA SCHEDA HA TROVATO UNA COSA CHE NON ERA NEL MANDATO: **le dimensioni non tornano**
+
+```
+tw, twn, dtw, grad_tw, mem_mot, proj   ->  ANGOLI, cioe' ADIMENSIONALI
+d0                                     ->  LUNGHEZZA
+d0[mask] += _sd0(proj, mask)           ->  un NUMERO PURO sommato a una LUNGHEZZA
+```
+**L'unica cosa che da' a `proj` unita' di lunghezza e' il clip `0.01·median(d0)`.**
+**Quindi il clip non e' un limite: e' LA SCALA DELLA LEGGE.** Ed e' esattamente cio' che dice la
+misura: **il tetto e' SATURO nel `78 %`–`89 %` degli archi** *(`A11` cor.6: «un limite che
+morde quasi sempre non e' un limite: e' la legge»)*.
+
+**Non lo registro come difetto nuovo:** il tetto e' **gia'** in `D03`. **`Z112` ne misura la
+gravita'** e la scheda ne dice la ragione strutturale. *(`P1`: ho controllato lo storico prima di
+chiamarlo nuovo.)*
+**E `grad_tw` e' chiamato GRADIENTE ma non e' diviso per la lunghezza dell'arco** — `A3c`.
+
+**`MEM_ARCO` deve rispondere alla domanda dimensionale PRIMA di essere scritta.**

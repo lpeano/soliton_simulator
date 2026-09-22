@@ -191,3 +191,130 @@ l'unico dei tre candidati a rendere `LAM` un RISULTATO invece che un'ipotesi.**
   esistono, il referto no. **È il punto 5 del mandato dei sospesi:** distribuzione di `d0/LAM` e
   **test del cricchetto** su rumore simmetrico sintetico;
 - **`A11` cor.5:** dove nasce la discesa che il freno trattiene? **Non è stato cercato.**
+
+---
+
+# ② LA MEMORIA DEL MOTO — **`memoria_hebbiana_moto` / `S08_proj` / `mem_mot`**
+
+> **STATO: `DIFETTOSA`.** Difetti **`D03`** *(direzioni dal disegno, `Imed` globale, tetto
+> `0.01·median(d0)`)* e **`D02`** *(il pozzo usa `pos`)*.
+> **Cura derivata e NON scritta: `MEM_ARCO`.** **Spegnerla toglie il `62 %` della crescita di `d0`
+> e FA SPARIRE LA COMPRESSIONE** *(`Z109`)*.
+
+## LA FORMA — copiata dal codice (`:5644-5676`), non dal commento
+
+```
+twn[nodo]   = SUM |tw| sugli archi incidenti / deg            [rad]
+dtw[arco]   = twn[jj] - twn[ii]                               [rad]
+dirarc      = (pos[jj] - pos[ii]) / |pos[jj] - pos[ii]|       <- DAL DISEGNO (D02/D03)
+grad_tw[n]  = SUM_archi dtw * dirarc / deg                    [rad]   <- NON diviso per una lunghezza
+plast       = tanh(|grad_tw|)                                 in [0,1)
+mem_mot     = (1 - plast)*mem_mot + plast*grad_tw             <- LA MEMORIA: rilassamento
+memedge     = 0.5*(mem_mot[ii]*I[ii]/Imed + mem_mot[jj]*I[jj]/Imed)    <- Imed GLOBALE
+proj        = SUM(memedge * dirarc)
+proj        = clip(proj, -0.01*median(d0), +0.01*median(d0))  <- TETTO GLOBALE
+d0[mask]   += _sd0(proj, mask)                                <- il sito `S08_proj`
+```
+**E IL QUARTO PUNTO, che non scrive su `d0` e che `MEM_MOTO` non copriva** (`:6033`):
+```
+proiezione_trasversale = SUM(mem_mot[ii] * dir_laterale)
+shift_fase_dinamico    = accoppiamento_dinamico * proiezione_trasversale * (d_archi/d0_archi)
+phi[ii] = (phi[ii] + clip(shift_fase_dinamico, -pi/4, +pi/4)) % 4pi
+```
+
+## DA DOVE VIENE
+
+**Legge del momento:** `mem(t+1) = mem(t) + correzione_dal_campo`. La **plasticità** non è scelta:
+è `|grad_tw|` stesso, saturato da `tanh`. **Questo è derivato.**
+**`NON RICOSTRUITO`:** perché la correzione sia `grad_tw` *(differenza di torsione per nodo)* e
+non un'altra forma; e perché il tetto sia `0.01`.
+
+## LE DIMENSIONI — **e qui c'è un problema**
+
+| simbolo | dimensione |
+|---|---|
+| `tw`, `twn`, `dtw`, `grad_tw`, `mem_mot` | **angolo** — adimensionale |
+| `dirarc`, `I/Imed`, `plast` | adimensionale |
+| **`proj`** | **adimensionale** |
+| **`d0`** | **lunghezza `[L]`** |
+
+> **⚠ `proj` È UN NUMERO PURO, E VIENE SOMMATO A UNA LUNGHEZZA.**
+> **L'unica cosa che gli dà unità di lunghezza è IL CLIP `0.01·median(d0)`.**
+> **Quindi il clip non è un limite: è la SCALA della legge** — ed è esattamente ciò che il
+> `78 %`–`89 %` di saturazione misurato dice *(`Z112`)*.
+>
+> **E `grad_tw` è chiamato GRADIENTE ma non è diviso per una lunghezza:** un gradiente vero
+> sarebbe `dtw/L`. **`A3c`.**
+
+## COSA LEGGE / COSA SCRIVE
+
+- **legge:** `tw`, `pos` *(il DISEGNO — `D02`)*, `psi` → `I` e `Imed` *(media **globale** —
+  `A2`, `D03`)*, `_deg`, `d0`.
+- **scrive:** `mem_mot` *(stato per nodo)* · `d0` al sito **`S08_proj`** · **`phi`** al
+  punto `:6033`.
+- **flag:** **`MEM_MOTO`** recinta la **sola** scrittura su `d0`; **`MEM_MOTO_TUTTO`** recinta
+  **tutti e quattro** i punti *(sigillo `10/10`, blob `21e3a3dc`)*.
+
+## I LIMITI, CLASSIFICATI CON `A11`
+
+| limite | corollario | esito |
+|---|---|---|
+| `clip(proj, ±0.01·median(d0))` | **1** | ❌ il `0.01` è **scelto** *(`A1`)* |
+| | **2** | ❌ **cresce con `d0`**: più `d0` scappa, più il tetto glielo consente |
+| | **6** | ❌ **saturo nel `78 %`–`89 %`**: *«non è un limite, è la legge»* |
+| `max(median(I), 1e-9)` | **1** | ⚠ difesa dalla divisione, non vincolo fisico |
+| `max(|v|, 1e-9)` su `L` | **1** | ⚠ idem |
+| `clip(shift_fase, ±π/4)` | **1** | ⚠ dichiarato *«limite geometrico causale»*: **da verificare se satura** — **non misurato** |
+
+## LO STATO: `DIFETTOSA` — **e quanto pesa, misurato**
+
+| | acceso | spento *(`MEM_MOTO=False`)* |
+|---|--:|--:|
+| `Δ(Σd0)` su 600 passi | `+1.731e+06` | **`+6.504e+05`** — **−62 %** |
+| `S08_proj`, saldo | `+7.151e+05` | assente |
+| `med d/d0` finale | `0.7489` **`NON REGGE`** | **`0.8546` `REGGE`** |
+| criteri | `6/8` | **`7/8`** |
+
+## L'IPOTESI DELLA COMPRESSIONE — **misurata, e si divide in due**
+
+> *«`S08_proj` scrive `d0` verso l'ALTO senza che `d` segua, e questo abbassa `d/d0`»*
+> *(Luca, 2026-09-22 · `csv/_test_fork/_compressione_memmoto.py` blob `f5e55310`, `Z112`)*
+
+**✅ LA PARTE «`d` NON SEGUE» REGGE, e nettamente.** Fra i due bracci allo **stesso** passo,
+spegnendo `S08_proj`:
+
+| passo | `Δd0/d0` | `Δd/d` | **rapporto** |
+|--:|--:|--:|--:|
+| 120 | `−11.42 %` | `−1.37 %` | **`8.35`** |
+| 360 | `−27.94 %` | `−3.11 %` | **`8.97`** |
+| 600 | `−32.01 %` | `−12.97 %` | **`2.47`** |
+
+**`d0` è da `2.5` a `9` volte più sensibile di `d`.** Il criterio chiedeva `>= 2` ovunque: **c'è.**
+
+**⚠ LA PARTE «VERSO L'ALTO» NON REGGE COME SCRITTA, e va detto.** La frazione di archi con
+`proj > 0` è **`57.7 %` · `64.3 %` · `58.6 %` · `51.4 %` · `47.4 %`**: **decresce**, e **al
+passo 600 è SOTTO metà** con **somma NEGATIVA** *(`−8.4e+02`)*.
+**Ma la correlazione trasversale è forte e sempre dello stesso segno: `−0.19` … `−0.44`**,
+contro un nullo di `1.4e-03` — **da `140` a `310` volte il suo valore sotto ipotesi nulla**.
+**Gli archi che ricevono più `proj` HANNO `d/d0` più basso, nello stesso istante.**
+
+> **COME SI LEGGONO INSIEME, ed è il limite che avevo dichiarato PRIMA:** `proj` è l'incremento
+> **istantaneo**, `d/d0` è una **storia**. **Al passo 600 l'istantaneo è già girato in negativo
+> mentre `d0` resta alto: è l'ACCUMULO che comprime, non il segno del momento.**
+> **L'ipotesi regge nella sostanza — `S08_proj` è la causa della compressione — ma il
+> meccanismo NON è «spinge sempre in su»: è «ha spinto in su, e `d0` non torna».**
+> **E questo è esattamente il cricchetto del freno** *(scheda ①, `A11` cor.4)*: `d0` sale e non
+> può scendere. **Le due schede si toccano qui.**
+
+## LE DOMANDE APERTE
+
+1. **`proj` è adimensionale e viene sommato a una lunghezza.** **Quale lunghezza fisica lo
+   converte?** Oggi lo fa il clip, che è un numero scelto. **`MEM_ARCO` deve rispondere a questa
+   prima di essere scritta.**
+2. **`grad_tw` è un gradiente senza divisione per la lunghezza dell'arco.** Dividerlo cambia la
+   legge o la ripara?
+3. **Il `62 %` di `Z109` non è il peso della sola scrittura su `d0`:** `shift_fase_dinamico` legge
+   `d_archi/d0_archi`, quindi il punto (4) è **accoppiato** al punto (3) attraverso `d0`
+   *(sigillo di `G4-bis`, `T6`)*. **`G4-bis` è il braccio che separa le due cose.**
+4. **Se `d0` è `2.5`–`9` volte più sensibile di `d`, che cosa lega `d` a `d0`?** La compressione
+   è un difetto **di `d0`** o un'**assenza di accoppiamento** verso `d`?
