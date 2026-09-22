@@ -11,7 +11,7 @@
 |---|---|
 | **comando** | `python csv/_test_fork/_g4_prova.py --ritmo-wrap` |
 | **destinazione** | `csv/_test_fork/_d34_ritmo_wrap` |
-| **lanciato** | subito dopo questo commit *(l'ora esatta e il PID sono nel commit d'avvio)* |
+| **lanciato** | **2026-09-22 alle `20:04:18`, PID Windows `10772`** *(il processo `python.exe`, NON la shell)* |
 | **durata attesa** | **~42 min** *(il braccio di riferimento di `G4`: `2076 s`; `G4-bis`: `2489 s`)* |
 | **passi** | 600 *(100 frame × 6)* · seme `42` · blob `3d91338e` |
 | **confronto** | `csv/_test_fork/_g4_riferimento`, **già sul disco** |
