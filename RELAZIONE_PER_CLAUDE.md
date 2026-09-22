@@ -11037,3 +11037,38 @@ gira, *«saturi in tutti e 120 i passi»* resta una **verifica aritmetica**
 > **⚠ COSA RESTA APERTO, ed e' il numero ovvio: QUANTI archi stanno sul plateau.** La
 > strumentazione (`satura()`) e' scritta e **non ancora esercitata da un criterio**. — `Z106`
 > **⚠ E NESSUNA CURA SI DERIVA QUI:** il mandato dice che si derivano al `CHK3`.
+
+### ⑹ **Un run FALLITO, e il collaudo era passato lo stesso**
+
+> **Riscontro negativo, relazionato perche' lo e'.** Il giro di `G2` che doveva misurare la
+> **saturazione** e' morto **alla prima invocazione di `S09`, al passo 1**. Nessun dato prodotto.
+> Il log e' committato come reperto: `csv/_test_fork/_diag_D/dove_spinge_FALLITO_2026-09-22.txt`.
+
+```
+File "csv/_test_fork/_dove_spinge_la_gravita.py", line 471, in traccia
+    SAT_REG += np.bincount(cls[sel], minlength=len(ETICHETTE)).astype(np.int64)
+UnboundLocalError: cannot access local variable 'SAT_REG' where it is not associated with a value
+```
+
+**LA CAUSA, ed e' mia.** `SAT_REG += ...` dentro la funzione **annidata** `traccia` e' un
+**assegnamento aumentato**: Python lega il nome come **locale** della funzione invece di usare
+quello del chiuso, e la lettura implicita che `+=` fa per prima cosa trova la variabile non
+inizializzata. `SAT_PASSO.append(...)` e `SAT_SALDO["sat"] += ...` **non** hanno il problema,
+perche' sono una chiamata di metodo e un assegnamento di **item**: nessuno dei due **lega** il
+nome. La correzione usa `np.add(SAT_REG, x, out=SAT_REG)`, che scrive **in place** senza legare
+nulla.
+
+> **⚠ E LA COSA CHE VALE LA PENA PORTARSI DIETRO: I DODICI COLLAUDI ERANO TUTTI `OK` A SECCO,
+> E IL RUN E' MORTO COMUNQUE.** Non e' un difetto dei collaudi: **collaudano i CRITERI** --
+> `satura()`, l'accumulatore per chiave, l'aggregazione per regione -- **e non l'IMPIANTO che li
+> alimenta** dentro `traccia`.
+> **E' la stessa lezione gia' scritta per il sigillo dei flag del driver: un collaudo che passa
+> dice che CIO' CHE GUARDA e' a posto, non che tutto lo sia.**
+> **Non aggiungo un collaudo per questo caso:** un `UnboundLocalError` si prende **girando**, e ora
+> il run gira. **Se si ripetesse su un altro accumulatore, allora servirebbe un presidio e non una
+> nota** (`A9`).
+
+**Stato dei dati:** l'output `DOVE_SPINGE_LA_GRAVITA.txt` sul disco era stato **troncato** dal run
+fallito *(lo script apre il file in scrittura all'inizio di `main()`)*. **E' stato ripristinato da
+git:** la versione buona e' quella di `67445ec`, e **resta valida** -- il giro nuovo la rigenerera'
+per intero aggiungendo la saturazione.

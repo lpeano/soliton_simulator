@@ -468,9 +468,17 @@ def main():
             ACC["v"][:len(dx)] += dx
             n_sat, scritti, sel = satura(dx)
             SAT_PASSO.append((PASSO["k"], n_sat, scritti, len(dx)))
-            SAT_REG += np.bincount(cls[sel], minlength=len(ETICHETTE)).astype(np.int64)
+            # ⚠ `SAT_REG += ...` qui NON si puo' usare: un assegnamento aumentato dentro una
+            #   funzione annidata LEGA il nome come LOCALE e alza `UnboundLocalError`.
+            #   `np.add(..., out=...)` scrive IN PLACE senza legare nulla. Difetto preso il
+            #   2026-09-22, al passo 1, e il collaudo NON lo aveva visto perche' collauda i
+            #   CRITERI, non l'impianto che li alimenta.
+            np.add(SAT_REG, np.bincount(cls[sel], minlength=len(ETICHETTE)).astype(np.int64),
+                   out=SAT_REG)
             _scr = dx != 0.0
-            SAT_REG_TOT += np.bincount(cls[_scr], minlength=len(ETICHETTE)).astype(np.int64)
+            np.add(SAT_REG_TOT,
+                   np.bincount(cls[_scr], minlength=len(ETICHETTE)).astype(np.int64),
+                   out=SAT_REG_TOT)
             SAT_SALDO["sat"] += float(np.sum(dx[sel]))
             SAT_SALDO["tot"] += float(np.sum(dx))
             _ds = dx[sel]
