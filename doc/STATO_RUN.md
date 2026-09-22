@@ -262,7 +262,13 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **driver** | inoltra tutte le cure | 21/9 §① | ✅ **`3/3`**, 9 opzioni su 9 in entrambi i versi |
 | **V** | **VALIDAZIONE a 600 passi** | GLOBALE §3 | ⚠ **`6` criteri su `8`** *(`Z101`)*. **`nsub` max `4`**, `peq >= 0`, zero sotto `LAM`, **zero violazioni**. **NON reggono `d0` e `d/d0`** |
 | **CHK2** | **CHECKPOINT 2** | GLOBALE §3 | ✅ **raggiunto e riferito a Luca.** **IL RUN LUNGO NON SI LANCIA** |
-| **D0** | **⚠ LA CURA DI `d0`: CHI LO FA SCAPPARE** — `S09` *(spinta × `median(d0)`)* e `S10` *(gravita', idem)*, **auto-amplificanti per costruzione e MAI misurati PER SITO** | decisione di Luca, 21/9 | ▶ **E' LA PROSSIMA, ed e' l'UNICA cosa che blocca il run lungo.** Prima la **somma per scrittore** con `TRACCIA_D0`, separando **SALITE e DISCESE** |
+| **D0** | **CHI FA SCAPPARE `d0`** | 21/9 | ✅ **MISURATO: e' IL FRENO.** Gli scrittori spingono **giu'** `-1.543e+05`, il vincolo **aggiunge** `+3.205e+05`. **`S10` inerte, `S09` verso il BASSO** *(`Z102`)*. **La spinta e' la DISCESA CANCELLATA**, `|dx|·min(1, LAM/d0)`, e **si indebolisce da sola**: dal `91 %` al `24 %` |
+| **G1** | **§1 QUANTO CONTA IL DISEGNO** — `L_disegno/d` per arco, per regione, nel tempo, e la correlazione col CENTRO del disegno | GLOBALE-DISEGNO §1 | ▶ **sola lettura, sugli snapshot di `_val600`** |
+| **G2** | **§2 DOVE SPINGE LA GRAVITA'** — saldo di `S09` **per regione**, salite e discese, e i 20 archi piu' spinti | GLOBALE-DISEGNO §2 | ⏸ rigiocata 120 passi, `TRACCIA_D0` |
+| **G3** | **§3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE** — `GRAV_BIFASE = False` **impostato dalla rigiocata sul MODULO**, 600 passi | GLOBALE-DISEGNO §3 | ⏸ **nessuna modifica al simulatore ne' al driver** |
+| **G4** | **§4 PROVA DI SPEGNIMENTO: la sola MEMORIA DEL MOTO** — flag nuovo `MEM_MOTO`, `True` di default, che salta **solo** il blocco di `mem_mot` | GLOBALE-DISEGNO §4 | ⏸ **con sigillo BLOCCANTE di byte-identita'**. **⚠ `MEM_HEBB = False` NON si usa: spegne l'INTERA funzione, gravita' e coesione comprese** |
+| **CHK3** | **CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PRIMA** | GLOBALE-DISEGNO §5 | ⏸ **QUI CI SI FERMA.** Le cure solo **DERIVATE, non scritte** |
+
 | **C5-res** | **I RESIDUI DI `C5`** — **`I4`** la scatola nera *(rigiocare da solo il passo in cui scatta un invariante)*, **`I5`** la tabella degli underflow **per RIGA**, e la **MODALITA' FINE** *(controllo dopo OGNI scrittura invece che a fine passo)* | mandato `C5`, decisione di Luca 21/9 | ⏸ **DOPO la cura di `d0` e PRIMA del run lungo. Stasera no.** |
 | **8-bis** | **ARCHIVIO A ROTAZIONE** — si scrive su `C:`, ogni snapshot completo va su `E:` con `sha1` dei byte compressi, sigilli `R1`-`R5` | archivio | 🔒 prima del run lungo |
 | **E3** | **EPOCA 3 + RUN LUNGO** — tag `epoca-3`, 3000 passi, `M1`/`M4` leggere durante il run | GLOBALE §4 | 🔒 **solo dopo che i criteri REGGONO.** Nessun confronto con le epoche precedenti |
@@ -271,6 +277,23 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | 8 | `M2`/`M3` cosmologici *(pesanti)* | COSMOLOGICO | ⏸ |
 | 9 | **CHECKPOINT FINALE a Luca** | — | ⏸ |
 | 10 | `Z47` PARTE ② — lo stacco | `MANDATO_Z47_coda` | 🔒 **NON parte senza il via libera di Luca** |
+
+> **⚠⚠ IL MANDATO DEL 2026-09-22: IL DISEGNO DENTRO LA FISICA.**
+> **Tre fatti letti dal codice e VERIFICATI dal disco:**
+> **①** `pozzo_grafo` **dichiara nel suo docstring** *«il pozzo non usa la geometria del rendering
+> ... diviso per la DISTANZA REALE dell'arco»*, **e poi calcola `L` da `self.pos`, che E' il
+> disegno.** La distanza reale esiste, ed e' **`d`**. **Il commento dice il FALSO**, e il pavimento
+> `1e-9` su `L` e' **un'altra toppa** (`A11`).
+> **②** `S09` clippa `spinta` al **passo causale** — quindi e' **gia' una LUNGHEZZA** — e poi la
+> **moltiplica per `median(d0[mask])`**: statistica **GLOBALE** (`A2`, `A5`) **e lunghezza AL
+> QUADRATO**. *(E il VERSO lo decide la TORSIONE, non la massa: e' una scelta di fisica forte, e va
+> registrata come DOMANDA, non come difetto.)*
+> **③** `mem_mot` prende le **direzioni da `pos`**, normalizza su `Imed` **globale**, e ha un tetto
+> `0.01 * median(d0)` che viola **quattro** cose in una riga: coefficiente scelto (`A1`), statistica
+> globale (`A2`), **dipende da cio' che limita** e **taglio secco** (`A11` corollari 2 e 7).
+>
+> **PRIMA SI MISURA E SI SPEGNE, POI SI CURA.** Nessuna cura fino al `CHK3`.
+
 
 > **⚠ PERCHE' I RESIDUI DI `C5` VANNO PRIMA DEL RUN LUNGO E NON PRIMA DELLA CURA DI `d0`**
 > *(decisione di Luca, 2026-09-21, 22:30)*:
