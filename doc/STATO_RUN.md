@@ -384,6 +384,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **D27** | **Il grafo e' in QUATTRO COMPONENTI che non si toccano mai**, e la bimodalita' del grado e' la semina. **Una distanza SUL GRAFO fra componenti diverse non esiste**, e le tre prove dell'ipotesi la usano | `Z65` | — | `APERTO` |
 | **D28** | **`nsub` esplode e lo tira `max(|vd|)` su POCHISSIMI archi**: il costo dell'intero sistema e' governato da una manciata di archi | `Z74` | — | `APERTO` |
 | **D29** | **CINQUE NODI DI VUOTO sono i piu' connessi dell'intero sistema**: il vuoto ha degli HUB, e non dovrebbe averne | `Z77` | — | `APERTO` |
+| **D30** | **`_massa` chiama `semina` SENZA `mass_id` (`:6209`), quindi `masse_info` non viene MAI popolato e `_registra_concorrenza` non parte: negli snapshot di epoca 3 `masse_info` e' VUOTO e `conc_nodi` e' tutto liste vuote** | lettura del sorgente `:6209` + misurato su `_val600/scena_000120` | — | `APERTO` |
 <!-- DIFETTI-NUOVI-FINE -->
 
 

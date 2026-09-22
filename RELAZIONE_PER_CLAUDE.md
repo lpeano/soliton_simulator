@@ -11665,3 +11665,49 @@ parte si fa SENZA RUN**.
 componente **senza costo**. **Non lo faccio.** Cambierebbe **il blob dello strumento fra i due
 bracci**, e li renderebbe **non confrontabili** — che e' esattamente il difetto contro cui
 esiste il pattern del controllo dell'involucro. **I due bracci restano identici.**
+
+### ㉘ **`D25`: il criterio sulla MEDIANA e' CIECO proprio sul caso che deve misurare**
+
+> **Rilievo di Luca, e l'esito NON si legge.** Committato come reperto:
+> `csv/_test_fork/_diag_D/COMPONENTI_E_TEMPO_REPERTO_criterio_sbagliato.md`.
+
+**Il criterio confrontava il ritmo di ogni nodo con LA MEDIANA DEL RUN STESSO** *(`r/med < 0.01`,
+`< 0.1`)*.
+> **Se il `93 %` dei nodi e' fermo, LA MEDIANA E' ESSA STESSA UN NODO FERMO**, e il criterio non
+> vede niente: **i fermi sembrano normali e quelli che scorrono sembrano anomalie.**
+> **E' cieco proprio sul caso che deve misurare.**
+
+**E NON E' UN ERRORE NUOVO: e' gia' catalogato in `CLAUDE.md`.** **`P4`** — *prima di
+misurare se una grandezza cambia, verificare che sia LIBERA di cambiare* — e **`C12`** —
+*una grandezza normalizzata sulla propria mediana ha un punto fisso: su quello non si misura
+nulla*. **Ci sono cascato mentre credevo di EVITARE una soglia scelta.**
+> **La lezione: il rimedio a una soglia scelta NON e' la mediana. E' un riferimento ESTERNO alla
+> distribuzione.** Qui e' **`r = 1`**, cioe' il nodo il cui tempo proprio vale il tempo di
+> coordinata `DT`.
+
+**COSA RESTA VALIDO, e va detto perche' non cade tutto:** **le COMPONENTI**. Si calcolano da `i` e
+`j`, **non dipendono dal criterio di `D25`**, e dicono **UNA sola componente** su tutti e tre gli
+archivi di epoca 3, **12 snapshot su 12**.
+
+### ⚠ E LEGGENDO LE MASSE DAL CODICE INVECE DI SUPPORLE, E' USCITO UN DIFETTO NUOVO
+
+**`masse_info` e' VUOTO e `conc_nodi` e' tutto liste vuote** negli snapshot di epoca 3 —
+**dopo** la cura di `Z53` che doveva farli sopravvivere.
+**LA CAUSA, dal sorgente (`:6209`):**
+
+```python
+def _massa(cx, r, n, fase, etichetta=None):
+    net.semina(n, raggio=r, centro=centro, fase=fase)      # <- SENZA mass_id
+    if etichetta:
+        test["dati"].setdefault("coorti", {})[etichetta] = idx
+```
+
+> **`semina` e' chiamata SENZA `mass_id`**, quindi `masse_info` **non viene mai popolato** e
+> `_registra_concorrenza` **non parte**. La coorte finisce in **`test["dati"]`**, che e' un
+> dizionario **di modulo** e **non sta nello snapshot**.
+> **La cura di `Z53` preserva una registrazione che per questa scena NON AVVIENE.**
+
+**⚠ E LA DOMANDA DI LUCA — «le tre masse stanno in componenti diverse?» —
+HA COMUNQUE RISPOSTA, e non dipende dall'assunzione:** poiche' **la componente e' UNA SOLA**,
+**qualunque** partizione dei nodi finisce dentro quella. **La risposta e' NO, e l'assunzione sui
+tre terzi non la tocca.**
