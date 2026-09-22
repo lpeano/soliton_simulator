@@ -7,7 +7,7 @@ Decisione di Luca, 2026-09-22, **nella forma giusta**:
     Se la scheda NON ESISTE, prima si crea la scheda.
     I commit che non toccano la fisica usano l'eccezione  [SENZA-FISICA: <motivo>].
 
-⚠ PERCHE' QUESTA FORMA E NON «tocca il registro»: un hook che chiedesse soltanto di toccare
+!! PERCHE' QUESTA FORMA E NON "tocca il registro": un hook che chiedesse soltanto di toccare
   `doc/REGISTRO_FISICA.md` sarebbe soddisfatto da UNA RIGA QUALSIASI in fondo al file. Questo
   chiede che **la diff del registro cada DENTRO la sezione della legge toccata**. E' la
   differenza fra un presidio e una formalita' (`A9`).
@@ -23,7 +23,7 @@ COME SA COSA E' CAMBIATO. Dalla diff **in cache** di `soliton_simulator.py`:
     **in cache** *(par.0: i nomi non si spostano, le righe si')*;
   * le righe toccate a livello di MODULO -> il **flag** assegnato su quella riga.
 
-⚠ IL LIMITE, DICHIARATO INVECE DI ESSERE NASCOSTO: **questo hook non distingue una modifica di
+!! IL LIMITE, DICHIARATO INVECE DI ESSERE NASCOSTO: **questo hook non distingue una modifica di
   LEGGE da una modifica di COMMENTO.** Distinguerle richiederebbe un confronto di AST fra le due
   versioni, e un commento che descrive una legge **e' parte della legge** (par.0: i commenti
   stale sono un difetto documentato di questo repo). **Quindi ogni tocco dentro una funzione o
@@ -53,7 +53,7 @@ def _git(*a):
 def righe_toccate(diff):
     """Le righe del file NUOVO toccate da una diff `-U0`. Solo aggiunte e contesto zero.
 
-    ⚠ Una RIMOZIONE pura non ha righe nuove: si registra la riga a cui il taglio e' ancorato,
+    !! Una RIMOZIONE pura non ha righe nuove: si registra la riga a cui il taglio e' ancorato,
       altrimenti cancellare una legge intera non risulterebbe come 'toccata'.
     """
     out = set()
@@ -179,7 +179,7 @@ def controlla(staged, msg, leggi_git=True, _finti=None):
         t.append("\n  QUESTE HANNO UNA SCHEDA, e il commit NON la tocca:\n")
         for tipo, nome, s in scheda_non_toccata:
             t.append("    %-9s %-28s -> scheda `%s`\n" % (tipo, nome, s))
-        t.append("\n  ⚠ NON BASTA toccare il registro da qualche parte: la modifica deve cadere\n"
+        t.append("\n  !! NON BASTA toccare il registro da qualche parte: la modifica deve cadere\n"
                  "    DENTRO la sezione di QUELLA scheda. Un hook soddisfatto da una riga\n"
                  "    qualsiasi in fondo al file sarebbe una formalita', non un presidio.\n")
     t.append(
@@ -253,7 +253,7 @@ def collaudo(W):
     prova("K8", [3], [], "", 0,
           "tocco una riga VUOTA fuori da ogni funzione e flag: non e' una legge")
 
-    # ⚠ un rifiuto che non dice COSA toccare costringe a indovinare, e un presidio che si
+    # !! un rifiuto che non dice COSA toccare costringe a indovinare, e un presidio che si
     #   aggira per stanchezza non e' un presidio. Si verifica che il testo NOMINI la scheda
     #   e la funzione, non solo che rifiuti.
     ok9 = ("freno" in (t2 or "")) and ("_smorza" in (t2 or ""))

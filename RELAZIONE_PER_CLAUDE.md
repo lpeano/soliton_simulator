@@ -12498,3 +12498,10 @@ di COMMENTO.** Distinguerle richiederebbe un confronto di AST fra le due version
 commento che descrive una legge è parte della legge** — i commenti stale sono un difetto
 documentato di questo repo. **È più severo del necessario, e si dice.**
 **E il secondo limite è lo stesso di `P1-bis`: i hook non sono versionati da git.**
+
+> **✅ PROVATO IN ENTRAMBI I RAMI, sul repo vero — perché un presidio non provato è una nota.**
+> ① modifica finta dentro `_smorza` **senza** toccare la scheda → **RIFIUTATO**, e il rifiuto nomina `_smorza` e la scheda `freno-scala-min`.
+> ② **la stessa** modifica **più** una riga dentro la sezione `freno-scala-min` → **PASSATO**.
+> Il commit di prova era **locale e non pushato**, ed è stato annullato con `reset --soft`; **`soliton_simulator.py` è tornato al blob `21e3a3dc`**, verificato.
+
+**E un difetto mio, trovato dalla prova stessa:** il messaggio di rifiuto conteneva `⚠`, e lo `stderr` di Windows lo stampava come **`⚠`** *(cp1252 con `backslashreplace`)*. **Il file dichiarava «ASCII PURO» e io l'avevo violato**: sette caratteri, ora tolti. **È la stessa famiglia del presidio sull'encoding di `CLAUDE.md`** — lì uccide lo script, qui rende illeggibile un avviso.
