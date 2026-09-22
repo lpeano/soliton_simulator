@@ -222,6 +222,34 @@ def main():
           % (e_, pa, na, so, ne, mr, ("%d" % rp) if rp >= 0 else "n/d", mx, sp))
     W("\n**ARCHI IN REPULSIONE, sommati su tutti gli snapshot: %d.**\n\n" % tot_neg)
 
+    # ---- LA FINESTRA: dove il segno si inverte e dove l'ampiezza si azzera
+    W("\n### ⚠ **LA FINESTRA DELLA REPULSIONE: fra l'inversione del SEGNO e lo zero "
+      "dell'AMPIEZZA**\n\n")
+    W("> **`resp = salita * discesa * (1/tau_pp) * segno`.** Il `segno` si inverte a "
+      "`tau_pp > centro`, cioe' **oltre `~3.5pi`**.\n")
+    W("> **Ma `discesa = clip(1 - |tw|/4pi, 0, 1)` vale ESATTAMENTE ZERO per `|tw| >= 4pi`.**\n")
+    W("> **Quindi la repulsione puo' esistere SOLO nella finestra `[~3.5pi, 4pi)`, larga "
+      "mezzo `pi`** — e **oltre il tetto e' zero per costruzione**, cioe' **proprio dove la "
+      "materia e' piu' compressa**, che e' il caso per cui la legge dichiara di esistere.\n\n")
+    W("| archivio | passo | oltre l'inversione | **nella finestra `[3.5pi, 4pi)`** | "
+      "**oltre `4pi`: repulsione ZERO** | quota azzerata |\n")
+    W("|---|--:|--:|--:|--:|--:|\n")
+    for eti, cart in ARCHIVI:
+        for p in snapshot(cart):
+            passo = int(os.path.basename(p).split("_")[1].split(".")[0])
+            a = leggi(p)
+            r = risposta(a, gamma, tors_4pi)
+            avv = r["avv"]
+            oltre_inv = int(np.sum(r["tau_pp"] > r["centro"]))
+            oltre_tetto = int(np.sum(avv >= TW_TETTO))
+            finestra = int(np.sum((avv >= 3.5 * PI) & (avv < TW_TETTO)))
+            quota = (oltre_tetto / oltre_inv) if oltre_inv else float("nan")
+            W("| %s | %d | %d | **%d** | **%d** | **%.1f %%** |\n"
+              % (eti, passo, oltre_inv, finestra, oltre_tetto, 100.0 * quota))
+    W("\n**⚠ E LA VERIFICA CHE LA FINESTRA E' DAVVERO IL VINCOLO:** `min(resp)` vale "
+      "`~-1.5e-02` su tutti gli snapshot — **non cresce mai**, perche' gli archi che "
+      "potrebbero dare una repulsione grande sono **esattamente quelli che `discesa` azzera**.\n")
+
     # ---------------------------------------------------------- CANDIDATO 2
     W("\n## CANDIDATO 2 — **due definizioni di tempo proprio**\n\n")
     a_r, a_t = siti_dei_due_tempi()
