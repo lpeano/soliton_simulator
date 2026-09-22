@@ -8,6 +8,8 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
 > **Ogni difetto ACCLARATO** *(misura, riga di sorgente verificata o violazione di assioma, **committate**)* **entra nella sezione DIFETTI APERTI della CODA UNICA NELLO STESSO COMMIT**, con ID, prova e stato, e con la riga `DIFETTO ACCLARATO: Dxx` nel messaggio.
 > **I sospetti vanno in SOSPETTI. Nessun difetto si cancella: si chiude col commit della cura.**
 
+> **`A12` — UN DIFETTO DIMOSTRATO SI CURA. MISURARE NON E' CURARE.** Quando un difetto e' acclarato e la sua cura e' **derivabile**, **si cura**: le correlazioni con gli altri difetti **si capiscono meglio DOPO, con un difetto in meno**. Una cura alla volta, per **grandezza dell'effetto misurato**; ogni misura nuova che emerge durante una cura va **IN CODA**. *(`doc/ASSIOMI.md`, `A12`. La frase-spia e' «prima pero' bisogna capire se…».)*
+
 > **Prima di scrivere un sigillo, una prova o un confronto: leggi `doc/PATTERN_DI_PROVA.md`.**
 > **Ogni errore nuovo di metodo diventa una voce li', con il suo commit.**
 

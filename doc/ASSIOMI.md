@@ -453,3 +453,48 @@ in un punto.**
 **A5** (grandezze istantanee che mediano a distanza: `w`, `psi`, `B`, `lambda_nodi`) ·
 **A7** (altri cricchetti senza stato) · **A1** (enumerazione di TUTTE le costanti nei percorsi
 fisici: `0.02`, `3.0`, `TAU_DIFF`, `TAU_BG`, `M_PH`, `G_PH`…).
+
+---
+
+## A12 — UN DIFETTO DIMOSTRATO SI CURA. **MISURARE NON È CURARE.**
+
+> **Decisione di Luca, 2026-09-22.**
+> **Quando un difetto è acclarato e la sua cura è derivabile, SI CURA.**
+> **Non si aspetta di aver capito le sue correlazioni con gli altri difetti: le correlazioni si
+> capiscono meglio DOPO, con un difetto in meno.**
+
+### LE QUATTRO REGOLE
+
+1. **Ogni misura nuova che emerge DURANTE una cura va IN CODA, non davanti.**
+2. **Una cura alla volta**, e la successiva **non comincia** finché la precedente **non ha la
+   sua prova**.
+3. **Si cura per GRANDEZZA DELL'EFFETTO MISURATO, non per ordine di scoperta.**
+4. **Un difetto che non si sa curare si DICHIARA tale, con la domanda che manca, e NON blocca
+   gli altri.**
+
+### PERCHÉ
+
+**I difetti sono intrecciati per natura, quindi c'è SEMPRE una correlazione nuova da misurare
+prima di agire. Se la si insegue, non si cura mai niente.**
+
+> **IL CASO REALE, ed è di oggi — 22 settembre 2026.**
+> **Quattro misure chiuse e ZERO cure**, con **`D31` dimostrato sulla formula dal mattino**
+> *(`Z113`: `4/4`, deriva `+1.582064e-03` contro l'attesa derivata `+1.582007e-03`, scarto
+> `0.0 %`, e i due casi che devono dare zero lo danno)*.
+> **Il difetto più grande del sistema — il motore della crescita di `d0` — era dimostrato
+> alle undici del mattino, ed era ancora lì alle nove di sera.**
+
+### COSA `A12` NON DICE
+
+- **non dice di curare alla cieca:** `REG-R` resta — **una cura nasce dalla sua SCHEDA**, e
+  passa da **flag + sigillo + prova**. `A12` governa **QUANDO** si cura, non **COME**;
+- **non dice che misurare sia inutile:** dice che **una misura che non porta a una cura va in
+  coda**, non davanti a una cura già derivabile;
+- **non abolisce il `CHECKPOINT`:** le cure restano **dietro flag spenti** finché Luca non
+  legge le prove. **`A12` impedisce di non scriverle**, non di non accenderle.
+
+### COME SI RICONOSCE LA VIOLAZIONE
+
+**La frase-spia è: *«prima però bisogna capire se …»*.**
+Se ciò che segue è **una correlazione con un altro difetto**, e il difetto in mano è
+**già dimostrato con una cura derivabile**, allora **si sta rimandando**, e `A12` dice di no.
