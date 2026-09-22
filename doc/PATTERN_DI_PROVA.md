@@ -25,6 +25,7 @@
 | **4** | **Snapshot contro snapshot, allo stesso istante.** Mai la rete viva contro un file. | `abc5b49` | I **contatori diagnostici** continuano a salire dopo la scrittura: `_g_kernel_alpha_tot` dava «1 campo diverso» fra **due istanti**, non fra due run *(1523 e 1523, identici)*. | I due termini del confronto sono **due file**, allo **stesso passo**. **E niente `astype(float)` sui complessi**: scarta la parte immaginaria. |
 | **5** | **Il controllo dell'involucro, prima di ogni prova.** Lo strumento di lancio *(runpy, monkeypatch, tracce)* deve riprodurre il riferimento **campo per campo a flag invariato**. | `b812f92`, `c901456` | Il sigillo dimostra che **il flag** è chirurgico; **non** che **l'involucro** sia inerte. Sono due affermazioni diverse, e senza la seconda una differenza è attribuibile allo strumento. | Un giro corto a **flag invariato** contro il riferimento: **`0` campi diversi**. **Dimostra anche che le tracce sono di sola lettura.** |
 | **6** | **Ogni difetto ACCLARATO si registra SUBITO nella CODA UNICA**, nello stesso commit in cui diventa acclarato. | *decisione di Luca, 2026-09-22* | **Due cure sicure (`SPINTA_LOCALE`, `POZZO_D`) esistevano solo nella relazione e nei mandati: dopo una compattazione si sarebbero PERSE.** | La riga `DIFETTO ACCLARATO: Dxx` nel messaggio, e l'ID esiste nella sezione **DIFETTI APERTI**. Un **sospetto** va in **SOSPETTI** e si promuove solo con la prova. |
+| **7** | **Un giro CORTO prima del giro vero.** Prima di un run che costa più di qualche minuto, lo stesso strumento gira **end-to-end** coi parametri minimi. | `438da39`, `53e08f3` · *ammessa da Luca il 2026-09-22* | **I collaudi passano e il run muore lo stesso**: collaudano i **criteri**, non l'**impianto** che li alimenta. ① un `UnboundLocalError` ha ucciso un run di **400 s al passo 1**, con dodici collaudi tutti `OK`; ② il **bilancio di `G4` non chiudeva** *(`8.0e-05`)*, e il giro corto lo ha preso **in 43 s invece che in mezz'ora**, su un run che sarebbe stato **inutilizzabile**. | Lo strumento accetta un modo ridotto *(`--frame=3`, `--passi=2`)*, **ed e' stato ESEGUITO** prima del giro vero. |
 
 ### Le regole che valgono qui e stanno già altrove — **richiamo, non copia**
 
@@ -40,9 +41,7 @@
 
 ## IN PROVA
 
-| la regola | commit | il difetto che ha scoperto | come si verifica |
-|---|---|---|---|
-| **Un giro CORTO prima del giro vero.** Prima di un run che costa più di qualche minuto, lo stesso strumento gira **end-to-end** coi parametri minimi. | `438da39`, `b6f3c83` | **I collaudi passano e il run muore lo stesso**: collaudano i **criteri**, non l'**impianto** che li alimenta. Un `UnboundLocalError` ha ucciso un run di 400 s **al passo 1**, con dodici collaudi tutti `OK`. | Lo strumento accetta un modo ridotto *(`--passi=2`, `--prova`)*, ed è stato **eseguito** prima del giro vero. |
+*(nessuna)*
 
 ## RESPINTE
 
