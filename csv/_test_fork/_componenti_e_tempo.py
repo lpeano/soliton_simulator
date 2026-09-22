@@ -206,6 +206,12 @@ def main():
             W("| %s | %d | %d | `%.4e` | `%.4f` | `%.4f` | `%.6f` |\n"
               % (eti, int(a.get("_db_step", -1)), r.size, med, q1, q2, quota))
     W("\n")
+    W("## ⚠ COSA LA MISURA HA DETTO, **prima** delle domande\n\n")
+    W("**Le due premesse vanno verificate PRIMA di trarne conseguenze** *(par.9-bis: ogni\n")
+    W("numero porta la sua epoca)*. Le tabelle qui sopra dicono **quante componenti** e **quanti\n")
+    W("nodi fermi** ci sono DAVVERO negli archivi di QUESTA epoca. **Dove il numero di componenti\n")
+    W("e' `1`, la premessa di `D27` NON REGGE**, e le domande `1` e `2` restano aperte **solo per\n")
+    W("gli archivi in cui piu' componenti ci sono davvero.**\n\n")
     W("## ⚠ LE CONSEGUENZE SULLE TRE PROVE: **DOMANDE, non risposte**\n\n")
     W("1. **Se il grafo e' in piu' componenti, che cosa significa «distanza fra due masse»\n")
     W("   nella PROVA 1?** Un cammino minimo fra componenti diverse **non esiste**. Si misura\n")
