@@ -406,11 +406,21 @@ def main():
                      % (len([s for s in A_MONTE if s in ON["primo"]]), len(fuori),
                         fuori if fuori else ""))
     for s in A_MONTE:
-        if s in ON["primo"] and ON["primo"][s] is not None:
-            fa = ON["primo"][s]
+        fa = ON["primo"].get(s)
+        if fa is None:
+            W("      %-20s non invocato al passo 1\n" % s)
+            continue
+        ug = "IDENTICO" if identiche(fa, OFF["primo"].get(s)) else "*** DIVERSO ***"
+        if fa.get("concatena"):
+            # ⚠ i siti che CONCATENANO non hanno un delta: si mostra la COPPIA DI LUNGHEZZE.
+            #   Stamparli come firme faceva SCHIANTARE il referto su `KeyError: 'sha1'` DOPO che
+            #   T0..T3 erano gia' passati -- un crash nella STAMPA, non in un criterio.
+            fb = OFF["primo"].get(s) or {}
+            W("      %-20s CONCATENA  ON %s->%s   OFF %s->%s   %s\n"
+              % (s, fa.get("da"), fa.get("a"), fb.get("da"), fb.get("a"), ug))
+        else:
             W("      %-20s sha1 %s  forma %s  somma %+.6e  %s\n"
-              % (s, fa["sha1"], fa["forma"], fa["somma"],
-                 "IDENTICO" if identiche(fa, OFF["primo"].get(s)) else "*** DIVERSO ***"))
+              % (s, fa["sha1"], fa["forma"], fa["somma"], ug))
 
     # ---- T4: la MEMORIA DEL MOTO non e' toccata
     ok4 = identiche(ON["mem_mot"], OFF["mem_mot"])
@@ -447,10 +457,16 @@ def main():
     W("  `S12_coesione` sta A VALLE del blocco della gravita' (ordine verificato dal sorgente).\n")
     W("  invocazioni ON=%d OFF=%d -> %s\n"
       % (c_on, c_off, "UGUALI" if c_on == c_off else "DIVERSE"))
-    if s12on and s12off:
+    if s12on and s12off and "somma" in s12on and "somma" in s12off:
         W("  al passo 1: somma ON %+.6e  OFF %+.6e   firme %s\n"
           % (s12on["somma"], s12off["somma"],
              "UGUALI" if identiche(s12on, s12off) else "DIVERSE"))
+    elif s12on and s12off:
+        W("  al passo 1: e' un sito che CONCATENA, quindi niente somma: %s\n"
+          % ("coppie di lunghezze UGUALI" if identiche(s12on, s12off) else "DIVERSE"))
+    else:
+        W("  al passo 1: non invocato in almeno uno dei due bracci (ON=%s OFF=%s)\n"
+          % (s12on is not None, s12off is not None))
     W("  -> IL SIGILLO AFFERMA: la coesione gira lo STESSO NUMERO DI VOLTE, e la sua legge NON e'\n")
     W("     gated su `GRAV_BIFASE` (`T5`: la ramificazione e' UNA SOLA).\n")
     W("  -> IL SIGILLO NON AFFERMA che i suoi incrementi siano identici: NON LO SONO, e NON\n")
