@@ -1192,6 +1192,23 @@ CHI_COOP = False        # COOPERAZIONE (decisione di Luca, 2026-09-21): chi_basc
                         # OFF = byte-identico: i rami nuovi sono IRRAGGIUNGIBILI, non solo inerti.
 TEMPO_PROPRIO_ORIENTATO = False # FLAG 4 (separato, profondo): toglie |.| da f in ritmo() -> r con SEGNO
                         # (tempo proprio orientato). Cambia una legge di base; default off.
+RITMO_WRAP_2PI = False  # [D34, 2026-09-22] CURA: il ramo SPINORIALE di `ritmo()` avvolge sul
+                        # periodo GIUSTO. `np.angle` ha periodo `2pi`, quindi
+                        #     a = angle(psi_spin) - angle(psi_spin_prec)   sta in (-2pi, 2pi]
+                        # e `((a + 2pi) % 4pi - 2pi)` su quell'intervallo E' L'IDENTITA':
+                        # NON AVVOLGE NIENTE. Dimostrato: max|w4(a) - a| = 0.000e+00 su 100 001
+                        # punti (Z117). Ogni attraversamento del taglio a +-pi registra una
+                        # frequenza spuria di ~2pi/DT.
+                        # ⚠ IL CODICE CONTIENE IL PROPRIO CONTROESEMPIO: il ramo SCALARE otto
+                        #   righe sopra (`:2565`) usa GIA' `((a + pi) % 2pi - pi)`. Stessa
+                        #   grandezza, due periodi, stessa funzione. E il commento di `:2566`
+                        #   dichiara l'equivalenza "nel limite |dphi| < pi", che e' ESATTAMENTE
+                        #   la condizione in cui il taglio non si attraversa.
+                        # ⚠ SPENTO DI DEFAULT, e il default NON si cambia qui: e' una decisione
+                        #   di Luca, dopo che ha letto la prova a 600 passi (voce `E3`).
+                        # ⚠ TOCCA SOLO IL RAMO SPINORIALE. Il ramo scalare e' gia' giusto, e
+                        #   `TEMPO_SEGNO` (che non gira) non passa di qui.
+                        # Scheda: `doc/REGISTRO_FISICA.md`, IL TEMPO PROPRIO.
 SYNC_SPINORE = False    # KURAMOTO SU(2) SUGLI SPINORI (sotto-flag): tira ogni spinore verso l'allineamento
                         # con la media di vicinato via torque omega_sync = forza*(nb x nb_media), nb_media
                         # = (wI @ nb_t)/uno. forza = la STESSA del Kuramoto-phi (K_SYNC, 2/pi, prof_rel,
@@ -2582,7 +2599,13 @@ class Rete:
                 self._ritmo_snap_identico = getattr(self, "_ritmo_snap_identico", 0) + 1
         if CAMPO_SPINORIALE and _ps is not None and _psp is not None and len(_ps) == self.n and len(_psp) == self.n:
             a = np.angle(_ps[:, 0]) - np.angle(_psp[:, 0])
-            signed = ((a + 2 * np.pi) % (4 * np.pi) - 2 * np.pi) / DT   # wrapping su 4pi (l'otto)
+            if RITMO_WRAP_2PI:
+                # [D34, 2026-09-22] IL PERIODO GIUSTO. `np.angle` ha periodo `2pi`, quindi `a`
+                # sta in (-2pi, 2pi] e una differenza di OSSERVABILI si avvolge su `2pi`.
+                # E' LA STESSA FORMA del ramo scalare otto righe sopra.
+                signed = ((a + np.pi) % (2 * np.pi) - np.pi) / DT
+            else:
+                signed = ((a + 2 * np.pi) % (4 * np.pi) - 2 * np.pi) / DT   # wrapping su 4pi (l'otto)
         # FLAG 4 (--tempo-proprio-orientato): f mantiene il SEGNO (tempo proprio orientato);
         # off = modulo, byte-identico al comportamento storico. La scala gauge resta positiva.
         f = signed if TEMPO_PROPRIO_ORIENTATO else np.abs(signed)

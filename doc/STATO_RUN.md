@@ -400,7 +400,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | `COES_ADIM` | coesione ADIMENSIONALE | **`False`** | — *(non ha un sigillo suo)* | in **ogni** run del fork | `|F_adim| <= 1` **per costruzione**. **L'unica legge delle quattro schede con le unita' giuste senza che un clip gliele dia** | VERIFICATA-SPENTA |
 | `ANOM_SIMM` | `C1-bis` anomalia simmetrica, senza pavimento | **`False`** | `6/6` *(letto dal referto)* | in **ogni** run del fork | toglie `max(peq, 1e-9)`, che con `peq < 0` **RIBALTAVA IL SEGNO** *(`Z94`, `D17`)* | VERIFICATA-SPENTA |
 | `INVARIANTI` | `C5` domini di stato, due livelli | **`True`** | `3/3` *(letto dal referto)* | in **ogni** run: **zero violazioni** in tutti e tre i bracci di `G4` | legge soltanto; su un run sano non cambia un bit | **ACCESA DI DEFAULT** *(`True`)* |
-| `RITMO_WRAP_2PI` | **`A1`** il wrap del ritmo sul periodo GIUSTO *(`2π`)* | — **assente** | ⏸ **da scrivere** | ⏸ prova a 600 passi, **da fare** | cura **`D34`** *(`Z117`: il wrap a `4π` e' l'IDENTITA')* | ⏸ **NON ANCORA IN CODICE** |
+| `RITMO_WRAP_2PI` | **`A1`** il wrap del ritmo sul periodo GIUSTO *(`2π`)* | **`False`** | ⏸ **da scrivere** | ⏸ prova a 600 passi, **da fare** | cura **`D34`** *(`Z117`: il wrap a `4π` e' l'IDENTITA')* | ⏸ **NON ANCORA IN CODICE** |
 | `FASE_2PI` | **§D** `φ` come fase ordinaria su `[0, 2π)` | — **assente** | ⏸ **da scrivere** | ⏸ prova a 600 passi + i **quattro test** `E1`-`E4`, **da fare** | la lettura scelta da Luca, **da METTERE ALLA PROVA**. Se un test fallisce, **cade** | ⏸ **NON ANCORA IN CODICE** |
 
 **Cure con default ACCESO: 1 su 9.**

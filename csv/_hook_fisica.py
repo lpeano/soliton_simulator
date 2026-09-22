@@ -18,6 +18,12 @@ COME SA QUALE SCHEDA. Ogni scheda porta un marcatore leggibile da codice:
 
 La sezione di una scheda va dal suo marcatore al marcatore successivo (o a fine file).
 
+!! FRAGILITA' DICHIARATA: un ESEMPIO di marcatore scritto dentro la documentazione
+  verrebbe letto come un marcatore VERO. Oggi non succede perche' l'esempio in
+  `REGISTRO_FISICA.md` usa i puntini di sospensione, che non matchano `[\w-]+` --
+  cioe' PER FORTUNA, non per progetto. Se un giorno l'esempio diventasse realistico,
+  spezzerebbe la mappa delle sezioni. VERIFICATO OGGI: il hook vede 5 schede su 5.
+
 COME SA COSA E' CAMBIATO. Dalla diff **in cache** di `soliton_simulator.py`:
   * le righe toccate -> la FUNZIONE che le contiene, per **nome**, via AST della versione
     **in cache** *(par.0: i nomi non si spostano, le righe si')*;

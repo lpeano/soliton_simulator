@@ -564,8 +564,11 @@ avvertimento.**
 
 - **`D34`** — il wrap del ramo spinoriale. **Dimostrato:** `max|w4(a) − a| = 0.000e+00` su
   `100 001` punti. **Misurato raro:** `4.45e-05` dei nodi, `12` chiamate su `119`; **ma
-  arricchimento `728.94 x` al tetto** e **gauge invariato** *(`1.000000`)*. **Cura:
-  `RITMO_WRAP_2PI`.**
+  arricchimento `728.94 x` al tetto** e **gauge invariato** *(`1.000000`)*.
+  **✅ CURA `RITMO_WRAP_2PI`, IN CODICE dal 2026-09-22** *(blob `21e3a3dc` → `3d91338e`)*,
+  **spenta di default**. **Tocca UNA SOLA riga e SOLO il ramo spinoriale:**
+  `signed = ((a + π) % 2π − π)/DT`, **la stessa forma del ramo scalare otto righe sopra**.
+  **Il default NON si cambia qui:** è una decisione di Luca dopo la prova a 600 passi *(`E3`)*.
 - **`D32`** — `r` e `tau_pp`: correlazione **`-0.13`…`+0.29`**, segno non concorde.
   **Cura: DA DECIDERE** — §D del mandato propone **un solo tempo proprio** *(`r`, letto come
   osservabile)*, con **`tau_pp` tolto** e la mitosi che legge `r`. **È una lettura DA PROVARE,
