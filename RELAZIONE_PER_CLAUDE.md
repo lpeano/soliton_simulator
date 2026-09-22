@@ -12642,3 +12642,35 @@ lo passava già.**
 **E la lista delle cure approvate si legge dalla sezione `CURE VERIFICATE`, che è generata:**
 una sola fonte, e **il driver la legge invece di averne una copia sua** — due copie
 divergerebbero, ed è esattamente il difetto che questa voce vuole chiudere.
+
+### ㉴ **Scheda ⑤, il tempo proprio — e `REG-R` ha funzionato contro di me**
+
+**`REG-R` mi ha rifiutato il commit del flag**, perché `ritmo` **non aveva una scheda**. È
+l'unico modo in cui si sa che un presidio funziona: **quando blocca chi l'ha scritto.**
+
+#### ⚠ **IL CODICE CONTIENE IL PROPRIO CONTROESEMPIO**
+
+```
+:2565   signed = ((a + pi)   % (2 pi) - pi)   / DT     <- ramo SCALARE
+:2585   signed = ((a + 2 pi) % (4 pi) - 2 pi) / DT     <- ramo SPINORIALE
+```
+**Otto righe di distanza. Stessa grandezza, stesso significato, due periodi diversi.**
+E il commento di `:2566-2568` dichiara l'equivalenza **con la sua condizione**:
+*«nel limite `psi_spin[:,0] = psi` e **`|dphi| < pi`** → ritmo IDENTICO»*.
+**`|dphi| < pi` è esattamente la condizione in cui il taglio non si attraversa.**
+**Il commento sapeva già dove sta il difetto; nessuno ha letto quella condizione come un
+avvertimento.**
+
+#### E una cosa che rende `D32` più preciso, non più vago
+
+`r` **e** `tau_pp` sono **entrambi adimensionali** — `tau_pp` si chiama *tempo proprio* ma
+**non ha dimensione di tempo**. **`A3c`: sono CONFRONTABILI**, ed è proprio per questo che
+`D32` è un difetto e non un equivoco di notazione: **due numeri puri, stesso nome fisico,
+correlazione `~0`.**
+
+#### E un limite che MORDE
+
+Il **`+1e-6`** di `r = x/√(1+x²) + 1e-6` è un **numero scelto** *(`A11` cor.1)* **ed è
+attivo**: `min(r) = 1.414212e-06` misurato, cioè **esattamente lui** *(cor.6)*.
+**Quando `f ≈ 0` il tempo proprio del nodo non si ferma: si ferma AL PAVIMENTO.**
+*(La saturazione `x/√(1+x²)`, invece, non è un clip: è liscia ovunque.)*

@@ -480,3 +480,105 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 3. **Il ramo storico** *(`COES_ADIM = False`)* **è ancora raggiungibile.** Se non serve più,
    è codice morto che complica l'appaiamento delle tracce *(`Z114`)*; se serve, **cosa lo
    giustifica?**
+
+---
+
+<!-- SCHEDA nome=tempo-proprio funzioni=ritmo flag=TAU_LOC,TEMPO_SEGNO,TEMPO_PROPRIO_ORIENTATO,RITMO_WRAP_2PI -->
+# ⑤ IL TEMPO PROPRIO — **`ritmo()` / `r` / `dt_n = DT·r`**, e il surrogato **`tau_pp`**
+
+> **STATO: `DIFETTOSA`.** Difetti **`D34`** *(il wrap «a `4π`» non avvolge)* e **`D32`**
+> *(due grandezze diverse col nome di tempo proprio)*.
+> **È la grandezza da cui dipende il tic di OGNI processo locale** *(par.9: `dt_n = DT·r`, e
+> `DT` nudo dentro un rilassamento locale impone un frame preferito, cioè un etere)*.
+
+## LA FORMA — copiata dal codice (`:2536-2646`)
+
+```
+se TEMPO_SEGNO:                                 <- OGGI `False`: questo ramo NON gira
+    r = 1 + mean(|tw| sugli archi incidenti)/PHI_CRIT
+altrimenti, il ramo DE BROGLIE, che e' quello che gira:
+    a      = angle(psi) - angle(psi_prec)
+    signed = ((a + pi) % (2 pi) - pi) / DT                    <- ramo SCALARE: periodo 2pi
+    se CAMPO_SPINORIALE e psi_spin e' allineato:
+        a      = angle(psi_spin[:,0]) - angle(psi_spin_prec[:,0])
+        signed = ((a + 2 pi) % (4 pi) - 2 pi) / DT            <- ramo SPINORIALE: `D34`
+    f    = signed  (o |signed| se non TEMPO_PROPRIO_ORIENTATO)
+    med  = median(|f|) del passo PRECEDENTE                   <- gauge SFASATO (cura dell'anello)
+    x    = f / med
+    r    = x/sqrt(1 + x^2) + 1e-6                             <- SATURA a ~1
+    r_n  = r / (1/sqrt(2) + 1e-6)                             <- x=1 -> 1
+    ritorna 1 + TAU_LOC*(r_n - 1)
+```
+**E IL SURROGATO, che e' un'ALTRA legge (`:5160`):** `tau_pp = 1 + |tw|/PHI_CRIT`, **per ARCO**,
+usato da **mitosi**, **repulsione** e dalla memoria `_rep`.
+
+## ⚠ IL CODICE CONTIENE IL PROPRIO CONTROESEMPIO
+
+**Il ramo SCALARE avvolge su `2π`. Il ramo SPINORIALE, OTTO RIGHE DOPO, su `4π`.**
+**Stessa grandezza, stesso significato, due periodi diversi, nella stessa funzione.**
+E il commento di `:2566-2568` dichiara l'equivalenza **con la sua condizione**:
+*«nel limite `psi_spin[:,0] = psi` e **`|dphi| < pi`** → ritmo IDENTICO»*.
+**`|dphi| < pi` e' ESATTAMENTE la condizione in cui il taglio non si attraversa.**
+**Il commento sapeva già dove sta il difetto, e nessuno ha letto la condizione come un
+avvertimento.**
+
+## LE DIMENSIONI
+
+| simbolo | dimensione |
+|---|---|
+| `a`, `signed·DT` | **angolo** — adimensionale |
+| `signed`, `f`, `med` | `[1/T]` |
+| `x = f/med`, `r`, `r_n` | **adimensionale** ✅ |
+| `dt_n = DT·r` | `[T]` ✅ |
+| **`tau_pp`** | **adimensionale** — *si chiama «tempo proprio» ma NON ha dimensione di tempo* |
+
+> **`A3c`: `r` e `tau_pp` sono ENTRAMBI adimensionali, quindi CONFRONTABILI** — ed è
+> precisamente per questo che `D32` è un difetto e non un equivoco di notazione: **due numeri
+> puri con lo stesso nome fisico e correlazione `~0`.**
+
+## COSA LEGGE / COSA SCRIVE
+
+- **legge:** `psi`, `_psi_prec`, `psi_spin`, `_psi_spin_prec`, `_med_f_prec`, `tw` *(solo nel ramo
+  `TEMPO_SEGNO`, che non gira)*.
+- **scrive:** `_med_f_ultimo` *(registro, promosso da `step()`)*, e **`_r_corrente`** — che
+  **`step()`** salva. **`ritmo()` non scrive nessuno snapshot**, di proposito: ha **tre**
+  chiamanti e **due sono DIAGNOSTICI**; se avanzasse lo stato qui, ogni chiamata diagnostica
+  muoverebbe la fisica *(par.2.3)*.
+- **a valle:** `dt_n = DT·r` — **il tic di ogni processo locale**.
+
+## I LIMITI, CLASSIFICATI CON `A11`
+
+| limite | corollario | esito |
+|---|---|---|
+| `+1e-6` in `r = x/√(1+x²) + 1e-6` | **1** | ❌ **numero SCELTO**, non un vincolo fisico |
+| | **2** | ✅ costante |
+| | **6** | ⚠ **e' un PAVIMENTO che MORDE:** `min(r) = 1.414212e-06` **misurato**, cioè **esattamente il pavimento** *(`Z117`)*. **Quando `f ≈ 0` il tempo proprio del nodo NON si ferma: si ferma AL PAVIMENTO** |
+| `max(median(|f|), 1e-9)` | **1** | ⚠ difesa dalla divisione |
+| la saturazione `x/√(1+x²)` | **7(a)** | ✅ identità per `x ≪ 1`; **e non è un `clip`: è liscia ovunque**, derivata continua |
+
+> **⚠ E IL «RAPPORTO `max/min` = `1.000e+06`» NON È UNA MISURA:** è `1.4142 / 1.4142e-6`,
+> cioè **`1/1e-6`, l'inverso della regolarizzazione**. **Correzione a una mia frase di `Z110`**,
+> che lo chiamava *«il clip»*.
+
+## LO STATO: `DIFETTOSA`
+
+- **`D34`** — il wrap del ramo spinoriale. **Dimostrato:** `max|w4(a) − a| = 0.000e+00` su
+  `100 001` punti. **Misurato raro:** `4.45e-05` dei nodi, `12` chiamate su `119`; **ma
+  arricchimento `728.94 x` al tetto** e **gauge invariato** *(`1.000000`)*. **Cura:
+  `RITMO_WRAP_2PI`.**
+- **`D32`** — `r` e `tau_pp`: correlazione **`-0.13`…`+0.29`**, segno non concorde.
+  **Cura: DA DECIDERE** — §D del mandato propone **un solo tempo proprio** *(`r`, letto come
+  osservabile)*, con **`tau_pp` tolto** e la mitosi che legge `r`. **È una lettura DA PROVARE,
+  non una decisione presa.**
+
+## LE DOMANDE APERTE
+
+1. **Se si unifica il tempo proprio, quali leggi cambiano significato?** `tau_pp` compare in
+   **12 righe di codice**: mitosi *(soglia, segno, ampiezza)*, repulsione, e il rilassamento di
+   `_rep`. **Vanno elencate una per una prima di toccarle** — è il lavoro di `PROBLEMI-CHK3`.
+2. **Il pavimento `1e-6` è un vincolo o una difesa?** Oggi **morde**: `min(r)` è esattamente
+   lui. **Un nodo con `f = 0` che tempo proprio ha?** *(Zero è una risposta fisica; `1.414e-6`
+   è un numero scelto.)*
+3. **Il gauge è `median(|f|)` del passo PRECEDENTE** — cura dell'anello istantaneo *(`A6`)*.
+   **Ma resta una statistica GLOBALE dentro una legge per nodo** *(`A2`)*. **È accettabile
+   perché è un GAUGE, o è lo stesso difetto di `D01`?** **NON DECISO.**
