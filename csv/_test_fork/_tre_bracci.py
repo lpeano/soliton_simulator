@@ -56,7 +56,12 @@ def criteri(cart):
     m = re.search(r"REGGONO (\d+) criteri su (\d+)", t)
     if not m:
         return None, None
-    nr = re.findall(r"^(.+?)\s+NON REGGE\s", t, re.M)
+    # ⚠ CORRETTO dopo un FALSO POSITIVO (reperto `004be56`). La prima versione era
+    #   `^(.+?)\s+NON REGGE\s` e catturava L'INTESTAZIONE della sezione, che contiene la
+    #   stringa "REGGE / NON REGGE". Ora si richiede contenuto sulla STESSA riga dopo
+    #   "NON REGGE": le righe vere sono `<criterio>  NON REGGE  <spiegazione>`, mentre
+    #   l'intestazione finisce a fine riga.
+    nr = re.findall(r"^(.+?)\s+NON REGGE[ \t]+\S", t, re.M)
     return ("%s/%s" % (m.group(1), m.group(2))), [x.strip() for x in nr]
 
 
@@ -75,7 +80,14 @@ def collaudo(W):
     d = tempfile.mkdtemp()
     e = []
     os.makedirs(os.path.join(d, "buono"))
+    # ⚠ IL FILE SINTETICO PORTA L'INTESTAZIONE VERA, ed e' il punto: il primo collaudo NON
+    #   ce l'aveva, quindi non poteva prendere il falso positivo che poi e' successo.
+    #   **Un caso a risposta nota piu' POVERO dell'input vero collauda un input che non
+    #   esiste** (reperto `004be56`).
     io.open(os.path.join(d, "buono", "LETTURE.txt"), "w", encoding="utf-8").write(
+        "=" * 96 + "\n"
+        "ESITO CONTRO I CRITERI -- REGGE / NON REGGE\n"
+        + "=" * 96 + "\n"
         "`d0` NON scappa             NON REGGE  bla\n"
         "stress finito               REGGE      bla\n"
         "\nREGGONO 7 criteri su 8.\n")
