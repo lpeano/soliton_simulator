@@ -11987,3 +11987,52 @@ deve fallire sul codice vero** *(`MEM_HEBB=False`)* · `T9` la byte-inerzia cont
 **Nessun numero: il sigillo non e' ancora girato.** Questo commit esiste perche' il par.5 vuole
 il codice committato **prima** che l'output nasca, e `P1-sexies` vuole i criteri fissati **prima**
 di vedere i numeri.
+
+### ㉡ **Il sigillo di `G4-bis` fallisce `8/10`, e i due FAIL sono MIEI — piu' un riscontro fisico che non avevo previsto**
+
+> **`8` PASS su `10`.** Il flag **non e' stato toccato**: il blob resta `21e3a3dc`.
+> Referto committato **come reperto**, prima di correggere niente *(par.5)*.
+
+**QUELLO CHE PASSA, ed e' la sostanza:**
+- **`T9` BYTE-INERTE a flag acceso: `206` campi identici, `0` diversi**, contro `_val600`
+  *(blob `9557a867`, anteriore sia a `MEM_MOTO` sia a questo)*.
+- **`T4`** `mem_mot` **identicamente zero** spento *(`somma_abs = 0.000000e+00`)* e **viva**
+  accesa *(`1.552890e+03`)*.
+- **`T5`** `phi` ON `8d3fc3a2ec67` contro OFF `d15454061704`: **il ramo di `:6033` era davvero
+  raggiunto**, quindi c'era qualcosa da spegnere.
+- `T1`-`T3` la chirurgia: `S08_proj` `3 → 0`, **zero** altri siti toccati, **zero** differenze
+  a monte al passo 1.
+- **`T8`** il caso che deve fallire: `MEM_HEBB=False` tocca **sei** siti oltre `S08_proj`
+  *(`P3`, `P4`, `P6`, `P7`, `S09`, `S12`)*.
+
+**`T7` — IL CRITERIO CONTAVA I PUNTI, L'AST CONTA I RAMI.** Ne attendevo **4**, ne trova
+**3** *(righe `5676`, `5701`, `6069`)*. **I punti (1) e (2) stanno nello STESSO blocco**, quindi
+**una** ramificazione ne copre **due**. **Non e' un difetto del flag: e' la struttura del codice,
+che avevo contato male scrivendo il criterio.** E' alla lettera il caso di `P1-sexies`.
+*(E il numero da solo non sarebbe comunque un buon criterio: tre rami «da qualche parte» non
+dicono che siano i tre giusti. Il criterio nuovo verifica che tutti e tre stiano **dentro
+`memoria_hebbiana_moto`**, senza pinnare le righe — par.0.)*
+
+> **⚠ `T6` — E QUI C'E' UN RISCONTRO FISICO, non solo un criterio sbagliato.**
+>
+> **La meta' VERA:** col solo `MEM_MOTO=False`, `mem_mot` e' **ancora viva**,
+> `somma_abs = 1.552797e+03` contro `1.552890e+03` del braccio tutto acceso. **La premessa di
+> `G4-bis` REGGE.**
+>
+> **La meta' FALSA, e non l'avevo previsto:** avevo preteso che `phi` fosse **identica**. **Non
+> lo e', e il sorgente dice perche':**
+> ```
+> shift_fase_dinamico = accoppiamento_dinamico * proiezione_trasversale * (d_archi / d0_archi)
+> ```
+> **LO SPOSTAMENTO DI FASE LEGGE `d0`.** Spegnere `S08_proj` cambia `d0`, e `d0` **rientra**
+> nello spostamento di fase. **Il quarto punto e' accoppiato al terzo ATTRAVERSO `d0`: i due
+> effetti non sono separabili come avevo assunto.**
+>
+> **E questo rende `G4-bis` PIU' necessario, non meno:** col solo `MEM_MOTO` spento, `phi` riceve
+> uno spostamento **calcolato su un `d0` diverso** — ne' quello acceso ne' quello spento.
+
+**⚠ E TOCCA LA LETTURA DI `Z109`:** il **`62 %`** misurato sul braccio `MEM_MOTO` **non e' il
+peso della sola scrittura su `d0`**. Include anche l'effetto di un `phi` calcolato su un `d0`
+alterato. **`G4-bis` e' l'unico braccio che separa le due cose**, ed e' la ragione per cui la
+condizione posta da Luca era quella giusta. Il riscontro va **nella scheda della memoria del
+moto** *(`REG-B`)*.
