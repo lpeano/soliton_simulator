@@ -12320,3 +12320,32 @@ TRACCIA».** Il bilancio è **uno strumento esterno**. **Nel simulatore il sito 
 è `D04`: chiunque rifaccia la traccia senza quell'involucro **ritrova il buco di `Z107`**.
 **E il bilancio che chiude a `1.138e-13` e `1.170e-13` è la verifica a posteriori di questa
 tabella: se una di queste letture fosse sbagliata, non chiuderebbe.**
+
+### ㉩ **Schede ③ e ④: gravità bifase e coesione — e le DIMENSIONI dicono una cosa sola**
+
+**Le quattro schede dell'ordine di Luca sono scritte.** E messe in fila, **l'analisi dimensionale
+racconta la stessa storia tre volte su quattro:**
+
+| legge | l'incremento che scrive su `d0` | dimensione |
+|---|---|---|
+| ① **freno** | `dx·(1−LAM/prima)` | **`[L]`** ✅ |
+| ② **memoria del moto** | `proj` | **adimensionale** ❌ — glie le dà **il clip** |
+| ③ **gravità bifase** | `clip(spinta, ±passo_causale) · median(d0)` | **`[L²]`** ❌ |
+| ④ **coesione** | `cs_arco·DT · F_adim` | **`[L]`** ✅ |
+
+> **La gravità clippa al passo causale — quindi `spinta` è già una LUNGHEZZA — e POI la
+> moltiplica per `median(d0)`.** È `D01`, e la scheda lo rende esplicito invece di chiamarlo
+> genericamente *«statistica globale»*.
+> **La coesione è l'unica in cui le unità tornano SENZA che un clip gliele dia** — ed è anche
+> l'unica già **curata** *(`COES_ADIM` + `COES_CAUSALE`, `C4` `5/5`)*.
+
+**⚠ E `A11` corollario 6 ha lo stesso buco in TRE schede su quattro:** i contatori **esistono**
+e **nessuno li ha mai letti in un referto**. L'unico numero che c'è è quello della gravità, ed
+è pessimo: **`85.05 %` degli archi-passo incollato al tetto, `99.69 %` del saldo da incrementi
+saturi** *(`Z106`)*. **Per freno e coesione il numero non esiste ancora**, ed è scritto come
+lavoro residuo in entrambe.
+
+**E due cose che le schede dicono e che i difetti non dicevano:**
+- **il tetto locale della coesione NON è sempre più stretto:** dove il cono è veloce **allarga**.
+  **È causalità, non prudenza** — la lettura *«una cura che restringe»* è sbagliata;
+- **`S10_grav_med` è INERTE** in tutti i run del fork: gira sempre il ramo `VIRIALE`, cioè `S09`.

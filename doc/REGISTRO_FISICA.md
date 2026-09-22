@@ -317,3 +317,157 @@ contro un nullo di `1.4e-03` — **da `140` a `310` volte il suo valore sotto ip
    *(sigillo di `G4-bis`, `T6`)*. **`G4-bis` è il braccio che separa le due cose.**
 4. **Se `d0` è `2.5`–`9` volte più sensibile di `d`, che cosa lega `d` a `d0`?** La compressione
    è un difetto **di `d0`** o un'**assenza di accoppiamento** verso `d`?
+
+---
+
+# ③ LA GRAVITA' BIFASE — **`GRAV_BIFASE` / `S09_spinta_med` / `S10_grav_med`**
+
+> **STATO: `DIFETTOSA`.** Difetto **`D01`**. **Viola `A2`, `A5` e `A11` corollario 6.**
+> **NON è il motore della fuga di `d0`** *(`Z107`: spegnendola il rapporto passa da `1.2321` a
+> `1.2211`, lo `0.9 %`)*, **ma è il maggior scrittore in ampiezza**: `±2.5e+06`–`3.7e+06`
+> per 600 passi.
+
+## LA FORMA — copiata dal codice (`:5766-5850`)
+
+```
+grav      = -tanh(s) * ampiezza                       s = |tw|/PHI_CRIT - 1, FIRMATA
+                                                      -s = il VERSO (attrae / respinge)
+se SPINORE:  grav = grav * (nb_g[ii]·nb_g[jj]) * sign(dpozzo)     <- proiezione spinoriale
+
+c_sistema      = LAM * sqrt(K_C)                      velocità del cono, da LAM e K_C
+passo_causale  = c_sistema * DT                       IL TETTO
+
+se VIRIALE:  radiale  = grav * cos2
+             tangenz  = |grav| * sin2 * sign(circ_arc)      (o `_azim` se LS_AZIM)
+             spinta   = radiale + tangenz
+             spinta   = clip(spinta, ±passo_causale)
+             d0[mask] += _sd0(spinta * median(d0[mask]), mask)        <- `S09_spinta_med`
+altrimenti:  grav     = clip(grav, ±passo_causale)
+             d0[mask] += _sd0(grav * median(d0[mask]), mask)          <- `S10_grav_med`
+```
+
+## DA DOVE VIENE
+
+**Il verso è DERIVATO:** `s = |tw|/PHI_CRIT - 1` è lo scarto dal **quanto di olonomia**, e il
+segno di `-tanh(s)` dice se l'arco è sotto o sopra il giro completo. **Bifase: attrae da una
+parte, respinge dall'altra, e la soglia è `PHI_CRIT`, che esisteva già.**
+**`NON RICOSTRUITO`:** perché `tanh` e non un'altra saturazione; perché la scomposizione
+radiale/tangenziale usi `cos2`/`sin2` di quell'angolo.
+
+## LE DIMENSIONI — **e qui c'è il difetto**
+
+| simbolo | dimensione |
+|---|---|
+| `s`, `tanh(s)`, `ampiezza`, `cos2`, `sin2`, `proiez` | adimensionale |
+| **`grav`, `spinta`** | **adimensionale** |
+| `c_sistema = LAM·√K_C` | `[L/T]` |
+| **`passo_causale = c_sistema·DT`** | **`[L]`** |
+| `spinta * median(d0)` | `[L]` |
+
+> **⚠ `spinta` VIENE CLIPPATA A UNA LUNGHEZZA E POI MOLTIPLICATA PER UN'ALTRA LUNGHEZZA.**
+> Dopo il clip `spinta` ha unità `[L]`; moltiplicarla per `median(d0)` dà **`[L²]`**, che viene
+> sommato a `d0` — **`[L]`**. **È `D01`, e la scheda lo rende esplicito:** *«clippa al passo
+> causale — quindi è già una LUNGHEZZA — e poi moltiplica per `median(d0)`: statistica GLOBALE
+> e lunghezza AL QUADRATO»*.
+
+## COSA LEGGE / COSA SCRIVE
+
+- **legge:** `tw`, `pozzo_grafo` → `dpozzo` *(che usa `pos`, il **DISEGNO** — `D02`)*,
+  `_nb_grav()`, `median(d0[mask])` *(**globale** — `A2`)*, `LAM`, `K_C`, `DT`.
+- **scrive:** `d0` a **`S09_spinta_med`** *(ramo `VIRIALE`)* oppure **`S10_grav_med`**.
+  **I due rami sono esclusivi:** in tutti i run del fork gira `S09`, e **`S10` è inerte**
+  *(`Z102`)*.
+- **flag:** `GRAV_BIFASE` *(sigillo `7/7`, `G3`)*.
+
+## I LIMITI, CLASSIFICATI CON `A11`
+
+| limite | corollario | esito |
+|---|---|---|
+| `clip(spinta, ±passo_causale)` | **1** | ✅ **causalità**: `c_sistema` viene da `LAM` e `K_C`, non è scelto |
+| | **2** | ✅ costante, non insegue `d0` |
+| | **6** | ❌ **VIOLATO: `85.05 %` degli archi-passo INCOLLATO AL TETTO**, e il **`99.69 %`** del saldo viene da incrementi **saturi** *(`Z106`)*. **Non è un limite: è la legge**, e nessuno l'ha scelta |
+| | **5 (A5)** | ⚠ `c_sistema` è costruito su **costanti di modulo** e **non conosce il cono del LUOGO** — lo stesso difetto che `COES_CAUSALE` ha curato per la coesione |
+
+## LO STATO: `DIFETTOSA` — **e dove spinge, misurato**
+
+- **il saldo netto vive SUL CONFINE vuoto-massa e TIRA GIÙ:** `-1.4150` per arco, il **`107 %`**
+  del totale *(`Z105`)*;
+- i **20 archi** col `|saldo|` maggiore sono **`20/20` nel VUOTO**, e il confine è **DIFFUSO** su
+  **`96 429`** archi all'**`85 %`** del plateau;
+- saldo su 600 passi: **`-1.901e+05`** *(braccio acceso)*, **`-2.598e+05`** *(senza memoria del
+  moto)* — **il maggior scrittore in ampiezza, e tira GIÙ.**
+
+## LE DOMANDE APERTE
+
+1. **Se il `99.69 %` del saldo viene da incrementi saturi, che legge sta girando davvero?**
+   Quella scritta, o **`spinta = passo_causale · sign(...)`**? *(`A11` cor.6.)*
+2. **Il tetto è GLOBALE mentre `COES_CAUSALE` ha reso locale quello della coesione.**
+   Perché non qui? È la stessa `A5`.
+3. **`median(d0[mask])` è una statistica globale dentro una legge che si dichiara locale.**
+   `SPINTA_LOCALE` è la cura derivata — **e deve risolvere anche il `[L²]`.**
+
+---
+
+# ④ LA COESIONE — **`COES_ADIM` / `COES_CAUSALE` / `S12_coesione`**
+
+> **STATO: `DA VERIFICARE`.** Il difetto **`D18`** *(istanti misti e tetto globale)* è
+> **`CURATO`** da `COES_CAUSALE` *(`C4`, sigillo `5/5`)*, e la forma adimensionale da `COES_ADIM`.
+> **È l'unica delle quattro che arriva alla scheda già curata.**
+
+## LA FORMA — copiata dal codice (`:5939-6032`)
+
+```
+coesione_relazionale = scala_statale * (forza_campo + richiamo_elastico)
+                       * filtro_portata * d0[mask]**2 * (I_arco/I_med)
+tasso_dinamico       = tanh(stress_metrico) * d0[mask]
+
+se COES_ADIM:   _delta_coes = _passo_causale * _F_adim          |_F_adim| <= 1 PER COSTRUZIONE
+                d0[mask] += _sd0(_delta_coes, mask)
+altrimenti:     d0[mask] += _sd0(clip(coesione_relazionale, ±tasso_dinamico), mask)
+                                                                 <- il ramo STORICO
+se COES_CAUSALE: _passo_causale = cs_arco * DT      <- il cono LOCALE, col `cs` del nodo PIÙ LENTO
+altrimenti:      _passo_causale = LAM*sqrt(K_C)*DT  <- costanti di MODULO
+```
+**⚠ I due rami di `COES_ADIM` sono MUTUAMENTE ESCLUSIVI e condividono UN solo sito di traccia**
+— ed è la coppia che ha prodotto il falso positivo di `Z114`.
+
+## LE DIMENSIONI — **coerenti, ed è la cura che le ha rese tali**
+
+| simbolo | dimensione |
+|---|---|
+| `_F_adim` | **adimensionale**, e `|_F_adim| <= 1` **per costruzione** |
+| `_passo_causale = cs_arco·DT` | **`[L]`** |
+| `_delta_coes` | **`[L]`** ✅ |
+
+> **È l'unica delle quattro leggi in cui l'incremento ha le unità giuste SENZA che un clip
+> gliele dia.** *(Confronta: `proj` della memoria del moto — adimensionale; `spinta` della
+> gravità — `[L²]`.)*
+
+## I LIMITI, CLASSIFICATI CON `A11`
+
+| limite | corollario | esito |
+|---|---|---|
+| `_passo_causale = cs_arco·DT` | **1** | ✅ **causalità LOCALE**: `cs` del nodo più lento, zero parametri |
+| | **2** | ✅ non insegue `d0` |
+| | **6** | ⚠ **i contatori ESISTONO** *(`_g_cct_stringe`, `_g_cct_allarga`, `_g_cct_archi`, `_g_cct_min`)* **ma la frazione non è in nessun referto**. **Lavoro residuo.** Il massimo misurato è `0.2384`, **e un MASSIMO non dice QUANTO SPESSO** |
+| | **7(a)** | ✅ `|_F_adim| <= 1` per costruzione: non è un clip, è un **dominio** |
+
+> **E il tetto locale NON è sempre più stretto:** dove il cono è veloce **ALLARGA**. **È
+> causalità, non prudenza** — e va detto, perché la lettura sbagliata *(«una cura che
+> restringe»)* circola facile.
+
+## LO STATO: `DA VERIFICARE` — **e quanto pesa**
+
+saldo su 600 passi: **`-1.025e+05`** *(braccio acceso)*, **`-1.064e+05`** *(senza memoria del
+moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
+
+## LE DOMANDE APERTE
+
+1. **Quante volte il tetto causale morde?** I contatori ci sono, **nessuno li ha letti**. Finché
+   non lo si fa, non si può dire se `A11` cor.6 sia rispettato. **È lo stesso lavoro residuo del
+   freno.**
+2. **`scala_statale`, `forza_campo`, `richiamo_elastico`: da dove vengono?** **`NON RICOSTRUITO`**
+   in questa scheda — vanno lette dal codice che le costruisce, e non l'ho fatto.
+3. **Il ramo storico** *(`COES_ADIM = False`)* **è ancora raggiungibile.** Se non serve più,
+   è codice morto che complica l'appaiamento delle tracce *(`Z114`)*; se serve, **cosa lo
+   giustifica?**
