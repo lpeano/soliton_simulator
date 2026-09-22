@@ -1,118 +1,66 @@
 <!-- PUNTO-DI-RIPRESA:INIZIO -->
 # ⚠⚠ PUNTO DI RIPRESA — **si legge PER PRIMO dopo un riavvio**
 
-> **Aggiornato 2026-09-22 00:10 · HEAD `73e5ee9` · branch `fork-su2`, tutto committato e pushato.**
-> **Il PC si riavvia fra mezzanotte e le due** *(vincolo di Luca, 2026-09-21)*. **Questo blocco e'
-> RIGENERATO per intero a ogni aggiornamento**, fra due marcatori HTML: non si accumulano versioni
-> e non c'e' niente da cancellare a mano.
+> **Aggiornato 2026-09-22 17:45 · HEAD `a99656e` · branch `fork-su2`, tutto committato e pushato.**
+> **Il PC si spegne alle 18:00** *(vincolo di Luca, 2026-09-22)*. **Nessun processo vivo:
+> verificato con `Get-CimInstance Win32_Process` — zero `python.exe`.**
+> **Questo blocco e' RIGENERATO per intero a ogni aggiornamento**, fra due marcatori HTML.
 
-## COSA E' FATTO — **e come verificarlo senza fidarsi di questa riga**
+## → LA PRIMA COSA DA FARE ALLA RIACCENSIONE
+
+```
+python csv/_test_fork/_letture_validazione.py csv/_test_fork/_g4bis_senza_blocco
+```
+**Le letture `REGGE / NON REGGE` di `G4-bis` NON sono state generate.** I **5 snapshot sono sul
+disco** *(`scena_000120` … `scena_000600.pkl.gz`)*, quindi **non serve rigirare niente**: e'
+una lettura, **circa 3 minuti**. **Senza di esse manca il confronto `6/8` · `7/8` · `?` fra i
+tre bracci**, che e' il numero che `CHK3` usera'.
+*(Il comando va verificato: l'argomento potrebbe chiamarsi diversamente — `--help` per primo.)*
+
+## POI, NELL'ORDINE DECISO DA LUCA
+
+| | lavoro | stato | dove riprende |
+|--:|---|---|---|
+| ① | **letture di `G4-bis`** | ⏸ da generare | qui sopra |
+| ② | **`REG-R` cablata** | ⏸ non cominciata | ⚠ **e non e' ovvia:** l'hook rifiuterebbe **ogni** commit al simulatore, e le schede coprono **4** leggi su tutte le attive. **Da decidere con Luca se cablarla ora o dopo la fase B** |
+| ③ | **`SCALE-TW`** *(mandato del 22/9, ore 17:44)* | ⏸ non cominciata | **dal §1: il CENSIMENTO da AST.** Il primo difetto e' gia' indicato: **`TORS_4PI` `:789` dice «soglia 4π» e «default off»; la soglia e' `3π` e il flag e' ACCESO** |
+| ④ | **`PROBLEMI-CHK3`** | ⏸ non cominciato | i sette problemi sono **gia' elencati** nella sua voce di coda e nelle schede ①-④: **manca metterli in ordine motivato** |
+| ⑤ | schede ⑤+ *(mitosi, Schwinger, `peq`)* | ⏸ | `doc/REGISTRO_FISICA.md` |
+| ⑥ | `PAT-1`, `PAT-2` | ⏸ | prima del prossimo uso dei due strumenti |
+
+## LAVORI A META' — **nessuno**
+
+**Ogni lavoro di oggi e' a un punto pulito:** strumento committato, criteri scritti, esito
+registrato. **I due fallimenti** *(il sigillo `8/10`, il cricchetto `1/4`)* **e il falso positivo**
+*(`Z114`)* **sono committati come reperti E poi corretti**, coi giri rifatti per intero.
+
+## RUN DA RIFARE SE INTERROTTI — **nessuno**
+
+**`G4-bis` e' FINITO alle 16:59** *(`2489.5 s`, bilancio che chiude a `9.498e-14`)*.
+**Nessun run e' stato interrotto.**
+
+## LO STATO DEL SIMULATORE
+
+**Blob `21e3a3dc`** *(sha1 byte grezzi)*. **Due flag aggiunti oggi, entrambi sigillati:**
+`MEM_MOTO` *(8/8)* e **`MEM_MOTO_TUTTO`** *(10/10, byte-inerte acceso: `206` campi identici,
+`0` diversi)*. **Erano le DUE modifiche ammesse prima del `CHK3`, e sono esaurite.**
+**⚠ NESSUNA CURA e' stata scritta: siamo ancora PRIMA del checkpoint.**
+
+## COSA E' FATTO OGGI — **e come verificarlo senza fidarsi di questa riga**
+
 | | stato | la prova, sul disco |
 |---|---|---|
-| **diagnosi dei picchi** | ✅ passo **1126**, arco **`3352-506`**, `peq = -4.85e-04` | `csv/_test_fork/_diag_D/PEQ_DENTRO_001126.txt` · `Z93`, `Z94` |
-| **`C1 PEQ_ESATTO`** | ✅ **sigillo `7/7`** | `csv/_seal_fork/_sigillo_peq_esatto_2026-09-21.txt` · `Z95` |
-| **`C2 PEQ_NASCITA_LOCALE`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_peq_nascita_2026-09-21.txt` · `Z96` |
-| **assioma `A11`** | ✅ scritto, coi sette corollari | `doc/ASSIOMI.md` · `CLAUDE.md` `P1-quinquies` |
-| **`C3 SCALA_MIN_PASSO`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_scala_min_passo_2026-09-21.txt` · `Z97` |
-| **`C4 COES_CAUSALE`** | ✅ **sigillo `5/5`** | `csv/_seal_fork/_sigillo_coes_causale_2026-09-21.txt` · `Z98` |
-| **`C1-bis ANOM_SIMM`** | ✅ **sigillo `6/6`** | `csv/_seal_fork/_sigillo_anom_simm_2026-09-21.txt` · `Z99` |
-| **`C5 INVARIANTI`** | ✅ **sigillo `3/3`** | `csv/_seal_fork/_sigillo_invarianti_2026-09-21.txt` · `Z100` |
-| **il DRIVER inoltra le cure** | ✅ **sigillo dei flag `3/3`**, 9 opzioni su 9 in entrambi i versi | `csv/_seal_fork/_sigillo_flag_driver.py` |
-| **strumento delle LETTURE** | ✅ criteri fissati PRIMA, tabella generata da codice | `csv/_test_fork/_letture_validazione.py` |
-| **validazione 600 passi** | ✅ **FINITA**: 6 criteri su 8 REGGONO. `nsub` max = **4**, `peq >= 0`, zero sotto `LAM`, zero violazioni. **NON reggono `d0` (esponenziale, x1.232 per snapshot) e `d/d0` (0.69-0.84 = COMPRESSIONE)** | `csv/_test_fork/_val600/LETTURE.txt` · `Z101` |
-| **CHECKPOINT 2** | ⚠ **RAGGIUNTO: si aspetta LUCA. IL RUN LUNGO NON SI LANCIA** | — |
-| **misura `D0`** | ✅ **FATTA: e' IL FRENO.** Scrittori `-1.543e+05`, il vincolo aggiunge `+3.205e+05`, effettivo `+1.661e+05`. **`S10` inerte, `S09` verso il BASSO** | `csv/_test_fork/_diag_D/SOMMA_PER_SCRITTORE_d0.txt` · `Z102` |
-| **il prossimo giro** | ⏸ **DECISIONE DI LUCA sul freno asimmetrico** *(`A11` corollario 4)*. **Nessuna cura fatta stasera: il mandato chiedeva solo la misura** | `Z102` · `A11` corollario 7: tre forme morbide sono gia' cadute |
-| **poi** | ⏸ **i residui di `C5`**: `I4` scatola nera, `I5` underflow per riga, **modalita' FINE** -- **dopo `d0`, PRIMA del run lungo** | `Z100` · deciso da Luca il 21/9 alle 22:30 |
-
-## COME SI RIPARTE — **i comandi esatti, verbatim**
-
-**① VERIFICARE CHE NON SI SIA PERSO NULLA** *(sempre, prima di tutto)*
-```
-cd C:\\Users\\lpeano\\soliton_simulator
-git status --short
-git log --oneline -5
-python csv/_presidio.py
-```
-
-**② RIGIRARE I SIGILLI GIA' PASSATI** *(devono ridare gli stessi numeri: se no, qualcosa e' cambiato)*
-```
-python csv/_seal_fork/_sigillo_traccia_peq.py
-python csv/_seal_fork/_sigillo_peq_esatto.py
-python csv/_seal_fork/_sigillo_peq_nascita.py
-```
-
-**③ RIFARE LA MISURA DEI TRE NUMERI** *(due minuti: NON integra il passo esplosivo)*
-```
-python csv/_test_fork/_peq_dentro_1126.py --da=1080 --fino=1126
-```
-
-**④ LA VALIDAZIONE — il comando ESATTO, e il driver ORA inoltra le cure** *(sigillo `3/3`)*
-**⚠ Senza `--serie` NON E' RIPRENDIBILE**, e un riavvio la farebbe ricominciare da zero.
-```
-python csv/_test_fork/_scena_video.py 100 csv/_test_fork/_val600 --sep=4.0 --serie=20 --chi-basc=on --chi-coop=on --scala-min=off --coes-adim=on --peq-esatto=on --peq-nascita-locale=on --scala-min-passo=on --coes-causale=on --anom-simm=on --invarianti=on --csv-progresso=csv/_test_fork/_val600/prog.csv
-```
-**`100` frame x `6` passi = `600` passi.** **`--scala-min=off` perche' `SCALA_MIN_PASSO` lo
-SOSTITUISCE** *(precedenza dichiarata: col nuovo acceso, il freno per-scrittura diventa passante)*.
-**Le letture si generano poi con:**
-```
-python csv/_test_fork/_letture_validazione.py --dir=csv/_test_fork/_val600
-```
-
-**⑤ SE LA VALIDAZIONE ERA IN CORSO AL RIAVVIO — si RIPRENDE, non si rilancia**
-**⚠ IL DRIVER HA `--riprendi`, ED E' LA VIA GIUSTA: stesso comando del punto ④ PIU' `--riprendi`.**
-Senza quel flag, una cartella non vuota viene **RIFIUTATA** *(ed e' giusto: la ripresa e' una
-scelta esplicita, mai un ripiego automatico)*.
-```
-python csv/_test_fork/_scena_video.py 100 csv/_test_fork/_val600 --sep=4.0 --serie=20 --riprendi --chi-basc=on --chi-coop=on --scala-min=off --coes-adim=on --peq-esatto=on --peq-nascita-locale=on --scala-min-passo=on --coes-causale=on --anom-simm=on --invarianti=on --csv-progresso=csv/_test_fork/_val600/prog.csv
-```
-**Per vedere a che punto era:**
-```
-ls csv/_test_fork/_val600/scena_*.pkl.gz
-tail -5 csv/_test_fork/_val600/prog.csv
-tail -3 csv/_test_fork/_val600/log.txt
-```
-
-**⑤-bis LA VIA ALTERNATIVA, dal simulatore invece che dal driver**
-```
-python soliton_simulator.py --db-rigioca <ULTIMO_SNAPSHOT> 600 ...   (stessi flag)
-```
-**L'ultimo snapshot si legge dal disco:**
-```
-ls csv/_test_fork/_val600/scena_*.pkl.gz
-```
-**e `doc/STATO_RUN.md` porta la voce del run col COMANDO VERBATIM** *(par.5-octies)*.
-
-## IL VIDEO DELLA VALIDAZIONE — **due strade, la scelta e' di Luca**
-
-> **NON lanciato stasera:** alle `00:06` si era gia' dentro la finestra di riavvio, e il mandato
-> diceva *«se non finisce entro le 23:30, NON lanciarlo»*.
-
-**⚠ E IL MIO `§0` ERA SBAGLIATO:** avevo risposto *«il video non c'e'»* dopo aver cercato **solo**
-dentro `_scena_video.py`. **Esiste gia' `csv/_test_fork/_video_da_snapshot.py`**, che ha prodotto
-`csv/_test_fork/_video_g6000/video_g6000.mp4` *(46 fotogrammi, 1.28 MB)*. **Lo ha trovato Luca.**
-
-| strada | fotogrammi | fisica | tempo | nota |
-|---|---:|---|---|---|
-| **`_video_da_snapshot.py`** *(esiste, task history `d20a3ea`)* | **5** | **NESSUNA** — legge gli snapshot e chiama solo le funzioni di **disegno** | subito | **`0.25 s` di video a 20 fps.** E' **hardcodato su `_g6000`**: vanno parametrizzati `ARCHIVIO`, `DEST` e l'argv *(`--sep 8` invece di `4.0`)* |
-| **`_video_val600.py`** *(scritto stanotte, MAI girato)* | **100** | **RIESEGUITA** *(rigiocata dalla semina)* | **~35 min + disegno** | **Dimostra di essere QUEL run** confrontando lo stato al passo 600 con `scena_000600.pkl.gz`: se non coincide **non monta** |
-
-**Per averne 100 senza rigiocare servirebbero 100 snapshot da ~36 MB = `~3.6 GB`.** E' il vero
-motivo per cui la seconda strada esiste.
-
-```
-python csv/_test_fork/_video_val600.py --prova      (12 passi: si vede che monta)
-python csv/_test_fork/_video_val600.py              (600 passi, 100 fotogrammi)
-```
-**Esce su `E:\soliton_archivio\video_val600\`, NON in git.** `ffmpeg 8.1.1` e `matplotlib 3.10.7`
-sono presenti *(verificato dal disco)*.
-
-
-## ⚠ COSA NON SI DEVE FARE AL RIAVVIO
-- **NON usare `--db-cleanup`**: **CANCELLA il `.pkl`**. L'archivio del ramo D *(10 snapshot,
-  ~370 MB, irriproducibili senza rigirare 1200 passi)* non si tocca.
-- **NON rigirare il ramo D vecchio** per confronto: e' **EPOCA 2**, le cure lo hanno cambiato.
-- **NON fidarsi di questa tabella:** ogni riga porta il file che la prova. **Si guarda quello.**
+| **`G1`** · quanto conta il disegno | ✅ | `Z103`, `3c03223` |
+| **`G2`** · dove spinge la gravita' | ✅ | `Z105`, `Z106`, `fedda6c` |
+| **`G3`** · spegnimento gravita' | ✅ | `Z107`, `52486f0` |
+| **`G4`** · spegnimento memoria del moto | ✅ | `Z108`, `Z109`, `fbd3bc9` |
+| **`G4-bis`** · spegnimento INTERO blocco | ✅ | `Z115`, `a99656e` — **`Δ` NON monotono** |
+| **registro della fisica** | ⚠ **4 schede su tutte** | `doc/REGISTRO_FISICA.md` · `4091cda`, `e637b07`, `e0dd5a4` |
+| **punto 4** · scrittori non tracciati | ✅ **sono DUE** | `Z114`, `94be0a5` |
+| **punto 5** · bande + cricchetto | ✅ **`4/4`, scarto `0.0 %`** | `Z113`, `a0ce514` |
+| **`D32`** · due tempi propri | ✅ acclarato | `Z110`, `be28256` |
+| **`D33`** · repulsione spenta al tetto | ✅ acclarato | `Z111`, `be28256` |
+| **`D25`** · col riferimento `r = 1` | ✅ **non regge qui** | `7882689` |
 
 ## ⚠⚠ TRIAGE DELLE 17:45 — **generato alle 17:43, con `G4-bis` GIA' FINITO**
 

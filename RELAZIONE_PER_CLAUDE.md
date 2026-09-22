@@ -12383,3 +12383,28 @@ lasciando vivo un termine di fase che legge un `d0` alterato**.
 
 **LAVORO RESIDUO DICHIARATO:** le letture `REGGE / NON REGGE` di `G4-bis` **non sono state
 generate** — i 5 snapshot sono sul disco, **è la prima cosa alla riaccensione.**
+
+### ㉫ **Chiusura delle 18:00 — il punto di ripresa e il punto della situazione**
+
+> **`git status` pulito** *(nessun file modificato fuori dal commit)* · **nessun processo vivo**
+> *(`Get-CimInstance Win32_Process`: zero `python.exe`)* · **`G4-bis` finito alle 16:59**, nessun
+> run interrotto.
+
+**LA PRIMA COSA ALLA RIACCENSIONE**, ed è scritta in cima a `doc/STATO_RUN.md`:
+**generare le letture `REGGE / NON REGGE` di `G4-bis`**. I **5 snapshot sono sul disco**, quindi
+non serve rigirare niente — è una lettura di ~3 minuti. **Senza, manca il confronto
+`6/8` · `7/8` · `?` fra i tre bracci, che è il numero che `CHK3` userà.**
+
+**LAVORI A METÀ: nessuno.** Ogni lavoro di oggi è a un punto pulito — strumento committato,
+criteri scritti, esito registrato. **I due fallimenti** *(sigillo `8/10`, cricchetto `1/4`)* **e il
+falso positivo** *(`Z114`)* **sono committati come reperti e poi corretti, coi giri rifatti per
+intero.**
+
+**IL SIMULATORE: blob `21e3a3dc`.** Due flag aggiunti oggi, **entrambi sigillati** — `MEM_MOTO`
+*(8/8)* e `MEM_MOTO_TUTTO` *(10/10)*. **Erano le due modifiche ammesse prima del `CHK3`, e sono
+esaurite.** **Nessuna cura è stata scritta.**
+
+**`SCALE-TW` e `PROBLEMI-CHK3` sono in coda, non cominciati** — il triage dice che non ci stavano,
+e il mandato di `SCALE-TW` dice esso stesso *«NON ORA»*. **Il primo difetto di `SCALE-TW` è
+già indicato da Luca e registrato:** `TORS_4PI` a `:789` dichiara *«soglia 4π»* e
+*«default off»*, **ma la soglia è `3π` e il flag è acceso** — e **fa fede il codice**.
