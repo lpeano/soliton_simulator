@@ -20,7 +20,7 @@ DUE AFFERMAZIONI DIVERSE, e nessuna sostituisce l'altra:
   due catture identiche in `d0` e diverse in `phi` **devono** essere dichiarate diverse.
 
 ⚠ `P1-sexies`: i criteri si collaudano PRIMA su casi a risposta nota, **e i casi che DEVONO
-  fallire sono i piu' importanti**. Qui sono QUATTRO: `K2`, `K4`, `K6`, `K7`. Piu' `T8` sul
+  fallire sono i piu' importanti**. Qui sono CINQUE: `K2`, `K4`, `K6`, `K7`, `K10`. Piu' `T8` sul
   codice vero (`MEM_HEBB = False`, che il mandato VIETA, e che infatti ne tocca cinque).
 ASCII PURO.
 """
@@ -85,8 +85,14 @@ BRACCI = (("ON", True, True, True),
           ("OFF", False, True, True),
           ("SOLO-MEM", True, False, True),
           ("HEBB", True, True, False))
-# I QUATTRO PUNTI che il flag deve recintare, per `T7` (AST).
-PUNTI_ATTESI = 4
+# `T7` (AST). ⚠ CORRETTO il 2026-09-22 dopo un FAIL: qui attendevo `4`, cioe' il numero dei
+# PUNTI. **L'AST conta i RAMI, e i punti (1) e (2) stanno nello STESSO blocco**, quindi TRE
+# ramificazioni ne coprono QUATTRO. Il FAIL era del criterio, non del flag (`P1-sexies`).
+# ⚠ E IL NUMERO DA SOLO NON BASTA: tre rami "da qualche parte" non dicono che siano i tre
+#   giusti. Si verifica anche che stiano TUTTI dentro `memoria_hebbiana_moto` -- per NOME di
+#   funzione, non per riga (par.0: le righe si spostano, i nomi no).
+RAMI_ATTESI = 3
+FUNZIONE_ATTESA = "memoria_hebbiana_moto"
 
 
 def firma(a):
@@ -157,14 +163,29 @@ def solo_quello(cnt_a, cnt_b, esenti):
 
 
 def gate(percorso, nome):
-    """Quante RAMIFICAZIONI dipendono da `nome`, e dove."""
+    """Quante RAMIFICAZIONI dipendono da `nome`, DOVE, e **DENTRO QUALE FUNZIONE**.
+
+    ⚠ La funzione si legge dall'albero, **per NOME**, non dalla riga: le righe si spostano a
+      ogni blob (par.0), i nomi no. Ritorna `[(riga, nome_funzione), ...]`.
+    """
     with io.open(percorso, encoding="utf-8") as f:
         albero = ast.parse(f.read(), percorso)
+    # a quale funzione appartiene ogni riga
+    di_chi = {}
+    for nodo in ast.walk(albero):
+        if isinstance(nodo, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            for x in ast.walk(nodo):
+                ln = getattr(x, "lineno", None)
+                if ln is not None:
+                    # la funzione PIU' INTERNA vince: si sovrascrive scendendo
+                    pre = di_chi.get(ln)
+                    if pre is None or nodo.lineno > pre[1]:
+                        di_chi[ln] = (nodo.name, nodo.lineno)
     rami, assegn, tutti = [], [], []
     for nodo in ast.walk(albero):
         if isinstance(nodo, (ast.If, ast.IfExp)):
             if any(isinstance(x, ast.Name) and x.id == nome for x in ast.walk(nodo.test)):
-                rami.append(nodo.lineno)
+                rami.append((nodo.lineno, di_chi.get(nodo.lineno, ("<modulo>", 0))[0]))
         elif isinstance(nodo, ast.Assign):
             for t in nodo.targets:
                 if isinstance(t, ast.Name) and t.id == nome:
@@ -271,6 +292,55 @@ def collaudo(W):
     ok8 = (not identiche(None, None))
     W("K8 due ASSENZE non sono un'identita' -> %s\n" % ("OK" if ok8 else "*** NO ***"))
     e.append(ok8)
+
+    # --- `gate`: il criterio di `T7`, riscritto dopo un FAIL. Si collauda su sorgenti FINTI.
+    import tempfile
+    d = tempfile.mkdtemp()
+    buono = os.path.join(d, "buono.py")
+    io.open(buono, "w", encoding="utf-8").write(
+        "F = True\n"
+        "class R(object):\n"
+        "    def memoria_hebbiana_moto(self):\n"
+        "        if F:\n"
+        "            a = 1\n"
+        "        else:\n"
+        "            a = 2\n"
+        "        if F and True:\n"
+        "            b = 1\n"
+        "        if F:\n"
+        "            c = 1\n"
+        "        return a\n")
+    r9, a9, _t9 = gate(buono, "F")
+    ok9 = (len(r9) == RAMI_ATTESI and all(fn == FUNZIONE_ATTESA for _l, fn in r9)
+           and len(a9) == 1)
+    W("K9 `gate` su un sorgente FINTO corretto: 3 rami, tutti in `%s`, 1 assegnamento -> %s\n"
+      % (FUNZIONE_ATTESA, "OK" if ok9 else "*** NO *** %s" % r9))
+    e.append(ok9)
+
+    cattivo = os.path.join(d, "cattivo.py")
+    io.open(cattivo, "w", encoding="utf-8").write(
+        "F = True\n"
+        "class R(object):\n"
+        "    def memoria_hebbiana_moto(self):\n"
+        "        if F:\n"
+        "            a = 1\n"
+        "        if F:\n"
+        "            b = 1\n"
+        "        return a\n"
+        "    def una_ALTRA_legge(self):\n"
+        "        if F:\n"
+        "            return 0\n"
+        "        return 1\n")
+    r10, _a10, _t10 = gate(cattivo, "F")
+    fuori10 = [(l, f) for l, f in r10 if f != FUNZIONE_ATTESA]
+    ok10 = (len(r10) == RAMI_ATTESI) and bool(fuori10)
+    W("K10 IL CASO CHE DEVE FALLIRE: 3 rami COME ATTESO, ma UNO gate un'ALTRA legge\n")
+    W("      (`una_ALTRA_legge`). Il solo CONTEGGIO passerebbe. La verifica sulla FUNZIONE\n")
+    W("      lo vede -> %s  (fuori: %s)\n"
+      % ("OK" if ok10 else "*** il criterio guarderebbe solo il numero ***", fuori10))
+    e.append(ok10)
+    import shutil
+    shutil.rmtree(d, ignore_errors=True)
 
     ok = all(e)
     W("-" * 100 + "\n")
@@ -463,23 +533,43 @@ def main():
     W("         nessun sito di traccia di `d0` vede quella scrittura (`K7`).\n")
 
     # ---- PERCHE' `G4-bis` ESISTE: il vecchio flag NON bastava
+    # ⚠ CORRETTO il 2026-09-22 dopo un FAIL. Il criterio pretendeva ANCHE che `phi` fosse
+    #   IDENTICA fra SOLO-MEM e ON. **E' FALSO, e il sorgente dice perche':**
+    #       shift_fase_dinamico = accoppiamento_dinamico * proiezione_trasversale * (d_archi / d0_archi)
+    #   LO SPOSTAMENTO DI FASE LEGGE `d0`. Spegnere `S08_proj` cambia `d0`, e `d0` RIENTRA nello
+    #   spostamento di fase: il punto (4) e' ACCOPPIATO al punto (3) attraverso `d0`.
+    #   **Cio' che `T6` deve affermare e' UNA cosa sola: col vecchio flag `mem_mot` resta VIVA.**
+    #   L'accoppiamento si MISURA e si RIPORTA, non si asserisce.
     solo_viva = not e_zero(SOLO["mem_mot_fine"])
-    solo_phi_come_on = identiche(SOLO["phi"], ON["phi"])
-    ok6 = solo_viva and solo_phi_come_on
-    esito("T6", ok6, "PERCHE' `G4-bis` ESISTE -- col SOLO `MEM_MOTO=False`: `mem_mot` e' ancora "
-                     "VIVA (somma_abs=%.6e) e `phi` e' IDENTICA al braccio tutto acceso -> %s"
-                     % (SOLO["mem_mot_fine"]["somma_abs"],
+    ok6 = solo_viva
+    esito("T6", ok6, "PERCHE' `G4-bis` ESISTE -- col SOLO `MEM_MOTO=False` `mem_mot` e' ancora "
+                     "VIVA: somma_abs=%.6e (ON %.6e, OFF %.6e) -> %s"
+                     % (SOLO["mem_mot_fine"]["somma_abs"], ON["mem_mot_fine"]["somma_abs"],
+                        OFF["mem_mot_fine"]["somma_abs"],
                         "l'effetto INDIRETTO era rimasto acceso"
                         if ok6 else "*** la premessa di G4-bis non regge ***"))
     W("      -> e' la MISURA che giustifica questo secondo braccio, invece dell'argomento.\n")
+    _phi_uguali = identiche(SOLO["phi"], ON["phi"])
+    W("      MISURATO, e NON e' un criterio: `phi` SOLO-MEM contro ON -> %s.\n"
+      % ("identica" if _phi_uguali else "DIVERSA"))
+    W("         Il sorgente dice perche': `shift_fase_dinamico` ha un fattore `d_archi/d0_archi`,\n")
+    W("         cioe' LO SPOSTAMENTO DI FASE LEGGE `d0`. Spegnere `S08_proj` cambia `d0` e `d0`\n")
+    W("         rientra nello spostamento. **Il punto (4) e' ACCOPPIATO al (3) attraverso `d0`.**\n")
+    W("         Conseguenza: col solo `MEM_MOTO` spento, `phi` riceve uno spostamento calcolato\n")
+    W("         su un `d0` DIVERSO -- ne' quello acceso ne' quello spento. `G4-bis` e' l'unico\n")
+    W("         braccio che separa le due cose.\n")
 
     rami, assegn, tutti = gate(os.path.join(RADICE, "soliton_simulator.py"), "MEM_MOTO_TUTTO")
-    ok7 = (len(rami) == PUNTI_ATTESI)
-    esito("T7", ok7, "GATE (AST): ramificazioni che dipendono da `MEM_MOTO_TUTTO` = %d (attese "
-                     "%d), righe %s" % (len(rami), PUNTI_ATTESI, rami))
-    W("      assegnamenti: %s ; occorrenze del NOME: %s\n" % (assegn, tutti))
-    W("      -> il conto e' STRUTTURALE: se un quinto ramo comparisse, o uno dei quattro\n")
-    W("         sparisse, questo criterio lo direbbe senza bisogno di girare niente.\n")
+    fuori_f = [(ln, fn) for ln, fn in rami if fn != FUNZIONE_ATTESA]
+    ok7 = (len(rami) == RAMI_ATTESI and not fuori_f and len(assegn) == 1)
+    esito("T7", ok7, "GATE (AST): rami = %d (attesi %d) — tutti in `%s`? %s — "
+                     "assegnamenti = %d (atteso 1). rami: %s"
+                     % (len(rami), RAMI_ATTESI, FUNZIONE_ATTESA,
+                        "SI'" if not fuori_f else "NO: %s" % fuori_f, len(assegn), rami))
+    W("      occorrenze del NOME: %s\n" % tutti)
+    W("      -> TRE rami coprono QUATTRO punti: (1) e (2) stanno nello stesso blocco. Il conto\n")
+    W("         e' STRUTTURALE, e la verifica sulla FUNZIONE e' cio' che impedisce che tre rami\n")
+    W("         qualsiasi passino per i tre giusti. Nessuna riga e' pinnata (par.0).\n")
 
     f8 = solo_quello(ON["cnt"], HEBB["cnt"], set(SPENTI))
     ok8 = (len(f8) > 0)
