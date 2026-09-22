@@ -265,7 +265,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **D0** | **CHI FA SCAPPARE `d0`** | 21/9 | ✅ **MISURATO: e' IL FRENO.** Gli scrittori spingono **giu'** `-1.543e+05`, il vincolo **aggiunge** `+3.205e+05`. **`S10` inerte, `S09` verso il BASSO** *(`Z102`)*. **La spinta e' la DISCESA CANCELLATA**, `|dx|·min(1, LAM/d0)`, e **si indebolisce da sola**: dal `91 %` al `24 %` |
 | **G1** | **§1 QUANTO CONTA IL DISEGNO** — `L_disegno/d` per arco, per regione, nel tempo, e la correlazione col CENTRO del disegno | GLOBALE-DISEGNO §1 | ▶ **sola lettura, sugli snapshot di `_val600`** |
 | **G2** | **§2 DOVE SPINGE LA GRAVITA'** | GLOBALE-DISEGNO §2 | ✅ **FATTO.** Il saldo vive **sul CONFINE vuoto-massa** *(`-1.4150`/arco, `107 %` del totale, `Z105`)*; i 20 archi col `|saldo|` maggiore sono **`20/20` nel VUOTO** e il confine e' **DIFFUSO** su `96 429` archi all'**`85 %` del plateau**; e **l'`85.05 %` degli archi-passo e' INCOLLATO AL TETTO**, con il **`99.69 %` del saldo** da incrementi saturi *(`Z106`)*. **`A11` corollario 6** |
-| **G3** | **§3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE** — `GRAV_BIFASE = False` **impostato dalla rigiocata sul MODULO**, 600 passi | GLOBALE-DISEGNO §3 | ⏸ **nessuna modifica al simulatore ne' al driver** |
+| **G3** | **§3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE** — `GRAV_BIFASE = False` impostata **dalla rigiocata sul modulo**, 600 passi | GLOBALE-DISEGNO §3 | ▶ **IN CORSO.** ✅ **SIGILLO 7/7** *(`76114e0`, blob `cb506019`, criterio stretto sui siti che concatenano)*. ▶ **CONTROLLO POSITIVO dell'involucro avviato il 2026-09-22 alle 11:20:04, PID 14806**, strumento blob `14b11a93`, simulatore `9557a867`, seme `42`. **La prova a 600 passi NON parte finche' il controllo non passa** |
 | **G4** | **§4 PROVA DI SPEGNIMENTO: la sola MEMORIA DEL MOTO** — flag nuovo `MEM_MOTO`, `True` di default, che salta **solo** il blocco di `mem_mot` | GLOBALE-DISEGNO §4 | ⏸ **con sigillo BLOCCANTE di byte-identita'**. **⚠ `MEM_HEBB = False` NON si usa: spegne l'INTERA funzione, gravita' e coesione comprese** |
 | **G4-bis** | **`MEM_ARCO` — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE** *(aggiunta di Luca al §4, 2026-09-22)* | GLOBALE-DISEGNO §4 | ⏸ **DERIVATA SI', CODICE NO, prima del `CHK3`.** **Dopo** lo spegnimento di `MEM_MOTO`: se il sistema **si rompe** senza, `MEM_ARCO` e' **la cura da proporre**; se **sta in piedi**, resta **registrata come alternativa** |
 | **CHK3** | **CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PRIMA** | GLOBALE-DISEGNO §5 | ⏸ **QUI CI SI FERMA.** Le cure solo **DERIVATE, non scritte** |
@@ -301,6 +301,27 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 > vicini si mescolano.** Una `m_arco` puramente per-arco **perderebbe l'accoppiamento col
 > vicinato**, e la derivazione deve dire **se quell'accoppiamento serve** — e se si', **da
 > dove viene il peso una volta tolto il disegno.**
+
+> **▶ `G3` IN CORSO — avvio committato il 2026-09-22.**
+> **① SIGILLO, PASSATO PRIMA DELLA PROVA:** `csv/_seal_fork/_sigillo_spegni_grav.py` blob
+> `cb506019`, **`7/7`** *(commit `76114e0`)*. `T5` e' il criterio che lo chiude ed e'
+> **strutturale**: l'AST dice che **una sola ramificazione** dipende da `GRAV_BIFASE` *(riga
+> `5661`)*, quindi **nessun'altra legge PUO' essere gated su quel nome**.
+> **② CONTROLLO POSITIVO dell'involucro:** avviato **11:20:04**, **PID 14806**, 120 passi a
+> flag INVARIATO, confrontati campo per campo con `_val600/scena_000120.pkl.gz`.
+> **Serve a un'affermazione DIVERSA da quella del sigillo:** il sigillo dice che *il FLAG* e'
+> chirurgico, il controllo dice che *il mio INVOLUCRO* e' inerte. **Senza, una differenza
+> misurata nella prova sarebbe attribuibile all'involucro invece che allo spegnimento.**
+> **③ LA PROVA a 600 passi parte SOLO se il controllo passa.**
+>
+> **I COMANDI, verbatim:**
+> ```
+> python csv/_test_fork/_spegni_grav_bifase.py --controllo
+> python csv/_test_fork/_spegni_grav_bifase.py --prova
+> python csv/_test_fork/_letture_validazione.py --dir=csv/_test_fork/_g3_senza_bifase
+> ```
+> **Le letture sono gli STESSI OTTO CRITERI ASSOLUTI della validazione.** Nessun confronto fra
+> epoche.
 
 > **⚠⚠ IL MANDATO DEL 2026-09-22: IL DISEGNO DENTRO LA FISICA.**
 > **Tre fatti letti dal codice e VERIFICATI dal disco:**
