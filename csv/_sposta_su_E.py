@@ -22,6 +22,7 @@ import hashlib
 import io
 import os
 import shutil
+import subprocess
 import sys
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
@@ -40,6 +41,22 @@ DA_SPOSTARE = ["csv/_test_fork/_g4_corto",
 # ⚠ I RUN ATTIVI: se una di queste compare in DA_SPOSTARE lo script SI FERMA.
 MAI = ["csv/_test_fork/_g4_riferimento", "csv/_test_fork/_g4_senza_memmoto",
        "csv/_test_fork/_val600", "csv/_test_fork/_g3_senza_bifase"]
+
+
+def tracciati(radice):
+    """I file che GIT conosce. Spostarli sarebbe CANCELLARLI DAL REPO.
+
+    ⚠ Difetto vero, 2026-09-22: la prima versione di questo script ha spostato **tre file
+      COMMITTATI** (`BILANCIO_d0.txt`, `.csv`, e il reperto del bilancio che non chiudeva).
+      Erano recuperabili perche' stavano in git, **ma lo strumento non doveva toccarli**:
+      **un file tracciato non e' spazio da liberare, e' contenuto del repo.**
+    """
+    try:
+        r = subprocess.run(["git", "ls-files"], cwd=radice, capture_output=True, text=True)
+        return set(x.strip().replace("/", os.sep) for x in (r.stdout or "").splitlines()
+                   if x.strip())
+    except Exception:
+        return None
 
 
 def sha1(p):
@@ -83,6 +100,12 @@ def main():
     if not os.path.isdir(os.path.splitdrive(DEST_E)[0] + os.sep):
         W("*** `E:` non e' raggiungibile: NON sposto niente. ***\n")
         return 1
+    tr = tracciati(RADICE)
+    if tr is None:
+        W("*** non riesco a leggere `git ls-files`: NON sposto niente, perche' non so quali\n")
+        W("    file siano TRACCIATI. Meglio non liberare spazio che cancellare il repo. ***\n")
+        return 1
+    W("git conosce %d file: quelli NON si toccano.\n\n" % len(tr))
     righe = []
     tot = 0
     for rel in DA_SPOSTARE:
@@ -90,6 +113,14 @@ def main():
         if not os.path.isdir(src):
             righe.append((rel, "\u2014", 0, "ASSENTE: niente da spostare"))
             continue
+        # cio' che e' GIA' su `E:` e qui non c'e' piu': si verifica la copia e si dichiara
+        dst0 = os.path.join(DEST_E, os.path.basename(src))
+        if os.path.isdir(dst0):
+            for nome in sorted(os.listdir(dst0)):
+                if not os.path.exists(os.path.join(src, nome)):
+                    p = os.path.join(dst0, nome)
+                    righe.append(("%s/%s" % (rel, nome), sha1(p), os.path.getsize(p),
+                                  "GIA' SPOSTATO in un giro precedente: **verificato su `E:`**"))
         dst = os.path.join(DEST_E, os.path.basename(src))
         try:
             os.makedirs(dst)
@@ -100,6 +131,11 @@ def main():
             if not os.path.isfile(f_src):
                 continue
             f_dst = os.path.join(dst, nome)
+            if os.path.relpath(f_src, RADICE) in tr:
+                righe.append(("%s/%s" % (rel, nome), "—", os.path.getsize(f_src),
+                              "**SALTATO: TRACCIATO DA GIT** — non e' spazio da liberare, "
+                              "e' contenuto del repo"))
+                continue
             n = os.path.getsize(f_src)
             h1 = sha1(f_src)
             shutil.copy2(f_src, f_dst)
