@@ -12074,3 +12074,62 @@ moto** *(`REG-B`)*.
 **`G4-bis` e' PARTITO:** `--spegni-tutto`, 600 passi, in `csv/_test_fork/_g4bis_senza_blocco`.
 **`MEM_MOTO` resta al suo default:** deve essere `MEM_MOTO_TUTTO` **da solo** a spegnere tutti e
 quattro i punti.
+
+### ㉣ **Due difetti acclarati: `D32` i due tempi propri, `D33` la repulsione che si spegne prima di servire**
+
+> Mandato di Luca. **Solo letture del sorgente e snapshot gia' scritti**: 20 snapshot dei quattro
+> archivi delle cure, **nessun run**. Strumento blob `20bd4b3e`.
+
+#### ✅ `D32` — **`r` e `tau_pp` non sono due nomi per la stessa cosa: sono due cose**
+
+**DAL SORGENTE, ed e' la prova strutturale:** **`TEMPO_SEGNO = False`**, quindi **`ritmo()` NON
+prende il ramo `1+|tw|/PHI_CRIT`** *(`:2553` non gira)*: prende il **de Broglie**,
+`f = Δangolo/DT`, normalizzato sulla **mediana ritardata** di `|f|`. **`tau_pp` e' invece una
+dilatazione torsionale.** **Due leggi diverse, non due stime della stessa grandezza.**
+
+| | `r` *(`dt_n = DT·r`)* | `tau_pp` *(mitosi, repulsione)* |
+|---|--:|--:|
+| **correlazione fra i due** | — | **`-0.1316` … `+0.2875`** *(segno non concorde)* |
+| mediana, fra snapshot dello **stesso** run | **`0.344` → `1.409`** | `1.408` → `1.470` |
+| `max/min` | **`1.000e+06`** *(il clip)* | `>1`, attorno a `1.4` |
+| righe di **codice** che lo usano | **31** *(+26 di commento)* | **12** *(+4)* |
+
+> **Se fossero la stessa grandezza la correlazione sarebbe `~1`. E' `~0`.**
+> **`r` vive su SEI ordini di grandezza, `tau_pp` su meno di uno.**
+> Il **tic dei processi locali** e' `dt_n = DT·r` *(par.9)*; **mitosi, repulsione e la memoria
+> `_rep` girano invece su `tau_pp`** *(`:5207`)*.
+
+**Nessuna cura:** il mandato chiedeva di misurare e registrare. **La scheda del registro dovra'
+dire quale delle due e' il tempo proprio, e cosa e' l'altra.**
+
+#### ✅ `D33` — **la premessa cade, la conclusione regge, per un'altra ragione**
+
+**❌ PRIMA LA PREMESSA, perche' e' mia responsabilita' dirlo:** il commento `:64-66` dice che
+la torsione **satura a `~2.5pi`** — **e quel numero e' PRE-FORK** *(par.9-bis)*. **Oggi e'
+falso:** `max|tw|` sta **fra `9.5pi` e `13.0pi`**, il `p99.99` **fra `6.4pi` e `9.1pi`**, e
+**lo `0.06 %`–`0.17 %` degli archi supera `4pi`**. **`tau_pp` raggiunge eccome l'inversione.**
+
+**✅ MA LA CONCLUSIONE REGGE, e la ragione e' strutturale:**
+```
+resp    = salita * discesa * (1/tau_pp) * segno
+segno   = -tanh(3*(tau_pp - centro))          inverte oltre  ~3.5 pi
+discesa = clip(1 - |tw|/4pi, 0, 1)            ZERO ESATTO    da  4 pi
+```
+> **La finestra utile e' `[~3.5pi, 4pi)`: larga MEZZO `pi`.** **Oltre il tetto la repulsione e'
+> zero per costruzione** — **cioe' proprio dove la materia e' piu' compressa**, che e' il caso
+> per cui la legge **dichiara** di esistere *(`:5153-5156`: «inverte in REPULSIONE avvicinandosi al
+> tetto 4pi, materia super-compressa»)*.
+
+| | archi oltre l'inversione | nella finestra | **oltre `4pi`: ZERO** | **quota azzerata** |
+|---|--:|--:|--:|--:|
+| passo 120 | `928` | `37` | **`878`** | **`94.6 %`** |
+| passo 600 | `446` | `97` | **`336`** | **`75.3 %`** |
+| su tutti e 20 gli snapshot | `446`–`953` | `27`–`116` | `336`–`910` | **`75.3 %`–`95.8 %`** |
+
+**E la verifica che la finestra e' davvero il vincolo:** `min(resp)` vale **`~-1.5e-02` su tutti e
+20 gli snapshot, senza mai crescere** — gli archi che darebbero la repulsione grande sono
+**esattamente quelli che `discesa` azzera**.
+
+**QUANTO PESA, misurato e non aggettivato:** la spinta `0.02*d0*_rep` somma **`2.6e-03`–`1.3e-02`**
+per snapshot; il saldo di `S05_spinta_locale` su 600 passi vale **`+3.57`** *(`Z108`)* contro
+**`-2.6e+05`** di `S09`: **un fattore `~1e-5`.** **Non scrivo «inerte»: scrivo quanto vale.**
