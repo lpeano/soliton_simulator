@@ -12610,3 +12610,35 @@ confronto.
 **Collaudo `P1-sexies` per famiglia**, ciascuno col **caso che deve fallire** e un **caso
 nascosto**: una costante passata da una **variabile**, una mediana calcolata in **un'altra
 funzione**.
+
+### ㉳ **Che cos'è l'epoca 3: i DEFAULT nel sorgente, non un elenco di flag da ricordare**
+
+> **Decisione di Luca**, ed è la risposta diretta al numero uscito ieri sera: **`1` cura su `9`
+> ha il default acceso.** Le altre **le accende l'argv del driver, run per run** — non sono
+> «nel codice», e **dal sorgente non si vedrebbe**.
+
+**① UN COMMIT A SÉ PER OGNI CURA APPROVATA:** il default passa a `True`, **una cura per
+commit**.
+**② COL SIGILLO DELL'EQUIVALENZA:** un run **con i vecchi argomenti** — cioè col flag
+passato esplicitamente — **resta IDENTICO**. È la stessa forma del `T9` di `MEM_MOTO_TUTTO`:
+`206` campi identici, `0` diversi. **Cambiare un default non deve cambiare un run che quel flag
+lo passava già.**
+
+> **⚠ E IL PRECEDENTE DICE PERCHÉ SERVE.** Quando `STEP2_OROLOGIO` passò a `ON` di
+> default, *«l'assenza del flag»* smise di significare `OFF`, e **i rami di controllo
+> diventarono duplicati del ramo di prova** — un sigillo che sarebbe **passato sempre**, e con
+> le shape uguali, quindi invisibile anche alla guardia delle shape.
+> **Quando si ribalta un default si cercano, NELLO STESSO COMMIT, tutti i punti che ottenevano il
+> vecchio comportamento per OMISSIONE.**
+
+**③ E DUE PRESIDI**, perché una regola che dipende dal ricordarsene non è un presidio
+*(`A9`)*:
+- **il driver RIFIUTA DI PARTIRE** se una cura **approvata** risulta **spenta**. Non un avviso:
+  **un rifiuto**;
+- **il referto di OGNI run STAMPA LO STATO DI TUTTE LE CURE**, così la configurazione **sta nel
+  dato**, non nel comando. È `P6`: *un file che si distingue dagli altri solo per il nome non
+  è un dato, è un ricordo.*
+
+**E la lista delle cure approvate si legge dalla sezione `CURE VERIFICATE`, che è generata:**
+una sola fonte, e **il driver la legge invece di averne una copia sua** — due copie
+divergerebbero, ed è esattamente il difetto che questa voce vuole chiudere.
