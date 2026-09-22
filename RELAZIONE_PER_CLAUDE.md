@@ -12181,3 +12181,38 @@ chiamarlo nuovo.)*
 **E `grad_tw` e' chiamato GRADIENTE ma non e' diviso per la lunghezza dell'arco** — `A3c`.
 
 **`MEM_ARCO` deve rispondere alla domanda dimensionale PRIMA di essere scritta.**
+
+### ㉥ **Il test del cricchetto fallisce 1/4, e il difetto e' TUTTO nel mio banco di prova**
+
+> Referto committato **come reperto** prima di toccare qualunque cosa. **Il simulatore non e'
+> stato toccato.**
+
+| caso | deriva misurata | attesa | esito |
+|---|--:|--:|---|
+| `b1` freno vero, `x0 = 10·LAM` | `+5.848e-03` | `+6.383e-03` | **PASS** *(scarto 8.4 %)* |
+| `b1` freno vero, `x0 = 100·LAM` | `+7.107e-03` | `+6.383e-03` | ❌ *(11.3 %, tolleranza 10 %)* |
+| **`b2` `LAM = 0`, DEVE dare zero** | `+2.597e-05` | `0` | ❌ |
+| **`b3` freno SIMMETRICO, DEVE dare zero** | `+1.280e-06` | `0` | ❌ |
+
+**LA CAUSA E' UNA SOLA, ed e' mia: il test ha lasciato la regione che dichiarava di sondare.**
+Con `amp = 2 %` e **400 passi**, la camminata ha deviazione `sigma·√P ≈ 32` su `x0 = 8`:
+**`x` finisce sotto `LAM`, e in alcuni cammini sotto ZERO.** Li' scatta la guardia
+`pos = prima > 0` di `_smorza`: **le discese diventano `0` e le salite passano** — **un secondo
+cricchetto, al confine**, che non c'entra con `LAM`. **`b2` e `b3` misuravano quello.**
+
+> **E `b1` a `x0 = 100·LAM` sbaglia per un motivo diverso e altrettanto mio:** l'attesa usa
+> `LAM/x0`, ma **`x` si sparge**, e `LAM/x` e' **convessa** — per Jensen `E[LAM/x] > LAM/E[x]`.
+> **La formula era giusta per un `x` fermo, e `x` non sta fermo.** Il `+11 %` e' esattamente
+> quello. **La tolleranza del `10 %` non era sbagliata: era l'attesa a ignorare la dispersione.**
+
+**⚠ E C'E' UN RISCONTRO VERO DENTRO L'ERRORE, e va tenuto:** `_smorza` ha **DUE** cricchetti,
+non uno — quello di `LAM` *(cor.4)* e quello della guardia `prima > 0`. **Il secondo non e'
+raggiungibile oggi** *(`d0` sta sopra `LAM` per costruzione)*, **ma e' una proprieta' della
+formula**, e finisce nella scheda ①.
+
+**Cosa cambio, e sono correzioni al TEST:** ① ampiezza e passi tali che la camminata **resti**
+lontana dal confine, ② **e la condizione si VERIFICA e si stampa** invece di essere assunta
+— `min(x)/LAM` durante il giro, col test che **fallisce** se scende; ③ l'attesa si confronta
+con **`E[LAM/x]` misurato sull'insieme**, non con `LAM/x0`.
+**E' la quinta volta che un `FAIL` e' del criterio e non della cura. `P1-sexies` esiste per
+questo, e stavolta il caso sintetico non rispettava la PROPRIA premessa.**
