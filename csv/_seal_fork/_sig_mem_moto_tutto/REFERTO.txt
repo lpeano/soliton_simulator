@@ -1,0 +1,103 @@
+# SIGILLO -- `MEM_MOTO_TUTTO`: BYTE-INERTE acceso, e spegne TUTTI E QUATTRO i punti
+# [G4-bis] scritto sui SETTE PATTERN STANDARD di `doc/PATTERN_DI_PROVA.md`.
+# 3 passi per braccio, un PROCESSO per braccio.
+#
+COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di sigillare
+----------------------------------------------------------------------------------------------------
+K1 spegnimento CHIRURGICO (solo `S08_proj` sparisce) -> nessun colpevole -> OK
+K2 IL CASO CHE DEVE FALLIRE: tocca ANCHE `S09_spinta_med` -> OK: il criterio lo VEDE  (colpevoli [('S09_spinta_med', 3, 0)])
+K3 FIRMA: due array identici -> stessa firma -> OK
+K4 IL CASO CHE `max|delta|` SBAGLIEREBBE: `+0.0` contro `-0.0`, max|delta| = 0.0e+00
+     le firme sono DIVERSE -> OK: la firma e' piu' stretta
+K5 `e_zero` su un array di 100000 zeri -> OK
+K6 IL CASO CHE DEVE FALLIRE: UN elemento su 100000 vale `1e-300`
+     media = 1.000e-305, cioe' `0.0` in stampa. `e_zero` dice NON zero -> OK: e' ESATTO, non a tolleranza
+K7 IL CASO CHE DEVE FALLIRE, ED E' LA RAGIONE DI QUESTO SIGILLO:
+     due catture con `d0` IDENTICO e `phi` diverso di `1e-9` su UN nodo.
+     Un criterio che guardasse solo `d0` le direbbe uguali, e lo SPOSTAMENTO DI FASE
+     resterebbe vivo senza che nessuno se ne accorga. `stessa_cattura` dice DIVERSE -> OK
+K8 due ASSENZE non sono un'identita' -> OK
+K9 `gate` su un sorgente FINTO corretto: 3 rami, tutti in `memoria_hebbiana_moto`, 1 assegnamento -> OK
+K10 IL CASO CHE DEVE FALLIRE: 3 rami COME ATTESO, ma UNO gate un'ALTRA legge
+      (`una_ALTRA_legge`). Il solo CONTEGGIO passerebbe. La verifica sulla FUNZIONE
+      lo vede -> OK  (fuori: [(10, 'una_ALTRA_legge')])
+----------------------------------------------------------------------------------------------------
+  -> i criteri PASSANO: si sigilla
+
+blob simulatore ORA (sha1 byte grezzi) 21e3a3dc
+riferimento `_val600`, blob `9557a867`: anteriore SIA a `MEM_MOTO` SIA a questo flag
+
+I BRACCI, ciascuno in un processo suo:
+  ON        TUTTO=True  MEM_MOTO=True  MEM_HEBB=True   n=2480   archi=526084  siti=12
+  ON-bis    TUTTO=True  MEM_MOTO=True  MEM_HEBB=True   n=2480   archi=526084  siti=12
+  OFF       TUTTO=False MEM_MOTO=True  MEM_HEBB=True   n=2510   archi=526120  siti=11
+  SOLO-MEM  TUTTO=True  MEM_MOTO=False MEM_HEBB=True   n=2480   archi=526084  siti=11
+  HEBB      TUTTO=True  MEM_MOTO=True  MEM_HEBB=False  n=2510   archi=526120  siti=5
+  (61.3 s)
+
+====================================================================================================
+I CRITERI
+====================================================================================================
+T0    PASS RIPRODUCIBILITA': due bracci ON separati -> invocazioni diverse=0, firme diverse=0, stessa cattura (`d0`+`phi`+`mem_mot`)=True, n 2480==2480
+T1    PASS PUNTO (3) -- LO SPEGNIMENTO SPEGNE: S08_proj ON=3 -> OFF=0
+T2    PASS SPEGNE SOLO QUELLO: siti di traccia diversi da `S08_proj` con invocazioni diverse = 0 
+      -> i PAVIMENTI (`P3`, `P7`), la GRAVITA' e la COESIONE devono restare: non sono
+         memoria del moto. Se uno di loro sparisse, comparirebbe qui.
+T3    PASS BYTE-IDENTITA' A MONTE al passo 1: confrontati=5, DIVERSI=0 
+      S01_archi_nuovi      non invocato al passo 1
+      S02_rilass_visco     sha1 d49dcd13b466  somma +0.000000e+00  IDENTICO
+      S03_diff_guscio      sha1 89732fd415a2  somma -7.839273e+02  IDENTICO
+      S04_rilass_TAU_P     non invocato al passo 1
+      P1_dopo_rilass       sha1 d49dcd13b466  somma +0.000000e+00  IDENTICO
+      S05_spinta_locale    non invocato al passo 1
+      P2_dopo_spinta       non invocato al passo 1
+      S06_mitosi           CONCATENA ON 525973->526019 OFF 525973->526019  coda 9459ff102ff5/9459ff102ff5  IDENTICO
+      S07_schwinger        CONCATENA ON 526019->526047 OFF 526019->526047  coda 9f9aec9bfbd9/9f9aec9bfbd9  IDENTICO
+T4    PASS PUNTI (1)+(2) -- `mem_mot` e' IDENTICAMENTE ZERO a 3 passi: OFF somma_abs=0.000000e+00 (zero=True), ON somma_abs=1.552890e+03 (viva=True)
+      -> ESATTO, non a tolleranza (`K5`/`K6`). E serve ENTRAMBE le meta': uno zero da
+         solo non dice nulla se anche il braccio acceso fosse zero.
+T5    PASS PUNTO (4) -- LO SPOSTAMENTO DI FASE E' SPENTO: `phi` al passo 1 ON sha1 8d3fc3a2ec67 vs OFF d15454061704 -> DIVERSO
+      -> se fossero IDENTICI significherebbe che il ramo di `:6033` non gira affatto,
+         e allora il flag non avrebbe niente da spegnere li'. `phi` e' l'UNICA prova:
+         nessun sito di traccia di `d0` vede quella scrittura (`K7`).
+T6    PASS PERCHE' `G4-bis` ESISTE -- col SOLO `MEM_MOTO=False` `mem_mot` e' ancora VIVA: somma_abs=1.552797e+03 (ON 1.552890e+03, OFF 0.000000e+00) -> l'effetto INDIRETTO era rimasto acceso
+      -> e' la MISURA che giustifica questo secondo braccio, invece dell'argomento.
+      MISURATO, e NON e' un criterio: `phi` SOLO-MEM contro ON -> DIVERSA.
+         Il sorgente dice perche': `shift_fase_dinamico` ha un fattore `d_archi/d0_archi`,
+         cioe' LO SPOSTAMENTO DI FASE LEGGE `d0`. Spegnere `S08_proj` cambia `d0` e `d0`
+         rientra nello spostamento. **Il punto (4) e' ACCOPPIATO al (3) attraverso `d0`.**
+         Conseguenza: col solo `MEM_MOTO` spento, `phi` riceve uno spostamento calcolato
+         su un `d0` DIVERSO -- ne' quello acceso ne' quello spento. `G4-bis` e' l'unico
+         braccio che separa le due cose.
+T7    PASS GATE (AST): rami = 3 (attesi 3) — tutti in `memoria_hebbiana_moto`? SI' — assegnamenti = 1 (atteso 1). rami: [(5676, 'memoria_hebbiana_moto'), (5701, 'memoria_hebbiana_moto'), (6069, 'memoria_hebbiana_moto')]
+      occorrenze del NOME: [906, 5676, 5701, 6069]
+      -> TRE rami coprono QUATTRO punti: (1) e (2) stanno nello stesso blocco. Il conto
+         e' STRUTTURALE, e la verifica sulla FUNZIONE e' cio' che impedisce che tre rami
+         qualsiasi passino per i tre giusti. Nessuna riga e' pinnata (par.0).
+T8    PASS IL CASO CHE DEVE FALLIRE, sul codice VERO -- `MEM_HEBB=False`: siti toccati OLTRE `S08_proj` = 6
+      P3_dopo_proj         ON=3    HEBB=0   
+      P4_dopo_grav         ON=3    HEBB=0   
+      P6_dopo_coesione     ON=3    HEBB=0   
+      P7_dopo_4917         ON=3    HEBB=0   
+      S09_spinta_med       ON=3    HEBB=0   
+      S12_coesione         ON=3    HEBB=0   
+      -> e' il motivo per cui `MEM_HEBB=False` NON e' il sostituto di questo flag.
+
+----------------------------------------------------------------------------------------------------
+T9 -- LA BYTE-INERZIA A FLAG ACCESO (120 passi attraverso il DRIVER)
+  confronto SNAPSHOT contro SNAPSHOT col riferimento `_val600/scena_000120.pkl.gz`,
+  blob `9557a867`, ANTERIORE sia a `MEM_MOTO` sia a `MEM_MOTO_TUTTO`.
+----------------------------------------------------------------------------------------------------
+  (412.1 s)
+  campi UGUALI 206   DIVERSI 0   non confrontati 0
+T9    PASS BYTE-INERTE a flag ACCESO: 206 campi identici, 0 diversi
+
+====================================================================================================
+ESITO: 10/10
+====================================================================================================
+*** SIGILLO PASSATO. `MEM_MOTO_TUTTO` e' BYTE-INERTE acceso e spegne TUTTI E
+    QUATTRO i punti. La prova di spegnimento `G4-bis` puo' partire. ***
+
+LIMITI: 3 passi per braccio per `T1`-`T8`, UN seme, UNA scena. Cio' che li rende
+  conclusivi non e' il numero di passi ma `T7` (STRUTTURALE, dal sorgente) e `T9`
+  (120 passi contro il riferimento vero).

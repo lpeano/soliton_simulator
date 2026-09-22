@@ -12036,3 +12036,41 @@ peso della sola scrittura su `d0`**. Include anche l'effetto di un `phi` calcola
 alterato. **`G4-bis` e' l'unico braccio che separa le due cose**, ed e' la ragione per cui la
 condizione posta da Luca era quella giusta. Il riscontro va **nella scheda della memoria del
 moto** *(`REG-B`)*.
+
+### ㉢ **Il sigillo di `G4-bis` passa `10/10` — e un accoppiamento che non avevo previsto**
+
+> Blob simulatore **`21e3a3dc`**, riferimento `_val600` blob `9557a867`.
+> **Il collaudo: `10` casi, CINQUE dei quali DEVONO fallire** *(`K2`, `K4`, `K6`, `K7`, `K10`)*.
+> **Tutti e dieci come atteso.**
+
+| | cosa | esito |
+|---|---|---|
+| `T0` | riproducibilita' | `0` invocazioni diverse, `0` firme diverse, `n 2480==2480` |
+| `T1` | **punto (3)** `S08_proj` | `3 → 0` |
+| `T2` | chirurgia | **`0`** altri siti toccati |
+| `T3` | byte-identita' a monte | `5` confrontati, **`0`** diversi |
+| `T4` | **punti (1)+(2)** | `mem_mot` **`0.000000e+00`** spento, `1.552890e+03` acceso |
+| `T5` | **punto (4)** | `phi` ON `8d3fc3a2ec67` ≠ OFF `d15454061704` |
+| `T6` | perche' `G4-bis` esiste | col solo `MEM_MOTO=False`, `mem_mot` **e' ancora viva**: `1.552797e+03` |
+| `T7` | gate AST | `3` rami, **tutti in `memoria_hebbiana_moto`**, `1` assegnamento |
+| `T8` | **il caso che deve fallire** | `MEM_HEBB=False` tocca **`6`** siti oltre `S08_proj` |
+| `T9` | **byte-inerzia acceso** | **`206` campi identici, `0` diversi** *(412 s)* |
+
+> **⚠ E IL RISCONTRO PIU' INTERESSANTE NON E' UN CRITERIO: E' UNA MISURA.**
+> `phi` di `SOLO-MEM` contro `ON` e' **DIVERSA**, e il sorgente dice perche':
+> ```
+> shift_fase_dinamico = accoppiamento_dinamico * proiezione_trasversale * (d_archi / d0_archi)
+> ```
+> **LO SPOSTAMENTO DI FASE LEGGE `d0`.** Spegnere `S08_proj` cambia `d0`, e `d0` **rientra** nello
+> spostamento di fase. **Il punto (4) e' ACCOPPIATO al punto (3) attraverso `d0`: non sono
+> separabili.**
+>
+> **Conseguenza, e tocca la lettura di `Z109`:** col solo `MEM_MOTO` spento, `phi` riceve uno
+> spostamento **calcolato su un `d0` diverso** — ne' quello acceso ne' quello spento. Quindi
+> **il `62 %` di `Z109` non e' il peso della sola scrittura su `d0`.** **`G4-bis` e' l'unico
+> braccio che separa le due cose**, ed e' la ragione per cui la condizione posta da Luca era
+> quella giusta.
+
+**`G4-bis` e' PARTITO:** `--spegni-tutto`, 600 passi, in `csv/_test_fork/_g4bis_senza_blocco`.
+**`MEM_MOTO` resta al suo default:** deve essere `MEM_MOTO_TUTTO` **da solo** a spegnere tutti e
+quattro i punti.

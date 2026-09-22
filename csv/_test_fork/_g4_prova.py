@@ -43,7 +43,10 @@ I MODI:
                  bilancio che chiude. Se non passa, LA PROVA NON SI FA.
   --riferimento  600 passi, `MEM_MOTO` ACCESO, con la traccia completa. **Serve: senza il freno e
                  le nascite misurate NEL BRACCIO ACCESO, il confronto non regge.**
-  --spegni       600 passi, `MEM_MOTO = False`.
+  --spegni       600 passi, `MEM_MOTO = False` (la sola scrittura su `d0`).
+  --spegni-tutto 600 passi, `MEM_MOTO_TUTTO = False`: **L'INTERO BLOCCO**, spostamento di
+                 fase compreso. E' `G4-bis`, e la condizione che lo ha attivato e' `Z109`:
+                 spento `MEM_MOTO`, `d0` cresce lo stesso (rapporto 1.1607).
   --corto        aggiunge `--passi` ridotti: il giro CORTO prima del giro vero (proposta IN PROVA).
 ASCII PURO.
 """
@@ -191,21 +194,26 @@ def confronta_snap(p_a, p_b, W):
     return ug, dv
 
 
-def installa(S, spegni_mem):
+def installa(S, spegni_mem, spegni_tutto=False):
     """Avvolge tutto cio' che serve. PURE-READ tranne l'unico flag che il mandato ammette."""
     stato = {"passi": [], "conti": {}, "freno": {}, "aperto": None, "n_passo": 0,
              "fine_prec": None}
 
     # --- 1. il FLAG, sul modulo, DOPO che il driver ha applicato i suoi
     orig_flag = S._applica_flag
-    visto = {"chiamate": 0, "dopo": None}
+    visto = {"chiamate": 0, "dopo": None, "dopo_tutto": None}
 
     def _wrap_flag(a):
         r = orig_flag(a)
         visto["chiamate"] += 1
         if spegni_mem:
             S.MEM_MOTO = False
+        if spegni_tutto:
+            # [G4-bis, 2026-09-22] L'INTERO blocco, spostamento di fase compreso. Sigillo
+            # `_sigillo_mem_moto_tutto.py` **10/10** sul blob `21e3a3dc`.
+            S.MEM_MOTO_TUTTO = False
         visto["dopo"] = bool(S.MEM_MOTO)
+        visto["dopo_tutto"] = bool(getattr(S, "MEM_MOTO_TUTTO", True))
         return r
     S._applica_flag = _wrap_flag
 
@@ -398,13 +406,13 @@ def main():
     modo = None
     passi = None
     for a in sys.argv[1:]:
-        if a in ("--controllo", "--riferimento", "--spegni"):
+        if a in ("--controllo", "--riferimento", "--spegni", "--spegni-tutto"):
             modo = a
         if a.startswith("--frame="):
             passi = int(a.split("=", 1)[1])
     if modo is None:
         print(__doc__)
-        print("*** serve --controllo, --riferimento oppure --spegni ***")
+        print("*** serve --controllo, --riferimento, --spegni o --spegni-tutto ***")
         return 2
     W = sys.stdout.write
     if not collaudo(W):
@@ -427,9 +435,15 @@ def main():
     elif modo == "--riferimento":
         dest = os.path.join(RADICE, "csv", "_test_fork", "_g4_riferimento")
         nfr, spegni = (passi or 100), False
-    else:
+    elif modo == "--spegni":
         dest = os.path.join(RADICE, "csv", "_test_fork", "_g4_senza_memmoto")
         nfr, spegni = (passi or 100), True
+    else:
+        # [G4-bis] L'INTERO blocco. `MEM_MOTO` resta al suo default: e'
+        # `MEM_MOTO_TUTTO` DA SOLO a dover spegnere tutti e quattro i punti
+        # (sigillo `_sigillo_mem_moto_tutto.py` 10/10, blob 21e3a3dc).
+        dest = os.path.join(RADICE, "csv", "_test_fork", "_g4bis_senza_blocco")
+        nfr, spegni = (passi or 100), False
     try:
         os.makedirs(dest)
     except OSError:
@@ -440,19 +454,21 @@ def main():
         open(os.path.join(RADICE, "soliton_simulator.py"), "rb").read()).hexdigest()[:8]
     import inspect as _insp
     seme = _insp.signature(S.Rete.__init__).parameters["seed"].default
-    stato, visto = installa(S, spegni)
+    stato, visto = installa(S, spegni, spegni_tutto=(modo == "--spegni-tutto"))
     argv = ["_scena_video.py", str(nfr), dest] + COMUNE + \
         ["--csv-progresso=%s" % os.path.join(dest, "prog.csv")]
     sys.argv = list(argv)
-    W("[G4] modo %s   MEM_MOTO spento dall'involucro: %s   frame %d\n" % (modo, spegni, nfr))
+    W("[G4] modo %s   MEM_MOTO spento: %s   MEM_MOTO_TUTTO spento: %s   frame %d\n"
+      % (modo, spegni, modo == "--spegni-tutto", nfr))
     W("[G4] blob simulatore %s   seme %s\n" % (blob, seme))
     t0 = time.time()
     runpy.run_path(DRIVER, run_name="__main__")
     W("\n[G4] %.1f s\n" % (time.time() - t0))
 
-    W("\nL'INVOLUCRO: `_applica_flag` avvolto %d volte, MEM_MOTO ORA = %s\n"
-      % (visto["chiamate"], bool(S.MEM_MOTO)))
-    if visto["chiamate"] == 0 or (spegni and S.MEM_MOTO):
+    W("\nL'INVOLUCRO: `_applica_flag` avvolto %d volte, MEM_MOTO ORA = %s, MEM_MOTO_TUTTO ORA = %s\n"
+      % (visto["chiamate"], bool(S.MEM_MOTO), bool(S.MEM_MOTO_TUTTO)))
+    if (visto["chiamate"] == 0 or (spegni and S.MEM_MOTO)
+            or (modo == "--spegni-tutto" and S.MEM_MOTO_TUTTO)):
         W("*** L'INVOLUCRO NON HA AGITO. FERMO. ***\n")
         return 1
 
