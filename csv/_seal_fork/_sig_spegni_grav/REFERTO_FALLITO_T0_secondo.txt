@@ -1,0 +1,42 @@
+# SIGILLO -- `GRAV_BIFASE = False` SPEGNE SOLO `S09`
+# prima della prova di spegnimento `G3`. Nessuna modifica a simulatore ne' driver.
+# 3 passi dalla semina per braccio, configurazione della validazione.
+# ⚠ OGNI BRACCIO IN UN PROCESSO SEPARATO: `avvia_test` e' un interruttore a LEVETTA
+#   (`:6465`), e in-process il secondo braccio nasceva SENZA MASSE. Vedi
+#   `REFERTO_FALLITO_T0.txt` e il commit `b6f3c83`.
+#
+COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di sigillare
+----------------------------------------------------------------------------------------------------
+K1 spegnimento CHIRURGICO (solo `S09` sparisce) -> atteso NESSUN colpevole
+     colpevoli: nessuno  -> OK
+K2 IL CASO CHE DEVE FALLIRE: lo spegnimento tocca ANCHE `S11_flusso`
+     colpevoli: [('S11_flusso', 3, 0)]
+     atteso: `S11_flusso` segnalato -> OK: il criterio VEDE uno spegnimento troppo largo
+K3 un sito che COMPARE invece di sparire -> atteso segnalato
+     colpevoli: [('S05_spinta_locale', 0, 7)]  -> OK
+K4 FIRMA: due array identici -> stessa firma  -> OK
+K5 IL CASO CHE UN CRITERIO SU `max|delta|` SBAGLIEREBBE: `+0.0` contro `-0.0`
+     max|delta| = 0.000e+00  (un criterio su max|delta| direbbe IDENTICI)
+     le firme: DIVERSE  -> OK: la firma e' PIU' STRETTA
+K6 FORME DIVERSE -> firme diverse, MAI identita' per mancanza di confronto -> OK
+K7 due ASSENZE non sono un'identita' -> OK
+----------------------------------------------------------------------------------------------------
+  -> i criteri PASSANO: si sigilla
+
+blob simulatore (sha1 byte grezzi) 9557a867
+
+I QUATTRO BRACCI, ciascuno in un processo suo:
+  ON       GRAV_BIFASE=True  MEM_HEBB=True   n=2480   archi=526084  siti=12
+  ON-bis   GRAV_BIFASE=True  MEM_HEBB=True   n=2480   archi=526084  siti=12
+  OFF      GRAV_BIFASE=False MEM_HEBB=True   n=2480   archi=526084  siti=10
+  HEBB     GRAV_BIFASE=True  MEM_HEBB=False  n=2510   archi=526120  siti=5
+  (42.9 s)
+
+====================================================================================================
+I CRITERI
+====================================================================================================
+T0    FAIL RIPRODUCIBILITA': due bracci ON separati coincidono? invocazioni diverse=0, siti con firma diversa=2, n 2480==2480, mem_mot =, d0 =
+
+*** T0 FALLISCE: i due bracci ON NON coincidono, quindi QUALUNQUE differenza
+    misurata sotto sarebbe indistinguibile dalla deriva. IL SIGILLO SI FERMA. ***
+    siti con firma diversa: ['S06_mitosi', 'S07_schwinger']

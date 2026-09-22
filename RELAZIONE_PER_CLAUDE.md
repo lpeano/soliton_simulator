@@ -11182,3 +11182,40 @@ Commit a se', poi si rigira.
 fallire)*: **collaudavano il CRITERIO, e il criterio va bene. A rompersi e' stato l'IMPIANTO che
 lo alimenta** — **la stessa identica lezione di due ore fa con l'`UnboundLocalError`**, e stavolta
 l'ho presa perche' `T0` esisteva.
+
+### ⑼ **`T0` fallisce una SECONDA volta, e una seconda volta e' il CRITERIO**
+
+> **La correzione precedente ha funzionato.** Con **un processo per braccio** i quattro mondi
+> finalmente coincidono:
+
+```
+ON       n=2480  archi=526084  siti=12
+ON-bis   n=2480  archi=526084  siti=12
+OFF      n=2480  archi=526084  siti=10
+HEBB     n=2510  archi=526120  siti=5      <- diverso per FISICA, ed e' giusto
+invocazioni diverse fra ON e ON-bis: 0 . mem_mot identico . d0 identico . n uguale
+```
+
+**Restano DUE soli siti con firma diversa: `S06_mitosi` e `S07_schwinger`.**
+
+**LA CAUSA, ed e' di nuovo il mio criterio.** Quei due **CONCATENANO**: cambiano la **lunghezza**
+di `d0`, quindi il delta elemento-per-elemento **non esiste** e il figlio registrava `None`. E
+`identiche(None, None)` risponde `False` **per scelta** — e' il collaudo `K7`, *«due
+assenze non sono un'identita'»*.
+
+> **Quella scelta e' GIUSTA per un dato MANCANTE e SBAGLIATA per un'assenza STRUTTURALE e
+> ATTESA.** E' la stessa situazione che in `Z102` fa comparire quei siti con **`n/d`**.
+
+**LA CORREZIONE:** il figlio registra `{"concatena": True, "da":, "a":}` invece di `None`, e
+`identiche()` distingue **tre** casi — due **firme** *(byte e forma)*, due **concatena**
+*(stessa coppia di lunghezze)*, **una di ciascuna o un `None`** *(**non** e' identita': un sito che
+cambia **natura** fra i due bracci e' un **segnale**, non un pareggio)*.
+Tre collaudi nuovi, e **`K10` e' il caso che deve fallire**. Ora sono **dieci** collaudi, di cui
+**quattro** casi che devono fallire (`K2`, `K5`, `K9`, `K10`).
+
+> **⚠ E' IL SECONDO GIRO DELLO STESSO DIFETTO DI CATEGORIA: `T0` ha fallito due volte, e due
+> volte per il CRITERIO e non per il flag.** **Il valore di `T0` sta esattamente qui:** senza,
+> avrei letto `T1`-`T6` **su bracci non confrontabili** la prima volta, e **su un criterio che
+> dichiarava diversi due siti identici** la seconda.
+> **⚠ E su `GRAV_BIFASE` continua a non esserci NESSUNA affermazione:** `T1`-`T6` non sono
+> ancora stati eseguiti.

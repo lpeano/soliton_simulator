@@ -90,6 +90,11 @@ A_MONTE = ("S01_archi_nuovi", "S02_rilass_visco", "S03_diff_guscio", "S04_rilass
            "S07_schwinger", "S08_proj", "P3_dopo_proj")
 GRAVITA = ("S09_spinta_med", "S10_grav_med", "P4_dopo_grav")
 A_VALLE = ("S11_flusso", "P5_dopo_flusso", "S12_coesione", "P6_dopo_coesione", "P7_dopo_4917")
+# I SITI CHE CONCATENANO: cambiano la LUNGHEZZA di `d0`, quindi il delta elemento-per-elemento
+# NON ESISTE. E' la stessa convenzione che in `Z102` li fa comparire con `n/d`.
+# ⚠ Non si confrontano per FIRMA -- si confrontano per la COPPIA DI LUNGHEZZE. Trattarli come
+#   "assenti" faceva fallire `T0` su un'assenza STRUTTURALE e ATTESA (2026-09-22).
+CONCATENANO = ("S01_archi_nuovi", "S06_mitosi", "S07_schwinger")
 
 # i quattro bracci: (nome, spegni_grav, spegni_hebb)
 BRACCI = (("ON", False, False), ("ON-bis", False, False),
@@ -117,9 +122,22 @@ def firma(a):
 
 
 def identiche(fa, fb):
-    """Due firme sono la stessa cosa? ⚠ `None` contro `None` NON e' identita': e' ASSENZA."""
+    """Due catture sono la stessa cosa?
+
+    ⚠ TRE casi, e mescolarli e' stato un difetto vero (`T0` fallito il 2026-09-22):
+      * due FIRME        -> identita' dei BYTE e della forma;
+      * due CONCATENA    -> stessa coppia di lunghezze. L'assenza del delta e' STRUTTURALE e
+                            ATTESA, non un dato mancante: sono i siti che allungano `d0`;
+      * una di ciascuna, oppure un `None` -> **NON e' identita'**. Due ASSENZE non fanno
+                            un'uguaglianza, e un sito che cambia natura fra i due bracci e' un
+                            SEGNALE, non un pareggio.
+    """
     if fa is None or fb is None:
         return False
+    ca, cb = fa.get("concatena"), fb.get("concatena")
+    if ca or cb:
+        return (bool(ca) and bool(cb)
+                and fa.get("da") == fb.get("da") and fa.get("a") == fb.get("a"))
     return fa["sha1"] == fb["sha1"] and fa["forma"] == fb["forma"]
 
 
@@ -216,6 +234,20 @@ def collaudo(W):
       % ("OK" if ok6 else "*** LO ZERO SAREBBE AMBIGUO ***"))
     e.append(ok6)
 
+    cc1 = {"concatena": True, "da": 100, "a": 104}
+    cc2 = {"concatena": True, "da": 100, "a": 104}
+    cc3 = {"concatena": True, "da": 100, "a": 106}
+    ok8 = identiche(cc1, cc2)
+    ok9 = (not identiche(cc1, cc3))
+    ok10 = (not identiche(cc1, firma(np.ones(4))))
+    W("K8 i siti che CONCATENANO: stessa coppia di lunghezze -> IDENTICI -> %s\n"
+      % ("OK" if ok8 else "*** un'assenza STRUTTURALE e ATTESA farebbe fallire T0 ***"))
+    W("K9 lunghezze DIVERSE (100->104 contro 100->106) -> NON identici -> %s\n"
+      % ("OK" if ok9 else "*** non vedrebbe una mitosi diversa ***"))
+    W("K10 un CONCATENA contro una FIRMA -> NON identici -> %s\n"
+      % ("OK" if ok10 else "*** un sito che cambia NATURA passerebbe per uguale ***"))
+    e += [ok8, ok9, ok10]
+
     ok7 = (not identiche(None, None))
     W("K7 due ASSENZE non sono un'identita' -> %s\n"
       % ("OK" if ok7 else "*** due `None` passerebbero per uguali ***"))
@@ -254,7 +286,8 @@ def braccio(nome):
         if stato["passo"] == 1 and sito not in primo:
             dopo = np.asarray(self.d0, dtype=float)
             pri = np.asarray(prima, dtype=float)
-            primo[sito] = firma(dopo - pri) if len(pri) == len(dopo) else None
+            primo[sito] = (firma(dopo - pri) if len(pri) == len(dopo)
+                           else {"concatena": True, "da": len(pri), "a": len(dopo)})
     S.Rete._traccia_d0 = traccia
     S.TRACCIA_D0 = True
 
