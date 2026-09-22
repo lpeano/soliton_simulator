@@ -37,10 +37,14 @@ NON_TASK = re.compile(r"^(D[0-9]{2}|S[0-9]{2})$")
 
 
 def stato(cella):
-    for m, nome in MARCATORI:
-        if m in cella:
-            return nome
-    return "(senza marcatore)"
+    """Il marcatore che vale e' il PRIMO DELLA CELLA, non il primo della mia lista.
+
+    ⚠ Difetto vero, trovato guardando l'output: la riga di `G4` contiene `▶ IN CORSO` e poi tre
+      `✅` dei pezzi gia' fatti. Prendendo il primo della LISTA, **`G4` risultava FATTO mentre
+      stava girando**. Si prende quello che compare PRIMA NEL TESTO.
+    """
+    trovati = [(cella.index(m), nome) for m, nome in MARCATORI if m in cella]
+    return min(trovati)[1] if trovati else "(senza marcatore)"
 
 
 def righe(percorso):
@@ -54,7 +58,11 @@ def righe(percorso):
         idn = m.group(1)
         out.append({"id": idn, "cosa": c[2] if len(c) > 2 else "",
                     "stato": stato(c[4] if len(c) > 4 else ""),
-                    "nota": c[4] if len(c) > 4 else "", "difetto": bool(NON_TASK.match(idn))})
+                    # ⚠ i DIFETTI hanno una colonna in piu': lo stato sta nell'ULTIMA cella
+                    #   piena, non nella quarta. Leggerla sbagliata metteva 30 difetti su 30 in
+                    #   "ALTRO", cioe' NESSUNA informazione.
+                    "nota": ([x for x in c[1:] if x] or [""])[-1],
+                    "difetto": bool(NON_TASK.match(idn))})
     return out
 
 
@@ -77,6 +85,11 @@ def collaudo(W):
     ok1 = (stato("✅ fatto") == "FATTO") and (stato("▶ in corso") == "IN CORSO")
     W("K1 i marcatori si leggono -> %s\n" % ("OK" if ok1 else "*** NO ***"))
     e.append(ok1)
+    okA = (stato("▶ IN CORSO. ✅ pezzo fatto ✅ altro") == "IN CORSO")
+    W("K1b IL CASO CHE DEVE FALLIRE: una riga `IN CORSO` che contiene dei `fatto` -> %s\n"
+      % ("OK: vince il PRIMO DELLA CELLA"
+         if okA else "*** un run IN CORSO risulterebbe FATTO ***"))
+    e.append(okA)
     ok2 = (stato("nessun marcatore qui") == "(senza marcatore)")
     W("K2 IL CASO CHE DEVE FALLIRE: una riga SENZA marcatore -> %s\n"
       % ("OK: compare come tale, non sparisce e non viene inventata"
@@ -116,10 +129,21 @@ def main():
         W("\n")
     st = {}
     for x in dif:
-        k = "CURATO" if "CURATO" in x["nota"].upper() and "INEFFICACE" not in x["nota"].upper() \
-            else ("NON E' UN DIFETTO" if "NON E' UN DIFETTO" in x["nota"].upper()
-                  else ("ALTRO" if x["id"].startswith("D") and "APERTO" not in x["nota"].upper()
-                        else "APERTO"))
+        u = x["nota"].upper()
+        if "INEFFICACE" in u:
+            k = "CURA INEFFICACE"
+        elif "NON E' UN DIFETTO" in u:
+            k = "NON E' UN DIFETTO"
+        elif "RIMISURARE" in u:
+            k = "DA RIMISURARE"
+        elif "CURATO" in u:
+            k = "CURATO"
+        elif "DERIVATA" in u:
+            k = "CURA DERIVATA"
+        elif "APERTO" in u or "ATTESA" in u:
+            k = "APERTO / in attesa"
+        else:
+            k = "(stato non riconosciuto)"
         st.setdefault(k, []).append(x["id"])
     W("## DIFETTI E SOSPETTI — %d righe\n\n" % len(dif))
     W("| stato | quanti | quali |\n|---|--:|---|\n")
