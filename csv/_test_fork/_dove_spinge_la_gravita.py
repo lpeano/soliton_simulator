@@ -111,6 +111,72 @@ def concentrazione(v):
     return float(np.sum(s[:k]) / np.sum(pos))
 
 
+class AccChiave(object):
+    """Il cumulato per arco IDENTIFICATO DALLA COPPIA DI NODI, non dalla posizione.
+
+    ⚠ PERCHE' NON BASTA LA POSIZIONE, e non e' una precauzione: e' MISURATO. La mitosi fa
+      `self.i = concatenate([self.i[keep], a, m])` (`:5325`), cioe' **TOGLIE** gli archi spezzati
+      con `[keep]` e appende i nuovi: tutto cio' che segue un arco rimosso **SLITTA**. La guardia
+      del prefisso lo ha visto in **61 passi su 120**.
+
+    ⚠ PERCHE' LA COPPIA DI NODI E' UN'IDENTITA' VALIDA, verificato dal sorgente: le uniche
+      assegnazioni di `self.pos` sono `vstack` (`:2299`, `:5258`, `:5402`), l'inizializzazione
+      (`:1431`) e un `nan_to_num` che non cambia la forma (`:5535`). **I nodi si APPENDONO e basta:
+      nessuna rimozione, nessuna rinumerazione.**
+
+    ⚠ E I DUE MODI IN CUI QUESTA IDENTITA' POTREBBE ROMPERSI SONO CONTATI, NON ESCLUSI:
+      * **doppioni** -- due archi con la stessa coppia di nodi nello stesso passo;
+      * **risurrezioni** -- una coppia che sparisce e poi ricompare, cioe' un arco DIVERSO che
+        eredita la chiave di uno morto. Si rileva dal SALTO nell'ultimo passo in cui si e' vista.
+      Se sono molti, il cumulato non vale e lo si dice.
+    """
+
+    def __init__(self, base):
+        self.base = np.int64(base)
+        self.chiavi = np.zeros(0, dtype=np.int64)
+        self.acc = np.zeros(0, dtype=float)
+        self.visto = np.zeros(0, dtype=np.int64)
+        self.doppioni = 0
+        self.risurrezioni = 0
+
+    def chiave(self, ii, jj):
+        return np.asarray(ii, dtype=np.int64) * self.base + np.asarray(jj, dtype=np.int64)
+
+    def aggiungi(self, ii, jj, dx, passo):
+        k = self.chiave(ii, jj)
+        if len(np.unique(k)) != len(k):
+            self.doppioni += int(len(k) - len(np.unique(k)))
+        p = np.searchsorted(self.chiavi, k)
+        pc = np.minimum(p, max(len(self.chiavi) - 1, 0))
+        col = (len(self.chiavi) > 0) & (p < len(self.chiavi))
+        col = col & (self.chiavi[pc] == k) if len(self.chiavi) else np.zeros(len(k), bool)
+        if np.any(col):
+            np.add.at(self.acc, p[col], dx[col])
+            _salto = passo - self.visto[p[col]]
+            self.risurrezioni += int(np.sum(_salto > 1))
+            self.visto[p[col]] = passo
+        nuovi = ~col
+        if np.any(nuovi):
+            ku, inv = np.unique(k[nuovi], return_inverse=True)
+            su = np.bincount(inv, dx[nuovi], minlength=len(ku))
+            self.chiavi = np.concatenate([self.chiavi, ku])
+            self.acc = np.concatenate([self.acc, su])
+            self.visto = np.concatenate([self.visto,
+                                         np.full(len(ku), passo, dtype=np.int64)])
+            o = np.argsort(self.chiavi, kind="stable")
+            self.chiavi = self.chiavi[o]; self.acc = self.acc[o]; self.visto = self.visto[o]
+
+    def leggi(self, ii, jj):
+        """Il cumulato riallineato agli archi VIVI ORA. -1 = chiave non presente."""
+        k = self.chiave(ii, jj)
+        p = np.searchsorted(self.chiavi, k)
+        pc = np.minimum(p, max(len(self.chiavi) - 1, 0))
+        ok = (p < len(self.chiavi)) & (self.chiavi[pc] == k) if len(self.chiavi) \
+            else np.zeros(len(k), bool)
+        v = np.zeros(len(k)); v[ok] = self.acc[p[ok]]
+        return v, ok
+
+
 def prefisso_regge(ii, jj, pii, pjj):
     """La guardia: il prefisso di (i, j) e' rimasto identico? E' il caso C del collaudo."""
     if pii is None:
@@ -174,6 +240,47 @@ def collaudo(W):
          "OK" if okC2 else "*** NON VEDE IL RIORDINO: IL CUMULATO SAREBBE FALSO ***"))
     esiti += [okC1, okC2]
 
+    # --- D: IL CUMULATO PER CHIAVE su un caso a somme NOTE, CON RIORDINO E RIMOZIONE in mezzo.
+    #     E' il caso che DEVE riuscire dove quello posizionale sbaglia.
+    A = AccChiave(1 << 32)
+    p1_i = np.array([10, 11, 12, 13]); p1_j = np.array([20, 21, 22, 23])
+    A.aggiungi(p1_i, p1_j, np.array([1.0, 2.0, 3.0, 4.0]), 1)
+    # passo 2: l'arco (11,21) MUORE, i restanti SLITTANO, e ne nasce uno nuovo in coda
+    p2_i = np.array([10, 12, 13, 99]); p2_j = np.array([20, 22, 23, 98])
+    A.aggiungi(p2_i, p2_j, np.array([10.0, 30.0, 40.0, 7.0]), 2)
+    fin_i = np.array([10, 12, 13, 99]); fin_j = np.array([20, 22, 23, 98])
+    v, _ok = A.leggi(fin_i, fin_j)
+    attesi = np.array([11.0, 33.0, 44.0, 7.0])       # noti a mano
+    okD = bool(np.allclose(v, attesi, rtol=0, atol=1e-12))
+    # e il CONFRONTO: l'accumulatore POSIZIONALE, sugli stessi dati, cosa avrebbe dato?
+    posiz = np.array([1.0, 2.0, 3.0, 4.0]) + np.array([10.0, 30.0, 40.0, 7.0])
+    W("D  cumulato PER CHIAVE, con un arco MORTO e gli altri SLITTATI in mezzo\n")
+    W("     atteso   %s\n" % ["%.0f" % x for x in attesi])
+    W("     ottenuto %s   -> %s\n"
+      % (["%.0f" % x for x in v], "OK" if okD else "*** SOMMA SULL'ARCO SBAGLIATO ***"))
+    W("     (per contrasto, l'accumulatore POSIZIONALE avrebbe dato %s: sbagliato su 3 archi\n"
+      % ["%.0f" % x for x in posiz])
+    W("      su 4 -- ed e' esattamente il difetto che la guardia del prefisso ha trovato)\n")
+    esiti.append(okD)
+
+    # --- E: IL CASO CHE DEVE FALLIRE. Una RISURREZIONE: una chiave che sparisce e ricompare.
+    #     Se l'accumulatore non se ne accorge, sta sommando DUE archi diversi nello stesso posto.
+    B = AccChiave(1 << 32)
+    B.aggiungi(np.array([5]), np.array([6]), np.array([1.0]), 1)
+    B.aggiungi(np.array([7]), np.array([8]), np.array([1.0]), 2)     # (5,6) ASSENTE al passo 2
+    B.aggiungi(np.array([5]), np.array([6]), np.array([1.0]), 3)     # e RICOMPARE al passo 3
+    okE = B.risurrezioni >= 1
+    C = AccChiave(1 << 32)
+    for _p in (1, 2, 3):
+        C.aggiungi(np.array([5]), np.array([6]), np.array([1.0]), _p)  # sempre viva: 0 allarmi
+    okE2 = C.risurrezioni == 0
+    W("E  LA GUARDIA DELLA RISURREZIONE -- il caso che DEVE fallire\n")
+    W("     chiave che SPARISCE e RICOMPARE -> risurrezioni contate %d, atteso >= 1  -> %s\n"
+      % (B.risurrezioni, "OK" if okE else "*** NON LA VEDE: sommerebbe DUE archi diversi ***"))
+    W("     chiave sempre VIVA               -> risurrezioni contate %d, atteso 0     -> %s\n"
+      % (C.risurrezioni, "OK" if okE2 else "*** FALSO ALLARME ***"))
+    esiti += [okE, okE2]
+
     ok = all(esiti)
     W("-" * 92 + "\n")
     W("  -> i criteri %s\n\n" % ("PASSANO tutti: si misura" if ok
@@ -205,9 +312,12 @@ def main():
 
     # accumulatori per REGIONE, per sito; e il cumulato PER ARCO del solo `S09`
     PER_REG = {}                 # sito -> [su, giu, n_su, n_giu] per classe
-    ACC = {"v": np.zeros(0)}     # cumulato per arco di S09 (cresce in coda)
+    ACC = {"v": np.zeros(0)}     # cumulato POSIZIONALE di S09 -- tenuto per CONTRASTO
+    ACCK = AccChiave(1 << 32)    # cumulato PER CHIAVE (coppia di nodi): quello buono
     GIRI = {}
     CRESCITA = {"pad": 0, "salta": 0}
+    PASSO = {"k": 0}
+    TOP_PASSO = {"v": None}      # il top-20 di UN SOLO passo: immune al riordino per costruzione
 
     def traccia(self, sito, prima, pavimento=None):
         """SOSTITUISCE `_traccia_d0`. PURE-READ: legge e somma, non scrive stato."""
@@ -234,6 +344,8 @@ def main():
                 ACC["v"] = np.concatenate([v, np.zeros(len(dx) - len(v))])
                 CRESCITA["pad"] += 1
             ACC["v"][:len(dx)] += dx
+            ACCK.aggiungi(ii, jj, dx, PASSO["k"])
+            TOP_PASSO["v"] = (ii.copy(), jj.copy(), dx.copy(), PASSO["k"])
 
     S.Rete._traccia_d0 = traccia
 
@@ -250,6 +362,7 @@ def main():
     for k in range(1, PASSI + 1):
         if (k - 1) % PPF == 0:
             S.passo_test()
+        PASSO["k"] = k
         S.scuoti_vuoto(net); net.step(); net.mitosi()
         net.rilassa_disegno(); net.memoria_hebbiana_moto()
         fatti = k
@@ -302,40 +415,72 @@ def main():
       % (len(viol), fatti))
     W("  (allungamenti dell'accumulatore: %d; chiamate saltate per lunghezza: %d)\n"
       % (CRESCITA["pad"], CRESCITA["salta"]))
-    v = ACC["v"]
-    if viol:
-        W("\n*** IL PREFISSO NON REGGE (prime violazioni ai passi %s). LA TABELLA NON SI STAMPA:\n"
-          % viol[:8])
-        W("    sarebbero numeri VERI sommati sull'ARCO SBAGLIATO. Dichiarato, non nascosto. ***\n")
-    elif v.size == 0:
-        W("\n*** nessun cumulato: `S09` non ha scritto. ***\n")
-    else:
-        ii = np.asarray(net.i); jj = np.asarray(net.j)
-        L = min(len(v), len(ii))
-        vv = v[:L]
-        cls = classe_arco(ii[:L], jj[:L])
-        d = np.asarray(net.d, dtype=float)[:L]
-        d0 = np.asarray(net.d0, dtype=float)[:L]
-        pos = np.asarray(net.pos, dtype=float)
-        Ld = np.linalg.norm(pos[jj[:L]] - pos[ii[:L]], axis=1) / np.maximum(d, 1e-300)
-        W("\nCONCENTRAZIONE: la frazione della spinta POSITIVA totale che sta nell'1 %% di archi\n")
-        W("  piu' spinti. Il valore sotto IPOTESI NULLA (spinta uniforme) e' 0.01.\n")
-        cpos = concentrazione(vv)
-        W("  misurata = %.5f    nullo = 0.01    rapporto = %.1fx\n"
-          % (cpos, cpos / 0.01 if np.isfinite(cpos) else float("nan")))
-        W("\n%6s %8s %8s %-20s | %13s | %10s %10s %8s\n"
-          % ("rango", "nodo i", "nodo j", "regione", "spinta cumulata", "d", "d0", "L/d"))
-        W("-" * 108 + "\n")
-        ordine = np.argsort(vv)[::-1][:20]
-        for r, a_ in enumerate(ordine, 1):
-            W("%6d %8d %8d %-20s | %13.6e | %10.5f %10.5f %8.3f\n"
-              % (r, int(ii[a_]), int(jj[a_]), ETICHETTE[cls[a_]], vv[a_],
-                 d[a_], d0[a_], Ld[a_]))
-        W("\ne i 5 archi piu' TIRATI GIU', per contrasto:\n")
-        for r, a_ in enumerate(np.argsort(vv)[:5], 1):
-            W("%6d %8d %8d %-20s | %13.6e | %10.5f %10.5f %8.3f\n"
-              % (r, int(ii[a_]), int(jj[a_]), ETICHETTE[cls[a_]], vv[a_],
-                 d[a_], d0[a_], Ld[a_]))
+    W("  -> IL CUMULATO POSIZIONALE E' INUTILIZZABILE, e per questo non si usa.\n")
+    W("     LA MITOSI TOGLIE archi (`self.i = concatenate([self.i[keep], a, m])`, `:5325`):\n")
+    W("     tutto cio' che segue un arco rimosso SLITTA. Si usa l'accumulatore PER CHIAVE.\n")
+    W("\nla guardia dell'accumulatore PER CHIAVE (coppia di nodi):\n")
+    W("  doppioni (due archi con la stessa coppia nello stesso passo): %d\n" % ACCK.doppioni)
+    W("  RISURREZIONI (una coppia sparisce e ricompare -> un arco DIVERSO eredita la chiave): %d\n"
+      % ACCK.risurrezioni)
+    W("  chiavi distinte viste in tutto il run: %d\n" % len(ACCK.chiavi))
+
+    ii = np.asarray(net.i); jj = np.asarray(net.j)
+    d = np.asarray(net.d, dtype=float)
+    d0 = np.asarray(net.d0, dtype=float)
+    pos = np.asarray(net.pos, dtype=float)
+    cls = classe_arco(ii, jj)
+    Ld = np.linalg.norm(pos[jj] - pos[ii], axis=1) / np.maximum(d, 1e-300)
+    vv, trovati = ACCK.leggi(ii, jj)
+    W("  archi VIVI ora con un cumulato: %d su %d\n" % (int(np.sum(trovati)), len(ii)))
+    _sporco = (ACCK.doppioni + ACCK.risurrezioni)
+    if _sporco:
+        W("\n  *** %d chiavi AMBIGUE: il cumulato per chiave e' SPORCO su quelle. Il numero e'\n"
+          % _sporco)
+        W("      dichiarato qui invece di essere nascosto; se e' grande davanti a %d, la\n"
+          % len(ACCK.chiavi))
+        W("      tabella cumulata NON si legge. ***\n")
+
+    W("\nCONCENTRAZIONE, sul cumulato PER CHIAVE: la frazione della spinta POSITIVA totale che\n")
+    W("  sta nell'1 %% di archi piu' spinti. Il valore sotto IPOTESI NULLA (uniforme) e' 0.01.\n")
+    cpos = concentrazione(vv)
+    W("  misurata = %.5f    nullo = 0.01    rapporto = %.1fx\n"
+      % (cpos, cpos / 0.01 if np.isfinite(cpos) else float("nan")))
+    cneg = concentrazione(-vv)
+    W("  e sulle SPINTE NEGATIVE (la compressione): %.5f    rapporto = %.1fx\n"
+      % (cneg, cneg / 0.01 if np.isfinite(cneg) else float("nan")))
+
+    W("\nI 20 ARCHI PIU' SPINTI VERSO L'ALTO (cumulato su %d passi, chiave = coppia di nodi)\n"
+      % fatti)
+    W("%6s %8s %8s %-20s | %13s | %10s %10s %8s\n"
+      % ("rango", "nodo i", "nodo j", "regione", "spinta cumul.", "d", "d0", "L/d"))
+    W("-" * 108 + "\n")
+    for r, a_ in enumerate(np.argsort(vv)[::-1][:20], 1):
+        W("%6d %8d %8d %-20s | %13.6e | %10.5f %10.5f %8.3f\n"
+          % (r, int(ii[a_]), int(jj[a_]), ETICHETTE[cls[a_]], vv[a_], d[a_], d0[a_], Ld[a_]))
+    W("\nI 20 ARCHI PIU' TIRATI GIU' -- e sono questi che portano il saldo, perche' il saldo\n")
+    W("  totale e' NEGATIVO e vive sul confine:\n")
+    W("%6s %8s %8s %-20s | %13s | %10s %10s %8s\n"
+      % ("rango", "nodo i", "nodo j", "regione", "spinta cumul.", "d", "d0", "L/d"))
+    W("-" * 108 + "\n")
+    for r, a_ in enumerate(np.argsort(vv)[:20], 1):
+        W("%6d %8d %8d %-20s | %13.6e | %10.5f %10.5f %8.3f\n"
+          % (r, int(ii[a_]), int(jj[a_]), ETICHETTE[cls[a_]], vv[a_], d[a_], d0[a_], Ld[a_]))
+
+    # ---------------- il top di UN SOLO passo: immune al riordino PER COSTRUZIONE
+    if TOP_PASSO["v"] is not None:
+        tii, tjj, tdx, tk = TOP_PASSO["v"]
+        W("\n" + "-" * 108 + "\n")
+        W("CONTROPROVA -- il top di UN SOLO PASSO (il %d), che NON cumula nulla e quindi e'\n" % tk)
+        W("  immune al riordino PER COSTRUZIONE. Se i nodi qui somigliano a quelli di sopra,\n")
+        W("  le due strade concordano; se no, il cumulato va guardato con sospetto.\n")
+        tcl = classe_arco(tii, tjj)
+        W("%6s %8s %8s %-20s | %13s\n"
+          % ("rango", "nodo i", "nodo j", "regione", "spinta nel passo"))
+        for r, a_ in enumerate(np.argsort(tdx)[:10], 1):
+            W("%6d %8d %8d %-20s | %13.6e\n"
+              % (r, int(tii[a_]), int(tjj[a_]), ETICHETTE[tcl[a_]], tdx[a_]))
+        W("  concentrazione delle DISCESE in questo singolo passo: %.5f  (nullo 0.01)\n"
+          % concentrazione(-tdx))
 
     W("\nLIMITI: UN seme, UNA scena, %d passi dalla semina. E questa misura dice DOVE la spinta\n"
       % fatti)
