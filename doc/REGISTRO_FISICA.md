@@ -582,6 +582,9 @@ avvertimento.**
 2. **Il pavimento `1e-6` è un vincolo o una difesa?** Oggi **morde**: `min(r)` è esattamente
    lui. **Un nodo con `f = 0` che tempo proprio ha?** *(Zero è una risposta fisica; `1.414e-6`
    è un numero scelto.)*
-3. **Il gauge è `median(|f|)` del passo PRECEDENTE** — cura dell'anello istantaneo *(`A6`)*.
+3. **⚠ L'ANELLO CHE `A6` TIENE D'OCCHIO, posto da Luca il 2026-09-22:** **l'orologio dello spinore si calcola dalla VARIAZIONE della fase dello spinore, e poi FA AVANZARE quella stessa fase.** `r` viene da `angle(psi_spin) − angle(psi_spin_prec)`; `dt_n = DT·r` entra nell'integrazione che **muove `psi_spin`**; al passo dopo `r` si rimisura da lì. **È un anello CHIUSO.**
+   **NON è retroazione ISTANTANEA** — lo snapshot è **ritardato** *(`_psi_spin_prec` è del passo precedente, promosso da `step()`)*, **e questo lo mette fuori dalla lettera di `A6`**. **Ma è esattamente la forma che `A6` sorveglia**, e va scritto invece di essere dedotto ogni volta da capo.
+   **NON DA CHIUDERE ORA.** La domanda è: *un orologio che misura sé stesso può derivare senza che nulla lo riporti indietro?* — e il candidato per deciderlo è la **dispersione di `r` a codice invariato fra semi**, che oggi **non è misurata**.
+4. **Il gauge è `median(|f|)` del passo PRECEDENTE** — cura dell'anello istantaneo *(`A6`)*.
    **Ma resta una statistica GLOBALE dentro una legge per nodo** *(`A2`)*. **È accettabile
    perché è un GAUGE, o è lo stesso difetto di `D01`?** **NON DECISO.**

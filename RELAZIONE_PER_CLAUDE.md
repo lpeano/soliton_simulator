@@ -12837,3 +12837,54 @@ confronta un referto vecchio con uno nuovo deve saperlo *(par.9-bis)*.
 **dormiente** *(`K_FRANGE = 0`)*, e va nei sospetti come **`S07`**.
 *(Curiosamente, **con `φ` su `2π` quella riga diventa corretta per costruzione**: la decisione
 la cura senza toccarla.)*
+
+### ㉻ **`φ` NON è l'azimut del Bloch — e questo toglie una delle quattro gambe di `B1`**
+
+> `R = |media(exp(i·Δ))|` con `Δ = wrap(atan2(nb_y, nb_x) − φ)`. **Statistica CIRCOLARE**,
+> non lineare. **Criterio scritto prima: `R ≥ 0.90` = coincidono.**
+
+| | misurato | nullo |
+|---|--:|--:|
+| **`R` con `φ`** | **`0.0201` … `0.1822`** | `~0.016` |
+| `R` con `phi_s` | `0.0762` … `0.2466` | `~0.016` |
+
+**Il criterio chiedeva `0.90`. Il massimo su 15 snapshot è `0.18`.**
+**E la funzione GIRA:** `_passo_spinoriale` è chiamato a `:4620` con `SPINORE_VIVO = True`.
+*(Il suo docstring si dichiara anche «ORFANO», ed è falso pure quello: **due frasi false
+nello stesso docstring**.)*
+
+> **⚠ QUESTO TOGLIE UNO DEI TUOI QUATTRO ARGOMENTI PER `B1`, e te lo dico prima di
+> procedere.** L'argomento era: *«`:2675` dice che `φ` è l'azimut del Bloch, e l'azimut ha
+> periodo `2π`»*. **La premessa è falsa.**
+>
+> **Gli altri tre reggono, e sono indipendenti:** ① **`31` righe su `31` leggono `φ` da
+> `exp`/`cos`/`sin`** — **è un conto** · ② due rappresentazioni = due ponti *(`A10`)* ·
+> ③ con `φ` su `2π` la soglia della mitosi torna `2π`.
+> **La decisione regge su TRE gambe invece di quattro**, e l'argomento caduto **non argomenta
+> per `4π`**: dice solo che `φ` non è ciò che il commento dichiara. **Procedo.**
+> **E apre una domanda nuova: se `φ` non è l'azimut, CHE COS'È?** → **`S08`**.
+> **Refutare non è spiegare.**
+
+### ㉼ **I tempi propri sono TRE, e sono tre grandezze diverse**
+
+**`:1319` ne dichiara già due**, ed è il codice a dirlo: *«i due tempi propri (metrico
+`tau_p = d/cs` e orologio `dt_n = DT·r`) sono SCOLLEGATI»*. **Con `tau_pp` sono tre.**
+
+| | mediane | correlazione *(nullo `1.4e-03`)* |
+|---|---|---|
+| **`r_arco`** | **oscilla** `0.34`…`1.40` | `corr(r, tau_pp)` = **`-0.25` … `+0.26`**, segno **non concorde** |
+| **`tau_pp`** | **inchiodato** `1.10`…`1.42` | `corr(tau_pp, d/cs)` = `-0.08` … `+0.48`, non concorde |
+| **`d/cs`** | **CRESCE MONOTONO** `0.69` → `1.54` | `corr(r, d/cs)` = **`+0.05` … `+0.54`, positiva OVUNQUE** |
+
+> **`d/cs` è l'unico che si muove in modo monotono**, cioè **l'unico che si comporta come il
+> tempo di un universo che si espande.**
+> **E `corr(r, d/cs)` è la più forte delle tre:** orologio e metrica **non sono così
+> scollegati come `:1319` dichiara** — **ma la correlazione CALA nel tempo** *(`+0.54` al passo
+> 240, `+0.05` al 600)*, **e con un seme solo non si distingue una tendenza da una
+> fluttuazione.**
+
+**CHI LEGGE COSA, dall'AST:** `r`/`dt_n` in **7** funzioni · `d/cs` in **6** · **`tau_pp` in
+UNA SOLA**. **`tau_pp` è locale alla mitosi**, e la conseguenza per l'unificazione è concreta:
+**toglierlo tocca una funzione, non il sistema.**
+
+**✅ `D32` si estende: non due tempi, TRE.** **Nessuna unificazione ora.**
