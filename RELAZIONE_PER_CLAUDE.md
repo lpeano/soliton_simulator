@@ -11629,3 +11629,39 @@ manca, **compare nella sezione dei non dichiarati, dove si vede**. Non puo' spar
 **Il collaudo `K6` e' quello che rende credibile `K1`:** un cercatore **menomato**, che guarda
 solo gli `Assign`, **perde `peq`, `rho` e `tw`**. Senza quel caso, `K1` direbbe *«trovati
 tutti»* **senza poterlo sapere**.
+
+### ㉗ **`CHK3-D`: i difetti nuovi contro le misure gia' fatte — e il costo, dichiarato prima**
+
+> **Richiesta di Luca, 2026-09-22.** **Non ora: al CHECKPOINT.** `G4` continua senza
+> interruzioni. **Solo misure e letture del sorgente, nessuna cura**, e **le conseguenze sulle
+> tre prove dell'ipotesi si scrivono come DOMANDE, non come risposte.**
+
+**Due difetti nuovi vanno messi CONTRO le misure gia' fatte:**
+- **`D27`** — **il grafo e' in quattro componenti che non si toccano mai.** Per `G1`, `G2`,
+  `G3` e `G4`: archi e nodi per componente, e **se saturazione, saldo per regione, crescita di
+  `d0` e bilancio cambiano misurati componente per componente**. **E dove stanno le tre masse.**
+- **`D25`** — **il tempo che non scorre.** Quali leggi leggono il tempo proprio, e **quanto
+  del loro effetto si perde nel `93 %` dei nodi fermi**.
+
+**IL COSTO, VERIFICATO DAL DISCO E NON STIMATO A OCCHIO.** Ho guardato **cosa c'e' davvero negli
+snapshot** prima di rispondere: **`i`, `j` e `_r_corrente` ci sono gia'**, quindi **la maggior
+parte si fa SENZA RUN**.
+
+| cosa | run? | costo |
+|---|---|---|
+| `D27` archi/nodi per componente + dove stanno le masse | **no** | ~2 min |
+| `D27` crescita di `d0` per componente | **no** | incluso |
+| `D27` saturazione e saldo per regione, per componente | **si'**, 120 passi | **~7 min** |
+| `D27` **bilancio** per componente, `G4` | **si'**, 600 passi × braccio | **~70 min** |
+| `D25` quali leggi leggono il tempo proprio | **no**, sorgente | ~15 min |
+| `D25` quanti nodi fermi | **no**, `_r_corrente` e' li' | incluso |
+| `D25` effetto perso per legge | **si'**, stessa rigiocata | incluso |
+
+> **`~17` minuti senza il bilancio per componente, `~87` con.** Il pezzo caro e' **uno**, e
+> **l'alternativa e' un braccio solo: `35` minuti.**
+
+**⚠ E UNA COSA CHE NON FARO' SENZA VIA LIBERA**, perche' sarebbe la scorciatoia comoda: il
+**braccio di spegnimento non e' ancora partito**, quindi potrei aggiungergli il conteggio per
+componente **senza costo**. **Non lo faccio.** Cambierebbe **il blob dello strumento fra i due
+bracci**, e li renderebbe **non confrontabili** — che e' esattamente il difetto contro cui
+esiste il pattern del controllo dell'involucro. **I due bracci restano identici.**

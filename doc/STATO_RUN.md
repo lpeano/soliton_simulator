@@ -270,6 +270,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **G4-bis** | **IL SECONDO BRACCIO: spegnere l'INTERO blocco di `mem_mot`**, spostamento di fase compreso | richiesta di Luca, 2026-09-22 | ⏸ **CONDIZIONATO: si fa SE `d0` cresce lo stesso in `G4`**, e **prima del CHECKPOINT**. Serve a escludere **l'effetto INDIRETTO** di `mem_mot` *(la proiezione trasversale di `:6016`)*, che `MEM_MOTO` **non** tocca |
 | **G4-bis** | **`MEM_ARCO` — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE** *(aggiunta di Luca al §4, 2026-09-22)* | GLOBALE-DISEGNO §4 | ⏸ **DERIVATA SI', CODICE NO, prima del `CHK3`.** **Dopo** lo spegnimento di `MEM_MOTO`: se il sistema **si rompe** senza, `MEM_ARCO` e' **la cura da proporre**; se **sta in piedi**, resta **registrata come alternativa** |
 | **CHK3** | **CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PRIMA** | GLOBALE-DISEGNO §5 | ⏸ **QUI CI SI FERMA.** Le cure solo **DERIVATE, non scritte** |
+| **CHK3-D** | **Nel referto del `CHK3`, la sezione «I DIFETTI NUOVI CONTRO LE MISURE GIA' FATTE»** — `D27` *(quattro componenti)* e `D25` *(il tempo che non scorre)* **contro `G1`, `G2`, `G3`, `G4`** | richiesta di Luca, 2026-09-22 | ⏸ **AL CHECKPOINT, non prima.** **Solo misure e letture del sorgente, nessuna cura.** **Le conseguenze sulle tre prove dell'ipotesi si scrivono come DOMANDE.** Il costo e' dichiarato qui sotto, e **i run si fanno solo col via libera di Luca** |
 | **PATTERN** | **`doc/PATTERN_DI_PROVA.md`** — la lista di controllo di ogni prova | MANDATO-PATTERN | ✅ **SCRITTO** *(48 righe)*, **5 STANDARD + 1 IN PROVA**, una riga sola in `CLAUDE.md`. **Il collaudo del §4 NON e' tutto verde:** vedi le due voci qui sotto |
 | **PAT-1** | **`_dove_spinge_la_gravita.py` non rispetta il pattern `5`** *(nessun CONTROLLO DELL'INVOLUCRO)* | PATTERN §4 | ⏸ **PRIMA del suo prossimo uso.** Sostituisce `_traccia_d0` e rigioca dalla semina, **senza mai verificare che la rigiocata riproduca `_val600`**. **I numeri di `Z105`/`Z106` restano quelli misurati**, ma la loro FEDELTA' alla validazione **non e' stata dimostrata** |
 | **PAT-2** | **`_spegni_grav_bifase.py:184` non rispetta il pattern `2`** *(usa `max\|Δ\|` invece delle FIRME)* | PATTERN §4 | ⏸ **PRIMA del suo prossimo uso.** `confronta()` e' un controllo di IDENTITA' e va fatto sui **byte**: oggi `+0.0` contro `-0.0` passerebbe per identico. *(Il cast dei complessi e' gia' corretto, `abc5b49`.)* |
@@ -452,6 +453,38 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **S04** | **La crescita e' NUCLEAZIONE, non stiramento**: la mediana sale perche' **nascono lunghi e muoiono corti** | le tre mediane *(nati, morti, vivi)* del bilancio di `G4` | in attesa |
 | **S05** | **La compressione `d/d0 < 1` e' un difetto** e non una fase | `G3` dice che **peggiora** senza gravita' *(`0.7489`→`0.6258`)*: serve una misura che ne trovi la CAUSA | in attesa |
 
+
+> **⚠⚠ `CHK3-D`: LA SEZIONE DEL CHECKPOINT SUI DIFETTI NUOVI, E IL SUO COSTO.**
+> **Richiesta di Luca, 2026-09-22.** Nel referto del `CHK3` va una sezione **«I DIFETTI
+> NUOVI CONTRO LE MISURE GIA' FATTE»**:
+> **① `D27` — IL GRAFO IN QUATTRO COMPONENTI.** Per `G1`, `G2`, `G3` e `G4`: **quanti
+> archi e nodi** stanno in ciascuna componente, e **se i numeri principali cambiano misurati
+> componente per componente** *(saturazione, saldo per regione, crescita di `d0`, bilancio)*.
+> **E le tre masse della scena stanno in componenti diverse?**
+> **② `D25` — IL TEMPO CHE NON SCORRE.** **Quali schede del registro leggono il tempo
+> proprio**, e **quanto del loro effetto si perde nel `93 %` dei nodi fermi**.
+>
+> **IL COSTO, DICHIARATO PRIMA DI FARE QUALUNQUE RUN** *(e dopo aver verificato dal disco cosa
+> contengono gli snapshot: `i`, `j` e **`_r_corrente`** ci sono gia')*:
+>
+> | cosa | run? | costo |
+> |---|---|---|
+> | `D27` archi/nodi per componente + **dove stanno le tre masse** | **no**, da snapshot | ~2 min |
+> | `D27` crescita di `d0` per componente su `G1`/`G3`/`G4` | **no**, da snapshot | incluso |
+> | `D27` saturazione e saldo per regione, per componente | **si'**, rigiocata 120 passi | **~7 min** |
+> | `D27` **bilancio** per componente, `G4` | **si'**, 600 passi per braccio | **~35 min × 2** |
+> | `D25` quali leggi leggono il tempo proprio | **no**, lettura del sorgente | ~15 min |
+> | `D25` quanti nodi fermi, distribuzione di `r` | **no**, `_r_corrente` e' nello snapshot | incluso |
+> | `D25` effetto perso **per legge** | **si'**, la stessa rigiocata da 120 passi | incluso |
+>
+> **TOTALE: ~17 minuti senza il bilancio per componente, ~87 con.** Il pezzo caro e' **uno solo**,
+> e **l'alternativa e' farlo su UN braccio (35 min)**: la domanda *«le componenti si
+> comportano diversamente?»* riceve risposta gia' da uno.
+>
+> **⚠ COSA NON FARO' SENZA VIA LIBERA, e lo segnalo perche' sarebbe tentante:** il braccio di
+> spegnimento **non e' ancora partito**, quindi potrei aggiungergli il conteggio per componente
+> «gratis». **NON lo faccio: cambierebbe il blob dello strumento fra i due bracci e li
+> renderebbe NON CONFRONTABILI.** I due bracci restano identici.
 
 > **⚠⚠ IL MANDATO DEI PATTERN DI PROVA (2026-09-22), col §3 GIA' SOSTITUITO
 > DALL'INTEGRAZIONE DI LUCA.**
