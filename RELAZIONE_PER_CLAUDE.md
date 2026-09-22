@@ -10794,3 +10794,45 @@ spegnimento** (`G3`). **LIMITI: un seme, una scena, 5 snapshot.**
 **⚠ E il criterio e' stato collaudato PRIMA** su due casi a risposta nota (`P1-sexies`):
 `r = +0.9976` su quello che deve dipendere, `r = -0.0005` su quello che non deve. **Un criterio
 che non puo' fallire non e' un criterio.**
+
+### ⑴ **`MEM_ARCO` — la memoria del moto non si butta: si TRADUCE** *(aggiunta di Luca al §4)*
+
+**L'osservazione di Luca, e il sorgente la conferma** (`:5631-5648`): la legge **parte gia' da una
+grandezza relazionale** e ci **ritorna**, facendo un giro dal disegno nel mezzo.
+
+```
+dtw     = twn[jj] - twn[ii]                      <- GIA' PER ARCO, gia' relazionale
+dirarc  = (pos[jj] - pos[ii]) / L                <- IL DISEGNO
+grad_tw = (bincount(ii, dtw*dirarc)
+           + bincount(jj, dtw*dirarc)) / _deg    <- vettore di NODO
+mem_mot <- (1-plast)*mem_mot + plast*grad_tw
+memedge = 0.5*(mem_mot[ii]*I[ii]/Imed + mem_mot[jj]*I[jj]/Imed)    <- Imed e' GLOBALE (A2)
+proj    = sum(memedge * dirarc)                  <- DI NUOVO UN NUMERO PER ARCO
+d0[mask] += _sd0(clip(proj, -0.01*median(d0), +0.01*median(d0)))
+```
+
+**Il tetto `0.01*median(d0)` viola quattro cose in una riga:** coefficiente scelto (`A1`),
+statistica globale (`A2`), **dipende da cio' che limita** e **taglio secco** (`A11` corollari 2 e 7).
+
+**LA FORMA CANDIDATA, `MEM_ARCO`** *(flag nuovo, spento di default, byte-inerte)*: la memoria vive
+**sull'arco orientato**, positiva da `i` a `j` e negativa al contrario, con la **stessa legge**
+`m_arco <- (1-plast)*m_arco + plast*dtw`. **Nessuna posizione, nessuna direzione del disegno.**
+`plast` e il peso della massa **derivati in forma locale**, senza `Imed`. **Il tetto e' il passo
+causale.** La parte **«di lato»** — `dir_laterale`, lo spostamento di fase a `:6016`,
+la rotazione orbitale — diventa **circolazione sui giri chiusi di archi**, **la stessa
+grandezza dell'olonomia**.
+
+> **⚠ UN FATTO DAL SORGENTE CHE LA DERIVAZIONE DEVE AFFRONTARE** — non un'obiezione alla
+> proposta, una cosa da chiudere dentro di essa. **Il giro per il nodo NON e' l'identita':**
+> `bincount(ii,·) + bincount(jj,·)` diviso `_deg` **media l'arco con TUTTI GLI ALTRI
+> ARCHI DELLO STESSO NODO**, pesati dalle loro direzioni **nel disegno**. **Cio' che passa per
+> `pos` non e' solo un giro: e' il PESO con cui i vicini si mescolano.** Una `m_arco` puramente
+> per-arco **perde l'accoppiamento col vicinato**: la derivazione deve dire **se serve**, e se si'
+> **da dove viene quel peso una volta tolto il disegno**.
+
+**E `S08_proj` non e' un dettaglio: in `Z102` e' lo scrittore PIU' POSITIVO di tutti** (`+8.65e+04`).
+
+**ORDINE, imposto da Luca:** **prima la prova di spegnimento di `MEM_MOTO`** (`G4`). Se il sistema
+**si rompe** senza la memoria del moto, `MEM_ARCO` e' **la cura da proporre al `CHK3`**; se **sta
+in piedi** senza, `MEM_ARCO` resta **registrata come alternativa**. **In entrambi i casi: derivata
+si', codice no, prima del checkpoint.** — **`Z104`**

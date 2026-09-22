@@ -267,6 +267,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **G2** | **§2 DOVE SPINGE LA GRAVITA'** — saldo di `S09` **per regione**, salite e discese, e i 20 archi piu' spinti | GLOBALE-DISEGNO §2 | ⏸ rigiocata 120 passi, `TRACCIA_D0` |
 | **G3** | **§3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE** — `GRAV_BIFASE = False` **impostato dalla rigiocata sul MODULO**, 600 passi | GLOBALE-DISEGNO §3 | ⏸ **nessuna modifica al simulatore ne' al driver** |
 | **G4** | **§4 PROVA DI SPEGNIMENTO: la sola MEMORIA DEL MOTO** — flag nuovo `MEM_MOTO`, `True` di default, che salta **solo** il blocco di `mem_mot` | GLOBALE-DISEGNO §4 | ⏸ **con sigillo BLOCCANTE di byte-identita'**. **⚠ `MEM_HEBB = False` NON si usa: spegne l'INTERA funzione, gravita' e coesione comprese** |
+| **G4-bis** | **`MEM_ARCO` — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE** *(aggiunta di Luca al §4, 2026-09-22)* | GLOBALE-DISEGNO §4 | ⏸ **DERIVATA SI', CODICE NO, prima del `CHK3`.** **Dopo** lo spegnimento di `MEM_MOTO`: se il sistema **si rompe** senza, `MEM_ARCO` e' **la cura da proporre**; se **sta in piedi**, resta **registrata come alternativa** |
 | **CHK3** | **CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PRIMA** | GLOBALE-DISEGNO §5 | ⏸ **QUI CI SI FERMA.** Le cure solo **DERIVATE, non scritte** |
 
 | **C5-res** | **I RESIDUI DI `C5`** — **`I4`** la scatola nera *(rigiocare da solo il passo in cui scatta un invariante)*, **`I5`** la tabella degli underflow **per RIGA**, e la **MODALITA' FINE** *(controllo dopo OGNI scrittura invece che a fine passo)* | mandato `C5`, decisione di Luca 21/9 | ⏸ **DOPO la cura di `d0` e PRIMA del run lungo. Stasera no.** |
@@ -277,6 +278,28 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | 8 | `M2`/`M3` cosmologici *(pesanti)* | COSMOLOGICO | ⏸ |
 | 9 | **CHECKPOINT FINALE a Luca** | — | ⏸ |
 | 10 | `Z47` PARTE ② — lo stacco | `MANDATO_Z47_coda` | 🔒 **NON parte senza il via libera di Luca** |
+
+> **⚠ AGGIUNTA DI LUCA AL §4 (2026-09-22): LA MEMORIA DEL MOTO NON SI BUTTA, SI TRADUCE.**
+> **L'osservazione, e il codice la conferma** (`:5631-5648`): la legge **parte gia' da una
+> grandezza RELAZIONALE**, `dtw = twn[jj] - twn[ii]` **sull'arco**; la porta in un **vettore di
+> nodo** con `dirarc` *(che viene da `pos`, cioe' dal DISEGNO)*; e poi la **riproietta sull'arco**
+> con lo stesso `dirarc`. **In `d0` entra `proj`, un numero CON SEGNO PER ARCO.**
+> **`MEM_ARCO`** *(flag nuovo, spento di default, byte-inerte)*: la memoria vive **sull'arco
+> orientato**, positiva da `i` a `j`, e si aggiorna con la stessa legge,
+> `m_arco <- (1-plast)*m_arco + plast*dtw`. **Nessuna posizione, nessuna direzione del disegno.**
+> `plast` e il peso della massa **derivati in forma LOCALE, senza `Imed` globale**. **Il tetto e'
+> il PASSO CAUSALE**, non `0.01*median(d0)`.
+> La parte **«di lato»** *(`dir_laterale`, lo spostamento di fase a `:6016`, la rotazione
+> orbitale)* diventa **CIRCOLAZIONE sui giri chiusi di archi**, **la stessa grandezza
+> dell'olonomia**. **Per ora solo DERIVATA e riportata, non scritta.**
+>
+> **⚠ E UN FATTO DAL SORGENTE CHE LA DERIVAZIONE DEVE AFFRONTARE, non un'obiezione:** il giro
+> per il nodo **non e' l'identita'**. `np.bincount(ii, dtw*dirarc) + np.bincount(jj, dtw*dirarc)`
+> diviso `_deg` **MEDIA l'arco con TUTTI GLI ALTRI ARCHI DELLO STESSO NODO**, pesati dalle loro
+> direzioni **nel disegno**. **Cio' che passa per `pos` non e' solo un giro: e' il PESO con cui i
+> vicini si mescolano.** Una `m_arco` puramente per-arco **perderebbe l'accoppiamento col
+> vicinato**, e la derivazione deve dire **se quell'accoppiamento serve** — e se si', **da
+> dove viene il peso una volta tolto il disegno.**
 
 > **⚠⚠ IL MANDATO DEL 2026-09-22: IL DISEGNO DENTRO LA FISICA.**
 > **Tre fatti letti dal codice e VERIFICATI dal disco:**
