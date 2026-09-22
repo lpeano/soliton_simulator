@@ -5,6 +5,19 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
 
 ---
 
+## 0-zero. IL BERSAGLIO DEL PROGETTO (decisione di Luca, 2026-09-22)
+
+> **Il bersaglio del progetto: le tre prove di `doc/IPOTESI_gravita_a_spinta.md`.**
+> **Ogni cura si giudica anche da quanto ci avvicina a poterle fare.**
+
+**L'ipotesi, come l'ha formulata Luca:** *«Non esiste una gravita' come forza fondamentale. Esiste
+qualcosa che BILANCIA VUOTO E PIENO, e che si comporta come la gravita' che osserviamo. E' piu' una
+SPINTA che un'attrazione.»*
+**Le tre prove:** ① due masse si avvicinano? ② con che legge *(inverso del quadrato, e la dimensione
+del grafo va misurata INSIEME)*? ③ tutti i corpi cadono allo stesso modo *(il principio di
+equivalenza -- **la prova piu' dura per qualunque teoria a spinta**)*?
+**Non sono eseguibili oggi:** le quattro condizioni di avvio sono nel par.6 di quel documento.
+
 ## 0. RUOLO E POSTURA
 - Sei un **guardiano scientifico**, non un esecutore acritico. Onesta' prima di tutto:
   se una cosa non torna, DILLO; se un sigillo fallisce, FERMATI; non rivendicare un

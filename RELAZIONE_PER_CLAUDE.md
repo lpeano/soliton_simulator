@@ -10878,3 +10878,68 @@ strumento diverso. E **`S10_grav_med` non ha girato**: zero invocazioni, come in
 > era stato collaudato prima, ed **era quello che DOVEVA fallire**.
 > **I 20 archi si misurano lo stesso**, con un accumulatore che identifica l'arco dalla **coppia di
 > nodi** invece che dalla posizione. E' il passo successivo. — **`Z105`**
+
+### ⑶ **IL BERSAGLIO DEL PROGETTO: l'ipotesi della gravita' a SPINTA, e le tre prove**
+
+> **SOLO TESTO.** Nessun codice, nessun run. **Nessuna prova e' stata eseguita**, e non lo saranno
+> finche' non valgono le quattro condizioni del par.6 del documento.
+
+**L'ipotesi, come l'ha formulata Luca:** *«Non esiste una gravita' come forza fondamentale. Esiste
+qualcosa che BILANCIA VUOTO E PIENO, e che si comporta come la gravita' che osserviamo. E' piu' una
+SPINTA che un'attrazione.»* — **`doc/IPOTESI_gravita_a_spinta.md`**
+
+**IL CONTESTO E' VERIFICATO DA FONTI, non scritto a memoria.** La **gravita' a spinta di Le Sage**
+*(Fatio de Duillier 1690; Le Sage 1748/1784)* ha **la stessa forma**: una spinta isotropa, due corpi
+che si fanno **ombra**, e l'inverso del quadrato perche' l'ombra si diluisce come una sfera.
+**E' caduta per QUATTRO obiezioni precise, e sono le quattro domande che anche questo modello deve
+affrontare:**
+
+| | l'obiezione | chi | il numero |
+|---|---|---|---|
+| **O1** | **ATTRITO** sulle orbite | Laplace, Maxwell, Poincare' | `v` dovrebbe essere **10^8 volte la luce** |
+| **O2** | **RISCALDAMENTO** dagli urti anelastici | Maxwell 1875, Poincare' 1908 | la Terra a **`10^26` gradi al secondo** |
+| **O3** | **SCHERMATURA**: la massa non e' piu' additiva | Darwin 1905, Poincare' | **rompe il principio di equivalenza** |
+| **O4** | **ENERGIA** non bilanciata | Maxwell, Poincare' | la massa della Terra **raddoppierebbe** |
+
+**Come si trasportano qui — e questo e' RAGIONAMENTO, non misura:** **`O1` si trasporta**
+*(una massa in moto nel grafo viene frenata?)*; **`O2` si trasporta in forma diversa**, e **ne
+abbiamo gia' un caso: il freno asimmetrico di `Z102`, che AGGIUNGE `+3.205e+05` — da dove viene
+quell'energia?**; **`O3` si trasporta INTERO** ed e' la **PROVA 3**; **`O4` non si trasporta
+direttamente**, e lo dico invece di forzarlo.
+
+**E le forme moderne:** **Jacobson (1995)** deriva **le equazioni di Einstein** da `dQ = T dS` sugli
+orizzonti di Rindler locali — *«l'equazione di Einstein e' un'equazione di stato»*;
+**Verlinde (2010/2011)** ne fa una **forza entropica**. **In comune con l'ipotesi di Luca: la
+gravita' ESCE dal modello invece di esserci messa, e il soggetto e' una SUPERFICIE.**
+**Non in comune: li' la grandezza che bilancia e' l'ENTROPIA.** Non sono la stessa teoria, e dirlo
+sarebbe un'associazione, non un fatto (`P1`).
+
+**IL PRIMO RISCONTRO E' GIA' MISURATO, ED E' `Z105`:** la spinta **si cancella al 98 % dentro il
+vuoto e dentro le masse**, e vale il **107 % del saldo totale sul CONFINE**. **E' coerente con
+*«qualcosa che bilancia vuoto e pieno»*.**
+> **⚠ MA NON E' UNA CONFERMA, e va detto per primo: e' misurato su un sistema che ha ancora IL
+> DISEGNO DENTRO IL POZZO** (`Z103`, dove al passo 600 **un arco su quattro** ha il disegno piu' del
+> doppio della distanza vera, **con dipendenza dal centro**). **Resta possibile che il «confine»
+> sia dove il DISEGNO e' piu' distorto, invece che dove la FISICA e' piu' attiva. VA RIMISURATO
+> DOPO LA CURA DEL POZZO.**
+
+**E UNA DOMANDA APERTA, registrata e non chiusa.** Nella gravita' osservata lo spazio radiale vicino
+a una massa e' **STIRATO**; qui il confine e' **COMPRESSO**. **Ma ci sono DUE distanze:** la
+**somma delle `d`** e il **numero di PASSI**. Se vicino alle masse i legami sono piu' **corti** ma
+piu' **numerosi**, contando i passi lo spazio risulta **stirato** e contando le `d` **compresso**:
+**segni opposti per lo stesso sistema.** **Quale sia quella fisica — e se diano lo stesso segno
+— va MISURATO.**
+
+**Le tre prove, coi criteri scritti PRIMA:** ① **due masse si avvicinano?** *(distanza di
+GRAFO; controllo con UNA sola massa, per separare l'avvicinamento dall'espansione del vuoto)*;
+② **con che legge?** *(pendenza `-2` in log-log — **ma `-2` vale in dimensione 3, e la
+dimensione effettiva del grafo va misurata INSIEME**, senno' un `-1.6` e' indistinguibile fra
+«legge sbagliata» e «dimensione 2.6»)*; ③ **tutti i corpi cadono uguale?**
+*(il principio di equivalenza: se l'accelerazione va come la SUPERFICIE invece che come la massa,
+**non e' un dettaglio da aggiustare: e' `O3`, ed e' cio' che ha ucciso Le Sage**)*.
+**Per ognuna: >= 4 semi.**
+
+**Le quattro condizioni di avvio** — disegno fuori dalla gravita', spinta locale con le
+dimensioni giuste, run lungo sano, memoria del moto risolta — **non valgono oggi.** Fino ad
+allora **le tre prove sono il BERSAGLIO: danno una direzione al lavoro di pulizia**, ed e' per
+questo che stanno **in testa a `CLAUDE.md`**.
