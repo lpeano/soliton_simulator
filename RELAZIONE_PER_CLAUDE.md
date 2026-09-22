@@ -11512,3 +11512,49 @@ il cui messaggio contiene `DIFETTO ACCLARATO:`, `SOSPETTO:` o `PROMOSSO:` **senz
 **rifiuta** quando la coda manca · **passa** quando c'e' · **passa** quando non c'e'
 nessuna dichiarazione. **E il limite di sempre va ridetto: i hook non sono versionati da git**, un
 clone nuovo non ce l'ha finche' non lo installa.
+
+### ㉔ **Il triage: OGNI voce `CODICE` ha un esito — il mio recupero ne copriva 15 su 37**
+
+> **Luca ha contato, io no.** Il recupero di `ccf1f73` ne dichiarava quindici e **ne mancavano
+> ventuno, senza motivazione**. **Tabella GENERATA** da `csv/_seal_fork/_triage_difetti.py`
+> (`P1-ter`), **non scritta a mano**.
+
+**IL MIO ERRORE DI ESTRAZIONE, ed e' preciso:** cercavo l'ultimo `**Zxx**` **prima** della parola
+`CODICE`, ma **le righe del registro CITANO altre voci nel corpo**, quindi **l'ID pescato era
+spesso quello CITATO e non quello della riga**. Ora si parte dai **confini di riga**.
+
+**E L'ELENCO NON E' RIPRODUCIBILE DA UN FILTRO MECCANICO.** Sul file di oggi: il **tag**
+`[... · CODICE]` marca **11** voci · la parola `CODICE` in maiuscolo **20** ·
+`codice` senza distinzione di maiuscole **49**. **Nessuno di questi da' 36.** L'elenco autorevole
+e' quello **esplicito di Luca**, ed e' **37 e non 36 perche' `Z9-bis` e `Z10` mappano entrambe su
+`D07`** — lo dico invece di aggiustare il conto.
+
+**L'ESITO: `10` difetti nuovi · `20` gia' coperte · `7` non sono difetti.**
+
+| nuovo | da | il difetto | stato |
+|---|---|---|---|
+| **`D20`** | `Z1` | la correzione su `inerzia` **non cablata**, e **il gate che la autorizzava aveva misurato un'altra grandezza** | `APERTO` |
+| **`D21`** | `Z4` | `_floor_d0` **sospesa**, e i due rami violano **assiomi diversi** | `APERTO` |
+| **`D22`** | `Z24` | il **denominatore per grado**, lo stesso schema in **almeno quattro punti** | **`CURATO`** *(`Z25`, sigillo `12/12`)* |
+| **`D23`** | `Z37` | **la cucitura dello snapshot fallisce su entrambi i fronti**, e non e' cablata | `APERTO` |
+| **`D24`** | `Z40` | **`A2` violato da `Lam = mean(I)`**, e **la violazione e' la ragione per cui il pezzo funziona** | `APERTO` |
+| **`D25`** | `Z46` | **il gauge del tempo e' la costante `1e-9`**, e il `93 %` dei nodi non invecchia | `APERTO` |
+| **`D26`** | `Z53` | le coorti **non sopravvivevano allo snapshot** | **`CURATO`** *(sigillo `9/9`)* |
+| **`D27`** | `Z65` | **il grafo e' in QUATTRO componenti che non si toccano mai** | `APERTO` |
+| **`D28`** | `Z74` | **`nsub` esplode tirato da POCHISSIMI archi** | `APERTO` |
+| **`D29`** | `Z77` | **cinque nodi di VUOTO sono i piu' connessi dell'intero sistema** | `APERTO` |
+
+> **`D27` merita una riga a parte:** se il grafo e' in **quattro componenti separate**, **una
+> distanza SUL GRAFO fra componenti diverse non esiste** — e **le tre prove dell'ipotesi la
+> usano tutte e tre**. E' un difetto che tocca **il bersaglio del progetto**.
+
+**Le sette che NON sono difetti**, ciascuna col motivo: `Z36` *(un rapporto su una grandezza
+minuscola, gia' ri-letto)* · `Z38` *(la mia obiezione era refutata)* · `Z39` *(un fatto
+di `CLAUDE.md` caduto, gia' corretto)* · `Z70` *(corregge una lettura)* · `Z83` *(una
+DOMANDA dichiarata)* · `Z84` *(descrive un meccanismo, e alimenta `S01`)* · `Z86` *(un
+difetto di CRITERIO, non di codice: vive nei pattern)*.
+
+**⚠ LA CLASSIFICAZIONE E' UN GIUDIZIO MIO**, dichiarato riga per riga. **Lo script garantisce
+che sia COMPLETA e MOTIVATA, non che sia giusta**: ogni riga porta il perche', cosi' e'
+contestabile. E **`Z79` porta un dubbio dichiarato**: e' `GIA' COPERTA` da `D18`, ma **non ho
+rimisurato** che `COES_ADIM` abbia davvero tolto il clip che scalava con `d0`.

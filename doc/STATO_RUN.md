@@ -368,6 +368,72 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **D17** | **`peq` diventava NEGATIVO e il pavimento `max(peq, 1e-9)` NE RIBALTAVA IL SEGNO** *(da `-3.72` a `+1.8e+06`)* | `Z94` | `PEQ_ESATTO` + `ANOM_SIMM` *(`C1`, `C1-bis`)* | **`CURATO`** |
 | **D18** | **`COES_ADIM` leggeva ISTANTI MISTI e il suo tetto era GLOBALE** | `Z92` · `A5` | `COES_CAUSALE` *(`C4`)* | **`CURATO`** |
 | **D19** | **OTTO grandezze che la semina legge erano INERTI SUL VUOTO in ogni run di epoca 1** | `Z88` | la cura del mondo-dopo-i-flag | **`CURATO`** |
+<!-- DIFETTI-NUOVI-INIZIO -->
+| **D20** | La correzione (1) su `inerzia` NON e' stata cablata, e **il gate che la autorizzava aveva misurato UN'ALTRA GRANDEZZA** | `Z1` | — | `APERTO` |
+| **D21** | `_floor_d0` e' SOSPESA, e **i due rami violano assiomi DIVERSI**: la scelta non e' stata fatta | `Z4` | — | `APERTO` |
+| **D22** | Il DENOMINATORE PER GRADO: la misura non distingue (A) da (B), ma **(B) cade per DIMOSTRAZIONE**, e lo stesso schema e' in **almeno quattro punti** | `Z24` | — | `CURATO` |
+| **D23** | **La cucitura dello snapshot FALLISCE su entrambi i fronti**, e si DIMOSTRA perche'. **NON CABLATA** | `Z37` | — | `APERTO` |
+| **D24** | **`A2` e' VIOLATO da `Lam = mean(I)`** -- una media GLOBALE dentro una legge locale -- **e la violazione e' la ragione per cui il pezzo funziona** | `Z40` | — | `APERTO` |
+| **D25** | **Il gauge del tempo e' la costante `1e-9`**, e il `93 %` dei nodi non invecchia: sono sempre gli stessi, e sono le tre masse | `Z46` | — | `APERTO` |
+| **D26** | Le coorti **non sopravvivevano allo SNAPSHOT**: dopo un salva/ricarica il lignaggio ripartiva VUOTO | `Z53` | — | `CURATO` |
+| **D27** | **Il grafo e' in QUATTRO COMPONENTI che non si toccano mai**, e la bimodalita' del grado e' la semina. **Una distanza SUL GRAFO fra componenti diverse non esiste**, e le tre prove dell'ipotesi la usano | `Z65` | — | `APERTO` |
+| **D28** | **`nsub` esplode e lo tira `max(|vd|)` su POCHISSIMI archi**: il costo dell'intero sistema e' governato da una manciata di archi | `Z74` | — | `APERTO` |
+| **D29** | **CINQUE NODI DI VUOTO sono i piu' connessi dell'intero sistema**: il vuoto ha degli HUB, e non dovrebbe averne | `Z77` | — | `APERTO` |
+<!-- DIFETTI-NUOVI-FINE -->
+
+
+<!-- TRIAGE-INIZIO -->
+
+### ESITO DI OGNI VOCE `CODICE` DI `RAMIFICAZIONI.md` — **tabella GENERATA**
+
+> **GENERATA DA CODICE** (`P1-ter`) da `csv/_seal_fork/_triage_difetti.py`. **Nessuna voce resta senza esito**, e non e' una promessa: se una sola ne fosse priva, **lo script fallisce e non scrive niente**.
+>
+> **⚠ L'ELENCO NON E' RIPRODUCIBILE DA UN FILTRO MECCANICO, e va detto:** sul file di oggi il **tag** `[... · CODICE]` marca **11** voci, la parola `CODICE` in maiuscolo **20**, `codice` senza distinzione di maiuscole **49**. **Nessuno di questi da' 36.** L'elenco autorevole e' quello **esplicito di Luca**: le **15** gia' coperte da `D01`-`D19` **piu' le 21** che ha nominato. Lo script **verifica che ognuna esista** nel registro.
+>
+> **⚠ E IL MIO ERRORE DI ESTRAZIONE, dichiarato:** cercavo l'ultimo `**Zxx**` *prima* della parola `CODICE`, ma **le righe CITANO altre voci nel corpo**, quindi l'ID pescato era spesso quello **citato**. Ora si parte dai **confini di riga**.
+
+**10 DIFETTI nuovi · 20 gia' coperte · 7 non sono difetti — 37 voci in tutto.**
+
+| voce | esito | ID | perche' |
+|---|---|---|---|
+| **`Z1`** | **DIFETTO** | **`D20`** *(APERTO)* | La correzione (1) su `inerzia` NON e' stata cablata, e **il gate che la autorizzava aveva misurato UN'ALTRA GRANDEZZA** |
+| **`Z4`** | **DIFETTO** | **`D21`** *(APERTO)* | `_floor_d0` e' SOSPESA, e **i due rami violano assiomi DIVERSI**: la scelta non e' stata fatta |
+| **`Z7`** | GIA' COPERTA | `D06` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z9-bis`** | GIA' COPERTA | `D07` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z10`** | GIA' COPERTA | `D07` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z11`** | GIA' COPERTA | `D13` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z14`** | GIA' COPERTA | `D08` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z24`** | **DIFETTO** | **`D22`** *(CURATO)* | Il DENOMINATORE PER GRADO: la misura non distingue (A) da (B), ma **(B) cade per DIMOSTRAZIONE**, e lo stesso schema e' in **almeno quattro punti** |
+| **`Z25`** | GIA' COPERTA | `D22` | E' la CHIUSURA di `Z24`: il denominatore per grado era un errore ed e' stato TOLTO, sigillo `12/12` |
+| **`Z33`** | GIA' COPERTA | `D14` | La mediana di `ritmo()` fa DUE mestieri; `Z41` **la supera sullo stesso oggetto** dicendo che ne fa TRE ed e' anche il rompi-anello |
+| **`Z36`** | NON E' UN DIFETTO | — | **Ri-letta da `Z37`**: il `64.7 %` e' **un rapporto su una grandezza minuscola**, e gli stati consecutivi hanno overlap `> 0.99` nel `100 %` dei casi. **E' una lettura corretta di un numero, non un difetto del codice** |
+| **`Z37`** | **DIFETTO** | **`D23`** *(APERTO)* | **La cucitura dello snapshot FALLISCE su entrambi i fronti**, e si DIMOSTRA perche'. **NON CABLATA** |
+| **`Z38`** | NON E' UN DIFETTO | — | Il gauge attuale sta NELLA MATERIA e **la mia obiezione e' REFUTATA**. Una premessa che cade non e' un difetto: e' un riscontro |
+| **`Z39`** | NON E' UN DIFETTO | — | **Un fatto stabile di `CLAUDE.md` e' caduto** *(`cs` e' vivo)*, e `CLAUDE.md` e' gia' stato corretto. **Il lavoro che ne discende e' il fronte `A`, non un difetto del codice** |
+| **`Z40`** | **DIFETTO** | **`D24`** *(APERTO)* | **`A2` e' VIOLATO da `Lam = mean(I)`** -- una media GLOBALE dentro una legge locale -- **e la violazione e' la ragione per cui il pezzo funziona** |
+| **`Z41`** | GIA' COPERTA | `D14` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z46`** | **DIFETTO** | **`D25`** *(APERTO)* | **Il gauge del tempo e' la costante `1e-9`**, e il `93 %` dei nodi non invecchia: sono sempre gli stessi, e sono le tre masse |
+| **`Z53`** | **DIFETTO** | **`D26`** *(CURATO)* | Le coorti **non sopravvivevano allo SNAPSHOT**: dopo un salva/ricarica il lignaggio ripartiva VUOTO |
+| **`Z65`** | **DIFETTO** | **`D27`** *(APERTO)* | **Il grafo e' in QUATTRO COMPONENTI che non si toccano mai**, e la bimodalita' del grado e' la semina. **Una distanza SUL GRAFO fra componenti diverse non esiste**, e le tre prove dell'ipotesi la usano |
+| **`Z70`** | NON E' UN DIFETTO | — | **Corregge una lettura precedente**: l'anello `A6` c'e', ma non e' istantaneo e non passa dalla riga che era stata citata. **La correzione di una lettura non e' un difetto del codice** |
+| **`Z71`** | GIA' COPERTA | `D15` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z73`** | GIA' COPERTA | `D09` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z74`** | **DIFETTO** | **`D28`** *(APERTO)* | **`nsub` esplode e lo tira `max(|vd|)` su POCHISSIMI archi**: il costo dell'intero sistema e' governato da una manciata di archi |
+| **`Z75`** | GIA' COPERTA | `D10` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z77`** | **DIFETTO** | **`D29`** *(APERTO)* | **CINQUE NODI DI VUOTO sono i piu' connessi dell'intero sistema**: il vuoto ha degli HUB, e non dovrebbe averne |
+| **`Z79`** | GIA' COPERTA | `D18` | Il clip della coesione **scalava con `d0` stesso** *(`A11` cor.2)*; `COES_ADIM` lo ha sostituito col passo causale. **⚠ DA RIVERIFICARE sul blob corrente** |
+| **`Z83`** | NON E' UN DIFETTO | — | E' una **DOMANDA dichiarata** *(`d0` deve stare sopra `LAM`?)*, e la decisione spetta a Luca. **Una domanda aperta non e' un difetto** |
+| **`Z84`** | NON E' UN DIFETTO | — | **Descrive un MECCANISMO** -- `d` e `d0` sono un anello, ed e' `cs^2*lap` ad allungare l'arco. **Alimenta il sospetto `S01`**, non e' un difetto di per se' |
+| **`Z86`** | NON E' UN DIFETTO | — | **E' un difetto di CRITERIO, non di codice**, e l'errore era mio. Vive in `doc/PATTERN_DI_PROVA.md` e in `P1-sexies`, non fra i difetti del simulatore |
+| **`Z87`** | GIA' COPERTA | `D11` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z88`** | GIA' COPERTA | `D19` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z89`** | GIA' COPERTA | `D12` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z90`** | GIA' COPERTA | `D17` | La divergenza del ramo D *(`nsub = 22591`)* risaliva a **`peq` negativo**, curato da `PEQ_ESATTO`: `Z101` misura che **l'esplosione e' sparita** |
+| **`Z91`** | GIA' COPERTA | `D16` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z92`** | GIA' COPERTA | `D18` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z94`** | GIA' COPERTA | `D17` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+| **`Z104`** | GIA' COPERTA | `D03` | gia' nella sezione DIFETTI APERTI dal recupero di `ccf1f73` |
+<!-- TRIAGE-FINE -->
 
 ## SOSPETTI — **registrati, NON promossi**
 
