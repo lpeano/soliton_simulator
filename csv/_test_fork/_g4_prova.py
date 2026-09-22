@@ -412,7 +412,17 @@ def main():
 
     os.chdir(RADICE)
     if modo == "--controllo":
-        dest = os.path.join(RADICE, "csv", "_test_fork", "_g4_controllo")
+        # Un giro CORTO va in una cartella SUA: il driver RIFIUTA (giustamente) una cartella che
+        # contiene gia' snapshot di questa fisica senza `--riprendi`, e il giro corto non deve
+        # sporcare la cartella del controllo vero. `_g4_corto` e' scratch, e si ripulisce.
+        if passi is not None:
+            dest = os.path.join(RADICE, "csv", "_test_fork", "_g4_corto")
+            if os.path.isdir(dest):
+                for _f in os.listdir(dest):
+                    if _f.endswith(".pkl.gz"):
+                        os.remove(os.path.join(dest, _f))
+        else:
+            dest = os.path.join(RADICE, "csv", "_test_fork", "_g4_controllo")
         nfr, spegni = (passi or 20), False
     elif modo == "--riferimento":
         dest = os.path.join(RADICE, "csv", "_test_fork", "_g4_riferimento")
