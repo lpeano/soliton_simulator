@@ -903,6 +903,27 @@ MEM_MOTO = True          # LA MEMORIA DEL MOTO scrive su `d0` (il sito `S08_proj
                          #   siti oltre la gravita' (sigillo di G3, `T6`).
                          # Non ha un flag da riga di comando, di proposito: si imposta SUL MODULO
                          # dalla rigiocata, come `GRAV_BIFASE` in G3, cosi' il driver non cambia.
+MEM_MOTO_TUTTO = True    # [G4-bis, 2026-09-22] SPEGNE L'INTERO BLOCCO DELLA MEMORIA DEL MOTO,
+                         # SPOSTAMENTO DI FASE COMPRESO. `MEM_MOTO` recinta la sola scrittura su
+                         # `d0`; questo recinta i QUATTRO punti in cui la memoria del moto vive:
+                         #   (1) `:5655`  l'AGGIORNAMENTO  mem_mot = (1-plast)*mem_mot + plast*grad_tw
+                         #   (2) `:5657`  `memedge`, e con esso `proj`
+                         #   (3) `:5670`  il sito `S08_proj` (la scrittura su `d0`)
+                         #   (4) `:6033`  la PROIEZIONE TRASVERSALE -> `shift_fase_dinamico` -> `phi`
+                         # (4) e' L'EFFETTO INDIRETTO che `MEM_MOTO` lascia vivo, ed e' la ragione
+                         # per cui questo flag esiste: spento `MEM_MOTO`, `mem_mot` continua ad
+                         # aggiornarsi e `:6033` continua a leggerla.
+                         # ⚠ SPENTO, `mem_mot` RESTA IDENTICAMENTE ZERO per tutto il run: nasce a
+                         #   zero (`:1507`), la mitosi copia dal padre (`:5288`) e semina/Schwinger
+                         #   aggiungono zeri. Non e' una grandezza "congelata a un valore": e'
+                         #   una grandezza che non si accende mai.
+                         # ⚠ `proj` SPENTO E' ZERO **MA CONSERVA LA SUA LUNGHEZZA**: `len(proj)` e'
+                         #   il gate del ramo `GRAV_BIFASE` subito sotto. Azzerare la lunghezza
+                         #   spegnerebbe ANCHE la gravita' -- che e' esattamente cio' che questa
+                         #   prova NON deve fare.
+                         # ⚠ COSA NON TOCCA, di proposito: i pavimenti `P3` e `P7`, la gravita'
+                         #   bifase, la coesione, e `_smp_chiudi`. Non sono memoria del moto.
+                         # Come `MEM_MOTO`: nessun flag da riga di comando, si imposta SUL MODULO.
 # SETTORE SPINORIALE a 4pi. Ogni nodo porta una SECONDA componente di fase che, accoppiata
 # alle antichiralita' (perc_chi, i +-pi gia' nel sistema), trasforma come uno spinore sotto
 # 4pi (doppia copertura). Quando SPENTO (SPINORE=False) il sistema e' IDENTICO all'U(1)
@@ -5652,11 +5673,18 @@ class Rete:
         # LEGGE DEL MOMENTO: si conserva, corretto dal gradiente di torsione (geodetica).
         # la plasticita' (quanto il campo corregge) e' |grad_tw| stesso: emerge, non scelta.
         plast = np.tanh(np.linalg.norm(grad_tw, axis=1))[:, None]   # in [0,1), dallo stato
-        self.mem_mot[:self.n] = (1.0 - plast) * self.mem_mot[:self.n] + plast * grad_tw
-        # INERZIA = |Psi|^2: il momento sposta le d0 in proporzione alla massa del nodo.
-        memedge = 0.5 * (self.mem_mot[ii] * (I[ii, None] / Imed) +
-                         self.mem_mot[jj] * (I[jj, None] / Imed))
-        proj = np.sum(memedge * dirarc, axis=1)
+        if MEM_MOTO_TUTTO:
+            self.mem_mot[:self.n] = (1.0 - plast) * self.mem_mot[:self.n] + plast * grad_tw
+            # INERZIA = |Psi|^2: il momento sposta le d0 in proporzione alla massa del nodo.
+            memedge = 0.5 * (self.mem_mot[ii] * (I[ii, None] / Imed) +
+                             self.mem_mot[jj] * (I[jj, None] / Imed))
+            proj = np.sum(memedge * dirarc, axis=1)
+        else:
+            # [MEM_MOTO_TUTTO, G4-bis 2026-09-22] PUNTI (1) e (2) SPENTI: `mem_mot` non si
+            # aggiorna mai e resta ZERO, quindi `memedge` non ha nulla da calcolare.
+            # ⚠ `proj` E' ZERO MA CONSERVA LA LUNGHEZZA: `len(proj)` e' il gate del ramo
+            #   `GRAV_BIFASE` qui sotto. Un array vuoto spegnerebbe anche la gravita'.
+            proj = np.zeros(len(ii))
         
         if len(proj):
             # --- LOCALE PURA: rimossa la sottrazione di proj.mean() ---
@@ -5667,7 +5695,10 @@ class Rete:
             # gravita' qui sotto ne usa `len(proj)`), `mem_mot` resta aggiornato, il pavimento
             # `P3` continua a girare. Cosi' si isola IL CONTRIBUTO A `d0`, che e' cio' che la
             # prova di spegnimento deve misurare.
-            if MEM_MOTO:
+            # [MEM_MOTO_TUTTO] PUNTO (3): lo stesso sito, recintato anche dal flag di `G4-bis`.
+            # Non basta che `proj` sia zero: `_sd0` passa dal freno, e una scrittura di zeri
+            # NON e' garantita essere un non-evento. Il sito si spegne, non si annacqua.
+            if MEM_MOTO and MEM_MOTO_TUTTO:
                 if TRACCIA_D0: _tr_pre = self.d0.copy()
                 self.d0[mask] += self._sd0(proj, mask)
                 if TRACCIA_D0: self._traccia_d0('S08_proj', _tr_pre)
@@ -6029,19 +6060,26 @@ class Rete:
                 inerzia_locale = np.maximum(0.5 * (I_nodi[ii] + I_nodi[jj]) / I_med, 1e-3)
                 accoppiamento_dinamico = spin_relativo / inerzia_locale
                 
-                # Proiezione del gradiente di memoria del moto sulla direzione trasversale
-                proiezione_trasversale = np.sum(self.mem_mot[ii] * dir_laterale, axis=1)
-                
-                # Shift di fase emergente guidato interamente dallo stato del sistema e dalla deformazione metrica
-                d_archi = np.maximum(self.d[mask], 1e-6)
-                d0_archi = np.maximum(self.d0[mask], 1e-6)
-                shift_fase_dinamico = accoppiamento_dinamico * proiezione_trasversale * (d_archi / d0_archi)
-                
-                # Limite geometrico causale del passo di fase per preservare la stabilità del campo
-                shift_fase_dinamico = np.clip(shift_fase_dinamico, -np.pi * 0.25, np.pi * 0.25)
-                
-                # Applica lo shift al campo di fase senza alterare le coordinate fisse dei puntatori (net.pos)
-                self.phi[ii] = (self.phi[ii] + shift_fase_dinamico) % (4 * np.pi)
+                # [MEM_MOTO_TUTTO] PUNTO (4): L'EFFETTO INDIRETTO, ed e' la ragione per cui questo
+                # flag esiste. `MEM_MOTO` lo lascia VIVO -- spegne la scrittura su `d0` ma
+                # `mem_mot` continua ad aggiornarsi, e QUESTA riga continua a leggerla e a
+                # scrivere su `self.phi`. Qui si spegne anche quello.
+                # ⚠ NON si conta sul fatto che `mem_mot` sia zero: `(phi + 0) % (4 pi)` e' un
+                #   NO-OP solo se `phi` sta gia' nel dominio. Il ramo si spegne, non si annacqua.
+                if MEM_MOTO_TUTTO:
+                    # Proiezione del gradiente di memoria del moto sulla direzione trasversale
+                    proiezione_trasversale = np.sum(self.mem_mot[ii] * dir_laterale, axis=1)
+
+                    # Shift di fase emergente guidato interamente dallo stato del sistema e dalla deformazione metrica
+                    d_archi = np.maximum(self.d[mask], 1e-6)
+                    d0_archi = np.maximum(self.d0[mask], 1e-6)
+                    shift_fase_dinamico = accoppiamento_dinamico * proiezione_trasversale * (d_archi / d0_archi)
+
+                    # Limite geometrico causale del passo di fase per preservare la stabilità del campo
+                    shift_fase_dinamico = np.clip(shift_fase_dinamico, -np.pi * 0.25, np.pi * 0.25)
+
+                    # Applica lo shift al campo di fase senza alterare le coordinate fisse dei puntatori (net.pos)
+                    self.phi[ii] = (self.phi[ii] + shift_fase_dinamico) % (4 * np.pi)
                 if TRACCIA_D0: _tr_pre = self.d0.copy()
                 self.d0 = self._pav_d0(self.d0)
                 if TRACCIA_D0: self._traccia_d0('P7_dopo_4917', _tr_pre, pavimento=self._floor_d0())

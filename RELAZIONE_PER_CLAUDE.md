@@ -11938,3 +11938,52 @@ la MEMORIA DEL MOTO** — sale dal quarto posto, e `Z109` dice perche' — **poi
 bifase e coesione.** Nella scheda della memoria del moto va **verificata l'ipotesi della
 compressione**: *`S08_proj` scrive `d0` verso l'alto senza che `d` segua, e questo abbassa
 `d/d0`*. **Solo misure sugli snapshot gia' scritti.**
+
+### ㉠ **`G4-bis`: il flag `MEM_MOTO_TUTTO`, e perche' il suo sigillo non e' una copia**
+
+> **Via libera di Luca.** **La SECONDA E ULTIMA modifica al simulatore ammessa prima del `CHK3`.**
+> Blob `ab685eac` → **`21e3a3dc`**.
+
+**`MEM_MOTO_TUTTO`** — costante di modulo, `True` di default, **nessun flag da riga di
+comando** *(come `MEM_MOTO` e `GRAV_BIFASE`: si imposta sul modulo dalla rigiocata, cosi' il
+driver non cambia e una legge di questo peso non si spegne per sbaglio da un comando)*.
+Recinta i **quattro** punti, **letti dal sorgente**:
+
+| | riga | cosa |
+|---|---|---|
+| (1) | `:5655` | `mem_mot = (1−plast)·mem_mot + plast·grad_tw` |
+| (2) | `:5657` | `memedge`, e con esso `proj` |
+| (3) | `:5670` | `S08_proj` — gia' recintato, ora `MEM_MOTO and MEM_MOTO_TUTTO` |
+| **(4)** | **`:6033`** | **la proiezione trasversale → `shift_fase_dinamico` → `self.phi`** |
+
+**DUE SCELTE CHE NON SONO OVVIE, e le dichiaro invece di lasciarle nel codice:**
+- **`proj` spento e' ZERO ma CONSERVA LA SUA LUNGHEZZA.** `len(proj)` e' il gate del ramo
+  `GRAV_BIFASE` subito sotto: **un array vuoto spegnerebbe anche la gravita'**, che e'
+  esattamente cio' che questa prova non deve fare.
+- **I punti (3) e (4) si SPENGONO, non si annacquano.** Non mi affido al fatto che `mem_mot` sia
+  zero: `_sd0` passa dal **freno**, e `(phi + 0) % (4π)` e' un no-op **solo se `phi` sta gia'
+  nel dominio**. **Un ramo spento e' una garanzia, un valore nullo e' una speranza.**
+- **Cosa NON tocca:** i pavimenti `P3` e `P7`, la gravita' bifase, la coesione, `_smp_chiudi`.
+  **Non sono memoria del moto.**
+
+> **⚠ E IL SIGILLO NON E' UNA COPIA DI QUELLO DI `MEM_MOTO`, per una ragione precisa.**
+> Li' il criterio guardava **`d0`** e i siti di traccia. **Qui `d0` NON BASTA: il quarto punto
+> scrive su `phi`, che NESSUN sito di traccia di `d0` vede.** Un sigillo copiato sarebbe passato
+> **con lo spostamento di fase ancora vivo**. Il criterio guarda **`d0` E `phi` E `mem_mot`**, e
+> il collaudo **`K7`** e' il caso che lo dimostra: due catture con `d0` **identico** e `phi`
+> diverso di `1e-9` su **un** nodo **devono** risultare diverse.
+
+**I DIECI CRITERI**, `T0` riproducibilita' · `T1`-`T3` il punto (3) e la chirurgia ·
+**`T4`** i punti (1)+(2), *`mem_mot` identicamente zero — **esatto, non a tolleranza*** ·
+**`T5`** il punto (4), `phi` deve **differire** · **`T6` PERCHE' `G4-bis` ESISTE**: col solo
+`MEM_MOTO=False`, `mem_mot` e' **ancora viva** e `phi` **identica** al braccio acceso — **e'
+la MISURA che giustifica il secondo braccio, invece dell'argomento** · `T7` il gate **AST**
+*(esattamente 4 ramificazioni: strutturale, non serve girare niente)* · **`T8` il caso che
+deve fallire sul codice vero** *(`MEM_HEBB=False`)* · `T9` la byte-inerzia contro `_val600`.
+
+**`K6` merita una riga:** un array con **un** elemento su **centomila** pari a `1e-300` ha media
+`0.0` in stampa, e **una tolleranza lo chiamerebbe zero**. `e_zero` e' **esatto**.
+
+**Nessun numero: il sigillo non e' ancora girato.** Questo commit esiste perche' il par.5 vuole
+il codice committato **prima** che l'output nasca, e `P1-sexies` vuole i criteri fissati **prima**
+di vedere i numeri.

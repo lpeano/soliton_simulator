@@ -11,6 +11,22 @@
 
 ---
 
+### `csv/_seal_fork/_sigillo_mem_moto_tutto.py` — **SIGILLO di `MEM_MOTO_TUTTO`** *(`G4-bis`)*
+
+```
+python csv/_seal_fork/_sigillo_mem_moto_tutto.py
+```
+**Cosa misura:** che `MEM_MOTO_TUTTO` sia **byte-inerte acceso** *(`T9`, 120 passi contro
+`_val600`)* e che spento spenga **tutti e quattro** i punti della memoria del moto — la
+scrittura su `d0` *(`T1`-`T3`)*, l'aggiornamento di `mem_mot` *(`T4`)* e **lo spostamento di
+fase su `phi`** *(`T5`)*. **`T6` misura PERCHE' `G4-bis` esiste:** col solo `MEM_MOTO=False`,
+`mem_mot` resta viva e `phi` identica al braccio acceso.
+**⚠ Il criterio guarda `d0` E `phi` E `mem_mot`:** un criterio sul solo `d0` sarebbe
+**cieco sul quarto punto**, e il collaudo `K7` e' il caso che lo dimostra.
+**Blob dell'ultimo giro:** *(da riempire dopo il primo giro)* · **simulatore `21e3a3dc`**.
+**Opzioni:** `--passi=N` *(default 3)* · `--senza-t9` *(salta la byte-inerzia: la marca
+FAIL, non la salta in silenzio)*.
+
 ## 0. LA REGOLA CHE QUESTO FILE RENDE VERIFICABILE
 
 > **Un diagnostico che contamina la fisica non misura il sistema: misura se stesso** (§2.3).
