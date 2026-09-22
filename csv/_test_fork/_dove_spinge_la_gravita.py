@@ -135,7 +135,7 @@ class AccChiave(object):
       Se sono molti, il cumulato non vale e lo si dice.
     """
 
-    CAMPI = ("acc", "su", "giu", "npassi", "visto")
+    CAMPI = ("acc", "su", "giu", "npassi", "nsat", "visto")
 
     def __init__(self, base):
         self.base = np.int64(base)
@@ -144,6 +144,7 @@ class AccChiave(object):
         self.su = np.zeros(0, dtype=float)       # somma delle SALITE
         self.giu = np.zeros(0, dtype=float)      # somma delle DISCESE
         self.npassi = np.zeros(0, dtype=np.int64)   # in quanti passi l'arco ESISTE
+        self.nsat = np.zeros(0, dtype=np.int64)     # in quanti passi e' INCOLLATO AL TETTO
         self.visto = np.zeros(0, dtype=np.int64)    # l'ULTIMO passo in cui si e' visto
         self.doppioni = 0
         self.risurrezioni = 0
@@ -163,7 +164,7 @@ class AccChiave(object):
         ok = (p < len(self.chiavi)) & (self.chiavi[pc] == k)
         return p, ok
 
-    def aggiungi(self, ii, jj, dx, passo):
+    def aggiungi(self, ii, jj, dx, passo, sat=None):
         k = self.chiave(ii, jj)
         nu = len(np.unique(k))
         if nu != len(k):
@@ -175,11 +176,15 @@ class AccChiave(object):
             np.add.at(self.su, pc, np.where(dc > 0.0, dc, 0.0))
             np.add.at(self.giu, pc, np.where(dc < 0.0, dc, 0.0))
             np.add.at(self.npassi, pc, 1)
+            if sat is not None:
+                np.add.at(self.nsat, pc, sat[col].astype(np.int64))
             self.risurrezioni += int(np.sum((passo - self.visto[pc]) > 1))
             self.visto[pc] = passo
         nuovi = ~col
         if np.any(nuovi):
             kn = k[nuovi]; dn = dx[nuovi]
+            sn = (sat[nuovi].astype(np.int64) if sat is not None
+                  else np.zeros(int(np.sum(nuovi)), dtype=np.int64))
             ku, inv = np.unique(kn, return_inverse=True)
             m = len(ku)
             self.chiavi = np.concatenate([self.chiavi, ku])
@@ -190,6 +195,8 @@ class AccChiave(object):
                 [self.giu, np.bincount(inv, np.where(dn < 0.0, dn, 0.0), minlength=m)])
             self.npassi = np.concatenate(
                 [self.npassi, np.bincount(inv, minlength=m).astype(np.int64)])
+            self.nsat = np.concatenate(
+                [self.nsat, np.bincount(inv, sn, minlength=m).astype(np.int64)])
             self.visto = np.concatenate([self.visto, np.full(m, passo, dtype=np.int64)])
             o = np.argsort(self.chiavi, kind="stable")
             self.chiavi = self.chiavi[o]
@@ -324,6 +331,33 @@ def collaudo(W):
          else "*** IL CASO NON DISTINGUE: il collaudo D non proverebbe nulla ***"))
     esiti.append(okDb)
 
+    # --- F: LA SATURAZIONE, su due casi a risposta nota.
+    #     F1 DEVE trovarne esattamente il numero noto; F2 e' IL CASO CHE DEVE FALLIRE -- una
+    #     distribuzione SENZA clip, dove il massimo e' raggiunto da UNO solo: se il criterio
+    #     dicesse "molti saturi" anche li', misurerebbe il massimo invece del TETTO, e la
+    #     "saturazione diffusa" sarebbe un artefatto del criterio invece che un fatto del codice.
+    rng2 = np.random.default_rng(3)
+    base = rng2.random(10000) * 0.5                      # tutti sotto il tetto
+    tetto = 0.9
+    base[:137] = tetto                                   # 137 INCOLLATI in su
+    base[137:137 + 61] = -tetto                          # 61 INCOLLATI in giu'
+    ns, scr, sel = satura(base)
+    okF1 = (ns == 198) and (scr == 10000)
+    W("F  LA SATURAZIONE, su un caso a numero NOTO di archi incollati al tetto\n")
+    W("     atteso 198 saturi (137 in su + 61 in giu') su 10000 scritti\n")
+    W("     ottenuto %d saturi su %d scritti  -> %s\n"
+      % (ns, scr, "OK" if okF1 else "*** CONTEGGIO SBAGLIATO ***"))
+    esiti.append(okF1)
+
+    liscio = np.linspace(0.01, 0.99, 10000)              # NESSUN clip: tutti valori diversi
+    ns2, _s2, _l2 = satura(liscio)
+    okF2 = ns2 <= 2
+    W("F- IL CASO CHE DEVE FALLIRE: una distribuzione LISCIA, senza nessun tetto\n")
+    W("     ottenuti %d saturi, atteso <= 2 (solo il massimo)  -> %s\n"
+      % (ns2, "OK: il criterio vede il TETTO, non il massimo"
+         if okF2 else "*** MISURA IL MASSIMO: la saturazione sarebbe un artefatto ***"))
+    esiti.append(okF2)
+
     # --- G: le TRE COLONNE NUOVE -- salite, discese e PASSI IN CUI L'ARCO ESISTE -- a somme note.
     G = AccChiave(1 << 32)
     G.aggiungi(np.array([3, 4]), np.array([7, 8]), np.array([+5.0, -2.0]), 1)
@@ -402,6 +436,10 @@ def main():
     CRESCITA = {"pad": 0, "salta": 0}
     PASSO = {"k": 0}
     TOP_PASSO = {"v": None}      # il top-20 di UN SOLO passo: immune al riordino per costruzione
+    SAT_PASSO = []               # (passo, n_saturi, n_scritti, n_vivi)
+    SAT_REG = np.zeros(len(ETICHETTE), dtype=np.int64)   # archi-passo saturi per regione
+    SAT_REG_TOT = np.zeros(len(ETICHETTE), dtype=np.int64)  # archi-passo scritti per regione
+    SAT_SALDO = {"sat": 0.0, "tot": 0.0, "sat_su": 0.0, "sat_giu": 0.0}
 
     def traccia(self, sito, prima, pavimento=None):
         """SOSTITUISCE `_traccia_d0`. PURE-READ: legge e somma, non scrive stato."""
@@ -428,7 +466,17 @@ def main():
                 ACC["v"] = np.concatenate([v, np.zeros(len(dx) - len(v))])
                 CRESCITA["pad"] += 1
             ACC["v"][:len(dx)] += dx
-            ACCK.aggiungi(ii, jj, dx, PASSO["k"])
+            n_sat, scritti, sel = satura(dx)
+            SAT_PASSO.append((PASSO["k"], n_sat, scritti, len(dx)))
+            SAT_REG += np.bincount(cls[sel], minlength=len(ETICHETTE)).astype(np.int64)
+            _scr = dx != 0.0
+            SAT_REG_TOT += np.bincount(cls[_scr], minlength=len(ETICHETTE)).astype(np.int64)
+            SAT_SALDO["sat"] += float(np.sum(dx[sel]))
+            SAT_SALDO["tot"] += float(np.sum(dx))
+            _ds = dx[sel]
+            SAT_SALDO["sat_su"] += float(np.sum(_ds[_ds > 0.0]))
+            SAT_SALDO["sat_giu"] += float(np.sum(_ds[_ds < 0.0]))
+            ACCK.aggiungi(ii, jj, dx, PASSO["k"], sat=sel)
             TOP_PASSO["v"] = (ii.copy(), jj.copy(), dx.copy(), PASSO["k"])
 
     S.Rete._traccia_d0 = traccia
@@ -602,6 +650,80 @@ def main():
         W("%5d %7d %7d %-20s | %+13.6e %13.6e %13.6e | %6d %5s\n"
           % (rr[0], rr[1], rr[2], rr[3], rr[4], rr[5], rr[6], rr[7],
              "si" if rr[8] else "NO"))
+
+    # ---------------- LA SATURAZIONE, MISURATA
+    W("\n" + "=" * 108 + "\n")
+    W("LA SATURAZIONE DI `S09`: QUANTO SPESSO LA SPINTA E' INCOLLATA AL TETTO CAUSALE\n")
+    W("  `spinta = np.clip(spinta, -passo_causale, passo_causale)` e poi\n")
+    W("  `d0[mask] += _sd0(spinta * median(d0[mask]), mask)`: su un arco SATURO l'incremento vale\n")
+    W("  `passo_causale * median(d0[mask])`, UGUALE PER TUTTI. Non dipende piu' dall'arco.\n")
+    W("=" * 108 + "\n")
+    if SAT_PASSO:
+        _ns = np.array([r[1] for r in SAT_PASSO], dtype=float)
+        _nw = np.array([r[2] for r in SAT_PASSO], dtype=float)
+        _nv = np.array([r[3] for r in SAT_PASSO], dtype=float)
+        fr_scr = _ns / np.maximum(_nw, 1.0)
+        fr_viv = _ns / np.maximum(_nv, 1.0)
+        W("\nPER PASSO (%d passi):\n" % len(SAT_PASSO))
+        W("%-28s %12s %12s %12s %12s\n" % ("", "min", "mediana", "max", "totale"))
+        W("  %-26s %12d %12d %12d %12d\n"
+          % ("archi SATURI", int(_ns.min()), int(np.median(_ns)), int(_ns.max()), int(_ns.sum())))
+        W("  %-26s %12d %12d %12d %12d\n"
+          % ("archi SCRITTI (dx != 0)", int(_nw.min()), int(np.median(_nw)), int(_nw.max()),
+             int(_nw.sum())))
+        W("  %-26s %12.6f %12.6f %12.6f %12.6f\n"
+          % ("frazione sugli SCRITTI", fr_scr.min(), float(np.median(fr_scr)), fr_scr.max(),
+             float(_ns.sum() / max(_nw.sum(), 1.0))))
+        W("  %-26s %12.6f %12.6f %12.6f %12.6f\n"
+          % ("frazione sugli archi VIVI", fr_viv.min(), float(np.median(fr_viv)), fr_viv.max(),
+             float(_ns.sum() / max(_nv.sum(), 1.0))))
+
+        W("\nPER ARCO -- in quanti passi ciascuno e' SATURO (istogramma, su %d chiavi):\n"
+          % len(ACCK.chiavi))
+        _bins = [(0, 0, "0 (mai saturo)"), (1, 10, "1-10"), (11, 60, "11-60"),
+                 (61, 119, "61-119"), (120, 10 ** 9, "120 (SEMPRE)")]
+        for lo, hi, et in _bins:
+            _sel = (ACCK.nsat >= lo) & (ACCK.nsat <= hi)
+            _c = int(np.sum(_sel))
+            W("  %-16s %10d archi   %7.4f della popolazione\n"
+              % (et, _c, _c / max(len(ACCK.chiavi), 1)))
+
+        W("\nPER REGIONE -- archi-passo saturi su archi-passo scritti:\n")
+        W("%-22s %14s %14s %12s\n" % ("regione", "saturi", "scritti", "frazione"))
+        W("-" * 66 + "\n")
+        for c in range(len(ETICHETTE)):
+            if SAT_REG_TOT[c] == 0:
+                continue
+            W("%-22s %14d %14d %12.6f\n"
+              % (ETICHETTE[c], int(SAT_REG[c]), int(SAT_REG_TOT[c]),
+                 SAT_REG[c] / max(float(SAT_REG_TOT[c]), 1.0)))
+
+        W("\nQUANTA PARTE DEL SALDO VIENE DA INCREMENTI SATURI:\n")
+        _st = SAT_SALDO["sat"]; _tt = SAT_SALDO["tot"]
+        W("  saldo da incrementi SATURI   %+.6e   (salite %+.6e, discese %+.6e)\n"
+          % (_st, SAT_SALDO["sat_su"], SAT_SALDO["sat_giu"]))
+        W("  saldo NETTO totale di `S09`  %+.6e\n" % _tt)
+        W("  rapporto saturo/totale       %.6f\n" % (_st / _tt if _tt else float("nan")))
+
+        # ---- LA LETTURA, FISSATA PRIMA (mandato del 2026-09-22 par.1)
+        _fr = float(_ns.sum() / max(_nw.sum(), 1.0))
+        W("\n" + "-" * 108 + "\n")
+        W("LA LETTURA, FISSATA PRIMA DI GUARDARE I NUMERI:\n")
+        W("  saturazione RARA   (< 1 %%)  -> il clip e' un difetto LOCALE, il plateau e' una coda\n")
+        W("  saturazione DIFFUSA (> 10 %%) -> la spinta e' in gran parte `tetto x mediana globale`:\n")
+        W("                                 un numero GLOBALE con un segno. `A11` corollario 6.\n")
+        W("  in mezzo                    -> si scrive il numero, SENZA etichetta.\n")
+        W("  MISURATO: frazione di archi-passo saturi sugli scritti = %.6f = %.4f %%\n"
+          % (_fr, 100.0 * _fr))
+        if _fr < 0.01:
+            W("  -> *** SATURAZIONE RARA: difetto LOCALE. ***\n")
+        elif _fr > 0.10:
+            W("  -> *** SATURAZIONE DIFFUSA: la spinta di oggi e' in gran parte UN NUMERO\n")
+            W("         GLOBALE CON UN SEGNO. E' `A11` corollario 6. ***\n")
+        else:
+            W("  -> IN MEZZO: il numero e' %.4f %%, e resta SENZA ETICHETTA.\n" % (100.0 * _fr))
+    else:
+        W("\n*** `S09` non ha scritto: la saturazione non e' misurabile qui. ***\n")
 
     # ---------------- LE TRE RIGHE DI RISCONTRO
     # il saldo per regione COME LO HA CALCOLATO `Z105`: sommando PER PASSO, con la classe
