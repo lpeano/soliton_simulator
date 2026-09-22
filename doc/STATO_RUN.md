@@ -368,6 +368,10 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **D17** | **`peq` diventava NEGATIVO e il pavimento `max(peq, 1e-9)` NE RIBALTAVA IL SEGNO** *(da `-3.72` a `+1.8e+06`)* | `Z94` | `PEQ_ESATTO` + `ANOM_SIMM` *(`C1`, `C1-bis`)* | **`CURATO`** |
 | **D18** | **`COES_ADIM` leggeva ISTANTI MISTI e il suo tetto era GLOBALE** | `Z92` · `A5` | `COES_CAUSALE` *(`C4`)* | **`CURATO`** |
 | **D19** | **OTTO grandezze che la semina legge erano INERTI SUL VUOTO in ogni run di epoca 1** | `Z88` | la cura del mondo-dopo-i-flag | **`CURATO`** |
+| **REG-A** | **FASE A del registro della fisica: l'INVENTARIO degli scrittori di stato** | MANDATO-REGISTRO §2 | ✅ **FATTA** *(`1214283`, blob `2c70e4ad`)*: **`164` scritture fisiche su `27` grandezze, di cui `65` CONCATENAZIONI**, piu' `313` scritture su attributi **non dichiarati fisici**, elencati e non nascosti |
+| **REG-B** | **FASE B: le SCHEDE, a lotti** — prima le componenti dentro le misure in corso | MANDATO-REGISTRO §2 | ⏸ **mentre i run girano.** `27` grandezze da coprire, **nessuna esclusa** |
+| **REG-C** | **FASE C: LA STORIA** di ogni legge, e le schede delle leggi TOLTE | MANDATO-REGISTRO §2 | ⏸ cio' che non si ricostruisce si scrive **NON RICOSTRUITO** |
+| **REG-V** | **`_verifica_registro.py`**: completezza, esistenza, coerenza con la traccia di `d0` e col registro dei domini di `C5` | MANDATO-REGISTRO §3 | ⏸ col collaudo `P1-sexies`, **compreso un registro volutamente sbagliato che DEVE fallire** |
 <!-- DIFETTI-NUOVI-INIZIO -->
 | **D20** | La correzione (1) su `inerzia` NON e' stata cablata, e **il gate che la autorizzava aveva misurato UN'ALTRA GRANDEZZA** | `Z1` | — | `APERTO` |
 | **D21** | `_floor_d0` e' SOSPESA, e **i due rami violano assiomi DIVERSI**: la scelta non e' stata fatta | `Z4` | — | `APERTO` |

@@ -11590,3 +11590,42 @@ sarebbe **invisibile**. Ora si misura.
 **12:48:17**, strumento `b9642633`, simulatore `ab685eac`, seme `42`.
 **Serve, e non e' un di piu':** senza il freno e le nascite misurate **nel braccio acceso**, il
 confronto con lo spegnimento non regge. **E risponde da solo alla domanda del buco.**
+
+### ㉖ **Registro della fisica, FASE A: l'inventario degli scrittori — `164` scritture su `27` grandezze**
+
+> **Generato dall'AST**, non da una `grep`, e **in sola lettura**: costruisce l'albero del
+> sorgente e **non importa il simulatore**. Per questo puo' girare **mentre il braccio di
+> riferimento di `G4` e' in corso**, che e' esattamente quello che ha fatto.
+
+**`164` scritture su grandezze fisiche · `27` grandezze distinte · `65` CONCATENAZIONI
+· `313` scritture su attributi non dichiarati fisici**, elencate in fondo e **non nascoste**.
+
+**PERCHE' NON BASTAVA UNA `grep`, ed e' il punto dello strumento.** Trova quattro cose che una
+ricerca testuale perde:
+`self.x += ...` **aumentato** *(nessun `=` da cercare)* · `self.x[...] = ...` **per indice**
+· `np.add.at(self.x, ...)` **in place**, dove nella riga **non c'e' nessun `=`** · e le
+**`CONCATENAZIONI`**, marcate a parte perche' **cambiano la LUNGHEZZA** — cioe' **fanno
+nascere e morire archi** — e li' il delta elemento-per-elemento **non esiste**. *(E' proprio
+il punto che ha fatto non chiudere il bilancio di `G4`.)*
+
+**LE TRE GRANDEZZE PIU' SCRITTE**, e la prima non sorprende:
+
+| grandezza | scritture | di cui CONCATENA | dove |
+|---|--:|--:|---|
+| **`d0`** | **22** | 3 | `step`, `mitosi`, `memoria_hebbiana_moto`, `_allaccia`, **`_smp_chiudi`** |
+| `d` · `peq` · `phi` | 9 | 3–4 | `step`, `mitosi`, `_allaccia` |
+| `pos` | 8 | 3 | `rilassa_disegno`, `mitosi`, `_togli_rotazione_rigida`, `semina` |
+
+> **`d0` ha VENTIDUE punti di scrittura**, e la traccia di `Z102` ne copre **diciannove**.
+> **`_smp_chiudi` compare qui dentro**, ed e' la conferma indipendente del difetto `D04`:
+> **l'inventario lo trova, la traccia no.**
+
+**⚠ UNA SEMPLIFICAZIONE DICHIARATA:** il flag attribuito e' quello dell'`if` **piu' interno**
+che nomina una costante maiuscola. Se una scrittura sta sotto **due** flag annidati, ne compare
+**uno solo**.
+**⚠ E LA LISTA DELLE GRANDEZZE FISICHE E' UN GIUDIZIO MIO**, dichiarato nel file: se una
+manca, **compare nella sezione dei non dichiarati, dove si vede**. Non puo' sparire in silenzio.
+
+**Il collaudo `K6` e' quello che rende credibile `K1`:** un cercatore **menomato**, che guarda
+solo gli `Assign`, **perde `peq`, `rho` e `tw`**. Senza quel caso, `K1` direbbe *«trovati
+tutti»* **senza poterlo sapere**.
