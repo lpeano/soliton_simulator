@@ -11324,3 +11324,63 @@ della validazione. Esce in `csv/_test_fork/_g3_senza_bifase/`.
   contrae? `d/d0` torna verso `1`?
 **Si legge con gli STESSI OTTO CRITERI ASSOLUTI** *(`_letture_validazione.py --dir=...`)*, piu'
 la **traccia salite/discese per scrittore**, la stessa di `Z102`. **Nessun confronto fra epoche.**
+
+### ⑿ **`G3`: LA GRAVITA' NON E' IL MOTORE. Spenta, `d0` scappa uguale**
+
+> Prova di spegnimento, **600 passi**, `GRAV_BIFASE = False` imposta **sul modulo dalla
+> rigiocata**. Simulatore `9557a867`, seme `42`, configurazione della validazione.
+> **Preceduta da: sigillo `7/7`** *(lo spegnimento e' chirurgico)* **e controllo dell'involucro
+> `206` campi identici / `0` diversi** *(lo strumento di lancio e' inerte)*.
+
+**IL NUMERO CHE DECIDE — il criterio `4`, il rapporto fra snapshot consecutivi di `med d0`:**
+
+| | rapporti | MEDIANO |
+|---|---|--:|
+| gravita' **ACCESA** | `1.2332`, `1.3585`, `1.2309`, `1.1371` | **`1.2321`** |
+| gravita' **SPENTA** | `1.2445`, `1.3126`, `1.1976`, `1.1225` | **`1.2211`** |
+
+> **Differenza: `0.9 %`. Costante `> 1` = esponenziale, in ENTRAMBI.**
+> **La lettura fissata prima era: *«`d0` cresce lo stesso → il motore e' altrove»*.
+> Si verifica.**
+
+**E DUE COSE CAMBIANO DAVVERO, IN DIREZIONI OPPOSTE:**
+
+| | ACCESA | SPENTA | |
+|---|--:|--:|---|
+| `med d/d0` finale | `0.7489` | **`0.6258`** | **la compressione PEGGIORA** |
+| `med d/d0` minimo | `0.6922` | **`0.6123`** | |
+| **stress** massimo | `7.866` | **`2.321`** | **`-70 %`** |
+
+> **La gravita' CONTRASTAVA la compressione, non la causava.** E **lo stress era in gran parte
+> roba sua.** Nessuna delle due era una lettura fissata prima: sono **risposte alle domande di
+> contorno** del mandato *(«`d/d0` torna verso 1?», «lo stress resta finito?»)*.
+
+**GLI ALTRI SEI CRITERI REGGONO IN ENTRAMBI, identici:** `nsub` max `4`, `peq >= 0`, zero archi
+sotto `LAM`, **zero violazioni di dominio**, stress finito, e il tetto di `COES_CAUSALE`
+addirittura **piu' largo** (`0.2384`). **`6/8` di qua e `6/8` di la', e sono GLI STESSI DUE a non
+reggere.**
+
+**LA TRACCIA PER SCRITTORE, a gravita' spenta** *(la stessa di `Z102`)*:
+
+```
+S08_proj            +1.746303e+06     <- di gran lunga il piu' POSITIVO
+S02_rilass_visco    -1.046810e+06
+S03_diff_guscio     -5.667919e+05
+S12_coesione        -1.342968e+05
+S05_spinta_locale   +2.763773e+00
+SALDO TOTALE        -1.593122e+03     <- MILLE VOLTE piu' piccolo dei singoli termini
+```
+
+> **Gli scrittori quasi si cancellano, e `med d0` RADDOPPIA lo stesso** *(da `1.6372` a
+> `3.5951`)*. **E' la stessa firma strutturale di `Z102`.**
+
+**⚠ IL SOSPETTO CHE NE ESCE, E RESTA UN SOSPETTO: `S08_proj`, la MEMORIA DEL MOTO.** E' il
+maggior scrittore positivo ed e' **esattamente cio' che `G4` spegne**. **Non lo chiamo causa
+finche' non e' spento.**
+**⚠ E IN QUESTO RUN IL FRENO NON E' STATO MISURATO** *(`_smorza` non e' stato avvolto)*:
+la firma somiglia a quella di `Z102`, **ma non affermo che sia di nuovo lui**.
+**⚠ `coer_l` oscilla senza tendenza chiara in entrambi** *(`0.36`–`0.56` ON,
+`0.32`–`0.48` OFF)*: **alla domanda «le masse restano coese?» questo run NON
+risponde in modo netto**, e non invento una risposta.
+**⚠ LIMITI: UN seme, UNA scena.** Per una barra fra semi ne servono **almeno quattro**
+(`P3`). — **`Z107`**

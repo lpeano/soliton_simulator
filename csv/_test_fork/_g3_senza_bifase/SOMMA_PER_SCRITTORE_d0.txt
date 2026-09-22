@@ -1,0 +1,22 @@
+# G3 -- SALITE e DISCESE di `d0` per SCRITTORE, con `GRAV_BIFASE=False`
+# blob simulatore (sha1 byte grezzi)=9557a867  seme=42
+# la stessa traccia di `Z102`, cosi' i due si confrontano riga per riga.
+# ⚠ i siti che CONCATENANO portano `n/d`: li' il delta non esiste.
+
+scrittore                    SALITE        DISCESE          SALDO | |saldo|/tot |   giri  salta
+----------------------------------------------------------------------------------------------------
+P1_dopo_rilass         0.000000e+00   0.000000e+00   0.000000e+00 |     0.0000 |    600      0
+P2_dopo_spinta         0.000000e+00   0.000000e+00   0.000000e+00 |     0.0000 |    596      0
+P3_dopo_proj           0.000000e+00   0.000000e+00   0.000000e+00 |     0.0000 |    600      0
+P6_dopo_coesione       0.000000e+00   0.000000e+00   0.000000e+00 |     0.0000 |    600      0
+P7_dopo_4917           0.000000e+00   0.000000e+00   0.000000e+00 |     0.0000 |    600      0
+S01_archi_nuovi                 n/d            n/d            n/d |        n/d |      4      4
+S02_rilass_visco       2.852031e+04  -1.075331e+06  -1.046810e+06 |     0.9483 |    600      0
+S03_diff_guscio        9.412810e+05  -1.508073e+06  -5.667919e+05 |     0.2314 |    600      0
+S05_spinta_locale      2.763773e+00   0.000000e+00   2.763773e+00 |     1.0000 |    596      0
+S06_mitosi                      n/d            n/d            n/d |        n/d |    270    270
+S07_schwinger                   n/d            n/d            n/d |        n/d |    110    110
+S08_proj               4.148969e+06  -2.402666e+06   1.746303e+06 |     0.2665 |    600      0
+S12_coesione           6.732038e+04  -2.016172e+05  -1.342968e+05 |     0.4994 |    600      0
+----------------------------------------------------------------------------------------------------
+SALDO TOTALE                                        -1.593122e+03
