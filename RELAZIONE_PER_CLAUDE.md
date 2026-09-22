@@ -11558,3 +11558,35 @@ difetto di CRITERIO, non di codice: vive nei pattern)*.
 che sia COMPLETA e MOTIVATA, non che sia giusta**: ogni riga porta il perche', cosi' e'
 contestabile. E **`Z79` porta un dubbio dichiarato**: e' `GIA' COPERTA` da `D18`, ma **non ho
 rimisurato** che `COES_ADIM` abbia davvero tolto il clip che scalava con `d0`.
+
+### ㉕ **`G4`: il controllo PASSA e IL BILANCIO CHIUDE. Il braccio di riferimento e' partito**
+
+> **`206` campi identici, `0` diversi** contro `_val600`, **e il bilancio di `d0` chiude a
+> `4.035e-14`** su 120 passi. **La prova puo' partire.**
+
+**IL BUCO DI `Z107` E' CHIUSO, e il termine mancante era leggibile dal sorgente:**
+`_smp_chiudi()` (`:3677`) fa `self.d0 = v + self._smorza(v, dx, 'd0_passo')` — **riscrive
+tutto `d0` a fine passo** — e **non ha nessun `_traccia_d0` attorno**. **Una scrittura
+invisibile alla traccia.** Ora si misura avvolgendo `_smorza` e contando **solo** `d0_passo`
+*(le altre chiamate starebbero dentro siti gia' tracciati e si conterebbero due volte)*.
+
+**E CI SONO VOLUTI DUE GIRI CORTI PER ARRIVARCI**, ed e' la ragione per cui quel pattern e' ora
+`STANDARD`:
+- **il primo** ha trovato che **il bilancio non chiudeva** *(`8.0e-05`)*, in **43 secondi**;
+- **il dato che ha indicato la causa**: il passo con **zero nascite e zero morti** chiudeva a
+  `1.8e-14`, **solo i passi con nascite o morti** avevano residuo. **Misuravo nascite e morti a
+  inizio/fine passo**, ma un arco che nasce **viene poi modificato dalle scritture**, che il
+  bilancio conta gia' a parte: **doppio conteggio**. La forma esatta e' `Σ(dopo) -
+  Σ(prima)` **al sito che concatena**;
+- **il secondo** e' morto perche' **il driver rifiuta una cartella gia' popolata** — una
+  **guardia giusta**, che non ho aggirato: il giro corto ha ora una cartella sua.
+
+**E UNA SECONDA GUARDIA, aggiunta nello stesso giro:** **il SALTO fra la fine di un passo e
+l'inizio del successivo**. Fra i due il driver chiama `diagnostica`/`campo_spaziale`/`pozzo_grafo`:
+**se una di quelle toccasse `d0`, il bilancio PER PASSO chiuderebbe lo stesso** e il difetto
+sarebbe **invisibile**. Ora si misura.
+
+**IL BRACCIO DI RIFERIMENTO E' PARTITO:** `MEM_MOTO` acceso, **600 passi**, **PID 15472**, ore
+**12:48:17**, strumento `b9642633`, simulatore `ab685eac`, seme `42`.
+**Serve, e non e' un di piu':** senza il freno e le nascite misurate **nel braccio acceso**, il
+confronto con lo spegnimento non regge. **E risponde da solo alla domanda del buco.**

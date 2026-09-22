@@ -1,0 +1,73 @@
+# G4 -- IL BILANCIO DI `d0`, con MEM_MOTO=True
+# blob simulatore (sha1 byte grezzi)=ab685eac  seme=42  passi=120
+# CRITERIO, scritto PRIMA: Delta(somma d0) = scritture + freno + nati - morti,
+#   entro 1e-9 RELATIVO alla scala dei termini.
+
+IL BILANCIO CHIUDE? residuo relativo: max 4.035e-14, mediano 1.221e-14 su 120 passi
+  -> CHIUDE
+
+I TOTALI SU 120 PASSI:
+  Delta(somma d0)  +1.662369e+05
+  scritture        -1.543448e+05   (-92.85 % del Delta)
+  FRENO            +3.204548e+05   (192.77 %)
+  NASCITE-MORTI    +1.269433e+02   (  0.08 %)   <- misurato AL SITO che concatena
+
+  (descrittivi, a granularita' di PASSO e non del sito -- NON entrano nel
+   bilancio: un arco nato e poi scritto mostrerebbe il valore di fine passo)
+  nascite (fine passo)  +5.186200e+02
+  morti (inizio passo)  +3.887728e+02
+
+  LA GUARDIA DEL SALTO fra la fine di un passo e l'inizio del successivo:
+  somma dei salti  +0.000000e+00  -> nessuna scrittura fuori dal ciclo
+
+CHI FA CRESCERE `d0`: il termine col contributo POSITIVO maggiore.
+  freno              +3.204548e+05
+  nascite-morti      +1.269433e+02
+  scritture          -1.543448e+05
+  -> IL PRIMO E' `freno`
+
+NASCITE e MORTI, e la MEDIANA che conta:
+ passo   n nati  n morti |     med nati    med morti     med vivi
+     8        4        2 |     0.987886     1.972761     0.942769
+    16       12        4 |     0.899877     2.060898     1.028569
+    24        0        0 |          nan          nan     1.069267
+    32        8        4 |     1.099539     1.941226     1.112032
+    40        2        1 |     0.982920     2.100625     1.162756
+    48        0        0 |          nan          nan     1.213757
+    56        4        2 |     0.908208     1.326715     1.251020
+    64        6        3 |     1.130800     2.108282     1.280207
+    72        0        0 |          nan          nan     1.305421
+    80        2        1 |     0.800133     1.917778     1.328075
+    88        0        0 |          nan          nan     1.348563
+    96        0        0 |          nan          nan     1.367269
+   104        0        0 |          nan          nan     1.382640
+   112        0        0 |          nan          nan     1.398773
+   120        0        0 |          nan          nan     1.415026
+
+  -> se `med nati` > `med vivi` e `med morti` < `med vivi`, la mediana sale
+     SENZA CHE NESSUN ARCO CRESCA: e' NUCLEAZIONE, non stiramento.
+
+GLI SCRITTORI (la traccia di `Z102`):
+scrittore                    SALITE        DISCESE          SALDO |   giri  salta
+P1_dopo_rilass         0.000000e+00   0.000000e+00   0.000000e+00 |    120      0
+P2_dopo_spinta         0.000000e+00   0.000000e+00   0.000000e+00 |    116      0
+P3_dopo_proj           0.000000e+00   0.000000e+00   0.000000e+00 |    120      0
+P4_dopo_grav           0.000000e+00   0.000000e+00   0.000000e+00 |    120      0
+P6_dopo_coesione       0.000000e+00   0.000000e+00   0.000000e+00 |    120      0
+P7_dopo_4917           0.000000e+00   0.000000e+00   0.000000e+00 |    120      0
+S01_archi_nuovi                 n/d            n/d            n/d |      4      4
+S02_rilass_visco       1.094373e+04  -3.857385e+04  -2.763012e+04 |    120      0
+S03_diff_guscio        9.814573e+04  -1.577562e+05  -5.961046e+04 |    120      0
+S05_spinta_locale      2.474363e-01   0.000000e+00   2.474363e-01 |    116      0
+S06_mitosi                      n/d            n/d            n/d |     62     62
+S07_schwinger                   n/d            n/d            n/d |     28     28
+S08_proj               3.869162e+05  -3.003707e+05   8.654547e+04 |    120      0
+S09_spinta_med         3.389975e+05  -4.658382e+05  -1.268406e+05 |    120      0
+S12_coesione           1.750558e+04  -4.431491e+04  -2.680933e+04 |    120      0
+
+IL FRENO, per chiamante di `_smorza`:
+  d0_passo       aggiunge +3.204548e+05 su dx -1.543428e+05 in 120 giri   <- NEL BILANCIO
+  d_passo        aggiunge +2.289172e+04 su dx +1.265550e+04 in 120 giri   (dentro un sito tracciato)
+
+⚠ `_smp_chiudi()` RISCRIVE `d0` a fine passo SENZA nessun `_traccia_d0`
+  attorno (`:3677`): e' la scrittura che in `Z107` mancava al bilancio.
