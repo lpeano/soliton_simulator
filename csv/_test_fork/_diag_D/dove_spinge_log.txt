@@ -1,4 +1,4 @@
-[TIMBRO] _dove_spinge_la_gravita.py  sha1-BYTE 89c775fd  committato e pulito
+[TIMBRO] _dove_spinge_la_gravita.py  sha1-BYTE 7fec247f  committato e pulito
 [calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
 [spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
 [invarianti] ACCESI (default). DUE LIVELLI: NUMERICO -- overflow, divisione per zero e valori non validi alzano un'eccezione con la riga esatta; l'UNDERFLOW NON ferma niente, perche' densita' come 1e-81 di un nodo neonato sono LEGITTIME. FISICO -- ogni grandezza di stato dentro il suo dominio, a fine passo, con gli INDICI e i valori. L'esplosione del 21/9 NON era un overflow (1.8e6 e' un numero normale): l'avrebbe presa solo la regola FISICA `peq >= 0`. Legge soltanto: su un run sano non cambia un bit.
@@ -43,10 +43,18 @@ B+ controllo POSITIVO: 200 archi su 200000 portano tutto -> atteso MOLTO sopra 0
 C  LA GUARDIA DEL PREFISSO -- il caso che DEVE fallire
      archi APPESI in coda      -> la guardia dice REGGE, atteso REGGE      -> OK
      archi PERMUTATI           -> la guardia dice NON REGGE, atteso NON REGGE  -> OK
+D  cumulato PER CHIAVE, con un arco MORTO e gli altri SLITTATI in mezzo
+     atteso   ['11', '33', '44', '7']
+     ottenuto ['11', '33', '44', '7']   -> OK
+     (per contrasto, l'accumulatore POSIZIONALE avrebbe dato ['11', '32', '43', '11']: sbagliato su 3 archi
+      su 4 -- ed e' esattamente il difetto che la guardia del prefisso ha trovato)
+E  LA GUARDIA DELLA RISURREZIONE -- il caso che DEVE fallire
+     chiave che SPARISCE e RICOMPARE -> risurrezioni contate 1, atteso >= 1  -> OK
+     chiave sempre VIVA               -> risurrezioni contate 0, atteso 0     -> OK
 --------------------------------------------------------------------------------------------
   -> i criteri PASSANO tutti: si misura
 
-configurazione: quella della VALIDAZIONE (sei cure accese). Passi: 120 su 120. 377.2 s
+configurazione: quella della VALIDAZIONE (sei cure accese). Passi: 120 su 120. 400.0 s
 
 ============================================================================================================
 `S09_spinta_med` -- IL SALDO PER REGIONE
@@ -73,9 +81,86 @@ I 20 ARCHI CHE RICEVONO LA SPINTA PIU' GRANDE (cumulato di `S09` sui 120 passi)
 ============================================================================================================
 la guardia del PREFISSO: 61 passi su 120 in cui `(i, j)` NON e' rimasto un prefisso
   (allungamenti dell'accumulatore: 62; chiamate saltate per lunghezza: 93)
+  -> IL CUMULATO POSIZIONALE E' INUTILIZZABILE, e per questo non si usa.
+     LA MITOSI TOGLIE archi (`self.i = concatenate([self.i[keep], a, m])`, `:5325`):
+     tutto cio' che segue un arco rimosso SLITTA. Si usa l'accumulatore PER CHIAVE.
 
-*** IL PREFISSO NON REGGE (prime violazioni ai passi [3, 4, 5, 6, 7, 8, 9, 10]). LA TABELLA NON SI STAMPA:
-    sarebbero numeri VERI sommati sull'ARCO SBAGLIATO. Dichiarato, non nascosto. ***
+la guardia dell'accumulatore PER CHIAVE (coppia di nodi):
+  doppioni (due archi con la stessa coppia nello stesso passo): 0
+  RISURREZIONI (una coppia sparisce e ricompare -> un arco DIVERSO eredita la chiave): 0
+  chiavi distinte viste in tutto il run: 526439
+  archi VIVI ora con un cumulato: 526282 su 526282
+
+CONCENTRAZIONE, sul cumulato PER CHIAVE: la frazione della spinta POSITIVA totale che
+  sta nell'1 %% di archi piu' spinti. Il valore sotto IPOTESI NULLA (uniforme) e' 0.01.
+  misurata = 0.01925    nullo = 0.01    rapporto = 1.9x
+  e sulle SPINTE NEGATIVE (la compressione): 0.01588    rapporto = 1.6x
+
+I 20 ARCHI PIU' SPINTI VERSO L'ALTO (cumulato su 120 passi, chiave = coppia di nodi)
+ rango   nodo i   nodo j regione              | spinta cumul. |          d         d0      L/d
+------------------------------------------------------------------------------------------------------------
+     1      336      446 vuoto-vuoto          |  1.663184e+00 |    2.01590    1.97488    0.935
+     2       19      465 vuoto-vuoto          |  1.663184e+00 |    2.21131    1.99668    0.982
+     3       59      420 vuoto-vuoto          |  1.663184e+00 |    2.15509    2.01055    0.989
+     4      340      420 vuoto-vuoto          |  1.663184e+00 |    2.23823    2.01357    0.881
+     5       91      300 vuoto-vuoto          |  1.663184e+00 |    2.17941    2.03197    0.724
+     6      172      414 vuoto-vuoto          |  1.663184e+00 |    2.08102    1.92371    0.913
+     7      215      573 vuoto-vuoto          |  1.663184e+00 |    2.09147    1.94411    1.097
+     8      315      573 vuoto-vuoto          |  1.663184e+00 |    2.12796    1.95939    1.130
+     9      123      414 vuoto-vuoto          |  1.663184e+00 |    2.31256    1.96314    1.022
+    10      143      152 vuoto-vuoto          |  1.663184e+00 |    2.11989    1.96699    0.852
+    11      617      726 vuoto-vuoto          |  1.663184e+00 |    2.09793    1.90280    0.855
+    12       26      397 vuoto-vuoto          |  1.663184e+00 |    2.16537    2.00055    0.636
+    13      106      884 vuoto-vuoto          |  1.663184e+00 |    2.17712    1.95930    1.052
+    14      592      716 vuoto-vuoto          |  1.663184e+00 |    2.14770    2.11228    1.048
+    15      406      669 vuoto-vuoto          |  1.663184e+00 |    2.44159    2.00625    0.739
+    16       31      648 vuoto-vuoto          |  1.663184e+00 |    1.79665    1.93698    0.936
+    17      340      604 vuoto-vuoto          |  1.663184e+00 |    2.29328    1.94185    1.065
+    18       61      604 vuoto-vuoto          |  1.663184e+00 |    2.22813    1.94801    0.944
+    19       77      531 vuoto-vuoto          |  1.663184e+00 |    2.18280    1.94796    1.017
+    20      238      648 vuoto-vuoto          |  1.663184e+00 |    2.06721    1.95777    1.019
+
+I 20 ARCHI PIU' TIRATI GIU' -- e sono questi che portano il saldo, perche' il saldo
+  totale e' NEGATIVO e vive sul confine:
+ rango   nodo i   nodo j regione              | spinta cumul. |          d         d0      L/d
+------------------------------------------------------------------------------------------------------------
+     1     1887       49 CONFINE vuoto-massa  | -1.663184e+00 |    1.13837    0.84806    0.718
+     2     1525      666 CONFINE vuoto-massa  | -1.663184e+00 |    1.20670    0.87857    0.946
+     3     1489     1603 massa-massa          | -1.663184e+00 |    1.08713    0.91216    1.366
+     4     1560     1603 massa-massa          | -1.663184e+00 |    1.10557    0.98774    1.317
+     5     1884      554 CONFINE vuoto-massa  | -1.663184e+00 |    1.74181    0.96239    1.178
+     6     1474     1596 massa-massa          | -1.663184e+00 |    1.06415    0.96690    1.300
+     7       82      589 vuoto-vuoto          | -1.663184e+00 |    1.95604    1.50605    1.070
+     8     1791      666 CONFINE vuoto-massa  | -1.663184e+00 |    1.08478    0.98432    0.887
+     9      265      459 vuoto-vuoto          | -1.663184e+00 |    1.84066    1.46893    1.194
+    10      661      806 vuoto-vuoto          | -1.663184e+00 |    2.02468    1.45664    1.069
+    11     2244      390 CONFINE vuoto-massa  | -1.663184e+00 |    1.33880    0.96367    1.030
+    12     1481     1689 massa-massa          | -1.663184e+00 |    1.03017    0.99152    1.226
+    13     1771     1832 massa-massa          | -1.663184e+00 |    1.13966    0.95218    1.191
+    14     1489     1608 massa-massa          | -1.663184e+00 |    1.06484    0.85001    1.479
+    15      444      649 vuoto-vuoto          | -1.663184e+00 |    2.03040    1.51932    1.054
+    16     1356      849 CONFINE vuoto-massa  | -1.663184e+00 |    1.93437    1.54906    1.030
+    17      469      863 vuoto-vuoto          | -1.663184e+00 |    2.00871    1.48555    1.048
+    18     1410     1640 massa-massa          | -1.663184e+00 |    1.12313    0.82183    1.191
+    19      186      787 vuoto-vuoto          | -1.663184e+00 |    2.02019    1.51696    1.032
+    20     1455      568 CONFINE vuoto-massa  | -1.663184e+00 |    1.73909    0.96742    1.089
+
+------------------------------------------------------------------------------------------------------------
+CONTROPROVA -- il top di UN SOLO PASSO (il 120), che NON cumula nulla e quindi e'
+  immune al riordino PER COSTRUZIONE. Se i nodi qui somigliano a quelli di sopra,
+  le due strade concordano; se no, il cumulato va guardato con sospetto.
+ rango   nodo i   nodo j regione              | spinta nel passo
+     1      274      646 vuoto-vuoto          | -1.607642e-02
+     2     1388     2640 CONFINE con nato     | -1.607642e-02
+     3     1869     2638 CONFINE con nato     | -1.607642e-02
+     4      723      766 vuoto-vuoto          | -1.607642e-02
+     5      624      646 vuoto-vuoto          | -1.607642e-02
+     6      624      766 vuoto-vuoto          | -1.607642e-02
+     7      624      821 vuoto-vuoto          | -1.607642e-02
+     8      624      723 vuoto-vuoto          | -1.607642e-02
+     9      681      766 vuoto-vuoto          | -1.607642e-02
+    10      681      821 vuoto-vuoto          | -1.607642e-02
+  concentrazione delle DISCESE in questo singolo passo: 0.01075  (nullo 0.01)
 
 LIMITI: UN seme, UNA scena, 120 passi dalla semina. E questa misura dice DOVE la spinta
   arriva, NON se spegnerla cambi il sistema: per quello servono `G3` e `G4`.

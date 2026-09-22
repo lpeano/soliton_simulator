@@ -10943,3 +10943,51 @@ dimensione effettiva del grafo va misurata INSIEME**, senno' un `-1.6` e' indist
 dimensioni giuste, run lungo sano, memoria del moto risolta — **non valgono oggi.** Fino ad
 allora **le tre prove sono il BERSAGLIO: danno una direzione al lavoro di pulizia**, ed e' per
 questo che stanno **in testa a `CLAUDE.md`**.
+
+### ⑷ **`G2` secondo giro: gli archi estremi sono un PLATEAU DI SATURAZIONE, non una coda**
+
+> **⚠ E PRIMA DI TUTTO, UN RITARDO MIO, DICHIARATO INVECE CHE RECUPERATO IN SILENZIO.**
+> Questo giro e' stato **girato e non committato**, e i suoi numeri sono stati **detti a Luca in
+> chat**. **E' una violazione di `P1-bis`/`P1-bis-bis`**: per chi legge il repo -- Claude web, una
+> sessione nuova -- quei numeri **non esistevano**. **Se ne e' accorto Luca**, verificando dal
+> disco che dopo `7f1def4` *(lo strumento)* non c'era l'esito. **`CLAUDE.md` lo dice gia': un
+> blocco di recupero non sana la violazione, la conferma.**
+> *(Il run e' valido: il timbro del presidio dice `sha1-BYTE 7fec247f committato e pulito`, cioe'
+> i byte che hanno girato sono esattamente quelli di `7f1def4`.)*
+
+**L'ACCUMULATORE PER CHIAVE HA FUNZIONATO, e le sue due guardie sono a zero:**
+
+```
+doppioni (stessa coppia due volte nello stesso passo)        0
+RISURREZIONI (una coppia sparisce e ricompare)               0
+chiavi distinte viste in tutto il run                  526 439
+archi VIVI ora con un cumulato                 526 282 su 526 282
+```
+
+**IL FATTO NUOVO:** i **20 archi piu' spinti in su** valgono **tutti** `+1.663184e+00`; i **20 piu'
+tirati giu'** valgono **tutti** `-1.663184e+00`. **E al singolo passo 120 i primi dieci valgono
+tutti `-1.607642e-02`.** **Quaranta archi diversi, un solo numero.**
+
+**LA CAUSA E' NEL SORGENTE, non dedotta.** `S09` fa:
+```
+spinta = np.clip(spinta, -passo_causale, passo_causale)
+d0[mask] += _sd0(spinta * float(np.median(self.d0[mask])), mask)
+```
+**Quando il clip morde, l'incremento vale `passo_causale * median(d0[mask])`: un tetto GLOBALE
+moltiplicato per una statistica GLOBALE.**
+> **Su un arco saturo la spinta non dipende piu' dall'arco. Solo il SEGNO lo fa.**
+
+**E LA CONCENTRAZIONE DICE CHE NON E' UNA CODA:** la frazione della spinta positiva che sta
+nell'`1 %` di archi piu' spinti vale **`0.01925`** contro il nullo `0.01` *(`1.9x`)*; sulle
+negative **`0.01588`** *(`1.6x`)*; **in un singolo passo `0.01075`, cioe' IL NULLO.**
+**La spinta e' quasi uniforme, e gli estremi sono archi incollati al tetto.**
+
+**⚠ E' `A11` corollario 6: se un limite satura, e' un ALLARME, non una protezione.**
+
+**⚠ COSA MANCA ANCORA, e lo dico invece di arrotondare:** **quanti** archi saturano e **per
+quanti passi** non e' misurato. La strumentazione e' scritta e **non ancora girata**; finche' non
+gira, *«saturi in tutti e 120 i passi»* resta una **verifica aritmetica**
+*(`1.663184/120 = 0.013860`, fra il tetto iniziale e quello del passo 120 `0.016076`, coerente con
+`median(d0)` da `0.883` a `1.415`)*, **non una misura**. — **`Z106`**
+
+**⚠ E NESSUNA CURA SI DERIVA QUI.** Il mandato dice che le cure si derivano al `CHK3`.
