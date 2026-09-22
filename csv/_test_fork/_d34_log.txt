@@ -1,0 +1,119 @@
+[TIMBRO] _g4_prova.py  sha1-BYTE d24b1be3  committato e pulito
+COLLAUDO DEL BILANCIO su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di misurare
+----------------------------------------------------------------------------------------------------
+K1 bilancio COMPLETO su un caso noto -> residuo -8.882e-16, atteso 0 -> OK
+K2 IL CASO CHE DEVE FALLIRE: lo stesso bilancio SENZA le nascite
+     residuo 5.000e+00 (relativo 7.812e-01), atteso NON nullo -> OK: il criterio VEDE il termine mancante
+K3 IL CASO CHE DEVE FALLIRE: senza le MORTI -> residuo -2.000e+00 -> OK
+K4 IL CASO CHE DEVE FALLIRE: senza il FRENO -> residuo 3.000e-01 -> OK
+K5 cancellazione (`Delta = 0` con termini enormi) -> relativo 0.000e+00, NON esplode -> OK
+----------------------------------------------------------------------------------------------------
+  -> il bilancio PASSA i collaudi: si misura
+
+[G4] modo --ritmo-wrap   MEM_MOTO spento: False   MEM_MOTO_TUTTO spento: False   frame 100
+[G4] blob simulatore 3d91338e   seme 42
+[TIMBRO] _scena_video.py  sha1-BYTE 44ee9c7d  committato e pulito
+================================================================================================================
+SCENA DEL VIDEO senza rendering -- 100 frame x 6 passi = 600 passi di motore
+================================================================================================================
+[calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[invarianti] ACCESI (default). DUE LIVELLI: NUMERICO -- overflow, divisione per zero e valori non validi alzano un'eccezione con la riga esatta; l'UNDERFLOW NON ferma niente, perche' densita' come 1e-81 di un nodo neonato sono LEGITTIME. FISICO -- ogni grandezza di stato dentro il suo dominio, a fine passo, con gli INDICI e i valori. L'esplosione del 21/9 NON era un overflow (1.8e6 e' un numero normale): l'avrebbe presa solo la regola FISICA `peq >= 0`. Legge soltanto: su un run sano non cambia un bit.
+[anom-simm] L'ANOMALIA SIMMETRICA, SENZA PAVIMENTO: anom = 2*(rho-peq)/(rho+peq), con `0/0 := 0` DEFINITO (precedente: scala_p, Z67). Toglie il pavimento max(peq,1e-9), che e' un numero SCELTO e non esprime nessun vincolo fisico (A11): con peq negativo RIBALTAVA IL SEGNO e moltiplicava per 3.7e5 (Z94). Il caso peq->0 con rho ordinario passa da 1e+08 a ESATTAMENTE +2, e per anomalie piccole le due forme coincidono. *** RICHIEDE --peq-esatto: con peq < 0 il denominatore si annulla in peq = -rho ed e' un POLO, non un limite. Senza C1 questa cura sostituisce un pavimento con un polo. Il caso e' CONTATO, non assunto impossibile. ***
+[coes-causale] LA COESIONE RISPETTA L'ISTANTE E IL CONO LOCALE: `d0` e `d` si leggono dalla fotografia di INIZIO PASSO invece che da un `d0` gia' spostato da sette scritture, e il tetto e' `cs_arco*DT` col `cs` del nodo PIU' LENTO invece di `LAM*sqrt(K_C)*DT`, che e' costruito su costanti di modulo e non conosce il cono del luogo (A5). Zero parametri: `_cs_nodo_prev` esiste gia'. NB: il tetto locale non e' sempre piu' stretto -- dove il cono e' veloce ALLARGA -- ed e' causalita', non prudenza.
+[scala-min-passo] IL FRENO UNA VOLTA PER PASSO: le sei scritture di `d0` e i sotto-passi di `d` NON frenano piu'; a fine passo si applica `_smorza` UNA VOLTA sulla VARIAZIONE TOTALE, dal valore di INIZIO passo. Cura il CRICCHETTO di Z91: frenare ogni scrittura separatamente rende il risultato dipendente dall'ORDINE delle leggi e, poiche' frena solo le discese, con spinte opposte di somma nulla NON da' zero. Applicato una volta sola sul totale il bias e' ZERO ESATTO. Lo snapshot di inizio passo segue la mitosi ai quattro siti di ristrutturazione; gli archi NATI nel passo non vengono frenati, e le nascite restano a LAM. Zero coefficienti.
+[peq-nascita-locale] UNA SOLA LEGGE DI NASCITA PER `peq`: gli archi della creazione di coppia alla Schwinger nascono con `nan` e vengono CALIBRATI da step() sulla `rho` DEL LORO ARCO, esattamente come quelli di `_allaccia`. Prima prendevano `median(peq)`, LA MEDIANA GLOBALE: una statistica globale dentro una legge locale (A2), e quei nodi non hanno alcun rapporto con la mediana della rete. Zero parametri: il meccanismo esisteva gia'. L'eredita' della MITOSI non si tocca: un arco che si spezza non nasce, CONTINUA.
+[peq-esatto] IL RILASSAMENTO DI `peq` IN FORMA ESATTA: peq <- rho + (peq-rho)*exp(-dt_e/tau_bg), piu' lo stesso passo esatto per la diffusione (splitting di Lie-Trotter, punto fisso `peq+flusso`). E' una COMBINAZIONE CONVESSA, quindi `min(peq,rho) <= peq_new <= max(peq,rho)` per QUALUNQUE passo: `peq` NON PUO' PIU' SCAVALCARE SOTTO ZERO. L'Eulero esplicito di prima scavalcava per dt_e/tau_bg > 1, misurato 1.2018 al passo 1126 del ramo D. Zero coefficienti nuovi: e' la stessa forma gia' imposta dal par.4 per i rilassamenti di primo ordine. NON toglie il pavimento di :4215.
+[coes-adim] COESIONE ADIMENSIONALE: i tre addendi normalizzati sulla densita' LOCALE dell'arco (I_med sparisce, era una media globale), e lo spostamento e' passo_causale * tanh(...) * filtro_portata, con |F| <= 1 PER COSTRUZIONE. Sostituisce il clip tanh(stress)*d0.
+[chi-coop] COOPERAZIONE: chi_basc SCRIVE perc_geom (geometria, letta dalla catena della torsione) e lo spinore scrive perc_chi (carica, letta dal campo B, dalla mitosi e da Schwinger). L'anello carica -> campo -> spinore -> carica e' quello NORMALE della fisica, sfasato di un passo.
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+[fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+[step2-orologio] STEP 2: omega_clk *= (cs/CS_M)^2 = OROLOGIO DI COMPTON (omega = m c^2/hbar, e nel modello c e' cs). Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.
+[rumore-colorato] TAGLIO SPETTRALE: il calcio del vuoto non e' piu' bianco ma correlato su tau_c = LAM/CS_M = 0.4 (= 40 passi), con un processo di Ornstein-Uhlenbeck sul rumore stesso e `dt_n = DT*r` (non DT: e' un processo LOCALE). `amp` INVARIATA. MOTIVO: il rumore bianco discreto inietta a tutte le frequenze fino a Nyquist, incluse quelle che il passo non risolve; in natura non esiste. ZERO coefficienti: LAM e CS_M sono gia' nel sistema. ATTENZIONE: la ricorsione PRESERVA LA VARIANZA, quindi NON abbassa theta - se lo muove lo fa SALIRE (<=5%). Si cabla perche' il rumore bianco e' SBAGLIATO, non perche' risolva l'aliasing (doc/PREDIZIONE_taglio_spettrale.md).
+[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: inerzia = T^2 = (d/cs)^2, quindi il tempo che COSTRUISCE l'inerzia e quello che la RILASSA devono essere lo stesso; oggi sono due diversi nella stessa equazione. Zero coefficienti, zero floor nuovi. NB: |omega|_eq va come sqrt(tau), quindi theta cala di ~13x: UN ORDINE DI GRANDEZZA, NON la soluzione dell'aliasing.
+[spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+
+  FLAG ATTIVI, letti dal MODULO dopo `_applica_flag` (P6: dai dati, non dal comando):
+    CAMPO_SPINORIALE     True
+    SPINORE_VIVO         True
+    SPINORE_CORRETTO     True
+    CHI_CORE             True
+    CS_DINAMICO          True
+    TAU_LUCE             True
+    CHI_BASC             True
+    CHI_COOP             True
+    SCALA_MIN            False
+    COES_ADIM            True
+    PEQ_ESATTO           True
+    PEQ_NASCITA_LOCALE   True
+    SCALA_MIN_PASSO      True
+    COES_CAUSALE         True
+    ANOM_SIMM            True
+    INVARIANTI           True
+    FORK_SU2             True
+    FORK_SU2_MEM         True
+    STEP2_OROLOGIO       True
+    SPIN_FEEDBACK        True
+    CALORE_VETTORIALE    False
+    PLAST_DIN            True
+    VERLET               True
+    TAU_LOC              1.0
+  PASSI_PER_FRAME = 6   DT = 0.01   TAU_A = 50.0   N_c(collasso) = 621
+  ⚠ `--tau-luce` ha il SIGILLO FALLITO (CLAUDE.md par.0): ramo NON CERTIFICATO.
+  ⚠ `--chi-basc` RISCRIVE `perc_chi` a ogni passo: non e' un'etichetta di lignaggio.
+
+  scena avviata: n = 2391 nodi alla semina (N_c*0.8 per massa, 3 masse)
+
+  SEME EFFETTIVO (letto da Rete.__init__): 42    BLOB: a781e4338c70aab1f59ed81ac03c8782537aeb7f
+  SERIE ATTIVA: uno snapshot ogni 20 frame = 120 passi di motore -> C:\Users\lpeano\soliton_simulator\csv\_test_fork\_d34_ritmo_wrap\scena.pkl.gz
+  frame 1     n=2492    archi=526098   coer_l=0.5735   dil= -1.277%   [21.8 s, 21.797 s/frame]
+  frame 5     n=2585    archi=526208   coer_l=0.3432   dil= -6.149%   [108.4 s, 21.679 s/frame]
+  frame 10    n=2629    archi=526264   coer_l=0.3267   dil=-10.581%   [217.2 s, 21.722 s/frame]
+  frame 15    n=2643    archi=526281   coer_l=0.3352   dil=-13.627%   [327.4 s, 21.826 s/frame]
+  SNAPSHOT passo 120     n=2660       36.22 MB in   1.3 s -> scena_000120.pkl.gz
+  frame 20    n=2660    archi=526302   coer_l=0.3568   dil=-16.515%   [447.8 s, 22.389 s/frame]
+  frame 25    n=2671    archi=526315   coer_l=0.3478   dil=-19.738%   [548.7 s, 21.950 s/frame]
+  frame 30    n=2683    archi=526331   coer_l=0.3899   dil=-22.955%   [648.6 s, 21.621 s/frame]
+  frame 35    n=2706    archi=526362   coer_l=0.4282   dil=-26.492%   [754.6 s, 21.560 s/frame]
+  SNAPSHOT passo 240     n=2724       36.41 MB in   1.4 s -> scena_000240.pkl.gz
+  frame 40    n=2724    archi=526383   coer_l=0.4498   dil=-29.763%   [867.5 s, 21.688 s/frame]
+  frame 45    n=2741    archi=526405   coer_l=0.4038   dil=-32.674%   [975.1 s, 21.669 s/frame]
+  frame 50    n=2755    archi=526422   coer_l=0.4532   dil=-34.245%   [1077.1 s, 21.542 s/frame]
+  frame 55    n=2768    archi=526439   coer_l=0.5294   dil=-35.784%   [1178.7 s, 21.432 s/frame]
+  SNAPSHOT passo 360     n=2787       36.49 MB in   1.3 s -> scena_000360.pkl.gz
+  frame 60    n=2787    archi=526461   coer_l=0.5455   dil=-37.301%   [1280.8 s, 21.347 s/frame]
+  frame 65    n=2808    archi=526488   coer_l=0.5562   dil=-38.185%   [1383.8 s, 21.288 s/frame]
+  frame 70    n=2825    archi=526508   coer_l=0.5563   dil=-38.213%   [1490.4 s, 21.291 s/frame]
+  frame 75    n=2842    archi=526530   coer_l=0.5549   dil=-37.499%   [1596.5 s, 21.287 s/frame]
+  SNAPSHOT passo 480     n=2867       36.52 MB in   1.3 s -> scena_000480.pkl.gz
+  frame 80    n=2867    archi=526560   coer_l=0.5336   dil=-36.361%   [1701.4 s, 21.267 s/frame]
+  frame 85    n=2912    archi=526619   coer_l=0.4909   dil=-34.674%   [1804.6 s, 21.231 s/frame]
+  frame 90    n=2959    archi=526679   coer_l=0.4672   dil=-32.387%   [1907.4 s, 21.193 s/frame]
+  frame 95    n=2995    archi=526723   coer_l=0.4397   dil=-30.858%   [2012.0 s, 21.179 s/frame]
+  SNAPSHOT passo 600     n=3073       36.72 MB in   1.3 s -> scena_000600.pkl.gz
+  frame 100   n=3073    archi=526823   coer_l=0.4249   dil=-28.889%   [2120.9 s, 21.209 s/frame]
+
+  TOTALE 2120.9 s per 100 frame (dal 1 al 100) -> 21.209 s/frame medio
+  n da 2492 a 3073;  costo per frame da 21.797 a 21.203 s  (x0.97)
+  ⚠ IL COSTO CRESCE COL NUMERO DI NODI: un'estrapolazione LINEARE SOTTOSTIMA.
+  progresso CSV -> C:\Users\lpeano\soliton_simulator\csv\_test_fork\_d34_ritmo_wrap\prog.csv
+  ARCHIVIO: 5 snapshot scritti, 0 saltati, 0 FALLITI   (0.18 GB in totale)
+================================================================================================================
+
+[G4] 2121.4 s
+
+L'INVOLUCRO: `_applica_flag` avvolto 1 volte, MEM_MOTO ORA = True, MEM_MOTO_TUTTO ORA = True
+
+IL BILANCIO:
+  bilancio -> C:\Users\lpeano\soliton_simulator\csv\_test_fork\_d34_ritmo_wrap\BILANCIO_d0.txt
+  e C:\Users\lpeano\soliton_simulator\csv\_test_fork\_d34_ritmo_wrap\BILANCIO_d0.csv
+  residuo relativo MASSIMO = 9.595e-14  -> CHIUDE

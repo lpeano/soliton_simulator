@@ -378,7 +378,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | `ANOM_SIMM` | `C1-bis` anomalia simmetrica, senza pavimento | **`False`** | `6/6` *(letto dal referto)* | in **ogni** run del fork | toglie `max(peq, 1e-9)`, che con `peq < 0` **RIBALTAVA IL SEGNO** *(`Z94`, `D17`)* | VERIFICATA-SPENTA |
 | `INVARIANTI` | `C5` domini di stato, due livelli | **`True`** | `3/3` *(letto dal referto)* | in **ogni** run: **zero violazioni** in tutti e tre i bracci di `G4` | legge soltanto; su un run sano non cambia un bit | **ACCESA DI DEFAULT** *(`True`)* |
 | `RITMO_WRAP_2PI` | **`A1`** il wrap del ritmo sul periodo GIUSTO *(`2π`)* | **`False`** | ⏸ **da scrivere** | ⏸ prova a 600 passi, **da fare** | cura **`D34`** *(`Z117`: il wrap a `4π` e' l'IDENTITA')* | ⏸ **NON ANCORA IN CODICE** |
-| `FASE_2PI` | **§D** `φ` come fase ordinaria su `[0, 2π)` | — **assente** | ⏸ **da scrivere** | ⏸ prova a 600 passi + i **quattro test** `E1`-`E4`, **da fare** | la lettura scelta da Luca, **da METTERE ALLA PROVA**. Se un test fallisce, **cade** | ⏸ **NON ANCORA IN CODICE** |
+| `FASE_2PI` | **§D** `φ` come fase ordinaria su `[0, 2π)` | **`False`** | ⏸ **da scrivere** | ⏸ prova a 600 passi + i **quattro test** `E1`-`E4`, **da fare** | la lettura scelta da Luca, **da METTERE ALLA PROVA**. Se un test fallisce, **cade** | ⏸ **NON ANCORA IN CODICE** |
 
 **Cure con default ACCESO: 1 su 9.**
 
@@ -482,6 +482,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **S06** | **Il «muro dell'1 %» dell'antifase e' causato da `D35`**: l'antifase «non annichila» perche' **`+2π` letto da `exp(iφ)` non e' un'antifase, e' la stessa fase** | rimisurare l'annichilazione **dopo** la decisione su `φ` *(e' il test `E2` del §E)* | **in attesa** — «non annichila» e' una misura **PRE-FORK** *(par.9-bis)* e **non l'ho rimisurata** |
 | **S07** | **`dphi_arc = angle(exp(1j·Δφ))` (`:5894`) COLLASSA a `2π` una differenza che vive su `4π`** — e' `B3` del mandato | **DORMIENTE**: `K_FRANGE = 0`, il ramo non gira. Da riesaminare **se** `K_FRANGE` venisse acceso, **o** quando `φ` passa a `2π` *(con `φ` su `2π` la riga diventa CORRETTA per costruzione)* | **in attesa** — **non e' un distinguitore**, e' un difetto di un'altra famiglia |
 | **S08** | **Se `φ` non e' l'azimut del Bloch, CHE COS'E'?** | `Z121` ha **refutato** la frase del docstring *(`R ≤ 0.18` contro un nullo di `0.016`, criterio `≥ 0.90`)*, **ma non ha detto che cosa `φ` sia**. Serve una lettura della catena che la AGGIORNA *(`phivel`, `_phc`, `omega_clk`)* | **in attesa** — **refutare non e' spiegare**, e la differenza si scrive |
+| **S09** | **La correzione del ritmo ALZA la quota di nodi al tetto perche' ABBASSA il gauge `median(|f|)`** | rimisurare `median(|f|)` **a 600 passi** coi due wrap in parallelo *(a 120 passi `Z117` lo trovava INVARIATO, `1.000000`)*, **e su piu' semi** | **in attesa** — **e' l'OPPOSTO del meccanismo che avevo ipotizzato in `Z117`**, e con UN seme la direzione non e' attribuibile |
 
 
 > **⚠⚠ `CHK3-D`: LA SEZIONE DEL CHECKPOINT SUI DIFETTI NUOVI, E IL SUO COSTO.**

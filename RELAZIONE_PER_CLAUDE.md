@@ -12888,3 +12888,49 @@ UNA SOLA**. **`tau_pp` è locale alla mitosi**, e la conseguenza per l'unificazi
 **toglierlo tocca una funzione, non il sistema.**
 
 **✅ `D32` si estende: non due tempi, TRE.** **Nessuna unificazione ora.**
+
+### ㉽ **La prova di `D34`: `6/8` come previsto, e UNA MIA PREVISIONE SBAGLIATA**
+
+> Finita alle **20:39**, `2121.4 s`. Flag **acceso**, blob `3d91338e`, seme `42`, 600 passi.
+> **Le previsioni erano committate prima che il flag esistesse** *(`94351c9`)*, e le verifico
+> una per una.
+
+| | previsione | esito |
+|---|---|---|
+| ① | `6/8`, gli stessi due criteri | **✅** `d0` e `d/d0` |
+| ② | il bilancio chiude | **✅** `9.595e-14` |
+| ③ | `min(r)` resta al pavimento | **✅** `1.414212e-06` **esatto**, in entrambi i bracci |
+| ④ | `max(r)` resta `≈1.4142` | **✅** `1.414213e+00` |
+| ⑤ | la quota al TETTO **cala** del `~3 %` | **❌ SBAGLIATA: SALE** |
+
+**❌ LA QUINTA È SBAGLIATA, e sale a tutti e tre gli istanti:**
+`3.40e-03`→`4.14e-03` *(+22 %)* · `7.25e-04`→`1.08e-03` *(+49 %)* ·
+`5.25e-02`→`5.47e-02` *(+4 %)*.
+
+**E GLI AGGREGATI PEGGIORANO TUTTI:**
+
+| | riferimento | con la cura |
+|---|--:|--:|
+| `Δ(Σd0)` | `+1.731e+06` | **`+1.959e+06`** |
+| FRENO | `+117.41 %` | `+105.60 %` |
+| `med d/d0` | `0.7489` | **`0.7096`** |
+| stress | `7.866` | **`9.833`** |
+| `n` | `2959` | `3073` *(`+3.9 %`)* |
+
+> **⚠ E IL LIMITE ERA SCRITTO PRIMA, quindi non lo invento adesso:** *«il sistema è caotico,
+> due run che differiscono di `1e-16` divergono comunque; quella differenza NON è l'effetto
+> della correzione, è dispersione di run; con UN seme non è attribuibile»*.
+> **`n` diverge del `3.9 %`, sotto il `±10 %` che avevo indicato come soglia di sospetto.**
+
+**✅ LA CORREZIONE RESTA GIUSTA, e la ragione non è negli aggregati:** il difetto è
+**dimostrato** — `max|w4(a) − a| = 0.000e+00` su `100 001` punti — e **lasciare un wrap che
+non avvolge non ha nessun argomento a favore**. **La prova non doveva dimostrare che serve:
+doveva misurare QUANTO.** La risposta è **poco, e non nella direzione che mi aspettavo**.
+
+**⚠ UNA SPIEGAZIONE CANDIDATA, che NON promuovo a fatto → `S09`:** togliere le frequenze
+spurie **abbassa `median(|f|)`**, il gauge; con un gauge più piccolo **`x = f/med` sale per
+tutti**, e **più nodi arrivano al tetto**. **È l'opposto del meccanismo che avevo ipotizzato
+in `Z117`**, dove a 120 passi il gauge risultava **invariato** *(`1.000000`)*. **A 600 passi non
+l'ho rimisurato, e con un seme la direzione non è attribuibile.**
+
+**Il default resta SPENTO. La decisione è tua** *(voce `E3`)*.
