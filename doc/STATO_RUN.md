@@ -370,7 +370,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **D18** | **`COES_ADIM` leggeva ISTANTI MISTI e il suo tetto era GLOBALE** | `Z92` · `A5` | `COES_CAUSALE` *(`C4`)* | **`CURATO`** |
 | **D19** | **OTTO grandezze che la semina legge erano INERTI SUL VUOTO in ogni run di epoca 1** | `Z88` | la cura del mondo-dopo-i-flag | **`CURATO`** |
 | **REG-A** | **FASE A del registro della fisica: l'INVENTARIO degli scrittori di stato** | MANDATO-REGISTRO §2 | ✅ **FATTA** *(`1214283`, blob `2c70e4ad`)*: **`164` scritture fisiche su `27` grandezze, di cui `65` CONCATENAZIONI**, piu' `313` scritture su attributi **non dichiarati fisici**, elencati e non nascosti |
-| **REG-B** | **FASE B: le SCHEDE, a lotti** — prima le componenti dentro le misure in corso | MANDATO-REGISTRO §2 | ⏸ **mentre i run girano.** `27` grandezze da coprire, **nessuna esclusa** |
+| **REG-B** | **FASE B: le SCHEDE**, a lotti, **un commit per lotto** | MANDATO-REGISTRO §2 | ⏸ **ORDINE FISSATO DA LUCA:** per primo **il freno di `SCALA_MIN`** *(stato `DIFETTOSA`, `D31`, violazione di `A11` corollario 7)*, poi **gravita' bifase**, **memoria del moto**, **coesione**, **mitosi**, **Schwinger**, **rilassamento di `peq`**. Poi le altre attive, poi le **dormienti**. **Ogni scrittore dei 164 dell'inventario deve finire in una scheda** |
 | **REG-C** | **FASE C: LA STORIA** di ogni legge, e le schede delle leggi TOLTE | MANDATO-REGISTRO §2 | ⏸ cio' che non si ricostruisce si scrive **NON RICOSTRUITO** |
 | **REG-R** | **LA REGOLA MANTENUTA del registro della fisica** — la riga in `CLAUDE.md` *(«nessuna legge fisica entra, cambia o esce dal simulatore senza passare da `doc/REGISTRO_FISICA.md`»)* **e l'hook che RIFIUTA un commit che tocca `soliton_simulator.py` senza toccare il registro**, salvo `[SENZA-FISICA: motivo]` | MANDATO-REGISTRO §4 | ⏸ **NON FATTA, e me ne accorgo facendo il punto.** **Non poteva essere fatta prima:** l'hook rifiuterebbe ogni commit al simulatore, e `doc/REGISTRO_FISICA.md` **non esiste ancora** — va con la **fase B** |
 | **REG-V** | **`_verifica_registro.py`**: completezza, esistenza, coerenza con la traccia di `d0` e col registro dei domini di `C5` | MANDATO-REGISTRO §3 | ⏸ col collaudo `P1-sexies`, **compreso un registro volutamente sbagliato che DEVE fallire** |
@@ -382,6 +382,17 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 > **Sono DUE blob diversi**, e il secondo e' byte-inerte rispetto al primo a `MEM_MOTO` acceso
 > *(sigillo `T7`, `206` campi identici)* — **ed e' per questo che i numeri dei due si
 > confrontano.** Senza quel sigillo, sarebbero due sistemi.
+
+> **⚠⚠ IL VINCOLO CHE GOVERNA IL CHECKPOINT (Luca, 2026-09-22), e viene prima di ogni
+> cura:**
+> **LE CURE DEL `CHK3` NON PARTONO FINCHE' LE SCHEDE DELLE COMPONENTI DA CURARE NON ESISTONO.**
+> **Il registro serve esattamente a questo: una cura deve NASCERE DALLA SCHEDA** — dalla
+> formula, dalle dimensioni, da cosa legge e cosa scrive, dai limiti classificati con `A11`.
+> **Se la scheda non c'e', si cura di nuovo alla cieca**, ed e' il modo in cui sono nati
+> `D01`-`D31`.
+> **Conseguenza operativa:** `SPINTA_LOCALE`, `POZZO_D`, `MEM_ARCO` e **il freno simmetrico di
+> `D31`** **non si scrivono in codice** finche' le loro schede non stanno in
+> `doc/REGISTRO_FISICA.md`.
 
 <!-- DIFETTI-NUOVI-INIZIO -->
 | **D20** | La correzione (1) su `inerzia` NON e' stata cablata, e **il gate che la autorizzava aveva misurato UN'ALTRA GRANDEZZA** | `Z1` | — | `APERTO` |

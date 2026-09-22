@@ -11791,3 +11791,42 @@ e' nucleazione**.
 13:59:29, PID `15750`** — dira' se la memoria del moto cambi qualcosa. **Ma il motore e'
 gia' identificato, e non e' lei.**
 **⚠ LIMITI: UN seme, UNA scena, 600 passi.**
+
+### ㉜ **Disco: `108 MB` liberati su `E:` — e uno strumento che spostava file COMMITTATI**
+
+**Spostati con `copia → sha1 dei byte compressi → confronto → rimozione`**, in
+`E:\soliton_archivio\spostati_2026-09-22`: i tre `.pkl.gz` di `_g4_corto`, `_g4_inerzia` e
+`_g4_controllo`, **`108.2 MB`**, ciascuno **verificato** *(elenco generato in
+`doc/SPOSTATI_SU_E.md`)*.
+
+> **⚠ MA LA PRIMA VERSIONE HA SPOSTATO ANCHE TRE FILE COMMITTATI** —
+> `_g4_controllo/BILANCIO_d0.txt`, `.csv` e il reperto del bilancio che non chiudeva.
+> **Erano recuperabili perche' stavano in git, e sono stati ripristinati**, ma **lo strumento non
+> doveva toccarli: un file tracciato non e' spazio da liberare, e' contenuto del repo.**
+> **Corretto:** legge `git ls-files` e **salta** cio' che git conosce, dichiarandolo riga per
+> riga; e **se non riesce a leggere `git ls-files` non sposta NIENTE** — *meglio non liberare
+> spazio che cancellare il repo*.
+
+**E perche' i collaudi non l'hanno preso:** `K1`, `K2` e `K3` collaudavano **il confronto `sha1`**
+e **la lista dei divieti**, cioe' i **criteri**. **Non collaudavano la domanda «questo file
+posso spostarlo?», che non mi ero posto.** E' la stessa lezione gia' nei pattern: **un
+collaudo che passa dice che cio' che guarda e' a posto, non che tutto lo sia.**
+
+### ㉝ **Il registro della fisica: il vincolo che governa il CHECKPOINT**
+
+> **Decisione di Luca, e viene prima di ogni cura:**
+> **LE CURE DEL `CHK3` NON PARTONO FINCHE' LE SCHEDE DELLE COMPONENTI DA CURARE NON ESISTONO.**
+
+**Il registro serve esattamente a questo: una cura deve NASCERE DALLA SCHEDA** — dalla
+formula, dalle dimensioni, da cosa legge e cosa scrive, dai limiti classificati con `A11`.
+**Se la scheda non c'e', si cura di nuovo alla cieca** — ed e' il modo in cui sono nati
+`D01`-`D31`.
+
+**Conseguenza operativa, scritta in coda:** `SPINTA_LOCALE`, `POZZO_D`, `MEM_ARCO` e **il freno
+simmetrico di `D31`** **non si scrivono in codice** finche' le loro schede non stanno in
+`doc/REGISTRO_FISICA.md`.
+
+**E il punto 6 e' stato sostituito per intero:** oltre alla fase B e a `REG-R`, comprende ora
+anche **la fase C** *(la storia di ogni legge, epoca per epoca, anche per le leggi TOLTE)* e
+**lo script di verifica** *(registro contro codice, traccia di `d0`, domini di `C5`, coda dei
+difetti)*. **Erano due pezzi che il mio elenco aveva perso.**
