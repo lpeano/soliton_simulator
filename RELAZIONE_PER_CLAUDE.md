@@ -11887,3 +11887,54 @@ sembrare la causa.
 fase compreso** — **va fatto prima del `CHK3`**, perche' `MEM_MOTO` lascia vivo l'effetto
 **indiretto**: la proiezione trasversale di `:6016` continua a leggere `mem_mot`.
 **LIMITI: UN seme, UNA scena, 600 passi.**
+
+### ㉟ **Verifica di stato del 2026-09-22, ore 15:40 — e cio' che ho saltato**
+
+**`G4-bis` NON E' PARTITO, e non c'e' nessun processo Python vivo** *(verificato con
+`Get-CimInstance Win32_Process`: zero `python.exe`)*. **Non parte finche' non ha il suo SIGILLO**
+— pattern ⑤, e il flag **non esiste ancora**. Dal sorgente, deve coprire **quattro**
+punti, non uno: `:5655` l'aggiornamento di `mem_mot`, `:5657-5658` `memedge`, `:5670` il sito
+`S08_proj` *(gia' recintato)*, e **`:6033` la proiezione trasversale**, che diventa
+`shift_fase_dinamico` e **scrive `self.phi`** — l'effetto **indiretto** che `MEM_MOTO` lascia
+vivo. **`MEM_HEBB = False` non e' il sostituto:** il `T6` di `G3` ha MISURATO che toglie **cinque**
+siti in piu'.
+
+**I SETTE PUNTI DEL MANDATO DEI SOSPESI, com'e' davvero:**
+
+| | punto | stato | commit |
+|--:|---|---|---|
+| 1 | il `PID` nella coda | ✅ fatto | `bec6faf` |
+| 2 | il disco | ✅ fatto *(poi la tabella dei file fuori dal repo l'hai annullata tu)* | `cee2854` `31001eb` `498efdf` |
+| 3 | **`D25` col riferimento `r = 1`** | ✅ **fatto, E L'ESITO E' CHE `D25` NON REGGE QUI** | `3828281` + **questo** |
+| 4 | i due scrittori di `d0` non tracciati | ❌ **NON INIZIATO** | — |
+| 5 | le due misure sul freno *(bande di `d0/LAM`, cricchetto)* | ❌ **NON INIZIATO** | — |
+| 6 | il registro della fisica | ⚠ **solo la FASE A.** **`doc/REGISTRO_FISICA.md` NON ESISTE**, zero schede, `REG-C`/`REG-V`/`REG-R` non iniziate | `1214283` `9a82bfb` |
+| 7 | il punto della situazione | ⚠ **generato alle 14:00 e ORA SCADUTO**: precede `Z109` | `010809a` `49a4cb2` |
+
+> **`D25`, l'esito, col riferimento ESTERNO `r = 1`:** i nodi con `r < 0.1` sono lo **`0.30 %`**
+> in `_val600` e `_g4_riferimento`, il **`4.98 %`** in `_g4_senza_memmoto`, il **`18.69 %`** in
+> `_g3_senza_bifase`; **la quota di TEMPO nei fermi sta fra lo `0.01 %` e l'`1.83 %`.**
+> **Il `93 %` non regge su questi archivi**, come non reggeva la premessa di `D27`. **La voce non
+> si cancella** *(`par.9-bis`)*, e la domanda resta **con il numero nuovo**.
+
+**⚠ QUELLO CHE HO SALTATO, e va detto per intero:**
+1. **I punti `4` e `5` non li ho nemmeno cominciati.** Quando lo spegnimento di `G4` e' finito ho
+   dato la precedenza al suo esito, **come avevi disposto**, ma prima di quello ero al punto `3` e
+   **non sono mai arrivato al `4`**.
+2. **Il punto `6` l'ho lasciato alla FASE A**, cioe' all'inventario. **E questo BLOCCA il `CHK3`
+   per la regola che hai posto tu:** le cure non partono finche' le schede non esistono, e **non
+   esiste nemmeno il file.**
+3. **Il documento di `D25` era GIRATO E NON COMMITTATO** — `P1-bis`. **Era sul disco,
+   modificato, da prima delle 15:21.** Lo committo adesso **dichiarando che e' un recupero in
+   ritardo**, non una consegna puntuale.
+4. **La frase sul `93 %` era rimasta nel generatore** *(`:298`)* **mentre la sua stessa tabella la
+   smentiva.** L'ho corretta nel generatore **e** nel documento, con la **stessa** prosa. **Le
+   tabelle non le ho toccate: sono generate** *(`P1-ter`)*.
+5. **`PAT-1` e `PAT-2` sono ancora da fare** prima del prossimo uso dei due strumenti, e
+   **`REG-R`, `C5-res`, `8-bis`, `E3`** restano dove erano.
+
+**E L'ORDINE DELLE SCHEDE E' CAMBIATO** *(tua decisione di adesso)*: **freno di `SCALA_MIN`, poi
+la MEMORIA DEL MOTO** — sale dal quarto posto, e `Z109` dice perche' — **poi gravita'
+bifase e coesione.** Nella scheda della memoria del moto va **verificata l'ipotesi della
+compressione**: *`S08_proj` scrive `d0` verso l'alto senza che `d` segua, e questo abbassa
+`d/d0`*. **Solo misure sugli snapshot gia' scritti.**
