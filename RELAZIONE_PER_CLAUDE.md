@@ -11711,3 +11711,30 @@ def _massa(cx, r, n, fase, etichetta=None):
 HA COMUNQUE RISPOSTA, e non dipende dall'assunzione:** poiche' **la componente e' UNA SOLA**,
 **qualunque** partizione dei nodi finisce dentro quella. **La risposta e' NO, e l'assunzione sui
 tre terzi non la tocca.**
+
+### ㉙ **Due correzioni mie: il blob attribuito male, e l'EPOCA d'origine di `D27` e `D25`**
+
+> **Rilievo di Luca.** Il commit `3fa58ca` lasciava capire che avessi **gia' visto dei numeri**.
+> **E' vero: li avevo visti.** Sono committati in `944064a` come reperto, e **il file vivo
+> `COMPONENTI_E_TEMPO.md` era rimasto NON TRACCIATO**: ora c'e'.
+
+**⚠ CORREZIONE 1 — IL BLOB ERA ATTRIBUITO MALE, ed e' un errore mio in un messaggio di
+commit.** In `944064a` ho scritto che il reperto era *«l'output del blob `91654a0b`»*.
+**Non lo e'.** La copia e' stata fatta **dopo** la rigenerazione con `6520c98c`, e lo si vede dal
+file stesso: **contiene la sezione «COSA LA MISURA HA DETTO», che solo il blob nuovo
+scrive**. **Il reperto e' l'output di `6520c98c`.**
+*(Il commit e' gia' pubblicato e non si riscrive: la correzione vive qui e nel commit che la
+porta.)*
+
+**⚠ CORREZIONE 2 — L'EPOCA D'ORIGINE, che avrei dovuto scrivere quando ho creato le due
+voci.** **`par.9-bis` dice che ogni numero porta la sua epoca, e io le ho importate senza.**
+
+| | misurato in origine | esito in epoca 3 |
+|---|---|---|
+| **`D27`** *(quattro componenti)* | **EPOCA 1**, blob **`775ceab7`**, i **45 snapshot di `_g6000`** | **NON CONFERMATO**: **UNA sola componente** su `_val600`, `_g3_senza_bifase` e `_g4_riferimento` — **12 snapshot su 12** |
+| **`D25`** *(il tempo che non scorre)* | **EPOCA 1**, blob **`a1ae5090`**, run continuo a **1200 passi** | **DA RIMISURARE**: il primo tentativo aveva un criterio **cieco**, e l'esito **non si legge** |
+
+> **Nessuna delle due si cancella.** Restano nella sezione **col numero d'origine, con l'epoca, e
+> col fatto che le ho importate da un'epoca diversa senza riverificarle.**
+> **E' esattamente il difetto contro cui `par.9-bis` esiste**, e l'ho fatto lo stesso giorno in
+> cui l'ho citato.
