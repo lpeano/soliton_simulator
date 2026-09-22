@@ -112,9 +112,41 @@ def siti_traccia(albero, di_chi):
     return sorted(set(out))
 
 
-def appaia(scr, sit):
+def rami_esclusivi(albero):
+    """Coppie di righe che stanno in RAMI DIVERSI dello stesso `if`: ne gira UNA SOLA.
+
+    ⚠ NATO DA UN FALSO POSITIVO, 2026-09-22 (reperto `103b45c`). La coesione scrive `d0` in
+      `if COES_ADIM:` e di nuovo nell'`else:`, con UN solo `_traccia_d0` dopo. Il criterio
+      vedeva "c'e' un'altra scrittura in mezzo" e dichiarava scoperta la prima.
+      **Due rami di un `if/else` non sono due scritture in sequenza: e' UNA scrittura con
+      due forme.**
+    """
+    coppie = set()
+    for nodo in ast.walk(albero):
+        if not isinstance(nodo, ast.If) or not nodo.orelse:
+            continue
+
+        def righe(corpo):
+            out = set()
+            for st in corpo:
+                for x in ast.walk(st):
+                    ln = getattr(x, "lineno", None)
+                    if ln is not None:
+                        out.add(ln)
+            return out
+        a, b = righe(nodo.body), righe(nodo.orelse)
+        for ra in a:
+            for rb in b:
+                coppie.add((ra, rb)); coppie.add((rb, ra))
+    return coppie
+
+
+def appaia(scr, sit, esclusive=frozenset()):
     """Una scrittura e' TRACCIATA se un `_traccia_d0` la segue nella STESSA funzione, senza
-    un'altra scrittura in mezzo. E' la convenzione del codice: pre-copia, scrittura, traccia."""
+    un'altra scrittura in mezzo. E' la convenzione del codice: pre-copia, scrittura, traccia.
+
+    ⚠ Una scrittura in mezzo NON conta se sta in un RAMO ESCLUSIVO rispetto a questa.
+    """
     righe_scr = sorted(r for r, _f, _t in scr)
     esito = {}
     for r, fn, tipo in scr:
@@ -123,7 +155,8 @@ def appaia(scr, sit):
             esito[r] = (None, None)
             continue
         s = min(dopo, key=lambda z: z[0])
-        in_mezzo = [q for q in righe_scr if r < q < s[0]]
+        in_mezzo = [q for q in righe_scr
+                    if r < q < s[0] and (r, q) not in esclusive]
         esito[r] = (s[2], s[0]) if not in_mezzo else (None, None)
     return esito
 
@@ -140,7 +173,7 @@ def collaudo(W):
     a = ast.parse(buono)
     s1_, dc = scritture_d0(a)
     t1 = siti_traccia(a, dc)
-    e1 = appaia(s1_, t1)
+    e1 = appaia(s1_, t1, rami_esclusivi(a))
     ok1 = len(s1_) == 1 and list(e1.values())[0][0] == "SITO_X"
     W("K1 scrittura SEGUITA da `_traccia_d0` nella stessa funzione -> TRACCIATA -> %s\n"
       % ("OK" if ok1 else "*** NO *** %s" % e1))
@@ -155,7 +188,7 @@ def collaudo(W):
     b = ast.parse(cattivo)
     s2, dc2 = scritture_d0(b)
     t2 = siti_traccia(b, dc2)
-    e2 = appaia(s2, t2)
+    e2 = appaia(s2, t2, rami_esclusivi(b))
     non_tr = [r for r, (n, _l) in e2.items() if n is None]
     ok2 = (len(s2) == 2 and len(non_tr) == 1)
     W("K2 IL CASO CHE DEVE FALLIRE: una scrittura in un'ALTRA funzione, con un `_traccia_d0`\n")
@@ -170,13 +203,35 @@ def collaudo(W):
     c = ast.parse(terzo)
     s3, dc3 = scritture_d0(c)
     t3 = siti_traccia(c, dc3)
-    e3 = appaia(s3, t3)
+    e3 = appaia(s3, t3, rami_esclusivi(c))
     non3 = [r for r, (n, _l) in e3.items() if n is None]
     ok3 = (len(s3) == 2 and len(non3) == 1)
     W("K3 SECONDO CASO CHE DEVE FALLIRE: DUE scritture e UN solo `_traccia_d0` -> la PRIMA\n")
     W("     non e' coperta -> %s\n"
       % ("OK: una traccia copre UNA scrittura" if ok3 else "*** ne coprirebbe due ***"))
-    ok = ok1 and ok2 and ok3
+    quarto = ("class R(object):\n"
+              "    def f(self):\n"
+              "        _p = self.d0.copy()\n"
+              "        if FLAG:\n"
+              "            self.d0 = self.d0 + 1\n"
+              "        else:\n"
+              "            self.d0 = self.d0 + 2\n"
+              "        self._traccia_d0('SITO_W', _p)\n")
+    d = ast.parse(quarto)
+    s4, dc4 = scritture_d0(d)
+    t4 = siti_traccia(d, dc4)
+    e4_vecchio = appaia(s4, t4)                       # SENZA i rami esclusivi
+    e4 = appaia(s4, t4, rami_esclusivi(d))            # CON
+    vecchio_sbaglia = any(n is None for n, _l in e4_vecchio.values())
+    nuovo_ok = all(n == "SITO_W" for n, _l in e4.values())
+    ok4 = vecchio_sbaglia and nuovo_ok and len(s4) == 2
+    W("K4 IL CASO CHE IL CRITERIO VECCHIO SBAGLIAVA: due scritture nei DUE RAMI di un\n")
+    W("     `if/else`, con UN solo `_traccia_d0` dopo. Ne gira UNA SOLA.\n")
+    W("     criterio VECCHIO -> %s ; criterio NUOVO -> %s ; esito %s\n"
+      % ("ne dichiara una scoperta (SBAGLIATO)" if vecchio_sbaglia else "le copre entrambe",
+         "le copre entrambe" if nuovo_ok else "*** ne dichiara una scoperta ***",
+         "OK" if ok4 else "*** NO ***"))
+    ok = ok1 and ok2 and ok3 and ok4
     W("-" * 96 + "\n  -> %s\n\n" % ("i criteri PASSANO" if ok else "*** NON PASSANO ***"))
     return ok
 
@@ -203,7 +258,7 @@ def main():
 
     scr, di_chi = scritture_d0(albero)
     sit = siti_traccia(albero, di_chi)
-    esito = appaia(scr, sit)
+    esito = appaia(scr, sit, rami_esclusivi(albero))
     W("**SCRITTURE SU `self.d0`: %d** · **SITI DI TRACCIA: %d**\n\n" % (len(scr), len(sit)))
     W("| riga | funzione | tipo | sito di traccia | codice |\n|--:|---|---|---|---|\n")
     for r, fn, tipo in scr:
