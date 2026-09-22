@@ -892,6 +892,17 @@ FRAME_DRAG = True
 PASSI_PER_FRAME = 6      # passi di motore per frame nell'interattivo: rende visibile l'evoluzione
 GRAV_BIFASE = True       # LEGGE gravitazionale bifase unica (sciolta-1, direzione intrinseca,
                          # spinore accoppiato, tetto causale). Attiva di default.
+MEM_MOTO = True          # LA MEMORIA DEL MOTO scrive su `d0` (il sito `S08_proj`). ATTIVA di
+                         # default: spegnerla e' una PROVA DI SPEGNIMENTO, non fisica alternativa.
+                         # ⚠ SPEGNE SOLO LA SCRITTURA SU `d0`. `mem_mot` continua ad aggiornarsi
+                         #   e resta disponibile a chi la legge altrove (la proiezione
+                         #   trasversale di `:6016`): cosi' si isola IL CONTRIBUTO A `d0` invece
+                         #   di spegnere una grandezza di stato.
+                         # ⚠ NON si usa `MEM_HEBB = False` al suo posto: quello spegne l'INTERA
+                         #   funzione -- gravita' e coesione comprese. MISURATO: toglie CINQUE
+                         #   siti oltre la gravita' (sigillo di G3, `T6`).
+                         # Non ha un flag da riga di comando, di proposito: si imposta SUL MODULO
+                         # dalla rigiocata, come `GRAV_BIFASE` in G3, cosi' il driver non cambia.
 # SETTORE SPINORIALE a 4pi. Ogni nodo porta una SECONDA componente di fase che, accoppiata
 # alle antichiralita' (perc_chi, i +-pi gia' nel sistema), trasforma come uno spinore sotto
 # 4pi (doppia copertura). Quando SPENTO (SPINORE=False) il sistema e' IDENTICO all'U(1)
@@ -5651,9 +5662,15 @@ class Rete:
             # --- LOCALE PURA: rimossa la sottrazione di proj.mean() ---
             passo_max = 0.01 * float(np.median(self.d0[mask])) if mask.any() else 0.0
             proj = np.clip(proj, -passo_max, passo_max)
-            if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0[mask] += self._sd0(proj, mask)
-            if TRACCIA_D0: self._traccia_d0('S08_proj', _tr_pre)
+            # [MEM_MOTO, 2026-09-22] LA SOLA SCRITTURA DELLA MEMORIA DEL MOTO SU `d0`.
+            # Spegnere il flag toglie QUESTA RIGA e basta: `proj` resta calcolato (il ramo della
+            # gravita' qui sotto ne usa `len(proj)`), `mem_mot` resta aggiornato, il pavimento
+            # `P3` continua a girare. Cosi' si isola IL CONTRIBUTO A `d0`, che e' cio' che la
+            # prova di spegnimento deve misurare.
+            if MEM_MOTO:
+                if TRACCIA_D0: _tr_pre = self.d0.copy()
+                self.d0[mask] += self._sd0(proj, mask)
+                if TRACCIA_D0: self._traccia_d0('S08_proj', _tr_pre)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
             self.d0 = self._pav_d0(self.d0)          # PAVIMENTO
             if TRACCIA_D0: self._traccia_d0('P3_dopo_proj', _tr_pre, pavimento=self._floor_d0())

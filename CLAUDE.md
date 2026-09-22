@@ -1254,6 +1254,19 @@ metrica, e l'aggregazione di spazio-tempo-materia." Ogni "-> nasce" e' un'IPOTES
   **⚠ E I CONTATORI DELLE `(b)` SI CHIAMANO `_spento`, NON `_salti`:** misurano un ramo che non gira
   **per scelta** (flag o costante a zero), non una legge saltata. Mescolarli produrrebbe una
   «frazione di fallimento» che e' una **frequenza di selezione**.
+- **`MEM_MOTO` (2026-09-22, costante di modulo, `True` di default, NESSUN flag CLI).** Recinta
+  **una sola riga**: `self.d0[mask] += self._sd0(proj, mask)`, cioe' il sito **`S08_proj`**.
+  **Spenta, `proj` resta CALCOLATO** *(il ramo `if GRAV_BIFASE and len(proj)` ne usa la
+  lunghezza)*, **`mem_mot` resta AGGIORNATO** *(e chi la legge altrove, come la proiezione
+  trasversale di `:6016`, non se ne accorge)*, e **il pavimento `P3_dopo_proj` continua a
+  girare**. **Si toglie SOLO il contributo a `d0`**, che e' cio' che una prova di spegnimento
+  deve misurare.
+  **⚠ NON si usa `MEM_HEBB = False` al suo posto:** spegne l'**intera** funzione. **MISURATO**
+  dal sigillo di `G3` (`T6`): toglie **cinque** siti oltre la gravita' — `S08_proj`,
+  `P3_dopo_proj`, `S12_coesione`, `P6_dopo_coesione`, `P7_dopo_4917`.
+  **Perche' senza flag CLI:** si imposta **sul modulo** dalla rigiocata, come `GRAV_BIFASE` in
+  `G3`, **cosi' il driver non cambia** — e una legge di questo peso non deve poter essere
+  spenta per sbaglio da un comando.
 - Ancora elastica verso LAM (riga ~3234): e' a CORTO raggio (filtro_portata=1-tanh(d/LAM)), fissa la
   scala LOCALE (materia legata), NON blocca l'espansione a grande scala.
 

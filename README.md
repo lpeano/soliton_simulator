@@ -410,6 +410,22 @@ passi mancanti. Il DB contiene l'hash del codice: se il codice cambia, il DB
 viene rifiutato per evitare di mischiare fisiche diverse. Per ricominciare da
 zero usare `--db-cleanup`.
 
+## 9-bis. Costanti di modulo SENZA flag da riga di comando
+
+Alcune leggi si accendono e si spengono da una **costante di modulo**, non da un'opzione: si
+impostano **sul modulo** da uno script di rigiocata. E' voluto — non devono poter essere accese
+per sbaglio da un comando.
+
+| costante | default | cosa fa | byte-inerte al default? |
+|---|:-:|---|---|
+| `GRAV_BIFASE` | `True` | la legge gravitazionale bifase: il sito `S09_spinta_med` che scrive `d0` | — (e' il comportamento storico) |
+| `MEM_MOTO` | `True` | **la scrittura della memoria del moto su `d0`**, cioe' il sito `S08_proj`. Spenta, `proj` resta calcolato *(il ramo della gravita' ne usa `len(proj)`)*, `mem_mot` resta aggiornato e il pavimento `P3` continua a girare: si toglie **solo** il contributo a `d0` | **si', sigillato** |
+| `TRACCIA_D0` | `False` | i diciannove punti di traccia degli scrittori di `d0` | si' |
+
+**⚠ `MEM_HEBB = False` NON e' il modo di spegnere la memoria del moto:** spegne l'**intera**
+funzione, gravita' e coesione comprese. **Misurato: toglie cinque siti oltre la gravita'**
+(`S08_proj`, `P3_dopo_proj`, `S12_coesione`, `P6`, `P7`).
+
 ## 10. Cosa non versionare
 
 Il repository conserva codice, script e documentazione. Sono ignorati:
