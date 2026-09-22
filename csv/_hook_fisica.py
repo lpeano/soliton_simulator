@@ -99,6 +99,44 @@ def mappa_righe(sorgente):
     return dict((r, v[0]) for r, v in di_chi.items()), flag
 
 
+def gate(percorso, nome):
+    """Le RAMIFICAZIONI che dipendono da `nome`, DOVE, e DENTRO QUALE FUNZIONE.
+
+    Ritorna `([(riga, nome_funzione), ...], [righe di assegnamento], [tutte le occorrenze])`.
+
+    !! STA QUI, e non in un sigillo, per una ragione imparata sbagliando: la prima stesura di
+      questa funzione vive dentro `_sigillo_mem_moto_tutto.py`, e il sigillo di
+      `RITMO_WRAP_2PI` ha provato a importarla da qui SCHIANTANDOSI (reperto `da371a7`).
+      Questo modulo fa gia' lavoro AST sul simulatore: e' la sua casa.
+    !! `_sigillo_mem_moto_tutto.py` TIENE la sua copia finche' non lo si rigira: il suo
+      referto 10/10 e' legato al suo blob. DUE COPIE CHE DIVERGONO SONO UN DIFETTO, ed e'
+      dichiarato invece che nascosto.
+    """
+    with io.open(percorso, encoding="utf-8") as f:
+        albero = ast.parse(f.read(), percorso)
+    di_chi = {}
+    for nodo in ast.walk(albero):
+        if isinstance(nodo, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            for x in ast.walk(nodo):
+                ln = getattr(x, "lineno", None)
+                if ln is not None:
+                    pre = di_chi.get(ln)
+                    if pre is None or nodo.lineno > pre[1]:
+                        di_chi[ln] = (nodo.name, nodo.lineno)
+    rami, assegn, tutti = [], [], []
+    for nodo in ast.walk(albero):
+        if isinstance(nodo, (ast.If, ast.IfExp)):
+            if any(isinstance(x, ast.Name) and x.id == nome for x in ast.walk(nodo.test)):
+                rami.append((nodo.lineno, di_chi.get(nodo.lineno, ("<modulo>", 0))[0]))
+        elif isinstance(nodo, ast.Assign):
+            for t_ in nodo.targets:
+                if isinstance(t_, ast.Name) and t_.id == nome:
+                    assegn.append(nodo.lineno)
+        elif isinstance(nodo, ast.Name) and nodo.id == nome:
+            tutti.append(nodo.lineno)
+    return sorted(rami), sorted(assegn), sorted(set(tutti))
+
+
 def schede(testo):
     """nome -> (riga_inizio, riga_fine, set funzioni, set flag). Righe 1-based, estremi inclusi."""
     righe = testo.splitlines()
