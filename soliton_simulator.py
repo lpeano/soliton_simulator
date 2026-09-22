@@ -1192,6 +1192,34 @@ CHI_COOP = False        # COOPERAZIONE (decisione di Luca, 2026-09-21): chi_basc
                         # OFF = byte-identico: i rami nuovi sono IRRAGGIUNGIBILI, non solo inerti.
 TEMPO_PROPRIO_ORIENTATO = False # FLAG 4 (separato, profondo): toglie |.| da f in ritmo() -> r con SEGNO
                         # (tempo proprio orientato). Cambia una legge di base; default off.
+FASE_2PI = False        # [B1, 2026-09-22] CURA: `phi` e' una FASE ORDINARIA su [0, 2pi).
+                        # DECISIONE DI LUCA, presa DOPO la verifica `Z120`: nessuna riga della
+                        # FISICA distingue `phi` da `phi + 2pi`, fuori dalla torsione e
+                        # dall'antifase. 31 candidati letti uno per uno.
+                        # IL FATTO CHE LA REGGE: in 31 righe su 31 il campo legge `phi` da
+                        # `exp`/`cos`/`sin` (Z118), e li' `exp(i(phi+2pi)) = exp(i phi)`: la
+                        # doppia copertura e' INVISIBILE. E' un conto, non un'interpretazione.
+                        # LA DOPPIA COPERTURA RESTA dove e' gia' vera: nel SEGNO esplicito
+                        # (`_spinor_lift`, `s_k = sign(perc_chi)`) e nei MEZZI ANGOLI
+                        # (`exp(-0.5i ...)`). UN SOLO PONTE (A10).
+                        # ⚠ UNA DELLE QUATTRO GAMBE E' CADUTA, e va detto: il docstring di
+                        #   `_passo_spinoriale` dice che `phi` e' l'AZIMUT del Bloch. MISURATO
+                        #   FALSO (Z121: R <= 0.18 contro un criterio di 0.90). L'argomento
+                        #   caduto NON argomenta per 4pi: dice solo che `phi` non e' cio' che
+                        #   il commento dichiarava. -> `S08`, aperto.
+                        # COSA TOCCA: (a) il DOMINIO, `% (4pi)` -> `% (2pi)`, via `_dphi()`;
+                        #   (b) le DIFFERENZE di fase, `_w4` -> `_w2`, via `_wphi()`;
+                        #   (c) l'ANTIFASE, `+2pi` -> `+pi`, come META' del dominio;
+                        #   (d) la SOGLIA della mitosi, `2pi + pi` -> `2pi`.
+                        # ⚠ COSA NON TOCCA, ed e' un confine scelto: la TORSIONE ACCUMULATA
+                        #   (`tw`, `twp`, `_w8` a :4651-4655). `tw` e' un ACCUMULO: non ha
+                        #   periodo, e il suo dominio appartiene a `SCALE-TW`. Toccarlo qui
+                        #   mescolerebbe due decisioni.
+                        # ⚠ SPENTA DI DEFAULT. Il passaggio a `True` e' una decisione di Luca
+                        #   dopo i QUATTRO TEST del paragrafo E. Se un test fallisce, la
+                        #   lettura CADE e si scrive.
+                        # Schede: `doc/REGISTRO_FISICA.md`, LA FASE `phi` E IL SUO DOMINIO,
+                        #   e LA MITOSI E SCHWINGER.
 RITMO_WRAP_2PI = False  # [D34, 2026-09-22] CURA: il ramo SPINORIALE di `ritmo()` avvolge sul
                         # periodo GIUSTO. `np.angle` ha periodo `2pi`, quindi
                         #     a = angle(psi_spin) - angle(psi_spin_prec)   sta in (-2pi, 2pi]
@@ -2215,7 +2243,7 @@ class Rete:
         rho_arco = 0.5 * (rho[self.i] + rho[self.j])
         gradiente_rho = rho[self.j] - rho[self.i]
         corrente = w * rho_arco * spin * self.tw / max(PHI_CRIT, 1e-9)
-        dph = self._w4(self.phi[self.i] - self.phi[self.j])   # 1-forma di fase, orientata i->j
+        dph = self._wphi(self.phi[self.i] - self.phi[self.j])   # 1-forma di fase, orientata i->j
         valori = np.array([sum(segno * corrente[e] for e, segno in ciclo)
                            for ciclo in cicli], float)
         olonomia = np.array([sum(segno * dph[e] for e, segno in ciclo)
@@ -2346,8 +2374,8 @@ class Rete:
             ph = float(fase) + self.rng.normal(0, 0.05, n)
         base = self.n
         self.pos = np.vstack([self.pos, p])
-        self.phi = np.concatenate([self.phi, ph % (4 * np.pi)])
-        self.phi0 = np.concatenate([self.phi0, ph % (4 * np.pi)])
+        self.phi = np.concatenate([self.phi, ph % self._dphi()])
+        self.phi0 = np.concatenate([self.phi0, ph % self._dphi()])
         self.phi_s = np.concatenate([self.phi_s, np.zeros(n)])   # spinore: nasce a 0 (inerte se spento)
         # profilo di percorrenza: verso casuale (+1/-1) = le due antichiralita', ~50/50.
         # (assegnato PRIMA di phivel perche' il calcio chirale lo usa)
@@ -3418,6 +3446,25 @@ class Rete:
         introdurre valori nuovi. Vettorializzata. Gestisce f reale (mitosi/torsione)
         e complesso (interferenza): np.abs(f) e' il modulo in entrambi i casi."""
         return f / (1.0 + GAMMA * np.sqrt(np.abs(f) ** 2 + 1e-9))
+
+    @staticmethod
+    def _dphi():
+        """[FASE_2PI] IL DOMINIO DI `phi`: `2pi` con la cura, `4pi` senza.
+
+        Un solo posto da cui tutti i `% (...)` su `phi` prendono il periodo, cosi' non si
+        possono sfasare fra loro -- il difetto che `D34` ha mostrato costare caro.
+        """
+        return (2.0 * np.pi) if FASE_2PI else (4.0 * np.pi)
+
+    @staticmethod
+    def _wphi(a):
+        """[FASE_2PI] L'avvolgimento di una DIFFERENZA DI FASE, sul periodo di `phi`.
+
+        ⚠ NON si usa per la TORSIONE: `tw` e' un ACCUMULO e non ha periodo (vedi `_w8`).
+        """
+        if FASE_2PI:
+            return (a + np.pi) % (2 * np.pi) - np.pi
+        return (a + 2 * np.pi) % (4 * np.pi) - 2 * np.pi
 
     @staticmethod
     def _w4(a): return (a + 2 * np.pi) % (4 * np.pi) - 2 * np.pi
@@ -4622,10 +4669,10 @@ class Rete:
 
         # --- COMMIT ATOMICO DELLE FASI (Unico punto di scrittura sincrono) ---
         self.phivel = _phivel_t + delta_phivel
-        self.phi = (_phi_t + (dt_n_s * self.phivel) + delta_sync_phi) % (4 * np.pi)  # dt_n_s = verso firmato (5.3a)
+        self.phi = (_phi_t + (dt_n_s * self.phivel) + delta_sync_phi) % self._dphi()  # dt_n_s = verso firmato (5.3a)
 
         # Calcolo della differenza di fase sull'arco basato rigorosamente sullo stato al tempo t
-        dph = self._w4(_phi_t[i] - _phi_t[j])
+        dph = self._wphi(_phi_t[i] - _phi_t[j])
         if TORS_4PI and len(self.perc_chi) >= self.n:
             # [CHI_COOP] TORS_4PI E' TORSIONE: legge la cache della GEOMETRIA, non quella della
             # carica. Senza la cache separata riceverebbe `_chi_core_nodi`, che con la cooperazione
@@ -5099,7 +5146,10 @@ class Rete:
         # e' un giro pieno piu' il twist dipolare massimo. Se cambiano gli ingredienti
         # (quanto o struttura dipolare) la soglia si aggiorna da se'. A doppia copertura
         # spenta resta il solo quanto di olonomia PHI_CRIT.
-        if TORS_4PI:
+        # [FASE_2PI] Con `phi` su 2pi un arco porta una differenza fino a `pi`, e il
+        # quanto che fa dividere l'arco e' `2pi`: il `2pi + pi` cade, e con esso la sua
+        # derivazione a posteriori. E' il punto PIU' INCERTO della cura, e lo decide `E1`.
+        if TORS_4PI and not FASE_2PI:
             twist_max = np.pi                                 # |chi_i-chi_j|=2 -> pi*0.5*2 = pi
             soglia0 = PHI_CRIT + twist_max                    # = 2pi + pi (emergente), = 3pi
         else:
@@ -5270,7 +5320,7 @@ class Rete:
         self.negate += int((~ok).sum()); sel = c[ok]
         if not len(sel): return 0
         a, b = self.i[sel], self.j[sel]; m = self.n + np.arange(len(sel))
-        D = self._w4(self.phi[a] - self.phi[b])
+        D = self._wphi(self.phi[a] - self.phi[b])
         # FASE DEL FIGLIO. Di default la fase media (mitosi isotropa nell'interferenza:
         # il pattern costruttivo si espande simmetrico, il baricentro non trasla).
         # Con MITOSI_DIR la fase del figlio e' spostata verso il genitore a torsione
@@ -5286,9 +5336,9 @@ class Rete:
             twn = twn / np.maximum(self._deg, 1)
             # bias in [-0.5,0.5]: verso il genitore piu' teso. 0 = punto medio.
             bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))
-            fm = (self.phi[a] - (0.5 + bias) * D) % (4 * np.pi)
+            fm = (self.phi[a] - (0.5 + bias) * D) % self._dphi()
         else:
-            fm = (self.phi[a] - 0.5 * D) % (4 * np.pi)
+            fm = (self.phi[a] - 0.5 * D) % self._dphi()
         pos_figlio = 0.5 * (self.pos[a] + self.pos[b])
         # --- LEGGE DI STABILITA' (ANTIFASE DELLE AGGIUNTE, interruttore ANTIFASE_ADD) ---
         # Dove la densita' locale supera l'equilibrio, il NUOVO nodo nasce in ANTIFASE invece
@@ -5308,7 +5358,9 @@ class Rete:
             s = (rho_sel - peq_sel) / np.maximum(rho_c, 1e-6)
             p_anti = np.where(s > 0, np.tanh(s), 0.0)          # prob antifase, 0 sotto equilibrio
             flip = self.rng.random(len(sel)) < p_anti
-            fm = np.where(flip, (fm + 2 * np.pi) % (4 * np.pi), fm)  # +2pi in copertura 4pi = antifase
+            # [FASE_2PI] L'ANTIFASE E' META' DEL DOMINIO: `+pi` su 2pi, `+2pi` su 4pi.
+            _mezzo = self._dphi() / 2.0
+            fm = np.where(flip, (fm + _mezzo) % self._dphi(), fm)
             self.ultima_frac_antifase = float(flip.mean()) if len(flip) else 0.0
         self.pos = np.vstack([self.pos, pos_figlio])
         self.phi = np.concatenate([self.phi, fm]); self.phi0 = np.concatenate([self.phi0, fm])
@@ -5350,12 +5402,12 @@ class Rete:
             comune = KICK_TW * sciolta * (mod - 0.5)
             calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod
             calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod
-            self.phi[a] = (self.phi[a] + calcio_a) % (4 * np.pi)
-            self.phi[b] = (self.phi[b] + calcio_b) % (4 * np.pi)
+            self.phi[a] = (self.phi[a] + calcio_a) % self._dphi()
+            self.phi[b] = (self.phi[b] + calcio_b) % self._dphi()
         else:
             # REGIME STOCASTICO (canonico, validato): rinculo di fase casuale. DEFAULT.
             self.phi[g] = (self.phi[g] + self.rng.normal(0, 1, len(g)) *
-                           KICK_TW * np.concatenate([sciolta, sciolta])) % (4 * np.pi)
+                           KICK_TW * np.concatenate([sciolta, sciolta])) % self._dphi()
         keep = np.ones(len(self.i), bool); keep[sel] = False
         dh = self.d[sel] / 2
         # lunghezza di riposo dei due nuovi archi. Di default meta' dell'arco (dh):
@@ -5400,8 +5452,8 @@ class Rete:
         self._rep = np.concatenate([self._rep[keep], self._rep[sel], self._rep[sel]])
         zz = np.zeros(len(sel))
         self.tw = np.concatenate([self.tw[keep], zz, zz])
-        self.twp = np.concatenate([self.twp[keep], self._w4(self.phi[a] - fm),
-                                   self._w4(fm - self.phi[b])])
+        self.twp = np.concatenate([self.twp[keep], self._wphi(self.phi[a] - fm),
+                                   self._wphi(fm - self.phi[b])])
         self._grado(); self.nati += len(sel)
         # EMISSIONE DI COPPIA: per una frazione degli eventi nasce un anti-nodo a
         # fase fm+pi, collegato ai due genitori a-b. La coppia (nodo fm + anti-nodo
@@ -5440,7 +5492,11 @@ class Rete:
             if estratto.any():
                 pick = np.where(estratto)[0]
                 aa, bb = a[pick], b[pick]
-                anti = (fm[pick] + 2 * np.pi) % (4 * np.pi)
+                # [FASE_2PI, D35] L'ANTIFASE E' META' DEL DOMINIO. Con `phi` su 4pi il
+                # `+2pi` NON e' un'antifase: il campo legge `exp(i phi)` e
+                # `exp(i(phi+2pi)) = exp(i phi)`, cioe' l'antiparticella e' IDENTICA
+                # alla particella. Con `phi` su 2pi diventa `+pi`, che lo e' davvero.
+                anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()
                 nc = len(pick)   # fase opposta (fm+pi)
                 k = self.n + np.arange(nc)
                 dd = self._nasce(np.maximum(
@@ -5505,8 +5561,8 @@ class Rete:
                 self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])   # [(3)] archi nuovi
                 zz2 = np.zeros(nc)
                 self.tw = np.concatenate([self.tw, zz2, zz2])
-                self.twp = np.concatenate([self.twp, self._w4(self.phi[aa] - anti),
-                                           self._w4(anti - self.phi[bb])])
+                self.twp = np.concatenate([self.twp, self._wphi(self.phi[aa] - anti),
+                                           self._wphi(anti - self.phi[bb])])
                 self._grado(); self.nati += nc; self.coppie_nate += nc
         return len(sel)
 
@@ -6102,7 +6158,7 @@ class Rete:
                     shift_fase_dinamico = np.clip(shift_fase_dinamico, -np.pi * 0.25, np.pi * 0.25)
 
                     # Applica lo shift al campo di fase senza alterare le coordinate fisse dei puntatori (net.pos)
-                    self.phi[ii] = (self.phi[ii] + shift_fase_dinamico) % (4 * np.pi)
+                    self.phi[ii] = (self.phi[ii] + shift_fase_dinamico) % self._dphi()
                 if TRACCIA_D0: _tr_pre = self.d0.copy()
                 self.d0 = self._pav_d0(self.d0)
                 if TRACCIA_D0: self._traccia_d0('P7_dopo_4917', _tr_pre, pavimento=self._floor_d0())

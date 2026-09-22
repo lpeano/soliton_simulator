@@ -312,6 +312,10 @@ contro un nullo di `1.4e-03` — **da `140` a `310` volte il suo valore sotto ip
 > **E questo è esattamente il cricchetto del freno** *(scheda ①, `A11` cor.4)*: `d0` sale e non
 > può scendere. **Le due schede si toccano qui.**
 
+## ⚠ `FASE_2PI` TOCCA UN SITO ANCHE QUI
+
+**`:6105`**, l'avvolgimento di `phi` dopo lo spostamento di fase, passa da `% (4π)` a **`% self._dphi()`**. **È l'unico punto di questa scheda che la cura del dominio attraversa**, e la legge della memoria del moto **non cambia**: cambia **il periodo su cui `phi` si richiude** dopo che questa legge l'ha spostata.
+
 ## LE DOMANDE APERTE
 
 1. **`proj` è adimensionale e viene sommato a una lunghezza.** **Quale lunghezza fisica lo
@@ -591,7 +595,7 @@ avvertimento.**
 
 ---
 
-<!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
+<!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,_dphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
 # ⑥ LA FASE `φ` E IL SUO DOMINIO — **`semina` / `_w4` / `_w8` / `step`**
 
 > **STATO: `DIFETTOSA`.** Difetti **`D34`** *(il wrap del ritmo)*, **`D35`** *(l'antifase di
@@ -649,7 +653,9 @@ distingue `φ` da `φ + 2π`**, fuori dalla torsione *(`_w4`/`_w8`)* e dall'anti
 | la soglia della mitosi, `discesa`, il punto di inversione | **`L`** | **si levigano**, coi tre obblighi del cor.7 e la **larghezza DERIVATA** — **ma appartengono a `SCALE-TW`, non a qui** |
 | la nascita di un nodo | **`E`** | **evento discreto**: resta discreto, **ma il suo TASSO dev'essere liscio** |
 
-## LA CURA DECISA — **`FASE_2PI`**, spenta di default
+## LA CURA DECISA — **`FASE_2PI`**, spenta di default — ✅ **IN CODICE** *(blob `3d91338e` → `445e2896`)*
+
+**I DUE AIUTANTI, e sono il punto della forma:** **`_dphi()`** *(il periodo)* e **`_wphi()`** *(l'avvolgimento di una differenza)*. **UN SOLO POSTO da cui tutti prendono il periodo**, così non si possono sfasare fra loro — **che è esattamente il difetto che `D34` ha mostrato costare caro**: due rami della stessa funzione con due periodi diversi, a otto righe di distanza.
 
 > **Decisione di Luca, presa dopo la verifica di `Z120`.** **Regge su TRE argomenti invece dei
 > quattro iniziali**, perché il quarto *(l'azimut)* è caduto con `Z121` — **e l'argomento
@@ -737,7 +743,7 @@ al `96 %` degli archi oltre l'inversione riceve repulsione esattamente zero** *(
 | `0.02 * d0 * _rep` | **`L`** | ❌ il `0.02` è **scelto**, già dichiarato in `D03` |
 | la nascita di un nodo | **`E`** | ✅ **evento discreto con TASSO liscio** — la campana **è** già liscia; **ma `salita` ha un `max(…, 0)` e `discesa` un `clip`: due spigoli DENTRO il tasso**, da verificare |
 
-## COSA CAMBIA CON `FASE_2PI`
+## COSA CAMBIA CON `FASE_2PI` — ✅ **IN CODICE** *(blob `445e2896`)*, spenta di default
 
 - **`anti = (fm + π) % 2π`** — cura `D35`;
 - **`soglia0 = 2π`** — *«un arco porta una differenza fino a `π`; quando porta un quanto
