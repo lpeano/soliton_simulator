@@ -480,6 +480,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **S04** | **La crescita e' NUCLEAZIONE, non stiramento** | ❌ **CADE con `Z108`**: nascite meno morti valgono lo **`0.01 %`** del `Δ` *(`+254.4` su `+1.731e+06`)* | **NON E' IL MOTORE** |
 | **S05** | **La compressione `d/d0 < 1` e' un difetto** e non una fase | `G3` dice che **peggiora** senza gravita' *(`0.7489`→`0.6258`)*: serve una misura che ne trovi la CAUSA | in attesa |
 | **S06** | **Il «muro dell'1 %» dell'antifase e' causato da `D35`**: l'antifase «non annichila» perche' **`+2π` letto da `exp(iφ)` non e' un'antifase, e' la stessa fase** | rimisurare l'annichilazione **dopo** la decisione su `φ` *(e' il test `E2` del §E)* | **in attesa** — «non annichila» e' una misura **PRE-FORK** *(par.9-bis)* e **non l'ho rimisurata** |
+| **S07** | **`dphi_arc = angle(exp(1j·Δφ))` (`:5894`) COLLASSA a `2π` una differenza che vive su `4π`** — e' `B3` del mandato | **DORMIENTE**: `K_FRANGE = 0`, il ramo non gira. Da riesaminare **se** `K_FRANGE` venisse acceso, **o** quando `φ` passa a `2π` *(con `φ` su `2π` la riga diventa CORRETTA per costruzione)* | **in attesa** — **non e' un distinguitore**, e' un difetto di un'altra famiglia |
 
 
 > **⚠⚠ `CHK3-D`: LA SEZIONE DEL CHECKPOINT SUI DIFETTI NUOVI, E IL SUO COSTO.**

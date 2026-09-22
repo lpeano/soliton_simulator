@@ -12798,3 +12798,42 @@ che non esistono.** La cura è **il periodo giusto**.
 
 **NON LO CORREGGO:** la correzione dipende da **che cosa è `φ`** *(§`B1`)*, che è una
 decisione di Luca. **Registrato e fermo.**
+
+### ㉺ **La verifica di `B1`: NESSUNA riga della fisica distingue `φ` da `φ + 2π`**
+
+> **`31` candidati, letti UNO PER UNO.** Lo strumento restringe; la lettura è mia, e le righe
+> stanno nel referto perché le legga anche Luca. Collaudo `8/8`, **quattro casi che DEVONO
+> comparire** *(mezzo angolo, `cos(φ/2)`, `φ.mean()`, un confronto)*.
+
+**I `3` «MEZZI ANGOLI» SONO FALSI POSITIVI MIEI.** Tutti e tre sono `np.angle(np.exp(1j*X))`,
+che **non è un mezzo angolo: è un avvolgimento a `2π`**. Il mio estrattore del coefficiente
+ha dato `None` perché l'argomento è una **chiamata**, non un prodotto — e `None` finisce fra
+i candidati **di proposito**.
+
+**I `28` «USI GREZZI», classificati:**
+
+| quanti | che cosa sono | distinguono? |
+|--:|---|---|
+| `13` | assegnamenti, copie, `len()`, avvolgimenti | **no** |
+| `7` | **la TORSIONE** *(`_w4`)* | **sì, ma è il canale escluso** |
+| `2` | **l'antifase** *(`ANTIFASE_ADD` dormiente, `D35`)* | già registrati |
+| `6` | **diagnostici** *(`_diag_completa`, `_ordine`, `_gusci_esterni`)* | **sì, ma non sono leggi** |
+
+## ✅ **LA VERIFICA CONFERMA LA DECISIONE.** Ma due riserve, e sono vere
+
+**① `_w4` DISTINGUE DAVVERO.** `_w4` manda in `(-2π, 2π]`, quindi
+`_w4(x + 2π) ≠ _w4(x)`: **il canale della torsione porta informazione a `4π` VERA.**
+È il canale che escludi — **ma portare `φ` su `2π` cambia ciò che `_w4` vede**, e con esso
+**`fm`, la fase delle figlie** *(`:5289-5291`: `fm = φ[a] − 0.5·D`, e `D = _w4(φ[a]−φ[b])`)*.
+**Non è un'obiezione alla decisione: è una conseguenza da misurare**, ed è esattamente il
+test **`E1`** — *la mitosi a `2π` funziona senza tarature?*
+
+**② I DIAGNOSTICI CAMBIERANNO I NUMERI.** `phi_min`, `phi_max`, **`phi_mean`** e la fase media
+dei nuclei **dipendono dal dominio**. **Nessuna legge cambia, ma i referti sì** — e chi
+confronta un referto vecchio con uno nuovo deve saperlo *(par.9-bis)*.
+
+**⚠ E una riga è un difetto DIVERSO, non un distinguitore:** `:5894`,
+`angle(exp(1j·Δφ))`, **collassa a `2π` una differenza che vive su `4π`**. È `B3`,
+**dormiente** *(`K_FRANGE = 0`)*, e va nei sospetti come **`S07`**.
+*(Curiosamente, **con `φ` su `2π` quella riga diventa corretta per costruzione**: la decisione
+la cura senza toccarla.)*
