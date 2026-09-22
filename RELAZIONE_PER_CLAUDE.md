@@ -12216,3 +12216,45 @@ lontana dal confine, ② **e la condizione si VERIFICA e si stampa** invece di e
 con **`E[LAM/x]` misurato sull'insieme**, non con `LAM/x0`.
 **E' la quinta volta che un `FAIL` e' del criterio e non della cura. `P1-sexies` esiste per
 questo, e stavolta il caso sintetico non rispettava la PROPRIA premessa.**
+
+### ㉦ **Il cricchetto è DIMOSTRATO, non solo misurato — `4/4`, scarto `0.0 %`**
+
+> **La parte `(b)` non dipende da nessun seme: è una proprietà della FORMULA.**
+> Rumore **antitetico** *(ogni `+a` ha il suo `-a`: media zero ESATTA)*, `200 000` cammini,
+> **e la premessa «LONTANO DAL CONFINE» ora si VERIFICA invece di essere assunta**
+> — `min(x)/LAM` stampato, fra `7.67` e `78.62`.
+
+| caso | deriva misurata | attesa **derivata** | scarto | esito |
+|---|--:|--:|--:|---|
+| `b1` `x0 = 10·LAM` | `+1.582064e-03` | `+1.582007e-03` | **`0.0 %`** | **PASS** |
+| `b1` `x0 = 100·LAM` | `+1.595602e-03` | `+1.596143e-03` | **`0.0 %`** | **PASS** |
+| **`b2` `LAM = 0`** | **`0.000000e+00`** | `0` | — | **PASS** |
+| **`b3` freno SIMMETRICO** | `+5.9e-09` | `0` | — | **PASS** |
+
+**L'attesa è DERIVATA, non tarata:** `sigma/√(2π) · E[LAM/x]`.
+**E i due casi che devono dare zero lo danno**, quindi **la deriva viene dall'ASIMMETRIA** —
+non dall'attenuazione *(`b3`)* né dal banco di prova *(`b2`)*.
+**✅ `D31` passa da «misurato su un run» a «dimostrato sulla formula».**
+
+#### **E LE BANDE dicono DOVE morde: la popolazione si è POLARIZZATA**
+
+| passo 600, `G4` riferimento | archi | frazione annullata | **quota del freno** *(stima)* |
+|---|--:|--:|--:|
+| **`[1.0, 1.1)·LAM`** | **`13.74 %`** | **`99.96 %`** | **`35.80 %`** |
+| `[1.1, 1.5)` | `7.44 %` | `78.21 %` | `15.42 %` |
+| `[1.5, 2.0)` | `7.41 %` | `57.72 %` | `11.33 %` |
+| `[2.0, 3.0)` | `11.09 %` | `40.65 %` | `12.00 %` |
+| **`>= 3.0`** | **`60.32 %`** | `15.06 %` | `25.45 %` |
+
+> **Al passo 120 la popolazione era a CAMPANA** *(`8 / 26 / 32 / 30 / 3 %`)*. **Al passo 600 è
+> BIMODALE:** un blocco **incollato al muro**, dove ogni discesa viene annullata al `99.96 %`, e
+> un blocco **scappato oltre `3·LAM`**. **Le bande intermedie si sono svuotate.**
+> **Non è una distribuzione che si allarga: è una che si SPACCA.**
+> *(La quota del freno è una **STIMA sotto ipotesi dichiarata** — gli snapshot hanno `d0` ma
+> non `dx`. Popolazione e frazione annullata sono **esatte**.)*
+
+**⚠ E UN RISCONTRO NATO DAL MIO ERRORE:** il primo giro fallì `1/4` perché la camminata
+usciva dalla regione che il test dichiarava di sondare e finiva **sotto zero**, dove scatta la
+guardia `pos = prima > 0`. **`_smorza` ha DUE cricchetti, non uno.** Il secondo **non è
+raggiungibile oggi** *(`d0 >= LAM` per costruzione)* **ma è una proprietà della formula**, ed
+è ora nella scheda ①: **una cura che tocchi il pavimento lo incontrerà.**

@@ -109,9 +109,9 @@ proprio questa forma e non un'altra che rispetti l'obbligo (b).**
 | **1 — origine fisica** | ✅ `LAM` è la scala del sistema, non una difesa dalla divisione |
 | **2 — non dipende da ciò che limita** | ✅ `LAM` è costante; **non** insegue `d0` *(a differenza del pavimento comovente `f·median(d0)` di `Z91`)* |
 | **3 — non ribalta segni** | ✅ `fatt ∈ [0,1]`, quindi `eff` ha il segno di `dx`; e `_g_sm_max_giu ≤ 0` lo misura a ogni scrittura |
-| **4 — SIMMETRICO** | ❌ **VIOLATO.** Frena **solo** le discese. **È il cricchetto.** |
+| **4 — SIMMETRICO** | ❌ **VIOLATO, e DIMOSTRATO sulla formula** *(`Z113`, `4/4`)*: su rumore a media **zero esatta**, lontano dal confine, la deriva è **`+1.582064e-03`** contro l'attesa derivata **`+1.582007e-03`** — **scarto `0.0 %`**. **E con `LAM = 0` la deriva è `0.000000e+00` ESATTO**, con un freno **simmetrico** `5.9e-09`: **viene dall'ASIMMETRIA** |
 | **5 — si ripara all'origine** | ⚠ **DA DECIDERE:** il freno sta nel punto d'uso. **Dove nasce la discesa che va frenata?** |
-| **6 — se satura è un allarme** | ⚠ i contatori **esistono** *(`_g_sm_discese`, `_g_sm_patol`, `_g_sm_viol_*`)*; **la frazione di saturazione non è mai stata letta in un referto.** Lavoro residuo. |
+| **6 — se satura è un allarme** | ❌ **VIOLATO, e ora è MISURATO** *(`Z113`)*: al passo 600 il **`13.74 %`** degli archi sta in `[1.0, 1.1)·LAM`, dove il freno annulla il **`99.96 %`** di ogni discesa, e porta il **`35.80 %`** del freno. **La popolazione si è POLARIZZATA:** `13.74 %` incollato al muro, **`60.32 %` oltre `3·LAM`**, le bande intermedie svuotate |
 | **7(a) — lontano è identità** | ✅ per `x ≫ LAM`, `1 − LAM/x → 1` |
 | **7(b) — nessuna deriva su spinte simmetriche** | ❌ **VIOLATO, ed è il punto.** |
 | **7(c) — larghezza dalla fisica** | ✅ la larghezza **è** `LAM` |
@@ -187,9 +187,8 @@ l'unico dei tre candidati a rendere `LAM` un RISULTATO invece che un'ipotesi.**
 
 ## LAVORO RESIDUO DI QUESTA SCHEDA
 
-- **la frazione di SATURAZIONE del freno non è mai stata letta** *(`A11` cor.6)* — i contatori
-  esistono, il referto no. **È il punto 5 del mandato dei sospesi:** distribuzione di `d0/LAM` e
-  **test del cricchetto** su rumore simmetrico sintetico;
+- ✅ **FATTO** *(`Z113`)*: le bande di `d0/LAM` e il test del cricchetto. **Restano i CONTATORI del simulatore** *(`_g_sm_discese`, `_g_sm_patol`, `_g_sm_viol_*`)*, **mai letti in un referto**: la misura di `Z113` è fatta sugli snapshot e su una formula, **non su quei contatori**;
+- ⚠ **`_smorza` HA DUE CRICCHETTI, non uno** *(trovato sbagliando, reperto `7203ae3`)*: oltre a `LAM`, la guardia **`pos = prima > 0`** azzera le discese e lascia passare le salite. **Non è raggiungibile oggi** — `d0 >= LAM` per costruzione — **ma è una proprietà della formula, e una cura che tocchi il pavimento la incontrerà**;
 - **`A11` cor.5:** dove nasce la discesa che il freno trattiene? **Non è stato cercato.**
 
 ---
