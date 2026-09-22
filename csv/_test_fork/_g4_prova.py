@@ -24,8 +24,19 @@ E GLI ALTRI DUE TERMINI CHE LA TRACCIA NON PUO' VEDERE:
     nascono i lunghi, la mediana sale **senza che nessun arco cresca**.)*
 
 IL CRITERIO DI CHIUSURA, SCRITTO PRIMA:
-      Delta(somma di `d0`) nel passo = scritture + freno + nascite - morti      entro 1e-9 relativo
+      Delta(somma di `d0`) nel passo = scritture + freno + (nascite - morti)    entro 1e-9 relativo
   **Se non chiude, manca un termine: si DICHIARA, e la prova non si legge finche' non si trova.**
+
+  ⚠ E `nascite - morti` si misura **AL SITO CHE CONCATENA**, come `Σ(dopo) - Σ(prima)`,
+    **non** come somma dei `d0` degli archi nati/morti letta a inizio e fine passo. La prima
+    versione faceva cosi' e **NON CHIUDEVA** *(residuo relativo `8.0e-05`)*: un arco nato viene
+    poi **modificato dalle scritture**, che il bilancio conta gia' a parte, e leggerlo a fine
+    passo lo conta **due volte**. **Il giro corto lo ha preso in 43 s invece che in mezz'ora.**
+
+  ⚠ E C'E' UNA SECONDA GUARDIA: **il SALTO fra la fine di un passo e l'inizio del successivo.**
+    Fra i due, il driver chiama `diagnostica`/`campo_spaziale`/`pozzo_grafo`. Se una di quelle
+    toccasse `d0`, **il bilancio PER PASSO chiuderebbe lo stesso** e il difetto sarebbe
+    **invisibile**. Si misura, invece di darlo per scontato.
 
 I MODI:
   --controllo    120 passi a flag INVARIATO: snapshot contro snapshot con `_val600` **e** il
@@ -66,17 +77,27 @@ CONCATENANO = ("S01_archi_nuovi", "S06_mitosi", "S07_schwinger")
 
 
 # ------------------------------------------------------------------ IL BILANCIO, isolato
-def bilancio(inizio, fine, scritture, freno, nati, morti):
+def bilancio(inizio, fine, scritture, freno, concat):
     """Il residuo del bilancio e il suo valore RELATIVO.
+
+    ⚠ IL TERZO TERMINE E' `concat`, NON «nascite meno morti» misurate a inizio/fine
+      passo. La prima versione usava quelle, e **NON CHIUDEVA**: residuo relativo `8.0e-05`.
+      **Il giro corto lo ha preso in 43 s invece che in mezz'ora** *(proposta `IN PROVA`)*.
+      **LA CAUSA, e il dato che la indica: il passo 2, con ZERO nascite e ZERO morti, chiudeva a
+      `1.8e-14`; solo i passi con nascite o morti avevano residuo.** Un arco che NASCE viene poi
+      **modificato dalle scritture**, che il bilancio conta gia' a parte: usare il suo `d0` a
+      FINE passo lo conta **due volte**. Lo stesso, col segno opposto, per chi muore.
+      **La forma esatta e' `Σ(dopo) - Σ(prima)` AL SITO CHE CONCATENA**: e' nascite meno
+      morti **nell'istante giusto**, e non interferisce con nessuna scrittura.
 
     ⚠ Il denominatore NON e' `Delta` (che puo' essere ~0 per cancellazione e farebbe esplodere
       il relativo): e' la **scala dei termini**, cioe' la somma dei loro moduli. Un residuo si
       giudica contro **quanto materiale e' passato**, non contro quanto e' rimasto.
     """
     delta = fine - inizio
-    previsto = scritture + freno + nati - morti
+    previsto = scritture + freno + concat
     res = delta - previsto
-    scala = (abs(scritture) + abs(freno) + abs(nati) + abs(morti) + abs(delta))
+    scala = (abs(scritture) + abs(freno) + abs(concat) + abs(delta))
     return delta, previsto, res, (abs(res) / scala if scala > 0 else 0.0)
 
 
@@ -91,15 +112,16 @@ def collaudo(W):
     fren = +0.3                                       # il freno aggiunge 0.3
     nasce = 5.0                                       # un arco nasce con d0 = 5.0
     muore = 2.0                                       # uno muore, portandosi via 2.0
-    fine = float(np.sum(d0_in)) + scritt + fren + nasce - muore
-    delta, previsto, res, rel = bilancio(float(np.sum(d0_in)), fine, scritt, fren, nasce, muore)
+    concat = nasce - muore                            # cio' che il sito che CONCATENA sposta
+    fine = float(np.sum(d0_in)) + scritt + fren + concat
+    delta, previsto, res, rel = bilancio(float(np.sum(d0_in)), fine, scritt, fren, concat)
     ok1 = (abs(res) < 1e-12)
     W("K1 bilancio COMPLETO su un caso noto -> residuo %.3e, atteso 0 -> %s\n"
       % (res, "OK" if ok1 else "*** NON CHIUDE su un caso costruito a mano ***"))
     e.append(ok1)
 
     # IL CASO CHE DEVE FALLIRE: lo stesso bilancio SENZA le nascite.
-    _d, _p, res2, rel2 = bilancio(float(np.sum(d0_in)), fine, scritt, fren, 0.0, muore)
+    _d, _p, res2, rel2 = bilancio(float(np.sum(d0_in)), fine, scritt, fren, -muore)
     ok2 = (abs(res2) > 1e-9) and (rel2 > 1e-9)
     W("K2 IL CASO CHE DEVE FALLIRE: lo stesso bilancio SENZA le nascite\n")
     W("     residuo %.3e (relativo %.3e), atteso NON nullo -> %s\n"
@@ -108,21 +130,21 @@ def collaudo(W):
     e.append(ok2)
 
     # e il caso che deve fallire per le MORTI
-    _d, _p, res3, rel3 = bilancio(float(np.sum(d0_in)), fine, scritt, fren, nasce, 0.0)
+    _d, _p, res3, rel3 = bilancio(float(np.sum(d0_in)), fine, scritt, fren, nasce)
     ok3 = (abs(res3) > 1e-9)
     W("K3 IL CASO CHE DEVE FALLIRE: senza le MORTI -> residuo %.3e -> %s\n"
       % (res3, "OK" if ok3 else "*** CIECO ***"))
     e.append(ok3)
 
     # e il caso che deve fallire per il FRENO -- e' il termine che in G3 mancava davvero
-    _d, _p, res4, rel4 = bilancio(float(np.sum(d0_in)), fine, scritt, 0.0, nasce, muore)
+    _d, _p, res4, rel4 = bilancio(float(np.sum(d0_in)), fine, scritt, 0.0, concat)
     ok4 = (abs(res4) > 1e-9)
     W("K4 IL CASO CHE DEVE FALLIRE: senza il FRENO -> residuo %.3e -> %s\n"
       % (res4, "OK" if ok4 else "*** CIECO ***"))
     e.append(ok4)
 
     # il denominatore NON deve esplodere quando Delta ~ 0 per cancellazione
-    _d, _p, res5, rel5 = bilancio(10.0, 10.0, +1000.0, -1000.0, 0.0, 0.0)
+    _d, _p, res5, rel5 = bilancio(10.0, 10.0, +1000.0, -1000.0, 0.0)
     ok5 = (rel5 < 1e-12)
     W("K5 cancellazione (`Delta = 0` con termini enormi) -> relativo %.3e, NON esplode -> %s\n"
       % (rel5, "OK" if ok5 else "*** il denominatore e' sbagliato ***"))
@@ -171,7 +193,8 @@ def confronta_snap(p_a, p_b, W):
 
 def installa(S, spegni_mem):
     """Avvolge tutto cio' che serve. PURE-READ tranne l'unico flag che il mandato ammette."""
-    stato = {"passi": [], "conti": {}, "freno": {}, "aperto": None, "n_passo": 0}
+    stato = {"passi": [], "conti": {}, "freno": {}, "aperto": None, "n_passo": 0,
+             "fine_prec": None}
 
     # --- 1. il FLAG, sul modulo, DOPO che il driver ha applicato i suoi
     orig_flag = S._applica_flag
@@ -196,7 +219,11 @@ def installa(S, spegni_mem):
         dopo = np.asarray(self.d0, dtype=float)
         pri = np.asarray(prima, dtype=float)
         if len(pri) != len(dopo):
+            # ⚠ NON si salta: `Σ(dopo) - Σ(prima)` e' ESATTAMENTE cio' che il sito
+            #   sposta -- nascite meno morti NELL'ISTANTE GIUSTO. Saltare qui era il difetto che
+            #   faceva non chiudere il bilancio (residuo `8.0e-05`).
             c["salta"] += 1
+            stato["concat"] = stato.get("concat", 0.0) + float(np.sum(dopo) - np.sum(pri))
             return
         dx = dopo - pri
         c["su"] += float(np.sum(dx[dx > 0.0]))
@@ -232,6 +259,7 @@ def installa(S, spegni_mem):
         stato["aperto"] = (chiavi(net).copy(), np.asarray(net.d0, dtype=float).copy())
         stato["scritture"] = 0.0
         stato["freno_passo"] = 0.0
+        stato["concat"] = 0.0
         return orig_scuoti(net, *a, **k)
     S.scuoti_vuoto = _wrap_scuoti
 
@@ -246,11 +274,20 @@ def installa(S, spegni_mem):
             morti = float(np.sum(v0[~vivi0])); nati = float(np.sum(v1[~vivi1]))
             inizio = float(np.sum(v0)); fine = float(np.sum(v1))
             sc = stato.get("scritture", 0.0); fr = stato.get("freno_passo", 0.0)
-            d, p, res, rel = bilancio(inizio, fine, sc, fr, nati, morti)
+            cc = stato.get("concat", 0.0)
+            d, p, res, rel = bilancio(inizio, fine, sc, fr, cc)
+            # ⚠ LA GUARDIA DEL SALTO: fra la FINE di un passo e l'INIZIO del successivo il
+            #   driver chiama `diagnostica`/`campo_spaziale`/`pozzo_grafo`. Se una di quelle
+            #   toccasse `d0`, il bilancio PER PASSO chiuderebbe lo stesso e il difetto sarebbe
+            #   INVISIBILE. Qui si misura, invece di darlo per scontato.
+            salto = (inizio - stato["fine_prec"]) if stato["fine_prec"] is not None else 0.0
+            stato["fine_prec"] = fine
+            stato["salto_tot"] = stato.get("salto_tot", 0.0) + salto
             stato["n_passo"] += 1
             stato["passi"].append(
                 dict(passo=stato["n_passo"], inizio=inizio, fine=fine, delta=d,
                      scritture=sc, freno=fr, nati=nati, morti=morti,
+                     concat=cc, salto=salto,
                      n_nati=int(np.sum(~vivi1)), n_morti=int(np.sum(~vivi0)),
                      med_nati=float(np.median(v1[~vivi1])) if np.any(~vivi1) else float("nan"),
                      med_morti=float(np.median(v0[~vivi0])) if np.any(~vivi0) else float("nan"),
@@ -268,13 +305,15 @@ def scrivi(stato, visto, dest, W, blob, seme, mem):
     P = stato["passi"]
     with io.open(p_csv, "w", encoding="utf-8", newline="\n") as f:
         f.write("# blob=%s seme=%s MEM_MOTO=%s\n" % (blob, seme, mem))
-        f.write("passo,inizio,fine,delta,scritture,freno,nati,morti,n_nati,n_morti,"
-                "med_nati,med_morti,med_vivi,residuo,residuo_rel\n")
+        f.write("passo,inizio,fine,delta,scritture,freno,concat,salto,nati,morti,"
+                "n_nati,n_morti,med_nati,med_morti,med_vivi,residuo,residuo_rel\n")
         for r in P:
-            f.write("%d,%.9e,%.9e,%.9e,%.9e,%.9e,%.9e,%.9e,%d,%d,%.9e,%.9e,%.9e,%.9e,%.9e\n"
+            f.write("%d,%.9e,%.9e,%.9e,%.9e,%.9e,%.9e,%.9e,%.9e,%.9e,%d,%d,"
+                    "%.9e,%.9e,%.9e,%.9e,%.9e\n"
                     % (r["passo"], r["inizio"], r["fine"], r["delta"], r["scritture"],
-                       r["freno"], r["nati"], r["morti"], r["n_nati"], r["n_morti"],
-                       r["med_nati"], r["med_morti"], r["med_vivi"], r["residuo"], r["rel"]))
+                       r["freno"], r["concat"], r["salto"], r["nati"], r["morti"],
+                       r["n_nati"], r["n_morti"], r["med_nati"], r["med_morti"],
+                       r["med_vivi"], r["residuo"], r["rel"]))
     with io.open(p_txt, "w", encoding="utf-8", newline="\n") as f:
         f.write("# G4 -- IL BILANCIO DI `d0`, con MEM_MOTO=%s\n" % mem)
         f.write("# blob simulatore (sha1 byte grezzi)=%s  seme=%s  passi=%d\n"
@@ -291,7 +330,8 @@ def scrivi(stato, visto, dest, W, blob, seme, mem):
         f.write("  -> %s\n\n" % ("CHIUDE" if chiude else
                                  "*** NON CHIUDE: MANCA UN TERMINE. La prova non si legge. ***"))
         tot = dict((k, float(np.sum([r[k] for r in P])))
-                   for k in ("delta", "scritture", "freno", "nati", "morti"))
+                   for k in ("delta", "scritture", "freno", "concat", "nati", "morti",
+                             "salto"))
         f.write("I TOTALI SU %d PASSI:\n" % len(P))
         f.write("  Delta(somma d0)  %+.6e\n" % tot["delta"])
         f.write("  scritture        %+.6e   (%6.2f %% del Delta)\n"
@@ -300,15 +340,21 @@ def scrivi(stato, visto, dest, W, blob, seme, mem):
         f.write("  FRENO            %+.6e   (%6.2f %%)\n"
                 % (tot["freno"], 100.0 * tot["freno"] / tot["delta"]
                    if tot["delta"] else float("nan")))
-        f.write("  NASCITE          %+.6e   (%6.2f %%)\n"
-                % (tot["nati"], 100.0 * tot["nati"] / tot["delta"]
+        f.write("  NASCITE-MORTI    %+.6e   (%6.2f %%)   <- misurato AL SITO che concatena\n"
+                % (tot["concat"], 100.0 * tot["concat"] / tot["delta"]
                    if tot["delta"] else float("nan")))
-        f.write("  MORTI           -%.6e   (%6.2f %%)\n"
-                % (tot["morti"], -100.0 * tot["morti"] / tot["delta"]
-                   if tot["delta"] else float("nan")))
+        f.write("\n  (descrittivi, a granularita' di PASSO e non del sito -- NON entrano nel\n")
+        f.write("   bilancio: un arco nato e poi scritto mostrerebbe il valore di fine passo)\n")
+        f.write("  nascite (fine passo)  %+.6e\n" % tot["nati"])
+        f.write("  morti (inizio passo)  %+.6e\n" % tot["morti"])
+        f.write("\n  LA GUARDIA DEL SALTO fra la fine di un passo e l'inizio del successivo:\n")
+        f.write("  somma dei salti  %+.6e  -> %s\n"
+                % (tot["salto"], "nessuna scrittura fuori dal ciclo"
+                   if abs(tot["salto"]) < 1e-9 * max(abs(tot["delta"]), 1.0)
+                   else "*** QUALCOSA SCRIVE `d0` FUORI DAL CICLO DEL PASSO ***"))
         f.write("\nCHI FA CRESCERE `d0`: il termine col contributo POSITIVO maggiore.\n")
         cand = [("scritture", tot["scritture"]), ("freno", tot["freno"]),
-                ("nascite", tot["nati"]), ("morti (col segno)", -tot["morti"])]
+                ("nascite-morti", tot["concat"])]
         cand.sort(key=lambda x: -x[1])
         for n, v in cand:
             f.write("  %-18s %+.6e\n" % (n, v))
