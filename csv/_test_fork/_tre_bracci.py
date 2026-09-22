@@ -129,7 +129,9 @@ def main():
     W("\n## LE GRANDEZZE, snapshot per snapshot\n\n")
     for campo, eti, fmt in (("med_d0", "`med d0`", "%.4f"), ("med_d", "`med d`", "%.4f"),
                             ("med_r", "**`med d/d0`**", "%.4f"), ("n", "`n`", "%d")):
-        W("### %s\n\n| passo | %s |\n|--:|%s|\n"
+        # ⚠ il separatore ha UNA colonna in piu' delle intestazioni: quella del `passo`.
+        #   La prima versione aggiungeva un `|` di troppo in fondo (difetto cosmetico, 18:36).
+        W("### %s\n\n| passo | %s |\n|--:|%s\n"
           % (eti, " | ".join("**%s**" % b[0] for b in BRACCI),
              "--:|" * len(BRACCI)))
         for passo in PASSI:
