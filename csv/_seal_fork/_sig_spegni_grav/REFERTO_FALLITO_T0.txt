@@ -1,0 +1,34 @@
+# SIGILLO -- `GRAV_BIFASE = False` SPEGNE SOLO `S09`
+# prima della prova di spegnimento `G3`. Nessuna modifica a simulatore ne' driver.
+# 3 passi dalla semina per braccio, configurazione della validazione.
+#
+COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di sigillare
+------------------------------------------------------------------------------------------------
+K1 spegnimento CHIRURGICO (solo `S09` sparisce) -> atteso NESSUN colpevole
+     colpevoli: nessuno  -> OK
+K2 IL CASO CHE DEVE FALLIRE: lo spegnimento tocca ANCHE `S11_flusso`
+     colpevoli: [('S11_flusso', 3, 0)]
+     atteso: `S11_flusso` fra i colpevoli -> OK: il criterio VEDE uno spegnimento troppo largo
+K3 un sito che COMPARE invece di sparire -> atteso segnalato
+     colpevoli: [('S05_spinta_locale', 0, 7)]  -> OK
+K4 `scarto`: identici -> 0.0 ; FORME DIVERSE -> `nan`, MAI 0 per mancanza di confronto
+     identici 0.000e+00 ; forme diverse nan (shape ((5,), (7,))) -> OK
+------------------------------------------------------------------------------------------------
+  -> i criteri PASSANO: si sigilla
+
+blob simulatore (sha1 byte grezzi) 9557a867   seme 42
+
+I QUATTRO BRACCI:
+  braccio ON       GRAV_BIFASE=True  MEM_HEBB=True   n=2480   archi=526084  siti=12
+  braccio ON-bis   GRAV_BIFASE=True  MEM_HEBB=True   n=900    archi=59730   siti=10
+  braccio OFF      GRAV_BIFASE=False MEM_HEBB=True   n=2480   archi=526084  siti=10
+  braccio HEBB     GRAV_BIFASE=True  MEM_HEBB=False  n=900    archi=59730   siti=3
+  (19.5 s)
+
+================================================================================================
+I CRITERI
+================================================================================================
+T0    FAIL RIPRODUCIBILITA': due bracci ON identici? invocazioni diverse=2, max|dx| al passo 1 = 0.000e+00, max|mem_mot| = nan
+
+*** T0 FALLISCE: i due bracci ON NON coincidono, quindi QUALUNQUE differenza
+    misurata sotto sarebbe indistinguibile dalla deriva. IL SIGILLO SI FERMA. ***

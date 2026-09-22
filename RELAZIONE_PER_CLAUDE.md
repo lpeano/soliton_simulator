@@ -11128,3 +11128,57 @@ citare** per **`SPINTA_LOCALE`**. — **`Z106`, ora CHIUSA**
 **Le tre righe di riscontro e le guardie si riproducono IDENTICHE** al giro precedente *(sistema
 deterministico)*: `0/20` sul confine, saldo di confine diffuso su `96 429` archi, `Z105` confermata
 a `3.072e-13`, **doppioni `0`, risurrezioni `0`**.
+
+### ⑻ **Il sigillo di `G3` FALLISCE su `T0`, e il difetto e' NEL BANCO DI PROVA, non nel flag**
+
+> **Riscontro negativo, relazionato perche' lo e'.** Il sigillo
+> `csv/_seal_fork/_sigillo_spegni_grav.py` *(blob `b242286f`, commit `e937bf9`)* **si e' fermato
+> al primo criterio** e **non ha provato nulla su `GRAV_BIFASE`**.
+> Referto: `csv/_seal_fork/_sig_spegni_grav/REFERTO.txt`.
+
+**`T0` e' il controllo di RIPRODUCIBILITA':** due bracci `ON` girati separatamente devono
+coincidere. **Se non coincidono, qualunque differenza misurata dopo sarebbe indistinguibile dalla
+deriva**, e uno zero non significherebbe niente. **Ha fatto esattamente il suo mestiere.**
+
+```
+braccio ON       GRAV_BIFASE=True  MEM_HEBB=True   n=2480   archi=526084   siti=12
+braccio ON-bis   GRAV_BIFASE=True  MEM_HEBB=True   n=900    archi=59730    siti=10
+braccio OFF      GRAV_BIFASE=False MEM_HEBB=True   n=2480   archi=526084   siti=10
+braccio HEBB     GRAV_BIFASE=True  MEM_HEBB=False  n=900    archi=59730    siti=3
+T0  FAIL   invocazioni diverse=2, max|mem_mot| = nan
+```
+
+**I bracci si alternano `2480 / 900 / 2480 / 900`. `n = 900` e' il VUOTO DA SOLO: le masse non
+sono state seminate.**
+
+**LA CAUSA, letta dal sorgente e non congetturata** (`avvia_test`, `:6465`):
+
+```python
+def _f(_=None):
+    if test["nome"] == nome: ferma_test(); return
+```
+
+> **`avvia_test` e' un INTERRUTTORE A LEVETTA.** La prima chiamata avvia la scena; **la seconda,
+> con la scena ancora attiva, la FERMA** e torna **senza seminare le masse**.
+
+**Il mio banco di prova faceva girare i quattro bracci NELLO STESSO PROCESSO, e non si puo':**
+oltre alla levetta, **la rete stessa sopravvive** fra un braccio e l'altro. **E' un difetto mio del
+metodo, non del flag.**
+
+> **⚠ COSA QUESTO NON DICE, e va detto prima di tutto: NON dice che `GRAV_BIFASE = False` sia
+> uno spegnimento sporco.** **Non e' stato misurato affatto.** `T1`-`T6` non sono nemmeno stati
+> eseguiti, perche' `T0` ferma il sigillo apposta.
+> **E il `max|mem_mot| = nan` accanto al `FAIL` e' proprio la guardia contro la trappola dello
+> zero:** i due `mem_mot` hanno **forme diverse** *(`2480` contro `900` nodi)*, e `scarto()`
+> restituisce `nan` invece di `0` — **lo zero per MANCANZA DI CONFRONTO e' gia' catalogato in
+> `CLAUDE.md` come trappola, e qui non e' passato.**
+
+**LA CORREZIONE:** ogni braccio gira in un **processo separato**, e il confronto si fa su
+**firme** *(sha1 dei byte dell'array)* invece che su `max|Δ|`. **La firma e' un criterio PIU'
+FORTE:** `max|Δ| = 0` puo' nascondere due `NaN` nello stesso posto, l'identita' dei byte no.
+Commit a se', poi si rigira.
+
+**I quattro collaudi del criterio erano passati** *(`K1`-`K4`, incluso `K2`, quello che DEVE
+fallire)*: **collaudavano il CRITERIO, e il criterio va bene. A rompersi e' stato l'IMPIANTO che
+lo alimenta** — **la stessa identica lezione di due ore fa con l'`UnboundLocalError`**, e stavolta
+l'ho presa perche' `T0` esisteva.
