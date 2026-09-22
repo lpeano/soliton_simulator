@@ -12408,3 +12408,22 @@ esaurite.** **Nessuna cura è stata scritta.**
 e il mandato di `SCALE-TW` dice esso stesso *«NON ORA»*. **Il primo difetto di `SCALE-TW` è
 già indicato da Luca e registrato:** `TORS_4PI` a `:789` dichiara *«soglia 4π»* e
 *«default off»*, **ma la soglia è `3π` e il flag è acceso** — e **fa fede il codice**.
+
+### ㉬ **Il confronto dei tre bracci: un falso positivo nella mia regex, e il collaudo non l'aveva preso**
+
+> Referto committato **come reperto**. I NUMERI delle grandezze **sono giusti**: il difetto e'
+> **solo** nella colonna «quali NON reggono».
+
+La colonna elenca **`ESITO CONTRO I CRITERI -- REGGE /`** fra i criteri che non reggono.
+**Non e' un criterio: e' l'INTESTAZIONE della sezione**, che contiene la stringa
+*«REGGE / NON REGGE»* e che la mia regex `^(.+?)\s+NON REGGE\s` cattura.
+
+> **⚠ E IL PUNTO NON E' LA REGEX: E' IL COLLAUDO.** `K1` usava un file sintetico che
+> **non aveva l'intestazione vera**. **Il caso a risposta nota non somigliava all'input vero**,
+> quindi non poteva prendere questo errore. **`P1-sexies` dice di collaudare su un caso a
+> risposta nota; questo aggiunge che il caso deve SOMIGLIARE al vero** — altrimenti collauda
+> un input che non esiste.
+
+**La correzione:** la regex richiede **contenuto sulla STESSA riga** dopo `NON REGGE`
+*(`[ 	]+\S`)*. Le righe vere sono `<criterio>  NON REGGE  <spiegazione>`; l'intestazione
+finisce **a fine riga**. **E un collaudo nuovo con l'intestazione VERA dentro il file sintetico.**
