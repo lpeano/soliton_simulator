@@ -10836,3 +10836,45 @@ grandezza dell'olonomia**.
 **si rompe** senza la memoria del moto, `MEM_ARCO` e' **la cura da proporre al `CHK3`**; se **sta
 in piedi** senza, `MEM_ARCO` resta **registrata come alternativa**. **In entrambi i casi: derivata
 si', codice no, prima del checkpoint.** — **`Z104`**
+
+### ⑵ **`G2` -- tutto il saldo netto della gravita' sta SUL CONFINE vuoto-massa, e TIRA GIU'**
+
+> **SOLA MISURA**, 120 passi dalla semina, configurazione della validazione. Lo strumento
+> **non tocca il simulatore**: sostituisce `_traccia_d0` con una funzione pure-read allo stesso
+> punto di chiamata. **`dx` e' la spinta GREZZA**, perche' sotto `SCALA_MIN_PASSO` -- acceso qui --
+> `_sd0` **restituisce `dx` invariato** *(verificato dal sorgente)*: il freno agisce una volta a
+> fine passo, fuori da questo punto.
+
+| regione | archi | SALITE | DISCESE | SALDO | **SALDO/ARCO** | `\|saldo\|/tot` |
+|---|---:|---:|---:|---:|---:|---:|
+| `vuoto-vuoto` | 59683 | `4.714e+04` | `-4.891e+04` | `-1.766e+03` | `-0.0296` | `0.018` |
+| `massa-massa` | 369766 | `2.826e+05` | `-2.714e+05` | `+1.125e+04` | `+0.0304` | `0.020` |
+| `nato-nato` | 13 | `4.88` | `-5.03` | `-0.145` | `-0.0112` | `0.015` |
+| **`CONFINE vuoto-massa`** | **96332** | **`8.887e+03`** | **`-1.452e+05`** | **`-1.363e+05`** | **`-1.415`** | **`0.885`** |
+| `CONFINE con nato` | 488 | `3.37e+02` | `-3.54e+02` | `-17.4` | `-0.0357` | `0.025` |
+| **TOTALE** | **526282** | `3.390e+05` | `-4.658e+05` | **`-1.268e+05`** | | |
+
+**Tre cose, e la terza e' quella che decide:**
+1. **Il confine e' `47` volte piu' spinto della regione successiva**, e **col segno opposto a
+   `massa-massa`**.
+2. **Non e' una quasi-cancellazione.** `|saldo|/tot` vale **`0.885`** sul confine contro
+   **`0.018`-`0.025` ovunque altrove: fuori dal confine la spinta si elide al 98 %.** Sul confine le
+   salite sono `8.9e+03` contro discese `-1.45e+05` -- **un'asimmetria di 16 volte**.
+3. **Il saldo del confine, `-1.363e+05`, e' il 107 % del saldo totale `-1.268e+05`.** Tutto il
+   resto messo insieme e' **rumore che si cancella**.
+
+> **La lettura fissata prima era *«maggiore in `massa-massa`/`CONFINE` -> la spinta segue la
+> massa»*, e si verifica -- ma nella forma piu' stretta possibile: non segue la massa, SEGUE IL SUO
+> BORDO, e li' COMPRIME.**
+
+**Controprova:** il totale coincide **esattamente** col `-1.268e+05` di `Z102`, misurato da uno
+strumento diverso. E **`S10_grav_med` non ha girato**: zero invocazioni, come in `Z102`.
+
+> **⚠ E LA GUARDIA DEL PREFISSO E' SCATTATA. LA TABELLA DEI 20 ARCHI NON E' STATA STAMPATA.**
+> Il mio ragionamento preliminare assumeva che la mitosi **appendesse** archi senza riordinare i
+> precedenti. **E' FALSO: in 61 passi su 120**, e le prime violazioni sono **ai passi 3-10**.
+> Senza la guardia avrei pubblicato **numeri veri sommati sull'arco sbagliato**.
+> **E' `P1-sexies` che ha IMPEDITO, non che ha avvertito:** il caso sintetico *«archi permutati»*
+> era stato collaudato prima, ed **era quello che DOVEVA fallire**.
+> **I 20 archi si misurano lo stesso**, con un accumulatore che identifica l'arco dalla **coppia di
+> nodi** invece che dalla posizione. E' il passo successivo. — **`Z105`**

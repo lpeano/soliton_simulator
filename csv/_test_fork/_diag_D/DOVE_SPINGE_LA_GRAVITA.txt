@@ -1,0 +1,55 @@
+# DOVE SPINGE LA GRAVITA' -- il saldo di `S09` PER REGIONE, e i 20 archi piu' spinti
+# SOLA MISURA. Nessuna cura, nessuna modifica al simulatore.
+# ATTENZIONE A COSA E' `dx`: `S09` scrive `d0[mask] += _sd0(...)`, e sotto
+#   `SCALA_MIN_PASSO` -- acceso qui -- `_sd0` e' PASS-THROUGH: il freno agisce UNA volta
+#   a fine passo, FUORI da questo punto. Quindi `dx` e' la spinta GREZZA, la stessa che
+#   in `Z102` somma a `-1.268e+05`, NON quella dopo il freno.
+#
+COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di misurare
+--------------------------------------------------------------------------------------------
+A  aggregazione per regione, somme NOTE costruite a mano
+     atteso  su = ['2.0', '10.0', '100.0', '7.0', '0.5']
+     ottenuto su = ['2.0', '10.0', '100.0', '7.0', '0.5']   -> OK
+B  concentrazione su una spinta UNIFORME  -> atteso ~0.01 (il valore sotto ipotesi nulla)
+     ottenuto 0.01047  -> OK
+B+ controllo POSITIVO: 200 archi su 200000 portano tutto -> atteso MOLTO sopra 0.01
+     ottenuto 0.99901  -> OK
+C  LA GUARDIA DEL PREFISSO -- il caso che DEVE fallire
+     archi APPESI in coda      -> la guardia dice REGGE, atteso REGGE      -> OK
+     archi PERMUTATI           -> la guardia dice NON REGGE, atteso NON REGGE  -> OK
+--------------------------------------------------------------------------------------------
+  -> i criteri PASSANO tutti: si misura
+
+configurazione: quella della VALIDAZIONE (sei cure accese). Passi: 120 su 120. 377.2 s
+
+============================================================================================================
+`S09_spinta_med` -- IL SALDO PER REGIONE
+============================================================================================================
+regione                  archi |        SALITE       DISCESE         SALDO |    SALDO/ARCO |saldo|/tot
+------------------------------------------------------------------------------------------------------------
+vuoto-vuoto              59683 |  4.714088e+04 -4.890703e+04 -1.766148e+03 | -2.959215e-02      0.0184
+massa-massa             369766 |  2.826280e+05 -2.713773e+05  1.125071e+04 |  3.042658e-02      0.0203
+nato-nato                   13 |  4.882956e+00 -5.027957e+00 -1.450010e-01 | -1.115392e-02      0.0146
+CONFINE vuoto-massa      96332 |  8.887001e+03 -1.451946e+05 -1.363076e+05 | -1.414978e+00      0.8846
+CONFINE con nato           488 |  3.367496e+02 -3.541639e+02 -1.741421e+01 | -3.568486e-02      0.0252
+------------------------------------------------------------------------------------------------------------
+TOTALE                  526282 |  3.389975e+05 -4.658382e+05 -1.268406e+05 |
+  giri: 120   conteggi: salite 26949807, discese 36197690
+
+============================================================================================================
+`S10_grav_med` -- IL SALDO PER REGIONE
+============================================================================================================
+*** NON HA MAI GIRATO in questa configurazione: non e' misurabile qui, e lo dico
+    invece di dedurlo. (giri registrati: 0) ***
+
+============================================================================================================
+I 20 ARCHI CHE RICEVONO LA SPINTA PIU' GRANDE (cumulato di `S09` sui 120 passi)
+============================================================================================================
+la guardia del PREFISSO: 61 passi su 120 in cui `(i, j)` NON e' rimasto un prefisso
+  (allungamenti dell'accumulatore: 62; chiamate saltate per lunghezza: 93)
+
+*** IL PREFISSO NON REGGE (prime violazioni ai passi [3, 4, 5, 6, 7, 8, 9, 10]). LA TABELLA NON SI STAMPA:
+    sarebbero numeri VERI sommati sull'ARCO SBAGLIATO. Dichiarato, non nascosto. ***
+
+LIMITI: UN seme, UNA scena, 120 passi dalla semina. E questa misura dice DOVE la spinta
+  arriva, NON se spegnerla cambi il sistema: per quello servono `G3` e `G4`.
