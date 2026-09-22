@@ -249,6 +249,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 
 | **C5-res** | **I RESIDUI DI `C5`** — **`I4`** la scatola nera *(rigiocare da solo il passo in cui scatta un invariante)*, **`I5`** la tabella degli underflow **per RIGA**, e la **MODALITA' FINE** *(controllo dopo OGNI scrittura invece che a fine passo)* | mandato `C5`, decisione di Luca 21/9 | ⏸ **DOPO la cura di `d0` e PRIMA del run lungo. Stasera no.** |
 | **8-bis** | **ARCHIVIO A ROTAZIONE** — si scrive su `C:`, ogni snapshot completo va su `E:` con `sha1` dei byte compressi, sigilli `R1`-`R5` | archivio | 🔒 prima del run lungo |
+| **PROVA-COMB** | **LA PROVA COMBINATA: TUTTE LE CURE APPROVATE ACCESE INSIEME** — 600 passi, stesso seme e scena, **letture della validazione** *(8 criteri)* **e BILANCIO di `d0`**, contro il **riferimento di `G4`** | decisione di Luca, 2026-09-22 | 🔒 **PRIMA del tag `epoca-3`, e dopo che Luca ha approvato le singole cure.** **PERCHE' SERVE, ed e' il par.1 letto al contrario:** la regola d'oro dice *un interruttore alla volta* **per capire**; ma un sistema che gira con **otto** cure accese non e' mai stato provato **in quella configurazione**. **Ogni cura e' sigillata DA SOLA; l'insieme no.** **COSA DECIDE:** se i criteri che REGGONO da sole reggono anche **insieme**, e se il bilancio di `d0` **chiude** con tutte accese. **Se un criterio cade solo nella combinazione, e' un'INTERAZIONE fra cure**, e va trovata prima dell'epoca 3. **LE CURE DA ACCENDERE si leggono dalla sezione `CURE VERIFICATE`** — solo quelle con stato **APPROVATA DA LUCA**. **Il riferimento di paragone e' `_g4_riferimento`**, gia' sul disco: nessun run in piu' per il confronto |
 | **E3** | **EPOCA 3 + RUN LUNGO** — tag `epoca-3`, 3000 passi, `M1`/`M4` leggere durante il run | GLOBALE §4 | 🔒 **solo dopo che i criteri REGGONO.** Nessun confronto con le epoche precedenti |
 | 6 | strumento cosmologico `M1`-`M4`, **sul nuovo D** | COSMOLOGICO | ⏸ |
 | 7 | **`Z47` PARTE ①** — ricognizione di `pos` nella fisica *(sola lettura)* | `MANDATO_Z47_coda` | ⏸ |
@@ -364,6 +365,41 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 > **Conseguenza operativa:** `SPINTA_LOCALE`, `POZZO_D`, `MEM_ARCO` e **il freno simmetrico di
 > `D31`** **non si scrivono in codice** finche' le loro schede non stanno in
 > `doc/REGISTRO_FISICA.md`.
+
+<!-- CURE-INIZIO -->
+
+## ✅ CURE VERIFICATE — **flag · sigillo · prova · esito · stato**
+
+> **Decisione di Luca, 2026-09-22.** Si aggiorna **nello stesso commit** in cui una cura viene sigillata o provata.
+> **Generata da `csv/_cure_verificate.py`:** il **DEFAULT** si legge dal sorgente a ogni giro e l'esito del sigillo dal suo referto; **prova, esito e stato sono LETTURE**, scritte a mano.
+>
+> **⚠ IL FATTO CHE LA TABELLA RENDE VISIBILE:** **quasi tutte le cure hanno default `False`** e **le accende il DRIVER, run per run**. Non sono «nel codice»: sono **nell'argv**. **Un run che dimentica un flag gira su un sistema che si sa difettoso** *(`P2`)*, e nessuno se ne accorgerebbe dal sorgente.
+
+| flag | cura | **default** | sigillo | prova | esito | stato |
+|---|---|:--:|--:|---|---|---|
+| `PEQ_ESATTO` | `C1` rilassamento di `peq` in forma ESATTA | **`False`** | `7/7` *(letto dal referto)* | in **ogni** run del fork *(`--peq-esatto=on`)* | `peq` non puo' piu' scavalcare sotto zero: combinazione convessa, **dimostrato** e non imposto. Cura `D17` | VERIFICATA-SPENTA *(default `False`, accesa dal driver)* |
+| `PEQ_NASCITA_LOCALE` | `C2` nascita LOCALE di `peq` | **`False`** | `6/6` *(letto dal referto)* | in **ogni** run del fork | una sola legge di nascita; via la mediana GLOBALE *(`A2`)* | VERIFICATA-SPENTA *(default `False`, accesa dal driver)* |
+| `SCALA_MIN_PASSO` | `C3` il freno UNA VOLTA per passo | **`False`** | `6/6` *(letto dal referto)* | `G4` riferimento e i due spegnimenti, 600 passi | cura il cricchetto **d'ORDINE** di `Z91`. **⚠ MA NON IL CRICCHETTO DI VERSO:** `Z113` lo DIMOSTRA sulla formula, ed e' **`D31`** | VERIFICATA-SPENTA — **e la legge che applica e' DIFETTOSA** |
+| `COES_CAUSALE` | `C4` coesione: istante unico e cono LOCALE | **`False`** | `5/5` *(letto dal referto)* | in **ogni** run del fork | cura `D18`. Il tetto locale **non e' sempre piu' stretto**: dove il cono e' veloce **allarga** | VERIFICATA-SPENTA *(default `False`, accesa dal driver)* |
+| `COES_ADIM` | coesione ADIMENSIONALE | **`False`** | — *(non ha un sigillo suo)* | in **ogni** run del fork | `|F_adim| <= 1` **per costruzione**. **L'unica legge delle quattro schede con le unita' giuste senza che un clip gliele dia** | VERIFICATA-SPENTA |
+| `ANOM_SIMM` | `C1-bis` anomalia simmetrica, senza pavimento | **`False`** | `6/6` *(letto dal referto)* | in **ogni** run del fork | toglie `max(peq, 1e-9)`, che con `peq < 0` **RIBALTAVA IL SEGNO** *(`Z94`, `D17`)* | VERIFICATA-SPENTA |
+| `INVARIANTI` | `C5` domini di stato, due livelli | **`True`** | `3/3` *(letto dal referto)* | in **ogni** run: **zero violazioni** in tutti e tre i bracci di `G4` | legge soltanto; su un run sano non cambia un bit | **ACCESA DI DEFAULT** *(`True`)* |
+| `RITMO_WRAP_2PI` | **`A1`** il wrap del ritmo sul periodo GIUSTO *(`2π`)* | — **assente** | ⏸ **da scrivere** | ⏸ prova a 600 passi, **da fare** | cura **`D34`** *(`Z117`: il wrap a `4π` e' l'IDENTITA')* | ⏸ **NON ANCORA IN CODICE** |
+| `FASE_2PI` | **§D** `φ` come fase ordinaria su `[0, 2π)` | — **assente** | ⏸ **da scrivere** | ⏸ prova a 600 passi + i **quattro test** `E1`-`E4`, **da fare** | la lettura scelta da Luca, **da METTERE ALLA PROVA**. Se un test fallisce, **cade** | ⏸ **NON ANCORA IN CODICE** |
+
+**Cure con default ACCESO: 1 su 9.**
+
+### ⚠ E QUESTE NON SONO CURE: sono **PROVE DI SPEGNIMENTO**
+
+> Il flag e' **`True`** — la legge **gira** — e **spegnerlo e' il test**. Metterle fra le cure gonfierebbe il conto.
+
+| flag | legge | **default** | sigillo | prova | esito |
+|---|---|:--:|--:|---|---|
+| `GRAV_BIFASE` | la gravita' bifase | **`True`** | `7/7` | `G3`, 600 passi | **NON e' il motore di `d0`** *(`Z107`)* |
+| `MEM_MOTO` | la scrittura della memoria del moto su `d0` | **`True`** | `8/8` | `G4`, 600 passi | **non e' il motore**, ma pesa *(`Z109`)* |
+| `MEM_MOTO_TUTTO` | l'INTERO blocco della memoria del moto | **`True`** | `10/10` | `G4-bis`, 600 passi | **spegnere di piu' da' PIU' crescita** *(`Z115`, `Z116`)* |
+
+<!-- CURE-FINE -->
 
 <!-- DIFETTI-NUOVI-INIZIO -->
 | **D20** | La correzione (1) su `inerzia` NON e' stata cablata, e **il gate che la autorizzava aveva misurato UN'ALTRA GRANDEZZA** | `Z1` | — | `APERTO` |

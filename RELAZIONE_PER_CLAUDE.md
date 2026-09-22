@@ -12550,3 +12550,36 @@ una misura una costante del codice.
 
 **→ La domanda del mandato** *«e' questa la causa di `r` su sei ordini di grandezza?»*
 **ha risposta: NO.** I sei ordini sono **il pavimento diviso il tetto**, scritti nella formula.
+
+### ㉰ **`CURE VERIFICATE` nella coda — e il fatto che la tabella rende visibile**
+
+> Decisione di Luca: per ogni cura **flag · sigillo · prova · esito · stato**, aggiornata
+> **nello stesso commit** in cui una cura viene sigillata o provata.
+> **Generata** *(`P1-ter`)*: il **default** si legge dal sorgente a ogni giro e l'esito del
+> sigillo dal suo referto; **prova, esito e stato sono LETTURE**, scritte a mano col loro commit.
+
+**⚠ IL NUMERO CHE LA TABELLA FA USCIRE: `1` cura su `9` ha il default ACCESO.**
+Tutte le altre — `PEQ_ESATTO`, `PEQ_NASCITA_LOCALE`, `SCALA_MIN_PASSO`, `COES_CAUSALE`,
+`COES_ADIM`, `ANOM_SIMM` — hanno **default `False`**, e **le accende il DRIVER, run per run**.
+**Non sono «nel codice»: sono nell'argv.** Un run che dimentica un flag **gira su un sistema
+che si sa difettoso** *(`P2`)*, **e dal sorgente non si vedrebbe.**
+
+**E una distinzione senza la quale il conto sarebbe falso:** `GRAV_BIFASE`, `MEM_MOTO` e
+`MEM_MOTO_TUTTO` **NON sono cure**. Il loro flag è `True` — la legge **gira** — e
+**spegnerlo è il test**. Stanno in una tabella a parte.
+
+**E `SCALA_MIN_PASSO` è il caso più scomodo, e va scritto:** è una cura **verificata**
+*(`6/6`)* che cura il cricchetto **d'ORDINE** di `Z91` — **ma la legge che applica è
+DIFETTOSA**: il cricchetto **di VERSO** resta, e `Z113` lo dimostra sulla formula. **Una cura
+sigillata non rende sana la legge che applica.**
+
+### ㉱ **`PROVA-COMB`: tutte le cure approvate accese INSIEME, prima dell'epoca 3**
+
+**È il par.1 letto al contrario.** La regola d'oro dice *un interruttore alla volta* **per
+capire**; ma un sistema che gira con **otto** cure accese **non è mai stato provato in quella
+configurazione**. **Ogni cura è sigillata DA SOLA; l'insieme no.**
+**Cosa decide:** se i criteri che reggono da sole reggono anche **insieme**, e se il bilancio di
+`d0` **chiude** con tutte accese. **Se un criterio cade solo nella combinazione, è
+un'INTERAZIONE fra cure**, e va trovata prima dell'epoca 3.
+Il riferimento di paragone è **`_g4_riferimento`, già sul disco**: nessun run in più per il
+confronto.
