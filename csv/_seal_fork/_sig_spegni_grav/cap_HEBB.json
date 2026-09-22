@@ -1,0 +1,88 @@
+{
+ "nome": "HEBB",
+ "grav": true,
+ "hebb": false,
+ "n": 2510,
+ "archi": 526120,
+ "passi": 3,
+ "cnt": {
+  "S02_rilass_visco": 3,
+  "S03_diff_guscio": 3,
+  "P1_dopo_rilass": 3,
+  "S06_mitosi": 2,
+  "S07_schwinger": 2
+ },
+ "primo": {
+  "S02_rilass_visco": {
+   "sha1": "d49dcd13b466",
+   "forma": [
+    525973
+   ],
+   "dtype": "float64",
+   "somma": 0.0,
+   "somma_abs": 0.0,
+   "min": 0.0,
+   "max": 0.0,
+   "n_non_finiti": 0
+  },
+  "S03_diff_guscio": {
+   "sha1": "89732fd415a2",
+   "forma": [
+    525973
+   ],
+   "dtype": "float64",
+   "somma": -783.9273335368515,
+   "somma_abs": 2986.869137469355,
+   "min": -0.020000000000000018,
+   "max": 0.020000000000000018,
+   "n_non_finiti": 0
+  },
+  "P1_dopo_rilass": {
+   "sha1": "d49dcd13b466",
+   "forma": [
+    525973
+   ],
+   "dtype": "float64",
+   "somma": 0.0,
+   "somma_abs": 0.0,
+   "min": 0.0,
+   "max": 0.0,
+   "n_non_finiti": 0
+  },
+  "S06_mitosi": {
+   "concatena": true,
+   "da": 525973,
+   "a": 526019
+  },
+  "S07_schwinger": {
+   "concatena": true,
+   "da": 526019,
+   "a": 526047
+  }
+ },
+ "mem_mot": {
+  "sha1": "9d01d1293b1d",
+  "forma": [
+   2451,
+   3
+  ],
+  "dtype": "float64",
+  "somma": 0.0,
+  "somma_abs": 0.0,
+  "min": 0.0,
+  "max": 0.0,
+  "n_non_finiti": 0
+ },
+ "d0": {
+  "sha1": "140414884f8b",
+  "forma": [
+   526047
+  ],
+  "dtype": "float64",
+  "somma": 605893.0108257597,
+  "somma_abs": 605893.0108257597,
+  "min": 0.8,
+  "max": 2.387088174890802,
+  "n_non_finiti": 0
+ }
+}

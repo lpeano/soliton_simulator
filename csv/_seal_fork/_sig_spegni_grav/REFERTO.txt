@@ -1,34 +1,96 @@
 # SIGILLO -- `GRAV_BIFASE = False` SPEGNE SOLO `S09`
 # prima della prova di spegnimento `G3`. Nessuna modifica a simulatore ne' driver.
 # 3 passi dalla semina per braccio, configurazione della validazione.
+# ⚠ OGNI BRACCIO IN UN PROCESSO SEPARATO: `avvia_test` e' un interruttore a LEVETTA
+#   (`:6465`), e in-process il secondo braccio nasceva SENZA MASSE. Vedi
+#   `REFERTO_FALLITO_T0.txt` e il commit `b6f3c83`.
 #
 COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di sigillare
-------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
 K1 spegnimento CHIRURGICO (solo `S09` sparisce) -> atteso NESSUN colpevole
      colpevoli: nessuno  -> OK
 K2 IL CASO CHE DEVE FALLIRE: lo spegnimento tocca ANCHE `S11_flusso`
      colpevoli: [('S11_flusso', 3, 0)]
-     atteso: `S11_flusso` fra i colpevoli -> OK: il criterio VEDE uno spegnimento troppo largo
+     atteso: `S11_flusso` segnalato -> OK: il criterio VEDE uno spegnimento troppo largo
 K3 un sito che COMPARE invece di sparire -> atteso segnalato
      colpevoli: [('S05_spinta_locale', 0, 7)]  -> OK
-K4 `scarto`: identici -> 0.0 ; FORME DIVERSE -> `nan`, MAI 0 per mancanza di confronto
-     identici 0.000e+00 ; forme diverse nan (shape ((5,), (7,))) -> OK
-------------------------------------------------------------------------------------------------
+K4 FIRMA: due array identici -> stessa firma  -> OK
+K5 IL CASO CHE UN CRITERIO SU `max|delta|` SBAGLIEREBBE: `+0.0` contro `-0.0`
+     max|delta| = 0.000e+00  (un criterio su max|delta| direbbe IDENTICI)
+     le firme: DIVERSE  -> OK: la firma e' PIU' STRETTA
+K6 FORME DIVERSE -> firme diverse, MAI identita' per mancanza di confronto -> OK
+K8 i siti che CONCATENANO: stessa coppia di lunghezze -> IDENTICI -> OK
+K9 lunghezze DIVERSE (100->104 contro 100->106) -> NON identici -> OK
+K10 un CONCATENA contro una FIRMA -> NON identici -> OK
+K7 due ASSENZE non sono un'identita' -> OK
+----------------------------------------------------------------------------------------------------
   -> i criteri PASSANO: si sigilla
 
-blob simulatore (sha1 byte grezzi) 9557a867   seme 42
+blob simulatore (sha1 byte grezzi) 9557a867
 
-I QUATTRO BRACCI:
-  braccio ON       GRAV_BIFASE=True  MEM_HEBB=True   n=2480   archi=526084  siti=12
-  braccio ON-bis   GRAV_BIFASE=True  MEM_HEBB=True   n=900    archi=59730   siti=10
-  braccio OFF      GRAV_BIFASE=False MEM_HEBB=True   n=2480   archi=526084  siti=10
-  braccio HEBB     GRAV_BIFASE=True  MEM_HEBB=False  n=900    archi=59730   siti=3
-  (19.5 s)
+I QUATTRO BRACCI, ciascuno in un processo suo:
+  ON       GRAV_BIFASE=True  MEM_HEBB=True   n=2480   archi=526084  siti=12
+  ON-bis   GRAV_BIFASE=True  MEM_HEBB=True   n=2480   archi=526084  siti=12
+  OFF      GRAV_BIFASE=False MEM_HEBB=True   n=2480   archi=526084  siti=10
+  HEBB     GRAV_BIFASE=True  MEM_HEBB=False  n=2510   archi=526120  siti=5
+  (39.0 s)
 
-================================================================================================
+====================================================================================================
 I CRITERI
-================================================================================================
-T0    FAIL RIPRODUCIBILITA': due bracci ON identici? invocazioni diverse=2, max|dx| al passo 1 = 0.000e+00, max|mem_mot| = nan
+====================================================================================================
+T0    PASS RIPRODUCIBILITA': due bracci ON separati coincidono? invocazioni diverse=0, siti con firma diversa=0, n 2480==2480, mem_mot =, d0 =
+T1    PASS LO SPEGNIMENTO SPEGNE: S09 ON=3 -> OFF=0 ; S10 OFF=0 ; P4 OFF=0
+T2    PASS SPEGNE SOLO QUELLO: siti (non gravita') con invocazioni diverse = 0 
+T3    PASS BYTE-IDENTITA' A MONTE al passo 1: siti confrontati=7, con firma DIVERSA=0 
+      S01_archi_nuovi      non invocato al passo 1
+      S02_rilass_visco     sha1 d49dcd13b466  forma [525973]  somma +0.000000e+00  IDENTICO
+      S03_diff_guscio      sha1 89732fd415a2  forma [525973]  somma -7.839273e+02  IDENTICO
+      S04_rilass_TAU_P     non invocato al passo 1
+      P1_dopo_rilass       sha1 d49dcd13b466  forma [525973]  somma +0.000000e+00  IDENTICO
+      S05_spinta_locale    non invocato al passo 1
+      P2_dopo_spinta       non invocato al passo 1
+      S06_mitosi           CONCATENA  ON 525973->526019   OFF 525973->526019   IDENTICO
+      S07_schwinger        CONCATENA  ON 526019->526047   OFF 526019->526047   IDENTICO
+      S08_proj             sha1 3137c8abe7b6  forma [526047]  somma +3.640635e+02  IDENTICO
+      P3_dopo_proj         sha1 dc07c64451aa  forma [526047]  somma +0.000000e+00  IDENTICO
+T4    PASS MEMORIA DEL MOTO intatta: mem_mot ON sha1 5a90926566f6 forma [2451, 3]  vs OFF sha1 5a90926566f6 -> IDENTICO
+T5    PASS GATE UNICO (AST): ramificazioni che dipendono da GRAV_BIFASE = 1, righe [5661]
+      assegnamenti: righe [893] ; tutte le occorrenze del NOME: righe [893, 5661, 8169]
+      -> se la ramificazione e' UNA SOLA, nessun'altra legge PUO' essere gated su quel
+         nome, e l'affermazione non dipende piu' da quanti passi si sono girati.
+T6    PASS IL CASO CHE DEVE FALLIRE -- `MEM_HEBB=False`: siti toccati OLTRE la gravita' = 5
+      P3_dopo_proj         ON=3    HEBB=0   
+      P6_dopo_coesione     ON=3    HEBB=0   
+      P7_dopo_4917         ON=3    HEBB=0   
+      S08_proj             ON=3    HEBB=0   
+      S12_coesione         ON=3    HEBB=0   
+      -> `T2` su questo braccio FALLISCE, come deve. Se `T2` lo desse per buono, direbbe
+         "spegne solo S09" SENZA POTERLO SAPERE. Ed e' anche la prova, SUL CODICE VERO,
+         di perche' il mandato VIETA `MEM_HEBB=False` come prova di spegnimento.
 
-*** T0 FALLISCE: i due bracci ON NON coincidono, quindi QUALUNQUE differenza
-    misurata sotto sarebbe indistinguibile dalla deriva. IL SIGILLO SI FERMA. ***
+----------------------------------------------------------------------------------------------------
+LA COESIONE: cosa il sigillo AFFERMA e cosa NO
+----------------------------------------------------------------------------------------------------
+  `S12_coesione` sta A VALLE del blocco della gravita' (ordine verificato dal sorgente).
+  invocazioni ON=3 OFF=3 -> UGUALI
+  al passo 1: somma ON -3.715772e+01  OFF -3.715772e+01   firme DIVERSE
+  -> IL SIGILLO AFFERMA: la coesione gira lo STESSO NUMERO DI VOLTE, e la sua legge NON e'
+     gated su `GRAV_BIFASE` (`T5`: la ramificazione e' UNA SOLA).
+  -> IL SIGILLO NON AFFERMA che i suoi incrementi siano identici: NON LO SONO, e NON
+     DEVONO esserlo. La coesione vede un `d0` diverso perche' la gravita' non lo ha
+     spostato. E' FISICA CHE PROPAGA, non l'interruttore che la tocca.
+     Dire "la coesione non e' toccata" senza questa distinzione sarebbe FALSO.
+
+====================================================================================================
+ESITO: 7/7
+====================================================================================================
+*** SIGILLO PASSATO: `GRAV_BIFASE = False` spegne SOLO la gravita' bifase.
+    La prova di spegnimento `G3` puo' partire. ***
+
+LIMITI: 3 passi per braccio, UN seme, UNA scena. `T2` e' un confronto di CONTEGGI su
+  pochi passi; cio' che rende il sigillo conclusivo NON e' il numero di passi ma `T5`,
+  che e' STRUTTURALE e non campionario.
+NOTA: `np.random.seed()` e' rimesso identico in ogni braccio. Il generatore e' PER-RETE
+  (`self.rng = np.random.default_rng(seed)`, `:1430`), quindi in teoria non serve; se un
+  percorso usasse quello GLOBALE, senza non sarebbero confrontabili. `T0` e' cio' che lo
+  verifica invece di darlo per scontato.

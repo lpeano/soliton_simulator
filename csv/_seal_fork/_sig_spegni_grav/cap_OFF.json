@@ -1,0 +1,153 @@
+{
+ "nome": "OFF",
+ "grav": false,
+ "hebb": true,
+ "n": 2480,
+ "archi": 526084,
+ "passi": 3,
+ "cnt": {
+  "S02_rilass_visco": 3,
+  "S03_diff_guscio": 3,
+  "P1_dopo_rilass": 3,
+  "S06_mitosi": 2,
+  "S07_schwinger": 2,
+  "S08_proj": 3,
+  "P3_dopo_proj": 3,
+  "S12_coesione": 3,
+  "P6_dopo_coesione": 3,
+  "P7_dopo_4917": 3
+ },
+ "primo": {
+  "S02_rilass_visco": {
+   "sha1": "d49dcd13b466",
+   "forma": [
+    525973
+   ],
+   "dtype": "float64",
+   "somma": 0.0,
+   "somma_abs": 0.0,
+   "min": 0.0,
+   "max": 0.0,
+   "n_non_finiti": 0
+  },
+  "S03_diff_guscio": {
+   "sha1": "89732fd415a2",
+   "forma": [
+    525973
+   ],
+   "dtype": "float64",
+   "somma": -783.9273335368515,
+   "somma_abs": 2986.869137469355,
+   "min": -0.020000000000000018,
+   "max": 0.020000000000000018,
+   "n_non_finiti": 0
+  },
+  "P1_dopo_rilass": {
+   "sha1": "d49dcd13b466",
+   "forma": [
+    525973
+   ],
+   "dtype": "float64",
+   "somma": 0.0,
+   "somma_abs": 0.0,
+   "min": 0.0,
+   "max": 0.0,
+   "n_non_finiti": 0
+  },
+  "S06_mitosi": {
+   "concatena": true,
+   "da": 525973,
+   "a": 526019
+  },
+  "S07_schwinger": {
+   "concatena": true,
+   "da": 526019,
+   "a": 526047
+  },
+  "S08_proj": {
+   "sha1": "3137c8abe7b6",
+   "forma": [
+    526047
+   ],
+   "dtype": "float64",
+   "somma": 364.06352286144806,
+   "somma_abs": 803.8361112684598,
+   "min": -0.008811406304398695,
+   "max": 0.008811406304398695,
+   "n_non_finiti": 0
+  },
+  "P3_dopo_proj": {
+   "sha1": "dc07c64451aa",
+   "forma": [
+    526047
+   ],
+   "dtype": "float64",
+   "somma": 0.0,
+   "somma_abs": 0.0,
+   "min": 0.0,
+   "max": 0.0,
+   "n_non_finiti": 0
+  },
+  "S12_coesione": {
+   "sha1": "d99dd2f34896",
+   "forma": [
+    526047
+   ],
+   "dtype": "float64",
+   "somma": -37.15772407073692,
+   "somma_abs": 308.4003332156385,
+   "min": -0.004462062032208003,
+   "max": 0.004768116880884743,
+   "n_non_finiti": 0
+  },
+  "P6_dopo_coesione": {
+   "sha1": "dc07c64451aa",
+   "forma": [
+    526047
+   ],
+   "dtype": "float64",
+   "somma": 0.0,
+   "somma_abs": 0.0,
+   "min": 0.0,
+   "max": 0.0,
+   "n_non_finiti": 0
+  },
+  "P7_dopo_4917": {
+   "sha1": "dc07c64451aa",
+   "forma": [
+    526047
+   ],
+   "dtype": "float64",
+   "somma": 0.0,
+   "somma_abs": 0.0,
+   "min": 0.0,
+   "max": 0.0,
+   "n_non_finiti": 0
+  }
+ },
+ "mem_mot": {
+  "sha1": "5a90926566f6",
+  "forma": [
+   2451,
+   3
+  ],
+  "dtype": "float64",
+  "somma": 71.36700285946219,
+  "somma_abs": 696.1832589296009,
+  "min": -3.0054950770249764,
+  "max": 3.3805025447898003,
+  "n_non_finiti": 0
+ },
+ "d0": {
+  "sha1": "1b29081dab3d",
+  "forma": [
+   526047
+  ],
+  "dtype": "float64",
+  "somma": 606162.3416933236,
+  "somma_abs": 606162.3416933236,
+  "min": 0.8,
+  "max": 2.392533745350541,
+  "n_non_finiti": 0
+ }
+}

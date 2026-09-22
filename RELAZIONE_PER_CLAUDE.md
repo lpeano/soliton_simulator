@@ -11219,3 +11219,47 @@ Tre collaudi nuovi, e **`K10` e' il caso che deve fallire**. Ora sono **dieci** 
 > dichiarava diversi due siti identici** la seconda.
 > **⚠ E su `GRAV_BIFASE` continua a non esserci NESSUNA affermazione:** `T1`-`T6` non sono
 > ancora stati eseguiti.
+
+### ⑽ **Il sigillo di `G3` PASSA, `7/7`: `GRAV_BIFASE = False` spegne SOLO la gravita' bifase**
+
+> `csv/_seal_fork/_sigillo_spegni_grav.py` blob `74af236e`, simulatore `9557a867`, seme `42`,
+> **quattro bracci da 3 passi dalla semina, ciascuno in un processo suo**.
+> Referto: `csv/_seal_fork/_sig_spegni_grav/REFERTO.txt`.
+
+| | esito |
+|---|---|
+| **`T0`** RIPRODUCIBILITA' | **PASS** — due bracci `ON` separati: invocazioni diverse `0`, firme diverse `0`, `n` `2480=2480`, `mem_mot` e `d0` identici |
+| **`T1`** lo spegnimento SPEGNE | **PASS** — `S09` `ON=3` → `OFF=0`; `S10` `0`; `P4` `0` |
+| **`T2`** spegne SOLO quello | **PASS** — siti non-gravita' con invocazioni diverse: **`0`** |
+| **`T3`** byte-identita' A MONTE | **PASS** — 7 siti confrontati, **0** con firma diversa |
+| **`T4`** memoria del moto | **PASS** — `mem_mot` sha1 `5a90926566f6` **identico**, forma `[2451, 3]` |
+| **`T5`** GATE UNICO (AST) | **PASS** — **ramificazioni che dipendono da `GRAV_BIFASE`: UNA SOLA**, riga `5661` |
+| **`T6`** il caso che DEVE fallire | **PASS** — `MEM_HEBB=False` tocca **5 siti oltre la gravita'** |
+
+**`T5` e' il criterio che rende il sigillo conclusivo, e non e' campionario.** L'AST dice che il
+nome `GRAV_BIFASE` compare in **tre** punti eseguibili — l'assegnamento `:893`, **un solo `if`
+`:5661`**, e una `print` `:8169` — quindi **nessun'altra legge PUO' essere gated su quel
+nome**. L'affermazione *«spegne solo la gravita'»* **non dipende da quanti passi si sono
+girati**.
+
+**`T6` e' la prova, SUL CODICE VERO, di perche' il mandato vieta `MEM_HEBB = False`:**
+spegnendolo spariscono **`S08_proj`, `P3_dopo_proj`, `S12_coesione`, `P6`, `P7`** — cinque
+siti oltre la gravita'. **Non e' una prova di spegnimento della gravita': e' lo spegnimento di
+mezza funzione.**
+
+> **⚠ E LA DISTINZIONE SULLA COESIONE, che il referto scrive e che non va persa.**
+> `S12_coesione` sta **a valle** del blocco. Al passo 1 le sue invocazioni sono **uguali** (`3` e
+> `3`) e la **somma** dei suoi incrementi e' **identica** (`-3.715772e+01`), **ma le firme sono
+> DIVERSE**: gli incrementi **non** sono gli stessi byte.
+> **IL SIGILLO AFFERMA** che la coesione gira lo stesso numero di volte e che **la sua legge non
+> e' gated su `GRAV_BIFASE`** (`T5`).
+> **IL SIGILLO NON AFFERMA** che i suoi incrementi siano identici: **non lo sono, e non devono
+> esserlo** — la coesione vede un `d0` diverso perche' la gravita' non lo ha spostato.
+> **E' fisica che propaga, non l'interruttore che la tocca.** Dire *«la coesione non e'
+> toccata»* senza questa distinzione sarebbe **falso**.
+
+**⚠ E I TRE DIFETTI CHE CI SONO VOLUTI, tutti MIEI e nessuno del flag:** ① il banco girava i
+bracci **nello stesso processo** e `avvia_test` e' un **interruttore a levetta**; ② il criterio
+trattava un'assenza **strutturale e attesa** *(i siti che concatenano)* come un **dato mancante**;
+③ la **stampa** del dettaglio assumeva che ogni record fosse una firma.
+**`T0` ha preso i primi due. Il terzo si e' preso da solo, schiantandosi.**
