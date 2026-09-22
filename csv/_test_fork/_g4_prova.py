@@ -194,7 +194,7 @@ def confronta_snap(p_a, p_b, W):
     return ug, dv
 
 
-def installa(S, spegni_mem, spegni_tutto=False):
+def installa(S, spegni_mem, spegni_tutto=False, wrap2pi=False):
     """Avvolge tutto cio' che serve. PURE-READ tranne l'unico flag che il mandato ammette."""
     stato = {"passi": [], "conti": {}, "freno": {}, "aperto": None, "n_passo": 0,
              "fine_prec": None}
@@ -208,6 +208,10 @@ def installa(S, spegni_mem, spegni_tutto=False):
         visto["chiamate"] += 1
         if spegni_mem:
             S.MEM_MOTO = False
+        if wrap2pi:
+            # [D34, 2026-09-22] LA CURA DEL RITMO. Sigillo 4/4: byte-inerte spenta,
+            # e accesa CAMBIA (104 campi). Il default nel sorgente resta False.
+            S.RITMO_WRAP_2PI = True
         if spegni_tutto:
             # [G4-bis, 2026-09-22] L'INTERO blocco, spostamento di fase compreso. Sigillo
             # `_sigillo_mem_moto_tutto.py` **10/10** sul blob `21e3a3dc`.
@@ -406,7 +410,8 @@ def main():
     modo = None
     passi = None
     for a in sys.argv[1:]:
-        if a in ("--controllo", "--riferimento", "--spegni", "--spegni-tutto"):
+        if a in ("--controllo", "--riferimento", "--spegni", "--spegni-tutto",
+                 "--ritmo-wrap"):
             modo = a
         if a.startswith("--frame="):
             passi = int(a.split("=", 1)[1])
@@ -438,6 +443,11 @@ def main():
     elif modo == "--spegni":
         dest = os.path.join(RADICE, "csv", "_test_fork", "_g4_senza_memmoto")
         nfr, spegni = (passi or 100), True
+    elif modo == "--ritmo-wrap":
+        # [D34] LA PROVA DELLA CURA DEL RITMO. Nient'altro e' spento: il confronto e'
+        # con `_g4_riferimento`, che gira con gli STESSI flag e lo STESSO seme.
+        dest = os.path.join(RADICE, "csv", "_test_fork", "_d34_ritmo_wrap")
+        nfr, spegni = (passi or 100), False
     else:
         # [G4-bis] L'INTERO blocco. `MEM_MOTO` resta al suo default: e'
         # `MEM_MOTO_TUTTO` DA SOLO a dover spegnere tutti e quattro i punti
@@ -454,7 +464,8 @@ def main():
         open(os.path.join(RADICE, "soliton_simulator.py"), "rb").read()).hexdigest()[:8]
     import inspect as _insp
     seme = _insp.signature(S.Rete.__init__).parameters["seed"].default
-    stato, visto = installa(S, spegni, spegni_tutto=(modo == "--spegni-tutto"))
+    stato, visto = installa(S, spegni, spegni_tutto=(modo == "--spegni-tutto"),
+                            wrap2pi=(modo == "--ritmo-wrap"))
     argv = ["_scena_video.py", str(nfr), dest] + COMUNE + \
         ["--csv-progresso=%s" % os.path.join(dest, "prog.csv")]
     sys.argv = list(argv)
@@ -468,7 +479,8 @@ def main():
     W("\nL'INVOLUCRO: `_applica_flag` avvolto %d volte, MEM_MOTO ORA = %s, MEM_MOTO_TUTTO ORA = %s\n"
       % (visto["chiamate"], bool(S.MEM_MOTO), bool(S.MEM_MOTO_TUTTO)))
     if (visto["chiamate"] == 0 or (spegni and S.MEM_MOTO)
-            or (modo == "--spegni-tutto" and S.MEM_MOTO_TUTTO)):
+            or (modo == "--spegni-tutto" and S.MEM_MOTO_TUTTO)
+            or (modo == "--ritmo-wrap" and not S.RITMO_WRAP_2PI)):
         W("*** L'INVOLUCRO NON HA AGITO. FERMO. ***\n")
         return 1
 

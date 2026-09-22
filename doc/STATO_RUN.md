@@ -1,86 +1,57 @@
 <!-- PUNTO-DI-RIPRESA:INIZIO -->
 # ⚠⚠ PUNTO DI RIPRESA — **si legge PER PRIMO dopo un riavvio**
 
-> **Aggiornato 2026-09-22 17:45 · HEAD `a99656e` · branch `fork-su2`, tutto committato e pushato.**
-> **Il PC si spegne alle 18:00** *(vincolo di Luca, 2026-09-22)*. **Nessun processo vivo:
-> verificato con `Get-CimInstance Win32_Process` — zero `python.exe`.**
-> **Questo blocco e' RIGENERATO per intero a ogni aggiornamento**, fra due marcatori HTML.
+> **Aggiornato 2026-09-22 sera · HEAD `b95df68` · branch `fork-su2`.**
+> **Scritto PRIMA di lanciare la prova**, come Luca ha chiesto: se il riavvio la tronca, qui
+> c'è già scritto che cosa esisteva.
 
-## → LA PRIMA COSA DA FARE ALLA RIACCENSIONE
+## ⚠⚠ C'ERA UN RUN IN CORSO — **`D34`, la prova di `RITMO_WRAP_2PI`**
 
-```
-python csv/_test_fork/_letture_validazione.py csv/_test_fork/_g4bis_senza_blocco
-```
-**Le letture `REGGE / NON REGGE` di `G4-bis` NON sono state generate.** I **5 snapshot sono sul
-disco** *(`scena_000120` … `scena_000600.pkl.gz`)*, quindi **non serve rigirare niente**: e'
-una lettura, **circa 3 minuti**. **Senza di esse manca il confronto `6/8` · `7/8` · `?` fra i
-tre bracci**, che e' il numero che `CHK3` usera'.
-*(Il comando va verificato: l'argomento potrebbe chiamarsi diversamente — `--help` per primo.)*
+| | |
+|---|---|
+| **comando** | `python csv/_test_fork/_g4_prova.py --ritmo-wrap` |
+| **destinazione** | `csv/_test_fork/_d34_ritmo_wrap` |
+| **lanciato** | subito dopo questo commit *(l'ora esatta e il PID sono nel commit d'avvio)* |
+| **durata attesa** | **~42 min** *(il braccio di riferimento di `G4`: `2076 s`; `G4-bis`: `2489 s`)* |
+| **passi** | 600 *(100 frame × 6)* · seme `42` · blob `3d91338e` |
+| **confronto** | `csv/_test_fork/_g4_riferimento`, **già sul disco** |
 
-## POI, NELL'ORDINE DECISO DA LUCA
+> **→ SE GLI SNAPSHOT SI FERMANO PRIMA DEL PASSO 600, IL RUN VA RILANCIATO DA CAPO.**
+> **Non si riprende a metà**, e non serve: il sistema è **deterministico**, stesso seme e
+> stesso blob danno lo stesso risultato. **Si cancella la cartella e si rilancia.**
+> **Come si verifica:** in `csv/_test_fork/_d34_ritmo_wrap` devono esserci **cinque**
+> `scena_000120 … scena_000600.pkl.gz` **e** `BILANCIO_d0.txt`. **Se manca `BILANCIO_d0.txt`,
+> il run è stato troncato**, qualunque cosa ci sia negli snapshot.
 
-| | lavoro | stato | dove riprende |
-|--:|---|---|---|
-| ① | **letture di `G4-bis`** | ⏸ da generare | qui sopra |
-| ② | **`REG-R` cablata** | ⏸ non cominciata | ⚠ **e non e' ovvia:** l'hook rifiuterebbe **ogni** commit al simulatore, e le schede coprono **4** leggi su tutte le attive. **Da decidere con Luca se cablarla ora o dopo la fase B** |
-| ③ | **`SCALE-TW`** *(mandato del 22/9, ore 17:44)* | ⏸ non cominciata | **dal §1: il CENSIMENTO da AST.** Il primo difetto e' gia' indicato: **`TORS_4PI` `:789` dice «soglia 4π» e «default off»; la soglia e' `3π` e il flag e' ACCESO** |
-| ④ | **`PROBLEMI-CHK3`** | ⏸ non cominciato | i sette problemi sono **gia' elencati** nella sua voce di coda e nelle schede ①-④: **manca metterli in ordine motivato** |
-| ⑤ | schede ⑤+ *(mitosi, Schwinger, `peq`)* | ⏸ | `doc/REGISTRO_FISICA.md` |
-| ⑥ | `PAT-1`, `PAT-2` | ⏸ | prima del prossimo uso dei due strumenti |
+**E LE PREVISIONI SONO GIÀ SCRITTE, committate PRIMA che il flag esistesse** *(`94351c9`)*:
+**mi aspetto `6/8` e poco o nessun cambiamento leggibile a un seme solo.** **Se l'esito fosse
+`7/8` o `8/8`, va trattato con sospetto**, non con entusiasmo.
 
-## LAVORI A META' — **nessuno**
+## POI, NELL'ORDINE DEL MANDATO
 
-**Ogni lavoro di oggi e' a un punto pulito:** strumento committato, criteri scritti, esito
-registrato. **I due fallimenti** *(il sigillo `8/10`, il cricchetto `1/4`)* **e il falso positivo**
-*(`Z114`)* **sono committati come reperti E poi corretti**, coi giri rifatti per intero.
+| | lavoro | stato |
+|--:|---|---|
+| ① | **`A1` / `D34`**: misura · flag · sigillo · **prova** | ✅✅✅ · ▶ **la prova è il run qui sopra** |
+| ② | **censimento** `PARTE C` + classi `T/L/E` | ✅ strumento *(`b95df68`, collaudo `5/5`)*, ⏸ **da girare sul sorgente vero** |
+| ③ | **le schede** per §D *(campo, mitosi, Schwinger)* | ⏸ — la scheda ⑤ *(tempo proprio)* c'è già |
+| ④ | **`FASE_2PI`** in codice, dietro flag | ⏸ **dopo** le schede |
+| ⑤ | la prova e i **quattro test** `E1`-`E4` | ⏸ |
+| ⑥ | **`PROBLEMI-CHK3`**, poi `FAMIGLIE`, poi schede ⑥+, `PAT-1`/`PAT-2` | ⏸ |
+| ⑦ | **`CHECKPOINT`** — **ci si ferma e si aspetta Luca** | ⏸ |
 
-## RUN DA RIFARE SE INTERROTTI — **nessuno**
+## LAVORI A METÀ — **nessuno**
 
-**`G4-bis` e' FINITO alle 16:59** *(`2489.5 s`, bilancio che chiude a `9.498e-14`)*.
-**Nessun run e' stato interrotto.**
+Ogni lavoro è a un punto pulito. **I fallimenti di oggi sono committati come reperti e poi
+corretti, coi giri rifatti per intero:** il sigillo `8/10` di `MEM_MOTO_TUTTO`, il cricchetto
+`1/4`, il falso positivo di `Z114`, il falso positivo della regex di `_tre_bracci`, e **lo
+schianto del sigillo di `RITMO_WRAP_2PI` a `T2`** *(`da371a7`)*.
 
 ## LO STATO DEL SIMULATORE
 
-**Blob `21e3a3dc`** *(sha1 byte grezzi)*. **Due flag aggiunti oggi, entrambi sigillati:**
-`MEM_MOTO` *(8/8)* e **`MEM_MOTO_TUTTO`** *(10/10, byte-inerte acceso: `206` campi identici,
-`0` diversi)*. **Erano le DUE modifiche ammesse prima del `CHK3`, e sono esaurite.**
-**⚠ NESSUNA CURA e' stata scritta: siamo ancora PRIMA del checkpoint.**
-
-## COSA E' FATTO OGGI — **e come verificarlo senza fidarsi di questa riga**
-
-| | stato | la prova, sul disco |
-|---|---|---|
-| **`G1`** · quanto conta il disegno | ✅ | `Z103`, `3c03223` |
-| **`G2`** · dove spinge la gravita' | ✅ | `Z105`, `Z106`, `fedda6c` |
-| **`G3`** · spegnimento gravita' | ✅ | `Z107`, `52486f0` |
-| **`G4`** · spegnimento memoria del moto | ✅ | `Z108`, `Z109`, `fbd3bc9` |
-| **`G4-bis`** · spegnimento INTERO blocco | ✅ | `Z115`, `a99656e` — **`Δ` NON monotono** |
-| **registro della fisica** | ⚠ **4 schede su tutte** | `doc/REGISTRO_FISICA.md` · `4091cda`, `e637b07`, `e0dd5a4` |
-| **punto 4** · scrittori non tracciati | ✅ **sono DUE** | `Z114`, `94be0a5` |
-| **punto 5** · bande + cricchetto | ✅ **`4/4`, scarto `0.0 %`** | `Z113`, `a0ce514` |
-| **`D32`** · due tempi propri | ✅ acclarato | `Z110`, `be28256` |
-| **`D33`** · repulsione spenta al tetto | ✅ acclarato | `Z111`, `be28256` |
-| **`D25`** · col riferimento `r = 1` | ✅ **non regge qui** | `7882689` |
-
-## ⚠⚠ TRIAGE DELLE 17:45 — **generato alle 17:43, con `G4-bis` GIA' FINITO**
-
-> **Vincolo di Luca: alle 18:00 il PC si spegne.** Margine: tutto chiuso alle **17:45**.
-> **Al momento del triage mancano DUE MINUTI a quel margine**, quindi la tabella e' corta e la
-> risposta e' quasi sempre la stessa. **Lo dico invece di fingere che ci sia una scelta.**
-
-| lavoro | stima | ci sta entro le 17:45? | dove si ferma in modo pulito |
-|---|--:|---|---|
-| **① esito di `G4-bis`** | fatto | ✅ **SI'** | — |
-| **le letture `REGGE/NON REGGE` di `G4-bis`** | ~3 min | ❌ **NO** | i **5 snapshot sono sul disco**: si rigenerano quando si vuole. **PRIMA COSA ALLA RIACCENSIONE** |
-| **② `REG-R` cablata** *(riga in `CLAUDE.md` + hook)* | ~15 min | ❌ **NO** | **non cominciata.** ⚠ **E non sarebbe comunque da cablare oggi:** l'hook rifiuterebbe ogni commit al simulatore, e le schede coprono **4** leggi su tutte quelle attive |
-| **③ punto della situazione** | ~3 min | ⚠ **IN PARTE** | si rigenera **dopo** questo commit, se il tempo regge |
-| **④ `SCALE-TW`** | ore | ❌ **NO** | **in coda, non cominciata.** ⚠ **Il mandato e' arrivato alle 17:44, DOPO questo triage**, e dice **esso stesso «NON ORA»**: la voce di coda ora ne porta le quattro parti |
-| **④ `PROBLEMI-CHK3`** | ~40 min | ❌ **NO** | **in coda, non cominciato.** I sette problemi sono **gia' elencati** nella sua voce e nelle schede ①-④: **il lavoro che manca e' metterli in ordine motivato, non trovarli** |
-| schede ⑤+ del registro *(mitosi, Schwinger, `peq`)* | ore | ❌ **NO** | **in coda** |
-| `PAT-1`, `PAT-2` | ~20 min | ❌ **NO** | **in coda**, prima del prossimo uso dei due strumenti |
-
-**LE REGOLE RISPETTATE:** nessun run nuovo *(nessuno lanciato dopo le 17:30, e non ce ne sono di
-vivi)* · nessun lavoro cominciato a meta' · nessuna cura · **`G4-bis` ha avuto la precedenza.**
+**Blob `3d91338e`.** **Tre flag aggiunti oggi, tutti sigillati:** `MEM_MOTO` *(8/8)*,
+`MEM_MOTO_TUTTO` *(10/10)*, **`RITMO_WRAP_2PI` *(4/4)***.
+**⚠ TUTTI E TRE SPENTI O AL LORO DEFAULT: nessuna cura è accesa, e nessuna decisione di
+default è stata presa.** Il passaggio a `True` è la voce `E3`, e **è una decisione di Luca**.
 
 <!-- PUNTO-DI-RIPRESA:FINE -->
 

@@ -1,0 +1,49 @@
+# SIGILLO -- `RITMO_WRAP_2PI` (`D34`)
+# BYTE-INERTE spento, e CORREGGE il taglio acceso.
+#
+COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`)
+------------------------------------------------------------------------------------------------
+K1 attraversa il taglio: il wrap NUOVO da' +10.0000, la frequenza VERA e' +10.0000 -> OK
+K2 IL CASO CHE DEVE FALLIRE: la formula VECCHIA sullo stesso caso da' -618.3185
+     sbaglia di -628.3185 -> OK: il difetto e' riprodotto
+K3 LONTANO dal taglio (|a| < pi) i due wrap COINCIDONO: max|diff| = 1.137e-13 -> OK: la cura non tocca il caso normale
+K4 OLTRE il taglio DEVONO differire: min|diff| = 6.283e+02 -> OK
+K5 il wrap NUOVO porta tutto dentro [-pi, pi]/DT -> OK
+------------------------------------------------------------------------------------------------
+  -> i criteri PASSANO
+
+blob simulatore ORA (sha1 byte grezzi) 3d91338e
+riferimento `_val600`, blob `9557a867`: ANTERIORE a questo flag
+
+T1    PASS IL DEFAULT E' SPENTO: `RITMO_WRAP_2PI = False` (letto dal sorgente)
+T2    PASS GATE (AST): 1 ramificazione in `ritmo`, 1 assegnamento -> [(2602, 'ritmo')]
+      -> STRUTTURALE: se comparisse un secondo ramo, o se finisse in un'altra
+         funzione, questo criterio lo direbbe senza girare niente.
+
+------------------------------------------------------------------------------------------------
+T3 -- BYTE-INERZIA A FLAG SPENTO (120 passi, snapshot vs snapshot)
+------------------------------------------------------------------------------------------------
+  (343.2 s)
+  campi UGUALI 206   DIVERSI 0   non confrontati 0
+T3    PASS BYTE-INERTE spento: 206 campi identici, 0 diversi
+
+------------------------------------------------------------------------------------------------
+T4 -- IL CONTROLLO POSITIVO: acceso, DEVE cambiare qualcosa
+------------------------------------------------------------------------------------------------
+  (346.3 s)
+  campi UGUALI 102   DIVERSI 104   non confrontati 0
+  i diversi: _calcpsi_chiamate, _calcpsi_w_none, _chi_core_nodi(shape (2647,)!=(2660,)), _chi_core_raggio(shape (2647,)!=(2660,)), _chi_core_rho0(shape (2647,)!=(2660,)), _chi_core_rhoc(max|d|=1.207e-03), _chi_geom_nodi(shape (2647,)!=(2660,)), _cs_nodo_prev(shape (2647,)!=(2660,)), _deg(shape (2647,)!=(2660,)), _diag_amp_med(max|d|=8.865e-04)
+T4    PASS ACCESO CAMBIA: 104 campi diversi contro il braccio spento
+      -> par.10 criterio 2: un sigillo che verifica solo la byte-identita' a
+         OFF passerebbe anche su CODICE MORTO. Questo dimostra che il flag FA.
+
+================================================================================================
+ESITO: 4/4
+================================================================================================
+*** SIGILLO PASSATO. La prova a 600 passi puo' partire. ***
+
+LIMITI: `T3`/`T4` su 120 passi, UN seme, UNA scena. Cio' che li rende conclusivi non e'
+  il numero di passi ma `T2` (strutturale) e il collaudo (risposta NOTA).
+⚠ E `T4` dice che il flag CAMBIA, NON che il cambiamento sia una cura: su un sistema
+  caotico due run che differiscono di 1e-16 divergono comunque. **QUANTO** e **in che
+  direzione** lo dira' la prova a 600 passi, con le previsioni gia' scritte (`94351c9`).

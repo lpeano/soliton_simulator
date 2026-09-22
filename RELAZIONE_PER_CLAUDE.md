@@ -12694,3 +12694,23 @@ la sua casa naturale — fa già lavoro AST sul simulatore — e da lì la usano
 **`_sigillo_mem_moto_tutto.py` TIENE la sua copia**, e non per pigrizia: **il suo referto `10/10`
 è legato al suo blob**, e cambiarlo obbligherebbe a rigirarlo. **Due copie che divergono sono
 un difetto**, quindi lo scrivo qui: **quando quel sigillo si rigira, la copia si toglie.**
+
+### ㉶ **Il sigillo di `RITMO_WRAP_2PI` passa `4/4`**
+
+| | cosa | esito |
+|---|---|---|
+| `T1` | **il default è SPENTO**, letto dal sorgente | `False` |
+| `T2` | gate **AST**: `1` ramificazione, **dentro `ritmo`**, `1` assegnamento | `[(2602, 'ritmo')]` |
+| `T3` | **byte-inerte SPENTO**, 120 passi contro `_val600` | **`206` identici, `0` diversi** |
+| `T4` | **controllo POSITIVO**: acceso **deve** cambiare | **`104` campi diversi**, `n` `2647`→`2660` |
+
+**Il collaudo è `5/5`**, e i due che contano sono `K2` *(la formula vecchia sullo stesso caso
+**deve** sbagliare — se non sbagliasse, il sigillo certificherebbe il nulla)* e `K3` *(lontano
+dal taglio i due wrap **coincidono**: la cura non tocca il caso normale — obbligo **(a)** del
+corollario 7)*.
+
+> **⚠ E IL REFERTO DICE DI SÉ CHE `T4` NON È UNA PROVA DI CURA:** dice che il flag
+> **cambia**, non che il cambiamento sia un miglioramento. **Su un sistema caotico due run che
+> differiscono di `1e-16` divergono comunque.** **Quanto** e **in che direzione** lo dice la
+> prova a 600 passi — **con le previsioni già scritte prima che il flag esistesse**
+> *(`94351c9`)*.
