@@ -269,6 +269,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **G4** | **§4 PROVA DI SPEGNIMENTO: la sola MEMORIA DEL MOTO** — flag nuovo `MEM_MOTO`, `True` di default, che salta **solo** il blocco di `mem_mot` | GLOBALE-DISEGNO §4 | ⏸ **con sigillo BLOCCANTE di byte-identita'**. **⚠ `MEM_HEBB = False` NON si usa: spegne l'INTERA funzione, gravita' e coesione comprese** |
 | **G4-bis** | **`MEM_ARCO` — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE** *(aggiunta di Luca al §4, 2026-09-22)* | GLOBALE-DISEGNO §4 | ⏸ **DERIVATA SI', CODICE NO, prima del `CHK3`.** **Dopo** lo spegnimento di `MEM_MOTO`: se il sistema **si rompe** senza, `MEM_ARCO` e' **la cura da proporre**; se **sta in piedi**, resta **registrata come alternativa** |
 | **CHK3** | **CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PRIMA** | GLOBALE-DISEGNO §5 | ⏸ **QUI CI SI FERMA.** Le cure solo **DERIVATE, non scritte** |
+| **PATTERN** | **`doc/PATTERN_DI_PROVA.md`** — la lista di controllo di ogni prova: i **cinque pattern** nati oggi da `G3`, piu' i richiami alle regole gia' esistenti | MANDATO-PATTERN | ⏸ **DOPO l'esito di `G3` committato** *(vincolo del §0: l'esito potrebbe far nascere un sesto pattern)*. **Tre sezioni: STANDARD · IN PROVA · RESPINTE.** Una riga sola in `CLAUDE.md`, **non** una sezione. Max **una schermata e mezza** |
 | **PROVE** | **LE TRE PROVE DELL'IPOTESI DELLA GRAVITA' A SPINTA** — ① due masse si avvicinano? ② con che legge? ③ tutti i corpi cadono uguale? | `doc/IPOTESI_gravita_a_spinta.md` | ⏸ **DOPO il run lungo dell'epoca 3.** **CONDIZIONI DI AVVIO, TUTTE:** il **disegno FUORI dalla gravita'** *(`Z103`, sigillato)* · la **spinta LOCALE con le dimensioni giuste** *(via il `median(d0)`)* · un **run lungo SANO** coi criteri assoluti che reggono *(oggi 6 su 8)* · la **memoria del moto risolta** *(`Z104`)*. **Fino ad allora sono il BERSAGLIO, non un compito** |
 
 | **C5-res** | **I RESIDUI DI `C5`** — **`I4`** la scatola nera *(rigiocare da solo il passo in cui scatta un invariante)*, **`I5`** la tabella degli underflow **per RIGA**, e la **MODALITA' FINE** *(controllo dopo OGNI scrittura invece che a fine passo)* | mandato `C5`, decisione di Luca 21/9 | ⏸ **DOPO la cura di `d0` e PRIMA del run lungo. Stasera no.** |
@@ -327,6 +328,42 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 > ```
 > **Le letture sono gli STESSI OTTO CRITERI ASSOLUTI della validazione.** Nessun confronto fra
 > epoche.
+
+> **⚠⚠ IL MANDATO DEI PATTERN DI PROVA (2026-09-22), col §3 GIA' SOSTITUITO
+> DALL'INTEGRAZIONE DI LUCA.**
+> **PERCHE' ESISTE:** in `G3` sono emersi **cinque** pattern che hanno salvato la misura, e
+> **nessuno di essi e' in `CLAUDE.md`** *(verificato dal disco: c'e' il controllo positivo nel
+> par.10 e `P1-sexies`, ma non gli altri quattro)*. **Oggi li seguo perche' li ho davanti; in una
+> sessione nuova, dopo una compattazione, non li avrei.** **Sopravvive solo cio' che sta nel
+> repo** — e `CLAUDE.md` e' gia' a **1482 righe**, quindi il rischio opposto e' **diluirli**.
+>
+> **I CINQUE, gia' STANDARD:** ① **un processo per braccio** *(`b6f3c83`, `96c7f22`)* ·
+> ② **firme dei byte, non `max|delta|`** *(`96c7f22`)* · ③ **assenza STRUTTURALE
+> ≠ dato mancante**, e per chi concatena **lunghezze + firma della coda + firma dell'intero**
+> *(`40f79dc`, `691eeba`)* · ④ **snapshot contro snapshot, allo STESSO ISTANTE**, e
+> niente cast dei complessi *(`abc5b49`)* · ⑤ **il controllo dell'INVOLUCRO prima di
+> ogni prova** *(`b812f92`, `c901456`)*.
+>
+> **⚠ IL §3 E' STATO SOSTITUITO DA LUCA, e la versione che vale e' questa —
+> PROPOSTE «IN PROVA» COL VETO DI LUCA:**
+> **NON aggiungo voci STANDARD da solo.** Un pattern nuovo — nato da un **fallimento di
+> metodo** *oppure* da una **soluzione che ha funzionato** *(come il controllo dell'involucro)*
+> — entra nella sezione **`IN PROVA`** con **quattro** cose: la regola in **una riga**, il
+> **commit** in cui e' nato, il **difetto che previene o ha scoperto**, e **come si verifica che
+> uno strumento lo rispetti**.
+> **LO USO SUBITO**, senza aspettare, e **lo segnalo nel messaggio a Luca prima di `PUSHATO`**
+> con la riga **`PROPOSTA IN PROVA: <regola>`**.
+> **Diventa STANDARD solo col SI' ESPLICITO di Luca**, anche dato in blocco al checkpoint.
+> **Se Luca non dice niente, resta IN PROVA.** **Se lo respinge**, va in fondo nella sezione
+> **`RESPINTE`** **col motivo**, cosi' non si ripropone.
+> **Ammissione solo se:** nasce da un **caso reale col suo commit** · si dice in **una
+> riga** · **si puo' verificare**. **Ogni 10 voci standard, propongo anche cosa TOGLIERE o
+> FONDERE.**
+>
+> **§4, IL COLLAUDO DEL DOCUMENTO:** rileggere **uno per uno** gli strumenti di prova attivi
+> e scrivere, **per ciascun pattern, quali lo rispettano e quali no**. **NON si correggono
+> subito:** chi non lo rispetta va in CODA **prima del suo prossimo utilizzo**. **Il runner di
+> `G4` deve nascere gia' conforme ai cinque.**
 
 > **⚠⚠ IL MANDATO DEL 2026-09-22: IL DISEGNO DENTRO LA FISICA.**
 > **Tre fatti letti dal codice e VERIFICATI dal disco:**
