@@ -588,3 +588,170 @@ avvertimento.**
 4. **Il gauge è `median(|f|)` del passo PRECEDENTE** — cura dell'anello istantaneo *(`A6`)*.
    **Ma resta una statistica GLOBALE dentro una legge per nodo** *(`A2`)*. **È accettabile
    perché è un GAUGE, o è lo stesso difetto di `D01`?** **NON DECISO.**
+
+---
+
+<!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
+# ⑥ LA FASE `φ` E IL SUO DOMINIO — **`semina` / `_w4` / `_w8` / `step`**
+
+> **STATO: `DIFETTOSA`.** Difetti **`D34`** *(il wrap del ritmo)*, **`D35`** *(l'antifase di
+> Schwinger)*, e i sospetti **`S07`**, **`S08`**.
+> **⚠ QUESTA SCHEDA RIVENDICA `step` IN VIA PROVVISORIA:** `step` fa **tutto**, e attribuirlo
+> alla fase è improprio. Lo tiene perché `REG-R` mappa **per funzione** e i due siti di `φ`
+> vivono lì. **Quando `step` avrà la sua scheda, il marcatore si divide.**
+
+## LA REGOLA DI FONDO *(decisione di Luca, 2026-09-22)*
+
+> **Lo spinore ha periodo `4π`; tutto ciò che si OSSERVA da lui ha periodo `2π`; un ACCUMULO
+> non ha periodo.**
+> `np.angle`, `|ψ|²`, `exp(iφ)`, `cos`, `sin` hanno **periodo `2π`**: **non vedono il segno
+> dello spinore.** **Un avvolgimento su `4π` applicato a una grandezza a periodo `2π` non
+> avvolge niente. Un «`+2π` = antifase» letto attraverso `exp(iφ)` è un'identità.**
+> **Per ogni `π` del codice la domanda è: questa grandezza è lo SPINORE, un'OSSERVABILE o un
+> ACCUMULO?**
+
+## LA FORMA OGGI — copiata dal codice
+
+```
+semina  (:2349-2350)   phi, phi0 <- ph % (4 pi)                    <- il dominio DICHIARATO
+step    (:4625)        phi <- (phi_t + dt_n_s*phivel + dsync) % (4 pi)
+mitosi  (:5289-5357)   fm, phi[a], phi[b], phi[g]  % (4 pi)
+mem_mot (:6105)        phi[ii] <- (phi[ii] + shift) % (4 pi)
+_w4     (:3423)        (a + 2 pi) % (4 pi) - 2 pi                  <- differenze di fase
+_w8     (:3426)        (a + 4 pi) % (8 pi) - 4 pi                  <- la TORSIONE accumulata
+```
+
+## ⚠ IL FATTO MISURATO, ed è il cuore della scheda
+
+**In `31` righe su `31` il campo legge `φ` attraverso `exp`, `cos`, `sin` o `angle`** *(`Z118`,
+censimento da AST)*. **In tutte e 31 la doppia copertura di `φ` è INVISIBILE alla fisica**,
+perché `exp(i(φ + 2π)) = exp(iφ)`. **Non è un'interpretazione: è un conto.**
+
+**E la verifica che Luca ha chiesto è stata fatta** *(`Z120`)*: **nessuna riga della FISICA
+distingue `φ` da `φ + 2π`**, fuori dalla torsione *(`_w4`/`_w8`)* e dall'antifase.
+`31` candidati letti uno per uno: `13` assegnamenti, `7` torsione, `2` antifase, `6` diagnostici.
+
+> **⚠ E UNA PREMESSA CHE È CADUTA, scritta qui perché non si riusi:** il docstring di
+> `_passo_spinoriale` dice che `φ` è **l'azimut del vettore di Bloch**. **MISURATO: FALSO**
+> *(`Z121`, `R ≤ 0.18` contro un criterio di `0.90` e un nullo di `0.016`)*.
+> **Se `φ` non è l'azimut, che cos'è? → `S08`, aperto.** **Refutare non è spiegare.**
+
+## LE DIMENSIONI
+
+`φ`, `_w4(Δφ)`, `_w8(…)`, `twist_dip` sono **angoli**, cioè adimensionali. **Coerente.**
+*(Il difetto non è dimensionale: è di PERIODO.)*
+
+## I LIMITI, CLASSIFICATI CON `A11` e con le classi `T/L/E`
+
+| punto | classe | esito |
+|---|:--:|---|
+| `% (2π)`, `% (4π)`, `_w4`, `_w8` | **`T`** | **NON si levigano.** Il salto da `2π` a `0` è un artefatto della **coordinata**: levigarlo **inventerebbe valori che non esistono**. **La cura è il PERIODO GIUSTO** |
+| la soglia della mitosi, `discesa`, il punto di inversione | **`L`** | **si levigano**, coi tre obblighi del cor.7 e la **larghezza DERIVATA** — **ma appartengono a `SCALE-TW`, non a qui** |
+| la nascita di un nodo | **`E`** | **evento discreto**: resta discreto, **ma il suo TASSO dev'essere liscio** |
+
+## LA CURA DECISA — **`FASE_2PI`**, spenta di default
+
+> **Decisione di Luca, presa dopo la verifica di `Z120`.** **Regge su TRE argomenti invece dei
+> quattro iniziali**, perché il quarto *(l'azimut)* è caduto con `Z121` — **e l'argomento
+> caduto non argomenta per `4π`: dice solo che `φ` non è ciò che il commento dichiarava.**
+
+**`φ` è una FASE ORDINARIA su `[0, 2π)`. L'antifase è `+π`.**
+**La doppia copertura resta dove è già vera: nel SEGNO esplicito** *(`_spinor_lift`,
+`s_k = sign(perc_chi)`)* **e nei MEZZI ANGOLI** *(`exp(-0.5i…)`)* — **un solo ponte** *(`A10`)*.
+
+**COSA TOCCA, e nient'altro:**
+
+| | sito | oggi | con `FASE_2PI` |
+|---|---|---|---|
+| (a) | `:2349`, `:2350`, `:4625`, `:5289`, `:5291`, `:5353`, `:5354`, `:5357`, `:6105` | `% (4π)` | **`% (2π)`** |
+| (b) | `:2218`, `:4628`, `:5273`, `:5403`, `:5404`, `:5508`, `:5509` | `_w4(Δφ)` | **`_w2(Δφ)`** *(via `_wphi`)* |
+| (c) | `:5311` *(dormiente)*, **`:5443`** *(`D35`, attivo)* | `+2π` | **`+π`** |
+| (d) | `:5104` | `soglia0 = 2π + π = 3π` | **`soglia0 = 2π`** |
+
+**⚠ COSA NON TOCCA, ed è una scelta di confine:** **`:4651-4655`**, dove `_w8`/`_w4` avvolgono
+la **TORSIONE ACCUMULATA** *(`tw`, `twp`)*. **`tw` è un ACCUMULO: non ha periodo**, e il suo
+dominio appartiene a **`SCALE-TW`**. **Toccarlo qui mescolerebbe due decisioni.**
+*(La conseguenza — `dph` passa da `(-2π, 2π]` a `(-π, π]`, quindi `twp` cambia intervallo
+— **non è una modifica: è un effetto, ed è il test `E1`.**)*
+
+**⚠ E IL PUNTO (e) DEL §D È GIÀ IN CODICE:** *«la coppia nasce con lo spinore di segno
+opposto»* — `:5477` fa già `_eredita_spinore_figli(aa, segno=-1)`. **Verificato dal sorgente:
+non c'è niente da cambiare lì.**
+
+## LE DOMANDE APERTE
+
+1. **`S08`: se `φ` non è l'azimut del Bloch, che cos'è?** **Non si risolve con un'altra
+   misura adesso** *(decisione di Luca)*.
+2. **`S07`:** `:5894` collassa a `2π` una differenza a `4π` — **dormiente** *(`K_FRANGE = 0`)*.
+   **Con `φ` su `2π` quella riga diventa corretta per costruzione:** la cura la sana senza
+   toccarla.
+3. **Il dominio di `tw` resta a `4π`/`8π`.** **Con `φ` su `2π` è ancora il dominio giusto,
+   o `_w8` diventa l'identità come lo era il wrap del ritmo?** → **`SCALE-TW`**.
+
+---
+
+<!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME -->
+# ⑦ LA MITOSI E SCHWINGER — **`mitosi()`**
+
+> **STATO: `DIFETTOSA`.** Difetti **`D35`** *(l'antifase della coppia)* e **`D33`** *(la
+> repulsione che si spegne al tetto)*. Piu' **`D03`** per la parte di `_rep`.
+
+## LA FORMA — copiata dal codice
+
+```
+soglia0 = PHI_CRIT + twist_max = 2pi + pi = 3pi          (TORS_4PI acceso)
+soglia  = soglia0 * (1 - 0.3*tanh(grad_tau))             modulazione LOCALE
+ecc     = max(|tw|/soglia - 1, 0)
+salita  = satura(ecc)                                     zero sotto soglia
+discesa = clip(1 - |tw|/TW_TETTO, 0, 1)                   ZERO da 4pi
+tau_pp  = 1 + |tw|/PHI_CRIT                               <- il "tempo proprio surrogato"
+centro  = 0.5*(tau_soglia + tau_tetto)
+segno   = -tanh(3.0*(tau_pp - centro))                    + crea, - respinge
+resp    = salita * discesa * (1/tau_pp) * segno
+prob    = clip(resp, 0, 1)        ->  nasce = rng < prob             (CREAZIONE)
+rep     = clip(-resp, 0, 1)       ->  _rep rilassa con tau_pp        (REPULSIONE)
+```
+**LA COPPIA (Schwinger):** `prob_coppia = 1 - exp(-COPPIA_MIT * eccesso)`, e il partner nasce
+con **`anti = (fm + 2π) % 4π`** *(`:5443`)* **e lo spinore di segno opposto** *(`:5477`)*.
+
+## ⚠ I DUE DIFETTI, MISURATI
+
+**`D35` — l'antifase non è un'antifase.** Il campo è `F = Σ K·exp(iφ)`, e
+`exp(i(φ + 2π)) = exp(iφ)`: **nel campo l'antiparticella è IDENTICA alla particella.**
+**Il commento dice `+π`, il codice fa `+2π`: fa fede il codice.**
+**E il ramo È ATTIVO:** `COPPIA_MIT = 1.0`, e `S07_schwinger` scatta **`102` · `90` · `172`**
+volte su 600 passi nei tre bracci *(`Z119`)*.
+
+**`D33` — la repulsione si spegne dove servirebbe.** Il `segno` si inverte oltre `~3.5π`, **ma
+`discesa` è ZERO ESATTO da `4π`**: la finestra utile è larga **mezzo `π`**, e **dal `75 %`
+al `96 %` degli archi oltre l'inversione riceve repulsione esattamente zero** *(`Z111`)*.
+
+## I LIMITI, CLASSIFICATI
+
+| limite | classe | `A11` |
+|---|:--:|---|
+| `soglia0 = 3π` | **`L`** | ⚠ **derivazione A POSTERIORI**: `2π + π` è stato giustificato dopo, e **cade con `FASE_2PI`** *(`§D` punto 2)*. **È il punto più incerto, e lo decide `E1`** |
+| `0.3 * tanh(grad_tau)` | **`L`** | ❌ il `0.3` è **scelto** *(`A1`)* → `SCALE-TW` |
+| `clip(1 - \|tw\|/4π, 0, 1)` | **`L`** | ❌ **`D33`**: azzera il ramo repulsivo oltre `4π`. **Due leggi in un prodotto solo** |
+| `tanh(3.0 * …)` | **`L`** | ❌ il `3.0` è **scelto** → `SCALE-TW` |
+| `0.02 * d0 * _rep` | **`L`** | ❌ il `0.02` è **scelto**, già dichiarato in `D03` |
+| la nascita di un nodo | **`E`** | ✅ **evento discreto con TASSO liscio** — la campana **è** già liscia; **ma `salita` ha un `max(…, 0)` e `discesa` un `clip`: due spigoli DENTRO il tasso**, da verificare |
+
+## COSA CAMBIA CON `FASE_2PI`
+
+- **`anti = (fm + π) % 2π`** — cura `D35`;
+- **`soglia0 = 2π`** — *«un arco porta una differenza fino a `π`; quando porta un quanto
+  intero (`2π`) si divide, e ciascuna metà ne porta `π`»* *(Luca)*;
+- **e il punto di inversione SI SPOSTA come conseguenza:** `tau_soglia` passa da `2.5` a `2`,
+  quindi `centro` da `2.75` a **`2.5`**, cioè **l'inversione da `3.5π` a `3π`**. **La finestra
+  di `D33` si allarga da mezzo `π` a un `π` intero** — **non è una cura di `D33`, è un
+  effetto, e va misurato.**
+
+## LE DOMANDE APERTE
+
+1. **`E1`: la mitosi a `2π` funziona senza tarature?** Né zero mitosi né esplosione. **Se
+   fallisce, cade il punto 2 del `§D`**, e con esso la soglia a `2π`.
+2. **`E2`: le coppie annichilano?** Oggi la frazione è `~0`. **Se resta `~0` con `+π`, cade il
+   punto 5**, e `S06` *(il «muro dell'1 %»)* **non** ha la spiegazione che sembra avere.
+3. **L'argomento della soglia vale per una differenza ISTANTANEA, ma `tw` è un ACCUMULO che
+   decade.** **È la crepa dichiarata da Luca stesso**, e `E1` è il suo giudice.
