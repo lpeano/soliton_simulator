@@ -12258,3 +12258,37 @@ usciva dalla regione che il test dichiarava di sondare e finiva **sotto zero**, 
 guardia `pos = prima > 0`. **`_smorza` ha DUE cricchetti, non uno.** Il secondo **non è
 raggiungibile oggi** *(`d0 >= LAM` per costruzione)* **ma è una proprietà della formula**, ed
 è ora nella scheda ①: **una cura che tocchi il pavimento lo incontrerà.**
+
+### ㉧ **Gli scrittori di `d0` non tracciati: sono DUE, non tre — e il terzo è un falso positivo mio**
+
+> **`22` scritture su `self.d0`, `19` siti di traccia**, blob `21e3a3dc`. Il collaudo `P1-sexies`
+> passa `K1`, `K2` e `K3`. Referto committato **come reperto**.
+
+| riga | funzione | esito |
+|--:|---|---|
+| `1514` | `__init__` | **FUORI PERIMETRO:** è l'inizializzazione. Il bilancio misura `Δ` **fra inizio e fine di un passo**, e qui non c'è nessun passo |
+| `3719` | `_smp_chiudi` | **`D04`** — il termine che in `Z107` mancava. **Il bilancio lo prende avvolgendo `_smorza`** e sommando **solo** le chiamate con `quale == 'd0_passo'`. Vale il `117 %`–`218 %` della crescita |
+| `6030` | `memoria_hebbiana_moto` | ❌ **FALSO POSITIVO, ed è mio** |
+
+**IL FALSO POSITIVO, letto dal sorgente (`:6028-6034`):**
+```python
+if TRACCIA_D0: _tr_pre = self.d0.copy()
+if COES_ADIM:
+    self.d0[mask] += self._sd0(_delta_coes, mask)          # :6030
+else:
+    self.d0[mask] += self._sd0(np.clip(...), mask)         # :6032
+if TRACCIA_D0: self._traccia_d0('S12_coesione', _tr_pre)
+```
+**I due rami sono MUTUAMENTE ESCLUSIVI: ne gira UNO SOLO**, e l'unico `_traccia_d0` copre quello
+che gira. **Il mio criterio ha visto «`:6032` sta fra `:6030` e la traccia» e ha dichiarato
+`:6030` scoperta. Non sa distinguere DUE SCRITTURE IN SEQUENZA da DUE RAMI DI UN `if/else`.**
+
+> **✅ LA RISPOSTA ALLA DOMANDA È QUINDI:** gli scrittori davvero non tracciati sono **DUE** —
+> **`__init__:1514`**, fuori perimetro, e **`_smp_chiudi:3719`**, che è `D04`.
+> **`22 − 19 = 3` perché la coppia `if/else` della coesione conta come DUE scritture che
+> condividono UN solo sito.**
+
+**⚠ E LA COSA CHE VALE PIÙ DEL CONTEGGIO: «IL BILANCIO LE COPRE» NON SIGNIFICA «IL
+SIMULATORE LE TRACCIA».** Il bilancio è **uno strumento esterno**. **Nel simulatore il sito di
+`_smp_chiudi` manca ancora** — **chiunque rifaccia la traccia senza quell'involucro ritrova il
+buco di `Z107`.**
