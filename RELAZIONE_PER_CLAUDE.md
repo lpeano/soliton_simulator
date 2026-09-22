@@ -12505,3 +12505,48 @@ documentato di questo repo. **È più severo del necessario, e si dice.**
 > Il commit di prova era **locale e non pushato**, ed è stato annullato con `reset --soft`; **`soliton_simulator.py` è tornato al blob `21e3a3dc`**, verificato.
 
 **E un difetto mio, trovato dalla prova stessa:** il messaggio di rifiuto conteneva `⚠`, e lo `stderr` di Windows lo stampava come **`⚠`** *(cp1252 con `backslashreplace`)*. **Il file dichiarava «ASCII PURO» e io l'avevo violato**: sette caratteri, ora tolti. **È la stessa famiglia del presidio sull'encoding di `CLAUDE.md`** — lì uccide lo script, qui rende illeggibile un avviso.
+
+### ㉯ **`A1` misurato: il difetto e' CERTO, ma NON spiega `r` — e una mia frase di `Z110` era sbagliata**
+
+> **Il simulatore non e' stato toccato.** `ritmo()` e' avvolto dall'esterno e il valore restituito
+> non viene modificato. 120 passi, seme `42`, configurazione della validazione.
+
+**LA DIMOSTRAZIONE, algebrica e non congetturale** *(`:2584-2585`)*: `np.angle` ha periodo `2π`,
+quindi `a` sta in `(-2π, 2π]`, e `((a + 2π) % 4π) - 2π` su quell'intervallo
+**e' `a`**. **Verificato su `100 001` punti: `max|w4(a) - a| = 0.000e+00`.**
+**Il caso:** fase da `π-0.05` a `-π+0.05` → wrap giusto **`+0.1`**, wrap in vigore
+**`-6.183`**. ✅ **`D34`.**
+
+**MA LA MISURA RIDIMENSIONA IL SOSPETTO, e la scrivo per intero:**
+
+| | valore | il nullo |
+|---|--:|--:|
+| frazione di nodi con `|a| > π`, media | `4.45e-05` | — |
+| chiamate con almeno un attraversamento | `12` su `119` | — |
+| nodi tagliati per chiamata, massimo | `3` | — |
+| **`f_a` fra i nodi al TETTO** | **`3.25e-02`** | `4.45e-05` |
+| **arricchimento** | **`728.94 x`** | `1 x` |
+| **`median(|f|)` 4π / 2π** | **`1.000000`** | `1` |
+
+> **QUANDO SCATTA, INCHIODA** *(`729 x`)* — **ma spiega solo il `3.2 %` dei nodi al tetto.**
+> Il criterio scritto **prima** chiedeva `>= 50 %`: **CONTRIBUISCE, NON SPIEGA.**
+> **E non muove il gauge:** rapporto `1.000000` esatto. **Il meccanismo indiretto che avevo
+> ipotizzato — il taglio gonfia `median(|f|)` e schiaccia tutti gli altri — NON AVVIENE.**
+
+#### ⚠ **CORREZIONE A UNA MIA FRASE DI `Z110`**
+
+Avevo scritto *«`max/min` di `r` tocca `1.000e+06` **(il clip)**»*. **Non esiste nessun clip
+a `1e6`.** Dal codice *(`:2643-2645`)*:
+```
+r   = x/sqrt(1+x^2) + 1e-6      -> satura a ~1
+r_n = r / (1/sqrt(2) + 1e-6)    -> TETTO ~1.4142, PAVIMENTO ~1.4142e-6
+```
+**`max/min = 1.4142 / 1.4142e-6 = 1e+06` E' `1/1e-6` PER COSTRUZIONE**: e' l'inverso della
+**regolarizzazione additiva**, non una misura. **Misurato: `min(r) = 1.414212e-06`, il pavimento
+esatto.**
+**`D32` regge lo stesso** — la correlazione `~0` fra `r` e `tau_pp` non dipende da questo —
+**ma la sua prova dell'«ampiezza» va letta cosi'**, e chiamarla «clip» faceva sembrare
+una misura una costante del codice.
+
+**→ La domanda del mandato** *«e' questa la causa di `r` su sei ordini di grandezza?»*
+**ha risposta: NO.** I sei ordini sono **il pavimento diviso il tetto**, scritti nella formula.
