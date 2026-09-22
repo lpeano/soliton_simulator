@@ -23,6 +23,11 @@ D  cumulato PER CHIAVE, con una MITOSI in mezzo: l'arco (11,21) MUORE e gli altr
 D- IL CASO CHE DEVE FALLIRE: lo stesso caso con l'accumulatore PER POSIZIONE
      ottenuto ['11', '32', '43', '11']   contro l'atteso ['11', '33', '44', '7']
      archi sbagliati: 3 su 4, atteso >= 3  -> OK: il caso DISTINGUE i due accumulatori
+F  LA SATURAZIONE, su un caso a numero NOTO di archi incollati al tetto
+     atteso 198 saturi (137 in su + 61 in giu') su 10000 scritti
+     ottenuto 198 saturi su 10000 scritti  -> OK
+F- IL CASO CHE DEVE FALLIRE: una distribuzione LISCIA, senza nessun tetto
+     ottenuti 1 saturi, atteso <= 2 (solo il massimo)  -> OK: il criterio vede il TETTO, non il massimo
 G  le TRE COLONNE NUOVE a somme NOTE: salite, discese, passi in cui l'arco ESISTE
      atteso   salite [5.5, 0]  discese [-1, -2]  passi [3, 1]  saldo [4.5, -2]
      ottenuto salite [5.5, 0]  discese [-1, -2]  passi [3, 1]  saldo [4.5, -2]  -> OK
@@ -32,7 +37,7 @@ E  LA GUARDIA DELLA RISURREZIONE -- il caso che DEVE fallire
 --------------------------------------------------------------------------------------------
   -> i criteri PASSANO tutti: si misura
 
-configurazione: quella della VALIDAZIONE (sei cure accese). Passi: 120 su 120. 457.1 s
+configurazione: quella della VALIDAZIONE (sei cure accese). Passi: 120 su 120. 533.4 s
 
 ============================================================================================================
 `S09_spinta_med` -- IL SALDO PER REGIONE
@@ -100,6 +105,51 @@ I 20 ARCHI COL |SALDO| PIU' GRANDE -- per CHIAVE (i,j), su tutte le chiavi viste
    18     169     319 vuoto-vuoto          | +1.663184e+00  1.663184e+00  0.000000e+00 |    120    si
    19     159     223 vuoto-vuoto          | +1.663184e+00  1.663184e+00  0.000000e+00 |    120    si
    20     405     648 vuoto-vuoto          | +1.663184e+00  1.663184e+00  0.000000e+00 |    120    si
+
+============================================================================================================
+LA SATURAZIONE DI `S09`: QUANTO SPESSO LA SPINTA E' INCOLLATA AL TETTO CAUSALE
+  `spinta = np.clip(spinta, -passo_causale, passo_causale)` e poi
+  `d0[mask] += _sd0(spinta * median(d0[mask]), mask)`: su un arco SATURO l'incremento vale
+  `passo_causale * median(d0[mask])`, UGUALE PER TUTTI. Non dipende piu' dall'arco.
+============================================================================================================
+
+PER PASSO (120 passi):
+                                      min      mediana          max       totale
+  archi SATURI                     436017       447458       472238     53705492
+  archi SCRITTI (dx != 0)          526047       526248       526282     63147497
+  frazione sugli SCRITTI         0.828602     0.850253     0.897711     0.850477
+  frazione sugli archi VIVI      0.828602     0.850253     0.897711     0.850477
+
+PER ARCO -- in quanti passi ciascuno e' SATURO (istogramma, su 526439 chiavi):
+  0 (mai saturo)          278 archi    0.0005 della popolazione
+  1-10                    792 archi    0.0015 della popolazione
+  11-60                 32383 archi    0.0615 della popolazione
+  61-119               434782 archi    0.8259 della popolazione
+  120 (SEMPRE)          58204 archi    0.1106 della popolazione
+
+PER REGIONE -- archi-passo saturi su archi-passo scritti:
+regione                        saturi        scritti     frazione
+------------------------------------------------------------------
+vuoto-vuoto                   6733618        7162895     0.940069
+massa-massa                  36146053       44372128     0.814612
+nato-nato                         618            710     0.870423
+CONFINE vuoto-massa          10777614       11562169     0.932145
+CONFINE con nato                47589          49595     0.959552
+
+QUANTA PARTE DEL SALDO VIENE DA INCREMENTI SATURI:
+  saldo da incrementi SATURI   -1.264464e+05   (salite +3.088976e+05, discese -4.353440e+05)
+  saldo NETTO totale di `S09`  -1.268406e+05
+  rapporto saturo/totale       0.996892
+
+------------------------------------------------------------------------------------------------------------
+LA LETTURA, FISSATA PRIMA DI GUARDARE I NUMERI:
+  saturazione RARA   (< 1 %%)  -> il clip e' un difetto LOCALE, il plateau e' una coda
+  saturazione DIFFUSA (> 10 %%) -> la spinta e' in gran parte `tetto x mediana globale`:
+                                 un numero GLOBALE con un segno. `A11` corollario 6.
+  in mezzo                    -> si scrive il numero, SENZA etichetta.
+  MISURATO: frazione di archi-passo saturi sugli scritti = 0.850477 = 85.0477 %
+  -> *** SATURAZIONE DIFFUSA: la spinta di oggi e' in gran parte UN NUMERO
+         GLOBALE CON UN SEGNO. E' `A11` corollario 6. ***
 
 ============================================================================================================
 LE TRE RIGHE DI RISCONTRO

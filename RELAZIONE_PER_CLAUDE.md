@@ -11072,3 +11072,59 @@ nulla.
 fallito *(lo script apre il file in scrittura all'inizio di `main()`)*. **E' stato ripristinato da
 git:** la versione buona e' quella di `67445ec`, e **resta valida** -- il giro nuovo la rigenerera'
 per intero aggiungendo la saturazione.
+
+### ⑺ **LA SATURAZIONE MISURATA: l'`85 %` della spinta gravitazionale e' un NUMERO GLOBALE CON UN SEGNO**
+
+> **La lettura era fissata PRIMA** *(mandato del 2026-09-22 §1, e scritta dentro lo strumento)*:
+> **rara `< 1 %`** → difetto locale, il plateau e' una coda; **diffusa `> 10 %`** → la
+> spinta e' in gran parte *«tetto × mediana globale»*; **in mezzo** → si scrive
+> il numero senza etichetta.
+
+**MISURATO: `85.0477 %`.** Otto volte sopra la soglia della lettura *«diffusa»*.
+
+**PER PASSO** *(120 passi)*:
+
+| | min | mediana | max | totale |
+|---|---:|---:|---:|---:|
+| archi **SATURI** | `436 017` | `447 458` | `472 238` | `53 705 492` |
+| archi **scritti** | `526 047` | `526 248` | `526 282` | `63 147 497` |
+| **frazione** | `0.8286` | `0.8503` | `0.8977` | **`0.850477`** |
+
+**PER ARCO** — in quanti passi ciascuno e' saturo, su `526 439` chiavi:
+
+| passi saturi | archi | frazione |
+|---|---:|---:|
+| **`0` (mai)** | **`278`** | **`0.0005`** |
+| `1-10` | `792` | `0.0015` |
+| `11-60` | `32 383` | `0.0615` |
+| `61-119` | `434 782` | `0.8259` |
+| **`120` (SEMPRE)** | **`58 204`** | **`0.1106`** |
+
+> **Solo `278` archi su mezzo milione non saturano MAI. Il `93.65 %` e' saturo per piu' di meta'
+> run.** **Il «plateau» non e' una coda: e' IL REGIME NORMALE.**
+
+**PER REGIONE** — satura **ovunque**, e di piu' **nel vuoto e sui confini**:
+`vuoto-vuoto` **`94.0 %`** · `CONFINE con nato` **`96.0 %`** · `CONFINE vuoto-massa`
+**`93.2 %`** · `nato-nato` `87.0 %` · `massa-massa` **`81.5 %`**.
+
+**E IL NUMERO CHE DECIDE:**
+```
+saldo da incrementi SATURI   -1.264464e+05   (salite +3.089e+05, discese -4.353e+05)
+saldo NETTO totale di S09    -1.268406e+05
+rapporto                      0.996892
+```
+> **Il `99.69 %` del saldo netto della gravita' viene da incrementi SATURI.**
+> E su un arco saturo l'incremento vale `passo_causale * median(d0[mask])` — **un tetto
+> globale per una statistica globale**, **uguale per tutti**.
+> **QUINDI: oggi la «spinta gravitazionale» e', per il `99.69 %` del suo effetto netto,
+> UN SOLO NUMERO MOLTIPLICATO PER UN SEGNO.** Il pozzo decide **dove il segno e' `+` e dove
+> e' `-`**; **quanto** non lo decide quasi mai.
+
+**⚠ E' `A11` corollario 6** *(se un limite satura, e' un allarme e non una protezione)*,
+**misurato invece che argomentato.**
+**⚠ NESSUNA CURA SI SCRIVE QUI:** si derivano al `CHK3`, e questo numero e' **la prova da
+citare** per **`SPINTA_LOCALE`**. — **`Z106`, ora CHIUSA**
+
+**Le tre righe di riscontro e le guardie si riproducono IDENTICHE** al giro precedente *(sistema
+deterministico)*: `0/20` sul confine, saldo di confine diffuso su `96 429` archi, `Z105` confermata
+a `3.072e-13`, **doppioni `0`, risurrezioni `0`**.
