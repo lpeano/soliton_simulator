@@ -11289,3 +11289,38 @@ S07_schwinger CONCATENA ON 526019->526047 OFF 526019->526047
 
 **Il `7/7` di `9829f84` era stato ottenuto col criterio VECCHIO e non valeva piu': questo vale.**
 
+### ⑾ **`G3`: il controllo positivo PASSA, e la prova a 600 passi e' partita**
+
+> **CONTROLLO POSITIVO: `206` campi identici, `0` diversi**, snapshot contro snapshot al passo
+> 120 fra `_g3_controllo` e `_val600`. **L'involucro riproduce la validazione esattamente.**
+
+**Serve a un'affermazione DIVERSA da quella del sigillo.** Il sigillo `7/7` dice che **il FLAG**
+e' chirurgico; il controllo dice che **il mio INVOLUCRO** *(`runpy` piu' il monkeypatch di
+`_applica_flag` e di `_traccia_d0`)* e' **inerte**. Senza, una differenza misurata nella prova
+sarebbe attribuibile all'involucro invece che allo spegnimento. **E verifica anche una terza
+cosa: che la traccia salite/discese sia davvero PURE-READ** — se lo fosse solo a parole, lo
+stato al passo 120 non coinciderebbe piu'.
+
+> **⚠ AL PRIMO GIRO IL CONTROLLO AVEVA DETTO `1` CAMPO DIVERSO, E A SBAGLIARE ERA IL
+> CONFRONTO, NON IL RUN.** `confronta()` metteva a paragone **la rete VIVA a fine processo** con
+> uno snapshot del **passo 120**. Il campo era `_g_kernel_alpha_tot`, un contatore diagnostico di
+> `_pesi()` (`:3215`) che il suo stesso commento dichiara *«byte-inerte: si CONTA, non si
+> cambia»*, e che **continua a salire dopo che lo snapshot e' stato scritto**.
+> **Non era una differenza fra i due run: era una differenza fra due ISTANTI.**
+> **Misurato leggendo i due file: `1523` e `1523`, identici.**
+> **Un confronto fra istanti diversi produce differenze VERE che non significano niente.**
+> **E un secondo difetto dello stesso metodo l'ha segnalato numpy:** `astype(float)` su un array
+> **complesso scarta la parte immaginaria** *(`ComplexWarning`)*. Ora si sottrae senza cast.
+> **Il run non e' stato rifatto: era giusto. E' stata riparata la LETTURA.**
+
+**LA PROVA E' PARTITA:** `GRAV_BIFASE = False`, **600 passi**, **PID 14940**, ore **11:28:56**,
+strumento blob `9648906e`, driver `44ee9c7d`, simulatore `9557a867`, seme `42`, configurazione
+della validazione. Esce in `csv/_test_fork/_g3_senza_bifase/`.
+
+**LE LETTURE SONO FISSATE PRIMA, e sono quelle del mandato:**
+- **`d0` smette di crescere** → la gravita' era il motore della fuga;
+- **`d0` cresce lo stesso** → il motore e' altrove;
+- **in ogni caso:** le masse restano coese? lo stress resta finito? il sistema si espande o si
+  contrae? `d/d0` torna verso `1`?
+**Si legge con gli STESSI OTTO CRITERI ASSOLUTI** *(`_letture_validazione.py --dir=...`)*, piu'
+la **traccia salite/discese per scrittore**, la stessa di `Z102`. **Nessun confronto fra epoche.**

@@ -1,0 +1,98 @@
+[TIMBRO] _spegni_grav_bifase.py  sha1-BYTE 14b11a93  committato e pulito
+[G3] modo --controllo   GRAV_BIFASE spento dall'involucro: False
+[G3] argv: _scena_video.py 20 C:\Users\lpeano\soliton_simulator\csv\_test_fork\_g3_controllo --sep=4.0 --serie=20 --chi-basc=on --chi-coop=on --scala-min=off --coes-adim=on --peq-esatto=on --peq-nascita-locale=on --scala-min-passo=on --coes-causale=on --anom-simm=on --invarianti=on
+[TIMBRO] _scena_video.py  sha1-BYTE 44ee9c7d  committato e pulito
+================================================================================================================
+SCENA DEL VIDEO senza rendering -- 20 frame x 6 passi = 120 passi di motore
+================================================================================================================
+[calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[invarianti] ACCESI (default). DUE LIVELLI: NUMERICO -- overflow, divisione per zero e valori non validi alzano un'eccezione con la riga esatta; l'UNDERFLOW NON ferma niente, perche' densita' come 1e-81 di un nodo neonato sono LEGITTIME. FISICO -- ogni grandezza di stato dentro il suo dominio, a fine passo, con gli INDICI e i valori. L'esplosione del 21/9 NON era un overflow (1.8e6 e' un numero normale): l'avrebbe presa solo la regola FISICA `peq >= 0`. Legge soltanto: su un run sano non cambia un bit.
+[anom-simm] L'ANOMALIA SIMMETRICA, SENZA PAVIMENTO: anom = 2*(rho-peq)/(rho+peq), con `0/0 := 0` DEFINITO (precedente: scala_p, Z67). Toglie il pavimento max(peq,1e-9), che e' un numero SCELTO e non esprime nessun vincolo fisico (A11): con peq negativo RIBALTAVA IL SEGNO e moltiplicava per 3.7e5 (Z94). Il caso peq->0 con rho ordinario passa da 1e+08 a ESATTAMENTE +2, e per anomalie piccole le due forme coincidono. *** RICHIEDE --peq-esatto: con peq < 0 il denominatore si annulla in peq = -rho ed e' un POLO, non un limite. Senza C1 questa cura sostituisce un pavimento con un polo. Il caso e' CONTATO, non assunto impossibile. ***
+[coes-causale] LA COESIONE RISPETTA L'ISTANTE E IL CONO LOCALE: `d0` e `d` si leggono dalla fotografia di INIZIO PASSO invece che da un `d0` gia' spostato da sette scritture, e il tetto e' `cs_arco*DT` col `cs` del nodo PIU' LENTO invece di `LAM*sqrt(K_C)*DT`, che e' costruito su costanti di modulo e non conosce il cono del luogo (A5). Zero parametri: `_cs_nodo_prev` esiste gia'. NB: il tetto locale non e' sempre piu' stretto -- dove il cono e' veloce ALLARGA -- ed e' causalita', non prudenza.
+[scala-min-passo] IL FRENO UNA VOLTA PER PASSO: le sei scritture di `d0` e i sotto-passi di `d` NON frenano piu'; a fine passo si applica `_smorza` UNA VOLTA sulla VARIAZIONE TOTALE, dal valore di INIZIO passo. Cura il CRICCHETTO di Z91: frenare ogni scrittura separatamente rende il risultato dipendente dall'ORDINE delle leggi e, poiche' frena solo le discese, con spinte opposte di somma nulla NON da' zero. Applicato una volta sola sul totale il bias e' ZERO ESATTO. Lo snapshot di inizio passo segue la mitosi ai quattro siti di ristrutturazione; gli archi NATI nel passo non vengono frenati, e le nascite restano a LAM. Zero coefficienti.
+[peq-nascita-locale] UNA SOLA LEGGE DI NASCITA PER `peq`: gli archi della creazione di coppia alla Schwinger nascono con `nan` e vengono CALIBRATI da step() sulla `rho` DEL LORO ARCO, esattamente come quelli di `_allaccia`. Prima prendevano `median(peq)`, LA MEDIANA GLOBALE: una statistica globale dentro una legge locale (A2), e quei nodi non hanno alcun rapporto con la mediana della rete. Zero parametri: il meccanismo esisteva gia'. L'eredita' della MITOSI non si tocca: un arco che si spezza non nasce, CONTINUA.
+[peq-esatto] IL RILASSAMENTO DI `peq` IN FORMA ESATTA: peq <- rho + (peq-rho)*exp(-dt_e/tau_bg), piu' lo stesso passo esatto per la diffusione (splitting di Lie-Trotter, punto fisso `peq+flusso`). E' una COMBINAZIONE CONVESSA, quindi `min(peq,rho) <= peq_new <= max(peq,rho)` per QUALUNQUE passo: `peq` NON PUO' PIU' SCAVALCARE SOTTO ZERO. L'Eulero esplicito di prima scavalcava per dt_e/tau_bg > 1, misurato 1.2018 al passo 1126 del ramo D. Zero coefficienti nuovi: e' la stessa forma gia' imposta dal par.4 per i rilassamenti di primo ordine. NON toglie il pavimento di :4215.
+[coes-adim] COESIONE ADIMENSIONALE: i tre addendi normalizzati sulla densita' LOCALE dell'arco (I_med sparisce, era una media globale), e lo spostamento e' passo_causale * tanh(...) * filtro_portata, con |F| <= 1 PER COSTRUZIONE. Sostituisce il clip tanh(stress)*d0.
+[chi-coop] COOPERAZIONE: chi_basc SCRIVE perc_geom (geometria, letta dalla catena della torsione) e lo spinore scrive perc_chi (carica, letta dal campo B, dalla mitosi e da Schwinger). L'anello carica -> campo -> spinore -> carica e' quello NORMALE della fisica, sfasato di un passo.
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+[fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+[step2-orologio] STEP 2: omega_clk *= (cs/CS_M)^2 = OROLOGIO DI COMPTON (omega = m c^2/hbar, e nel modello c e' cs). Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.
+[rumore-colorato] TAGLIO SPETTRALE: il calcio del vuoto non e' piu' bianco ma correlato su tau_c = LAM/CS_M = 0.4 (= 40 passi), con un processo di Ornstein-Uhlenbeck sul rumore stesso e `dt_n = DT*r` (non DT: e' un processo LOCALE). `amp` INVARIATA. MOTIVO: il rumore bianco discreto inietta a tutte le frequenze fino a Nyquist, incluse quelle che il passo non risolve; in natura non esiste. ZERO coefficienti: LAM e CS_M sono gia' nel sistema. ATTENZIONE: la ricorsione PRESERVA LA VARIANZA, quindi NON abbassa theta - se lo muove lo fa SALIRE (<=5%). Si cabla perche' il rumore bianco e' SBAGLIATO, non perche' risolva l'aliasing (doc/PREDIZIONE_taglio_spettrale.md).
+[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: inerzia = T^2 = (d/cs)^2, quindi il tempo che COSTRUISCE l'inerzia e quello che la RILASSA devono essere lo stesso; oggi sono due diversi nella stessa equazione. Zero coefficienti, zero floor nuovi. NB: |omega|_eq va come sqrt(tau), quindi theta cala di ~13x: UN ORDINE DI GRANDEZZA, NON la soluzione dell'aliasing.
+[spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+
+  FLAG ATTIVI, letti dal MODULO dopo `_applica_flag` (P6: dai dati, non dal comando):
+    CAMPO_SPINORIALE     True
+    SPINORE_VIVO         True
+    SPINORE_CORRETTO     True
+    CHI_CORE             True
+    CS_DINAMICO          True
+    TAU_LUCE             True
+    CHI_BASC             True
+    CHI_COOP             True
+    SCALA_MIN            False
+    COES_ADIM            True
+    PEQ_ESATTO           True
+    PEQ_NASCITA_LOCALE   True
+    SCALA_MIN_PASSO      True
+    COES_CAUSALE         True
+    ANOM_SIMM            True
+    INVARIANTI           True
+    FORK_SU2             True
+    FORK_SU2_MEM         True
+    STEP2_OROLOGIO       True
+    SPIN_FEEDBACK        True
+    CALORE_VETTORIALE    False
+    PLAST_DIN            True
+    VERLET               True
+    TAU_LOC              1.0
+  PASSI_PER_FRAME = 6   DT = 0.01   TAU_A = 50.0   N_c(collasso) = 621
+  ⚠ `--tau-luce` ha il SIGILLO FALLITO (CLAUDE.md par.0): ramo NON CERTIFICATO.
+  ⚠ `--chi-basc` RISCRIVE `perc_chi` a ogni passo: non e' un'etichetta di lignaggio.
+
+  scena avviata: n = 2391 nodi alla semina (N_c*0.8 per massa, 3 masse)
+
+  SEME EFFETTIVO (letto da Rete.__init__): 42    BLOB: f2628c16b066cf490ee10e8525af83afcd445ec8
+  SERIE ATTIVA: uno snapshot ogni 20 frame = 120 passi di motore -> C:\Users\lpeano\soliton_simulator\csv\_test_fork\_g3_controllo\scena.pkl.gz
+  frame 1     n=2492    archi=526098   coer_l=0.5735   dil= -1.277%   [18.1 s, 18.146 s/frame]
+  frame 5     n=2585    archi=526208   coer_l=0.3432   dil= -6.149%   [91.6 s, 18.317 s/frame]
+  frame 10    n=2618    archi=526246   coer_l=0.3185   dil=-10.614%   [179.2 s, 17.919 s/frame]
+  frame 15    n=2639    archi=526272   coer_l=0.3171   dil=-14.068%   [265.7 s, 17.712 s/frame]
+  SNAPSHOT passo 120     n=2647       36.20 MB in   1.3 s -> scena_000120.pkl.gz
+  frame 20    n=2647    archi=526282   coer_l=0.3551   dil=-16.911%   [353.7 s, 17.685 s/frame]
+C:\Users\lpeano\soliton_simulator\csv\_test_fork\_spegni_grav_bifase.py:172: ComplexWarning: Casting complex values to real discards the imaginary part
+  d = np.max(np.abs(aa.astype(float) - bb.astype(float))) if aa.size else 0.0
+
+  TOTALE 353.7 s per 20 frame (dal 1 al 20) -> 17.685 s/frame medio
+  n da 2492 a 2647;  costo per frame da 18.146 a 17.661 s  (x0.97)
+  ⚠ IL COSTO CRESCE COL NUMERO DI NODI: un'estrapolazione LINEARE SOTTOSTIMA.
+  ARCHIVIO: 1 snapshot scritti, 0 saltati, 0 FALLITI   (0.04 GB in totale)
+================================================================================================================
+
+============================================================================================
+L'INVOLUCRO: cosa ha fatto davvero
+============================================================================================
+  `_applica_flag` avvolto, chiamate: 1
+  `GRAV_BIFASE` PRIMA dell'involucro: True   DOPO: True
+  valore ORA sul modulo: True
+
+============================================================================================
+IL CONTROLLO POSITIVO: l'involucro riproduce la validazione?
+  confronto dello stato al passo 120 con `_val600/scena_000120.pkl.gz`
+============================================================================================
+  campi UGUALI 205   DIVERSI 1   non confrontati 0
+  i primi diversi: _g_kernel_alpha_tot
+
+  *** L'INVOLUCRO NON RIPRODUCE LA VALIDAZIONE (1 campi diversi).
+      LA PROVA DI SPEGNIMENTO NON SI FA finche' questo non e' risolto: una
+      differenza misurata sarebbe attribuibile all'involucro invece che al flag. ***
