@@ -629,3 +629,61 @@ mi fermo** (è il falsificatore §2.5 del task history).
 **LIMITI GIÀ NOTI E DICHIARATI:** **un seme per scena**, **`--tau-luce` col SIGILLO FALLITO**,
 **`--chi-basc` attivo**, **sei istanti**, **coorte ANAGRAFICA e non per massa** *(il tracking non è
 nei `.pkl`: `Z53`)*. **Nessuna identificazione di fisica, nessun verdetto.**
+
+
+---
+
+# `RITMO_WRAP_2PI` (`A1`, `D34`) — **cosa mi aspetto, scritto PRIMA di girare**
+
+> **2026-09-22, sera.** Il flag **non e' ancora in codice**. Queste previsioni si fissano
+> adesso perche' **una previsione scritta dopo e' una ricostruzione**, e perche' `Z117` ha
+> gia' dato i numeri da cui discendono.
+
+## LA PREVISIONE PRINCIPALE, e va contro l'aspettativa naturale
+
+**Mi aspetto che la correzione cambi POCO, e forse nulla di leggibile a un seme solo.**
+Non perche' il difetto sia lieve — **e' certo, e quando scatta falsa il tempo proprio di quel
+nodo di `~2π/DT`** — ma perche' `Z117` lo ha **misurato raro**: `4.45e-05` dei nodi,
+`12` chiamate su `119`, al massimo `3` nodi per chiamata, e **`median(|f|)` invariato a
+`1.000000`**.
+
+**⚠ E QUI C'E' IL RISCHIO DI LETTURA PIU' GRANDE, e lo dichiaro adesso:** il sistema e'
+**caotico**, e **due run che differiscono di `1e-16` divergono comunque** *(par.9, primo
+presidio)*. **Il flag acceso cambia la traiettoria**, quindi `n`, `archi` e le mediane
+**saranno diversi**. **Quella differenza NON e' l'effetto della correzione: e' dispersione di
+run.** **Con UN seme non e' attribuibile**, e la barra giusta e' **fra semi**, che non ho.
+
+## LE PREVISIONI PUNTUALI
+
+1. **Le letture della validazione: `6/8`, gli stessi due che non reggono** *(`d0` e `d/d0`)*.
+   **Perche':** `d0` e' governato dal **freno** *(`+117 %`…`+218 %`)* e dalla memoria del
+   moto, **non da `r`**. **Se uscisse `7/8` o `8/8`, non ci crederei senza un secondo seme.**
+2. **Il bilancio di `d0` CHIUDE**, come nei tre bracci precedenti *(`1.1e-13`…`9.5e-14`)*.
+   **Se non chiudesse, il flag ha toccato piu' di quello che dichiara**, e sarebbe un difetto
+   del flag, non un riscontro fisico.
+3. **`min(r)` resta `≈ 1.414e-06`.** **Il pavimento NON viene dal taglio**: viene da
+   `f ≈ 0` e dal `+1e-6` additivo. **Se sparisse, ho sbagliato la lettura di `Z117`.**
+4. **`max(r)` resta `≈ 1.4142`** — e' il tetto della formula, non un effetto.
+5. **La quota di nodi al TETTO cala di poco: mi aspetto un calo dell'ordine del `3 %` del suo
+   valore**, non un azzeramento. **Viene dal `f_a|tetto = 3.25e-02` di `Z117`.**
+   **Se il tetto si svuotasse, `Z117` avrebbe sbagliato**, e sarebbe il risultato piu'
+   interessante dei due.
+6. **Il numero di attraversamenti del taglio NON va a zero:** il flag cambia **come si avvolge**,
+   non **quante volte la fase attraversa `±π`**. **Se andasse a zero, il flag sta facendo
+   qualcosa che non ho capito.**
+
+## COSA RENDEREBBE LA CORREZIONE COMUNQUE GIUSTA, anche con tutti i numeri fermi
+
+**Il difetto e' DIMOSTRATO, non stimato:** `max|w4(a) - a| = 0.000e+00` su `100 001` punti.
+**Una correzione che non sposta un aggregato resta una correzione**, e l'alternativa — lasciare
+un wrap che non avvolge — **non ha nessun argomento a favore**. **Il valore della prova a 600
+passi non e' dimostrare che serve: e' misurare QUANTO.**
+
+## COME PUO' FALLIRE QUESTA PREVISIONE
+
+- **se i criteri passassero a `7/8` o `8/8`**: vorrebbe dire che `r` conta **molto** piu' di
+  quanto `Z117` suggerisce, e **il `3.2 %` di arricchimento non basterebbe a spiegarlo**;
+- **se il bilancio non chiudesse**: difetto del flag;
+- **se `n` divergesse di piu' del `±10 %`**: da leggere **come dispersione di run finche' non
+  c'e' un secondo seme**, non come effetto — e lo scrivo prima proprio per non cedere alla
+  tentazione di leggerlo come effetto.
