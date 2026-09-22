@@ -12583,3 +12583,30 @@ configurazione**. **Ogni cura è sigillata DA SOLA; l'insieme no.**
 un'INTERAZIONE fra cure**, e va trovata prima dell'epoca 3.
 Il riferimento di paragone è **`_g4_riferimento`, già sul disco**: nessun run in più per il
 confronto.
+
+### ㉲ **`FAMIGLIE`: il cercatore di famiglie di difetti, in coda dopo `PROBLEMI-CHK3`**
+
+> **Solo lettura. Nessuna cura, e nessuna proposta di soluzione.** Legge il sorgente *(AST)* e
+> segnala i punti che ricadono nelle famiglie **già note** — ciascuna nata da **difetti
+> reali di questo repo**, non da principi generali.
+
+| | famiglia | da quale difetto nasce |
+|---|---|---|
+| **`F1`** | numeri **scelti** nelle formule fisiche | `D01` · il `0.02`, il `0.3`, il `3.0`, il `π/4` |
+| **`F2`** | statistiche **globali** in leggi **locali** | `D01`, `A2` |
+| **`F3`** | limiti: `clip`, `maximum`, `minimum`, col **valore** e se ha un **contatore** | `A11`, `D31` |
+| **`F4`** | scritture di stato **senza traccia** | `D04` — **già fatto per `d0`: si RIUSA il criterio**, rami esclusivi compresi |
+| **`F5`** | fasi col **periodo sbagliato** | `D34`, dal censimento in corso |
+
+**⚠ DUE VINCOLI CHE LA VOCE PORTA, e sono il punto:**
+- **l'esito è obbligatorio per OGNI punto:** «**già noto**» · «**candidato**» ·
+  «**NON è un difetto, perché…**». **Nessun punto resta senza esito**, e **non si
+  classifica come difetto ciò che non lo è**. *Un cercatore che segnala tutto non lo legge
+  nessuno* — ed è il difetto **già misurato** di `csv/_blob_nelle_voci.py`;
+- **i candidati NON diventano difetti acclarati automaticamente:** vanno nei **`SOSPETTI`** e si
+  promuovono **uno per uno con la prova**. *Un cercatore che crea difetti da solo li crea anche
+  dove non ci sono.*
+
+**Collaudo `P1-sexies` per famiglia**, ciascuno col **caso che deve fallire** e un **caso
+nascosto**: una costante passata da una **variabile**, una mediana calcolata in **un'altra
+funzione**.
