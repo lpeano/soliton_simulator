@@ -12349,3 +12349,37 @@ lavoro residuo in entrambe.
 - **il tetto locale della coesione NON è sempre più stretto:** dove il cono è veloce **allarga**.
   **È causalità, non prudenza** — la lettura *«una cura che restringe»* è sbagliata;
 - **`S10_grav_med` è INERTE** in tutti i run del fork: gira sempre il ramo `VIRIALE`, cioè `S09`.
+
+### ㉪ **`G4-bis`: spegnere di PIÙ dà PIÙ crescita — e il «62 %» di `Z109` non era il peso della memoria del moto**
+
+> Finito alle **16:59**, `2489.5 s`. **Il bilancio chiude a `9.498e-14`.** `MEM_MOTO_TUTTO = False`,
+> sigillo `10/10`, blob `21e3a3dc`, seme `42`, 600 passi.
+
+| | tutto ACCESO | solo `MEM_MOTO` off | **INTERO blocco off** |
+|---|--:|--:|--:|
+| **`Δ(Σd0)`** | `+1.731e+06` | `+6.504e+05` | **`+9.179e+05`** |
+| **FRENO** | `+117.41 %` | `+218.33 %` | **`+178.09 %`** |
+| scritture | `−17.43 %` | `−118.38 %` | **`−78.16 %`** |
+| nascite−morti | `0.01 %` | `0.05 %` | `0.07 %` |
+| salto fra i passi | `0` | `0` | **`0`** |
+| `n` al passo 600 | `2959` | `2914` | **`3853`** |
+| `dil` | `−11 %` | `−11 %` | **`−27.6 %`** |
+
+> **⚠ IL RISULTATO NON È MONOTONO, ED È IL PUNTO.** **Spegnere DI PIÙ non dà MENO crescita:
+> ne dà il `41 %` IN PIÙ.** Quindi **lo spostamento di fase di `:6033` TRATTENEVA `d0`**, e
+> toglierlo insieme alla scrittura **toglie un freno**.
+>
+> **E il sigillo lo aveva già detto:** `shift_fase_dinamico` ha il fattore `d_archi/d0_archi`,
+> cioè **legge `d0`**. I punti (3) e (4) **non sono separabili** — `T6` lo aveva misurato
+> *(`phi` di `SOLO-MEM` ≠ `ON`)*. **Qui si vede l'effetto sul risultato.**
+
+**✅ CONSEGUENZA SU `Z109`, e va scritta perché corregge una mia lettura di stamattina:**
+**il «`62 %`» NON è il peso della memoria del moto.** È il peso di **spegnere la scrittura
+lasciando vivo un termine di fase che legge un `d0` alterato**.
+**Il peso dell'INTERO blocco è il `47 %`** *(`9.179e+05` contro `1.731e+06`)*.
+
+**⚠ E IL MOTORE RESTA IL FRENO IN TUTTI E TRE I BRACCI** — `+117 %`, `+218 %`, `+178 %`.
+**Nessuna configurazione della memoria del moto lo sposta. `D31` regge.**
+
+**LAVORO RESIDUO DICHIARATO:** le letture `REGGE / NON REGGE` di `G4-bis` **non sono state
+generate** — i 5 snapshot sono sul disco, **è la prima cosa alla riaccensione.**

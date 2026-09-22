@@ -113,6 +113,27 @@ sono presenti *(verificato dal disco)*.
   ~370 MB, irriproducibili senza rigirare 1200 passi)* non si tocca.
 - **NON rigirare il ramo D vecchio** per confronto: e' **EPOCA 2**, le cure lo hanno cambiato.
 - **NON fidarsi di questa tabella:** ogni riga porta il file che la prova. **Si guarda quello.**
+
+## ⚠⚠ TRIAGE DELLE 17:45 — **generato alle 17:43, con `G4-bis` GIA' FINITO**
+
+> **Vincolo di Luca: alle 18:00 il PC si spegne.** Margine: tutto chiuso alle **17:45**.
+> **Al momento del triage mancano DUE MINUTI a quel margine**, quindi la tabella e' corta e la
+> risposta e' quasi sempre la stessa. **Lo dico invece di fingere che ci sia una scelta.**
+
+| lavoro | stima | ci sta entro le 17:45? | dove si ferma in modo pulito |
+|---|--:|---|---|
+| **① esito di `G4-bis`** | fatto | ✅ **SI'** | — |
+| **le letture `REGGE/NON REGGE` di `G4-bis`** | ~3 min | ❌ **NO** | i **5 snapshot sono sul disco**: si rigenerano quando si vuole. **PRIMA COSA ALLA RIACCENSIONE** |
+| **② `REG-R` cablata** *(riga in `CLAUDE.md` + hook)* | ~15 min | ❌ **NO** | **non cominciata.** ⚠ **E non sarebbe comunque da cablare oggi:** l'hook rifiuterebbe ogni commit al simulatore, e le schede coprono **4** leggi su tutte quelle attive |
+| **③ punto della situazione** | ~3 min | ⚠ **IN PARTE** | si rigenera **dopo** questo commit, se il tempo regge |
+| **④ `SCALE-TW`** | ore | ❌ **NO** | **in coda, non cominciata** *(il mandato non e' ancora stato letto dal disco)* |
+| **④ `PROBLEMI-CHK3`** | ~40 min | ❌ **NO** | **in coda, non cominciato.** I sette problemi sono **gia' elencati** nella sua voce e nelle schede ①-④: **il lavoro che manca e' metterli in ordine motivato, non trovarli** |
+| schede ⑤+ del registro *(mitosi, Schwinger, `peq`)* | ore | ❌ **NO** | **in coda** |
+| `PAT-1`, `PAT-2` | ~20 min | ❌ **NO** | **in coda**, prima del prossimo uso dei due strumenti |
+
+**LE REGOLE RISPETTATE:** nessun run nuovo *(nessuno lanciato dopo le 17:30, e non ce ne sono di
+vivi)* · nessun lavoro cominciato a meta' · nessuna cura · **`G4-bis` ha avuto la precedenza.**
+
 <!-- PUNTO-DI-RIPRESA:FINE -->
 
 > ## ⚠ DAL TAG `epoca-2`: **SISTEMA D**
@@ -267,8 +288,10 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **G2** | **§2 DOVE SPINGE LA GRAVITA'** | GLOBALE-DISEGNO §2 | ✅ **FATTO.** Il saldo vive **sul CONFINE vuoto-massa** *(`-1.4150`/arco, `107 %` del totale, `Z105`)*; i 20 archi col `|saldo|` maggiore sono **`20/20` nel VUOTO** e il confine e' **DIFFUSO** su `96 429` archi all'**`85 %` del plateau**; e **l'`85.05 %` degli archi-passo e' INCOLLATO AL TETTO**, con il **`99.69 %` del saldo** da incrementi saturi *(`Z106`)*. **`A11` corollario 6** |
 | **G3** | **§3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE** | GLOBALE-DISEGNO §3 | ✅ **FATTA.** ✅ sigillo `7/7` · ✅ controllo involucro `206/0`. **ESITO: la gravita' NON e' il motore.** Rapporto di `d0` **`1.2321` → `1.2211`**, differenza `0.9 %`. **La compressione PEGGIORA** *(`d/d0` `0.7489` → `0.6258`)* e **lo stress CROLLA del `70 %`** *(`7.866` → `2.321`)*. `6/8` in entrambi, **gli stessi due**. `S08_proj` e' il maggior scrittore positivo *(`Z107`)* |
 | **G4** | **§4 PROVA DI SPEGNIMENTO: la MEMORIA DEL MOTO** — flag `MEM_MOTO` | GLOBALE-DISEGNO §4 | ✅ **FATTO** *(finito 14:39:27)*. **La memoria del moto NON e' il motore** — `d0` cresce ancora *(`1.1607`)* — **ma ne porta il `62 %`**, e **spegnendola la COMPRESSIONE SPARISCE**: `d/d0` da `0.7489` a `0.8546`, **`7` criteri su `8`**, il migliore mai misurato. **Il motore resta IL FRENO: `+218 %`** *(`Z109`)* |
-| **G4-bis** | **IL SECONDO BRACCIO: spegnere l'INTERO blocco di `mem_mot`**, spostamento di fase compreso | richiesta di Luca, 2026-09-22 | ✅ **SIGILLO `10/10`** *(blob simulatore `21e3a3dc`)*: byte-inerte acceso *(`T9`: `206` campi identici, `0` diversi)* e **spegne tutti e quattro i punti** *(`T4` `mem_mot` identicamente zero, `T5` `phi` differisce)*. ▶ **RUN AVVIATO alle 16:34, PID Windows `2156`** *(processo `python.exe`, non la shell)*, `--spegni-tutto`, 600 passi, `csv/_test_fork/_g4bis_senza_blocco`, log `_g4bis_log.txt`. **Atteso ~35 min** *(il braccio di riferimento di `G4` ne ha presi `2076.7 s`)* |
+| **G4-bis** | **IL SECONDO BRACCIO: spegnere l'INTERO blocco di `mem_mot`** | richiesta di Luca, 2026-09-22 | ✅ **FATTO** *(finito 16:59, `2489.5 s`)*. Sigillo `10/10`, bilancio che **CHIUDE a `9.498e-14`**. **ESITO NON MONOTONO: spegnere di PIU' da' PIU' crescita** — `Δ` da `+6.504e+05` a **`+9.179e+05`**. **Lo spostamento di fase TRATTENEVA `d0`.** Il peso vero dell'intero blocco e' il **`47 %`**, non il `62 %` *(`Z115`)*. ⏸ **letture `REGGE/NON REGGE` NON generate: prima cosa alla riaccensione** |
 | **G4-MEMARCO** | **`MEM_ARCO` — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE** *(aggiunta di Luca al §4, 2026-09-22)* | GLOBALE-DISEGNO §4 | ⏸ **DERIVATA SI', CODICE NO, prima del `CHK3`.** **Dopo** lo spegnimento di `MEM_MOTO`: se il sistema **si rompe** senza, `MEM_ARCO` e' **la cura da proporre**; se **sta in piedi**, resta **registrata come alternativa** |
+| **SCALE-TW** | **LE SCALE DELLA TORSIONE** *(`MANDATO_scale_della_torsione.md`)* | mandato di Luca, 2026-09-22 | ⏸ **NON COMINCIATA.** Posizione: **dopo** l'esito di `G4-bis` *(fatto)* e **`REG-R`**, **prima** del `CHK3`. **Il triage delle 17:45 dice che NON ci sta oggi** — il mandato non e' ancora stato letto dal disco. **Da `D33` dipende:** la finestra `[3.5π, 4π)` e il tetto `TW_TETTO` |
+| **PROBLEMI-CHK3** | **IL PIANO DEI PROBLEMI APERTI** — per ciascuno: **la domanda da chiudere · la misura o derivazione che la chiude · da che scheda dipende · cosa blocca**. **NESSUNA CURA.** | mandato di Luca, 2026-09-22 | ⏸ **NON COMINCIATO** *(triage: non ci sta entro le 17:45)*. **E' il documento che Luca guardera' per decidere.** **I sette problemi sono gia' elencati nel mandato e nelle schede**: `D31` freno *(5 candidati, e il test che devono passare e' gia' scritto: `Z113`)* · **LA SPINTA VERSO IL MURO** *(chi spinge il `13.7 %` contro il confine? `A11`: un vincolo che lavora tanto e' un ALLARME, e la legge che spinge va trovata PRIMA di scegliere il vincolo)* · `MEM_ARCO` *(`Z104`, `Z112`, `Z115`)* · `SPINTA_LOCALE`/`POZZO_D` · `D32` i due tempi *(**se si unificano, le leggi che usano `tau_pp` cambiano significato: vanno elencate**)* · `D33` *(dipende da `SCALE-TW`)* · **l'ORDINE motivato dai numeri e dalle dipendenze fra schede** |
 | **CHK3** | **CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PRIMA** | GLOBALE-DISEGNO §5 | ⏸ **QUI CI SI FERMA.** Le cure solo **DERIVATE, non scritte** |
 | **CHK3-D** | **Nel referto del `CHK3`, la sezione «I DIFETTI NUOVI CONTRO LE MISURE GIA' FATTE»** — `D27` *(quattro componenti)* e `D25` *(il tempo che non scorre)* **contro `G1`, `G2`, `G3`, `G4`** | richiesta di Luca, 2026-09-22 | ⏸ **AL CHECKPOINT, non prima.** **Solo misure e letture del sorgente, nessuna cura.** **Le conseguenze sulle tre prove dell'ipotesi si scrivono come DOMANDE.** Il costo e' dichiarato qui sotto, e **i run si fanno solo col via libera di Luca** |
 | **PATTERN** | **`doc/PATTERN_DI_PROVA.md`** — la lista di controllo di ogni prova | MANDATO-PATTERN | ✅ **SCRITTO** *(48 righe)*, **5 STANDARD + 1 IN PROVA**, una riga sola in `CLAUDE.md`. **Il collaudo del §4 NON e' tutto verde:** vedi le due voci qui sotto |
