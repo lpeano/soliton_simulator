@@ -10754,3 +10754,43 @@ punto del freno, `Σ|dx⁻|`. Oggi ho il **netto** (`-1.543e+05`) e l'**aggiunto
 (`+3.205e+05`), ma non il lordo delle discese: con quello la formula
 `aggiunto = Σ|dx⁻| · min(1, LAM/d0)` si **verifica** invece di essere solo derivata.
 **Una riga nello strumento, e si misura in sei minuti.** *(Non lanciata stanotte: il PC si riavvia.)*
+
+### ⑳ **`G1` -- IL POZZO GRAVITAZIONALE USA IL DISEGNO, e la differenza CRESCE**
+
+> **SOLA LETTURA** sugli snapshot di `_val600`. Nessuna fisica eseguita, nessuna cura.
+
+`pozzo_grafo` **dichiara** *«il pozzo non usa la geometria del rendering ... diviso per la
+DISTANZA REALE dell'arco»*, e poi calcola `L = max(|pos[j]-pos[i]|, 1e-9)`. **`pos` e' il
+DISEGNO**, e la distanza reale esiste: **e' `d`**. *(Verificato dal sorgente, non copiato dal
+mandato.)*
+
+| passo | mediana `L/d` | `p99` | max | frazione `> 2` |
+|---:|---:|---:|---:|---:|
+| 120 | `0.982` | `1.35` | `1.89` | `0.0000` |
+| 240 | `0.957` | `1.93` | `3.14` | `0.0071` |
+| 360 | `0.986` | `2.77` | `5.75` | `0.0495` |
+| 480 | `1.063` | `4.68` | `8.34` | `0.1371` |
+| **600** | **`1.217`** | **`7.54`** | **`14.39`** | **`0.2561`** |
+
+> **Al passo 600 UN ARCO SU QUATTRO ha il disegno piu' del DOPPIO della distanza vera.**
+> E la differenza **non e' stabile: CRESCE**, snapshot dopo snapshot.
+
+**Per regione, al passo 600:** `massa-massa` mediana **`1.242`**, `p99` **`8.13`** — **il
+disegno sbaglia di piu' DENTRO LE MASSE, che e' proprio dove la gravita' conta** ·
+`vuoto-vuoto` `1.081` · `nato-nato` `1.019`.
+
+**E il disegno IMPONE UN CENTRO: 5 snapshot su 5.** La correlazione fra `L/d` e la distanza dal
+baricentro del disegno va da **`-0.088`** a **`+0.181`**, contro una soglia di **`0.0041`**
+*(`3/sqrt(N)`, il valore sotto ipotesi nulla a 3 sigma — **non scelta**, calcolata per ogni
+snapshot dal suo `N`)*. **Cambia segno e cresce:** all'inizio gli archi lontani dal centro hanno
+`L/d` piu' **piccolo**, alla fine piu' **grande**.
+
+**Le due letture fissate prima si verificano ENTRAMBE**, quindi: **la gravita' di oggi e' in buona
+parte un effetto del disegno.**
+
+**⚠ Cosa NON dice:** **quanto quella differenza SPOSTI la fisica.** `L/d` dice che le due
+distanze differiscono, non che la gravita' sarebbe diversa: per quello serve la **prova di
+spegnimento** (`G3`). **LIMITI: un seme, una scena, 5 snapshot.**
+**⚠ E il criterio e' stato collaudato PRIMA** su due casi a risposta nota (`P1-sexies`):
+`r = +0.9976` su quello che deve dipendere, `r = -0.0005` su quello che non deve. **Un criterio
+che non puo' fallire non e' un criterio.**

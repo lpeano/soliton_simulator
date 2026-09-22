@@ -162,7 +162,7 @@ def main():
     med_u = float(np.median(righe[-1][4]))
     lontano = abs(med_u - 1.0) > 0.10
     W("  mediana di `L_disegno/d` all'ultimo snapshot: %.4f\n" % med_u)
-    W("  -> %s\n" % ("LONTANO da 1 (oltre il 10 %%): il disegno NON e' una buona"
+    W("  -> %s\n" % ("LONTANO da 1 (oltre il 10 per cento): il disegno NON e' una buona"
                      " approssimazione della distanza vera" if lontano
                      else "vicino a 1: il disegno approssima bene la distanza vera"))
     W("  dipendenza dal centro: %d snapshot su %d dicono DIPENDE\n"

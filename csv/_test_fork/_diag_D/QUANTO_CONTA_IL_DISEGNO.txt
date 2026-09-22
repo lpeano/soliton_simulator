@@ -1,0 +1,51 @@
+# QUANTO CONTA IL DISEGNO -- `L_disegno / d`, per regione, nel tempo, contro il CENTRO
+# SOLA LETTURA sugli snapshot di `_val600`. Nessuna fisica eseguita.
+# `L_disegno` = |pos[j] - pos[i]|, esattamente come la calcola `pozzo_grafo`.
+# `d` = la lunghezza VERA dell'arco.
+#
+COLLAUDO DEL CRITERIO su due casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di usarlo:
+  soglia = 3/sqrt(N) = 0.02121   (il valore sotto IPOTESI NULLA a 3 sigma, non scelto)
+  caso A, rapporto che DIPENDE dal raggio   -> r = +0.9976  atteso |r| > soglia  -> OK
+  caso B, rapporto INDIPENDENTE dal raggio  -> r = -0.0005  atteso |r| <= soglia -> OK
+  -> il criterio DISTINGUE i due casi
+
+LA DISTRIBUZIONE DI `L_disegno / d`, snapshot per snapshot
+   passo     archi |        p1   mediana       p99       max | frazione > 2
+------------------------------------------------------------------------------
+     120    526282 |    0.2414    0.9823    1.3464    1.8853 |    0.0000
+     240    526336 |    0.2455    0.9565    1.9264    3.1371 |    0.0071
+     360    526418 |    0.2423    0.9863    2.7702    5.7549 |    0.0495
+     480    526512 |    0.2399    1.0632    4.6776    8.3405 |    0.1371
+     600    526672 |    0.2316    1.2166    7.5417   14.3931 |    0.2561
+
+PER REGIONE, all'ultimo snapshot (passo 600)
+regione dell'arco     archi |        p1   mediana       p99
+------------------------------------------------------------
+vuoto-vuoto          59641 |    0.2193    1.0808    4.1067
+massa-massa         369701 |    0.2239    1.2419    8.1328
+nato-nato              109 |    0.7583    1.0188    2.4605
+CONFINE vuoto-massa     96282 |    0.2886    1.2287    4.6581
+CONFINE con nato       939 |    0.5891    1.0478    5.6671
+
+IL DISEGNO IMPONE UN CENTRO? -- correlazione fra `L/d` e la distanza dal CENTRO
+del disegno (baricentro delle posizioni), sul PUNTO MEDIO di ogni arco.
+   passo     archi |  r Pearson  soglia 3s | giudizio
+------------------------------------------------------------------------------
+     120    526282 |   -0.08764    0.00414 | DIPENDE DAL CENTRO
+     240    526336 |   +0.00520    0.00414 | DIPENDE DAL CENTRO
+     360    526418 |   +0.08519    0.00413 | DIPENDE DAL CENTRO
+     480    526512 |   +0.15552    0.00413 | DIPENDE DAL CENTRO
+     600    526672 |   +0.18098    0.00413 | DIPENDE DAL CENTRO
+
+==============================================================================
+ESITO CONTRO LE LETTURE FISSATE PRIMA
+==============================================================================
+  mediana di `L_disegno/d` all'ultimo snapshot: 1.2166
+  -> LONTANO da 1 (oltre il 10 per cento): il disegno NON e' una buona approssimazione della distanza vera
+  dipendenza dal centro: 5 snapshot su 5 dicono DIPENDE
+
+*** LA GRAVITA' DI OGGI E' IN BUONA PARTE UN EFFETTO DEL DISEGNO. ***
+
+LIMITI: UN seme, UNA scena, 5 snapshot. E il rapporto `L/d` dice quanto le due distanze
+  differiscono, NON quanto quella differenza sposti la fisica: per quello serve la prova di
+  spegnimento (`G3`).
