@@ -419,7 +419,7 @@ per sbaglio da un comando.
 | costante | default | cosa fa | byte-inerte al default? |
 |---|:-:|---|---|
 | `GRAV_BIFASE` | `True` | la legge gravitazionale bifase: il sito `S09_spinta_med` che scrive `d0` | — (e' il comportamento storico) |
-| `MEM_MOTO` | `True` | **la scrittura della memoria del moto su `d0`**, cioe' il sito `S08_proj`. Spenta, `proj` resta calcolato *(il ramo della gravita' ne usa `len(proj)`)*, `mem_mot` resta aggiornato e il pavimento `P3` continua a girare: si toglie **solo** il contributo a `d0` | **si', sigillato** |
+| `MEM_MOTO` | `True` | **la scrittura della memoria del moto su `d0`**, cioe' il sito `S08_proj`. Spenta, `proj` resta calcolato *(il ramo della gravita' ne usa `len(proj)`)*, `mem_mot` resta aggiornato e il pavimento `P3` continua a girare: si toglie **solo** il contributo a `d0` | **si', MISURATO**: `206` campi identici e `0` diversi contro `_val600`, prodotto dal blob PRIMA del flag *(sigillo `T7`)* |
 | `TRACCIA_D0` | `False` | i diciannove punti di traccia degli scrittori di `d0` | si' |
 
 **⚠ `MEM_HEBB = False` NON e' il modo di spegnere la memoria del moto:** spegne l'**intera**

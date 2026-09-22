@@ -1,0 +1,76 @@
+[TIMBRO] _sigillo_mem_moto.py  sha1-BYTE 940afcc7  committato e pulito
+# SIGILLO -- `MEM_MOTO`: BYTE-INERTE acceso, CHIRURGICO spento
+# scritto sui CINQUE PATTERN STANDARD di `doc/PATTERN_DI_PROVA.md`.
+# 3 passi per braccio, un PROCESSO per braccio.
+#
+COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di sigillare
+----------------------------------------------------------------------------------------------------
+K1 spegnimento CHIRURGICO (solo `S08_proj` sparisce) -> nessun colpevole -> OK
+K2 IL CASO CHE DEVE FALLIRE: tocca ANCHE `S09_spinta_med` -> OK: il criterio lo VEDE  (colpevoli [('S09_spinta_med', 3, 0)])
+K3 FIRMA: due array identici -> stessa firma -> OK
+K4 IL CASO CHE `max|delta|` SBAGLIEREBBE: `+0.0` contro `-0.0`, max|delta| = 0.0e+00
+     le firme sono DIVERSE -> OK: la firma e' piu' stretta
+K5 CONCATENA identici (lunghezze + coda + intero) -> OK
+K6 IL CASO CHE DEVE FALLIRE: stesse lunghezze, CODA diversa -> OK
+K7 IL CASO CHE DEVE FALLIRE: stessa coda, cambia la parte CONSERVATA -> OK
+K8 due ASSENZE non sono un'identita' -> OK
+----------------------------------------------------------------------------------------------------
+  -> i criteri PASSANO: si sigilla
+
+blob simulatore ORA (sha1 byte grezzi) ab685eac
+riferimento `_val600`, prodotto dal blob PRIMA del flag: 9557a867
+
+I BRACCI, ciascuno in un processo suo:
+  ON       MEM_MOTO=True  MEM_HEBB=True   n=2480   archi=526084  siti=12
+  ON-bis   MEM_MOTO=True  MEM_HEBB=True   n=2480   archi=526084  siti=12
+  OFF      MEM_MOTO=False MEM_HEBB=True   n=2480   archi=526084  siti=11
+  HEBB     MEM_MOTO=True  MEM_HEBB=False  n=2510   archi=526120  siti=5
+  (39.5 s)
+
+====================================================================================================
+I CRITERI
+====================================================================================================
+T0    PASS RIPRODUCIBILITA': due bracci ON separati -> invocazioni diverse=0, firme diverse=0, n 2480==2480
+T1    PASS LO SPEGNIMENTO SPEGNE: S08_proj ON=3 -> OFF=0
+T2    PASS SPEGNE SOLO QUELLO: siti diversi da `S08_proj` con invocazioni diverse = 0 
+T3    PASS BYTE-IDENTITA' A MONTE al passo 1: confrontati=5, DIVERSI=0 
+      S01_archi_nuovi      non invocato al passo 1
+      S02_rilass_visco     sha1 d49dcd13b466  somma +0.000000e+00  IDENTICO
+      S03_diff_guscio      sha1 89732fd415a2  somma -7.839273e+02  IDENTICO
+      S04_rilass_TAU_P     non invocato al passo 1
+      P1_dopo_rilass       sha1 d49dcd13b466  somma +0.000000e+00  IDENTICO
+      S05_spinta_locale    non invocato al passo 1
+      P2_dopo_spinta       non invocato al passo 1
+      S06_mitosi           CONCATENA ON 525973->526019 OFF 525973->526019  coda 9459ff102ff5/9459ff102ff5  IDENTICO
+      S07_schwinger        CONCATENA ON 526019->526047 OFF 526019->526047  coda 9f9aec9bfbd9/9f9aec9bfbd9  IDENTICO
+T4    PASS `mem_mot` RESTA AGGIORNATO anche a flag spento: ON sha1 5a90926566f6 vs OFF 5a90926566f6 -> IDENTICO
+      -> e' VOLUTO: il flag toglie la SCRITTURA SU `d0`, non la grandezza di stato.
+T5    PASS GATE UNICO (AST): ramificazioni che dipendono da MEM_MOTO = 1, righe [5670]
+      assegnamenti: [895] ; occorrenze del NOME: [895, 5670]
+T6    PASS IL CASO CHE DEVE FALLIRE -- `MEM_HEBB=False`: siti toccati OLTRE `S08_proj` = 6
+      P3_dopo_proj         ON=3    HEBB=0   
+      P4_dopo_grav         ON=3    HEBB=0   
+      P6_dopo_coesione     ON=3    HEBB=0   
+      P7_dopo_4917         ON=3    HEBB=0   
+      S09_spinta_med       ON=3    HEBB=0   
+      S12_coesione         ON=3    HEBB=0   
+
+----------------------------------------------------------------------------------------------------
+T7 -- LA BYTE-INERZIA A FLAG ACCESO (120 passi attraverso il DRIVER)
+  confronto SNAPSHOT contro SNAPSHOT col riferimento `_val600/scena_000120.pkl.gz`,
+  prodotto dal blob `9557a867`, cioe' PRIMA che questo flag esistesse.
+----------------------------------------------------------------------------------------------------
+  (355.3 s)
+  campi UGUALI 206   DIVERSI 0   non confrontati 0
+T7    PASS BYTE-INERTE a flag ACCESO: 206 campi identici, 0 diversi
+
+====================================================================================================
+ESITO: 8/8
+====================================================================================================
+*** SIGILLO PASSATO. `MEM_MOTO` e' BYTE-INERTE acceso e CHIRURGICO spento.
+    La prova di spegnimento `G4` puo' partire. ***
+
+LIMITI: 3 passi per braccio per `T1`-`T6`, UN seme, UNA scena. Cio' che li rende
+  conclusivi non e' il numero di passi ma `T5` (strutturale) e `T7` (120 passi contro il
+  riferimento vero).
+

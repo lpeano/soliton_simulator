@@ -11433,3 +11433,50 @@ lo stesso**, perche' collaudano i **criteri** e non l'**impianto** che li alimen
 `UnboundLocalError` ha ucciso un run di **400 s al passo 1**, con **dodici collaudi tutti `OK`**.
 **Si verifica cosi':** lo strumento accetta un modo ridotto *(`--passi=2`)* **ed e' stato
 eseguito** prima del giro vero. **Resta IN PROVA finche' Luca non dice si'.**
+
+### ㉒ **`MEM_MOTO` sigillato `8/8`: byte-inerte acceso, chirurgico spento**
+
+> `csv/_seal_fork/_sigillo_mem_moto.py` blob `940afcc7`, simulatore `ab685eac`, seme `42`.
+> **Scritto sui cinque pattern standard.** Referto: `csv/_seal_fork/_sig_mem_moto/REFERTO.txt`.
+
+| | esito |
+|---|---|
+| **`T0`** riproducibilita' | **PASS** — due bracci `ON` separati: `0` invocazioni diverse, `0` firme diverse |
+| **`T1`** lo spegnimento spegne | **PASS** — `S08_proj` `ON=3` → `OFF=0` |
+| **`T2`** spegne SOLO quello | **PASS** — siti diversi da `S08_proj` con invocazioni diverse: **`0`** |
+| **`T3`** byte-identita' a monte | **PASS** — `5` siti confrontati, **`0`** diversi |
+| **`T4`** `mem_mot` resta aggiornato | **PASS** — sha1 `5a90926566f6` **identico** fra `ON` e `OFF` |
+| **`T5`** gate unico (AST) | **PASS** — **una sola** ramificazione, riga `5670`; il nome compare in **due** punti soli (`895`, `5670`) |
+| **`T6`** il caso che DEVE fallire | **PASS** — `MEM_HEBB=False` tocca **sei** siti oltre `S08_proj` |
+| **`T7`** **BYTE-INERZIA a flag acceso** | **PASS** — **`206` campi identici, `0` diversi** contro `_val600`, prodotto dal blob **prima** del flag |
+
+**`T7` e' il criterio che vale di piu'**, e non era in `G3`: dimostra che **a `MEM_MOTO = True` il
+codice nuovo produce lo stesso run, bit per bit, di quello che c'era prima che il flag esistesse**.
+Costa `355 s` ed e' la ragione per cui **tutti i numeri di `G1`, `G2` e `G3`** — presi sul
+blob `9557a867` — **restano validi sul blob `ab685eac`**.
+
+**`T4` e' l'unico criterio che si aspetta UGUAGLIANZA dove un lettore distratto vedrebbe una
+contraddizione:** `mem_mot` **deve** restare identico, perche' **il flag toglie la SCRITTURA su
+`d0`, non la grandezza di stato**. Se cambiasse, il flag starebbe facendo altro.
+
+### ⚠ UNA DIVERGENZA DAL MANDATO, DICHIARATA (rilievo di Luca)
+
+**Il mandato del DISEGNO (§4) chiedeva di spegnere l'INTERO blocco di `mem_mot`** —
+l'aggiornamento del momento, la proiezione `S08` su `d0`, **e lo spostamento di fase a `:6016`**.
+**Io ho recintato SOLO la scrittura su `d0`.**
+
+**Cosa resta VIVO a flag spento, e va saputo leggendo i numeri di `G4`:**
+- `mem_mot` **continua ad aggiornarsi** *(`T4` lo misura)*;
+- **la proiezione trasversale di `:6016` continua a leggerla** — `proiezione_trasversale =
+  sum(mem_mot[ii] * dir_laterale)` — quindi **l'effetto INDIRETTO della memoria del moto sulla
+  fase non e' spento**;
+- `proj` resta calcolato *(serve a `len(proj)` nel ramo della gravita')* e il pavimento `P3`
+  continua a girare.
+
+**Perche' l'ho fatto cosi':** e' la forma **piu' pulita per la domanda di `G4`** — isola
+**il contributo a `d0`**, che e' la grandezza in esame, e rende il sigillo **chirurgico e
+dimostrabile** *(`T2`, `T3`, `T5`)*. **Ma e' una domanda piu' STRETTA di quella del mandato, e
+chiamarla «spegnere la memoria del moto» sarebbe impreciso.**
+
+> **DECISIONE DI LUCA, gia' in CODA come `G4-bis`: se `d0` cresce lo stesso, PRIMA del CHECKPOINT
+> si aggiunge un SECONDO BRACCIO che spegne TUTTO IL BLOCCO**, per escludere l'effetto indiretto.
