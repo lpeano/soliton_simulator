@@ -1,0 +1,72 @@
+# G4 -- IL BILANCIO DI `d0`, con MEM_MOTO=False
+# blob simulatore (sha1 byte grezzi)=ab685eac  seme=42  passi=600
+# CRITERIO, scritto PRIMA: Delta(somma d0) = scritture + freno + nati - morti,
+#   entro 1e-9 RELATIVO alla scala dei termini.
+
+IL BILANCIO CHIUDE? residuo relativo: max 1.170e-13, mediano 1.380e-14 su 600 passi
+  -> CHIUDE
+
+I TOTALI SU 600 PASSI:
+  Delta(somma d0)  +6.503684e+05
+  scritture        -7.698895e+05   (-118.38 % del Delta)
+  FRENO            +1.419938e+06   (218.33 %)
+  NASCITE-MORTI    +3.197154e+02   (  0.05 %)   <- misurato AL SITO che concatena
+
+  (descrittivi, a granularita' di PASSO e non del sito -- NON entrano nel
+   bilancio: un arco nato e poi scritto mostrerebbe il valore di fine passo)
+  nascite (fine passo)  +1.039364e+03
+  morti (inizio passo)  +7.143826e+02
+
+  LA GUARDIA DEL SALTO fra la fine di un passo e l'inizio del successivo:
+  somma dei salti  +0.000000e+00  -> nessuna scrittura fuori dal ciclo
+
+CHI FA CRESCERE `d0`: il termine col contributo POSITIVO maggiore.
+  freno              +1.419938e+06
+  nascite-morti      +3.197154e+02
+  scritture          -7.698895e+05
+  -> IL PRIMO E' `freno`
+
+NASCITE e MORTI, e la MEDIANA che conta:
+ passo   n nati  n morti |     med nati    med morti     med vivi
+    40        6        2 |     1.190212     1.717778     1.122947
+    80        0        0 |          nan          nan     1.248329
+   120        4        1 |     0.906227     1.391340     1.253432
+   160        0        0 |          nan          nan     1.294804
+   200        0        0 |          nan          nan     1.402290
+   240        0        0 |          nan          nan     1.456581
+   280        0        0 |          nan          nan     1.516698
+   320        0        0 |          nan          nan     1.638763
+   360        2        1 |     0.807703     0.903444     1.708249
+   400        6        2 |     1.107035     2.274740     1.805255
+   440        0        0 |          nan          nan     1.900150
+   480        2        1 |     1.020126     2.558547     1.980407
+   520        0        0 |          nan          nan     2.066335
+   560        0        0 |          nan          nan     2.152260
+   600        2        1 |     0.800000     0.964112     2.255872
+
+  -> se `med nati` > `med vivi` e `med morti` < `med vivi`, la mediana sale
+     SENZA CHE NESSUN ARCO CRESCA: e' NUCLEAZIONE, non stiramento.
+
+GLI SCRITTORI (la traccia di `Z102`):
+scrittore                    SALITE        DISCESE          SALDO |   giri  salta
+P1_dopo_rilass         0.000000e+00   0.000000e+00   0.000000e+00 |    600      0
+P2_dopo_spinta         0.000000e+00   0.000000e+00   0.000000e+00 |    596      0
+P3_dopo_proj           0.000000e+00   0.000000e+00   0.000000e+00 |    600      0
+P4_dopo_grav           0.000000e+00   0.000000e+00   0.000000e+00 |    600      0
+P6_dopo_coesione       0.000000e+00   0.000000e+00   0.000000e+00 |    600      0
+P7_dopo_4917           0.000000e+00   0.000000e+00   0.000000e+00 |    600      0
+S01_archi_nuovi                 n/d            n/d            n/d |      4      4
+S02_rilass_visco       1.484665e+05  -3.285281e+05  -1.800616e+05 |    600      0
+S03_diff_guscio        8.745226e+05  -1.098160e+06  -2.236377e+05 |    600      0
+S05_spinta_locale      2.277023e+00   0.000000e+00   2.277023e+00 |    596      0
+S06_mitosi                      n/d            n/d            n/d |    207    207
+S07_schwinger                   n/d            n/d            n/d |     90     90
+S09_spinta_med         2.542374e+06  -2.802151e+06  -2.597763e+05 |    600      0
+S12_coesione           6.419984e+04  -1.706160e+05  -1.064162e+05 |    600      0
+
+IL FRENO, per chiamante di `_smorza`:
+  d0_passo       aggiunge +1.419938e+06 su dx -7.698872e+05 in 600 giri   <- NEL BILANCIO
+  d_passo        aggiunge +2.826812e+05 su dx +1.378272e+05 in 600 giri   (dentro un sito tracciato)
+
+⚠ `_smp_chiudi()` RISCRIVE `d0` a fine passo SENZA nessun `_traccia_d0`
+  attorno (`:3677`): e' la scrittura che in `Z107` mancava al bilancio.

@@ -1,0 +1,48 @@
+# LE LETTURE DELLA VALIDAZIONE -- criteri ASSOLUTI, fissati PRIMA
+# cartella: csv\_test_fork\_g4_senza_memmoto
+# snapshot trovati: 5
+#
+# ⚠ NESSUN CONFRONTO CON LE EPOCHE PRECEDENTI: le cure hanno cambiato la fisica.
+#   Questi numeri sono di un sistema NUOVO e si leggono contro criteri ASSOLUTI.
+
+I CRITERI, come erano scritti PRIMA di vedere i numeri:
+  1. nessun picco di `nsub`       il massimo di `nsub` resta vicino al pavimento 4
+     (origine: il pavimento e' nel codice (`max(4, n1, n2, n3)`), non scelto qui)
+  2. `peq >= 0` sempre            il minimo di `peq` su tutti gli snapshot e' >= 0
+     (origine: una PRESSIONE non e' negativa -- dominio fisico, `A11` corollario 1)
+  3. nessun arco sotto `LAM`      il minimo di `d` e di `d0` e' >= LAM
+     (origine: `LAM` e' la scala del sistema, non un numero scelto)
+  4. `d0` NON scappa              la mediana di `d0` non cresce in modo esponenziale
+     (origine: si legge il RAPPORTO fra snapshot consecutivi; costante = esponenziale)
+  5. `d/d0` vicino a 1            la trasparenza: si riporta DOVE STA, IN ENTRAMBI I VERSI
+     (origine: `d/d0 = 1` e' l'assenza di tensione E di compressione)
+  6. stress finito                `|d-d0|/d0` non diverge
+     (origine: finitezza)
+  7. invarianti mai scattati      zero violazioni di dominio in tutto il run
+     (origine: gli invarianti fermerebbero il run; zero = nessuna violazione)
+  8. il tetto di `COES_CAUSALE`   quanto spesso il termine tocca il cono locale
+     (chiesto da Luca: oggi il MASSIMO vale 92.7 %, e un massimo non dice QUANTO SPESSO)
+
+   passo       n     archi |      min d      med d     min d0 |     med d0   med d/d0 |   min peq
+------------------------------------------------------------------------------------------------
+     120    2670    526318 |     0.8000     1.0358     0.8000 |     1.2534     0.8750 | 1.402e-07
+     240    2703    526357 |     0.8000     1.2857     0.8000 |     1.4566     0.9505 | 9.142e-06
+     360    2737    526398 |     0.8000     1.3895     0.8000 |     1.7082     0.9739 | 2.497e-05
+     480    2799    526476 |     0.8000     1.5106     0.8000 |     1.9804     0.9449 | 1.448e-05
+     600    2914    526619 |     0.8000     1.6382     0.8000 |     2.2559     0.8546 | 1.456e-04
+
+================================================================================================
+ESITO CONTRO I CRITERI -- REGGE / NON REGGE
+================================================================================================
+nessun picco di `nsub`       REGGE      `nsub` massimo osservato = 4 (pavimento 4)
+`peq >= 0` sempre            REGGE      min(peq) su tutti gli snapshot = 1.4015e-07
+nessun arco sotto `LAM`      REGGE      archi sotto LAM: 0; min(d) = 0.800000 contro LAM = 0.8000
+`d0` NON scappa              NON REGGE  rapporto MEDIANO di `med d0` fra snapshot consecutivi = 1.1607 (costante > 1 = ESPONENZIALE); da 1.2534 a 2.2559
+`d/d0` vicino a 1            REGGE      med `d/d0` da 0.8750 a 0.8546; minimo 0.8546, massimo 0.9739 -- SOTTO 1 = COMPRESSIONE, SOPRA 1 = TENSIONE
+stress finito                REGGE      stress massimo = 2.386
+invarianti mai scattati      REGGE      violazioni di dominio registrate: 0
+il tetto di `COES_CAUSALE`   REGGE      rapporto MASSIMO |delta|/(cs_arco*DT) = 0.2384 -- **e' un MASSIMO, non dice QUANTO SPESSO**: i contatori a bucket non esistono ancora, ed e' LAVORO RESIDUO dichiarato
+
+REGGONO 7 criteri su 8.
+
+*** QUALCOSA NON REGGE: IL RUN LUNGO NON SI LANCIA. ***

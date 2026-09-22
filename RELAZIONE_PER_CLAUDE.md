@@ -11830,3 +11830,60 @@ simmetrico di `D31`** **non si scrivono in codice** finche' le loro schede non s
 anche **la fase C** *(la storia di ogni legge, epoca per epoca, anche per le leggi TOLTE)* e
 **lo script di verifica** *(registro contro codice, traccia di `d0`, domini di `C5`, coda dei
 difetti)*. **Erano due pezzi che il mio elenco aveva perso.**
+
+### ㉞ **`G4` spegnimento: la memoria del moto NON e' il motore, ma LA COMPRESSIONE ERA SUA**
+
+> `MEM_MOTO = False`, **600 passi**, finito alle **14:39:27**. **Il bilancio chiude a
+> `1.170e-13`.** Stesso strumento, stesso blob, stesso seme del braccio acceso: **l'unica
+> differenza e' il flag**.
+
+| | ACCESO | SPENTO | |
+|---|--:|--:|---|
+| `Δ(somma d0)` | `+1.731e+06` | **`+6.504e+05`** | **la crescita cala del `62 %`** |
+| rapporto mediano di `med d0` | `1.2320` | **`1.1607`** | cresce ancora, **e' ancora esponenziale** |
+| `med d0` finale | `3.3180` | **`2.2559`** | `-32 %` |
+| **`med d/d0` finale** | `0.7489` | **`0.8546`** | **da `NON REGGE` a `REGGE`** |
+| `d/d0` minimo | `0.6922` | **`0.8546`** | |
+| **stress** massimo | `7.866` | **`2.386`** | `-70 %` |
+| **criteri** | `6/8` | **`7/8`** | **il migliore mai misurato** |
+| **FRENO** | `+117.41 %` | **`+218.33 %`** | **il motore, e la sua quota CRESCE** |
+| scritture | `-17.43 %` | **`-118.38 %`** | tirano giu' ancora di piu' |
+
+**E GLI SCRITTORI NON RESTANO FERMI: SI RIORGANIZZANO.** Non e' solo `S08_proj` che sparisce
+*(valeva `+7.151e+05`, il maggior scrittore positivo)*:
+
+| scrittore | ACCESO | SPENTO | |
+|---|--:|--:|---|
+| `S08_proj` | `+7.151e+05` | **assente** | spento correttamente |
+| `S03_diff_guscio` | `+1.119e+05` | **`-2.236e+05`** | **CAMBIA SEGNO** |
+| `S02_rilass_visco` | `-8.361e+05` | **`-1.801e+05`** | perde il `78 %` |
+| `S09_spinta_med` | `-1.901e+05` | **`-2.598e+05`** | tira giu' di piu' |
+| freno su `d` *(fuori bilancio)* | `+5.946e+05` | **`+2.827e+05`** | cala di meta' |
+
+> **Spegnere `S08_proj` non toglie solo il suo `+7.15e+05`: cambia cosa fanno gli altri.**
+> **La differenza di `Δ` e' `1.081e+06`, e `S08` ne spiega direttamente solo i due terzi.**
+> **Il resto e' propagazione** — quindi **«quanto pesa la memoria del moto» non e' il suo
+> saldo, e' questo `62 %`.**
+
+**LE LETTURE ERANO FISSATE PRIMA, e rispondono cosi':**
+- *«`d0` smette di crescere → la memoria del moto era il motore»*: **NO.** Cresce
+  ancora, `1.1607`, **costante `> 1` = esponenziale**.
+- *«Cresce lo stesso → il motore e' altrove, e il bilancio dice dove: **il freno
+  domina**»*: **SI'.** `+218.33 %`, e la quota **cresce** perche' il `Δ` si e'
+  rimpicciolito **e il freno no**.
+
+**✅ `S03` e' DECISO: la memoria del moto NON e' il motore.** **Ma non e' nemmeno
+irrilevante: spegnerla toglie il `62 %` della crescita.** **Sono due cose diverse e vanno dette
+insieme** — dire solo la prima la farebbe sembrare innocua, dire solo la seconda la farebbe
+sembrare la causa.
+
+> **⚠ E LA SCOPERTA CHE NON ERA FRA LE LETTURE: LA COMPRESSIONE ERA SUA.**
+> `d/d0` passa da **`0.7489`** a **`0.8546`**, e il criterio da **`NON REGGE`** a **`REGGE`**.
+> **In `G3`, spegnendo la GRAVITA', `d/d0` PEGGIORAVA** (`0.6258`). **Le due leggi spingono in
+> direzioni opposte sulla compressione**, e questo non era previsto da nessuna lettura.
+
+**⚠ E `G4-bis` E' ATTIVATO.** La condizione era *«se `d0` cresce lo stesso»*, e
+**cresce**. Il secondo braccio — spegnere l'**intero** blocco di `mem_mot`, **spostamento di
+fase compreso** — **va fatto prima del `CHK3`**, perche' `MEM_MOTO` lascia vivo l'effetto
+**indiretto**: la proiezione trasversale di `:6016` continua a leggere `mem_mot`.
+**LIMITI: UN seme, UNA scena, 600 passi.**
