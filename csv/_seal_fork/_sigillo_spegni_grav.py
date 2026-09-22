@@ -22,6 +22,13 @@ COSA DEVE DIMOSTRARE, e sono tre cose diverse che NON si sostituiscono:
      invocazioni, e cio' che sta A MONTE resta BYTE-IDENTICO);
   3. che **la memoria del moto non e' toccata** (`mem_mot` identico bit per bit).
 
+⚠ I SITI CHE CONCATENANO NON SI CONFRONTANO SOLO PER LUNGHEZZA (rilievo di Luca, 2026-09-22):
+  due bracci possono allungare `d0` DELLA STESSA QUANTITA' con VALORI DIVERSI, e un criterio che
+  guarda solo i conti li darebbe per identici. Si confrontano anche la **CODA NUOVA** (i valori
+  oltre la vecchia lunghezza) e l'**INTERO `d0`** dopo la scrittura -- quest'ultimo perche' `S06`
+  fa `concatenate([d0[keep], d0new])`, cioe' TOGLIE archi e poi appende: **la parte conservata
+  NON e' un prefisso di `prima`**, e un cambiamento LI' non si vedrebbe guardando solo la coda.
+
 ⚠ IL CONFRONTO SI FA SU FIRME (`sha1` dei byte), NON SU `max|delta|`, ed e' un criterio PIU'
   FORTE: `max|delta| = 0` sopravvive a due `NaN` nello stesso posto e a `+0.0` contro `-0.0`,
   l'identita' dei byte no. Quando una firma differisce si stampano **cinque scalari** (somma,
@@ -136,8 +143,23 @@ def identiche(fa, fb):
         return False
     ca, cb = fa.get("concatena"), fb.get("concatena")
     if ca or cb:
-        return (bool(ca) and bool(cb)
-                and fa.get("da") == fb.get("da") and fa.get("a") == fb.get("a"))
+        if not (ca and cb):
+            return False
+        # ⚠ LE LUNGHEZZE DA SOLE NON BASTANO -- rilievo di Luca, 2026-09-22. Due bracci possono
+        #   allungare `d0` DELLA STESSA QUANTITA' con VALORI DIVERSI, e il criterio li avrebbe
+        #   dati per identici. Si confrontano anche:
+        #     `coda`  -- la firma dei valori OLTRE la vecchia lunghezza, cioe' la coda nuova;
+        #     `tutto` -- la firma dell'INTERO `d0` dopo la scrittura.
+        #   Servono ENTRAMBE: `coda` e' cio' che Luca ha nominato, ma `S06` fa
+        #   `d0 = concatenate([d0[keep], d0new])`, cioe' TOGLIE archi e poi appende -- la parte
+        #   conservata NON e' un prefisso di `prima`. `tutto` copre anche un cambiamento LI'.
+        #   ⚠ se `d0` si ACCORCIA la coda non esiste in NESSUNO dei due, e li' l'assenza e'
+        #     determinata dalla coppia di lunghezze, che e' gia' confrontata: due `None` valgono
+        #     come uguali SOLO in questo caso, e solo perche' `da`/`a` coincidono gia'.
+        _ka, _kb = fa.get("coda"), fb.get("coda")
+        coda_ok = (_ka is None and _kb is None) or identiche(_ka, _kb)
+        return (fa.get("da") == fb.get("da") and fa.get("a") == fb.get("a")
+                and coda_ok and identiche(fa.get("tutto"), fb.get("tutto")))
     return fa["sha1"] == fb["sha1"] and fa["forma"] == fb["forma"]
 
 
@@ -234,9 +256,19 @@ def collaudo(W):
       % ("OK" if ok6 else "*** LO ZERO SAREBBE AMBIGUO ***"))
     e.append(ok6)
 
-    cc1 = {"concatena": True, "da": 100, "a": 104}
-    cc2 = {"concatena": True, "da": 100, "a": 104}
-    cc3 = {"concatena": True, "da": 100, "a": 106}
+    def _cc(da, a, coda, tutto):
+        return {"concatena": True, "da": da, "a": a,
+                "coda": firma(np.asarray(coda, dtype=float)),
+                "tutto": firma(np.asarray(tutto, dtype=float))}
+
+    cc1 = _cc(100, 104, [1.0, 2.0, 3.0, 4.0], np.arange(104, dtype=float))
+    cc2 = _cc(100, 104, [1.0, 2.0, 3.0, 4.0], np.arange(104, dtype=float))
+    cc3 = _cc(100, 106, [1.0, 2.0, 3.0, 4.0, 5.0, 6.0], np.arange(106, dtype=float))
+    # IL CASO DI LUCA: STESSE LUNGHEZZE, CONTENUTO DELLA CODA DIVERSO.
+    cc4 = _cc(100, 104, [1.0, 2.0, 3.0, 9.0], np.arange(104, dtype=float))
+    # e il suo gemello: coda uguale, ma cambia qualcosa NELLA PARTE CONSERVATA.
+    _t5 = np.arange(104, dtype=float); _t5[7] = -1.0
+    cc5 = _cc(100, 104, [1.0, 2.0, 3.0, 4.0], _t5)
     ok8 = identiche(cc1, cc2)
     ok9 = (not identiche(cc1, cc3))
     ok10 = (not identiche(cc1, firma(np.ones(4))))
@@ -246,7 +278,14 @@ def collaudo(W):
       % ("OK" if ok9 else "*** non vedrebbe una mitosi diversa ***"))
     W("K10 un CONCATENA contro una FIRMA -> NON identici -> %s\n"
       % ("OK" if ok10 else "*** un sito che cambia NATURA passerebbe per uguale ***"))
-    e += [ok8, ok9, ok10]
+    ok11 = (not identiche(cc1, cc4))
+    ok12 = (not identiche(cc1, cc5))
+    W("K11 IL CASO DI LUCA: STESSE LUNGHEZZE (100->104), CODA DIVERSA -> NON identici -> %s\n"
+      % ("OK" if ok11 else
+         "*** due code DIVERSE passerebbero per uguali: il criterio guarderebbe solo i CONTI ***"))
+    W("K12 stesse lunghezze e stessa coda, ma cambia la parte CONSERVATA -> NON identici -> %s\n"
+      % ("OK" if ok12 else "*** un cambiamento dentro `d0[keep]` sfuggirebbe ***"))
+    e += [ok8, ok9, ok10, ok11, ok12]
 
     ok7 = (not identiche(None, None))
     W("K7 due ASSENZE non sono un'identita' -> %s\n"
@@ -286,8 +325,14 @@ def braccio(nome):
         if stato["passo"] == 1 and sito not in primo:
             dopo = np.asarray(self.d0, dtype=float)
             pri = np.asarray(prima, dtype=float)
-            primo[sito] = (firma(dopo - pri) if len(pri) == len(dopo)
-                           else {"concatena": True, "da": len(pri), "a": len(dopo)})
+            if len(pri) == len(dopo):
+                primo[sito] = firma(dopo - pri)
+            else:
+                # ⚠ il delta elemento-per-elemento non esiste, ma il CONTENUTO va confrontato
+                #   lo stesso: lunghezze uguali con valori diversi devono risultare DIVERSE.
+                primo[sito] = {"concatena": True, "da": len(pri), "a": len(dopo),
+                               "coda": firma(dopo[len(pri):]) if len(dopo) > len(pri) else None,
+                               "tutto": firma(dopo)}
     S.Rete._traccia_d0 = traccia
     S.TRACCIA_D0 = True
 
@@ -416,8 +461,13 @@ def main():
             #   Stamparli come firme faceva SCHIANTARE il referto su `KeyError: 'sha1'` DOPO che
             #   T0..T3 erano gia' passati -- un crash nella STAMPA, non in un criterio.
             fb = OFF["primo"].get(s) or {}
-            W("      %-20s CONCATENA  ON %s->%s   OFF %s->%s   %s\n"
-              % (s, fa.get("da"), fa.get("a"), fb.get("da"), fb.get("a"), ug))
+            _ka = (fa.get("coda") or {}).get("sha1", "-")
+            _kb = (fb.get("coda") or {}).get("sha1", "-")
+            _ta = (fa.get("tutto") or {}).get("sha1", "-")
+            _tb = (fb.get("tutto") or {}).get("sha1", "-")
+            W("      %-20s CONCATENA ON %s->%s OFF %s->%s  coda %s/%s  tutto %s/%s  %s\n"
+              % (s, fa.get("da"), fa.get("a"), fb.get("da"), fb.get("a"),
+                 _ka, _kb, _ta, _tb, ug))
         else:
             W("      %-20s sha1 %s  forma %s  somma %+.6e  %s\n"
               % (s, fa["sha1"], fa["forma"], fa["somma"], ug))
