@@ -12745,3 +12745,56 @@ fasce non si distingue dal rumore interno.*
 `D34`. **La misura si fa DOPO la correzione del ritmo, o si rifà.** *Misurare la foliazione con
 un orologio che si sa difettoso darebbe fasce sbagliate — e sarebbe peggio di nessuna risposta,
 perché sembrerebbe una risposta.*
+
+### ㉸ **Il censimento: `52` punti, `38` gravi — e il numero che decide `B1` è `31`**
+
+> **AST sul blob `3d91338e`, collaudo `5/5`.** Sola lettura.
+
+| tipo | che cos'è | gravi | non gravi |
+|:--:|---|--:|--:|
+| **`OSS`** | grandezza a `4π` dentro funzione a periodo `2π` | **`31`** | `0` |
+| `W4` | avvolgimento su `4π` | `3` | `10` |
+| `A2P` | `+2π` su una fase | `4` | `0` |
+| `W2` | avvolgimento su `2π` | `0` | `4` *(legittimi)* |
+
+> **`31` righe in cui `phi` — che vive su `[0, 4π)` — entra in `exp`, `cos`, `sin` o
+> `angle`.** **In tutte e 31 la doppia copertura è INVISIBILE alla fisica**, perché
+> `exp(i(φ + 2π)) = exp(iφ)`.
+> **Non è un'opinione sul modello: è un conto.** E sono su `calcola_psi`, `step`,
+> `campo_spaziale`, `aggiorna_pesi_concorrenza`, `_passo_spinoriale` — **sul campo e sugli
+> accoppiamenti, non in un angolo.**
+
+**✅ E IL CENSIMENTO RITROVA `D34` DA SOLO:** `ritmo` `:2608` esce **`W4` grave**, partendo
+dall'AST e non dal mandato. *(Un censimento che non ritrovasse il difetto già noto non
+varrebbe niente.)*
+
+**I falsi positivi sono nel referto, non lasciati da scoprire:** `_w4` è segnalato `A2P` **ma
+quella riga è la DEFINIZIONE di un wrap a `4π`** — il `+2π` fa parte della costruzione, e
+il rilevatore non può distinguerli guardando la riga.
+
+**⚠ TUTTI i punti sono di classe `T`, e quindi NON SI LEVIGANO:** il salto da `2π` a `0` è
+un artefatto della **coordinata**, non una discontinuità fisica. **Levigarlo inventerebbe valori
+che non esistono.** La cura è **il periodo giusto**.
+
+### ㉹ **`D35`: l'antiparticella di Schwinger è identica alla particella — e il ramo È ATTIVO**
+
+```
+:5443   anti = (fm[pick] + 2 * np.pi) % (4 * np.pi)
+:5444   nc = len(pick)   # fase opposta (fm+pi)          <- il commento dice +pi
+:3357   F = self._mat(w) @ (amp * np.exp(1j * self.phi))  <- il campo
+```
+**`exp(i(φ + 2π)) = exp(iφ)`. Nel campo l'antiparticella è IDENTICA alla particella.**
+**Commento contro codice: fa fede il codice** *(par.0, come `Z103`)*.
+
+**E NON È CODICE DORMIENTE:** `COPPIA_MIT = 1.0` di default, e `S07_schwinger` scatta
+**`102` · `90` · `172`** volte su 600 passi nei tre bracci di `G4`.
+
+> **⚠ E LA NOTA STORICA ORA HA UNA SPIEGAZIONE CANDIDATA.** Il commento pre-fork dice che
+> l'antifase *«non annichila»* — il «muro dell'1 %». **Se l'antifase è `+2π` e il
+> campo la legge da `exp(iφ)`, allora non annichila PERCHÉ NON È UN'ANTIFASE: è la stessa
+> fase.**
+> **Ma «non annichila» è una misura PRE-FORK** *(par.9-bis)* **e non l'ho rimisurata.**
+> **Quindi va nei SOSPETTI come `S06`, non fra i fatti** — ed è esattamente il test `E2`.
+
+**NON LO CORREGGO:** la correzione dipende da **che cosa è `φ`** *(§`B1`)*, che è una
+decisione di Luca. **Registrato e fermo.**

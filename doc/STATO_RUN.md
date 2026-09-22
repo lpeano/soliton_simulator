@@ -410,6 +410,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **D32** | **`r` e `tau_pp` sono DUE GRANDEZZE DIVERSE COL NOME DI TEMPO PROPRIO: correlazione fra `-0.13` e `+0.29`, segno non concorde** | `Z110`: 20 snapshot, 4 archivi delle cure, strumento blob `20bd4b3e` · **dal sorgente:** `TEMPO_SEGNO = False`, quindi `ritmo()` e' de Broglie normalizzato *(`:2553` non gira)* e `tau_pp` e' torsione *(`:5160`)* · `A10` | **dire QUALE delle due e' il tempo proprio**, nella scheda del registro | `APERTO` |
 | **D33** | **La repulsione alla massima compressione e' AZZERATA proprio dove serve: dal `75 %` al `96 %` degli archi oltre l'inversione riceve `resp` ESATTAMENTE ZERO** | `Z111`: `discesa = clip(1-|tw|/4pi,0,1)` e' zero per `|tw| >= 4pi` *(`:5153`)* mentre il segno si inverte a `~3.5pi`: **finestra larga mezzo `pi`** · contraddice il commento della legge *(`:5153-5156`)* | **da decidere al `CHK3`** *(uno dei tre candidati del freno)* | `APERTO` |
 | **D34** | **Il wrap «a 4π» di `ritmo()` (`:2584-2585`) NON AVVOLGE: su `(-2π, 2π)` e' l'IDENTITA'. Ogni attraversamento del taglio a `±π` registra una frequenza spuria di `~2π/DT`** | `Z117`: dimostrazione algebrica *(`max|w4(a) - a| = 0` su `100 001` punti)* + misura a 120 passi · **attivo nel fork** *(`--campo-spinoriale`)* · rilievo di Luca | **`RITMO_WRAP_2PI`** — flag, sigillo, prova a 600 passi. **Eccezione dichiarata alla regola «nessuna cura prima del `CHK3`»** | `APERTO` |
+| **D35** | **L'antiparticella di Schwinger nasce con `+2π` (`:5443`) e nel campo `F = Σ exp(iφ)` E' IDENTICA alla particella, non opposta. Il commento dice `+π`** | `Z119`: letto dal sorgente · **il ramo E' ATTIVO**, `COPPIA_MIT = 1.0`, e `S07_schwinger` scatta `90`-`172` volte su 600 passi nei tre bracci di `G4` · rilievo di Luca | **DIPENDE DA §`B1`** *(che cosa e' `φ`)*: **non si corregge prima della decisione di Luca** | `APERTO` |
 <!-- DIFETTI-NUOVI-FINE -->
 
 
@@ -478,6 +479,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **S03** | **La memoria del moto fa scappare `d0`** | ✅ **DECISO da `Z109`**: spegnendola `d0` **cresce ancora** *(`1.1607`)*, quindi **NON e' il motore** — ma la crescita **cala del `62 %`** e **la compressione sparisce** | **NON E' IL MOTORE, ma pesa il `62 %`** |
 | **S04** | **La crescita e' NUCLEAZIONE, non stiramento** | ❌ **CADE con `Z108`**: nascite meno morti valgono lo **`0.01 %`** del `Δ` *(`+254.4` su `+1.731e+06`)* | **NON E' IL MOTORE** |
 | **S05** | **La compressione `d/d0 < 1` e' un difetto** e non una fase | `G3` dice che **peggiora** senza gravita' *(`0.7489`→`0.6258`)*: serve una misura che ne trovi la CAUSA | in attesa |
+| **S06** | **Il «muro dell'1 %» dell'antifase e' causato da `D35`**: l'antifase «non annichila» perche' **`+2π` letto da `exp(iφ)` non e' un'antifase, e' la stessa fase** | rimisurare l'annichilazione **dopo** la decisione su `φ` *(e' il test `E2` del §E)* | **in attesa** — «non annichila» e' una misura **PRE-FORK** *(par.9-bis)* e **non l'ho rimisurata** |
 
 
 > **⚠⚠ `CHK3-D`: LA SEZIONE DEL CHECKPOINT SUI DIFETTI NUOVI, E IL SUO COSTO.**

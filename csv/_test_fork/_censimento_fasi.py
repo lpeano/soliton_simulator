@@ -315,6 +315,40 @@ def main():
        "letture di fasi. **Le classi `L` ed `E` appartengono al censimento delle SCALE** "
        "*(`SCALE-TW`: soglia della mitosi, `discesa`, il punto di inversione, `tanh(3·…)`)*, "
        "**che è un lavoro diverso e non si fa qui.**\n")
+    # --- il conto per TIPO, che e' quello che si legge
+    per_tipo = {}
+    for p in punti:
+        k = (p["tipo"], p["grave"])
+        per_tipo[k] = per_tipo.get(k, 0) + 1
+    Wf("\n## IL CONTO PER TIPO\n\n")
+    Wf("| tipo | che cos'è | gravi | non gravi |\n|:--:|---|--:|--:|\n")
+    for tp, desc in (("OSS", "una grandezza a `4π` dentro una funzione a periodo `2π`"),
+                     ("W4", "un avvolgimento su `4π`"),
+                     ("W2", "un avvolgimento su `2π`"),
+                     ("A2P", "un `+2π` su una fase")):
+        Wf("| `%s` | %s | **%d** | %d |\n"
+           % (tp, desc, per_tipo.get((tp, True), 0), per_tipo.get((tp, False), 0)))
+    n_oss = per_tipo.get(("OSS", True), 0)
+    Wf("\n> **⚠ IL NUMERO CHE DECIDE `B1`: `%d` punti in cui `phi` (che vive su `[0, 4π)`) "
+       "entra in una funzione a periodo `2π`.**\n" % n_oss)
+    Wf("> **In tutti e `%d`, la doppia copertura di `phi` E' INVISIBILE alla fisica:** "
+       "`exp(i(phi + 2π)) = exp(i phi)`.\n" % n_oss)
+    Wf("> **Non è un'opinione sul modello: è un conto.** È la domanda §`B1` — *che cos'è "
+       "`phi`?* — e **questa tabella è la sua evidenza.**\n")
+
+    Wf("\n## ⚠ I FALSI POSITIVI, dichiarati invece che lasciati da scoprire\n\n")
+    Wf("- **`_w4` (`:3423`) segnalato `A2P`:** quella riga *è* la **definizione** di un "
+       "avvolgimento su `4π` — `(a + 2π) %% (4π) - 2π` — e il `+2π` fa parte "
+       "della **costruzione del wrap**, non è un'antifase. **Il rilevatore `A2P` non può "
+       "distinguerli guardando la riga**, e chiamarlo difetto sarebbe un errore. "
+       "*(`_w4` resta comunque da classificare: **su che cosa viene applicato** decide se il "
+       "periodo è giusto, e quello si vede dai suoi CHIAMANTI, non da qui.)*\n")
+    Wf("- **`fonte = ?`:** lo strumento **non ha saputo** dire da dove viene il valore avvolto. "
+       "**Si scrive `?`, non si indovina.**\n")
+    Wf("- **`flag = —`** non significa «sempre attivo»: significa **nessun `if <FLAG>` che "
+       "racchiude quella riga**. Il ramo può essere governato più in alto, o da una guardia "
+       "che non è un flag.\n")
+
     Wf("\n## CHE COSA QUESTO STRUMENTO NON FA\n\n")
     Wf("**Non decide.** Ogni punto esce con la sua classe e col flag che lo governa; **la "
        "proposta è un lavoro a parte**, e per i punti non capiti si scrive `DA DECIDERE`.\n")
