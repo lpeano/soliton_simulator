@@ -11687,11 +11687,11 @@ nulla*. **Ci sono cascato mentre credevo di EVITARE una soglia scelta.**
 
 **COSA RESTA VALIDO, e va detto perche' non cade tutto:** **le COMPONENTI**. Si calcolano da `i` e
 `j`, **non dipendono dal criterio di `D25`**, e dicono **UNA sola componente** su tutti e tre gli
-archivi di epoca 3, **12 snapshot su 12**.
+archivi delle cure, **12 snapshot su 12** — *e «epoca 3» e' un'etichetta che NON esiste ancora: il tag `epoca-3` e' in coda, vedi sotto*.
 
 ### ⚠ E LEGGENDO LE MASSE DAL CODICE INVECE DI SUPPORLE, E' USCITO UN DIFETTO NUOVO
 
-**`masse_info` e' VUOTO e `conc_nodi` e' tutto liste vuote** negli snapshot di epoca 3 —
+**`masse_info` e' VUOTO e `conc_nodi` e' tutto liste vuote** negli snapshot degli archivi delle cure —
 **dopo** la cura di `Z53` che doveva farli sopravvivere.
 **LA CAUSA, dal sorgente (`:6209`):**
 
@@ -11729,7 +11729,7 @@ porta.)*
 **⚠ CORREZIONE 2 — L'EPOCA D'ORIGINE, che avrei dovuto scrivere quando ho creato le due
 voci.** **`par.9-bis` dice che ogni numero porta la sua epoca, e io le ho importate senza.**
 
-| | misurato in origine | esito in epoca 3 |
+| | misurato in origine | esito sugli archivi delle cure |
 |---|---|---|
 | **`D27`** *(quattro componenti)* | **EPOCA 1**, blob **`775ceab7`**, i **45 snapshot di `_g6000`** | **NON CONFERMATO**: **UNA sola componente** su `_val600`, `_g3_senza_bifase` e `_g4_riferimento` — **12 snapshot su 12** |
 | **`D25`** *(il tempo che non scorre)* | **EPOCA 1**, blob **`a1ae5090`**, run continuo a **1200 passi** | **DA RIMISURARE**: il primo tentativo aveva un criterio **cieco**, e l'esito **non si legge** |
@@ -11738,3 +11738,25 @@ voci.** **`par.9-bis` dice che ogni numero porta la sua epoca, e io le ho import
 > col fatto che le ho importate da un'epoca diversa senza riverificarle.**
 > **E' esattamente il difetto contro cui `par.9-bis` esiste**, e l'ho fatto lo stesso giorno in
 > cui l'ho citato.
+
+### ㉚ **Tre correzioni: `D27` cade, `D26` non e' curato QUI, e «epoca 3» non esiste**
+
+**① `D27` NON E' UN DIFETTO NEL SISTEMA ATTUALE.** La prova: **UNA SOLA componente**, su gli **archivi delle cure** — `_val600` e `_g3_senza_bifase` *(simulatore blob `9557a867`)*, `_g4_controllo` e `_g4_riferimento` *(blob `ab685eac`)*,
+**12 snapshot su 12**. In origine `Z65` ne aveva misurate **quattro**, ma **su un altro sistema**:
+blob **`775ceab7`**, i **45 snapshot di `_g6000`**. **La voce non si cancella:** resta col numero
+d'origine e col fatto che **l'ho importata senza riverificarla**.
+**E la precondizione delle PROVE 1 e 2 e' ora scritta nel documento dell'ipotesi**: «distanza
+sul grafo» ha senso **solo se gli estremi sono connessi**, e **oggi lo sono** — ma
+**non lo erano su `_g6000`**, quindi **va riverificata sulla scena su cui la prova girera'**.
+
+**② `D26` NON E' CURATO PER QUESTA SCENA.** Da `CURATO` a **`CURA INEFFICACE PER LA SCENA
+N-MASSE`**: la cura di `Z53` *(sigillo `9/9`)* **preserva una registrazione che qui non avviene
+mai**, perche' `_massa` chiama `semina` **senza `mass_id`** (`:6209`). **→ `D30`.**
+**La cura in se' resta valida: e' il percorso di questa scena a non arrivarci.**
+
+**③ «EPOCA 3» NON ESISTE, e l'ho usata come se fosse un fatto.** **Il tag
+`epoca-3` e' ancora in coda** *(voce `E3`)*. Cio' che intendevo, e che d'ora in poi si scrive per
+esteso, e' gli **archivi delle cure** — `_val600` e `_g3_senza_bifase` *(simulatore blob `9557a867`)*, `_g4_controllo` e `_g4_riferimento` *(blob `ab685eac`)*.
+> **Sono DUE blob diversi**, e si confrontano **solo** perche' il secondo e' **byte-inerte**
+> rispetto al primo a `MEM_MOTO` acceso — `206` campi identici, sigillo `T7`.
+> **Senza quel sigillo sarebbero due sistemi, e nessun numero passerebbe dall'uno all'altro.**

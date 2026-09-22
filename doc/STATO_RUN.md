@@ -373,6 +373,15 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **REG-B** | **FASE B: le SCHEDE, a lotti** — prima le componenti dentro le misure in corso | MANDATO-REGISTRO §2 | ⏸ **mentre i run girano.** `27` grandezze da coprire, **nessuna esclusa** |
 | **REG-C** | **FASE C: LA STORIA** di ogni legge, e le schede delle leggi TOLTE | MANDATO-REGISTRO §2 | ⏸ cio' che non si ricostruisce si scrive **NON RICOSTRUITO** |
 | **REG-V** | **`_verifica_registro.py`**: completezza, esistenza, coerenza con la traccia di `d0` e col registro dei domini di `C5` | MANDATO-REGISTRO §3 | ⏸ col collaudo `P1-sexies`, **compreso un registro volutamente sbagliato che DEVE fallire** |
+> **⚠ SULL'ETICHETTA «EPOCA 3», e va detta prima di usarla ancora.**
+> **IL TAG `epoca-3` NON ESISTE.** E' un lavoro ancora in coda *(voce `E3`)*, e finche' non c'e'
+> **«archivi di epoca 3» non identifica niente**: e' un'etichetta che ho usato come se
+> fosse un fatto.
+> **CIO' CHE INTENDEVO, e che d'ora in poi si scrive per esteso:** gli **archivi delle cure** — `_val600` e `_g3_senza_bifase` *(simulatore blob `9557a867`)*, `_g4_controllo` e `_g4_riferimento` *(blob `ab685eac`)*.
+> **Sono DUE blob diversi**, e il secondo e' byte-inerte rispetto al primo a `MEM_MOTO` acceso
+> *(sigillo `T7`, `206` campi identici)* — **ed e' per questo che i numeri dei due si
+> confrontano.** Senza quel sigillo, sarebbero due sistemi.
+
 <!-- DIFETTI-NUOVI-INIZIO -->
 | **D20** | La correzione (1) su `inerzia` NON e' stata cablata, e **il gate che la autorizzava aveva misurato UN'ALTRA GRANDEZZA** | `Z1` | — | `APERTO` |
 | **D21** | `_floor_d0` e' SOSPESA, e **i due rami violano assiomi DIVERSI**: la scelta non e' stata fatta | `Z4` | — | `APERTO` |
@@ -380,8 +389,8 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **D23** | **La cucitura dello snapshot FALLISCE su entrambi i fronti**, e si DIMOSTRA perche'. **NON CABLATA** | `Z37` | — | `APERTO` |
 | **D24** | **`A2` e' VIOLATO da `Lam = mean(I)`** -- una media GLOBALE dentro una legge locale -- **e la violazione e' la ragione per cui il pezzo funziona** | `Z40` | — | `APERTO` |
 | **D25** | **Il gauge del tempo e' la costante `1e-9`**, e il `93 %` dei nodi non invecchia | `Z46` — **MISURATO IN EPOCA 1**, blob **`a1ae5090`**, run continuo a **1200 passi** | — | **`DA RIMISURARE IN EPOCA 3`**: il primo tentativo ha usato un criterio **cieco** *(confronto con la MEDIANA: se i fermi sono la maggioranza, la mediana e' essa stessa ferma)*, e l'esito **non si legge** *(`944064a`)*. Il giro nuovo usa un riferimento **esterno**, `r = 1` |
-| **D26** | Le coorti **non sopravvivevano allo SNAPSHOT**: dopo un salva/ricarica il lignaggio ripartiva VUOTO | `Z53` | — | `CURATO` |
-| **D27** | **Il grafo e' in QUATTRO COMPONENTI che non si toccano mai** | `Z65` — **MISURATO IN EPOCA 1**, blob **`775ceab7`**, i **45 snapshot di `_g6000`** | — | **`NON CONFERMATO IN EPOCA 3`**: misurata **UNA SOLA componente** su **`_val600`**, **`_g3_senza_bifase`** e **`_g4_riferimento`** — **12 snapshot su 12** *(`944064a`, strumento blob `6520c98c`)*. **La voce NON si cancella:** resta col suo numero, e col fatto che **l'ho importata da un'epoca diversa senza riverificarla** (`par.9-bis`) |
+| **D26** | Le coorti **non sopravvivevano allo SNAPSHOT**: dopo un salva/ricarica il lignaggio ripartiva VUOTO | `Z53`, sigillo `9/9` | la cura di `Z53` | **`CURA INEFFICACE PER LA SCENA N-MASSE`** — **la cura preserva una registrazione che qui NON AVVIENE MAI**: `_massa` chiama `semina` **senza `mass_id`** *(`:6209`)*, quindi `masse_info` resta VUOTO e `conc_nodi` tutto liste vuote. **→ `D30`.** La cura in se' **resta valida**: e' il percorso di questa scena a non arrivarci |
+| **D27** | **Il grafo e' in QUATTRO COMPONENTI che non si toccano mai** | `Z65`, **misurato in ORIGINE su un ALTRO sistema**: blob **`775ceab7`**, i **45 snapshot di `_g6000`** *(quello che il registro etichetta `EPOCA 1`)* | — | **`NON E' UN DIFETTO NEL SISTEMA ATTUALE`** — **LA PROVA: UNA SOLA componente**, su gli **archivi delle cure** — `_val600` e `_g3_senza_bifase` *(simulatore blob `9557a867`)*, `_g4_controllo` e `_g4_riferimento` *(blob `ab685eac`)*, **12 snapshot su 12** *(`944064a`, strumento blob `6520c98c`)*. **La voce NON si cancella:** resta col numero d'origine e col fatto che **l'ho importata da un altro sistema senza riverificarla** (`par.9-bis`) |
 | **D28** | **`nsub` esplode e lo tira `max(|vd|)` su POCHISSIMI archi**: il costo dell'intero sistema e' governato da una manciata di archi | `Z74` | — | `APERTO` |
 | **D29** | **CINQUE NODI DI VUOTO sono i piu' connessi dell'intero sistema**: il vuoto ha degli HUB, e non dovrebbe averne | `Z77` | — | `APERTO` |
 | **D30** | **`_massa` chiama `semina` SENZA `mass_id` (`:6209`), quindi `masse_info` non viene MAI popolato e `_registra_concorrenza` non parte: negli snapshot di epoca 3 `masse_info` e' VUOTO e `conc_nodi` e' tutto liste vuote** | lettura del sorgente `:6209` + misurato su `_val600/scena_000120` | — | `APERTO` |

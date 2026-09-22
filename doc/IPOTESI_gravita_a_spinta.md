@@ -155,6 +155,15 @@ MISURATO, NON DEDOTTO.** *(Criterio di chiusura: una misura che, sullo stesso sn
 | **SMENTITA** | resta ferma, **oppure cresce**, **oppure oscilla senza verso** |
 | **CONTROLLO** | **lo stesso con UNA SOLA massa.** Serve a separare l'avvicinamento dall'**espansione del vuoto**: se anche la scena a una massa mostra una variazione della stessa scala, quello che si vede non e' attrazione |
 
+> **✅ UNA PRECONDIZIONE DI QUESTA PROVA E' STATA MISURATA (2026-09-22).** «Distanza sul
+> grafo» ha senso **solo se i due estremi sono connessi**. **Misurato: il grafo e' in UNA
+> SOLA componente**, su gli **archivi delle cure** — `_val600` e `_g3_senza_bifase` *(simulatore blob `9557a867`)*, `_g4_controllo` e `_g4_riferimento` *(blob `ab685eac`)*, **12 snapshot su 12** — e **le tre masse ci stanno tutte
+> dentro**. *(Strumento `csv/_test_fork/_componenti_e_tempo.py` blob `6520c98c`, commit
+> `944064a`.)*
+> **⚠ NON valeva in un archivio precedente:** su `_g6000` *(blob `775ceab7`)* erano state
+> misurate **quattro** componenti (`Z65`). **Quindi la precondizione va RIVERIFICATA sulla scena
+> su cui la prova girera' davvero**, non data per acquisita.
+
 ### PROVA 2 — **con che legge?**
 **La spinta netta dev'essere compatibile con l'INVERSO DEL QUADRATO, almeno a grande distanza.**
 
