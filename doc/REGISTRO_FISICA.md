@@ -25,8 +25,13 @@
 legge fisica entra, cambia o esce dal simulatore senza passare da questo documento**, con un hook
 che rifiuta un commit a `soliton_simulator.py` che non tocchi il registro, salvo
 `[SENZA-FISICA: <motivo>]`.
-**⚠ Oggi NON è cablata, e va detto invece di darla per fatta** *(`A9`)*: l'hook rifiuterebbe ogni
-commit al simulatore finché le schede non esistono.
+**✅ CABLATA il 2026-09-22 — e nella forma che la rende un presidio invece di una formalità.**
+`csv/_hook_fisica.py`, dentro il `commit-msg` già esistente *(un hook solo: due che se lo contendono è il modo in cui un presidio sparisce in silenzio)*. **Non chiede di «toccare il registro»** — lo soddisferebbe una riga qualsiasi in fondo al file. **Chiede che la modifica cada DENTRO la sezione della legge toccata**, e se quella legge **non ha una scheda**, dice *«prima si crea la scheda»*.
+
+**COME SA QUALE SCHEDA:** ogni scheda porta un marcatore leggibile da codice — `<!-- SCHEDA nome=… funzioni=… flag=… -->` — e la sezione va da un marcatore al successivo.
+**COME SA COSA È CAMBIATO:** dalla diff in cache di `soliton_simulator.py`, le righe toccate risalgono alla **funzione** che le contiene *(per NOME, via AST della versione in cache — par.0)* o al **flag** di modulo assegnato su quella riga.
+
+**⚠ IL LIMITE, dichiarato invece che nascosto:** **non distingue una modifica di LEGGE da una di COMMENTO.** Distinguerle richiederebbe un confronto di AST fra le due versioni, e **un commento che descrive una legge è parte della legge** *(i commenti stale sono un difetto documentato di questo repo)*. **Quindi è più severo del necessario**, e le modifiche davvero non fisiche passano per `[SENZA-FISICA: <motivo>]`.
 
 ## COSA C'È DA COPRIRE — **dalla `FASE A`, misurato, non stimato**
 
@@ -42,6 +47,7 @@ voce `Z…` della `FASE A`, commit `9a82bfb`)*.
 
 ---
 
+<!-- SCHEDA nome=freno-scala-min funzioni=_smorza,_smp_apri,_smp_chiudi,_smp_snap,_sd0,_pav_d0,_floor_d0,_nasce flag=SCALA_MIN,SCALA_MIN_PASSO -->
 # ① IL FRENO DI `SCALA_MIN` — **`SCALA_MIN_PASSO` / `_smorza` / `_smp_chiudi`**
 
 > **STATO: `DIFETTOSA`.** Difetto **`D31`**. **Viola `A11` corollario 4 e corollario 7(b).**
@@ -193,6 +199,7 @@ l'unico dei tre candidati a rendere `LAM` un RISULTATO invece che un'ipotesi.**
 
 ---
 
+<!-- SCHEDA nome=memoria-del-moto funzioni=memoria_hebbiana_moto flag=MEM_HEBB,MEM_MOTO,MEM_MOTO_TUTTO,SCALA_P_MEDIANA,ZETA_VIR -->
 # ② LA MEMORIA DEL MOTO — **`memoria_hebbiana_moto` / `S08_proj` / `mem_mot`**
 
 > **STATO: `DIFETTOSA`.** Difetti **`D03`** *(direzioni dal disegno, `Imed` globale, tetto
@@ -320,6 +327,7 @@ contro un nullo di `1.4e-03` — **da `140` a `310` volte il suo valore sotto ip
 
 ---
 
+<!-- SCHEDA nome=gravita-bifase funzioni=pozzo_grafo,_nb_grav flag=GRAV_BIFASE,VIRIALE,LS_AZIM,PHI_CRIT,K_FRANGE -->
 # ③ LA GRAVITA' BIFASE — **`GRAV_BIFASE` / `S09_spinta_med` / `S10_grav_med`**
 
 > **STATO: `DIFETTOSA`.** Difetto **`D01`**. **Viola `A2`, `A5` e `A11` corollario 6.**
@@ -408,6 +416,7 @@ radiale/tangenziale usi `cos2`/`sin2` di quell'angolo.
 
 ---
 
+<!-- SCHEDA nome=coesione funzioni= flag=COES_ADIM,COES_CAUSALE,K_C -->
 # ④ LA COESIONE — **`COES_ADIM` / `COES_CAUSALE` / `S12_coesione`**
 
 > **STATO: `DA VERIFICARE`.** Il difetto **`D18`** *(istanti misti e tetto globale)* è

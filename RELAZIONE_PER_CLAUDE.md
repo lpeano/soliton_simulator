@@ -12460,3 +12460,41 @@ tutto acceso.**
 **LA LETTURA, e non e' una cura:** spegnere l'intero blocco **compra un `d/d0` perfetto per 360
 passi e lo paga con un'esplosione di popolazione**. **Le due cose vanno insieme**, e **quale sia
 causa dell'altra NON E' DECISO da questa misura.** → **domanda per `PROBLEMI-CHK3`.**
+
+### ㉮ **`REG-R` è CABLATA — e nella forma che la rende un presidio, non una formalità**
+
+> **Decisione di Luca:** *un commit che modifica una legge deve modificare LA SCHEDA DI QUELLA
+> LEGGE; se la scheda non esiste, prima si crea la scheda; i commit che non toccano la fisica
+> usano `[SENZA-FISICA: motivo]`.*
+
+**Perché questa forma e non «tocca il registro»:** un hook che chiedesse soltanto di toccare
+`doc/REGISTRO_FISICA.md` sarebbe soddisfatto da **una riga qualsiasi in fondo al file**. Questo
+chiede che **la diff del registro cada DENTRO la sezione della legge toccata**. È la differenza
+fra un presidio e una formalità *(`A9`)*.
+
+**COME FUNZIONA:**
+- ogni scheda porta `<!-- SCHEDA nome=… funzioni=… flag=… -->`; la sezione va da un
+  marcatore al successivo;
+- dalla diff in cache di `soliton_simulator.py`, le righe toccate risalgono alla **funzione** che
+  le contiene *(per NOME, via AST della versione in cache — par.0: le righe si spostano, i nomi
+  no)* o al **flag** di modulo assegnato lì;
+- se la legge **non ha scheda** → *«prima si crea la scheda»*; se ce l'ha ma la diff non cade
+  dentro → rifiuto che **nomina la scheda e la funzione**.
+
+**IL COLLAUDO: `9/9`, e QUATTRO casi DEVONO fallire** — `K2` legge toccata e registro no ·
+`K3` registro toccato nella scheda **sbagliata** · `K4` legge **senza** scheda · `K7` flag
+senza scheda. Più `K8`: una riga fuori da ogni funzione e flag **non è una legge** e passa.
+**`K3` è quello che separa questo hook da una formalità.**
+
+**E PROVATO SUL REPO VERO, non solo sul sintetico:** una modifica finta dentro `_smorza` **è
+stata rifiutata**, e il rifiuto ha nominato la funzione. Il simulatore è stato ripristinato,
+blob `21e3a3dc` invariato.
+*(Il primo rifiuto diceva «`_smorza` non ha una scheda» — **corretto**: l'hook legge il
+registro **dall'indice**, e i marcatori non erano ancora committati. È il comportamento giusto,
+e va capito prima di usarlo.)*
+
+**⚠ IL LIMITE, dichiarato invece che nascosto:** **non distingue una modifica di LEGGE da una
+di COMMENTO.** Distinguerle richiederebbe un confronto di AST fra le due versioni, e **un
+commento che descrive una legge è parte della legge** — i commenti stale sono un difetto
+documentato di questo repo. **È più severo del necessario, e si dice.**
+**E il secondo limite è lo stesso di `P1-bis`: i hook non sono versionati da git.**

@@ -115,6 +115,21 @@ def controlla():
             "  " + CODA + " e mettila nel commit.\n\n")
         return 1
 
+    # --- [REG-R, 2026-09-22] NESSUNA LEGGE CAMBIA SENZA CHE CAMBI LA SUA SCHEDA.
+    #   Sta QUI e non in un hook suo perche' `commit-msg` e' uno solo: due hook che se lo
+    #   contendono e' il modo in cui un presidio sparisce in silenzio.
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import _hook_fisica
+        _c, _t = _hook_fisica.controlla(st, msg0)
+        if _t:
+            sys.stderr.write(_t)
+        if _c:
+            return _c
+    except Exception as _e:            # A8: un presidio che si schianta NON deve bloccare
+        sys.stderr.write("[REG-R] il controllo NON e' girato (%s): dichiarato, non nascosto.\n"
+                         % _e)
+
     if not motivi:
         return 0
     if RELAZIONE in st:
