@@ -20,7 +20,7 @@ La sezione di una scheda va dal suo marcatore al marcatore successivo (o a fine 
 
 !! FRAGILITA' DICHIARATA: un ESEMPIO di marcatore scritto dentro la documentazione
   verrebbe letto come un marcatore VERO. Oggi non succede perche' l'esempio in
-  `REGISTRO_FISICA.md` usa i puntini di sospensione, che non matchano `[\w-]+` --
+  `REGISTRO_FISICA.md` usa i puntini di sospensione, che non matchano la classe di caratteri del nome --
   cioe' PER FORTUNA, non per progetto. Se un giorno l'esempio diventasse realistico,
   spezzerebbe la mappa delle sezioni. VERIFICATO OGGI: il hook vede 5 schede su 5.
 
