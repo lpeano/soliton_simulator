@@ -12427,3 +12427,36 @@ La colonna elenca **`ESITO CONTRO I CRITERI -- REGGE /`** fra i criteri che non 
 **La correzione:** la regex richiede **contenuto sulla STESSA riga** dopo `NON REGGE`
 *(`[ 	]+\S`)*. Le righe vere sono `<criterio>  NON REGGE  <spiegazione>`; l'intestazione
 finisce **a fine riga**. **E un collaudo nuovo con l'intestazione VERA dentro il file sintetico.**
+
+### ㉭ **I tre bracci: `6/8` · `7/8` · `6/8` — e un `d/d0 = 1.000` che dura 360 passi**
+
+> Generato dai **15 snapshot gia' scritti**, nessun run. Seme `42`, 600 passi, stessa scena.
+
+| braccio | cosa spegne | **criteri** | quali NON reggono |
+|---|---|--:|---|
+| **ACCESO** | tutto attivo | `6/8` | `d0`, `d/d0` |
+| **SOLO-SCRITTURA** | `MEM_MOTO = False` | **`7/8`** | `d0` |
+| **INTERO-BLOCCO** | `MEM_MOTO_TUTTO = False` | `6/8` | `d0`, `d/d0` |
+
+**Il braccio PARZIALE e' il migliore dei tre.** E la fuga di `d0` lo conferma: rapporto mediano
+**`1.2320` · `1.1607` · `1.2287`** — **spegnere TUTTO riporta la fuga quasi dove era con
+tutto acceso.**
+
+#### ⚠ **E LA COSA CHE NESSUNA LETTURA AVEVA PREVISTO**
+
+| `med d/d0` | 120 | 240 | 360 | 480 | 600 |
+|---|--:|--:|--:|--:|--:|
+| ACCESO | `0.8442` | `0.7875` | `0.6938` | `0.6922` | `0.7489` |
+| SOLO-SCRITTURA | `0.8750` | `0.9505` | `0.9739` | `0.9449` | `0.8546` |
+| **INTERO-BLOCCO** | **`0.9982`** | **`1.0005`** | **`0.9999`** | `0.8625` | `0.7886` |
+
+> **`d/d0 = 1` e' l'assenza di tensione E di compressione: e' l'IDEALE, e non era mai stato
+> raggiunto.** Il braccio che spegne tutto il blocco **ce lo tiene per 360 passi**, a quattro cifre.
+> **Poi crolla.**
+>
+> **E crolla ESATTAMENTE mentre la popolazione esplode:** `n` va da `3160` a `3312` a **`3853`**,
+> contro `2959` *(acceso)* e `2914` *(parziale)*. **`+30 %` di nodi.**
+
+**LA LETTURA, e non e' una cura:** spegnere l'intero blocco **compra un `d/d0` perfetto per 360
+passi e lo paga con un'esplosione di popolazione**. **Le due cose vanno insieme**, e **quale sia
+causa dell'altra NON E' DECISO da questa misura.** → **domanda per `PROBLEMI-CHK3`.**
