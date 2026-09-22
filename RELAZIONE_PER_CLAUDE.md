@@ -12292,3 +12292,31 @@ che gira. **Il mio criterio ha visto «`:6032` sta fra `:6030` e la traccia» e 
 SIMULATORE LE TRACCIA».** Il bilancio è **uno strumento esterno**. **Nel simulatore il sito di
 `_smp_chiudi` manca ancora** — **chiunque rifaccia la traccia senza quell'involucro ritrova il
 buco di `Z107`.**
+
+### ㉨ **Punto 4 chiuso: `2 su 22`, e il criterio ora ha il collaudo del caso che sbagliava**
+
+**Col criterio corretto — che riconosce i RAMI ESCLUSIVI — le non tracciate sono DUE**, e il
+collaudo passa **`4/4`**:
+
+| | cosa verifica |
+|---|---|
+| `K1` | scrittura seguita da `_traccia_d0` nella stessa funzione → **tracciata** |
+| `K2` | **deve fallire:** scrittura in un'ALTRA funzione → **non tracciata** |
+| `K3` | **deve fallire:** due scritture, una traccia → la **prima** scoperta |
+| **`K4`** | **il caso che il criterio VECCHIO sbagliava:** due rami di un `if/else`, una traccia |
+
+> **`K4` verifica DUE cose, e la prima è quella che conta:** che il criterio **vecchio** ne
+> dichiarasse davvero una scoperta, **e** che il nuovo le copra entrambe. **Senza la prima metà
+> direbbe solo «non rompe», non «serviva».**
+
+**LE DUE, con riga e funzione:**
+- **`:1514` `__init__`** — **fuori perimetro:** non è una scrittura di passo, e il bilancio
+  misura `Δ` **fra inizio e fine di un passo**;
+- **`:3719` `_smp_chiudi`** — **`D04`**, e vale il `117 %`–`218 %` della crescita.
+  **Il bilancio lo prende avvolgendo `_smorza`** e sommando **solo** `quale == 'd0_passo'`.
+
+**⚠ E LA COSA CHE VALE PIÙ DEL CONTEGGIO: «IL BILANCIO LE COPRE» NON È «IL SIMULATORE LE
+TRACCIA».** Il bilancio è **uno strumento esterno**. **Nel simulatore il sito manca ancora**, ed
+è `D04`: chiunque rifaccia la traccia senza quell'involucro **ritrova il buco di `Z107`**.
+**E il bilancio che chiude a `1.138e-13` e `1.170e-13` è la verifica a posteriori di questa
+tabella: se una di queste letture fosse sbagliata, non chiuderebbe.**
