@@ -54,6 +54,10 @@ for _a in sys.argv[1:]:
     if _a.startswith("--limite="):
         LIMITE_S = int(_a.split("=", 1)[1])
 OUT = os.path.join(RADICE, "csv", "_test_fork", "_diag_D", "DOVE_SPINGE_LA_GRAVITA.txt")
+# ⚠ `P1-ter`: la tabella dei 20 archi si GENERA in `csv` e in `markdown`, e non si ricopia MAI a
+#   mano. `P6`: entrambi portano BLOB, SEME e i flag che distinguono questo run.
+OUT_CSV = os.path.join(RADICE, "csv", "_test_fork", "_diag_D", "G2_20_ARCHI.csv")
+OUT_MD = os.path.join(RADICE, "csv", "_test_fork", "_diag_D", "G2_20_ARCHI.md")
 
 # LA CONFIGURAZIONE DELLA VALIDAZIONE, identica a `_somma_per_scrittore_d0.py`
 ARGV = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", "3", "--sep", "4.0",
@@ -131,50 +135,97 @@ class AccChiave(object):
       Se sono molti, il cumulato non vale e lo si dice.
     """
 
+    CAMPI = ("acc", "su", "giu", "npassi", "visto")
+
     def __init__(self, base):
         self.base = np.int64(base)
         self.chiavi = np.zeros(0, dtype=np.int64)
-        self.acc = np.zeros(0, dtype=float)
-        self.visto = np.zeros(0, dtype=np.int64)
+        self.acc = np.zeros(0, dtype=float)      # saldo netto
+        self.su = np.zeros(0, dtype=float)       # somma delle SALITE
+        self.giu = np.zeros(0, dtype=float)      # somma delle DISCESE
+        self.npassi = np.zeros(0, dtype=np.int64)   # in quanti passi l'arco ESISTE
+        self.visto = np.zeros(0, dtype=np.int64)    # l'ULTIMO passo in cui si e' visto
         self.doppioni = 0
         self.risurrezioni = 0
 
     def chiave(self, ii, jj):
         return np.asarray(ii, dtype=np.int64) * self.base + np.asarray(jj, dtype=np.int64)
 
+    def nodi(self, k):
+        k = np.asarray(k, dtype=np.int64)
+        return k // self.base, k % self.base
+
+    def _trova(self, k):
+        if len(self.chiavi) == 0:
+            return np.zeros(len(k), dtype=np.int64), np.zeros(len(k), bool)
+        p = np.searchsorted(self.chiavi, k)
+        pc = np.minimum(p, len(self.chiavi) - 1)
+        ok = (p < len(self.chiavi)) & (self.chiavi[pc] == k)
+        return p, ok
+
     def aggiungi(self, ii, jj, dx, passo):
         k = self.chiave(ii, jj)
-        if len(np.unique(k)) != len(k):
-            self.doppioni += int(len(k) - len(np.unique(k)))
-        p = np.searchsorted(self.chiavi, k)
-        pc = np.minimum(p, max(len(self.chiavi) - 1, 0))
-        col = (len(self.chiavi) > 0) & (p < len(self.chiavi))
-        col = col & (self.chiavi[pc] == k) if len(self.chiavi) else np.zeros(len(k), bool)
+        nu = len(np.unique(k))
+        if nu != len(k):
+            self.doppioni += int(len(k) - nu)
+        p, col = self._trova(k)
         if np.any(col):
-            np.add.at(self.acc, p[col], dx[col])
-            _salto = passo - self.visto[p[col]]
-            self.risurrezioni += int(np.sum(_salto > 1))
-            self.visto[p[col]] = passo
+            pc = p[col]; dc = dx[col]
+            np.add.at(self.acc, pc, dc)
+            np.add.at(self.su, pc, np.where(dc > 0.0, dc, 0.0))
+            np.add.at(self.giu, pc, np.where(dc < 0.0, dc, 0.0))
+            np.add.at(self.npassi, pc, 1)
+            self.risurrezioni += int(np.sum((passo - self.visto[pc]) > 1))
+            self.visto[pc] = passo
         nuovi = ~col
         if np.any(nuovi):
-            ku, inv = np.unique(k[nuovi], return_inverse=True)
-            su = np.bincount(inv, dx[nuovi], minlength=len(ku))
+            kn = k[nuovi]; dn = dx[nuovi]
+            ku, inv = np.unique(kn, return_inverse=True)
+            m = len(ku)
             self.chiavi = np.concatenate([self.chiavi, ku])
-            self.acc = np.concatenate([self.acc, su])
-            self.visto = np.concatenate([self.visto,
-                                         np.full(len(ku), passo, dtype=np.int64)])
+            self.acc = np.concatenate([self.acc, np.bincount(inv, dn, minlength=m)])
+            self.su = np.concatenate(
+                [self.su, np.bincount(inv, np.where(dn > 0.0, dn, 0.0), minlength=m)])
+            self.giu = np.concatenate(
+                [self.giu, np.bincount(inv, np.where(dn < 0.0, dn, 0.0), minlength=m)])
+            self.npassi = np.concatenate(
+                [self.npassi, np.bincount(inv, minlength=m).astype(np.int64)])
+            self.visto = np.concatenate([self.visto, np.full(m, passo, dtype=np.int64)])
             o = np.argsort(self.chiavi, kind="stable")
-            self.chiavi = self.chiavi[o]; self.acc = self.acc[o]; self.visto = self.visto[o]
+            self.chiavi = self.chiavi[o]
+            for _c in self.CAMPI:
+                setattr(self, _c, getattr(self, _c)[o])
 
     def leggi(self, ii, jj):
-        """Il cumulato riallineato agli archi VIVI ORA. -1 = chiave non presente."""
+        """Il cumulato riallineato agli archi VIVI ORA."""
         k = self.chiave(ii, jj)
-        p = np.searchsorted(self.chiavi, k)
-        pc = np.minimum(p, max(len(self.chiavi) - 1, 0))
-        ok = (p < len(self.chiavi)) & (self.chiavi[pc] == k) if len(self.chiavi) \
-            else np.zeros(len(k), bool)
+        p, ok = self._trova(k)
         v = np.zeros(len(k)); v[ok] = self.acc[p[ok]]
         return v, ok
+
+
+def satura(dx):
+    """Quanti archi sono INCOLLATI AL TETTO in questo passo, e quanti sono stati scritti.
+
+    ⚠ PERCHE' SI MISURA, e non e' una curiosita': `S09` fa
+        `spinta = np.clip(spinta, -passo_causale, passo_causale)`
+        `d0[mask] += _sd0(spinta * float(np.median(self.d0[mask])), mask)`
+      cioe' quando il clip MORDE l'incremento vale `passo_causale * median(d0[mask])`, che e'
+      **UGUALE PER TUTTI GLI ARCHI SATURI**: un tetto globale per una statistica globale (`A2`).
+      **Su un arco saturo la spinta non dipende piu' dall'arco: solo il SEGNO lo fa.**
+      **`A11` corollario 6: se un limite satura, e' un allarme, non una protezione.**
+
+    ⚠ COME SI RICONOSCE SENZA LEGGERE IL TETTO: se il clip NON morde, il massimo di `|dx|` e'
+      raggiunto da UNO o DUE archi; se morde, da MOLTI. Il conteggio distingue i due casi da se',
+      e il collaudo `F` lo verifica su entrambi.
+    """
+    a = np.abs(dx)
+    scritti = int(np.count_nonzero(dx))
+    if scritti == 0:
+        return 0, 0, np.zeros(len(dx), bool)
+    tetto = float(np.max(a))
+    sel = a >= tetto * (1.0 - 1e-12)
+    return int(np.sum(sel)), scritti, sel
 
 
 def prefisso_regge(ii, jj, pii, pjj):
@@ -252,16 +303,49 @@ def collaudo(W):
     v, _ok = A.leggi(fin_i, fin_j)
     attesi = np.array([11.0, 33.0, 44.0, 7.0])       # noti a mano
     okD = bool(np.allclose(v, attesi, rtol=0, atol=1e-12))
-    # e il CONFRONTO: l'accumulatore POSIZIONALE, sugli stessi dati, cosa avrebbe dato?
-    posiz = np.array([1.0, 2.0, 3.0, 4.0]) + np.array([10.0, 30.0, 40.0, 7.0])
-    W("D  cumulato PER CHIAVE, con un arco MORTO e gli altri SLITTATI in mezzo\n")
+    W("D  cumulato PER CHIAVE, con una MITOSI in mezzo: l'arco (11,21) MUORE e gli altri SLITTANO\n")
     W("     atteso   %s\n" % ["%.0f" % x for x in attesi])
     W("     ottenuto %s   -> %s\n"
       % (["%.0f" % x for x in v], "OK" if okD else "*** SOMMA SULL'ARCO SBAGLIATO ***"))
-    W("     (per contrasto, l'accumulatore POSIZIONALE avrebbe dato %s: sbagliato su 3 archi\n"
-      % ["%.0f" % x for x in posiz])
-    W("      su 4 -- ed e' esattamente il difetto che la guardia del prefisso ha trovato)\n")
     esiti.append(okD)
+
+    # --- D-bis: IL CASO CHE DEVE FALLIRE, e NON e' un commento: e' un'asserzione.
+    #     L'accumulatore POSIZIONALE, sugli stessi identici dati, DEVE dare il risultato
+    #     SBAGLIATO. Se desse quello giusto, il collaudo D non proverebbe niente -- passerebbe
+    #     anche un accumulatore rotto, perche' il caso non distinguerebbe i due.
+    posiz = np.array([1.0, 2.0, 3.0, 4.0]) + np.array([10.0, 30.0, 40.0, 7.0])
+    sbagliati = int(np.sum(~np.isclose(posiz, attesi, rtol=0, atol=1e-12)))
+    okDb = sbagliati >= 3
+    W("D- IL CASO CHE DEVE FALLIRE: lo stesso caso con l'accumulatore PER POSIZIONE\n")
+    W("     ottenuto %s   contro l'atteso %s\n"
+      % (["%.0f" % x for x in posiz], ["%.0f" % x for x in attesi]))
+    W("     archi sbagliati: %d su 4, atteso >= 3  -> %s\n"
+      % (sbagliati, "OK: il caso DISTINGUE i due accumulatori" if okDb
+         else "*** IL CASO NON DISTINGUE: il collaudo D non proverebbe nulla ***"))
+    esiti.append(okDb)
+
+    # --- G: le TRE COLONNE NUOVE -- salite, discese e PASSI IN CUI L'ARCO ESISTE -- a somme note.
+    G = AccChiave(1 << 32)
+    G.aggiungi(np.array([3, 4]), np.array([7, 8]), np.array([+5.0, -2.0]), 1)
+    G.aggiungi(np.array([3]), np.array([7]), np.array([-1.0]), 2)          # (4,8) MUORE
+    G.aggiungi(np.array([3]), np.array([7]), np.array([+0.5]), 3)
+    kk = G.chiave(np.array([3, 4]), np.array([7, 8]))
+    p, _o = G._trova(kk)
+    att_su = np.array([5.5, 0.0]); att_giu = np.array([-1.0, -2.0])
+    att_np = np.array([3, 1]); att_sal = np.array([4.5, -2.0])
+    okG = (np.allclose(G.su[p], att_su, rtol=0, atol=1e-12)
+           and np.allclose(G.giu[p], att_giu, rtol=0, atol=1e-12)
+           and np.array_equal(G.npassi[p], att_np)
+           and np.allclose(G.acc[p], att_sal, rtol=0, atol=1e-12))
+    W("G  le TRE COLONNE NUOVE a somme NOTE: salite, discese, passi in cui l'arco ESISTE\n")
+    def _l(v):
+        return "[" + ", ".join("%g" % float(x) for x in v) + "]"
+    W("     atteso   salite %s  discese %s  passi %s  saldo %s\n"
+      % (_l(att_su), _l(att_giu), _l(att_np), _l(att_sal)))
+    W("     ottenuto salite %s  discese %s  passi %s  saldo %s  -> %s\n"
+      % (_l(G.su[p]), _l(G.giu[p]), _l(G.npassi[p]), _l(G.acc[p]),
+         "OK" if okG else "*** COLONNE SBAGLIATE ***"))
+    esiti.append(okG)
 
     # --- E: IL CASO CHE DEVE FALLIRE. Una RISURREZIONE: una chiave che sparisce e ricompare.
     #     Se l'accumulatore non se ne accorge, sta sommando DUE archi diversi nello stesso posto.
@@ -348,6 +432,14 @@ def main():
             TOP_PASSO["v"] = (ii.copy(), jj.copy(), dx.copy(), PASSO["k"])
 
     S.Rete._traccia_d0 = traccia
+
+    # ⚠ `P6`: il BLOB (sha1 dei byte GREZZI, non `git hash-object`) e il SEME EFFETTIVO, letto
+    #   dalla firma di `Rete.__init__` come fa il driver -- non da una costante ricordata.
+    import hashlib
+    import inspect as _insp
+    _BLOB_SIM = hashlib.sha1(
+        open(os.path.join(RADICE, "soliton_simulator.py"), "rb").read()).hexdigest()[:8]
+    _SEME = _insp.signature(S.Rete.__init__).parameters["seed"].default
 
     S._NMASSE_VIDEO["n"] = 3; S._NMASSE_VIDEO["sep"] = 4.0; S._NMASSE_VIDEO["size"] = None
     S.avvia_test("N-MASSE")()
@@ -449,22 +541,121 @@ def main():
     W("  e sulle SPINTE NEGATIVE (la compressione): %.5f    rapporto = %.1fx\n"
       % (cneg, cneg / 0.01 if np.isfinite(cneg) else float("nan")))
 
-    W("\nI 20 ARCHI PIU' SPINTI VERSO L'ALTO (cumulato su %d passi, chiave = coppia di nodi)\n"
-      % fatti)
-    W("%6s %8s %8s %-20s | %13s | %10s %10s %8s\n"
-      % ("rango", "nodo i", "nodo j", "regione", "spinta cumul.", "d", "d0", "L/d"))
+    # ---------------- I 20 ARCHI col |saldo| piu' grande, SU TUTTE LE CHIAVI (anche morte)
+    kt = ACCK.chiavi
+    ki, kj = ACCK.nodi(kt)
+    kcls = classe_arco(ki, kj)
+    ordine = np.argsort(np.abs(ACCK.acc))[::-1][:20]
+
+    intest = ["rango", "nodo_i", "nodo_j", "regione", "saldo_netto", "somma_salite",
+              "somma_discese", "passi_in_cui_esiste", "vivo_ora", "d", "d0", "L_disegno_su_d"]
+    vivi = {}
+    for _a in range(len(ii)):
+        vivi[int(ii[_a]) * (1 << 32) + int(jj[_a])] = _a
+    righe_csv = []
+    for r, a_ in enumerate(ordine, 1):
+        _k = int(kt[a_])
+        _iv = vivi.get(_k)
+        righe_csv.append([r, int(ki[a_]), int(kj[a_]), ETICHETTE[kcls[a_]],
+                          ACCK.acc[a_], ACCK.su[a_], ACCK.giu[a_], int(ACCK.npassi[a_]),
+                          1 if _iv is not None else 0,
+                          d[_iv] if _iv is not None else float("nan"),
+                          d0[_iv] if _iv is not None else float("nan"),
+                          Ld[_iv] if _iv is not None else float("nan")])
+
+    with io.open(OUT_CSV, "w", encoding="utf-8", newline="\n") as fc:
+        fc.write("# G2 -- i 20 archi col |saldo S09| piu' grande, identificati per CHIAVE (i,j)\n")
+        fc.write("# blob simulatore (sha1 byte grezzi)=%s  seme=%s  passi=%d  scena=N-MASSE sep=4.0\n"
+                 % (_BLOB_SIM, _SEME, fatti))
+        fc.write("# doppioni=%d risurrezioni=%d chiavi_distinte=%d\n"
+                 % (ACCK.doppioni, ACCK.risurrezioni, len(kt)))
+        fc.write(",".join(intest) + "\n")
+        for rr in righe_csv:
+            fc.write(",".join(("%d" % x) if isinstance(x, int) else
+                              (x if isinstance(x, str) else "%.9e" % x) for x in rr) + "\n")
+
+    with io.open(OUT_MD, "w", encoding="utf-8", newline="\n") as fm:
+        fm.write("# `G2` -- i **20 archi** col `|saldo S09|` piu' grande\n\n")
+        fm.write("> **GENERATA DA CODICE** (`P1-ter`), mai ricopiata a mano.\n")
+        fm.write("> `csv/_test_fork/_dove_spinge_la_gravita.py`, blob simulatore `%s`, seme `%s`,\n"
+                 % (_BLOB_SIM, _SEME))
+        fm.write("> **%d passi dalla semina**, configurazione della validazione.\n" % fatti)
+        fm.write("> Archi identificati per **chiave `(i, j)`**, non per posizione.\n\n")
+        fm.write("| # | `i` | `j` | regione | saldo netto | salite | discese | passi | vivo |\n")
+        fm.write("|--:|--:|--:|---|--:|--:|--:|--:|:-:|\n")
+        for rr in righe_csv:
+            fm.write("| %d | %d | %d | %s | `%+.6e` | `%.6e` | `%.6e` | %d | %s |\n"
+                     % (rr[0], rr[1], rr[2], rr[3], rr[4], rr[5], rr[6], rr[7],
+                        "si" if rr[8] else "**no**"))
+        fm.write("\n**doppioni** *(stessa chiave due volte nello stesso passo)*: **%d** · "
+                 "**risurrezioni** *(chiave che sparisce e ricompare)*: **%d** · "
+                 "chiavi distinte: **%d**\n" % (ACCK.doppioni, ACCK.risurrezioni, len(kt)))
+
+    W("\nI 20 ARCHI COL |SALDO| PIU' GRANDE -- per CHIAVE (i,j), su tutte le chiavi viste\n")
+    W("  tabella GENERATA DA CODICE anche in:\n    %s\n    %s\n"
+      % (os.path.relpath(OUT_CSV, RADICE).replace("\\", "/"),
+         os.path.relpath(OUT_MD, RADICE).replace("\\", "/")))
+    W("%5s %7s %7s %-20s | %13s %13s %13s | %6s %5s\n"
+      % ("#", "i", "j", "regione", "SALDO", "salite", "discese", "passi", "vivo"))
     W("-" * 108 + "\n")
-    for r, a_ in enumerate(np.argsort(vv)[::-1][:20], 1):
-        W("%6d %8d %8d %-20s | %13.6e | %10.5f %10.5f %8.3f\n"
-          % (r, int(ii[a_]), int(jj[a_]), ETICHETTE[cls[a_]], vv[a_], d[a_], d0[a_], Ld[a_]))
-    W("\nI 20 ARCHI PIU' TIRATI GIU' -- e sono questi che portano il saldo, perche' il saldo\n")
-    W("  totale e' NEGATIVO e vive sul confine:\n")
-    W("%6s %8s %8s %-20s | %13s | %10s %10s %8s\n"
-      % ("rango", "nodo i", "nodo j", "regione", "spinta cumul.", "d", "d0", "L/d"))
-    W("-" * 108 + "\n")
-    for r, a_ in enumerate(np.argsort(vv)[:20], 1):
-        W("%6d %8d %8d %-20s | %13.6e | %10.5f %10.5f %8.3f\n"
-          % (r, int(ii[a_]), int(jj[a_]), ETICHETTE[cls[a_]], vv[a_], d[a_], d0[a_], Ld[a_]))
+    for rr in righe_csv:
+        W("%5d %7d %7d %-20s | %+13.6e %13.6e %13.6e | %6d %5s\n"
+          % (rr[0], rr[1], rr[2], rr[3], rr[4], rr[5], rr[6], rr[7],
+             "si" if rr[8] else "NO"))
+
+    # ---------------- LE TRE RIGHE DI RISCONTRO
+    # il saldo per regione COME LO HA CALCOLATO `Z105`: sommando PER PASSO, con la classe
+    # ricalcolata a ogni passo. Serve al riscontro 3, che lo confronta col saldo PER CHIAVE.
+    PER_REG_C = {}
+    if "S09_spinta_med" in PER_REG:
+        _su0, _giu0, _n1, _n2 = PER_REG["S09_spinta_med"]
+        for c in range(len(ETICHETTE)):
+            PER_REG_C[c] = float(_su0[c] + _giu0[c])
+    W("\n" + "=" * 108 + "\n")
+    W("LE TRE RIGHE DI RISCONTRO\n")
+    W("=" * 108 + "\n")
+    _sul_conf = int(np.sum([1 for rr in righe_csv if rr[3].startswith("CONFINE")]))
+    W("1. I 20 ARCHI STANNO SUL CONFINE?  %d su 20\n" % _sul_conf)
+
+    saldo_reg = np.zeros(len(ETICHETTE))
+    su_reg = np.zeros(len(ETICHETTE)); giu_reg = np.zeros(len(ETICHETTE))
+    for c in range(len(ETICHETTE)):
+        s = kcls == c
+        saldo_reg[c] = float(np.sum(ACCK.acc[s]))
+        su_reg[c] = float(np.sum(ACCK.su[s])); giu_reg[c] = float(np.sum(ACCK.giu[s]))
+    _conf = saldo_reg[3]
+    _venti = float(np.sum([rr[4] for rr in righe_csv if rr[3].startswith("CONFINE")]))
+    W("2. QUANTA PARTE DEL SALDO DI CONFINE FANNO I 20?\n")
+    W("   saldo dei 20 sul confine = %+.6e   saldo TOTALE del confine = %+.6e\n"
+      % (_venti, _conf))
+    W("   frazione = %.8f   -- il nullo, se il saldo fosse diffuso su tutti i %d archi di\n"
+      % (_venti / _conf if _conf else float("nan"), int(np.sum(kcls == 3))))
+    W("   confine, sarebbe 20/%d = %.8f\n"
+      % (int(np.sum(kcls == 3)), 20.0 / max(int(np.sum(kcls == 3)), 1)))
+    W("   -> %s\n" % ("CONCENTRATO su pochi archi"
+                      if _conf and abs(_venti / _conf) > 10 * (20.0 / max(int(np.sum(kcls == 3)), 1))
+                      else "DIFFUSO: i 20 non fanno una parte speciale del saldo"))
+
+    W("3. IL SALDO PER REGIONE RIFATTO PER CHIAVE COINCIDE CON QUELLO DI `Z105`?\n")
+    W("   `Z105` ha sommato PER PASSO (classe calcolata a ogni passo); qui si somma PER CHIAVE.\n")
+    W("   Se coincidono, la tabella per regione di `Z105` NON era toccata dal riordino.\n")
+    W("%-20s | %15s %15s | %15s\n"
+      % ("regione", "saldo PER PASSO", "saldo PER CHIAVE", "differenza"))
+    W("-" * 74 + "\n")
+    _peggio = 0.0
+    for c in range(len(ETICHETTE)):
+        if c not in PER_REG_C:
+            continue
+        a = PER_REG_C[c]; b = saldo_reg[c]
+        dd = abs(a - b)
+        _peggio = max(_peggio, dd / max(abs(a), 1e-300))
+        W("%-20s | %+15.6e %+15.6e | %15.3e\n" % (ETICHETTE[c], a, b, dd))
+    W("-" * 74 + "\n")
+    W("   scarto relativo PEGGIORE = %.3e\n" % _peggio)
+    W("   -> %s\n" % ("COINCIDONO: `Z105` NON va corretto."
+                      if _peggio < 1e-9 else
+                      "*** NON COINCIDONO: `Z105` VA CORRETTO, e con esso "
+                      "`doc/IPOTESI_gravita_a_spinta.md`. ***"))
 
     # ---------------- il top di UN SOLO passo: immune al riordino PER COSTRUZIONE
     if TOP_PASSO["v"] is not None:
