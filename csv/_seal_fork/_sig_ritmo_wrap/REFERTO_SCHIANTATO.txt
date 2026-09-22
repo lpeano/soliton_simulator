@@ -1,0 +1,18 @@
+# SIGILLO -- `RITMO_WRAP_2PI` (`D34`)
+# BYTE-INERTE spento, e CORREGGE il taglio acceso.
+#
+COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`)
+------------------------------------------------------------------------------------------------
+K1 attraversa il taglio: il wrap NUOVO da' +10.0000, la frequenza VERA e' +10.0000 -> OK
+K2 IL CASO CHE DEVE FALLIRE: la formula VECCHIA sullo stesso caso da' -618.3185
+     sbaglia di -628.3185 -> OK: il difetto e' riprodotto
+K3 LONTANO dal taglio (|a| < pi) i due wrap COINCIDONO: max|diff| = 1.137e-13 -> OK: la cura non tocca il caso normale
+K4 OLTRE il taglio DEVONO differire: min|diff| = 6.283e+02 -> OK
+K5 il wrap NUOVO porta tutto dentro [-pi, pi]/DT -> OK
+------------------------------------------------------------------------------------------------
+  -> i criteri PASSANO
+
+blob simulatore ORA (sha1 byte grezzi) 3d91338e
+riferimento `_val600`, blob `9557a867`: ANTERIORE a questo flag
+
+T1    PASS IL DEFAULT E' SPENTO: `RITMO_WRAP_2PI = False` (letto dal sorgente)

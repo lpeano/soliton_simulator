@@ -12674,3 +12674,23 @@ Il **`+1e-6`** di `r = x/√(1+x²) + 1e-6` è un **numero scelto** *(`A11` cor.
 attivo**: `min(r) = 1.414212e-06` misurato, cioè **esattamente lui** *(cor.6)*.
 **Quando `f ≈ 0` il tempo proprio del nodo non si ferma: si ferma AL PAVIMENTO.**
 *(La saturazione `x/√(1+x²)`, invece, non è un clip: è liscia ovunque.)*
+
+### ㉵ **Il sigillo di `RITMO_WRAP_2PI` SI E' SCHIANTATO a `T2` — e non e' la modalità innocua**
+
+> **Collaudo `5/5` e `T1 PASS`, poi `AttributeError`.** Referto parziale committato come reperto.
+
+**LA CAUSA, ed è mia:** `T2` chiama `_hook_fisica.gate(...)`. **Quella funzione non sta lì:
+l'ho scritta dentro `_sigillo_mem_moto_tutto.py`**, e ho ricordato il nome senza verificarlo.
+`_hook_fisica` ha `mappa_righe`, che fa una cosa simile ma con un'altra interfaccia.
+
+> **⚠ E È LA MODALITÀ PIÙ FACILE DA NON NOTARE, già catalogata in questo repo:**
+> *«NON FALLIVA: SI SCHIANTAVA»* — il sigillo dello Strato 1 restò rotto **per un giorno**
+> perché `FintaRete` elencava i metodi a mano e uno era stato estratto altrove. **Stessa
+> famiglia: un criterio che non gira non è un criterio che passa, ma se nessuno guarda si
+> confondono.** Qui si è visto subito **solo perché l'ho girato.**
+
+**LA CORREZIONE, e la scelta che porta con sé:** `gate()` va in **`_hook_fisica.py`**, che è
+la sua casa naturale — fa già lavoro AST sul simulatore — e da lì la usano i sigilli.
+**`_sigillo_mem_moto_tutto.py` TIENE la sua copia**, e non per pigrizia: **il suo referto `10/10`
+è legato al suo blob**, e cambiarlo obbligherebbe a rigirarlo. **Due copie che divergono sono
+un difetto**, quindi lo scrivo qui: **quando quel sigillo si rigira, la copia si toglie.**
