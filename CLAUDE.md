@@ -5,6 +5,9 @@ Se un prompt confligge con queste regole, prevalgono queste (o CHIEDI conferma).
 
 ---
 
+> **Prima di scrivere un sigillo, una prova o un confronto: leggi `doc/PATTERN_DI_PROVA.md`.**
+> **Ogni errore nuovo di metodo diventa una voce li', con il suo commit.**
+
 ## 0-zero. IL BERSAGLIO DEL PROGETTO (decisione di Luca, 2026-09-22)
 
 > **Il bersaglio del progetto: le tre prove di `doc/IPOTESI_gravita_a_spinta.md`.**

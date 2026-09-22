@@ -11384,3 +11384,52 @@ la firma somiglia a quella di `Z102`, **ma non affermo che sia di nuovo lui**.
 risponde in modo netto**, e non invento una risposta.
 **⚠ LIMITI: UN seme, UNA scena.** Per una barra fra semi ne servono **almeno quattro**
 (`P3`). — **`Z107`**
+
+### ㉑ **`doc/PATTERN_DI_PROVA.md`: i cinque pattern scritti dove sopravvivono**
+
+> **48 righe**, tre sezioni *(`STANDARD` · `IN PROVA` · `RESPINTE`)*, e **una riga sola
+> in `CLAUDE.md`** — non una sezione. **Il motivo e' nel mandato stesso:** `CLAUDE.md` e' a
+> **1482 righe**, e metterceli dentro li **diluirebbe**.
+
+**PERCHE' SERVIVA, verificato dal disco:** dei cinque pattern emersi oggi in `G3`, **in
+`CLAUDE.md` ce n'era UNO** *(il controllo positivo, par.10 criterio 2)*, piu' `P1-sexies`.
+**Non c'erano** «un processo per braccio», «firme invece di `max|Δ|`»,
+«assenza strutturale ≠ dato mancante», «snapshot contro snapshot allo stesso
+istante». **Oggi li ho seguiti perche' li avevo davanti. Una sessione nuova non li avrebbe.**
+
+**Ogni voce porta quattro cose:** la regola in **una riga**, il **commit** in cui e' nata, il
+**difetto che previene**, e **come si verifica** che uno strumento la rispetti. **La quarta e'
+quella che impedisce di scrivere pattern che suonano bene e non sono controllabili.**
+
+### ⚠ IL COLLAUDO DEL §4 — **e NON e' tutto verde**
+
+| strumento | `1` processo | `2` firme | `3` assenza strutt. | `4` snapshot | `5` involucro |
+|---|:-:|:-:|:-:|:-:|:-:|
+| `_sigillo_spegni_grav.py` | ✅ | ✅ | ✅ | n/a | ✅ *(`T0`)* |
+| `_spegni_grav_bifase.py` | ✅ | **❌** | ✅ | ✅ | ✅ |
+| `_dove_spinge_la_gravita.py` | n/a | n/a | ✅ | n/a | **❌** |
+| `_g3_confronto.py` | n/a | n/a | n/a | ✅ | n/a |
+| `_letture_validazione.py` | n/a | n/a | n/a | ✅ *(nessun cast)* | n/a |
+
+**I DUE ROSSI, e vanno in CODA PRIMA del loro prossimo uso** *(non si correggono ora, come dice
+il mandato)*:
+- **`PAT-1` — `_dove_spinge_la_gravita.py` non ha il controllo dell'involucro.** Sostituisce
+  `_traccia_d0` e rigioca dalla semina **senza mai verificare che la rigiocata riproduca
+  `_val600`**. **I numeri di `Z105`/`Z106` restano quelli misurati**, ma **la loro fedelta' alla
+  validazione non e' stata dimostrata**, e questo va detto accanto a quei numeri.
+- **`PAT-2` — `_spegni_grav_bifase.py:184` usa ancora `max|Δ|`** dove fa un controllo di
+  **identita'**: oggi **`+0.0` contro `-0.0` passerebbe per identico**. *(Il cast dei complessi e'
+  gia' corretto, `abc5b49`.)*
+
+**⚠ E IL RUNNER DI `G4` DEVE NASCERE GIA' CONFORME AI CINQUE**, come chiede il mandato: in
+particolare col **controllo dell'involucro** e con le **firme**.
+
+### PROPOSTA `IN PROVA`
+
+**«Un giro CORTO prima del giro vero»** — prima di un run che costa piu' di qualche
+minuto, lo stesso strumento gira **end-to-end coi parametri minimi**.
+**Nasce da due fallimenti di oggi** *(`438da39`, `b6f3c83`)*: **i collaudi passano e il run muore
+lo stesso**, perche' collaudano i **criteri** e non l'**impianto** che li alimenta. Un
+`UnboundLocalError` ha ucciso un run di **400 s al passo 1**, con **dodici collaudi tutti `OK`**.
+**Si verifica cosi':** lo strumento accetta un modo ridotto *(`--passi=2`)* **ed e' stato
+eseguito** prima del giro vero. **Resta IN PROVA finche' Luca non dice si'.**
