@@ -12714,3 +12714,34 @@ corollario 7)*.
 > differiscono di `1e-16` divergono comunque.** **Quanto** e **in che direzione** lo dice la
 > prova a 600 passi — **con le previsioni già scritte prima che il flag esistesse**
 > *(`94351c9`)*.
+
+### ㉷ **`FASCE-TAU`: la crescita è coordinata col tempo proprio?** *(registrata, non cominciata)*
+
+> **Idea di Luca.** L'espansione non deve essere omogenea in senso **assoluto**, ma omogenea
+> **dentro una fascia di tempo proprio**: ciò che condivide lo stesso `r` cresce insieme, e
+> fasce diverse crescono in proporzione a **quanto il tempo scorre lì**.
+> **Le fasce di `r` sono la foliazione del modello** — l'analogo delle **ipersuperfici a tempo
+> cosmico costante** di Friedmann.
+
+**LA MISURA — solo snapshot già scritti, nessun run:** fasce di `r`; per ogni fascia il fattore
+di crescita di `d0` fra snapshot consecutivi; e **il confronto fra la DISPERSIONE DENTRO una
+fascia e la DIFFERENZA FRA fasce**. *È quel rapporto a decidere: senza, una differenza fra
+fasce non si distingue dal rumore interno.*
+
+**LE DUE LETTURE, scritte prima:**
+- i fattori **differiscono fra fasce, in proporzione ai tempi propri** → **la crescita è
+  coordinata col tempo proprio: l'ipotesi regge**;
+- i fattori sono **uguali in tutte le fasce** → **la crescita è omogenea in tempo di
+  COORDINATA**, cioè **la firma di un vincolo applicato a ogni passo, cieco al tempo proprio**.
+
+> **⚠ E la seconda lettura è un TEST INDIPENDENTE SU `D31`** — e non usa il bilancio:
+> **arriverebbe alla stessa conclusione da un'altra strada.** Un difetto confermato da due
+> misure indipendenti è un'altra cosa rispetto a uno confermato due volte dalla stessa.
+
+**DOVE:** sul braccio **INTERO-BLOCCO di `G4-bis`**, **nei 360 passi con `d/d0 = 1.000`**
+*(`Z116`)*, **dove l'espansione era trasparente** — senza tensione né compressione a coprirla.
+
+**⚠ E IL VINCOLO DI ORDINE, posto da Luca:** `r` di oggi è la grandezza su cui pesano `D32` e
+`D34`. **La misura si fa DOPO la correzione del ritmo, o si rifà.** *Misurare la foliazione con
+un orologio che si sa difettoso darebbe fasce sbagliate — e sarebbe peggio di nessuna risposta,
+perché sembrerebbe una risposta.*
