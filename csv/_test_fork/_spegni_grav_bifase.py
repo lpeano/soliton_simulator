@@ -150,26 +150,38 @@ def scrivi_scrittori(conti, dest, W, blob, seme, grav):
     return tot
 
 
-def confronta(net, p_rif, W):
-    """Confronto campo per campo con uno snapshot. Zero differenze = riproduce."""
-    with gzip.open(p_rif, "rb") as f:
-        rif = pickle.load(f)["attrs"]
+def confronta(p_a, p_b, W):
+    """Confronto campo per campo fra DUE SNAPSHOT. Zero differenze = riproduce.
+
+    ⚠ SNAPSHOT contro SNAPSHOT, e non la RETE VIVA contro uno snapshot. La prima versione
+      confrontava `S.net` a FINE PROCESSO con lo snapshot del passo 120, e dava `1` campo
+      diverso -- `_g_kernel_alpha_tot`, un contatore diagnostico di `_pesi()` che continua a
+      salire DOPO che lo snapshot e' stato scritto. **Non era una differenza fra i due run: era
+      una differenza fra due ISTANTI.** Misurato: i due snapshot hanno entrambi `1523`.
+      **Un confronto fra istanti diversi produce differenze VERE che non significano niente.**
+
+    ⚠ E I COMPLESSI NON SI CASTANO A `float`: `aa.astype(float)` **scarta la parte immaginaria**
+      (numpy lo segnala con `ComplexWarning`, e il primo confronto lo ha emesso). Qui si sottrae
+      senza cast, cosi' la parte immaginaria conta.
+    """
+    def leggi(p):
+        with gzip.open(p, "rb") as f:
+            return pickle.load(f)["attrs"]
+    a, b = leggi(p_a), leggi(p_b)
     uguali = diversi = assenti = 0
     nomi_div = []
-    for k in sorted(rif):
-        if not hasattr(net, k):
+    for k in sorted(set(a) | set(b)):
+        if k not in a or k not in b:
             assenti += 1
+            nomi_div.append("%s(presente in uno solo)" % k)
             continue
-        a = getattr(net, k)
-        b = rif[k]
         try:
-            aa = np.asarray(a)
-            bb = np.asarray(b)
+            aa = np.asarray(a[k]); bb = np.asarray(b[k])
             if aa.shape != bb.shape:
                 diversi += 1; nomi_div.append("%s(shape %s!=%s)" % (k, aa.shape, bb.shape))
                 continue
             if aa.dtype.kind in "fc" or bb.dtype.kind in "fc":
-                d = np.max(np.abs(aa.astype(float) - bb.astype(float))) if aa.size else 0.0
+                d = float(np.max(np.abs(aa - bb))) if aa.size else 0.0
                 if d == 0.0:
                     uguali += 1
                 else:
@@ -191,12 +203,34 @@ def confronta(net, p_rif, W):
 def main():
     modo = None
     for a in sys.argv[1:]:
-        if a in ("--controllo", "--prova"):
+        if a in ("--controllo", "--prova", "--confronta"):
             modo = a
     if modo is None:
         print(__doc__)
-        print("*** serve --controllo oppure --prova. Il CONTROLLO va fatto PRIMA. ***")
+        print("*** serve --controllo, --prova oppure --confronta. Il CONTROLLO va PRIMA. ***")
         return 2
+
+    if modo == "--confronta":
+        # ⚠ SOLA LETTURA: confronta due snapshot GIA' SCRITTI, senza rigirare niente.
+        #   Serve perche' il confronto della prima versione era SBAGLIATO (rete viva contro
+        #   snapshot) mentre IL RUN ERA GIUSTO: si ripara la LETTURA, non si rifa' la FISICA.
+        p_ctl = os.path.join(RADICE, "csv", "_test_fork", "_g3_controllo",
+                             "scena_000120.pkl.gz")
+        W = sys.stdout.write
+        W("IL CONTROLLO POSITIVO, riletto SNAPSHOT contro SNAPSHOT\n")
+        W("  %s\n" % os.path.relpath(RIF120, RADICE))
+        W("  %s\n" % os.path.relpath(p_ctl, RADICE))
+        if not (os.path.exists(RIF120) and os.path.exists(p_ctl)):
+            W("*** manca uno dei due snapshot ***\n")
+            return 1
+        ug, dv = confronta(RIF120, p_ctl, W)
+        if dv == 0 and ug > 0:
+            W("\n*** L'INVOLUCRO RIPRODUCE LA VALIDAZIONE: %d campi identici, 0 diversi.\n"
+              % ug)
+            W("    Qualunque differenza in `--prova` e' attribuibile allo SPEGNIMENTO. ***\n")
+            return 0
+        W("\n*** NON RIPRODUCE (%d campi diversi): la prova NON si fa. ***\n" % dv)
+        return 1
 
     os.chdir(RADICE)
     if modo == "--controllo":
@@ -247,9 +281,14 @@ def main():
     if modo == "--controllo":
         W("\n" + "=" * 92 + "\n")
         W("IL CONTROLLO POSITIVO: l'involucro riproduce la validazione?\n")
-        W("  confronto dello stato al passo 120 con `_val600/scena_000120.pkl.gz`\n")
+        W("  confronto SNAPSHOT contro SNAPSHOT al passo 120, con\n")
+        W("  `_val600/scena_000120.pkl.gz`. NON la rete viva: e' un ISTANTE DIVERSO.\n")
         W("=" * 92 + "\n")
-        ug, dv = confronta(S.net, RIF120, W)
+        p_ctl = os.path.join(dest, "scena_000120.pkl.gz")
+        if not os.path.exists(p_ctl):
+            W("  *** il controllo non ha scritto lo snapshot: non e' confrontabile ***\n")
+            return 1
+        ug, dv = confronta(RIF120, p_ctl, W)
         if dv == 0 and ug > 0:
             W("\n  *** L'INVOLUCRO RIPRODUCE LA VALIDAZIONE: %d campi identici, 0 diversi.\n" % ug)
             W("      Qualunque differenza in `--prova` e' attribuibile allo SPEGNIMENTO. ***\n")
