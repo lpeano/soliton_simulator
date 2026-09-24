@@ -1,0 +1,79 @@
+# `C1` -- `SEMINA_LAM` spenta e' byte-identica? E il controllo positivo di `D38`.
+#
+# IL RIFERIMENTO E' IL CODICE VECCHIO CHE GIRA ADESSO, non un pickle salvato
+# (rilievo di Luca): cosi' un FAIL si attribuisce a `SEMINA_LAM` e non a cambi
+# intermedi del driver (`--sep`, `CHICOOP`).
+#
+  VECCHIO  blob 49fc54d2  commit 7a36ae5  672772 byte (estratto in BINARIO)
+  NUOVO    blob 5031ffe9
+
+================================================================================================
+`C1` -- argv del driver, `SEMINA_LAM` spenta: DEVONO essere IDENTICI
+================================================================================================
+
+  [c1_vecchio] 363.8 s  rc=0  sim=_sim_vecchio.py  extra=-
+
+  [c1_nuovo] 362.0 s  rc=0  sim=soliton_simulator.py  extra=-
+  UGUALI 218   DIVERSI 0
+  solo in VECCHIO                  0
+  solo in NUOVO                    0
+  NON CONFRONTABILI (eccezione)    0
+
+  `C1` PASS PIENO: `SEMINA_LAM` spenta non cambia un bit, e nemmeno
+        `_nasce` senza gate -- con `SCALA_MIN_PASSO` acceso
+        girava gia'. E nessun campo resta non confrontato.
+
+================================================================================================
+`D38` -- ENTRAMBI con `--scala-min-passo=off`: DEVONO DIFFERIRE
+================================================================================================
+  Cambia SOLO IL CODICE: il vecchio `_nasce` e' gated e NON tronca, il nuovo SI'.
+  (Il controllo di prima confrontava ACCESO contro SPENTO: differivano per il FRENO,
+   e di `D38` non dicevano niente. Rilievo di Luca.)
+
+  [d38_vecchio] 6.0 s  rc=1  sim=_sim_vecchio.py  extra=['--scala-min-passo=off']
+    soliton_simulator.DominioViolato: [INVARIANTE] `d` VIOLA `>= LAM (= 0.800000) -- LEGGE, non opzione` al passo 1, in `memoria_hebbiana_moto`.
+    quanti: 223380
+    arco=53-294 quanti=223380 su=525973
+
+  [d38_nuovo] 8.1 s  rc=1  sim=soliton_simulator.py  extra=['--scala-min-passo=off']
+    soliton_simulator.DominioViolato: [INVARIANTE] `d0` VIOLA `>= LAM (= 0.800000) -- LEGGE, non opzione` al passo 2, in `memoria_hebbiana_moto`.
+    quanti: 98740
+    arco=282-714 quanti=98740 su=525973
+
+  VECCHIO : si ferma su `d` al passo 1, con 223380 valori fuori dominio
+  NUOVO   : si ferma su `d0` al passo 2, con 98740 valori fuori dominio
+  -> si fermano in modo DIVERSO, e ENTRAMBI i motivi sono riconosciuti.
+
+  `D38` PASS: i due codici si comportano DIVERSAMENTE a parita' di argv.
+        Il vecchio cade su `d` (la SEMINA, `_nasce` non tronca),
+        il nuovo su `d0` (l'EVOLUZIONE): la nascita e' curata,
+        e resta scoperto il MANTENIMENTO -- che e' il freno.
+
+================================================================================================
+COLLAUDO DEL CRITERIO `D38` -- il caso che DEVE fallire
+================================================================================================
+  `P1-sexies`: un criterio si collauda su un caso a risposta NOTA. Qui il caso e'
+  **LO STESSO CODICE NEI DUE BRACCI**: non c'e' nessuna cura fra loro, quindi il
+  criterio di `D38` **DEVE dare FAIL**. Se desse PASS, direbbe `PASS` a qualunque cosa.
+  (E' il buco che aveva il criterio precedente, trovato da Luca.)
+
+  [collaudo_a] 8.0 s  rc=1  sim=soliton_simulator.py  extra=['--scala-min-passo=off']
+    soliton_simulator.DominioViolato: [INVARIANTE] `d0` VIOLA `>= LAM (= 0.800000) -- LEGGE, non opzione` al passo 2, in `memoria_hebbiana_moto`.
+    quanti: 98740
+    arco=282-714 quanti=98740 su=525973
+
+  [collaudo_b] 8.2 s  rc=1  sim=soliton_simulator.py  extra=['--scala-min-passo=off']
+    soliton_simulator.DominioViolato: [INVARIANTE] `d0` VIOLA `>= LAM (= 0.800000) -- LEGGE, non opzione` al passo 2, in `memoria_hebbiana_moto`.
+    quanti: 98740
+    arco=282-714 quanti=98740 su=525973
+
+  collaudo a: si ferma su `d0` al passo 2, con 98740 valori fuori dominio
+  collaudo b: si ferma su `d0` al passo 2, con 98740 valori fuori dominio
+  -> si fermano per LO STESSO motivo, allo stesso passo, sugli stessi valori.
+
+  COLLAUDO PASS: col MEDESIMO codice il criterio di `D38` dice FAIL, come deve
+
+================================================================================================
+ESITO: 3/3
+================================================================================================
+*** PASSATO. ***

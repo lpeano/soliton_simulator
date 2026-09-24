@@ -1,3 +1,4 @@
+[TIMBRO] _capienza_lam.py  sha1-BYTE da6f98e6  committato e pulito
 # `SEMINA_LAM` -- QUANTI NODI ENTRANO DAVVERO. Semina RSA VERA, non estrapolazione.
 #
 # La capienza si legge dal RIFIUTO di `_semina_lam`, che dichiara `collocati`:

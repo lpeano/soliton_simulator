@@ -15755,3 +15755,82 @@ differisce, e quello NON è un difetto: è la cura di `D38`.**
 
 `r = 4.0`: **`462 ± 4`** contro i **`395.8 ± 8.7`** del criterio a lotti. **`+17 %`.** I numeri
 della capienza e i raggi per `n` **vanno rifatti tutti**, come avevi detto.
+
+
+---
+
+# ✅ `SEMINA_LAM` È SIGILLATA — `C1` `C2` `C3` `C4`, **e il referto è NEL REPO** *(2026-09-25)*
+
+**`csv/_seal_fork/_c1_semina/REFERTO.txt`.** *(Il giro precedente l'aveva prodotto e io te
+l'avevo riportato, **ma non era committato**: per chi legge il repo, `C1` non era mai stato
+fatto. Tuo rilievo.)*
+
+## `C1` — **PASS PIENO**, e il riferimento è il codice vecchio che gira
+
+```
+VECCHIO  blob 49fc54d2  commit 7a36ae5  672772 byte (estratto in BINARIO)
+NUOVO    blob 5031ffe9
+
+[c1_vecchio] 363.8 s  rc=0        [c1_nuovo] 362.0 s  rc=0
+UGUALI 218   DIVERSI 0
+solo in VECCHIO 0   solo in NUOVO 0   NON CONFRONTABILI 0
+```
+
+> **`218` campi identici, zero diversi, e zero campi non confrontati** — è quest'ultimo che
+> rende il `PASS` **pieno** invece che **condizionato**.
+> **`SEMINA_LAM` spenta non cambia un bit, e nemmeno `_nasce` senza gate:** con
+> `SCALA_MIN_PASSO` acceso girava già.
+
+**E il confronto è ATTRIBUIBILE**, perché il riferimento non è un pickle vecchio ma **il blob
+`49fc54d2` che gira adesso con la STESSA argv letta dal driver**: `--sep` e `CHICOOP` sono
+cambiati oggi, e un pickle li avrebbe mescolati dentro.
+
+## `D38` — **PASS**, e i due codici cadono in punti diversi
+
+```
+VECCHIO : si ferma su `d`  al passo 1, con 223380 valori fuori dominio   (su 525973)
+NUOVO   : si ferma su `d0` al passo 2, con  98740 valori fuori dominio
+-> si fermano in modo DIVERSO, e ENTRAMBI i motivi sono riconosciuti.
+```
+
+> **Il vecchio cade su `d` alla SEMINA** — `_nasce` è gated e non tronca.
+> **Il nuovo cade su `d0` all'EVOLUZIONE, al passo 2.**
+> ### **La nascita è curata; resta scoperto il MANTENIMENTO — che è il freno.**
+
+**Cambia SOLO il codice**: `--scala-min-passo=off` sta su **entrambi** i bracci. *(Il controllo
+di prima confrontava ACCESO contro SPENTO, e quei due differivano **per il freno**: di `D38` non
+dicevano niente.)*
+
+## IL COLLAUDO — **PASS**, e ora esercita **il codice che giudica**
+
+```
+collaudo a: si ferma su `d0` al passo 2, con 98740 valori fuori dominio
+collaudo b: si ferma su `d0` al passo 2, con 98740 valori fuori dominio
+-> si fermano per LO STESSO motivo, allo stesso passo, sugli stessi valori.
+COLLAUDO PASS: col MEDESIMO codice il criterio di `D38` dice FAIL, come deve
+```
+
+**`verdetto_diversi()` è UNA funzione sola**, chiamata dal criterio **e** dal collaudo: prima
+erano **due copie**, e **il collaudo verificava la copia**. Un collaudo che non esercita il
+codice giudicante non collauda niente.
+
+**E un arresto non riconosciuto ora è `FAIL`, con le ultime dodici righe dell'errore nel
+referto:** prima un crash qualunque del braccio nuovo contava come *«motivo diverso»* e `D38`
+passava. **Un crash non è un motivo di arresto diverso: è un crash.**
+
+## COSA HO COMMITTATO E COSA NO, dichiarato
+
+**SÌ:** `REFERTO.txt` e i `CONFIGURAZIONE.txt` dei quattro bracci *(la certificazione di cosa
+ha girato)*.
+**NO:** i `.pkl.gz` *(`124 MB` in tutto)* e **`_sim_vecchio.py`** *(`672 KB`)*. Quest'ultimo è
+**riproducibile da `git`** — commit `7a36ae5` — e il referto ne dichiara **blob, commit e
+byte**. È la regola dei `.pkl` applicata a una copia di codice: **il dato è il comando che lo
+produce.**
+
+## ❗ E IL BILANCIO DI GIORNATA SU DI ME, perché è un conto e non un'impressione
+
+**Quattro criteri scritti oggi avevano un ramo che non verificava ciò che il test dichiarava:**
+`dv > 0` letto come effetto *(`T5`, `Z145`)* · *«entrambi arrivano in fondo → `PASS`»* ·
+*«arresto non riconosciuto → diverso»* · e il collaudo che **duplicava** la logica invece di
+chiamarla. **La forma è sempre la stessa: un `or` che salva il test quando il caso interessante
+non si presenta.** Li hai trovati tutti e quattro tu.

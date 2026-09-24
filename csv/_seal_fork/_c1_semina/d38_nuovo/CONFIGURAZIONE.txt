@@ -1,0 +1,184 @@
+# REFERTO DI CONFIGURAZIONE DEL RUN
+#
+# Lo stato EFFETTIVO dei flag, letto DAL MODULO dopo `_applica_flag`.
+# I nomi vengono dall'AST (assegnamenti di MODULO, nome MAIUSCOLO), non da una
+# lista a mano: una lista a mano invecchia in silenzio.
+#
+quando           2026-09-25 00:00:58
+simulatore       soliton_simulator.py  sha1-BYTE 5031ffe92eef0d2d3fce3a870fefe8c67d5404e8
+driver           csv\_test_fork\_scena_video.py  sha1-BYTE e043e53f76c3f146b488f10ed44e86c642d1124b
+git              HEAD 92144d7c971aefd22d4f09cf525f2be82e5be71e  branch fork-su2  albero *** SPORCO ***
+seme             42
+
+ARGV VERBATIM -- quello passato al SIMULATORE:
+  soliton_simulator.py --test N-MASSE --nmasse 3 --sep 4.0 --giri 0 --campo-spinoriale --spinore-vivo --spinore-corretto --chi-core --calore-scal --deparam-orologio --verlet --fork-su2 --fork-su2-mem --cs-dinamico --tau-luce --rumore-colorato --pav-com --guscio-morbido --zeta-vir --ritmo-wrap-2pi --tempo-unico-mitosi --chi-basc --chi-coop --coes-adim --peq-esatto --peq-nascita-locale --coes-causale --anom-simm --invarianti=on --plast-din --viriale --olon-part
+ARGV VERBATIM -- quello con cui e' stato invocato il processo:
+  C:\Users\lpeano\soliton_simulator\csv\_test_fork\_scena_video.py 20 C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_c1_semina\d38_nuovo --serie=20 --scala-min-passo=off
+
+================================================================================================
+I FLAG CHE L'ARGV HA CAMBIATO rispetto al default del sorgente: 26
+================================================================================================
+nome                           default sorgente   EFFETTIVO         
+------------------------------------------------------------------------------------------------
+ANOM_SIMM                      False              True              
+CALORE_VETTORIALE              True               False             
+CAMPO_SPINORIALE               False              True              
+CHI_BASC                       False              True              
+CHI_COOP                       False              True              
+CHI_CORE                       False              True              
+COES_ADIM                      False              True              
+COES_CAUSALE                   False              True              
+CS_DINAMICO                    False              True              
+DEPARAM_OROLOGIO               False              True              
+FORK_SU2                       False              True              
+FORK_SU2_MEM                   False              True              
+GUSCIO_MORBIDO                 False              True              
+OLON_PART                      False              True              
+PAV_COM                        False              True              
+PEQ_ESATTO                     False              True              
+PEQ_NASCITA_LOCALE             False              True              
+PLAST_DIN                      False              True              
+RITMO_WRAP_2PI                 False              True              
+RUMORE_COLORATO                False              True              
+SPINORE_CORRETTO               False              True              
+TAU_LUCE                       False              True              
+TEMPO_UNICO_MITOSI             False              True              
+VERLET                         False              True              
+VIRIALE                        False              True              
+ZETA_VIR                       False              True              
+
+NON CONFRONTABILI (default non scalare: lista, dict, array): 4 -- BOTTONI, DOMINI, TRACCIA_D0_COPPIE, TRACCIA_D0_NODI
+  Per questi il referto riporta il valore EFFETTIVO nella tabella completa, ma NON
+  dice se e' cambiato: dirlo richiederebbe un confronto che non ho fatto.
+
+================================================================================================
+TUTTI I FLAG E LE COSTANTI DI MODULO: 125
+================================================================================================
+nome                           default sorgente   EFFETTIVO          
+------------------------------------------------------------------------------------------------
+ALPHA_NAT                      0.0                0.0               
+ANOM_SIMM                      False              True                <-- CAMBIATO
+ANTIFASE_ADD                   False              False             
+BOTTONI                        []                 <list>            
+CALORE_VETTORIALE              True               False               <-- CAMBIATO
+CAMPO_SPINORIALE               False              True                <-- CAMBIATO
+CHI_BASC                       False              True                <-- CAMBIATO
+CHI_COOP                       False              True                <-- CAMBIATO
+CHI_CORE                       False              True                <-- CAMBIATO
+CHI_DA_SPINORE                 False              False             
+CMAP_INTERF                                       <LinearSegmentedColormap>
+COES_ADIM                      False              True                <-- CAMBIATO
+COES_CAUSALE                   False              True                <-- CAMBIATO
+COMPAT_CHI                     False              False             
+COPPIA_DENSITA                 False              False             
+COPPIA_MIT                     1.0                1.0               
+COPPIA_RECIPROCA               False              False             
+CROSSOVER_K                    1.0                1.0               
+CS_DINAMICO                    False              True                <-- CAMBIATO
+DEBUG_INIT                     False              False             
+DENS_CRIT_B                    0.14               0.14              
+DENS_CRIT_C                    484.0              484.0             
+DENS_CRIT_THETA                0.14               0.14              
+DEPARAM_OROLOGIO               False              True                <-- CAMBIATO
+DIFF_RES                       0.0                0.0               
+DOMINI                         {'d': ('lam', 'la lunghezza VERA di un arco'), 'd0': ('lam', 'la lunghezza di RIPOSO di un arco'), 'vd': ('finito', 'velocita di `d`: nessun vincolo di segno, e non deve esserci'), 'peq': ('peq', 'la pressione di equilibrio: >= 0, e `nan` SOLO sugli archi marcati'), 'tw': ('finito', 'torsione d arco: puo essere di entrambi i segni'), 'twp': ('finito', 'torsione precedente'), '_rep': ('finito', 'memoria di repulsione d arco'), '_sin2_vir': ('finito', 'sin^2 della viriale: in [0,1] per costruzione, si verifica FINITO'), '_dt_e_ultimo': ('pos', 'il passo di tempo efficace d arco: un tempo e POSITIVO'), 'i': ('indice', 'indice di NODO del lato i di ogni arco'), 'j': ('indice', 'indice di NODO del lato j di ogni arco'), 'psi': ('finito', 'campo di materia complesso'), 'phi': ('fase', 'fase, a doppia copertura: il dominio E [0, 4pi)'), 'phi0': ('fase', 'fase di riferimento'), 'phi_s': ('finito', 'fase spinoriale: nessun vincolo dichiarato oltre la finitezza'), 'phivel': ('finito', 'velocita di fase: entrambi i segni'), 'eta': ('nonneg', 'eta di un nodo: un ETA non e negativa'), 'pos': ('finito', 'posizione di DISEGNO: nessun vincolo fisico'), 'perc_chi': ('segno', 'la CARICA: segno di doppia copertura, in {-1,+1}'), 'perc_geom': ('segno', 'la GEOMETRIA: il giro e compiuto o no, in {-1,+1}'), 'perc_tw': ('finito', 'percentuale di torsione'), 'rho_spin': ('nonneg', 'densita spinoriale: una DENSITA non e negativa'), 'omega_s': ('finito', 'velocita angolare spinoriale: entrambi i segni'), 'mem_mot': ('finito', 'memoria di moto'), '_deg': ('nonneg', 'grado di un nodo: un CONTEGGIO non e negativo'), '_cs_nodo_prev': ('pos', 'velocita delle onde metriche: una VELOCITA e positiva'), '_r_corrente': ('pos', 'ritmo dell orologio locale: un RITMO e positivo'), '_fatt_cs_ultimo': ('pos', 'fattore di cs: positivo per costruzione'), '_psi_prec': ('finito', 'psi del passo precedente'), '_psi_spinor': ('unita', 'lo spinore primario: |psi| = 1'), '_psi_spin_prec': ('finito', 'spinore del passo precedente'), 'psi_spin': ('finito', 'spinore ricostruito nel passo'), '_spinor_lift': ('finito', 'sollevamento spinoriale'), '_nb': ('unita', 'versore di Bloch: |n| = 1'), '_nb_prec': ('unita', 'versore di Bloch committato'), '_nb_ret': ('unita', 'versore di Bloch RITARDATO'), '_xi_rumore': ('finito', 'rumore colorato'), '_chi_core_nodi': ('finito', 'chiralita del core locale'), '_chi_geom_nodi': ('finito', 'chiralita GEOMETRICA, cache separata (CHI_COOP)'), '_chi_core_rho0': ('finito', 'densita di riferimento del core'), '_chi_core_raggio': ('nonneg', 'raggio del core: un RAGGIO non e negativo'), '_perm': ('finito', 'permutazione di cache: non e fisica, si verifica finita')} <dict>            
+DT                             0.01               0.01              
+ELAST_C                        100.0              100.0             
+EMB_ETA                        0.12               0.12              
+EMB_IT                         3                  3                 
+FASE_2PI                       False              False             
+FERMA_DOPO_NSUB                False              False             
+FORK_SU2                       False              True                <-- CAMBIATO
+FORK_SU2_MEM                   False              True                <-- CAMBIATO
+FRAME_DRAG                     True               True              
+GAMMA                          0.05               0.05              
+GAMMA_TURBO                    1.0                1.0               
+GRAV_AMPIEZZA                  False              False             
+GRAV_BIFASE                    True               True              
+GUSCIO_MORBIDO                 False              True                <-- CAMBIATO
+G_PH                                              0.003             
+HAM_SRC                        0.0                0.0               
+INVARIANTI                     True               True              
+KERNEL_ALPHA                   1.0                1.0               
+KICK_TW                        0.35               0.35              
+KURAMOTO_SU2                   False              False             
+K_C                            2.0                2.0               
+K_FRANGE                       0.0                0.0               
+K_SYNC                         1.0                1.0               
+LAM                            0.8                0.8               
+LAM_BASE                       0.8                0.8               
+LS_AZIM                        False              False             
+L_CONSERVA                     False              False             
+MAX_NODI                       4000000            4000000           
+MEM_HEBB                       True               True              
+MEM_MOTO                       True               True              
+MEM_MOTO_TUTTO                 True               True              
+MITMAX                         0                  0                 
+MITOSI_DIR                     0.0                0.0               
+MU_PSI                         -0.05              -0.05             
+M_PH                           1.0                1.0               
+OLON_PART                      False              True                <-- CAMBIATO
+OROLOGIO_SEGNO                 False              False             
+PASSI_PER_FRAME                6                  6                 
+PAV_COM                        False              True                <-- CAMBIATO
+PEQ_ESATTO                     False              True                <-- CAMBIATO
+PEQ_NASCITA_LOCALE             False              True                <-- CAMBIATO
+PHI_CRIT                                          6.283185307179586 
+PLAST_DIN                      False              True                <-- CAMBIATO
+PLAST_MIT                      0.0                0.0               
+POLO_MATURO                    False              False             
+P_LAM                          1.0                1.0               
+QMIN_M                         0.0                0.0               
+REGIME                         deterministico     deterministico    
+REPULS_LEGGE                   True               True              
+RITMO_WRAP_2PI                 False              True                <-- CAMBIATO
+RUMORE_COLORATO                False              True                <-- CAMBIATO
+SCALA_AMP                      1.0                1.0               
+SCALA_B                        1.0                1.0               
+SCALA_MIN                      False              False             
+SCALA_MIN_PASSO                False              False             
+SCALA_P_MEDIANA                False              False             
+SCHERMATURA                    True               True              
+SCUOTIMENTO                                       True              
+SEME_INIZIALE                  900                900               
+SEMINA_LAM                     False              False             
+SPINORE                        True               True              
+SPINORE_CORRETTO               False              True                <-- CAMBIATO
+SPINORE_VIVO                   True               True              
+SPIN_FEEDBACK                  True               True              
+SPIN_LARMOR                    False              False             
+SPIN_POSITIVI                  False              False             
+STEP2_OROLOGIO                 True               True              
+SYNC_FASE_OROLOGIO             False              False             
+SYNC_SPINORE                   False              False             
+SYNC_UPDATE                    False              False             
+SYNC_W                         1.0                1.0               
+TAU_A                                             50.0              
+TAU_A_LOCALE                   True               True              
+TAU_BG                         5.0                5.0               
+TAU_DIFF                       1.0                1.0               
+TAU_LOC                        1.0                1.0               
+TAU_LOCALI                     True               True              
+TAU_LUCE                       False              True                <-- CAMBIATO
+TAU_P                          2.0                2.0               
+TAU_TW                         20.0               20.0              
+TAU_USA_D0                     False              False             
+TEMPO_PROPRIO_ORIENTATO        False              False             
+TEMPO_SEGNO                    False              False             
+TEMPO_UNICO_MITOSI             False              True                <-- CAMBIATO
+TESTS                                             <dict>            
+TORS_4PI                       True               True              
+TRACCIA_D0                     False              False             
+TRACCIA_D0_COPPIE              ((16, 481),)       <tuple>           
+TRACCIA_D0_NODI                (16, 481, 621, 627, 837) <tuple>           
+TRACCIA_PEQ                    False              False             
+TRACCIA_VD                     False              False             
+TW_SPINORE                     False              False             
+VERLET                         False              True                <-- CAMBIATO
+VERSO_CHI                      False              False             
+VIRIALE                        False              True                <-- CAMBIATO
+VISTA_RETE                     False              False             
+ZETA_LOC                       False              False             
+ZETA_M                         0.75               0.75              
+ZETA_VIR                       False              True                <-- CAMBIATO
+
