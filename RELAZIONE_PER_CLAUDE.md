@@ -15685,3 +15685,73 @@ qualcosa**: è una media fra due fisiche diverse.
 >
 > **È lo stesso errore di prima con un altro numero:** avevo sostituito un'estrapolazione da un
 > punto con un'estrapolazione da una retta **che non ha il diritto di essere una retta**.
+
+
+---
+
+# ✅ L'ARRESTO DERIVATO È IN CODICE, E `C2` `C3` `C4` PASSANO *(2026-09-24)*
+
+**Zhang-Torquato in `_semina_lam`:** celle di lato `LAM/√3`, si classificano *(morta / libera /
+da dividere)*, si propone solo nelle vive, **si finisce quando non ne resta nessuna**.
+**Un numero solo: `LAM`.** La risoluzione ultima è `LAM · eps` del calcolatore, con il suo
+contatore `A8`.
+
+## `C2` — **la capienza NON dipende più da `n` chiesto: IDENTICA, non «vicina»**
+
+```
+r=2.264  ask=50000 -> [98, 98, 97, 101]        ask=100000 -> [98, 98, 97, 101]        IDENTICI
+r=4.000  ask=50000 -> [469, 461, 459, 462]     ask=100000 -> [469, 461, 459, 462]     IDENTICI
+r=5.480  ask=50000 -> [1149, 1127, 1117, 1136] ask=100000 -> [1149, 1127, 1117, 1136] IDENTICI
+```
+
+**Col criterio a lotti gli scarti erano `+0.61 %`, `+4.11 %`, `+2.77 %`. Ora sono ZERO esatto**,
+perché la saturazione non è più una rinuncia: **è una proprietà della geometria.**
+
+## `C3` — **`0.384` nella sfera interna, entro la dispersione fra quattro semi**
+
+```
+                                    frazione INTERNA (nodi a distanza >= R_CONN dal bordo)
+r= 4.00  r_int=1.60  n_int=[28,22,22,24]        0.3750 +- 0.0383
+r= 5.48  r_int=3.08  n_int=[171,170,176,179]    0.3811 +- 0.0080
+r= 7.60  r_int=5.20  n_int=[835,843,829,840]    0.3809 +- 0.0024
+r=10.00  r_int=7.60  n_int=[2637,2610,2633,2616] 0.3826 +- 0.0016
+```
+
+> ### **Converge a `0.3826 ± 0.0016` contro il `0.384` noto: dentro la dispersione.**
+> **È il controllo contro un numero che nessuno qui ha scelto, e passa.**
+
+## `C4` — **nessun rifiuto falso**, su quattro semi × quattro taglie *(`1`, `k/2`, `k-1`, `k`)*
+
+**Passa a entrambi i raggi provati.** **Era il difetto che avevi trovato, e non c'è più.**
+
+## ❌ E LA MIA DIAGNOSI DI MEZZ'ORA PRIMA ERA SBAGLIATA
+
+Avevo scritto: **«`C3` ha preso un difetto del mio codice: frazione `0.536` contro `0.384`»**.
+**Falso, e per una ragione che tu avevi già scritto nel mandato:** quel `0.536` era la frazione
+**GLOBALE**, e tu avevi detto esplicitamente di misurarla **nella sfera interna**. La globale è
+alta per due motivi che non sono difetti — le sfere di raggio `LAM/2` **sporgono** oltre `r`, e il
+denominatore non le contiene.
+
+> **La prova che la mia diagnosi era sbagliata: dopo la «correzione» la frazione GLOBALE è SALITA**
+> *(`0.536` → `0.568` a `r = 2.0`)*. **Se il `0.536` fosse stato il difetto, la cura lo avrebbe
+> abbassato.** Ho letto un numero che tu avevi già dichiarato inadatto, e ne ho tratto una
+> diagnosi.
+
+**⚠ MA IL CAMBIAMENTO CHE HO FATTO RESTA GIUSTO, per una ragione diversa da quella che avevo
+dato.** La prima stesura proponeva **un punto per cella**: le celle piccole *(gli interstizi)*
+pesavano come quelle grandi, quindi **le proposte non erano uniformi nel volume libero** — e
+l'`RSA` è *esattamente* «uniforme nella regione, condizionato all'accettazione», cioè **uniforme
+nel volume LIBERO**. Ora la cella si sorteggia con peso `lato³`. **La cura era giusta; il motivo
+che avevo scritto no.**
+
+## ⚠ `C1` RESTA DA GIRARE, e va detto come si leggerà
+
+**`C1` non può essere «byte-identico» in assoluto**, perché nello stesso lavoro **`_nasce` ha
+perso il gate** *(`D38`)*. **Ma con la configurazione del driver è identico per costruzione**:
+`SCALA_MIN_PASSO` è acceso, quindi `_nasce` **girava già**. **Con `--scala-min-passo=off`
+differisce, e quello NON è un difetto: è la cura di `D38`.**
+
+## E LA CAPIENZA CAMBIA — **l'arresto esatto ne trova PIÙ**
+
+`r = 4.0`: **`462 ± 4`** contro i **`395.8 ± 8.7`** del criterio a lotti. **`+17 %`.** I numeri
+della capienza e i raggi per `n` **vanno rifatti tutti**, come avevi detto.

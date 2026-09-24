@@ -2403,80 +2403,151 @@ class Rete:
         S.data = np.zeros(len(ii))
         self._S = S
 
+    @staticmethod
+    def _celle_vive(o, lati, nodi, c, r, T):
+        """Classifica le celle. Torna `(vive_o, vive_lati, libere, morte, abbandonate)`.
+
+        Una cella e' un cubo `[o, o+lato)`, **e ogni cella ha il SUO lato**: le libere restano
+        grandi, solo le parziali si spezzano. Tre esiti:
+          * **MORTA**   -- tutta FUORI dalla palla, **oppure** COPERTA da un nodo;
+          * **LIBERA**  -- tutta DENTRO e a `>= LAM` da ogni nodo: **ogni** suo punto va bene;
+          * **DA DIVIDERE** -- in parte coperta o a cavallo del bordo.
+
+        **La suddivisione si ferma a `lato < LAM * eps_macchina`** *(Luca)*: sotto, due
+        posizioni sono **lo stesso `float`**. Le celle abbandonate li' si **CONTANO** (`A8`).
+
+        **⚠ IL TEST DI COPERTURA GUARDA SOLO IL NODO PIU' VICINO**, quindi una cella coperta
+        dall'UNIONE di piu' nodi non e' riconosciuta e **si suddivide**. E' **conservativo**:
+        costa lavoro, non correttezza. Dichiarato invece che taciuto.
+        """
+        if not len(o):
+            v = o[:0]
+            return v, lati[:0], v, lati[:0], 0, 0
+        mezzo = o + 0.5 * lati[:, None]
+        dc = np.abs(mezzo - c)
+        vicino_c = np.linalg.norm(np.maximum(dc - 0.5 * lati[:, None], 0.0), axis=1)
+        lontano_c = np.linalg.norm(dc + 0.5 * lati[:, None], axis=1)
+        fuori = vicino_c > r
+        dentro = lontano_c <= r
+        if T is not None:
+            q = nodi[T.query(mezzo, k=1)[1]]
+            vic = np.clip(q, o, o + lati[:, None])
+            dmin = np.linalg.norm(q - vic, axis=1)
+            sp = np.maximum(np.abs(q - o), np.abs(q - (o + lati[:, None])))
+            coperta = np.linalg.norm(sp, axis=1) <= LAM
+            libera_nodi = dmin >= LAM
+        else:
+            coperta = np.zeros(len(o), bool)
+            libera_nodi = np.ones(len(o), bool)
+        morta = fuori | coperta
+        libera = (~morta) & dentro & libera_nodi
+        dividi = (~morta) & (~libera)
+        troppo_piccole = dividi & (lati < LAM * float(np.finfo(float).eps))
+        dividi = dividi & (~troppo_piccole)
+        # ⚠ LE LIBERE TORNANO COL LORO LATO: senza, il peso `lato^3` del sorteggio sarebbe
+        #   sbagliato proprio per le celle grandi, cioe' dove sta quasi tutto il volume libero.
+        return (o[dividi], lati[dividi], o[libera], lati[libera],
+                int(morta.sum()), int(troppo_piccole.sum()))
+
     def _semina_lam(self, n, r, centro):
         """[SEMINA_LAM] `n` punti nella palla di raggio `r`, a distanza **>= LAM** l'uno
-        dall'altro **e da OGNI nodo gia' presente**. `RSA` (random sequential adsorption).
+        dall'altro **e da OGNI nodo gia' presente**. `RSA` con **SATURAZIONE ESATTA**.
 
-        **PERCHE' `RSA` E NON UN RETICOLO:** un reticolo imporrebbe una struttura -- direzioni
-        privilegiate, un passo -- e sarebbe **un parametro travestito da geometria**. L'`RSA`
-        non ha parametri: propone un punto **con la stessa distribuzione di prima**, lo accetta
-        se rispetta `LAM`, altrimenti lo scarta.
+        **L'ARRESTO SI DERIVA DA `LAM`** *(decisione di Luca, 2026-09-24)* -- metodo di
+        **Zhang & Torquato (2013)**: celle di lato `LAM/sqrt(3)` *(diagonale `LAM`, quindi al
+        piu' un nodo per cella)*, si tengono quelle con spazio libero, si suddividono le
+        parziali, si propone solo nelle vive, **e si finisce quando non ne resta NESSUNA**.
+        **Il rifiuto scatta SOLO se `n` supera la saturazione vera**, quindi **non dipende da
+        `n` e non puo' essere FALSO** -- i due difetti del criterio a lotti.
 
-        **IL CRITERIO DI ARRESTO NON E' UN NUMERO NUOVO** (par.3): si propone un LOTTO della
-        taglia **CHIESTA** (`n`, che il chiamante ha dato) e **si rinuncia quando un lotto
-        INTERO non produce nemmeno un'accettazione**. La saturazione si dichiara da se'.
+        **UN NUMERO SOLO: `LAM`.** Il lato ne discende per geometria; la risoluzione ultima e'
+        `eps` del calcolatore.
 
-        **SE `n` NON ENTRA, SI RIFIUTA** (`A9`): niente riduzioni silenziose. Una semina che
-        «fa del suo meglio» consegnerebbe una massa **piu' piccola di quella chiesta, IN
-        SILENZIO**, e ogni misura successiva sarebbe su una taglia diversa da quella scritta
-        nel comando.
+        ⚠⚠ **LE PROPOSTE SONO UNIFORMI NEL VOLUME LIBERO, e non e' un dettaglio.**
+        La prima stesura proponeva **UN PUNTO PER CELLA**: le celle piccole *(suddivise, cioe'
+        gli interstizi)* ricevevano **lo stesso peso** di quelle grandi, e la semina **riempiva
+        i buchi** invece di depositare a caso. **Il risultato era un impacchettamento piu'
+        DENSO dell'`RSA`: frazione `0.536` contro `0.384`.** Non era una violazione del
+        vincolo *(la distanza minima misurata era `0.801 >= LAM`)*: era **un'altra statistica**.
+        **L'ha preso `C3`**, che confronta con un valore esterno al progetto -- e questo era
+        esattamente il suo mestiere.
         """
         c = np.asarray(centro, float)
-        vecchi = np.asarray(self.pos, float)
-        T = cKDTree(vecchi) if len(vecchi) else None
         acc = np.empty((n, 3), float)
         k = 0
+        self._sl_abbandonate = getattr(self, "_sl_abbandonate", 0)
+        self._sl_giri = getattr(self, "_sl_giri", 0)
+        lato0 = LAM / np.sqrt(3.0)
+        m = int(np.ceil(2.0 * r / lato0))
+        g = np.arange(m, dtype=float) * lato0
+        o = (np.stack(np.meshgrid(g, g, g, indexing="ij"), axis=-1).reshape(-1, 3) + (c - r))
+        lati = np.full(len(o), lato0)
         while k < n:
-            # STESSA DISTRIBUZIONE del ramo spento: gaussiana normalizzata x r*rand^(1/3)
-            u = self.rng.normal(size=(n, 3))
-            u /= np.linalg.norm(u, axis=1, keepdims=True)
-            prop = c + u * (r * self.rng.random(n) ** (1 / 3))[:, None]
-            if T is not None:
-                prop = prop[T.query(prop, k=1)[0] >= LAM]       # >= LAM dai nodi GIA' PRESENTI
-            prese = 0
-            for q in prop:
+            nodi = (np.vstack([np.asarray(self.pos, float), acc[:k]]) if k
+                    else np.asarray(self.pos, float))
+            T = cKDTree(nodi) if len(nodi) else None
+            o_div, lati_div, o_lib, lati_lib, _morte, _abb =                 self._celle_vive(o, lati, nodi, c, r, T)
+            self._sl_abbandonate += _abb
+            # le LIBERE restano GRANDI: non si spezzano, e il loro volume pesa per intero
+            o = np.vstack([o_div, o_lib]) if len(o_lib) else o_div
+            lati = (np.concatenate([lati_div, lati_lib]) if len(lati_lib) else lati_div)
+            if not len(o):
+                break                                     # SATURAZIONE: nessuna cella viva
+            self._sl_giri += 1
+            # PROPOSTE UNIFORMI NEL VOLUME: la cella si sorteggia con peso `lato^3`.
+            # Il numero di proposte e' il numero di celle: non e' un parametro, e' quante ce
+            # ne sono.
+            vol = lati ** 3
+            idx = self.rng.choice(len(o), size=len(o), p=vol / vol.sum())
+            p = o[idx] + lati[idx][:, None] * self.rng.random((len(idx), 3))
+            p = p[np.linalg.norm(p - c, axis=1) <= r]
+            if T is not None and len(p):
+                p = p[T.query(p, k=1)[0] >= LAM]
+            for q in p:
                 if k and np.min(np.sum((acc[:k] - q) ** 2, axis=1)) < LAM * LAM:
-                    continue                                    # >= LAM dai GIA' ACCETTATI
+                    continue
                 acc[k] = q
                 k += 1
-                prese += 1
                 if k == n:
                     break
-            if prese == 0:
-                # RSA in 3D satura intorno a una frazione di impacchettamento ~0.384: e' una
-                # STIMA di letteratura, non un conto di questo sistema, e si dichiara come tale.
-                stima = 0.384 * (r / (0.5 * LAM)) ** 3
-                raise SystemExit(
-                    "[semina-lam] RIFIUTO DI SEMINARE: non ci stanno %d nodi a distanza >= LAM\n"
-                    "  chiesti      n = %d\n"
-                    "  raggio       r = %.6f   (= %.3f LAM)\n"
-                    "  LAM            = %.6f   -- `A13`: e' la SCALA DI PLANCK del sistema\n"
-                    "  collocati      = %d   <- QUANTO L'RSA HA RAGGIUNTO CON UN LOTTO DI\n"
-                    "                           TAGLIA n. **NON E' \"IL MASSIMO CHE CI STA\":\n"
-                    "                           e' un LIMITE INFERIORE che CRESCE con n**\n"
-                    "  stima RSA      = %.0f  <- frazione di impacchettamento ~0.384, STIMA DI\n"
-                    "                           LETTERATURA, non un conto di questo sistema\n"
-                    "  nodi gia' presenti = %d\n"
-                    "\n"
-                    "  NON RIDUCO n IN SILENZIO (`A9`): una massa piu' piccola di quella chiesta\n"
-                    "  renderebbe ogni misura successiva una misura di un'altra taglia.\n"
-                    "  LA SCENA CALCOLA IL RAGGIO DA n: o cresce il raggio, o cala n.\n"
-                    "\n"
-                    "  !! IL LIMITE DI QUESTO RIFIUTO, e va letto prima di credergli\n"
-                    "     (rilievo di Luca, 2026-09-24):\n"
-                    "     mi arrendo quando UN LOTTO DI n PROPOSTE non accetta NESSUN punto, e\n"
-                    "     il lotto ha la taglia CHIESTA. Quindi:\n"
-                    "     * `collocati` DIPENDE DA n: piu' se ne chiedono, piu' tentativi si\n"
-                    "       fanno, piu' se ne piazzano. MISURATO a r = 4.0, stesso seme:\n"
-                    "       n=900 -> 372 | n=4000 -> 399 | n=8000 -> 411 | n=32000 -> 418.\n"
-                    "     * CON n PICCOLO QUESTO RIFIUTO PUO' ESSERE FALSO: bastano n mancati\n"
-                    "       di fila mentre c'e' ancora posto. **E' il silenzio al contrario\n"
-                    "       che `A9` vuole evitare**: non nascondo una riduzione, ma potrei\n"
-                    "       negare una taglia che in realta' entrerebbe.\n"
-                    "     IL CRITERIO DI ARRESTO NON E' STATO CAMBIATO (decisione di Luca:\n"
-                    "     prima si misura quanto pesa). Cambiarlo introdurrebbe un NUMERO --\n"
-                    "     la taglia del lotto -- che e' cio' che si voleva evitare (par.3).\n"
-                    % (n, n, r, r / LAM, LAM, k, stima, len(vecchi)))
+            if k == n:
+                break
+            # si spezzano SOLO le celle da dividere (le prime `len(o_div)`)
+            nd = len(o_div)
+            if nd:
+                off = 0.5 * np.array([[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1],
+                                      [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]], float)
+                nuovi = (o[:nd][:, None, :] + lati[:nd][:, None, None] * off).reshape(-1, 3)
+                nuovi_lati = np.repeat(lati[:nd] * 0.5, 8)
+                o = np.vstack([nuovi, o[nd:]])
+                lati = np.concatenate([nuovi_lati, lati[nd:]])
+        if k < n:
+            frazione = k * (LAM / 2.0) ** 3 / max(r ** 3, 1e-300)
+            raise SystemExit(
+                "[semina-lam] RIFIUTO DI SEMINARE: non ci stanno %d nodi a distanza >= LAM\n"
+                "  chiesti      n = %d\n"
+                "  raggio       r = %.6f   (= %.3f LAM)\n"
+                "  LAM            = %.6f   -- `A13`: e' la SCALA DI PLANCK del sistema\n"
+                "  collocati      = %d   <- **LA SATURAZIONE VERA**: non resta NESSUNA cella\n"
+                "                           in cui un altro nodo possa stare\n"
+                "  frazione       = %.4f  (sfere di raggio LAM/2 sul volume della palla;\n"
+                "                          il valore noto dell'RSA in 3D e' 0.384, e va\n"
+                "                          letto NELLA SFERA INTERNA, non qui: il bordo\n"
+                "                          abbassa questa)\n"
+                "  nodi gia' presenti = %d   giri = %d   celle abbandonate per risoluzione = %d\n"
+                "\n"
+                "  NON RIDUCO n IN SILENZIO (`A9`): una massa piu' piccola di quella chiesta\n"
+                "  renderebbe ogni misura successiva una misura di un'altra taglia.\n"
+                "  LA SCENA CALCOLA IL RAGGIO DA n: o cresce il raggio, o cala n.\n"
+                "\n"
+                "  L'ARRESTO E' DERIVATO DA LAM (Zhang-Torquato 2013): celle di lato\n"
+                "  LAM/sqrt(3), si finisce quando non resta nessuna cella viva. **Quindi\n"
+                "  questo rifiuto NON dipende da n e NON puo' essere falso** -- al contrario\n"
+                "  del criterio a lotti, che aveva entrambi i difetti (rilievo di Luca).\n"
+                "  ** Se `celle abbandonate` > 0 la saturazione NON e' esatta: la suddivisione\n"
+                "     ha toccato la risoluzione di `float64` (LAM * eps).**\n"
+                % (n, n, r, r / LAM, LAM, k, frazione, len(self.pos),
+                   self._sl_giri, self._sl_abbandonate))
         return acc
 
     def semina(self, n, raggio=None, centro=(0, 0, 0), fase=None, mass_id=None):

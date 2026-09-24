@@ -1538,7 +1538,7 @@ invece di zero.
 
 ---
 
-<!-- SCHEDA nome=nascita-archi funzioni=_allaccia,_nasce,semina,_semina_lam flag=SEMINA_LAM,NASCITA_LAM,SCALA_MIN,SCALA_MIN_PASSO,LAM -->
+<!-- SCHEDA nome=nascita-archi funzioni=_allaccia,_nasce,semina,_semina_lam,_celle_vive flag=SEMINA_LAM,NASCITA_LAM,SCALA_MIN,SCALA_MIN_PASSO,LAM -->
 
 # ⑫ LA NASCITA DEGLI ARCHI — **la cura della semina** *(`D38`, decisione `D-b` di Luca)*
 
@@ -1826,6 +1826,38 @@ diagonale `LAM`)*.
 > arbitraria, **non la rende innocua**. Se celle vengono abbandonate lì, la saturazione
 > dichiarata **non è esatta**, ed è esattamente ciò che il contatore deve rendere visibile.
 > **Un presidio che non conta non è un presidio.**
+
+## 5-ter-bis. ✅ **IL CODICE DELL'ARRESTO DERIVATO** — *2026-09-24*
+
+**Due metodi:** `_celle_vive` *(la classificazione)* e `_semina_lam` *(il ciclo)*.
+
+```
+celle di lato LAM/sqrt(3), OGNI cella col SUO lato (le libere restano grandi)
+  MORTA        tutta fuori dalla palla, OPPURE coperta da un nodo
+  LIBERA       tutta dentro e a >= LAM da ogni nodo: ogni suo punto va bene
+  DA DIVIDERE  in parte coperta, o a cavallo del bordo -> si spezza in 8
+la cella si sorteggia con peso `lato^3`; si finisce quando non resta nessuna cella
+```
+
+### ⚠ DUE LIMITI DEL CODICE, dichiarati invece che taciuti
+
+1. **il test di copertura guarda solo il nodo PIÙ VICINO**: una cella coperta dall'**unione** di
+   più nodi non è riconosciuta e **si suddivide**. È **conservativo** — costa lavoro, non
+   correttezza;
+2. **la risoluzione `LAM · eps`** ferma la suddivisione, e le celle abbandonate lì si **contano**
+   *(`_sl_abbandonate`)*. **Se il contatore sale, la saturazione dichiarata non è esatta.**
+
+### ❌ E UNA DIAGNOSI MIA, SBAGLIATA, che resta scritta
+
+Avevo scritto che **`C3` aveva preso un difetto del codice** *(frazione `0.536` contro `0.384`)*.
+**Era la frazione GLOBALE, che il mandato di Luca aveva già dichiarato inadatta.**
+**La prova che la diagnosi era sbagliata: dopo la «correzione» la globale è SALITA** *(`0.536`
+→ `0.568`)*. **Ho letto un numero dichiarato inadatto e ne ho tratto una conclusione.**
+
+**Il cambiamento resta comunque giusto, per un'altra ragione:** proponevo **un punto per cella**,
+quindi gli interstizi pesavano come le regioni grandi e **le proposte non erano uniformi nel
+volume libero** — e l'`RSA` è *esattamente* «uniforme nella regione, condizionato
+all'accettazione». **La cura era giusta; il motivo che avevo scritto no.**
 
 ## 5-quater. I CRITERI DELL'ARRESTO DERIVATO — **fissati PRIMA del codice** *(Luca)*
 
