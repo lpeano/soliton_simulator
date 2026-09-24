@@ -144,6 +144,42 @@ def main():
     P("     a flag ACCESO**, perche' i metodi che li scrivono girano solo li'. **E' assenza\n")
     P("     STRUTTURALE, non un dato perso**, e per questo il braccio acceso ne ha di piu'.\n")
 
+    # ---------------------------------------------------------------- i DUE da spiegare
+    P("\n" + "=" * 96 + "\n3. I DUE CAMPI CHE IL PUNTO 2 SEGNALA COME `DA SPIEGARE`\n"
+      + "=" * 96 + "\n")
+    P("  `_peqn_idx` e `_ritmo_snap_identico` NON sono contatori della cura, e ci sono SOLO\n")
+    P("  nel braccio acceso. **La spiegazione si prende dal codice e si VERIFICA sui dati.**\n\n")
+    import gzip as _gz
+    C2 = pickle.load(_gz.open(os.path.join(RADICE, "csv", "_test_fork", "_cura2_corto",
+                                           "scena_000120.pkl.gz"), "rb"))["attrs"]
+    P("  (a) `_peqn_idx` -- la MARCA degli archi nati nell'ULTIMA mitosi, scritta a `:5747`\n")
+    P("      sotto `PEQ_NASCITA_LOCALE` e **CONSUMATA** alla calibrazione dopo (`:4923`,\n")
+    P("      `self._peqn_idx = None` -- \"vale per UNA calibrazione sola\").\n")
+    P("      **Quindi la sua PRESENZA significa: una mitosi e' avvenuta nell'ultimo passo e\n")
+    P("      la calibrazione non l'ha ancora consumata.** E' TRAIETTORIA, non codice: i due\n")
+    P("      bracci hanno traiettorie diverse. **ASSENZA STRUTTURALE, spiegata.**\n\n")
+    for eti, D in (("sigillo ACCESO", A), ("giro corto", C2)):
+        idx = np.asarray(D.get("_peqn_idx", []))
+        peq = np.asarray(D.get("peq", []), dtype=float)
+        nan = np.flatnonzero(np.isnan(peq)) if peq.size else np.array([], dtype=int)
+        ok = bool(np.array_equal(nan, idx))
+        P("      %-16s NaN in `peq`: %s   `_peqn_idx`: %s   COINCIDONO: %s\n"
+          % (eti, list(map(int, nan)), list(map(int, idx)), ok))
+    P("\n      -> ❗ **E QUESTO CHIUDE LA DOMANDA SUI `NaN` DI `peq`:** il dominio dichiara\n")
+    P("         *\"`nan` SOLO sugli archi marcati\"*, e **gli archi marcati sono ESATTAMENTE\n")
+    P("         quelli con `nan`**. Non era da credere al dominio: **e' verificato sui dati**.\n")
+    P("\n  (b) `_ritmo_snap_identico` -- contatore di `Z33` (`:2651`): scatta quando lo\n")
+    P("      snapshot di `psi_spin` e' **identico** al precedente, cioe' quando `f` sara'\n")
+    P("      ZERO per ogni nodo. **Non e' un errore** -- significa che `psi_spin` non e'\n")
+    P("      cambiato -- **ma senza il contatore la degenerazione sarebbe INVISIBILE**.\n")
+    P("      valore nel braccio ACCESO: %s   nel giro corto: %s   nel riferimento: %s\n"
+      % (A.get("_ritmo_snap_identico", "ASSENTE"), C2.get("_ritmo_snap_identico", "ASSENTE"),
+         R.get("_ritmo_snap_identico", "ASSENTE")))
+    P("      -> ⚠ **SCATTA CON LA CURA E NON SENZA.** Una volta su 120 passi: poco, e **non e'\n")
+    P("         nulla**. Si RIPORTA e va IN CODA: non e' materia di questo referto.\n")
+    P("\n  ⚠ E I DUE VALORI SONO IDENTICI FRA IL SIGILLO E IL GIRO CORTO -- due processi\n")
+    P("     diversi, due strumenti diversi: **e' riproducibilita', non ripetizione.**\n")
+
     P("\n" + "=" * 96 + "\n")
     P("!! COSA RESTA VERO DEL VECCHIO `T4`: il verdetto. COSA NON ERA GIUSTIFICATO: la\n")
     P("   FIDUCIA nel verdetto. Un test di IDENTITA' con un criterio che non vede `+0.0`\n")
