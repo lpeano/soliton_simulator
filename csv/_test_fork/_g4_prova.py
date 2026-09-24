@@ -197,7 +197,8 @@ def confronta_snap(p_a, p_b, W):
     return ug, dv
 
 
-def installa(S, spegni_mem, spegni_tutto=False, wrap2pi=False, fase2pi=False):
+def installa(S, spegni_mem, spegni_tutto=False, wrap2pi=False, fase2pi=False,
+             cura2=False):
     """Avvolge tutto cio' che serve. PURE-READ tranne l'unico flag che il mandato ammette."""
     stato = {"passi": [], "conti": {}, "freno": {}, "aperto": None, "n_passo": 0,
              "fine_prec": None}
@@ -215,6 +216,12 @@ def installa(S, spegni_mem, spegni_tutto=False, wrap2pi=False, fase2pi=False):
             # [D34, 2026-09-22] LA CURA DEL RITMO. Sigillo 4/4: byte-inerte spenta,
             # e accesa CAMBIA (104 campi). Il default nel sorgente resta False.
             S.RITMO_WRAP_2PI = True
+        if cura2:
+            # [CURA 2] la cura IN PROVA si accende sul modulo, DOPO che il driver ha
+            # applicato i suoi flag. `RITMO_WRAP_2PI` resta acceso dall'argv del driver:
+            # il confronto e' con `_cura1_corto`, che ha la STESSA configurazione e questo
+            # flag SPENTO -- un interruttore solo di differenza.
+            S.TEMPO_UNICO_MITOSI = True
         if fase2pi:
             # [FASE_2PI, 2026-09-22] `phi` come fase ORDINARIA su [0, 2pi). Sigillo
             # `_sigillo_fase_2pi.py` **6/6** sul blob `445e2896`: byte-inerte spenta
@@ -267,6 +274,33 @@ def installa(S, spegni_mem, spegni_tutto=False, wrap2pi=False, fase2pi=False):
             #   DENTRO un sito gia' tracciato e si conterebbero DUE VOLTE.
             if quale == "d0_passo":
                 stato["freno_passo"] = stato.get("freno_passo", 0.0) + agg
+        # [V8/V9, richiesta di Luca 2026-09-24] LA DISTRIBUZIONE DI |dx|/d, SENZA UN RUN IN PIU'.
+        #   L'involucro vede GIA' ogni coppia `(dx, prima)`: e' il numero che decide fra la forma
+        #   PIANA `exp(x)` e la forma `1 + tanh(x)` della cura di `D31` (scheda 11, par.4-quater).
+        #     |dx|/d << 1  -> le due forme sono indistinguibili, e `tanh` e' migliore su tutto
+        #     |dx|/d ~ 1   -> il tetto di `tanh` (RADDOPPIA) comincia a mordere
+        #     |dx|/d > 2   -> con la forma di Ito una SALITA FAREBBE SCENDERE (per questo e' uscita)
+        #   SI SEPARANO SALITE E DISCESE: oggi il freno tocca SOLO le discese, quindi una
+        #   distribuzione unica mescolerebbe cio' che e' frenato con cio' che non lo e'.
+        _p = np.atleast_1d(np.asarray(prima, dtype=float))
+        if _d.shape == _p.shape and _d.size:
+            _x = np.abs(_d) / np.maximum(_p, 1e-300)
+            for _et, _m in (("salite", _d > 0.0), ("discese", _d < 0.0)):
+                if not _m.any():
+                    continue
+                v = stato.setdefault("ratio", {}).setdefault(
+                    _et, {"campioni": [], "n": 0, "gt05": 0, "gt1": 0, "gt2": 0, "max": 0.0})
+                xs = _x[_m]
+                v["n"] += int(xs.size)
+                v["gt05"] += int(np.sum(xs > 0.5))
+                v["gt1"] += int(np.sum(xs > 1.0))
+                v["gt2"] += int(np.sum(xs > 2.0))
+                v["max"] = max(v["max"], float(xs.max()))
+                # CAMPIONE per i quantili: tenerli TUTTI sarebbe centinaia di milioni di valori.
+                # Si prende un sottocampione REGOLARE (non casuale: niente RNG da consumare, e
+                # nessuna dipendenza dal seme), dichiarato nel referto.
+                if len(v["campioni"]) < 400:
+                    v["campioni"].append(xs[::max(1, xs.size // 2000)].astype(float))
         c["giri"] += 1
         return eff
     S.Rete._smorza = _wrap_smorza
@@ -409,6 +443,40 @@ def scrivi(stato, visto, dest, W, blob, seme, mem):
                        "   <- NEL BILANCIO" if q == "d0_passo" else "   (dentro un sito tracciato)"))
         f.write("\n⚠ `_smp_chiudi()` RISCRIVE `d0` a fine passo SENZA nessun `_traccia_d0`\n")
         f.write("  attorno (`:3677`): e' la scrittura che in `Z107` mancava al bilancio.\n")
+        # [V8/V9] LA DISTRIBUZIONE DI |dx|/d -- il numero che decide fra `exp(x)` e `1+tanh(x)`
+        f.write("\n" + "=" * 92 + "\n")
+        f.write("V8/V9 -- LA DISTRIBUZIONE DI |dx|/d, SEPARATA PER SALITE E DISCESE\n")
+        f.write("=" * 92 + "\n")
+        f.write("  E' il numero che decide la forma del freno-legge (scheda 11, par.4-quater):\n")
+        f.write("    |dx|/d << 1  -> `exp(x)` e `1+tanh(x)` sono indistinguibili\n")
+        f.write("    |dx|/d ~ 1   -> il tetto di `1+tanh(x)` (RADDOPPIA) comincia a mordere\n")
+        f.write("    |dx|/d > 2   -> con la forma di Ito una SALITA FAREBBE SCENDERE\n\n")
+        rr = stato.get("ratio", {})
+        if not rr:
+            f.write("  *** NESSUN CAMPIONE: `_smorza` non e' stato chiamato, oppure le forme\n")
+            f.write("      di `dx` e `prima` non coincidevano mai. E' un REPERTO, non un vuoto.\n")
+        else:
+            f.write("  %-9s %12s %10s %10s %10s %10s %10s %10s %10s\n"
+                    % ("verso", "n", "p50", "p90", "p99", "p99.9", "max",
+                       ">1 (quota)", ">2 (quota)"))
+            f.write("  " + "-" * 90 + "\n")
+            for et in ("discese", "salite"):
+                v = rr.get(et)
+                if not v:
+                    f.write("  %-9s   (nessuna)\n" % et)
+                    continue
+                camp = np.concatenate(v["campioni"]) if v["campioni"] else np.zeros(0)
+                q = (np.percentile(camp, [50, 90, 99, 99.9]) if camp.size
+                     else [float("nan")] * 4)
+                f.write("  %-9s %12d %10.4f %10.4f %10.4f %10.4f %10.4f %10.3e %10.3e\n"
+                        % (et, v["n"], q[0], q[1], q[2], q[3], v["max"],
+                           v["gt1"] / max(v["n"], 1), v["gt2"] / max(v["n"], 1)))
+            f.write("\n  quota con |dx|/d > 0.5:  %s\n"
+                    % "  ".join("%s %.3e" % (et, rr[et]["gt05"] / max(rr[et]["n"], 1))
+                                for et in sorted(rr)))
+            f.write("  ⚠ I QUANTILI vengono da un SOTTOCAMPIONE REGOLARE (non casuale: nessun\n")
+            f.write("    RNG consumato, nessuna dipendenza dal seme); `n`, `max` e le QUOTE\n")
+            f.write("    sono invece su TUTTI i campioni. Dichiarato perche' sono due basi.\n")
     W("  bilancio -> %s\n  e %s\n" % (p_txt, p_csv))
     rel = np.array([r["rel"] for r in P])
     return float(np.max(rel)), bool(np.max(rel) < 1e-9)
@@ -420,7 +488,7 @@ def main():
     for a in sys.argv[1:]:
         if a in ("--controllo", "--riferimento", "--spegni", "--spegni-tutto",
                  "--ritmo-wrap", "--fase-2pi", "--fase-2pi-corto",
-                 "--cura1-corto"):
+                 "--cura1-corto", "--cura2-corto"):
             modo = a
         if a.startswith("--frame="):
             passi = int(a.split("=", 1)[1])
@@ -452,6 +520,17 @@ def main():
     elif modo == "--spegni":
         dest = os.path.join(RADICE, "csv", "_test_fork", "_g4_senza_memmoto")
         nfr, spegni = (passi or 100), True
+    elif modo == "--cura2-corto":
+        # [CURA 2] IL GIRO CORTO. `TEMPO_UNICO_MITOSI` si accende SUL MODULO, come
+        # `MEM_MOTO`/`FASE_2PI`: non ha bisogno di stare nell'argv del driver perche'
+        # NON e' una cura approvata -- e' una cura IN PROVA, e il suo posto e' qui
+        # finche' Luca non legge il referto.
+        dest = os.path.join(RADICE, "csv", "_test_fork", "_cura2_corto")
+        if os.path.isdir(dest):
+            for _f in os.listdir(dest):
+                if _f.endswith(".pkl.gz"):
+                    os.remove(os.path.join(dest, _f))
+        nfr, spegni = (passi or 20), False
     elif modo == "--cura1-corto":
         # [CURA 1, 2026-09-24] IL GIRO CORTO DELLA CURA 1. NON forza NIENTE sul modulo:
         # la cura e' nell'ARGV del driver (`--ritmo-wrap-2pi`), che e' il punto della
@@ -502,7 +581,8 @@ def main():
     seme = _insp.signature(S.Rete.__init__).parameters["seed"].default
     stato, visto = installa(S, spegni, spegni_tutto=(modo == "--spegni-tutto"),
                             wrap2pi=(modo == "--ritmo-wrap"),
-                            fase2pi=modo.startswith("--fase-2pi"))
+                            fase2pi=modo.startswith("--fase-2pi"),
+                            cura2=(modo == "--cura2-corto"))
     argv = ["_scena_video.py", str(nfr), dest] + COMUNE + \
         ["--csv-progresso=%s" % os.path.join(dest, "prog.csv")]
     sys.argv = list(argv)
@@ -519,7 +599,9 @@ def main():
             or (modo == "--spegni-tutto" and S.MEM_MOTO_TUTTO)
             or (modo == "--ritmo-wrap" and not S.RITMO_WRAP_2PI)
             or (modo.startswith("--fase-2pi") and not S.FASE_2PI)
-            or (modo == "--cura1-corto" and not S.RITMO_WRAP_2PI)):
+            or (modo == "--cura1-corto" and not S.RITMO_WRAP_2PI)
+            or (modo == "--cura2-corto" and not (S.TEMPO_UNICO_MITOSI
+                                                 and S.RITMO_WRAP_2PI))):
         W("*** L'INVOLUCRO NON HA AGITO. FERMO. ***\n")
         return 1
 
