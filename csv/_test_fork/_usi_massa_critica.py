@@ -1,0 +1,109 @@
+# -*- coding: utf-8 -*-
+"""`massa_critica_collasso` -- **CHI LA USA.** Elenco GENERATO dall'AST. **Non si tocca.**
+
+`A13`: *«`LAM` e' la scala di Planck del sistema»*, e la conseguenza 4 dice che **qualunque
+costante tarata su un numero di nodi entro un raggio `< LAM` e' tarata SOTTO la scala di
+Planck**.
+
+`massa_critica_collasso()` chiede **~`621` nodi in una sfera di raggio `LAM`**. Con distanza
+minima `LAM` **ne entra circa una dozzina**: il conto e' geometrico e sta nel referto.
+
+> **DECISIONE DI LUCA: si MARCA e NON SI TOCCA.** Questa sonda **elenca chi la usa**, cosi' la
+> marcatura ha un perimetro invece di essere un'avvertenza generica.
+
+Sola lettura, nessun run. `P1-ter`.
+ASCII puro.
+"""
+import ast
+import io
+import os
+import sys
+
+_QUI = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.abspath(os.path.join(_QUI, "..")))
+import _presidio
+
+_presidio.avvia(__file__)
+
+RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
+SORGENTE = os.path.join(RADICE, "soliton_simulator.py")
+DEST = os.path.join(_QUI, "_revisione", "USI_massa_critica.txt")
+NOMI = ("massa_critica_collasso", "massa_critica_adattiva")
+
+
+def main():
+    try:
+        os.makedirs(os.path.dirname(DEST))
+    except OSError:
+        pass
+    f = io.open(DEST, "w", encoding="utf-8", newline="\n")
+
+    def P(s):
+        sys.stdout.write(s)
+        f.write(s)
+
+    src = io.open(SORGENTE, encoding="utf-8").read()
+    alb = ast.parse(src)
+    righe = {}
+    for n in ast.walk(alb):
+        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            for r in range(n.lineno, (n.end_lineno or n.lineno) + 1):
+                righe.setdefault(r, n.name)
+    usi = []
+    for n in ast.walk(alb):
+        if isinstance(n, ast.Name) and n.id in NOMI:
+            usi.append((n.lineno, n.id, righe.get(n.lineno, "(modulo: SCENE)")))
+    usi.sort()
+
+    P("# `massa_critica_collasso` -- CHI LA USA. Elenco GENERATO dall'AST.\n#\n")
+    P("# `A13` conseguenza 4: una costante tarata entro un raggio < LAM e' tarata SOTTO la\n")
+    P("# scala di Planck. **DECISIONE DI LUCA: SI MARCA E NON SI TOCCA.**\n#\n")
+
+    # il conto geometrico, DERIVATO e non ricopiato
+    sys.path.insert(0, RADICE)
+    import soliton_simulator as S
+    import numpy as np
+    Nc = float(S.massa_critica_collasso())
+    LAM = float(S.LAM)
+    # sfere di diametro LAM che entrano in una sfera di raggio LAM, all'impacchettamento
+    # massimo (Kepler, densita' pi/(3*sqrt(2)) = 0.7405): e' un LIMITE SUPERIORE.
+    dens_kepler = np.pi / (3.0 * np.sqrt(2.0))
+    vol_grande = (4.0 / 3.0) * np.pi * LAM ** 3
+    vol_palla = (4.0 / 3.0) * np.pi * (LAM / 2.0) ** 3
+    n_max = dens_kepler * vol_grande / vol_palla
+    P("IL CONTO, derivato e non ricopiato:\n")
+    P("  massa_critica_collasso() = %.4f  nodi, chiesti in una sfera di raggio LAM = %.6f\n"
+      % (Nc, LAM))
+    P("  con distanza minima LAM fra i centri, ogni nodo occupa una palla di raggio LAM/2.\n")
+    P("  all'impacchettamento MASSIMO (Kepler, densita' %.6f) in una sfera di raggio LAM\n"
+      % dens_kepler)
+    P("  entrano al PIU'  %.4f  nodi  -- cioe' `8 * %.6f` = il LIMITE SUPERIORE.\n"
+      % (n_max, dens_kepler))
+    P("  RAPPORTO CHIESTO / POSSIBILE = %.2f\n" % (Nc / n_max))
+    P("\n  -> **e' un LIMITE SUPERIORE, quindi il rapporto vero e' PEGGIORE**: Kepler vale per\n")
+    P("     sfere identiche in un reticolo infinito, non per %d punti in una pallina.\n" % int(Nc))
+    P("  -> **la costante chiede %.0f volte piu' nodi di quanti ne stiano.**\n" % (Nc / n_max))
+
+    P("\n" + "=" * 100 + "\nCHI LA USA -- %d usi\n" % len(usi) + "=" * 100 + "\n")
+    scene = [u for u in usi if u[2].startswith("(modulo")]
+    codice = [u for u in usi if not u[2].startswith("(modulo")]
+    P("\n-- NEL CODICE DELLA FISICA (%d) --\n" % len(codice))
+    for l, nm, fu in codice:
+        P("  :%-6d %-26s in  %s\n" % (l, nm, fu))
+    P("\n-- NELLE SCENE / TAVOLA DEI TEST (%d), a livello di modulo --\n" % len(scene))
+    for l, nm, fu in scene:
+        P("  :%-6d %-26s\n" % (l, nm))
+
+    P("\n" + "=" * 100 + "\nCOME SI LEGGE\n" + "=" * 100 + "\n")
+    P("  **Gli usi NELLE SCENE decidono QUANTI nodi seminare**: sono la taglia delle masse.\n")
+    P("  **Gli usi NELLA FISICA la usano come SOGLIA o come SCALA** -- ed e' li' che il fatto\n")
+    P("  di essere tarata sotto la scala di Planck **entra nelle leggi**.\n")
+    P("\n  ⚠ **NON SI TOCCA NIENTE** (decisione di Luca). Questo elenco e' il PERIMETRO della\n")
+    P("  marcatura: una costante marcata senza l'elenco di chi la usa e' un'avvertenza\n")
+    P("  generica, e un'avvertenza generica non impedisce nulla (`A9`).\n")
+    f.close()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
