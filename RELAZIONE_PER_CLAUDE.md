@@ -13173,9 +13173,11 @@ del §D, che è una tua decisione.**
 
 > **⚠ E PRIMA VA MISURATA UNA COSA CHE HO LASCIATO DENTRO DI PROPOSITO:** il censimento aveva
 > tenuto `_w4`/`_w8` sulla torsione **ACCUMULATA** fuori dalla cura *(era `SCALE-TW`)*. Quindi
-> **oggi l'INGRESSO di `tw` vive su `2π` e il suo AVVOLGIMENTO su `4π`: due scale diverse
-> nella stessa grandezza.** **`SCALE-TW` non è più un lavoro in coda: è il PREREQUISITO di
-> questa cura.**
+> **⚠ QUESTA FRASE ERA SBAGLIATA, e la lascio leggibile con la correzione accanto**
+> *(rilievo di Luca, 24/9)*: avevo scritto *«l'INGRESSO di `tw` vive su `2π` e il suo
+> AVVOLGIMENTO su `4π`»*. **L'avvolgimento non c'entra:** con `TORS_4PI` la torsione si
+> avvolge con **`_w8`**, finestra **`8π`**, che su incrementi piccoli è **l'identità**.
+> **A dimezzare `tw` è l'INGRESSO.** → vedi la voce sotto.
 
 **E `E1b` PASSA:** `n` `2461` contro il tetto `10×` = `26470`. **Non esplode: MUORE** — il verso
 opposto a quello che temevo quando ho messo il giro corto. **Ma il giro corto è servito
@@ -13455,3 +13457,28 @@ Ricostruendo `r` col `median` **corrente** si ottiene **mediana `1.000000` esatt
 punto fisso pre-cura: **la differenza è la cura, non un errore.**
 **Ciò che non so è perché lo sfasamento produca una saturazione del 30 %, e non lo inseguo
 adesso** *(`A12` regola 1)*.
+
+### ㉜ **(1d) «Ingresso `2π`, avvolgimento `4π`» era SBAGLIATO: l'avvolgimento non c'entra**
+
+> **Rilievo tuo, verificato dal sorgente.** L'avevo scritto in **tre** punti *(punto di ripresa,
+> voce `D36`, relazione)*, e da lì avevo concluso che **`SCALE-TW` fosse prerequisito di `D36`**.
+> **Non lo è.**
+
+**Cosa dice il sorgente:**
+
+| | |
+|---|---|
+| `_w8` | `(a + 4π) % 8π − 4π` — finestra **`8π`**, quindi **identità** per `\|a\| < 4π` |
+| `:4698` | `self.tw += self._w8(dph + twist_dip − self.twp) − dt_e*self.tw/_ttw` |
+| `:4699` | `self.twp = self._w8(dph + twist_dip)` |
+| `:4675` | **`dph = self._wphi(_phi_t[i] − _phi_t[j])`** |
+
+**Con `FASE_2PI` acceso `dph` sta in `(-π, π]`**, e `|twist_dip| ≤ π` **per costruzione**
+*(`twist_dip = π·0.5·(chi_i − chi_j)` con `|chi_i − chi_j| ≤ 2`)*: la somma sta in
+`(-2π, 2π]`, **e `_w8` la lascia intatta**. **Quindi l'avvolgimento è inerte, e a dimezzare
+`tw` è l'INGRESSO.**
+
+> **Conseguenza: `SCALE-TW` torna IN CODA al suo posto** *(`A12`)*, e **non blocca `D36`**.
+> **Ciò che resta vero è il difetto stesso:** la soglia della mitosi è in **unità assolute** di
+> `tw`, e **`tw` prende la sua scala da `phi`**. Il difetto non dipendeva dall'argomento
+> sbagliato — **ma l'argomento sbagliato aveva prodotto una PRIORITÀ sbagliata**, e quella sì.
