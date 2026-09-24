@@ -135,8 +135,11 @@ def main():
         rc = 0
     else:
         with io.open(grezzo, "w", encoding="utf-8", newline="\n") as g:
-            rc = subprocess.call([sys.executable, "-u", "-c", FIGLIO], cwd=RADICE,
-                                 stdout=g, stderr=subprocess.STDOUT)
+            # ⚠ `SEMI` era definito nel GENITORE e non passato al figlio: NameError dopo la
+            #   prima riga. Ora si inietta, come per gli altri strumenti.
+            rc = subprocess.call([sys.executable, "-u", "-c", "SEMI = %r
+" % (SEMI,) + FIGLIO],
+                                 cwd=RADICE, stdout=g, stderr=subprocess.STDOUT)
         out = io.open(grezzo, encoding="utf-8", errors="replace").read()
 
     P("# LE DUE SCENE DELLA STRADA (ii) -- massa = REGIONE A FASE COERENTE NEL VUOTO\n#\n")
