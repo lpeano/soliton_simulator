@@ -81,6 +81,21 @@ CURE = [
      "✅✅ **APPROVATA DA LUCA il 2026-09-24. IL DRIVER LA ACCENDE IN OGNI RUN** "
      "*(`--ritmo-wrap-2pi`)*. Default nel sorgente **`False`**, come tutte le cure "
      "pre-epoca-3. **`D34` passa da difetto aperto a CURA IN CODICE.**"),
+    ("TEMPO_UNICO_MITOSI", "**`CURA 2`** UN SOLO OROLOGIO dentro `mitosi()`",
+     "⏸ *(l'esito si legge dal referto)*", "csv/_seal_fork/_sig_cura2/REFERTO.txt",
+     "✅ **giro corto di 120 passi contro `_cura1_corto`** *(un interruttore di differenza, "
+     "due processi freschi a un solo braccio)*",
+     "gli usi di `tau_pp` come TEMPO passano all'orologio `dt_e`; i **quattro** usi come "
+     "POSIZIONE sull'asse della torsione restano INTOCCATI *(dall'AST, `T3`)*. **La mitosi "
+     "vive** *(eventi `67` -> `76`)*, **il bilancio chiude** *(`5.304e-14`)*, e **la "
+     "saturazione di `tanh(grad)` passa da `0.0034 %` a ZERO** *(`A11` cor.6; il massimo "
+     "misurato `0.8861` contro il `0.8884` PREVISTO dall'intervallo di `r`)*. "
+     "**⚠ MA due delle tre sostituzioni formali sono INERTI in questo regime:** il clip "
+     "alto su `prob` non morde **mai** *(0 su 63 128 409)* e l'Eulero non ha **mai** "
+     "`dt/τ > 1`. **⚠ E la previsione di `×2.5`-`×3` su `d0` NON regge: `±3 %`**",
+     "✅✅ **APPROVATA DA LUCA il 2026-09-24. IL DRIVER LA ACCENDE IN OGNI RUN** "
+     "*(`--tempo-unico-mitosi`)*. Default nel sorgente **`False`**, come tutte le cure "
+     "pre-epoca-3."),
     ("FASE_2PI", "**§D** `φ` come fase ordinaria su `[0, 2π)`",
      "⏸ *(l'esito si legge dal referto)*",
      "csv/_seal_fork/_sig_fase_2pi/REFERTO.txt",
