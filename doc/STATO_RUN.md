@@ -1,3 +1,38 @@
+<!-- INDIRIZZO:INIZIO -->
+# ⚠⚠⚠ L'INDIRIZZO DEL LAVORO — **decisione di Luca, 2026-09-24**
+
+> ### **«La doppia copertura deve vivere in UN posto solo, lo spinore; oggi vive anche in `phi`,
+> ### dove è finta, e da lì governa la generazione di materia e un tempo proprio.
+> ### Il `4pi` e il tempo unico si sistemano INSIEME, prima di tutto il resto.»**
+>
+> *(parole di Luca, riportate verbatim: sono la motivazione, non una mia parafrasi)*
+
+## COSA SIGNIFICA, operativamente
+
+**Non si cura `FASE_2PI` da sola e non si cura `TEMPO_UNICO` da solo.** Sono **due facce dello
+stesso difetto**: `phi` porta una doppia copertura che **non le appartiene**, e da lì la passa
+alla **torsione**, che la passa alla **mitosi**, alla **creazione di coppia** e a un **tempo
+proprio**. Curare un anello alla volta sposta il difetto invece di toglierlo — **ed è
+esattamente quello che `Z127` ha misurato**: portare `phi` su `2pi` ha dimezzato `tw` e
+**fermato la generazione di materia**, perché le soglie restavano ancorate al `4pi` vecchio.
+
+## ⛔ SOSPESI — **e non si riaprono senza Luca**
+
+| lavoro | stato |
+|---|---|
+| **la prova di `FASE_2PI`** *(600 passi)* | ⛔ **SOSPESA** |
+| **la cura di `D36`** *(soglie in frazione del dominio)* | ⛔ **SOSPESA** — era il punto 5 del mandato precedente, **non è stata cominciata** |
+| **`TEMPO_UNICO` come cura a sé** | ⛔ **SOSPESO**: va progettato **insieme** al `4pi` |
+| `PROBLEMI-CHK3` · `FAMIGLIE` · `FASCE-TAU` | ⛔ **SOSPESI** |
+| **ogni run** | ⛔ **SOSPESO** |
+| **ogni cura nuova in codice** | ⛔ **NESSUNA** |
+
+> **Cosa si fa invece:** la **MAPPA del `4pi`**, la domanda **`S08`** *(che cos'è `phi`)*, la
+> **MAPPA dei tempi**, e poi **UNA SCHEDA DI PROPOSTA nel registro** — **derivata, senza
+> codice**. Tutto **sola lettura**.
+
+<!-- INDIRIZZO:FINE -->
+
 <!-- PUNTO-DI-RIPRESA:INIZIO -->
 # ⚠⚠ PUNTO DI RIPRESA — **si legge PER PRIMO dopo un riavvio**
 

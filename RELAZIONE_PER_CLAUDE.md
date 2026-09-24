@@ -13348,3 +13348,25 @@ lunghezza è un **motore**: è **`D31`**.
 > **⚠ E una cosa che NON dico: che `C3` sia la causa del cricchetto di VERSO.** Non lo è.
 > **`C3` cura il cricchetto d'ORDINE (`Z91`); `Z113` dimostra che quello di VERSO sopravvive.**
 > Due difetti diversi nello stesso punto.
+
+### ㉙ **L'INDIRIZZO: il `4pi` e il tempo unico si sistemano INSIEME** *(decisione di Luca, 24/9)*
+
+> **«La doppia copertura deve vivere in UN posto solo, lo spinore; oggi vive anche in `phi`,
+> dove è finta, e da lì governa la generazione di materia e un tempo proprio. Il `4pi` e il
+> tempo unico si sistemano INSIEME, prima di tutto il resto.»**
+
+**Perché è la lettura giusta, e lo dice una misura mia:** `Z127`. Portare `phi` su `2pi` ha
+**dimezzato `tw`** e **fermato la generazione di materia** *(mitosi `62` → `1` evento, Schwinger
+`28` → `0`)*, **perché le soglie restavano ancorate al `4pi` vecchio**. Curare un anello alla
+volta **sposta** il difetto invece di toglierlo.
+
+**SOSPESI, e non si riaprono senza di te:** la prova di `FASE_2PI` · la cura di `D36` *(non
+cominciata)* · `TEMPO_UNICO` come cura a sé · `PROBLEMI-CHK3` · `FAMIGLIE` · `FASCE-TAU` ·
+**ogni run** · **ogni cura nuova in codice**.
+
+**Cosa si fa invece, tutto in sola lettura:** la **mappa del `4pi`** *(classi VERA /
+DICHIARATA / EREDITATA / INVERSA, piu' il grafo delle dipendenze)* · **`S08`: che cos'è `phi`**
+· la **mappa dei tempi** · e **una scheda di PROPOSTA nel registro**, derivata, **senza codice**.
+
+> **Ero al primo stato pulito quando il prompt è arrivato** *(`fc085b2`, nessun run in corso)*,
+> e **il punto 5 del mandato precedente — la cura di `D36` — non era stato cominciato.**
