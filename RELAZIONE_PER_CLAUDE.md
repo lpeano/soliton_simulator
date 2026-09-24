@@ -13654,3 +13654,57 @@ messaggio che **non nomina la ragione** non passa.
 > `CONFIGURAZIONE.txt`.
 > **E `(b)` non ritira nulla:** `TW_SPINORE` era spento in **9 run su 11** e `--tw-spinore` non
 > compare in nessun lanciatore committato.
+
+### ㉠ **`CURA 1`: la PROVA. La mitosi NON muore, e l'unico effetto sopra il nullo è su `r`**
+
+> Giro corto **`509.0 s`**, 120 passi, `csv/_test_fork/_cura1_corto`. Referto intero:
+> `doc/REFERTO_cura1_orologio.md`.
+
+**La cura gira davvero, e per la prima volta si LEGGE da un file** invece di essere ricostruita:
+
+```
+RITMO_WRAP_2PI                 False              True     <-- CAMBIATO
+TW_SPINORE                     False              False
+```
+
+**`28` flag cambiati dall'argv su `123`**, e **il bilancio di `d0` CHIUDE: `4.721e-14`.**
+
+| al passo 120 | senza la cura | **con** | |
+|---|--:|--:|---|
+| **mitosi** | `203` nati, `62` eventi | **`209`, `67`** | **vive** |
+| **Schwinger** | `53`, `28` eventi | **`60`, `33`** | **vive** |
+| `|tw|` mediana | `1.78474` | `1.78324` | `−0.08 %` |
+| **`r` mediana** | `1.018363` | **`0.680787`** | **`−33 %`** |
+| `r` al tetto | `0.76 %` | `1.02 %` | |
+| `med d/d0` | `0.8442` | `0.8577` | verso `1` |
+
+### ✅ **La mitosi NON muore — ed è la differenza con `FASE_2PI`**
+
+`FASE_2PI` da sola aveva portato la mitosi da **`62` a `1` evento** e Schwinger da **`28` a
+`0`** *(`Z127`)*. **Qui vivono entrambe.** La ragione sta nel grafo corretto: la cura tocca
+**`ritmo()`**, e **`|tw|` resta praticamente invariato** — `tw` prende la sua scala da `phi`,
+**non da `r`**.
+
+### ⚠ **E UN SOLO numero è sopra il nullo. Gli altri li scrivo come NON MISURATI**
+
+| | scarto | nullo |
+|---|--:|---|
+| `n` | `+0.49 %` | **`~1.4 %`** *(`Z21`)* → **sotto: non attribuibile** |
+| mitosi / Schwinger, eventi | `+8 %` / `+18 %` | **non misurato** → **non attribuibile** |
+| **`r` mediana** | **`−33 %`** | il gauge è deterministico → **ATTRIBUIBILE** |
+
+> **Il referto dice UNA cosa con certezza: la cura abbassa `r`.** Il resto è dentro la
+> dispersione di run, a **un seme**, e va scritto *«non misurato»* — **non «nessun effetto» e
+> non «migliora».** Anche il `med d/d0` che va verso `1` è `+1.6 %`: **non è una misura.**
+
+### 🟨 **E il verso smentisce in parte `S09`**
+
+`S09` diceva: *il gauge si abbassa, quindi `x = f/med` **sale** per tutti e più nodi arrivano al
+tetto*. **Misurato: `median(r)` SCENDE del `33 %`, e la quota al tetto SALE comunque.** Le due
+cose insieme dicono che **la distribuzione si ALLARGA**, non che si sposta. **`S09` resta aperto
+e va riformulato**, e non lo inseguo adesso *(`A12` regola 1)*.
+
+> **La cura resta giusta per la ragione con cui è nata, non per questi numeri:** `D34` è
+> **dimostrato sulla formula**, e **lasciare un wrap che non avvolge non ha nessun argomento a
+> favore**. Il giro corto serviva a misurare **quanto costa**, non a decidere **se farlo**.
+> **Costa poco, e non rompe niente.**

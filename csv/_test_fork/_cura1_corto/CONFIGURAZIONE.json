@@ -1,0 +1,504 @@
+{
+ "argv_esterno": [
+  "C:\\Users\\lpeano\\soliton_simulator\\csv\\_test_fork\\_scena_video.py",
+  "20",
+  "C:\\Users\\lpeano\\soliton_simulator\\csv\\_test_fork\\_cura1_corto",
+  "--sep=4.0",
+  "--serie=20",
+  "--chi-basc=on",
+  "--chi-coop=on",
+  "--scala-min=off",
+  "--coes-adim=on",
+  "--peq-esatto=on",
+  "--peq-nascita-locale=on",
+  "--scala-min-passo=on",
+  "--coes-causale=on",
+  "--anom-simm=on",
+  "--invarianti=on",
+  "--csv-progresso=C:\\Users\\lpeano\\soliton_simulator\\csv\\_test_fork\\_cura1_corto\\prog.csv"
+ ],
+ "argv_interno": [
+  "soliton_simulator.py",
+  "--test",
+  "N-MASSE",
+  "--nmasse",
+  "3",
+  "--sep",
+  "4.0",
+  "--giri",
+  "0",
+  "--campo-spinoriale",
+  "--spinore-vivo",
+  "--spinore-corretto",
+  "--chi-core",
+  "--calore-scal",
+  "--deparam-orologio",
+  "--verlet",
+  "--fork-su2",
+  "--fork-su2-mem",
+  "--cs-dinamico",
+  "--tau-luce",
+  "--rumore-colorato",
+  "--pav-com",
+  "--guscio-morbido",
+  "--zeta-vir",
+  "--ritmo-wrap-2pi",
+  "--chi-basc",
+  "--chi-coop",
+  "--coes-adim",
+  "--peq-esatto",
+  "--peq-nascita-locale",
+  "--scala-min-passo",
+  "--coes-causale",
+  "--anom-simm",
+  "--invarianti=on",
+  "--plast-din",
+  "--viriale",
+  "--olon-part"
+ ],
+ "default_dal_sorgente": {
+  "ALPHA_NAT": 0.0,
+  "ANOM_SIMM": false,
+  "ANTIFASE_ADD": false,
+  "BOTTONI": [],
+  "CALORE_VETTORIALE": true,
+  "CAMPO_SPINORIALE": false,
+  "CHI_BASC": false,
+  "CHI_COOP": false,
+  "CHI_CORE": false,
+  "CHI_DA_SPINORE": false,
+  "CMAP_INTERF": null,
+  "COES_ADIM": false,
+  "COES_CAUSALE": false,
+  "COMPAT_CHI": false,
+  "COPPIA_DENSITA": false,
+  "COPPIA_MIT": 1.0,
+  "COPPIA_RECIPROCA": false,
+  "CROSSOVER_K": 1.0,
+  "CS_DINAMICO": false,
+  "DEBUG_INIT": false,
+  "DENS_CRIT_B": 0.14,
+  "DENS_CRIT_C": 484.0,
+  "DENS_CRIT_THETA": 0.14,
+  "DEPARAM_OROLOGIO": false,
+  "DIFF_RES": 0.0,
+  "DOMINI": {
+   "_chi_core_nodi": [
+    "finito",
+    "chiralita del core locale"
+   ],
+   "_chi_core_raggio": [
+    "nonneg",
+    "raggio del core: un RAGGIO non e negativo"
+   ],
+   "_chi_core_rho0": [
+    "finito",
+    "densita di riferimento del core"
+   ],
+   "_chi_geom_nodi": [
+    "finito",
+    "chiralita GEOMETRICA, cache separata (CHI_COOP)"
+   ],
+   "_cs_nodo_prev": [
+    "pos",
+    "velocita delle onde metriche: una VELOCITA e positiva"
+   ],
+   "_deg": [
+    "nonneg",
+    "grado di un nodo: un CONTEGGIO non e negativo"
+   ],
+   "_dt_e_ultimo": [
+    "pos",
+    "il passo di tempo efficace d arco: un tempo e POSITIVO"
+   ],
+   "_fatt_cs_ultimo": [
+    "pos",
+    "fattore di cs: positivo per costruzione"
+   ],
+   "_nb": [
+    "unita",
+    "versore di Bloch: |n| = 1"
+   ],
+   "_nb_prec": [
+    "unita",
+    "versore di Bloch committato"
+   ],
+   "_nb_ret": [
+    "unita",
+    "versore di Bloch RITARDATO"
+   ],
+   "_perm": [
+    "finito",
+    "permutazione di cache: non e fisica, si verifica finita"
+   ],
+   "_psi_prec": [
+    "finito",
+    "psi del passo precedente"
+   ],
+   "_psi_spin_prec": [
+    "finito",
+    "spinore del passo precedente"
+   ],
+   "_psi_spinor": [
+    "unita",
+    "lo spinore primario: |psi| = 1"
+   ],
+   "_r_corrente": [
+    "pos",
+    "ritmo dell orologio locale: un RITMO e positivo"
+   ],
+   "_rep": [
+    "finito",
+    "memoria di repulsione d arco"
+   ],
+   "_sin2_vir": [
+    "finito",
+    "sin^2 della viriale: in [0,1] per costruzione, si verifica FINITO"
+   ],
+   "_spinor_lift": [
+    "finito",
+    "sollevamento spinoriale"
+   ],
+   "_xi_rumore": [
+    "finito",
+    "rumore colorato"
+   ],
+   "d": [
+    "lam",
+    "la lunghezza VERA di un arco"
+   ],
+   "d0": [
+    "lam",
+    "la lunghezza di RIPOSO di un arco"
+   ],
+   "eta": [
+    "nonneg",
+    "eta di un nodo: un ETA non e negativa"
+   ],
+   "i": [
+    "indice",
+    "indice di NODO del lato i di ogni arco"
+   ],
+   "j": [
+    "indice",
+    "indice di NODO del lato j di ogni arco"
+   ],
+   "mem_mot": [
+    "finito",
+    "memoria di moto"
+   ],
+   "omega_s": [
+    "finito",
+    "velocita angolare spinoriale: entrambi i segni"
+   ],
+   "peq": [
+    "peq",
+    "la pressione di equilibrio: >= 0, e `nan` SOLO sugli archi marcati"
+   ],
+   "perc_chi": [
+    "segno",
+    "la CARICA: segno di doppia copertura, in {-1,+1}"
+   ],
+   "perc_geom": [
+    "segno",
+    "la GEOMETRIA: il giro e compiuto o no, in {-1,+1}"
+   ],
+   "perc_tw": [
+    "finito",
+    "percentuale di torsione"
+   ],
+   "phi": [
+    "fase",
+    "fase, a doppia copertura: il dominio E [0, 4pi)"
+   ],
+   "phi0": [
+    "fase",
+    "fase di riferimento"
+   ],
+   "phi_s": [
+    "finito",
+    "fase spinoriale: nessun vincolo dichiarato oltre la finitezza"
+   ],
+   "phivel": [
+    "finito",
+    "velocita di fase: entrambi i segni"
+   ],
+   "pos": [
+    "finito",
+    "posizione di DISEGNO: nessun vincolo fisico"
+   ],
+   "psi": [
+    "finito",
+    "campo di materia complesso"
+   ],
+   "psi_spin": [
+    "finito",
+    "spinore ricostruito nel passo"
+   ],
+   "rho_spin": [
+    "nonneg",
+    "densita spinoriale: una DENSITA non e negativa"
+   ],
+   "tw": [
+    "finito",
+    "torsione d arco: puo essere di entrambi i segni"
+   ],
+   "twp": [
+    "finito",
+    "torsione precedente"
+   ],
+   "vd": [
+    "finito",
+    "velocita di `d`: nessun vincolo di segno, e non deve esserci"
+   ]
+  },
+  "DT": 0.01,
+  "ELAST_C": 100.0,
+  "EMB_ETA": 0.12,
+  "EMB_IT": 3,
+  "FASE_2PI": false,
+  "FERMA_DOPO_NSUB": false,
+  "FORK_SU2": false,
+  "FORK_SU2_MEM": false,
+  "FRAME_DRAG": true,
+  "GAMMA": 0.05,
+  "GAMMA_TURBO": 1.0,
+  "GRAV_AMPIEZZA": false,
+  "GRAV_BIFASE": true,
+  "GUSCIO_MORBIDO": false,
+  "G_PH": null,
+  "HAM_SRC": 0.0,
+  "INVARIANTI": true,
+  "KERNEL_ALPHA": 1.0,
+  "KICK_TW": 0.35,
+  "KURAMOTO_SU2": false,
+  "K_C": 2.0,
+  "K_FRANGE": 0.0,
+  "K_SYNC": 1.0,
+  "LAM": 0.8,
+  "LAM_BASE": 0.8,
+  "LS_AZIM": false,
+  "L_CONSERVA": false,
+  "MAX_NODI": 4000000,
+  "MEM_HEBB": true,
+  "MEM_MOTO": true,
+  "MEM_MOTO_TUTTO": true,
+  "MITMAX": 0,
+  "MITOSI_DIR": 0.0,
+  "MU_PSI": -0.05,
+  "M_PH": 1.0,
+  "OLON_PART": false,
+  "OROLOGIO_SEGNO": false,
+  "PASSI_PER_FRAME": 6,
+  "PAV_COM": false,
+  "PEQ_ESATTO": false,
+  "PEQ_NASCITA_LOCALE": false,
+  "PHI_CRIT": null,
+  "PLAST_DIN": false,
+  "PLAST_MIT": 0.0,
+  "POLO_MATURO": false,
+  "P_LAM": 1.0,
+  "QMIN_M": 0.0,
+  "REGIME": "deterministico",
+  "REPULS_LEGGE": true,
+  "RITMO_WRAP_2PI": false,
+  "RUMORE_COLORATO": false,
+  "SCALA_AMP": 1.0,
+  "SCALA_B": 1.0,
+  "SCALA_MIN": false,
+  "SCALA_MIN_PASSO": false,
+  "SCALA_P_MEDIANA": false,
+  "SCHERMATURA": true,
+  "SCUOTIMENTO": null,
+  "SEME_INIZIALE": 900,
+  "SPINORE": true,
+  "SPINORE_CORRETTO": false,
+  "SPINORE_VIVO": true,
+  "SPIN_FEEDBACK": true,
+  "SPIN_LARMOR": false,
+  "SPIN_POSITIVI": false,
+  "STEP2_OROLOGIO": true,
+  "SYNC_FASE_OROLOGIO": false,
+  "SYNC_SPINORE": false,
+  "SYNC_UPDATE": false,
+  "SYNC_W": 1.0,
+  "TAU_A": null,
+  "TAU_A_LOCALE": true,
+  "TAU_BG": 5.0,
+  "TAU_DIFF": 1.0,
+  "TAU_LOC": 1.0,
+  "TAU_LOCALI": true,
+  "TAU_LUCE": false,
+  "TAU_P": 2.0,
+  "TAU_TW": 20.0,
+  "TAU_USA_D0": false,
+  "TEMPO_PROPRIO_ORIENTATO": false,
+  "TEMPO_SEGNO": false,
+  "TESTS": null,
+  "TORS_4PI": true,
+  "TRACCIA_D0": false,
+  "TRACCIA_D0_COPPIE": [
+   [
+    16,
+    481
+   ]
+  ],
+  "TRACCIA_D0_NODI": [
+   16,
+   481,
+   621,
+   627,
+   837
+  ],
+  "TRACCIA_PEQ": false,
+  "TRACCIA_VD": false,
+  "TW_SPINORE": false,
+  "VERLET": false,
+  "VERSO_CHI": false,
+  "VIRIALE": false,
+  "VISTA_RETE": false,
+  "ZETA_LOC": false,
+  "ZETA_M": 0.75,
+  "ZETA_VIR": false
+ },
+ "driver": {
+  "percorso": "csv\\_test_fork\\_scena_video.py",
+  "sha1_byte": "43ed085cbcf42b3233d47cf1b2232ce2ff5e849d"
+ },
+ "effettivo_dal_modulo": {
+  "ALPHA_NAT": 0.0,
+  "ANOM_SIMM": true,
+  "ANTIFASE_ADD": false,
+  "BOTTONI": "<list>",
+  "CALORE_VETTORIALE": false,
+  "CAMPO_SPINORIALE": true,
+  "CHI_BASC": true,
+  "CHI_COOP": true,
+  "CHI_CORE": true,
+  "CHI_DA_SPINORE": false,
+  "CMAP_INTERF": "<LinearSegmentedColormap>",
+  "COES_ADIM": true,
+  "COES_CAUSALE": true,
+  "COMPAT_CHI": false,
+  "COPPIA_DENSITA": false,
+  "COPPIA_MIT": 1.0,
+  "COPPIA_RECIPROCA": false,
+  "CROSSOVER_K": 1.0,
+  "CS_DINAMICO": true,
+  "DEBUG_INIT": false,
+  "DENS_CRIT_B": 0.14,
+  "DENS_CRIT_C": 484.0,
+  "DENS_CRIT_THETA": 0.14,
+  "DEPARAM_OROLOGIO": true,
+  "DIFF_RES": 0.0,
+  "DOMINI": "<dict>",
+  "DT": 0.01,
+  "ELAST_C": 100.0,
+  "EMB_ETA": 0.12,
+  "EMB_IT": 3,
+  "FASE_2PI": false,
+  "FERMA_DOPO_NSUB": false,
+  "FORK_SU2": true,
+  "FORK_SU2_MEM": true,
+  "FRAME_DRAG": true,
+  "GAMMA": 0.05,
+  "GAMMA_TURBO": 1.0,
+  "GRAV_AMPIEZZA": false,
+  "GRAV_BIFASE": true,
+  "GUSCIO_MORBIDO": true,
+  "G_PH": 0.003,
+  "HAM_SRC": 0.0,
+  "INVARIANTI": true,
+  "KERNEL_ALPHA": 1.0,
+  "KICK_TW": 0.35,
+  "KURAMOTO_SU2": false,
+  "K_C": 2.0,
+  "K_FRANGE": 0.0,
+  "K_SYNC": 1.0,
+  "LAM": 0.8,
+  "LAM_BASE": 0.8,
+  "LS_AZIM": false,
+  "L_CONSERVA": false,
+  "MAX_NODI": 4000000,
+  "MEM_HEBB": true,
+  "MEM_MOTO": true,
+  "MEM_MOTO_TUTTO": true,
+  "MITMAX": 0,
+  "MITOSI_DIR": 0.0,
+  "MU_PSI": -0.05,
+  "M_PH": 1.0,
+  "OLON_PART": true,
+  "OROLOGIO_SEGNO": false,
+  "PASSI_PER_FRAME": 6,
+  "PAV_COM": true,
+  "PEQ_ESATTO": true,
+  "PEQ_NASCITA_LOCALE": true,
+  "PHI_CRIT": 6.283185307179586,
+  "PLAST_DIN": true,
+  "PLAST_MIT": 0.0,
+  "POLO_MATURO": false,
+  "P_LAM": 1.0,
+  "QMIN_M": 0.0,
+  "REGIME": "deterministico",
+  "REPULS_LEGGE": true,
+  "RITMO_WRAP_2PI": true,
+  "RUMORE_COLORATO": true,
+  "SCALA_AMP": 1.0,
+  "SCALA_B": 1.0,
+  "SCALA_MIN": false,
+  "SCALA_MIN_PASSO": true,
+  "SCALA_P_MEDIANA": false,
+  "SCHERMATURA": true,
+  "SCUOTIMENTO": true,
+  "SEME_INIZIALE": 900,
+  "SPINORE": true,
+  "SPINORE_CORRETTO": true,
+  "SPINORE_VIVO": true,
+  "SPIN_FEEDBACK": true,
+  "SPIN_LARMOR": false,
+  "SPIN_POSITIVI": false,
+  "STEP2_OROLOGIO": true,
+  "SYNC_FASE_OROLOGIO": false,
+  "SYNC_SPINORE": false,
+  "SYNC_UPDATE": false,
+  "SYNC_W": 1.0,
+  "TAU_A": 50.0,
+  "TAU_A_LOCALE": true,
+  "TAU_BG": 5.0,
+  "TAU_DIFF": 1.0,
+  "TAU_LOC": 1.0,
+  "TAU_LOCALI": true,
+  "TAU_LUCE": true,
+  "TAU_P": 2.0,
+  "TAU_TW": 20.0,
+  "TAU_USA_D0": false,
+  "TEMPO_PROPRIO_ORIENTATO": false,
+  "TEMPO_SEGNO": false,
+  "TESTS": "<dict>",
+  "TORS_4PI": true,
+  "TRACCIA_D0": true,
+  "TRACCIA_D0_COPPIE": "<tuple>",
+  "TRACCIA_D0_NODI": "<tuple>",
+  "TRACCIA_PEQ": false,
+  "TRACCIA_VD": false,
+  "TW_SPINORE": false,
+  "VERLET": true,
+  "VERSO_CHI": false,
+  "VIRIALE": true,
+  "VISTA_RETE": false,
+  "ZETA_LOC": false,
+  "ZETA_M": 0.75,
+  "ZETA_VIR": true
+ },
+ "git": {
+  "branch": "fork-su2",
+  "head": "9d6e43e374b81f7d53e2f04fea67c40dfb4fc0d0",
+  "pulito": false
+ },
+ "quando": "2026-09-24 14:40:51",
+ "seme": 42,
+ "simulatore": {
+  "percorso": "soliton_simulator.py",
+  "sha1_byte": "dd82794a8a7111ee34530dd01992e88b9b9b8951"
+ }
+}

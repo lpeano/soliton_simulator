@@ -1149,3 +1149,5 @@ ramo B (chi_basc OFF):
   ```
 - **note** Il giro corto della CURA 1: 120 passi col driver che accende --ritmo-wrap-2pi. Sigillo 6/6 (287e27d). Destinazione csv/_test_fork/_cura1_corto. Confronto: _g4_riferimento, che ha girato SENZA la cura.
 - *2026-09-24 14:41:14* — PARTITO: PID Windows 27128, 2026-09-24 ~14:40. 20 frame = 120 passi.
+
+**chiuso 2026-09-24 14:51:33 — FINITO** 120 passi in 509.0 s. CONFIGURAZIONE.txt conferma RITMO_WRAP_2PI=True e TW_SPINORE=False. Bilancio CHIUDE (4.721e-14). La mitosi NON muore: 209 nati/67 eventi contro 203/62. Unico effetto sopra il nullo: median(r) -33 percento. I dati SERVONO: sono la prova di CURA 1.
