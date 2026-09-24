@@ -86,11 +86,20 @@ def confronta_snap(p_a, p_b, W):
 
 class FintoArco(object):
     """Il minimo che `verifica_invarianti` legge. Gli attributi ASSENTI vengono SALTATI
-    (`getattr(..., None) -> continue`), quindi si controlla solo cio' che si mette."""
+    (`getattr(..., None) -> continue`), quindi si controlla solo cio' che si mette.
+
+    !! SERVONO ANCHE `i` E `j`, e il collaudo me l'ha detto: la VIA DI VIOLAZIONE legge
+       `self.i` / `self.j` per riportare QUALE ARCO ha violato
+       (`extra['arco'] = '%d-%d'`). Senza, al posto di `DominioViolato` arrivava un
+       `AttributeError`, e `K2` FALLIVA -- non per un difetto del codice ma del mio banco.
+       **Un banco di prova piu' povero dell'ingresso vero non prova niente.**
+    """
 
     def __init__(self, d):
-        self.n = 3
         self.d = np.asarray(d, dtype=float)
+        self.n = len(self.d)
+        self.i = np.arange(len(self.d))
+        self.j = np.arange(len(self.d)) + 1
 
 
 def collaudo(W, S):
@@ -105,36 +114,39 @@ def collaudo(W, S):
         S.SCALA_MIN, S.SCALA_MIN_PASSO = scala_min, scala_min_passo
         try:
             S.Rete.verifica_invarianti(FintoArco(d), dove="collaudo")
-            return None
+            return None, None
         except S.DominioViolato as ex:
-            return str(ex)
+            return "DominioViolato", str(ex)
         except Exception as ex:
-            return "%s: %s" % (type(ex).__name__, ex)
+            # !! NON si confonde con una violazione: un'eccezione QUALUNQUE e' un difetto
+            #    del BANCO, e `K3` prima passava proprio per questo (accettava tutto).
+            return type(ex).__name__, str(ex)
         finally:
             S.SCALA_MIN, S.SCALA_MIN_PASSO = v_sm, v_smp
 
     sopra = [LAM, LAM * 1.5, LAM * 2.0]
     sotto = [LAM, LAM * 0.5, LAM * 2.0]        # il secondo e' SOTTO la legge
 
-    m = scatta(sopra, False, False)
-    ok1 = (m is None)
-    W("K1 `d >= LAM` a flag SPENTI non deve fermarsi -> %s\n"
-      % ("OK" if ok1 else "*** si ferma: %s ***" % (m or "")[:120]))
+    tipo, m = scatta(sopra, False, False)
+    ok1 = (tipo is None)
+    W("K1 `d >= LAM` a flag SPENTI non deve fermarsi -> %s  (%s)\n"
+      % ("OK" if ok1 else "*** si ferma ***", tipo or "nessuna eccezione"))
     e.append(ok1)
 
-    m = scatta(sotto, False, False)
-    ok2 = (m is not None and "LAM" in m)
-    W("K2 IL CASO CHE DEVE FERMARSI: `d < LAM` a flag SPENTI -> %s\n"
-      % ("OK: si ferma, e la regola nomina LAM" if ok2
-         else "*** NON si ferma, oppure il messaggio non nomina LAM ***"))
+    tipo, m = scatta(sotto, False, False)
+    ok2 = (tipo == "DominioViolato" and "LAM" in (m or ""))
+    W("K2 IL CASO CHE DEVE FERMARSI: `d < LAM` a flag SPENTI -> %s  (%s)\n"
+      % ("OK: `DominioViolato`, e la regola nomina LAM" if ok2
+         else "*** non e' `DominioViolato`, o il messaggio non nomina LAM ***", tipo))
     if m:
         W("     messaggio: %s\n" % m[:220])
     e.append(ok2)
 
-    m = scatta(sotto, False, True)
-    ok3 = (m is not None)
-    W("K3 e `d < LAM` a flag ACCESI si ferma come prima -> %s\n"
-      % ("OK" if ok3 else "*** NO ***"))
+    tipo, m = scatta(sotto, False, True)
+    ok3 = (tipo == "DominioViolato")
+    W("K3 e `d < LAM` a flag ACCESI si ferma come prima -> %s  (%s)\n"
+      % ("OK" if ok3 else "*** NO: serve `DominioViolato`, non un'eccezione qualunque ***",
+         tipo))
     e.append(ok3)
 
     # IL CASO CHE DEVE FALLIRE: la regola VECCHIA, a flag spenti, ACCETTAVA `d < LAM`
@@ -197,14 +209,16 @@ def main():
         try:
             S.Rete.verifica_invarianti(FintoArco(d), dove="sigillo")
             return None
+        except S.DominioViolato as ex:
+            return "DominioViolato: %s" % ex
         except BaseException as ex:
-            return "%s: %s" % (type(ex).__name__, ex)
+            return "*** ECCEZIONE ESTRANEA *** %s: %s" % (type(ex).__name__, ex)
         finally:
             S.SCALA_MIN, S.SCALA_MIN_PASSO = v1, v2
 
     L = S.LAM
     m = scatta([L, L * 0.5, L * 2.0], False, False)
-    ok = (m is not None and "LAM" in m)
+    ok = (m is not None and m.startswith("DominioViolato") and "LAM" in m)
     P("T3    %s IL CASO CHE DEVE FERMARSI: un arco sotto `LAM` a FLAG SPENTI ferma il run\n"
       % ("PASS" if ok else "FAIL"))
     P("      %s\n" % (m or "(non si e' fermato)")[:240])
