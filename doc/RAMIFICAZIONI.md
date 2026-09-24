@@ -1,5 +1,28 @@
 # REGISTRO DELLE RAMIFICAZIONI — lo **stato** dei fronti, non la cronaca
 
+## `Z145` — ⚠ **`T5` DEL SIGILLO DI `CURA 2` È INVALIDO: `dv > 0` LETTO COME EFFETTO** *(2026-09-24)*
+
+**STATO: APERTO.** Difetto **dello strumento**, non della cura. `doc/REPERTO_sigillo_cura2_T5.md`.
+Blob `b881db89`, sigillo `a11e3c5`, codice `c04d2b0`.
+
+Il sigillo fa i due bracci **nello stesso processo** con `runpy.run_path`. Il secondo run è
+partito da un **mondo diverso e più piccolo**: `n = 901` contro `2660`, archi `59 731` contro
+`526 302`, `33.3 s` contro `404.5 s`. **E `n` non può scendere** — nessuna rimozione di nodi
+esiste nel file *(cercato su tutto il sorgente, standard 9)*. Quindi i `109` campi diversi
+misurano **due mondi**, non il flag.
+
+**Gemello speculare di** *«`max|A−B| = 0` può significare nessun confronto»*.
+
+**CRITERIO DI CHIUSURA:** `T5` gira in un **processo separato**, e il controllo positivo di
+`CURA 2` risulta stabilito *(o smentito)* **con i due bracci partiti dallo stesso mondo**.
+**Lo strumento giusto esiste già:** `_cura1_corto` contro `_cura2_corto`, entrambi processi
+freschi a un solo braccio.
+
+**⚠ NON INVALIDA `T4`**, che è il **primo** run del processo e dà `206` campi identici a un
+riferimento fresco: **il processo parte pulito**, e la byte-inerzia a flag spento — inclusa
+l'estrazione **senza flag** di `_cs_arco_da_nodo` — **è certificata**.
+
+
 > Branch `fork-su2`. Creato 2026-09-15. Blob al momento della creazione: **`7d484580`**.
 > **Questo e' uno STATO, non un diario.** La cronaca sta nei documenti di `doc/` e in
 > `CLAUDECONNECT.md`. Qui c'e' solo: dove siamo, su cosa, e cosa lo chiuderebbe.

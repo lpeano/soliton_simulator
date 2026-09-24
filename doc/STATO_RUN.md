@@ -1164,3 +1164,5 @@ ramo B (chi_basc OFF):
   python csv/_seal_fork/_sigillo_cura2.py
   ```
 - **note** Sigillo di CURA 2. T4 byte-inerzia a flag SPENTO contro _cura1_corto/scena_000120.pkl.gz; T5 controllo positivo a flag ACCESO. Due giri da 120 passi, ~17 min. Collaudo 6/6 e T1/T2/T3 gia' PASS. Codice: c04d2b0, blob b881db89. Sigillo: a11e3c5.
+
+**chiuso 2026-09-24 18:53:50 — FINITO** Stampato 5/5 ma T5 e INVALIDO (Z145): i due bracci girano nello stesso processo e il secondo e partito da un mondo piu piccolo (n 901 contro 2660, archi 59731 contro 526302, 33.3 s contro 404.5 s), e n NON PUO scendere. T1/T2/T3/T4 valgono: T4 da 206 campi identici al riferimento fresco, quindi la byte-inerzia a flag spento e certificata. Il controllo positivo di CURA 2 NON e stabilito. I dati SERVONO: T4 risponde al criterio K (clip su prob e clip alto su rep: ZERO su 63148047). Giro corto NON lanciato: reperto, commit, stop.

@@ -43,7 +43,37 @@
 
 ## IN PROVA
 
-*(nessuna)*
+### **`10`. UN COLLAUDO DEI CRITERI NON COLLAUDA IL BANCO CHE LI ALIMENTA.**
+
+> **La regola in una riga:** *oltre ai casi a risposta nota sulle FORMULE, un sigillo che
+> confronta due bracci deve avere un caso che verifica che **i due bracci partano dallo stesso
+> mondo**.*
+
+**IL CASO REALE che la genera — `Z145`, 2026-09-24,** `doc/REPERTO_sigillo_cura2_T5.md`.
+Il sigillo di `CURA 2` ha stampato **`5/5 PASS`**. Il collaudo `P1-sexies` era stato fatto **e
+rispettato**: sei casi a risposta nota, **due dei quali DEVONO fallire, e falliscono**.
+**Eppure `T5` era invalido:** i due bracci giravano **nello stesso processo**, il secondo è
+partito da un mondo diverso *(`n = 901` contro `2660`)*, e i `109` campi diversi misuravano
+**due mondi**, non il flag.
+
+**PERCHÉ IL COLLAUDO NON POTEVA PRENDERLO:** ho collaudato **le formule** — Poisson contro clip,
+la convessità del rilassamento, l'intercettazione di un `segno` sporco. **Nessuno dei sei casi
+chiedeva *«i due bracci partono dallo stesso mondo?»*.** Il banco era fuori dal collaudo.
+
+**COME SI RICONOSCE IL RISCHIO:** quando un criterio è della forma *«i due devono DIFFERIRE»*.
+Un criterio di **identità** *(`max|A−B| = 0`)* fallisce rumorosamente se il banco è rotto; un
+criterio di **differenza** **passa più facilmente proprio quando il banco è rotto**.
+
+> ### **È IL GEMELLO SPECULARE DEL DIFETTO GIÀ A `STANDARD`:**
+> *«`max|A−B| = 0.000e+00` può significare **nessun confronto**»* ↔
+> **«`dv > 0` può significare **due mondi diversi**».**
+> **Uno zero letto come identità; un non-zero letto come effetto.**
+
+**COSA LA FAREBBE CADERE:** se in tre sigilli consecutivi il caso sul banco risultasse
+**sempre vuoto** — cioè nessun modo plausibile di rompere il banco — la regola sarebbe
+burocrazia e andrebbe respinta.
+**⚠ E NON È UN PRESIDIO** *(`A9`)*: non impedisce nulla. Lo diventerebbe solo con un controllo
+che **rifiuti** un sigillo a due bracci privo di quel caso.
 
 > **La regola sull'ASSENZA è stata PROMOSSA a `STANDARD` il 2026-09-24**, col **sì esplicito di Luca** — **riga `9`**. È rimasta `IN PROVA` meno di un'ora, e non perché fosse ovvia: perché aveva **tre casi reali già misurati** nel giorno stesso.
 >

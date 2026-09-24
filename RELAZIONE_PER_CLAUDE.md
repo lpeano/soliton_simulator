@@ -14454,3 +14454,73 @@ Ho provato a far girare il collaudo **prima** di committare lo script, per prend
 sbagliato in secondi invece che in 17 minuti. **`_presidio.avvia` ha rifiutato:** *«un SIGILLO
 certifica un BLOB, e questo blob non è nel repo»*. Ha ragione, ed è il caso in cui un presidio
 **impedisce** invece di annotare (`A9`). Il collaudo gira ora, dopo questo commit.
+
+---
+
+# ❌ `CURA 2` (C) — **IL SIGILLO HA STAMPATO `5/5`, E UNO DEI CINQUE È INVALIDO** (2026-09-24)
+
+**`Z145`, `doc/REPERTO_sigillo_cura2_T5.md`.** Difetto **del mio strumento**, non della cura.
+
+## IL NUMERO CHE NON TORNA
+
+| run | `n` a 120 | archi | durata |
+|---|--:|--:|--:|
+| riferimento `_cura1_corto` *(processo fresco)* | `2660` | `526 302` | `509.0 s` |
+| **`T4` SPENTO** *(1º run del processo)* | `2660` | `526 302` | `404.5 s` |
+| **`T5` ACCESO** *(2º run dello STESSO processo)* | **`901`** | **`59 731`** | **`33.3 s`** |
+
+Al passo **12** il sistema ha già **`n = 2515`**.
+
+## LA DIMOSTRAZIONE — `n` NON PUÒ SCENDERE
+
+Cercato **su tutto il file** *(standard 9, non una finestra)*: **nessuna** funzione di rimozione,
+**nessun** `self.n -=`, **nessun** `np.delete`. `MAX_NODI` è dichiarato nel codice stesso come
+*«guardia di MEMORIA, non di fisica»*, ed è un tetto.
+
+> ### **Nel simulatore nessun meccanismo toglie nodi. Quindi il run `T5` NON è partito dal mondo
+> ### da cui è partito `T4`: è partito da uno diverso e più piccolo.**
+
+**Non è una congettura: è un'impossibilità.** Il *perché* resta da stabilire *(candidato: stato
+di modulo mutato dal primo run — `runpy.run_path` due volte nello stesso processo)*, **e finché
+non è stabilito non lo scrivo come causa.**
+
+## È IL GEMELLO SPECULARE DI UN DIFETTO GIÀ CATALOGATO
+
+Il registro ha già *«`max|A−B| = 0.000e+00` può significare **nessun confronto**»*.
+### **Questo è: `dv > 0` può significare «due mondi diversi», non «il flag fa qualcosa».**
+
+## COSA RESTA IN PIEDI
+
+`T1`/`T2`/`T3` leggono il **sorgente**: valgono. **`T4` vale ed è il test più forte** — è il
+**primo** run del processo e dà `206` campi **identici** a un riferimento girato in un processo
+**fresco e separato**, il che prova che *il processo parte pulito* e copre anche l'estrazione
+**senza flag** di `_cs_arco_da_nodo`. **`T5` è invalido, e quindi il controllo positivo di
+`CURA 2` NON è stabilito: non so se la cura faccia qualcosa.**
+
+## ⚠ IL MIO COLLAUDO NON POTEVA PRENDERLO
+
+`P1-sexies` è stato rispettato — sei casi a risposta nota, due che devono fallire e falliscono.
+**Ma ho collaudato le FORMULE e non il BANCO:** nessuno dei sei chiede *«i due bracci partono
+dallo stesso mondo?»*. **Un collaudo dei criteri non collauda l'apparato che li alimenta.**
+Proposta per `PATTERN_DI_PROVA.md`, **sezione IN PROVA**, non promossa.
+
+## ✅ MA IL CRITERIO `K` È GIÀ RISPOSTO, dal run **certificato** `T4`, senza un run in più
+
+| | | |
+|---|--:|---|
+| `_tum_clip_prob` | **`0` su `63 148 047`** | il clip su `prob` **non ha mai morso** |
+| `_tum_clip_rep` | **`0` su `63 148 047`** | il clip **alto** su `rep` **non ha mai morso** |
+
+> **La sostituzione del clip con Poisson è FORMALE: non cambia un numero, cambia la forma** e
+> toglie un limite che `A11` classifica come patch. **Corretta e inerte.**
+>
+> **⚠ E NON DIRE «il clip non morde»: il contatore guarda SOLO il lato ALTO.** Il clip a **zero**
+> morde ogni volta che `resp > 0`, e **quanto non lo so.** → in coda.
+
+## COSA NON HO FATTO, E PERCHÉ
+
+**Non ho lanciato il giro corto.** Il sigillo è il **cancello** del giro corto, e il suo
+*«può partire»* poggia sul test che so invalido. **La riparazione è quasi gratis** — il giro
+corto `--cura2-corto` è **un processo fresco a un solo braccio**, e `_cura1_corto` pure:
+**il confronto fra i due È il controllo positivo fatto bene** — **ma lanciarlo adesso sarebbe
+aggiustare al volo dentro lo stesso passo**, che il par.5 vieta. **Reperto, commit, stop.**

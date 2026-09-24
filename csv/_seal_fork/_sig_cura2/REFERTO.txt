@@ -1,0 +1,46 @@
+# SIGILLO -- `CURA 2`: il tempo unico nella mitosi
+#
+COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di misurare
+----------------------------------------------------------------------------------------------------
+K1 lambda = 0.01  : Poisson 0.009950, clip 0.010000 -> coincidono -> OK
+K2 lambda = 2.0   : Poisson 0.864665, clip 1.000000 -> differiscono -> OK
+   -> a lambda piccolo l'errore relativo e' lambda/2; a lambda = 2 il clip da' 1.0
+      esatto mentre Poisson da' 0.864665: **e' li' che le due forme differiscono**.
+K3 la forma ESATTA resta fra i due valori per dt/tau in {0.1, 1, 5, 50} -> OK: combinazione convessa
+K4 IL CASO CHE DEVE FALLIRE: l'EULERO con dt/tau = 2.5 da' 1.8000, FUORI da [0.3, 0.9] -> OK: il difetto di `S12` e' riprodotto
+K5 SECONDO CASO CHE DEVE FALLIRE: un `segno` che usa `_ft` -> intercettato ['_ft'] -> OK
+K6 e il `segno` VERO non si segnala: legge ['centro', 'np', 'tanh', 'tau_pp'] -> OK
+----------------------------------------------------------------------------------------------------
+  -> i criteri PASSANO
+
+blob simulatore ORA (sha1 byte grezzi) b881db89
+riferimento `_cura1_corto/scena_000120.pkl.gz` -- STESSA configurazione, flag SPENTO
+
+T1    PASS IL DEFAULT E' SPENTO: `TEMPO_UNICO_MITOSI = False`
+T2    PASS GATE (AST): i rami stanno SOLO in ['_applica_flag', 'mitosi'] -> {'mitosi': [5370, 5387, 5438, 5297]}
+T3    PASS I QUATTRO USI `TORSIONE` SONO INTOCCATI: nessuno legge un nome della cura
+      trovati: ['centro', 'segno', 'tau_soglia', 'tau_tetto']
+      -> e' il test che CODIFICA la regola di Luca: dove intenzione e implementazione
+         COINCIDONO non si tocca. Se la cura li toccasse, avrebbe curato cio' che non
+         era rotto -- e questo lo prende DALL'AST, non dalla mia parola.
+
+  [SPENTO] 404.5 s   TEMPO_UNICO_MITOSI = False
+  campi UGUALI 206   DIVERSI 0   non confrontati 4
+T4    PASS BYTE-INERTE spento: 206 identici, 0 diversi, 4 non confrontati
+      -> i `non confrontati` sono i CONTATORI nuovi, che girano anche a flag
+         spento di proposito: cosi' il "prima" del criterio `K` arriva da qui,
+         senza un run in piu'.
+
+  [ACCESO] 33.3 s   TEMPO_UNICO_MITOSI = True
+  campi UGUALI 88   DIVERSI 109   non confrontati 19
+  i diversi: _calcpsi_chiamate(308 != 242), _calcpsi_w_none(68 != 2), _chi_core_nodi(shape (2660,)!=(901,)), _chi_core_raggio(shape (2660,)!=(901,)), _chi_core_rho0(shape (2660,)!=(901,)), _chi_core_rhoc(289.80021123233064 != 289.78483782249907), _chi_geom_nodi(shape (2660,)!=(901,)), _cs_nodo_prev(shape (2660,)!=(901,))
+T5    PASS CONTROLLO POSITIVO acceso: 109 campi diversi
+
+====================================================================================================
+ESITO: 5/5
+====================================================================================================
+*** SIGILLO PASSATO. Il giro corto puo' partire. ***
+
+!! E IL SIGILLO NON DICE CHE LA CURA SIA GIUSTA: dice che tocca SOLO cio' che era
+   incoerente, che a flag spento non cambia un bit, e che acceso fa qualcosa.
+   Se la mitosi viva o muoia lo dice il GIRO CORTO, non questo.
