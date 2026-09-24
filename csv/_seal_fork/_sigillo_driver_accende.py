@@ -34,8 +34,16 @@ RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
 DRIVER = os.path.join(RADICE, "csv", "_test_fork", "_scena_video.py")
 DEST = os.path.join(_QUI, "_sig_driver_accende")
 
-# le cure che il driver DEVE accendere in ogni run, e che NON dipendono da un `=on` del comando
-OBBLIGATORIE = ("RITMO_WRAP_2PI", "TEMPO_UNICO_MITOSI")
+# ⚠ [DECISIONE DI LUCA, 2026-09-24] **IL DRIVER ACCENDE TUTTE LE CURE APPROVATE IN MODO
+#   INCONDIZIONATO. UN SOLO MODO DI LANCIARE: NUDA = CAMPAGNA.**
+#   Quindi `OBBLIGATORIE` NON e' piu' una lista a mano: sono **TUTTE le cure** di
+#   `_cure_verificate.py`, MENO quelle escluse qui sotto **con il loro motivo**.
+#   ### E IL PRESIDIO E' PROPRIO QUESTO: una cura nuova che non sia ne' obbligatoria ne'
+#   ### esclusa **fa FALLIRE il sigillo**, invece di passare in silenzio.
+ESCLUSE = {
+    "FASE_2PI": "NON e' approvata: la sua prova la BOCCIA (`Z127`, `2/4`, `E1` non passa -- "
+                "mitosi `62` -> `1` evento). Il driver NON deve accenderla.",
+}
 
 # Le DUE invocazioni, e la differenza fra loro e' il punto di questo sigillo:
 #   NUDA      il driver con i soli argomenti posizionali -- cio' che gira se nessuno
@@ -69,7 +77,7 @@ def figlio():
     finally:
         sys.argv = vecchio
     S = g.get("S") or sys.modules["soliton_simulator"]
-    for nome in sorted(set(OBBLIGATORIE) | set(_flag_delle_cure())):
+    for nome in sorted(set(obbligatorie()) | set(_flag_delle_cure())):
         sys.stdout.write("STATO %s %s\n" % (nome, getattr(S, nome, "ASSENTE")))
     return 0
 
@@ -81,6 +89,11 @@ def _flag_delle_cure():
         return [c[0] for c in CURE]
     except Exception:
         return []
+
+
+def obbligatorie():
+    """TUTTE le cure, meno le `ESCLUSE`. **Non una lista a mano.**"""
+    return tuple(f for f in _flag_delle_cure() if f not in ESCLUSE)
 
 
 def main():
@@ -140,32 +153,50 @@ def main():
     P("DUE INVOCAZIONI, e la differenza fra loro e' il punto:\n")
     P("  NUDA      i soli argomenti posizionali -- cio' che gira se nessuno ricorda gli `=on`\n")
     P("  CAMPAGNA  gli argomenti che `_g4_prova.py` passa davvero\n\n")
+    OBB = obbligatorie()
     P("  %-24s %-10s %-10s %s\n" % ("flag", "NUDA", "CAMPAGNA", ""))
     esiti = []
     nudi_spenti = []
+    orfane = []
     for nome in sorted(letti["NUDA"]):
         vn, vc = letti["NUDA"][nome], letti["CAMPAGNA"].get(nome, "?")
-        if nome in OBBLIGATORIE:
+        if nome in OBB:
             ok = (vn == "True" and vc == "True")
             esiti.append(ok)
-            nota = "**DEVE essere True in ENTRAMBE** -> %s" % ("PASS" if ok else "*** FAIL ***")
-        else:
-            if vn != "True" and vc == "True":
+            if vc == "True" and vn != "True":
                 nudi_spenti.append(nome)
-                nota = "⚠ **accesa SOLO dal comando**"
-            else:
-                nota = "*(dipende dal comando)*"
+            nota = "**DEVE essere True in ENTRAMBE** -> %s" % ("PASS" if ok else "*** FAIL ***")
+        elif nome in ESCLUSE:
+            ok = (vn != "True" and vc != "True")
+            esiti.append(ok)
+            nota = "**ESCLUSA, deve restare False** -> %s" % ("PASS" if ok else "*** FAIL ***")
+        else:
+            orfane.append(nome)
+            nota = "⚠ **ORFANA: ne' obbligatoria ne' esclusa**"
         P("  %-24s %-10s %-10s %s\n" % (nome, vn, vc, nota))
-    P("\n  ⚠ CURE CHE L'INVOCAZIONE NUDA NON ACCENDE: %d su %d -- %s\n"
-      % (len(nudi_spenti), len(letti["NUDA"]), ", ".join(nudi_spenti) or "nessuna"))
-    P("     Non e' un difetto del driver: e' il FATTO che `CURE VERIFICATE` rende visibile.\n")
-    P("     Quelle cure **non sono nel codice: sono nell'argv di CHI LANCIA**, e un comando\n")
-    P("     che ne dimentica una gira su un sistema che si sa difettoso (`P2`) **senza che\n")
-    P("     nessun sigillo se ne accorga**. Le DUE obbligatorie sono le uniche che il DRIVER\n")
-    P("     accende da se', e quindi le uniche che non si possono dimenticare.\n")
+
+    P("\n  CURE OBBLIGATORIE: %d   ESCLUSE: %d   ORFANE: %d\n"
+      % (len(OBB), len(ESCLUSE), len(orfane)))
+    for k, v in sorted(ESCLUSE.items()):
+        P("    escl. %-20s %s\n" % (k, v))
+    if orfane:
+        esiti.append(False)
+        P("\n  *** ORFANE: %s ***\n" % ", ".join(orfane))
+        P("  Una cura che non e' ne' obbligatoria ne' esclusa **passerebbe in silenzio**.\n")
+        P("  Si dichiara in `ESCLUSE` col suo motivo, oppure il driver deve accenderla.\n")
+    if nudi_spenti:
+        P("\n  *** ACCESE SOLO DAL COMANDO: %s ***\n" % ", ".join(nudi_spenti))
+        P("  **NUDA != CAMPAGNA**, e la decisione di Luca del 2026-09-24 dice che devono\n")
+        P("  coincidere: *un solo modo di lanciare*. Quelle cure non sono nel codice, sono\n")
+        P("  **nell'argv di CHI LANCIA**, e un comando che ne dimentica una gira su un sistema\n")
+        P("  che si sa difettoso (`P2`) **senza che nessun sigillo se ne accorga**.\n")
+    else:
+        P("\n  ✅ **NUDA = CAMPAGNA su tutte le obbligatorie: UN SOLO MODO DI LANCIARE.**\n")
+        P("     Nessuna cura approvata si puo' piu' dimenticare da riga di comando.\n")
 
     n = sum(1 for x in esiti if x)
-    P("\n" + "=" * 92 + "\nESITO: %d/%d sulle cure OBBLIGATORIE\n" % (n, len(esiti)) + "=" * 92 + "\n")
+    P("\n" + "=" * 92 + "\nESITO: %d/%d (obbligatorie + escluse + orfane)\n"
+      % (n, len(esiti)) + "=" * 92 + "\n")
     P("*** %s ***\n" % ("IL DRIVER LE ACCENDE." if n == len(esiti) else
                         "IL DRIVER NON LE ACCENDE: reperto, commit, STOP."))
     P("\n!! COSA QUESTO SIGILLO NON DICE: che le cure siano GIUSTE, ne' che il flag FUNZIONI.\n")

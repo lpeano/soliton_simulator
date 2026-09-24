@@ -97,8 +97,25 @@ CHICOOP = "off"
 # stessa ragione di `--chi-coop`: il default e' quello che lascia l'argv IDENTICO elemento per
 # elemento a quello di prima. Lo prova il sigillo, non questo commento.
 SCALAMIN = "off"
-COESADIM = "off"
-# [LE CINQUE CURE, 2026-09-21] stesso schema NOMINALE `=on|off`, DEFAULT `off`.
+# ⚠⚠ [DECISIONE DI LUCA, 2026-09-24] **IL DRIVER ACCENDE TUTTE LE CURE APPROVATE IN MODO
+#   INCONDIZIONATO. UN SOLO MODO DI LANCIARE: NUDA = CAMPAGNA.**
+#   PERCHE': il sigillo `csv/_seal_fork/_sigillo_driver_accende.py` ha MISURATO che con
+#   l'invocazione NUDA **SEI cure su dieci erano SPENTE** -- `PEQ_ESATTO`,
+#   `PEQ_NASCITA_LOCALE`, `SCALA_MIN_PASSO`, `COES_CAUSALE`, `COES_ADIM`, `ANOM_SIMM`.
+#   Erano accese **solo** perche' OGNI comando di campagna passava `=on`: non erano nel
+#   codice, erano **nell'argv di chi lancia**, e un comando che ne dimenticava una girava su
+#   un sistema che si sa difettoso (`P2`) **senza che nessun sigillo se ne accorgesse**.
+#   COME, e conserva cio' che il par.10 impone: **si cambia il DEFAULT DELL'OPZIONE DEL
+#   DRIVER**, non si toglie l'opzione. `=off` continua a funzionare ed e' il ramo
+#   **DIAGNOSTICO** per gli A/B -- *«resta un `--senza-<nome>` marcato DIAGNOSTICO, non
+#   fisica alternativa»*.
+#   ⚠ E NON E' L'EPOCA 3: i `default` NEL SORGENTE del simulatore restano `False`. Qui
+#   cambia il default **del driver**, che e' cio' che decide che cosa GIRA.
+#   ⚠ `SCALAMIN` RESTA `off`: **non e' una cura approvata** (e' il freno vecchio, quello che
+#   `D31` accusa). Non entra in questa decisione.
+COESADIM = "on"
+# [LE CINQUE CURE, 2026-09-21] stesso schema NOMINALE `=on|off`. **DEFAULT `on` dal
+# 2026-09-24**: sono cure APPROVATE, e il driver le accende da se'.
 # ⚠⚠ `--invarianti=on|off` SI PARSA QUI, E LA PRIMA VERSIONE NON LO FACEVA -- ERRORE MIO.
 #   Il ragionamento era: *e' un'opzione VALORIZZATA del simulatore, quindi cade in `_resti` e ci
 #   arriva tale e quale*. **FALSO:** `_resti` diventa il NUOVO `_ARGV`, e il driver legge
@@ -108,11 +125,11 @@ COESADIM = "off"
 #   Si parsa e si inoltra **VERBATIM**, senza tradurla in booleano: cosi' non esiste nessuna
 #   traduzione che possa divergere -- che era la ragione vera della scelta iniziale.
 INVARIANTI_OPT = None
-PEQESATTO = "off"
-PEQNASCITA = "off"
-SCALAMINPASSO = "off"
-COESCAUSALE = "off"
-ANOMSIMM = "off"
+PEQESATTO = "on"
+PEQNASCITA = "on"
+SCALAMINPASSO = "on"
+COESCAUSALE = "on"
+ANOMSIMM = "on"
 
 _resti = []
 for _x in _ARGV[1:]:
