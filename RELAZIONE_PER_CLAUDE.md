@@ -14396,3 +14396,61 @@ inverte.** → punti **`V8`** e **`V9`** della verifica.
 
 **La decide la distribuzione di `|dx|/d`** — `V8`/`V9` — **e la decidi tu dopo quella misura.**
 Non prima: senza quel numero **non c'è una base derivata**, e sceglierei per gusto.
+
+---
+
+# `CURA 2` (C) — IL SIGILLO, COMMITTATO PRIMA DEL CODICE CHE GIUDICA (2026-09-24)
+
+**`csv/_seal_fork/_sigillo_cura2.py`.** Sei test, e il collaudo a risposta nota prima di tutti.
+
+## ❗ IL TEST CHE CONTA È `T3`, E CODIFICA LA REGOLA DI LUCA
+
+> *«Si applicano le cose corrette e coerenti. Dove intenzione e implementazione DIVERGONO,
+> si realizza l'INTENZIONE.»*
+
+La cura tocca i **tre usi-TEMPO** di `tau_pp`. **`T3` verifica che i QUATTRO usi-TORSIONE —
+`tau_soglia`, `tau_tetto`, `centro`, `segno` — siano INTOCCATI**, cioè che nessuno di loro
+legga un nome introdotto dalla cura (`_ft`, `ampiezza_int`, `resp_int`, `_rn`, `_tau_a`,
+`_rap`, `_resp_rep`).
+
+**Perché serve un test e non la mia parola:** l'altra metà della regola — *dove coincidono non
+si tocca* — **non ha nessun presidio naturale**. Un sigillo di byte-inerzia passa anche se ho
+curato cose che non erano rotte, perché a flag spento non cambia comunque nulla. `T3` la prende
+**dall'AST**, e il collaudo `K5` lo prova su un `segno` sintetico che USA `_ft`: il criterio lo
+intercetta. `K6` prova il contrario — il `segno` vero non si segnala.
+
+## GLI ALTRI CINQUE
+
+| | cosa verifica |
+|---|---|
+| `T1` | `TEMPO_UNICO_MITOSI = False` di default |
+| `T2` | **GATE dall'AST**: i rami del flag stanno SOLO in `mitosi` e `_applica_flag` |
+| `T4` | **byte-inerzia a flag spento** contro `_cura1_corto/scena_000120.pkl.gz` |
+| `T5` | **controllo positivo**: acceso, DEVE differire |
+
+**`T4` prova DUE cose, non una.** Oltre alla byte-inerzia del flag, prova che l'**estrazione**
+di `_cs_arco_da_nodo` da `step()` (`:4791`) non ha cambiato un bit — ed è una modifica **senza
+flag**, che nessun altro test coprirebbe.
+
+## IL COLLAUDO (`P1-sexies`), E DUE CASI DEVONO FALLIRE
+
+`K1`/`K2` — Poisson contro clip: a `λ = 0.01` coincidono, a `λ = 2` il clip dà `1.0` esatto
+mentre Poisson dà `0.864665`. **È lì che le due forme differiscono, ed è lì che il criterio
+deve vedere.**
+`K3` — la forma esatta resta fra i due valori per `dt/τ ∈ {0.1, 1, 5, 50}`.
+**`K4` — IL CASO CHE DEVE FALLIRE:** l'Eulero con `dt/τ = 2.5` dà `1.8`, **fuori** da
+`[0.3, 0.9]`. Riproduce il difetto che `S12` cura.
+**`K5` — IL SECONDO CASO CHE DEVE FALLIRE:** un `segno` sintetico che legge `_ft`.
+
+## ⚠ E COSA IL SIGILLO NON DICE
+
+**Non dice che la cura sia giusta.** Dice che tocca **solo** ciò che era incoerente, che a flag
+spento non cambia un bit, e che acceso fa qualcosa. **Se la mitosi viva o muoia lo dice il giro
+corto**, non questo.
+
+## ⚠ IL PRESIDIO HA RIFIUTATO DI FARMI BARARE
+
+Ho provato a far girare il collaudo **prima** di committare lo script, per prendere un criterio
+sbagliato in secondi invece che in 17 minuti. **`_presidio.avvia` ha rifiutato:** *«un SIGILLO
+certifica un BLOB, e questo blob non è nel repo»*. Ha ragione, ed è il caso in cui un presidio
+**impedisce** invece di annotare (`A9`). Il collaudo gira ora, dopo questo commit.
