@@ -153,6 +153,57 @@ def confronta(A, B, P, ea, eb):
     return ug, dv, len(solo_a) + len(solo_b) + len(rotti)
 
 
+def quale(o):
+    """`(grandezza, passo, quanti)` letti DALLA STESSA RIGA, con UNA regex.
+
+    Se l'arresto **non e' un `DominioViolato`** torna `("-", -1, -1)`: **un arresto non
+    riconosciuto NON e' un \"motivo diverso\"**, e' un **errore**, e chi legge il verdetto
+    deve saperlo.
+    """
+    m = re.search(r"`(\w+)` VIOLA `[^`]*` al passo (\d+)", o)
+    q = re.search(r"quanti: (\d+)", o)
+    return (m.group(1) if m else "-", int(m.group(2)) if m else -1,
+            int(q.group(1)) if q else -1)
+
+
+def verdetto_diversi(ga, Aa, oa, gb, Bb, ob, ea, eb, P):
+    """**I DUE BRACCI SI COMPORTANO DIVERSAMENTE?** — UNA funzione sola.
+
+    ❌ **PRIMA QUESTA LOGICA ERA SCRITTA DUE VOLTE** — una nel criterio di `D38`, una nel suo
+       collaudo — **quindi il collaudo verificava LA COPIA, non il criterio.** Un collaudo che
+       non esercita il codice giudicante non collauda niente *(rilievo di Luca, 2026-09-24)*.
+       **Ora la chiamano entrambi**, e un difetto qui **si vede dal collaudo**.
+
+    ❌ **E IL SECONDO BUCO:** il criterio diceva `gv != gn and gv[0] != "-"`. **Se il braccio
+       NUOVO si fermava per un errore QUALUNQUE** (`gn[0] == "-"`) **il confronto risultava
+       \"diverso\" e `D38` PASSAVA** *(rilievo di Luca)*. **Un crash non e' un motivo di arresto
+       diverso: e' un crash.** Ora **si leggono ENTRAMBI i motivi**, e se uno dei due non e'
+       riconosciuto l'esito e' **FAIL, col testo dell'errore nel referto**.
+    """
+    P("\n  %-8s: si ferma su `%s` al passo %s, con %s valori fuori dominio\n" % ((ea,) + ga))
+    P("  %-8s: si ferma su `%s` al passo %s, con %s valori fuori dominio\n" % ((eb,) + gb))
+    # (0) un arresto NON RICONOSCIUTO e' un FAIL, e si mostra
+    for eti, g, o, att in ((ea, ga, oa, Aa), (eb, gb, ob, Bb)):
+        if g[0] == "-" and att is None:
+            P("\n  *** %s: ARRESTO NON RICONOSCIUTO -- non e' un `DominioViolato`.\n" % eti)
+            P("      NON conta come \"motivo diverso\": e' un ERRORE, e l'esito e' FAIL.\n")
+            for riga in o.strip().splitlines()[-12:]:
+                P("      | %s\n" % riga)
+            return False
+    if ga != gb and ga[0] != "-" and gb[0] != "-":
+        P("  -> si fermano in modo DIVERSO, e ENTRAMBI i motivi sono riconosciuti.\n")
+        return True
+    if Aa is not None and Bb is not None:
+        P("  -> entrambi arrivano in fondo: allora DEVONO differire NEI DATI.\n")
+        _ug, _dv, _ex = confronta(Aa, Bb, P, ea, eb)
+        return _dv > 0
+    if (Aa is None) != (Bb is None):
+        P("  -> uno arriva in fondo e l'altro si ferma per un motivo RICONOSCIUTO.\n")
+        return True
+    P("  -> si fermano per LO STESSO motivo, allo stesso passo, sugli stessi valori.\n")
+    return False
+
+
 def main():
     try:
         os.makedirs(DEST)
@@ -215,41 +266,8 @@ def main():
     Av, ov, rv = gira("d38_vecchio", vecchio, ["--scala-min-passo=off"], P)
     Bn, on_, rn = gira("d38_nuovo", nuovo, ["--scala-min-passo=off"], P)
 
-    def quale(o):
-        """`(grandezza, passo, quanti)` letti DALLA STESSA RIGA, con UNA regex.
-
-        ❌ **PRIMA ERANO TRE REGEX SLEGATE sul testo INTERO**, e il risultato veniva stampato
-           **sotto etichette sbagliate**: la frase diceva *«si ferma su `d` al passo 223380,
-           1126 valori fuori dominio»* mentre i numeri veri erano **passo 1** e
-           **223 380 valori**. Tre regex indipendenti possono pescare da **tre righe diverse**,
-           e l'ordine della tupla non era quello della frase.
-           **Le righe grezze citate sopra erano giuste: era il mio RIASSUNTO a mentire** --
-           ed e' peggio, perche' il riassunto e' quello che si legge.
-        """
-        m = re.search(r"`(\w+)` VIOLA `[^`]*` al passo (\d+)", o)
-        q = re.search(r"quanti: (\d+)", o)
-        return (m.group(1) if m else "-", int(m.group(2)) if m else -1,
-                int(q.group(1)) if q else -1)
-
     gv, gn = quale(ov), quale(on_)
-    P("\n  VECCHIO: si ferma su `%s` al passo %s, con %s valori fuori dominio\n" % gv)
-    P("  NUOVO  : si ferma su `%s` al passo %s, con %s valori fuori dominio\n" % gn)
-    # ❌ IL CRITERIO PRECEDENTE AVEVA UN BUCO (rilievo di Luca):
-    #     ok2 = (gv != gn) or (Av is not None and Bn is not None)
-    #   il secondo ramo dava PASS **se entrambi arrivavano in fondo, SENZA verificare che
-    #   DIFFERISSERO**: due corse IDENTICHE sarebbero passate. E' la stessa famiglia del
-    #   `dv > 0` letto come effetto: un criterio che non puo' fallire dove dovrebbe.
-    ok2 = False
-    if gv != gn and gv[0] != "-":
-        ok2 = True                        # si fermano in modo DIVERSO: e' la cura
-        P("  -> si fermano in modo DIVERSO.\n")
-    elif Av is not None and Bn is not None:
-        P("  -> entrambi arrivano in fondo: allora DEVONO differire NEI DATI.\n")
-        _ug, _dv, _ex = confronta(Av, Bn, P, "VECCHIO", "NUOVO")
-        ok2 = (_dv > 0)
-    else:
-        P("  -> uno solo arriva in fondo: DIVERSI per definizione.\n")
-        ok2 = (Av is None) != (Bn is None)
+    ok2 = verdetto_diversi(gv, Av, ov, gn, Bn, on_, "VECCHIO", "NUOVO", P)
     esiti.append(ok2)
     P("\n  `D38` %s\n" % ("PASS: i due codici si comportano DIVERSAMENTE a parita' di argv.\n"
                           "        Il vecchio cade su `d` (la SEMINA, `_nasce` non tronca),\n"
@@ -267,15 +285,9 @@ def main():
     Ka, oka, _ = gira("collaudo_a", nuovo, ["--scala-min-passo=off"], P)
     Kb, okb, _ = gira("collaudo_b", nuovo, ["--scala-min-passo=off"], P)
     ga, gb = quale(oka), quale(okb)
-    P("\n  braccio a: `%s` al passo %s, con %s valori fuori dominio\n" % ga)
-    P("  braccio b: `%s` al passo %s, con %s valori fuori dominio\n" % gb)
-    if ga != gb and ga[0] != "-":
-        finto = True
-    elif Ka is not None and Kb is not None:
-        _u, _d, _e = confronta(Ka, Kb, P, "a", "b")
-        finto = (_d > 0)
-    else:
-        finto = (Ka is None) != (Kb is None)
+    # ❗ LA STESSA FUNZIONE del criterio, non una copia: cosi' il collaudo esercita IL CODICE
+    #   CHE GIUDICA. Prima erano due copie, e il collaudo verificava la copia.
+    finto = verdetto_diversi(ga, Ka, oka, gb, Kb, okb, "collaudo a", "collaudo b", P)
     ok3 = (not finto)
     esiti.append(ok3)
     P("\n  COLLAUDO %s: col MEDESIMO codice il criterio di `D38` %s\n"
