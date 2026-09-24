@@ -13758,3 +13758,86 @@ lui.
 abbassa, quindi `x` sale per tutti»*. **`median(r)` scende del `33 %` e la quota al tetto sale
 comunque: la distribuzione si ALLARGA, non si sposta.** Il criterio di chiusura ora chiede la
 **dispersione**, non la mediana.
+
+### ㉢ **`CURA 2`: la SCHEDA, prima del codice** — e l'elenco fa emergere due cose
+
+> Scheda ⑨ `tempo-nella-mitosi` in `doc/REGISTRO_FISICA.md`. **Nessun codice.**
+
+### **La classificazione, e il criterio che la decide sta in una riga**
+
+> *Un uso è **`TEMPO`** se la grandezza entra **come durata o come ritmo** — se la si potesse
+> misurare con un **cronometro**. È **`TORSIONE`** se entra **come posizione su un asse** — se
+> la si potesse misurare con un **goniometro**.*
+
+| riga | espressione | classe |
+|---|---|:--:|
+| `:5233` | `tau_pp = 1 + |tw|/PHI_CRIT` | **la SORGENTE: una misura di TORSIONE chiamata «tempo proprio»** |
+| `:5240` | `tau_locale = 1/tau_pp` | **`TEMPO`** → `r_arco` |
+| `:5241` | `ampiezza = salita*discesa*tau_locale` | **`TEMPO`** |
+| `:5280` | `.../ max(tau_pp, 1e-12)` *(costante di tempo)* | **`TEMPO`** → `· r_arco` |
+| `:5234-5238` | `tau_soglia`, `tau_tetto`, `centro` | **`TORSIONE`** — posizioni sull'asse di `tw` |
+| `:5239` | `segno = −tanh(3(tau_pp − centro))` | **`TORSIONE`** — l'inversione. **Resta com'è** |
+| `:5189-5196` | `tau_nodo` → `grad_tau` → `soglia` | **`TEMPO` per intenzione, `TORSIONE` per implementazione** → `grad_r` |
+
+### ⚠ **E qui c'è la prima cosa che l'elenco fa emergere**
+
+**`tau_nodo = 1 + mean(|tw|)/PHI_CRIT` è IDENTICO al ramo `TEMPO_SEGNO` di `ritmo()`** —
+**quello che non gira** *(`Z130`)*.
+
+> **La mitosi usa, come «tempo proprio», esattamente la definizione di tempo che il resto del
+> sistema ha SCARTATO.** Sono **due orologi diversi nello stesso passo**, ed è il difetto che
+> `CURA 2` deve togliere.
+
+### **Il ritmo di un ARCO: `r_arco = min(r_i, r_j)`, il più LENTO**
+
+**È causalità, non prudenza:** un processo che vive sull'arco coinvolge **entrambi** i nodi,
+quindi non può avanzare più in fretta del più lento — altrimenti l'estremo lento riceverebbe,
+**nel proprio tempo proprio**, più di quanto il suo orologio ha battuto.
+**E ha un precedente nel codice:** `COES_CAUSALE` usa il `cs` del **nodo più lento**, con lo
+stesso argomento.
+
+**Le alternative, dichiarate:** la **media** non è causale *(un nodo veloce accelera l'arco)* e
+è una statistica in una legge locale *(`A2`)* · la **media armonica** vale per rate **in serie**,
+e l'arco non è due processi in serie · la **geometrica** non ha derivazione · il **max** è
+anti-causale · l'`r` **del nodo `i`** rompe l'antisimmetria dell'arco.
+
+### ✅ **Un clamp SPARISCE per costruzione** *(`A11`)*
+
+`max(tau_pp, 1e-12)` protegge da una divisione per zero, e `A11` dice di **cercare l'errore**.
+Con `r` il pavimento è **derivato** *(`1.4142e-6`, dalla formula normalizzata)*, quindi
+`1/r ≤ 707107` e **non c'è più niente da proteggere**. **Un clamp che sparisce è meglio di un
+clamp giustificato.**
+
+### ⚠ **E la seconda cosa: il rischio principale della cura è la SCALA**
+
+`tau_locale = 1/tau_pp` vive in **`(0, 1]`**. **`r` vive in `[1.4142e-6, 1.4142]`**, e la sua
+**mediana misurata è `0.68`**. **`ampiezza` entra in `prob = clip(resp, 0, 1)`**, quindi **la
+scala decide il tasso di mitosi**.
+
+> **Sostituire `r` cambia quella scala di un fattore `O(1)` che NON SO DIMOSTRARE ESSERE `1`.**
+> **Non metto un fattore di normalizzazione:** sarebbe un numero **scelto** *(`A1`)*.
+> **`E1` — la mitosi non muore e non esplode — è esattamente il suo giudice**, ed è lo stesso
+> posto in cui `FASE_2PI` è caduta, per un motivo diverso.
+
+### ❓ **UNA DOMANDA PER TE, e la pongo adesso perché `CURA 2` TOCCA QUELLA RIGA**
+
+```python
+self._rep = self._rep + _dte * (rep - self._rep) / np.maximum(tau_pp, 1e-12)
+```
+
+**È un EULERO ESPLICITO su un rilassamento di primo ordine, e `par.4` lo vieta** *(«usa il passo
+ESATTO»)*. **È la stessa famiglia che `PEQ_ESATTO` ha curato per `peq`**, dove l'Eulero
+**scavalcava sotto zero** per `dt_e/tau > 1` *(misurato `1.2018`)*.
+
+**Non lo tocco in `CURA 2`:** mescolare *«quale tempo»* con *«quale integratore»* renderebbe il
+risultato ininterpretabile *(par.1)*. **Ma curare il tempo e lasciare l'integratore sbagliato è
+mezzo lavoro sulla stessa riga.** → **`S12`** nella coda. **Dimmi se va fatto dopo, o insieme.**
+
+### **E il problema della provenienza di `r`, che va risolto nel codice**
+
+`r` per nodo sta in `self._r_corrente`, scritto in `step()` **ma solo `if FORK_SU2_MEM`**.
+**È disponibile** quando `mitosi()` gira *(il ciclo è `step(); mitosi(); ...`)* **e la lunghezza
+è giusta in quel punto** — ma è **un array per-nodo attraversato da un punto di crescita**,
+cioè la classe **`A8b`** di `_cs_nodo_prev` *(`71.88 %`)* e `_psi_spin_prec` *(`95.33 %`)*.
+**La guardia si CONTA, non si tace**, con **quattro** numeri: invocazioni, salti, **la forma** al
+fallimento, e **quando**.
