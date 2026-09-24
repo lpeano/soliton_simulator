@@ -137,8 +137,8 @@ def main():
         with io.open(grezzo, "w", encoding="utf-8", newline="\n") as g:
             # ⚠ `SEMI` era definito nel GENITORE e non passato al figlio: NameError dopo la
             #   prima riga. Ora si inietta, come per gli altri strumenti.
-            rc = subprocess.call([sys.executable, "-u", "-c", "SEMI = %r
-" % (SEMI,) + FIGLIO],
+            testa = "SEMI = %r" % (SEMI,) + chr(10)
+            rc = subprocess.call([sys.executable, "-u", "-c", testa + FIGLIO],
                                  cwd=RADICE, stdout=g, stderr=subprocess.STDOUT)
         out = io.open(grezzo, encoding="utf-8", errors="replace").read()
 
