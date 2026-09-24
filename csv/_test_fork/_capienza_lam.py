@@ -142,9 +142,16 @@ def main():
     # gira. Prima era `capture_output=True`, e non c'era modo di sapere a che punto fosse --
     # difetto mio, e la ragione per cui alla domanda "quanto ci vorra'?" non sapevo rispondere.
     grezzo = os.path.join(os.path.dirname(DEST), "CAPIENZA_LAM.progresso.txt")
-    with io.open(grezzo, "w", encoding="utf-8", newline="\n") as _g:
-        rc = subprocess.call([sys.executable, "-u", "-c", FIGLIO], cwd=RADICE,
-                             stdout=_g, stderr=subprocess.STDOUT)
+    if "--riusa" in sys.argv and os.path.exists(grezzo):
+        # RIUSA la misura gia' fatta invece di rifarla. **SI DICHIARA**: i numeri sono
+        # quelli del file, con la loro data, e NON sono stati rimisurati adesso.
+        rc = 0
+        P("!! `--riusa`: i numeri vengono da `%s`, **NON rimisurati adesso**\n#\n"
+          % os.path.basename(grezzo))
+    else:
+        with io.open(grezzo, "w", encoding="utf-8", newline="\n") as _g:
+            rc = subprocess.call([sys.executable, "-u", "-c", FIGLIO], cwd=RADICE,
+                                 stdout=_g, stderr=subprocess.STDOUT)
 
     class _R(object):
         pass
@@ -172,9 +179,13 @@ def main():
             cap[float(m.group(1))] = float(m.group(2))
     rag = {}
     for x in (r.stdout or "").splitlines():
-        m = re.match(r"RAGGIO_PER n=(\d+)\s+->\s+r=([\d.]+)", x)
+        # IL FORMATO E' CAMBIATO quando il raggio ha acquisito la DISPERSIONE (rilievo
+        #   di Luca): era `-> r=4.5950`, ora e' `r = 4.5950 +- 0.0350`. Il parser vecchio
+        #   non matchava piu' e **LA SEZIONE (a) SPARIVA IN SILENZIO** -- un output
+        #   PARZIALE che sembra completo se non si guarda cosa manca.
+        m = re.match(r"RAGGIO_PER n=(\d+)\s+r = ([\d.]+) \+- ([\d.]+)", x)
         if m:
-            rag[int(m.group(1))] = float(m.group(2))
+            rag[int(m.group(1))] = (float(m.group(2)), float(m.group(3)))
     sys.path.insert(0, RADICE)
     import soliton_simulator as S
     import numpy as np
@@ -199,14 +210,22 @@ def main():
     P("  L'INTERVALLO fra i BORDI e' `sep*sqrt(3) - 2*r_massa`.\n")
     P("  ⚠ **`intervallo = R_CONN` E' UNA SCELTA DI LUCA, NON UNA DERIVAZIONE**, e si dichiara:\n")
     P("     e' il raggio a cui il vuoto si allaccia, quindi \"le masse si vedono appena\".\n\n")
-    ra = rag.get(497)
-    if ra:
+    if 497 in rag:
+        ra, dra = rag[497]
         sep_a = (2.0 * ra + RC) / np.sqrt(3.0)
+        # LA DISPERSIONE SI PROPAGA, non si perde: un numero derivato da una misura con
+        # barra non puo' arrivare al referto senza barra.
+        dsep = 2.0 * dra / np.sqrt(3.0)
         P("  (a) STESSA MATERIA -- n per massa come oggi (%d)\n" % 497)
-        P("      raggio della massa con `A13`:  r = %.4f  (= %.3f LAM)\n" % (ra, ra / LAM))
-        P("      sep necessario:  (2*r + R_CONN)/sqrt(3) = **%.4f**\n" % sep_a)
-        P("      distanza fra i centri = sep*sqrt(3) = %.4f\n" % (sep_a * np.sqrt(3.0)))
+        P("      raggio della massa con `A13`:  r = %.4f +- %.4f  (= %.3f +- %.3f LAM)\n"
+          % (ra, dra, ra / LAM, dra / LAM))
+        P("      sep necessario:  (2*r + R_CONN)/sqrt(3) = **%.4f +- %.4f**\n"
+          % (sep_a, dsep))
+        P("      distanza fra i centri = sep*sqrt(3) = %.4f +- %.4f\n"
+          % (sep_a * np.sqrt(3.0), dsep * np.sqrt(3.0)))
         P("      estensione totale della scena ~ sep + r = %.4f\n" % (sep_a + ra))
+    else:
+        P("  (a) *** RAGGIO PER n=497 NON LETTO: sezione MANCANTE, non vuota ***\n")
     sep_b = 4.0
     r_b = (sep_b * float(np.sqrt(3.0)) - RC) / 2.0
     P("\n  (b) STESSA DISTANZA -- `--sep 4.0`\n")
