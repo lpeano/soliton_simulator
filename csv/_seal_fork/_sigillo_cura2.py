@@ -123,6 +123,56 @@ def rami_del_flag(src, flag):
     return fuori
 
 
+def braccio(nome, acceso, dest, solo_flag=False):
+    """UN braccio, in QUESTO processo -- che e' un processo TUTTO SUO.
+
+    `STANDARD 1` di `doc/PATTERN_DI_PROVA.md`: *un processo per braccio.* `avvia_test` e' una
+    LEVETTA -- la seconda chiamata FERMA la scena e il braccio nasce SENZA MASSE (`n = 900`).
+    **E' il difetto `Z145`**, in cui questo stesso sigillo e' caduto: il suo `T5` misurava
+    `n = 901` contro `2660` e leggeva la differenza come effetto del flag.
+    """
+    import runpy
+    os.chdir(RADICE)
+    import soliton_simulator as S
+    orig = S._applica_flag
+
+    def _w(a, _v=acceso):
+        r = orig(a)
+        S.TEMPO_UNICO_MITOSI = _v
+        return r
+    S._applica_flag = _w
+    if solo_flag:
+        # COLLAUDO DEL MECCANISMO, SENZA FISICA: si prova che il braccio ARRIVA nel figlio.
+        # SI PASSA DAL PERCORSO VERO -- lo stesso `_cli()` + `_applica_flag(a)` del driver
+        # (`_scena_video.py:232-234`) -- e non da un argv finto: `_applica_flag` legge
+        # `a.maxnodi` SENZA default, quindi un oggetto vuoto morirebbe li' e il collaudo
+        # proverebbe solo che un'eccezione si propaga.
+        # Si parte dal valore SBAGLIATO apposta: se il braccio non attraversasse il confine
+        # di processo, il figlio stamperebbe l'OPPOSTO, non un valore mancante.
+        S.TEMPO_UNICO_MITOSI = not acceso
+        sys.argv = ["soliton_simulator.py"]
+        S._applica_flag(S._cli())
+        sys.stdout.write("FLAG=" + chr(10) + str(S.TEMPO_UNICO_MITOSI) + chr(10))
+        return 0
+    sys.argv = ["_scena_video.py", "20", dest] + COMUNE
+    runpy.run_path(DRIVER, run_name="__main__")
+    return 0
+
+
+def lancia_braccio(nome, acceso, dest, solo_flag=False):
+    """Lancia un braccio in un PROCESSO NUOVO. Torna (rc, output, secondi)."""
+    import subprocess
+    import time
+    cmd = [sys.executable, os.path.abspath(__file__), "--braccio", nome,
+           "1" if acceso else "0", dest]
+    if solo_flag:
+        cmd.append("--solo-flag")
+    t0 = time.time()
+    r = subprocess.run(cmd, cwd=RADICE, capture_output=True, text=True,
+                       encoding="utf-8", errors="replace")
+    return r.returncode, (r.stdout or "") + (r.stderr or ""), time.time() - t0
+
+
 def collaudo(W):
     W("COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di misurare\n")
     W("-" * 100 + "\n")
@@ -174,6 +224,24 @@ def collaudo(W):
     W("K6 e il `segno` VERO non si segnala: legge %s -> %s\n"
       % (sorted(letti), "OK" if ok else "*** falso allarme ***"))
     e.append(ok)
+
+    # K7/K8 -- IL BRACCIO ATTRAVERSA IL CONFINE DI PROCESSO.
+    # Senza questo la riparazione di `Z145` sarebbe ASSERITA e non provata -- che e'
+    # ESATTAMENTE cio' che `Z145` E': un meccanismo creduto invece che misurato.
+    # Costa un secondo: il figlio applica i flag, dichiara il proprio stato e esce, SENZA fisica.
+    for _nm, _acc in (("SPENTO", False), ("ACCESO", True)):
+        rc, out, sec = lancia_braccio(_nm, _acc, "", solo_flag=True)
+        letto = None
+        righe = out.splitlines()
+        for _k, _r in enumerate(righe):
+            if _r.strip() == "FLAG=" and _k + 1 < len(righe):
+                letto = (righe[_k + 1].strip() == "True")
+        ok = (rc == 0 and letto is _acc)
+        W("K%d il FIGLIO %-6s dichiara TEMPO_UNICO_MITOSI = %-5s (atteso %-5s) in %.2f s -> %s"
+          % (len(e) + 1, _nm, letto, _acc, sec, "OK" if ok else "*** NO ***") + chr(10))
+        e.append(ok)
+    W("   -> il figlio PARTE dal valore SBAGLIATO: se il braccio non attraversasse il confine," + chr(10))
+    W("      leggerebbe l'OPPOSTO di quello atteso, non un valore mancante." + chr(10))
 
     ok = all(e)
     W("-" * 100 + "\n  -> %s\n\n" % ("i criteri PASSANO" if ok else "*** NON PASSANO ***"))
@@ -234,11 +302,13 @@ def main():
     P("         era rotto -- e questo lo prende DALL'AST, non dalla mia parola.\n")
     esiti.append(ok)
 
-    # T4/T5 -- byte-inerzia a flag SPENTO, e controllo positivo ACCESO
-    import runpy
-    import time
-    os.chdir(RADICE)
-    import soliton_simulator as S
+    # T4/T5 -- UN PROCESSO PER BRACCIO (`STANDARD 1`), riparato dopo `Z145`
+    P("\n!! RIPARAZIONE DI `Z145`: ogni braccio gira in un PROCESSO SUO." + chr(10))
+    P("   Prima giravano entrambi qui dentro con `runpy`, e il secondo nasceva SENZA MASSE" + chr(10))
+    P("   (`avvia_test` e' una LEVETTA): n = 901 contro 2660, letto come effetto del flag." + chr(10))
+    P("   E IL CRITERIO DI RIPRODUCIBILITA' DELLO `STANDARD 1` E' `T4` STESSO: confronta due" + chr(10))
+    P("   bracci IDENTICI -- questo, e il riferimento girato in un processo separato -- e" + chr(10))
+    P("   pretende ZERO campi diversi. VA LETTO PRIMA DI `T5`." + chr(10))
     for nome, acceso in (("SPENTO", False), ("ACCESO", True)):
         d = os.path.join(INERTE, nome)
         try:
@@ -248,23 +318,12 @@ def main():
         for f in os.listdir(d):
             if f.endswith(".pkl.gz"):
                 os.remove(os.path.join(d, f))
-        orig = S._applica_flag
-
-        def _w(a, _v=acceso):
-            r = orig(a)
-            S.TEMPO_UNICO_MITOSI = _v
-            return r
-        S._applica_flag = _w
-        vecchio = list(sys.argv)
-        sys.argv = ["_scena_video.py", "20", d] + COMUNE
-        t0 = time.time()
-        try:
-            runpy.run_path(DRIVER, run_name="__main__")
-        finally:
-            S._applica_flag = orig
-            sys.argv = vecchio
-        P("\n  [%s] %.1f s   TEMPO_UNICO_MITOSI = %s\n"
-          % (nome, time.time() - t0, S.TEMPO_UNICO_MITOSI))
+        rc, out, sec = lancia_braccio(nome, acceso, d)
+        P(chr(10) + "  [%s] %.1f s   PROCESSO SUO   rc=%d" % (nome, sec, rc) + chr(10))
+        if rc != 0:
+            P("*** il braccio e' MORTO ***" + chr(10) + out[-2000:] + chr(10))
+            esiti.append(False)
+            continue
         p = os.path.join(d, "scena_000120.pkl.gz")
         if not os.path.exists(p):
             P("*** snapshot mancante ***\n")
@@ -297,4 +356,7 @@ def main():
 
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "--braccio":
+        sys.exit(braccio(sys.argv[2], sys.argv[3] == "1", sys.argv[4],
+                         solo_flag=("--solo-flag" in sys.argv)))
     sys.exit(main())
