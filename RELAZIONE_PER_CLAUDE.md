@@ -15035,3 +15035,33 @@ boccia)*.
 risultato; **un comando NUDO ora accende sei cure che prima non accendeva.** **Non è
 byte-inerte, ed è il punto.** **I run già fatti non cambiano:** passavano tutti `=on`, e il
 loro `CONFIGURAZIONE.txt` lo documenta.
+
+---
+
+# ⚠ IL SIGILLO DI `CHI_COOP` SI SCHIANTA, E SULL'INVARIANTE CHE HO RESO INCONDIZIONATO IO
+
+Cercavo il suo esito per metterlo in `CURE VERIFICATE` *(tuo punto 1)*. **Non c'era un referto
+salvato, quindi l'ho RIGIRATO** — un sigillo che non viene rigirato non protegge nulla.
+
+```
+DominioViolato: `d` VIOLA `>= LAM (= 0.800000) -- LEGGE, non opzione`
+  al passo 1, in memoria_hebbiana_moto
+  quanti: 223396 su 526047 archi -- il 42.5 % -- GIA' AL PASSO 1
+  valori: 0.640, 0.591, 0.750, 0.740, 0.510, 0.536, 0.686, 0.470
+```
+
+**La sua argv è ferma a prima che le cure esistessero:** non ha `--scala-min-passo`, né
+`--peq-esatto`, né le altre. **È la stessa famiglia del difetto già catalogato in `CLAUDE.md`**
+— *l'argv di `_sigillo_strato1.py` non conteneva `--cs-dinamico`, quindi il `23/23` non aveva
+mai esercitato la dipendenza da `cs`*.
+
+> **⚠ E NON SPENGO L'INVARIANTE PER FAR GIRARE IL SIGILLO: spegnerlo sarebbe NASCONDERE LA
+> MISURA.** Si aggiorna l'argv.
+
+**Ma prima la controprova, perché *«probabilmente è il freno»* non è una misura:** due bracci,
+stessa scena, stesso seme, stesso blob, un passo di motore — **`SENZA`** *(l'argv del sigillo
+com'è oggi)* contro **`CON`** *(la stessa più le otto cure che il driver accende)*.
+
+**Se conferma, il fatto è grosso: la legge `d >= LAM` reggerebbe PERCHÉ UNA CURA È ACCESA**, non
+per proprietà del sistema — **che è esattamente ciò che la tua decisione su `LAM` STRUTTURALE
+dice.**
