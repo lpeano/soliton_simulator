@@ -1,5 +1,33 @@
 # REGISTRO DELLE RAMIFICAZIONI — lo **stato** dei fronti, non la cronaca
 
+## `Z148` — ❗ **LA LEGGE `d >= LAM` REGGE PERCHE' UNA CURA E' ACCESA** *(2026-09-24)*
+
+**STATO: ACCLARATO.** `csv/_seal_fork/_reperto_lam_senza_freno.py`, blob `49fc54d2`, un passo
+di motore, due bracci a **stessa scena, stesso seme, stesso blob**.
+
+```
+SENZA   VIOLATO  | archi 526047 | sotto LAM 223396 (42.47 %) | min(d)/LAM 0.062500
+CON     NESSUNA  | archi 525973 | sotto LAM      0 ( 0.00 %) | min(d)/LAM 1.000000
+```
+
+**Non e' una proprieta' del sistema: e' una CONSEGUENZA DI UN FLAG.** E il `1.000000` esatto e'
+esso stesso il reperto: gli archi **stanno SUL muro**, non sopra *(`A11` cor.6)*.
+
+**E' LA MISURA CHE MANCAVA A `D31` E ALLA DECISIONE SU `LAM` STRUTTURALE**: spegni il freno e
+la legge cade su `223 396` archi.
+
+**COME E' STATO TROVATO:** rigirando il sigillo di `CHI_COOP` per metterne l'esito in
+`CURE VERIFICATE`. **Si schianta**, perche' la sua argv e' ferma a prima che le cure
+esistessero — **stessa famiglia del `23/23` dello Strato 1 che non aveva mai esercitato `cs`**.
+
+**CRITERIO DI CHIUSURA:** la legge diventa **strutturale** *(voce `B` del quadro)*, e questo
+stesso confronto, rifatto, da' `0` violazioni **in entrambi i bracci**.
+
+**⚠ LIMITE: un passo, un seme, una scena.**
+**⚠ NB DI INVENTARIO: `Z147` non e' registrato, ma il file `csv/_test_fork/_z147_ito.py` porta
+quel numero.** Per non creare un secondo `Z147` questa voce prende il `148`.
+
+
 ## `Z145` — ✅ **CHIUSO** — `T5` del sigillo di `CURA 2` era invalido: `dv > 0` letto come effetto *(2026-09-24)*
 
 **STATO: CHIUSO lo stesso giorno, con ENTRAMBI i pezzi del criterio soddisfatti.**

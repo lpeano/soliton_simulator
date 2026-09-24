@@ -1,0 +1,30 @@
+# REPERTO -- `d >= LAM` SENZA IL FRENO
+#
+# Due bracci, STESSA SCENA, STESSO SEME, STESSO BLOB. Un passo di motore.
+# SENZA = l'argv del sigillo di `CHI_COOP` come sta scritta oggi
+# CON   = la stessa piu' le cure che il driver accende
+#
+  SENZA   VIOLATO: [INVARIANTE] `d` VIOLA `>= LAM (= 0.800000) -- LEGGE, non opzione` al passo 1, in `memoria_hebbiana_moto`. | LAM 0.800000 | archi 526047 | sotto LAM 223396 (42.47 %) | min(d)/LAM 0.062500
+  CON     NESSUNA VIOLAZIONE | LAM 0.800000 | archi 525973 | sotto LAM 0 (0.00 %) | min(d)/LAM 1.000000
+
+  cure aggiunte nel braccio CON: --scala-min-passo --peq-esatto --peq-nascita-locale --coes-causale --anom-simm --coes-adim --ritmo-wrap-2pi --tempo-unico-mitosi
+
+============================================================================================
+COME SI LEGGE
+============================================================================================
+  ❗ **LA LEGGE `d >= LAM` REGGE PERCHE' UNA CURA E' ACCESA.**
+     Senza le cure la legge e' violata **su quasi meta' degli archi al passo 1**;
+     con le cure non e' violata affatto. **Non e' una proprieta' del sistema: e'
+     una CONSEGUENZA DI UN FLAG.**
+
+  -> ed e' esattamente cio' che la decisione di Luca su `LAM` STRUTTURALE dice:
+     *«nessuna lunghezza sotto `LAM` deve diventare STRUTTURALE, non un freno che
+     ci arriva»*. **Qui si vede il costo della realizzazione di oggi.**
+
+  -> E IL SIGILLO DI `CHI_COOP` NON E' ROTTO: e' la sua ARGV a essere ferma a
+     prima che le cure esistessero. **Stessa famiglia del `23/23` dello Strato 1
+     che non aveva mai esercitato `cs`.** Si aggiorna l'argv, non si spegne
+     l'invariante: spegnerlo sarebbe nascondere la misura.
+
+!! LIMITE: UN passo, UN seme, UNA scena. Dice CHE la legge dipende dal flag,
+   non di quanto il difetto cresca nel tempo.

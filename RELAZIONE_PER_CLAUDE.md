@@ -15065,3 +15065,44 @@ com'è oggi)* contro **`CON`** *(la stessa più le otto cure che il driver accen
 **Se conferma, il fatto è grosso: la legge `d >= LAM` reggerebbe PERCHÉ UNA CURA È ACCESA**, non
 per proprietà del sistema — **che è esattamente ciò che la tua decisione su `LAM` STRUTTURALE
 dice.**
+
+---
+
+# ❗ MISURATO: **LA LEGGE `d >= LAM` REGGE PERCHÉ UNA CURA È ACCESA** *(`Z148`, 2026-09-24)*
+
+Due bracci, **stessa scena, stesso seme, stesso blob `49fc54d2`**, un passo di motore:
+
+```
+SENZA   VIOLATO  | archi 526047 | sotto LAM 223396 (42.47 %) | min(d)/LAM 0.062500
+CON     NESSUNA  | archi 525973 | sotto LAM      0 ( 0.00 %) | min(d)/LAM 1.000000
+```
+
+*(`CON` = le otto cure che il driver accende; `SENZA` = l'argv del sigillo di `CHI_COOP`
+com'è scritta oggi.)*
+
+> ### **Non è una proprietà del sistema: è una CONSEGUENZA DI UN FLAG.**
+> Senza le cure **quasi metà degli archi** è sotto `LAM` **già al passo 1**, e il minimo sta a
+> **`1/16` di `LAM`**. Con le cure **nessuno**, e **`min(d)/LAM = 1.000000` ESATTO**.
+
+**E quel `1.000000` esatto è esso stesso il reperto:** gli archi non stanno *sopra* il muro,
+**stanno ESATTAMENTE SUL MURO**. `A11` cor.6 — *un limite che satura non è un limite: è la
+legge*. **Il freno non impedisce di scendere sotto `LAM`: ci appoggia il sistema contro.**
+
+> ### ❗ **È LA MISURA CHE MANCAVA ALLA TUA DECISIONE SU `LAM` STRUTTURALE.**
+> *«Nessuna lunghezza sotto `LAM` deve diventare STRUTTURALE, non un freno che ci arriva.»*
+> **Ora si vede il costo della realizzazione di oggi: spegni il freno e la legge cade su
+> `223 396` archi.**
+
+## E IL SIGILLO DI `CHI_COOP` NON È ROTTO: **è la sua ARGV a essere ferma**
+
+Non ha `--scala-min-passo` né le altre cure. **Stessa famiglia del `23/23` dello Strato 1 che
+non aveva mai esercitato `cs`.** **Si aggiorna l'argv, NON si spegne l'invariante:** spegnerlo
+sarebbe nascondere proprio questa misura.
+
+**⚠ LIMITE: un passo, un seme, una scena.** Dice **CHE** la legge dipende dal flag, **non** di
+quanto il difetto cresca nel tempo.
+
+**⚠ E UN ERRORE MIO NEL MEZZO:** il primo giro è morto su `AttributeError: no attribute 'rete'`
+— avevo scritto `S.rete` e `avvia_test(...)` **a memoria**, invece di copiarle dal sigillo che
+stavo riproducendo, dove sono `S.net` e `avvia_test(...)()`. **`P1` applicato a due righe di
+codice.** Lo strumento però **non ha concluso**: ha stampato *«l'esito non è quello atteso»*.
