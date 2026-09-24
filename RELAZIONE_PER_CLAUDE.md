@@ -14310,3 +14310,58 @@ presidio — **nemmeno adesso che è `STANDARD`.**
 
 > **La sezione `IN PROVA` torna vuota, e dice dove la regola è andata:** una regola promossa che
 > sparisce dalla sezione da cui viene è una regola di cui si perde la storia.
+
+### ㉫ **La correzione di Itô, valutata: guadagna DUE volte e perde UNA, e la perdita non è nella deriva**
+
+> Verificato **numericamente**, non solo algebricamente — `csv/_test_fork/_z147_ito.txt`.
+> **Nessun codice.**
+
+### ✅ **Guadagno 1: la deriva scende dal SECONDO al QUARTO ordine, e cambia SEGNO**
+
+| `s = a/d` | **piana** | **Itô** | rapporto |
+|--:|--:|--:|--:|
+| `0.125` | `+7.822678e-03` | **`−2.026048e-05`** | `2.59e-03` |
+| `0.0625` | `+1.953761e-03` | **`−1.270242e-06`** | `6.50e-04` |
+
+**L'ordine si legge raddoppiando `s`:** piana **`×4.004`** *(`2²`)*, Itô **`×15.950`** *(`2⁴`)*.
+
+### ✅ **Guadagno 2, che la sola deriva non mostra: è più FEDELE alla legge**
+
+Entrambe tendono a `u ← u(1+x)`. **`exp(x − x²/2) = 1 + x + O(x³)`: i termini in `x²` si
+cancellano esattamente.** A `x = 0.3`: eccesso **`−9.54e-03`** contro **`+4.99e-02`**.
+
+> **Quindi «un piccolo bias verso il basso di ordine `dx²`» è vero RELATIVAMENTE ALLA PIANA,
+> non relativamente alla LEGGE.** Rispetto alla legge, la correzione **toglie l'eccesso di
+> convessità della piana**: è più fedele, non meno. **Le due letture portano a decisioni
+> opposte**, e per questo la distinzione va fatta.
+
+### ❌ **La perdita: NON È MONOTONA**
+
+`f(x) = exp(x − x²/2)` ha **massimo in `x = 1`**, dove vale `√e = 1.64872`. Poi **scende**:
+
+| `x` | piana | **Itô** | |
+|--:|--:|--:|---|
+| `1.0` | `2.71828` | **`1.64872`** | il massimo |
+| `2.0` | `7.38906` | `1.00000` | una salita non muove nulla |
+| `2.5` | `12.18249` | **`0.53526`** | **una salita FA SCENDERE** |
+
+Su `[0,3]`: Itô ha **`2000` incrementi negativi su `3000`**, la piana **zero**.
+
+> **È la firma esatta che `A11` cerca: una spinta più grande che produce un effetto più
+> piccolo.** E qualunque salita, con Itô, **non può far crescere `u` di più di `√e`** in una
+> scrittura.
+
+### ⚠ **E una conseguenza che tocca un altro fronte**
+
+**La deriva di Itô è NEGATIVA: spinge gli archi piano VERSO il muro**, mentre quella di oggi li
+spinge lontano. È debolissima *(quarto ordine)*, **ma il verso è opposto** — e *«chi spinge gli
+archi contro il muro»* è già un fronte aperto *(`D33`, `S05`)*. **Più piccolo non è
+automaticamente meglio quando il SEGNO cambia**, e chi indaga quel fronte deve saperlo.
+
+### **La scelta è tua, e il criterio è MISURABILE**
+
+**La distribuzione di `|dx|/d`.** Se `max ≪ 1`, la non-monotonia **non si manifesta mai** e Itô
+è migliore su tutto. Se arriva vicino a `1`, il tetto `√e` comincia a mordere; **a `2`
+inverte.** → punti **`V8`** e **`V9`** della verifica.
+
+> **Non scelgo io, e non perché sia prudenza: perché il numero che decide non è misurato.**
