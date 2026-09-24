@@ -37,6 +37,19 @@ DEST = os.path.join(_QUI, "_sig_driver_accende")
 # le cure che il driver DEVE accendere in ogni run, e che NON dipendono da un `=on` del comando
 OBBLIGATORIE = ("RITMO_WRAP_2PI", "TEMPO_UNICO_MITOSI")
 
+# Le DUE invocazioni, e la differenza fra loro e' il punto di questo sigillo:
+#   NUDA      il driver con i soli argomenti posizionali -- cio' che gira se nessuno
+#             ricorda gli `=on`;
+#   CAMPAGNA  gli argomenti che `_g4_prova.py` passa davvero, copiati dal
+#             `CONFIGURAZIONE.txt` di un run vero (non da un ricordo).
+INVOCAZIONI = {
+    "NUDA": [],
+    "CAMPAGNA": ["--sep=4.0", "--chi-basc=on", "--chi-coop=on", "--scala-min=off",
+                 "--coes-adim=on", "--peq-esatto=on", "--peq-nascita-locale=on",
+                 "--scala-min-passo=on", "--coes-causale=on", "--anom-simm=on",
+                 "--invarianti=on"],
+}
+
 
 def figlio():
     """Percorre la strada VERA del driver e dichiara lo stato del modulo. Senza fisica."""
@@ -49,7 +62,8 @@ def figlio():
     testa = t[:t.index(anc) + len(anc)]
     g = {"__name__": "__main__", "__file__": DRIVER}
     vecchio = list(sys.argv)
-    sys.argv = ["_scena_video.py", "1", os.path.join(DEST, "_scarto")]
+    sys.argv = (["_scena_video.py", "1", os.path.join(DEST, "_scarto")]
+                + INVOCAZIONI[sys.argv[2] if len(sys.argv) > 2 else "NUDA"])
     try:
         exec(compile(testa, DRIVER, "exec"), g)
     finally:
@@ -103,34 +117,52 @@ def main():
         return 1
     P("-" * 92 + "\n  -> i criteri PASSANO\n\n")
 
-    # --- il figlio
-    cmd = [sys.executable, os.path.abspath(__file__), "--figlio"]
-    r = subprocess.run(cmd, cwd=RADICE, capture_output=True, text=True,
-                       encoding="utf-8", errors="replace")
+    # --- i DUE figli
     letti = {}
-    for riga in (r.stdout or "").splitlines():
-        m = re.match(r"^STATO (\w+) (\S+)$", riga.strip())
-        if m:
-            letti[m.group(1)] = m.group(2)
-    if r.returncode != 0 or not letti:
-        P("*** IL FIGLIO E' MORTO (rc=%d) ***\n%s\n" % (r.returncode, (r.stdout + r.stderr)[-3000:]))
-        ref.close()
-        return 1
+    for modo in ("NUDA", "CAMPAGNA"):
+        cmd = [sys.executable, os.path.abspath(__file__), "--figlio", modo]
+        r = subprocess.run(cmd, cwd=RADICE, capture_output=True, text=True,
+                           encoding="utf-8", errors="replace")
+        d = {}
+        for riga in (r.stdout or "").splitlines():
+            m = re.match(r"^STATO (\w+) (\S+)$", riga.strip())
+            if m:
+                d[m.group(1)] = m.group(2)
+        if r.returncode != 0 or not d:
+            P("*** IL FIGLIO %s E' MORTO (rc=%d) ***\n%s\n"
+              % (modo, r.returncode, (r.stdout + r.stderr)[-3000:]))
+            ref.close()
+            return 1
+        letti[modo] = d
 
     P("LO STATO EFFETTIVO DEL MODULO dopo `_cli()` + `_applica_flag(a)`,\n")
-    P("percorrendo la sys.argv CABLATA NEL DRIVER, in un PROCESSO NUOVO (`STANDARD 1`):\n\n")
-    P("  %-24s %-10s %s\n" % ("flag", "stato", ""))
+    P("percorrendo la sys.argv CABLATA NEL DRIVER, in un PROCESSO NUOVO (`STANDARD 1`).\n")
+    P("DUE INVOCAZIONI, e la differenza fra loro e' il punto:\n")
+    P("  NUDA      i soli argomenti posizionali -- cio' che gira se nessuno ricorda gli `=on`\n")
+    P("  CAMPAGNA  gli argomenti che `_g4_prova.py` passa davvero\n\n")
+    P("  %-24s %-10s %-10s %s\n" % ("flag", "NUDA", "CAMPAGNA", ""))
     esiti = []
-    for nome in sorted(letti):
-        v = letti[nome]
-        obb = nome in OBBLIGATORIE
-        if obb:
-            ok = (v == "True")
+    nudi_spenti = []
+    for nome in sorted(letti["NUDA"]):
+        vn, vc = letti["NUDA"][nome], letti["CAMPAGNA"].get(nome, "?")
+        if nome in OBBLIGATORIE:
+            ok = (vn == "True" and vc == "True")
             esiti.append(ok)
-            nota = "**DEVE essere True** -> %s" % ("PASS" if ok else "*** FAIL ***")
+            nota = "**DEVE essere True in ENTRAMBE** -> %s" % ("PASS" if ok else "*** FAIL ***")
         else:
-            nota = "*(dipende dal comando: `=on`/`=off`)*"
-        P("  %-24s %-10s %s\n" % (nome, v, nota))
+            if vn != "True" and vc == "True":
+                nudi_spenti.append(nome)
+                nota = "⚠ **accesa SOLO dal comando**"
+            else:
+                nota = "*(dipende dal comando)*"
+        P("  %-24s %-10s %-10s %s\n" % (nome, vn, vc, nota))
+    P("\n  ⚠ CURE CHE L'INVOCAZIONE NUDA NON ACCENDE: %d su %d -- %s\n"
+      % (len(nudi_spenti), len(letti["NUDA"]), ", ".join(nudi_spenti) or "nessuna"))
+    P("     Non e' un difetto del driver: e' il FATTO che `CURE VERIFICATE` rende visibile.\n")
+    P("     Quelle cure **non sono nel codice: sono nell'argv di CHI LANCIA**, e un comando\n")
+    P("     che ne dimentica una gira su un sistema che si sa difettoso (`P2`) **senza che\n")
+    P("     nessun sigillo se ne accorga**. Le DUE obbligatorie sono le uniche che il DRIVER\n")
+    P("     accende da se', e quindi le uniche che non si possono dimenticare.\n")
 
     n = sum(1 for x in esiti if x)
     P("\n" + "=" * 92 + "\nESITO: %d/%d sulle cure OBBLIGATORIE\n" % (n, len(esiti)) + "=" * 92 + "\n")
