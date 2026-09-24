@@ -47,8 +47,9 @@ sys.argv = ARGV
 import soliton_simulator as S
 a = S._cli(); S._applica_regime(a); S._applica_flag(a)
 S._NMASSE_VIDEO["n"] = 3; S._NMASSE_VIDEO["sep"] = 4.0; S._NMASSE_VIDEO["size"] = None
-S.avvia_test("N-MASSE")
-net = S.rete
+S.avvia_test("N-MASSE")()      # `avvia_test` TORNA una funzione: la si chiama (come :87)
+net = S.net                    # e la rete sta in `S.net`, non `S.rete`
+S.stato["nframe"] = 0
 np.random.seed(42)
 try:
     net.step(); net.mitosi(); net.rilassa_disegno(); net.memoria_hebbiana_moto()
