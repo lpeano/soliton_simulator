@@ -15592,3 +15592,50 @@ Quando il raggio ha acquisito la dispersione, **il formato è cambiato** — da 
 SILENZIO.** Un output **parziale** che sembra completo se non si guarda cosa manca. **È la stessa
 famiglia del referto dei criteri che si fermava al titolo di `G`.** Ora, se il raggio non si
 legge, il referto **lo dice**.
+
+
+---
+
+# ✅ L'ARRESTO SI DERIVA DA `LAM` — **i criteri `C1`-`C4`, prima del codice** *(tua decisione)*
+
+Scheda ⑫ par.5-ter e 5-quater. **Nessuna riga di codice.**
+
+**Il metodo è accolto come l'hai dato:** celle di lato `LAM/√3` — diagonale `LAM`, quindi al più
+un nodo per cella — si tengono le celle con spazio libero, si suddividono le parzialmente
+coperte, si propone solo nelle libere, si finisce quando non ne resta nessuna.
+**Il rifiuto scatta solo se `n` supera la saturazione vera**, e **cade con lui il difetto che
+avevi trovato: il rifiuto non può più essere falso.**
+
+## ⚠ MA DEVO DIRTI UNA COSA SU «ZERO NUMERI NUOVI», e preferisco dirla prima di scrivere
+
+**Nella FISICA è parameter-free e lo confermo:** l'unica lunghezza è `LAM`, e `LAM/√3` ne
+discende per geometria.
+
+**Ma la suddivisione non termina in modo esatto al BORDO della regione.** Una cella tutta dentro
+la palla si risolve in un numero finito di passi, perché i nodi sono finiti. **Una cella che
+attraversa la superficie della sfera non è né dentro né fuori**, e si suddividerebbe
+**all'infinito**: il guscio ha volume che tende a zero **ma non diventa mai vuoto**.
+
+> ### **Serve una RISOLUZIONE NUMERICA — il punto in cui due posizioni non sono più
+> ### distinguibili. Non è un parametro fisico, ma è un numero.**
+> **La dichiaro come tale, con un CONTATORE `A8`** — quante celle sono state abbandonate per
+> risoluzione — **così si vede se ha mai contato.**
+> **Non è «zero numeri»: è zero numeri FISICI più una risoluzione numerica contata.**
+> **Preferisco dirlo che far passare un numero per una derivazione.**
+
+## I QUATTRO CRITERI, e `C3` è il più forte
+
+`C1` byte-identico a flag spento · **`C2` capienza indipendente da `n` chiesto — è il criterio
+che OGGI FALLISCE, misurato `+0.61 %`, `+4.11 %`, `+2.77 %`, e con l'arresto derivato deve dare
+`0` esatto** · `C3` frazione di impacchettamento `~0.384` · `C4` nessun rifiuto falso su quattro
+semi.
+
+> ### **`C3` è il più forte dei quattro**, e lo dico perché cambia come si legge un `FAIL`:
+> `C1`, `C2`, `C4` verificano che il codice sia **coerente con se stesso**. **`C3` lo confronta
+> con un numero che nessuno in questo progetto ha scelto.** È il solo che possa dire **«il
+> codice è sbagliato»** invece di «il codice non fa quello che credevo».
+>
+> **⚠ E il suo limite, che va scritto ORA per non prendere un `FAIL` falso:** `0.384` è il valore
+> **nel volume infinito**. In una palla il bordo abbassa la frazione — **e l'esponente `2.6875`
+> misurato oggi è proprio quel bordo**. Quindi **`C3` si legge sui raggi GRANDI**, e sui piccoli
+> si aspetta di meno.

@@ -1774,6 +1774,70 @@ ma non era «la capienza»: era la capienza A QUELLA DOMANDA.**
 
 ---
 
+## 5-ter. ✅ **L'ARRESTO SI DERIVA DA `LAM`** — decisione di Luca, 2026-09-24
+
+> **Nessuna taglia di lotto. Saturazione ESATTA.**
+
+**IL METODO — Zhang & Torquato (2013), suddivisione di celle:**
+
+```
+celle di lato LAM/sqrt(3)  ->  diagonale = LAM  ->  AL PIU' UN NODO PER CELLA
+  cella COPERTA da un nodo (distanza dal nodo allo spigolo PIU' LONTANO <= LAM)  -> MORTA
+  cella fuori dalla regione                                                      -> MORTA
+  cella LIBERA (nessun nodo entro LAM dal suo punto PIU' VICINO)  -> ci si puo' seminare
+  cella PARZIALMENTE coperta                                      -> SI SUDDIVIDE in 8
+si propone SOLO nelle celle vive; si finisce quando non ne resta NESSUNA
+```
+
+> ### **IL RIFIUTO SCATTA SOLO SE `n` SUPERA LA SATURAZIONE VERA.**
+> Non più «un lotto senza accettazioni»: **non c'è più posto, e lo si sa per costruzione.**
+> **Cade con lui il difetto che Luca aveva trovato:** il rifiuto **non può più essere falso.**
+
+### ⚠⚠ E QUI DEVO DIRE UNA COSA SU «ZERO NUMERI NUOVI»
+
+**Il metodo è parameter-free nella FISICA: l'unica lunghezza è `LAM`, e `LAM/sqrt(3)` ne
+discende** *(la diagonale del cubo di lato `a` è `a·sqrt(3)`, quindi `a = LAM/sqrt(3)` dà
+diagonale `LAM`)*.
+
+**MA LA SUDDIVISIONE NON TERMINA IN MODO ESATTO AL BORDO DELLA REGIONE**, e va detto:
+
+- una cella tutta dentro la palla si risolve *(coperta o libera)* in un numero finito di
+  suddivisioni, perché i nodi sono finiti;
+- **una cella che ATTRAVERSA la superficie della sfera non è né dentro né fuori**, quindi si
+  suddividerebbe **all'infinito**: il guscio ha volume che tende a zero ma **non diventa mai
+  vuoto**.
+
+> ### **SERVE UNA RISOLUZIONE NUMERICA, e non è un parametro fisico: è il punto in cui due
+> ### posizioni non sono più distinguibili.** La dichiaro come tale, **con un CONTATORE `A8`**
+> — quante celle sono state abbandonate per risoluzione — **così si vede se ha mai contato.**
+> **Non è «zero numeri»: è ZERO NUMERI FISICI più una risolu­ zione numerica contata.**
+> **Preferisco dirlo che far passare un numero per una derivazione.**
+
+## 5-quater. I CRITERI DELL'ARRESTO DERIVATO — **fissati PRIMA del codice** *(Luca)*
+
+| | criterio | perché |
+|---|---|---|
+| **`C1`** | **flag spento: byte-identico** | par.2.1. L'arresto vive dentro `SEMINA_LAM`: a flag spento non esiste |
+| **`C2`** | **la capienza è INDIPENDENTE da `n` chiesto** *(prova del raddoppio)* | ❗ **È IL CRITERIO CHE OGGI FALLISCE:** misurato `+0.61 %`, `+4.11 %`, `+2.77 %` a tre raggi. **Con l'arresto derivato deve dare `0` esatto**, perché la saturazione non dipende dalla domanda |
+| **`C3`** | **frazione di impacchettamento a saturazione `~0.384`** *(valore noto in 3D)* | ❗ **È IL CONTROLLO CONTRO UN VALORE ESTERNO AL PROGETTO**, e vale più di un test interno: se si discosta, **il codice è sbagliato**, non il sistema. *(La frazione si calcola su sfere di raggio `LAM/2`: `n·(LAM/2)³ / r³`.)* |
+| **`C4`** | **nessun rifiuto falso**: con `n` sotto la capienza misurata la semina riesce **sempre**, su **quattro semi** | è il difetto che Luca ha trovato, e questo criterio **lo mette alla prova invece di fidarsi** |
+
+> ### ⚠ `C3` È IL CRITERIO PIÙ FORTE DEI QUATTRO, e va detto perché
+> `C1`, `C2` e `C4` verificano che il codice sia **coerente con se stesso**. **`C3` lo confronta
+> con un numero che nessuno in questo progetto ha scelto** — la frazione di saturazione
+> dell'`RSA` in 3D, `~0.384`, misurata in letteratura su un problema che è lo **stesso**.
+> **È il solo dei quattro che possa dire «il codice è sbagliato» invece di «il codice non fa
+> quello che credevo».**
+>
+> **⚠ E IL SUO LIMITE:** `0.384` è il valore **nel volume infinito**. In una palla di raggio
+> `r` il bordo abbassa la frazione, e **l'esponente `2.6875` misurato oggi è proprio quel
+> bordo**. Quindi `C3` **si legge sui raggi GRANDI**, e sui piccoli **si aspetta di meno**:
+> altrimenti è un `FAIL` falso su codice corretto — il difetto di `T1` in `E4-LAM`.
+
+**⚠ I NUMERI DI PRIMA RESTANO NEL REGISTRO COME STORIA** *(decisione di Luca)*: sono
+misurati col criterio a lotti, e **vanno rifatti**. Il par.5-bis e questa sezione dicono con
+quale criterio ciascuno è stato preso.
+
 ## 6. `massa_critica_collasso` — **MARCATA, NON TOCCATA** *(decisione di Luca)*
 
 > ### **«Tarata sotto la scala di Planck, da non usare.»**
