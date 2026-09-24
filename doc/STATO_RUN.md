@@ -1139,3 +1139,13 @@ ramo B (chi_basc OFF):
 - *2026-09-24 11:55:34* — PARTITO: PID Windows 15112 (il processo python.exe, NON la shell), 2026-09-24 ~11:5x. 20 frame = 120 passi. Log: csv/_test_fork/_f2p_corto_log.txt
 
 **chiuso 2026-09-24 12:06:04 — FINITO** 120 passi in 444.7 s, 1 snapshot + BILANCIO (chiude a 4.041e-14). ESITO DEI TEST 2/4: E1a NON PASSA (mitosi 1 evento contro 62, Schwinger 0 contro 28), E1c NON PASSA (0.345x contro la banda 5x-100x: MIA previsione sbagliata NEL VERSO), E1b e E4 PASSANO. I dati parziali SERVONO: sono la prova di D36. Il run a 600 passi NON e stato lanciato (par.5: si committa il fallimento e si ferma).
+
+## APERTO CURA1-CORTO
+
+- **avvio** `2026-09-24 14:41:14` · **blob** `0e06edf2 (git) / dd82794a (byte grezzi)` · **HEAD** `9d6e43e`
+- **comando**
+  ```
+  python csv/_test_fork/_g4_prova.py --cura1-corto
+  ```
+- **note** Il giro corto della CURA 1: 120 passi col driver che accende --ritmo-wrap-2pi. Sigillo 6/6 (287e27d). Destinazione csv/_test_fork/_cura1_corto. Confronto: _g4_riferimento, che ha girato SENZA la cura.
+- *2026-09-24 14:41:14* — PARTITO: PID Windows 27128, 2026-09-24 ~14:40. 20 frame = 120 passi.
