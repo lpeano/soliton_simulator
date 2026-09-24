@@ -216,15 +216,24 @@ def main():
     Bn, on_, rn = gira("d38_nuovo", nuovo, ["--scala-min-passo=off"], P)
 
     def quale(o):
-        m = re.search(r"`(\w+)` VIOLA", o)
+        """`(grandezza, passo, quanti)` letti DALLA STESSA RIGA, con UNA regex.
+
+        ❌ **PRIMA ERANO TRE REGEX SLEGATE sul testo INTERO**, e il risultato veniva stampato
+           **sotto etichette sbagliate**: la frase diceva *«si ferma su `d` al passo 223380,
+           1126 valori fuori dominio»* mentre i numeri veri erano **passo 1** e
+           **223 380 valori**. Tre regex indipendenti possono pescare da **tre righe diverse**,
+           e l'ordine della tupla non era quello della frase.
+           **Le righe grezze citate sopra erano giuste: era il mio RIASSUNTO a mentire** --
+           ed e' peggio, perche' il riassunto e' quello che si legge.
+        """
+        m = re.search(r"`(\w+)` VIOLA `[^`]*` al passo (\d+)", o)
         q = re.search(r"quanti: (\d+)", o)
-        s = re.search(r"al passo (\d+)", o)
-        return (m.group(1) if m else "-", int(q.group(1)) if q else -1,
-                int(s.group(1)) if s else -1)
+        return (m.group(1) if m else "-", int(m.group(2)) if m else -1,
+                int(q.group(1)) if q else -1)
 
     gv, gn = quale(ov), quale(on_)
-    P("\n  VECCHIO: si ferma su `%s` al passo %s, %s valori fuori dominio\n" % gv)
-    P("  NUOVO  : si ferma su `%s` al passo %s, %s valori fuori dominio\n" % gn)
+    P("\n  VECCHIO: si ferma su `%s` al passo %s, con %s valori fuori dominio\n" % gv)
+    P("  NUOVO  : si ferma su `%s` al passo %s, con %s valori fuori dominio\n" % gn)
     # ❌ IL CRITERIO PRECEDENTE AVEVA UN BUCO (rilievo di Luca):
     #     ok2 = (gv != gn) or (Av is not None and Bn is not None)
     #   il secondo ramo dava PASS **se entrambi arrivavano in fondo, SENZA verificare che
@@ -258,8 +267,8 @@ def main():
     Ka, oka, _ = gira("collaudo_a", nuovo, ["--scala-min-passo=off"], P)
     Kb, okb, _ = gira("collaudo_b", nuovo, ["--scala-min-passo=off"], P)
     ga, gb = quale(oka), quale(okb)
-    P("\n  braccio a: `%s` passo %s, %s fuori dominio\n" % ga)
-    P("  braccio b: `%s` passo %s, %s fuori dominio\n" % gb)
+    P("\n  braccio a: `%s` al passo %s, con %s valori fuori dominio\n" % ga)
+    P("  braccio b: `%s` al passo %s, con %s valori fuori dominio\n" % gb)
     if ga != gb and ga[0] != "-":
         finto = True
     elif Ka is not None and Kb is not None:
