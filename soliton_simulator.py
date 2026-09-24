@@ -7254,7 +7254,7 @@ def _applica_flag(a):
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
     global PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO, COES_CAUSALE, ANOM_SIMM
     global INVARIANTI
-    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, SCALA_MIN, COES_ADIM, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
+    global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, SCALA_MIN, COES_ADIM, RITMO_WRAP_2PI, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
     if getattr(a, "tau_d0", False):
@@ -7311,7 +7311,37 @@ def _applica_flag(a):
     # il braccio OFF e' `--senza-spinore-vivo`, che e' un DIAGNOSTICO.
     SPINORE_VIVO = not bool(getattr(a, "senza_spinore_vivo", False))
     SPIN_LARMOR = bool(getattr(a, "spin_larmor", False))   # campo trasverso geometrico (Larmor): default off
+    # [CURA 1a, APPROVATA da Luca 2026-09-24] Il wrap del ritmo sul periodo GIUSTO.
+    #   `D34` e' DIMOSTRATO sulla formula (`max|w4(a) - a| = 0.000e+00` su 100 001 punti:
+    #   un wrap su `4pi` applicato a una differenza di `np.angle`, che ha periodo `2pi`,
+    #   e' l'IDENTITA' e non avvolge niente). Sigillo `_sigillo_ritmo_wrap.py` 4/4, prova
+    #   a 600 passi `Z123`. FINO A OGGI ERA ACCENDIBILE SOLO IN-PROCESS: senza opzione, il
+    #   driver non poteva accenderla, e una cura che nessun run accende e' un ramo morto.
+    RITMO_WRAP_2PI = bool(getattr(a, "ritmo_wrap_2pi", False))  # cura D34: default off, il driver la accende
     TW_SPINORE = bool(getattr(a, "tw_spinore", False))     # torsione 4pi -> Bloch (doppia copertura): default off
+    # [CURA 1b, decisione di Luca 2026-09-24] IL PONTE INVERSO E' IMPEDITO, non sconsigliato.
+    # `TW_SPINORE` fa scrivere lo SPINORE dalla TORSIONE: `tw` -> `omega_s` -> `_psi_spinor`
+    # (`:3090-3100`, e la conseguenza a `:3264`). Sono le UNICHE DUE occorrenze della classe
+    # `INVERSA` su 139 punti della mappa del `4pi` (`csv/_test_fork/_diag_D/MAPPA_4PI.md`):
+    # il `4pi` di `_psi_spinor` e' VERO (spin 1/2), quello di `phi` da cui `tw` prende la
+    # scala e' una CONVENZIONE del codice. Quindi il finto comanda il vero, ed e' il
+    # contrario della freccia causale del par.4: «i nodi guidano, gli archi ricordano».
+    # NON SI CANCELLA IL RAMO (par.10: il codice di una legge esclusa resta, ed e' l'evidenza
+    # che spiega perche' esiste il suo sostituto -- `TW_SPINORE` esiste perche' `SPIN_LARMOR`
+    # fallisce). E NON BASTA IL DEFAULT SPENTO: era gia' spento e non ha impedito nulla (`A9`).
+    # NON RITIRA NULLA: `TW_SPINORE = False` in 9 run su 11 ricostruibili e `--tw-spinore` non
+    # compare in nessun lanciatore committato (`csv/_test_fork/_RICOSTRUZIONE_config.txt`).
+    if TW_SPINORE:
+        raise SystemExit(
+            "[tw-spinore] RIFIUTO DI PARTIRE: e' il ponte inverso.\n"
+            "  La torsione `tw` prende la sua scala da `phi`, il cui dominio `4pi` e' una\n"
+            "  CONVENZIONE del codice; lo spinore ha il `4pi` VERO (spin 1/2). Con questo\n"
+            "  flag il finto scrive il vero: tw -> omega_s -> _psi_spinor (:3090-3100).\n"
+            "  E' il contrario della freccia causale del par.4 di CLAUDE.md.\n"
+            "  Vedi doc/REGISTRO_FISICA.md, scheda 8 `torsione-spinore`, e\n"
+            "  doc/REFERTO_tw_spinore.md (il commento della legge e' falso: dichiara un\n"
+            "  ANGOLO `tw/2` e somma una VELOCITA' angolare -- fattore 628.3 = 2pi/DT).\n"
+            "  Per riaprirlo serve una decisione di Luca, non la rimozione di questa riga.")
     SPINORE_CORRETTO = bool(getattr(a, "spinore_corretto", False)) # master: orologio proprio + spinore primario complesso
     CHI_DA_SPINORE = bool(getattr(a, "chi_da_spinore", False))     # flag 3: perc_chi da doppia-copertura di _psi_spinor
     TEMPO_PROPRIO_ORIENTATO = bool(getattr(a, "tempo_proprio_orientato", False)) # flag 4: r con segno (toglie |.|)
@@ -7869,6 +7899,14 @@ def _cli():
                         "somma B_geo = <|tw|/PHI_CRIT * (n_i x n_j)>, termine non-abeliano perpendicolare "
                         "a n che sostiene la precessione di Larmor senza auto-spegnersi con l'ordine. "
                         "Richiede --spinore-vivo. Default off = non-regressione.")
+    p.add_argument("--ritmo-wrap-2pi", action="store_true", dest="ritmo_wrap_2pi",
+                   help="[CURA D34, approvata 2026-09-24] Il ramo SPINORIALE di `ritmo()` avvolge "
+                        "la differenza di fase sul periodo GIUSTO (2pi) invece che su 4pi. "
+                        "MOTIVO: `np.angle` ha periodo 2pi, quindi la differenza sta in (-2pi, 2pi] "
+                        "e un wrap su 4pi e' l'IDENTITA' -- non avvolge niente. Dimostrato sulla "
+                        "formula (max|w4(a)-a| = 0.000e+00 su 100 001 punti), sigillo 4/4, prova a "
+                        "600 passi (Z123). Default off per la byte-identita' dei sigilli; IL DRIVER "
+                        "LA ACCENDE IN OGNI RUN.")
     p.add_argument("--tw-spinore", action="store_true", dest="tw_spinore",
                    help="AGGANCIO DOPPIA COPERTURA (legge, zero parametri): la torsione a 4pi (tw) fa "
                         "precedere il Bloch di tw/2 (spin-1/2) attorno all'asse sigma della chiralita' del "

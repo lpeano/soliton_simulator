@@ -28,6 +28,19 @@ che rifiuta un commit a `soliton_simulator.py` che non tocchi il registro, salvo
 **✅ CABLATA il 2026-09-22 — e nella forma che la rende un presidio invece di una formalità.**
 `csv/_hook_fisica.py`, dentro il `commit-msg` già esistente *(un hook solo: due che se lo contendono è il modo in cui un presidio sparisce in silenzio)*. **Non chiede di «toccare il registro»** — lo soddisferebbe una riga qualsiasi in fondo al file. **Chiede che la modifica cada DENTRO la sezione della legge toccata**, e se quella legge **non ha una scheda**, dice *«prima si crea la scheda»*.
 
+> ### ⚠ **UN INDEBOLIMENTO DI `REG-R`, dichiarato il 2026-09-24**
+>
+> **`_applica_flag` e `_cli` NON sono leggi**: sono il cablaggio dei flag. Ma è **lì** che un
+> flag viene collegato alla sua legge, quindi `REG-R` li vede cambiare e chiede una scheda.
+> **Li ho aggiunti alle `funzioni=` delle due schede che governano i flag cablati in quel
+> commit** — `tempo-proprio` per `RITMO_WRAP_2PI`, `torsione-spinore` per `TW_SPINORE` —
+> perché è vero che la cura *sta* lì.
+>
+> **L'INDEBOLIMENTO: da ora un commit che tocca `_applica_flag` per un flag QUALUNQUE
+> soddisfa `REG-R` toccando una di queste due schede.** È meno stretto di prima, e va detto
+> invece di scoprirlo dopo. **Non l'ho risolto**: la via pulita sarebbe che `REG-R` mappasse
+> il flag, non la funzione, e quella è una modifica al presidio che **non decido da solo**.
+
 **COME SA QUALE SCHEDA:** ogni scheda porta un marcatore leggibile da codice — `<!-- SCHEDA nome=… funzioni=… flag=… -->` — e la sezione va da un marcatore al successivo.
 **COME SA COSA È CAMBIATO:** dalla diff in cache di `soliton_simulator.py`, le righe toccate risalgono alla **funzione** che le contiene *(per NOME, via AST della versione in cache — par.0)* o al **flag** di modulo assegnato su quella riga.
 
@@ -487,7 +500,25 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 
 ---
 
-<!-- SCHEDA nome=tempo-proprio funzioni=ritmo flag=TAU_LOC,TEMPO_SEGNO,TEMPO_PROPRIO_ORIENTATO,RITMO_WRAP_2PI -->
+<!-- SCHEDA nome=tempo-proprio funzioni=ritmo,_cli,_applica_flag flag=TAU_LOC,TEMPO_SEGNO,TEMPO_PROPRIO_ORIENTATO,RITMO_WRAP_2PI -->
+
+> ## ✅ **`RITMO_WRAP_2PI` È APPROVATA — decisione di Luca, 2026-09-24**
+>
+> **Da oggi il driver la accende in OGNI run** *(`--ritmo-wrap-2pi`, cablato in
+> `csv/_test_fork/_scena_video.py`)*. `D34` passa da **difetto aperto** a **CURA IN CODICE**.
+>
+> **Che cosa è stato aggiunto**, perché fino a oggi la cura era accendibile **solo
+> in-process**: l'opzione **`--ritmo-wrap-2pi`** nel simulatore e la riga corrispondente in
+> `_applica_flag` *(con `RITMO_WRAP_2PI` nel `global`: senza, l'assegnamento creerebbe una
+> **locale** e il flag resterebbe **inerte in silenzio** — è il difetto già catalogato di
+> `--tau-a`)*.
+>
+> **⚠ E NON È BYTE-INERTE, ed è il punto:** è una **cura**, non un'opzione. **I numeri presi
+> prima di oggi non si confrontano con quelli di dopo senza dirlo** *(par.9-bis)*, e lo stato
+> effettivo di ogni run sta in `CONFIGURAZIONE.txt`.
+>
+> **Il default nel sorgente resta `False`**, come per tutte le cure non ancora in epoca 3: chi
+> vuole il braccio di confronto **omette il flag**, e il referto lo mostra.
 # ⑤ IL TEMPO PROPRIO — **`ritmo()` / `r` / `dt_n = DT·r`**, e il surrogato **`tau_pp`**
 
 > **STATO: `DIFETTOSA`.** Difetti **`D34`** *(il wrap «a `4π`» non avvolge)* e **`D32`**
@@ -815,7 +846,7 @@ lo schianto sarebbe arrivato dopo quaranta minuti.**
 
 ---
 
-<!-- SCHEDA nome=torsione-spinore funzioni=_passo_spinoriale flag=TW_SPINORE,SYNC_SPINORE,SPIN_LARMOR,SPIN_FEEDBACK -->
+<!-- SCHEDA nome=torsione-spinore funzioni=_passo_spinoriale,_applica_flag flag=TW_SPINORE,SYNC_SPINORE,SPIN_LARMOR,SPIN_FEEDBACK -->
 
 # ⑧ TORSIONE → SPINORE — **il ponte INVERSO**
 
@@ -898,4 +929,21 @@ spinori** *(olonomia SU(2))*, non dalle differenze di `phi`. **In quell'architet
 domanda cambia**: la torsione sarebbe già una proprietà degli spinori trasportati, e una
 retroazione su `omega_s` **non sarebbe più un ponte inverso** — sarebbe dinamica interna.
 **Non lo so derivare oggi, e non lo decido: è la domanda che il `CHECKPOINT` mette a Luca.**
+
+## ✅ LA CURA È IN CODICE — 2026-09-24
+
+**`_applica_flag`, subito dopo `TW_SPINORE = bool(getattr(a, "tw_spinore", False))`:**
+
+```python
+if TW_SPINORE:
+    raise SystemExit("[tw-spinore] RIFIUTO DI PARTIRE: e' il ponte inverso. ...")
+```
+
+**Il messaggio nomina la ragione** *(il ponte inverso, le righe `:3090-3100`, la scheda, il
+referto col commento falso)* **e dice come riaprirlo**: *«una decisione di Luca, non la
+rimozione di questa riga»*.
+
+**Perché in `_applica_flag` e non nel punto d'uso:** lì il rifiuto arriva **prima che la scena
+nasca**, quindi non c'è nessun run a metà da interpretare. Un rifiuto dentro `step()` lascerebbe
+uno stato parziale sul disco.
 

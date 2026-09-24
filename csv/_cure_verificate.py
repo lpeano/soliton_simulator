@@ -75,10 +75,12 @@ CURE = [
      "in **ogni** run: **zero violazioni** in tutti e tre i bracci di `G4`",
      "legge soltanto; su un run sano non cambia un bit", "**ACCESA DI DEFAULT** *(`True`)*"),
     ("RITMO_WRAP_2PI", "**`A1`** il wrap del ritmo sul periodo GIUSTO *(`2π`)*",
-     "`4/4` *(scritto a mano: il referto sta nel log, non in un file con la riga di verdetto)*", None,
-     "✅ **`G4`, 600 passi** *(`Z123`, `csv/_test_fork/_d34_ritmo_wrap`)*",
+     "`4/4` + **`6/6` di `CURA 1`** *(`csv/_seal_fork/_sig_cura1/REFERTO.txt`)*", None,
+     "✅ **`G4`, 600 passi** *(`Z123`)* + **giro corto di `CURA 1`**",
      "cura **`D34`** *(`Z117`: il wrap a `4π` e' l'IDENTITA')*. **`6/8` come previsto e il bilancio CHIUDE (`9.595e-14`), ma TUTTI gli aggregati peggiorano e la mia previsione ⑤ era SBAGLIATA** *(la quota al tetto SALE: -> `S09`)*",
-     "**PROVATA, default SPENTO** — la decisione e' di Luca"),
+     "✅✅ **APPROVATA DA LUCA il 2026-09-24. IL DRIVER LA ACCENDE IN OGNI RUN** "
+     "*(`--ritmo-wrap-2pi`)*. Default nel sorgente **`False`**, come tutte le cure "
+     "pre-epoca-3. **`D34` passa da difetto aperto a CURA IN CODICE.**"),
     ("FASE_2PI", "**§D** `φ` come fase ordinaria su `[0, 2π)`",
      "⏸ *(l'esito si legge dal referto)*",
      "csv/_seal_fork/_sig_fase_2pi/REFERTO.txt",
@@ -228,6 +230,20 @@ def main():
           % (flag, nome, dd, esito_sigillo(ref, sig), prova, esito, stato))
     W("")
     W("**Cure con default ACCESO: %d su %d.**" % (n_on, len(CURE)))
+    W("")
+    W("### ⛔ E QUESTO NON E' UNA CURA: e' un **PRESIDIO STRUTTURALE**")
+    W("")
+    W("> Non corregge un difetto MISURATO, perche' la legge **non ha mai girato** e quindi non "
+      "ha prodotto nulla da curare. **Impedisce** che venga accesa. Metterlo fra le cure "
+      "gonfierebbe il conto.")
+    W("")
+    W("| flag | che cosa impedisce | **default** | come | sigillo |")
+    W("|---|---|:--:|---|--:|")
+    W("| `TW_SPINORE` | **il PONTE INVERSO**: `tw` (la cui scala viene da `phi`) scrive lo "
+      "SPINORE — `tw` -> `omega_s` -> `_psi_spinor` (`:3090-3100`). Le **uniche due** "
+      "`INVERSA` su 139 punti della mappa del `4pi` | **`%s`** | il simulatore **RIFIUTA DI "
+      "PARTIRE** in `_applica_flag`, col messaggio che nomina la ragione. **Il ramo resta** "
+      "(par.10) | **`6/6`** *(`CURA 1`)* |" % (default("TW_SPINORE") or "?"))
     W("")
     W("### ⚠ E QUESTE NON SONO CURE: sono **PROVE DI SPEGNIMENTO**")
     W("")

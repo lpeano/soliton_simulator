@@ -192,7 +192,13 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--
             "--giri", "0", "--campo-spinoriale", "--spinore-vivo", "--spinore-corretto",
             "--chi-core", "--calore-scal", "--deparam-orologio", "--verlet", "--fork-su2",
             "--fork-su2-mem", "--cs-dinamico", "--tau-luce", "--rumore-colorato",
-            "--pav-com", "--guscio-morbido", "--zeta-vir"] \
+            "--pav-com", "--guscio-morbido", "--zeta-vir",
+            # [CURA 1a, 2026-09-24] LA CURA DI `D34`, APPROVATA DA LUCA: il driver la
+            # ACCENDE IN OGNI RUN. Da qui in avanti ogni run del fork gira col wrap del
+            # ritmo sul periodo GIUSTO. **NON e' byte-inerte, ed e' il punto**: e' una
+            # cura, non un'opzione, e i numeri di prima non si confrontano con questi
+            # senza dirlo (par.9-bis). Lo stato effettivo sta in CONFIGURAZIONE.txt.
+            "--ritmo-wrap-2pi"] \
     + (["--chi-basc"] if CHIBASC == "on" else []) \
     + (["--chi-coop"] if CHICOOP == "on" else []) \
     + (["--scala-min"] if SCALAMIN == "on" else []) \

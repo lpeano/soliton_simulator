@@ -1,0 +1,46 @@
+# SIGILLO -- `CURA 1`: l'orologio
+#
+COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di misurare
+------------------------------------------------------------------------------------------------
+K1 trova UN rifiuto dentro `if TW_SPINORE` -> OK  ([2])
+K2 IL CASO CHE DEVE FALLIRE: un rifiuto sotto un ALTRO flag -> 0 trovati -> OK: non lo conta
+K3 SECONDO CASO CHE DEVE FALLIRE: `if TW_SPINORE` che NON solleva -> 0 -> OK: un avviso non e' un rifiuto
+K4 il criterio sulla RAGIONE accetta un messaggio che la nomina -> OK
+K5 TERZO CASO CHE DEVE FALLIRE: un messaggio SENZA la ragione -> OK: non passa
+------------------------------------------------------------------------------------------------
+  -> i criteri PASSANO
+
+blob simulatore ORA (sha1 byte grezzi) dd82794a
+riferimento `_val600/scena_000120.pkl.gz` (blob `9557a867`)
+
+T1    PASS L'OPZIONE ESISTE E IL DRIVER LA PASSA: opzione nel simulatore True, nel driver True
+      -> un flag approvato che nessun run accende non e' una cura: e' un ramo morto.
+T2    PASS `RITMO_WRAP_2PI` DOPO `_applica_flag` con l'argv del driver = True
+T3    PASS IL DEFAULT DI `TW_SPINORE` E' SPENTO: letto dal sorgente = False
+T4    PASS IL RIFIUTO SCATTA con `--tw-spinore`, e NOMINA LA RAGIONE
+      scattato: True   la ragione (ponte/inverso) c'e': True
+      messaggio: [tw-spinore] RIFIUTO DI PARTIRE: e' il ponte inverso.
+  La torsione `tw` prende la sua scala da `phi`, il cui dominio `4pi` e' una
+  CONVENZIONE del codice; lo spinore ha il `4pi` VERO (spin 1/2). Con questo
+  flag il finto scrive il vero: tw -> omega_s -> _psi_spinor (:3090-3100).
+  E' il contrario
+      rifiuti trovati dall'AST dentro `if TW_SPINORE`: righe [7335]
+T5    PASS E NON SCATTA SENZA IL FLAG: `_applica_flag` passa liscio -> si'
+      -> e' il controllo che rende `T4` leggibile: un rifiuto che scatta SEMPRE
+         bloccherebbe ogni run, e passerebbe `T4` senza essere un presidio.
+
+------------------------------------------------------------------------------------------------
+T6 -- BYTE-INERZIA: 120 passi con `RITMO_WRAP_2PI` FORZATO SPENTO e `TW_SPINORE`
+      spento, contro `_val600`. Isola il PRESIDIO dall'effetto VOLUTO di (a).
+------------------------------------------------------------------------------------------------
+  (451.7 s)   RITMO_WRAP_2PI durante il giro: False
+  campi UGUALI 206   DIVERSI 0   non confrontati 0
+T6    PASS BYTE-INERTE: 206 campi identici, 0 diversi
+
+================================================================================================
+ESITO: 6/6
+================================================================================================
+*** SIGILLO PASSATO. Il giro corto di `CURA 1` puo' partire. ***
+
+!! E IL SIGILLO NON DICE CHE LA CURA SIA GIUSTA: dice che (a) il driver la accende
+   davvero e (b) il ponte inverso e' impedito, non solo sconsigliato.

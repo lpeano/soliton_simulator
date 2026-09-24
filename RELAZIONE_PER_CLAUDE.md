@@ -13596,3 +13596,61 @@ restano **`tau_pp`** e, indirettamente, la repulsione.
 
 Sono **misure**, e la loro risposta **non cambia nessuna delle tre cure**. Servono per la
 **torsione dal trasporto `SU(2)`**, che è **dopo** il `CHECKPOINT`.
+
+### ㉟ **`CURA 1` È IN CODICE: sigillo `6/6`** — l'orologio
+
+> `csv/_seal_fork/_sig_cura1/REFERTO.txt`. **Prima cura che entra in codice con la tua
+> approvazione.**
+
+### **(a) `RITMO_WRAP_2PI`: servivano TRE cose, non una**
+
+**Fino a oggi era accendibile solo in-process:** non esisteva nessuna opzione da riga di
+comando, quindi **nessun run poteva accenderla**. Una cura che nessun run accende **è un ramo
+morto**, e il sigillo lo controlla in `T1`.
+
+| | |
+|---|---|
+| l'opzione **`--ritmo-wrap-2pi`** | nel simulatore |
+| la riga in **`_applica_flag`** | `RITMO_WRAP_2PI = bool(getattr(a, "ritmo_wrap_2pi", False))` |
+| **`RITMO_WRAP_2PI` nel `global`** | **senza, l'assegnamento creerebbe una LOCALE e il flag resterebbe inerte in silenzio** — è il difetto già catalogato di `--tau-a` |
+| il **driver** lo passa | `csv/_test_fork/_scena_video.py`, in ogni run |
+
+### **(b) `TW_SPINORE`: il simulatore RIFIUTA DI PARTIRE**
+
+Il rifiuto sta in **`_applica_flag`** (`:7335`), **non nel punto d'uso**, e la ragione è
+precisa: **lì arriva prima che la scena nasca**, quindi non lascia uno stato parziale sul
+disco. Un rifiuto dentro `step()` lo farebbe.
+
+**Il messaggio nomina la ragione** *(il ponte inverso, `:3090-3100`, la scheda ⑧, il referto col
+commento falso)* **e dice come riaprirlo:** *«una decisione di Luca, non la rimozione di questa
+riga»*. **Il ramo resta** — par.10: il codice di una legge esclusa è l'evidenza che spiega
+perché esiste il suo sostituto.
+
+### **Il sigillo, `6/6`, e due test sono il controllo l'uno dell'altro**
+
+| | | |
+|---|---|---|
+| `T1` | l'opzione esiste **nel simulatore** *e* il **driver** la passa | **PASS** |
+| `T2` | dopo `_applica_flag` con l'argv del driver, `RITMO_WRAP_2PI = True` | **PASS** |
+| `T3` | il default di `TW_SPINORE` è `False` | **PASS** |
+| **`T4`** | **il rifiuto SCATTA** e **nomina la ragione** *(cercata nel messaggio, non sperata)* | **PASS** |
+| **`T5`** | **e NON scatta senza il flag** | **PASS** |
+| **`T6`** | **BYTE-INERTE: `206` campi identici, `0` diversi** | **PASS** |
+
+**`T5` è quello che rende `T4` leggibile:** un rifiuto che scatta **sempre** bloccherebbe ogni
+run e **passerebbe `T4` senza essere un presidio**.
+
+**`T6` isola il presidio dall'effetto VOLUTO di `(a)`:** gira 120 passi con `RITMO_WRAP_2PI`
+**forzato spento**, cioè nella configurazione di **prima**, e confronta con `_val600`. **`0`
+campi diversi** dice che il rifiuto non ha effetti collaterali.
+
+**Collaudo `5/5`, con TRE casi che devono fallire:** un rifiuto sotto un **altro** flag non
+conta; un `if TW_SPINORE` che **non solleva** non è un rifiuto *(un avviso non basta)*; un
+messaggio che **non nomina la ragione** non passa.
+
+> ### ⚠ **Accendere `RITMO_WRAP_2PI` nel driver NON è byte-inerte, ed è il punto**
+> È una **cura**, non un'opzione. **I numeri presi prima di oggi non si confrontano con quelli
+> di dopo senza dirlo** *(par.9-bis)*, e lo stato effettivo di ogni run sta in
+> `CONFIGURAZIONE.txt`.
+> **E `(b)` non ritira nulla:** `TW_SPINORE` era spento in **9 run su 11** e `--tw-spinore` non
+> compare in nessun lanciatore committato.
