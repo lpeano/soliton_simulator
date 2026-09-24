@@ -13841,3 +13841,93 @@ mezzo lavoro sulla stessa riga.** → **`S12`** nella coda. **Dimmi se va fatto 
 cioè la classe **`A8b`** di `_cs_nodo_prev` *(`71.88 %`)* e `_psi_spin_prec` *(`95.33 %`)*.
 **La guardia si CONTA, non si tace**, con **quattro** numeri: invocazioni, salti, **la forma** al
 fallimento, e **quando**.
+
+### ㉣ **`CURA 2` riscritta col mandato: un solo tempo, e DUE miei errori corretti**
+
+> Scheda ⑨ **riscritta**. Il principio è tuo: *«si applicano le cose corrette e coerenti; dove
+> intenzione e implementazione divergono, si realizza l'INTENZIONE; ogni grandezza con le sue
+> unità giuste»*.
+
+### ❌ **Primo errore mio: avevo proposto `min(r_i, r_j)`**
+
+**Era sbagliato per la ragione più semplice: creava un SECONDO orologio d'arco**, accanto a
+`dt_e = DT·0.5(r_i+r_j)` che il sistema ha già (`:4352`). *«Un solo tempo»* è il nome della cura,
+e la mia proposta ne aggiungeva uno.
+
+**E anche l'argomento con cui avevo scartato la media era sbagliato:** avevo scritto che una
+media *«viola `A2`»*. **`A2` riguarda le statistiche GLOBALI** — la media dei **due** nodi di un
+arco è locale per costruzione. **La tua correzione era giusta su entrambi i punti.**
+
+**L'argomento causale per `min(r)` è in coda come `S13`**, come proposta per **tutto** il
+sistema.
+
+### ❌ **Secondo errore: la media ARMONICA esisteva già, e l'avevo liquidata**
+
+`:4774`: **`cs_arco = 2·cs_i·cs_j/(cs_i+cs_j)`**, col commento *«**collo di bottiglia causale:
+media armonica, non media aritmetica**»*. La mia tabella la scartava con *«vale per rate in
+serie, e l'arco non lo è»*. **Il sistema la usa esattamente per questo.**
+
+> **Il sistema ha DUE medie d'arco, ciascuna col suo dominio: aritmetica per il TEMPO, armonica
+> per la VELOCITÀ. Non se ne inventa una terza.**
+
+### ✅ **Il gradiente: su `r`, e la ragione è un conto, non una preferenza**
+
+| | intervallo | `tanh(grad)` | la modulazione `1 − 0.3·tanh` |
+|---|---|---|---|
+| **`r`** | `[1.4142e-6, 1.4142]` | `≤ tanh(1.4142) = 0.8884` | **`[0.7335, 1]·soglia0` — MODULA** |
+| `1/r` | `[0.707, 707107]` | `→ 1` **esatto** | **`0.7·soglia0` COSTANTE** |
+
+**Con `1/r` la modulazione diventerebbe un riscalamento costante della soglia, cioè un parametro
+nascosto** *(`A1`)*. **`A11` cor.6: un limite che satura è un allarme.**
+
+### ✅ **`S12`: e i difetti su quella riga erano TRE, non due**
+
+| | |
+|---|---|
+| **① la dilatazione era contata DUE VOLTE** | `_dte` **è già** `DT·0.5(r_i+r_j)`; dividere **anche** per `tau_pp` la conta di nuovo. **Questo non l'avevo visto** |
+| **②** `tau_pp` **non è una durata** | è un numero puro. Una costante di tempo deve avere le unità di un tempo |
+| **③** l'integratore è un **Eulero esplicito** | il commento dichiara *«rilassamento esponenziale»* |
+
+**La durata, DERIVATA: `tau_arco = d / cs_arco`** — `[LAM]/[LAM/DT] = [DT]`, una durata vera.
+**È la stessa legge `tau = d/cs` di `FORK_SU2_MEM`, al livello dell'ARCO**, dove `d` e `cs_arco`
+sono **direttamente disponibili** senza la media sul grado che la versione nodale deve fare.
+
+**Forma esatta:** `_rep ← rep + (_rep − rep)·exp(−dt_e/tau_arco)`. **Combinazione convessa**:
+`_rep` resta fra i due valori **per qualunque passo**, e il difetto che l'Eulero aveva su `peq`
+*(`dt/tau = 1.2018`)* **non può ripresentarsi**.
+
+### ✅ **`prob = 1 − exp(−max(resp, 0))`, e il clip sparisce**
+
+`resp` è il **numero atteso di eventi** nel passo proprio locale; la probabilità di **almeno
+uno** in un processo di Poisson è `1 − e^{−λ}`. **Sta in `[0,1)` per costruzione.** Per `λ`
+piccolo coincide con la vecchia forma: **l'errore relativo è `λ/2`**, quindi sotto `λ = 0.02` le
+due differiscono di meno dell'`1 %`.
+
+**E il fattore di tempo compare UNA volta sola**, dentro `ampiezza` — metterlo anche
+nell'esponente sarebbe **la dilatazione contata due volte**, lo stesso difetto del par.3.
+
+### ✅ **E la sostituzione toglie un DOPPIO CONTO DELLA TORSIONE**
+
+`tau_locale = 1/(1+|tw|/PHI_CRIT)` decresce con la torsione — **ma `discesa =
+clip(1 − |tw|/TW_TETTO, 0, 1)` fa già esattamente questo**, e va a zero al tetto. **Oggi la
+soppressione ad alta torsione è contata due volte.** Con `dt_e/DT` resta contata **una**, dove la
+legge la dichiara.
+
+### ❓ **L'unica cosa che NON decido: `rep`, il ramo repulsivo (`:5249`)**
+
+`rep = clip(−resp, 0, 1)` è un clip come `prob` — **ma `rep` non è una probabilità: è una
+MAGNITUDINE**, e la forma di Poisson non va bene per lui.
+
+| | |
+|---|---|
+| **lasciarlo** | creazione e repulsione leggono la **stessa campana in due modi diversi**: è la doppia lettura che la cura sta togliendo |
+| `tanh(max(−resp,0))` | è la normalizzazione che `COES_ADIM` usa per una magnitudine — **ma cambia la scala della repulsione, e non so derivare che sia neutro** |
+
+> **Faccio la prima e la DICHIARO come incoerenza che la cura NON chiude**, così il referto la
+> porta a te invece di nasconderla.
+
+### **E una cosa che `E1a` deve giudicare, non io**
+
+`1/tau_pp` ha mediana vicina a `1`; **`dt_e/DT` ha mediana misurata `≈ 0.68`** *(`Z135`)*.
+**Il tasso di mitosi può calare di circa un terzo.** **Non metto un fattore di
+normalizzazione**: sarebbe un numero scelto.

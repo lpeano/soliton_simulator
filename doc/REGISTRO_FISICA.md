@@ -951,170 +951,266 @@ uno stato parziale sul disco.
 
 <!-- SCHEDA nome=tempo-nella-mitosi funzioni=mitosi flag=TEMPO_UNICO_MITOSI,MITOSI_DIR -->
 
-# ⑨ IL TEMPO NELLA MITOSI — **`CURA 2`**, la scheda **prima** del codice
+# ⑨ IL TEMPO NELLA MITOSI — **`CURA 2`**
 
-> **Mandato di Luca, 2026-09-24.** Flag previsto: **`TEMPO_UNICO_MITOSI`**, spento di default.
-> **Questa scheda non contiene codice.** Serve a decidere **che cosa** cambia, e a far vedere
-> **due cose che l'elenco fa emergere** e che non erano nel mandato.
+> **Mandato di Luca, 2026-09-24.** Flag: **`TEMPO_UNICO_MITOSI`**, spento di default.
+> **Riscritta** dopo il mandato: la prima stesura aveva **due errori**, segnati con ❌.
 
-## 1. OGNI USO DI `tau_pp` DENTRO `mitosi()`, CLASSIFICATO
+## 0. IL PRINCIPIO, ed è di Luca
 
-**La sorgente, e il punto di partenza è che NON è un tempo:**
+> ### **«Si applicano le cose CORRETTE e COERENTI. Dove intenzione e implementazione
+> ### divergono, si realizza l'INTENZIONE. Ogni grandezza con le sue UNITÀ giuste.»**
 
-| riga | espressione | che cos'è **davvero** |
-|---|---|---|
-| **`:5233`** | `tau_pp = 1.0 + avv / PHI_CRIT`, con `avv = \|tw\|` | **una MISURA DI TORSIONE chiamata «tempo proprio locale»**. Non legge nessun orologio: legge `tw` |
+**Operativamente: si cura dove intenzione e implementazione DIVERGONO; dove sono coerenti non
+si tocca.** L'intenzione si legge **dal commento e dal nome**, che sono ciò che la legge
+*dichiara di essere*.
 
-**E da lì si biforca in due usi che NON sono la stessa cosa:**
+| riga | l'INTENZIONE, dal commento | l'IMPLEMENTAZIONE | coerenti? |
+|---|---|---|:--:|
+| `:5240` | *«ritmo»* | `1/(1 + |tw|/PHI_CRIT)`: reciproco di una **torsione** | **NO** |
+| `:5244` | una **probabilità** | `clip(resp, 0, 1)`: un **clip** `A11` | **NO** |
+| `:5280` | *«rilassa con tempo `tau_pp` — **un tempo locale dello stesso arco**»* e *«`A5` livello 1, **rilassamento esponenziale**»* | una **torsione** come costante di tempo, **e un EULERO esplicito** | **NO, due volte** |
+| `:5189-5196` | *«gradiente di **tempo proprio** lungo l'arco»* | gradiente di `mean(|tw|)` | **NO** |
+| `:5234-5239` | soglia, tetto, centro, **inversione**: posizioni sull'asse di `tw` | esattamente quello | **SÌ → NON SI TOCCA** |
 
-| riga | espressione | **classe** | perché |
-|---|---|:--:|---|
-| **`:5240`** | `tau_locale = 1.0 / tau_pp` | **`TEMPO`** | è chiamato *«ritmo»* nel commento, e **si comporta come un ritmo**: entra moltiplicando l'ampiezza |
-| **`:5241`** | `ampiezza = salita * discesa * tau_locale` | **`TEMPO`** *(via `tau_locale`)* | l'ampiezza della campana è modulata da un **ritmo** |
-| **`:5280`** | `self._rep += _dte * (rep − self._rep) / max(tau_pp, 1e-12)` | **`TEMPO`** | `tau_pp` è qui la **costante di tempo** di un rilassamento |
-| **`:5234`** | `tau_soglia = 1.0 + soglia / PHI_CRIT` | **`TORSIONE`** | è **la soglia**, espressa in unità di `tw`. Non è un tempo: è una posizione sull'asse della torsione |
-| **`:5235`** | `tau_tetto = 1.0 + TW_TETTO / PHI_CRIT` *(`= 3`)* | **`TORSIONE`** | il tetto `4π`, idem |
-| **`:5238`** | `centro = 0.5 * (tau_soglia + tau_tetto)` | **`TORSIONE`** | il punto medio **fra due posizioni sull'asse di `tw`** |
-| **`:5239`** | `segno = −tanh(3.0 * (tau_pp − centro))` | **`TORSIONE`** | **l'INVERSIONE**: usa `tau_pp` come **coordinata sull'asse della torsione**, non come tempo. `crea` sotto il centro, `respinge` sopra |
-| **`:5277-5279`** | il clamp `1e-12` su `tau_pp`, **contato** | **presidio** | `A11`: protegge da una divisione per zero. Vedi §4 |
+---
 
-**E il quarto uso, quello che Luca chiama *la modulazione della soglia col gradiente di tempo
-proprio*, sta PRIMA e non usa `tau_pp` ma un suo gemello:**
+## 1. UN SOLO TEMPO D'ARCO: **`dt_e`, che il sistema definisce già**
 
-| riga | espressione | **classe** |
-|---|---|:--:|
-| **`:5189-5193`** | `tau_nodo = 1.0 + mean(\|tw\|)/PHI_CRIT` **per nodo** | **`TEMPO` per INTENZIONE, `TORSIONE` per IMPLEMENTAZIONE** |
-| **`:5194`** | `grad_tau = \|tau_nodo[i] − tau_nodo[j]\|` | idem |
-| **`:5196`** | `soglia = soglia0 * (1.0 − 0.3 * tanh(grad_tau))` | idem |
+**`:4352`: `dt_e = DT * 0.5 * (r[i] + r[j])`.** È **il** tempo proprio d'arco del sistema, e la
+mitosi usa **quello**, cioe' il fattore adimensionale **`dt_e/DT = 0.5(r_i + r_j)`**.
 
-> ### ⚠ **`tau_nodo` È LA STESSA FORMULA DEL RAMO MORTO DI `ritmo()`**
-> `tau_nodo = 1 + mean(\|tw\|)/PHI_CRIT` è **identico** a
-> `r = 1 + mean(\|tw\|)/PHI_CRIT`, il ramo **`TEMPO_SEGNO`** di `ritmo()` — **che non gira**
-> *(`TEMPO_SEGNO = False` in 9 run su 11, `Z130`)*.
-> **Quindi la mitosi usa, come «tempo proprio», esattamente la definizione di tempo che il
-> resto del sistema ha SCARTATO.** Non è un dettaglio di stile: è **due orologi diversi nello
-> stesso passo**, ed è il difetto che `CURA 2` deve togliere.
+### ❌ **IL MIO PRIMO ERRORE: avevo proposto `min(r_i, r_j)`**
 
-**IL CRITERIO CHE SEPARA LE DUE CLASSI, in una riga:** *un uso è `TEMPO` se la grandezza entra
-**come durata o come ritmo** (se la si potesse misurare con un cronometro); è `TORSIONE` se
-entra **come posizione su un asse** (se la si potesse misurare con un goniometro).*
-`segno` confronta `tau_pp` con `centro`, che è una posizione: **goniometro**.
-`tau_locale` moltiplica un'ampiezza per unità di tempo: **cronometro**.
+**Era sbagliato per la ragione più semplice: creava un SECONDO orologio d'arco**, accanto a
+quello che il sistema ha già. *«Un solo tempo»* è il nome di questa cura, e la mia proposta ne
+aggiungeva uno.
 
-## 2. COME SI OTTIENE IL RITMO DI UN **ARCO** DAGLI `r` DEI SUOI DUE NODI
+**E l'argomento con cui l'avevo scartata la media era anch'esso sbagliato:** avevo scritto che
+una media *«viola `A2`, è una statistica in una legge locale»*. **`A2` riguarda le statistiche
+GLOBALI** — una mediana su tutta la rete, una media su tutti i nodi. **La media dei DUE nodi di
+un arco è locale per costruzione**, ed è la definizione che il sistema usa già.
 
-**Candidata, ed è quella che scelgo: `r_arco = min(r_i, r_j)` — il più LENTO dei due.**
+> **L'argomento causale per `min(r)` non è privo di senso, ma se vale, vale per TUTTO il
+> sistema, non per la mitosi da sola.** → va **in coda** come proposta generale, `S13`.
 
-**La derivazione, e non è un'analogia:** `r` è un **ritmo** *(`dt_n = DT · r`, quindi `r` grande
-= orologio veloce)*. Un processo che vive **sull'arco** coinvolge **entrambi** i nodi, quindi
-non può avanzare più in fretta del **più lento dei due**: altrimenti l'estremo lento
-riceverebbe, nel proprio tempo proprio, più di quanto il suo orologio ha battuto. **È
-causalità, non prudenza.**
+### ⚠ **E la media ARMONICA esisteva già, per il `cs`**
 
-**E ha un PRECEDENTE NEL CODICE, non inventato qui:** `COES_CAUSALE` *(scheda ④)* usa
-**`cs` del nodo PIÙ LENTO** per il tetto del cono d'arco, con lo stesso argomento.
+`:4774`: `cs_arco = 2·cs_i·cs_j / (cs_i + cs_j)`, col commento *«**collo di bottiglia causale:
+media armonica, non media aritmetica**»*. **La mia tabella delle alternative la liquidava con
+«vale per rate in serie, e l'arco non lo è»: era sbagliato**, perché il sistema la usa
+esattamente per questo e la chiama col suo nome.
+**Il sistema ha quindi DUE medie d'arco, ciascuna col suo dominio:** **aritmetica** per il
+**tempo** (`dt_e`), **armonica** per la **velocità** (`cs_arco`). **Non se ne inventa una terza.**
 
-**LE ALTERNATIVE, e perché no** *(si dichiarano, non si nascondono)*:
+---
 
-| candidata | perché NO |
+## 2. IL GRADIENTE DI TEMPO PROPRIO — **su `r`, e la ragione è derivata**
+
+**Oggi** (`:5189-5196`): `tau_nodo = 1 + mean(|tw|)/PHI_CRIT` per nodo, poi
+`grad_tau = |tau_i − tau_j|`, poi `soglia = soglia0·(1 − 0.3·tanh(grad_tau))`.
+
+**`tau_nodo` è IDENTICO al ramo `TEMPO_SEGNO` di `ritmo()` — quello che NON GIRA** *(`Z130`)*.
+**La mitosi usa come «tempo proprio» la definizione di tempo che il resto del sistema ha
+SCARTATO.** Sono **due orologi nello stesso passo**.
+
+**Con la cura: `grad_r = |r_i − r_j|`.**
+
+### **`r` o `1/r`? Si prende `r`, e NON è una preferenza**
+
+`tau_nodo` oggi è una **lentezza** *(«tau_nodo alto = tempo lento», lo dice il commento)*, e
+l'analogo diretto della lentezza è **`1/r`**. **Ma `1/r` È ILLIMITATO**, e il conto lo mostra:
+
+| | intervallo | `tanh` del gradiente | la modulazione `1 − 0.3·tanh` |
+|---|---|---|---|
+| **`r`** | `[1.4142e-6, 1.4142]` | `tanh(grad) ≤ tanh(1.4142) = 0.8884` | **`[0.7335, 1]·soglia0` — MODULA** |
+| `1/r` | `[0.707, 707107]` | `grad` fino a `~7e5` → **`tanh = 1` ESATTO** | **`0.7·soglia0` COSTANTE** |
+
+> **Con `1/r` la modulazione diventa un RISCALAMENTO COSTANTE della soglia**, cioè **un
+> parametro nascosto** *(`A1`)*, non una legge. **Con `r` resta una modulazione.**
+> **`A11` cor.6: un limite che satura è un allarme** — e `1/r` lo farebbe saturare **sempre**.
+
+---
+
+## 3. IL RILASSAMENTO DI `_rep` — **`S12` APPROVATO DA LUCA**
+
+**Oggi** (`:5280`): `self._rep += _dte * (rep − self._rep) / max(tau_pp, 1e-12)`.
+
+**Tre difetti nella stessa riga, e il commento ne dichiara due:**
+
+| | |
 |---|---|
-| **media** `(r_i + r_j)/2` | **non è causale**: un nodo veloce accelera l'arco oltre il battito del nodo lento. E una media è una **statistica**, non una legge locale *(`A2`)* |
-| **media armonica** `2/(1/r_i + 1/r_j)` | naturale per **rate in serie**, ma l'arco **non è** due processi in serie: è **uno** processo fra due estremi |
-| **media geometrica** `√(r_i·r_j)` | **nessuna derivazione**: sarebbe scelta perché «sta in mezzo» |
-| **max** | **anti-causale**: l'arco andrebbe più veloce del suo estremo lento |
-| `r` del nodo `i` *(orientato)* | **rompe l'antisimmetria**: `r_ij ≠ r_ji`, e un arco non ha un verso privilegiato |
+| **① la DILATAZIONE È CONTATA DUE VOLTE** | `_dte` **è già** `DT·0.5(r_i+r_j)`, cioè contiene già il tempo proprio; dividere **anche** per `tau_pp` la conta una seconda volta |
+| **② `tau_pp` non è una durata** | è un numero puro *(un fattore di dilatazione)*. Una costante di tempo **deve avere le unità di un tempo** |
+| **③ l'integratore è un EULERO ESPLICITO** | il commento dichiara *«`A5` livello 1, **rilassamento esponenziale**»*, e `par.4` impone la **forma esatta** |
 
-## 3. COSA DIVENTA OGNI USO `TEMPO`
+### **LA DURATA, DERIVATA: `tau_arco = d / cs_arco`**
 
-| oggi | con `TEMPO_UNICO_MITOSI` | nota dimensionale |
+**È il ritardo causale dell'arco**, e **le due grandezze esistono già**:
+
+| | | unità |
 |---|---|---|
-| `tau_locale = 1/tau_pp` | **`tau_locale = r_arco`** | `r` **è già** un ritmo: non si inverte. Invertirlo darebbe un tempo dove serve un ritmo |
-| `/max(tau_pp, 1e-12)` *(costante di tempo)* | **`· r_arco`** | la costante di tempo è `1/r_arco`, quindi dividerci equivale a **moltiplicare per `r_arco`** |
-| `grad_tau` da `tau_nodo` | **`grad_r = \|r_i − r_j\|`** | lo stesso gradiente, sull'orologio **vero** invece che sul proxy di torsione |
+| `d` | la **lunghezza dell'arco**, `self.d` | `[LAM]` |
+| `cs_arco` | la velocità d'onda d'arco, **media armonica** *(`:4774`)* | `[LAM/DT]` |
+| **`tau_arco = d / cs_arco`** | **una DURATA** | **`[DT]`** ✅ |
 
-**E cosa NON cambia:** `tau_soglia`, `tau_tetto`, `centro`, `segno`. **Restano in unità di `tw`**,
-perché sono posizioni sull'asse della torsione. **Il nome `tau_` su quelle quattro è
-fuorviante** e va cambiato in `tw_`-qualcosa, ma **il rinominare è un cambiamento a parte**: qui
-si cambia la fisica, non i nomi *(un commit = un cambiamento logico)*.
+**È la stessa legge che `FORK_SU2_MEM` usa per il ritardo dei Bloch** *(`tau = d/cs`,
+`_tempo_luce_nodo`)*, **al livello dell'ARCO invece che del nodo** — e al livello dell'arco `d` e
+`cs_arco` sono **direttamente disponibili**, senza la media sul grado che la versione nodale deve
+fare. **Zero parametri nuovi, zero coefficienti.**
 
-## 4. I LIMITI, CLASSIFICATI CON `A11`
+### **LA FORMA ESATTA**
 
-| limite | oggi | con la cura |
-|---|---|---|
-| `max(tau_pp, 1e-12)` *(`:5280`)* | **clamp che protegge da una divisione per zero** → `A11` dice di **cercare l'errore** | **SPARISCE PER COSTRUZIONE:** `r` ha un **pavimento derivato** *(`1.4142e-6`, dalla formula `x/√(1+x²) + 10⁻⁶` normalizzata)*, quindi `1/r ≤ 707107` e non c'è niente da proteggere. **Un clamp che sparisce è meglio di un clamp giustificato** |
-| `0.3 * tanh(grad_tau)` *(`:5196`)* | **tetto al `30 %`** sulla modulazione della soglia | **RESTA, e resta un numero SCELTO.** Non so derivarlo *(§6)*. Con `grad_r` cambia la **scala** del suo argomento, quindi **il `30 %` morde in modo diverso** — ed è una cosa da misurare, non da assumere |
-
-## 5. ⚠ DUE COSE CHE L'ELENCO FA EMERGERE, e che non erano nel mandato
-
-### ① **LA SCALA DELL'AMPIEZZA CAMBIA, E NON SO DERIVARE CHE RESTI LA STESSA**
-
-`tau_locale = 1/tau_pp` vive in **`(0, 1]`** *(perché `tau_pp ≥ 1`)*. **`r` vive in
-`[1.4142e-6, 1.4142]`**, e nel giro corto di `CURA 1` la sua **mediana è `0.68`**.
-
-**`ampiezza` entra in `prob = clip(resp, 0, 1)`**, quindi **la scala decide il tasso di mitosi**.
-Sostituire `r` a `1/tau_pp` cambia quella scala di un fattore `O(1)` **che non so dimostrare
-essere `1`**.
-
-> **NON metto un fattore di normalizzazione**, perché sarebbe un **numero scelto** *(`A1`)* e
-> peggiorerebbe le cose. **Lo dichiaro come il rischio principale della cura**, e **`E1` — *la
-> mitosi non muore e non esplode* — è esattamente il suo giudice.** È lo stesso posto in cui
-> `FASE_2PI` è caduta *(`Z127`)*, per un motivo diverso.
-
-### ② **IL RILASSAMENTO DI `:5280` È UN EULERO ESPLICITO, E `par.4` LO VIETA**
-
-```python
-self._rep = self._rep + _dte * (rep - self._rep) / np.maximum(tau_pp, 1e-12)
+```
+_rep  <-  rep + (_rep - rep) * exp(-dt_e / tau_arco)
 ```
 
-**`CLAUDE.md` par.4 è esplicito:** *«per il RILASSAMENTO di primo ordine usa il passo ESATTO
-`U(t+dt) = U_target + (U−U_target)·e^{−dt/tau}`, NON Verlet»* — e un Eulero esplicito è **peggio
-di Verlet** su questo punto. **È la stessa famiglia che `PEQ_ESATTO` (`C1`) ha curato per `peq`**,
-dove l'Eulero **scavalcava sotto zero** per `dt_e/tau > 1` *(misurato `1.2018`)*.
+**L'esponente è `[DT]/[DT]` = numero puro.** È la stessa forma che `PEQ_ESATTO` (`C1`) ha imposto
+a `peq` e che `par.4` impone a ogni rilassamento di primo ordine. **È una combinazione convessa**,
+quindi `_rep` resta **fra `rep` e il suo valore precedente per QUALUNQUE passo**: non può
+scavalcare, e il difetto che l'Eulero aveva su `peq` *(`dt/tau > 1` misurato `1.2018`)* **non può
+ripresentarsi**.
 
-> **QUESTO NON È PARTE DI `CURA 2`, e non lo tocco:** un commit = un cambiamento logico, e
-> mescolare *«quale tempo»* con *«quale integratore»* renderebbe il risultato ininterpretabile
-> *(par.1)*.
-> **MA È UNA DOMANDA PER LUCA, e va posta adesso perché `CURA 2` TOCCA QUELLA RIGA:** curare il
-> tempo e lasciare l'integratore sbagliato è **mezzo lavoro sulla stessa riga**.
-> **→ registrato nella coda come difetto candidato.**
+### ✅ **E DUE CLAMP SPARISCONO PER COSTRUZIONE** *(`A11`)*
 
-## 6. COSA NON SO DERIVARE — **dichiarato** *(`A12` regola 4)*
+| clamp | perché sparisce |
+|---|---|
+| `max(tau_pp, 1e-12)` | `tau_pp` **esce dalla formula**: non c'è più nulla da proteggere |
+| *(nuovo)* una divisione per `tau_arco` | `d ≥ LAM` per costruzione *(la scala minima)* e `cs_arco > 0`, quindi **`tau_arco > 0` derivato**. **Serve solo il contatore** del caso `cs_arco = 0`, che non deve capitare |
 
-1. **che la scala dell'ampiezza resti la stessa** *(§5 ①)*. È il rischio principale;
-2. **il `0.3` della modulazione della soglia.** Era già un numero scelto prima della cura, e la
-   cura **non lo migliora né lo peggiora**: lo **sposta su un'altra scala**;
-3. **se `grad_r` sia il gradiente giusto**, o se il gradiente vada preso su `1/r` *(il tempo)*
-   invece che su `r` *(il ritmo)*. `\|r_i − r_j\|` e `\|1/r_i − 1/r_j\|` **non sono monotoni
-   l'uno nell'altro** quando gli `r` sono piccoli, e la differenza **non è cosmetica**;
-4. **il `3.0` dentro `tanh(3.0·(tau_pp − centro))`.** Resta `TORSIONE` e resta com'è, ma è un
-   numero scelto: **lo dichiaro qui perché la scheda lo deve dire**, non perché `CURA 2` lo tocchi.
+---
 
-## 7. IL PROBLEMA DELLA PROVENIENZA DI `r` DENTRO `mitosi()`
+## 4. LA PROBABILITÀ DI MITOSI — **la forma di Poisson, e il clip sparisce**
 
-**`r` per nodo sta in `self._r_corrente`, scritto in `step()` a `:4397` — ma solo
-`if FORK_SU2_MEM`.**
+**Oggi** (`:5244`): `prob = np.clip(resp, 0.0, 1.0)`. **Un clip `A11` su una probabilità.**
+
+**Con la cura:**
+
+```
+prob = 1 - exp(-max(resp, 0))
+```
+
+**Perché è DERIVATA e non scelta:** `resp` è il **numero atteso di eventi** nel passo proprio
+locale *(un tasso per unità di tempo di coordinata, moltiplicato per `dt_e/DT`)*, e la
+probabilità di **almeno un evento** di un processo di Poisson con quel numero atteso è
+`1 − e^{−λ}`. **Sta in `[0, 1)` per costruzione: il clip non ha più niente da tagliare.**
+
+**E per ampiezze piccole coincide con la vecchia forma:** `1 − e^{−λ} = λ − λ²/2 + …`, quindi
+**l'errore relativo è `λ/2`**: sotto `λ = 0.02` le due forme differiscono di meno dell'`1 %`.
+
+### ⚠ **IL FATTORE DI TEMPO VA CONTATO UNA VOLTA SOLA**
+
+`tau_locale` **non si sostituisce con `dt_e/DT` lasciando poi un secondo `dt_e/DT`
+nell'esponente**: sarebbe **la dilatazione contata due volte**, lo stesso difetto del par.3 ①.
+**Il fattore compare UNA volta**, dentro `ampiezza`:
+
+```
+ampiezza = salita * discesa * (dt_e / DT)        # numero atteso di eventi
+resp     = ampiezza * segno
+prob     = 1 - exp(-max(resp, 0))
+```
+
+### ✅ **E LA SOSTITUZIONE TOGLIE UN DOPPIO CONTO DELLA TORSIONE**
+
+`tau_locale = 1/(1 + |tw|/PHI_CRIT)` **decresce con la torsione**. Ma `discesa =
+clip(1 − |tw|/TW_TETTO, 0, 1)` **fa già esattamente questo**, e va a zero al tetto.
+**Quindi oggi la soppressione ad alta torsione è contata DUE VOLTE**, una in `discesa` e una in
+`tau_locale`. **Con `dt_e/DT` resta contata una volta**, in `discesa`, dove la legge la
+dichiara — e il fattore di tempo fa il mestiere del tempo.
+
+---
+
+## 5. ❓ **L'UNICA DECISIONE CHE NON PRENDO: `rep`, il ramo REPULSIVO**
+
+`:5249`: `rep = np.clip(-resp, 0.0, 1.0)`. **È un clip `A11`, come `prob`** — ma **`rep` non è
+una probabilità: è una MAGNITUDINE**, e alimenta una spinta su `d0`.
+
+**Quindi la forma di Poisson NON va bene per lui**: `1 − e^{−λ}` è la probabilità di almeno un
+evento, e qui non si contano eventi.
+
+| opzione | conseguenza |
+|---|---|
+| **(i)** lo si lascia col clip | **creazione e repulsione leggono la STESSA campana in due modi diversi**: una come *tasso*, l'altra come *magnitudine*. È **la doppia lettura che questa cura sta togliendo** |
+| **(ii)** `rep = tanh(max(-resp, 0))` | è la normalizzazione che `COES_ADIM` usa per una magnitudine *(`|F| ≤ 1` per costruzione)*. **Ma cambia la SCALA della repulsione**, e **non so derivare che il cambiamento sia neutro** |
+
+> **NON SCELGO, e non lo metto nel codice.** Il mandato copre `prob` (`:5244`); `rep` è
+> `:5249`. **Faccio `(i)` — il clip resta — e lo DICHIARO come incoerenza che la cura NON
+> chiude**, così il referto la porta a Luca invece di nasconderla. *(`A12` regola 4.)*
+
+---
+
+## 6. LA TABELLA DELLE UNITÀ
+
+| grandezza | **prima** | **dopo** | nota |
+|---|---|---|---|
+| `DT` | tempo di coordinata | — | l'unità di tempo |
+| `r` | numero puro | — | `dt_n = DT·r` |
+| `dt_e` | `[DT]` | — | `DT·0.5(r_i+r_j)`, `:4352` |
+| `dt_e/DT` | — | **numero puro** | il fattore di tempo proprio d'arco |
+| `avv = |tw|` | `[rad]` | — | torsione |
+| `soglia` | `[rad]` | `[rad]` | modulata da `grad_r`, non da `grad_tau` |
+| `ecc = avv/soglia − 1` | numero puro | — | rapporto di due angoli |
+| `salita`, `discesa` | numero puro | — | |
+| `tau_locale` | numero puro *(ma **era** un reciproco di torsione)* | **`dt_e/DT`** | **ora è un tempo, come il nome dice** |
+| `ampiezza` | numero puro | numero puro | **numero atteso di eventi** |
+| `segno` | numero puro `(−1, 1)` | — | resta |
+| `resp` | numero puro | — | |
+| `prob` | numero puro **con clip** | numero puro **in `[0,1)` per costruzione** | il clip sparisce |
+| `tau_pp` | numero puro, **usato come TEMPO** | **esce dagli usi TEMPO** | resta solo come coordinata di torsione |
+| **`tau_arco`** | — | **`[DT]`** | `d/cs_arco`: **una durata vera** |
+| `_rep` | numero puro | — | rilassa in forma **esatta** |
+| `grad_tau` → `grad_r` | `[rad]`/PHI_CRIT | **numero puro** | gradiente di un **ritmo** |
+
+**Nessuna grandezza con unità diverse viene sommata o confrontata**: gli unici confronti sono
+`avv` con `soglia` *(entrambi `[rad]`)* e `tau_pp` con `centro` *(entrambi numeri puri sull'asse
+di torsione)*.
+
+---
+
+## 7. LA PROVENIENZA DI `r` DENTRO `mitosi()`, e la guardia
+
+`r` per nodo è in `self._r_corrente`, scritto in `step()` a `:4397` **ma solo
+`if FORK_SU2_MEM`**.
 
 | questione | risposta, **dal codice** |
 |---|---|
-| è disponibile quando `mitosi()` gira? | **sì**: il ciclo del driver è `step(); mitosi(); rilassa_disegno(); memoria_hebbiana_moto()`, quindi `mitosi()` segue **immediatamente** `step()` |
-| la lunghezza è giusta? | **sì in quel punto**: `n` non è ancora cresciuto. **Ma è un array per-nodo attraversato da un punto di crescita**, cioè la classe **`A8b`** di `_cs_nodo_prev` *(71.88 %)* e `_psi_spin_prec` *(95.33 %)* |
-| e se `FORK_SU2_MEM` è spento? | **`_r_corrente` è `None`**. Nei run del fork è **acceso**, ma **una dipendenza va DICHIARATA**: `TEMPO_UNICO_MITOSI` **richiede `--fork-su2-mem`**, e senza deve **rifiutare** o **contare**, non cadere in silenzio |
+| è disponibile? | **sì**: il ciclo è `step(); mitosi(); …`, quindi `mitosi()` segue **immediatamente** |
+| la lunghezza è giusta? | **sì in quel punto** — `n` non è ancora cresciuto. Ma è un array **per-nodo attraversato da un punto di crescita**: la classe `A8b` di `_cs_nodo_prev` *(`71.88 %`)* e `_psi_spin_prec` *(`95.33 %`)* |
+| se `FORK_SU2_MEM` è spento? | `_r_corrente` è `None`. **Dipendenza DICHIARATA**: nei run del fork è acceso |
+| indici d'arco `≥ n`? | il codice si guarda già *(`self.i[self.i < self.n]`, `:5190-5192`)*: si fa lo stesso, **e si conta** |
 
-> **LA GUARDIA SI CONTA, NON SI TACE** *(`A8`)*: invocazioni, salti, **la forma al fallimento**
-> *(le due lunghezze)* e **quando** *(l'indice dell'ultima invocazione saltata)*. **Quattro
-> numeri, non uno** — perché `20 %` di salti nelle prime dieci invocazioni e `20 %` sparsi su
-> tutto il run **danno lo stesso conteggio e sono due diagnosi opposte.**
+**LA GUARDIA SI CONTA, NON SI TACE** *(`A8`)*: **quattro** numeri — invocazioni, salti, **la
+forma** al fallimento *(le due lunghezze)*, e **quando** *(l'indice dell'ultima saltata)*.
+Il fallback è **`dt_e/DT = 1`**, cioè *«nessuna dilatazione»*: la stessa convenzione che
+`ritmo()` usa quando non c'è un passato *(`np.ones`)*, **non una convenzione nuova**.
 
-## 8. I CRITERI DELLA PROVA, fissati qui
+---
+
+## 8. COSA NON SO DERIVARE — **dichiarato** *(`A12` regola 4)*
+
+1. **`rep`, il ramo repulsivo** *(par.5)*: lascio il clip e dichiaro l'incoerenza;
+2. **il `0.3`** della modulazione della soglia: era un numero scelto **prima** della cura, e la
+   cura non lo migliora né lo peggiora — **ne cambia la scala dell'argomento**, e il conto del
+   par.2 dice di quanto *(`tanh ≤ 0.8884` invece di `→ 1`)*;
+3. **il `3.0`** dentro `tanh(3.0·(tau_pp − centro))`: resta `TORSIONE`, resta com'è, **è un
+   numero scelto** e la scheda lo deve dire;
+4. **che il tasso di mitosi resti dello stesso ordine.** `1/tau_pp ∈ (0,1]` con mediana vicina a
+   `1`; `dt_e/DT` ha **mediana misurata `≈ 0.68`** *(`Z135`)*. **Il tasso può calare di ~`1/3`**,
+   e **`E1a` è il suo giudice**. *(Non metto un fattore di normalizzazione: sarebbe un numero
+   scelto.)*
+
+---
+
+## 9. I CRITERI DELLA PROVA, fissati qui
 
 | | criterio | origine |
 |---|---|---|
-| **`E1a`** | la mitosi **non muore**: nascite `> 0`, eventi **dello stesso ordine** del riferimento | di Luca. Il nullo: se la scala dell'ampiezza crollasse, le nascite andrebbero a `0` — **è successo con `FASE_2PI`** |
-| **`E1b`** | la mitosi **non esplode**: `n` finale **`< 10×`** il riferimento | **misurata**: `178` archi per nodo, quindi `10× n` ≈ `5.3M` archi = `10×` memoria e tempo |
-| **`B`** | il **bilancio di `d0` CHIUDE** | il criterio di `G4`, invariato |
-| **`G`** | **dove nasce la materia rispetto al gradiente di `r`** | richiesta di Luca. **Si RIPORTA**, non si giudica: non ho un'attesa derivata su questo |
-| **`C`** | la **guardia** di `_r_corrente`: quante volte salta, e **quando** | `A8`. Se salta **fuori dal transitorio**, la cura gira su un fallback e **il referto non si legge** |
+| **`E1a`** | la mitosi **non muore**: nascite `> 0` e eventi **dello stesso ordine** del riferimento | di Luca. `FASE_2PI` è caduta qui *(`62` → `1` evento)* |
+| **`E1b`** | **non esplode**: `n` finale `< 10×` il riferimento | **misurata**: `178` archi per nodo |
+| **`B`** | il **bilancio di `d0` CHIUDE** | il criterio di `G4` |
+| **`K`** | **quante volte la vecchia `prob` avrebbe richiesto il clip** *(cioè `resp > 1`)* | richiesta di Luca: **dice quanto la forma nuova differisce dalla vecchia**. Se è `0`, le due forme sono indistinguibili e la cura di `:5244` è **formale** |
+| **`G`** | **dove nasce la materia rispetto al gradiente di `r`** | richiesta di Luca. **Si RIPORTA**, non si giudica |
+| **`C`** | la **guardia** di `_r_corrente`: quante volte salta, e **quando** | `A8`. Se salta **fuori dal transitorio**, il referto **non si legge** |
 
-**Riferimento: `csv/_test_fork/_cura1_corto`** — *stessa configurazione, `CURA 1` accesa, flag
-`TEMPO_UNICO_MITOSI` spento*. **È il confronto giusto perché differisce per UN interruttore.**
-
+**Riferimento: `csv/_test_fork/_cura1_corto`** — stessa configurazione, `CURA 1` accesa, questo
+flag **spento**. **Differisce per UN interruttore.**
