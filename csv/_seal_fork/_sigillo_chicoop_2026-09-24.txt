@@ -1,35 +1,44 @@
-[TIMBRO] _sigillo_chicoop.py  sha1-BYTE 05ff11e3  committato e pulito
+[TIMBRO] _sigillo_chicoop.py  sha1-BYTE 93f6e792  committato e pulito
 Z0  simulatore PRIMA (79be011): sha1 GREZZO b46835bd
 Z0  simulatore ORA            : sha1 GREZZO 49fc54d2
 Z0  (NB: NON e' `git hash-object`. Sono due numeri diversi per lo stesso file, C18.)
 
 braccio A: simulatore PRIMA della patch        (chi_basc -> perc_chi)
-braccio B: simulatore ORA, CHI_COOP = False    (atteso: identico ad A)
-re bianco e' SBAGLIATO, non perche' risolva l'aliasing (doc/PREDIZIONE_taglio_spettrale.md).
-[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: inerzia = T^2 = (d/cs)^2, quindi il tempo che COSTRUISCE l'inerzia e quello che la RILASSA devono essere lo stesso; oggi sono due diversi nella stessa equazione. Zero coefficienti, zero floor nuovi. NB: |omega|_eq va come sqrt(tau), quindi theta cala di ~13x: UN ORDINE DI GRANDEZZA, NON la soluzione dell'aliasing.
-[spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.
-[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
-[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
-[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
-[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
-[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
-[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
-[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+[TIMBRO] _sigillo_chicoop.py  sha1-BYTE 93f6e792  committato e pulito
 
-Traceback (most recent call last):
-  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sigillo_chicoop.py", line 132, in <module>
-    net.rilassa_disegno(); net.memoria_hebbiana_moto()
-                           ~~~~~~~~~~~~~~~~~~~~~~~~~^^
-  File "C:\Users\lpeano\soliton_simulator\soliton_simulator.py", line 6357, in memoria_hebbiana_moto
-    self.verifica_invarianti(dove='memoria_hebbiana_moto')
-    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\lpeano\soliton_simulator\soliton_simulator.py", line 3760, in verifica_invarianti
-    raise DominioViolato(quale, regola, passo, idx,
-                         np.abs(vals).astype(float), dove, extra)
-_sim_x.DominioViolato: [INVARIANTE] `d` VIOLA `>= LAM (= 0.800000) -- LEGGE, non opzione` al passo 1, in `memoria_hebbiana_moto`.
-  quanti: 223396
-  indici (primi 8): 3, 5, 6, 7, 11, 16, 17, 29
-  valori (primi 8): 6.401830e-01, 5.912308e-01, 7.499317e-01, 7.398202e-01, 5.101286e-01, 5.362541e-01, 6.864849e-01, 4.700825e-01
-  arco=53-294 quanti=223396 su=526047
+              [--dpi DPI] [--seed SEED] [--dt DT] [--nodi NODI]
+                            [--maxnodi MAXNODI] [--diffres DIFFRES]
+                            [--alfanat ALFANAT] [--ham HAM] [--zeta ZETA]
+                            [--zeta-loc] [--tauloc TAULOC] [--plam PLAM]
+                            [--plastmit PLASTMIT] [--coppia COPPIA]
+                            [--gamma GAMMA] [--lam LAM] [--scala SCALA]
+                            [--mupsi MUPSI] [--mitmax MITMAX]
+                            [--kfrange KFRANGE] [--viriale] [--grav-ampiezza]
+                            [--coppia-reciproca] [--chi-basc] [--zeta-vir]
+                            [--verlet] [--plast-din] [--tau-a V]
+                            [--elast-c ELAST_C] [--guscio-morbido] [--pav-com]
+                            [--olon-part] [--polo-maturo] [--ls-azim]
+                            [--verso-chi] [--sync] [--senza-spinore-vivo]
+                            [--spinore-vivo] [--spin-larmor] [--tw-spinore]
+                            [--spinore-corretto] [--chi-da-spinore]
+                            [--tempo-proprio-orientato] [--sync-spinore]
+                            [--deparam-orologio] [--sync-fase-orologio]
+                            [--fork-su2] [--fork-su2-mem] [--rumore-colorato]
+                            [--tau-luce] [--gamma-turbo K]
+                            [--senza-step2-orologio] [--step2-orologio]
+                            [--kuramoto-su2] [--trace-segno]
+                            [--trace-out TRACE_OUT] [--campo-spinoriale]
+                            [--tempo-segno] [--orologio-segno]
+                            [--senza-spin-feedback] [--spin-feedback]
+                            [--spin-positivi] [--chi-core] [--cs-dinamico]
+                            [--vista-rete] [--bussola BUSSOLA] [--giri GIRI]
+                            [--sync-db SYNC_DB] [--db-cleanup] [--da-libera]
+                            [--db-ogni DB_OGNI] [--db-serie]
+                            [--db-rigioca DA A] [--batch] [--passi PASSI]
+                            [--ogni OGNI] [--sep SEP] [--nmasse NMASSE]
+                            [--size SIZE] [--passi-per-frame PASSI_PER_FRAME]
+                            [--solo-materia] [--denoise] [--csv CSV]
+                            [--diaglog DIAGLOG]
+soliton_simulator.py: error: unrecognized arguments: --scala-min-passo --peq-esatto --peq-nascita-locale --coes-causale --anom-simm --coes-adim --ritmo-wrap-2pi --tempo-unico-mitosi
 
-lavoratore uscito con 1
+lavoratore uscito con 2

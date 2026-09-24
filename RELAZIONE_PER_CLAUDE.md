@@ -15272,3 +15272,56 @@ a quello del referto.
 **E `C4` è fatto:** l'argv e `--sep` si **leggono dal driver** — `csv/_testa_driver.py`, che
 esegue la testa vera fino a `_applica_flag`. **Un posto solo**, perché ricostruirla sarebbe una
 seconda formula per la stessa cosa. *(Il sigillo del driver ha ancora la sua copia: in coda.)*
+
+---
+
+# ✅ `D-a` — `--sep` **4.0**: `NUDA = CAMPAGNA` senza più nessuna differenza
+
+```
+NUDA     (38 elementi)
+CAMPAGNA (38 elementi)
+✅ NESSUNA DIFFERENZA: le due argv COINCIDONO opzione per opzione.
+ESITO: 12/12 (obbligatorie + escluse + orfane + argv intera)
+```
+
+**E la ragione del `"8"` era SCADUTA esattamente come quella di `CHICOOP`:** il default doveva
+riprodurre il comportamento attuale verbatim, e **ogni** comando di campagna passava
+`--sep=4.0`.
+
+## ✅ E LA PROVA DI `C1`, RIFATTA SULLA SCENA NUOVA, SI AGGANCIA AL REFERTO
+
+```
+--sep del driver, letto dal sorgente: 4.0
+IDENTICI BIT A BIT       = True     elementi diversi: 0 su 525973
+min(d_off)/LAM           = 0.012098
+archi con d_off < LAM    = 223380 su 525973 (42.47 %)
+archi con d_on == LAM    = 223380
+```
+
+> ### **`223 380` è il numero esatto del referto, e i due conteggi coincidono.**
+> **Ora «sono gli stessi archi» è provato, non dedotto.**
+
+---
+
+# ⚠ IL SIGILLO DI `CHI_COOP` **NON È PIÙ RIGIRABILE, E NON PER L'ARGV** — *e la mia patch era sbagliata*
+
+Avevo aggiunto le otto cure alla sua argv credendo che bastasse. **Il rigiro lo smentisce:**
+
+```
+soliton_simulator.py: error: unrecognized arguments: --scala-min-passo --peq-esatto
+  --peq-nascita-locale --coes-causale --anom-simm --coes-adim --ritmo-wrap-2pi
+  --tempo-unico-mitosi
+```
+
+**Il braccio `A` è un simulatore VECCHIO** *(`79be011`, sha1 grezzo `b46835bd`)* **che quelle
+opzioni non le ha**, e l'argv è **una sola** per i due bracci.
+
+> ### **IL PROBLEMA È STRUTTURALE:**
+> - **senza** le cure, il braccio nuovo **si schianta** su `d >= LAM` *(`Z148`)*;
+> - **con** le cure, il braccio vecchio **non parte**;
+> - **darle a uno solo** farebbe differire i bracci **per le cure** invece che per `CHI_COOP`:
+>   **il confronto non direbbe più niente.**
+>
+> **Ho RITIRATO la mia patch e l'ho dichiarato NON RIGIRABILE invece di truccarlo. E NON
+> spengo l'invariante:** spegnerlo nasconderebbe proprio la misura di `Z148`.
+> **È un `Z31` NUOVO**, non un'omissione di inventario — e sta in `CURE VERIFICATE`.

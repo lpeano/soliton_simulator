@@ -75,17 +75,26 @@ if "--lavoro" in sys.argv:
                 "--fork-su2-mem", "--cs-dinamico", "--tau-luce", "--rumore-colorato",
                 "--pav-com", "--guscio-morbido", "--zeta-vir", "--chi-basc", "--plast-din",
                 "--viriale", "--olon-part",
-                # [2026-09-24, `Z148`] LE CURE CHE IL DRIVER ACCENDE. **Senza, questo sigillo
-                # SI SCHIANTA** sull'invariante `d >= LAM`, che `E4-LAM` ha reso
-                # incondizionato: `223 396` archi su `526 047` sotto `LAM` gia' al passo 1.
-                # **Non e' il sigillo a essere rotto: era la sua argv ferma a prima che le
-                # cure esistessero** -- la stessa famiglia del `23/23` dello Strato 1 che non
-                # aveva mai esercitato `cs`.
-                # **NON si spegne l'invariante:** spegnerlo nasconderebbe proprio la misura
-                # di `Z148`, cioe' che la legge regge PERCHE' una cura e' accesa.
-                "--scala-min-passo", "--peq-esatto", "--peq-nascita-locale",
-                "--coes-causale", "--anom-simm", "--coes-adim",
-                "--ritmo-wrap-2pi", "--tempo-unico-mitosi",
+                # ⚠⚠ [2026-09-24] **QUESTO SIGILLO NON E' PIU' RIGIRABILE, E NON PER L'ARGV.**
+                # Avevo aggiunto qui le otto cure del driver, credendo che bastasse: **era
+                # SBAGLIATO, e la prova e' il rigiro** --
+                #   `soliton_simulator.py: error: unrecognized arguments: --scala-min-passo
+                #    --peq-esatto ... --tempo-unico-mitosi`
+                # perche' **il braccio A e' un simulatore VECCHIO** (`79be011`, sha1 grezzo
+                # `b46835bd`) **che quelle opzioni non le ha**. L'argv e' UNA SOLA per i due
+                # bracci, e non puo' essere valida per entrambi.
+                #
+                # **IL PROBLEMA E' STRUTTURALE, non di argv:**
+                #   * SENZA le cure, il braccio B (simulatore di OGGI) **si schianta**
+                #     sull'invariante `d >= LAM`, che `E4-LAM` ha reso incondizionato
+                #     (**`Z148`**: `223 380` archi nascono sotto `LAM`);
+                #   * CON le cure, il braccio A **non parte**.
+                #   * e darle a UNO SOLO dei due farebbe differire i bracci **per le cure**
+                #     invece che per `CHI_COOP`: **il confronto non direbbe piu' niente.**
+                #
+                # **Quindi si dichiara NON RIGIRABILE** invece di truccarlo, e **NON si
+                # spegne l'invariante**: spegnerlo nasconderebbe proprio la misura di `Z148`.
+                # **E' un `Z31` NUOVO**, non un'omissione di inventario.
                 ] + (["--chi-coop"] if coop else [])
     import importlib.util as _iu
     _sp = _iu.spec_from_file_location("_sim_x", simp)

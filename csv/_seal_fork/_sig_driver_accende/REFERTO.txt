@@ -49,19 +49,13 @@ L'ARGV INTERA: NUDA contro CAMPAGNA -- **non solo le cure**
   NUDA     (38 elementi)
   CAMPAGNA (38 elementi)
 
-  ⚠ **DIFFERENZE: 1**
-
-    opzione                    NUDA             CAMPAGNA        
-    --sep                      8                4.0             
-
-  **OGNI DIFFERENZA VA SPIEGATA O TOLTA.** Una che resta senza motivo e' un modo
-  diverso di lanciare, e la decisione di Luca dice che ce ne deve essere UNO SOLO.
-  (elementi solo in CAMPAGNA: 1, solo in NUDA: 1 -- conteggio grezzo)
+  ✅ **NESSUNA DIFFERENZA: le due argv COINCIDONO opzione per opzione.**
+  (elementi solo in CAMPAGNA: 0, solo in NUDA: 0 -- conteggio grezzo)
 
 ============================================================================================
-ESITO: 11/12 (obbligatorie + escluse + orfane + argv intera)
+ESITO: 12/12 (obbligatorie + escluse + orfane + argv intera)
 ============================================================================================
-*** IL DRIVER NON LE ACCENDE: reperto, commit, STOP. ***
+*** IL DRIVER LE ACCENDE. ***
 
 !! COSA QUESTO SIGILLO NON DICE: che le cure siano GIUSTE, ne' che il flag FUNZIONI.
    Quelli sono i sigilli di ciascuna cura. Questo dice che ACCADONO nei run --

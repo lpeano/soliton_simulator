@@ -92,9 +92,12 @@ CURE = [
      "driver **non poteva vederla**: era passata `=on` da ogni comando di campagna mentre il "
      "default del driver diceva `\"off\"`. **ORFANO FUORI DALLA LISTA** -- il caso che il "
      "controllo delle orfane doveva impedire *(rilievo di Luca)*. "
-     "**⚠ E IL SUO SIGILLO NON E' RIGIRABILE COM'ERA:** `csv/_seal_fork/_sigillo_chicoop.py` "
-     "si schiantava sull'invariante `d >= LAM` perche' la sua argv era ferma a prima delle "
-     "cure (**`Z148`**). **Argv aggiornata; l'esito va RIPRESO.** "
+     "**⚠⚠ E IL SUO SIGILLO NON E' PIU' RIGIRABILE, e NON per l'argv:** confronta il "
+     "simulatore di OGGI con uno **VECCHIO** (`b46835bd`) che le opzioni delle cure **non le "
+     "ha**. Senza le cure il braccio nuovo **si schianta** su `d >= LAM` (**`Z148`**); con le "
+     "cure il braccio vecchio **non parte**; darle a uno solo farebbe differire i bracci **per "
+     "le cure** invece che per `CHI_COOP`. **DICHIARATO NON RIGIRABILE invece che truccato: e' "
+     "un `Z31` NUOVO.** "
      "Ora **ACCESA DAL DRIVER** *(`--chi-coop`)*"),
     ("TEMPO_UNICO_MITOSI", "**`CURA 2`** UN SOLO OROLOGIO dentro `mitosi()`",
      "⏸ *(l'esito si legge dal referto)*", "csv/_seal_fork/_sig_cura2/REFERTO.txt",
