@@ -15424,3 +15424,20 @@ vedrà.**
 **Non copre:** la **mitosi**, che crea archi per conto suo *(`N3` lo rileverebbe, la cura non lo
 tocca)* · `semina()` *(voce `H`)* · e la strada alternativa **Poisson-disk**, dichiarata **non
 presa**, non esclusa.
+
+---
+
+# ❗ `A13` — **«`LAM` È LA SCALA DI PLANCK DEL SISTEMA»** *(tuo assioma, 2026-09-24)*
+
+In `doc/ASSIOMI.md`, **verbatim**. *«Sotto `LAM` non esiste niente: né archi né distanze fra
+nodi, nemmeno alla semina.»*
+
+**È un assioma, non una misura:** non si verifica, **si impone**, e tutto ciò che lo viola è un
+difetto **per definizione**. Quattro conseguenze scritte: `d >= LAM` *(già verificato da
+`E4-LAM`)* · **`|pos_i − pos_j| >= LAM` per ogni COPPIA, connessa o no** · **alla semina come a
+ogni altro istante** · **e qualunque costante tarata entro un raggio `< LAM` è tarata sotto la
+scala di Planck**.
+
+> ### **LO STATO ALLA DATA DELL'ASSIOMA: il `99.96 %` dei nodi nasce più vicino di `LAM` a un
+> ### altro nodo, con mediana `0.135·LAM`.** Il sistema nasce **~7.4 volte più fitto della
+> ### propria scala di Planck**, e **lo è sempre stato.**

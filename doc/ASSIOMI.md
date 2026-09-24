@@ -1,5 +1,48 @@
 # ASSIOMI — vincoli sulla forma delle leggi
 
+---
+
+## `A13` — ❗ **`LAM` È LA SCALA DI PLANCK DEL SISTEMA** *(decisione di Luca, 2026-09-24)*
+
+> ### **«LAM è la scala di Planck del sistema.»**
+>
+> **Sotto `LAM` non esiste niente: né archi né distanze fra nodi, nemmeno alla semina.**
+
+**È un ASSIOMA, non una misura**, e per questo sta qui e non nel registro dei difetti: non si
+verifica, **si impone**, e tutto ciò che lo viola è un difetto **per definizione**.
+
+### COSA NE DISCENDE, e sono conseguenze non opinioni
+
+1. **`d >= LAM` per ogni arco** — già verificato SEMPRE da `E4-LAM` *(`6/6`)*;
+2. **`|pos_i − pos_j| >= LAM` per ogni COPPIA di nodi**, e **non solo per le coppie
+   connesse**: una distanza sotto `LAM` non esiste, che ci sia un arco o no;
+3. **alla SEMINA come a ogni altro istante.** Un punto di partenza che viola l'assioma è un
+   sistema che nasce fuori dalla propria fisica;
+4. **qualunque costante tarata su un numero di nodi entro un raggio `< LAM`** è tarata **sotto
+   la scala di Planck**, e **non si può usare**.
+
+### ⚠ LO STATO ALLA DATA DELL'ASSIOMA — **misurato, non supposto**
+
+*(`csv/_test_fork/_geometria_semina.py`, blob `49fc54d2`, passo ZERO)*
+
+```
+distanza al PRIMO VICINO fra le posizioni:  p50 = 0.107721   min = 0.009679
+LAM = 0.800000                              mediana/LAM = 0.134651
+sotto LAM = 2390 nodi su 2391  (99.96 %)
+```
+
+> ### **IL `99.96 %` DEI NODI NASCE PIÙ VICINO DI `LAM` A UN ALTRO NODO.**
+> **La mediana è `0.135·LAM`: il sistema nasce ~`7.4` volte più fitto della propria scala di
+> Planck.** **L'assioma è violato al passo zero, e lo è sempre stato.**
+
+### ⚠ E UNA CONSEGUENZA CHE COLPISCE UNA COSTANTE — `massa_critica_collasso`
+
+Chiede **~`621` nodi in una sfera di raggio `LAM`**. Con distanza minima `LAM` **ne entrano circa
+una dozzina**. **È TARATA SOTTO LA SCALA DI PLANCK, e da questo assioma NON SI PUÒ USARE.**
+**Non si tocca** *(decisione di Luca)*: si **marca**, e si elencano i suoi usi.
+
+---
+
 **Stato: BOZZA, non ancora passata al vaglio.** Nessuno di questi e' derivato da un principio piu'
 alto. **Non sono generativi** (gli assiomi di Peano lo sono: cinque enunciati da cui l'aritmetica
 discende): **questi sono RESTRITTIVI** — dicono cosa una legge **non puo'** essere. **Finche' non
