@@ -13931,3 +13931,60 @@ MAGNITUDINE**, e la forma di Poisson non va bene per lui.
 `1/tau_pp` ha mediana vicina a `1`; **`dt_e/DT` ha mediana misurata `≈ 0.68`** *(`Z135`)*.
 **Il tasso di mitosi può calare di circa un terzo.** **Non metto un fattore di
 normalizzazione**: sarebbe un numero scelto.
+
+### ㉤ **Le due precisazioni del guardiano: la seconda è un doppio conteggio, e lo correggo**
+
+### **(1) `cs_arco` è una LOCALE di `step()`: hai ragione, e cambia tre cose**
+
+Non è un attributo (`:4774`), quindi in `mitosi()` `tau_arco = d/cs_arco` va **ricostruito da
+`self._cs_nodo_prev`** — classe **`A8b`**, la stessa che fu **stale al `71.88 %`**.
+
+| | |
+|---|---|
+| **una sola formula** | si **estrae** `_cs_arco_da_nodo(cs_nodo, i, j)`, e la chiamano **`step()` E `mitosi()`**. È l'argomento del docstring di `_tempo_luce_nodo`: *«duplicarla avrebbe significato avere **due leggi che possono divergere**»* |
+| **la guardia si CONTA** | quattro numeri: invocazioni, salti, **forma**, **quando**. **Il fallback è `CS_M`**, e non è nuovo: è ciò che `step()` fa già a `:4778` con `CS_DINAMICO` spento |
+| **il sigillo prova l'estrazione** | a flag **spento**, `step()` deve restare **byte-identico**. **Non è ovvio:** un'estrazione può cambiare l'ordine delle operazioni in virgola mobile |
+
+### **(2) SÌ, È UN DOPPIO CONTEGGIO. Non lo giustifico: lo correggo.**
+
+> **Un'INTENSITÀ D'EQUILIBRIO non può dipendere dalla DURATA del passo: se dipendesse, la stessa
+> condizione fisica darebbe un equilibrio diverso a seconda di quanto batte l'orologio locale.
+> Una PROBABILITÀ PER PASSO, invece, DEVE dipenderne.**
+
+`rep` è il **bersaglio** di un rilassamento, cioè un **equilibrio**. `prob` è una probabilità
+**nel passo**, cioè un **conteggio**. Due tipi diversi, e il tempo entra **solo nel secondo**.
+
+```
+ampiezza_int = salita * discesa                    # INTENSITA'    (senza tempo)
+ampiezza_ev  = ampiezza_int * (dt_e / DT)          # EVENTI ATTESI (con il tempo)
+
+rep   = clip(-ampiezza_int * segno, 0, 1)          # equilibrio
+prob  = 1 - exp(-max(ampiezza_ev * segno, 0))      # per passo
+_rep <- rep + (_rep - rep) * exp(-dt_e / tau_arco) # il tempo entra QUI, nella VELOCITA'
+```
+
+### ✅ **E così la cura chiude un difetto che né io né il mandato avevamo nominato**
+
+**Oggi** `ampiezza = salita·discesa·(1/tau_pp)` e `rep = clip(−ampiezza·segno, 0, 1)`: quindi
+**l'equilibrio della repulsione dipende GIÀ da un fattore che il commento chiama «ritmo»** — ed
+è la **terza** dipendenza da `|tw|` nello stesso bersaglio, dopo `salita` e `discesa`.
+**Togliendo il fattore di tempo restano le due che sono la legge**, e l'equilibrio smette di
+dipendere dall'orologio.
+
+### ⚠ **E una cosa che ho verificato invece di assumerla: il clip su `rep` MORDE**
+
+Volevo dichiararlo inerte *(lato superiore inarrivabile)* o sostituirlo con `tanh`. **Ho
+controllato:**
+
+| | |
+|---|---|
+| `satura(f) = f/(1 + GAMMA·|f|)` | → **`1/GAMMA`** per `f → ∞` |
+| **`GAMMA = 0.05`** | → **`salita < 20`**, non `< 1` |
+
+**Quindi il clip a `1` è raggiungibile, e non di poco.** Resta in questa cura, e **la sua
+sostituzione si decide su una MISURA**: `tanh` e il clip **coincidono dove il clip non morde**.
+**Il criterio `K` conta quante volte morde** — esteso da `prob` anche a `rep` — **e poi decidi
+tu.**
+
+> **Se non avessi controllato `GAMMA` avrei scritto che il clip è inerte, e sarebbe stato
+> falso.**
