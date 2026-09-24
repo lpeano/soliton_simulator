@@ -14365,3 +14365,34 @@ automaticamente meglio quando il SEGNO cambia**, e chi indaga quel fronte deve s
 inverte.** → punti **`V8`** e **`V9`** della verifica.
 
 > **Non scelgo io, e non perché sia prudenza: perché il numero che decide non è misurato.**
+
+### ㉬ **La terza forma, `1 + tanh(x)`: tutte e quattro le proprietà reggono, e DOMINA Itô**
+
+> Verificata collo **stesso strumento** e gli stessi punti `V8`/`V9`. **Nessun codice.**
+
+| | verifica |
+|---|---|
+| **deriva** | **`0.000000000000000e+00`** a ogni `s` provato — **zero ESATTO in macchina**. `(1+tanh x)+(1+tanh(−x)) = 2` **per disparità**: non è un'approssimazione, è un'identità |
+| **monotona** | **`0` incrementi negativi su `6000`** in `[−3,3]` *(Itô: `2000` su `3000`)* |
+| **mai sotto `LAM`** | `1 + tanh(x) ∈ (0, 2)`: `x = −50 → ~0⁺`, `x = +50 → 2.000000` |
+| **fedeltà** | `1 + x − x³/3 + …`, **nessun termine in `x²`**. E a `x = 0.3` l'eccesso è **`−8.687e-03`** contro il **`−9.538e-03`** di Itô: **un po' PIÙ fedele** |
+| **limite** | una salita **al più RADDOPPIA** `(d−LAM)`. È una **saturazione** *(`A11` cor.6)*, **ma meno restrittiva del `√e` di Itô** e **senza la non-monotonia** |
+
+### ❗ **Le tre a confronto, e ne resta una di troppo**
+
+| | deriva | monotona | fedeltà | tetto salita |
+|---|---|:--:|---|---|
+| **piana** `exp(x)` | `+s²/2` *(2°, POS)* | **✅** | `+x²/2` | **nessuno** |
+| **Itô** `exp(x−x²/2)` | `−s⁴/12` *(4°, NEG)* | **❌** | `O(x³)` | `1.6487` |
+| **tanh** `1+tanh(x)` | **`0` ESATTO** | **✅** | `O(x³)` | `2` |
+
+> **`tanh` domina `Itô` su OGNI asse**: deriva più piccola, monotona *(Itô no)*, stessa
+> fedeltà *(anzi migliore)*, tetto **meno** restrittivo. **Quindi Itô esce dal confronto** —
+> non c'è nessun asse su cui sia preferibile.
+
+### **La scelta vera è fra `piana` e `tanh`, e si riduce a una domanda sola**
+
+> **`piana` non ha tetto ma HA deriva. `tanh` non ha deriva ma SATURA a `2`.**
+
+**La decide la distribuzione di `|dx|/d`** — `V8`/`V9` — **e la decidi tu dopo quella misura.**
+Non prima: senza quel numero **non c'è una base derivata**, e sceglierei per gusto.
