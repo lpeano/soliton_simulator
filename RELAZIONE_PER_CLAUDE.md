@@ -13988,3 +13988,57 @@ tu.**
 
 > **Se non avessi controllato `GAMMA` avrei scritto che il clip è inerte, e sarebbe stato
 > falso.**
+
+### ㉥ **Due correzioni prima del codice: un clamp che NASCE, e i quantili di `d/d0`**
+
+### ❌ **Correzione mia: i clamp non sono «due che spariscono». Uno sparisce, uno NASCE.**
+
+Avevo scritto che *«due clamp spariscono per costruzione»*. **Il secondo era falso.**
+
+| clamp | verdetto |
+|---|---|
+| `max(tau_pp, 1e-12)` | **era CODICE MORTO**: `tau_pp = 1 + |tw|/PHI_CRIT` con `|tw| ≥ 0` → **`tau_pp ≥ 1` sempre**. Sparisce, **e non proteggeva nulla** |
+| `max(tau_arco, 1e-12)` | **NASCE, ed è VIVO**: `tau_arco = d/cs_arco` si annulla se `d = 0` |
+
+**È un clamp in PIÙ, non in meno.** E `d ≥ LAM` vale **solo con `SCALA_MIN` o
+`SCALA_MIN_PASSO` accesi** — **una dipendenza, non una costruzione.**
+
+**Misurato nel giro di `CURA 1`:**
+
+| | |
+|---|--:|
+| `LAM` | **`0.8`** |
+| `min(d)` | **`0.800000`** — **esattamente `LAM`** |
+| archi con `d < LAM` | **`0` su `526302`** |
+
+**Quindi nei run il clamp non morde — ma per via di un FLAG, non per costruzione.** Lo scrivo,
+**lo CONTO**, e dichiaro da dove viene la garanzia.
+
+> **⚠ E il mio conto precedente era sbagliato anche nel numero:** avevo scritto
+> `min(d)/LAM = 2.0000` perché il mio script aveva **`LAM = 0.4` cablato a mano** invece di
+> leggerlo dal sorgente. **`LAM` è `0.8`**, e il rapporto è **`1.0000`**.
+> *(`P1-ter`: un numero ricopiato a mano non ha provenienza. Vale anche per me quando lo
+> «ricordo» dentro uno script.)*
+
+### ✅ **E il tuo rilievo su `d/d0`: la mediana da sola nasconde la compensazione**
+
+*«La mediana è un riassunto globale di un rapporto locale: può nascondere compressione e
+stiramento che si compensano.»* — quindi il criterio `R` ora chiede **`p10`, mediana, `p90`**
+e la **divisione per classe d'arco**.
+
+**E uso la convenzione di `G1`-`G2`, non una nuova**
+*(`csv/_test_fork/_dove_spinge_la_gravita.py:72-78`)*:
+
+| classe del nodo | indice |
+|---|---|
+| **VUOTO** | `< 900` |
+| **MASSA seminata** | `< 2391` |
+| **NATO** durante il run | `≥ 2391` |
+
+e l'arco prende la **coppia** delle due classi: `vuoto-vuoto`, `massa-massa`,
+**`CONFINE vuoto-massa`**, `CONFINE con nato`, `altro`. **È la stessa con cui `Z105` ha trovato
+che il saldo della gravità vive sul confine** *(`−1.4150`/arco, il `107 %` del totale)*.
+
+> **E `A2` resta rispettato:** le statistiche globali stanno **solo nel referto**. Le grandezze
+> che la legge tocca — `ampiezza_int`, `ampiezza_ev`, `rep`, `prob`, `_rep`, `grad_r` —
+> **non leggono nessuna statistica globale.**
