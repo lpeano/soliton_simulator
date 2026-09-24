@@ -502,6 +502,19 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 
 <!-- SCHEDA nome=tempo-proprio funzioni=ritmo,_cli,_applica_flag flag=TAU_LOC,TEMPO_SEGNO,TEMPO_PROPRIO_ORIENTATO,RITMO_WRAP_2PI -->
 
+> ### ➜ **`CURA 2` PASSA DI QUI, e questa scheda deve dirlo** *(2026-09-24, blob `b881db89`)*
+>
+> `_cli` e `_applica_flag` acquisiscono **`--tempo-unico-mitosi`** *(con `TEMPO_UNICO_MITOSI`
+> nel `global`, come `RITMO_WRAP_2PI`: senza, l'assegnamento creerebbe una locale e il flag
+> sarebbe **silenziosamente inerte** — il difetto documentato di `--tau-a`)*. **La legge sta in
+> scheda ⑨**; qui resta il rimando, perché `REG-R` mappa **per funzione**.
+>
+> **⚠ E C'È UN LEGAME DI SOSTANZA, non solo di funzione: `CURA 2` prende il suo orologio da
+> QUI.** `_r_nodo_mitosi` legge `_r_corrente`, cioè l'`r` che **`ritmo()` di questa scheda
+> produce**; e il `tau_nodo` che la cura **sostituisce** è **identico al ramo `TEMPO_SEGNO`**
+> — un ramo di **questa** scheda **che non gira** *(`Z130`)*. **La mitosi usava come «tempo
+> proprio» la definizione di tempo che il resto del sistema ha SCARTATO.**
+
 > ## ✅ **`RITMO_WRAP_2PI` È APPROVATA — decisione di Luca, 2026-09-24**
 >
 > **Da oggi il driver la accende in OGNI run** *(`--ritmo-wrap-2pi`, cablato in
@@ -634,6 +647,21 @@ avvertimento.**
 > **⚠ QUESTA SCHEDA RIVENDICA `step` IN VIA PROVVISORIA:** `step` fa **tutto**, e attribuirlo
 > alla fase è improprio. Lo tiene perché `REG-R` mappa **per funzione** e i due siti di `φ`
 > vivono lì. **Quando `step` avrà la sua scheda, il marcatore si divide.**
+>
+> ### ➜ **E `CURA 2` HA TOCCATO `step`, con una modifica SENZA FLAG** *(2026-09-24)*
+>
+> La media **armonica** d'arco di `:4791` — `cs_arco = 2·cs_i·cs_j/(cs_i+cs_j)`, il *«collo di
+> bottiglia causale»* — è stata **ESTRATTA nel metodo `_cs_arco_da_nodo`** e `step()` ora lo
+> **chiama**, **senza che l'espressione cambi di una virgola**. Motivo: `mitosi()` ne ha
+> bisogno per `tau_arco = d/cs_arco`, e **duplicarla avrebbe dato due leggi che possono
+> divergere**.
+>
+> **⚠ NON È GATED DA NESSUN FLAG**, quindi nessun sigillo di byte-inerzia del *flag* la copre:
+> **la copre solo `T4`**, che confronta il run a flag SPENTO col riferimento `_cura1_corto`.
+> **Se `T4` fallisce, il primo sospetto è questa estrazione, non la cura.**
+>
+> *(E conferma ciò che questa scheda dice già: `step` fa troppe cose perché una sola scheda lo
+> rivendichi. La divisione del marcatore resta in coda.)*
 
 ## LA REGOLA DI FONDO *(decisione di Luca, 2026-09-22)*
 
@@ -732,6 +760,21 @@ non c'è niente da cambiare lì.**
 
 > **STATO: `DIFETTOSA`.** Difetti **`D35`** *(l'antifase della coppia)* e **`D33`** *(la
 > repulsione che si spegne al tetto)*. Piu' **`D03`** per la parte di `_rep`.
+>
+> ### ➜ **`CURA 2` MODIFICA `mitosi()`, e la legge sta in scheda ⑨** *(2026-09-24)*
+>
+> Quattro rami gated su **`TEMPO_UNICO_MITOSI`** *(spento di default)*: `grad_tau`, il fattore
+> di tempo di `ampiezza`, la forma di `prob`, il bersaglio e il rilassamento di `_rep`.
+> **I quattro usi di `tau_pp` come POSIZIONE sull'asse della torsione** — `tau_soglia`,
+> `tau_tetto`, `centro`, `segno`, cioè **la forma riportata qui sotto** — **NON sono toccati**,
+> e il sigillo lo verifica **dall'AST** *(`T3`)*, non a parola.
+>
+> **⚠ E `D33` È DENTRO IL PERIMETRO DELLA CURA:** *«la repulsione che si spegne al tetto»* vive
+> su `_rep`, che `CURA 2` cambia in **due** punti — il bersaglio *(ora senza il fattore di
+> tempo)* e l'integratore *(ora esatto invece che Eulero)*. **La cura NON dichiara di curare
+> `D33`**, e il criterio `R` misura proprio **quanto `d0` si allarga**: la previsione di Luca è
+> **×2.5-×3** sul bersaglio. **Se `D33` si muovesse, sarebbe un effetto collaterale da
+> RIPORTARE, non un merito da rivendicare.**
 
 ## LA FORMA — copiata dal codice
 
@@ -949,7 +992,7 @@ uno stato parziale sul disco.
 
 ---
 
-<!-- SCHEDA nome=tempo-nella-mitosi funzioni=mitosi flag=TEMPO_UNICO_MITOSI,MITOSI_DIR -->
+<!-- SCHEDA nome=tempo-nella-mitosi funzioni=mitosi,_cs_arco_da_nodo,_r_nodo_mitosi,_fattore_tempo_arco,_tau_arco_causale flag=TEMPO_UNICO_MITOSI,MITOSI_DIR -->
 
 # ⑨ IL TEMPO NELLA MITOSI — **`CURA 2`**
 
@@ -1368,9 +1411,64 @@ Il fallback è **`dt_e/DT = 1`**, cioè *«nessuna dilatazione»*: la stessa con
 | **`G`** | **dove nasce la materia rispetto al gradiente di `r`** | richiesta di Luca. **Si RIPORTA**, non si giudica |
 | **`R`** | **`d0` e `d/d0` con i QUANTILI (`p10`, mediana, `p90`) e la divisione VUOTO / CONFINE / MASSA**, più il **TERMINE DELLA REPULSIONE nel bilancio**, contro `_cura1_corto` | **richiesta di Luca, 2026-09-24**, e la previsione è **sua e derivata**: togliere il fattore di tempo dal bersaglio di `rep` **ALZA l'equilibrio della repulsione**, che **allarga `d0`**. **Quanto:** il bersaglio viene moltiplicato per `tau_pp = 1 + |tw|/PHI_CRIT`, e nel regime repulsivo `tau_pp > centro = 2.5`, quindi **circa ×2.5-×3**. **Si RIPORTA il verso e l'ampiezza**, e se `d0` si allarga **non è una sorpresa: è la previsione**. **⚠ E LA MEDIANA DA SOLA NON BASTA — rilievo di Luca, 2026-09-24:** *«la mediana è un riassunto GLOBALE di un rapporto LOCALE: può nascondere compressione e stiramento che si COMPENSANO»*. Quindi **`p10`, mediana, `p90`** e la **divisione per classe d'arco**, con la **stessa convenzione di `G1`-`G2`** *(`csv/_test_fork/_dove_spinge_la_gravita.py:72-78`: nodo `< 900` = **VUOTO**, `< 2391` = **MASSA seminata**, oltre = **NATO**; l'arco prende la coppia delle due classi)* — **non una convenzione nuova**. **E `A2` vale: statistiche globali SOLO nel referto, MAI nella legge.** La legge tocca `ampiezza_int`, `ampiezza_ev`, `rep`, `prob`, `_rep`, `grad_r`: **nessuna di queste legge una statistica globale.** |
 | **`C`** | la **guardia** di `_r_corrente`: quante volte salta, e **quando** | `A8`. Se salta **fuori dal transitorio**, il referto **non si legge** |
+| **`V8`/`V9`** | **la distribuzione di `\|dx\|/d`** — `p50`/`p90`/`p99`/`p99.9`, `max`, e la quota `> 0.5`, `> 1`, `> 2` — **separata per SALITE e DISCESE** | **decisione di Luca, 2026-09-24: SENZA UN RUN IN PIÙ.** L'involucro del bilancio avvolge già `_smorza` e vede ogni `(dx, prima)`: il numero che sceglie fra `piana` e `tanh` *(scheda ⑪)* **si raccoglie qui dentro**. Criterio committato **prima** in `2c4da47` |
 
 **Riferimento: `csv/_test_fork/_cura1_corto`** — stessa configurazione, `CURA 1` accesa, questo
 flag **spento**. **Differisce per UN interruttore.**
+
+---
+
+## 10. IL CODICE, COM'È STATO SCRITTO — *2026-09-24, blob `b881db89`*
+
+### 10.1 QUATTRO METODI NUOVI, e ciascuno esiste per non avere DUE leggi
+
+| metodo | cosa fa | perché è un metodo e non una riga |
+|---|---|---|
+| **`_cs_arco_da_nodo`** | media **armonica** del `cs` sui due estremi | **ESTRATTA da `step()` `:4791` senza cambiarne una virgola.** `mitosi()` ne ha bisogno per `tau_arco = d/cs_arco`; **duplicarla avrebbe significato due leggi che possono divergere** — lo stesso argomento del docstring di `_tempo_luce_nodo`. **`T4` prova che l'estrazione non ha cambiato un bit** |
+| **`_r_nodo_mitosi`** | l'orologio **per nodo**, per il gradiente | guardia **contata `A8`**: invocazioni, salti, **forma** al fallimento, **quando** |
+| **`_fattore_tempo_arco`** | `dt_e/DT` per arco | **LETTO da `_dt_e_ultimo`, NON ricalcolato.** Ricalcolarlo sarebbe **una seconda formula per lo stesso tempo** |
+| **`_tau_arco_causale`** | `d / cs_arco`, e **ha le unità di un TEMPO** | `[LAM]/[LAM/DT] = [DT]`. **NESSUN CLAMP**, ed è una decisione di Luca: `d ≥ LAM` è una **LEGGE** *(`E4-LAM`)* e `cs > 0` è **derivato** |
+
+### 10.2 LE QUATTRO MODIFICHE GATED, tutte dentro `mitosi()`
+
+```
+:5297   grad_tau   da |tw| per nodo  ->  da r per nodo  (_r_nodo_mitosi)
+:5370   ampiezza   * 1/tau_pp        ->  * dt_e/DT      (_fattore_tempo_arco)
+        prob       clip(resp,0,1)    ->  1 - exp(-max(resp,0))     [Poisson]
+:5387   rep        bersaglio da resp ->  da resp_int (SENZA il tempo)
+:5438   _rep       Eulero con tau_pp ->  forma ESATTA con tau_arco  [S12]
+```
+
+> **⚠ E IL FATTORE DI TEMPO ENTRA UNA VOLTA SOLA, non due — è il rilievo di Luca del `e11602d`.**
+> `rep` è il **BERSAGLIO di un rilassamento**, cioè un **EQUILIBRIO**: non può dipendere dalla
+> **durata** del passo, senno' la stessa condizione fisica darebbe un equilibrio diverso a
+> seconda di quanto batte l'orologio locale. `prob` è una **probabilità NEL passo**, cioè un
+> **conteggio**: **deve** dipenderne. Per questo esistono `ampiezza_int` *(senza tempo)* e
+> `ampiezza` *(con)*, e il bersaglio legge la prima.
+
+### 10.2-bis ⚠ **I QUATTRO METODI SONO LEGGI, E `REG-R` LO HA PRETESO**
+
+Il primo tentativo di commit è stato **RIFIUTATO**: *«queste leggi non hanno una scheda»*, e
+le elencava tutte e quattro. **Aveva ragione, e non era una formalità** — sono quattro
+relazioni fisiche *(una media d'arco, un orologio per nodo, un fattore di tempo, un ritardo
+causale)*, e senza scheda si curerebbe alla cieca. **Sono entrate nel marcatore di questa
+scheda**, che è dove la loro legge è scritta.
+
+> **⚠ E UNA TENSIONE VA DICHIARATA, non nascosta: `_cs_arco_da_nodo` NON È SOLO DI QUESTA
+> SCHEDA.** La chiama anche `step()`, che appartiene alla ⑥, e la relazione vive in `step()`
+> **da prima della cura**. Sta qui perché **qui è stata scritta la sua derivazione**
+> *(armonica perché è un collo di bottiglia; aritmetica per il tempo, armonica per la
+> velocità)*. **È lo stesso caso della ⑥ che rivendica `step` «in via provvisoria», con lo
+> stesso rimedio: quando `step` avrà la sua scheda, il marcatore si divide.** Finché non
+> succede, **una modifica a questa media obbliga a toccare la ⑨ e non la ⑥**, e chi la cerca
+> partendo da `step()` deve passare dal rimando che la ⑥ ora porta.
+
+### 10.3 I CONTATORI `A8`, e girano **ANCHE A FLAG SPENTO**
+
+`_tum_clip_prob*`, `_tum_clip_rep*`, `_tum_eulero_gt1`/`_tot` sono **fuori dal gate**, di
+proposito: così **il «prima» del criterio `K` arriva dal giro di byte-inerzia del sigillo,
+senza un run in più**. Sono l'unica ragione per cui `T4` riporta dei campi *«non confrontati»*
+invece di zero.
 
 ---
 

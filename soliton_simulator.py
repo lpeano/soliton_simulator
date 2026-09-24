@@ -1232,6 +1232,18 @@ FASE_2PI = False        # [B1, 2026-09-22] CURA: `phi` e' una FASE ORDINARIA su 
                         #   lettura CADE e si scrive.
                         # Schede: `doc/REGISTRO_FISICA.md`, LA FASE `phi` E IL SUO DOMINIO,
                         #   e LA MITOSI E SCHWINGER.
+TEMPO_UNICO_MITOSI = False  # [CURA 2, 2026-09-24] UN SOLO OROLOGIO DENTRO `mitosi()`.
+                        # IL DIFETTO: `tau_pp = 1 + |tw|/PHI_CRIT` si chiama "tempo proprio
+                        # locale" ma e' una MISURA DI TORSIONE, e la mitosi la usa in DUE modi
+                        # incompatibili -- come TEMPO (il ritmo `1/tau_pp`, la costante di
+                        # rilassamento di `_rep`) e come POSIZIONE sull'asse di `tw` (la soglia,
+                        # il centro, l'inversione `segno`). Gli usi-TEMPO passano all'OROLOGIO
+                        # `dt_e` che il sistema gia' definisce (`:4369`); gli usi-TORSIONE
+                        # restano com'erano, perche' li' intenzione e implementazione COINCIDONO.
+                        # E `tau_nodo` (`:5206-5210`) e' IDENTICO al ramo `TEMPO_SEGNO` di
+                        # `ritmo()`, CHE NON GIRA (`Z130`): la mitosi usa come "tempo proprio"
+                        # la definizione di tempo che il resto del sistema ha SCARTATO.
+                        # Scheda 9 `tempo-nella-mitosi`. Default SPENTO.
 RITMO_WRAP_2PI = False  # [D34, 2026-09-22] CURA: il ramo SPINORIALE di `ritmo()` avvolge sul
                         # periodo GIUSTO. `np.angle` ha periodo `2pi`, quindi
                         #     a = angle(psi_spin) - angle(psi_spin_prec)   sta in (-2pi, 2pi]
@@ -4222,6 +4234,85 @@ class Rete:
         self._nb_ret = out
         return out
 
+    @staticmethod
+    def _cs_arco_da_nodo(cs_nodo, ii, jj):
+        """MEDIA ARMONICA del `cs` sui due estremi: il COLLO DI BOTTIGLIA CAUSALE d'arco.
+
+        **UNICO punto del file in cui questa relazione e' scritta.** Estratta da `step()`
+        (`:4791`) il 2026-09-24 **senza cambiarne una virgola**, perche' `mitosi()` ne ha
+        bisogno per `tau_arco = d/cs_arco` (`CURA 2`) e **duplicarla avrebbe significato avere
+        due leggi che possono divergere** -- lo stesso argomento del docstring di
+        `_tempo_luce_nodo`.
+
+        PERCHE' ARMONICA E NON ARITMETICA: e' un COLLO DI BOTTIGLIA. Il commento originale di
+        `step()` lo diceva gia', ed e' la ragione per cui il sistema ha DUE medie d'arco con
+        domini diversi: **aritmetica per il TEMPO** (`dt_e`), **armonica per la VELOCITA'**.
+        Non se ne inventa una terza.
+        """
+        return (2.0 * cs_nodo[ii] * cs_nodo[jj] /
+                np.maximum(cs_nodo[ii] + cs_nodo[jj], 1e-12))
+
+    def _r_nodo_mitosi(self):
+        """L'OROLOGIO per NODO, per il gradiente di tempo della mitosi. Guardia CONTATA (`A8`).
+
+        Il fallback e' `1` = "nessuna dilatazione", **la stessa convenzione che `ritmo()` usa
+        quando non c'e' un passato** (`np.ones`): non una convenzione nuova.
+        `_r_corrente` e' un array PER NODO attraversato da un punto di crescita, cioe' la
+        classe `A8b` di `_cs_nodo_prev` (71.88 %) e `_psi_spin_prec` (95.33 %): si contano
+        QUATTRO cose, non una -- invocazioni, salti, la FORMA al fallimento, e QUANDO.
+        """
+        n = self.n
+        self._tum_r_tot = getattr(self, "_tum_r_tot", 0) + 1
+        r = getattr(self, "_r_corrente", None)
+        if r is None or len(r) < n:
+            self._tum_r_salti = getattr(self, "_tum_r_salti", 0) + 1
+            self._tum_r_forma = (-1 if r is None else len(r), n)
+            self._tum_r_quando = self._tum_r_tot
+            return np.ones(n)
+        return np.asarray(r, dtype=float)[:n]
+
+    def _fattore_tempo_arco(self, n_archi):
+        """`dt_e/DT` per ARCO: il fattore di tempo proprio, **LETTO e non ricalcolato**.
+
+        `dt_e = DT*0.5*(r_i+r_j)` e' **IL** tempo d'arco del sistema (`:4369`), e `step()` lo
+        lascia in `_dt_e_ultimo`. Ricalcolarlo qui sarebbe **una seconda formula per lo stesso
+        tempo**, cioe' due leggi. Fallback `1` = nessuna dilatazione, CONTATO.
+        """
+        self._tum_t_tot = getattr(self, "_tum_t_tot", 0) + 1
+        dte = getattr(self, "_dt_e_ultimo", None)
+        a = None if dte is None else np.asarray(dte, dtype=float)
+        if a is None or a.ndim == 0 or len(a) != n_archi:
+            self._tum_t_salti = getattr(self, "_tum_t_salti", 0) + 1
+            self._tum_t_forma = (-1 if a is None else (0 if a.ndim == 0 else len(a)), n_archi)
+            self._tum_t_quando = self._tum_t_tot
+            return np.ones(n_archi)
+        return a / DT
+
+    def _tau_arco_causale(self, n_archi):
+        """Il RITARDO CAUSALE d'arco: `tau = d / cs_arco`, e **ha le unita' di un TEMPO**.
+
+        `[LAM] / [LAM/DT] = [DT]`. E' la stessa legge `tau = d/cs` che `FORK_SU2_MEM` usa per
+        il ritardo dei Bloch, **al livello dell'ARCO** invece che del nodo -- e li' `d` e
+        `cs_arco` sono DIRETTAMENTE disponibili, senza la media sul grado che la versione
+        nodale deve fare.
+
+        ** NESSUN CLAMP, ed e' una decisione di Luca**: `d >= LAM` e' una LEGGE (invariante
+        `C5`, verificato SEMPRE da `E4-LAM`) e `cs > 0` e' DERIVATO (`cs_floor > 0`,
+        `transizione in (0,1)` stretto). Se mai uno dei due fosse zero, e' il livello NUMERICO
+        (`np.seterr(divide='raise')`) a fermarsi **con la riga esatta**: `A11` dice di
+        sostituire il limite col RILEVAMENTO dell'errore, non di nasconderlo.
+        """
+        self._tum_cs_tot = getattr(self, "_tum_cs_tot", 0) + 1
+        csn = getattr(self, "_cs_nodo_prev", None)
+        if csn is None or len(csn) < self.n:
+            self._tum_cs_salti = getattr(self, "_tum_cs_salti", 0) + 1
+            self._tum_cs_forma = (-1 if csn is None else len(csn), self.n)
+            self._tum_cs_quando = self._tum_cs_tot
+            cs_arco = np.full(n_archi, CS_M, dtype=float)   # la convenzione di `:4795`
+        else:
+            cs_arco = self._cs_arco_da_nodo(np.asarray(csn, dtype=float), self.i, self.j)
+        return np.asarray(self.d, dtype=float)[:n_archi] / cs_arco
+
     def _tempo_luce_nodo(self, ii, jj):
         """TEMPO-LUCE per nodo: `tau = d_nodo / cs_nodo`. **E' una LEGGE, non un numero.**
 
@@ -4788,8 +4879,8 @@ class Rete:
                 # meccanismo di ritardo, coerente e innocuo. Scritta solo col flag ON (byte-identita').
                 self._cs_nodo_prev = cs_nodo.copy()
             # Collo di bottiglia causale: media armonica, non media aritmetica.
-            cs_arco = (2.0 * cs_nodo[i] * cs_nodo[j] /
-                       np.maximum(cs_nodo[i] + cs_nodo[j], 1e-12))
+            # [CURA 2] ESTRATTA in `_cs_arco_da_nodo`: la STESSA espressione, un solo posto.
+            cs_arco = self._cs_arco_da_nodo(cs_nodo, i, j)
             cs_max_corrente = float(np.max(cs_arco)) if len(cs_arco) else CS_M
         else:
             cs_arco = np.full(len(i), CS_M, dtype=float)
@@ -5203,12 +5294,28 @@ class Rete:
             # gradiente di tempo proprio LUNGO l'arco: differenza del tempo proprio nodale
             # fra i due estremi. tau_nodo alto = tempo lento = materia. Dove il gradiente
             # e' forte, la soglia si abbassa (la mitosi e' agevolata verso il tempo lento).
-            tau_nodo = np.zeros(self.n)
-            aw = np.abs(self.tw)
-            np.add.at(tau_nodo, self.i[self.i < self.n], aw[self.i < self.n])
-            np.add.at(tau_nodo, self.j[self.j < self.n], aw[self.j < self.n])
-            tau_nodo = 1.0 + tau_nodo / np.maximum(self._deg, 1) / PHI_CRIT
-            grad_tau = np.abs(tau_nodo[self.i] - tau_nodo[self.j])   # gradiente lungo l'arco
+            if TEMPO_UNICO_MITOSI:
+                # [CURA 2] IL GRADIENTE DI TEMPO SI PRENDE DALL'OROLOGIO, non da `|tw|`.
+                # Il commento qui sopra dice "gradiente di TEMPO PROPRIO", ma `tau_nodo` e'
+                # `1 + mean(|tw|)/PHI_CRIT`, cioe' ESATTAMENTE la formula del ramo
+                # `TEMPO_SEGNO` di `ritmo()` -- CHE NON GIRA (`TEMPO_SEGNO = False` in 9 run
+                # su 11, `Z130`). Intenzione TEMPO, implementazione TORSIONE.
+                # SI PRENDE `r` E NON `1/r`, e la ragione e' un conto, non una preferenza:
+                #   r    in [1.4142e-6, 1.4142]  -> tanh(grad) <= 0.8884 -> la soglia MODULA
+                #   1/r  in [0.707, 707107]      -> tanh(grad) -> 1 ESATTO -> la modulazione
+                #                                   diventerebbe un RISCALAMENTO COSTANTE
+                #                                   della soglia, cioe' un PARAMETRO NASCOSTO
+                #                                   (`A1`), e `A11` cor.6 dice che un limite
+                #                                   che satura e' un allarme.
+                _rn = self._r_nodo_mitosi()
+                grad_tau = np.abs(_rn[self.i] - _rn[self.j])
+            else:
+                tau_nodo = np.zeros(self.n)
+                aw = np.abs(self.tw)
+                np.add.at(tau_nodo, self.i[self.i < self.n], aw[self.i < self.n])
+                np.add.at(tau_nodo, self.j[self.j < self.n], aw[self.j < self.n])
+                tau_nodo = 1.0 + tau_nodo / np.maximum(self._deg, 1) / PHI_CRIT
+                grad_tau = np.abs(tau_nodo[self.i] - tau_nodo[self.j])   # gradiente lungo l'arco
             # modulazione limitata: la soglia scende di al piu' ~30% dove il gradiente e' forte
             soglia = soglia0 * (1.0 - 0.3 * np.tanh(grad_tau))
         # CRITICITA' NON MONOTONA (campana) ancorata ai due valori fisici del sistema:
@@ -5254,16 +5361,50 @@ class Rete:
         # da meta'-cammino-al-tetto in su. Centrata sul punto medio (soglia+tetto)/2.
         centro = 0.5 * (tau_soglia + tau_tetto)
         segno = -np.tanh(3.0 * (tau_pp - centro))
-        tau_locale = 1.0 / tau_pp                          # ritmo (sempre positivo)
-        ampiezza = salita * discesa * tau_locale           # campana positiva (0..max)
+        # [CURA 2] LA CAMPANA SI LEGGE DUE VOLTE, E CIASCUNA LETTURA HA LE SUE UNITA'.
+        #   `rep` e' il BERSAGLIO di un rilassamento, cioe' un EQUILIBRIO: **non puo'
+        #   dipendere dalla DURATA del passo**, senno' la stessa condizione fisica darebbe un
+        #   equilibrio diverso a seconda di quanto batte l'orologio locale.
+        #   `prob` e' una probabilita' NEL PASSO, cioe' un CONTEGGIO: **DEVE dipenderne**.
+        #   Quindi il fattore di tempo entra UNA volta sola, e solo nel secondo.
+        if TEMPO_UNICO_MITOSI:
+            _ft = self._fattore_tempo_arco(len(avv))       # dt_e/DT: il tempo d'arco, LETTO
+            ampiezza_int = salita * discesa                # INTENSITA': numero puro, SENZA tempo
+            ampiezza = ampiezza_int * _ft                  # EVENTI ATTESI nel passo proprio
+            resp_int = ampiezza_int * segno                # -> il BERSAGLIO `rep`
+        else:
+            tau_locale = 1.0 / tau_pp                      # ritmo (sempre positivo)
+            ampiezza = salita * discesa * tau_locale       # campana positiva (0..max)
+            resp_int = None
         resp = ampiezza * segno                            # FIRMATA: + crea, - respinge
         # --- CREAZIONE: dove resp > 0, mitosi probabilistica (come prima) ---
-        prob = np.clip(resp, 0.0, 1.0)
+        # [A8] QUANTE VOLTE IL CLIP AVREBBE MORSO. Byte-inerte: si CONTA, non si cambia --
+        # e gira ANCHE a flag spento, cosi' il "prima" del confronto arriva dal giro di
+        # byte-inerzia del sigillo, senza un run in piu'.
+        self._tum_clip_prob_tot = getattr(self, "_tum_clip_prob_tot", 0) + int(np.size(resp))
+        self._tum_clip_prob = (getattr(self, "_tum_clip_prob", 0)
+                               + int(np.sum(np.asarray(resp) > 1.0)))
+        if TEMPO_UNICO_MITOSI:
+            # LA FORMA DI POISSON: `resp` e' il NUMERO ATTESO di eventi nel passo proprio, e
+            # la probabilita' di ALMENO UNO e' `1 - e^-lambda`. Sta in [0, 1) PER COSTRUZIONE:
+            # il clip non ha piu' niente da tagliare (`A11`). Per lambda piccolo coincide con
+            # la forma vecchia: l'errore relativo e' lambda/2.
+            prob = 1.0 - np.exp(-np.maximum(resp, 0.0))
+        else:
+            prob = np.clip(resp, 0.0, 1.0)
         nasce = self.rng.random(len(avv)) < prob
         # --- REPULSIONE: dove resp < 0, il tempo proprio estremo respinge: allarga d0
         # localmente (pressione a corto raggio), invece di creare nodi. E' il confine
         # attivo dei nuclei super-densi: la materia compressa respinge invece di collassare.
-        rep = np.clip(-resp, 0.0, 1.0)
+        # [CURA 2] il BERSAGLIO usa `resp_int`, cioe' la campana SENZA il fattore di tempo.
+        # ⚠ IL CLIP RESTA, e la sua sostituzione con `tanh` e' una DECISIONE DI LUCA dopo una
+        #   MISURA: `satura(f) -> 1/GAMMA = 20`, quindi il clip a 1 E' RAGGIUNGIBILE. Le due
+        #   forme coincidono DOVE IL CLIP NON MORDE, e il contatore qui sotto dice quanto.
+        _resp_rep = resp if resp_int is None else resp_int
+        self._tum_clip_rep_tot = getattr(self, "_tum_clip_rep_tot", 0) + int(np.size(_resp_rep))
+        self._tum_clip_rep = (getattr(self, "_tum_clip_rep", 0)
+                              + int(np.sum(-np.asarray(_resp_rep) > 1.0)))
+        rep = np.clip(-_resp_rep, 0.0, 1.0)
 
         # ---- CORREZIONE (3) del 2026-09-17: MEMORIA DELLA REPULSIONE (par.10 categoria D) ----
         # ASSIOMA A7: "una grandezza senza stato non puo' conservare nulla". `rep` era ISTANTANEO e
@@ -5294,7 +5435,27 @@ class Rete:
         # A8: il clamp 1e-12 su tau_pp e' un ramo silenzioso. CONTATO.
         self._rep_taupp_clamp = getattr(self, "_rep_taupp_clamp", 0) + int(np.sum(np.asarray(tau_pp) < 1e-12))
         self._rep_taupp_tot = getattr(self, "_rep_taupp_tot", 0) + int(np.size(tau_pp))
-        self._rep = self._rep + _dte * (rep - self._rep) / np.maximum(tau_pp, 1e-12)
+        if TEMPO_UNICO_MITOSI:
+            # [CURA 2 + S12] TRE difetti nella riga vecchia, e il commento ne dichiarava due:
+            #   (1) LA DILATAZIONE ERA CONTATA DUE VOLTE: `_dte` E' GIA' `DT*0.5*(r_i+r_j)`,
+            #       e dividere ANCHE per `tau_pp` la conta di nuovo;
+            #   (2) `tau_pp` NON E' UNA DURATA: e' un numero puro. Una costante di tempo deve
+            #       avere le unita' di un tempo -- e `tau_arco = d/cs_arco` le ha: [DT];
+            #   (3) L'INTEGRATORE ERA UN EULERO ESPLICITO, mentre il commento dichiara
+            #       "`A5` livello 1, rilassamento ESPONENZIALE" e par.4 impone la forma ESATTA.
+            # La forma esatta e' una COMBINAZIONE CONVESSA: `_rep` resta fra `rep` e il suo
+            # valore precedente PER QUALUNQUE PASSO, quindi il difetto che l'Eulero aveva su
+            # `peq` (`dt/tau = 1.2018`, scavalcava sotto zero) NON PUO' RIPRESENTARSI.
+            _tau_a = self._tau_arco_causale(len(rep))
+            _rap = np.asarray(_dte, dtype=float) / _tau_a
+            # [A8] quante volte l'Eulero AVREBBE scavalcato (`dt/tau > 1`): misura quanto
+            # serviva `S12`. Byte-inerte: si conta e basta.
+            self._tum_eulero_gt1 = (getattr(self, "_tum_eulero_gt1", 0)
+                                    + int(np.sum(_rap > 1.0)))
+            self._tum_eulero_tot = getattr(self, "_tum_eulero_tot", 0) + int(np.size(_rap))
+            self._rep = rep + (self._rep - rep) * np.exp(-_rap)
+        else:
+            self._rep = self._rep + _dte * (rep - self._rep) / np.maximum(tau_pp, 1e-12)
         _rep_mem = self._rep
         # quanto la memoria si discosta dall'istantaneo: se fosse ~0 la cura sarebbe inerte.
         if len(rep):
@@ -7271,6 +7432,7 @@ def _applica_flag(a):
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
     global PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO, COES_CAUSALE, ANOM_SIMM
     global INVARIANTI
+    global TEMPO_UNICO_MITOSI
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, SCALA_MIN, COES_ADIM, RITMO_WRAP_2PI, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
@@ -7335,6 +7497,7 @@ def _applica_flag(a):
     #   a 600 passi `Z123`. FINO A OGGI ERA ACCENDIBILE SOLO IN-PROCESS: senza opzione, il
     #   driver non poteva accenderla, e una cura che nessun run accende e' un ramo morto.
     RITMO_WRAP_2PI = bool(getattr(a, "ritmo_wrap_2pi", False))  # cura D34: default off, il driver la accende
+    TEMPO_UNICO_MITOSI = bool(getattr(a, "tempo_unico_mitosi", False))  # CURA 2: default off
     TW_SPINORE = bool(getattr(a, "tw_spinore", False))     # torsione 4pi -> Bloch (doppia copertura): default off
     # [CURA 1b, decisione di Luca 2026-09-24] IL PONTE INVERSO E' IMPEDITO, non sconsigliato.
     # `TW_SPINORE` fa scrivere lo SPINORE dalla TORSIONE: `tw` -> `omega_s` -> `_psi_spinor`
@@ -7916,6 +8079,15 @@ def _cli():
                         "somma B_geo = <|tw|/PHI_CRIT * (n_i x n_j)>, termine non-abeliano perpendicolare "
                         "a n che sostiene la precessione di Larmor senza auto-spegnersi con l'ordine. "
                         "Richiede --spinore-vivo. Default off = non-regressione.")
+    p.add_argument("--tempo-unico-mitosi", action="store_true", dest="tempo_unico_mitosi",
+                   help="[CURA 2] UN SOLO OROLOGIO dentro `mitosi()`. Gli usi di `tau_pp` come "
+                        "TEMPO (il ritmo, la costante di rilassamento di `_rep`, il gradiente "
+                        "di tempo proprio) passano all'orologio `dt_e` che il sistema gia' "
+                        "definisce; gli usi come POSIZIONE sull'asse della torsione (soglia, "
+                        "centro, inversione) restano com'erano. Piu': `prob` in forma di "
+                        "Poisson `1-exp(-lambda)` invece del clip, e il rilassamento di `_rep` "
+                        "in forma ESATTA con `tau = d/cs_arco` (una DURATA) invece "
+                        "dell'Eulero con `tau_pp` (un numero puro). Default off.")
     p.add_argument("--ritmo-wrap-2pi", action="store_true", dest="ritmo_wrap_2pi",
                    help="[CURA D34, approvata 2026-09-24] Il ramo SPINORIALE di `ritmo()` avvolge "
                         "la differenza di fase sul periodo GIUSTO (2pi) invece che su 4pi. "
