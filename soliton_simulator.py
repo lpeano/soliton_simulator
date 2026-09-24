@@ -5384,6 +5384,15 @@ class Rete:
         self._tum_clip_prob_tot = getattr(self, "_tum_clip_prob_tot", 0) + int(np.size(resp))
         self._tum_clip_prob = (getattr(self, "_tum_clip_prob", 0)
                                + int(np.sum(np.asarray(resp) > 1.0)))
+        # [A8, richiesta di Luca 2026-09-24] IL CLIP HA DUE LATI, E FINORA NE CONTAVO UNO SOLO.
+        # `np.clip(resp, 0, 1)` taglia in ALTO (contato sopra: ZERO su 63'148'047) **e in BASSO**.
+        # Il lato basso morde ogni volta che `resp <= 0`, cioe' su TUTTO il regime repulsivo, e
+        # dire "il clip non morde" senza questo numero sarebbe FALSO.
+        # NB: la forma di Poisson `1 - exp(-max(resp, 0))` conserva il taglio in basso -- e' il
+        # taglio in ALTO che sparisce. Questo contatore dice quanto grande sia il pezzo di
+        # dominio su cui le due forme COINCIDONO ESATTAMENTE (entrambe danno 0).
+        self._tum_clip0_prob = (getattr(self, "_tum_clip0_prob", 0)
+                                + int(np.sum(np.asarray(resp) <= 0.0)))
         if TEMPO_UNICO_MITOSI:
             # LA FORMA DI POISSON: `resp` e' il NUMERO ATTESO di eventi nel passo proprio, e
             # la probabilita' di ALMENO UNO e' `1 - e^-lambda`. Sta in [0, 1) PER COSTRUZIONE:

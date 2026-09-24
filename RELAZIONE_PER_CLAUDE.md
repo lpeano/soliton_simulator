@@ -14524,3 +14524,22 @@ Proposta per `PATTERN_DI_PROVA.md`, **sezione IN PROVA**, non promossa.
 corto `--cura2-corto` è **un processo fresco a un solo braccio**, e `_cura1_corto` pure:
 **il confronto fra i due È il controllo positivo fatto bene** — **ma lanciarlo adesso sarebbe
 aggiustare al volo dentro lo stesso passo**, che il par.5 vieta. **Reperto, commit, stop.**
+
+---
+
+# IL CLIP HA DUE LATI, E NE CONTAVO UNO SOLO — *tuo rilievo, 2026-09-24*
+
+`np.clip(resp, 0, 1)` taglia **in alto** — e quello l'ho contato: **`0` su `63 148 047`** — **e
+in basso**, che morde **ogni volta che `resp <= 0`**, cioè su **tutto il regime repulsivo**.
+**Dire *«il clip non morde»* con in mano solo il lato alto era falso, e l'avevo già segnalato
+come limite mio.** Ora è un contatore: **`_tum_clip0_prob`**, incondizionato come gli altri.
+
+> **E dice una cosa precisa sulla cura**: la forma di Poisson `1 − exp(−max(resp, 0))`
+> **conserva** il taglio in basso — è quello **in alto** che sparisce. Quindi il contatore misura
+> **quanto è grande il pezzo di dominio su cui le due forme coincidono ESATTAMENTE**. **Più è
+> grande, più la cura di `:5244` è formale.**
+
+**⚠ E CAMBIA IL BLOB: `b881db89` → `49fc54d2`.** `T4` è certificato su `b881db89`. **La
+byte-inerzia di questo contatore è PER COSTRUZIONE — un accumulatore intero che nessuna legge
+rilegge — e NON È MISURATA.** Lo scrivo invece di chiamarla certificata: il sigillo riparato,
+girando i bracci in `subprocess`, la rimisurerà senza costo aggiuntivo.

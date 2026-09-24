@@ -769,6 +769,13 @@ non c'è niente da cambiare lì.**
 > `tau_tetto`, `centro`, `segno`, cioè **la forma riportata qui sotto** — **NON sono toccati**,
 > e il sigillo lo verifica **dall'AST** *(`T3`)*, non a parola.
 >
+> **➜ E `mitosi()` HA UN CONTATORE IN PIÙ, incondizionato** *(2026-09-24, `_tum_clip0_prob`)*:
+> `np.clip(resp, 0, 1)` taglia **in alto E IN BASSO**, e finora contavo **solo il lato alto**.
+> **Il lato basso morde su tutto il regime repulsivo** — cioè sulla metà di questa scheda che
+> riguarda `_rep`. **Byte-inerte per costruzione, non misurata.**
+>
+> **⚠ E IL CLIP SU `rep` HA LO STESSO DOPPIO LATO E IL CONTATORE DEL LATO BASSO NON C'È ANCORA.**
+>
 > **⚠ E `D33` È DENTRO IL PERIMETRO DELLA CURA:** *«la repulsione che si spegne al tetto»* vive
 > su `_rep`, che `CURA 2` cambia in **due** punti — il bersaglio *(ora senza il fattore di
 > tempo)* e l'integratore *(ora esatto invece che Eulero)*. **La cura NON dichiara di curare
@@ -1462,6 +1469,19 @@ scheda**, che è dove la loro legge è scritta.
 > stesso rimedio: quando `step` avrà la sua scheda, il marcatore si divide.** Finché non
 > succede, **una modifica a questa media obbliga a toccare la ⑨ e non la ⑥**, e chi la cerca
 > partendo da `step()` deve passare dal rimando che la ⑥ ora porta.
+
+### 10.2-ter ⚠ **IL CLIP HA DUE LATI, E NE CONTAVO UNO SOLO** — *rilievo di Luca, 2026-09-24*
+
+`np.clip(resp, 0, 1)` taglia **in alto** *(contato: `_tum_clip_prob` = **`0` su `63 148 047`**)*
+**e in basso**. **Il lato basso morde ogni volta che `resp <= 0`, cioè su TUTTO il regime
+repulsivo** — e dire *«il clip non morde»* con in mano solo il lato alto **sarebbe falso**.
+
+Aggiunto **`_tum_clip0_prob`**, incondizionato come gli altri.
+
+> **E dice una cosa precisa sulla cura: la forma di Poisson `1 − exp(−max(resp, 0))` CONSERVA il
+> taglio in basso.** È il taglio **in alto** che sparisce. Quindi `_tum_clip0_prob` misura
+> **quanto è grande il pezzo di dominio su cui le due forme COINCIDONO ESATTAMENTE** *(entrambe
+> danno `0`)*. **Più è grande, più la cura di `:5244` è formale.**
 
 ### 10.3 I CONTATORI `A8`, e girano **ANCHE A FLAG SPENTO**
 
