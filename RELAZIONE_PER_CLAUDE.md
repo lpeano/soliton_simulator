@@ -13046,3 +13046,66 @@ registro:
 
 **Puoi sostituirli**: sono derivati, non tuoi. **I criteri li fisso PRIMA di girare**
 *(par.5-septies)*, nel commit che precede il run.
+
+### ㉓ **I criteri di `E1`-`E4`, fissati PRIMA di girare — e `E2` non è misurabile**
+
+> **Committati prima del run**, come par.5-septies chiede: il commit dei criteri deve essere
+> **antenato** del commit del run. Strumento: `csv/_test_fork/_f2p_test_E.py`.
+
+**`E1` ed `E2` sono tuoi. `E3` ed `E4` sono miei, derivati** *(è `Z125`)*, **e puoi
+sostituirli.**
+
+| test | criterio | **origine**, che non è una scelta |
+|---|---|---|
+| **`E1a`** | nascite `> 0`, `n` cresce | il nullo: se la cura rompesse `fm`, sarebbero `0` |
+| **`E1b`** | `n` finale **< 10×** il riferimento | **`178` archi per nodo misurati** *(`526672/2959`)*: `10× n` ≈ `5.3M` archi = `10×` memoria e tempo, **e quella è l'esplosione**. `MAX_NODI = 4000000` non serve, è memoria non fisica |
+| **`E1c`** | fattore fra **`5×`** e **`100×`** | **derivato dagli archi già sul disco: `49.46×`** |
+| **`E3`** | si **riporta** la popolazione delle finestre | il §E dice *«è un effetto, va misurato»* |
+| **`E4`** | `max(φ) < 2π` | il nullo è il sigillo: spento `12.565546` |
+
+**Da dove viene il `49.46×`, ed è una previsione vera, non un'aspettativa:** la campana della
+mitosi ha il **picco a `|tw| = soglia`** e si azzera al tetto `4π`. Abbassando la soglia da
+`3π` a `2π`, la finestra che la campana copre passa da **`346` archi** *(`tau` `2.5`-`3.0`)* a
+**`17113`** *(`tau` `2.0`-`2.5`)*, al passo 600 del riferimento. **La banda è un ordine per
+lato** perché la larghezza della campana non entra nel conto **e la mitosi consuma la
+torsione**. **`E1c` giudica me, non la cura.**
+
+### ❌ **`E2` NON È MISURABILE, e non riporto uno zero al suo posto**
+
+**L'annichilazione vive SOLO dentro `ANTIFASE_ADD` (`:5351`), che è `False`.** Il ramo che la
+cura tocca — `:5499` — è la **creazione di coppia alla Schwinger**, dove l'antifase decide se
+l'antiparticella è **distinguibile** dalla particella nel campo. **Precondizione, non
+annichilazione.**
+
+Quello che si misura, e il `2` **non è scelto** *(è `|exp(iπ) − 1|`)*:
+**spenta `+2π` su `4π` → `2.156e-15`** *(identica: è `D35`)* · **accesa `+π` su `2π` →
+`2.000000`** *(opposta)*.
+
+> **⚠ E LA CONSEGUENZA PER `S06` È PIÙ FORTE DELLA DOMANDA:** il «muro dell'1 %» **non si
+> spiega con `D35` da solo**, perché **il meccanismo che annichilerebbe non gira**.
+> **`S06` non si chiude con questa cura.** Per misurarlo servirebbe accendere `ANTIFASE_ADD`,
+> che è un **esperimento** *(par.10)*, non fisica: **te lo chiedo, non lo decido.**
+
+### ㉔ **`S10`: il tetto `1.414213` di `r` viene da un ramo che non gira**
+
+Cercando il gauge per `E4` ho letto `ritmo()`: **`TEMPO_SEGNO` è acceso** e
+`_g_temposegno_tot = 600`, quindi il ramo vivo è **`r = 1 + mean|tw|/PHI_CRIT`** — che **non
+ha** il tetto `1.4142`, perché quel tetto è della formula a bottleneck `x/√(1+x²)` **dell'altro
+ramo**.
+
+**Misurato sul riferimento:** `r` medio **`1.3545`–`1.3689`**, **nessun tetto e nessun
+pavimento toccato**.
+
+> **Non dico che `Z117` e `Z123` siano sbagliati: dico che NON SO da dove venga quel numero, e
+> finché non lo so non lo cito come se lo sapessi.** → **`S10`**, coi contatori di `A8` già
+> disponibili per rispondere. **E `E4` non è costruito su quel gauge**, appunto.
+
+### ✅ **E il controllo dell'involucro ha trovato un difetto PRIMA del run**
+
+Lo strumento puntato sul **riferimento contro se stesso** dà **`2/4`**: `E1a`/`E1b` passano,
+**`E1c` e `E4` NON passano**, perché il braccio della «cura» *è* il riferimento. **I criteri non
+sono vuoti.**
+
+E nel farlo si è schiantato con **`KeyError: 'n'`**: `n` **non è una chiave** dello snapshot,
+il numero di nodi si legge da `len(phi)`. **Su un run vero lo schianto sarebbe arrivato dopo
+quaranta minuti** — ed è esattamente ciò per cui `STANDARD ⑤` esiste.

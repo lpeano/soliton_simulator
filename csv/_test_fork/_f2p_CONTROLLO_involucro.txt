@@ -1,0 +1,135 @@
+[TIMBRO] _f2p_test_E.py  sha1-BYTE 391eee7a  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
+# I TEST `E1`-`E4` DELLA CURA `FASE_2PI`
+#
+# braccio CURA:        csv\_test_fork\_g4_riferimento
+# braccio RIFERIMENTO: csv\_test_fork\_g4_riferimento
+#
+COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di misurare
+------------------------------------------------------------------------------------------------
+K1 le finestre su un `tw` a risposta NOTA: nuova=10 (10), vecchia=5 (5), oltre=2 (2) -> OK
+K2 IL CASO CHE DEVE FALLIRE: `+2pi` nel campo da' max|diff| = 2.133e-15 -> OK: `D35` e' riprodotto (l'antiparticella e' IDENTICA)
+K3 e `+pi` da' max|diff| = 2.000000, atteso 2 = |exp(i pi) - 1| -> OK
+K4 SECONDO CASO CHE DEVE FALLIRE: `E1a` con 0 nascite -> FAIL -> OK: il criterio non passa a vuoto
+K5 TERZO CASO CHE DEVE FALLIRE: `E1b` con `n` 100x il riferimento -> FAIL -> OK
+K6 e il caso LEGITTIMO non si boccia: `E1b` con `n` 3x -> PASS -> OK
+------------------------------------------------------------------------------------------------
+  -> i criteri PASSANO
+
+I CRITERI, come erano scritti PRIMA di vedere i numeri:
+  1. E1a  la mitosi NON muore
+     `_g_nati_mitosi > 0` e `n` cresce
+     (di LUCA. Nullo: se la cura rompesse `fm`, le nascite sarebbero 0)
+  2. E1b  la mitosi NON esplode
+     `n` finale < 10x il riferimento, e il run ARRIVA a 600 passi
+     (MISURATA: 178 archi per nodo (526672 / 2959). 10x `n` = ~5.3M archi = 10x memoria e tempo: oltre, il sistema non e' simulabile, e QUELLA e' l'esplosione)
+  3. E1c  il FATTORE, contro la mia previsione
+     le nascite da mitosi salgono di un fattore fra 5x e 100x
+     (DERIVATA dagli archi GIA' SUL DISCO: la campana ha il picco a `|tw| = soglia`, e la finestra nuova (`tau` 2.0-2.5) contiene 17113 archi contro i 346 della vecchia (`tau` 2.5-3.0) al passo 600: fattore 49.5x. La banda e' UN ORDINE per lato perche' la LARGHEZZA della campana non entra nel conto, e la mitosi CONSUMA la torsione (retroazione che smorza). **Questo test giudica ME, non la cura**)
+  4. E2   le coppie annichilano?
+     NON MISURABILE in questo run: `ANTIFASE_ADD = False`
+     (di LUCA, e la risposta e' una DICHIARAZIONE: il meccanismo non gira. Si misura la PRECONDIZIONE (l'antiparticella e' distinguibile nel campo) e il tasso di coppie)
+  5. E3   la finestra d'inversione di `D33`
+     si allarga da mezzo `pi` a un `pi` intero: si riporta la POPOLAZIONE delle due finestre in entrambi i bracci
+     (MIO, derivato dal par.E che dichiara -- non e' una cura di `D33`, e' un effetto, e va misurato. `tau_soglia` 2.5 -> 2, `centro` 2.75 -> 2.5, inversione `3.5pi` -> `3pi`)
+  6. E4   i diagnostici di fase
+     `min/max/mean/median` di `phi` nei due bracci, col NULLO accanto
+     (MIO, dalla riserva (2) di `Z120`. Il nullo e' il sigillo: `max(phi)` 12.565546 -> 6.282066. **Nessuna legge cambia, i referti si'**, e chi confronta un referto vecchio con uno nuovo deve saperlo (par.9-bis))
+
+snapshot: riferimento 5, cura 5
+
+================================================================================================
+PER ISTANTE -- RIF = riferimento (soglia 3pi), CUR = con `FASE_2PI` (soglia 2pi)
+================================================================================================
+  passo |    n RIF    n CUR |  archi RIF  archi CUR | mit RIF mit CUR | schw RIF schw CUR
+------------------------------------------------------------------------------------------------
+    120 |     2647     2647 |     526282     526282 |     203     203 |       53       53
+    240 |     2694     2694 |     526336     526336 |     243     243 |       60       60
+    360 |     2761     2761 |     526418     526418 |     295     295 |       75       75
+    480 |     2836     2836 |     526512     526512 |     351     351 |       94       94
+    600 |     2959     2959 |     526672     526672 |     437     437 |      131      131
+
+================================================================================================
+`E1` -- LA MITOSI (di LUCA): ne' zero ne' esplosione
+================================================================================================
+  nascite da mitosi   RIF    437 (249 eventi)   CUR    437 (249 eventi)
+  nodi                RIF   2959                CUR   2959
+  archi               RIF 526672                CUR 526672
+
+  IL FATTORE MISURATO: 1.000x   (la mia previsione era fra 5x e 100x, dal 49.5x
+  della popolazione degli archi)
+
+================================================================================================
+`E2` -- LE COPPIE (di LUCA): **NON MISURABILE in questo run**
+================================================================================================
+  L'ANNICHILAZIONE vive SOLO dentro `ANTIFASE_ADD`, che e' `False`: il meccanismo
+  che annichilerebbe NON GIRA. Riportare uno zero qui sarebbe leggere un'ASSENZA
+  DI MECCANISMO come un'assenza di effetto -- lo stesso errore del
+  `max|A-B| = 0.000e+00` per mancanza di confronto.
+
+  LA PRECONDIZIONE, che invece SI misura (ed e' `D35`):
+    spenta  `+2pi` su dominio `4pi`  -> max|exp(i anti) - exp(i part)| = 2.156e-15
+    accesa  `+pi`  su dominio `2pi`  -> max|exp(i anti) - exp(i part)| = 2.000000
+    (il `2` non e' scelto: e' `|exp(i pi) - 1|`)
+
+  E IL TASSO DI COPPIE, come LETTURA:
+    schwinger  RIF 131 nati (102 eventi)   CUR 131 nati (102 eventi)
+
+  -> `E2` NON DA' UN ESITO: da' una DICHIARAZIONE. Per misurare l'annichilazione
+     servirebbe accendere `ANTIFASE_ADD`, che e' un ESPERIMENTO (par.10), non
+     fisica, e va chiesto a Luca invece che deciso qui.
+  -> E PER `S06`: il muro dell'1 % NON si spiega con `D35` da solo.
+
+================================================================================================
+`E3` -- LA FINESTRA D'INVERSIONE DI `D33` (MIO, derivato)
+================================================================================================
+  la campana della mitosi ha il picco a `|tw| = soglia` e si azzera al tetto `4pi`.
+  con `phi` su `2pi` la soglia scende da `3pi` a `2pi`: `tau_soglia` 2.5 -> 2.0,
+  `centro` 2.75 -> 2.5, inversione `3.5pi` -> `3pi`.
+
+  passo |  nuova 2.0-2.5 RIF/CUR  vecchia 2.5-3 RIF/CUR |    oltre RIF    oltre CUR
+------------------------------------------------------------------------------------------------
+    120 |       6095        6095         74          74 |          878          878
+    240 |       3727        3727         89          89 |          810          810
+    360 |       8643        8643        157         157 |          717          717
+    480 |      18758       18758        196         196 |          553          553
+    600 |      17113       17113        346         346 |          336          336
+
+  il RAPPORTO che genera la previsione di `E1c`: nuova/vecchia nel RIFERIMENTO = 49.46x
+  (e' un EFFETTO della cura, non una cura di `D33`: si RIPORTA, non si giudica)
+
+================================================================================================
+`E4` -- I DIAGNOSTICI DI FASE (MIO, derivato dalla riserva 2 di `Z120`)
+================================================================================================
+  passo |  max phi R  max phi C |  med phi R  med phi C |  min phi R  min phi C
+------------------------------------------------------------------------------------------------
+    120 |  12.565546  12.565546 |   6.787261   6.787261 |   0.010131   0.010131
+    240 |  12.564555  12.564555 |   6.188071   6.188071 |   0.010602   0.010602
+    360 |  12.564673  12.564673 |   5.533549   5.533549 |   0.008263   0.008263
+    480 |  12.560578  12.560578 |   5.504143   5.504143 |   0.002190   0.002190
+    600 |  12.566279  12.566279 |   5.715198   5.715198 |   0.009601   0.009601
+
+  E `r`, il ritmo: il ramo che GIRA e' `TEMPO_SEGNO` (`r = 1 + mean|tw|/PHI_CRIT`),
+  che NON ha il tetto `1.4142` della formula a bottleneck. Il `1.414213` citato
+  altrove viene dall'ALTRO ramo, e la sua provenienza e' una DOMANDA APERTA (`S10`),
+  non un fatto: qui si riporta il ramo vivo.
+    passo    120   r(medio sugli archi) RIF 1.368893   CUR 1.368893
+    passo    240   r(medio sugli archi) RIF 1.354545   CUR 1.354545
+    passo    360   r(medio sugli archi) RIF 1.366476   CUR 1.366476
+    passo    480   r(medio sugli archi) RIF 1.364154   CUR 1.364154
+    passo    600   r(medio sugli archi) RIF 1.365143   CUR 1.365143
+
+================================================================================================
+ESITO DEI TEST -- PASSA / NON PASSA
+================================================================================================
+  E1a  la mitosi NON muore                   PASSA       nascite 437, `n` 2647 -> 2959
+  E1b  la mitosi NON esplode                 PASSA       `n` CUR 2959 contro il tetto 10x = 29590
+  E1c  il FATTORE contro la MIA previsione   NON PASSA   fattore 1.000x, banda prevista 5x-100x -- **questo giudica ME**
+  E4   `phi` sta davvero sotto `2pi`         NON PASSA   max(phi) = 12.566279 contro `2pi` = 6.283185 (il NULLO e' il 12.565546 del sigillo a flag spento)
+
+ESITO: 2/4
+
+`E2` NON entra nel conto: e' una DICHIARAZIONE, non un test -- e contarlo come
+PASS o come FAIL sarebbe falso in entrambi i versi.
+
+!! E SE `E1a` o `E1b` NON PASSANO, LA LETTURA DEL par.D CADE: la soglia a `2pi` non
+  regge, e il punto 2 va riaperto. `E1c` invece giudica LA MIA PREVISIONE.

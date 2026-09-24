@@ -44,6 +44,9 @@ I MODI:
   --riferimento  600 passi, `MEM_MOTO` ACCESO, con la traccia completa. **Serve: senza il freno e
                  le nascite misurate NEL BRACCIO ACCESO, il confronto non regge.**
   --spegni       600 passi, `MEM_MOTO = False` (la sola scrittura su `d0`).
+  --fase-2pi     600 passi, `FASE_2PI = True`: `phi` su [0, 2pi). La CURA di `D35`.
+  --fase-2pi-corto  120 passi, lo STESSO braccio: **STANDARD 7**, il giro corto prima
+                 del giro vero, per misurare il COSTO prima di spenderlo.
   --spegni-tutto 600 passi, `MEM_MOTO_TUTTO = False`: **L'INTERO BLOCCO**, spostamento di
                  fase compreso. E' `G4-bis`, e la condizione che lo ha attivato e' `Z109`:
                  spento `MEM_MOTO`, `d0` cresce lo stesso (rapporto 1.1607).
@@ -194,7 +197,7 @@ def confronta_snap(p_a, p_b, W):
     return ug, dv
 
 
-def installa(S, spegni_mem, spegni_tutto=False, wrap2pi=False):
+def installa(S, spegni_mem, spegni_tutto=False, wrap2pi=False, fase2pi=False):
     """Avvolge tutto cio' che serve. PURE-READ tranne l'unico flag che il mandato ammette."""
     stato = {"passi": [], "conti": {}, "freno": {}, "aperto": None, "n_passo": 0,
              "fine_prec": None}
@@ -212,6 +215,11 @@ def installa(S, spegni_mem, spegni_tutto=False, wrap2pi=False):
             # [D34, 2026-09-22] LA CURA DEL RITMO. Sigillo 4/4: byte-inerte spenta,
             # e accesa CAMBIA (104 campi). Il default nel sorgente resta False.
             S.RITMO_WRAP_2PI = True
+        if fase2pi:
+            # [FASE_2PI, 2026-09-22] `phi` come fase ORDINARIA su [0, 2pi). Sigillo
+            # `_sigillo_fase_2pi.py` **6/6** sul blob `445e2896`: byte-inerte spenta
+            # (206 campi identici), e accesa `max(phi)` passa da 12.565546 a 6.282066.
+            S.FASE_2PI = True
         if spegni_tutto:
             # [G4-bis, 2026-09-22] L'INTERO blocco, spostamento di fase compreso. Sigillo
             # `_sigillo_mem_moto_tutto.py` **10/10** sul blob `21e3a3dc`.
@@ -411,7 +419,7 @@ def main():
     passi = None
     for a in sys.argv[1:]:
         if a in ("--controllo", "--riferimento", "--spegni", "--spegni-tutto",
-                 "--ritmo-wrap"):
+                 "--ritmo-wrap", "--fase-2pi", "--fase-2pi-corto"):
             modo = a
         if a.startswith("--frame="):
             passi = int(a.split("=", 1)[1])
@@ -443,6 +451,22 @@ def main():
     elif modo == "--spegni":
         dest = os.path.join(RADICE, "csv", "_test_fork", "_g4_senza_memmoto")
         nfr, spegni = (passi or 100), True
+    elif modo in ("--fase-2pi", "--fase-2pi-corto"):
+        # [FASE_2PI] LA PROVA DELLA CURA DELLA FASE. Nient'altro e' spento: il
+        # confronto e' con `_g4_riferimento`, STESSI flag e STESSO seme.
+        # `--fase-2pi-corto` e' lo STANDARD 7: un giro CORTO prima del giro vero,
+        # perche' la soglia della mitosi scende da 3pi a 2pi e la finestra della
+        # campana e' 49.5 volte piu' popolata (17113 archi contro 346, passo 600):
+        # se la mitosi accelera di quel fattore, gli ARCHI e il TEMPO esplodono, e
+        # va saputo su 120 passi invece che su 600.
+        corto = (modo == "--fase-2pi-corto")
+        dest = os.path.join(RADICE, "csv", "_test_fork",
+                            "_f2p_corto" if corto else "_f2p_prova")
+        if corto and os.path.isdir(dest):
+            for _f in os.listdir(dest):
+                if _f.endswith(".pkl.gz"):
+                    os.remove(os.path.join(dest, _f))
+        nfr, spegni = (passi or (20 if corto else 100)), False
     elif modo == "--ritmo-wrap":
         # [D34] LA PROVA DELLA CURA DEL RITMO. Nient'altro e' spento: il confronto e'
         # con `_g4_riferimento`, che gira con gli STESSI flag e lo STESSO seme.
@@ -465,7 +489,8 @@ def main():
     import inspect as _insp
     seme = _insp.signature(S.Rete.__init__).parameters["seed"].default
     stato, visto = installa(S, spegni, spegni_tutto=(modo == "--spegni-tutto"),
-                            wrap2pi=(modo == "--ritmo-wrap"))
+                            wrap2pi=(modo == "--ritmo-wrap"),
+                            fase2pi=modo.startswith("--fase-2pi"))
     argv = ["_scena_video.py", str(nfr), dest] + COMUNE + \
         ["--csv-progresso=%s" % os.path.join(dest, "prog.csv")]
     sys.argv = list(argv)
@@ -480,7 +505,8 @@ def main():
       % (visto["chiamate"], bool(S.MEM_MOTO), bool(S.MEM_MOTO_TUTTO)))
     if (visto["chiamate"] == 0 or (spegni and S.MEM_MOTO)
             or (modo == "--spegni-tutto" and S.MEM_MOTO_TUTTO)
-            or (modo == "--ritmo-wrap" and not S.RITMO_WRAP_2PI)):
+            or (modo == "--ritmo-wrap" and not S.RITMO_WRAP_2PI)
+            or (modo.startswith("--fase-2pi") and not S.FASE_2PI)):
         W("*** L'INVOLUCRO NON HA AGITO. FERMO. ***\n")
         return 1
 

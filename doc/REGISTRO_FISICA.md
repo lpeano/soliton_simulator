@@ -761,3 +761,54 @@ al `96 %` degli archi oltre l'inversione riceve repulsione esattamente zero** *(
    punto 5**, e `S06` *(il «muro dell'1 %»)* **non** ha la spiegazione che sembra avere.
 3. **L'argomento della soglia vale per una differenza ISTANTANEA, ma `tw` è un ACCUMULO che
    decade.** **È la crepa dichiarata da Luca stesso**, e `E1` è il suo giudice.
+
+## I CRITERI DEI TEST, **fissati PRIMA di girare** *(par.5-septies)*
+
+> **⚠ CHI HA SCRITTO QUALE TEST, e va detto perché due sono MIEI — è `Z125`.**
+> Nel repo esistevano **solo `E1` ed `E2`**, e ho citato *«i quattro test `E1`-`E4`»* **undici
+> volte** senza che `E3` ed `E4` fossero scritti da nessuna parte. **`E1` ed `E2` sono di Luca
+> e non si toccano; `E3` ed `E4` li DERIVO, e Luca può sostituirli.**
+> Lo strumento è **`csv/_test_fork/_f2p_test_E.py`**, e i criteri stanno **nel suo codice**,
+> non solo qui *(`P1-ter`)*.
+
+| test | di chi | criterio | **origine della soglia** |
+|---|:--:|---|---|
+| **`E1a`** la mitosi non muore | **Luca** | `_g_nati_mitosi > 0` e `n` cresce | il nullo: se la cura rompesse `fm`, le nascite sarebbero `0` |
+| **`E1b`** la mitosi non esplode | **Luca** | `n` finale **< 10×** il riferimento, e il run **arriva** a 600 passi | **MISURATA: `178` archi per nodo** *(`526672 / 2959`)*. `10× n` = `~5.3M` archi = `10×` memoria e tempo: **oltre, il sistema non è simulabile, e QUELLA è l'esplosione**. **`MAX_NODI = 4000000` non serve: è una guardia di memoria, non di fisica** |
+| **`E1c`** il **fattore** | *mio* | le nascite salgono di un fattore **fra `5×` e `100×`** | **DERIVATA dagli archi GIÀ SUL DISCO**: la campana ha il picco a `|tw| = soglia`, e la finestra **nuova** *(`tau` `2.0`-`2.5`)* contiene **`17113`** archi contro i **`346`** della vecchia *(`tau` `2.5`-`3.0`)* al passo 600 — **`49.46×`**. La banda è **un ordine per lato** perché la **larghezza** della campana non entra nel conto e **la mitosi CONSUMA la torsione** *(retroazione che smorza)*. **Questo test giudica ME, non la cura** |
+| **`E2`** le coppie annichilano | **Luca** | **NON MISURABILE**, e si dichiara | vedi il blocco qui sotto |
+| **`E3`** la finestra di `D33` | *mio* | si riporta la **popolazione** delle due finestre nei due bracci | il §E **stesso** dice *«non è una cura di `D33`, è un effetto, e va misurato»*. **Si RIPORTA, non si giudica** |
+| **`E4`** i diagnostici di fase | *mio* | `max(φ) < 2π` nel braccio della cura | la **riserva ② di `Z120`**. **Il nullo è il sigillo:** a flag spento `max(φ) = 12.565546` |
+
+### ❌ **`E2` NON È MISURABILE IN QUESTO RUN, e lo dichiaro invece di riportare uno zero**
+
+**L'ANNICHILAZIONE VIVE SOLO DENTRO `ANTIFASE_ADD` (`:5351`), CHE È `False`.**
+Il ramo che la cura tocca — **`:5499`** — è la **creazione di coppia alla Schwinger**, e lì
+l'antifase decide se l'antiparticella è **DISTINGUIBILE** dalla particella nel campo: che è la
+**precondizione** dell'annichilazione, **non l'annichilazione**.
+
+**Riportare uno zero sarebbe leggere un'ASSENZA DI MECCANISMO come un'assenza di effetto** —
+lo stesso errore del `max|A-B| = 0.000e+00` per **mancanza di confronto**.
+
+**COSA SI MISURA AL SUO POSTO**, e il valore atteso **non è scelto**, è `|exp(i s) − 1|`:
+
+| | `max|exp(i·anti) − exp(i·part)|` |
+|---|--:|
+| **spenta** — `+2π` su dominio `4π` | **`2.156e-15`** → **identica**: è `D35` |
+| **accesa** — `+π` su dominio `2π` | **`2.000000`** → **opposta** |
+
+> ### ⚠ **E LA CONSEGUENZA PER `S06` È PIÙ FORTE DELLA DOMANDA DI PARTENZA**
+> Il «muro dell'1 %» **non si spiega con `D35` da solo**: il meccanismo che annichilerebbe
+> **non gira**. **`S06` non si chiude con questa cura**, e per misurarlo servirebbe accendere
+> `ANTIFASE_ADD` — che è un **ESPERIMENTO** *(par.10)*, **non fisica**, e va **chiesto a Luca**
+> invece che deciso qui.
+
+### ✅ **IL CONTROLLO DELL'INVOLUCRO È STATO FATTO PRIMA** *(`STANDARD ⑤`)*
+
+Lo strumento puntato sul **riferimento CONTRO SE STESSO** dà **`2/4`**: `E1a` e `E1b`
+**passano**, **`E1c` e `E4` NON passano** — perché il braccio della «cura» *è* il riferimento.
+**I criteri non sono vuoti.** → `csv/_test_fork/_f2p_CONTROLLO_involucro.txt`
+
+**E il controllo ha trovato un difetto prima del run:** `n` **non è una chiave** dello snapshot
+*(si legge da `len(phi)`)*, e lo strumento si schiantava con `KeyError: 'n'`. **Su un run vero
+lo schianto sarebbe arrivato dopo quaranta minuti.**
