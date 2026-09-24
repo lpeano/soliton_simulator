@@ -1,0 +1,54 @@
+[TIMBRO] _sigillo_fase_2pi.py  sha1-BYTE a9cee26f  committato e pulito
+# SIGILLO -- `FASE_2PI` (`B1`, `D35`)
+#
+COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`)
+------------------------------------------------------------------------------------------------
+K1 `_wphi` ACCESO porta ogni differenza dentro [-pi, pi]: max = 3.141593 -> OK
+K2 IL CASO CHE DEVE SBAGLIARE: `_w4` sulle stesse differenze e' L'IDENTITA'
+     max|w4(a) - a| = 0.000e+00 -> OK: il difetto e' riprodotto
+K3 LONTANO dal taglio (|a| < pi) i due COINCIDONO: max|diff| = 8.882e-16 -> OK: obbligo (a) del cor.7
+K4 l'ANTIFASE e' META' del dominio: 2pi -> +pi, 4pi -> +2pi -> OK
+K5 IL CASO CHE DEVE ESSERE UN'IDENTITA': `+2pi` su un dominio `2pi` -> max|diff| = 8.882e-16
+     -> OK  *(e' il motivo per cui `+2pi` NON e' un'antifase: `D35`)*
+K6 la SOGLIA: spenta `2pi + pi = 3pi`, accesa `2pi` -> OK
+------------------------------------------------------------------------------------------------
+  -> i criteri PASSANO
+
+blob simulatore ORA (sha1 byte grezzi) 445e2896
+riferimento `_val600`, blob `9557a867`: ANTERIORE a questo flag
+
+T1    PASS IL DEFAULT E' SPENTO: `FASE_2PI = False` (letto dal sorgente)
+T2    PASS GATE (AST): 3 rami, tutti in ['_dphi', '_wphi', 'mitosi']? SI' -- 1 assegnamento. rami: [(3457, '_dphi'), (3465, '_wphi'), (5152, 'mitosi')]
+      -> STRUTTURALE: un ramo in una funzione NON prevista comparirebbe qui, senza
+         girare niente. Le altre modifiche passano da `_dphi()`/`_wphi()`, che NON
+         sono ramificazioni: sono UN SOLO punto da cui tutti prendono il periodo.
+
+------------------------------------------------------------------------------------------------
+T3 -- BYTE-INERZIA A FLAG SPENTO (120 passi)
+------------------------------------------------------------------------------------------------
+  (348.2 s)
+  campi UGUALI 206   DIVERSI 0   non confrontati 0
+T3    PASS BYTE-INERTE spento: 206 campi identici, 0 diversi
+
+------------------------------------------------------------------------------------------------
+T4/T5/T6 -- A FLAG ACCESO (120 passi)
+------------------------------------------------------------------------------------------------
+  (331.5 s)
+  campi UGUALI 94   DIVERSI 103   non confrontati 9
+  i diversi: _calcpsi_chiamate, _calcpsi_w_none, _chi_core_nodi(shape (2647,)!=(2461,)), _chi_core_raggio(shape (2647,)!=(2461,)), _chi_core_rho0(shape (2647,)!=(2461,)), _chi_core_rhoc(max|d|=2.025e-02), _chi_geom_nodi(shape (2647,)!=(2461,)), _cs_nodo_prev(shape (2647,)!=(2461,))
+T4    PASS CONTROLLO POSITIVO: acceso CAMBIA, 103 campi diversi
+T5    PASS IL DOMINIO E' DAVVERO CAMBIATO: acceso max(phi) = 6.282066 < 2pi = 6.283185
+T6    PASS E SPENTO NON LO E': max(phi) = 12.565546, SOPRA 2pi -- il criterio `T5` non e' vuoto
+      -> `T6` e' il controllo che rende `T5` leggibile: se anche spento `phi`
+         stesse sotto `2pi`, `T5` passerebbe SENZA che il flag abbia fatto nulla.
+      min(phi): spento 0.010131, acceso 0.000788
+
+================================================================================================
+ESITO: 6/6
+================================================================================================
+*** SIGILLO PASSATO. La prova a 600 passi e i quattro test possono partire. ***
+
+⚠ E IL SIGILLO NON DICE CHE LA CURA SIA GIUSTA: dice che fa CIO' CHE DICHIARA.
+  Se `φ` debba vivere su `2π` lo decidono i QUATTRO TEST del paragrafo E, e se uno
+  fallisce LA LETTURA CADE.
+

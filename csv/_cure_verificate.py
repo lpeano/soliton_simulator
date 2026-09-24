@@ -75,15 +75,16 @@ CURE = [
      "in **ogni** run: **zero violazioni** in tutti e tre i bracci di `G4`",
      "legge soltanto; su un run sano non cambia un bit", "**ACCESA DI DEFAULT** *(`True`)*"),
     ("RITMO_WRAP_2PI", "**`A1`** il wrap del ritmo sul periodo GIUSTO *(`2π`)*",
-     "⏸ **da scrivere**", None,
-     "⏸ prova a 600 passi, **da fare**",
-     "cura **`D34`** *(`Z117`: il wrap a `4π` e' l'IDENTITA')*",
-     "⏸ **NON ANCORA IN CODICE**"),
+     "`4/4` *(scritto a mano: il referto sta nel log, non in un file con la riga di verdetto)*", None,
+     "✅ **`G4`, 600 passi** *(`Z123`, `csv/_test_fork/_d34_ritmo_wrap`)*",
+     "cura **`D34`** *(`Z117`: il wrap a `4π` e' l'IDENTITA')*. **`6/8` come previsto e il bilancio CHIUDE (`9.595e-14`), ma TUTTI gli aggregati peggiorano e la mia previsione ⑤ era SBAGLIATA** *(la quota al tetto SALE: -> `S09`)*",
+     "**PROVATA, default SPENTO** — la decisione e' di Luca"),
     ("FASE_2PI", "**§D** `φ` come fase ordinaria su `[0, 2π)`",
-     "⏸ **da scrivere**", None,
-     "⏸ prova a 600 passi + i **quattro test** `E1`-`E4`, **da fare**",
-     "la lettura scelta da Luca, **da METTERE ALLA PROVA**. Se un test fallisce, **cade**",
-     "⏸ **NON ANCORA IN CODICE**"),
+     "⏸ *(l'esito si legge dal referto)*",
+     "csv/_seal_fork/_sig_fase_2pi/REFERTO.txt",
+     "⏸ prova a 600 passi + i test `E1`-`E4`, **da fare**",
+     "la lettura scelta da Luca, **da METTERE ALLA PROVA**. Se un test fallisce, **cade**. **Cura `D35`** *(l'antifase `+2π` che non e' un'antifase)*",
+     "✅ **IN CODICE e SIGILLATA**, default **SPENTO**. ⏸ **NON ANCORA PROVATA**"),
 ]
 
 # Le PROVE DI SPEGNIMENTO: NON sono cure, e stanno a parte perche' il conto resti onesto.
@@ -104,11 +105,20 @@ def default(flag):
     return m.group(1) if m else None
 
 
-VERDETTO = re.compile(r"^\s*SIGILLO\b[^\n:]*:\s*(\d+)\s*/\s*(\d+)\s*$", re.M | re.I)
+VERDETTO = re.compile(
+    r"^\s*(?:SIGILLO\b[^\n:]*|ESITO)\s*:\s*(\d+)\s*/\s*(\d+)\s*$", re.M | re.I)
 
 
 def verdetto(testo):
-    """L'esito del sigillo, ANCORATO alla riga di verdetto `SIGILLO <NOME>: n/m`.
+    """L'esito del sigillo, ANCORATO a una riga di verdetto: `SIGILLO <NOME>: n/m`
+    oppure `ESITO: n/m`.
+
+    LE DUE FORME NON SONO UN CAPRICCIO: i sigilli di `RITMO_WRAP_2PI` e `FASE_2PI`
+      scrivono `ESITO: n/m`, i precedenti `SIGILLO <NOME>: n/m`. Ho preferito INSEGNARE
+      al lettore le due forme che i referti hanno DAVVERO, invece di ricopiare i numeri
+      a mano (`P1-ter`): un numero generato ha una provenienza, uno ricopiato no.
+      **Cio' che NON si allarga e' l'ANCORAGGIO A INIZIO RIGA**, che e' la parte che
+      impedisce il `0/0` di `U6`.
 
     ⚠ CORRETTO SUBITO DOPO AVERLO SCRITTO. La prima versione cercava il primo `n/m` del file
       e su `_sigillo_anom_simm` prendeva **`0/0`** -- che veniva da `U6`, dove `0/0` e' il
@@ -158,6 +168,25 @@ def collaudo(W):
     W("K3 SECONDO CASO CHE DEVE FALLIRE: un file SENZA riga di verdetto -> `None`, non un "
       "numero inventato -> %s\n" % ("OK" if ok3 else "*** inventa un esito ***"))
     e.append(ok3)
+    # LA FORMA NUOVA: `ESITO: n/m`, e il `0/0` di prima NON deve vincere
+    nuovo = ("U6   PASS `0/0` E' DEFINITO ZERO: 525973 archi\n"
+             "\n===========\nESITO: 6/6\n===========\n")
+    v4 = verdetto(nuovo)
+    ok4 = (v4 == ("6", "6"))
+    W("K4 legge la forma `ESITO: n/m` dei referti nuovi, e NON il `0/0` -> %s  (%s)\n"
+      % ("OK" if ok4 else "*** NO ***", v4))
+    e.append(ok4)
+    # TERZO CASO CHE DEVE FALLIRE: `ESITO` senza numeri non e' un verdetto
+    ok5 = verdetto("ESITO: PASSATO, tutti i test\nqualche 3/4 nel testo\n") is None
+    W("K5 TERZO CASO CHE DEVE FALLIRE: `ESITO: PASSATO` (senza `n/m`) -> `None` -> %s\n"
+      % ("OK" if ok5 else "*** inventa un esito ***"))
+    e.append(ok5)
+    # QUARTO: `esito` NON a inizio riga (dentro la prosa) non conta. E' la parte
+    # dell'ancoraggio che NON si allarga: senza, ogni frase diventa un verdetto.
+    ok6 = verdetto("il suo esito: 9/9 secondo me\n") is None
+    W("K6 QUARTO CASO CHE DEVE FALLIRE: `esito: 9/9` DENTRO la prosa -> `None` -> %s\n"
+      % ("OK" if ok6 else "*** legge la prosa come verdetto ***"))
+    e.append(ok6)
     ok = all(e)
     W("-" * 92 + "\n  -> %s\n\n" % ("i criteri PASSANO" if ok else "*** NON PASSANO ***"))
     return ok

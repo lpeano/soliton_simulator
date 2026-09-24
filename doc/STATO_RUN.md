@@ -1,57 +1,47 @@
 <!-- PUNTO-DI-RIPRESA:INIZIO -->
 # ⚠⚠ PUNTO DI RIPRESA — **si legge PER PRIMO dopo un riavvio**
 
-> **Aggiornato 2026-09-22 sera · HEAD `b95df68` · branch `fork-su2`.**
-> **Scritto PRIMA di lanciare la prova**, come Luca ha chiesto: se il riavvio la tronca, qui
-> c'è già scritto che cosa esisteva.
+> **Aggiornato 2026-09-24 mattina · HEAD `0def7d3` · branch `fork-su2`.**
+> **Simulatore blob `445e2896`.** **Nessun processo vivo, niente a metà.**
 
-## ⚠⚠ C'ERA UN RUN IN CORSO — **`D34`, la prova di `RITMO_WRAP_2PI`**
+## NON C'E' NESSUN RUN IN CORSO
 
-| | |
-|---|---|
-| **comando** | `python csv/_test_fork/_g4_prova.py --ritmo-wrap` |
-| **destinazione** | `csv/_test_fork/_d34_ritmo_wrap` |
-| **lanciato** | **2026-09-22 alle `20:04:18`, PID Windows `10772`** *(il processo `python.exe`, NON la shell)* |
-| **durata attesa** | **~42 min** *(il braccio di riferimento di `G4`: `2076 s`; `G4-bis`: `2489 s`)* |
-| **passi** | 600 *(100 frame × 6)* · seme `42` · blob `3d91338e` |
-| **confronto** | `csv/_test_fork/_g4_riferimento`, **già sul disco** |
+Il run di `D34` **è finito** *(`Z123`)*, e il sigillo di `FASE_2PI` **è finito `6/6`**
+*(`Z124`)*. **Il prossimo run è la prova di `FASE_2PI` a 600 passi**, e quando parte questo
+blocco lo dirà qui sopra.
 
-> **→ SE GLI SNAPSHOT SI FERMANO PRIMA DEL PASSO 600, IL RUN VA RILANCIATO DA CAPO.**
-> **Non si riprende a metà**, e non serve: il sistema è **deterministico**, stesso seme e
-> stesso blob danno lo stesso risultato. **Si cancella la cartella e si rilancia.**
-> **Come si verifica:** in `csv/_test_fork/_d34_ritmo_wrap` devono esserci **cinque**
-> `scena_000120 … scena_000600.pkl.gz` **e** `BILANCIO_d0.txt`. **Se manca `BILANCIO_d0.txt`,
-> il run è stato troncato**, qualunque cosa ci sia negli snapshot.
+## LO STATO DELLE CURE — **la tabella vera è `CURE VERIFICATE`, più sotto**
 
-**E LE PREVISIONI SONO GIÀ SCRITTE, committate PRIMA che il flag esistesse** *(`94351c9`)*:
-**mi aspetto `6/8` e poco o nessun cambiamento leggibile a un seme solo.** **Se l'esito fosse
-`7/8` o `8/8`, va trattato con sospetto**, non con entusiasmo.
+| flag | in codice | sigillo | prova |
+|---|:--:|--:|---|
+| `MEM_MOTO` *(spegnimento)* | ✅ | `8/8` | ✅ `G4` |
+| `MEM_MOTO_TUTTO` *(spegnimento)* | ✅ | `10/10` | ✅ `G4-bis` |
+| **`RITMO_WRAP_2PI`** *(cura `D34`)* | ✅ | `4/4` | ✅ 600 passi *(`Z123`)* |
+| **`FASE_2PI`** *(cura `D35`)* | ✅ | **`6/6`** *(`Z124`)* | ⏸ **il prossimo lavoro** |
+
+> **⚠ TUTTI SPENTI O AL LORO DEFAULT: nessuna cura è accesa, e nessuna decisione di default
+> è stata presa.** Il passaggio a `True` è la voce **`E3` della coda** *(l'epoca 3)*, ed è
+> **una decisione di Luca**.
+> **⚠ E `E3` DENOTA DUE COSE in questo documento:** la voce dell'epoca 3 **e** il terzo test
+> del §E. **È `Z125`**, ed è dichiarato invece di essere rinominato in silenzio.
 
 ## POI, NELL'ORDINE DEL MANDATO
 
 | | lavoro | stato |
 |--:|---|---|
-| ① | **`A1` / `D34`**: misura · flag · sigillo · **prova** | ✅✅✅ · ▶ **la prova è il run qui sopra** |
-| ② | **censimento** `PARTE C` + classi `T/L/E` | ✅ strumento *(`b95df68`, collaudo `5/5`)*, ⏸ **da girare sul sorgente vero** |
-| ③ | **le schede** per §D *(campo, mitosi, Schwinger)* | ⏸ — la scheda ⑤ *(tempo proprio)* c'è già |
-| ④ | **`FASE_2PI`** in codice, dietro flag | ⏸ **dopo** le schede |
-| ⑤ | la prova e i **quattro test** `E1`-`E4` | ⏸ |
-| ⑥ | **`PROBLEMI-CHK3`**, poi `FAMIGLIE`, poi schede ⑥+, `PAT-1`/`PAT-2` | ⏸ |
-| ⑦ | **`CHECKPOINT`** — **ci si ferma e si aspetta Luca** | ⏸ |
+| ① | **`A1` / `D34`**: misura · flag · sigillo · prova | ✅✅✅✅ *(`Z117`, `Z123`)* |
+| ② | **censimento** `PARTE C` + classi `T/L/E` | ✅ girato sul sorgente vero |
+| ③ | **le schede** per §D | ✅ **sette schede** nel registro |
+| ④ | **`FASE_2PI`** in codice, dietro flag, **sigillata** | ✅ `6/6` *(`Z124`)* |
+| ⑤ | **la prova a 600 passi + i test `E1`-`E4`** | ▶ **È QUI CHE SI RIPRENDE** |
+| ⑥ | **`TEMPO_UNICO`**: scheda, flag, sigillo, prova | ⏸ la seconda cura |
+| ⑦ | **`PROBLEMI-CHK3`**, `FAMIGLIE`, `FASCE-TAU`, `PAT-1`/`PAT-2` | ⏸ |
+| ⑧ | **`CHECKPOINT`** — **ci si ferma e si aspetta Luca** | ⏸ |
 
 ## LAVORI A METÀ — **nessuno**
 
-Ogni lavoro è a un punto pulito. **I fallimenti di oggi sono committati come reperti e poi
-corretti, coi giri rifatti per intero:** il sigillo `8/10` di `MEM_MOTO_TUTTO`, il cricchetto
-`1/4`, il falso positivo di `Z114`, il falso positivo della regex di `_tre_bracci`, e **lo
-schianto del sigillo di `RITMO_WRAP_2PI` a `T2`** *(`da371a7`)*.
-
-## LO STATO DEL SIMULATORE
-
-**Blob `3d91338e`.** **Tre flag aggiunti oggi, tutti sigillati:** `MEM_MOTO` *(8/8)*,
-`MEM_MOTO_TUTTO` *(10/10)*, **`RITMO_WRAP_2PI` *(4/4)***.
-**⚠ TUTTI E TRE SPENTI O AL LORO DEFAULT: nessuna cura è accesa, e nessuna decisione di
-default è stata presa.** Il passaggio a `True` è la voce `E3`, e **è una decisione di Luca**.
+Ogni lavoro è a un punto pulito. **I fallimenti sono committati come reperti e poi corretti,
+coi giri rifatti per intero.**
 
 <!-- PUNTO-DI-RIPRESA:FINE -->
 
@@ -377,8 +367,8 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | `COES_ADIM` | coesione ADIMENSIONALE | **`False`** | — *(non ha un sigillo suo)* | in **ogni** run del fork | `|F_adim| <= 1` **per costruzione**. **L'unica legge delle quattro schede con le unita' giuste senza che un clip gliele dia** | VERIFICATA-SPENTA |
 | `ANOM_SIMM` | `C1-bis` anomalia simmetrica, senza pavimento | **`False`** | `6/6` *(letto dal referto)* | in **ogni** run del fork | toglie `max(peq, 1e-9)`, che con `peq < 0` **RIBALTAVA IL SEGNO** *(`Z94`, `D17`)* | VERIFICATA-SPENTA |
 | `INVARIANTI` | `C5` domini di stato, due livelli | **`True`** | `3/3` *(letto dal referto)* | in **ogni** run: **zero violazioni** in tutti e tre i bracci di `G4` | legge soltanto; su un run sano non cambia un bit | **ACCESA DI DEFAULT** *(`True`)* |
-| `RITMO_WRAP_2PI` | **`A1`** il wrap del ritmo sul periodo GIUSTO *(`2π`)* | **`False`** | ⏸ **da scrivere** | ⏸ prova a 600 passi, **da fare** | cura **`D34`** *(`Z117`: il wrap a `4π` e' l'IDENTITA')* | ⏸ **NON ANCORA IN CODICE** |
-| `FASE_2PI` | **§D** `φ` come fase ordinaria su `[0, 2π)` | **`False`** | ⏸ **da scrivere** | ⏸ prova a 600 passi + i **quattro test** `E1`-`E4`, **da fare** | la lettura scelta da Luca, **da METTERE ALLA PROVA**. Se un test fallisce, **cade** | ⏸ **NON ANCORA IN CODICE** |
+| `RITMO_WRAP_2PI` | **`A1`** il wrap del ritmo sul periodo GIUSTO *(`2π`)* | **`False`** | `4/4` *(scritto a mano: il referto sta nel log, non in un file con la riga di verdetto)* | ✅ **`G4`, 600 passi** *(`Z123`, `csv/_test_fork/_d34_ritmo_wrap`)* | cura **`D34`** *(`Z117`: il wrap a `4π` e' l'IDENTITA')*. **`6/8` come previsto e il bilancio CHIUDE (`9.595e-14`), ma TUTTI gli aggregati peggiorano e la mia previsione ⑤ era SBAGLIATA** *(la quota al tetto SALE: -> `S09`)* | **PROVATA, default SPENTO** — la decisione e' di Luca |
+| `FASE_2PI` | **§D** `φ` come fase ordinaria su `[0, 2π)` | **`False`** | `6/6` *(letto dal referto)* | ⏸ prova a 600 passi + i test `E1`-`E4`, **da fare** | la lettura scelta da Luca, **da METTERE ALLA PROVA**. Se un test fallisce, **cade**. **Cura `D35`** *(l'antifase `+2π` che non e' un'antifase)* | ✅ **IN CODICE e SIGILLATA**, default **SPENTO**. ⏸ **NON ANCORA PROVATA** |
 
 **Cure con default ACCESO: 1 su 9.**
 

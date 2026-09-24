@@ -12976,3 +12976,73 @@ effetti misurati, l'ordine non coincide:**
 > tale, con la domanda che manca, e non blocca gli altri.*
 > **Quindi l'ordine che hai dato è compatibile con `A12`**, e lo seguo. **Ma `D31` non deve
 > restare senza una data**, ed è questo che volevo mettere nero su bianco.
+
+### ㉑ **Il sigillo di `FASE_2PI`: `6/6` PASS — e `T6` è il test che rende `T5` leggibile**
+
+> Finito alle **20:57** del 22/9. Blob **`445e2896`**, due run da 120 passi
+> *(`348.2 s` + `331.5 s`)*. Referto: `csv/_seal_fork/_sig_fase_2pi/REFERTO.txt`.
+
+| | test | esito |
+|---|---|---|
+| `T1` | il default è spento, letto dal sorgente | **PASS** `FASE_2PI = False` |
+| `T2` | GATE dall'AST | **PASS** `3` rami, tutti in `_dphi` / `_wphi` / `mitosi` |
+| `T3` | byte-inerzia a flag spento | **PASS** **`206` campi identici, `0` diversi** |
+| `T4` | controllo positivo | **PASS** `103` campi diversi, `n` `2461` → `2647` |
+| `T5` | il dominio è cambiato | **PASS** acceso `max(φ) = 6.282066 < 2π` |
+| `T6` | **e spento NON lo è** | **PASS** `max(φ) = 12.565546`, **sopra `2π`** |
+
+**`T2` merita una riga**, perché il numero *`3` rami* per **21 sostituzioni** sembra un errore e
+non lo è: le altre **non sono ramificazioni**. Passano da **`_dphi()`** e **`_wphi()`**, che
+sono **un solo punto da cui tutti prendono il periodo** — ed è il motivo per cui il flag è
+stato scritto così invece che con venti `if`.
+
+**`T6` è il test che conta più di `T5`:** se anche a flag **spento** `φ` stesse sotto `2π`,
+allora `T5` **passerebbe senza che il flag abbia fatto nulla**. È `P1-sexies` portato **dentro**
+il sigillo, non solo nel collaudo.
+
+**E i collaudi sono `6`, con DUE casi che devono fallire, e sono i due difetti:**
+`K2` — `_w4` sulle stesse differenze è **l'identità** *(`max|w4(a) − a| = 0.000e+00`)*: **`D34`
+riprodotto**. `K5` — **`+2π` su un dominio `2π` è un'identità** *(`8.882e-16`)*: **è `D35`**,
+il motivo per cui `+2π` non è un'antifase. `K3` è l'obbligo **(a)** del cor.7 di `A11`.
+
+> **⚠ Il sigillo non dice che la cura sia giusta: dice che fa ciò che dichiara.**
+> Se `φ` debba vivere su `2π` lo decidono i test, e **se uno fallisce la lettura cade**.
+> **Il default resta SPENTO.**
+
+### ㉒ **UN BUCO MIO: il §E non esiste nel repo oltre `E1` ed `E2`**
+
+> **Trovato rileggendo dal disco prima di girare la prova**, non a memoria — e **verificato
+> anche sul transcript**, non solo sui documenti.
+
+Ho scritto *«i quattro test `E1`-`E4`»* **undici volte**. Nel repo ci sono **due** test, in
+`doc/REGISTRO_FISICA.md` sotto *«LE DOMANDE APERTE»*:
+
+- **`E1`** — *la mitosi a `2π` funziona senza tarature?* Se fallisce **cade il punto 2 del §D**;
+- **`E2`** — *le coppie annichilano?* Se resta `~0` con `+π`, **cade il punto 5** e `S06` perde
+  la spiegazione che sembra avere;
+- e un **terzo punto che non è un test**: la crepa che hai dichiarato tu stesso — *l'argomento
+  della soglia vale per una differenza **istantanea**, mentre `tw` è un **accumulo** che decade*
+  — e il suo giudice è `E1`.
+
+**`E3` ed `E4` non ci sono.** Cercati nei tuoi messaggi, nei miei, in `doc/`, in questa
+relazione. **E la frase che ho scritto io — *«`E3` `r` non tocca più il clip, `E4` lo
+spegnimento di `SPINORE_VIVO` conta»* — è una ricostruzione che non ho potuto verificare da
+nessuna fonte.**
+
+**Perché è un difetto di metodo e non una dimenticanza:** *«i quattro test»* era diventato un
+**nome**, e un nome si trasporta senza riaprirlo. È **`P1` esatto**, applicato al mio stesso
+testo. **E la coda lo aggravava:** la voce dell'**epoca 3** si chiama anche lei **`E3`**.
+
+**Cosa faccio, e lo dichiaro invece di inventare le tue parole:** `E1` ed `E2` **sono tuoi e
+restano tuoi**; `E3` ed `E4` **li derivo da ciò che è committato**, e li marco come **miei** nel
+registro:
+
+- **`E3`** — dall'effetto che il §E **stesso** dichiara *«va misurato»*: con `φ` su `2π` la
+  soglia della mitosi passa a `2π`, quindi `tau_soglia` da `2.5` a `2`, `centro` da `2.75` a
+  `2.5`, e **l'inversione da `3.5π` a `3π`**: **la finestra di `D33` si allarga da mezzo `π` a
+  un `π` intero**;
+- **`E4`** — dalla riserva ② di `Z120`: **i diagnostici di fase cambiano per costruzione**, e
+  fra loro c'è **il gauge `median(|f|)` di `S09`**, il sospetto aperto ieri.
+
+**Puoi sostituirli**: sono derivati, non tuoi. **I criteri li fisso PRIMA di girare**
+*(par.5-septies)*, nel commit che precede il run.
