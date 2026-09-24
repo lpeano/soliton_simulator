@@ -13287,3 +13287,64 @@ contraddizioni non spiegate sono zero**.
 
 > **Vale la pena dirlo così: lo strumento stava segnalando come reperto un difetto PROPRIO.**
 > È la ragione per cui *«non spiegata»* deve essere una **riga stampata** e non un silenzio.
+
+### ㉘ **Le risposte puntuali: `SPINORE_CORRETTO` è ACCESO, `TEMPO_SEGNO` è SPENTO, il freno GIRAVA** *(punto 3)*
+
+> Dalla tabella generata, non a memoria. Referto intero: `doc/REFERTO_configurazione_run.md`.
+
+| flag | valore | fonte |
+|---|:--:|---|
+| `CAMPO_SPINORIALE` | **`True`** | banner *(stato effettivo dal modulo)* |
+| `SPINORE_VIVO` | **`True`** | banner, **e il default è già `True`** |
+| `SPINORE_CORRETTO` | **`True`** | banner |
+| **`TEMPO_SEGNO`** | **`False`** | default del blob **+ `--tempo-segno` assente da ogni lanciatore committato** |
+| `SCALA_MIN` | **`False`** | banner |
+| `SCALA_MIN_PASSO` | **`True`** | banner |
+
+**`SPINORE_CORRETTO` è `True`, non `False`:** il default nel sorgente è `False`, ma il driver
+cabla `--spinore-corretto` (`:187`). **La lettura «spento» era sbagliata.**
+
+**`SPINORE_VIVO` è `True` per DEFAULT, non per l'argv:** chi lo spegnesse togliendo il flag dal
+driver **non otterrebbe nulla** — servirebbe `--senza-spinore-vivo`. **È la trappola di
+`STEP2_OROLOGIO`**, di nuovo.
+
+### **`--scala-min=off`: il freno ERA ATTIVO, via `SCALA_MIN_PASSO`**
+
+**È un `or` in quattro punti su cinque** — `:3657` *(guardia invarianti)*, `:3811` *(il
+pavimento `_floor_d0()` **sparisce**)*, `:3821` *(alla nascita il troncone va a `LAM`)* — e
+l'unica cosa che `SCALA_MIN` **da solo** governa è **frenare scrittura per scrittura**
+(`:3800-3805`), che **`C3` ha sostituito di proposito**, perché frenare a ogni scrittura fa
+dipendere il risultato **dall'ORDINE**.
+
+**I contatori del riferimento a 600 passi lo confermano:** `_g_smp_chiusure = 600` e
+`_g_sm_d0_passo = 600` *(**una** chiusura per passo)* · `_g_smp_passanti = 3596` *(le scritture
+**non** frenate singolarmente)* · `_g_sm_pav_saltati = 3596` · `_g_sm_nascite = 604`.
+
+**E `_g_smp_nulli = 0`:** su `526` mila archi, `dx == 0` **non capita mai**. Il ramo «spinte
+opposte di somma nulla» del docstring **è teorico**, e va detto.
+
+### **Il termine del freno nei bilanci, e il SEGNO è il punto**
+
+| run | `freno` | quota di `Δ(Σd0)` |
+|---|--:|--:|
+| `G4` riferimento | **`+2.032480e+06`** | **`+117.41 %`** |
+| `G4` spegni | `+1.419938e+06` | `+218.33 %` |
+| `G4-bis` | `+1.634679e+06` | `+178.09 %` |
+| `D34` | `+2.068902e+06` | `+105.60 %` |
+| `FASE_2PI` corto | `+3.226687e+05` | `+186.77 %` |
+
+**Positivo in tutti e cinque, e più grande del `Δ` totale.** Un *freno* che **aggiunge**
+lunghezza è un **motore**: è **`D31`**.
+
+### **Per `D31` e per il bilancio di `Z108`/`Z113`: reggono, e ora è VERIFICATO**
+
+- **`D31`**: il freno **girava** in ogni campagna. `Z113` lo dimostra **sulla formula**, quindi
+  non dipendeva dalla configurazione — **ma ora sappiamo che la dimostrazione è PERTINENTE**:
+  il cricchetto non era una proprietà di un ramo spento;
+- **il bilancio misura il freno GIUSTO**, e si legge dal sorgente: `_freno_passo` chiama
+  `self._smorza(v, dx, 'd0_passo')` (`:3790`) e l'involucro conta **solo `d0_passo`**.
+  `_g_sm_d0_passo = 600 = _g_smp_chiusure`: **nessuna doppia contabilizzazione.**
+
+> **⚠ E una cosa che NON dico: che `C3` sia la causa del cricchetto di VERSO.** Non lo è.
+> **`C3` cura il cricchetto d'ORDINE (`Z91`); `Z113` dimostra che quello di VERSO sopravvive.**
+> Due difetti diversi nello stesso punto.
