@@ -182,18 +182,29 @@
 ## IL GRAFO DELLE DIPENDENZE
 
 ```
-  SPINORE (4pi VERO)
-      |  _phc / phivel / omega_clk
-      v
-    phi  (4pi DICHIARATO -- la convenzione)
-      |  dph = _wphi(phi[i] - phi[j])   :4675
-      v
-  twp, tw  (EREDITATO)                  :4698-4699
-      |                |            |              |
-      v                v            v              v
-   MITOSI          SCHWINGER    REPULSIONE       TEMPI
-   soglia,         antifase,    max compress.    ritmo, tau_pp
-   campana         prob_coppia  (S05)            d/cs
+            SPINORE  _psi_spinor   (il 4pi VERO)
+                 |                        |
+   _phc/phivel/  |                        |  :3398  psi_spin = mat(w) @ (amp * _psi_spinor)
+   omega_clk     v                        v
+               phi                   L'OROLOGIO  r      (ritmo(), :2628-2629)
+        (il 4pi DICHIARATO)               ^
+                 |                        |  e `phi` ci arriva SOLO dal FALLBACK :3393-3394
+                 |  :4675                 |  MISURATO: 3 volte su 441 (0.68 %), alle
+                 |  dph = _wphi(          |  invocazioni 1-2-3 -- il transitorio del primo
+                 |     phi[i] - phi[j])   |  passo, e MAI PIU'
+                 v                        |
+            twp, tw   (EREDITATO)         |  (nessuna freccia a regime)
+            :4698-4699
+                 |              |              |
+                 v              v              v
+              MITOSI        SCHWINGER      REPULSIONE
+              soglia,       antifase,      max compress.
+              campana       prob_coppia    (S05)
+
+  !! LA CORREZIONE: l'OROLOGIO NON viene da `phi` ne' da `tw`. Viene dallo SPINORE.
+     Il ramo `TEMPO_SEGNO` di `ritmo()` (`r = 1 + mean|tw|/PHI_CRIT`), che SI' viene
+     dalla torsione, NON GIRA: `TEMPO_SEGNO = False` in 9 run su 11 (`Z130`).
+     Restano da `tw`: `tau_pp` e, indirettamente, il termine di repulsione.
 
   E IL VERSO SBAGLIATO, che l'architettura deve abolire:
     tw  ---- TW_SPINORE ---->  omega_s  (lo SPINORE)     *** INVERSA ***
@@ -201,14 +212,15 @@
 
 | da | a | come | classe |
 |---|---|---|:--:|
-| SPINORE `psi_spinor` | `phi` | `_phc` / `phivel` / `omega_clk`: l'orologio proprio nasce dalla fase dello spinore | `VERA -> DICHIARATA` |
+| SPINORE `_psi_spinor` | `phi` | `_phc` / `phivel` / `omega_clk` fanno AVANZARE `phi`. **Attenzione: questa freccia va dallo spinore a `phi`, non il contrario** -- `phi` e' una CONSEGUENZA | `VERA -> DICHIARATA` |
 | `phi` | `dph` | `dph = _wphi(phi[i] - phi[j])` (`:4675`) | `DICHIARATA -> EREDITATA` |
 | `dph` | `twp`, `tw` | `tw += _w8(dph + twist_dip - twp)` (`:4698-4699`) | `EREDITATA` |
 | `tw` | MITOSI | `avv = |tw|`, soglia `PHI_CRIT + twist_max`, campana fino a `TW_TETTO` | `EREDITATA` |
 | `tw` | SCHWINGER | `eccesso_torsione` -> `prob_coppia`, e l'antifase `fm + dphi/2` | `EREDITATA` |
 | `tw` | REPULSIONE / `d0` | il termine di massima compressione (`S05`) | `EREDITATA` |
 | `tw` | TEMPI | `ritmo()` ramo `TEMPO_SEGNO` (`r = 1 + mean|tw|/PHI_CRIT`) e `tau_pp` | `EREDITATA` |
-| `phi` | TEMPI | `ritmo()` ramo VIVO: `signed` da `np.angle(psi_spin)`, gauge, bottleneck | `DICHIARATA -> EREDITATA` |
+| SPINORE `_psi_spinor` | TEMPI (l'OROLOGIO) | `ritmo()` ramo VIVO `:2628-2629`: `np.angle(psi_spin)`, e `psi_spin` e' costruito a `:3398` DALLO SNAPSHOT `_psi_spinor`. **NON da `phi`** | `VERA -> il tempo` |
+| `phi` | TEMPI, SOLO dal fallback | `:3393-3394`: se `_psi_spinor` e' assente o corto, `_psp[:,0] = exp(1j*phi)`. MISURATO: **3 volte su 441 (0.68 %), alle invocazioni 1-2-3** -- il transitorio del primo passo, e mai piu' | `DICHIARATA, ma TRANSITORIA` |
 | `tw` | SPINORE | `TW_SPINORE`: `_otw` sommato a `omega_new` (`:2149-2154`) | `*** INVERSA ***` |
 
 > **!! COSA QUESTA MAPPA NON FA: non decide.** Dice **di chi** e' il `4pi` in ogni punto e **se quel punto gira**. La proposta e' una **scheda a parte**.

@@ -31,6 +31,18 @@ esattamente quello che `Z127` ha misurato**: portare `phi` su `2pi` ha dimezzato
 > **MAPPA dei tempi**, e poi **UNA SCHEDA DI PROPOSTA nel registro** — **derivata, senza
 > codice**. Tutto **sola lettura**.
 
+## ⏳ IN CODA, e NON bloccano le cure *(`A12` regola 1)*
+
+**Decisione di Luca, 2026-09-24.** Due lavori del prompt unico **vanno in coda**, perché sono
+**misure** e `A12` dice che una misura nuova non passa davanti a una cura derivabile:
+
+| | lavoro | perché è in coda |
+|--:|---|---|
+| **(3)** | **`S08`: che cos'è `phi`** — la catena che lo aggiorna, e se si ottiene dalla fase globale `U(1)` dello spinore *(il Bloch è caduto: `Z121`)* | è una **misura**, e la sua risposta **non cambia** nessuna delle tre cure |
+| **(4)** | **LA MAPPA DEI TEMPI** — ogni lettore di `r`, `dt_n`, `tau_pp`, `d/cs`, e l'anello `A6` | idem. **E una parte è già fatta:** la provenienza dell'orologio è nel grafo della mappa del `4pi`, misurata |
+
+> **Servono per la torsione dal trasporto `SU(2)`**, che è **dopo** il `CHECKPOINT`.
+
 <!-- INDIRIZZO:FINE -->
 
 <!-- PUNTO-DI-RIPRESA:INIZIO -->

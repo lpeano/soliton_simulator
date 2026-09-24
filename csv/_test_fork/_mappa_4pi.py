@@ -335,8 +335,9 @@ def collaudo(W):
 
 # ---------------------------------------------------------------- IL GRAFO
 GRAFO = [
-    ("SPINORE `psi_spinor`", "`phi`",
-     "`_phc` / `phivel` / `omega_clk`: l'orologio proprio nasce dalla fase dello spinore",
+    ("SPINORE `_psi_spinor`", "`phi`",
+     "`_phc` / `phivel` / `omega_clk` fanno AVANZARE `phi`. **Attenzione: questa freccia "
+     "va dallo spinore a `phi`, non il contrario** -- `phi` e' una CONSEGUENZA",
      "VERA -> DICHIARATA"),
     ("`phi`", "`dph`", "`dph = _wphi(phi[i] - phi[j])` (`:4675`)", "DICHIARATA -> EREDITATA"),
     ("`dph`", "`twp`, `tw`", "`tw += _w8(dph + twist_dip - twp)` (`:4698-4699`)", "EREDITATA"),
@@ -347,8 +348,15 @@ GRAFO = [
     ("`tw`", "REPULSIONE / `d0`", "il termine di massima compressione (`S05`)", "EREDITATA"),
     ("`tw`", "TEMPI", "`ritmo()` ramo `TEMPO_SEGNO` (`r = 1 + mean|tw|/PHI_CRIT`) e `tau_pp`",
      "EREDITATA"),
-    ("`phi`", "TEMPI", "`ritmo()` ramo VIVO: `signed` da `np.angle(psi_spin)`, gauge, bottleneck",
-     "DICHIARATA -> EREDITATA"),
+    ("SPINORE `_psi_spinor`", "TEMPI (l'OROLOGIO)",
+     "`ritmo()` ramo VIVO `:2628-2629`: `np.angle(psi_spin)`, e `psi_spin` e' costruito a "
+     "`:3398` DALLO SNAPSHOT `_psi_spinor`. **NON da `phi`**",
+     "VERA -> il tempo"),
+    ("`phi`", "TEMPI, SOLO dal fallback",
+     "`:3393-3394`: se `_psi_spinor` e' assente o corto, `_psp[:,0] = exp(1j*phi)`. "
+     "MISURATO: **3 volte su 441 (0.68 %), alle invocazioni 1-2-3** -- il transitorio "
+     "del primo passo, e mai piu'",
+     "DICHIARATA, ma TRANSITORIA"),
     ("`tw`", "SPINORE", "`TW_SPINORE`: `_otw` sommato a `omega_new` (`:2149-2154`)",
      "*** INVERSA ***"),
 ]
@@ -450,18 +458,29 @@ def main():
        "spenta**, e l'architettura a un solo ponte deve dire **se puo' esistere affatto**.\n\n")
     Wf("## IL GRAFO DELLE DIPENDENZE\n\n")
     Wf("```\n")
-    Wf("  SPINORE (4pi VERO)\n")
-    Wf("      |  _phc / phivel / omega_clk\n")
-    Wf("      v\n")
-    Wf("    phi  (4pi DICHIARATO -- la convenzione)\n")
-    Wf("      |  dph = _wphi(phi[i] - phi[j])   :4675\n")
-    Wf("      v\n")
-    Wf("  twp, tw  (EREDITATO)                  :4698-4699\n")
-    Wf("      |                |            |              |\n")
-    Wf("      v                v            v              v\n")
-    Wf("   MITOSI          SCHWINGER    REPULSIONE       TEMPI\n")
-    Wf("   soglia,         antifase,    max compress.    ritmo, tau_pp\n")
-    Wf("   campana         prob_coppia  (S05)            d/cs\n")
+    Wf("            SPINORE  _psi_spinor   (il 4pi VERO)\n")
+    Wf("                 |                        |\n")
+    Wf("   _phc/phivel/  |                        |  :3398  psi_spin = mat(w) @ (amp * _psi_spinor)\n")
+    Wf("   omega_clk     v                        v\n")
+    Wf("               phi                   L'OROLOGIO  r      (ritmo(), :2628-2629)\n")
+    Wf("        (il 4pi DICHIARATO)               ^\n")
+    Wf("                 |                        |  e `phi` ci arriva SOLO dal FALLBACK :3393-3394\n")
+    Wf("                 |  :4675                 |  MISURATO: 3 volte su 441 (0.68 %), alle\n")
+    Wf("                 |  dph = _wphi(          |  invocazioni 1-2-3 -- il transitorio del primo\n")
+    Wf("                 |     phi[i] - phi[j])   |  passo, e MAI PIU'\n")
+    Wf("                 v                        |\n")
+    Wf("            twp, tw   (EREDITATO)         |  (nessuna freccia a regime)\n")
+    Wf("            :4698-4699\n")
+    Wf("                 |              |              |\n")
+    Wf("                 v              v              v\n")
+    Wf("              MITOSI        SCHWINGER      REPULSIONE\n")
+    Wf("              soglia,       antifase,      max compress.\n")
+    Wf("              campana       prob_coppia    (S05)\n")
+    Wf("\n")
+    Wf("  !! LA CORREZIONE: l'OROLOGIO NON viene da `phi` ne' da `tw`. Viene dallo SPINORE.\n")
+    Wf("     Il ramo `TEMPO_SEGNO` di `ritmo()` (`r = 1 + mean|tw|/PHI_CRIT`), che SI' viene\n")
+    Wf("     dalla torsione, NON GIRA: `TEMPO_SEGNO = False` in 9 run su 11 (`Z130`).\n")
+    Wf("     Restano da `tw`: `tau_pp` e, indirettamente, il termine di repulsione.\n")
     Wf("\n")
     Wf("  E IL VERSO SBAGLIATO, che l'architettura deve abolire:\n")
     Wf("    tw  ---- TW_SPINORE ---->  omega_s  (lo SPINORE)     *** INVERSA ***\n")

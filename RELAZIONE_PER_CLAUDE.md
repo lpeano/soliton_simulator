@@ -13536,3 +13536,63 @@ peggio di uno che scrive `-`.** Ora si cerca per **token esatto**, e dice **`Fal
 > **E il collaudo aveva già fermato tutto una volta prima:** `K2` *(un caso che DEVE passare)*
 > falliva perché `self._psi_spinor` dà il nome **con l'underscore** e il confronto era esatto.
 > **Il collaudo ha rifiutato di produrre la mappa**, che è il suo mestiere.
+
+### ㉞ **Il grafo corretto: l'OROLOGIO viene dallo SPINORE, non da `phi`**
+
+> **Rilievo tuo**, e la misura lo conferma con un margine che non lascia dubbi.
+
+**Dal codice:** il ramo **vivo** di `ritmo()` (`:2628-2629`) legge
+`np.angle(psi_spin[:,0]) − np.angle(_psi_spin_prec[:,0])`, e **`psi_spin` è costruito a
+`:3398` dallo snapshot `_psi_spinor`**:
+
+```
+psi_spin = mat(w) @ (amp * _psi_spinor)
+```
+
+**`phi` entra in quella catena in UN SOLO punto**, il fallback `:3393-3394`:
+
+```python
+if _psp is None or len(_psp) < _n:
+    _psp = np.zeros((_n, 2), complex);  _psp[:, 0] = np.exp(1j * self.phi[:_n])
+```
+
+### **Quante volte scatta: `3` su `441`, e tutte e tre all'avvio**
+
+| | |
+|---|--:|
+| invocazioni di `calcola_psi` con `CAMPO_SPINORIALE` acceso | **441** |
+| di cui il fallback è scattato | **3** — **`0.68 %`** |
+| perché `_psi_spinor` era **assente** | `0` |
+| perché era più **corto** di `n` | `3` |
+| **quando** | invocazioni **`1, 2, 3`** |
+| forma al fallimento `(len, n)` | `(0, 2391)` × 3 |
+
+**È il transitorio del primo passo, quando `_psi_spinor` non esiste ancora, e dopo la terza
+invocazione non scatta più.** Il criterio di lettura era **scritto nel codice della sonda prima
+di girarla**, e non aveva soglie da scegliere: *zero → il grafo si corregge; solo alle prime
+invocazioni → transitorio, grafo corretto comunque; sparso sul run → il grafo NON si corregge,
+ed è un reperto*.
+
+> **La domanda non era retorica:** i precedenti di questa famiglia sono **`_cs_nodo_prev` al
+> `71.88 %`** e **`_psi_spin_prec` al `95.33 %`**, per mesi, in silenzio. **Qui è `0.68 %` e
+> solo all'avvio.**
+
+### **Cosa cambia nel grafo, e cosa NON cambia**
+
+**Cambia:** la freccia **`phi → TEMPI` sparisce a regime**. L'orologio è
+**`SPINORE → psi_spin → r`**. E la freccia **`SPINORE → phi`** resta, ma va **letta nel verso
+giusto**: `_phc`/`phivel`/`omega_clk` fanno **avanzare** `phi`, quindi **`phi` è una
+conseguenza dello spinore**, non una sorgente.
+
+**Non cambia:** `tw` **prende ancora la sua scala da `phi`** *(`:4675`, `dph = _wphi(phi[i] −
+phi[j])`)*, e da `tw` dipendono **mitosi, Schwinger e repulsione**. **Il difetto che l'indirizzo
+descrive resta intero.**
+
+**E una cosa che il grafo diceva male:** avevo messo `ritmo` fra i figli di `tw`. È vero **solo
+del ramo `TEMPO_SEGNO`** (`r = 1 + mean|tw|/PHI_CRIT`), **che non gira** *(`Z130`)*. Da `tw`
+restano **`tau_pp`** e, indirettamente, la repulsione.
+
+### ⏳ **E (3) `S08` e (4) la mappa dei tempi vanno IN CODA** *(`A12` regola 1)*
+
+Sono **misure**, e la loro risposta **non cambia nessuna delle tre cure**. Servono per la
+**torsione dal trasporto `SU(2)`**, che è **dopo** il `CHECKPOINT`.
