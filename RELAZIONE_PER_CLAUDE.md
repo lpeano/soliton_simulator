@@ -14747,3 +14747,29 @@ Le tre guardie hanno **zero salti** — l'opposto di `_cs_nodo_prev` *(`71.88 %`
 `_r_corrente` è lungo `2570` su `2575`, perché `mitosi()` gira **dopo** `step()`; e
 `_r_nodo_mitosi` è chiamata **dentro** `mitosi()`, **prima** che i figli esistano.
 **La legge è salva per l'ordine delle chiamate, e basta spostare una riga per romperla.**
+
+---
+
+# ✅ LA FORMA DEL FRENO-LEGGE È DECISA — **`1 + tanh(dx/d)`** *(tua decisione, 2026-09-24)*
+
+```
+(d − LAM)  ←  (d − LAM) · (1 + tanh(dx / d))
+```
+
+Scritta in **scheda ⑪ par.4-quinquies** e in **`D31`** *(che vive nella `STATO` della scheda ①,
+non nel registro dei fronti — l'ho cercato lì e non c'era)*. **Nessun codice.**
+
+**La misura che l'ha decisa:** `max |dx|/d = 0.0531` su `125 731 076` campioni, **zero oltre
+`0.5`** su entrambi i versi. La saturazione conta a `x ~ 1`: il massimo misurato è **19 volte**
+più piccolo. **Il solo prezzo dichiarato di `tanh` si paga zero volte.**
+
+> **E l'argomento più forte è l'asimmetria della conoscenza, non quella delle forme:** il costo
+> di `tanh` è **misurato** e vale zero; il costo di `piana` è **non misurato**, e il suo
+> intervallo a 6000 passi va da `+1.7 %` a `+471 %`. **Si sceglie la forma il cui prezzo si
+> conosce.**
+
+**Il criterio che la riapre, scritto ORA** *(par.10: la condizione si scrive al momento della
+decisione, non dopo)*: **una quota non nulla di `|dx|/d > 0.5`.**
+
+**E resta in coda, a zero run in più:** registrare `mean((dx/d)²)` nello stesso involucro.
+Direbbe **di quanto** `piana` sarebbe stata peggiore — non **se**.

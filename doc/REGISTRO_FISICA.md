@@ -65,6 +65,27 @@ voce `Z…` della `FASE A`, commit `9a82bfb`)*.
 
 > **STATO: `DIFETTOSA`.** Difetto **`D31`**. **Viola `A11` corollario 4 e corollario 7(b).**
 > **È IL MOTORE DELLA CRESCITA DI `d0`**, misurato due volte con un bilancio che chiude.
+>
+> ### ✅ **LA FORMA DELLA CURA DI `D31` È DECISA** *(Luca, 2026-09-24)*
+>
+> ```
+> (d − LAM)  ←  (d − LAM) · (1 + tanh(dx / d))
+> ```
+>
+> **LA MISURA CHE L'HA DECISA:** `V8`/`V9` dal giro corto di `CURA 2` — **`max |dx|/d = 0.0531`
+> su `125 731 076` campioni, ZERO oltre `0.5`** su entrambi i versi. **Il solo difetto
+> dichiarato di `tanh`, la saturazione a `2`, non si presenta mai:** conta a `x ~ 1`, e il
+> massimo misurato è **`19` volte** più piccolo.
+>
+> **⚠ E IL CONFRONTO NON È SIMMETRICO:** la deriva di `piana` vale `exp(N·E[x²]/2)`, e **`E[x²]`
+> NON è stato registrato** — a `6000` passi l'intervallo va da **`+1.7 %` a `+471 %`**.
+> **Si sceglie la forma il cui prezzo si CONOSCE.**
+>
+> **CRITERIO CHE LA RIAPRE, scritto ORA** *(par.10: la condizione si scrive al momento della
+> decisione, non dopo)*: **una quota NON NULLA di `|dx|/d > 0.5`.**
+>
+> **⚠ NESSUN CODICE: la forma è decisa, la scrittura no.** Sta in **scheda ⑩ par.4-quinquies**,
+> e **l'ordine — se il freno-legge venga prima o dopo `CURA 3` — è un CHECKPOINT di Luca.**
 
 ## LA FORMA — copiata dal codice, non dal commento
 
@@ -1897,6 +1918,64 @@ tetto `√e` di Itô** — punti `V8`/`V9`.
 > **La decide la DISTRIBUZIONE di `|dx|/d`** — punti `V8`/`V9` — **e la decide Luca DOPO quella
 > misura.** *(Non prima: senza quel numero non c'è una base derivata.)*
 
+## 4-quinquies. ✅ **LA FORMA È DECISA — `1 + tanh(x)`** *(decisione di Luca, 2026-09-24)*
+
+```
+(d − LAM)  ←  (d − LAM) · (1 + tanh(dx / d))
+```
+
+### LA MISURA CHE L'HA DECISA — `V8`/`V9`, dal giro corto di `CURA 2`
+
+*(`csv/_test_fork/_cura2_corto/BILANCIO_d0.txt`, blob `49fc54d2`, `120` passi, seme `42`)*
+
+```
+  verso                n        p50      p90      p99    p99.9      max   >0.5   >1   >2
+  discese       60538734     0.0019   0.0239   0.0310   0.0344   0.0385    0.0  0.0  0.0
+  salite        65192342     0.0024   0.0124   0.0241   0.0307   0.0531    0.0  0.0  0.0
+```
+
+> ### ❗ **IL SOLO DIFETTO DICHIARATO DI `tanh` — LA SATURAZIONE A `2` — NON SI PRESENTA MAI.**
+> Il **massimo** su **`125 731 076`** campioni è **`0.0531`**: la saturazione conta a `x` di
+> ordine `1`, e il massimo misurato è **`19` volte più piccolo**. **Zero campioni oltre `0.5`,
+> su entrambi i versi.** Al massimo misurato le due forme differiscono di **`1.4e-03`
+> relativo**.
+>
+> **Quindi `tanh` paga il suo unico prezzo ZERO VOLTE, e in cambio dà deriva ESATTAMENTE nulla.**
+
+### ⚠ E IL CONFRONTO NON È SIMMETRICO, PERCHÉ SULL'ALTRO PIATTO IL NUMERO MANCA
+
+La deriva di `piana` vale `exp(N·E[x²]/2)`, e **`E[x²]` NON È STATO REGISTRATO** — l'involucro
+ha salvato **quantili**, `max` e quote, **e i quantili non bastano a stimare una media di
+quadrati** *(`csv/_test_fork/_z146_scelta_freno.py`)*:
+
+| ipotesi su `sqrt(E[x²])` | 120 passi | 1200 passi | 6000 passi |
+|---|--:|--:|--:|
+| `= p50 (0.0024)` | `+0.03 %` | `+0.35 %` | `+1.74 %` |
+| `= p90 (0.0124)` | `+0.93 %` | `+9.66 %` | `+58.61 %` |
+| `= p99 (0.0241)` | `+3.55 %` | `+41.69 %` | `+471.12 %` |
+
+> **A `120` passi la scelta è indifferente in ogni ipotesi. A `6000` l'intervallo va da
+> `+1.7 %` a `+471 %`: TROPPO LARGO per decidere.**
+>
+> ### **E LA DECISIONE NON NE È INDEBOLITA — È ANZI IL SUO ARGOMENTO PIÙ FORTE:**
+> **il costo di `tanh` è MISURATO e vale zero; il costo di `piana` è NON MISURATO e il suo
+> intervallo arriva a un fattore.** **Si sceglie la forma il cui prezzo si conosce.**
+
+### ⚠ COSA RESTEREBBE DA MISURARE, e costa **ZERO run in più**
+
+Registrare **`mean((dx/d)²)`** nello stesso involucro che già registra i quantili: **è una somma
+in più, sugli stessi campioni.** **Non cambia la decisione** — servirebbe a sapere **di quanto**
+`piana` sarebbe stata peggiore, non **se**. **→ in coda.**
+
+### ⚠ E LA DECISIONE PORTA IL SUO REGIME, come ogni numero di questo repo *(`9-bis`)*
+
+`|dx|/d ≤ 0.053` è misurato a **`120` passi**, su **un seme**, con `--sep 4.0`. **Se un giorno
+`|dx|/d` si avvicinasse a `1`, la saturazione di `tanh` comincerebbe a mordere e questa
+decisione andrebbe RIFATTA, non difesa.**
+**IL CRITERIO CHE LA RIAPRE, scritto ORA e non dopo** *(`par.10`: la condizione di retrocessione
+si scrive al momento della promozione)*:
+### **una quota NON NULLA di `|dx|/d > 0.5`.**
+
 ## 5. ❌ **PERCHÉ NON `exp(dx/u)`** — la variabile `log(d − LAM)`
 
 La scelta «naturale» sarebbe far evolvere **liberamente** `log u`, cioè `u ← u·exp(dx/u)`.
@@ -1951,7 +2030,7 @@ spostamento ILLIMITATO**, che è la firma di `A11`.
    alla stessa legge è **plausibile, non derivato**;
 4. **chi spinge gli archi contro il muro.** La proposta toglie **il cricchetto del freno**, non
    la **causa** per cui gli archi ci arrivano. **Resta aperta e SEPARATA:** `D33` e `S05`.
-5. **se la SATURAZIONE di `tanh` a `2` si manifesti davvero**, e la stessa domanda per la non-monotonia di Itô. Dipende da `\|dx\|/d`, che **non è
+5. ~~**se la SATURAZIONE di `tanh` a `2` si manifesti davvero**~~ — **RISOLTO il 2026-09-24**: **non si manifesta**, `max |dx|/d = 0.0531` su `125 731 076` campioni, **zero oltre `0.5`** *(par.4-quinquies)*. **Resta aperto `E[x²]`**, che non ho registrato e che direbbe **di quanto** `piana` sarebbe stata peggiore. Dipende da `\|dx\|/d`, che **non è
    misurato** — punti `V8`/`V9`. **Senza quel numero la scelta fra le due forme non ha una
    base derivata**, e resta di Luca;
 6. **se una deriva NEGATIVA di quarto ordine sia preferibile a una POSITIVA di secondo.** È
