@@ -1155,3 +1155,12 @@ ramo B (chi_basc OFF):
 - *2026-09-24 14:41:14* — PARTITO: PID Windows 27128, 2026-09-24 ~14:40. 20 frame = 120 passi.
 
 **chiuso 2026-09-24 14:51:33 — FINITO** 120 passi in 509.0 s. CONFIGURAZIONE.txt conferma RITMO_WRAP_2PI=True e TW_SPINORE=False. Bilancio CHIUDE (4.721e-14). La mitosi NON muore: 209 nati/67 eventi contro 203/62. Unico effetto sopra il nullo: median(r) -33 percento. I dati SERVONO: sono la prova di CURA 1.
+
+## APERTO SIGILLO-CURA2
+
+- **avvio** `2026-09-24 18:41:03` · **blob** `800666c2 (git) / b881db89 (byte grezzi)` · **HEAD** `c04d2b0`
+- **comando**
+  ```
+  python csv/_seal_fork/_sigillo_cura2.py
+  ```
+- **note** Sigillo di CURA 2. T4 byte-inerzia a flag SPENTO contro _cura1_corto/scena_000120.pkl.gz; T5 controllo positivo a flag ACCESO. Due giri da 120 passi, ~17 min. Collaudo 6/6 e T1/T2/T3 gia' PASS. Codice: c04d2b0, blob b881db89. Sigillo: a11e3c5.
