@@ -14207,3 +14207,83 @@ fa fallire il sigillo.
 > legge giusta, realizzata male, e controllata solo a volte**: ora almeno il controllo non
 > dipende più da un flag. **Il punto ② di `E4-LAM` resta aperto**, ed è la scheda del
 > freno-legge.
+
+### ㉩ **La scheda del FRENO-LEGGE: la deriva passa dal PRIMO al SECONDO ordine**
+
+> Scheda ⑫ `freno-legge`. **Nessun codice**, come hai deciso: il codice solo dopo la prova di
+> `CURA 2`.
+
+### **Il freno di oggi è già asintotico — ma in UN VERSO SOLO**
+
+Con `u = d − LAM` e mobilità `m = u/d`:
+
+| verso | oggi | asintotico? |
+|---|---|:--:|
+| **discesa** | `u ← u(1 + dx/d)`, incremento `dx·m` | **sì** — `m → 0` al confine |
+| **salita** | `u ← u + dx`, **identità esatta** | **no** |
+
+### **La deriva di oggi: PRIMO ordine, e MASSIMA AL CONFINE**
+
+```
+E[Δu] = ½(+a) + ½(−a·m) = (a/2)·(LAM/d)
+```
+
+**Al confine `d → LAM` vale `a/2`: il cricchetto è più forte proprio dove il vincolo morde.**
+È la forma esatta di quello che `Z113` ha dimostrato e che i bilanci misurano — il termine
+FRENO vale **`+117 %`** di `Δ(Σd0)`.
+
+### **La forma proposta, e al primo ordine è GIÀ quella di oggi**
+
+```
+(d − LAM) ← (d − LAM)·exp(dx/d)          eff = u·(exp(dx/d) − 1)
+```
+
+**`u·(exp(dx/d) − 1) = dx·m + O(dx²)`** — **il fattore non cambia, cambia il VERSO in cui si
+applica.** Non è una legge nuova: è **la stessa legge resa simmetrica**. E l'interfaccia di
+`_smorza` *(che ritorna un incremento)* **resta identica**.
+
+### **La deriva residua: SECONDO ordine, nulla al confine**
+
+```
+E[Δu] = u·(cosh(a/d) − 1) = u·a²/(2d²) + O(a⁴)
+```
+
+| | oggi | proposta |
+|---|---|---|
+| ordine nel rumore | **primo** | **secondo** |
+| al confine `d → LAM` | **`→ a/2`, MASSIMA** | **`→ 0`** |
+| lontano | `→ 0` | `→ a²/(2d)` |
+
+**Il rapporto dà una CONDIZIONE:** `nuova/oggi = a·(d−LAM)/(d·LAM)`.
+
+> ### ❗ **La proposta è migliore OVUNQUE se e solo se `a < LAM`**
+> cioè **se il passo tipico di rumore è più piccolo della scala minima**. **`LAM = 0.8`, e `a`
+> NON È MISURATO.** È il primo punto della verifica, e senza quel numero **non posso
+> dichiarare vera la condizione**.
+
+### ✅ **Due limiti spariscono, e questa volta l'ho VERIFICATO**
+
+`max(0, 1 − LAM/d)` e `pos = prima > 0` **proteggevano entrambi da `d < LAM`** — che **`E4-LAM`
+ora vieta come invariante**. **Spariscono, e non ne nasce nessuno:** l'overflow di `exp` è
+limitato da `|dx|/LAM` e, se mai accadesse, lo prende `np.seterr(over='raise')` **con la riga**.
+
+> *(L'ho controllato invece di dirlo. È l'errore di `Z142`, dove avevo scritto «due clamp
+> spariscono» e uno nasceva.)*
+
+### ❌ **E la via che avevi corretto sta nella scheda, non cancellata**
+
+`u ← u·exp(dx/u)` — far evolvere liberamente `log u` — **è sbagliata**: vicino al confine
+`u → 0`, quindi **una spinta piccola diventa un salto enorme**. **Una spinta limitata
+produrrebbe uno spostamento illimitato**, che è la firma di `A11`. Con `exp(dx/d)` non succede,
+perché **`d ≥ LAM` è una legge** e l'esponente è limitato da `|dx|/LAM`.
+
+**Resta scritta perché spiega perché la scelta è quella che è** *(par.10)*.
+
+### ⚠ **E la cosa che non va persa**
+
+> **Questa cura NON elimina la deriva. La abbassa di un ordine e la annulla dove oggi è
+> massima.** `cosh(x) ≥ 1` sempre, quindi `E[Δu] ≥ 0` **sempre**: **cambia l'ORDINE, non il
+> segno.** Dire *«il cricchetto sparisce»* sarebbe falso.
+
+**E resta separata la domanda che non tocco: chi spinge gli archi contro il muro** — `D33`,
+`S05`.
