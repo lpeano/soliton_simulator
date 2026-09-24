@@ -66,6 +66,17 @@ voce `Z…` della `FASE A`, commit `9a82bfb`)*.
 > **STATO: `DIFETTOSA`.** Difetto **`D31`**. **Viola `A11` corollario 4 e corollario 7(b).**
 > **È IL MOTORE DELLA CRESCITA DI `d0`**, misurato due volte con un bilancio che chiude.
 >
+> ### ➜ **`_nasce` HA PERSO IL SUO GATE** *(2026-09-24, `D38`)*
+>
+> `_nasce` — *il troncone sotto `LAM` si porta A `LAM`* — era `if not (SCALA_MIN or
+> SCALA_MIN_PASSO): return v`. **Il gate è TOLTO: il presidio agisce SEMPRE.**
+> **Coi default del SORGENTE la legge `d >= LAM` era VIOLATA AL PASSO ZERO su `223 380`
+> archi**, ed è **lo stesso schema che `E4-LAM` ha tolto al CONTROLLO e che era rimasto
+> all'ESECUZIONE**: *il controllo era legge, chi la faceva rispettare era un'opzione.*
+>
+> **⚠ E NON È UNA CURA, È UN PRESIDIO** *(decisione di Luca)*: con `SEMINA_LAM` acceso **non
+> deve scattare mai**, e **`_g_sm_nascite` è la sua misura**. **La legge sta in scheda ⑫.**
+>
 > ### ✅ **LA FORMA DELLA CURA DI `D31` È DECISA** *(Luca, 2026-09-24)*
 >
 > ```
@@ -530,6 +541,11 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 > sarebbe **silenziosamente inerte** — il difetto documentato di `--tau-a`)*. **La legge sta in
 > scheda ⑨**; qui resta il rimando, perché `REG-R` mappa **per funzione**.
 >
+> **➤ E `SEMINA_LAM` passa di qui allo stesso modo** *(2026-09-24)*: `--semina-lam` in `_cli`,
+> la riga in `_applica_flag`, e **`SEMINA_LAM` nel `global`** — senza il quale l'assegnamento
+> creerebbe una locale e il flag sarebbe **silenziosamente inerte**. **La legge sta in scheda
+> ⑫.**
+>
 > **⚠ E C'È UN LEGAME DI SOSTANZA, non solo di funzione: `CURA 2` prende il suo orologio da
 > QUI.** `_r_nodo_mitosi` legge `_r_corrente`, cioè l'`r` che **`ritmo()` di questa scheda
 > produce**; e il `tau_nodo` che la cura **sostituisce** è **identico al ramo `TEMPO_SEGNO`**
@@ -668,6 +684,15 @@ avvertimento.**
 > **⚠ QUESTA SCHEDA RIVENDICA `step` IN VIA PROVVISORIA:** `step` fa **tutto**, e attribuirlo
 > alla fase è improprio. Lo tiene perché `REG-R` mappa **per funzione** e i due siti di `φ`
 > vivono lì. **Quando `step` avrà la sua scheda, il marcatore si divide.**
+>
+> ### ➜ **E `semina()` HA UN RAMO NUOVO: `SEMINA_LAM`** *(2026-09-24)*
+>
+> Questa scheda rivendica `semina` **per la FASE** *(`φ` nasce su `[0, 4π)`)*. Il ramo nuovo
+> **non tocca la fase**: tocca **le POSIZIONI** — ogni nodo a distanza `>= LAM` da qualunque
+> altro, con `RSA` — e **la sua legge sta in scheda ⑫**.
+> **⚠ Ma è nella STESSA funzione**, quindi una modifica futura alla fase della semina e una alla
+> geometria **si incontrano qui**. *(Stessa ragione per cui questa scheda rivendica `step` «in
+> via provvisoria»: quando `semina` avrà la sua scheda, il marcatore si divide.)*
 >
 > ### ➜ **E `CURA 2` HA TOCCATO `step`, con una modifica SENZA FLAG** *(2026-09-24)*
 >
@@ -1513,7 +1538,7 @@ invece di zero.
 
 ---
 
-<!-- SCHEDA nome=nascita-archi funzioni=_allaccia,_nasce,semina flag=SEMINA_LAM,NASCITA_LAM,SCALA_MIN,SCALA_MIN_PASSO,LAM -->
+<!-- SCHEDA nome=nascita-archi funzioni=_allaccia,_nasce,semina,_semina_lam flag=SEMINA_LAM,NASCITA_LAM,SCALA_MIN,SCALA_MIN_PASSO,LAM -->
 
 # ⑫ LA NASCITA DEGLI ARCHI — **la cura della semina** *(`D38`, decisione `D-b` di Luca)*
 
@@ -1678,6 +1703,50 @@ CRESCITA CURA 2 = +47.2795 %
 >    difetto della cura: è `A13` che dice che quella taglia non esiste.**
 > 2. **la coesione.** Il grafo sarà molto più rado e `R_CONN = 3·LAM` resta invariato.
 >    **Non l'ho misurato, e `S7` è dove si vedrà.**
+
+## 5-bis. ❗ **IL RIFIUTO HA GIÀ PARLATO, AL PRIMO GIRO DEL FLAG** *(2026-09-24, blob `ba9054ce`)*
+
+**Non era una prova: stavo solo verificando che il flag arrivasse.** `--semina-lam` da solo, e
+la *cura del mondo* ricostruisce il vuoto di fondo dopo i flag:
+
+```
+[semina-lam] RIFIUTO DI SEMINARE: non ci stanno 900 nodi a distanza >= LAM
+  chiesti      n = 900
+  raggio       r = 4.000000   (= 5.000 LAM)
+  LAM            = 0.800000
+  collocati      = 352   <- il MASSIMO RAGGIUNTO, misurato adesso
+  stima RSA      = 384   <- frazione di impacchettamento ~0.384 (STIMA di letteratura)
+  nodi gia' presenti = 0
+```
+
+> ### **IL VUOTO DI FONDO DI DEFAULT — `900` NODI IN RAGGIO `4.0` — NON ENTRA: NE STANNO `352`.**
+>
+> **E' la prima incognita che avevo dichiarato, e si è materializzata subito.** **Non è un
+> difetto della cura: è `A13` che dice che quella taglia non esiste.** Prima di oggi il sistema
+> la otteneva **sovrapponendo i nodi sotto la scala di Planck.**
+>
+> **E il RIFIUTO ha fatto il suo mestiere al primo colpo:** senza di lui la semina avrebbe
+> consegnato **`352` nodi invece di `900`, in silenzio**, e ogni misura successiva sarebbe stata
+> su una taglia diversa da quella scritta nel comando *(`A9`)*.
+
+**LA STIMA `RSA` REGGE:** `384` previsti contro `352` misurati, **scarto `8.3 %`** — e la stima
+è un **limite superiore** *(ignora il bordo)*, quindi il verso è quello giusto.
+
+### ➤ COSA NE DISCENDE PER LA TAGLIA, e è una DECISIONE DI LUCA
+
+`n` scala come `r³`, quindi il raggio che serve è `r = 4 · (n/352)^(1/3)`:
+
+| `n` chiesti | raggio necessario | in `LAM` |
+|--:|--:|--:|
+| `352` | `4.00` | `5.0` |
+| `500` | `4.50` | `5.6` |
+| `900` | `5.48` | `6.8` |
+| `2391` *(la scena di oggi)* | `7.60` | `9.5` |
+
+> **Il punto di partenza che Luca ipotizzava — `~500` nodi, raggio `~4` — è a un soffio: con
+> raggio `4` ne stanno `352`, e per `500` serve `4.5`.** **La taglia la sceglie Luca** *(mandato)*.
+
+---
 
 ## 6. `massa_critica_collasso` — **MARCATA, NON TOCCATA** *(decisione di Luca)*
 

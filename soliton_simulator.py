@@ -1232,6 +1232,23 @@ FASE_2PI = False        # [B1, 2026-09-22] CURA: `phi` e' una FASE ORDINARIA su 
                         #   lettura CADE e si scrive.
                         # Schede: `doc/REGISTRO_FISICA.md`, LA FASE `phi` E IL SUO DOMINIO,
                         #   e LA MITOSI E SCHWINGER.
+SEMINA_LAM = False      # [CURA DELLA SEMINA, 2026-09-24] `A13`: **`LAM` E' LA SCALA DI
+                        # PLANCK DEL SISTEMA**, e sotto `LAM` non esiste niente -- ne' archi
+                        # ne' DISTANZE FRA NODI, **nemmeno alla semina**.
+                        # IL DIFETTO (`D38`, misurato): al passo ZERO il **99.96 %** dei nodi
+                        # ha il primo vicino **sotto `LAM`**, con mediana **`0.135*LAM`**: il
+                        # sistema nasce **~7.4 volte piu' fitto della propria scala di
+                        # Planck**. Da li' il **42.47 %** degli archi nasce sotto `LAM`, e
+                        # `_nasce` li tronca -- cioe' **SCOLLEGA `d` da `pos`** (`D02` fatto a
+                        # mano).
+                        # LA CURA: ogni nodo nuovo a distanza **`>= LAM` da QUALUNQUE nodo
+                        # gia' presente** -- stessa massa, altre masse, **VUOTO DI FONDO** --
+                        # con semina casuale e **SCARTO** (`RSA`). Nessun nodo di seconda
+                        # classe: il vuoto passa da `semina()` come tutto il resto (`:6392`).
+                        # ZERO NUMERI NUOVI: `LAM` e' l'assioma, e l'`RSA` non ha parametri.
+                        # Scheda 12 `nascita-archi`. Default SPENTO.
+                        # ⚠ NON e' `NASCITA_LAM`, che e' RITIRATA: filtrare gli ARCHI lascia i
+                        #   NODI sotto `LAM`, cioe' toglie il sintomo e lascia la violazione.
 TEMPO_UNICO_MITOSI = False  # [CURA 2, 2026-09-24] UN SOLO OROLOGIO DENTRO `mitosi()`.
                         # IL DIFETTO: `tau_pp = 1 + |tw|/PHI_CRIT` si chiama "tempo proprio
                         # locale" ma e' una MISURA DI TORSIONE, e la mitosi la usa in DUE modi
@@ -2386,12 +2403,74 @@ class Rete:
         S.data = np.zeros(len(ii))
         self._S = S
 
+    def _semina_lam(self, n, r, centro):
+        """[SEMINA_LAM] `n` punti nella palla di raggio `r`, a distanza **>= LAM** l'uno
+        dall'altro **e da OGNI nodo gia' presente**. `RSA` (random sequential adsorption).
+
+        **PERCHE' `RSA` E NON UN RETICOLO:** un reticolo imporrebbe una struttura -- direzioni
+        privilegiate, un passo -- e sarebbe **un parametro travestito da geometria**. L'`RSA`
+        non ha parametri: propone un punto **con la stessa distribuzione di prima**, lo accetta
+        se rispetta `LAM`, altrimenti lo scarta.
+
+        **IL CRITERIO DI ARRESTO NON E' UN NUMERO NUOVO** (par.3): si propone un LOTTO della
+        taglia **CHIESTA** (`n`, che il chiamante ha dato) e **si rinuncia quando un lotto
+        INTERO non produce nemmeno un'accettazione**. La saturazione si dichiara da se'.
+
+        **SE `n` NON ENTRA, SI RIFIUTA** (`A9`): niente riduzioni silenziose. Una semina che
+        «fa del suo meglio» consegnerebbe una massa **piu' piccola di quella chiesta, IN
+        SILENZIO**, e ogni misura successiva sarebbe su una taglia diversa da quella scritta
+        nel comando.
+        """
+        c = np.asarray(centro, float)
+        vecchi = np.asarray(self.pos, float)
+        T = cKDTree(vecchi) if len(vecchi) else None
+        acc = np.empty((n, 3), float)
+        k = 0
+        while k < n:
+            # STESSA DISTRIBUZIONE del ramo spento: gaussiana normalizzata x r*rand^(1/3)
+            u = self.rng.normal(size=(n, 3))
+            u /= np.linalg.norm(u, axis=1, keepdims=True)
+            prop = c + u * (r * self.rng.random(n) ** (1 / 3))[:, None]
+            if T is not None:
+                prop = prop[T.query(prop, k=1)[0] >= LAM]       # >= LAM dai nodi GIA' PRESENTI
+            prese = 0
+            for q in prop:
+                if k and np.min(np.sum((acc[:k] - q) ** 2, axis=1)) < LAM * LAM:
+                    continue                                    # >= LAM dai GIA' ACCETTATI
+                acc[k] = q
+                k += 1
+                prese += 1
+                if k == n:
+                    break
+            if prese == 0:
+                # RSA in 3D satura intorno a una frazione di impacchettamento ~0.384: e' una
+                # STIMA di letteratura, non un conto di questo sistema, e si dichiara come tale.
+                stima = 0.384 * (r / (0.5 * LAM)) ** 3
+                raise SystemExit(
+                    "[semina-lam] RIFIUTO DI SEMINARE: non ci stanno %d nodi a distanza >= LAM\n"
+                    "  chiesti      n = %d\n"
+                    "  raggio       r = %.6f   (= %.3f LAM)\n"
+                    "  LAM            = %.6f   -- `A13`: e' la SCALA DI PLANCK del sistema\n"
+                    "  collocati      = %d   <- il MASSIMO RAGGIUNTO, misurato adesso\n"
+                    "  stima RSA      = %.0f  <- frazione di impacchettamento ~0.384, STIMA DI\n"
+                    "                           LETTERATURA, non un conto di questo sistema\n"
+                    "  nodi gia' presenti = %d\n"
+                    "\n"
+                    "  NON RIDUCO n IN SILENZIO (`A9`): una massa piu' piccola di quella chiesta\n"
+                    "  renderebbe ogni misura successiva una misura di un'altra taglia.\n"
+                    "  LA SCENA CALCOLA IL RAGGIO DA n: o cresce il raggio, o cala n.\n"
+                    % (n, n, r, r / LAM, LAM, k, stima, len(vecchi)))
+        return acc
+
     def semina(self, n, raggio=None, centro=(0, 0, 0), fase=None, mass_id=None):
         n = max(0, min(n, MAX_NODI - self.n))
         if n == 0: return
         r = _scala_sistema() * 0.5 if raggio is None else raggio
-        u = self.rng.normal(size=(n, 3)); u /= np.linalg.norm(u, axis=1, keepdims=True)
-        p = np.asarray(centro, float) + u * (r * self.rng.random(n) ** (1 / 3))[:, None]
+        if SEMINA_LAM:
+            p = self._semina_lam(n, r, centro)
+        else:
+            u = self.rng.normal(size=(n, 3)); u /= np.linalg.norm(u, axis=1, keepdims=True)
+            p = np.asarray(centro, float) + u * (r * self.rng.random(n) ** (1 / 3))[:, None]
         if fase is None:
             ph = self.rng.random(n) * 4 * np.pi
         else:
@@ -3847,8 +3926,14 @@ class Rete:
         vale lo smorzamento. Non e' una regola di arresto nuova: e' il punto di partenza."""
         # [C3] anche con `SCALA_MIN_PASSO`: una NASCITA e' una concatenazione, non una discesa,
         # e il punto di partenza non e' un freno.
-        if not (SCALA_MIN or SCALA_MIN_PASSO):
-            return v
+        # ⚠⚠ [`D38`, 2026-09-24] **IL GATE E' TOLTO: il presidio agisce SEMPRE.**
+        #   Era `if not (SCALA_MIN or SCALA_MIN_PASSO): return v`, e **coi default del SORGENTE
+        #   la legge `d >= LAM` era VIOLATA AL PASSO ZERO su 223 380 archi**. E' lo stesso
+        #   schema che `E4-LAM` ha tolto al CONTROLLO e che era rimasto all'ESECUZIONE:
+        #   **il controllo era legge, chi la faceva rispettare era un'opzione.**
+        #   **NON E' UNA CURA, E' UN PRESIDIO** (decisione di Luca): con `SEMINA_LAM` acceso
+        #   **non deve scattare mai**, e `_g_sm_nascite` e' la sua misura -- se sale, un arco
+        #   e' nato sotto `LAM` **da un'altra strada** (la MITOSI: voce `M2` della coda).
         self._g_sm_nascite = getattr(self, '_g_sm_nascite', 0) + 1
         return np.maximum(v, LAM)
 
@@ -7441,6 +7526,7 @@ def _applica_flag(a):
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
     global PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO, COES_CAUSALE, ANOM_SIMM
     global INVARIANTI
+    global SEMINA_LAM
     global TEMPO_UNICO_MITOSI
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, SCALA_MIN, COES_ADIM, RITMO_WRAP_2PI, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
@@ -7507,6 +7593,7 @@ def _applica_flag(a):
     #   driver non poteva accenderla, e una cura che nessun run accende e' un ramo morto.
     RITMO_WRAP_2PI = bool(getattr(a, "ritmo_wrap_2pi", False))  # cura D34: default off, il driver la accende
     TEMPO_UNICO_MITOSI = bool(getattr(a, "tempo_unico_mitosi", False))  # CURA 2: default off
+    SEMINA_LAM = bool(getattr(a, "semina_lam", False))  # cura della semina: default off
     TW_SPINORE = bool(getattr(a, "tw_spinore", False))     # torsione 4pi -> Bloch (doppia copertura): default off
     # [CURA 1b, decisione di Luca 2026-09-24] IL PONTE INVERSO E' IMPEDITO, non sconsigliato.
     # `TW_SPINORE` fa scrivere lo SPINORE dalla TORSIONE: `tw` -> `omega_s` -> `_psi_spinor`
@@ -8088,6 +8175,14 @@ def _cli():
                         "somma B_geo = <|tw|/PHI_CRIT * (n_i x n_j)>, termine non-abeliano perpendicolare "
                         "a n che sostiene la precessione di Larmor senza auto-spegnersi con l'ordine. "
                         "Richiede --spinore-vivo. Default off = non-regressione.")
+    p.add_argument("--semina-lam", action="store_true", dest="semina_lam",
+                   help="[CURA DELLA SEMINA] `A13`: LAM e' la scala di Planck del sistema, e "
+                        "sotto LAM non esiste niente -- nemmeno una distanza fra nodi. Ogni "
+                        "nodo nuovo viene messo a distanza >= LAM da QUALUNQUE nodo gia' "
+                        "presente (stessa massa, altre masse, vuoto di fondo), con semina "
+                        "casuale e scarto (RSA). Se n non entra nel raggio, la semina RIFIUTA "
+                        "nominando n, raggio e massimo raggiunto: niente riduzioni silenziose. "
+                        "Zero numeri nuovi. Default off.")
     p.add_argument("--tempo-unico-mitosi", action="store_true", dest="tempo_unico_mitosi",
                    help="[CURA 2] UN SOLO OROLOGIO dentro `mitosi()`. Gli usi di `tau_pp` come "
                         "TEMPO (il ritmo, la costante di rilassamento di `_rep`, il gradiente "
