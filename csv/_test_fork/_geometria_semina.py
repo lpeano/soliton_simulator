@@ -32,7 +32,11 @@ FIGLIO = r'''
 import os, sys, numpy as np
 sys.path.insert(0, os.path.join(RAD, "csv"))
 import _testa_driver as T
-S, argv, g = T.esegui(os.path.join(RAD, "csv", "_test_fork", "_revisione", "_scarto"), [])
+# ATTENZIONE: serve `d` GREZZA, PRIMA di `_nasce`. Col ramo acceso `d` e' gia' troncata a
+# `LAM`, quindi "quanti archi sotto LAM" risponderebbe SEMPRE ZERO -- la stessa trappola del
+# `max|A-B| = 0` per MANCANZA DI CONFRONTO.
+S, argv, g = T.esegui(os.path.join(RAD, "csv", "_test_fork", "_revisione", "_scarto"),
+                      ["--scala-min-passo=off"])
 S._NMASSE_VIDEO["n"] = 3; S._NMASSE_VIDEO["sep"] = 4.0; S._NMASSE_VIDEO["size"] = None
 S.avvia_test("N-MASSE")()
 net = S.net
