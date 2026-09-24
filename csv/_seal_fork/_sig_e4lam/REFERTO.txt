@@ -1,0 +1,48 @@
+# SIGILLO -- `E4-LAM`: la legge `d >= LAM` si verifica SEMPRE
+#
+blob simulatore ORA (sha1 byte grezzi) 863f4704
+LAM = 0.8
+
+COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di misurare
+------------------------------------------------------------------------------------------------
+K1 `d >= LAM` a flag SPENTI non deve fermarsi -> OK  (nessuna eccezione)
+K2 IL CASO CHE DEVE FERMARSI: `d < LAM` a flag SPENTI -> OK: `DominioViolato`, e la regola nomina LAM  (DominioViolato)
+     messaggio: [INVARIANTE] `d` VIOLA `>= LAM (= 0.800000) -- LEGGE, non opzione` al passo 1, in `collaudo`.
+  quanti: 1
+  indici (primi 8): 1
+  valori (primi 8): 4.000000e-01
+  arco=1-2 quanti=1 su=3
+K3 e `d < LAM` a flag ACCESI si ferma come prima -> OK  (DominioViolato)
+K4 IL CASO CHE DEVE FALLIRE: la regola VECCHIA a flag spenti era `d > 0`, e `min(d) = 0.4000 > 0` -> OK: il difetto e' riprodotto (prima PASSAVA)
+------------------------------------------------------------------------------------------------
+  -> i criteri PASSANO
+
+T1    FAIL `_lam_attivo` NON ESISTE PIU' nel sorgente: la legge non e' piu' condizionata
+T2    PASS `_cs_nodo_prev` e' nei DOMINI come `pos`: ('pos', 'velocita delle onde metriche: una VELOCITA e positiva')
+      -> `cs > 0` e' DERIVATO (cs_floor > 0, transizione in (0,1) stretto), quindi e'
+         un INVARIANTE e non un caso da contare.
+T3    PASS IL CASO CHE DEVE FERMARSI: un arco sotto `LAM` a FLAG SPENTI ferma il run
+      DominioViolato: [INVARIANTE] `d` VIOLA `>= LAM (= 0.800000) -- LEGGE, non opzione` al passo 1, in `sigillo`.
+  quanti: 1
+  indici (primi 8): 1
+  valori (primi 8): 4.000000e-01
+  arco=1-2 quanti=1 su=3
+T4    PASS E IL CONTROLLO: con `d >= LAM` NON si ferma -> non si ferma
+      -> senza `T4`, `T3` passerebbe anche se il controllo si fermasse SEMPRE.
+
+------------------------------------------------------------------------------------------------
+T5 -- BYTE-INERZIA: 120 passi nella configurazione dei run, contro `_cura1_corto`.
+      L'invariante LEGGE soltanto: non deve cambiare un bit.
+------------------------------------------------------------------------------------------------
+  (386.5 s)
+  campi UGUALI 206   DIVERSI 0   non confrontati 0
+T5    PASS BYTE-INERTE: 206 campi identici, 0 diversi
+
+================================================================================================
+ESITO: 4/5
+================================================================================================
+*** SIGILLO FALLITO: reperto, commit, STOP (par.5). ***
+
+!! COSA QUESTO SIGILLO NON DICE: che `d >= LAM` sia la REALIZZAZIONE giusta della
+   legge. Dice che la legge e' ora VERIFICATA SEMPRE. La realizzazione di oggi e' il
+   freno a senso unico, cioe' `D31`, e la sua cura e' un lavoro a parte.

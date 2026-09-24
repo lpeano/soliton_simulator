@@ -14109,3 +14109,57 @@ voce `E4-LAM`.**
 > **⚠ E c'è un secondo strato, che il tuo rilievo fa emergere:** oggi quella legge **non è
 > nemmeno verificata sempre**. Quindi il sistema ha **una legge giusta, realizzata male, e
 > controllata solo a volte.**
+
+### ㉧ **REPERTO: il sigillo di `E4-LAM` fallisce `4/5`, e i due difetti sono MIEI**
+
+> **Committo il fallimento prima di correggerlo**, come par.5 e il tuo mandato chiedono.
+> `csv/_seal_fork/_sig_e4lam/REFERTO.txt`.
+
+### ✅ **Il codice della cura è giusto, e i test che contano passano**
+
+| | | |
+|---|---|---|
+| `T3` | **un arco sotto `LAM` a flag SPENTI FERMA IL RUN** | **PASS** |
+| `T4` | e con `d ≥ LAM` **non** si ferma *(il controllo che rende `T3` leggibile)* | **PASS** |
+| `T5` | **byte-inerte: `206` campi identici, `0` diversi** contro `_cura1_corto` | **PASS** |
+
+**Il messaggio della legge esce così, ed è quello che volevi:**
+
+```
+[INVARIANTE] `d` VIOLA `>= LAM (= 0.800000) -- LEGGE, non opzione` al passo 1
+  indici (primi 8): 1     valori: 4.000000e-01     arco=1-2
+```
+
+**E dall'AST i riferimenti di CODICE a `_lam_attivo` sono `[]`: zero.**
+
+### ❌ **Difetto mio n.1: `T1` è un criterio scritto male**
+
+Cercava **`"_lam_attivo" not in sorg`**, cioè **nel TESTO** — e trova le sue **due occorrenze
+nei MIEI COMMENTI** (`:3666`, `:3715`), dove **spiego** che il gate è stato tolto.
+
+> **Il codice è corretto. Il criterio no.** È esattamente il presidio *«un criterio di sigillo
+> si scrive DA UNA MISURA, non dal proprio modello mentale del codice»*: la misura giusta è
+> **l'AST**, non un `in`. **E un `FAIL` falso costa più di un sigillo mancante, perché si porta
+> dietro una diagnosi.**
+
+### ❌ **Difetto mio n.2: `_cs_nodo_prev` ERA GIÀ nei `DOMINI`**
+
+Sta a **`:257`**, e la mia copia è a **`:226`**. **In un letterale di dict la chiave duplicata
+vince l'ULTIMA**, quindi **la mia è codice morto** — e **`T2` lo ha mostrato** stampando una
+descrizione **che non è la mia**.
+
+**Quindi la mia affermazione «`cs > 0` si aggiunge ai `DOMINI`» era FALSA: c'era già.**
+
+**E perché non l'ho visto, che è la parte da non rifare:** avevo cercato con
+`sed -n '213,240p' | grep cs`, e la voce sta a **`:257`, fuori da quella finestra**.
+**Ho concluso un'ASSENZA da una ricerca PARZIALE.** È `P1`, e **una finestra di 28 righe non è
+«il disco».**
+
+> **La cura resta buona** — la duplicazione era inerte, e `T5` è byte-identico comunque.
+> **Ma una chiave duplicata è un difetto e va tolta**, e la derivazione che `cs > 0` è un
+> invariante resta valida: **era già stata fatta da qualcun altro prima di me.**
+
+### **Cosa faccio ora**
+
+**Mi fermo qui col commit del reperto**, poi: togliere la chiave duplicata, riscrivere `T1`
+sull'**AST**, e rigirare. **Nessuna delle due è una modifica alla cura.**

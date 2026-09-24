@@ -215,6 +215,15 @@ DOMINI = {
     'd':        ('lam',    'la lunghezza VERA di un arco'),
     'd0':       ('lam',    'la lunghezza di RIPOSO di un arco'),
     'vd':       ('finito', 'velocita di `d`: nessun vincolo di segno, e non deve esserci'),
+    # [E4-LAM, 2026-09-24] `cs` NON PUO' ESSERE ZERO, ed e' DERIVATO dal codice, non
+    #   misurato: `cs_floor = CS_M/(1 + sqrt(I)*sqrt(1/scala))` ha denominatore >= 1
+    #   quindi > 0; `min(cs_floor, CS_M)` lo tiene in (0, CS_M]; e
+    #   `transizione = 0.5*(1 + tanh(1 - u))` sta in (0, 1) STRETTO, quindi il ritorno
+    #   `cs_floor + (CS_M - cs_floor)*transizione` e' >= cs_floor > 0.
+    #   Una proprieta' DERIVATA e' un INVARIANTE, non un caso da contare: cosi'
+    #   `tau_arco = d/cs_arco` (CURA 2) si scrive SENZA clamp, e se mai fosse zero e'
+    #   il livello NUMERICO (`np.seterr(divide='raise')`) a fermarsi con la riga.
+    '_cs_nodo_prev': ('pos', 'la velocita d onda di nodo: una velocita e POSITIVA'),
     # ⚠ `peq` HA UN'ECCEZIONE DICHIARATA, ed e' un INVARIANTE PIU' FORTE, non piu' debole:
     #   con `PEQ_NASCITA_LOCALE` gli archi di Schwinger nascono `nan` e vengono CALIBRATI
     #   all'inizio del passo dopo. Fra la `mitosi()` e quella calibrazione il `nan` e'
@@ -3654,7 +3663,8 @@ class Rete:
         self._g_inv_giri = getattr(self, '_g_inv_giri', 0) + 1
         passo = self._g_inv_giri if passo is None else passo
         n = self.n
-        _lam_attivo = SCALA_MIN or SCALA_MIN_PASSO
+        # [E4-LAM] `_lam_attivo` E' STATO TOLTO: era l'unico uso, e serviva a CONDIZIONARE
+        # la legge `d >= LAM`. Lasciarlo qui inutilizzato sarebbe codice morto.
         controllate = 0
         for quale, (forma, _perche) in DOMINI.items():
             v = getattr(self, quale, None)
@@ -3699,12 +3709,16 @@ class Rete:
                     cattivo = ~fin | (vf < 0.0) | (vf >= 4.0 * np.pi)
                     regola = 'in [0, 4*pi)'
                 elif forma == 'lam':
-                    if _lam_attivo:
-                        # ⚠ la tolleranza e' l'ARROTONDAMENTO di `LAM`, non un numero scelto
-                        cattivo = ~fin | (vf < LAM * (1.0 - 1e-12))
-                        regola = '>= LAM (= %.6f), con la scala minima accesa' % LAM
-                    else:
-                        cattivo = ~fin | (vf <= 0.0); regola = '> 0 (scala minima SPENTA)'
+                    # [E4-LAM, decisione di Luca 2026-09-24] SI VERIFICA SEMPRE, NON PIU'
+                    # SOTTO FLAG. *** «La lunghezza degli archi non puo' scendere sotto la
+                    # lunghezza tipica del sistema» E' UNA LEGGE, non una garanzia che
+                    # dipende da un flag. *** Prima il controllo era `if _lam_attivo`, cioe'
+                    # `SCALA_MIN or SCALA_MIN_PASSO`, e a flag spenti DEGRADAVA a `> 0`:
+                    # una legge verificata solo quando un flag e' acceso non e' una legge,
+                    # e' un'opzione (A9: un presidio che non impedisce non e' un presidio).
+                    # ⚠ la tolleranza e' l'ARROTONDAMENTO di `LAM`, non un numero scelto
+                    cattivo = ~fin | (vf < LAM * (1.0 - 1e-12))
+                    regola = '>= LAM (= %.6f) -- LEGGE, non opzione' % LAM
                 elif forma == 'unita':
                     nrm = np.sqrt(np.sum(np.abs(v) ** 2, axis=-1)) if v.ndim > 1 \
                         else np.abs(v)
