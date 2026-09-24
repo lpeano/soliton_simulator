@@ -1513,13 +1513,27 @@ invece di zero.
 
 ---
 
-<!-- SCHEDA nome=nascita-archi funzioni=_allaccia,_nasce flag=NASCITA_LAM,SCALA_MIN,SCALA_MIN_PASSO,LAM -->
+<!-- SCHEDA nome=nascita-archi funzioni=_allaccia,_nasce,semina flag=SEMINA_LAM,NASCITA_LAM,SCALA_MIN,SCALA_MIN_PASSO,LAM -->
 
 # ⑫ LA NASCITA DEGLI ARCHI — **la cura della semina** *(`D38`, decisione `D-b` di Luca)*
 
 > **Decisione di Luca, 2026-09-24:** *«Non deve nascere un arco sotto `LAM`. Il troncone
 > `_nasce` resta come PRESIDIO.»*
 > **NESSUN CODICE in questa scheda.** Difetto e criteri **prima**, cura **dopo**.
+>
+> ## ❌ **`NASCITA_LAM` È RITIRATA — decisione di Luca, 2026-09-24**
+>
+> **La prima cura che avevo proposto era `keep &= (dd >= LAM)`: FILTRARE GLI ARCHI.**
+> **È ritirata**, e il motivo è **il criterio che avevo scritto io stesso** nel par.2 di questa
+> scheda: *«se la mediana della distanza al primo vicino è sotto `LAM`, il difetto è nelle
+> POSIZIONI, e nessun aggiustamento sugli ARCHI può curarlo»*.
+>
+> ### **Filtrare gli archi lascia i NODI a `0.135·LAM` l'uno dall'altro.** Toglie il sintomo
+> ### *(`d < LAM`)* e lascia la violazione *(`|pos_i − pos_j| < LAM`)*. **Con `A13` non è
+> ### nemmeno una mezza cura: è la cura di un'altra cosa.**
+>
+> **NON si cancella** *(par.10: il codice di una legge esclusa non si cancella mai)*: resta qui,
+> **come il perché esiste `SEMINA_LAM`.**
 
 ## 1. IL DIFETTO — **`D38`**
 
@@ -1579,53 +1593,129 @@ SE_TAGLIASSI  nodi_isolati  = 0 su 2391 (0.00 %)
 > isolato **non è un nodo più semplice, è un nodo che esce dalla fisica**. **Non ce n'è
 > nessuno**, perché `R_CONN = 3·LAM` lascia un anello `[LAM, 3·LAM]` pieno di vicini.
 
-## 4. LA CURA — **`NASCITA_LAM`, spenta di default**
+## 4. LA CURA — **`SEMINA_LAM`, spenta di default. UN INTERRUTTORE SOLO.**
+
+**`A13` dice che sotto `LAM` non esiste niente, nemmeno una distanza fra nodi.** Quindi la cura
+non sta sugli archi: **sta dove i nodi vengono messi.**
 
 ```
-in `_allaccia`, nel filtro `keep`:     keep &= (dd >= LAM)
+in `semina()`:  ogni nodo nuovo a distanza >= LAM da QUALUNQUE nodo GIA' PRESENTE
+                -- della stessa massa, delle altre masse, del VUOTO DI FONDO --
+                con semina casuale e SCARTO (RSA, random sequential adsorption)
 ```
 
-**L'arco sotto `LAM` NON SI CREA.** Non si crea e poi si corregge: **non esiste.**
+**E il vuoto di fondo segue la stessa regola:** *non ci sono nodi di seconda classe.*
 
 > ### PERCHÉ È DERIVATA E NON SCELTA *(par.3, zero manopole)*
-> `LAM` **c'è già** ed è la lunghezza tipica del sistema; `R_CONN = 3·LAM` **c'è già**.
-> **La cura non introduce nessun numero**: usa la soglia che la legge nomina.
->
-> ### E `_nasce` RESTA — **come PRESIDIO, non come cura** *(decisione di Luca)*
-> Dopo la cura **non deve scattare mai**. **Il suo contatore `_g_sm_nascite` diventa la
-> misura del presidio:** se sale, un arco è nato sotto `LAM` da un'altra strada.
-> **⚠ E LE ALTRE STRADE ESISTONO:** la **mitosi** crea archi, e questa scheda **non li
-> copre**. → in coda.
+> **`LAM` c'è già** ed è l'assioma; **`R_CONN = 3·LAM` c'è già**. **La cura non introduce
+> nessun numero.** L'`RSA` non ha parametri: propone un punto, lo accetta se rispetta `LAM`,
+> altrimenti lo scarta.
 
-## 5. I CRITERI DELLA PROVA, **fissati QUI, prima del codice**
+### ❗ E SE `n` NON ENTRA NEL RAGGIO, **LA SEMINA RIFIUTA** *(`A9`)*
+
+> **NIENTE RIDUZIONI SILENZIOSE.** Se in quel raggio non stanno `n` nodi a distanza `LAM`, la
+> semina **si ferma** con un messaggio che **nomina `n`, il raggio e il massimo possibile**.
+> **È la ragione per cui questo è un presidio e non una nota:** una semina che «fa del suo
+> meglio» consegnerebbe **una massa più piccola di quella chiesta, in silenzio**, e ogni
+> misura successiva sarebbe su una taglia diversa da quella scritta nel comando.
+>
+> **La SCENA calcola il raggio da `n`** *(decisione di Luca)*: è la scena a sapere quanto spazio
+> serve, non la semina a stringersi.
+
+### E `_nasce` RESTA — **come PRESIDIO, e ora agisce SEMPRE**
+
+`D38` *(il troncone sotto flag)* **si cura qui**: il presidio **non è più gated**.
+Dopo la cura **non deve scattare mai**, e **`_g_sm_nascite` è la sua misura**: se sale, un arco
+è nato sotto `LAM` **da un'altra strada**.
+
+> **⚠ E LE ALTRE STRADE ESISTONO:** la **mitosi** crea nodi vicino al genitore, e questa scheda
+> **non la copre**. **`S4` lo RILEVEREBBE al passo zero, non nei passi dopo.** → in coda.
+
+## 5. I CRITERI DELLA PROVA, **fissati QUI, PRIMA DEL CODICE** *(mandato di Luca)*
 
 | | criterio | origine |
 |---|---|---|
-| **`N1`** | **flag SPENTO = byte-identico**: firma dei byte su tutti i campi contro `_cura2_corto` | par.2.1 |
-| **`N2`** | **flag ACCESO, passo ZERO: `sum(d < LAM) == 0` E `sum(d == LAM) == 0`** | ❗ **i due insieme**: il primo da solo lo darebbe anche `_nasce`. **Lo zero sul secondo è ciò che distingue «non creato» da «troncato»** |
-| **`N3`** | **`_g_sm_nascite == 0`** a flag acceso | il presidio **non deve scattare**: se scatta, un arco è nato sotto `LAM` da un'altra strada |
-| **`N4`** | **nodi isolati `== 0`** | misurato `0` **prima** di proporre la cura; se dopo non è `0`, la cura **spezza il grafo** e va ritirata |
-| **`N5`** | **archi rimasti `≈ 302 593`** *(stesso seme, stessa scena)* | è il numero **previsto** dalla misura: se differisce, il filtro **non fa quello che credo** |
-| **`N6`** | **il giro corto di 120 passi**: la mitosi **non muore** e il **bilancio di `d0` CHIUDE** | `E1a` e `B`, gli stessi di `CURA 1` e `CURA 2` |
-| **`N7`** | **`d == |pos_i − pos_j|` per OGNI arco al passo zero** | ❗ **è il criterio che dice se la cura ha curato `D02` a questo sito**: oggi diverge sul `42.47 %` |
+| **`S1`** | **flag SPENTO = byte-identico**: **firma dei byte** su tutti i campi, **un processo per braccio** | par.2.1 · `STANDARD 1` · `STANDARD 2` |
+| **`S2`** | **passo ZERO: `min` distanza fra POSIZIONI `>= LAM`** *(`cKDTree`, `k=2`)* | ❗ **è `A13` misurato direttamente**, e **è il criterio che `NASCITA_LAM` non poteva soddisfare** |
+| **`S3`** | **passo ZERO: `sum(d < LAM) == 0` E `sum(d == LAM) == 0`** | **i due INSIEME**: il primo da solo lo darebbe anche `_nasce`. **Lo zero sul secondo distingue «non c'è bisogno di troncare» da «troncato»** |
+| **`S4`** | **`_g_sm_nascite == 0`** al passo zero | il presidio **non deve scattare**. **Rileva solo il passo zero**, non i passi dopo |
+| **`S5`** | **nodi isolati `== 0`** | un nodo isolato **non è un nodo più semplice: è un nodo che esce dalla fisica** |
+| **`S6`** | **`d == |pos_i − pos_j|` per OGNI arco al passo zero** | ❗ dice se la cura ha curato **`D02` a questo sito**: oggi diverge sul `42.47 %` |
+| **`S7`** | **giro corto di 120 passi**: la mitosi **viva**, il **bilancio di `d0` CHIUDE** | `E1a` e `B`, gli stessi di `CURA 1` e `CURA 2`. ❗ **è il solo che può BOCCIARE la cura** |
 
-> ### ⚠ E LA PREVISIONE, scritta PRIMA *(par.9, `doc/PREVISIONI_qualitative.md`)*
-> **Togliere il `42.47 %` degli archi NON è byte-inerte e cambierà TUTTO.** `n`, la densità, il
-> bilancio, la mitosi. **Mi aspetto numeri diversi, non numeri uguali**, e **`N6` è il solo
-> criterio che può bocciare la cura**: se la mitosi muore come per `FASE_2PI`, la cura cade.
+### ❗ `P-GONFIA` — **LA PREVISIONE, CON LA SUA SOGLIA NUMERICA FISSATA ORA**
+
+**La previsione di Luca:** *la crescita della mediana di `d0` nei 120 passi **CALA NETTAMENTE**
+rispetto al giro di `CURA 2`.*
+
+**Il riferimento, LETTO dal bilancio di `CURA 2`** *(`csv/_test_fork/_cura2_corto/BILANCIO_d0.txt`,
+colonna `med vivi`)*:
+
+```
+med vivi:  passo 8 -> 0.938570      passo 120 -> 1.382321
+CRESCITA CURA 2 = +47.2795 %
+```
+
+> ### **SOGLIA: la crescita deve essere `< +23.64 %`, cioè MENO DELLA METÀ.**
 >
-> **⚠ E UN'INCOGNITA CHE DICHIARO INVECE DI NASCONDERE:** con il `42 %` degli archi in meno il
-> grafo è **più rado**, e `R_CONN = 3·LAM` resta invariato. **Non so** se la coesione regga:
-> **non l'ho misurato, e `N6` è dove si vedrà.**
+> **⚠ E «metà» È UNA SCELTA, non una derivazione — lo dico invece di farla passare per un
+> conto.** Non so derivare quanto debba calare: so che il freno agisce **sugli archi al muro**,
+> e quegli archi **non esisteranno più**. **Un fattore 2 è la soglia più grossolana che possa
+> ancora distinguere «cala nettamente» da «cala un po'»**, ed è grossolana **di proposito**:
+> il riferimento è **UN SEME SOLO**, la dispersione fra semi **non è misurata** *(`P3`)*, e una
+> soglia fine su un riferimento senza barra sarebbe finta precisione.
+>
+> ### **SE NON CALA → IL MOTORE È IL FRENO, e il freno-legge va in coda** *(decisione di Luca)*.
+> **È una previsione che può FALLIRE e indirizzare il lavoro**, non una che conferma comunque.
 
-## 6. COSA QUESTA SCHEDA **NON** COPRE
+> ### ⚠ LE ALTRE PREVISIONI, scritte PRIMA
+> **NON sarà byte-inerte e cambierà TUTTO**: `n`, la densità, il bilancio, la mitosi.
+> **Mi aspetto numeri diversi, non numeri uguali.**
+>
+> **⚠ E DUE INCOGNITE, dichiarate invece che nascoste:**
+> 1. **quanti nodi entreranno davvero.** Con distanza minima `LAM` la densità massima è fissata
+>    dalla geometria: la semina **potrebbe RIFIUTARE** le taglie di oggi. **Se rifiuta, non è un
+>    difetto della cura: è `A13` che dice che quella taglia non esiste.**
+> 2. **la coesione.** Il grafo sarà molto più rado e `R_CONN = 3·LAM` resta invariato.
+>    **Non l'ho misurato, e `S7` è dove si vedrà.**
 
-- **la mitosi**, che crea archi per conto suo *(`:5747` e dintorni)*: `N3` lo **rileverebbe**,
-  ma la cura **non lo tocca**;
-- **`semina()`**, la terza via di crescita, già nota come scoperta *(voce `H` del registro)*;
-- **la scelta alternativa** — seminare i nodi a distanza `≥ LAM` *(Poisson-disk)* — che
-  cambierebbe **il numero di nodi o il volume** e **non è stata misurata**. **Si dichiara come
-  strada non presa, non come strada esclusa.**
+## 6. `massa_critica_collasso` — **MARCATA, NON TOCCATA** *(decisione di Luca)*
+
+> ### **«Tarata sotto la scala di Planck, da non usare.»**
+
+**Il conto, derivato** *(`csv/_test_fork/_usi_massa_critica.py`)*:
+
+```
+massa_critica_collasso() = 621.4858 nodi, in una sfera di raggio LAM = 0.8
+quanti PUNTI stanno in una palla di raggio LAM con distanze mutue >= LAM?
+  uno al centro + al piu' 12 sulla sfera (separazione >= 60 gradi = NUMERO DI BACIO, K(3)=12)
+  -> al piu' 13
+RAPPORTO CHIESTO / POSSIBILE = 47.81
+```
+
+**La costante chiede ~`48` volte più nodi di quanti ne stiano.**
+
+**`36` usi nel simulatore, elencati dall'AST: `21` nel codice della FISICA** *(dove essere tarata
+sotto la scala di Planck **entra nelle leggi**)* **e `15` nelle SCENE** *(dove decide **quanti**
+nodi seminare)*. **Non si tocca niente:** l'elenco è **il perimetro della marcatura**, perché
+una costante marcata senza l'elenco di chi la usa è un'avvertenza generica, **e un'avvertenza
+generica non impedisce nulla** *(`A9`)*.
+
+> **⚠ E IL MIO PRIMO CONTO ERA SBAGLIATO:** avevo usato l'impacchettamento di **Kepler** —
+> palline di raggio `LAM/2` **interamente dentro** una sfera di raggio `LAM`, `8·0.7405 = 5.92`.
+> **Kepler impone una condizione più stretta di quella vera**: qui il vincolo è **solo sui
+> centri**. **Il numero di Luca — «circa una dozzina» — era esatto, e il mio troppo piccolo di
+> ~2.2 volte.** Il conto sbagliato **resta stampato nel referto**, col perché.
+
+## 7. COSA QUESTA SCHEDA **NON** COPRE
+
+- **la MITOSI**, che crea nodi vicino al genitore: **rispetta `LAM`?** `S4` lo rileverebbe **al
+  passo zero**, non ai passi dopo. **→ in coda, misurarlo;**
+- **`Λ = media GLOBALE di `I` dentro la legge locale di `cs`** — più materia nel sistema, meno
+  rallentamento: **sospetto famiglia `D01`/`D03`. → in coda;**
+- **la scelta alternativa: FILTRARE GLI ARCHI** *(`NASCITA_LAM`)*, **ritirata** — vedi il
+  cappello di questa scheda. **Esclusa per DIMOSTRAZIONE**, non per misura: lascia i nodi sotto
+  `LAM`, quindi **viola `A13` per costruzione**.
 
 ---
 

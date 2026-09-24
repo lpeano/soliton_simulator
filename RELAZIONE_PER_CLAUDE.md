@@ -15441,3 +15441,76 @@ scala di Planck**.
 > ### **LO STATO ALLA DATA DELL'ASSIOMA: il `99.96 %` dei nodi nasce più vicino di `LAM` a un
 > ### altro nodo, con mediana `0.135·LAM`.** Il sistema nasce **~7.4 volte più fitto della
 > ### propria scala di Planck**, e **lo è sempre stato.**
+
+
+---
+
+# ✅ LA CURA DELLA SEMINA — **`SEMINA_LAM`: ritiro, criteri e marcatura, PRIMA del codice**
+
+## ❌ `NASCITA_LAM` È RITIRATA, e il motivo è un criterio che avevo scritto io
+
+Avevo proposto `keep &= (dd >= LAM)`: **filtrare gli archi**. **Ma il par.2 della mia stessa
+scheda diceva:** *«si la mediana della distanza al primo vicino è sotto `LAM`, il difetto è nelle
+POSIZIONI, e nessun aggiustamento sugli ARCHI può curarlo»*.
+
+> ### **Filtrare gli archi lascia i nodi a `0.135·LAM` l'uno dall'altro:** toglie il sintomo
+> ### *(`d < LAM`)* e lascia la violazione *(`|pos_i − pos_j| < LAM`)*. **Con `A13` è la cura di
+> ### un'altra cosa.** Non cancellata: resta come **il perché esiste `SEMINA_LAM`**.
+
+## LA CURA — `SEMINA_LAM`, spenta di default, **un interruttore solo**
+
+Ogni nodo nuovo a distanza `>= LAM` da **qualunque** nodo già presente — stessa massa, altre
+masse, **vuoto di fondo** — con semina casuale e **scarto** *(`RSA`)*. **Nessun nodo di seconda
+classe.** **Zero numeri nuovi:** `LAM` e `R_CONN` esistono già, e l'`RSA` non ha parametri.
+
+**Se `n` non entra nel raggio, la semina RIFIUTA** nominando `n`, il raggio e il massimo
+possibile *(`A9`)*: **niente riduzioni silenziose**, perché una semina che «fa del suo meglio»
+consegnerebbe **una massa più piccola di quella chiesta, in silenzio**. **La scena calcola il
+raggio da `n`.**
+
+**`_nasce` resta come PRESIDIO e ora agisce SEMPRE: `D38` si cura qui.**
+
+## GLI OTTO CRITERI, e `P-GONFIA` ha la sua soglia
+
+`S1` byte-identico a flag spento *(firma dei byte, un processo per braccio)* · **`S2` passo zero:
+`min` distanza fra POSIZIONI `>= LAM` — è `A13` misurato, ed è il criterio che `NASCITA_LAM` non
+poteva soddisfare** · `S3` `sum(d < LAM) == 0` **E** `sum(d == LAM) == 0` · `S4`
+`_g_sm_nascite == 0` · `S5` nodi isolati `0` · `S6` `d == |pos_i − pos_j|` per ogni arco ·
+**`S7` giro corto: mitosi viva e bilancio che chiude — il solo che può bocciare la cura**.
+
+**`P-GONFIA`, col riferimento LETTO dal bilancio di `CURA 2`:**
+
+```
+med vivi:  passo 8 -> 0.938570   passo 120 -> 1.382321
+CRESCITA CURA 2 = +47.2795 %        SOGLIA: la crescita deve essere < +23.64 %
+```
+
+> **⚠ E «metà» È UNA SCELTA, non una derivazione** — lo dico invece di farla passare per un
+> conto. È grossolana **di proposito**: il riferimento è **un seme solo**, la dispersione fra
+> semi **non è misurata** *(`P3`)*, e una soglia fine su un riferimento senza barra sarebbe finta
+> precisione. **Se non cala → il motore è il freno, e il freno-legge va in coda.**
+
+**Due incognite dichiarate:** **quanti nodi entreranno davvero** — con distanza minima `LAM` la
+densità massima è fissata dalla geometria, e la semina **potrebbe rifiutare le taglie di oggi**;
+**se rifiuta non è un difetto della cura, è `A13` che dice che quella taglia non esiste** — e
+**la coesione**, con `R_CONN` invariato su un grafo molto più rado.
+
+## `massa_critica_collasso` — **marcata, non toccata**
+
+```
+621.4858 nodi chiesti in una sfera di raggio LAM = 0.8
+quanti PUNTI ci stanno con distanze mutue >= LAM?  1 al centro + al piu' 12 sulla sfera
+  (separazione >= 60 gradi = NUMERO DI BACIO, K(3) = 12)  ->  al piu' 13
+RAPPORTO CHIESTO / POSSIBILE = 47.81
+```
+
+**`36` usi, dall'AST: `21` nella FISICA** *(dove l'essere tarata sotto la scala di Planck entra
+nelle leggi)* **e `15` nelle SCENE** *(dove decide quanti nodi seminare)*. L'elenco è **il
+perimetro della marcatura**: una costante marcata senza l'elenco di chi la usa è un'avvertenza
+generica, **e un'avvertenza generica non impedisce nulla**.
+
+> **⚠ E IL MIO PRIMO CONTO ERA SBAGLIATO:** avevo usato **Kepler** — palline di raggio `LAM/2`
+> **interamente dentro** — ottenendo `5.92`. **Kepler impone una condizione più stretta di quella
+> vera: qui il vincolo è solo sui CENTRI.** **Il tuo «circa una dozzina» era esatto**, il mio
+> numero troppo piccolo di ~2.2 volte. Il conto sbagliato **resta stampato nel referto**, col
+> perché: un errore cancellato non insegna niente.

@@ -1,0 +1,79 @@
+# `massa_critica_collasso` -- CHI LA USA. Elenco GENERATO dall'AST.
+#
+# `A13` conseguenza 4: una costante tarata entro un raggio < LAM e' tarata SOTTO la
+# scala di Planck. **DECISIONE DI LUCA: SI MARCA E NON SI TOCCA.**
+#
+IL CONTO, derivato e non ricopiato:
+  massa_critica_collasso() = 621.4858  nodi, chiesti in una sfera di raggio LAM = 0.800000
+  IL PROBLEMA: quanti PUNTI stanno in una palla di raggio LAM con distanze mutue >= LAM?
+  Se uno sta al centro, gli altri devono stare a distanza >= LAM da lui e <= LAM dal
+  centro: quindi ESATTAMENTE sulla sfera di raggio LAM, con separazione angolare >= 60
+  gradi. Il massimo su una sfera con separazione >= 60 gradi e' il NUMERO DI BACIO in
+  3D, K(3) = 12. Quindi al piu' 12 + 1 = 13.
+  RAPPORTO CHIESTO / POSSIBILE = 47.81
+
+  -> **la costante chiede ~48 volte piu' nodi di quanti ne stiano.**
+
+  !! IL MIO PRIMO CONTO ERA SBAGLIATO, E IL NUMERO DI LUCA ERA GIUSTO.
+     Avevo usato l'impacchettamento di KEPLER -- palline di raggio LAM/2 dentro una
+     sfera di raggio LAM -> 8 * 0.740480 = 5.9238. **Kepler pretende le palline INTERAMENTE
+     DENTRO, che e' una condizione PIU' STRETTA di quella vera**: qui il vincolo e' solo
+     sui CENTRI. Il mio numero (5.92) era TROPPO PICCOLO di ~2.2 volte, e la "circa
+     una dozzina" di Luca e' ESATTA.
+     **Il conto sbagliato resta stampato, col perche': un errore cancellato non insegna
+     niente, e chi rifara' il conto rischia di rifare il mio.**
+
+====================================================================================================
+CHI LA USA -- 36 usi
+====================================================================================================
+
+-- NEL CODICE DELLA FISICA (21) --
+  :562    massa_critica_collasso     in  massa_critica_adattiva
+  :2032   massa_critica_adattiva     in  chiralita_core_locale
+  :2034   massa_critica_collasso     in  chiralita_core_locale
+  :2586   massa_critica_adattiva     in  lambda_nodi
+  :3151   massa_critica_adattiva     in  _passo_spinoriale
+  :3153   massa_critica_collasso     in  _passo_spinoriale
+  :4581   massa_critica_adattiva     in  step
+  :4583   massa_critica_collasso     in  step
+  :5544   massa_critica_collasso     in  mitosi
+  :6367   massa_critica_adattiva     in  diagnostica
+  :6541   massa_critica_collasso     in  _semina_fila_radiale
+  :6552   massa_critica_collasso     in  _semina_buco_nero
+  :6554   massa_critica_collasso     in  _semina_buco_nero
+  :6568   massa_critica_collasso     in  _semina_n_masse
+  :6595   massa_critica_collasso     in  _crea_masse_casuali
+  :7212   massa_critica_adattiva     in  update
+  :7328   massa_critica_collasso     in  _crea_massa
+  :7335   massa_critica_collasso     in  _crea_buconero
+  :7364   massa_critica_collasso     in  _semina_al_click
+  :8541   massa_critica_collasso     in  batch_condensazione
+  :8734   massa_critica_adattiva     in  batch_condensazione
+
+-- NELLE SCENE / TAVOLA DEI TEST (15), a livello di modulo --
+  :6636   massa_critica_collasso    
+  :6642   massa_critica_collasso    
+  :6657   massa_critica_collasso    
+  :6660   massa_critica_collasso    
+  :6675   massa_critica_collasso    
+  :6677   massa_critica_collasso    
+  :6690   massa_critica_collasso    
+  :6692   massa_critica_collasso    
+  :6701   massa_critica_collasso    
+  :6704   massa_critica_collasso    
+  :6747   massa_critica_collasso    
+  :6748   massa_critica_collasso    
+  :6749   massa_critica_collasso    
+  :6775   massa_critica_collasso    
+  :6776   massa_critica_collasso    
+
+====================================================================================================
+COME SI LEGGE
+====================================================================================================
+  **Gli usi NELLE SCENE decidono QUANTI nodi seminare**: sono la taglia delle masse.
+  **Gli usi NELLA FISICA la usano come SOGLIA o come SCALA** -- ed e' li' che il fatto
+  di essere tarata sotto la scala di Planck **entra nelle leggi**.
+
+  ⚠ **NON SI TOCCA NIENTE** (decisione di Luca). Questo elenco e' il PERIMETRO della
+  marcatura: una costante marcata senza l'elenco di chi la usa e' un'avvertenza
+  generica, e un'avvertenza generica non impedisce nulla (`A9`).
