@@ -65,24 +65,39 @@ def main():
     import numpy as np
     Nc = float(S.massa_critica_collasso())
     LAM = float(S.LAM)
-    # sfere di diametro LAM che entrano in una sfera di raggio LAM, all'impacchettamento
-    # massimo (Kepler, densita' pi/(3*sqrt(2)) = 0.7405): e' un LIMITE SUPERIORE.
-    dens_kepler = np.pi / (3.0 * np.sqrt(2.0))
-    vol_grande = (4.0 / 3.0) * np.pi * LAM ** 3
-    vol_palla = (4.0 / 3.0) * np.pi * (LAM / 2.0) ** 3
-    n_max = dens_kepler * vol_grande / vol_palla
+    # IL MIO PRIMO CONTO ERA SBAGLIATO, e il numero di Luca era giusto.
+    #   Avevo usato l'impacchettamento di KEPLER: palline di raggio LAM/2 dentro una sfera di
+    #   raggio LAM -> `8 * 0.740480 = 5.92`. **Kepler pretende le palline INTERAMENTE DENTRO**,
+    #   che e' una condizione PIU' STRETTA di quella vera: qui il vincolo e' solo sui CENTRI.
+    #   IL PROBLEMA VERO: quanti PUNTI stanno in una palla di raggio `LAM` con distanze mutue
+    #   `>= LAM`? Se uno sta al centro, gli altri devono stare a distanza `>= LAM` da lui e
+    #   `<= LAM` dal centro: quindi **esattamente sulla sfera di raggio `LAM`**, con
+    #   separazione angolare `>= 60 gradi`. Il massimo su una sfera con separazione
+    #   `>= 60 gradi` e' il **NUMERO DI BACIO** in 3D, `K(3) = 12`.
+    #   **Quindi al piu' `12 + 1 = 13`** -- ed e' la "circa una dozzina" di Luca, ESATTA.
+    n_max = 13.0
+    dens_kepler = np.pi / (3.0 * np.sqrt(2.0))     # resta, per mostrare il conto SBAGLIATO
+    n_kepler = dens_kepler * 8.0
     P("IL CONTO, derivato e non ricopiato:\n")
     P("  massa_critica_collasso() = %.4f  nodi, chiesti in una sfera di raggio LAM = %.6f\n"
       % (Nc, LAM))
-    P("  con distanza minima LAM fra i centri, ogni nodo occupa una palla di raggio LAM/2.\n")
-    P("  all'impacchettamento MASSIMO (Kepler, densita' %.6f) in una sfera di raggio LAM\n"
-      % dens_kepler)
-    P("  entrano al PIU'  %.4f  nodi  -- cioe' `8 * %.6f` = il LIMITE SUPERIORE.\n"
-      % (n_max, dens_kepler))
+    P("  IL PROBLEMA: quanti PUNTI stanno in una palla di raggio LAM con distanze mutue >= LAM?\n")
+    P("  Se uno sta al centro, gli altri devono stare a distanza >= LAM da lui e <= LAM dal\n")
+    P("  centro: quindi ESATTAMENTE sulla sfera di raggio LAM, con separazione angolare >= 60\n")
+    P("  gradi. Il massimo su una sfera con separazione >= 60 gradi e' il NUMERO DI BACIO in\n")
+    P("  3D, K(3) = 12. Quindi al piu' 12 + 1 = %d.\n" % int(n_max))
     P("  RAPPORTO CHIESTO / POSSIBILE = %.2f\n" % (Nc / n_max))
-    P("\n  -> **e' un LIMITE SUPERIORE, quindi il rapporto vero e' PEGGIORE**: Kepler vale per\n")
-    P("     sfere identiche in un reticolo infinito, non per %d punti in una pallina.\n" % int(Nc))
-    P("  -> **la costante chiede %.0f volte piu' nodi di quanti ne stiano.**\n" % (Nc / n_max))
+    P("\n  -> **la costante chiede ~%.0f volte piu' nodi di quanti ne stiano.**\n" % (Nc / n_max))
+    P("\n  !! IL MIO PRIMO CONTO ERA SBAGLIATO, E IL NUMERO DI LUCA ERA GIUSTO.\n")
+    P("     Avevo usato l'impacchettamento di KEPLER -- palline di raggio LAM/2 dentro una\n")
+    P("     sfera di raggio LAM -> 8 * %.6f = %.4f. **Kepler pretende le palline INTERAMENTE\n"
+      % (dens_kepler, n_kepler))
+    P("     DENTRO, che e' una condizione PIU' STRETTA di quella vera**: qui il vincolo e' solo\n")
+    P("     sui CENTRI. Il mio numero (%.2f) era TROPPO PICCOLO di ~%.1f volte, e la \"circa\n"
+      % (n_kepler, n_max / n_kepler))
+    P("     una dozzina\" di Luca e' ESATTA.\n")
+    P("     **Il conto sbagliato resta stampato, col perche': un errore cancellato non insegna\n")
+    P("     niente, e chi rifara' il conto rischia di rifare il mio.**\n")
 
     P("\n" + "=" * 100 + "\nCHI LA USA -- %d usi\n" % len(usi) + "=" * 100 + "\n")
     scene = [u for u in usi if u[2].startswith("(modulo")]
