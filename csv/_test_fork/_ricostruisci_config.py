@@ -11,16 +11,19 @@ LE TRE FONTI, NELL'ORDINE CHE LUCA HA FISSATO:
   2. **BANNER** -- il blocco *"FLAG ATTIVI, letti dal MODULO dopo `_applica_flag`"* stampato
      nel log del run. E' la fonte piu' forte in assoluto per i 24 flag che elenca, perche'
      e' lo stato EFFETTIVO letto dal modulo. **Ma sono 24 su 123.**
-  3. **DEFAULT DEL BLOB DI QUEL RUN** -- dall'AST di `<commit>:soliton_simulator.py`.
+  3. **DEFAULT DEL SORGENTE AL COMMIT DI QUEL RUN** -- dall'AST di
+     `<commit>:soliton_simulator.py`. !! L'HASH DI UN RUN E' UN **COMMIT**, non un blob:
+     `git cat-file -t` su un timbro del presidio risponde `Not a valid object name`.
+     Accanto si riporta lo sha1 del simulatore, DICENDO quale convenzione e' (par.5-quinquies).
      **Vale solo se nessuna opzione lo cambia**, e questo si VERIFICA: si ricava dall'AST di
      `_applica_flag` l'opzione che scrive quel flag, e si cerca nei lanciatori committati a
      quel commit. Se l'opzione NON c'e', il default vale.
 
-⚠ SE DUE FONTI SI CONTRADDICONO SI RIPORTANO ENTRAMBE: e' un reperto, non un errore da
+!! SE DUE FONTI SI CONTRADDICONO SI RIPORTANO ENTRAMBE: e' un reperto, non un errore da
   risolvere in silenzio.
-⚠ CIO' CHE NON SI RICOSTRUISCE SI SCRIVE `NON RICOSTRUITO`, COL MOTIVO.
+!! CIO' CHE NON SI RICOSTRUISCE SI SCRIVE `NON RICOSTRUITO`, COL MOTIVO.
 
-⚠ E UNA COSA E' SCRITTA A MANO, di proposito, perche' NON e' derivabile: QUALE CAMPAGNA
+!! E UNA COSA E' SCRITTA A MANO, di proposito, perche' NON e' derivabile: QUALE CAMPAGNA
   (`G1`, `G2`, ...) corrisponde a quale cartella. Si **verifica** contro la riga
   `[G4] modo --...` del log quando c'e', e la verifica si stampa.
 
@@ -59,9 +62,9 @@ RUN = [
     ("FASE_2PI corto", "csv/_test_fork/_f2p_corto", "csv/_test_fork/_f2p_corto_log.txt"),
 ]
 
-# I SEI del punto 3 del mandato, piu' i due che servono a leggerli
+# I SETTE del punto (1b) del prompt unico, piu' i due che servono a leggerli
 INTERESSE = ["CAMPO_SPINORIALE", "SPINORE_VIVO", "SPINORE_CORRETTO", "TEMPO_SEGNO",
-             "SCALA_MIN", "SCALA_MIN_PASSO", "OROLOGIO_SEGNO", "TAU_LOC"]
+             "SCALA_MIN", "SCALA_MIN_PASSO", "TW_SPINORE", "OROLOGIO_SEGNO", "TAU_LOC"]
 
 LANCIATORI = ("csv/_test_fork/_scena_video.py", "csv/_test_fork/_g4_prova.py",
               "csv/_test_fork/_spegni_grav_bifase.py")
@@ -141,6 +144,36 @@ def defaults_del_blob(commit):
             pass
 
 
+_SHA_LOG = re.compile(r"blob simulatore\s+([0-9a-f]{8,40})")
+
+
+def timbro_al_commit(commit, log=None):
+    """L'identita' del simulatore A QUEL COMMIT, dicendo QUALE delle due convenzioni e'.
+
+    !! L'HASH DI UN RUN E' UN **COMMIT**, non un blob: `git cat-file -t` su un timbro del
+       presidio risponde `Not a valid object name`, perche' quel numero non e' un oggetto git.
+       Qui si riporta il commit COME COMMIT, e accanto lo sha1 dei byte -- specificando da
+       dove viene, perche' le due convenzioni NON sono lo stesso numero (par.5-quinquies):
+         * dal LOG  -> `hashlib.sha1(byte GREZZI del file su disco)`: e' quello che i CSV
+           citano, ed e' l'unico che vede la trappola CRLF;
+         * da GIT   -> sha1 del CONTENUTO del blob, che git conserva in forma **LF**. Se il
+           working tree aveva CRLF, questo numero e' DIVERSO da quello che ha girato.
+       Si preferisce il log. Quando manca, si dichiara che e' la forma LF.
+    """
+    if log:
+        p = os.path.join(RADICE, log)
+        if os.path.exists(p):
+            m = _SHA_LOG.search(io.open(p, encoding="utf-8", errors="replace").read())
+            if m:
+                return m.group(1)[:8], "sha1 byte GREZZI, dal log"
+    t = git("cat-file", "-p", "%s:soliton_simulator.py" % commit) if commit else None
+    if not t:
+        return None, "NON RICOSTRUITO"
+    import hashlib
+    return (hashlib.sha1(t.encode("utf-8")).hexdigest()[:8],
+            "sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF")
+
+
 def opzione_del_flag(commit, flag):
     """L'opzione che SCRIVE quel flag in `_applica_flag`, dall'AST del blob di quel commit.
 
@@ -213,7 +246,7 @@ def main():
     W = sys.stdout.write
     W("# LA RICOSTRUZIONE DELLA CONFIGURAZIONE DEI RUN GIA' FATTI\n#\n")
     W("# GENERATA da `csv/_test_fork/_ricostruisci_config.py`. Fonti, in ordine:\n")
-    W("#   argv (dal driver COMMITTATO a quel commit) . banner del log . default del blob\n")
+    W("#   argv (dal driver COMMITTATO a quel commit) . banner del log . default del sorgente\n")
     W("# Cio' che non si ricostruisce e' scritto NON RICOSTRUITO, col motivo.\n#\n")
 
     # ---------------- la provenienza di ogni run
@@ -263,17 +296,21 @@ def main():
                 continue
             opz = opzione_del_flag(c, flag)
             dove = opzione_nei_lanciatori(c, opz) if opz else None
+            sh, conv = timbro_al_commit(c, s["log"])
             if opz and dove == []:
-                W("    %-20s %-8s  FONTE: default del blob %s, E l'opzione `--%s` NON compare "
-                  "in nessun lanciatore committato -> il default VALE\n"
-                  % (nome, d[flag], c[:8], opz.replace("_", "-")))
+                W("    %-20s %-8s  FONTE: default del sorgente AL COMMIT %s "
+                  "[sim %s -- %s], E l'opzione `--%s` NON compare in nessun lanciatore "
+                  "committato -> il default VALE\n"
+                  % (nome, d[flag], c[:8], sh, conv, opz.replace("_", "-")))
             elif opz and dove:
-                W("    %-20s %-8s  !! default del blob, MA `--%s` compare in %s: "
-                  "il valore dipende dall'argv e il banner non lo elenca -> NON RICOSTRUITO\n"
-                  % (nome, "?", opz.replace("_", "-"), ", ".join(dove)))
+                W("    %-20s %-8s  !! default del sorgente AL COMMIT %s, MA `--%s` compare "
+                  "in %s: il valore dipende dall'argv e il banner non lo elenca -> "
+                  "NON RICOSTRUITO\n"
+                  % (nome, "?", c[:8], opz.replace("_", "-"), ", ".join(dove)))
             else:
-                W("    %-20s %-8s  FONTE: default del blob %s (nessuna opzione lo scrive in "
-                  "`_applica_flag`)\n" % (nome, d[flag], c[:8]))
+                W("    %-20s %-8s  FONTE: default del sorgente AL COMMIT %s [sim %s -- %s] "
+                  "(nessuna opzione lo scrive in `_applica_flag`)\n"
+                  % (nome, d[flag], c[:8], sh, conv))
 
     # ---------------- la tabella completa dal banner
     W("\n" + "=" * 110 + "\n")
@@ -294,7 +331,7 @@ def main():
 
     # ---------------- le contraddizioni
     W("\n" + "=" * 110 + "\n")
-    W("CONTRADDIZIONI FRA FONTI -- banner contro default del blob\n")
+    W("CONTRADDIZIONI FRA FONTI -- banner contro default del sorgente a quel commit\n")
     W("=" * 110 + "\n")
     n_contr = 0
     for nome in [r[0] for r in RUN]:

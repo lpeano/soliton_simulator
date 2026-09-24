@@ -1,8 +1,8 @@
-[TIMBRO] _ricostruisci_config.py  sha1-BYTE 0fd8b254  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
+[TIMBRO] _ricostruisci_config.py  sha1-BYTE 627927ee  !! MODIFICATO rispetto a HEAD (blob-git 507b86d5) -- i byte che girano NON sono quelli committati
 # LA RICOSTRUZIONE DELLA CONFIGURAZIONE DEI RUN GIA' FATTI
 #
 # GENERATA da `csv/_test_fork/_ricostruisci_config.py`. Fonti, in ordine:
-#   argv (dal driver COMMITTATO a quel commit) . banner del log . default del blob
+#   argv (dal driver COMMITTATO a quel commit) . banner del log . default del sorgente
 # Cio' che non si ricostruisce e' scritto NON RICOSTRUITO, col motivo.
 #
 ==============================================================================================================
@@ -32,7 +32,7 @@ I FLAG DEL PUNTO 3 -- valore + FONTE, per ogni run
 --- CAMPO_SPINORIALE
     G1  (video 6000)     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
     G2  (g2m)            True      FONTE: banner del log (stato EFFETTIVO dal modulo)
-    validazione 600      ?         !! default del blob, MA `--campo-spinoriale` compare in csv/_test_fork/_scena_video.py: il valore dipende dall'argv e il banner non lo elenca -> NON RICOSTRUITO
+    validazione 600      ?         !! default del sorgente AL COMMIT 691b7e99, MA `--campo-spinoriale` compare in csv/_test_fork/_scena_video.py: il valore dipende dall'argv e il banner non lo elenca -> NON RICOSTRUITO
     G3  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
     G3  senza bifase     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
     G4  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
@@ -45,7 +45,7 @@ I FLAG DEL PUNTO 3 -- valore + FONTE, per ogni run
 --- SPINORE_VIVO
     G1  (video 6000)     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
     G2  (g2m)            True      FONTE: banner del log (stato EFFETTIVO dal modulo)
-    validazione 600      True      FONTE: default del blob 691b7e99, E l'opzione `--senza-spinore-vivo` NON compare in nessun lanciatore committato -> il default VALE
+    validazione 600      True      FONTE: default del sorgente AL COMMIT 691b7e99 [sim 9557a867 -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--senza-spinore-vivo` NON compare in nessun lanciatore committato -> il default VALE
     G3  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
     G3  senza bifase     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
     G4  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
@@ -58,7 +58,7 @@ I FLAG DEL PUNTO 3 -- valore + FONTE, per ogni run
 --- SPINORE_CORRETTO
     G1  (video 6000)     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
     G2  (g2m)            True      FONTE: banner del log (stato EFFETTIVO dal modulo)
-    validazione 600      ?         !! default del blob, MA `--spinore-corretto` compare in csv/_test_fork/_scena_video.py: il valore dipende dall'argv e il banner non lo elenca -> NON RICOSTRUITO
+    validazione 600      ?         !! default del sorgente AL COMMIT 691b7e99, MA `--spinore-corretto` compare in csv/_test_fork/_scena_video.py: il valore dipende dall'argv e il banner non lo elenca -> NON RICOSTRUITO
     G3  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
     G3  senza bifase     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
     G4  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
@@ -69,22 +69,22 @@ I FLAG DEL PUNTO 3 -- valore + FONTE, per ogni run
     FASE_2PI corto       True      FONTE: banner del log (stato EFFETTIVO dal modulo)
 
 --- TEMPO_SEGNO
-    G1  (video 6000)     False     FONTE: default del blob 94e2ec07, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
-    G2  (g2m)            False     FONTE: default del blob 2b0a19f9, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
-    validazione 600      False     FONTE: default del blob 691b7e99, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G1  (video 6000)     False     FONTE: default del sorgente AL COMMIT 94e2ec07 [sim 15b4652a -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G2  (g2m)            False     FONTE: default del sorgente AL COMMIT 2b0a19f9 [sim 15b4652a -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    validazione 600      False     FONTE: default del sorgente AL COMMIT 691b7e99 [sim 9557a867 -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
     G3  controllo        ?         NON RICOSTRUITO: nessuno snapshot, quindi nessun commit, e il log non porta il banner
-    G3  senza bifase     False     FONTE: default del blob abc5b49f, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G3  senza bifase     False     FONTE: default del sorgente AL COMMIT abc5b49f [sim 9557a867 -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
     G4  controllo        ?         NON RICOSTRUITO: nessuno snapshot, quindi nessun commit, e il log non porta il banner
-    G4  riferimento      False     FONTE: default del blob bc30e626, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
-    G4  spegni           False     FONTE: default del blob 49a4cb2e, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
-    G4-bis               False     FONTE: default del blob 26c4165c, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
-    D34 ritmo-wrap       False     FONTE: default del blob 8ec9e248, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
-    FASE_2PI corto       False     FONTE: default del blob b5e9a9ac, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G4  riferimento      False     FONTE: default del sorgente AL COMMIT bc30e626 [sim ab685eac -- sha1 byte GREZZI, dal log], E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G4  spegni           False     FONTE: default del sorgente AL COMMIT 49a4cb2e [sim ab685eac -- sha1 byte GREZZI, dal log], E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G4-bis               False     FONTE: default del sorgente AL COMMIT 26c4165c [sim 21e3a3dc -- sha1 byte GREZZI, dal log], E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    D34 ritmo-wrap       False     FONTE: default del sorgente AL COMMIT 8ec9e248 [sim 3d91338e -- sha1 byte GREZZI, dal log], E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    FASE_2PI corto       False     FONTE: default del sorgente AL COMMIT b5e9a9ac [sim 445e2896 -- sha1 byte GREZZI, dal log], E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
 
 --- SCALA_MIN
     G1  (video 6000)     -         NON RICOSTRUITO: il flag NON ESISTE nel blob di questo run
     G2  (g2m)            -         NON RICOSTRUITO: il flag NON ESISTE nel blob di questo run
-    validazione 600      ?         !! default del blob, MA `--scala-min` compare in csv/_test_fork/_scena_video.py: il valore dipende dall'argv e il banner non lo elenca -> NON RICOSTRUITO
+    validazione 600      ?         !! default del sorgente AL COMMIT 691b7e99, MA `--scala-min` compare in csv/_test_fork/_scena_video.py: il valore dipende dall'argv e il banner non lo elenca -> NON RICOSTRUITO
     G3  controllo        False     FONTE: banner del log (stato EFFETTIVO dal modulo)
     G3  senza bifase     False     FONTE: banner del log (stato EFFETTIVO dal modulo)
     G4  controllo        False     FONTE: banner del log (stato EFFETTIVO dal modulo)
@@ -97,7 +97,7 @@ I FLAG DEL PUNTO 3 -- valore + FONTE, per ogni run
 --- SCALA_MIN_PASSO
     G1  (video 6000)     -         NON RICOSTRUITO: il flag NON ESISTE nel blob di questo run
     G2  (g2m)            -         NON RICOSTRUITO: il flag NON ESISTE nel blob di questo run
-    validazione 600      ?         !! default del blob, MA `--scala-min-passo` compare in csv/_test_fork/_scena_video.py: il valore dipende dall'argv e il banner non lo elenca -> NON RICOSTRUITO
+    validazione 600      ?         !! default del sorgente AL COMMIT 691b7e99, MA `--scala-min-passo` compare in csv/_test_fork/_scena_video.py: il valore dipende dall'argv e il banner non lo elenca -> NON RICOSTRUITO
     G3  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
     G3  senza bifase     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
     G4  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
@@ -107,23 +107,36 @@ I FLAG DEL PUNTO 3 -- valore + FONTE, per ogni run
     D34 ritmo-wrap       True      FONTE: banner del log (stato EFFETTIVO dal modulo)
     FASE_2PI corto       True      FONTE: banner del log (stato EFFETTIVO dal modulo)
 
---- OROLOGIO_SEGNO
-    G1  (video 6000)     False     FONTE: default del blob 94e2ec07, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
-    G2  (g2m)            False     FONTE: default del blob 2b0a19f9, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
-    validazione 600      False     FONTE: default del blob 691b7e99, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+--- TW_SPINORE
+    G1  (video 6000)     False     FONTE: default del sorgente AL COMMIT 94e2ec07 [sim 15b4652a -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--tw-spinore` NON compare in nessun lanciatore committato -> il default VALE
+    G2  (g2m)            False     FONTE: default del sorgente AL COMMIT 2b0a19f9 [sim 15b4652a -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--tw-spinore` NON compare in nessun lanciatore committato -> il default VALE
+    validazione 600      False     FONTE: default del sorgente AL COMMIT 691b7e99 [sim 9557a867 -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--tw-spinore` NON compare in nessun lanciatore committato -> il default VALE
     G3  controllo        ?         NON RICOSTRUITO: nessuno snapshot, quindi nessun commit, e il log non porta il banner
-    G3  senza bifase     False     FONTE: default del blob abc5b49f, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G3  senza bifase     False     FONTE: default del sorgente AL COMMIT abc5b49f [sim 9557a867 -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--tw-spinore` NON compare in nessun lanciatore committato -> il default VALE
     G4  controllo        ?         NON RICOSTRUITO: nessuno snapshot, quindi nessun commit, e il log non porta il banner
-    G4  riferimento      False     FONTE: default del blob bc30e626, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
-    G4  spegni           False     FONTE: default del blob 49a4cb2e, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
-    G4-bis               False     FONTE: default del blob 26c4165c, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
-    D34 ritmo-wrap       False     FONTE: default del blob 8ec9e248, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
-    FASE_2PI corto       False     FONTE: default del blob b5e9a9ac, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G4  riferimento      False     FONTE: default del sorgente AL COMMIT bc30e626 [sim ab685eac -- sha1 byte GREZZI, dal log], E l'opzione `--tw-spinore` NON compare in nessun lanciatore committato -> il default VALE
+    G4  spegni           False     FONTE: default del sorgente AL COMMIT 49a4cb2e [sim ab685eac -- sha1 byte GREZZI, dal log], E l'opzione `--tw-spinore` NON compare in nessun lanciatore committato -> il default VALE
+    G4-bis               False     FONTE: default del sorgente AL COMMIT 26c4165c [sim 21e3a3dc -- sha1 byte GREZZI, dal log], E l'opzione `--tw-spinore` NON compare in nessun lanciatore committato -> il default VALE
+    D34 ritmo-wrap       False     FONTE: default del sorgente AL COMMIT 8ec9e248 [sim 3d91338e -- sha1 byte GREZZI, dal log], E l'opzione `--tw-spinore` NON compare in nessun lanciatore committato -> il default VALE
+    FASE_2PI corto       False     FONTE: default del sorgente AL COMMIT b5e9a9ac [sim 445e2896 -- sha1 byte GREZZI, dal log], E l'opzione `--tw-spinore` NON compare in nessun lanciatore committato -> il default VALE
+
+--- OROLOGIO_SEGNO
+    G1  (video 6000)     False     FONTE: default del sorgente AL COMMIT 94e2ec07 [sim 15b4652a -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G2  (g2m)            False     FONTE: default del sorgente AL COMMIT 2b0a19f9 [sim 15b4652a -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    validazione 600      False     FONTE: default del sorgente AL COMMIT 691b7e99 [sim 9557a867 -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G3  controllo        ?         NON RICOSTRUITO: nessuno snapshot, quindi nessun commit, e il log non porta il banner
+    G3  senza bifase     False     FONTE: default del sorgente AL COMMIT abc5b49f [sim 9557a867 -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G4  controllo        ?         NON RICOSTRUITO: nessuno snapshot, quindi nessun commit, e il log non porta il banner
+    G4  riferimento      False     FONTE: default del sorgente AL COMMIT bc30e626 [sim ab685eac -- sha1 byte GREZZI, dal log], E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G4  spegni           False     FONTE: default del sorgente AL COMMIT 49a4cb2e [sim ab685eac -- sha1 byte GREZZI, dal log], E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G4-bis               False     FONTE: default del sorgente AL COMMIT 26c4165c [sim 21e3a3dc -- sha1 byte GREZZI, dal log], E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    D34 ritmo-wrap       False     FONTE: default del sorgente AL COMMIT 8ec9e248 [sim 3d91338e -- sha1 byte GREZZI, dal log], E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    FASE_2PI corto       False     FONTE: default del sorgente AL COMMIT b5e9a9ac [sim 445e2896 -- sha1 byte GREZZI, dal log], E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
 
 --- TAU_LOC
     G1  (video 6000)     1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
     G2  (g2m)            1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
-    validazione 600      1.0       FONTE: default del blob 691b7e99, E l'opzione `--tauloc` NON compare in nessun lanciatore committato -> il default VALE
+    validazione 600      1.0       FONTE: default del sorgente AL COMMIT 691b7e99 [sim 9557a867 -- sha1 del CONTENUTO git, forma LF -- NON e' il byte-grezzo se il disco era CRLF], E l'opzione `--tauloc` NON compare in nessun lanciatore committato -> il default VALE
     G3  controllo        1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
     G3  senza bifase     1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
     G4  controllo        1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
@@ -167,7 +180,7 @@ VERLET                 True      True      True      True      True      True   
   nel tempo: e' una lista A MANO nel driver, ed e' cresciuta).
 
 ==============================================================================================================
-CONTRADDIZIONI FRA FONTI -- banner contro default del blob
+CONTRADDIZIONI FRA FONTI -- banner contro default del sorgente a quel commit
 ==============================================================================================================
   G1  (video 6000)   CALORE_VETTORIALE      banner False  default True   -> SPIEGATA: l'opzione `--calore-vett` la cambia
   G1  (video 6000)   CAMPO_SPINORIALE       banner True   default False  -> SPIEGATA: l'opzione `--campo-spinoriale` la cambia

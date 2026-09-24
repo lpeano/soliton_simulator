@@ -1,13 +1,13 @@
 # REFERTO — **LA CONFIGURAZIONE CON CUI I RUN HANNO GIRATO**
 
-> **Punto 3 del mandato di Luca, 2026-09-24.** Le risposte vengono **dalla tabella generata**
+> **Punto (1b) del prompt unico di Luca, 2026-09-24.** Le risposte vengono **dalla tabella generata**
 > (`csv/_test_fork/_RICOSTRUZIONE_config.txt`), **non a memoria**.
 > Strumenti: `csv/_configurazione.py` *(da ora in avanti)* e
 > `csv/_test_fork/_ricostruisci_config.py` *(per i run già fatti)*.
 
 ---
 
-## 1. I SEI FLAG, PER OGNI RUN
+## 1. I SETTE FLAG, PER OGNI RUN
 
 **Il valore è lo stesso su tutte le campagne ricostruite.** Riporto il valore e **da dove
 viene**, perché la fonte cambia il peso della risposta.
@@ -17,9 +17,19 @@ viene**, perché la fonte cambia il peso della risposta.
 | `CAMPO_SPINORIALE` | **`True`** | **banner** *(stato effettivo dal modulo)* | 10 su 11 |
 | `SPINORE_VIVO` | **`True`** | **banner**, e il **default è già `True`** | 10 su 11 |
 | `SPINORE_CORRETTO` | **`True`** | **banner** | 10 su 11 |
-| **`TEMPO_SEGNO`** | **`False`** | default del blob **+ `--tempo-segno` ASSENTE da ogni lanciatore committato** | 9 su 11 |
+| **`TEMPO_SEGNO`** | **`False`** | default del sorgente al commit **+ `--tempo-segno` ASSENTE da ogni lanciatore committato** | 9 su 11 |
 | `SCALA_MIN` | **`False`** | **banner** | 8 su 11 |
 | `SCALA_MIN_PASSO` | **`True`** | **banner** | 8 su 11 |
+| **`TW_SPINORE`** | **`False`** | default del sorgente al commit **+ `--tw-spinore` ASSENTE da ogni lanciatore committato** | 9 su 11 |
+
+> ### ⚠ **E `TW_SPINORE` è `False` IN OGNI RUN, il che chiude una domanda e ne apre un'altra.**
+> **Chiude:** il fronte `W` del registro dice che `TW_SPINORE` ha un **commento falso**
+> *(dichiara di pilotare il Bloch di `tw/2`, cioè un ANGOLO, mentre il codice somma
+> `tw/(4π)` a una VELOCITÀ angolare — fattore `628.3 = 2π/DT`)*. **Nessuna misura di
+> questo programma è stata contaminata da quella legge: non ha mai girato.**
+> **Apre:** è il caso **INVERSA** della mappa del `4π` — *la torsione che pilota il
+> Bloch*, cioè il `4π` **finto** che comanda il `4π` **vero**. È spento **oggi**, e
+> l'architettura a un solo ponte deve dire **se può esistere affatto**.
 
 **Le celle che mancano sono dichiarate, non dedotte:**
 
@@ -27,7 +37,7 @@ viene**, perché la fonte cambia il peso della risposta.
   `.pkl.gz` a ogni giro: è **scratch**)*, quindi non hanno un commit da cui leggere i default.
   Per loro valgono i **24 flag del banner** e nulla più → `TEMPO_SEGNO` **NON RICOSTRUITO**;
 - **`validazione 600`** non ha banner nel suo log, e per i flag che un'opzione **può** cambiare
-  il default del blob **non basta** → **NON RICOSTRUITO**, non «probabilmente come gli altri»;
+  il default del sorgente **non basta** → **NON RICOSTRUITO**, non «probabilmente come gli altri»;
 - **`G1` e `G2`** hanno un banner di **15** flag, non 24: il banner è una **lista a mano** nel
   driver, ed è cresciuta nel tempo. `SCALA_MIN`/`SCALA_MIN_PASSO` **non esistevano** allora.
 
@@ -130,6 +140,8 @@ e si conterebbero due volte»*. Quindi:
 ---
 
 ## 5. COSA RESTA NON RICOSTRUITO, e perché
+
+> **⚠ E UNA PRECISAZIONE DI NOMENCLATURA, chiesta da Luca:** dove il referto generato dice **«default del sorgente AL COMMIT `<hash>`»**, quell'hash è un **COMMIT**, non un blob. `git cat-file -t` su un timbro del presidio risponde **`Not a valid object name`**, perché quel numero **non è un oggetto git**. Accanto, per leggibilità, c'è lo `sha1` del simulatore — **e il referto dice QUALE delle due convenzioni è**: `sha1 byte GREZZI, dal log` *(quello che i CSV citano, l'unico che vede la trappola CRLF)*, oppure `sha1 del CONTENUTO git, forma LF`, che **non è il byte-grezzo se il disco era CRLF**.
 
 | cosa | perché |
 |---|---|

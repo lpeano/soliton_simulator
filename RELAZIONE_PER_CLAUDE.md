@@ -13370,3 +13370,34 @@ DICHIARATA / EREDITATA / INVERSA, piu' il grafo delle dipendenze)* · **`S08`: c
 
 > **Ero al primo stato pulito quando il prompt è arrivato** *(`fc085b2`, nessun run in corso)*,
 > e **il punto 5 del mandato precedente — la cura di `D36` — non era stato cominciato.**
+
+### ㉚ **(1a)(1b) L'hash è un COMMIT, e `TW_SPINORE` è spento in ogni run**
+
+**(1a)** Nel referto generato *«default del blob `<hash>`»* è diventato **«default del sorgente
+AL COMMIT `<hash>`»**: quell'hash è un **commit**, e `git cat-file -t` su un timbro del
+presidio risponde **`Not a valid object name`** perché quel numero **non è un oggetto git**.
+
+**Accanto c'è lo `sha1` del simulatore, e il referto dice QUALE convenzione è** — perché le
+due **non sono lo stesso numero** *(par.5-quinquies)*:
+
+| quando | cosa riporta |
+|---|---|
+| il log ha `blob simulatore XXXXXXXX` | **`sha1` dei byte GREZZI**: quello che i CSV citano, **l'unico che vede la trappola CRLF** |
+| il log non c'è | `sha1` del **CONTENUTO git**, che git conserva in forma **LF** — e il referto scrive **«NON è il byte-grezzo se il disco era CRLF»** |
+
+**Misurato:** `G4` riferimento/spegni → **`ab685eac`** *(byte grezzi, dal log)* · `G4-bis` →
+**`21e3a3dc`** · `D34` → **`3d91338e`** · `FASE_2PI` corto → **`445e2896`**. Per `G1`, `G2`,
+`validazione 600` e `G3` il log non porta quella riga, e il referto usa la forma **LF**
+*(`15b4652a`, `9557a867`)* **dichiarandolo**.
+
+**(1b)** Aggiunto **`TW_SPINORE`** ai flag delle risposte puntuali: **`False` in 9 run su 11**,
+e **`--tw-spinore` non compare in nessun lanciatore committato** a nessuno di quei commit.
+
+> **Questo chiude una cosa e ne apre un'altra.**
+> **Chiude:** il fronte `W` dice che `TW_SPINORE` ha un **commento falso** *(dichiara di
+> pilotare il Bloch di `tw/2`, un ANGOLO, mentre somma `tw/(4π)` a una VELOCITÀ angolare —
+> fattore `628.3 = 2π/DT`)*. **Nessuna misura di questo programma è contaminata da quella
+> legge: non ha mai girato.**
+> **Apre:** è il caso **INVERSA** della mappa del `4π` — **la torsione che pilota il Bloch**,
+> cioè il `4π` **finto** che comanda il `4π` **vero**. È spento **oggi**, e l'architettura a un
+> solo ponte deve dire **se può esistere affatto**.
