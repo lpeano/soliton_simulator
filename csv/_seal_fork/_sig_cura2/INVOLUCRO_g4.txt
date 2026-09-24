@@ -1,0 +1,30 @@
+# `STANDARD 5` -- L'INVOLUCRO DI `_g4_prova.py` E' INERTE?
+#
+# NUDO    csv\_seal_fork\_sig_cura2\inerte\ACCESO\scena_000120.pkl.gz
+# AVVOLTO csv\_test_fork\_cura2_corto\scena_000120.pkl.gz
+#
+CONFRONTO PER FIRMA DEI BYTE (`sha1` + forma + dtype):
+  campi UGUALI 218   DIVERSI 0   non confrontati 0
+
+  -> PASS: L'INVOLUCRO E' INERTE. `_g4_prova.py` avvolge `_smorza` e
+     `_applica_flag` SENZA cambiare un bit del risultato, quindi il
+     bilancio di `d0` e i quantili di `V8`/`V9` sono misure di SOLA
+     LETTURA sul run vero.
+
+
+============================================================================================
+PERCHE' LA FIRMA DEI BYTE E NON `array_equal` -- `STANDARD 2`
+============================================================================================
+  `peq`: 2 `NaN` su 526204 (0.0004 %), posizioni identiche: True, finiti identici: True
+     `np.array_equal` risponde **False**; la firma dei byte risponde **True**.
+
+  -> `NaN != NaN`, quindi `array_equal` dichiara DIVERSI due array BYTE-IDENTICI.
+     E' un generatore di FAIL FALSI, ed e' il difetto che `_sigillo_cura2.py` aveva:
+     `confronta_snap` usa `np.array_equal`. **Non ha prodotto un FAIL** perche' `T4`
+     confronta due run senza `NaN` in quel campo -- ma e' la stessa famiglia di
+     `max|A-B| = 0.000e+00` letto come identita': **il criterio non vede cio' che
+     dichiara di vedere.**
+
+  ⚠ E IL `NaN` DI `peq` NON E' UN DIFETTO: il suo DOMINIO lo dichiara --
+     "la pressione di equilibrio: >= 0, e `nan` SOLO sugli archi marcati"
+     (`DOMINI['peq']`). **Verificato dall'AST, non dedotto.**

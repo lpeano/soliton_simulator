@@ -85,5 +85,23 @@
      prima il gradiente veniva da `|tw|`, che e' TORSIONE, non tempo.
 
 ================================================================================================
+`A11` cor.6 -- LA SATURAZIONE DI `tanh(grad)`: il limite MORDE?
+================================================================================================
+  La soglia della mitosi e' `soglia0 * (1 - 0.3*tanh(grad))`. Se `tanh(grad) -> 1`
+  la modulazione diventa un RISCALAMENTO COSTANTE della soglia, cioe' un PARAMETRO
+  NASCOSTO (`A1`), e `A11` cor.6 dice che un limite che satura e' un ALLARME.
+  E' l'argomento con cui la scheda 9 par.2 ha scelto `r` invece di `1/r`:
+    r    in [1.4142e-6, 1.4142]  -> tanh(grad) <= 0.8884
+    1/r  in [0.707, 707107]      -> tanh(grad) -> 1 ESATTO
+  QUI SI MISURA SE L'ARGOMENTO REGGE SUI DATI.
+
+  braccio               p50        p90        p99          max       > 0.95
+  cura1 (OFF)        0.0412     0.2380     0.5373       0.9968      0.0034 %   (da |tw|)
+  cura2 (ON)         0.0991     0.4962     0.7496       0.8861      0.0000 %   (da r)
+
+  -> la quota con `tanh(grad) > 0.95` e' la misura del cor.6: se fosse ALTA, la
+     modulazione sarebbe un riscaldamento costante e il `0.3` un parametro nascosto.
+
+================================================================================================
 !! COSA QUESTO REFERTO NON DICE: che la cura sia GIUSTA. Dice che la mitosi vive, che
    il bilancio chiude, e QUANTO le forme nuove differiscono da quelle vecchie.

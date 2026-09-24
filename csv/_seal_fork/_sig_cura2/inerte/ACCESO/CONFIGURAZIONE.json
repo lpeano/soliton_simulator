@@ -493,13 +493,13 @@
  },
  "git": {
   "branch": "fork-su2",
-  "head": "391bae9cde2d4d71d1378d4cfc91e17ecd0a4f29",
+  "head": "12e675dd56edf0236add735c0ceb76fd0a4db69f",
   "pulito": false
  },
- "quando": "2026-09-24 18:48:09",
+ "quando": "2026-09-24 19:33:31",
  "seme": 42,
  "simulatore": {
   "percorso": "soliton_simulator.py",
-  "sha1_byte": "b881db897d518000306456409a8b241f91cb8869"
+  "sha1_byte": "49fc54d2260b51c6d12b3e6d914bb0b939199c2d"
  }
 }

@@ -14773,3 +14773,62 @@ decisione, non dopo)*: **una quota non nulla di `|dx|/d > 0.5`.**
 
 **E resta in coda, a zero run in più:** registrare `mean((dx/d)²)` nello stesso involucro.
 Direbbe **di quanto** `piana` sarebbe stata peggiore — non **se**.
+
+
+---
+
+# ✅ `(1a)` — **`T4` PASSA SUL BLOB `49fc54d2`, E L'INVOLUCRO È INERTE** *(2026-09-24)*
+
+**Sigillo riparato, un processo per braccio** *(`csv/_seal_fork/_sig_cura2/REFERTO.txt`)*:
+
+```
+T1 PASS  default spento
+T2 PASS  GATE (AST): i rami solo in mitosi()
+T3 PASS  i quattro usi TORSIONE sono INTOCCATI
+[SPENTO] 398.3 s  PROCESSO SUO  rc=0  ->  206 identici, 0 diversi, 5 non confrontati
+T4 PASS  BYTE-INERTE spento
+[ACCESO] 379.9 s  PROCESSO SUO  rc=0  ->  92 identici, 114 diversi, 12 non confrontati
+T5 PASS  CONTROLLO POSITIVO
+ESITO: 5/5
+```
+
+> ### **La byte-inerzia del contatore del clip a zero era DICHIARATA «per costruzione, NON
+> ### MISURATA». Ora è MISURATA: `206` campi identici, `0` diversi, sul blob `49fc54d2`.**
+
+**E `T5` conferma il giro corto da un'altra strada:** l'`n` del braccio acceso è **`2575`**, lo
+stesso del giro corto — che è una **riproducibilità fra due processi diversi**, non una
+ripetizione.
+
+## ✅ E DA LÌ VIENE UN CONTROLLO CHE MANCAVA — **`STANDARD 5`, l'involucro**
+
+*(`csv/_seal_fork/_involucro_g4.py`, nessun run nuovo: due snapshot che esistevano già)*
+
+Il braccio acceso del sigillo gira il **driver NUDO**; il giro corto gira **lo stesso driver
+dentro `_g4_prova.py`**, che avvolge `_smorza` e `_applica_flag`. Stesso blob, stesso seme,
+stessa argv, stesso flag.
+
+> ### **`217` campi con FIRMA DEI BYTE IDENTICA, `0` diversi. L'INVOLUCRO È INERTE.**
+> **Non è un dettaglio: è l'involucro che produce il BILANCIO di `d0` e i quantili di
+> `V8`/`V9`** — cioè **i numeri su cui si è decisa la forma del freno-legge.** Fino a ora era
+> *«il flag è chirurgico»*; **ora è anche «lo strumento non tocca il risultato».**
+
+## ⚠ E UN DIFETTO DEL MIO SIGILLO, TROVATO PROPRIO LÌ
+
+Il primo confronto diceva **«1 campo diverso: `peq`, `max|d| = nan`»**. Misurato:
+
+```
+peq: 2 NaN su 526204 (0.0004 %), posizioni identiche: True, finiti identici: True
+     np.array_equal risponde  False
+     la firma dei byte risponde  True   (sha1 dei byte grezzi IDENTICO)
+```
+
+> ### **`NaN != NaN`, quindi `array_equal` dichiara DIVERSI due array BYTE-IDENTICI.**
+> **`confronta_snap` del sigillo usa `array_equal`: è un generatore di FAIL FALSI.**
+> **Non ha prodotto un FAIL** — `T4` confronta due run senza `NaN` in quel campo — **ma è la
+> stessa famiglia di `max|A−B| = 0` letto come identità: il criterio non vede ciò che dichiara
+> di vedere.** E lo `STANDARD 2` prescriveva già la firma dei byte. **Non l'ho applicato.**
+> **La correzione è un commit a sé.**
+
+**⚠ E IL `NaN` DI `peq` NON È UN DIFETTO:** il suo dominio lo dichiara —
+*«la pressione di equilibrio: `>= 0`, e `nan` SOLO sugli archi marcati»* *(`DOMINI['peq']`)*.
+**Verificato dall'AST, non dedotto.**

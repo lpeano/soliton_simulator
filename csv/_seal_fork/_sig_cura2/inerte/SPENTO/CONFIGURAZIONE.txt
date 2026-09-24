@@ -4,10 +4,10 @@
 # I nomi vengono dall'AST (assegnamenti di MODULO, nome MAIUSCOLO), non da una
 # lista a mano: una lista a mano invecchia in silenzio.
 #
-quando           2026-09-24 18:41:24
-simulatore       soliton_simulator.py  sha1-BYTE b881db897d518000306456409a8b241f91cb8869
+quando           2026-09-24 19:26:53
+simulatore       soliton_simulator.py  sha1-BYTE 49fc54d2260b51c6d12b3e6d914bb0b939199c2d
 driver           csv\_test_fork\_scena_video.py  sha1-BYTE 43ed085cbcf42b3233d47cf1b2232ce2ff5e849d
-git              HEAD 391bae9cde2d4d71d1378d4cfc91e17ecd0a4f29  branch fork-su2  albero *** SPORCO ***
+git              HEAD 7ed47978ac2058020b2527c50b9a5bda66595e8e  branch fork-su2  albero *** SPORCO ***
 seme             42
 
 ARGV VERBATIM -- quello passato al SIMULATORE:

@@ -10,31 +10,42 @@ K3 la forma ESATTA resta fra i due valori per dt/tau in {0.1, 1, 5, 50} -> OK: c
 K4 IL CASO CHE DEVE FALLIRE: l'EULERO con dt/tau = 2.5 da' 1.8000, FUORI da [0.3, 0.9] -> OK: il difetto di `S12` e' riprodotto
 K5 SECONDO CASO CHE DEVE FALLIRE: un `segno` che usa `_ft` -> intercettato ['_ft'] -> OK
 K6 e il `segno` VERO non si segnala: legge ['centro', 'np', 'tanh', 'tau_pp'] -> OK
+K7 il FIGLIO SPENTO dichiara TEMPO_UNICO_MITOSI = False (atteso False) in 1.99 s -> OK
+K8 il FIGLIO ACCESO dichiara TEMPO_UNICO_MITOSI = True  (atteso True ) in 2.03 s -> OK
+   -> il figlio PARTE dal valore SBAGLIATO: se il braccio non attraversasse il confine,
+      leggerebbe l'OPPOSTO di quello atteso, non un valore mancante.
 ----------------------------------------------------------------------------------------------------
   -> i criteri PASSANO
 
-blob simulatore ORA (sha1 byte grezzi) b881db89
+blob simulatore ORA (sha1 byte grezzi) 49fc54d2
 riferimento `_cura1_corto/scena_000120.pkl.gz` -- STESSA configurazione, flag SPENTO
 
 T1    PASS IL DEFAULT E' SPENTO: `TEMPO_UNICO_MITOSI = False`
-T2    PASS GATE (AST): i rami stanno SOLO in ['_applica_flag', 'mitosi'] -> {'mitosi': [5370, 5387, 5438, 5297]}
+T2    PASS GATE (AST): i rami stanno SOLO in ['_applica_flag', 'mitosi'] -> {'mitosi': [5370, 5396, 5447, 5297]}
 T3    PASS I QUATTRO USI `TORSIONE` SONO INTOCCATI: nessuno legge un nome della cura
       trovati: ['centro', 'segno', 'tau_soglia', 'tau_tetto']
       -> e' il test che CODIFICA la regola di Luca: dove intenzione e implementazione
          COINCIDONO non si tocca. Se la cura li toccasse, avrebbe curato cio' che non
          era rotto -- e questo lo prende DALL'AST, non dalla mia parola.
 
-  [SPENTO] 404.5 s   TEMPO_UNICO_MITOSI = False
-  campi UGUALI 206   DIVERSI 0   non confrontati 4
-T4    PASS BYTE-INERTE spento: 206 identici, 0 diversi, 4 non confrontati
+!! RIPARAZIONE DI `Z145`: ogni braccio gira in un PROCESSO SUO.
+   Prima giravano entrambi qui dentro con `runpy`, e il secondo nasceva SENZA MASSE
+   (`avvia_test` e' una LEVETTA): n = 901 contro 2660, letto come effetto del flag.
+   E IL CRITERIO DI RIPRODUCIBILITA' DELLO `STANDARD 1` E' `T4` STESSO: confronta due
+   bracci IDENTICI -- questo, e il riferimento girato in un processo separato -- e
+   pretende ZERO campi diversi. VA LETTO PRIMA DI `T5`.
+
+  [SPENTO] 398.3 s   PROCESSO SUO   rc=0
+  campi UGUALI 206   DIVERSI 0   non confrontati 5
+T4    PASS BYTE-INERTE spento: 206 identici, 0 diversi, 5 non confrontati
       -> i `non confrontati` sono i CONTATORI nuovi, che girano anche a flag
          spento di proposito: cosi' il "prima" del criterio `K` arriva da qui,
          senza un run in piu'.
 
-  [ACCESO] 33.3 s   TEMPO_UNICO_MITOSI = True
-  campi UGUALI 88   DIVERSI 109   non confrontati 19
-  i diversi: _calcpsi_chiamate(308 != 242), _calcpsi_w_none(68 != 2), _chi_core_nodi(shape (2660,)!=(901,)), _chi_core_raggio(shape (2660,)!=(901,)), _chi_core_rho0(shape (2660,)!=(901,)), _chi_core_rhoc(289.80021123233064 != 289.78483782249907), _chi_geom_nodi(shape (2660,)!=(901,)), _cs_nodo_prev(shape (2660,)!=(901,))
-T5    PASS CONTROLLO POSITIVO acceso: 109 campi diversi
+  [ACCESO] 379.9 s   PROCESSO SUO   rc=0
+  campi UGUALI 92   DIVERSI 114   non confrontati 12
+  i diversi: _calcpsi_chiamate(308 != 317), _calcpsi_w_none(68 != 77), _chi_core_nodi(shape (2660,)!=(2570,)), _chi_core_raggio(shape (2660,)!=(2570,)), _chi_core_rho0(shape (2660,)!=(2570,)), _chi_core_rhoc(289.80021123233064 != 289.8029302739168), _chi_geom_nodi(shape (2660,)!=(2570,)), _cs_nodo_prev(shape (2660,)!=(2575,))
+T5    PASS CONTROLLO POSITIVO acceso: 114 campi diversi
 
 ====================================================================================================
 ESITO: 5/5
