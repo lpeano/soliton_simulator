@@ -14543,3 +14543,45 @@ come limite mio.** Ora è un contatore: **`_tum_clip0_prob`**, incondizionato co
 byte-inerzia di questo contatore è PER COSTRUZIONE — un accumulatore intero che nessuna legge
 rilegge — e NON È MISURATA.** Lo scrivo invece di chiamarla certificata: il sigillo riparato,
 girando i bracci in `subprocess`, la rimisurerà senza costo aggiuntivo.
+
+---
+
+# ❗ CORREZIONE A `Z145` — **LA CAUSA NON ERA IGNOTA: ERA UNO STANDARD MIO, VIOLATO** *(tuo rilievo, 2026-09-24)*
+
+**Avevo scritto:** *«il perché il mondo fosse diverso resta da stabilire»*. **Sbagliato.**
+
+> ### **`STANDARD 1` di `doc/PATTERN_DI_PROVA.md`: «Un processo per braccio. Mai due bracci di un confronto nello stesso processo.»**
+>
+> **E quella riga contiene GIÀ il meccanismo, che avevo scritto io** *(`b6f3c83`, `96c7f22`)*:
+> **`avvia_test` è una LEVETTA — la seconda chiamata FERMA la scena, e il braccio nasce SENZA
+> MASSE, `n = 900`.**
+>
+> ### **Io ho misurato `n = 901`.**
+
+**Il numero era a una cifra da quello già scritto nel mio file di standard.** *(`901` e non
+`900` perché questa scena ha `--nmasse 3 --sep 4.0`: il vuoto è lo stesso, il conteggio delle
+masse no.)*
+
+## E LA RIGA NUOVA CHE AVEVO PROPOSTO NON SERVIVA
+
+L'hai **fusa nella riga `1`** come suo *«come si verifica»*, e hai ragione: **non era una regola
+nuova, era l'applicazione di quella che c'era.** Aggiungere una riga dove ce n'era già una è il
+modo in cui un elenco di standard diventa illeggibile — **e un elenco illeggibile non impedisce
+nulla** *(`A9`)*.
+
+**Ciò che resta, e ora sta dentro la riga `1`:** *un criterio di **identità** fallisce
+rumorosamente col banco rotto; uno di **differenza** passa più facilmente **proprio** col banco
+rotto.* **Quindi ogni volta che un test chiede «i due DEVONO differire», prima si confrontano
+due bracci identici.** È la stessa riga `1`, letta al contrario.
+
+> **`Z145` non è successo perché lo standard non c'era. È successo perché non l'ho applicato —
+> e poi ho proposto di aggiungerne un altro.**
+
+## LE TRE DECISIONI, E DOVE SONO
+
+1. **`T5` := `--cura2-corto` contro `_cura1_corto`**, due processi freschi. **LANCIATO**
+   *(`c8efff5` apre il registro)*. È anche `V8`/`V9`.
+2. **Riparazione del sigillo in un commit a sé**, ogni braccio via `subprocess`. **`T4` non si
+   rigira: è valido.** *(Da fare.)*
+3. **Il clip a ZERO di `prob`: contato.** **Fatto PRIMA del lancio** *(`7a36ae5`)*, perché
+   durante un run il simulatore non si tocca *(par.9)*.

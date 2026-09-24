@@ -46,10 +46,37 @@ fisica»**, ed è un **tetto**, non una potatura.
 > **Quindi un run che al passo 120 ha `n = 901` NON può essere partito dal mondo che al passo 12
 > ne aveva `2515`.** Il secondo run **è partito da un mondo diverso e più piccolo.**
 
-**Non è una congettura sul meccanismo: è un'impossibilità.** Il *perché* il mondo fosse diverso
-resta da stabilire *(candidato: stato di modulo mutato dal primo run e non ricostruito dal
-secondo, `runpy.run_path` due volte nello stesso processo)* — **e finché non è stabilito, non lo
-si scrive come causa.**
+**Non è una congettura sul meccanismo: è un'impossibilità.**
+
+---
+
+## 3-bis. ⚠ **CORREZIONE DI LUCA, STESSO GIORNO: LA CAUSA NON È IGNOTA**
+
+**Avevo scritto:** *«il perché il mondo fosse diverso resta da stabilire»*. **È sbagliato.**
+
+> ### **È la violazione dello `STANDARD 1` di `doc/PATTERN_DI_PROVA.md`:**
+> ### **«Un processo per braccio. Mai due bracci di un confronto nello stesso processo.»**
+>
+> **E quella riga contiene GIÀ il meccanismo, che avevo scritto io** *(commit `b6f3c83`,
+> `96c7f22`)*:
+> ### **`avvia_test` è una LEVETTA: la seconda chiamata FERMA la scena, e il braccio nasce SENZA MASSE — `n = 900` invece di `2480`.**
+>
+> ### **Io ho misurato `n = 901`.**
+
+**Il numero era a una cifra dal numero già scritto nel mio file di standard.** *(`901` e non
+`900` perché la scena di questo test ha `--nmasse 3 --sep 4.0`, non la configurazione con cui
+lo standard fu misurato: il vuoto è lo stesso, il conteggio delle masse no.)*
+
+> **E LA LEZIONE NON È «serviva una regola»: è «la regola c'era e non l'ho applicata».**
+> Nel primo referto avevo proposto una **riga nuova** per `PATTERN_DI_PROVA`. **Luca l'ha fusa
+> nella riga `1` come suo *«come si verifica»*, e ha ragione:** aggiungere una riga dove ce n'era
+> già una è il modo in cui un elenco di standard diventa illeggibile — **e un elenco illeggibile
+> non impedisce nulla** *(`A9`)*.
+>
+> **CIÒ CHE RESTA, e sta ora dentro la riga `1`:** *un criterio di **identità** fallisce
+> rumorosamente col banco rotto; uno di **differenza** passa più facilmente **proprio** col banco
+> rotto.* **Quindi ogni volta che un test chiede «i due DEVONO differire», prima si confrontano
+> due bracci identici.** È la stessa riga `1`, letta al contrario.
 
 ## 4. COSA È INVALIDATO E COSA NO
 
@@ -113,7 +140,14 @@ Dal run **`T4`**, che è **certificato** *(byte-identico al riferimento)*:
 > paragone `_cura1_corto` **è anch'esso un processo fresco a un solo braccio**.
 > ### **`_cura1_corto` contro `_cura2_corto` È il controllo positivo fatto bene.**
 
-**NON L'HO LANCIATO.** Il sigillo è il **cancello** del giro corto, e il suo verdetto
-*«il giro corto può partire»* poggia su un test che ora so invalido. **Lanciarlo sarebbe
-«aggiustare al volo dentro lo stesso passo»**, che il par.5 vieta.
-**Reperto, commit, stop. La decisione è di Luca.**
+**NON L'AVEVO LANCIATO**, e la decisione è arrivata.
+
+## 9. ✅ **LA DECISIONE DI LUCA, 2026-09-24 — in tre pezzi**
+
+1. **`T5` := il confronto fra `--cura2-corto` e `_cura1_corto`**, due processi freschi a un solo
+   braccio. **Il giro corto è lanciato**, ed è **anche** `V8`/`V9`.
+2. **Il sigillo si ripara in un commit a sé: ogni braccio via `subprocess`.**
+   **`T4` NON si rigira: è valido.**
+3. **Il clip a ZERO di `prob` si conta nel giro corto** — quante volte `resp <= 0`.
+   **Fatto prima del lancio** *(`7a36ae5`, `_tum_clip0_prob`, blob `b881db89` → `49fc54d2`)*,
+   **perché durante un run il simulatore non si tocca** *(par.9)*.

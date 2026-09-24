@@ -11,12 +11,25 @@ partito da un **mondo diverso e più piccolo**: `n = 901` contro `2660`, archi `
 esiste nel file *(cercato su tutto il sorgente, standard 9)*. Quindi i `109` campi diversi
 misurano **due mondi**, non il flag.
 
+> ### ❗ **LA CAUSA NON È IGNOTA — CORREZIONE DI LUCA, STESSO GIORNO.**
+> **È la VIOLAZIONE DELLO `STANDARD 1` di `doc/PATTERN_DI_PROVA.md`**, che dice
+> *«**Un processo per braccio.** Mai due bracci di un confronto nello stesso processo»* e ne
+> scrive già il **meccanismo**:
+> ### **`avvia_test` è una LEVETTA: la seconda chiamata FERMA la scena, e il braccio nasce SENZA MASSE — `n = 900`.**
+> **Io ho misurato `n = 901`.**
+>
+> **Avevo scritto *«il perché resta da stabilire»*. Era sbagliato: era scritto nel mio stesso
+> file di standard, col numero esatto dentro** *(commit `b6f3c83`, `96c7f22`)*. **Non ho
+> violato una regola che non c'era: ho violato una regola che avevo scritto io, e poi ho
+> proposto di aggiungerne un'altra.**
+
 **Gemello speculare di** *«`max|A−B| = 0` può significare nessun confronto»*.
 
-**CRITERIO DI CHIUSURA:** `T5` gira in un **processo separato**, e il controllo positivo di
-`CURA 2` risulta stabilito *(o smentito)* **con i due bracci partiti dallo stesso mondo**.
-**Lo strumento giusto esiste già:** `_cura1_corto` contro `_cura2_corto`, entrambi processi
-freschi a un solo braccio.
+**CRITERIO DI CHIUSURA — deciso da Luca, 2026-09-24, in DUE pezzi:**
+1. **`T5` := il confronto fra `--cura2-corto` e `_cura1_corto`**, due processi freschi a un solo
+   braccio *(standard 1)*. **Il giro corto è stato lanciato**, ed è **anche** `V8`/`V9`.
+2. **Il sigillo si ripara in un commit a sé: ogni braccio via `subprocess`.**
+   **`T4` NON si rigira: è valido** *(è il primo run del processo)*.
 
 **⚠ NON INVALIDA `T4`**, che è il **primo** run del processo e dà `206` campi identici a un
 riferimento fresco: **il processo parte pulito**, e la byte-inerzia a flag spento — inclusa
