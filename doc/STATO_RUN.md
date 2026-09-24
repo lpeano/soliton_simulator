@@ -1178,3 +1178,12 @@ ramo B (chi_basc OFF):
 - *2026-09-24 19:12:11* — frame 10/20 (passo 60): n 2393 -> 2459, archi ~526061. LA MITOSI E VIVA. Confronto col T5 contaminato: quello dava n=901 e 59731 archi. Z145 confermato dal disco.
 
 **chiuso 2026-09-24 19:17:24 — FINITO** 120 passi in 520.1 s. n 2393 -> 2575, archi 526204. Bilancio CHIUDE (5.304e-14). V8/V9 nel BILANCIO_d0.txt: |dx|/d max 0.0531, ZERO campioni sopra 0.5. I dati SERVONO: sono T5 (il controllo positivo rifatto in processo fresco, dopo Z145) e la misura che sceglie la forma del freno-legge.
+
+## APERTO SIGILLO-CURA2-RIPARATO
+
+- **avvio** `2026-09-24 19:26:36` · **blob** `67ea1a19 (git) / 49fc54d2 (byte grezzi)` · **HEAD** `1afa968`
+- **comando**
+  ```
+  python csv/_seal_fork/_sigillo_cura2.py
+  ```
+- **note** Decisione di Luca (1a): T4 byte-inerzia sul blob 49fc54d2 col sigillo RIPARATO, UN PROCESSO PER BRACCIO (standard 1). Due bracci in subprocess, ~17 min. Il T4 precedente era sul blob b881db89, PRIMA del contatore del clip a zero: questo ri-certifica la byte-inerzia sul blob che ha girato il giro corto. Sigillo 2f5155b.
