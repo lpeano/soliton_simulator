@@ -13708,3 +13708,53 @@ e va riformulato**, e non lo inseguo adesso *(`A12` regola 1)*.
 > **dimostrato sulla formula**, e **lasciare un wrap che non avvolge non ha nessun argomento a
 > favore**. Il giro corto serviva a misurare **quanto costa**, non a decidere **se farlo**.
 > **Costa poco, e non rompe niente.**
+
+### ㉡ **Il controllo di Luca: le due strade danno `206` campi su `206`. Zero diversi.**
+
+> **Non l'ho cercato io, ed è il controllo più forte che abbiamo su questa cura.**
+
+Luca ha confrontato il giro corto di `CURA 1` con la prova di `D34` di due giorni fa. Quella
+accendeva l'orologio corretto **forzandolo dall'interno dello script**; questa lo accende **dalla
+riga di comando**. **Al passo 120 i due run coincidono.**
+
+**L'ho rifatto sui 206 campi invece che su tre**, e il risultato è più forte di come l'aveva
+descritto:
+
+| | `_d34_ritmo_wrap` | `_cura1_corto` |
+|---|---|---|
+| come si accende | **forzata in-process** | **flag da riga di comando** |
+| commit | `8ec9e248` | `9d6e43e3` |
+| simulatore | `3d91338e` | **`dd82794a`** |
+
+```
+UGUALI 206   DIVERSI 0   non confrontati 0
+```
+
+### **Cosa dimostra, e sono TRE cose**
+
+**① La strada nuova fa esattamente ciò che faceva la vecchia.** Il cablaggio dell'opzione non
+ha cambiato la fisica di una virgola.
+
+**② Tutto il delta di codice fra i due blob è BYTE-INERTE SULLA FISICA** — l'opzione, il
+`global`, il rifiuto di `TW_SPINORE`, **e il referto di configurazione**, che a ogni run scrive
+due file. **Ed è più forte di `T6` del sigillo:** `T6` provava la byte-inerzia con la cura
+**spenta**; questo la prova **col delta intero e la cura ACCESA**.
+
+**③ Il sistema è deterministico come dichiarato**, su due processi, due giorni, due blob.
+
+> ### ⚠ **E il metodo: il dato c'era da mezz'ora, la domanda no**
+> Avevo quello snapshot sul disco e l'ho letto **solo** come *«confronto contro il riferimento
+> senza la cura»*, senza chiedermi **se i due bracci CON la cura coincidessero**.
+> È la forma esatta del presidio *«quando si apre una domanda nuova, ri-interroga le misure
+> vecchie»* — **e qui la misura era di mezz'ora prima, non di mesi.**
+
+### **E due correzioni al registro, che Luca ha chiesto**
+
+**`D34`:** il marchio stava nell'ID ma **la colonna `stato` diceva ancora `APERTO`**. Corretta.
+**Una correzione che aggiorna l'ID e lascia lo `stato` è una correzione a metà**, e l'ha presa
+lui.
+
+**`S09` riformulato, e la mia formulazione era sbagliata NEL MECCANISMO:** dicevo *«il gauge si
+abbassa, quindi `x` sale per tutti»*. **`median(r)` scende del `33 %` e la quota al tetto sale
+comunque: la distribuzione si ALLARGA, non si sposta.** Il criterio di chiusura ora chiede la
+**dispersione**, non la mediana.
