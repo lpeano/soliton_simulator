@@ -15364,3 +15364,63 @@ corretta, che è **esattamente il difetto di `T1` in `E4-LAM`**.
 
 Registrato come **`D38`** nella coda, con la cura che hai deciso: **`D-b`, la cura della
 semina.**
+
+---
+
+# ✅ `D-b` — **LA SCHEDA E I CRITERI DELLA CURA DELLA SEMINA, PRIMA DEL CODICE**
+
+**Scheda ⑫, `doc/REGISTRO_FISICA.md`.** Nessuna riga di simulatore.
+
+## ❗ LA CAUSA NON È NEGLI ARCHI: È NELLE POSIZIONI
+
+`_allaccia` prende la lunghezza dal `cKDTree` — **è la distanza euclidea vera fra `pos`**.
+Quindi un arco nasce corto perché **i nodi sono seminati vicini**. Misurato *(passo zero,
+`--scala-min-passo=off` per avere la `d` grezza)*:
+
+```
+distanza al PRIMO VICINO:  p50=0.107721  min=0.009679  max=0.814763   LAM=0.8
+sotto_LAM = 2390 su 2391 (99.96 %)   mediana/LAM = 0.134651
+```
+
+> ### **Il `99.96 %` dei nodi ha il primo vicino sotto `LAM`, e la mediana è `0.135·LAM`: la
+> ### semina mette i nodi ~`7.4` volte più fitti della lunghezza tipica del sistema.**
+>
+> **Quindi `_nasce` non «corregge» `d`: LA SCOLLEGA DA `pos`.** Dopo il troncone, per il
+> `42.47 %` degli archi **`d ≠ |pos_i − pos_j|`**. **È `D02` fatto a mano, al passo zero.**
+
+## ❗ E IL NUMERO CHE RENDE LA CURA POSSIBILE
+
+```
+SE_TAGLIASSI  archi_rimasti = 302593 su 525973 (57.53 %)
+SE_TAGLIASSI  nodi_isolati  = 0 su 2391 (0.00 %)
+```
+
+**Non creare gli archi sotto `LAM` costa il `42.47 %` degli archi e ZERO nodi isolati.** Era la
+domanda che poteva uccidere la cura, **ed è misurata prima di proporla**: un nodo isolato non è
+un nodo più semplice, **è un nodo che esce dalla fisica**. Non ce n'è nessuno, perché
+`R_CONN = 3·LAM` lascia un anello `[LAM, 3·LAM]` pieno di vicini.
+
+## LA CURA — `NASCITA_LAM`, spenta di default
+
+`keep &= (dd >= LAM)` nel filtro di `_allaccia`. **L'arco sotto `LAM` non si crea**: non si crea
+e poi si corregge, **non esiste**. **Zero numeri nuovi** — `LAM` e `R_CONN` ci sono già.
+**`_nasce` resta come PRESIDIO** e **non deve scattare mai**: `_g_sm_nascite` diventa la sua
+misura.
+
+## I SETTE CRITERI, fissati prima del codice
+
+`N1` byte-identico a flag spento · **`N2` passo zero: `sum(d < LAM) == 0` E `sum(d == LAM) == 0`
+— i due INSIEME, perché il primo da solo lo darebbe anche `_nasce`: lo zero sul secondo è ciò
+che distingue «non creato» da «troncato»** · `N3` `_g_sm_nascite == 0` · `N4` nodi isolati `0` ·
+`N5` archi rimasti `≈ 302 593` · **`N6` giro corto: la mitosi non muore e il bilancio chiude —
+è il solo criterio che può BOCCIARE la cura** · **`N7` `d == |pos_i − pos_j|` per ogni arco, che
+dice se la cura ha curato `D02` a questo sito**.
+
+**⚠ E LA PREVISIONE, scritta prima:** togliere il `42.47 %` degli archi **non è byte-inerte e
+cambierà tutto**. Mi aspetto numeri diversi, non uguali. **E dichiaro un'incognita: con il grafo
+più rado e `R_CONN` invariato, non so se la coesione regga. Non l'ho misurato, e `N6` è dove si
+vedrà.**
+
+**Non copre:** la **mitosi**, che crea archi per conto suo *(`N3` lo rileverebbe, la cura non lo
+tocca)* · `semina()` *(voce `H`)* · e la strada alternativa **Poisson-disk**, dichiarata **non
+presa**, non esclusa.

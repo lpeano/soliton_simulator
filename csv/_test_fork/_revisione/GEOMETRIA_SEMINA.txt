@@ -1,0 +1,23 @@
+# `D-b` -- LA GEOMETRIA DELLA SEMINA: perche' nascono archi sotto `LAM`
+#
+# `_allaccia` prende `dd` dal `cKDTree`: la DISTANZA EUCLIDEA VERA fra le posizioni.
+# Un arco nasce sotto `LAM` perche' i due nodi sono stati SEMINATI piu' vicini di `LAM`.
+#
+  NN n=2391  LAM=0.800000  R_CONN=2.400000
+  NN p01=0.022187 p10=0.049003 p50=0.107721 p90=0.473825 p99=0.676303 min=0.009679 max=0.814763
+  NN sotto_LAM=2390 su 2391 (99.96 %)  mediana/LAM=0.134651  min/LAM=0.012098
+  ARCHI n=525973  sotto_LAM=223380 (42.47 %)  p50/LAM=1.098440
+  SE_TAGLIASSI archi_rimasti=302593 su 525973 (57.53 %)
+  SE_TAGLIASSI nodi_isolati=0 su 2391 (0.00 %)
+
+================================================================================================
+COME SI LEGGE
+================================================================================================
+  `NN` e' la distanza al PRIMO VICINO di ogni nodo: **la piu' corta che quel nodo puo'
+  avere**. Se la sua MEDIANA e' sotto `LAM`, allora **la semina mette i nodi piu' fitti
+  della lunghezza tipica del sistema**, e nessun aggiustamento sugli ARCHI puo' curarlo:
+  il difetto e' nelle POSIZIONI.
+
+  `SE_TAGLIASSI` dice cosa costerebbe la cura BANALE -- *non creare archi sotto `LAM`*:
+  quanti archi restano e **quanti nodi restano ISOLATI**. Un nodo isolato non e' un nodo
+  piu' semplice: **e' un nodo che esce dalla fisica.**

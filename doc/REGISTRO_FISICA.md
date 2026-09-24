@@ -1513,6 +1513,122 @@ invece di zero.
 
 ---
 
+<!-- SCHEDA nome=nascita-archi funzioni=_allaccia,_nasce flag=NASCITA_LAM,SCALA_MIN,SCALA_MIN_PASSO,LAM -->
+
+# ⑫ LA NASCITA DEGLI ARCHI — **la cura della semina** *(`D38`, decisione `D-b` di Luca)*
+
+> **Decisione di Luca, 2026-09-24:** *«Non deve nascere un arco sotto `LAM`. Il troncone
+> `_nasce` resta come PRESIDIO.»*
+> **NESSUN CODICE in questa scheda.** Difetto e criteri **prima**, cura **dopo**.
+
+## 1. IL DIFETTO — **`D38`**
+
+`_allaccia` prende la lunghezza dell'arco dal `cKDTree`:
+
+```python
+M = Tn.sparse_distance_matrix(T, rc, output_type="coo_matrix")
+a, b, dd = M.row + base, M.col, M.data          # dd = la distanza EUCLIDEA VERA fra `pos`
+...
+dd = self._nasce(dd)                            # [SCALA_MIN] il troncone parte da LAM
+```
+
+e `_nasce` *(`:3845-3853`)* è:
+
+```python
+if not (SCALA_MIN or SCALA_MIN_PASSO):
+    return v
+return np.maximum(v, LAM)
+```
+
+> ### ❗ **LA LEGGE `d >= LAM` È VERIFICATA SEMPRE (`E4-LAM`) MA FATTA RISPETTARE ALLA NASCITA
+> ### DA UN'OPZIONE.** È **lo schema che `E4-LAM` ha tolto al CONTROLLO e che è rimasto
+> ### all'ESECUZIONE.** Coi **default del sorgente** la legge è **violata al passo zero**.
+
+## 2. LA CAUSA — **non è negli ARCHI: è nelle POSIZIONI**
+
+*(`csv/_test_fork/_geometria_semina.py`, blob `49fc54d2`, passo ZERO, `--scala-min-passo=off`
+per avere la `d` GREZZA — col ramo acceso la domanda risponderebbe sempre zero.)*
+
+**Distanza al PRIMO VICINO di ogni nodo** *(la più corta che quel nodo può avere)*:
+
+```
+n=2391  LAM=0.800000  R_CONN=2.400000
+p01=0.022187  p10=0.049003  p50=0.107721  p90=0.473825  p99=0.676303
+min=0.009679  max=0.814763
+sotto_LAM = 2390 su 2391 (99.96 %)   mediana/LAM = 0.134651   min/LAM = 0.012098
+```
+
+> ### ❗ **IL `99.96 %` DEI NODI HA IL PRIMO VICINO SOTTO `LAM`, e la mediana è `0.135·LAM`:
+> ### LA SEMINA METTE I NODI ~`7.4` VOLTE PIÙ FITTI DELLA LUNGHEZZA TIPICA DEL SISTEMA.**
+>
+> **Quindi `_nasce` non «corregge» `d`: LA SCOLLEGA DA `pos`.** Per il `42.47 %` degli archi,
+> dopo il troncone **`d ≠ |pos_i − pos_j|`**. **È `D02` FATTO A MANO** — la distanza e il
+> disegno divergono **per costruzione**, e divergono **al passo zero**.
+
+**Sugli archi:** `223 380` su `525 973` — il **`42.47 %`** — nascono sotto `LAM`.
+
+## 3. ❗ IL NUMERO CHE RENDE LA CURA POSSIBILE
+
+```
+SE_TAGLIASSI  archi_rimasti = 302593 su 525973 (57.53 %)
+SE_TAGLIASSI  nodi_isolati  = 0 su 2391 (0.00 %)
+```
+
+> ### **NON CREARE gli archi sotto `LAM` costa il `42.47 %` degli archi e ZERO NODI ISOLATI.**
+> **Era la domanda che poteva uccidere la cura, ed è misurata prima di proporla:** un nodo
+> isolato **non è un nodo più semplice, è un nodo che esce dalla fisica**. **Non ce n'è
+> nessuno**, perché `R_CONN = 3·LAM` lascia un anello `[LAM, 3·LAM]` pieno di vicini.
+
+## 4. LA CURA — **`NASCITA_LAM`, spenta di default**
+
+```
+in `_allaccia`, nel filtro `keep`:     keep &= (dd >= LAM)
+```
+
+**L'arco sotto `LAM` NON SI CREA.** Non si crea e poi si corregge: **non esiste.**
+
+> ### PERCHÉ È DERIVATA E NON SCELTA *(par.3, zero manopole)*
+> `LAM` **c'è già** ed è la lunghezza tipica del sistema; `R_CONN = 3·LAM` **c'è già**.
+> **La cura non introduce nessun numero**: usa la soglia che la legge nomina.
+>
+> ### E `_nasce` RESTA — **come PRESIDIO, non come cura** *(decisione di Luca)*
+> Dopo la cura **non deve scattare mai**. **Il suo contatore `_g_sm_nascite` diventa la
+> misura del presidio:** se sale, un arco è nato sotto `LAM` da un'altra strada.
+> **⚠ E LE ALTRE STRADE ESISTONO:** la **mitosi** crea archi, e questa scheda **non li
+> copre**. → in coda.
+
+## 5. I CRITERI DELLA PROVA, **fissati QUI, prima del codice**
+
+| | criterio | origine |
+|---|---|---|
+| **`N1`** | **flag SPENTO = byte-identico**: firma dei byte su tutti i campi contro `_cura2_corto` | par.2.1 |
+| **`N2`** | **flag ACCESO, passo ZERO: `sum(d < LAM) == 0` E `sum(d == LAM) == 0`** | ❗ **i due insieme**: il primo da solo lo darebbe anche `_nasce`. **Lo zero sul secondo è ciò che distingue «non creato» da «troncato»** |
+| **`N3`** | **`_g_sm_nascite == 0`** a flag acceso | il presidio **non deve scattare**: se scatta, un arco è nato sotto `LAM` da un'altra strada |
+| **`N4`** | **nodi isolati `== 0`** | misurato `0` **prima** di proporre la cura; se dopo non è `0`, la cura **spezza il grafo** e va ritirata |
+| **`N5`** | **archi rimasti `≈ 302 593`** *(stesso seme, stessa scena)* | è il numero **previsto** dalla misura: se differisce, il filtro **non fa quello che credo** |
+| **`N6`** | **il giro corto di 120 passi**: la mitosi **non muore** e il **bilancio di `d0` CHIUDE** | `E1a` e `B`, gli stessi di `CURA 1` e `CURA 2` |
+| **`N7`** | **`d == |pos_i − pos_j|` per OGNI arco al passo zero** | ❗ **è il criterio che dice se la cura ha curato `D02` a questo sito**: oggi diverge sul `42.47 %` |
+
+> ### ⚠ E LA PREVISIONE, scritta PRIMA *(par.9, `doc/PREVISIONI_qualitative.md`)*
+> **Togliere il `42.47 %` degli archi NON è byte-inerte e cambierà TUTTO.** `n`, la densità, il
+> bilancio, la mitosi. **Mi aspetto numeri diversi, non numeri uguali**, e **`N6` è il solo
+> criterio che può bocciare la cura**: se la mitosi muore come per `FASE_2PI`, la cura cade.
+>
+> **⚠ E UN'INCOGNITA CHE DICHIARO INVECE DI NASCONDERE:** con il `42 %` degli archi in meno il
+> grafo è **più rado**, e `R_CONN = 3·LAM` resta invariato. **Non so** se la coesione regga:
+> **non l'ho misurato, e `N6` è dove si vedrà.**
+
+## 6. COSA QUESTA SCHEDA **NON** COPRE
+
+- **la mitosi**, che crea archi per conto suo *(`:5747` e dintorni)*: `N3` lo **rileverebbe**,
+  ma la cura **non lo tocca**;
+- **`semina()`**, la terza via di crescita, già nota come scoperta *(voce `H` del registro)*;
+- **la scelta alternativa** — seminare i nodi a distanza `≥ LAM` *(Poisson-disk)* — che
+  cambierebbe **il numero di nodi o il volume** e **non è stata misurata**. **Si dichiara come
+  strada non presa, non come strada esclusa.**
+
+---
+
 <!-- SCHEDA nome=invarianti funzioni=verifica_invarianti flag=INVARIANTI,DOMINI -->
 
 # ⑩ GLI INVARIANTI DI DOMINIO — **`C5`**
