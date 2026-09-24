@@ -198,7 +198,18 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--
             # ritmo sul periodo GIUSTO. **NON e' byte-inerte, ed e' il punto**: e' una
             # cura, non un'opzione, e i numeri di prima non si confrontano con questi
             # senza dirlo (par.9-bis). Lo stato effettivo sta in CONFIGURAZIONE.txt.
-            "--ritmo-wrap-2pi"] \
+            "--ritmo-wrap-2pi",
+            # [CURA 2, 2026-09-24] IL TEMPO UNICO NELLA MITOSI, APPROVATA DA LUCA: il driver
+            # la ACCENDE IN OGNI RUN. Gli usi di `tau_pp` come TEMPO passano all'orologio
+            # `dt_e` che il sistema gia' definisce; i quattro usi come POSIZIONE sull'asse
+            # della torsione restano INTOCCATI (verificato dall'AST: `T3` del sigillo).
+            # Sigillo 5/5 con UN PROCESSO PER BRACCIO (`Z145`); giro corto di 120 passi
+            # contro `_cura1_corto`: la mitosi vive (eventi 67 -> 76), il bilancio chiude
+            # (5.304e-14), e la saturazione di `tanh(grad)` passa da 0.0034 % a ZERO.
+            # **NON e' byte-inerte, ed e' il punto**: e' una cura, non un'opzione.
+            # IL DEFAULT NEL SORGENTE RESTA `False`: i default si cambiano all'EPOCA 3
+            # (decisione di Luca, 2026-09-24). Lo stato effettivo sta in CONFIGURAZIONE.txt.
+            "--tempo-unico-mitosi"] \
     + (["--chi-basc"] if CHIBASC == "on" else []) \
     + (["--chi-coop"] if CHICOOP == "on" else []) \
     + (["--scala-min"] if SCALAMIN == "on" else []) \
