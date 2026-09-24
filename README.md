@@ -188,6 +188,44 @@ le cache `--sync-db` sono versionate per hash del codice e non vanno riutilizzat
 tra configurazioni fisiche diverse. Vedi `REPORT_SESSIONE_2026-09-04.md` per lo
 stato della sessione e il TODO dei test.
 
+## 4-bis. Il referto di configurazione dei run — **nessun run parte senza**
+
+*(decisione di Luca, 2026-09-24)*
+
+Ogni run lanciato attraverso `csv/_test_fork/_scena_video.py` scrive nella **cartella del
+run** due file:
+
+| file | contenuto |
+|---|---|
+| **`CONFIGURAZIONE.txt`** | leggibile: i flag che l'argv ha **cambiato** rispetto al default, poi **tutti** i flag e le costanti di modulo |
+| **`CONFIGURAZIONE.json`** | gli stessi dati, per gli strumenti |
+
+**Cosa contiene**, e ogni voce c'e' per un motivo:
+
+- **lo stato EFFETTIVO di tutti i flag di modulo, letto DAL MODULO dopo `_applica_flag`** —
+  non il default scritto nel sorgente. **Sono due cose diverse:** `SPINORE_CORRETTO` ha
+  default `False` e vale `True` in ogni run del fork, perche' il driver cabla
+  `--spinore-corretto`. Chi legge il sorgente conclude il contrario di chi legge il run;
+- **i due argv VERBATIM**, che **non sono lo stesso**: quello con cui e' stato invocato il
+  processo, e quello passato al simulatore dopo che il driver ha tolto le proprie opzioni;
+- **`sha1` dei byte grezzi** di simulatore e driver *(**non** `git hash-object`: trappola
+  CRLF)*, il **seme**, `HEAD`, e **se l'albero di git e' pulito**.
+
+**L'elenco dei flag non e' scritto a mano: viene dall'AST** — gli assegnamenti a livello di
+modulo con nome maiuscolo, **`123`** al momento in cui scrivo. La lista a mano che il driver
+stampava a video ne aveva **`24`**, e una lista a mano invecchia in silenzio.
+
+> **DEFAULT: sempre attivo, e non si spegne.** Il driver **rifiuta di partire** se non riesce
+> a scrivere il referto. **Non e' byte-inerte sulla fisica** perche' non tocca la fisica:
+> legge il modulo e scrive due file. **Nessun flag**, per la stessa ragione per cui non ce
+> l'hanno le correzioni di difetto (par.10): non e' una legge, e' un presidio.
+
+**Il collaudo si gira da solo:** `python csv/_configurazione.py` — **`6/6`**, con due casi che
+**devono** fallire e un terzo, `K6`, che verifica **dall'AST** che nel driver la scrittura
+venga **dopo** `_applica_flag`. *(Letta prima, la tabella mostrerebbe i default: esattamente
+la bugia che il referto esiste per impedire. E `K6` ha davvero fallito finche' il cablaggio
+non c'era.)*
+
 ## 5. Varianti Velocity-Verlet
 
 Per ogni script di esperimento è disponibile una copia con suffisso `_verlet`.

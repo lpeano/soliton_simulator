@@ -55,6 +55,11 @@ sys.path.insert(0, ROOT)
 os.chdir(ROOT)
 
 _ARGV = list(sys.argv)
+# [REFERTO DI CONFIGURAZIONE, 2026-09-24] LA COPIA VERBATIM, presa PRIMA di qualunque
+# filtro: `_ARGV` viene RISCRITTO piu' sotto (le opzioni del driver vengono tolte prima
+# che il parser del simulatore le veda), quindi da quel punto in poi NON e' piu' verbatim.
+# Il referto deve riportare il comando COME E' STATO DATO, non come e' stato ripulito.
+_ARGV_VERBATIM = list(sys.argv)
 # [ARCHIVIO, 2026-09-19] OPZIONI DEL DRIVER, tolte da argv PRIMA che il parser del simulatore lo
 # veda. Sono NOMINALI e non posizionali di proposito: aggiungere un 6o argomento posizionale
 # avrebbe costretto a passare anche i precedenti, e il comando di `Z49` deve restare riproducibile
@@ -255,6 +260,29 @@ BASE_SERIE = os.path.join(DEST, "scena.pkl.gz")     # `.gz` -> compressione a li
 _n_scritti = _n_saltati = _n_falliti = 0
 _peso_tot = 0
 print("\n  SEME EFFETTIVO (letto da Rete.__init__): %s    BLOB: %s" % (SEME_EFFETTIVO, BLOB_RUN))
+
+# ---------------------------------------------------------------------------------------
+# [REFERTO DI CONFIGURAZIONE, decisione di Luca 2026-09-24] NESSUN RUN PARTE SENZA.
+#   Si scrive QUI e non prima: deve stare DOPO `_applica_flag` (`:223`) e dopo eventuali
+#   involucri che impostano flag sul modulo (`_g4_prova.py` lo fa DENTRO l'involucro di
+#   `_applica_flag`, quindi e' gia' incluso). Letto prima, mostrerebbe i DEFAULT -- cioe'
+#   esattamente la bugia che il referto esiste per impedire, e `collaudo()` verifica
+#   QUEST'ORDINE dall'AST.
+#   PERCHE' RIFIUTA DI PARTIRE invece di avvisare: un run senza referto e' un run le cui
+#   conclusioni si dedurranno dal sorgente -- ed e' cosi' che sono nati `S10` e la lettura
+#   sbagliata su `SPINORE_CORRETTO`, nello stesso giorno.
+import _configurazione as _CFG                                              # noqa: E402
+try:
+    _p_cfg, _p_cfgj = _CFG.scrivi(DEST, S, os.path.join(ROOT, "soliton_simulator.py"),
+                                  sys.argv, argv_esterno=_ARGV_VERBATIM,
+                                  driver=os.path.abspath(__file__),
+                                  seme=SEME_EFFETTIVO)
+except Exception as _e_cfg:
+    raise SystemExit("[configurazione] RIFIUTO DI PARTIRE: non riesco a scrivere "
+                     "CONFIGURAZIONE.txt in %s -- %s: %s"
+                     % (DEST, type(_e_cfg).__name__, _e_cfg))
+print("  CONFIGURAZIONE -> %s  (+ .json)" % _p_cfg)
+
 FRAME0 = 0          # da quale frame si parte: 0 = da zero, >0 = RIPRESA
 if SERIE:
     print("  SERIE ATTIVA: uno snapshot ogni %d frame = %d passi di motore -> %s"
