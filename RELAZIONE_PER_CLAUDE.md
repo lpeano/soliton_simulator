@@ -14287,3 +14287,26 @@ perché **`d ≥ LAM` è una legge** e l'esponente è limitato da `|dx|/LAM`.
 
 **E resta separata la domanda che non tocco: chi spinge gli archi contro il muro** — `D33`,
 `S05`.
+
+### ㉪ **La regola dell'ASSENZA è STANDARD** — riga `9`, col sì esplicito di Luca
+
+> È rimasta `IN PROVA` **meno di un'ora**, e non perché fosse ovvia: perché aveva **tre casi
+> reali già misurati** nello stesso giorno.
+
+**La regola:** *un'ASSENZA si dichiara solo da una ricerca sull'**intero file** o dall'**AST**.
+Mai da una finestra di righe, mai da un `in` sul testo.*
+
+**Come si verifica che la rispetto:** ogni affermazione di assenza porta **il comando che l'ha
+prodotta**, e quel comando **non ha un intervallo di righe**. Per una domanda su un riferimento
+di **codice**: **l'AST**, non un `in`.
+
+### ⚠ **E il limite resta quello dichiarato quando era `IN PROVA`: la promozione non lo cancella**
+
+**Non è un presidio** *(`A9`)*. Non impedisce nulla: è un **obbligo di forma verificabile dal
+destinatario**. **Cosa la renderebbe un presidio:** un controllo che rifiuti, nei referti
+generati, le parole *«non esiste» / «manca» / «assente»* se non accompagnate da un comando
+**senza intervallo di righe**. **Non è scritto**, e finché non lo è la regola non va chiamata
+presidio — **nemmeno adesso che è `STANDARD`.**
+
+> **La sezione `IN PROVA` torna vuota, e dice dove la regola è andata:** una regola promossa che
+> sparisce dalla sezione da cui viene è una regola di cui si perde la storia.

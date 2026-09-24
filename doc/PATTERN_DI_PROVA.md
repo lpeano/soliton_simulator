@@ -28,6 +28,7 @@
 | **7** | **Un giro CORTO prima del giro vero.** Prima di un run che costa più di qualche minuto, lo stesso strumento gira **end-to-end** coi parametri minimi. | `438da39`, `53e08f3` · *ammessa da Luca il 2026-09-22* | **I collaudi passano e il run muore lo stesso**: collaudano i **criteri**, non l'**impianto** che li alimenta. ① un `UnboundLocalError` ha ucciso un run di **400 s al passo 1**, con dodici collaudi tutti `OK`; ② il **bilancio di `G4` non chiudeva** *(`8.0e-05`)*, e il giro corto lo ha preso **in 43 s invece che in mezz'ora**, su un run che sarebbe stato **inutilizzabile**. | Lo strumento accetta un modo ridotto *(`--frame=3`, `--passi=2`)*, **ed e' stato ESEGUITO** prima del giro vero. |
 | **8** | **Un difetto DIMOSTRATO si cura: misurare non è curare.** Se la cura è **derivabile**, si scrive — le correlazioni si capiscono **dopo**, con un difetto in meno. | *decisione di Luca, 2026-09-22* · `A12` | **Quattro misure chiuse e ZERO cure in un giorno**, con **`D31` dimostrato sulla formula dal mattino** *(`Z113`, `4/4`, scarto `0.0 %`)*: il motore della crescita di `d0` era dimostrato alle undici ed era ancora lì alle nove di sera. | **La frase-spia:** *«prima però bisogna capire se…»*. Se ciò che segue è una **correlazione con un altro difetto** e quello in mano è già dimostrato, **si sta rimandando**. **Una cura alla volta**, per **grandezza dell'effetto misurato**; le misure nuove **in coda**. |
 
+| **9** | **Un'ASSENZA si dichiara solo da una ricerca sull'INTERO FILE o dall'AST.** Mai da una finestra di righe, mai da un `in` sul testo. | *decisione di Luca, 2026-09-24* · `2070aab` | **TRE casi in un giorno, e sbagliano nei DUE versi opposti:** `S10` *(dedotto da un contatore, senza verificare né dove stesse né il valore del flag — **ritirato**)* · `T1` di `E4-LAM` *(`"_lam_attivo" not in sorg` trova le sue occorrenze nei **COMMENTI** → **`FAIL` falso su codice corretto**)* · `D37` *(cercato in una finestra di **28 righe**, la voce stava a `:257` → **chiave duplicata**, codice morto in silenzio)*. | ogni affermazione di assenza porta **il comando che l'ha prodotta**, e quel comando **non ha un intervallo di righe**. Per una domanda su un riferimento di **codice**: **l'AST**, non un `in`. |
 ### Le regole che valgono qui e stanno già altrove — **richiamo, non copia**
 
 - **Il criterio si collauda su casi a risposta nota, con uno che DEVE fallire** → `CLAUDE.md` `P1-sexies`.
@@ -42,46 +43,11 @@
 
 ## IN PROVA
 
-### ① **UN'ASSENZA SI DICHIARA SOLO DA UNA RICERCA SULL'INTERO FILE O DALL'AST** — mai da una finestra di righe, mai da un `in` sul testo
+*(nessuna)*
 
-> **Proposta di Luca, 2026-09-24.** *(`PROPOSTA IN PROVA`)*
-
-| | |
-|---|---|
-| **la regola, in una riga** | **Dire *«non c'è»* richiede una ricerca sull'**intero file** o sull'**AST**. Una finestra di righe e un `in` sul testo possono dire *«non c'è»* quando c'è, e *«c'è»* quando è solo un commento.** |
-| **il difetto reale da cui nasce** | **TRE casi, tutti dello stesso giorno** — vedi sotto |
-| **come la userei** | prima di scrivere *«non esiste»*, *«manca»*, *«non è in `DOMINI`»*, *«non ha un flag CLI»*: **`grep` su tutto il file**, oppure **l'AST** se la domanda è su un riferimento di **codice**. |
-| **come si vede se la rispetto** | ogni affermazione di assenza porta **il comando che l'ha prodotta**, e quel comando **non ha un intervallo di righe** |
-
-### I TRE CASI, e sono di oggi
-
-| | il caso | l'errore |
-|---|---|---|
-| **`S10`** | *«il ramo `TEMPO_SEGNO` di `ritmo()` gira 600 volte»* | dedotto **da un contatore** senza verificare **dove stesse** rispetto al controllo del flag *(stava PRIMA)*, **né il valore del flag** *(era `False`)*. **Due verifiche omesse nella stessa frase**, e il sospetto è stato **ritirato** *(`Z130`)* |
-| **`T1` di `E4-LAM`** | *«`_lam_attivo` non esiste più»*, cercato con `"_lam_attivo" not in sorg` | **trova le sue DUE occorrenze nei COMMENTI** che spiegano che il gate è stato tolto → **`FAIL` falso su codice corretto**. Dall'AST i riferimenti di codice sono **`[]`** *(`Z142`)* |
-| **`D37`** | *«`_cs_nodo_prev` non è nei `DOMINI`»*, cercato con `sed -n '213,240p' \| grep cs` | **la voce sta a `:257`, fuori dalla finestra.** Ho aggiunto un **duplicato**, che in un dict è **codice morto in silenzio** *(`Z142`, `D37`)* |
-
-> **I tre errori hanno lo stesso verso opposto a coppie, e per questo la regola serve in
-> entrambe le direzioni:** `T1` diceva **«c'è»** e non c'era *(un commento letto come codice)*;
-> `D37` e `S10` dicevano **«non c'è»** e c'era. **Una ricerca parziale sbaglia in entrambi i
-> sensi.**
-
-### ⚠ **PERCHÉ NON È GIÀ COPERTA DA `P1`**
-
-`P1` dice *«non usare l'associazione senza verificare lo storico»*, e riguarda i **fatti già
-stabiliti nei documenti**. **Questa riguarda il CODICE**, ed è più stretta: dice **quale
-strumento** rende valida un'affermazione di assenza. `P1` dice *«rileggi»*; questa dice
-**«rileggi TUTTO, o guarda l'AST»**.
-
-### ⚠ **E IL LIMITE, dichiarato: NON È UN PRESIDIO** *(`A9`)*
-
-**Non impedisce nulla.** È un **obbligo di forma verificabile dal destinatario**: se
-un'affermazione di assenza non porta il comando che l'ha prodotta, **si vede**.
-**Cosa la renderebbe un presidio:** un controllo che, nei referti generati, rifiuti le parole
-*«non esiste» / «manca» / «assente»* se non accompagnate da un comando senza intervallo di
-righe. **Non l'ho scritto**, e va detto invece di chiamarla presidio.
-
-*(nessun'altra)*
+> **La regola sull'ASSENZA è stata PROMOSSA a `STANDARD` il 2026-09-24**, col **sì esplicito di Luca** — **riga `9`**. È rimasta `IN PROVA` meno di un'ora, e non perché fosse ovvia: perché aveva **tre casi reali già misurati** nel giorno stesso.
+>
+> **⚠ E IL SUO LIMITE RESTA QUELLO DICHIARATO QUANDO ERA `IN PROVA`, la promozione non lo cancella:** **non è un presidio** *(`A9`)*. Non impedisce nulla: è un **obbligo di forma verificabile dal destinatario**. **Cosa la renderebbe un presidio:** un controllo che rifiuti, nei referti generati, le parole *«non esiste» / «manca» / «assente»* se non accompagnate da un comando **senza intervallo di righe**. **NON è scritto**, e la regola non va chiamata presidio finché non lo è.
 
 ## RESPINTE
 
