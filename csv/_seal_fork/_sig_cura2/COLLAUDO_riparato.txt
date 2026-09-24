@@ -1,0 +1,20 @@
+# COLLAUDO del sigillo di CURA 2 RIPARATO (un processo per braccio, Z145)
+#
+COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di misurare
+----------------------------------------------------------------------------------------------------
+K1 lambda = 0.01  : Poisson 0.009950, clip 0.010000 -> coincidono -> OK
+K2 lambda = 2.0   : Poisson 0.864665, clip 1.000000 -> differiscono -> OK
+   -> a lambda piccolo l'errore relativo e' lambda/2; a lambda = 2 il clip da' 1.0
+      esatto mentre Poisson da' 0.864665: **e' li' che le due forme differiscono**.
+K3 la forma ESATTA resta fra i due valori per dt/tau in {0.1, 1, 5, 50} -> OK: combinazione convessa
+K4 IL CASO CHE DEVE FALLIRE: l'EULERO con dt/tau = 2.5 da' 1.8000, FUORI da [0.3, 0.9] -> OK: il difetto di `S12` e' riprodotto
+K5 SECONDO CASO CHE DEVE FALLIRE: un `segno` che usa `_ft` -> intercettato ['_ft'] -> OK
+K6 e il `segno` VERO non si segnala: legge ['centro', 'np', 'tanh', 'tau_pp'] -> OK
+K7 il FIGLIO SPENTO dichiara TEMPO_UNICO_MITOSI = False (atteso False) in 2.20 s -> OK
+K8 il FIGLIO ACCESO dichiara TEMPO_UNICO_MITOSI = True  (atteso True ) in 2.34 s -> OK
+   -> il figlio PARTE dal valore SBAGLIATO: se il braccio non attraversasse il confine,
+      leggerebbe l'OPPOSTO di quello atteso, non un valore mancante.
+----------------------------------------------------------------------------------------------------
+  -> i criteri PASSANO
+
+ESITO COLLAUDO: True

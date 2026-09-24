@@ -1175,3 +1175,4 @@ ramo B (chi_basc OFF):
   python csv/_test_fork/_g4_prova.py --cura2-corto
   ```
 - **note** Il giro corto di CURA 2: 120 passi, PROCESSO FRESCO A UN SOLO BRACCIO (standard 1). E la decisione di Luca: T5 := questo run contro _cura1_corto, che e anchesso un processo fresco a un solo braccio. E anche V8/V9 (distribuzione di |dx|/d) e il clip a ZERO di prob. Codice 7a36ae5, blob 49fc54d2. Riferimento: csv/_test_fork/_cura1_corto.
+- *2026-09-24 19:12:11* — frame 10/20 (passo 60): n 2393 -> 2459, archi ~526061. LA MITOSI E VIVA. Confronto col T5 contaminato: quello dava n=901 e 59731 archi. Z145 confermato dal disco.

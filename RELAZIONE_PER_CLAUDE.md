@@ -14585,3 +14585,48 @@ due bracci identici.** È la stessa riga `1`, letta al contrario.
    rigira: è valido.** *(Da fare.)*
 3. **Il clip a ZERO di `prob`: contato.** **Fatto PRIMA del lancio** *(`7a36ae5`)*, perché
    durante un run il simulatore non si tocca *(par.9)*.
+
+---
+
+# A METÀ DEL GIRO CORTO DI `CURA 2` — **e `Z145` è confermato dal disco** *(2026-09-24)*
+
+**Resoconto a metà run** *(par.5-octies: un run che gira senza un resoconto pushato è un run che,
+se la macchina si riavvia, nessuno sa che esisteva)*.
+
+| | `n` | archi |
+|---|--:|--:|
+| **giro corto, processo FRESCO**, frame `1` *(passo `6`)* | `2393` | `525 976` |
+| **giro corto, processo FRESCO**, frame `10` *(passo `60`)* | **`2459`** | **`526 061`** |
+| il `T5` **contaminato**, passo `120` | **`901`** | **`59 731`** |
+
+> ### **`Z145` non era una congettura, ed è ora confermato da un run vero: in un processo fresco
+> ### il braccio acceso ha `~2459` nodi e `~526 061` archi, non `901` e `59 731`.**
+> **Il braccio contaminato era nato senza masse**, esattamente come lo `STANDARD 1` descrive.
+
+**E dice già qualcosa sulla cura, con la prudenza dovuta a metà run:** `n` **cresce**
+*(`2393 → 2459`)*. **La mitosi non è morta**, che è il criterio `E1a` — quello su cui `FASE_2PI`
+era caduta. **Il verdetto si dà a `120` passi contro `_cura1_corto`, non qui.**
+
+## E LA RIPARAZIONE DEL SIGILLO È PROVATA, NON ASSERITA
+
+`2f5155b`: ogni braccio via `subprocess`, con l'ingresso `--braccio`. **Collaudo `8/8`**, e le
+due voci nuove sono il punto:
+
+```
+K7  il FIGLIO SPENTO dichiara TEMPO_UNICO_MITOSI = False (atteso False)  3.47 s  OK
+K8  il FIGLIO ACCESO dichiara TEMPO_UNICO_MITOSI = True  (atteso True )  2.40 s  OK
+```
+
+**Il figlio parte dal valore SBAGLIATO, apposta:** se il braccio non attraversasse il confine di
+processo, leggerebbe **l'opposto** di quello atteso — non un valore mancante, che sarebbe
+ambiguo. **Senza `K7`/`K8` la riparazione sarebbe ASSERITA invece che misurata, che è
+esattamente ciò che `Z145` È.**
+
+**⚠ E UN DIFETTO PRESO SCRIVENDOLO:** la prima versione passava al figlio un **argv finto**.
+`_applica_flag` legge **`a.maxnodi` senza default**, quindi sarebbe morto lì e il collaudo
+avrebbe provato solo che un'eccezione si propaga. **Ora il figlio passa dal percorso vero**,
+`_cli()` + `_applica_flag(a)`, gli stessi di `_scena_video.py:232-234`.
+
+**⚠ E IL LIMITE, perché un sigillo non rieseguito non protegge nulla (`A9`):** `K7`/`K8` sono
+**provati**; `T4`/`T5` **in subprocess NON sono stati rieseguiti**, per tua decisione — `T4` è
+valido e `T5` è diventato il confronto fra i due giri corti.
