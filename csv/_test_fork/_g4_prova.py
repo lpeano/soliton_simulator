@@ -419,7 +419,8 @@ def main():
     passi = None
     for a in sys.argv[1:]:
         if a in ("--controllo", "--riferimento", "--spegni", "--spegni-tutto",
-                 "--ritmo-wrap", "--fase-2pi", "--fase-2pi-corto"):
+                 "--ritmo-wrap", "--fase-2pi", "--fase-2pi-corto",
+                 "--cura1-corto"):
             modo = a
         if a.startswith("--frame="):
             passi = int(a.split("=", 1)[1])
@@ -451,6 +452,17 @@ def main():
     elif modo == "--spegni":
         dest = os.path.join(RADICE, "csv", "_test_fork", "_g4_senza_memmoto")
         nfr, spegni = (passi or 100), True
+    elif modo == "--cura1-corto":
+        # [CURA 1, 2026-09-24] IL GIRO CORTO DELLA CURA 1. NON forza NIENTE sul modulo:
+        # la cura e' nell'ARGV del driver (`--ritmo-wrap-2pi`), che e' il punto della
+        # cura stessa. Se l'involucro forzasse il flag, il giro proverebbe l'involucro
+        # invece del driver -- ed e' esattamente cio' che `T1` del sigillo esclude.
+        dest = os.path.join(RADICE, "csv", "_test_fork", "_cura1_corto")
+        if os.path.isdir(dest):
+            for _f in os.listdir(dest):
+                if _f.endswith(".pkl.gz"):
+                    os.remove(os.path.join(dest, _f))
+        nfr, spegni = (passi or 20), False
     elif modo in ("--fase-2pi", "--fase-2pi-corto"):
         # [FASE_2PI] LA PROVA DELLA CURA DELLA FASE. Nient'altro e' spento: il
         # confronto e' con `_g4_riferimento`, STESSI flag e STESSO seme.
@@ -506,7 +518,8 @@ def main():
     if (visto["chiamate"] == 0 or (spegni and S.MEM_MOTO)
             or (modo == "--spegni-tutto" and S.MEM_MOTO_TUTTO)
             or (modo == "--ritmo-wrap" and not S.RITMO_WRAP_2PI)
-            or (modo.startswith("--fase-2pi") and not S.FASE_2PI)):
+            or (modo.startswith("--fase-2pi") and not S.FASE_2PI)
+            or (modo == "--cura1-corto" and not S.RITMO_WRAP_2PI)):
         W("*** L'INVOLUCRO NON HA AGITO. FERMO. ***\n")
         return 1
 
