@@ -15155,3 +15155,80 @@ decidere al posto tuo.**
 >   sigillo, con la ragione scritta: *«la scena non è una cura»*.
 >
 > **Non scelgo io.** Fino alla tua risposta il sigillo **resta in FAIL**, che è lo stato vero.
+
+---
+
+# ✅ REVISIONE — **L'AVVIO E `memoria_hebbiana_moto`** *(tua domanda, 2026-09-24)*
+
+**`doc/REVISIONE_avvio_e_memoria.md`.** Sola lettura, nessuna riga di codice. Tabelle generate
+da `_revisione_mhm.py` *(AST)* e `_revisione_avvio.py` *(sonda pure-read, 4 passi)*.
+
+> ### **SÌ a entrambe le domande.**
+
+## 1. L'AVVIO
+
+**`ritmo()` torna `r = 1` per tutti UNA volta sola, al passo 1** — `_ritmo_sicurezza` resta `1`,
+e la forma `(-1, 2391)` dice che **`_psi_prec` era `None`**, non corto.
+
+> **Al passo 1 `dt_n = DT` e `dt_e = DT` per ogni nodo e ogni arco. Non è che l'avvio usi *un
+> altro* tempo proprio: al passo 1 il tempo proprio NON ESISTE.** E non è curabile — senza un
+> passato `r` **non è calcolabile**. **Il difetto è che nessuno lo DICHIARA.**
+
+**Il fallback `exp(iφ)` scatta alle invocazioni `1, 2, 3` su `9`**, e lì
+**`max|φ| = 12.566238` contro `4π = 12.566371`**: **`φ` copre già tutto il dominio `4π`**, su
+tutti i `2391` nodi.
+
+> ### **È un ponte `INVERSA`, ed è la CONDIZIONE INIZIALE.** `φ` — `4π` **dichiarato**, cioè una
+> convenzione — **scrive lo SPINORE**, `4π` **vero**. **Stessa forma di `TW_SPINORE`**, che hai
+> bloccato per sempre. **Ma è un fallback, non una legge**, e la differenza va detta.
+
+## ❗ 1c. E IL NUMERO CHE CORREGGE `Z148`
+
+```
+archi=525973  sotto_LAM=0  min/LAM=1.000000  esattamente_LAM=223380
+```
+
+**`Z148`, senza le cure: `223 396` archi sotto `LAM`. Qui, con le cure: `223 380` esattamente
+`A` `LAM`. Sono gli stessi archi.**
+
+> ### **`Z148` va corretto nel MECCANISMO, non nel verdetto.** Avevo scritto *«il freno ci
+> ### appoggia il sistema contro»*. **Non è il freno: è `_nasce`, alla NASCITA.** Il freno li
+> ### tiene lì dopo *(`min/LAM` da `1.000000` a `1.000049` in quattro passi)*, **ma a metterli
+> ### sul muro è la semina.** **Il `42.48 %` degli archi NASCE sul muro.**
+
+## 2. `memoria_hebbiana_moto` — sei scritture vere su undici
+
+**Due** *(spinta `:6116`, gravità `:6122`)* usano **`DT` di coordinata** e il **cono GLOBALE**
+`c_sistema = LAM·√K_C`. **Quattro** moltiplicano per **`median(d0[mask])`**.
+
+**Tre famiglie sono GIÀ CURATE ALTROVE E NON LÌ:** il **cono locale** *(`C4`, solo nella
+coesione)* · la **scala locale** *(`C2`, `Z67`)* · la **forma esatta / niente clip** *(`C1`,
+`C1-bis`)*.
+
+## 3. ❗ `COES_CAUSALE` HA CURATO METÀ DEL CONO — **il tuo rilievo è esatto**
+
+```
+:6057  passo_causale  = c_sistema * DT
+:6113  passo_causale  = c_sistema * DT
+:6253  _passo_causale = _csa * DT        <- COES_CAUSALE
+```
+
+Un tetto causale è **velocità × tempo**. **`C4` ha reso LOCALE la velocità e ha lasciato GLOBALE
+il tempo.** **`cs` del luogo × orologio di nessun luogo.** *(`30` usi di `DT` in `10` funzioni;
+`5` in `memoria_hebbiana_moto`.)*
+
+## 4. LA PROPOSTA, e decidi tu
+
+**ESTENSIONI** *(stessa forma, sigillo già esistente, nessuna legge nuova)*: **`A1`** il tempo
+del cono da `CURA 2` a `:6253` · **`A2`** il cono locale da `C4` a spinta e gravità · **`A3`**
+la scala locale da `C2`/`Z67` ai quattro siti con la mediana.
+
+**NUOVI**: **`B1`** il passo 1 senza tempo proprio *(da DICHIARARE, non curabile)* · **`B2`** lo
+spinore iniziale preso da `φ` *(tocca la condizione iniziale: decidi tu)* · **`B3`** il `42.48 %`
+che nasce sul muro *(`A11` cor.6, gemello di `D31` alla nascita)* · **`B4`** `D02`, che legge
+`pos` invece di `d` e **non ha una cura da estendere**.
+
+**Ordine proposto:** `B3` *(corregge una mia diagnosi di ieri)* → `A1` *(due caratteri su una
+cura già sigillata)* → `A2`, `A3` → `B1`, `B2` *(dichiarazioni prima che cure)* → `B4`.
+
+**⚠ `CURA 3` non è in questa lista, di proposito: la revisione era sola lettura e non la ordina.**

@@ -1,0 +1,128 @@
+# REVISIONE (2)(3) -- GENERATA DALL'AST, nessun run
+#
+# `memoria_hebbiana_moto`: righe 5895-6357 (462 righe)
+#
+==============================================================================================================
+(2) LE SCRITTURE DI `d`/`d0` IN `memoria_hebbiana_moto`
+==============================================================================================================
+  trovate 11 scritture
+
+  :5969  self.d0[mask] += self._sd0(proj, mask)
+        TEMPO      — *(nessun tempo esplicito nella chiusura)*
+        CONO       —
+        GLOBALI    median
+        LEGGE DA   dal DISEGNO (`pos`), da `d0`, da `d`
+        DIFETTO    `A2` / `D01` -- statistica GLOBALE dentro una legge LOCALE   [curato altrove? **SI': `PEQ_NASCITA_LOCALE` (`C2`) e `SCALA_P` (`Z67`)** -- ma non in questi siti]
+        DIFETTO    `D02` -- legge IL DISEGNO invece della distanza REALE   [curato altrove? NO, mai curato]
+        DIFETTO    `A11` -- un limite che potrebbe nascondere un difetto   [curato altrove? **SI': `ANOM_SIMM` (`C1-bis`) e `PEQ_ESATTO` (`C1`)** -- altrove]
+
+  :5972  self.d0 = self._pav_d0(self.d0)
+        TEMPO      — *(nessun tempo esplicito nella chiusura)*
+        CONO       —
+        GLOBALI    —
+        LEGGE DA   da `d0`, da `d`
+        DIFETTO    — *(nessun marcatore noto nella chiusura)*
+
+  :6116  self.d0[mask] += self._sd0(spinta * float(np.median(self.d0[mask])), mask)
+        TEMPO      DT di COORDINATA
+        CONO       GLOBALE (LAM*sqrt(K_C)), GLOBALE (c_sistema*DT), LOCALE di nodo
+        GLOBALI    median, mean
+        LEGGE DA   dal DISEGNO (`pos`), da `d0`, da `d`
+        DIFETTO    `D18` -- cono GLOBALE dove serve quello LOCALE   [curato altrove? **SI': `COES_CAUSALE` (`C4`) usa il cono LOCALE** -- ma solo nella COESIONE]
+        DIFETTO    `D18` -- tetto causale dal cono GLOBALE   [curato altrove? **SI': `COES_CAUSALE` (`C4`)**, e solo li']
+        DIFETTO    `A2` / `D01` -- statistica GLOBALE dentro una legge LOCALE   [curato altrove? **SI': `PEQ_NASCITA_LOCALE` (`C2`) e `SCALA_P` (`Z67`)** -- ma non in questi siti]
+        DIFETTO    `A2` -- statistica GLOBALE dentro una legge LOCALE   [curato altrove? in parte]
+        DIFETTO    `D02` -- legge IL DISEGNO invece della distanza REALE   [curato altrove? NO, mai curato]
+        DIFETTO    `A11` -- un limite che potrebbe nascondere un difetto   [curato altrove? **SI': `ANOM_SIMM` (`C1-bis`) e `PEQ_ESATTO` (`C1`)** -- altrove]
+
+  :6122  self.d0[mask] += self._sd0(grav * float(np.median(self.d0[mask])), mask)
+        TEMPO      DT di COORDINATA
+        CONO       GLOBALE (LAM*sqrt(K_C)), GLOBALE (c_sistema*DT), LOCALE di nodo
+        GLOBALI    median
+        LEGGE DA   da `d0`, da `d`
+        DIFETTO    `D18` -- cono GLOBALE dove serve quello LOCALE   [curato altrove? **SI': `COES_CAUSALE` (`C4`) usa il cono LOCALE** -- ma solo nella COESIONE]
+        DIFETTO    `D18` -- tetto causale dal cono GLOBALE   [curato altrove? **SI': `COES_CAUSALE` (`C4`)**, e solo li']
+        DIFETTO    `A2` / `D01` -- statistica GLOBALE dentro una legge LOCALE   [curato altrove? **SI': `PEQ_NASCITA_LOCALE` (`C2`) e `SCALA_P` (`Z67`)** -- ma non in questi siti]
+        DIFETTO    `A11` -- un limite che potrebbe nascondere un difetto   [curato altrove? **SI': `ANOM_SIMM` (`C1-bis`) e `PEQ_ESATTO` (`C1`)** -- altrove]
+
+  :6125  self.d0 = self._pav_d0(self.d0)
+        TEMPO      — *(nessun tempo esplicito nella chiusura)*
+        CONO       —
+        GLOBALI    —
+        LEGGE DA   da `d0`, da `d`
+        DIFETTO    — *(nessun marcatore noto nella chiusura)*
+
+  :6145  self.d0[mask] += self._sd0(flusso, mask)
+        TEMPO      — *(nessun tempo esplicito nella chiusura)*
+        CONO       —
+        GLOBALI    median
+        LEGGE DA   da `d0`, da `d`
+        DIFETTO    `A2` / `D01` -- statistica GLOBALE dentro una legge LOCALE   [curato altrove? **SI': `PEQ_NASCITA_LOCALE` (`C2`) e `SCALA_P` (`Z67`)** -- ma non in questi siti]
+        DIFETTO    `A11` -- un limite che potrebbe nascondere un difetto   [curato altrove? **SI': `ANOM_SIMM` (`C1-bis`) e `PEQ_ESATTO` (`C1`)** -- altrove]
+
+  :6148  self.d0 = self._pav_d0(self.d0)
+        TEMPO      — *(nessun tempo esplicito nella chiusura)*
+        CONO       —
+        GLOBALI    —
+        LEGGE DA   da `d0`, da `d`
+        DIFETTO    — *(nessun marcatore noto nella chiusura)*
+
+  :6296  self.d0[mask] += self._sd0(_delta_coes, mask)
+        TEMPO      DT di COORDINATA
+        CONO       GLOBALE (c_sistema*DT), LOCALE di nodo
+        GLOBALI    —
+        LEGGE DA   da `d0`, da `d`
+        DIFETTO    `D18` -- tetto causale dal cono GLOBALE   [curato altrove? **SI': `COES_CAUSALE` (`C4`)**, e solo li']
+
+  :6298  self.d0[mask] += self._sd0(np.clip(coesione_relazionale, -tasso_dinamico, tasso_dinamico), mask)
+        TEMPO      — *(nessun tempo esplicito nella chiusura)*
+        CONO       —
+        GLOBALI    mean
+        LEGGE DA   da `d0`, da `d`
+        DIFETTO    `A2` -- statistica GLOBALE dentro una legge LOCALE   [curato altrove? in parte]
+        DIFETTO    `A11` -- un limite che potrebbe nascondere un difetto   [curato altrove? **SI': `ANOM_SIMM` (`C1-bis`) e `PEQ_ESATTO` (`C1`)** -- altrove]
+
+  :6302  self.d0 = self._pav_d0(self.d0)
+        TEMPO      — *(nessun tempo esplicito nella chiusura)*
+        CONO       —
+        GLOBALI    —
+        LEGGE DA   da `d0`, da `d`
+        DIFETTO    — *(nessun marcatore noto nella chiusura)*
+
+  :6350  self.d0 = self._pav_d0(self.d0)
+        TEMPO      — *(nessun tempo esplicito nella chiusura)*
+        CONO       —
+        GLOBALI    —
+        LEGGE DA   da `d0`, da `d`
+        DIFETTO    — *(nessun marcatore noto nella chiusura)*
+
+  ⚠ IL LIMITE DEL METODO: la chiusura e' SINTATTICA e si ferma al bordo della funzione.
+     Questi metodi sono CHIAMATI e il loro interno NON e' letto:
+     self._dphi, self._floor_d0, self._nb_grav, self._pav_d0, self._sd0, self._smp_chiudi, self._traccia_coesione, self._traccia_d0, self.calcola_psi, self.d0.copy, self.pos[:self.n].mean, self.pozzo_grafo, self.verifica_invarianti
+
+==============================================================================================================
+(3) OGNI USO DI `DT` NEL FILE, per funzione
+==============================================================================================================
+  `DT` e' il tempo di COORDINATA. `CLAUDE.md` par.9: *il tic dei processi locali e'
+  `dt_n = DT*r`, non `DT`; `DT` nudo impone la foliazione sincrona globale, cioe'
+  UN FRAME PREFERITO.* Qui si contano i siti, **non si giudica**: alcuni usi di `DT`
+  sono LEGITTIMI (il conteggio dei sottopassi CFL, la costruzione di `dt_e` stesso).
+
+  funzione                              usi  righe
+  step                                   10  4457, 4459, 4460, 5029, 5030, 5031, 5039, 5040, 5041
+  memoria_hebbiana_moto                   5  6057, 6113, 6253, 6254, 6264
+  _applica_flag                           3  7447, 7714
+  ritmo                                   3  2634, 2658, 2660
+  mitosi                                  2  5435, 5439
+  _bloch_ritardato                        2  4204, 4206
+  _passo_spinoriale                       2  3143
+  (modulo)                                1  330
+  _fattore_tempo_arco                     1  4289
+  _dbg_init                               1  6408
+
+  TOTALE usi di `DT`: 30 in 10 funzioni
+
+  E DOVE `DT` INCONTRA UN CONO (`c_sistema`, `cs_arco`): e' li' che il tempo unico
+  vorrebbe `dt_e`, perche' un TETTO CAUSALE e' `velocita' x TEMPO PROPRIO`.
+    :6057  memoria_hebbiana_moto        passo_causale = c_sistema * DT
+    :6113  memoria_hebbiana_moto        passo_causale = c_sistema * DT

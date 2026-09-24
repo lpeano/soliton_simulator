@@ -1,0 +1,45 @@
+# REVISIONE (1) -- L'AVVIO: quale tempo usa ogni legge nei primi passi
+#
+# ARGV: quella del driver DOPO la decisione `NUDA = CAMPAGNA` (tutte le cure accese)
+# PURE-READ: l'involucro su `calcola_psi` CONTA e basta.
+#
+========================================================================================================
+(1c) LA SEMINA AL PASSO ZERO -- prima di qualunque passo
+========================================================================================================
+  archi=525973  sotto_LAM=0  min/LAM=1.000000  esattamente_LAM=223380  nascite=4  SCALA_MIN=False  SCALA_MIN_PASSO=True
+
+  `_nasce` porta il troncone a `LAM` ALLA NASCITA, ed e' gated su
+  `SCALA_MIN or SCALA_MIN_PASSO`. **`esattamente_LAM` sono gli archi TRONCATI**:
+  una distribuzione continua non colpisce `LAM` esatto per caso.
+
+========================================================================================================
+(1a) `ritmo()` -- il ramo `r = 1` per tutti
+========================================================================================================
+  PASSO 1  ritmo_chiamate=1  ritmo_r1=1  forma_r1=(-1, 2391)  calcpsi=3  w_none=1  n=2391  archi=525973  sotto_LAM=0  min/LAM=1.000000
+  PASSO 2  ritmo_chiamate=2  ritmo_r1=1  forma_r1=(-1, 2391)  calcpsi=5  w_none=1  n=2391  archi=525973  sotto_LAM=0  min/LAM=1.000006
+  PASSO 3  ritmo_chiamate=3  ritmo_r1=1  forma_r1=(-1, 2391)  calcpsi=7  w_none=1  n=2391  archi=525973  sotto_LAM=0  min/LAM=1.000023
+  PASSO 4  ritmo_chiamate=4  ritmo_r1=1  forma_r1=(-1, 2391)  calcpsi=9  w_none=1  n=2391  archi=525973  sotto_LAM=0  min/LAM=1.000049
+
+  `ritmo_r1` e' `_ritmo_sicurezza`: quante volte `ritmo()` ha restituito
+  `np.ones(n)` perche' `_psi_prec` mancava o era della lunghezza sbagliata.
+
+========================================================================================================
+(1b) IL FALLBACK `exp(i phi)` DELLO SPINORE
+========================================================================================================
+  1  fallback=True  len(_psi_spinor)=0  n=2391  max|phi|=12.566238  phi_non_zero=2391/2391
+  2  fallback=True  len(_psi_spinor)=0  n=2391  max|phi|=12.566238  phi_non_zero=2391/2391
+  3  fallback=True  len(_psi_spinor)=0  n=2391  max|phi|=12.566238  phi_non_zero=2391/2391
+  4  fallback=False  len(_psi_spinor)=2391  n=2391  max|phi|=12.564288  phi_non_zero=2391/2391
+  5  fallback=False  len(_psi_spinor)=2391  n=2391  max|phi|=12.564288  phi_non_zero=2391/2391
+  6  fallback=False  len(_psi_spinor)=2391  n=2391  max|phi|=12.561364  phi_non_zero=2391/2391
+  7  fallback=False  len(_psi_spinor)=2391  n=2391  max|phi|=12.561364  phi_non_zero=2391/2391
+  8  fallback=False  len(_psi_spinor)=2391  n=2391  max|phi|=12.561265  phi_non_zero=2391/2391
+  9  fallback=False  len(_psi_spinor)=2391  n=2391  max|phi|=12.561265  phi_non_zero=2391/2391
+  TOT invocazioni=9  con fallback=3
+
+  Quando scatta, `psi_spin` e' costruito **DA `phi`**:
+      `_psp[:, 0] = np.exp(1j * self.phi[:_n])`   (in `calcola_psi`)
+  ⚠ **E' UN PONTE `INVERSA`**: `phi` -- il cui `4pi` e' **DICHIARATO**, cioe' una
+  convenzione -- **scrive lo SPINORE**, il cui `4pi` e' **VERO**. E' la stessa forma
+  per cui `TW_SPINORE` e' bloccato PER SEMPRE. **Qui pero' e' un FALLBACK DI AVVIO,
+  non una legge**, e la differenza va detta invece di confonderle.
