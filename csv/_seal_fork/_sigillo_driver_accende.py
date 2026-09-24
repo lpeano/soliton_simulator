@@ -68,6 +68,11 @@ def figlio():
     anc = "S._applica_flag(a)"
     assert t.count(anc) == 1, "ancora non unica nel driver: %d" % t.count(anc)
     testa = t[:t.index(anc) + len(anc)]
+    # si cattura l'argv COSTRUITA DAL DRIVER: e' `sys.argv` nel momento in cui chiama
+    # `_cli()`, cioe' subito prima dell'ancora. Si aggiunge una riga al testo eseguito,
+    # invece di ricostruirla -- **ricostruirla sarebbe una SECONDA formula per la stessa
+    # cosa**, ed e' l'errore che questo repo insegue.
+    testa += "\n_ARGV_SIM = list(sys.argv)\n"
     g = {"__name__": "__main__", "__file__": DRIVER}
     vecchio = list(sys.argv)
     sys.argv = (["_scena_video.py", "1", os.path.join(DEST, "_scarto")]
@@ -79,6 +84,16 @@ def figlio():
     S = g.get("S") or sys.modules["soliton_simulator"]
     for nome in sorted(set(obbligatorie()) | set(_flag_delle_cure())):
         sys.stdout.write("STATO %s %s\n" % (nome, getattr(S, nome, "ASSENTE")))
+    # [3, richiesta di Luca 2026-09-24] L'INTERA ARGV che il driver ha costruito per il
+    # simulatore. **Le cure della lista non bastano:** `CHI_COOP` era passato `=on` dalla
+    # campagna e `"off"` di default nel driver, e il sigillo NON LO VEDEVA perche' non e' in
+    # `_cure_verificate.py`. **Era un ORFANO FUORI DALLA LISTA -- il caso esatto che il
+    # controllo delle orfane doveva impedire, e che non poteva vedere.**
+    # Si dichiara l'argv INTERA, e il confronto fra le due invocazioni non ha piu' una lista
+    # a cui essere fedele.
+    for k, v in enumerate(g.get("_ARGV_SIM") or sys.modules["soliton_simulator"].__dict__
+                          .get("_argv_mai", []) or []):
+        sys.stdout.write("ARGV %d %s\n" % (k, v))
     return 0
 
 
@@ -132,15 +147,21 @@ def main():
 
     # --- i DUE figli
     letti = {}
+    argvi = {}
     for modo in ("NUDA", "CAMPAGNA"):
         cmd = [sys.executable, os.path.abspath(__file__), "--figlio", modo]
         r = subprocess.run(cmd, cwd=RADICE, capture_output=True, text=True,
                            encoding="utf-8", errors="replace")
         d = {}
+        av = []
         for riga in (r.stdout or "").splitlines():
             m = re.match(r"^STATO (\w+) (\S+)$", riga.strip())
             if m:
                 d[m.group(1)] = m.group(2)
+            m = re.match(r"^ARGV (\d+) (.*)$", riga.rstrip())
+            if m:
+                av.append(m.group(2))
+        argvi[modo] = av
         if r.returncode != 0 or not d:
             P("*** IL FIGLIO %s E' MORTO (rc=%d) ***\n%s\n"
               % (modo, r.returncode, (r.stdout + r.stderr)[-3000:]))
@@ -194,8 +215,55 @@ def main():
         P("\n  ✅ **NUDA = CAMPAGNA su tutte le obbligatorie: UN SOLO MODO DI LANCIARE.**\n")
         P("     Nessuna cura approvata si puo' piu' dimenticare da riga di comando.\n")
 
+    # ---------------------------------------------------------------- l'ARGV INTERA
+    P("\n" + "=" * 92 + "\nL'ARGV INTERA: NUDA contro CAMPAGNA -- **non solo le cure**\n"
+      + "=" * 92 + "\n")
+    P("  `CHI_COOP` era passato `=on` dalla campagna e `\"off\"` di default nel driver, e il\n")
+    P("  sigillo NON LO VEDEVA: non e' in `_cure_verificate.py`. **ORFANO FUORI DALLA LISTA**\n")
+    P("  -- il caso esatto che il controllo delle orfane doveva impedire e non poteva vedere.\n")
+    P("  **Qui il confronto non ha piu' una lista a cui essere fedele.** (Rilievo di Luca.)\n\n")
+    an, ac = argvi.get("NUDA", []), argvi.get("CAMPAGNA", [])
+    P("  NUDA     (%d elementi)\n  CAMPAGNA (%d elementi)\n\n" % (len(an), len(ac)))
+    sn, sc = set(an), set(ac)
+    solo_c = [x for x in ac if x not in sn]
+    solo_n = [x for x in an if x not in sc]
+    # le opzioni VALORIZZATE (`--x=v` o `--x v`) si confrontano per NOME, senno' un valore
+    # diverso comparirebbe come «due opzioni diverse» invece che come UNA che cambia valore.
+    def coppie(a):
+        fuori, k = {}, 0
+        while k < len(a):
+            x = a[k]
+            if x.startswith("--") and "=" in x:
+                nm, vv = x.split("=", 1)
+                fuori[nm] = vv
+            elif x.startswith("--") and k + 1 < len(a) and not a[k + 1].startswith("--"):
+                fuori[x] = a[k + 1]
+                k += 1
+            elif x.startswith("--"):
+                fuori[x] = True
+            k += 1
+        return fuori
+    cn, cc = coppie(an), coppie(ac)
+    diff = []
+    for nm in sorted(set(cn) | set(cc)):
+        vn, vc = cn.get(nm, "(assente)"), cc.get(nm, "(assente)")
+        if vn != vc:
+            diff.append((nm, vn, vc))
+    if diff:
+        P("  ⚠ **DIFFERENZE: %d**\n\n" % len(diff))
+        P("    %-26s %-16s %-16s\n" % ("opzione", "NUDA", "CAMPAGNA"))
+        for nm, vn, vc in diff:
+            P("    %-26s %-16s %-16s\n" % (nm, vn, vc))
+        P("\n  **OGNI DIFFERENZA VA SPIEGATA O TOLTA.** Una che resta senza motivo e' un modo\n")
+        P("  diverso di lanciare, e la decisione di Luca dice che ce ne deve essere UNO SOLO.\n")
+    else:
+        P("  ✅ **NESSUNA DIFFERENZA: le due argv COINCIDONO opzione per opzione.**\n")
+    P("  (elementi solo in CAMPAGNA: %d, solo in NUDA: %d -- conteggio grezzo)\n"
+      % (len(solo_c), len(solo_n)))
+    esiti.append(not diff)
+
     n = sum(1 for x in esiti if x)
-    P("\n" + "=" * 92 + "\nESITO: %d/%d (obbligatorie + escluse + orfane)\n"
+    P("\n" + "=" * 92 + "\nESITO: %d/%d (obbligatorie + escluse + orfane + argv intera)\n"
       % (n, len(esiti)) + "=" * 92 + "\n")
     P("*** %s ***\n" % ("IL DRIVER LE ACCENDE." if n == len(esiti) else
                         "IL DRIVER NON LE ACCENDE: reperto, commit, STOP."))
