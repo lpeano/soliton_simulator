@@ -162,6 +162,50 @@ def collaudo(W, S):
       % (min(sotto), "OK: il difetto e' riprodotto (prima PASSAVA)" if ok4 else "*** NO ***"))
     e.append(ok4)
 
+    # K5/K6: i due criteri NUOVI, sui casi a risposta NOTA.
+    #   Nascono da `Z142`: `T1` cercava nel TESTO e `D37` era una chiave duplicata. Entrambi
+    #   si collaudano su sorgenti sintetici, dove la risposta e' nota in anticipo.
+    import ast as _a
+    import collections as _c
+
+    def rif_codice(src):
+        return [n.lineno for n in _a.walk(_a.parse(src))
+                if isinstance(n, _a.Name) and n.id == "_lam_attivo"]
+
+    def dup_dominio(src):
+        for nodo in _a.walk(_a.parse(src)):
+            if isinstance(nodo, _a.Assign) and any(
+                    isinstance(b, _a.Name) and b.id == "DOMINI" for b in nodo.targets):
+                ch = [k.value for k in nodo.value.keys if isinstance(k, _a.Constant)]
+                return sorted(k for k, n2 in _c.Counter(ch).items() if n2 > 1)
+        return None
+
+    solo_commento = "# qui si parla di _lam_attivo ma e' un COMMENTO\nx = 1\n"
+    ok5 = (rif_codice(solo_commento) == []) and ("_lam_attivo" in solo_commento)
+    W("K5 IL CASO CHE DEVE FALLIRE: `_lam_attivo` SOLO in un commento -> l'AST dice %s "
+      "mentre un `in` sul testo direbbe TROVATO -> %s\n"
+      % (rif_codice(solo_commento) or "[]",
+         "OK: il criterio vecchio sbagliava" if ok5 else "*** NO ***"))
+    e.append(ok5)
+
+    con_codice = "if _lam_attivo:\n    pass\n"
+    ok6 = (len(rif_codice(con_codice)) == 1)
+    W("K6 e un riferimento VERO si trova: righe %s -> %s\n"
+      % (rif_codice(con_codice), "OK" if ok6 else "*** NO ***"))
+    e.append(ok6)
+
+    doppio = "DOMINI = {\n    'a': 1,\n    'b': 2,\n    'a': 3,\n}\n"
+    ok7 = (dup_dominio(doppio) == ["a"])
+    W("K7 SECONDO CASO CHE DEVE FALLIRE: un `DOMINI` con la chiave `'a'` DUE volte -> "
+      "duplicate %s -> %s\n" % (dup_dominio(doppio), "OK" if ok7 else "*** NO ***"))
+    e.append(ok7)
+
+    pulito = "DOMINI = {\n    'a': 1,\n    'b': 2,\n}\n"
+    ok8 = (dup_dominio(pulito) == [])
+    W("K8 e un `DOMINI` pulito non da' falsi allarmi: duplicate %s -> %s\n"
+      % (dup_dominio(pulito) or "NESSUNA", "OK" if ok8 else "*** NO ***"))
+    e.append(ok8)
+
     ok = all(e)
     W("-" * 96 + "\n  -> %s\n\n" % ("i criteri PASSANO" if ok else "*** NON PASSANO ***"))
     return ok
@@ -193,10 +237,37 @@ def main():
     esiti = []
     sorg = io.open(SORGENTE, encoding="utf-8").read()
 
-    # T1: il gate e' SPARITO dal sorgente
-    ok = ("_lam_attivo" not in sorg)
-    P("T1    %s `_lam_attivo` NON ESISTE PIU' nel sorgente: la legge non e' piu' condizionata\n"
-      % ("PASS" if ok else "FAIL"))
+    # T1: il gate e' sparito -- DALL'AST, non dal testo.
+    #   !! LA PRIMA STESURA CERCAVA `"_lam_attivo" not in sorg`, cioe' NEL TESTO, e trovava
+    #   le DUE occorrenze nei COMMENTI che SPIEGANO che il gate e' stato tolto: `FAIL` falso
+    #   su codice corretto. **Un `FAIL` falso costa piu' di un sigillo mancante, perche' si
+    #   porta dietro una diagnosi.** La misura giusta e' l'AST: un `Name` di CODICE.
+    import ast as _ast
+    _alb = _ast.parse(sorg)
+    _rif = sorted({n.lineno for n in _ast.walk(_alb)
+                   if isinstance(n, _ast.Name) and n.id == "_lam_attivo"})
+    _testo = sorg.count("_lam_attivo")
+    ok = (len(_rif) == 0)
+    P("T1    %s `_lam_attivo` non ha piu' RIFERIMENTI DI CODICE: dall'AST %s\n"
+      % ("PASS" if ok else "FAIL", _rif or "[] (nessuno)"))
+    P("      (nel TESTO compare %d volte, e sono COMMENTI: per questo il criterio guarda\n"
+      "       l'AST e non un `in`.)\n" % _testo)
+    esiti.append(ok)
+
+    # T1b: NESSUNA CHIAVE DUPLICATA nei `DOMINI` -- e' la cura di `D37`, dall'AST.
+    import collections as _co
+    _chiavi, _dup = [], []
+    for nodo in _ast.walk(_alb):
+        if isinstance(nodo, _ast.Assign) and any(
+                isinstance(b, _ast.Name) and b.id == "DOMINI" for b in nodo.targets):
+            _chiavi = [k.value for k in nodo.value.keys if isinstance(k, _ast.Constant)]
+            _dup = sorted(k for k, c in _co.Counter(_chiavi).items() if c > 1)
+            break
+    ok = (len(_chiavi) > 0 and not _dup)
+    P("T1b   %s `DOMINI` NON ha chiavi duplicate: %d chiavi, duplicate %s\n"
+      % ("PASS" if ok else "FAIL", len(_chiavi), _dup or "NESSUNA"))
+    P("      -> e' la cura di `D37`. In un letterale di dict la chiave duplicata vince\n"
+      "         l'ULTIMA, quindi una voce duplicata e' CODICE MORTO **in silenzio**.\n")
     esiti.append(ok)
 
     # T2: `_cs_nodo_prev` e' fra i DOMINI, come `pos`
