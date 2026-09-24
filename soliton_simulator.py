@@ -2410,15 +2410,29 @@ class Rete:
         Una cella e' un cubo `[o, o+lato)`, **e ogni cella ha il SUO lato**: le libere restano
         grandi, solo le parziali si spezzano. Tre esiti:
           * **MORTA**   -- tutta FUORI dalla palla, **oppure** COPERTA da un nodo;
-          * **LIBERA**  -- tutta DENTRO e a `>= LAM` da ogni nodo: **ogni** suo punto va bene;
+          * **LIBERA rispetto al nodo piu' vicino al CENTRO** -- tutta dentro la palla, e il
+                           nodo piu' vicino al centro della cella dista `>= LAM` dal suo punto
+                           piu' vicino. **⚠ NON e' «ogni suo punto e' accettabile»**, e la
+                           differenza e' un rilievo di Luca: il test guarda **un solo nodo**,
+                           e **un ALTRO nodo puo' stare entro `LAM` da un angolo**. La
+                           correttezza regge perche' **ogni proposta e' verificata contro
+                           TUTTI i nodi** prima di essere accettata -- ma l'etichetta va
+                           scritta per quello che il test fa, non per quello che si spera;
           * **DA DIVIDERE** -- in parte coperta o a cavallo del bordo.
 
         **La suddivisione si ferma a `lato < LAM * eps_macchina`** *(Luca)*: sotto, due
         posizioni sono **lo stesso `float`**. Le celle abbandonate li' si **CONTANO** (`A8`).
 
-        **⚠ IL TEST DI COPERTURA GUARDA SOLO IL NODO PIU' VICINO**, quindi una cella coperta
-        dall'UNIONE di piu' nodi non e' riconosciuta e **si suddivide**. E' **conservativo**:
-        costa lavoro, non correttezza. Dichiarato invece che taciuto.
+        **⚠ IL TEST GUARDA UN SOLO NODO -- il piu' vicino al CENTRO della cella -- e questo
+        ha DUE conseguenze, non una:**
+          * una cella coperta dall'**UNIONE** di piu' nodi non e' riconosciuta e **si
+            suddivide**: costa lavoro, non correttezza;
+          * una cella detta **LIBERA** puo' avere **un altro nodo entro `LAM` da un angolo**:
+            quindi «LIBERA» **non garantisce che ogni suo punto vada bene.**
+        **La correttezza non dipende da questo test:** dipende dal fatto che **ogni proposta e'
+        verificata contro TUTTI i nodi** (`cKDTree`) prima di essere accettata. Il test delle
+        celle serve a sapere **DOVE proporre** e **QUANDO fermarsi**, non a garantire i punti.
+        *(Rilievo di Luca, 2026-09-24: l'etichetta prometteva piu' di quanto il test verifichi.)*
         """
         if not len(o):
             v = o[:0]
@@ -2465,12 +2479,24 @@ class Rete:
 
         ⚠⚠ **LE PROPOSTE SONO UNIFORMI NEL VOLUME LIBERO, e non e' un dettaglio.**
         La prima stesura proponeva **UN PUNTO PER CELLA**: le celle piccole *(suddivise, cioe'
-        gli interstizi)* ricevevano **lo stesso peso** di quelle grandi, e la semina **riempiva
-        i buchi** invece di depositare a caso. **Il risultato era un impacchettamento piu'
-        DENSO dell'`RSA`: frazione `0.536` contro `0.384`.** Non era una violazione del
-        vincolo *(la distanza minima misurata era `0.801 >= LAM`)*: era **un'altra statistica**.
-        **L'ha preso `C3`**, che confronta con un valore esterno al progetto -- e questo era
-        esattamente il suo mestiere.
+        gli interstizi)* ricevevano **lo stesso peso** di quelle grandi, quindi **le proposte
+        non erano uniformi nel volume libero**. E l'`RSA` e' *esattamente* «uniforme nella
+        regione, condizionato all'accettazione», cioe' **uniforme nel volume LIBERO**: un peso
+        sbagliato fa un'ALTRA statistica, non l'`RSA`. Ora la cella si sorteggia con peso
+        `lato^3`.
+
+        ❌ **E QUI C'ERA SCRITTA UNA DIAGNOSI SBAGLIATA, MIA** *(corretta il 2026-09-24 su
+           rilievo di Luca)*. Dicevo: *«il risultato era un impacchettamento piu' DENSO
+           dell'RSA, frazione 0.536 contro 0.384, e l'ha preso C3»*. **Falso:**
+           * `0.536` era la frazione **GLOBALE**, e il mandato di Luca aveva **gia' dichiarato
+             che `C3` si misura NELLA SFERA INTERNA** -- la globale e' alta perche' le sfere di
+             raggio `LAM/2` **sporgono** oltre `r` e il denominatore non le contiene;
+           * **la prova che la diagnosi era sbagliata: dopo la «correzione» la globale e'
+             SALITA** (`0.536` -> `0.568` a `r = 2.0`). Se fosse stata il difetto, la cura
+             l'avrebbe abbassata.
+           * **`C3`, misurato come va misurato, PASSA:** `0.3826 +- 0.0016` a `r = 10`.
+           **Il cambiamento resta giusto; il motivo che avevo scritto no.**
+           *(Se commento e storia divergono, il commento mente: par.5-bis.)*
         """
         c = np.asarray(centro, float)
         acc = np.empty((n, 3), float)

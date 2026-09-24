@@ -1834,16 +1834,23 @@ diagonale `LAM`)*.
 ```
 celle di lato LAM/sqrt(3), OGNI cella col SUO lato (le libere restano grandi)
   MORTA        tutta fuori dalla palla, OPPURE coperta da un nodo
-  LIBERA       tutta dentro e a >= LAM da ogni nodo: ogni suo punto va bene
+  LIBERA       tutta dentro, e il nodo PIU' VICINO AL CENTRO dista >= LAM
+               ⚠ NON "ogni suo punto va bene": il test guarda UN SOLO nodo, e un
+                 ALTRO nodo puo' stare entro LAM da un angolo (rilievo di Luca)
   DA DIVIDERE  in parte coperta, o a cavallo del bordo -> si spezza in 8
 la cella si sorteggia con peso `lato^3`; si finisce quando non resta nessuna cella
 ```
 
 ### ⚠ DUE LIMITI DEL CODICE, dichiarati invece che taciuti
 
-1. **il test di copertura guarda solo il nodo PIÙ VICINO**: una cella coperta dall'**unione** di
-   più nodi non è riconosciuta e **si suddivide**. È **conservativo** — costa lavoro, non
-   correttezza;
+1. **il test guarda UN SOLO nodo — il più vicino al CENTRO della cella — e questo ha DUE
+   conseguenze, non una:** una cella coperta dall'**unione** di più nodi non è riconosciuta e
+   **si suddivide** *(costa lavoro, non correttezza)*; **e una cella detta «LIBERA» può avere un
+   altro nodo entro `LAM` da un angolo**, quindi **«LIBERA» non garantisce che ogni suo punto
+   vada bene** *(rilievo di Luca)*.
+   **LA CORRETTEZZA NON DIPENDE DA QUESTO TEST:** dipende dal fatto che **ogni proposta è
+   verificata contro TUTTI i nodi** prima di essere accettata. Il test delle celle serve a
+   sapere **dove proporre** e **quando fermarsi**, non a garantire i punti;
 2. **la risoluzione `LAM · eps`** ferma la suddivisione, e le celle abbandonate lì si **contano**
    *(`_sl_abbandonate`)*. **Se il contatore sale, la saturazione dichiarata non è esatta.**
 
