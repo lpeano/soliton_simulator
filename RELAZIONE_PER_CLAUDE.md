@@ -15834,3 +15834,84 @@ produce.**
 *«arresto non riconosciuto → diverso»* · e il collaudo che **duplicava** la logica invece di
 chiamarla. **La forma è sempre la stessa: un `or` che salva il test quando il caso interessante
 non si presenta.** Li hai trovati tutti e quattro tu.
+
+
+---
+
+# ✅ I NUMERI DELLE DUE SCENE, CALCOLATI — **e uno smentisce un'assunzione** *(2026-09-25)*
+
+*(`csv/_test_fork/_scene_coerenti.py`, semina `RSA` vera con arresto derivato, quattro semi)*
+
+```
+RA  r = 4.0964 +- 0.0140  (= 5.121 LAM)     <- il raggio che contiene 497 nodi IN ISOLAMENTO
+
+SCENA_A  sep = 6.1158   centri = 10.5929   raggio_vuoto = 12.6122  (= 15.765 LAM)
+         VUOTO   capienza = 12798.0 +- 11.9   [12807, 12783, 12812, 12790]
+         REGIONI nodi dentro le TRE = 1230.5 +- 7.4   per regione [405, 413, 415]
+         QUOTA   materia / totale = 0.0961
+
+SCENA_B  sep = 4.0000   centri =  6.9282   r_regione = 2.2641
+         raggio_vuoto = 8.6641  (= 10.830 LAM)
+         VUOTO   capienza = 4261.5 +- 5.5   [4266, 4252, 4264, 4264]
+         REGIONI nodi dentro le TRE = 209.8 +- 5.1   per regione [69, 68, 74]
+         QUOTA   materia / totale = 0.0492
+```
+
+## ❗ LA SMENTITA: **una regione DENTRO il vuoto contiene MENO di quanto conteneva DA SOLA**
+
+Il mandato dice *«raggio di regione ~ quello che conteneva ~`497` nodi»*. Quel raggio è
+**`4.0964`**, misurato su una **palla isolata**. **Ma dentro il vuoto la stessa palla ne contiene
+`~410`, non `497`.**
+
+| | in ISOLAMENTO | DENTRO il vuoto | rapporto |
+|---|--:|--:|--:|
+| regione di `r = 4.0964` *(scena `A`)* | `497` | **`411 ± 4`** | `0.83` |
+| regione di `r = 2.2641` *(scena `B`)* | `98` | **`70 ± 2`** | `0.71` |
+
+> ### **PERCHÉ, e non è un difetto della semina: è il BORDO.**
+> In una palla **isolata** i centri possono stare fino al raggio `r`, e **il volume di
+> esclusione di un nodo al bordo sta in parte FUORI dalla palla**: per unità di volume ci
+> stanno **più centri**. Dentro un vuoto saturo quella stessa regione è un **sotto-volume di
+> bulk**, e la densità è quella di bulk. **La frazione lo conferma:** `497` in isolamento danno
+> `0.4628` *(globale, gonfiata dal bordo)*, `411` dentro il vuoto danno `0.3817` — **il
+> `0.384` dell'`RSA`**.
+>
+> **È lo stesso effetto per cui `C3` va misurato nella sfera interna**, e che avevi imposto tu.
+> Qui si presenta dall'altro lato: **il bordo non abbassa, GONFIA**, se si guarda la palla
+> isolata.
+
+## ❓ LA DOMANDA, ED È TUA
+
+La scena `(a)` si chiama **«STESSA MATERIA»**, e ora le due letture divergono:
+
+- **tenere il RAGGIO `4.0964`** — come dice la lettera del mandato — e le regioni contengono
+  **`411`** nodi invece di `497`;
+- **tenere il CONTO `497`** — come dice il nome della scena — e serve un raggio **più grande**,
+  da misurare **dentro il vuoto** *(stima dal rapporto: `r ≈ 4.0964 · (497/411)^(1/3) ≈ 4.37`,
+  **da verificare con la semina, non da estrapolare**)*.
+
+**Non scelgo io.** E la differenza non è cosmetica: `497` contro `411` è il **`21 %`** di
+materia in più, e `P-GONFIA` confronta la crescita di `d0` col giro di `CURA 2`, **che aveva
+`497` per massa**.
+
+## ⚠ E UN AVVISO DI COSTO, prima che parta un run
+
+**Il vuoto della scena `A` ha `12 798` nodi: `5.4×` la scena di oggi**, e il costo per passo
+cresce **più che linearmente**. **`120` passi non costeranno `5×` il giro di `CURA 2`:
+costeranno di più, e di quanto non lo so.** La scena `B` ha `4 262` nodi, `1.8×`: quella è
+paragonabile.
+
+## ✅ E DUE COSE CHE FUNZIONANO
+
+**`QUOTA` non è né `0` né `1`:** `9.6 %` in `A`, `4.9 %` in `B`. **C'è un vuoto e ci sono
+delle masse**, che era la condizione perché la scena esistesse.
+**E le tre regioni sono equilibrate:** `[405, 413, 415]` in `A`, `[69, 68, 74]` in `B` — nessuna
+è privilegiata dalla geometria.
+
+## ⚠ UN DIFETTO MIO, preso dal rifiuto stesso
+
+Chiedevo la capienza **MEDIA** fra semi meno uno, ma **la capienza dipende dal seme**
+*(`12807 / 12783 / 12812 / 12790`)*: la media superava la capienza dei semi più bassi e la
+semina **rifiutava**. **Il rifiuto aveva ragione: era la mia richiesta a essere sbagliata.**
+*(E prima ancora lo strumento era morto su `NameError: SEMI` — definito nel genitore e non
+passato al figlio.)*

@@ -1,0 +1,10 @@
+LAM 0.800000 RCONN 2.400000
+RA r = 4.0964 +- 0.0140  (= 5.121 LAM)  semi=['4.109', '4.080', '4.085', '4.112']
+SCENA_A sep = 6.1158   centri = 10.5929   raggio_vuoto = 12.6122  (= 15.765 LAM)
+SCENA_B sep = 4.0000   centri = 6.9282   r_regione = 2.2641   raggio_vuoto = 8.6641  (= 10.830 LAM)
+VUOTO_A raggio 12.6122  capienza = 12798.0 +- 11.9  [12807, 12783, 12812, 12790]
+REGIONI_A nodi dentro le TRE regioni = 1230.5 +- 7.4   per regione [405, 413, 415]
+QUOTA_A  materia / totale = 0.0961
+VUOTO_B raggio 8.6641  capienza = 4261.5 +- 5.5  [4266, 4252, 4264, 4264]
+REGIONI_B nodi dentro le TRE regioni = 209.8 +- 5.1   per regione [69, 68, 74]
+QUOTA_B  materia / totale = 0.0492

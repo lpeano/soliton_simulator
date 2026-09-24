@@ -1,0 +1,35 @@
+# LE DUE SCENE DELLA STRADA (ii) -- massa = REGIONE A FASE COERENTE NEL VUOTO
+#
+# Decisione di Luca, 2026-09-25. Vuoto UNICO con `SEMINA_LAM`; le masse NON
+# aggiungono nodi: sono i nodi del vuoto dentro tre sfere, a fase comune.
+# I numeri sono CALCOLATI con la semina RSA vera, non stimati.
+#
+  LAM 0.800000 RCONN 2.400000
+  RA r = 4.0964 +- 0.0140  (= 5.121 LAM)  semi=['4.109', '4.080', '4.085', '4.112']
+  SCENA_A sep = 6.1158   centri = 10.5929   raggio_vuoto = 12.6122  (= 15.765 LAM)
+  SCENA_B sep = 4.0000   centri = 6.9282   r_regione = 2.2641   raggio_vuoto = 8.6641  (= 10.830 LAM)
+  VUOTO_A raggio 12.6122  capienza = 12798.0 +- 11.9  [12807, 12783, 12812, 12790]
+  REGIONI_A nodi dentro le TRE regioni = 1230.5 +- 7.4   per regione [405, 413, 415]
+  QUOTA_A  materia / totale = 0.0961
+  VUOTO_B raggio 8.6641  capienza = 4261.5 +- 5.5  [4266, 4252, 4264, 4264]
+  REGIONI_B nodi dentro le TRE regioni = 209.8 +- 5.1   per regione [69, 68, 74]
+  QUOTA_B  materia / totale = 0.0492
+
+====================================================================================================
+COME SI LEGGE, e cosa e' SCELTO
+====================================================================================================
+  `intervallo = R_CONN` fra i bordi delle regioni e' una **SCELTA DI LUCA**, non una
+  derivazione: e' il raggio a cui il vuoto si allaccia, quindi "le regioni si vedono
+  appena". Tutto il resto segue.
+
+  `raggio del vuoto = sep + r + R_CONN` e' il MINIMO che contiene le tre regioni piu'
+  un guscio di `R_CONN`: il punto di una regione piu' lontano dall'origine sta a
+  `sep + r`, e il guscio serve perche' le regioni **non tocchino il bordo del vuoto**.
+
+  `QUOTA` e' la frazione di nodi che diventano MATERIA. **Non e' un parametro: e' una
+  CONSEGUENZA della geometria**, e va guardata perche' se fosse vicina a `1` il vuoto
+  non esisterebbe, e se fosse vicina a `0` le masse non esisterebbero.
+
+  ⚠ I nodi "dentro le regioni" sono contati su una semina VERA a quel raggio, con la
+  capienza misurata **meno uno** (per non farla rifiutare). **Non e' la scena: e' la
+  sua geometria.** La scena vera la costruisce il simulatore.

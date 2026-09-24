@@ -1668,6 +1668,51 @@ Dopo la cura **non deve scattare mai**, e **`_g_sm_nascite` è la sua misura**: 
 | **`S6`** | **`d == |pos_i − pos_j|` per OGNI arco al passo zero** | ❗ dice se la cura ha curato **`D02` a questo sito**: oggi diverge sul `42.47 %` |
 | **`S7`** | **giro corto di 120 passi**: la mitosi **viva**, il **bilancio di `d0` CHIUDE** | `E1a` e `B`, gli stessi di `CURA 1` e `CURA 2`. ❗ **è il solo che può BOCCIARE la cura** |
 
+### ✅ **LA STRADA è `(ii)`: MASSA = REGIONE A FASE COERENTE NEL VUOTO** *(Luca, 2026-09-25)*
+
+```
+un vuoto UNICO seminato con SEMINA_LAM (saturazione esatta) su una palla che
+contiene le tre regioni.
+LE MASSE NON AGGIUNGONO NODI: sono i nodi del vuoto DENTRO TRE SFERE, a cui si
+assegna la STESSA FASE (fase della scena + il rumore che `semina()` usa gia').
+Fuori: fasi casuali, come oggi. Coorti registrate come oggi (`massa_k`).
+```
+
+> ### **ZERO NUMERI NUOVI, e per una ragione che vale più dell'economia:** la materia **era
+> ### già** uno **STATO del nodo** nel codice — `I > Λ`, *«sotto `Λ` sei vuoto, sopra sei
+> ### materia»* *(voce `M1` della coda)*. **La strada `(ii)` non aggiunge un'ontologia: rende
+> ### la SCENA coerente con quella che il simulatore ha già.**
+>
+> **E risolve il vincolo che uccideva `(i)`:** con `A13` una massa **non può essere più densa
+> del vuoto** — stessa distanza minima per tutti — quindi *«aggiungere nodi»* dentro un vuoto
+> saturo **è impossibile per costruzione**. Se la massa non aggiunge nodi, il problema non
+> esiste.
+
+### LA GEOMETRIA, e cosa è SCELTO
+
+```
+tre regioni su un cerchio di raggio `sep` -> distanza fra i CENTRI = sep*sqrt(3) (corda 120')
+intervallo fra i BORDI = sep*sqrt(3) - 2*r      ** = R_CONN e' una SCELTA di Luca **
+raggio del VUOTO = sep + r + R_CONN            <- il minimo che contiene le tre regioni
+                                                  PIU' un guscio di R_CONN
+```
+
+**I numeri si calcolano con la semina VERA** *(`csv/_test_fork/_scene_coerenti.py`)*, **non si
+stimano**, e si committano **prima** della misura.
+
+### I DUE CRITERI IN PIÙ — **`S9` e `S10`**, fissati PRIMA *(Luca, 2026-09-25)*
+
+| | criterio | perché |
+|---|---|---|
+| **`S9`** | **al passo ZERO: intensità media DENTRO le regioni / quella del vuoto, `> 1`** — e **si riporta il valore** | ❗ **È IL CRITERIO CHE DECIDE SE LA STRADA `(ii)` ESISTE.** Se le regioni non sono **materia per il codice**, allora «massa = fase coerente» è una parola, non una scena. **E non basta «esiste un effetto»: il valore va detto**, perché `1.01` e `10` sono due fisiche diverse |
+| **`S10`** | **le regioni restano coerenti**: frazione di nodi della coorte con `I > Λ`, ai passi `0`, `30`, `60`, `120` | ❗ **SE CROLLA È UN RISULTATO, NON UN DIFETTO** *(Luca)*: direbbe che **la coerenza da sola non tiene la materia**. **Reperto e stop.** È il solo criterio di questa scheda che può dire qualcosa sulla FISICA invece che sul codice |
+
+> **⚠ E `S10` HA UN NULLO CHE VA DETTO ORA** *(presidio del valore sotto ipotesi nulla)*:
+> **fuori dalle regioni le fasi sono casuali**, quindi la frazione con `I > Λ` nel VUOTO non è
+> zero — `Λ` è la **media** di `I`, quindi per costruzione **circa metà dei nodi** ci sta
+> sopra. **Il numero che conta è il CONTRASTO fra coorte e vuoto, non il valore assoluto**, e
+> il referto deve riportare **entrambi**.
+
 ### ❗ `P-GONFIA` — **LA PREVISIONE, CON LA SUA SOGLIA NUMERICA FISSATA ORA**
 
 **La previsione di Luca:** *la crescita della mediana di `d0` nei 120 passi **CALA NETTAMENTE**
