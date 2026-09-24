@@ -1109,7 +1109,59 @@ virgola mobile.
 
 ### ⚠ **I CLAMP: uno SPARISCE, uno NASCE** *(`A11`)*
 
-### ❌ **CORREZIONE MIA: i clamp NON sono «due che spariscono». È UNO che sparisce e UNO che NASCE.**
+### ✅ **DECISIONE DI LUCA, 2026-09-24: NON SI SCRIVE NESSUN CLAMP. È UNA LEGGE.**
+
+> ### **«La lunghezza degli archi non può scendere sotto la lunghezza tipica del sistema» è una
+> ### LEGGE, non una garanzia che dipende da un flag.**
+
+**Quindi in `CURA 2` `tau_arco = d / cs_arco` si scrive COSÌ, senza `np.maximum`.** Se uno dei
+due fosse zero, **il livello NUMERICO di `C5` alza un'eccezione con la riga esatta**:
+`np.seterr(over='raise', divide='raise', invalid='raise')` a **`:7382`**. **È `A11` fatto bene:
+un limite che protegge da un errore si sostituisce con il RILEVAMENTO dell'errore.**
+
+#### ① **`d ≥ LAM`: L'INVARIANTE ESISTE — MA È GATED SU UN FLAG, ed è il difetto**
+
+`DOMINI['d'] = ('lam', …)` e `DOMINI['d0'] = ('lam', …)` **ci sono** (`:215-216`). Ma il
+controllo, a **`:3702`**, è:
+
+```python
+_lam_attivo = SCALA_MIN or SCALA_MIN_PASSO        # :3657
+…
+if _lam_attivo:
+    cattivo = ~fin | (vf < LAM * (1.0 - 1e-12));  regola = '>= LAM, con la scala minima accesa'
+else:
+    cattivo = ~fin | (vf <= 0.0);                 regola = '> 0 (scala minima SPENTA)'
+```
+
+> **Una LEGGE verificata solo quando un flag è acceso non è una legge: è un'opzione.**
+> **→ va reso INCONDIZIONATO**, ed è la voce `E4-LAM` della coda: **non lo faccio in `CURA 2`**,
+> perché cambierebbe il comportamento di una configurazione diversa da quella dei run *(a flag
+> spenti, un `d < LAM` oggi passa e domani fermerebbe il run)*, **e quella è una decisione di
+> Luca su `C5`, non un pezzo di questa cura.**
+>
+> **Per `CURA 2` non serve:** nei run `SCALA_MIN_PASSO` è **acceso**, quindi l'invariante
+> controlla `d ≥ LAM` **davvero**, e **misurato**: `min(d) = 0.800000 = LAM` esatto, `0` archi
+> sotto su `526302`.
+
+#### ② **`cs` NON PUÒ ESSERE ZERO — derivato dal codice, non misurato**
+
+```python
+_scala      = max(_Lam, 1e-30) / GAMMA_TURBO**2
+cs_floor    = CS_M / (1.0 + sqrt(_I) * sqrt(1.0/_scala))      # > 0: il denominatore e' >= 1
+cs_floor    = min(cs_floor, CS_M)                             # quindi 0 < cs_floor <= CS_M
+transizione = 0.5 * (1.0 + tanh(1.0 - u_nodo))                # in (0, 1) STRETTO
+return        cs_floor + (CS_M - cs_floor) * transizione      # >= cs_floor > 0
+```
+
+**`cs ∈ (0, CS_M]` PER COSTRUZIONE**, e `cs_arco` è la **media armonica di due numeri
+positivi**, dunque **positiva**. *(La misura concorda e non serve alla dimostrazione:
+`min(cs) = 4.3465e-01`, **`0` zeri esatti** su `2660` nodi.)*
+
+> **Quindi è un INVARIANTE, non un caso da contare** — e si aggiunge a `DOMINI`:
+> `'_cs_nodo_prev': ('pos', …)`. **Legge soltanto: su un run sano non cambia un bit.**
+> **Nel ramo `CS_DINAMICO` spento `cs_arco = CS_M` costante**, quindi positivo anche lì.
+
+### ❌ **E RESTA LA MIA CORREZIONE SUL CONTO DEI CLAMP, perché il primo pezzo era giusto**
 
 **Avevo scritto** che *«due clamp spariscono per costruzione»*. **Il secondo era falso**, e l'ho
 visto controllando invece di assumere.
@@ -1117,11 +1169,9 @@ visto controllando invece di assumere.
 | clamp | prima | dopo | verdetto |
 |---|---|---|---|
 | `max(tau_pp, 1e-12)` | **È CODICE MORTO**: `tau_pp = 1 + |tw|/PHI_CRIT` con `|tw| ≥ 0`, quindi **`tau_pp ≥ 1` SEMPRE** e il clamp è **irraggiungibile** | esce dalla formula | **sparisce, e non proteggeva nulla** |
-| `max(tau_arco, 1e-12)` | — | **NASCE, ed è VIVO** | ⚠ **UN CLAMP IN PIÙ, non in meno** |
+| `max(tau_arco, 1e-12)` | — | **NON SI SCRIVE** *(decisione di Luca)* | **`d ≥ LAM` è una legge e `cs > 0` è derivato: al posto del clamp c'è l'INVARIANTE** |
 
-**Perché è vivo:** `tau_arco = d/cs_arco` si annulla se `d = 0`, e **`d ≥ LAM` vale solo con
-`SCALA_MIN` oppure `SCALA_MIN_PASSO` accesi** *(il pavimento di `_nasce`)*. **È una dipendenza,
-e va dichiarata.**
+**Il primo pezzo resta vero e utile:** `max(tau_pp, 1e-12)` era **codice morto**, e accorgersene è il tipo di cosa che `A11` chiede. **Il secondo pezzo è caduto**: non nasce nessun clamp, perché `d ≥ LAM` è una **legge** e `cs > 0` è **derivato**.
 
 **MISURATO nel giro di `CURA 1`** *(`SCALA_MIN = False`, **`SCALA_MIN_PASSO = True`**)*:
 

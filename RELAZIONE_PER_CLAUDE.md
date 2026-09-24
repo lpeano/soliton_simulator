@@ -14042,3 +14042,70 @@ che il saldo della gravità vive sul confine** *(`−1.4150`/arco, il `107 %` de
 > **E `A2` resta rispettato:** le statistiche globali stanno **solo nel referto**. Le grandezze
 > che la legge tocca — `ampiezza_int`, `ampiezza_ev`, `rep`, `prob`, `_rep`, `grad_r` —
 > **non leggono nessuna statistica globale.**
+
+### ㉦ **La legge di `LAM` è STRUTTURALE, `cs` non può essere zero, e nessun clamp si scrive**
+
+### ✅ **(1) `d ≥ LAM`: l'invariante ESISTE — ma è GATED SU UN FLAG, ed è il difetto**
+
+`DOMINI['d'] = ('lam', …)` e `DOMINI['d0']` **ci sono** (`:215-216`). **Ma il controllo è
+condizionato** (`:3657`, `:3702`):
+
+```python
+_lam_attivo = SCALA_MIN or SCALA_MIN_PASSO
+…
+if _lam_attivo:  cattivo = ~fin | (vf < LAM * (1.0 - 1e-12))   # '>= LAM, con la scala minima accesa'
+else:            cattivo = ~fin | (vf <= 0.0)                  # '> 0 (scala minima SPENTA)'
+```
+
+> **Una legge verificata solo quando un flag è acceso non è una legge: è un'opzione.**
+
+**Non lo sblocco in `CURA 2`**, e la ragione è concreta: a flag spenti un `d < LAM` **oggi
+passa** e **domani fermerebbe il run** con riga e indici. **È un cambiamento a `C5`, e la
+decisione è tua** → voce **`E4-LAM`**.
+
+**Per `CURA 2` non serve:** nei run `SCALA_MIN_PASSO` è **acceso**, quindi l'invariante controlla
+`d ≥ LAM` **davvero** — e misurato: **`min(d) = 0.800000 = LAM` esatto, `0` archi sotto su
+`526302`**.
+
+### ✅ **(2) `cs` NON può essere zero — DERIVATO dal codice, non misurato**
+
+```python
+cs_floor    = CS_M / (1.0 + sqrt(_I) * sqrt(1.0/_scala))   # denominatore >= 1  ->  > 0
+cs_floor    = min(cs_floor, CS_M)                          # 0 < cs_floor <= CS_M
+transizione = 0.5 * (1.0 + tanh(1.0 - u_nodo))             # in (0, 1) STRETTO
+return        cs_floor + (CS_M - cs_floor) * transizione    # >= cs_floor > 0
+```
+
+**`cs ∈ (0, CS_M]` per costruzione**, e `cs_arco` è la **media armonica di due positivi**, dunque
+positiva. *(La misura concorda e non serve alla dimostrazione: `min(cs) = 4.3465e-01`, **zero**
+zeri esatti su `2660`.)* **Nel ramo `CS_DINAMICO` spento è `CS_M` costante.**
+
+> **Quindi è un INVARIANTE, non un caso da contare**, e lo aggiungo a `DOMINI`:
+> `'_cs_nodo_prev': ('pos', …)`. **Legge soltanto: su un run sano non cambia un bit.**
+
+### ✅ **Conseguenza: in `CURA 2` `tau_arco = d / cs_arco` si scrive SENZA `np.maximum`**
+
+Se uno dei due fosse zero, **il livello NUMERICO di `C5` alza un'eccezione con la riga esatta**
+— `np.seterr(divide='raise', invalid='raise', over='raise')` a **`:7382`**.
+**È `A11` fatto bene: un limite che protegge da un errore si sostituisce col RILEVAMENTO
+dell'errore.**
+
+**E cade metà della mia correzione precedente:** il pezzo su `max(tau_pp, 1e-12)` *(codice
+morto)* **resta vero e utile**; il pezzo sul *«clamp che nasce»* **è caduto** — non nasce nessun
+clamp.
+
+### ✅✅ **(3) E questo RIBALTA il modo di leggere `D31`**
+
+> **La legge è giusta. L'implementazione no.**
+
+**La realizzazione OGGI di *«nessuna lunghezza sotto `LAM`»* è il FRENO A SENSO UNICO**, cioè
+**esattamente `D31`**: si frena la discesa e non la salita, e da lì viene il cricchetto
+*(dimostrato sulla formula, `Z113`, scarto `0.0 %`)*.
+
+**Quindi `D31` non si cura togliendo il pavimento: il pavimento È la legge.** Si cura **cambiando
+come la si realizza**, e la forma giusta non è un freno asimmetrico. **Scritto in `D31` e nella
+voce `E4-LAM`.**
+
+> **⚠ E c'è un secondo strato, che il tuo rilievo fa emergere:** oggi quella legge **non è
+> nemmeno verificata sempre**. Quindi il sistema ha **una legge giusta, realizzata male, e
+> controllata solo a volte.**
