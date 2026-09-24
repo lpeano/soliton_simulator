@@ -13401,3 +13401,57 @@ e **`--tw-spinore` non compare in nessun lanciatore committato** a nessuno di qu
 > **Apre:** è il caso **INVERSA** della mappa del `4π` — **la torsione che pilota il Bloch**,
 > cioè il `4π` **finto** che comanda il `4π` **vero**. È spento **oggi**, e l'architettura a un
 > solo ponte deve dire **se può esistere affatto**.
+
+### ㉛ **(1c) `S10` è RITIRATA: la premessa era sbagliata DUE volte**
+
+> **Reperto.** Il sospetto era mio, e il dubbio che gettava su `Z117`/`Z123` **non era
+> fondato.**
+
+**① L'errore che hai indicato tu.** `_g_temposegno_tot` sale a **`:4406`**, **prima** del
+controllo `if TEMPO_SEGNO`, **e in una funzione diversa da `ritmo()`**. Conta le
+**invocazioni**, non il ramo attivo: **varrebbe `600` col flag acceso o spento.** Io avevo
+letto `= 600` come *«il ramo `TEMPO_SEGNO` ha girato 600 volte»*.
+
+**② L'errore che il primo nascondeva, ed è più grosso: `TEMPO_SEGNO` è `False`.** In **9 run
+su 11**, e `--tempo-segno` **non compare in nessun lanciatore committato**. **Quindi il ramo
+che chiamavo «vivo» non gira, e quello che chiamavo «morto» è il vivo. Ho scambiato i due
+rami.**
+
+### ✅ **Quindi `Z117` e `Z123` erano corretti, e il mio dubbio no**
+
+Il tetto del ramo vivo è **`(1+10⁻⁶)/(1/√2+10⁻⁶) = 1.414213`**, e **si misura**:
+
+| passo | `min r` | `med r` | `max r` | nodi al tetto |
+|--:|--:|--:|--:|--:|
+| 120 | `0.000108711` | `1.018363` | `1.414212967` | `0.76 %` |
+| 240 | `0.000070231` | `0.593971` | `1.414212936` | `1.19 %` |
+| 360 | **`0.000001414`** | `0.763052` | `1.414209114` | `0.83 %` |
+| 480 | `0.000047600` | `0.344277` | `1.414212577` | `3.35 %` |
+| 600 | `0.010278019` | `1.408827` | `1.414212974` | **`29.57 %`** |
+
+**Il `min` al passo 360 è `1.414e-06`**, che non è un numero qualunque: è
+`10⁻⁶/(1/√2+10⁻⁶)`, cioè **`x = 0`** — quello che il codice stesso chiama *«la FIRMA DEL
+DIFETTO»*. **È esattamente la coppia che `Z117`/`Z123` citavano.**
+
+### **Lezione di metodo, ed è `P1` sul mio stesso testo**
+
+Ho dedotto **quale ramo girasse da un contatore**, senza verificare **dove il contatore
+stesse** rispetto al controllo del flag, e **senza verificare il valore del flag**. **Due
+verifiche omesse nella stessa frase.**
+
+> **Ed è il caso che ha motivato il referto di configurazione:** se `CONFIGURAZIONE.txt` fosse
+> esistito, **`TEMPO_SEGNO = False` sarebbe stata una riga da leggere** invece di una deduzione
+> da sbagliare.
+
+### ⚠ **Un sospetto nuovo ne esce, e va IN CODA — `S11`**
+
+**La quota di nodi con `r` al tetto passa da `0.76 %` a `29.57 %` in 600 passi**, e
+`median(r)` oscilla di un **fattore 4** *(`1.018` / `0.594` / `0.763` / `0.344` / `1.409`)*
+quando il gauge lo ancorerebbe a `1`. **`A11` cor.6: un limite che satura è un allarme.**
+
+**E NON è un difetto della cura dell'anello istantaneo:** il gauge è il `median(|f|)` del passo
+**precedente** *(categoria D, 18/9, che ha rotto il punto fisso di `A6`/`A3` **di proposito**)*.
+Ricostruendo `r` col `median` **corrente** si ottiene **mediana `1.000000` esatta**, cioè il
+punto fisso pre-cura: **la differenza è la cura, non un errore.**
+**Ciò che non so è perché lo sfasamento produca una saturazione del 30 %, e non lo inseguo
+adesso** *(`A12` regola 1)*.
