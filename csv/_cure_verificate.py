@@ -81,6 +81,21 @@ CURE = [
      "✅✅ **APPROVATA DA LUCA il 2026-09-24. IL DRIVER LA ACCENDE IN OGNI RUN** "
      "*(`--ritmo-wrap-2pi`)*. Default nel sorgente **`False`**, come tutte le cure "
      "pre-epoca-3. **`D34` passa da difetto aperto a CURA IN CODICE.**"),
+    ("CHI_COOP", "**COOPERAZIONE**: la GEOMETRIA in `perc_geom`, la CARICA in `perc_chi`",
+     "⚠ *(vedi stato)*", None,
+     "✅ **in OGNI run da `G3` in poi** -- e' **una delle TRE leggi che DEFINISCONO l'EPOCA 2** "
+     "(`CLAUDE.md` par.9-bis)",
+     "`chi_basc` NON si spegne per accendere lo spinore: i due fanno lavori DIVERSI e devono "
+     "COOPERARE. Spegnere `chi_basc` toglierebbe la GEOMETRIA insieme alla CARICA, e **un "
+     "confronto con due variabili cambiate insieme non si legge**",
+     "⚠⚠ **ERA FUORI DA QUESTA TABELLA FINO AL 2026-09-24**, e per questo il sigillo del "
+     "driver **non poteva vederla**: era passata `=on` da ogni comando di campagna mentre il "
+     "default del driver diceva `\"off\"`. **ORFANO FUORI DALLA LISTA** -- il caso che il "
+     "controllo delle orfane doveva impedire *(rilievo di Luca)*. "
+     "**⚠ E IL SUO SIGILLO NON E' RIGIRABILE COM'ERA:** `csv/_seal_fork/_sigillo_chicoop.py` "
+     "si schiantava sull'invariante `d >= LAM` perche' la sua argv era ferma a prima delle "
+     "cure (**`Z148`**). **Argv aggiornata; l'esito va RIPRESO.** "
+     "Ora **ACCESA DAL DRIVER** *(`--chi-coop`)*"),
     ("TEMPO_UNICO_MITOSI", "**`CURA 2`** UN SOLO OROLOGIO dentro `mitosi()`",
      "⏸ *(l'esito si legge dal referto)*", "csv/_seal_fork/_sig_cura2/REFERTO.txt",
      "✅ **giro corto di 120 passi contro `_cura1_corto`** *(un interruttore di differenza, "

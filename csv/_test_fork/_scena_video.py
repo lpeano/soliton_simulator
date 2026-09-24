@@ -86,13 +86,18 @@ SEP = "8"
 # ⚠ E NON E' UNA MODIFICA AL SIMULATORE: `CHI_BASC = False` e' gia' il default di MODULO (`:746`).
 #   Era il DRIVER ad accenderlo. Qui si rende esplicito un interruttore che c'era gia'.
 CHIBASC = "on"
-# [RAMO C a cooperazione, 2026-09-21] --chi-coop=on|off NOMINALE, DEFAULT `off`.
-# ⚠ QUI IL DEFAULT E' `off` E NON `on`, ed e' l'opposto di `--chi-basc`: la ragione e' la
-#   stessa in entrambi i casi -- il default e' quello che riproduce il comportamento
-#   ATTUALE VERBATIM. Il driver non ha MAI passato `--chi-coop` (il flag nasce oggi), quindi
-#   `off` e' l'unico default che lascia l'argv identico elemento per elemento.
-#   Lo prova `csv/_seal_fork/_sigillo_chicoop_driver.py`, non questo commento.
-CHICOOP = "off"
+# [RAMO C a cooperazione, 2026-09-21] --chi-coop=on|off NOMINALE.
+# ⚠ IL DEFAULT ERA `off`, ED E' PASSATO A `on` IL 2026-09-24. La ragione del `off` era
+#   valida QUANDO il flag nasceva: *il default e' quello che riproduce il comportamento
+#   ATTUALE VERBATIM*, e il driver non aveva mai passato `--chi-coop`.
+#   ⚠⚠ MA DA `G3` IN POI OGNI COMANDO DI CAMPAGNA HA PASSATO `--chi-coop=on`, e il default
+#   e' rimasto `off`: **il comportamento attuale non era piu' quello che il default
+#   riproduceva.** La ragione era scaduta e il default no.
+CHICOOP = "on"          # [2026-09-24] ACCESA DAL DRIVER. E' una delle TRE leggi che
+                        # DEFINISCONO L'EPOCA 2 (`CLAUDE.md` par.9-bis) ed era passata
+                        # `=on` da OGNI comando di campagna mentre il default diceva
+                        # `"off"`: **il sigillo non la vedeva perche' non e' in
+                        # `_cure_verificate.py` -- ORFANO FUORI DALLA LISTA.**
 # [RAMO D, 2026-09-21] --scala-min=on|off e --coes-adim=on|off, DEFAULT `off` entrambi, per la
 # stessa ragione di `--chi-coop`: il default e' quello che lascia l'argv IDENTICO elemento per
 # elemento a quello di prima. Lo prova il sigillo, non questo commento.
@@ -124,7 +129,9 @@ COESADIM = "on"
 #   **Un'opzione che «passa dritta» passa dritta anche nei POSIZIONALI.**
 #   Si parsa e si inoltra **VERBATIM**, senza tradurla in booleano: cosi' non esiste nessuna
 #   traduzione che possa divergere -- che era la ragione vera della scelta iniziale.
-INVARIANTI_OPT = None
+INVARIANTI_OPT = "on"   # [2026-09-24] ESPLICITO, non piu' `None`. Il default del sorgente
+                        # e' gia' `True`, quindi NON cambia cio' che gira -- cambia che
+                        # **l'argv lo DICE**, e `NUDA` e `CAMPAGNA` coincidono anche qui.
 PEQESATTO = "on"
 PEQNASCITA = "on"
 SCALAMINPASSO = "on"

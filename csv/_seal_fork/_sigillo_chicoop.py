@@ -74,7 +74,19 @@ if "--lavoro" in sys.argv:
                 "--chi-core", "--calore-scal", "--deparam-orologio", "--verlet", "--fork-su2",
                 "--fork-su2-mem", "--cs-dinamico", "--tau-luce", "--rumore-colorato",
                 "--pav-com", "--guscio-morbido", "--zeta-vir", "--chi-basc", "--plast-din",
-                "--viriale", "--olon-part"] + (["--chi-coop"] if coop else [])
+                "--viriale", "--olon-part",
+                # [2026-09-24, `Z148`] LE CURE CHE IL DRIVER ACCENDE. **Senza, questo sigillo
+                # SI SCHIANTA** sull'invariante `d >= LAM`, che `E4-LAM` ha reso
+                # incondizionato: `223 396` archi su `526 047` sotto `LAM` gia' al passo 1.
+                # **Non e' il sigillo a essere rotto: era la sua argv ferma a prima che le
+                # cure esistessero** -- la stessa famiglia del `23/23` dello Strato 1 che non
+                # aveva mai esercitato `cs`.
+                # **NON si spegne l'invariante:** spegnerlo nasconderebbe proprio la misura
+                # di `Z148`, cioe' che la legge regge PERCHE' una cura e' accesa.
+                "--scala-min-passo", "--peq-esatto", "--peq-nascita-locale",
+                "--coes-causale", "--anom-simm", "--coes-adim",
+                "--ritmo-wrap-2pi", "--tempo-unico-mitosi",
+                ] + (["--chi-coop"] if coop else [])
     import importlib.util as _iu
     _sp = _iu.spec_from_file_location("_sim_x", simp)
     S = _iu.module_from_spec(_sp)
