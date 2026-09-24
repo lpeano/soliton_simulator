@@ -1,0 +1,304 @@
+[TIMBRO] _ricostruisci_config.py  sha1-BYTE 0fd8b254  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
+# LA RICOSTRUZIONE DELLA CONFIGURAZIONE DEI RUN GIA' FATTI
+#
+# GENERATA da `csv/_test_fork/_ricostruisci_config.py`. Fonti, in ordine:
+#   argv (dal driver COMMITTATO a quel commit) . banner del log . default del blob
+# Cio' che non si ricostruisce e' scritto NON RICOSTRUITO, col motivo.
+#
+==============================================================================================================
+LA PROVENIENZA DI OGNI RUN -- e la VERIFICA della corrispondenza campagna/cartella
+==============================================================================================================
+campagna             commit     banner?   modo    cartella
+--------------------------------------------------------------------------------------------------------------
+G1  (video 6000)     94e2ec07   15 flag   -       csv/_test_fork/_gvideo
+G2  (g2m)            2b0a19f9   15 flag   -       csv/_test_fork/_g2m
+validazione 600      691b7e99   NO        -       csv/_test_fork/_val600
+G3  controllo        NON RIC.   24 flag   --controllo (nessuna)
+G3  senza bifase     abc5b49f   24 flag   --prova csv/_test_fork/_g3_senza_bifase
+G4  controllo        NON RIC.   24 flag   --controllo csv/_test_fork/_g4_controllo
+G4  riferimento      bc30e626   24 flag   --riferimento csv/_test_fork/_g4_riferimento
+G4  spegni           49a4cb2e   24 flag   --spegni csv/_test_fork/_g4_senza_memmoto
+G4-bis               26c4165c   24 flag   --spegni-tutto csv/_test_fork/_g4bis_senza_blocco
+D34 ritmo-wrap       8ec9e248   24 flag   --ritmo-wrap csv/_test_fork/_d34_ritmo_wrap
+FASE_2PI corto       b5e9a9ac   24 flag   --fase-2pi-corto csv/_test_fork/_f2p_corto
+
+  NOTA: `commit` viene DALLO SNAPSHOT (`d['commit']`), non dal log: e' il timbro che
+  il run si e' messo da solo. Dove manca, non c'e' snapshot da cui leggerlo.
+
+==============================================================================================================
+I FLAG DEL PUNTO 3 -- valore + FONTE, per ogni run
+==============================================================================================================
+
+--- CAMPO_SPINORIALE
+    G1  (video 6000)     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G2  (g2m)            True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    validazione 600      ?         !! default del blob, MA `--campo-spinoriale` compare in csv/_test_fork/_scena_video.py: il valore dipende dall'argv e il banner non lo elenca -> NON RICOSTRUITO
+    G3  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G3  senza bifase     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  riferimento      True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  spegni           True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4-bis               True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    D34 ritmo-wrap       True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    FASE_2PI corto       True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+
+--- SPINORE_VIVO
+    G1  (video 6000)     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G2  (g2m)            True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    validazione 600      True      FONTE: default del blob 691b7e99, E l'opzione `--senza-spinore-vivo` NON compare in nessun lanciatore committato -> il default VALE
+    G3  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G3  senza bifase     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  riferimento      True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  spegni           True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4-bis               True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    D34 ritmo-wrap       True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    FASE_2PI corto       True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+
+--- SPINORE_CORRETTO
+    G1  (video 6000)     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G2  (g2m)            True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    validazione 600      ?         !! default del blob, MA `--spinore-corretto` compare in csv/_test_fork/_scena_video.py: il valore dipende dall'argv e il banner non lo elenca -> NON RICOSTRUITO
+    G3  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G3  senza bifase     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  riferimento      True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  spegni           True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4-bis               True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    D34 ritmo-wrap       True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    FASE_2PI corto       True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+
+--- TEMPO_SEGNO
+    G1  (video 6000)     False     FONTE: default del blob 94e2ec07, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G2  (g2m)            False     FONTE: default del blob 2b0a19f9, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    validazione 600      False     FONTE: default del blob 691b7e99, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G3  controllo        ?         NON RICOSTRUITO: nessuno snapshot, quindi nessun commit, e il log non porta il banner
+    G3  senza bifase     False     FONTE: default del blob abc5b49f, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G4  controllo        ?         NON RICOSTRUITO: nessuno snapshot, quindi nessun commit, e il log non porta il banner
+    G4  riferimento      False     FONTE: default del blob bc30e626, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G4  spegni           False     FONTE: default del blob 49a4cb2e, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G4-bis               False     FONTE: default del blob 26c4165c, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    D34 ritmo-wrap       False     FONTE: default del blob 8ec9e248, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+    FASE_2PI corto       False     FONTE: default del blob b5e9a9ac, E l'opzione `--tempo-segno` NON compare in nessun lanciatore committato -> il default VALE
+
+--- SCALA_MIN
+    G1  (video 6000)     -         NON RICOSTRUITO: il flag NON ESISTE nel blob di questo run
+    G2  (g2m)            -         NON RICOSTRUITO: il flag NON ESISTE nel blob di questo run
+    validazione 600      ?         !! default del blob, MA `--scala-min` compare in csv/_test_fork/_scena_video.py: il valore dipende dall'argv e il banner non lo elenca -> NON RICOSTRUITO
+    G3  controllo        False     FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G3  senza bifase     False     FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  controllo        False     FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  riferimento      False     FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  spegni           False     FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4-bis               False     FONTE: banner del log (stato EFFETTIVO dal modulo)
+    D34 ritmo-wrap       False     FONTE: banner del log (stato EFFETTIVO dal modulo)
+    FASE_2PI corto       False     FONTE: banner del log (stato EFFETTIVO dal modulo)
+
+--- SCALA_MIN_PASSO
+    G1  (video 6000)     -         NON RICOSTRUITO: il flag NON ESISTE nel blob di questo run
+    G2  (g2m)            -         NON RICOSTRUITO: il flag NON ESISTE nel blob di questo run
+    validazione 600      ?         !! default del blob, MA `--scala-min-passo` compare in csv/_test_fork/_scena_video.py: il valore dipende dall'argv e il banner non lo elenca -> NON RICOSTRUITO
+    G3  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G3  senza bifase     True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  controllo        True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  riferimento      True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  spegni           True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4-bis               True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    D34 ritmo-wrap       True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+    FASE_2PI corto       True      FONTE: banner del log (stato EFFETTIVO dal modulo)
+
+--- OROLOGIO_SEGNO
+    G1  (video 6000)     False     FONTE: default del blob 94e2ec07, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G2  (g2m)            False     FONTE: default del blob 2b0a19f9, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    validazione 600      False     FONTE: default del blob 691b7e99, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G3  controllo        ?         NON RICOSTRUITO: nessuno snapshot, quindi nessun commit, e il log non porta il banner
+    G3  senza bifase     False     FONTE: default del blob abc5b49f, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G4  controllo        ?         NON RICOSTRUITO: nessuno snapshot, quindi nessun commit, e il log non porta il banner
+    G4  riferimento      False     FONTE: default del blob bc30e626, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G4  spegni           False     FONTE: default del blob 49a4cb2e, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    G4-bis               False     FONTE: default del blob 26c4165c, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    D34 ritmo-wrap       False     FONTE: default del blob 8ec9e248, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+    FASE_2PI corto       False     FONTE: default del blob b5e9a9ac, E l'opzione `--orologio-segno` NON compare in nessun lanciatore committato -> il default VALE
+
+--- TAU_LOC
+    G1  (video 6000)     1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G2  (g2m)            1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
+    validazione 600      1.0       FONTE: default del blob 691b7e99, E l'opzione `--tauloc` NON compare in nessun lanciatore committato -> il default VALE
+    G3  controllo        1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G3  senza bifase     1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  controllo        1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  riferimento      1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4  spegni           1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
+    G4-bis               1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
+    D34 ritmo-wrap       1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
+    FASE_2PI corto       1.0       FONTE: banner del log (stato EFFETTIVO dal modulo)
+
+==============================================================================================================
+LA TABELLA COMPLETA, dai BANNER -- i 24 flag che i log stampano
+==============================================================================================================
+flag                   G1        G2        G3        G3        G4        G4        G4        G4-bis    D34       FASE_2PI 
+--------------------------------------------------------------------------------------------------------------
+ANOM_SIMM              -         -         True      True      True      True      True      True      True      True     
+CALORE_VETTORIALE      False     False     False     False     False     False     False     False     False     False    
+CAMPO_SPINORIALE       True      True      True      True      True      True      True      True      True      True     
+CHI_BASC               True      True      True      True      True      True      True      True      True      True     
+CHI_COOP               -         -         True      True      True      True      True      True      True      True     
+CHI_CORE               True      True      True      True      True      True      True      True      True      True     
+COES_ADIM              -         -         True      True      True      True      True      True      True      True     
+COES_CAUSALE           -         -         True      True      True      True      True      True      True      True     
+CS_DINAMICO            True      True      True      True      True      True      True      True      True      True     
+FORK_SU2               True      True      True      True      True      True      True      True      True      True     
+FORK_SU2_MEM           True      True      True      True      True      True      True      True      True      True     
+INVARIANTI             -         -         True      True      True      True      True      True      True      True     
+PEQ_ESATTO             -         -         True      True      True      True      True      True      True      True     
+PEQ_NASCITA_LOCALE     -         -         True      True      True      True      True      True      True      True     
+PLAST_DIN              True      True      True      True      True      True      True      True      True      True     
+SCALA_MIN              -         -         False     False     False     False     False     False     False     False    
+SCALA_MIN_PASSO        -         -         True      True      True      True      True      True      True      True     
+SPINORE_CORRETTO       True      True      True      True      True      True      True      True      True      True     
+SPINORE_VIVO           True      True      True      True      True      True      True      True      True      True     
+SPIN_FEEDBACK          True      True      True      True      True      True      True      True      True      True     
+STEP2_OROLOGIO         True      True      True      True      True      True      True      True      True      True     
+TAU_LOC                1.0       1.0       1.0       1.0       1.0       1.0       1.0       1.0       1.0       1.0      
+TAU_LUCE               True      True      True      True      True      True      True      True      True      True     
+VERLET                 True      True      True      True      True      True      True      True      True      True     
+
+  `-` = il log di quel run non elenca quel flag nel banner (il banner e' cambiato
+  nel tempo: e' una lista A MANO nel driver, ed e' cresciuta).
+
+==============================================================================================================
+CONTRADDIZIONI FRA FONTI -- banner contro default del blob
+==============================================================================================================
+  G1  (video 6000)   CALORE_VETTORIALE      banner False  default True   -> SPIEGATA: l'opzione `--calore-vett` la cambia
+  G1  (video 6000)   CAMPO_SPINORIALE       banner True   default False  -> SPIEGATA: l'opzione `--campo-spinoriale` la cambia
+  G1  (video 6000)   CHI_BASC               banner True   default False  -> SPIEGATA: l'opzione `--chi-basc` la cambia
+  G1  (video 6000)   CHI_CORE               banner True   default False  -> SPIEGATA: l'opzione `--chi-core` la cambia
+  G1  (video 6000)   CS_DINAMICO            banner True   default False  -> SPIEGATA: l'opzione `--cs-dinamico` la cambia
+  G1  (video 6000)   FORK_SU2               banner True   default False  -> SPIEGATA: l'opzione `--fork-su2` la cambia
+  G1  (video 6000)   FORK_SU2_MEM           banner True   default False  -> SPIEGATA: l'opzione `--fork-su2-mem` la cambia
+  G1  (video 6000)   PLAST_DIN              banner True   default False  -> SPIEGATA: l'opzione `--plast-din` la cambia
+  G1  (video 6000)   SPINORE_CORRETTO       banner True   default False  -> SPIEGATA: l'opzione `--spinore-corretto` la cambia
+  G1  (video 6000)   TAU_LUCE               banner True   default False  -> SPIEGATA: l'opzione `--tau-luce` la cambia
+  G1  (video 6000)   VERLET                 banner True   default False  -> SPIEGATA: l'opzione `--verlet` la cambia
+  G2  (g2m)          CALORE_VETTORIALE      banner False  default True   -> SPIEGATA: l'opzione `--calore-vett` la cambia
+  G2  (g2m)          CAMPO_SPINORIALE       banner True   default False  -> SPIEGATA: l'opzione `--campo-spinoriale` la cambia
+  G2  (g2m)          CHI_BASC               banner True   default False  -> SPIEGATA: l'opzione `--chi-basc` la cambia
+  G2  (g2m)          CHI_CORE               banner True   default False  -> SPIEGATA: l'opzione `--chi-core` la cambia
+  G2  (g2m)          CS_DINAMICO            banner True   default False  -> SPIEGATA: l'opzione `--cs-dinamico` la cambia
+  G2  (g2m)          FORK_SU2               banner True   default False  -> SPIEGATA: l'opzione `--fork-su2` la cambia
+  G2  (g2m)          FORK_SU2_MEM           banner True   default False  -> SPIEGATA: l'opzione `--fork-su2-mem` la cambia
+  G2  (g2m)          PLAST_DIN              banner True   default False  -> SPIEGATA: l'opzione `--plast-din` la cambia
+  G2  (g2m)          SPINORE_CORRETTO       banner True   default False  -> SPIEGATA: l'opzione `--spinore-corretto` la cambia
+  G2  (g2m)          TAU_LUCE               banner True   default False  -> SPIEGATA: l'opzione `--tau-luce` la cambia
+  G2  (g2m)          VERLET                 banner True   default False  -> SPIEGATA: l'opzione `--verlet` la cambia
+  G3  senza bifase   ANOM_SIMM              banner True   default False  -> SPIEGATA: l'opzione `--anom-simm` la cambia
+  G3  senza bifase   CALORE_VETTORIALE      banner False  default True   -> SPIEGATA: l'opzione `--calore-vett` la cambia
+  G3  senza bifase   CAMPO_SPINORIALE       banner True   default False  -> SPIEGATA: l'opzione `--campo-spinoriale` la cambia
+  G3  senza bifase   CHI_BASC               banner True   default False  -> SPIEGATA: l'opzione `--chi-basc` la cambia
+  G3  senza bifase   CHI_COOP               banner True   default False  -> SPIEGATA: l'opzione `--chi-coop` la cambia
+  G3  senza bifase   CHI_CORE               banner True   default False  -> SPIEGATA: l'opzione `--chi-core` la cambia
+  G3  senza bifase   COES_ADIM              banner True   default False  -> SPIEGATA: l'opzione `--coes-adim` la cambia
+  G3  senza bifase   COES_CAUSALE           banner True   default False  -> SPIEGATA: l'opzione `--coes-causale` la cambia
+  G3  senza bifase   CS_DINAMICO            banner True   default False  -> SPIEGATA: l'opzione `--cs-dinamico` la cambia
+  G3  senza bifase   FORK_SU2               banner True   default False  -> SPIEGATA: l'opzione `--fork-su2` la cambia
+  G3  senza bifase   FORK_SU2_MEM           banner True   default False  -> SPIEGATA: l'opzione `--fork-su2-mem` la cambia
+  G3  senza bifase   PEQ_ESATTO             banner True   default False  -> SPIEGATA: l'opzione `--peq-esatto` la cambia
+  G3  senza bifase   PEQ_NASCITA_LOCALE     banner True   default False  -> SPIEGATA: l'opzione `--peq-nascita-locale` la cambia
+  G3  senza bifase   PLAST_DIN              banner True   default False  -> SPIEGATA: l'opzione `--plast-din` la cambia
+  G3  senza bifase   SCALA_MIN_PASSO        banner True   default False  -> SPIEGATA: l'opzione `--scala-min-passo` la cambia
+  G3  senza bifase   SPINORE_CORRETTO       banner True   default False  -> SPIEGATA: l'opzione `--spinore-corretto` la cambia
+  G3  senza bifase   TAU_LUCE               banner True   default False  -> SPIEGATA: l'opzione `--tau-luce` la cambia
+  G3  senza bifase   VERLET                 banner True   default False  -> SPIEGATA: l'opzione `--verlet` la cambia
+  G4  riferimento    ANOM_SIMM              banner True   default False  -> SPIEGATA: l'opzione `--anom-simm` la cambia
+  G4  riferimento    CALORE_VETTORIALE      banner False  default True   -> SPIEGATA: l'opzione `--calore-vett` la cambia
+  G4  riferimento    CAMPO_SPINORIALE       banner True   default False  -> SPIEGATA: l'opzione `--campo-spinoriale` la cambia
+  G4  riferimento    CHI_BASC               banner True   default False  -> SPIEGATA: l'opzione `--chi-basc` la cambia
+  G4  riferimento    CHI_COOP               banner True   default False  -> SPIEGATA: l'opzione `--chi-coop` la cambia
+  G4  riferimento    CHI_CORE               banner True   default False  -> SPIEGATA: l'opzione `--chi-core` la cambia
+  G4  riferimento    COES_ADIM              banner True   default False  -> SPIEGATA: l'opzione `--coes-adim` la cambia
+  G4  riferimento    COES_CAUSALE           banner True   default False  -> SPIEGATA: l'opzione `--coes-causale` la cambia
+  G4  riferimento    CS_DINAMICO            banner True   default False  -> SPIEGATA: l'opzione `--cs-dinamico` la cambia
+  G4  riferimento    FORK_SU2               banner True   default False  -> SPIEGATA: l'opzione `--fork-su2` la cambia
+  G4  riferimento    FORK_SU2_MEM           banner True   default False  -> SPIEGATA: l'opzione `--fork-su2-mem` la cambia
+  G4  riferimento    PEQ_ESATTO             banner True   default False  -> SPIEGATA: l'opzione `--peq-esatto` la cambia
+  G4  riferimento    PEQ_NASCITA_LOCALE     banner True   default False  -> SPIEGATA: l'opzione `--peq-nascita-locale` la cambia
+  G4  riferimento    PLAST_DIN              banner True   default False  -> SPIEGATA: l'opzione `--plast-din` la cambia
+  G4  riferimento    SCALA_MIN_PASSO        banner True   default False  -> SPIEGATA: l'opzione `--scala-min-passo` la cambia
+  G4  riferimento    SPINORE_CORRETTO       banner True   default False  -> SPIEGATA: l'opzione `--spinore-corretto` la cambia
+  G4  riferimento    TAU_LUCE               banner True   default False  -> SPIEGATA: l'opzione `--tau-luce` la cambia
+  G4  riferimento    VERLET                 banner True   default False  -> SPIEGATA: l'opzione `--verlet` la cambia
+  G4  spegni         ANOM_SIMM              banner True   default False  -> SPIEGATA: l'opzione `--anom-simm` la cambia
+  G4  spegni         CALORE_VETTORIALE      banner False  default True   -> SPIEGATA: l'opzione `--calore-vett` la cambia
+  G4  spegni         CAMPO_SPINORIALE       banner True   default False  -> SPIEGATA: l'opzione `--campo-spinoriale` la cambia
+  G4  spegni         CHI_BASC               banner True   default False  -> SPIEGATA: l'opzione `--chi-basc` la cambia
+  G4  spegni         CHI_COOP               banner True   default False  -> SPIEGATA: l'opzione `--chi-coop` la cambia
+  G4  spegni         CHI_CORE               banner True   default False  -> SPIEGATA: l'opzione `--chi-core` la cambia
+  G4  spegni         COES_ADIM              banner True   default False  -> SPIEGATA: l'opzione `--coes-adim` la cambia
+  G4  spegni         COES_CAUSALE           banner True   default False  -> SPIEGATA: l'opzione `--coes-causale` la cambia
+  G4  spegni         CS_DINAMICO            banner True   default False  -> SPIEGATA: l'opzione `--cs-dinamico` la cambia
+  G4  spegni         FORK_SU2               banner True   default False  -> SPIEGATA: l'opzione `--fork-su2` la cambia
+  G4  spegni         FORK_SU2_MEM           banner True   default False  -> SPIEGATA: l'opzione `--fork-su2-mem` la cambia
+  G4  spegni         PEQ_ESATTO             banner True   default False  -> SPIEGATA: l'opzione `--peq-esatto` la cambia
+  G4  spegni         PEQ_NASCITA_LOCALE     banner True   default False  -> SPIEGATA: l'opzione `--peq-nascita-locale` la cambia
+  G4  spegni         PLAST_DIN              banner True   default False  -> SPIEGATA: l'opzione `--plast-din` la cambia
+  G4  spegni         SCALA_MIN_PASSO        banner True   default False  -> SPIEGATA: l'opzione `--scala-min-passo` la cambia
+  G4  spegni         SPINORE_CORRETTO       banner True   default False  -> SPIEGATA: l'opzione `--spinore-corretto` la cambia
+  G4  spegni         TAU_LUCE               banner True   default False  -> SPIEGATA: l'opzione `--tau-luce` la cambia
+  G4  spegni         VERLET                 banner True   default False  -> SPIEGATA: l'opzione `--verlet` la cambia
+  G4-bis             ANOM_SIMM              banner True   default False  -> SPIEGATA: l'opzione `--anom-simm` la cambia
+  G4-bis             CALORE_VETTORIALE      banner False  default True   -> SPIEGATA: l'opzione `--calore-vett` la cambia
+  G4-bis             CAMPO_SPINORIALE       banner True   default False  -> SPIEGATA: l'opzione `--campo-spinoriale` la cambia
+  G4-bis             CHI_BASC               banner True   default False  -> SPIEGATA: l'opzione `--chi-basc` la cambia
+  G4-bis             CHI_COOP               banner True   default False  -> SPIEGATA: l'opzione `--chi-coop` la cambia
+  G4-bis             CHI_CORE               banner True   default False  -> SPIEGATA: l'opzione `--chi-core` la cambia
+  G4-bis             COES_ADIM              banner True   default False  -> SPIEGATA: l'opzione `--coes-adim` la cambia
+  G4-bis             COES_CAUSALE           banner True   default False  -> SPIEGATA: l'opzione `--coes-causale` la cambia
+  G4-bis             CS_DINAMICO            banner True   default False  -> SPIEGATA: l'opzione `--cs-dinamico` la cambia
+  G4-bis             FORK_SU2               banner True   default False  -> SPIEGATA: l'opzione `--fork-su2` la cambia
+  G4-bis             FORK_SU2_MEM           banner True   default False  -> SPIEGATA: l'opzione `--fork-su2-mem` la cambia
+  G4-bis             PEQ_ESATTO             banner True   default False  -> SPIEGATA: l'opzione `--peq-esatto` la cambia
+  G4-bis             PEQ_NASCITA_LOCALE     banner True   default False  -> SPIEGATA: l'opzione `--peq-nascita-locale` la cambia
+  G4-bis             PLAST_DIN              banner True   default False  -> SPIEGATA: l'opzione `--plast-din` la cambia
+  G4-bis             SCALA_MIN_PASSO        banner True   default False  -> SPIEGATA: l'opzione `--scala-min-passo` la cambia
+  G4-bis             SPINORE_CORRETTO       banner True   default False  -> SPIEGATA: l'opzione `--spinore-corretto` la cambia
+  G4-bis             TAU_LUCE               banner True   default False  -> SPIEGATA: l'opzione `--tau-luce` la cambia
+  G4-bis             VERLET                 banner True   default False  -> SPIEGATA: l'opzione `--verlet` la cambia
+  D34 ritmo-wrap     ANOM_SIMM              banner True   default False  -> SPIEGATA: l'opzione `--anom-simm` la cambia
+  D34 ritmo-wrap     CALORE_VETTORIALE      banner False  default True   -> SPIEGATA: l'opzione `--calore-vett` la cambia
+  D34 ritmo-wrap     CAMPO_SPINORIALE       banner True   default False  -> SPIEGATA: l'opzione `--campo-spinoriale` la cambia
+  D34 ritmo-wrap     CHI_BASC               banner True   default False  -> SPIEGATA: l'opzione `--chi-basc` la cambia
+  D34 ritmo-wrap     CHI_COOP               banner True   default False  -> SPIEGATA: l'opzione `--chi-coop` la cambia
+  D34 ritmo-wrap     CHI_CORE               banner True   default False  -> SPIEGATA: l'opzione `--chi-core` la cambia
+  D34 ritmo-wrap     COES_ADIM              banner True   default False  -> SPIEGATA: l'opzione `--coes-adim` la cambia
+  D34 ritmo-wrap     COES_CAUSALE           banner True   default False  -> SPIEGATA: l'opzione `--coes-causale` la cambia
+  D34 ritmo-wrap     CS_DINAMICO            banner True   default False  -> SPIEGATA: l'opzione `--cs-dinamico` la cambia
+  D34 ritmo-wrap     FORK_SU2               banner True   default False  -> SPIEGATA: l'opzione `--fork-su2` la cambia
+  D34 ritmo-wrap     FORK_SU2_MEM           banner True   default False  -> SPIEGATA: l'opzione `--fork-su2-mem` la cambia
+  D34 ritmo-wrap     PEQ_ESATTO             banner True   default False  -> SPIEGATA: l'opzione `--peq-esatto` la cambia
+  D34 ritmo-wrap     PEQ_NASCITA_LOCALE     banner True   default False  -> SPIEGATA: l'opzione `--peq-nascita-locale` la cambia
+  D34 ritmo-wrap     PLAST_DIN              banner True   default False  -> SPIEGATA: l'opzione `--plast-din` la cambia
+  D34 ritmo-wrap     SCALA_MIN_PASSO        banner True   default False  -> SPIEGATA: l'opzione `--scala-min-passo` la cambia
+  D34 ritmo-wrap     SPINORE_CORRETTO       banner True   default False  -> SPIEGATA: l'opzione `--spinore-corretto` la cambia
+  D34 ritmo-wrap     TAU_LUCE               banner True   default False  -> SPIEGATA: l'opzione `--tau-luce` la cambia
+  D34 ritmo-wrap     VERLET                 banner True   default False  -> SPIEGATA: l'opzione `--verlet` la cambia
+  FASE_2PI corto     ANOM_SIMM              banner True   default False  -> SPIEGATA: l'opzione `--anom-simm` la cambia
+  FASE_2PI corto     CALORE_VETTORIALE      banner False  default True   -> SPIEGATA: l'opzione `--calore-vett` la cambia
+  FASE_2PI corto     CAMPO_SPINORIALE       banner True   default False  -> SPIEGATA: l'opzione `--campo-spinoriale` la cambia
+  FASE_2PI corto     CHI_BASC               banner True   default False  -> SPIEGATA: l'opzione `--chi-basc` la cambia
+  FASE_2PI corto     CHI_COOP               banner True   default False  -> SPIEGATA: l'opzione `--chi-coop` la cambia
+  FASE_2PI corto     CHI_CORE               banner True   default False  -> SPIEGATA: l'opzione `--chi-core` la cambia
+  FASE_2PI corto     COES_ADIM              banner True   default False  -> SPIEGATA: l'opzione `--coes-adim` la cambia
+  FASE_2PI corto     COES_CAUSALE           banner True   default False  -> SPIEGATA: l'opzione `--coes-causale` la cambia
+  FASE_2PI corto     CS_DINAMICO            banner True   default False  -> SPIEGATA: l'opzione `--cs-dinamico` la cambia
+  FASE_2PI corto     FORK_SU2               banner True   default False  -> SPIEGATA: l'opzione `--fork-su2` la cambia
+  FASE_2PI corto     FORK_SU2_MEM           banner True   default False  -> SPIEGATA: l'opzione `--fork-su2-mem` la cambia
+  FASE_2PI corto     PEQ_ESATTO             banner True   default False  -> SPIEGATA: l'opzione `--peq-esatto` la cambia
+  FASE_2PI corto     PEQ_NASCITA_LOCALE     banner True   default False  -> SPIEGATA: l'opzione `--peq-nascita-locale` la cambia
+  FASE_2PI corto     PLAST_DIN              banner True   default False  -> SPIEGATA: l'opzione `--plast-din` la cambia
+  FASE_2PI corto     SCALA_MIN_PASSO        banner True   default False  -> SPIEGATA: l'opzione `--scala-min-passo` la cambia
+  FASE_2PI corto     SPINORE_CORRETTO       banner True   default False  -> SPIEGATA: l'opzione `--spinore-corretto` la cambia
+  FASE_2PI corto     TAU_LUCE               banner True   default False  -> SPIEGATA: l'opzione `--tau-luce` la cambia
+  FASE_2PI corto     VERLET                 banner True   default False  -> SPIEGATA: l'opzione `--verlet` la cambia
+
+  totale: 130. Una differenza banner/default NON e' un errore: e' l'argv che agisce.
+  Quelle marcate NON SPIEGATA lo sono.
