@@ -13,9 +13,14 @@ strada»*.
 
   GENERATO, a ogni giro, dal DISCO:
     * `A` intera: **importa `CURE` da `_cure_verificate.py`** (una sola fonte, non una copia),
-      legge il **DEFAULT dal sorgente** e verifica **se il DRIVER accende il flag**, leggendo
-      l'argv cablato in `csv/_test_fork/_scena_video.py`. **E' il campo che decide se una cura
-      GIRA DAVVERO**, e la sezione `CURE VERIFICATE` esiste proprio perche' si sfalsa da solo;
+      legge il **DEFAULT dal sorgente**, e prende le colonne **NUDA** e **CAMPAGNA** dal
+      **REFERTO DEL SIGILLO DEL DRIVER** -- che percorre `_cli()` + `_applica_flag(a)` in un
+      processo nuovo e legge lo stato **DAL MODULO**.
+      **⚠ LA PRIMA VERSIONE CERCAVA IL NOME DELL'OPZIONE NEL TESTO DEL DRIVER, e sbagliava:**
+      `"--peq-esatto"` **c'e'**, ma dentro `if PEQESATTO == "on"` con default `"off"`. **Il
+      nome e' presente, la cura NO**, e il quadro diceva `SI'` a SEI cure spente **mentre il
+      sigillo, nello stesso repo, stampava `NUDA = False` per quelle sei.**
+      **E' lo `STANDARD 9` col segno opposto: una PRESENZA dedotta da un `in` sul testo.**
     * per ogni voce di `B`: **la verifica che NON sia in codice**, cercando il suo marcatore
       nel sorgente. **Se un giorno c'e', la riga si segnala da sola** -- che e' il solo modo
       perche' `B` non diventi una lista di buoni propositi;
