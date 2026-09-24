@@ -230,7 +230,7 @@ def main():
           % (nome, a[0], a[1], a[2], float(th.max()),
              100.0 * float((th > 0.95).mean()), sorgente))
     P("\n  -> la quota con `tanh(grad) > 0.95` e' la misura del cor.6: se fosse ALTA, la\n")
-    P("     modulazione sarebbe un riscaldamento costante e il `0.3` un parametro nascosto.\n")
+    P("     modulazione sarebbe un riscalamento costante e il `0.3` un parametro nascosto.\n")
 
     P("\n" + "=" * 96 + "\n")
     P("!! COSA QUESTO REFERTO NON DICE: che la cura sia GIUSTA. Dice che la mitosi vive, che\n")
