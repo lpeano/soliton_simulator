@@ -1,0 +1,56 @@
+# `Z146` -- LA SCELTA DELLA FORMA DEL FRENO-LEGGE, letta da `V8`/`V9`
+# sorgente: _cura2_corto\BILANCIO_d0.txt (PARSATO, non ricopiato)
+#
+I NUMERI, come stanno nel referto:
+  verso                 n       p50       p90       p99     p99.9       max
+  discese        60538734    0.0019    0.0239    0.0310    0.0344    0.0385
+  salite         65192342    0.0024    0.0124    0.0241    0.0307    0.0531
+
+============================================================================================
+1. LA SATURAZIONE DI `tanh` -- il suo unico difetto dichiarato
+============================================================================================
+  `1+tanh(x) < 2` per costruzione, e la saturazione conta quando `x` e' di ordine `1`.
+  il MASSIMO misurato su 125731076 campioni e' x = 0.0531
+  fattore a quel massimo: 1+tanh(0.0531) = 1.053050   contro exp(0.0531) = 1.054535
+  scarto fra le due forme AL MASSIMO MISURATO: 1.485e-03 (relativo 1.408e-03)
+
+  -> il tetto e' a `x` di ordine 1; il massimo misurato e' 19 VOLTE piu' piccolo.
+     LA SATURAZIONE DI `tanh` NON SI MANIFESTA MAI in questo regime, e la quota con
+     |dx|/d > 0.5 e' ZERO su entrambi i versi.
+
+============================================================================================
+2. LA DERIVA DELLA FORMA PIANA -- e QUI IL DATO MANCA
+============================================================================================
+  La deriva per applicazione e' `E[x^2]/2`, e su N applicazioni il fattore accumulato
+  e' `exp(N*E[x^2]/2)` (moltiplicativo).
+  ⚠ `E[x^2]` NON E' STATO REGISTRATO: l'involucro ha salvato QUANTILI, `max` e quote.
+    Quindi si da' un INTERVALLO fra due ipotesi estreme, non un numero.
+
+  ipotesi su sqrt(E[x^2])               120 passi   1200 passi   6000 passi
+  = p50  (0.0024) -- MINIMO               +0.03 %      +0.35 %      +1.74 %
+  = p90  (0.0124)                         +0.93 %      +9.66 %     +58.61 %
+  = p99  (0.0241)                         +3.55 %     +41.69 %    +471.12 %
+  = max  (0.0531) -- MASSIMO             +18.43 %    +442.91 % +471553.64 %
+
+  -> A 120 PASSI LA DIFFERENZA E' TRASCURABILE IN OGNI IPOTESI.
+     A 6000 PASSI L'INTERVALLO E' TROPPO LARGO PER DECIDERE: va da qualche per cento
+     a un fattore. **E' UN LIMITE DELLA MIA MISURA, non del sistema.**
+
+============================================================================================
+3. COSA SI PUO' DIRE, E COSA NO
+============================================================================================
+  SI PUO' DIRE:
+   - la SATURAZIONE di `tanh` non si manifesta: il suo unico difetto dichiarato NON
+     si presenta a questi |dx|/d. Costo MISURATO: nessuno.
+   - la DERIVA di `piana` e' positiva e si accumula; a 120 passi e' trascurabile.
+   - le due forme coincidono entro 1.4e-03 al massimo misurato.
+
+  NON SI PUO' DIRE:
+   - QUANTO valga la deriva a tempi lunghi: serve `E[x^2]`, che non ho registrato.
+   - che la scelta sia indifferente: lo e' a 120 passi, NON e' dimostrato a 6000.
+
+  COSA LO CHIUDEREBBE, e costa ZERO run in piu':
+   registrare `mean((dx/d)^2)` nello stesso involucro che gia' registra i quantili.
+   E' UNA SOMMA IN PIU', sugli stessi campioni.
+
+  ⚠ E LA SCELTA RESTA DI LUCA: questa e' la misura, non la decisione.

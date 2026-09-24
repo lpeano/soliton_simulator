@@ -14630,3 +14630,120 @@ avrebbe provato solo che un'eccezione si propaga. **Ora il figlio passa dal perc
 **⚠ E IL LIMITE, perché un sigillo non rieseguito non protegge nulla (`A9`):** `K7`/`K8` sono
 **provati**; `T4`/`T5` **in subprocess NON sono stati rieseguiti**, per tua decisione — `T4` è
 valido e `T5` è diventato il confronto fra i due giri corti.
+
+
+---
+
+# ✅ `CURA 2` — **IL GIRO CORTO È FINITO, E `T5` È FATTO BENE** *(2026-09-24)*
+
+**`doc/REFERTO_cura2_tempo_unico.md`.** `120` passi, `520.1 s`, blob `49fc54d2`, seme `42`.
+**Riferimento `_cura1_corto`: un interruttore di differenza, e DUE PROCESSI FRESCHI A UN SOLO
+BRACCIO.** **`Z145` è CHIUSO**, con entrambi i pezzi del criterio.
+
+## GLI OTTO CRITERI
+
+| | esito |
+|---|---|
+| `E1a` la mitosi non muore | ✅ **PASS** |
+| `E1b` non esplode | ✅ **PASS** |
+| `B` il bilancio chiude | ✅ **PASS**, `5.304e-14` |
+| `K` il clip | ✅ misurato, **e ribalta la lettura** |
+| `C` `H` le guardie | ✅ **zero salti su tre** |
+| `G` dove nasce la materia | ✅ riportato |
+| `R` `d0` e `d/d0` | ⚠ **SMENTISCE la previsione** |
+| `V8` `V9` | ✅ misurato |
+
+## `E1a` — LA MITOSI VIVE, MA NON COME AVEVO PREVISTO
+
+```
+                    cura1 (OFF)   cura2 (ON)   rapporto
+  n al passo 120           2660         2575     0.9680
+  nati da mitosi            209          137     0.6555
+  eventi di mitosi           67           76     1.1343
+```
+
+**`FASE_2PI` era caduta qui: `62` eventi → `1`. Qui gli eventi SALGONO del `13 %`.**
+
+**⚠ E LA MIA PREVISIONE ERA SULLA GRANDEZZA SBAGLIATA.** Avevo scritto *«il TASSO può calare di
+~1/3, perché `dt_e/DT` ha mediana ≈ 0.68»*. **Il tasso di eventi è salito. Sono i NATI a calare,
+di `0.6555` — quasi esattamente il `0.68`.** Il numero c'era, la grandezza no. **Lo scrivo
+invece di far combaciare la previsione a posteriori.**
+
+## ❗ `K` — IL CLIP HA DUE LATI, E QUESTO RIBALTA LA LETTURA DELLA CURA
+
+```
+  clip ALTO su prob (resp > 1)             0 / 63128409 =   0.00000 %
+  clip a ZERO su prob (resp <= 0)   63110902 / 63128409 =  99.97227 %
+  clip ALTO su rep                         0 / 63128409 =   0.00000 %
+  Eulero con dt/tau > 1                    0 / 63128409 =   0.00000 %
+```
+
+> **LA FORMA DI POISSON È UN NO-OP IN QUESTO REGIME.** Conserva il taglio in basso e toglie
+> quello in alto; **quello in alto non morde mai**, e **quello in basso morde il `99.97 %`**,
+> dove **le due forme coincidono esattamente**. Restano `17 507` casi su `63 128 409` — lo
+> **`0.028 %`** — e lì il clip non ha comunque mai morso.
+>
+> **La cura di `:5244` è CORRETTA E INERTE.** Era il punto 1 di *«cosa non so derivare»*: ora è
+> derivato. **Senza il contatore che mi hai chiesto, avrei scritto «il clip non morde» ed
+> sarebbe stato falso al `99.97 %`.**
+
+**E `S12` idem:** l'Eulero non ha mai avuto `dt/τ > 1` su questo sito. **Non è un argomento per
+togliere la cura** — la forma esatta è convessa **per qualunque passo**, quella di Eulero no.
+
+## ❗ `R` — LA TUA PREVISIONE DI `×2.5`-`×3` SU `d0` NON REGGE
+
+| classe | `p50` OFF | `p50` ON | variazione |
+|---|--:|--:|--:|
+| vuoto-vuoto | `1.7385` | `1.7612` | `+1.3 %` |
+| massa-massa | `1.2365` | `1.2028` | `−2.7 %` |
+| CONFINE vuoto-massa | `1.4530` | `1.4802` | `+1.9 %` |
+
+**Non `×2.5`: `×1.01`.** **E il perché sta nel criterio `K`:** il bersaglio di `rep` vive su
+`resp_int`, `resp <= 0` nel `99.97 %` dei casi, e `rep = clip(−resp, 0, 1)` con il clip alto che
+non morde mai — quindi **`rep` resta piccolo**. Moltiplicare per `2.5` una quantità piccola,
+dentro un rilassamento con `dt/τ ≪ 1`, **sposta poco l'equilibrio raggiunto in 120 passi.**
+
+> **Va letto come LIMITE SUPERIORE, non come «nessun effetto»:** a `120` passi il sistema non ha
+> percorso abbastanza del proprio rilassamento.
+
+## `G` — LA MATERIA NASCE DOVE L'OROLOGIO CAMBIA
+
+Rapporto fra la mediana di `grad|r|` sugli archi **con un nato** e su **tutti**:
+**`2.47×` senza la cura, `4.23×` con.**
+
+**⚠ UN SEME, UN ISTANTE, NESSUNA BARRA** *(`P3`)*. **È un'indicazione, non un fatto.**
+
+## `V8` / `V9` — E LA SCELTA DELLA FORMA DEL FRENO
+
+```
+  verso            n        p50      p90      p99    p99.9      max   >0.5
+  discese   60538734     0.0019   0.0239   0.0310   0.0344   0.0385    0.0
+  salite    65192342     0.0024   0.0124   0.0241   0.0307   0.0531    0.0
+```
+
+> ### ✅ **LA SATURAZIONE DI `tanh` NON SI MANIFESTA MAI.** Il massimo su `125 731 076` campioni
+> ### è `0.0531`, **`19` volte** sotto la scala a cui il tetto conta. **Costo misurato: nessuno.**
+
+**⚠ MA LA DERIVA DELLA PIANA NON SO QUANTIFICARLA, ED È UN LIMITE MIO.** Vale `exp(N·E[x²]/2)`,
+e **`E[x²]` non l'ho registrato** — ho salvato quantili, `max` e quote, **e i quantili non
+bastano a stimare una media di quadrati**:
+
+| ipotesi su `sqrt(E[x²])` | 120 passi | 1200 passi | 6000 passi |
+|---|--:|--:|--:|
+| `= p50 (0.0024)` | `+0.03 %` | `+0.35 %` | `+1.74 %` |
+| `= p90 (0.0124)` | `+0.93 %` | `+9.66 %` | `+58.61 %` |
+| `= p99 (0.0241)` | `+3.55 %` | `+41.69 %` | `+471.12 %` |
+
+**A `120` passi è trascurabile in ogni ipotesi. A `6000` l'intervallo è troppo largo per
+decidere.** **Cosa lo chiuderebbe, a ZERO run in più: registrare `mean((dx/d)²)` nello stesso
+involucro. È una somma in più, sugli stessi campioni.**
+
+**La scelta resta tua: questa è la misura, non la decisione.**
+
+## ⚠ UNA COSA DA METTERE IN CODA, e viene da `C`/`H`
+
+Le tre guardie hanno **zero salti** — l'opposto di `_cs_nodo_prev` *(`71.88 %`)* e
+`_psi_spin_prec` *(`95.33 %`)*. **Ma il perché è l'ORDINE, non la guardia:** allo snapshot
+`_r_corrente` è lungo `2570` su `2575`, perché `mitosi()` gira **dopo** `step()`; e
+`_r_nodo_mitosi` è chiamata **dentro** `mitosi()`, **prima** che i figli esistano.
+**La legge è salva per l'ordine delle chiamate, e basta spostare una riga per romperla.**

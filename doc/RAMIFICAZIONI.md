@@ -1,8 +1,22 @@
 # REGISTRO DELLE RAMIFICAZIONI — lo **stato** dei fronti, non la cronaca
 
-## `Z145` — ⚠ **`T5` DEL SIGILLO DI `CURA 2` È INVALIDO: `dv > 0` LETTO COME EFFETTO** *(2026-09-24)*
+## `Z145` — ✅ **CHIUSO** — `T5` del sigillo di `CURA 2` era invalido: `dv > 0` letto come effetto *(2026-09-24)*
 
-**STATO: APERTO.** Difetto **dello strumento**, non della cura. `doc/REPERTO_sigillo_cura2_T5.md`.
+**STATO: CHIUSO lo stesso giorno, con ENTRAMBI i pezzi del criterio soddisfatti.**
+1. **`T5` rifatto in due processi freschi a un solo braccio:** `_cura2_corto` contro
+   `_cura1_corto`. **Il controllo positivo è stabilito** — `doc/REFERTO_cura2_tempo_unico.md`.
+   **E conferma la diagnosi dal disco:** in un processo fresco il braccio acceso ha `n = 2575` e
+   `526 204` archi, **non `901` e `59 731`**.
+2. **Sigillo riparato** *(`2f5155b`)*: ogni braccio via `subprocess`, ingresso `--braccio`.
+   **Collaudo `8/8`**, con `K7`/`K8` che provano che il braccio **attraversa il confine di
+   processo** — il figlio parte dal valore **sbagliato**, così un meccanismo rotto darebbe
+   l'**opposto** e non un valore mancante.
+
+**⚠ E IL LIMITE, dichiarato:** `T4`/`T5` **in `subprocess` non sono stati rieseguiti** *(decisione
+di Luca: `T4` è valido, `T5` è diventato il confronto fra i giri corti)*. **Il meccanismo è
+provato, l'uso no** — e un sigillo non rieseguito non protegge nulla *(`A9`)*.
+
+**STATO ORIGINARIO: APERTO.** Difetto **dello strumento**, non della cura. `doc/REPERTO_sigillo_cura2_T5.md`.
 Blob `b881db89`, sigillo `a11e3c5`, codice `c04d2b0`.
 
 Il sigillo fa i due bracci **nello stesso processo** con `runpy.run_path`. Il secondo run è

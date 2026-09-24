@@ -1,0 +1,89 @@
+# I CRITERI DELLA PROVA DI `CURA 2` -- generati, non ricopiati (`P1-ter`)
+#
+# riferimento  _cura1_corto  blob 0e06edf2  commit 9d6e43e
+# prova        _cura2_corto  blob 67ea1a19  commit c8efff5
+# UN INTERRUTTORE DI DIFFERENZA: TEMPO_UNICO_MITOSI.
+# E DUE PROCESSI FRESCHI A UN SOLO BRACCIO (`STANDARD 1`): e' `T5`, dopo `Z145`.
+
+================================================================================================
+`E1a` / `E1b` -- LA MITOSI VIVE? ESPLODE?
+================================================================================================
+                                cura1 (OFF)     cura2 (ON)     rapporto
+  n al passo 120                       2660           2575       0.9680
+  archi                              526302         526204       0.9998
+  nati da mitosi                        209            137       0.6555
+  eventi di mitosi                       67             76       1.1343
+  nascite (semina/mit)                  171            196       1.1462
+
+  `E1a` LA MITOSI NON MUORE ed e' dello STESSO ORDINE  -> PASS
+  `E1b` NON ESPLODE (n < 10x il riferimento)            -> PASS
+
+  !! IL TERMINE DI PARAGONE E' `FASE_2PI`, che qui e' CADUTA: 62 eventi -> 1.
+
+================================================================================================
+`K` -- QUANTE VOLTE IL CLIP AVREBBE MORSO, e su QUALE LATO
+================================================================================================
+  clip ALTO su `prob` (resp > 1)                    0 /     63128409 =   0.00000 %   la forma di Poisson toglie QUESTO
+  clip a ZERO su `prob` (resp <= 0)          63110902 /     63128409 =  99.97227 %   Poisson lo CONSERVA: qui le due forme COINCIDONO
+  clip ALTO su `rep`                                0 /     63128409 =   0.00000 %   decide se `tanh` cambierebbe qualcosa
+  Eulero con dt/tau > 1                             0 /     63128409 =   0.00000 %   misura quanto serviva `S12` in QUESTO regime
+
+  -> il clip ha DUE lati e ora sono contati entrambi (richiesta di Luca).
+
+================================================================================================
+`C` / `H` -- LE GUARDIE `A8`: invocazioni, salti, forma, QUANDO
+================================================================================================
+  `_r_corrente` (l'orologio)         invocazioni   120   salti     0 (  0.00 %)   forma -   ultimo -
+  `_cs_nodo_prev` (la velocita')     invocazioni   120   salti     0 (  0.00 %)   forma -   ultimo -
+  `_dt_e_ultimo` (il tempo d'arco)   invocazioni   120   salti     0 (  0.00 %)   forma -   ultimo -
+
+  -> un fallback mai misurato e' un comportamento SCONOSCIUTO (`P5`); uno che scatta
+     il 72 %% NON e' un fallback, e' il comportamento principale.
+
+================================================================================================
+`R` -- `d0` e `d/d0`: QUANTILI e divisione per CLASSE D'ARCO
+================================================================================================
+  convenzione di `G1`-`G2` (`_dove_spinge_la_gravita.py:72`), NON una nuova:
+    nodo < 900 = VUOTO   < 2391 = MASSA seminata   oltre = NATO
+  e `2391` e' LETTO DAL RUN: il log dice "n = 2391 nodi alla semina".
+
+  --- d0 ---
+  classe                    p10 OFF    p50 OFF    p90 OFF     p10 ON     p50 ON     p90 ON      n ON
+  vuoto-vuoto                1.3584     1.7385     2.2789     1.3381     1.7612     2.4468     59676
+  massa-massa                0.8421     1.2365     2.2546     0.8158     1.2028     2.3825    369766
+  nato-nato                  0.8587     1.0316     1.2791     0.8392     1.1108     1.2494        14
+  CONFINE vuoto-massa        1.0969     1.4530     1.6471     1.0455     1.4802     1.7165     96403
+  CONFINE con nato           0.9246     1.5121     2.1431     0.9338     1.2558     1.9194       345
+  altro                         nan        nan        nan        nan        nan        nan         0
+
+  --- d/d0 ---
+  classe                    p10 OFF    p50 OFF    p90 OFF     p10 ON     p50 ON     p90 ON      n ON
+  vuoto-vuoto                0.8164     1.0575     1.2992     0.7304     1.0514     1.3145     59676
+  massa-massa                0.4901     0.7600     1.0098     0.4776     0.7708     1.0310    369766
+  nato-nato                  0.6262     0.8147     0.9712     0.6493     0.7303     0.9642        14
+  CONFINE vuoto-massa        0.8916     1.2209     1.5318     0.8547     1.2040     1.6090     96403
+  CONFINE con nato           0.6301     0.7782     0.9922     0.6101     0.8220     0.9954       345
+  altro                         nan        nan        nan        nan        nan        nan         0
+
+  !! LA MEDIANA DA SOLA NON BASTA (rilievo di Luca): e' un riassunto GLOBALE di un
+     rapporto LOCALE, e puo' nascondere compressione e stiramento che si COMPENSANO.
+  !! E `A2`: queste sono statistiche del REFERTO. Nessuna entra nella legge.
+
+================================================================================================
+`G` -- DOVE NASCE LA MATERIA rispetto al GRADIENTE DI `r`
+================================================================================================
+  Si RIPORTA, non si giudica (criterio di Luca).
+
+  cura1 (OFF)   TUTTI  7.630e-03 1.159e-01 6.842e-01   |  ARCHI CON UN NATO  1.507e-02 2.860e-01 1.023e+00  (n=526)
+  cura2 (ON)    `_r_corrente` e' lungo 2570 su 2575 nodi (i 5 figli dell'ultimo passo
+                nascono DOPO la scrittura): la misura resta sui 526194 archi con
+                entrambi gli estremi noti, su 526204.
+  cura2 (ON)    TUTTI  1.569e-02 9.946e-02 5.442e-01   |  ARCHI CON UN NATO  2.898e-02 4.203e-01 9.519e-01  (n=349)
+
+  -> se il gradiente sugli archi con un NATO fosse sistematicamente piu' alto, la
+     materia nascerebbe DOVE IL TEMPO CAMBIA. E' cio' che la cura rende misurabile:
+     prima il gradiente veniva da `|tw|`, che e' TORSIONE, non tempo.
+
+================================================================================================
+!! COSA QUESTO REFERTO NON DICE: che la cura sia GIUSTA. Dice che la mitosi vive, che
+   il bilancio chiude, e QUANTO le forme nuove differiscono da quelle vecchie.
