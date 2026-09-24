@@ -1166,3 +1166,12 @@ ramo B (chi_basc OFF):
 - **note** Sigillo di CURA 2. T4 byte-inerzia a flag SPENTO contro _cura1_corto/scena_000120.pkl.gz; T5 controllo positivo a flag ACCESO. Due giri da 120 passi, ~17 min. Collaudo 6/6 e T1/T2/T3 gia' PASS. Codice: c04d2b0, blob b881db89. Sigillo: a11e3c5.
 
 **chiuso 2026-09-24 18:53:50 — FINITO** Stampato 5/5 ma T5 e INVALIDO (Z145): i due bracci girano nello stesso processo e il secondo e partito da un mondo piu piccolo (n 901 contro 2660, archi 59731 contro 526302, 33.3 s contro 404.5 s), e n NON PUO scendere. T1/T2/T3/T4 valgono: T4 da 206 campi identici al riferimento fresco, quindi la byte-inerzia a flag spento e certificata. Il controllo positivo di CURA 2 NON e stabilito. I dati SERVONO: T4 risponde al criterio K (clip su prob e clip alto su rep: ZERO su 63148047). Giro corto NON lanciato: reperto, commit, stop.
+
+## APERTO CURA2-CORTO
+
+- **avvio** `2026-09-24 19:06:12` · **blob** `67ea1a19 (git) / 49fc54d2 (byte grezzi)` · **HEAD** `7a36ae5`
+- **comando**
+  ```
+  python csv/_test_fork/_g4_prova.py --cura2-corto
+  ```
+- **note** Il giro corto di CURA 2: 120 passi, PROCESSO FRESCO A UN SOLO BRACCIO (standard 1). E la decisione di Luca: T5 := questo run contro _cura1_corto, che e anchesso un processo fresco a un solo braccio. E anche V8/V9 (distribuzione di |dx|/d) e il clip a ZERO di prob. Codice 7a36ae5, blob 49fc54d2. Riferimento: csv/_test_fork/_cura1_corto.
