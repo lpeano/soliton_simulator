@@ -99,8 +99,13 @@ for eti, V, R_, SEP in (("A", VA, RA, SEPA), ("B", VB, RB, SEPB)):
     _di("VUOTO_%s raggio %.4f  capienza = %.1f +- %.1f  %s"
         % (eti, V, float(np.mean(cap)), float(np.std(cap)), cap))
     dentro, tot = [], []
-    for s in SEMI:
-        p = semina(int(np.mean(cap)) - 1, V, s)
+    for k_s, s in enumerate(SEMI):
+        # ATTENZIONE: si chiede la capienza DI QUEL SEME meno uno, non la MEDIA meno uno.
+        # La capienza dipende dal seme (12807 / 12783 / 12812 / 12790 a r = 12.61), quindi la
+        # media meno uno SUPERA la capienza dei semi piu' bassi e la semina RIFIUTA -- ed e'
+        # esattamente cosi' che questo strumento e' morto al primo giro. Il rifiuto aveva
+        # ragione: era la mia richiesta a essere sbagliata.
+        p = semina(cap[k_s] - 1, V, s)
         c = np.array([[SEP * np.cos(2 * np.pi * k / 3), SEP * np.sin(2 * np.pi * k / 3), 0.0]
                       for k in range(3)])
         m = np.zeros(len(p), bool)
