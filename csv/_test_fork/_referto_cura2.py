@@ -166,9 +166,21 @@ def main():
         i, j = np.asarray(D["i"]), np.asarray(D["j"])
         n = len(D["_cs_nodo_prev"])
         r = np.asarray(D.get("_r_corrente", np.ones(n)), dtype=float)
+        # `_r_corrente` e' scritto in `step()`; `mitosi()` gira DOPO e aggiunge nodi, quindi
+        # ALLO SNAPSHOT l'array e' corto dei figli dell'ULTIMO passo. NON e' un difetto, ed e'
+        # il motivo per cui `_tum_r_salti = 0`: `_r_nodo_mitosi` e' chiamata DENTRO `mitosi()`,
+        # PRIMA che i figli esistano, e li' `len(r) == n`.
+        # E' l'ordine che salva la legge, non la guardia -- l'OPPOSTO di `_cs_nodo_prev`
+        # (71.88 %) e `_psi_spin_prec` (95.33 %), dove la mitosi aveva gia' allungato `n`.
+        # Per la MISURA si restano sugli archi i cui DUE estremi hanno un `r`.
+        ok = (i < len(r)) & (j < len(r))
         if len(r) < n:
-            P("  %-12s  `_r_corrente` CORTO (%d < %d): non misurabile\n" % (nome, len(r), n))
-            continue
+            P("  %-12s  `_r_corrente` e' lungo %d su %d nodi (i %d figli dell'ultimo passo\n"
+              % (nome, len(r), n, n - len(r)))
+            P("                nascono DOPO la scrittura): la misura resta sui %d archi con\n"
+              % int(ok.sum()))
+            P("                entrambi gli estremi noti, su %d.\n" % len(i))
+        i, j = i[ok], j[ok]
         g = np.abs(r[i] - r[j])
         nati = (i >= N0_SEMINA) | (j >= N0_SEMINA)
         a1 = q(g)
