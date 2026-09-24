@@ -31,57 +31,85 @@ _presidio.avvia(__file__)
 RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
 DEST = os.path.join(_QUI, "_revisione", "CAPIENZA_LAM.txt")
 
-FIGLIO = r'''
-import sys, re, numpy as np, math
+FIGLIO = r"""
+import sys, re, time, numpy as np, math
 sys.argv = ["soliton_simulator.py"]
 import soliton_simulator as S
 S.SEMINA_LAM = True
 LAM = float(S.LAM); RC = float(S.R_CONN())
 
-def capienza(r, seed):
-    """Il MASSIMO che l'RSA colloca in una palla di raggio r, dal PERCORSO VERO."""
+def _dì(s):
+    sys.stdout.write(s + chr(10)); sys.stdout.flush()   # AVANZAMENTO VISIBILE
+
+def capienza(r, seed, ask=4000):
+    '''Il MASSIMO che l'RSA colloca in una palla di raggio r, dal PERCORSO VERO.
+
+    Si chiede `ask` e si legge il RIFIUTO. Se invece RIESCE, `ask` era troppo basso e si
+    RADDOPPIA: cosi' il numero resta quello vero e il LOTTO resta piccolo.
+    (Nel mio primo giro chiedevo 200000, e siccome il lotto ha la taglia CHIESTA ogni
+    tentativo proponeva duecentomila punti: era il difetto che rendeva la misura interminabile.)
+    '''
+    while ask < 4000000:
+        net = S.Rete(seed)
+        try:
+            net._semina_lam(ask, r, (0.0, 0.0, 0.0))
+            ask *= 2                       # e' entrato tutto: il tetto era troppo basso
+            continue
+        except SystemExit as ex:
+            m = re.search(r"collocati\s*=\s*(\d+)", str(ex))
+            return int(m.group(1)) if m else -1
+    return -1
+
+def entra(n, r, seed=1):
+    '''Domanda SI'/NO diretta: `n` nodi entrano in raggio `r`? Lotto = n, non 200000.'''
     net = S.Rete(seed)
     try:
-        net._semina_lam(200000, r, (0.0, 0.0, 0.0))
-        return 200000
-    except SystemExit as ex:
-        m = re.search(r"collocati\s*=\s*(\d+)", str(ex))
-        return int(m.group(1)) if m else -1
+        net._semina_lam(n, r, (0.0, 0.0, 0.0))
+        return True
+    except SystemExit:
+        return False
 
 RAGGI = [0.7, 1.0, 1.5, 2.0, 2.264, 3.0, 4.0, 4.5, 5.48, 7.6]
 SEMI = [1, 2, 3]
-print("LAM %.6f RCONN %.6f" % (LAM, RC))
+_dì("LAM %.6f RCONN %.6f" % (LAM, RC))
 dati = {}
 for r in RAGGI:
+    t0 = time.time()
     v = [capienza(r, s) for s in SEMI]
     dati[r] = v
-    print("CAP r=%.4f  r/LAM=%.3f  n=%s  media=%.1f  disp=%.1f"
-          % (r, r / LAM, v, float(np.mean(v)), float(np.std(v))))
+    _dì("CAP r=%.4f  r/LAM=%.3f  n=%s  media=%.1f  disp=%.1f  [%.1f s]"
+        % (r, r / LAM, v, float(np.mean(v)), float(np.std(v)), time.time() - t0))
 
-# l'ESPONENTE: si misura, non si assume
 rr = np.array([r for r in RAGGI if np.mean(dati[r]) >= 5.0], float)
 nn = np.array([np.mean(dati[r]) for r in RAGGI if np.mean(dati[r]) >= 5.0], float)
 A = np.vstack([np.log(rr), np.ones(len(rr))]).T
 esp, q = np.linalg.lstsq(A, np.log(nn), rcond=None)[0]
-print("ESPONENTE misurato = %.4f   (atteso 3 se n ~ r^3)  su %d raggi con n>=5"
-      % (esp, len(rr)))
-print("COEFF n = %.4f * r^%.4f" % (math.exp(q), esp))
+_dì("ESPONENTE misurato = %.4f   (atteso 3 se n ~ r^3)  su %d raggi con n>=5"
+    % (esp, len(rr)))
+_dì("COEFF n = %.4f * r^%.4f" % (math.exp(q), esp))
 
-def raggio_per(n, seed=1, lo=0.5, hi=40.0):
-    """il RAGGIO MINIMO che contiene n, cercato con la semina VERA (bisezione)."""
-    for _ in range(26):
+def raggio_per(n, seed=1):
+    '''Il RAGGIO MINIMO che contiene n. Si parte dalla legge MISURATA e si stringe con la
+    domanda SI'/NO diretta: dodici passi bastano a ~0.1 %% del raggio.'''
+    g = (n / math.exp(q)) ** (1.0 / esp)
+    lo, hi = 0.5 * g, 2.0 * g
+    while not entra(n, hi, seed):
+        hi *= 1.5
+    for _ in range(12):
         mid = 0.5 * (lo + hi)
-        if capienza(mid, seed) >= n:
+        if entra(n, mid, seed):
             hi = mid
         else:
             lo = mid
     return hi
 
 for n in (497, 900, 2391):
+    t0 = time.time()
     r = raggio_per(n)
-    print("RAGGIO_PER n=%d  ->  r=%.4f  (= %.3f LAM)   verifica: capienza=%d"
-          % (n, r, r / LAM, capienza(r, 1)))
-'''
+    _dì("RAGGIO_PER n=%d  ->  r=%.4f  (= %.3f LAM)   verifica entra=%s   [%.1f s]"
+        % (n, r, r / LAM, entra(n, r), time.time() - t0))
+"""
+
 
 
 def main():
@@ -95,8 +123,20 @@ def main():
         sys.stdout.write(s)
         f.write(s)
 
-    r = subprocess.run([sys.executable, "-c", FIGLIO], cwd=RADICE, capture_output=True,
-                       text=True, encoding="utf-8", errors="replace")
+    # AVANZAMENTO VISIBILE: lo stdout del figlio va in un file che si puo' guardare MENTRE
+    # gira. Prima era `capture_output=True`, e non c'era modo di sapere a che punto fosse --
+    # difetto mio, e la ragione per cui alla domanda "quanto ci vorra'?" non sapevo rispondere.
+    grezzo = os.path.join(os.path.dirname(DEST), "CAPIENZA_LAM.progresso.txt")
+    with io.open(grezzo, "w", encoding="utf-8", newline="\n") as _g:
+        rc = subprocess.call([sys.executable, "-u", "-c", FIGLIO], cwd=RADICE,
+                             stdout=_g, stderr=subprocess.STDOUT)
+
+    class _R(object):
+        pass
+    r = _R()
+    r.returncode = rc
+    r.stdout = io.open(grezzo, encoding="utf-8", errors="replace").read()
+    r.stderr = ""
     P("# `SEMINA_LAM` -- QUANTI NODI ENTRANO DAVVERO. Semina RSA VERA, non estrapolazione.\n#\n")
     P("# La capienza si legge dal RIFIUTO di `_semina_lam`, che dichiara `collocati`:\n")
     P("# **il numero viene dallo stesso codice che semina.**\n")
