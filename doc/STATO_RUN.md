@@ -1,10 +1,20 @@
 <!-- PUNTO-DI-RIPRESA:INIZIO -->
 # ⚠⚠ PUNTO DI RIPRESA — **si legge PER PRIMO dopo un riavvio**
 
-> **Aggiornato 2026-09-24 mattina · HEAD `0def7d3` · branch `fork-su2`.**
+> **Aggiornato 2026-09-24 mezzogiorno · HEAD `da6d24a` · branch `fork-su2`.**
 > **Simulatore blob `445e2896`.** **Nessun processo vivo, niente a metà.**
 
-## NON C'E' NESSUN RUN IN CORSO
+## ⚠ CI SI È FERMATI QUI: **`E1` NON PASSA, e la decisione è di Luca**
+
+**Nessun run in corso.** Il giro corto di `FASE_2PI` è finito e **la sua prova la
+boccia**: la cura fa ciò che dichiara su `φ`, **ma la generazione di materia si ferma**
+*(mitosi `62` → `1` evento, Schwinger `28` → `0`)*, perché **`|tw|` si dimezza e nessun
+arco raggiunge più la soglia** *(`MAX 4.37 = 1.39π` contro `2π`)*.
+**→ `D36` acclarato · `Z127` · il punto 2 del §D va riaperto.**
+**E `SCALE-TW` non è più un lavoro in coda: è il PREREQUISITO**, perché l'INGRESSO di
+`tw` vive su `2π` e il suo AVVOLGIMENTO su `4π`.
+
+## COS'ALTRO NON C'È IN CORSO
 
 Il run di `D34` **è finito** *(`Z123`)*, e il sigillo di `FASE_2PI` **è finito `6/6`**
 *(`Z124`)*. **Il prossimo run è la prova di `FASE_2PI` a 600 passi**, e quando parte questo
@@ -17,7 +27,7 @@ blocco lo dirà qui sopra.
 | `MEM_MOTO` *(spegnimento)* | ✅ | `8/8` | ✅ `G4` |
 | `MEM_MOTO_TUTTO` *(spegnimento)* | ✅ | `10/10` | ✅ `G4-bis` |
 | **`RITMO_WRAP_2PI`** *(cura `D34`)* | ✅ | `4/4` | ✅ 600 passi *(`Z123`)* |
-| **`FASE_2PI`** *(cura `D35`)* | ✅ | **`6/6`** *(`Z124`)* | ⏸ **il prossimo lavoro** |
+| **`FASE_2PI`** *(cura `D35`)* | ✅ | **`6/6`** *(`Z124`)* | ❌ **`2/4` sul giro CORTO: `E1` NON PASSA** *(`Z127`)* |
 
 > **⚠ TUTTI SPENTI O AL LORO DEFAULT: nessuna cura è accesa, e nessuna decisione di default
 > è stata presa.** Il passaggio a `True` è la voce **`E3` della coda** *(l'epoca 3)*, ed è
@@ -33,7 +43,7 @@ blocco lo dirà qui sopra.
 | ② | **censimento** `PARTE C` + classi `T/L/E` | ✅ girato sul sorgente vero |
 | ③ | **le schede** per §D | ✅ **sette schede** nel registro |
 | ④ | **`FASE_2PI`** in codice, dietro flag, **sigillata** | ✅ `6/6` *(`Z124`)* |
-| ⑤ | **la prova a 600 passi + i test `E1`-`E4`** | ▶ **È QUI CHE SI RIPRENDE** |
+| ⑤ | **la prova + i test `E1`-`E4`** | ❌ **il giro CORTO la BOCCIA: `E1` NON PASSA** *(`Z127`)*. Il run a 600 passi **NON è stato lanciato** |
 | ⑥ | **`TEMPO_UNICO`**: scheda, flag, sigillo, prova | ⏸ la seconda cura |
 | ⑦ | **`PROBLEMI-CHK3`**, `FAMIGLIE`, `FASCE-TAU`, `PAT-1`/`PAT-2` | ⏸ |
 | ⑧ | **`CHECKPOINT`** — **ci si ferma e si aspetta Luca** | ⏸ |
@@ -368,7 +378,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | `ANOM_SIMM` | `C1-bis` anomalia simmetrica, senza pavimento | **`False`** | `6/6` *(letto dal referto)* | in **ogni** run del fork | toglie `max(peq, 1e-9)`, che con `peq < 0` **RIBALTAVA IL SEGNO** *(`Z94`, `D17`)* | VERIFICATA-SPENTA |
 | `INVARIANTI` | `C5` domini di stato, due livelli | **`True`** | `3/3` *(letto dal referto)* | in **ogni** run: **zero violazioni** in tutti e tre i bracci di `G4` | legge soltanto; su un run sano non cambia un bit | **ACCESA DI DEFAULT** *(`True`)* |
 | `RITMO_WRAP_2PI` | **`A1`** il wrap del ritmo sul periodo GIUSTO *(`2π`)* | **`False`** | `4/4` *(scritto a mano: il referto sta nel log, non in un file con la riga di verdetto)* | ✅ **`G4`, 600 passi** *(`Z123`, `csv/_test_fork/_d34_ritmo_wrap`)* | cura **`D34`** *(`Z117`: il wrap a `4π` e' l'IDENTITA')*. **`6/8` come previsto e il bilancio CHIUDE (`9.595e-14`), ma TUTTI gli aggregati peggiorano e la mia previsione ⑤ era SBAGLIATA** *(la quota al tetto SALE: -> `S09`)* | **PROVATA, default SPENTO** — la decisione e' di Luca |
-| `FASE_2PI` | **§D** `φ` come fase ordinaria su `[0, 2π)` | **`False`** | `6/6` *(letto dal referto)* | ⏸ prova a 600 passi + i test `E1`-`E4`, **da fare** | la lettura scelta da Luca, **da METTERE ALLA PROVA**. Se un test fallisce, **cade**. **Cura `D35`** *(l'antifase `+2π` che non e' un'antifase)* | ✅ **IN CODICE e SIGILLATA**, default **SPENTO**. ⏸ **NON ANCORA PROVATA** |
+| `FASE_2PI` | **§D** `φ` come fase ordinaria su `[0, 2π)` | **`False`** | `6/6` *(letto dal referto)* | ❌ **PROVATA sul giro CORTO (120 passi, `Z127`): `2/4`, `E1` NON PASSA** | **LA LETTURA CADE.** La cura fa cio' che dichiara su `phi` *(`E4` PASSA, bilancio `4.041e-14`)*, **ma la generazione di materia SI FERMA**: mitosi `62` -> `1` evento, Schwinger `28` -> `0`. **`|tw|` si dimezza e nessun arco raggiunge piu' la soglia** *(`MAX 4.37 = 1.39 pi` contro `2pi`)*. **-> `D36`** | ❌ **IN CODICE e SIGILLATA, ma la PROVA la BOCCIA.** Default **SPENTO**, e ci resta: il punto 2 del par.D va riaperto *(decisione di Luca)* |
 
 **Cure con default ACCESO: 1 su 9.**
 
@@ -401,6 +411,7 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | **D33** | **La repulsione alla massima compressione e' AZZERATA proprio dove serve: dal `75 %` al `96 %` degli archi oltre l'inversione riceve `resp` ESATTAMENTE ZERO** | `Z111`: `discesa = clip(1-|tw|/4pi,0,1)` e' zero per `|tw| >= 4pi` *(`:5153`)* mentre il segno si inverte a `~3.5pi`: **finestra larga mezzo `pi`** · contraddice il commento della legge *(`:5153-5156`)* | **da decidere al `CHK3`** *(uno dei tre candidati del freno)* | `APERTO` |
 | **D34** | **Il wrap «a 4π» di `ritmo()` (`:2584-2585`) NON AVVOLGE: su `(-2π, 2π)` e' l'IDENTITA'. Ogni attraversamento del taglio a `±π` registra una frequenza spuria di `~2π/DT`** | `Z117`: dimostrazione algebrica *(`max|w4(a) - a| = 0` su `100 001` punti)* + misura a 120 passi · **attivo nel fork** *(`--campo-spinoriale`)* · rilievo di Luca | **`RITMO_WRAP_2PI`** — flag, sigillo, prova a 600 passi. **Eccezione dichiarata alla regola «nessuna cura prima del `CHK3`»** | `APERTO` |
 | **D35** | **L'antiparticella di Schwinger nasce con `+2π` (`:5443`) e nel campo `F = Σ exp(iφ)` E' IDENTICA alla particella, non opposta. Il commento dice `+π`** | `Z119`: letto dal sorgente · **il ramo E' ATTIVO**, `COPPIA_MIT = 1.0`, e `S07_schwinger` scatta `90`-`172` volte su 600 passi nei tre bracci di `G4` · rilievo di Luca | **DIPENDE DA §`B1`** *(che cosa e' `φ`)*: **non si corregge prima della decisione di Luca** | `APERTO` |
+| **D36** | **LA SOGLIA DELLA MITOSI E' IN UNITA' ASSOLUTE DI `tw`, MENTRE LA SCALA DI `tw` DIPENDE DAL DOMINIO DI `phi`: le due NON SI POSSONO CAMBIARE UNA PER VOLTA** (`:5152-5156`, `soglia0 = PHI_CRIT + twist_max` oppure `PHI_CRIT`) | **ACCLARATO PER MISURA, `Z127`** *(2026-09-24, blob `445e2896`, 120 passi, seme 42)*: portando `phi` su `2pi` **`|tw|` si dimezza** *(`p99` `6.391` → `3.147`; `MAX` `34.35` → `4.37 = 1.39 pi`)* mentre la soglia scende solo di un terzo *(`3pi` → `2pi`)*: **gli archi sopra soglia passano da `7047` a `0`** e la generazione di materia si **ferma** *(mitosi `62` → `1` evento; Schwinger `28` → `0`)*. | **PERCHE' E' UN DIFETTO E NON UN ACCOPPIAMENTO LEGITTIMO:** una soglia in unita' **assolute** di una grandezza la cui scala e' fissata da una **convenzione** *(il dominio di avvolgimento)* **non e' una legge fisica: e' una manopola travestita**. La stessa famiglia di `A2`/`A3`. **E la crepa era GIA' DICHIARATA da Luca** — *l'argomento vale per una differenza ISTANTANEA, `tw` e' un ACCUMULO* — **e `E1` l'ha giudicata.** | **LA CURA CANDIDATA E' DERIVABILE, e NON la applico:** esprimere la soglia come **frazione del dominio** invece che in valore assoluto — se un arco porta una differenza fino a `_dphi()/2` e il quanto e' il dominio intero, la soglia e' `_dphi()/2` *(cioe' `pi` su `2pi`, `2pi` su `4pi`)*. **MA QUESTO CAMBIA IL PUNTO 2 DEL par.D, CHE E' UNA DECISIONE DI LUCA**, e la sua regola e' esplicita: *«se un test fallisce, la decisione cade E SI SCRIVE»*. **Scritta, non applicata.** **E va misurato PRIMA se `tw` si dimezzi DAVVERO per costruzione o per caso:** il censimento aveva lasciato `_w4`/`_w8` sulla torsione ACCUMULATA **fuori** dalla cura, di proposito *(era `SCALE-TW`)* — **quindi oggi l'INGRESSO di `tw` vive su `2pi` e il suo AVVOLGIMENTO su `4pi`: due scale diverse nella stessa grandezza.** **→ `SCALE-TW` non e' piu' un lavoro in coda: e' il PREREQUISITO di questa cura.** |
 <!-- DIFETTI-NUOVI-FINE -->
 
 
@@ -1068,3 +1079,5 @@ ramo B (chi_basc OFF):
   ```
 - **note** STANDARD 7: il giro CORTO (120 passi) prima del giro vero. Serve a misurare il COSTO: se la mitosi accelera del fattore previsto (5x-100x), archi e tempo esplodono. Criteri committati PRIMA in b5e9a9a. Destinazione csv/_test_fork/_f2p_corto.
 - *2026-09-24 11:55:34* — PARTITO: PID Windows 15112 (il processo python.exe, NON la shell), 2026-09-24 ~11:5x. 20 frame = 120 passi. Log: csv/_test_fork/_f2p_corto_log.txt
+
+**chiuso 2026-09-24 12:06:04 — FINITO** 120 passi in 444.7 s, 1 snapshot + BILANCIO (chiude a 4.041e-14). ESITO DEI TEST 2/4: E1a NON PASSA (mitosi 1 evento contro 62, Schwinger 0 contro 28), E1c NON PASSA (0.345x contro la banda 5x-100x: MIA previsione sbagliata NEL VERSO), E1b e E4 PASSANO. I dati parziali SERVONO: sono la prova di D36. Il run a 600 passi NON e stato lanciato (par.5: si committa il fallimento e si ferma).

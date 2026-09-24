@@ -82,9 +82,13 @@ CURE = [
     ("FASE_2PI", "**§D** `φ` come fase ordinaria su `[0, 2π)`",
      "⏸ *(l'esito si legge dal referto)*",
      "csv/_seal_fork/_sig_fase_2pi/REFERTO.txt",
-     "⏸ prova a 600 passi + i test `E1`-`E4`, **da fare**",
-     "la lettura scelta da Luca, **da METTERE ALLA PROVA**. Se un test fallisce, **cade**. **Cura `D35`** *(l'antifase `+2π` che non e' un'antifase)*",
-     "✅ **IN CODICE e SIGILLATA**, default **SPENTO**. ⏸ **NON ANCORA PROVATA**"),
+     "❌ **PROVATA sul giro CORTO (120 passi, `Z127`): `2/4`, `E1` NON PASSA**",
+     "**LA LETTURA CADE.** La cura fa cio' che dichiara su `phi` *(`E4` PASSA, bilancio "
+     "`4.041e-14`)*, **ma la generazione di materia SI FERMA**: mitosi `62` -> `1` evento, "
+     "Schwinger `28` -> `0`. **`|tw|` si dimezza e nessun arco raggiunge piu' la soglia** "
+     "*(`MAX 4.37 = 1.39 pi` contro `2pi`)*. **-> `D36`**",
+     "❌ **IN CODICE e SIGILLATA, ma la PROVA la BOCCIA.** Default **SPENTO**, e ci resta: "
+     "il punto 2 del par.D va riaperto *(decisione di Luca)*"),
 ]
 
 # Le PROVE DI SPEGNIMENTO: NON sono cure, e stanno a parte perche' il conto resti onesto.
