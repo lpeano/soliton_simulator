@@ -79,8 +79,14 @@ DECISO = [
 # ---------------------------------------------------------------- C: aperto
 # (voce, dove vive, marcatore da verificare o None)
 APERTO = [
-    ("**`S08`** -- il sito `S08_proj`: `proj` e' ADIMENSIONALE e viene sommato a una LUNGHEZZA; "
-     "l'unica cosa che gli da' unita' e' il clip",
+    ("**`S08`** -- **se `phi` non e' l'azimut del Bloch, CHE COS'E'?** `Z121` ha **refutato** "
+     "la frase del docstring *(`R <= 0.18` contro un nullo di `0.016`, criterio `>= 0.90`)*, "
+     "**ma non ha detto che cosa `phi` SIA**. **E' la domanda del PONTE VERO** *(voce 8)*, "
+     "presa dall'altro capo",
+     "`doc/STATO_RUN.md`, tabella dei sospetti, riga `S08`", None),
+    ("**`S08_proj`** -- **NON e' `S08`, ed e' un'altra cosa**: `proj` e' ADIMENSIONALE e viene "
+     "sommato a una LUNGHEZZA; l'unica cosa che gli da' unita' e' il clip *(`A11`)*. "
+     "**Li avevo confusi nel primo quadro** *(rilievo di Luca)*",
      "scheda (2) `memoria-del-moto`; `Z112`", "S08_proj"),
     ("**LA MAPPA DEI TEMPI** -- quanti tempi ha il sistema, e quali sono la stessa cosa con nomi "
      "diversi. **Sospesa dal `PROMPT UNICO`, mai ripresa**",
@@ -127,14 +133,35 @@ def default_di(sorg, flag):
     return m.group(1) if m else "?"
 
 
-def argv_driver():
-    """Le opzioni cablate nel driver: e' cio' che decide se una cura GIRA DAVVERO."""
-    t = io.open(DRIVER, encoding="utf-8", errors="replace").read()
-    return set(re.findall(r'"(--[a-z0-9-]+)"', t)) | set(re.findall(r"'(--[a-z0-9-]+)'", t))
+def stato_dal_sigillo():
+    """LO STATO EFFETTIVO, dal SIGILLO DEL DRIVER -- non dal testo del driver.
 
+    ⚠ **LA VERSIONE PRECEDENTE CERCAVA IL NOME `"--peq-esatto"` NEL FILE, e lo TROVAVA**:
+    la riga c'e', ma dentro una CONDIZIONE --
+        `+ (["--peq-esatto"] if PEQESATTO == "on" else [])`
+    con `PEQESATTO` che **di default vale `"off"`**. **Il nome e' presente, la cura NO.**
+    Il quadro diceva `SI'` a SEI cure che l'invocazione nuda **non accende**, e lo diceva
+    **mentre il sigillo del driver, nello stesso repo, stampava `NUDA = False` per quelle
+    sei.** *(Rilievo di Luca, 2026-09-24.)*
 
-def opzione_di(flag):
-    return "--" + flag.lower().replace("_", "-")
+    ### **E' lo `STANDARD 9` preso al contrario: ho dichiarato una PRESENZA da un `in` sul
+    ### testo, dove serviva la CONDIZIONE.** La regola nomina le assenze; **una presenza
+    ### dedotta da un `in` e' lo stesso errore col segno opposto.**
+
+    Ora si legge **il REFERTO DEL SIGILLO**, che percorre `_cli()` + `_applica_flag(a)` in un
+    processo nuovo e legge lo stato **DAL MODULO**. Se il referto manca, si DICHIARA: **non si
+    indovina**.
+    """
+    p = os.path.join(RADICE, "csv", "_seal_fork", "_sig_driver_accende", "REFERTO.txt")
+    if not os.path.exists(p):
+        return None
+    t = io.open(p, encoding="utf-8", errors="replace").read()
+    fuori = {}
+    for r in t.splitlines():
+        m = re.match(r"^\s{2}([A-Z][A-Z0-9_]+)\s+(True|False|ASSENTE)\s+(True|False|ASSENTE)\b", r)
+        if m:
+            fuori[m.group(1)] = (m.group(2) == "True", m.group(3) == "True")
+    return fuori or None
 
 
 def rami():
@@ -152,7 +179,7 @@ def rami():
 
 def main():
     sorg = io.open(SORGENTE, encoding="utf-8", errors="replace").read()
-    opz = argv_driver()
+    sig = stato_dal_sigillo()
     from _cure_verificate import CURE
 
     R = []
@@ -172,27 +199,44 @@ def main():
     # ------------------------------------------------------------------ A
     W("### A. ✅ ACQUISITO — **in codice E acceso nei run**")
     W("")
-    W("| flag | cura | default | **il driver lo accende?** | sigillo |")
-    W("|---|---|:--:|:--:|--:|")
+    if sig is None:
+        W("> ⚠ **IL REFERTO DEL SIGILLO DEL DRIVER MANCA**, quindi la colonna *«il driver lo")
+        W("> accende?»* **non si puo' generare**. Si dichiara invece di indovinare: gira")
+        W("> `python csv/_seal_fork/_sigillo_driver_accende.py` e rigenera.")
+        W("")
+    W("| flag | cura | default | **NUDA** | **CAMPAGNA** | sigillo |")
+    W("|---|---|:--:|:--:|:--:|--:|")
     acceso = 0
+    nudo_no = []
     for c in CURE:
-        flag, nome, sig = c[0], c[1], c[2]
+        flag, nome, s_sig = c[0], c[1], c[2]
         d = default_di(sorg, flag)
-        o = opzione_di(flag)
-        su = (d == "True") or (o in opz)
-        acceso += 1 if su else 0
-        W("| `%s` | %s | **`%s`** | %s | %s |"
-          % (flag, nome, d,
-             ("✅ **sì** *(`%s`)*" % o) if o in opz else
-             ("✅ *(default `True`)*" if d == "True" else "❌ **NO**"), sig))
+        vn, vc = (sig or {}).get(flag, (None, None))
+        if vc:
+            acceso += 1
+        if vc and not vn:
+            nudo_no.append(flag)
+        sim = lambda v: "?" if v is None else ("✅" if v else "❌")
+        W("| `%s` | %s | **`%s`** | %s | %s | %s |"
+          % (flag, nome, d, sim(vn), sim(vc), s_sig))
     W("")
-    W("**Accese nei run: %d su %d.** *(Il `default` nel sorgente resta `False`: **i default si "
-      "cambiano all'epoca 3**, voce `B`.)*" % (acceso, len(CURE)))
+    W("> **LE DUE COLONNE SI LEGGONO DAL SIGILLO DEL DRIVER** — `_cli()` + `_applica_flag(a)`")
+    W("> in un processo nuovo, stato letto **dal MODULO**. **NUDA** = i soli argomenti")
+    W("> posizionali; **CAMPAGNA** = gli argomenti che `_g4_prova.py` passa davvero.")
     W("")
-    W("> **⚠ IL FATTO CHE QUESTA COLONNA RENDE VISIBILE:** una cura con `default False` e **senza")
-    W("> la riga nell'argv del driver** *non gira*, e nessun sigillo se ne accorge — il sigillo")
-    W("> certifica che il flag **funziona**, non che sia **acceso**. **La colonna si legge dal")
-    W("> driver, non dalla mia memoria.**")
+    W("**Accese in CAMPAGNA: %d su %d.** *(Il `default` nel sorgente resta `False`: **i default "
+      "si cambiano all'epoca 3**, voce `B`.)*" % (acceso, len(CURE)))
+    W("")
+    if nudo_no:
+        W("> ### ⚠ **ACCESE SOLO DAL COMANDO, NON DAL DRIVER: %d** — %s"
+          % (len(nudo_no), ", ".join("`%s`" % x for x in nudo_no)))
+        W("> **Non sono nel codice: sono nell'argv di CHI LANCIA**, e un comando che ne")
+        W("> dimentica una gira su un sistema che si sa difettoso *(`P2`)* **senza che nessun")
+        W("> sigillo se ne accorga**.")
+    else:
+        W("> ### ✅ **NUDA = CAMPAGNA: il driver accende TUTTE le cure approvate da sé.**")
+        W("> **Un solo modo di lanciare**, e nessuna cura si puo' dimenticare *(decisione di")
+        W("> Luca, 2026-09-24)*.")
     W("")
 
     # ------------------------------------------------------------------ B
