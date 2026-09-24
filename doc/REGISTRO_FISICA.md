@@ -1729,6 +1729,32 @@ la *cura del mondo* ricostruisce il vuoto di fondo dopo i flag:
 > consegnato **`352` nodi invece di `900`, in silenzio**, e ogni misura successiva sarebbe stata
 > su una taglia diversa da quella scritta nel comando *(`A9`)*.
 
+### ⚠⚠ **IL LIMITE DEL RIFIUTO, e va letto PRIMA di credergli** *(rilievo di Luca, 2026-09-24)*
+
+`_semina_lam` si arrende quando **un lotto di `n` proposte non accetta nessun punto**, e **il
+lotto ha la taglia CHIESTA**. Da qui tre conseguenze, e nessuna è innocua:
+
+1. **`collocati` DIPENDE DA `n`.** Più se ne chiedono, più tentativi si fanno, più se ne
+   piazzano. **MISURATO a `r = 4.0`, stesso seme:**
+   ```
+   n=900 -> 372 | n=2000 -> 371 | n=4000 -> 399 | n=8000 -> 411 | n=16000 -> 398 | n=32000 -> 418
+   ```
+   **`+12 %` su un intervallo di richieste di `35x`.** **Non è «il massimo che ci sta»: è un
+   LIMITE INFERIORE che cresce con la richiesta.**
+2. **CON `n` PICCOLO IL RIFIUTO PUÒ ESSERE FALSO:** bastano `n` mancati di fila mentre c'è
+   ancora posto. **È il silenzio al contrario che `A9` vuole evitare** — non nasconde una
+   riduzione, ma **può negare una taglia che in realtà entrerebbe.**
+3. **la bisezione del raggio poggia su un sì/no RUMOROSO**, quindi il raggio per `n` **si dà
+   con la sua dispersione fra semi, mai come un numero secco.**
+
+> **IL CRITERIO DI ARRESTO NON È STATO CAMBIATO** *(decisione di Luca: prima si misura quanto
+> pesa)*. Cambiarlo introdurrebbe **un NUMERO** — la taglia del lotto — che è ciò che si voleva
+> evitare *(par.3)*. **Il limite è scritto DENTRO il messaggio di rifiuto**, così chi lo legge
+> lo legge lì e non qui.
+
+**⚠ E IL `352` DEL PRIMO GIRO VA RILETTO COSÌ:** veniva da `ask = 900`. **Non era sbagliato,
+ma non era «la capienza»: era la capienza A QUELLA DOMANDA.**
+
 **LA STIMA `RSA` REGGE:** `384` previsti contro `352` misurati, **scarto `8.3 %`** — e la stima
 è un **limite superiore** *(ignora il bordo)*, quindi il verso è quello giusto.
 

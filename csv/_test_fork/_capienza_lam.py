@@ -38,77 +38,92 @@ import soliton_simulator as S
 S.SEMINA_LAM = True
 LAM = float(S.LAM); RC = float(S.R_CONN())
 
-def _dì(s):
-    sys.stdout.write(s + chr(10)); sys.stdout.flush()   # AVANZAMENTO VISIBILE
+# LA RICHIESTA E' FISSA PER OGNI RAGGIO, e non per fortuna (rilievo di Luca):
+# se un raggio la raggiungesse, la capienza non sarebbe un rifiuto ma un successo, e il
+# confronto fra raggi userebbe due definizioni diverse. Il codice lo CONTROLLA e lo DICE.
+ASK = 4000
 
-def capienza(r, seed, ask=4000):
-    '''Il MASSIMO che l'RSA colloca in una palla di raggio r, dal PERCORSO VERO.
+def _di(s):
+    sys.stdout.write(s + chr(10)); sys.stdout.flush()
 
-    Si chiede `ask` e si legge il RIFIUTO. Se invece RIESCE, `ask` era troppo basso e si
-    RADDOPPIA: cosi' il numero resta quello vero e il LOTTO resta piccolo.
-    (Nel mio primo giro chiedevo 200000, e siccome il lotto ha la taglia CHIESTA ogni
-    tentativo proponeva duecentomila punti: era il difetto che rendeva la misura interminabile.)
-    '''
-    while ask < 4000000:
-        net = S.Rete(seed)
-        try:
-            net._semina_lam(ask, r, (0.0, 0.0, 0.0))
-            ask *= 2                       # e' entrato tutto: il tetto era troppo basso
-            continue
-        except SystemExit as ex:
-            m = re.search(r"collocati\s*=\s*(\d+)", str(ex))
-            return int(m.group(1)) if m else -1
-    return -1
+def capienza(r, seed, ask=ASK):
+    '''Quanto l'RSA raggiunge in raggio r CON UN LOTTO DI TAGLIA `ask`.
 
-def entra(n, r, seed=1):
-    '''Domanda SI'/NO diretta: `n` nodi entrano in raggio `r`? Lotto = n, non 200000.'''
+    NON e' "il massimo che ci sta": e' un LIMITE INFERIORE che cresce con `ask`, perche' il
+    criterio di arresto e' "un lotto intero senza accettazioni" e il lotto ha la taglia
+    chiesta. (Rilievo di Luca, 2026-09-24.) Torna `-1` se ENTRA TUTTO: li' il numero non e'
+    una capienza, ed e' il caso che renderebbe i raggi non confrontabili.'''
     net = S.Rete(seed)
     try:
-        net._semina_lam(n, r, (0.0, 0.0, 0.0))
-        return True
+        net._semina_lam(ask, r, (0.0, 0.0, 0.0))
+        return -1
+    except SystemExit as ex:
+        m = re.search(r"collocati\s*=\s*(\d+)", str(ex))
+        return int(m.group(1)) if m else -2
+
+def entra(n, r, seed):
+    net = S.Rete(seed)
+    try:
+        net._semina_lam(n, r, (0.0, 0.0, 0.0)); return True
     except SystemExit:
         return False
 
 RAGGI = [0.7, 1.0, 1.5, 2.0, 2.264, 3.0, 4.0, 4.5, 5.48, 7.6]
-SEMI = [1, 2, 3]
-_dì("LAM %.6f RCONN %.6f" % (LAM, RC))
+SEMI = [1, 2, 3, 4]
+_di("LAM %.6f RCONN %.6f ASK %d SEMI %d" % (LAM, RC, ASK, len(SEMI)))
 dati = {}
 for r in RAGGI:
     t0 = time.time()
     v = [capienza(r, s) for s in SEMI]
+    if min(v) < 0:
+        _di("*** r=%.4f: ENTRA TUTTO con ask=%d -> capienza NON DEFINITA, raggi NON"
+            " CONFRONTABILI. Alzare ASK." % (r, ASK)); continue
     dati[r] = v
-    _dì("CAP r=%.4f  r/LAM=%.3f  n=%s  media=%.1f  disp=%.1f  [%.1f s]"
-        % (r, r / LAM, v, float(np.mean(v)), float(np.std(v)), time.time() - t0))
+    _di("CAP r=%.4f  r/LAM=%.3f  n=%s  media=%.1f  disp=%.1f  (%.1f %%)  [%.1f s]"
+        % (r, r / LAM, v, float(np.mean(v)), float(np.std(v)),
+           100.0 * float(np.std(v)) / max(float(np.mean(v)), 1e-9), time.time() - t0))
 
-rr = np.array([r for r in RAGGI if np.mean(dati[r]) >= 5.0], float)
-nn = np.array([np.mean(dati[r]) for r in RAGGI if np.mean(dati[r]) >= 5.0], float)
+# (2) LA PROVA DEL RADDOPPIO: la capienza cambia se si chiede il doppio?
+_di("")
+_di("RADDOPPIO -- la capienza cambia raddoppiando n chiesto? (stesso seme)")
+for r in (2.264, 4.0, 5.48):
+    a = [capienza(r, s, ASK) for s in SEMI]
+    b = [capienza(r, s, 2 * ASK) for s in SEMI]
+    ma, mb = float(np.mean(a)), float(np.mean(b))
+    _di("RAD r=%.4f  ask=%d -> %.1f +- %.1f   ask=%d -> %.1f +- %.1f   scarto %+.2f %%"
+        % (r, ASK, ma, float(np.std(a)), 2 * ASK, mb, float(np.std(b)),
+           100.0 * (mb / max(ma, 1e-9) - 1.0)))
+
+rr = np.array([r for r in RAGGI if r in dati and np.mean(dati[r]) >= 5.0], float)
+nn = np.array([np.mean(dati[r]) for r in RAGGI if r in dati and np.mean(dati[r]) >= 5.0], float)
 A = np.vstack([np.log(rr), np.ones(len(rr))]).T
 esp, q = np.linalg.lstsq(A, np.log(nn), rcond=None)[0]
-_dì("ESPONENTE misurato = %.4f   (atteso 3 se n ~ r^3)  su %d raggi con n>=5"
-    % (esp, len(rr)))
-_dì("COEFF n = %.4f * r^%.4f" % (math.exp(q), esp))
+_di("")
+_di("ESPONENTE misurato = %.4f   (atteso 3 se n ~ r^3)  su %d raggi" % (esp, len(rr)))
+_di("COEFF n = %.4f * r^%.4f" % (math.exp(q), esp))
 
-def raggio_per(n, seed=1):
-    '''Il RAGGIO MINIMO che contiene n. Si parte dalla legge MISURATA e si stringe con la
-    domanda SI'/NO diretta: dodici passi bastano a ~0.1 %% del raggio.'''
+# (3) IL RAGGIO PER n, CON LA SUA DISPERSIONE FRA SEMI
+def raggio_per(n, seed):
     g = (n / math.exp(q)) ** (1.0 / esp)
     lo, hi = 0.5 * g, 2.0 * g
-    while not entra(n, hi, seed):
-        hi *= 1.5
-    for _ in range(12):
+    for _ in range(8):
+        if entra(n, hi, seed): break
+        hi *= 1.4
+    for _ in range(11):
         mid = 0.5 * (lo + hi)
-        if entra(n, mid, seed):
-            hi = mid
-        else:
-            lo = mid
+        if entra(n, mid, seed): hi = mid
+        else: lo = mid
     return hi
 
+_di("")
 for n in (497, 900, 2391):
     t0 = time.time()
-    r = raggio_per(n)
-    _dì("RAGGIO_PER n=%d  ->  r=%.4f  (= %.3f LAM)   verifica entra=%s   [%.1f s]"
-        % (n, r, r / LAM, entra(n, r), time.time() - t0))
+    v = [raggio_per(n, s) for s in SEMI]
+    _di("RAGGIO_PER n=%d  r = %.4f +- %.4f  (= %.3f +- %.3f LAM)  semi=%s  [%.1f s]"
+        % (n, float(np.mean(v)), float(np.std(v)), float(np.mean(v)) / LAM,
+           float(np.std(v)) / LAM, ["%.3f" % x for x in v], time.time() - t0))
 """
+
 
 
 
