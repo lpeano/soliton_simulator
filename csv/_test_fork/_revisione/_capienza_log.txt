@@ -1,0 +1,54 @@
+[TIMBRO] _capienza_lam.py  sha1-BYTE 66dd2019  committato e pulito
+# `SEMINA_LAM` -- QUANTI NODI ENTRANO DAVVERO. Semina RSA VERA, non estrapolazione.
+#
+# La capienza si legge dal RIFIUTO di `_semina_lam`, che dichiara `collocati`:
+# **il numero viene dallo stesso codice che semina.**
+# MISURATO IN ISOLAMENTO: una regione vuota alla volta, SENZA il vuoto di fondo.
+#
+  LAM 0.800000 RCONN 2.400000 ASK 4000 SEMI 4
+  CAP r=0.7000  r/LAM=0.875  n=[5, 5, 4, 4]  media=4.5  disp=0.5  (11.1 %)  [0.3 s]
+  CAP r=1.0000  r/LAM=1.250  n=[11, 9, 11, 11]  media=10.5  disp=0.9  (8.2 %)  [0.4 s]
+  CAP r=1.5000  r/LAM=1.875  n=[30, 28, 28, 29]  media=28.8  disp=0.8  (2.9 %)  [0.5 s]
+  CAP r=2.0000  r/LAM=2.500  n=[58, 60, 57, 61]  media=59.0  disp=1.6  (2.7 %)  [0.7 s]
+  CAP r=2.2640  r/LAM=2.830  n=[85, 78, 83, 83]  media=82.2  disp=2.6  (3.1 %)  [1.0 s]
+  CAP r=3.0000  r/LAM=3.750  n=[177, 171, 180, 183]  media=177.8  disp=4.4  (2.5 %)  [1.9 s]
+  CAP r=4.0000  r/LAM=5.000  n=[399, 396, 406, 382]  media=395.8  disp=8.7  (2.2 %)  [4.0 s]
+  CAP r=4.5000  r/LAM=5.625  n=[566, 539, 544, 532]  media=545.2  disp=12.7  (2.3 %)  [5.5 s]
+  CAP r=5.4800  r/LAM=6.850  n=[954, 940, 948, 950]  media=948.0  disp=5.1  (0.5 %)  [11.3 s]
+  CAP r=7.6000  r/LAM=9.500  n=[2400, 2445, 2350, 2347]  media=2385.5  disp=40.3  (1.7 %)  [38.3 s]
+  ESPONENTE misurato = 2.6875   (atteso 3 se n ~ r^3)  su 9 raggi
+  COEFF n = 9.6466 * r^2.6875
+  RAGGIO_PER n=497  r = 4.5950 +- 0.0350  (= 5.744 +- 0.044 LAM)  semi=['4.609', '4.644', '4.574', '4.552']  [6.2 s]
+  RAGGIO_PER n=900  r = 5.5589 +- 0.0213  (= 6.949 +- 0.027 LAM)  semi=['5.547', '5.555', '5.539', '5.595']  [22.7 s]
+  RAGGIO_PER n=2391  r = 7.6799 +- 0.0153  (= 9.600 +- 0.019 LAM)  semi=['7.694', '7.688', '7.654', '7.683']  [186.9 s]
+
+====================================================================================================
+LA SCENA DI OGGI, e il numero che la uccide
+====================================================================================================
+  `_semina_n_masse`: 3 masse su un cerchio di raggio `sep`, ognuna con
+  `npunt = int(massa_critica_collasso() * 0.8) = 497` nodi in **raggio `0.7`**
+  (`_size_video(k, 0.7)`, e `--size` non e' passato).
+
+  ❗ IN RAGGIO `0.7` (= 0.875 LAM) CI STANNO **4** NODI. La scena ne chiede **497**.
+     RAPPORTO CHIESTO / POSSIBILE = **110**
+  -> **il raggio della massa e' PIU' PICCOLO di `LAM`**: la scena mette la materia
+     **dentro una regione piu' piccola della scala di Planck del sistema.**
+
+====================================================================================================
+LE DUE SCENE DEL MANDATO -- NUMERI, NON STIME
+====================================================================================================
+  GEOMETRIA: `nm = 3` masse su un cerchio di raggio `sep`. La distanza fra i CENTRI di
+  due masse adiacenti e' la corda a 120 gradi: **`sep * sqrt(3)`**.
+  L'INTERVALLO fra i BORDI e' `sep*sqrt(3) - 2*r_massa`.
+  ⚠ **`intervallo = R_CONN` E' UNA SCELTA DI LUCA, NON UNA DERIVAZIONE**, e si dichiara:
+     e' il raggio a cui il vuoto si allaccia, quindi "le masse si vedono appena".
+
+
+  (b) STESSA DISTANZA -- `--sep 4.0`
+      distanza fra i centri = 4.0*sqrt(3) = 6.9282
+      raggio massimo con intervallo R_CONN:  r = (6.9282 - 2.4000)/2 = **2.2641** (= 2.830 LAM)
+      n per massa = capienza a quel raggio: **82**  (misurato a r=2.264, il piu' vicino)
+
+  ⚠ **TUTTI QUESTI NUMERI IGNORANO IL VUOTO DI FONDO**, e non e' una svista: **se il
+     vuoto e' seminato al massimo non c'e' posto per nessuna massa.** E' la decisione
+     `(i)` / `(ii)` che aspetta Luca. **Le scene si PREPARANO, non si girano.**

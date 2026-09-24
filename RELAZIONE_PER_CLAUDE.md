@@ -15514,3 +15514,81 @@ generica, **e un'avvertenza generica non impedisce nulla**.
 > vera: qui il vincolo è solo sui CENTRI.** **Il tuo «circa una dozzina» era esatto**, il mio
 > numero troppo piccolo di ~2.2 volte. Il conto sbagliato **resta stampato nel referto**, col
 > perché: un errore cancellato non insegna niente.
+
+
+---
+
+# ❗ LA CAPIENZA, MISURATA — **e la mia legge `r ∝ n^(1/3)` È SMENTITA** *(2026-09-24)*
+
+*(`csv/_test_fork/_capienza_lam.py`, richiesta FISSA `4000`, **quattro semi**, blob `bd99fd8`)*
+
+```
+CAP r=0.7000  r/LAM=0.875  n=[5, 5, 4, 4]          media=4.5     disp=0.5  (11.1 %)
+CAP r=1.0000  r/LAM=1.250  n=[11, 9, 11, 11]       media=10.5    disp=0.9   (8.2 %)
+CAP r=2.0000  r/LAM=2.500  n=[58, 60, 57, 61]      media=59.0    disp=1.6   (2.7 %)
+CAP r=2.2640  r/LAM=2.830  n=[85, 78, 83, 83]      media=82.2    disp=2.6   (3.1 %)
+CAP r=4.0000  r/LAM=5.000  n=[399, 396, 406, 382]  media=395.8   disp=8.7   (2.2 %)
+CAP r=5.4800  r/LAM=6.850  n=[954, 940, 948, 950]  media=948.0   disp=5.1   (0.5 %)
+CAP r=7.6000  r/LAM=9.500  n=[2400, 2445, 2350, 2347]  media=2385.5  disp=40.3  (1.7 %)
+```
+
+> ### **ESPONENTE MISURATO = `2.6875`, NON `3`.**
+> Avevo scritto `r = 4·(n/352)^(1/3)` **da UN solo punto**, e tu hai chiesto di verificarla con
+> la semina vera. **Non regge:** la capienza cresce come `r^2.69`, non `r^3`.
+> **Il perché è il BORDO:** a raggi piccoli la superficie pesa, e l'`RSA` vicino al bordo è meno
+> efficiente. L'esponente sale verso `3` solo per regioni grandi. **Estrapolare da un punto era
+> esattamente l'errore.**
+
+## LA PROVA DEL RADDOPPIO — **il limite c'è e ora è quantificato su più raggi**
+
+```
+RAD r=2.2640  ask=4000 -> 82.2 +- 2.6    ask=8000 -> 82.8 +- 1.1    scarto +0.61 %
+RAD r=4.0000  ask=4000 -> 395.8 +- 8.7   ask=8000 -> 412.0 +- 2.2   scarto +4.11 %
+RAD r=5.4800  ask=4000 -> 948.0 +- 5.1   ask=8000 -> 974.2 +- 3.3   scarto +2.77 %
+```
+
+**La capienza cresce ancora raddoppiando la richiesta: `+0.6 %`, `+4.1 %`, `+2.8 %`.**
+**`C2` del tuo mandato nuovo è esattamente questo test, e OGGI FALLIREBBE.**
+
+## I RAGGI, **con la loro dispersione fra semi** *(punto 3)*
+
+| `n` | raggio | in `LAM` |
+|--:|---|---|
+| `497` | `4.5950 ± 0.0350` | `5.744 ± 0.044` |
+| `900` | `5.5589 ± 0.0213` | `6.949 ± 0.027` |
+| `2391` | `7.6799 ± 0.0153` | `9.600 ± 0.019` |
+
+**La dispersione è sotto l'`1 %`:** il sì/no rumoroso **non rovina la bisezione** quanto temevo.
+**Ma è rumore sulla risposta a una domanda che dipende ancora dalla richiesta**, quindi il
+numero vero resta da rifare col criterio nuovo.
+
+## ❗ IL NUMERO CHE UCCIDE LA SCENA DI OGGI
+
+```
+_semina_n_masse: 3 masse, ognuna con 497 nodi in raggio 0.7 (= 0.875 LAM)
+IN RAGGIO 0.7 CI STANNO 4 NODI.  RAPPORTO CHIESTO / POSSIBILE = 110
+```
+
+> **Il raggio della massa è PIÙ PICCOLO di `LAM`.** La scena mette `497` nodi **dentro una
+> regione più piccola della scala di Planck del sistema.** **Non è una densità alta: è una
+> regione in cui, per `A13`, non esistono due punti distinti.**
+
+## LE DUE SCENE, coi numeri veri
+
+**(a) STESSA MATERIA** — `497` nodi per massa:
+`r = 4.5950 ± 0.0350` · **`sep = 6.6915 ± 0.0404`** · centri a `11.5900 ± 0.0700` · estensione
+`~11.29`.
+
+**(b) STESSA DISTANZA** — `--sep 4.0`: centri a `6.9282` · raggio massimo con intervallo
+`R_CONN`: **`r = 2.2641`** · **`n` per massa = `82 ± 3`** *(la tua stima era `~110`)*.
+
+**⚠ Tutti questi numeri IGNORANO il vuoto di fondo**, e non è una svista: se il vuoto è seminato
+al massimo **non c'è posto per nessuna massa**. È la decisione `(i)`/`(ii)` che aspetta te.
+
+## ⚠ E UN DIFETTO DEL MIO STRUMENTO, preso rileggendo l'output
+
+Quando il raggio ha acquisito la dispersione, **il formato è cambiato** — da `-> r=4.5950` a
+`r = 4.5950 +- 0.0350` — e **il mio parser non matchava più: la sezione `(a)` spariva IN
+SILENZIO.** Un output **parziale** che sembra completo se non si guarda cosa manca. **È la stessa
+famiglia del referto dei criteri che si fermava al titolo di `G`.** Ora, se il raggio non si
+legge, il referto **lo dice**.
