@@ -13482,3 +13482,57 @@ adesso** *(`A12` regola 1)*.
 > **Ciò che resta vero è il difetto stesso:** la soglia della mitosi è in **unità assolute** di
 > `tw`, e **`tw` prende la sua scala da `phi`**. Il difetto non dipendeva dall'argomento
 > sbagliato — **ma l'argomento sbagliato aveva prodotto una PRIORITÀ sbagliata**, e quella sì.
+
+### ㉝ **(2) LA MAPPA DEL `4pi`: `139` punti, e la classe `INVERSA` è UNA CATENA SOLA**
+
+> `csv/_test_fork/_mappa_4pi.py` → `csv/_test_fork/_diag_D/MAPPA_4PI.md`. **Sola lettura,
+> AST.** Le **regole di classificazione sono committate PRIMA** *(`14d1829`)*.
+
+| classe | quanti | che cos'è |
+|:--:|--:|---|
+| **`VERA`** | **17** | la doppia copertura **dello spinore**: `_phc`, `_spinor_lift`, `psi_spinor`, i mezzi angoli. **È fisica.** |
+| **`DICHIARATA`** | **17** | il **dominio di `phi`**: una **convenzione del codice** |
+| **`EREDITATA`** | **76** | chi prende la sua **scala** da `phi` |
+| **`INVERSA`** | **2** | **il finto pilota il vero** |
+| `?` | **27** | **non classificati**, e restano tali |
+
+**`?` 27 su 139, e non li forzo:** una classe assegnata a forza è peggio di una cella vuota.
+
+### ❗ **Le due `INVERSA` sono la STESSA catena, ed è `TW_SPINORE`**
+
+```
+tw --> _twh = tw/(2*PHI_CRIT)              :3095
+   --> np.add.at(_otw, ii, _axis*_twh)     :3098-3099   MUTAZIONE IN PLACE
+   --> omega_new = omega_new + _otw/...    :3100        *** IL PONTE SBAGLIATO ***
+   --> psi_sp_new  (integra omega_new)
+   --> self._psi_spinor = psi_sp_new       :3264        *** la CONSEGUENZA ***
+```
+
+**`:3100` è il ponte sbagliato** *(la torsione che scrive `omega_s`, cioè lo spinore)*;
+**`:3264` è la sua conseguenza**, il commit atomico dello spinore — **non è un difetto in
+sé**, lo diventa solo se `:3100` ha scritto. **E oggi nessuna delle due gira:
+`TW_SPINORE = False`.**
+
+> **Il limite è dichiarato nel referto: il contagio da `tw` è INSENSIBILE AL FLUSSO.** Una
+> `INVERSA` dice *«la catena esiste nel codice»*, **non** *«gira adesso»*: per quello c'è la
+> colonna **EFFETTIVO**.
+
+### **Tre difetti dello strumento, e tutti e tre si sono denunciati da soli**
+
+**① `Z118` È CIECO SUI SITI CHE `FASE_2PI` HA RISCRITTO.** Cerca i multipli di `pi` come
+**letterali** (`% (4*np.pi)`), e la cura li ha riscritti in **`self._dphi()`**. Riusandolo, la
+prima mappa aveva **42 punti**; con la spazzata per NOME sono **139**. **Fra i siti che `Z118`
+non vedeva: la soglia della mitosi, l'antifase (`:5499`), l'accumulo di `tw`, `TW_SPINORE`.**
+
+**② Zero `VERA` e zero `INVERSA`.** Una classe **sempre vuota** è un numero impossibile
+*(par.9)*. `VERA` mancava perché `_phc` e `_spinor_lift` **non hanno un multiplo di `pi`
+scritto**; `INVERSA` perché la catena è lunga **tre salti** e uno passa per **`np.add.at`**,
+cioè una **mutazione in place** che nessuna regola sugli assegnamenti vede.
+
+**③ `TW_SPINORE` risultava `True`.** Cercavo il flag **a sottostringa** nel testo della
+condizione, e prendevo il valore di un altro. **Un referto che sbaglia lo stato di un flag è
+peggio di uno che scrive `-`.** Ora si cerca per **token esatto**, e dice **`False`**.
+
+> **E il collaudo aveva già fermato tutto una volta prima:** `K2` *(un caso che DEVE passare)*
+> falliva perché `self._psi_spinor` dà il nome **con l'underscore** e il confronto era esatto.
+> **Il collaudo ha rifiutato di produrre la mappa**, che è il suo mestiere.

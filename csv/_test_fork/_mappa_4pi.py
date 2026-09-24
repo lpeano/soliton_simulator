@@ -25,11 +25,11 @@ LE QUATTRO CLASSI, e le REGOLE con cui si assegnano (fissate PRIMA di girare):
                BERSAGLIO e' spinoriale/Bloch e il cui VALORE legge `tw`/`twp`/`dph`.
                **E' la classe che l'architettura a un solo ponte deve abolire.**
 
-⚠ L'ORDINE DI PRECEDENZA CONTA, e si dichiara: `INVERSA` > `VERA` > `DICHIARATA` >
+!! L'ORDINE DI PRECEDENZA CONTA, e si dichiara: `INVERSA` > `VERA` > `DICHIARATA` >
   `EREDITATA`. Un sito che e' sia spinoriale sia letto da `tw` e' **`INVERSA`**, perche' la
   domanda di Luca e' *dove il finto comanda il vero*, e quella vince su tutto.
 
-⚠ CIO' CHE QUESTA MAPPA NON FA: **non decide**. Dice di CHI e' il `4pi` e se quel punto
+!! CIO' CHE QUESTA MAPPA NON FA: **non decide**. Dice di CHI e' il `4pi` e se quel punto
   GIRA. La proposta e' il punto (5), ed e' una scheda a parte.
 
 ASCII PURO.
@@ -38,6 +38,7 @@ import ast
 import io
 import json
 import os
+import re
 import sys
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
@@ -77,7 +78,18 @@ def _nomi(nodo):
 
 
 def _ha(nomi, vocab):
-    return any(v in nomi for v in vocab)
+    """Appartenenza con gli UNDERSCORE INIZIALI NORMALIZZATI, non a sottostringa.
+
+    !! PERCHE' NON A SOTTOSTRINGA, ed e' la parte che conta: `tw` sarebbe contenuto in
+       `twist_dip` e `twist_max`, che vengono da `chi` e NON da `tw` -- la regola `INVERSA`
+       si accenderebbe su siti che non leggono la torsione affatto.
+    !! E PERCHE' NON ESATTA: `self._psi_spinor` da' il nome `_psi_spinor`, con l'underscore,
+       e un confronto esatto contro `psi_spinor` lo MANCA. **`K2` del collaudo l'ha preso**,
+       e il collaudo ha rifiutato di produrre la mappa: era un caso che DEVE passare e non
+       passava.
+    """
+    nn = {n.lstrip("_") for n in nomi}
+    return any(v.lstrip("_") in nn for v in vocab)
 
 
 def _mezzo_angolo(nodo):
@@ -93,12 +105,54 @@ def _mezzo_angolo(nodo):
     return False
 
 
-def classifica(nodo_riga, righe_testo, riga):
+SEMI_TW = ("tw", "twp", "dph")
+
+
+def contagio_tw(fn):
+    """I nomi di variabile che, DENTRO una funzione, discendono da `tw`/`twp`/`dph`.
+
+    !! SERVE, e senza di lui la classe `INVERSA` risulta VUOTA: la catena vera di
+       `TW_SPINORE` e' `tw -> _twh -> _otw -> omega_new`, cioe' **DUE salti**, mentre la
+       regola a un salto non vede niente. Una classe sempre vuota e' un numero impossibile,
+       e la prima stesura ne aveva DUE (`VERA` e `INVERSA`).
+       Si itera fino a chiusura: e' un insieme piccolo, e cosi' non dipende dall'ordine.
+    """
+    contagiati = set(SEMI_TW)
+    for _ in range(8):                      # chiusura: piu' di 8 salti non ne esistono qui
+        prima = len(contagiati)
+        for n in ast.walk(fn):
+            # (a) un assegnamento normale
+            if isinstance(n, (ast.Assign, ast.AugAssign)) and n.value is not None:
+                if _ha(_nomi(n.value), tuple(contagiati)):
+                    bers = n.targets if isinstance(n, ast.Assign) else [n.target]
+                    for b in bers:
+                        contagiati |= _nomi(b)
+                continue
+            # (b) LA MUTAZIONE IN PLACE: `np.add.at(X, idx, V)` scrive X con V.
+            #     !! SENZA QUESTO RAMO LA CLASSE `INVERSA` RESTA VUOTA, e non per assenza
+            #     del difetto: la catena vera di `TW_SPINORE` e'
+            #        `_twh = tw/(2*PHI_CRIT)`  ->  `np.add.at(_otw, ii, _axis*_twh)`
+            #        ->  `omega_new = omega_new + _otw/...`
+            #     e `_otw` NON E' MAI il bersaglio di un assegnamento: e' mutato IN PLACE.
+            #     Una regola che guarda solo gli assegnamenti non lo vede MAI.
+            if isinstance(n, ast.Call):
+                f = n.func
+                nome = f.attr if isinstance(f, ast.Attribute) else getattr(f, "id", None)
+                if nome in ("at", "add", "subtract", "put", "copyto") and len(n.args) >= 2:
+                    if _ha(_nomi(n.args[-1]), tuple(contagiati)):
+                        contagiati |= _nomi(n.args[0])
+        if len(contagiati) == prima:
+            break
+    return contagiati
+
+
+def classifica(nodo_riga, righe_testo, riga, contagiati=()):
     """LA CLASSE, con la regola che l'ha deciso. Precedenza: INVERSA > VERA > DICHIARATA > ERED."""
     nomi = _nomi(nodo_riga) if nodo_riga is not None else set()
     testo = righe_testo[riga - 1] if 0 < riga <= len(righe_testo) else ""
 
-    # INVERSA: un assegnamento il cui BERSAGLIO e' spinoriale/Bloch e il cui VALORE legge tw
+    # INVERSA: un assegnamento il cui BERSAGLIO e' spinoriale/Bloch e il cui VALORE legge
+    # una grandezza CONTAGIATA da `tw` (anche a piu' salti di distanza)
     if isinstance(nodo_riga, (ast.Assign, ast.AugAssign)):
         bers = (nodo_riga.targets if isinstance(nodo_riga, ast.Assign)
                 else [nodo_riga.target])
@@ -106,8 +160,12 @@ def classifica(nodo_riga, righe_testo, riga):
         for b in bers:
             nb |= _nomi(b)
         nv = _nomi(nodo_riga.value) if nodo_riga.value is not None else set()
-        if _ha(nb, SPINORIALI + BLOCH) and _ha(nv, ("tw", "twp", "dph")):
-            return "INVERSA", "bersaglio spinoriale/Bloch, valore che legge `tw`/`twp`/`dph`"
+        semi = tuple(contagiati) or SEMI_TW
+        if _ha(nb, SPINORIALI + BLOCH) and _ha(nv, semi):
+            quali = sorted(n for n in nv if n.lstrip("_") in
+                           {s.lstrip("_") for s in semi})[:3]
+            return "INVERSA", ("bersaglio spinoriale/Bloch, valore che discende da `tw` "
+                               "(via %s)" % ", ".join("`%s`" % q for q in quali))
 
     if riga in VERI_DICHIARATI:
         return "VERA", "sito dichiarato da Luca: %s" % VERI_DICHIARATI[riga]
@@ -128,11 +186,86 @@ def classifica(nodo_riga, righe_testo, riga):
 
 
 def nodo_di_riga(albero):
-    """{riga: il nodo di istruzione che comincia li'}."""
+    """{riga: l'istruzione PIU' INTERNA che COPRE quella riga}.
+
+    !! LA PRIMA STESURA MAPPAVA SOLO `n.lineno`, cioe' la riga in cui l'istruzione COMINCIA.
+       Su questo file quasi ogni riga interessante sta **in mezzo** a un'istruzione su piu'
+       righe, quindi il nodo risultava `None`, i nomi erano un insieme VUOTO, e la mappa
+       usciva con **zero `VERA`, zero `DICHIARATA`, zero `INVERSA` e 16 `?`**.
+       **Non era un risultato: era il difetto dello strumento che si denunciava da solo**,
+       perche' una classe SEMPRE vuota e' un numero impossibile (par.9).
+       Si copre tutto lo span `lineno..end_lineno`, e a parita' di riga vince l'istruzione
+       col SUO span piu' PICCOLO: la piu' interna, che e' quella che contiene l'espressione.
+    """
     out = {}
     for n in ast.walk(albero):
-        if isinstance(n, ast.stmt) and hasattr(n, "lineno"):
-            out.setdefault(n.lineno, n)
+        if not (isinstance(n, ast.stmt) and hasattr(n, "lineno")):
+            continue
+        fine = getattr(n, "end_lineno", None) or n.lineno
+        span = fine - n.lineno
+        for r in range(n.lineno, fine + 1):
+            prec = out.get(r)
+            if prec is None:
+                out[r] = n
+            else:
+                p_fine = getattr(prec, "end_lineno", None) or prec.lineno
+                if span < (p_fine - prec.lineno):
+                    out[r] = n
+    return out
+
+
+# ---------------------------------------------------------------- LA SPAZZATA, che Z118 non fa
+#   !! PERCHE' SERVE, ed e' un difetto di Z118 che questa mappa ha scoperto riusandolo:
+#   `_censimento_fasi.py` cerca i multipli di `pi` SCRITTI COME LETTERALI (`% (4*np.pi)`), ma
+#   la cura `FASE_2PI` ha riscritto quei siti in `% self._dphi()` e `self._wphi(...)`.
+#   **Quindi il censimento e' CIECO esattamente sui siti che la cura ha toccato**, e con lui
+#   la prima stesura di questa mappa: zero `VERA`, zero `DICHIARATA`, zero `INVERSA`.
+#   Una classe SEMPRE vuota e' un numero impossibile, ed e' cosi' che il difetto si e'
+#   denunciato (par.9). Qui si spazza per NOME, non per letterale.
+CHIAMATE_PERIODO = ("_dphi", "_wphi", "_w4", "_w8", "_spinor_lift")
+COSTANTI_PERIODO = ("PHI_CRIT", "TW_TETTO", "twist_max", "twist_dip", "soglia0",
+                    "tau_soglia", "tau_tetto",
+                    # i siti del `4pi` VERO: non hanno un multiplo di `pi` scritto, quindi
+                    # ne' Z118 ne' un grep li trovano. `_phc = exp(-0.5j * _sk * ...)` e'
+                    # LA doppia copertura dello spinore, e il `-0.5` e' il mezzo angolo.
+                    "_phc", "_sk", "s_k", "_spinor_lift", "psi_spinor",
+                    # e i due anelli della catena INVERSA di `TW_SPINORE`
+                    "_twh", "_otw")
+
+
+def punti_extra(testo, albero, nodi):
+    """I siti a periodo che `Z118` non vede: chiamate e costanti, non letterali di `pi`."""
+    righe = testo.split("\n")
+    fn_di_riga = {}
+    for n in ast.walk(albero):
+        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            for r in range(n.lineno, (getattr(n, "end_lineno", None) or n.lineno) + 1):
+                fn_di_riga.setdefault(r, n.name)
+    visti, out = set(), []
+    for n in ast.walk(albero):
+        nome = None
+        if isinstance(n, ast.Call):
+            f = n.func
+            nome = f.attr if isinstance(f, ast.Attribute) else getattr(f, "id", None)
+            if nome not in CHIAMATE_PERIODO:
+                nome = None
+        elif isinstance(n, ast.Name) and n.id in COSTANTI_PERIODO:
+            nome = n.id
+        elif isinstance(n, ast.Attribute) and n.attr in COSTANTI_PERIODO:
+            nome = n.attr
+        if not nome:
+            continue
+        r = getattr(n, "lineno", None)
+        if r is None or (r, nome) in visti:
+            continue
+        visti.add((r, nome))
+        # il FLAG che governa quella riga: lo chiediamo a Z118, che sa farlo
+        try:
+            fl = Z118.flag_di_riga(albero, righe).get(r, "")
+        except Exception:
+            fl = ""
+        out.append(dict(riga=r, fn=fn_di_riga.get(r, "(modulo)"), tipo="SWEEP",
+                        classe="", flag=fl, fonte="`%s`" % nome))
     return out
 
 
@@ -230,6 +363,14 @@ def main():
     albero = ast.parse(testo)
     nodi = nodo_di_riga(albero)
     punti = Z118.censisci(testo)
+    # !! SI AGGIUNGE LA SPAZZATA: senza, la mappa e' CIECA sui siti che la cura `FASE_2PI` ha
+    #    riscritto, perche' `Z118` cerca i multipli di `pi` come LETTERALI e quei siti ora
+    #    dicono `self._dphi()`. Il conto dei due insiemi si stampa: si vede quanto Z118
+    #    da solo NON vedeva.
+    n_z118 = len(punti)
+    extra = punti_extra(testo, albero, nodi)
+    punti = punti + extra
+    punti.sort(key=lambda p: (p["riga"], p["tipo"]))
     eff, fonte_eff = effettivo()
 
     try:
@@ -256,18 +397,29 @@ def main():
        "che e' sia spinoriale sia scritto da `tw` e' **`INVERSA`**, perche' la domanda e' "
        "*dove il finto comanda il vero*.\n\n")
 
+    fn_di_nome = {n.name: n for n in ast.walk(albero)
+                  if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+    contagio = {}
     conta = {}
     Wf("## I PUNTI\n\n")
     Wf("| riga | funzione | tipo | **di chi** | regola che l'ha deciso | flag | **EFFETTIVO "
        "nei run** |\n|--:|---|:--:|:--:|---|---|:--:|\n")
     for p in punti:
-        c, regola = classifica(nodi.get(p["riga"]), righe, p["riga"])
+        fn_nodo = fn_di_nome.get(p["fn"])
+        if fn_nodo is not None and p["fn"] not in contagio:
+            contagio[p["fn"]] = contagio_tw(fn_nodo)
+        c, regola = classifica(nodi.get(p["riga"]), righe, p["riga"],
+                               contagio.get(p["fn"], ()))
         conta[c] = conta.get(c, 0) + 1
         fl = p.get("flag") or "-"
+        # !! IL FLAG SI CERCA PER TOKEN ESATTO, non a sottostringa: la prima stesura faceva
+        #    `if nome in fl` e su `TW_SPINORE` prendeva il valore di un ALTRO flag il cui nome
+        #    e' contenuto in quella stringa, stampando `True` dove il referto dice `False`.
+        #    Un referto che sbaglia lo stato di un flag e' peggio di uno che scrive `-`.
         val = "-"
-        for nome in eff:
-            if nome and nome in fl:
-                val = str(eff[nome])
+        for tok in re.findall(r"[A-Z][A-Z0-9_]+", fl or ""):
+            if tok in eff:
+                val = str(eff[tok])
                 break
         Wf("| `:%d` | `%s` | `%s` | **`%s`** | %s | %s | **%s** |\n"
            % (p["riga"], p["fn"], p["tipo"], c, regola, fl, val))
@@ -278,6 +430,24 @@ def main():
            "**Non li forzo in una classe**, perche' una classe assegnata a forza e' peggio di "
            "una cella vuota.\n\n" % conta["?"])
 
+    Wf("### !! COME SI LEGGE UNA `INVERSA`, e il limite e' dichiarato\n\n")
+    Wf("**Il contagio da `tw` e' INSENSIBILE AL FLUSSO: ignora i gate.** Quindi una `INVERSA` "
+       "dice *\"la catena ESISTE nel codice\"*, **non** *\"gira adesso\"*. Per sapere se gira si "
+       "guarda la colonna **EFFETTIVO**.\n\n")
+    Wf("**Le due `INVERSA` trovate stanno sulla STESSA catena**, ed e' quella di `TW_SPINORE`:\n\n")
+    Wf("```\n")
+    Wf("  tw  --> _twh = tw/(2*PHI_CRIT)        :3095\n")
+    Wf("      --> np.add.at(_otw, ii, _axis*_twh)   :3098-3099   (mutazione IN PLACE)\n")
+    Wf("      --> omega_new = omega_new + _otw/...  :3100        *** INVERSA ***\n")
+    Wf("      --> psi_sp_new  (integra omega_new)\n")
+    Wf("      --> self._psi_spinor = psi_sp_new     :3264        *** INVERSA (conseguenza) ***\n")
+    Wf("```\n\n")
+    Wf("> **`:3100` e' il PONTE SBAGLIATO** *(la torsione che scrive `omega_s`, cioe' lo "
+       "spinore)*, **e `:3264` e' la sua CONSEGUENZA**: il commit atomico dello spinore. "
+       "**`:3264` non e' un difetto in se'** -- diventa un ponte inverso **solo** se `:3100` "
+       "ha scritto.\n")
+    Wf("> **E OGGI NESSUNA DELLE DUE GIRA: `TW_SPINORE = False`.** La catena e' **in codice e "
+       "spenta**, e l'architettura a un solo ponte deve dire **se puo' esistere affatto**.\n\n")
     Wf("## IL GRAFO DELLE DIPENDENZE\n\n")
     Wf("```\n")
     Wf("  SPINORE (4pi VERO)\n")
@@ -300,7 +470,7 @@ def main():
     for da, a, come, cl in GRAFO:
         Wf("| %s | %s | %s | `%s` |\n" % (da, a, come, cl))
     Wf("\n")
-    Wf("> **⚠ COSA QUESTA MAPPA NON FA: non decide.** Dice **di chi** e' il `4pi` in ogni "
+    Wf("> **!! COSA QUESTA MAPPA NON FA: non decide.** Dice **di chi** e' il `4pi` in ogni "
        "punto e **se quel punto gira**. La proposta e' una **scheda a parte**.\n")
     f.close()
     W("mappa scritta -> %s\n" % os.path.relpath(OUT, RADICE))
