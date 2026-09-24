@@ -1,0 +1,91 @@
+# G4 -- IL BILANCIO DI `d0`, con MEM_MOTO=True
+# blob simulatore (sha1 byte grezzi)=49fc54d2  seme=42  passi=120
+# CRITERIO, scritto PRIMA: Delta(somma d0) = scritture + freno + nati - morti,
+#   entro 1e-9 RELATIVO alla scala dei termini.
+
+IL BILANCIO CHIUDE? residuo relativo: max 5.304e-14, mediano 1.181e-14 su 120 passi
+  -> CHIUDE
+
+I TOTALI SU 120 PASSI:
+  Delta(somma d0)  +1.681530e+05
+  scritture        -1.534035e+05   (-91.23 % del Delta)
+  FRENO            +3.214340e+05   (191.16 %)
+  NASCITE-MORTI    +1.224666e+02   (  0.07 %)   <- misurato AL SITO che concatena
+
+  (descrittivi, a granularita' di PASSO e non del sito -- NON entrano nel
+   bilancio: un arco nato e poi scritto mostrerebbe il valore di fine passo)
+  nascite (fine passo)  +3.753851e+02
+  morti (inizio passo)  +2.498742e+02
+
+  LA GUARDIA DEL SALTO fra la fine di un passo e l'inizio del successivo:
+  somma dei salti  +0.000000e+00  -> nessuna scrittura fuori dal ciclo
+
+CHI FA CRESCERE `d0`: il termine col contributo POSITIVO maggiore.
+  freno              +3.214340e+05
+  nascite-morti      +1.224666e+02
+  scritture          -1.534035e+05
+  -> IL PRIMO E' `freno`
+
+NASCITE e MORTI, e la MEDIANA che conta:
+ passo   n nati  n morti |     med nati    med morti     med vivi
+     8        0        0 |          nan          nan     0.938570
+    16        2        1 |     0.802930     1.613736     1.022466
+    24        0        0 |          nan          nan     1.073950
+    32        0        0 |          nan          nan     1.116760
+    40        6        2 |     0.804686     1.611203     1.156687
+    48        4        1 |     1.248056     1.885971     1.190882
+    56        0        0 |          nan          nan     1.214973
+    64        0        0 |          nan          nan     1.238288
+    72        0        0 |          nan          nan     1.255779
+    80        2        1 |     0.998094     1.688350     1.272858
+    88        2        1 |     1.036705     1.679276     1.294850
+    96        2        1 |     1.190436     1.441686     1.315611
+   104        4        2 |     1.201803     1.675827     1.333915
+   112        2        1 |     1.219594     1.929797     1.356740
+   120       10        4 |     0.826670     1.429883     1.382321
+
+  -> se `med nati` > `med vivi` e `med morti` < `med vivi`, la mediana sale
+     SENZA CHE NESSUN ARCO CRESCA: e' NUCLEAZIONE, non stiramento.
+
+GLI SCRITTORI (la traccia di `Z102`):
+scrittore                    SALITE        DISCESE          SALDO |   giri  salta
+P1_dopo_rilass         0.000000e+00   0.000000e+00   0.000000e+00 |    120      0
+P2_dopo_spinta         0.000000e+00   0.000000e+00   0.000000e+00 |    110      0
+P3_dopo_proj           0.000000e+00   0.000000e+00   0.000000e+00 |    120      0
+P4_dopo_grav           0.000000e+00   0.000000e+00   0.000000e+00 |    120      0
+P6_dopo_coesione       0.000000e+00   0.000000e+00   0.000000e+00 |    120      0
+P7_dopo_4917           0.000000e+00   0.000000e+00   0.000000e+00 |    120      0
+S01_archi_nuovi                 n/d            n/d            n/d |      4      4
+S02_rilass_visco       1.032038e+04  -3.537004e+04  -2.504966e+04 |    120      0
+S03_diff_guscio        1.021450e+05  -1.576943e+05  -5.554929e+04 |    120      0
+S05_spinta_locale      1.165054e+00   0.000000e+00   1.165054e+00 |    110      0
+S06_mitosi                      n/d            n/d            n/d |     76     76
+S07_schwinger                   n/d            n/d            n/d |     40     40
+S08_proj               3.824322e+05  -3.013867e+05   8.104549e+04 |    120      0
+S09_spinta_med         3.288429e+05  -4.594865e+05  -1.306437e+05 |    120      0
+S12_coesione           1.897787e+04  -4.218540e+04  -2.320754e+04 |    120      0
+
+IL FRENO, per chiamante di `_smorza`:
+  d0_passo       aggiunge +3.214340e+05 su dx -1.534028e+05 in 120 giri   <- NEL BILANCIO
+  d_passo        aggiunge +2.369097e+04 su dx +1.033479e+04 in 120 giri   (dentro un sito tracciato)
+
+⚠ `_smp_chiudi()` RISCRIVE `d0` a fine passo SENZA nessun `_traccia_d0`
+  attorno (`:3677`): e' la scrittura che in `Z107` mancava al bilancio.
+
+============================================================================================
+V8/V9 -- LA DISTRIBUZIONE DI |dx|/d, SEPARATA PER SALITE E DISCESE
+============================================================================================
+  E' il numero che decide la forma del freno-legge (scheda 11, par.4-quater):
+    |dx|/d << 1  -> `exp(x)` e `1+tanh(x)` sono indistinguibili
+    |dx|/d ~ 1   -> il tetto di `1+tanh(x)` (RADDOPPIA) comincia a mordere
+    |dx|/d > 2   -> con la forma di Ito una SALITA FAREBBE SCENDERE
+
+  verso                n        p50        p90        p99      p99.9        max >1 (quota) >2 (quota)
+  ------------------------------------------------------------------------------------------
+  discese       60538734     0.0019     0.0239     0.0310     0.0344     0.0385  0.000e+00  0.000e+00
+  salite        65192342     0.0024     0.0124     0.0241     0.0307     0.0531  0.000e+00  0.000e+00
+
+  quota con |dx|/d > 0.5:  discese 0.000e+00  salite 0.000e+00
+  ⚠ I QUANTILI vengono da un SOTTOCAMPIONE REGOLARE (non casuale: nessun
+    RNG consumato, nessuna dipendenza dal seme); `n`, `max` e le QUOTE
+    sono invece su TUTTI i campioni. Dichiarato perche' sono due basi.
