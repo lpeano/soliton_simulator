@@ -48,10 +48,27 @@ esattamente quello che `Z127` ha misurato**: portare `phi` su `2pi` ha dimezzato
 <!-- PUNTO-DI-RIPRESA:INIZIO -->
 # ⚠⚠ PUNTO DI RIPRESA — **si legge PER PRIMO dopo un riavvio**
 
-> **Aggiornato 2026-09-24 mezzogiorno · HEAD `da6d24a` · branch `fork-su2`.**
-> **Simulatore blob `445e2896`.** **Nessun processo vivo, niente a metà.**
+> **Aggiornato 2026-09-24 sera · HEAD `43f3a89` · branch `fork-su2`.**
+> **Simulatore blob `49fc54d2`.** **Nessun processo vivo, niente a metà.**
+>
+> ### ✅ **`CURA 1` E `CURA 2` SONO APPROVATE E IL DRIVER LE ACCENDE IN OGNI RUN.**
+> **I loro default nel sorgente restano `False`: i default si cambiano all'EPOCA 3.**
+> **Sotto c'è IL QUADRO UNICO, generato: cosa è acquisito, cosa è deciso e non ancora in
+> codice, cosa è aperto.** **Si legge quello, non questa testa.**
 
-## ⚠ CI SI È FERMATI QUI: **`E1` NON PASSA, e la decisione è di Luca**
+## ⚠ CI SI È FERMATI QUI: **`CURA 2` chiusa e accesa; il prossimo passo è `CURA 3`**
+
+**Nessun run in corso.** `CURA 2` è **approvata, accesa nel driver e verificata**: sigillo
+`5/5` con **un processo per braccio**, giro corto `120` passi contro `_cura1_corto`, `T4`
+**rifatto con la firma dei byte** *(`206` uguali, `0` diversi — le due strade concordano)*,
+e un sigillo nuovo che certifica **che il driver la accende davvero**.
+**Il prossimo passo è `CURA 3`** *(`φ` su `2π` con le soglie che la seguono)*, **e dopo un
+CHECKPOINT: Luca decide se il freno-legge viene prima o dopo.**
+
+### ⚠ E LA SEZIONE QUI SOTTO È STORICA — `FASE_2PI`, che è CADUTA
+
+> **Si legge per sapere COM'ERA**, non come stato attuale. `FASE_2PI` resta **l'unica cura
+> del quadro che il driver NON accende**, e il perché è qui.
 
 **Nessun run in corso.** Il giro corto di `FASE_2PI` è finito e **la sua prova la
 boccia**: la cura fa ciò che dichiara su `φ`, **ma la generazione di materia si ferma**
@@ -68,6 +85,80 @@ piccoli è **l'identità**. **A dimezzare `tw` è l'INGRESSO** *(`dph` e `twp` p
 Il run di `D34` **è finito** *(`Z123`)*, e il sigillo di `FASE_2PI` **è finito `6/6`**
 *(`Z124`)*. **Il prossimo run è la prova di `FASE_2PI` a 600 passi**, e quando parte questo
 blocco lo dirà qui sopra.
+
+<!-- QUADRO-INIZIO -->
+
+## IL QUADRO UNICO — **tre elenchi, GENERATI** *(decisione di Luca, 2026-09-24)*
+
+> *«Troppi fili aperti, il lavoro buono non deve perdersi per strada.»*
+> **Generato da `csv/_quadro_unico.py`, e si rigira a ogni commit che cambia una cura o
+> una decisione.** **Il DEFAULT e la colonna *driver* si leggono dal DISCO a ogni giro**;
+> il testo delle decisioni e dei fronti e' **scritto a mano**, ciascuno col suo commit —
+> *un'interpretazione non si genera, una condizione del codice si'.*
+
+### A. ✅ ACQUISITO — **in codice E acceso nei run**
+
+| flag | cura | default | **il driver lo accende?** | sigillo |
+|---|---|:--:|:--:|--:|
+| `PEQ_ESATTO` | `C1` rilassamento di `peq` in forma ESATTA | **`False`** | ✅ **sì** *(`--peq-esatto`)* | `7/7` |
+| `PEQ_NASCITA_LOCALE` | `C2` nascita LOCALE di `peq` | **`False`** | ✅ **sì** *(`--peq-nascita-locale`)* | `6/6` |
+| `SCALA_MIN_PASSO` | `C3` il freno UNA VOLTA per passo | **`False`** | ✅ **sì** *(`--scala-min-passo`)* | `6/6` |
+| `COES_CAUSALE` | `C4` coesione: istante unico e cono LOCALE | **`False`** | ✅ **sì** *(`--coes-causale`)* | `5/5` |
+| `COES_ADIM` | coesione ADIMENSIONALE | **`False`** | ✅ **sì** *(`--coes-adim`)* | — *(non ha un sigillo suo)* |
+| `ANOM_SIMM` | `C1-bis` anomalia simmetrica, senza pavimento | **`False`** | ✅ **sì** *(`--anom-simm`)* | `6/6` |
+| `INVARIANTI` | `C5` domini di stato, due livelli | **`True`** | ✅ *(default `True`)* | `3/3` |
+| `RITMO_WRAP_2PI` | **`A1`** il wrap del ritmo sul periodo GIUSTO *(`2π`)* | **`False`** | ✅ **sì** *(`--ritmo-wrap-2pi`)* | `4/4` + **`6/6` di `CURA 1`** *(`csv/_seal_fork/_sig_cura1/REFERTO.txt`)* |
+| `TEMPO_UNICO_MITOSI` | **`CURA 2`** UN SOLO OROLOGIO dentro `mitosi()` | **`False`** | ✅ **sì** *(`--tempo-unico-mitosi`)* | ⏸ *(l'esito si legge dal referto)* |
+| `FASE_2PI` | **§D** `φ` come fase ordinaria su `[0, 2π)` | **`False`** | ❌ **NO** | ⏸ *(l'esito si legge dal referto)* |
+
+**Accese nei run: 9 su 10.** *(Il `default` nel sorgente resta `False`: **i default si cambiano all'epoca 3**, voce `B`.)*
+
+> **⚠ IL FATTO CHE QUESTA COLONNA RENDE VISIBILE:** una cura con `default False` e **senza
+> la riga nell'argv del driver** *non gira*, e nessun sigillo se ne accorge — il sigillo
+> certifica che il flag **funziona**, non che sia **acceso**. **La colonna si legge dal
+> driver, non dalla mia memoria.**
+
+### B. 🟨 DECISO DA LUCA, **non ancora in codice**
+
+| decisione | contenuto | dove vive | commit | **già in codice?** |
+|---|---|---|--:|:--:|
+| **IL FRENO-LEGGE: la forma** | `(d - LAM) <- (d - LAM) * (1 + tanh(dx/d))`. Deriva **esattamente nulla**, e il suo unico prezzo -- la saturazione a `2` -- **si paga zero volte**: `max |dx|/d = 0.0531` su `125 731 076` campioni, **zero oltre `0.5`**. | scheda (11) par.4-quinquies + `D31` nella `STATO` della scheda (1) | `19cea14` | ⚠ **SÌ — la riga va spostata in `A`** |
+| **`LAM` STRUTTURALE** | *«nessuna lunghezza sotto `LAM`»* deve diventare **strutturale**, non un freno che ci arriva. Oggi `E4-LAM` la **VERIFICA sempre** (`6/6`), ma la **realizzazione** e' ancora il freno a senso unico. | `D31`, e il punto (2) di `E4-LAM` | `e8d8ba1` | — *(non verificabile da un marcatore)* |
+| **EPOCA 3 = i default nel sorgente** | i `default` dei flag delle cure **restano `False`** e si cambiano **all'epoca 3**. Fino ad allora **le accende il DRIVER**, run per run. | questa sezione, colonna *driver* di `A` | *(decisione di Luca, 2026-09-24)* | — *(non verificabile da un marcatore)* |
+| **`CURA 3` -- `phi` su `2pi` con le soglie che la seguono** | nella **forma decisa**: frazioni che sul dominio `4pi` danno **ESATTAMENTE** i valori di oggi, flag spento, sigillo con **un processo per braccio**, giro corto contro `CURA 2`. | mandato di Luca; scheda da scrivere | *(mandato del 2026-09-24)* | no *(verificato dal sorgente)* |
+| **`TW_SPINORE` bloccato PER SEMPRE** | e' **gia' in codice** come presidio (il simulatore **rifiuta di partire**), ma la decisione *«per sempre»* e' di Luca e va letta qui: **non e' una cura, e' un IMPEDIMENTO** -- la legge non ha mai girato, quindi non ha prodotto nulla da curare. | `CURE VERIFICATE`, sezione *presidio strutturale* | `dd82794a` | ⚠ **SÌ — la riga va spostata in `A`** |
+
+> **La colonna *già in codice* è GENERATA**: cerca il marcatore nel sorgente a ogni giro.
+> **È il solo modo perché `B` non diventi una lista di buoni propositi**: il giorno in cui
+> una decisione entra nel codice, **la riga si segnala da sola**.
+
+### C. 🟥 APERTO — **una riga per voce, col posto dove vive**
+
+| | fronte | dove vive | esiste ancora? |
+|--:|---|---|:--:|
+| `1` | **`S08`** -- il sito `S08_proj`: `proj` e' ADIMENSIONALE e viene sommato a una LUNGHEZZA; l'unica cosa che gli da' unita' e' il clip | scheda (2) `memoria-del-moto`; `Z112` | ✅ **sì** |
+| `2` | **LA MAPPA DEI TEMPI** -- quanti tempi ha il sistema, e quali sono la stessa cosa con nomi diversi. **Sospesa dal `PROMPT UNICO`, mai ripresa** | mandato del 2026-09-24, punto (4) | — |
+| `3` | **`D33`** -- la repulsione che si spegne al tetto. **E' dentro il perimetro di `CURA 2`** e il criterio `R` l'ha sfiorato: `d0` si muove del `+-3 %`, non del `x2.5` previsto | scheda (7) `mitosi-schwinger` | — |
+| `4` | **CHI SPINGE CONTRO IL MURO** -- quali siti spingono `d` verso `LAM` e con che peso. Il bilancio dice **chi fa crescere `d0`**; questo chiede **chi la fa scendere** | scheda (1) + il bilancio di `G4` | — |
+| `5` | **IL CLAMP MORTO IN `_cs_arco_da_nodo`** -- `np.maximum(cs_i + cs_j, 1e-12)`. **Protegge da un errore, e `A11` dice di cercare l'errore**: `cs > 0` e' DERIVATO (`cs_floor > 0`), quindi il clamp non puo' mordere. **E' EREDITATO da `step()`, non l'ho aggiunto io** -- e la cura e' toglierlo **dal sito originale**, non solo dalla copia | scheda (9) par.10.1; `:4791` e il metodo estratto | ✅ **sì** |
+| `6` | **`S09`** -- l'orologio *non si sposta, si allarga*: il criterio va **riformulato** (rilievo di Luca sul `0746144`) | `CURA 1`, referto dell'orologio | — |
+| `7` | **`S11`** e **`S13`** -- sospetti mai promossi ne' chiusi | coda dei sospetti | — |
+| `8` | **IL PONTE VERO** -- la torsione presa dal **trasporto SU(2)**, non da `phi`. **E' il motivo per cui `TW_SPINORE` e' bloccato**: quel ponte era INVERSO. Il ponte giusto non esiste ancora | mappa del `4pi`, le due voci `INVERSA`; scheda (8) | — |
+| `9` | **IL MERGE DI `main`** -- `doc/PIANO_merge_main.md`. **`fork-su2` e' l'unico ramo vivo.** **E' una DECISIONE DI LUCA: si segnala, non si fa** | `doc/PIANO_merge_main.md` | — |
+| `10` | **`mean((dx/d)^2)` NON REGISTRATO** -- direbbe **di quanto** la forma piana sarebbe stata peggiore. **Costa ZERO run in piu'**: una somma, sugli stessi campioni | scheda (11) par.4-quinquies | — |
+| `11` | **LA LEGGE DI `CURA 2` E' SALVA PER L'ORDINE DELLE CHIAMATE, non per una guardia** -- `_r_nodo_mitosi` legge `_r_corrente` **prima** che la mitosi allunghi `n`. **Basta spostare una riga.** Le tre guardie hanno **zero salti**, e non per merito loro | scheda (9) par.10; referto di `CURA 2` par.4 | — |
+
+### I RAMI — **letti da `git` a ogni giro**
+
+| ramo | ultimo commit |
+|---|---|
+| `fork-su2` | a49aee2 2026-09-24 |
+| `main` | 252630f 2026-09-10 |
+
+> **`fork-su2` è l'unico ramo vivo.** **Il merge è una DECISIONE DI LUCA**
+> *(`doc/PIANO_merge_main.md`)*: **si segnala, non si fa** — ed è la voce `9` di `C`.
+
+<!-- QUADRO-FINE -->
 
 ## LO STATO DELLE CURE — **la tabella vera è `CURE VERIFICATE`, più sotto**
 
@@ -427,9 +518,10 @@ un run scrive su `C:`, e solo dopo l'archivio viene spostato. Cambiare i comandi
 | `ANOM_SIMM` | `C1-bis` anomalia simmetrica, senza pavimento | **`False`** | `6/6` *(letto dal referto)* | in **ogni** run del fork | toglie `max(peq, 1e-9)`, che con `peq < 0` **RIBALTAVA IL SEGNO** *(`Z94`, `D17`)* | VERIFICATA-SPENTA |
 | `INVARIANTI` | `C5` domini di stato, due livelli | **`True`** | `3/3` *(letto dal referto)* | in **ogni** run: **zero violazioni** in tutti e tre i bracci di `G4` | legge soltanto; su un run sano non cambia un bit | **ACCESA DI DEFAULT** *(`True`)* |
 | `RITMO_WRAP_2PI` | **`A1`** il wrap del ritmo sul periodo GIUSTO *(`2π`)* | **`False`** | `4/4` + **`6/6` di `CURA 1`** *(`csv/_seal_fork/_sig_cura1/REFERTO.txt`)* | ✅ **`G4`, 600 passi** *(`Z123`)* + **giro corto di `CURA 1`** | cura **`D34`** *(`Z117`: il wrap a `4π` e' l'IDENTITA')*. **`6/8` come previsto e il bilancio CHIUDE (`9.595e-14`), ma TUTTI gli aggregati peggiorano e la mia previsione ⑤ era SBAGLIATA** *(la quota al tetto SALE: -> `S09`)* | ✅✅ **APPROVATA DA LUCA il 2026-09-24. IL DRIVER LA ACCENDE IN OGNI RUN** *(`--ritmo-wrap-2pi`)*. Default nel sorgente **`False`**, come tutte le cure pre-epoca-3. **`D34` passa da difetto aperto a CURA IN CODICE.** |
+| `TEMPO_UNICO_MITOSI` | **`CURA 2`** UN SOLO OROLOGIO dentro `mitosi()` | **`False`** | `5/5` *(letto dal referto)* | ✅ **giro corto di 120 passi contro `_cura1_corto`** *(un interruttore di differenza, due processi freschi a un solo braccio)* | gli usi di `tau_pp` come TEMPO passano all'orologio `dt_e`; i **quattro** usi come POSIZIONE sull'asse della torsione restano INTOCCATI *(dall'AST, `T3`)*. **La mitosi vive** *(eventi `67` -> `76`)*, **il bilancio chiude** *(`5.304e-14`)*, e **la saturazione di `tanh(grad)` passa da `0.0034 %` a ZERO** *(`A11` cor.6; il massimo misurato `0.8861` contro il `0.8884` PREVISTO dall'intervallo di `r`)*. **⚠ MA due delle tre sostituzioni formali sono INERTI in questo regime:** il clip alto su `prob` non morde **mai** *(0 su 63 128 409)* e l'Eulero non ha **mai** `dt/τ > 1`. **⚠ E la previsione di `×2.5`-`×3` su `d0` NON regge: `±3 %`** | ✅✅ **APPROVATA DA LUCA il 2026-09-24. IL DRIVER LA ACCENDE IN OGNI RUN** *(`--tempo-unico-mitosi`)*. Default nel sorgente **`False`**, come tutte le cure pre-epoca-3. |
 | `FASE_2PI` | **§D** `φ` come fase ordinaria su `[0, 2π)` | **`False`** | `6/6` *(letto dal referto)* | ❌ **PROVATA sul giro CORTO (120 passi, `Z127`): `2/4`, `E1` NON PASSA** | **LA LETTURA CADE.** La cura fa cio' che dichiara su `phi` *(`E4` PASSA, bilancio `4.041e-14`)*, **ma la generazione di materia SI FERMA**: mitosi `62` -> `1` evento, Schwinger `28` -> `0`. **`|tw|` si dimezza e nessun arco raggiunge piu' la soglia** *(`MAX 4.37 = 1.39 pi` contro `2pi`)*. **-> `D36`** | ❌ **IN CODICE e SIGILLATA, ma la PROVA la BOCCIA.** Default **SPENTO**, e ci resta: il punto 2 del par.D va riaperto *(decisione di Luca)* |
 
-**Cure con default ACCESO: 1 su 9.**
+**Cure con default ACCESO: 1 su 10.**
 
 ### ⛔ E QUESTO NON E' UNA CURA: e' un **PRESIDIO STRUTTURALE**
 

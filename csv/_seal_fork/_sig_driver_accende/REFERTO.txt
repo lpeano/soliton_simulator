@@ -1,0 +1,51 @@
+# SIGILLO -- IL DRIVER ACCENDE DAVVERO LE CURE APPROVATE?
+#
+# Un sigillo di cura certifica che il flag FUNZIONA. NON che sia ACCESO.
+# Questo certifica il secondo, ed e' l'unico che lo fa.
+#
+COLLAUDO (`P1-sexies`), con il caso che DEVE fallire
+--------------------------------------------------------------------------------------------
+K1 `--tempo-unico-mitosi` nell'argv del driver: True (atteso True) -> OK
+K2 `--flag-che-non-esiste` nell'argv del driver: False (atteso False) -> OK
+   -> IL SECONDO E' IL CASO CHE DEVE FALLIRE: se il criterio dicesse `True` a tutto,
+      direbbe `True` anche a un flag inventato.
+   !! E QUESTO E' SOLO IL TESTO. IL TEST VERO E' SOTTO: lo stato del MODULO.
+--------------------------------------------------------------------------------------------
+  -> i criteri PASSANO
+
+LO STATO EFFETTIVO DEL MODULO dopo `_cli()` + `_applica_flag(a)`,
+percorrendo la sys.argv CABLATA NEL DRIVER, in un PROCESSO NUOVO (`STANDARD 1`).
+DUE INVOCAZIONI, e la differenza fra loro e' il punto:
+  NUDA      i soli argomenti posizionali -- cio' che gira se nessuno ricorda gli `=on`
+  CAMPAGNA  gli argomenti che `_g4_prova.py` passa davvero
+
+  flag                     NUDA       CAMPAGNA   
+  ANOM_SIMM                False      True       ⚠ **accesa SOLO dal comando**
+  COES_ADIM                False      True       ⚠ **accesa SOLO dal comando**
+  COES_CAUSALE             False      True       ⚠ **accesa SOLO dal comando**
+  FASE_2PI                 False      False      *(dipende dal comando)*
+  INVARIANTI               True       True       *(dipende dal comando)*
+  PEQ_ESATTO               False      True       ⚠ **accesa SOLO dal comando**
+  PEQ_NASCITA_LOCALE       False      True       ⚠ **accesa SOLO dal comando**
+  RITMO_WRAP_2PI           True       True       **DEVE essere True in ENTRAMBE** -> PASS
+  SCALA_MIN_PASSO          False      True       ⚠ **accesa SOLO dal comando**
+  TEMPO_UNICO_MITOSI       True       True       **DEVE essere True in ENTRAMBE** -> PASS
+
+  ⚠ CURE CHE L'INVOCAZIONE NUDA NON ACCENDE: 6 su 10 -- ANOM_SIMM, COES_ADIM, COES_CAUSALE, PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO
+     Non e' un difetto del driver: e' il FATTO che `CURE VERIFICATE` rende visibile.
+     Quelle cure **non sono nel codice: sono nell'argv di CHI LANCIA**, e un comando
+     che ne dimentica una gira su un sistema che si sa difettoso (`P2`) **senza che
+     nessun sigillo se ne accorga**. Le DUE obbligatorie sono le uniche che il DRIVER
+     accende da se', e quindi le uniche che non si possono dimenticare.
+
+============================================================================================
+ESITO: 2/2 sulle cure OBBLIGATORIE
+============================================================================================
+*** IL DRIVER LE ACCENDE. ***
+
+!! COSA QUESTO SIGILLO NON DICE: che le cure siano GIUSTE, ne' che il flag FUNZIONI.
+   Quelli sono i sigilli di ciascuna cura. Questo dice che ACCADONO nei run --
+   l'affermazione che non aveva nessun presidio.
+
+!! E IL LIMITE: certifica L'ARGV DI QUESTO DRIVER. Un altro strumento che costruisce
+   la propria argv (un sigillo in-process, una sonda) NON e' coperto.

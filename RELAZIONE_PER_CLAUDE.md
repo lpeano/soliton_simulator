@@ -14832,3 +14832,124 @@ peq: 2 NaN su 526204 (0.0004 %), posizioni identiche: True, finiti identici: Tru
 **⚠ E IL `NaN` DI `peq` NON È UN DIFETTO:** il suo dominio lo dichiara —
 *«la pressione di equilibrio: `>= 0`, e `nan` SOLO sugli archi marcati»* *(`DOMINI['peq']`)*.
 **Verificato dall'AST, non dedotto.**
+
+
+---
+
+# ❗ UNA MIA AFFERMAZIONE, SMENTITA DAL MIO STESSO COLLAUDO *(tuo rilievo, 2026-09-24)*
+
+**Avevo scritto, nel commit `03f6567`:** *«questa modifica può solo SPOSTARE campi da "diversi"
+a "uguali", mai il contrario. **Detto invece di dedotto.**»*
+
+**È FALSA, e la smentisce `K8` — che ho scritto nello STESSO commit:**
+
+```
+K8  +0.0 contro -0.0:  firma DIVERSA,  array_equal UGUALE
+```
+
+> ### **Quindi la firma può spostare campi ANCHE da «uguali» a «diversi», e `T4` — che è un
+> ### test di IDENTITÀ — poteva essere un FALSO `PASS`.**
+> **L'ho persino etichettata *«detto invece di dedotto»*, mentre era DEDOTTA, e dedotta male,
+> contro una prova che avevo appena scritto io.**
+
+## `T4` RIFATTO CON LA FIRMA DEI BYTE — **nessun run nuovo**
+
+*(`csv/_seal_fork/_riverifica_t4.py`, sugli snapshot già scritti)*
+
+```
+UGUALI 206   DIVERSI 0   solo in RIF: 0   solo in SPENTO: 5   illeggibili: 0
+array_equal diceva 206 e 0.  La firma dice 206 e 0.
+```
+
+> **Le due strade CONCORDANO: il `PASS` non era falso.**
+> **Ma ciò che è cambiato non è il verdetto: è che ORA SI SA.** Un test di identità con un
+> criterio che non vede `+0.0` contro `-0.0` può passare per la ragione sbagliata, **e nessuno
+> lo saprebbe.**
+
+## I «NON CONFRONTATI», CLASSIFICATI — **`STANDARD 3`**
+
+| | SPENTO | ACCESO |
+|---|--:|--:|
+| solo nel riferimento | `0` | `0` |
+| solo nel braccio | `5` | `12` |
+| illeggibili | `0` | `0` |
+
+**I `5` dello spento sono TUTTI contatori `_tum_clip*`: assenza STRUTTURALE**, il blob del
+riferimento non li aveva. **I `12` dell'acceso sono `10` contatori** *(gli stessi più
+`_tum_r_*`, `_tum_cs_*`, `_tum_t_*`, `_tum_eulero_*`, che **esistono solo a flag acceso** perché
+i metodi che li scrivono girano solo lì)* **più DUE che il mio strumento ha segnalato come
+«DA SPIEGARE»** — e li ho spiegati **dal codice**, verificandoli **sui dati**:
+
+### ❗ `_peqn_idx` — **e chiude la domanda sui `NaN` di `peq`**
+
+È la **marca** degli archi nati nell'ultima mitosi *(`:5747`)*, **consumata alla calibrazione
+dopo** *(`:4923`, «vale per UNA calibrazione sola»)*. La sua presenza dice: **una mitosi è
+avvenuta nell'ultimo passo.** È **traiettoria**, non codice.
+
+```
+sigillo ACCESO   NaN in peq: [526202, 526203]   _peqn_idx: [526202, 526203]   COINCIDONO
+giro corto       NaN in peq: [526202, 526203]   _peqn_idx: [526202, 526203]   COINCIDONO
+```
+
+> **Il dominio dichiara *«`nan` SOLO sugli archi marcati»*, e gli archi marcati sono
+> ESATTAMENTE quelli con `nan`.** **Non era da credere al dominio: ora è verificato sui dati.**
+
+### `_ritmo_snap_identico` — **scatta con la cura e non senza**
+
+Contatore di `Z33` *(`:2651`)*: scatta quando lo snapshot di `psi_spin` è **identico** al
+precedente. **Vale `1` in entrambi i run con la cura, ASSENTE nel riferimento.** Una volta su
+`120` passi: **poco, e non è nulla. → in coda.**
+
+**E i due valori sono IDENTICI fra il sigillo e il giro corto** — due processi diversi, due
+strumenti diversi: **riproducibilità, non ripetizione.**
+
+---
+
+# ✅ `(1c)` — `CURA 2` È ACCESA NEL DRIVER, E UN SIGILLO CERTIFICA CHE LO SIA
+
+`--tempo-unico-mitosi` nell'argv cablato, accanto a `--ritmo-wrap-2pi`. **Il default nel
+sorgente resta `False`: i default si cambiano all'epoca 3.**
+
+**E ho scritto il sigillo che mancava** *(`csv/_seal_fork/_sigillo_driver_accende.py`)*, per
+un'affermazione che **non aveva nessun presidio**: *un sigillo di cura certifica che il flag
+**funziona**, non che sia **acceso**.* Lancia un processo nuovo che percorre la strada vera del
+driver — `_cli()` + `_applica_flag(a)` — e legge lo stato **dal modulo**.
+
+```
+                         NUDA       CAMPAGNA
+RITMO_WRAP_2PI           True       True        DEVE essere True in ENTRAMBE -> PASS
+TEMPO_UNICO_MITOSI       True       True        DEVE essere True in ENTRAMBE -> PASS
+
+⚠ CURE CHE L'INVOCAZIONE NUDA NON ACCENDE: 6 su 10
+  ANOM_SIMM, COES_ADIM, COES_CAUSALE, PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO
+```
+
+> ### ❗ **SEI CURE SU DIECI NON SI ACCENDONO DA SOLE.** Sono accese **solo** perché ogni
+> comando di campagna passa `=on`. **Non sono nel codice: sono nell'argv di CHI LANCIA**, e un
+> comando che ne dimentica una gira su un sistema che si sa difettoso *(`P2`)* **senza che
+> nessun sigillo se ne accorga**.
+> **`RITMO_WRAP_2PI` e `TEMPO_UNICO_MITOSI` sono le uniche due che il DRIVER accende da sé, e
+> quindi le uniche che non si possono dimenticare.**
+
+---
+
+# ✅ IL QUADRO UNICO — **generato** *(`csv/_quadro_unico.py`)*
+
+Nel `PUNTO DI RIPRESA` di `doc/STATO_RUN.md`, fra marcatori, **e si rigira a ogni commit che
+cambia una cura o una decisione**:
+
+**`A` ACQUISITO — `10` cure, `9` accese nei run.** La colonna *«il driver lo accende?»* **si
+legge dal driver**, non dalla mia memoria. L'unica a `❌ NO` è **`FASE_2PI`**, che è caduta.
+
+**`B` DECISO, non in codice — `5` voci:** freno-legge `1+tanh` · `LAM` strutturale · epoca 3 =
+i default nel sorgente · `CURA 3` nella forma decisa · `TW_SPINORE` bloccato per sempre.
+**La colonna *«già in codice?»* è GENERATA**: cerca il marcatore nel sorgente a ogni giro,
+così **il giorno in cui una decisione entra nel codice la riga si segnala da sola.**
+
+**`C` APERTO — `11` voci**, ciascuna col posto dove vive: `S08` · la mappa dei tempi · `D33` ·
+chi spinge contro il muro · **il clamp morto in `_cs_arco_da_nodo`** · `S09`/`S11`/`S13` · il
+ponte vero · **il merge di `main`** · `mean((dx/d)²)` non registrato · **la legge di `CURA 2`
+salva per l'ordine delle chiamate**.
+
+**I rami sono letti da `git`**: `fork-su2` è l'unico vivo. **Il merge è una tua decisione:
+segnalato, non fatto.**

@@ -1,0 +1,92 @@
+# RIVERIFICA DI `T4` CON LA FIRMA DEI BYTE -- nessun run nuovo
+#
+# La frase del commit `03f6567` era FALSA: la correzione NON puo' solo spostare campi
+# da diversi a uguali. `K8` lo dimostra: `+0.0` contro `-0.0` -> `array_equal` UGUALE,
+# firma DIVERSA. Quindi `T4` poteva essere un FALSO PASS. (Rilievo di Luca.)
+#
+================================================================================================
+1. `T4` RIFATTO -- riferimento `_cura1_corto` contro braccio SPENTO
+================================================================================================
+  UGUALI 206   DIVERSI 0   solo in RIF: 0   solo in SPENTO: 5   illeggibili: 0
+
+  -> `T4` con la FIRMA DEI BYTE: **PASS, e ora l'identita' e' quella vera**
+     `array_equal` diceva `206` uguali e `0` diversi. La firma dice `206` e `0`.
+     **Le due strade CONCORDANO: il PASS non era falso.**
+
+================================================================================================
+2. I CAMPI NON CONFRONTATI -- `STANDARD 3`
+================================================================================================
+  *Un sito che cambia lunghezza non ha un delta: si registra come tale, non come `None`.*
+  E qui la domanda e' piu' stretta: **assenza STRUTTURALE o dato MANCANTE?**
+
+  -- braccio SPENTO contro il riferimento --
+  presenti solo nel RIFERIMENTO (0):
+    (nessuno)
+  presenti solo nello SPENTO (5):
+    _tum_clip0_prob              ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+    _tum_clip_prob               ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+    _tum_clip_prob_tot           ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+    _tum_clip_rep                ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+    _tum_clip_rep_tot            ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+  illeggibili (0): nessuno
+
+  -- braccio ACCESO contro il riferimento --
+  UGUALI 92   DIVERSI 114   solo in RIF: 0   solo in ACCESO: 12   illeggibili: 0
+  i DIVERSI: _calcpsi_chiamate(308 != 317), _calcpsi_w_none(68 != 77), _chi_core_nodi(1bc44d39 (2660,) float64 != 816b1acb (2570,) float64), _chi_core_raggio(f795b54f (2660,) float64 != 9e3e1f3f (2570,) float64), _chi_core_rho0(f6c81fd0 (2660,) float64 != 37dfd843 (2570,) float64), _chi_core_rhoc(289.80021123233064 != 289.8029302739168), _chi_geom_nodi(cdd42c19 (2660,) float64 != 168515a2 (2570,) float64), _cs_nodo_prev(1abb7616 (2660,) float64 != b0718c0b (2575,) float64), _deg(9900c32b (2660,) int64 != be2e30f2 (2575,) int64), _diag_amp_med(0.16789910700074911 != 0.18081312985236792), _diag_sin2_med(0.6948143717312374 != 0.6873106916694239), _diag_sin2_p95(0.99784219122797 != 0.997769493990705)
+  presenti solo nel RIFERIMENTO (0):
+    (nessuno)
+  presenti solo nell'ACCESO (12):
+    _peqn_idx                    ⚠ **DA SPIEGARE** -- non e' un contatore della cura
+    _ritmo_snap_identico         ⚠ **DA SPIEGARE** -- non e' un contatore della cura
+    _tum_clip0_prob              ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+    _tum_clip_prob               ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+    _tum_clip_prob_tot           ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+    _tum_clip_rep                ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+    _tum_clip_rep_tot            ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+    _tum_cs_tot                  ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+    _tum_eulero_gt1              ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+    _tum_eulero_tot              ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+    _tum_r_tot                   ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+    _tum_t_tot                   ASSENZA STRUTTURALE -- contatore introdotto DOPO quel blob, il riferimento non poteva averlo
+  illeggibili (0): nessuno
+
+  ⚠ E I DUE BRACCI NON HANNO LO STESSO NUMERO DI NON CONFRONTATI, ed e' atteso:
+     i contatori `_tum_r_*`, `_tum_cs_*`, `_tum_t_*` e `_tum_eulero_*` **esistono solo
+     a flag ACCESO**, perche' i metodi che li scrivono girano solo li'. **E' assenza
+     STRUTTURALE, non un dato perso**, e per questo il braccio acceso ne ha di piu'.
+
+================================================================================================
+3. I DUE CAMPI CHE IL PUNTO 2 SEGNALA COME `DA SPIEGARE`
+================================================================================================
+  `_peqn_idx` e `_ritmo_snap_identico` NON sono contatori della cura, e ci sono SOLO
+  nel braccio acceso. **La spiegazione si prende dal codice e si VERIFICA sui dati.**
+
+  (a) `_peqn_idx` -- la MARCA degli archi nati nell'ULTIMA mitosi, scritta a `:5747`
+      sotto `PEQ_NASCITA_LOCALE` e **CONSUMATA** alla calibrazione dopo (`:4923`,
+      `self._peqn_idx = None` -- "vale per UNA calibrazione sola").
+      **Quindi la sua PRESENZA significa: una mitosi e' avvenuta nell'ultimo passo e
+      la calibrazione non l'ha ancora consumata.** E' TRAIETTORIA, non codice: i due
+      bracci hanno traiettorie diverse. **ASSENZA STRUTTURALE, spiegata.**
+
+      sigillo ACCESO   NaN in `peq`: [526202, 526203]   `_peqn_idx`: [526202, 526203]   COINCIDONO: True
+      giro corto       NaN in `peq`: [526202, 526203]   `_peqn_idx`: [526202, 526203]   COINCIDONO: True
+
+      -> ❗ **E QUESTO CHIUDE LA DOMANDA SUI `NaN` DI `peq`:** il dominio dichiara
+         *"`nan` SOLO sugli archi marcati"*, e **gli archi marcati sono ESATTAMENTE
+         quelli con `nan`**. Non era da credere al dominio: **e' verificato sui dati**.
+
+  (b) `_ritmo_snap_identico` -- contatore di `Z33` (`:2651`): scatta quando lo
+      snapshot di `psi_spin` e' **identico** al precedente, cioe' quando `f` sara'
+      ZERO per ogni nodo. **Non e' un errore** -- significa che `psi_spin` non e'
+      cambiato -- **ma senza il contatore la degenerazione sarebbe INVISIBILE**.
+      valore nel braccio ACCESO: 1   nel giro corto: 1   nel riferimento: ASSENTE
+      -> ⚠ **SCATTA CON LA CURA E NON SENZA.** Una volta su 120 passi: poco, e **non e'
+         nulla**. Si RIPORTA e va IN CODA: non e' materia di questo referto.
+
+  ⚠ E I DUE VALORI SONO IDENTICI FRA IL SIGILLO E IL GIRO CORTO -- due processi
+     diversi, due strumenti diversi: **e' riproducibilita', non ripetizione.**
+
+================================================================================================
+!! COSA RESTA VERO DEL VECCHIO `T4`: il verdetto. COSA NON ERA GIUSTIFICATO: la
+   FIDUCIA nel verdetto. Un test di IDENTITA' con un criterio che non vede `+0.0`
+   contro `-0.0` puo' passare per la ragione sbagliata, e nessuno lo saprebbe.
