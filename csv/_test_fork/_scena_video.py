@@ -76,7 +76,15 @@ RIPRENDI = False
 # fosse posizionale, passarlo costringerebbe a passare anche i precedenti e il comando di `Z49`
 # non resterebbe riproducibile VERBATIM. A default il driver fa ESATTAMENTE quello che faceva:
 # lo prova `csv/_seal_fork/_sigillo_sep_driver.py`, non questo commento.
-SEP = "8"
+SEP = "4.0"             # [DECISIONE DI LUCA, 2026-09-24] IL DEFAULT SEGUE LA CAMPAGNA.
+                        # Era `"8"`, e OGNI comando di campagna passava `--sep=4.0`: il
+                        # default non riproduceva piu' il comportamento attuale -- **la
+                        # stessa scadenza di `CHICOOP`**. Con questo `NUDA = CAMPAGNA` non
+                        # ha piu' NESSUNA differenza, e il sigillo del driver puo' passare.
+                        # ⚠ CAMBIA LA SCENA DI DEFAULT: chi lancia nudo ottiene ora le
+                        #   masse a `4.0` invece che a `8`. **Non e' byte-inerte, ed e' il
+                        #   punto.** I run gia' fatti passavano `--sep=4.0` esplicitamente
+                        #   e il loro `CONFIGURAZIONE.txt` lo documenta.
 # [A/B chi_basc, 2026-09-20] --chi-basc=on|off NOMINALE, DEFAULT `on`.
 # ⚠ IL DEFAULT E' `on` E NON `off`, ED E' UNA SCELTA: il driver ha SEMPRE passato `--chi-basc`
 #   (era cablato poche righe sotto), quindi `on` e' l'unico default che riproduce il comportamento
