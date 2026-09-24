@@ -33,6 +33,9 @@ DEST = os.path.join(_QUI, "_cura2_corto", "REFERTO_criteri.txt")
 # La convenzione di `G1`-`G2`, NON una nuova: `_dove_spinge_la_gravita.py:72`.
 # **LETTI DAL RUN**, non assunti: il log dice "n = 2391 nodi alla semina".
 N_VUOTO, N0_SEMINA = 900, 2391
+# `PHI_CRIT` LETTO DAL SIMULATORE, non ricopiato: e' la costante che `mitosi()` usa.
+sys.path.insert(0, RADICE)
+from soliton_simulator import PHI_CRIT
 ETI = ("vuoto-vuoto", "massa-massa", "nato-nato", "CONFINE vuoto-massa",
        "CONFINE con nato", "altro")
 
@@ -74,6 +77,7 @@ def main():
 
     dR, dC = leggi(RIF), leggi(CUR)
     A, B = dR["attrs"], dC["attrs"]
+    A_, B_ = A, B                    # alias per la sezione della saturazione
     nA, nB = len(A["_cs_nodo_prev"]), len(B["_cs_nodo_prev"])
 
     P("# I CRITERI DELLA PROVA DI `CURA 2` -- generati, non ricopiati (`P1-ter`)\n#\n")
@@ -190,6 +194,43 @@ def main():
     P("\n  -> se il gradiente sugli archi con un NATO fosse sistematicamente piu' alto, la\n")
     P("     materia nascerebbe DOVE IL TEMPO CAMBIA. E' cio' che la cura rende misurabile:\n")
     P("     prima il gradiente veniva da `|tw|`, che e' TORSIONE, non tempo.\n")
+
+    # ------------------------------------------------------------------ SATURAZIONE
+    P("\n" + "=" * 96 + "\n`A11` cor.6 -- LA SATURAZIONE DI `tanh(grad)`: il limite MORDE?\n"
+      + "=" * 96 + "\n")
+    P("  La soglia della mitosi e' `soglia0 * (1 - 0.3*tanh(grad))`. Se `tanh(grad) -> 1`\n")
+    P("  la modulazione diventa un RISCALAMENTO COSTANTE della soglia, cioe' un PARAMETRO\n")
+    P("  NASCOSTO (`A1`), e `A11` cor.6 dice che un limite che satura e' un ALLARME.\n")
+    P("  E' l'argomento con cui la scheda 9 par.2 ha scelto `r` invece di `1/r`:\n")
+    P("    r    in [1.4142e-6, 1.4142]  -> tanh(grad) <= 0.8884\n")
+    P("    1/r  in [0.707, 707107]      -> tanh(grad) -> 1 ESATTO\n")
+    P("  QUI SI MISURA SE L'ARGOMENTO REGGE SUI DATI.\n\n")
+    P("  %-14s %10s %10s %10s %12s %12s\n"
+      % ("braccio", "p50", "p90", "p99", "max", "> 0.95"))
+    for nome, D, sorgente in (("cura1 (OFF)", A_, "da |tw|"), ("cura2 (ON)", B_, "da r")):
+        i, j = np.asarray(D["i"]), np.asarray(D["j"])
+        n = len(D["_cs_nodo_prev"])
+        if sorgente == "da r":
+            r = np.asarray(D.get("_r_corrente", np.ones(n)), dtype=float)
+            ok = (i < len(r)) & (j < len(r))
+            g = np.abs(r[i[ok]] - r[j[ok]])
+        else:
+            # `tau_nodo = 1 + mean(|tw|)/PHI_CRIT`, ricostruito come in `mitosi()`
+            tw = np.abs(np.asarray(D["tw"], dtype=float))
+            deg = np.maximum(np.asarray(D["_deg"], dtype=float), 1.0)
+            acc = np.zeros(n)
+            mi, mj = i < n, j < n
+            np.add.at(acc, i[mi], tw[mi])
+            np.add.at(acc, j[mj], tw[mj])
+            tau_nodo = 1.0 + acc / deg[:n] / PHI_CRIT
+            g = np.abs(tau_nodo[i] - tau_nodo[j])
+        th = np.tanh(g)
+        a = q(th, (50, 90, 99))
+        P("  %-14s %10.4f %10.4f %10.4f %12.4f %11.4f %%   (%s)\n"
+          % (nome, a[0], a[1], a[2], float(th.max()),
+             100.0 * float((th > 0.95).mean()), sorgente))
+    P("\n  -> la quota con `tanh(grad) > 0.95` e' la misura del cor.6: se fosse ALTA, la\n")
+    P("     modulazione sarebbe un riscaldamento costante e il `0.3` un parametro nascosto.\n")
 
     P("\n" + "=" * 96 + "\n")
     P("!! COSA QUESTO REFERTO NON DICE: che la cura sia GIUSTA. Dice che la mitosi vive, che\n")
