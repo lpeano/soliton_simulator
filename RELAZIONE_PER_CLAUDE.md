@@ -15325,3 +15325,42 @@ opzioni non le ha**, e l'argv è **una sola** per i due bracci.
 > **Ho RITIRATO la mia patch e l'ho dichiarato NON RIGIRABILE invece di truccarlo. E NON
 > spengo l'invariante:** spegnerlo nasconderebbe proprio la misura di `Z148`.
 > **È un `Z31` NUOVO**, non un'omissione di inventario — e sta in `CURE VERIFICATE`.
+
+---
+
+# ✅ `C2` e `C3` — le due correzioni al referto
+
+## `C3` — **il fallback `exp(iφ)` NON è un ponte `INVERSA`. RICLASSIFICATO.**
+
+**La smentita era nel commento DUE RIGHE SOPRA il fallback** *(`:3414`)*:
+
+```
+Riduzione-al-limite S3: con _psi_spinor=(e^{i phi},0) -> comp 0 == self.psi.
+```
+
+> **È la CONDIZIONE INIZIALE SCALARE, DICHIARATA** — il limite `S3` — **e il fallback lo
+> REALIZZA**, invece di violarlo. **`TW_SPINORE` è tutt'altro: una LEGGE permanente e non
+> dichiarata.** Un punto di partenza dichiarato e una legge non dichiarata non sono la stessa
+> cosa, **e chiamarle insieme era mio.**
+
+**E il periodo `2π` è certo per algebra, non «da misurare»:** `exp(i(φ+2π)) = exp(iφ)`. Avevo
+scritto *«va verificata prima di usarla»* — **non c'era niente da verificare.**
+
+### ➜ LA CONSEGUENZA PER `CURA 3`, scritta ORA
+
+**Stesso VALORE, ma i BYTE possono differire all'ultima cifra:** `exp(i·φ)` e
+`exp(i·(φ mod 2π))` sono matematicamente uguali e **numericamente no**.
+**Il sigillo di `CURA 3` su questo sito NON può chiedere identità di byte:** deve chiedere
+**uguaglianza entro l'ulp e DICHIARARLO** — altrimenti produce un `FAIL` falso su una cura
+corretta, che è **esattamente il difetto di `T1` in `E4-LAM`**.
+
+## `C2` — **`D38`: la legge è verificata sempre, ma fatta rispettare da un'opzione**
+
+`_nasce` *(`:3850`)* è gated su `SCALA_MIN or SCALA_MIN_PASSO`.
+
+> ### **È lo schema che `E4-LAM` ha TOLTO al controllo, e che è rimasto all'ESECUZIONE:**
+> **il controllo è legge, chi la fa rispettare alla nascita è un'opzione.**
+> **Coi default del SORGENTE la legge è violata al passo zero**, su `223 380` archi.
+
+Registrato come **`D38`** nella coda, con la cura che hai deciso: **`D-b`, la cura della
+semina.**

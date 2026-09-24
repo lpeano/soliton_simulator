@@ -8,7 +8,7 @@
 
 ## RISPOSTA IN UNA RIGA
 
-> ### **SÌ a entrambe.** L'avvio gira **senza tempo proprio** e costruisce lo **spinore da `φ`**;
+> ### **SÌ a entrambe.** L'avvio gira **senza tempo proprio** *(al passo 1 `r = 1` per tutti)*;
 > ### `memoria_hebbiana_moto` usa `DT` di coordinata e il **cono GLOBALE** in due siti su sei —
 > ### e **tre** delle famiglie di difetto che vi compaiono **sono già curate ALTROVE, non lì**.
 
@@ -57,19 +57,33 @@ E il fallback fa:
 _psp[:, 0] = np.exp(1j * self.phi[:_n])      # in `calcola_psi`
 ```
 
-> ### ❗ **È UN PONTE `INVERSA`, ED È LA CONDIZIONE INIZIALE.**
-> `φ` — il cui `4π` è **DICHIARATO**, cioè una **convenzione** — **scrive lo SPINORE**, il cui
-> `4π` è **VERO**. **È la stessa forma per cui `TW_SPINORE` è bloccato PER SEMPRE.**
+> ### ⚠ **RICLASSIFICATO — CORREZIONE DI LUCA, `C3`. NON È UN PONTE `INVERSA`.**
 >
-> **⚠ MA NON È LA STESSA COSA, e la differenza va detta invece di confonderle:**
-> `TW_SPINORE` sarebbe una **LEGGE** che gira a ogni passo; **questo è un FALLBACK DI AVVIO**
-> che gira **tre volte su nove** e poi tace. **Però quelle tre volte fissano lo stato iniziale
-> dello spinore**, e uno stato iniziale non è meno determinante di una legge: **è la sua
-> condizione al contorno.**
+> **Avevo scritto:** *«è un ponte `INVERSA`, la stessa forma per cui `TW_SPINORE` è bloccato»*.
+> **È sbagliato, e la smentita è nel commento DUE RIGHE SOPRA il fallback** *(`:3414`)*:
 >
-> **E `exp(iφ)` ha periodo `2π`:** un `φ` che vive su `4π` e uno che vive su `2π` **danno lo
-> stesso spinore iniziale**, con il **segno di doppia copertura perso**. *(Non è misurato qui:
-> è una lettura della forma, e va verificata prima di usarla.)*
+> ```
+> Riduzione-al-limite S3: con _psi_spinor=(e^{i phi},0) -> comp 0 == self.psi.
+> ```
+>
+> ### **Il fallback NON è un ponte: È LA CONDIZIONE INIZIALE SCALARE, DICHIARATA.**
+> È il **limite `S3`** — *«nel limite in cui lo spinore è la fase pura sull'asse 0, il campo
+> spinoriale coincide col campo scalare»* — e il fallback **lo realizza**, invece di violarlo.
+> **`TW_SPINORE` è tutt'altro: una LEGGE che a ogni passo fa scrivere allo spinore una
+> grandezza che prende la scala da `φ`.** Un **punto di partenza dichiarato** e una **legge
+> permanente non dichiarata** non sono la stessa cosa, e **chiamarle insieme era mio.**
+>
+> ### ❗ **E IL PERIODO `2π` È CERTO PER ALGEBRA, non «da misurare».**
+> `exp(iφ)` ha periodo `2π`: `exp(i(φ+2π)) = exp(iφ)`. **Non c'è niente da misurare.**
+> Quindi un `φ` su `4π` e il suo ridotto su `2π` **danno lo STESSO spinore iniziale**.
+>
+> ### ➜ **CONSEGUENZA DA SCRIVERE ORA, PER `CURA 3`:**
+> **stesso VALORE, ma i BYTE possono differire all'ultima cifra.** `exp(i·φ)` e
+> `exp(i·(φ mod 2π))` sono matematicamente uguali e **numericamente no**: la riduzione cambia
+> l'argomento, e l'arrotondamento dell'ultimo bit con esso.
+> **IL SIGILLO DI `CURA 3` DEVE PREVEDERLO**: su questo sito **non può chiedere identità di
+> byte**. Deve chiedere **uguaglianza entro l'ulp**, e **dichiararlo** — altrimenti produce un
+> `FAIL` falso su una cura corretta, che è il difetto già catalogato di `T1` in `E4-LAM`.
 
 ### 1c. La semina al passo zero — **`223 380` archi nati ESATTAMENTE a `LAM`**
 
@@ -81,9 +95,24 @@ nascite=4  SCALA_MIN=False  SCALA_MIN_PASSO=True
 `_nasce` *(«il troncone sotto `LAM` si porta A `LAM`»)* è gated su
 `SCALA_MIN or SCALA_MIN_PASSO`.
 
-> ### ❗ **IL `42.48 %` DEGLI ARCHI NASCE SUL MURO.** E il numero **chiude il cerchio di `Z148`**:
-> lì, **senza** le cure, gli archi sotto `LAM` erano **`223 396`**. Qui, **con** le cure, quelli
-> **esattamente a `LAM`** sono **`223 380`**. **Sono gli stessi archi.**
+> ### ❗ **IL `42.48 %` DEGLI ARCHI NASCE SUL MURO.**
+>
+> **⚠ E «SONO GLI STESSI ARCHI» ERA DEDOTTO DA DUE CONTEGGI DIVERSI — `STANDARD 9`, rilievo di
+> Luca (`C1`). ORA È PROVATO**, al passo ZERO, un processo per braccio
+> *(`csv/_seal_fork/_prova_nasce_identita.py`)*:
+>
+> ```
+> sha1(d_on)             = f24d4d38f9f81f4b        <- il braccio con `_nasce`
+> sha1(max(d_off, LAM))  = f24d4d38f9f81f4b        <- il braccio senza, troncato a mano
+> IDENTICI BIT A BIT     = True     elementi diversi: 0 su 525973
+>
+> min(d_off)/LAM         = 0.012098
+> archi con d_off < LAM  = 223380 su 525973 (42.47 %)
+> archi con d_on == LAM  = 223380                  <- LO STESSO NUMERO
+> ```
+>
+> ### **`_nasce` è `np.maximum(d, LAM)` E NIENT'ALTRO**, e i due conteggi **coincidono**:
+> ### `223 380`. **Non è più una deduzione: è un'identità di byte.**
 >
 > ### **QUINDI `Z148` VA CORRETTO NEL MECCANISMO, NON NEL VERDETTO:** avevo scritto *«il freno
 > ### ci appoggia il sistema contro»*. **Non è il freno: è `_nasce`, alla NASCITA.** Il freno li
@@ -176,14 +205,18 @@ e la **costruzione di `dt_e` stessa** devono usarlo.
 | | difetto | prova | nota |
 |--:|---|---|---|
 | **B1** | **al passo 1 il tempo proprio NON ESISTE**: `ritmo()` torna `r = 1` per tutti, e **nessun referto lo dichiara** | `_ritmo_sicurezza = 1`, forma `(-1, 2391)` | **non è curabile** *(senza passato `r` non è calcolabile)*: è **da DICHIARARE**, non da curare. Il presidio naturale è una riga in `CONFIGURAZIONE.txt` |
-| **B2** | **il fallback `exp(iφ)` costruisce lo SPINORE da `φ`**: ponte `INVERSA`, e **fissa la condizione iniziale** | `3` invocazioni su `9`, `max\|φ\| = 12.566238 ≈ 4π` | **stessa forma di `TW_SPINORE`**, che è bloccato per sempre. **Ma è un fallback, non una legge.** Cosa lo chiuderebbe: uno spinore iniziale **derivato**, non preso da `φ` |
+| ~~**B2**~~ | ~~il fallback `exp(iφ)` è un ponte `INVERSA`~~ **RITIRATO** *(`C3`, Luca)*: è la **condizione iniziale scalare DICHIARATA** a `:3414` *(limite `S3`)*, non un ponte | `3` invocazioni su `9` | **non è un difetto.** Resta la **conseguenza per `CURA 3`**: il periodo `2π` è certo per algebra, quindi **stesso valore ma byte diversi all'ultima cifra** → **il sigillo deve prevederlo** |
+| **B5** | **`_nasce` è gated su `SCALA_MIN or SCALA_MIN_PASSO`** *(`:3850`)*: **la legge `d >= LAM` è VERIFICATA sempre ma FATTA RISPETTARE da un'opzione** | `223 380` archi nascono sotto `LAM` coi default del sorgente | **`D38`**, e **è lo schema che `E4-LAM` ha TOLTO al controllo**: *il controllo è legge, chi la fa rispettare alla nascita è un'opzione* |
 | **B3** | **il `42.48 %` degli archi NASCE sul muro** *(`_nasce`)* | `223 380` su `525 973` esattamente a `LAM` al passo `0` | **`A11` cor.6.** È il **gemello di `D31` alla NASCITA**, e `D31` parla del **freno**. **Corregge il meccanismo che avevo scritto in `Z148`** |
 | **B4** | **`D02` — legge `pos` (il DISEGNO) invece di `d`** | compare nella chiusura di `:5969` e `:6116` | **mai curato da nessuna parte**, e non ha una cura da estendere |
 
 ### ❗ E L'ORDINE CHE PROPONGO, con la ragione
 
-1. **`B3`** — perché **corregge una cosa che ho scritto io ieri** *(`Z148`)*, e una diagnosi
-   sbagliata nel registro costa più di un difetto aperto;
+0. **`B3` + `B5` INSIEME — ed è la decisione `D-b` di Luca: si parte da qui, come CURA DELLA
+   SEMINA.** *«Non deve nascere un arco sotto `LAM`. Il troncone `_nasce` resta come
+   PRESIDIO.»* **Sono lo stesso difetto visto da due lati:** `B3` dice *quanti* nascono sul
+   muro, `B5` dice *che a tenerli lì è un'opzione*;
+1. ~~**`B3`**~~ *(assorbito nel punto 0)*;
 2. **`A1`** — perché è **due caratteri di formula** su una cura già sigillata, e chiude il
    rilievo di Luca sull'ibrido `cs` locale × `DT` globale;
 3. **`A2`**, poi **`A3`** — per **grandezza dell'effetto misurato** *(`A12`)*: il cono tocca due
