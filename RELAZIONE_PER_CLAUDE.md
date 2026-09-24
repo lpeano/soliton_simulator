@@ -13188,3 +13188,53 @@ uno snapshot. **Ciò che decide è il conto degli EVENTI** (`1` contro `62`, `0`
 
 **MI FERMO QUI, come par.5 impone:** il fallimento è committato, e **non ho lanciato il run a
 600 passi.** La scelta è tua — la trovi nella coda sotto `D36`.
+
+### ㉖ **Il referto di configurazione: nessun run parte senza** *(punto 1 del mandato)*
+
+> **⚠ RELAZIONE IN RITARDO DI UN COMMIT, e lo dichiaro invece di far finta.** Il lavoro è in
+> `ed3ef28`, che **non tocca questo file**: `P1-bis` la vuole nello stesso commit. Recuperare
+> non sana la violazione, la conferma.
+
+**Perché serviva adesso e non all'epoca 3:** due casi reali dello **stesso giorno**.
+**`S10`** è nato deducendo dal sorgente quale ramo di `ritmo()` girasse — e la deduzione era
+**sbagliata**. E **`SPINORE_CORRETTO` ha default `False` nel sorgente e vale `True` in ogni run
+del fork**, perché il driver cabla `--spinore-corretto` (`:187`): **chi legge il sorgente
+conclude il contrario di chi legge il run.**
+
+**Cosa scrive**, in `CONFIGURAZIONE.txt` e `.json` nella cartella del run:
+
+- **lo stato EFFETTIVO di tutti i flag di modulo, letto DAL MODULO dopo `_applica_flag`**;
+- **i due argv VERBATIM, che non sono lo stesso.** `_ARGV` viene **riscritto** a `:171` — il
+  driver toglie le proprie opzioni prima che il parser del simulatore le veda — quindi ho
+  conservato `_ARGV_VERBATIM` **prima** del filtro. Senza, *«verbatim»* sarebbe stato il
+  comando **ripulito**;
+- **`sha1` dei byte grezzi** di simulatore e driver *(non `git hash-object`: `C18`)*, seme,
+  `HEAD`, e **se l'albero è pulito**.
+
+**L'elenco dei flag viene dall'AST**, non da una lista a mano: **`123` nomi**, entrando anche
+negli `if`/`try` di modulo perché fermarsi a `body` ne perderebbe **in silenzio**. La lista a
+mano che il driver stampava a video ne aveva **`24`**.
+
+**Collaudo `6/6`, e tre criteri non sono controlli di comodo:**
+
+| | |
+|---|---|
+| `K3` | **il caso che DEVE fallire:** prima di `_applica_flag` è `False`, dopo `True` — **letto prima darebbe la risposta sbagliata** |
+| `K5` | **secondo caso che deve fallire:** una `dest` inesistente **solleva**, così il driver può rifiutare di partire |
+| `K6` | **l'ordine, DALL'AST:** `_applica_flag` a `:228`, `scrivi` a `:276` — **dopo** |
+
+> **E `K6` ha davvero FALLITO** prima che il cablaggio esistesse:
+> *«`scrivi` alle `[]` → SCRITTO PRIMA O ASSENTE»*. **Non è un criterio che passa a vuoto:
+> l'ho visto bocciare.**
+
+**Sul giro di prova** *(2 frame, `csv/_test_fork/_g4_corto`)*: **182 righe, 30 flag cambiati
+dall'argv, 4 dichiarati NON CONFRONTABILI**, e l'albero segnalato **`*** SPORCO ***`** —
+correttamente, perché avevo lavoro non committato.
+
+**Un falso positivo trovato e corretto:** alla prima stesura `BOTTONI [] → <list>` compariva
+fra i cambiati, perché confrontavo un default letterale con un valore **stringificato**. Ora si
+confronta **solo fra scalari**, e i quattro non confrontabili sono **dichiarati** tali.
+**Un referto che segnala trenta cambi fra cui uno falso insegna a non fidarsi del referto.**
+
+**Nessun flag**, per la stessa ragione per cui non ce l'hanno le correzioni di difetto
+*(par.10)*: **non è una legge, è un presidio.**
