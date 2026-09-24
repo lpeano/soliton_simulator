@@ -88,18 +88,23 @@ class FintoArco(object):
     """Il minimo che `verifica_invarianti` legge. Gli attributi ASSENTI vengono SALTATI
     (`getattr(..., None) -> continue`), quindi si controlla solo cio' che si mette.
 
-    !! SERVONO ANCHE `i` E `j`, e il collaudo me l'ha detto: la VIA DI VIOLAZIONE legge
-       `self.i` / `self.j` per riportare QUALE ARCO ha violato
-       (`extra['arco'] = '%d-%d'`). Senza, al posto di `DominioViolato` arrivava un
-       `AttributeError`, e `K2` FALLIVA -- non per un difetto del codice ma del mio banco.
-       **Un banco di prova piu' povero dell'ingresso vero non prova niente.**
+    !! TRE VOLTE IL BANCO E' STATO PIU' POVERO DELL'INGRESSO VERO, e OGNI volta l'ha
+       preso il collaudo. Vale la pena elencarle, perche' e' la stessa forma:
+         1. mancavano `i` e `j`: la VIA DI VIOLAZIONE li legge per dire QUALE arco ha
+            violato (`extra['arco'] = '%d-%d'`) -> arrivava un `AttributeError` invece di
+            `DominioViolato`, e `K2` falliva **per un difetto del banco**;
+         2. `K3` accettava `m is not None`, cioe' QUALUNQUE eccezione -- e riceveva
+            proprio quell'`AttributeError`. **Un criterio che accetta tutto passa sempre**;
+         3. `j = arange(n) + 1` contiene `n`, che VIOLA il dominio `0 <= j < n`: il
+            controllo si fermava su `j` prima di arrivare a `d`, e `K1` falliva.
+       **Ora il grafo e' VALIDO: un anello, `j = (i + 1) % n`.**
     """
 
     def __init__(self, d):
         self.d = np.asarray(d, dtype=float)
         self.n = len(self.d)
-        self.i = np.arange(len(self.d))
-        self.j = np.arange(len(self.d)) + 1
+        self.i = np.arange(self.n)
+        self.j = (np.arange(self.n) + 1) % self.n     # un ANELLO: tutti gli indici < n
 
 
 def collaudo(W, S):
