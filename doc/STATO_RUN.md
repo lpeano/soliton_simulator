@@ -98,25 +98,28 @@ blocco lo dirà qui sopra.
 
 ### A. ✅ ACQUISITO — **in codice E acceso nei run**
 
-| flag | cura | default | **il driver lo accende?** | sigillo |
-|---|---|:--:|:--:|--:|
-| `PEQ_ESATTO` | `C1` rilassamento di `peq` in forma ESATTA | **`False`** | ✅ **sì** *(`--peq-esatto`)* | `7/7` |
-| `PEQ_NASCITA_LOCALE` | `C2` nascita LOCALE di `peq` | **`False`** | ✅ **sì** *(`--peq-nascita-locale`)* | `6/6` |
-| `SCALA_MIN_PASSO` | `C3` il freno UNA VOLTA per passo | **`False`** | ✅ **sì** *(`--scala-min-passo`)* | `6/6` |
-| `COES_CAUSALE` | `C4` coesione: istante unico e cono LOCALE | **`False`** | ✅ **sì** *(`--coes-causale`)* | `5/5` |
-| `COES_ADIM` | coesione ADIMENSIONALE | **`False`** | ✅ **sì** *(`--coes-adim`)* | — *(non ha un sigillo suo)* |
-| `ANOM_SIMM` | `C1-bis` anomalia simmetrica, senza pavimento | **`False`** | ✅ **sì** *(`--anom-simm`)* | `6/6` |
-| `INVARIANTI` | `C5` domini di stato, due livelli | **`True`** | ✅ *(default `True`)* | `3/3` |
-| `RITMO_WRAP_2PI` | **`A1`** il wrap del ritmo sul periodo GIUSTO *(`2π`)* | **`False`** | ✅ **sì** *(`--ritmo-wrap-2pi`)* | `4/4` + **`6/6` di `CURA 1`** *(`csv/_seal_fork/_sig_cura1/REFERTO.txt`)* |
-| `TEMPO_UNICO_MITOSI` | **`CURA 2`** UN SOLO OROLOGIO dentro `mitosi()` | **`False`** | ✅ **sì** *(`--tempo-unico-mitosi`)* | ⏸ *(l'esito si legge dal referto)* |
-| `FASE_2PI` | **§D** `φ` come fase ordinaria su `[0, 2π)` | **`False`** | ❌ **NO** | ⏸ *(l'esito si legge dal referto)* |
+| flag | cura | default | **NUDA** | **CAMPAGNA** | sigillo |
+|---|---|:--:|:--:|:--:|--:|
+| `PEQ_ESATTO` | `C1` rilassamento di `peq` in forma ESATTA | **`False`** | ✅ | ✅ | `7/7` |
+| `PEQ_NASCITA_LOCALE` | `C2` nascita LOCALE di `peq` | **`False`** | ✅ | ✅ | `6/6` |
+| `SCALA_MIN_PASSO` | `C3` il freno UNA VOLTA per passo | **`False`** | ✅ | ✅ | `6/6` |
+| `COES_CAUSALE` | `C4` coesione: istante unico e cono LOCALE | **`False`** | ✅ | ✅ | `5/5` |
+| `COES_ADIM` | coesione ADIMENSIONALE | **`False`** | ✅ | ✅ | — *(non ha un sigillo suo)* |
+| `ANOM_SIMM` | `C1-bis` anomalia simmetrica, senza pavimento | **`False`** | ✅ | ✅ | `6/6` |
+| `INVARIANTI` | `C5` domini di stato, due livelli | **`True`** | ✅ | ✅ | `3/3` |
+| `RITMO_WRAP_2PI` | **`A1`** il wrap del ritmo sul periodo GIUSTO *(`2π`)* | **`False`** | ✅ | ✅ | `4/4` + **`6/6` di `CURA 1`** *(`csv/_seal_fork/_sig_cura1/REFERTO.txt`)* |
+| `TEMPO_UNICO_MITOSI` | **`CURA 2`** UN SOLO OROLOGIO dentro `mitosi()` | **`False`** | ✅ | ✅ | ⏸ *(l'esito si legge dal referto)* |
+| `FASE_2PI` | **§D** `φ` come fase ordinaria su `[0, 2π)` | **`False`** | ❌ | ❌ | ⏸ *(l'esito si legge dal referto)* |
 
-**Accese nei run: 9 su 10.** *(Il `default` nel sorgente resta `False`: **i default si cambiano all'epoca 3**, voce `B`.)*
+> **LE DUE COLONNE SI LEGGONO DAL SIGILLO DEL DRIVER** — `_cli()` + `_applica_flag(a)`
+> in un processo nuovo, stato letto **dal MODULO**. **NUDA** = i soli argomenti
+> posizionali; **CAMPAGNA** = gli argomenti che `_g4_prova.py` passa davvero.
 
-> **⚠ IL FATTO CHE QUESTA COLONNA RENDE VISIBILE:** una cura con `default False` e **senza
-> la riga nell'argv del driver** *non gira*, e nessun sigillo se ne accorge — il sigillo
-> certifica che il flag **funziona**, non che sia **acceso**. **La colonna si legge dal
-> driver, non dalla mia memoria.**
+**Accese in CAMPAGNA: 9 su 10.** *(Il `default` nel sorgente resta `False`: **i default si cambiano all'epoca 3**, voce `B`.)*
+
+> ### ✅ **NUDA = CAMPAGNA: il driver accende TUTTE le cure approvate da sé.**
+> **Un solo modo di lanciare**, e nessuna cura si puo' dimenticare *(decisione di
+> Luca, 2026-09-24)*.
 
 ### B. 🟨 DECISO DA LUCA, **non ancora in codice**
 
@@ -136,23 +139,24 @@ blocco lo dirà qui sopra.
 
 | | fronte | dove vive | esiste ancora? |
 |--:|---|---|:--:|
-| `1` | **`S08`** -- il sito `S08_proj`: `proj` e' ADIMENSIONALE e viene sommato a una LUNGHEZZA; l'unica cosa che gli da' unita' e' il clip | scheda (2) `memoria-del-moto`; `Z112` | ✅ **sì** |
-| `2` | **LA MAPPA DEI TEMPI** -- quanti tempi ha il sistema, e quali sono la stessa cosa con nomi diversi. **Sospesa dal `PROMPT UNICO`, mai ripresa** | mandato del 2026-09-24, punto (4) | — |
-| `3` | **`D33`** -- la repulsione che si spegne al tetto. **E' dentro il perimetro di `CURA 2`** e il criterio `R` l'ha sfiorato: `d0` si muove del `+-3 %`, non del `x2.5` previsto | scheda (7) `mitosi-schwinger` | — |
-| `4` | **CHI SPINGE CONTRO IL MURO** -- quali siti spingono `d` verso `LAM` e con che peso. Il bilancio dice **chi fa crescere `d0`**; questo chiede **chi la fa scendere** | scheda (1) + il bilancio di `G4` | — |
-| `5` | **IL CLAMP MORTO IN `_cs_arco_da_nodo`** -- `np.maximum(cs_i + cs_j, 1e-12)`. **Protegge da un errore, e `A11` dice di cercare l'errore**: `cs > 0` e' DERIVATO (`cs_floor > 0`), quindi il clamp non puo' mordere. **E' EREDITATO da `step()`, non l'ho aggiunto io** -- e la cura e' toglierlo **dal sito originale**, non solo dalla copia | scheda (9) par.10.1; `:4791` e il metodo estratto | ✅ **sì** |
-| `6` | **`S09`** -- l'orologio *non si sposta, si allarga*: il criterio va **riformulato** (rilievo di Luca sul `0746144`) | `CURA 1`, referto dell'orologio | — |
-| `7` | **`S11`** e **`S13`** -- sospetti mai promossi ne' chiusi | coda dei sospetti | — |
-| `8` | **IL PONTE VERO** -- la torsione presa dal **trasporto SU(2)**, non da `phi`. **E' il motivo per cui `TW_SPINORE` e' bloccato**: quel ponte era INVERSO. Il ponte giusto non esiste ancora | mappa del `4pi`, le due voci `INVERSA`; scheda (8) | — |
-| `9` | **IL MERGE DI `main`** -- `doc/PIANO_merge_main.md`. **`fork-su2` e' l'unico ramo vivo.** **E' una DECISIONE DI LUCA: si segnala, non si fa** | `doc/PIANO_merge_main.md` | — |
-| `10` | **`mean((dx/d)^2)` NON REGISTRATO** -- direbbe **di quanto** la forma piana sarebbe stata peggiore. **Costa ZERO run in piu'**: una somma, sugli stessi campioni | scheda (11) par.4-quinquies | — |
-| `11` | **LA LEGGE DI `CURA 2` E' SALVA PER L'ORDINE DELLE CHIAMATE, non per una guardia** -- `_r_nodo_mitosi` legge `_r_corrente` **prima** che la mitosi allunghi `n`. **Basta spostare una riga.** Le tre guardie hanno **zero salti**, e non per merito loro | scheda (9) par.10; referto di `CURA 2` par.4 | — |
+| `1` | **`S08`** -- **se `phi` non e' l'azimut del Bloch, CHE COS'E'?** `Z121` ha **refutato** la frase del docstring *(`R <= 0.18` contro un nullo di `0.016`, criterio `>= 0.90`)*, **ma non ha detto che cosa `phi` SIA**. **E' la domanda del PONTE VERO** *(voce 8)*, presa dall'altro capo | `doc/STATO_RUN.md`, tabella dei sospetti, riga `S08` | — |
+| `2` | **`S08_proj`** -- **NON e' `S08`, ed e' un'altra cosa**: `proj` e' ADIMENSIONALE e viene sommato a una LUNGHEZZA; l'unica cosa che gli da' unita' e' il clip *(`A11`)*. **Li avevo confusi nel primo quadro** *(rilievo di Luca)* | scheda (2) `memoria-del-moto`; `Z112` | ✅ **sì** |
+| `3` | **LA MAPPA DEI TEMPI** -- quanti tempi ha il sistema, e quali sono la stessa cosa con nomi diversi. **Sospesa dal `PROMPT UNICO`, mai ripresa** | mandato del 2026-09-24, punto (4) | — |
+| `4` | **`D33`** -- la repulsione che si spegne al tetto. **E' dentro il perimetro di `CURA 2`** e il criterio `R` l'ha sfiorato: `d0` si muove del `+-3 %`, non del `x2.5` previsto | scheda (7) `mitosi-schwinger` | — |
+| `5` | **CHI SPINGE CONTRO IL MURO** -- quali siti spingono `d` verso `LAM` e con che peso. Il bilancio dice **chi fa crescere `d0`**; questo chiede **chi la fa scendere** | scheda (1) + il bilancio di `G4` | — |
+| `6` | **IL CLAMP MORTO IN `_cs_arco_da_nodo`** -- `np.maximum(cs_i + cs_j, 1e-12)`. **Protegge da un errore, e `A11` dice di cercare l'errore**: `cs > 0` e' DERIVATO (`cs_floor > 0`), quindi il clamp non puo' mordere. **E' EREDITATO da `step()`, non l'ho aggiunto io** -- e la cura e' toglierlo **dal sito originale**, non solo dalla copia | scheda (9) par.10.1; `:4791` e il metodo estratto | ✅ **sì** |
+| `7` | **`S09`** -- l'orologio *non si sposta, si allarga*: il criterio va **riformulato** (rilievo di Luca sul `0746144`) | `CURA 1`, referto dell'orologio | — |
+| `8` | **`S11`** e **`S13`** -- sospetti mai promossi ne' chiusi | coda dei sospetti | — |
+| `9` | **IL PONTE VERO** -- la torsione presa dal **trasporto SU(2)**, non da `phi`. **E' il motivo per cui `TW_SPINORE` e' bloccato**: quel ponte era INVERSO. Il ponte giusto non esiste ancora | mappa del `4pi`, le due voci `INVERSA`; scheda (8) | — |
+| `10` | **IL MERGE DI `main`** -- `doc/PIANO_merge_main.md`. **`fork-su2` e' l'unico ramo vivo.** **E' una DECISIONE DI LUCA: si segnala, non si fa** | `doc/PIANO_merge_main.md` | — |
+| `11` | **`mean((dx/d)^2)` NON REGISTRATO** -- direbbe **di quanto** la forma piana sarebbe stata peggiore. **Costa ZERO run in piu'**: una somma, sugli stessi campioni | scheda (11) par.4-quinquies | — |
+| `12` | **LA LEGGE DI `CURA 2` E' SALVA PER L'ORDINE DELLE CHIAMATE, non per una guardia** -- `_r_nodo_mitosi` legge `_r_corrente` **prima** che la mitosi allunghi `n`. **Basta spostare una riga.** Le tre guardie hanno **zero salti**, e non per merito loro | scheda (9) par.10; referto di `CURA 2` par.4 | — |
 
 ### I RAMI — **letti da `git` a ogni giro**
 
 | ramo | ultimo commit |
 |---|---|
-| `fork-su2` | a49aee2 2026-09-24 |
+| `fork-su2` | 67392cb 2026-09-24 |
 | `main` | 252630f 2026-09-10 |
 
 > **`fork-su2` è l'unico ramo vivo.** **Il merge è una DECISIONE DI LUCA**

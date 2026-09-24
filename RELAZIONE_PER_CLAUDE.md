@@ -14953,3 +14953,85 @@ salva per l'ordine delle chiamate**.
 
 **I rami sono letti da `git`**: `fork-su2` è l'unico vivo. **Il merge è una tua decisione:
 segnalato, non fatto.**
+
+
+---
+
+# ❌ DUE ERRORI NEL QUADRO, E LA DECISIONE CHE NE È USCITA *(tuoi rilievi, 2026-09-24)*
+
+## 1. LA COLONNA DEL DRIVER ERA GENERATA DAL **TESTO**, NON DALLA **CONDIZIONE**
+
+`argv_driver()` cercava `"--peq-esatto"` nel file **e lo trovava**. La riga c'è:
+
+```python
++ (["--peq-esatto"] if PEQESATTO == "on" else [])       # PEQESATTO = "off"
+```
+
+> ### **Il NOME è presente, la CURA no.** Il quadro diceva `SÌ` a **sei** cure che
+> ### l'invocazione nuda non accende — **mentre il sigillo del driver, nello stesso repo,
+> ### stampava `NUDA = False` per quelle sei.** Avevo la contraddizione davanti.
+
+**Ed è lo `STANDARD 9` col segno opposto.** La regola dice *«un'ASSENZA si dichiara solo da una
+ricerca sull'intero file o dall'AST, mai da un `in` sul testo»*. **Io ho dichiarato una
+PRESENZA da un `in` sul testo: è lo stesso errore, rovesciato.** *(E la regola, così com'è
+scritta, non lo copriva. → in coda: vale la pena estenderla?)*
+
+**Corretto:** la colonna diventa **due** — `NUDA` e `CAMPAGNA` — e **si legge dal referto del
+sigillo del driver**, che percorre `_cli()` + `_applica_flag(a)` in un processo nuovo e legge
+lo stato **dal modulo**. **Se il referto manca, il quadro lo DICHIARA invece di indovinare.**
+
+## 2. `S08` NON ERA `S08_proj`
+
+**`S08` è il sospetto *«se `φ` non è l'azimut del Bloch, CHE COS'È?»*** — `Z121` ha **refutato**
+la frase del docstring *(`R ≤ 0.18` contro un nullo di `0.016`, criterio `≥ 0.90`)* **ma non ha
+detto che cosa `φ` sia**. **È la domanda del PONTE VERO presa dall'altro capo**, e nel quadro
+era diventata il sito `S08_proj`, che è tutt'altro. **Ora sono due voci distinte: `C` passa da
+`11` a `12`.**
+
+---
+
+# ✅ `(3)` LA DECISIONE: **IL DRIVER ACCENDE TUTTE LE CURE APPROVATE. `NUDA = CAMPAGNA`.**
+
+```
+                         NUDA       CAMPAGNA
+ANOM_SIMM                True       True       PASS
+COES_ADIM                True       True       PASS
+COES_CAUSALE             True       True       PASS
+INVARIANTI               True       True       PASS
+PEQ_ESATTO               True       True       PASS
+PEQ_NASCITA_LOCALE       True       True       PASS
+RITMO_WRAP_2PI           True       True       PASS
+SCALA_MIN_PASSO          True       True       PASS
+TEMPO_UNICO_MITOSI       True       True       PASS
+FASE_2PI                 False      False      ESCLUSA, deve restare False -> PASS
+
+CURE OBBLIGATORIE: 9   ESCLUSE: 1   ORFANE: 0          ESITO: 10/10
+✅ NUDA = CAMPAGNA su tutte le obbligatorie: UN SOLO MODO DI LANCIARE.
+```
+
+**COME, e conserva ciò che il par.10 impone:** ho cambiato **il default dell'OPZIONE DEL
+DRIVER** da `"off"` a `"on"`, **non tolto l'opzione**. `=off` continua a funzionare ed è il ramo
+**diagnostico** per gli A/B — *«resta un `--senza-<nome>` marcato DIAGNOSTICO, non fisica
+alternativa»*.
+
+**⚠ E NON È L'EPOCA 3:** i `default` **nel sorgente** restano `False`. Qui cambia il default
+**del driver**, che è ciò che decide **cosa gira**.
+
+**⚠ `SCALAMIN` resta `off`: non è una cura approvata** — è il freno vecchio, quello che `D31`
+accusa. Non entra in questa decisione.
+
+## ❗ E IL PEZZO CHE VALE PIÙ DEL CAMBIO DI DEFAULT
+
+**`OBBLIGATORIE` non è più una lista a mano:** sono **tutte** le cure di `_cure_verificate.py`
+**meno le `ESCLUSE`, che portano il loro motivo** *(oggi solo `FASE_2PI`: la sua prova la
+boccia)*.
+
+> ### **Una cura nuova che non sia né obbligatoria né esclusa è ORFANA e FA FALLIRE IL
+> ### SIGILLO**, invece di passare in silenzio.
+> **E le escluse si verificano nel verso opposto: devono restare `False` in ENTRAMBE le
+> invocazioni.** Senza quello, «escludere» sarebbe solo non guardare.
+
+**⚠ COSA CAMBIA PER I RUN:** un comando che passava `=on` esplicitamente ottiene lo stesso
+risultato; **un comando NUDO ora accende sei cure che prima non accendeva.** **Non è
+byte-inerte, ed è il punto.** **I run già fatti non cambiano:** passavano tutti `=on`, e il
+loro `CONFIGURAZIONE.txt` lo documenta.

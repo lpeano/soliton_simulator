@@ -20,26 +20,25 @@ DUE INVOCAZIONI, e la differenza fra loro e' il punto:
   CAMPAGNA  gli argomenti che `_g4_prova.py` passa davvero
 
   flag                     NUDA       CAMPAGNA   
-  ANOM_SIMM                False      True       ⚠ **accesa SOLO dal comando**
-  COES_ADIM                False      True       ⚠ **accesa SOLO dal comando**
-  COES_CAUSALE             False      True       ⚠ **accesa SOLO dal comando**
-  FASE_2PI                 False      False      *(dipende dal comando)*
-  INVARIANTI               True       True       *(dipende dal comando)*
-  PEQ_ESATTO               False      True       ⚠ **accesa SOLO dal comando**
-  PEQ_NASCITA_LOCALE       False      True       ⚠ **accesa SOLO dal comando**
+  ANOM_SIMM                True       True       **DEVE essere True in ENTRAMBE** -> PASS
+  COES_ADIM                True       True       **DEVE essere True in ENTRAMBE** -> PASS
+  COES_CAUSALE             True       True       **DEVE essere True in ENTRAMBE** -> PASS
+  FASE_2PI                 False      False      **ESCLUSA, deve restare False** -> PASS
+  INVARIANTI               True       True       **DEVE essere True in ENTRAMBE** -> PASS
+  PEQ_ESATTO               True       True       **DEVE essere True in ENTRAMBE** -> PASS
+  PEQ_NASCITA_LOCALE       True       True       **DEVE essere True in ENTRAMBE** -> PASS
   RITMO_WRAP_2PI           True       True       **DEVE essere True in ENTRAMBE** -> PASS
-  SCALA_MIN_PASSO          False      True       ⚠ **accesa SOLO dal comando**
+  SCALA_MIN_PASSO          True       True       **DEVE essere True in ENTRAMBE** -> PASS
   TEMPO_UNICO_MITOSI       True       True       **DEVE essere True in ENTRAMBE** -> PASS
 
-  ⚠ CURE CHE L'INVOCAZIONE NUDA NON ACCENDE: 6 su 10 -- ANOM_SIMM, COES_ADIM, COES_CAUSALE, PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO
-     Non e' un difetto del driver: e' il FATTO che `CURE VERIFICATE` rende visibile.
-     Quelle cure **non sono nel codice: sono nell'argv di CHI LANCIA**, e un comando
-     che ne dimentica una gira su un sistema che si sa difettoso (`P2`) **senza che
-     nessun sigillo se ne accorga**. Le DUE obbligatorie sono le uniche che il DRIVER
-     accende da se', e quindi le uniche che non si possono dimenticare.
+  CURE OBBLIGATORIE: 9   ESCLUSE: 1   ORFANE: 0
+    escl. FASE_2PI             NON e' approvata: la sua prova la BOCCIA (`Z127`, `2/4`, `E1` non passa -- mitosi `62` -> `1` evento). Il driver NON deve accenderla.
+
+  ✅ **NUDA = CAMPAGNA su tutte le obbligatorie: UN SOLO MODO DI LANCIARE.**
+     Nessuna cura approvata si puo' piu' dimenticare da riga di comando.
 
 ============================================================================================
-ESITO: 2/2 sulle cure OBBLIGATORIE
+ESITO: 10/10 (obbligatorie + escluse + orfane)
 ============================================================================================
 *** IL DRIVER LE ACCENDE. ***
 
