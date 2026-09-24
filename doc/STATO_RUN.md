@@ -1058,3 +1058,13 @@ ramo B (chi_basc OFF):
 - **note** VALIDAZIONE delle SEI cure (C1, C2, C3, C4, C1-bis, C5) + le tre modifiche di epoca 2. 600 passi, sep=4.0, stesso seme, invarianti ACCESI, archivio a SERIE ogni 20 frame (RIPRENDIBILE: il PC si riavvia fra mezzanotte e le due). --scala-min=off perche' SCALA_MIN_PASSO lo SOSTITUISCE. CHECKPOINT 2: a run finito ci si FERMA e si aspetta Luca.
 
 **chiuso 2026-09-21 22:30:54 — FINITO** 600 passi completati in 2100.5 s (21.0 s/frame). 5 snapshot, 0.18 GB, 0 falliti. SEI criteri su OTTO REGGONO: nsub massimo 4 (il pavimento, contro 22591 del ramo D), peq >= 0 sempre (min 2.04e-07), zero archi sotto LAM, ZERO violazioni di dominio, stress finito 7.87, coesione al massimo al 23.8% del cono locale. NON REGGONO: d0 scappa ancora (med d0 da 1.4150 a 3.3180, rapporto COSTANTE 1.2320 = ESPONENZIALE) e d/d0 sta fra 0.69 e 0.84, cioe' COMPRESSIONE. I due criteri che cadono NON sono quelli che le cure dovevano curare: la fuga di d0 e' il fronte S09/S10, escluso da questo giro dal mandato globale. IL RUN LUNGO NON SI LANCIA. I dati servono: sono la base del prossimo giro.
+
+## APERTO F2P-CORTO
+
+- **avvio** `2026-09-24 11:54:57` · **blob** `024747ef (git) / 445e2896 (byte grezzi)` · **HEAD** `b5e9a9a`
+- **comando**
+  ```
+  python csv/_test_fork/_g4_prova.py --fase-2pi-corto
+  ```
+- **note** STANDARD 7: il giro CORTO (120 passi) prima del giro vero. Serve a misurare il COSTO: se la mitosi accelera del fattore previsto (5x-100x), archi e tempo esplodono. Criteri committati PRIMA in b5e9a9a. Destinazione csv/_test_fork/_f2p_corto.
+- *2026-09-24 11:55:34* — PARTITO: PID Windows 15112 (il processo python.exe, NON la shell), 2026-09-24 ~11:5x. 20 frame = 120 passi. Log: csv/_test_fork/_f2p_corto_log.txt
