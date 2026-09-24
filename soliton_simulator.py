@@ -215,15 +215,6 @@ DOMINI = {
     'd':        ('lam',    'la lunghezza VERA di un arco'),
     'd0':       ('lam',    'la lunghezza di RIPOSO di un arco'),
     'vd':       ('finito', 'velocita di `d`: nessun vincolo di segno, e non deve esserci'),
-    # [E4-LAM, 2026-09-24] `cs` NON PUO' ESSERE ZERO, ed e' DERIVATO dal codice, non
-    #   misurato: `cs_floor = CS_M/(1 + sqrt(I)*sqrt(1/scala))` ha denominatore >= 1
-    #   quindi > 0; `min(cs_floor, CS_M)` lo tiene in (0, CS_M]; e
-    #   `transizione = 0.5*(1 + tanh(1 - u))` sta in (0, 1) STRETTO, quindi il ritorno
-    #   `cs_floor + (CS_M - cs_floor)*transizione` e' >= cs_floor > 0.
-    #   Una proprieta' DERIVATA e' un INVARIANTE, non un caso da contare: cosi'
-    #   `tau_arco = d/cs_arco` (CURA 2) si scrive SENZA clamp, e se mai fosse zero e'
-    #   il livello NUMERICO (`np.seterr(divide='raise')`) a fermarsi con la riga.
-    '_cs_nodo_prev': ('pos', 'la velocita d onda di nodo: una velocita e POSITIVA'),
     # ⚠ `peq` HA UN'ECCEZIONE DICHIARATA, ed e' un INVARIANTE PIU' FORTE, non piu' debole:
     #   con `PEQ_NASCITA_LOCALE` gli archi di Schwinger nascono `nan` e vengono CALIBRATI
     #   all'inizio del passo dopo. Fra la `mitosi()` e quella calibrazione il `nan` e'
@@ -254,6 +245,18 @@ DOMINI = {
     'omega_s':  ('finito', 'velocita angolare spinoriale: entrambi i segni'),
     'mem_mot':  ('finito', 'memoria di moto'),
     '_deg':     ('nonneg', 'grado di un nodo: un CONTEGGIO non e negativo'),
+    # [D37, 2026-09-24] LA DERIVAZIONE, spostata qui dalla MIA voce DUPLICATA che stava
+    #   150 righe sopra. `cs` NON PUO' ESSERE ZERO, ed e' DERIVATO dal codice, non
+    #   misurato: `cs_floor = CS_M/(1 + sqrt(I)*sqrt(1/scala))` ha denominatore >= 1
+    #   quindi > 0; `min(cs_floor, CS_M)` lo tiene in (0, CS_M]; e
+    #   `transizione = 0.5*(1 + tanh(1 - u))` sta in (0, 1) STRETTO, quindi il ritorno
+    #   `cs_floor + (CS_M - cs_floor)*transizione` e' >= cs_floor > 0.
+    #   CONSEGUENZA per `CURA 2`: `tau_arco = d/cs_arco` si scrive SENZA clamp, e se mai
+    #   fosse zero e' il livello NUMERICO (`np.seterr(divide='raise')`) a fermarsi con
+    #   la riga -- non un `np.maximum` che nasconde il caso.
+    # ⚠ E QUESTA VOCE ESISTEVA GIA': la mia era un DUPLICATO, e in un letterale di dict
+    #   vince l'ULTIMA, quindi la mia era CODICE MORTO. L'ho aggiunta perche' avevo
+    #   cercato in una finestra di 28 righe invece che nel file intero (`P1`, `D37`).
     '_cs_nodo_prev': ('pos', 'velocita delle onde metriche: una VELOCITA e positiva'),
     '_r_corrente':   ('pos', 'ritmo dell orologio locale: un RITMO e positivo'),
     '_fatt_cs_ultimo': ('pos', 'fattore di cs: positivo per costruzione'),

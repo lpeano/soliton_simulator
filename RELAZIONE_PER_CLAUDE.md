@@ -14163,3 +14163,47 @@ descrizione **che non è la mia**.
 
 **Mi fermo qui col commit del reperto**, poi: togliere la chiave duplicata, riscrivere `T1`
 sull'**AST**, e rigirare. **Nessuna delle due è una modifica alla cura.**
+
+### ㉨ **`E4-LAM` passa `6/6`, e `D37` è curato nello stesso giorno in cui è nato**
+
+> `csv/_seal_fork/_sig_e4lam/REFERTO.txt`. **Collaudo `8/8`, con QUATTRO casi che devono
+> fallire.**
+
+| | | |
+|---|---|---|
+| `T1` | `_lam_attivo` non ha più riferimenti di **codice** — **dall'AST: `[]`** | **PASS** |
+| **`T1b`** | **`DOMINI` non ha chiavi duplicate: `42` chiavi, `0` duplicate** | **PASS** |
+| `T2` | `cs` è un invariante `pos` | **PASS** |
+| **`T3`** | **un arco sotto `LAM` a flag SPENTI ferma il run** | **PASS** |
+| **`T4`** | e con `d ≥ LAM` **non** si ferma | **PASS** |
+| **`T5`** | **byte-inerte: `206` campi identici, `0` diversi** | **PASS** |
+
+**`T1` stampa anche quante volte il nome compare nel TESTO — `2`, e sono i commenti che
+spiegano la rimozione.** Così la differenza fra le due letture resta **visibile nel referto**,
+invece di essere una nota in un commit.
+
+### **I quattro casi che devono fallire, perché sono la parte che vale**
+
+| | |
+|---|---|
+| `K2` | un arco sotto `LAM` a flag spenti **deve** fermarsi |
+| `K4` | la regola **vecchia** a flag spenti era `d > 0`, e `min(d) = 0.4 > 0`: **passava** |
+| **`K5`** | **`_lam_attivo` solo in un commento: l'AST dice `[]`, un `in` direbbe TROVATO** — riproduce il difetto del criterio vecchio |
+| **`K7`** | un `DOMINI` con la chiave `'a'` due volte → `['a']` |
+
+### ✅ **`D37` curato, e la derivazione non è stata buttata**
+
+La mia voce duplicata (`:226`) è **via**, e **la derivazione di `cs > 0` è stata SPOSTATA sulla
+voce preesistente** invece di essere cancellata — col motivo per cui era nata e col perché era
+un duplicato. **E `T1b` resta come test permanente:** qualunque chiave duplicata, d'ora in poi,
+fa fallire il sigillo.
+
+### ⚠ **Cosa questo NON dice**
+
+**Non dice che `d ≥ LAM` sia la REALIZZAZIONE giusta della legge.** Dice che la legge è ora
+**verificata sempre**.
+
+> **La realizzazione di oggi è il freno a senso unico, cioè `D31`.** Il sistema aveva **una
+> legge giusta, realizzata male, e controllata solo a volte**: ora almeno il controllo non
+> dipende più da un flag. **Il punto ② di `E4-LAM` resta aperto**, ed è la scheda del
+> freno-legge.

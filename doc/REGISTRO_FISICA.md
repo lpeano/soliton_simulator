@@ -1467,6 +1467,21 @@ sta a **`:257`**. **Ho concluso un'ASSENZA da una ricerca PARZIALE.**
 **Cura: si toglie la mia, si tiene la preesistente.** **E la derivazione resta valida:
 `cs > 0` era GIÀ un invariante**, fatto da qualcun altro prima di me.
 
+### ✅ **`D37` È CURATO** — 2026-09-24, lo stesso giorno in cui è nato
+
+La voce duplicata è **via**, e **la derivazione di `cs > 0` è stata SPOSTATA sulla voce
+preesistente** invece di essere buttata — col motivo per cui era nata **e col perché era
+un duplicato**, così chi la legge fra un mese sa entrambe le cose.
+
+**E c'è un TEST PERMANENTE:** **`T1b`** del sigillo `E4-LAM` verifica **dall'AST** che il
+letterale `DOMINI` **non abbia chiavi duplicate** — oggi **`42` chiavi, `0` duplicate** —
+col suo collaudo `K7` *(un `DOMINI` con `'a'` due volte → `['a']`)* e `K8` *(uno pulito non
+dà falsi allarmi)*.
+
+> **⚠ IL LIMITE DI `T1b`, dichiarato:** guarda il **letterale**. Voci aggiunte con
+> `DOMINI[...] = ...` **non le vedrebbe**. Oggi non ce ne sono, e se ce ne fossero il test
+> **non lo direbbe**.
+
 ## ⚠ COSA QUESTA LEGGE **NON** FA, dichiarato
 
 - **non corregge**: **legge soltanto**, e su un run sano **non cambia un bit**. Se scatta, il

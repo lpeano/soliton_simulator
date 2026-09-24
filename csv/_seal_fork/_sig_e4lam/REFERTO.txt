@@ -1,6 +1,6 @@
 # SIGILLO -- `E4-LAM`: la legge `d >= LAM` si verifica SEMPRE
 #
-blob simulatore ORA (sha1 byte grezzi) 863f4704
+blob simulatore ORA (sha1 byte grezzi) 4ef304b5
 LAM = 0.8
 
 COLLAUDO DEI CRITERI su casi a RISPOSTA NOTA (`P1-sexies`), PRIMA di misurare
@@ -14,10 +14,19 @@ K2 IL CASO CHE DEVE FERMARSI: `d < LAM` a flag SPENTI -> OK: `DominioViolato`, e
   arco=1-2 quanti=1 su=3
 K3 e `d < LAM` a flag ACCESI si ferma come prima -> OK  (DominioViolato)
 K4 IL CASO CHE DEVE FALLIRE: la regola VECCHIA a flag spenti era `d > 0`, e `min(d) = 0.4000 > 0` -> OK: il difetto e' riprodotto (prima PASSAVA)
+K5 IL CASO CHE DEVE FALLIRE: `_lam_attivo` SOLO in un commento -> l'AST dice [] mentre un `in` sul testo direbbe TROVATO -> OK: il criterio vecchio sbagliava
+K6 e un riferimento VERO si trova: righe [1] -> OK
+K7 SECONDO CASO CHE DEVE FALLIRE: un `DOMINI` con la chiave `'a'` DUE volte -> duplicate ['a'] -> OK
+K8 e un `DOMINI` pulito non da' falsi allarmi: duplicate NESSUNA -> OK
 ------------------------------------------------------------------------------------------------
   -> i criteri PASSANO
 
-T1    FAIL `_lam_attivo` NON ESISTE PIU' nel sorgente: la legge non e' piu' condizionata
+T1    PASS `_lam_attivo` non ha piu' RIFERIMENTI DI CODICE: dall'AST [] (nessuno)
+      (nel TESTO compare 2 volte, e sono COMMENTI: per questo il criterio guarda
+       l'AST e non un `in`.)
+T1b   PASS `DOMINI` NON ha chiavi duplicate: 42 chiavi, duplicate NESSUNA
+      -> e' la cura di `D37`. In un letterale di dict la chiave duplicata vince
+         l'ULTIMA, quindi una voce duplicata e' CODICE MORTO **in silenzio**.
 T2    PASS `_cs_nodo_prev` e' nei DOMINI come `pos`: ('pos', 'velocita delle onde metriche: una VELOCITA e positiva')
       -> `cs > 0` e' DERIVATO (cs_floor > 0, transizione in (0,1) stretto), quindi e'
          un INVARIANTE e non un caso da contare.
@@ -34,14 +43,14 @@ T4    PASS E IL CONTROLLO: con `d >= LAM` NON si ferma -> non si ferma
 T5 -- BYTE-INERZIA: 120 passi nella configurazione dei run, contro `_cura1_corto`.
       L'invariante LEGGE soltanto: non deve cambiare un bit.
 ------------------------------------------------------------------------------------------------
-  (386.5 s)
+  (425.6 s)
   campi UGUALI 206   DIVERSI 0   non confrontati 0
 T5    PASS BYTE-INERTE: 206 campi identici, 0 diversi
 
 ================================================================================================
-ESITO: 4/5
+ESITO: 6/6
 ================================================================================================
-*** SIGILLO FALLITO: reperto, commit, STOP (par.5). ***
+*** SIGILLO PASSATO. ***
 
 !! COSA QUESTO SIGILLO NON DICE: che `d >= LAM` sia la REALIZZAZIONE giusta della
    legge. Dice che la legge e' ora VERIFICATA SEMPRE. La realizzazione di oggi e' il
