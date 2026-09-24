@@ -43,6 +43,17 @@ TORSIONE = ("tau_soglia", "tau_tetto", "centro", "segno")
 NUOVI = ("_ft", "ampiezza_int", "resp_int", "_rn", "_tau_a", "_rap", "_resp_rep")
 
 
+def firma_byte(a):
+    """`sha1` dei byte grezzi + forma + dtype -- l'IDENTITA' dello `STANDARD 2`.
+
+    Vede cio' che `array_equal` non vede: **due `NaN` nello stesso posto** *(identici)* e
+    **`+0.0` contro `-0.0`** *(diversi)*.
+    """
+    import hashlib
+    a = np.ascontiguousarray(a)
+    return (hashlib.sha1(a.tobytes()).hexdigest(), a.shape, str(a.dtype))
+
+
 def confronta_snap(p_a, p_b, W):
     import gzip
     import pickle
@@ -64,7 +75,13 @@ def confronta_snap(p_a, p_b, W):
                     dv += 1
                     diversi.append("%s(shape %s!=%s)" % (k, a.shape, b.shape))
                     continue
-                if a.size == 0 or np.array_equal(a, b):
+                # [STANDARD 2, 2026-09-24] IDENTITA' = FIRMA DEI BYTE, non `array_equal`.
+                # MISURATO: su `peq` (2 `NaN` su 526 204) `array_equal` rispondeva **False**
+                # su due array il cui `sha1` dei byte grezzi COINCIDE, perche' `NaN != NaN`.
+                # Era un generatore di FAIL FALSI. Lo `STANDARD 2` lo prescriveva gia'
+                # ("firme dei byte, non max|delta|") e non l'avevo applicato.
+                # `max|A-B|` resta sotto, per dire DI QUANTO -- non PER DECIDERE.
+                if a.size == 0 or firma_byte(a) == firma_byte(b):
                     ug += 1
                 else:
                     dv += 1
@@ -224,6 +241,22 @@ def collaudo(W):
     W("K6 e il `segno` VERO non si segnala: legge %s -> %s\n"
       % (sorted(letti), "OK" if ok else "*** falso allarme ***"))
     e.append(ok)
+
+    # K9/K10 -- LA FIRMA DEI BYTE VEDE CIO' CHE `array_equal` NON VEDE.
+    # Sono i DUE casi che lo `STANDARD 2` nomina, e il primo e' MISURATO su dati veri
+    # (`peq`, 2 `NaN` su 526 204: `array_equal` diceva DIVERSI, il `sha1` dice UGUALI).
+    _nan = np.array([1.0, np.nan, 3.0])
+    ok = (firma_byte(_nan) == firma_byte(_nan.copy())) and not np.array_equal(_nan, _nan.copy())
+    W("K%d due array con `NaN` NELLO STESSO POSTO: firma UGUALE, `array_equal` DIVERSO -> %s"
+      % (len(e) + 1, "OK" if ok else "*** NO ***") + chr(10))
+    e.append(ok)
+    _p, _m = np.array([0.0]), np.array([-0.0])
+    ok = (firma_byte(_p) != firma_byte(_m)) and np.array_equal(_p, _m)
+    W("K%d `+0.0` contro `-0.0`: firma DIVERSA, `array_equal` UGUALE -> %s"
+      % (len(e) + 1, "OK" if ok else "*** NO ***") + chr(10))
+    e.append(ok)
+    W("   -> IL SECONDO E' IL CASO CHE DEVE FALLIRE: `array_equal` li dichiara identici e" + chr(10))
+    W("      non lo sono. La firma dei byte sbaglia in NESSUNO dei due versi." + chr(10))
 
     # K7/K8 -- IL BRACCIO ATTRAVERSA IL CONFINE DI PROCESSO.
     # Senza questo la riparazione di `Z145` sarebbe ASSERITA e non provata -- che e'
