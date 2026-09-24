@@ -1807,11 +1807,25 @@ diagonale `LAM`)*.
   suddividerebbe **all'infinito**: il guscio ha volume che tende a zero ma **non diventa mai
   vuoto**.
 
-> ### **SERVE UNA RISOLUZIONE NUMERICA, e non è un parametro fisico: è il punto in cui due
-> ### posizioni non sono più distinguibili.** La dichiaro come tale, **con un CONTATORE `A8`**
-> — quante celle sono state abbandonate per risoluzione — **così si vede se ha mai contato.**
-> **Non è «zero numeri»: è ZERO NUMERI FISICI più una risolu­ zione numerica contata.**
-> **Preferisco dirlo che far passare un numero per una derivazione.**
+> ### ✅ **LA RISOLUZIONE NON SI SCEGLIE — precisazione di Luca, 2026-09-24**
+>
+> ```
+> si ferma la suddivisione quando il lato della cella e' piu' piccolo di cio' che
+> `float64` distingue RISPETTO A LAM:        lato < LAM * eps_macchina
+> ```
+>
+> **`eps` è una proprietà DEL CALCOLATORE, non un numero scelto** — `np.finfo(float).eps`,
+> `2.22e-16`. **Sotto quella soglia due posizioni non sono più posizioni diverse: sono lo
+> stesso `float`.** Suddividere ancora non aggiungerebbe informazione, **ne toglierebbe**.
+>
+> **Avevo scritto «non è zero numeri, è zero numeri fisici più una risoluzione»: con `eps` la
+> frase cade**, perché `eps` non è un numero del modello né una mia scelta. **Resta UN
+> NUMERO SOLO: `LAM`.**
+>
+> **IL CONTATORE `A8` RESTA** *(Luca)*, e va detto perché: `eps` rende la risoluzione non
+> arbitraria, **non la rende innocua**. Se celle vengono abbandonate lì, la saturazione
+> dichiarata **non è esatta**, ed è esattamente ciò che il contatore deve rendere visibile.
+> **Un presidio che non conta non è un presidio.**
 
 ## 5-quater. I CRITERI DELL'ARRESTO DERIVATO — **fissati PRIMA del codice** *(Luca)*
 
@@ -1819,7 +1833,7 @@ diagonale `LAM`)*.
 |---|---|---|
 | **`C1`** | **flag spento: byte-identico** | par.2.1. L'arresto vive dentro `SEMINA_LAM`: a flag spento non esiste |
 | **`C2`** | **la capienza è INDIPENDENTE da `n` chiesto** *(prova del raddoppio)* | ❗ **È IL CRITERIO CHE OGGI FALLISCE:** misurato `+0.61 %`, `+4.11 %`, `+2.77 %` a tre raggi. **Con l'arresto derivato deve dare `0` esatto**, perché la saturazione non dipende dalla domanda |
-| **`C3`** | **frazione di impacchettamento a saturazione `~0.384`** *(valore noto in 3D)* | ❗ **È IL CONTROLLO CONTRO UN VALORE ESTERNO AL PROGETTO**, e vale più di un test interno: se si discosta, **il codice è sbagliato**, non il sistema. *(La frazione si calcola su sfere di raggio `LAM/2`: `n·(LAM/2)³ / r³`.)* |
+| **`C3`** | **frazione di impacchettamento `0.384` NELLA SFERA INTERNA** — i nodi a distanza `>= R_CONN` dal bordo, **entro la dispersione fra QUATTRO semi** | ❗ **È IL CONTROLLO CONTRO UN VALORE ESTERNO AL PROGETTO**: se si discosta, **il codice è sbagliato**, non il sistema. **RIDEFINITO da Luca, 2026-09-24:** si misura **dentro**, dove il bordo non arriva, **e li' vale `0.384` senza sconti** |
 | **`C4`** | **nessun rifiuto falso**: con `n` sotto la capienza misurata la semina riesce **sempre**, su **quattro semi** | è il difetto che Luca ha trovato, e questo criterio **lo mette alla prova invece di fidarsi** |
 
 > ### ⚠ `C3` È IL CRITERIO PIÙ FORTE DEI QUATTRO, e va detto perché
@@ -1829,10 +1843,16 @@ diagonale `LAM`)*.
 > **È il solo dei quattro che possa dire «il codice è sbagliato» invece di «il codice non fa
 > quello che credevo».**
 >
-> **⚠ E IL SUO LIMITE:** `0.384` è il valore **nel volume infinito**. In una palla di raggio
-> `r` il bordo abbassa la frazione, e **l'esponente `2.6875` misurato oggi è proprio quel
-> bordo**. Quindi `C3` **si legge sui raggi GRANDI**, e sui piccoli **si aspetta di meno**:
-> altrimenti è un `FAIL` falso su codice corretto — il difetto di `T1` in `E4-LAM`.
+> ### ✅ **E IL SUO LIMITE È TOLTO, NON GIRATO — precisazione di Luca**
+>
+> **Avevo scritto «`C3` si legge sui raggi GRANDI, e sui piccoli si aspetta di meno».**
+> **È un criterio che si adatta al risultato**, cioè il difetto che `P1-sexies` insegue: una
+> soglia che si allarga dove il dato non torna **non può più fallire**.
+>
+> **LA FORMA GIUSTA È RESTRINGERE IL DOMINIO, NON LA SOGLIA:** si misura la frazione **solo
+> sui nodi a distanza `>= R_CONN` dal bordo**. **Lì il bordo non arriva, e `0.384` vale senza
+> sconti**, entro la dispersione fra **quattro semi**.
+> **La soglia resta dura; è il dominio a essere onesto.**
 
 **⚠ I NUMERI DI PRIMA RESTANO NEL REGISTRO COME STORIA** *(decisione di Luca)*: sono
 misurati col criterio a lotti, e **vanno rifatti**. Il par.5-bis e questa sezione dicono con

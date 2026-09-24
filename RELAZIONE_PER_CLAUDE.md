@@ -15639,3 +15639,49 @@ semi.
 > **nel volume infinito**. In una palla il bordo abbassa la frazione — **e l'esponente `2.6875`
 > misurato oggi è proprio quel bordo**. Quindi **`C3` si legge sui raggi GRANDI**, e sui piccoli
 > si aspetta di meno.
+
+
+---
+
+# ✅ DUE PRECISAZIONI ACCOLTE, E UNA CORREZIONE MIA *(2026-09-24)*
+
+## 1. LA RISOLUZIONE NON SI SCEGLIE — **e la mia frase cade**
+
+```
+si ferma la suddivisione quando   lato_cella < LAM * eps_macchina     (eps = 2.22e-16)
+```
+
+**`eps` è una proprietà del CALCOLATORE**, non un numero del modello né una mia scelta: sotto
+quella soglia **due posizioni non sono più posizioni diverse, sono lo stesso `float`**.
+
+> **Avevo scritto «non è zero numeri: è zero numeri FISICI più una risoluzione numerica».**
+> **Con `eps` quella frase CADE: resta UN NUMERO SOLO, `LAM`.** Avevo trattato come inevitabile
+> una scelta che non c'era.
+
+**E il contatore `A8` resta, come hai detto** — e il perché lo scrivo: **`eps` rende la
+risoluzione non arbitraria, non la rende innocua.** Se delle celle vengono abbandonate lì, la
+saturazione dichiarata **non è esatta**, ed è proprio quello che il contatore deve rendere
+visibile.
+
+## 2. `C3` SI MISURA NELLA SFERA INTERNA — **e il mio limite era un criterio che si adatta**
+
+**Avevo scritto:** *«`C3` si legge sui raggi GRANDI, e sui piccoli si aspetta di meno»*.
+**È una soglia che si allarga dove il dato non torna**, cioè il difetto che `P1-sexies`
+insegue: **un criterio così non può più fallire.**
+
+> ### **La forma giusta è restringere il DOMINIO, non la SOGLIA.**
+> Si misura la frazione **solo sui nodi a distanza `>= R_CONN` dal bordo**. **Lì il bordo non
+> arriva, e `0.384` vale senza sconti**, entro la dispersione fra **quattro semi**.
+> **La soglia resta dura; è il dominio a essere onesto.**
+
+## 3. L'ESPONENTE `2.6875` NON È UNA LEGGE, e l'avevo citato come se lo fosse
+
+**Mescola due regimi** — quello dominato dal **bordo** e quello di **volume**. Una retta su
+`log n` contro `log r` che attraversa due regimi **non ha una pendenza che significhi
+qualcosa**: è una media fra due fisiche diverse.
+
+> **Serve solo a dire che la mia `r ∝ n^(1/3)` era sbagliata. NON a prevedere.**
+> **Valgono i raggi per bisezione, misurati a ogni `n`.**
+>
+> **È lo stesso errore di prima con un altro numero:** avevo sostituito un'estrapolazione da un
+> punto con un'estrapolazione da una retta **che non ha il diritto di essere una retta**.
