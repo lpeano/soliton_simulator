@@ -171,8 +171,6 @@ def main():
             continue
         g = np.abs(r[i] - r[j])
         nati = (i >= N0_SEMINA) | (j >= N0_SEMINA)
-        P("  %-12s  grad|r| su TUTTI gli archi   p10/p50/p90 = %.3e / %.3e / %.3e\n"
-          % (nome,) + "")
         a1 = q(g)
         a2 = q(g[nati]) if nati.any() else [float("nan")] * 3
         P("  %-12s  TUTTI  %.3e %.3e %.3e   |  ARCHI CON UN NATO  %.3e %.3e %.3e  (n=%d)\n"
