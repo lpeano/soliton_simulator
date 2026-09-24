@@ -1,0 +1,38 @@
+# `C1` -- LA PROVA PER IDENTITA': `_nasce` e' `np.maximum(d, LAM)` E NIENT'ALTRO?
+#
+# Passo ZERO, un processo per braccio (`STANDARD 1`). Argv LETTA dal driver.
+#
+  `--sep` DEL DRIVER, letto dal sorgente: 8
+
+  on n=2391 archi=429498 LAM=0.800000000 SCALA_MIN=False SCALA_MIN_PASSO=True nascite=4
+  off n=2391 archi=429498 LAM=0.800000000 SCALA_MIN=False SCALA_MIN_PASSO=False nascite=0
+
+  LAM = 0.800000000 (letto dal simulatore)
+  forma: d_on (429498,)  d_off (429498,)
+
+====================================================================================================
+IL CRITERIO
+====================================================================================================
+  sha1(d_on)               = f24d4d38f9f81f4b
+  sha1(max(d_off, LAM))    = f24d4d38f9f81f4b
+  IDENTICI BIT A BIT       = True
+
+  -> **PASS. `_nasce` e' `np.maximum(d, LAM)` E NIENT'ALTRO**, e «sono gli
+     stessi archi» NON e' piu' una deduzione da due conteggi: e'
+     un'IDENTITA' DI BYTE.
+     elementi diversi: 0 su 429498
+
+====================================================================================================
+I NUMERI CHIESTI
+====================================================================================================
+  min(d_off)/LAM           = 0.012098
+  archi con d_off < LAM    = 221028 su 429498 (51.46 %)
+  archi con d_on == LAM    = 221028
+  min(d_on)/LAM            = 1.000000
+
+  -> i TRE numeri devono coincidere: `d_off < LAM`, `d_on == LAM`, e il conteggio
+     del referto. **Se coincidono, sono davvero GLI STESSI ARCHI.**
+
+  argv del simulatore, braccio ON:
+    soliton_simulator.py --test N-MASSE --nmasse 3 --sep 8 --giri 0 --campo-spinoriale --spinore-vivo --spinore-corretto --chi-core --calore-scal --deparam-orologio --verlet --fork-su2 --fork-su2-mem --cs-dinamico --tau-luce --rumore-colorato --pav-com --guscio-morbido --zeta-vir --ritmo-wrap-2pi --tempo-unico-mitosi --chi-basc --chi-coop --coes-adim --peq-esatto --peq-nascita-locale --scala-min-passo --coes-causale --anom-simm --invarianti=on --plast-din --viriale --olon-part
+  (differenza col braccio OFF: solo `SCALA_MIN_PASSO`)

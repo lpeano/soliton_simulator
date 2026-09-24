@@ -15232,3 +15232,43 @@ che nasce sul muro *(`A11` cor.6, gemello di `D31` alla nascita)* · **`B4`** `D
 cura già sigillata)* → `A2`, `A3` → `B1`, `B2` *(dichiarazioni prima che cure)* → `B4`.
 
 **⚠ `CURA 3` non è in questa lista, di proposito: la revisione era sola lettura e non la ordina.**
+
+---
+
+# ✅ `C1` — **«SONO GLI STESSI ARCHI» ORA È UN'IDENTITÀ DI BYTE, NON UNA DEDUZIONE**
+
+**Avevi ragione: era lo `STANDARD 9`.** Confrontavo `223 396` *(passo 1, braccio senza cure)* con
+`223 380` *(passo 0, braccio con)* e concludevo *«sono gli stessi archi»*. **Due numeri vicini
+non sono un'identità.**
+
+**La prova vera** *(`csv/_seal_fork/_prova_nasce_identita.py`, passo ZERO, un processo per
+braccio, argv **letta** dal driver)*:
+
+```
+sha1(d_on)             = f24d4d38f9f81f4b
+sha1(max(d_off, LAM))  = f24d4d38f9f81f4b
+IDENTICI BIT A BIT     = True        elementi diversi: 0 su 429498
+```
+
+> ### **`_nasce` è `np.maximum(d, LAM)` E NIENT'ALTRO.**
+
+E i numeri che chiedevi:
+
+```
+min(d_off)/LAM        = 0.012098          <- il ~0.0121 atteso
+archi con d_off < LAM = 221028 su 429498 (51.46 %)
+archi con d_on == LAM = 221028            <- LO STESSO NUMERO
+min(d_on)/LAM         = 1.000000
+```
+
+**`d_off < LAM` e `d_on == LAM` coincidono esattamente: `221 028`.** **Ora sono davvero gli
+stessi archi, e si vede invece di dedurlo.**
+
+**⚠ QUESTO GIRO È A `--sep 8`**, il default del driver **prima** della tua decisione `D-a`.
+Per questo i conteggi differiscono da quelli del referto *(`223 380` su `525 973` a
+`--sep 4.0`)*: **è un'altra scena.** **Rifaccio la prova dopo `D-a`**, così il numero si aggancia
+a quello del referto.
+
+**E `C4` è fatto:** l'argv e `--sep` si **leggono dal driver** — `csv/_testa_driver.py`, che
+esegue la testa vera fino a `_applica_flag`. **Un posto solo**, perché ricostruirla sarebbe una
+seconda formula per la stessa cosa. *(Il sigillo del driver ha ancora la sua copia: in coda.)*
