@@ -15106,3 +15106,52 @@ quanto il difetto cresca nel tempo.
 — avevo scritto `S.rete` e `avvia_test(...)` **a memoria**, invece di copiarle dal sigillo che
 stavo riproducendo, dove sono `S.net` e `avvia_test(...)()`. **`P1` applicato a due righe di
 codice.** Lo strumento però **non ha concluso**: ha stampato *«l'esito non è quello atteso»*.
+
+---
+
+# ✅ `CHI_COOP` È NELLA LISTA E ACCESA — **e resta UNA sola differenza: `--sep`**
+
+**Prima** *(argv intera, NUDA contro CAMPAGNA)*: `--chi-coop`, `--invarianti`, `--sep`.
+**Ora:**
+
+```
+NUDA     (38 elementi)
+CAMPAGNA (38 elementi)
+⚠ DIFFERENZE: 1
+  opzione      NUDA    CAMPAGNA
+  --sep        8       4.0
+```
+
+**`--invarianti`** passa da `None` a `"on"`: **non cambia ciò che gira** *(il default del
+sorgente è già `True`)* — **cambia che l'argv LO DICE.**
+
+**⚠ E IL COMMENTO SOPRA `CHICOOP` ERA SCADUTO, NON SBAGLIATO.** Diceva: *«il default è quello
+che riproduce il comportamento ATTUALE VERBATIM, e il driver non ha MAI passato `--chi-coop`»*.
+**Vero QUANDO il flag nasceva.** Da `G3` in poi **ogni** comando lo passava `=on`, e **il
+comportamento attuale non era più quello che il default riproduceva.** **La ragione era scaduta
+e il default no.**
+
+## ⚠ IL SIGILLO DEL DRIVER ORA **FALLISCE**, e fallisce sulla cosa giusta
+
+**`--sep`: il driver ha `8`, la campagna `4.0`.** Il criterio dice *«ogni differenza va spiegata
+o tolta»*, e questa non è né spiegata né tolta. **Non la esento da solo: esentarla sarebbe
+decidere al posto tuo.**
+
+# ❓ LA DOMANDA, ED È LA TUA `(4)`
+
+**`--sep` e `--serie` non sono cure: sono la SCENA e l'ARCHIVIO.**
+
+| | driver | campagna | che cos'è |
+|---|--:|--:|---|
+| **`--sep`** | `8` | `4.0` | **separazione delle masse: è FISICA DELLA SCENA.** Cambia la condizione iniziale, quindi **cambia i numeri** |
+| **`--serie`** | `None` | `20` | **cadenza degli snapshot.** È un'opzione **del driver**, non inoltrata al simulatore: **non compare nel confronto** e **non tocca la fisica** |
+
+> **`--serie` non richiede una decisione:** è archivio, e chi vuole gli snapshot li chiede.
+> **`--sep` sì**, e le due strade sono:
+> - **il default segue la campagna (`4.0`)** → `NUDA = CAMPAGNA` davvero, un solo modo di
+>   lanciare, e il sigillo passa. **Ma cambia la scena di default per chiunque lanci nudo**, e
+>   `sep=8` è quella con cui sono stati fatti i run più vecchi;
+> - **il default resta `8`** → allora `--sep` va **dichiarato come differenza LEGITTIMA** nel
+>   sigillo, con la ragione scritta: *«la scena non è una cura»*.
+>
+> **Non scelgo io.** Fino alla tua risposta il sigillo **resta in FAIL**, che è lo stato vero.

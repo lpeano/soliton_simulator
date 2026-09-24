@@ -21,6 +21,7 @@ DUE INVOCAZIONI, e la differenza fra loro e' il punto:
 
   flag                     NUDA       CAMPAGNA   
   ANOM_SIMM                True       True       **DEVE essere True in ENTRAMBE** -> PASS
+  CHI_COOP                 True       True       **DEVE essere True in ENTRAMBE** -> PASS
   COES_ADIM                True       True       **DEVE essere True in ENTRAMBE** -> PASS
   COES_CAUSALE             True       True       **DEVE essere True in ENTRAMBE** -> PASS
   FASE_2PI                 False      False      **ESCLUSA, deve restare False** -> PASS
@@ -31,16 +32,36 @@ DUE INVOCAZIONI, e la differenza fra loro e' il punto:
   SCALA_MIN_PASSO          True       True       **DEVE essere True in ENTRAMBE** -> PASS
   TEMPO_UNICO_MITOSI       True       True       **DEVE essere True in ENTRAMBE** -> PASS
 
-  CURE OBBLIGATORIE: 9   ESCLUSE: 1   ORFANE: 0
+  CURE OBBLIGATORIE: 10   ESCLUSE: 1   ORFANE: 0
     escl. FASE_2PI             NON e' approvata: la sua prova la BOCCIA (`Z127`, `2/4`, `E1` non passa -- mitosi `62` -> `1` evento). Il driver NON deve accenderla.
 
   ✅ **NUDA = CAMPAGNA su tutte le obbligatorie: UN SOLO MODO DI LANCIARE.**
      Nessuna cura approvata si puo' piu' dimenticare da riga di comando.
 
 ============================================================================================
-ESITO: 10/10 (obbligatorie + escluse + orfane)
+L'ARGV INTERA: NUDA contro CAMPAGNA -- **non solo le cure**
 ============================================================================================
-*** IL DRIVER LE ACCENDE. ***
+  `CHI_COOP` era passato `=on` dalla campagna e `"off"` di default nel driver, e il
+  sigillo NON LO VEDEVA: non e' in `_cure_verificate.py`. **ORFANO FUORI DALLA LISTA**
+  -- il caso esatto che il controllo delle orfane doveva impedire e non poteva vedere.
+  **Qui il confronto non ha piu' una lista a cui essere fedele.** (Rilievo di Luca.)
+
+  NUDA     (38 elementi)
+  CAMPAGNA (38 elementi)
+
+  ⚠ **DIFFERENZE: 1**
+
+    opzione                    NUDA             CAMPAGNA        
+    --sep                      8                4.0             
+
+  **OGNI DIFFERENZA VA SPIEGATA O TOLTA.** Una che resta senza motivo e' un modo
+  diverso di lanciare, e la decisione di Luca dice che ce ne deve essere UNO SOLO.
+  (elementi solo in CAMPAGNA: 1, solo in NUDA: 1 -- conteggio grezzo)
+
+============================================================================================
+ESITO: 11/12 (obbligatorie + escluse + orfane + argv intera)
+============================================================================================
+*** IL DRIVER NON LE ACCENDE: reperto, commit, STOP. ***
 
 !! COSA QUESTO SIGILLO NON DICE: che le cure siano GIUSTE, ne' che il flag FUNZIONI.
    Quelli sono i sigilli di ciascuna cura. Questo dice che ACCADONO nei run --
