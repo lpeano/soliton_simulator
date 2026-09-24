@@ -170,6 +170,8 @@ def main():
     P("# intermedi del driver (`--sep`, `CHICOOP`).\n#\n")
 
     vecchio = os.path.join(DEST, "_sim_vecchio.py")
+    # il collaudo ha bisogno del file vecchio: si estrae qui sotto, e si collauda DOPO
+
     h, nb = estrai_vecchio(vecchio)
     if h is None:
         P("*** blob %s NON TROVATO negli ultimi 60 commit del simulatore ***\n" % VECCHIO_SHA)
@@ -192,9 +194,18 @@ def main():
         ug, dv, extra = confronta(A, B, P, "VECCHIO", "NUOVO")
         ok = (dv == 0 and ug > 100)
         esiti.append(ok)
-        P("\n  `C1` %s\n" % ("PASS: `SEMINA_LAM` spenta non cambia un bit, e nemmeno\n"
-                             "        `_nasce` senza gate -- con `SCALA_MIN_PASSO` acceso\n"
-                             "        girava gia'." if ok else "*** FAIL ***"))
+        if ok and extra:
+            # ⚠ PASS CONDIZIONATO (rilievo di Luca): i campi presenti in uno solo o non
+            #   confrontabili **non sono zero**, e finche' non sono SPIEGATI il `PASS` non e'
+            #   pieno. Dirlo è diverso da nasconderlo in un conteggio.
+            P("\n  `C1` **PASS CONDIZIONATO**: `%d` campi non confrontati, elencati sopra.\n"
+              % extra)
+            P("        Finche' non sono SPIEGATI, questo non e' un PASS pieno.\n")
+        else:
+            P("\n  `C1` %s\n" % ("PASS PIENO: `SEMINA_LAM` spenta non cambia un bit, e nemmeno\n"
+                                  "        `_nasce` senza gate -- con `SCALA_MIN_PASSO` acceso\n"
+                                  "        girava gia'. E nessun campo resta non confrontato."
+                                  if ok else "*** FAIL ***"))
 
     P("\n" + "=" * 96 + "\n`D38` -- ENTRAMBI con `--scala-min-passo=off`: DEVONO DIFFERIRE\n"
       + "=" * 96 + "\n")
@@ -214,13 +225,53 @@ def main():
     gv, gn = quale(ov), quale(on_)
     P("\n  VECCHIO: si ferma su `%s` al passo %s, %s valori fuori dominio\n" % gv)
     P("  NUOVO  : si ferma su `%s` al passo %s, %s valori fuori dominio\n" % gn)
-    ok2 = (gv != gn) or (Av is not None and Bn is not None)
+    # ❌ IL CRITERIO PRECEDENTE AVEVA UN BUCO (rilievo di Luca):
+    #     ok2 = (gv != gn) or (Av is not None and Bn is not None)
+    #   il secondo ramo dava PASS **se entrambi arrivavano in fondo, SENZA verificare che
+    #   DIFFERISSERO**: due corse IDENTICHE sarebbero passate. E' la stessa famiglia del
+    #   `dv > 0` letto come effetto: un criterio che non puo' fallire dove dovrebbe.
+    ok2 = False
+    if gv != gn and gv[0] != "-":
+        ok2 = True                        # si fermano in modo DIVERSO: e' la cura
+        P("  -> si fermano in modo DIVERSO.\n")
+    elif Av is not None and Bn is not None:
+        P("  -> entrambi arrivano in fondo: allora DEVONO differire NEI DATI.\n")
+        _ug, _dv, _ex = confronta(Av, Bn, P, "VECCHIO", "NUOVO")
+        ok2 = (_dv > 0)
+    else:
+        P("  -> uno solo arriva in fondo: DIVERSI per definizione.\n")
+        ok2 = (Av is None) != (Bn is None)
     esiti.append(ok2)
     P("\n  `D38` %s\n" % ("PASS: i due codici si comportano DIVERSAMENTE a parita' di argv.\n"
                           "        Il vecchio cade su `d` (la SEMINA, `_nasce` non tronca),\n"
                           "        il nuovo su `d0` (l'EVOLUZIONE): la nascita e' curata,\n"
                           "        e resta scoperto il MANTENIMENTO -- che e' il freno."
                           if ok2 else "*** FAIL: i due codici si comportano UGUALE ***"))
+
+    # ------------------------------------------------------------------ IL COLLAUDO
+    P("\n" + "=" * 96 + "\nCOLLAUDO DEL CRITERIO `D38` -- il caso che DEVE fallire\n"
+      + "=" * 96 + "\n")
+    P("  `P1-sexies`: un criterio si collauda su un caso a risposta NOTA. Qui il caso e'\n")
+    P("  **LO STESSO CODICE NEI DUE BRACCI**: non c'e' nessuna cura fra loro, quindi il\n")
+    P("  criterio di `D38` **DEVE dare FAIL**. Se desse PASS, direbbe `PASS` a qualunque cosa.\n")
+    P("  (E' il buco che aveva il criterio precedente, trovato da Luca.)\n")
+    Ka, oka, _ = gira("collaudo_a", nuovo, ["--scala-min-passo=off"], P)
+    Kb, okb, _ = gira("collaudo_b", nuovo, ["--scala-min-passo=off"], P)
+    ga, gb = quale(oka), quale(okb)
+    P("\n  braccio a: `%s` passo %s, %s fuori dominio\n" % ga)
+    P("  braccio b: `%s` passo %s, %s fuori dominio\n" % gb)
+    if ga != gb and ga[0] != "-":
+        finto = True
+    elif Ka is not None and Kb is not None:
+        _u, _d, _e = confronta(Ka, Kb, P, "a", "b")
+        finto = (_d > 0)
+    else:
+        finto = (Ka is None) != (Kb is None)
+    ok3 = (not finto)
+    esiti.append(ok3)
+    P("\n  COLLAUDO %s: col MEDESIMO codice il criterio di `D38` %s\n"
+      % ("PASS" if ok3 else "*** NO ***",
+         "dice FAIL, come deve" if ok3 else "direbbe PASS -- IL CRITERIO E' VUOTO"))
 
     n = sum(1 for x in esiti if x)
     P("\n" + "=" * 96 + "\nESITO: %d/%d\n" % (n, len(esiti)) + "=" * 96 + "\n")
