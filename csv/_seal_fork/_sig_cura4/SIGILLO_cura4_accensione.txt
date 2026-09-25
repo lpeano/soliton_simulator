@@ -4,15 +4,17 @@ SIGILLO `CURA 4` -- L'ACCENSIONE DEL CAMPO (`SEMINA_MATURA`)
 
 [off] rc=0 0
 [scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK off  n 4252 -> 4252  pesi0 0.000000e+00  pesi1 6.382729e-04
+OK off  n 4252 -> 4252  pesi0 0.000000e+00  pesi1 6.382612e-04
 [on] rc=0 00
 [scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK on  n 4252 -> 4252  pesi0 1.855623e+04  pesi1 1.588506e+04
+OK on  n 4252 -> 4252  pesi0 1.855623e+04  pesi1 1.041879e+04
 [on_forzato] rc=0 a-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK on_forzato  n 4252 -> 4252  pesi0 0.000000e+00  pesi1 1.983475e+00
+OK on_forzato  n 4252 -> 4252  pesi0 0.000000e+00  pesi1 1.983439e+00
 [prima] rc=0 [scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK prima  n 4252 -> 4252  pesi0 0.000000e+00  pesi1 6.382729e-04
-[mitosi] rc=0 OK mitosi  n 60 -> 62  nuovi 2
+OK prima  n 4252 -> 4252  pesi0 0.000000e+00  pesi1 6.382612e-04  (il codice di prima e' 900fe603^, e NON contiene SEMINA_MATURA)
+[mitosi] rc=0 a chiralit� emergente del core locale
+[cs-dinamico] velocit� metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+OK mitosi  n 60 -> 62  nuovi 2
 
 CONFIGURAZIONE: TAU_A = 50.0   DT = 0.010   ->   TAU_A/DT = 5000 passi
   scena (ii) (b), seme 11:  n = 4252, archi = 148237
@@ -21,29 +23,38 @@ NOTA SU `A1`: qui OFF e ON DEVONO differire (e' `A5`). La BYTE-IDENTITA' del ram
   si prova contro il codice PRECEDENTE alla cura, ed e' il braccio `A1` piu' sotto.
 
 A1    PASS  flag SPENTO = BYTE-IDENTICO al codice PRECEDENTE (firma dei byte, un processo per braccio)
-             campi confrontati 90   DIVERSI 0
+             campi confrontati 102   DIVERSI 0
              diversi: NESSUNO
              presenti solo nel VECCHIO: nessuno
              presenti solo nel NUOVO:   nessuno
-             (il vecchio e' `HEAD:soliton_simulator.py`, estratto in BINARIO)
-A2    PASS  al passo 1 `ramp == 1` su TUTTI i nodi della semina iniziale (ESATTO)
-             ON : min 1.000000000000000  max 1.000000000000000   uguali a 1: 4252 su 4252
+             (il vecchio e' 900fe603^:soliton_simulator.py, estratto in BINARIO -- il PADRE del commit che ha introdotto SEMINA_MATURA, non `HEAD`: HEAD LA CONTIENE)
+CLI   PASS  il flag arriva DAL CLI (argv del driver) e NESSUN braccio lo assegna a mano
+             off         flag=False    atteso=False  opz_nell_argv=False  SEMINA_LAM=True   argv=42 scartate=[]
+             on          flag=True     atteso=True   opz_nell_argv=True   SEMINA_LAM=True   argv=43 scartate=[]
+             on_forzato  flag=True     atteso=True   opz_nell_argv=True   SEMINA_LAM=True   argv=43 scartate=[]
+             mitosi      flag=True     atteso=True   opz_nell_argv=True   SEMINA_LAM=True   argv=43 scartate=[]
+             prima       flag=ASSENTE  atteso=False  opz_nell_argv=False  SEMINA_LAM=True   argv=41 scartate=['--mitosi-2lam']
+             argv CATTURATA dal driver: 43 voci, e contiene --semina-matura
+             nessuna assegnazione `S.SEMINA_MATURA`/`S.SEMINA_LAM` nei sorgenti dei figli (verificato per AST)
+
+A2    FAIL  al passo 1 `ramp == 1` su TUTTI i nodi della semina iniziale (ESATTO)
+             ON : min 0.326478182506377  max 1.000000000000000   uguali a 1: 54 su 4252
              OFF: min 0.000200000000000  max 0.000200000000000   (il riferimento: oggi e' ~0)
              e al passo ZERO la somma dei pesi: ON 1.855623e+04 contro OFF 0.000000e+00
 A3    PASS  un nodo nato da MITOSI parte da `ramp = 0` e arriva a 1 nel suo TEMPO-LUCE
              nodi nati dalla mitosi: 2   (tw forzato nella finestra DERIVATA: 10.210176)
              ramp alla nascita: [0.0, 0.0]   atteso 0
-             tempo-luce alla nascita: [0.5772851039949839, 0.5772851124741513]
-             passi per arrivare a ramp = 1: 98   (ramp finale 1.0)
-             ATTESO ~ tempo_luce/DT = 57.7 passi
+             tempo-luce alla nascita: [0.8764553904389667, 0.8764553902267217]
+             passi per arrivare a ramp = 1: 60   (ramp finale 1.0)
+             ATTESO ~ tempo_luce/DT = 87.6 passi
 A4    PASS  contrasto massa/vuoto e `Lam` al passo 1, contro `P2 = 27` e `P3 = 5`
-             contrasto  ON 6.7916   OFF 9.1711      previsto P2 = 27  -> rapporto 0.252
-             Lam        ON 2.158522e+00   OFF 4.462107e-15   previsto P3 = 5   -> rapporto 4.317e-01
-             salita di `Lam` ON/OFF: x4.837e+14   <- IL CONTROLLO che la cura AGISCE
-             I_massa ON 1.144769e+01   I_vuoto ON 1.685569e+00
+             contrasto  ON 1.5208   OFF 9.1652      previsto P2 = 27  -> rapporto 0.056
+             Lam        ON 7.034487e-01   OFF 4.455642e-15   previsto P3 = 5   -> rapporto 1.407e-01
+             salita di `Lam` ON/OFF: x1.579e+14   <- IL CONTROLLO che la cura AGISCE
+             I_massa ON 1.043502e+00   I_vuoto ON 6.861350e-01
 A5    PASS  CONTROLLO POSITIVO: ON e OFF DEVONO differire al passo 1
-             campi confrontati 87   DIVERSI 21   presenti in uno solo: OFF ['_taup_peq_deg_passi', '_taup_peq_deg_ultimo', '_taup_peq_degenere'] / ON nessuno
-             primi diversi: _cs_chiamate, _cs_fallback, _nb, _nb_prec, _sfb_amp_coppia, _sfondo_ko_rho, _sfondo_ko_ultima_rho, _spinor_lift, _taup_causale_scatti, _taup_causale_su_degenere
+             campi confrontati 98   DIVERSI 28   presenti in uno solo: OFF ['_cs_lam_degenere', '_taup_peq_deg_passi', '_taup_peq_deg_ultimo', '_taup_peq_degenere'] / ON ['_xi_chiamate', '_xi_esteso', '_xi_nuovi', '_xi_rumore']
+             primi diversi: _chi_core_rho0, _chi_core_rhoc, _cs_chiamate, _cs_fallback, _cs_nodo_prev, _nb, _nb_prec, _psi_spinor, _sfb_amp_coppia, _sfondo_ko_rho
              un sigillo che verifica solo la byte-identita' a OFF passerebbe su
              codice MORTO (par.10.2): questo e' il criterio che lo esclude.
 A6    PASS  CASO CHE DEVE FALLIRE: con `maturi=False` forzato, `A2` da' FAIL
@@ -56,10 +67,10 @@ A7    PASS  `TAU_A` NON e' piu' letto da `_pesi` -- dall'AST, non da un `grep`
              SOLO a flag spento: i due ruoli sono separati, e la separazione e'
              verificata dove sta la legge, non dove sta il nome.
 
-CONTATORI DELLA RAMPA (A8), braccio ON: {'_g_rampa_tot': 12, '_g_cura4_maturati': 4252, '_g_rampa_sotto1': 0, '_g_rampa_nodi': 34016}
+CONTATORI DELLA RAMPA (A8), braccio ON: {'_g_rampa_tot': 20, '_g_cura4_maturati': 4252, '_g_rampa_sotto1': 16792, '_g_rampa_nodi': 68032, '_g_rampa_prec': ['ndarray', [4252]], '_g_rampa_cali': 4198, '_g_rampa_calo_somma': 816.8198051073161, '_g_rampa_calo_max': 0.6735218174936226, '_g_rampa_calo_quando': 17}
 
 ========================================================================================================
-ESITO: 7/7 PASS
+ESITO: 7/8 PASS
 ========================================================================================================
 
 COSA QUESTO SIGILLO *NON* DICE:

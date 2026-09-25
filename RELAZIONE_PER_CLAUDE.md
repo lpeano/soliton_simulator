@@ -17720,3 +17720,107 @@ Dopo la cura, il sigillo del driver dava **`15/15`** e `S5` stampava ancora
 **LEZIONE OPERATIVA, e vale oltre questo caso:** quando una cura cambia **il percorso** che il
 codice prende, **il criterio che quel percorso sorvegliava va riletto nello stesso commit** —
 altrimenti resta a guardia di una porta che non c'è più.
+
+
+---
+
+# ⛔ **`CLI-1` SU `CURA 4`: `7/8`, E IL `FAIL` È UN RISCONTRO — «MATURO» NON RESTA MATURO** *(2026-09-25)*
+
+*(`csv/_seal_fork/_sigillo_cura4_accensione.py` rifatto **dal CLI**; referto in
+`csv/_seal_fork/_sig_cura4/SIGILLO_cura4_accensione.txt`. Sonda:
+`csv/_test_fork/_perche_ramp_cala.py`, referto in `csv/_test_fork/_perche_ramp_cala/`.)*
+
+## ① IL MANDATO ERA *«RIFAI I SIGILLI PASSANDO DAL CLI»*, E IL PASSAGGIO HA TROVATO TRE COSE
+
+**Il difetto di partenza, già misurato:** il sigillo faceva `S.SEMINA_MATURA = bool(FLAG)`
+**sul modulo**, e per questo dava `7/7` **mentre il flag era MORTO da riga di comando**.
+
+> ### **UN SIGILLO CHE IMPOSTA IL MODULO A MANO PROVA LA LEGGE, NON IL FLAG.**
+
+**⚠ E IL DRIVER NON PUÒ DARE IL BRACCIO OFF:** `--semina-lam`, `--semina-matura` e
+`--mitosi-2lam` sono cablati **senza `if`** — è `NUDA = CAMPAGNA`, di proposito. Quindi il
+braccio OFF è **«un comando che DIMENTICA il flag»**: la stessa argv **meno l'opzione**, che è
+l'unico OFF che il CLI ammette (`store_true`: `--semina-matura=off` **non esiste**).
+
+## ② ❌ **`A1` ERA VACUO, E L'HO SCRITTO IO** — la prova è che il braccio non poteva nemmeno girare
+
+`A1` prendeva il codice «di prima» da **`HEAD:soliton_simulator.py`**. Era giusto **finché la
+cura non era committata**; **dal commit della cura in poi HEAD LA CONTIENE**, e il braccio
+«prima» è diventato **il braccio OFF di se stesso**.
+
+```
+AttributeError: 'Rete' object has no attribute '_tempo_rampa'
+```
+
+> **È la PROVA, non un argomento:** ora che il braccio gira **davvero** su `900fe603^`, muore su
+> un metodo che **la cura 4 ha introdotto**. Finché il «prima» era `HEAD`, quel metodo **c'era**.
+> **Un braccio che non poteva nemmeno GIRARE sul codice vero stava passando da giorni.**
+> **NON era vacuo quando l'ho scritto: LO È DIVENTATO** — la famiglia di `T1` (par.0).
+
+**CURA, la stessa di `T1`: si ancora alla COPPIA DI BLOB CHE RACCHIUDE IL CAMBIAMENTO.**
+`_cli_flag.sim_prima_del_flag` trova il commit che ha **introdotto** il flag (`git log -S`, la
+voce più vecchia), ne prende **il PADRE**, estrae in **BINARIO** e **ASSERISCE che il file
+estratto non contenga il flag**: se l'ancora fosse sbagliata **si ferma invece di misurare
+niente** (`A9`). Misurato: `SEMINA_MATURA → 900fe603`, `MITOSI_2LAM → 127cc115`.
+E la rampa del vecchio (`eta/TAU_A`) è **letta dal sorgente vecchio** (`:3537`), non indovinata.
+
+## ③ ✅ **E LA CURA 5 VIETAVA LA MITOSI DI `A3`** — il sigillo girava dove l'altra cura non c'era
+
+Dal CLI arriva **anche `--mitosi-2lam`**, quindi `d >= 2 LAM`. L'arco `0` del telaio di `A3`
+misura **`d = 1.1433`** contro **`2 LAM = 1.6000`**: `nuovi 0`, e `A3` non aveva più nulla da
+misurare. **Non si spegne la cura 5 e non si fabbrica una lunghezza: si prende l'arco più
+LUNGO** (`d = 2.3939`; **154 archi su 224** conformano già).
+**«Arco 0» era una scelta arbitraria; «il più lungo» è un criterio.**
+
+## ④ ⛔ IL `FAIL`: **`A2`**, e non è il criterio che sbaglia — è che *«maturo» non resta maturo*
+
+```
+passo ZERO   ramp = 1.000000000000000   su TUTTI i 4252 nodi   (min = max = 1)
+passo 1      ramp == 1 su  54 su 4252     min 0.3265     _g_rampa_cali = 4198
+```
+
+**La cura FA cio' che dichiara ALLA NASCITA** *(e il controllo c'è: somma dei pesi al passo
+zero `1.855623e+04` contro `0.000000e+00` a flag spento)*. **Poi la rampa SCENDE.**
+
+**PERCHÉ, misurato separatamente** *(sonda `_perche_ramp_cala.py`, argv del driver, nessun flag
+toccato)*:
+
+| grandezza | passo 0 (p50) | passo 1 (p50) | rapporto |
+|---|---|---|---|
+| `eta` — il numeratore | `0.897802954` | `0.907802954` | **×1.011** |
+| `_tempo_rampa` — il denominatore | `0.897802954` | `1.071554877` | **×1.196** |
+| `ramp = min(1, eta/tr)` | `1.000000000` | `0.845601758` | **×0.846** |
+
+> ### **IL DENOMINATORE CRESCE 18 VOLTE PIÙ DEL NUMERATORE.**
+> Non è `eta` che si ferma: è **la scala di riferimento che si allunga**. `ramp` è un **rapporto
+> fra due quantità che si muovono entrambe**, e la maturità non è una proprietà del nodo: è una
+> **relazione con una scala che cambia**.
+
+**E LA CAUSA È LEGGIBILE:** `cs` per nodo al passo 1 vale **p50 `1.672`** contro **`CS_M = 2`**,
+con **`cs_std/cs = 19.07 %`** *(coerente col `17.6 %` già in `CLAUDE.md`: **`cs` è VIVO**)*.
+**Al passo ZERO la cache `_cs_nodo_prev` non esiste ancora**, quindi il tempo-luce si calcola con
+`cs = CS_M`; al passo 1 il `cs` vero è **più piccolo**, il tempo-luce **più lungo**, e la rampa
+cade.
+
+> ### ⇒ **LA MATURITÀ ALLA NASCITA È ASSEGNATA CON UN `cs` CHE IL NODO NON HA.**
+
+**PERCHÉ QUESTO NON SI VEDEVA PRIMA:** il sigillo girava su **default di modulo**, dove
+**`CS_DINAMICO` è `False`** → `cs = CS_M` costante → il tempo-luce quasi fermo → `ramp == 1`
+anche al passo 1. **Il criterio `A2` non era sbagliato: era misurato in una configurazione che
+la campagna non usa.** *(È `C13`/`Z39` di nuovo, dall'altro lato: un `cs` costante fa sembrare
+esatta una legge che nel regime vero non lo è.)*
+
+## ⑤ 🛑 **MI FERMO QUI, E NON PERCHÉ SIA COMODO: È LA REGOLA CHE HO SCRITTO PRIMA DI VEDERE I NUMERI**
+
+Il task history di `CLI-1` (`doc/TASK_HISTORY/2026-09-25_cli-1-sigilli-dal-cli.md`, committato
+**prima** del lavoro) dice:
+
+> *«se un verdetto di `CURA 4` o `CURA 5` **cambia** passando dal CLI → **STOP**: non è un
+> sigillo da aggiustare, è un difetto del percorso, e si committa il `FAIL` così com'è (par.5)»*
+
+**Quindi `A2` resta `FAIL` e il referto si committa così.** Le due strade che vedo — e **nessuna
+è mia**: ① la maturità si assegna con il **`cs` del luogo** invece di `CS_M`, il che richiede che
+la cache esista **alla semina** *(oggi non esiste: è la stessa famiglia della cura `C7`)*;
+② il calo **è la legge** e `A2` va riscritto come *«al passo ZERO esatto, e al passo 1 la rampa
+resta ≫ del braccio spento»* — cioè un **limite**, non un'uguaglianza.
+**DECIDE LUCA.** La voce è in coda come **`RAMPA-1`**.

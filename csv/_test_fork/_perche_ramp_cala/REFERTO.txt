@@ -1,0 +1,28 @@
+====================================================================================================
+PERCHE' LA RAMPA CALA -- configurazione della CAMPAGNA (argv del driver), seme 11
+====================================================================================================
+
+SEMINA_MATURA True   CS_DINAMICO True   TAU_LUCE True   nodi iniziali 4252
+
+grandezza              passo 0 (p50)      passo 1 (p50)      rapporto 1/0      
+eta (numeratore)       0.897802954        0.907802954        1.011138          
+_tempo_rampa (den.)    0.897802954        1.071554877        1.193530          
+ramp = min(1, e/t)     1.000000000        0.845601758        0.845602          
+
+ramp al passo 0:  min 1.000000000000000   max 1.000000000000000   uguali a 1: 4252 su 4252
+ramp al passo 1:  min 0.326478182506377   max 1.000000000000000   uguali a 1: 54 su 4252
+
+CRESCITA MEDIANA SEPARATA:   eta x1.011138     _tempo_rampa x1.195939
+
+-> IL DENOMINATORE CRESCE PIU' DEL NUMERATORE: e' IL TEMPO-LUCE che sale, non `eta`
+   che si ferma. **Un nodo MATURO torna IMMATURO perche' la sua scala di
+   riferimento si e' allungata.**
+
+E DI CHE COSA E' FATTO IL DENOMINATORE (`d_nodo / cs_nodo`):
+  cs per nodo al passo 1:  p05 1.008046  p50 1.672326  p95 1.954363   CS_M 2.000000   cs_std/cs 19.0708 %
+
+COSA QUESTA SONDA *NON* DICE:
+  - NON dice se il calo sia un difetto o la legge: dice DA DOVE viene. La decisione e' di Luca.
+  - un seme, una scena, DUE passi. Il calo a tempi lunghi non e' misurato qui.
+  - non tocca nessun flag: spegnere `--cs-dinamico` per vedere se il calo sparisce sarebbe
+    una misura DIVERSA, e cambierebbe la configurazione invece di leggerla (`P2`).
