@@ -1,0 +1,361 @@
+======================================================================================================================
+SIGILLO ESTESO `INERZIA-1(C)` -- TRE LETTURE MISURATE INSIEME   (2026-09-25)
+======================================================================================================================
+
+[on_s11_lunghi] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK on_s11_lunghi  modo taglio  n 4252
+[off_s11_lunghi] rc=0 ioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK off_s11_lunghi  modo taglio  n 4252
+[ril_s11_lunghi] rc=0 oni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK ril_s11_lunghi  modo rilassa  n 4252
+[on_s11_corti] rc=0 egioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK on_s11_corti  modo taglio  n 4252
+[off_s11_corti] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK off_s11_corti  modo taglio  n 4252
+[ril_s11_corti] rc=0 ioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK ril_s11_corti  modo rilassa  n 4252
+[on_s12_lunghi] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK on_s12_lunghi  modo taglio  n 4297
+[off_s12_lunghi] rc=0 ioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK off_s12_lunghi  modo taglio  n 4297
+[ril_s12_lunghi] rc=0 oni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK ril_s12_lunghi  modo rilassa  n 4297
+[on_s12_corti] rc=0 egioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK on_s12_corti  modo taglio  n 4297
+[off_s12_corti] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK off_s12_corti  modo taglio  n 4297
+[ril_s12_corti] rc=0 ioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK ril_s12_corti  modo rilassa  n 4297
+[prima_s11_lunghi] rc=0 ni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK prima_s11_lunghi  modo taglio  n 4252
+[figli_s11] rc=0 le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK figli_s11  modo figli  n 4470
+[prima_s12_lunghi] rc=0 ni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK prima_s12_lunghi  modo taglio  n 4297
+[figli_s12] rc=0 le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK figli_s12  modo figli  n 4513
+
+blob del simulatore VERO      1fc6a1c5
+blob della COPIA diagnostica  9103dc67   (2 ancore, GENERATA AL RUN)
+il codice di PRIMA e'         a2a60534^   (PADRE del commit del flag, NON `HEAD`)
+blob della copia di PRIMA     0d38758f   (2 ancore)
+semi [11, 12]   versi ['lunghi', 'corti']   k [77, 20, 8, 4, 2]   k del rilassamento [77, 8, 2]   bersagli 20
+passi pieni prima del taglio 20   BUDGET del rilassamento e dei figli 120 passi
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 79
+  -> FUORI CONFIGURAZIONE DEL DRIVER: 1 differenze su 79
+       CONTRASTO_INTENSIVO        qui True     driver False
+  ESENZIONE DICHIARATA: il flag in prova NON e' ancora nel driver (entra dopo il sigillo), quindi l'argv ON e' quella del driver PIU' --contrasto-intensivo
+
+======================================================================================================================
+I NUMERI DEL TAGLIO (un passo dopo)
+======================================================================================================================
+----------------------------------------------------------------------------------------------------------------------
+on_s11_lunghi   CONTRASTO_INTENSIVO = True   (sim _sim_diag_est.py)
+k      COPPIA        INERZIA       contrasto     coppia/inerzia  |omega|       al pav. b/t   |peq-rho|/rho
+77     0.310036      6.30485       4.47668       0.0395388       0.00958128    0/20 0/4252   0.9702
+20     0.333788      1.84052       3.81479       0.136984        0.0103928     0/20 0/4252   0.9386
+8      0.448129      0.910927      2.15636       0.470175        0.0158493     0/20 0/4252   0.8216
+4      0.423844      0.458835      1.50828       0.941513        0.0205278     0/20 0/4252   0.5799
+2      0.660249      0.259462      0.947673      1.85084         0.0307942     0/20 0/4252   0.4664
+  pendenze su log k:  COPPIA -0.1882   INERZIA 0.8722   CONTRASTO 0.4353   |omega| -0.3231
+
+----------------------------------------------------------------------------------------------------------------------
+off_s11_lunghi   CONTRASTO_INTENSIVO = False   (sim _sim_diag_est.py)
+k      COPPIA        INERZIA       contrasto     coppia/inerzia  |omega|       al pav. b/t   |peq-rho|/rho
+77     0.310273      49.0223       33.6342       0.0049225       0.00600827    0/20 0/4252   0.9701
+20     0.333663      8.15145       16.481        0.0303725       0.0061346     0/20 0/4252   0.9386
+8      0.448174      2.35753       5.64845       0.178943        0.00813605    0/20 0/4252   0.8217
+4      0.423298      0.660596      2.04261       0.756747        0.0128386     0/20 0/4252   0.5799
+2      0.659845      0.181042      0.716429      2.3706          0.0345311     0/20 0/4252   0.4662
+  pendenze su log k:  COPPIA -0.1878   INERZIA 1.5200   CONTRASTO 1.0630   |omega| -0.4375
+
+----------------------------------------------------------------------------------------------------------------------
+on_s11_corti   CONTRASTO_INTENSIVO = True   (sim _sim_diag_est.py)
+k      COPPIA        INERZIA       contrasto     coppia/inerzia  |omega|       al pav. b/t   |peq-rho|/rho
+77     0.310036      6.30485       4.47668       0.0395388       0.00958128    0/20 0/4252   0.9702
+20     0.352034      1.50598       0.681793      0.25211         0.0108452     0/20 0/4252   1.311
+8      0.555619      0.616151      0.253058      0.881402        0.0191244     0/20 0/4252   17.55
+4      0.738117      0.277742      0.112915      2.10454         0.0332193     0/20 0/4252   76.83
+2      0.837726      0.172143      0.0729193     4.63729         0.0701523     0/20 0/4252   266.5
+  pendenze su log k:  COPPIA -0.2989   INERZIA 1.0031   CONTRASTO 1.1442   |omega| -0.5414
+
+----------------------------------------------------------------------------------------------------------------------
+off_s11_corti   CONTRASTO_INTENSIVO = False   (sim _sim_diag_est.py)
+k      COPPIA        INERZIA       contrasto     coppia/inerzia  |omega|       al pav. b/t   |peq-rho|/rho
+77     0.310273      49.0223       33.6342       0.0049225       0.00600827    0/20 0/4252   0.9701
+20     0.351863      0.983347      0.435134      0.331463        0.00987641    0/20 0/4252   1.31
+8      0.555803      0.138423      0.0539615     3.47152         0.0526045     0/20 0/4252   17.54
+4      0.737052      0.0306758     0.0129432     19.9542         0.282646      0/20 0/4252   76.8
+2      0.836488      0.00971264    0.00374073    74.8548         1.05991       0/20 0/4252   266.5
+  pendenze su log k:  COPPIA -0.2983   INERZIA 2.3389   CONTRASTO 2.4855   |omega| -1.4717
+
+----------------------------------------------------------------------------------------------------------------------
+on_s12_lunghi   CONTRASTO_INTENSIVO = True   (sim _sim_diag_est.py)
+k      COPPIA        INERZIA       contrasto     coppia/inerzia  |omega|       al pav. b/t   |peq-rho|/rho
+77     0.353478      7.69587       5.0189        0.0451282       0.0137119     0/20 0/4297   0.9732
+20     0.38568       2.64483       4.1476        0.145855        0.0149163     0/20 0/4297   0.9415
+8      0.542991      1.13018       2.82501       0.442127        0.0160871     0/20 0/4297   0.8527
+4      0.745668      0.633875      1.93618       1.09464         0.0261631     0/20 0/4297   0.5941
+2      0.806347      0.365656      0.88101       2.02742         0.0392336     0/20 0/4297   0.5767
+  pendenze su log k:  COPPIA -0.2511   INERZIA 0.8434   CONTRASTO 0.4503   |omega| -0.2776
+
+----------------------------------------------------------------------------------------------------------------------
+off_s12_lunghi   CONTRASTO_INTENSIVO = False   (sim _sim_diag_est.py)
+k      COPPIA        INERZIA       contrasto     coppia/inerzia  |omega|       al pav. b/t   |peq-rho|/rho
+77     0.353324      61.0135       37.3887       0.00625503      0.00844853    0/20 0/4297   0.9732
+20     0.361263      12.4622       17.1056       0.0340017       0.00857976    0/20 0/4297   0.9415
+8      0.542986      2.90735       6.79614       0.161835        0.00950794    0/20 0/4297   0.8528
+4      0.745774      0.894415      2.46476       0.883195        0.0177898     0/20 0/4297   0.5943
+2      0.80726       0.279497      0.678952      2.67237         0.0375784     0/20 0/4297   0.5766
+  pendenze su log k:  COPPIA -0.2570   INERZIA 1.4858   CONTRASTO 1.0773   |omega| -0.3806
+
+----------------------------------------------------------------------------------------------------------------------
+on_s12_corti   CONTRASTO_INTENSIVO = True   (sim _sim_diag_est.py)
+k      COPPIA        INERZIA       contrasto     coppia/inerzia  |omega|       al pav. b/t   |peq-rho|/rho
+77     0.353478      7.69587       5.0189        0.0451282       0.0137119     0/20 0/4297   0.9732
+20     0.368913      1.86262       0.742346      0.171733        0.0143613     0/20 0/4297   1.09
+8      0.466996      0.75104       0.282064      0.652191        0.0181459     0/20 0/4297   13.51
+4      0.603777      0.362265      0.137181      1.75941         0.0308289     0/20 0/4297   62.03
+2      0.808593      0.213103      0.0755957     4.67474         0.0674881     0/20 0/4297   237.7
+  pendenze su log k:  COPPIA -0.2276   INERZIA 0.9941   CONTRASTO 1.1483   |omega| -0.4097
+
+----------------------------------------------------------------------------------------------------------------------
+off_s12_corti   CONTRASTO_INTENSIVO = False   (sim _sim_diag_est.py)
+k      COPPIA        INERZIA       contrasto     coppia/inerzia  |omega|       al pav. b/t   |peq-rho|/rho
+77     0.353324      61.0135       37.3887       0.00625503      0.00844853    0/20 0/4297   0.9732
+20     0.368204      1.24084       0.481641      0.25277         0.0108257     0/20 0/4297   1.09
+8      0.466919      0.178546      0.0689473     2.78945         0.0425667     0/20 0/4297   13.51
+4      0.603372      0.0392524     0.0158793     15.3809         0.218999      0/20 0/4297   62.03
+2      0.808432      0.0104857     0.00425862    90.3776         1.27849       0/20 0/4297   237.7
+  pendenze su log k:  COPPIA -0.2278   INERZIA 2.3642   CONTRASTO 2.4656   |omega| -1.3807
+
+----------------------------------------------------------------------------------------------------------------------
+prima_s11_lunghi   CONTRASTO_INTENSIVO = ASSENTE   (sim _sim_prima_diag.py)
+k      COPPIA        INERZIA       contrasto     coppia/inerzia  |omega|       al pav. b/t   |peq-rho|/rho
+77     0.310273      49.0223       33.6342       0.0049225       0.00600827    0/20 0/4252   0.9701
+20     0.333663      8.15145       16.481        0.0303725       0.0061346     0/20 0/4252   0.9386
+8      0.448174      2.35753       5.64845       0.178943        0.00813605    0/20 0/4252   0.8217
+4      0.423298      0.660596      2.04261       0.756747        0.0128386     0/20 0/4252   0.5799
+2      0.659845      0.181042      0.716429      2.3706          0.0345311     0/20 0/4252   0.4662
+  pendenze su log k:  COPPIA -0.1878   INERZIA 1.5200   CONTRASTO 1.0630   |omega| -0.4375
+
+----------------------------------------------------------------------------------------------------------------------
+prima_s12_lunghi   CONTRASTO_INTENSIVO = ASSENTE   (sim _sim_prima_diag.py)
+k      COPPIA        INERZIA       contrasto     coppia/inerzia  |omega|       al pav. b/t   |peq-rho|/rho
+77     0.353324      61.0135       37.3887       0.00625503      0.00844853    0/20 0/4297   0.9732
+20     0.361263      12.4622       17.1056       0.0340017       0.00857976    0/20 0/4297   0.9415
+8      0.542986      2.90735       6.79614       0.161835        0.00950794    0/20 0/4297   0.8528
+4      0.745774      0.894415      2.46476       0.883195        0.0177898     0/20 0/4297   0.5943
+2      0.80726       0.279497      0.678952      2.67237         0.0375784     0/20 0/4297   0.5766
+  pendenze su log k:  COPPIA -0.2570   INERZIA 1.4858   CONTRASTO 1.0773   |omega| -0.3806
+
+C1'    FAIL  pendenza del CONTRASTO = quella della COPPIA entro lo spread fra semi
+              ON : |pend(contrasto) - pend(coppia)|  0.6235  1.4431  0.7013  1.3760
+              OFF: 1.2508  2.7838  1.3344  2.6934  1.2508  1.3344
+              spread FRA SEMI (dev.std della differenza ON): 0.3753
+              CRITERIO: il MASSIMO della differenza ON sta entro 2 spread.
+                **`T2` E' ESCLUSO**, e la ragione e' dichiarata: in questa misura `T2`
+                dipende da `k` per la GEOMETRIA DEL TAGLIO (togliere i lunghi accorcia
+                `d_nodo`, togliere i corti lo allunga), non per estensivita'.
+
+C1''   FAIL  LA MIA PREVISIONE: differenza inerzia-coppia < 0.7 nel taglio `corti`
+              ON corti: 1.3021  1.2217   (criterio: < 0.7)
+                **SE NON PASSA, la mia diagnosi "il residuo viene dai pesi" e'
+                SBAGLIATA, e lo scrivo.** La ragione strutturale e' nel task history,
+                scritta PRIMA: `rho_spin` e' il MODULO QUADRO di una somma pesata, quindi
+                dividere per `W` una volta toglie UNA potenza, e se la dipendenza e'
+                quadratica il residuo NON si azzera.
+
+C2     FAIL  `|omega|(k=2)/|omega|(k=77)` < 3 in tutti i bracci ON
+              ON : on_s11_lunghi x3.214  on_s11_corti x7.322  on_s12_lunghi x2.861  on_s12_corti x4.922
+              OFF: off_s11_lunghi x5.747  off_s11_corti x176.4  off_s12_lunghi x4.448  off_s12_corti x151.3  prima_s11_lunghi x5.747  prima_s12_lunghi x4.448
+                **il `3` e' una SCELTA per "stesso ordine", dichiarata** (Luca).
+
+C3     PASS  flag SPENTO byte-identico al codice PRECEDENTE (a2a60534^)
+              seme 11: campi 121   DIVERSI 0   solo nuovo nessuno   solo vecchio nessuno
+              seme 12: campi 121   DIVERSI 0   solo nuovo nessuno   solo vecchio nessuno
+
+C4     PASS  braccio spento generato TOGLIENDO l'opzione, e su di esso `C1'` NON passa
+                on_s11_lunghi        flag=True    opz=True   atteso=True
+                off_s11_lunghi       flag=False   opz=False  atteso=False
+                ril_s11_lunghi       flag=False   opz=False  atteso=False
+                on_s11_corti         flag=True    opz=True   atteso=True
+                off_s11_corti        flag=False   opz=False  atteso=False
+                ril_s11_corti        flag=False   opz=False  atteso=False
+                on_s12_lunghi        flag=True    opz=True   atteso=True
+                off_s12_lunghi       flag=False   opz=False  atteso=False
+                ril_s12_lunghi       flag=False   opz=False  atteso=False
+                on_s12_corti         flag=True    opz=True   atteso=True
+                off_s12_corti        flag=False   opz=False  atteso=False
+                ril_s12_corti        flag=False   opz=False  atteso=False
+                prima_s11_lunghi     flag=ASSENTE opz=False  atteso=False
+                figli_s11            flag=False   opz=False  atteso=False
+                prima_s12_lunghi     flag=ASSENTE opz=False  atteso=False
+                figli_s12            flag=False   opz=False  atteso=False
+              su OFF la differenza contrasto-coppia vale 1.2508  2.7838  1.3344  2.6934  1.2508  1.3344, contro 2 spread = 0.7506
+                **CORRETTO DA LUCA il 2026-09-25: NESSUNA soglia propria.** La forma
+                precedente pretendeva una separazione `3x` e DUPLICAVA `C1`, fallendo
+                insieme a lui (`1.64` contro `1.71`, rapporto `1.04`).
+
+C5     PASS  il pavimento `1e-6` non comincia a mordere con la cura
+              ON: bersagli al pavimento 0   NODI al pavimento 0
+                PRIMA della cura era `0/20` in ogni riga (`CONFIG-1/a`).
+
+======================================================================================================================
+`C6` -- LA SCALA DELL'INERZIA SU TUTTI I NODI
+======================================================================================================================
+braccio              p5            mediana       p95           min           al pav./nodi
+on_s11_lunghi        1.95859       5.92769       12.5785       0.812191      0/4252
+off_s11_lunghi       13.1114       40.2779       91.6181       5.76025       0/4252
+on_s11_corti         1.95859       5.92769       12.5785       0.812191      0/4252
+off_s11_corti        13.1114       40.2779       91.6181       5.76025       0/4252
+on_s12_lunghi        2.00049       6.68723       13.8899       0.960217      0/4297
+off_s12_lunghi       14.2121       44.9539       103.81        6.39588       0/4297
+on_s12_corti         2.00049       6.68723       13.8899       0.960217      0/4297
+off_s12_corti        14.2121       44.9539       103.81        6.39588       0/4297
+prima_s11_lunghi     13.1114       40.2779       91.6181       5.76025       0/4252
+prima_s12_lunghi     14.2121       44.9539       103.81        6.39588       0/4297
+
+C6     PASS  la scala dell'inerzia su TUTTI i nodi e' DICHIARATA prima/dopo
+              mediana ON 6.30746   mediana OFF 42.6159   rapporto x0.148
+                **nessuna soglia, di proposito:** la cura divide, quindi la scala SCENDE.
+                Il criterio e' che sia DICHIARATA, e `C5` dice se arriva al pavimento.
+
+======================================================================================================================
+`R1`/`R2` -- ESTENSIVO O RITARDATO? il contrasto DOPO il rilassamento (flag SPENTO)
+======================================================================================================================
+  ⚠ `N` NON E' SCELTO E NON E' RICOSTRUITO PER ALGEBRA: si guarda il DECADIMENTO MISURATO
+    di `|peq - rho|/rho` sui bersagli. Il budget e' 120 passi, DICHIARATO.
+    *(`TAU_BG = 5.0` non e' il tempo vero -- con `TAU_LOCALI` e' `1/r_arco` -- e il `dt_e`
+    misurato e' per SOTTO-PASSO: `tau_bg/dt_e` NON e' un numero di passi.)*
+
+----------------------------------------------------------------------------------------------------------------------
+ril_s11_lunghi   checkpoint [1, 40, 120]
+passo    pend.coppia   pend.contr.   differenza      |peq-rho|/rho |omega| k2/k77
+1        -0.2024       1.0283        1.2307          0.8217        5.747
+40       -0.2146       0.9160        1.1306          0.935         217.7
+120      -0.1361       0.9846        1.1207          0.702         367.9
+
+----------------------------------------------------------------------------------------------------------------------
+ril_s11_corti   checkpoint [1, 40, 120]
+passo    pend.coppia   pend.contr.   differenza      |peq-rho|/rho |omega| k2/k77
+1        -0.2703       2.5278        2.7980          17.54         176.4
+40       -0.3969       2.3534        2.7503          22.28         7327
+120      -0.3806       1.9253        2.3059          1.541         9749
+
+----------------------------------------------------------------------------------------------------------------------
+ril_s12_lunghi   checkpoint [1, 40, 120]
+passo    pend.coppia   pend.contr.   differenza      |peq-rho|/rho |omega| k2/k77
+1        -0.2228       1.0644        1.2871          0.8528        4.448
+40       -0.2185       1.0245        1.2431          0.9469        135.9
+120      -0.2551       1.0913        1.3464          0.9605        263.9
+
+----------------------------------------------------------------------------------------------------------------------
+ril_s12_corti   checkpoint [1, 40, 120]
+passo    pend.coppia   pend.contr.   differenza      |peq-rho|/rho |omega| k2/k77
+1        -0.2166       2.5159        2.7325          13.51         151.3
+40       -0.3227       2.4100        2.7327          17.05         5132
+120      -0.3418       2.0072        2.3491          1.019         5684
+
+R1     FAIL  dopo il budget, la pendenza del CONTRASTO torna su quella della COPPIA
+                ril_s11_lunghi       differenza finale 1.1207   |peq-rho|/rho finale 0.702
+                ril_s11_corti        differenza finale 2.3059   |peq-rho|/rho finale 1.541
+                ril_s12_lunghi       differenza finale 1.3464   |peq-rho|/rho finale 0.9605
+                ril_s12_corti        differenza finale 2.3491   |peq-rho|/rho finale 1.019
+              criterio: differenza <= 2 spread (0.7506) **E** `|peq-rho|/rho < 0.1`
+                **LA SECONDA CONDIZIONE NON E' UN EXTRA: SE `peq` NON SI E' RILASSATO,
+                `R1` NON E' MISURATO** -- e un `FAIL` senza di essa sarebbe un verdetto
+                vacuo travestito da risultato.
+
+R2     FAIL  il residuo CALA MONOTONAMENTE nel tempo (transitorio, non offset)
+                ril_s11_lunghi       residui 1.2307  1.1306  1.1207   monotono: True
+                ril_s11_corti        residui 2.7980  2.7503  2.3059   monotono: True
+                ril_s12_lunghi       residui 1.2871  1.2431  1.3464   monotono: False
+                ril_s12_corti        residui 2.7325  2.7327  2.3491   monotono: False
+
+======================================================================================================================
+`R3`/`R4`/`R3bis` -- I FIGLI DELLA MITOSI dalla nascita (flag SPENTO)
+======================================================================================================================
+----------------------------------------------------------------------------------------------------------------------
+seme 11   nati 218   campioni 4490
+eta      quanti   ramp p50     |omega| p50  rho p50      peq p50      contr p50    |omega|*ramp
+1        210      0.0277086    0.0265082    0.000195378  1.36651      1            0.00071022
+2        202      0.0536655    457.689      0.00160691   1.36976      7.13566e-05  24.2118
+3        193      0.0750158    526.727      0.00294929   1.36077      0.000516378  37.3712
+4        180      0.09487      543.328      0.0044209    1.3579       0.00100273   52.6996
+5        177      0.111341     575.926      0.00637929   1.34485      0.00158722   66.356
+6        175      0.129255     581.354      0.00966666   1.3037       0.0024298    80.4916
+7        165      0.147939     598.771      0.0119401    1.32517      0.00286683   91.4891
+8        161      0.16683      591.211      0.0155718    1.30407      0.00394467   102.55
+9        153      0.186724     614.715      0.018762     1.31865      0.0050742    116.502
+10       151      0.206875     617.809      0.0227823    1.27536      0.00596427   126.302
+11       149      0.223417     618.189      0.0236912    1.2494       0.00690366   135.229
+12       142      0.241049     628.046      0.0272509    1.28026      0.00808154   143.937
+13       134      0.259864     620.325      0.0355826    1.26569      0.00977062   153.291
+14       130      0.279531     608.39       0.0360978    1.24651      0.0112475    159.427
+
+  IL NULLO (nodi NON nati), mediane: ramp 1 -> 1   |omega| 0.00721388 -> 0.0128349
+              rho 24.8197 -> 45.0973   peq 0.709747 -> 1.64426   contrasto 29.9559 -> 8.39934
+
+----------------------------------------------------------------------------------------------------------------------
+seme 12   nati 216   campioni 4412
+eta      quanti   ramp p50     |omega| p50  rho p50      peq p50      contr p50    |omega|*ramp
+1        211      0.0274587    0.0285168    0.000184629  1.35436      1            0.000721347
+2        205      0.0538241    482.248      0.00142508   1.34752      6.40463e-05  27.0419
+3        197      0.0728449    590.266      0.00282178   1.32362      0.000485091  42.1717
+4        193      0.0931811    616.291      0.00421423   1.28073      0.00100196   55.0114
+5        188      0.113437     640.575      0.00640464   1.29195      0.00158509   67.24
+6        181      0.132159     648.322      0.00901601   1.25482      0.0022754    81.1834
+7        176      0.156566     654.599      0.0119404    1.24609      0.00312673   95.0416
+8        172      0.177871     643.155      0.0147033    1.20961      0.00438586   108.007
+9        161      0.19404      628.318      0.0198514    1.19236      0.00574002   118.869
+10       157      0.21357      619.421      0.0254596    1.17567      0.00710787   131.379
+11       149      0.236823     628.473      0.0281651    1.17074      0.00866336   148.151
+12       142      0.259576     591.463      0.0332363    1.14623      0.0100438    151.133
+13       136      0.272554     603.157      0.0414584    1.13381      0.0116218    164.566
+14       131      0.292272     602.024      0.0439622    1.11469      0.0141451    171.219
+
+  IL NULLO (nodi NON nati), mediane: ramp 1 -> 1   |omega| 0.00708456 -> 0.0116799
+              rho 25.2177 -> 45.5169   peq 0.654759 -> 1.64361   contrasto 32.9804 -> 8.67841
+
+R3     FAIL  il contrasto dei FIGLI rientra verso i nodi maturi entro il budget
+                seme 11: contrasto 1 -> 0.0972044   (nodi non nati: 8.39934)   peq 1.36651 -> 1.65942   rho 0.000195378 -> 0.392793
+                seme 12: contrasto 1 -> 0.334279   (nodi non nati: 8.67841)   peq 1.35436 -> 0.589218   rho 0.000184629 -> 0.834643
+
+R3bis  FAIL  `|omega| * ramp` COSTANTE sui figli (incoerenza di ESPONENTI)
+                seme 11: CV(|omega|*ramp) 0.3537   CV(|omega|) 0.2989   ramp 0.02771 -> 1   |omega| 0.0265082 -> 289.264
+                seme 12: CV(|omega|*ramp) 0.5135   CV(|omega|) 0.5503   ramp 0.02746 -> 1   |omega| 0.0285168 -> 55.3635
+              criterio: il prodotto e' COSTANTE se la sua dispersione relativa e'
+                **meno di META'** di quella di `|omega|` da solo. **Se passa, il difetto
+                dei figli e' un'incoerenza di ESPONENTI della rampa** -- non estensivita'
+                ne' solo ritardo di `peq` (lettura di Luca, derivata dal codice).
+
+R4     PASS  IL NULLO: i nodi NON nati nello stesso intervallo
+                seme 11: contrasto 29.9559 -> 8.39934   |omega| 0.00721388 -> 0.0128349
+                seme 12: contrasto 32.9804 -> 8.67841   |omega| 0.00708456 -> 0.0116799
+                **senza questo, un "rientro" potrebbe essere la deriva di TUTTO il
+                sistema.** Non ha soglia: e' il termine di paragone di `R3`.
+
+======================================================================================================================
+ESITO: 5/12 PASS
+======================================================================================================================
+
+QUALI DELLE TRE LETTURE REGGONO -- e possono essere piu' di una:
+  ESTENSIVITA'        -> `C1'` e `C1''`: la normalizzazione basta?
+  RITARDO DI `peq`    -> `R1` e `R2`: il residuo e' un TRANSITORIO?
+  ESPONENTI DI `ramp` -> `R3bis`: `|omega|*ramp` e' costante sui figli?
+**NESSUNA CURA SCELTA: decide Luca.**
+
+COSA QUESTO SIGILLO *NON* DICE:
+  - `R1`/`R2` girano a flag SPENTO (lo chiede il criterio di Luca): dicono se il difetto e' un
+    transitorio DEL SISTEMA, non se la cura lo tolga.
+  - `R1`/`R2` usano TRE valori di `k` invece di cinque, e va detto: una pendenza su 3 punti e'
+    piu' fragile. Il costo era 5 reti x 120 passi x 4 bracci; la barra si legge dai due semi.
+  - il BUDGET e' 120 passi, DICHIARATO. Se `|peq-rho|/rho` non scende sotto `0.1`, `R1` dice
+    **NON MISURATO**, non `FAIL`.
+  - i 20 bersagli non sono adiacenti, **ma possono condividere un VICINO**.
+  - DUE SEMI: per una barra fra semi servono >= 4 (`P3` delle regole).

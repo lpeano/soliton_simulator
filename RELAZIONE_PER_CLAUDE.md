@@ -18655,3 +18655,121 @@ che non cambia.
 > `P1-bis` e' cablato e **ha fatto passare** il commit: il file era nell'elenco, il contenuto no.
 > **E' la forma piu' silenziosa del difetto che quel presidio esiste per impedire**, e va scritta
 > qui perche' la prossima volta la si riconosca: **il presidio verifica la PRESENZA, non il DELTA.**
+
+
+---
+
+# ⚖️ **SIGILLO ESTESO `INERZIA-1(C)`: `5/12`, E LE TRE LETTURE SONO **TUTTE** VERE IN PARTE** *(2026-09-25)*
+
+*(`csv/_seal_fork/_sigillo_contrasto_esteso.py`, referto in
+`csv/_seal_fork/_sig_contrasto_esteso/SIGILLO_contrasto_esteso.txt`. Tredici bracci, un processo
+ciascuno; copia diagnostica **generata al run** con la **postcondizione** del diff.
+Esponenti: `csv/_test_fork/_esponenti_figli.py`.)*
+
+```
+C1'    FAIL    C1''  FAIL    C2  FAIL    C3  PASS    C4  PASS    C5  PASS    C6  PASS
+R1     NON MISURATO (non FAIL)   R2  FAIL parziale   R3  FAIL    R3bis  FAIL   R4  PASS
+```
+
+## ❗ **PRIMA DI TUTTO: `R1` NON E' UN `FAIL`, E' UN *NON MISURATO*** — come scritto **prima**
+
+```
+|peq - rho| / rho  a fine budget:   0.702   1.541   0.9605   1.019       (criterio: < 0.1)
+```
+
+**`peq` NON si e' rilassato in 120 passi**, quindi la domanda *«la pendenza torna su quella della
+coppia dopo il rilassamento?»* **non ha avuto luogo**. Il criterio lo diceva in anticipo, e il
+`FAIL` stampato **va letto come NON MISURATO**: un `FAIL` senza quella condizione sarebbe **un
+verdetto vacuo travestito da risultato**.
+
+## 🔴 **MA IL DATO CHE DECIDE E' UN ALTRO, E NON L'AVEVO CHIESTO A NESSUN CRITERIO**
+
+```
+|omega| (k=2)/(k=77) nel tempo, flag SPENTO:
+  ril_s11_lunghi      passo 1:   x5.747      passo 40:  x217.7     passo 120:  x367.9
+  ril_s11_corti       passo 1:   x176.4      passo 40:  x7327      passo 120:  x9749
+  ril_s12_lunghi      passo 1:   x4.448      passo 40:  x135.9     passo 120:  x263.9
+  ril_s12_corti       passo 1:   x151.3      passo 40:  x5132      passo 120:  x5684
+```
+
+> ### **IL DIVARIO NON SI RIASSORBE: CRESCE DI UN FATTORE ~60 IN 120 PASSI.**
+> **Un transitorio decade. Questo DIVERGE.** È la risposta piu' forte alla domanda *«estensivo o
+> ritardato?»*, e non viene da `R1` — viene dalla colonna che avevo messo accanto **per controllo**.
+
+## 🎯 **GLI ESPONENTI SUI FIGLI: TRE COSE MISURATE, CON `R2` ALTO**
+
+```
+seme   rho ~ ramp^a        peq ~ ramp^?         contrasto ~ ramp^b    |omega| ~ ramp^c
+11     1.9133  (R2 0.994)  0.0171  (R2 0.014)   2.1191  (R2 0.971)    -0.3056  (R2 0.608)
+12     1.9866  (R2 0.990)  -0.2044 (R2 0.211)   2.4548  (R2 0.971)    -0.7810  (R2 0.420)
+```
+
+1. **`rho ~ ramp^1.95`, `R2 = 0.99`.** **LA PARTE QUADRATICA E' MISURATA, e con precisione.**
+   `rho_s` e' il **modulo quadro** di una somma i cui pesi portano `ramp_i·ramp_j`: l'esponente `2`
+   e' quello che la struttura prevede, **e il dato lo dice**. *(Era la nota che ho scritto **prima**
+   della misura, come ragione per dubitare della mia stessa previsione.)*
+2. **`peq ~ ramp^0`** *(`0.017` e `-0.204`, `R2` `0.01` e `0.21`: **piatto**)*. **L'eredita' di
+   `peq` non segue il figlio.** E non e' un ritardo che passa: **a eta' 68-79 `ramp` e' arrivato a
+   `1` e `peq` e' ancora dov'era.**
+3. **`contrasto ~ ramp^2.1…2.5`**: porta **tutto** l'esponente di `rho`, perche' il denominatore non
+   ne porta nessuno.
+
+## ❌ **E `R3bis` CADE, MA IL SUO MECCANISMO NO — e la distinzione conta**
+
+`|omega| ~ ramp^-0.31` e `^-0.78`, con **`R2` `0.61` e `0.42`**: **non e' `-1`**, e il fit e'
+**debole**. Quindi `|omega|·ramp` **non e' costante**, e il criterio fallisce.
+
+> ### **PERCHE', ed e' lo STESSO errore che Luca ha rilevato per `peq`, applicato a `omega`:**
+> `omega_new = omega_src + dt·(coppia/inerzia − omega_src/tau)`. **`omega` ha una MEMORIA sua.**
+> Confrontarlo con un rapporto **istantaneo** assume che lo segua subito, e **non lo fa**: sta al
+> suo **plateau** *(il random walk smorzato gia' documentato in `CLAUDE.md`)*.
+> **L'asimmetria di esponenti che Luca ha derivato E' CONFERMATA** *(`contrasto ~ ramp²` contro
+> `coppia ~ ramp¹`)*: **e' l'OSSERVABILE scelto per vederla che non funziona**, non il meccanismo.
+
+## 🔍 I FIGLI, IN NUMERI CRUDI — **e qui c'e' il difetto piu' grosso della giornata**
+
+```
+eta   ramp     |omega|     rho        peq      contrasto      | maturi (nullo R4)
+1     0.0277   0.0265      1.95e-04   1.3665   1  <- CONVENZIONE   omega  0.0072 -> 0.0128
+2     0.0537   457.7       1.61e-03   1.3698   7.14e-05          contrasto 30.0 -> 8.40
+14    0.2795   608.4       3.61e-02   1.2465   1.12e-02
+```
+
+> ### **UN FIGLIO HA `|omega| ~ 600` CONTRO `0.013` DI UN NODO MATURO: UN FATTORE ~47 000.**
+> E la causa e' leggibile: **`contrasto` e' 3-4 ordini TROPPO PICCOLO**, perche' `rho` parte da
+> `2e-04` mentre **`peq` e' ereditato a `1.37`**. `inerzia = contrasto·T2` minuscola -> **`omega`
+> esplode**. **A eta' 14 il contrasto e' ancora `0.011` contro `8.4` dei maturi: tre ordini.**
+
+**⚠ E `contrasto = 1` ESATTO all'eta' 1 NON e' fisica: e' la CONVENZIONE del primo passo**
+*(`_ok_n` falso -> `_contrasto = 1`)*. L'ho **esclusa dai fit** e lo dichiaro: includerla avrebbe
+dato un esponente inventato.
+
+**`R4` PASS e serve proprio qui:** sui nodi **non nati** `|omega|` va da `0.0072` a `0.0128` e il
+contrasto da `30` a `8.4`. **Il divario dei figli non e' deriva del sistema.**
+
+## ⚖️ **QUALI LETTURE REGGONO: TUTTE E TRE, IN PARTE. Nessuna da sola.**
+
+| lettura | cosa regge | cosa cade |
+|---|---|---|
+| **estensivita'** | la direzione: la normalizzazione **dimezza** il divario *(`1.25 -> 0.62`, `2.78 -> 1.44`)* | **l'esponente e' `2`, non `1`**: `W` una volta **non basta** (`C1''` cade, come la nota strutturale prevedeva) |
+| **ritardo di `peq`** | **l'eredita' di `peq` e' un difetto MISURATO**: `peq ~ ramp^0`, piatto, e a eta' 68-79 e' ancora dov'era | **non e' un RITARDO che passa**: `R1` **non misurato**, e il divario di `|omega|` **CRESCE x60** invece di decadere |
+| **esponenti di `ramp`** | **l'asimmetria e' CONFERMATA**: `contrasto ~ ramp^2`, `coppia ~ ramp^1` | **l'osservabile `|omega|·ramp` no** (`c = -0.31/-0.78`, `R2` `0.6/0.4`): `omega` **ha memoria sua** |
+
+> ### **E LE TRE SI SALDANO IN UNA SOLA FRASE, che i numeri sostengono:**
+> **`rho_s` porta DUE potenze del vicinato *(pesi × modulo quadro)*, `peq` NESSUNA *(e' una media,
+> e alla nascita e' EREDITATA)*, la coppia UNA *(`B` e' gia' diviso per il grado, `:3251`)*.**
+> **Non e' un difetto con tre spiegazioni: e' UN'ASIMMETRIA DI POTENZE con tre sintomi.**
+
+## ✅ COSA LA CURA HA GIA' OTTENUTO, e non e' poco
+
+**`C3` PASS** *(byte-identico al padre del commit, 121 campi, 0 diversi)*: **e' LOCALE.**
+**`C5` PASS**: il pavimento non morde. **`C6`**: la scala scende di quanto deve.
+**E sul taglio `corti`, `|omega| k2/k77` passa da `x176` a `x7.3` e da `x151` a `x4.9`** — **un
+fattore 24-31** — pur restando fuori dal `< 3` dichiarato.
+
+## 🛑 **MI FERMO. NESSUNA CURA SCELTA.**
+
+**Cosa NON faccio, e perche':** la forma `rho_s / W^2` **chiuderebbe l'esponente** ed e' la
+conseguenza diretta dei numeri — **ma il difetto dei FIGLI non lo tocca**, perche' li' il problema
+e' `peq` **ereditato**, non l'esponente del vicinato. **Due cure diverse per due sintomi della
+stessa asimmetria, e quale venga prima e' una decisione, non un calcolo.**

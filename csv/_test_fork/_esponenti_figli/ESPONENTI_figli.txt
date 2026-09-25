@@ -1,0 +1,45 @@
+========================================================================================================
+GLI ESPONENTI DELLA RAMPA SUI FIGLI DELLA MITOSI -- dai json del sigillo esteso
+========================================================================================================
+
+  `ramp` cresce dalla nascita; qui si misura COME la seguono le altre grandezze.
+  La configurazione e' quella dichiarata nel referto del sigillo (flag SPENTO, argv del
+  driver, 2 semi, budget 120 passi). **Nessuna misura nuova: e' una LETTURA.**
+
+seme     grandezza              esponente    R2         lettura
+11       rho                    1.9133       0.9939     il campo del nodo
+11       peq                    0.0171       0.0141     la memoria
+11       contrasto              2.1191       0.9714     rho/peq
+11       omega                  -0.3056      0.6083     |omega|
+11       ramp (da->a)           0.05367 -> 1            eta' da 2 a 68
+
+12       rho                    1.9866       0.9896     il campo del nodo
+12       peq                    -0.2044      0.2106     la memoria
+12       contrasto              2.4548       0.9705     rho/peq
+12       omega                  -0.7810      0.4202     |omega|
+12       ramp (da->a)           0.05382 -> 1            eta' da 2 a 79
+
+========================================================================================================
+COSA DICONO, e la lettura non e' una scelta fra le tre: e' un PEZZO DI CIASCUNA
+========================================================================================================
+
+  `rho ~ ramp^a` con `a ~ 2`  ->  **LA PARTE QUADRATICA E' MISURATA.** `rho_s` e' il modulo
+    QUADRO di una somma i cui pesi portano `ramp_i*ramp_j`: l'esponente 2 e' quello che la
+    struttura prevede, e qui si vede sul dato.
+
+  `peq ~ ramp^0` (piatto)  ->  **L'EREDITA' DI `peq` NON SEGUE IL FIGLIO.** E' il valore
+    dell'arco del genitore, e resta li' mentre il figlio matura.
+
+  `_contrasto ~ ramp^b` con `b ~ a`  ->  conseguenza dei due precedenti: il contrasto porta
+    **tutto** l'esponente di `rho`, perche' il denominatore non ne porta nessuno.
+
+  `|omega| ~ ramp^c`  ->  **SE `c` NON VALE `-1`, `R3bis` come CRITERIO cade**, e la ragione
+    e' che `omega` **ha una memoria sua** (`omega_new = omega_src + dt*(coppia/inerzia -
+    omega_src/tau)`): confrontare un rapporto ISTANTANEO con una grandezza che RILASSA e' lo
+    stesso errore che Luca ha rilevato per `peq`, applicato a `omega`.
+
+COSA QUESTO NON DICE:
+  - non e' una misura nuova: e' una LETTURA dei json del sigillo, con la sua configurazione.
+  - le mediane per eta' mescolano figli di madri diverse: l'esponente e' di POPOLAZIONE.
+  - l'eta' 1 e' ESCLUSA dai fit, e va detto: li' `_contrasto` vale `1` per la CONVENZIONE del
+    primo passo, non per la fisica. Includerla darebbe un esponente inventato.
