@@ -132,6 +132,21 @@ for nome, strum, ref, flags in MISURE:
         modo, val = come_impostato(strum, flag)
         rp = os.path.join(RADICE, ref)
         testo = io.open(rp, encoding="utf-8", errors="replace").read() if os.path.isfile(rp) else ""
+        # ⚠ E SI GUARDA ANCHE NEI JSON DEI BRACCI, che stanno in `_tmp/` accanto al referto:
+        #   il referto e' una SINTESI e non stampa tutti i contatori, ma i json li contengono
+        #   per intero. **Cercare solo nel referto darebbe NON VERIFICATO su una prova che
+        #   esiste sul disco** -- e sarebbe un'assenza dedotta dal posto in cui ho guardato.
+        _dt = os.path.join(os.path.dirname(rp), "_tmp")
+        _jn = 0
+        if os.path.isdir(_dt):
+            for _f in sorted(os.listdir(_dt)):
+                if _f.endswith(".json"):
+                    try:
+                        testo += chr(10) + io.open(os.path.join(_dt, _f), encoding="utf-8",
+                                                   errors="replace").read()
+                        _jn += 1
+                    except Exception:
+                        pass
         trovate = []
         for pat, et in PROVE.get(flag, []):
             mm = re.search(pat, testo)
@@ -142,7 +157,7 @@ for nome, strum, ref, flags in MISURE:
                     continue
                 trovate.append(et)
         ok = bool(trovate)
-        ESITI.append((nome, flag, modo, trovate, ok, os.path.isfile(rp)))
+        ESITI.append((nome, flag, modo, trovate, ok, os.path.isfile(rp), _jn))
         P("%-26s %-12s %-34s %-44s"
           % (nome[:26], flag[:12], modo[:34],
              (trovate[0][:44] if trovate else ("NON VERIFICATO" if os.path.isfile(rp)
@@ -154,10 +169,10 @@ P("-" * 120)
 P("L'ESITO, per misura")
 P("-" * 120)
 _ko = [x for x in ESITI if not x[4]]
-for nome, flag, modo, trovate, ok, ha_ref in ESITI:
+for nome, flag, modo, trovate, ok, ha_ref, _jn in ESITI:
     P("  %-26s %-12s  %s" % (nome[:26], flag[:12],
                              "✅ ACCESO (provato da %d effetto/i)" % len(trovate) if ok
-                             else ("⚠ NON VERIFICATO dal referto" if ha_ref
+                             else ("⚠ NON VERIFICATO (referto + %d json)" % _jn if ha_ref
                                    else "⚠ REFERTO ASSENTE")))
     if not ok:
         P("       (a) dice: %s" % modo)
