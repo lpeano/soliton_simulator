@@ -2499,6 +2499,17 @@ class Rete:
            *(Se commento e storia divergono, il commento mente: par.5-bis.)*
         """
         c = np.asarray(centro, float)
+        # [SCENA (ii), 2026-09-25] `n < 0` = **FINO A SATURAZIONE**, senza un bersaglio.
+        #   Non e' una manopola nuova (par.3): l'arresto era GIA' derivato da `LAM`, e questo
+        #   modo si limita a NON imporre un `n`. Serve perche' la scena `(ii)` chiede
+        #   **il vuoto che ci sta**, e la capienza **dipende dal seme** -- misurato
+        #   `12807/12783/12812/12790` su quattro semi. Chiedere la MEDIA fa RIFIUTARE i semi
+        #   sotto media, ed e' esattamente l'errore che Luca ha preso il 2026-09-25.
+        # IL TETTO DELL'ARRAY E' GEOMETRICO, non scelto: al piu' UN nodo per cella di
+        #   diagonale `LAM`, quindi al piu' quante celle stanno nel cubo che contiene la palla.
+        _sat = bool(n < 0)
+        if _sat:
+            n = int(np.ceil((2.0 * r / (LAM / np.sqrt(3.0))) ** 3)) + 1
         acc = np.empty((n, 3), float)
         k = 0
         self._sl_abbandonate = getattr(self, "_sl_abbandonate", 0)
@@ -2547,6 +2558,16 @@ class Rete:
                 nuovi_lati = np.repeat(lati[:nd] * 0.5, 8)
                 o = np.vstack([nuovi, o[nd:]])
                 lati = np.concatenate([nuovi_lati, lati[nd:]])
+        if _sat:
+            # SATURAZIONE: non c'e' un bersaglio, quindi non c'e' rifiuto. Il tetto geometrico
+            # non deve MAI essere toccato: se lo fosse, l'array e' stato il vincolo invece
+            # della geometria, e va detto (`A9`) invece di passare in silenzio.
+            if k >= n:
+                raise SystemExit(
+                    "[semina-lam] IL TETTO GEOMETRICO E' STATO RAGGIUNTO (%d): l'array e' stato\n"
+                    "  il vincolo invece della geometria. NON riduco in silenzio (`A9`)." % n)
+            self._sl_saturazione = int(k)
+            return acc[:k]
         if k < n:
             frazione = k * (LAM / 2.0) ** 3 / max(r ** 3, 1e-300)
             raise SystemExit(
@@ -2577,11 +2598,22 @@ class Rete:
         return acc
 
     def semina(self, n, raggio=None, centro=(0, 0, 0), fase=None, mass_id=None):
-        n = max(0, min(n, MAX_NODI - self.n))
+        # [SCENA (ii)] `n < 0` = **FINO A SATURAZIONE**. Richiede `SEMINA_LAM`: senza una
+        # distanza minima la saturazione NON ESISTE, e ridurre a un numero qualsiasi sarebbe
+        # una riduzione silenziosa (`A9`). Si DICE, non si aggiusta.
+        _sat = bool(n < 0)
+        if _sat and not SEMINA_LAM:
+            raise SystemExit(
+                "[semina] `n < 0` (saturazione) RICHIEDE `SEMINA_LAM`: senza distanza minima\n"
+                "  la saturazione non esiste. Per il braccio di controllo di `P-GONFIA` si passa\n"
+                "  il numero MISURATO dal braccio acceso, non un numero qualunque (`A9`).")
+        n = (MAX_NODI - self.n) if _sat else max(0, min(n, MAX_NODI - self.n))
         if n == 0: return
         r = _scala_sistema() * 0.5 if raggio is None else raggio
         if SEMINA_LAM:
-            p = self._semina_lam(n, r, centro)
+            p = self._semina_lam(-1 if _sat else n, r, centro)
+            n = len(p)                 # in saturazione il numero lo decide la GEOMETRIA
+            if n == 0: return
         else:
             u = self.rng.normal(size=(n, 3)); u /= np.linalg.norm(u, axis=1, keepdims=True)
             p = np.asarray(centro, float) + u * (r * self.rng.random(n) ** (1 / 3))[:, None]
@@ -6822,6 +6854,102 @@ def _semina_n_masse():
         _massa(centro, _size_video(k, 0.7), npunt, 0.0, "massa_%d" % k)
 
 
+# ============================================================================================
+# SCENA (ii) -- MASSA = REGIONE A FASE COERENTE IN UN VUOTO SOLO  (decisione di Luca, 2026-09-25)
+# ============================================================================================
+# **LE MASSE NON AGGIUNGONO NODI.** Si semina UN SOLO vuoto, fino a SATURAZIONE, e le masse sono
+# TRE REGIONI di quel vuoto a cui si da' una FASE COMUNE. E' la differenza con la scena di
+# `CURA 2`, dove ogni massa era una semina a se' e il vuoto non c'era.
+#
+# LA GEOMETRIA SI DERIVA, non si sceglie -- un solo ingresso, `--sep`:
+#   centri sul cerchio di raggio `sep`       -> distanza fra centri adiacenti = sep*sqrt(3)
+#   raggio della regione                     -> r = (sep*sqrt(3) - R_CONN)/2
+#                                               cioe' IL VARCO FRA LE SUPERFICI E' `R_CONN`:
+#                                               le regioni NON si toccano e NON si allacciano
+#                                               direttamente, ma il vuoto fra loro si'.
+#   raggio del vuoto                         -> Rv = sep + r + R_CONN
+#                                               un guscio di `R_CONN` oltre la regione piu'
+#                                               esterna, cosi' nessuna regione tocca il bordo.
+#
+# LE DUE SCENE, e sono LO STESSO CODICE con `--sep` diverso (misurate il 2026-09-25):
+#   (a) "STESSO RAGGIO"   --sep 6.1158  -> r = 4.0964   vuoto 12.6122   ~411 nodi/regione
+#   (b)                   --sep 4.0     -> r = 2.2641   vuoto  8.6641   ~ 70 nodi/regione
+# ⚠ La `(a)` si chiama «STESSO RAGGIO», NON «stessa materia»: i 497 nodi per massa di `CURA 2`
+#   stavano in un raggio `0.7 = 0.875 LAM`, dove ce ne stanno 5. Non c'e' una materia da
+#   conservare, perche' quella materia era SOTTO LA SCALA DI PLANCK (`A13`).
+_MC_VIDEO = {"nodi": 0, "fasi_casuali": False}   # riempiti da esegui_headless
+
+def _semina_masse_coerenti():
+    """SCENA (ii). Semina UN vuoto e marca TRE REGIONI a fase coerente. NON aggiunge nodi."""
+    sep = _sep_video()
+    rc = R_CONN()
+    r = 0.5 * (sep * np.sqrt(3.0) - rc)
+    if r <= 0:
+        raise SystemExit(
+            "[scena-ii] `--sep %.6f` da' un raggio di regione NEGATIVO (%.6f): con tre masse su\n"
+            "  un cerchio di raggio `sep` i centri distano `sep*sqrt(3)`, e il varco fra le\n"
+            "  superfici e' `R_CONN = %.6f`. Serve `sep > %.6f`." % (sep, r, rc, rc / np.sqrt(3.0)))
+    Rv = sep + r + rc
+    # --- UN SOLO VUOTO, e lo si VERIFICA invece di sperarlo. Se la rete ha gia' dei nodi,
+    #     il vuoto dell'`import`/di `--nodi` si SOMMEREBBE a questo: due vuoti, non uno, e la
+    #     scena non sarebbe quella decisa. NON lo aggiusto in silenzio (`A9`): lo DICO.
+    if net.n:
+        raise SystemExit(
+            "[scena-ii] LA RETE HA GIA' %d NODI: la scena (ii) vuole UN SOLO VUOTO, e questo si\n"
+            "  SOMMEREBBE. Si lancia con `--nodi 0`. NON svuoto la rete da solo (`A9`): svuotarla\n"
+            "  significherebbe buttare via cio' che un altro flag ha chiesto, senza dirlo." % net.n)
+    # --- IL VUOTO. `nodi = 0` -> SATURAZIONE (il numero lo decide la geometria). Il braccio di
+    #     controllo di `P-GONFIA` passa il numero MISURATO qui, per avere lo STESSO `n`.
+    _n = int(_MC_VIDEO.get("nodi") or 0)
+    net.semina(-1 if _n <= 0 else _n, raggio=Rv, centro=(0.0, 0.0, 0.0))
+    pos = np.asarray(net.pos, float)
+    # --- LE TRE REGIONI. Nessun nodo nuovo: si assegna la FASE e si registra la coorte.
+    _cas = bool(_MC_VIDEO.get("fasi_casuali"))
+    dentro = np.zeros(net.n, bool)
+    for k in range(3):
+        ang = 2.0 * np.pi * k / 3.0
+        c = np.array([sep * np.cos(ang), sep * np.sin(ang), 0.0])
+        idx = np.where(np.linalg.norm(pos - c, axis=1) <= r)[0]
+        if _cas:
+            # BRACCIO DI CONTROLLO DI `S10` (Luca): fasi CASUALI anche DENTRO le regioni.
+            # La coorte resta la STESSA -- cambia solo la fase -- cosi' `S10` si legge come
+            # CONTRASTO e non in assoluto: il ~50 % che `Lam` da' per costruzione non si
+            # confonde con mezzo successo.
+            ph = net.rng.random(len(idx)) * net._dphi()
+        else:
+            # FASE COMUNE nella regione. La dispersione 0.05 e' la STESSA di `semina(fase=...)`:
+            # non e' un numero nuovo, e' la convenzione gia' in uso per un dominio coerente.
+            # LA FASE DELLA REGIONE: il CENTRO del k-esimo terzo del DOMINIO di `phi`.
+            # ⚠ NON `2 pi k/3`: per `k = 0` quella vale ZERO, cioe' **esattamente sul taglio
+            #   del wrap**, e la dispersione gaussiana ci cade a cavallo. La fase resta
+            #   coerente SUL CERCHIO, ma qualunque statistica LINEARE la legge come massima
+            #   dispersione -- MISURATO nella prova di fumo: `std(phi) = 6.0798` per `massa_0`
+            #   contro `0.0518` e `0.0468` per le altre due, a fase IDENTICAMENTE coerente.
+            #   Il centro del terzo e' derivato ("tre regioni, spaziate uguali"), non scelto,
+            #   e NESSUNO dei tre cade sul taglio.
+            # La dispersione `0.05` NON e' un numero nuovo: e' la stessa di `semina(fase=...)`.
+            ph = net._dphi() * (k + 0.5) / 3.0 + net.rng.normal(0, 0.05, len(idx))
+        net.phi[idx] = ph % net._dphi()
+        net.phi0[idx] = net.phi[idx]
+        dentro[idx] = True
+        et = "massa_%d" % k
+        test["dati"].setdefault("coorti", {})[et] = idx
+        test["dati"].setdefault("E0", {})[et] = None
+    # il VUOTO come coorte a se': serve a `S9` (contrasto dentro/fuori) come DENOMINATORE.
+    test["dati"].setdefault("coorti", {})["vuoto"] = np.where(~dentro)[0]
+    test["dati"].setdefault("E0", {})["vuoto"] = None
+    # ⚠ `conc_nodi` NON viene toccato, di proposito: le regioni NON sono masse SEMINATE, e
+    #   marcarle come tali direbbe che il lignaggio viene da una semina che non c'e' stata.
+    test["dati"]["scena_ii"] = dict(
+        sep=float(sep), r_regione=float(r), raggio_vuoto=float(Rv), R_CONN=float(rc),
+        n_vuoto=int(net.n), fasi_casuali=bool(_cas),
+        saturazione=int(getattr(net, "_sl_saturazione", -1)),
+        dentro=int(dentro.sum()), quota=float(dentro.mean()) if net.n else float("nan"))
+    print("[scena-ii] sep %.6f  r_regione %.6f  raggio_vuoto %.6f  R_CONN %.6f" % (sep, r, Rv, rc))
+    print("[scena-ii] n = %d   dentro le regioni = %d   QUOTA = %.4f   fasi_casuali = %s"
+          % (net.n, int(dentro.sum()), dentro.mean() if net.n else float("nan"), _cas))
+
+
 def _energia(etichetta):
     """energia d'interferenza della coorte, normalizzata al suo valore iniziale"""
     co = test["dati"].get("coorti", {}).get(etichetta)
@@ -6928,6 +7056,13 @@ TESTS = {
    dict(cap=lambda: f"DUE MASSE 3/3 — frame-dragging attivo: osservare se la congiungente "
                     f"ruota (precessione) e se i solitoni corrono lungo le geodetiche",
         dur=220)],
+ "MASSE-COERENTI": [
+   dict(cap=lambda: "SCENA (ii) 1/2 - UN SOLO VUOTO (sep %.4f), e le masse sono TRE REGIONI a "
+                    "fase coerente: NON aggiungono nodi" % _sep_video(),
+        al_via=lambda: _semina_masse_coerenti(), dur=120),
+   dict(cap=lambda: "SCENA (ii) 2/2 - evoluzione libera: le regioni restano coerenti o si "
+                    "erodono dal bordo; coerenza %.2f" % net.diagnostica()['coer_l'],
+        dur=280)],
  "N-MASSE": [
    dict(cap=lambda: f"N MASSE 1/2 — {_n_masse_video()} masse in cerchio (raggio {_sep_video():.1f}), "
                     f"ben separate; lo zoom segue lo scaling dello spazio",
@@ -8110,6 +8245,10 @@ def esegui_headless(a):
     _applica_flag(a)
     # N MASSE nel video: passo numero e raggio allo scenario. Lo zoom seguira' lo scaling perche'
     # l'inquadratura R si adatta all'estensione reale dei nodi (vedi update: R = max|pos|).
+    # [SCENA (ii)] `--mc-nodi 0` = SATURAZIONE (il default). Il braccio di controllo di
+    # `P-GONFIA` passa qui il numero MISURATO dal braccio acceso, per avere lo STESSO `n`.
+    _MC_VIDEO["nodi"] = int(getattr(a, "mc_nodi", 0) or 0)
+    _MC_VIDEO["fasi_casuali"] = bool(getattr(a, "mc_fasi_casuali", False))
     _NMASSE_VIDEO["n"] = max(2, int(getattr(a, "nmasse", 2)))
     _NMASSE_VIDEO["sep"] = float(getattr(a, "sep", 3.0))
     _sz = getattr(a, "size", None)
@@ -8629,6 +8768,14 @@ def _cli():
                    help="batch: ogni quanti passi registrare una misura (default 30)")
     p.add_argument("--sep", type=float, default=2.3,
                    help="batch: raggio del cerchio su cui stanno le masse (default 2.3)")
+    # [SCENA (ii), 2026-09-25] `0` = FINO A SATURAZIONE (il default): il numero lo decide la
+    # GEOMETRIA, non un numero scelto. Il braccio di controllo di `P-GONFIA` (`SEMINA_LAM`
+    # spento) passa qui il numero MISURATO dal braccio acceso, per avere lo STESSO `n`.
+    p.add_argument("--mc-nodi", type=int, default=0,
+                   help="SCENA (ii): nodi del vuoto; 0 = fino a saturazione (default)")
+    # BRACCIO DI CONTROLLO DI `S10`: fasi casuali anche DENTRO le regioni. DIAGNOSTICO.
+    p.add_argument("--mc-fasi-casuali", action="store_true",
+                   help="SCENA (ii): fasi casuali dentro le regioni (controllo di S10)")
     p.add_argument("--nmasse", type=int, default=2,
                    help="batch/video: numero di masse, disposte in cerchio di raggio sep (default 2)")
     p.add_argument("--size", type=str, default=None,

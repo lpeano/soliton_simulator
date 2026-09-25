@@ -16042,3 +16042,56 @@ dei nuovi archi Schwinger viene da `0.5*|pos[aa] - pos[bb]|`, cioè **dal DISEGN
 
 **Il valore dello Schwinger NON è a risposta nota:** è verificato contro l'ARRAY (`U2-5`) e contro
 l'altro braccio (`U2-10`), **mai contro un conto a mano**.
+
+
+---
+
+# ✅ LA SCENA `(ii)` È IN CODICE E GIRA — **un vuoto solo, e le masse sono REGIONI** *(2026-09-25)*
+
+*(`_semina_masse_coerenti`, scena `MASSE-COERENTI`, flag `--mc-nodi` e `--mc-fasi-casuali`)*
+
+**LA GEOMETRIA SI DERIVA DA UN SOLO INGRESSO, `--sep`** — `r = (sep*sqrt(3) - R_CONN)/2`,
+`Rv = sep + r + R_CONN` — **e riproduce ESATTI i numeri che avevo misurato per altra via**:
+
+| scena | `--sep` | `r_regione` | `raggio_vuoto` | `n` | nodi/regione | **ARCHI** |
+|---|--:|--:|--:|--:|--:|--:|
+| `(a)` «stesso raggio» | `6.1158` | `4.096438` | `12.612238` | `12 802` | `411/413/413` | **`471 564`** |
+| `(b)` | `4.0` | `2.264102` | `8.664102` | `4 252` | `67/75/64` | **`148 237`** |
+
+- **`QUOTA`** `0.0966` e `0.0484` contro i `0.0961` e `0.0492` previsti;
+- **distanza minima** `0.800005` e `0.800000` contro `LAM = 0.8`;
+- **il costo, misurato dagli ARCHI come imposto: `3.2×`, non `5.4×` come i nodi.** La mia stima
+  *«`~500k` e `~150k`»* regge entro il `6 %`.
+
+## ✅ LA COERENZA C'È, E IL CONTROLLO DI `S10` È AL NULLO
+
+```
+COERENZA CIRCOLARE |<e^{i phi}>|   regioni  0.999631 / 0.999665 / 0.999726
+                                   vuoto    0.008019      nullo ~ 1/sqrt(n) = 0.0157
+CONTROLLO (fasi casuali dentro)    regioni  0.071 / 0.035 / 0.032   -> AL NULLO
+```
+
+## ❗ E UN RISCONTRO CHE NON CERCAVO: **una fase a `0` sta sul TAGLIO del wrap**
+
+Con `fase = 2 pi k/3`, `massa_0` dava **`std(phi) = 6.0798`** contro `0.0518` e `0.0468` delle
+altre due, **a fase identicamente coerente**: `phi % _dphi()` manda la coda negativa a `~4 pi`.
+**`std(phi) = 3.63` è il valore di fasi CASUALI, e `6.08` è PEGGIO del caso** — cioè il segno
+che è sbagliata la statistica, non il dato.
+**Cura derivata:** la fase della regione `k` è il centro del `k`-esimo terzo del dominio,
+`_dphi()*(k+0.5)/3`. **Nessuno dei tre cade sul taglio.**
+**E la coerenza si misura CIRCOLARMENTE**, non con una `std`.
+
+## ⚠ TRE COSE DA SAPERE PRIMA DEL GIRO
+
+1. **`--nodi 0` È OBBLIGATORIO:** la scena **RIFIUTA** se la rete ha già nodi, perché il vuoto
+   dell'`import` si **sommerebbe** — due vuoti, non uno. **Non svuoto la rete da sola** (`A9`).
+2. **`--mc-nodi 0` = SATURAZIONE**, e la capienza **dipende dal seme**: il braccio di controllo di
+   `P-GONFIA` *(`SEMINA_LAM` spenta)* deve ricevere **il numero MISURATO dal braccio acceso**,
+   perché senza distanza minima la saturazione **non esiste**.
+3. **`conc_nodi` non viene toccato:** le regioni **non sono masse seminate**.
+
+## ❌ E UN DIFETTO MIO, il terzo dello stesso tipo in un giorno
+
+Un `heredoc` ha convertito `\\n` in un **newline vero** dentro un letterale, spezzando il
+sorgente. **È la terza volta**, e la regola che mi ero dato — *niente heredoc per gli script di
+patch* — **l'avevo scritta io**. Riparato con lo strumento di scrittura.

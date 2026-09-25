@@ -717,6 +717,21 @@ avvertimento.**
 
 ---
 
+
+### ➕ DUE FLAG NUOVI IN `_cli`, PER LA SCENA `(ii)` *(2026-09-25)*
+
+| flag | default | cosa fa | byte-inerte a default? |
+|---|---|---|---|
+| **`--mc-nodi N`** | **`0`** | nodi del vuoto della scena `(ii)`. **`0` = FINO A SATURAZIONE**: il numero lo decide la **geometria**, non una scelta. | **sì**: letto **solo** da `_semina_masse_coerenti`, che gira **solo** nella scena `MASSE-COERENTI` |
+| **`--mc-fasi-casuali`** | **`False`** | **BRACCIO DI CONTROLLO DI `S10`**: fasi casuali **anche dentro** le regioni. **DIAGNOSTICO, non fisica alternativa.** | **sì**, stessa ragione |
+
+> **Perché `--mc-nodi` esiste invece di lasciare sempre la saturazione:** il **braccio di
+> controllo di `P-GONFIA`** gira con `SEMINA_LAM` **spenta**, e **senza distanza minima la
+> saturazione non esiste**. Quel braccio deve ricevere **il numero MISURATO dal braccio acceso**,
+> per avere **lo stesso `n`** — che è la condizione che rende il confronto attribuibile alla
+> **sola** distanza minima.
+> **Non è una manopola di fisica** *(par.10, categoria infrastruttura)*: non entra in nessuna legge.
+
 <!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,_dphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
 # ⑥ LA FASE `φ` E IL SUO DOMINIO — **`semina` / `_w4` / `_w8` / `step`**
 
@@ -841,6 +856,38 @@ non c'è niente da cambiare lì.**
    o `_w8` diventa l'identità come lo era il wrap del ritmo?** → **`SCALE-TW`**.
 
 ---
+
+
+### ❗ UNA FASE A `0` STA **SUL TAGLIO DEL WRAP**, E OGNI STATISTICA LINEARE LA LEGGE COME MASSIMO DISORDINE *(2026-09-25)*
+
+**Misurato nella prova di fumo della scena `(ii)`**, e preso **prima** di usarlo come criterio:
+
+```
+fase della regione = 2 pi k/3       ->  massa_0 (k=0, fase ZERO):  std(phi) = 6.0798
+                                        massa_1:                   std(phi) = 0.0518
+                                        massa_2:                   std(phi) = 0.0468
+                                        ... A FASE IDENTICAMENTE COERENTE
+```
+
+**`phi % _dphi()` manda la coda gaussiana negativa a `~4 pi`:** la fase resta **coerente SUL
+CERCHIO**, ma `std` la legge a cavallo del taglio e dà **il valore del disordine massimo**.
+
+> ### **NON È UN DIFETTO DI `phi`: È UN DIFETTO DELLA STATISTICA.** La coerenza di una fase si
+> ### misura **CIRCOLARMENTE**, `|<e^{i phi}>|`, non con una deviazione standard.
+
+**La cura nella scena è derivata, non scelta:** la fase della regione `k` è il **CENTRO del
+`k`-esimo terzo del dominio**, `_dphi()*(k+0.5)/3` — *«tre regioni, spaziate uguali»* — e
+**nessuno dei tre cade sul taglio**. **Dopo:**
+
+```
+COERENZA CIRCOLARE |<e^{i phi}>|      dentro le regioni   0.999631 / 0.999665 / 0.999726
+                                      nel vuoto           0.008019   (nullo ~ 1/sqrt(n) = 0.0157)
+BRACCIO DI CONTROLLO di `S10`         dentro le regioni   0.071 / 0.035 / 0.032  -> AL NULLO
+```
+
+**È la stessa famiglia di `RITMO_WRAP_2PI`**, e la stessa del presidio del par.9 *«quanto
+varrebbe se non ci fosse niente?»*: `std(phi) ≈ D/sqrt(12) = 3.63` **è** il valore di fasi
+casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sbagliata e non il dato.
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME -->
 # ⑦ LA MITOSI E SCHWINGER — **`mitosi()`**
@@ -2228,6 +2275,57 @@ generica non impedisce nulla** *(`A9`)*.
 
 ---
 
+
+### ✅ LA SCENA `(ii)` È IN CODICE: **`semina(n < 0)` = FINO A SATURAZIONE** *(2026-09-25)*
+
+**`_semina_lam` accetta `n < 0`: nessun bersaglio, si semina finché non resta una cella viva.**
+**Non è una manopola nuova** *(par.3)*: l'arresto era **già** derivato da `LAM`
+*(Zhang-Torquato)*; questo modo si limita a **non imporre un `n`**.
+
+> ### **PERCHÉ SERVE, ed è un errore che Luca ha già preso:** la capienza **DIPENDE DAL SEME**
+> — misurata `12807 / 12783 / 12812 / 12790`. **Chiedere la MEDIA fa RIFIUTARE i semi sotto
+> media**, e il rifiuto aveva ragione: era la richiesta a essere sbagliata.
+
+**DUE PRESIDI, entrambi `A9`:**
+- **il tetto dell'array è GEOMETRICO**, non scelto *(al più un nodo per cella di diagonale
+  `LAM`)*, e **se venisse raggiunto il codice si FERMA e lo DICE**: l'array sarebbe stato il
+  vincolo invece della geometria;
+- **`n < 0` senza `SEMINA_LAM` è un RIFIUTO**: senza distanza minima **la saturazione non
+  esiste**, e ridurre a un numero qualunque sarebbe una riduzione silenziosa. **Il braccio di
+  controllo di `P-GONFIA` passa il numero MISURATO dal braccio acceso**, non un numero a caso.
+
+### ✅ LA GEOMETRIA DELLA SCENA `(ii)` SI DERIVA DA UN SOLO INGRESSO, `--sep`
+
+```
+centri sul cerchio di raggio `sep`  ->  distanza fra centri adiacenti = sep*sqrt(3)
+raggio della regione                ->  r  = (sep*sqrt(3) - R_CONN)/2
+                                        cioè IL VARCO FRA LE SUPERFICI È `R_CONN`
+raggio del vuoto                    ->  Rv = sep + r + R_CONN
+                                        un guscio di `R_CONN` oltre la regione più esterna
+```
+
+**E riproduce ESATTI i numeri misurati il 2026-09-25**, che erano stati ottenuti per altra via:
+
+| scena | `--sep` | `r_regione` | `raggio_vuoto` | `n` *(saturazione)* | nodi/regione | **ARCHI** |
+|---|--:|--:|--:|--:|--:|--:|
+| **`(a)` «stesso raggio»** | `6.1158` | `4.096438` | `12.612238` | `12 802` | `411 / 413 / 413` | **`471 564`** |
+| **`(b)`** | `4.0` | `2.264102` | `8.664102` | `4 252` | `67 / 75 / 64` | **`148 237`** |
+
+**LE MASSE NON AGGIUNGONO NODI:** `QUOTA` *(dentro/totale)* vale **`0.0966`** in `(a)` e
+**`0.0484`** in `(b)`, contro i `0.0961` e `0.0492` previsti.
+**E la distanza minima regge:** `min(d_nodi) = 0.800005` e `0.800000` contro `LAM = 0.8`.
+
+**IL COSTO, misurato dagli ARCHI come imposto:** `471 564` contro `148 237`, cioè **`3.2×`** —
+**non `5.4×` come i nodi.** La mia stima *«`~500k` e `~150k`»* regge entro il `6 %`.
+
+**⚠ `conc_nodi` NON viene toccato, di proposito:** le regioni **non sono masse SEMINATE**, e
+marcarle come tali direbbe che il lignaggio viene da una semina che non c'è stata.
+
+**⚠ E LA SCENA RIFIUTA SE LA RETE NON È VUOTA:** il vuoto dell'`import`/di `--nodi` si
+**sommerebbe** a quello della scena — **due vuoti, non uno**. Si lancia con **`--nodi 0`**, e la
+rete **non si svuota da sola** *(`A9`: svuotarla butterebbe via ciò che un altro flag ha
+chiesto, senza dirlo)*.
+
 <!-- SCHEDA nome=invarianti funzioni=verifica_invarianti flag=INVARIANTI,DOMINI -->
 
 # ⑩ GLI INVARIANTI DI DOMINIO — **`C5`**
@@ -2758,3 +2856,70 @@ spostamento ILLIMITATO**, che è la firma di `A11`.
 > sarebbe falso: `cosh(x) ≥ 1` sempre, quindi `E[Δu] ≥ 0` **sempre**. **Cambia l'ORDINE, non il
 > segno.**
 
+<!-- SCHEDA nome=scena-masse-coerenti funzioni=_semina_masse_coerenti,esegui_headless flag=_MC_VIDEO,TESTS,MASSE-COERENTI -->
+
+# ③ `scena-masse-coerenti` — **LA SCENA `(ii)`: UN VUOTO SOLO, E LE MASSE SONO REGIONI**
+
+**Decisione di Luca, 2026-09-25.** È una **SCENA**, non una legge: non entra in nessuna equazione
+del passo. Sta nel registro perché **decide che cosa viene misurato**, e una scena sbagliata
+produce numeri irreprensibili su un sistema che non è quello che si crede.
+
+## LA FORMA
+
+> ### **MASSA = REGIONE A FASE COERENTE IN UN VUOTO SOLO. LE MASSE NON AGGIUNGONO NODI.**
+
+È la differenza con la scena di `CURA 2`, dove **ogni massa era una semina a sé** e il vuoto
+**non c'era**.
+
+## LA GEOMETRIA È DERIVATA DA UN SOLO INGRESSO, `--sep`
+
+```
+centri sul cerchio di raggio `sep`   ->  distanza fra centri adiacenti = sep*sqrt(3)
+r  = (sep*sqrt(3) - R_CONN)/2        ->  IL VARCO FRA LE SUPERFICI È `R_CONN`:
+                                         le regioni non si toccano e non si allacciano
+                                         direttamente, ma il vuoto fra loro sì
+Rv = sep + r + R_CONN                ->  un guscio di `R_CONN` oltre la regione più esterna,
+                                         così nessuna regione tocca il bordo
+fase della regione k = _dphi()*(k+0.5)/3   ->  il CENTRO del k-esimo terzo del dominio
+```
+
+**Nessun numero scelto.** `R_CONN = 3*LAM` e `_dphi()` esistono già; il *«centro del terzo»* viene
+da *«tre regioni, spaziate uguali»*.
+
+## ⚠ LE DUE SCENE SONO LO STESSO CODICE CON `--sep` DIVERSO
+
+| scena | `--sep` | `r_regione` | `raggio_vuoto` | `n` *(saturazione)* | nodi/regione | **ARCHI** | `QUOTA` |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| **`(a)` «STESSO RAGGIO»** | `6.1158` | `4.096438` | `12.612238` | `12 802` | `411/413/413` | **`471 564`** | `0.0966` |
+| **`(b)`** | `4.0` | `2.264102` | `8.664102` | `4 252` | `67/75/64` | **`148 237`** | `0.0484` |
+
+*(un seme, `11`; `csv/_test_fork/_fumo_scena_ii.py`)*
+
+**⚠ `(a)` SI CHIAMA «STESSO RAGGIO», NON «STESSA MATERIA»:** i `497` nodi per massa di `CURA 2`
+stavano in un raggio `0.7 = 0.875 LAM`, dove ce ne stanno **`5`**. **Non c'è una materia da
+conservare**, perché quella materia era **sotto la scala di Planck** (`A13`).
+
+## I DUE BRACCI DI CONTROLLO, e senza di loro i criteri non si leggono
+
+| criterio | braccio di controllo | perché |
+|---|---|---|
+| **`S10`** *(le regioni restano coerenti?)* | **`--mc-fasi-casuali`**: stessa scena, stesso seme, **fasi casuali anche dentro le regioni** | senza, il `~50 %` che `Lam` dà **per costruzione** si leggerebbe come mezzo successo. **Misurato: il controllo sta AL NULLO**, `0.071 / 0.035 / 0.032` |
+| **`P-GONFIA`** *(quanto gonfia `d0`?)* | **la STESSA scena con `SEMINA_LAM` SPENTA**, **stesso `n` MISURATO** dal braccio acceso | il confronto con `CURA 2` è fra **scene diverse** e non attribuisce niente alla semina |
+
+**⚠ `--mc-nodi` ESISTE PER QUESTO:** con `SEMINA_LAM` spenta **la saturazione non esiste**, quindi
+il braccio di controllo **non può leggersi `n` da solo** e lo riceve.
+
+## COSA LA SCENA RIFIUTA DI FARE *(`A9`)*
+
+- **se la rete ha già nodi**: il vuoto dell'`import`/di `--nodi` **si sommerebbe** — **due vuoti,
+  non uno**. Si lancia con **`--nodi 0`**, e **la rete non si svuota da sola**: svuotarla
+  butterebbe via ciò che un altro flag ha chiesto, **senza dirlo**;
+- **`conc_nodi` non viene toccato**: le regioni **non sono masse SEMINATE**, e marcarle come tali
+  direbbe che il lignaggio viene da una semina che non c'è stata.
+
+## ⛔ LO STATO: **IL GIRO DI 120 PASSI È SOSPESO** *(Luca, 2026-09-25)*
+
+**La parte al PASSO ZERO si fa subito** *(`S1`-`S9`, previsioni `P1`-`P5`, numero di archi,
+frazione di archi sotto `2 LAM`)*: **non dipende dalla mitosi.**
+**Il giro resta sospeso** finché la **soglia della mitosi** non è una **legge derivata**: `3π` è
+**un numero tarato a posteriori nell'epoca 1** — vedi la scheda `mitosi-schwinger` e `SCALE-TW`.
