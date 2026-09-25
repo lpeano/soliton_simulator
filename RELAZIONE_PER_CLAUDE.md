@@ -16781,3 +16781,86 @@ assegnazioni del cronometro, e il commento di quella riga lo dice. **Il criterio
 
 **✅ E `P3` TIENE**, dopo essere stata *«non confrontabile»* a campo spento: `2.16` contro `5`,
 **dentro il fattore `2`.**
+
+
+---
+
+# ❌❌❌ **«LA MITOSI È MORTA» È RITIRATO. 48 NODI NASCONO IN 300 PASSI.** *(2026-09-25)*
+
+*(`csv/_test_fork/_scale_tw2.py`, referto in `csv/_test_fork/_scale_tw2/`, **passo PIENO**,
+campo MATURO, freno ON, **4 SEMI**, `300` passi, scena `(ii)` `(b)`)*
+
+```
+passo   n      nati  |tw|p50/pi  p95/pi  max/pi  >=soglia    in finestra  _ttw p50
+  0     4266   0     0.0000      0.0000  0.0000  0.000e+00   0.000e+00    13.8171
+  1     4270   2     0.9932      2.5933  2.9999  0.000e+00   0.000e+00    13.8072
+  5     4276   6     0.9926      2.5675  3.0623  9.220e-05   9.220e-05     5.1216
+ 20     4281   9     0.9754      2.3379  3.5910  2.342e-04   2.292e-04     1.6564
+ 60     4283  11     0.9388      1.9382  3.3133  2.544e-04   2.544e-04     1.0462
+120     4290  17     0.8851      2.0291  3.4156  2.785e-04   2.785e-04     1.2974
+200     4301  24     0.8137      2.0899  3.4442  4.154e-04   4.154e-04     1.7478
+300     4336  48     0.7600      2.1586  3.6554  8.205e-04   8.154e-04     1.6658
+```
+
+> ### ⛔ **LA CONCLUSIONE CHE HA FATTO RIORDINARE IL PIANO STAMATTINA È FALSA.**
+> Avevo scritto: *«`max|tw| = 2.8991 π` contro una soglia di `3π`. **Mai raggiunta, in nessuno dei
+> `20` passi.** La frazione `>= 3π` è `0.000000` sempre.»*
+>
+> **Col passo VERO: `max|tw| = 3.6554 π ± 0.0870`, sopra la soglia. `48.0 ± 2.4` nodi nati in
+> `300` passi, `41.2` eventi di mitosi.**
+>
+> **La causa è il ciclo incompleto:** misuravo con `net.step()` da solo, **senza scuotimento del
+> vuoto e senza mitosi**. Lo **scuotimento** è ciò che alimenta `tw`, e **la mitosi non poteva
+> scattare perché non la chiamavo.**
+
+## ✅ COSA DELLA MIA CONCLUSIONE RESTA, E ORA È QUANTIFICATO
+
+**La seconda metà regge:** `|tw|` **tipico** vale `0.7600 π`, cioè **sotto la soglia di un fattore
+`3.9`**. **La mitosi scatta SOLO SULLA CODA**, e la coda ora ha un numero:
+
+```
+frazione di archi NELLA FINESTRA DI CREAZIONE = 8.154e-04      (circa 1 arco su 1230)
+```
+
+**E la distribuzione SI ALLARGA col tempo:** `p50` **CALA** *(`0.993 → 0.760 π`)* mentre `max`
+**CRESCE** *(`3.00 → 3.66 π`)*. **`_ttw` cala da `13.8` a `1.67`**, come avevo misurato — e quella
+parte era giusta.
+
+> **Quindi l'affermazione corretta è: «la soglia `3π` È raggiungibile, da circa un arco su `1230`,
+> e la mitosi produce `~0.16` nodi per passo su `~4300`».** Non «morta», e non «sana»: **rara**.
+
+## ✅ `A8-div`: **NESSUNA DIVERGENZA col criterio scritto prima** — ma il livello sale di `~1000×`
+
+```
+passo   max|omega| p50   spread fra semi   max|phivel| p50
+  1     1.7968           0.149             1.16511
+ 20     1206.13          1562.45          12.8372
+300     3173.42          3712.3           17.826
+
+frazione di passi in CRESCITA, per seme:   0.023, 0.133, 0.060, 0.143
+rapporto finale/iniziale, per seme:        1032, 1161, 2983, 2357
+```
+
+**Il criterio era: crescita quasi monotona (`>= 0.95` dei passi) su TUTTI i semi. Non lo è** — al
+massimo `0.143`. **Quindi: non è divergenza, è un LIVELLO.**
+
+> **⚠ MA IL LIVELLO SALE DI TRE ORDINI DI GRANDEZZA** *(`1032`-`2983×` fra il passo `1` e il
+> `300`)*, **e lo spread fra semi è più grande della mediana** *(`3712` contro `3173`)*: `max|omega|`
+> è **dominato dalle code**. **Non è «niente», e non lo chiamo tale.** `max|phivel|` invece si
+> assesta: `12.8 → 17.8` fra il passo `20` e il `300`, cioè **`×1.4` in `280` passi**.
+> **Il criterio di Luca è soddisfatto** *(niente reperto-e-stop)*, **e la crescita del livello va
+> in coda come cosa da guardare, non archiviata.**
+
+## ✅ E LA NON-MONOTONIA DI `ramp` È REALE, PICCOLA, E MISURATA — come dichiarato
+
+```
+_g_rampa_cali        2764 / 3048 / 3417 / 2902     su ~5.3e6 nodi-passo  =  ~0.05 %
+_g_rampa_calo_max    0.0154 / 0.0125 / 0.0166 / 0.0177
+_g_rampa_calo_somma  8.65 / 8.45 / 12.47 / 6.67
+_g_rampa_prec_disallineata  33 / 45 / 43 / 44      shape tipica [4313, 4314]
+```
+
+**Il contatore c'era PRIMA della misura**, ed è il punto: `ramp` **scende** qualche volta, **di al
+più `0.018`**, sullo `0.05 %` dei casi. **E il disallineamento dell'array diagnostico capita a ogni
+MITOSI** *(shape `[4313, 4314]`: un nodo di differenza)* — **dichiarato, contato, e senza
+conseguenze sulla legge.**

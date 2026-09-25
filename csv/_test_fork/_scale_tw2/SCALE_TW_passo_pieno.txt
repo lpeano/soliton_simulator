@@ -1,0 +1,80 @@
+======================================================================================================================
+`SCALE-TW` RIFATTO — PASSO PIENO, CAMPO MATURO, 4 SEMI, 300 PASSI
+======================================================================================================================
+
+  passo = scuoti_vuoto() -> step() -> mitosi() -> rilassa_disegno() -> memoria_hebbiana_moto()   (letto per AST da `update()` e verificato contro il driver)
+
+[s11] rc=0 _CONN 2.400000
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK s11  n finale 4314  nati_mitosi 41
+[s12] rc=0 _CONN 2.400000
+[scena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK s12  n finale 4372  nati_mitosi 52
+[s13] rc=0 _CONN 2.400000
+[scena-ii] n = 4244   dentro le regioni = 205   QUOTA = 0.0483   fasi_casuali = False
+OK s13  n finale 4312  nati_mitosi 50
+[s14] rc=0 _CONN 2.400000
+[scena-ii] n = 4271   dentro le regioni = 205   QUOTA = 0.0480   fasi_casuali = False
+OK s14  n finale 4348  nati_mitosi 49
+
+LA FINESTRA DI CREAZIONE, derivata dal codice:
+  soglia0 = 9.424778 = 1.500 PHI_CRIT      tetto = 12.566371 = 2.000 PHI_CRIT
+  finestra: avv in (9.424778, 10.995574) = (1.500, 1.750) PHI_CRIT
+
+----------------------------------------------------------------------------------------------------------------------
+passo  n       nati     |tw|p50/pi p95/pi     max/pi     >=soglia     in finestra  _ttw p50  
+----------------------------------------------------------------------------------------------------------------------
+0      4266    0        0.0000     0.0000     0.0000     0.000e+00    0.000e+00    13.8171   
+1      4270    2        0.9932     2.5933     2.9999     0.000e+00    0.000e+00    13.8072   
+5      4276    6        0.9926     2.5675     3.0623     9.220e-05    9.220e-05    5.1216    
+20     4281    9        0.9754     2.3379     3.5910     2.342e-04    2.292e-04    1.6564    
+60     4283    11       0.9388     1.9382     3.3133     2.544e-04    2.544e-04    1.0462    
+120    4290    17       0.8851     2.0291     3.4156     2.785e-04    2.785e-04    1.2974    
+200    4301    24       0.8137     2.0899     3.4442     4.154e-04    4.154e-04    1.7478    
+300    4336    48       0.7600     2.1586     3.6554     8.205e-04    8.154e-04    1.6658    
+
+  (media su 4 semi; `nati` = `_g_nati_mitosi` cumulativo)
+
+======================================================================================================================
+LA DOMANDA: **LA MITOSI E' MORTA?** — e ora il passo e' quello vero
+======================================================================================================================
+  al passo 300, media su 4 semi:
+     nodi nati da mitosi      = 48.0 +- 2.4      eventi di mitosi = 41.2
+     frazione >= soglia0      = 8.204834e-04 +- 3.6e-05
+     frazione NELLA FINESTRA  = 8.154385e-04 +- 3.7e-05
+     max |tw| / pi            = 3.6554 +- 0.0870     (la soglia e' 3.000 pi)
+
+  -> ** LA MITOSI NON E' MORTA: 48.0 nodi nati in 300 passi. **
+     La conclusione precedente ("max|tw| = 2.8991 pi, frazione 0.000000") era misurata
+     CON IL CICLO INCOMPLETO -- senza scuotimento e senza mitosi. VA RITIRATA.
+
+======================================================================================================================
+`A8-div` — LA SORVEGLIANZA SULLA DIVERGENZA DI `omega` (criterio di Luca, scritto prima)
+======================================================================================================================
+  Se `omega` diverge NON e' un risultato nuovo: `TAU_A = 50` ERA la cura "per non far
+  divergere omega" (help di `--tau-a`). Sarebbe IL DIFETTO ORIGINALE CHE TORNA FUORI.
+
+  passo  max|omega| p50   max|omega| spread max|phivel| p50  n p50           
+  1      1.7968           0.149034         1.16511          4265            
+  20     1206.13          1562.45          12.8372          4274            
+  60     1602.02          1910.57          16.1088          4276            
+  120    2328.64          4234.36          15.632           4283            
+  200    1944.72          5285.2           14.9242          4295            
+  300    3173.42          3712.3           17.826           4331            
+
+  frazione di passi in CRESCITA di max|omega|, per seme: 0.023, 0.133, 0.060, 0.143
+  rapporto finale/iniziale, per seme: 1032, 1161, 2983, 2357
+  -> NESSUNA DIVERGENZA con questo criterio: la crescita NON e' quasi monotona.
+     E' un LIVELLO, non una divergenza.
+
+CONTATORI DELLA RAMPA (`A8`), i CALI — per seme:
+  seme 11   {'_g_rampa_tot': 1235, '_g_rampa_sotto1': 13832, '_g_rampa_nodi': 5278547, '_g_rampa_prec_disallineata': 33, '_g_rampa_prec_shape': [4313, 4314], '_g_rampa_cali': 2764, '_g_rampa_calo_somma': 8.646313587846835, '_g_rampa_calo_max': 0.015435907838170282, '_g_rampa_calo_quando': 1232}
+  seme 12   {'_g_rampa_tot': 1247, '_g_rampa_sotto1': 16282, '_g_rampa_nodi': 5400437, '_g_rampa_prec_disallineata': 45, '_g_rampa_prec_shape': [4371, 4372], '_g_rampa_cali': 3048, '_g_rampa_calo_somma': 8.446705538095914, '_g_rampa_calo_max': 0.01254069803773561, '_g_rampa_calo_quando': 1244}
+  seme 13   {'_g_rampa_tot': 1245, '_g_rampa_sotto1': 17397, '_g_rampa_nodi': 5319605, '_g_rampa_prec_disallineata': 43, '_g_rampa_prec_shape': [4309, 4312], '_g_rampa_cali': 3417, '_g_rampa_calo_somma': 12.46863810824311, '_g_rampa_calo_max': 0.01655297279111334, '_g_rampa_calo_quando': 1242}
+  seme 14   {'_g_rampa_tot': 1246, '_g_rampa_sotto1': 15414, '_g_rampa_nodi': 5358340, '_g_rampa_prec_disallineata': 44, '_g_rampa_prec_shape': [4347, 4348], '_g_rampa_cali': 2902, '_g_rampa_calo_somma': 6.6733443867447715, '_g_rampa_calo_max': 0.017679392766375646, '_g_rampa_calo_quando': 1242}
+
+COSA QUESTO NON DICE:
+  - la scena e' la (ii) (b), la piu' economica. La (a) non e' misurata qui.
+  - `4` semi soddisfano il minimo del par.0-ter, ma `t(3) = 3.18`: le barre sono larghe.
+  - la SOGLIA LOCALE e' modulata (fino a -30 %): la frazione vera e' >= a quella calcolata
+    contro `soglia0` fisso.

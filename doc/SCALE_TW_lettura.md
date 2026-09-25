@@ -256,6 +256,33 @@ passo   |tw| / pi                            _ttw                 frazione |tw| 
  20     p50 0.9933  p95 2.3434  max 2.8991   p50  1.818  p05 0.690      0.000000
 ```
 
+### ❌❌❌ RITIRATO IL 2026-09-25: **LA SOGLIA È RAGGIUNTA. LA MISURA QUI SOTTO GIRAVA SU UN CICLO INCOMPLETO**
+
+**`net.step()` NON È UN PASSO:** il passo è `scuoti_vuoto → step → mitosi → rilassa_disegno →
+memoria_hebbiana_moto`. **Questa misura chiamava solo `step()`**, quindi **senza scuotimento del
+vuoto** *(che è ciò che alimenta `tw`)* **e senza mitosi** *(che non poteva scattare perché non
+veniva chiamata)*.
+
+**RIFATTA col passo PIENO, campo MATURO, 4 SEMI, 300 passi**
+*(`csv/_test_fork/_scale_tw2.py`)*:
+
+```
+passo 300:  |tw| p50 = 0.7600 pi    max = 3.6554 pi +- 0.0870    la soglia e' 3.000 pi
+            frazione NELLA FINESTRA = 8.154e-04      (circa 1 arco su 1230)
+            NODI NATI DA MITOSI = 48.0 +- 2.4        eventi = 41.2
+```
+
+> ### ✅ **LA MITOSI NON È MORTA.** L'affermazione corretta è: **la soglia è raggiungibile da
+> ### circa un arco su `1230`, e la mitosi produce `~0.16` nodi per passo su `~4300`.**
+> **Né morta né sana: RARA.**
+>
+> **Cosa RESTA della lettura qui sotto:** `|tw|` **tipico** è sotto la soglia di un fattore `3.9`,
+> quindi **la mitosi scatta SOLO SULLA CODA** — e ora la coda ha un numero. E **`_ttw` cala**
+> *(`13.8 → 1.67`)*, che era misurato bene.
+> **Cosa CADE:** *«mai raggiunta»*, *«frazione `0.000000`»*, *«spenta di un fattore `3`»*.
+
+### ⚙ IL BLOCCO STORICO, che si legge per sapere COM'ERA e COSA L'HA TOLTO
+
 > ### ⛔ **LA SOGLIA `3π` NON È MAI RAGGIUNTA DA NESSUN ARCO, IN NESSUNO DEI 20 PASSI.**
 > `max|tw| = 2.8991 π`; la frazione `>= 3π` è **`0.000000`** sempre.
 > **Il tipico sta sotto la soglia di un fattore `3.020`** — **sopra** il `2` del criterio.
