@@ -18589,3 +18589,69 @@ per cui il difetto **si registra** invece di essere solo corretto in silenzio.
 `_g_ci_senza_peso` **c'era** e avrebbe fatto `> 0` a ogni mitosi: **avrei visto il numero e non
 avrei capito che invalidava tutto**, perché contava **invocazioni** e non **nodi**.
 **Un contatore con la granularità sbagliata non è un presidio: è un numero che rassicura.**
+
+
+---
+
+# ❗ **`R3 bis`: UN'INCOERENZA DI ESPONENTI DELLA RAMPA** — lettura di Luca, **verificata dal codice** *(2026-09-25)*
+
+> Per un figlio della mitosi: la **COPPIA** porta `ramp` **una volta**; **`rho_s`** viene da archi
+> pesati `ramp_i·ramp_j` **ed e' un modulo QUADRO** -> **`~ramp^2`**; con **`peq` ereditato** dal
+> genitore, **`_contrasto ~ ramp^2`**, quindi **`omega ~ 1/ramp`**.
+> **PREVISIONE: sui figli `|omega| · ramp` ≈ COSTANTE durante la maturazione.**
+
+**LA VERIFICA, riga per riga — nessuna misura nuova:**
+
+```
+:3850   base = exp(-d/lam) * ramp[self.i] * ramp[self.j]      il PESO porta ramp_i*ramp_j
+        rho_spin = Re(conj(psi_spin).psi_spin)                MODULO QUADRO  -> ~ramp^2
+:3241   B costruito con w[mask] ...
+:3251   ... B = B / max(deg, 1e-9)                            ramp UNA volta
+:3526   _tq = cross(_nb_grav(), nb)                           una DIREZIONE: senza ramp
+:3554   _tq = _tq * ramp[:n]                                  ramp UNA volta, esplicito
+:6226   peq[sel] ereditato ESATTAMENTE                        NON scala con ramp
+```
+
+> ### ✅ **LA DERIVAZIONE REGGE**, ed e' pulita perche' **entrambi** i termini della coppia portano
+> ### `ramp` **una volta sola**: il primo dentro `B`, il secondo scritto a mano.
+
+## ⭐ **E UN DETTAGLIO CHE RAFFORZA TUTTO: `B = B / max(deg, 1e-9)`**
+
+**`B` e' GIA' UNA MEDIA sui vicini. `rho_s` no.**
+
+> **Ecco perche' la coppia ha misurato `-0.19 … -0.30`, cioe' INTENSIVA: non e' un caso, e'
+> scritto a `:3251`.** L'asimmetria «somma contro media» ha quindi **una controprova interna**:
+> nello stesso file, **lo stesso tipo di grandezza e' normalizzato in un posto e non nell'altro.**
+
+## LE TRE LETTURE NON SONO VARIANTI DELLA STESSA CURA
+
+```
+estensivita'        -> normalizzare rho_s        tocca TUTTI i nodi, ~1/77, per sempre
+ritardo di peq      -> curare peq ALLA NASCITA   tocca i nuovi ARCHI
+esponenti di ramp   -> curare L'ESPONENTE        tocca i nodi che stanno MATURANDO
+```
+
+**Due di esse RITIRAREBBERO la variante pesata**, e per questo `R1`, `R3` e `R3 bis` vanno
+misurati **insieme**: si escludono a vicenda **nei numeri**, non nel ragionamento.
+
+**E IL DATO LI SEPARA, perche' hanno DUE SCALE DI TEMPO DIVERSE** *(`tau_bg` contro il tempo-luce
+della rampa)*: se `|omega|·ramp` e' piatto **mentre `peq` e' ancora lontano dall'equilibrio**, e'
+`R3 bis`; se `|omega|` rientra **solo quando `peq` arriva**, e' `R3`. **Se sono piatti entrambi,
+sono due difetti sovrapposti** — e va scritto cosi', non scelto.
+
+**CONSEGUENZA OPERATIVA, e la scrivo perche' senza di essa `R3 bis` non sarebbe verificabile:**
+**`R3` deve raccogliere anche `ramp` e `|omega|` per ciascun figlio**, non solo `rho`, `peq` e
+`_contrasto`.
+
+## ❌ E UN MIO ERRORE DI PROCESSO, NELLO STESSO GIRO
+
+**Il commit `009d49a` ha messo `R3 bis` nel task history MA NON IN RELAZIONE:** lo script che
+scriveva questo paragrafo e' morto con `UnicodeEncodeError: surrogates not allowed` *(avevo scritto
+un'emoji come **due** escape surrogati invece di un carattere)*, e **il commit e' passato comunque**
+perche' `RELAZIONE_PER_CLAUDE.md` era staged **senza modifiche**: `git` non si lamenta di un file
+che non cambia.
+
+> ### **UN HOOK CHE GUARDA «I FILE TOCCATI» NON VEDE UN FILE STAGED CHE NON E' CAMBIATO.**
+> `P1-bis` e' cablato e **ha fatto passare** il commit: il file era nell'elenco, il contenuto no.
+> **E' la forma piu' silenziosa del difetto che quel presidio esiste per impedire**, e va scritta
+> qui perche' la prossima volta la si riconosca: **il presidio verifica la PRESENZA, non il DELTA.**
