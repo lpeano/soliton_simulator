@@ -63,3 +63,31 @@
 ## RESPINTE
 
 *(nessuna)*
+
+---
+
+## `STANDARD 10` — **UNA CURA NON AUMENTA IL NUMERO DELLE LEGGI** *(criterio di Luca, 2026-09-25)*
+
+> ### **«Una cura non aumenta il numero delle leggi; a parità di effetto si preferisce togliere
+> ### un'eccezione.»**
+
+**IL CASO CHE L'HA GENERATO, ed è di oggi:** `NODI-1` proponeva di far allacciare i nodi nati in
+dinamica **con la stessa regola della semina** *(`R_CONN`)*. Sembrava *togliere* un'eccezione
+— «nessun nodo di seconda classe» — e invece **ne aggiungeva una di fisica**: avrebbe
+trasformato la mitosi da **creazione di spazio** *(il figlio non accorcia niente: la relazione fra
+i genitori passa da `1` a `2` passi)* in **addensamento** *(`~77` scorciatoie per figlio)*.
+
+> **La forma dell'errore:** una regola che rende **uniforme il CODICE** può rendere **non uniforme
+> la FISICA**. «Togliere un'eccezione» va misurato **sulle leggi**, non sui rami del programma.
+
+**COME SI APPLICA, operativamente:**
+
+1. **si conta:** quante leggi c'erano prima, quante dopo. Una cura che ne aggiunge una **deve
+   dire perché non si poteva togliere niente**;
+2. **a parità di effetto misurato, vince la variante con MENO leggi** — e «parità» significa
+   *entro la barra d'errore*, non a occhio;
+3. **un'eccezione che si toglie va verificata SULLA FISICA:** *che cosa cambia nel sistema*, non
+   *quante righe in meno ha il file*.
+
+**⚠ E NON È UN INVITO A NON CURARE:** `A12` resta — *un difetto dimostrato si cura*. Questo dice
+**come** si scegle fra due cure, non **se** curare.

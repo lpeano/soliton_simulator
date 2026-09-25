@@ -17083,3 +17083,42 @@ floating point viene da un `maximum`: è il segno che il pavimento ha MORSO.)*
 **⚠ DUE SEMI**, e il par.0-ter chiede `>= 4` per una barra. **Le classi sono calcolate al passo
 zero e tenute fisse**, per non mescolare la contrazione col rimescolamento delle coorti.
 **Solo misura, nessuna cura.**
+
+
+---
+
+# ❌ **`NODI-1` È RITIRATA**, e la direzione è la strada `(c)` *(Luca, 2026-09-25)*
+
+**Non cancellata: resta come storia, col motivo.**
+
+> ### **PERCHÉ È CADUTA, ed è una ragione DI FISICA, non di costo:**
+> allacciare il figlio entro `R_CONN` **trasformerebbe la mitosi da CREAZIONE DI SPAZIO in
+> ADDENSAMENTO**.
+>
+> Con il figlio legato **ai soli genitori**, la relazione fra i due genitori **passa da `1` a `2`
+> passi** e **il nuovo nodo non accorcia niente**: è **spazio nuovo**.
+> Con `R_CONN`, quel figlio aprirebbe **`~77` scorciatoie**, e il grafo **si addenserebbe invece
+> di crescere**.
+
+> ### ✅ **LA DIREZIONE DI LAVORO È LA STRADA `(c)`: il figlio nasce legato ai soli genitori.**
+> ### **Un nodo appena nato, DEBOLMENTE ACCOPPIATO, È FISICA.**
+> **E non è ancora una cura.**
+
+## ➕ `STANDARD 10` — il criterio di metodo, registrato accanto agli altri
+
+> **«Una cura non aumenta il numero delle leggi; a parità di effetto si preferisce togliere
+> un'eccezione.»**
+
+**E il caso che l'ha generato è proprio `NODI-1`:** sembrava *togliere* un'eccezione — «nessun
+nodo di seconda classe» — e invece **ne aggiungeva una di fisica**.
+**La forma dell'errore, che è la cosa da ricordare:** *una regola che rende uniforme il CODICE può
+rendere NON uniforme la FISICA*. «Togliere un'eccezione» va misurato **sulle leggi**, non sui rami
+del programma.
+
+## ⛔ E PRIMA DI QUALUNQUE CURA, TRE MISURE — in corso
+
+`1.` **`A13` alla nascita** *(un figlio nasce a `>= LAM` da TUTTI, o solo dai genitori?)* ·
+`2.` **la traiettoria dei figli** *(restano a grado `2`? `omega` rientra?)* ·
+`3.` **il limite di accoppiamento debole** *(a `k` piccolo, `omega = coppia/inerzia` esplode? se
+sì è un difetto della LEGGE, non del nodo, e vale qualunque strada si scelga)*.
+**Nessuna cura. Decide Luca dopo i numeri.**
