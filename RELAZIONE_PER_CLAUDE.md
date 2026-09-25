@@ -17304,3 +17304,54 @@ passo  60    12.71        passo 300    1.695
 **Il disordine non resta confinato nei nati: arriva agli originali.** *(Non so per quale via, e non
 lo indovino: potrebbe essere propagazione, o potrebbe essere che gli originali diventano vicini di
 nati. Va misurato, non dedotto.)*
+
+
+---
+
+# ❌❌ **`A13` ALLA NASCITA: LA MIA MISURA ERA SU `pos`, CIOÈ SUL DISEGNO** *(rilievo di Luca, 2026-09-25)*
+
+> *«`pos` è il disegno; la distanza fra due nodi è quella **LUNGO GLI ARCHI** — cammino minimo,
+> somma delle `d`. In questi termini il figlio dista `d/2` dai genitori e **di più** da tutti gli
+> altri: `A13` alla nascita equivale a «l'arco che si divide ha `d >= 2 LAM`» (= `U2`).»*
+
+**Ha ragione, e l'errore è di IMPOSTAZIONE, non di esecuzione: il mandato chiedeva `cKDTree` sulle
+posizioni, e io l'ho eseguito senza rilevare che `pos` non è la distanza del sistema.**
+**È `A3`** — il fronte per cui *il disegno deve uscire dalla dinamica* — **applicato a me stesso:
+ho misurato la geometria dell'embedding e l'ho chiamata `A13`.**
+
+## COSA RESTA E COSA CAMBIA
+
+| | |
+|---|---|
+| **la misura su `pos`** | **RESTA nel referto**, e si rilegge come **misura del DISEGNO**, non di `A13` |
+| *«figlio e antinodo COINCIDONO»* | **vale NEL DISEGNO.** **Lungo gli archi distano `d`**, e `d >= LAM` per costruzione |
+| **`A13` alla nascita** | è **`d_arco >= 2 LAM`**, perché il figlio nasce a `d/2` dai genitori — **cioè esattamente `U2`** |
+
+> ### ❗ **E QUESTO UNIFICA DUE VOCI CHE TENEVO SEPARATE:** `U2`/`M2` *(«la mitosi mette i figli
+> ### sotto `LAM`»)* **È** `A13` alla nascita. **Non sono due difetti: è uno, visto da due lati.**
+> **E il numero c'è già, misurato:** la frazione di archi sotto `2 LAM` al passo zero vale
+> **`0.2936`** *(scena `(a)`)* e **`0.2998`** *(`(b)`)*.
+
+**⚠ E LO SCHWINGER RESTA UN CASO A SÉ, per una ragione che è già in coda:** la `d` dei suoi archi
+nuovi viene da **`0.5·|pos[aa] − pos[bb]|`**, cioè **dal DISEGNO** — **la voce `A3`**. Quindi per
+lo Schwinger *«la distanza lungo gli archi»* **è essa stessa derivata da `pos`**, e la misura
+relazionale non lo affranca dal problema: **lo mostra.**
+
+---
+
+# ⛔ **CONTAGIO** — e la conseguenza operativa è immediata
+
+```
+|omega| MASSIMO, rapporto nati/originali:
+passo   5    39.17        passo 120    1.021
+passo  20    17.27        passo 200    0.8017
+passo  60    12.71        passo 300    1.695
+```
+
+> ### ⛔ **NESSUNA CORSA LUNGA PRIMA DELLA CURA DELL'INERZIA** *(decisione di Luca)*.
+> **Finché la legge dell'inerzia non è curata, ogni corsa lunga ne è CONTAMINATA.**
+> All'inizio il disordine sta **nei figli** *(grado `2`, dove la legge cede)*; **dal passo `120`
+> i due gruppi sono allo stesso livello**: **non resta confinato.**
+>
+> **⚠ E LA VIA NON È MISURATA:** propagazione, o gli originali che diventano **vicini di nati**?
+> **Va misurato, non dedotto** — ma **la conseguenza operativa non dipende da quale sia.**
