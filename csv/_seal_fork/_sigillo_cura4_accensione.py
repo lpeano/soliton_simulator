@@ -243,6 +243,86 @@ print("OK mitosi  n %d -> %d  nuovi %d" % (n_pre, net.n, nuovi.size))
 '''
 
 
+# ==========================================================================================
+# IL BRACCIO `lungo` — **`RAMPA-1`: la maturita' e' IRREVERSIBILE?** (criteri di Luca)
+# ------------------------------------------------------------------------------------------
+#   La prima stesura di `A2` guardava **il passo 1**, e con `eta = _tempo_rampa()` bastava:
+#   `ramp` era `1` in quell'istante. **Ma `ramp` e' un RAPPORTO fra due quantita' che si
+#   muovono entrambe**, e al passo 1 in configurazione del driver era gia' caduto a `0.846`.
+#   **Quindi il criterio nuovo non guarda UN passo: guarda OGNI passo per 120.**
+#   ⚠ **E il passo e' il PASSO PIENO** (`csv/_passo.py`): `net.step()` da solo **non e' un
+#   passo** — sono CINQUE chiamate, e misurare la dinamica con una sola e' un difetto gia'
+#   catalogato.
+#   ⚠ **I CALI SI CONTANO QUI, NON NEL SIMULATORE:** `_g_rampa_cali` e' **globale**, e i nati
+#   in dinamica **devono** salire da `0` — quindi un contatore globale non risponde alla
+#   domanda *«la rampa dei nodi della SEMINA e' mai scesa?»*. Il sigillo ha gli indici della
+#   semina e se li tiene: **aggiungere un contatore per-sottoinsieme sarebbe una legge in
+#   piu'** (`STANDARD 10`).
+FIGLIO_LUNGO = r'''
+import io, json, os, sys
+import numpy as np
+sys.path.insert(0, RAD)
+sys.path.insert(0, os.path.join(RAD, "csv"))
+import _cli_flag
+import _passo
+_argv, _scartate = _cli_flag.argv_per(SIM, ARGV if FLAG else _cli_flag.senza(ARGV, OPZ))
+S, _a_cli = _cli_flag.carica_dal_cli(_argv, nome="sim_c4l", sim=SIM)
+_CLI = {"flag": getattr(S, FLAGNOME, "ASSENTE"), "atteso": bool(FLAG),
+        "semina_lam": getattr(S, "SEMINA_LAM", "ASSENTE"),
+        "opz_nell_argv": OPZ in _argv, "argv_len": len(_argv),
+        "scartate": _scartate, "sim": os.path.basename(SIM)}
+S.net = S.Rete(SEME)
+S.test["dati"] = {}
+S._NMASSE_VIDEO["sep"] = float(SEP)
+S._MC_VIDEO["nodi"] = 0
+S._MC_VIDEO["fasi_casuali"] = False
+S._semina_masse_coerenti()
+net = S.net
+n0 = int(net.n)
+iniz = np.arange(n0)
+
+
+def _ramp(net):
+    _tr = net._tempo_rampa()
+    return np.minimum(1.0, np.asarray(net.eta, float) / _tr)
+
+
+r0 = _ramp(net)[iniz]
+o = dict(FLAG=bool(FLAG), CLI=_CLI, n0=n0, passi=int(PASSI),
+         eta0_inf=int(np.sum(~np.isfinite(np.asarray(net.eta, float)[iniz]))),
+         r0_min=float(r0.min()), r0_uguali1=int(np.sum(r0 == 1.0)))
+prec = r0.copy()
+peggio, cali, quando, nati_zero = 1.0, 0, -1, None
+traccia = []
+for _p in range(int(PASSI)):
+    _passo.passo_pieno(S, net)
+    r = _ramp(net)
+    ri = r[iniz]
+    if float(ri.min()) < peggio:
+        peggio = float(ri.min())
+    _c = int(np.sum(ri < prec - 0.0))
+    if _c:
+        cali += _c
+        if quando < 0:
+            quando = _p + 1
+    prec = ri.copy()
+    if nati_zero is None and net.n > n0:
+        _nuovi = np.arange(n0, net.n)
+        nati_zero = [int(_nuovi.size), float(r[_nuovi].max())]
+    if (_p + 1) % 20 == 0 or _p == 0:
+        traccia.append([_p + 1, int(net.n), float(ri.min()),
+                        int(np.sum(ri == 1.0)), int(cali)])
+o.update(peggio=float(peggio), cali=int(cali), quando=int(quando),
+         n_fine=int(net.n), traccia=traccia, nati_zero=nati_zero,
+         r_fine_min=float(_ramp(net)[iniz].min()),
+         r_fine_uguali1=int(np.sum(_ramp(net)[iniz] == 1.0)))
+io.open(os.path.join(TMPD, NOME + ".json"), "w", encoding="utf-8").write(json.dumps(o))
+print("OK %s  n %d -> %d  peggio %.15f  cali %d" % (NOME, n0, net.n, peggio, cali))
+'''
+
+PASSI_LUNGO = 120
+
+
 def braccio(nome, flag, maturi=None, sorgente=FIGLIO, sim=None, argv=None):
     """UN PROCESSO per braccio (`STANDARD 1`), configurato DAL CLI.
 
@@ -256,7 +336,8 @@ def braccio(nome, flag, maturi=None, sorgente=FIGLIO, sim=None, argv=None):
              "SEME = %d" % SEME, "SEP = %r" % SEP, "FLAG = %r" % flag,
              "MATURI_FORZATO = %r" % maturi, "SIM = %r" % (sim or SIM_HEAD),
              "ARGV = %r" % (ARGV if argv is None else argv),
-             "OPZ = %r" % OPZ, "FLAGNOME = %r" % FLAGNOME, ""]
+             "OPZ = %r" % OPZ, "FLAGNOME = %r" % FLAGNOME,
+             "PASSI = %d" % PASSI_LUNGO, ""]
     src = chr(10).join(testa) + sorgente
     p = os.path.join(TMP, "_br_" + nome + ".py")
     io.open(p, "w", encoding="utf-8", newline=chr(10)).write(src)
@@ -297,6 +378,13 @@ LOG.append("[prima] rc=%d %s  (il codice di prima e' %s^, e NON contiene %s)"
               FLAGNOME))
 if rr.returncode:
     LOG.append((rr.stderr or "")[-1400:])
+# I DUE BRACCI LUNGHI: ON e OFF, 120 passi PIENI. **L'OFF e' il NULLO**: senza, un
+#   `ramp = 1` non direbbe niente, perche' non si saprebbe quanto vale a flag spento.
+for _nl in ("lungo_on", "lungo_off"):
+    rr = braccio(_nl, _nl.endswith("_on"), None, FIGLIO_LUNGO)
+    LOG.append("[%s] rc=%d %s" % (_nl, rr.returncode, (rr.stdout or "").strip()[-110:]))
+    if rr.returncode:
+        LOG.append((rr.stderr or "")[-1400:])
 rr = braccio("mitosi", True, None, FIGLIO_MIT)
 LOG.append("[mitosi] rc=%d %s" % (rr.returncode, (rr.stdout or "").strip()[-150:]))
 if rr.returncode:
@@ -413,8 +501,34 @@ OK.append(crit("CLI", "il flag arriva DAL CLI (argv del driver) e NESSUN braccio
                             else "ASSEGNAZIONI A MANO TROVATE: %s" % ", ".join(_ast_dove))))
 P()
 
-# ---------------------------------------------------------------- A2
-OK.append(crit("A2", "al passo 1 `ramp == 1` su TUTTI i nodi della semina iniziale (ESATTO)",
+# ---------------------------------------------------------------- A2 (`RAMPA-1`)
+# I CRITERI SONO DI LUCA, e si scrivono qui perche' il vecchio `A2` guardava UN passo:
+#   `ramp == 1` su TUTTI i nodi della semina **a OGNI passo per 120 passi**; i **cali** sui
+#   soli nodi della semina **== 0**; un nato da mitosi **parte da 0**; flag spento
+#   **byte-identico** (`A1`).
+LU, LO = leggi("lungo_on"), leggi("lungo_off")
+_ok2 = (LU["peggio"] == 1.0 and LU["cali"] == 0
+        and LU["r_fine_uguali1"] == LU["n0"] and LU["eta0_inf"] == LU["n0"])
+OK.append(crit("A2", "`ramp == 1` su TUTTI i nodi della semina a OGNI passo per %d passi"
+               % LU["passi"], _ok2,
+               "ON : peggior `ramp` in %d passi  %.15f   (atteso 1 ESATTO)"
+               % (LU["passi"], LU["peggio"])
+               + chr(10) + "     CALI sui nodi della semina: %d   (atteso 0; primo al passo %s)"
+               % (LU["cali"], LU["quando"])
+               + chr(10) + "     `eta = +inf` su %d nodi su %d della semina"
+               % (LU["eta0_inf"], LU["n0"])
+               + chr(10) + "     a fine corsa `ramp == 1` su %d su %d   (n %d -> %d)"
+               % (LU["r_fine_uguali1"], LU["n0"], LU["n0"], LU["n_fine"])
+               + chr(10) + "OFF: peggior `ramp` %.15f   cali %d   <- IL NULLO: a flag spento"
+               % (LO["peggio"], LO["cali"])
+               + chr(10) + "     la rampa NON vale 1, e infatti `eta = +inf` su %d nodi"
+               % LO["eta0_inf"]
+               + chr(10) + "traccia ON  [passo, n, min ramp, uguali a 1, cali]:"
+               + chr(10) + chr(10).join("  %s" % x for x in LU["traccia"])))
+P()
+
+# ---------------------------------------------------------------- A2b (il passo 1, storico)
+OK.append(crit("A2b", "al passo 1 `ramp == 1` su TUTTI i nodi della semina iniziale (ESATTO)",
                ON["ramp1_iniz_min"] == 1.0 and ON["ramp1_iniz_uguali_1"] == ON["n0"],
                "ON : min %.15f  max %.15f   uguali a 1: %d su %d"
                % (ON["ramp1_iniz_min"], ON["ramp1_iniz_max"], ON["ramp1_iniz_uguali_1"], ON["n0"])
