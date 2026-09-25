@@ -15994,3 +15994,51 @@ lavoro che non le cercava.
 Ho scelto `tw = 1e3` e poi `1.2·PHI_CRIT`, **entrambi fuori dalla finestra**, prima di misurarla.
 **Due numeri scelti dal mio modello mentale invece che dal codice**, uno dopo l'altro, sullo stesso
 criterio — ed è esattamente ciò che il par.9 registra come *«un criterio si scrive DA UNA MISURA»*.
+
+---
+
+# ✅ SIGILLO `U2`: **11/11 PASS** — i contatori separati, collaudati su una mitosi vera *(2026-09-25)*
+
+*(`csv/_seal_fork/_sigillo_u2_contatori.py`, referto in `csv/_seal_fork/_sig_u2/`)*
+
+```
+CASO A RISPOSTA NOTA: un arco a 1.2 LAM si divide -> dh = 0.6 LAM, entrambi i figli troncati
+
+  _sm_lund_mitosi   = 0.6400000000000001   atteso 2*(LAM - 0.6 LAM) = 0.8 LAM
+  _sm_lund0_mitosi  = 0.6400000000000001   atteso idem
+  _sm_trd_mitosi    = 2                    atteso 2   (DUE archi veri, non uno)
+  _sm_trd0_mitosi   = 2                    atteso 2
+
+MODEL-FREE (U2-5), su ENTRAMBI i bracci:
+  d = 1.2 LAM   `d` array 4 / contatori 4      `d0` array 4 / contatori 4
+  d = 3.0 LAM   `d` array 2 / contatori 2      `d0` array 2 / contatori 2
+```
+
+**`U2-6`, il caso che DEVE fallire, fallisce:** la formula vecchia dava `0.32` su `d` invece di
+`0.64` — **sottoconto esatto di `2`** — e una somma mescolata di `0.96 = 1.2 LAM`, che non è in
+nessuna delle due unità.
+
+## ❗ IL RISULTATO CHE NON CERCAVO: `U2-10`, lo SCHWINGER NON LEGGE `d`
+
+```
+d = 1.2 LAM  ->  _sm_lund_schwinger = 0.6438369716111617
+d = 3.0 LAM  ->  _sm_lund_schwinger = 0.6438369716111617
+```
+
+**`d` cambia di un fattore `2.5` e la lunghezza fabbricata non si muove di un bit.** La lunghezza
+dei nuovi archi Schwinger viene da `0.5*|pos[aa] - pos[bb]|`, cioè **dal DISEGNO**.
+**È la voce `A3` della coda, MISURATA invece che letta dal codice.**
+
+## ⚠ TRE DICHIARAZIONI CHE HO DOVUTO CORREGGERE, tutte mie
+
+1. **«il sito `schwinger` non è collaudato»** — scritto PRIMA di girare, per prudenza: **è
+   collaudato**, quel ramo scatta nello stesso passo. Era una dichiarazione fatta sul mio modello
+   del test, non sul test.
+2. **tre criteri su undici erano sbagliati**, e tutti tre davano **FAIL su comportamento corretto**:
+   `U2-1` guardava `n`/`archi` totali *(ma scatta anche lo Schwinger)*, `U2-5` confrontava un sito
+   con tutti gli archi, `U2-7` pretendeva zero dove lo Schwinger tronca comunque.
+3. **due numeri scelti invece che misurati** per la torsione (`1e3`, poi `1.2·PHI_CRIT`), entrambi
+   **fuori dalla finestra di creazione**: la mitosi non scattava affatto.
+
+**Il valore dello Schwinger NON è a risposta nota:** è verificato contro l'ARRAY (`U2-5`) e contro
+l'altro braccio (`U2-10`), **mai contro un conto a mano**.

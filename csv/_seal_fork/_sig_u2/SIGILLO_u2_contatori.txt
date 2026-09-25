@@ -1,0 +1,93 @@
+====================================================================================================
+SIGILLO `U2` -- CONTATORI DI `_nasce` SEPARATI PER GRANDEZZA E PER SITO
+====================================================================================================
+
+[nuovo_12] rc=0
+OK nuovo_12 n 40 -> 42, archi 136 -> 139
+
+[nuovo_30] rc=0
+OK nuovo_30 n 40 -> 42, archi 136 -> 139
+
+[vecchio_12] rc=0
+OK vecchio_12 n 40 -> 42, archi 136 -> 139
+
+
+CONFIGURAZIONE (dai default del sorgente, dichiarata):
+  LAM = 0.800000000   TEMPO_UNICO_MITOSI = False   PLAST_DIN = False   PLAST_MIT = 0.0
+  PHI_CRIT = 6.283185307   TW_TETTO = 12.566370614   soglia0 = 9.424777961  (= 3 pi: TORS_4PI e' ON)
+  FINESTRA DI CREAZIONE, derivata dal codice: avv in (9.424778, 10.995574) = (1.500, 1.750) PHI_CRIT
+  tw dell'arco = 10.210176124 = 1.6250 PHI_CRIT  (IL MEZZO della finestra, non un numero scelto)
+  arco selezionato: d = 0.960000000 = 1.2000 LAM,  d0 = 0.960000000
+  n  40 -> 42      archi  136 -> 139
+
+I CONTATORI, come sono usciti:
+  _sm_lund0_mitosi           0.6400000000000001
+  _sm_lund0_schwinger        0.6438369716111617
+  _sm_lund_mitosi            0.6400000000000001
+  _sm_lund_schwinger         0.6438369716111617
+  _sm_trd0_mitosi            2
+  _sm_trd0_schwinger         2
+  _sm_trd_mitosi             2
+  _sm_trd_schwinger          2
+  _sm_visd0_mitosi           2
+  _sm_visd0_schwinger        2
+  _sm_visd_mitosi            2
+  _sm_visd_schwinger         2
+
+U2-1   PASS  nel sito `mitosi` si e' diviso UN SOLO arco (due archi figli)
+              visd0_mitosi = 2   visd_mitosi = 2   atteso 2 e 2
+              composizione del passo: n +2, archi +3 = UNA mitosi (+1 nodo, +1 arco netto) PIU' UNO SCHWINGER (+1 nodo, +2 archi)
+U2-2   PASS  `_sm_trd_mitosi` conta gli ARCHI VERI di `d`: DUE, non uno
+              misurato 2   atteso 2   (il difetto corretto era proprio il sottoconto x2)
+U2-3   PASS  `_sm_lund_mitosi` = 2*(LAM - d/2), a risposta nota
+              misurato 0.640000000000000
+              atteso    0.640000000000000  = 2*(0.800000 - 0.480000)
+U2-4   PASS  `_sm_lund0_mitosi` ha la sua chiave e il suo valore (e' QUELLO di `P-GONFIA`)
+              lund0 misurato 0.640000000000000   atteso 0.640000000000000
+              trd0 misurato 2   atteso 2
+U2-5   PASS  la SOMMA dei contatori su TUTTI i siti = gli archi che nell'ARRAY stanno a `LAM`
+              d = 1.2 LAM   `d` array 4 / contatori 4      `d0` array 4 / contatori 4
+              d = 3.0 LAM   `d` array 2 / contatori 2      `d0` array 2 / contatori 2
+              min(d) = 0.800000000   min(d0) = 0.800000000   (nessuno sotto LAM)
+              E' il criterio MODEL-FREE: legge gli array, non il mio conto.
+U2-6   PASS  IL CASO CHE DEVE FALLIRE: il criterio `U2-3` applicato alla formula VECCHIA da' FAIL
+              la vecchia, sullo STESSO evento, dava su `d`: 0.320000000000000
+              il criterio chiede                              0.640000000000000   -> scarto 0.320000000000000
+              e la sua SOMMA MESCOLATA valeva 0.960000000 = 1.2000 LAM, che non e' in NESSUNA delle due unita'.
+              Se questo criterio passasse sulla vecchia, non discriminerebbe la cura dal difetto.
+U2-7   PASS  il sito `mitosi` GIRA ma NON tronca, con `d = 3.0 LAM`: `lun` e `tr` a ZERO
+              nascite (INVOCAZIONI) = 3, e salgono comunque
+              visd_mitosi = 2, visd0_mitosi = 2   -> il sito HA girato
+              lun/tr del sito `mitosi` non nulli: NESSUNO
+              E' la ragione per cui i contatori esistono: `_g_sm_nascite` non distingue un'invocazione che tronca da una che non tronca.
+U2-8   PASS  BYTE-IDENTICO al codice di HEAD su `d` e `d0` (i contatori non toccano la fisica)
+              d  identico: True      d0 identico: True
+              CONTROLLO POSITIVO: `d` PRIMA della mitosi contro `d` DOPO, stesso braccio, DIVERSO: True
+              (senza, uno `identico` potrebbe essere un confronto cieco -- par.9)
+U2-9   PASS  le chiavi sono SEPARATE per grandezza (`d`/`d0`) e per sito
+              presenti: _sm_lund0_mitosi, _sm_lund0_schwinger, _sm_lund_mitosi, _sm_lund_schwinger, _sm_trd0_mitosi, _sm_trd0_schwinger, _sm_trd_mitosi, _sm_trd_schwinger, _sm_visd0_mitosi, _sm_visd0_schwinger, _sm_visd_mitosi, _sm_visd_schwinger
+              mancanti: NESSUNA
+U2-10  PASS  lo SCHWINGER fabbrica la STESSA lunghezza coi due `d`: NON legge `d`, legge `pos` (`A3`)
+              d = 1.2 LAM -> lund_schwinger = 0.6438369716111617
+              d = 3.0 LAM -> lund_schwinger = 0.6438369716111617
+              `d` cambia di un fattore 2.5, la lunghezza fabbricata NON si muove.
+              E' la voce `A3` della coda, MISURATA invece che letta: la lunghezza di un arco nuovo viene dal DISEGNO.
+U2-11  PASS  `_g_sm_nascite` = 3 invocazioni, e i SITI presenti le spiegano tutte
+              nascite = 3   attese 3: `dh` + `d0new` (mitosi) + `dd` (schwinger)
+              chiavi `_semina` presenti: NESSUNA  -> `_allaccia` NON e' stata chiamata dopo l'azzeramento, quindi il sito `semina` NON e' collaudato qui.
+
+====================================================================================================
+ESITO: 11/11 PASS
+====================================================================================================
+
+COSA QUESTO SIGILLO *NON* DICE, e va detto:
+  - IL SITO `schwinger` E' RISULTATO COLLAUDATO, contro la mia stessa dichiarazione: quel ramo
+    SCATTA nello stesso passo, e `U2-5`/`U2-10` lo misurano. Avevo scritto `non collaudato`
+    PRIMA di girare, per prudenza: era una dichiarazione fatta sul mio modello del test, non
+    sul test. La correggo qui invece di lasciarla, ed e' la stessa classe di errore dei
+    commenti scaduti. **MA il suo valore NON e' a risposta nota**: `U2-5` lo verifica
+    contro l'ARRAY, `U2-10` contro l'altro braccio; nessuno dei due contro un conto a mano.
+  - NON collauda il sito `semina`: dopo l'azzeramento `_allaccia` non viene chiamata, e
+    `U2-11` lo DICHIARA invece di lasciarlo implicito. Li' md=1/md0=1 e il conto e' banale,
+    ma banale non e' misurato.
+  - I default usati sono quelli del SORGENTE, non l'argv del driver: `TEMPO_UNICO_MITOSI = False`.
