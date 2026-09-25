@@ -237,3 +237,67 @@ ragionamento.**
 transitorio di `peq`, **quel transitorio è comunque ciò che il sistema vive ogni volta che nasce un
 nodo** — e i nodi nascono continuamente. **«È un ritardo» non significa «è innocuo»**: significa
 che la cura va messa **alla nascita**, non nella legge dell'inerzia.
+
+
+---
+
+# ④ ❗ **`R3 bis` — UN'INCOERENZA DI ESPONENTI DELLA RAMPA** *(lettura di Luca, verificata dal codice)*
+
+> **Per un figlio della mitosi:** la **COPPIA** è moltiplicata per `ramp` **una volta**, mentre
+> **`rho_s`** viene da archi pesati `ramp_i·ramp_j` **ed è un modulo QUADRO** → **`~ramp²`**; con
+> **`peq` ereditato dal genitore** *(che non scala con `ramp`)*, **`_contrasto ~ ramp²`** e quindi
+> **`omega ~ coppia/inerzia ~ 1/ramp`**.
+> **PREVISIONE: sui figli, `|omega| · ramp` ≈ COSTANTE durante la maturazione**, e `|omega|` che
+> **cala** mentre `ramp → 1`.
+
+**NESSUNA MISURA NUOVA: si verifica coi dati di `R3`.** *(Conseguenza operativa: `R3` deve
+raccogliere **anche `ramp` e `|omega|`** per ciascun figlio, oltre a `rho`, `peq` e `_contrasto`.
+Lo scrivo qui perché `R3` non è ancora implementato, e senza queste due colonne `R3 bis` non
+sarebbe verificabile.)*
+
+## LA VERIFICA DAL CODICE — **entrambi gli esponenti, riga per riga**
+
+| dove | riga | cosa dice |
+|---|---|---|
+| **il peso d'arco** | `:3850` | `base = exp(-d/lam) * ramp[self.i] * ramp[self.j]` → **il peso porta `ramp_i·ramp_j`** |
+| **`rho_s`** | `calcola_psi` | `psi_spin = _mat(w) @ (amp*_psp)`, poi `rho_spin = Re(conj(psi_spin)·psi_spin)` → **MODULO QUADRO** di una somma pesata → **`~ramp²`** |
+| **la coppia, 1° termine** | `:3241-3251` | `B` costruito con `w[mask]` **e poi `B = B / max(deg, 1e-9)`** → porta `ramp_i` **una volta** |
+| **la coppia, 2° termine** | `:3526`, `:3554` | `_tq = cross(_nb_grav(), nb)` *(una DIREZIONE, normalizzata: senza `ramp`)*, poi `_tq = _tq * ramp[:n]` → **`ramp` una volta, esplicito** |
+| **`peq` del figlio** | `:6226` | `peq[sel]` ereditato **esattamente**: **non scala con `ramp`** |
+
+> ### ✅ **LA DERIVAZIONE REGGE: coppia `~ramp¹`, `_contrasto ~ramp²`, quindi `omega ~ 1/ramp`.**
+> Ed è **pulita** perché **tutti e due** i termini della coppia portano `ramp` **una volta sola**:
+> il primo attraverso i pesi dentro `B`, il secondo scritto a mano a `:3554`.
+
+## 🎯 **E UN DETTAGLIO CHE RAFFORZA TUTTO IL QUADRO: `B = B / max(deg, 1e-9)`**
+
+**`B` è già una MEDIA sui vicini** *(diviso il grado)*, e `rho_s` **no**.
+
+> **Ecco perché la coppia ha misurato `-0.19 … -0.30`, cioè INTENSIVA:** non è un caso né una
+> fortuna, **è scritto nel codice a `:3251`**. **Il campo del nodo (`B`) è normalizzato sul
+> vicinato; il campo emesso (`rho_s`) non lo è.** L'asimmetria che ho chiamato «somma contro
+> media» ha quindi **una controprova interna**: nello stesso file, **lo stesso tipo di grandezza è
+> normalizzato in un posto e non nell'altro.**
+
+## SE `R3 bis` REGGE, COSA CAMBIA — e non è la stessa cura
+
+```
+estensivita'        -> si normalizza rho_s (tocca TUTTI i nodi, ~1/77)
+ritardo di peq      -> si cura peq ALLA NASCITA dei nuovi archi
+esponenti di ramp   -> si cura L'ESPONENTE: la coppia e l'inerzia devono portare
+                       LA STESSA potenza di `ramp`, e il difetto e' sui SOLI nodi
+                       che stanno maturando -- cioe' i nati in dinamica
+```
+
+> **Le tre letture non sono varianti della stessa cura: sono tre difetti diversi**, e **due di
+> esse ritirerebbero la variante pesata** *(che tocca tutti i nodi, per sempre)*.
+> **`R1`, `R3` e `R3 bis` si escludono a vicenda nei numeri**, ed è il motivo per cui vanno
+> misurati **insieme** e non uno alla volta.
+
+**COSA DISTINGUE `R3 bis` DA `R3`, perché sui figli agiscono entrambi:** `R3` dice *«il contrasto
+rientra quando `peq` si rilassa»* — un rientro **guidato dal tempo di `peq`**; `R3 bis` dice
+*«`|omega|·ramp` è costante»* — un rientro **guidato da `ramp`**. **Hanno due scale di tempo
+diverse** *(`tau_bg` contro il tempo-luce della rampa)*, quindi **il dato li separa**:
+se il prodotto `|omega|·ramp` è piatto **mentre** `peq` è ancora lontano dall'equilibrio, è
+`R3 bis`; se `|omega|` rientra **solo quando `peq` arriva**, è `R3`. **Se sono piatti entrambi,
+sono due difetti sovrapposti** — e va scritto così, non scelto.
