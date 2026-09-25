@@ -181,6 +181,84 @@ def sim_prima_del_flag(nome_flag, dest, radice=None):
     return introduce
 
 
+def _booleani(S):
+    return sorted(k for k, v in vars(S).items() if isinstance(v, bool) and k.isupper())
+
+
+_CACHE_DRV = []          # il modulo di riferimento, caricato UNA VOLTA per processo
+
+
+def scarto_dal_driver(S, argv=None):
+    """I booleani di modulo in cui `S` DIFFERISCE dalla configurazione del DRIVER.
+
+    Restituisce `(diverse, quanti_confrontati)`. **Il termine di paragone si costruisce
+    caricando il simulatore con l'argv VERA del driver**, non da un elenco a mano: una cura
+    nuova entra da se'.
+    **Si calcola UNA VOLTA per processo** (`_CACHE_DRV`), perche' costa un `exec` del driver.
+    """
+    if not _CACHE_DRV:
+        if argv is None:
+            _S0, argv = argv_del_driver([])
+        Sd, _ = carica_dal_cli(list(argv) + ["--nodi", "0"], nome="cfg_drv_p5")
+        _CACHE_DRV.append(Sd)
+    Sd = _CACHE_DRV[0]
+    nomi = _booleani(Sd)
+    div = [k for k in nomi if bool(getattr(S, k, None)) != bool(getattr(Sd, k))]
+    return div, len(nomi)
+
+
+def dichiara_configurazione(S, stampa, esenzione=None):
+    """**`P5`: un referto dichiara LA CONFIGURAZIONE INTERA, non i flag che ho toccato.**
+
+    *(Decisione di Luca, 2026-09-25, dopo `CONFIG-1`: sei misure erano state prese con
+    **28 leggi su 31 spente** — `FORK_SU2`, `CAMPO_SPINORIALE`, `CS_DINAMICO`… — e ogni
+    referto dichiarava solo i **quattro flag che avevo acceso io**. **Il flag era acceso, e
+    intorno a lui il sistema era spento.**)*
+
+    `stampa` e' la funzione con cui il referto scrive una riga (il solito `P`).
+    **Restituisce `True` se la configurazione E' quella del driver.**
+
+    ⚠ **Non dice «i flag sono giusti»: dice DOVE SI E' MISURATO.** Una misura fuori
+    configurazione non e' sbagliata — e' **la misura di un altro sistema** — e va letta cosi'.
+    """
+    div, quanti = scarto_dal_driver(S)
+    stampa("=" * 100)
+    stampa("LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI")
+    stampa("=" * 100)
+    stampa("  booleani di modulo confrontati con l'argv del DRIVER: %d" % quanti)
+    if not div:
+        stampa("  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su %d." % quanti)
+    else:
+        stampa("  -> FUORI CONFIGURAZIONE DEL DRIVER: %d differenze su %d" % (len(div), quanti))
+        for k in div:
+            stampa("       %-26s qui %-6s   driver %s"
+                   % (k, bool(getattr(S, k, None)), bool(getattr(cache_driver(), k))))
+        if esenzione:
+            stampa("  ESENZIONE DICHIARATA: %s" % esenzione)
+    stampa("")
+    return not div
+
+
+def cache_driver():
+    """Il modulo di riferimento (configurazione del driver), gia' caricato."""
+    return _CACHE_DRV[0]
+
+
+def esigi_configurazione(S, stampa, esenzione=None):
+    """**FUORI CONFIGURAZIONE DEL DRIVER SI FERMA** (decisione di Luca), salvo esenzione.
+
+    **Perche' e' uno STOP e non un avviso** (`A9`): un avviso in cima a un referto lungo
+    **non impedisce niente**, e `CONFIG-1` e' successo **con gli avvisi al loro posto** —
+    dichiaravo i flag accesi e la misura era di un altro sistema comunque.
+    **L'esenzione resta possibile ma obbliga a DICHIARARE**, come `[SENZA-RELAZIONE]`.
+    """
+    ok = dichiara_configurazione(S, stampa, esenzione)
+    if not ok and not esenzione:
+        stampa("STOP: misura FUORI configurazione del driver e senza esenzione dichiarata.")
+        raise SystemExit(3)
+    return ok
+
+
 def dichiara(S, nomi):
     """Le righe `STATO <nome> <valore>` per i flag richiesti, lette DAL MODULO."""
     return [(n, getattr(S, n, "ASSENTE")) for n in nomi]

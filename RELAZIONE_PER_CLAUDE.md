@@ -18049,3 +18049,77 @@ memoria del moto.
 > misura che la deciderebbe è *«quante di quelle 12 leggi cambiano risultato se al passo 0
 > ricevessero il `cs` del passo 1 invece di `CS_M`»* — un contrasto misurabile, non una
 > congettura.
+
+
+---
+
+# ✅ **`P3`, `P5`, `P8` SONO PRESIDI, NON PIÙ PROSA** *(2026-09-25, anticipati su ordine di Luca)*
+
+*(`csv/_hook_presidi.py`, hook `pre-commit`. Collaudo: **8/8**.)*
+
+| presidio | cosa IMPEDISCE | il difetto REALE da cui nasce, **di oggi** |
+|---|---|---|
+| **`P3`** | un **sigillo** che configura il modulo **a mano** invece di passare dal CLI | `CLI-1`: `7/7` e `8/8` **con i flag MORTI da riga di comando** |
+| **`P5`** | un referto che **non dichiara la configurazione INTERA** | `CONFIG-1`: sei misure con **28 leggi su 31 spente** |
+| **`P8`** | un confronto che prende **il codice di prima da `HEAD`** | `ANCORE-1`: **25 file**, e `A1` confrontava il ramo spento **con se stesso** |
+
+**LA VIA D'USCITA OBBLIGA A DICHIARARE** *(la forma di `[SENZA-RELAZIONE]`)*: `# ESENTE-P3:
+<motivo>` nel file, **e l'esenzione deve comparire in `doc/ESENZIONI_presidi.md`** — altrimenti
+**il commit fallisce comunque**. Così non se ne accumulano di invisibili.
+
+**IL MECCANISMO DI `P5` È UNA FUNZIONE, non una raccomandazione:**
+`_cli_flag.dichiara_configurazione(S, P)` confronta **tutti i 78 booleani di modulo** con la
+configurazione del **driver** *(costruita caricando il simulatore con l'argv vera, non da un
+elenco a mano)* e stampa **lo scarto INTERO**; `esigi_configurazione` **si ferma**
+(`SystemExit(3)`) se la misura è fuori configurazione e non c'è esenzione.
+**Perché uno STOP e non un avviso:** `CONFIG-1` è successo **con gli avvisi al loro posto**.
+
+## ❌ **E IL COLLAUDO HA TROVATO UN BUCO NEL MIO RILEVATORE — IL CASO CHE DEVE BLOCCARE**
+
+`blocca_P8` **non bloccava**: cercavo il nome *«vecchio/prima»* **solo nelle righe SEGUENTI**
+all'estrazione da `HEAD`, e `VECCHIO = ...` sta tipicamente **PRIMA**.
+
+> ### E LO STESSO BUCO ERA NELLO STRUMENTO CHE HA CONTATO I 39. **IL NUMERO CHE HO PUBBLICATO
+> ### STAMATTINA ERA UN SOTTOCONTO.**
+
+```
+                                      pubblicato    CORRETTO
+RIFERIMENTO «PRIMA» (scadono)             39            43
+DA GUARDARE A MANO                        10             9
+CURATO (ancorato al padre del commit)      6            12
+guardia del par.5-quinquies               31            27
+file di csv/ esaminati                   307           310
+```
+
+**Correzione, e vale per la voce `ANCORE-1`: sono 43 occorrenze, non 39.**
+*(I `CURATO` salgono da 6 a 12 per la stessa ragione: la finestra ora vede anche la riga
+`VECCHIO = ...` che precede una chiamata a `sim_prima_del_flag`.)*
+
+> **Questo è `P1-sexies` che paga in un giro:** *«il caso che DEVE fallire è il più
+> importante»*. Senza quel caso sintetico, avrei installato un presidio che **non blocca il
+> difetto per cui è stato scritto**, e avrei continuato a citare `39`.
+
+---
+
+# 📋 **`RAMPA-2`: LA CANDIDATA DI LUCA, REGISTRATA PRIMA DI LAVORARCI** *(2026-09-25)*
+
+*(Non eseguita: `RAMPA-1` è in corso e Luca ha detto di non interromperlo. Sta qui perché **una
+proposta che vive solo in chat, per chi legge il repo, non è mai stata fatta**.)*
+
+> **LA CANDIDATA:** **inizializzare la cache `_cs_nodo_prev` valutando LA STESSA LEGGE**
+> (`_cs_nodo`) **sullo stato iniziale, prima del primo passo.** Con `SEMINA_MATURA` il campo
+> esiste già al passo 0 (`ramp = 1`), quindi `I` e i pesi **ci sono**.
+
+**PERCHÉ È DERIVATA e non è un numero scelto:** non introduce un valore iniziale per `cs` — **usa
+la legge di `cs`**. È la stessa forma di `C7` *(il figlio eredita dal padre)* portata al caso in
+cui **un padre non c'è**: invece di ereditare, **si valuta**.
+
+**LA VERIFICA CHE DEVE PRECEDERLA, come Luca l'ha posta:**
+1. **CIRCOLARITÀ** — la legge di `cs` dipende da qualcosa che **al passo 0 non esiste**?
+   *(`cs = CS_M/(1+GAMMA*sqrt(I))` con la scala relazionale `_Lam = mean(I)`: se `I` al passo 0 è
+   già definito, non c'è circolo; se `I` dipendesse a sua volta da `cs`, sì.)*
+2. **ALTRI STATI «prec» NELLA STESSA CONDIZIONE** — `C7` (`_cs_nodo_prev`) e `C11`
+   (`_psi_spin_prec`) sono già stati curati **per la mitosi**: **lo sono anche per il passo 0?**
+3. **POI** la misura d'impatto — le 12 leggi restanti — **su questa candidata**, non su un `cs`
+   preso dal passo 1 a posteriori. *(La differenza conta: un `cs` preso dopo non è un `cs`
+   iniziale, è un'anticipazione impossibile.)*

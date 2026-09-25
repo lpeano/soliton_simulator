@@ -11,20 +11,21 @@
 > codice che gira sia committato (par.5-quinquies). **Quello si lascia in pace.**
 
 ```
-RIFERIMENTO «PRIMA»                        39
-DA GUARDARE A MANO                         10
-CURATO (ancorato al padre del commit)      6
-guardia del par.5-quinquies                31
+RIFERIMENTO «PRIMA»                        43
+DA GUARDARE A MANO                         9
+CURATO (ancorato al padre del commit)      12
+guardia del par.5-quinquies                27
 NON ANALIZZABILE                           1
-TOTALE occorrenze                          87
-file di csv/ esaminati                     307
+TOTALE occorrenze                          92
+file di csv/ esaminati                     310
 ```
 
-## RIFERIMENTO «PRIMA» — 39
+## RIFERIMENTO «PRIMA» — 43
 
 | file | riga | stringa |
 |---|---|---|
 | `csv/_seal_fork/_ab_chi_basc.py` | 93 | `cat-file` |
+| `csv/_seal_fork/_c1_semina_lam.py` | 60 | `Il blob `49fc54d2` dei BYTE GREZZI, estratto da `git` **in binar` |
 | `csv/_seal_fork/_c1_semina_lam.py` | 69 | `cat-file` |
 | `csv/_seal_fork/_sigillo_Z1c.py` | 125 | `cat-file` |
 | `csv/_seal_fork/_sigillo_anello.py` | 2 | `SIGILLO P0-P10 -- la cura dell'ANELLO ISTANTANEO in `ritmo()` (m` |
@@ -61,14 +62,17 @@ Criter` |
 | `csv/_seal_fork/_sigillo_tau_luce.py` | 2 | `SIGILLO di `--tau-luce` (FASE 2) -- T0..T5. **RIPARATO il 2026-0` |
 | `csv/_seal_fork/_sigillo_tau_luce.py` | 90 | `git cat-file -p IN BINARIO. RIFIUTA se non estraibile: NON degra` |
 | `csv/_seal_fork/_sigillo_tau_luce.py` | 244 | `estratti con `git cat-file -p` IN BINARIO -- mai `git checkout` ` |
+| `csv/_seal_fork/_sigillo_tau_luce.py` | 93 | `cat-file` |
 | `csv/_seal_fork/_sigillo_traccia_d0.py` | 2 | `SIGILLO DI `TRACCIA_D0` -- la strumentazione dei DICIANNOVE punt` |
 | `csv/_seal_fork/_sigillo_traccia_d0.py` | 118 | `cat-file` |
 | `csv/_seal_fork/_sigillo_traccia_peq.py` | 127 | `cat-file` |
+| `csv/_seal_fork/_sigillo_u2_contatori.py` | 174 | `cat-file` |
+| `csv/_seal_fork/_sigillo_u2_contatori.py` | 174 | `HEAD:soliton_simulator.py` |
 | `csv/_test_fork/_video_da_snapshot.py` | 2 | `IL VIDEO DAGLI SNAPSHOT -- si legge e si disegna, nient'altro.
 
 ` |
 
-## DA GUARDARE A MANO — 10
+## DA GUARDARE A MANO — 9
 
 | file | riga | stringa |
 |---|---|---|
@@ -81,9 +85,8 @@ Criter` |
 | `csv/_test_fork/_ricostruisci_config.py` | 183 | `cat-file` |
 | `csv/_test_fork/_ricostruisci_config.py` | 239 | `cat-file` |
 | `csv/_test_fork/_z129_inventario.py` | 31 | `\| **`csv/_test_fork/_ricostruisci_config.py`** \| **`%s`** \| `pyt` |
-| `csv/_test_fork/_z9_coorti.py` | 82 | `cat-file` |
 
-## CURATO (ancorato al padre del commit) — 6
+## CURATO (ancorato al padre del commit) — 12
 
 | file | riga | stringa |
 |---|---|---|
@@ -93,18 +96,22 @@ Criter` |
 | `csv/_ancore_prima.py` | 42 | `cat-file` |
 | `csv/_ancore_prima.py` | 42 | `git show` |
 | `csv/_cli_flag.py` | 146 | `Estrae in BINARIO il simulatore **PRECEDENTE all'introduzione di` |
+| `csv/_cli_flag.py` | 172 | `cat-file` |
+| `csv/_hook_presidi.py` | 235 | `g = subprocess.run(['git', 'cat-file', '-p', 'HEAD:soliton_simul` |
+| `csv/_hook_presidi.py` | 240 | `# l'ancora e' il PADRE del commit, non `HEAD:soliton_simulator.p` |
+| `csv/_hook_presidi.py` | 97 | `HEAD:` |
+| `csv/_hook_presidi.py` | 97 | `rev-parse HEAD` |
+| `csv/_hook_presidi.py` | 97 | `cat-file` |
 
-## guardia del par.5-quinquies — 31
+## guardia del par.5-quinquies — 27
 
 | file | riga | stringa |
 |---|---|---|
-| `csv/_cli_flag.py` | 172 | `cat-file` |
 | `csv/_presidio.py` | 79 | `HEAD:%s` |
 | `csv/_presidio.py` | 86 | `cat-file` |
 | `csv/_presidio.py` | 86 | `HEAD:%s` |
 | `csv/_seal_53c/_old_sim.py` | 2062 | `HEAD:` |
 | `csv/_seal_fork/_ab_chibasc/_sim_prima.py` | 3017 | `HEAD:` |
-| `csv/_seal_fork/_c1_semina_lam.py` | 60 | `Il blob `49fc54d2` dei BYTE GREZZI, estratto da `git` **in binar` |
 | `csv/_seal_fork/_sig_anom_simm/_sim_prima.py` | 3625 | `HEAD:` |
 | `csv/_seal_fork/_sig_chicoop/_sim_prima.py` | 3176 | `HEAD:` |
 | `csv/_seal_fork/_sig_coes_causale/_sim_prima.py` | 3586 | `HEAD:` |
@@ -118,9 +125,6 @@ Criter` |
 | `csv/_seal_fork/_sig_traccia_d0/_sim_prima.py` | 3129 | `HEAD:` |
 | `csv/_seal_fork/_sig_traccia_peq/_sim_committato.py` | 3359 | `HEAD:` |
 | `csv/_seal_fork/_sigillo_denominatore.py` | 67 | `HEAD:soliton_simulator.py` |
-| `csv/_seal_fork/_sigillo_tau_luce.py` | 93 | `cat-file` |
-| `csv/_seal_fork/_sigillo_u2_contatori.py` | 174 | `cat-file` |
-| `csv/_seal_fork/_sigillo_u2_contatori.py` | 174 | `HEAD:soliton_simulator.py` |
 | `csv/_seal_k2/_old_sim.py` | 1950 | `HEAD:` |
 | `csv/_stato_run.py` | 39 | `⚠ CORRETTA IL 2026-09-21: STAMPAVA UNA CONVENZIONE E NE DICHIARA` |
 | `csv/_test_fork/_limite_accoppiamento/_sim_diag.py` | 4404 | `HEAD:` |
@@ -129,6 +133,7 @@ Criter` |
 | `csv/_test_fork/_ricostruisci_config.py` | 2 | `LA RICOSTRUZIONE DELLA CONFIGURAZIONE DEI RUN GIA' FATTI -- tabe` |
 | `csv/_test_fork/_ricostruisci_config.py` | 151 | `L'identita' del simulatore A QUEL COMMIT, dicendo QUALE delle du` |
 | `csv/_test_fork/_ricostruisci_config.py` | 169 | `cat-file` |
+| `csv/_test_fork/_z9_coorti.py` | 82 | `cat-file` |
 
 ## NON ANALIZZABILE — 1
 

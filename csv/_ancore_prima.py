@@ -23,6 +23,12 @@ incerti si stampano come **DA GUARDARE A MANO** invece di essere assolti.
 
 ASCII puro. Sola lettura.
 """
+# ESENTE-P5: strumento di analisi STATICA. Non importa il simulatore e non lo fa girare:
+#   legge SORGENTI per AST. **Non esiste una «configurazione» in cui questa misura sia stata
+#   presa**, quindi dichiararla sarebbe una riga vuota -- e `P5` esiste per impedire le
+#   dichiarazioni vuote, non per aggiungerne una. *(Il presidio ha rifiutato per primo questo
+#   file, il 2026-09-25, ed era il caso giusto da guardare: la differenza fra «misura del
+#   sistema» e «lettura del codice» non la puo' fare un euristico su `DEST`.)*
 import ast
 import io
 import os
@@ -75,8 +81,12 @@ def esamina(p):
             continue
         # il RUOLO: si guarda la riga intera e le due dopo, dove finisce cio' che si estrae
         righe = t.split(NL)
+        # ⚠ ANCHE INDIETRO (corretto il 2026-09-25): guardando solo in avanti questo
+        #   strumento **sottocontava**, perche' `VECCHIO = ...` sta tipicamente **PRIMA**
+        #   dell'estrazione. L'ha trovato il **collaudo** di `csv/_hook_presidi.py`, sul caso
+        #   sintetico che DEVE bloccare (`P1-sexies`).
         i = max(0, (nd.lineno or 1) - 1)
-        intorno = NL.join(righe[i:i + 4]).lower()
+        intorno = NL.join(righe[max(0, i - 3):i + 4]).lower()
         if any(x in intorno for x in NOMI_PRIMA):
             ruolo = "CURATO (ancorato al padre del commit)" if curato else "RIFERIMENTO «PRIMA»"
         elif "sha1" in intorno or "blob" in intorno or "hash" in intorno or "==" in intorno:
