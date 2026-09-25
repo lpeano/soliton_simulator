@@ -26,6 +26,7 @@ import sys
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(_QUI, "..")))
+import _cli_flag
 import _presidio
 
 _presidio.avvia(__file__)
@@ -67,27 +68,16 @@ INVOCAZIONI = {
 
 def figlio():
     """Percorre la strada VERA del driver e dichiara lo stato del modulo. Senza fisica."""
-    os.chdir(RADICE)
-    t = io.open(DRIVER, encoding="utf-8").read()
-    # si esegue il driver fino ALLA RIGA DOPO `_applica_flag`, poi si esce: il taglio e'
-    # sull'ANCORA `_applica_flag(a)`, cercata nel testo INTERO (`STANDARD 9`), non su una riga.
-    anc = "S._applica_flag(a)"
-    assert t.count(anc) == 1, "ancora non unica nel driver: %d" % t.count(anc)
-    testa = t[:t.index(anc) + len(anc)]
-    # si cattura l'argv COSTRUITA DAL DRIVER: e' `sys.argv` nel momento in cui chiama
-    # `_cli()`, cioe' subito prima dell'ancora. Si aggiunge una riga al testo eseguito,
-    # invece di ricostruirla -- **ricostruirla sarebbe una SECONDA formula per la stessa
-    # cosa**, ed e' l'errore che questo repo insegue.
-    testa += "\n_ARGV_SIM = list(sys.argv)\n"
-    g = {"__name__": "__main__", "__file__": DRIVER}
-    vecchio = list(sys.argv)
-    sys.argv = (["_scena_video.py", "1", os.path.join(DEST, "_scarto")]
-                + INVOCAZIONI[sys.argv[2] if len(sys.argv) > 2 else "NUDA"])
-    try:
-        exec(compile(testa, DRIVER, "exec"), g)
-    finally:
-        sys.argv = vecchio
-    S = g.get("S") or sys.modules["soliton_simulator"]
+    # [FATTORIZZATO il 2026-09-25, `CLI-1`] La cattura dell'argv del driver sta ora in
+    #   `csv/_cli_flag.py`, perche' **i sigilli di `CURA 4` e `CURA 5` devono percorrere LA
+    #   STESSA strada**. Due implementazioni della stessa cattura sarebbero **due formule per
+    #   la stessa cosa**, e questo repo ha gia' pagato quell'errore piu' volte.
+    #   **La tecnica non cambia**: si esegue il TESTO del driver fino all'ancora
+    #   `S._applica_flag(a)` (cercata nel testo intero, `STANDARD 9`) e si CATTURA la
+    #   `sys.argv` che il driver ha costruito, invece di ricostruirla.
+    modo = sys.argv[2] if len(sys.argv) > 2 else "NUDA"
+    S, _argv_sim = _cli_flag.argv_del_driver(INVOCAZIONI[modo],
+                                             dest=os.path.join(DEST, "_scarto"))
     for nome in sorted(set(obbligatorie()) | set(_flag_delle_cure())):
         sys.stdout.write("STATO %s %s\n" % (nome, getattr(S, nome, "ASSENTE")))
     # [3, richiesta di Luca 2026-09-24] L'INTERA ARGV che il driver ha costruito per il
@@ -97,8 +87,7 @@ def figlio():
     # controllo delle orfane doveva impedire, e che non poteva vedere.**
     # Si dichiara l'argv INTERA, e il confronto fra le due invocazioni non ha piu' una lista
     # a cui essere fedele.
-    for k, v in enumerate(g.get("_ARGV_SIM") or sys.modules["soliton_simulator"].__dict__
-                          .get("_argv_mai", []) or []):
+    for k, v in enumerate(_argv_sim):
         sys.stdout.write("ARGV %d %s\n" % (k, v))
     return 0
 
