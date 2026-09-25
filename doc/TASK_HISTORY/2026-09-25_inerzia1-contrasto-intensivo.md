@@ -93,3 +93,85 @@ stringhe non le cercava, **non me l'avrebbe detto**.
 - [ ] referto + relazione + voce di coda, **nello stesso commit** del riscontro
 - [ ] **`STANDARD 10` verificato, non asserito:** contare le leggi prima/dopo nel sito
 - [ ] poi **`CONFIG-1` b) chi comprime `d0`** (ordine di Luca)
+
+
+---
+
+# ② **LA VARIANTE PESATA** — criteri fissati PRIMA di misurare *(decisione di Luca, 2026-09-25)*
+
+> **`rho_s` si normalizza sulla SOMMA DEI PESI del nodo** *(quella di `_mat(w)`)*, **non sul
+> conteggio.** Stesso flag. **Nessun numero nuovo.**
+> *(La versione per conteggio **non è nel driver** e **resta nel registro come tentativo
+> misurato**: toglieva esattamente `−1.0000` di pendenza e non bastava.)*
+
+**DOVE VIVE, e perché non serve niente di nuovo:** `w` è **già un parametro** di
+`_passo_spinoriale` (`def _passo_spinoriale(self, i, j, w, dt_n, …)`), ed è **lo stesso `w`** che
+`calcola_psi` passa a `_mat(w)` per costruire `psi_spin`. La somma per nodo è
+`np.bincount(i, w) + np.bincount(j, w)`, cioè **la somma di riga di `_mat(w)`** — la grandezza che
+il campo del nodo usa già.
+
+## ⚠ **UN'OSSERVAZIONE DI STRUTTURA CHE INDEBOLISCE LA MIA STESSA PREVISIONE, e la scrivo PRIMA**
+
+Leggendo `calcola_psi`:
+
+```
+psi_spin = (_mat(w) @ (amp * _psi_spinor)) / (1 + GAMMA*|…|)
+rho_spin = Re( conj(psi_spin) . psi_spin )          <- IL MODULO QUADRO
+```
+
+> ### **`rho_s` non è una somma pesata: è il QUADRATO di una somma pesata.**
+> Se `psi_spin ∼ W` *(la somma dei pesi)*, allora **`rho_s ∼ W²`**.
+
+**Conseguenza, e va detta ORA perché dopo sembrerebbe una scusa:** dividere per `W` **una volta**
+toglie **una** potenza di `W` — esattamente come dividere per il conteggio toglieva una potenza di
+`k`. **Se la dipendenza è quadratica, la variante pesata potrebbe NON portare il residuo sotto
+`0.7`**, e la forma coerente sarebbe **`rho_s / W²`**.
+
+**NON la anticipo e non la implemento:** Luca ha deciso `W`, e **la misura dirà se basta**. Ma il
+mio `C1''` — *«la differenza scende sotto `0.7` nel taglio corti»* — **ha ora una ragione
+strutturale per fallire**, e se fallisce **non sarà una sorpresa: sarà questa**.
+*(La differenza fra le due letture è misurabile: se `rho_s ∼ W²`, la variante `W` deve togliere
+**una** potenza e lasciare un residuo ≈ a quello di oggi meno uno; se `rho_s ∼ W`, deve azzerarlo.
+**Il numero distingue le due ipotesi**, ed è per questo che la misura vale anche se `C1''` cade.)*
+
+## I CRITERI, **come Luca li ha fissati**, prima dei numeri
+
+| | criterio | nota |
+|---|---|---|
+| **`C1'`** | pendenza su `log k` del **CONTRASTO** uguale a quella della **COPPIA** entro lo spread fra semi, **in tutti e 4 i bracci** | **`T2` ESCLUSO**, e il perché è dichiarato qui sotto |
+| **`C1''`** | **la mia previsione falsificabile**: differenza di pendenza **inerzia−coppia < 0.7** nel taglio **«corti»** | **se non passa, la diagnosi «residuo dai pesi» è sbagliata e LO SI SCRIVE** |
+| **`C2`** | `|omega|(k=2)/|omega|(k=77)` **< 3** in tutti i bracci | **il `3` è una SCELTA** per *«stesso ordine»*, **dichiarata** |
+| **`C3`** | flag spento **byte-identico al padre del commit del flag** (`P8`) | |
+| **`C4`** | **CORRETTO da Luca**: braccio spento generato **togliendo l'opzione**, e su di esso **`C1'` NON passa**. **Nessuna soglia propria.** | vedi sotto |
+| **`C5`** | il pavimento `1e-6` | quante volte morde |
+| **`C6`** | scala dell'inerzia su **tutti** i nodi | mediana, `p5`, `p95` |
+
+### **PERCHÉ `T2` È ESCLUSO DA `C1'`** *(dichiarazione richiesta da Luca)*
+
+`T2 = (d_nodo/cs_nodo)²` **dipende da `k` in questa misura per la GEOMETRIA DEL TAGLIO, non per
+estensività**: togliere i **lunghi** accorcia `d_nodo` *(pendenza `+0.44`)*, togliere i **corti**
+lo allunga *(`−0.15`)*. **È l'ascissa che cambia la geometria, non la legge che scala col grado.**
+Quindi mettere `T2` dentro il criterio misurerebbe **il taglio**, non l'incoerenza.
+**`C1'` guarda `_contrasto` contro `COPPIA`**, che sono i due termini che *devono* avere la stessa
+estensività. *(E `C1''` resta sull'**inerzia** intera, perché è lì che il difetto arriva a `omega`:
+i due criteri guardano due cose diverse, ed è voluto.)*
+
+### **`C4` È STATO CORRETTO, E NON È UN ALLENTAMENTO** *(decisione di Luca)*
+
+```
+VECCHIA FORMA (mia, 2026-09-25, sigillo 3/6):
+    il braccio spento e' generato togliendo l'opzione
+    E  min(|Δpend| OFF) > max(|Δpend| ON) * 3.0        <- UNA SOGLIA PROPRIA
+
+FORMA CORRETTA (Luca):
+    il braccio spento e' generato togliendo l'opzione
+    E  su di esso `C1'` NON passa                      <- NESSUNA soglia propria
+```
+
+**PERCHÉ la vecchia era sbagliata:** quel `* 3.0` **duplicava `C1`** con una soglia più stretta, e
+infatti `C4` è fallito **per la stessa ragione di `C1`** — `max(ON) = 1.64` contro
+`min(OFF) = 1.71`, rapporto `1.04`. **Un criterio che fallisce per il fallimento di un altro non
+sta misurando niente di suo: sta contando due volte lo stesso fatto.**
+**E la correzione la fa Luca, non io, e non dopo aver visto i numeri di una misura nuova:** la
+vecchia forma è scritta qui sopra perché **un criterio corretto senza che si veda quello di prima
+è un criterio senza provenienza.**
