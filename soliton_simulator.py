@@ -8104,6 +8104,17 @@ def _applica_flag(a):
     #   driver non poteva accenderla, e una cura che nessun run accende e' un ramo morto.
     RITMO_WRAP_2PI = bool(getattr(a, "ritmo_wrap_2pi", False))  # cura D34: default off, il driver la accende
     TEMPO_UNICO_MITOSI = bool(getattr(a, "tempo_unico_mitosi", False))  # CURA 2: default off
+    # [CURA 4 e CURA 5] QUI, dove sta il `global`. Prima erano in `esegui_headless`, cioè
+    #   in un'altra funzione, quindi LOCALI e INERTI: i flag da riga di comando erano MORTI.
+    SEMINA_MATURA = bool(getattr(a, "semina_matura", False))   # [CURA 4]
+    if SEMINA_MATURA:
+        print("[cura4] SEMINA_MATURA ON: i nodi della semina iniziale nascono MATURI, e la "
+              "rampa usa `_tempo_luce_nodo` invece di TAU_A (che resta la sola vita media "
+              "spinoriale).")
+    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+    if MITOSI_2LAM:
+        print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` (`A13` alla "
+              "nascita). Lo Schwinger NON e' toccato.")
     SEMINA_LAM = bool(getattr(a, "semina_lam", False))  # cura della semina: default off
     TW_SPINORE = bool(getattr(a, "tw_spinore", False))     # torsione 4pi -> Bloch (doppia copertura): default off
     # [CURA 1b, decisione di Luca 2026-09-24] IL PONTE INVERSO E' IMPEDITO, non sconsigliato.
@@ -8458,14 +8469,17 @@ def esegui_headless(a):
     # l'inquadratura R si adatta all'estensione reale dei nodi (vedi update: R = max|pos|).
     # [SCENA (ii)] `--mc-nodi 0` = SATURAZIONE (il default). Il braccio di controllo di
     # `P-GONFIA` passa qui il numero MISURATO dal braccio acceso, per avere lo STESSO `n`.
-    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
-    if MITOSI_2LAM:
-        print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` (`A13` alla "
-              "nascita). Lo Schwinger NON e' toccato.")
-    SEMINA_MATURA = bool(getattr(a, "semina_matura", False))   # [CURA 4]
-    if SEMINA_MATURA:
-        print("[cura4] SEMINA_MATURA ON: i nodi della semina iniziale nascono MATURI, e la rampa "
-              "usa `_tempo_luce_nodo` invece di TAU_A (che resta la sola vita media spinoriale).")
+    # ❌❌ LE DUE ASSEGNAZIONI STAVANO QUI, E I FLAG ERANO MORTI. Il `global` è dichiarato in
+    #   `_applica_flag`, ma le assegnazioni erano in `esegui_headless`: **due funzioni
+    #   diverse**, quindi qui erano VARIABILI LOCALI e il flag di modulo restava `False`.
+    #   **`--semina-matura` e `--mitosi-2lam` NON FUNZIONAVANO DA RIGA DI COMANDO.**
+    #   ⚠ E I DUE SIGILLI PASSAVANO UGUALMENTE, perche' impostavano `S.SEMINA_MATURA = True`
+    #   **direttamente sul modulo**: non hanno mai provato il percorso CLI.
+    #   Trovato dal SIGILLO DEL DRIVER (`MITOSI_2LAM False/False` in NUDA e CAMPAGNA).
+    #   ✅ Le assegnazioni sono ora in `_applica_flag`, dove sta il `global` e dove stanno
+    #   tutti gli altri flag. **E il commento che avevo scritto accanto al `global` diceva
+    #   esattamente questo rischio: «senza questo l'assegnazione sarebbe una LOCALE, cioè
+    #   INERTE IN SILENZIO». L'ho scritto e poi l'ho fatto.**
     _MC_VIDEO["nodi"] = int(getattr(a, "mc_nodi", 0) or 0)
     _MC_VIDEO["fasi_casuali"] = bool(getattr(a, "mc_fasi_casuali", False))
     _NMASSE_VIDEO["n"] = max(2, int(getattr(a, "nmasse", 2)))

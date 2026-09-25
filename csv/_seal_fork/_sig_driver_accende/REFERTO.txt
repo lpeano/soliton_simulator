@@ -26,14 +26,18 @@ DUE INVOCAZIONI, e la differenza fra loro e' il punto:
   COES_CAUSALE             True       True       **DEVE essere True in ENTRAMBE** -> PASS
   FASE_2PI                 False      False      **ESCLUSA, deve restare False** -> PASS
   INVARIANTI               True       True       **DEVE essere True in ENTRAMBE** -> PASS
+  MITOSI_2LAM              True       True       **DEVE essere True in ENTRAMBE** -> PASS
   PEQ_ESATTO               True       True       **DEVE essere True in ENTRAMBE** -> PASS
   PEQ_NASCITA_LOCALE       True       True       **DEVE essere True in ENTRAMBE** -> PASS
   RITMO_WRAP_2PI           True       True       **DEVE essere True in ENTRAMBE** -> PASS
   SCALA_MIN_PASSO          True       True       **DEVE essere True in ENTRAMBE** -> PASS
+  SEMINA_LAM               False      False      **ESCLUSA, deve restare False** -> PASS
+  SEMINA_MATURA            True       True       **DEVE essere True in ENTRAMBE** -> PASS
   TEMPO_UNICO_MITOSI       True       True       **DEVE essere True in ENTRAMBE** -> PASS
-
-  CURE OBBLIGATORIE: 10   ESCLUSE: 1   ORFANE: 0
+  ================================================================================================  `S5` -- LA SCENA DI DEFAULT DEL DRIVER E' COMPATIBILE CON `SEMINA_LAM`?  ================================================================================================     vuoto di default: `semina(900)` in raggio 4.000000    LAM = 0.800000     con `SEMINA_LAM` acceso: RIFIUTA     saturazione vera: 455 nodi   contro 900 chiesti     -> ⛔ **INCOMPATIBILE.** Accendere `SEMINA_LAM` nel driver ROMPEREBBE ogni        scena che semina il vuoto di DEFAULT. E non si aggira con un numero,        perche' **LA CAPIENZA DIPENDE DAL SEME** (misurato: 12807/12783/12812/12790).        ✅ E' compatibile con la scena `(ii)`, che semina a `--nodi 0` e costruisce        il vuoto da se' fino a SATURAZIONE.        ⚠ PER QUESTO `SEMINA_LAM` E' FRA LE `ESCLUSE`, **e non per merito**: e' un        CONFLITTO DI SCENA. **La decisione e' di Luca, e questo criterio mette il        numero davanti invece di nascondere l'esclusione.**
+  CURE OBBLIGATORIE: 12   ESCLUSE: 2   ORFANE: 0
     escl. FASE_2PI             NON e' approvata: la sua prova la BOCCIA (`Z127`, `2/4`, `E1` non passa -- mitosi `62` -> `1` evento). Il driver NON deve accenderla.
+    escl. SEMINA_LAM           APPROVATA, ma la scena di DEFAULT del driver RIFIUTA: `900` nodi in raggio `4.0` contro una saturazione vera di `455`. Compatibile SOLO con la scena `(ii)` a `--nodi 0`. **Non e' un'esclusione per merito: e' un conflitto di scena, e va deciso.**
 
   ✅ **NUDA = CAMPAGNA su tutte le obbligatorie: UN SOLO MODO DI LANCIARE.**
      Nessuna cura approvata si puo' piu' dimenticare da riga di comando.
@@ -46,14 +50,14 @@ L'ARGV INTERA: NUDA contro CAMPAGNA -- **non solo le cure**
   -- il caso esatto che il controllo delle orfane doveva impedire e non poteva vedere.
   **Qui il confronto non ha piu' una lista a cui essere fedele.** (Rilievo di Luca.)
 
-  NUDA     (38 elementi)
-  CAMPAGNA (38 elementi)
+  NUDA     (40 elementi)
+  CAMPAGNA (40 elementi)
 
   ✅ **NESSUNA DIFFERENZA: le due argv COINCIDONO opzione per opzione.**
   (elementi solo in CAMPAGNA: 0, solo in NUDA: 0 -- conteggio grezzo)
 
 ============================================================================================
-ESITO: 12/12 (obbligatorie + escluse + orfane + argv intera)
+ESITO: 15/15 (obbligatorie + escluse + orfane + argv intera)
 ============================================================================================
 *** IL DRIVER LE ACCENDE. ***
 

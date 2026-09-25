@@ -741,6 +741,32 @@ avvertimento.**
 
 **La legge sta nella scheda `accensione-campo`.**
 
+### ❌❌ `--semina-matura` E `--mitosi-2lam` ERANO MORTI: assegnati in una funzione, `global` in un'altra *(2026-09-25)*
+
+Il `global SEMINA_MATURA` e il `global MITOSI_2LAM` sono in **`_applica_flag`**, ma **le
+assegnazioni erano in `esegui_headless`**: due funzioni diverse, quindi là erano **variabili
+LOCALI** e il flag di modulo restava `False`.
+
+> ### ⛔ **I DUE FLAG NON FUNZIONAVANO DA RIGA DI COMANDO.**
+> ### ⚠ **E I DUE SIGILLI PASSAVANO UGUALMENTE**, perché impostavano `S.SEMINA_MATURA = True`
+> ### **direttamente sul modulo: non hanno mai provato il percorso CLI.**
+> **`7/7` e `8/8` restano validi per la LEGGE, ma non dicevano niente sul FLAG.**
+>
+> **L'ha trovato il SIGILLO DEL DRIVER** *(`MITOSI_2LAM False/False` in NUDA e CAMPAGNA)*: senza
+> il mandato di aggiungerli al driver, **il difetto sarebbe restato invisibile fino alla prima
+> campagna.**
+>
+> **E il commento accanto al `global` diceva esattamente questo rischio** — *«senza questo
+> l'assegnazione sarebbe una LOCALE, cioè INERTE IN SILENZIO»*. **Scritto, e poi fatto.**
+> **È la famiglia di `VERSO_CHI` e `TW_SPINORE`: un flag che non fa ciò che dichiara è peggio di
+> un flag assente.**
+
+**✅ CURA: le tre assegnazioni** *(`SEMINA_MATURA`, `MITOSI_2LAM`, `SEMINA_LAM`)* **stanno ora in
+`_applica_flag`**, verificato dall'AST. **Sigillo del driver: `15/15`.**
+
+**⛔ E RESTA IN CODA:** i sigilli di `CURA 4` e `CURA 5` **vanno rifatti passando dal CLI**,
+altrimenti quel percorso resta non provato.
+
 ### ➕ `--mitosi-2lam` in `_cli` / `_applica_flag` *(CURA 5, 2026-09-25)*
 
 | flag | default | byte-inerte a default? |
@@ -3061,6 +3087,13 @@ il braccio di controllo **non può leggersi `n` da solo** e lo riceve.
 frazione di archi sotto `2 LAM`)*: **non dipende dalla mitosi.**
 **Il giro resta sospeso** finché la **soglia della mitosi** non è una **legge derivata**: `3π` è
 **un numero tarato a posteriori nell'epoca 1** — vedi la scheda `mitosi-schwinger` e `SCALE-TW`.
+
+### ➕ `esegui_headless` NON assegna più i flag di cura *(2026-09-25)*
+
+Le assegnazioni di `SEMINA_MATURA` e `MITOSI_2LAM` **erano qui**, e con il `global` in
+`_applica_flag` erano **variabili locali inerti**. Ora `esegui_headless` tiene **solo** ciò che
+è suo: `_MC_VIDEO` e `_NMASSE_VIDEO`, che sono **dizionari** e non hanno bisogno di `global`.
+**La regola che ne esce: un flag di modulo si assegna DOVE sta il suo `global`, e mai altrove.**
 
 ### ➕ `CURA 5` E LA SCENA `(ii)`: la cura si accende dal driver *(2026-09-25)*
 

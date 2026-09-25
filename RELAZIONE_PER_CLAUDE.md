@@ -17516,3 +17516,88 @@ potrebbe essere molto più basso»*.
 > ### **`300` PASSI NON LO ESCLUDONO, e il sigillo non pretende di averlo escluso.**
 > **La verifica richiede una corsa lunga, e `CONTAGIO` la vieta finché l'inerzia non è curata.**
 > **Le due cose sono in sequenza, non in parallelo.**
+
+
+---
+
+# ❌❌❌ **`--semina-matura` E `--mitosi-2lam` ERANO MORTI: DUE CURE APPROVATE CHE NON SI ACCENDEVANO** *(2026-09-25)*
+
+Il `global SEMINA_MATURA` e il `global MITOSI_2LAM` sono dichiarati in **`_applica_flag`**, ma
+**le assegnazioni erano in `esegui_headless`** — **due funzioni diverse**. Là erano **variabili
+LOCALI**, e il flag di modulo **restava `False`**.
+
+> ### ⛔ **I DUE FLAG NON FUNZIONAVANO DA RIGA DI COMANDO.**
+>
+> ### ⚠ **E I DUE SIGILLI PASSAVANO UGUALMENTE** — perché impostavano
+> ### **`S.SEMINA_MATURA = True` direttamente sul modulo**, e **non hanno mai provato il percorso
+> ### CLI.** **`7/7` e `8/8` restano validi per la LEGGE, ma non dicevano niente sul FLAG.**
+
+## ✅ L'HA TROVATO IL SIGILLO DEL DRIVER, e senza il mandato di Luca sarebbe restato invisibile
+
+```
+MITOSI_2LAM      False   False    **DEVE essere True in ENTRAMBE** -> *** FAIL ***
+SEMINA_MATURA    False   False    **DEVE essere True in ENTRAMBE** -> *** FAIL ***
+```
+
+**I due flag erano nell'argv del driver e non arrivavano.** **Il presidio ha fatto il suo
+mestiere**, e **senza la decisione di aggiungerli al driver il difetto sarebbe uscito alla prima
+campagna** — cioè dopo ore di run su due cure spente.
+
+## ❗ E IL COMMENTO CHE AVEVO SCRITTO IO DICEVA ESATTAMENTE QUESTO RISCHIO
+
+Accanto al `global` avevo scritto: *«senza questo l'assegnazione sarebbe una LOCALE, cioè INERTE
+IN SILENZIO»*. **L'ho scritto, e poi l'ho fatto** — mettendo l'assegnazione **da un'altra parte.**
+**È la famiglia di `VERSO_CHI` e `TW_SPINORE`: un flag che non fa ciò che dichiara è peggio di un
+flag assente.**
+
+**✅ CURA, verificata dall'AST:** le **tre** assegnazioni *(`SEMINA_MATURA`, `MITOSI_2LAM`,
+`SEMINA_LAM`)* stanno ora in **`_applica_flag`**.
+**LA REGOLA CHE NE ESCE: un flag di modulo si assegna DOVE STA IL SUO `global`, e mai altrove.**
+
+---
+
+# ✅ SIGILLO DEL DRIVER: **15/15** — e un criterio nuovo che MISURA un conflitto
+
+```
+CURE OBBLIGATORIE 12    ESCLUSE 2    ORFANE 0
+NUDA = CAMPAGNA su tutte le obbligatorie: UN SOLO MODO DI LANCIARE
+argv: 40 elementi in ENTRAMBE, nessuna differenza opzione per opzione
+```
+
+**Le tre cure approvate sono nella lista** *(`CURE` passa da `11` a `14`)*, e **`SEMINA_MATURA` e
+`MITOSI_2LAM` sono nel driver**, accese in ogni run.
+
+## ⛔ `S5` — **`SEMINA_LAM` È INCOMPATIBILE CON LA SCENA DI DEFAULT DEL DRIVER**, misurato
+
+```
+vuoto di default:  semina(900) in raggio 4.000000        LAM = 0.800000
+con `SEMINA_LAM`:  RIFIUTA
+saturazione vera:  455 nodi   contro 900 chiesti
+```
+
+> **Accendere `SEMINA_LAM` nel driver ROMPEREBBE ogni scena che semina il vuoto di default.**
+> **E non si aggira con un numero, perché la capienza DIPENDE DAL SEME** *(misurato:
+> `12807/12783/12812/12790`)* — **è l'errore che Luca ha già preso.**
+> **✅ È compatibile con la scena `(ii)`**, che semina a `--nodi 0` e costruisce il vuoto da sé
+> fino a saturazione.
+
+> ### ⚠ **PER QUESTO `SEMINA_LAM` È FRA LE `ESCLUSE`, E NON PER MERITO: È UN CONFLITTO DI SCENA.**
+> **E `S5` MISURA il conflitto e lo mette nel referto**, invece di nasconderlo dietro
+> un'esclusione silenziosa: **se un giorno la scena di default diventasse compatibile, `S5` lo
+> direbbe e `SEMINA_LAM` andrebbe TOLTA dalle escluse.** **La decisione è di Luca.**
+
+## ❌ E UN DIFETTO MIO CHE L'ASSERT DI UNICITÀ **NON HA PRESO**
+
+Le tre voci erano finite in **`SPEGNIMENTI`** invece che in **`CURE`**, perché avevo usato
+`("GRAV_BIFASE"` come ancora **credendola l'ultima voce di `CURE`**, e invece è **la prima di
+`SPEGNIMENTI`**.
+
+> **L'ancora era UNICA e puntava al posto sbagliato.** **Un `assert` di unicità non verifica che
+> l'ancora sia QUELLA GIUSTA** — è il complemento di `P1-quater`, che copre il caso opposto
+> *(un'ancora non unica)*. **Se ne è accorto il conteggio** *(`CURE: 11` invece di `14`)*, cioè
+> **un controllo sul RISULTATO, non sulla sostituzione.**
+
+## ⛔ RESTA IN CODA
+
+**I sigilli di `CURA 4` e `CURA 5` vanno rifatti PASSANDO DAL CLI**, altrimenti quel percorso
+resta non provato — ed è esattamente il percorso che la campagna usa.
