@@ -1,0 +1,95 @@
+==========================================================================================================================
+**DOVE STA `omega` ESTREMO** — e la traiettoria del braccio SPENTO, che mancava
+==========================================================================================================================
+
+  passo = scuoti_vuoto() -> step() -> mitosi() -> rilassa_disegno() -> memoria_hebbiana_moto()   (letto per AST da `update()` e verificato contro il driver)
+  scena (ii) (b), 120 passi, 2 semi, DUE bracci. Costo basso, per mandato.
+
+  ❌ IL MIO CRITERIO ERA TROPPO LARGO, e Luca ha ragione: avevo chiesto «crescita in >= 95 %
+     dei passi» e con 0.023-0.143 ho concluso «non diverge». **Ma una successione puo'
+     crescere di x1000 salendo a scatti e scendendo spesso**: la monotonia e' SUFFICIENTE
+     per la divergenza, NON NECESSARIA. Il criterio giusto guarda IL LIVELLO, non la forma.
+
+[mat_s11] rc=0 _CONN 2.400000
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK mat_s11  max|omega| finale 2365.44
+[mat_s12] rc=0 _CONN 2.400000
+[scena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK mat_s12  max|omega| finale 1205.27
+[spe_s11] rc=0 _CONN 2.400000
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK spe_s11  max|omega| finale 201.034
+[spe_s12] rc=0 _CONN 2.400000
+[scena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK spe_s12  max|omega| finale 216.864
+
+--------------------------------------------------------------------------------------------------------------------------
+A. LA TRAIETTORIA NEI DUE BRACCI — **il nullo è lo SPENTO**, e mancava
+--------------------------------------------------------------------------------------------------------------------------
+  passo   max|omega|                 mediana |omega|            max|phivel|           
+          MATURO       SPENTO        MATURO       SPENTO        MATURO     SPENTO     
+  1       1.7251       1.71853       0.611178     0.608747      1.15442    1.14874    
+  5       1853.39      1.69122       0.611483     0.598511      3.24866    2.25229    
+  20      1746.9       2.01023       0.61283      0.564913      12.4389    6.82336    
+  60      1490.12      120.984       0.620022     0.497486      15.6551    9.38878    
+  120     1785.36      208.949       0.646579     0.46528       15.205     7.61769    
+
+  MATURO   rapporto max|omega| (passo 120 / passo 1), per seme: 1412, 678.9
+  SPENTO   rapporto max|omega| (passo 120 / passo 1), per seme: 120.4, 122.7
+
+  -> MATURO x1046   contro   SPENTO x121.6      rapporto fra i due = 8.602
+     ** LA CRESCITA C'E' ANCHE A CAMPO SPENTO: NON VIENE DALLA `CURA 4`. **
+     Il nullo dice che questo `omega` sale comunque, e la `CURA 4` non e' la causa.
+
+--------------------------------------------------------------------------------------------------------------------------
+B. DOVE STANNO — il top 0.1 %% per `|omega|`, contro TUTTI i nodi
+--------------------------------------------------------------------------------------------------------------------------
+  braccio MATURO
+    passo  top n  |omega| top  eta  (top / tutti)       ramp (top / tutti)       al pavimento (t/T)     dentro massa (t/T)  
+    1      5      1.63802      0.9086 / 0.9079          1.0000 / 1.0000          0.0000 / 0.0013        0.0000 / 0.0492     
+    20     5      682.538      0.1158 / 1.081           0.2567 / 1.0000          0.0000 / 0.0003        0.0000 / 0.0490     
+    60     5      808.795      0.4928 / 1.453           0.7115 / 1.0000          0.0000 / 0.0000        0.0000 / 0.0490     
+    120    5      960.569      0.7395 / 1.986           0.9270 / 1.0000          0.0000 / 0.0002        0.0000 / 0.0490     
+
+    passo  rho (top / tutti)        grado (top / tutti)      nati dopo 0 (t/T)      isolati top       
+    1      3.247 / 2.856            75.0 / 77.0              0.0000 / 0.0013        0.0000            
+    20     0.0222 / 3.088           2.0 / 77.0               1.0000 / 0.0040        0.0000            
+    60     0.04 / 1.639             2.0 / 77.0               1.0000 / 0.0043        0.0000            
+    120    0.06728 / 1.414          2.0 / 77.0               0.9000 / 0.0056        0.0000            
+
+  braccio SPENTO
+    passo  top n  |omega| top  eta  (top / tutti)       ramp (top / tutti)       al pavimento (t/T)     dentro massa (t/T)  
+    1      5      1.63112      0.01 / 0.01              0.0002 / 0.0002          1.0000 / 1.0000        0.0000 / 0.0492     
+    20     5      1.54117      0.1845 / 0.1906          0.0037 / 0.0038          1.0000 / 1.0000        0.0000 / 0.0489     
+    60     5      53.1854      0.3332 / 0.5583          0.0067 / 0.0112          1.0000 / 1.0000        0.0000 / 0.0488     
+    120    5      124.52       0.3859 / 1.098           0.0077 / 0.0220          1.0000 / 0.9885        0.0000 / 0.0487     
+
+    passo  rho (top / tutti)        grado (top / tutti)      nati dopo 0 (t/T)      isolati top       
+    1      6.226e-15 / 5.239e-15    75.0 / 77.0              0.0000 / 0.0008        0.0000            
+    20     2.288e-10 / 2.41e-10     75.0 / 77.0              0.0000 / 0.0062        0.0000            
+    60     1.901e-09 / 1.639e-08    33.0 / 77.0              0.5000 / 0.0085        0.0000            
+    120    3.982e-09 / 2.018e-07    2.0 / 76.5               0.8000 / 0.0102        0.0000            
+
+--------------------------------------------------------------------------------------------------------------------------
+C. LA LETTURA — confrontando top e tutti, e i due bracci
+--------------------------------------------------------------------------------------------------------------------------
+  MATURO, al passo 120:
+     APPENA NATI?             top 0.9000  tutti 0.0056   arricchimento x161   <- i nodi nati DOPO il passo zero sono sovrarappresentati nel top
+     INERZIA AL PAVIMENTO?    top 0.0000  tutti 0.0002   arricchimento x0   
+     DENTRO LE MASSE?         top 0.0000  tutti 0.0490   arricchimento x0   
+     `ramp` del top: 0.9270 contro 1.0000 di tutti   (`1` = maturo)
+     `rho` del top: 0.06728 contro 1.414 di tutti
+
+  SPENTO, al passo 120:
+     APPENA NATI?             top 0.8000  tutti 0.0102   arricchimento x78.5   <- i nodi nati DOPO il passo zero sono sovrarappresentati nel top
+     INERZIA AL PAVIMENTO?    top 1.0000  tutti 0.9885   arricchimento x1.01   
+     DENTRO LE MASSE?         top 0.0000  tutti 0.0487   arricchimento x0   
+     `ramp` del top: 0.0077 contro 0.0220 di tutti   (`1` = maturo)
+     `rho` del top: 3.982e-09 contro 2.018e-07 di tutti
+
+COSA QUESTO NON DICE:
+  - DUE SEMI e 120 passi: non e' una barra d'errore, ed è di proposito (costo basso).
+  - NON dice se `omega` DIVERGA: dice DOVE sta il suo estremo. Il criterio sul LIVELLO
+    va riscritto, e questo è il materiale per scriverlo da una misura invece che da un modello.
+  - `nati dopo 0` usa l'INDICE del nodo come proxy dell'eta': vale perche' i nodi si
+    APPENDONO, ma **la mitosi RIMUOVE archi, non nodi**, quindi l'indice resta un proxy buono.

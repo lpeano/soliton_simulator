@@ -16864,3 +16864,89 @@ _g_rampa_prec_disallineata  33 / 45 / 43 / 44      shape tipica [4313, 4314]
 più `0.018`**, sullo `0.05 %` dei casi. **E il disallineamento dell'array diagnostico capita a ogni
 MITOSI** *(shape `[4313, 4314]`: un nodo di differenza)* — **dichiarato, contato, e senza
 conseguenze sulla legge.**
+
+
+---
+
+# ✅ **`omega` ESTREMO È LOCALIZZATO: SONO I FIGLI DELLA MITOSI** — e il mio candidato è ESCLUSO *(2026-09-25)*
+
+*(`csv/_test_fork/_dove_sta_omega.py`, referto in `csv/_test_fork/_dove_sta_omega/`, scena `(ii)`
+`(b)`, `120` passi, `2` semi, **due bracci**. Costo basso, per mandato.)*
+
+## ❌ PRIMA DI TUTTO: **IL MIO CRITERIO ERA TROPPO LARGO, e Luca ha ragione**
+
+Avevo chiesto *«crescita in `>= 95 %` dei passi»*, e con `0.023`-`0.143` ho concluso *«non
+diverge»*. **Ma una successione può crescere di `×1000` salendo a scatti e scendendo spesso: la
+monotonia è SUFFICIENTE per la divergenza, non NECESSARIA.** **Il criterio giusto guarda il
+LIVELLO, non la forma.**
+
+## A. IL NULLO — e mancava: **la crescita c'è ANCHE A CAMPO SPENTO**
+
+```
+passo   max|omega|                mediana |omega|              max|phivel|
+        MATURO      SPENTO        MATURO      SPENTO           MATURO   SPENTO
+  1     1.7251      1.71853       0.611178    0.608747         1.15442  1.14874
+  5     1853.39     1.69122       0.611483    0.598511         3.24866  2.25229
+ 20     1746.9      2.01023       0.61283     0.564913        12.4389   6.82336
+ 60     1490.12     120.984       0.620022    0.497486        15.6551   9.38878
+120     1785.36     208.949       0.646579    0.46528         15.205    7.61769
+
+rapporto (passo 120 / passo 1):   MATURO  ×1046      SPENTO  ×121.6      fra i due: ×8.6
+```
+
+> ### ✅ **LA CRESCITA NON VIENE DALLA `CURA 4`: c'è anche a campo spento** *(`×121.6`)*.
+> **La `CURA 4` la AMPLIFICA di `×8.6`, non la crea.**
+>
+> ### ❗ E C'È UNA COSA PIÙ IMPORTANTE, che la mediana dice e il massimo nascondeva:
+> **LA MEDIANA DI `|omega|` È PIATTA** *(`0.611 → 0.647` in `MATURO`)* **e in `SPENTO`
+> DIMINUISCE** *(`0.609 → 0.465`)*.
+> **Quindi non è il sistema che accelera: sono POCHI NODI ESTREMI.** E in `MATURO` il massimo
+> **salta una volta al passo `5`** *(`1.7 → 1853`)* **e poi sta su un plateau** *(`1747`, `1490`,
+> `1785`)*: **non cresce, è SALTATO.**
+
+## B. DOVE STANNO — il top `0.1 %` *(5 nodi)*, con l'ARRICCHIMENTO contro tutta la popolazione
+
+| | top | tutti | arricchimento |
+|---|--:|--:|--:|
+| **nati DOPO il passo zero** | **`0.90`** | `0.0056` | **`×161`** |
+| **grado** | **`2.0`** | `77.0` | **`1/38`** |
+| **`rho` (la densità sorgente)** | **`0.0673`** | `1.414` | **`1/21`** |
+| inerzia AL PAVIMENTO `1e-6` | **`0.0000`** | `0.0002` | **`×0`** |
+| dentro le masse | **`0.0000`** | `0.0490` | **`×0`** |
+| `ramp` | `0.927` | `1.0000` | — |
+
+> ### ✅ **SONO I FIGLI DELLA MITOSI, E IL CODICE LO DICE:** *«il figlio nasce al PUNTO MEDIO
+> ### dell'arco con ESATTAMENTE due archi, verso entrambi i genitori»* — **grado `2`**, contro
+> ### `77` della popolazione. **E `0.90` del top è nato dopo il passo zero, contro `0.0056`.**
+>
+> **E la catena è quella del par.9, misurata:** `omega = coppia/inerzia`, e un figlio nasce con
+> **densità `21×` più bassa** → `omega` schizza. **Non è una legge che diverge: è un nodo appena
+> nato con due soli archi in una regione rada.**
+>
+> **E STANNO NEL VUOTO, non nelle masse** *(`0.0000` contro `0.0490`)*.
+
+## ❌❌ IL CANDIDATO CHE AVEVO DICHIARATO È **ESCLUSO** nel braccio maturo
+
+Nel task history avevo scritto, come candidato per la diagnosi: *«l'INERZIA BLOCCATA AL PAVIMENTO
+— `inerzia = max(_rho_sorgente(), 1e-6)`, misurata attiva sul `99.7 %` dei nodi (par.9)»*.
+
+```
+al pavimento, MATURO:   top 0.0000     tutti 0.0002        <- NON morde
+al pavimento, SPENTO:   top 1.0000     tutti 0.9885        <- morde su TUTTI
+```
+
+> ### **A CAMPO MATURO IL PAVIMENTO NON MORDE AFFATTO** *(`rho = 0.067 ≫ 1e-6`)*: **il mio
+> ### candidato è falso lì.** È vero nel braccio SPENTO, dove `rho ~ 4e-9` e **tutti** i nodi
+> ### stanno al pavimento — cioè nel regime in cui il par.9 l'aveva misurato.
+>
+> **Avevo dichiarato il candidato prima della misura, e la misura lo esclude. Lo scrivo così.**
+> **La `CURA 4`, alzando `rho` di sette ordini, ha TOLTO il pavimento di mezzo** — ed è un
+> effetto che non avevo previsto.
+
+## ⛔ COSA RESTA DA DECIDERE
+
+**Il criterio sul LIVELLO va riscritto**, e ora c'è il materiale per scriverlo **da una misura**:
+la mediana è piatta, il massimo salta una volta e plateau. **Un criterio sul massimo è un criterio
+su cinque nodi su `4300`**; uno sulla mediana direbbe *«niente»*.
+**La domanda vera che ne esce: un figlio di mitosi con grado `2` e densità `21×` più bassa è un
+nodo LEGITTIMO o un difetto della mitosi?** **Non la decido io.**
