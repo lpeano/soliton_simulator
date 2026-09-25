@@ -1,0 +1,111 @@
+======================================================================================================================
+**CHI COMPRIME `d0`** — bilancio PER SCRITTORE, e uniforme o differenziale?
+======================================================================================================================
+
+  passo = scuoti_vuoto() -> step() -> mitosi() -> rilassa_disegno() -> memoria_hebbiana_moto()   (letto per AST da `update()` e verificato contro il driver)
+  scena (ii) (b), 120 passi, 2 semi, campo MATURO e SPENTO, freno ON come il driver.
+
+[mat_s11] rc=0 n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK mat_s11  med d0 1.884270 -> 1.200422   archi 148237 -> 148260
+[mat_s12] rc=0 n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK mat_s12  med d0 1.884964 -> 1.206300   archi 151142 -> 151181
+[spe_s11] rc=0 n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK spe_s11  med d0 1.884270 -> 0.800000   archi 148237 -> 148302
+[spe_s12] rc=0 n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK spe_s12  med d0 1.884964 -> 0.800000   archi 151142 -> 151187
+
+----------------------------------------------------------------------------------------------------------------------
+1. LA CONTRAZIONE, e `P-GONFIA` NON HA OGGETTO
+----------------------------------------------------------------------------------------------------------------------
+  MATURO   med d0  1.884617 -> 1.203361  (spread fra semi 5.9e-03)   variazione -36.15 %
+  SPENTO   med d0  1.884617 -> 0.800000  (spread fra semi 5.4e-08)   variazione -57.55 %
+  `P-GONFIA` prevede una CRESCITA e una soglia «meno della meta' di +47.28 %».
+  -> **NELLA SCENA (ii) `d0` NON CRESCE: SI CONTRAE. IL CRITERIO NON HA UN OGGETTO.**
+     Non e' «passato»: misura una crescita che non c'e'. **REGISTRATO.**
+
+----------------------------------------------------------------------------------------------------------------------
+2. IL BILANCIO PER SCRITTORE (somma su TUTTI gli archi, cumulativa su 120 passi)
+----------------------------------------------------------------------------------------------------------------------
+  braccio MATURO:
+    sito               giri     delta TOTALE   solo POSITIVI  solo NEGATIVI  concat  
+    P1_dopo_rilass     120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
+    P2_dopo_spinta     112      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
+    P3_dopo_proj       120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
+    P4_dopo_grav       120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
+    P6_dopo_coesione   120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
+    P7_dopo_4917       120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
+    S01_archi_nuovi    1        +0.000000e+00  +0.000000e+00  +0.000000e+00  1       
+    S02_rilass_visco   120      +4.532450e+04  +5.695193e+04  -1.162743e+04  0       
+    S05_spinta_locale  112      +1.872824e-03  +1.872824e-03  +0.000000e+00  0       
+    S06_mitosi         12       +0.000000e+00  +0.000000e+00  +0.000000e+00  12      
+    S07_schwinger      5        +0.000000e+00  +0.000000e+00  +0.000000e+00  5       
+    S08_proj           120      +1.059420e+03  +8.596189e+04  -8.490247e+04  0       
+    S10_grav_med       120      -5.554499e+02  +1.245030e+05  -1.250584e+05  0       
+    S12_coesione       120      -7.332203e+05  +2.056006e+05  -9.388210e+05  0       
+    SOMMA scrittori (`S*`) = -6.873919e+05      SOMMA pavimenti (`P*`) = +0.000000e+00
+    CRESCITA VERA di `sum(d0)` = -7.852849e+04
+    RESIDUO = crescita vera - (scrittori + pavimenti) = +6.088634e+05
+    -> il bilancio NON CHIUDE: c'e' uno scrittore NON TRACCIATO, ed e' il risultato
+
+  braccio SPENTO:
+    sito               giri     delta TOTALE   solo POSITIVI  solo NEGATIVI  concat  
+    P1_dopo_rilass     120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
+    P2_dopo_spinta     100      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
+    P3_dopo_proj       120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
+    P4_dopo_grav       120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
+    P6_dopo_coesione   120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
+    P7_dopo_4917       120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
+    S01_archi_nuovi    1        +0.000000e+00  +0.000000e+00  +0.000000e+00  1       
+    S02_rilass_visco   120      +6.567036e+04  +6.567036e+04  -1.119607e-03  0       
+    S05_spinta_locale  100      +6.893163e-04  +6.893163e-04  +0.000000e+00  0       
+    S06_mitosi         24       +0.000000e+00  +0.000000e+00  +0.000000e+00  24      
+    S07_schwinger      10       +0.000000e+00  +0.000000e+00  +0.000000e+00  10      
+    S08_proj           120      -5.699806e+02  +4.872576e+04  -4.929574e+04  0       
+    S10_grav_med       120      -2.978660e+03  +8.438168e+04  -8.736034e+04  0       
+    S12_coesione       120      -8.528372e+06  +7.276977e+05  -9.256070e+06  0       
+    SOMMA scrittori (`S*`) = -8.466251e+06      SOMMA pavimenti (`P*`) = +0.000000e+00
+    CRESCITA VERA di `sum(d0)` = -1.339239e+05
+    RESIDUO = crescita vera - (scrittori + pavimenti) = +8.332327e+06
+    -> il bilancio NON CHIUDE: c'e' uno scrittore NON TRACCIATO, ed e' il risultato
+
+----------------------------------------------------------------------------------------------------------------------
+3. UNIFORME O DIFFERENZIALE? — il criterio era scritto prima
+----------------------------------------------------------------------------------------------------------------------
+  braccio MATURO   (confrontabile: True)
+    classe           archi     med ini      med fin      variazione  
+    dentro-massa     3800      1.755109     1.131953     -35.51       %
+    fra-masse        0          NON MISURATO (meno di 10 archi, o non confrontabile)
+    massa-vuoto      9762      2.003228     1.216287     -39.28       %
+    vuoto-vuoto      136128    1.878403     1.204362     -35.88       %
+
+  braccio SPENTO   (confrontabile: True)
+    classe           archi     med ini      med fin      variazione  
+    dentro-massa     3800      1.755109     0.800000     -54.42       %
+    fra-masse        0          NON MISURATO (meno di 10 archi, o non confrontabile)
+    massa-vuoto      9762      2.003228     0.800000     -60.06       %
+    vuoto-vuoto      136128    1.878403     0.800000     -57.41       %
+
+  MATURO   escursione fra classi = 3.78 punti percentuali
+           la classe che si contrae PIU' e': **massa-vuoto** (-39.28 %)
+           -> DIFFERENZIALE, ma la classe che si contrae piu' NON e' `fra-masse`:
+              non e' l'avvicinamento fra masse. Va detto cosi'.
+  SPENTO   escursione fra classi = 5.65 punti percentuali
+           la classe che si contrae PIU' e': **massa-vuoto** (-60.06 %)
+           -> DIFFERENZIALE, ma la classe che si contrae piu' NON e' `fra-masse`:
+              non e' l'avvicinamento fra masse. Va detto cosi'.
+
+----------------------------------------------------------------------------------------------------------------------
+4. IL PAVIMENTO CHE MORDE — frazione di archi a `d0 == LAM` ESATTO, a fine corsa
+----------------------------------------------------------------------------------------------------------------------
+  MATURO   a `LAM` ESATTO: 0.005565 (spread 4.6e-03)    entro 1.01 LAM: 0.097287    min(d0) = 0.800000000
+  SPENTO   a `LAM` ESATTO: 0.342577 (spread 1.4e-02)    entro 1.01 LAM: 0.678930    min(d0) = 0.800000000
+  (`d0 == LAM` esatto e' il segno che il PAVIMENTO ha MORSO, non che la fisica si e'
+   fermata li': un'uguaglianza esatta in floating point viene da un `maximum`.)
+
+COSA QUESTO NON DICE:
+  - DUE SEMI: par.0-ter `P3` chiede >= 4 per una barra. Con 2, t(0.025,1) = 12.706.
+  - le CLASSI sono calcolate al passo ZERO e tenute FISSE: se le si ricalcolasse a ogni
+    passo si mescolerebbe la contrazione col rimescolamento delle coorti. **Ma la MITOSI
+    RIMUOVE l'arco diviso**, quindi gli indici possono slittare: la colonna «confrontabile»
+    dice se il confronto e' stato fatto, e dove non lo e' si legge NON MISURATO.
+  - SOLO MISURA. Nessuna cura, per mandato.

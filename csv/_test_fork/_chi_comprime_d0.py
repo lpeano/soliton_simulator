@@ -100,6 +100,40 @@ def _wrap(self, sito, prima, pavimento=None):
 
 S.Rete._traccia_d0 = _wrap
 
+# ❌❌ IL BILANCIO NON CHIUDEVA, ED ERA UNA MIA OMISSIONE, NON UN RISULTATO.
+#   `_smp_chiudi` -- IL FRENO su `d0` -- riscrive `d0` SENZA passare da `_traccia_d0`, e
+#   **sta scritto nel docstring di `_g4_prova`**: "`_smp_chiudi` riscrive `d0` SENZA traccia:
+#   si prende da `_smorza`". Avevo letto quello strumento per sapere QUALE meccanismo usare,
+#   **e non ho letto la riga che diceva che uno scrittore manca.**
+#   MISURATO nella prima corsa: residuo `+6.09e5` (maturo) e `+8.33e6` (spento), dello
+#   stesso ordine della somma degli scrittori. **Non era uno scrittore SCONOSCIUTO: era
+#   quello che l'altro strumento NOMINA.**
+_orig_sm = S.Rete._smorza
+
+
+def _wrap_sm(self, prima, dx, quale):
+    _fuori = _orig_sm(self, prima, dx, quale)
+    _p = np.asarray(prima, float)
+    _f = np.asarray(_fuori, float)
+    _dx = np.asarray(dx, float)
+    v = BIL.setdefault('FRENO_' + str(quale), dict(giri=0, delta=0.0, delta_pos=0.0,
+                                                   delta_neg=0.0, lung_prima=0,
+                                                   lung_dopo=0, concat=0))
+    v['giri'] += 1
+    if _p.size == _f.size == _dx.size:
+        # il FRENO cambia l'INCREMENTO: il suo contributo e' `smorzato - grezzo`
+        _dd = _f - _dx
+        v['delta'] += float(_dd.sum())
+        v['delta_pos'] += float(_dd[_dd > 0].sum())
+        v['delta_neg'] += float(_dd[_dd < 0].sum())
+    else:
+        v['concat'] += 1
+        v['lung_prima'] = int(_p.size); v['lung_dopo'] = int(_f.size)
+    return _fuori
+
+
+S.Rete._smorza = _wrap_sm
+
 S.net = S.Rete(SEME)
 S.test["dati"] = {}
 S._NMASSE_VIDEO["sep"] = float(SEP)
@@ -128,6 +162,73 @@ CLASSI = {
 IDX0 = np.where(ok)[0]
 d0_ini = np.asarray(net.d0, float).copy()
 
+# ❗ `fra-masse` HA ZERO ARCHI, E NON E' UN DIFETTO: E' LA SCENA.
+#   Il varco fra le superfici delle regioni e' `R_CONN` PER COSTRUZIONE, quindi **le regioni
+#   non si allacciano direttamente**. **La domanda "la contrazione avvicina le masse?" NON
+#   si misura sugli archi diretti: non ce ne sono.**
+#   SI MISURA IL PONTE fra i nuclei, in DUE modi:
+#     (a) i passi in ARCHI (cammino minimo sul grafo);
+#     (b) LA SOMMA DEI `d0` lungo quel cammino -- la lunghezza metrica del ponte.
+#   ⚠ E' (b) che conta per la PROVA 1: se il grafo si contrae UNIFORMEMENTE cala come
+#     tutto il resto; se le masse si AVVICINANO, cala DI PIU'. Il nullo sono gli archi
+#     vuoto-vuoto.
+import collections
+
+
+def _nuclei(net, co, n):
+    # il nucleo di ogni regione: il nodo della coorte col GRADO piu' alto (il piu' interno)
+    grado = np.zeros(n, int)
+    ii = np.asarray(net.i, int); jj = np.asarray(net.j, int)
+    m = (ii < n) & (jj < n)
+    np.add.at(grado, ii[m], 1); np.add.at(grado, jj[m], 1)
+    out = []
+    for k in range(3):
+        idx = co['massa_%d' % k]
+        idx = idx[idx < n]
+        out.append(int(idx[np.argmax(grado[idx])]) if idx.size else -1)
+    return out
+
+
+def _ponte(net, a, b, n):
+    # (passi in archi, somma dei `d0`) lungo il cammino minimo. BFS, solo topologia.
+    if a < 0 or b < 0 or a >= n or b >= n:
+        return None, None
+    ii = np.asarray(net.i, int); jj = np.asarray(net.j, int)
+    d0 = np.asarray(net.d0, float)
+    adj = collections.defaultdict(list)
+    for e, (x, y) in enumerate(zip(ii, jj)):
+        x = int(x); y = int(y)
+        if x == y or x >= n or y >= n or e >= d0.size:
+            continue
+        adj[x].append((y, e)); adj[y].append((x, e))
+    prev = {a: (None, None)}
+    q = collections.deque([a])
+    while q:
+        u = q.popleft()
+        if u == b:
+            break
+        for v, e in adj[u]:
+            if v not in prev:
+                prev[v] = (u, e)
+                q.append(v)
+    if b not in prev:
+        return None, None
+    passi, lung, x = 0, 0.0, b
+    while prev[x][0] is not None:
+        u, e = prev[x]
+        passi += 1
+        lung += float(d0[e])
+        x = u
+    return passi, lung
+
+
+NUC = _nuclei(net, co, n0)
+o['nuclei'] = NUC
+for _a, _b in ((0, 1), (0, 2), (1, 2)):
+    pa, lu = _ponte(net, NUC[_a], NUC[_b], n0)
+    o['ponte_ini_%d%d_passi' % (_a, _b)] = pa
+    o['ponte_ini_%d%d_lung' % (_a, _b)] = lu
+
 o = dict(FLAG=bool(FLAG), SEME=SEME, n0=n0, archi0=int(len(net.d)), LAM=LAM, PASSI=int(PASSI),
          classi={k: int(v.sum()) for k, v in CLASSI.items()},
          d0_med_ini=float(np.median(d0_ini)))
@@ -149,12 +250,19 @@ if o["confrontabile"]:
         if m.sum() >= 10:
             o["fin_" + k] = float(np.median(d0_fin[IDX0[m]]))
 # la frazione a `d0 == LAM` ESATTO
+# il PONTE a fine corsa: la stessa misura, per la PROVA 1
+for _a, _b in ((0, 1), (0, 2), (1, 2)):
+    pa, lu = _ponte(net, NUC[_a], NUC[_b], int(net.n))
+    o['ponte_fin_%d%d_passi' % (_a, _b)] = pa
+    o['ponte_fin_%d%d_lung' % (_a, _b)] = lu
 o["fraz_d0_a_LAM"] = float(np.mean(d0_fin == LAM))
 o["fraz_d0_sotto_1p01LAM"] = float(np.mean(d0_fin <= 1.01 * LAM))
 o["d0_min_fin"] = float(d0_fin.min())
 o["bilancio"] = BIL
 o["somma_scrittori"] = float(sum(v["delta"] for k, v in BIL.items() if k.startswith("S")))
 o["somma_pavimenti"] = float(sum(v["delta"] for k, v in BIL.items() if k.startswith("P")))
+o["somma_freno"] = float(sum(v["delta"] for k, v in BIL.items()
+                            if k.startswith("FRENO_")))
 o["crescita_vera"] = float(d0_fin.sum() - d0_ini.sum()) if o["confrontabile"] else float("nan")
 io.open(os.path.join(TMPD, NOME + ".json"), "w", encoding="utf-8").write(json.dumps(o))
 print("OK %s  med d0 %.6f -> %.6f   archi %d -> %d"
@@ -250,11 +358,13 @@ for et, L in (("MATURO", MAT), ("SPENTO", SPE)):
           % (s, np.mean(gi), np.mean(dl), np.mean(dp), np.mean(dn), np.mean(cc)))
     ss, _ = mm(L, "somma_scrittori")
     sp, _ = mm(L, "somma_pavimenti")
+    sf, _ = mm(L, "somma_freno")
     cv, _ = mm(L, "crescita_vera")
     P("    SOMMA scrittori (`S*`) = %+.6e      SOMMA pavimenti (`P*`) = %+.6e" % (ss, sp))
+    P("    SOMMA FRENO (`_smorza`, che NON passa da `_traccia_d0`) = %+.6e" % sf)
     P("    CRESCITA VERA di `sum(d0)` = %+.6e" % cv)
-    _res = cv - (ss + sp)
-    P("    RESIDUO = crescita vera - (scrittori + pavimenti) = %+.6e" % _res)
+    _res = cv - (ss + sp + sf)
+    P("    RESIDUO = crescita vera - (scrittori + pavimenti + FRENO) = %+.6e" % _res)
     P("    -> il bilancio %s"
       % ("CHIUDE (residuo trascurabile)" if abs(_res) <= 1e-6 * max(abs(cv), 1.0)
          else "NON CHIUDE: c'e' uno scrittore NON TRACCIATO, ed e' il risultato"))
@@ -300,6 +410,48 @@ for et, d_ in _fr.items():
             P("           -> DIFFERENZIALE, ma la classe che si contrae piu' NON e' `fra-masse`:")
             P("              non e' l'avvicinamento fra masse. Va detto cosi'.")
 P()
+P("-" * 118)
+P("3-bis. LA PROVA 1: LE MASSE SI AVVICINANO? -- e `fra-masse` non ha archi PER COSTRUZIONE")
+P("-" * 118)
+P("  Il varco fra le superfici e' `R_CONN` PER COSTRUZIONE della scena, quindi LE REGIONI")
+P("  NON SI ALLACCIANO DIRETTAMENTE: `fra-masse` ha ZERO archi, e NON e' un difetto.")
+P("  Si misura IL PONTE fra i nuclei: passi in ARCHI e SOMMA dei `d0` lungo il cammino minimo.")
+P("  \u26a0 E' la somma dei `d0` che conta per la PROVA 1: se il grafo si contrae UNIFORMEMENTE")
+P("     cala come tutto il resto; se le masse si AVVICINANO, cala DI PIU'. Il nullo sono gli")
+P("     archi vuoto-vuoto.")
+P()
+for et, L in (("MATURO", MAT), ("SPENTO", SPE)):
+    P("  braccio %s" % et)
+    P("    %-8s %-22s %-24s %-14s" % ("coppia", "passi (ini -> fin)",
+                                      "somma d0 (ini -> fin)", "variazione"))
+    _var = []
+    for a_, b_ in ((0, 1), (0, 2), (1, 2)):
+        pi_, _ = mm(L, "ponte_ini_%d%d_passi" % (a_, b_))
+        pf_, _ = mm(L, "ponte_fin_%d%d_passi" % (a_, b_))
+        li_, _ = mm(L, "ponte_ini_%d%d_lung" % (a_, b_))
+        lf_, _ = mm(L, "ponte_fin_%d%d_lung" % (a_, b_))
+        if li_ != li_ or lf_ != lf_:
+            P("    %-8s NON MISURATO (nuclei non connessi)" % ("%d-%d" % (a_, b_)))
+            continue
+        v_ = 100.0 * (lf_ - li_) / li_ if li_ else float("nan")
+        _var.append(v_)
+        P("    %-8s %-22s %-24s %+-14.2f %%"
+          % ("%d-%d" % (a_, b_), "%.1f -> %.1f" % (pi_, pf_),
+             "%.4f -> %.4f" % (li_, lf_), v_))
+    if _var:
+        _mv = float(np.mean(_var))
+        _vv, _ = mm(L, "ini_vuoto-vuoto")
+        _vf, _ = mm(L, "fin_vuoto-vuoto")
+        _base = 100.0 * (_vf - _vv) / _vv if _vv else float("nan")
+        P("    media della variazione del PONTE = %+.2f %%   contro %+.2f %% del vuoto-vuoto"
+          % (_mv, _base))
+        if _mv < _base - 1.0:
+            P("    -> ** IL PONTE SI ACCORCIA PIU' DEL VUOTO: LE MASSE SI AVVICINANO. **")
+        elif _mv > _base + 1.0:
+            P("    -> il ponte si accorcia MENO del vuoto: si ALLONTANANO relativamente.")
+        else:
+            P("    -> il ponte segue il vuoto entro 1 punto: CONTRAZIONE UNIFORME, NON gravita'.")
+    P()
 P("-" * 118)
 P("4. IL PAVIMENTO CHE MORDE — frazione di archi a `d0 == LAM` ESATTO, a fine corsa")
 P("-" * 118)
