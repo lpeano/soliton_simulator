@@ -63,6 +63,15 @@ S = _iu.module_from_spec(_sp); _sp.loader.exec_module(S)
 
 S.SEMINA_LAM = True
 S.SEMINA_MATURA = bool(FLAG)
+# ❌❌ LA PRIMA CORSA NON HA RACCOLTO NESSUN CAMPIONE, E LA COLPA E' MIA: `_smorza` e' chiamata
+#   da `_smp_chiudi` (`:4166`, il sito `d0_passo` del riferimento) SOLO con `SCALA_MIN_PASSO`
+#   ACCESO, e nel sorgente e' `False`. **Il driver della campagna lo ha `on`** (`SCALAMINPASSO`),
+#   quindi misurare con i default del sorgente **misura un sistema senza freno**.
+#   E' lo stesso errore del par.9 sui run senza `--cs-dinamico`: la configurazione fa parte
+#   della misura, e non si eredita dai default.
+# `SCALA_MIN` resta SPENTO: il driver lo tiene `off` perche' **non e' una cura approvata**.
+S.SCALA_MIN_PASSO = True
+S.SCALA_MIN = False
 
 # --- L'INVOLUCRO SU `_smorza`: si contano le coppie (dx, prima). Nessuna riga del simulatore. ---
 ACC = {}
@@ -204,6 +213,9 @@ P("  salite    65192342   p50 0.0024  p90 0.0124  p99 0.0241  p999 0.0307  max 0
 P()
 P("LE DUE CORSE DI OGGI -- stessa scena (ii) (b), seme %d, %d passi, UN PROCESSO PER BRACCIO"
   % (SEME, PASSI))
+P("  CONFIGURAZIONE DICHIARATA: `SCALA_MIN_PASSO = True` (come il driver), `SCALA_MIN = False`")
+P("  (con i default del SORGENTE `SCALA_MIN_PASSO` e' False e `_smorza` NON viene chiamata:")
+P("   la prima corsa non ha raccolto NIENTE, ed era un difetto della mia configurazione.)")
 P("  braccio   n           archi        ramp finale p50   Lam finale      med d0 inizio -> fine")
 for et, D in (("MATURO", M), ("SPENTO", Sp)):
     P("  %-9s %-11d %-12d %-17.6f %-15.6e %.6f -> %.6f"
@@ -245,7 +257,17 @@ P("  rapporto MATURO/SPENTO = %.4f" % (mx_m / mx_s if mx_s else float("nan")))
 P("  campioni oltre 0.5: %d      oltre 1: %d      oltre 2: %d   (braccio MATURO)"
   % (o05, o1, o2))
 P()
-if mx_m < 0.5:
+# ❌ IL VERDETTO SU `nan` ERA VACUO, ed e' lo SPECCHIO del PASS su `inf` di `S9`:
+#   `nan < 0.5` e' False, quindi la prima stesura stampava "IL MASSIMO SUPERA 0.5: LA DECISIONE
+#   VA RIAPERTA" **quando non c'era NESSUN CAMPIONE**. Un FAIL vacuo su dati assenti costa come
+#   un PASS vacuo: si porta dietro una diagnosi che non c'e'.
+_tot = sum(v["n"] for _, _, v in righe)
+if not righe or not np.isfinite(mx_m) or _tot == 0:
+    P("  -> ** NON MISURATO: NESSUN CAMPIONE. ** `_smorza` non e' stata chiamata con forme")
+    P("     compatibili, oppure il freno era SPENTO. Non si legge nulla, e in particolare")
+    P("     **NON si conclude che il massimo superi 0.5**: non c'e' un massimo.")
+    P("     (campioni totali: %d)" % _tot)
+elif mx_m < 0.5:
     P("  -> LA FORMA `1+tanh` REGGE ANCHE A CAMPO MATURO: il massimo resta sotto 0.5, cioe'")
     P("     la saturazione non morde. **La decisione di Luca NON va riaperta per questo motivo.**")
 else:
