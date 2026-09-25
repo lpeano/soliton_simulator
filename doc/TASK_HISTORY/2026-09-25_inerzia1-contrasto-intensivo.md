@@ -175,3 +175,65 @@ sta misurando niente di suo: sta contando due volte lo stesso fatto.**
 **E la correzione la fa Luca, non io, e non dopo aver visto i numeri di una misura nuova:** la
 vecchia forma è scritta qui sopra perché **un criterio corretto senza che si veda quello di prima
 è un criterio senza provenienza.**
+
+
+---
+
+# ③ ❗ **ESTENSIVO O RITARDATO?** — l'ipotesi di Luca, e i criteri **prima** di misurare
+
+> **`_contrasto = rho_s / _peq_nodo`, e `peq` è una MEMORIA che rilassa verso `rho`.**
+> **All'equilibrio i due seguono lo STESSO vicinato, e il loro rapporto potrebbe essere GIÀ
+> intensivo.** Allora il `+1.06 … +2.47` che ho misurato non sarebbe estensività: sarebbe **il
+> ritardo di `peq` dietro a `rho`**.
+
+**E DUE FATTI LA SOSTENGONO — entrambi verificati dal codice, non supposti:**
+
+1. **nella prova di limite gli archi si tagliano DI COLPO.** `rho_s` si ricostruisce **nello stesso
+   passo** *(`psi_spin = _mat(w) @ …`)*; `peq` no: rilassa con `exp(-dt_e/tau_bg)`.
+   **Il mio taglio è un GRADINO, e ho misurato la risposta un passo dopo.**
+2. **i figli della mitosi EREDITANO `peq` dall'arco del genitore — ESATTAMENTE**, e la riga è
+   `:6226`:
+   ```
+   self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])
+   ```
+   **Il `peq` di un arco nato ha il valore di un arco di un nodo da ~77 vicini; il suo `rho` viene
+   da 2.** *(Ed è la stessa famiglia di `C7`/`C11`: un'eredità che copia uno stato **di un altro
+   vicinato**.)*
+
+## ⚠ **`TAU_BG = 5.0` NON È IL TEMPO VERO, e questo cambia come si scrive il criterio**
+
+Dal codice: con **`TAU_LOCALI = True`** *(default)* il rilassamento usa
+**`tau_bg_loc = max(1/max(r_arco, 1e-3), 1e-3)`** — **un tempo LOCALE**, non la costante `5.0`.
+`TAU_BG` entra solo nel ramo `TAU_LOCALI` spento (`:5522`).
+
+> ### **Quindi `N` non si SCEGLIE: si DERIVA dalla misura.** Il numero di passi per un tempo di
+> ### rilassamento è **`tau_bg_loc / dt_e`**, e **va letto dalla rete che gira**, per arco.
+> **Il sigillo stampa la mediana di `tau_bg_loc/dt_e` e usa `N = 3 ×` quel numero**, dichiarandolo.
+> *(Scegliere `N = 300` perché «sembra abbastanza» sarebbe un numero tarato — par.3 — e in questo
+> repo un `tau` stimato invece che letto ha già prodotto la voce «un'ipotesi che rigenera la
+> propria scusa».)*
+
+## I CRITERI DI `(a)` e `(b)`, scritti ORA
+
+| | criterio | **cosa decide** |
+|---|---|---|
+| **`R1`** | *(a)* dopo `N = 3 tau_bg` dal taglio, **a flag SPENTO**, la pendenza su `log k` di **`_contrasto`** torna entro lo spread fra semi da quella della **COPPIA** | **se SÌ: era un RITARDO**, e la normalizzazione è la cura sbagliata |
+| **`R2`** | *(a)* il **residuo** `\|pend(contrasto) − pend(coppia)\|` **cala monotonamente** fra `1`, `N/3`, `N` passi dal taglio | distingue un **transitorio** da un **offset costante**: un ritardo DEVE decadere |
+| **`R3`** | *(b)* per i figli della mitosi, `rho`, `peq` e `_contrasto` **dalla nascita**: il contrasto **rientra** verso il valore dei nodi maturi entro `N` passi | **se SÌ: l'eredità di `peq` è il difetto**, e la cura è **`peq` alla nascita** |
+| **`R4`** | *(b)* **il nullo**: gli stessi tre valori sui nodi **NON nati** nello stesso intervallo | senza, un «rientro» potrebbe essere solo la deriva di tutto il sistema |
+
+**COSA MI FAREBBE CAMBIARE IDEA, e lo scrivo perché è la mia diagnosi a essere in gioco:**
+se `R1` e `R3` passano, **la mia lettura «il residuo viene dai pesi» è sbagliata** — non
+incompleta: **sbagliata**, perché avrei attribuito a una legge un artefatto del mio protocollo di
+misura *(un gradino su una memoria)*. **E lo scriverò così.**
+
+**COSA RESTEREBBE VERO ANCHE ALLORA:** che `rho_s` **è** una somma pesata e `_peq_nodo` **è** una
+media — l'asimmetria di struttura è nel codice. Ma **un'asimmetria di struttura non è un difetto
+se le due grandezze, all'equilibrio, vivono sullo stesso vicinato**: sarebbe una scrittura
+ridondante, non una legge sbagliata. **La differenza fra le due letture la fa `R1`, non il
+ragionamento.**
+
+**⚠ E UNA COSA CHE NON SI PUÒ CHIUDERE COSÌ:** `|omega|` a `k = 2` faceva **×176**. Se è un
+transitorio di `peq`, **quel transitorio è comunque ciò che il sistema vive ogni volta che nasce un
+nodo** — e i nodi nascono continuamente. **«È un ritardo» non significa «è innocuo»**: significa
+che la cura va messa **alla nascita**, non nella legge dell'inerzia.
