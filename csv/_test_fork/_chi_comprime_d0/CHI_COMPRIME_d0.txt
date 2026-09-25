@@ -5,14 +5,10 @@
   passo = scuoti_vuoto() -> step() -> mitosi() -> rilassa_disegno() -> memoria_hebbiana_moto()   (letto per AST da `update()` e verificato contro il driver)
   scena (ii) (b), 120 passi, 2 semi, campo MATURO e SPENTO, freno ON come il driver.
 
-[mat_s11] rc=0 n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK mat_s11  med d0 1.884270 -> 1.200422   archi 148237 -> 148260
-[mat_s12] rc=0 n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK mat_s12  med d0 1.884964 -> 1.206300   archi 151142 -> 151181
-[spe_s11] rc=0 n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK spe_s11  med d0 1.884270 -> 0.800000   archi 148237 -> 148302
-[spe_s12] rc=0 n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK spe_s12  med d0 1.884964 -> 0.800000   archi 151142 -> 151187
+[mat_s11] RILETTO dal json (nessuna simulazione rigirata)
+[mat_s12] RILETTO dal json (nessuna simulazione rigirata)
+[spe_s11] RILETTO dal json (nessuna simulazione rigirata)
+[spe_s12] RILETTO dal json (nessuna simulazione rigirata)
 
 ----------------------------------------------------------------------------------------------------------------------
 1. LA CONTRAZIONE, e `P-GONFIA` NON HA OGGETTO
@@ -28,6 +24,8 @@ OK spe_s12  med d0 1.884964 -> 0.800000   archi 151142 -> 151187
 ----------------------------------------------------------------------------------------------------------------------
   braccio MATURO:
     sito               giri     delta TOTALE   solo POSITIVI  solo NEGATIVI  concat  
+    FRENO_d0_passo     120      +6.088461e+05  +6.088461e+05  +0.000000e+00  0       
+    FRENO_d_passo      120      +1.103075e+04  +1.103075e+04  +0.000000e+00  0       
     P1_dopo_rilass     120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
     P2_dopo_spinta     112      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
     P3_dopo_proj       120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
@@ -43,12 +41,19 @@ OK spe_s12  med d0 1.884964 -> 0.800000   archi 151142 -> 151187
     S10_grav_med       120      -5.554499e+02  +1.245030e+05  -1.250584e+05  0       
     S12_coesione       120      -7.332203e+05  +2.056006e+05  -9.388210e+05  0       
     SOMMA scrittori (`S*`) = -6.873919e+05      SOMMA pavimenti (`P*`) = +0.000000e+00
+    SOMMA FRENO su `d0` (`_smorza`, che NON passa da `_traccia_d0`) = +6.088461e+05
+    (e il freno su `d` vale +1.103075e+04: NON entra nel bilancio di `d0` -- sommarlo era
+     un errore di CATEGORIA, lo stesso di `U2`, e il residuo COSTANTE fra i due
+     bracci lo ha denunciato.)
     CRESCITA VERA di `sum(d0)` = -7.852849e+04
-    RESIDUO = crescita vera - (scrittori + pavimenti) = +6.088634e+05
-    -> il bilancio NON CHIUDE: c'e' uno scrittore NON TRACCIATO, ed e' il risultato
+    RESIDUO = crescita vera - (scrittori + pavimenti + FRENO) = +1.724891e+01
+    RESIDUO RELATIVO alla crescita vera = 2.197e-04
+    -> il bilancio CHIUDE (residuo relativo < 1e-3)
 
   braccio SPENTO:
     sito               giri     delta TOTALE   solo POSITIVI  solo NEGATIVI  concat  
+    FRENO_d0_passo     120      +8.332285e+06  +8.332285e+06  +0.000000e+00  0       
+    FRENO_d_passo      120      +1.095520e+04  +1.095520e+04  +0.000000e+00  0       
     P1_dopo_rilass     120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
     P2_dopo_spinta     100      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
     P3_dopo_proj       120      +0.000000e+00  +0.000000e+00  +0.000000e+00  0       
@@ -64,9 +69,14 @@ OK spe_s12  med d0 1.884964 -> 0.800000   archi 151142 -> 151187
     S10_grav_med       120      -2.978660e+03  +8.438168e+04  -8.736034e+04  0       
     S12_coesione       120      -8.528372e+06  +7.276977e+05  -9.256070e+06  0       
     SOMMA scrittori (`S*`) = -8.466251e+06      SOMMA pavimenti (`P*`) = +0.000000e+00
+    SOMMA FRENO su `d0` (`_smorza`, che NON passa da `_traccia_d0`) = +8.332285e+06
+    (e il freno su `d` vale +1.095520e+04: NON entra nel bilancio di `d0` -- sommarlo era
+     un errore di CATEGORIA, lo stesso di `U2`, e il residuo COSTANTE fra i due
+     bracci lo ha denunciato.)
     CRESCITA VERA di `sum(d0)` = -1.339239e+05
-    RESIDUO = crescita vera - (scrittori + pavimenti) = +8.332327e+06
-    -> il bilancio NON CHIUDE: c'e' uno scrittore NON TRACCIATO, ed e' il risultato
+    RESIDUO = crescita vera - (scrittori + pavimenti + FRENO) = +4.136077e+01
+    RESIDUO RELATIVO alla crescita vera = 3.088e-04
+    -> il bilancio CHIUDE (residuo relativo < 1e-3)
 
 ----------------------------------------------------------------------------------------------------------------------
 3. UNIFORME O DIFFERENZIALE? — il criterio era scritto prima
@@ -93,6 +103,39 @@ OK spe_s12  med d0 1.884964 -> 0.800000   archi 151142 -> 151187
            la classe che si contrae PIU' e': **massa-vuoto** (-60.06 %)
            -> DIFFERENZIALE, ma la classe che si contrae piu' NON e' `fra-masse`:
               non e' l'avvicinamento fra masse. Va detto cosi'.
+
+----------------------------------------------------------------------------------------------------------------------
+3-bis. LA PROVA 1: LE MASSE SI AVVICINANO? -- e `fra-masse` non ha archi PER COSTRUZIONE
+----------------------------------------------------------------------------------------------------------------------
+  Il varco fra le superfici e' `R_CONN` PER COSTRUZIONE della scena, quindi LE REGIONI
+  NON SI ALLACCIANO DIRETTAMENTE: `fra-masse` ha ZERO archi, e NON e' un difetto.
+  Si misura IL PONTE fra i nuclei: passi in ARCHI e SOMMA dei `d0` lungo il cammino minimo.
+  ⚠ E' la somma dei `d0` che conta per la PROVA 1: se il grafo si contrae UNIFORMEMENTE
+     cala come tutto il resto; se le masse si AVVICINANO, cala DI PIU'. Il nullo sono gli
+     archi vuoto-vuoto.
+
+  braccio MATURO
+    coppia   passi (ini -> fin)     somma d0 (ini -> fin)    variazione    
+    0-1      5.0 -> 5.0             11.3596 -> 7.9722        -29.82         %
+    0-2      4.0 -> 4.0             8.5111 -> 6.1122         -28.19         %
+    1-2      4.0 -> 4.0             8.8536 -> 4.7157         -46.74         %
+    media della variazione del PONTE = -34.91 %   contro -35.88 % del vuoto-vuoto
+    il vuoto finisce a 1.204362 (LAM = 0.800000): sopra il pavimento
+    frazione di archi a `LAM` esatto = 0.005565
+    -> il ponte segue il vuoto entro 1 punto: CONTRAZIONE UNIFORME, NON gravita'.
+
+  braccio SPENTO
+    coppia   passi (ini -> fin)     somma d0 (ini -> fin)    variazione    
+    0-1      5.0 -> 5.0             11.3596 -> 4.5902        -59.59         %
+    0-2      4.0 -> 4.0             8.5111 -> 3.4488         -59.48         %
+    1-2      4.0 -> 4.0             8.8536 -> 3.5725         -59.65         %
+    media della variazione del PONTE = -59.57 %   contro -57.41 % del vuoto-vuoto
+    il vuoto finisce a 0.800000 (LAM = 0.800000): AL PAVIMENTO
+    frazione di archi a `LAM` esatto = 0.342577
+    -> ⛔ **NON SI LEGGE COME GRAVITA': il vuoto E' AL PAVIMENTO.** Il ponte
+       partiva PIU' LUNGO della mediana, quindi cala di piu' in percentuale
+       **solo perche' ha piu' strada da fare fino allo stesso pavimento**.
+       E' REGRESSIONE VERSO IL PAVIMENTO, non avvicinamento.
 
 ----------------------------------------------------------------------------------------------------------------------
 4. IL PAVIMENTO CHE MORDE — frazione di archi a `d0 == LAM` ESATTO, a fine corsa

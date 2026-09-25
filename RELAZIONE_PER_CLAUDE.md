@@ -16979,3 +16979,107 @@ nasce **su un arco con due**, quindi **le due decisioni si intrecciano** e separ
 significherebbe curare due volte lo stesso punto.
 **E il calcolo delle distanze passerà DAGLI ARCHI quando il disegno uscirà dalla dinamica**
 *(`A3`)*: allacciare «entro `R_CONN`» oggi richiede `pos`, e questo lega `NODI-1` ad `A3`.
+
+
+---
+
+# ✅ **CHI COMPRIME `d0`: È LA COESIONE. E LA CONTRAZIONE NON È GRAVITÀ.** *(2026-09-25)*
+
+*(`csv/_test_fork/_chi_comprime_d0.py`, referto in `csv/_test_fork/_chi_comprime_d0/`,
+scena `(ii)` `(b)`, **passo PIENO**, freno ON come il driver, `120` passi, **2 semi**,
+campo MATURO e SPENTO. **Solo misura, nessuna cura, per mandato.**)*
+
+## 1. `P-GONFIA` NON HA OGGETTO — **registrato**
+
+```
+med d0    MATURO   1.884617 -> 1.203361    -36.15 %     spread fra semi 5.9e-03
+          SPENTO   1.884617 -> 0.800000    -57.55 %     spread fra semi 5.4e-08
+```
+
+> ### **`P-GONFIA` prevede una CRESCITA, con soglia «meno della metà di `+47.28 %`».**
+> ### **Nella scena `(ii)` `d0` NON CRESCE: SI CONTRAE. Il criterio non ha un oggetto** — non è
+> ### «passato», **misura una crescita che non c'è.**
+
+## 2. ✅ IL BILANCIO **CHIUDE**, e lo scrittore è **`S12_coesione`**
+
+```
+                         MATURO            SPENTO
+S12_coesione         -7.332203e+05     -8.528372e+06      <- IL COMPRESSORE
+S02_rilass_visco     +4.532450e+04     +6.567036e+04      <- addiziona
+S08_proj             +1.059420e+03     -5.699806e+02
+S10_grav_med         -5.554499e+02     -2.978660e+03
+pavimenti (`P*`)     +0.000000e+00     +0.000000e+00      <- NON MORDONO MAI
+FRENO su `d0`        +6.088461e+05     +8.332285e+06      <- si oppone, e quasi pareggia
+
+SOMMA scrittori      -6.873919e+05     -8.466251e+06
+CRESCITA VERA        -7.852849e+04     -1.339239e+05
+RESIDUO              +1.724891e+01     +4.136077e+01
+RESIDUO RELATIVO      2.197e-04         3.088e-04         -> IL BILANCIO CHIUDE
+```
+
+> ### **`S12_coesione` è il compressore, e di un fattore `11.6` fra i due bracci.**
+> **E la struttura è più interessante del totale:** la coesione spinge a `-9.39e5` e il **FRENO
+> si oppone a `+6.09e5`**, cioè **il freno recupera il `65 %`** di ciò che la coesione toglie.
+> **Il netto è la differenza fra due termini grandi**, non un effetto piccolo.
+>
+> ### ❗ **E I PAVIMENTI SONO A ZERO ESATTO IN ENTRAMBI I BRACCI: `_pav_d0` NON MORDE MAI.**
+> **La contrazione fino a `LAM` non viene dai pavimenti: viene dalla COESIONE, e il pavimento la
+> TROVA già arrivata.** *(Ed è coerente col `34 %` di archi a `LAM` esatto: ci arrivano, non ci
+> vengono spinti.)*
+
+### ❌❌ E IL BILANCIO NON CHIUDEVA, PER DUE OMISSIONI MIE — entrambe corrette
+
+1. **`_smorza` non era tracciata.** `_smp_chiudi` riscrive `d0` **senza passare da
+   `_traccia_d0`**, **e sta scritto nel docstring di `_g4_prova`**: *«`_smp_chiudi` riscrive `d0`
+   SENZA traccia: si prende da `_smorza`»*. **Avevo letto quello strumento per sapere quale
+   meccanismo usare, e non ho letto la riga che diceva che uno scrittore manca.**
+2. **poi ho mescolato `d` e `d0`, che è ESATTAMENTE l'errore di `U2`.** `FRENO_d_passo` frena
+   **`d`**, e sommarlo al bilancio di `d0` è un errore di **categoria**.
+   **E il dato l'ha denunciato:** il residuo valeva `-1.101e4` e `-1.091e4` — **quasi identici
+   fra due bracci diversissimi**, e quasi esattamente `-FRENO_d_passo`. **Un residuo COSTANTE
+   fra due bracci così diversi non viene dalla fisica: viene da un termine che non c'entra.**
+
+## 3. ⛔ **LA CONTRAZIONE NON È GRAVITÀ**, in nessuno dei due bracci — e per due ragioni diverse
+
+**`fra-masse` ha ZERO archi, e non è un difetto: è la scena.** Il varco fra le superfici è
+`R_CONN` **per costruzione**, quindi le regioni **non si allacciano direttamente**. Si misura
+**il PONTE fra i nuclei**: passi in archi e **somma dei `d0`** lungo il cammino minimo.
+
+```
+MATURO   ponte medio  -34.91 %   contro  -35.88 %  del vuoto-vuoto
+         il vuoto finisce a 1.204362 (LAM = 0.8): SOPRA il pavimento
+         -> IL PONTE SEGUE IL VUOTO ENTRO 1 PUNTO: **CONTRAZIONE UNIFORME, NON GRAVITA'.**
+
+SPENTO   ponte medio  -59.57 %   contro  -57.41 %  del vuoto-vuoto
+         il vuoto finisce a 0.800000 = LAM ESATTO: **AL PAVIMENTO**
+         frazione di archi a LAM esatto = 0.342577
+         -> **NON SI LEGGE COME GRAVITA': REGRESSIONE VERSO IL PAVIMENTO.**
+```
+
+> ### ❗ **E LA SECONDA LETTURA È UNA CORREZIONE A ME STESSO, fatta prima di pubblicare il
+> ### numero.** Il mio criterio, come l'avevo scritto, stampava *«IL PONTE SI ACCORCIA PIÙ DEL
+> ### VUOTO: LE MASSE SI AVVICINANO»* per il braccio SPENTO.
+> **È falso, e il pavimento lo dice:** il vuoto è arrivato **esattamente a `LAM`**, e il ponte
+> partiva **più lungo della mediana** *(`2.13` per arco contro `1.88`)*. **Cala di più in
+> percentuale solo perché ha più strada da fare fino allo STESSO pavimento.**
+> **È il presidio del par.9 sul valore sotto ipotesi nulla, applicato a una percentuale: due
+> grandezze che convergono sullo stesso limite hanno variazioni percentuali diverse SE PARTONO
+> DA POSTI DIVERSI, e quella differenza non è un effetto.**
+
+**La classe che si contrae più è `massa-vuoto`** *(`-39.28 %` contro `-35.88 %` del vuoto)*,
+**non `fra-masse`**: l'escursione fra classi è **`3.78` punti** su un `-36 %` medio.
+
+## 4. ✅ IL PAVIMENTO MORDE, E LA `CURA 4` LO TIENE LONTANO DI `62×`
+
+```
+a `d0 == LAM` ESATTO    MATURO 0.005565      SPENTO 0.342577      rapporto 61.6
+entro 1.01 LAM          MATURO 0.097287      SPENTO 0.678930
+min(d0)                 0.800000000 in ENTRAMBI
+```
+
+**A campo spento UN TERZO DEGLI ARCHI sta esattamente sul pavimento.** *(Un'uguaglianza esatta in
+floating point viene da un `maximum`: è il segno che il pavimento ha MORSO.)*
+
+**⚠ DUE SEMI**, e il par.0-ter chiede `>= 4` per una barra. **Le classi sono calcolate al passo
+zero e tenute fisse**, per non mescolare la contrazione col rimescolamento delle coorti.
+**Solo misura, nessuna cura.**
