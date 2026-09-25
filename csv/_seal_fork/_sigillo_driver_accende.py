@@ -43,6 +43,21 @@ DEST = os.path.join(_QUI, "_sig_driver_accende")
 ESCLUSE = {
     "FASE_2PI": "NON e' approvata: la sua prova la BOCCIA (`Z127`, `2/4`, `E1` non passa -- "
                 "mitosi `62` -> `1` evento). Il driver NON deve accenderla.",
+    # ⛔ `SEMINA_LAM` E' APPROVATA, e questa NON e' un'esclusione per merito: e' per
+    #   INCOMPATIBILITA' MISURATA con la scena di DEFAULT del driver, ed e' la verifica che
+    #   Luca ha chiesto nello stesso mandato in cui ha deciso `NUDA = CAMPAGNA`.
+    #   MISURATO: `semina(900)` in raggio `4.0` con `SEMINA_LAM` acceso **RIFIUTA**, e la
+    #   saturazione vera e' **455** nodi. Quindi accenderla nel driver **romperebbe ogni scena
+    #   che semina il vuoto di default** -- e non si aggira con un numero, perche' la capienza
+    #   DIPENDE DAL SEME (misurato: 12807/12783/12812/12790 su quattro semi).
+    #   **E' compatibile con la scena `(ii)`, che semina con `--nodi 0` e costruisce il vuoto
+    #   da se' fino a SATURAZIONE.**
+    #   ⚠ **LA DECISIONE NON E' MIA:** il criterio `S5` qui sotto MISURA il conflitto e lo
+    #   mette nel referto, invece di nasconderlo dietro un'esclusione silenziosa.
+    "SEMINA_LAM": "APPROVATA, ma la scena di DEFAULT del driver RIFIUTA: `900` nodi in raggio "
+                  "`4.0` contro una saturazione vera di `455`. Compatibile SOLO con la scena "
+                  "`(ii)` a `--nodi 0`. **Non e' un'esclusione per merito: e' un conflitto di "
+                  "scena, e va deciso.**",
 }
 
 # Le DUE invocazioni, e la differenza fra loro e' il punto di questo sigillo:
@@ -196,6 +211,54 @@ def main():
             nota = "⚠ **ORFANA: ne' obbligatoria ne' esclusa**"
         P("  %-24s %-10s %-10s %s\n" % (nome, vn, vc, nota))
 
+    # ================== `S5`: LA SCENA DI DEFAULT E' COMPATIBILE CON `SEMINA_LAM`? ========
+    # ⛔ NON E' UNA DOMANDA RETORICA, ed e' la verifica che Luca ha chiesto NELLO STESSO
+    #   mandato in cui ha deciso `NUDA = CAMPAGNA`. Il vuoto di default del driver e'
+    #   `semina(SEME_INIZIALE)` in raggio `_scala_sistema()*0.5`, e con `SEMINA_LAM` acceso
+    #   la semina **RIFIUTA** se `n` supera la saturazione vera.
+    #   **Si MISURA, non si deduce**, e il risultato va nel referto anche (e soprattutto) se
+    #   dice che le due cose non stanno insieme.
+    import importlib.util as _iu2
+    _spec = _iu2.spec_from_file_location("sim_s5", os.path.join(RADICE,
+                                                               "soliton_simulator.py"))
+    _S5 = _iu2.module_from_spec(_spec)
+    _spec.loader.exec_module(_S5)
+    _S5.SEMINA_LAM = True
+    _net5 = _S5.Rete(42)
+    _rif, _sat, _err = False, None, ""
+    try:
+        _net5.semina(_S5.SEME_INIZIALE)
+        _sat = int(_net5.n)
+    except SystemExit as _e:
+        _rif = True
+        _err = str(_e)
+        for _r in _err.split(chr(10)):
+            if "collocati" in _r:
+                try:
+                    _sat = int(_r.split("=")[1].split()[0])
+                except Exception:
+                    pass
+    P("")
+    P("  " + "=" * 96)
+    P("  `S5` -- LA SCENA DI DEFAULT DEL DRIVER E' COMPATIBILE CON `SEMINA_LAM`?")
+    P("  " + "=" * 96)
+    P("     vuoto di default: `semina(%d)` in raggio %.6f    LAM = %.6f"
+      % (_S5.SEME_INIZIALE, _S5._scala_sistema() * 0.5, _S5.LAM))
+    P("     con `SEMINA_LAM` acceso: %s" % ("RIFIUTA" if _rif else "non rifiuta"))
+    P("     saturazione vera: %s nodi   contro %d chiesti" % (_sat, _S5.SEME_INIZIALE))
+    if _rif:
+        P("     -> ⛔ **INCOMPATIBILE.** Accendere `SEMINA_LAM` nel driver ROMPEREBBE ogni")
+        P("        scena che semina il vuoto di DEFAULT. E non si aggira con un numero,")
+        P("        perche' **LA CAPIENZA DIPENDE DAL SEME** (misurato: 12807/12783/12812/12790).")
+        P("        ✅ E' compatibile con la scena `(ii)`, che semina a `--nodi 0` e costruisce")
+        P("        il vuoto da se' fino a SATURAZIONE.")
+        P("        ⚠ PER QUESTO `SEMINA_LAM` E' FRA LE `ESCLUSE`, **e non per merito**: e' un")
+        P("        CONFLITTO DI SCENA. **La decisione e' di Luca, e questo criterio mette il")
+        P("        numero davanti invece di nascondere l'esclusione.**")
+    else:
+        P("     -> ✅ COMPATIBILE: `SEMINA_LAM` puo' essere accesa dal driver su ogni scena,")
+        P("        e va TOLTA dalle `ESCLUSE`.")
+    P("")
     P("\n  CURE OBBLIGATORIE: %d   ESCLUSE: %d   ORFANE: %d\n"
       % (len(OBB), len(ESCLUSE), len(orfane)))
     for k, v in sorted(ESCLUSE.items()):

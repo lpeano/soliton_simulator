@@ -124,6 +124,30 @@ CURE = [
      "*(`MAX 4.37 = 1.39 pi` contro `2pi`)*. **-> `D36`**",
      "❌ **IN CODICE e SIGILLATA, ma la PROVA la BOCCIA.** Default **SPENTO**, e ci resta: "
      "il punto 2 del par.D va riaperto *(decisione di Luca)*"),
+    ("SEMINA_LAM", "**`A13`**: il vuoto nasce con distanza minima `LAM` (`RSA` con saturazione "
+     "esatta, Zhang-Torquato)", "`C1` PASS PIENO + `C2`/`C3`/`C4` + `D38`",
+     "csv/_seal_fork/_c1_semina/",
+     "⛔ **NON nel driver: la scena di DEFAULT del driver RIFIUTA** — `900` nodi in raggio "
+     "`4.0`, e la saturazione vera e' **`455`**. **Compatibile SOLO con la scena `(ii)` a "
+     "`--nodi 0`.**",
+     "`A13` è l'assioma: sotto `LAM` non esiste niente, nemmeno alla semina. `C3` misura "
+     "`0.3826 ± 0.0016` contro il `0.384` noto dell'`RSA`, **nella sfera interna**",
+     "VERIFICATA-SPENTA *(default `False`)* — **e il driver non può accenderla su ogni scena**"),
+    ("SEMINA_MATURA", "**`CURA 4`** i nodi del vuoto DATO nascono maturi; la rampa resta ai nati "
+     "in dinamica, col tempo-luce invece di `TAU_A`", "`7/7`",
+     "csv/_seal_fork/_sig_cura4/SIGILLO_cura4_accensione.txt",
+     "in **ogni** run del fork *(`--semina-matura`)*",
+     "senza, l'universo parte **senza campo**: somma dei pesi `0.000000e+00` al passo zero, e "
+     "`TAU_A/DT = 5000` passi per accendersi — con il peso d'arco a `5.76e-04` al passo `120`. "
+     "E **separa i due ruoli di `TAU_A`**, che restava insieme vita media e tempo di accensione",
+     "VERIFICATA-SPENTA *(default `False`, accesa dal driver)*"),
+    ("MITOSI_2LAM", "**`CURA 5`** `A13` ALLA NASCITA: un arco si divide solo se `d >= 2 LAM`",
+     "`8/8`", "csv/_seal_fork/_sig_cura5/SIGILLO_cura5_a13nascita.txt",
+     "in **ogni** run del fork *(`--mitosi-2lam`)*",
+     "`_sm_lund_mitosi` da `3.5`-`4.0` a **`0.0` ESATTO**: la mitosi non fabbrica piu' lunghezza. "
+     "E **toglie una legge** invece di aggiungerla (`STANDARD 10`): `_nasce` non ha piu' niente "
+     "da fare su quel sito. Lo Schwinger **non** e' toccato (resta `A3`)",
+     "VERIFICATA-SPENTA *(default `False`, accesa dal driver)*"),
 ]
 
 # Le PROVE DI SPEGNIMENTO: NON sono cure, e stanno a parte perche' il conto resti onesto.

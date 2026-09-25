@@ -241,7 +241,20 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--
             # **NON e' byte-inerte, ed e' il punto**: e' una cura, non un'opzione.
             # IL DEFAULT NEL SORGENTE RESTA `False`: i default si cambiano all'EPOCA 3
             # (decisione di Luca, 2026-09-24). Lo stato effettivo sta in CONFIGURAZIONE.txt.
-            "--tempo-unico-mitosi"] \
+            "--tempo-unico-mitosi",
+            # [CURA 4, 2026-09-25] L'ACCENSIONE DEL CAMPO, APPROVATA DA LUCA: il driver la
+            # ACCENDE IN OGNI RUN. Senza, l'universo parte SENZA CAMPO (somma dei pesi
+            # `0.000000e+00` al passo zero) e ci mette `TAU_A/DT = 5000` passi ad accendersi:
+            # al passo 120 il peso d'arco vale `5.76e-04` del maturo. E SEPARA I DUE RUOLI DI
+            # `TAU_A`, che restava insieme vita media della memoria spinoriale E tempo di
+            # accensione di una sorgente. Sigillo 7/7, un processo per braccio.
+            "--semina-matura",
+            # [CURA 5, 2026-09-25] `A13` ALLA NASCITA, APPROVATA DA LUCA: un arco si divide
+            # SOLO se `d >= 2 LAM`. `_sm_lund_mitosi` passa da `3.5`-`4.0` a `0.0` ESATTO: la
+            # mitosi non fabbrica piu' lunghezza. E TOGLIE una legge invece di aggiungerla
+            # (`STANDARD 10`): `_nasce` non ha piu' niente da fare su quel sito. Lo SCHWINGER
+            # non e' toccato (resta `A3`). Sigillo 8/8.
+            "--mitosi-2lam"] \
     + (["--chi-basc"] if CHIBASC == "on" else []) \
     + (["--chi-coop"] if CHICOOP == "on" else []) \
     + (["--scala-min"] if SCALAMIN == "on" else []) \
