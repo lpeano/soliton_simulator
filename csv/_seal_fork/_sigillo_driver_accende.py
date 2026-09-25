@@ -217,8 +217,13 @@ def main():
     _S5.SEMINA_LAM = True
     _net5 = _S5.Rete(42)
     _rif, _sat, _err = False, None, ""
+    # ⚠ SI PROVA CIO' CHE IL DRIVER FA ADESSO, non la domanda vecchia. Dal 2026-09-25
+    #   (`SCENA-1` strada (1)) il vuoto di default e' `semina(-1 if SEMINA_LAM else a.nodi)`,
+    #   cioe' **LA SATURAZIONE**. La prima stesura di `S5` chiedeva ancora
+    #   `semina(SEME_INIZIALE)`, e diceva INCOMPATIBILE su una strada che il driver non usa
+    #   piu': **un criterio che prova la domanda di ieri da' la risposta di ieri.**
     try:
-        _net5.semina(_S5.SEME_INIZIALE)
+        _net5.semina(-1 if _S5.SEMINA_LAM else _S5.SEME_INIZIALE)
         _sat = int(_net5.n)
     except SystemExit as _e:
         _rif = True
@@ -233,8 +238,9 @@ def main():
     P("  " + "=" * 96)
     P("  `S5` -- LA SCENA DI DEFAULT DEL DRIVER E' COMPATIBILE CON `SEMINA_LAM`?")
     P("  " + "=" * 96)
-    P("     vuoto di default: `semina(%d)` in raggio %.6f    LAM = %.6f"
-      % (_S5.SEME_INIZIALE, _S5._scala_sistema() * 0.5, _S5.LAM))
+    P("     vuoto di default: `semina(%s)` in raggio %.6f    LAM = %.6f"
+      % ("-1 = SATURAZIONE" if _S5.SEMINA_LAM else str(_S5.SEME_INIZIALE),
+         _S5._scala_sistema() * 0.5, _S5.LAM))
     P("     con `SEMINA_LAM` acceso: %s" % ("RIFIUTA" if _rif else "non rifiuta"))
     P("     saturazione vera: %s nodi   contro %d chiesti" % (_sat, _S5.SEME_INIZIALE))
     if _rif:
@@ -247,8 +253,12 @@ def main():
         P("        CONFLITTO DI SCENA. **La decisione e' di Luca, e questo criterio mette il")
         P("        numero davanti invece di nascondere l'esclusione.**")
     else:
-        P("     -> ✅ COMPATIBILE: `SEMINA_LAM` puo' essere accesa dal driver su ogni scena,")
-        P("        e va TOLTA dalle `ESCLUSE`.")
+        P("     -> ✅ COMPATIBILE: il vuoto di default e' LA SATURAZIONE (`semina(-1)`), e")
+        P("        `SEMINA_LAM` e' OBBLIGATORIA. Il numero di nodi lo decide la GEOMETRIA, non un")
+        P("        parametro -- e questo e' cio' che rende la compatibilita' STABILE: non c'e' un")
+        P("        numero che possa diventare sbagliato quando il seme cambia.")
+        P("        ⚠ E le scene che seminano masse SOPRA il vuoto RIFIUTANO di partire (`A9`):")
+        P("        `_massa` solleva con `SEMINA_LAM` acceso. Sono di EPOCA PRE-`A13`.")
     P("")
     P("\n  CURE OBBLIGATORIE: %d   ESCLUSE: %d   ORFANE: %d\n"
       % (len(OBB), len(ESCLUSE), len(orfane)))
