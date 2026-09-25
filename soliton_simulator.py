@@ -414,30 +414,8 @@ CALORE_VETTORIALE = True   # calcio termico: True=vettoriale+chirale DI DEFAULT 
                            # eccitato, phivel firmato da perc_chi). False=scalare isotropo. --calore-scal per tornare scalare
                        # rispetto a frequenze locali (invarianza per riparametrizzazione). IN VERIFICA.
                        # False = costanti fisse (comportamento precedente). Reversibile.
-MITOSI_2LAM = False
-
-# ============================================================================================
-# [`INERZIA-1(C)`, DECISIONE DI LUCA 2026-09-25] **IL CONTRASTO DIVENTA «PER VICINO».**
-# --------------------------------------------------------------------------------------------
-# `inerzia = _contrasto * T2` con `_contrasto = rho_s / peq_nodo`, e i due fattori scalano nel
-# numero di vicini **IN VERSO OPPOSTO**. **MISURATO** in configurazione del driver
-# (`CONFIG-1/a`, 2 semi x 2 versi del taglio, 20 bersagli per seme), pendenze su `log k`:
-#     COPPIA       -0.19 ... -0.30      INTENSIVA (non cresce col numero di vicini)
-#     _contrasto   +1.06 ... +2.47      ESTENSIVO
-#     T2           -0.15 ... +0.44      fa cio' che la geometria impone
-# Conseguenza: da `k = 77` a `k = 2` l'inerzia crolla `x2e-4 ... x4.6e-3`, il rapporto sale
-# `x427 ... x1.5e4`, e **`|omega|` arriva a `x176`**: il difetto ARRIVA ALLA DINAMICA.
-# **LA CAUSA E' DI STRUTTURA:** `rho_s` e' una **SOMMA pesata sui vicini**, `_peq_nodo` e'
-# **esplicitamente una MEDIA**. Un rapporto somma/media **scala col grado per costruzione**.
-# ✅ **LA CURA E' LOCALE, e la localita' e' il punto:** `rho_s` si normalizza **per vicino**
-#   **DENTRO `_contrasto` e SOLO LI'**, col **medesimo `_cn`** che `_peq_nodo` usa gia' come
-#   denominatore. **`rho_s` NON cambia altrove: la cura tocca L'INERZIA, non IL CAMPO.**
-#   Le **7 letture di `rho_s` fuori da `_passo_spinoriale`** sono elencate in
-#   `doc/LETTURE_rho_s.md` e passano tutte da `rho_spin` o da `_rho_sorgente()`: **nessuna
-#   vede la normalizzazione**, e lo prova la byte-identita' a flag spento.
-# ✅ **`STANDARD 10`: NESSUNA LEGGE NUOVA E NESSUNA GRANDEZZA NUOVA** -- si TOGLIE
-#   l'incoerenza fra numeratore e denominatore, e `_cn` esiste gia' tre righe sopra.
-CONTRASTO_INTENSIVO = False     # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. Approvata da Luca.
+MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `MITOSI_2LAM`: `A13` ALLA NASCITA. Approvata
+                        # da Luca.
                         # OFF di default: un interruttore alla volta (par.1).
                         #
                         # LA LEGGE: **un arco si divide SOLO se `d_arco >= 2 LAM`.**
@@ -467,6 +445,41 @@ CONTRASTO_INTENSIVO = False     # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. Appro
                         # ⚠ LO SCHWINGER **NON E' TOCCATO** (decisione di Luca): la `d` dei suoi
                         #   archi nuovi viene da `0.5*|pos[aa]-pos[bb]|`, cioe' **dal DISEGNO**, ed
                         #   e' la voce `A3`. Toccarlo qui vorrebbe dire curare `A3` di nascosto.
+
+# ============================================================================================
+# [`INERZIA-1(C)`, DECISIONE DI LUCA 2026-09-25] **IL CONTRASTO DIVENTA «PER VICINO».**
+# --------------------------------------------------------------------------------------------
+# `inerzia = _contrasto * T2` con `_contrasto = rho_s / peq_nodo`, e i due fattori scalano nel
+# numero di vicini **IN VERSO OPPOSTO**. **MISURATO** in configurazione del driver
+# (`CONFIG-1/a`, 2 semi x 2 versi del taglio, 20 bersagli per seme), pendenze su `log k`:
+#     COPPIA       -0.19 ... -0.30      INTENSIVA (non cresce col numero di vicini)
+#     _contrasto   +1.06 ... +2.47      ESTENSIVO
+#     T2           -0.15 ... +0.44      fa cio' che la geometria impone
+# Conseguenza: da `k = 77` a `k = 2` l'inerzia crolla `x2e-4 ... x4.6e-3`, il rapporto sale
+# `x427 ... x1.5e4`, e **`|omega|` arriva a `x176`**: il difetto ARRIVA ALLA DINAMICA.
+# **LA CAUSA E' DI STRUTTURA:** `rho_s` e' una **SOMMA pesata sui vicini**, `_peq_nodo` e'
+# **esplicitamente una MEDIA**. Un rapporto somma/media **scala col grado per costruzione**.
+# ✅ **LA CURA E' LOCALE, e la localita' e' il punto:** `rho_s` si normalizza **per vicino**
+#   **DENTRO `_contrasto` e SOLO LI'**. **`rho_s` NON cambia altrove: la cura tocca
+#   L'INERZIA, non IL CAMPO.** Le **7 letture di `rho_s` fuori da `_passo_spinoriale`** sono
+#   elencate in `doc/LETTURE_rho_s.md` e passano tutte da `rho_spin` o da `_rho_sorgente()`:
+#   **nessuna vede la normalizzazione**, e lo prova la byte-identita' a flag spento (`C3` del
+#   sigillo: 121 campi, 0 diversi, 2 semi).
+# ⚠ **PRIMO TENTATIVO (per CONTEGGIO dei vicini): MISURATO E INSUFFICIENTE** -- sigillo
+#   `3/6`. Toglieva **esattamente `-1.0000` di pendenza** in tutti e 4 i bracci (a quattro
+#   cifre), ma il residuo restava **`+0.49`** togliendo i lunghi e **`+1.34`** togliendo i
+#   corti. **Il residuo viene DAI PESI:** `rho_s` e' una somma PESATA `Σ w_ij`, e dividere
+#   per il NUMERO di vicini non e' dividere per il PESO TOTALE. **Resta nel registro come
+#   tentativo misurato** (decisione di Luca).
+# ✅ **`STANDARD 10`: NESSUNA LEGGE NUOVA E NESSUNA GRANDEZZA NUOVA** -- si TOGLIE
+#   l'incoerenza fra numeratore e denominatore, e il peso dei vicini lo costruisce gia'
+#   `_mat(w)`.
+CONTRASTO_INTENSIVO = False   # [`INERZIA-1(C)`, 2026-09-25] `CONTRASTO_INTENSIVO`: IL
+                        #   CONTRASTO DELL'INERZIA
+                        #   E' «PER VICINO». Decisione di Luca. OFF di default, e FUORI dal
+                        #   driver finche' il sigillo non passa. La legge, la derivazione e i
+                        #   numeri stanno nella scheda `inerzia-spinoriale` di
+                        #   `doc/REGISTRO_FISICA.md`.
 SEMINA_MATURA = False   # [CURA 4, 2026-09-25] L'ACCENSIONE DEL CAMPO. Decisione di Luca.
                         # OFF di default: un interruttore alla volta (par.1).
                         #

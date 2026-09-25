@@ -345,6 +345,14 @@ def installa():
     return 0
 
 def pre_commit():
+    # `P7` sta in un modulo suo (`csv/_presidio_commenti_flag.py`) perche' NON guarda i file
+    #   staged: e' una POSTCONDIZIONE, e confronta il disco con `HEAD`.
+    import subprocess as _sp
+    _q = _sp.run([sys.executable, os.path.join(RADICE, 'csv', '_presidio_commenti_flag.py'),
+                  '--pre-commit'], cwd=RADICE, capture_output=True, text=True)
+    if _q.returncode:
+        sys.stderr.write(_q.stderr or '')
+        return 1
     coppie = []
     for rel in staged():
         p = os.path.join(RADICE, rel)
