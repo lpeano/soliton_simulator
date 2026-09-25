@@ -60,22 +60,22 @@ S.SCALA_MIN_PASSO = True
 S.SCALA_MIN = False
 if hasattr(S, "MITOSI_2LAM"):
     S.MITOSI_2LAM = bool(FLAG)
-if SOGLIA_ZERO and hasattr(S, "MITOSI_2LAM"):
-    # `C8`, IL CASO CHE DEVE FALLIRE: il flag resta ON ma la soglia si porta a ZERO, cosi' la
-    #   condizione `d >= 2*LAM` diventa `d >= 0`, sempre vera. Se `C2` passa anche cosi', non
-    #   sta guardando la cura. Si ottiene mettendo `LAM = 0` SOLO dentro il confronto: si
-    #   avvolge `mitosi` e si azzera `LAM` per la durata della chiamata.
-    _lam_vero = S.LAM
-    _orig_mit = S.Rete.mitosi
-
-    def _mit0(self):
-        S.LAM = 0.0
-        try:
-            return _orig_mit(self)
-        finally:
-            S.LAM = _lam_vero
-
-    S.Rete.mitosi = _mit0
+# ❌❌ IL MIO PRIMO `C8` ERA MAL COSTRUITO, E LO SCRIVO PERCHE' INSEGNA QUALCOSA.
+#   Azzeravo `LAM` per la durata di `mitosi`, per rendere `d >= 2*LAM` sempre vera. Ma
+#   **`_nasce` USA LO STESSO `LAM`**, quindi con `LAM = 0` **non troncava piu' niente**, e
+#   gli archi nascevano sotto la scala vera: `verifica_invarianti` li ha beccati e il
+#   braccio SI E' SCHIANTATO invece di FALLIRE.
+#     `DominioViolato: d VIOLA >= LAM (= 0.800000) al passo 1, quanti: 6,
+#      valori 5.29e-01, 5.05e-01, ...`
+#   ✅ **E QUESTO E' UN RISCONTRO, non solo un mio errore:** dimostra che
+#   `verifica_invarianti` PROTEGGE GIA' `d >= LAM`, e che oggi **e' `_nasce` a garantirlo**.
+#   Cioe': la `CURA 5` toglie il BISOGNO del presidio **senza toccare l'invariante**, e
+#   l'invariante resta a vigilare. È esattamente la forma che `STANDARD 10` chiede.
+#
+#   IL `C8` GIUSTO NON HA BISOGNO DI MANIPOLARE NIENTE: **il caso che deve fallire e' il
+#   BRACCIO OFF.** Se `C2` (`_sm_trd_mitosi == 0`) passasse anche a flag SPENTO, non
+#   starebbe guardando la cura. E il dato c'e' gia', nello stesso sigillo.
+SOGLIA_ZERO = False
 
 S.net = S.Rete(SEME)
 S.test["dati"] = {}
@@ -192,10 +192,10 @@ def braccio(nome, seme, flag, sim=None, soglia_zero=False):
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 
+# il braccio `c8` NON esiste piu': il caso che deve fallire e' il braccio OFF, che c'e' gia'.
 BR = ([("off_s%d" % s, s, False, None, False) for s in SEMI]
       + [("on_s%d" % s, s, True, None, False) for s in SEMI]
-      + [("prima_s%d" % s, s, False, VECCHIO, False) for s in SEMI]
-      + [("c8_s%d" % SEMI[0], SEMI[0], True, None, True)])
+      + [("prima_s%d" % s, s, False, VECCHIO, False) for s in SEMI])
 proc = {n: braccio(n, s, f, sm, sz) for n, s, f, sm, sz in BR}
 LOG = []
 for n, pr in proc.items():
@@ -246,7 +246,7 @@ def leggi(n):
 OFF = [leggi("off_s%d" % s) for s in SEMI]
 ON = [leggi("on_s%d" % s) for s in SEMI]
 PR = [leggi("prima_s%d" % s) for s in SEMI]
-C8 = leggi("c8_s%d" % SEMI[0])
+
 OK = []
 
 
@@ -350,16 +350,21 @@ OK.append(crit("C7", "CONTROLLO POSITIVO: i due bracci DEVONO differire",
                + chr(10) + "MORTO (par.10.2)."))
 
 # ---------------------------------------------------------------- C8
-_tr8 = C8["contatori_sm"].get("_sm_trd_mitosi", 0)
-_lu8 = C8["contatori_sm"].get("_sm_lund_mitosi", 0.0)
-OK.append(crit("C8", "CASO CHE DEVE FALLIRE: con la soglia forzata a ZERO, `C2` da' FAIL",
-               not (_tr8 == 0 and _lu8 == 0.0),
-               "soglia a zero: trd_mitosi = %s   lund_mitosi = %s   -> `C2` %s"
-               % (_tr8, _lu8, "FALLISCE (giusto)" if not (_tr8 == 0 and _lu8 == 0.0)
-                  else "PASSA (e non deve)")
-               + chr(10) + "la soglia si azzera mettendo `LAM = 0` SOLO per la durata di `mitosi`,"
-               + chr(10) + "cosi' `d >= 2*LAM` diventa `d >= 0`, sempre vera. Se `C2` passasse"
-               + chr(10) + "anche qui, non starebbe guardando la CURA."))
+# `C8`, IL CASO CHE DEVE FALLIRE: **il braccio OFF**. Non serve manipolare niente.
+_ok8 = not (all(t == 0 for t in _tr0) and all(l == 0.0 for l in _lu0))
+OK.append(crit("C8", "CASO CHE DEVE FALLIRE: `C2` applicato al braccio OFF da' FAIL",
+               _ok8,
+               "OFF: trd_mitosi %s   lund_mitosi %s   -> `C2` %s"
+               % (_tr0, _lu0, "FALLISCE (giusto)" if _ok8 else "PASSA (e non deve)")
+               + chr(10) + "Se `C2` passasse anche a flag SPENTO, non starebbe guardando la CURA."
+               + chr(10) + "❌ E IL MIO PRIMO `C8` ERA MAL COSTRUITO: azzeravo `LAM` per la durata"
+               + chr(10) + "  di `mitosi`, ma **`_nasce` usa LO STESSO `LAM`**, quindi non troncava"
+               + chr(10) + "  piu' niente e `verifica_invarianti` ha fatto SCHIANTARE il braccio"
+               + chr(10) + "  invece di farlo FALLIRE (`DominioViolato: d VIOLA >= LAM`, 6 archi a"
+               + chr(10) + "  5.29e-01 e 5.05e-01 al passo 1)."
+               + chr(10) + "✅ ED E' UN RISCONTRO: dimostra che `verifica_invarianti` PROTEGGE GIA'"
+               + chr(10) + "  `d >= LAM`, e che oggi e' `_nasce` a garantirlo. La `CURA 5` toglie il"
+               + chr(10) + "  BISOGNO del presidio SENZA toccare l'invariante, che resta a vigilare."))
 
 P()
 P("CONTATORI DELLA CURA (braccio ON): negati %s su %s candidati"
