@@ -3371,8 +3371,6 @@ class Rete:
             _peq_nodo = np.where(_cn[:n] > 0, _sp[:n] / np.maximum(_cn[:n], 1), 0.0)
         else:
             _peq_nodo = np.zeros(n)
-            _cn = None      # [`INERZIA-1(C)`] nessun arco valido: non c'e' un conteggio di
-                            #   vicini, e il ramo sotto lo DICHIARA invece di inventarne uno.
 
         # IL FALLBACK DEL PRIMO PASSO, con la convenzione GIA' USATA SOPRA per `_cs_nodo_prev`:
         # quando lo stato precedente non e' utilizzabile si prende il valore che rende il fattore
@@ -3429,17 +3427,42 @@ class Rete:
         #   ⚠ **`_cn = None`** (nessun arco valido) **NON si aggira con un `1`:** in quel caso
         #   `_ok_n` e' falso e `_contrasto` vale **1** per la convenzione del primo passo. Il
         #   ramo e' CONTATO, non assunto impossibile (`P5`).
+        # ✅ [VARIANTE PESATA, decisione di Luca 2026-09-25] **SI NORMALIZZA SULLA SOMMA DEI
+        #   PESI, NON SUL CONTEGGIO.** `w` e' **gia' un parametro di questa funzione**, ed e' lo
+        #   STESSO `w` che `calcola_psi` passa a `_mat(w)` per costruire `psi_spin`: la somma per
+        #   nodo e' **la somma di riga di `_mat(w)`**. **Nessuna grandezza nuova.**
+        #   ⚠ **IL PRIMO TENTATIVO (per CONTEGGIO) E' MISURATO E INSUFFICIENTE**, sigillo `3/6`:
+        #     toglieva **esattamente `-1.0000`** di pendenza in 4 bracci su 4, e restava un
+        #     residuo **`+0.49`** (via i lunghi) e **`+1.34`** (via i corti). **Resta nel
+        #     registro come tentativo misurato**, non nel codice.
+        #   ⚠ **E UNA COSA DA SAPERE PRIMA DI LEGGERE I NUMERI:** `rho_spin` e' il **MODULO
+        #     QUADRO** di `psi_spin`, che a sua volta e' una somma pesata -> **`rho_s ~ W^2`**.
+        #     Dividere per `W` **una volta** toglie **una** potenza: se la dipendenza e'
+        #     quadratica il residuo **non si azzera**, e la forma coerente sarebbe `W^2`.
+        #     **E' scritto nel task history PRIMA della misura**, perche' dopo sembrerebbe una
+        #     scusa. Il numero distingue le due ipotesi.
         _rho_c = _rho_s
         if CONTRASTO_INTENSIVO:
             self._g_ci_tot = getattr(self, '_g_ci_tot', 0) + 1
-            if _cn is None:
-                self._g_ci_senza_cn = getattr(self, '_g_ci_senza_cn', 0) + 1
-                self._g_ci_senza_cn_quando = int(self._g_ci_tot)
+            _wn = None
+            if w is not None and len(np.asarray(w)) == len(self.i):
+                _wa = np.asarray(w, float)
+                _wn = (np.bincount(self.i, _wa, minlength=n)[:n]
+                       + np.bincount(self.j, _wa, minlength=n)[:n])
+            if _wn is None or not np.all(np.isfinite(_wn)) or np.any(_wn <= 0.0):
+                # ⚠ IL RAMO SENZA PESO UTILIZZABILE **NON si aggira con un `1`**: si lascia
+                #   `_rho_c = _rho_s` e **si CONTA**, con la stessa convenzione del primo passo
+                #   (`_contrasto` neutro) usata per `_cs_nodo_prev`. Un fallback non misurato e'
+                #   un comportamento sconosciuto (`P5`), e qui il primo passo ci passa.
+                self._g_ci_senza_peso = getattr(self, '_g_ci_senza_peso', 0) + 1
+                self._g_ci_senza_peso_quando = int(self._g_ci_tot)
+                self._g_ci_senza_peso_forma = (int(len(np.asarray(w))) if w is not None else -1,
+                                              int(len(self.i)))
             else:
-                _vic = np.maximum(np.asarray(_cn[:n], float), 1.0)
-                _rho_c = _rho_s / _vic
-                self._g_ci_vic_p50 = float(np.median(_vic))
-                self._g_ci_vic_min = float(_vic.min())
+                _rho_c = _rho_s / _wn
+                self._g_ci_w_p50 = float(np.median(_wn))
+                self._g_ci_w_min = float(_wn.min())
+                self._g_ci_w_max = float(_wn.max())
                 self._g_ci_nodi = int(n)
         _contrasto = np.where(_ok_n, _rho_c / np.where(_ok_n, _peq_nodo, 1.0), 1.0)
         inerzia = np.maximum(_contrasto * _T2, 1e-6)       # il pavimento RESTA: deve diventare inerte

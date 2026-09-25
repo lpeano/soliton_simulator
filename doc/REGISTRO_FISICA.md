@@ -1242,6 +1242,31 @@ rende la cura una **rimozione di incoerenza** e non un fattore di scala nuovo.
 
 ## ✅ LA CURA DEL 2026-09-25 — `INERZIA-1(C)`, **LOCALE** (decisione di Luca)
 
+> ### ⚠ **DUE VARIANTI PROVATE, E UNA TERZA IPOTESI CHE POTREBBE RITIRARLE ENTRAMBE**
+> **VARIANTE 1 — per CONTEGGIO dei vicini** (`rho_s / max(_cn, 1)`). **Sigillo `3/6`.**
+> Toglieva **esattamente `-1.0000`** di pendenza in **4 bracci su 4** *(`1.5200 -> 0.5199`,
+> `2.3389 -> 1.3387`, `1.4858 -> 0.4865`, `2.3642 -> 1.3641`)* — **una** potenza di `k`, cioe'
+> quello che il conteggio puo' togliere. **Residuo `+0.49` (via i lunghi), `+1.34` (via i
+> corti).** `C3` PASS *(LOCALE: 121 campi, 0 diversi)*, `C5` PASS *(pavimento non morde, min
+> `0.0655`)*, `C6` scala `x0.0149 ~ 1/77`. **Non e' nel codice: resta come TENTATIVO MISURATO.**
+>
+> **VARIANTE 2 — per SOMMA DEI PESI** (`rho_s / Σ w_ij`), decisione di Luca: `w` e' **gia'** un
+> parametro di `_passo_spinoriale`, lo **stesso** che `calcola_psi` passa a `_mat(w)`.
+> **⚠ `rho_spin` e' il MODULO QUADRO di `psi_spin`**, che e' a sua volta una somma pesata ->
+> **`rho_s ~ W^2`**: dividere per `W` **una volta** toglie **una** potenza, quindi se la
+> dipendenza e' quadratica **il residuo non si azzera**.
+>
+> ### ❗ **IPOTESI DI LUCA (2026-09-25): E SE FOSSE UN RITARDO DI `peq`, NON UN'ESTENSIVITA'?**
+> `_peq_nodo` e' una **MEMORIA** che rilassa verso `rho` con `tau_bg`. **All'equilibrio i due
+> seguono lo STESSO vicinato, e il loro rapporto potrebbe essere GIA' intensivo.** Due fatti:
+> * nella prova di limite gli archi si tagliano **DI COLPO**: `rho` reagisce subito, **`peq` no**;
+> * **i figli della mitosi EREDITANO `peq` dall'arco del genitore** *(vicinato ~77)*, mentre il
+>   loro `rho` viene da **2** vicini.
+>
+> **Se e' un ritardo, la cura NON e' normalizzare** — cambierebbe l'inerzia di **TUTTI** i nodi
+> di `~1/77` — **ma il `peq` alla nascita dei nuovi archi.** **La misura decide, e la decisione
+> e' di Luca.** *(Criteri nel task history, scritti prima.)*
+
 **IL DIFETTO, MISURATO** *(`CONFIG-1/a`, configurazione del driver, 2 semi × 2 versi del
 taglio, 20 bersagli per seme; `csv/_test_fork/_limite_accoppiamento2.py`)* — pendenze su
 `log k`, dove `k` e' il numero di relazioni del nodo:
