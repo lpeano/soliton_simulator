@@ -18849,3 +18849,85 @@ eta'.
 **Quindi: prima i criteri, poi UNA lettura in piu' che registra `W` e la COPPIA per ogni figlio a
 ogni eta'** — sola lettura, nessuna cura, e **serve a `POTENZE-1`**, quindi rispetta il vincolo del
 mandato globale sulle indagini nuove.
+
+
+---
+
+# ⚖️ **LE TRE FRAZIONI, DAL GIRO VALIDO: IL DIVARIO DEI FIGLI E' `W^2`, NON `peq`** *(2026-09-26)*
+
+*(`csv/_test_fork/_scomposizione_figli.py`, referto in
+`csv/_test_fork/_scomposizione_figli/SCOMPOSIZIONE_figli.txt`. Flag **SPENTO**, argv del driver,
+2 semi, budget 120 passi, `passo_pieno`.)*
+
+## PRIMA I CONTROLLI, perche' senza di essi le frazioni non valgono niente
+
+```
+COLLAUDO           4/4      chiude SOLO `geometrica|ok_n`    (1.776e-15 contro 9.27 del filtro vecchio)
+K1   PASS   l'identita' chiude su 4300 campioni, scarto massimo 3.553e-15
+K2   PASS   le frazioni hanno lo stesso segno e ordine sui DUE semi, a ogni eta'
+K3          `coppia ~ ramp^0.146` (R2 0.58) e `^0.039` (R2 0.05)  ->  `R3bis` CADE
+passi con NASCITE, ora TENUTI:   51 (s11)   46 (s12)      <- prima erano SCARTATI
+nodi col contrasto DI CONVENZIONE, esclusi:   maturi 0/0   figli 210/211
+```
+
+> **`4300` campioni contro i `400` del giro invalidato**, e **`K2` che era `FAIL` ora e' `PASS`**:
+> il campione distorto non era solo piu' piccolo, **era diverso**. **E i 210/211 figli esclusi sono
+> esattamente l'eta' 1**, i nodi col `_contrasto = 1` di convenzione: nel giro invalidato erano
+> sopravvissuti per caso *(`rho = 0.0` esatto)*, ora si escludono **per la causa giusta**.
+
+## 🎯 **LA RISPOSTA: `T2` E' IL `107`-`114 %` DEL DIVARIO**
+
+```
+                %T2 (rho_s/W^2)   %T3 (peq EREDITATO)   %T1 (resto)     log(c_f/c_m)
+s11  eta' 2        107.8              -3.3                 -4.5           -11.64
+s11  eta' 14       114.0              -6.0                 -8.0            -6.55
+s12  eta' 2        107.2              -2.8                 -4.4           -11.65
+s12  eta' 14       114.4              -6.4                 -8.0            -6.53
+```
+
+> ### **IL DIVARIO DEI FIGLI E' TUTTO NEL PESO DI VICINATO, AL QUADRATO.**
+> `T2` **eccede il 100 %** perche' gli altri due termini vanno **in direzione OPPOSTA** e lo
+> compensano di `~8`-`14 %`.
+
+**E LA STRUTTURA SI VEDE DIRETTAMENTE, come terza prova indipendente:**
+
+```
+rho ~ ramp^2.74        W ~ ramp^1.37        ->   rho ~ W^(2.74/1.37) = W^2.00
+inerzia ~ ramp^2.80    (R2 0.95-0.96 su tutte)
+```
+
+**`2.00` esatto.** `rho_s` **e' il quadrato** di una somma pesata, e il dato lo dice **senza
+passare dalla lettura del codice**.
+
+## ❌❌ **E QUESTO RIBALTA UNA MIA LETTURA, non la sfuma**
+
+**Cosa avevo scritto** *(sigillo esteso)*: *«la causa e' leggibile: `contrasto` e' 3-4 ordini
+troppo piccolo **perche' `rho` parte da `2e-04` mentre `peq` e' ereditato a `1.37`**»*.
+
+> ### ❌ **`T3` E' NEGATIVO: `-3` a `-6 %`.** Il `peq` del figlio e' **piu' PICCOLO** di quello dei
+> ### maturi *(rapporto `~0.68`)*, quindi **riduce** il divario invece di produrlo.
+> **L'errore era di CATEGORIA:** ho confrontato `peq = 1.37` con `rho = 2e-04` — **un rapporto
+> interno al figlio** — e ne ho concluso qualcosa **sul confronto coi maturi**, che e' un'altra
+> domanda. *(E' l'errore di popolazione di `A3`, fatto su me stesso.)*
+
+## ⚠⚠ **MA LE FRAZIONI NON DICONO «COSA FAREBBE OGNI CURA», E LA DIFFERENZA E' GROSSA**
+
+| | il legame frazione -> cura |
+|---|---|
+| **cura A**, `rho_s/W^2` | **ESATTO**: quella cura **rimuove `T2` per costruzione**. Togliere il `107`-`114 %` significa **piu'** che chiudere il divario: lo **rovescerebbe** di `~8`-`14 %` |
+| **cura B**, `peq` alla nascita | **NON esatto, e qui devo essere chiaro**: `T3` e' il contributo **ATTUALE** del rapporto dei `peq`. Una cura che **cambiasse** `peq_f` — per esempio calibrandolo sul `rho` locale del figlio, cioe' da `1.37` a `~2e-04` — **sposterebbe `T3` di una quantita' ENORME**, non del suo valore attuale |
+
+> ### **LA SCOMPOSIZIONE DICE DI COSA E' FATTO IL DIVARIO, NON COSA FAREBBE UNA CURA.**
+> Per la **A** le due cose coincidono *(la cura rimuove esattamente quel termine)*. Per la **B**
+> **no**: `T3 = -3 %` significa *«il `peq` ereditato non e' cio' che PRODUCE il divario»*, **non**
+> *«curare `peq` alla nascita non avrebbe effetto»*. **Non ho misurato la seconda cosa**, e
+> scriverlo come se l'avessi misurata sarebbe l'errore piu' facile di questa pagina.
+
+## ✅ E `R3bis` CADE, ora su un campione valido
+
+`coppia ~ ramp^0.146` *(`R2 0.58`)* e `^0.039` *(`R2 0.05`)*: **la coppia NON porta `ramp`.**
+Quindi l'asimmetria di esponenti **fra coppia e inerzia non e' `1` contro `2`: e' `0` contro `2.8`**
+— **piu' grande** di quanto l'ipotesi prevedeva, non piu' piccola.
+*(E `|omega| ~ ramp^+0.16` / `^+0.07`: **sale** leggermente con `ramp`, non scende come `1/ramp`.)*
+
+## 🛑 MI FERMO. **La scelta fra A e B e' di Luca**, e questi sono i numeri per farla.

@@ -1,0 +1,163 @@
+================================================================================================================
+LA SCOMPOSIZIONE ESATTA DEL DIVARIO DEI FIGLI   (2026-09-26)
+================================================================================================================
+
+[scomp_s11] si gira: assente
+[scomp_s12] si gira: assente
+[scomp_s11] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK scomp_s11  nati 218  righe 2112  maturi 120  esclusi 0
+[scomp_s12] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK scomp_s12  nati 216  righe 2188  maturi 120  esclusi 0
+
+blob del simulatore  1fc6a1c5      blob della copia  1c712163   (2 ancore, GENERATA AL RUN)
+semi [11, 12]   flag SPENTO   passi pieni prima 20   budget 120   eta' fino a 14
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 79
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 79.
+
+
+================================================================================================================
+IL COLLAUDO DI `K1` SU DATI SINTETICI A RISPOSTA NOTA (`P1-sexies`)
+================================================================================================================
+  dati con `contrasto == rho/peq` nodo per nodo, `rho` e `peq` log-normali INDIPENDENTI
+  (se fossero proporzionali il difetto non si vedrebbe: **il caso sintetico deve
+  CONTENERE il difetto**, non spiegarlo).
+
+  aggregazione | filtro              scarto max     atteso
+  geometrica|ok_n                    1.776e-15      ~0  <- L'UNICO che deve chiudere
+  mediane|ok_n                       4.748e-02      >> 0  (aggregazione sbagliata)
+  geometrica|tutte_positive          9.274e+00      >> 0  (nodi di CONVENZIONE dentro)
+  mediane|tutte_positive             9.321e+00      >> 0  (entrambi i difetti)
+
+  -> COLLAUDO 4/4: chiude SOLO `geometrica|ok_n`.
+     **Quindi `K1` e' un controllo VERO**: se fallisce sul dato, il difetto e' nella
+     RACCOLTA, non nell'aggregazione.
+
+================================================================================================================
+`K1` -- L'IDENTITA' CHIUDE?   |T1+T2+T3 - log(c_f/c_m)| < 1e-9
+================================================================================================================
+  scomp_s11      campioni   2112   scarto massimo dell'identita'  3.553e-15
+  scomp_s12      campioni   2188   scarto massimo dell'identita'  3.553e-15
+
+  -> `K1` PASS   (massimo su 4300 campioni: 3.553e-15)
+
+================================================================================================================
+LE TRE FRAZIONI, ETA' PER ETA' -- figlio contro MATURI DELLO STESSO PASSO
+================================================================================================================
+  T2 = quello che `rho_s/W^2` TOGLIE      T3 = quello che resta a `peq` EREDITATO
+  T1 = quello che resta in `rho/W^2` a parita' di peso: NESSUNA delle due cure lo tocca
+
+----------------------------------------------------------------------------------------------------------------
+scomp_s11   (nati 218)
+eta    campioni c_f/c_m      log(c_f/c_m) T1           T2           T3        %T2       %T3   %T1
+2      202     8.521e-06    -11.6422     0.5274       -12.5559     0.3863    107.8     -3.3   -4.5
+3      193     6.175e-05    -9.6041      0.5272       -10.5072     0.3759    109.4     -3.9   -5.5
+4      180     0.0001199    -8.9524      0.5243       -9.8526      0.3760    110.1     -4.2   -5.9
+5      177     0.0001913    -8.4962      0.5260       -9.4108      0.3886    110.8     -4.6   -6.2
+6      175     0.0002797    -8.1232      0.5230       -9.0404      0.3941    111.3     -4.9   -6.4
+7      165     0.0003239    -7.8636      0.5187       -8.7638      0.3815    111.4     -4.9   -6.6
+8      161     0.0004626    -7.5901      0.5189       -8.4800      0.3709    111.7     -4.9   -6.8
+9      153     0.0005987    -7.4059      0.5191       -8.2809      0.3559    111.8     -4.8   -7.0
+10     151     0.0007152    -7.1945      0.5162       -8.0800      0.3694    112.3     -5.1   -7.2
+11     149     0.0008075    -6.9879      0.5172       -7.8853      0.3801    112.8     -5.4   -7.4
+12     142     0.0009707    -6.8800      0.5249       -7.7716      0.3667    113.0     -5.3   -7.6
+13     134     0.001149     -6.7063      0.5242       -7.6146      0.3841    113.5     -5.7   -7.8
+14     130     0.001347     -6.5519      0.5232       -7.4690      0.3939    114.0     -6.0   -8.0
+
+----------------------------------------------------------------------------------------------------------------
+scomp_s12   (nati 216)
+eta    campioni c_f/c_m      log(c_f/c_m) T1           T2           T3        %T2       %T3   %T1
+2      205     7.345e-06    -11.7699     0.5135       -12.6143     0.3309    107.2     -2.8   -4.4
+3      197     5.669e-05    -9.7809      0.5106       -10.6390     0.3475    108.8     -3.6   -5.2
+4      193     0.0001177    -9.0993      0.5106       -9.9652      0.3553    109.5     -3.9   -5.6
+5      188     0.0001855    -8.6300      0.5125       -9.5042      0.3618    110.1     -4.2   -5.9
+6      181     0.0002689    -8.2479      0.5108       -9.1335      0.3748    110.7     -4.5   -6.2
+7      176     0.000346     -7.9147      0.5063       -8.7898      0.3687    111.1     -4.7   -6.4
+8      172     0.000514     -7.6040      0.5063       -8.4941      0.3837    111.7     -5.0   -6.7
+9      161     0.0006744    -7.3401      0.5219       -8.2311      0.3691    112.1     -5.0   -7.1
+10     157     0.0008229    -7.1242      0.5219       -8.0338      0.3876    112.8     -5.4   -7.3
+11     149     0.001007     -6.9287      0.5256       -7.8340      0.3797    113.1     -5.5   -7.6
+12     142     0.00117      -6.7353      0.5234       -7.6582      0.3996    113.7     -5.9   -7.8
+13     136     0.001351     -6.5882      0.5201       -7.5199      0.4116    114.1     -6.2   -7.9
+14     131     0.001672     -6.4209      0.5158       -7.3465      0.4097    114.4     -6.4   -8.0
+
+================================================================================================================
+`K2` -- LE FRAZIONI SONO LE STESSE SUI DUE SEMI?
+================================================================================================================
+eta    %T2 (s1 / s2)          %T3 (s1 / s2)          segni concordi?
+2      107.8 / 107.2          -3.3 / -2.8            si
+3      109.4 / 108.8          -3.9 / -3.6            si
+4      110.1 / 109.5          -4.2 / -3.9            si
+5      110.8 / 110.1          -4.6 / -4.2            si
+6      111.3 / 110.7          -4.9 / -4.5            si
+7      111.4 / 111.1          -4.9 / -4.7            si
+8      111.7 / 111.7          -4.9 / -5.0            si
+9      111.8 / 112.1          -4.8 / -5.0            si
+10     112.3 / 112.8          -5.1 / -5.4            si
+11     112.8 / 113.1          -5.4 / -5.5            si
+12     113.0 / 113.7          -5.3 / -5.9            si
+13     113.5 / 114.1          -5.7 / -6.2            si
+14     114.0 / 114.4          -6.0 / -6.4            si
+
+  -> `K2` PASS
+
+================================================================================================================
+`K3` (`R3bis`) -- LA COPPIA SUI FIGLI: `coppia ~ ramp^c`
+================================================================================================================
+braccio        grandezza        esponente    R2         punti
+scomp_s11      coppia           0.1460       0.5800     13
+scomp_s11      |omega|          0.1637       0.8667     13
+scomp_s11      rho              2.7378       0.9484     13
+scomp_s11      W                1.3700       0.9459     13
+scomp_s11      inerzia          2.7957       0.9522     13
+scomp_s11      ramp (da->a)     0.05367 -> 0.2795
+
+scomp_s12      coppia           0.0390       0.0514     13
+scomp_s12      |omega|          0.0718       0.2390     13
+scomp_s12      rho              2.7682       0.9607     13
+scomp_s12      W                1.3702       0.9590     13
+scomp_s12      inerzia          2.8039       0.9574     13
+scomp_s12      ramp (da->a)     0.05382 -> 0.2923
+
+  -> `K3`: LA COPPIA NON PORTA `ramp` (`c ~ 0`): `R3bis` CADE
+
+================================================================================================================
+`K4` -- IL NULLO: i MATURI, e la loro DERIVA nel budget
+================================================================================================================
+braccio        W             peq           rho           contrasto     |omega|
+scomp_s11 inizio 6.763         0.7914        21.88         27.65         0.007214
+scomp_s11 fine 5.116         1.669         13.99         8.382         0.01283
+scomp_s12 inizio 6.824         0.7375        22.43         30.41         0.007085
+scomp_s12 fine 5.119         1.662         14.15         8.51          0.01168
+
+  I maturi DERIVANO, ed e' la ragione per cui il confronto e' allo STESSO PASSO: un
+  riferimento fisso darebbe un divario che cambia **perche' cambia il riferimento**.
+  passi con NASCITE (diagnostiche corte, neonati saltati): {'scomp_s11': 51, 'scomp_s12': 46}
+  nodi con `_ok_n` FALSO esclusi -- maturi: {'scomp_s11': 0, 'scomp_s12': 0}   figli: {'scomp_s11': 210, 'scomp_s12': 211}
+  *(sono i nodi col `_contrasto` DI CONVENZIONE: 1. Positivo, quindi il filtro
+  «tutte positive» NON li toglieva.)*
+  passi ESCLUSI e il perche': {'scomp_s11': (0, []), 'scomp_s12': (0, [])}
+
+================================================================================================================
+LA RISPOSTA ALLA DOMANDA DI LUCA
+================================================================================================================
+  scomp_s11      eta' 2:  T2 107.8 %   T3 -3.3 %   T1 -4.5 %
+                 eta' 14: T2 114.0 %   T3 -6.0 %   T1 -8.0 %
+  scomp_s12      eta' 2:  T2 107.2 %   T3 -2.8 %   T1 -4.4 %
+                 eta' 14: T2 114.4 %   T3 -6.4 %   T1 -8.0 %
+
+  **`rho_s/W^2` toglie la quota `T2`. `peq` alla nascita toglie `T3`. `T1` non lo tocca
+  nessuna delle due.** Le tre sommano a 100 % **per identita'**, non per costruzione del
+  criterio: `K1` lo verifica sul dato.
+
+COSA QUESTA LETTURA *NON* DICE:
+  - **quale cura scegliere: decide Luca.** Qui ci sono le frazioni.
+  - **non dice che `rho_s/W^2` sia sicura:** toglie `T2` per costruzione, ma non e' misurato
+    che non rompa altro (`rho_s` entra in `lambda_nodi`, nella soglia della mitosi, nella
+    coppia Schwinger: `doc/LETTURE_rho_s.md`).
+  - **niente sul taglio:** questa e' la famiglia dei FIGLI.
+  - le mediane per eta' mescolano figli di madri diverse: le frazioni sono di POPOLAZIONE.
+  - DUE SEMI: `K2` guarda la concordanza, non una barra (per una barra servono >= 4).

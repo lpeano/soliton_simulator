@@ -202,7 +202,15 @@ for _p in range(1, BUDGET + 1):
     #   ⚠ Si tengono solo i nodi con **tutte e quattro** le grandezze positive: dove `_ok_n`
     #     e' falso `_contrasto` vale `1` per CONVENZIONE, e li' l'identita' **non deve**
     #     chiudere. **Quanti se ne scartano E' UN NUMERO CHE VA NEL REFERTO.**
-    OK_N = np.asarray(getattr(net, "_diag_ok_n", np.ones(n, bool)))[:n].astype(bool)
+    # ✅ [OKN-ASSERT, residuo rilevato da Luca il 2026-09-26] **NIENTE `getattr(..., default)`:**
+    #   un `np.ones` di ripiego direbbe «tutti validi» **senza avvisare**, ed e' `RIPIEGO-1` in
+    #   miniatura. Oggi la postcondizione `P9` garantisce che la riga ci sia, **ma la garanzia sta
+    #   in un ALTRO presidio**: se la lista delle righe dichiarate cambiasse, il difetto
+    #   tornerebbe **muto**. Qui si FERMA, e dice quale riga manca.
+    assert hasattr(net, "_diag_ok_n"), (
+        "manca la riga diagnostica `_diag_ok_n`: senza di essa i nodi col `_contrasto` DI "
+        "CONVENZIONE (= 1, POSITIVO) entrerebbero nell'identita' e `K1` misurerebbe un'altra cosa")
+    OK_N = np.asarray(net._diag_ok_n)[:n].astype(bool)
     _bm = (W[mv] > 0) & (PQ[mv] > 0) & (RH[mv] > 0) & (CT[mv] > 0) & OK_N[mv]
     _mv = mv[_bm]
     o["ok_n_falsi_maturi"] = o.get("ok_n_falsi_maturi", 0) + int(np.sum(~OK_N[mv]))
