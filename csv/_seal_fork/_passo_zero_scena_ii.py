@@ -114,6 +114,33 @@ o["U2_contatori"] = {k: (float(v) if isinstance(v, float) else int(v))
 net.calcola_psi()
 I = np.asarray(net.intensita(), float)
 assert I.size == net.n, "calcola_psi non ha prodotto n valori: %d contro %d" % (I.size, net.n)
+o["S9_I_max_passo0"] = float(I.max())
+o["eta_max_passo0"] = float(np.max(net.eta)) if len(net.eta) else float("nan")
+o["pesi_somma_passo0"] = float(np.sum(net._pesi()))
+# ❌❌ AL PASSO ZERO IL CAMPO E' NULLO **PER COSTRUZIONE**, non per un difetto.
+#   `_pesi` moltiplica per `ramp = min(1, eta/TAU_A)` e **`eta = 0` ALLA NASCITA**, quindi
+#   TUTTI i pesi sono ZERO e `psi = 0`. MISURATO: pesi somma = 0, I.max = 0, esatti.
+#   -> **`S9`, `P2` e `P3` NON SONO MISURABILI AL PASSO ZERO**: non manca un dato, la
+#      grandezza **vale zero per definizione a quell'istante**. E' `P4` del par.0-ter:
+#      prima di misurare se una grandezza cambia, verificare che sia LIBERA di cambiare.
+#   -> e il mio criterio `contrasto > 1` **passava su `0/0 = inf`**: un PASS VACUO.
+# SI MISURA AL PRIMO ISTANTE IN CUI IL CAMPO ESISTE, cioe' **dopo UN passo**, e SI DICHIARA
+#   che non e' il passo zero. **UN passo non e' il giro di 120: quello resta sospeso.**
+net.step()
+net.calcola_psi()
+I1 = np.asarray(net.intensita(), float)
+co1 = {k: v[v < net.n] for k, v in co.items()}
+dentro1 = np.concatenate([co1["massa_%d" % k] for k in range(3)])
+o["P1passo_I_massa"] = float(I1[dentro1].mean()); o["P1passo_I_vuoto"] = float(I1[co1["vuoto"]].mean())
+o["P1passo_contrasto"] = ((o["P1passo_I_massa"] / o["P1passo_I_vuoto"])
+                          if o["P1passo_I_vuoto"] else float("inf"))
+o["P1passo_Lam"] = float(I1.mean())
+o["P1passo_eta_med"] = float(np.median(net.eta))
+o["P1passo_ramp_med"] = float(min(1.0, np.median(net.eta) / S.TAU_A))
+o["TAU_A"] = float(S.TAU_A); o["DT"] = float(S.DT)
+o["P1passo_frazione"] = {("massa_%d" % k): float(np.mean(I1[co1["massa_%d" % k]] > I1.mean()))
+                         for k in range(3)}
+o["P1passo_frazione"]["vuoto"] = float(np.mean(I1[co1["vuoto"]] > I1.mean()))
 dentro = np.concatenate([co["massa_%d" % k] for k in range(3)])
 o["S9_I_massa"] = float(I[dentro].mean()); o["S9_I_vuoto"] = float(I[co["vuoto"]].mean())
 o["S9_contrasto"] = (o["S9_I_massa"] / o["S9_I_vuoto"]) if o["S9_I_vuoto"] else float("inf")
@@ -305,10 +332,26 @@ OK.append(crit("S3", "`sum(d < LAM) == 0` E `sum(d == LAM) == 0` -- i due INSIEM
                + chr(10) + "lo ZERO sul secondo distingue \"non c'e' bisogno di troncare\" da \"troncato\""))
 
 # ---------------------------------------------------------------- S4
-_v = [(et, st(et, "S4_nascite")[0].sum()) for et, _ in SCENE]
-OK.append(crit("S4", "`_g_sm_nascite == 0` al passo zero: il presidio NON scatta",
+# ❌❌ IL CRITERIO DELLA SCHEDA E' SBAGLIATO, ED E' MIO: `_g_sm_nascite == 0` **NON PUO'
+#   essere soddisfatto da codice corretto**, perche' conta le **INVOCAZIONI** di `_nasce`, e
+#   `_allaccia` la invoca **legittimamente** a ogni lotto della semina. MISURATO: `4` in
+#   entrambe le scene, con **ZERO troncamenti**.
+#   E' la classe di `N3b` (par.9): *un criterio scaduto che produce un FAIL falso costa piu' di
+#   un sigillo mancante*, perche' si porta dietro una diagnosi che non c'e'.
+#   IL CRITERIO GIUSTO E' SUI **TRONCAMENTI**, ed e' esattamente cio' per cui `U2` esiste:
+#     somma di `_sm_tr{d,d0}_*` == 0.
+def _somma_tr(J):
+    return sum(v for k, v in J["U2_contatori"].items() if k.startswith("_sm_tr"))
+
+
+_v = [(et, sum(_somma_tr(DATI["%s_s%d" % (et, s)]) for s in SEMI if "%s_s%d" % (et, s) in DATI),
+       st(et, "S4_nascite")[0].sum()) for et, _ in SCENE]
+OK.append(crit("S4", "NESSUN TRONCAMENTO al passo zero: somma di `_sm_tr*` == 0 (il presidio non scatta)",
                all(x[1] == 0 for x in _v),
-               chr(10).join("scena (%s): nascite = %d" % x for x in _v)))
+               chr(10).join("scena (%s): archi troncati = %d     invocazioni `_g_sm_nascite` = %d"
+                            % x for x in _v)
+               + chr(10) + "`_g_sm_nascite` NON e' zero e NON deve esserlo: conta le INVOCAZIONI,"
+               + chr(10) + "e `_allaccia` invoca `_nasce` a ogni lotto della semina."))
 
 # ---------------------------------------------------------------- S5
 _v = [(et, st(et, "S5_isolati")[0].sum(), st(et, "grado_medio")[1]) for et, _ in SCENE]
@@ -331,11 +374,34 @@ for et, _ in SCENE:
     im_ = st(et, "S9_I_massa")[1]
     iv_ = st(et, "S9_I_vuoto")[1]
     _v.append((et, cm_, cs_, im_, iv_, c_.min()))
-OK.append(crit("S9", "intensita' DENTRO le regioni / nel VUOTO > 1 -- IL CRITERIO CHE DECIDE SE LA STRADA (ii) ESISTE",
-               all(x[5] > 1.0 for x in _v),
+# ❌❌ `S9` NON E' MISURABILE AL PASSO ZERO, e il criterio vecchio PASSAVA SU `inf`.
+_z = [(et, st(et, "S9_I_max_passo0")[0].max(), st(et, "pesi_somma_passo0")[0].max(),
+       st(et, "eta_max_passo0")[0].max()) for et, _ in SCENE]
+P()
+P("S9 AL PASSO ZERO: **NON MISURABILE**, e non per un dato che manca.")
+for x in _z:
+    P("   scena (%s): max(I) = %.6e   somma dei pesi = %.6e   max(eta) = %.6e"
+      % x)
+P("   `_pesi` moltiplica per `ramp = min(1, eta/TAU_A)` e `eta = 0` ALLA NASCITA:")
+P("   tutti i pesi sono ZERO ESATTO, quindi `psi = 0` e `I = 0`. La grandezza NON E' LIBERA")
+P("   DI ESSERE DIVERSA DA ZERO a quell'istante (par.0-ter `P4`).")
+P("   ! E IL MIO CRITERIO `contrasto > 1` PASSAVA SU `0/0 = inf`: un PASS VACUO.")
+P("   TAU_A = %.1f, DT = %.3f  ->  servono TAU_A/DT = %.0f passi perche' `ramp` arrivi a 1."
+  % (DATI["a_s%d" % SEMI[0]]["TAU_A"], DATI["a_s%d" % SEMI[0]]["DT"],
+     DATI["a_s%d" % SEMI[0]]["TAU_A"] / DATI["a_s%d" % SEMI[0]]["DT"]))
+P()
+_v9 = []
+for et, _ in SCENE:
+    c_, cm_, cs_ = st(et, "P1passo_contrasto")
+    _v9.append((et, cm_, cs_, c_.min(), st(et, "P1passo_I_massa")[1], st(et, "P1passo_I_vuoto")[1],
+                st(et, "P1passo_ramp_med")[1]))
+OK.append(crit("S9(1)", "DOPO UN PASSO -- il primo istante in cui il campo esiste -- contrasto > 1",
+               all(x[3] > 1.0 for x in _v9),
                chr(10).join("scena (%s): contrasto = %.4f +- %.4f   (min fra semi %.4f)"
-                            "   I_massa = %.6e   I_vuoto = %.6e" % (x[0], x[1], x[2], x[5], x[3], x[4])
-                            for x in _v)
+                            "   I_massa = %.4e   I_vuoto = %.4e   ramp = %.6f"
+                            % x for x in _v9)
+               + chr(10) + "! NON E' IL PASSO ZERO, ed e' dichiarato: e' UN passo, il minimo perche'"
+               + chr(10) + "  il campo esista. UN passo non e' il giro di 120, che resta SOSPESO."
                + chr(10) + "NON basta \"esiste un effetto\": 1.01 e 10 sono due fisiche diverse."))
 
 # ---------------------------------------------------------------- S10 al passo zero + controllo
@@ -395,12 +461,13 @@ PREV = {"a": {"P1": 9.0, "P2": 27.0, "P3": 5.0, "P4": 0.55},
 for et, _ in SCENE:
     D0 = DATI["%s_s%d" % (et, SEMI[0])]
     p1 = st(et, "P1_pesi_per_nodo")[1]
-    p2 = st(et, "S9_contrasto")[1]
-    p3 = st(et, "P3_Lam")[1]
+    # `P2` e `P3` si leggono DOPO UN PASSO: al passo zero valgono 0 per costruzione (vedi `S9`).
+    p2 = st(et, "P1passo_contrasto")[1]
+    p3 = st(et, "P1passo_Lam")[1]
     P("  scena (%s)" % et)
     for sig, mis, att, nome in (("P1", p1, PREV[et]["P1"], "somma dei pesi per nodo (mediana)"),
-                                ("P2", p2, PREV[et]["P2"], "contrasto I_massa/I_vuoto"),
-                                ("P3", p3, PREV[et]["P3"], "Lam = mean(I)")):
+                                ("P2", p2, PREV[et]["P2"], "contrasto I/I (DOPO UN PASSO)"),
+                                ("P3", p3, PREV[et]["P3"], "Lam = mean(I) (DOPO UN PASSO)")):
         r = (mis / att) if att else float("inf")
         seg = "OK" if 0.5 <= r <= 2.0 else "!! FUORI DAL FATTORE 2"
         P("    %-4s %-38s misurato %-14.6g previsto %-8g  rapporto %.3f  %s"
