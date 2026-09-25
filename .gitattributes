@@ -1,15 +1,45 @@
-# ============================================================================================
-#  SOLO I HOOK, E SOLO `eol=lf`.  (2026-09-25)
-# --------------------------------------------------------------------------------------------
-#  `core.autocrlf = true` su questo clone: `git checkout` riscrive LF -> CRLF sul disco.
-#  Per un file di testo e' innocuo; per uno script `#!/bin/sh` NON LO E':
-#  su Linux/macOS un hook con i `^M` muore con `/bin/sh^M: bad interpreter`,
-#  e un presidio che non parte e' peggio di un presidio assente (`A9`).
+# ------------------------------------------------------------------------------------------
+# NEWLINE — perche' questo file esiste (2026-09-16, decisione di Luca)
 #
-#  ⚠ QUESTA REGOLA E' DELIBERATAMENTE STRETTA: copre `.githooks/` e nient'altro.
-#    `CLAUDE.md` par.5-quinquies dice che un `.gitattributes` su `soliton_simulator.py`
-#    NON e' stato aggiunto perche' cambierebbe il comportamento di git su tutto il repo
-#    e romperebbe il confronto fra i blob storici (la trappola CRLF, C18).
-#    Qui il rischio non c'e': `.githooks/` nasce oggi e nessun blob storico lo cita.
-# ============================================================================================
+# `core.autocrlf = true` e NESSUN .gitattributes: `git checkout` riscriveva le newline LF -> CRLF
+# sul disco, e `git hash-object` NON lo mostrava, perche' applica proprio il filtro `clean` che
+# annulla la differenza. Risultato: il file sul disco NON era piu' byte-identico all'oggetto che
+# i CSV citano con la loro colonna `blob`.
+#
+# MISURATO: soliton_simulator.py e' passato da 435730 byte (LF) a 442240 (6510 CRLF), cambiando
+# lo sha1 dei BYTE GREZZI da 08784685 a 37c31630 — mentre `git hash-object`, `git rev-parse HEAD:`
+# e `git diff` continuavano a dire «identico». E' successo DUE VOLTE in un giorno: la prima
+# causata da un mio `git checkout`, la seconda DA SOLA.
+#
+# Chi certifica i byte NON usi `git hash-object`: usi lo sha1 dei byte grezzi
+# (`sha1("blob <len>\0" + byte)`), che e' quello che gli script di misura scrivono nel CSV.
+# ------------------------------------------------------------------------------------------
+
+# Il simulatore e tutti gli strumenti: LF sul disco, sempre, su qualunque piattaforma.
+*.py text eol=lf
+
+# Documenti e dati di misura: stessa regola, cosi' il blob di un CSV non cambia per il sistema
+# operativo di chi lo ha scritto.
+*.md  text eol=lf
+*.csv text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+
+# Binari: mai toccati.
+*.pkl binary
+*.npy binary
+*.npz binary
+*.png binary
+*.mp4 binary
+*.docx binary
+
+# E questo file stesso.
+.gitattributes text eol=lf
+
+# ------------------------------------------------------------------------------------------
+# I HOOK VERSIONATI (2026-09-25). Non hanno estensione, quindi NESSUNA delle regole qui sopra
+# li copre: `.githooks/pre-commit` e `.githooks/commit-msg` sono script `#!/bin/sh`, e su
+# Linux/macOS un hook con i `^M` muore con `/bin/sh^M: bad interpreter`.
+# Un presidio che non parte e' peggio di un presidio assente (`A9`).
+# ------------------------------------------------------------------------------------------
 .githooks/* text eol=lf
