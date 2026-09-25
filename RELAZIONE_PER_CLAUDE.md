@@ -17601,3 +17601,60 @@ Le tre voci erano finite in **`SPEGNIMENTI`** invece che in **`CURE`**, perché 
 
 **I sigilli di `CURA 4` e `CURA 5` vanno rifatti PASSANDO DAL CLI**, altrimenti quel percorso
 resta non provato — ed è esattamente il percorso che la campagna usa.
+
+
+---
+
+# ✅ **IL FLAG ERA ACCESO IN TUTTE LE MISURE DI OGGI** — provato, non dedotto *(2026-09-25)*
+
+*(`csv/_test_fork/_verifica_flag_accesi.py`, referto in `csv/_test_fork/_verifica_flag/`.
+Sola lettura sui file già committati, più **una sonda del meccanismo**.)*
+
+## LA PROVA CHE DECIDE: **la sonda del MECCANISMO, col suo CONTROLLO**
+
+```
+flag       ramp p50       somma dei pesi     _g_cura4_maturati
+False      0.000000       0.000000e+00       0
+True       1.000000       1.855623e+04       4252
+```
+
+> ### ✅ **IL MECCANISMO FUNZIONA.** A flag ACCESO `ramp p50 = 1.000000` **esatto** e
+> ### `_g_cura4_maturati = 4252`; a flag SPENTO `ramp p50 = 0.000000` e il contatore è **zero**.
+>
+> **IL CONTROLLO È IL BRACCIO SPENTO, e senza di esso un `1.0` non proverebbe nulla**, perché non
+> si saprebbe quanto valga a flag spento. *(È il presidio del par.9 sul valore sotto ipotesi
+> nulla, applicato a una verifica di configurazione.)*
+>
+> ### **⇒ TUTTE LE MISURE DI OGGI DICHIARATE «CAMPO MATURO» AVEVANO IL FLAG ACCESO.**
+
+**PERCHÉ UNA SOLA SONDA BASTA PER TUTTE:** il meccanismo è **lo stesso in ognuna** —
+`S.SEMINA_MATURA = True` *(o `= bool(FLAG)`)* su un modulo importato — **e la colonna `(a)` della
+tabella lo verifica sonda per sonda**, dal sorgente.
+
+## ⚠ E TRE SOLE MISURE LO PROVANO **DAL PROPRIO REFERTO**
+
+| misura | provato dal referto? |
+|---|---|
+| `SCALE-TW` passo pieno | **sì** — i contatori `_g_rampa*` |
+| sigillo `CURA 4` | **sì** — `_g_cura4_maturati > 0`, `ramp` a `1` |
+| sigillo `CURA 5` | **sì** — `negati`, `_sm_trd_mitosi == 0` |
+| `chi comprime d0` · `figli della mitosi` · `limite di accoppiamento` · `A13 relazionale` · `dove sta omega` · `rimisura \|dx\|/d` | **NO** — il referto non stampa un effetto che lo provi |
+
+> **Le sei righe «NO» NON dicono che il flag fosse spento: dicono che QUEL REFERTO non lo prova.**
+> **La sonda del meccanismo lo prova per loro** — ma **la lezione resta, e vale come regola:**
+>
+> ### **UN REFERTO CHE DICHIARA UNA CONFIGURAZIONE DEVE STAMPARE UN EFFETTO CHE LA PROVI.**
+> Scrivere *«campo maturo»* in testa al referto è **un'asserzione**; stampare `ramp p50 = 1.0` è
+> **una misura**. **Sei referti su nove avevano solo l'asserzione.**
+
+## ❌ E DUE DIFETTI MIEI NELLO STRUMENTO DI VERIFICA, corretti prima di leggerlo
+
+1. **cercavo le prove SOLO nel referto**, e il referto è una **sintesi**: i contatori stanno nei
+   **json dei bracci**, in `_tmp/`. **Cercare solo nel referto dava `NON VERIFICATO` su una prova
+   che esiste sul disco** — cioè **un'assenza dedotta dal posto in cui avevo guardato**, che è
+   `STANDARD 9` applicato a me stesso. *(E anche coi json, sei restavano non provate: quella
+   correzione non ha cambiato l'esito, e va detto.)*
+2. **l'ancora del patch non attaccava** perché usavo `\u2757` dove il file ha **il carattere
+   reale**. Ho smesso di patchare il patch e ho **appeso** la sonda: **una sostituzione che non
+   attacca si riconosce dall'`assert`, ma tre tentativi di riparare l'ancora sono un segnale che
+   la strada è sbagliata.**

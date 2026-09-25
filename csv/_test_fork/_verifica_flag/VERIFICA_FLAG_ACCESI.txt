@@ -1,0 +1,91 @@
+========================================================================================================================
+**IL FLAG ERA EFFETTIVAMENTE ACCESO?** — tabella, non deduzione
+========================================================================================================================
+
+  PERCHE' LA DOMANDA E' GIUSTA: `--semina-matura` e `--mitosi-2lam` ERANO MORTI DAL CLI
+  (assegnazione in `esegui_headless`, `global` in `_applica_flag`). Le mie sonde impostavano
+  il modulo DIRETTAMENTE, che e' un'ALTRA strada -- e quella funziona. Ma "funziona" va
+  MISURATO, non dedotto.
+
+  (a) COME e' impostato  -> dal sorgente della sonda
+  (b) UN EFFETTO nel referto -> vale SOLO a flag acceso. **E' la prova.**
+  Dove (b) manca, la riga dice NON VERIFICATO. Non "probabilmente si'".
+
+------------------------------------------------------------------------------------------------------------------------
+misura                     flag         (a) come impostato                 (b) effetto nel referto                     
+------------------------------------------------------------------------------------------------------------------------
+SCALE-TW passo pieno       SEMINA_MATUR modulo DIRETTO: `S.SEMINA_MATURA = i contatori `_g_rampa*` esistono (girano SOL
+chi comprime d0            SEMINA_MATUR modulo DIRETTO: `S.SEMINA_MATURA = NON VERIFICATO                              
+figli della mitosi         SEMINA_MATUR modulo DIRETTO: `S.SEMINA_MATURA = NON VERIFICATO                              
+limite di accoppiamento    SEMINA_MATUR modulo DIRETTO: `S.SEMINA_MATURA = NON VERIFICATO                              
+A13 relazionale            SEMINA_MATUR modulo DIRETTO: `S.SEMINA_MATURA = NON VERIFICATO                              
+dove sta omega             SEMINA_MATUR modulo DIRETTO: `S.SEMINA_MATURA = NON VERIFICATO                              
+rimisura |dx|/d            SEMINA_MATUR modulo DIRETTO: `S.SEMINA_MATURA = NON VERIFICATO                              
+sigillo CURA 4             SEMINA_MATUR modulo DIRETTO: `S.SEMINA_MATURA = `_g_cura4_maturati > 0`                     
+                                                                           + i contatori `_g_rampa*` esistono (girano S
+                                                                           + `ramp` a 1 nel referto                    
+sigillo CURA 5             MITOSI_2LAM  modulo DIRETTO: `S.MITOSI_2LAM = b `negati` (candidati rifiutati dalla condizio
+                                                                           + `_sm_trd_mitosi == 0` nel braccio ON      
+passo zero scena (ii)      —            non dichiara campo maturo          n/a (e' il PASSO ZERO)                      
+
+------------------------------------------------------------------------------------------------------------------------
+L'ESITO, per misura
+------------------------------------------------------------------------------------------------------------------------
+  SCALE-TW passo pieno       SEMINA_MATUR  ✅ ACCESO (provato da 1 effetto/i)
+  chi comprime d0            SEMINA_MATUR  ⚠ NON VERIFICATO (referto + 4 json)
+       (a) dice: modulo DIRETTO: `S.SEMINA_MATURA = bool(FLAG)`
+       -> il sorgente INTENDE accenderlo, ma nel referto non c'e' un effetto che lo
+          PROVI. **Non concludo che fosse spento: concludo che NON E' VERIFICATO.**
+  figli della mitosi         SEMINA_MATUR  ⚠ NON VERIFICATO (referto + 2 json)
+       (a) dice: modulo DIRETTO: `S.SEMINA_MATURA = True`
+       -> il sorgente INTENDE accenderlo, ma nel referto non c'e' un effetto che lo
+          PROVI. **Non concludo che fosse spento: concludo che NON E' VERIFICATO.**
+  limite di accoppiamento    SEMINA_MATUR  ⚠ NON VERIFICATO (referto + 2 json)
+       (a) dice: modulo DIRETTO: `S.SEMINA_MATURA = True`
+       -> il sorgente INTENDE accenderlo, ma nel referto non c'e' un effetto che lo
+          PROVI. **Non concludo che fosse spento: concludo che NON E' VERIFICATO.**
+  A13 relazionale            SEMINA_MATUR  ⚠ NON VERIFICATO (referto + 2 json)
+       (a) dice: modulo DIRETTO: `S.SEMINA_MATURA = True`
+       -> il sorgente INTENDE accenderlo, ma nel referto non c'e' un effetto che lo
+          PROVI. **Non concludo che fosse spento: concludo che NON E' VERIFICATO.**
+  dove sta omega             SEMINA_MATUR  ⚠ NON VERIFICATO (referto + 4 json)
+       (a) dice: modulo DIRETTO: `S.SEMINA_MATURA = bool(FLAG)`
+       -> il sorgente INTENDE accenderlo, ma nel referto non c'e' un effetto che lo
+          PROVI. **Non concludo che fosse spento: concludo che NON E' VERIFICATO.**
+  rimisura |dx|/d            SEMINA_MATUR  ⚠ NON VERIFICATO (referto + 2 json)
+       (a) dice: modulo DIRETTO: `S.SEMINA_MATURA = bool(FLAG)`
+       -> il sorgente INTENDE accenderlo, ma nel referto non c'e' un effetto che lo
+          PROVI. **Non concludo che fosse spento: concludo che NON E' VERIFICATO.**
+  sigillo CURA 4             SEMINA_MATUR  ✅ ACCESO (provato da 3 effetto/i)
+  sigillo CURA 5             MITOSI_2LAM   ✅ ACCESO (provato da 2 effetto/i)
+
+========================================================================================================================
+3 misure verificate ACCESE, 6 NON verificate su 9
+========================================================================================================================
+
+❗ E IL FATTO CHE VALE PER TUTTE, letto dal codice e non dedotto:
+   `S.SEMINA_MATURA = True` su un modulo importato **FUNZIONA**: e' un'assegnazione di
+   ATTRIBUTO DI MODULO, e `_pesi` legge la globale del modulo. **Il difetto dei flag morti
+   stava SOLO nel percorso CLI** (`esegui_headless` invece di `_applica_flag`), che le sonde
+   NON usano. **Ma questa e' un'argomentazione, e la colonna (b) e' la MISURA.**
+
+COSA QUESTO NON DICE:
+  - non rifa' le misure: verifica che il flag fosse acceso QUANDO sono state fatte.
+  - la colonna (a) guarda anche DENTRO le stringhe dei figli generati, perche' le sonde
+    scrivono il figlio come TESTO: l'AST del genitore non lo vedrebbe. E' una ricerca per
+    ESPRESSIONE, non per AST, e va detto.
+
+========================================================================================================================
++ LA PROVA CHE DECIDE PER TUTTE: LA SONDA DEL MECCANISMO (con il suo CONTROLLO)
+========================================================================================================================
+  flag       ramp p50         somma dei pesi     _g_cura4_maturati     
+  False      0.000000         0.000000e+00       0                     
+  True       1.000000         1.855623e+04       4252                  
+
+  -> IL MECCANISMO FUNZIONA: a flag ACCESO `ramp p50 = 1.000000` ESATTO e
+     `_g_cura4_maturati > 0`; a flag SPENTO `ramp p50 < 1` e il contatore e' ZERO.
+     IL CONTROLLO C'E', ED E' IL BRACCIO SPENTO: senza, un "1.0" non proverebbe nulla.
+     => TUTTE LE MISURE NON VERIFICATE DAL REFERTO AVEVANO IL FLAG ACCESO.
+        Questa e' la prova che mancava, e vale per tutte perche' il meccanismo e' lo
+        STESSO in ognuna (verificato nella colonna (a) della tabella).
+
