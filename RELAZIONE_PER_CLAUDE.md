@@ -16950,3 +16950,32 @@ la mediana è piatta, il massimo salta una volta e plateau. **Un criterio sul ma
 su cinque nodi su `4300`**; uno sulla mediana direbbe *«niente»*.
 **La domanda vera che ne esce: un figlio di mitosi con grado `2` e densità `21×` più bassa è un
 nodo LEGITTIMO o un difetto della mitosi?** **Non la decido io.**
+
+
+---
+
+# ❗ DECISIONE DI PRINCIPIO: **«NESSUN NODO DI SECONDA CLASSE» VALE ANCHE PER I NATI IN DINAMICA** *(Luca, 2026-09-25)*
+
+**In coda come `NODI-1`. NON si cura ora.**
+
+> Un nodo nato da **mitosi**, **Schwinger** o **faccia** si allaccia con la **STESSA regola della
+> semina** *(`R_CONN`)*, **non solo ai genitori**.
+
+**IL MOTIVO È MISURATO**, ed è il referto di `343d302`:
+
+| il top `0.1 %` di `\|omega\|` | top | tutti |
+|---|--:|--:|
+| nati dopo il passo zero | **`0.90`** | `0.0056` |
+| grado | **`2.0`** | `77.0` |
+| `rho` | **`0.0673`** | `1.414` |
+
+**Un figlio di mitosi nasce con `2` archi contro `77`, densità `1/21`, e `omega = coppia/inerzia`
+fa il resto.** **Non è una legge che diverge: è un nodo che nasce con due soli archi in una
+regione rada** — cioè **un nodo di seconda classe**, e il principio dice che non deve esistere.
+
+**⛔ SI CURA INSIEME ALLA NUOVA LEGGE DI CREAZIONE, non prima**, e la ragione è strutturale: un
+nodo che nasce **al centro di un triangolo con tre archi** è già meno di seconda classe di uno che
+nasce **su un arco con due**, quindi **le due decisioni si intrecciano** e separarle
+significherebbe curare due volte lo stesso punto.
+**E il calcolo delle distanze passerà DAGLI ARCHI quando il disegno uscirà dalla dinamica**
+*(`A3`)*: allacciare «entro `R_CONN`» oggi richiede `pos`, e questo lega `NODI-1` ad `A3`.
