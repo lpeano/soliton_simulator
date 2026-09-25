@@ -75,8 +75,15 @@ net.d = np.full(len(net.d), 3.0 * LAM)          # tutti gli altri BEN SOPRA LAM
 net.d0 = net.d.copy()
 net.d[0] = FATT * LAM
 net.d0[0] = FATT * LAM
+# LA TORSIONE VA IN UNA FINESTRA, NON "GRANDE": `1.0e3` NON FACEVA SCATTARE NULLA.
+#   `discesa = clip(1 - avv/TW_TETTO, 0, 1)` -> ZERO sopra il tetto: la mitosi si SPEGNE.
+#   `segno = -tanh(3*(tau_pp - centro))` -> NEGATIVO (repulsione) sopra `centro`.
+#   Con `tau_pp = 1 + avv/PHI_CRIT`, `tau_soglia = 2`, `tau_tetto = 3`, `centro = 2.5`:
+#   serve `avv` fra `PHI_CRIT` e `1.5*PHI_CRIT`. Si prende `1.2*PHI_CRIT` -> `tau_pp = 2.2`.
+#   ⚠ DIFETTO MIO, ed e' il quinto criterio scritto DAL MIO MODELLO MENTALE invece che da una
+#     misura (par.9): avevo scelto "un numero grande" senza guardare la campana.
 net.tw = np.zeros(len(net.d))
-net.tw[0] = 1.0e3                               # solo l'arco 0 supera la soglia
+net.tw[0] = 1.2 * float(S.PHI_CRIT)
 if hasattr(net, "_rep"):
     net._rep = np.zeros(len(net.d))
 
@@ -98,6 +105,8 @@ for _k in [k for k in list(vars(net)) if k.startswith("_sm_") or k == "_g_sm_nas
 n_pre = int(net.n)
 archi_pre = int(len(net.d))
 d_pre_sel = float(net.d[0]); d0_pre_sel = float(net.d0[0])
+# il PRE della STESSA grandezza: e' il controllo positivo giusto per `U2-8`.
+np.save(os.path.join(TMPD, NOME + "_dPRE.npy"), np.ascontiguousarray(np.asarray(net.d, float)))
 net.mitosi()
 
 out = {
@@ -111,6 +120,10 @@ out = {
     "d0_a_lam": int(np.sum(np.asarray(net.d0) == LAM)),
     "d_min": float(np.min(net.d)), "d0_min": float(np.min(net.d0)),
     "TEMPO_UNICO_MITOSI": bool(S.TEMPO_UNICO_MITOSI),
+    # `TW_TETTO` e' una LOCALE di `mitosi` (`:5578`), non un attributo di modulo: si
+    # ricalcola qui e SI DICHIARA da dove viene, invece di leggerla dove non esiste.
+    "PHI_CRIT": float(S.PHI_CRIT), "TW_TETTO": float(4.0 * np.pi),
+    "tw_sel": float(1.2 * S.PHI_CRIT),
     "PLAST_DIN": bool(S.PLAST_DIN), "PLAST_MIT": float(S.PLAST_MIT),
 }
 for k, v in sorted(vars(net).items()):
@@ -198,6 +211,8 @@ LAM = A["LAM"]
 P("CONFIGURAZIONE (dai default del sorgente, dichiarata):")
 P("  LAM = %.9f   TEMPO_UNICO_MITOSI = %s   PLAST_DIN = %s   PLAST_MIT = %s"
   % (LAM, A["TEMPO_UNICO_MITOSI"], A["PLAST_DIN"], A["PLAST_MIT"]))
+P("  PHI_CRIT = %.9f   TW_TETTO = %.9f   tw dell'arco = %.9f  (nella FINESTRA della campana)"
+  % (A["PHI_CRIT"], A["TW_TETTO"], A["tw_sel"]))
 P("  arco selezionato: d = %.9f = %.4f LAM,  d0 = %.9f"
   % (A["d_pre_sel"], A["d_pre_sel"] / LAM, A["d0_pre_sel"]))
 P("  n  %d -> %d      archi  %d -> %d" % (A["n_pre"], A["n_post"], A["archi_pre"], A["archi_post"]))
@@ -282,13 +297,18 @@ import numpy as np
 fd = [io.open(os.path.join(TMP, n + "_d.npy"), "rb").read() for n in ("nuovo_12", "vecchio_12")]
 fd0 = [io.open(os.path.join(TMP, n + "_d0.npy"), "rb").read() for n in ("nuovo_12", "vecchio_12")]
 ident = (fd[0] == fd[1]) and (fd0[0] == fd0[1])
-# controllo positivo del confronto: due istanti diversi NON devono essere identici
-ctrl = io.open(os.path.join(TMP, "nuovo_30_d.npy"), "rb").read()
+# CONTROLLO POSITIVO, e il primo che avevo scritto era VACUO: confrontava il caso a 3.0 LAM,
+# i cui `d` sono diversi PERCHE' LI AVEVO IMPOSTATI IO diversi. Non provava che il confronto
+# vedesse una differenza, provava che avevo scritto due numeri diversi. (Difetto mio.)
+# Il controllo giusto e' `d` PRIMA contro `d` DOPO la mitosi, nello STESSO braccio: stessa
+# grandezza, stesso braccio, e la mitosi DEVE averli cambiati.
+ctrl = io.open(os.path.join(TMP, "nuovo_12_dPRE.npy"), "rb").read()
 vive = (ctrl != fd[0])
 OK.append(criterio("U2-8", "BYTE-IDENTICO al codice di HEAD su `d` e `d0` (i contatori non toccano la fisica)",
                    ident and vive,
                    "d  identico: %s      d0 identico: %s%s"
-                   "CONTROLLO POSITIVO del confronto: il caso a 3.0 LAM e' DIVERSO: %s%s"
+                   "CONTROLLO POSITIVO: `d` PRIMA della mitosi contro `d` DOPO, stesso braccio,"
+                   " DIVERSO: %s%s"
                    "(senza, uno `identico` potrebbe essere un confronto cieco -- par.9)"
                    % (fd[0] == fd[1], fd0[0] == fd0[1], chr(10), vive, chr(10))))
 
