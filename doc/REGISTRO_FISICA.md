@@ -985,6 +985,14 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 
 `semina(..., maturi=None)` decide se i nodi nuovi nascono **maturi** *(`ramp = 1`)* o con la rampa. **Default: maturi se la rete era VUOTA** *(`base == 0`)*, cioè se questa semina **è** l'universo. **La legge sta nella scheda `accensione-campo`.**
 
+> **✅ AGGIORNATO il 2026-09-25 (`RAMPA-1`, strada (3)):** i nodi maturi ricevono
+> **`eta = +inf`**, non `eta = _tempo_rampa()`. **La rampa non puo' piu' SCENDERE** — prima
+> scendeva, misurato: `ramp` da `1.000000000` a `0.845601758` in **un** passo, perche' il
+> denominatore cresce `x1.196` contro `x1.011` del numeratore.
+> **La derivazione e i numeri stanno nella scheda `accensione-campo`**: qui sta solo il
+> rimando, perche' `semina` compare in entrambi i marcatori e **un lettore che arriva da
+> `fase-phi` non deve poter credere che la legge sia ancora quella.**
+
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
 # ⑦ LA MITOSI E SCHWINGER — **`mitosi()`**
 
@@ -3152,6 +3160,53 @@ avvenivano **su archi corti**, cioè in regioni **diverse** dalle altre: **non �
 uniforme**, e va tenuto presente leggendo qualunque confronto fra i due bracci.
 
 <!-- SCHEDA nome=accensione-campo funzioni=_pesi,_tempo_rampa,semina flag=SEMINA_MATURA,TAU_A,TAU_A_LOCALE -->
+
+> ## ✅ **AGGIORNATA il 2026-09-25 — `RAMPA-1`, strada (3): IL VUOTO DATO HA ETA' INFINITA.**
+> **LA LEGGE ORA E':** i nodi della semina iniziale (`maturi=True`) ricevono **`eta = +inf`**.
+> **`ramp = min(1, eta/_tempo_rampa()) = 1` per sempre, qualunque `cs`.**
+>
+> ### PERCHE' LA FORMA PRECEDENTE ERA SBAGLIATA, e non e' un'opinione
+> `eta = _tempo_rampa()` dava `ramp = 1` **esatto IN QUELL'ISTANTE**, e `ramp` e' un **rapporto
+> fra due quantita' che si muovono entrambe**. **MISURATO** in configurazione del driver
+> *(`csv/_test_fork/_perche_ramp_cala.py`)*:
+>
+> | grandezza | passo 0 (p50) | passo 1 (p50) | rapporto |
+> |---|---|---|---|
+> | `eta` — numeratore | `0.897802954` | `0.907802954` | **x1.011** |
+> | `_tempo_rampa` — denominatore | `0.897802954` | `1.071554877` | **x1.196** |
+> | `ramp` | `1.000000000` | `0.845601758` | **x0.846** |
+>
+> **Il denominatore corre 18 volte piu' del numeratore**, e al passo 1 solo **54 nodi su
+> 4252** sono ancora a `1` (`_g_rampa_cali = 4198`).
+> **CAUSA:** al passo 0 la cache `_cs_nodo_prev` **non esiste**, quindi il tempo-luce si
+> calcola con `cs = CS_M = 2`; al passo 1 il `cs` vero e' **`p50 1.672`**, `cs_std/cs = 19.07 %`.
+> **La maturita' era assegnata con un `cs` che il nodo non ha.** *(-> `RAMPA-2`, in coda: al
+> passo 1 TUTTE le leggi che usano il tempo-luce o `cs` hanno lo stesso problema.)*
+>
+> ### DIMENSIONI E DOMINIO
+> `eta` e' un **tempo** (`[T]`), e `+inf` e' un tempo **infinito**: dimensionalmente coerente.
+> `ramp` resta in `[0, 1]` per costruzione (`min(1, ...)`); `inf/tr` con `tr > 0` finito da'
+> `inf`, e `min(1, inf) = 1`. **`tr = 0` darebbe `nan`**, ma `tr = d_nodo/cs_nodo > 0` sempre
+> *(`d >= LAM` per `A13`, `cs > 0` per `cs_floor`)*.
+>
+> ### `A11` — NESSUN LIMITE NUOVO, E UNO IN MENO
+> **`+inf` NON e' un tetto ne' un pavimento:** e' l'assenza di una scala. E **spariscono** la
+> chiamata a `_tempo_rampa()` alla semina **e le sue due diramazioni** (array / scalare), che
+> esistevano solo per ricopiare il denominatore nel numeratore (`STANDARD 10`).
+>
+> ### COSA LEGGE E COSA SCRIVE
+> **scrive** `self.eta[_a:_b] = np.inf` (i soli nodi del vuoto dato, l'intervallo
+> `_cura4_maturi` fissato da `semina`). **Non legge niente**: e' proprio il punto — prima
+> leggeva `_tempo_rampa()`, cioe' `d` e `cs` di quell'istante.
+> **I nati in dinamica NON sono toccati**: `eta = 0` a `:2720`, `:2723`, `:6022`, `:6178`, e
+> salgono con la rampa del tempo-luce. **La maturita' e' del VUOTO DATO, non si eredita.**
+>
+> ### `+inf` E' UN VALORE SPECIALE: LE SUE LETTURE SONO VERIFICATE **PER AST**
+> `csv/_letture_eta.py` -> `doc/LETTURE_eta.md`: **17 occorrenze** nel simulatore, e le uniche
+> **due** letture dentro una legge sono **`:3419`** *(il torque pesato)* e **`:3684`** *(`_pesi`)*,
+> **nessuna delle due e' una riduzione**. L'unica riduzione e' **diagnostica** (`_stat` delle
+> colonne `eta_*` in `_diag_completa`), adattata a parte.
+
 
 # ④ `accensione-campo` — **QUANDO UN NODO DIVENTA SORGENTE DI CAMPO**
 

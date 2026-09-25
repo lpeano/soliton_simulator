@@ -2738,18 +2738,36 @@ class Rete:
         # [CURA 4] LA MATURITA' SI SCRIVE **QUI**, DOPO `_allaccia`, e non prima: il tempo di
         #   rampa e' `_tempo_luce_nodo`, che ha bisogno degli ARCHI per costruire `d_nodo`.
         #   Prima dell'allaccio il nodo non ha archi, e il tempo-luce non esiste ancora.
-        # `eta = tempo_rampa` da' `ramp = min(1, eta/tempo) = 1` **ESATTO**, non approssimato.
-        # NESSUN NUMERO NUOVO: il valore e' la grandezza stessa che sta al denominatore.
+        # ========================================================================================
+        # [`RAMPA-1`, strada (3), DECISIONE DI LUCA 2026-09-25] **IL VUOTO DATO HA ETA' INFINITA.**
+        # ----------------------------------------------------------------------------------------
+        # ❌ **COM'ERA E PERCHE' NON BASTAVA:** `eta = _tempo_rampa()` da' `ramp = 1` **esatto
+        #   IN QUELL'ISTANTE**, e `ramp` e' un rapporto fra **due quantita' che si muovono
+        #   entrambe**. **MISURATO** in configurazione del driver (`RAMPA-1`): fra il passo 0 e
+        #   il passo 1 `eta` cresce **x1.011** e `_tempo_rampa` **x1.196** -- il denominatore
+        #   corre **18 volte** piu' del numeratore -- e `ramp` cade a `0.846` di mediana, con
+        #   **solo 54 nodi su 4252** ancora a `1` e `_g_rampa_cali = 4198`.
+        #   **CAUSA:** al passo 0 la cache `_cs_nodo_prev` **non esiste**, quindi il tempo-luce
+        #   si calcola con `cs = CS_M`; al passo 1 il `cs` vero e' `p50 1.672` su `CS_M = 2`
+        #   (`cs_std/cs = 19.07 %`). **La maturita' era assegnata con un `cs` che il nodo non ha.**
+        # ✅ **ORA: `eta = +inf`.** `ramp = min(1, inf/tr) = 1` **per sempre, qualunque `cs`**.
+        #   **«Maturo» non e' un VALORE di `eta`: e' una PROPRIETA'** -- il vuoto **c'era gia'**.
+        #   `+inf` e' l'unico modo di dirlo **senza un numero e senza un array**: non e' una
+        #   soglia grande, e' **«nessun tempo di accensione»**.
+        # ✅ **E TOGLIE CODICE INVECE DI AGGIUNGERLO** (`STANDARD 10`): via la chiamata a
+        #   `_tempo_rampa()` **e le sue DUE diramazioni** (array / scalare), che esistevano solo
+        #   per ricopiare il denominatore nel numeratore.
+        # ⚠ **I NATI IN DINAMICA NON SONO TOCCATI:** nascono con `eta = 0` (`:2720`, `:2723`,
+        #   `:6022`, `:6178`) e salgono con la rampa del tempo-luce. **La maturita' e' del VUOTO
+        #   DATO, non una proprieta' che si eredita.**
+        # ⚠ **`+inf` E' UN VALORE SPECIALE, e le sue letture sono VERIFICATE PER AST**
+        #   (`csv/_letture_eta.py`, `doc/LETTURE_eta.md`): le uniche due letture di `eta` in una
+        #   legge sono `:3419` e `:3684`, **nessuna delle due e' una riduzione**. L'unica
+        #   riduzione e' **diagnostica** (`_stat` delle colonne `eta_*`), adattata nello stesso
+        #   commit.
         if SEMINA_MATURA and getattr(self, "_cura4_maturi", None) is not None:
             _a, _b = self._cura4_maturi
-            _tr = self._tempo_rampa()
-            if np.ndim(_tr):
-                self.eta[_a:_b] = np.asarray(_tr, float)[_a:_b]
-            else:
-                # il ramo scalare (`TAU_A`): capita solo se `_tempo_rampa` e' caduto sul
-                # fallback, e li' i suoi contatori lo dicono gia'. Si usa lo stesso valore,
-                # cosi' `ramp = 1` vale comunque.
-                self.eta[_a:_b] = float(_tr)
+            self.eta[_a:_b] = np.inf
             self._g_cura4_maturati = getattr(self, "_g_cura4_maturati", 0) + int(_b - _a)
             self._cura4_maturi = None
         if mass_id is not None:
