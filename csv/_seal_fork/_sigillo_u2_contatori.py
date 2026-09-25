@@ -82,8 +82,17 @@ net.d0[0] = FATT * LAM
 #   serve `avv` fra `PHI_CRIT` e `1.5*PHI_CRIT`. Si prende `1.2*PHI_CRIT` -> `tau_pp = 2.2`.
 #   ⚠ DIFETTO MIO, ed e' il quinto criterio scritto DAL MIO MODELLO MENTALE invece che da una
 #     misura (par.9): avevo scelto "un numero grande" senza guardare la campana.
+# LA FINESTRA SI DERIVA DAL CODICE, NON SI SCEGLIE (par.9):
+#   soglia0 = PHI_CRIT + pi  se `TORS_4PI and not FASE_2PI`  (il default: 3pi, NON 2pi)
+#   creazione  <=>  avv > soglia0   E   tau_pp < centro = (tau_soglia + tau_tetto)/2
+#   con tau_pp = 1 + avv/PHI_CRIT  ->  avv < (centro - 1)*PHI_CRIT
+# Misurata: (1.500, 1.750)*PHI_CRIT. Si prende IL MEZZO della finestra.
+_s0 = (S.PHI_CRIT + np.pi) if (S.TORS_4PI and not S.FASE_2PI) else S.PHI_CRIT
+_centro = 0.5 * ((1.0 + _s0 / S.PHI_CRIT) + (1.0 + (4.0 * np.pi) / S.PHI_CRIT))
+_lo, _hi = _s0, (_centro - 1.0) * S.PHI_CRIT
+TW0 = 0.5 * (_lo + _hi)
 net.tw = np.zeros(len(net.d))
-net.tw[0] = 1.2 * float(S.PHI_CRIT)
+net.tw[0] = TW0
 if hasattr(net, "_rep"):
     net._rep = np.zeros(len(net.d))
 
@@ -123,7 +132,8 @@ out = {
     # `TW_TETTO` e' una LOCALE di `mitosi` (`:5578`), non un attributo di modulo: si
     # ricalcola qui e SI DICHIARA da dove viene, invece di leggerla dove non esiste.
     "PHI_CRIT": float(S.PHI_CRIT), "TW_TETTO": float(4.0 * np.pi),
-    "tw_sel": float(1.2 * S.PHI_CRIT),
+    "tw_sel": float(TW0), "soglia0": float(_s0),
+    "finestra": [float(_lo), float(_hi)],
     "PLAST_DIN": bool(S.PLAST_DIN), "PLAST_MIT": float(S.PLAST_MIT),
 }
 for k, v in sorted(vars(net).items()):
@@ -211,8 +221,13 @@ LAM = A["LAM"]
 P("CONFIGURAZIONE (dai default del sorgente, dichiarata):")
 P("  LAM = %.9f   TEMPO_UNICO_MITOSI = %s   PLAST_DIN = %s   PLAST_MIT = %s"
   % (LAM, A["TEMPO_UNICO_MITOSI"], A["PLAST_DIN"], A["PLAST_MIT"]))
-P("  PHI_CRIT = %.9f   TW_TETTO = %.9f   tw dell'arco = %.9f  (nella FINESTRA della campana)"
-  % (A["PHI_CRIT"], A["TW_TETTO"], A["tw_sel"]))
+P("  PHI_CRIT = %.9f   TW_TETTO = %.9f   soglia0 = %.9f  (= 3 pi: TORS_4PI e' ON)"
+  % (A["PHI_CRIT"], A["TW_TETTO"], A["soglia0"]))
+P("  FINESTRA DI CREAZIONE, derivata dal codice: avv in (%.6f, %.6f) = (%.3f, %.3f) PHI_CRIT"
+  % (A["finestra"][0], A["finestra"][1],
+     A["finestra"][0] / A["PHI_CRIT"], A["finestra"][1] / A["PHI_CRIT"]))
+P("  tw dell'arco = %.9f = %.4f PHI_CRIT  (IL MEZZO della finestra, non un numero scelto)"
+  % (A["tw_sel"], A["tw_sel"] / A["PHI_CRIT"]))
 P("  arco selezionato: d = %.9f = %.4f LAM,  d0 = %.9f"
   % (A["d_pre_sel"], A["d_pre_sel"] / LAM, A["d0_pre_sel"]))
 P("  n  %d -> %d      archi  %d -> %d" % (A["n_pre"], A["n_post"], A["archi_pre"], A["archi_post"]))
