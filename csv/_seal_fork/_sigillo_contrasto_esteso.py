@@ -117,10 +117,14 @@ def copia_diag(sorgente, dest):
     #   programma**.
     import difflib as _dl
     _dop = io.open(dest, encoding="utf-8", newline="").read().split(NL)
-    _agg = [x[1:].rstrip(chr(13)) for x in _dl.ndiff(righe, _dop) if x.startswith("+ ")]
+    # ⚠ `ndiff` prefissa con DUE caratteri (`"+ "`), non uno: `x[1:]` lascia uno spazio in
+    #   testa e OGNI riga sembra estranea. **La postcondizione ha bloccato per questo**, ed e'
+    #   il verso giusto in cui sbagliare: un presidio che si sbaglia FERMANDO si corregge, uno
+    #   che si sbaglia PASSANDO non si scopre.
+    _agg = [x[2:].rstrip(chr(13)) for x in _dl.ndiff(righe, _dop) if x.startswith("+ ")]
     _tol = set(DIAG_IN) | set(DIAG_CO)
     _estranee = [x for x in _agg if x not in _tol]
-    _tolte = [x[1:].rstrip(chr(13)) for x in _dl.ndiff(righe, _dop) if x.startswith("- ")]
+    _tolte = [x[2:].rstrip(chr(13)) for x in _dl.ndiff(righe, _dop) if x.startswith("- ")]
     assert not _estranee and not _tolte, (
         "la copia differisce per righe NON dichiarate: aggiunte %r  tolte %r"
         % (_estranee[:3], _tolte[:3]))
