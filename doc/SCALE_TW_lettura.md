@@ -236,12 +236,66 @@ due prove sul codice di oggi.**
 
 ---
 
-## ❗ IL PUNTO (b) — **LA MISURA** — è in `csv/_test_fork/_scale_tw.py`
+## ❗ (b) LA MISURA — **`|tw|` SI FERMA A `π`, E LA SOGLIA È `3π`**
 
-**La stima è scritta nella docstring dello strumento PRIMA di girarlo** *(par.5-septies)*:
-`tw` è un **cammino aleatorio smorzato**, quindi `|tw|_eq ≈ σ·sqrt(_ttw/(2·dt_e))` — **la stessa
-forma di `omega_eq` del par.9, che su questo repo fu misurata a `×1.03`.**
-**Il criterio è fissato prima:** *se `|tw|` tipico sta sotto `3π` di più di un fattore `2`, la
-mitosi scatta **solo sulla coda**.*
+*(`csv/_test_fork/_scale_tw.py`, referto in `csv/_test_fork/_scale_tw/`, scena `(ii)` `(b)`,
+seme `11`, `20` passi — **UN SEME: non è una barra d'errore**)*
 
-**I numeri arrivano nel commit del referto, non qui.**
+**La stima era scritta nella docstring PRIMA di girare** *(par.5-septies)*: `tw` è un **cammino
+aleatorio smorzato**, `|tw|_eq ≈ σ·sqrt(_ttw/(2·dt_e))` — la stessa forma di `omega_eq` del par.9,
+lì misurata a `×1.03`. **E il criterio era fissato prima:** *se il tipico sta sotto `3π` di più di
+un fattore `2`, la mitosi scatta solo sulla coda.*
+
+```
+passo   |tw| / pi                            _ttw                 frazione |tw| >= 3 pi
+  0     p50 0.0000  p95 0.0000  max 0.0000   p50 13.757  p05 5.369      0.000000
+  1     p50 0.9919  p95 2.5891  max 2.9999   p50 13.753  p05 5.367      0.000000
+  2     p50 0.9913  p95 2.5848  max 2.9982   p50 10.056  p05 4.014      0.000000
+  5     p50 0.9933  p95 2.5758  max 2.9959   p50  7.254  p05 2.901      0.000000
+ 10     p50 0.9939  p95 2.5176  max 2.9651   p50  3.391  p05 1.337      0.000000
+ 20     p50 0.9933  p95 2.3434  max 2.8991   p50  1.818  p05 0.690      0.000000
+```
+
+> ### ⛔ **LA SOGLIA `3π` NON È MAI RAGGIUNTA DA NESSUN ARCO, IN NESSUNO DEI 20 PASSI.**
+> `max|tw| = 2.8991 π`; la frazione `>= 3π` è **`0.000000`** sempre.
+> **Il tipico sta sotto la soglia di un fattore `3.020`** — **sopra** il `2` del criterio.
+
+### ❗ E IL VALORE A CUI SI FERMA DICE **QUALE PEZZO DELLA SOGLIA NON SI ACCUMULA**
+
+**`|tw|` mediano vale `0.9933 π`, cioè `π` entro lo `0.7 %`.** E `π` qui non è un numero
+qualunque: **è esattamente `twist_dip` massimo**, `π·0.5·|χ_i − χ_j|` con `|χ_i − χ_j| = 2`.
+
+> ### **`tw` ACCUMULA IL TWIST DIPOLARE E BASTA. IL QUANTO `2π` NON VIENE MAI ACCUMULATO.**
+> La soglia è `2π + π` = *«un giro pieno PIÙ il twist dipolare massimo»*.
+> **Misurato: si arriva al secondo addendo e MAI al primo.**
+> **La mitosi, in questo regime, è SPENTA — e di un fattore `3`, non di un margine.**
+
+### ⚠ NON È UN TRANSITORIO CHE SI RISOLVE ASPETTANDO: **il margine PEGGIORA**
+
+- **`|tw|` non cresce** fra il passo `1` e il `20`: `p50` fermo a `0.993 π`, e il **`p95` CALA**
+  *(`2.589 → 2.343`)*;
+- **`_ttw` CALA di un fattore `7.6`** *(`13.76 → 1.82`)*: `|Δω|` **cresce**, quindi
+  `λ = dt_e/_ttw` cresce e `|tw|_eq ∝ sqrt(_ttw)` **scende**;
+- **è il presidio del par.9 al contrario** *(«un'ipotesi che rigenera la propria scusa»)*: qui
+  **non c'è nessun «aspetta ancora» da invocare**, perché la grandezza che fissa il livello
+  **sta calando**.
+
+**⚠ UN SEME, UNA SCENA, 20 PASSI**, e il tempo di equilibrio è `_ttw/dt_e ≈ 196` passi: il valore
+va citato **col passo** *(par.9)*. **La DIREZIONE non è in dubbio**, perché `_ttw` decresce in
+tutti i punti misurati.
+
+### COSA QUESTA MISURA **NON** DICE
+
+**Non dice quale delle due letture di (d) sia giusta.** Dice che **la soglia di oggi non è
+raggiungibile**: *un numero tarato per far scattare la mitosi non la fa scattare più* nel regime
+`A13`. *(`E` di `COMPONENTI_PROMOSSE`: si misura per PROMUOVERE, si DIMOSTRA per ESCLUDERE.)*
+
+### ❗ E SI LEGA A `PHI_CRIT`: **la storia si sta ripetendo col segno opposto**
+
+Il commento di `PHI_CRIT` *(`:422`)* dice: *«a `4π` la mitosi non scattava MAI … a `2π` ripara»*.
+**Oggi la mitosi non scatta di nuovo** — non perché il quanto sia `4π`, ma perché **`tw` non
+arriva più nemmeno a `2π`**.
+
+> **Se si «riparasse» abbassando la soglia, si rifarebbe esattamente ciò che Luca ha appena
+> chiamato «tarato a posteriori». È il motivo per cui il punto (e) propone DUE LEGGI e non un
+> numero.**
