@@ -468,8 +468,20 @@ di fisica dice *«questa e' la legge»*, e le due cose non si sostituiscono.
   **La guardia ora distingue i tre casi** e scrive il motivo in `<base>._sim.motivo.txt`, **su
   file e non solo a stdout**: dentro un sigillo lo stdout e' **catturato**, ed e' cosi' che un
   allarme vero diventa indistinguibile da uno spurio.
-  **DA DECIDERE (Luca):** un `.gitattributes` con `soliton_simulator.py text eol=lf` toglierebbe
-  la trappola alla radice. **Non l'ho aggiunto: cambia il comportamento di git su tutto il repo.**
+  **✅ RISOLTO, E QUESTA RIGA ERA STALE DA NOVE GIORNI — corretta il 2026-09-25.**
+  La versione precedente diceva *«DA DECIDERE (Luca): un `.gitattributes`… **non l'ho
+  aggiunto**»*. **E' STATO AGGIUNTO IL 2026-09-16, per decisione di Luca**, e copre `*.py`,
+  `*.md`, `*.csv`, `*.txt`, `*.json` con **`text eol=lf`**, i binari come `binary`, e **se
+  stesso**. Dal 2026-09-25 c'e' in piu' **`.githooks/* text eol=lf`**, perche' quei file
+  **non hanno estensione** e sono script `#!/bin/sh`: su Linux un hook coi `^M` muore con
+  `/bin/sh^M: bad interpreter`, e **un presidio che non parte e' peggio di uno assente**.
+  **⚠ COME SE N'E' ACCORTO, e vale come lezione piu' della correzione:** il 2026-09-25 ho
+  **SOVRASCRITTO** `.gitattributes` con un `cat >` **dandolo per inesistente**, e nel
+  messaggio di commit ho citato **questa riga** come stato attuale. Il file c'era, con
+  trentasette righe deliberate. Ripristinato da git (`2d98cd6`).
+  **UN FATTO STALE QUI NON E' UN'IMPRECISIONE: E' UNA PREMESSA CHE QUALCUNO USERA' PER AGIRE**
+  — e l'ho usata io, per cancellare un file. E' l'errore del docstring «ORFANO» (par.0),
+  fatto **sul file che vieta di farlo** (par.5-bis).
 - **Corollario, e va rispettato anche quando e' scomodo:** se un run e' partito col codice non
   committato, **la copia `._sim.py` va committata insieme ai dati**, non cancellata «tanto poi lo
   committo». Il file committato **dopo** ha lo stesso contenuto ma **non lo dimostra**.
