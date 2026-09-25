@@ -3470,7 +3470,23 @@ class Rete:
                 #   NATI IN DINAMICA*. **Un ripiego globale su una condizione locale e' un
                 #   verdetto vacuo mascherato**, e sarebbe passato per un `PASS`.
                 _ok_w = np.isfinite(_wn) & (_wn > 0.0)
-                _rho_c = np.where(_ok_w, _rho_s / np.where(_ok_w, _wn, 1.0), _rho_s)
+                # ✅ [CURA A, DECISIONE DI LUCA 2026-09-26] **`W` AL QUADRATO, non `W`.**
+                #   **MISURATO sui figli della mitosi** (`csv/_test_fork/_scomposizione_figli.py`,
+                #   2 semi, `K1` PASS su 4300 campioni): `rho ~ ramp^2.74` e `W ~ ramp^1.37`,
+                #   quindi **`rho ~ W^2.00`** — `2.00` esatto, `R2` `0.95`-`0.96`. `rho_s` e' il
+                #   **modulo quadro** di una somma pesata, e dividere per `W` **una volta**
+                #   toglieva **una** potenza: la variante `/W` dimezzava il divario di pendenza
+                #   (`1.25 -> 0.62`, `2.78 -> 1.44`) **senza chiuderlo**.
+                #   E la scomposizione lo conferma dall'altro lato: il termine `W^2` (`T2`) e' il
+                #   **`107`-`114 %`** del divario dei figli, mentre il `peq` EREDITATO (`T3`) e'
+                #   **`-3` a `-6 %`**, cioe' va nella direzione OPPOSTA.
+                #   ⚠ **RESTA FUORI, e va detto:** la coppia **non porta `ramp`** (`^0.15`,
+                #   `^0.04`), quindi l'asimmetria sui figli e' `0` contro `2.8` e **`W^2` ne toglie
+                #   `2`: resta `0.8`.** Questa cura non chiude quello.
+                #   ⚠ E IL RISCHIO VERO: dividere DUE volte abbassa l'inerzia due volte, quindi
+                #   **il pavimento `1e-6` e' il criterio da guardare** (`C5`). Con `/W` non mordeva
+                #   (min `0.0655`, quattro ordini sopra).
+                _rho_c = np.where(_ok_w, _rho_s / np.where(_ok_w, _wn * _wn, 1.0), _rho_s)
                 _senza = int(np.sum(~_ok_w))
                 self._g_ci_nodi_senza_peso = getattr(self, '_g_ci_nodi_senza_peso', 0) + _senza
                 self._g_ci_nodi_tot = getattr(self, '_g_ci_nodi_tot', 0) + int(n)

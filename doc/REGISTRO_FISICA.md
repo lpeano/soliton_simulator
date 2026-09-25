@@ -1252,6 +1252,37 @@ rende la cura una **rimozione di incoerenza** e non un fattore di scala nuovo.
 >
 > **VARIANTE 2 — per SOMMA DEI PESI** (`rho_s / Σ w_ij`), decisione di Luca: `w` e' **gia'** un
 > parametro di `_passo_spinoriale`, lo **stesso** che `calcola_psi` passa a `_mat(w)`.
+> **⚠ VARIANTE 2 MISURATA E INSUFFICIENTE:** dimezzava il divario di pendenza (`1.25 -> 0.62`,
+> `2.78 -> 1.44`) **senza chiuderlo**, perche' toglieva **una sola** potenza.
+>
+> ## ✅ **LA FORMA IN VIGORE — CURA A, `rho_s / W^2`** *(decisione di Luca, 2026-09-26)*
+> **`_rho_c = rho_s / W^2`**, con `W = Σ w_ij` per nodo, **dentro `_contrasto` e SOLO li'**.
+>
+> ### PERCHE' L'ESPONENTE E' `2`, E NON E' UNA SCELTA
+> **MISURATO sui figli della mitosi** *(2 semi, `K1` PASS su **4300** campioni, collaudo `4/4`)*:
+> ```
+> rho ~ ramp^2.74      W ~ ramp^1.37      ->   rho ~ W^(2.74/1.37) = W^2.00     (R2 0.95-0.96)
+> ```
+> **`2.00` esatto.** `rho_s` e' il **modulo quadro** di una somma pesata, e il dato lo dice
+> **senza passare dalla lettura del codice**.
+>
+> ### E LA SCOMPOSIZIONE DEL DIVARIO DEI FIGLI LO CONFERMA DALL'ALTRO LATO
+> `log(c_f/c_m) = T1 + T2 + T3`, con `T2 = 2 log(W_f/W_m)`:
+> ```
+>            %T2 (il termine W^2)   %T3 (peq EREDITATO)   %T1 (resto)
+> eta' 2        107.2 - 107.8            -3.3 / -2.8         -4.5 / -4.4
+> eta' 14       114.0 - 114.4            -6.0 / -6.4         -8.0 / -8.0
+> ```
+> **Il divario dei figli e' TUTTO nel peso di vicinato, al quadrato.** Il `peq` **ereditato** va
+> nella direzione **OPPOSTA** *(`T3 < 0`: il `peq` del figlio e' **piu' piccolo** di quello dei
+> maturi, rapporto `~0.68`)*, quindi **NON e' la causa** — e questo **ritira** la lettura
+> precedente, che l'attribuiva a `peq`.
+>
+> ### ⚠ COSA QUESTA CURA **NON** CHIUDE
+> **La coppia non porta `ramp`** (`^0.15`, `^0.04`, `R2` `0.58`/`0.05`): l'asimmetria di esponenti
+> sui figli e' **`0` contro `2.8`**, e `W^2` ne toglie **`2`** — **resta `0.8`**.
+> **E il rischio vero e' il PAVIMENTO:** dividere due volte abbassa l'inerzia due volte. Con `/W`
+> non mordeva (`min 0.0655`, quattro ordini sopra `1e-6`); con `/W^2` **va misurato** (`C5`).
 > **❌❌ E IL SUO PRIMO RIPIEGO ERA UN DIFETTO, rilevato da Luca prima che il sigillo girasse:**
 > `if ... or np.any(_wn <= 0.0)` — **una condizione GLOBALE su una grandezza LOCALE**. Un solo
 > nodo con somma dei pesi zero **spegneva la cura per tutto il sistema in quel passo**, e **non
