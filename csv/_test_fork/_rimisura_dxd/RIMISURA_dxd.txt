@@ -1,0 +1,63 @@
+================================================================================================================
+RIMISURA DI `|dx|/d` A CAMPO MATURO -- il numero che decide la forma del freno-legge
+================================================================================================================
+
+[maturo] rc=0 o 8.664102  R_CONN 2.400000
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK maturo  n 4252 -> 4270  passi 120  max|dx|/d 0.9496799788197696
+[spento] rc=0 o 8.664102  R_CONN 2.400000
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK spento  n 4252 -> 4303  passi 120  max|dx|/d 0.9964465005351301
+
+IL RIFERIMENTO (`V8`/`V9`, `CURA 2`, blob `49fc54d2`, 120 passi, seme 42) -- A CAMPO SPENTO:
+  discese   60538734   p50 0.0019  p90 0.0239  p99 0.0310  p999 0.0344  max 0.0385  >0.5 = 0
+  salite    65192342   p50 0.0024  p90 0.0124  p99 0.0241  p999 0.0307  max 0.0531  >0.5 = 0
+
+LE DUE CORSE DI OGGI -- stessa scena (ii) (b), seme 11, 120 passi, UN PROCESSO PER BRACCIO
+  CONFIGURAZIONE DICHIARATA: `SCALA_MIN_PASSO = True` (come il driver), `SCALA_MIN = False`
+  (con i default del SORGENTE `SCALA_MIN_PASSO` e' False e `_smorza` NON viene chiamata:
+   la prima corsa non ha raccolto NIENTE, ed era un difetto della mia configurazione.)
+  braccio   n           archi        ramp finale p50   Lam finale      med d0 inizio -> fine
+  MATURO    4270        148260       1.000000          1.941607e+00    1.884270 -> 1.200422
+  SPENTO    4303        148302       0.022046          2.715539e-07    1.884270 -> 0.800000
+
+----------------------------------------------------------------------------------------------------------------
+LA DISTRIBUZIONE DI `|dx|/d`, per verso e per braccio
+----------------------------------------------------------------------------------------------------------------
+  braccio   verso            n            p50        p90        p99        p99.9      MAX        E[x^2]    >0.5   
+  MATURO    discese          21794086     0.0058     0.0828     0.4927     0.7616     0.9497     8.229e-03 203682 
+  MATURO    salite           13787873     0.0020     0.0185     0.1288     0.5751     0.7289     1.396e-03 23527  
+  MATURO    discese_d0passo  12463600     0.0239     0.1406     0.5958     0.7969     0.9497     1.439e-02 203682 
+  MATURO    salite_d0passo   5327391      0.0081     0.0405     0.3527     0.6270     0.7289     3.596e-03 23527  
+  SPENTO    discese          24870686     0.3659     0.9111     0.9548     0.9752     0.9964     3.236e-01 11295646
+  SPENTO    salite           10569206     0.0015     0.3177     0.9285     0.9541     0.9956     7.126e-02 1024172
+  SPENTO    discese_d0passo  15795017     0.7818     0.9266     0.9582     0.9793     0.9964     5.095e-01 11295646
+  SPENTO    salite_d0passo   1999077      0.5936     0.9161     0.9484     0.9608     0.9956     3.767e-01 1024172
+
+  (i quantili vengono da un CAMPIONE dichiarato: uno su 512. `n`, `MAX`, `E[x^2]` e le quote
+   sono su TUTTI i campioni, non sul sottocampione.)
+
+================================================================================================================
+IL CRITERIO DI `V8`, gia' scritto: la saturazione di `1+tanh` morde a `x` di ordine 1.
+================================================================================================================
+  max |dx|/d  a campo MATURO = 0.949680
+  max |dx|/d  a campo SPENTO = 0.996447   (riferimento di CURA 2: 0.0531)
+  rapporto MATURO/SPENTO = 0.9531
+  campioni oltre 0.5: 454418      oltre 1: 0      oltre 2: 0   (braccio MATURO)
+
+  -> ** IL MASSIMO SUPERA 0.5 A CAMPO MATURO: LA DECISIONE VA RIAPERTA. **
+     La conclusione "la saturazione non si presenta MAI" era vera A CAMPO SPENTO.
+
+E `E[x^2]`, CHE `Z146` DICHIARAVA MANCANTE (la deriva di `piana` vale `exp(N*E[x^2]/2)`):
+  MATURO    discese    E[x^2] = 8.228903e-03   n = 21794086   ->  N*E[x^2]/2 = 8.967071e+04
+  MATURO    salite     E[x^2] = 1.395712e-03   n = 13787873   ->  N*E[x^2]/2 = 9.621950e+03
+  SPENTO    discese    E[x^2] = 3.235688e-01   n = 24870686   ->  N*E[x^2]/2 = 4.023689e+06
+  SPENTO    salite     E[x^2] = 7.126250e-02   n = 10569206   ->  N*E[x^2]/2 = 3.765940e+05
+  (e' il numero che mancava sull'altro piatto del confronto: ora c'e'.)
+
+COSA QUESTO NON DICE:
+  - UN SEME. Non e' una barra d'errore (par.0-ter `P3`: servono >= 4 semi).
+  - la scena e' la (ii) (b), NON quella di `CURA 2`: il riferimento `0.0531` viene da una
+    scena DIVERSA, quindi il confronto MATURO/SPENTO di oggi (stessa scena, stesso seme) e'
+    quello che attribuisce, e il `0.0531` sta qui come STORIA.
+  - `120` passi: lo stesso numero del riferimento, per confrontabilita'.

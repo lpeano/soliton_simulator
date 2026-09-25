@@ -16598,3 +16598,94 @@ appartenenza al grafo** *(un nodo i cui archi superano `R_CONN` non sarebbe alla
 nuovo ha **grado `3`** contro `70`, e **non passa da `_allaccia`** — i suoi archi sono **imposti**,
 non trovati per raggio, quindi **non si allaccia al vuoto come gli altri nodi**. **Va deciso se è
 voluto.**
+
+
+---
+
+# ❗❗ LA RIMISURA DI `|dx|/d` A CAMPO MATURO — **la premessa CADE, la decisione REGGE per un'altra ragione** *(2026-09-25)*
+
+*(`csv/_test_fork/_rimisura_dxd.py`, referto in `csv/_test_fork/_rimisura_dxd/`, scena `(ii)` `(b)`,
+seme `11`, `120` passi, **passo COMPLETO**, `SCALA_MIN_PASSO = True` come il driver,
+**un processo per braccio**. **UN SEME.**)*
+
+```
+braccio   n      archi    ramp p50   Lam finale       med d0 inizio -> fine
+MATURO    4270   148260   1.000000   1.941607e+00     1.884270 -> 1.200422
+SPENTO    4303   148302   0.022046   2.715539e-07     1.884270 -> 0.800000
+
+braccio  verso             n           p50      p90      p99      p99.9    MAX      E[x^2]     >0.5
+MATURO   discese           21794086    0.0058   0.0828   0.4927   0.7616   0.9497   8.229e-03  203682
+MATURO   salite            13787873    0.0020   0.0185   0.1288   0.5751   0.7289   1.396e-03  23527
+SPENTO   discese           24870686    0.3659   0.9111   0.9548   0.9752   0.9964   3.236e-01  11295646
+SPENTO   salite            10569206    0.0015   0.3177   0.9285   0.9541   0.9956   7.126e-02  1024172
+```
+
+## ❌ LA PREMESSA DI `V8` È FALSA IN QUESTA SCENA — **e non per il campo**
+
+**`max|dx|/d` vale `0.9497` a campo MATURO e `0.9964` a campo SPENTO: rapporto `0.95`.**
+
+> ### **I DUE BRACCI SONO QUASI UGUALI SUL MASSIMO. Quindi il `0.0531` del riferimento NON È
+> ### RIPRODOTTO DA NESSUNO DEI DUE: quel numero veniva da una SCENA DIVERSA** *(`CURA 2`, masse
+> ### seminate, non la scena `(ii)`)*.
+>
+> **⚠ LA LETTURA GIUSTA NON È «il campo maturo alza il massimo»: È «LA SCENA `(ii)` alza il
+> massimo, IN ENTRAMBI I BRACCI».** Attribuire al campo ciò che viene dalla scena sarebbe
+> **l'errore di attribuzione** che questo repo ha già pagato più volte.
+>
+> **La conclusione *«la saturazione di `tanh` non si presenta MAI»* è dunque FALSA qui:**
+> **`454 418` campioni oltre `0.5`**, `p99 = 0.4927`, `p99.9 = 0.7616`.
+
+## ✅ MA IL CAMPO MATURO **ABBASSA** `|dx|/d` TIPICO, E DI MOLTO
+
+| | MATURO | SPENTO | fattore |
+|---|--:|--:|--:|
+| `p50` discese | **`0.0058`** | `0.3659` | **`63×` più piccolo** |
+| `E[x²]` discese | **`8.229e-03`** | `3.236e-01` | **`39×`** |
+| campioni `> 0.5` | **`203 682`** | `11 295 646` | **`55×`** |
+
+> **Il campo maturo non peggiora la situazione: la MIGLIORA di un fattore fra `39` e `63`.**
+> **Quello che resta alto è solo la CODA ESTREMA**, e in entrambi i bracci.
+
+## ✅✅ E `E[x²]` — IL NUMERO CHE `Z146` DICHIARAVA MANCANTE — **DECIDE IL CONFRONTO**
+
+`Z146` diceva: *«la deriva di `piana` vale `exp(N·E[x²]/2)`, e `E[x²]` NON È STATO REGISTRATO — i
+quantili non bastano a stimare una media di quadrati»*. **Ora c'è:**
+
+```
+MATURO  discese   N*E[x^2]/2 = 8.967071e+04        SPENTO  discese  4.023689e+06
+MATURO  salite    N*E[x^2]/2 = 9.621950e+03        SPENTO  salite   3.765940e+05
+```
+
+> ### **La deriva di `piana` sarebbe `exp(8.97e+04)`: NON è grande, è FUORI SCALA.**
+> ### **E `nessun campione oltre 1`** — quindi il caso di Ito in cui *«una salita farebbe
+> ### scendere»* **non si presenta mai**, e il tetto di `1+tanh` **non si ribalta**.
+
+> ## ✅ **QUINDI: LA PREMESSA DI `V8` CADE, MA LA DECISIONE `(1+tanh)` REGGE — E ORA SU UNA
+> ## MISURA SU ENTRAMBI I PIATTI, non su un solo piatto.**
+> Prima si diceva *«`1+tanh` non paga mai il suo prezzo»*: **falso in questa scena**.
+> Ora si dice *«`1+tanh` paga il suo prezzo su `454 418` campioni, e `piana` pagherebbe
+> `exp(9e4)`»*. **È un argomento più forte, non più debole.**
+>
+> **⚠ E IL MIO STRUMENTO STAMPA «LA DECISIONE VA RIAPERTA»: è TROPPO BRUSCO.** Il criterio
+> automatico guarda **solo il massimo**, e il massimo dice che la premessa cade — **non che la
+> scelta sia sbagliata**. **Va letta così, e la riga dello strumento va corretta.**
+
+## ❗❗ E IL RISULTATO PIÙ GROSSO NON ERA QUELLO CERCATO: **`d0` NON GONFIA. SI CONTRAE.**
+
+```
+med d0     1.884270  ->  1.200422   (MATURO)      -36.3 %
+med d0     1.884270  ->  0.800000   (SPENTO)      -57.5 %,  ed e' ESATTAMENTE `LAM`
+```
+
+> ### **`P-GONFIA` prevedeva una CRESCITA di `d0` e una soglia «meno della metà di `+47.3 %`».**
+> ### **Nella scena `(ii)` `d0` NON cresce: CALA del `36 %` a campo maturo e del `57 %` a campo
+> ### spento — e a campo spento finisce ESATTAMENTE SUL PAVIMENTO `LAM = 0.8`.**
+>
+> **Il criterio `P-GONFIA`, come scritto, non ha un oggetto in questa scena.** Non è «passato»:
+> **misura una crescita che non c'è.**
+> **E il campo maturo tiene `d0` LONTANO dal pavimento** *(`1.200` contro `0.800`)*: è un effetto
+> grande, misurato, e nella direzione opposta a quella che la soglia presumeva.
+
+**⚠ UN SEME, `120` passi, una scena.** E `n` cresce *(`4252 → 4270` maturo, `→ 4303` spento)*:
+**col passo COMPLETO la mitosi SCATTA** — `18` e `51` nodi nuovi. **Non era così nelle mie misure
+col ciclo incompleto**, ed è un'altra cosa che quel difetto nascondeva.
