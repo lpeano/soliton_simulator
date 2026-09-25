@@ -236,7 +236,9 @@ DOMINI = {
     'phi0':     ('fase',   'fase di riferimento'),
     'phi_s':    ('finito', 'fase spinoriale: nessun vincolo dichiarato oltre la finitezza'),
     'phivel':   ('finito', 'velocita di fase: entrambi i segni'),
-    'eta':      ('nonneg', 'eta di un nodo: un ETA non e negativa'),
+    # [`RAMPA-1`, 2026-09-25] `nonneg_inf` E NON `nonneg`: il vuoto DATO ha `eta = +inf`,
+    #   cioe' NESSUN TEMPO DI ACCENSIONE. `+inf` e' NEL DOMINIO di un'eta'; `nan` e `-inf` no.
+    'eta':      ('nonneg_inf', 'eta di un nodo: non negativa, e +inf per il vuoto DATO'),
     'pos':      ('finito', 'posizione di DISEGNO: nessun vincolo fisico'),
     'perc_chi': ('segno',  'la CARICA: segno di doppia copertura, in {-1,+1}'),
     'perc_geom':('segno',  'la GEOMETRIA: il giro e compiuto o no, in {-1,+1}'),
@@ -4139,6 +4141,22 @@ class Rete:
                     cattivo = ~fin | (vf <= 0.0); regola = '> 0'
                 elif forma == 'nonneg':
                     cattivo = ~fin | (vf < 0.0); regola = '>= 0'
+                elif forma == 'nonneg_inf':
+                    # [`RAMPA-1`, 2026-09-25] **`+inf` E' NEL DOMINIO, `nan` E `-inf` NO.**
+                    #   Serve a `eta`: il vuoto DATO ha `eta = +inf` perche' **non ha un tempo
+                    #   di accensione** -- non e' un numero grande, e' l'assenza di una scala.
+                    #   ⚠ **NON si allarga `nonneg`**, che copre `rho_spin`, `_deg`, il raggio
+                    #   del core e altre otto grandezze: per loro un `inf` **resta un difetto**.
+                    #   Una forma nuova per UNA grandezza costa meno di un controllo indebolito
+                    #   per dodici (`A9`: un presidio che ammette tutto non impedisce niente).
+                    #   ❌ **E QUESTO INVARIANTE HA FERMATO LA CURA AL PRIMO GIRO**, con
+                    #   `eta VIOLA >= 0 ... valori inf, quanti 4252 su 4252`: **ha funzionato.**
+                    #   L'audit per AST (`csv/_letture_eta.py`) **non poteva vederlo**, perche'
+                    #   qui `eta` e' una **CHIAVE DI TABELLA**, cioe' una STRINGA, non un
+                    #   attributo: **un audit su chi LEGGE una grandezza deve cercare anche le
+                    #   stringhe, in un codice guidato da tabelle.**
+                    cattivo = np.isnan(vf) | (vf < 0.0)
+                    regola = '>= 0, con +inf AMMESSO (vuoto dato: nessun tempo di accensione)'
                 elif forma == 'segno':
                     cattivo = ~np.isin(v, (-1, 1)); regola = 'in {-1, +1}'
                 elif forma == 'fase':

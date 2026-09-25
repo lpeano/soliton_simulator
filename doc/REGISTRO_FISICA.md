@@ -2545,6 +2545,37 @@ giorno tornasse incompatibile **lo direbbe da sé.**
 
 <!-- SCHEDA nome=invarianti funzioni=verifica_invarianti flag=INVARIANTI,DOMINI -->
 
+> ## ✅ **AGGIORNATA il 2026-09-25 — `nonneg_inf`, e l'invariante HA FERMATO UNA CURA**
+> **Il dominio di `eta` e' cambiato** (`RAMPA-1`: il vuoto dato ha `eta = +inf`), quindi la sua
+> **forma** passa da `nonneg` a **`nonneg_inf`**:
+>
+> ```
+> nonneg       ~isfinite | (v < 0)        -> `inf` e' un DIFETTO
+> nonneg_inf   isnan     | (v < 0)        -> `+inf` AMMESSO, `nan` e `-inf` NO
+> ```
+>
+> ### ❌ E L'INVARIANTE HA FERMATO LA CURA AL PRIMO GIRO
+> ```
+> [INVARIANTE] `eta` VIOLA `>= 0` al passo 1, in `memoria_hebbiana_moto`.
+>   quanti: 4252   valori: inf, inf, inf, ...   quanti=4252 su=4252
+> ```
+> **Ha funzionato**: una legge nuova ha incontrato il dominio dichiarato e **si e' fermata**,
+> invece di girare per 120 passi con un valore che nessuno aveva ammesso.
+>
+> ### ⚠ **NON SI ALLARGA `nonneg`**, e il perche' e' `A9`
+> `nonneg` copre `rho_spin`, `_deg`, `_chi_core_raggio` e altre: **per loro un `inf` resta un
+> difetto**. **Una forma nuova per UNA grandezza costa meno di un controllo indebolito per
+> dodici** — un presidio che ammette tutto non impedisce niente.
+>
+> ### ❌ E UN LIMITE DEL MIO AUDIT, che va scritto qui perche' si ripetera'
+> `csv/_letture_eta.py` cerca `eta` **per AST**, come **attributo** o **nome**. Qui `eta` e' una
+> **CHIAVE DI TABELLA**, cioe' una **STRINGA** (`'eta': ('nonneg', ...)`), e l'audit **non
+> poteva vederlo**. **In un codice guidato da tabelle, un audit su chi LEGGE una grandezza deve
+> cercare anche le stringhe.** *(Il limite dichiarato prima era un altro — «la riduzione si
+> cerca sulla stessa riga» — e questo si e' aggiunto: due limiti, e il secondo l'ha trovato il
+> codice, non io.)*
+
+
 # ⑩ GLI INVARIANTI DI DOMINIO — **`C5`**
 
 > **Scheda aperta il 2026-09-24, e mancava.** `C5` è in `CURE VERIFICATE` con sigillo `3/3`,
