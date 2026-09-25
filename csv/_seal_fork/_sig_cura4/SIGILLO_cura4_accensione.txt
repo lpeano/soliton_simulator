@@ -1,0 +1,71 @@
+========================================================================================================
+SIGILLO `CURA 4` -- L'ACCENSIONE DEL CAMPO (`SEMINA_MATURA`)
+========================================================================================================
+
+[off] rc=0 0
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK off  n 4252 -> 4252  pesi0 0.000000e+00  pesi1 6.382729e-04
+[on] rc=0 00
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK on  n 4252 -> 4252  pesi0 1.855623e+04  pesi1 1.588506e+04
+[on_forzato] rc=0 a-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK on_forzato  n 4252 -> 4252  pesi0 0.000000e+00  pesi1 1.983475e+00
+[prima] rc=0 [scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK prima  n 4252 -> 4252  pesi0 0.000000e+00  pesi1 6.382729e-04
+[mitosi] rc=0 OK mitosi  n 60 -> 62  nuovi 2
+
+CONFIGURAZIONE: TAU_A = 50.0   DT = 0.010   ->   TAU_A/DT = 5000 passi
+  scena (ii) (b), seme 11:  n = 4252, archi = 148237
+
+NOTA SU `A1`: qui OFF e ON DEVONO differire (e' `A5`). La BYTE-IDENTITA' del ramo spento
+  si prova contro il codice PRECEDENTE alla cura, ed e' il braccio `A1` piu' sotto.
+
+A1    PASS  flag SPENTO = BYTE-IDENTICO al codice PRECEDENTE (firma dei byte, un processo per braccio)
+             campi confrontati 90   DIVERSI 0
+             diversi: NESSUNO
+             presenti solo nel VECCHIO: nessuno
+             presenti solo nel NUOVO:   nessuno
+             (il vecchio e' `HEAD:soliton_simulator.py`, estratto in BINARIO)
+A2    PASS  al passo 1 `ramp == 1` su TUTTI i nodi della semina iniziale (ESATTO)
+             ON : min 1.000000000000000  max 1.000000000000000   uguali a 1: 4252 su 4252
+             OFF: min 0.000200000000000  max 0.000200000000000   (il riferimento: oggi e' ~0)
+             e al passo ZERO la somma dei pesi: ON 1.855623e+04 contro OFF 0.000000e+00
+A3    PASS  un nodo nato da MITOSI parte da `ramp = 0` e arriva a 1 nel suo TEMPO-LUCE
+             nodi nati dalla mitosi: 2   (tw forzato nella finestra DERIVATA: 10.210176)
+             ramp alla nascita: [0.0, 0.0]   atteso 0
+             tempo-luce alla nascita: [0.5772851039949839, 0.5772851124741513]
+             passi per arrivare a ramp = 1: 98   (ramp finale 1.0)
+             ATTESO ~ tempo_luce/DT = 57.7 passi
+A4    PASS  contrasto massa/vuoto e `Lam` al passo 1, contro `P2 = 27` e `P3 = 5`
+             contrasto  ON 6.7916   OFF 9.1711      previsto P2 = 27  -> rapporto 0.252
+             Lam        ON 2.158522e+00   OFF 4.462107e-15   previsto P3 = 5   -> rapporto 4.317e-01
+             salita di `Lam` ON/OFF: x4.837e+14   <- IL CONTROLLO che la cura AGISCE
+             I_massa ON 1.144769e+01   I_vuoto ON 1.685569e+00
+A5    PASS  CONTROLLO POSITIVO: ON e OFF DEVONO differire al passo 1
+             campi confrontati 87   DIVERSI 21   presenti in uno solo: OFF ['_taup_peq_deg_passi', '_taup_peq_deg_ultimo', '_taup_peq_degenere'] / ON nessuno
+             primi diversi: _cs_chiamate, _cs_fallback, _nb, _nb_prec, _sfb_amp_coppia, _sfondo_ko_rho, _sfondo_ko_ultima_rho, _spinor_lift, _taup_causale_scatti, _taup_causale_su_degenere
+             un sigillo che verifica solo la byte-identita' a OFF passerebbe su
+             codice MORTO (par.10.2): questo e' il criterio che lo esclude.
+A6    PASS  CASO CHE DEVE FALLIRE: con `maturi=False` forzato, `A2` da' FAIL
+             forzato: min 0.010613644494938   uguali a 1: 0 su 4252   -> `A2` FALLISCE (giusto)
+             somma dei pesi al passo 0: 0.000000e+00   (col flag ON ma senza maturita')
+             se `A2` passasse qui, non starebbe guardando la MATURITA'.
+A7    PASS  `TAU_A` NON e' piu' letto da `_pesi` -- dall'AST, non da un `grep`
+             occorrenze di `TAU_A` dentro `_pesi`: NESSUNA
+             il denominatore passa da `_tempo_rampa()`, che restituisce `TAU_A`
+             SOLO a flag spento: i due ruoli sono separati, e la separazione e'
+             verificata dove sta la legge, non dove sta il nome.
+
+CONTATORI DELLA RAMPA (A8), braccio ON: {'_g_rampa_tot': 12, '_g_cura4_maturati': 4252, '_g_rampa_sotto1': 0, '_g_rampa_nodi': 34016}
+
+========================================================================================================
+ESITO: 7/7 PASS
+========================================================================================================
+
+COSA QUESTO SIGILLO *NON* DICE:
+  - `A1` (byte-identita' del ramo SPENTO contro il codice PRECEDENTE) e' un braccio a se',
+    perche' richiede di estrarre il blob precedente da git. E' nel sigillo `_a1_cura4.py`.
+  - `A3` gira su una rete da 60 nodi, non sulla scena: misura UN nodo, non una statistica.
+  - la MITOSI e' forzata (la soglia `3pi` e' irraggiungibile, `SCALE-TW`): senza forzarla
+    `A3` non avrebbe nulla da misurare, e va detto invece di far sembrare che scatti da se'.
+  - la rimisura di `|dx|/d` a campo maturo NON e' qui: e' il passo dopo.

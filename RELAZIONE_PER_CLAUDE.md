@@ -16431,3 +16431,79 @@ TRIANGOLI VERI nel grafo            1 697 590    (conteggio esatto)
 **⚠ E UN AVVISO PER LA CORSA DIAGNOSTICA `2b`:** i triangoli veri sono **`1.7` milioni** su
 `4252` nodi. **Enumerarli tutti è possibile ma non gratis**, e per la statistica **non serve**:
 va **campionato**, e il campionamento va **dichiarato**.
+
+
+---
+
+# ✅ `CURA 4` — **SIGILLO 7/7 PASS**, e il campo si accende *(2026-09-25)*
+
+*(`csv/_seal_fork/_sigillo_cura4_accensione.py`, referto in `csv/_seal_fork/_sig_cura4/`,
+scena `(ii)` `(b)`, seme `11`, **un processo per braccio**. I criteri erano fissati nel task
+history `30db901`, **antenato** del commit del codice.)*
+
+| | criterio | numeri |
+|---|---|---|
+| **`A1`** | flag SPENTO = **BYTE-IDENTICO** al codice precedente | **`0` diversi su `90` campi**, nessuno presente in uno solo |
+| **`A2`** | al passo `1` `ramp == 1` su tutti i nodi della semina | **`4252` su `4252`, esatto**. Somma dei pesi al passo `0`: **`1.856e+04`** contro **`0.000000e+00`** |
+| **`A3`** | un nato da mitosi parte da `0` e arriva a `1` nel tempo-luce | `ramp` alla nascita `[0.0, 0.0]`; tempo-luce `0.5773`; **`98` passi** per arrivare a `1` |
+| **`A4`** | contrasto e `Lam` contro `P2 = 27` e `P3 = 5` | **`Lam` sale di `4.84e+14`** |
+| **`A5`** | CONTROLLO POSITIVO: ON e OFF **devono** differire | **`21` campi diversi su `87`** |
+| **`A6`** | CASO CHE DEVE FALLIRE | con `maturi=False`: `ramp = 0.0106`, **`0` su `4252` a `1`** → `A2` **fallisce** |
+| **`A7`** | `TAU_A` non è più letto da `_pesi` *(AST)* | **nessuna occorrenza** |
+
+**E la non-monotonia dichiarata NON si è manifestata:** `_g_rampa_sotto1 = 0` su **`34 016`**
+nodi-passo. **Il contatore c'era prima della misura**, ed è il punto: se si fosse manifestata,
+l'avrei letta invece di scoprirla dopo.
+
+## ✅ `P3` ORA È CONFERMATA — e prima non era nemmeno confrontabile
+
+```
+Lam = mean(I)      previsto  5        OFF 4.462107e-15      ON 2.158522e+00
+                                      rapporto ON/previsto = 0.432   DENTRO IL FATTORE 2
+```
+
+**Ieri `P3` valeva `7.2e-15` e ho scritto «non è confrontabile»: era giusto, e ora si vede
+perché.** Col campo maturo la previsione del mandato **torna, entro il fattore `2`**.
+
+## ❗ IL RISCONTRO CHE NON MI ASPETTAVO: **il contrasto massa/vuoto CALA**
+
+```
+contrasto I_massa/I_vuoto      OFF 9.1711        ON 6.7916        previsto P2 = 27
+```
+
+> ### **Accendere il campo ABBASSA il contrasto, non lo alza.** `9.17 → 6.79`, e il previsto era
+> ### `27`: rapporto `0.252`, **FUORI DAL FATTORE 2**.
+>
+> **Nel task history avevo scritto, prima di guardare:** *«al passo `1` il contrasto massa/vuoto
+> **salirà**»*. **È andata al contrario, e lo dico invece di spiegarlo via.**
+>
+> **L'unica cosa che posso dire senza inventare:** `I_massa = 11.45` e `I_vuoto = 1.686` sono
+> **entrambi** saliti di `~15` ordini; il **rapporto** è calato. **A campo spento il vuoto era
+> praticamente zero**, quindi qualunque intensità nelle regioni dava un rapporto grande.
+> **Con il campo acceso il vuoto È un campo**, e il contrasto è misurato contro qualcosa invece
+> che contro nulla. **Quale dei due numeri sia «giusto» non lo so, e non lo decido io.**
+
+## ⚠ `A3`: `98` PASSI CONTRO `57.7` ATTESI — **è la non-monotonia, misurata**
+
+Il tempo-luce alla nascita è `0.5773`, che a `DT = 0.01` darebbe **`57.7`** passi. Ne sono
+serviti **`98`**, fattore **`1.70`**.
+**È esattamente ciò che il commento di `_tempo_rampa` dichiara:** il tempo-luce **cresce** mentre
+il nodo matura, quindi **il bersaglio si muove**. **Il criterio è passato perché chiedeva «arriva
+a `1`»**, non «in esattamente `57.7` passi» — e per fortuna, perché quel numero sarebbe stato
+sbagliato.
+
+## ❗ E UN DETTAGLIO DI `A5` CHE VALE PIÙ DEL CONTEGGIO
+
+Fra i campi **presenti in un braccio solo**: `_taup_peq_degenere`, `_taup_peq_deg_passi`,
+`_taup_peq_deg_ultimo` — **esistono nel braccio OFF e NON in quello ON.**
+**Significa che un ramo di DEGENERAZIONE che scattava a campo spento non scatta più a campo
+maturo.** Non l'ho cercato: l'ha fatto uscire il confronto per NOME dei campi, che `STANDARD 3`
+impone *(un'assenza strutturale non è un dato mancante)*.
+
+## ⛔ CIÒ CHE RESTA APERTO, E IL PROSSIMO PASSO
+
+- **la stabilità su un giro lungo col campo acceso** *(`G_PH = 3e-3` è dichiarato «vicino al
+  limite di divergenza»)*: **il sigillo gira `8` passi, non `300`**;
+- **la rimisura di `|dx|/d` a campo maturo**, che è il passo esplicitamente chiesto: la forma del
+  freno-legge `(1+tanh)` fu decisa su `max|dx|/d = 0.0531` **a campo spento**;
+- **poi** la corsa diagnostica `2b` sui **triangoli** e la valutazione di `2c`.
