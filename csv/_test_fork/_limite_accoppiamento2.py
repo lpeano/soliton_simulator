@@ -345,6 +345,30 @@ P("  *(La coerenza che Luca chiede: se la coppia e' intensiva, l'inerzia DEVE es
 P()
 
 P("=" * 120)
+P("DOVE STA LA NON-COERENZA: `inerzia = contrasto * T2`, e i due FATTORI SEPARATI")
+P("=" * 120)
+P("  `_contrasto = rho_s / peq_nodo`   e   `T2 = (d_nodo/cs_nodo)^2`. Se la coppia e'")
+P("  INTENSIVA, la coerenza dimensionale vuole che lo sia anche l'inerzia: qui si vede")
+P("  QUALE DEI DUE FATTORI la rende estensiva, invece di attribuirlo all'inerzia in blocco.")
+P()
+P("%-14s %-6s %-14s %-14s %-14s" % ("braccio", "k", "contrasto", "T2", "inerzia"))
+for (s, v), o in sorted(tabelle.items()):
+    for c in o["casi"]:
+        if "errore" in c:
+            continue
+        P("%-14s %-6d %-14.6g %-14.6g %-14.6g"
+          % ("s%d %s" % (s, v), c["K"], c["contrasto_p50"], c["T2_p50"], c["inerzia_p50"]))
+P()
+P("%-14s %-18s %-18s %-18s" % ("braccio", "pend. contrasto", "pend. T2", "pend. INERZIA"))
+for (s, v), o in sorted(tabelle.items()):
+    ks = [c["K"] for c in o["casi"] if "errore" not in c]
+    P("%-14s %-18.4f %-18.4f %-18.4f"
+      % ("s%d %s" % (s, v),
+         pend(ks, [c["contrasto_p50"] for c in o["casi"] if "errore" not in c]),
+         pend(ks, [c["T2_p50"] for c in o["casi"] if "errore" not in c]),
+         pend(ks, [c["inerzia_p50"] for c in o["casi"] if "errore" not in c])))
+P()
+P("=" * 120)
 P("IL CRITERIO, scritto PRIMA: se `|coppia|` resta dello stesso ordine e `inerzia` CROLLA al")
 P("calare di `k`, `omega` esplode PER LA LEGGE DELL'INERZIA, non per il nodo. `|omega|` e' il")
 P("CONTROLLO.")
