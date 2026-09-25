@@ -34,6 +34,7 @@ rilassamento si è completato dentro il budget**. Se non si completa, **`R1`/`R2
 
 ASCII puro.
 """
+import ast
 import hashlib
 import io
 import json
@@ -73,29 +74,58 @@ blob_vero = hashlib.sha1(io.open(SIM, "rb").read()).hexdigest()[:8]
 
 
 def copia_diag(sorgente, dest):
-    """La COPIA diagnostica, GENERATA AL RUN dal file corrente. Restituisce (blob, ancore)."""
-    src = io.open(sorgente, encoding="utf-8", newline="").read()
-    k = 0
-    for A in ("        inerzia = np.maximum(_contrasto * _T2, 1e-6)       # il pavimento RESTA",
-              "        inerzia = np.maximum(_contrasto * _T2, 1e-6)"):
-        if src.count(A) >= 1:
-            src = src.replace(A, NL.join([
-                A if not A.endswith("RESTA") else
-                "        inerzia = np.maximum(_contrasto * _T2, 1e-6)",
-                "        self._diag_inerzia = np.array(inerzia, copy=True)",
-                "        self._diag_contrasto = np.array(_contrasto, copy=True)",
-                "        self._diag_T2 = np.array(_T2, copy=True)",
-                "        self._diag_peq_nodo = np.array(_peq_nodo, copy=True)"]), 1)
-            k += 1
-            break
-    B = ("        omega_new = omega_src + dtn_c * (correzione / inerzia[:, None]"
-         " - omega_src / _tau)")
-    assert src.count(B) == 1, "l'ancora di omega_new non e' unica in %s" % sorgente
-    src = src.replace(B, "        self._diag_coppia = np.array(correzione, copy=True)" + NL + B, 1)
-    k += 1
-    io.open(dest, "w", encoding="utf-8", newline=NL).write(src)
-    return hashlib.sha1(io.open(dest, "rb").read()).hexdigest()[:8], k
+    """La COPIA diagnostica, GENERATA AL RUN dal file corrente. Restituisce (blob, ancore).
 
+    ❌ **PRIMA VERSIONE ROTTA, e il difetto e' istruttivo:** l'ancora era una STRINGA che
+    coincideva col PREFISSO della riga vera
+    *(`inerzia = np.maximum(...)       # il pavimento RESTA: deve diventare inerte`)*, e la
+    sostituzione ha **tagliato la coda del commento**, lasciando `: deve diventare inerte`
+    appeso alla mia ultima riga -> `SyntaxError`. **La copia era rotta, e il braccio e' morto
+    all'import.**
+    ✅ **ORA SI LAVORA PER RIGHE:** si trova **la riga UNICA** che comincia col testo dato e si
+    inserisce **dopo di essa, INTERA**. Un'ancora di riga non puo' tagliare una coda.
+    *(E' la classe che `P9` — in coda — deve impedire: una copia che differisce per piu' delle
+    righe diagnostiche dichiarate. Qui differiva anche nella SINTASSI.)*
+    """
+    righe = io.open(sorgente, encoding="utf-8", newline="").read().split(NL)
+    DIAG_IN = ["        self._diag_inerzia = np.array(inerzia, copy=True)",
+               "        self._diag_contrasto = np.array(_contrasto, copy=True)",
+               "        self._diag_T2 = np.array(_T2, copy=True)",
+               "        self._diag_peq_nodo = np.array(_peq_nodo, copy=True)"]
+    DIAG_CO = ["        self._diag_coppia = np.array(correzione, copy=True)"]
+    fuori, k = [], 0
+    _pre_in = "        inerzia = np.maximum(_contrasto * _T2, 1e-6)"
+    _pre_co = "        omega_new = omega_src + dtn_c * (correzione / inerzia[:, None]"
+    _n_in = sum(1 for r in righe if r.startswith(_pre_in))
+    _n_co = sum(1 for r in righe if r.startswith(_pre_co))
+    assert _n_in == 1, "righe dell'inerzia: %d in %s" % (_n_in, sorgente)
+    assert _n_co == 1, "righe di omega_new: %d in %s" % (_n_co, sorgente)
+    for r in righe:
+        if r.startswith(_pre_co):
+            fuori.extend(DIAG_CO)            # la coppia si legge PRIMA di essere usata
+            fuori.append(r)
+            k += 1
+            continue
+        fuori.append(r)
+        if r.startswith(_pre_in):
+            fuori.extend(DIAG_IN)
+            k += 1
+    io.open(dest, "w", encoding="utf-8", newline=NL).write(NL.join(fuori))
+    # ⚠ **POSTCONDIZIONE (anticipo di `P9`): la copia DEVE differire SOLO per le righe
+    #   diagnostiche dichiarate.** Se differisce per altro, **STOP**: una copia che gira al posto
+    #   del simulatore e che non si sa in cosa differisca **non e' un diagnostico, e' un altro
+    #   programma**.
+    import difflib as _dl
+    _dop = io.open(dest, encoding="utf-8", newline="").read().split(NL)
+    _agg = [x[1:].rstrip(chr(13)) for x in _dl.ndiff(righe, _dop) if x.startswith("+ ")]
+    _tol = set(DIAG_IN) | set(DIAG_CO)
+    _estranee = [x for x in _agg if x not in _tol]
+    _tolte = [x[1:].rstrip(chr(13)) for x in _dl.ndiff(righe, _dop) if x.startswith("- ")]
+    assert not _estranee and not _tolte, (
+        "la copia differisce per righe NON dichiarate: aggiunte %r  tolte %r"
+        % (_estranee[:3], _tolte[:3]))
+    ast.parse(NL.join(_dop))            # e DEVE compilare
+    return hashlib.sha1(io.open(dest, "rb").read()).hexdigest()[:8], k
 
 COPIA = os.path.join(FUORI, "_sim_diag_est.py")
 blob_copia, anc_copia = copia_diag(SIM, COPIA)
