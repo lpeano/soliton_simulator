@@ -1713,6 +1713,96 @@ stimano**, e si committano **prima** della misura.
 > sopra. **Il numero che conta è il CONTRASTO fra coorte e vuoto, non il valore assoluto**, e
 > il referto deve riportare **entrambi**.
 
+### ✅ **LA SCENA `(a)` SI CHIAMA «STESSO RAGGIO», NON «STESSA MATERIA»** *(Luca, 2026-09-25)*
+
+**Si tiene il RAGGIO `4.0964`**, cioe' **`~411` nodi per regione**, non `497`.
+
+> ### **E LA RAGIONE È PIÙ FORTE DELLA SCELTA: i `497` per massa di `CURA 2` ERANO SOTTO LA
+> ### SCALA DI PLANCK.** Stavano in un raggio `0.7 = 0.875·LAM`, dove ci stanno **`5`** nodi
+> *(rapporto `104`)*. **Non c'è una «stessa materia» da conservare: quella materia non
+> esisteva.** Conservare `497` sarebbe **portare avanti un numero nato in un regime che `A13`
+> ha dichiarato inesistente.**
+>
+> **Il nome cambia perche' il nome era una PROMESSA sbagliata**, ed è lo stesso difetto dei
+> commenti scaduti: *«stessa materia»* avrebbe fatto leggere il confronto come se una
+> grandezza fosse tenuta fissa, mentre quella grandezza **non ha un valore precedente valido**.
+
+**La scena `(b)` resta com'è:** `sep = 4.0`, `r_regione = 2.2641`, `~70` nodi per regione.
+
+### ❗ `P-GONFIA` — **IL RIFERIMENTO CAMBIA, E VA DICHIARATO** *(Luca, 2026-09-25)*
+
+**Il confronto con `CURA 2` è fra SCENE DIVERSE e non attribuisce niente alla semina.**
+*(Scena diversa, `n` diverso, raggio diverso, `QUOTA` diversa: qualunque differenza di `d0`
+potrebbe venire da lì.)*
+
+```
+BRACCIO DI CONTROLLO DI `P-GONFIA`:
+  la STESSA scena (ii) -- stesso raggio del vuoto, stesso `n`, stesse regioni,
+  stesso seme -- con `SEMINA_LAM` **SPENTA**.
+  UNICA DIFFERENZA: la distanza minima.
+```
+
+> **La soglia resta «MENO DELLA METÀ»**, ma **applicata a QUESTO confronto**.
+> **Il confronto con `CURA 2` resta nel referto come riferimento DI UN'ALTRA SCENA**, e va
+> letto così: dice **dove siamo**, non **cosa ha fatto la semina**.
+
+### ❗ `S10` — **TRE PRECISAZIONI PRIMA DELLA MISURA** *(Luca, 2026-09-25)*
+
+1. **BRACCIO DI CONTROLLO:** la stessa scena, **stesso seme**, con **fasi CASUALI anche dentro
+   le tre regioni**. **`S10` si legge come CONTRASTO fra la coorte coerente e questo controllo,
+   non in assoluto.** *(Senza, il `~50 %` che `Λ` dà per costruzione si leggerebbe come mezzo
+   successo.)*
+2. **PROFILO PER GUSCI**, contati **in ARCHI dal nucleo della regione** *(non da `pos`)*:
+   frazione con `I > Λ` ai passi `0`, `30`, `60`, `120`.
+   **Distingue l'EROSIONE DAL BORDO dallo SFASAMENTO GLOBALE** — due esiti che un numero unico
+   confonderebbe.
+3. **PREVISIONE, scritta prima:** la scena **`(b)` perde coerenza PRIMA della `(a)`**.
+   `r = 2.26 < R_CONN = 2.4`, quindi **nessun nodo della regione `(b)` ha tutti i vicini
+   dentro**; in `(a)` *(`r = 4.10`)* il nucleo interno di raggio `~1.70` **ce li ha tutti**.
+   **Se accade il contrario, va spiegato.**
+
+> ### ⛔ **E SE LA COERENZA CROLLA: REPERTO E STOP. NESSUNA LEGGE NUOVA PER TENERLA** *(Luca)*.
+> **La diagnosi si fa DOPO, spegnendo UNA legge alla volta** — dispersione delle frequenze,
+> calci di fase della mitosi, torsione.
+> **È `A12` applicato al contrario:** una misura che fallisce **non autorizza una legge**, e
+> aggiungere un meccanismo per salvare un risultato è il modo in cui una teoria smette di
+> poter essere smentita.
+
+### ❗ LE PREVISIONI ANALITICHE, **committate PRIMA del giro** *(punto 4 del mandato)*
+
+| | grandezza | `CURA 2` | scena `(ii)` | `×` |
+|---|---|--:|--:|--:|
+| **`P1`** | somma dei pesi per nodo | `~50` | `~9` | `0.18` |
+| **`P2`** | contrasto `I_massa / I_vuoto` | `~13` | `~27` | `2.1` |
+| **`P3`** | `Λ` | `~140` | `~5` | `0.036` |
+| **`P3b`** | ampiezza dello scuotimento | — | **`~5×` più bassa** | `0.2` |
+| **`P4`** | `cs_floor` dentro le masse | `~0.9` | `~0.55` | `0.61` |
+| **`P5`** | `lambda_nodi` | — | **quasi COSTANTE, `0.74`-`0.76 LAM` ovunque** | — |
+
+**LE ASSUNZIONI, dichiarate:** `SCALA_AMP = 1` · pesi `exp(-d/LAM)` · **nessuna correlazione
+`RSA`**.
+
+> **⚠ E UNA DICHIARAZIONE DI PROVENIENZA, perche' conta per come si legge un errore:
+> QUESTE PREVISIONI VENGONO DAL MANDATO, NON LE HO DERIVATE IO.** Le committo come sono, con le
+> loro assunzioni, **e le verifico al passo zero**. Se sbagliassi a rivendicarle come mie, un
+> loro fallimento non direbbe piu' se è sbagliata l'assunzione o il conto.
+>
+> **CRITERIO: se una previsione sbaglia di più di un FATTORE 2, va spiegato perche'** — *o
+> l'assunzione è falsa, o la legge fa altro da ciò che dice* *(Luca)*. **E `P5` è la piu'
+> interessante**: se `lambda_nodi` è quasi costante, **la legge di schermatura è di fatto
+> SPENTA dalla soglia irraggiungibile** — cioè lo stesso difetto di `massa_critica_collasso`,
+> visto da un'altra legge.
+
+### ❗ IL COSTO SI MISURA DAGLI **ARCHI**, non dai nodi *(punto 5)*
+
+**Al passo ZERO si conta il numero di ARCHI di entrambe le scene, PRIMA di stimare i tempi.**
+**Stima da verificare:** `(a)` `~500k` archi *(simile a `CURA 2`)*, `(b)` `~150k`.
+
+> **E il mio avviso di costo di ieri era sbagliato nella grandezza guardata:** avevo detto
+> *«il vuoto di `A` ha `5.4×` i nodi, quindi costera' molto di piu'»*. **Il costo dipende dagli
+> ARCHI**, e con `A13` i nodi sono **piu' distanti**, quindi **meno connessi**: `5.4×` i nodi
+> **non significa `5.4×` gli archi**. **Si misura, non si stima.**
+
 ### ❗ `P-GONFIA` — **LA PREVISIONE, CON LA SUA SOGLIA NUMERICA FISSATA ORA**
 
 **La previsione di Luca:** *la crescita della mediana di `d0` nei 120 passi **CALA NETTAMENTE**
