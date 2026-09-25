@@ -17824,3 +17824,73 @@ la cache esista **alla semina** *(oggi non esiste: è la stessa famiglia della c
 ② il calo **è la legge** e `A2` va riscritto come *«al passo ZERO esatto, e al passo 1 la rampa
 resta ≫ del braccio spento»* — cioè un **limite**, non un'uguaglianza.
 **DECIDE LUCA.** La voce è in coda come **`RAMPA-1`**.
+
+
+---
+
+# ⛔ **LE SEI MISURE DI OGGI GIRAVANO CON 28 LEGGI SU 31 SPENTE** *(2026-09-25, mandato di Luca, punto 1)*
+
+*(`csv/_config_delle_misure.py`, generato per **AST**; tabella in
+`doc/CONFIGURAZIONE_misure_2026-09-25.md`. **Nessun numero ricopiato a mano**, `P1-ter`.)*
+
+## LA RISPOSTA ALLA DOMANDA, IN UNA RIGA
+
+> ### **NESSUNA delle sei girava in configurazione del driver.** Tutte e sei: **default del
+> ### sorgente + quattro o cinque flag impostati A MANO.**
+
+| misura | strumento | configurazione | flag a mano | **leggi spente** |
+|---|---|---|---|---|
+| SCALE-TW pieno | `_scale_tw2.py` | default + flag a mano | 4 | **28 su 31** |
+| **chi comprime `d0`** | `_chi_comprime_d0.py` | default + flag a mano | 5 | **28 su 31** |
+| figli della mitosi | `_figli_della_mitosi.py` | default + flag a mano | 4 | **28 su 31** |
+| **limite di accoppiamento** | `_limite_accoppiamento.py` | default + flag a mano | 4 | **28 su 31** |
+| `A13` relazionale | `_a13_relazionale.py` | default + flag a mano | 4 | **28 su 31** |
+| omega estremo | `_dove_sta_omega.py` | default + flag a mano | 4 | **28 su 31** |
+
+**IL CONTO È MISURATO, non stimato:** il simulatore si carica **due volte** — una sui default,
+una con l'argv del driver — e si confrontano **tutti i 78 booleani di modulo**. **31 differiscono.**
+Rimettendo i flag che ogni strumento accende a mano, **ne restano 28.**
+
+## ⚠ E NON È «QUALCHE OPZIONE»: MANCAVA **IL FORK**
+
+```
+ANOM_SIMM · CALORE_VETTORIALE · CAMPO_SPINORIALE · CHI_BASC · CHI_COOP · CHI_CORE ·
+COES_ADIM · COES_CAUSALE · CS_DINAMICO · DEPARAM_OROLOGIO · FORK_SU2 · FORK_SU2_MEM ·
+GUSCIO_MORBIDO · MITOSI_2LAM · OLON_PART · PAV_COM · PEQ_ESATTO · PEQ_NASCITA_LOCALE ·
+PLAST_DIN · RITMO_WRAP_2PI · RUMORE_COLORATO · SPINORE_CORRETTO · STEP2_OROLOGIO ·
+TAU_LUCE · TEMPO_UNICO_MITOSI · VERLET · VIRIALE · ZETA_VIR
+```
+
+> **`FORK_SU2`, `FORK_SU2_MEM`, `CAMPO_SPINORIALE`, `SPINORE_CORRETTO`, `STEP2_OROLOGIO`,
+> `VERLET`.** Cioè: **le sei misure di oggi sono state prese su un sistema SENZA IL FORK**, con
+> l'integratore di primo ordine e l'orologio scalare — **il sistema pre-fork più le due cure
+> nuove.** **Non è «una configurazione diversa»: è un altro programma.**
+
+**E LA VOCE CHE PESA PIÙ DI TUTTE È `CS_DINAMICO`**, perché è **il flag che ha fatto cadere
+`A2`**: spento, `cs = CS_M` **costante**, quindi `tau = d/cs` è **`tau ∝ d` travestito**
+(par.4) e **ogni grandezza che divide per il tempo-luce sembra ferma**.
+
+## COSA QUESTO RITIRA E COSA NO
+
+- **NON ritira le letture di CODICE.** `A13` relazionale ha contato archi (`77.23 %` conformi):
+  è **geometria del vuoto seminato**, e i flag del fork non la toccano. *(Ma va riverificato,
+  non asserito: `SEMINA_LAM` era acceso a mano, ed è quello che decide la geometria.)*
+- **RITIRA come misure del sistema vero** le due da cui dipende una decisione, ed è esattamente
+  la priorità che Luca ha indicato: **`chi comprime d0`** *(il bilancio per scrittore, il
+  `−36 %` e il `−57.5 %`, il verdetto «`S12_coesione` è il compressore»)* e **il limite di
+  accoppiamento** *(il rapporto `×1521`, il salto a `k = 2`, su cui poggia `INERZIA-1`)*.
+  **Quei numeri restano veri di quel sistema, e quel sistema non è quello che gira.**
+- **`SCALE-TW`** diceva *«la mitosi NON è morta»* con `48` nodi in `300` passi: la soglia `3π` e
+  la finestra dipendono da `TORS_4PI`/`FASE_2PI`, **che non sono fra i 28** — ma
+  `TEMPO_UNICO_MITOSI` **sì**. **Da riverificare.**
+
+## 🛑 LA LEZIONE, E NON È NUOVA — È `P1` APPLICATA ALLA CONFIGURAZIONE
+
+Ogni volta che ho scritto *«campo maturo, cura 5 ON»* in testa a un referto, **ho dichiarato i
+flag che avevo ACCESO e taciuto i 28 che non c'erano.** La verifica di stamattina
+(«il flag era acceso?») ha risposto **sì** — e **la domanda era troppo piccola**: il flag era
+acceso, e intorno a lui il sistema era spento.
+
+> ### **UN REFERTO DEVE DICHIARARE LA CONFIGURAZIONE INTERA, NON I FLAG CHE HO TOCCATO.**
+> E la forma che lo rende verificabile è quella che il sigillo di `CURA 4` ora usa:
+> **l'argv si CATTURA dal driver**, non si compone.
