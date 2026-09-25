@@ -120,6 +120,11 @@ def analizza(rel):
         v = "DRIVER (argv catturata) + lancio del driver"
     elif usa_cli:
         v = "DRIVER (argv catturata via `_cli_flag`)"
+    elif lancia_driver and a_mano:
+        # ⚠ MISTO: il run vero gira in configurazione del driver, ma la parte IN-PROCESSO
+        #   dello strumento imposta flag a mano. **Sono due sistemi nello stesso strumento**,
+        #   e dire solo "DRIVER" nasconderebbe la seconda meta'.
+        v = "MISTO: driver per il run, flag a mano in-process"
     elif lancia_driver:
         v = "DRIVER (lanciato per subprocess)"
     elif a_mano:
@@ -176,6 +181,48 @@ for k in sorted(conta):
 P("%-46s %d" % ("TOTALE", sum(conta.values())))
 P("```")
 P()
+P("## LA DISTANZA DALLA CONFIGURAZIONE DEL DRIVER — **quali leggi MANCAVANO**")
+P()
+P("*«Default del sorgente + quattro flag» non dice QUANTO manca. Qui il conto e'")
+P("MISURATO: si carica il simulatore **due volte** — una sui default, una con l'argv del")
+P("driver — e si confrontano **tutti** i booleani di modulo. Poi, per ogni strumento, si")
+P("rimettono i flag che imposta a mano e **si elenca cio' che resta**.*")
+P()
+sys.path.insert(0, _QUI)
+import _cli_flag
+_Sdef, _ = _cli_flag.carica_dal_cli(["soliton_simulator.py"], nome="cfg_def")
+_Sdrv, _ARGVD = None, None
+_S0, _ARGVD = _cli_flag.argv_del_driver([], dest=os.path.join(_QUI, "_scarto_cfg"))
+_Sdrv, _ = _cli_flag.carica_dal_cli(_ARGVD + ["--nodi", "0"], nome="cfg_drv")
+_boolflag = sorted(k for k, v in vars(_Sdef).items()
+                   if isinstance(v, bool) and k.isupper())
+_diverse = [k for k in _boolflag if bool(getattr(_Sdef, k)) != bool(getattr(_Sdrv, k, None))]
+P("```")
+P("booleani di modulo confrontati            %d" % len(_boolflag))
+P("DIVERSI fra default e argv del driver     %d" % len(_diverse))
+P("```")
+P()
+P("**I %d flag che il driver ACCENDE e i default NO:**" % len(_diverse))
+P()
+P("`" + "` · `".join(_diverse) + "`")
+P()
+P("| misura | flag rimessi a mano | **leggi che RESTAVANO SPENTE** | quante |")
+P("|---|---|---|---|")
+for _nome, _rel in NOMINATI:
+    _v, _am, _nt = analizza(_rel)
+    _resta = [k for k in _diverse if k not in _am]
+    P("| %s | %d | %s | **%d su %d** |"
+      % (_nome, len(_am),
+         ", ".join("`%s`" % x for x in _resta) if _resta else "—",
+         len(_resta), len(_diverse)))
+P()
+P("> ### ⚠ **NESSUNA DELLE SEI GIRAVA IN CONFIGURAZIONE DEL DRIVER**, e la voce che pesa")
+P("> ### piu' di tutte e' **`CS_DINAMICO`**: e' **il flag che ha fatto cadere `A2`**.")
+P(">")
+P("> Con `CS_DINAMICO` spento `cs = CS_M` **costante**, quindi `tau = d/cs` e' `tau ∝ d`")
+P("> travestito (par.4 di `CLAUDE.md`), il tempo-luce non si muove e **ogni grandezza che")
+P("> lo divide sembra ferma**. E' esattamente il meccanismo del `FAIL` di `A2`.")
+
 P("## COSA QUESTA TABELLA **NON** DICE")
 P()
 P("- **non dice che una misura sia sbagliata.** Dice **in quale sistema** e' stata presa.")
