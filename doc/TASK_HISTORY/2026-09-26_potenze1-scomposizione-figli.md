@@ -63,3 +63,55 @@ darebbe un divario che cambia **perché cambia il riferimento**.
 - **se `rho_s/W²` sia SICURA.** Toglie `T2` per costruzione, ma **non è misurato** che non rompa
   altro: `rho_s` entra in `lambda_nodi`, nella soglia della mitosi, nella coppia Schwinger.
 - **niente sul taglio.** Questa è la famiglia dei **figli**; `C1'`/`C1''` restano dove sono.
+
+---
+
+# ❌❌ **DUE DIFETTI NELLO STRUMENTO, TROVATI DA LUCA SUL FILE COMMITTATO — PRIMA DEI DATI**
+
+*(La raccolta era partita: **fermata**. I criteri qui sopra restano, con questa modifica.)*
+
+## ① **IL RIFERIMENTO DEI MATURI ERA INCOERENTE: `K1` AVREBBE FALLITO PER COSTRUZIONE**
+
+`c_m`, `rho_m`, `peq_m`, `W_m` erano **MEDIANE prese separatamente**. Ma l'identita' richiede
+**`c_m = rho_m/peq_m`**, e **la mediana di un rapporto NON e' il rapporto delle mediane.**
+
+> ### **`K1` avrebbe fallito ANCHE SU DATI PERFETTI, e io avrei cercato il difetto nella
+> ### RACCOLTA.** Il criterio scritto come presidio contro me stesso **sarebbe diventato la
+> ### trappola**: `STOP, la raccolta e' incoerente` su una raccolta sana.
+
+## ② **L'AGGREGAZIONE PER ETA' NASCONDEVA LA NON-ADDITIVITA'**
+
+Prendevo la **mediana** di `T1`, `T2`, `T3` **separatamente** e normalizzavo sulla loro somma:
+**le frazioni sommavano al 100 % per COSTRUZIONE**, qualunque cosa facessero i dati.
+
+## ✅ **LA CURA: MEDIA DEI LOGARITMI (media geometrica)**
+
+`log` di una media geometrica e' **ADDITIVO**, quindi
+`mean(log c) = mean(log rho) - mean(log peq)` **esattamente, nodo per nodo**.
+**Si applica sia ai maturi sia ai figli di ogni eta'.** Le **mediane si riportano A PARTE**, come
+descrizione dell'ordine di grandezza.
+
+> ### **E `K1` DIVENTA UN CONTROLLO VERO:** non piu' *«ho aggregato in modo coerente?»* ma
+> ### ***«il contrasto e' DAVVERO `rho/peq` nodo per nodo?»*** — che e' una domanda sul CODICE.
+
+**⚠ E UN NUMERO CHE VA NEL REFERTO:** si tengono solo i nodi con **tutte e quattro** le grandezze
+positive, perche' dove `_ok_n` e' falso `_contrasto` vale `1` per **convenzione** e li' l'identita'
+**non deve** chiudere. **Quanti se ne scartano si conta e si stampa.**
+
+## IL COLLAUDO (`P1-sexies`), FATTO **PRIMA** DEL RUN
+
+Dati sintetici con `contrasto == rho/peq` **nodo per nodo**, `rho` e `peq` log-normali
+**INDIPENDENTI** *(se fossero proporzionali il difetto non si vedrebbe: **il caso sintetico deve
+CONTENERE il difetto**, non spiegarlo)*:
+
+```
+media GEOMETRICA   scarto massimo dell'identita'   1.776e-15      (atteso ~0)
+MEDIANE separate   scarto massimo dell'identita'   4.748e-02      (atteso >> 0)
+```
+
+> ### ✅ **COLLAUDO 2/2:** la geometrica **chiude**, le mediane separate **non chiudono**.
+> **Quindi `K1` non e' una tautologia:** se fallisce sul dato, il difetto e' nella **raccolta**.
+> *(E il referto lo dichiara: se il collaudo fosse VUOTO — mediane che non fanno fallire
+> l'identita' — lo stampa e dice che `K1` non prova niente.)*
+
+**`K1` resta invariato come SOGLIA** (`< 1e-9`), **e ora ha senso.**

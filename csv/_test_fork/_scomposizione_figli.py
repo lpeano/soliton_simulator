@@ -170,8 +170,34 @@ for _p in range(1, BUDGET + 1):
     np.add.at(gr, _i[_m], 1); np.add.at(gr, _j[_m], 1)
     # I MATURI DELLO STESSO PASSO: i nodi che c'erano al passo zero (indici < n0)
     mv = np.arange(min(n0, n))
-    _wm = float(np.median(W[mv])); _pm = float(np.median(PQ[mv])); _rm = float(np.median(RH[mv]))
-    _cm = float(np.median(CT[mv]))
+    # ❌❌ **DIFETTO RILEVATO DA LUCA sul file committato, PRIMA che i dati fossero letti:**
+    #   con le MEDIANE prese separatamente, `c_m != rho_m/peq_m` — **la mediana di un rapporto
+    #   NON e' il rapporto delle mediane** — e l'identita' `T1+T2+T3 = log(c_f/c_m)` la
+    #   richiede. **`K1` avrebbe fallito PER COSTRUZIONE, anche su dati perfetti**, e io
+    #   avrei cercato il difetto nella raccolta.
+    # ✅ **ORA: MEDIA DEI LOGARITMI (media geometrica).** `log` di una media geometrica e'
+    #   **ADDITIVO**, quindi `mean(log c) = mean(log rho) - mean(log peq)` **esattamente**,
+    #   nodo per nodo — e `K1` diventa un **controllo VERO** *(«il contrasto e' davvero
+    #   `rho/peq` nodo per nodo?»)* invece di una tautologia rovesciata.
+    #   ⚠ Si tengono solo i nodi con **tutte e quattro** le grandezze positive: dove `_ok_n`
+    #     e' falso `_contrasto` vale `1` per CONVENZIONE, e li' l'identita' **non deve**
+    #     chiudere. **Quanti se ne scartano E' UN NUMERO CHE VA NEL REFERTO.**
+    _bm = (W[mv] > 0) & (PQ[mv] > 0) & (RH[mv] > 0) & (CT[mv] > 0)
+    _mv = mv[_bm]
+    if _mv.size < 10:
+        o["esclusi"] += 1
+        o["esclusi_perche"].append([_p, "meno di 10 maturi utilizzabili", int(_mv.size)])
+        continue
+    _wm = float(np.exp(np.mean(np.log(W[_mv]))))
+    _pm = float(np.exp(np.mean(np.log(PQ[_mv]))))
+    _rm = float(np.exp(np.mean(np.log(RH[_mv]))))
+    _cm = float(np.exp(np.mean(np.log(CT[_mv]))))
+    o.setdefault('scartati_maturi', []).append([_p, int(mv.size - _mv.size), int(mv.size)])
+    # LE MEDIANE SI RIPORTANO A PARTE, come DESCRIZIONE (richiesta di Luca): servono a
+    #   leggere l'ordine di grandezza, non a costruire l'identita'.
+    o.setdefault('maturi_mediane', []).append(
+        [_p, float(np.median(W[_mv])), float(np.median(PQ[_mv])), float(np.median(RH[_mv])),
+         float(np.median(CT[_mv]))])
     if not (_wm > 0 and _pm > 0 and _rm > 0 and _cm > 0):
         # ⚠ NON si aggira con un `max(..., 1e-9)` (`A11`): il passo si ESCLUDE e SI CONTA.
         o["esclusi"] += 1
@@ -222,6 +248,43 @@ def braccio(nome, seme):
     return subprocess.Popen([sys.executable, p], cwd=RADICE,
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
+
+# ==========================================================================================
+# IL COLLAUDO (`P1-sexies`): su dati SINTETICI con `contrasto == rho/peq` nodo per nodo,
+#   `K1` **deve PASSARE** con la media geometrica e **FALLIRE** con le mediane separate.
+#   **Se non fallisce, il collaudo e' VUOTO e lo si dichiara.**
+# ------------------------------------------------------------------------------------------
+def collaudo_k1(seme=7, quanti=400):
+    """Due risposte NOTE: geometrica -> chiude; mediane separate -> NON chiude."""
+    rg = np.random.default_rng(seme)
+    # i MATURI: `rho` e `peq` log-normali INDIPENDENTI, cosi' la mediana del rapporto e'
+    #   diversa dal rapporto delle mediane (se fossero proporzionali, il difetto non si
+    #   vedrebbe: **il caso sintetico deve CONTENERE il difetto**, non spiegarlo).
+    rho_m = np.exp(rg.normal(0.0, 1.0, quanti))
+    peq_m = np.exp(rg.normal(0.0, 1.0, quanti))
+    W_m = np.exp(rg.normal(0.0, 0.5, quanti))
+    ct_m = rho_m / peq_m                      # ESATTAMENTE, nodo per nodo
+    rho_f = np.exp(rg.normal(-6.0, 1.0, 40))
+    peq_f = np.exp(rg.normal(0.3, 0.2, 40))
+    W_f = np.exp(rg.normal(-1.5, 0.4, 40))
+    ct_f = rho_f / peq_f
+    fuori = {}
+    for modo in ('geometrica', 'mediane'):
+        if modo == 'geometrica':
+            g = lambda x: float(np.exp(np.mean(np.log(x))))
+        else:
+            g = lambda x: float(np.median(x))
+        _r, _p, _w, _c = g(rho_m), g(peq_m), g(W_m), g(ct_m)
+        tot = np.log(ct_f / _c)
+        T1 = np.log((rho_f / W_f ** 2) / (_r / _w ** 2))
+        T2 = 2.0 * np.log(W_f / _w)
+        T3 = -np.log(peq_f / _p)
+        fuori[modo] = float(np.abs(T1 + T2 + T3 - tot).max())
+    return fuori
+
+
+_CO = collaudo_k1()
+_CO_OK = (_CO['geometrica'] < 1e-12) and (_CO['mediane'] > 1e-3)
 
 LOG, RIPRESI, dati = [], {}, {}
 proc = {}
@@ -287,6 +350,28 @@ if not dati:
 
 # ====================================================================== `K1`: l'identita' CHIUDE?
 P("=" * 112)
+P("IL COLLAUDO DI `K1` SU DATI SINTETICI A RISPOSTA NOTA (`P1-sexies`)")
+P("=" * 112)
+P("  dati con `contrasto == rho/peq` nodo per nodo, `rho` e `peq` log-normali INDIPENDENTI")
+P("  (se fossero proporzionali il difetto non si vedrebbe: **il caso sintetico deve")
+P("  CONTENERE il difetto**, non spiegarlo).")
+P()
+P("  media GEOMETRICA   scarto massimo dell'identita'  %.3e   (atteso ~0)"
+  % _CO["geometrica"])
+P("  MEDIANE separate   scarto massimo dell'identita'  %.3e   (atteso >> 0)"
+  % _CO["mediane"])
+P()
+if _CO_OK:
+    P("  -> COLLAUDO 2/2: la geometrica CHIUDE, le mediane separate NON chiudono.")
+    P("     **Quindi `K1` e' un controllo VERO**: se fallisce sul dato, il difetto e' nella")
+    P("     RACCOLTA, non nell'aggregazione.")
+else:
+    P("  -> ⛔ **COLLAUDO VUOTO O SBAGLIATO, e lo dichiaro invece di proseguire:**")
+    P("     geometrica %.3e   mediane %.3e" % (_CO["geometrica"], _CO["mediane"]))
+    P("     Se le mediane NON fanno fallire l'identita', questo collaudo non prova niente,")
+    P("     e `K1` resta una tautologia travestita.")
+P()
+P("=" * 112)
 P("`K1` -- L'IDENTITA' CHIUDE?   |T1+T2+T3 - log(c_f/c_m)| < 1e-9")
 P("=" * 112)
 _k1_max, _k1_n = 0.0, 0
@@ -343,8 +428,19 @@ for nome, (ar, tot, T1, T2, T3) in sorted(SC.items()):
     fr = {}
     for e in et:
         m = ar[:, 2] == e
-        _t, _a, _b, _c = np.median(tot[m]), np.median(T1[m]), np.median(T2[m]), np.median(T3[m])
+        # ❌ **SECONDO DIFETTO RILEVATO DA LUCA:** prendere la MEDIANA di `T1`, `T2`, `T3`
+        #   separatamente e normalizzare sulla loro somma fa sommare le frazioni al 100 %
+        #   **per costruzione**, e **nasconde la non-additivita'**.
+        # ✅ **ORA SI FA LA MEDIA** dei tre termini (sono gia' LOGARITMI: la media di un
+        #   logaritmo E' il logaritmo della media geometrica, e **la somma si conserva**).
+        #   Cosi' `_a + _b + _c` e' la media di `T1+T2+T3`, che `K1` ha verificato essere
+        #   **uguale** alla media di `log(c_f/c_m)`: le frazioni sommano al 100 % **perche'
+        #   l'identita' chiude sul DATO**, non perche' le ho normalizzate.
+        _t = float(np.mean(tot[m]))
+        _a, _b, _c = float(np.mean(T1[m])), float(np.mean(T2[m])), float(np.mean(T3[m]))
         _s = _a + _b + _c
+        assert abs(_s - _t) < 1e-9, (
+            "l'additivita' non tiene sull'aggregato: eta %d, %.3e" % (e, abs(_s - _t)))
         f2 = 100.0 * _b / _s if _s else float("nan")
         f3 = 100.0 * _c / _s if _s else float("nan")
         f1 = 100.0 * _a / _s if _s else float("nan")
@@ -468,4 +564,4 @@ P("  - DUE SEMI: `K2` guarda la concordanza, non una barra (per una barra servon
 T = NL.join(R) + NL
 io.open(DEST, "w", encoding="utf-8", newline=NL).write(T)
 print(T)
-sys.exit(0 if (_K1 and _K2) else 1)
+sys.exit(0 if (_K1 and _K2 and _CO_OK) else 1)
