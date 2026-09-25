@@ -1,0 +1,57 @@
+================================================================================================================
+`PASSO-2` -- CHI PARTIVA DA UN VUOTO INVECCHIATO CON 300 PASSI INCOMPLETI
+================================================================================================================
+
+LA CONDIZIONE, letta dal codice:  `if a.seed is not None or a.nodi != SEME_INIZIALE:`
+  SEME_INIZIALE = 900   (il default di `--nodi`)
+  ⚠ E' un `or`: BASTA `--seed`, con QUALUNQUE valore. Un run con `--seed 42` la fa scattare
+    ugualmente, anche se 42 e' il default del costruttore, perche' `a.seed is not None`.
+
+----------------------------------------------------------------------------------------------------------------
+I FILE CERCATI: 31  (la tabella delle campagne + ogni `CONFIGURAZIONE*` sotto `csv/`)
+----------------------------------------------------------------------------------------------------------------
+
+  NESSUNA riga con `--seed` o `--nodi` trovata nei file cercati.
+  ⚠ E UNO ZERO QUI VA GUARDATO DUE VOLTE: la prima stesura di questo strumento dava
+    zero PER UN PARSER SBAGLIATO (regex sul testo, ma gli argv sono LISTE JSON). Se
+    questo zero e' vero, significa che NESSUN run documentato passava quei flag.
+  CONTROLLO POSITIVO DEL PARSER, su un argv costruito a mano:
+    ['--nodi','0','--seed','11'] -> seed=11 nodi=0   (attesi 11 e 0)
+    -> il parser FUNZIONA
+
+  RIGHE CHE FAREBBERO SCATTARE L'INVECCHIAMENTO: 0 su 0
+
+----------------------------------------------------------------------------------------------------------------
+`--nodi 0` (la scena `(ii)`): IL CICLO GIRA SU ZERO NODI? -- MISURATO, non dedotto
+----------------------------------------------------------------------------------------------------------------
+
+  --nodi 0     --seed (assente)  ->  invecchia: SI'   n prima 0      archi prima 0       
+      giri del ciclo = 300     n dopo 0      archi dopo 0       
+      -> IL CICLO GIRA 300 VOLTE SU ZERO NODI. Nessun effetto possibile: `step()` su una
+         rete vuota non ha nulla da muovere. **MISURATO, non dedotto.**
+
+  --nodi 0     --seed 11     ->  invecchia: SI'   n prima 0      archi prima 0       
+      giri del ciclo = 300     n dopo 0      archi dopo 0       
+      -> IL CICLO GIRA 300 VOLTE SU ZERO NODI. Nessun effetto possibile: `step()` su una
+         rete vuota non ha nulla da muovere. **MISURATO, non dedotto.**
+
+  --nodi 900   --seed (assente)  ->  invecchia: no    n prima 900    archi prima 59730   
+      giri del ciclo = 0       n dopo 900    archi dopo 59730   
+
+================================================================================================================
+LA CONCLUSIONE
+================================================================================================================
+  * con `--nodi 0` (la scena `(ii)`) il ciclo gira su ZERO NODI: `PASSO-2` **non tocca la
+    scena `(ii)`**, ed e' MISURATO qui sopra.
+  * `PASSO-2` tocca **solo** i run che seminano un vuoto E passano `--seed` o un `--nodi`
+    diverso dal default. La tabella qui sopra dice quali sono, e viene dai FILE.
+  * ⚠ E la condizione e' un `or` su `a.seed is not None`: **un run con `--seed` uguale al
+    default lo fa scattare ugualmente**. Chi legge «ho passato il seme di default, quindi non
+    cambia niente» sbaglia.
+
+COSA QUESTO NON DICE:
+  - la ricerca e' sui file di configurazione TROVATI: un run lanciato a mano e non
+    registrato in nessun `CONFIGURAZIONE*` non compare. **Non e' un inventario dei run:
+    e' un inventario dei run DOCUMENTATI.**
+  - non dice se quell'invecchiamento abbia CAMBIATO una conclusione: dice quali run lo
+    hanno subito.
