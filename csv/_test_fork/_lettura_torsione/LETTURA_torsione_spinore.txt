@@ -1,0 +1,48 @@
+============================================================================================================
+(2a) LA TORSIONE LETTA DALLO SPINORE -- cosa esiste gia', e quanto vale
+============================================================================================================
+
+I FLAG, dai default del sorgente -- e decidono COSA e' leggibile:
+  SPINORE_VIVO       = True
+  SPINORE_CORRETTO   = False
+  CAMPO_SPINORIALE   = False
+  CHI_DA_SPINORE     = False
+  CHI_CORE           = False
+  CHI_BASC           = False
+  FORK_SU2           = False
+  FORK_SU2_MEM       = False
+  TORS_4PI           = True
+  OLON_PART          = False
+
+CHE COSA IL CODICE CALCOLA GIA' (pure-read per dichiarazione):
+  `_link_su2_N`             ESISTE   staticmethod: N_ij = (1+n_i.n_j) I + i (n_i x n_j).sigma
+  `_bloch_ritardato`        ESISTE   i Bloch a t-tau (STRATO 1)
+  `circolazione_topologica` ESISTE   restituisce `berry_spin` = curvatura non-abeliana SU(2) sui CICLI
+  `chiralita_core_locale`   ESISTE   l'identita' materia/vuoto
+
+------------------------------------------------------------------------------------------------------------
+LA MISURA, scena (ii) (b), DOPO UN PASSO, su 4 semi
+------------------------------------------------------------------------------------------------------------
+
+  `_nb` (Bloch per nodo) E' PRESENTE coi default: la rotazione del trasporto E' LEGGIBILE.
+
+  chi = arccos(n_i . n_j), L'ANGOLO DI ROTAZIONE DEL TRASPORTO SU(2), per ARCO:
+     p05   0.001806 rad = 0.000575 pi     (media su 4 semi, SE 8.05e-06)
+     p50   0.006619 rad = 0.002107 pi     (media su 4 semi, SE 2.73e-05)
+     p95   0.013763 rad = 0.004381 pi     (media su 4 semi, SE 3.85e-05)
+     max   0.028423 rad = 0.009047 pi     (media su 4 semi, SE 8.24e-04)
+     overlap di spin |N|/2 = cos(chi/2), mediano: 0.999995  (1 = allineati, 0 = antipodali)
+     frazione di archi con chi > pi/2    : 0.000000 +- 0.000000
+     frazione di archi con chi > 0.9 pi  : 0.000000 +- 0.000000
+
+  IL LIMITE STRUTTURALE, e non e' una misura ma un CONTO: `arccos` sta in [0, pi],
+  quindi UN ARCO NON PUO' SUPERARE `pi` = UN QUARTO del ricoprimento `4pi`.
+  -> se il quanto deve essere `4pi`, NON PUO' VIVERE SU UN ARCO: serve un CICLO.
+
+  I CICLI, e la curvatura non-abeliana che il codice CALCOLA GIA':
+     n_cicli = 256.0 +- 0.0
+     campioni di `berry_spin`       = 256 +- 0
+     |berry_spin| mediano           = 1.16206e-05 +- 2.9e-06
+     |berry_spin| max               = 5.92165e-05 +- 1.1e-05
+     olonomia di fase max           = 35.2437 +- 9.1
+     olonomia di fase media |.|     = 11.4222 +- 3.8

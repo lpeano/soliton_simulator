@@ -1,0 +1,83 @@
+==============================================================================================================
+(a) CHI USA `TAU_A` -- dall'AST, con la FUNZIONE in cui cade ogni occorrenza
+==============================================================================================================
+
+riga   nome           cosa    classe   funzione                   riga di codice
+120    _TAU_A_REGIME  SCRIVE  -        <modulo>                   _TAU_A_REGIME = 50.0       # alta persistenza memoria spinoriale
+125    _TAU_A_REGIME  SCRIVE  -        <modulo>                   _TAU_A_REGIME = 2.0        # canonico
+408    TAU_A          SCRIVE  -        <modulo>                   TAU_A    = _TAU_A_REGIME
+408    _TAU_A_REGIME  legge   -        <modulo>                   TAU_A    = _TAU_A_REGIME
+415    TAU_A_LOCALE   SCRIVE  -        <modulo>                   TAU_A_LOCALE = True     # vita media spinoriale LOCALE ~|Psi|^2 (decadimento atomico). I
+3316   TAU_A          legge   Rete     _passo_spinoriale          _tq = _tq * np.minimum(1.0, self.eta[:n] / TAU_A)[:, None]
+3331   TAU_A_LOCALE   legge   Rete     _passo_spinoriale          elif TAU_A_LOCALE:
+3334   TAU_A          legge   Rete     _passo_spinoriale          _tau = TAU_A * np.maximum(_dens / _dens_rif, 0.05)   # vita media locale, pavimento 0.05
+3337   TAU_A          legge   Rete     _passo_spinoriale          _tau = TAU_A
+3537   TAU_A          legge   Rete     _pesi                      ramp = np.minimum(1.0, self.eta / TAU_A)
+7873   TAU_A          SCRIVE  -        _applica_flag              TAU_A = float(a.tau_a_over)
+7874   TAU_A          legge   -        _applica_flag              globals()["_TAU_A_OVERRIDE"] = TAU_A
+7875   TAU_A          legge   -        _applica_flag              print(f"[tau-a] ESPERIMENTO: TAU_A sovrascritto a {TAU_A} (default del regime "
+7876   _TAU_A_REGIME  legge   -        _applica_flag              f"'{REGIME}': {_TAU_A_REGIME}). NON e' una correzione, NON e' promosso, e la "
+7877   TAU_A          legge   -        _applica_flag              f"combinazione TAU_A={TAU_A} con G_PH={G_PH} NON e' mai stata validata.")
+10065  TAU_A          SCRIVE  -        _applica_regime            SCUOTIMENTO = False; G_PH = 3e-3; TAU_A = 50.0; _CALORE_INIT = 0.4
+10067  TAU_A          SCRIVE  -        _applica_regime            SCUOTIMENTO = True;  G_PH = 0.15; TAU_A = 2.0;  _CALORE_INIT = 0.0
+10069  TAU_A          legge   -        _applica_regime            f"TAU_A={TAU_A} calore_init={_CALORE_INIT}", flush=True)
+
+I DUE VALORI, e quale e' il DEFAULT:
+  REGIME = 'deterministico'  (default del sorgente)  ->  TAU_A = 50.0000
+  ramo `deterministico`: TAU_A = 50.0   commento: "alta persistenza memoria spinoriale"
+  ramo `stocastico`:     TAU_A =  2.0   commento: "canonico"
+  TAU_A_LOCALE = True   (commento nel sorgente: "IN VERIFICA")
+  DT = 0.0100   ->   TAU_A/DT = 5000 passi a r = 1
+
+DOVE NASCE `eta`, cioe' CHI PARTE DA ZERO (dall'AST, scritture di `self.eta`):
+  riga 1550   in __init__                    self.phivel = np.zeros(0); self.eta = np.zeros(0)
+  riga 2645   in semina                      self.eta = np.concatenate([self.eta, np.zeros(n)])
+  riga 4799   in step                        w = self._pesi(); self.eta += dt_n
+  riga 5831   in mitosi                      self.eta = np.concatenate([self.eta, np.zeros(len(sel))])
+  riga 5987   in mitosi                      self.eta = np.concatenate([self.eta, np.zeros(nc)])
+
+==============================================================================================================
+(b) I CANDIDATI AL TEMPO DI RAMPA -- esistono? che forma hanno? quanto valgono?
+==============================================================================================================
+
+  _tempo_luce_nodo       per NODO    ESISTE
+  ritmo                  per NODO    ESISTE
+  _tau_arco_causale      per ARCO    ESISTE
+  _cs_arco_da_nodo       per ARCO    ESISTE
+  _r_nodo_mitosi         per NODO    ESISTE
+  _fattore_tempo_arco    per ARCO    ESISTE
+
+SCENA (ii) (b): n = 4252, archi = 148237
+
+  CANDIDATO 1 -- `d_nodo/cs_nodo` (`_tempo_luce_nodo`, GIA' CABLATO nello Strato 1).
+     FORMA: la firma e' `(self, ii, jj)` ma il RITORNO e' PER NODO -- misurato:
+     shape restituita = 4252,  nodi = 4252,  archi = 148237   -> shape == nodi: True
+     E' ESATTAMENTE la forma che serve a `ramp`: nessuna riduzione arco->nodo da inventare.
+  valori:
+     p05 0.865619   p50 0.897803   p95 0.922031   (in unita' di tempo)
+     PASSI per ramp = 1 (tempo/DT):  p05 86.6   p50 89.8   p95 92.2
+     contro i 5000 passi di TAU_A: piu' rapido di un fattore 55.7 (mediana)
+
+  CANDIDATO 2 -- il PERIODO DELLO SPINORE. Ingredienti disponibili:
+     `ritmo()` (il fattore di tempo proprio `r`): p05 1  p50 1  p95 1
+     `dt_n = DT*r`: p50 0.01
+     `omega_clk` NON ESISTE come attributo al passo zero: il periodo dello spinore
+     NON e' leggibile PRIMA del primo passo. E' un fatto, non un dettaglio: il
+     candidato 2 richiede che l'orologio esista GIA', e al passo zero non esiste.
+
+==============================================================================================================
+(c) LA CONSEGUENZA: `ramp` nei giri corti da 120 passi
+==============================================================================================================
+
+  `ramp = min(1, eta/TAU_A)` ed `eta` cresce di `dt_n = DT*r` per passo.
+  Con `r ~ 1`, al passo `k`:  ramp(k) = k*DT/TAU_A = k/5000
+     passo 1      ramp = 0.000200   (il campo e' al 0.0200 % del suo valore)
+     passo 8      ramp = 0.001600   (il campo e' al 0.1600 % del suo valore)
+     passo 30     ramp = 0.006000   (il campo e' al 0.6000 % del suo valore)
+     passo 60     ramp = 0.012000   (il campo e' al 1.2000 % del suo valore)
+     passo 120    ramp = 0.024000   (il campo e' al 2.4000 % del suo valore)
+     passo 1230   ramp = 0.246000   (il campo e' al 24.6000 % del suo valore)
+     passo 5000   ramp = 1.000000   (il campo e' al 100.0000 % del suo valore)
+
+  E `ramp` entra nei pesi COME PRODOTTO DI DUE NODI (`ramp[i]*ramp[j]`, `:3537`),
+  quindi il peso dell'arco va come `ramp^2`: al passo 120, 5.760e-04 del valore maturo.

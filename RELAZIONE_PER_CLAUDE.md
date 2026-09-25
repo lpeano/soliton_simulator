@@ -16242,3 +16242,135 @@ scena (b)   massa_0  raggiunti  67/67    g0:1  g1:58   g2:8
 > **È pertinente alla previsione che avevo scritto per `S10`** *(«la `(b)` perde coerenza prima
 > della `(a)`»)*: la differenza in gusci è `3`-`4` contro `2`-`3`, **meno netta di quanto la mia
 > previsione assumeva.**
+
+
+---
+
+# 📖 DUE LETTURE, SOLA LETTURA: **l'accensione del campo** e **la torsione dallo spinore** *(2026-09-25)*
+
+*(mandato di Luca. Documento: `doc/LETTURA_accensione_e_torsione.md`. Strumenti:
+`csv/_test_fork/_lettura_tau_a.py`, `csv/_test_fork/_lettura_torsione_spinore.py`.
+**Nessuna riga del simulatore toccata. STOP: sceglie Luca.**)*
+
+## 1. L'ACCENSIONE — `TAU_A` ha **due valori, due ruoli fisicamente diversi, nessuno derivato**
+
+**Il `50` non è il canonico:** è il valore del regime `deterministico`, che è **il default del
+sorgente**; il `2.0` è marcato *«canonico»*. **E la provenienza è scritta nel repo**, nel `help`
+di `--tau-a`: *«`TAU_A = 50` nel ramo deterministico era una **CURA** (per non far divergere
+`omega`)»*.
+
+| riga | funzione | ruolo |
+|--:|---|---|
+| **`:3537`** | **`_pesi`** | **la RAMPA DEI PESI DEL CAMPO** |
+| **`:3334`** | `_passo_spinoriale` | **la VITA MEDIA della memoria spinoriale** |
+| `:3316` | `_passo_spinoriale` | la **stessa** rampa sulla coppia — il commento lo dichiara |
+
+> ### **Due ruoli diversi: la VITA MEDIA di una memoria e il TEMPO DI ACCENSIONE di una sorgente.
+> ### Nessuna ragione, scritta da nessuna parte, perché coincidano — e il `50` è stato scelto
+> ### per il primo. Il secondo l'ha EREDITATO.**
+
+**E tutti i nodi nascono con `eta = 0`**: `semina` *(`:2645`)*, `mitosi` *(`:5831`)*, Schwinger
+*(`:5987`)* scrivono **lo stesso zero**. **La distinzione fra «nodo dato» e «nodo creato» non
+esiste nel codice.**
+
+### ✅ IL CANDIDATO `d/cs` FUNZIONA, e per tre ragioni MISURATE
+
+| candidato | esiste? | forma | **passi per `ramp = 1`** |
+|---|---|---|--:|
+| **`_tempo_luce_nodo`** *(`d/cs`)* | **sì, già cablato** *(Strato 1)* | **PER NODO** | **`p05 86.6` · `p50 89.8` · `p95 92.2`** |
+| periodo dello spinore | ingredienti sì, **periodo no** | — | **non leggibile al passo zero** |
+
+`89.8` contro `5000`: **più rapido di `55.7×`**, ed è **stretto** *(±3 %)*, quindi non introduce
+dispersione nuova. **Il candidato 2 non è disponibile**: `omega_clk` **non esiste prima del primo
+passo**, e un tempo che serve **alla nascita** non può venire da una grandezza che nasce dopo.
+
+**⚠ E UNA MIA CAUTELA ERA SBAGLIATA, la lascio leggibile:** avevo dedotto *dalla firma*
+`(self, ii, jj)` che il ritorno fosse per ARCO e servisse una riduzione arco→nodo. **Falso:** la
+shape è `4252` = **i NODI** *(archi: `148 237`)*. **È già la forma di `ramp`.** *(Dedotto dalla
+firma invece che dal dato.)*
+
+**⚠ E LA PROPOSTA ① RICHIEDE UN PEZZO NUOVO, uno solo:** `semina` è usata **anche in volo**
+dalla GUI *(voce `H`)*. **La distinzione «iniziale» / «in volo» non esiste nel codice** e andrebbe
+introdotta.
+
+### ⛔ (c) TUTTI I GIRI DA 120 PASSI HANNO GIRATO COL CAMPO SPENTO — e il peso è PEGGIO del campo
+
+`ramp` entra come **`ramp[i]*ramp[j]`**, quindi **il peso d'arco va come `ramp²`**:
+
+```
+passo  120   ramp = 0.024        peso d'arco = 5.76e-04     UNA PARTE SU 1736
+passo 5000   ramp = 1.000        peso d'arco = 1.00
+```
+
+| | conclusione che ne dipende | come va trattata |
+|---|---|---|
+| **1** | **la FORMA del freno-legge `(1+tanh)`**, decisa perché `max \|dx\|/d = 0.0531` e *«la saturazione non si presenta MAI»* | **È UNA DECISIONE DI FORMA PRESA SU UNA MISURA: la misura va rifatta.** Non dice che la saturazione non si presenti col campo maturo: dice che **non si presenta a campo spento** |
+| **2** | la soglia di `P-GONFIA`, `< +23.64 %` *(metà di `+47.2795 %`)* | **ancorata a quel regime**, non invalida: **va marcata** |
+| **3** | `S7` di `SEMINA_LAM` | già sospeso; ora ha **una seconda ragione** |
+| **4** | le approvazioni di `CURA 1` e `CURA 2` | confronti **interni** allo stesso regime |
+| **5** | `T5` di `CURA 2` | **entrambi** i bracci a campo spento: valido **fra loro**, non trasportabile |
+
+> **È `9-bis`: ogni numero porta la sua EPOCA. Questi numeri hanno un'epoca in più di quella che
+> dichiarano, e non è il blob: è `ramp`.**
+> **⚠ E NON HO MISURATO come `\|dx\|/d` scali con `ramp`.** Che il massimo cresca è **atteso**,
+> non provato — e l'attesa non è una misura.
+
+## 2. LA TORSIONE DALLO SPINORE — **esiste già più di quanto il mandato supponesse**
+
+- **`_link_su2_N`** è `staticmethod` **dichiarato PURE-READ**, e porta l'**identità sigillata**
+  `N_ij = 2 cos(χ/2) U_ij` con `U_ij = exp(−i(χ/2) m̂·σ)`: **l'angolo di rotazione del trasporto
+  È GIÀ `χ = arccos(n_i·n_j)`**, non va inventato.
+- **`circolazione_topologica` restituisce GIÀ `berry_spin`**, che il suo stesso docstring chiama
+  **«curvatura non-abeliana SU(2), gauge-invariante»**, **calcolata SUI CICLI**.
+- **`_nb` è presente coi default** *(`SPINORE_VIVO = True`)*: **si legge senza accendere nulla.**
+
+### ⛔ MA C'È UN CONTO CHE DECIDE, E NON È UNA MISURA
+
+**`arccos` sta in `[0, π]`**: l'angolo `SU(2)` su **un arco** è al massimo `π`, **un quarto** di
+`4π`.
+
+> ### **Se il quanto deve essere `4π`, NON PUÒ VIVERE SU UN ARCO: deve vivere su un CICLO.**
+> **Non è un limite del regime: è il codominio di `arccos`. Nessuna maturazione lo cambia.**
+
+### LA MISURA, scena `(ii)` `(b)`, dopo UN passo, **4 semi**
+
+```
+chi per ARCO   p50 0.002107 pi    p95 0.004381 pi    max 0.009047 pi
+               overlap di spin cos(chi/2) mediano = 0.999995
+               frazione con chi > pi/2 : 0.000000
+CICLI          n_cicli 256.0 +- 0.0
+               |berry_spin| mediano 1.16e-05    max 5.92e-05
+               olonomia di FASE   max 35.2437   media |.| 11.4222      (4 pi = 12.566)
+```
+
+**A un passo la curvatura SU(2) è `1e-05`: cinque ordini sotto qualunque quanto. Ma NON è un
+verdetto**, e va detto: **il settore di spin non è maturo a un passo** *(overlap `0.999995`)*.
+**E il valore a maturità è GIÀ MISURATO nel par.9, non da me:** `spin_ovl = 0.5`,
+`χ ≈ 90° ± 39°` a `800` passi — **i valori di direzioni CASUALI**. Quindi a maturità `χ` per arco
+vale **`~0.5 π`**: **il doppio di oggi verso `π`, e ancora un OTTAVO di `4π`.**
+
+### ❗ E UN NUMERO CHE VA NELLA DIREZIONE OPPOSTA
+
+**L'olonomia di FASE supera già `4π`:** `max = 35.24` contro `12.566`, cioè **`2.8×` il
+ricoprimento**, con media assoluta `11.42` già dell'ordine di `4π`.
+**Sui CICLI un quanto di `4π` È RAGGIUNGIBILE — per la fase.** Per la curvatura di Berry oggi no,
+di cinque ordini, **e quanto lo diventi a maturità NON L'HO MISURATO** *(serve il giro sospeso)*.
+
+### I QUATTRO RUOLI — **due costano ZERO, due costano davvero**
+
+| ruolo | nella proposta | costo |
+|---|---|---|
+| **identità** `chi_basc` | **`CHI_DA_SPINORE`, già cablato** *(oggi `False`)* | **ZERO** |
+| **corrente** | **`berry_spin`, già calcolato nella stessa funzione** | **ZERO** |
+| **orologio** `τ_pp` | **esce**, l'orologio unico è `r` | **3 siti** |
+| **creazione** | un quanto della rotazione — **e per il conto sopra, di un CICLO** | **il pezzo grosso: cambio di GRANULARITÀ** |
+
+> ### ❗ **LA DOMANDA CHE NON SO RISOLVERE, E CHE VA DECISA PRIMA DEL CODICE:**
+> se la mitosi diventa un evento **di ciclo**, **quale arco del ciclo si divide?**
+> Qualunque risposta *(il più teso, il più lungo, uno a caso)* **è una REGOLA NUOVA** — cioè
+> esattamente ciò che la proposta vuole evitare. **La macchina dei cicli esiste** *(`parent`,
+> `parent_e`)*, **la mappa ciclo→arco no.**
+
+**E i criteri sono scritti ora, `TS-1`..`TS-6`**, con `TS-5` come **caso che DEVE fallire**.
+**`TS-1` è già valutabile in parte, e la risposta provvisoria è NO per gli archi** *(codominio di
+`arccos`)*, **DA MISURARE per i cicli.**
