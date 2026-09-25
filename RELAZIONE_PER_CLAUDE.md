@@ -18532,3 +18532,60 @@ controllo**. **Tag `base-epoca-4`.**
 Ogni giorno, in `STATO_RUN`: **quante voci chiuse, quante aperte, quante nuove — e in quale delle
 quattro strade sono finite**. **La lista deve ACCORCIARSI: se in un giorno cresce, lo si scrive in
 testa.**
+
+
+---
+
+# ❌ **`RIPIEGO-1`: UN RIPIEGO GLOBALE SU UNA CONDIZIONE LOCALE — difetto mio, trovato da Luca prima che il sigillo girasse** *(2026-09-25)*
+
+**LA FORMA SBAGLIATA, nella variante pesata di `INERZIA-1(C)`:**
+
+```python
+if _wn is None or not np.all(np.isfinite(_wn)) or np.any(_wn <= 0.0):
+    ...ripiego per TUTTI...
+```
+
+> ### **`np.any` su una grandezza PER NODO: un solo nodo con somma dei pesi zero spegneva la cura
+> ### per TUTTA la rete in quel passo.**
+
+**E NON ERA UN CASO RARO: ERA *IL* CASO.** I figli della mitosi nascono con **`ramp = 0`**, quindi
+i loro archi hanno **`w = 0`** e la loro somma è **`0`**. **Ogni nascita spegneva la cura per
+l'intero sistema** — e **i figli sono esattamente ciò che la cura doveva sistemare.**
+
+**LA CURA DEL DIFETTO:** ripiego **per nodo** (`np.where`), e i contatori diventano **per NODO**
+invece che per invocazione:
+
+```
+_g_ci_nodi_senza_peso  su  _g_ci_nodi_tot      quanti nodi, non quante volte
+_g_ci_senza_peso_nati                          quanti di quei nodi sono NATI IN DINAMICA
+```
+
+Il discriminante «nato in dinamica» **esiste già e non è un'invenzione**: i nodi del vuoto dato
+hanno **`eta = +inf`** *(`RAMPA-1`)*, i nati in dinamica un `eta` **finito**. **⚠ Vale solo con
+`SEMINA_MATURA` acceso:** senza, `eta` è finito per tutti e **il contatore vale `-1`, dichiarato
+invece che finto.**
+
+## ✅ **NESSUN NUMERO È DA RITIRARE, E L'HO VERIFICATO DAL REFERTO, NON DALLA MEMORIA**
+
+```
+blob del simulatore VERO      3e8bb8dd        <- il sigillo girato e' la variante A CONTEGGIO
+blob della variante pesata    b4dd0d5f        <- non aveva ancora girato
+blob curato                   1fc6a1c5
+```
+
+**Ma se avesse girato, i suoi numeri non avrebbero misurato la variante** — e questo è il motivo
+per cui il difetto **si registra** invece di essere solo corretto in silenzio.
+
+## LA LEZIONE, e ha un nome nelle regole
+
+> ### **UN RIPIEGO GLOBALE SU UNA CONDIZIONE LOCALE È UN VERDETTO VACUO MASCHERATO** *(`P6`)*.
+> È la famiglia del `max|A-B| = 0.000e+00` per **mancanza di confronto**: la cura era **accesa** e
+> **non stava agendo**, e il sigillo avrebbe stampato numeri della variante **senza la variante**.
+> **`P5` conta i rami perché scattano; qui il ramo scattava per un nodo e valeva per tutti** — e
+> nemmeno un contatore per invocazione l'avrebbe mostrato, perché *una* invocazione *era*
+> difettosa **per intero**.
+
+**E VA DETTO CHE L'HA TROVATO LUCA, NON UN CONTROLLO.** Il mio contatore
+`_g_ci_senza_peso` **c'era** e avrebbe fatto `> 0` a ogni mitosi: **avrei visto il numero e non
+avrei capito che invalidava tutto**, perché contava **invocazioni** e non **nodi**.
+**Un contatore con la granularità sbagliata non è un presidio: è un numero che rassicura.**

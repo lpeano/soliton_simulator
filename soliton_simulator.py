@@ -3449,20 +3449,49 @@ class Rete:
                 _wa = np.asarray(w, float)
                 _wn = (np.bincount(self.i, _wa, minlength=n)[:n]
                        + np.bincount(self.j, _wa, minlength=n)[:n])
-            if _wn is None or not np.all(np.isfinite(_wn)) or np.any(_wn <= 0.0):
-                # ⚠ IL RAMO SENZA PESO UTILIZZABILE **NON si aggira con un `1`**: si lascia
-                #   `_rho_c = _rho_s` e **si CONTA**, con la stessa convenzione del primo passo
-                #   (`_contrasto` neutro) usata per `_cs_nodo_prev`. Un fallback non misurato e'
-                #   un comportamento sconosciuto (`P5`), e qui il primo passo ci passa.
-                self._g_ci_senza_peso = getattr(self, '_g_ci_senza_peso', 0) + 1
-                self._g_ci_senza_peso_quando = int(self._g_ci_tot)
-                self._g_ci_senza_peso_forma = (int(len(np.asarray(w))) if w is not None else -1,
-                                              int(len(self.i)))
+            if _wn is None:
+                # nessun peso d'arco utilizzabile AFFATTO (lunghezze incoerenti): qui il ramo e'
+                #   davvero globale, perche' manca l'ARRAY, non un valore.
+                self._g_ci_senza_array = getattr(self, '_g_ci_senza_array', 0) + 1
+                self._g_ci_senza_array_quando = int(self._g_ci_tot)
+                self._g_ci_senza_array_forma = (int(len(np.asarray(w))) if w is not None else -1,
+                                               int(len(self.i)))
             else:
-                _rho_c = _rho_s / _wn
-                self._g_ci_w_p50 = float(np.median(_wn))
-                self._g_ci_w_min = float(_wn.min())
-                self._g_ci_w_max = float(_wn.max())
+                # ❌❌ **DIFETTO MIO, RILEVATO DA LUCA il 2026-09-25 (P6): IL RIPIEGO ERA GLOBALE
+                #   SU UNA CONDIZIONE LOCALE.** La forma di prima era
+                #   `if ... or np.any(_wn <= 0.0):` -> **UN SOLO nodo con somma dei pesi zero
+                #   spegneva la cura per TUTTO IL SISTEMA in quel passo.**
+                #   **E non era un caso raro: era IL CASO.** I figli della mitosi nascono con
+                #   `ramp = 0`, quindi i loro archi hanno `w = 0` e la loro somma e' `0`:
+                #   **ogni nascita spegneva la cura per l'intera rete** -- e i figli sono
+                #   **esattamente cio' che la cura doveva sistemare.**
+                #   ✅ **ORA IL RIPIEGO E' PER NODO** (`np.where`), e i contatori sono **per
+                #   NODO**, non per invocazione: *quanti nodi senza peso* e *quanti di questi
+                #   NATI IN DINAMICA*. **Un ripiego globale su una condizione locale e' un
+                #   verdetto vacuo mascherato**, e sarebbe passato per un `PASS`.
+                _ok_w = np.isfinite(_wn) & (_wn > 0.0)
+                _rho_c = np.where(_ok_w, _rho_s / np.where(_ok_w, _wn, 1.0), _rho_s)
+                _senza = int(np.sum(~_ok_w))
+                self._g_ci_nodi_senza_peso = getattr(self, '_g_ci_nodi_senza_peso', 0) + _senza
+                self._g_ci_nodi_tot = getattr(self, '_g_ci_nodi_tot', 0) + int(n)
+                if _senza:
+                    self._g_ci_senza_peso_quando = int(self._g_ci_tot)
+                    # **QUANTI DI QUESTI SONO NATI IN DINAMICA:** i nodi del vuoto DATO hanno
+                    #   `eta = +inf` (`RAMPA-1`), i nati in dinamica un `eta` FINITO. ⚠ Il
+                    #   discriminante esiste **solo con `SEMINA_MATURA` acceso**: senza, `eta` e'
+                    #   finito per tutti e il contatore vale `-1`, **dichiarato invece che finto**.
+                    _et = np.asarray(getattr(self, 'eta', []), float)
+                    if SEMINA_MATURA and _et.size >= n:
+                        _nati = int(np.sum(~_ok_w & np.isfinite(_et[:n])))
+                    else:
+                        _nati = -1
+                    self._g_ci_senza_peso_nati = (getattr(self, '_g_ci_senza_peso_nati', 0)
+                                                  + _nati) if _nati >= 0 else -1
+                _wv = _wn[_ok_w]
+                if _wv.size:
+                    self._g_ci_w_p50 = float(np.median(_wv))
+                    self._g_ci_w_min = float(_wv.min())
+                    self._g_ci_w_max = float(_wv.max())
                 self._g_ci_nodi = int(n)
         _contrasto = np.where(_ok_n, _rho_c / np.where(_ok_n, _peq_nodo, 1.0), 1.0)
         inerzia = np.maximum(_contrasto * _T2, 1e-6)       # il pavimento RESTA: deve diventare inerte

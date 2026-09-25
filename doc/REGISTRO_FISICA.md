@@ -1252,6 +1252,15 @@ rende la cura una **rimozione di incoerenza** e non un fattore di scala nuovo.
 >
 > **VARIANTE 2 — per SOMMA DEI PESI** (`rho_s / Σ w_ij`), decisione di Luca: `w` e' **gia'** un
 > parametro di `_passo_spinoriale`, lo **stesso** che `calcola_psi` passa a `_mat(w)`.
+> **❌❌ E IL SUO PRIMO RIPIEGO ERA UN DIFETTO, rilevato da Luca prima che il sigillo girasse:**
+> `if ... or np.any(_wn <= 0.0)` — **una condizione GLOBALE su una grandezza LOCALE**. Un solo
+> nodo con somma dei pesi zero **spegneva la cura per tutto il sistema in quel passo**, e **non
+> era un caso raro: era IL CASO**, perche' i figli della mitosi nascono con `ramp = 0`, quindi i
+> loro archi hanno `w = 0`. **Ogni nascita spegneva la cura** — e i figli sono **esattamente cio'
+> che la cura doveva sistemare.** ✅ **Ora il ripiego e' PER NODO** (`np.where`), e i contatori
+> sono **per NODO**: `_g_ci_nodi_senza_peso` su `_g_ci_nodi_tot`, piu' **quanti di quei nodi sono
+> NATI IN DINAMICA** *(discriminante: `eta` finito contro `+inf` di `RAMPA-1`; senza
+> `SEMINA_MATURA` il contatore vale `-1`, **dichiarato invece che finto**)*.
 > **⚠ `rho_spin` e' il MODULO QUADRO di `psi_spin`**, che e' a sua volta una somma pesata ->
 > **`rho_s ~ W^2`**: dividere per `W` **una volta** toglie **una** potenza, quindi se la
 > dipendenza e' quadratica **il residuo non si azzera**.
