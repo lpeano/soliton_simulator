@@ -1,0 +1,149 @@
+========================================================================================================================
+IL LIMITE DI ACCOPPIAMENTO -- RIFATTO IN CONFIGURAZIONE DEL DRIVER   (2026-09-25)
+========================================================================================================================
+
+[s11 lunghi] rc=0 scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK s11_lunghi  bersagli 20  casi 5
+[s11 corti] rc=0 [scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK s11_corti  bersagli 20  casi 5
+[s12 lunghi] rc=0 scena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK s12_lunghi  bersagli 20  casi 5
+[s12 corti] rc=0 [scena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK s12_corti  bersagli 20  casi 5
+
+blob del simulatore VERO   81548e77
+blob della COPIA diagnostica  cefc75b4   (4 assegnazioni, il file vero NON e' toccato)
+semi [11, 12]   versi del taglio ['lunghi', 'corti']   k [77, 20, 8, 4, 2]   bersagli per seme 20   passi pieni prima 20
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 78
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 78.
+
+========================================================================================================================
+I NUMERI, e accanto quelli VECCHI -- marcati **sistema pre-fork + 2 cure** (`CONFIG-1`)
+========================================================================================================================
+  (i numeri vecchi sono LETTI dal referto della prima versione, non ricopiati: letti 5 valori di `k`)
+
+------------------------------------------------------------------------------------------------------------------------
+SEME 11   taglio: via i piu' LUNGHI   n = 4252   grado mediano 77   bersagli 20
+  configurazione del figlio: SEMINA_MATURA True  CS_DINAMICO True  FORK_SU2 True  TAU_LUCE True
+------------------------------------------------------------------------------------------------------------------------
+k      grado    COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav.   | VECCHIO coppia/inerzia
+77     77.0     0.310273       49.0223        0.0049225        0.00600827     33.6342        0/20      | 0.126216
+20     20.0     0.333663       8.15145        0.0303725        0.0061346      16.481         0/20      | 0.412342
+8      8.0      0.448174       2.35753        0.178943         0.00813605     5.64845        0/20      | 1.37486
+4      4.0      0.423298       0.660596       0.756747         0.0128386      2.04261        0/20      | 1.86683
+2      2.0      0.659845       0.181042       2.3706           0.0345311      0.716429       0/20      | 192.007
+
+------------------------------------------------------------------------------------------------------------------------
+SEME 11   taglio: via i piu' CORTI   n = 4252   grado mediano 77   bersagli 20
+  configurazione del figlio: SEMINA_MATURA True  CS_DINAMICO True  FORK_SU2 True  TAU_LUCE True
+------------------------------------------------------------------------------------------------------------------------
+k      grado    COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav.   | VECCHIO coppia/inerzia
+77     77.0     0.310273       49.0223        0.0049225        0.00600827     33.6342        0/20      | 0.126216
+20     20.0     0.351863       0.983347       0.331463         0.00987641     0.435134       0/20      | 0.412342
+8      8.0      0.555803       0.138423       3.47152          0.0526045      0.0539615      0/20      | 1.37486
+4      4.0      0.737052       0.0306758      19.9542          0.282646       0.0129432      0/20      | 1.86683
+2      2.0      0.836488       0.00971264     74.8548          1.05991        0.00374073     0/20      | 192.007
+
+------------------------------------------------------------------------------------------------------------------------
+SEME 12   taglio: via i piu' LUNGHI   n = 4297   grado mediano 77   bersagli 20
+  configurazione del figlio: SEMINA_MATURA True  CS_DINAMICO True  FORK_SU2 True  TAU_LUCE True
+------------------------------------------------------------------------------------------------------------------------
+k      grado    COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav.   | VECCHIO coppia/inerzia
+77     77.0     0.353324       61.0135        0.00625503       0.00844853     37.3887        0/20      | 0.126216
+20     20.0     0.361263       12.4622        0.0340017        0.00857976     17.1056        0/20      | 0.412342
+8      8.0      0.542986       2.90735        0.161835         0.00950794     6.79614        0/20      | 1.37486
+4      4.0      0.745774       0.894415       0.883195         0.0177898      2.46476        0/20      | 1.86683
+2      2.0      0.80726        0.279497       2.67237          0.0375784      0.678952       0/20      | 192.007
+
+------------------------------------------------------------------------------------------------------------------------
+SEME 12   taglio: via i piu' CORTI   n = 4297   grado mediano 77   bersagli 20
+  configurazione del figlio: SEMINA_MATURA True  CS_DINAMICO True  FORK_SU2 True  TAU_LUCE True
+------------------------------------------------------------------------------------------------------------------------
+k      grado    COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav.   | VECCHIO coppia/inerzia
+77     77.0     0.353324       61.0135        0.00625503       0.00844853     37.3887        0/20      | 0.126216
+20     20.0     0.368204       1.24084        0.25277          0.0108257      0.481641       0/20      | 0.412342
+8      8.0      0.466919       0.178546       2.78945          0.0425667      0.0689473      0/20      | 1.37486
+4      4.0      0.603372       0.0392524      15.3809          0.218999       0.0158793      0/20      | 1.86683
+2      2.0      0.808432       0.0104857      90.3776          1.27849        0.00425862     0/20      | 192.007
+
+========================================================================================================================
+COME SCALANO IN `k` -- pendenza su `log k` (COPPIA e INERZIA SEPARATE, come chiesto)
+========================================================================================================================
+braccio        pend. COPPIA     pend. INERZIA    pend. rapporto   pend. |omega|   
+s11 corti      -0.2983          2.3389           -2.6545          -1.4717         
+s11 lunghi     -0.1878          1.5200           -1.7286          -0.4375         
+s12 corti      -0.2278          2.3642           -2.6195          -1.3807         
+s12 lunghi     -0.2570          1.4858           -1.6970          -0.3806         
+
+  Una pendenza POSITIVA su `log k` significa: la grandezza CRESCE col grado. Per l'inerzia
+  una pendenza ~ +1 direbbe `inerzia ~ k`; per la coppia ~ 0 direbbe INTENSIVA.
+  *(La coerenza che Luca chiede: se la coppia e' intensiva, l'inerzia DEVE esserlo.)*
+
+========================================================================================================================
+DOVE STA LA NON-COERENZA: `inerzia = contrasto * T2`, e i due FATTORI SEPARATI
+========================================================================================================================
+  `_contrasto = rho_s / peq_nodo`   e   `T2 = (d_nodo/cs_nodo)^2`. Se la coppia e'
+  INTENSIVA, la coerenza dimensionale vuole che lo sia anche l'inerzia: qui si vede
+  QUALE DEI DUE FATTORI la rende estensiva, invece di attribuirlo all'inerzia in blocco.
+
+braccio        k      contrasto      T2             inerzia       
+s11 corti      77     33.6342        1.28332        49.0223       
+s11 corti      20     0.435134       2.06884        0.983347      
+s11 corti      8      0.0539615      2.22403        0.138423      
+s11 corti      4      0.0129432      2.29901        0.0306758     
+s11 corti      2      0.00374073     2.32259        0.00971264    
+s11 lunghi     77     33.6342        1.28332        49.0223       
+s11 lunghi     20     16.481         0.546421       8.15145       
+s11 lunghi     8      5.64845        0.345336       2.35753       
+s11 lunghi     4      2.04261        0.281505       0.660596      
+s11 lunghi     2      0.716429       0.268746       0.181042      
+s12 corti      77     37.3887        1.25199        61.0135       
+s12 corti      20     0.481641       1.95552        1.24084       
+s12 corti      8      0.0689473      2.09844        0.178546      
+s12 corti      4      0.0158793      2.14753        0.0392524     
+s12 corti      2      0.00425862     2.17321        0.0104857     
+s12 lunghi     77     37.3887        1.25199        61.0135       
+s12 lunghi     20     17.1056        0.545879       12.4622       
+s12 lunghi     8      6.79614        0.35218        2.90735       
+s12 lunghi     4      2.46476        0.292047       0.894415      
+s12 lunghi     2      0.678952       0.26801        0.279497      
+
+braccio        pend. contrasto    pend. T2           pend. INERZIA     
+s11 corti      2.4855             -0.1568            2.3389            
+s11 lunghi     1.0630             0.4420             1.5200            
+s12 corti      2.4656             -0.1455            2.3642            
+s12 lunghi     1.0773             0.4316             1.4858            
+
+========================================================================================================================
+IL CRITERIO, scritto PRIMA: se `|coppia|` resta dello stesso ordine e `inerzia` CROLLA al
+calare di `k`, `omega` esplode PER LA LEGGE DELL'INERZIA, non per il nodo. `|omega|` e' il
+CONTROLLO.
+========================================================================================================================
+  s11 corti    da k = 77 a k = 2:  COPPIA x2.696      INERZIA x0.0001981  rapporto x1.521e+04  |omega| x176.4
+  s11 lunghi   da k = 77 a k = 2:  COPPIA x2.127      INERZIA x0.003693   rapporto x481.6      |omega| x5.747
+  s12 corti    da k = 77 a k = 2:  COPPIA x2.288      INERZIA x0.0001719  rapporto x1.445e+04  |omega| x151.3
+  s12 lunghi   da k = 77 a k = 2:  COPPIA x2.285      INERZIA x0.004581   rapporto x427.2      |omega| x4.448
+
+  -> LA LEGGE DELL'INERZIA NON REGGE IL LIMITE, **IN TUTTI E 4 I BRACCI**
+     (due semi x due versi del taglio): la coppia resta dello stesso ordine e l'inerzia
+     CROLLA. **Il verso del taglio NON e' il responsabile**, ed era il dubbio che la
+     prima versione, con un solo verso, lasciava aperto.
+
+========================================================================================================================
+COSA QUESTO NON DICE
+========================================================================================================================
+  - i 20 bersagli NON sono adiacenti fra loro (nessun arco tolto due volte), **ma possono
+    condividere un VICINO**: l'effetto del taglio non e' perfettamente indipendente fra
+    bersagli. E' il prezzo di averne 20 invece di 1, e si dichiara.
+  - il taglio TOGLIE ARCHI A MANO: non e' un processo del sistema, ed e' di proposito -- la
+    domanda e' se la LEGGE regga un `k` piccolo, non se il sistema ci arrivi da solo.
+  - DUE SEMI: la dispersione fra semi si legge dalle due righe, non da una barra (`P3` delle
+    regole: per una barra servono >= 4 semi).
+  - SOLA LETTURA sul simulatore: la copia diagnostica NON e' il file delle campagne, e i due
+    blob sono in testa.
+  - i numeri VECCHI sono di un ALTRO SISTEMA (`CONFIG-1`: 28 leggi su 31 spente). Il
+    confronto e' fra due sistemi, **non** una ripetizione della stessa misura.

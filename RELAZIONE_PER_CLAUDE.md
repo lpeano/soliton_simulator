@@ -18239,3 +18239,98 @@ perché il ripristino viene da git, **non dalla mia memoria di cosa ci fosse**.
 letto è un'operazione **senza presidio**. La forma giusta era `cat >> file` — o leggerlo prima.
 *(Lo stesso difetto ha una voce in `doc/PATTERN_DI_PROVA.md` per le sostituzioni di testo,
 `P1-quater`: «ogni sostituzione si asserisce per sé». **Sovrascrivere non asserisce niente.**)*
+
+
+---
+
+# ⛔ **IL LIMITE DI ACCOPPIAMENTO, IN CONFIGURAZIONE DEL DRIVER: LA LEGGE DELL'INERZIA NON REGGE, E IL COLPEVOLE HA UN NOME** *(2026-09-25)*
+
+*(`csv/_test_fork/_limite_accoppiamento2.py`, referto in
+`csv/_test_fork/_limite_accoppiamento2/LIMITE_ACCOPPIAMENTO2.txt`. Blob del simulatore
+`81548e77`; copia diagnostica a 4 assegnazioni, **il file vero non è toccato**.
+**`P5`: «IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 78».**)*
+
+**Rifatta come Luca ha ordinato:** argv del driver via `_cli_flag`, `passo_pieno`, `RAMPA-1`
+attiva, **2 semi**, **un processo per (seme, verso)**, `k = 77, 20, 8, 4, 2`, **20 bersagli per
+seme** non adiacenti fra loro, **taglio nei DUE versi**.
+
+## ① IL VERDETTO — **in tutti e QUATTRO i bracci**, e stavolta anche `|omega|` esplode
+
+```
+braccio       da k = 77 a k = 2:  COPPIA      INERZIA       rapporto      |omega|
+s11 corti                         x2.696      x0.0001981    x1.521e+04    x176.4
+s11 lunghi                        x2.127      x0.003693     x481.6        x5.747
+s12 corti                         x2.288      x0.0001719    x1.445e+04    x151.3
+s12 lunghi                        x2.285      x0.004581     x427.2        x4.448
+```
+
+> ### **IL VERSO DEL TAGLIO NON È IL RESPONSABILE** — era il dubbio che la prima versione, con
+> ### un solo verso, lasciava aperto. **La coppia resta dello stesso ordine (×2.1–2.7) e
+> ### l'inerzia crolla di 2-4 ordini, in tutti e quattro i bracci.**
+
+**E IL CONTROLLO CONFERMA LA CATENA:** `|omega|` **esplode fino a ×176**. Nella versione
+sbagliata faceva **×4.1** e si poteva sostenere che il rapporto misurato non arrivasse alla
+dinamica. **Ora ci arriva.** *(Il verso «corti» — via il vicinato prossimo — è il più violento:
+×176 contro ×5.7. Coerente col kernel `exp(-d/lam)`, dove i vicini prossimi pesano di più.)*
+
+## ② **DOVE STA LA NON-COERENZA: È `_contrasto`, NON `T2`**
+
+`inerzia = _contrasto · T2`, con `_contrasto = rho_s/peq_nodo` e `T2 = (d_nodo/cs_nodo)²`.
+Pendenze su `log k`:
+
+```
+braccio       COPPIA     INERZIA     contrasto    T2
+s11 corti     -0.298     +2.339      +2.486       -0.157
+s12 corti     -0.228     +2.364      +2.466       -0.146
+s11 lunghi    -0.188     +1.520      +1.063       +0.442
+s12 lunghi    -0.257     +1.486      +1.077       +0.432
+```
+
+> ### **LA COPPIA È INTENSIVA** (`k^-0.19…-0.30`, cioè *non cresce* col grado) **E IL
+> ### `_contrasto` È ESTENSIVO** (`k^+1.06` togliendo i lunghi, **`k^+2.47`** togliendo i corti).
+> ### **Questa è l'incoerenza, quantificata: due fattori della stessa equazione scalano in
+> ### modo opposto nel numero di vicini.**
+
+**`T2` si comporta come la geometria impone**, e in questo è un **controllo che torna**: togliere
+i **lunghi** accorcia `d_nodo` → `T2` cala (`+0.44`); togliere i **corti** lo allunga → `T2`
+resta quasi fermo (`-0.15`). **Non è `T2` a rompere il limite.**
+
+**E COMBACIA COL DIFETTO DI STRUTTURA GIÀ LETTO DAL CODICE:** `rho_s` è una **SOMMA pesata sui
+vicini** (`psi = _mat(w) @ …`), `_peq_nodo` è **esplicitamente una MEDIA**. **Un rapporto
+somma/media scala col grado per costruzione** — e qui si vede **di quanto**.
+
+## ③ IL PAVIMENTO `1e-6` **NON MORDE**: `0/20` in ogni riga, in tutti i bracci
+
+Era la terza sotto-domanda di `INERZIA-1(c)`. **L'inerzia non è tenuta su da un limite
+artificiale: cade e continua a cadere.** *(È un punto a favore di `A11`: qui il pavimento non
+sta nascondendo niente.)*
+
+## ④ IL CONFRONTO COI NUMERI VECCHI — **due sistemi, non una ripetizione**
+
+I numeri della prima versione *(«sistema pre-fork + 2 cure», `CONFIG-1`: 28 leggi su 31 spente)*
+sono **letti dal file** del referto vecchio, non ricopiati, e stampati accanto:
+
+```
+k     coppia/inerzia NUOVO (s11 lunghi / corti)     VECCHIO (1 nodo, 1 verso)
+77    0.00492                                       0.126
+20    0.0304  /  0.331                               0.412
+8     0.179   /  3.472                               1.375
+4     0.757   /  19.95                               1.867
+2     2.371   /  74.85                               192.0
+```
+
+**Il vecchio `×1521` cadeva FRA i due versi nuovi** (`×482` lunghi, `×1.5e4` corti) — e con **un
+solo nodo** non c'era modo di saperlo. **La conclusione qualitativa regge; la sua forza cambia
+di un ordine di grandezza, e ora ha il controllo su `|omega|`.**
+
+## 🛑 **MI FERMO QUI, come ordinato.** La cura la decide Luca
+
+**Cosa i numeri indicano, senza che io la scriva:** la direzione **(C)** ha ora un bersaglio
+**misurato** — **`_contrasto` deve diventare intensivo**, cioè `rho_s` normalizzato **come lo è
+già `_peq_nodo`** *(una media sul vicinato, non una somma)*. **Non la eseguo:** è una legge, e
+`A12` dice di curare **un difetto dimostrato** — questo lo è — ma la forma della cura cambia la
+fisica di ogni nodo, e il mandato dice **STOP dopo (a)**.
+
+**Cosa NON dicono questi numeri** *(e va detto prima che la cura sembri ovvia)*: che rendere
+`_contrasto` intensivo **non rompa** qualcos'altro. `rho_s` estensivo entra anche altrove, e
+**la misura d'impatto non è stata fatta.**

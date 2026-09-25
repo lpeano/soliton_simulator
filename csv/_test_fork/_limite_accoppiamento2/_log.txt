@@ -1,0 +1,205 @@
+[TIMBRO] _limite_accoppiamento2.py  sha1-BYTE 5d856a45  committato e pulito
+[calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+[cura4] SEMINA_MATURA ON: i nodi della semina iniziale nascono MATURI, e la rampa usa `_tempo_luce_nodo` invece di TAU_A (che resta la sola vita media spinoriale).
+[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` (`A13` alla nascita). Lo Schwinger NON e' toccato.
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[invarianti] ACCESI (default). DUE LIVELLI: NUMERICO -- overflow, divisione per zero e valori non validi alzano un'eccezione con la riga esatta; l'UNDERFLOW NON ferma niente, perche' densita' come 1e-81 di un nodo neonato sono LEGITTIME. FISICO -- ogni grandezza di stato dentro il suo dominio, a fine passo, con gli INDICI e i valori. L'esplosione del 21/9 NON era un overflow (1.8e6 e' un numero normale): l'avrebbe presa solo la regola FISICA `peq >= 0`. Legge soltanto: su un run sano non cambia un bit.
+[anom-simm] L'ANOMALIA SIMMETRICA, SENZA PAVIMENTO: anom = 2*(rho-peq)/(rho+peq), con `0/0 := 0` DEFINITO (precedente: scala_p, Z67). Toglie il pavimento max(peq,1e-9), che e' un numero SCELTO e non esprime nessun vincolo fisico (A11): con peq negativo RIBALTAVA IL SEGNO e moltiplicava per 3.7e5 (Z94). Il caso peq->0 con rho ordinario passa da 1e+08 a ESATTAMENTE +2, e per anomalie piccole le due forme coincidono. *** RICHIEDE --peq-esatto: con peq < 0 il denominatore si annulla in peq = -rho ed e' un POLO, non un limite. Senza C1 questa cura sostituisce un pavimento con un polo. Il caso e' CONTATO, non assunto impossibile. ***
+[coes-causale] LA COESIONE RISPETTA L'ISTANTE E IL CONO LOCALE: `d0` e `d` si leggono dalla fotografia di INIZIO PASSO invece che da un `d0` gia' spostato da sette scritture, e il tetto e' `cs_arco*DT` col `cs` del nodo PIU' LENTO invece di `LAM*sqrt(K_C)*DT`, che e' costruito su costanti di modulo e non conosce il cono del luogo (A5). Zero parametri: `_cs_nodo_prev` esiste gia'. NB: il tetto locale non e' sempre piu' stretto -- dove il cono e' veloce ALLARGA -- ed e' causalita', non prudenza.
+[scala-min-passo] IL FRENO UNA VOLTA PER PASSO: le sei scritture di `d0` e i sotto-passi di `d` NON frenano piu'; a fine passo si applica `_smorza` UNA VOLTA sulla VARIAZIONE TOTALE, dal valore di INIZIO passo. Cura il CRICCHETTO di Z91: frenare ogni scrittura separatamente rende il risultato dipendente dall'ORDINE delle leggi e, poiche' frena solo le discese, con spinte opposte di somma nulla NON da' zero. Applicato una volta sola sul totale il bias e' ZERO ESATTO. Lo snapshot di inizio passo segue la mitosi ai quattro siti di ristrutturazione; gli archi NATI nel passo non vengono frenati, e le nascite restano a LAM. Zero coefficienti.
+[peq-nascita-locale] UNA SOLA LEGGE DI NASCITA PER `peq`: gli archi della creazione di coppia alla Schwinger nascono con `nan` e vengono CALIBRATI da step() sulla `rho` DEL LORO ARCO, esattamente come quelli di `_allaccia`. Prima prendevano `median(peq)`, LA MEDIANA GLOBALE: una statistica globale dentro una legge locale (A2), e quei nodi non hanno alcun rapporto con la mediana della rete. Zero parametri: il meccanismo esisteva gia'. L'eredita' della MITOSI non si tocca: un arco che si spezza non nasce, CONTINUA.
+[peq-esatto] IL RILASSAMENTO DI `peq` IN FORMA ESATTA: peq <- rho + (peq-rho)*exp(-dt_e/tau_bg), piu' lo stesso passo esatto per la diffusione (splitting di Lie-Trotter, punto fisso `peq+flusso`). E' una COMBINAZIONE CONVESSA, quindi `min(peq,rho) <= peq_new <= max(peq,rho)` per QUALUNQUE passo: `peq` NON PUO' PIU' SCAVALCARE SOTTO ZERO. L'Eulero esplicito di prima scavalcava per dt_e/tau_bg > 1, misurato 1.2018 al passo 1126 del ramo D. Zero coefficienti nuovi: e' la stessa forma gia' imposta dal par.4 per i rilassamenti di primo ordine. NON toglie il pavimento di :4215.
+[coes-adim] COESIONE ADIMENSIONALE: i tre addendi normalizzati sulla densita' LOCALE dell'arco (I_med sparisce, era una media globale), e lo spostamento e' passo_causale * tanh(...) * filtro_portata, con |F| <= 1 PER COSTRUZIONE. Sostituisce il clip tanh(stress)*d0.
+[chi-coop] COOPERAZIONE: chi_basc SCRIVE perc_geom (geometria, letta dalla catena della torsione) e lo spinore scrive perc_chi (carica, letta dal campo B, dalla mitosi e da Schwinger). L'anello carica -> campo -> spinore -> carica e' quello NORMALE della fisica, sfasato di un passo.
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+[fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+[step2-orologio] STEP 2: omega_clk *= (cs/CS_M)^2 = OROLOGIO DI COMPTON (omega = m c^2/hbar, e nel modello c e' cs). Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.
+[rumore-colorato] TAGLIO SPETTRALE: il calcio del vuoto non e' piu' bianco ma correlato su tau_c = LAM/CS_M = 0.4 (= 40 passi), con un processo di Ornstein-Uhlenbeck sul rumore stesso e `dt_n = DT*r` (non DT: e' un processo LOCALE). `amp` INVARIATA. MOTIVO: il rumore bianco discreto inietta a tutte le frequenze fino a Nyquist, incluse quelle che il passo non risolve; in natura non esiste. ZERO coefficienti: LAM e CS_M sono gia' nel sistema. ATTENZIONE: la ricorsione PRESERVA LA VARIANZA, quindi NON abbassa theta - se lo muove lo fa SALIRE (<=5%). Si cabla perche' il rumore bianco e' SBAGLIATO, non perche' risolva l'aliasing (doc/PREDIZIONE_taglio_spettrale.md).
+[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: inerzia = T^2 = (d/cs)^2, quindi il tempo che COSTRUISCE l'inerzia e quello che la RILASSA devono essere lo stesso; oggi sono due diversi nella stessa equazione. Zero coefficienti, zero floor nuovi. NB: |omega|_eq va come sqrt(tau), quindi theta cala di ~13x: UN ORDINE DI GRANDEZZA, NON la soluzione dell'aliasing.
+[spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+[calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
+[cura4] SEMINA_MATURA ON: i nodi della semina iniziale nascono MATURI, e la rampa usa `_tempo_luce_nodo` invece di TAU_A (che resta la sola vita media spinoriale).
+[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` (`A13` alla nascita). Lo Schwinger NON e' toccato.
+[spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
+[invarianti] ACCESI (default). DUE LIVELLI: NUMERICO -- overflow, divisione per zero e valori non validi alzano un'eccezione con la riga esatta; l'UNDERFLOW NON ferma niente, perche' densita' come 1e-81 di un nodo neonato sono LEGITTIME. FISICO -- ogni grandezza di stato dentro il suo dominio, a fine passo, con gli INDICI e i valori. L'esplosione del 21/9 NON era un overflow (1.8e6 e' un numero normale): l'avrebbe presa solo la regola FISICA `peq >= 0`. Legge soltanto: su un run sano non cambia un bit.
+[anom-simm] L'ANOMALIA SIMMETRICA, SENZA PAVIMENTO: anom = 2*(rho-peq)/(rho+peq), con `0/0 := 0` DEFINITO (precedente: scala_p, Z67). Toglie il pavimento max(peq,1e-9), che e' un numero SCELTO e non esprime nessun vincolo fisico (A11): con peq negativo RIBALTAVA IL SEGNO e moltiplicava per 3.7e5 (Z94). Il caso peq->0 con rho ordinario passa da 1e+08 a ESATTAMENTE +2, e per anomalie piccole le due forme coincidono. *** RICHIEDE --peq-esatto: con peq < 0 il denominatore si annulla in peq = -rho ed e' un POLO, non un limite. Senza C1 questa cura sostituisce un pavimento con un polo. Il caso e' CONTATO, non assunto impossibile. ***
+[coes-causale] LA COESIONE RISPETTA L'ISTANTE E IL CONO LOCALE: `d0` e `d` si leggono dalla fotografia di INIZIO PASSO invece che da un `d0` gia' spostato da sette scritture, e il tetto e' `cs_arco*DT` col `cs` del nodo PIU' LENTO invece di `LAM*sqrt(K_C)*DT`, che e' costruito su costanti di modulo e non conosce il cono del luogo (A5). Zero parametri: `_cs_nodo_prev` esiste gia'. NB: il tetto locale non e' sempre piu' stretto -- dove il cono e' veloce ALLARGA -- ed e' causalita', non prudenza.
+[scala-min-passo] IL FRENO UNA VOLTA PER PASSO: le sei scritture di `d0` e i sotto-passi di `d` NON frenano piu'; a fine passo si applica `_smorza` UNA VOLTA sulla VARIAZIONE TOTALE, dal valore di INIZIO passo. Cura il CRICCHETTO di Z91: frenare ogni scrittura separatamente rende il risultato dipendente dall'ORDINE delle leggi e, poiche' frena solo le discese, con spinte opposte di somma nulla NON da' zero. Applicato una volta sola sul totale il bias e' ZERO ESATTO. Lo snapshot di inizio passo segue la mitosi ai quattro siti di ristrutturazione; gli archi NATI nel passo non vengono frenati, e le nascite restano a LAM. Zero coefficienti.
+[peq-nascita-locale] UNA SOLA LEGGE DI NASCITA PER `peq`: gli archi della creazione di coppia alla Schwinger nascono con `nan` e vengono CALIBRATI da step() sulla `rho` DEL LORO ARCO, esattamente come quelli di `_allaccia`. Prima prendevano `median(peq)`, LA MEDIANA GLOBALE: una statistica globale dentro una legge locale (A2), e quei nodi non hanno alcun rapporto con la mediana della rete. Zero parametri: il meccanismo esisteva gia'. L'eredita' della MITOSI non si tocca: un arco che si spezza non nasce, CONTINUA.
+[peq-esatto] IL RILASSAMENTO DI `peq` IN FORMA ESATTA: peq <- rho + (peq-rho)*exp(-dt_e/tau_bg), piu' lo stesso passo esatto per la diffusione (splitting di Lie-Trotter, punto fisso `peq+flusso`). E' una COMBINAZIONE CONVESSA, quindi `min(peq,rho) <= peq_new <= max(peq,rho)` per QUALUNQUE passo: `peq` NON PUO' PIU' SCAVALCARE SOTTO ZERO. L'Eulero esplicito di prima scavalcava per dt_e/tau_bg > 1, misurato 1.2018 al passo 1126 del ramo D. Zero coefficienti nuovi: e' la stessa forma gia' imposta dal par.4 per i rilassamenti di primo ordine. NON toglie il pavimento di :4215.
+[coes-adim] COESIONE ADIMENSIONALE: i tre addendi normalizzati sulla densita' LOCALE dell'arco (I_med sparisce, era una media globale), e lo spostamento e' passo_causale * tanh(...) * filtro_portata, con |F| <= 1 PER COSTRUZIONE. Sostituisce il clip tanh(stress)*d0.
+[chi-coop] COOPERAZIONE: chi_basc SCRIVE perc_geom (geometria, letta dalla catena della torsione) e lo spinore scrive perc_chi (carica, letta dal campo B, dalla mitosi e da Schwinger). L'anello carica -> campo -> spinore -> carica e' quello NORMALE della fisica, sfasato di un passo.
+[deparam-orologio] orologio RELAZIONALE: freq = coerenza d'arco intensiva (no |Psi|^2 estensiva, no rho_c globale, no volume)
+[campo-spinoriale] FASI 1-3: campo Psi EMESSO dallo spinore (n,2) in calcola_psi; densita'/gravita' native (rho_spin, nb); FORZE = OVERLAP SPINORIALE <psi_i|psi_j> (coppia in step). Mitosi/coppie = Fase 4, ancora scalari. Riduzione-al-limite: spinore (e^{i phi},0) -> tutto scalare (sigilli 0.000e+00)
+[fork-su2] STRATO 0: la forza trasporta con N_ij/2 = cos(chi/2) U_ij in SU(2) (MESCOLA a,b -> non-abeliano). Peso = overlap di spin |<n_i|n_j>|, non una manopola. Allineati -> N/2=I -> riduzione ESATTA allo scalare; antipodali -> N=0. Bloch presi da _psi_spinor (gli stessi stati trasportati: connessione di Berry DI quegli stati).
+[fork-su2-mem] STRATO 1: la connessione N nasce dai Bloch RITARDATI n(t-tau), tau = d/cs (tempo-luce d'arco, zero parametri nuovi). ROMPE IL TEOREMA DI INERZIA dello Strato 0: psi(t) non e' autovettore di n(t-tau).sigma, quindi <psi_i|N|psi_j> != 2<psi_i|psi_j> e la FORZA CAMBIA. Rilassamento ESATTO alpha=1-exp(-dt/tau) con slerp geodetico sulla sfera (primo ordine, mai Verlet). A riposo o per tau->0 il ritardato torna al corrente -> riduzione allo Strato 0. Il TRASPORTO resta sugli spinori correnti.
+[step2-orologio] STEP 2: omega_clk *= (cs/CS_M)^2 = OROLOGIO DI COMPTON (omega = m c^2/hbar, e nel modello c e' cs). Aggancia il tempo proprio dell'OROLOGIO a quello della METRICA, che erano scollegati. Zero parametri: a cs=CS_M il fattore e' 1 esatto. cs dal passo precedente (il settore metrico gira dopo). Tocca la MAGNITUDINE, mai il segno. NB: agisce sulla FASE (U(1)), NON sul Bloch: non organizza lo spin, e non deve.
+[rumore-colorato] TAGLIO SPETTRALE: il calcio del vuoto non e' piu' bianco ma correlato su tau_c = LAM/CS_M = 0.4 (= 40 passi), con un processo di Ornstein-Uhlenbeck sul rumore stesso e `dt_n = DT*r` (non DT: e' un processo LOCALE). `amp` INVARIATA. MOTIVO: il rumore bianco discreto inietta a tutte le frequenze fino a Nyquist, incluse quelle che il passo non risolve; in natura non esiste. ZERO coefficienti: LAM e CS_M sono gia' nel sistema. ATTENZIONE: la ricorsione PRESERVA LA VARIANZA, quindi NON abbassa theta - se lo muove lo fa SALIRE (<=5%). Si cabla perche' il rumore bianco e' SBAGLIATO, non perche' risolva l'aliasing (doc/PREDIZIONE_taglio_spettrale.md).
+[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: inerzia = T^2 = (d/cs)^2, quindi il tempo che COSTRUISCE l'inerzia e quello che la RILASSA devono essere lo stesso; oggi sono due diversi nella stessa equazione. Zero coefficienti, zero floor nuovi. NB: |omega|_eq va come sqrt(tau), quindi theta cala di ~13x: UN ORDINE DI GRANDEZZA, NON la soluzione dell'aliasing.
+[spin-feedback] ON di default (2026-09-18): prerequisiti presenti, il ramo GIRA. Acceso PER DECISIONE e su basi di FORMA (cricchetto curato 1.112 -> 6.5e-16; G6: fase CUCITA, cambi di segno 0.0035 contro nullo 0.50; sigillo 12/12), NON perche' una misura lo abbia mostrato migliore: l'A/B a quattro semi NON ha mostrato effetto.
+[verlet] integratore metrico Velocity-Verlet (2 ordine) attivo
+[olon-part] la partizione tangenziale usa curl + twist coerente (verso -> conversione)
+[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto
+[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)
+[chi-basc] basculamento chirale attivo: perc_chi vira secondo la torsione locale vs PHI_CRIT (2pi)
+[chi-core] frame-dragging guidato dalla chiralità emergente del core locale
+[cs-dinamico] velocità metrica locale cs_eff(rho) con profilo tanh e CFL dinamico
+========================================================================================================================
+IL LIMITE DI ACCOPPIAMENTO -- RIFATTO IN CONFIGURAZIONE DEL DRIVER   (2026-09-25)
+========================================================================================================================
+
+[s11 lunghi] rc=0 scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK s11_lunghi  bersagli 20  casi 5
+[s11 corti] rc=0 [scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK s11_corti  bersagli 20  casi 5
+[s12 lunghi] rc=0 scena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK s12_lunghi  bersagli 20  casi 5
+[s12 corti] rc=0 [scena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK s12_corti  bersagli 20  casi 5
+
+blob del simulatore VERO   81548e77
+blob della COPIA diagnostica  cefc75b4   (4 assegnazioni, il file vero NON e' toccato)
+semi [11, 12]   versi del taglio ['lunghi', 'corti']   k [77, 20, 8, 4, 2]   bersagli per seme 20   passi pieni prima 20
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 78
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 78.
+
+========================================================================================================================
+I NUMERI, e accanto quelli VECCHI -- marcati **sistema pre-fork + 2 cure** (`CONFIG-1`)
+========================================================================================================================
+  (i numeri vecchi sono LETTI dal referto della prima versione, non ricopiati: letti 5 valori di `k`)
+
+------------------------------------------------------------------------------------------------------------------------
+SEME 11   taglio: via i piu' LUNGHI   n = 4252   grado mediano 77   bersagli 20
+  configurazione del figlio: SEMINA_MATURA True  CS_DINAMICO True  FORK_SU2 True  TAU_LUCE True
+------------------------------------------------------------------------------------------------------------------------
+k      grado    COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav.   | VECCHIO coppia/inerzia
+77     77.0     0.310273       49.0223        0.0049225        0.00600827     33.6342        0/20      | 0.126216
+20     20.0     0.333663       8.15145        0.0303725        0.0061346      16.481         0/20      | 0.412342
+8      8.0      0.448174       2.35753        0.178943         0.00813605     5.64845        0/20      | 1.37486
+4      4.0      0.423298       0.660596       0.756747         0.0128386      2.04261        0/20      | 1.86683
+2      2.0      0.659845       0.181042       2.3706           0.0345311      0.716429       0/20      | 192.007
+
+------------------------------------------------------------------------------------------------------------------------
+SEME 11   taglio: via i piu' CORTI   n = 4252   grado mediano 77   bersagli 20
+  configurazione del figlio: SEMINA_MATURA True  CS_DINAMICO True  FORK_SU2 True  TAU_LUCE True
+------------------------------------------------------------------------------------------------------------------------
+k      grado    COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav.   | VECCHIO coppia/inerzia
+77     77.0     0.310273       49.0223        0.0049225        0.00600827     33.6342        0/20      | 0.126216
+20     20.0     0.351863       0.983347       0.331463         0.00987641     0.435134       0/20      | 0.412342
+8      8.0      0.555803       0.138423       3.47152          0.0526045      0.0539615      0/20      | 1.37486
+4      4.0      0.737052       0.0306758      19.9542          0.282646       0.0129432      0/20      | 1.86683
+2      2.0      0.836488       0.00971264     74.8548          1.05991        0.00374073     0/20      | 192.007
+
+------------------------------------------------------------------------------------------------------------------------
+SEME 12   taglio: via i piu' LUNGHI   n = 4297   grado mediano 77   bersagli 20
+  configurazione del figlio: SEMINA_MATURA True  CS_DINAMICO True  FORK_SU2 True  TAU_LUCE True
+------------------------------------------------------------------------------------------------------------------------
+k      grado    COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav.   | VECCHIO coppia/inerzia
+77     77.0     0.353324       61.0135        0.00625503       0.00844853     37.3887        0/20      | 0.126216
+20     20.0     0.361263       12.4622        0.0340017        0.00857976     17.1056        0/20      | 0.412342
+8      8.0      0.542986       2.90735        0.161835         0.00950794     6.79614        0/20      | 1.37486
+4      4.0      0.745774       0.894415       0.883195         0.0177898      2.46476        0/20      | 1.86683
+2      2.0      0.80726        0.279497       2.67237          0.0375784      0.678952       0/20      | 192.007
+
+------------------------------------------------------------------------------------------------------------------------
+SEME 12   taglio: via i piu' CORTI   n = 4297   grado mediano 77   bersagli 20
+  configurazione del figlio: SEMINA_MATURA True  CS_DINAMICO True  FORK_SU2 True  TAU_LUCE True
+------------------------------------------------------------------------------------------------------------------------
+k      grado    COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav.   | VECCHIO coppia/inerzia
+77     77.0     0.353324       61.0135        0.00625503       0.00844853     37.3887        0/20      | 0.126216
+20     20.0     0.368204       1.24084        0.25277          0.0108257      0.481641       0/20      | 0.412342
+8      8.0      0.466919       0.178546       2.78945          0.0425667      0.0689473      0/20      | 1.37486
+4      4.0      0.603372       0.0392524      15.3809          0.218999       0.0158793      0/20      | 1.86683
+2      2.0      0.808432       0.0104857      90.3776          1.27849        0.00425862     0/20      | 192.007
+
+========================================================================================================================
+COME SCALANO IN `k` -- pendenza su `log k` (COPPIA e INERZIA SEPARATE, come chiesto)
+========================================================================================================================
+braccio        pend. COPPIA     pend. INERZIA    pend. rapporto   pend. |omega|   
+s11 corti      -0.2983          2.3389           -2.6545          -1.4717         
+s11 lunghi     -0.1878          1.5200           -1.7286          -0.4375         
+s12 corti      -0.2278          2.3642           -2.6195          -1.3807         
+s12 lunghi     -0.2570          1.4858           -1.6970          -0.3806         
+
+  Una pendenza POSITIVA su `log k` significa: la grandezza CRESCE col grado. Per l'inerzia
+  una pendenza ~ +1 direbbe `inerzia ~ k`; per la coppia ~ 0 direbbe INTENSIVA.
+  *(La coerenza che Luca chiede: se la coppia e' intensiva, l'inerzia DEVE esserlo.)*
+
+========================================================================================================================
+DOVE STA LA NON-COERENZA: `inerzia = contrasto * T2`, e i due FATTORI SEPARATI
+========================================================================================================================
+  `_contrasto = rho_s / peq_nodo`   e   `T2 = (d_nodo/cs_nodo)^2`. Se la coppia e'
+  INTENSIVA, la coerenza dimensionale vuole che lo sia anche l'inerzia: qui si vede
+  QUALE DEI DUE FATTORI la rende estensiva, invece di attribuirlo all'inerzia in blocco.
+
+braccio        k      contrasto      T2             inerzia       
+s11 corti      77     33.6342        1.28332        49.0223       
+s11 corti      20     0.435134       2.06884        0.983347      
+s11 corti      8      0.0539615      2.22403        0.138423      
+s11 corti      4      0.0129432      2.29901        0.0306758     
+s11 corti      2      0.00374073     2.32259        0.00971264    
+s11 lunghi     77     33.6342        1.28332        49.0223       
+s11 lunghi     20     16.481         0.546421       8.15145       
+s11 lunghi     8      5.64845        0.345336       2.35753       
+s11 lunghi     4      2.04261        0.281505       0.660596      
+s11 lunghi     2      0.716429       0.268746       0.181042      
+s12 corti      77     37.3887        1.25199        61.0135       
+s12 corti      20     0.481641       1.95552        1.24084       
+s12 corti      8      0.0689473      2.09844        0.178546      
+s12 corti      4      0.0158793      2.14753        0.0392524     
+s12 corti      2      0.00425862     2.17321        0.0104857     
+s12 lunghi     77     37.3887        1.25199        61.0135       
+s12 lunghi     20     17.1056        0.545879       12.4622       
+s12 lunghi     8      6.79614        0.35218        2.90735       
+s12 lunghi     4      2.46476        0.292047       0.894415      
+s12 lunghi     2      0.678952       0.26801        0.279497      
+
+braccio        pend. contrasto    pend. T2           pend. INERZIA     
+s11 corti      2.4855             -0.1568            2.3389            
+s11 lunghi     1.0630             0.4420             1.5200            
+s12 corti      2.4656             -0.1455            2.3642            
+s12 lunghi     1.0773             0.4316             1.4858            
+
+========================================================================================================================
+IL CRITERIO, scritto PRIMA: se `|coppia|` resta dello stesso ordine e `inerzia` CROLLA al
+calare di `k`, `omega` esplode PER LA LEGGE DELL'INERZIA, non per il nodo. `|omega|` e' il
+CONTROLLO.
+========================================================================================================================
+  s11 corti    da k = 77 a k = 2:  COPPIA x2.696      INERZIA x0.0001981  rapporto x1.521e+04  |omega| x176.4
+  s11 lunghi   da k = 77 a k = 2:  COPPIA x2.127      INERZIA x0.003693   rapporto x481.6      |omega| x5.747
+  s12 corti    da k = 77 a k = 2:  COPPIA x2.288      INERZIA x0.0001719  rapporto x1.445e+04  |omega| x151.3
+  s12 lunghi   da k = 77 a k = 2:  COPPIA x2.285      INERZIA x0.004581   rapporto x427.2      |omega| x4.448
+
+  -> LA LEGGE DELL'INERZIA NON REGGE IL LIMITE, **IN TUTTI E 4 I BRACCI**
+     (due semi x due versi del taglio): la coppia resta dello stesso ordine e l'inerzia
+     CROLLA. **Il verso del taglio NON e' il responsabile**, ed era il dubbio che la
+     prima versione, con un solo verso, lasciava aperto.
+
+========================================================================================================================
+COSA QUESTO NON DICE
+========================================================================================================================
+  - i 20 bersagli NON sono adiacenti fra loro (nessun arco tolto due volte), **ma possono
+    condividere un VICINO**: l'effetto del taglio non e' perfettamente indipendente fra
+    bersagli. E' il prezzo di averne 20 invece di 1, e si dichiara.
+  - il taglio TOGLIE ARCHI A MANO: non e' un processo del sistema, ed e' di proposito -- la
+    domanda e' se la LEGGE regga un `k` piccolo, non se il sistema ci arrivi da solo.
+  - DUE SEMI: la dispersione fra semi si legge dalle due righe, non da una barra (`P3` delle
+    regole: per una barra servono >= 4 semi).
+  - SOLA LETTURA sul simulatore: la copia diagnostica NON e' il file delle campagne, e i due
+    blob sono in testa.
+  - i numeri VECCHI sono di un ALTRO SISTEMA (`CONFIG-1`: 28 leggi su 31 spente). Il
+    confronto e' fra due sistemi, **non** una ripetizione della stessa misura.
+
