@@ -17122,3 +17122,82 @@ del programma.
 `3.` **il limite di accoppiamento debole** *(a `k` piccolo, `omega = coppia/inerzia` esplode? se
 sì è un difetto della LEGGE, non del nodo, e vale qualunque strada si scelga)*.
 **Nessuna cura. Decide Luca dopo i numeri.**
+
+
+---
+
+# ⛔ **MISURA 3: LA LEGGE DELL'INERZIA NON REGGE IL LIMITE.** E il salto è **esattamente a `k = 2`** *(2026-09-25)*
+
+*(`csv/_test_fork/_limite_accoppiamento.py`, referto in `csv/_test_fork/_limite_accoppiamento/`,
+scena `(ii)` `(b)`, campo MATURO, `20` passi pieni prima di operare, **2 semi**, un processo per
+caso, **una copia fresca della rete per ogni `k`**.)*
+
+```
+k      grado   COPPIA      INERZIA     coppia/inerzia   |omega|    contrasto   al pavimento
+77     77      0.332865    2.72747     0.126216         0.723236   3.40563     0/2
+20     20      0.328437    0.777515    0.412342         0.725978   2.26907     0/2
+ 8      8      0.292286    0.193995    1.37486          0.733472   0.882367    0/2
+ 4      4      0.290853    0.246661    1.86683          0.721119   1.31221     0/2
+ 2      2      0.795815    0.044203    192.007          2.96831    0.259374    0/2
+
+da k = 77 a k = 2:    COPPIA  ×2.391      INERZIA  ×0.01621      coppia/inerzia  ×1521
+```
+
+> ### ⛔ **IL CRITERIO ERA SCRITTO PRIMA, E DICE: LA LEGGE DELL'INERZIA NON REGGE IL LIMITE.**
+> **La coppia resta dello stesso ordine** *(`×2.39`)* **e l'inerzia CROLLA** *(`×0.016`)*.
+> **È un difetto della LEGGE, non del nodo, e vale qualunque strada si scelga** — come Luca
+> aveva anticipato nel criterio.
+
+## ❗ E IL DATO DICE PIÙ DEL CRITERIO: **il collasso è a `k = 2`, non graduale**
+
+**`|omega|` resta PIATTO a `0.72` fino a `k = 4`** *(`0.7232`, `0.7260`, `0.7335`, `0.7211`)*
+**e SALTA a `2.97` solo a `k = 2`.**
+
+> ### **`k = 2` È ESATTAMENTE IL GRADO CON CUI NASCE UN FIGLIO DI MITOSI.**
+> Non è una coincidenza: è lo stesso numero, e il codice lo dice *(«il figlio nasce al punto
+> medio dell'arco con ESATTAMENTE due archi»)*.
+> **Quindi la mitosi mette ogni figlio, per costruzione, NEL PUNTO IN CUI LA LEGGE DELL'INERZIA
+> CEDE.**
+
+## ✅ E NON È IL PAVIMENTO: **`1e-6` non morde MAI**
+
+```
+al pavimento:  0/2 in TUTTI i casi, k = 77 compreso
+inerzia a k=2: 0.044203      cioe' 4.4e+04 VOLTE sopra il pavimento
+```
+
+> **Il pavimento `1e-6` è innocente qui.** L'inerzia crolla **restando quattro ordini sopra il
+> pavimento**: **il problema è la FORMA della legge, non la sua regolarizzazione.**
+> *(E `A11` è salvo: il limite non sta nascondendo niente, in questo caso.)*
+
+## DOVE CROLLA L'INERZIA, dei suoi due fattori
+
+`inerzia = max(_contrasto · _T2, 1e-6)`, e **calano entrambi**:
+
+```
+_contrasto   3.40563  ->  0.259374     ×0.0762
+_T2          (il resto)                 ×0.213
+```
+
+**`_contrasto = rho_s / peq_nodo`**, e un nodo con due soli archi ha **poca densità sorgente**;
+**`_T2` è il tempo-luce al quadrato**, e con due archi la lunghezza tipica cambia.
+**Nessuno dei due è un accidente: entrambi dipendono dal VICINATO, che è ciò che si è tolto.**
+
+## ⚠ UNA CORREZIONE A CIÒ CHE AVEVO CITATO IO, per la seconda volta
+
+Avevo scritto, come candidato per la diagnosi di `omega`: *«l'inerzia bloccata al pavimento
+`max(_rho_sorgente(), 1e-6)`»*.
+**La legge di oggi è `max(_contrasto · _T2, 1e-6)`**, e il commento a `:3226` dichiara la mia
+**superata**: *«Era: `inerzia = max(rho_sorgente * (CS_M/cs)^2, 1e-6)`»*.
+**Citavo una forma che il codice ha sostituito**, e questa è la seconda volta che quel candidato
+cade: prima perché il pavimento **non morde**, ora perché **la formula non è quella.**
+
+## COSA QUESTA MISURA **NON** DICE
+
+- **DUE SEMI e UN SOLO nodo bersaglio per seme:** è una **prova di limite**, non una statistica.
+- **il taglio toglie archi A MANO**, e **di proposito**: la domanda è *se la LEGGE regga un `k`
+  piccolo*, non *se il sistema ci arrivi da solo*.
+- **togliere archi cambia anche i VICINI** del bersaglio: l'effetto misurato **non è solo suo**.
+- **il file vero NON è stato toccato**: coppia e inerzia sono **locali** di `_passo_spinoriale`,
+  e si sono lette da una **COPIA** con quattro assegnazioni diagnostiche. **I due blob sono nel
+  referto.**

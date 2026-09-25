@@ -1,0 +1,66 @@
+========================================================================================================================
+MISURA 3 — **IL LIMITE DI ACCOPPIAMENTO DEBOLE**. Sola lettura sul simulatore.
+========================================================================================================================
+
+  passo = scuoti_vuoto() -> step() -> mitosi() -> rilassa_disegno() -> memoria_hebbiana_moto()   (letto per AST da `update()` e verificato contro il driver)
+  scena (ii) (b), campo MATURO, freno ON, 20 passi PIENI prima di operare, 2 semi.
+
+  LA COPIA DEL SIMULATORE, e i due blob (par.5-quinquies):
+    file VERO   sha1-byte f3d4e537   (NON toccato: il mandato dice sola lettura)
+    COPIA       sha1-byte 97794e19   csv\_test_fork\_limite_accoppiamento\_sim_diag.py
+    la copia aggiunge SOLO assegnazioni diagnostiche: `_diag_inerzia`, `_diag_contrasto`,
+    `_diag_T2`, `_diag_coppia`. **Coppia e inerzia sono LOCALI di `_passo_spinoriale`**
+    (`:3332`, `:3338`), quindi da fuori non si leggono.
+
+  ⚠ LA LEGGE DELL'INERZIA OGGI, e va detta giusta:
+     `inerzia = max(_contrasto * _T2, 1e-6)`  con `_contrasto = rho_s/peq_nodo`
+     **NON** `max(_rho_sorgente(), 1e-6)`, che il commento a `:3226` dichiara SUPERATA.
+     **Il candidato che avevo citato io usava la forma vecchia.**
+
+[s11] rc=0 ONN 2.400000
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK s11  bersaglio 74 (grado 77), casi 5
+[s12] rc=0 ONN 2.400000
+[scena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK s12  bersaglio 18 (grado 77), casi 5
+
+------------------------------------------------------------------------------------------------------------------------
+IL BERSAGLIO: un nodo NORMALE, col grado piu' vicino alla MEDIANA (non il massimo, non il
+minimo: la domanda e' sul LIMITE, e il punto di partenza deve essere TIPICO).
+  seme 11   nodo 74     grado iniziale 77    (mediano 77), archi suoi 77
+  seme 12   nodo 18     grado iniziale 77    (mediano 77), archi suoi 77
+
+  IL TAGLIO: si tolgono gli archi PIU' LUNGHI per primi. **E' una scelta, e la dichiaro:**
+  togliere i piu' CORTI cambierebbe il vicinato prossimo, che pesa di piu' nel kernel
+  `exp(-d/lam)`. Togliere i piu' lunghi e' il taglio MENO invasivo a parita' di `k`.
+  E OGNI CASO PARTE DA UNA COPIA FRESCA della rete: i casi sono INDIPENDENTI, non a cascata.
+
+------------------------------------------------------------------------------------------------------------------------
+k      grado    COPPIA         INERZIA        coppia/inerzia |omega|        contrasto      al pav.   
+------------------------------------------------------------------------------------------------------------------------
+77     77       0.332865       2.72747        0.126216       0.723236       3.40563        0/2       
+20     20       0.328437       0.777515       0.412342       0.725978       2.26907        0/2       
+8      8        0.292286       0.193995       1.37486        0.733472       0.882367       0/2       
+4      4        0.290853       0.246661       1.86683        0.721119       1.31221        0/2       
+2      2        0.795815       0.044203       192.007        2.96831        0.259374       0/2       
+
+========================================================================================================================
+IL CRITERIO, scritto PRIMA: se `|coppia|` resta dello stesso ordine e `inerzia` CROLLA al
+calare di `k`, `omega` esplode **per la legge dell'inerzia**, non per il nodo.
+========================================================================================================================
+  da k = 77 a k = 2:
+     COPPIA         x2.391
+     INERZIA        x0.01621
+     coppia/inerzia x1521
+
+  -> ⛔ **LA LEGGE DELL'INERZIA NON REGGE IL LIMITE:** la coppia resta dello stesso
+     ordine (x2.39) e l'inerzia CROLLA (x0.0162). **E' un difetto della LEGGE, non del
+     nodo, e vale qualunque strada si scelga** (rilievo di Luca, criterio scritto prima).
+
+COSA QUESTO NON DICE:
+  - DUE SEMI, e UN SOLO nodo bersaglio per seme: e' una PROVA DI LIMITE, non una statistica.
+  - il taglio TOGLIE ARCHI A MANO: non e' un processo del sistema, ed e' di proposito --
+    la domanda e' se la LEGGE regga un `k` piccolo, non se il sistema ci arrivi da solo.
+  - togliere archi cambia anche i VICINI del bersaglio: l'effetto misurato non e' solo suo.
+  - SOLA LETTURA sul simulatore: la copia diagnostica NON e' il file che gira nelle campagne,
+    e i due blob sono qui sopra.
