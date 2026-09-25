@@ -17201,3 +17201,106 @@ cade: prima perché il pavimento **non morde**, ora perché **la formula non è 
 - **il file vero NON è stato toccato**: coppia e inerzia sono **locali** di `_passo_spinoriale`,
   e si sono lette da una **COPIA** con quattro assegnazioni diagnostiche. **I due blob sono nel
   referto.**
+
+
+---
+
+# ⛔⛔ **MISURA 1: `A13` È VIOLATO AL `100 %` A OGNI NASCITA. E LA CURA CANDIDATA SPEGNEREBBE LA MITOSI.** *(2026-09-25)*
+
+*(`csv/_test_fork/_figli_della_mitosi.py`, referto in `csv/_test_fork/_figli_della_mitosi/`,
+scena `(ii)` `(b)`, **passo PIENO**, campo MATURO, `300` passi, **2 semi**. La misura è presa
+**subito dopo `mitosi()` e prima di `rilassa_disegno()`**, cioè **alle posizioni di NASCITA**.)*
+
+```
+canale       nati    d/LAM p05   d/LAM p50   d/LAM min   sotto LAM    sotto 0.5 LAM
+mitosi        93     0.0000      0.2958      0.0000      1.000000     0.655914
+schwinger     44     0.0000      0.0000      0.0000      1.000000     1.000000
+
+TUTTI (137):  sotto LAM = 1.000000     sotto 0.5 LAM = 0.766423     min = 0.000000 LAM
+```
+
+> ### ⛔ **IL `100 %` DEI NATI NASCE A MENO DI `LAM` DAL SUO VICINO PIÙ PROSSIMO.**
+> `A13` — *«sotto `LAM` non esiste niente: né archi né distanze fra nodi»* — **è violato in
+> silenzio a OGNI nascita.** La mitosi controlla **solo i genitori**.
+>
+> ### ❗ E `min = 0.0000 LAM` SIGNIFICA **NODI COINCIDENTI**, non «vicini».
+> **Lo Schwinger è il caso puro: `d/LAM = 0.0000` su TUTTI E 44**, mediana compresa.
+> **L'antinodo nasce ESATTAMENTE SOPRA un altro nodo.** È un fatto a sé, più forte della
+> violazione di `A13`: **due nodi nello stesso punto non sono due nodi vicini, sono una
+> degenerazione.**
+
+## ➕ LA CURA CANDIDATA, VALUTATA E **NON SCRITTA** — e il numero è senza ambiguità
+
+*«`A13` applicato alla nascita: un nodo nasce solo dove c'è posto»* — **non è una legge nuova**
+*(`STANDARD 10`)*: è `A13`, che vale già per la semina, **esteso al sito che non lo applica**.
+
+```
+eventi di nascita registrati:                      137
+che sopravvivrebbero (`d >= LAM` da TUTTI):          0      = 0.0000
+```
+
+> ### ⛔ **ZERO SU CENTOTRENTASETTE. APPLICARE `A13` ALLA NASCITA NON REGOLA LA MITOSI: LA SPEGNE.**
+> Era il caso che il criterio prevedeva, e **il numero dice quale dei due sia** — senza margine.
+> **Non è una decisione mia.**
+
+---
+
+# ⛔ **MISURA 2: I FIGLI RESTANO A GRADO `2` PER SEMPRE, E `omega` NON RIENTRA**
+
+```
+passo  nati  grado (nati/orig)  frazione a grado 2  rho (nati/orig)     |omega| p50 (nati/orig)
+  1      6   2.0 / 77.0         1.0000 / 0.0000     0        / 2.864     0     / 0.6112
+  5     12   2.0 / 77.0         1.0000 / 0.0000     0.001363 / 2.265   186.2   / 0.6112
+ 20     17   2.0 / 77.0         1.0000 / 0.0000     0.02303  / 3.105   170.3   / 0.6115
+120     24   2.0 / 77.0         1.0000 / 0.0000     0.07001  / 1.422   165.0   / 0.6445
+300     68   2.0 / 77.0         1.0000 / 0.0000     0.03383  / 2.001   185.8   / 0.6639
+```
+
+> ### ✅ **RESTANO A GRADO `2`: IL `100.0 %` DI ESSI, AL PASSO `300`.**
+> **E la verifica dall'AST lo spiega:** `self.i` e `self.j` sono scritti in **quattro punti
+> soli** — `__init__`, `_allaccia` *(da `semina`)*, e `mitosi` in **due** siti *(divisione e
+> Schwinger)*. **Nessuna crescita successiva delle relazioni.**
+> **Un figlio nasce con due archi e muore con due archi.**
+>
+> ### ⛔ **E `omega` NON RIENTRA: `0 → 186` al passo `5`, e poi PLATEAU** *(`170`, `209`, `165`,
+> ### `142`, `186`)*. **Contro `0.664` degli originali: un fattore `280`.**
+> **`rho` dei nati è `0.034` contro `2.00`: un fattore `59`** — **peggio del `21` che avevo
+> misurato prima**, perché quello era il top `0.1 %` e questo è **tutta** la popolazione dei nati.
+
+## ✅ E IL PAVIMENTO DELL'INERZIA NON MORDE MAI — **il mio candidato è morto per la terza volta**
+
+```
+_inerzia_al_pavimento / _inerzia_tot  =  0 su 1 291 724 invocazioni      (passo 300)
+```
+
+**Zero. Su un milione e trecentomila.** *(E i contatori erano **già cablati** nel simulatore: non
+li ho aggiunti, li ho letti.)*
+
+> **Avevo proposto «l'inerzia bloccata al pavimento» come candidato, e cade per TRE ragioni
+> indipendenti:** ① il pavimento **non morde** *(`0` su `1.3e6`)*; ② la formula che citavo è
+> **superata** *(oggi è `max(_contrasto · _T2, 1e-6)`)*; ③ e la **misura 3** mostra che l'inerzia
+> crolla **restando quattro ordini sopra** il pavimento.
+> **Tre volte, e ogni volta per un motivo diverso.**
+
+## ❌ UN DIFETTO DEL MIO VERDETTO, e va detto: **ha diviso per zero**
+
+Il referto stampa *«RESTA sullo stesso ordine (`×nan`)»*. **È falso, ed è un `nan` che ho
+prodotto io:** al passo `1` i nati hanno `omega = 0` **esattamente** *(nascono con `omega_s = 0`)*,
+quindi il rapporto `o2/o1` divide per zero.
+**La lettura giusta è nei numeri, non nel verdetto: `omega` NON rientra** — `0 → 186` e poi
+plateau. **Il verdetto automatico non ha coperto il caso «il valore iniziale è zero per
+costruzione»**, che è esattamente il presidio del par.9 sul valore sotto ipotesi nulla.
+
+## ❗ E UNA COSA CHE NON CERCAVO: **dal passo `120` gli ORIGINALI raggiungono i nati**
+
+```
+|omega| MASSIMO, rapporto nati/originali:
+passo   5    39.17        passo 120    1.021
+passo  20    17.27        passo 200    0.8017
+passo  60    12.71        passo 300    1.695
+```
+
+**All'inizio i nati sono `39×` peggio; dal passo `120` i due gruppi sono allo stesso livello.**
+**Il disordine non resta confinato nei nati: arriva agli originali.** *(Non so per quale via, e non
+lo indovino: potrebbe essere propagazione, o potrebbe essere che gli originali diventano vicini di
+nati. Va misurato, non dedotto.)*

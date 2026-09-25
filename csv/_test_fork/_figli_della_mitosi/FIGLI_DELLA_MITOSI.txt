@@ -1,0 +1,98 @@
+========================================================================================================================
+MISURE 1 e 2 — `A13` ALLA NASCITA, e LA TRAIETTORIA DEI FIGLI. **Sola lettura.**
+========================================================================================================================
+
+  passo = scuoti_vuoto() -> step() -> mitosi() -> rilassa_disegno() -> memoria_hebbiana_moto()   (letto per AST da `update()` e verificato contro il driver)
+  scena (ii) (b), campo MATURO, freno ON, 300 passi, 2 semi, un processo per braccio.
+
+✅ LA VERIFICA DALL'AST (misura 2, la parte che non richiede un run):
+   `self.i` e `self.j` sono scritti in QUATTRO punti SOLI:
+     `:1624`  __init__     (il vuoto)
+     `:2851`  _allaccia    (chiamato da `semina`)
+     `:6041`  mitosi       la DIVISIONE
+     `:6163`  mitosi       lo SCHWINGER
+   **NESSUNA crescita successiva delle relazioni.** Un figlio nato con grado 2 resta a
+   grado 2, se non lo tocca un arco nuovo -- e un arco nuovo puo' venire solo da quei siti.
+
+[s11] rc=0 400000
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK s11  n 4252 -> 4314  nascite registrate 62
+[s12] rc=0 400000
+[scena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK s12  n 4297 -> 4372  nascite registrate 75
+
+------------------------------------------------------------------------------------------------------------------------
+1. `A13` ALLA NASCITA — distanza dal nodo PIU' VICINO fra TUTTI, alle posizioni di NASCITA
+------------------------------------------------------------------------------------------------------------------------
+  LAM = 0.800000. La misura e' presa SUBITO DOPO `mitosi()` e PRIMA di `rilassa_disegno()`.
+
+  canale       nati     d/LAM p05    d/LAM p50    d/LAM min    sotto LAM      sotto 0.5 LAM 
+  mitosi       93       0.0000       0.2958       0.0000       1.000000       0.655914      
+  schwinger    44       0.0000       0.0000       0.0000       1.000000       1.000000      
+  ?            0         (nessuno)
+
+  TUTTI I NATI (137): sotto LAM = 1.000000      sotto 0.5 LAM = 0.766423      min = 0.000000 LAM
+
+  -> ⛔ **`A13` È VIOLATO ALLA NASCITA, e in silenzio:** il 100.00 % dei nati nasce a meno
+     di `LAM` dal suo vicino piu' prossimo. La mitosi controlla SOLO i genitori.
+
+  ➕ LA CURA SENZA LEGGI NUOVE, VALUTATA E **NON SCRITTA** (`STANDARD 10`):
+     **`A13` applicato alla nascita**: un nodo nasce **solo dove c'e' posto**.
+     Non e' una legge nuova: e' `A13` che vale gia' per la semina, esteso al sito che non
+     lo applica. **Quanti eventi di oggi sopravvivrebbero?**
+       eventi di nascita registrati: 137
+       che sopravvivono (`d >= LAM` da TUTTI): 0  = 0.0000
+     ⚠ E IL COSTO VA DETTO: se la frazione che sopravvive e' piccola, applicare `A13`
+       alla nascita **non regola la mitosi: la SPEGNE**. Il numero qui sopra dice quale
+       dei due casi sia, e NON e' una decisione mia.
+
+------------------------------------------------------------------------------------------------------------------------
+2. LA TRAIETTORIA DEI FIGLI — grado, `rho`, `|omega|` nel tempo. NATI contro ORIGINALI
+------------------------------------------------------------------------------------------------------------------------
+  passo  nati    grado (nati/orig)        frazione a grado 2       rho (nati/orig)          |omega| p50 (nati/orig)
+  0      0       nan / 77.0               nan / 0.0000             nan / 0                  nan / 0.6112          
+  1      6       2.0 / 77.0               1.0000 / 0.0000          0 / 2.864                0 / 0.6112            
+  5      12      2.0 / 77.0               1.0000 / 0.0000          0.001363 / 2.265         186.2 / 0.6112        
+  20     17      2.0 / 77.0               1.0000 / 0.0000          0.02303 / 3.105          170.3 / 0.6115        
+  60     18      2.0 / 77.0               1.0000 / 0.0000          0.03489 / 1.651          208.6 / 0.6181        
+  120    24      2.0 / 77.0               1.0000 / 0.0000          0.07001 / 1.422          165 / 0.6445          
+  200    33      2.0 / 77.0               1.0000 / 0.0000          0.06293 / 3.169          142.3 / 0.6564        
+  300    68      2.0 / 77.0               1.0000 / 0.0000          0.03383 / 2.001          185.8 / 0.6639        
+
+  |omega| MASSIMO fra i nati contro fra gli originali:
+    passo 1      nati 0                originali 1.7251           rapporto 0
+    passo 5      nati 1853.39          originali 47.3204          rapporto 39.17
+    passo 20     nati 1746.9           originali 101.171          rapporto 17.27
+    passo 60     nati 1490.12          originali 117.247          rapporto 12.71
+    passo 120    nati 1463.89          originali 1433.63          rapporto 1.021
+    passo 200    nati 1060.21          originali 1322.41          rapporto 0.8017
+    passo 300    nati 1836.91          originali 1083.96          rapporto 1.695
+
+  -> RESTANO A GRADO 2? frazione dei nati con grado esattamente 2 al passo 300: **1.0000**
+     ** SÌ: 100.0 % dei nati resta a grado 2. Coerente con l'AST: nessuna crescita
+        successiva delle relazioni. **
+
+  -> `omega` RIENTRA O RESTA ALTO? mediana dei nati: 0 al passo 1  ->  185.82 al passo 300
+     e la mediana degli ORIGINALI: 0.611178 -> 0.663854
+     ** RESTA sullo stesso ordine (xnan). **
+
+  E IL PAVIMENTO DELL'INERZIA, dai contatori GIA' cablati nel simulatore:
+    passo 1      al pavimento 0              su 4274            =  0.000000
+    passo 5      al pavimento 0              su 21406           =  0.000000
+    passo 20     al pavimento 0              su 85748           =  0.000000
+    passo 60     al pavimento 0              su 257444          =  0.000000
+    passo 120    al pavimento 0              su 515194          =  0.000001
+    passo 200    al pavimento 0              su 859370          =  0.000001
+    passo 300    al pavimento 0              su 1291724         =  0.000000
+    (`_inerzia_al_pavimento` / `_inerzia_tot`: cumulativi, e la legge oggi e'
+     `inerzia = max(_contrasto * _T2, 1e-6)`, NON `max(_rho_sorgente(), 1e-6)`.
+     ⚠ IL CANDIDATO CHE AVEVO CITATO USAVA LA FORMA SUPERATA: il commento a `:3226` dice
+     'Era: inerzia = max(rho_sorgente * (CS_M/cs)^2, 1e-6)'. La forma e' cambiata.)
+
+COSA QUESTO NON DICE:
+  - DUE SEMI: par.0-ter `P3` chiede >= 4 per una barra fra semi.
+  - l'attribuzione del CANALE (mitosi o Schwinger) viene dai contatori, non dall'ordine, e
+    quando i conti non quadrano il referto lo DICE invece di scegliere.
+  - `A13` e' misurato SULLE POSIZIONI (`pos`): e' l'unica cosa che oggi esiste, ed è anche
+    il motivo per cui `A3` (il disegno che esce dalla dinamica) tocca questa misura.
+  - SOLA LETTURA. Nessuna cura.
