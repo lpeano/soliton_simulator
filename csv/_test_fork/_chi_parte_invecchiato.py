@@ -78,6 +78,33 @@ for r, _d, fs in os.walk(os.path.join(RADICE, "csv")):
 RE_SEED = re.compile(r"--seed[= ]+(-?\d+)")
 RE_NODI = re.compile(r"--nodi[= ]+(-?\d+)")
 
+
+def _da_lista(argv):
+    """`--nodi` e `--seed` da una LISTA di argomenti, dove il valore e' l'elemento SEGUENTE.
+
+    ❌❌ LA PRIMA STESURA CERCAVA LA REGEX NEL TESTO, E NON POTEVA MATCHARE PER COSTRUZIONE:
+       i `CONFIGURAZIONE*` sono **JSON**, e `argv_interno` e' una **lista di stringhe separate**
+       — `"--nodi", "900"` sono DUE elementi, quindi `--nodi 900` **non compare mai** come
+       stringa contigua. **Il risultato era «NESSUNA riga trovata»: uno ZERO DA PARSER
+       SBAGLIATO**, cioe' esattamente la trappola del par.9 *(«quanto varrebbe se non ci fosse
+       niente?»: qui lo zero valeva zero per costruzione)*.
+    """
+    fuori = {}
+    for k, x in enumerate(argv):
+        x = str(x)
+        for nome in ("--seed", "--nodi"):
+            if x == nome and k + 1 < len(argv):
+                try:
+                    fuori[nome] = int(str(argv[k + 1]))
+                except Exception:
+                    pass
+            elif x.startswith(nome + "="):
+                try:
+                    fuori[nome] = int(x.split("=", 1)[1])
+                except Exception:
+                    pass
+    return fuori.get("--seed"), fuori.get("--nodi")
+
 P("-" * 112)
 P("I FILE CERCATI: %d  (la tabella delle campagne + ogni `CONFIGURAZIONE*` sotto `csv/`)" % len(FILES))
 P("-" * 112)
@@ -89,19 +116,54 @@ for p in FILES:
     except Exception:
         continue
     rel = os.path.relpath(p, RADICE).replace(chr(92), "/")
+    # (1) I FILE JSON: gli argv sono LISTE, e il valore e' l'elemento SEGUENTE.
+    if p.endswith(".json"):
+        import json as _j
+        try:
+            D = _j.loads(src)
+        except Exception:
+            D = None
+        if isinstance(D, dict):
+            for campo in ("argv_esterno", "argv_interno"):
+                av = D.get(campo)
+                if not isinstance(av, list):
+                    continue
+                seed, nodi = _da_lista(av)
+                if seed is None and nodi is None:
+                    continue
+                scatta = (seed is not None) or (nodi is not None
+                                                and nodi != getattr(S, "SEME_INIZIALE", None))
+                righe.append((rel + " [" + campo + "]", 0, seed, nodi, scatta,
+                              " ".join(str(x) for x in av)[-120:]))
+            continue
+    # (2) I FILE DI TESTO: la regex, che li' funziona.
     for k, linea in enumerate(src.split(chr(10)), start=1):
         s_ = RE_SEED.search(linea)
         n_ = RE_NODI.search(linea)
+        # e anche la forma a LISTA su una riga di testo (la tabella la scrive cosi')
         if not s_ and not n_:
-            continue
-        nodi = int(n_.group(1)) if n_ else None
-        seed = int(s_.group(1)) if s_ else None
+            if "--seed" in linea or "--nodi" in linea:
+                seed, nodi = _da_lista(linea.replace(",", " ").replace('"', " ").split())
+                if seed is None and nodi is None:
+                    continue
+            else:
+                continue
+        else:
+            nodi = int(n_.group(1)) if n_ else None
+            seed = int(s_.group(1)) if s_ else None
         scatta = (seed is not None) or (nodi is not None
                                         and nodi != getattr(S, "SEME_INIZIALE", None))
         righe.append((rel, k, seed, nodi, scatta, linea.strip()[:120]))
 
 if not righe:
     P("  NESSUNA riga con `--seed` o `--nodi` trovata nei file cercati.")
+    P("  ⚠ E UNO ZERO QUI VA GUARDATO DUE VOLTE: la prima stesura di questo strumento dava")
+    P("    zero PER UN PARSER SBAGLIATO (regex sul testo, ma gli argv sono LISTE JSON). Se")
+    P("    questo zero e' vero, significa che NESSUN run documentato passava quei flag.")
+    P("  CONTROLLO POSITIVO DEL PARSER, su un argv costruito a mano:")
+    _s, _n = _da_lista(["x.py", "--nodi", "0", "--seed", "11", "--serie=20"])
+    P("    ['--nodi','0','--seed','11'] -> seed=%s nodi=%s   (attesi 11 e 0)" % (_s, _n))
+    P("    -> il parser %s" % ("FUNZIONA" if (_s == 11 and _n == 0) else "NON FUNZIONA"))
 else:
     P("  %-46s %-6s %-8s %-8s %-8s" % ("file", "riga", "--seed", "--nodi", "INVECCHIA?"))
     for rel, k, seed, nodi, scatta, linea in righe:
