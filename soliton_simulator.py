@@ -9347,7 +9347,19 @@ def batch_condensazione(a):
         cols['phivel_min'], cols['phivel_max'], cols['phivel_mean'], cols['phivel_absmax'] = _stat(net.phivel[:n])
         cols['d_min'], cols['d_max'], cols['d_mean'], _ = _stat(net.d[:n] if len(net.d) >= n else net.d)
         cols['d0_min'], cols['d0_max'], cols['d0_mean'], _ = _stat(net.d0[:n] if len(net.d0) >= n else net.d0)
-        cols['eta_min'], cols['eta_max'], cols['eta_mean'], _ = _stat(net.eta[:n] if len(net.eta) >= n else net.eta)
+        # [`RAMPA-1`] I NODI DELLA SEMINA HANNO `eta = +inf`, quindi `_stat` su tutto darebbe
+        #   `eta_max = inf` e **`eta_mean = inf`**: una colonna di `inf` **non e' un dato**, e un
+        #   CSV e' il dato (`P6`). Le statistiche si fanno sui **finiti** -- cioe' sui nodi NATI
+        #   IN DINAMICA, che sono quelli la cui rampa ha una storia -- e **il conto degli
+        #   infiniti diventa una colonna sua**, `eta_inf`, che dice quanti nodi sono del vuoto
+        #   dato. **Non si nasconde l'infinito: si separa, e si conta.**
+        #   ⚠ Se TUTTI i nodi sono infiniti (prima della prima mitosi) `_stat` di un array vuoto
+        #   da' `nan`: **`nan` qui significa «nessun nodo nato in dinamica»**, non «misura
+        #   fallita», e `eta_inf` lo dice.
+        _eta_v = net.eta[:n] if len(net.eta) >= n else net.eta
+        _eta_fin = np.asarray(_eta_v, float)[np.isfinite(np.asarray(_eta_v, float))]
+        cols['eta_min'], cols['eta_max'], cols['eta_mean'], _ = _stat(_eta_fin)
+        cols['eta_inf'] = int(np.sum(~np.isfinite(np.asarray(_eta_v, float))))
         cols['tau_min'], cols['tau_max'], cols['tau_mean'], _ = _stat(tau)
         cols['dmin_nodi'] = dmin
         cols['xi_termo'] = float(getattr(net, 'xi_termo', 0.0))
