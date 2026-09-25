@@ -732,6 +732,15 @@ avvertimento.**
 > **sola** distanza minima.
 > **Non è una manopola di fisica** *(par.10, categoria infrastruttura)*: non entra in nessuna legge.
 
+
+### ➕ `CURA 4` AGGIUNGE `--semina-matura` in `_cli` / `_applica_flag` *(2026-09-25)*
+
+| flag | default | byte-inerte a default? |
+|---|---|---|
+| **`--semina-matura`** | **OFF** | **sì**: `_tempo_rampa()` restituisce `TAU_A` e `semina` scrive `eta = 0`, cioè **le righe di prima**. Lo prova `A1` |
+
+**La legge sta nella scheda `accensione-campo`.**
+
 <!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,_dphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
 # ⑥ LA FASE `φ` E IL SUO DOMINIO — **`semina` / `_w4` / `_w8` / `step`**
 
@@ -926,6 +935,11 @@ BRACCIO DI CONTROLLO di `S10`         dentro le regioni   0.071 / 0.035 / 0.032 
 **È la stessa famiglia di `RITMO_WRAP_2PI`**, e la stessa del presidio del par.9 *«quanto
 varrebbe se non ci fosse niente?»*: `std(phi) ≈ D/sqrt(12) = 3.63` **è** il valore di fasi
 casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sbagliata e non il dato.
+
+
+### ➕ `CURA 4` TOCCA `semina`: il parametro `maturi` *(2026-09-25)*
+
+`semina(..., maturi=None)` decide se i nodi nuovi nascono **maturi** *(`ramp = 1`)* o con la rampa. **Default: maturi se la rete era VUOTA** *(`base == 0`)*, cioè se questa semina **è** l'universo. **La legge sta nella scheda `accensione-campo`.**
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME -->
 # ⑦ LA MITOSI E SCHWINGER — **`mitosi()`**
@@ -1191,6 +1205,11 @@ nasca**, quindi non c'è nessun run a metà da interpretare. Un rifiuto dentro `
 uno stato parziale sul disco.
 
 ---
+
+
+### ➕ `CURA 4` TOCCA `_passo_spinoriale` a `:3382` *(2026-09-25)*
+
+Quella riga **deve seguire `_pesi`**: il suo commento dice *«la STESSA riga di `_pesi()`»*, e se una usasse `TAU_A` e l'altra il tempo-luce sarebbero **due leggi che possono divergere** — la ragione per cui `_tempo_luce_nodo` fu **estratto in un metodo solo**. Ora entrambe passano da `_tempo_rampa()`. **`:3334` NON cambia: lì `TAU_A` resta, ed è il suo unico ruolo superstite.**
 
 <!-- SCHEDA nome=tempo-nella-mitosi funzioni=mitosi,_cs_arco_da_nodo,_r_nodo_mitosi,_fattore_tempo_arco,_tau_arco_causale flag=TEMPO_UNICO_MITOSI,MITOSI_DIR -->
 
@@ -2364,6 +2383,11 @@ marcarle come tali direbbe che il lignaggio viene da una semina che non c'è sta
 rete **non si svuota da sola** *(`A9`: svuotarla butterebbe via ciò che un altro flag ha
 chiesto, senza dirlo)*.
 
+
+### ➕ `CURA 4` E LA SCENA `(ii)`: la semina della scena è **INIZIALE** *(2026-09-25)*
+
+`_semina_masse_coerenti` chiama `net.semina` **una sola volta, su rete vuota** *(la scena RIFIUTA se `net.n` non è zero)*, quindi il default `maturi=None` la classifica **iniziale** e i suoi nodi nascono **maturi**. **È la condizione che rende misurabile `S9` al passo zero**, che oggi non lo è.
+
 <!-- SCHEDA nome=invarianti funzioni=verifica_invarianti flag=INVARIANTI,DOMINI -->
 
 # ⑩ GLI INVARIANTI DI DOMINIO — **`C5`**
@@ -2965,3 +2989,108 @@ il braccio di controllo **non può leggersi `n` da solo** e lo riceve.
 frazione di archi sotto `2 LAM`)*: **non dipende dalla mitosi.**
 **Il giro resta sospeso** finché la **soglia della mitosi** non è una **legge derivata**: `3π` è
 **un numero tarato a posteriori nell'epoca 1** — vedi la scheda `mitosi-schwinger` e `SCALE-TW`.
+
+<!-- SCHEDA nome=accensione-campo funzioni=_pesi,_tempo_rampa,semina flag=SEMINA_MATURA,TAU_A,TAU_A_LOCALE -->
+
+# ④ `accensione-campo` — **QUANDO UN NODO DIVENTA SORGENTE DI CAMPO**
+
+**`CURA 4`, decisione di Luca, 2026-09-25. Flag `SEMINA_MATURA`, OFF di default.**
+
+## LA LEGGE
+
+```python
+_pesi:   ramp = min(1, eta / _tempo_rampa())
+         base = exp(-d/lam_archi) * ramp[i] * ramp[j]
+```
+
+> ### ❗ **`ramp` ENTRA COME PRODOTTO DI DUE NODI: IL PESO D'ARCO VA COME `ramp²`.**
+
+`_tempo_rampa()`: **`TAU_A` a flag spento** *(byte-identico)*, **`_tempo_luce_nodo` a flag acceso**.
+
+## IL DIFETTO CURATO, misurato
+
+| | |
+|---|---|
+| **tutti** i nodi nascono con `eta = 0` | `semina` `:2645`, `mitosi` `:5831`, Schwinger `:5987` — **lo stesso zero** |
+| al passo zero la somma dei pesi è | **`0.000000e+00` ESATTO** |
+| passi perché `ramp = 1` | **`TAU_A/DT = 5000`** |
+| al passo `120`, `ramp` | `0.024` — e il **peso d'arco `5.76e-04`**, **una parte su `1736`** |
+
+**TUTTI i giri corti fatti finora hanno girato in quel regime**, `CURA 2` compresa.
+
+## LA CURA, in due metà
+
+1. **i nodi della SEMINA INIZIALE nascono MATURI:** `eta = _tempo_rampa()`, che dà
+   `ramp = min(1, eta/tempo) = 1` **ESATTO**. **Nessun numero nuovo:** il valore è *la grandezza
+   stessa che sta al denominatore*.
+2. **la rampa resta per i nati in dinamica**, col tempo **`_tempo_luce_nodo`** invece di `TAU_A`.
+   Misurato: **`89.8` passi** *(`p05 86.6` / `p95 92.2`, cioè `±3 %`)* contro `5000`.
+
+> ### ✅ **E COSÌ I DUE RUOLI DI `TAU_A` SI SEPARANO.**
+> Oggi `TAU_A` è **insieme** la **vita media della memoria spinoriale** *(`:3334`, ed è per
+> **quello** che il `50` fu scelto: *«alta persistenza memoria spinoriale»*, *«per non far
+> divergere `omega`»*)* **e** il **tempo di accensione di una sorgente** *(`_pesi`)*.
+> **Nessuna ragione, scritta da nessuna parte, perché coincidano.**
+> **Col flag ON `TAU_A` resta SOLO il primo**, e `A7` lo verifica **dall'AST**.
+
+## ❗ LA DISTINZIONE «INIZIALE» / «IN VOLO» — **il codice non l'aveva, e va dichiarata**
+
+```
+semina(..., maturi=True/False)   -> lo dice il CHIAMANTE, esplicitamente
+semina(..., maturi=None)         -> DEFAULT: matura SE LA RETE ERA VUOTA (`base == 0`)
+```
+
+> **`base == 0` NON È UNA SOGLIA: è un fatto topologico** — prima non c'era niente.
+> Un criterio temporale *(«prima del passo 1»)* sarebbe **un numero nuovo** *(par.3, `A11`)*.
+>
+> **⚠ IL LIMITE:** una scena che seminasse **due volte** avrebbe la **seconda** trattata come
+> «in volo». **Per questo il parametro esplicito esiste**: chi vuole due semine iniziali passa
+> `maturi=True` **e lo dichiara nella scena**.
+
+## ✅ `eta` È IL MARCATORE, E NON SERVE UN ARRAY NUOVO
+
+**nato in dinamica → `eta = 0`; nato come vuoto DATO → `eta` tale che `ramp = 1`.**
+`eta` **esiste già**, è **già estesa a ogni sito di nascita** ed è **già nello snapshot**.
+**Così non si crea il settimo array da estendere a mano** — la famiglia di difetti di
+`_cs_nodo_prev` *(`71.88 %`)* e `_psi_spin_prec` *(`95.33 %`)*.
+
+**E LA MATURITÀ SI SCRIVE DOPO `_allaccia`**, non prima: `_tempo_luce_nodo` ha bisogno degli
+**archi** per costruire `d_nodo`.
+
+## ⚠ `A11` — **NON È MONOTONO, E SI MISURA INVECE DI NASCONDERLO**
+
+`_tempo_luce_nodo` dipende da `d` e da `cs`, quindi **cambia a ogni passo**: se gli archi di un
+nodo si allungano, `ramp` **può SCENDERE**.
+**È voluto:** è una legge locale che segue lo stato locale, come `_ttw = 2π/|Δω|`.
+**L'alternativa — congelare il tempo-luce alla nascita — richiederebbe un array di stato nuovo**
+per nodo, con la sua estensione alla mitosi, allo Schwinger e allo snapshot: **esattamente il
+difetto che si vuole evitare.**
+**Contatore: `_g_rampa_sotto1` / `_g_rampa_nodi`.** E i rami di fallback *(nessun arco, forma non
+combaciante)* sono **dichiarati e contati** *(`A8`)*.
+
+## I CRITERI, fissati nel TASK HISTORY **prima** del codice
+
+*(`doc/TASK_HISTORY/2026-09-25_cura-accensione-campo.md`, commit `30db901`, **antenato** del
+commit del codice — par.5-septies: l'ordine è verificabile da git)*
+
+| | criterio |
+|---|---|
+| **`A1`** | **flag SPENTO = BYTE-IDENTICO** al codice precedente, firma dei byte, un processo per braccio |
+| **`A2`** | al passo `1`, **`ramp == 1` su TUTTI** i nodi della semina iniziale, **ESATTO** |
+| **`A3`** | un nodo nato da **MITOSI** parte da `ramp = 0` e arriva a `1` **nel suo tempo-luce** |
+| **`A4`** | contrasto massa/vuoto e `Lam` al passo `1`, contro **`P2 = 27`** e **`P3 = 5`** |
+| **`A5`** | **CONTROLLO POSITIVO:** ON e OFF **DEVONO** differire |
+| **`A6`** | **CASO CHE DEVE FALLIRE:** con `maturi=False` forzato, **`A2` deve dare FAIL** |
+| **`A7`** | **`TAU_A` non è più letto da `_pesi`** — dall'**AST**, non da un `grep` |
+
+**⚠ `A3` FORZA LA MITOSI**, perché la soglia `3π` è **irraggiungibile** *(`SCALE-TW`:
+`max|tw| = 2.8991 π`)*: **senza forzarla `A3` non avrebbe nulla da misurare**, e va detto invece
+di far sembrare che scatti da sé.
+
+## ⛔ COSA RESTA APERTO
+
+- **la stabilità col campo acceso dal passo zero.** `G_PH = 3e-3` è dichiarato *«vicino al limite
+  di divergenza»* *(`1e-4` e `0` divergono)*. **Se diverge è un RISULTATO**, da committare e
+  fermarsi.
+- **la rimisura di `|dx|/d` a campo maturo:** la forma del freno-legge `(1+tanh)` fu decisa su
+  `max |dx|/d = 0.0531` **a campo spento**. **È il passo dopo il sigillo.**

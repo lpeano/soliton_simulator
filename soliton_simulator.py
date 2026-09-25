@@ -412,6 +412,31 @@ CALORE_VETTORIALE = True   # calcio termico: True=vettoriale+chirale DI DEFAULT 
                            # eccitato, phivel firmato da perc_chi). False=scalare isotropo. --calore-scal per tornare scalare
                        # rispetto a frequenze locali (invarianza per riparametrizzazione). IN VERIFICA.
                        # False = costanti fisse (comportamento precedente). Reversibile.
+SEMINA_MATURA = False   # [CURA 4, 2026-09-25] L'ACCENSIONE DEL CAMPO. Decisione di Luca.
+                        # OFF di default: un interruttore alla volta (par.1).
+                        #
+                        # IL DIFETTO CURATO, misurato: `_pesi` moltiplica per
+                        # `ramp = min(1, eta/TAU_A)` e **OGNI** nodo nasce con `eta = 0` --
+                        # `semina`, `mitosi` e lo Schwinger scrivono LO STESSO ZERO. Quindi
+                        # **l'universo parte SENZA CAMPO** (somma dei pesi = 0 ESATTO al passo
+                        # zero) e ci mette `TAU_A/DT = 5000` passi ad accendersi. E poiche'
+                        # `ramp` entra come `ramp[i]*ramp[j]`, **il peso d'arco va come
+                        # `ramp^2`**: al passo 120 vale `5.76e-04` del maturo, UNA PARTE SU 1736.
+                        # TUTTI i giri corti fatti finora hanno girato in quel regime.
+                        #
+                        # LA CURA, in due meta':
+                        #  (1) i nodi della SEMINA INIZIALE nascono MATURI -- sono il vuoto che
+                        #      GIA' ESISTE, non nodi appena creati;
+                        #  (2) la rampa resta SOLO per i nodi nati in dinamica (mitosi,
+                        #      Schwinger, semina in volo), col tempo = `_tempo_luce_nodo`
+                        #      invece di `TAU_A`.
+                        #
+                        # E COSI' I DUE RUOLI DI `TAU_A` SI SEPARANO. Oggi `TAU_A` e' insieme
+                        # la VITA MEDIA della memoria spinoriale (`:3334`, ed e' per QUELLO che
+                        # il 50 fu scelto -- "alta persistenza memoria spinoriale") e il TEMPO
+                        # DI ACCENSIONE di una sorgente (`_pesi`). Nessuna ragione, scritta da
+                        # nessuna parte, perche' coincidano. Col flag ON `TAU_A` resta SOLO il
+                        # primo.
 TAU_A_LOCALE = True     # vita media spinoriale LOCALE ~|Psi|^2 (decadimento atomico). IN VERIFICA.
                        # False = TAU_A fisso (comportamento precedente). Reversibile.
 SCALA_P_MEDIANA = False  # DIAGNOSTICO, NON FISICA ALTERNATIVA. Ripristina la vecchia scala di
@@ -2597,7 +2622,8 @@ class Rete:
                    self._sl_giri, self._sl_abbandonate))
         return acc
 
-    def semina(self, n, raggio=None, centro=(0, 0, 0), fase=None, mass_id=None):
+    def semina(self, n, raggio=None, centro=(0, 0, 0), fase=None, mass_id=None,
+               maturi=None):
         # [SCENA (ii)] `n < 0` = **FINO A SATURAZIONE**. Richiede `SEMINA_LAM`: senza una
         # distanza minima la saturazione NON ESISTE, e ridurre a un numero qualsiasi sarebbe
         # una riduzione silenziosa (`A9`). Si DICE, non si aggiusta.
@@ -2642,7 +2668,30 @@ class Rete:
             self.phivel = np.concatenate([self.phivel, calcio_phi])
         else:
             self.phivel = np.concatenate([self.phivel, np.zeros(n)])
-        self.eta = np.concatenate([self.eta, np.zeros(n)])
+        # [CURA 4] L'ETA' DEI NODI NUOVI. `eta` E' IL MARCATORE, e non serve un array nuovo:
+        #   nato in dinamica -> `eta = 0`; nato come vuoto DATO -> `eta` tale che `ramp = 1`.
+        #   `eta` esiste gia', e' GIA' estesa a ogni sito di nascita ed e' GIA' nello snapshot:
+        #   **usarla come marcatore evita di creare il settimo array da estendere a mano**, che
+        #   e' la famiglia di difetti di `_cs_nodo_prev` e `_psi_spin_prec`.
+        #
+        # LA DISTINZIONE "INIZIALE" / "IN VOLO", dichiarata (il codice non l'aveva):
+        #   `maturi=True/False`  -> lo dice il CHIAMANTE, esplicitamente;
+        #   `maturi=None`        -> DEFAULT: matura **se la rete era VUOTA**, cioe' se questa
+        #                           semina **E'** l'universo.
+        #   ⚠ `n == 0` NON E' UNA SOGLIA: e' un fatto topologico -- prima non c'era niente.
+        #     Un criterio temporale ("prima del passo 1") sarebbe un numero nuovo (par.3/A11).
+        #   ⚠ E IL LIMITE: una scena che seminasse DUE volte su rete non vuota avrebbe la
+        #     seconda trattata come "in volo". Per questo il parametro ESPLICITO esiste: chi
+        #     vuole due semine iniziali passa `maturi=True` e lo DICHIARA nella scena.
+        _mat = (base == 0) if maturi is None else bool(maturi)
+        if SEMINA_MATURA and _mat:
+            # `eta` = il tempo di rampa DI QUEI NODI -> `ramp = min(1, eta/tempo) = 1` ESATTO.
+            # Si legge DOPO `_allaccia` (sotto), perche' il tempo-luce ha bisogno degli archi.
+            self.eta = np.concatenate([self.eta, np.zeros(n)])
+            self._cura4_maturi = (int(base), int(base + n))
+        else:
+            self.eta = np.concatenate([self.eta, np.zeros(n)])
+            self._cura4_maturi = None
         self.perc_chi = np.concatenate([self.perc_chi, chi_nuovi])
         # [CHI_COOP] VIA 1 di 3 (semina). Alla nascita la geometria COPIA la carica: nel ramo A al
         # passo 0 sono la stessa cosa, e `chi_basc` la riscrive al passo dopo comunque.
@@ -2656,6 +2705,23 @@ class Rete:
             self.omega_s = np.vstack([self.omega_s, calcio_omega]) if len(self.omega_s) else calcio_omega
         self.conc_nodi.extend([[] for _ in range(n)])   # TRACKING: liste vuote per i nuovi nodi
         self._allaccia(base)
+        # [CURA 4] LA MATURITA' SI SCRIVE **QUI**, DOPO `_allaccia`, e non prima: il tempo di
+        #   rampa e' `_tempo_luce_nodo`, che ha bisogno degli ARCHI per costruire `d_nodo`.
+        #   Prima dell'allaccio il nodo non ha archi, e il tempo-luce non esiste ancora.
+        # `eta = tempo_rampa` da' `ramp = min(1, eta/tempo) = 1` **ESATTO**, non approssimato.
+        # NESSUN NUMERO NUOVO: il valore e' la grandezza stessa che sta al denominatore.
+        if SEMINA_MATURA and getattr(self, "_cura4_maturi", None) is not None:
+            _a, _b = self._cura4_maturi
+            _tr = self._tempo_rampa()
+            if np.ndim(_tr):
+                self.eta[_a:_b] = np.asarray(_tr, float)[_a:_b]
+            else:
+                # il ramo scalare (`TAU_A`): capita solo se `_tempo_rampa` e' caduto sul
+                # fallback, e li' i suoi contatori lo dicono gia'. Si usa lo stesso valore,
+                # cosi' `ramp = 1` vale comunque.
+                self.eta[_a:_b] = float(_tr)
+            self._g_cura4_maturati = getattr(self, "_g_cura4_maturati", 0) + int(_b - _a)
+            self._cura4_maturi = None
         if mass_id is not None:
             self.masse_info[mass_id] = dict(centro=tuple(np.asarray(centro, float)),
                                             fase=(None if fase is None else float(fase)),
@@ -3313,7 +3379,14 @@ class Rete:
                 _tq = _tq * self._rho_sorgente()[:, None]
             if COPPIA_RECIPROCA:
                 # la STESSA riga di `_pesi()` (:2649): nessun numero nuovo
-                _tq = _tq * np.minimum(1.0, self.eta[:n] / TAU_A)[:, None]
+                # [CURA 4] DEVE seguire `_pesi`: il commento sopra dice "la STESSA riga di
+                #   `_pesi()`", e se una delle due usasse `TAU_A` e l'altra il tempo-luce
+                #   sarebbero DUE leggi che possono divergere -- esattamente la ragione per cui
+                #   `_tempo_luce_nodo` fu ESTRATTO in un metodo solo. `_tempo_rampa()` restituisce
+                #   `TAU_A` a flag spento, quindi questa riga e' BYTE-IDENTICA a prima.
+                _trq = self._tempo_rampa()
+                _trq = np.asarray(_trq, float)[:n] if np.ndim(_trq) else _trq
+                _tq = _tq * np.minimum(1.0, self.eta[:n] / _trq)[:, None]
             correzione = correzione + _tq
         # VITA MEDIA LOCALE (ispirata al decadimento atomico / regola d'oro di Fermi): TAU_A non e'
         # piu' un numero fisso ma una PROPRIETA' DELLO STATO. Come ogni isotopo ha la sua vita media,
@@ -3533,8 +3606,57 @@ class Rete:
     # perde, ed e' quella la ragione della regola.
     # Sigillo: csv/_seal_fork/_sigillo_rimozione5.py  (byte-identita' ASSOLUTA, shape comprese)
 
+    def _tempo_rampa(self):
+        """[CURA 4] IL TEMPO DI ACCENSIONE di un nodo come sorgente di campo, PER NODO.
+
+        A flag SPENTO e' `TAU_A`, cioe' esattamente il comportamento di prima.
+        A flag ACCESO e' **`_tempo_luce_nodo`**, `tau = d_nodo/cs_nodo`: **la STESSA legge
+        gia' cablata nello STRATO 1**, non una legge nuova, e **per NODO** -- la forma che
+        `ramp` richiede *(shape misurata `= n`)*.
+
+        MISURATO nella scena `(ii)` `(b)`: `p50 = 0.8978`, cioe' **`89.8` passi** contro i
+        **`5000`** di `TAU_A`, con `p05 86.6` / `p95 92.2` -- **stretto a +-3 %**, quindi
+        **non introduce una dispersione nuova**.
+
+        ⚠ **NON E' MONOTONO, E VA DETTO:** `_tempo_luce_nodo` dipende da `d` e da `cs`, quindi
+        **cambia a ogni passo**. Se gli archi di un nodo si allungano, il suo tempo di rampa
+        cresce e `ramp` **puo' SCENDERE**. **E' voluto**: e' una legge locale che segue lo stato
+        locale, come `_ttw = 2pi/|dw|`.
+        **L'ALTERNATIVA -- congelare il tempo-luce alla nascita -- RICHIEDEREBBE UN ARRAY DI
+        STATO NUOVO PER NODO**, con la sua estensione alla mitosi, allo Schwinger e allo
+        snapshot: **esattamente la famiglia di difetti `_cs_nodo_prev` (71.88 %) e
+        `_psi_spin_prec` (95.33 %)**. **Non si fa**, e la non-monotonia si MISURA invece di
+        essere nascosta (contatore qui sotto).
+
+        A8: il ramo senza archi e' DICHIARATO e CONTATO. Senza archi `_tempo_luce_nodo` non ha
+        da cosa costruire `d_nodo`, e si cade su `TAU_A`: non e' un errore, e' il primo istante.
+        """
+        if not SEMINA_MATURA:
+            return TAU_A
+        self._g_rampa_tot = getattr(self, "_g_rampa_tot", 0) + 1
+        if not len(self.i):
+            self._g_rampa_senza_archi = getattr(self, "_g_rampa_senza_archi", 0) + 1
+            self._g_rampa_quando = self._g_rampa_tot
+            return TAU_A
+        tl = np.asarray(self._tempo_luce_nodo(self.i, self.j), float)
+        if tl.size != self.n:
+            # A8/A9: la forma non combacia -> si dichiara, si conta, e si cade su `TAU_A`.
+            self._g_rampa_forma = getattr(self, "_g_rampa_forma", 0) + 1
+            self._g_rampa_shape = (int(tl.size), int(self.n))
+            self._g_rampa_quando = self._g_rampa_tot
+            return TAU_A
+        return tl
+
     def _pesi(self):
-        ramp = np.minimum(1.0, self.eta / TAU_A)
+        # [CURA 4] il DENOMINATORE della rampa: `TAU_A` a flag spento, il tempo-luce a flag
+        # acceso. La riga sotto e' IDENTICA a prima quando `_tempo_rampa()` restituisce `TAU_A`.
+        _tr = self._tempo_rampa()
+        ramp = np.minimum(1.0, self.eta / _tr)
+        if SEMINA_MATURA:
+            # A8: la NON-MONOTONIA dichiarata sopra si MISURA. `ramp < 1` su un nodo che era
+            # maturo e' il caso che il commento ammette: si conta, non si corregge.
+            self._g_rampa_sotto1 = getattr(self, "_g_rampa_sotto1", 0) + int(np.sum(ramp < 1.0))
+            self._g_rampa_nodi = getattr(self, "_g_rampa_nodi", 0) + int(ramp.size)
         base = np.exp(-self.d / self._lam_archi()) * ramp[self.i] * ramp[self.j]
         # [A8, 2026-09-20] CONTABILITA' DELLA GUARDIA -- byte-inerte: si CONTA, non si cambia.
         # Un ramo che salta in silenzio e' un comportamento SCONOSCIUTO (A8), e questa forma ha
@@ -7840,6 +7962,7 @@ def _applica_flag(a):
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
     global TAU_LUCE, RUMORE_COLORATO
+    global SEMINA_MATURA   # [CURA 4] senza questo l'assegnazione sarebbe una LOCALE, inerte
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
     global PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO, COES_CAUSALE, ANOM_SIMM
@@ -8265,6 +8388,10 @@ def esegui_headless(a):
     # l'inquadratura R si adatta all'estensione reale dei nodi (vedi update: R = max|pos|).
     # [SCENA (ii)] `--mc-nodi 0` = SATURAZIONE (il default). Il braccio di controllo di
     # `P-GONFIA` passa qui il numero MISURATO dal braccio acceso, per avere lo STESSO `n`.
+    SEMINA_MATURA = bool(getattr(a, "semina_matura", False))   # [CURA 4]
+    if SEMINA_MATURA:
+        print("[cura4] SEMINA_MATURA ON: i nodi della semina iniziale nascono MATURI, e la rampa "
+              "usa `_tempo_luce_nodo` invece di TAU_A (che resta la sola vita media spinoriale).")
     _MC_VIDEO["nodi"] = int(getattr(a, "mc_nodi", 0) or 0)
     _MC_VIDEO["fasi_casuali"] = bool(getattr(a, "mc_fasi_casuali", False))
     _NMASSE_VIDEO["n"] = max(2, int(getattr(a, "nmasse", 2)))
@@ -8789,6 +8916,13 @@ def _cli():
     # [SCENA (ii), 2026-09-25] `0` = FINO A SATURAZIONE (il default): il numero lo decide la
     # GEOMETRIA, non un numero scelto. Il braccio di controllo di `P-GONFIA` (`SEMINA_LAM`
     # spento) passa qui il numero MISURATO dal braccio acceso, per avere lo STESSO `n`.
+    # [CURA 4, 2026-09-25] L'ACCENSIONE DEL CAMPO. OFF di default (par.1).
+    p.add_argument("--semina-matura", action="store_true",
+                   help="[CURA 4] i nodi della SEMINA INIZIALE nascono MATURI (ramp = 1), e la "
+                        "rampa dei pesi resta SOLO per i nati in dinamica col tempo "
+                        "`_tempo_luce_nodo` invece di TAU_A. Cosi' i due ruoli di TAU_A si "
+                        "separano: TAU_A resta SOLO la vita media della memoria spinoriale. "
+                        "OFF di default: a flag spento il comportamento e' BYTE-IDENTICO.")
     p.add_argument("--mc-nodi", type=int, default=0,
                    help="SCENA (ii): nodi del vuoto; 0 = fino a saturazione (default)")
     # BRACCIO DI CONTROLLO DI `S10`: fasi casuali anche DENTRO le regioni. DIAGNOSTICO.
