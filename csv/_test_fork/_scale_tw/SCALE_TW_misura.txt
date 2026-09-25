@@ -1,0 +1,45 @@
+====================================================================================================
+`SCALE-TW` (b) -- IL LIVELLO DI `|tw|` NEL REGIME `A13`, E LA SOGLIA `3pi`
+====================================================================================================
+
+COSTANTI, lette dal sorgente:
+  PHI_CRIT  = 6.283185307   (= 2 pi)          `:422`
+  TAU_TW    = 20.0000                      `:427`  -- usato SOLO come fallback: `TAU_LOCALI` e' True
+  TORS_4PI  = True   FASE_2PI = False   ->  soglia0 = PHI_CRIT + pi = 3 pi = 9.424778
+  TW_TETTO  = 12.566370614   (= 4 pi)          `:5626` (LOCALE di `mitosi`)
+  QMIN_M    = 0.000000  <- la soglia di densita' e' `>= 0`: SEMPRE VERA
+
+SCENA (ii) (b): n = 4252, archi = 148237, seme 11
+
+----------------------------------------------------------------------------------------------------
+passo  |tw| (in unita' di pi)             _ttw                               frazioni                
+----------------------------------------------------------------------------------------------------
+0      p50   0.0000 p95   0.0000 max   0.0000  p50   13.7565 p05    5.3685  dt_e  0.01000  >=3pi 0.00000 >=4pi 0.00000
+1      p50   0.9919 p95   2.5891 max   2.9999  p50   13.7528 p05    5.3671  dt_e  0.01000  >=3pi 0.00000 >=4pi 0.00000
+2      p50   0.9913 p95   2.5848 max   2.9982  p50   10.0560 p05    4.0136  dt_e  0.01000  >=3pi 0.00000 >=4pi 0.00000
+5      p50   0.9933 p95   2.5758 max   2.9959  p50    7.2545 p05    2.9009  dt_e  0.00231  >=3pi 0.00000 >=4pi 0.00000
+10     p50   0.9939 p95   2.5176 max   2.9651  p50    3.3906 p05    1.3370  dt_e  0.01095  >=3pi 0.00000 >=4pi 0.00000
+20     p50   0.9933 p95   2.3434 max   2.8991  p50    1.8182 p05    0.6903  dt_e  0.00927  >=3pi 0.00000 >=4pi 0.00000
+
+----------------------------------------------------------------------------------------------------
+LA STIMA DELLO STATO STAZIONARIO, dalla forma del codice
+----------------------------------------------------------------------------------------------------
+  lambda = dt_e/_ttw (mediane) = 0.00509772
+  se `tw` e' un cammino aleatorio smorzato, l'incremento tipico vale
+    sigma = |tw|_p50 * sqrt(2 lambda) = 0.315098   (= 0.1003 pi)
+  e viceversa, con quell'incremento:
+    |tw|_eq = sigma * sqrt(_ttw/(2 dt_e)) = 3.12064   (= 0.9933 pi)
+
+  soglia  3 pi = 9.424778      |tw| p50 = 3.120638 = 0.9933 pi      rapporto soglia/|tw| = 3.020
+  tetto   4 pi = 12.566371      |tw| max = 9.107720 = 2.8991 pi
+
+IL CRITERIO, scritto PRIMA (vedi la docstring):
+  la soglia e' RAGGIUNTA da qualche arco?  NO   (frazione >= 3pi = 0.000000)
+  il tipico e' sotto la soglia di un fattore 3.020  ->  LA MITOSI SCATTA SOLO SULLA CODA
+
+COSA QUESTO NON DICE:
+  - UN SEME, UNA SCENA (b), 20 passi. Non e' una barra d'errore (par.0-ter P3: >= 4 semi).
+  - `|tw|` puo' CRESCERE ancora: un cammino aleatorio smorzato arriva all'equilibrio in
+    ~`_ttw/dt_e` passi, e qui quel numero vale 196.2. Il valore va citato COL PASSO (par.9).
+  - la soglia LOCALE e' modulata (`soglia0*(1 - 0.3*tanh(grad_tau))`): scende di al piu' 30 %,
+    quindi la frazione vera e' >= a quella calcolata qui contro `3pi` fisso.
