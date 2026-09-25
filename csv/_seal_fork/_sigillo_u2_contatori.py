@@ -68,6 +68,11 @@ S = _iu.module_from_spec(_sp); _sp.loader.exec_module(S)
 net = S.Rete(SEME)
 net.semina(NODI)
 assert len(net.d) > 0, "rete senza archi"
+# UN PASSO PRIMA, e non e' un dettaglio: `mitosi` legge `I = self._rho_sorgente()`, che su una
+# rete appena seminata e' VUOTO (`IndexError` a `:5749`). La soglia di densita'
+# `0.5*(I[a]+I[b]) >= QMIN_M*median(peq)` esiste, e un arco che non la passa NON si divide:
+# senza il passo, il caso "a risposta nota" non arriverebbe nemmeno a `_nasce`.
+net.step()
 
 # --- lo stato NOTO: un solo arco lungo `FATT * LAM`, e la torsione solo LI'. ---
 LAM = float(S.LAM)
@@ -124,6 +129,8 @@ out = {
     "archi_pre": archi_pre, "archi_post": int(len(net.d)),
     "d_pre_sel": d_pre_sel, "d0_pre_sel": d0_pre_sel,
     "nascite": int(getattr(net, "_g_sm_nascite", 0)),
+    "negate": int(getattr(net, "negate", -1)),
+    "peq_med": float(np.median(net.peq)) if len(net.peq) else float("nan"),
     # quanti archi VERI stanno esattamente a LAM, sulle due grandezze
     "d_a_lam": int(np.sum(np.asarray(net.d) == LAM)),
     "d0_a_lam": int(np.sum(np.asarray(net.d0) == LAM)),
