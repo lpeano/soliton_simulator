@@ -162,8 +162,19 @@ S._semina_masse_coerenti()
 net = S.net
 n0, a0 = int(net.n), int(len(net.d))
 d0_med0 = float(np.median(net.d0))
+# [A8-div, richiesta di Luca 2026-09-25] LA SORVEGLIANZA SULLA DIVERGENZA, per passo.
+#   NON per curiosita': `TAU_A = 50` ERA la cura "per non far divergere omega" (help di
+#   `--tau-a`), quindi se col campo acceso `omega` diverge **NON e' un risultato nuovo: e' il
+#   difetto originale che torna fuori**. E "diverge" si decide CONFRONTANDO I DUE BRACCI, non
+#   guardando un numero solo: crescita monotona senza plateau dove l'altro si assesta.
+TRAI = []
 for k in range(PASSI):
     passo_pieno(S, net)
+    _om = np.asarray(net.omega_s, float) if np.size(net.omega_s) else np.zeros((1, 3))
+    TRAI.append((k + 1,
+                 float(np.max(np.linalg.norm(_om, axis=1))) if _om.size else float("nan"),
+                 float(np.max(np.abs(net.phivel))) if np.size(net.phivel) else float("nan"),
+                 float(np.median(np.abs(net.phivel))) if np.size(net.phivel) else float("nan")))
 o = dict(FLAG=bool(FLAG), n0=n0, archi0=a0, n1=int(net.n), archi1=int(len(net.d)),
          d0_med_inizio=d0_med0, d0_med_fine=float(np.median(net.d0)), passi=int(PASSI))
 _tr = net._tempo_rampa()
@@ -172,6 +183,10 @@ o["ramp_fine_p50"] = float(np.median(_r)); o["ramp_fine_min"] = float(_r.min())
 net.calcola_psi()
 I = np.asarray(net.intensita(), float)
 o["Lam_fine"] = float(I.mean())
+o["traiettoria"] = TRAI
+o["g_rampa"] = {k: (list(v) if isinstance(v, tuple) else v)
+                for k, v in vars(net).items()
+                if k.startswith("_g_rampa") and not k.endswith("_prec")}
 for et, v in ACC.items():
     c = np.asarray(v["campioni"], float)
     o[et] = dict(n=v["n"], media=(v["somma"] / v["n"] if v["n"] else float("nan")),
@@ -308,6 +323,49 @@ for et, verso, v in righe:
         P("  %-9s %-9s  E[x^2] = %.6e   n = %d   ->  N*E[x^2]/2 = %.6e"
           % (et, verso, v["Ex2"], v["n"], v["n"] * v["Ex2"] / 2.0))
 P("  (e' il numero che mancava sull'altro piatto del confronto: ora c'e'.)")
+P()
+P("=" * 112)
+P("`A8-div` -- LA SORVEGLIANZA SULLA DIVERGENZA (richiesta di Luca)")
+P("=" * 112)
+P("  `TAU_A = 50` ERA la cura \"per non far divergere omega\" (help di `--tau-a`): se col campo")
+P("  acceso `omega` diverge, NON E' UN RISULTATO NUOVO, e' IL DIFETTO ORIGINALE CHE TORNA FUORI.")
+P("  E \"diverge\" si decide CONFRONTANDO I DUE BRACCI: crescita monotona senza plateau dove")
+P("  l'altro si assesta. Il nullo e' l'altro braccio (par.9).")
+P()
+P("  %-6s %-24s %-24s %-24s" % ("passo", "max |omega_s|", "max |phivel|", "mediana |phivel|"))
+P("  %-6s %-11s %-12s %-11s %-12s %-11s %-12s" % ("", "MATURO", "SPENTO", "MATURO", "SPENTO",
+                                                  "MATURO", "SPENTO"))
+_tm = {r[0]: r for r in M.get("traiettoria", [])}
+_ts = {r[0]: r for r in Sp.get("traiettoria", [])}
+for k in (1, 5, 20, 40, 60, 80, 100, 120):
+    if k not in _tm or k not in _ts:
+        continue
+    P("  %-6d %-11.4g %-12.4g %-11.4g %-12.4g %-11.4g %-12.4g"
+      % (k, _tm[k][1], _ts[k][1], _tm[k][2], _ts[k][2], _tm[k][3], _ts[k][3]))
+P()
+if _tm and _ts:
+    _om_m = [r[1] for r in M["traiettoria"]]
+    _om_s = [r[1] for r in Sp["traiettoria"]]
+    _cre_m = sum(1 for a, b in zip(_om_m, _om_m[1:]) if b > a)
+    _cre_s = sum(1 for a, b in zip(_om_s, _om_s[1:]) if b > a)
+    P("  max|omega|: passi in CRESCITA su %d -> MATURO %d, SPENTO %d"
+      % (len(_om_m) - 1, _cre_m, _cre_s))
+    P("  rapporto finale/iniziale: MATURO %.4g   SPENTO %.4g"
+      % (_om_m[-1] / _om_m[0] if _om_m[0] else float("nan"),
+         _om_s[-1] / _om_s[0] if _om_s[0] else float("nan")))
+    _mono = (_cre_m >= 0.95 * (len(_om_m) - 1)) and (_cre_s < 0.95 * (len(_om_s) - 1))
+    if _mono:
+        P("  -> ** DIVERGENZA nel braccio MATURO: crescita quasi MONOTONA dove lo SPENTO no. **")
+        P("     REPERTO E STOP. La diagnosi cerca LA CAUSA CHE `TAU_A = 50` COPRIVA")
+        P("     (candidato dichiarato: l'inerzia bloccata al pavimento `max(rho, 1e-6)`, par.9),")
+        P("     E NON SI RIMETTE LA RAMPA LENTA.")
+    else:
+        P("  -> NESSUNA DIVERGENZA con questo criterio: i due bracci non si distinguono per")
+        P("     monotonia. Sono LIVELLI diversi, non una divergenza.")
+P()
+P("CONTATORI DELLA RAMPA (`A8`), i CALI -- e non `ramp < 1`, che include i nodi giovani:")
+for et, D in (("MATURO", M), ("SPENTO", Sp)):
+    P("  %-8s %s" % (et, D.get("g_rampa") or "NESSUNO"))
 P()
 P("COSA QUESTO NON DICE:")
 P("  - UN SEME. Non e' una barra d'errore (par.0-ter `P3`: servono >= 4 semi).")

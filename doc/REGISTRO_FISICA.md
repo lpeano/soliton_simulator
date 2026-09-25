@@ -3057,6 +3057,23 @@ semina(..., maturi=None)         -> DEFAULT: matura SE LA RETE ERA VUOTA (`base 
 **E LA MATURITÀ SI SCRIVE DOPO `_allaccia`**, non prima: `_tempo_luce_nodo` ha bisogno degli
 **archi** per costruire `d_nodo`.
 
+## ➕ IL CONTATORE DEI **CALI** DI `ramp` *(rilievo di Luca, 2026-09-25)*
+
+❌ **`_g_rampa_sotto1` NON misura ciò che serve:** conta quanti nodi hanno `ramp < 1`, **che
+include un nodo GIOVANE non ancora arrivato a `1`**. **Un CALO è un'altra cosa.**
+
+```
+_g_rampa_cali         quante volte un `ramp` per nodo e' SCESO rispetto al passo prima
+_g_rampa_calo_somma   la somma dei cali ("di quanto", cumulativo)
+_g_rampa_calo_max     il calo singolo PIU' GRANDE
+_g_rampa_calo_quando  l'indice dell'ULTIMA invocazione in cui e' calato
+```
+
+**Serve un array `_g_rampa_prec`, e lo dichiaro DIAGNOSTICO:** il suo disallineamento **si conta e
+si riparte** *(`_g_rampa_prec_disallineata`)* invece di essere esteso a mano a ogni sito di
+nascita. **NON è la famiglia di `_cs_nodo_prev`**, che stava su un percorso **fisico**: qui se il
+confronto salta **si perde una MISURA, non una legge**.
+
 ## ⚠ `A11` — **NON È MONOTONO, E SI MISURA INVECE DI NASCONDERLO**
 
 `_tempo_luce_nodo` dipende da `d` e da `cs`, quindi **cambia a ogni passo**: se gli archi di un

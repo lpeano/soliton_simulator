@@ -105,6 +105,63 @@ supera, la decisione va riaperta.**
 
 ---
 
+## ➕➕ DUE RIGHE DI LUCA — **e la prima CORREGGE ciò che avevo scritto io qui sopra**
+
+> **⚠ ONESTÀ SULL'ORDINE, che è il punto del par.5-septies: queste due righe arrivano DOPO il
+> commit del codice** *(`900fe60`)*, **non prima.** Luca le ha chieste *«prima del codice»*, e il
+> codice c'era già. **Non antidato niente: lo scrivo, e git lo mostra.**
+
+### ❌❌ LA CORREZIONE: **«se `omega` diverge è un RISULTATO» È SBAGLIATO**
+
+**Avevo scritto, nel «cosa NON so» qui sopra:** *«Se diverge, è un RISULTATO, non un fallimento
+della cura»*.
+
+> ### **NON È UN RISULTATO NUOVO: È IL DIFETTO ORIGINALE CHE TORNA FUORI.**
+> **`TAU_A = 50` era la cura «per non far divergere `omega`»** — e non lo deduco, **sta scritto
+> nel `help` di `--tau-a`**: *«`TAU_A = 50` nel ramo deterministico era una **CURA** (per non far
+> divergere `omega`) o una scelta scaduta?»*
+>
+> **Quindi togliere il `50` dalla rampa e vedere `omega` divergere non è una scoperta: è il
+> ritorno di ciò che il `50` COPRIVA.** Chiamarlo «risultato» sarebbe **prendersi il merito di
+> aver scoperchiato un difetto noto**, e **suggerirebbe che non ci sia niente da curare.**
+
+### IL CRITERIO, SCRITTO ORA *(e prima del run che lo verifica)*
+
+```
+A8-div   si registra `max|omega_s|` e `max|phivel|` PER PASSO, nei DUE bracci.
+         Se diverge  ->  REPERTO, e STOP.
+         La diagnosi cerca LA CAUSA CHE `TAU_A = 50` COPRIVA
+             (candidato dichiarato: l'INERZIA BLOCCATA AL PAVIMENTO --
+              `inerzia = max(_rho_sorgente(), 1e-6)`, misurata attiva sul 99.7 % dei nodi, par.9)
+         E **NON SI RIMETTE LA RAMPA LENTA**: rimetterla sarebbe ricoprire il difetto
+             con lo stesso coperchio, e perdere la separazione dei due ruoli di `TAU_A`.
+```
+
+**⚠ E «diverge» va definito prima, sennò lo si decide guardando:** si confronta la **traiettoria
+dei due bracci**. Se il braccio MATURO cresce in modo **monotono e senza plateau** dove lo SPENTO
+si assesta, **è divergenza**; se entrambi si assestano a livelli diversi, **è un livello diverso,
+non una divergenza.** *(par.9: il presidio del valore sotto ipotesi nulla — qui il nullo è l'altro
+braccio.)*
+
+### IL CONTATORE `A8` SULLA NON-MONOTONIA DI `ramp`
+
+**Il contatore che avevo messo — `_g_rampa_sotto1` — NON misura ciò che serve:** conta quanti
+nodi hanno `ramp < 1`, che include **un nodo giovane che non è ancora arrivato a `1`**.
+**Un CALO è un'altra cosa**, e va misurato come tale: **quante volte `ramp` di un nodo
+DIMINUISCE, e DI QUANTO.**
+
+```
+_g_rampa_cali        quante volte un `ramp` per nodo e' SCESO rispetto al passo prima
+_g_rampa_calo_somma  la somma dei cali («di quanto», cumulativo)
+_g_rampa_calo_max    il calo singolo PIU' GRANDE
+_g_rampa_calo_quando l'indice dell'ULTIMA invocazione in cui e' calato
+```
+
+**Serve un array diagnostico `_g_rampa_prec`**, e **lo dichiaro come tale**: è **diagnostico, non
+fisica**, quindi il suo disallineamento **si conta e si riparte** *(`_g_rampa_prec_disallineata`)*
+invece di essere esteso a mano a ogni sito di nascita. **È la stessa forma dei contatori delle
+guardie, non la famiglia di `_cs_nodo_prev`** — che era su un **percorso fisico**.
+
 ## ③ TODO DEL NEXT STEP
 
 1. **[fatto in questo commit]** la dichiarazione di **`2a`**: i cicli di

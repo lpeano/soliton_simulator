@@ -3653,10 +3653,35 @@ class Rete:
         _tr = self._tempo_rampa()
         ramp = np.minimum(1.0, self.eta / _tr)
         if SEMINA_MATURA:
-            # A8: la NON-MONOTONIA dichiarata sopra si MISURA. `ramp < 1` su un nodo che era
-            # maturo e' il caso che il commento ammette: si conta, non si corregge.
+            # A8: la NON-MONOTONIA dichiarata sopra si MISURA.
+            # ❌ `_g_rampa_sotto1` NON MISURA CIO' CHE SERVE, e Luca l'ha rilevato: conta quanti
+            #   nodi hanno `ramp < 1`, **che include un nodo GIOVANE non ancora arrivato a 1**.
+            #   **Un CALO e' un'altra cosa**, e va misurato come tale: quante volte `ramp` di un
+            #   nodo DIMINUISCE, e DI QUANTO.
+            #   `_g_rampa_sotto1` resta, perche' e' comunque il denominatore utile.
             self._g_rampa_sotto1 = getattr(self, "_g_rampa_sotto1", 0) + int(np.sum(ramp < 1.0))
             self._g_rampa_nodi = getattr(self, "_g_rampa_nodi", 0) + int(ramp.size)
+            # `_g_rampa_prec` e' un array DIAGNOSTICO, e lo dichiaro come tale: il suo
+            #   disallineamento SI CONTA e si riparte, invece di essere esteso a mano a ogni sito
+            #   di nascita. **NON e' la famiglia di `_cs_nodo_prev`**, che stava su un percorso
+            #   FISICO: qui se il confronto salta si perde una MISURA, non una legge.
+            _prec = getattr(self, "_g_rampa_prec", None)
+            if _prec is not None and len(_prec) == len(ramp):
+                _cal = ramp < _prec
+                _nc = int(_cal.sum())
+                if _nc:
+                    _dd = _prec[_cal] - ramp[_cal]
+                    self._g_rampa_cali = getattr(self, "_g_rampa_cali", 0) + _nc
+                    self._g_rampa_calo_somma = (getattr(self, "_g_rampa_calo_somma", 0.0)
+                                                + float(_dd.sum()))
+                    self._g_rampa_calo_max = max(getattr(self, "_g_rampa_calo_max", 0.0),
+                                                 float(_dd.max()))
+                    self._g_rampa_calo_quando = self._g_rampa_tot
+            elif _prec is not None:
+                self._g_rampa_prec_disallineata = (
+                    getattr(self, "_g_rampa_prec_disallineata", 0) + 1)
+                self._g_rampa_prec_shape = (len(_prec), len(ramp))
+            self._g_rampa_prec = np.array(ramp, dtype=float, copy=True)
         base = np.exp(-self.d / self._lam_archi()) * ramp[self.i] * ramp[self.j]
         # [A8, 2026-09-20] CONTABILITA' DELLA GUARDIA -- byte-inerte: si CONTA, non si cambia.
         # Un ramo che salta in silenzio e' un comportamento SCONOSCIUTO (A8), e questa forma ha
