@@ -114,7 +114,13 @@ o = dict(FLAG=bool(FLAG), MATURI_FORZATO=MATURI_FORZATO, CLI=_CLI, n0=n0, archi0
          TAU_A=float(S.TAU_A), DT=float(S.DT))
 
 def _ramp(net):
-    _tr = net._tempo_rampa()
+    # ⚠ SUL CODICE DI PRIMA `_tempo_rampa` NON ESISTE: l'ha introdotta la cura 4. La
+    #   rampa del vecchio e' `eta/TAU_A`, **LETTA DAL SORGENTE VECCHIO** (`:3537` di
+    #   `900fe603^`: `ramp = np.minimum(1.0, self.eta / TAU_A)`), **non indovinata**.
+    #   ✅ **E CHE QUESTO RAMO SERVA E' LA PROVA CHE `A1` ERA VACUO:** finche' il codice
+    #   «di prima» era `HEAD`, `_tempo_rampa` **c'era** -- perche' HEAD conteneva la cura.
+    #   **Un braccio che non poteva nemmeno GIRARE sul codice vero stava passando da giorni.**
+    _tr = net._tempo_rampa() if hasattr(net, "_tempo_rampa") else S.TAU_A
     return np.minimum(1.0, np.asarray(net.eta, float) / _tr)
 
 o["ramp0_min"] = float(_ramp(net).min()); o["ramp0_max"] = float(_ramp(net).max())
@@ -384,7 +390,10 @@ _cli_ok = _ast_ok
 for _n, _c in _cli_att:
     if _n == "prima":
         # il codice di PRIMA non ha il flag: l'atteso e' che sia ASSENTE, non False.
-        _cli_ok = _cli_ok and (_c.get("flag") == "ASSENTE") and (OPZ in _c.get("scartate", []))
+        # il codice di PRIMA non ha il flag: l'atteso e' ASSENTE, e l'opzione non e' nella
+        # sua argv (`senza` la toglie prima, quindi NON compare fra le `scartate`).
+        _cli_ok = _cli_ok and (_c.get("flag") == "ASSENTE")
+        _cli_ok = _cli_ok and (_c.get("opz_nell_argv") is False)
     else:
         _cli_ok = _cli_ok and (bool(_c.get("flag")) == bool(_c.get("atteso")))
         _cli_ok = _cli_ok and (bool(_c.get("opz_nell_argv")) == bool(_c.get("atteso")))
