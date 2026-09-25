@@ -17947,3 +17947,49 @@ ferma invece di misurare niente** (`A9`).
 **NON converto i 25 adesso**: sarebbero 25 sigilli da rigirare, e il mandato in corso è un altro.
 La voce è in coda come **`ANCORE-1`**, e **il controllo va fra i presidi automatici** come
 **`P8 ANCORA «PRIMA» NON SCADUTA`** — richiesta di Luca nello stesso mandato.
+
+
+---
+
+# ✅ **`RAMPA-1`: LA VERIFICA CHE PRECEDE LA CURA — OGNI LETTURA DI `eta`, PER AST** *(2026-09-25)*
+
+*(`csv/_letture_eta.py`, referto `doc/LETTURE_eta.md`. Decisione di Luca: **strada (3), il vuoto
+dato ha eta INFINITA**. Task history: `doc/TASK_HISTORY/2026-09-25_rampa1-eta-infinita.md`,
+committato **prima**.)*
+
+```
+occorrenze di `eta` nel simulatore   17   (11 letture, 6 scritture)
+righe attese dal guardiano           [3419, 3684, 4976]     TUTTE TROVATE
+trovate e NON attese                 [1605, 2720, 2723, 2747, 2752, 6022, 6178, 9332]
+```
+
+> ### ✅ **IL GUARDIANO AVEVA RAGIONE SULLA FISICA.** `:3419` *(il torque pesato)* e `:3684`
+> ### *(`_pesi`)* sono **le uniche due letture che USANO `eta` in una legge**; `:4976` l'unico
+> ### incremento. **Nessuna delle due è una riduzione: `+inf` non ha niente da rompere.**
+
+Le altre otto righe sono l'**inizializzazione** (`:1605`), la **crescita degli array** alla mitosi
+e allo Schwinger (`:2720`, `:2723`, `:6022`, `:6178`), **la scrittura della cura 4** (`:2747`,
+`:2752` — il sito da cambiare) e **una STATISTICA DIAGNOSTICA** (`:9332`).
+
+## ⚠ E LA VERIFICA HA TROVATO UNA COSA CHE IL MIO STRUMENTO NON HA CLASSIFICATO
+
+`:9332` è `cols['eta_min'], cols['eta_max'], cols['eta_mean'], _ = _stat(net.eta[:n] ...)`.
+**È una riduzione**, e il mio euristico cerca `mean(`, `sum(`, `median(`… mentre lì c’è
+**`_stat(`**. **Con `eta = inf` quella colonna del CSV diventa `inf`** — e **un CSV è il dato**
+(`P6`), non un log: va **adattata e dichiarata**, non lasciata stampare `inf`.
+
+> **Il limite del mio strumento — «la riduzione si cerca SULLA STESSA RIGA» — si è manifestato
+> al primo uso.** L'avevo dichiarato **prima** di leggerne l'esito, e è la ragione per cui la
+> tabella si legge riga per riga invece di fidarsi del conteggio `CON UNA RIDUZIONE: 0`.
+> **Un conteggio che dice zero non dice «non ce ne sono»: dice «il mio filtro non ne ha visti».**
+
+**NEGLI STRUMENTI:** `287` occorrenze di `eta`, `14` con una riduzione sulla stessa riga.
+**Non rompono la fisica: rompono i REFERTI**, e un referto che stampa `inf` è un **verdetto
+vacuo** — la famiglia già catalogata del `PASS` su `inf`.
+
+## PERCHÉ LA STRADA (3) È UNA CURA E NON UN TRUCCO
+
+*«Maturo»* non è un **valore** di `eta`: è una **proprietà** — il vuoto **c'era già**. `+inf`
+è l'unico modo di dirlo **senza un numero e senza un array**: non è una soglia grande, è
+*«nessun tempo di accensione»*. **E TOGLIE codice invece di aggiungerlo** (`STANDARD 10`):
+sparisce la chiamata a `_tempo_rampa()` alla semina **e le sue due diramazioni**.
