@@ -1948,6 +1948,33 @@ BRACCIO DI CONTROLLO DI `P-GONFIA`:
 **LE ASSUNZIONI, dichiarate:** `SCALA_AMP = 1` · pesi `exp(-d/LAM)` · **nessuna correlazione
 `RSA`**.
 
+### ❌❌ **`P2` È FALLITA DI `×4`** — registrata così da Luca, **non come «da spiegare»** *(2026-09-25)*
+
+**Misurato a campo MATURO** *(`CURA 4` ON, sigillo `A4`)*:
+
+| | previsto | misurato | |
+|---|--:|--:|---|
+| **contrasto `I_massa / I_vuoto`** | `27` | **`6.79`** | **`×0.25`: FALLITA di `×4`** |
+| `I_vuoto` | `1.42` | **`1.69`** | **stimato BENE** |
+| `I_massa` | `≈38` *(implicito)* | **`11.45`** | **SOVRASTIMATO di `~×3.3`** |
+| **`P3` (`Lam`)** | `5` | **`2.16`** | `×0.43`: **dentro il fattore `2`, TIENE** |
+
+> ### **LA CAUSA, ed è di Luca, non mia:** *«ho sovrastimato `I_massa` assumendo NODI INTERNI;
+> ### le regioni sono QUASI SOLO BORDO.»*
+>
+> **E il dato che lo conferma era già nel referto del passo zero, nel PROFILO PER GUSCI:**
+> con `1` nodo al centro e `~80` al primo guscio su `~411` totali, **quasi tutta la regione sta
+> a distanza `2` dal nucleo** — `3`-`4` gusci in `(a)`, `2`-`3` in `(b)`.
+> **Un nodo di bordo ha meno vicini coerenti, quindi meno interferenza costruttiva.**
+>
+> ### **IL RISULTATO FISICO, detto come va detto: le masse sono `~7` volte più luminose del
+> ### vuoto. SI DISTINGUONO, MA NON DI MOLTO.**
+> **Non è «da spiegare»: è spiegato, e la previsione è sbagliata di un fattore `4`.**
+
+**⚠ E LA PROVENIENZA RESTA QUELLA DICHIARATA:** queste previsioni vengono **dal mandato**, non le
+ho derivate io. **Ma la CAUSA del fallimento è un'assunzione geometrica**, e quell'assunzione
+— *«nodi interni»* — **era falsificabile dal profilo per gusci, che avevo già misurato**.
+
 > **⚠ E UNA DICHIARAZIONE DI PROVENIENZA, perche' conta per come si legge un errore:
 > QUESTE PREVISIONI VENGONO DAL MANDATO, NON LE HO DERIVATE IO.** Le committo come sono, con le
 > loro assunzioni, **e le verifico al passo zero**. Se sbagliassi a rivendicarle come mie, un

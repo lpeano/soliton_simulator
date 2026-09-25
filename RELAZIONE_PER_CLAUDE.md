@@ -16755,3 +16755,29 @@ scuotimento e senza memoria del moto**, per «invecchiare» la rete.
 **L'altro sito trovato, `:6846`, NON è un difetto:** è **il passo completo**, interrotto dalle
 assegnazioni del cronometro, e il commento di quella riga lo dice. **Il criterio che li distingue
 è cablato in `_passo.soli()`**, non deciso a occhio.
+
+
+---
+
+# ❌❌ **`P2` È FALLITA DI `×4`** — registrata come tale, non come «da spiegare» *(Luca, 2026-09-25)*
+
+| | previsto | misurato | |
+|---|--:|--:|---|
+| contrasto `I_massa/I_vuoto` | `27` | **`6.79`** | **`×0.25`: FALLITA di `×4`** |
+| `I_vuoto` | `1.42` | **`1.69`** | **stimato BENE** |
+| `I_massa` | `≈38` | **`11.45`** | **SOVRASTIMATO di `~×3.3`** |
+| `P3` (`Lam`) | `5` | **`2.16`** | **tiene**, `×0.43` |
+
+> ### **LA CAUSA È DI LUCA:** *«ho sovrastimato `I_massa` assumendo NODI INTERNI; le regioni sono
+> ### QUASI SOLO BORDO.»*
+>
+> **E il dato che lo conferma era GIÀ nel mio referto del passo zero**, nel profilo per gusci:
+> `1` nodo al centro, `~80` al primo guscio su `~411`, **`3`-`4` gusci in tutto**. **Quasi tutta
+> la regione sta a distanza `2` dal nucleo.** Avevo misurato l'assunzione che falsificava la
+> previsione, **e non ho collegato le due cose.**
+>
+> ### **IL RISULTATO, detto come va detto: le masse sono `~7` volte più luminose del vuoto. SI
+> ### DISTINGUONO, MA NON DI MOLTO.**
+
+**✅ E `P3` TIENE**, dopo essere stata *«non confrontabile»* a campo spento: `2.16` contro `5`,
+**dentro il fattore `2`.**
