@@ -43,21 +43,12 @@ DEST = os.path.join(_QUI, "_sig_driver_accende")
 ESCLUSE = {
     "FASE_2PI": "NON e' approvata: la sua prova la BOCCIA (`Z127`, `2/4`, `E1` non passa -- "
                 "mitosi `62` -> `1` evento). Il driver NON deve accenderla.",
-    # ⛔ `SEMINA_LAM` E' APPROVATA, e questa NON e' un'esclusione per merito: e' per
-    #   INCOMPATIBILITA' MISURATA con la scena di DEFAULT del driver, ed e' la verifica che
-    #   Luca ha chiesto nello stesso mandato in cui ha deciso `NUDA = CAMPAGNA`.
-    #   MISURATO: `semina(900)` in raggio `4.0` con `SEMINA_LAM` acceso **RIFIUTA**, e la
-    #   saturazione vera e' **455** nodi. Quindi accenderla nel driver **romperebbe ogni scena
-    #   che semina il vuoto di default** -- e non si aggira con un numero, perche' la capienza
-    #   DIPENDE DAL SEME (misurato: 12807/12783/12812/12790 su quattro semi).
-    #   **E' compatibile con la scena `(ii)`, che semina con `--nodi 0` e costruisce il vuoto
-    #   da se' fino a SATURAZIONE.**
-    #   ⚠ **LA DECISIONE NON E' MIA:** il criterio `S5` qui sotto MISURA il conflitto e lo
-    #   mette nel referto, invece di nasconderlo dietro un'esclusione silenziosa.
-    "SEMINA_LAM": "APPROVATA, ma la scena di DEFAULT del driver RIFIUTA: `900` nodi in raggio "
-                  "`4.0` contro una saturazione vera di `455`. Compatibile SOLO con la scena "
-                  "`(ii)` a `--nodi 0`. **Non e' un'esclusione per merito: e' un conflitto di "
-                  "scena, e va deciso.**",
+    # ✅ `SEMINA_LAM` E' USCITA DALLE ESCLUSE il 2026-09-25 (decisione di Luca, SCENA-1
+    #   strada (1)): il vuoto di default del driver e' diventato la SATURAZIONE
+    #   (`semina(-1)`, nessun numero), e le scene che seminano masse sopra il vuoto
+    #   RIFIUTANO di partire dicendolo (`A9`) invece di adattarsi in silenzio.
+    #   **Il criterio `S5` verifica la compatibilita' a ogni corsa**, e se un giorno
+    #   tornasse incompatibile lo direbbe.
 }
 
 # Le DUE invocazioni, e la differenza fra loro e' il punto di questo sigillo:

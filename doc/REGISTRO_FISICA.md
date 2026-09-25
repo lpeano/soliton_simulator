@@ -767,6 +767,16 @@ LOCALI** e il flag di modulo restava `False`.
 **⛔ E RESTA IN CODA:** i sigilli di `CURA 4` e `CURA 5` **vanno rifatti passando dal CLI**,
 altrimenti quel percorso resta non provato.
 
+### ➕ `SEMINA_LAM` IN `_applica_flag`: il vuoto di default diventa la SATURAZIONE *(SCENA-1, 2026-09-25)*
+
+```
+net.semina(-1 if SEMINA_LAM else a.nodi)
+```
+
+**`-1` non è un numero: è il sentinella della SATURAZIONE**, e il numero di nodi lo decide la
+**geometria**. **A flag spento il comportamento è quello di prima** *(`a.nodi`)*, perché senza
+distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifiutando `n < 0`.
+
 ### ➕ `--mitosi-2lam` in `_cli` / `_applica_flag` *(CURA 5, 2026-09-25)*
 
 | flag | default | byte-inerte a default? |
@@ -2486,6 +2496,45 @@ chiesto, senza dirlo)*.
 
 `_semina_masse_coerenti` chiama `net.semina` **una sola volta, su rete vuota** *(la scena RIFIUTA se `net.n` non è zero)*, quindi il default `maturi=None` la classifica **iniziale** e i suoi nodi nascono **maturi**. **È la condizione che rende misurabile `S9` al passo zero**, che oggi non lo è.
 
+### ✅✅ `SCENA-1`, STRADA (1): **IL VUOTO DI DEFAULT E' LA SATURAZIONE, E `SEMINA_LAM` E' OBBLIGATORIA** *(Luca, 2026-09-25)*
+
+```
+PRIMA   net.semina(a.nodi)          con `a.nodi = SEME_INIZIALE = 900` in raggio 4.0
+        -> con `SEMINA_LAM` RIFIUTA: la saturazione vera e' 455
+DOPO    net.semina(-1 if SEMINA_LAM else a.nodi)
+        -> LA SATURAZIONE, senza un numero: **il numero lo decide la GEOMETRIA**
+```
+
+> ### **E NON SI POTEVA AGGIRARE CON UN NUMERO**, perché **la capienza DIPENDE DAL SEME**
+> *(misurato: `12807/12783/12812/12790`)*. **Scegliere `455` avrebbe fatto rifiutare i semi più
+> poveri** — l'errore già preso il 2026-09-25.
+
+**⚠ SOLO a flag ACCESO:** a flag spento **la saturazione non esiste** *(senza distanza minima non
+c'è un limite)*, e `semina` **lo dice da sé rifiutando `n < 0`**.
+
+**⚠ E IL VUOTO DELL'`import` RESTA A `SEME_INIZIALE`:** lì `SEMINA_LAM` è ancora `False` *(i flag
+si applicano DOPO, in `_applica_flag`)*, e **la cura del mondo del 2026-09-21 ha già stabilito che
+quel vuoto viene RICOSTRUITO quando i flag sono noti.** Cambiarlo lì significherebbe **deciderlo
+prima di sapere con quali flag si gira.**
+
+### ⛔ LE SCENE CHE SEMINANO MASSE SOPRA IL VUOTO SONO **DI EPOCA PRE-`A13`**
+
+**`_massa` RIFIUTA con `SEMINA_LAM` acceso, e lo DICE** *(`A9`)*: **non si adatta in silenzio.**
+
+> **PERCHÉ, misurato:** `_massa` chiede `n` nodi in un raggio **scelto per la scena**, e quei
+> raggi vengono dall'epoca in cui **una distanza sotto `LAM` era ammessa**. Il caso più chiaro:
+> `_semina_n_masse` chiede **`497` nodi in raggio `0.7 = 0.875 LAM`, dove ce ne stanno `5`** —
+> **rapporto `104`**.
+> **Non è una scena da adattare: è una scena di un'altra fisica.**
+
+**La scena `MASSE-COERENTI` — la scena `(ii)` — NON passa da `_massa`:** le sue masse sono
+**regioni a fase coerente di un vuoto solo**, e **non aggiungono nodi**. **È la scena dell'epoca
+`A13`.**
+
+**✅ `SEMINA_LAM` È USCITA DALLE `ESCLUSE`** del sigillo del driver, ed è **obbligatoria**:
+`NUDA = CAMPAGNA`. **Il criterio `S5` verifica la compatibilità a ogni corsa**, quindi se un
+giorno tornasse incompatibile **lo direbbe da sé.**
+
 <!-- SCHEDA nome=invarianti funzioni=verifica_invarianti flag=INVARIANTI,DOMINI -->
 
 # ⑩ GLI INVARIANTI DI DOMINIO — **`C5`**
@@ -3016,7 +3065,7 @@ spostamento ILLIMITATO**, che è la firma di `A11`.
 > sarebbe falso: `cosh(x) ≥ 1` sempre, quindi `E[Δu] ≥ 0` **sempre**. **Cambia l'ORDINE, non il
 > segno.**
 
-<!-- SCHEDA nome=scena-masse-coerenti funzioni=_semina_masse_coerenti,esegui_headless flag=_MC_VIDEO,TESTS,MASSE-COERENTI -->
+<!-- SCHEDA nome=scena-masse-coerenti funzioni=_semina_masse_coerenti,esegui_headless,_massa flag=_MC_VIDEO,TESTS,MASSE-COERENTI,SEMINA_LAM -->
 
 # ③ `scena-masse-coerenti` — **LA SCENA `(ii)`: UN VUOTO SOLO, E LE MASSE SONO REGIONI**
 

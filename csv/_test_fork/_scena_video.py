@@ -248,6 +248,13 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--
             # al passo 120 il peso d'arco vale `5.76e-04` del maturo. E SEPARA I DUE RUOLI DI
             # `TAU_A`, che restava insieme vita media della memoria spinoriale E tempo di
             # accensione di una sorgente. Sigillo 7/7, un processo per braccio.
+            # [SEMINA_LAM, SCENA-1 strada (1), 2026-09-25] `A13` ALLA SEMINA, APPROVATA DA
+            # LUCA e ora OBBLIGATORIA: il vuoto nasce con distanza minima `LAM`. Il vuoto di
+            # default e' passato alla SATURAZIONE (`semina(-1)`, nessun numero), e le scene
+            # che seminano masse SOPRA il vuoto (`N-MASSE`, `TERRA-BUCONERO`, ...) sono di
+            # EPOCA PRE-`A13`: con questo flag RIFIUTANO di partire, dicendolo (`A9`).
+            # La scena `MASSE-COERENTI` (la scena `(ii)`) NON passa da `_massa` e va.
+            "--semina-lam",
             "--semina-matura",
             # [CURA 5, 2026-09-25] `A13` ALLA NASCITA, APPROVATA DA LUCA: un arco si divide
             # SOLO se `d >= 2 LAM`. `_sm_lund_mitosi` passa da `3.5`-`4.0` a `0.0` ESATTO: la

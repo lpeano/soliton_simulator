@@ -6862,6 +6862,10 @@ class Rete:
 
 
 net = Rete()
+# [SCENA-1] il vuoto dell'`import` resta a `SEME_INIZIALE`: qui `SEMINA_LAM` e' ancora `False`
+#   (i flag si applicano DOPO, in `_applica_flag`), e la cura del mondo del 2026-09-21 ha gia'
+#   stabilito che questo vuoto viene RICOSTRUITO quando i flag sono noti. Cambiarlo qui
+#   significherebbe deciderlo prima di sapere con quali flag si gira.
 net.semina(SEME_INIZIALE)
 
 # ============================================================================
@@ -6985,7 +6989,32 @@ test = dict(nome=None, fase=0, timer=0, cap="", dati={})
 
 def _massa(cx, r, n, fase, etichetta=None):
     """crea un dominio coerente e ne REGISTRA la coorte, per poterlo misurare.
-    cx puo' essere un numero (coordinata x, centro sull'asse) o una terna/array (x,y,z)."""
+    cx puo' essere un numero (coordinata x, centro sull'asse) o una terna/array (x,y,z).
+
+    ⛔ **LE SCENE CHE SEMINANO MASSE SOPRA IL VUOTO SONO DI EPOCA PRE-`A13`**
+    *(decisione di Luca, 2026-09-25)*. Con `SEMINA_LAM` acceso **RIFIUTANO DI PARTIRE, e lo
+    DICONO** (`A9`): **non si adattano in silenzio.**
+
+    **PERCHE', ed e' misurato:** `_massa` chiede `n` nodi in un raggio `r` **scelto per la
+    scena**, e quei raggi vengono dall'epoca in cui **una distanza sotto `LAM` era ammessa**.
+    Il caso piu' chiaro: `_semina_n_masse` chiede `497` nodi in raggio `0.7 = 0.875 LAM`,
+    **dove ce ne stanno `5`** — un rapporto di **`104`**. **Non e' una scena da adattare: e'
+    una scena di un'altra fisica.**
+
+    **La scena `(ii)` (`MASSE-COERENTI`) NON passa da qui**: le sue masse sono **regioni a fase
+    coerente di un vuoto solo**, e non aggiungono nodi.
+    """
+    if SEMINA_LAM:
+        raise SystemExit(
+            "[massa] SCENA DI EPOCA PRE-`A13`: `_massa` semina %s nodi in un raggio scelto per\n"
+            "  la scena, e quei raggi vengono dall'epoca in cui una distanza sotto `LAM` era\n"
+            "  ammessa. Con `SEMINA_LAM` acceso questa scena NON PARTE, e NON si adatta in\n"
+            "  silenzio (`A9`).\n"
+            "  IL CASO PIU' CHIARO, misurato: `N-MASSE` chiede 497 nodi in raggio 0.7 = 0.875 LAM,\n"
+            "  dove ce ne stanno 5. Rapporto 104.\n"
+            "  CHE FARE: usare la scena `MASSE-COERENTI` (la scena `(ii)`), dove le masse sono\n"
+            "  REGIONI A FASE COERENTE di un vuoto solo e non aggiungono nodi; oppure spegnere\n"
+            "  `--semina-lam` e DICHIARARE che il run e' di epoca pre-`A13`." % n)
     base = net.n
     centro = (float(cx), 0.0, 0.0) if np.isscalar(cx) else tuple(np.asarray(cx, float)[:3])
     net.semina(n, raggio=r, centro=centro, fase=fase)
@@ -8455,7 +8484,14 @@ def _applica_flag(a):
     #   partenza di OGNI run -- che e' l'opposto di cio' che questa cura vuole. Restano dov'erano.
     #   L'ASIMMETRIA E' DICHIARATA, non subita.
     net = Rete(a.seed if a.seed is not None else 42)
-    net.semina(a.nodi)
+    # [SCENA-1, strada (1), decisione di Luca 2026-09-25] IL VUOTO DI DEFAULT E' LA
+    #   SATURAZIONE, senza un numero. Con `SEMINA_LAM` acceso, chiedere `SEME_INIZIALE = 900`
+    #   nodi in raggio `4.0` **RIFIUTA**: la saturazione vera e' `455`. E non si aggira con un
+    #   numero, perche' **la capienza DIPENDE DAL SEME** (misurato: 12807/12783/12812/12790).
+    #   `semina(-1)` chiede la SATURAZIONE: il numero lo decide la GEOMETRIA.
+    #   ⚠ SOLO a flag ACCESO: a flag spento la saturazione NON ESISTE (senza distanza minima
+    #     non c'e' un limite), e `semina` lo dice da se' rifiutando `n < 0`.
+    net.semina(-1 if SEMINA_LAM else a.nodi)
     if a.seed is not None or a.nodi != SEME_INIZIALE:
         for _ in range(300): net.step()
         net.rilassa_disegno(30)
