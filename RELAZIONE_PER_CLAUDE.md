@@ -17430,3 +17430,89 @@ frazione di DIVISIONI con `d_arco < 2 LAM`:                    0.2277
 **Che nel DISEGNO i nati nascono sovrapposti** *(`min = 0.0000 LAM`, e lo Schwinger a `0.0000` su
 tutti e 44)*. **È un fatto sul disegno**, e va letto così: **il disegno mette nodi nello stesso
 punto.** *(Se e quanto questo conti dipende da chi legge `pos`, cioè da `A3`.)*
+
+
+---
+
+# ✅ `CURA 5` — **SIGILLO 8/8 PASS.** `A13` alla nascita è cablato *(2026-09-25)*
+
+*(`csv/_seal_fork/_sigillo_cura5_a13nascita.py`, referto in `csv/_seal_fork/_sig_cura5/`,
+scena `(ii)` `(b)`, **passo PIENO**, campo MATURO, freno ON, `300` passi, **2 semi**, un processo
+per braccio. I criteri erano fissati nel task history `832653e`, **antenato** del commit del
+codice.)*
+
+| | criterio | numeri |
+|---|---|---|
+| **`C1`** | flag SPENTO = **byte-identico** al codice precedente | **`0` campi diversi**, nessuno presente in uno solo |
+| **`C2`** | ON: `_sm_trd_mitosi == 0` **e** `_sm_lund_mitosi == 0` | **`[0, 0]` e `[0.0, 0.0]`, ESATTO.** OFF: `[20, 22]` e `[3.548, 4.041]` |
+| **`C3`** | eventi `~77 %` di quelli a flag spento | eventi ON **`29.0`** contro OFF **`39.0`** → **`0.7436`** *(atteso `0.7723`)* |
+| **`C4`** | nessun figlio con `d/2 < LAM` | `201` valori, **`0` sotto `LAM`**, min `1.0376 LAM`. OFF: **`63` su `279`** |
+| **`C5`** | il figlio è a `>= LAM` da **tutti** lungo gli archi | `95` nati, **`0` sotto**, min `1.0000 LAM` esatto |
+| **`C6`** | lo Schwinger è invariato *(dichiarativo)* | ON `(2, 0.243)` `(2, 0.408)` · OFF `(8, 0.836)` `(14, 3.023)` |
+| **`C7`** | CONTROLLO POSITIVO: i bracci **devono** differire | **`66` campi diversi** |
+| **`C8`** | CASO CHE DEVE FALLIRE | `C2` sul braccio OFF **FALLISCE**, come deve |
+
+```
+NODI:  OFF 4343.0 -> ON 4322.0        nati da mitosi:  OFF 46.5 -> ON 33.5
+candidati NEGATI dalla condizione:    13 su 46.5
+```
+
+> ### ✅ **LA CURA FA ESATTAMENTE CIÒ CHE DICE: `_sm_lund_mitosi` passa da `3.5`-`4.0` a `0.0`
+> ### ESATTO. La mitosi non fabbrica più lunghezza.**
+
+## ❗ TRE COSE CHE IL SIGILLO HA FATTO USCIRE, E DUE NON LE AVEVO PREVISTE
+
+### ⚠ `C5` PASSA IN **ENTRAMBI** I BRACCI: **non discrimina**
+
+```
+ON : 95 nati,  0 sotto LAM        OFF: 137 nati,  0 sotto LAM
+```
+
+**A flag SPENTO l'argomento era GIÀ vero** — e la ragione è ovvia **a posteriori**: ci arrivava
+**per TRONCAMENTO**, cioè `_nasce` portava i figli a `LAM`. **Il criterio è soddisfatto nei due
+casi, ma per ragioni opposte:**
+
+| | come si arriva a `>= LAM` |
+|---|---|
+| **OFF** | **fabbricando lunghezza** *(`_sm_lund_mitosi = 3.5`-`4.0`)* |
+| **ON** | **scegliendo l'arco** *(`_sm_lund_mitosi = 0.0`)* |
+
+> **`C5` verifica che `A13` sia rispettato, e lo era già. Ciò che la cura cambia è CHI lo
+> rispetta: prima il presidio, ora la legge.** **Un criterio che passa in entrambi i bracci non
+> è inutile — dice che l'invariante tiene — ma NON è la prova della cura**, e va letto così.
+> *(La prova della cura è `C2`, e quello discrimina in modo esatto.)*
+
+### ✅ LO SCHWINGER **MIGLIORA, INDIRETTAMENTE** — e non l'avevo previsto
+
+```
+_sm_trd_schwinger    OFF  8, 14        ON  2, 2          da 4 a 7 volte meno
+_sm_lund_schwinger   OFF  0.836, 3.023 ON  0.243, 0.408
+```
+
+**La cura non tocca lo Schwinger** *(la condizione sta nella maschera `ok` della DIVISIONE, e il
+ramo Schwinger non la attraversa)*, **ma meno divisioni → meno archi corti → lo Schwinger trova
+meno archi sotto `LAM` da cui partire.**
+
+> **È un effetto di SECONDO ordine, e va detto come tale: non è una cura dello Schwinger.** La sua
+> `d` viene ancora **dal disegno** *(`0.5·|pos[aa] − pos[bb]|`)*, e **`A3` resta aperta.**
+
+### ⚠ `C3`: `0.7436` CONTRO `0.7723`, DENTRO LA TOLLERANZA **MA LA TOLLERANZA È LARGA**
+
+Lo **spread fra due semi nel braccio OFF è `12` eventi su `39`**, cioè il **`31 %`**. La
+tolleranza usata *(`max(spread relativo, 0.10)`)* vale quindi **`0.377`**, e **con una tolleranza
+così larga il criterio passerebbe anche a `0.40` o a `1.10`.**
+
+> **`C3` È PASSATO, MA NON HA DISCRIMINATO MOLTO**, e lo dico invece di contarlo come una
+> conferma forte. **Con `2` semi non si può fare meglio** *(par.0-ter: servono `>= 4`)*, e **il
+> valore centrale `0.7436` è comunque a `3.7` punti percentuali da quello atteso**, che è un buon
+> accordo. **Ma è l'accordo del valore, non la stretta del criterio.**
+
+## ⛔ E IL RISCHIO DICHIARATO PRIMA **NON È ESCLUSO**
+
+Nel task history avevo scritto: *«il grafo si contrae, quindi gli archi scendono sotto `2 LAM` e
+la condizione diventa via via più difficile — il `77 %` è misurato su `300` passi; a `1000`
+potrebbe essere molto più basso»*.
+
+> ### **`300` PASSI NON LO ESCLUDONO, e il sigillo non pretende di averlo escluso.**
+> **La verifica richiede una corsa lunga, e `CONTAGIO` la vieta finché l'inerzia non è curata.**
+> **Le due cose sono in sequenza, non in parallelo.**

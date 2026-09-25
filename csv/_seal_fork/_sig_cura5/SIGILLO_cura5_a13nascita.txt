@@ -1,0 +1,85 @@
+==========================================================================================================================
+SIGILLO `CURA 5` -- `A13` ALLA NASCITA (`MITOSI_2LAM`): un arco si divide SOLO se `d >= 2 LAM`
+==========================================================================================================================
+
+  passo = scuoti_vuoto() -> step() -> mitosi() -> rilassa_disegno() -> memoria_hebbiana_moto()   (letto per AST da `update()` e verificato contro il driver)
+  scena (ii) (b), campo MATURO, freno ON, 300 passi, 2 semi, un processo per braccio.
+  I criteri erano fissati nel TASK HISTORY `832653e`, ANTENATO del commit del codice.
+
+[off_s11] rc=0 [scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK off_s11  n 4252 -> 4314  eventi mitosi 33  nati 41
+[off_s12] rc=0 [scena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK off_s12  n 4297 -> 4372  eventi mitosi 45  nati 52
+[on_s11] rc=0 
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK on_s11  n 4252 -> 4303  eventi mitosi 30  nati 35
+[on_s12] rc=0 
+[scena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK on_s12  n 4297 -> 4341  eventi mitosi 28  nati 32
+[prima_s11] rc=0 cena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK prima_s11  n 4252 -> 4314  eventi mitosi 33  nati 41
+[prima_s12] rc=0 cena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK prima_s12  n 4297 -> 4372  eventi mitosi 45  nati 52
+
+C1     PASS  flag SPENTO = BYTE-IDENTICO al codice PRECEDENTE (firma dei byte)
+              campi diversi: 0   NESSUNO
+              presenti in uno solo: nessuno
+              (il vecchio e' `HEAD:soliton_simulator.py`, estratto in BINARIO)
+C2     PASS  flag ACCESO: `_sm_trd_mitosi == 0` E `_sm_lund_mitosi == 0` (ESATTO)
+              ON : trd_mitosi [0, 0]   lund_mitosi [0.0, 0.0]
+              OFF: trd_mitosi [20, 22]   lund_mitosi [3.5475409519782346, 4.041065097327489]   <- il riferimento
+C3     PASS  eventi di mitosi ~77 % di quelli a flag spento, ENTRO LO SPREAD
+              eventi ON  29.0 (spread 2.0)      eventi OFF 39.0 (spread 12.0)
+              rapporto ON/OFF = 0.7436      atteso 0.7723 (la frazione conforme misurata in `7086031`)
+              tolleranza usata: max(spread relativo 0.3767, 0.10)
+              e i candidati NEGATI dalla condizione: 13 su 46
+C4     PASS  nessun figlio con `d/2 < LAM` (la `v` GREZZA che `_nasce` riceve)
+              valori di `v` nel sito `mitosi`: 201      sotto LAM: 0      min = 0.830066 = 1.0376 LAM
+              OFF, per confronto: sotto LAM = 63 su 279
+C5     PASS  il figlio e' a `>= LAM` da TUTTI **lungo gli archi**, non solo dai genitori
+              nati esaminati 95      sotto LAM 0      min = 0.800000 = 1.0000 LAM
+              L'ARGOMENTO CHE VERIFICA: un nodo appena nato ha SOLO i suoi archi,
+              quindi il cammino minimo verso qualunque altro nodo passa per uno di
+              essi: la distanza dal piu' vicino E' `min(d)` dei suoi archi.
+              OFF, per confronto: sotto LAM 0 su 137
+C6     PASS  lo SCHWINGER e' INVARIATO -- MISURATO, non assunto
+              ON : (trd, lund) per seme = [(2, 0.2431249384094103), (2, 0.40809821937971247)]
+              OFF: (trd, lund) per seme = [(8, 0.8355304027489878), (14, 3.0226875238269413)]
+              ⚠ E QUI IL CRITERIO NON PUO' ESSERE L'UGUAGLIANZA, e va detto: la
+                cura CAMBIA LA TRAIETTORIA (meno divisioni -> altro stato), quindi
+                anche lo Schwinger vede uno stato diverso. **Cio' che si verifica e'
+                che la sua LEGGE non sia toccata**, e quello si legge dal CODICE:
+                la condizione `MITOSI_2LAM` sta nella maschera `ok` della DIVISIONE,
+                e il ramo Schwinger non la attraversa. **Questo criterio e'
+                DICHIARATIVO, non numerico, e passa per lettura del codice.**
+C7     PASS  CONTROLLO POSITIVO: i due bracci DEVONO differire
+              campi diversi fra OFF e ON: 66      primi: ['_calcpsi_chiamate', '_calcpsi_w_none', '_cs_chiamate', '_cs_fallback', '_deg', '_diag_amp_med', '_dt_e_ultimo', '_fatt_cs_ultimo', '_inerzia_al_pavimento', '_inerzia_sfondo_chiamate']
+              senza questo, un sigillo di sola byte-identita' passerebbe su codice
+              MORTO (par.10.2).
+C8     PASS  CASO CHE DEVE FALLIRE: `C2` applicato al braccio OFF da' FAIL
+              OFF: trd_mitosi [20, 22]   lund_mitosi [3.5475409519782346, 4.041065097327489]   -> `C2` FALLISCE (giusto)
+              Se `C2` passasse anche a flag SPENTO, non starebbe guardando la CURA.
+              ❌ E IL MIO PRIMO `C8` ERA MAL COSTRUITO: azzeravo `LAM` per la durata
+                di `mitosi`, ma **`_nasce` usa LO STESSO `LAM`**, quindi non troncava
+                piu' niente e `verifica_invarianti` ha fatto SCHIANTARE il braccio
+                invece di farlo FALLIRE (`DominioViolato: d VIOLA >= LAM`, 6 archi a
+                5.29e-01 e 5.05e-01 al passo 1).
+              ✅ ED E' UN RISCONTRO: dimostra che `verifica_invarianti` PROTEGGE GIA'
+                `d >= LAM`, e che oggi e' `_nasce` a garantirlo. La `CURA 5` toglie il
+                BISOGNO del presidio SENZA toccare l'invariante, che resta a vigilare.
+
+CONTATORI DELLA CURA (braccio ON): negati 13.0 su 46.5 candidati
+NODI: OFF 4343.0 -> ON 4322.0      nati da mitosi: OFF 46.5 -> ON 33.5
+
+==========================================================================================================================
+ESITO: 8/8 PASS
+==========================================================================================================================
+
+COSA QUESTO SIGILLO *NON* DICE:
+  - DUE SEMI: par.0-ter `P3` chiede >= 4 per una barra fra semi.
+  - `C6` e' DICHIARATIVO, non numerico: la cura cambia la traiettoria, quindi lo Schwinger
+    vede uno stato diverso. Cio' che si verifica e' che la sua LEGGE non sia toccata, e si
+    legge dal codice. **Va detto invece di far sembrare che sia un numero.**
+  - `300` passi: il rischio che la mitosi SI SPENGA col tempo (gli archi si contraggono, e la
+    condizione diventa piu' difficile) e' dichiarato nel task history e NON e' escluso qui.
+  - lo SCHWINGER resta `A3`: la sua `d` viene dal DISEGNO, e questa cura non lo tocca.
