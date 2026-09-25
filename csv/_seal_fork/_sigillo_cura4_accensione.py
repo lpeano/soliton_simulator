@@ -216,7 +216,7 @@ def braccio(nome, flag, maturi=None, sorgente=FIGLIO, sim=None, argv=None):
              "OPZ = %r" % OPZ, "FLAGNOME = %r" % FLAGNOME, ""]
     src = chr(10).join(testa) + sorgente
     p = os.path.join(TMP, "_br_" + nome + ".py")
-    io.open(p, "w", encoding="utf-8", newline="\\n").write(src)
+    io.open(p, "w", encoding="utf-8", newline=chr(10)).write(src)
     return subprocess.run([sys.executable, p], cwd=RADICE, capture_output=True,
                           text=True, encoding="utf-8", errors="replace")
 
