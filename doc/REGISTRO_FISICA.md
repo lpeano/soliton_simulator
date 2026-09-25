@@ -741,6 +741,14 @@ avvertimento.**
 
 **La legge sta nella scheda `accensione-campo`.**
 
+### ➕ `--mitosi-2lam` in `_cli` / `_applica_flag` *(CURA 5, 2026-09-25)*
+
+| flag | default | byte-inerte a default? |
+|---|---|---|
+| **`--mitosi-2lam`** | **OFF** | **sì**: la condizione è un `and` in più su una maschera, e a flag spento non si valuta. Lo prova `C1` |
+
+**La legge sta nella scheda `mitosi-schwinger`.**
+
 <!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,_dphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
 # ⑥ LA FASE `φ` E IL SUO DOMINIO — **`semina` / `_w4` / `_w8` / `step`**
 
@@ -941,7 +949,7 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 
 `semina(..., maturi=None)` decide se i nodi nuovi nascono **maturi** *(`ramp = 1`)* o con la rampa. **Default: maturi se la rete era VUOTA** *(`base == 0`)*, cioè se questa semina **è** l'universo. **La legge sta nella scheda `accensione-campo`.**
 
-<!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME -->
+<!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
 # ⑦ LA MITOSI E SCHWINGER — **`mitosi()`**
 
 > **STATO: `DIFETTOSA`.** Difetti **`D35`** *(l'antifase della coppia)* e **`D33`** *(la
@@ -1102,6 +1110,43 @@ d0new = self._nasce(d0new, 'mitosi', 0, 1)   # d0new e' GIA' concat([d0h, d0h])
 da `pos`, non da `d`** *(voce `A3` della coda)*.
 
 **La legge dei contatori sta nella scheda `freno-scala-min`, con `_nasce`.**
+
+
+### ➕➕ `CURA 5` — **`A13` ALLA NASCITA: un arco si divide SOLO se `d >= 2 LAM`** *(Luca, 2026-09-25)*
+
+**Flag `MITOSI_2LAM`, `--mitosi-2lam`, OFF di default.** La condizione sta **nella maschera `ok`**
+di `mitosi`, accanto alla soglia di densità: **lo stesso punto dove il codice decide se un
+candidato si divide.**
+
+> ### **NON È UNA LEGGE NUOVA, ed è `STANDARD 10` applicato:**
+> ```
+> PRIMA   la mitosi divide senza guardare `d`;  `_nasce` INTERVIENE e FABBRICA lunghezza
+> DOPO    la mitosi guarda `d >= 2 LAM`;        `_nasce` non ha piu' niente da fare li'
+> ```
+> **Le leggi non aumentano: si TOGLIE l'eccezione per cui la mitosi era il solo sito capace di
+> creare una distanza sotto la scala di Planck, con un presidio che la riparava dopo.**
+
+**PERCHÉ `2 LAM` E NON UN ALTRO NUMERO:** il figlio nasce a **`d/2`** dai genitori, e **la distanza
+del sistema è quella LUNGO GLI ARCHI**, non su `pos` *(correzione di Luca)*. Quindi `A13`
+— *«sotto `LAM` non esiste una distanza»* — alla nascita **È** `d/2 >= LAM`. **Nessun numero nuovo.**
+
+**MISURATO PRIMA DELLA CURA** *(`7086031`, `279` eventi, `2` semi, `300` passi)*: il **`77.23 %`**
+delle divisioni è **già conforme**. E la mitosi **non divide a caso**: `0.2277` contro `0.2998` di
+archi corti nel grafo.
+
+**⚠ LO SCHWINGER NON È TOCCATO** *(decisione di Luca)*: la `d` dei suoi archi nuovi viene da
+`0.5·|pos[aa] − pos[bb]|`, cioè **dal DISEGNO** — **la voce `A3`**. Toccarlo qui vorrebbe dire
+curare `A3` di nascosto.
+
+**I CRITERI** *(task history `832653e`, **antenato** del commit del codice)*: `C1` byte-identità ·
+`C2` `_sm_trd_mitosi == 0` **e** `_sm_lund_mitosi == 0` · `C3` eventi `~77 %` entro lo spread ·
+`C4` nessun figlio con `d/2 < LAM` · `C5` il figlio è a `>= LAM` da **tutti** lungo gli archi ·
+`C6` Schwinger invariato · `C7` controllo positivo · `C8` **caso che deve fallire**.
+
+**⛔ IL RISCHIO DICHIARATO PRIMA:** il grafo **si contrae** *(`med d0` `−36 %`)*, quindi gli archi
+scendono sotto `2 LAM` e **la condizione diventa via via più difficile**. **Il `77 %` è misurato su
+`300` passi; a `1000` potrebbe essere molto più basso** — cioè **la cura potrebbe SPEGNERE la
+mitosi col tempo invece di regolarla.** `C3` guarda questo, e `300` passi **non lo escludono.**
 
 <!-- SCHEDA nome=torsione-spinore funzioni=_passo_spinoriale,_applica_flag flag=TW_SPINORE,SYNC_SPINORE,SPIN_LARMOR,SPIN_FEEDBACK -->
 
@@ -3016,6 +3061,13 @@ il braccio di controllo **non può leggersi `n` da solo** e lo riceve.
 frazione di archi sotto `2 LAM`)*: **non dipende dalla mitosi.**
 **Il giro resta sospeso** finché la **soglia della mitosi** non è una **legge derivata**: `3π` è
 **un numero tarato a posteriori nell'epoca 1** — vedi la scheda `mitosi-schwinger` e `SCALE-TW`.
+
+### ➕ `CURA 5` E LA SCENA `(ii)`: la cura si accende dal driver *(2026-09-25)*
+
+`--mitosi-2lam` passa da `esegui_headless` come tutti gli altri. **Nella scena `(ii)` il `77.23 %`
+delle divisioni è già conforme**, quindi la cura **toglie il `22.77 %`** — e quelle divisioni
+avvenivano **su archi corti**, cioè in regioni **diverse** dalle altre: **non è un campionamento
+uniforme**, e va tenuto presente leggendo qualunque confronto fra i due bracci.
 
 <!-- SCHEDA nome=accensione-campo funzioni=_pesi,_tempo_rampa,semina flag=SEMINA_MATURA,TAU_A,TAU_A_LOCALE -->
 

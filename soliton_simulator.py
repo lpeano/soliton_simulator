@@ -412,6 +412,36 @@ CALORE_VETTORIALE = True   # calcio termico: True=vettoriale+chirale DI DEFAULT 
                            # eccitato, phivel firmato da perc_chi). False=scalare isotropo. --calore-scal per tornare scalare
                        # rispetto a frequenze locali (invarianza per riparametrizzazione). IN VERIFICA.
                        # False = costanti fisse (comportamento precedente). Reversibile.
+MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. Approvata da Luca.
+                        # OFF di default: un interruttore alla volta (par.1).
+                        #
+                        # LA LEGGE: **un arco si divide SOLO se `d_arco >= 2 LAM`.**
+                        #
+                        # E NON E' UNA LEGGE NUOVA -- e' `A13` *(«sotto `LAM` non esiste niente:
+                        # ne' archi ne' distanze fra nodi»)* applicato al sito che non lo
+                        # applicava. Il figlio nasce a `d/2` dai genitori, e **la distanza del
+                        # sistema e' quella LUNGO GLI ARCHI, non su `pos`** (correzione di Luca,
+                        # 2026-09-25): quindi `A13` alla nascita **E'** `d/2 >= LAM`, cioe'
+                        # `d_arco >= 2 LAM`. **Nessun numero nuovo.**
+                        #
+                        # STANDARD 10, IL CONTO DELLE LEGGI -- e va nella direzione giusta:
+                        #   PRIMA  la mitosi divide senza guardare `d`; `_nasce` INTERVIENE sui
+                        #          figli e FABBRICA lunghezza (misurato: `_sm_lund_mitosi` vale
+                        #          `0.8 LAM` per evento nel caso a risposta nota);
+                        #   DOPO   la mitosi guarda `d >= 2 LAM`; `_nasce` NON HA PIU' NIENTE DA
+                        #          FARE su quel sito.
+                        # **Le leggi non aumentano: si TOGLIE l'eccezione per cui la mitosi era il
+                        # solo sito capace di creare una distanza sotto la scala di Planck, con un
+                        # presidio che la riparava dopo.**
+                        #
+                        # MISURATO PRIMA DELLA CURA (`7086031`, 279 eventi, 2 semi, 300 passi):
+                        #   il **77.23 %** delle divisioni e' GIA' conforme, il **22.77 %** no.
+                        #   E la mitosi **non divide a caso**: `0.2277` contro `0.2998` di archi
+                        #   corti nel grafo, cioe' **evita un po'** gli archi corti.
+                        #
+                        # ⚠ LO SCHWINGER **NON E' TOCCATO** (decisione di Luca): la `d` dei suoi
+                        #   archi nuovi viene da `0.5*|pos[aa]-pos[bb]|`, cioe' **dal DISEGNO**, ed
+                        #   e' la voce `A3`. Toccarlo qui vorrebbe dire curare `A3` di nascosto.
 SEMINA_MATURA = False   # [CURA 4, 2026-09-25] L'ACCENSIONE DEL CAMPO. Decisione di Luca.
                         # OFF di default: un interruttore alla volta (par.1).
                         #
@@ -5926,6 +5956,20 @@ class Rete:
         I = self._rho_sorgente()   # [FASE 5] soglia mitosi su densita' SPINORIALE (rho_spin ON / |psi|^2 OFF); limite identico
         a, b = self.i[c], self.j[c]
         ok = 0.5 * (I[a] + I[b]) >= QMIN_M * float(np.median(self.peq))
+        # [CURA 5] `A13` ALLA NASCITA: un arco si divide SOLO se `d_arco >= 2 LAM`.
+        #   Il figlio nasce a `d/2` dai genitori, quindi `d/2 >= LAM` <=> `d >= 2 LAM`.
+        #   LA CONDIZIONE VA **QUI**, accanto alla soglia di densita': e' lo STESSO punto dove il
+        #   codice decide «questo candidato si divide o no». **NON in `nasce`** (la' si decide una
+        #   PROBABILITA', e `A13` non e' una probabilita'), **NON in `_nasce`** (la' si RIPARA, e
+        #   la cura e' proprio togliere la riparazione).
+        self._g_m2l_tot = getattr(self, "_g_m2l_tot", 0) + int(np.size(c))
+        if MITOSI_2LAM and len(c):
+            _dc = np.asarray(self.d, float)[c]
+            _conforme = _dc >= 2.0 * LAM
+            self._g_m2l_negati = getattr(self, "_g_m2l_negati", 0) + int(np.sum(~_conforme))
+            self._g_m2l_dmin = min(getattr(self, "_g_m2l_dmin", float("inf")),
+                                   float(_dc.min()) if _dc.size else float("inf"))
+            ok = ok & _conforme
         self.negate += int((~ok).sum()); sel = c[ok]
         if not len(sel): return 0
         a, b = self.i[sel], self.j[sel]; m = self.n + np.arange(len(sel))
@@ -7987,6 +8031,7 @@ def _applica_flag(a):
     global SCUOTIMENTO
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
     global TAU_LUCE, RUMORE_COLORATO
+    global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe una LOCALE, inerte
     global SEMINA_MATURA   # [CURA 4] senza questo l'assegnazione sarebbe una LOCALE, inerte
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
@@ -8413,6 +8458,10 @@ def esegui_headless(a):
     # l'inquadratura R si adatta all'estensione reale dei nodi (vedi update: R = max|pos|).
     # [SCENA (ii)] `--mc-nodi 0` = SATURAZIONE (il default). Il braccio di controllo di
     # `P-GONFIA` passa qui il numero MISURATO dal braccio acceso, per avere lo STESSO `n`.
+    MITOSI_2LAM = bool(getattr(a, "mitosi_2lam", False))       # [CURA 5]
+    if MITOSI_2LAM:
+        print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` (`A13` alla "
+              "nascita). Lo Schwinger NON e' toccato.")
     SEMINA_MATURA = bool(getattr(a, "semina_matura", False))   # [CURA 4]
     if SEMINA_MATURA:
         print("[cura4] SEMINA_MATURA ON: i nodi della semina iniziale nascono MATURI, e la rampa "
@@ -8941,6 +8990,14 @@ def _cli():
     # [SCENA (ii), 2026-09-25] `0` = FINO A SATURAZIONE (il default): il numero lo decide la
     # GEOMETRIA, non un numero scelto. Il braccio di controllo di `P-GONFIA` (`SEMINA_LAM`
     # spento) passa qui il numero MISURATO dal braccio acceso, per avere lo STESSO `n`.
+    # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. OFF di default (par.1).
+    p.add_argument("--mitosi-2lam", action="store_true",
+                   help="[CURA 5] un arco si divide SOLO se `d_arco >= 2 LAM`, cioe' `A13` "
+                        "applicato alla nascita: il figlio nasce a `d/2` dai genitori, e sotto "
+                        "`LAM` non esiste una distanza. NON e' una legge nuova e non ha numeri "
+                        "nuovi; TOGLIE l'intervento di `_nasce` sui figli della mitosi. Lo "
+                        "SCHWINGER non e' toccato (resta `A3`). OFF di default: a flag spento il "
+                        "comportamento e' BYTE-IDENTICO.")
     # [CURA 4, 2026-09-25] L'ACCENSIONE DEL CAMPO. OFF di default (par.1).
     p.add_argument("--semina-matura", action="store_true",
                    help="[CURA 4] i nodi della SEMINA INIZIALE nascono MATURI (ramp = 1), e la "
