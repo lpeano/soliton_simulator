@@ -74,11 +74,39 @@ S = _iu.module_from_spec(_sp); _sp.loader.exec_module(S)
 
 S.SEMINA_LAM = True
 S.SEMINA_MATURA = True          # IL CAMPO MATURO: e' la CURA 4
+S.SCALA_MIN_PASSO = True        # come il driver (`SCALAMINPASSO = "on"`)
+S.SCALA_MIN = False             # come il driver: NON e' una cura approvata
 S.net = S.Rete(SEME)
 S.test["dati"] = {}
 S._NMASSE_VIDEO["sep"] = float(SEP)
 S._MC_VIDEO["nodi"] = 0
 S._MC_VIDEO["fasi_casuali"] = False
+
+# ============================================================================================
+# ❌❌ `net.step()` NON E' UN PASSO. IL PASSO DEL DRIVER SONO **CINQUE** CHIAMATE:
+#
+#     scuoti_vuoto(net); net.step(); net.mitosi(); net.rilassa_disegno(); net.memoria_hebbiana_moto()
+#
+#   *(`csv/_test_fork/_scena_video.py`, riga 37 e riga 394)*
+#
+# E NON E' UN DETTAGLIO: `_smp_chiudi` -- cioe' IL FRENO su `d0`, il sito `d0_passo` da cui
+#   vengono i numeri di `V8`/`V9` -- vive DENTRO `memoria_hebbiana_moto`, e il suo commento lo
+#   dice: *"`memoria_hebbiana_moto` e' l'ULTIMA chiamata del passo NEL DRIVER"*.
+#   Con il solo `net.step()` **il freno non si chiude mai**, e la rimisura non raccoglieva
+#   NESSUN CAMPIONE.
+#
+# ⚠ E TOCCA ANCHE LE ALTRE MIE MISURE DI OGGI: la traiettoria di `|tw|` di `SCALE-TW` e la
+#   corsa sui triangoli girano su un ciclo INCOMPLETO. Si rifanno con questo, e si dichiara.
+# ============================================================================================
+def passo_pieno(S, net):
+    """IL PASSO COMPLETO, nell'ordine del driver. UNA funzione, cosi' non ci sono due versioni."""
+    S.scuoti_vuoto(net)
+    net.step()
+    net.mitosi()
+    net.rilassa_disegno()
+    net.memoria_hebbiana_moto()
+
+
 S._semina_masse_coerenti()
 net = S.net
 co = S.test["dati"]["coorti"]
@@ -213,7 +241,7 @@ def misura(net, passo):
 ris = []
 for k in range(max(ISTANTI) + 1):
     if k:
-        net.step()
+        passo_pieno(S, net)
     if k in ISTANTI:
         ris.append(misura(net, k))
 io.open(os.path.join(TMPD, NOME + ".json"), "w", encoding="utf-8").write(json.dumps(ris))

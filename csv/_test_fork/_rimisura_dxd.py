@@ -132,12 +132,38 @@ S.test["dati"] = {}
 S._NMASSE_VIDEO["sep"] = float(SEP)
 S._MC_VIDEO["nodi"] = 0
 S._MC_VIDEO["fasi_casuali"] = False
+
+# ============================================================================================
+# ❌❌ `net.step()` NON E' UN PASSO. IL PASSO DEL DRIVER SONO **CINQUE** CHIAMATE:
+#
+#     scuoti_vuoto(net); net.step(); net.mitosi(); net.rilassa_disegno(); net.memoria_hebbiana_moto()
+#
+#   *(`csv/_test_fork/_scena_video.py`, riga 37 e riga 394)*
+#
+# E NON E' UN DETTAGLIO: `_smp_chiudi` -- cioe' IL FRENO su `d0`, il sito `d0_passo` da cui
+#   vengono i numeri di `V8`/`V9` -- vive DENTRO `memoria_hebbiana_moto`, e il suo commento lo
+#   dice: *"`memoria_hebbiana_moto` e' l'ULTIMA chiamata del passo NEL DRIVER"*.
+#   Con il solo `net.step()` **il freno non si chiude mai**, e la rimisura non raccoglieva
+#   NESSUN CAMPIONE.
+#
+# ⚠ E TOCCA ANCHE LE ALTRE MIE MISURE DI OGGI: la traiettoria di `|tw|` di `SCALE-TW` e la
+#   corsa sui triangoli girano su un ciclo INCOMPLETO. Si rifanno con questo, e si dichiara.
+# ============================================================================================
+def passo_pieno(S, net):
+    """IL PASSO COMPLETO, nell'ordine del driver. UNA funzione, cosi' non ci sono due versioni."""
+    S.scuoti_vuoto(net)
+    net.step()
+    net.mitosi()
+    net.rilassa_disegno()
+    net.memoria_hebbiana_moto()
+
+
 S._semina_masse_coerenti()
 net = S.net
 n0, a0 = int(net.n), int(len(net.d))
 d0_med0 = float(np.median(net.d0))
 for k in range(PASSI):
-    net.step()
+    passo_pieno(S, net)
 o = dict(FLAG=bool(FLAG), n0=n0, archi0=a0, n1=int(net.n), archi1=int(len(net.d)),
          d0_med_inizio=d0_med0, d0_med_fine=float(np.median(net.d0)), passi=int(PASSI))
 _tr = net._tempo_rampa()
@@ -243,8 +269,10 @@ P("   sono su TUTTI i campioni, non sul sottocampione.)")
 P()
 
 # ---------------------------------------------------------------- il criterio di `V8`
-mx_m = max(v["massimo"] for _, _, v in righe if _ == "MATURO") if righe else float("nan")
-mx_s = max(v["massimo"] for e, _, v in righe if e == "SPENTO") if righe else float("nan")
+# ! e qui `_` era usato SIA come variabile di ciclo SIA nel confronto: il secondo `_`
+#   sovrascriveva il primo, quindi il filtro guardava il VERSO invece del braccio.
+mx_m = max([v["massimo"] for e, _, v in righe if e == "MATURO"] or [float("nan")])
+mx_s = max([v["massimo"] for e, _, v in righe if e == "SPENTO"] or [float("nan")])
 o05 = sum(v["oltre05"] for e, _, v in righe if e == "MATURO")
 o1 = sum(v["oltre1"] for e, _, v in righe if e == "MATURO")
 o2 = sum(v["oltre2"] for e, _, v in righe if e == "MATURO")
