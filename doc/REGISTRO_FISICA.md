@@ -253,6 +253,38 @@ l'unico dei tre candidati a rendere `LAM` un RISULTATO invece che un'ipotesi.**
 
 ---
 
+
+### ❌❌ `_nasce` — **I CONTATORI MESCOLAVANO `d` CON `d0`. CORRETTO** *(rilievo di Luca, 2026-09-25)*
+
+**`_nasce` è una legge di questa scheda**, e i suoi contatori appartengono qui.
+
+`_nasce(v, dove="?", md=1, md0=1)`. **`md`/`md0` dicono quanti ARCHI VERI di `d` e di `d0`
+diventa ogni voce di `v` nel sito che chiama** — e **sono diversi in ognuno dei quattro siti**:
+
+| sito | `md` | `md0` | dal codice |
+|---|--:|--:|---|
+| `semina` — `_allaccia`, `dd` | `1` | `1` | `d = concat([d, dd])` **e** `d0 = concat([d0, dd])`: **UNA chiamata, DUE grandezze** |
+| `mitosi` — `dh` | **`2`** | `0` | `d = concat([d[keep], dh, dh])`: **due archi per voce** |
+| `mitosi` — `d0new` | `0` | `1` | `d0new` è **già** `concat([d0h, d0h])` |
+| `schwinger` — `dd` | **`2`** | **`2`** | `[d, dd, dd]` **e** `[d0, dd, dd]` |
+
+**Contatori: `_sm_{lun,tr,vis}{d,d0}_{sito}`.** Byte-inerti *(si somma, non si cambia)*.
+
+> ### **Solo `_sm_lund0_*` è nelle unità del bilancio di `d0`, quindi solo quello entra in `P-GONFIA`.**
+
+**COSA C'ERA PRIMA, e perché era sbagliato:** un contatore solo, `_sm_lunghezza`, che
+① **sommava `d` e `d0` nello stesso numero** — quindi **non era nelle unità di nessuna delle
+due**, che era l'unica ragione per cui l'avevo scritto; ② **sottocontava di `2`** il sito `dh`;
+③ contava le **voci**, non gli **archi**, anche nel denominatore.
+
+**SIGILLO: `csv/_seal_fork/_sigillo_u2_contatori.py`** — **una MITOSI VERA** con un solo arco a
+`1.2 LAM` *(`dh = 0.6 LAM`, entrambi i figli troncati)*; atteso per costruzione
+`trd = trd0 = 2`, `lund = lund0 = 0.8 LAM`. **`U2-6` è il caso che DEVE fallire** *(`P1-sexies`)*:
+la formula vecchia, sullo stesso evento, dava `0.4 LAM` su `d` e una somma mescolata di `1.2 LAM`.
+
+**⚠ `_g_sm_nascite` RESTA, e misura un'altra cosa:** le **INVOCAZIONI**. Una chiamata che non
+tronca nulla lo fa salire ugualmente — è il presidio di `D38`, non una misura del troncamento.
+
 <!-- SCHEDA nome=memoria-del-moto funzioni=memoria_hebbiana_moto flag=MEM_HEBB,MEM_MOTO,MEM_MOTO_TUTTO,SCALA_P_MEDIANA,ZETA_VIR -->
 # ② LA MEMORIA DEL MOTO — **`memoria_hebbiana_moto` / `S08_proj` / `mem_mot`**
 
@@ -950,6 +982,27 @@ Lo strumento puntato sul **riferimento CONTRO SE STESSO** dà **`2/4`**: `E1a` e
 lo schianto sarebbe arrivato dopo quaranta minuti.**
 
 ---
+
+
+### ❗ LA MITOSI CHIAMA `_nasce` DUE VOLTE, E LE DUE CHIAMATE NON HANNO LA STESSA MOLTEPLICITÀ *(2026-09-25)*
+
+**Fatto di questa scheda, e ci si sbaglia facile** *(mi ci sono sbagliato io)*:
+
+```python
+dh    = self._nasce(dh,    'mitosi', 2, 0)   # `len(sel)` voci -> concat([d[keep], dh, dh])
+d0new = self._nasce(d0new, 'mitosi', 0, 1)   # d0new e' GIA' concat([d0h, d0h])
+```
+
+> **`dh` ha una voce per arco che si divide, ma diventa DUE archi di `d`.**
+> **`d0new` ha già le due voci dei figli.**
+> **Chi conta le voci invece degli archi sbaglia di `2` sul primo e di niente sul secondo** —
+> cioè in modo **asimmetrico fra le due grandezze**, che è il difetto peggiore da leggere.
+
+**E IL RAMO SCHWINGER È UN TERZO CASO:** `dd` finisce in `concat([d, dd, dd])` **e** in
+`concat([d0, dd, dd])`, quindi è `×2` su **entrambe** le grandezze — e **la sua lunghezza viene
+da `pos`, non da `d`** *(voce `A3` della coda)*.
+
+**La legge dei contatori sta nella scheda `freno-scala-min`, con `_nasce`.**
 
 <!-- SCHEDA nome=torsione-spinore funzioni=_passo_spinoriale,_applica_flag flag=TW_SPINORE,SYNC_SPINORE,SPIN_LARMOR,SPIN_FEEDBACK -->
 
@@ -1816,8 +1869,8 @@ viene dalla MITOSI** invece che dalla semina.
 
 | | cosa | quando |
 |---|---|---|
-| **`U2a`** | **la LUNGHEZZA FABBRICATA da `_nasce`**: `sum(LAM - d)` sugli archi troncati | cumulativa, e **al netto del passo zero** |
-| **`U2b`** | quanti archi sono stati **troncati**, e su quanti visti | idem |
+| **`U2a`** | **la LUNGHEZZA FABBRICATA da `_nasce`**, `sum(LAM - v)` sugli archi troncati, **SEPARATA per grandezza (`d`, `d0`) e per sito (`semina`, `mitosi`, `schwinger`)** e contata sugli **ARCHI VERI**. **Nel confronto con la crescita di `d0` entra SOLO `_sm_lund0_*`** | cumulativa, e **al netto del passo zero** |
+| **`U2b`** | quanti archi sono stati **troncati**, e su quanti visti — **stessa separazione** | idem |
 | **`U2c`** | **frazione di archi sotto `2 LAM`** | ai passi `0` e `120` |
 
 ### ❗ E IL CONTATORE CHE LUCA CITAVA NON MISURAVA QUESTO — rilievo mio, verificato dal codice
@@ -1838,6 +1891,63 @@ troncato un figlio della mitosi»* **non era leggibile**: il numero non c'era.
 > ### al gonfiamento di `d0`, NELLE STESSE UNITÀ DEL BILANCIO.**
 > Così `P-GONFIA` non dice solo *«quanto è cresciuto»*: dice **quanta di quella crescita è
 > lunghezza FABBRICATA alla nascita**, e quanto resta da spiegare.
+
+### ❌❌ `U2` ERA SBAGLIATA: **UN CONTATORE SOLO, E MESCOLAVA `d` CON `d0`** *(rilievo di Luca, 2026-09-25)*
+
+**Cio' che avevo scritto ieri:** *«`_sm_lunghezza` è il contributo DIRETTO di `_nasce` al
+gonfiamento di `d0`, NELLE STESSE UNITÀ DEL BILANCIO»*. **Non lo era**, e la ragione è nel
+codice che avevo letto io stesso per scrivere la riga.
+
+> ### **`_nasce` è chiamata in QUATTRO siti, e la MOLTEPLICITÀ degli archi veri è DIVERSA in ognuno.**
+
+| sito | chiamata | archi veri di `d` | archi veri di `d0` | dal codice |
+|---|---|--:|--:|---|
+| **`semina`** | `_allaccia`: `dd` | `1` | `1` | `d = concat([d, dd])` **e** `d0 = concat([d0, dd])` — **UNA chiamata vale per DUE grandezze** |
+| **`mitosi`** | `dh` | **`2`** | `0` | `d = concat([d[keep], dh, dh])` — **`dh` ha `len(sel)` voci ma diventa DUE archi per voce** |
+| **`mitosi`** | `d0new` | `0` | `1` | `d0new` è **già** `concat([d0h, d0h])`: i due figli ci sono già |
+| **`schwinger`** | `dd` | **`2`** | **`2`** | `concat([d, dd, dd])` **e** `concat([d0, dd, dd])` |
+
+**TRE DIFETTI IN UNO, e il primo distrugge proprio la ragione per cui il contatore esisteva:**
+
+1. **la somma MESCOLAVA `d` e `d0`** — quindi **non era «nelle unità del bilancio di `d0`»**,
+   che era l'unica cosa che le dava senso in `P-GONFIA`;
+2. **il sito `dh` era SOTTOCONTATO DI `2`**: contava le voci di `dh`, non gli archi che ne nascono;
+3. **`_sm_visti` contava le VOCI**, non gli archi, con lo stesso errore nel denominatore.
+
+**LA CORREZIONE:** `_nasce(v, dove, md, md0)`. Contatori `_sm_{lun,tr,vis}{d,d0}_{sito}`,
+**separati per grandezza e per sito, sugli ARCHI VERI**.
+
+> ### **Solo `_sm_lund0_*` entra nel confronto con la crescita di `d0` in `P-GONFIA`.**
+
+**⚠ E LO SCHWINGER È UN QUARTO SITO, NON NEI TRE DEL RILIEVO:** è `×2` su **entrambe** le
+grandezze. Lo segnalo perché cambia il conto, e perché la sua lunghezza viene da **`pos`, non da
+`d`** — cioè è anche la voce **`A3`** della coda.
+
+### ✅ IL SIGILLO: `csv/_seal_fork/_sigillo_u2_contatori.py`
+
+**Il caso a risposta nota, come chiesto da Luca:** **una MITOSI VERA** con **un solo arco a
+`1.2 LAM`** — `dh = 0.6 LAM < LAM`, **entrambi i figli troncati**.
+
+```
+ATTESO PER COSTRUZIONE:
+  _sm_trd_mitosi   = 2                       (DUE archi di `d`, non uno)
+  _sm_trd0_mitosi  = 2
+  _sm_lund_mitosi  = 2 * (LAM - 0.6 LAM)     = 0.8 LAM
+  _sm_lund0_mitosi = 2 * (LAM - 0.6 LAM)     = 0.8 LAM
+```
+
+**`U2-6` È IL CASO CHE DEVE FALLIRE** *(`P1-sexies`, ed è il criterio più importante)*: la
+formula VECCHIA, **sullo stesso evento**, dava `0.4 LAM` sul lato `d` e una somma mescolata di
+`1.2 LAM`, **che non è in nessuna delle due unità**. Il criterio applicato a quella **deve dare
+FAIL**: se passasse, non discriminerebbe la cura dal difetto.
+
+**`U2-5` è MODEL-FREE:** non confronta col mio conto, **legge `d` e `d0` e conta gli archi che
+nell'ARRAY stanno a `LAM`**. **`U2-8` è la BYTE-IDENTITÀ** al codice di `HEAD`, col suo controllo
+positivo *(un caso diverso DEVE risultare diverso, sennò «identico» è un confronto cieco)*.
+
+**COSA IL SIGILLO NON DICE, dichiarato nel referto:** **il sito `schwinger` NON è collaudato**
+— quel ramo non è stato fatto scattare, e la sua molteplicità è **letta dal codice, non
+misurata**.
 
 ### ❗ IL COSTO SI MISURA DAGLI **ARCHI**, non dai nodi *(punto 5)*
 

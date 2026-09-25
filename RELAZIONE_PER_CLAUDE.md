@@ -15915,3 +15915,50 @@ Chiedevo la capienza **MEDIA** fra semi meno uno, ma **la capienza dipende dal s
 semina **rifiutava**. **Il rifiuto aveva ragione: era la mia richiesta a essere sbagliata.**
 *(E prima ancora lo strumento era morto su `NameError: SEMI` — definito nel genitore e non
 passato al figlio.)*
+
+
+---
+
+# ❌ `U2` ERA SBAGLIATA, E IL RILIEVO È DI LUCA — **un contatore che mescolava `d` con `d0`** *(2026-09-25)*
+
+**Ieri avevo scritto, come se fosse il punto della cosa:** *«`_sm_lunghezza` è il contributo
+DIRETTO di `_nasce` al gonfiamento di `d0`, NELLE STESSE UNITÀ DEL BILANCIO»*.
+**Non lo era.** E la smentita sta nel codice che avevo letto io stesso per scriverla.
+
+## I QUATTRO SITI, e la molteplicità È DIVERSA in ognuno
+
+| sito | archi veri di `d` | archi veri di `d0` | dal codice |
+|---|--:|--:|---|
+| `_allaccia` *(semina)* | `1` | `1` | **UNA chiamata vale per DUE grandezze** |
+| mitosi, `dh` | **`2`** | `0` | `concat([d[keep], dh, dh])`: **due archi per voce** |
+| mitosi, `d0new` | `0` | `1` | è **già** `concat([d0h, d0h])` |
+| **Schwinger** | **`2`** | **`2`** | `[d, dd, dd]` **e** `[d0, dd, dd]` |
+
+**Tre difetti in uno:** ① la somma mescolava le due grandezze, quindi **non era nelle unità di
+nessuna delle due**; ② il sito `dh` era **sottocontato di `2`**; ③ `_sm_visti` contava le voci,
+non gli archi.
+
+> ### ⚠ **E LO SCHWINGER È UN QUARTO SITO, NON FRA I TRE DEL RILIEVO** — `×2` su **entrambe**
+> le grandezze. Lo dico perché **cambia il conto**, non per completezza.
+> **E la sua lunghezza viene da `pos`, non da `d`**: è anche la voce **`A3`** della coda.
+
+## LA CORREZIONE, e il collaudo a risposta nota
+
+`_nasce(v, dove, md, md0)`, contatori `_sm_{lun,tr,vis}{d,d0}_{sito}` sugli **ARCHI VERI**.
+**Solo `_sm_lund0_*` entra in `P-GONFIA`.**
+
+**Il collaudo è una MITOSI VERA** — un solo arco a `1.2 LAM`, `dh = 0.6 LAM`, **entrambi i figli
+troncati** — e **`U2-6` è il caso che DEVE fallire**: la formula vecchia, sullo stesso evento,
+dava `0.4 LAM` su `d` e una somma mescolata di `1.2 LAM`.
+
+**I NUMERI NON SONO ANCORA IN QUESTO DOCUMENTO: il sigillo non è stato girato** — rifiuta di
+girare su un blob non committato *(par.2.6)*, ed è giusto così. **Questo commit è il codice; i
+numeri arrivano nel prossimo, insieme al referto.**
+
+## ⚠ LA LEZIONE DI METODO, e è la terza volta in tre giorni
+
+**Avevo letto i quattro siti** — sta scritto nel mio stesso riepilogo — **e ho scritto il
+contatore come se ce ne fosse uno.** Non è stata disattenzione sul codice: è aver scritto la
+FRASE *«nelle stesse unità del bilancio»* **guardando la forma `sum(LAM - v)` invece
+dell'espressione effettiva** — **esattamente `P1` applicato al proprio testo**, e lo stesso
+difetto che il par.9 registra per il punto fisso di `_tau`.

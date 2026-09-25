@@ -2752,7 +2752,8 @@ class Rete:
         if not len(a): self._grado(); return
         self.i = np.concatenate([self.i, a]); self.j = np.concatenate([self.j, b])
         if TRACCIA_D0: _tr_pre = self.d0.copy()
-        dd = self._nasce(dd)          # [SCALA_MIN] nascita: il troncone parte da LAM
+        # `md=1, md0=1`: UNA chiamata vale per `d` E per `d0` (entrambi concatenano `dd`).
+        dd = self._nasce(dd, 'semina', 1, 1)   # [SCALA_MIN] il troncone parte da LAM
         self._smp_chirurgia(nuovi=dd)   # [C3] `_allaccia` (semina): archi nuovi in coda
         self.d = np.concatenate([self.d, dd]); self.d0 = np.concatenate([self.d0, dd])
         if TRACCIA_D0: self._traccia_d0('S01_archi_nuovi', _tr_pre)
@@ -4035,7 +4036,7 @@ class Rete:
             return v
         return np.maximum(v, self._floor_d0())
 
-    def _nasce(self, v):
+    def _nasce(self, v, dove="?", md=1, md0=1):
         """NASCITA (concatenazione): il troncone sotto `LAM` si porta A `LAM`. Da li' in poi
         vale lo smorzamento. Non e' una regola di arresto nuova: e' il punto di partenza."""
         # [C3] anche con `SCALA_MIN_PASSO`: una NASCITA e' una concatenazione, non una discesa,
@@ -4052,20 +4053,46 @@ class Rete:
         # [A8, `U2`, 2026-09-25] ⚠ `_g_sm_nascite` CONTA LE INVOCAZIONI, NON I TRONCAMENTI.
         #   Luca l'ha chiesto per sapere "quante volte `_nasce` ha troncato un figlio della
         #   mitosi", e **quel numero non c'era**: una chiamata che non tronca nulla lo fa
-        #   salire ugualmente. Tre contatori nuovi, tutti byte-inerti (si somma, non si cambia):
-        #     `_sm_troncati`  quanti ARCHI sono stati portati a `LAM`
-        #     `_sm_lunghezza` **LA LUNGHEZZA FABBRICATA**: `sum(LAM - v)` sui troncati.
-        #                     E' il numero che conta davvero, perche' e' **il contributo
-        #                     DIRETTO di `_nasce` al gonfiamento di `d0`**, nelle stesse unita'
-        #                     del bilancio.
-        #     `_sm_visti`     quanti archi sono passati da qui, per avere il denominatore.
+        #   salire ugualmente. Contatori byte-inerti (si somma, non si cambia):
+        #     `_sm_vis<q>_<sito>`  quanti archi sono passati da qui (il denominatore)
+        #     `_sm_tr<q>_<sito>`   quanti ARCHI sono stati portati a `LAM`
+        #     `_sm_lun<q>_<sito>`  **LA LUNGHEZZA FABBRICATA**: `sum(LAM - v)` sui troncati,
+        #                          cioe' il contributo DIRETTO di `_nasce` al gonfiamento,
+        #                          **nelle stesse unita' del bilancio di quella grandezza**.
+        #
+        # ❌❌ **CORREZIONE DI LUCA, 2026-09-25 -- PRIMA C'ERA UN CONTATORE SOLO, E MESCOLAVA
+        #   `d` CON `d0`.** Tre difetti in uno:
+        #     ① `_sm_lunghezza` sommava contributi di `d` e di `d0` nello stesso numero,
+        #        quindi **NON era "nelle unita' del bilancio di `d0`"** -- che era l'unica
+        #        ragione per cui l'avevo scritto;
+        #     ② il sito `dh` della mitosi era **SOTTOCONTATO DI 2**: `dh` ha `len(sel)` voci,
+        #        ma finisce in `concatenate([d[keep], dh, dh])`, cioe' **DUE archi veri per voce**;
+        #     ③ `_sm_visti` contava le VOCI, non gli ARCHI, con lo stesso errore.
+        #
+        #   **`dove` e' il SITO; `md`/`md0` dicono QUANTI ARCHI VERI di `d` e di `d0` diventa
+        #   ogni voce di `v` in quel sito.** I quattro siti, letti dal codice:
+        #     | sito                        | `md` | `md0` | perche'                             |
+        #     | `semina`    (`_allaccia`)   |  1   |   1   | UNA chiamata vale per `d` E per `d0` |
+        #     | `mitosi`    (`dh`)          |  2   |   0   | `concatenate([d[keep], dh, dh])`     |
+        #     | `mitosi`    (`d0new`)       |  0   |   1   | `d0new` e' GIA' i due figli           |
+        #     | `schwinger` (`dd`)          |  2   |   2   | `[d, dd, dd]` **e** `[d0, dd, dd]`   |
+        #   **Lo Schwinger e' un QUARTO sito, `x2` su ENTRAMBE le grandezze**: non era fra i tre
+        #   che il rilievo elencava, e va detto perche' cambia il conto.
+        #
+        # > **Solo `_sm_lund0_*` entra nel confronto con la crescita di `d0` in `P-GONFIA`.**
         _v = np.asarray(v, dtype=float)
         _sotto = _v < LAM
-        self._sm_visti = getattr(self, '_sm_visti', 0) + int(_v.size)
-        self._sm_troncati = getattr(self, '_sm_troncati', 0) + int(_sotto.sum())
-        self._sm_lunghezza = (getattr(self, '_sm_lunghezza', 0.0)
-                              + float(np.sum(LAM - _v[_sotto])) if _sotto.any()
-                              else getattr(self, '_sm_lunghezza', 0.0))
+        _ntr = int(_sotto.sum())
+        _fab = float(np.sum(LAM - _v[_sotto])) if _ntr else 0.0
+        for _q, _m in (("d", md), ("d0", md0)):
+            if not _m:
+                continue
+            _b = "_sm_%s%s_%s"
+            for _pre, _val, _zero in (("lun", _m * _fab, 0.0),
+                                      ("tr", _m * _ntr, 0),
+                                      ("vis", _m * int(_v.size), 0)):
+                _k = _b % (_pre, _q, dove)
+                setattr(self, _k, getattr(self, _k, _zero) + _val)
         return np.maximum(v, LAM)
 
     def _peq_esatto(self, rho, flusso, dt_e, tau_bg):
@@ -5840,8 +5867,11 @@ class Rete:
             keep_idx = np.where(keep)[0]
             self.conc_archi = ([self.conc_archi[e] if e < len(self.conc_archi) else []
                                 for e in keep_idx] + [[] for _ in range(2 * len(a))])
-        dh = self._nasce(dh)          # [SCALA_MIN] i tronconi d/2 della mitosi
-        d0new = self._nasce(d0new)
+        # `md=2, md0=0`: `dh` finisce in `concatenate([d[keep], dh, dh])`, quindi ogni voce
+        #   diventa DUE archi di `d`; su `d0` non entra (ci pensa `d0new`, gia' raddoppiato).
+        dh = self._nasce(dh, 'mitosi', 2, 0)   # [SCALA_MIN] i tronconi d/2 della mitosi
+        # `md=0, md0=1`: `d0new` e' GIA' `concatenate([d0h, d0h])`, cioe' i due figli.
+        d0new = self._nasce(d0new, 'mitosi', 0, 1)
         self.d = np.concatenate([self.d[keep], dh, dh])
         if TRACCIA_D0: _tr_pre = self.d0.copy()
         self._smp_chirurgia(keep=keep, nuovi=d0new)   # [C3] lo snapshot segue la mitosi
@@ -5902,8 +5932,12 @@ class Rete:
                 anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()
                 nc = len(pick)   # fase opposta (fm+pi)
                 k = self.n + np.arange(nc)
+                # `md=2, md0=2`: `concatenate([d, dd, dd])` E `concatenate([d0, dd, dd])`.
+                # ⚠ QUARTO SITO, non nei tre del rilievo: e' `x2` su ENTRAMBE le grandezze.
+                # ⚠ E la lunghezza viene da `pos`, non da `d`: e' la voce `A3` della coda.
                 dd = self._nasce(np.maximum(
-                    0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05))
+                    0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05),
+                    'schwinger', 2, 2)
                 # [PEQ_NASCITA_LOCALE, C2] `nan` = «da calibrare sulla `rho` del PROPRIO
                 # arco», ed e' la STESSA convenzione di `_allaccia`: `:4189` lo fa
                 # all'inizio del passo dopo, e da' `anom = 0` ESATTO alla nascita.
