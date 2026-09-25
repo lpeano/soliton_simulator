@@ -196,4 +196,58 @@ P("  - la colonna (a) guarda anche DENTRO le stringhe dei figli generati, perche
 P("    scrivono il figlio come TESTO: l'AST del genitore non lo vedrebbe. E' una ricerca per")
 P("    ESPRESSIONE, non per AST, e va detto.")
 
+
+# ==========================================================================================
+# ➕ LA PROVA CHE DECIDE PER TUTTE: **LA SONDA DEL MECCANISMO**
+# ------------------------------------------------------------------------------------------
+#   Le misure non verificate dal referto usano TUTTE lo stesso meccanismo:
+#   `S.SEMINA_MATURA = True` su un modulo importato. **La domanda non e' se quel referto lo
+#   STAMPI: e' se il MECCANISMO FUNZIONI.**
+#   Se funziona, erano tutte accese. **Se non funziona, TUTTO CIO' CHE OGGI E' STATO
+#   DICHIARATO "campo maturo" E' INVALIDO** — e sarebbe un risultato, da committare come tale.
+#   ⚠ E SI MISURA COL SUO CONTROLLO (il braccio a flag SPENTO): senza, un `ramp = 1.0` non
+#   proverebbe nulla, perche' non si saprebbe quanto valga a flag spento.
+P()
+P("=" * 120)
+P("+ LA PROVA CHE DECIDE PER TUTTE: LA SONDA DEL MECCANISMO (con il suo CONTROLLO)")
+P("=" * 120)
+import importlib.util as _iu
+import numpy as _np
+_ris = []
+for _acceso in (False, True):
+    _sp = _iu.spec_from_file_location("sim_vf_%d" % int(_acceso),
+                                      os.path.join(RADICE, "soliton_simulator.py"))
+    _S = _iu.module_from_spec(_sp)
+    _sp.loader.exec_module(_S)
+    _S.SEMINA_LAM = True
+    _S.SEMINA_MATURA = bool(_acceso)     # <- IL MECCANISMO, identico a quello delle sonde
+    _S.test["dati"] = {}
+    _S._NMASSE_VIDEO["sep"] = 4.0
+    _S._MC_VIDEO["nodi"] = 0
+    _S._MC_VIDEO["fasi_casuali"] = False
+    _S.net = _S.Rete(11)
+    _S._semina_masse_coerenti()
+    _net = _S.net
+    _tr = _net._tempo_rampa()
+    _r = _np.minimum(1.0, _np.asarray(_net.eta, float)
+                     / (_np.asarray(_tr, float) if _np.ndim(_tr) else _tr))
+    _ris.append((bool(_acceso), float(_np.median(_r)), float(_np.sum(_net._pesi())),
+                 int(getattr(_net, "_g_cura4_maturati", 0))))
+P("  %-10s %-16s %-18s %-22s" % ("flag", "ramp p50", "somma dei pesi", "_g_cura4_maturati"))
+for _a, _rp, _pe, _mt in _ris:
+    P("  %-10s %-16.6f %-18.6e %-22d" % (_a, _rp, _pe, _mt))
+_ok_mec = (_ris[1][1] == 1.0 and _ris[0][1] < 1.0
+           and _ris[1][3] > 0 and _ris[0][3] == 0)
+P()
+if _ok_mec:
+    P("  -> IL MECCANISMO FUNZIONA: a flag ACCESO `ramp p50 = 1.000000` ESATTO e")
+    P("     `_g_cura4_maturati > 0`; a flag SPENTO `ramp p50 < 1` e il contatore e' ZERO.")
+    P("     IL CONTROLLO C'E', ED E' IL BRACCIO SPENTO: senza, un \"1.0\" non proverebbe nulla.")
+    P("     => TUTTE LE MISURE NON VERIFICATE DAL REFERTO AVEVANO IL FLAG ACCESO.")
+    P("        Questa e' la prova che mancava, e vale per tutte perche' il meccanismo e' lo")
+    P("        STESSO in ognuna (verificato nella colonna (a) della tabella).")
+else:
+    P("  -> IL MECCANISMO NON FUNZIONA COME CREDEVO. Ogni misura di oggi dichiarata")
+    P("     \"campo maturo\" VA RIFATTA, e questo e' un RISULTATO da committare come tale.")
+P()
 io.open(DEST, "w", encoding="utf-8", newline="\n").write(chr(10).join(R) + chr(10))
