@@ -17658,3 +17658,65 @@ tabella lo verifica sonda per sonda**, dal sorgente.
    reale**. Ho smesso di patchare il patch e ho **appeso** la sonda: **una sostituzione che non
    attacca si riconosce dall'`assert`, ma tre tentativi di riparare l'ancora sono un segnale che
    la strada è sbagliata.**
+
+
+---
+
+# ✅ **`SCENA-1`, strada (1): IL VUOTO DI DEFAULT E' LA SATURAZIONE** *(2026-09-25, decisione di Luca)*
+
+*(`soliton_simulator.py`; sigillo `csv/_seal_fork/_sigillo_driver_accende.py`, referto in
+`csv/_seal_fork/_sig_driver_accende/REFERTO.txt`. **`ESITO 15/15`**, e `S5` dice **COMPATIBILE**.)*
+
+## IL CONFLITTO, e perché nessuna delle tre strade che avevo proposto era quella giusta
+
+`SEMINA_LAM` è una cura approvata, ma la scena di default del driver chiedeva
+**`semina(900)` in raggio `4.0`**, e con la cura accesa quella richiesta **RIFIUTA**: la
+saturazione vera è **`455` nodi**. Avevo proposto tre strade — `--nodi 0`, ridurre `--nodi`,
+tenere `SEMINA_LAM` fra le **escluse** — e **Luca ha scelto una quarta, che non era fra le mie**:
+
+> ### **il vuoto di default diventa `semina(-1)`, LA SATURAZIONE. Senza un numero.**
+
+**PERCHE' E' MIGLIORE DI TUTTE E TRE, e il motivo è misurato, non estetico:** la capienza
+**DIPENDE DAL SEME** (`12807 / 12783 / 12812 / 12790` nelle quattro misure di saturazione), quindi
+**qualunque numero scritto nel driver è un numero che un giorno sarà sbagliato.** La strada (2)
+— *ridurre `--nodi`* — era esattamente l'errore già preso; la strada (3) lasciava una cura
+approvata **spegnibile per omissione**, contro `NUDA = CAMPAGNA`.
+**Con `semina(-1)` il numero di nodi lo decide LA GEOMETRIA**, e non c'è più un parametro che
+possa scadere.
+
+## LE SCENE PRE-`A13` **RIFIUTANO DI PARTIRE, E LO DICONO** (`A9`)
+
+`_massa` — la funzione con cui `N-MASSE`, `TERRA-BUCONERO` e simili seminano masse **sopra** il
+vuoto — **solleva** con `SEMINA_LAM` acceso, **invece di adattarsi in silenzio**.
+
+```
+_semina_n_masse chiede  497 nodi  in raggio 0.7 = 0.875 LAM,  dove ce ne stanno  5.
+                                                              rapporto  104
+```
+
+> **Non è una scena da adattare: è una scena di UN'ALTRA FISICA.** Quei raggi vengono
+> dall'epoca in cui **una distanza sotto `LAM` era ammessa**. Un adattamento automatico avrebbe
+> prodotto una scena **che nessuno ha progettato**, con lo stesso nome di una che qualcuno aveva
+> progettato — ed è il difetto del default ribaltato (par.9): **converte i rami di controllo in
+> duplicati del ramo di prova.**
+> **La scena `(ii)` (`MASSE-COERENTI`) NON passa da `_massa`** e non è toccata: le sue masse sono
+> **regioni a fase coerente di un vuoto solo**, e non aggiungono nodi.
+
+## ❌ E UN DIFETTO MIO: **`S5` PROVAVA LA DOMANDA DI IERI**
+
+Dopo la cura, il sigillo del driver dava **`15/15`** e `S5` stampava ancora
+**`⛔ INCOMPATIBILE`**, con la coda *"per questo `SEMINA_LAM` è fra le `ESCLUSE`"* — mentre
+`SEMINA_LAM` **non era più fra le escluse**. La ragione: `S5` chiamava
+**`semina(SEME_INIZIALE)`**, cioè **la strada che il driver non usa più**.
+
+> ### **UN CRITERIO CHE PROVA LA DOMANDA DI IERI DA' LA RISPOSTA DI IERI — e la dà con un `PASS` accanto.**
+> È la famiglia del **criterio scaduto** (par.9: *"un criterio scaduto che produce un FAIL falso
+> costa più di un sigillo mancante, perché si porta dietro una diagnosi"*), e stavolta il costo
+> era **un referto che contraddiceva se stesso a due righe di distanza**.
+> **Il numero è rimasto lo stesso (`455` contro `900`): non è cambiata la misura, è cambiata LA
+> DOMANDA.** `S5` ora chiama `semina(-1 if SEMINA_LAM else SEME_INIZIALE)`, cioè **letteralmente
+> la riga del driver**, e verifica in più che `_massa` rifiuti.
+
+**LEZIONE OPERATIVA, e vale oltre questo caso:** quando una cura cambia **il percorso** che il
+codice prende, **il criterio che quel percorso sorvegliava va riletto nello stesso commit** —
+altrimenti resta a guardia di una porta che non c'è più.
