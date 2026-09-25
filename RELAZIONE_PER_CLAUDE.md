@@ -16095,3 +16095,49 @@ che è sbagliata la statistica, non il dato.
 Un `heredoc` ha convertito `\\n` in un **newline vero** dentro un letterale, spezzando il
 sorgente. **È la terza volta**, e la regola che mi ero dato — *niente heredoc per gli script di
 patch* — **l'avevo scritta io**. Riparato con lo strumento di scrittura.
+
+
+---
+
+# ❌ LA MIA CURA DEL TAGLIO ERA UNA **SCELTA DI FISICA NON DICHIARATA** *(rilievo di Luca, 2026-09-25)*
+
+**Il difetto che avevo trovato era vero** — una fase a `0` sta sul taglio dell'avvolgimento e il
+rumore la spezza in due metà lontane. **La FORMA con cui l'ho curato no:** mettendo ogni regione
+al centro di un **terzo diverso** del dominio, `_dphi()*(k+0.5)/3`, **ho dato alle tre masse fasi
+sfasate di `120°` in `exp(i phi)`**.
+
+> ### **Masse sfasate interferiscono in parte in modo DISTRUTTIVO: fra loro nascono repulsione o
+> ### cancellazione DALLA CONDIZIONE INIZIALE, non dalla dinamica.**
+> E la **prima delle tre prove** chiede *«due masse si avvicinano?»*: sarebbe stato **un effetto
+> messo dentro da me**, e **indistinguibile da quello cercato**.
+> **La scena vecchia usava la STESSA fase per tutte, e il codice diceva perché** — *«fase
+> compatibile: le masse devono coesistere, non annichilarsi»*. **Non l'ho letto.**
+
+## ✅ LA CORREZIONE, DECISA DA LUCA: **stessa fase per tutte e tre, `_dphi()/2`**
+
+Lontana dal taglio da entrambi i lati, e poiché il campo usa **`exp(1j*phi)` direttamente**
+(`:3635`), `phi = 2 pi` dà `exp(i 2 pi) = 1`: **è la fase ZERO di prima, esattamente.**
+**Nessun numero nuovo.**
+
+| | coerenza **FRA** le regioni | fasi nel campo |
+|---|--:|---|
+| scena `(a)` | **`0.999681`** | `359.965 / 0.085 / 359.939` — **fase ZERO, la stessa** |
+| scena `(b)` | **`0.999666`** | `0.248 / 359.969 / 359.222` — **fase ZERO, la stessa** |
+| controllo a fasi casuali | `0.029367` | `322.890 / 3.935 / 335.848` |
+
+**E tutto il resto è invariato** *(non dipende dalla fase)*: `(a)` `12 802` nodi, `471 564` archi;
+`(b)` `4 252` nodi, `148 237` archi; distanza minima `0.800006` e `0.800000`.
+
+## ⚠ LA VERSIONE SFASATA È ESISTITA SOLO IN `3a67512` E NON HA PRODOTTO NESSUNA MISURA
+
+*(registrato su richiesta di Luca)*. Il commit `3a67512` conteneva il codice e la prova di fumo;
+**nessun giro, nessun referto, nessun numero della scena dipendeva dalla fase.**
+
+## ❗ E IL DIFETTO DI METODO È PIÙ GRANDE DELLA FASE: **la prova di fumo non misurava la grandezza in questione**
+
+Guardava la coerenza **DENTRO** ciascuna regione — **perfetta in entrambi i casi** — e **non FRA**
+le regioni. **Un criterio che non guarda la grandezza di cui si discute non è un criterio**, ed è
+la stessa famiglia dei cinque criteri vuoti del 2026-09-21.
+**Ora la misura c'è, e il suo nullo si sa in anticipo:** tre gruppi uguali a `120°` **si
+cancellano**, quindi la versione sfasata darebbe `~0`. **È il caso che DEVE fallire, e ora
+esiste.**

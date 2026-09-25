@@ -875,9 +875,47 @@ CERCHIO**, ma `std` la legge a cavallo del taglio e dà **il valore del disordin
 > ### **NON È UN DIFETTO DI `phi`: È UN DIFETTO DELLA STATISTICA.** La coerenza di una fase si
 > ### misura **CIRCOLARMENTE**, `|<e^{i phi}>|`, non con una deviazione standard.
 
-**La cura nella scena è derivata, non scelta:** la fase della regione `k` è il **CENTRO del
-`k`-esimo terzo del dominio**, `_dphi()*(k+0.5)/3` — *«tre regioni, spaziate uguali»* — e
-**nessuno dei tre cade sul taglio**. **Dopo:**
+### ❌❌ LA MIA PRIMA CURA DEL TAGLIO ERA UNA SCELTA DI FISICA NON DICHIARATA *(Luca, 2026-09-25)*
+
+**Avevo messo ogni regione al centro di un TERZO diverso del dominio**, `_dphi()*(k+0.5)/3`.
+Evitava il taglio — ed era vero — **ma dava alle tre masse fasi SFASATE DI 120 GRADI in
+`exp(i phi)`**.
+
+> ### **MASSE SFASATE INTERFERISCONO IN PARTE IN MODO DISTRUTTIVO:** fra loro nascono
+> ### **repulsione o cancellazione DALLA CONDIZIONE INIZIALE, non dalla dinamica.**
+>
+> E la **prima delle tre prove** chiede esattamente *«due masse si avvicinano?»*: sarebbe
+> stato **un effetto messo dentro da me**, e indistinguibile da quello cercato.
+>
+> **La scena vecchia usava la STESSA fase per tutte, e il codice diceva perché:**
+> *«fase compatibile: le masse devono coesistere, non annichilarsi»*. **Non l'ho letto.**
+
+**DECISIONE DI LUCA: la STESSA fase per tutte e tre, `_dphi()/2`.**
+Sta **lontana dal taglio da entrambi i lati**, e poiché il campo usa **`exp(1j*phi)`
+direttamente** (`:3635`), `phi = 2 pi` dà `exp(i 2 pi) = 1`: **è la fase ZERO di prima,
+esattamente.** **Nessun numero nuovo:** il centro di un intervallo non è una manopola.
+
+**⚠ E LA PROVA DI FUMO NON SE NE ACCORGEVA, perché non misurava la grandezza in questione:**
+guardava la coerenza **DENTRO** ciascuna regione — **perfetta in entrambi i casi** — e non
+**FRA** le regioni. **Un criterio che non guarda la grandezza di cui si discute non è un
+criterio.** Ora la misura c'è, e **il suo nullo si sa in anticipo**: tre gruppi uguali a
+`120°` **si cancellano**, quindi la versione sfasata darebbe `|<e^{i phi}>| ~ 0`.
+
+| | coerenza FRA le regioni | fasi nel campo `exp(1j*phi)` |
+|---|--:|---|
+| **scena `(a)`, fase unica** | **`0.999681`** | `359.965 / 0.085 / 359.939` — **fase ZERO, la stessa** |
+| **scena `(b)`, fase unica** | **`0.999666`** | `0.248 / 359.969 / 359.222` — **fase ZERO, la stessa** |
+| **controllo a fasi casuali** | `0.029367` | `322.890 / 3.935 / 335.848` |
+
+> **⚠ LA VERSIONE SFASATA È ESISTITA SOLO NEL COMMIT `3a67512` E NON HA PRODOTTO NESSUNA
+> MISURA** *(registrato su richiesta di Luca)*. I numeri della prova di fumo di quel commit
+> — taglia, archi, `QUOTA`, distanza minima — **non dipendono dalla fase** e restano validi.
+
+**E la convenzione si dichiara, sennò il numero si legge male:** le fasi «normalizzate a
+`4 pi`» valgono `~180°` perché `_dphi()/2` è metà del periodo di `phi`; **nel CAMPO sono
+`0°`**. Due convenzioni, due numeri, **lo stesso stato**.
+
+**Il valore dopo la cura del taglio:**
 
 ```
 COERENZA CIRCOLARE |<e^{i phi}>|      dentro le regioni   0.999631 / 0.999665 / 0.999726
@@ -2880,7 +2918,11 @@ r  = (sep*sqrt(3) - R_CONN)/2        ->  IL VARCO FRA LE SUPERFICI È `R_CONN`:
                                          direttamente, ma il vuoto fra loro sì
 Rv = sep + r + R_CONN                ->  un guscio di `R_CONN` oltre la regione più esterna,
                                          così nessuna regione tocca il bordo
-fase della regione k = _dphi()*(k+0.5)/3   ->  il CENTRO del k-esimo terzo del dominio
+fase, LA STESSA PER TUTTE E TRE = _dphi()/2  ->  il CENTRO del dominio.
+                                                 Nel campo (`exp(1j*phi)`) e' la FASE ZERO.
+                                                 ⚠ NON una fase per regione: masse sfasate
+                                                   INTERFERISCONO, e sarebbe un effetto
+                                                   messo dalla CONDIZIONE INIZIALE.
 ```
 
 **Nessun numero scelto.** `R_CONN = 3*LAM` e `_dphi()` esistono già; il *«centro del terzo»* viene

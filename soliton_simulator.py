@@ -6917,18 +6917,36 @@ def _semina_masse_coerenti():
             # confonde con mezzo successo.
             ph = net.rng.random(len(idx)) * net._dphi()
         else:
-            # FASE COMUNE nella regione. La dispersione 0.05 e' la STESSA di `semina(fase=...)`:
-            # non e' un numero nuovo, e' la convenzione gia' in uso per un dominio coerente.
-            # LA FASE DELLA REGIONE: il CENTRO del k-esimo terzo del DOMINIO di `phi`.
-            # ⚠ NON `2 pi k/3`: per `k = 0` quella vale ZERO, cioe' **esattamente sul taglio
-            #   del wrap**, e la dispersione gaussiana ci cade a cavallo. La fase resta
-            #   coerente SUL CERCHIO, ma qualunque statistica LINEARE la legge come massima
-            #   dispersione -- MISURATO nella prova di fumo: `std(phi) = 6.0798` per `massa_0`
-            #   contro `0.0518` e `0.0468` per le altre due, a fase IDENTICAMENTE coerente.
-            #   Il centro del terzo e' derivato ("tre regioni, spaziate uguali"), non scelto,
-            #   e NESSUNO dei tre cade sul taglio.
+            # LA FASE DELLA REGIONE: **LA STESSA PER TUTTE E TRE**, al CENTRO del dominio.
+            #
+            # ① PERCHE' NON `0`: una fase a zero sta **esattamente sul taglio dell'avvolgimento**,
+            #   e `phi % _dphi()` manda la coda gaussiana negativa a `~4 pi`. La fase resta
+            #   coerente SUL CERCHIO, ma ogni statistica LINEARE la legge come disordine
+            #   MASSIMO -- MISURATO: `std(phi) = 6.0798` per `massa_0` contro `0.0518` e
+            #   `0.0468` delle altre due, **a fase identicamente coerente**. E `3.63` e' il
+            #   valore di fasi CASUALI, quindi `6.08` e' **peggio del caso**: il segno che
+            #   sbaglia la STATISTICA, non il dato. (La coerenza si misura `|<e^{i phi}>|`.)
+            #
+            # ②❗ PERCHE' UNA SOLA FASE, E NON UNA PER REGIONE -- **DECISIONE DI LUCA,
+            #   2026-09-25, su una scelta di fisica che avevo fatto SENZA DICHIARARLA.**
+            #   La prima stesura metteva ogni regione al centro di un TERZO diverso del
+            #   dominio, `_dphi()*(k+0.5)/3`: evitava il taglio, ma **dava alle tre masse
+            #   fasi SFASATE DI 120 GRADI in `exp(i phi)`**.
+            #   **Masse sfasate INTERFERISCONO in parte in modo distruttivo**: fra loro
+            #   nascono repulsione o cancellazione **dalla CONDIZIONE INIZIALE, non dalla
+            #   dinamica** -- e la prima delle tre prove chiede proprio *«due masse si
+            #   avvicinano?»*. Sarebbe stato un effetto messo dentro da me.
+            #   **La scena vecchia usava la STESSA fase per tutte, e il codice diceva
+            #   perche': «fase compatibile: le masse devono coesistere, non annichilarsi».**
+            #   Se un giorno servissero masse sfasate, dev'essere una scelta DICHIARATA e
+            #   un esperimento a parte.
+            #
+            # ③ PERCHE' `_dphi()/2`: sta **lontana dal taglio da entrambi i lati**, e nel
+            #   campo -- che vede la fase su `2 pi` -- **equivale alla fase ZERO di prima**
+            #   (`_dphi()/2 = 2 pi` sul dominio `4 pi`). **Nessun numero nuovo**: il centro
+            #   di un intervallo non e' una manopola.
             # La dispersione `0.05` NON e' un numero nuovo: e' la stessa di `semina(fase=...)`.
-            ph = net._dphi() * (k + 0.5) / 3.0 + net.rng.normal(0, 0.05, len(idx))
+            ph = net._dphi() / 2.0 + net.rng.normal(0, 0.05, len(idx))
         net.phi[idx] = ph % net._dphi()
         net.phi0[idx] = net.phi[idx]
         dentro[idx] = True

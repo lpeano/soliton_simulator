@@ -1,0 +1,41 @@
+================================================================================================
+SCENA (b)  --sep 4.0   fasi COERENTI
+[scena-ii] sep 4.000000  r_regione 2.264102  raggio_vuoto 8.664102  R_CONN 2.400000
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+  tempo 8.7 s
+    massa_0  n=67    std(phi)   0.0544   COERENZA CIRCOLARE |<e^iphi>| = 0.999631
+    massa_1  n=75    std(phi)   0.0518   COERENZA CIRCOLARE |<e^iphi>| = 0.999665
+    massa_2  n=64    std(phi)   0.0468   COERENZA CIRCOLARE |<e^iphi>| = 0.999726
+    vuoto    n=4046  std(phi)   3.6220   COERENZA CIRCOLARE           = 0.008019   nullo ~ 1/sqrt(n) = 0.0157
+    FRA LE REGIONI (unione)  |<e^iphi>| = 0.999666    fasi medie normalizzate a 4pi = 180.12 / 179.98 / 179.61 gradi
+       NEL CAMPO (exp(1j*phi), :3635): 0.248 / 359.969 / 359.222 gradi  -> FASE ZERO, e la STESSA per tutte e tre
+       sfasamenti: 359.86 e 359.49 gradi   -> ATTESO 0 e 0 (stessa fase per tutte); la versione SFASATA dava 120 e 240, e |<e^iphi>| ~ 0
+    min distanza fra nodi = 0.800000429   LAM = 0.800000000   archi = 148237
+    {'R_CONN': 2.4, 'dentro': 206, 'fasi_casuali': False, 'n_vuoto': 4252, 'quota': 0.048448, 'r_regione': 2.264102, 'raggio_vuoto': 8.664102, 'saturazione': 4252, 'sep': 4.0}
+
+SCENA (b)  --sep 4.0   fasi CASUALI  (braccio di controllo di S10)
+[scena-ii] sep 4.000000  r_regione 2.264102  raggio_vuoto 8.664102  R_CONN 2.400000
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = True
+  tempo 9.6 s
+    massa_0  n=67    std(phi)   3.4707   COERENZA CIRCOLARE |<e^iphi>| = 0.071154
+    massa_1  n=75    std(phi)   3.6095   COERENZA CIRCOLARE |<e^iphi>| = 0.035246
+    massa_2  n=64    std(phi)   3.7566   COERENZA CIRCOLARE |<e^iphi>| = 0.032041
+    vuoto    n=4046  std(phi)   3.6220   COERENZA CIRCOLARE           = 0.008019   nullo ~ 1/sqrt(n) = 0.0157
+    FRA LE REGIONI (unione)  |<e^iphi>| = 0.029367    fasi medie normalizzate a 4pi = 208.13 / 172.13 / 323.05 gradi
+       NEL CAMPO (exp(1j*phi), :3635): 322.890 / 3.935 / 335.848 gradi  -> NON e' fase zero (atteso: braccio a fasi casuali)
+       sfasamenti: 324.00 e 114.92 gradi   -> ATTESO 0 e 0 (stessa fase per tutte); la versione SFASATA dava 120 e 240, e |<e^iphi>| ~ 0
+    min distanza fra nodi = 0.800000429   LAM = 0.800000000   archi = 148237
+
+SCENA (a)  --sep 6.1158   fasi COERENTI
+[scena-ii] sep 6.115800  r_regione 4.096438  raggio_vuoto 12.612238  R_CONN 2.400000
+[scena-ii] n = 12802   dentro le regioni = 1237   QUOTA = 0.0966   fasi_casuali = False
+  tempo 44.0 s
+    massa_0  n=411   std(phi)   0.0513   COERENZA CIRCOLARE |<e^iphi>| = 0.999671
+    massa_1  n=413   std(phi)   0.0517   COERENZA CIRCOLARE |<e^iphi>| = 0.999666
+    massa_2  n=413   std(phi)   0.0484   COERENZA CIRCOLARE |<e^iphi>| = 0.999707
+    vuoto    n=11565 std(phi)   3.6351   COERENZA CIRCOLARE           = 0.009126   nullo ~ 1/sqrt(n) = 0.0093
+    FRA LE REGIONI (unione)  |<e^iphi>| = 0.999681    fasi medie normalizzate a 4pi = 179.98 / 180.04 / 179.97 gradi
+       NEL CAMPO (exp(1j*phi), :3635): 359.965 / 0.085 / 359.939 gradi  -> FASE ZERO, e la STESSA per tutte e tre
+       sfasamenti: 0.06 e 359.99 gradi   -> ATTESO 0 e 0 (stessa fase per tutte); la versione SFASATA dava 120 e 240, e |<e^iphi>| ~ 0
+    min distanza fra nodi = 0.800005555   LAM = 0.800000000   archi = 471564
+    {'R_CONN': 2.4, 'dentro': 1237, 'fasi_casuali': False, 'n_vuoto': 12802, 'quota': 0.096626, 'r_regione': 4.096438, 'raggio_vuoto': 12.612238, 'saturazione': 12802, 'sep': 6.1158}
