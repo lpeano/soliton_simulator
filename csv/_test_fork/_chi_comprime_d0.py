@@ -223,15 +223,18 @@ def _ponte(net, a, b, n):
 
 
 NUC = _nuclei(net, co, n0)
+# ⚠ il PONTE INIZIALE si registra DOPO che `o` esiste (sotto): qui `o` non c'e' ancora, e
+#   la prima stesura moriva con `NameError: name 'o' is not defined` su tutti e quattro i
+#   bracci. Un ordine sbagliato di due righe, e il guardiano era lo schianto.
+
+o = dict(FLAG=bool(FLAG), SEME=SEME, n0=n0, archi0=int(len(net.d)), LAM=LAM, PASSI=int(PASSI),
+         classi={k: int(v.sum()) for k, v in CLASSI.items()},
+         d0_med_ini=float(np.median(d0_ini)))
 o['nuclei'] = NUC
 for _a, _b in ((0, 1), (0, 2), (1, 2)):
     pa, lu = _ponte(net, NUC[_a], NUC[_b], n0)
     o['ponte_ini_%d%d_passi' % (_a, _b)] = pa
     o['ponte_ini_%d%d_lung' % (_a, _b)] = lu
-
-o = dict(FLAG=bool(FLAG), SEME=SEME, n0=n0, archi0=int(len(net.d)), LAM=LAM, PASSI=int(PASSI),
-         classi={k: int(v.sum()) for k, v in CLASSI.items()},
-         d0_med_ini=float(np.median(d0_ini)))
 for k, m in CLASSI.items():
     if m.sum() >= 10:
         o["ini_" + k] = float(np.median(d0_ini[IDX0[m]]))
