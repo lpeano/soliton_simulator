@@ -127,8 +127,19 @@ P()
 
 # --- candidato 1: il tempo-luce PER NODO, `_tempo_luce_nodo` (gia' cablato, Strato 1) ---
 try:
-    tl = np.asarray(net._tempo_luce_nodo(), float)
-    P("  CANDIDATO 1 -- `d_nodo/cs_nodo` (`_tempo_luce_nodo`, per NODO, GIA' CABLATO):")
+    # firma vera: `_tempo_luce_nodo(self, ii, jj)` -- vuole gli indici degli archi.
+    tl = np.asarray(net._tempo_luce_nodo(net.i, net.j), float)
+    P("  CANDIDATO 1 -- `d_nodo/cs_nodo` (`_tempo_luce_nodo`, GIA' CABLATO nello Strato 1).")
+    # ! CORREZIONE DI UNA MIA CAUTELA SBAGLIATA: avevo scritto che il valore fosse PER ARCO
+    #   perche' la firma prende `(ii, jj)`. E' FALSO: la shape misurata e' `n` (i NODI).
+    #   Gli indici servono a COSTRUIRE `d_nodo` (la lunghezza tipica degli archi del nodo);
+    #   il ritorno e' PER NODO, cioe' ESATTAMENTE la forma che serve a `ramp`.
+    #   Lo dico invece di cancellarlo: era una cautela sbagliata, e la shape l'ha smentita.
+    P("     FORMA: la firma e' `(self, ii, jj)` ma il RITORNO e' PER NODO -- misurato:")
+    P("     shape restituita = %d,  nodi = %d,  archi = %d   -> shape == nodi: %s"
+      % (tl.size, net.n, len(net.d), tl.size == net.n))
+    P("     E' ESATTAMENTE la forma che serve a `ramp`: nessuna riduzione arco->nodo da inventare.")
+    P("  valori:")
     P("     p05 %.6g   p50 %.6g   p95 %.6g   (in unita' di tempo)" %
       (np.percentile(tl, 5), np.median(tl), np.percentile(tl, 95)))
     P("     PASSI per ramp = 1 (tempo/DT):  p05 %.1f   p50 %.1f   p95 %.1f"
