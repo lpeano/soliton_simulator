@@ -17993,3 +17993,59 @@ vacuo** — la famiglia già catalogata del `PASS` su `inf`.
 è l'unico modo di dirlo **senza un numero e senza un array**: non è una soglia grande, è
 *«nessun tempo di accensione»*. **E TOGLIE codice invece di aggiungerlo** (`STANDARD 10`):
 sparisce la chiamata a `_tempo_rampa()` alla semina **e le sue due diramazioni**.
+
+
+---
+
+# ⛔ **`RAMPA-2`: AL PASSO 0 TUTTI LEGGONO `cs = CS_M` — 13 FUNZIONI, 40 PUNTI** *(2026-09-25)*
+
+*(`csv/_chi_usa_il_tempo_luce.py`, per **AST**; `doc/RAMPA2_chi_usa_il_tempo_luce.md`.
+Domanda di Luca: *«quali ALTRE leggi usano il tempo-luce o `cs` al passo 1?»*)*
+
+## IL FATTO, che `RAMPA-1` ha scoperto per caso curando un'altra cosa
+
+Al **passo 0** la cache `_cs_nodo_prev` **non esiste**, quindi il tempo-luce si calcola con
+**`cs = CS_M`** *(il valore di modulo)* **ovunque**. Al passo 1 il `cs` vero vale
+**`p50 1.672`** contro **`CS_M = 2`**, con **`cs_std/cs = 19.07 %`**.
+
+> ### **IL TEMPO-LUCE DEL PASSO 0 È SBAGLIATO DEL ~20 %, IN MODO SISTEMATICO E NELLA STESSA
+> ### DIREZIONE PER TUTTI.** Non è rumore: è un **bias**.
+
+## L'ELENCO — **13 funzioni, 40 punti**
+
+```
+step                               14        _diag_completa                      2
+_passo_spinoriale                   8        _tempo_rampa                        1
+_cs_nodo                            3        _pesi                               1
+_tau_arco_causale                   2        _bloch_ritardato                    1
+mitosi                              2        _tempo_luce_nodo                    1
+memoria_hebbiana_moto               2        batch_condensazione                 1
+_applica_flag                       2
+```
+
+**`RAMPA-1` ne ha curata UNA** — la maturità della cura 4, che ora **non legge più niente**
+(`eta = +inf`). **Le altre dodici sono lì**, e fra loro ci sono i pesi d'arco (`_pesi`), il
+ritardo dello Strato 1 (`_bloch_ritardato`), il tempo nella mitosi (`_tau_arco_causale`) e la
+memoria del moto.
+
+## ⚠ TRE COSE CHE QUESTO ELENCO **NON** DICE, e la seconda è quella che pesa
+
+1. **Non dice che ognuna sia un difetto.** Una legge che legge `cs` al passo 1 è sbagliata
+   **solo se il valore che riceve non è quello del luogo** — e al passo 0 non lo è **per
+   nessuno**. **Quante ne dipendano DAVVERO va misurato**, una per una: lo strumento le
+   **trova**, non le misura.
+2. **Non dice se il fallback sia CONTATO.** È la domanda di `P5`, ed è quella che pesa: un ramo
+   che cade su `CS_M` **senza dirlo** è un **comportamento sconosciuto**. In questo repo uno di
+   quei rami scattava nel **71.88 %** delle chiamate **senza che nessun sigillo se ne
+   accorgesse** (`C7`).
+3. **La cura non è «usare `CS_M` meglio».** È la stessa famiglia di **`B1`** *(il passo 1 senza
+   tempo proprio)* e di **`C7`** *(la cache scartata a ogni mitosi)*. **In `C7` la forma che ha
+   funzionato era EREDITARE** — il figlio prende `cs` dal padre, zero parametri.
+   **Al passo 0 non c'è un padre da cui ereditare, e questa è la differenza vera.**
+
+> **Detto senza girarci intorno: non ho una cura derivata per `RAMPA-2`.** La forma che ha
+> funzionato due volte (eredità) **qui non si applica**, e inventare un valore iniziale per `cs`
+> sarebbe **scegliere un numero** (par.3). **La voce resta APERTA con il suo criterio**, e la
+> misura che la deciderebbe è *«quante di quelle 12 leggi cambiano risultato se al passo 0
+> ricevessero il `cs` del passo 1 invece di `CS_M`»* — un contrasto misurabile, non una
+> congettura.
