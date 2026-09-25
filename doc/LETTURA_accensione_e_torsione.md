@@ -228,7 +228,21 @@ I CICLI, e la curvatura che il codice calcola GIA':
 > **Quindi a maturità `χ` per arco vale `~0.5 π`** — **il doppio di quanto serve per arrivare a
 > `π`, e ancora un OTTAVO di `4π`.** Il conto del codominio resta.
 
-### ❗ E UN NUMERO CHE VA NELLA DIREZIONE OPPOSTA: **l'olonomia di FASE supera già `4π`**
+### ❌❌ RITIRATO IL 2026-09-25 SU RILIEVO DI LUCA — il blocco qui sotto è **una conclusione sbagliata su una misura giusta**
+
+**I cicli di `circolazione_topologica` sono FONDAMENTALI DI UN ALBERO** *(`_base_cicli_topologici`,
+`:1643`)*, **TAPPATI a `256`** e **dipendenti dall'ordine di visita**. **MISURATO:** cicli
+restituiti **`256` esatti** *(il tetto MORDE)*, lunghezza **`p50 = 19` archi** *(max `48`)*, e la
+base cattura **`41` triangoli su `1 697 590` veri = `2.4e-05`**.
+
+> **Un'olonomia che supera `4π` su cicli di `19` archi è quasi una conseguenza della LUNGHEZZA:**
+> diciannove termini a media nulla danno una passeggiata di ampiezza `~sqrt(19)`. **Non è un
+> quanto.** **La curvatura LOCALE non è stata misurata**, e serve sui **CICLI MINIMI — i
+> TRIANGOLI di archi** *(decisione di Luca)*.
+> **Il numero resta** *(è una misura)*; **la frase «sui cicli un quanto di `4π` è raggiungibile»
+> è RITIRATA.**
+
+### ❗ IL NUMERO, che resta come misura: **l'olonomia di FASE su quei cicli supera `4π`**
 
 `max = 35.24` contro `4π = 12.566`: **`2.8` volte il ricoprimento**, e la media assoluta `11.42`
 è **già dell'ordine di `4π`**. **Sui cicli, un quanto di `4π` È RAGGIUNGIBILE** — **per la fase.**

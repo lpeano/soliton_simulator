@@ -16374,3 +16374,60 @@ di cinque ordini, **e quanto lo diventi a maturità NON L'HO MISURATO** *(serve 
 **E i criteri sono scritti ora, `TS-1`..`TS-6`**, con `TS-5` come **caso che DEVE fallire**.
 **`TS-1` è già valutabile in parte, e la risposta provvisoria è NO per gli archi** *(codominio di
 `arccos`)*, **DA MISURARE per i cicli.**
+
+
+---
+
+# ❌❌ `2a` — **«L'OLONOMIA SUPERA `4π`» NON DICE NULLA SULLA CURVATURA LOCALE** *(rilievo di Luca, 2026-09-25)*
+
+**Ieri ho scritto, come se fosse un fatto sulla curvatura:** *«l'olonomia di FASE supera già `4π`:
+`max = 35.24` contro `12.566` … **sui CICLI un quanto di `4π` È RAGGIUNGIBILE**»*.
+**La misura è giusta; la conclusione no**, e la ragione è in `_base_cicli_topologici` *(`:1643`)*,
+che avevo letto per il nome e non per il codice.
+
+## I CICLI DI `circolazione_topologica` SONO **FONDAMENTALI DI UN ALBERO**, E **TAPPATI**
+
+```python
+def _base_cicli_topologici(self, massimo=256):
+    """... Il limite serve solo a mantenere la diagnostica leggera."""
+```
+
+**MISURATO** *(scena `(ii)` `(b)`, seme `11`, dopo un passo)*:
+
+```
+cicli restituiti                    256          <- ESATTAMENTE il tetto: il tetto MORDE
+lunghezza dei cicli (in archi)      min 3   p50 19.0   p95 43.2   max 48
+quanti sono TRIANGOLI (len == 3)    41           = 16.0 % della base
+TRIANGOLI VERI nel grafo            1 697 590    (conteggio esatto)
+   -> la base ne cattura            41 / 1 697 590 = 2.42e-05
+```
+
+> ### ⛔ **L'OLONOMIA È UNA SOMMA SU CICLI DI LUNGHEZZA MEDIANA `19`: che superi `4π` È QUASI
+> ### UNA CONSEGUENZA DELLA LUNGHEZZA, non della curvatura.**
+> Diciannove termini a media nulla danno un cammino aleatorio di ampiezza `~sqrt(19)` volte il
+> termine tipico. **`35 / 12.566 = 2.8` su `19` archi non è un quanto: è una passeggiata.**
+>
+> ### ⛔ **E LA BASE DIPENDE DALLA VISITA:** sono i cicli fondamentali di un albero costruito
+> ### scorrendo i nodi in ordine di indice. **Cambiando l'ordine, cambiano i cicli.** Una
+> ### grandezza che dipende dall'ordine di visita **non è una proprietà del grafo.**
+>
+> ### ⛔ **E IL TETTO `256` MORDE**, e non di poco: la base **ne restituisce esattamente `256`**,
+> ### e i triangoli veri sono **`1.7` milioni**. **La diagnostica vede una parte su `41 000`.**
+
+## COSA RESTA VERO, E COSA VA RITIRATO
+
+- **RESTA VERO** il numero: `olonomia_max = 35.2437 ± 9.1`, `media |.| = 11.4222 ± 3.8` su
+  `256` cicli. **È una misura, e sta nel referto.**
+- **VA RITIRATA** la frase *«sui cicli un quanto di `4π` è raggiungibile»*: **non è stabilita**.
+  Quei cicli sono **lunghi, tappati e dipendenti dalla visita**; **la curvatura LOCALE non è stata
+  misurata.**
+- **SERVE LA CURVATURA SUI CICLI MINIMI — I TRIANGOLI DI ARCHI** *(decisione di Luca)*, che sono
+  **il ciclo più corto possibile** e **non dipendono da nessuna visita**.
+
+> **È lo stesso errore di forma del par.9 sulle statistiche riassuntive:** avevo letto un numero
+> grande come un effetto, **senza chiedermi quanto varrebbe per costruzione** — qui: *quanto vale
+> l'olonomia su un ciclo di `19` archi se non c'è nessuna curvatura?* **Non me l'ero chiesto.**
+
+**⚠ E UN AVVISO PER LA CORSA DIAGNOSTICA `2b`:** i triangoli veri sono **`1.7` milioni** su
+`4252` nodi. **Enumerarli tutti è possibile ma non gratis**, e per la statistica **non serve**:
+va **campionato**, e il campionamento va **dichiarato**.
