@@ -18773,3 +18773,79 @@ fattore 24-31** — pur restando fuori dal `< 3` dichiarato.
 conseguenza diretta dei numeri — **ma il difetto dei FIGLI non lo tocca**, perche' li' il problema
 e' `peq` **ereditato**, non l'esponente del vicinato. **Due cure diverse per due sintomi della
 stessa asimmetria, e quale venga prima e' una decisione, non un calcolo.**
+
+
+---
+
+# ❌❌ **DUE RITRATTAZIONI AL REFERTO DEL SIGILLO ESTESO** *(rilievi di Luca, 2026-09-25)*
+
+## ① **RITIRO: «il divario di `omega` DIVERGE, quindi non e' un ritardo»**
+
+**Cosa avevo scritto:** *«Un transitorio decade. Questo DIVERGE. È la risposta più forte alla
+domanda "estensivo o ritardato?"»*, citando `|omega|` k2/k77 da `x5.7` a `x368` e da `x176` a
+`x9749`.
+
+> ### ❌ **NON REGGE, E IL MOTIVO E' NEL MIO STESSO REFERTO.**
+> Nella **stessa finestra** ho dichiarato `R1` **NON MISURATO** perche' **`peq` non si e'
+> rilassato** *(`|peq-rho|/rho` finale `0.70`-`1.54` contro `< 0.1`)*. **La stessa condizione vale
+> per `omega`:** se la finestra e' troppo corta per leggere il contrasto, **e' troppo corta per
+> leggere la traiettoria di `omega`.**
+> **Ho usato la stessa finestra come INSUFFICIENTE per un criterio e come DECISIVA per l'altro.**
+> Non e' un numero sbagliato: e' **una lettura incoerente**, ed e' peggio.
+
+## ✅ **IL DATO CHE SI PUO' USARE: I BRACCI `corti`, DOVE `peq` HA RECUPERATO DAVVERO**
+
+```
+braccio          |peq-rho|/rho          differenza di pendenza
+                 passo 1 -> 120         passo 1 -> 120
+ril_s11_corti    17.54 -> 1.541  (x11.4 di recupero)   2.7980 -> 2.3059   (-17.6 %)
+ril_s12_corti    13.51 -> 1.019  (x13.3 di recupero)   2.7325 -> 2.3491   (-14.0 %)
+```
+
+> ### **`peq` recupera di un fattore 11-13, e il divario di pendenza cala del 14-18 %.**
+> **Il divario NON e' proporzionale allo scarto di `peq`.** Se il residuo fosse **tutto** ritardo,
+> un recupero di `x11` avrebbe dovuto chiuderne la gran parte; ne chiude **meno di un quinto**.
+
+**COME SI LEGGE, e va detto con la sua misura di incertezza:** e' un **LIMITE SUPERIORE al
+contributo del ritardo in questa finestra**, non una sua esclusione. **Lo scarto residuo di `peq` e'
+ancora `1.0`-`1.5`**, cioe' **dieci volte sopra** la soglia di equilibrio: il sistema **non e'
+arrivato**, e cio' che resta da recuperare potrebbe non essere lineare. **`R1` resta NON MISURATO.**
+*(Ed e' il verso giusto: prima dicevo «non e' un ritardo», ora dico «il ritardo non spiega piu' di
+un quinto in questa finestra». La seconda e' piu' debole, e vera.)*
+
+## ② **RITIRO: «`omega` e' al plateau, quindi il meccanismo di `R3bis` e' confermato»**
+
+**Cosa avevo scritto:** *«`omega` ha una memoria sua e sta al suo plateau; l'asimmetria di esponenti
+E' CONFERMATA, e' l'osservabile che non funziona.»*
+
+> ### ❌ **IL PLATEAU NON L'HO MISURATO, E IL NUMERO CHE AVEVO LO CONTRADDICE.**
+> Il plateau del random walk smorzato va come **`|F|·sqrt(dt·tau/2)`**, cioe' **proporzionale alla
+> coppia**: se `coppia ~ ramp`, **il plateau dovrebbe CALARE come `1/ramp`** — **un fattore ~5 fra
+> eta' 2 e 14**, dove `ramp` va da `0.054` a `0.28`.
+> **`omega` MISURATO e' PIATTO: `457.7 -> 608.4`.** Non cala: sale del `33 %`.
+> **Quindi ne' `R3bis` ne' la mia spiegazione del plateau sono confermate.**
+
+**E LA COPPIA SUI FIGLI NON E' NEI JSON: VERIFICATO, NON SUPPOSTO.**
+
+```
+storia[i] = [passo, id, eta, ramp, |omega|, rho, peq, contrasto]        <- OTTO campi
+chiavi del json: SEME VERSO MODO CFG n bersagli grado_mediano n0 storia nullo nati
+coppia?  NO        W (somma dei pesi)?  NO
+```
+
+> ### ⇒ **LA COPPIA SUI FIGLI E' *NON MISURATA*, e `R3bis` resta APERTO.**
+> Non «fallito»: **aperto**. Il criterio che lo deciderebbe ha bisogno di una grandezza che **non ho
+> raccolto**, e questo e' un difetto della mia raccolta dati, non un esito.
+
+## ③ LA VERIFICA DELLA STIMA DI LUCA — **serve un dato che i json NON hanno**
+
+Luca chiede di calcolare **esatto**, dai json, `contrasto_figlio/contrasto_maturo` contro
+`(ramp·W_figlio/W_maturo)^2` **con `W` = la somma vera dei pesi di ciascun nodo, non `k`**, eta' per
+eta'.
+
+> ### **`W` NON E' NEI JSON.** La sua stima (`2.4e-6` misurato contro `1.9e-6` previsto) usa `k`
+> ### come proxy, ed e' proprio il proxy che lui chiede di sostituire. **Va raccolto.**
+
+**Quindi: prima i criteri, poi UNA lettura in piu' che registra `W` e la COPPIA per ogni figlio a
+ogni eta'** — sola lettura, nessuna cura, e **serve a `POTENZE-1`**, quindi rispetta il vincolo del
+mandato globale sulle indagini nuove.
