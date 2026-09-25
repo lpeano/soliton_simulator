@@ -18180,3 +18180,62 @@ traccia ON   [passo, n, min ramp, uguali a 1, cali]
 tabella**, cioe' una **STRINGA**. **In un codice guidato da tabelle, un audit su chi LEGGE una
 grandezza deve cercare anche le stringhe** — secondo limite del mio strumento, trovato dal
 codice e non da me.
+
+
+---
+
+# ✅ **I HOOK VIAGGIANO COL REPO — COLLAUDO SU CLONE PULITO, `5/5`** *(2026-09-25, ordine di Luca)*
+
+*(`csv/_seal_fork/_sig_hook/COLLAUDO_clone_pulito.txt`, coi comandi verbatim.)*
+
+```
+H1  .githooks/pre-commit nel clone            LF, 798 byte                  PASS
+H2  clone pulito: core.hooksPath              (non impostato)               PASS (atteso)
+H3  commit che viola P3, PRIMA                RIUSCITO                      PASS (atteso)
+H4  lo strumento LO DICE?                     si', e per PRIMO              PASS
+H5  commit che viola P3, DOPO il comando      RIFIUTATO, HEAD invariato     PASS
+```
+
+> ### **I DUE VERSI SONO ENTRAMBI PROVATI: passa senza il comando, BLOCCA col comando.**
+> Un presidio provato in un solo verso non è provato (`P1-sexies`).
+
+**IL COMANDO, uno per clone, ora in `CLAUDE.md` e in testa al `README`:**
+
+```
+git config core.hooksPath .githooks
+```
+
+**E `python csv/_hook_presidi.py` STAMPA LO STATO PER PRIMO**, prima del proprio docstring:
+*«I PRESIDI NON SONO ATTIVI IN QUESTO CLONE — un commit che viola `P3`, `P5` o `P8` passa senza
+dire niente»*. **Uno strumento che tace quando il presidio è spento non è un presidio.**
+
+## ✅ E `H1` SPIEGA PERCHÉ SERVIVA UNA RIGA DI `.gitattributes`
+
+`.githooks/pre-commit` e `commit-msg` **non hanno estensione**, quindi **nessuna** delle regole
+esistenti li copriva, e `core.autocrlf = true` li avrebbe scritti in **CRLF**: su Linux/macOS un
+hook coi `^M` muore con `/bin/sh^M: bad interpreter`. **Nel clone arrivano in LF: provato.**
+
+## ❌ **E QUI HO FATTO UN ERRORE GRAVE, che va scritto per intero**
+
+Ho **sovrascritto `.gitattributes` con un `cat >`, dandolo per inesistente.** **Esisteva**, con
+**trentasette righe deliberate** (decisione di Luca del 2026-09-16, dopo la trappola CRLF
+misurata due volte in un giorno): copriva `*.py`, `*.md`, `*.csv`, `*.txt`, `*.json` con
+`eol=lf`, i binari come `binary`, e **se stesso**.
+
+**E la premessa da cui ho agito era una RIGA STALE DI `CLAUDE.md`**, che diceva *«DA DECIDERE
+(Luca)… **non l'ho aggiunto**»*. **L'ho citata come stato attuale** nel messaggio di commit,
+invece di guardare il disco.
+
+> ### **UN FATTO STALE IN `CLAUDE.md` NON È UN'IMPRECISIONE: È UNA PREMESSA CHE QUALCUNO USERÀ
+> ### PER AGIRE.** E l'ho usata io, **per cancellare un file**.
+> È l'errore del docstring «ORFANO» (par.0), fatto **sul file che vieta di farlo** (par.5-bis),
+> il giorno stesso in cui quel file mi diceva *«verifica dal DISCO, non dai commenti»*.
+
+**Ripristinato da git** (`2d98cd6`: il `diff` contro l'originale è **solo** le mie 8 righe in
+più), **la riga di `CLAUDE.md` è corretta** (`040e624`), e **nessun contenuto è andato perso** —
+perché il ripristino viene da git, **non dalla mia memoria di cosa ci fosse**.
+
+**E LA LEZIONE OPERATIVA, che vale più della correzione:** `cat > file` su un file che non ho
+letto è un'operazione **senza presidio**. La forma giusta era `cat >> file` — o leggerlo prima.
+*(Lo stesso difetto ha una voce in `doc/PATTERN_DI_PROVA.md` per le sostituzioni di testo,
+`P1-quater`: «ogni sostituzione si asserisce per sé». **Sovrascrivere non asserisce niente.**)*

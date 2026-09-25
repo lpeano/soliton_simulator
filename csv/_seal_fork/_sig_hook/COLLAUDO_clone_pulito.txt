@@ -1,0 +1,67 @@
+================================================================================================
+COLLAUDO DEI HOOK VERSIONATI -- SU UN CLONE PULITO   (2026-09-25, ordine di Luca)
+================================================================================================
+
+  COMANDI, verbatim:
+    git clone --no-hardlinks . <tmp>/clone_p3
+    cd <tmp>/clone_p3
+    printf 'import x\nS.SEMINA_MATURA = True\n' > csv/_seal_fork/_sigillo_collaudo_p3.py
+    git add ... && git commit -m "collaudo: viola P3, hook non attivi"
+    python csv/_hook_presidi.py
+    git config core.hooksPath .githooks
+    printf 'import y\nS.MITOSI_2LAM = True\n' > csv/_seal_fork/_sigillo_collaudo_p3b.py
+    git add ... && git commit -m "collaudo: viola P3, hook ATTIVI"
+
+------------------------------------------------------------------------------------------------
+H1   LA FINE DI RIGA NEL CLONE -- `.gitattributes` funziona?
+------------------------------------------------------------------------------------------------
+     .githooks/pre-commit nel clone:   LF   798 byte
+     -> PASS. Senza la riga `.githooks/* text eol=lf`, `core.autocrlf = true` lo avrebbe
+        riscritto in CRLF, e su Linux/macOS sarebbe morto con `/bin/sh^M: bad interpreter`.
+        E' l'UNICA ragione per cui quella riga esiste, e qui si vede che serve.
+
+------------------------------------------------------------------------------------------------
+H2   CLONE PULITO: i hook sono attivi?
+------------------------------------------------------------------------------------------------
+     core.hooksPath = (non impostato)
+     -> PASS (atteso). Un clone nuovo NON ha i presidi attivi: e' il fatto che il mandato
+        chiedeva di rendere visibile, non un difetto da nascondere.
+
+------------------------------------------------------------------------------------------------
+H3   COMMIT CHE VIOLA `P3`, PRIMA dell'installazione
+------------------------------------------------------------------------------------------------
+     commit RIUSCITO:   1d5c3c6 collaudo: viola P3, hook non attivi
+     -> PASS (atteso). Passa, e senza il comando NIENTE lo impedisce.
+
+------------------------------------------------------------------------------------------------
+H4   E LO STRUMENTO LO DICE? (`A9`: uno strumento che tace non e' un presidio)
+------------------------------------------------------------------------------------------------
+     `python csv/_hook_presidi.py` stampa:
+       -- I PRESIDI NON SONO ATTIVI IN QUESTO CLONE.
+          core.hooksPath = (non impostato)
+          Un commit che viola P3, P5 o P8 passa senza dire niente.
+          CHE FARE, una volta per clone:   git config core.hooksPath .githooks
+     -> PASS. Il verdetto e' la PRIMA cosa che stampa, prima del proprio docstring.
+
+------------------------------------------------------------------------------------------------
+H5   COMMIT CHE VIOLA `P3`, DOPO `git config core.hooksPath .githooks`
+------------------------------------------------------------------------------------------------
+     [PRESIDI] *** COMMIT RIFIUTATO ***
+       P3  csv/_seal_fork/_sigillo_collaudo_p3b.py
+           sigillo che configura il modulo A MANO (MITOSI_2LAM) senza passare dal CLI:
+           prova LA LEGGE, non IL FLAG
+     HEAD dopo il tentativo:   1d5c3c6   (INVARIATO)
+     -> PASS. Il commit non e' stato creato, e il messaggio dice cosa fare.
+
+================================================================================================
+ESITO: 5/5 PASS -- e i due VERSI sono entrambi provati: PASSA senza il comando, BLOCCA col
+comando. Un presidio provato in un solo verso non e' provato (`P1-sexies`).
+================================================================================================
+
+COSA QUESTO COLLAUDO *NON* DICE:
+  - non prova che qualcuno DARA' il comando. Nessun meccanismo dentro git puo' forzarlo: e' il
+    limite vero, ed e' la ragione per cui lo strumento lo stampa a ogni invocazione.
+  - il clone e' LOCALE (`--no-hardlinks`). Un clone da remoto ha lo stesso comportamento per
+    `core.hooksPath` -- che e' una config LOCALE per definizione -- ma non l'ho provato da rete.
+  - `--depth 1` e' stato IGNORATO da git ("--depth is ignored in local clones"): il clone e'
+    completo. Non cambia l'esito, e si dichiara invece di lasciar credere che fosse shallow.
