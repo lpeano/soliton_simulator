@@ -1,0 +1,261 @@
+====================================================================================================================
+SIGILLO `INERZIA-1(C)` -- IL CONTRASTO PER VICINO (`CONTRASTO_INTENSIVO`)
+====================================================================================================================
+
+[on_s11_lunghi] rc=0 ntro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK on_s11_lunghi  bersagli 20  casi 5
+[off_s11_lunghi] rc=0 tro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK off_s11_lunghi  bersagli 20  casi 5
+[on_s11_corti] rc=0 entro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK on_s11_corti  bersagli 20  casi 5
+[off_s11_corti] rc=0 ntro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK off_s11_corti  bersagli 20  casi 5
+[on_s12_lunghi] rc=0 ntro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK on_s12_lunghi  bersagli 20  casi 5
+[off_s12_lunghi] rc=0 tro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK off_s12_lunghi  bersagli 20  casi 5
+[on_s12_corti] rc=0 entro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK on_s12_corti  bersagli 20  casi 5
+[off_s12_corti] rc=0 ntro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK off_s12_corti  bersagli 20  casi 5
+[prima_s11_lunghi] rc=0 o le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK prima_s11_lunghi  bersagli 20  casi 5
+[prima_s12_lunghi] rc=0 o le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK prima_s12_lunghi  bersagli 20  casi 5
+
+blob del simulatore VERO      3e8bb8dd
+blob della COPIA diagnostica  beac2722   (2 ancore)
+il codice di PRIMA e'         a2a60534^   (il PADRE del commit che ha introdotto CONTRASTO_INTENSIVO, NON `HEAD`)
+blob della copia di PRIMA     17d4b26f   (2 ancore)
+semi [11, 12]   versi ['lunghi', 'corti']   k [77, 20, 8, 4, 2]   bersagli 20   passi pieni prima 20
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 79
+  -> FUORI CONFIGURAZIONE DEL DRIVER: 1 differenze su 79
+       CONTRASTO_INTENSIVO        qui True     driver False
+  ESENZIONE DICHIARATA: il flag in prova NON e' ancora nel driver (decisione di Luca: entra fra le cure dopo il sigillo), quindi l'argv ON e' quella del driver PIU' --contrasto-intensivo
+
+====================================================================================================================
+I NUMERI, braccio per braccio
+====================================================================================================================
+--------------------------------------------------------------------------------------------------------------------
+on_s11_lunghi   seme 11   verso lunghi   CONTRASTO_INTENSIVO = True   (sim _sim_diag_ci.py)
+k      COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav. (bers./tutti)
+77     0.30962        0.635897       0.380125         0.0617967      0.435716       0/20  0/4252
+20     0.33333        0.406842       0.644676         0.0625951      0.822197       0/20  0/4252
+8      0.448585       0.294494       1.46568          0.0665949      0.705417       0/20  0/4252
+4      0.426976       0.165081       3.03428          0.0782929      0.509806       0/20  0/4252
+2      0.663912       0.0903891      4.9572           0.0924699      0.35776        0/20  0/4252
+
+--------------------------------------------------------------------------------------------------------------------
+off_s11_lunghi   seme 11   verso lunghi   CONTRASTO_INTENSIVO = False   (sim _sim_diag_ci.py)
+k      COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav. (bers./tutti)
+77     0.310273       49.0223        0.0049225        0.00600827     33.6342        0/20  0/4252
+20     0.333663       8.15145        0.0303725        0.0061346      16.481         0/20  0/4252
+8      0.448174       2.35753        0.178943         0.00813605     5.64845        0/20  0/4252
+4      0.423298       0.660596       0.756747         0.0128386      2.04261        0/20  0/4252
+2      0.659845       0.181042       2.3706           0.0345311      0.716429       0/20  0/4252
+
+--------------------------------------------------------------------------------------------------------------------
+on_s11_corti   seme 11   verso corti   CONTRASTO_INTENSIVO = True   (sim _sim_diag_ci.py)
+k      COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav. (bers./tutti)
+77     0.30962        0.635897       0.380125         0.0617967      0.435716       0/20  0/4252
+20     0.354288       0.0491097      6.60882          0.143223       0.0217267      0/20  0/4252
+8      0.5531         0.0172584      27.896           0.413069       0.0067369      0/20  0/4252
+4      0.740266       0.00765125     80.1636          1.13386        0.00323348     0/20  0/4252
+2      0.841333       0.00485963     151.118          2.16575        0.00186861     0/20  0/4252
+
+--------------------------------------------------------------------------------------------------------------------
+off_s11_corti   seme 11   verso corti   CONTRASTO_INTENSIVO = False   (sim _sim_diag_ci.py)
+k      COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav. (bers./tutti)
+77     0.310273       49.0223        0.0049225        0.00600827     33.6342        0/20  0/4252
+20     0.351863       0.983347       0.331463         0.00987641     0.435134       0/20  0/4252
+8      0.555803       0.138423       3.47152          0.0526045      0.0539615      0/20  0/4252
+4      0.737052       0.0306758      19.9542          0.282646       0.0129432      0/20  0/4252
+2      0.836488       0.00971264     74.8548          1.05991        0.00374073     0/20  0/4252
+
+--------------------------------------------------------------------------------------------------------------------
+on_s12_lunghi   seme 12   verso lunghi   CONTRASTO_INTENSIVO = True   (sim _sim_diag_ci.py)
+k      COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav. (bers./tutti)
+77     0.354212       0.791184       0.485559         0.0695833      0.485093       0/20  0/4297
+20     0.385788       0.621829       0.684977         0.0728003      0.855054       0/20  0/4297
+8      0.541184       0.36002        1.28397          0.0749033      0.848171       0/20  0/4297
+4      0.743228       0.223209       3.54515          0.0980549      0.615051       0/20  0/4297
+2      0.808166       0.139149       5.34324          0.128326       0.339152       0/20  0/4297
+
+--------------------------------------------------------------------------------------------------------------------
+off_s12_lunghi   seme 12   verso lunghi   CONTRASTO_INTENSIVO = False   (sim _sim_diag_ci.py)
+k      COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav. (bers./tutti)
+77     0.353324       61.0135        0.00625503       0.00844853     37.3887        0/20  0/4297
+20     0.361263       12.4622        0.0340017        0.00857976     17.1056        0/20  0/4297
+8      0.542986       2.90735        0.161835         0.00950794     6.79614        0/20  0/4297
+4      0.745774       0.894415       0.883195         0.0177898      2.46476        0/20  0/4297
+2      0.80726        0.279497       2.67237          0.0375784      0.678952       0/20  0/4297
+
+--------------------------------------------------------------------------------------------------------------------
+on_s12_corti   seme 12   verso corti   CONTRASTO_INTENSIVO = True   (sim _sim_diag_ci.py)
+k      COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav. (bers./tutti)
+77     0.354212       0.791184       0.485559         0.0695833      0.485093       0/20  0/4297
+20     0.371528       0.0618447      5.10736          0.105766       0.0240541      0/20  0/4297
+8      0.468006       0.0222687      22.4882          0.315178       0.00861159     0/20  0/4297
+4      0.607495       0.00977884     61.8099          0.823534       0.00396336     0/20  0/4297
+2      0.811367       0.00523953     179.084          2.56137        0.00212868     0/20  0/4297
+
+--------------------------------------------------------------------------------------------------------------------
+off_s12_corti   seme 12   verso corti   CONTRASTO_INTENSIVO = False   (sim _sim_diag_ci.py)
+k      COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav. (bers./tutti)
+77     0.353324       61.0135        0.00625503       0.00844853     37.3887        0/20  0/4297
+20     0.368204       1.24084        0.25277          0.0108257      0.481641       0/20  0/4297
+8      0.466919       0.178546       2.78945          0.0425667      0.0689473      0/20  0/4297
+4      0.603372       0.0392524      15.3809          0.218999       0.0158793      0/20  0/4297
+2      0.808432       0.0104857      90.3776          1.27849        0.00425862     0/20  0/4297
+
+--------------------------------------------------------------------------------------------------------------------
+prima_s11_lunghi   seme 11   verso lunghi   CONTRASTO_INTENSIVO = ASSENTE   (sim _sim_prima_diag.py)
+k      COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav. (bers./tutti)
+77     0.310273       49.0223        0.0049225        0.00600827     33.6342        0/20  0/4252
+20     0.333663       8.15145        0.0303725        0.0061346      16.481         0/20  0/4252
+8      0.448174       2.35753        0.178943         0.00813605     5.64845        0/20  0/4252
+4      0.423298       0.660596       0.756747         0.0128386      2.04261        0/20  0/4252
+2      0.659845       0.181042       2.3706           0.0345311      0.716429       0/20  0/4252
+
+--------------------------------------------------------------------------------------------------------------------
+prima_s12_lunghi   seme 12   verso lunghi   CONTRASTO_INTENSIVO = ASSENTE   (sim _sim_prima_diag.py)
+k      COPPIA p50     INERZIA p50    coppia/inerzia   |omega| p50    contrasto      al pav. (bers./tutti)
+77     0.353324       61.0135        0.00625503       0.00844853     37.3887        0/20  0/4297
+20     0.361263       12.4622        0.0340017        0.00857976     17.1056        0/20  0/4297
+8      0.542986       2.90735        0.161835         0.00950794     6.79614        0/20  0/4297
+4      0.745774       0.894415       0.883195         0.0177898      2.46476        0/20  0/4297
+2      0.80726        0.279497       2.67237          0.0375784      0.678952       0/20  0/4297
+
+====================================================================================================================
+`C1` -- LE PENDENZE DI COPPIA E INERZIA SU `log k`, UGUALI ENTRO L'ERRORE FRA SEMI
+====================================================================================================================
+braccio            pend. COPPIA   pend. INERZIA  differenza     pend. |omega| 
+on_s11_lunghi      -0.1906        0.5199         0.7105         -0.1072       
+off_s11_lunghi     -0.1878        1.5200         1.7078         -0.4375       
+on_s11_corti       -0.2998        1.3387         1.6385         -1.0096       
+off_s11_corti      -0.2983        2.3389         2.6373         -1.4717       
+on_s12_lunghi      -0.2505        0.4865         0.7370         -0.1577       
+off_s12_lunghi     -0.2570        1.4858         1.7428         -0.3806       
+on_s12_corti       -0.2279        1.3641         1.5920         -0.9956       
+off_s12_corti      -0.2278        2.3642         2.5920         -1.3807       
+prima_s11_lunghi   -0.1878        1.5200         1.7078         -0.4375       
+prima_s12_lunghi   -0.2570        1.4858         1.7428         -0.3806       
+
+C1    FAIL  pendenze di COPPIA e INERZIA uguali entro l'errore fra semi
+             ON : |pend(INERZIA) - pend(COPPIA)|  0.7105  1.6385  0.7370  1.5920
+             OFF: |pend(INERZIA) - pend(COPPIA)|  1.7078  2.6373  1.7428  2.5920  1.7078  1.7428
+             dispersione FRA SEMI della differenza, ON: 0.4461
+             CRITERIO: la differenza ON deve stare SOTTO UN TERZO della minima OFF.
+               **Non `== 0`**: le pendenze sono misure, e `R3` insegna che pretendere
+               l'uguaglianza esatta fa fallire un criterio su due ulp. Il fattore 3 e'
+               la separazione che le due popolazioni devono avere per dire `diverse`.
+
+====================================================================================================================
+`C2` -- `|omega|` A `k = 2` DELLO STESSO ORDINE DI `k = 77`
+====================================================================================================================
+  on_s11_lunghi      |omega| k=2 / k=77  x1.496
+  off_s11_lunghi     |omega| k=2 / k=77  x5.747
+  on_s11_corti       |omega| k=2 / k=77  x35.05
+  off_s11_corti      |omega| k=2 / k=77  x176.4
+  on_s12_lunghi      |omega| k=2 / k=77  x1.844
+  off_s12_lunghi     |omega| k=2 / k=77  x4.448
+  on_s12_corti       |omega| k=2 / k=77  x36.81
+  off_s12_corti      |omega| k=2 / k=77  x151.3
+  prima_s11_lunghi   |omega| k=2 / k=77  x5.747
+  prima_s12_lunghi   |omega| k=2 / k=77  x4.448
+
+C2    FAIL  `|omega|` a `k = 2` dello stesso ordine di `k = 77` (rapporto < 10)
+             ON : massimo rapporto  x36.81   (criterio: < 10, cioe' STESSO ORDINE)
+             OFF: x5.747  x176.4  x4.448  x151.3  x5.747  x4.448
+               IL NULLO E' IL BRACCIO OFF, e senza di esso un `x2` non direbbe nulla.
+
+====================================================================================================================
+`C3` -- FLAG SPENTO = BYTE-IDENTICO AL CODICE PRECEDENTE (non `HEAD`, `P8`)
+====================================================================================================================
+C3    PASS  flag SPENTO byte-identico al codice PRECEDENTE (a2a60534^)
+             seme 11: campi confrontati 121   DIVERSI 0   solo nuovo nessuno   solo vecchio nessuno
+             seme 12: campi confrontati 121   DIVERSI 0   solo nuovo nessuno   solo vecchio nessuno
+
+====================================================================================================================
+`C4` -- IL CASO CHE DEVE FALLIRE: il braccio SPENTO, generato TOGLIENDO il flag dall'argv
+====================================================================================================================
+C4    FAIL  il braccio spento e' generato TOGLIENDO l'opzione, e su di esso `C1`/`C2` FALLISCONO
+               on_s11_lunghi      flag=True   opz_nell_argv=True   atteso=True
+               off_s11_lunghi     flag=False  opz_nell_argv=False  atteso=False
+               on_s11_corti       flag=True   opz_nell_argv=True   atteso=True
+               off_s11_corti      flag=False  opz_nell_argv=False  atteso=False
+               on_s12_lunghi      flag=True   opz_nell_argv=True   atteso=True
+               off_s12_lunghi     flag=False  opz_nell_argv=False  atteso=False
+               on_s12_corti       flag=True   opz_nell_argv=True   atteso=True
+               off_s12_corti      flag=False  opz_nell_argv=False  atteso=False
+               prima_s11_lunghi   flag=ASSENTE opz_nell_argv=False  atteso=False
+               prima_s12_lunghi   flag=ASSENTE opz_nell_argv=False  atteso=False
+             bracci spenti: off_s11_lunghi, off_s11_corti, off_s12_lunghi, off_s12_corti
+             su di essi la differenza fra le pendenze vale 1.7078  2.6373  1.7428  2.5920  1.7078  1.7428, cioe' NON passa `C1`:
+               **e' il caso che DEVE fallire, e fallisce.**
+
+====================================================================================================================
+`C5` -- IL PAVIMENTO `1e-6`: QUANTE VOLTE MORDE CON LA CURA (`A11`)
+====================================================================================================================
+C5    PASS  il pavimento `1e-6` non comincia a mordere con la cura
+             ON : bersagli al pavimento, sommati su tutti i casi   0
+             ON : NODI al pavimento, sommati su tutti i casi        0
+             OFF: bersagli al pavimento                             0
+               PRIMA della cura era `0/20` in ogni riga (`CONFIG-1/a`).
+               **Se ON mordesse, la cura abbasserebbe l'inerzia IN ASSOLUTO e non solo
+               la sua pendenza**, e `A11` chiederebbe di guardare l'errore che il
+               pavimento nasconde.
+
+====================================================================================================================
+`C6` -- LA SCALA DELL'INERZIA SU **TUTTI** I NODI, PRIMA E DOPO
+====================================================================================================================
+braccio            p5             mediana        p95            min            al pav./nodi
+on_s11_lunghi      0.171211       0.598886       1.29685        0.065483       0/4252
+off_s11_lunghi     13.1114        40.2779        91.6181        5.76025        0/4252
+on_s11_corti       0.171211       0.598886       1.29685        0.065483       0/4252
+off_s11_corti      13.1114        40.2779        91.6181        5.76025        0/4252
+on_s12_lunghi      0.175765       0.671833       1.41539        0.0774388      0/4297
+off_s12_lunghi     14.2121        44.9539        103.81         6.39588        0/4297
+on_s12_corti       0.175765       0.671833       1.41539        0.0774388      0/4297
+off_s12_corti      14.2121        44.9539        103.81         6.39588        0/4297
+prima_s11_lunghi   13.1114        40.2779        91.6181        5.76025        0/4252
+prima_s12_lunghi   14.2121        44.9539        103.81         6.39588        0/4297
+
+C6    PASS  la scala dell'inerzia su TUTTI i nodi e' DICHIARATA prima/dopo
+             mediana ON  0.63536     mediana OFF 42.6159     rapporto x0.01491
+               **Questo criterio non ha una soglia, e non deve averla:** dice DI QUANTO
+               si sposta la scala. La cura divide per il numero di vicini, quindi un
+               abbassamento e' ATTESO: il punto e' che sia DICHIARATO, e che `C5` dica
+               se quell'abbassamento arriva al pavimento.
+
+====================================================================================================================
+I CONTATORI `A8` DEL SITO (`P5`: un ramo non misurato e' un comportamento sconosciuto)
+====================================================================================================================
+  on_s11_lunghi      {'_g_ci_tot': 20, '_g_ci_senza_cn': 1, '_g_ci_senza_cn_quando': 1, '_g_ci_vic_p50': 77.0, '_g_ci_vic_min': 37.0, '_g_ci_nodi': 4252}
+  off_s11_lunghi     (nessuno)
+  on_s11_corti       {'_g_ci_tot': 20, '_g_ci_senza_cn': 1, '_g_ci_senza_cn_quando': 1, '_g_ci_vic_p50': 77.0, '_g_ci_vic_min': 37.0, '_g_ci_nodi': 4252}
+  off_s11_corti      (nessuno)
+  on_s12_lunghi      {'_g_ci_tot': 20, '_g_ci_senza_cn': 1, '_g_ci_senza_cn_quando': 1, '_g_ci_vic_p50': 77.0, '_g_ci_vic_min': 37.0, '_g_ci_nodi': 4297}
+  off_s12_lunghi     (nessuno)
+  on_s12_corti       {'_g_ci_tot': 20, '_g_ci_senza_cn': 1, '_g_ci_senza_cn_quando': 1, '_g_ci_vic_p50': 77.0, '_g_ci_vic_min': 37.0, '_g_ci_nodi': 4297}
+  off_s12_corti      (nessuno)
+  prima_s11_lunghi   (nessuno)
+  prima_s12_lunghi   (nessuno)
+
+====================================================================================================================
+ESITO: 3/6 PASS
+====================================================================================================================
+
+COSA QUESTO SIGILLO *NON* DICE:
+  - **non dice che la cura sia GIUSTA in fisica**: dice che coppia e inerzia scalano allo
+    stesso modo, che era l'incoerenza misurata. Se il settore di spin resti aliasato e' UN'
+    ALTRA domanda, e questo sigillo non la tocca.
+  - `C6` non ha soglia **di proposito**: la cura divide per il numero di vicini, quindi la
+    scala si abbassa. Il criterio e' che sia DICHIARATA, non che non cambi.
+  - DUE SEMI: per una barra fra semi servono >= 4 (`P3` delle regole).
+  - il taglio TOGLIE ARCHI A MANO: la domanda e' se la LEGGE regga un `k` piccolo.
+  - i 20 bersagli non sono adiacenti, **ma possono condividere un VICINO**.

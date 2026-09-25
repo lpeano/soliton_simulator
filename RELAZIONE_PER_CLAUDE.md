@@ -18334,3 +18334,122 @@ fisica di ogni nodo, e il mandato dice **STOP dopo (a)**.
 **Cosa NON dicono questi numeri** *(e va detto prima che la cura sembri ovvia)*: che rendere
 `_contrasto` intensivo **non rompa** qualcos'altro. `rho_s` estensivo entra anche altrove, e
 **la misura d'impatto non è stata fatta.**
+
+
+---
+
+# ⚠ **`INERZIA-1(C)`: `3/6` — LA CURA TOGLIE ESATTAMENTE UNA POTENZA DI `k`, E NON BASTA** *(2026-09-25)*
+
+*(`csv/_seal_fork/_sigillo_contrasto_intensivo.py`, referto in
+`csv/_seal_fork/_sig_contrasto/SIGILLO_contrasto_intensivo.txt`. Dieci bracci, un processo
+ciascuno; blob del simulatore `3e8bb8dd`; il codice «di prima» è `a2a60534^`, **non `HEAD`**.)*
+
+```
+C1  FAIL   pendenze di COPPIA e INERZIA uguali entro l'errore fra semi
+C2  FAIL   |omega| a k = 2 dello stesso ordine di k = 77
+C3  PASS   flag SPENTO byte-identico al codice PRECEDENTE (a2a60534^)
+C4  FAIL   il caso che deve fallire  <- **e il FAIL e' del mio CRITERIO, non del braccio**
+C5  PASS   il pavimento 1e-6 non comincia a mordere
+C6  PASS   la scala dell'inerzia su TUTTI i nodi e' dichiarata
+```
+
+## ① ✅ **`C3`: LA CURA È LOCALE — PROVATO, NON ARGOMENTATO**
+
+```
+seme 11:  campi confrontati 121   DIVERSI 0   solo nuovo nessuno   solo vecchio nessuno
+seme 12:  campi confrontati 121   DIVERSI 0   solo nuovo nessuno   solo vecchio nessuno
+```
+
+**A flag spento lo stato è byte-identico al codice PRECEDENTE alla cura** — e «precedente» qui
+significa il **padre del commit che ha introdotto il flag**, non `HEAD`. **Le sette letture di
+`rho_s` fuori da `_passo_spinoriale` non vedono niente**: era l'affermazione che il ragionamento
+sulla località poteva solo rendere plausibile, e ora è misurata.
+
+## ② 🎯 **IL NUMERO CHE DECIDE: LA CURA TOGLIE `−1.0000` DI PENDENZA, IN TUTTI E QUATTRO I BRACCI**
+
+| braccio | pend. INERZIA **OFF** | pend. INERZIA **ON** | Δ |
+|---|---|---|---|
+| s11 lunghi | `1.5200` | `0.5199` | **`−1.0001`** |
+| s11 corti | `2.3389` | `1.3387` | **`−1.0002`** |
+| s12 lunghi | `1.4858` | `0.4865` | **`−0.9993`** |
+| s12 corti | `2.3642` | `1.3641` | **`−1.0001`** |
+
+> ### **DIVIDERE PER IL NUMERO DI VICINI TOGLIE ESATTAMENTE UNA POTENZA DI `k`, E LO FA A QUATTRO
+> ### CIFRE DECIMALI.** Il meccanismo fa **precisamente** quello per cui è stato scritto.
+> **Questo non è un `PASS`, ed è meglio di un `PASS`:** è la prova che la cura agisce **dove e
+> come** doveva, e che la misura è abbastanza precisa per dire *quanto manca*.
+
+## ③ ⛔ **`C1`: NECESSARIA, NON SUFFICIENTE — il residuo è reale e dipende da QUALI archi si toglie**
+
+```
+                     differenza |pend(INERZIA) - pend(COPPIA)|
+braccio              OFF        ON         residuo
+s11/s12 lunghi       1.71 1.74  0.71 0.74  <- da 1.7 a 0.7: MEZZO difetto in meno
+s11/s12 corti        2.64 2.59  1.64 1.59  <- da 2.6 a 1.6
+```
+
+**La coppia resta intensiva (`-0.19 … -0.30`), l'inerzia resta estensiva: `+0.49/+0.52`
+togliendo i lunghi, `+1.34/+1.36` togliendo i corti.**
+
+> ### **LA DIAGNOSI, e viene dai numeri, non da un'ipotesi:** normalizzare sul **CONTEGGIO** dei
+> ### vicini toglie **una** potenza; **il residuo viene dai PESI.**
+> `rho_s` è una **somma PESATA**, `Σ w_ij · (…)` con `w = exp(-d/lam)`. **Dividere per il
+> NUMERO di vicini non è dividere per il PESO totale.** E si vede da quale taglio fa più danno:
+> togliendo **i più corti** si togliono **i pesi più GRANDI**, e lì la normalizzazione per
+> conteggio **sotto-corregge di più** (`+1.34` contro `+0.49`).
+
+## ④ ⛔ **`C2`: metà curato, e la metà conta**
+
+```
+                 |omega| k=2 / k=77        OFF          ON
+togliendo i lunghi                         x5.7  x4.4    x1.50  x1.84   <- ESPLOSIONE SPARITA
+togliendo i corti                          x176  x151    x35.1  x36.8   <- x5 meglio, non risolto
+```
+
+**Togliendo i più lunghi l'esplosione è finita** (`×1.5`, sotto la soglia del criterio e
+praticamente *nessuna* crescita). **Togliendo i più corti resta `×35`** — cinque volte meglio di
+`×176`, e ancora **fuori dallo stesso ordine**.
+
+## ⑤ ❌ **`C4` È UN `FAIL` DEL MIO CRITERIO, E LO DICHIARO INVECE DI CORREGGERLO ORA**
+
+**Il braccio spento è generato bene:** tutti e dieci i bracci hanno la configurazione attesa
+(`flag`/`opz_nell_argv`/`atteso` concordi, `ASSENTE` sui due bracci del codice di prima), **e su
+di esso `C1` fallisce davvero**, che è ciò che Luca ha chiesto. **Ma il mio `C4` pretendeva in
+più una separazione di `3×` fra ON e OFF** — `max(ON) = 1.64` contro `min(OFF) = 1.71`, rapporto
+`1.04` — cioè **ho duplicato `C1` dentro `C4` con una soglia più stretta.**
+
+> **NON LO CAMBIO ADESSO.** Aggiustare un criterio **dopo** aver visto i numeri è esattamente
+> ciò che `P1-sexies` vieta, e in questo repo è già costato cinque criteri sbagliati in un
+> giorno. **La forma corretta sarebbe:** `C4` verifica *«il braccio spento è generato togliendo
+> l'opzione»* **e** *«su di esso `C1` non passa»* — **senza** una soglia propria. **Decide Luca.**
+
+## ⑥ ✅ `C5` e `C6`: il pavimento non morde, e la scala è dichiarata
+
+```
+scala dell'inerzia (TUTTI i nodi)   p5        mediana    p95       min        al pav.
+OFF                                 13.1      42.6       91.6      5.76       0/4252
+ON                                  0.171     0.635      1.297     0.0655     0/4252
+                                                         rapporto delle mediane  x0.0149 ~ 1/67
+```
+
+**La scala scende di ~`1/77`** — il conteggio mediano di vicini è `77`, quindi **scende
+esattamente di quel fattore**, come deve. **E il pavimento `1e-6` non morde nemmeno dopo:** il
+minimo su 4252 nodi è `0.0655`, **quattro ordini sopra il pavimento**. La cura **non** avvicina
+l'inerzia al limite artificiale.
+
+**E I CONTATORI `A8` DICONO IL LORO NUMERO** *(`P5`)*: `_g_ci_tot = 20` *(venti passi)*,
+**`_g_ci_senza_cn = 1`, all'invocazione `1`** — il primo passo non ha ancora archi validi, e cade
+sulla convenzione dichiarata (`_contrasto = 1`). **Una volta su venti, e solo la prima: il ramo è
+misurato, non assunto.** `_g_ci_vic_p50 = 77`, `min = 37`.
+
+## 🛑 DOVE SIAMO, senza abbellire
+
+**La cura è GIUSTA e INSUFFICIENTE.** È locale (`C3`), non tocca il pavimento (`C5`), sposta la
+scala di quanto deve (`C6`), e **toglie esattamente la potenza di `k` che il conteggio dei vicini
+può togliere** — `−1.0000`. **Ma `rho_s` è estensivo di più di uno**, e il resto sta **nei pesi**.
+
+**Il candidato che i numeri indicano** *(non lo eseguo: decide Luca)*: normalizzare sul **PESO
+TOTALE `Σ w_ij`** invece che sul **conteggio**, cioè la media pesata *vera* — la stessa grandezza
+che `_mat(w)` già costruisce. **Resta derivata** *(nessun numero nuovo)*, e la previsione è
+falsificabile: **se il residuo viene dai pesi, quella normalizzazione deve portare la differenza
+delle pendenze sotto `0.7` anche nel taglio «corti»**; se non lo fa, la mia diagnosi è sbagliata.
