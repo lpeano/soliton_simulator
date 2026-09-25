@@ -115,3 +115,69 @@ MEDIANE separate   scarto massimo dell'identita'   4.748e-02      (atteso >> 0)
 > l'identita' — lo stampa e dice che `K1` non prova niente.)*
 
 **`K1` resta invariato come SOGLIA** (`< 1e-9`), **e ora ha senso.**
+---
+
+# ❌❌❌ **ALTRI DUE DIFETTI, E IL PRIMO GIRO E' INVALIDATO** *(rilievi di Luca, 2026-09-26)*
+
+**Il giro era FINITO e `K1` era PASSATO.** Ed e' **peggio** che se avesse fallito: **`K1` e'
+passato perche' il secondo difetto ha NASCOSTO il primo.**
+
+## ③ **IL FILTRO «TUTTE E QUATTRO POSITIVE» NON TOGLIE IL CONTRASTO DI CONVENZIONE**
+
+Dove `_ok_n` e' falso, `_contrasto` vale **`1`** — e **`1` E' POSITIVO**. Quei nodi passano il
+filtro, e l'identita' **non chiude** su di loro.
+
+> ### ⚠ **NEL PRIMO GIRO SONO STATI SCARTATI PER CASO**, non dal filtro: al primo passo di vita
+> ### **`rho` vale `0.0` ESATTO**, e il filtro li ha presi **su `rho`**, non sulla convenzione.
+> **Se `rho` fosse stato piccolo-ma-non-nullo, `K1` avrebbe fallito** — o, peggio, **sarebbe
+> passato con un termine corrotto.**
+
+**CURA:** `_ok_n` diventa una **riga diagnostica** (`_diag_ok_n`, **aggiunta alla lista della
+postcondizione `P9`**), e i nodi con `_ok_n` falso si **escludono — maturi e figli — CONTATI e
+STAMPATI**. **Non un filtro sull'eta'**: l'eta' e' una conseguenza, `_ok_n` e' la causa.
+
+## ④ **UN PASSO CON UNA NASCITA SI SCARTAVA INTERO: IL CAMPIONE ERA DISTORTO**
+
+Le diagnostiche si scrivono in `step()`, **la mitosi viene dopo**: a ogni nascita
+`net.n > len(diag)`, e io buttavo **il passo intero**.
+
+```
+MISURATO sul primo giro:   seme 11  ->  51 passi scartati su 120     (42 %)
+                           seme 12  ->  46 passi scartati su 120     (38 %)
+                           motivo: «forme corte», cioe' UNA NASCITA
+```
+
+> ### **Restavano SOLO i passi SENZA nascite: un campione distorto PROPRIO sul fenomeno che si
+> ### vuole misurare.** I figli si guardano dove i figli non nascono.
+
+**CURA:** si usano i primi `len(diag)` nodi e si saltano **SOLO i neonati di quel passo**
+*(`k >= len(diag)`)*, come faceva il sigillo esteso — **e si conta quanti passi avevano nascite.**
+
+## ⛔ **CONSEGUENZA: I NUMERI DEL PRIMO GIRO NON SI PUBBLICANO**
+
+Le frazioni che avevo letto *(`%T2` fra `103` e `112`, `%T3` fra `-4` e `+2`)* vengono da un
+campione **senza nascite**. **Non le riporto come risultato**, e la voce `POTENZE-1` **non si
+aggiorna con quei numeri**: si rifa' la raccolta.
+
+## IL COLLAUDO, ORA A **QUATTRO CELLE** *(richiesta di Luca)*
+
+Dati sintetici con `contrasto == rho/peq` nodo per nodo, **piu' dodici nodi di CONVENZIONE**
+*(`contrasto = 1` con `rho/peq != 1`, e `_ok_n` falso solo su quelli)*:
+
+```
+aggregazione | filtro              scarto max      atteso
+geometrica|ok_n                    1.776e-15       ~0   <- L'UNICO che deve chiudere
+mediane|ok_n                       4.748e-02       >> 0  (aggregazione sbagliata)
+geometrica|tutte_positive          9.274e+00       >> 0  (nodi di CONVENZIONE dentro)
+mediane|tutte_positive             9.321e+00       >> 0  (entrambi i difetti)
+```
+
+> ### ✅ **COLLAUDO 4/4: chiude SOLO `geometrica|ok_n`.**
+> E il filtro vecchio sbaglia di **`9.27`**, non di un epsilon: **l'identita' non «si degrada»,
+> si rompe.** *(Se una delle tre celle che DEVONO fallire non fallisse, il referto lo stampa e
+> dichiara il collaudo VUOTO in quella cella.)*
+
+**LEZIONE, e vale oltre questo strumento:** i miei due presidi — il filtro e `K1` — **si sono
+coperti a vicenda.** Il filtro lasciava entrare i nodi sbagliati, il buttare-il-passo li toglieva
+per un'altra ragione, e `K1` **passava**. **Due difetti che si annullano danno un `PASS`, e un
+`PASS` non si indaga.**

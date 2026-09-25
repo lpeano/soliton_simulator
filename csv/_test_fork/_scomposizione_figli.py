@@ -67,6 +67,14 @@ DIAG_IN = [
     "        self._diag_contrasto = np.array(_contrasto, copy=True)",
     "        self._diag_peq_nodo = np.array(_peq_nodo, copy=True)",
     "        self._diag_rho_s = np.array(_rho_s, copy=True)",
+    # ⚠ **`_ok_n` E' INDISPENSABILE, e il filtro «tutte positive» NON lo sostituisce:**
+    #   dove `_ok_n` e' falso `_contrasto` vale **`1` per CONVENZIONE**, e **`1` e'
+    #   POSITIVO**. Quei nodi passerebbero il filtro e **l'identita' non chiuderebbe**.
+    #   *(Rilievo di Luca. Nel primo giro erano stati scartati **per caso**, perche' al
+    #   primo passo di vita `rho` vale `0.0` ESATTO — non per il filtro: **se `rho` fosse
+    #   stato piccolo-ma-non-nullo, `K1` avrebbe fallito o, peggio, sarebbe passato con un
+    #   termine corrotto.**)*
+    "        self._diag_ok_n = np.array(_ok_n, copy=True)",
     # ⚠ `W` E' LA STESSA ESPRESSIONE DELLA CURA: `bincount` di `w` su `i` e `j`. Se qui si
     #   scrivesse un'altra formula, la scomposizione parlerebbe di un'altra cura.
     "        self._diag_W = ((np.bincount(self.i, np.asarray(w, float), minlength=n)[:n]"
@@ -155,10 +163,22 @@ for _p in range(1, BUDGET + 1):
     n = int(net.n)
     W = _dg("_diag_W"); CT = _dg("_diag_contrasto"); PQ = _dg("_diag_peq_nodo")
     RH = _dg("_diag_rho_s"); CO = _dg("_diag_coppia"); IN = _dg("_diag_inerzia")
-    if min(W.size, CT.size, PQ.size, RH.size, IN.size) < n or CO.shape[0] < n:
+    # ❌❌ **SECONDO DIFETTO RILEVATO DA LUCA:** buttare il passo intero quando le
+    #   diagnostiche sono corte **scarta OGNI PASSO CON UNA NASCITA** — le diagnostiche si
+    #   scrivono in `step()`, la mitosi viene **dopo**, quindi `net.n > len(diag)` a ogni
+    #   nascita. **MISURATO nel primo giro: 51 e 46 passi su 120 scartati, il 40 %**, e
+    #   restavano **solo i passi senza nascite**: un campione DISTORTO proprio sul fenomeno
+    #   che si vuole misurare.
+    # ✅ **ORA: si usano i primi `len(diag)` nodi e si saltano SOLO i neonati di quel passo**
+    #   (come faceva il sigillo esteso), e **si conta quanti passi avevano nascite.**
+    _nd = int(min(W.size, CT.size, PQ.size, RH.size, IN.size, CO.shape[0]))
+    if _nd < 10:
         o["esclusi"] += 1
-        o["esclusi_perche"].append([_p, "forme corte", int(W.size), int(n)])
+        o["esclusi_perche"].append([_p, "diagnostiche troppo corte", _nd, int(n)])
         continue
+    if _nd < n:
+        o["passi_con_nascite"] = o.get("passi_con_nascite", 0) + 1
+    n = _nd
     cop = np.linalg.norm(CO[:n], axis=1)
     _tr = net._tempo_rampa()
     ramp = np.minimum(1.0, np.asarray(net.eta, float)[:n] / (np.asarray(_tr, float)[:n]
@@ -182,8 +202,10 @@ for _p in range(1, BUDGET + 1):
     #   ⚠ Si tengono solo i nodi con **tutte e quattro** le grandezze positive: dove `_ok_n`
     #     e' falso `_contrasto` vale `1` per CONVENZIONE, e li' l'identita' **non deve**
     #     chiudere. **Quanti se ne scartano E' UN NUMERO CHE VA NEL REFERTO.**
-    _bm = (W[mv] > 0) & (PQ[mv] > 0) & (RH[mv] > 0) & (CT[mv] > 0)
+    OK_N = np.asarray(getattr(net, "_diag_ok_n", np.ones(n, bool)))[:n].astype(bool)
+    _bm = (W[mv] > 0) & (PQ[mv] > 0) & (RH[mv] > 0) & (CT[mv] > 0) & OK_N[mv]
     _mv = mv[_bm]
+    o["ok_n_falsi_maturi"] = o.get("ok_n_falsi_maturi", 0) + int(np.sum(~OK_N[mv]))
     if _mv.size < 10:
         o["esclusi"] += 1
         o["esclusi_perche"].append([_p, "meno di 10 maturi utilizzabili", int(_mv.size)])
@@ -209,6 +231,11 @@ for _p in range(1, BUDGET + 1):
     for _k, _nasc in nati.items():
         _e = _p - _nasc
         if _k >= n or _e < 1 or _e > ETA_MAX:
+            continue
+        if not OK_N[_k]:
+            # il nodo porta il `_contrasto` DI CONVENZIONE (`= 1`): **si esclude e si
+            #   CONTA**, non si lascia entrare nell'identita'.
+            o["ok_n_falsi_figli"] = o.get("ok_n_falsi_figli", 0) + 1
             continue
         o["righe"].append([_p, int(_k), int(_e), float(W[_k]), float(PQ[_k]), float(RH[_k]),
                            float(CT[_k]), float(cop[_k]), float(om[_k]), float(ramp[_k]),
@@ -268,6 +295,13 @@ def collaudo_k1(seme=7, quanti=400):
     peq_f = np.exp(rg.normal(0.3, 0.2, 40))
     W_f = np.exp(rg.normal(-1.5, 0.4, 40))
     ct_f = rho_f / peq_f
+    # ⚠ **I NODI DI CONVENZIONE**, richiesta di Luca: `contrasto = 1` con `rho/peq != 1`.
+    #   Col filtro VECCHIO («tutte positive») **entrano**, e `K1` DEVE fallire; con `_ok_n`
+    #   si escludono, e `K1` DEVE passare. **Sono il caso che deve FALLIRE.**
+    rho_c = np.exp(rg.normal(-8.0, 0.5, 12))
+    peq_c = np.exp(rg.normal(0.3, 0.2, 12))
+    ct_c = np.ones(12)                      # LA CONVENZIONE: 1, e `1` e' POSITIVO
+    ok_n_c = np.zeros(12, bool)             # `_ok_n` falso proprio su questi
     fuori = {}
     for modo in ('geometrica', 'mediane'):
         if modo == 'geometrica':
@@ -275,16 +309,31 @@ def collaudo_k1(seme=7, quanti=400):
         else:
             g = lambda x: float(np.median(x))
         _r, _p, _w, _c = g(rho_m), g(peq_m), g(W_m), g(ct_m)
-        tot = np.log(ct_f / _c)
-        T1 = np.log((rho_f / W_f ** 2) / (_r / _w ** 2))
-        T2 = 2.0 * np.log(W_f / _w)
-        T3 = -np.log(peq_f / _p)
-        fuori[modo] = float(np.abs(T1 + T2 + T3 - tot).max())
+        for filtro in ('ok_n', 'tutte_positive'):
+            if filtro == 'ok_n':
+                _rf, _pf, _wf, _cf = rho_f, peq_f, W_f, ct_f
+            else:
+                # il filtro VECCHIO lascia entrare i nodi di CONVENZIONE
+                _rf = np.concatenate([rho_f, rho_c]); _pf = np.concatenate([peq_f, peq_c])
+                _wf = np.concatenate([W_f, np.exp(rg.normal(-1.5, 0.4, 12))])
+                _cf = np.concatenate([ct_f, ct_c])
+            tot = np.log(_cf / _c)
+            T1 = np.log((_rf / _wf ** 2) / (_r / _w ** 2))
+            T2 = 2.0 * np.log(_wf / _w)
+            T3 = -np.log(_pf / _p)
+            fuori[modo + '|' + filtro] = float(np.abs(T1 + T2 + T3 - tot).max())
     return fuori
 
 
 _CO = collaudo_k1()
-_CO_OK = (_CO['geometrica'] < 1e-12) and (_CO['mediane'] > 1e-3)
+# QUATTRO celle, e servono tutte e quattro: la geometrica col filtro `_ok_n` DEVE chiudere,
+#   e le altre tre DEVONO fallire — le mediane per l'aggregazione, il filtro vecchio per i
+#   nodi di convenzione. **Se una delle tre non fallisce, il collaudo e' VUOTO in quella
+#   cella e lo si dichiara.**
+_CO_OK = (_CO['geometrica|ok_n'] < 1e-12
+          and _CO['mediane|ok_n'] > 1e-3
+          and _CO['geometrica|tutte_positive'] > 1e-3
+          and _CO['mediane|tutte_positive'] > 1e-3)
 
 LOG, RIPRESI, dati = [], {}, {}
 proc = {}
@@ -356,18 +405,21 @@ P("  dati con `contrasto == rho/peq` nodo per nodo, `rho` e `peq` log-normali IN
 P("  (se fossero proporzionali il difetto non si vedrebbe: **il caso sintetico deve")
 P("  CONTENERE il difetto**, non spiegarlo).")
 P()
-P("  media GEOMETRICA   scarto massimo dell'identita'  %.3e   (atteso ~0)"
-  % _CO["geometrica"])
-P("  MEDIANE separate   scarto massimo dell'identita'  %.3e   (atteso >> 0)"
-  % _CO["mediane"])
+P("  %-34s %-14s %s" % ("aggregazione | filtro", "scarto max", "atteso"))
+for _k4, _atteso in (("geometrica|ok_n", "~0  <- L'UNICO che deve chiudere"),
+                     ("mediane|ok_n", ">> 0  (aggregazione sbagliata)"),
+                     ("geometrica|tutte_positive", ">> 0  (nodi di CONVENZIONE dentro)"),
+                     ("mediane|tutte_positive", ">> 0  (entrambi i difetti)")):
+    P("  %-34s %-14.3e %s" % (_k4, _CO[_k4], _atteso))
 P()
 if _CO_OK:
-    P("  -> COLLAUDO 2/2: la geometrica CHIUDE, le mediane separate NON chiudono.")
+    P("  -> COLLAUDO 4/4: chiude SOLO `geometrica|ok_n`.")
     P("     **Quindi `K1` e' un controllo VERO**: se fallisce sul dato, il difetto e' nella")
     P("     RACCOLTA, non nell'aggregazione.")
 else:
     P("  -> ⛔ **COLLAUDO VUOTO O SBAGLIATO, e lo dichiaro invece di proseguire:**")
-    P("     geometrica %.3e   mediane %.3e" % (_CO["geometrica"], _CO["mediane"]))
+    for _k4 in sorted(_CO):
+        P("     %-34s %.3e" % (_k4, _CO[_k4]))
     P("     Se le mediane NON fanno fallire l'identita', questo collaudo non prova niente,")
     P("     e `K1` resta una tautologia travestita.")
 P()
@@ -531,6 +583,13 @@ for nome, o in sorted(dati.items()):
 P()
 P("  I maturi DERIVANO, ed e' la ragione per cui il confronto e' allo STESSO PASSO: un")
 P("  riferimento fisso darebbe un divario che cambia **perche' cambia il riferimento**.")
+P("  passi con NASCITE (diagnostiche corte, neonati saltati): %s"
+  % {n: o.get("passi_con_nascite", 0) for n, o in sorted(dati.items())})
+P("  nodi con `_ok_n` FALSO esclusi -- maturi: %s   figli: %s"
+  % ({n: o.get("ok_n_falsi_maturi", 0) for n, o in sorted(dati.items())},
+     {n: o.get("ok_n_falsi_figli", 0) for n, o in sorted(dati.items())}))
+P("  *(sono i nodi col `_contrasto` DI CONVENZIONE: 1. Positivo, quindi il filtro")
+P("  «tutte positive» NON li toglieva.)*")
 P("  passi ESCLUSI e il perche': %s"
   % {n: (o.get("esclusi"), (o.get("esclusi_perche") or [])[:2]) for n, o in sorted(dati.items())})
 P()
