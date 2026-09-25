@@ -62,6 +62,16 @@ OPZ = "--semina-matura"
 FLAGNOME = "SEMINA_MATURA"
 SIM_HEAD = os.path.join(RADICE, "soliton_simulator.py")
 ARGV = _cli_flag.argv_del_driver([], dest=os.path.join(TMP, "_scarto"))[1]
+# ⚠ **`--nodi 0` SI AGGIUNGE, E VA DICHIARATO PERCHE' NON E' L'ARGV DEL DRIVER.**
+#   `_applica_flag` **semina il vuoto di default** (`SCENA-1`), ma **il figlio lo BUTTA**:
+#   fa `S.net = S.Rete(SEME)` e costruisce la scena `(ii)`. Quel vuoto non e' ne' misurato
+#   ne' confrontato -- e' solo costo.
+#   **E sul braccio «prima» era un ARRESTO:** il codice precedente non ha la `SCENA-1`,
+#   quindi semina `a.nodi = 900` **con `--semina-lam` acceso**, e
+#   `[semina-lam] RIFIUTO DI SEMINARE: non ci stanno 900 nodi a distanza >= LAM` **ferma il
+#   braccio**. E' **esattamente il conflitto che `S5` misura**, visto dal codice di prima:
+#   **la conferma indipendente che `SCENA-1` era necessaria**, non un intoppo del sigillo.
+ARGV = ARGV + ["--nodi", "0"]
 assert OPZ in ARGV, ("il driver NON passa %s: il braccio OFF sarebbe IDENTICO " % OPZ)
 
 FIGLIO = r'''
@@ -124,8 +134,19 @@ dentro = np.concatenate([co1["massa_%d" % k] for k in range(3)])
 o["I_massa"] = float(I[dentro].mean()); o["I_vuoto"] = float(I[co1["vuoto"]].mean())
 o["contrasto"] = (o["I_massa"] / o["I_vuoto"]) if o["I_vuoto"] else float("inf")
 o["Lam"] = float(I.mean())
-o["g_rampa"] = {k: (list(v) if isinstance(v, tuple) else v)
-                for k, v in vars(net).items() if k.startswith("_g_rampa") or k.startswith("_g_cura4")}
+# ⚠ `_g_rampa_prec` NON E' UN CONTATORE: e' la MEMORIA PER NODO della rampa del passo
+#   prima, un `ndarray(n,)`. Nel json ne va la FORMA, non i valori -- e va detto invece di
+#   toglierla in silenzio: chi legge il json deve sapere che quel campo non e' un numero.
+#   *(Il primo giro dal CLI e' morto qui: `TypeError: ndarray is not JSON serializable`,
+#   e NON era morto prima perche' a flag spento quel ramo non scriveva l'array.)*
+o["g_rampa"] = {}
+for _k, _v in vars(net).items():
+    if not (_k.startswith("_g_rampa") or _k.startswith("_g_cura4")):
+        continue
+    if isinstance(_v, np.ndarray):
+        o["g_rampa"][_k] = ["ndarray", list(_v.shape)]
+    else:
+        o["g_rampa"][_k] = list(_v) if isinstance(_v, tuple) else _v
 
 # FIRMA DEI BYTE su tutti i campi confrontabili (`STANDARD 2`)
 firme = {}
@@ -165,7 +186,22 @@ n_pre = int(net.n)
 _s0 = (S.PHI_CRIT + np.pi) if (S.TORS_4PI and not S.FASE_2PI) else S.PHI_CRIT
 _centro = 0.5 * ((1.0 + _s0 / S.PHI_CRIT) + (1.0 + (4.0 * np.pi) / S.PHI_CRIT))
 TW0 = 0.5 * (_s0 + (_centro - 1.0) * S.PHI_CRIT)
-net.tw = np.zeros(len(net.d)); net.tw[0] = TW0
+# ⚠⚠ [`CLI-1`, 2026-09-25] **L'ARCO SI SCEGLIE CONFORME A `A13`, NON SI PRENDE IL PRIMO.**
+#   Dal CLI arriva **anche `--mitosi-2lam`** (e'e' obbligatoria), quindi la
+#   `CURA 5` e' ATTIVA: **un arco si divide solo se `d >= 2 LAM`.** L'arco `0` di questo
+#   telaio misura `d = 1.1433` contro `2 LAM = 1.6000`, quindi **la cura 5 ne VIETAVA la
+#   divisione** e `A3` non aveva piu' niente da misurare: `nuovi 0`.
+#   **NON si spegne la cura 5 e NON si fabbrica una lunghezza:** si prende **l'arco piu'
+#   LUNGO**, che nel telaio conforma gia' (`d = 2.3939 >= 1.6000`, e 154 archi su 224 lo
+#   fanno). **«Arco 0» era una scelta arbitraria; «il piu' lungo» e' un criterio.**
+#   ✅ **E questo e' un riscontro del passaggio dal CLI**: il sigillo di una cura girava
+#   in una configurazione in cui **l'altra cura approvata non c'era**.
+_karc = int(np.argmax(np.asarray(net.d, float)))
+net.tw = np.zeros(len(net.d)); net.tw[_karc] = TW0
+o_arco = {"arco": _karc, "d_arco": float(np.asarray(net.d, float)[_karc]),
+          "due_lam": float(2.0 * S.LAM),
+          "conformi": int(np.sum(np.asarray(net.d, float) >= 2.0 * S.LAM)),
+          "archi": int(len(net.d))}
 _rng = net.rng
 class _R:
     def __getattr__(self, k): return getattr(_rng, k)
@@ -175,7 +211,8 @@ class _R:
 net.rng = _R()
 net.mitosi()
 nuovi = np.arange(n_pre, net.n)
-o = dict(n_pre=n_pre, n_post=int(net.n), nuovi=int(nuovi.size), TW0=float(TW0))
+o = dict(n_pre=n_pre, n_post=int(net.n), nuovi=int(nuovi.size), TW0=float(TW0),
+         arco=o_arco)
 def _ramp(net):
     _tr = net._tempo_rampa()
     return np.minimum(1.0, np.asarray(net.eta, float) / _tr), _tr
