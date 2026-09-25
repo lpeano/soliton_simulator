@@ -16507,3 +16507,94 @@ impone *(un'assenza strutturale non è un dato mancante)*.
 - **la rimisura di `|dx|/d` a campo maturo**, che è il passo esplicitamente chiesto: la forma del
   freno-legge `(1+tanh)` fu decisa su `max|dx|/d = 0.0531` **a campo spento**;
 - **poi** la corsa diagnostica `2b` sui **triangoli** e la valutazione di `2c`.
+
+
+---
+
+# ❌❌ **`net.step()` NON È UN PASSO: IL PASSO DEL DRIVER SONO CINQUE CHIAMATE** *(2026-09-25)*
+
+```python
+scuoti_vuoto(net); net.step(); net.mitosi(); net.rilassa_disegno(); net.memoria_hebbiana_moto()
+```
+*(`csv/_test_fork/_scena_video.py`, riga `37` e riga `394`)*
+
+**Io ne facevo UNA.**
+
+> ### **E NON È UN DETTAGLIO: `_smp_chiudi` — il FRENO su `d0`, il sito `d0_passo` da cui vengono
+> ### i numeri di `V8`/`V9` — vive DENTRO `memoria_hebbiana_moto`.**
+> Il suo commento lo dice: *«`memoria_hebbiana_moto` è l'ULTIMA chiamata del passo **NEL
+> DRIVER**»*. **Con il solo `net.step()` il freno non si chiude mai**, e la rimisura di `|dx|/d`
+> **non raccoglieva NESSUN CAMPIONE.**
+
+## ⚠ COSA QUESTO TOCCA DELLE MISURE DI OGGI, una per una
+
+| misura | dipende dal passo? |
+|---|---|
+| **la traiettoria di `\|tw\|` di `SCALE-TW`** *(20 passi)* | **SÌ: girava su un ciclo INCOMPLETO** |
+| **la corsa sui triangoli** | **SÌ** |
+| **`A3` del sigillo `CURA 4`** *(98 passi)* | **SÌ** |
+| `A1`, `A2`, `A5`, `A6`, `A7` di `CURA 4` | **NO: sono STRUTTURALI** *(byte-identità, `ramp` al passo 1, AST)* |
+| il **passo zero** della scena `(ii)` | **NO: è il passo zero** |
+
+**Si rifanno con `passo_pieno`, e questo va detto accanto ai numeri vecchi, non al loro posto.**
+
+## E DUE DIFETTI MIEI PIÙ PICCOLI, nello stesso strumento
+
+1. **il flag del freno era SPENTO:** `SCALA_MIN_PASSO` è `False` nel sorgente e **`on` nel
+   driver**. Misurare coi default del sorgente **misura un sistema senza freno** — lo stesso
+   errore dei run senza `--cs-dinamico` del par.9. **La configurazione fa parte della misura.**
+2. **`_` usato come variabile di ciclo E nel confronto:**
+   `max(v["massimo"] for _, _, v in righe if _ == "MATURO")` — il secondo `_` **sovrascrive il
+   primo**, quindi il filtro guardava **il VERSO invece del BRACCIO**. Silenzioso.
+   E la corsa **crashava** con `max() iterable argument is empty` invece di dire *«nessun
+   campione»*: **il guardiano sul vuoto era scritto DOPO l'uso.**
+
+---
+
+# `2c` — **CREAZIONE DI FACCIA: valutata, NON scritta** *(`doc/VALUTAZIONE_creazione_di_faccia.md`)*
+
+## ✅ LA PROPOSTA È MIGLIORE DELLA DOMANDA CHE VOLEVA RISOLVERE
+
+Ieri avevo scritto che *«quale arco del ciclo si divide»* era **una regola nuova** e che non la
+sapevo risolvere. **La creazione di faccia la scioglie: NON SI DIVIDE NESSUN ARCO.**
+
+- **le lunghezze non sono una scelta:** il circocentro è **equidistante per definizione**, quindi
+  le tre lunghezze **devono** essere uguali e valgono `R`. `R = abc/(4K)` viene dalle **tre `d`**,
+  **senza `pos`** — **conforme ad `A3`**;
+- **e CHIUDE `U2`/`M2` SU QUESTO CANALE PER COSTRUZIONE:** i tre archi nuovi hanno lunghezza
+  `R >= LAM`, che è **la condizione di nascita**, quindi **`_nasce` non tronca mai**. Contro il
+  **`29`-`30 %`** di archi sotto `2 LAM` di oggi;
+- **e non rimuove archi** *(la mitosi ne rimuove `1`)*: il bilancio di `d0` è più facile da chiudere.
+
+## IL CONTO DERIVATO, scritto prima della misura
+
+`R = lato/√3` per un equilatero, quindi **`R >= LAM` ⇔ `lato >= √3 LAM = 1.7321 LAM`.**
+
+> **Un triangolo di lati `LAM` — il minimo che `A13` ammette — NON PUÒ PARTORIRE** *(`R = 0.577
+> LAM`)*. **Ma la mediana MISURATA di `d` è `2.356 LAM`**, che dà `R = 1.36 LAM`: **il gate non
+> uccide il meccanismo.**
+
+## ⛔ IL BUCO: **il gate è solo DAL BASSO**
+
+Per un triangolo quasi degenere `K → 0` e **`R → ∞`**: `R >= LAM` è soddisfatta **banalmente dai
+triangoli più PIATTI**.
+**Candidato DERIVATO per chiuderlo dall'alto: `R <= R_CONN = 3 LAM`**, che è la **condizione di
+appartenenza al grafo** *(un nodo i cui archi superano `R_CONN` non sarebbe allacciato al vuoto)* —
+**quindi non un numero nuovo. NON L'HO SCRITTO.**
+
+## ⛔⛔ E IL PROBLEMA PIÙ GROSSO NON È NÉ L'ARCO NÉ IL DEGENERE: **MANCA IL TASSO**
+
+**`R >= LAM` è un VINCOLO, non un TASSO.** Oggi la mitosi ha `prob = clip(resp, 0, 1)`. Con
+**`1 697 590`** triangoli e mediana `R = 1.36 LAM`, **nascerebbero milioni di nodi in UN passo.**
+
+> ### **L'unica risposta che non introduce un numero è che il tasso venga DALLA CURVATURA** —
+> ### cioè dalla stessa grandezza che definisce `tw` nella lettura dallo spinore.
+> ### **Quindi `2c` DIPENDE DA `2b`: se la curvatura è rumore, la proposta è una FORMA SENZA UNA
+> ### LEGGE.**
+
+## IL COSTO
+
+`1 697 590` triangoli; **`~10⁷` operazioni PER PASSO** per enumerarli *(grado medio `~70`)*; il nodo
+nuovo ha **grado `3`** contro `70`, e **non passa da `_allaccia`** — i suoi archi sono **imposti**,
+non trovati per raggio, quindi **non si allaccia al vuoto come gli altri nodi**. **Va deciso se è
+voluto.**
