@@ -246,11 +246,19 @@ P()
 
 OK = []
 
-# ---- U2-1: UN SOLO arco si e' diviso. Senza questo, "risposta nota" non vale. -------------
-uno = (A["n_post"] == A["n_pre"] + 1) and (A["archi_post"] == A["archi_pre"] + 1)
-OK.append(criterio("U2-1", "UN SOLO arco si e' diviso (il caso e' quello dichiarato)", uno,
-                   "n +%d, archi +%d   atteso +1 e +1 (un arco sparisce, due nascono)"
-                   % (A["n_post"] - A["n_pre"], A["archi_post"] - A["archi_pre"])))
+# ---- U2-1: UN SOLO arco si e' diviso NEL SITO `mitosi`. -----------------------------------
+#      ❌ IL CRITERIO PRIMA GUARDAVA `n` E `archi` TOTALI, e falliva su un comportamento
+#         CORRETTO: nello stesso passo scatta ANCHE lo SCHWINGER (+1 nodo, +2 archi), quindi
+#         il totale e' `n +2, archi +3` e non `+1, +1`. **Era il criterio sbagliato, non la
+#         cura** -- la classe di FAIL che par.9 dice costare piu' di un sigillo mancante.
+#      Il criterio giusto guarda IL SITO: `d0new` ha DUE voci <=> UN solo arco si e' diviso.
+uno = (A.get("_sm_visd0_mitosi") == 2 and A.get("_sm_visd_mitosi") == 2)
+OK.append(criterio("U2-1", "nel sito `mitosi` si e' diviso UN SOLO arco (due archi figli)", uno,
+                   "visd0_mitosi = %s   visd_mitosi = %s   atteso 2 e 2%s"
+                   "composizione del passo: n +%d, archi +%d = UNA mitosi (+1 nodo, +1 arco netto)"
+                   " PIU' UNO SCHWINGER (+1 nodo, +2 archi)"
+                   % (A.get("_sm_visd0_mitosi"), A.get("_sm_visd_mitosi"), chr(10),
+                      A["n_post"] - A["n_pre"], A["archi_post"] - A["archi_pre"])))
 
 # ---- U2-2: i DUE figli su `d` sono troncati, e il contatore dice DUE (non uno) ------------
 att_trd = 2
@@ -278,15 +286,25 @@ OK.append(criterio("U2-4", "`_sm_lund0_mitosi` ha la sua chiave e il suo valore 
 
 # ---- U2-5: i contatori corrispondono agli ARCHI VERI nell'array, non a un modello --------
 #      E' il criterio MODEL-FREE: si legge `d`/`d0` e si contano gli archi a LAM.
-OK.append(criterio("U2-5", "i contatori coincidono con gli archi che nell'ARRAY stanno a `LAM`",
-                   (A["d_a_lam"] == A.get("_sm_trd_mitosi")
-                    and A["d0_a_lam"] == A.get("_sm_trd0_mitosi")),
-                   "archi di `d`  a LAM nell'array: %d   contatore: %s%s"
-                   "archi di `d0` a LAM nell'array: %d   contatore: %s%s"
-                   "min(d) = %.9f   min(d0) = %.9f   (nessuno sotto LAM)"
-                   % (A["d_a_lam"], A.get("_sm_trd_mitosi"), chr(10),
-                      A["d0_a_lam"], A.get("_sm_trd0_mitosi"), chr(10),
-                      A["d_min"], A["d0_min"])))
+#      ❌ E QUI IL CRITERIO PRIMA CONFRONTAVA IL SOLO SITO `mitosi` CON TUTTI GLI ARCHI A
+#         `LAM`: `4` contro `2`, FAIL su un comportamento corretto. I quattro archi a `LAM`
+#         sono `2` della mitosi **piu' `2` dello Schwinger**. **Si somma su TUTTI i siti.**
+def _somma(J, pre, q):
+    return sum(v for k, v in J.items() if k.startswith("_sm_%s%s_" % (pre, q)))
+
+
+_ok5 = []
+for _nome, _J in (("d = 1.2 LAM", A), ("d = 3.0 LAM", B)):
+    _ok5.append((_nome, _J["d_a_lam"], _somma(_J, "tr", "d"),
+                 _J["d0_a_lam"], _somma(_J, "tr", "d0")))
+OK.append(criterio("U2-5", "la SOMMA dei contatori su TUTTI i siti = gli archi che nell'ARRAY stanno a `LAM`",
+                   all(x[1] == x[2] and x[3] == x[4] for x in _ok5),
+                   chr(10).join(
+                       "%-12s  `d` array %d / contatori %d      `d0` array %d / contatori %d"
+                       % x for x in _ok5)
+                   + chr(10) + "min(d) = %.9f   min(d0) = %.9f   (nessuno sotto LAM)"
+                   % (A["d_min"], A["d0_min"])
+                   + chr(10) + "E' il criterio MODEL-FREE: legge gli array, non il mio conto."))
 
 # ---- U2-6: IL CASO CHE DEVE FALLIRE -- la formula VECCHIA sullo STESSO evento ------------
 #      Un contatore solo: `sum(LAM - v)` per CHIAMATA, senza molteplicita'.
@@ -306,12 +324,21 @@ OK.append(criterio("U2-6", "IL CASO CHE DEVE FALLIRE: il criterio `U2-3` applica
                       vec_mesc, vec_mesc / LAM, chr(10))))
 
 # ---- U2-7: `_g_sm_nascite` SALE anche senza troncamenti, i contatori nuovi NO ------------
-zeri = [k for k in B if k.startswith("_sm_") and B[k] not in (0, 0.0)]
-OK.append(criterio("U2-7", "senza troncamenti: `_g_sm_nascite` sale, i contatori nuovi restano a ZERO",
-                   B["nascite"] > 0 and not zeri,
-                   "arco a 3.0 LAM: nascite = %d (sale), contatori non nulli = %s%s"
-                   "E' la ragione per cui i contatori esistono: `_g_sm_nascite` conta le INVOCAZIONI."
-                   % (B["nascite"], zeri if zeri else "NESSUNO", chr(10))))
+#      ❌ E IL TERZO CRITERIO SBAGLIATO: pretendeva TUTTI i contatori a zero, ma lo
+#         SCHWINGER TRONCA COMUNQUE -- la sua lunghezza viene da `pos`, non da `d`, quindi
+#         portare `d` a `3.0 LAM` non lo tocca. Il criterio riguarda IL SITO `mitosi`.
+_vuoti = [k for k in B if k.startswith("_sm_") and k.endswith("_mitosi")
+          and (k.startswith("_sm_lun") or k.startswith("_sm_tr")) and B[k] not in (0, 0.0)]
+OK.append(criterio("U2-7", "il sito `mitosi` GIRA ma NON tronca, con `d = 3.0 LAM`: `lun` e `tr` a ZERO",
+                   (B["nascite"] > 0 and not _vuoti
+                    and B.get("_sm_visd0_mitosi") == 2 and B.get("_sm_visd_mitosi") == 2),
+                   "nascite (INVOCAZIONI) = %d, e salgono comunque%s"
+                   "visd_mitosi = %s, visd0_mitosi = %s   -> il sito HA girato%s"
+                   "lun/tr del sito `mitosi` non nulli: %s%s"
+                   "E' la ragione per cui i contatori esistono: `_g_sm_nascite` non distingue"
+                   " un'invocazione che tronca da una che non tronca."
+                   % (B["nascite"], chr(10), B.get("_sm_visd_mitosi"), B.get("_sm_visd0_mitosi"),
+                      chr(10), _vuoti if _vuoti else "NESSUNO", chr(10))))
 
 # ---- U2-8: BYTE-INERZIA contro il codice di HEAD (`STANDARD 2`) --------------------------
 import numpy as np
@@ -344,16 +371,47 @@ OK.append(criterio("U2-9", "le chiavi sono SEPARATE per grandezza (`d`/`d0`) e p
                    % (", ".join(chiavi), chr(10),
                       ", ".join(sorted(attese_mit - set(chiavi))) or "NESSUNA")))
 
+# ---- U2-10: LO SCHWINGER NON LEGGE `d`. **MISURATO, e conferma `A3`.** --------------------
+#      Fra i due bracci `d` cambia di un fattore `2.5` (1.2 LAM -> 3.0 LAM). Se la lunghezza
+#      dei nuovi archi Schwinger venisse da `d`, la lunghezza fabbricata DOVREBBE cambiare.
+#      Non cambia di un BIT: viene da `0.5*|pos[aa] - pos[bb]|`.
+_sa, _sb = A.get("_sm_lund_schwinger"), B.get("_sm_lund_schwinger")
+_ident_sch = (_sa is not None and _sa == _sb
+              and A.get("_sm_lund0_schwinger") == B.get("_sm_lund0_schwinger"))
+OK.append(criterio("U2-10", "lo SCHWINGER fabbrica la STESSA lunghezza coi due `d`: NON legge `d`, legge `pos` (`A3`)",
+                   _ident_sch,
+                   "d = 1.2 LAM -> lund_schwinger = %r%s"
+                   "d = 3.0 LAM -> lund_schwinger = %r%s"
+                   "`d` cambia di un fattore 2.5, la lunghezza fabbricata NON si muove.%s"
+                   "E' la voce `A3` della coda, MISURATA invece che letta: la lunghezza di un arco"
+                   " nuovo viene dal DISEGNO."
+                   % (_sa, chr(10), _sb, chr(10), chr(10))))
+
+# ---- U2-11: `_g_sm_nascite` = il numero di INVOCAZIONI, e i siti lo spiegano --------------
+#      Dopo l'azzeramento `_allaccia` NON e' chiamata: le tre invocazioni sono `dh`, `d0new`
+#      e lo Schwinger. Se comparisse una chiave `_semina`, il conto non sarebbe questo.
+_sem = [k for k in A if k.startswith("_sm_") and k.endswith("_semina")]
+OK.append(criterio("U2-11", "`_g_sm_nascite` = 3 invocazioni, e i SITI presenti le spiegano tutte",
+                   A["nascite"] == 3 and not _sem,
+                   "nascite = %d   attese 3: `dh` + `d0new` (mitosi) + `dd` (schwinger)%s"
+                   "chiavi `_semina` presenti: %s  -> `_allaccia` NON e' stata chiamata dopo"
+                   " l'azzeramento, quindi il sito `semina` NON e' collaudato qui."
+                   % (A["nascite"], chr(10), _sem if _sem else "NESSUNA")))
+
 P()
 P("=" * 100)
 P("ESITO: %d/%d PASS" % (sum(1 for x in OK if x), len(OK)))
 P("=" * 100)
 P()
 P("COSA QUESTO SIGILLO *NON* DICE, e va detto:")
-P("  - NON collauda il sito `schwinger` (md=2, md0=2): quel ramo non e' stato fatto scattare qui.")
-P("    E' il QUARTO sito, e NON era fra i tre del rilievo -- la molteplicita' e' letta dal codice,")
-P("    non misurata. **Resta da collaudare.**")
-P("  - NON collauda il sito `semina` con un valore noto: li' md=1/md0=1 e il conto e' banale,")
+P("  - IL SITO `schwinger` E' RISULTATO COLLAUDATO, contro la mia stessa dichiarazione: quel ramo")
+P("    SCATTA nello stesso passo, e `U2-5`/`U2-10` lo misurano. Avevo scritto `non collaudato`")
+P("    PRIMA di girare, per prudenza: era una dichiarazione fatta sul mio modello del test, non")
+P("    sul test. La correggo qui invece di lasciarla, ed e' la stessa classe di errore dei")
+P("    commenti scaduti. **MA il suo valore NON e' a risposta nota**: `U2-5` lo verifica")
+P("    contro l'ARRAY, `U2-10` contro l'altro braccio; nessuno dei due contro un conto a mano.")
+P("  - NON collauda il sito `semina`: dopo l'azzeramento `_allaccia` non viene chiamata, e")
+P("    `U2-11` lo DICHIARA invece di lasciarlo implicito. Li' md=1/md0=1 e il conto e' banale,")
 P("    ma banale non e' misurato.")
 P("  - I default usati sono quelli del SORGENTE, non l'argv del driver: `TEMPO_UNICO_MITOSI = %s`."
   % A["TEMPO_UNICO_MITOSI"])

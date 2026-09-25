@@ -15962,3 +15962,35 @@ contatore come se ce ne fosse uno.** Non è stata disattenzione sul codice: è a
 FRASE *«nelle stesse unità del bilancio»* **guardando la forma `sum(LAM - v)` invece
 dell'espressione effettiva** — **esattamente `P1` applicato al proprio testo**, e lo stesso
 difetto che il par.9 registra per il punto fisso di `_tau`.
+
+---
+
+# IN CODA: `S-MIT1`, `S-MIT2`, `FRAG1` — **tre cose che il sigillo `U2` ha fatto uscire** *(2026-09-25)*
+
+**Registrate da Luca, SOLA REGISTRAZIONE.** Escono tutte e tre dal collaudo di `U2`, cioè da un
+lavoro che non le cercava.
+
+- **`S-MIT1` — la mitosi ha una SOGLIA DI DENSITÀ con statistica GLOBALE.**
+  `0.5*(I[a]+I[b]) >= QMIN_M * median(peq)` (`:5749`): **un arco si divide in base alla mediana di
+  `peq` su TUTTA la rete.** Famiglia `D01`/`D03`.
+  **⚠ Da acclarare PRIMA di leggere la mitosi nel giro della scena `(ii)`:** lì il vuoto è il
+  `90 %` dei nodi, quindi **la mediana la decide il vuoto** e la soglia che governa la divisione
+  *dentro* le masse viene fissata da fuori.
+  **Misurato oggi:** `median(peq) = 0.0`, `negate = 0` — su una rete giovane la soglia è **inerte**,
+  e questo **non dice** come si comporterà con un vuoto maturo.
+
+- **`S-MIT2` — la finestra di creazione, misurata dal codice:** `avv ∈ (1.500, 1.750)·PHI_CRIT`,
+  **una banda larga `1/6` della soglia**. Sopra, **la stessa legge è repulsione**; sopra
+  `TW_TETTO = 4π` si **spegne**. `soglia0 = 3π = 9.4248` — **non `2π`**, perché `TORS_4PI` è ON e
+  `FASE_2PI` OFF. Va nel referto della scena `(ii)` quando si legge se la mitosi è viva.
+
+- **`FRAG1` — `mitosi()` su una rete senza campo va in `IndexError` invece di dichiararlo.**
+  `I = _rho_sorgente()` è vuoto finché non è girato un `step()`.
+  **Non fallisce: si schianta** — la stessa modalità del sigillo dello Strato 1, e la più facile
+  da non notare.
+
+## ⚠ E DUE ERRORI MIEI, nello stesso criterio
+
+Ho scelto `tw = 1e3` e poi `1.2·PHI_CRIT`, **entrambi fuori dalla finestra**, prima di misurarla.
+**Due numeri scelti dal mio modello mentale invece che dal codice**, uno dopo l'altro, sullo stesso
+criterio — ed è esattamente ciò che il par.9 registra come *«un criterio si scrive DA UNA MISURA»*.
