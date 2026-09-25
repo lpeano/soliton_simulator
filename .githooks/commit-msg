@@ -1,0 +1,12 @@
+#!/bin/sh
+# ============================================================================================
+#  COMMIT-MSG VERSIONATO -- `P1-bis` (la relazione) + `REG-R` (la scheda di fisica)
+# --------------------------------------------------------------------------------------------
+#  `csv/_hook_relazione.py` fa DUE controlli, non uno: rifiuta un commit che tocca un referto
+#  senza toccare `RELAZIONE_PER_CLAUDE.md`, e da li' chiama `csv/_hook_fisica.py` (`REG-R`),
+#  che rifiuta un commit in cui una LEGGE cambia e la sua SCHEDA no.
+#
+#  QUESTO FILE E' TRACCIATO DA GIT. Ogni clone deve dare UNA VOLTA:
+#      git config core.hooksPath .githooks
+# ============================================================================================
+exec python csv/_hook_relazione.py --controlla "$1"

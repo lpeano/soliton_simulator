@@ -1,0 +1,13 @@
+#!/bin/sh
+# ============================================================================================
+#  PRE-COMMIT VERSIONATO -- presidi `P3` / `P5` / `P8`   (vedi csv/_hook_presidi.py)
+# --------------------------------------------------------------------------------------------
+#  QUESTO FILE E' TRACCIATO DA GIT, a differenza di `.git/hooks/`, che NON viaggia col repo.
+#  Perche' conti, ogni clone deve dare UNA VOLTA:
+#
+#      git config core.hooksPath .githooks
+#
+#  Finche' quel comando non e' dato, i presidi NON impediscono niente -- e
+#  `python csv/_hook_presidi.py` LO DICE, invece di tacere (`A9`).
+# ============================================================================================
+python "$(git rev-parse --show-toplevel)/csv/_hook_presidi.py" --pre-commit || exit 1

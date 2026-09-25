@@ -476,3 +476,25 @@ Il repository conserva codice, script e documentazione. Sono ignorati:
 La regola `*.mp4` vale in ogni sottocartella. I CSV di `out_elast/` e i log
 `log/elast*.log` sono conservati per documentare i test ELAST_C; i DB `.pkl`
 restano cache locali e non vengono versionati.
+
+## ✅ PRIMA DI LAVORARE: I PRESIDI (un comando, una volta per clone)
+
+```
+git config core.hooksPath .githooks
+```
+
+Gli hook stanno in **`.githooks/`**, **tracciata da git** (`.git/hooks/` non viaggia col
+repo). Rifiutano un commit che:
+
+* tocca un referto **senza** toccare `RELAZIONE_PER_CLAUDE.md` (`P1-bis`);
+* cambia una **legge** senza la sua **scheda** in `doc/REGISTRO_FISICA.md` (`REG-R`);
+* aggiunge un **sigillo** che configura il modulo **a mano** invece di passare dal CLI (`P3`);
+* scrive un **referto** senza dichiarare la **configurazione intera** (`P5`);
+* prende **«il codice di prima» da `HEAD`** (`P8`), che diventa vuoto appena la cura e'
+  committata.
+
+Ogni rifiuto dice **cosa fare**, e l'eccezione si dichiara nel file
+(`ESENTE-<Pn>: <motivo>`, col cancelletto) **piu'** una voce in
+`doc/ESENZIONI_presidi.md` (`python csv/_hook_presidi.py --elenca`).
+**Finche' il comando non e' dato i presidi non impediscono niente, e
+`python csv/_hook_presidi.py` lo dice** (`A9`).

@@ -148,8 +148,38 @@ sigillo `11/11`, la cura del mondo, il presidio che mentiva sull'hash.
 **✅ E DAL 2026-09-21 NON E' PIU' UNA NOTA: E' UN IMPEDIMENTO.**
 `csv/_hook_relazione.py` installa un hook **`commit-msg`** che **RIFIUTA** un commit che tocca
 `doc/RAMIFICAZIONI.md`, un `doc/REFERTO_*.md`, l'output di un sigillo o dati diagnostici
-**senza toccare anche `RELAZIONE_PER_CLAUDE.md`**. Si installa con
-`python csv/_hook_relazione.py --installa`.
+**senza toccare anche `RELAZIONE_PER_CLAUDE.md`**.
+
+### ✅ **I HOOK VIAGGIANO COL REPO — `.githooks/`, dal 2026-09-25 (ordine di Luca)**
+
+**UN SOLO COMANDO, UNA VOLTA PER CLONE, E VA DATO PRIMA DI LAVORARE:**
+
+```
+git config core.hooksPath .githooks        # oppure: python csv/_hook_presidi.py --installa
+```
+
+Gli script stanno in **`.githooks/`**, che **e' TRACCIATO da git**; `.git/hooks/` **non lo
+e'** e non viaggia col repo. `core.hooksPath` **SOSTITUISCE** `.git/hooks/`: le copie
+eventualmente rimaste li' **non girano piu'**, e `--installa` le **toglie**, perche' due
+verita' sono peggio di una.
+
+**COSA IMPEDISCONO, e sono DUE hook:**
+
+| hook | presidio |
+|---|---|
+| `commit-msg` | **`P1-bis`** (un referto senza relazione) **+ `REG-R`** (una legge che cambia senza la sua scheda), via `csv/_hook_relazione.py` che chiama `csv/_hook_fisica.py` |
+| `pre-commit` | **`P3`** (un sigillo che configura il modulo a mano), **`P5`** (un referto senza la configurazione INTERA), **`P8`** (il codice «di prima» preso da `HEAD`), via `csv/_hook_presidi.py` |
+
+**⚠ E FINCHE' QUEL COMANDO NON E' DATO, I PRESIDI NON IMPEDISCONO NIENTE.**
+**`python csv/_hook_presidi.py` LO DICE a ogni invocazione** *(fuori dal caso in cui e' lui
+stesso il hook)*, con il comando da dare: **uno strumento che TACE quando il presidio e'
+spento non e' un presidio** (`A9`).
+**Le esenzioni si dichiarano nel file** (`ESENTE-<Pn>: <motivo>`, col cancelletto) **e devono
+comparire in `doc/ESENZIONI_presidi.md`** (`python csv/_hook_presidi.py --elenca`):
+un'esenzione non elencata **fa fallire il commit comunque**.
+
+*(`csv/_hook_relazione.py --installa` resta e funziona, ma scrive in `.git/hooks/`: usare
+`--installa` di `_hook_presidi.py`, che imposta `core.hooksPath`.)*
 **LA VIA D'USCITA ESISTE MA OBBLIGA A DICHIARARE:** `[SENZA-RELAZIONE: <motivo>]` nel messaggio
 — stessa forma di `_stato_run.apri(forza=True)`. **Un'eccezione resta possibile, ma lascia una
 traccia leggibile in `git log` invece di passare in silenzio.**

@@ -278,21 +278,71 @@ def collaudo():
     return 0 if ok else 1
 
 
-HOOK = NL.join([
-    "#!/bin/sh",
-    "# [presidi P3/P5/P8] installato da csv/_hook_presidi.py --installa",
-    'python "$(git rev-parse --show-toplevel)/csv/_hook_presidi.py" --pre-commit || exit 1',
-    ""])
+GITHOOKS = ".githooks"
+
+
+def stato_hook():
+    """**I PRESIDI SONO ATTIVI IN QUESTO CLONE?** Stampa il verdetto e lo restituisce.
+
+    ⚠ **`A9`: uno strumento che TACE quando il presidio e' spento non e' un presidio.**
+    I hook di `.git/hooks/` **non viaggiano col repo**: un clone nuovo **non li ha**, e fino
+    al 2026-09-25 questo si leggeva **solo in una nota**. Ora gli script stanno in
+    **`.githooks/`, che E' TRACCIATO**, e basta **un comando per clone**:
+
+        git config core.hooksPath .githooks
+
+    **Questa funzione gira a ogni invocazione dello strumento**, cosi' un clone senza hook
+    **lo dice da se'** invece di far credere che i presidi stiano lavorando.
+    """
+    q = subprocess.run(["git", "config", "--get", "core.hooksPath"], cwd=RADICE,
+                       capture_output=True, text=True)
+    via = (q.stdout or "").strip()
+    attivo = (via == GITHOOKS)
+    dir_git = os.path.join(RADICE, ".git", "hooks")
+    resti = [f for f in ("pre-commit", "commit-msg")
+             if os.path.exists(os.path.join(dir_git, f))]
+    print("-" * 96)
+    if attivo:
+        print("  PRESIDI ATTIVI: `core.hooksPath` = %s (tracciato da git)." % via)
+        if resti:
+            print("  ⚠ in `.git/hooks/` restano copie IGNORATE: %s" % ", ".join(resti))
+            print("     `core.hooksPath` SOSTITUISCE quella cartella: quelle copie non")
+            print("     girano piu'. Vanno tolte, perche' due verita' sono peggio di una.")
+    else:
+        print("  ⛔ **I PRESIDI NON SONO ATTIVI IN QUESTO CLONE.**")
+        print("     `core.hooksPath` = %s" % (via or "(non impostato)"))
+        print("     Un commit che viola `P3`, `P5` o `P8` **passa senza dire niente**.")
+        if resti:
+            print("     *(in `.git/hooks/` ci sono %s: girano, ma NON viaggiano col repo)*"
+                  % ", ".join(resti))
+        print("     CHE FARE, una volta per clone:   git config core.hooksPath %s"
+              % GITHOOKS)
+    print("-" * 96)
+    return attivo
 
 
 def installa():
-    p = os.path.join(RADICE, ".git", "hooks", "pre-commit")
-    io.open(p, "w", encoding="utf-8", newline=NL).write(HOOK)
-    print("installato: %s" % p)
-    print("⚠ I HOOK NON SONO VERSIONATI DA GIT: un clone nuovo NON ce l'ha finche' non lo")
-    print("  installa. E' meno di un presidio completo, e va detto invece di chiamarlo tale.")
+    """Punta `core.hooksPath` alla cartella TRACCIATA, e toglie le copie non versionate."""
+    for f in ("pre-commit", "commit-msg"):
+        p = os.path.join(RADICE, GITHOOKS, f)
+        if not os.path.exists(p):
+            sys.stderr.write("MANCA %s: non installo nulla." % p + NL)
+            return 1
+    q = subprocess.run(["git", "config", "core.hooksPath", GITHOOKS], cwd=RADICE,
+                       capture_output=True, text=True)
+    if q.returncode:
+        sys.stderr.write((q.stderr or "")[:300] + NL)
+        return 1
+    print("`core.hooksPath` -> %s   (cartella TRACCIATA: viaggia col repo)" % GITHOOKS)
+    # le copie in `.git/hooks/` ora sono IGNORATE: si togliono, perche' un lettore che le
+    # trova crede che siano loro a girare.
+    for f in ("pre-commit", "commit-msg"):
+        p = os.path.join(RADICE, ".git", "hooks", f)
+        if os.path.exists(p):
+            os.remove(p)
+            print("  tolta la copia IGNORATA .git/hooks/%s" % f)
+    stato_hook()
     return 0
-
 
 def pre_commit():
     coppie = []
@@ -319,6 +369,11 @@ def pre_commit():
 
 if __name__ == "__main__":
     a = sys.argv[1:]
+    # ⚠ LO STATO DEI HOOK SI STAMPA A OGNI INVOCAZIONE **tranne quando siamo NOI il hook**
+    #   (li' gira per ogni commit, e un presidio che stampa a ogni commit diventa rumore
+    #   che si impara a saltare). **Fuori da quel caso, tacere sarebbe il difetto di `A9`.**
+    if "--pre-commit" not in a:
+        stato_hook()
     if "--collaudo" in a:
         sys.exit(collaudo())
     if "--installa" in a:
