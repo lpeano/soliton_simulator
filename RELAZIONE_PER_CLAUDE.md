@@ -17355,3 +17355,78 @@ passo  60    12.71        passo 300    1.695
 >
 > **⚠ E LA VIA NON È MISURATA:** propagazione, o gli originali che diventano **vicini di nati**?
 > **Va misurato, non dedotto** — ma **la conseguenza operativa non dipende da quale sia.**
+
+
+---
+
+# ✅✅ **`A13` RELAZIONALE: LA CURA NON SPEGNE LA MITOSI. LA REGOLA.** — e la mia conclusione precedente era un artefatto di `pos` *(2026-09-25)*
+
+*(`csv/_test_fork/_a13_relazionale.py`, referto in `csv/_test_fork/_a13_relazionale/`, scena `(ii)`
+`(b)`, **passo PIENO**, campo MATURO, `300` passi, **2 semi**)*
+
+```
+sito        valori   v/LAM p05   v/LAM p50   v/LAM p95   v/LAM min   sotto LAM
+mitosi       279     0.6413      1.1338      1.4646      0.5716      0.227720
+schwinger     44     0.7565      1.1910      1.4479      0.5272      0.247412
+```
+
+*(`v` è ciò che `_nasce` riceve, **prima del troncamento**: nel sito `mitosi` è `d_arco/2`,
+quindi `A13` alla nascita ⇔ `v >= LAM`.)*
+
+> ### ✅ **IL `77.23 %` DELLE DIVISIONI RISPETTA GIÀ `A13`. Il `22.77 %` no.**
+> **NON il `100 %` che violava, come diceva la misura su `pos`.**
+
+## ⛔ E QUESTO RIBALTA LA MIA CONCLUSIONE DI IERI, che era un ARTEFATTO
+
+**Avevo scritto, sulla base della misura su `pos`:**
+*«eventi che sopravvivrebbero: `0` su `137` — **applicare `A13` alla nascita non regola la mitosi:
+LA SPEGNE**»*.
+
+> ### **IN TERMINI RELAZIONALI SOPRAVVIVE IL `77 %` DEGLI EVENTI. LA CURA NON SPEGNE LA MITOSI:
+> ### LA REGOLA.**
+> **Lo `0 %` era la misura del DISEGNO**, dove i nati nascono sovrapposti perché `pos` mette il
+> figlio al punto medio geometrico e lì c'è già dell'altro. **Lungo gli archi — che è la
+> distanza del sistema — il figlio dista `d/2`, e `d/2 >= LAM` nel `77 %` dei casi.**
+>
+> **È lo stesso errore due volte:** prima ho **eseguito** una misura su `pos` senza rilevare che
+> non era `A13` *(rilievo di Luca)*, poi ho **tratto una conclusione operativa** da quel numero.
+> **La seconda è peggiore della prima**, perché dice *«non si può curare»* su un dato che non
+> misura la cosa.
+
+## ✅ IL CONTROLLO DI COERENZA QUADRA **ESATTAMENTE**
+
+```
+seme 11   `_sm_trd_mitosi`/`_sm_visd_mitosi` = 20/82  = 0.243902      involucro: 0.243902
+seme 12                                     = 22/104 = 0.211538      involucro: 0.211538
+```
+
+**I contatori di `U2` e l'involucro misurano la stessa cosa, cifra per cifra.** *(Era il criterio
+scritto nello strumento: se differissero, uno dei due sarebbe sbagliato.)*
+
+> ### ❗ **E CONFERMA CHE `U2` E `A13`-ALLA-NASCITA SONO LA STESSA VOCE**, non due: i contatori di
+> ### `U2` **stavano già misurando `A13` alla nascita**, e nessuno l'aveva detto.
+
+## ❗ E UN RISCONTRO CHE NON CERCAVO: **LA MITOSI NON DIVIDE A CASO**
+
+```
+frazione di archi sotto `2 LAM` nel grafo, al passo zero:      0.2998
+frazione di DIVISIONI con `d_arco < 2 LAM`:                    0.2277
+```
+
+> ### **La mitosi divide archi corti il `24 %` MENO SPESSO di quanto farebbe a caso.**
+> **Non è uniforme: EVITA un po' gli archi corti.** *(Il confronto era preparato nello strumento
+> prima di girarlo, ed è il motivo per cui il numero del passo zero era citato lì.)*
+> **⚠ Due semi, e lo spread fra semi è `3.2e-02`: la differenza `0.2998` contro `0.2277` è
+> `7.2e-02`, cioè `2.3` volte lo spread. È un indizio, non una misura a barra.**
+
+## ⚠ LO SCHWINGER RESTA `A3`, E LA MISURA LO MOSTRA
+
+`24.74 %` sotto `LAM` — **ma la sua `v` viene da `0.5·|pos[aa] − pos[bb]|`**, cioè **dal disegno**.
+**Per lo Schwinger «relazionale» non esiste ancora**, e questo numero **non è** `A13` relazionale:
+è `A13` misurato su una lunghezza che viene dall'embedding. **È la voce `A3`, e non si aggira.**
+
+## COSA RESTA VERO DELLA MISURA SU `pos`
+
+**Che nel DISEGNO i nati nascono sovrapposti** *(`min = 0.0000 LAM`, e lo Schwinger a `0.0000` su
+tutti e 44)*. **È un fatto sul disegno**, e va letto così: **il disegno mette nodi nello stesso
+punto.** *(Se e quanto questo conti dipende da chi legge `pos`, cioè da `A3`.)*

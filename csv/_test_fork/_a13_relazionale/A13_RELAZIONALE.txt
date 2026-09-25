@@ -1,0 +1,64 @@
+========================================================================================================================
+**`A13` ALLA NASCITA, IN MODO RELAZIONALE** — la distanza LUNGO GLI ARCHI, non su `pos`
+========================================================================================================================
+
+  passo = scuoti_vuoto() -> step() -> mitosi() -> rilassa_disegno() -> memoria_hebbiana_moto()   (letto per AST da `update()` e verificato contro il driver)
+  scena (ii) (b), campo MATURO, freno ON, 300 passi, 2 semi.
+
+  LA CORREZIONE DI LUCA, in una riga: `pos` e' IL DISEGNO. La distanza fra due nodi e'
+  quella LUNGO GLI ARCHI, e il figlio nasce a `d/2` dai genitori. Quindi:
+     `A13` alla nascita   <=>   `d_arco >= 2 LAM`   <=>   `v >= LAM`   dove `v = d_arco/2`
+  cioe' **ESATTAMENTE `U2`**. Non sono due difetti: e' uno, visto da due lati.
+
+[s11] rc=0 cena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK s11  siti ['mitosi', 'schwinger']  nati mitosi 41 schwinger 21
+[s12] rc=0 cena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK s12  siti ['mitosi', 'schwinger']  nati mitosi 52 schwinger 23
+
+------------------------------------------------------------------------------------------------------------------------
+LA DISTRIBUZIONE DI `v` (la lunghezza GREZZA, prima del troncamento), per SITO
+------------------------------------------------------------------------------------------------------------------------
+  `v` e' cio' che `_nasce` riceve. Nel sito `mitosi` vale `d_arco/2`; nel sito `schwinger`
+  vale `max(0.5*|pos[aa]-pos[bb]|, 0.05)` -- **cioe' viene dal DISEGNO: la voce `A3`.**
+
+  sito         valori    v/LAM p05     v/LAM p50     v/LAM p95     v/LAM min     sotto LAM      
+  mitosi       279       0.6413        1.1338        1.4646        0.5716        0.227720       
+  schwinger    44        0.7565        1.1910        1.4479        0.5272        0.247412       
+
+------------------------------------------------------------------------------------------------------------------------
+`A13` ALLA NASCITA, LA RISPOSTA RELAZIONALE
+------------------------------------------------------------------------------------------------------------------------
+  sito `mitosi`  (279 valori):
+     frazione con `v < LAM`  =  0.227720      (spread fra semi 3.2e-02)
+     frazione che RISPETTA `A13`  =  0.772280
+     -> in termini relazionali: **il 77.23 % delle divisioni ha `d_arco >= 2 LAM`**
+        e il 22.77 % NO. **Questo, e non la misura su `pos`, e' `A13` alla nascita.**
+        ⚠ CONFRONTO COL NUMERO GIA' NOTO: la frazione di archi sotto `2 LAM` al passo
+          ZERO valeva `0.2998` (scena b). Se i due numeri differiscono, la mitosi NON
+          divide a caso: **sceglie** (o evita) gli archi corti, e la differenza lo dice.
+
+  sito `schwinger`  (44 valori):
+     frazione con `v < LAM`  =  0.247412      (spread fra semi 1.1e-01)
+     frazione che RISPETTA `A13`  =  0.752588
+     -> ⚠ **PER LO SCHWINGER «RELAZIONALE» NON ESISTE ANCORA:** la sua `v` viene da
+        `0.5*|pos[aa]-pos[bb]|`, cioè **dal DISEGNO**. E' la voce `A3`, e questa misura
+        **la mostra** invece di nasconderla.
+
+------------------------------------------------------------------------------------------------------------------------
+E I CONTATORI DI `U2`, che contano la STESSA COSA (controllo di coerenza)
+------------------------------------------------------------------------------------------------------------------------
+  seme 11   `_sm_trd_mitosi`/`_sm_visd_mitosi` = 20/82 = 0.243902
+           (e la stessa frazione dall'involucro: 0.243902)
+  seme 12   `_sm_trd_mitosi`/`_sm_visd_mitosi` = 22/104 = 0.211538
+           (e la stessa frazione dall'involucro: 0.211538)
+  -> se le due colonne coincidono, l'involucro e i contatori misurano la stessa cosa e
+     nessuno dei due è sbagliato. Se differiscono, UNO DEI DUE è SBAGLIATO, e va detto.
+
+COSA QUESTO NON DICE:
+  - DUE SEMI.
+  - la MISURA SU `pos` del referto precedente RESTA VALIDA **come misura del DISEGNO**: dice
+    che nel disegno i nati nascono sovrapposti, e quello e' un fatto sul disegno. **Non era
+    `A13`**, e il referto precedente va letto con questa correzione accanto.
+  - il campione per i quantili e' di al piu' 20000 valori per sito, DICHIARATO; `n`, `min`,
+    `max` e la frazione sono su TUTTI i valori.
+  - SOLA LETTURA. Nessuna cura.
