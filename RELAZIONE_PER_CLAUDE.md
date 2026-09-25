@@ -17894,3 +17894,56 @@ acceso, e intorno a lui il sistema era spento.
 > ### **UN REFERTO DEVE DICHIARARE LA CONFIGURAZIONE INTERA, NON I FLAG CHE HO TOCCATO.**
 > E la forma che lo rende verificabile è quella che il sigillo di `CURA 4` ora usa:
 > **l'argv si CATTURA dal driver**, non si compone.
+
+
+---
+
+# ⛔ **VENTICINQUE SIGILLI PRENDONO «IL CODICE DI PRIMA» DA `HEAD`** *(2026-09-25, mandato di Luca, punto 3)*
+
+*(`csv/_ancore_prima.py`, elenco **generato**; `doc/ANCORE_prima_da_HEAD.md`.)*
+
+```
+file di csv/ esaminati                     307
+RIFERIMENTO «PRIMA» (scadono)               39 occorrenze, 25 file
+DA GUARDARE A MANO                          10
+CURATO (ancorato al padre del commit)        6
+guardia del par.5-quinquies (legittime)     31
+NON ANALIZZABILE                             1
+```
+
+> ### **NON È UN CASO ISOLATO: È IL MODO IN CUI QUESTO REPO SCRIVE I SIGILLI.**
+> `A1` di `CURA 4` non era una distrazione mia di ieri — **è la forma standard**, e la stessa
+> forma sta in `_sigillo_tau_luce`, `_sigillo_archivio`, `_sigillo_coorti`, `_sigillo_peq_esatto`,
+> `_sigillo_scala_p`, `_sigillo_cs_floor`, `_sigillo_anom_simm`, `_sigillo_Z1c`… **25 in tutto.**
+
+## COSA SIGNIFICA, E NON È «25 SIGILLI SBAGLIATI»
+
+**Al momento in cui sono girati, erano GIUSTI:** la cura non era ancora committata, quindi `HEAD`
+**era** davvero il codice di prima. **Il difetto è nel TEMPO:**
+
+> ### **RIGIRARE UNO DI QUEI SIGILLI OGGI DÀ UN `PASS` CHE NON SIGNIFICA NIENTE**, perché
+> ### confronta il ramo spento **con se stesso**.
+
+Ed è il gemello speculare del difetto già catalogato: *«un sigillo che non viene rigirato non
+protegge nulla»* (par.9, il crash dello Strato 1). **Qui il pericolo è l'opposto: uno che VIENE
+rigirato mente.** Le due cose insieme dicono che **il valore di un sigillo non sta nel suo esito
+storico, ma nella sua RI-GIRABILITÀ ONESTA.**
+
+## ⚠ E LA DISTINZIONE CHE LO STRUMENTO FA, perché un allarme falso costerebbe più del difetto
+
+**31 occorrenze usano `HEAD` in modo LEGITTIMO:** confrontare il **proprio** blob per verificare
+che il codice che gira **sia committato** (par.5-quinquies). **Quelle si lasciano in pace.**
+Il difetto è **solo** usare `HEAD` come *«il codice PRIMA della cura»*.
+**La classificazione è un'EURISTICA SUL NOME** della variabile/file vicino all'estrazione, e i
+**10 casi incerti** stanno sotto *DA GUARDARE A MANO*: **non sono assolti.**
+
+## LA CURA ESISTE GIÀ, ED È UNA RIGA
+
+`_cli_flag.sim_prima_del_flag(nome_flag, dest)`: trova **il commit che ha introdotto il flag**
+(`git log -S`, la voce più vecchia), ne prende **il PADRE**, estrae in **BINARIO** (trappola
+CRLF) e **ASSERISCE che il file estratto non contenga il flag** — se l'ancora è sbagliata **si
+ferma invece di misurare niente** (`A9`).
+
+**NON converto i 25 adesso**: sarebbero 25 sigilli da rigirare, e il mandato in corso è un altro.
+La voce è in coda come **`ANCORE-1`**, e **il controllo va fra i presidi automatici** come
+**`P8 ANCORA «PRIMA» NON SCADUTA`** — richiesta di Luca nello stesso mandato.
