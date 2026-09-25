@@ -1,0 +1,150 @@
+========================================================================================================
+SCENA (ii) -- IL PASSO ZERO. Il giro di 120 passi e' SOSPESO (decisione di Luca, 2026-09-25).
+========================================================================================================
+
+[a_s11] rc=0   raggio_vuoto 12.612238  R_CONN 2.400000
+[scena-ii] n = 12802   dentro le regioni = 1237   QUOTA = 0.0966   fasi_casuali = False
+OK a_s11  n=12802 archi=471564
+[a_s12] rc=0   raggio_vuoto 12.612238  R_CONN 2.400000
+[scena-ii] n = 12765   dentro le regioni = 1217   QUOTA = 0.0953   fasi_casuali = False
+OK a_s12  n=12765 archi=468042
+[a_s13] rc=0   raggio_vuoto 12.612238  R_CONN 2.400000
+[scena-ii] n = 12787   dentro le regioni = 1239   QUOTA = 0.0969   fasi_casuali = False
+OK a_s13  n=12787 archi=470836
+[a_s14] rc=0   raggio_vuoto 12.612238  R_CONN 2.400000
+[scena-ii] n = 12771   dentro le regioni = 1212   QUOTA = 0.0949   fasi_casuali = False
+OK a_s14  n=12771 archi=468985
+[a_ctrl] rc=0   raggio_vuoto 12.612238  R_CONN 2.400000
+[scena-ii] n = 12802   dentro le regioni = 1237   QUOTA = 0.0966   fasi_casuali = True
+OK a_ctrl  n=12802 archi=471564
+[b_s11] rc=0 4102  raggio_vuoto 8.664102  R_CONN 2.400000
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK b_s11  n=4252 archi=148237
+[b_s12] rc=0 4102  raggio_vuoto 8.664102  R_CONN 2.400000
+[scena-ii] n = 4297   dentro le regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK b_s12  n=4297 archi=151142
+[b_s13] rc=0 4102  raggio_vuoto 8.664102  R_CONN 2.400000
+[scena-ii] n = 4244   dentro le regioni = 205   QUOTA = 0.0483   fasi_casuali = False
+OK b_s13  n=4244 archi=147698
+[b_s14] rc=0 4102  raggio_vuoto 8.664102  R_CONN 2.400000
+[scena-ii] n = 4271   dentro le regioni = 205   QUOTA = 0.0480   fasi_casuali = False
+OK b_s14  n=4271 archi=149801
+[b_ctrl] rc=0 4102  raggio_vuoto 8.664102  R_CONN 2.400000
+[scena-ii] n = 4252   dentro le regioni = 206   QUOTA = 0.0484   fasi_casuali = True
+OK b_ctrl  n=4252 archi=148237
+
+LAM = 0.800000000    R_CONN = 2.400000000    semi = [11, 12, 13, 14]
+
+GEOMETRIA E TAGLIA (media su 4 semi, con SE fra semi -- par.0-ter P3)
+  scena  sep        r_reg      n (saturazione)        ARCHI                  QUOTA     
+  a      6.1158     4.096438   12781.2 +- 8.3         469856.8 +- 812.8      0.095941 +- 0.000485
+  b      4.0000     2.264102   4266.0 +- 11.8         149219.5 +- 780.7      0.048696 +- 0.000456
+
+S2       PASS  min distanza fra POSIZIONI >= LAM (`A13` misurato)
+                scena (a): min fra semi = 0.800001154   media = 0.800002982   LAM = 0.800000000
+                scena (b): min fra semi = 0.800000262   media = 0.800006393   LAM = 0.800000000
+S3       PASS  `sum(d < LAM) == 0` E `sum(d == LAM) == 0` -- i due INSIEME
+                scena (a): sotto LAM = 0   A LAM = 0   min(d) = 0.800001154
+                scena (b): sotto LAM = 0   A LAM = 0   min(d) = 0.800000262
+                lo ZERO sul secondo distingue "non c'e' bisogno di troncare" da "troncato"
+S4       PASS  NESSUN TRONCAMENTO al passo zero: somma di `_sm_tr*` == 0 (il presidio non scatta)
+                scena (a): archi troncati = 0     invocazioni `_g_sm_nascite` = 4
+                scena (b): archi troncati = 0     invocazioni `_g_sm_nascite` = 4
+                `_g_sm_nascite` NON e' zero e NON deve esserlo: conta le INVOCAZIONI,
+                e `_allaccia` invoca `_nasce` a ogni lotto della semina.
+S5       PASS  nodi isolati == 0
+                scena (a): isolati = 0   grado medio = 73.523
+                scena (b): isolati = 0   grado medio = 69.956
+S6       PASS  `d == |pos_i - pos_j|` per OGNI arco al passo zero (`D02` a questo sito)
+                scena (a): max scarto = 0.000e+00   frazione diversi = 0.000000
+                scena (b): max scarto = 0.000e+00   frazione diversi = 0.000000
+                riferimento storico: divergeva sul 42.47 %
+
+S9 AL PASSO ZERO: **NON MISURABILE**, e non per un dato che manca.
+   scena (a): max(I) = 0.000000e+00   somma dei pesi = 0.000000e+00   max(eta) = 0.000000e+00
+   scena (b): max(I) = 0.000000e+00   somma dei pesi = 0.000000e+00   max(eta) = 0.000000e+00
+   `_pesi` moltiplica per `ramp = min(1, eta/TAU_A)` e `eta = 0` ALLA NASCITA:
+   tutti i pesi sono ZERO ESATTO, quindi `psi = 0` e `I = 0`. La grandezza NON E' LIBERA
+   DI ESSERE DIVERSA DA ZERO a quell'istante (par.0-ter `P4`).
+   ! E IL MIO CRITERIO `contrasto > 1` PASSAVA SU `0/0 = inf`: un PASS VACUO.
+   TAU_A = 50.0, DT = 0.010  ->  servono TAU_A/DT = 5000 passi perche' `ramp` arrivi a 1.
+
+S9(1)    PASS  DOPO UN PASSO -- il primo istante in cui il campo esiste -- contrasto > 1
+                scena (a): contrasto = 13.6998 +- 0.2417   (min fra semi 13.2981)   I_massa = 4.4485e-14   I_vuoto = 3.2490e-15   ramp = 0.000200
+                scena (b): contrasto = 8.9025 +- 0.1791   (min fra semi 8.4992)   I_massa = 2.6687e-14   I_vuoto = 2.9962e-15   ramp = 0.000200
+                ! NON E' IL PASSO ZERO, ed e' dichiarato: e' UN passo, il minimo perche'
+                  il campo esista. UN passo non e' il giro di 120, che resta SOSPESO.
+                NON basta "esiste un effetto": 1.01 e 10 sono due fisiche diverse.
+
+--------------------------------------------------------------------------------------------------------
+S10 AL PASSO ZERO -- frazione della coorte con `I > Lam`, e IL BRACCIO DI CONTROLLO
+--------------------------------------------------------------------------------------------------------
+scena (a)   Lam = 0.000000e+00
+   massa_0   COERENTE 0.0000     CONTROLLO (fasi casuali) 0.0000     contrasto inf
+   massa_1   COERENTE 0.0000     CONTROLLO (fasi casuali) 0.0000     contrasto inf
+   massa_2   COERENTE 0.0000     CONTROLLO (fasi casuali) 0.0000     contrasto inf
+   vuoto     COERENTE 0.0000     CONTROLLO (fasi casuali) 0.0000     contrasto inf
+   PROFILO PER GUSCI, contati in ARCHI dal nucleo (non da `pos`):
+     massa_0   raggiunti 411/411   g0:n=1,f=0.000  g1:n=82,f=0.000  g2:n=326,f=0.000  g3:n=2,f=0.000
+     massa_1   raggiunti 413/413   g0:n=1,f=0.000  g1:n=82,f=0.000  g2:n=322,f=0.000  g3:n=8,f=0.000
+     massa_2   raggiunti 413/413   g0:n=1,f=0.000  g1:n=79,f=0.000  g2:n=322,f=0.000  g3:n=11,f=0.000
+
+scena (b)   Lam = 0.000000e+00
+   massa_0   COERENTE 0.0000     CONTROLLO (fasi casuali) 0.0000     contrasto inf
+   massa_1   COERENTE 0.0000     CONTROLLO (fasi casuali) 0.0000     contrasto inf
+   massa_2   COERENTE 0.0000     CONTROLLO (fasi casuali) 0.0000     contrasto inf
+   vuoto     COERENTE 0.0000     CONTROLLO (fasi casuali) 0.0000     contrasto inf
+   PROFILO PER GUSCI, contati in ARCHI dal nucleo (non da `pos`):
+     massa_0   raggiunti 67/67   g0:n=1,f=0.000  g1:n=58,f=0.000  g2:n=8,f=0.000
+     massa_1   raggiunti 75/75   g0:n=1,f=0.000  g1:n=68,f=0.000  g2:n=6,f=0.000
+     massa_2   raggiunti 64/64   g0:n=1,f=0.000  g1:n=57,f=0.000  g2:n=6,f=0.000
+
+--------------------------------------------------------------------------------------------------------
+ARCHI, E LA FRAZIONE SOTTO `2 LAM` (`U2c` al passo 0) -- il secondo motore del gonfiamento
+--------------------------------------------------------------------------------------------------------
+  scena (a): ARCHI = 469856.8 +- 812.8     sotto 2 LAM = 0.2936 +- 0.0001     mediana(d) = 1.8926 = 2.366 LAM     p05 = 0.9112
+  scena (b): ARCHI = 149219.5 +- 780.7     sotto 2 LAM = 0.2998 +- 0.0002     mediana(d) = 1.8844 = 2.356 LAM     p05 = 0.9056
+  (la stima di Luca per la voce `U2`/`M2` era `~1/4`: qui e' MISURATA, non assunta)
+
+CONTATORI DI `_nasce` AL PASSO ZERO (devono essere assenti o nulli: `S4`)
+  scena (a): {'_sm_lund_semina': 0.0, '_sm_trd_semina': 0, '_sm_visd_semina': 471564, '_sm_lund0_semina': 0.0, '_sm_trd0_semina': 0, '_sm_visd0_semina': 471564}
+  scena (b): {'_sm_lund_semina': 0.0, '_sm_trd_semina': 0, '_sm_visd_semina': 148237, '_sm_lund0_semina': 0.0, '_sm_trd0_semina': 0, '_sm_visd0_semina': 148237}
+
+--------------------------------------------------------------------------------------------------------
+LE PREVISIONI `P1`-`P5`, verificate al passo zero. CRITERIO: uno scarto > FATTORE 2 va spiegato.
+--------------------------------------------------------------------------------------------------------
+  ATTENZIONE: le previsioni VENGONO DAL MANDATO, non le ho derivate io (dichiarato nella scheda).
+
+  scena (a)
+    P1   somma dei pesi per nodo (mediana)      misurato 9.69956        previsto 9         rapporto 1.078  OK
+    P2   contrasto I/I (DOPO UN PASSO)          misurato 13.6998        previsto 27        rapporto 0.507  OK
+    P3   Lam = mean(I) (DOPO UN PASSO)          misurato 7.20551e-15    previsto 5         rapporto 0.000  !! FUORI DAL FATTORE 2
+    P4   NON MISURATO: cs_floor non esposto
+    P5   lambda_nodi / LAM:  p05 0.7615   mediana 0.7615   p95 0.7615
+         previsto: QUASI COSTANTE fra 0.74 e 0.76 LAM.  escursione p95/p05 = 1.0000
+         se e' quasi costante, la legge di schermatura e' di fatto SPENTA dalla
+         soglia irraggiungibile -- lo stesso difetto di `massa_critica_collasso` (`U1`).
+
+  scena (b)
+    P1   somma dei pesi per nodo (mediana)      misurato 9.50576        previsto 9         rapporto 1.056  OK
+    P2   contrasto I/I (DOPO UN PASSO)          misurato 8.90253        previsto 27        rapporto 0.330  !! FUORI DAL FATTORE 2
+    P3   Lam = mean(I) (DOPO UN PASSO)          misurato 4.1501e-15     previsto 5         rapporto 0.000  !! FUORI DAL FATTORE 2
+    P4   NON MISURATO: cs_floor non esposto
+    P5   lambda_nodi / LAM:  p05 0.7615   mediana 0.7615   p95 0.7615
+         previsto: QUASI COSTANTE fra 0.74 e 0.76 LAM.  escursione p95/p05 = 1.0000
+         se e' quasi costante, la legge di schermatura e' di fatto SPENTA dalla
+         soglia irraggiungibile -- lo stesso difetto di `massa_critica_collasso` (`U1`).
+
+========================================================================================================
+ESITO DEI CRITERI DEL PASSO ZERO: 6/6 PASS
+========================================================================================================
+
+COSA QUESTO NON DICE, e va detto:
+  - `S1` (byte-identita' a flag spento) NON e' qui: e' gia' sigillata da `_c1_semina_lam.py`
+    (`C1` PASS PIENO). Rifarla sarebbe contare due volte la stessa cosa.
+  - `S7` (giro di 120 passi) e' SOSPESO per decisione di Luca: la soglia della mitosi (`3pi`)
+    e' un numero tarato a posteriori nell'epoca 1, e va sostituita da una LEGGE DERIVATA.
+  - `S8` NON ESISTE nella scheda: la numerazione salta da `S7` a `S9`. Non ne invento uno.
+  - `S10` qui e' SOLO il passo ZERO. I passi 30/60/120 sono nel giro, quindi sospesi.
+  - `P-GONFIA` non e' qui: confronta la CRESCITA di `d0` nei 120 passi.
+  - le previsioni `P1`-`P5` vengono dal MANDATO, non le ho derivate io.

@@ -16141,3 +16141,104 @@ la stessa famiglia dei cinque criteri vuoti del 2026-09-21.
 **Ora la misura c'è, e il suo nullo si sa in anticipo:** tre gruppi uguali a `120°` **si
 cancellano**, quindi la versione sfasata darebbe `~0`. **È il caso che DEVE fallire, e ora
 esiste.**
+
+
+---
+
+# ✅ SCENA `(ii)` — **IL PASSO ZERO: 6/6 PASS**, e due criteri miei corretti *(2026-09-25)*
+
+*(`csv/_seal_fork/_passo_zero_scena_ii.py`, referto in `csv/_seal_fork/_sig_scena_ii/`,
+**4 semi**, un processo per braccio)*
+
+```
+scena  sep      r_reg     n (saturazione)      ARCHI                  QUOTA
+a      6.1158   4.096438  12781.2 +- 8.3       469856.8 +- 812.8      0.095941 +- 0.000485
+b      4.0000   2.264102   4266.0 +- 11.8      149219.5 +- 780.7      0.048696 +- 0.000456
+```
+
+| | criterio | esito |
+|---|---|---|
+| **`S2`** | min distanza fra POSIZIONI `>= LAM` | **PASS** — `0.800001` e `0.800000` |
+| **`S3`** | `sum(d < LAM) == 0` **E** `sum(d == LAM) == 0` | **PASS** — `0` e `0` |
+| **`S4`** | **nessun TRONCAMENTO** | **PASS** — `0` archi troncati |
+| **`S5`** | nodi isolati `== 0` | **PASS** — grado medio `73.5` e `70.0` |
+| **`S6`** | `d` uguale alla distanza nel disegno, per **ogni** arco | **PASS** — `max scarto = 0.000e+00` *(storico: `42.47 %` diversi)* |
+| **`S9(1)`** | contrasto `I_massa/I_vuoto > 1` | **PASS** — `13.6998 ± 0.2417` **(a)**, `8.9025 ± 0.1791` **(b)** |
+
+**E la frazione di archi sotto `2 LAM`** *(`U2c`, il secondo motore del gonfiamento)*: **`0.2936`**
+e **`0.2998`**. **La stima di Luca era `~1/4`: MISURATA, e sta SOPRA.**
+
+## ❌❌ DUE CRITERI MIEI ERANO SBAGLIATI, E UNO PASSAVA A VUOTO
+
+### `S4` **non poteva essere soddisfatto da codice corretto**
+
+La scheda chiedeva `_g_sm_nascite == 0`, **ma quel contatore conta le INVOCAZIONI**, e `_allaccia`
+invoca `_nasce` **legittimamente** a ogni lotto della semina. **Misurato: `4` invocazioni, `0`
+troncamenti.** È la classe di `N3b` — *un FAIL falso costa più di un sigillo mancante, perché si
+porta dietro una diagnosi che non c'è.*
+**Il criterio giusto è sui TRONCAMENTI**, `somma(_sm_tr*) == 0`, **ed è esattamente ciò per cui
+`U2` esiste.**
+
+### `S9` **PASSAVA SU `inf`**: al passo zero il campo **non esiste per costruzione**
+
+```
+somma dei pesi = 0.000000e+00      max(I) = 0.000000e+00      max(eta) = 0.000000e+00
+```
+
+**`_pesi` moltiplica per `ramp = min(1, eta/TAU_A)` e `eta = 0` ALLA NASCITA:** tutti i pesi sono
+**zero esatto**. Il contrasto valeva `0/0 = inf`, e il mio `> 1` **lo leggeva come PASS**.
+**È `P4` del par.0-ter:** prima di misurare se una grandezza cambia, verificare che sia **libera**
+di cambiare.
+
+> ### ❗ **`TAU_A = 50`, `DT = 0.01` → SERVONO `5000` PASSI PERCHÉ `ramp` ARRIVI A `1`.**
+> **Al passo `120` `ramp ≈ 0.024`: nel giro previsto il campo starebbe al `2.4 %` del suo valore.**
+> Va detto **prima** di leggere qualunque cosa sul campo, e **vale anche per `P-GONFIA`**.
+
+**Cura: `S9` si misura DOPO UN PASSO**, il primo istante in cui il campo esiste, **e si dichiara
+che non è il passo zero.** Un passo **non è** il giro di 120, che resta sospeso.
+
+## LE PREVISIONI `P1`-`P5` — **due tengono, una non è confrontabile, una è da spiegare**
+
+| | grandezza | previsto | **(a)** | **(b)** | esito |
+|---|---|--:|--:|--:|---|
+| **`P1`** | pesi per nodo | `9` | `9.700` | `9.506` | **x1.08 / x1.06 — tiene** |
+| **`P2`** | contrasto `I/I` | `27` | `13.70` | `8.90` | **x0.51 / x0.33 — la `(b)` È FUORI DAL FATTORE 2** |
+| **`P3`** | `Lam = mean(I)` | `5` | `7.2e-15` | `4.2e-15` | **NON CONFRONTABILE** |
+| **`P4`** | `cs_floor` | `0.55` | — | — | **non misurato:** non è esposto come metodo |
+| **`P5`** | `lambda_nodi/LAM` | `0.74`-`0.76` | `0.7615` | `0.7615` | **ESATTAMENTE COSTANTE** |
+
+**`P2`, e va spiegato come chiesto:** la `(b)` ha `~70` nodi per regione contro `~411` della `(a)`.
+**Meno vicini coerenti per nodo, meno interferenza costruttiva**, e il contrasto scala nella
+direzione giusta *(`13.70` contro `8.90`, cioè `x1.54` a fronte di `x5.9` nei nodi)*. **La
+previsione `27` era UNA SOLA, per due scene con densità di coorte diverse.**
+
+**`P3` NON è «sbagliata di 15 ordini»: NON È CONFRONTABILE.** Il previsto `~5` vale per un campo
+**maturo**; a `ramp = 0.0002` il campo è al `0.02 %`. **Dire «rapporto `1e-15`» sarebbe leggere una
+risoluzione come un effetto** — lo stesso errore del par.9 sui nulli.
+
+**`P5` è la più informativa, e conferma la previsione del mandato oltre la sua lettera:**
+`lambda_nodi/LAM` non è *quasi* costante, **è costante** — `p05 = p50 = p95 = 0.7615`, escursione
+`1.0000`. **La legge di schermatura è INERTE**, ed è lo stesso difetto di `massa_critica_collasso`
+*(`U1`)* visto da un'altra legge.
+
+## ❗ `S10` AL PASSO ZERO È **NON MISURABILE** per la stessa ragione — ma il PROFILO PER GUSCI dice qualcosa
+
+Con `Lam = 0` la frazione `I > Lam` è **vuota**. **Ma il profilo per gusci, contato in ARCHI dal
+nucleo, è STRUTTURALE e non dipende da `I`:**
+
+```
+scena (a)   massa_0  raggiunti 411/411   g0:1  g1:82   g2:326  g3:2
+            massa_1  raggiunti 413/413   g0:1  g1:82   g2:322  g3:8
+            massa_2  raggiunti 413/413   g0:1  g1:79   g2:322  g3:11
+scena (b)   massa_0  raggiunti  67/67    g0:1  g1:58   g2:8
+            massa_1  raggiunti  75/75    g0:1  g1:68   g2:6
+            massa_2  raggiunti  64/64    g0:1  g1:57   g2:6
+```
+
+> **Le regioni sono CONNESSE nel grafo** *(`raggiunti = totale`, tutte e sei)*, e sono **poco
+> profonde: `3`-`4` gusci nella `(a)`, `2`-`3` nella `(b)`.** Con `1` nodo al centro e `~80` al
+> primo guscio, **quasi tutta la regione sta a distanza `2` dal nucleo**: non c'è un interno
+> protetto da un bordo, **c'è quasi solo bordo.**
+> **È pertinente alla previsione che avevo scritto per `S10`** *(«la `(b)` perde coerenza prima
+> della `(a)`»)*: la differenza in gusci è `3`-`4` contro `2`-`3`, **meno netta di quanto la mia
+> previsione assumeva.**
