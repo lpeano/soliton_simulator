@@ -65,9 +65,14 @@ def argv_del_driver(extra=None, dest=None):
     cwd = os.getcwd()
     os.chdir(RADICE)
     sys.argv = posizionali(dest or os.path.join(_QUI, "_scarto_cli")) + list(extra or [])
+    # Lo stdout del driver NON e' il referto di chi lo chiama: si CATTURA e si butta.
+    import io as _io2
+    _so = sys.stdout
+    sys.stdout = _io2.StringIO()
     try:
         exec(compile(testa, DRIVER, "exec"), g)
     finally:
+        sys.stdout = _so
         sys.argv = vecchia
         os.chdir(cwd)
     S = g.get("S") or sys.modules["soliton_simulator"]
@@ -85,6 +90,30 @@ def senza(argv, opzione):
     assert opzione in argv, ("l'argv del driver NON contiene %r: il braccio OFF sarebbe "
                             "IDENTICO all'ON, e il sigillo misurerebbe niente" % opzione)
     return [x for x in argv if x != opzione]
+
+
+def argv_per(sim, argv):
+    """L'argv FILTRATA sulle opzioni che QUEL simulatore dichiara, piu' le scartate.
+
+    **Serve per il braccio «prima»:** il codice precedente a una cura **non conosce**
+    l'opzione della cura, e passargliela farebbe morire `argparse` su un'opzione ignota.
+    **E le opzioni note non si elencano a mano: si LEGGONO dal file** (`add_argument("--x"`),
+    cioe' dalla stessa fonte che le dichiara.
+
+    **Le SCARTATE si restituiscono perche' vanno nel referto:** dicono *quante e quali*
+    opzioni il codice di prima non aveva, e se fossero piu' di quelle attese il confronto
+    starebbe misurando anche altro. **Un filtro silenzioso sarebbe un difetto.**
+    """
+    import re
+    noti = set(re.findall(r'add_argument\(\s*"(--[a-z0-9-]+)"',
+                          io.open(sim, encoding="utf-8").read()))
+    tenute, scartate = [], []
+    for x in argv:
+        if x.startswith("--") and x.split("=")[0] not in noti:
+            scartate.append(x)
+        else:
+            tenute.append(x)
+    return tenute, scartate
 
 
 def carica_dal_cli(argv, nome="sim_cli", sim=None):
@@ -111,6 +140,45 @@ def carica_dal_cli(argv, nome="sim_cli", sim=None):
     finally:
         sys.argv = vecchia
     return S, a
+
+
+def sim_prima_del_flag(nome_flag, dest, radice=None):
+    """Estrae in BINARIO il simulatore **PRECEDENTE all'introduzione di `nome_flag`**.
+
+    ### Perche' esiste, ed e' un difetto MISURATO il 2026-09-25
+    I sigilli di `CURA 4` e `CURA 5` prendevano il codice «di prima» da
+    **`HEAD:soliton_simulator.py`**. Era giusto **finche' la cura non era committata**;
+    **dal commit della cura in poi HEAD LA CONTIENE**, e il braccio «prima» e' diventato
+    **il braccio OFF di se stesso**: un confronto che passa per costruzione.
+    **Non era vacuo quando e' stato scritto: LO E' DIVENTATO**, ed e' esattamente la
+    famiglia di `T1` (`CLAUDE.md` par.0: *un criterio SCADUTO che confrontava il disco di
+    OGGI con un blob di tre giorni fa*), curata nello stesso modo: **si ancora alla COPPIA
+    DI BLOB CHE RACCHIUDE IL CAMBIAMENTO.**
+
+    **E NON SI PINNA A MANO:** il commit che ha introdotto il flag si TROVA
+    (`git log -S<flag>`, la voce piu' vecchia) e si prende **il suo PADRE**.
+    **POI SI ASSERISCE CHE IL FILE ESTRATTO NON CONTENGA IL FLAG** -- e' il presidio che
+    rende l'ancora auto-denunciante: se un giorno il flag comparisse prima, o se la ricerca
+    trovasse il commit sbagliato, **si ferma invece di misurare niente** (`A9`).
+    """
+    import subprocess
+    rad = radice or RADICE
+    q = subprocess.run(["git", "log", "-S", nome_flag, "--format=%H", "--",
+                        "soliton_simulator.py"], cwd=rad, capture_output=True, text=True)
+    assert q.returncode == 0, q.stderr[:300]
+    righe = [r.strip() for r in (q.stdout or "").split(NL) if r.strip()]
+    assert righe, "nessun commit introduce %r in soliton_simulator.py" % nome_flag
+    introduce = righe[-1]                      # la voce piu' VECCHIA: l'introduzione
+    g = subprocess.run(["git", "cat-file", "-p", introduce + "^:soliton_simulator.py"],
+                       cwd=rad, capture_output=True)
+    assert g.returncode == 0, g.stderr[:300]
+    byte = g.stdout
+    # ⚠ IL PRESIDIO CHE RENDE L'ANCORA AUTO-DENUNCIANTE
+    assert nome_flag.encode() not in byte, (
+        "il codice estratto (%s^) CONTIENE GIA' %r: l'ancora e' sbagliata e il confronto "
+        "misurerebbe NIENTE" % (introduce[:8], nome_flag))
+    io.open(dest, "wb").write(byte)
+    return introduce
 
 
 def dichiara(S, nomi):

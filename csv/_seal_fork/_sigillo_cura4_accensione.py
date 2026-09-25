@@ -19,6 +19,7 @@ A7  `TAU_A` non e' piu' letto da `_pesi` -- verifica dall'AST, non da un `grep`
 `array_equal` dice `False` per due array di `NaN` byte-identici)*. ASCII puro nel sorgente.
 """
 import hashlib
+import ast
 import io
 import json
 import os
@@ -29,6 +30,7 @@ import numpy as np
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.abspath(os.path.join(_QUI, "..")))
+import _cli_flag
 import _presidio
 
 _presidio.avvia(__file__)
@@ -42,16 +44,44 @@ os.makedirs(TMP, exist_ok=True)
 SEME = 11
 SEP = 4.0          # la scena (ii) (b): la piu' economica
 
+# ========================================================================================
+# [`CLI-1`, mandato di Luca 2026-09-25] **I BRACCI SI CONFIGURANO DAL CLI, NON DAL MODULO.**
+# ----------------------------------------------------------------------------------------
+# La prima stesura di questo sigillo faceva `S.SEMINA_MATURA = bool(FLAG)` **sul modulo**.
+# **E' per questo che dava `7/7` mentre il flag era MORTO da riga di comando** (assegnazione
+# in `esegui_headless`, `global` in `_applica_flag`: una **locale silenziosamente inerte**).
+#   ### UN SIGILLO CHE IMPOSTA IL MODULO A MANO PROVA LA LEGGE, NON IL FLAG.
+# Ora l'argv **si CATTURA dal driver** (`csv/_cli_flag.py`, la stessa funzione che usa il
+# sigillo del driver: **una sola implementazione**) e ogni braccio passa da `_cli()` +
+# `_applica_flag(a)`.
+# **IL BRACCIO OFF E' L'ARGV MENO L'OPZIONE**, perche' i flag sono `store_true` e
+# **`--semina-matura=off` NON ESISTE**: l'unico OFF che il CLI ammette e' *un comando che
+# DIMENTICA il flag* -- che e' anche il difetto contro cui il sigillo del driver monta la
+# guardia. E il driver **non puo'** darlo: accende le obbligatorie senza `if`, di proposito.
+OPZ = "--semina-matura"
+FLAGNOME = "SEMINA_MATURA"
+SIM_HEAD = os.path.join(RADICE, "soliton_simulator.py")
+ARGV = _cli_flag.argv_del_driver([], dest=os.path.join(TMP, "_scarto"))[1]
+assert OPZ in ARGV, ("il driver NON passa %s: il braccio OFF sarebbe IDENTICO " % OPZ)
+
 FIGLIO = r'''
 import hashlib, io, json, os, sys
 import numpy as np
 sys.path.insert(0, RAD)
-import importlib.util as _iu
-_sp = _iu.spec_from_file_location("sim_c4", os.path.join(RAD, "soliton_simulator.py"))
-S = _iu.module_from_spec(_sp); _sp.loader.exec_module(S)
-
-S.SEMINA_LAM = True
-S.SEMINA_MATURA = bool(FLAG)
+sys.path.insert(0, os.path.join(RAD, "csv"))
+import _cli_flag
+# [`CLI-1`] IL FLAG ARRIVA DAL CLI. **Nessun attributo assegnato a mano**: si passa
+#   l'argv VERA DEL DRIVER a `_cli()` + `_applica_flag(a)`, e il braccio OFF e' la stessa
+#   argv MENO l'opzione. `argv_per` toglie in piu' le opzioni che QUEL simulatore non
+#   dichiara (serve al braccio «prima», che non conosce le opzioni nate dopo di lui).
+_argv, _scartate = _cli_flag.argv_per(SIM, ARGV if FLAG else _cli_flag.senza(ARGV, OPZ))
+S, _a_cli = _cli_flag.carica_dal_cli(_argv, nome="sim_c4", sim=SIM)
+# ⚠ E SI VERIFICA CHE IL CLI ABBIA DAVVERO ACCESO: senza questo, un flag morto
+#   ripasserebbe in silenzio, che e' esattamente cio' che e' successo.
+_CLI = {"flag": getattr(S, FLAGNOME, "ASSENTE"), "atteso": bool(FLAG),
+        "semina_lam": getattr(S, "SEMINA_LAM", "ASSENTE"),
+        "opz_nell_argv": OPZ in _argv, "argv_len": len(_argv),
+        "scartate": _scartate, "sim": os.path.basename(SIM)}
 S.net = S.Rete(SEME)
 S.test["dati"] = {}
 S._NMASSE_VIDEO["sep"] = float(SEP)
@@ -70,7 +100,7 @@ co = S.test["dati"]["coorti"]
 n0 = int(net.n)
 iniz = np.arange(n0)                      # TUTTI i nodi della semina iniziale
 
-o = dict(FLAG=bool(FLAG), MATURI_FORZATO=MATURI_FORZATO, n0=n0, archi0=int(len(net.d)),
+o = dict(FLAG=bool(FLAG), MATURI_FORZATO=MATURI_FORZATO, CLI=_CLI, n0=n0, archi0=int(len(net.d)),
          TAU_A=float(S.TAU_A), DT=float(S.DT))
 
 def _ramp(net):
@@ -119,9 +149,14 @@ import io, json, os, sys
 import numpy as np
 sys.path.insert(0, RAD)
 import importlib.util as _iu
-_sp = _iu.spec_from_file_location("sim_c4m", os.path.join(RAD, "soliton_simulator.py"))
-S = _iu.module_from_spec(_sp); _sp.loader.exec_module(S)
-S.SEMINA_MATURA = True
+sys.path.insert(0, os.path.join(RAD, "csv"))
+import _cli_flag
+_argv, _scartate = _cli_flag.argv_per(SIM, ARGV)     # [`CLI-1`] il flag dal CLI
+S, _a_cli = _cli_flag.carica_dal_cli(_argv, nome="sim_c4m", sim=SIM)
+_CLI = {"flag": getattr(S, FLAGNOME, "ASSENTE"), "atteso": True,
+        "semina_lam": getattr(S, "SEMINA_LAM", "ASSENTE"),
+        "opz_nell_argv": OPZ in _argv, "argv_len": len(_argv),
+        "scartate": _scartate, "sim": os.path.basename(SIM)}
 net = S.Rete(7)
 net.semina(60)                # rete piccola: `A3` misura UN nodo, non una statistica
 net.step()                    # senza, `_rho_sorgente()` e' vuoto e `mitosi` si SCHIANTA (FRAG1)
@@ -159,18 +194,31 @@ if nuovi.size:
     o["passi_per_ramp1"] = passi
     o["ramp_finale"] = float(r[nuovi[nuovi < net.n]].min()) if nuovi.max() < net.n else float("nan")
     o["tempo_luce_finale"] = (float(np.median(np.asarray(tr, float))) if np.ndim(tr) else float(tr))
+o["CLI"] = _CLI
 io.open(os.path.join(TMPD, "mitosi.json"), "w", encoding="utf-8").write(json.dumps(o))
 print("OK mitosi  n %d -> %d  nuovi %d" % (n_pre, net.n, nuovi.size))
 '''
 
 
-def braccio(nome, flag, maturi=None, sorgente=FIGLIO):
-    src = ("RAD = %r\nTMPD = %r\nNOME = %r\nSEME = %d\nSEP = %r\nFLAG = %r\nMATURI_FORZATO = %r\n"
-           % (RADICE, TMP, nome, SEME, SEP, flag, maturi)) + sorgente
+def braccio(nome, flag, maturi=None, sorgente=FIGLIO, sim=None, argv=None):
+    """UN PROCESSO per braccio (`STANDARD 1`), configurato DAL CLI.
+
+    `sim` permette di far girare lo STESSO figlio sul simulatore PRECEDENTE alla cura
+    (braccio `A1`): prima c'erano DUE funzioni e una `str.replace` sul sorgente del
+    figlio per togliere l'assegnazione del flag. **Passando dal CLI quella replace non
+    serve piu': non c'e' nessuna assegnazione da togliere** (`STANDARD 10`: una cura
+    non aumenta il numero delle leggi, e qui ne toglie una).
+    """
+    testa = ["RAD = %r" % RADICE, "TMPD = %r" % TMP, "NOME = %r" % nome,
+             "SEME = %d" % SEME, "SEP = %r" % SEP, "FLAG = %r" % flag,
+             "MATURI_FORZATO = %r" % maturi, "SIM = %r" % (sim or SIM_HEAD),
+             "ARGV = %r" % (ARGV if argv is None else argv),
+             "OPZ = %r" % OPZ, "FLAGNOME = %r" % FLAGNOME, ""]
+    src = chr(10).join(testa) + sorgente
     p = os.path.join(TMP, "_br_" + nome + ".py")
-    io.open(p, "w", encoding="utf-8", newline="\n").write(src)
-    return subprocess.run([sys.executable, p], cwd=RADICE, capture_output=True, text=True,
-                          encoding="utf-8", errors="replace")
+    io.open(p, "w", encoding="utf-8", newline="\\n").write(src)
+    return subprocess.run([sys.executable, p], cwd=RADICE, capture_output=True,
+                          text=True, encoding="utf-8", errors="replace")
 
 
 def leggi(nome):
@@ -184,30 +232,26 @@ for nome, flag, mat in BR:
     LOG.append("[%s] rc=%d %s" % (nome, rr.returncode, (rr.stdout or "").strip()[-150:]))
     if rr.returncode:
         LOG.append((rr.stderr or "")[-1400:])
-# `A1`: il ramo SPENTO contro il codice PRECEDENTE alla cura. Il blob si estrae da git in
-# BINARIO (la trappola CRLF del par.5-quinquies), e il braccio gira su QUEL file.
+# ==========================================================================================
+# `A1`: IL RAMO SPENTO CONTRO IL CODICE PRECEDENTE -- **E IL CRITERIO ERA SCADUTO**
+# ------------------------------------------------------------------------------------------
+# ❌ **DIFETTO MIO, trovato il 2026-09-25 rifacendo il sigillo per `CLI-1`:** il codice
+#   «di prima» si prendeva da **`HEAD:soliton_simulator.py`**. Era giusto **finche' la cura
+#   non era committata**; **dal commit della cura in poi HEAD LA CONTIENE**, e il braccio
+#   «prima» e' diventato **il braccio OFF di se stesso** -- un confronto che passa per
+#   costruzione. **NON era vacuo quando l'ho scritto: LO E' DIVENTATO**, ed e' la famiglia
+#   di `T1` (par.0: *un criterio SCADUTO che confronta il disco di OGGI con un blob di ieri*).
+# ✅ **CURA, la stessa di `T1`: si ancora alla COPPIA DI BLOB CHE RACCHIUDE IL CAMBIAMENTO.**
+#   `sim_prima_del_flag` trova il commit che ha INTRODOTTO il flag (`git log -S`, la voce
+#   piu' vecchia), ne prende il PADRE, estrae in BINARIO (trappola CRLF, par.5-quinquies) e
+#   **ASSERISCE che il file estratto NON contenga il flag**: se l'ancora fosse sbagliata
+#   **si ferma invece di misurare niente** (`A9`).
 VECCHIO = os.path.join(TMP, "_sim_vecchio.py")
-_g = subprocess.run(["git", "cat-file", "-p", "HEAD:soliton_simulator.py"], cwd=RADICE,
-                    capture_output=True)
-assert _g.returncode == 0, _g.stderr[:300]
-io.open(VECCHIO, "wb").write(_g.stdout)
-
-
-def braccio_vecchio(nome):
-    src = ("RAD = %r\nTMPD = %r\nNOME = %r\nSEME = %d\nSEP = %r\nFLAG = %r\n"
-           "MATURI_FORZATO = %r\nSIMV = %r\n"
-           % (RADICE, TMP, nome, SEME, SEP, False, None, VECCHIO)) + FIGLIO.replace(
-        'os.path.join(RAD, "soliton_simulator.py")', "SIMV").replace(
-        "S.SEMINA_MATURA = bool(FLAG)",
-        "if hasattr(S, 'SEMINA_MATURA'): S.SEMINA_MATURA = bool(FLAG)")
-    p = os.path.join(TMP, "_br_" + nome + ".py")
-    io.open(p, "w", encoding="utf-8", newline="\n").write(src)
-    return subprocess.run([sys.executable, p], cwd=RADICE, capture_output=True, text=True,
-                          encoding="utf-8", errors="replace")
-
-
-rr = braccio_vecchio("prima")
-LOG.append("[prima] rc=%d %s" % (rr.returncode, (rr.stdout or "").strip()[-150:]))
+COMMIT_CURA = _cli_flag.sim_prima_del_flag(FLAGNOME, VECCHIO, radice=RADICE)
+rr = braccio("prima", False, None, FIGLIO, sim=VECCHIO)
+LOG.append("[prima] rc=%d %s  (il codice di prima e' %s^, e NON contiene %s)"
+           % (rr.returncode, (rr.stdout or "").strip()[-150:], COMMIT_CURA[:8],
+              FLAGNOME))
 if rr.returncode:
     LOG.append((rr.stderr or "")[-1400:])
 rr = braccio("mitosi", True, None, FIGLIO_MIT)
@@ -277,7 +321,51 @@ OK.append(crit("A1", "flag SPENTO = BYTE-IDENTICO al codice PRECEDENTE (firma de
                + chr(10) + "diversi: %s" % (", ".join(_dif1[:12]) or "NESSUNO")
                + chr(10) + "presenti solo nel VECCHIO: %s" % (_solo_pr or "nessuno")
                + chr(10) + "presenti solo nel NUOVO:   %s" % (_solo_off or "nessuno")
-               + chr(10) + "(il vecchio e' `HEAD:soliton_simulator.py`, estratto in BINARIO)"))
+               + chr(10) + "(il vecchio e' %s^:soliton_simulator.py, estratto in "
+               "BINARIO -- il PADRE del commit che ha introdotto %s, non `HEAD`: HEAD "
+               "LA CONTIENE)" % (COMMIT_CURA[:8], FLAGNOME)))
+
+# ---------------------------------------------------------------- CLI
+# [`CLI-1`] **IL FLAG E' ARRIVATO DAL CLI, E NESSUNO L'HA ASSEGNATO A MANO.**
+#   Sono DUE affermazioni, e servono entrambe: la prima si legge dallo stato del modulo
+#   dopo `_cli()` + `_applica_flag(a)`; la seconda **si prova per AST sul SORGENTE DEI
+#   FIGLI** (`STANDARD 9`: mai un `in` sul testo), perche' un'assegnazione rimessa
+#   domani renderebbe il criterio di nuovo cieco.
+_ast_ok, _ast_dove = True, []
+for _nome_t, _tpl in (("FIGLIO", FIGLIO), ("FIGLIO_MIT", FIGLIO_MIT)):
+    for _nd in ast.walk(ast.parse(_tpl)):
+        if not isinstance(_nd, ast.Assign):
+            continue
+        for _tg in _nd.targets:
+            if (isinstance(_tg, ast.Attribute) and isinstance(_tg.value, ast.Name)
+                    and _tg.value.id == "S" and _tg.attr in (FLAGNOME, "SEMINA_LAM")):
+                _ast_ok = False
+                _ast_dove.append("%s:%d S.%s" % (_nome_t, _nd.lineno, _tg.attr))
+_cli_att = [(n_, d_.get("CLI", {})) for n_, d_ in
+            (("off", OFF), ("on", ON), ("on_forzato", FZ), ("mitosi", MI), ("prima", PR))]
+_cli_ok = _ast_ok
+for _n, _c in _cli_att:
+    if _n == "prima":
+        # il codice di PRIMA non ha il flag: l'atteso e' che sia ASSENTE, non False.
+        _cli_ok = _cli_ok and (_c.get("flag") == "ASSENTE") and (OPZ in _c.get("scartate", []))
+    else:
+        _cli_ok = _cli_ok and (bool(_c.get("flag")) == bool(_c.get("atteso")))
+        _cli_ok = _cli_ok and (bool(_c.get("opz_nell_argv")) == bool(_c.get("atteso")))
+        _cli_ok = _cli_ok and (_c.get("semina_lam") is True)
+OK.append(crit("CLI", "il flag arriva DAL CLI (argv del driver) e NESSUN braccio lo assegna a mano",
+               _cli_ok,
+               (chr(10).join("%-11s flag=%-8s atteso=%-6s opz_nell_argv=%-6s "
+                             "SEMINA_LAM=%-6s argv=%s scartate=%s"
+                             % (_n, _c.get("flag"), _c.get("atteso"),
+                                _c.get("opz_nell_argv"), _c.get("semina_lam"),
+                                _c.get("argv_len"), _c.get("scartate"))
+                             for _n, _c in _cli_att))
+               + chr(10) + "argv CATTURATA dal driver: %d voci, e contiene %s"
+               % (len(ARGV), OPZ)
+               + chr(10) + ("nessuna assegnazione `S.%s`/`S.SEMINA_LAM` nei sorgenti dei "
+                            "figli (verificato per AST)" % FLAGNOME if _ast_ok
+                            else "ASSEGNAZIONI A MANO TROVATE: %s" % ", ".join(_ast_dove))))
+P()
 
 # ---------------------------------------------------------------- A2
 OK.append(crit("A2", "al passo 1 `ramp == 1` su TUTTI i nodi della semina iniziale (ESATTO)",
