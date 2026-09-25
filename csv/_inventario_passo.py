@@ -191,9 +191,11 @@ P("   corsa. **Contarli gonfia il conto senza aggiungere un file da curare** —
 P("   GENITORE. **Saltati `%d`**, e il numero è detto invece di essere nascosto." % len(SALTATI))
 if NON_PARSABILI:
     P()
-    P("**⚠ `%d` file NON si sono potuti analizzare** *(sintassi non valida per l'AST di questa")
-    P("   versione di Python)*: `%s`. **Non contano né come completi né come incompleti, e va")
-    P("   detto.**" % (len(NON_PARSABILI), ", ".join("`%s`" % x for x in NON_PARSABILI[:6])))
+    P("**⚠ `%d` file NON si sono potuti analizzare** *(sintassi non valida per l'AST di questa"
+      % len(NON_PARSABILI))
+    P("   versione di Python)*: `%s`. **Non contano né come completi né come incompleti, e va"
+      % ", ".join("`%s`" % x for x in NON_PARSABILI[:6]))
+    P("   detto.**")
 P("**Di questi, `%d` NON hanno tutte le altre chiamate e NON usano il modulo condiviso.**" % len(INC))
 P()
 P("## IL CRITERIO DI CLASSIFICAZIONE, dichiarato — e il suo LIMITE")

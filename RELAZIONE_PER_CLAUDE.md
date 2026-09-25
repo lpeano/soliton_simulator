@@ -16689,3 +16689,69 @@ med d0     1.884270  ->  0.800000   (SPENTO)      -57.5 %,  ed e' ESATTAMENTE `L
 **⚠ UN SEME, `120` passi, una scena.** E `n` cresce *(`4252 → 4270` maturo, `→ 4303` spento)*:
 **col passo COMPLETO la mitosi SCATTA** — `18` e `51` nodi nuovi. **Non era così nelle mie misure
 col ciclo incompleto**, ed è un'altra cosa che quel difetto nascondeva.
+
+
+---
+
+# ⛔ **IL PASSO NON È `step()`: SONO CINQUE CHIAMATE. E `24` SCRIPT AVANZANO IN MODO INCOMPLETO** *(2026-09-25)*
+
+*(inventario **generato**: `doc/INVENTARIO_passo_incompleto.md`; modulo condiviso:
+`csv/_passo.py`)*
+
+## ✅ LA CURA STRUTTURALE: **`passo_pieno` LEGGE L'ORDINE DAL CODICE, non lo ricopia**
+
+```
+passo = scuoti_vuoto() -> step() -> mitosi() -> rilassa_disegno() -> memoria_hebbiana_moto()
+        (letto per AST da `update()` e VERIFICATO contro il driver)
+```
+
+**Si legge da DUE posti perché uno è una COPIA:** il driver dichiara nel proprio docstring *«Il
+ciclo per frame è COPIATO da `update()`»*. **Se i due divergono, `passo_pieno` RIFIUTA DI GIRARE:**
+due sequenze diverse significano che le sonde e la campagna avanzano in modo diverso, ed è
+esattamente il difetto da impedire. **Nessun fallback silenzioso** *(`A9`)*.
+
+**⚠ E C'È UNA SESTA CHIAMATA CHE NON STA NEL PASSO:** `passo_test()`, **una volta per FRAME**
+*(`PASSI_PER_FRAME = 6`)*. **Un passo di sonda e un frame di driver non sono la stessa cosa**, e
+`frame_pieno` esiste per chi vuole il secondo.
+
+## L'INVENTARIO
+
+```
+file sotto `csv/` che CHIAMANO `step()`          103     (per AST, non per testo)
+di questi, INCOMPLETI                             24
+   MISURA              11        ENTRAMBI  3
+   STRUTTURALE          4        NON CLASSIFICATO  6
+figli GENERATI saltati (`_tmp/_br_*.py`)          22
+non analizzabili (AST)                             1
+```
+
+**`STRUTTURALE` non dipende dal ciclo** *(un'identità di byte fra due bracci che avanzano allo
+stesso modo regge o cade per altre ragioni)*. **`MISURA` e `ENTRAMBI` sì.**
+
+## ❌❌ DUE DIFETTI MIEI NELL'INVENTARIO STESSO, corretti
+
+1. **cercavo i nomi NEL TESTO** *(`(nome + "(") in src`)*: **un file che MENZIONA `mitosi` in un
+   commento veniva contato come se la CHIAMASSE.** È **`STANDARD 9` al contrario**, e **non era
+   teorico**: ogni referto che spiega *«la mitosi resta morta»* contiene `mitosi(`, e quei file
+   risultavano «completi». **Il conto è passato da `31` a `24` incompleti su `132` → `103`
+   chiamanti.** **Ora è AST.**
+2. **contavo i figli GENERATI** *(`_tmp/_br_*.py`, scritti dai sigilli a ogni corsa)*: **gonfiano
+   il conto senza aggiungere un file da curare** — si cura il **genitore**. **`22` saltati**, e il
+   numero è detto.
+
+## ❗ E UN AVANZAMENTO INCOMPLETO **NEL SIMULATORE STESSO**
+
+```
+:8404   for _ in range(300): net.step()        seguito da  net.rilassa_disegno(30)
+```
+
+**Nel percorso di ricostruzione con `--seed`/`--nodi`.** **Trecento passi senza mitosi, senza
+scuotimento e senza memoria del moto**, per «invecchiare» la rete.
+
+> ### **È LO STESSO DIFETTO DELLE SONDE, DENTRO IL CODICE CHE LE SONDE IMITANO.**
+> E tocca la famiglia di **`Z88`**: è un percorso di **costruzione del vuoto**, quindi decide **da
+> quale stato parte** un run lanciato con `--seed`/`--nodi`.
+
+**L'altro sito trovato, `:6846`, NON è un difetto:** è **il passo completo**, interrotto dalle
+assegnazioni del cronometro, e il commento di quella riga lo dice. **Il criterio che li distingue
+è cablato in `_passo.soli()`**, non deciso a occhio.
