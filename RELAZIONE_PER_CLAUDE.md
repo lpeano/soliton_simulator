@@ -18123,3 +18123,60 @@ cui **un padre non c'è**: invece di ereditare, **si valuta**.
 3. **POI** la misura d'impatto — le 12 leggi restanti — **su questa candidata**, non su un `cs`
    preso dal passo 1 a posteriori. *(La differenza conta: un `cs` preso dopo non è un `cs`
    iniziale, è un'anticipazione impossibile.)*
+
+
+---
+
+# ✅ **`RAMPA-1` E' CURATA: `9/9 PASS`, E LA MATURITA' NON TORNA INDIETRO** *(2026-09-25)*
+
+*(`csv/_seal_fork/_sig_cura4/SIGILLO_cura4_accensione.txt`, blob `cae3b197`, **dal CLI**.)*
+
+```
+A1    PASS   flag SPENTO = BYTE-IDENTICO al codice PRECEDENTE (900fe603^, non HEAD)
+CLI   PASS   il flag arriva DAL CLI e NESSUN braccio lo assegna a mano (per AST)
+A2    PASS   `ramp == 1` su TUTTI i nodi della semina a OGNI passo per 120 passi
+A2b   PASS   al passo 1 `ramp == 1` su tutti (ESATTO)
+A3    PASS   un nato da MITOSI parte da `ramp = 0` e arriva a 1 nel suo TEMPO-LUCE
+A4    PASS   contrasto massa/vuoto e `Lam` al passo 1
+A5    PASS   CONTROLLO POSITIVO: ON e OFF DEVONO differire
+A6    PASS   CASO CHE DEVE FALLIRE: con `maturi=False` forzato, `A2` da' FAIL
+A7    PASS   `TAU_A` non e' piu' letto da `_pesi`
+ESITO: 9/9
+```
+
+## `A2` — IL CRITERIO DI LUCA, E I NUMERI
+
+```
+ON   peggior `ramp` in 120 passi   1.000000000000000     (atteso 1 ESATTO)
+     CALI sui nodi della semina    0                     (primo calo: MAI)
+     `eta = +inf`                  4252 su 4252
+     a fine corsa `ramp == 1`      4252 su 4252          (n 4252 -> 4352)
+OFF  peggior `ramp`                0.000200000000000     <- IL NULLO
+     `eta = +inf` su               0 nodi
+
+traccia ON   [passo, n, min ramp, uguali a 1, cali]
+  [1, 4252, 1.0, 4252, 0]      [80,  4260, 1.0, 4252, 0]
+  [20, 4252, 1.0, 4252, 0]     [100, 4281, 1.0, 4252, 0]
+  [40, 4252, 1.0, 4252, 0]     [120, 4352, 1.0, 4252, 0]
+  [60, 4252, 1.0, 4252, 0]
+```
+
+> ### **PRIMA:** `ramp` cadeva a `0.846` **in UN passo**, con `4198` cali su `4252` nodi.
+> ### **ORA:** `1.000000000000000` per **120 passi**, **zero cali**, mentre la rete cresce da
+> ### `4252` a `4352` nodi — e **i 100 nati in dinamica partono da `0`**, come devono (`A3`).
+
+**E il braccio OFF e' il NULLO che rende leggibile il PASS:** a flag spento la rampa vale
+**`2.0e-04`**. Senza quel braccio, un `1.0` non proverebbe niente.
+
+## COSA HA COSTRETTO A CAMBIARE, e non l'avevo previsto
+
+**L'INVARIANTE HA FERMATO LA CURA AL PRIMO GIRO:**
+`[INVARIANTE] eta VIOLA >= 0 al passo 1 ... valori: inf ... quanti=4252 su=4252`.
+**Ha funzionato**: `nonneg` e' `~isfinite | (v < 0)`. Il dominio di `eta` e' passato a
+**`nonneg_inf`** *(`+inf` ammesso, `nan` e `-inf` no)*, **senza allargare `nonneg`**, che copre
+`rho_spin`, `_deg` e altre dieci: per loro un `inf` **resta un difetto**.
+
+**E IL MIO AUDIT PER AST NON POTEVA VEDERLO:** l'invariante legge `eta` come **chiave di
+tabella**, cioe' una **STRINGA**. **In un codice guidato da tabelle, un audit su chi LEGGE una
+grandezza deve cercare anche le stringhe** — secondo limite del mio strumento, trovato dal
+codice e non da me.

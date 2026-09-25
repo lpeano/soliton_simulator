@@ -1,3 +1,4 @@
+[TIMBRO] _sigillo_cura4_accensione.py  sha1-BYTE cae3b197  committato e pulito
 ========================================================================================================
 SIGILLO `CURA 4` -- L'ACCENSIONE DEL CAMPO (`SEMINA_MATURA`)
 ========================================================================================================
@@ -100,3 +101,4 @@ COSA QUESTO SIGILLO *NON* DICE:
   - la MITOSI e' forzata (la soglia `3pi` e' irraggiungibile, `SCALE-TW`): senza forzarla
     `A3` non avrebbe nulla da misurare, e va detto invece di far sembrare che scatti da se'.
   - la rimisura di `|dx|/d` a campo maturo NON e' qui: e' il passo dopo.
+
