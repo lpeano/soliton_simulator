@@ -66,6 +66,15 @@ voce `Z…` della `FASE A`, commit `9a82bfb`)*.
 > **STATO: `DIFETTOSA`.** Difetto **`D31`**. **Viola `A11` corollario 4 e corollario 7(b).**
 > **È IL MOTORE DELLA CRESCITA DI `d0`**, misurato due volte con un bilancio che chiude.
 >
+> ### ➜ **`_nasce` ORA MISURA LA LUNGHEZZA CHE FABBRICA** *(2026-09-25, `U2`)*
+>
+> Tre contatori `A8`, **byte-inerti**: `_sm_visti`, `_sm_troncati`, **`_sm_lunghezza`**.
+> **`_g_sm_nascite` contava le INVOCAZIONI, non i troncamenti** — quindi *«quanto `_nasce`
+> ha fabbricato»* **non era leggibile**. Ora `_sm_lunghezza = sum(LAM - d)` sui troncati è
+> **il contributo DIRETTO di questa funzione al gonfiamento di `d0`, nelle stesse unita'
+> del bilancio** — cioè nelle stesse unita' in cui `D31` accusa il freno.
+> **Serve a `U2`**, e la legge sta in scheda ⑫.
+>
 > ### ➜ **`_nasce` HA PERSO IL SUO GATE** *(2026-09-24, `D38`)*
 >
 > `_nasce` — *il troncone sotto `LAM` si porta A `LAM`* — era `if not (SCALA_MIN or
@@ -1792,6 +1801,43 @@ BRACCIO DI CONTROLLO DI `P-GONFIA`:
 > interessante**: se `lambda_nodi` è quasi costante, **la legge di schermatura è di fatto
 > SPENTA dalla soglia irraggiungibile** — cioè lo stesso difetto di `massa_critica_collasso`,
 > visto da un'altra legge.
+
+### ⚠ `U2` È ATTIVA IN ENTRAMBI I BRACCI DI `P-GONFIA` E FABBRICA LUNGHEZZA *(Luca, 2026-09-25)*
+
+**Non cambia il criterio**, e va dichiarata come tale: serve a **leggere quanto del gonfiamento
+viene dalla MITOSI** invece che dalla semina.
+
+> **Il problema è che `U2` agisce in ENTRAMBI i bracci, e probabilmente PIÙ nel controllo**,
+> dove `SEMINA_LAM` è spenta e **quasi tutti gli archi sono corti**. **Il confronto di
+> `P-GONFIA` mescola quindi due effetti**, e senza contarli il suo esito — passi o fallisca —
+> non si attribuisce.
+
+**NEL REFERTO, PER OGNI BRACCIO:**
+
+| | cosa | quando |
+|---|---|---|
+| **`U2a`** | **la LUNGHEZZA FABBRICATA da `_nasce`**: `sum(LAM - d)` sugli archi troncati | cumulativa, e **al netto del passo zero** |
+| **`U2b`** | quanti archi sono stati **troncati**, e su quanti visti | idem |
+| **`U2c`** | **frazione di archi sotto `2 LAM`** | ai passi `0` e `120` |
+
+### ❗ E IL CONTATORE CHE LUCA CITAVA NON MISURAVA QUESTO — rilievo mio, verificato dal codice
+
+**`_g_sm_nascite` CONTA LE INVOCAZIONI di `_nasce`, non i troncamenti:**
+
+```python
+self._g_sm_nascite = getattr(self, '_g_sm_nascite', 0) + 1
+return np.maximum(v, LAM)
+```
+
+**Una chiamata che non tronca nulla lo fa salire ugualmente.** Quindi *«quante volte `_nasce` ha
+troncato un figlio della mitosi»* **non era leggibile**: il numero non c'era.
+
+> **Tre contatori nuovi, tutti BYTE-INERTI** *(si somma, non si cambia)*: `_sm_visti`,
+> `_sm_troncati`, **`_sm_lunghezza`**.
+> ### **E `_sm_lunghezza` è quello che conta: `sum(LAM - d)` è il contributo DIRETTO di `_nasce`
+> ### al gonfiamento di `d0`, NELLE STESSE UNITÀ DEL BILANCIO.**
+> Così `P-GONFIA` non dice solo *«quanto è cresciuto»*: dice **quanta di quella crescita è
+> lunghezza FABBRICATA alla nascita**, e quanto resta da spiegare.
 
 ### ❗ IL COSTO SI MISURA DAGLI **ARCHI**, non dai nodi *(punto 5)*
 

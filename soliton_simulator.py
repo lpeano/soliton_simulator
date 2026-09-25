@@ -4049,6 +4049,23 @@ class Rete:
         #   **non deve scattare mai**, e `_g_sm_nascite` e' la sua misura -- se sale, un arco
         #   e' nato sotto `LAM` **da un'altra strada** (la MITOSI: voce `M2` della coda).
         self._g_sm_nascite = getattr(self, '_g_sm_nascite', 0) + 1
+        # [A8, `U2`, 2026-09-25] ⚠ `_g_sm_nascite` CONTA LE INVOCAZIONI, NON I TRONCAMENTI.
+        #   Luca l'ha chiesto per sapere "quante volte `_nasce` ha troncato un figlio della
+        #   mitosi", e **quel numero non c'era**: una chiamata che non tronca nulla lo fa
+        #   salire ugualmente. Tre contatori nuovi, tutti byte-inerti (si somma, non si cambia):
+        #     `_sm_troncati`  quanti ARCHI sono stati portati a `LAM`
+        #     `_sm_lunghezza` **LA LUNGHEZZA FABBRICATA**: `sum(LAM - v)` sui troncati.
+        #                     E' il numero che conta davvero, perche' e' **il contributo
+        #                     DIRETTO di `_nasce` al gonfiamento di `d0`**, nelle stesse unita'
+        #                     del bilancio.
+        #     `_sm_visti`     quanti archi sono passati da qui, per avere il denominatore.
+        _v = np.asarray(v, dtype=float)
+        _sotto = _v < LAM
+        self._sm_visti = getattr(self, '_sm_visti', 0) + int(_v.size)
+        self._sm_troncati = getattr(self, '_sm_troncati', 0) + int(_sotto.sum())
+        self._sm_lunghezza = (getattr(self, '_sm_lunghezza', 0.0)
+                              + float(np.sum(LAM - _v[_sotto])) if _sotto.any()
+                              else getattr(self, '_sm_lunghezza', 0.0))
         return np.maximum(v, LAM)
 
     def _peq_esatto(self, rho, flusso, dt_e, tau_bg):
