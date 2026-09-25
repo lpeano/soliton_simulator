@@ -105,7 +105,15 @@ o["U2_contatori"] = {k: (float(v) if isinstance(v, float) else int(v))
                      for k, v in vars(net).items() if k.startswith("_sm_")}
 
 # ---- S9 : intensita' DENTRO le regioni / nel VUOTO ----------------------------------------
+# AL PASSO ZERO IL CAMPO NON ESISTE ANCORA: `self.psi` e' `zeros(0)` finche' nessuno ha
+# chiamato `calcola_psi` (`:3606`), e `intensita()` = `abs(psi)**2` restituisce un array VUOTO.
+#   MISURATO: `IndexError: index 22 is out of bounds for axis 0 with size 0` su TUTTI i 10 bracci.
+# Quindi "l'intensita' al passo zero" richiede di CALCOLARE il campo, e va DETTO: `calcola_psi`
+#   e' una funzione PURA delle posizioni e delle fasi -- non avanza il tempo, non tocca l'RNG --
+#   ma non e' "gratis": e' un atto dichiarato, non uno stato che c'era.
+net.calcola_psi()
 I = np.asarray(net.intensita(), float)
+assert I.size == net.n, "calcola_psi non ha prodotto n valori: %d contro %d" % (I.size, net.n)
 dentro = np.concatenate([co["massa_%d" % k] for k in range(3)])
 o["S9_I_massa"] = float(I[dentro].mean()); o["S9_I_vuoto"] = float(I[co["vuoto"]].mean())
 o["S9_contrasto"] = (o["S9_I_massa"] / o["S9_I_vuoto"]) if o["S9_I_vuoto"] else float("inf")
