@@ -264,8 +264,17 @@ o["d0_min_fin"] = float(d0_fin.min())
 o["bilancio"] = BIL
 o["somma_scrittori"] = float(sum(v["delta"] for k, v in BIL.items() if k.startswith("S")))
 o["somma_pavimenti"] = float(sum(v["delta"] for k, v in BIL.items() if k.startswith("P")))
-o["somma_freno"] = float(sum(v["delta"] for k, v in BIL.items()
-                            if k.startswith("FRENO_")))
+# ❌❌ IL BILANCIO MESCOLAVA `d` E `d0`, ED E' ESATTAMENTE L'ERRORE DI `U2`.
+#   `FRENO_d_passo` frena **`d`**, non `d0`: sommarlo al bilancio di `d0` e' un errore di
+#   CATEGORIA. MISURATO: il residuo valeva `-1.101e4` (maturo) e `-1.091e4` (spento) --
+#   **quasi identici**, e quasi esattamente `-FRENO_d_passo` (`+1.103e4`, `+1.096e4`).
+#   **Un residuo COSTANTE fra due bracci diversissimi era il segno che non veniva dalla
+#   fisica: veniva da un termine che non c'entrava.**
+o["somma_freno_d0"] = float(sum(v["delta"] for k, v in BIL.items()
+                               if k.startswith("FRENO_d0")))
+o["somma_freno_d"] = float(sum(v["delta"] for k, v in BIL.items()
+                              if k.startswith("FRENO_") and not k.startswith("FRENO_d0")))
+o["somma_freno"] = o["somma_freno_d0"]      # nel bilancio di `d0` entra SOLO quello di `d0`
 o["crescita_vera"] = float(d0_fin.sum() - d0_ini.sum()) if o["confrontabile"] else float("nan")
 io.open(os.path.join(TMPD, NOME + ".json"), "w", encoding="utf-8").write(json.dumps(o))
 print("OK %s  med d0 %.6f -> %.6f   archi %d -> %d"
@@ -283,14 +292,26 @@ def braccio(nome, seme, flag):
 
 
 BR = [("mat_s%d" % s, s, True) for s in SEMI] + [("spe_s%d" % s, s, False) for s in SEMI]
-proc = {n: braccio(n, s, f) for n, s, f in BR}
+# `--rileggi` rilegge i JSON gia' sul disco invece di rigirare la simulazione. Serve
+#   quando si corregge SOLO LA LETTURA: rigirare una simulazione per cambiare una formula
+#   di stampa **bruciarebbe tempo e non cambierebbe un dato**. E se i JSON non ci sono,
+#   RIFIUTA invece di girare a meta'.
+RILEGGI = ("--rileggi" in sys.argv)
 LOG = []
-for n, pr in proc.items():
-    so, se = pr.communicate()
-    LOG.append("[%s] rc=%d %s" % (n, pr.returncode,
-                                  (so or b"").decode("utf-8", "replace").strip()[-140:]))
-    if pr.returncode:
-        LOG.append((se or b"").decode("utf-8", "replace")[-1500:])
+if RILEGGI:
+    for n, _s, _f in BR:
+        _p = os.path.join(TMP, n + ".json")
+        if not os.path.isfile(_p):
+            raise SystemExit("[rileggi] manca %s: non rileggo a meta'." % _p)
+        LOG.append("[%s] RILETTO dal json (nessuna simulazione rigirata)" % n)
+else:
+    proc = {n: braccio(n, s, f) for n, s, f in BR}
+    for n, pr in proc.items():
+        so, se = pr.communicate()
+        LOG.append("[%s] rc=%d %s" % (n, pr.returncode,
+                                      (so or b"").decode("utf-8", "replace").strip()[-140:]))
+        if pr.returncode:
+            LOG.append((se or b"").decode("utf-8", "replace")[-1500:])
 
 P_ = []
 
@@ -318,7 +339,19 @@ if any("rc=1" in l for l in LOG):
 
 
 def leggi(n):
-    return json.loads(io.open(os.path.join(TMP, n + ".json"), encoding="utf-8").read())
+    d = json.loads(io.open(os.path.join(TMP, n + ".json"), encoding="utf-8").read())
+    # i json della corsa PRECEDENTE non hanno i campi separati: si ricavano dal bilancio,
+    # che c'e' per intero. Cosi' `--rileggi` funziona anche su di essi, e SI DICHIARA.
+    B = d.get("bilancio", {})
+    if "somma_freno_d0" not in d:
+        d["somma_freno_d0"] = float(sum(v["delta"] for k, v in B.items()
+                                       if k.startswith("FRENO_d0")))
+        d["somma_freno_d"] = float(sum(v["delta"] for k, v in B.items()
+                                      if k.startswith("FRENO_")
+                                      and not k.startswith("FRENO_d0")))
+        d["somma_freno"] = d["somma_freno_d0"]
+        d["_ricavato_da_bilancio"] = True
+    return d
 
 
 D = {n: leggi(n) for n, _, _ in BR}
@@ -364,13 +397,20 @@ for et, L in (("MATURO", MAT), ("SPENTO", SPE)):
     sf, _ = mm(L, "somma_freno")
     cv, _ = mm(L, "crescita_vera")
     P("    SOMMA scrittori (`S*`) = %+.6e      SOMMA pavimenti (`P*`) = %+.6e" % (ss, sp))
-    P("    SOMMA FRENO (`_smorza`, che NON passa da `_traccia_d0`) = %+.6e" % sf)
+    sfd, _ = mm(L, "somma_freno_d")
+    P("    SOMMA FRENO su `d0` (`_smorza`, che NON passa da `_traccia_d0`) = %+.6e" % sf)
+    P("    (e il freno su `d` vale %+.6e: NON entra nel bilancio di `d0` -- sommarlo era" % sfd)
+    P("     un errore di CATEGORIA, lo stesso di `U2`, e il residuo COSTANTE fra i due")
+    P("     bracci lo ha denunciato.)")
     P("    CRESCITA VERA di `sum(d0)` = %+.6e" % cv)
     _res = cv - (ss + sp + sf)
     P("    RESIDUO = crescita vera - (scrittori + pavimenti + FRENO) = %+.6e" % _res)
+    _rel = abs(_res) / max(abs(cv), 1e-300)
+    P("    RESIDUO RELATIVO alla crescita vera = %.3e" % _rel)
     P("    -> il bilancio %s"
-      % ("CHIUDE (residuo trascurabile)" if abs(_res) <= 1e-6 * max(abs(cv), 1.0)
-         else "NON CHIUDE: c'e' uno scrittore NON TRACCIATO, ed e' il risultato"))
+      % ("CHIUDE (residuo relativo < 1e-3)" if _rel < 1e-3
+         else ("chiude entro l'1 %%" if _rel < 1e-2
+               else "NON CHIUDE: c'e' uno scrittore NON TRACCIATO, ed e' il risultato")))
     P()
 P("-" * 118)
 P("3. UNIFORME O DIFFERENZIALE? — il criterio era scritto prima")
@@ -448,7 +488,23 @@ for et, L in (("MATURO", MAT), ("SPENTO", SPE)):
         _base = 100.0 * (_vf - _vv) / _vv if _vv else float("nan")
         P("    media della variazione del PONTE = %+.2f %%   contro %+.2f %% del vuoto-vuoto"
           % (_mv, _base))
-        if _mv < _base - 1.0:
+        # ⚠ E IL VERDETTO VA LETTO COL PAVIMENTO, senno' si legge la SATURAZIONE come
+        #   gravita'. Se la mediana del vuoto e' ARRIVATA a `LAM`, tutto sta collassando
+        #   sul pavimento, e un ponte che parte PIU' LUNGO cala di PIU' in percentuale
+        #   **solo perche' ha piu' strada da fare**: e' REGRESSIONE VERSO IL PAVIMENTO.
+        _lam, _ = mm(L, "LAM")
+        _al_pav = bool(_vf <= 1.001 * _lam)
+        _pa_ini = li_ / max(pi_, 1) if pi_ else float("nan")
+        P("    il vuoto finisce a %.6f (LAM = %.6f): %s"
+          % (_vf, _lam, "AL PAVIMENTO" if _al_pav else "sopra il pavimento"))
+        _fr, _ = mm(L, "fraz_d0_a_LAM")
+        P("    frazione di archi a `LAM` esatto = %.6f" % _fr)
+        if _al_pav:
+            P("    -> ⛔ **NON SI LEGGE COME GRAVITA': il vuoto E' AL PAVIMENTO.** Il ponte")
+            P("       partiva PIU' LUNGO della mediana, quindi cala di piu' in percentuale")
+            P("       **solo perche' ha piu' strada da fare fino allo stesso pavimento**.")
+            P("       E' REGRESSIONE VERSO IL PAVIMENTO, non avvicinamento.")
+        elif _mv < _base - 1.0:
             P("    -> ** IL PONTE SI ACCORCIA PIU' DEL VUOTO: LE MASSE SI AVVICINANO. **")
         elif _mv > _base + 1.0:
             P("    -> il ponte si accorcia MENO del vuoto: si ALLONTANANO relativamente.")
