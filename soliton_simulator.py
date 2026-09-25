@@ -414,7 +414,30 @@ CALORE_VETTORIALE = True   # calcio termico: True=vettoriale+chirale DI DEFAULT 
                            # eccitato, phivel firmato da perc_chi). False=scalare isotropo. --calore-scal per tornare scalare
                        # rispetto a frequenze locali (invarianza per riparametrizzazione). IN VERIFICA.
                        # False = costanti fisse (comportamento precedente). Reversibile.
-MITOSI_2LAM = False     # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. Approvata da Luca.
+MITOSI_2LAM = False
+
+# ============================================================================================
+# [`INERZIA-1(C)`, DECISIONE DI LUCA 2026-09-25] **IL CONTRASTO DIVENTA «PER VICINO».**
+# --------------------------------------------------------------------------------------------
+# `inerzia = _contrasto * T2` con `_contrasto = rho_s / peq_nodo`, e i due fattori scalano nel
+# numero di vicini **IN VERSO OPPOSTO**. **MISURATO** in configurazione del driver
+# (`CONFIG-1/a`, 2 semi x 2 versi del taglio, 20 bersagli per seme), pendenze su `log k`:
+#     COPPIA       -0.19 ... -0.30      INTENSIVA (non cresce col numero di vicini)
+#     _contrasto   +1.06 ... +2.47      ESTENSIVO
+#     T2           -0.15 ... +0.44      fa cio' che la geometria impone
+# Conseguenza: da `k = 77` a `k = 2` l'inerzia crolla `x2e-4 ... x4.6e-3`, il rapporto sale
+# `x427 ... x1.5e4`, e **`|omega|` arriva a `x176`**: il difetto ARRIVA ALLA DINAMICA.
+# **LA CAUSA E' DI STRUTTURA:** `rho_s` e' una **SOMMA pesata sui vicini**, `_peq_nodo` e'
+# **esplicitamente una MEDIA**. Un rapporto somma/media **scala col grado per costruzione**.
+# ✅ **LA CURA E' LOCALE, e la localita' e' il punto:** `rho_s` si normalizza **per vicino**
+#   **DENTRO `_contrasto` e SOLO LI'**, col **medesimo `_cn`** che `_peq_nodo` usa gia' come
+#   denominatore. **`rho_s` NON cambia altrove: la cura tocca L'INERZIA, non IL CAMPO.**
+#   Le **7 letture di `rho_s` fuori da `_passo_spinoriale`** sono elencate in
+#   `doc/LETTURE_rho_s.md` e passano tutte da `rho_spin` o da `_rho_sorgente()`: **nessuna
+#   vede la normalizzazione**, e lo prova la byte-identita' a flag spento.
+# ✅ **`STANDARD 10`: NESSUNA LEGGE NUOVA E NESSUNA GRANDEZZA NUOVA** -- si TOGLIE
+#   l'incoerenza fra numeratore e denominatore, e `_cn` esiste gia' tre righe sopra.
+CONTRASTO_INTENSIVO = False     # [CURA 5, 2026-09-25] `A13` ALLA NASCITA. Approvata da Luca.
                         # OFF di default: un interruttore alla volta (par.1).
                         #
                         # LA LEGGE: **un arco si divide SOLO se `d_arco >= 2 LAM`.**
@@ -3335,6 +3358,8 @@ class Rete:
             _peq_nodo = np.where(_cn[:n] > 0, _sp[:n] / np.maximum(_cn[:n], 1), 0.0)
         else:
             _peq_nodo = np.zeros(n)
+            _cn = None      # [`INERZIA-1(C)`] nessun arco valido: non c'e' un conteggio di
+                            #   vicini, e il ramo sotto lo DICHIARA invece di inventarne uno.
 
         # IL FALLBACK DEL PRIMO PASSO, con la convenzione GIA' USATA SOPRA per `_cs_nodo_prev`:
         # quando lo stato precedente non e' utilizzabile si prende il valore che rende il fattore
@@ -3378,7 +3403,32 @@ class Rete:
             # invocazioni e' un transitorio; uno sparso e' il comportamento principale, e i due
             # casi danno lo stesso conteggio. (Criterio scritto da questa distinzione, par.9.)
             self._inerzia_sfondo_ultima = self._inerzia_invocazioni
-        _contrasto = np.where(_ok_n, _rho_s / np.where(_ok_n, _peq_nodo, 1.0), 1.0)
+        # ====================================================================================
+        # [`INERZIA-1(C)`, decisione di Luca 2026-09-25] IL NUMERATORE DIVENTA «PER VICINO»
+        # ------------------------------------------------------------------------------------
+        #   `_peq_nodo` E' GIA' UNA MEDIA (`_sp/_cn`, tre righe sopra). Qui il numeratore usa
+        #   **LO STESSO `_cn`**, cosi' numeratore e denominatore sono **entrambi per vicino** e
+        #   il rapporto **non scala col grado**.
+        #   ⚠ **`_cn` conta gli archi VALIDI** (`peq` finito e positivo), non tutti: e' il
+        #   medesimo insieme su cui `_peq_nodo` fa la media. **Usare un conteggio diverso
+        #   sarebbe l'errore di POPOLAZIONE di `A3`** -- numeratore e denominatore su insiemi
+        #   diversi -- cioe' esattamente il difetto che questa cura sta togliendo.
+        #   ⚠ **`_cn = None`** (nessun arco valido) **NON si aggira con un `1`:** in quel caso
+        #   `_ok_n` e' falso e `_contrasto` vale **1** per la convenzione del primo passo. Il
+        #   ramo e' CONTATO, non assunto impossibile (`P5`).
+        _rho_c = _rho_s
+        if CONTRASTO_INTENSIVO:
+            self._g_ci_tot = getattr(self, '_g_ci_tot', 0) + 1
+            if _cn is None:
+                self._g_ci_senza_cn = getattr(self, '_g_ci_senza_cn', 0) + 1
+                self._g_ci_senza_cn_quando = int(self._g_ci_tot)
+            else:
+                _vic = np.maximum(np.asarray(_cn[:n], float), 1.0)
+                _rho_c = _rho_s / _vic
+                self._g_ci_vic_p50 = float(np.median(_vic))
+                self._g_ci_vic_min = float(_vic.min())
+                self._g_ci_nodi = int(n)
+        _contrasto = np.where(_ok_n, _rho_c / np.where(_ok_n, _peq_nodo, 1.0), 1.0)
         inerzia = np.maximum(_contrasto * _T2, 1e-6)       # il pavimento RESTA: deve diventare inerte
         self._inerzia_al_pavimento = getattr(self, "_inerzia_al_pavimento", 0) + int(np.sum(_contrasto * _T2 <= 1e-6))
         self._inerzia_tot = getattr(self, "_inerzia_tot", 0) + int(n)
@@ -8097,6 +8147,9 @@ def _applica_flag(a):
     global MAX_NODI, P_LAM, TAU_LOC, ZETA_M, HAM_SRC, ALPHA_NAT, DIFF_RES, PLAST_MIT, ZETA_LOC, VERLET, ELAST_C, PLAST_DIN, GUSCIO_MORBIDO
     global TAU_LUCE, RUMORE_COLORATO
     global MITOSI_2LAM     # [CURA 5] senza questo l'assegnazione sarebbe una LOCALE, inerte
+    global CONTRASTO_INTENSIVO   # [INERZIA-1(C)] idem: senza `global` il flag nasce MORTO,
+    #   ed e' esattamente come `--semina-matura` e `--mitosi-2lam` sono stati inerti per un
+    #   giorno intero, con i loro sigilli che PASSAVANO (li accendevano sul modulo).
     global SEMINA_MATURA   # [CURA 4] senza questo l'assegnazione sarebbe una LOCALE, inerte
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
@@ -8180,6 +8233,11 @@ def _applica_flag(a):
     if MITOSI_2LAM:
         print("[cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` (`A13` alla "
               "nascita). Lo Schwinger NON e' toccato.")
+    CONTRASTO_INTENSIVO = bool(getattr(a, "contrasto_intensivo", False))  # [INERZIA-1(C)]
+    if CONTRASTO_INTENSIVO:
+        print("[inerzia-1C] IL CONTRASTO E' PER VICINO: rho_s normalizzato sullo STESSO "
+              "conteggio di vicini che peq_nodo usa come denominatore. Coppia e inerzia "
+              "scalano allo stesso modo; rho_s NON cambia altrove (cura LOCALE).")
     SEMINA_LAM = bool(getattr(a, "semina_lam", False))  # cura della semina: default off
     TW_SPINORE = bool(getattr(a, "tw_spinore", False))     # torsione 4pi -> Bloch (doppia copertura): default off
     # [CURA 1b, decisione di Luca 2026-09-24] IL PONTE INVERSO E' IMPEDITO, non sconsigliato.
@@ -9084,6 +9142,14 @@ def _cli():
                         "nuovi; TOGLIE l'intervento di `_nasce` sui figli della mitosi. Lo "
                         "SCHWINGER non e' toccato (resta `A3`). OFF di default: a flag spento il "
                         "comportamento e' BYTE-IDENTICO.")
+    p.add_argument("--contrasto-intensivo", action="store_true", dest="contrasto_intensivo",
+                   help="[INERZIA-1(C)] il CONTRASTO dell'inerzia diventa PER VICINO: "
+                        "`rho_s` si normalizza sullo STESSO conteggio di vicini che "
+                        "`peq_nodo` usa gia' come denominatore. Curato perche' i due fattori "
+                        "scalavano in verso OPPOSTO nel numero di vicini (misurato: coppia "
+                        "k^-0.25, contrasto k^+1.06..+2.47), e da k=77 a k=2 |omega| "
+                        "esplodeva x150-176. LOCALE: `rho_s` NON cambia altrove. OFF di "
+                        "default finche' il sigillo non passa.")
     # [CURA 4, 2026-09-25] L'ACCENSIONE DEL CAMPO. OFF di default (par.1).
     p.add_argument("--semina-matura", action="store_true",
                    help="[CURA 4] i nodi della SEMINA INIZIALE nascono MATURI (ramp = 1), e la "

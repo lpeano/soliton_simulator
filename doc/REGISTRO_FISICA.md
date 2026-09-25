@@ -575,6 +575,14 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 
 <!-- SCHEDA nome=tempo-proprio funzioni=ritmo,_cli,_applica_flag flag=TAU_LOC,TEMPO_SEGNO,TEMPO_PROPRIO_ORIENTATO,RITMO_WRAP_2PI -->
 
+> **→ NOTA DEL 2026-09-25, e sta qui perche' questa scheda POSSIEDE `_cli` e `_applica_flag`:**
+> un flag nuovo, **`CONTRASTO_INTENSIVO`** (`--contrasto-intensivo`), si parsa in `_cli` e si
+> applica in `_applica_flag`, **con la `global` dichiarata nella stessa funzione** — senza,
+> nascerebbe **morto**, ed e' come `--semina-matura` e `--mitosi-2lam` sono stati inerti per un
+> giorno intero coi loro sigilli che passavano.
+> **Il TEMPO PROPRIO non cambia**: quel flag riguarda **l'inerzia**, e la sua legge sta nella
+> scheda **`inerzia-spinoriale`**. Qui sta solo il passaggio dal CLI.
+
 > ### ➜ **`CURA 2` PASSA DI QUI, e questa scheda deve dirlo** *(2026-09-24, blob `b881db89`)*
 >
 > `_cli` e `_applica_flag` acquisiscono **`--tempo-unico-mitosi`** *(con `TEMPO_UNICO_MITOSI`
@@ -994,6 +1002,14 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 > `fase-phi` non deve poter credere che la legge sia ancora quella.**
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
+
+> **→ NOTA DEL 2026-09-25: la LEGGE DELLA MITOSI NON E' CAMBIATA.** Il commit di
+> `INERZIA-1(C)` tocca **la riga accanto** alla `global MITOSI_2LAM` in `_applica_flag`, per
+> dichiarare `global CONTRASTO_INTENSIVO` — **niente di piu'**. `MITOSI_2LAM` e la soglia
+> `d >= 2 LAM` restano **identici**.
+> *(Questa nota esiste perche' `REG-R` ha rifiutato il commit chiedendo la scheda di
+> `MITOSI_2LAM`, e **ha fatto bene a chiederla**: dal diff non si vede se la riga toccata sia
+> un commento o una legge. **La risposta va scritta, non assunta.**)*
 # ⑦ LA MITOSI E SCHWINGER — **`mitosi()`**
 
 > **STATO: `DIFETTOSA`.** Difetti **`D35`** *(l'antifase della coppia)* e **`D33`** *(la
@@ -1192,9 +1208,101 @@ scendono sotto `2 LAM` e **la condizione diventa via via più difficile**. **Il 
 `300` passi; a `1000` potrebbe essere molto più basso** — cioè **la cura potrebbe SPEGNERE la
 mitosi col tempo invece di regolarla.** `C3` guarda questo, e `300` passi **non lo escludono.**
 
+<!-- SCHEDA nome=inerzia-spinoriale funzioni=_passo_spinoriale,_rho_sorgente,_applica_flag,_cli flag=CONTRASTO_INTENSIVO,CAMPO_SPINORIALE,TAU_A -->
+# Ⓐ `inerzia-spinoriale` — **QUANTO COSTA GIRARE A UNO SPINORE**
+
+> **QUESTA SCHEDA NASCE IL 2026-09-25, E IL FATTO CHE NON CI FOSSE E' PARTE DEL DIFETTO.**
+> La legge che divide la coppia — **`omega = coppia/inerzia`** — governa il settore di spin da
+> sempre, ed era descritta **solo nei commenti del codice e nei registri dei difetti**. Il
+> registro dice *«questo era rotto»*; **la scheda dice «questa e' la legge»**, e le due cose
+> non si sostituiscono (par.5-novies ③).
+
+## LA FORMA
+
+```
+inerzia    = max(_contrasto * _T2, 1e-6)
+_contrasto = rho_c / peq_nodo          rho_c = rho_s / max(_cn, 1)  se CONTRASTO_INTENSIVO
+                                       rho_c = rho_s                altrimenti
+_T2        = (d_nodo / cs_nodo)^2
+_peq_nodo  = _sp / max(_cn, 1)         (somma dei `peq` d'arco / numero di archi VALIDI)
+omega_new  = omega_src + dt_n * (correzione/inerzia - omega_src/_tau)
+```
+
+**`_cn` conta gli archi VALIDI** (`peq` finito e positivo), **non tutti**: e' il medesimo
+insieme su cui `_peq_nodo` fa la media. **Un conteggio diverso sarebbe l'errore di POPOLAZIONE
+di `A3`** — numeratore e denominatore su insiemi diversi.
+
+## DIMENSIONI
+
+`_T2` e' un **tempo al quadrato** (`[T²]`). `_contrasto` e' **adimensionale** *(una densita'
+diviso una densita')*, e con la cura resta adimensionale: `rho_s/vicini` diviso
+`peq_somma/vicini` — **i due `vicini` si semplificano nel rapporto**, ed e' proprio questo che
+rende la cura una **rimozione di incoerenza** e non un fattore di scala nuovo.
+`omega = coppia/inerzia` ha quindi le dimensioni di `[coppia]/[T²]`.
+
+## ✅ LA CURA DEL 2026-09-25 — `INERZIA-1(C)`, **LOCALE** (decisione di Luca)
+
+**IL DIFETTO, MISURATO** *(`CONFIG-1/a`, configurazione del driver, 2 semi × 2 versi del
+taglio, 20 bersagli per seme; `csv/_test_fork/_limite_accoppiamento2.py`)* — pendenze su
+`log k`, dove `k` e' il numero di relazioni del nodo:
+
+| grandezza | pendenza | lettura |
+|---|---|---|
+| **COPPIA** | `-0.19 … -0.30` | **INTENSIVA**: non cresce col numero di vicini |
+| **`_contrasto`** | **`+1.06 … +2.47`** | **ESTENSIVO** |
+| `_T2` | `-0.15 … +0.44` | fa cio' che la geometria impone |
+
+```
+da k = 77 a k = 2:   INERZIA x2e-4 ... x4.6e-3     coppia/inerzia x427 ... x1.5e4
+                     |omega|  x4.4  ... x176        <- IL DIFETTO ARRIVA ALLA DINAMICA
+```
+
+> ### **DUE FATTORI DELLA STESSA EQUAZIONE SCALAVANO IN VERSO OPPOSTO NEL NUMERO DI VICINI.**
+> **LA CAUSA E' DI STRUTTURA, non numerica:** `rho_s` e' una **SOMMA pesata sui vicini**
+> (`psi = _mat(w) @ …`), `_peq_nodo` e' **esplicitamente una MEDIA**. **Un rapporto
+> somma/media scala col grado per costruzione.**
+
+**PERCHE' LA CURA E' *LOCALE*, e perche' la localita' era la parte da decidere:** `rho_s`
+entra anche in **`lambda_nodi`**, nella **soglia della mitosi**, nella **densita' della coppia
+Schwinger** e nella **tabella degli invarianti**. Normalizzarlo **alla fonte** avrebbe
+cambiato **il campo**; normalizzarlo **dentro `_contrasto`** cambia **l'inerzia**.
+**Le sette letture fuori da `_passo_spinoriale` sono elencate in `doc/LETTURE_rho_s.md`**, e
+**nessuna vede la normalizzazione** — quattro di esse si trovano **solo cercando le
+STRINGHE**, ed e' la lezione che l'audit di `eta` ha pagato lo stesso giorno.
+
+## `A11` — IL PAVIMENTO `1e-6`
+
+**Resta, e deve diventare INERTE.** Misurato **prima** della cura: `0/20` — **non morde mai**,
+quindi non stava nascondendo il crollo. **Con la cura va RI-misurato**: se comincia a mordere,
+la cura abbassa l'inerzia **in assoluto** e non solo la sua pendenza, e `A11` chiede di
+guardare **l'errore che il pavimento nasconde**, non il pavimento.
+
+## COSA LEGGE E COSA SCRIVE
+
+**legge** `rho_s` *(via `_rho_sorgente()`)*, `peq` d'arco *(per `_peq_nodo`)*, `d_nodo` e
+`cs_nodo` *(per `_T2`)*, `omega_s`, `_tau`. **scrive** `omega_s`, e i contatori `A8`
+`_g_ci_tot` / `_g_ci_senza_cn` / `_g_ci_vic_p50` / `_g_ci_vic_min`.
+
+**⚠ `_cn = None`** *(nessun arco valido)* **non si aggira con un `1`:** in quel caso `_ok_n` e'
+falso e `_contrasto` vale **1** per la convenzione del primo passo, **la stessa di
+`_cs_nodo_prev`**. Il ramo e' **CONTATO** (`_g_ci_senza_cn`), non assunto impossibile (`P5`).
+
+## STATO
+
+**`CONTRASTO_INTENSIVO` e' OFF di default**, e **non e' nel driver**, finche' il sigillo non
+passa (decisione di Luca). **`STANDARD 10`: nessuna legge nuova, nessuna grandezza nuova** —
+`_cn` esiste tre righe sopra, e la cura **toglie** un'incoerenza invece di aggiungere un
+termine.
+
 <!-- SCHEDA nome=torsione-spinore funzioni=_passo_spinoriale,_applica_flag flag=TW_SPINORE,SYNC_SPINORE,SPIN_LARMOR,SPIN_FEEDBACK -->
 
 # ⑧ TORSIONE → SPINORE — **il ponte INVERSO**
+
+> **→ LA LEGGE DELL'INERZIA (`omega = coppia/inerzia`) HA UNA SCHEDA SUA dal 2026-09-25:**
+> **`inerzia-spinoriale`**. Sta qui il rimando perche' `_passo_spinoriale` compare in
+> entrambi i marcatori, e **un lettore che arriva da `torsione-spinore` non deve credere che
+> l'inerzia sia descritta qui.** *(La cura `INERZIA-1(C)` del 2026-09-25 — il contrasto «per
+> vicino» — e' descritta li', coi numeri che l'hanno motivata.)*
 
 > **Scheda aperta il 2026-09-24 per `CURA 1b`.** È l'unica legge del registro che esiste
 > **per essere bloccata**, non per essere applicata.
