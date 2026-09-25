@@ -18453,3 +18453,82 @@ TOTALE `Σ w_ij`** invece che sul **conteggio**, cioè la media pesata *vera* �
 che `_mat(w)` già costruisce. **Resta derivata** *(nessun numero nuovo)*, e la previsione è
 falsificabile: **se il residuo viene dai pesi, quella normalizzazione deve portare la differenza
 delle pendenze sotto `0.7` anche nel taglio «corti»**; se non lo fa, la mia diagnosi è sbagliata.
+
+
+---
+
+# 📋 **MANDATO GLOBALE: LISTA CHIUSA E LINEA D'ARRIVO — REGISTRATO, NON ESEGUITO** *(Luca, 2026-09-25)*
+
+> **Luca ha detto di metterlo IN CODA alla variante pesata di `INERZIA-1(C)`**, che è in corso.
+> Sta qui perché **una decisione che vive solo in chat, per chi legge il repo, non è mai stata
+> presa** — e questa cambia il modo di lavorare, non un numero.
+
+**LA DECISIONE:** *si curano **tutti** i difetti noti prima di chiudere l'epoca.* E perché sia
+**finibile**, due vincoli: **la lista si CHIUDE**, e si lavora **per famiglie**.
+
+## ① `doc/LISTA_CHIUSA.md` — da generare, poi **Luca APPROVA**
+
+Da `STATO_RUN` *(DIFETTI APERTI, CODA UNICA)*, dal registro di fisica e dai referti di oggi:
+**tutti** i difetti **ACCLARATI** ancora aperti, ciascuno con **id, una riga, prova (commit),
+stato, dipendenze, dimensione, famiglia**, **ordinati per DIPENDENZE** *(chi sblocca chi)*.
+**I SOSPETTI restano separati: non sono difetti finché non acclarati.**
+
+Le sette famiglie proposte dal guardiano — **e Luca chiede di correggerle se i dati dicono altro,
+dichiarandolo**:
+
+| | famiglia | voci citate nel mandato |
+|---|---|---|
+| **A** | inerzia e avvio | `INERZIA-1(C)` *(in corso)*, cura 5 dal CLI col `77 %` rimisurato, `RAMPA-2`, `B1`, `FRAG1` |
+| **B** | tempo unico | `tau_pp` nella campana della mitosi, `DT` dove serve `dt_e`, `PASSO-2` |
+| **C** | doppia copertura e creazione | `CURA 3` (`φ` su `2π`), torsione dallo spinore / curvatura sulle facce, soglia `3π` tarata, legge di creazione |
+| **D** | soglie tarate sotto Planck | massa critica *(21 usi)*, schermatura `lambda_nodi` spenta, audit delle costanti |
+| **E** | disegno e statistiche globali | `pos` nella dinamica (`A3`), medie/mediane globali in leggi locali, gravità «tetto × mediana» |
+| **F** | freno e contrazione | `freno-legge` `1+tanh`, `chi comprime d0` |
+| **G** | arretrato strumenti | `ANCORE-1` *(43)*, 24 script sul passo pieno, presidi `P1 P2 P4 P6 P7` e **`P9`** |
+
+> **`STOP` dopo la generazione: la lista la approva Luca, e da lì è la linea d'arrivo.**
+
+## ② LA REGOLA PER I DIFETTI NUOVI — **quattro strade, dichiarate nel commit**
+
+```
+1. BLOCCA il sistema (crash, invariante, nan)   -> si cura ORA, il minimo indispensabile
+2. INVALIDA la voce in corso                    -> si cura prima di chiudere quella voce
+3. STESSA RADICE di una voce in lista           -> entra in quella famiglia, Luca conferma
+4. ALTRIMENTI                                   -> doc/LISTA_DOPO.md, NON SI TOCCA
+```
+
+> ### ⚠ **E IL VINCOLO CHE MI RIGUARDA DI PIÙ:** *finché la lista è attiva **non si aprono
+> ### indagini nuove** — inventari, controlli a tappeto, sonde esplorative — **se non servono a
+> ### una voce**.*
+> **Oggi ne ho aperte parecchie** *(l'audit di `eta`, quello di `rho_s`, `ANCORE-1`, la tabella
+> delle configurazioni, `P7`)*: sono state utili, e **da ora ciascuna avrà bisogno di una voce a
+> cui servire.** Lo scrivo perché è la regola che mi cambia il comportamento, non una nota.
+
+## ③ `P9` — LE COPIE DEL SIMULATORE
+
+Ogni copia diagnostica si **GENERA al run** dal file corrente *(**mai** committata e riusata)*, e
+**prima di girare** si verifica **per diff** che differisca **SOLO** per le righe diagnostiche
+dichiarate *(assegnazioni a `self._diag_*`)* — **altrimenti STOP**. Il referto stampa **il blob
+del simulatore e quello della copia**. **Collaudo: una copia con una legge alterata deve essere
+bloccata.**
+
+*(Nota mia, e va verificata quando `P9` si scrive: i due sigilli di oggi generano la copia al run
+e stampano entrambi i blob, **ma il diff non lo controlla nessuno** — quindi `P9` non è già
+soddisfatto, è **già metà fatto**.)*
+
+## ④ LA LINEA D'ARRIVO — **a lista vuota**
+
+**BASE:** scena `(ii)(a)`, configurazione del driver con **TUTTE** le cure, **4 semi**, **600
+passi**, passo pieno, `P5` attivo. Referto: **bilancio di `d0` per scrittore, mitosi, omega
+mediano ed estremo, invarianti, distanza vera fra i nuclei delle masse contro il vuoto di
+controllo**. **Tag `base-epoca-4`.**
+**Poi PROVA 1 sulla base** — *le masse si avvicinano più del vuoto?* — **criteri scritti prima**.
+
+> È la prima delle tre prove di `doc/IPOTESI_gravita_a_spinta.md`, cioè **il bersaglio del
+> progetto** (par.0-zero di `CLAUDE.md`). La lista chiusa è ciò che la rende raggiungibile.
+
+## ⑤ IL CONTO GIORNALIERO
+
+Ogni giorno, in `STATO_RUN`: **quante voci chiuse, quante aperte, quante nuove — e in quale delle
+quattro strade sono finite**. **La lista deve ACCORCIARSI: se in un giorno cresce, lo si scrive in
+testa.**
