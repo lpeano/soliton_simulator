@@ -57,6 +57,38 @@ SEGNI_MISURA = ("percentile", "np.median", "np.mean", "corrcoef", "polyfit", ".s
                 "np.std", "pendenza", "quantil")
 
 ESCLUSI = ("_old_sim_pre_", "._sim.py", "_sim_vecchio.py", "_passo.py", "_inventario_passo.py")
+# ⚠ I FIGLI GENERATI NON SI INVENTARIANO: `csv/**/_tmp/_br_*.py` sono scritti DAI SIGILLI a
+#   ogni corsa, e contarli GONFIA il conto senza aggiungere un file da curare -- si cura il
+#   GENITORE. **Si escludono per PERCORSO, e si dichiara quanti sono.**
+ESCLUSI_DIR = ("/_tmp/", chr(92) + "_tmp" + chr(92))
+
+
+def _chiamate(src):
+    """I nomi EFFETTIVAMENTE CHIAMATI nel file, per AST.
+
+    ❌❌ LA PRIMA STESURA CERCAVA `(nome + "(")` NEL TESTO, e **un file che MENZIONA `mitosi`
+       in un commento veniva contato come se la CHIAMASSE.** È `STANDARD 9` al contrario: *una
+       PRESENZA dedotta da un `in` sul testo è lo stesso errore di un'ASSENZA dedotta così*.
+       **E qui il difetto non è teorico:** ogni referto che spiega «la mitosi resta morta»
+       contiene la parola `mitosi(`, e quei file risultavano «completi».
+    """
+    try:
+        arb = ast.parse(src)
+    except Exception:
+        return None
+    out = set()
+    for n in ast.walk(arb):
+        if isinstance(n, ast.Call):
+            f = n.func
+            if isinstance(f, ast.Attribute):
+                out.add(f.attr)
+            elif isinstance(f, ast.Name):
+                out.add(f.id)
+    return out
+
+
+SALTATI = []
+NON_PARSABILI = []
 
 
 def scandisci():
@@ -66,16 +98,24 @@ def scandisci():
             if not f.endswith(".py") or any(x in f for x in ESCLUSI):
                 continue
             p = os.path.join(radice, f)
+            rel = os.path.relpath(p, RADICE).replace(chr(92), "/")
+            if any(x in ("/" + rel) for x in ("/_tmp/",)):
+                SALTATI.append(rel)
+                continue
             try:
                 src = io.open(p, encoding="utf-8", errors="replace").read()
             except Exception:
                 continue
-            if ".step()" not in src:
+            ch = _chiamate(src)
+            if ch is None:
+                NON_PARSABILI.append(rel)
                 continue
-            # quali altre chiamate del passo compaiono NEL FILE?
-            presenti = [n for n in ALTRI if (n + "(") in src]
+            if "step" not in ch:
+                continue
+            # quali altre chiamate del passo sono EFFETTIVAMENTE CHIAMATE (AST, non testo)?
+            presenti = [n for n in ALTRI if n in ch]
             # usa il modulo condiviso?
-            usa_modulo = ("passo_pieno" in src) or ("_passo" in src and "import" in src)
+            usa_modulo = ("passo_pieno" in ch) or ("_passo" in src and "import _passo" in src)
             # quante volte `.step()` compare
             n_step = len(re.findall(r"\.step\(\)", src))
             strutt = sum(1 for s in SEGNI_STRUTT if s in src)
@@ -88,7 +128,7 @@ def scandisci():
                 classe = "MISURA"
             else:
                 classe = "NON CLASSIFICATO"
-            out.append(dict(file=os.path.relpath(p, RADICE).replace(chr(92), "/"),
+            out.append(dict(file=rel,
                             n_step=n_step, presenti=presenti,
                             mancanti=[n for n in ALTRI if n not in presenti],
                             usa_modulo=usa_modulo, classe=classe,
@@ -139,7 +179,21 @@ P("```")
 P(_passo.descrivi())
 P("```")
 P()
-P("**Trovati `%d` file sotto `csv/` che contengono `.step()`.**" % len(V))
+P("**Trovati `%d` file sotto `csv/` che CHIAMANO `step()`** *(per AST, non per testo)*." % len(V))
+P()
+P("**⚠ DUE CORREZIONI AL PRIMO CONTEGGIO, ed erano difetti miei:**")
+P("1. **i nomi erano cercati NEL TESTO** *(`(nome + \"(\") in src`)*: **un file che MENZIONA")
+P("   `mitosi` in un commento veniva contato come se la CHIAMASSE.** È `STANDARD 9` al")
+P("   contrario, e **non era teorico**: ogni referto che spiega «la mitosi resta morta»")
+P("   contiene `mitosi(`, e quei file risultavano «completi». **Ora è AST.**")
+P("2. **i figli GENERATI erano contati:** `csv/**/_tmp/_br_*.py` sono scritti dai sigilli a ogni")
+P("   corsa. **Contarli gonfia il conto senza aggiungere un file da curare** — si cura il")
+P("   GENITORE. **Saltati `%d`**, e il numero è detto invece di essere nascosto." % len(SALTATI))
+if NON_PARSABILI:
+    P()
+    P("**⚠ `%d` file NON si sono potuti analizzare** *(sintassi non valida per l'AST di questa")
+    P("   versione di Python)*: `%s`. **Non contano né come completi né come incompleti, e va")
+    P("   detto.**" % (len(NON_PARSABILI), ", ".join("`%s`" % x for x in NON_PARSABILI[:6])))
 P("**Di questi, `%d` NON hanno tutte le altre chiamate e NON usano il modulo condiviso.**" % len(INC))
 P()
 P("## IL CRITERIO DI CLASSIFICAZIONE, dichiarato — e il suo LIMITE")
