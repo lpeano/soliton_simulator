@@ -1,0 +1,59 @@
+========================================================================================================
+SIGILLO DI `DRIVER-SCENA-II` -- i cinque criteri del task history
+========================================================================================================
+
+  T1  L'ARGV DEL DEFAULT E' INVARIATA  (`--scena` non passato)
+        driver 'di prima' dal PADRE di 2b273da5 ... 502 righe
+        argv OGGI  42 elementi
+        argv PRIMA 42 elementi
+        identiche elemento per elemento ..... True
+
+  T5  IL CASO CHE DEVE FALLIRE: `N-MASSE` con `SEMINA_LAM`
+        rifiuta ............................. True
+        il messaggio e' ancora quello ....... True
+          [massa] SCENA DI EPOCA PRE-`A13`: `_massa` semina 497 nodi in un raggio scelto per
+            la scena, e quei raggi vengono dall'epoca in cui una distanza sotto `LAM` era
+        (il termine di paragone e' la misura 0: presente)
+
+  T2  CON LA SCENA (ii) IL VUOTO E' UNO SOLO, E LO FA LA SCENA
+        net.n dopo `_applica_flag` .......... 0   (atteso 0)
+        net.n dopo `avvia_test` ............. 4256   (atteso > 0, e con il `sep` del DRIVER: 4.000)
+        `--nodi 0` nell'argv ................ 0
+        AST di `_semina_masse_coerenti` intatto True   (contro 2b273da5^)
+
+  T4  CONFIGURAZIONE INTERA  (`H-P5`)
+        booleani confrontati ................ 79
+        DIVERSI dall'argv del driver ........ 0 []
+
+  T3  IL SEME E' REALE  -- tre processi, uno per braccio (`STANDARD 1`)
+        seme7a   seme 7  uscita 0  campi firmati 219
+        seme7b   seme 7  uscita 0  campi firmati 219
+        seme8    seme 8  uscita 0  campi firmati 219
+        T3a  seme 7 contro seme 7: campi IDENTICI 219 su 219
+        T3b  seme 7 contro seme 8: campi DIVERSI  99 su 219   ['_chi_core_nodi', '_chi_core_raggio', '_chi_core_rho0', '_chi_core_rhoc', '_chi_geom_nodi', '_cs_nodo_prev']
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 79
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 79.
+
+
+========================================================================================================
+  T1  default invariato (argv identica)          PASS
+  T5  N-MASSE rifiuta ancora, stesso messaggio   PASS
+  T2  un vuoto solo, costruito dalla scena       PASS
+  T4  0 differenze sui booleani                  PASS
+  T3a stesso seme -> byte identici               PASS
+  T3b semi diversi -> reti diverse               PASS
+SIGILLO: 6/6
+========================================================================================================
+
+COSA QUESTO SIGILLO *NON* DICE:
+  - **T1 non e' un confronto di RUN**: il ramo di default NON GIRA, e non per la cura --
+    non girava GIA' PRIMA (`M0c`). Confrontare due run morti darebbe un PASS vuoto.
+    Si confronta l'ARGV elemento per elemento, e l'esito.
+  - **non dice che la scena (ii) sia la scena GIUSTA per il run base**: dice che il
+    driver la produce, con un seme dichiarato e un vuoto solo.
+  - **nessuna misura di fisica**: `n`, `archi` e `QUOTA` sono numeri di un giro da UN
+    frame, non un risultato.

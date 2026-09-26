@@ -93,6 +93,12 @@ NUOVE = [
      "che giudica. Spostata da `CLAUDE.md` al posto 2."),
     # i criteri LOCALI della misura 0 di `DRIVER-SCENA-II`: `M0b` e `M0c` esistevano come
     #   "citato, mai definito"; ora hanno una definizione e un referto.
+    # i criteri LOCALI del sigillo di `DRIVER-SCENA-II`. `T1`..`T5` esistono gia' come
+    #   etichette locali di altri sigilli; `T3a` e `T3b` no.
+    ("T3a", "SIGILLO scena (ii): lo STESSO seme due volte da' byte IDENTICI -- 219 firme sha1 su 219", "csv/_seal_fork/_sigillo_scena_ii.py", "criterio-locale",
+     "definito il 2026-09-26. Un processo per braccio (STANDARD 1), firme dei byte (STANDARD 2). E' la meta' che dimostra il DETERMINISMO."),
+    ("T3b", "SIGILLO scena (ii): semi DIVERSI danno reti diverse -- 99 firme su 219 cambiano", "csv/_seal_fork/_sigillo_scena_ii.py", "criterio-locale",
+     "definito il 2026-09-26. E' la meta' che dimostra che il seme MORDE: senza, `--seme` sarebbe un'opzione inerte e il criterio 3 passerebbe per costruzione."),
     ("M0a", "MISURA 0 di DRIVER-SCENA-II: `--nodi 0` NON e' rispettato -- net.n = 455 "
             "dopo `_applica_flag` con SEMINA_LAM", "csv/_test_fork/_misura0_scena_ii.py",
      "criterio-locale",

@@ -2036,3 +2036,45 @@ questo blob non e' nel repo»* — e ha ragione: e' par.2 punto 6.
 **E `T2` non si accontenta dei due numeri:** verifica che l'**AST di `_semina_masse_coerenti` sia
 IDENTICO** a quello di prima. **La scena non e' stata toccata** — il difetto era a monte, e questa
 e' la prova, non l'affermazione.
+
+## ✅ `DRIVER-SCENA-II` — **SIGILLO 6/6.** Il primo `SI` e' chiuso, e mi fermo qui
+
+```
+T1  default invariato (argv identica) ....... PASS   42 elementi contro 42, IDENTICHE
+                                                     driver "di prima" dal PADRE di 2b273da5
+T5  N-MASSE rifiuta ancora, stesso messaggio  PASS   «SCENA DI EPOCA PRE-`A13`»
+T2  un vuoto solo, costruito dalla scena .... PASS   net.n  0 -> 4256   (sep del DRIVER 4.000)
+                                                     AST di `_semina_masse_coerenti` INTATTO
+T4  0 differenze sui booleani ............... PASS   0 su 79
+T3a stesso seme -> byte identici ............ PASS   219 campi su 219
+T3b semi diversi -> reti diverse ............ PASS   99 campi su 219 diversi
+SIGILLO: 6/6          tre processi, uno per braccio (`STANDARD 1`)
+```
+
+**IL SEME ORA E' UNA VARIABILE DEL RUN**, e non una costante nascosta: `7` due volte da' **219
+firme `sha1` identiche su 219**, `7` contro `8` ne cambia **99**. **Senza questo non esisteva una
+barra fra semi, e `P3` ne chiede almeno quattro.**
+
+### ❗ UN NUMERO CHE NON TORNAVA, E L'HA TROVATO IL CONFRONTO FRA DUE OUTPUT
+
+**`T2` riportava 2124 nodi dove il giro corto del driver ne faceva 4256.** Causa: `_NMASSE_VIDEO`
+— che porta `nmasse` e `sep` alla scena — e' riempito da **tre righe che stanno DOPO l'ancora
+`_applica_flag`**, quindi `argv_da` **non le eseguiva**: la scena girava col `sep` di **modulo
+(3.0)** invece di quello del **driver (4.0)**.
+
+> **Il criterio non era sbagliato** *(`net.n` `0` → `> 0`, AST intatto: regge con qualunque `sep`)*.
+> **Era sbagliato il NUMERO**, misurato in una configurazione **diversa da quella dichiarata** — la
+> famiglia di `CONFIG-1`. **E non l'ha trovato un criterio: l'ha trovato il confronto fra due
+> output che avrebbero dovuto coincidere.** Ora il sigillo **stampa il `sep` che ha usato**,
+> accanto al numero.
+
+### ⛔ STOP. Nessun run lungo.
+
+**Quattro cose sono in coda**, tutte nell'indice col criterio di chiusura:
+
+| id | che cos'e' |
+|---|---|
+| **`FATTI-AVVIO`** | la catena di avvio *(`_applica_flag`, `avvia_test`, `_massa`, `semina`)* non ha **un solo fatto** in `doc/FATTI_dal_codice.md` |
+| **`FUGA-MULTIRIGA`** | la via d'uscita di `H-REG-R` e `H-P1-bis` **non attraversa le righe** *(regex senza `re.S`)* — **lo stesso difetto curato oggi su `H-RIGHE`** |
+| **`H-REGR-LARGA`** | `H-REG-R` associa una scheda **per nome di funzione**: scatta su qualunque modifica a `_applica_flag` |
+| **`OSSERVABILE-P1`** | il prossimo `SI` dello smistamento, **non toccato** |
