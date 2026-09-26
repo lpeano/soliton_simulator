@@ -91,6 +91,15 @@ def carica():
     return noti, escl, ambigue
 
 
+TAB = chr(9)
+
+
+def leggi_tsv(p):
+    """`(colonne, righe)` di un TSV: serve al collaudo del punto 3, che aggiunge una riga vera."""
+    r = io.open(p, encoding="utf-8", newline="").read().split(NL)
+    return [c.strip() for c in r[0].split(TAB)], [x for x in r[1:] if x.strip()]
+
+
 def _ripulisci(tok):
     """Toglie una parentesi che appartiene alla PROSA, non all'ID.
 
@@ -276,6 +285,71 @@ def collaudo():
         P("                il documento e' tornato identico: %s" % (_sha1 == _sha0))
         P("                esito: %s" % ("PASS" if _ok_e2e else "FAIL"))
         esiti.append(_ok_e2e)
+    P()
+    # ---------------------------------------------------------------- IL PUNTO 3 DEL MANDATO
+    #   «un difetto nuovo si scrive come RIGA dell'indice; il hook rifiuta un ID nuovo in
+    #   `STATO_RUN` che non ha la sua riga». Si prova NEI DUE VERSI, sul HOOK VERO, con backup e
+    #   ripristino verificati per sha1.
+    import shutil
+    _sr = os.path.join(RADICE, "doc", "STATO_RUN.md")
+    _ix = os.path.join(RADICE, "doc", "INDICE_ID.tsv")
+    _st2 = subprocess.run(["git", "diff", "--cached", "--name-only"], cwd=RADICE,
+                          capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if (_st2.stdout or "").strip():
+        P("  PUNTO 3 NON ESEGUITO: c'erano modifiche in STAGE, e non le tocco.")
+        P("    (lo dichiaro invece di dare per buono un ramo che non ho provato.)")
+    else:
+        _id = _sent            # la sentinella: ignota per costruzione
+        _h0 = hashlib.sha1(io.open(_sr, "rb").read()).hexdigest()
+        _h1 = hashlib.sha1(io.open(_ix, "rb").read()).hexdigest()
+        shutil.copy(_sr, _sr + ".bak")
+        shutil.copy(_ix, _ix + ".bak")
+        _msgf = os.path.join(RADICE, "doc", "_collaudo_msg3.tmp")
+        io.open(_msgf, "w", encoding="utf-8", newline=NL).write("collaudo punto 3" + NL)
+        try:
+            # (a) l'ID nuovo SOLO in STATO_RUN
+            with io.open(_sr, "a", encoding="utf-8", newline=NL) as _f:
+                _f.write(NL + "| **%s** | difetto nuovo del collaudo | \u2014 | `APERTO` |" % _id + NL)
+            subprocess.run(["git", "add", "--", "doc/STATO_RUN.md"], cwd=RADICE,
+                           capture_output=True, text=True)
+            _a = subprocess.run([sys.executable, os.path.join(RADICE, "csv",
+                                                             "_presidio_indice.py"),
+                                 "--commit-msg", _msgf], cwd=RADICE, capture_output=True,
+                                text=True, encoding="utf-8", errors="replace")
+            _okA = (_a.returncode == 1 and (_id in (_a.stderr or "")
+                                            or _id[1:] in (_a.stderr or "")))
+            # (b) con la RIGA nell'indice
+            _c, _rr = leggi_tsv(_ix)
+            _nuova = [_id, "", "difetto nuovo del collaudo", "doc/STATO_RUN.md::collaudo",
+                      "aperto", "DA-DECIDERE", "difetto", "?", "", "(senza marcatore)", "", "", ""]
+            io.open(_ix, "w", encoding="utf-8", newline=NL).write(
+                TAB.join(_c) + NL + NL.join(_rr + [TAB.join(_nuova)]) + NL)
+            subprocess.run(["git", "add", "--", "doc/STATO_RUN.md", "doc/INDICE_ID.tsv"],
+                           cwd=RADICE, capture_output=True, text=True)
+            _b = subprocess.run([sys.executable, os.path.join(RADICE, "csv",
+                                                             "_presidio_indice.py"),
+                                 "--commit-msg", _msgf], cwd=RADICE, capture_output=True,
+                                text=True, encoding="utf-8", errors="replace")
+            _okB = (_b.returncode == 0)
+        finally:
+            subprocess.run(["git", "reset", "-q", "--", "doc/STATO_RUN.md", "doc/INDICE_ID.tsv"],
+                           cwd=RADICE, capture_output=True, text=True)
+            shutil.move(_sr + ".bak", _sr)
+            shutil.move(_ix + ".bak", _ix)
+            if os.path.exists(_msgf):
+                os.remove(_msgf)
+        _h0b = hashlib.sha1(io.open(_sr, "rb").read()).hexdigest()
+        _h1b = hashlib.sha1(io.open(_ix, "rb").read()).hexdigest()
+        _okC = (_h0 == _h0b and _h1 == _h1b)
+        P("  PUNTO 3, NEI DUE VERSI (sentinella `%s`):" % _id)
+        P("    DEVE FALLIRE  l'ID nuovo SOLO in `STATO_RUN` -> uscita %d, segnalato %s   %s"
+          % (_a.returncode, _id in (_a.stderr or "") or _id[1:] in (_a.stderr or ""),
+             "PASS" if _okA else "FAIL"))
+        P("    DEVE PASSARE  lo stesso ID **con la RIGA nell'indice** -> uscita %d   %s"
+          % (_b.returncode, "PASS" if _okB else "FAIL"))
+        P("    i due documenti sono tornati identici (sha1): %s   %s"
+          % (_okC, "PASS" if _okC else "FAIL"))
+        esiti += [_okA, _okB, _okC]
     P()
     _tutto = all(x for x in esiti if x is not None)
     P("  ESITO: %s" % ("%d/%d PASS -- il presidio IMPEDISCE e non solo avvisa"

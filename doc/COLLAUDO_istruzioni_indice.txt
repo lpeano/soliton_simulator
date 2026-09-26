@@ -1,0 +1,37 @@
+====================================================================================================
+COLLAUDO DELLE ISTRUZIONI D'USO (sezione 11 di CLAUDE.md)   (2026-09-26)
+====================================================================================================
+
+  LETTO DALLA SEZIONE, non da me:
+    la FONTE ............ doc/INDICE_ID.tsv
+    colonne ............. 13   id, alias, titolo_breve, fonte_principale, stato, blocca_run_base, tipo, famiglia, stato_da, avanzamento, revisione, motivo, nota
+    stati ammessi ....... aperto, chiuso, non-difetto, teoria, da-decidere
+    tipi ammessi ........ 10
+    comandi ............. python csv/_lista_chiusa.py | python csv/_vista_smistamento.py | python csv/_punto_della_situazione.py | python csv/_indice_id.py | python csv/_indice_id.py --collaudo
+    documenti citati .... doc/INDICE_ID.tsv, doc/REVISIONE_SI_2026-09-26.md, doc/SMISTAMENTO_run_base.md, doc/STATO_RUN.md
+
+  K0 la sezione dichiara fonte, 13 colonne, 5 stati e i comandi -> OK
+
+  IL DIFETTO FINTO `QZ901`, seguendo SOLO la sezione:
+    K1 DEVE FALLIRE  solo in `STATO_RUN` ............. uscita 1   OK
+    K2 DEVE PASSARE  con la RIGA nell'indice ......... uscita 0   OK
+    K3 i comandi della sezione girano tutti:
+         python csv/_lista_chiusa.py                  uscita 0
+         python csv/_vista_smistamento.py             uscita 0
+         python csv/_punto_della_situazione.py        uscita 0
+         python csv/_indice_id.py                     uscita 0
+         python csv/_indice_id.py --collaudo          uscita 0
+       -> OK
+    K4 il difetto finto COMPARE nello smistamento .... True   OK
+    K5 tutti i file sono tornati identici (sha1) ..... True   OK
+
+====================================================================================================
+ESITO: 6/6 PASS -- **LA SEZIONE 11 BASTA DA SOLA**
+====================================================================================================
+
+COSA QUESTO COLLAUDO *NON* DICE:
+  - **non dice che la sezione sia CHIARA per un umano**: dice che **contiene i dati e i comandi**
+    che servono a fare il lavoro, e che quei comandi girano.
+  - **la riga finta e' costruita dalle COLONNE della sezione**, e il collaudo si ferma se
+    l'intestazione dell'indice **non coincide** con quella dichiarata: se qualcuno cambia lo
+    schema e si dimentica la sezione, **questo collaudo lo denuncia**.

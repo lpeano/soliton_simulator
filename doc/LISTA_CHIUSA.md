@@ -387,7 +387,7 @@ FUORI LISTA           391   col motivo, dai campi dell'indice
 | `DA-DECIDERE` | **STANDARD 2** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **STANDARD 5** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **STANDARD 7** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **STANDARD 9** | — | (CITATO 12 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **STANDARD 9** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **STANDARD ⑤** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **STEP2** | — | (CITATO 66 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **SU2** | — | (CITATO 67 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |

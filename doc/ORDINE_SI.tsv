@@ -1,0 +1,11 @@
+n	voce	perche_viene_qui	stima
+1	DRIVER-SCENA-II	**senza un driver che faccia la scena `(ii)`(a) non si puo' girare NIENTE**: viene prima di ogni misura, perche' ogni misura va fatta su quella scena	1-2 h
+2	OSSERVABILE-P1	**e' la grandezza che la `PROVA 1` misura**: viene subito dopo il driver perche' il suo collaudo ha bisogno di una scena vera	1-1,5 h
+3	D02	**il disegno entra nella gravita'** *(`pozzo_grafo` usa `pos` a `:6541`)*: va curato PRIMA delle misure, altrimenti si misura un sistema che si sa difettoso *(`P2`)*	1,5-2,5 h
+4	U1	**misura prima**: quanto pesa `massa_critica_collasso` nei `21` punti	1 h
+5	SCALE-TW	**la misura `M1`**: quanta mitosi e DOVE. Va dopo `D02` perche' la spinta cambia dove i nodi nascono	1,5-2 h
+6	D31	**misura del freno**, e poi la forma decisa `1+tanh`: la deriva si misura sulla scena del driver	1-1,5 h
+7	CLI-1	**i sigilli delle cure 4 e 5 dal CLI**: indipendente dagli altri, si puo' fare in qualunque momento, e sta qui perche' e' il piu' breve	40-60 min
+8	D03 · D31 · SCALE-TW	**LE DECISIONI DI LUCA**: spegnere in modo dichiarato o `MEM_ARCO`; la forma del freno; che fare delle scale della torsione. **Vengono DOPO le misure**, perche' una decisione senza numeri e' una decisione al buio	— (decide Luca)
+9	RAMPA-2	**si cura comunque**, e sta per ultima perche' e' il transitorio di un passo	30-45 min
+10	RUN BASE	scena `(ii)`(a), 4 semi, 600 passi, tutte le cure, `P5` attivo, tag `base-epoca-4`; poi la `PROVA 1`	il run: ore-macchina

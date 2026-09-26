@@ -36,7 +36,7 @@ elencate qui        485   (tolte le etichette locali, gli assiomi e gli standard
 | **`Z100`** | Z100 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / INVARIANTI (C5): il programma si ferma quando una grandezza esce… | `fronte` | `bc940ff 22:30` |
 | **`Z101`** | Z101 APERTA ⏳[EPOCA 3 · MISURA] / VALIDAZIONE A 600 PASSI: 6 criteri su 8 REGGONO. L'ESPLOSIONE E' SPARITA,… | `fronte` | `bc940ff 22:30` |
 | **`Z102`** | Z102 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / CHI FA SCAPPARE d0: E' IL FRENO DELLA SCALA MINIMA. Gli… | `fronte` | `7263b19 16:38` |
-| **`Z103`** | Z103 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / IL POZZO GRAVITAZIONALE USA IL DISEGNO, E IL SUO DOCSTRING DICE… | `fronte` | `945f1d7 20:08` |
+| **`Z103`** | Z103 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / IL POZZO GRAVITAZIONALE USA IL DISEGNO, E IL SUO DOCSTRING DICE… | `fronte` | `1a764b0 17:39` |
 | **`Z107`** | Z107 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / LA GRAVITA' NON E' IL MOTORE DELLA FUGA DI d0: SPENTA, d0 SCAPPA… | `fronte` | `94be0a5 16:41` |
 | **`Z116`** | Z116 CHIUSA PER MISURA ⏳[archivi delle cure · MISURA] / I TRE BRACCI: 6/8 · 7/8 · 6/8. E SPEGNENDO TUTTO IL… | `fronte` | `ce7939b 20:06` |
 | **`Z12`** | Z12 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / pesi() gira SEDICI volte per passo, a cavallo della… | `fronte` | `16e9953 14:48` |
@@ -93,7 +93,7 @@ elencate qui        485   (tolte le etichette locali, gli assiomi e gli standard
 | **`S10`** | S10 RITIRATA il 2026-09-24 / Il tetto 1.414213 di r viene da un ramo di ritmo() che NON GIRA / — / RITIRATA,… | `altro` | `3eb6b7a 13:01` |
 | **`Z114`** | Z114 CHIUSA PER DIMOSTRAZIONE / GLI SCRITTORI DI d0 NON TRACCIATI SONO DUE, NON TRE: init (fuori perimetro) e… | `fronte` | `bf8aaad 17:45` |
 | **`Z117`** | Z117 CHIUSA PER DIMOSTRAZIONE + MISURA / IL WRAP «A 4π» DI ritmo() NON AVVOLGE NIENTE: su (-2π, 2π) E'… | `fronte` | `29b7846 13:43` |
-| **`Z73`** | Z73 RITIRATA ⏳[EPOCA 1 · MISURA] / RITIRATA UNA SECONDA VOLTA il 2026-09-20, e la smentita sta nel MESSAGGIO… | `fronte` | `3566e3b 17:25` |
+| **`Z73`** | Z73 RITIRATA ⏳[EPOCA 1 · MISURA] / RITIRATA UNA SECONDA VOLTA il 2026-09-20, e la smentita sta nel MESSAGGIO… | `fronte` | `1a764b0 17:39` |
 
 ## FATTO — 31
 
@@ -110,7 +110,7 @@ elencate qui        485   (tolte le etichette locali, gli assiomi e gli standard
 | **`G1`** | §1 QUANTO CONTA IL DISEGNO — Ldisegno/d per arco, per regione, nel tempo, e la correlazione col CENTRO del… | `cura` | `4a76517 15:00` |
 | **`G3`** | §3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE / GLOBALE-DISEGNO §3 / FATTA. sigillo 7/7 · controllo involucro… | `cura` | `0be343a 09:21` |
 | **`G4`** | §4 PROVA DI SPEGNIMENTO: la MEMORIA DEL MOTO — flag MEMMOTO / GLOBALE-DISEGNO §4 / FATTO (finito 14:39:27).… | `cura` | `8ee4377 17:24` |
-| **`LETTORI-INDICE`** | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FUORI PERIMETRO — e i quattro… | `altro` | `3566e3b 17:25` |
+| **`LETTORI-INDICE`** | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FUORI PERIMETRO — e i quattro… | `altro` | `1a764b0 17:39` |
 | **`OKN-ASSERT`** | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(..., default) CHE DECIDE AL POSTO… | `altro` | `e216730 01:33` |
 | **`POTENZE-1`** | CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6/6: F2 da x47 000 a x1.4, F1 2.427 contro 2.4567… | `altro` | `4a76517 15:00` |
 | **`RAMPA-1`** | CHIUSA il 2026-09-25, strada (3) (decisione di Luca): sigillo 9/9 dal CLI, ramp = 1.000000000000000 per 120… | `altro` | `4a5d085 20:33` |

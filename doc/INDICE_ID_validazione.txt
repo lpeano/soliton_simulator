@@ -1,0 +1,22 @@
+================================================================================================
+COLLAUDO DEL VALIDATORE -- i DUE versi   (2026-09-26)
+================================================================================================
+
+  DEVE PASSARE  l'indice VERO (741 voci) -> PASS
+  DEVE FALLIRE  uno stato inventato                  -> RIFIUTA: riga 2 (`A1`): stato `verde` non ammesso
+  DEVE FALLIRE  un tipo inventato                    -> RIFIUTA: riga 2 (`A1`): tipo `cosa` non ammesso
+  DEVE FALLIRE  una famiglia inventata               -> RIFIUTA: riga 2 (`A1`): famiglia `Z` non ammessa
+  DEVE FALLIRE  un `blocca SI` su una voce CHIUSA    -> RIFIUTA: riga 4 (`A1-INERZIA`): blocca SI ma stato `chiuso` /
+
+  VOCI PERSE rispetto al tag `lista-chiusa-v1`: nessuna   -> PASS
+    cancellazioni DICHIARATE (1):
+      `CLI-1)` -- token SPURIO: la parentesi della prosa attaccata all'id *(`(CLI-1)` letto come un nome)*. Curato il 2026-09-26: le parentesi devono essere BILANCIATE.
+
+================================================================================================
+ESITO: 6/6 PASS -- il validatore IMPEDISCE, non descrive
+================================================================================================
+
+COSA QUESTO COLLAUDO *NON* DICE:
+  - **non dice che i CONTENUTI siano giusti**: dice che sono **ben formati e coerenti**. Che
+    `D02` blocchi davvero il run base non lo decide uno schema.
+  - **non controlla il testo di `motivo`**: controlla che **ci sia** dove `blocca = SI`.

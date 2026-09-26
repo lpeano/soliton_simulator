@@ -353,7 +353,16 @@ def pre_commit():
     if _q.returncode:
         sys.stderr.write(_q.stderr or '')
         return 1
-    # [INDICE] il controllo degli ID **NON sta qui**: sta in `commit-msg`, perche' e' l'unico
+    # [INDICE] il VALIDATORE dello schema sta QUI, perche' guarda un FILE e non ha bisogno del
+    #   messaggio: `doc/INDICE_ID.tsv` e' LA FONTE, e una fonte mal formata non entra nel repo.
+    _qv = _sp.run([sys.executable, os.path.join(RADICE, 'csv', '_indice_id.py')],
+                  cwd=RADICE, capture_output=True, text=True)
+    if _qv.returncode:
+        sys.stderr.write((_qv.stdout or '') + (_qv.stderr or ''))
+        sys.stderr.write(NL + "  CHE FARE: correggere la riga dell'indice."
+                         " Il validatore dice quale e perche'." + NL + NL)
+        return 1
+    # [INDICE] il controllo degli ID citati **NON sta qui**: sta in `commit-msg`, perche' e' l'unico
     #   stadio in cui il MESSAGGIO esiste -- e senza il messaggio la via d'uscita dichiarata
     #   `[SENZA-INDICE: ...]` non si puo' leggere. Metterlo in `pre-commit` significava leggere
     #   `.git/COMMIT_EDITMSG`, che a quel punto contiene **il commit PRECEDENTE**: un'eccezione

@@ -1556,3 +1556,20 @@ commento e **senza flag da riga di comando**. Cioe': **esiste gia' uno strato di
 default che non e' mai passato per questi tre criteri, perche' i tre criteri non esistevano.**
 Il registro serve prima di tutto a **rendere visibile quello strato**, non solo a governare le
 promozioni future.
+
+---
+
+## 11. L'INDICE DEI DIFETTI: COME SI USA *(dal 2026-09-26)*
+
+- **LA FONTE E' `doc/INDICE_ID.tsv`** — un TSV di **13 colonne**, e **non ce n'e' un'altra**.
+- **colonne:** `id` · `alias` · `titolo_breve` · `fonte_principale` · `stato` · `blocca_run_base` · `tipo` · `famiglia` · `stato_da` · `avanzamento` · `revisione` · `motivo` · `nota`
+- **`stato`:** `aperto` | `chiuso` | `non-difetto` | `teoria` | `da-decidere`
+- **`blocca_run_base`:** `SI` | `NO` | `DA-DECIDERE` | `DA VERIFICARE`
+- **`tipo`:** `difetto` | `sospetto` | `fronte` | `misura` | `cura` | `presidio` | `assioma` | `standard` | `criterio-locale` | `altro` · **`famiglia`:** `A`-`G` oppure `?` · **`avanzamento`:** `FATTO` | `IN CORSO` | `IN CODA` | `BLOCCATO` | `CON RISERVA` | `(senza marcatore)`
+- **UN DIFETTO NUOVO = UNA RIGA NELL'INDICE**, piu' la spiegazione lunga in `doc/STATO_RUN.md` **con lo STESSO ID**. **MAI IL CONTRARIO:** un ID nuovo in un documento vivo **senza la sua riga** viene **RIFIUTATO dal hook**.
+- **`blocca_run_base = SI` RICHIEDE `motivo`** *(la prova in una frase)*: **una decisione senza prova non passa il validatore.**
+- **LE VISTE SI GENERANO, NON SI MODIFICANO A MANO:**
+  `python csv/_lista_chiusa.py` · `python csv/_vista_smistamento.py` · `python csv/_punto_della_situazione.py`
+- **IL VALIDATORE:** `python csv/_indice_id.py` *(e `python csv/_indice_id.py --collaudo`)*. **Gira da solo nel `pre-commit`**: schema, vocabolari, ID unici, coerenza `stato`/`blocca`, `motivo` dove serve, **e nessuna voce persa rispetto al tag**.
+- **COSA BLOCCA IL RUN BASE** si legge in **`doc/SMISTAMENTO_run_base.md`** *(gli `SI`, in ordine di lavoro)*; **il PERCHE' di ogni `SI`** sta in **`doc/REVISIONE_SI_2026-09-26.md`**, che separa ✅ *verificato sul codice* da 🟨 *misura di Luca* da 🧠 *inferenza*.
+- **LA LISTA E' CONGELATA al tag `lista-chiusa-v1`: SI SPUNTA, NON SI RIGENERA.** L'importatore che la costruiva dal Markdown e' in **`csv/_archivio/_indice_id_importatore.py`** e **NON si rilancia** *(rilanciarlo sovrascriverebbe la fonte con una ricostruzione, buttando via le decisioni scritte nelle colonne)*.

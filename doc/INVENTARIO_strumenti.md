@@ -854,3 +854,15 @@ python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie
 | documento | comando che lo collega | cosa contiene |
 |---|---|---|
 | `doc/REVISIONE_SI_2026-09-26.md` | `python csv/_indice_id.py` *(scrive la colonna `revisione` e i rimandi nello smistamento)* | per ognuno degli otto `SI` e per le sei voci che **non** bloccano: cio' che e' ✅ **VERIFICATO sul codice** *(file, riga, la frase che la riga contiene)*, cio' che e' 🟨 **di Luca e non ho rifatto**, cio' che e' 🧠 **INFERENZA**. **Blob del documento: `06c18fe9`.** |
+
+---
+
+## Aggiornati il 2026-09-26 — **l'INDICE E' LA FONTE: l'importatore si spegne**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_archivio/_indice_id_importatore.py` | `c796966e` | ⛔ **NON SI RILANCIA** | **l'importatore, SPENTO il 2026-09-26 dopo l'ULTIMA importazione.** Leggeva il Markdown e ricostruiva l'indice: rilanciarlo ora **sovrascriverebbe la fonte con una ricostruzione**, buttando via le decisioni scritte nelle colonne | — |
+| `csv/_indice_id.py` | `ee6bc793` | `python csv/_indice_id.py` · `--collaudo` | **VALIDATORE** *(non genera piu' niente)*: schema, vocabolari, ID unici e ben formati, coerenza `stato`/`blocca`, `motivo` dove `blocca = SI`, **nessuna voce persa rispetto al tag** *(con le cancellazioni DICHIARATE)*. **Gira nel `pre-commit`** | `doc/INDICE_ID_validazione.txt`: **6/6 PASS** — l'indice vero passa, quattro guasti diversi vengono RIFIUTATI |
+| `csv/_vista_smistamento.py` | `2c0575bf` | `python csv/_vista_smistamento.py` | genera `doc/SMISTAMENTO_run_base.md` **dai DATI**: `doc/INDICE_ID.tsv` + **`doc/ORDINE_SI.tsv`** *(l'ordine di lavoro, estratto dall'AST del vecchio generatore)*. **Nessuna decisione nel codice** | `137` voci, `8` `SI`, `0` da verificare |
+| `csv/_collaudo_istruzioni.py` | `9f30af48` | `python csv/_collaudo_istruzioni.py` | **collauda la SEZIONE 11 di `CLAUDE.md`**: la estrae, ne legge colonne/stati/comandi, **costruisce la riga del difetto finto dalle colonne DICHIARATE**, prova i due versi sul hook vero, rigenera le viste coi comandi della sezione, ripristina e verifica per sha1 | `doc/COLLAUDO_istruzioni_indice.txt`: **6/6 PASS — la sezione basta da sola** |
+| `doc/ORDINE_SI.tsv` | — | *(dato)* | l'ordine di lavoro degli otto `SI`: `n`, `voce`, `perche_viene_qui`, `stima`. **Era un letterale Python nel generatore: ora e' un DATO** | — |

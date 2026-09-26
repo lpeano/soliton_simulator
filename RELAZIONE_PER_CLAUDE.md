@@ -20286,3 +20286,78 @@ campi di DECISIONE cambiati (3):  D09  Z73  LETTORI-INDICE   -- esattamente le d
 
 **Le quattro condizioni di fine restano soddisfatte, e i collaudi pure** *(vista `2/2`, presidio
 `5/5`, collisioni `0` su `322`)*.
+
+
+---
+
+# 🏛️ **L'INDICE E' LA FONTE: l'importatore si e' SPENTO** *(ultimo passo, 2026-09-26)*
+
+## ✅ **LE QUATTRO COSE, e la quinta chiesta a meta' strada**
+
+**① ULTIMA IMPORTAZIONE, poi l'importatore E' SPENTO.** `csv/_indice_id.py` ha girato per l'ultima
+volta *(aggiungendo le colonne `motivo` e `nota`)* ed e' in
+**`csv/_archivio/_indice_id_importatore.py`**.
+> ### **Rilanciarlo ora sovrascriverebbe la FONTE con una RICOSTRUZIONE**, buttando via le decisioni
+> ### scritte nelle colonne. **E' scritto nel suo docstring e nell'inventario**, non solo qui.
+
+**② LE DECISIONI SONO NEI DATI, non nel codice.** `TIPO_A_MANO` → colonna **`nota`**
+*(«tipo deciso a mano: …»)*; le `DECISIONI` della revisione → colonna **`motivo`** *(la prova in una
+frase)*; l'**ordine di lavoro** → **`doc/ORDINE_SI.tsv`**, estratto **dall'AST** del vecchio
+generatore *(non ricopiato a mano: `P1-ter`)*. **Nel codice delle viste non c'e' piu' una sola
+decisione.**
+
+**③ `csv/_indice_id.py` ORA E' UN VALIDATORE** e **non genera niente**: schema *(13 colonne esatte)*,
+vocabolari, ID **unici e ben formati**, coerenza `stato`/`blocca`, **`motivo` obbligatorio dove
+`blocca = SI`** *(una decisione senza prova non passa)*, e **nessuna voce persa rispetto al tag**
+*(con le cancellazioni **DICHIARATE**: oggi una sola, il token spurio `CLI-1)`)*.
+**Gira da solo nel `pre-commit`.** Collaudo **6/6**: l'indice vero passa, e **quattro guasti diversi
+vengono rifiutati** *(stato inventato, tipo inventato, famiglia inventata, `blocca SI` su una voce
+chiusa)*.
+
+**④ LE VISTE SI GENERANO DAI DATI:** `_lista_chiusa`, **`_vista_smistamento`** *(nuovo: la vista era
+dentro l'importatore)*, `_punto_della_situazione`.
+
+**⑤ LE ISTRUZIONI D'USO SONO IN `CLAUDE.md`, sezione 11** — **14 righe**, con fonte, colonne, stati,
+comandi, che cosa blocca il run base e dove sta il perche' di ogni `SI`.
+
+## ✅ **IL COLLAUDO DELLE ISTRUZIONI, ed e' il piu' severo della giornata**
+
+`csv/_collaudo_istruzioni.py` **non usa cio' che so: usa cio' che la sezione DICE.** Estrae la
+sezione 11, ne legge **colonne, stati, tipi e comandi**, **costruisce la riga del difetto finto dalle
+colonne DICHIARATE** *(e si ferma se l'intestazione dell'indice non coincide con quella scritta nella
+sezione)*, e prova i due versi sul **hook vero**.
+
+```
+K0 la sezione dichiara fonte, 13 colonne, 5 stati e i comandi ....... OK
+K1 DEVE FALLIRE  il difetto finto SOLO in `STATO_RUN` ... uscita 1 ... OK
+K2 DEVE PASSARE  lo stesso con la RIGA nell'indice ...... uscita 0 ... OK
+K3 i cinque comandi della sezione girano tutti, uscita 0 ............ OK
+K4 il difetto finto COMPARE nello smistamento ....................... OK
+K5 tutti i file tornano identici (sha1) ............................. OK
+                                    -> 6/6: **LA SEZIONE 11 BASTA DA SOLA**
+```
+
+> ### **Un'istruzione d'uso si collauda facendo il lavoro CON QUELLA E NIENT'ALTRO.** Se avessi
+> ### provato *«so aggiungere un difetto»* avrei collaudato me, non la sezione.
+
+## ✅ **IL DELTA, col diff**
+
+```
+contro HEAD (1a764b0)   colonne 11 -> 13  (nuove: motivo, nota)
+                        voci 740 -> 740   sparite: nessuna   nuove: nessuna
+                        VOCI CAMBIATE nei campi di decisione: **0**
+contro il tag           colonne  9 -> 13  voci 741 -> 740 (il token spurio)
+                        cambiate: 3 -- D09, Z73, LETTORI-INDICE, **le decisioni gia' dichiarate**
+```
+
+**«0 voci cambiate» e' verificato contro `HEAD`**, che e' la domanda giusta per QUESTO passo: il
+refactoring ha spostato **dove** vivono le decisioni, **non quali sono**.
+
+## ❌ **UN DIFETTO MIO, e il solito posto**
+
+Nel patch che aggiungeva le colonne, `re.sub(r"[\t\n]", …)` e' diventato **un TAB e un NEWLINE VERI
+dentro la stringa** → `SyntaxError`. **Il blocco di scrittura del TSV e' stato ricostruito con
+`replace`, che non ha escape da rovinare.**
+> ### **Quarta volta oggi che un escape muore in un patch script** *(`\b` → backspace, `\u2014` →
+> ### em-dash, `\s` → warning, ora `\t`)*. **La regola operativa e': nei patch script non si scrivono
+> ### escape — si usa `chr()` o `replace`.**

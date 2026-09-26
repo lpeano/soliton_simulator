@@ -17,7 +17,12 @@ COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
                 il documento e' tornato identico: True
                 esito: PASS
 
-  ESITO: 5/5 PASS -- il presidio IMPEDISCE e non solo avvisa
+  PUNTO 3, NEI DUE VERSI (sentinella `QX700`):
+    DEVE FALLIRE  l'ID nuovo SOLO in `STATO_RUN` -> uscita 1, segnalato True   PASS
+    DEVE PASSARE  lo stesso ID **con la RIGA nell'indice** -> uscita 0   PASS
+    i due documenti sono tornati identici (sha1): True   PASS
+
+  ESITO: 8/8 PASS -- il presidio IMPEDISCE e non solo avvisa
 
 COSA QUESTO COLLAUDO *NON* DICE:
   - **non dice che l'indice sia completo**: dice che un ID FUORI dall'indice viene
