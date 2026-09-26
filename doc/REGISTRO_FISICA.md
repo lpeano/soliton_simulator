@@ -621,6 +621,9 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 # ⑤ IL TEMPO PROPRIO — **`ritmo()` / `r` / `dt_n = DT·r`**, e il surrogato **`tau_pp`**
 
 > **STATO: `DIFETTOSA`.** Difetto **`D34`** *(il wrap «a `4π`» non avvolge)*.
+> **✅ E DAL 2026-09-27 `_applica_flag` NON ASSEGNA PIU' `TEMPO_UNICO_MITOSI`:** la `CURA 2`
+> e' **strutturale** *(scheda ⑨)*, quindi qui non c'e' piu' un interruttore da applicare.
+> **Il `global` resta**, e non fa danno: nessuno assegna piu'.
 > **✅ `D32` E' RISOLTO — decisione di Luca del 2026-09-27:** **il tempo proprio del sistema e' `r`**
 > *(e `dt_e = DT·0.5·(r_i + r_j)` sull'arco)*; **`d/cs` e' il TEMPO-LUCE**, una grandezza **diversa
 > e legittima**, non un secondo tempo proprio; e cio' che si chiamava **`tau_pp` non e' un tempo
@@ -1029,6 +1032,16 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 > un commento o una legge. **La risposta va scritta, non assunta.**)*
 # ⑦ LA MITOSI E SCHWINGER — **`mitosi()`**
 
+> **→ NOTA DEL 2026-09-27 (seconda): DENTRO `mitosi()` SONO USCITI QUATTRO RAMI `else`.**
+> La `CURA 2` e' **strutturale** *(scheda ⑨, decisione di Luca)*: i quattro `if
+> TEMPO_UNICO_MITOSI:` **non ci sono piu'** e il corpo del ramo **acceso** resta, de-indentato.
+> **LA LEGGE DELLA MITOSI NON CAMBIA:** e' quella che girava gia' in ogni run, perche' il
+> driver accendeva il flag **sempre**. **Cio' che cambia e' che non si puo' piu' spegnere.**
+> **Il taglio e' stato fatto per AST**, non a stringhe, perche' togliere un `if` vuol dire
+> **de-indentare il suo corpo di 4** su quattro blocchi da 2 a 19 righe, e il controllo e'
+> che **il corpo sia lo stesso testo de-indentato e nient'altro**.
+> **I rami tolti:** `csv/_archivio/rami_off_cura2.py`, tag **`pre-cura2-strutturale`**.
+>
 > **→ NOTA DEL 2026-09-27: LA LEGGE DELLA MITOSI NON E' CAMBIATA, SONO CAMBIATI I NOMI.**
 > La chiusura di **`D32`** rinomina, **dentro `mitosi()`**, `tau_pp` → **`pos_torsione`**,
 > `tau_soglia`/`tau_tetto` → **`pos_soglia`/`pos_tetto`**, `tau_nodo` → **`tors_nodo`**,
@@ -1517,7 +1530,23 @@ Quella riga **deve seguire `_pesi`**: il suo commento dice *«la STESSA riga di 
 
 # ⑨ IL TEMPO NELLA MITOSI — **`CURA 2`**
 
-> **Mandato di Luca, 2026-09-24.** Flag: **`TEMPO_UNICO_MITOSI`**, spento di default.
+> ### ✅ **STRUTTURALE DAL 2026-09-27** *(decisione di Luca)*. **NON E' PIU' UN FLAG: E' UNA LEGGE.**
+> I **quattro** rami `else` di `TEMPO_UNICO_MITOSI` **sono usciti dal simulatore**; la
+> costante e' **`True`** e **l'assegnazione e' stata tolta da `_applica_flag`**: **nessun
+> percorso puo' piu' spegnerla.** `--tempo-unico-mitosi` resta **accettata come NO-OP
+> dichiarato** *(il driver la passa in ogni run)*, **e avvisa**.
+> **NON c'e' un `--senza-tempo-unico-mitosi`, e va detto:** `par.10` lo chiede per una
+> **promozione**, dove il ramo OFF resta nel codice. **Qui i rami ESCONO**, e il braccio
+> OFF vive **al tag**, non in un flag.
+> **DOVE SI RITROVANO:** tag **`pre-cura2-strutturale`** *(blob del simulatore al tag:
+> **`dd4f5ccf`**, sha1 byte grezzi)*, e archivio **`csv/_archivio/rami_off_cura2.py`**
+> — **quattro** rami, **13 righe**, **copiate dal sorgente da uno script**, ciascuna con
+> funzione, righe al tag, cosa faceva e perche' e' uscita.
+> **SI RILANCIA CON:** `git cat-file -p pre-cura2-strutturale:soliton_simulator.py`,
+> **in BINARIO** *(par.5-quinquies: `git checkout` riscriverebbe le newline)*.
+>
+> **Mandato di Luca, 2026-09-24.** Flag: **`TEMPO_UNICO_MITOSI`**, spento di default
+> *(storico: e' cosi' che e' nato)*.
 > **Riscritta** dopo il mandato: la prima stesura aveva **due errori**, segnati con ❌.
 
 ## 0. IL PRINCIPIO, ed è di Luca

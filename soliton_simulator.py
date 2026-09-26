@@ -1342,7 +1342,18 @@ SEMINA_LAM = False      # [CURA DELLA SEMINA, 2026-09-24] `A13`: **`LAM` E' LA S
                         # Scheda 12 `nascita-archi`. Default SPENTO.
                         # ⚠ NON e' `NASCITA_LAM`, che e' RITIRATA: filtrare gli ARCHI lascia i
                         #   NODI sotto `LAM`, cioe' toglie il sintomo e lascia la violazione.
-TEMPO_UNICO_MITOSI = False  # [CURA 2, 2026-09-24] UN SOLO OROLOGIO DENTRO `mitosi()`.
+TEMPO_UNICO_MITOSI = True   # [CURA 2 -> STRUTTURALE, 2026-09-27: decisione di Luca]
+                        # ⚠ NON E' PIU' UN FLAG: E' UNA LEGGE. I quattro rami `else`
+                        # sono USCITI dal simulatore, e l'assegnazione da `_applica_flag`
+                        # e' stata TOLTA: nessun percorso puo' piu' spegnerla.
+                        # RESTA un booleano di MODULO di proposito: cosi' continua a
+                        # comparire nella dichiarazione della configurazione (`H-P5` la
+                        # enumera con `vars(S)`), e cancellarla la farebbe SPARIRE dal
+                        # referto proprio mentre diventa obbligatoria.
+                        # IL BRACCIO OFF VIVE AL TAG `pre-cura2-strutturale`, non in un
+                        # flag: per questo NON c'e' un `--senza-tempo-unico-mitosi`.
+                        # I rami: `csv/_archivio/rami_off_cura2.py`.
+                        # [CURA 2, 2026-09-24] UN SOLO OROLOGIO DENTRO `mitosi()`.
                         # IL DIFETTO: `tau_pp = 1 + |tw|/PHI_CRIT` si chiama "tempo proprio
                         # locale" ma e' una MISURA DI TORSIONE, e la mitosi la usa in DUE modi
                         # incompatibili -- come TEMPO (il ritmo `1/tau_pp`, la costante di
@@ -5925,31 +5936,23 @@ class Rete:
             # gradiente di tempo proprio LUNGO l'arco: differenza del tempo proprio nodale
             # fra i due estremi. tau_nodo alto = tempo lento = materia. Dove il gradiente
             # e' forte, la soglia si abbassa (la mitosi e' agevolata verso il tempo lento).
-            if TEMPO_UNICO_MITOSI:
-                # [CURA 2] IL GRADIENTE DI TEMPO SI PRENDE DALL'OROLOGIO, non da `|tw|`.
-                # Il commento qui sopra dice "gradiente di TEMPO PROPRIO", ma `tau_nodo` e'
-                # `1 + mean(|tw|)/PHI_CRIT`, cioe' ESATTAMENTE la formula del ramo
-                # `TEMPO_SEGNO` di `ritmo()` -- CHE NON GIRA (`TEMPO_SEGNO = False` in 9 run
-                # su 11, `Z130`). Intenzione TEMPO, implementazione TORSIONE.
-                # SI PRENDE `r` E NON `1/r`, e la ragione e' un conto, non una preferenza:
-                #   r    in [1.4142e-6, 1.4142]  -> tanh(grad) <= 0.8884 -> la soglia MODULA
-                #   1/r  in [0.707, 707107]      -> tanh(grad) -> 1 ESATTO -> la modulazione
-                #                                   diventerebbe un RISCALAMENTO COSTANTE
-                #                                   della soglia, cioe' un PARAMETRO NASCOSTO
-                #                                   (`A1`), e `A11` cor.6 dice che un limite
-                #                                   che satura e' un allarme.
-                _rn = self._r_nodo_mitosi()
-                # `grad_modula` qui e' il gradiente di `r`: IL TEMPO PROPRIO VERO.
-                grad_modula = np.abs(_rn[self.i] - _rn[self.j])
-            else:
-                tors_nodo = np.zeros(self.n)
-                aw = np.abs(self.tw)
-                np.add.at(tors_nodo, self.i[self.i < self.n], aw[self.i < self.n])
-                np.add.at(tors_nodo, self.j[self.j < self.n], aw[self.j < self.n])
-                tors_nodo = 1.0 + tors_nodo / np.maximum(self._deg, 1) / PHI_CRIT
-                # a flag SPENTO `grad_modula` e' il gradiente della TORSIONE: un'altra
-                #   grandezza. **Un nome unico mentirebbe su un ramo dei due** (`D32`).
-                grad_modula = np.abs(tors_nodo[self.i] - tors_nodo[self.j])
+            # [CURA 2 STRUTTURALE, 2026-09-27] IL RAMO `if TEMPO_UNICO_MITOSI:` E' STATO TOLTO: la legge e' SEMPRE questa.
+            #   Il ramo `else` e' ARCHIVIATO in `csv/_archivio/rami_off_cura2.py` e si rilancia dal tag `pre-cura2-strutturale`.
+            # [CURA 2] IL GRADIENTE DI TEMPO SI PRENDE DALL'OROLOGIO, non da `|tw|`.
+            # Il commento qui sopra dice "gradiente di TEMPO PROPRIO", ma `tau_nodo` e'
+            # `1 + mean(|tw|)/PHI_CRIT`, cioe' ESATTAMENTE la formula del ramo
+            # `TEMPO_SEGNO` di `ritmo()` -- CHE NON GIRA (`TEMPO_SEGNO = False` in 9 run
+            # su 11, `Z130`). Intenzione TEMPO, implementazione TORSIONE.
+            # SI PRENDE `r` E NON `1/r`, e la ragione e' un conto, non una preferenza:
+            #   r    in [1.4142e-6, 1.4142]  -> tanh(grad) <= 0.8884 -> la soglia MODULA
+            #   1/r  in [0.707, 707107]      -> tanh(grad) -> 1 ESATTO -> la modulazione
+            #                                   diventerebbe un RISCALAMENTO COSTANTE
+            #                                   della soglia, cioe' un PARAMETRO NASCOSTO
+            #                                   (`A1`), e `A11` cor.6 dice che un limite
+            #                                   che satura e' un allarme.
+            _rn = self._r_nodo_mitosi()
+            # `grad_modula` qui e' il gradiente di `r`: IL TEMPO PROPRIO VERO.
+            grad_modula = np.abs(_rn[self.i] - _rn[self.j])
             # modulazione limitata: la soglia scende di al piu' ~30% dove il gradiente e' forte
             soglia = soglia0 * (1.0 - 0.3 * np.tanh(grad_modula))
         # CRITICITA' NON MONOTONA (campana) ancorata ai due valori fisici del sistema:
@@ -6005,18 +6008,12 @@ class Rete:
         #   equilibrio diverso a seconda di quanto batte l'orologio locale.
         #   `prob` e' una probabilita' NEL PASSO, cioe' un CONTEGGIO: **DEVE dipenderne**.
         #   Quindi il fattore di tempo entra UNA volta sola, e solo nel secondo.
-        if TEMPO_UNICO_MITOSI:
-            _ft = self._fattore_tempo_arco(len(avv))       # dt_e/DT: il tempo d'arco, LETTO
-            ampiezza_int = salita * discesa                # INTENSITA': numero puro, SENZA tempo
-            ampiezza = ampiezza_int * _ft                  # EVENTI ATTESI nel passo proprio
-            resp_int = ampiezza_int * segno                # -> il BERSAGLIO `rep`
-        else:
-            # ⚠ RAMO A FLAG SPENTO: qui `pos_torsione` E' USATA COME TEMPO (il suo
-            #   reciproco come ritmo), ed e' il difetto di `D32`. Proposto per la
-            #   rimozione (`STANDARD 10`), NON tolto senza il si' di Luca.
-            tau_locale = 1.0 / pos_torsione                # ritmo (sempre positivo)
-            ampiezza = salita * discesa * tau_locale       # campana positiva (0..max)
-            resp_int = None
+        # [CURA 2 STRUTTURALE, 2026-09-27] IL RAMO `if TEMPO_UNICO_MITOSI:` E' STATO TOLTO: la legge e' SEMPRE questa.
+        #   Il ramo `else` e' ARCHIVIATO in `csv/_archivio/rami_off_cura2.py` e si rilancia dal tag `pre-cura2-strutturale`.
+        _ft = self._fattore_tempo_arco(len(avv))       # dt_e/DT: il tempo d'arco, LETTO
+        ampiezza_int = salita * discesa                # INTENSITA': numero puro, SENZA tempo
+        ampiezza = ampiezza_int * _ft                  # EVENTI ATTESI nel passo proprio
+        resp_int = ampiezza_int * segno                # -> il BERSAGLIO `rep`
         resp = ampiezza * segno                            # FIRMATA: + crea, - respinge
         # --- CREAZIONE: dove resp > 0, mitosi probabilistica (come prima) ---
         # [A8] QUANTE VOLTE IL CLIP AVREBBE MORSO. Byte-inerte: si CONTA, non si cambia --
@@ -6034,14 +6031,13 @@ class Rete:
         # dominio su cui le due forme COINCIDONO ESATTAMENTE (entrambe danno 0).
         self._tum_clip0_prob = (getattr(self, "_tum_clip0_prob", 0)
                                 + int(np.sum(np.asarray(resp) <= 0.0)))
-        if TEMPO_UNICO_MITOSI:
-            # LA FORMA DI POISSON: `resp` e' il NUMERO ATTESO di eventi nel passo proprio, e
-            # la probabilita' di ALMENO UNO e' `1 - e^-lambda`. Sta in [0, 1) PER COSTRUZIONE:
-            # il clip non ha piu' niente da tagliare (`A11`). Per lambda piccolo coincide con
-            # la forma vecchia: l'errore relativo e' lambda/2.
-            prob = 1.0 - np.exp(-np.maximum(resp, 0.0))
-        else:
-            prob = np.clip(resp, 0.0, 1.0)
+        # [CURA 2 STRUTTURALE, 2026-09-27] IL RAMO `if TEMPO_UNICO_MITOSI:` E' STATO TOLTO: la legge e' SEMPRE questa.
+        #   Il ramo `else` e' ARCHIVIATO in `csv/_archivio/rami_off_cura2.py` e si rilancia dal tag `pre-cura2-strutturale`.
+        # LA FORMA DI POISSON: `resp` e' il NUMERO ATTESO di eventi nel passo proprio, e
+        # la probabilita' di ALMENO UNO e' `1 - e^-lambda`. Sta in [0, 1) PER COSTRUZIONE:
+        # il clip non ha piu' niente da tagliare (`A11`). Per lambda piccolo coincide con
+        # la forma vecchia: l'errore relativo e' lambda/2.
+        prob = 1.0 - np.exp(-np.maximum(resp, 0.0))
         nasce = self.rng.random(len(avv)) < prob
         # --- REPULSIONE: dove resp < 0, il tempo proprio estremo respinge: allarga d0
         # localmente (pressione a corto raggio), invece di creare nodi. E' il confine
@@ -6088,29 +6084,26 @@ class Rete:
         #   vive nel ramo `else`. In coda come `D32-CONTATORE`, non qui.
         self._rep_taupp_clamp = getattr(self, "_rep_taupp_clamp", 0) + int(np.sum(np.asarray(pos_torsione) < 1e-12))
         self._rep_taupp_tot = getattr(self, "_rep_taupp_tot", 0) + int(np.size(pos_torsione))
-        if TEMPO_UNICO_MITOSI:
-            # [CURA 2 + S12] TRE difetti nella riga vecchia, e il commento ne dichiarava due:
-            #   (1) LA DILATAZIONE ERA CONTATA DUE VOLTE: `_dte` E' GIA' `DT*0.5*(r_i+r_j)`,
-            #       e dividere ANCHE per `pos_torsione` la conta di nuovo;
-            #   (2) `pos_torsione` NON E' UNA DURATA: e' un numero puro (`D32`). Una costante di tempo deve
-            #       avere le unita' di un tempo -- e `tau_arco = d/cs_arco` le ha: [DT];
-            #   (3) L'INTEGRATORE ERA UN EULERO ESPLICITO, mentre il commento dichiara
-            #       "`A5` livello 1, rilassamento ESPONENZIALE" e par.4 impone la forma ESATTA.
-            # La forma esatta e' una COMBINAZIONE CONVESSA: `_rep` resta fra `rep` e il suo
-            # valore precedente PER QUALUNQUE PASSO, quindi il difetto che l'Eulero aveva su
-            # `peq` (`dt/tau = 1.2018`, scavalcava sotto zero) NON PUO' RIPRESENTARSI.
-            _tau_a = self._tau_arco_causale(len(rep))
-            _rap = np.asarray(_dte, dtype=float) / _tau_a
-            # [A8] quante volte l'Eulero AVREBBE scavalcato (`dt/tau > 1`): misura quanto
-            # serviva `S12`. Byte-inerte: si conta e basta.
-            self._tum_eulero_gt1 = (getattr(self, "_tum_eulero_gt1", 0)
-                                    + int(np.sum(_rap > 1.0)))
-            self._tum_eulero_tot = getattr(self, "_tum_eulero_tot", 0) + int(np.size(_rap))
-            self._rep = rep + (self._rep - rep) * np.exp(-_rap)
-        else:
-            # ⚠ RAMO A FLAG SPENTO: `pos_torsione` USATA COME COSTANTE DI TEMPO. Difetto di
-            #   `D32`, proposto per la rimozione, NON tolto senza il si' di Luca.
-            self._rep = self._rep + _dte * (rep - self._rep) / np.maximum(pos_torsione, 1e-12)
+        # [CURA 2 STRUTTURALE, 2026-09-27] IL RAMO `if TEMPO_UNICO_MITOSI:` E' STATO TOLTO: la legge e' SEMPRE questa.
+        #   Il ramo `else` e' ARCHIVIATO in `csv/_archivio/rami_off_cura2.py` e si rilancia dal tag `pre-cura2-strutturale`.
+        # [CURA 2 + S12] TRE difetti nella riga vecchia, e il commento ne dichiarava due:
+        #   (1) LA DILATAZIONE ERA CONTATA DUE VOLTE: `_dte` E' GIA' `DT*0.5*(r_i+r_j)`,
+        #       e dividere ANCHE per `pos_torsione` la conta di nuovo;
+        #   (2) `pos_torsione` NON E' UNA DURATA: e' un numero puro (`D32`). Una costante di tempo deve
+        #       avere le unita' di un tempo -- e `tau_arco = d/cs_arco` le ha: [DT];
+        #   (3) L'INTEGRATORE ERA UN EULERO ESPLICITO, mentre il commento dichiara
+        #       "`A5` livello 1, rilassamento ESPONENZIALE" e par.4 impone la forma ESATTA.
+        # La forma esatta e' una COMBINAZIONE CONVESSA: `_rep` resta fra `rep` e il suo
+        # valore precedente PER QUALUNQUE PASSO, quindi il difetto che l'Eulero aveva su
+        # `peq` (`dt/tau = 1.2018`, scavalcava sotto zero) NON PUO' RIPRESENTARSI.
+        _tau_a = self._tau_arco_causale(len(rep))
+        _rap = np.asarray(_dte, dtype=float) / _tau_a
+        # [A8] quante volte l'Eulero AVREBBE scavalcato (`dt/tau > 1`): misura quanto
+        # serviva `S12`. Byte-inerte: si conta e basta.
+        self._tum_eulero_gt1 = (getattr(self, "_tum_eulero_gt1", 0)
+                                + int(np.sum(_rap > 1.0)))
+        self._tum_eulero_tot = getattr(self, "_tum_eulero_tot", 0) + int(np.size(_rap))
+        self._rep = rep + (self._rep - rep) * np.exp(-_rap)
         _rep_mem = self._rep
         # quanto la memoria si discosta dall'istantaneo: se fosse ~0 la cura sarebbe inerte.
         if len(rep):
@@ -8329,7 +8322,14 @@ def _applica_flag(a):
     #   a 600 passi `Z123`. FINO A OGGI ERA ACCENDIBILE SOLO IN-PROCESS: senza opzione, il
     #   driver non poteva accenderla, e una cura che nessun run accende e' un ramo morto.
     RITMO_WRAP_2PI = bool(getattr(a, "ritmo_wrap_2pi", False))  # cura D34: default off, il driver la accende
-    TEMPO_UNICO_MITOSI = bool(getattr(a, "tempo_unico_mitosi", False))  # CURA 2: default off
+    # [CURA 2 STRUTTURALE, 2026-09-27] L'ASSEGNAZIONE E' TOLTA: la legge non si spegne.
+    #   `--tempo-unico-mitosi` resta ACCETTATA come NO-OP dichiarato (il driver la passa
+    #   in ogni run, e ogni comando gia' scritto la contiene), e AVVISA.
+    if getattr(a, "tempo_unico_mitosi", False):
+        print("[tempo-unico-mitosi] NO-OP DICHIARATO dal 2026-09-27: la `CURA 2` e'"
+              " STRUTTURALE e i rami a flag spento sono USCITI dal simulatore."
+              " Il braccio OFF vive al tag `pre-cura2-strutturale`;"
+              " i rami in csv/_archivio/rami_off_cura2.py.")
     # [CURA 4 e CURA 5] QUI, dove sta il `global`. Prima erano in `esegui_headless`, cioè
     #   in un'altra funzione, quindi LOCALI e INERTI: i flag da riga di comando erano MORTI.
     SEMINA_MATURA = bool(getattr(a, "semina_matura", False))   # [CURA 4]

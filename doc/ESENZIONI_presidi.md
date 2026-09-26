@@ -20,6 +20,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_letture_rho_s.py|H-P5` | strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: |
 | `csv/_lista_chiusa.py|H-P5` | non importa il simulatore e non lo fa girare. Legge un TSV e scrive un documento. |
 | `csv/_osservabile_p1.py|H-P5` | la configurazione si dichiara solo quando si COSTRUISCE una scena (`--scena`), e |
+| `csv/_patch_cura2_strutturale.py|H-P5` | non importa il simulatore e non lo fa girare. Riscrive un sorgente per AST. |
 | `csv/_patch_d32_nomi.py|H-P5` | non importa il simulatore e non lo fa girare. Rinomina variabili in un sorgente. |
 | `csv/_patch_default_scena.py|H-P5` | non importa il simulatore e non lo fa girare. Sostituisce due default nel driver. |
 | `csv/_patch_scena_ii.py|H-P5` | non importa il simulatore e non lo fa girare. Sostituisce testo in due sorgenti. |
@@ -44,5 +45,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_esponenti_figli.py|H-P5` | legge JSON gia' scritti, non fa girare il simulatore. La configurazione di quei dati |
 
 ```
-esenzioni dichiarate   37
+esenzioni dichiarate   38
 ```
