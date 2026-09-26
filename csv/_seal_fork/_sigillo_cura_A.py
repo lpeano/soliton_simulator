@@ -51,7 +51,12 @@ TMP = os.path.join(FUORI, "_tmp")
 os.makedirs(TMP, exist_ok=True)
 NL = chr(10)
 
-SEMI = [11, 12]
+# [`C1''''`, decisione di Luca 2026-09-26] **QUATTRO SEMI**, perche' `P3` delle regole lo impone
+#   per una barra FRA SEMI: con 2 semi la deviazione standard ha UN grado di liberta'.
+#   ⚠ **SOLO IL TAGLIO si rifa'**: `F1`, `F2`, `C3` e `C5` sono chiusi a 2 semi e **non si
+#   ripetono** (ordine di Luca). I bracci `figli` restano quelli, e il referto lo dichiara.
+SEMI = [11, 12, 13, 14]
+SEMI_FIGLI = [11, 12]      # i bracci dei figli NON si rifanno: 2 semi, come sigillati
 SEP = 4.0
 GRADI = [77, 20, 8, 4, 2]
 VERSI = ["lunghi", "corti"]
@@ -354,11 +359,12 @@ for s in SEMI:
         BRACCI.append(("off_s%d_%s" % (s, v), s, v, False, COPIA, blob_copia, ARGV_OFF, "taglio"))
         # `P1-sexies`: IL BRACCIO CON `/W`, che DEVE fallire `C1'`
         BRACCI.append(("suW_s%d_%s" % (s, v), s, v, True, PRIMA_W_DIAG, blob_W, ARGV_ON, "taglio"))
-for s in SEMI:
+for s in SEMI_FIGLI:
     BRACCI.append(("pf_s%d_lunghi" % s, s, "lunghi", False, PRIMA_FLAG_DIAG, blob_pf, ARGV_OFF,
                    "taglio"))
     BRACCI.append(("figli_on_s%d" % s, s, "lunghi", True, COPIA, blob_copia, ARGV_ON, "figli"))
-    BRACCI.append(("figli_off_s%d" % s, s, "lunghi", False, COPIA, blob_copia, ARGV_OFF, "figli"))
+    BRACCI.append(("figli_off_s%d" % s, s, "lunghi", False, COPIA, blob_copia, ARGV_OFF,
+                   "figli"))
 
 LOG, RIPRESI, dati = [], {}, {}
 GRUPPI = [("taglio", [b for b in BRACCI if b[7] == "taglio"]),
@@ -470,13 +476,36 @@ for (nome, s, v, fl, sim, blobc, argv, modo) in BRACCI:
 P()
 _don = [d for _n, d, _r in dif["on"]]
 _sp = float(np.std(_don)) if len(_don) > 1 else float("nan")
-OK.append(crit("C1'", "pendenza del CONTRASTO = quella della COPPIA entro 2x lo spread fra semi",
-               bool(_don and _sp == _sp and max(_don) <= 2.0 * _sp),
-               "ON  (`/W^2`): %s" % "  ".join("%.4f" % d for d in _don)
-               + NL + "OFF          : %s" % "  ".join("%.4f" % d for _n, d, _r in dif["off"])
-               + NL + "`/W` (il caso che DEVE fallire): %s"
-               % "  ".join("%.4f" % d for _n, d, _r in dif["suW"])
-               + NL + "spread FRA SEMI (ON): %.4f   ->  soglia 2x = %.4f" % (_sp, 2.0 * _sp)))
+# ============================================================== `C1''''`: la forma di Luca
+#   ❌ **IL CRITERIO VECCHIO ERA AUTO-REFERENZIALE:** `max(|Δ| ON) <= 2*std(|Δ| ON)`. La soglia
+#     si stringeva **con** i valori che doveva giudicare, e nel limite di una cura perfetta
+#     **tendeva a zero**. Su 2 semi dava `FAIL` per **un solo** valore (`0.1167` contro `0.0752`),
+#     mentre il divario era sceso di un fattore **20-100**.
+#   ❌ **E LA MIA PROPOSTA «un decimo di OFF» E' STATA RIFIUTATA DA LUCA, con ragione:** avrebbe
+#     dato `0.12` contro `0.125`, cioe' **un margine del 4 % su una soglia scelta GUARDANDO IL
+#     RISULTATO**. `P1-sexies` nel modo piu' elegante.
+#   ✅ **LA FORMA DI LUCA, su 4 SEMI:** la **MEDIA** e' compatibile con **ZERO** entro **2 ERRORI
+#     STANDARD** *(`SE = std/sqrt(4)`, l'errore DELLA MEDIA, non la dispersione dei valori)*,
+#     **e** sta **sotto** quella del braccio `/W` — che e' **un'altra popolazione MISURATA**,
+#     non se stessa.
+_m_on = float(np.mean(_don)) if _don else float("nan")
+_se_on = (float(np.std(_don, ddof=1)) / np.sqrt(len(_don))) if len(_don) > 1 else float("nan")
+_m_suw = float(np.mean([d for _n, d, _r in dif["suW"]])) if dif["suW"] else float("nan")
+_a_ok = bool(_m_on == _m_on and _se_on == _se_on and _m_on <= 2.0 * _se_on)
+_b_ok = bool(_m_on == _m_on and _m_suw == _m_suw and _m_on < _m_suw)
+OK.append(crit("C1''''", "media di |pend(contrasto)-pend(coppia)| ON compatibile con ZERO (2 SE) E sotto `/W`",
+               _a_ok and _b_ok,
+               "ON  (`/W^2`), %d semi: %s" % (len(_don), "  ".join("%.4f" % d for d in _don))
+               + NL + "   media %.4f   SE %.4f   ->  2 SE = %.4f   %s"
+               % (_m_on, _se_on, 2.0 * _se_on,
+                  "COMPATIBILE CON ZERO" if _a_ok else "NON compatibile")
+               + NL + "`/W`   media %.4f   %s" % (_m_suw,
+                                                  "ON sta SOTTO" if _b_ok else "ON NON sta sotto")
+               + NL + "OFF  : %s" % "  ".join("%.4f" % d for _n, d, _r in dif["off"])
+               + NL + "`/W`  : %s" % "  ".join("%.4f" % d for _n, d, _r in dif["suW"])
+               + NL + "  **Nessun numero scelto:** il `2` degli errori standard e' la convenzione",
+               + NL + "  statistica. E con 4 semi `t(0.025,3) = 3.18`, quindi **`2 SE` e' PIU'",
+               + NL + "  SEVERO** di un IC95 vero: lo dichiaro invece di spacciarlo per uguale."))
 _dsuw = [d for _n, d, _r in dif["suW"]]
 OK.append(crit("P1-sexies", "IL BRACCIO CON `/W` FALLISCE `C1'` (il caso che deve fallire)",
                bool(_dsuw and _don and min(_dsuw) > max(_don)),
