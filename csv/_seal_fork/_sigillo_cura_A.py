@@ -80,8 +80,14 @@ DIAG_IN = [
 DIAG_CO = [
     "        self._diag_coppia = np.array(correzione, copy=True)",
     "        self._diag_om_src = np.array(omega_src, copy=True)",
-    "        self._diag_freno = np.array(omega_src / _tau[:, None]"
-    " if np.ndim(_tau) else omega_src / _tau, copy=True)",
+    # ❌ **DIFETTO MIO, e la regola che ho violato e' quella che Luca aveva imposto:** avevo
+    #   scritto `omega_src / _tau[:, None]`, **riscrivendo** l'espressione invece di **copiarla**.
+    #   `_tau` e' **GIA'** `[:, None]` (`:3584`, `:3589`) oppure uno **scalare** (`:3591`), quindi
+    #   il mio `[:, None]` lo rendeva `(n,1,1)` e il broadcast produceva `(n,n,3)`: i tre bracci
+    #   dei figli sono morti con `TypeError: only length-1 arrays can be converted to Python
+    #   scalars`. **E' la stessa famiglia del «ricostruire la coppia da fuori», che dava META'
+    #   COPPIA:** l'unica forma sicura e' **la stessa riga del codice**, copiata.
+    "        self._diag_freno = np.array(omega_src / _tau, copy=True)",
 ]
 
 
