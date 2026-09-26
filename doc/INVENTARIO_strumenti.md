@@ -866,3 +866,11 @@ python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie
 | `csv/_vista_smistamento.py` | `2c0575bf` | `python csv/_vista_smistamento.py` | genera `doc/SMISTAMENTO_run_base.md` **dai DATI**: `doc/INDICE_ID.tsv` + **`doc/ORDINE_SI.tsv`** *(l'ordine di lavoro, estratto dall'AST del vecchio generatore)*. **Nessuna decisione nel codice** | `137` voci, `8` `SI`, `0` da verificare |
 | `csv/_collaudo_istruzioni.py` | `9f30af48` | `python csv/_collaudo_istruzioni.py` | **collauda la SEZIONE 11 di `CLAUDE.md`**: la estrae, ne legge colonne/stati/comandi, **costruisce la riga del difetto finto dalle colonne DICHIARATE**, prova i due versi sul hook vero, rigenera le viste coi comandi della sezione, ripristina e verifica per sha1 | `doc/COLLAUDO_istruzioni_indice.txt`: **6/6 PASS — la sezione basta da sola** |
 | `doc/ORDINE_SI.tsv` | — | *(dato)* | l'ordine di lavoro degli otto `SI`: `n`, `voce`, `perche_viene_qui`, `stima`. **Era un letterale Python nel generatore: ora e' un DATO** | — |
+
+---
+
+## Aggiunto il 2026-09-26 — **la PROPOSTA di riordino delle regole**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_regole_proposta.py` | `934fb523` | `python csv/_regole_proposta.py` | **inventaria OGNI regola in vigore** *(assiomi, `STANDARD`, i `P` di `CLAUDE.md`, i presidi dei hook, le sezioni di `CLAUDE.md`, le regole di lavoro nuove)*, misura le righe di ogni sezione e documento, e assegna a ciascuna una **destinazione**. **Si FERMA se un id resta senza destinazione** | `doc/REGOLE_proposta.md`: **76 regole, 76 con destinazione, 0 senza**; `CLAUDE.md` `1576 -> ~153`; avvio `2714 -> ~1021`; il posto 2 passa da `16` a `10` con tre fusioni |

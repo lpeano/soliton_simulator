@@ -20,6 +20,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_presidio_commenti_flag.py|P5` | strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: legge |
 | `csv/_presidio_indice.py|P5` | non importa il simulatore e non lo fa girare. E' un presidio su documenti. |
 | `csv/_punto_della_situazione.py|P5` | non importa il simulatore e non lo fa girare. Legge un TSV e `git log`. |
+| `csv/_regole_proposta.py|P5` | non importa il simulatore e non lo fa girare. Legge documenti e ne scrive uno. |
 | `csv/_rinomina_collisioni.py|P5` | non importa il simulatore e non lo fa girare. Rinomina etichette in due documenti. |
 | `csv/_vista_smistamento.py|P5` | non importa il simulatore e non lo fa girare. Legge due TSV e scrive un documento. |
 | `csv/_archivio/_indice_id_importatore.py|P5` | non importa il simulatore e non lo fa girare. Genera due indici da documenti. |
@@ -27,5 +28,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_esponenti_figli.py|P5` | legge JSON gia' scritti, non fa girare il simulatore. La configurazione di quei dati |
 
 ```
-esenzioni dichiarate   20
+esenzioni dichiarate   21
 ```

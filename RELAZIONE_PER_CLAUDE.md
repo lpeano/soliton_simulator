@@ -20361,3 +20361,76 @@ dentro la stringa** → `SyntaxError`. **Il blocco di scrittura del TSV e' stato
 > ### **Quarta volta oggi che un escape muore in un patch script** *(`\b` → backspace, `\u2014` →
 > ### em-dash, `\s` → warning, ora `\t`)*. **La regola operativa e': nei patch script non si scrivono
 > ### escape — si usa `chr()` o `replace`.**
+
+
+---
+
+# 🧹 **PROPOSTA DI RIORDINO DELLE REGOLE** *(2026-09-26, sessione nuova — SOLO PROPOSTA)*
+
+**`doc/REGOLE_proposta.md`, generata da `csv/_regole_proposta.py`. Non ho toccato `CLAUDE.md`, ne' i
+hook, ne' un assioma.**
+
+## ✅ LE PRECONDIZIONI, verificate e stampate PRIMA di tutto
+
+```
+(a) il tag `lista-chiusa-v1` esiste ......... 7935806, 2026-09-26      OK
+(b) LETTORI-INDICE `chiuso`, D09 `non-difetto` ...................     OK
+(c) `python csv/_indice_id.py` ............. 740 voci, exit 0          OK
+(d) albero di lavoro ....................... PULITO, nemmeno un `_log.txt`   OK
+```
+
+## 📉 I CONTEGGI, MISURATI
+
+```
+regole in vigore ............ 76  ->  62   (14 fuse o tolte; 58 con le tre fusioni in coda)
+di cui AUTOMATICHE ..........  8  ->   9   (+1 proposta: l'inventario degli strumenti)
+righe di CLAUDE.md ......... 1576 -> ~153  (sotto le 400 del presidio proposto)
+righe lette all'avvio ...... 2714 -> ~1021
+RELAZIONE_PER_CLAUDE.md ... 20364 -> un giorno, il resto in `doc/relazioni/`
+```
+
+> ### 🎯 **IL NUMERO CHE DECIDE: `par.9` da sola e' 671 righe su 1576, il 43 % di `CLAUDE.md`
+> ### — e NON E' UNA REGOLA: sono FATTI dal codice.** Il secondo taglio e' la **storia** *(`par.0-ter`
+> ### 208 + `par.5-quinquies` 130 = 338 righe)*, che va in un archivio **che non si legge all'avvio**.
+
+## ❌❌ **DUE COLLISIONI DI NOME, ed e' lo stesso difetto che l'indice ha curato per i difetti**
+
+| nome | in `CLAUDE.md` | nei hook |
+|---|---|---|
+| **`P3`** | nessuna statistica senza barra d'errore | un sigillo che configura il modulo a mano |
+| **`P5`** | ogni ramo `else`/fallback va contato | un referto senza la configurazione intera |
+
+**Lo stesso nome per due regole diverse.** Per i *difetti* l'abbiamo curato il 2026-09-26 *(`A3` era
+tre voci)*; **per le regole no.** Proposta: i presidi dei hook prendono il prefisso **`H-`**, che
+dice *«questo lo impedisce una macchina»*.
+
+## ✅ **IL CONTROLLO CHE RENDE LA PROPOSTA VERIFICABILE**
+
+**76 id estratti dalle fonti, 76 con una destinazione, 0 senza, 0 orfane** — e **lo script SI FERMA**
+se un id resta senza destinazione. *Nessun comportamento imposto da Luca puo' sparire in silenzio.*
+
+## ❌ **UN CONTO CHE SMENTIVA LA PROPOSTA A CUI ERA ALLEGATO**
+
+La prima stima di `CLAUDE.md` DOPO dava **497 righe** — **sopra la soglia di 400 che la proposta
+stessa chiede**: sottraeva solo `par.9` e le sezioni del posto 5, **ignorando le fusioni**.
+> ### **Un numero che contraddice il documento in cui sta non si arrotonda: si rifa'.** Ora e'
+> ### calcolato **per sezione**, con l'ipotesi **dichiarata** *(chi esce vale `0`, chi si fonde `2`
+> ### righe, chi resta il `40 %` se supera le 20 righe)*, e da' **153**.
+
+## ⚠ **E UN CONTO CHE ANCORA NON TORNA, dichiarato nel documento**
+
+Il posto 2 *(`PATTERN_DI_PROVA`, **tetto 10**)* raccoglierebbe **16** regole. **Non ci sta, e lo
+scrivo invece di alzare il tetto**: propongo **tre fusioni** — `P3`+`P6`+`par.9-bis` *(un numero
+senza barra, seme, flag ed EPOCA non e' un dato)*, `P4`+`L-SOGLIA` *(il test vuoto visto da due
+lati)*, `STANDARD 3`+`STANDARD 4` *(che cosa si confronta con che cosa)* — che lo portano a **10**.
+
+## 🔒 I TRE MECCANISMI CONTRO LA RICRESCITA
+
+**①** una regola nuova **ne sostituisce una** *(il tetto di 10 al posto 2, fatto valere da un
+conteggio)*; **②** un **presidio nel `pre-commit`** che rifiuta `CLAUDE.md` **oltre le 400 righe**;
+**③** a ogni **tag d'epoca**, la revisione dei presidi **mai scattati** — *un presidio che non ha mai
+rifiutato niente non sta impedendo niente* (`A9`), **e i hook contano gia' le proprie invocazioni**.
+
+## ⛔ **STOP: decide Luca.** Nessun documento nuovo e' stato scritto — `STORIA_REGOLE.md`,
+`FATTI_dal_codice.md` e `doc/relazioni/` sono **destinazioni proposte**, e scriverli sarebbe
+**applicare**.
