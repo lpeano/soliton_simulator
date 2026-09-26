@@ -899,3 +899,10 @@ diversi per lo stesso file.)*
 | `csv/_patch_scena_ii.py` | `3b3bd1d4` | `python csv/_patch_scena_ii.py` · `--prova` | la **cura** di `DRIVER-SCENA-II`: nove sostituzioni, **ognuna asserita per se'** (`P1-quater`), su `soliton_simulator.py` e sul driver. Idempotente | applicata; sintassi verificata dall'AST su entrambi i file |
 
 | `csv/_seal_fork/_sigillo_scena_ii.py` | `2a324202` | `python csv/_seal_fork/_sigillo_scena_ii.py` · `--corto` | **il SIGILLO di `DRIVER-SCENA-II`**, cinque criteri: argv del default invariata *(contro il PADRE del commit di `--scena=`)*, un vuoto solo fatto dalla scena *(+ AST della scena intatto)*, il seme reale *(tre processi, firme `sha1`)*, configurazione intera, e `N-MASSE` che rifiuta ancora | **6/6 PASS** sul simulatore `437632bf` e sul driver `18fb1231` (`csv/_seal_fork/_sig_scena_ii/REFERTO.txt`) |
+
+## Aggiunto il 2026-09-27 — **`OSSERVABILE-P1`** *(il secondo `SI`)*
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_osservabile_p1.py` | `77b93d1b` | `python csv/_osservabile_p1.py --scena` · `--snap F` · `--semi 11,12,13,14` · `--collaudo` · `--json F` | **L'OSSERVABILE DELLA `PROVA 1`**: la distanza fra le masse **lungo il grafo, pesi `net.d`** (`A13`, mai `pos`). Centro = **medoide di grafo**; da' anche **insieme-insieme**, i **punti di controllo** nel vuoto e la **dispersione fra semi** (`P3`). `inf` **dichiarato** se le masse sono in componenti diverse | `K1` errore **0.000e+00** su catena, reticolo, componenti staccate e medoide |
+| `csv/_seal_fork/_sigillo_osservabile_p1.py` | `8db2c386` | `python csv/_seal_fork/_sigillo_osservabile_p1.py` · `--corto` | il sigillo: `K1` sintetico, **`K2a`/`K2b`** *(cambio solo `d` -> cambia; solo `pos` -> non cambia)*, `K3` invarianza esatta, `K4` controlli entro il 10 %, `K5` **quattro processi** | **6/6 PASS** (`csv/_seal_fork/_sig_osservabile_p1/REFERTO.txt`) |

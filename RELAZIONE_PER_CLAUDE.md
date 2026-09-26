@@ -2205,3 +2205,48 @@ verificarlo.
 
 **I cinque criteri `K1`-`K5` sono nel task history**, ognuno con **che cosa decide** e **che cosa mi
 fa fermare**, e le letture *(soglie comprese)* fissate **prima** di vedere i numeri.
+
+## ✅ `OSSERVABILE-P1` — **SIGILLO 6/6.** E `K5` da' il numero che alla `PROVA 1` serviva
+
+```
+K1  grafo sintetico, errore < 1e-12 ........ PASS   errore 0.000e+00 (catena, reticolo, inf, medoide)
+K2a cambio solo `d`  -> la distanza CAMBIA . PASS   11.345803 -> 11.370993
+K2b cambio solo `pos`-> NON cambia ......... PASS   uguaglianza ESATTA su tutte tre le coppie
+K3  due chiamate -> stesso numero, esatto .. PASS
+K4  controlli nel vuoto entro il 10 % ...... PASS   scarti 0.016 / 0.014 / 0.005 %
+K5  >= 4 semi, con la barra fra semi ....... PASS   quattro processi, uno per braccio
+SIGILLO: 6/6
+```
+
+### ❌ IL CRITERIO `K2` DETTATO **NON E' SODDISFACIBILE A PASSO 0**, e la causa e' strutturale
+
+**MISURATO: `L_d / L_pos = 1.000000` ESATTO su tutte e tre le coppie.** Non e' un difetto dello
+strumento: **a passo 0 `d` E' la distanza euclidea**, perche' `_allaccia` crea l'arco con
+`d = dd` e `dd` e' la distanza che il **KD-tree ha misurato su `pos`**. **Le due grandezze
+coincidono per COSTRUZIONE**, e un criterio che chiede che differiscano e' della famiglia di `Q6`
+*(«>= 100 volte» una dispersione che vale zero)*.
+
+**Al suo posto una coppia che prova la stessa cosa meglio, e nei due versi:** `K2a` cambia **solo
+`d`** *(un arco del cammino minimo x10)* → la distanza **cambia** `11.345803 → 11.370993`;
+`K2b` cambia **solo `pos`** *(un nodo di `10 LAM = 8.0`)* → **non cambia, esattamente**.
+**Isola la dipendenza invece di dedurla da due numeri diversi**, e il rapporto `1.000000` resta
+stampato **come prova del perche'**.
+
+### 📊 IL NUMERO CHE LA `PROVA 1` DOVRA' BATTERE — **e non e' zero**
+
+| coppia | media *(4 semi)* | `sd` fra semi | IC95, `t(3) = 3.182` |
+|---|--:|--:|---|
+| `massa_0|massa_1` | **10.669444** | `0.238927` | `[10.289310, 11.049577]` |
+| `massa_0|massa_2` | **10.862821** | `0.145579` | `[10.631206, 11.094437]` |
+| `massa_1|massa_2` | **10.539362** | `0.510252` | `[9.727552, 11.351173]` |
+
+> **La dispersione fra semi vale `1.4 %`-`4.8 %` della distanza.** Quindi *«due masse si sono
+> avvicinate»* **non si legge da un calo**: si legge da un calo **piu' grande di quello**, e su
+> semi appaiati. **E' il valore sotto ipotesi nulla della `PROVA 1`**, e prima di questo strumento
+> non esisteva.
+
+**I punti di controllo si trovano facilmente al passo 0** *(5460 candidati, scarti sotto lo
+`0.02 %`)*: il vuoto e' quasi uniforme, quindi quasi ogni distanza esiste. **`K4` dice che
+esistono al passo 0, NON che resteranno validi a campo maturo.**
+
+### ⛔ STOP dopo il sigillo. Nessun run lungo: zero passi di dinamica.

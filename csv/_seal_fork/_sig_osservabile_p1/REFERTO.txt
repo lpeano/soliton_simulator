@@ -1,0 +1,81 @@
+========================================================================================================
+SIGILLO DI `OSSERVABILE-P1`
+========================================================================================================
+
+  K1  GRAFI SINTETICI A DISTANZA NOTA  (il `--collaudo` dello strumento)
+      COLLAUDO `K1` -- grafi SINTETICI a distanza NOTA (`P1-sexies`)
+      catena   0 -> 11   atteso 14.625000000   misurato 14.625000000   errore 0.000e+00  OK
+      catena   2 ->  7   atteso  8.000000000   misurato  8.000000000   errore 0.000e+00  OK
+      catena   5 ->  6   atteso  3.000000000   misurato  3.000000000   errore 0.000e+00  OK
+      catena   0 ->  1   atteso  0.500000000   misurato  0.500000000   errore 0.000e+00  OK
+      reticolo (0,0)->(6,6)   atteso  12.0   misurato  12.0   errore 0.000e+00  OK
+      reticolo (1,2)->(5,3)   atteso   5.0   misurato   5.0   errore 0.000e+00  OK
+      reticolo (3,3)->(3,6)   atteso   3.0   misurato   3.0   errore 0.000e+00  OK
+      staccati  0 -> 3   atteso inf   misurato inf   componenti 2  OK
+      medoide  catena di 7 a pesi 1   atteso 3 (unico)   misurato 3 (pari 1)  OK
+      COLLAUDO `K1`: OK
+
+  la scena: n 12814   archi 471143   sep 6.115800   r_regione 4.096438
+
+  K2  IL CASO CHE DEVE FALLIRE -- e il criterio DETTATO non e' soddisfacibile a passo 0
+      massa_0|massa_1        L_d    11.345803   L_pos    11.345803   L_d/L_pos 1.000000000
+      massa_0|massa_2        L_d    10.861730   L_pos    10.861730   L_d/L_pos 1.000000000
+      massa_1|massa_2        L_d    11.266299   L_pos    11.266299   L_d/L_pos 1.000000000
+      -> `d` e la distanza da `pos` COINCIDONO a passo 0: True
+         e' STRUTTURALE: `_allaccia` crea l'arco con `d = dd`, e `dd` e' la distanza
+         che il KD-tree ha misurato su `pos`. Il criterio dettato chiede che differiscano,
+         e a passo 0 NON POSSONO: e' la famiglia di `Q6`. Sostituito dalla coppia K2a/K2b.
+
+      K2a  cambio SOLO `d` (arco (208, 7066) del cammino minimo, x10, 1 arco/i):
+           prima    11.345803   dopo    11.370993   CAMBIATA True
+      K2b  cambio SOLO `pos` (nodo 3001 spostato di 10 LAM = 8.000000):
+           massa_0|massa_1        prima    11.345803   dopo    11.345803
+           massa_0|massa_2        prima    10.861730   dopo    10.861730
+           massa_1|massa_2        prima    11.266299   dopo    11.266299
+           IDENTICHE (uguaglianza esatta) True
+
+  K3  INVARIANZA -- stessa rete, due chiamate
+      centri uguali True   distanze uguali (ESATTE) True
+
+  K4  PUNTI DI CONTROLLO NEL VUOTO  (tolleranza 10 %, dichiarata PRIMA)
+      candidati oltre r_regione (4.096438) dalle masse .... 5460
+      massa_0|massa_1        controllo    11.347585   bersaglio    11.345803   scarto  0.016 %   entro SI
+      massa_0|massa_2        controllo    10.863302   bersaglio    10.861730   scarto  0.014 %   entro SI
+      massa_1|massa_2        controllo    11.265776   bersaglio    11.266299   scarto  0.005 %   entro SI
+
+  K5  DISPERSIONE FRA SEMI -- quattro processi, uno per braccio (`STANDARD 1`)
+      seme 11   n 12802  sep 6.1158   m0|m1=10.911450   m0|m2=11.060945   m1|m2=10.213584
+      seme 12   n 12765  sep 6.1158   m0|m1=10.339683   m0|m2=10.755176   m1|m2=10.807937
+      seme 13   n 12787  sep 6.1158   m0|m1=10.706263   m0|m2=10.883329   m1|m2=10.019708
+      seme 14   n 12771  sep 6.1158   m0|m1=10.720379   m0|m2=10.751834   m1|m2=11.116221
+      massa_0|massa_1        media    10.669444   sd   0.238927   t(3) 3.182   IC95 [10.289310, 11.049577]
+      massa_0|massa_2        media    10.862821   sd   0.145579   t(3) 3.182   IC95 [10.631206, 11.094437]
+      massa_1|massa_2        media    10.539362   sd   0.510252   t(3) 3.182   IC95 [9.727552, 11.351173]
+      semi con tutte le coppie: 4   (ne servono >= 4, `P3`)
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 79
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 79.
+
+
+========================================================================================================
+  K1  grafo sintetico, errore < 1e-12            PASS
+  K2a cambio `d` -> la distanza CAMBIA           PASS
+  K2b cambio `pos` -> la distanza NON cambia     PASS
+  K3  due chiamate -> stesso numero, esatto      PASS
+  K4  controlli nel vuoto entro il 10 %          PASS
+  K5  >= 4 semi, con la barra fra semi           PASS
+SIGILLO: 6/6
+========================================================================================================
+
+COSA QUESTO SIGILLO *NON* DICE:
+  - **non fa la `PROVA 1`**: certifica la GRANDEZZA, non che le masse si avvicinino.
+    Tutti i numeri sono al PASSO 0, cioe' la condizione iniziale.
+  - **`K2` non e' il criterio dettato**: quello non e' soddisfacibile a passo 0, perche'
+    `d` E' la distanza euclidea per costruzione. La coppia `K2a`/`K2b` prova la stessa
+    cosa in modo piu' forte, e il rapporto `L_d/L_pos = 1.000000` resta stampato come
+    PROVA del perche'.
+  - **`K4` dice che i punti di controllo ESISTONO al passo 0**, non che restino validi
+    mentre il sistema evolve: quello si rimisura a ogni istante in cui si legge la prova.
