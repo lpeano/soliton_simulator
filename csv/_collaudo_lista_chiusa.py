@@ -76,7 +76,11 @@ A = ' ("i 24 script che avanzano con step() da solo", r"'
 assert t.count(A) == 1, "l'ancora dell'elenco DEVONO non e' unica: %d" % t.count(A)
 _fine = t.index(NL + "]", t.index(A)) + 1
 io.open(TRUCCO, "w", encoding="utf-8", newline=NL).write(
-    t[:_fine] + ' ("COLLAUDO: una voce che NON esiste", r"QUESTA-VOCE-NON-ESISTE-DAVVERO"),' + NL
+    # ⚠ TRE campi: da quando la vista legge l'indice, `DEVONO` porta anche il MOTIVO della
+    #   copertura. Con DUE campi la copia truccata si schiantava in `ValueError` -- uscita `1`
+    #   invece di `3` -- e il collaudo dava `FAIL` **per la ragione sbagliata**.
+    t[:_fine]
+    + ' ("COLLAUDO: una voce che NON esiste", r"QUESTA-VOCE-NON-ESISTE-DAVVERO", ""),' + NL
     + t[_fine:])
 try:
     _prima = sha(DOC)

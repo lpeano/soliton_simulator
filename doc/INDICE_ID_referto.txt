@@ -2,43 +2,48 @@
 `doc/INDICE_ID.tsv` -- L'INDICE DI TUTTI GLI ID   (2026-09-26)
 ========================================================================================================
 
-  voci nell'indice: 664      esclusi (non sono ID): 41
-  alias dalle RINOMINE del PASSO 1: 2       alias dalla forma NUDA univoca: 32
+  voci nell'indice: 738      esclusi (non sono ID): 45
+  alias dalle RINOMINE del PASSO 1: 23       alias dalla forma NUDA univoca: 35
 
-  per STATO:            da-decidere=467, chiuso=122, aperto=47, teoria=17, non-difetto=11
-  per TIPO:             altro=225, criterio-locale=204, fronte=141, misura=28, difetto=25, assioma=16, cura=14, presidio=10, standard=1
-  per BLOCCA_RUN_BASE:  DA-DECIDERE=512, NO=147, SI=5
+  per STATO:            da-decidere=519, chiuso=135, aperto=54, teoria=17, non-difetto=13
+  per TIPO:             altro=247, criterio-locale=240, fronte=141, misura=35, difetto=25, cura=23, assioma=16, presidio=10, standard=1
+  per BLOCCA_RUN_BASE:  NO=406, DA-DECIDERE=330, SI=2
+  per FAMIGLIA:         ?=400, A=142, B=20, C=35, D=11, E=13, F=95, G=22
+
+  CONTROLLO di Luca: righe con stato chiuso/non-difetto/teoria (o criterio-locale) E blocca SI:
+      0   -> PASS
+  SMISTAMENTO (tipo difetto/fronte/misura/cura, stato aperto/da-decidere): 103 voci
 
   file SALTATI perche' sono OUTPUT di questa stessa macchina: 5  (COLLAUDO_presidio_indice.txt, COLLISIONI_ID.txt, INDICE_ID_referto.txt, INVENTARIO_lettori_id.txt, RINOMINE_ID.txt)
      uno strumento che si nutre dei propri output si AUTOCONFERMA: il referto del collaudo
      stampa `ZZ999`, e lo sweep lo metteva nell'indice.
 
-  CITATI e MAI DEFINITI in un registro (entrano con `da-decidere`): 289
-      di cui citati SOLO in referti/sigilli/task history -> `criterio-locale`: 120
-      T1                     119 citazioni
-      C95                    83 citazioni
-      E1                     64 citazioni
-      Y5                     62 citazioni
-      K3                     53 citazioni
-      S1                     50 citazioni
-      S3                     41 citazioni
+  CITATI e MAI DEFINITI in un registro (entrano con `da-decidere`): 322
+      di cui citati SOLO in referti/sigilli/task history -> `criterio-locale`: 152
+      DA-DECIDERE            438 citazioni
+      T1                     112 citazioni
+      IC95                   80 citazioni
+      SU2                    67 citazioni
+      STEP2                  66 citazioni
+      Y5                     64 citazioni
+      E1                     55 citazioni
+      S1                     51 citazioni
+      S3                     43 citazioni
       T6                     32 citazioni
       T0                     32 citazioni
-      Z1c                    31 citazioni
-      R1                     30 citazioni
-      M3                     29 citazioni
+      Z1c                    30 citazioni
 
 ========================================================================================================
 COSA QUESTO INDICE *NON* DICE
 ========================================================================================================
-  - **`blocca_run_base` e' `DA-DECIDERE` su 512 voci su 664**, e non e' pigrizia: **nessun
+  - **`blocca_run_base` e' `DA-DECIDERE` su 330 voci su 738**, e non e' pigrizia: **nessun
     documento lo dichiara**. Vale `SI` solo dove il testo dice «bloccante» o «prima di
     qualunque giro lungo». **Riempirla a intuito sarebbe indovinare, e Luca l'ha vietato.**
   - **`stato = da-decidere` significa che la fonte non porta un marcatore riconoscibile**, non
-    che la voce sia in sospeso. Sono 467 voci.
+    che la voce sia in sospeso. Sono 519 voci.
   - **il titolo e' TRONCATO a 110 caratteri**: l'indice dice DOVE vive una voce, non che cosa
     dice. La spiegazione resta nel documento.
   - **la fonte e' `file::ancora`, non `file:riga`**: un numero di riga marcisce al primo
     inserimento, un frammento di titolo si trova con una ricerca.
-  - **gli ESCLUSI sono 41 forme** riconosciute come locuzioni, nomi di file o di flag: stanno in
+  - **gli ESCLUSI sono 45 forme** riconosciute come locuzioni, nomi di file o di flag: stanno in
     `doc/INDICE_ID_ESCLUSI.tsv` **col motivo e col numero di citazioni**, non in silenzio.

@@ -19808,3 +19808,103 @@ end-to-end incluso.
 **⚠ E IL COLLAUDO SI ERA DICHIARATO INCOMPLETO, invece di dare per buono un ramo non provato:**
 *«END-TO-END NON ESEGUITO: c'erano modifiche in STAGE, e non le tocco»*. **E' quella riga che mi ha
 fatto rigirare il collaudo ad albero pulito.**
+
+
+---
+
+# ✅ **`PASSO 3` RIDOTTO: LA LISTA CHIUSA LEGGE L'INDICE, E TRE DIFETTI DELLA FORMA DEGLI ID**
+*(2026-09-26)*
+
+## ✅ **LE DUE CORREZIONI DI LUCA ALL'INDICE**
+
+**① `blocca_run_base` PER PAROLA CHIAVE ERA SBAGLIATO.** `Z25`, `Z29` e `Z73` uscivano
+`non-difetto` **e** `SI` insieme — `Z73` perche' il suo testo dice *«BLOCCA LA MITOSI»*, che parla
+della **mitosi**, non del run base.
+> ### **Una parola che compare nel racconto di un riscontro non e' una dichiarazione sul run base.**
+**Regola nuova:** un `non-difetto`, un `chiuso`, una `teoria` o un `criterio-locale` **non bloccano
+MAI** → `NO`, e vince sulla parola chiave. **`blocca SI` passa da `5` a `2`; `NO` da `147` a `404`.**
+**Controllo di Luca: `0` righe con stato chiuso/non-difetto/teoria e `blocca SI` — `PASS`.**
+
+**② LO SMISTAMENTO SI LIMITA A CHI PUO' BLOCCARE.** `doc/SMISTAMENTO_run_base.md`, **generato**:
+solo tipo `difetto`/`fronte`/`misura`/`cura` **e** stato `aperto`/`da-decidere` → **103 voci**, con
+`id`, **un titolo di UNA riga leggibile** e la fonte, **ordinate per famiglia**
+*(`A` 39, `F` 26, `B` 9, `C` 8, `E` 7, `D` 3, `G` 2, `?` 9)*.
+**`SI`/`NO` NON sono riempiti a intuito: la lista e' la base su cui decide Luca.**
+
+## 🔄 **LA VISTA NON FA PIU' PARSING: CONTEGGI PRIMA / DOPO**
+
+```
+                        PRIMA (parser su 5 fonti)      DOPO (vista sull'indice)
+voci                    625                            736
+in LISTA                406                            333
+FUORI LISTA             219                            403   (col motivo, dai CAMPI)
+sezioni fuori portata    48                              0   (non esistono piu': non legge documenti)
+senza famiglia          111                            190   (la famiglia viene dall'indice)
+voci PERSE                -                              2   DICHIARATE
+```
+
+**Il testo si accorcia da `420` a `117` caratteri** *(Luca ha scelto `famiglia`, non `testo`)*: la
+spiegazione sta **nella fonte, che e' in colonna**.
+
+## ⚠ **LE DUE VOCI PERSE, dichiarate PRIMA dei numeri**
+
+**Nell'indice entrano solo le voci CON UN ID.** Non ne hanno:
+- **il `tasso di mitosi`** — un punto di `COSA NON SO DERIVARE` della scheda ⑨: **una voce di
+  elenco in prosa senza etichetta**;
+- **`CURA 3`** — l'etichetta e' `CURA 3` **con lo SPAZIO**, e uno spazio non fa un identificatore.
+  **Basterebbe `CURA-3`: e' una rinomina, e la decide Luca.**
+
+**E TRE compaiono solo attraverso l'ID che le contiene**, dichiarato nel codice: la **soglia `3π`**
+→ `D36`; **`chi comprime d0`** → `CONFIG-1`; **i 24 script** → `PASSO-1`.
+**Se l'elenco delle perse cresce, il generatore SI FERMA.**
+
+## ❌❌ **TRE DIFETTI DELLA FORMA DEGLI ID, e il terzo era grave**
+
+```
+① lo STEM era tagliato a CINQUE caratteri   -> CONFIG-1, POTENZE-1, ANCORE-1, INERZIA-1(C),
+   `[A-Z][A-Za-z0-9]{0,4}`                      RIPRESA-ARGV, REPERTI-IMMUTABILI risultavano
+                                                «CITATI e MAI DEFINITI». `SCALE-TW` passava solo
+                                                perche' `SCALE` ha esattamente cinque lettere:
+                                                **il difetto era invisibile per un carattere.**
+② lo STEM chiedeva TRE caratteri col trattino -> `A3-DISEGNO` (nato dalla rinomina del PASSO 1)
+                                                NON era un ID. **Gli alias delle rinomine erano
+                                                2 su 23**: una citazione del nome vecchio sarebbe
+                                                stata RIFIUTATA dal presidio.
+③ le cifre IN CODA non erano previste         -> `FRAG1` non esisteva per la macchina degli ID.
+```
+
+**① e ③ li ha trovati il COLLAUDO della vista** *(`A3-DISEGNO` e `FRAG1` mancanti)*, **ed e' il
+motivo per cui il collaudo si scrive prima.** Dopo la cura: **indice da `666` a `736` voci**, **alias
+delle rinomine da `2` a `23`**.
+
+**⚠ E UNA CLASSE RESTA FUORI, dichiarata:** un'etichetta di **UNA SOLA PAROLA MAIUSCOLA** senza
+cifre ne' trattino — **`CONTAGIO`** — **non e' un ID in questo spazio**: e' la specifica di Luca
+*(«nomi MAIUSCOLI col trattino»)*, e allargare la regex vorrebbe dire **prendere ogni parola
+maiuscola della prosa**. **Quelle voci hanno bisogno di un ID, non di una regex piu' larga.**
+
+## ❌ **E DUE DIFETTI MIEI DI STRUMENTO, entrambi visti dai numeri**
+
+- **il filtro dell'enumerazione era troppo largo:** cercavo un `·` **in qualunque punto**
+  dell'etichetta, e il `·` sta anche dentro `[EPOCA 1 · CODICE]`, che e' in **ogni** riga di
+  `RAMIFICAZIONI`. **Le definizioni crollavano da `291` a `130` e i `fronte` da `141` a `8`.**
+  **Un filtro troppo largo svuota un indice in silenzio.** Ora il test si fa **subito dopo l'ID**.
+- **il collaudo della vista iniettava una tupla di DUE campi** in un elenco che ora ne ha **tre**:
+  la copia truccata si schiantava in `ValueError` — uscita `1` invece di `3` — e il collaudo dava
+  **`FAIL` per la ragione sbagliata**.
+
+## ✅ **LO STATO DEI COLLAUDI, tutti rigirati**
+
+```
+la vista (`_collaudo_lista_chiusa`)        2/2 PASS   (il ramo che deve fallire NON scrive il file)
+il presidio dell'indice                   5/5 PASS   (hook vero incluso, sentinella a run time)
+i presidi del pre-commit (`_hook_presidi`) 8/8 OK
+le collisioni                             0 su 291 ID definiti
+```
+
+## 📌 **E LA VOCE `LETTORI-INDICE` E' IN CODA** *(ordine di Luca)*
+
+I **sei** lettori che leggono ancora il Markdown — `_cure_verificate`, `_quadro_unico`,
+`_triage_difetti`, `_inventario_passo`, `_punto_della_situazione`, `_blob_nelle_voci` — stanno
+nell'indice come **una voce**, `stato: aperto`, **`blocca_run_base: NO`** *(la fonte lo dichiara:
+«NON BLOCCA il run base»)*, famiglia `G`. **Gli importatori restano a leggere il Markdown per
+necessita': sono cio' che costruisce l'indice.**

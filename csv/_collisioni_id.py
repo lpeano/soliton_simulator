@@ -82,8 +82,18 @@ SEZ_NON_DEFINISCONO = [
     (r"ESITO DI OGNI VOCE", "tabella GENERATA con l'esito delle voci di RAMIFICAZIONI: le CITA"),
 ]
 
+# ❌ LA FORMA CORRETTA il 2026-09-26, e due voci vere ne erano ESCLUSE:
+#   `A3-DISEGNO` — nata dalla rinomina del `PASSO 1` — ha lo stem di **due** caratteri, e la
+#   forma ne chiedeva **tre**; `FRAG1` ha **le cifre in coda** (`[A-Z]{2,}\d{1,3}`) e nessuna
+#   alternativa la copriva. **Il collaudo della vista le ha trovate mancanti**, ed e' il
+#   motivo per cui il collaudo si scrive prima.
+#   ⚠ RESTA FUORI, dichiarato: un'etichetta di UNA SOLA PAROLA MAIUSCOLA senza cifre ne'
+#   trattino (`CONTAGIO`) **non e' un ID in questo spazio** — e' la specifica di Luca
+#   («nomi MAIUSCOLI col trattino»), e accettarla vorrebbe dire prendere ogni parola
+#   maiuscola della prosa. **Quelle voci hanno bisogno di un ID, non di una regex piu'
+#   larga.**
 FORMA = re.compile(r"(?:[A-Z]\d{1,3}[a-z]?|STANDARD\s+[0-9①-⑳]+"
-                   r"|[A-Z][A-Z0-9]{2,}(?:-[A-Z0-9()/]+)+)")
+                   r"|[A-Z][A-Z0-9]{1,}(?:-[A-Z0-9()/]+)+|[A-Z]{2,}\d{1,3})")
 SIMBOLI = (u"✅❌⚠❓⛔⏸⭐➤▶❗☑"
            u"\U0001f7e5\U0001f7e7\U0001f7e9\U0001f4cb\U0001f4e4\U0001f6d1\U0001f3af")
 
@@ -104,11 +114,27 @@ def def_di(riga):
         c = _nudo(riga.strip().strip("|").split("|")[0])
     else:
         return None
-    m = re.match(r"^([A-Z][A-Za-z0-9]{0,4}(?:-[A-Z0-9()/]+)*|STANDARD\s+[0-9①-⑳]+)"
+    # ❌ DIFETTO CORRETTO il 2026-09-26: lo STEM era `[A-Z][A-Za-z0-9]{0,4}`, cioe'
+    #   **cinque caratteri al massimo**, e un nome piu' lungo col trattino NON veniva
+    #   riconosciuto come DEFINIZIONE. **Misurato:** `CONFIG-1`, `POTENZE-1`, `ANCORE-1`,
+    #   `INERZIA-1(C)`, `RIPRESA-ARGV`, `REPERTI-IMMUTABILI` finivano fra i «CITATI e MAI
+    #   DEFINITI» -- senza fonte, senza stato, senza famiglia -- **mentre sono voci definite
+    #   in una riga di tabella.** `SCALE-TW` passava solo perche' `SCALE` ha esattamente
+    #   cinque lettere: **il difetto era invisibile per un carattere.**
+    m = re.match(r"^([A-Z][A-Z0-9]{1,17}(?:-[A-Z0-9()/]+)+|[A-Z][A-Za-z0-9]{0,4}(?:-[A-Z0-9()/]+)*|STANDARD\s+[0-9①-⑳]+)"
                  r"(?:[\s.,:—-]|$)", c)
     if not m:
         return None
-    i = m.group(1).rstrip(".").replace("STANDARD  ", "STANDARD ")
+    i = m.group(1).rstrip(".")
+    # ⚠ UN'ETICHETTA CHE ELENCA PIU' VOCI NON NE DEFINISCE NESSUNA -- ma il test va fatto
+    #   **SUBITO DOPO L'ID**, non sulla cella intera: il primo tentativo cercava un `·` **in
+    #   qualunque punto**, e il `·` sta anche dentro `[EPOCA 1 · CODICE]`, che e' in **ogni** riga
+    #   di `RAMIFICAZIONI`. **Misurato: le definizioni crollavano da 291 a 130 e i `fronte` da 141
+    #   a 8** -- un filtro troppo largo svuota l'indice in silenzio.
+    _resto = c[len(m.group(1)):].strip()
+    if _resto.startswith("·") and re.match(r"^[A-Z][A-Z0-9\-()/]{2,}",
+                                              _resto.lstrip("· ").strip()):
+        return None
     return i if FORMA.fullmatch(i) and not re.fullmatch(r"[A-Z]", i) else None
 
 

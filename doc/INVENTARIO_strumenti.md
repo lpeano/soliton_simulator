@@ -805,3 +805,15 @@ python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie
 | strumento | blob (byte) | comando | cosa fa | esito |
 |---|---|---|---|---|
 | `csv/_inventario_lettori_id.py` | `d1f3819d` | `python csv/_inventario_lettori_id.py` | classifica in QUATTRO classi gli script che nominano un registro: **copia del simulatore** *(reperto)*, **scrittore una volta**, **IMPORTATORE** *(costruisce l'indice: DEVE leggere il Markdown)*, **LETTORE** *(il perimetro del `PASSO 3`)* | `doc/INVENTARIO_lettori_id.txt`: **83** script nominano un registro, ma i LETTORI che aprono davvero un registro sono **10** |
+
+---
+
+## Aggiornati il 2026-09-26 — **il `PASSO 3` ridotto: la vista legge l'INDICE**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_lista_chiusa.py` | `11300066` | `python csv/_lista_chiusa.py` | **RISCRITTO**: era un parser di **cinque** documenti in Markdown, ora e' una **VISTA su `doc/INDICE_ID.tsv`** *(`PASSO 3` ridotto)*. `id`, `stato`, `tipo`, `famiglia` sono **campi**, non inferenze | `doc/LISTA_CHIUSA.md`: **736** voci, `333` in lista, `403` fuori col motivo, **2 voci PERSE dichiarate** *(senza ID: non possono comparire)*. Collaudo `2/2` |
+| `csv/_indice_id.py` | `a66133cb` | `python csv/_indice_id.py` | **+ colonna `famiglia`** *(opzione (a) di Luca)*, **+ `doc/SMISTAMENTO_run_base.md`**, e la regola di `blocca_run_base` **corretta**: un chiuso, un non-difetto, una teoria o un criterio-locale **non bloccano mai** | `doc/INDICE_ID_referto.txt`: **736** voci *(da 666)*, `blocca SI` **2** *(da 5)*, controllo di Luca **PASS**; smistamento **103** voci in sette famiglie |
+| `csv/_collisioni_id.py` | `d226ee8d` | `python csv/_collisioni_id.py` | stessa forma di ID dell'indice *(stem lungo, enumerazioni, cifre in coda)* | `0` collisioni su **291** ID definiti |
+| `csv/_presidio_indice.py` | `16da1629` | `python csv/_presidio_indice.py --collaudo` | stessa forma di ID + **sentinella scelta a RUN TIME** | **5/5 PASS**, hook vero incluso |
+| `csv/_collaudo_lista_chiusa.py` | `4dd40e46` | `python csv/_collaudo_lista_chiusa.py` | l'iniezione della copia truccata usa **tre** campi *(l'elenco `DEVONO` porta anche il motivo della copertura)* | **2/2 PASS** |

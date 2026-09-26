@@ -53,8 +53,18 @@ TAB = chr(9)
 VIVI = ["doc/STATO_RUN.md", "doc/RAMIFICAZIONI.md", "doc/ASSIOMI.md", "doc/REGISTRO_FISICA.md",
         "doc/COMPONENTI_PROMOSSE.md", "doc/PATTERN_DI_PROVA.md", "doc/LISTA_CHIUSA.md",
         "CLAUDE.md"]
+# ❌ LA FORMA CORRETTA il 2026-09-26, e due voci vere ne erano ESCLUSE:
+#   `A3-DISEGNO` — nata dalla rinomina del `PASSO 1` — ha lo stem di **due** caratteri, e la
+#   forma ne chiedeva **tre**; `FRAG1` ha **le cifre in coda** (`[A-Z]{2,}\d{1,3}`) e nessuna
+#   alternativa la copriva. **Il collaudo della vista le ha trovate mancanti**, ed e' il
+#   motivo per cui il collaudo si scrive prima.
+#   ⚠ RESTA FUORI, dichiarato: un'etichetta di UNA SOLA PAROLA MAIUSCOLA senza cifre ne'
+#   trattino (`CONTAGIO`) **non e' un ID in questo spazio** — e' la specifica di Luca
+#   («nomi MAIUSCOLI col trattino»), e accettarla vorrebbe dire prendere ogni parola
+#   maiuscola della prosa. **Quelle voci hanno bisogno di un ID, non di una regex piu'
+#   larga.**
 FORMA = re.compile(r"(?:[A-Z]\d{1,3}[a-z]?|STANDARD\s+[0-9①-⑳]+"
-                   r"|[A-Z][A-Z0-9]{2,}(?:-[A-Z0-9()/]+)+)")
+                   r"|[A-Z][A-Z0-9]{1,}(?:-[A-Z0-9()/]+)+|[A-Z]{2,}\d{1,3})")
 
 
 def carica():
@@ -107,6 +117,14 @@ def _aggiunte():
 def pre_commit(msg_file=None):
     testo = _aggiunte()
     msg = ""
+    if msg_file is None:
+        # ⚠ IN `pre-commit` IL MESSAGGIO NON E' UN ARGOMENTO, ma con `git commit -F` git l'ha
+        #   gia' scritto in `.git/COMMIT_EDITMSG`. Senza questo ripiego la via d'uscita
+        #   `[SENZA-INDICE: ...]` valeva **solo** in `commit-msg`, cioe' **troppo tardi**: il
+        #   `pre-commit` rifiutava prima, e l'eccezione dichiarata non veniva nemmeno letta.
+        _cem = os.path.join(RADICE, ".git", "COMMIT_EDITMSG")
+        if os.path.exists(_cem):
+            msg_file = _cem
     if msg_file and os.path.exists(msg_file):
         msg = io.open(msg_file, encoding="utf-8", errors="replace").read()
         if "[SENZA-INDICE:" in msg:

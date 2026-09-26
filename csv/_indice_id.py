@@ -92,9 +92,46 @@ STATO = [
     (r"\bAPERT[AO]\b|⛔|❗|DA RIVERIFICARE|DA RIFARE|NON MISURAT|IN VERIFICA", "aperto"),
 ]
 BLOCCA_SI = r"BLOCCANTE|PRIMA DI QUALUNQUE GIRO|prima del run base|URGENTE, PRIMA"
+#   ...e una voce puo' DICHIARARE di non bloccare: la fonte vince sulla parola chiave.
+BLOCCA_NO = r"NON BLOCCA|non blocca il run base"
 
+# ------------------------------------------------------------------ LE SETTE FAMIGLIE (A-G)
+#   ⚠ QUESTE REGOLE VENGONO DA `_lista_chiusa.py`, e **si spostano qui** perche' dal 2026-09-26
+#   la famiglia e' una COLONNA DELL'INDICE (opzione (a) scelta da Luca): **un posto solo la
+#   calcola**, e la vista la LEGGE invece di ricalcolarla.
+#   L'ordine conta: la prima parola che attacca decide. `G` sta per ultima perche' le sue parole
+#   sono le piu' comuni (misurato: quando stava prima si prendeva tutto).
+FAMIGLIE = [
+    ("A", "INERZIA E AVVIO"), ("B", "TEMPO UNICO"), ("C", "DOPPIA COPERTURA E CREAZIONE"),
+    ("D", "SOGLIE TARATE E SOTTO PLANCK"), ("E", "DISEGNO E STATISTICHE GLOBALI"),
+    ("F", "FRENO E CONTRAZIONE"), ("G", "ARRETRATO DEGLI STRUMENTI"),
+]
+REG_FAM = [
+ (r"inerzia|contrasto|rho_s|\bramp\b|rampa|accension|\beta\b|omega|spinor|\bpeq\b|semina"
+  r"|sorgente di campo", "A"),
+ (r"freno|SCALA_MIN|smorza|\bd0\b|coesion|repulsion|dx/d|compression|\bLAM\b|_nasce"
+  r"|archi|distanz", "F"),
+ (r"fase|\bphi\b|\u03c6|2pi|4pi|2\u03c0|4\u03c0|torsion|\btw\b|mitosi|Schwinger|antifase"
+  r"|wrap|SCALE-TW|copertura|soglia0", "C"),
+ (r"tempo|dt_n|dt_e|orologio|ritmo|tau_pp|foliazion|causal|\btau\b", "B"),
+ (r"soglia|clip|pavimento|tetto|QMIN|tarat|unita' assolute|massa_critica|costant|limite", "D"),
+ (r"median|global|disegno|\bpos\b|statistic|rilassa_disegno", "E"),
+ (r"presidi|hook|ancor|inventario|passo incompleto|step\(\)|argv|\bCLI\b|P1-bis|\bP5\b"
+  r"|\bP8\b|\bP9\b|ripres|reperto|non ri-girabile|sigillo|blob|referto|script|lettori", "G"),
+]
+
+# ❌ LA FORMA CORRETTA il 2026-09-26, e due voci vere ne erano ESCLUSE:
+#   `A3-DISEGNO` — nata dalla rinomina del `PASSO 1` — ha lo stem di **due** caratteri, e la
+#   forma ne chiedeva **tre**; `FRAG1` ha **le cifre in coda** (`[A-Z]{2,}\d{1,3}`) e nessuna
+#   alternativa la copriva. **Il collaudo della vista le ha trovate mancanti**, ed e' il
+#   motivo per cui il collaudo si scrive prima.
+#   ⚠ RESTA FUORI, dichiarato: un'etichetta di UNA SOLA PAROLA MAIUSCOLA senza cifre ne'
+#   trattino (`CONTAGIO`) **non e' un ID in questo spazio** — e' la specifica di Luca
+#   («nomi MAIUSCOLI col trattino»), e accettarla vorrebbe dire prendere ogni parola
+#   maiuscola della prosa. **Quelle voci hanno bisogno di un ID, non di una regex piu'
+#   larga.**
 FORMA = re.compile(r"(?:[A-Z]\d{1,3}[a-z]?|STANDARD\s+[0-9①-⑳]+"
-                   r"|[A-Z][A-Z0-9]{2,}(?:-[A-Z0-9()/]+)+)")
+                   r"|[A-Z][A-Z0-9]{1,}(?:-[A-Z0-9()/]+)+|[A-Z]{2,}\d{1,3})")
 SIMBOLI = (u"✅❌⚠❓⛔⏸⭐➤▶❗☑"
            u"\U0001f7e5\U0001f7e7\U0001f7e9\U0001f4cb\U0001f4e4\U0001f6d1\U0001f3af")
 
@@ -128,6 +165,22 @@ def testo(p):
     return io.open(os.path.join(RADICE, p), encoding="utf-8", newline="").read()
 
 
+def _taglia(s, n):
+    """Tronca **su un confine di parola**.
+
+    ⚠ Tagliare a meta' parola **INVENTA UN ID**: `GLOBALE-DISEGNO` troncato a 117 caratteri
+    diventava `GLOBALE-DIS`, e il presidio dell'indice -- giustamente -- lo segnalava come ID
+    sconosciuto **in un documento che questa macchina stessa aveva scritto**.
+    **Un troncamento non deve creare nomi.**
+    """
+    s = re.sub(r"\s+", " ", s or "").strip()
+    if len(s) <= n:
+        return s
+    _t = s[:n - 1]
+    _sp = _t.rfind(" ")
+    return (_t[:_sp] if _sp > n // 2 else _t) + chr(0x2026)
+
+
 def _nudo(s):
     return re.sub(r"[`*#>_~]", "", re.sub("[" + SIMBOLI + "]", " ", s)).strip()
 
@@ -143,18 +196,52 @@ def def_di(riga):
         c = _nudo(riga)
     else:
         return None
-    m = re.match(r"^([A-Z][A-Za-z0-9]{0,4}(?:-[A-Z0-9()/]+)*|STANDARD\s+[0-9①-⑳]+)"
+    # ❌ DIFETTO CORRETTO il 2026-09-26: lo STEM era `[A-Z][A-Za-z0-9]{0,4}`, cioe'
+    #   **cinque caratteri al massimo**, e un nome piu' lungo col trattino NON veniva
+    #   riconosciuto come DEFINIZIONE. **Misurato:** `CONFIG-1`, `POTENZE-1`, `ANCORE-1`,
+    #   `INERZIA-1(C)`, `RIPRESA-ARGV`, `REPERTI-IMMUTABILI` finivano fra i «CITATI e MAI
+    #   DEFINITI» -- senza fonte, senza stato, senza famiglia -- **mentre sono voci definite
+    #   in una riga di tabella.** `SCALE-TW` passava solo perche' `SCALE` ha esattamente
+    #   cinque lettere: **il difetto era invisibile per un carattere.**
+    m = re.match(r"^([A-Z][A-Z0-9]{1,17}(?:-[A-Z0-9()/]+)+|[A-Z][A-Za-z0-9]{0,4}(?:-[A-Z0-9()/]+)*|STANDARD\s+[0-9①-⑳]+)"
                  r"(?:[\s.,:—-]|$)", c)
     if not m:
         return None
+    # ⚠ UN'ETICHETTA CHE ELENCA PIU' VOCI NON NE DEFINISCE NESSUNA. **Misurato:** la riga
+    #   `| PROBLEMI-CHK3 · FAMIGLIE · FASCE-TAU | SOSPESI |` faceva risultare `PROBLEMI-CHK3`
+    #   definito DUE volte -- una nella coda unica, dove la voce vive, e una qui, dove e' solo
+    #   **citata insieme ad altre due**. E' la stessa famiglia dei RIMANDI: cita, non definisce.
     i = m.group(1).rstrip(".")
+    # ⚠ UN'ETICHETTA CHE ELENCA PIU' VOCI NON NE DEFINISCE NESSUNA -- ma il test va fatto
+    #   **SUBITO DOPO L'ID**, non sulla cella intera: il primo tentativo cercava un `·` **in
+    #   qualunque punto**, e il `·` sta anche dentro `[EPOCA 1 · CODICE]`, che e' in **ogni** riga
+    #   di `RAMIFICAZIONI`. **Misurato: le definizioni crollavano da 291 a 130 e i `fronte` da 141
+    #   a 8** -- un filtro troppo largo svuota l'indice in silenzio.
+    _resto = c[len(m.group(1)):].strip()
+    if _resto.startswith("·") and re.match(r"^[A-Z][A-Z0-9\-()/]{2,}",
+                                              _resto.lstrip("· ").strip()):
+        return None
     return i if FORMA.fullmatch(i) and not re.fullmatch(r"[A-Z]", i) else None
 
 
 def titolo_di(riga):
     t = re.sub(r"\s+", " ", _nudo(riga).strip("| ")).strip()
     t = re.sub(r"^[A-Z][A-Za-z0-9-]{0,24}\s*[|—-]\s*", "", t)
-    return t[:110]
+    return _taglia(t, 111)
+
+
+def breve_riga(v):
+    """Un titolo di UNA riga, leggibile: il titolo, o la riga ridotta se il titolo e' vuoto."""
+    # Senza questa pulizia lo smistamento stampa righe come
+    #   `R2 VALE PER QUELLA SCENA [EPOCA 1 . MISURA] / NUOVO: il residuo...`, in cui **le prime sei
+    #   parole non dicono nulla** a chi deve decidere.
+    s = re.sub(r"\s+", " ", v["titolo"]).replace("|", "/").strip()
+    s = re.sub(r"^" + re.escape(v["id"].split(":")[-1]) + r"\b\s*", "", s)
+    s = re.sub(r"^(?:VALE SEMPRE|VALE PER QUELLA SCENA|CHIUSA PER \w+|DA RIVERIFICARE"
+               r"|LA LETTURA CADE|APERT[AO]|CURAT[AO])\s*", "", s)
+    s = re.sub(r"\[EPOCA[^\]]*\]\s*", "", s)
+    s = re.sub(r"^[\s/\u2014-]+", "", s)
+    return (s[:117] + "\u2026") if len(s) > 118 else s
 
 
 def primo(regole, testo_, altrimenti):
@@ -184,6 +271,7 @@ for f, ns, tipo_reg in REGISTRI:
         VOCI[chiave] = {
             "id": chiave,
             "titolo": titolo_di(riga) or "(senza titolo)",
+            "riga": _t,
             "fonte": "%s::%s" % (f, (titolo_di(riga) or "")[:40]),
             "tipo": primo(TIPO_SEZ, sez, tipo_reg),
             "stato": primo(STATO, _t, "da-decidere"),
@@ -278,32 +366,93 @@ for tok, n in NONDEF:
         "id": tok,
         "titolo": ("(CITATO %d volte, MAI definito in un registro%s)"
                    % (n, "" if _in_vivi else "; citato solo in referti/sigilli/task history")),
-        "fonte": "(nessuna definizione trovata)", "tipo": _tipo,
+        "riga": "", "fonte": "(nessuna definizione trovata)", "tipo": _tipo,
         "stato": "da-decidere", "blocca": "", "alias": set()}
 
-# blocca_run_base: NO dove la voce e' chiusa / teoria / non-difetto; altrimenti DA-DECIDERE
+# ------------------------------------------------------------------ `blocca_run_base`
+#   ❌ CORREZIONE DI LUCA, 2026-09-26: **la PAROLA CHIAVE da sola e' sbagliata.** `Z25`, `Z29` e
+#   `Z73` uscivano `non-difetto` **e** `SI` insieme -- `Z73` perche' il suo testo dice «BLOCCA LA
+#   MITOSI», che parla della MITOSI, non del run base. **Una parola che compare nel racconto di un
+#   riscontro non e' una dichiarazione sul run base.**
+#   REGOLA: **un `non-difetto`, un `chiuso`, una `teoria` o un `criterio-locale` NON bloccano MAI.**
 for v in VOCI.values():
-    if v["blocca"] == "SI":
-        continue
-    v["blocca"] = ("NO" if (v["stato"] in ("chiuso", "non-difetto")
-                            or v["tipo"] in ("assioma", "standard")) else "DA-DECIDERE")
     if v["tipo"] in ("assioma", "standard") and v["stato"] == "da-decidere":
         v["stato"] = "teoria"
+    _mai = (v["stato"] in ("chiuso", "non-difetto", "teoria")
+            or v["tipo"] in ("assioma", "standard", "criterio-locale"))
+    if _mai:
+        v["blocca"] = "NO"                     # vince sulla parola chiave
+    elif re.search(BLOCCA_NO, v.get("riga", "")):
+        v["blocca"] = "NO"                     # la fonte lo DICHIARA
+    elif v["blocca"] != "SI":
+        v["blocca"] = "DA-DECIDERE"
+    # la famiglia: dalla riga intera dove c'e', dal titolo altrimenti
+    v["fam"] = "?"
+    for pat, k in REG_FAM:
+        if re.search(pat, v.get("riga", "") or v["titolo"], re.I):
+            v["fam"] = k
+            break
 
 # ================================================================== SCRITTURA
-COL = ["id", "alias", "titolo_breve", "fonte_principale", "stato", "blocca_run_base", "tipo"]
+COL = ["id", "alias", "titolo_breve", "fonte_principale", "stato", "blocca_run_base", "tipo",
+       "famiglia"]
 out = [TAB.join(COL)]
 for k in sorted(VOCI):
     v = VOCI[k]
     out.append(TAB.join([v["id"], ",".join(sorted(v["alias"])),
                          re.sub(r"[\t\n]", " ", v["titolo"]), v["fonte"],
-                         v["stato"], v["blocca"], v["tipo"]]))
+                         v["stato"], v["blocca"], v["tipo"], v["fam"]]))
 io.open(DEST, "w", encoding="utf-8", newline=NL).write(NL.join(out) + NL)
 
 outx = [TAB.join(["forma", "motivo", "citazioni"])]
 for tok, mot, n in ESCL:
     outx.append(TAB.join([tok, mot, str(n)]))
 io.open(DEST_X, "w", encoding="utf-8", newline=NL).write(NL.join(outx) + NL)
+
+# ================================================================== lo SMISTAMENTO per Luca
+#   ⚠ SOLO i tipi che possono bloccare un run base, e SOLO se aperti o da decidere. **`SI`/`NO`
+#   NON si riempiono a intuito: questa lista e' la BASE su cui decide Luca** (ordine suo).
+TIPI_SMIST = ("difetto", "fronte", "misura", "cura")
+SMIST = [v for v in VOCI.values()
+         if v["tipo"] in TIPI_SMIST and v["stato"] in ("aperto", "da-decidere")]
+_sm = [u"# 🧮 **SMISTAMENTO PER IL RUN BASE — la lista su cui decide Luca** *(2026-09-26)*",
+       u"",
+       u"*(**Generata** da `csv/_indice_id.py` dall'indice: nessuna riga e' ricopiata a mano.)*",
+       u"",
+       u"> ## ⚠ **`blocca_run_base` NON E' RIEMPITO A INTUITO.**",
+       u"> Qui stanno **solo** le voci che potrebbero bloccare: tipo `difetto`, `fronte`, `misura`",
+       u"> o `cura`, **e** stato `aperto` o `da-decidere`. **Le decide Luca**, riga per riga.",
+       u"> Tutto il resto — `chiuso`, `non-difetto`, `teoria`, `criterio-locale`, `assioma`,",
+       u"> `standard` — **non blocca MAI**, ed e' gia' `NO` nell'indice **per regola, non per",
+       u"> giudizio**.",
+       u"",
+       u"```",
+       u"voci nell'indice          %d" % len(VOCI),
+       u"in questo smistamento     %d   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)"
+       % len(SMIST),
+       u"```",
+       u""]
+for k, nome in FAMIGLIE + [("?", "SENZA FAMIGLIA — nessuna regola ha deciso")]:
+    vv = [v for v in SMIST if v["fam"] == k]
+    if not vv:
+        continue
+    _sm += [u"## FAMIGLIA **%s** — %s   *(%d voci)*" % (k, nome, len(vv)), u"",
+            u"| blocca? | id | che cos'e' | fonte |", u"|:--:|---|---|---|"]
+    for v in sorted(vv, key=lambda x: (x["tipo"], x["id"])):
+        _sm.append(u"| `%s` | **%s** | %s | `%s` |"
+                   % (v["blocca"], v["id"], breve_riga(v), v["fonte"].split("::")[0]
+                      .replace("doc/", "")))
+    _sm.append(u"")
+_sm += [u"---", u"",
+        u"**COSA QUESTA LISTA NON DICE:**",
+        u"- **non dice che le altre %d voci siano irrilevanti**: dice che **non possono bloccare un"
+        % (len(VOCI) - len(SMIST)),
+        u"  run base** perche' sono chiuse, sono teoria, o sono etichette locali di un sigillo.",
+        u"- **il titolo e' UNA riga**: la spiegazione sta nella fonte, e la fonte e' nella colonna.",
+        u"- **`DA-DECIDERE` e' la risposta onesta**, non una casella vuota: nessun documento dichiara",
+        u"  che quella voce blocchi o non blocchi il run base."]
+io.open(os.path.join(RADICE, "doc", "SMISTAMENTO_run_base.md"), "w", encoding="utf-8",
+        newline=NL).write(NL.join(_sm) + NL)
 
 # ================================================================== il referto
 P("=" * 104)
@@ -320,6 +469,15 @@ _bl = Counter(v["blocca"] for v in VOCI.values())
 P("  per STATO:            %s" % ", ".join("%s=%d" % x for x in _st.most_common()))
 P("  per TIPO:             %s" % ", ".join("%s=%d" % x for x in _tp.most_common()))
 P("  per BLOCCA_RUN_BASE:  %s" % ", ".join("%s=%d" % x for x in _bl.most_common()))
+_fm = Counter(v["fam"] for v in VOCI.values())
+P("  per FAMIGLIA:         %s" % ", ".join("%s=%d" % x for x in sorted(_fm.items())))
+P()
+_male = [v["id"] for v in VOCI.values()
+         if v["blocca"] == "SI" and (v["stato"] in ("chiuso", "non-difetto", "teoria")
+                                     or v["tipo"] == "criterio-locale")]
+P("  CONTROLLO di Luca: righe con stato chiuso/non-difetto/teoria (o criterio-locale) E blocca SI:")
+P("      %d   -> %s" % (len(_male), "PASS" if not _male else "FAIL: " + ", ".join(_male[:12])))
+P("  SMISTAMENTO (tipo difetto/fronte/misura/cura, stato aperto/da-decidere): %d voci" % len(SMIST))
 P()
 P("  file SALTATI perche' sono OUTPUT di questa stessa macchina: %d  (%s)"
   % (len(AUTO_SALTATI), ", ".join(os.path.basename(x) for x in sorted(AUTO_SALTATI))))

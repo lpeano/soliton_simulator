@@ -9,7 +9,7 @@ LE COLLISIONI DI ID -- stesso nome, voci DIVERSE   (2026-09-26)
     INVENTARIO_strumenti             elenca STRUMENTI, non voci
     COMPONENTI_PROMOSSE              etichette LOCALI alle sue tabelle -- `A1`-`A8` le RAGIONI di una promozione, `B1`-`B10` i FLAG candidati, `C1`-`C5` gli ESPERIMENTI -- e si citano SEMPRE qualificate: «COMPONENTI_PROMOSSE.md `B9`». **Nell'indice vanno col namespace** (`COMPONENTI:B9`), che disambigua senza toccare il documento
 
-  ID definiti: 281      IN COLLISIONE (piu' di una voce): 0
+  ID definiti: 291      IN COLLISIONE (piu' di una voce): 0
   righe SALTATE perche' in una sezione-VISTA (citano, non definiscono): 37
       es.  doc/STATO_RUN.md:631  `Z1`  -- tabella GENERATA con l'esito delle voci di RAMIFICAZIONI: le CITA
       es.  doc/STATO_RUN.md:632  `Z4`  -- tabella GENERATA con l'esito delle voci di RAMIFICAZIONI: le CITA
