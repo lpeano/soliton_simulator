@@ -19212,3 +19212,49 @@ ha fatto cosa* si e' rivelata invertita.
 **Ma il rilievo di Luca coglie un difetto reale: un commit HA lasciato un reperto incoerente, e
 nessun presidio se n'e' accorto.** -> voce **`REPERTI-IMMUTABILI`**, e ora ha un caso reale da
 cui nascere: **`e062fdb`**, non un'ipotesi.
+
+---
+
+# ✅ **`C1` PASSA NELLA FORMA COL SEGNO: `(a')` E `(b)` IN ENTRAMBI I VERSI** *(2026-09-26)*
+
+*(`csv/_seal_fork/_c1_col_segno.py` -> `csv/_seal_fork/_sig_cura_A/C1_COL_SEGNO.txt`. **Nessun
+rigiro del simulatore**: legge i json dei bracci del sigillo della cura A, blob `fb51ae80`, e
+ricalcola le pendenze con **la stessa funzione `pend` del sigillo**, copiata.)*
+
+```
+verso    differenze FIRMATE                        media     SE       |media|/SE   esito
+corti    +0.1167  +0.0535  +0.0090  -0.0247        +0.0386   0.0306   1.2640       COMPATIBILE
+lunghi   +0.0115  +0.0519  +0.1533  -0.0511        +0.0414   0.0429   0.9656       COMPATIBILE
+(b)      corti  ON 0.0510  <  /W 1.3774  (x27)  <  OFF 2.7132  (x53)
+         lunghi ON 0.0669  <  /W 0.6749  (x10)  <  OFF 1.3045  (x19)
+```
+
+## 🎯 **IL NUMERO COINCIDE CON QUELLO DEL GUARDIANO, E VA DETTO ANCHE PERCHE' COINCIDE**
+
+**Atteso da Luca dal referto: `0.97` lunghi, `1.26` corti. Misurato dallo script: `0.9656` e
+`1.2640`.** *(L'unico scarto e' un arrotondamento: `+0.0090` contro `+0.0089` sul seme 13 dei
+corti.)* **Non c'era modo di saperlo senza ricalcolarlo:** un numero d'accordo **per caso** e un
+numero d'accordo **per costruzione** si distinguono solo facendo il conto.
+
+## ⚠ **PERCHE' IL CRITERIO E' CAMBIATO: UN COLLAUDO, NON IL DATO**
+
+```
+su RUMORE PURO (4 valori N(0,s), 1e5 prove, seme fisso 20260926) -- la CURA PERFETTA:
+   con |x|      passa il 14.11 %   ->  FALLISCE l'85.89 %,  media/SE tipica 2.897
+   col SEGNO    passa l'86.13 %        (= P(|t_3| <= 2), il valore esatto)
+```
+
+> ### **La media di quantita' tutte POSITIVE non puo' essere compatibile con zero.** Il criterio
+> ### vecchio falliva quasi sempre **anche quando non c'era niente da trovare**: il suo `FAIL` sui
+> ### dati veri **non era un riscontro sulla cura, era un riscontro su se stesso.**
+
+**E il collaudo e' stato committato PRIMA di rileggere i numeri** (`aae56ba` lo strumento, `ecf1e2c`
+l'esito), **proprio perche' `P1-sexies` vieta di aggiustare un criterio dopo aver visto i dati.**
+La forma nuova **non e' piu' larga per comodita'**: e' `t` di Student con 3 gradi di liberta' contro
+la soglia `2`, e passa l'**86 %** sul nulla — **non il 100 %** — quindi un suo `FAIL` **sarebbe**
+ancora informativo.
+
+**⚠ IL LIMITE, col verso corretto:** con semi **correlati** la `SE` calcolata **sottostima** quella
+vera, `|media|/SE` e' **gonfiato**, e il criterio fallisce **piu'** spesso — **il rischio e' un
+residuo FALSO**, non un `PASS` regalato. **Un `PASS` resta informativo.** La correlazione fra i
+quattro semi **non e' misurata**.

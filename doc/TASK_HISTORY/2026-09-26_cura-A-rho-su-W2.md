@@ -125,3 +125,62 @@ chiusi a 2 semi e **non si rifanno**.
 **COSA MI FAREBBE FERMARE:** se `(a)` passa e `(b)` no — cioe' la media ON e' compatibile con zero
 **ma non piu' piccola** di quella di `/W` — allora **il criterio non distingue le due forme** e il
 `PASS` sarebbe casuale. **Si riporta, non si sceglie.**
+
+---
+
+# 🔁 **IL CRITERIO `(a)` SI CORREGGE IN `(a')`: LE DIFFERENZE SI PRENDONO COL SEGNO**
+*(rilievo di Luca, 2026-09-26; **il motivo e' un COLLAUDO, non il dato**)*
+
+## I DUE CRITERI, FIANCO A FIANCO
+
+```
+(a)   VECCHIO      media( |pend(contrasto) - pend(coppia)| )  <=  2 * SE( |...| )
+(a')  NUOVO      | media(  pend(contrasto) - pend(coppia)  ) |  <=  2 * SE( ... )
+                                      ^^^^^^^^^^^^^^^^^^ FIRMATE, senza valore assoluto
+(b)   INVARIATO    la media ON sta SOTTO quella del braccio `/W`
+```
+
+**L'unica differenza e' il VALORE ASSOLUTO**, e cambia tutto: **una media di quantita' tutte
+positive non puo' essere compatibile con zero.** Il suo valore atteso e' `> 0` **per costruzione**,
+qualunque cosa faccia la cura.
+
+## ⚠ **IL MOTIVO DEL CAMBIO E' IL COLLAUDO, NON IL DATO — e la distinzione e' il punto**
+
+`P1-sexies` vieta di aggiustare un criterio **dopo aver visto i numeri**. Qui il criterio si cambia
+perche' un **collaudo su un caso a risposta nota** dimostra che **non era soddisfacibile**, e quel
+collaudo e' stato **scritto e committato PRIMA** di rileggere i numeri veri
+*(`csv/_collaudo_criterio_zero.py`, `aae56ba`; esito `ecf1e2c`)*:
+
+```
+su RUMORE PURO -- 4 valori N(0,s), 1e5 prove, seme fisso: la CURA PERFETTA, solo dispersione
+   con |x|      passa il 14.11 %   ->  FALLISCE l'85.89 %,  media/SE tipica 2.897
+   col SEGNO    passa l'86.13 %                            (= P(|t_3| <= 2), esatto)
+```
+
+> ### **Un criterio che fallisce l'86 % delle volte quando NON c'e' niente da trovare non misura
+> ### la cura: misura se stesso.** Il suo `FAIL` sui dati veri **non era un riscontro**.
+
+**E la forma nuova non e' «piu' larga»: e' `t_3` contro `2`**, cioe' la statistica ordinaria. Passa
+l'86 % sul nulla — **non il 100 %** — quindi un suo `FAIL` **resterebbe** informativo.
+
+## ESITO, dai json GIA' SCRITTI *(nessun rigiro del simulatore)*
+
+`csv/_seal_fork/_c1_col_segno.py` -> `csv/_seal_fork/_sig_cura_A/C1_COL_SEGNO.txt`
+
+```
+verso    differenze FIRMATE                        media     SE       |media|/SE   esito
+corti    +0.1167  +0.0535  +0.0090  -0.0247        +0.0386   0.0306   1.2640       COMPATIBILE
+lunghi   +0.0115  +0.0519  +0.1533  -0.0511        +0.0414   0.0429   0.9656       COMPATIBILE
+(b)      corti  ON 0.0510 < /W 1.3774 (x27)   lunghi  ON 0.0669 < /W 0.6749 (x10)  PASS
+```
+
+**Il numero esce dallo SCRIPT e coincide con quello che il guardiano aveva calcolato dal referto**
+*(atteso `0.97` lunghi, `1.26` corti; misurato `0.9656` e `1.2640`)*. **Lo dico anche se coincide:**
+la verifica era chiesta perche' un numero d'accordo per caso e un numero d'accordo per costruzione
+si distinguono solo dichiarandolo.
+
+**⚠ E IL LIMITE, col verso GIUSTO** *(la mia prima formulazione lo aveva invertito, corretta da Luca
+in `9d9c44a`)*: con semi **CORRELATI** la `SE` calcolata dai 4 valori **SOTTOSTIMA** quella vera,
+quindi `|media|/SE` e' **GONFIATO** e il criterio fallisce **PIU'** spesso. Il rischio e' un
+**residuo FALSO**, non un `PASS` regalato: **un `PASS` resta informativo, un `FAIL` andrebbe
+guardato due volte.** **La correlazione fra i semi NON e' misurata.**
