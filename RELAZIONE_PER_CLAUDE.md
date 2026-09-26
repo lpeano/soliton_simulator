@@ -19176,6 +19176,12 @@ e questa riga esiste per accorgersene.
 **E IL DATO MISURATO E' `2.1`-`2.2 SE`**, cioe' **PIU' VICINO A ZERO del rumore puro** *(mediana
 `2.90`)*. **Il `FAIL` non era un segnale di residuo: era il criterio.**
 
-**LIMITE DICHIARATO:** il rumore del collaudo e' `N(0,s)` **indipendente**; sui dati veri i quattro
-semi potrebbero essere **correlati** *(stessa scena, stessa geometria)*, e allora la `SE` vera
-sarebbe **piu' grande** e il criterio **piu' facile**. **Non l'ho misurato.**
+**LIMITE DICHIARATO — ❌ E IL VERSO CHE AVEVO SCRITTO ERA INVERTITO (rilievo di Luca):**
+~~*«la `SE` vera sarebbe piu' grande e il criterio piu' facile»*~~.
+**SBAGLIATO.** Il criterio **usa la `SE` CALCOLATA dai 4 valori**, non quella vera. Con semi
+**CORRELATI** la `SE` calcolata **SOTTOSTIMA** quella vera *(per dati correlati positivamente
+`Var(media) > s^2/n`)*, quindi **`media/SE` e' GONFIATO** e il criterio **fallisce PIU' spesso**:
+**il rischio e' un RESIDUO FALSO**, non un criterio piu' facile.
+**E la direzione conta:** significa che un `FAIL` della forma col segno, su semi correlati,
+**potrebbe essere un artefatto della correlazione** — mentre un `PASS` resterebbe informativo.
+**Non ho misurato la correlazione fra i semi**, e questo limite resta.
