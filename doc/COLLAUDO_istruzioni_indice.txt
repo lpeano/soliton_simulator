@@ -12,4 +12,27 @@ COLLAUDO DELLE ISTRUZIONI D'USO (sezione dell'INDICE DEI DIFETTI di CLAUDE.md)  
 
   K0 la sezione dichiara fonte, 13 colonne, 5 stati e i comandi -> OK
 
-  *** NON ESEGUITO: c'erano modifiche in STAGE, e non le tocco. Lo dichiaro.
+  IL DIFETTO FINTO `QZ901`, seguendo SOLO la sezione:
+    K1 DEVE FALLIRE  solo in `STATO_RUN` ............. uscita 1   OK
+    K2 DEVE PASSARE  con la RIGA nell'indice ......... uscita 0   OK
+    K3 i comandi della sezione girano tutti:
+         python csv/_indice_id.py                     uscita 0
+         python csv/_lista_chiusa.py                  uscita 0
+         python csv/_vista_smistamento.py             uscita 0
+         python csv/_punto_della_situazione.py        uscita 0
+         python csv/_indice_id.py                     uscita 0
+         python csv/_indice_id.py --collaudo          uscita 0
+       -> OK
+    K4 il difetto finto COMPARE nello smistamento .... True   OK
+    K5 tutti i file sono tornati identici (sha1) ..... True   OK
+
+====================================================================================================
+ESITO: 6/6 PASS -- **LA SEZIONE DELL'INDICE BASTA DA SOLA**
+====================================================================================================
+
+COSA QUESTO COLLAUDO *NON* DICE:
+  - **non dice che la sezione sia CHIARA per un umano**: dice che **contiene i dati e i comandi**
+    che servono a fare il lavoro, e che quei comandi girano.
+  - **la riga finta e' costruita dalle COLONNE della sezione**, e il collaudo si ferma se
+    l'intestazione dell'indice **non coincide** con quella dichiarata: se qualcuno cambia lo
+    schema e si dimentica la sezione, **questo collaudo lo denuncia**.
