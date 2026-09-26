@@ -184,3 +184,24 @@ in `9d9c44a`)*: con semi **CORRELATI** la `SE` calcolata dai 4 valori **SOTTOSTI
 quindi `|media|/SE` e' **GONFIATO** e il criterio fallisce **PIU'** spesso. Il rischio e' un
 **residuo FALSO**, non un `PASS` regalato: **un `PASS` resta informativo, un `FAIL` andrebbe
 guardato due volte.** **La correlazione fra i semi NON e' misurata.**
+
+---
+
+# ✅✅ **CHIUSA `6/6`** *(2026-09-26)*
+
+```
+C1 (a' col segno)  PASS   |media|/SE  0.9656 lunghi   1.2640 corti     4 semi, differenze FIRMATE
+C1 (b)             PASS   ON sotto /W  x27 corti  x10 lunghi
+P1-sexies          PASS   il braccio `/W` sta fra 0.6065 e 1.4431: le popolazioni non si toccano
+C3                 PASS   flag spento byte-identico al codice PRECEDENTE (`a2a60534^`), 121 campi
+C5                 PASS   il pavimento non morde: min 0.115, cinque ordini sopra `1e-6`
+F1                 PASS   contrasto figlio/maturo 2.427 contro 2.4567 PREVISTO (scarto 1.2 %)
+F2                 PASS   |omega| figlio/maturo da x47 000 a x1.4
+```
+
+**E LA CURA E' NEL DRIVER** *(decisione di Luca)*: `--contrasto-intensivo` in **ogni** run, sigillo
+del driver **`16/16`**, **14 obbligatorie** in `csv/_cure_verificate.py`.
+
+**COSA RESTA APERTO, e non lo tocco:** `OMEGA-ETA` *(il rapporto `|omega|` figlio/maturo **sale** con
+l'eta', `1.05 -> 1.86`: **da seguire nel run base, non una cura** — ordine di Luca)* e `COPPIA-RAMP`
+*(la coppia **non porta `ramp`**: domanda, non cura)*.

@@ -19322,3 +19322,68 @@ numero era nel TITOLO.** **Una cautela scritta sotto un titolo che la contraddic
 `POTENZE-1` di `STATO_RUN`. L'ho registrata anche la' perche' Luca l'ha chiesto in entrambi i posti
 — **non** perche' ce l'avessi scritta: dire *«corretto in due posti»* lasciando credere che
 l'errore fosse in due posti sarebbe un'esagerazione nella direzione comoda.
+
+
+---
+
+# ✅✅ **CURA A CHIUSA `6/6`, E LA BOZZA DELLA LISTA CHIUSA E' PRONTA** *(2026-09-26)*
+
+```
+C1 (a' col segno)  PASS   |media|/SE  0.9656 lunghi   1.2640 corti     4 semi, FIRMATE
+C1 (b)             PASS   ON sotto /W   x27 corti   x10 lunghi
+P1-sexies          PASS   le due popolazioni non si toccano
+C3                 PASS   byte-identico al codice PRECEDENTE (`a2a60534^`), 121 campi
+C5                 PASS   pavimento: min 0.115, cinque ordini sopra `1e-6`
+F1                 PASS   2.427 contro 2.4567 PREVISTO prima del codice (1.2 %)
+F2                 PASS   |omega| figlio/maturo da x47 000 a x1.4
+```
+
+**`POTENZE-1` e' CHIUSA in `doc/STATO_RUN.md`**, e la cura vive **nel driver** —
+`--contrasto-intensivo` in ogni run, sigillo del driver `16/16`, **14 obbligatorie**.
+
+## 📋 **LA BOZZA DELLA LISTA CHIUSA: `doc/LISTA_CHIUSA.md`, GENERATA E NON RICOPIATA**
+
+*(`csv/_lista_chiusa.py`, mandato globale `0c42925` parte 1. **Nessun run.**)*
+
+```
+difetti acclarati in tabella       38
+APERTI o con CURA DERIVATA         24   <- LA LISTA
+gia' CURATI / non-difetti          14   <- restano in tabella, non si cancellano
+voci di coda non-difetto           13   <- strumenti, domande, misure da rifare
+
+per famiglia:  A 1   B 3   C 4   D 6   E 5   F 5   G 0 difetti
+               + 13 voci di coda, di cui 8 in G
+```
+
+> ### ⚠ **NON E' ANCORA UNA LISTA CHIUSA: E' UNA PROPOSTA.** Diventa la linea d'arrivo **solo
+> ### quando Luca la approva**, e finche' non lo e' **non vale il vincolo che vieta le indagini nuove**.
+
+**COSA E' GENERATO E COSA E' MIO GIUDIZIO, dichiarato nel documento stesso:** dal file vengono
+`ID`, la riga del difetto, la prova, il campo `cura` e lo stato; **mio** e' l'assegnazione alla
+**FAMIGLIA**, che sta in `FAMIGLIA_DI` — **una riga per ID**, cosi' si corregge in un posto solo.
+
+**❌❌ E DUE DIFETTI DEL MIO GENERATORE, trovati leggendo il suo output:**
+
+```
+① la regex perdeva D34 e D37    perche' portano il loro stato DOPO l'id: `| **D37** CURATO |`
+                                 -> 36 difetti invece di 38, e DUE voci SPARITE IN SILENZIO
+② un `%3d` senza argomento      la riga «APERTI o con CURA DERIVATA  %3d» stampava il segnaposto
+```
+
+> ### **Il primo e' il piu' grave, ed e' il difetto di `A9` in forma nuova: un elenco che PERDE
+> ### righe non si denuncia**, perche' il totale sembra plausibile. **L'ho visto solo perche' avevo
+> ### messo un `assert len(D) >= 30` e un controllo `SENZA FAMIGLIA`** — ma il controllo guardava
+> ### **un solo verso**. **Ora guarda anche l'inverso** *(un ID classificato che la tabella non
+> ### contiene)*, ed e' quello che avrebbe preso `D34` e `D37` subito.
+
+**⚠ E DUE COSE CHE LA BOZZA NON HA, dichiarate nel documento invece di riempirle:** la
+**DIMENSIONE** di ciascuna voce *(stimarla richiede di leggere il codice di ognuna: e' lavoro, non
+generazione)* e l'**ordine per DIPENDENZE dentro la famiglia** *(le dipendenze non stanno in un
+campo, quindi ricavarle sarebbe un giudizio mio riga per riga)*. **Il mandato le chiede entrambe:
+mancano, e lo dico.**
+
+## 🛑 **STOP, come da mandato: la lista la APPROVA Luca.**
+
+**Il PILOTA e' registrato e NON e' partito** *(scena (ii)(a), 1 seme, 600 passi, snapshot ogni 60,
+riprendibile; scopo: costo s/passo, `OMEGA-ETA` fino a `ramp = 1`, nessun crash con la cura A;
+**niente tag, numeri non pubblicabili come risultato**)*.
