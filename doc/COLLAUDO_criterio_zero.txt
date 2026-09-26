@@ -1,0 +1,42 @@
+====================================================================================================
+COLLAUDO DEL CRITERIO «COMPATIBILE CON ZERO» -- su RUMORE PURO   (2026-09-26)
+====================================================================================================
+
+  100000 prove, 4 valori per prova, seme FISSO 20260926
+  Il rumore puro e' il caso in cui **la cura e' perfetta e resta solo la dispersione fra semi**.
+
+scala s          forma        PASSA          media/SE p50   media/SE p90   lettura
+0.01             con |x|      0.1415         2.8969         5.3771         quasi sempre FALLISCE
+0.01             col SEGNO    0.8606         0.7634         2.3514         quasi sempre PASSA
+0.05             con |x|      0.1404         2.9045         5.3755         quasi sempre FALLISCE
+0.05             col SEGNO    0.8622         0.7601         2.3407         quasi sempre PASSA
+1                con |x|      0.1414         2.8990         5.3892         quasi sempre FALLISCE
+1                col SEGNO    0.8612         0.7680         2.3445         quasi sempre PASSA
+
+  ⚠ **LA SCALA `s` NON CONTA, ed e' il punto:** il criterio e' un rapporto `media/SE`, quindi
+    e' **invariante di scala**. Le tre righe per forma danno lo stesso numero a meno del
+    rumore di campionamento: **se cosi' non fosse, il collaudo sarebbe sbagliato.**
+
+====================================================================================================
+IL VERDETTO
+====================================================================================================
+  con |x|     passa il 14.11 %   ->  FALLISCE il 85.89 % delle volte SU RUMORE PURO
+  col SEGNO   passa il 86.13 %
+
+  -> **LE DUE FORME SI SEPARANO**, e la conseguenza e' netta:
+     **il `FAIL` della forma con `|x|` NON dice niente sulla cura**: quel criterio
+     fallisce anche quando NON c'e' nessun effetto residuo. **Non era soddisfacibile.**
+     La forma col SEGNO passa sul rumore puro, quindi un suo `FAIL` **sarebbe** informativo.
+
+  ⚠ **E IL NUMERO ATTESO, dichiarato PRIMA:** per 4 valori `iid` la forma col segno e'
+    **esattamente** un `t` di Student con **3 gradi di liberta'** contro la soglia `2`, quindi
+    `P(|t_3| <= 2) ~ 0.86`. **Luca scriveva «~90 % o piu'»: il valore vero e' `86 %`, e lo
+    dico invece di arrotondarlo verso l'aspettativa.** Il criterio del collaudo e' **la
+    SEPARAZIONE** (`< 20 %%` contro `> 80 %%`), e quella c'e'.
+
+COSA QUESTO COLLAUDO *NON* DICE:
+  - **non dice che la cura funzioni**: dice che **il criterio vecchio non poteva dirlo**.
+  - non dice che la forma col segno sia l'unica sana: dice che **e' soddisfacibile**.
+  - il rumore e' `N(0, s)` **indipendente**: sui dati veri i quattro semi potrebbero essere
+    correlati *(stessa scena, stessa geometria)*, e allora la `SE` vera sarebbe piu' grande.
+    **Non lo misuro qui**, e va detto.

@@ -19134,3 +19134,48 @@ nessuna versione corretta.
 Ho dovuto **cancellare a mano** i json dei bracci `off_*`: portavano **il blob giusto con la
 configurazione sbagliata**. **Il blob certifica il CODICE, non l'ARGV**, e la ripresa si fida del
 blob. **-> voce `RIPRESA-ARGV` in coda.**
+
+---
+
+# ✅ **PASSO 1 — IL CRITERIO CON `|x|` NON ERA SODDISFACIBILE: dimostrato su rumore puro** *(2026-09-26)*
+
+*(`csv/_collaudo_criterio_zero.py`, referto `doc/COLLAUDO_criterio_zero.txt`. Committato **prima**
+di rileggere i numeri veri, come Luca ha ordinato.)*
+
+```
+scala s   forma        PASSA     media/SE p50   media/SE p90
+0.01      con |x|      0.1415    2.8969         5.3771
+0.01      col SEGNO    0.8606    0.7634         2.3514
+0.05      con |x|      0.1404    2.9045         5.3755
+0.05      col SEGNO    0.8622    0.7601         2.3407
+1         con |x|      0.1414    2.8990         5.3892
+1         col SEGNO    0.8612    0.7680         2.3445
+
+con |x|     passa il 14.11 %   ->  FALLISCE l'85.89 % su RUMORE PURO
+col SEGNO   passa l'86.13 %
+```
+
+> ### **IL `FAIL` DELLA FORMA CON `|x|` NON DICEVA NIENTE SULLA CURA:** quel criterio fallisce
+> ### l'**85.89 %** delle volte **anche quando non c'e' nessun effetto residuo**. **Non era
+> ### soddisfacibile**, e l'errore e' mio: l'ho scritto io.
+
+**E I NUMERI DI LUCA ERANO ESATTI:** aveva detto *«~86 % delle volte, media/SE tipica 2.9»* —
+misurato **`85.89 %`** e **`2.897`**.
+
+**⚠ E SUL «~90 % o piu'» DELLA FORMA COL SEGNO: il valore vero e' `86.13 %`, non `90`**, e lo dico
+invece di arrotondarlo verso l'aspettativa. **E' esatto per costruzione:** per 4 valori `iid` quella
+forma e' **esattamente** un `t` di Student con **3 gradi di liberta'** contro la soglia `2`, e
+`P(|t_3| <= 2) = 0.8607`. **Il criterio del collaudo era LA SEPARAZIONE** (`14 %` contro `86 %`),
+**e quella c'e'.**
+
+**UN CONTROLLO IN PIU', che doveva essere vero per costruzione:** il criterio e' un rapporto
+`media/SE`, quindi **invariante di scala** — e le tre scale danno lo stesso numero a meno del
+campionamento (`0.1415`, `0.1404`, `0.1414`). **Se cosi' non fosse, il collaudo sarebbe sbagliato**,
+e questa riga esiste per accorgersene.
+
+**E IL DATO MISURATO E' `2.1`-`2.2 SE`**, cioe' **PIU' VICINO A ZERO del rumore puro** *(mediana
+`2.90`)*. **Il `FAIL` non era un segnale di residuo: era il criterio.**
+
+**LIMITE DICHIARATO:** il rumore del collaudo e' `N(0,s)` **indipendente**; sui dati veri i quattro
+semi potrebbero essere **correlati** *(stessa scena, stessa geometria)*, e allora la `SE` vera
+sarebbe **piu' grande** e il criterio **piu' facile**. **Non l'ho misurato.**
