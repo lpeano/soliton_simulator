@@ -134,6 +134,23 @@ def pre_commit(msg_file=None):
     return 1
 
 
+def sentinella():
+    """Un ID che **non e' nell'indice**, scelto ORA.
+
+    ⚠ UNA SENTINELLA SCRITTA NEL CODICE NON REGGE, e il perche' e' misurato **due volte**:
+    `ZZ999` e' finito nel **referto** del collaudo, `QQ777` nella **relazione** -- e l'indice legge
+    i referti e la relazione. Al giro dopo la sentinella **era un ID noto**, e i due casi che DEVONO
+    fallire **passavano**. Saltare i propri referti non basta: **il racconto di un collaudo e' esso
+    stesso un documento.** Percio' la sentinella si sceglie a run time e si **verifica** ignota.
+    """
+    for k in range(700, 999):
+        cand = "QX%d" % k
+        ign, _amb = esamina(cand)
+        if ign:
+            return cand
+    raise RuntimeError("nessuna sentinella ignota fra QX700 e QX998: l'indice le contiene tutte")
+
+
 def collaudo():
     _presidio.avvia(__file__)
     noti, escl, amb = carica()
@@ -152,15 +169,24 @@ def collaudo():
     P()
     _un_noto = sorted(x for x in noti if re.fullmatch(r"D\d\d", x))[:1]
     _un_escl = sorted(escl)[:1]
+    _sent = sentinella()
+    _sent2 = sentinella.__wrapped__ if False else None
+    for _k2 in range(700, 999):                  # una seconda sentinella, diversa dalla prima
+        _c2 = "QX%d" % _k2
+        if _c2 != _sent and esamina(_c2)[0]:
+            _sent2 = _c2
+            break
+    P("  sentinelle scelte ORA e verificate ignote: `%s`, `%s`" % (_sent, _sent2))
+    P()
     casi = [
         ("DEVE PASSARE", "un ID noto: `%s`" % (_un_noto[0] if _un_noto else "D01"),
          "la riga cita `%s` e basta" % (_un_noto[0] if _un_noto else "D01"), True),
         ("DEVE PASSARE", "una forma ESCLUSA: `%s`" % (_un_escl[0] if _un_escl else "BYTE-INERTE"),
          "il commit dice %s" % (_un_escl[0] if _un_escl else "BYTE-INERTE"), True),
-        ("DEVE FALLIRE", "un ID inventato: `ZZ999`", "questa riga cita ZZ999, che non esiste",
-         False),
-        ("DEVE FALLIRE", "un difetto plausibile ma assente: `D97`",
-         "il difetto D97 sarebbe nuovo", False),
+        ("DEVE FALLIRE", "una sentinella ignota: `%s`" % _sent,
+         "questa riga cita %s, che non esiste" % _sent, False),
+        ("DEVE FALLIRE", "una seconda sentinella: `%s`" % _sent2,
+         "e questa cita %s" % _sent2, False),
     ]
     esiti = []
     for atteso, che, testo, deve_passare in casi:
@@ -192,7 +218,7 @@ def collaudo():
         shutil.copy(_vivo, _vivo + ".collaudo.bak")
         try:
             with io.open(_vivo, "a", encoding="utf-8", newline=NL) as _f:
-                _f.write(NL + "<!-- collaudo del presidio: QQ777 non esiste -->" + NL)
+                _f.write(NL + "<!-- collaudo del presidio: %s non esiste -->" % _sent + NL)
             subprocess.run(["git", "add", "--", "doc/LISTA_CHIUSA.md"], cwd=RADICE,
                            capture_output=True, text=True)
             _h = subprocess.run([sys.executable, os.path.join(RADICE, "csv", "_hook_presidi.py"),
@@ -203,10 +229,10 @@ def collaudo():
                            capture_output=True, text=True)
             shutil.move(_vivo + ".collaudo.bak", _vivo)
         _sha1 = hashlib.sha1(io.open(_vivo, "rb").read()).hexdigest()
-        _visto = "QQ777" in (_h.stderr or "") or "Q777" in (_h.stderr or "")
+        _visto = _sent in (_h.stderr or "") or _sent[1:] in (_h.stderr or "")
         _ok_e2e = (_h.returncode == 1 and _visto and _sha1 == _sha0)
-        P("  DEVE FALLIRE  il HOOK VERO su una riga con `QQ777`     -> uscita %d, ID segnalato %s"
-          % (_h.returncode, _visto))
+        P("  DEVE FALLIRE  il HOOK VERO su una riga con `%s`      -> uscita %d, ID segnalato %s"
+          % (_sent, _h.returncode, _visto))
         P("                il documento e' tornato identico: %s" % (_sha1 == _sha0))
         P("                esito: %s" % ("PASS" if _ok_e2e else "FAIL"))
         esiti.append(_ok_e2e)

@@ -19758,3 +19758,53 @@ perche' e' una precisazione di merito, non un'eccezione che mi concedo.**
 `a6e105c`, e l'ho visto perche' l'avviso era nell'output.** È la **trappola CRLF del par.5-quinquies**
 in veste nuova: **un file nuovo con un'estensione nuova non e' coperto da una regola scritta per le
 estensioni vecchie.**
+
+
+---
+
+# ❌❌ **DUE DIFETTI DEL PRESIDIO DELL'INDICE, TROVATI DAL PRESIDIO STESSO** *(2026-09-26)*
+
+**Li relaziono a parte perche' sono arrivati DOPO il messaggio del commit `42942cc`**, e un riscontro
+fuori dal repo non esiste *(par.5-ter)*.
+
+## ① **IL PRESIDIO HA BLOCCATO IL MIO COMMIT, E AVEVA RAGIONE**
+
+```
+[INDICE] *** COMMIT RIFIUTATO ***
+  ID citati nel MESSAGGIO e non nell'indice: SETTE-OTTO
+```
+
+`SETTE-OTTO` e' un **numerale a parole**, non un ID — ma **ha la forma di un ID**, e il presidio non
+puo' saperlo. **L'ho chiuso classificando, non con l'eccezione:** i numerali a parole
+*(`UNO`…`MILLE`, in testa o in coda)* sono ora fra gli **ESCLUSI col motivo**, e l'elenco passa da
+**39** a **41** forme.
+
+> ### **La via d'uscita `[SENZA-INDICE: ...]` c'era, ed e' il punto: NON l'ho usata.** Un'eccezione
+> ### avrebbe fatto passare quel commit e lasciato il difetto per il prossimo.
+
+## ② **L'INDICE SI NUTRIVA DEI PROPRI OUTPUT, E IL COLLAUDO SI AUTOCONFERMAVA**
+
+**Misurato:** dopo la prima rigenerazione, il collaudo dava **`FAIL`** su **entrambi** i casi che
+devono fallire:
+
+```
+DEVE FALLIRE  un ID inventato: `ZZ999`                 -> passa    FAIL
+DEVE FALLIRE  un difetto plausibile ma assente: `D97`  -> passa    FAIL
+```
+
+**Perche':** il referto del collaudo **stampa** `ZZ999` e `D97`; lo sweep dell'indice legge **tutti**
+i `.txt` di `doc/`, quindi li trovava, li metteva nell'indice come *«citati e mai definiti»*, e al
+giro successivo **erano ID noti**.
+
+> ### **Uno strumento che si nutre dei propri output si AUTOCONFERMA.** E' la stessa famiglia del
+> ### criterio auto-referenziale di stamattina *(la soglia calcolata dai dati che deve giudicare)*,
+> ### in veste di **circolarita' fra un indice e il suo collaudo**.
+
+**Cura:** lo sweep **salta i cinque file che sono output di questa stessa macchina**
+*(`INDICE_ID*`, `COLLISIONI_ID`, `RINOMINE_ID`, `COLLAUDO_presidio_indice`,
+`INVENTARIO_lettori_id`)*, e **il referto lo dichiara col conteggio**. Dopo la cura: **`5/5 PASS`**,
+end-to-end incluso.
+
+**⚠ E IL COLLAUDO SI ERA DICHIARATO INCOMPLETO, invece di dare per buono un ramo non provato:**
+*«END-TO-END NON ESEGUITO: c'erano modifiche in STAGE, e non le tocco»*. **E' quella riga che mi ha
+fatto rigirare il collaudo ad albero pulito.**
