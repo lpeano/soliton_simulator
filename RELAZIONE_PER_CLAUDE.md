@@ -2018,3 +2018,21 @@ con l'escape `barra-n` **dentro un heredoc**, e l'escape **e' morto** — e' div
 vero, l'ancora non si e' trovata *(`0 volte`)* e lo script **si e' fermato**. **`L-PATCH` vieta
 esattamente questo**, e il conteggio dell'ancora di `P1-quater` **ha impedito il danno invece di
 segnalarlo dopo**. Riscritte con `chr(92) + "n"`.
+
+## 🧪 IL SIGILLO DI `DRIVER-SCENA-II` — **committato PRIMA di girare**
+
+`csv/_seal_fork/_sigillo_scena_ii.py`, i **cinque criteri del task history**. **Il presidio del
+timbro ha rifiutato di girarlo finche' non era committato** — *«un sigillo certifica un BLOB, e
+questo blob non e' nel repo»* — e ha ragione: e' par.2 punto 6.
+
+> ### ⚠ **`T1` NON PUO' ESSERE UN CONFRONTO DI RUN, E LO DICHIARO NEL SIGILLO STESSO.**
+> **Il ramo di default del driver NON GIRA:** `N-MASSE` con `SEMINA_LAM` si ferma (`M0c`) — **e
+> non per la cura: non girava GIA' PRIMA.** Confrontare due run morti darebbe un **`PASS` vuoto**,
+> che e' `max|A-B| = 0` per **mancanza di confronto** (`STANDARD 2`). Quindi `T1` confronta **cio'
+> che il default PRODUCE**: l'**argv elemento per elemento** contro quella del driver **estratto
+> dal PADRE del commit** che ha introdotto `--scena=` *(con l'asserzione che non lo contenga:
+> `H-P8`)*, **piu' l'esito**.
+
+**E `T2` non si accontenta dei due numeri:** verifica che l'**AST di `_semina_masse_coerenti` sia
+IDENTICO** a quello di prima. **La scena non e' stata toccata** — il difetto era a monte, e questa
+e' la prova, non l'affermazione.
