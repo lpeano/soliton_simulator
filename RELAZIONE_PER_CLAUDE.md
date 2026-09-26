@@ -19471,3 +19471,64 @@ si esclude per sezione)*, ed e' **la stessa forma del difetto di partenza, vista
 - **`405` in lista NON vuol dire «405 difetti da curare»**: vuol dire che **405 righe non portano un
   marchio di chiusura**. Fra loro ci sono criteri, previsioni e voci di lavoro. **La potatura la fa
   Luca**, ed e' il senso della parola *approvazione*.
+
+
+---
+
+# 🧭 **PROPOSTA DI LUCA: UN REGISTRO STRUTTURATO AL POSTO DELLE TABELLE** *(valutazione, 2026-09-26)*
+
+*(`doc/VALUTAZIONE_registro_strutturato.md`. **Nessuna migrazione e' cominciata: decide Luca.**)*
+
+**LA DIAGNOSI DI LUCA E' GIUSTA, e la ragione e' piu' forte di come l'avevo capita io.** Il parser
+di oggi deve **INFERIRE dalla prosa tre cose che sono DECISIONI**:
+
+```
+① che cosa e' UNA VOCE     -> inferito dalla CONTIGUITA' delle righe   ->  6 righe su 43
+② qual e' il suo STATO     -> inferito dalle PAROLE   ->  `VALE SEMPRE` = chiusa E aperta
+③ a quale FAMIGLIA sta     -> inferito da parole chiave  ->  111 senza famiglia, `CLI-1` in `A`
+```
+
+> ### **Tutti e tre i difetti di oggi sono fallimenti di INFERENZA, non errori di codice.** Un campo
+> ### **dichiarato** non si puo' inferire male: si puo' solo sbagliare a scriverlo, **e allora si
+> ### vede nel diff.**
+
+## ✅ IL MIO PARERE, IN QUATTRO PUNTI
+
+**① SI', ed e' meglio — ma consiglio UN FILE PER VOCE** *(`doc/difetti/<ID>.yaml`)* invece di un
+`difetti.yaml` unico: **git da' una storia PER DIFETTO** *(e in questo repo la prova di un difetto
+**e'** un commit)*, e *«nessuna voce si cancella»* diventa **`git diff --diff-filter=D`**, cioe' un
+fatto di git invece di un controllo di parsing. **`PyYAML 6.0.3` c'e' gia'**, quindi il loader
+stretto non aggiunge dipendenze. **JSON lo scarto** *(niente commenti, diff peggiore)*; **il
+Markdown «macchina-primo» lo scarto per `A9`**: non toglie l'inferenza e la sua regola dipende dal
+ricordarsene — **ed e' gia' stata rotta**.
+
+**② I RISCHI, e il piu' grosso NON e' la perdita di voci:** e' **`R4`, LA COLLISIONE DI ID**, e
+**l'ho misurata oggi**: **`A3` sono DUE voci diverse** — in `RAMIFICAZIONI` *«FDT del solo
+scuotimento»*, **chiusa per dimostrazione**; in `STATO_RUN` *«il disegno esce dalla dinamica»*,
+**aperta**. Idem `B5`, `M1`, `M2`, `C21`. **Senza ID namespaced la migrazione fonde due cose e
+chiude un fronte aperto in silenzio.**
+Gli altri: **`R1`** perdita di voci *(controllo: il parser di oggi resta come **secondo lettore
+indipendente**, e si fa il `diff` delle due letture)*; **`R2`** stato scelto male *(controllo: il
+campo **`stato_da`** con la **frase verbatim**, e **`da-decidere`** come stato legittimo)*; **`R3`**
+due verita' *(controllo: le tabelle vecchie si **RIGENERANO** dentro marcatori e **il hook rifiuta
+una modifica a mano dentro i marcatori** — l'intestazione «fa fede» da sola e' una nota, `A9`)*;
+**`R5`** lo sweep e' esso stesso un parser su prosa — **converte ignoti in CONTATI, non li
+elimina**.
+
+**③ IL COSTO, coi numeri MISURATI separati dalle stime.** Misurato: **`436` ID distinti** in
+**`217`** file `.md` *(`D` 45, `Z` 137, `S` 23, `C` 28, `B` 11, `A` 13, `E` 4, `M` 5, nomi col
+trattino **170**)*, e dei nomi col trattino **circa META' NON E' UN ID** *(`BYTE-INERTE`,
+`NON-ABELIANO`, `ON-OFF`, `NO-OP`, `PURE-READ`, `PRE-FORK`…)*, quindi l'elenco `ESCLUSI` vale
+**~80-90 decisioni una tantum**. Stimato: **`~250-320` voci**, **`~7-10 h`** in 6-8 passi, di cui
+**`3-5 h` di REVISIONE A MANO**. **Quella parte non la comprimo:** comprimerla vorrebbe dire
+produrre trecento campi «plausibili», cioe' **il difetto di oggi moltiplicato per trecento**.
+
+**④ NIENTE E' A META', E NIENTE VA BUTTATO.** Il generatore e' **finito e collaudato `2/2`**
+*(`f4bc082`)*. Della sua materia: **la lettura delle cinque fonti diventa l'IMPORTATORE**; il
+**collaudo resta identico** *(collauda una vista, e le viste restano)*; **le 15 voci di Luca restano
+il criterio bloccante**, e diventano il controllo di completezza della migrazione; **`REG_FAM` — le
+famiglie per parola chiave — MUORE, e deve morire**: e' il pezzo piu' debole, e sopravvive solo per
+**proporre** una famiglia da rivedere a mano. **L'unico pezzo nuovo di macchina e' lo sweep.**
+
+## ⛔ **E MI FERMO QUI: non ho creato nessun `.yaml`.** Il criterio di chiusura della voce e' la
+scelta di Luca fra **(a)** un file per voce, **(b)** un `difetti.yaml` unico, **(c)** no / non ora.
