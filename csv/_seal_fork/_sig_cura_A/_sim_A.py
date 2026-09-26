@@ -3480,9 +3480,21 @@ class Rete:
                 #   E la scomposizione lo conferma dall'altro lato: il termine `W^2` (`T2`) e' il
                 #   **`107`-`114 %`** del divario dei figli, mentre il `peq` EREDITATO (`T3`) e'
                 #   **`-3` a `-6 %`**, cioe' va nella direzione OPPOSTA.
-                #   ⚠ **RESTA FUORI, e va detto:** la coppia **non porta `ramp`** (`^0.15`,
-                #   `^0.04`), quindi l'asimmetria sui figli e' `0` contro `2.8` e **`W^2` ne toglie
-                #   `2`: resta `0.8`.** Questa cura non chiude quello.
+                #   ❌ **CORREZIONE DEL 2026-09-26 (rilievo di Luca) — ERRORE DI UNITA' MIO.**
+                #   **Cio' che avevo scritto:** *«l'asimmetria sui figli e' `0` contro `2.8` e `W^2`
+                #   ne toglie `2`: **resta `0.8`**. Questa cura non chiude quello.»*
+                #   **SBAGLIATO: ho sottratto 2 potenze di `W` da 2.8 potenze di `ramp`** — due basi
+                #   diverse. **Il conto giusto:** `W ~ ramp^1.37`, quindi `W^2 ~ ramp^2.74`, e
+                #   `inerzia/W^2 ~ ramp^(2.80-2.74) = ramp^0.06`; la coppia va come `ramp^0.10`,
+                #   quindi il residuo e' **`0.06 - 0.10 = -0.04`, cioe' ZERO entro il rumore.**
+                #   **E IL DATO LO CONFERMAVA GIA':** `exp(T1+T3)` e' **piatto** su eta' `2..14`
+                #   (`x1.00`-`x1.08`) mentre `ramp` cresce `x5.20`. Con `0.8` potenze residue
+                #   varierebbe di **`x3.74`**; con `0.06`, di `x1.10`. **La piattezza esclude `0.8`
+                #   di un fattore quattro, e stava nel referto che avevo scritto io.**
+                #   ⇒ **`W^2` non e' una correzione parziale: chiude l'esponente.** La frase
+                #   «questa cura non chiude quello» era **troppo PESSIMISTA**, non troppo ottimista.
+                #   *(Quello che resta davvero fuori: la coppia non porta `ramp`, e **questo non e'
+                #   un difetto dell'inerzia** — e' una domanda sul termine `_tq*ramp`.)*
                 #   ⚠ E IL RISCHIO VERO: dividere DUE volte abbassa l'inerzia due volte, quindi
                 #   **il pavimento `1e-6` e' il criterio da guardare** (`C5`). Con `/W` non mordeva
                 #   (min `0.0655`, quattro ordini sopra).
