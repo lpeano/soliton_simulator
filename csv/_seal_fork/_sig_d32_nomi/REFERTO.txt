@@ -1,0 +1,49 @@
+========================================================================================================
+SIGILLO DI `D32` -- una RINOMINA non cambia un bit   (12 passi per braccio)
+========================================================================================================
+
+  N4  L'ANCORA -- il codice di PRIMA dal PADRE del commit di `pos_torsione`
+        commit che l'ha introdotto ......... 77e888ea   (si usa il suo PADRE)
+        blob del file estratto ............ 437632bf   e NON contiene `pos_torsione`
+
+  N1/N2  DUE PROCESSI, uno per braccio (`STANDARD 1`)
+        PRIMA  n 12814  archi 471143   campi firmati 214
+        DOPO   n 12814  archi 471143   campi firmati 214
+        stesso n, stessi archi, stessi campi ... True
+        campi confrontati 214   DIVERSI 0 []
+
+  N5  IL BLOCCO RINOMINATO HA GIRATO  (senno' `N1` passa a VUOTO)
+        `_rep_taupp_tot` (conta `size(pos_torsione)`)  PRIMA 5653716   DOPO 5653716
+        eventi di mitosi                              PRIMA -1   DOPO -1
+        > 0 su entrambi i bracci, e UGUALI ... True
+
+  N3  `pos_torsione` NON E' USATA NEL RAMO CHE GIRA  (per AST, non per `grep`)
+        else (SPENTO)  :6017
+        else (SPENTO)  :6113
+        usi nel ramo ACCESO ................ 0   (atteso 0)
+        usi nel ramo SPENTO ................ 2   (sono il difetto di `D32`,
+                                                 PROPOSTI per la rimozione)
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 79
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 79.
+
+
+========================================================================================================
+  N4  ancora al PADRE, asserita                  PASS
+  N1  byte-identico (0 campi diversi)            PASS
+  N2  il confronto NON e' vuoto                  PASS
+  N5  il codice rinominato HA girato             PASS
+  N3  nessun uso nel ramo che gira               PASS
+SIGILLO: 5/5
+========================================================================================================
+
+COSA QUESTO SIGILLO *NON* DICE:
+  - **non dice che i nomi nuovi siano i nomi GIUSTI**: dice che non cambiano un bit, e che
+    `pos_torsione` non e' usata come tempo nel ramo che gira.
+  - **`N3` guarda il ramo `else`, e lo trova**: quegli usi CI SONO ancora, e sono il
+    difetto. Sono **proposti** per la rimozione (`STANDARD 10`), non tolti.
+  - **12 passi non sono un run**: bastano a far girare la mitosi, non a dire fisica.
+  - **e un passo sono CINQUE chiamate, non `step()`**: con il solo `step()` `mitosi()` gira ZERO volte, e `N1` misurerebbe codice mai eseguito.

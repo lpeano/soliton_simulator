@@ -2316,3 +2316,65 @@ DEVE PASSARE  l'indice VERO (771 voci) -> PASS
 
 **E i controlli del riordino restano 5/5**: `CLAUDE.md` a **370 righe** *(tetto 400)*, con la riga
 nuova nella sezione dell'indice; il collaudo di quella sezione **6/6**, invariato.
+
+---
+
+# ✅ **`D32` E' CHIUSO** — i tre «tempi propri» erano tre grandezze *(2026-09-27)*
+
+> **Decisione di Luca:** *«il tempo proprio del sistema e' `r` (e `dt_e` sull'arco); `d/cs` e' il
+> TEMPO-LUCE, grandezza diversa e legittima.»*
+
+**Il difetto non era che fossero diverse: era che si chiamassero allo stesso modo.** `tau_pp` non
+e' un tempo affatto — e' `1 + avv/PHI_CRIT`, **una POSIZIONE sull'asse della torsione**, un numero
+puro. **Rinominata `pos_torsione`**, con `pos_soglia`/`pos_tetto`/`tors_nodo`/`grad_modula` e i
+**sette commenti** che dicevano *«tempo proprio»* corretti uno per uno.
+
+**VERIFICATO DAL SORGENTE (per AST, non per `grep`):** con `TEMPO_UNICO_MITOSI` **acceso** — che il
+driver accende in ogni run — gli usi di `pos_torsione` **come tempo** sono **`0` nel ramo che gira**
+e **`2` nel ramo `else`**.
+
+```
+SIGILLO 5/5
+N4  ancora al PADRE del commit di `pos_torsione`, e il file estratto NON lo contiene
+N1  byte-identico: 214 campi firmati, 0 diversi          N2  stesso n, stessi archi
+N5  `_rep_taupp_tot` = 5 653 716 su ENTRAMBI i bracci -> il codice rinominato HA GIRATO
+N3  usi nel ramo ACCESO 0 (atteso 0), nel ramo SPENTO 2 (il difetto, PROPOSTO)
+```
+
+## ❗ DUE ERRORI MIEI IN QUESTO GIRO, E LI HA PRESI ENTRAMBI `N5`
+
+**① `net.step()` NON E' UN PASSO, e `mitosi()` girava ZERO volte.** Il braccio del sigillo
+avanzava con `for _ in range(passi): net.step()`. **MISURATO con una spia sul metodo: `0` chiamate
+a `mitosi()` in 14 giri**, e `_rep_taupp_tot` **assente** — cioe' **`N1` misurava la byte-identita'
+di codice mai eseguito**. Ora il braccio fa **le cinque chiamate del driver**
+*(`passo_test`; poi `scuoti_vuoto`, `step`, `mitosi`, `rilassa_disegno`, `memoria_hebbiana_moto`)*.
+**E' un difetto GIA' SCRITTO nel repo** — *«`net.step()` non e' un passo: sono CINQUE chiamate»*,
+2026-09-25, **`24` script colpiti** — **e il mio sigillo era il venticinquesimo.**
+
+**② `N5` non l'avevo previsto io: l'ho aggiunto perche' `n` non cambiava.** Senza `N5` questo giro
+avrebbe portato **«4/4 PASS»** su un sigillo che **non provava niente**. *(`P1-sexies`: il caso che
+deve fallire e' il piu' importante — e qui il caso che DEVE fallire era «il codice non ha girato».)*
+
+## ⚠ UNA RINOMINA CHIESTA CHE NON SI POTEVA FARE COM'ERA
+
+Luca ha chiesto `grad_tau -> grad_torsione`. **Col flag ACCESO quel gradiente e'
+`|r_nodo[i] - r_nodo[j]|`: il gradiente di `r`, IL TEMPO PROPRIO VERO**; e' della **torsione solo a
+flag spento**. **Un nome vale per un ramo e mente sull'altro** — ed e' *esattamente* il difetto che
+`D32` descrive, ripetuto col segno opposto. Il nome al punto d'uso dice il **RUOLO**
+(**`grad_modula`**), e **ogni ramo dichiara il suo contenuto**. **Se preferisci il tuo nome, si
+cambia con una riga della tabella in `csv/_patch_d32_nomi.py`.**
+
+## I rami a flag spento: **PROPOSTI, non tolti** (`STANDARD 10`)
+
+Togliere i due usi **toglierebbe una legge** *(il ritmo finto `1/pos_torsione`)* senza aggiungerne,
+e `STANDARD 10` e' a favore. **Ma quel ramo e' anche il braccio OFF che rende misurabile la cura**,
+e toglierlo perderebbe la **byte-identita' a flag spento** *(par.2, punto 1)*. **Non ho toccato
+niente.**
+
+## ⚠ `Z117` NON POTEVA «RESTARE APERTA»: ERA GIA' CHIUSA, E SU UN'ALTRA COSA
+
+**`Z117` nell'indice e' `chiuso`**, e riguarda **il wrap a `4pi` di `ritmo()`** *(cioe' `D34`)*;
+**`REGISTRO_FISICA` cita `Z117` anche per IL PAVIMENTO** — **un ID per DUE cose**, la stessa
+collisione che l'indice esiste per curare. Il pavimento ha quindi **una voce propria**, aperta:
+**`RITMO-PAVIMENTO`**, col criterio di chiusura *(e' un vincolo fisico dichiarato o una difesa?
+`A11`)*.
