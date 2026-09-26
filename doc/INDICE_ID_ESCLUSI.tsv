@@ -60,3 +60,5 @@ INSIEME-INSIEME	locuzione del testo: `distanza INSIEME-INSIEME` e' il nome di un
 D021	ID SINTETICO del collaudo di `INDICE-LEGGERO`: esiste solo dentro un indice finto, per provare che `--cerca D02` NON lo trova. Non e' una voce del repo	0
 DE-DUPLICATI	locuzione del testo (il conteggio dei titoli de-duplicati), non un identificatore	0
 DE-INDENTARE	verbo della prosa (togliere indentazione), non un identificatore	0
+ESENTE-H-P9	marcatore di esenzione al presidio H-P9, non un identificatore	0
+ESENTE-H-P	pezzo del marcatore `ESENTE-H-P<n>`, non un identificatore	0

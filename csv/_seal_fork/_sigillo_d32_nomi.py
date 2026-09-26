@@ -81,7 +81,7 @@ BRACCIO = '''# -*- coding: utf-8 -*-
 import hashlib, json, os, sys
 import numpy as np
 sys.path.insert(0, os.path.join(%(rad)r, "csv"))
-import _cli_flag
+import _cli_flag, _passo
 _S0, argv = _cli_flag.argv_del_driver(dest=os.path.join(%(rad)r, "csv", "_test_fork",
                                                         "_scarto_cli"))
 S, a = _cli_flag.carica_dal_cli(argv, nome="sim_n1", sim=%(sim)r)
@@ -89,14 +89,13 @@ S._NMASSE_VIDEO["n"] = max(2, int(getattr(a, "nmasse", 2)))
 S._NMASSE_VIDEO["sep"] = float(getattr(a, "sep", 3.0))
 S._NMASSE_VIDEO["size"] = None
 S.avvia_test("MASSE-COERENTI")()
-# LE CINQUE CHIAMATE DEL DRIVER, copiate da `update()` -- NON `net.step()` da solo.
-#   `net.step()` NON E' UN PASSO: `mitosi()` e' una delle altre quattro, e con il solo
-#   `step()` viene chiamata ZERO volte (MISURATO: 0 chiamate in 14 giri). Un sigillo che
-#   avanzasse con `step()` misurerebbe la byte-identita' di un codice MAI ESEGUITO.
+# ⚠ `passo_pieno`, NON le cinque chiamate A MANO: la prima correzione le ricopiava, cioe'
+#   aggiungeva il ventiseiesimo posto in cui quell'ordine vive CABLATO. `_passo.passo_pieno`
+#   LEGGE l'ordine dal codice e RIFIUTA di girare se simulatore e driver divergono.
+#   (`net.step()` da solo chiamava `mitosi()` ZERO volte: misurato, 0 in 14 giri.)
 S.passo_test()
 for _ in range(%(passi)d):
-    S.scuoti_vuoto(S.net); S.net.step(); S.net.mitosi()
-    S.net.rilassa_disegno(); S.net.memoria_hebbiana_moto()
+    _passo.passo_pieno(S, S.net)
 o = {"n": int(S.net.n), "archi": int(len(S.net.d)), "firme": {},
      "taupp_tot": int(getattr(S.net, "_rep_taupp_tot", 0)),
      "mitosi_eventi": int(getattr(S.net, "_mit_eventi", -1))}
@@ -210,7 +209,18 @@ if __name__ == "__main__":
         esiti.append(("N5  il codice rinominato HA girato", ok5))
 
     # ------------------------------------------------------------------ N3
+    # ⚠ `N3` HA CAMBIATO SIGNIFICATO, e va detto invece di lasciarlo passare: dopo
+    #   `CURA2-STRUTTURALE` i `if TEMPO_UNICO_MITOSI` NON ESISTONO PIU', quindi la domanda
+    #   «quanti usi nel ramo acceso?» ha risposta 0 **per assenza del ramo**, non per la
+    #   cura dei nomi: sarebbe un PASS vuoto. Ora il criterio e' PIU' FORTE -- zero rami,
+    #   e `pos_torsione` usata SOLO per il segno.
     usi = n3_dall_ast()
+    import ast as _a3
+    _src3 = io.open(os.path.join(RADICE, SIM), encoding="utf-8").read()
+    _mit3 = next((x for x in _a3.walk(_a3.parse(_src3))
+                  if isinstance(x, _a3.FunctionDef) and x.name == "mitosi"), None)
+    _rami3 = [x.lineno for x in _a3.walk(_mit3) if isinstance(x, _a3.If)
+              and isinstance(x.test, _a3.Name) and x.test.id == "TEMPO_UNICO_MITOSI"]
     P("")
     P("  N3  `%s` NON E' USATA NEL RAMO CHE GIRA  (per AST, non per `grep`)" % NOME_NUOVO)
     if usi is None:
@@ -220,7 +230,9 @@ if __name__ == "__main__":
         for ramo, riga in usi:
             P("        %-14s :%d" % (ramo, riga))
         acceso = [x for x in usi if x[0].startswith("if")]
-        ok3 = (len(acceso) == 0)
+        ok3 = (len(acceso) == 0 and len(_rami3) == 0)
+        P("        `if TEMPO_UNICO_MITOSI` nel codice .. %d   (atteso 0: `CURA2-STRUTTURALE`"
+          " li ha TOLTI)" % len(_rami3))
         P("        usi nel ramo ACCESO ................ %d   (atteso 0)" % len(acceso))
         P("        usi nel ramo SPENTO ................ %d   (sono il difetto di `D32`,"
           % len([x for x in usi if x[0].startswith("else")]))

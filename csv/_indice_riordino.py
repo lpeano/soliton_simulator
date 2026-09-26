@@ -64,6 +64,8 @@ NUOVE = [
     ("H-VALIDATORE", "PRESIDIO DEL HOOK: un indice mal formato o con una voce persa rispetto "
                      "al tag", "csv/_indice_id.py", "presidio",
      "gira nel `pre-commit` dal 2026-09-26; non aveva un nome prima."),
+    ("H-P9", "PRESIDIO DEL HOOK: uno strumento che fa avanzare una rete con net.step() invece di passo_pieno", "csv/_hook_presidi.py", "presidio",
+     "nato il 2026-09-27 (mandato di Luca). Nasce da PASSO-1: 25 strumenti caduti su «net.step() non e' un passo», e il 25esimo era il sigillo di D32 -- dove mitosi() girava ZERO volte in 14 giri e la byte-identita' certificava codice MAI ESEGUITO. E la mia correzione aveva ricopiato le cinque chiamate a mano: il 26esimo posto in cui quell'ordine vive cablato. Il nome e' `H-P9` perche' la regex delle esenzioni accetta gia' `ESENTE-H-P<cifra>`. Le cinque chiamate NON sono ricopiate nel hook: si leggono da `_passo.ordine()`. Collaudo 10/10 nei due versi. ARRETRATO misurato: 26 file su 370."),
     ("H-RIGHE", "PRESIDIO DEL HOOK: CLAUDE.md oltre le 400 righe", "csv/_presidio_righe.py",
      "presidio",
      "nato col riordino del 2026-09-26 (mandato di Luca, punto h). Collaudo 4/4 nei DUE versi. "
@@ -172,6 +174,8 @@ NON_ID = [
     ("INSIEME-INSIEME", "locuzione del testo: `distanza INSIEME-INSIEME` e' il nome di una misura in prosa, non un identificatore di difetto"),
     ("H-P", "pezzo del modello `ESENTE-H-P<n>` nei messaggi dei presidi, non un id"),
     ("H-Pn", "segnaposto del modello `ESENTE-<H-Pn>` nei messaggi dei presidi, non un id"),
+    ("ESENTE-H-P9", "marcatore di esenzione al presidio H-P9, non un identificatore"),
+    ("ESENTE-H-P", "pezzo del marcatore `ESENTE-H-P<n>`, non un identificatore"),
     ("N-MASSE", "nome di una SCENA del simulatore (`TESTS`), non un identificatore di difetto"),
     ("MASSE-COERENTI", "nome di una SCENA del simulatore (`TESTS`), non un identificatore di difetto"),
     ("TERRA-BUCONERO", "nome di una SCENA del simulatore (`TESTS`), non un identificatore di difetto"),

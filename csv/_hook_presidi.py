@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""**I PRESIDI CHE IMPEDISCONO** — `H-P3`, `H-P5`, `H-P8` come hook `pre-commit`.
+"""**I PRESIDI CHE IMPEDISCONO** — `H-P3`, `H-P5`, `H-P8`, `H-P9` come hook `pre-commit`.
 
 *(Anticipati dal mandato sui presidi automatici, su ordine di Luca del 2026-09-25, perche' i tre
 difetti che coprono sono **accaduti oggi**: `CLI-1`, `CONFIG-1`, `ANCORE-1`.)*
@@ -13,6 +13,7 @@ difetti che coprono sono **accaduti oggi**: `CLI-1`, `CONFIG-1`, `ANCORE-1`.)*
 | **`H-P3`** | un **sigillo** che configura il modulo **a mano** invece di passare dal CLI | `CLI-1`: `7/7` e `8/8` **con i flag MORTI da riga di comando** |
 | **`H-P5`** | un referto che **non dichiara la configurazione INTERA** | `CONFIG-1`: sei misure con **28 leggi su 31 spente**, e ogni referto dichiarava i **4 flag accesi da me** |
 | **`H-P8`** | un confronto che prende **il codice di prima da `HEAD`** | `ANCORE-1`: **25 sigilli**, e `A1` confrontava **il ramo spento con se stesso** |
+| **`H-P9`** | uno strumento che fa avanzare una rete con **`net.step()`** invece di **`passo_pieno`** | `PASSO-1`: **25 strumenti**, e il 25esimo e' il sigillo di `D32`, dove `mitosi()` girava **0 volte in 14 giri** e la byte-identita' certificava **codice mai eseguito**. **E la correzione aveva ricopiato le cinque chiamate a mano** |
 
 **LA VIA D'USCITA ESISTE E OBBLIGA A DICHIARARE** *(la forma di `[SENZA-RELAZIONE]`)*:
 `ESENTE-H-P3: <motivo>` in un commento del file *(col cancelletto davanti; qui non si scrive
@@ -22,8 +23,8 @@ faccia: escludere un file dal proprio controllo e' il buco che `A9` descrive)*.
 generato da `--elenca`: **un'esenzione che non compare nell'elenco fa fallire il commit**, cosi'
 non se ne accumulano di invisibili.
 
-**COLLAUDO** *(`P1-sexies`)*: `--collaudo` prova **SEI** casi sintetici a risposta nota, **tre che
-DEVONO bloccare e tre che NON devono**. **Il caso che deve fallire e' il piu' importante:** un
+**COLLAUDO** *(`P1-sexies`)*: `--collaudo` prova **OTTO** casi sintetici a risposta nota, **quattro
+che DEVONO bloccare e quattro che NON devono**. **Il caso che deve fallire e' il piu' importante:** un
 presidio che non blocca mai e' una nota.
 
 ASCII puro.
@@ -91,6 +92,55 @@ def _scrive_referto(t, arb):
     return False
 
 
+#  LE CINQUE CHIAMATE DEL PASSO, lette da `csv/_passo.py` e NON ricopiate qui: se un giorno
+#  l'ordine cambiasse, cambierebbe in UN posto. Se `_passo` non si importa si ripiega su una
+#  lista MINIMA e **lo si dichiara nel motivo**, invece di tacere (`A9`).
+def _le_cinque():
+    try:
+        import _passo
+        return [n for _tipo, n in _passo.ordine()], True
+    except Exception:
+        return ['scuoti_vuoto', 'step', 'mitosi', 'rilassa_disegno',
+                'memoria_hebbiana_moto'], False
+
+
+def _avanza_con_step(t, arb):
+    """**`H-P9`**: il file fa avanzare una rete con `.step()` **senza** `passo_pieno`?
+
+    Restituisce `(riga, motivo)` oppure `(0, None)`.
+
+    ### Perche' esiste, ed e' un difetto MISURATO venticinque volte
+    **`net.step()` NON E' UN PASSO:** il passo sono **cinque chiamate**, e `mitosi()` e' una
+    delle altre quattro. Uno strumento che avanza con `step()` da solo **misura un sistema in
+    cui i nodi non nascono** -- e non se ne accorge, perche' non fallisce: gira.
+    **MISURATO il 2026-09-27:** nel sigillo di `D32`, `mitosi()` chiamata **0 volte in 14 giri**,
+    e la byte-identita' certificava **codice mai eseguito**.
+    **E la CORREZIONE ha ricopiato le cinque chiamate a mano**, cioe' ha aggiunto il
+    ventiseiesimo posto in cui quell'ordine vive cablato: per questo il presidio chiede
+    **`passo_pieno`**, che l'ordine lo **legge dal codice**.
+    """
+    cinque, da_passo = _le_cinque()
+    if _usa(t, 'passo_pieno') or _usa(t, 'frame_pieno'):
+        return 0, None
+    riga = 0
+    for nd in ast.walk(arb):
+        if (isinstance(nd, ast.Call) and isinstance(nd.func, ast.Attribute)
+                and nd.func.attr == 'step' and not nd.args):
+            riga = nd.lineno
+            break
+    if not riga:
+        return 0, None
+    # chi chiama TUTTE le altre quattro a mano avanza in modo completo: non e' il difetto
+    altre = [c for c in cinque if c != 'step']
+    if altre and all(_usa(t, c) for c in altre):
+        return 0, None
+    mancanti = [c for c in altre if not _usa(t, c)]
+    _rip = '' if da_passo else " (ordine di RIPIEGO: `csv/_passo.py` non si importa)"
+    return riga, ("fa avanzare una rete con `.step()` (:%d) senza `passo_pieno`: "
+                  "`net.step()` NON E' UN PASSO, e cosi' %s non gira%s"
+                  % (riga, ', '.join('`%s`' % m for m in mancanti[:4]), _rip))
+
+
 def _ancora_head(t, arb):
     """Prende «il codice di prima» da `HEAD`? (estrazione git + un nome che dice «vecchio»)"""
     righe = t.split(NL)
@@ -136,6 +186,11 @@ def esamina(rel, t):
     if lin and not _usa(t, "sim_prima_del_flag"):
         g.append(("H-P8", "prende «il codice di prima» da `HEAD` (:%d): DIVENTA VUOTO appena la "
                         "cura e' committata" % lin))
+    # ---------------------------------------------------------------- H-P9
+    if sotto_csv:
+        _r9, _m9 = _avanza_con_step(t, arb)
+        if _r9:
+            g.append(("H-P9", _m9))
     return g, esenzioni
 
 
@@ -231,6 +286,12 @@ SORG = {
                  "import io" + NL + "import _cli_flag" + NL + "DEST = 'x.txt'" + NL
                  + "_cli_flag.dichiara_configurazione(S, print)" + NL
                  + "io.open(DEST, 'w').write('ciao')" + NL),
+    # --- H-P9: DEVE bloccare / NON deve
+    "blocca_H-P9": ("csv/_test_fork/_sonda_finta.py",
+                    "import x" + NL + "for _ in range(3):" + NL + "    net.step()" + NL),
+    "passa_H-P9": ("csv/_test_fork/_sonda_finta2.py",
+                   "import _passo" + NL + "for _ in range(3):" + NL
+                   + "    _passo.passo_pieno(S, net)" + NL),
     # --- H-P8: DEVE bloccare / NON deve
     "blocca_H-P8": ("csv/_seal_fork/_sigillo_finto3.py",
                   "import subprocess" + NL
@@ -246,9 +307,11 @@ SORG = {
 
 def collaudo():
     print("=" * 96)
-    print("COLLAUDO DEI PRESIDI -- sei casi a risposta NOTA (`P1-sexies`)")
+    print("COLLAUDO DEI PRESIDI -- %d casi a risposta NOTA, nei DUE versi (`P1-sexies`)"
+          % (len(SORG) + 2))
     print("=" * 96)
     ok = True
+    _n_casi = 0
     for nome, (rel, t) in sorted(SORG.items()):
         atteso_blocca = nome.startswith("blocca")
         g, _ = controlla([(rel, t)], elenco="")
@@ -256,6 +319,7 @@ def collaudo():
         blocca = any(p == pres for p, _r, _m in g)
         buono = (blocca == atteso_blocca)
         ok = ok and buono
+        _n_casi += 1
         print("  %-11s %-34s atteso %-9s ottenuto %-9s %s"
               % (nome, os.path.basename(rel), "BLOCCA" if atteso_blocca else "passa",
                  "BLOCCA" if blocca else "passa", "OK" if buono else "!! SBAGLIATO"))
@@ -268,13 +332,18 @@ def collaudo():
           % ("esenz_nuda", os.path.basename(rel), "BLOCCA", "BLOCCA" if non_el else "passa",
              "OK" if non_el else "!! SBAGLIATO"))
     ok = ok and bool(non_el)
+    _n_casi += 1
     _g2, non_el2 = controlla([(rel, t_es)], elenco="%s|H-P3" % rel)
     print("  %-11s %-34s atteso %-9s ottenuto %-9s %s"
           % ("esenz_elenc", os.path.basename(rel), "passa",
              "BLOCCA" if non_el2 else "passa", "OK" if not non_el2 else "!! SBAGLIATO"))
     ok = ok and not non_el2
+    _n_casi += 1
     print()
-    print("COLLAUDO: %s" % ("8/8 OK" if ok else "FALLITO"))
+    # ⚠ IL TOTALE SI CONTA, NON SI SCRIVE: era la costante "8/8", e con `H-P9` i casi sono
+    #   diventati 10 mentre la riga diceva ancora 8. Un collaudo che sbaglia il proprio
+    #   conteggio non e' un dettaglio: e' il numero che chi legge prende per buono.
+    print("COLLAUDO: %s" % ("%d/%d OK" % (_n_casi, _n_casi) if ok else "FALLITO"))
     return 0 if ok else 1
 
 
@@ -311,7 +380,7 @@ def stato_hook():
     else:
         print("  ⛔ **I PRESIDI NON SONO ATTIVI IN QUESTO CLONE.**")
         print("     `core.hooksPath` = %s" % (via or "(non impostato)"))
-        print("     Un commit che viola `H-P3`, `H-P5` o `H-P8` **passa senza dire niente**.")
+        print("     Un commit che viola `H-P3`, `H-P5`, `H-P8` o `H-P9` **passa in silenzio**.")
         if resti:
             print("     *(in `.git/hooks/` ci sono %s: girano, ma NON viaggiano col repo)*"
                   % ", ".join(resti))
