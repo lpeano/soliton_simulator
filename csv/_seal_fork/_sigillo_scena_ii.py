@@ -70,8 +70,8 @@ def driver_prima(dest):
     c, fuori = _git("log", "--format=%H", "-S", "--scena=", "--", DRIVER)
     if c or not fuori.strip():
         raise SystemExit("non trovo il commit che ha introdotto `--scena=` nel driver")
-    intro = fuori.decode().split(NL)[-2] if fuori.decode().strip().split(NL)[-1] == "" \
-        else fuori.decode().strip().split(NL)[-1]
+    # `git log` da' il piu' RECENTE per primo: il commit che ha INTRODOTTO l'opzione e' l'ULTIMO.
+    intro = [x for x in fuori.decode().strip().split(NL) if x.strip()][-1]
     c2, testo = _git("show", "%s^:%s" % (intro, DRIVER))
     if c2:
         raise SystemExit("il PADRE di %s non ha il driver: ancora rotta" % intro[:8])
@@ -80,7 +80,7 @@ def driver_prima(dest):
         raise SystemExit("IL FILE 'DI PRIMA' CONTIENE GIA' `--scena=`: l'ancora e' sbagliata, "
                          "e mi fermo invece di misurare niente (A9)")
     io.open(dest, "w", encoding="utf-8", newline=NL).write(t)
-    return intro[:8], len(t.split(NL))
+    return intro[:8], len(t.split(NL)), intro + "^"
 
 
 def argv_da(driver_path, extra):
@@ -155,7 +155,7 @@ if __name__ == "__main__":
 
     # ---------------------------------------------------------------- T1
     prima = os.path.join(DEST, "_driver_prima.py")
-    sha, nr = driver_prima(prima)
+    sha, nr, REF_PRIMA = driver_prima(prima)
     a_oggi = argv_da(os.path.join(RADICE, DRIVER), [])
     a_prima = argv_da(prima, [])
     uguali = (a_oggi == a_prima)
@@ -172,8 +172,10 @@ if __name__ == "__main__":
     esiti.append(("T1  default invariato (argv identica)", uguali))
 
     # ---------------------------------------------------------------- T5 (il caso che DEVE fallire)
-    S_n, _a = _cli_flag.carica_dal_cli(_cli_flag.senza(a_oggi, "--nodi") + ["--nodi", "0"],
-                                       nome="sim_t5")
+    # ⚠ NON si usa `_cli_flag.senza`: l'argv di DEFAULT **non contiene** `--nodi` (lo passa
+    #   solo la scena `(ii)`), e la guardia di `senza` lo dice giustamente. Qui si AGGIUNGE.
+    a5 = list(a_oggi) + ([] if "--nodi" in a_oggi else ["--nodi", "0"])
+    S_n, _a = _cli_flag.carica_dal_cli(a5, nome="sim_t5")
     try:
         S_n.avvia_test("N-MASSE")()
         msg5, es5 = "(nessun rifiuto)", False
@@ -200,7 +202,10 @@ if __name__ == "__main__":
     n_scena = int(S2.net.n)
     ast_oggi = funzione_ast(io.open(os.path.join(RADICE, "soliton_simulator.py"),
                                    encoding="utf-8").read(), "_semina_masse_coerenti")
-    c3, sim_prima = _git("show", "HEAD~1:soliton_simulator.py")
+    # ⚠ L'ANCORA E' LA STESSA DI `T1` -- il PADRE del commit che ha introdotto `--scena=` --
+    #   e NON `HEAD~1`: `HEAD~1` e' una posizione RELATIVA, e basta un commit in mezzo per
+    #   fargli confrontare un'altra coppia (`H-P8`).
+    c3, sim_prima = _git("show", REF_PRIMA + ":soliton_simulator.py")
     ast_prima = funzione_ast(sim_prima.decode("utf-8"), "_semina_masse_coerenti") if not c3 else None
     scena_intatta = (ast_oggi is not None and ast_oggi == ast_prima)
     P("")
@@ -209,8 +214,8 @@ if __name__ == "__main__":
     P("        net.n dopo `avvia_test` ............. %d   (atteso > 0)" % n_scena)
     P("        `--nodi 0` nell'argv ................ %s"
       % ("--nodi" in a2 and a2[a2.index("--nodi") + 1]))
-    P("        AST di `_semina_masse_coerenti` intatto %s   (la scena NON e' stata toccata)"
-      % scena_intatta)
+    P("        AST di `_semina_masse_coerenti` intatto %s   (contro %s)"
+      % (scena_intatta, REF_PRIMA[:8] + "^"))
     ok2 = (n_flag == 0 and n_scena > 0 and scena_intatta)
     esiti.append(("T2  un vuoto solo, costruito dalla scena", ok2))
 
