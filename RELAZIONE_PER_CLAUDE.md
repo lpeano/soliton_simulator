@@ -2151,3 +2151,57 @@ fisica. **Non e' una discrepanza: sono due SEMI diversi** — il registro misuro
 seme `11`, il driver a default usa il `42`. **La saturazione dipende dal seme** *(gia' misurato:
 `12807 / 12783 / 12812 / 12790`)*, e `12814` sta in quella famiglia. **Citare `12 802` per questo
 run sarebbe sbagliato**, ed e' il genere di trasporto che `P3` vieta.
+
+---
+
+# 📐 **B) `OSSERVABILE-P1` — il task history, e la RICOGNIZIONE che Luca ha chiesto**
+
+## ⚠ LA RISPOSTA ALLA DOMANDA: **i tre script non esistono. In tutto il repo non c'e' UN cammino minimo.**
+
+**Ricerca sull'INTERO albero** (`STANDARD 9`, e il comando non ha intervalli di righe):
+
+```
+grep -rl <nome> --include=*.py .     (esclusi /_tmp/, _old_sim_*, *._sim.py)
+  dijkstra ........ nessun file      floyd_warshall .. nessun file
+  shortest_path ... nessun file      bellman_ford .... nessun file
+  breadth_first ... nessun file      johnson ......... nessun file
+grep -c 'dijkstra|shortest_path' soliton_simulator.py  ->  0
+```
+
+**Che cosa c'e' davvero, ed e' un'altra grandezza:** **quattro** script costruiscono un grafo
+sparso e ne contano le **COMPONENTI CONNESSE**, **tutti con pesi `np.ones`** — cioe' il
+**conteggio dei SALTI**, non la lunghezza:
+
+| script | che cosa fa | pesi |
+|---|---|---|
+| `csv/_test_fork/_letture_ab.py` | il presidio di `Z65`: componenti, taglia della piu' grande, isolati | `ones` |
+| `csv/_test_fork/_topologia.py` | componenti connesse su un run | `ones` |
+| `csv/_test_fork/_topologia_blocchi.py` | le stesse, a blocchi | `ones` |
+| `csv/_test_fork/_pilota_sep.py` | componenti al variare di `--sep` | `ones` |
+
+> ### **RIUSABILE E' L'IDIOMA, NON LA MISURA.**
+> `coo_matrix((pesi, (i, j)), shape=(n, n)).tocsr()` da `net.i`/`net.j` si riusa — ed e' identico
+> in tutti e quattro, quindi e' la forma di casa. **Ma `ones` e' il conteggio dei salti, e la
+> `PROVA 1` chiede la lunghezza pesata con `d`.** Riusare quel codice **cambiando `ones` in `d`**
+> e' corretto e minimo, **e oltre a quello non c'e' niente da riusare**.
+> **`connected_components` serve comunque:** se due masse stanno in componenti diverse la distanza
+> e' `inf`, e uno strumento che restituisse `inf` **senza dirlo** sarebbe illeggibile.
+
+*(`_passo_zero_scena_ii.py` legge `net.d` ma non e' un cammino: somma pesi. `_chi_comprime_d0.py`
+usa `len(net.d)` come conteggio archi.)*
+
+## La cosa che mi aspetto piu' difficile, e la scelta che dichiaro PRIMA
+
+Luca chiede la distanza **fra i CENTRI**, ma **un centro geometrico si prende da `pos`, ed e'
+proprio `pos` che non deve entrare**. Scelta: **il centro e' il MEDOIDE DI GRAFO** della regione —
+il nodo che minimizza la somma delle distanze pesate con `d` **sul sottografo indotto**. **Nessun
+`pos`.** In piu' riporto la distanza **insieme-insieme** *(che non ha bisogno di un centro)* e, come
+**diagnostico**, il centro da `pos`, per dire **se coincide**.
+
+**E una trappola che mi ha morso OGGI:** `argv_del_driver` taglia all'ancora, e le tre righe che
+riempiono `_NMASSE_VIDEO` stanno **dopo** — chi carica in-process ottiene `sep = 3.0` invece di
+`6.1158`, cioe' **2124 nodi invece di 12 814**. Lo strumento deve riempirle, e il collaudo
+verificarlo.
+
+**I cinque criteri `K1`-`K5` sono nel task history**, ognuno con **che cosa decide** e **che cosa mi
+fa fermare**, e le letture *(soglie comprese)* fissate **prima** di vedere i numeri.

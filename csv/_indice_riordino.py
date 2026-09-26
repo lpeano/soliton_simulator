@@ -158,6 +158,7 @@ NON_ID = [
     ("DA-CLAUDE-MD-2026-09-26", "marcatore HTML dell'innesto del riordino, non un identificatore"),
     ("ESENTE-H-P5", "marcatore di esenzione ai presidi, non un identificatore"),
     ("UTF-8", "nome di una codifica, non un identificatore"),
+    ("INSIEME-INSIEME", "locuzione del testo: `distanza INSIEME-INSIEME` e' il nome di una misura in prosa, non un identificatore di difetto"),
     ("H-P", "pezzo del modello `ESENTE-H-P<n>` nei messaggi dei presidi, non un id"),
     ("H-Pn", "segnaposto del modello `ESENTE-<H-Pn>` nei messaggi dei presidi, non un id"),
     ("N-MASSE", "nome di una SCENA del simulatore (`TESTS`), non un identificatore di difetto"),
