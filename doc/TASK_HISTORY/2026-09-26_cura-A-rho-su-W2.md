@@ -87,3 +87,41 @@ stesso passo** — e il referto dice **quale domina**, senza proporre nulla.
   ⇒ **`W²` chiude l'esponente**, e la mia frase era **troppo pessimista**.
 - **il taglio non è i figli**: `C1'` e `F1` guardano due popolazioni diverse, e possono dare esiti
   diversi. **Se succede, si riporta, non si sceglie quale contare.**
+
+---
+
+# ✅ **`C1'` SI CHIUDE CON 4 SEMI — criterio scritto PRIMA** *(decisione di Luca, 2026-09-26)*
+
+> **❌ LA SOGLIA NON SI CAMBIA DOPO AVER VISTO I NUMERI.** La mia proposta *«un decimo di OFF»*
+> avrebbe dato `0.12` contro `0.125`: **passerebbe per un margine del 4 %, ed e' una soglia
+> SCELTA SUL DATO.** Luca la rifiuta, e ha ragione: sarebbe `P1-sexies` violato nel modo piu'
+> elegante — una soglia che *sembra* derivata perche' si riferisce al braccio OFF, ma il cui
+> valore (`1/10`) e' stato scelto **guardando il risultato**.
+
+## IL CRITERIO NUOVO, e il difetto di quello vecchio
+
+**Il vecchio:** `max(|Δpend| ON) <= 2 x std(|Δpend| ON)`. **Auto-referenziale**: la soglia si
+stringe **con** i valori che deve giudicare, e nel limite di una cura perfetta **tende a zero**.
+
+**Il nuovo, deciso da Luca** — e `P3` delle regole lo impone comunque *(per una barra fra semi
+servono `>= 4` semi)*:
+
+```
+C1''''  su 4 SEMI:
+   (a) media( |pend(contrasto) - pend(coppia)| ) ON  e' COMPATIBILE CON ZERO
+       entro 2 ERRORI STANDARD sui 4 semi        ->   media <= 2 * SE,  SE = std/sqrt(4)
+   (b) e sta SOTTO quella di `/W`                ->   media_ON < media_suW
+```
+
+**Perche' e' sano dove il vecchio non lo era:** la soglia e' **l'errore della media**, non la
+dispersione dei valori; e `(b)` ancora il giudizio a **un'altra popolazione misurata** — il braccio
+`/W` — invece che a se stesso. **Nessun numero scelto:** il `2` degli errori standard e' la
+convenzione statistica, non una taratura *(e con 4 semi `t(0.025,3) = 3.18`, quindi `2 SE` e'
+**piu' severo** di un IC95 vero: lo dichiaro invece di spacciarlo per equivalente)*.
+
+**SOLO IL TAGLIO, nessun'altra modifica** *(ordine di Luca)*: `F1`, `F2`, `C3`, `C5` sono gia'
+chiusi a 2 semi e **non si rifanno**.
+
+**COSA MI FAREBBE FERMARE:** se `(a)` passa e `(b)` no — cioe' la media ON e' compatibile con zero
+**ma non piu' piccola** di quella di `/W` — allora **il criterio non distingue le due forme** e il
+`PASS` sarebbe casuale. **Si riporta, non si sceglie.**
