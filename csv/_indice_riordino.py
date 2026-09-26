@@ -93,6 +93,14 @@ NUOVE = [
      "che giudica. Spostata da `CLAUDE.md` al posto 2."),
     # i criteri LOCALI della misura 0 di `DRIVER-SCENA-II`: `M0b` e `M0c` esistevano come
     #   "citato, mai definito"; ora hanno una definizione e un referto.
+    # i criteri LOCALI del sigillo di `OSSERVABILE-P1`, e sono la SOSTITUZIONE di un
+    #   criterio dettato che si e' rivelato insoddisfacibile a passo 0.
+    ("K2a", "SIGILLO osservabile-P1: si cambia SOLO `d` (un arco del cammino minimo x10) e la distanza DEVE cambiare", "csv/_seal_fork/_sigillo_osservabile_p1.py",
+     "criterio-locale",
+     "definito il 2026-09-27. Sostituisce, con `K2b`, il criterio dettato `L_d != L_pos`: quello NON e' soddisfacibile a passo 0, perche' `d` E' la distanza euclidea (`_allaccia` crea l'arco con `d = dd` dal KD-tree su `pos`). Misurato: L_d/L_pos = 1.000000 esatto."),
+    ("K2b", "SIGILLO osservabile-P1: si cambia SOLO `pos` (un nodo di 10 LAM) e la distanza NON deve cambiare, esattamente", "csv/_seal_fork/_sigillo_osservabile_p1.py",
+     "criterio-locale",
+     "definito il 2026-09-27. E' la meta' NEGATIVA della coppia: isola la dipendenza da `d` invece di dedurla da due numeri diversi."),
     # i criteri LOCALI del sigillo di `DRIVER-SCENA-II`. `T1`..`T5` esistono gia' come
     #   etichette locali di altri sigilli; `T3a` e `T3b` no.
     ("T3a", "SIGILLO scena (ii): lo STESSO seme due volte da' byte IDENTICI -- 219 firme sha1 su 219", "csv/_seal_fork/_sigillo_scena_ii.py", "criterio-locale",
@@ -222,6 +230,8 @@ APERTE = [
     ("H-REGR-LARGA", "H-REG-R associa una scheda per NOME DI FUNZIONE: scatta su qualunque modifica a `_applica_flag`, 450 righe che applicano TUTTI i flag",
      "csv/_hook_fisica.py", "da-decidere",
      "CRITERIO DI CHIUSURA: Luca decide se l'associazione va STRETTA (per legge toccata, non per nome citato nella scheda) o se il costo dell'eccezione dichiarata e' accettabile. Misurato il 2026-09-26: la cura di DRIVER-SCENA-II non tocca la scheda `tempo-proprio`, e il presidio l'ha chiesta comunque."),
+    ("INDICE-LEGGERO", "l'indice pesa 169 KB e leggerlo intero non fa risparmiare contesto: serve un comando di interrogazione", "csv/_indice_id.py", "fronte",
+     "CRITERIO DI CHIUSURA (mandato di Luca, 2026-09-27): `--cerca ID` (uguaglianza ESATTA, mai prefisso), `--aperti`, `--blocca SI`, `--famiglia X`, `--dettaglio ID`, `--testo PAROLA` (ricerca sul testo COMPLETO, troncamento SOLO in stampa); il validatore impone titolo_breve <= 100 caratteri e rifiuta due titoli brevi IDENTICI; una riga nella sezione 11 di CLAUDE.md; collaudo nei DUE versi. Da fare DOPO OSSERVABILE-P1."),
     ("FATTI-AVVIO", "la catena di AVVIO non ha un solo fatto in FATTI_dal_codice.md: _applica_flag, avvia_test, _massa, semina", "doc/FATTI_dal_codice.md", "fronte",
      "CRITERIO DI CHIUSURA: una sezione per ciascuna delle quattro funzioni, coi fatti LETTI DAL CODICE e la riga misurata dall'AST. Trovato il 2026-09-26 lavorando a DRIVER-SCENA-II: il mandato indicava i fatti di _applica_flag e _massa, e non esistono -- ne in FATTI_dal_codice.md ne in par.9 al tag. E' la catena che decide CON CHE MONDO PARTE OGNI RUN."),
     ("RIORDINO-NOMI-H", "il prefisso `H-` e' sui NOMI VECCHI (H-P3) e non sui nomi semantici "
