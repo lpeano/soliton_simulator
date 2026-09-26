@@ -3539,3 +3539,40 @@ di far sembrare che scatti da sé.
   fermarsi.
 - **la rimisura di `|dx|/d` a campo maturo:** la forma del freno-legge `(1+tanh)` fu decisa su
   `max |dx|/d = 0.0531` **a campo spento**. **È il passo dopo il sigillo.**
+
+---
+
+<!-- DA-CLAUDE-MD-2026-09-26:par.4 -->
+
+> *(Era **`CLAUDE.md` par.4** fino al riordino del 2026-09-26. **Verbatim**, dal tag `regole-pre-riordino`. La storia di quella sezione sta in `doc/STORIA_REGOLE.md`.)*
+
+## 4. REGOLE FISICHE DA NON VIOLARE
+- **U_ij resta in SU(2):** costruiscilo/evolvilo NELL'ALGEBRA di Lie (exp, slerp/geodetica), MAI
+  come blend lineare di matrici (uscirebbe da SU(2)). Questo protegge unitarieta' **E**
+  elettromagnetismo (la fase globale U(1)/segno vive separata: SU(2) ha det=1, non la tocca).
+- **Freccia causale spinore -> link:** i nodi guidano, gli archi ricordano. Se in un test gli
+  spinori diventano passivi (il link li comanda) -> BUG, da rilevare, non l'obiettivo.
+- **Integratore:** VERLET (leapfrog) solo per il SECOND'ordine con inerzia (xddot: fasi, spinori,
+  metrica). Per il RILASSAMENTO di primo ordine (xdot: memoria del gauge Strato 1/2) usa il passo
+  ESATTO `U(t+dt) = U_target + (U-U_target) e^{-dt/tau}`, NON Verlet. Se ti chiedo Verlet su un
+  rilassamento, segnalalo invece di eseguire.
+- **`--cs-dinamico` CI VA SEMPRE (decisione di Luca, 2026-09-15).** Non e' un'opzione di scenario:
+  **senza, `cs = CS_M` costante e `_cs_nodo_prev` non viene MAI scritta**, quindi cade anche il
+  `tau = d/cs` dello **STRATO 1** (`_bloch_ritardato`), non solo quello di `--tau-luce`: **tutta la
+  memoria del fork gira su una legge amputata.** Una misura senza `--cs-dinamico` **non misura il
+  sistema che si crede di misurare**, ed e' successo (`doc/REPERTO_cs_dinamico_spento.md`).
+  **NB, e non cambia la regola:** alle densita' simulabili `cs` varia pochissimo — misurato
+  `cs \in [1.99954, 2.0]`, cioe' **0.023%**, che pesa **0.00629%** della dispersione di `tau = d/cs`
+  (una parte su **15 898**). **Il punto non e' l'ampiezza: e' che la legge dev'essere CABLATA.**
+  Un `cs` costante non e' un `cs` piccolo: e' un `cs` **assente**, e rende `tau = d/cs` un
+  `tau ∝ d` travestito.
+- **Dipendenza di flag:** `--cs-dinamico` implica `--chi-core` e `--spinore-vivo` (senza, e' inerte/incoerente).
+- **Mai confronti a PASSO FISSO su un sistema che si espande/dilata:** genera ALIASING (una struttura
+  che trasla o si dilata, campionata a intervalli costanti, sembra ferma o va a velocita' falsa).
+  Campiona in modo adattivo o normalizza sulla scala (comovente), non su intervalli assoluti.
+- **LOCALE PURA — niente sottrazione della media:** mai togliere la media globale (spinta.mean(),
+  flusso.mean(), ...). La media globale introduce NON-LOCALITA' (una scorciatoia che il sistema
+  relazionale non deve avere). Tutto agisce per arco/vicinato. La media NON va qui.
+
+<!-- DA-CLAUDE-MD-2026-09-26:par.4 FINE -->
+

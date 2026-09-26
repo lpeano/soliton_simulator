@@ -1709,3 +1709,38 @@ misurati, le destinazioni no**: stanno in una mappa `DESTINAZIONE` di 53 righe d
 `csv/_riordino_fatti.py`, **una riga per punto**, e si correggono in un posto solo.
 **E diciassette dei 53 punti NON sono fatti su una funzione: sono PRESIDI DI LETTURA**, e stanno
 in una sezione a parte che rimanda alla regola che li copre.
+
+## ③ La STORIA delle regole esce, e due sezioni vanno dove vivono le cose che dicono
+
+**`doc/STORIA_REGOLE.md` — 964 righe, archivio VERBATIM, che NON si legge all'avvio** (punto `f`).
+Contiene **ogni sezione** di `CLAUDE.md` di prima **tranne `par.9`**, e in testa una tabella di
+**23 righe** che dice, per ognuna, **dove vive oggi la sua regola**.
+
+**LA FONTE E' IL TAG, NON IL DISCO**, ed e' una decisione di metodo: `CLAUDE.md` viene riscritto
+dal riordino, e uno script che leggesse il disco alla seconda esecuzione **archivierebbe il file
+gia' asciugato, facendo sparire la storia in silenzio**.
+
+```
+righe di CLAUDE.md al tag ............. 1575
+sezioni archiviate ....................   23
+sezioni SENZA destinazione ............    0    <- lo script si ferma se non e' 0
+righe NON ritrovate (par.9 escluso) ...    0
+```
+
+**E UN DIFETTO VERO, TROVATO SPOSTANDO:** `CLAUDE.md` conteneva **un byte NUL** (riga 505, dentro
+la formula `sha1("blob <len>\0" + contenuto)`). **Un NUL fa dichiarare BINARIO il file a `grep`** —
+`grep -n '^## ' CLAUDE.md` rispondeva *«Binary file CLAUDE.md matches»* invece di elencare le
+sezioni. **Un presidio che gira `grep` su quel file non trova niente, e non lo dice.** Nell'archivio
+il NUL e' diventato due caratteri visibili, **con l'ancora contata** (`P1-quater`).
+
+**E LE DUE SEZIONI CHE NON ERANO REGOLE DI LAVORO:**
+
+| sezione | dove va | perche' |
+|---|---|---|
+| **`par.4`** — le regole fisiche da non violare | **`doc/REGISTRO_FISICA.md`** (in coda, 27 righe) | **sono FISICA**, e il posto delle leggi e' il registro delle leggi |
+| **`par.6`** — stato e ordine del lavoro | **`doc/STATO_RUN.md`** (dopo l'INDIRIZZO, 28 righe) | **e' STATO, non una regola** |
+
+**L'innesto in `STATO_RUN` e' PRIMA delle voci di run, non in coda**, e il perche' e' meccanico:
+quel file e' letto da `csv/_stato_run.py`, che cerca `## APERTO` e `**chiuso` per rifiutare
+l'apertura di un run quando il precedente e' ancora aperto. **Verificato dopo l'innesto: 17
+`APERTO` e 17 `chiuso`, il bilancio regge.**

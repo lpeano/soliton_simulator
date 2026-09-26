@@ -91,6 +91,44 @@ HEAD      copia 3cd1dd4f   referto cita 3cd1dd4f    coerente, e l'albero e' puli
 
 <!-- INDIRIZZO:FINE -->
 
+<!-- DA-CLAUDE-MD-2026-09-26:par.6 -->
+
+> *(Era **`CLAUDE.md` par.6** fino al riordino del 2026-09-26. **Verbatim**, dal tag `regole-pre-riordino`. La storia di quella sezione sta in `doc/STORIA_REGOLE.md`.)*
+
+## 6. STATO E ORDINE DEL LAVORO
+Ordine: **prima il FORK (non-abeliano), poi il resto.** GAMMA / Step 2 (cs<->orologio) / verifica
+EM<->curvatura sono A VALLE: non toccarli finche' il fork non gira (a densita' reali cs e' MORTO,
+I~0.05 vs soglia ~400 -> tutti i test cs-dipendenti oggi sono NULLI).
+
+Il fork si costruisce a strati (ognuno un flag OFF, ognuno si riduce a quello sotto):
+- **STRATO 0 — connessione Berry statica (arc-connection): IL PRIMO MATTONE.**
+  `U_ij = exp(-i (chi/2) m_hat . sigma)`, `chi=arccos(n_i.n_j)`, `m_hat=(n_j x n_i)/|n_j x n_i|`.
+  Peso antipodalita': `w_ij = |n_j x n_i| = sin(chi)` (NIENTE soglia netta, NIENTE coeff. tarato).
+  Sostituzione nella forza (`_coppia_interferenza`, righe 2207-2208): `Im<psi_i|psi_j> -> w_ij * Im<psi_i| U_ij |psi_j>`.
+  Flag OFF (es. `FORK_SU2=False`). Sigillo: OFF -> byte-identico scalare; ON+allineati -> scalare.
+- **STRATO 1 — connessione con MEMORIA (ritardazione): FATTO** (2026-09-14, flag `FORK_SU2_MEM`
+  / `--fork-su2-mem`, OFF di default; sigillo `csv/_seal_fork/_sigillo_strato1.py`, **23/23 PASS**).
+  Realizzato come **ritardazione dei BLOCH**, non come memoria della matrice: `_bloch_ritardato()`
+  rilassa il versore `n_ret` verso quello corrente con **slerp geodetico** e
+  `alpha = 1 - exp(-dt_n/tau)`, `tau = d_nodo/cs_nodo`. Si rilassa il Bloch e NON U/N perche' un
+  blend lineare di matrici uscirebbe da SU(2) (par.4). Il trasporto resta sugli spinori CORRENTI.
+  **E' il pezzo che ACCENDE il fork:** rompe il teorema di inerzia dello Strato 0 (vedi par.9).
+  Riduce a Strato 0 per tau->0 (esatto, 0.000e+00) e a riposo (5.3e-15).
+- **STRATO 2 — memoria hebbiana saturata (relazionale):** `dg/dt=c_ij*g*(1-g/G(rho))/tau`, tetto
+  `G(rho)` legato alla DENSITA' col GAMMA di cs ("sorelle non catena": G da rho, NON da cs diretto).
+  Riduce a Strato 1 per g=cost.
+
+**FATTO STABILITO (non ri-derivare male):** il trasporto attuale e' SCALARE (righe 2207-2208, stessa A
+applicata ad a e b) -> il sistema e' abeliano per STRUTTURA -> l'olonomia e' banale (W=2) qualunque
+cosa facciano gli spinori on-site. **La dinamica sugli ARCHI (arc-connection) e' il pezzo mancante:
+senza, non c'e' olonomia.** L'evoluzione on-site esistente (`SPINORE_VIVO`, `KURAMOTO_SU2`) e'
+COMPLEMENTARE (fornisce stati di nodo variati da trasportare), non sostitutiva.
+
+<!-- DA-CLAUDE-MD-2026-09-26:par.6 FINE -->
+
+---
+
+
 <!-- PUNTO-DI-RIPRESA:INIZIO -->
 # ⚠⚠ PUNTO DI RIPRESA — **si legge PER PRIMO dopo un riavvio**
 
