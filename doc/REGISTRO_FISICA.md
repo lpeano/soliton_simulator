@@ -620,8 +620,15 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 > vuole il braccio di confronto **omette il flag**, e il referto lo mostra.
 # ⑤ IL TEMPO PROPRIO — **`ritmo()` / `r` / `dt_n = DT·r`**, e il surrogato **`tau_pp`**
 
-> **STATO: `DIFETTOSA`.** Difetti **`D34`** *(il wrap «a `4π`» non avvolge)* e **`D32`**
-> *(due grandezze diverse col nome di tempo proprio)*.
+> **STATO: `DIFETTOSA`.** Difetto **`D34`** *(il wrap «a `4π`» non avvolge)*.
+> **✅ `D32` E' RISOLTO — decisione di Luca del 2026-09-27:** **il tempo proprio del sistema e' `r`**
+> *(e `dt_e = DT·0.5·(r_i + r_j)` sull'arco)*; **`d/cs` e' il TEMPO-LUCE**, una grandezza **diversa
+> e legittima**, non un secondo tempo proprio; e cio' che si chiamava **`tau_pp` non e' un tempo
+> affatto**: e' una **POSIZIONE sull'asse della torsione**, `1 + avv/PHI_CRIT`, un numero puro.
+> **Rinominata `pos_torsione`** *(sigillo byte-identico: i nomi non cambiano un bit)*.
+> **I TRE «TEMPI PROPRI» ERANO TRE GRANDEZZE, e ora hanno tre nomi:** `r` il tempo proprio,
+> `d/cs` il tempo-luce, `pos_torsione` una posizione. **Il difetto non era che fossero diverse:
+> era che si chiamassero allo stesso modo.** *(`Z117`, il pavimento del ritmo, resta APERTA a parte.)*
 > **È la grandezza da cui dipende il tic di OGNI processo locale** *(par.9: `dt_n = DT·r`, e
 > `DT` nudo dentro un rilassamento locale impone un frame preferito, cioè un etere)*.
 
@@ -703,16 +710,26 @@ avvertimento.**
   **spenta di default**. **Tocca UNA SOLA riga e SOLO il ramo spinoriale:**
   `signed = ((a + π) % 2π − π)/DT`, **la stessa forma del ramo scalare otto righe sopra**.
   **Il default NON si cambia qui:** è una decisione di Luca dopo la prova a 600 passi *(`E3`)*.
-- **`D32`** — `r` e `tau_pp`: correlazione **`-0.13`…`+0.29`**, segno non concorde.
-  **Cura: DA DECIDERE** — §D del mandato propone **un solo tempo proprio** *(`r`, letto come
-  osservabile)*, con **`tau_pp` tolto** e la mitosi che legge `r`. **È una lettura DA PROVARE,
-  non una decisione presa.**
+- **✅ `D32` — CHIUSO il 2026-09-27** *(decisione di Luca)*. La correlazione misurata fra `r`
+  e `tau_pp` — **`-0.13`…`+0.29`, segno non concorde** — **non era un difetto di `r`: era la
+  prova che le due grandezze non sono la stessa cosa**, e che chiamarle entrambe «tempo
+  proprio» era il difetto. **`r` e' il tempo proprio; `pos_torsione` e' una posizione.**
+  **VERIFICATO DAL SORGENTE:** con `TEMPO_UNICO_MITOSI` **acceso** *(il driver lo accende in
+  ogni run)* i due usi come TEMPO — `1/tau_pp` come ritmo e `tau_pp` come costante di tempo
+  di `_rep` — stanno **entrambi nel ramo `else`, che non gira**. Nel ramo attivo resta
+  **solo** `segno = -tanh(3·(pos_torsione − centro))`: **il SEGNO, cioe' la posizione**.
+  **⚠ I DUE USI NEL RAMO SPENTO CI SONO ANCORA, e sono PROPOSTI per la rimozione**
+  *(`STANDARD 10`: si toglierebbe una legge, il ritmo finto `1/pos_torsione`, senza
+  aggiungerne)* — **non tolti**, perche' quel ramo e' anche **il braccio OFF che rende
+  misurabile la cura**, e toglierlo perderebbe la byte-identita' a flag spento *(par.2,
+  punto 1)*. **Decide Luca.**
 
 ## LE DOMANDE APERTE
 
-1. **Se si unifica il tempo proprio, quali leggi cambiano significato?** `tau_pp` compare in
-   **12 righe di codice**: mitosi *(soglia, segno, ampiezza)*, repulsione, e il rilassamento di
-   `_rep`. **Vanno elencate una per una prima di toccarle** — è il lavoro di `PROBLEMI-CHK3`.
+1. **✅ RISPOSTA, 2026-09-27: il tempo proprio NON si unifica, perche' non erano tre tempi.**
+   Le righe sono state elencate una per una *(`csv/_patch_d32_nomi.py`, 24 sostituzioni
+   asserite)*, e il risultato e' che **nel ramo attivo nessuna usa `pos_torsione` come
+   tempo**. **Resta aperto SOLO che fare dei due usi nel ramo spento** — proposta sopra.
 2. **Il pavimento `1e-6` è un vincolo o una difesa?** Oggi **morde**: `min(r)` è esattamente
    lui. **Un nodo con `f = 0` che tempo proprio ha?** *(Zero è una risposta fisica; `1.414e-6`
    è un numero scelto.)*
@@ -1011,6 +1028,21 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 > `MITOSI_2LAM`, e **ha fatto bene a chiederla**: dal diff non si vede se la riga toccata sia
 > un commento o una legge. **La risposta va scritta, non assunta.**)*
 # ⑦ LA MITOSI E SCHWINGER — **`mitosi()`**
+
+> **→ NOTA DEL 2026-09-27: LA LEGGE DELLA MITOSI NON E' CAMBIATA, SONO CAMBIATI I NOMI.**
+> La chiusura di **`D32`** rinomina, **dentro `mitosi()`**, `tau_pp` → **`pos_torsione`**,
+> `tau_soglia`/`tau_tetto` → **`pos_soglia`/`pos_tetto`**, `tau_nodo` → **`tors_nodo`**,
+> `grad_tau` → **`grad_modula`**, e corregge i **sette commenti** che chiamavano `tau_pp`
+> *«tempo proprio»*. **Nessuna formula cambia**, e un sigillo byte-identico lo prova
+> *(`csv/_seal_fork/_sigillo_d32_nomi.py`)*.
+> **⚠ E UNA RINOMINA CHIESTA NON SI POTEVA FARE COM'ERA:** `grad_tau → grad_torsione`
+> **mentirebbe sul ramo che gira**. Con `TEMPO_UNICO_MITOSI` **acceso** quel gradiente e'
+> **`|r_nodo[i] − r_nodo[j]|`: il gradiente di `r`, il tempo proprio VERO**; e' della
+> **torsione solo a flag spento**. Il nome al punto d'uso dice quindi il **RUOLO**
+> *(`grad_modula`: modula la soglia)*, e **ogni ramo dichiara il suo contenuto**.
+> *(Questa nota esiste perche' `H-REG-R` ha rifiutato il commit chiedendo la scheda di
+> `mitosi`, e **ha fatto bene**: dal diff non si vede se una riga toccata sia un nome o una
+> legge. **La risposta va scritta, non assunta.**)*
 
 > **STATO: `DIFETTOSA`.** Difetti **`D35`** *(l'antifase della coppia)* e **`D33`** *(la
 > repulsione che si spegne al tetto)*. Piu' **`D03`** per la parte di `_rep`.

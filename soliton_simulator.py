@@ -5939,19 +5939,22 @@ class Rete:
                 #                                   (`A1`), e `A11` cor.6 dice che un limite
                 #                                   che satura e' un allarme.
                 _rn = self._r_nodo_mitosi()
-                grad_tau = np.abs(_rn[self.i] - _rn[self.j])
+                # `grad_modula` qui e' il gradiente di `r`: IL TEMPO PROPRIO VERO.
+                grad_modula = np.abs(_rn[self.i] - _rn[self.j])
             else:
-                tau_nodo = np.zeros(self.n)
+                tors_nodo = np.zeros(self.n)
                 aw = np.abs(self.tw)
-                np.add.at(tau_nodo, self.i[self.i < self.n], aw[self.i < self.n])
-                np.add.at(tau_nodo, self.j[self.j < self.n], aw[self.j < self.n])
-                tau_nodo = 1.0 + tau_nodo / np.maximum(self._deg, 1) / PHI_CRIT
-                grad_tau = np.abs(tau_nodo[self.i] - tau_nodo[self.j])   # gradiente lungo l'arco
+                np.add.at(tors_nodo, self.i[self.i < self.n], aw[self.i < self.n])
+                np.add.at(tors_nodo, self.j[self.j < self.n], aw[self.j < self.n])
+                tors_nodo = 1.0 + tors_nodo / np.maximum(self._deg, 1) / PHI_CRIT
+                # a flag SPENTO `grad_modula` e' il gradiente della TORSIONE: un'altra
+                #   grandezza. **Un nome unico mentirebbe su un ramo dei due** (`D32`).
+                grad_modula = np.abs(tors_nodo[self.i] - tors_nodo[self.j])
             # modulazione limitata: la soglia scende di al piu' ~30% dove il gradiente e' forte
-            soglia = soglia0 * (1.0 - 0.3 * np.tanh(grad_tau))
+            soglia = soglia0 * (1.0 - 0.3 * np.tanh(grad_modula))
         # CRITICITA' NON MONOTONA (campana) ancorata ai due valori fisici del sistema:
-        # massima alla SOGLIA LOCALE (soglia critica emergente, pilotata dal gradiente di
-        # tempo proprio), e si SPEGNE al tetto della doppia copertura 4pi. Tra i due, la
+        # massima alla SOGLIA LOCALE (soglia critica emergente, pilotata da `grad_modula`: il gradiente di
+        # `r` a flag acceso, della torsione a flag spento -- `D32`), e si SPEGNE al tetto 4pi. Tra i due, la
         # mitosi decresce: dove la torsione supera la soglia e va verso il tetto, il
         # sistema RIDUCE la generazione (omeostasi), e a 4pi si azzera del tutto (confine
         # netto per reazione geometrica intrinseca). Il ciclo di vita:
@@ -5985,13 +5988,17 @@ class Rete:
         # estremo). La transizione di segno sta FRA la soglia (crea) e il tetto (respinge):
         # cosi' la creazione avviene attorno alla soglia e la repulsione solo nel
         # sovraccarico verso 4pi. La campana va da +max (a soglia) a -max (a 4pi).
-        tau_pp = 1.0 + avv / PHI_CRIT                     # tempo proprio locale (>=1)
-        tau_soglia = 1.0 + soglia / PHI_CRIT              # tempo proprio ALLA soglia (locale)
-        tau_tetto = 1.0 + TW_TETTO / PHI_CRIT             # tempo proprio al tetto 4pi (=3)
+        # [D32, 2026-09-27] NON E' UN TEMPO PROPRIO: e' una POSIZIONE sull'asse della
+        #   torsione, un numero puro `1 + avv/PHI_CRIT`. Il tempo proprio del sistema e'
+        #   `r` (e `dt_e` sull'arco); `d/cs` e' il TEMPO-LUCE, un'altra grandezza.
+        #   Decisione di Luca, 2026-09-27. Il nome vecchio era `tau_pp`.
+        pos_soglia = 1.0 + soglia / PHI_CRIT              # la stessa POSIZIONE, alla soglia
+        pos_tetto = 1.0 + TW_TETTO / PHI_CRIT             # la stessa POSIZIONE, al tetto 4pi
         # transizione di segno a META' fra soglia e tetto: crea da soglia in giu', respinge
         # da meta'-cammino-al-tetto in su. Centrata sul punto medio (soglia+tetto)/2.
-        centro = 0.5 * (tau_soglia + tau_tetto)
-        segno = -np.tanh(3.0 * (tau_pp - centro))
+        centro = 0.5 * (pos_soglia + pos_tetto)
+        pos_torsione = 1.0 + avv / PHI_CRIT
+        segno = -np.tanh(3.0 * (pos_torsione - centro))
         # [CURA 2] LA CAMPANA SI LEGGE DUE VOLTE, E CIASCUNA LETTURA HA LE SUE UNITA'.
         #   `rep` e' il BERSAGLIO di un rilassamento, cioe' un EQUILIBRIO: **non puo'
         #   dipendere dalla DURATA del passo**, senno' la stessa condizione fisica darebbe un
@@ -6004,7 +6011,10 @@ class Rete:
             ampiezza = ampiezza_int * _ft                  # EVENTI ATTESI nel passo proprio
             resp_int = ampiezza_int * segno                # -> il BERSAGLIO `rep`
         else:
-            tau_locale = 1.0 / tau_pp                      # ritmo (sempre positivo)
+            # ⚠ RAMO A FLAG SPENTO: qui `pos_torsione` E' USATA COME TEMPO (il suo
+            #   reciproco come ritmo), ed e' il difetto di `D32`. Proposto per la
+            #   rimozione (`STANDARD 10`), NON tolto senza il si' di Luca.
+            tau_locale = 1.0 / pos_torsione                # ritmo (sempre positivo)
             ampiezza = salita * discesa * tau_locale       # campana positiva (0..max)
             resp_int = None
         resp = ampiezza * segno                            # FIRMATA: + crea, - respinge
@@ -6052,9 +6062,9 @@ class Rete:
         # e' un CRICCHETTO, e il rumore vi si integra in crescita monotona. Non c'era modo di
         # tornare indietro, nemmeno quando la condizione che aveva prodotto la spinta spariva.
         # LA CURA: `_rep` diventa uno STATO PER ARCO che rilassa verso il `rep` istantaneo con
-        # tempo `tau_pp` -- il tempo proprio locale GIA' calcolato qui sopra, non un tempo nuovo.
-        # ASSIOMA A5, livello 1 (rilassamento esponenziale): lecito perche' `tau_pp` e' un tempo
-        # locale dello stesso arco. ZERO PARAMETRI: `tau_pp` e `dt_e` esistono gia'.
+        # tempo d'arco `dt_e` -- NON `pos_torsione`, che non e' un tempo (`D32`).
+        # ASSIOMA A5, livello 1 (rilassamento esponenziale): lecito perche' `dt_e` e' un tempo
+        # locale dello stesso arco. ZERO PARAMETRI: `dt_e` esiste gia'.
         # Il contributo ORA PUO' ANCHE DECRESCERE: il cricchetto e' chiuso.
         # NB su cosa questo NON fa: `d0` resta cumulativa. Chiudere il cricchetto significa che
         # l'INGRESSO puo' calare, non che d0 possa tornare indietro da sola. La previsione scritta
@@ -6072,14 +6082,17 @@ class Rete:
             # P5: se lo stato non e' allineato agli archi, si riparte da zero e SI CONTA.
             self._rep_realloc = getattr(self, "_rep_realloc", 0) + 1
             self._rep = np.zeros(len(rep))
-        # A8: il clamp 1e-12 su tau_pp e' un ramo silenzioso. CONTATO.
-        self._rep_taupp_clamp = getattr(self, "_rep_taupp_clamp", 0) + int(np.sum(np.asarray(tau_pp) < 1e-12))
-        self._rep_taupp_tot = getattr(self, "_rep_taupp_tot", 0) + int(np.size(tau_pp))
+        # A8: il clamp 1e-12 su `pos_torsione` e' un ramo silenzioso. CONTATO.
+        # ⚠ IL NOME DEL CONTATORE NON SI RINOMINA: e' un REPERTO, sta nei `json` gia'
+        #   scritti (`CLAUDE.md` par.9). E a flag ACCESO conta un clamp che NON GIRA:
+        #   vive nel ramo `else`. In coda come `D32-CONTATORE`, non qui.
+        self._rep_taupp_clamp = getattr(self, "_rep_taupp_clamp", 0) + int(np.sum(np.asarray(pos_torsione) < 1e-12))
+        self._rep_taupp_tot = getattr(self, "_rep_taupp_tot", 0) + int(np.size(pos_torsione))
         if TEMPO_UNICO_MITOSI:
             # [CURA 2 + S12] TRE difetti nella riga vecchia, e il commento ne dichiarava due:
             #   (1) LA DILATAZIONE ERA CONTATA DUE VOLTE: `_dte` E' GIA' `DT*0.5*(r_i+r_j)`,
-            #       e dividere ANCHE per `tau_pp` la conta di nuovo;
-            #   (2) `tau_pp` NON E' UNA DURATA: e' un numero puro. Una costante di tempo deve
+            #       e dividere ANCHE per `pos_torsione` la conta di nuovo;
+            #   (2) `pos_torsione` NON E' UNA DURATA: e' un numero puro (`D32`). Una costante di tempo deve
             #       avere le unita' di un tempo -- e `tau_arco = d/cs_arco` le ha: [DT];
             #   (3) L'INTEGRATORE ERA UN EULERO ESPLICITO, mentre il commento dichiara
             #       "`A5` livello 1, rilassamento ESPONENZIALE" e par.4 impone la forma ESATTA.
@@ -6095,7 +6108,9 @@ class Rete:
             self._tum_eulero_tot = getattr(self, "_tum_eulero_tot", 0) + int(np.size(_rap))
             self._rep = rep + (self._rep - rep) * np.exp(-_rap)
         else:
-            self._rep = self._rep + _dte * (rep - self._rep) / np.maximum(tau_pp, 1e-12)
+            # ⚠ RAMO A FLAG SPENTO: `pos_torsione` USATA COME COSTANTE DI TEMPO. Difetto di
+            #   `D32`, proposto per la rimozione, NON tolto senza il si' di Luca.
+            self._rep = self._rep + _dte * (rep - self._rep) / np.maximum(pos_torsione, 1e-12)
         _rep_mem = self._rep
         # quanto la memoria si discosta dall'istantaneo: se fosse ~0 la cura sarebbe inerte.
         if len(rep):
