@@ -19387,3 +19387,87 @@ mancano, e lo dico.**
 **Il PILOTA e' registrato e NON e' partito** *(scena (ii)(a), 1 seme, 600 passi, snapshot ogni 60,
 riprendibile; scopo: costo s/passo, `OMEGA-ETA` fino a `ramp = 1`, nessun crash con la cura A;
 **niente tag, numeri non pubblicabili come risultato**)*.
+
+
+---
+
+# ❌❌ **LA MIA BOZZA DELLA LISTA CHIUSA ERA `STANDARD 9`: LEGGEVA UNA FONTE SOLA**
+*(rilievo di Luca, 2026-09-26)*
+
+**Luca non trovava nella bozza, fra le altre:** `SCALE-TW`, la **soglia di torsione `3π`**, `B5`
+*(theta, il collo di bottiglia)*, la **cura 5 via CLI**, le **misure da rifare in configurazione del
+driver** *(`chi comprime d0`, il `tasso di mitosi`, `|dx|/d` = `V8`/`V9` che decide il freno)*,
+`D33`, `A3`, `CURA 3`, `PASSO-2`, `FRAG1`, `M1`, `M2`, **i 24 script con `step()` da solo**.
+**Aveva ragione su tutte.**
+
+## ❌ **IL DIFETTO DI PRINCIPIO, e quello MECCANICO**
+
+```
+di PRINCIPIO   leggevo la SOLA tabella dei difetti acclarati e presentavo il risultato come
+               LA LISTA. Non si deduce l'assenza da una ricerca parziale.
+MECCANICO      raccoglievo righe CONTIGUE, e la tabella `IN CODA` e' INTERROTTA da un blocco
+               di codice a meta': vedevo 6 righe su 43. Un elenco che perde righe NON SI
+               DENUNCIA, perche' il totale sembra plausibile.
+```
+
+> ### **E il difetto meccanico da solo bastava:** in quelle 37 righe perse c'erano `PASSO-2`,
+> ### `FRAG1`, `M1`, `M2`, `A3`, `CLI-1`, `CONFIG-1`, `CONTAGIO`, `U1`, `U2` — **cioe' meta'
+> ### dell'elenco di Luca.**
+
+## ✅ **LA VERSIONE NUOVA: CINQUE FONTI, E OGNI VOCE HA UN POSTO**
+
+```
+fonte                                      voci   in LISTA   FUORI LISTA   sezioni fuori portata
+STATO_RUN.md                                246       157          89                5
+RAMIFICAZIONI.md                            198       118          80                1
+REGISTRO_FISICA.md                          172       122          50               39
+INVENTARIO_passo_incompleto.md                2         2           0                2
+CONFIGURAZIONE_misure_2026-09-25.md           6         6           0                1
+TOTALE                                      624       405         219               48
+```
+
+**LE FONTI SONO CINQUE E NON QUATTRO:** `CONFIGURAZIONE_misure_2026-09-25.md` e' **l'unico posto**
+dove stanno le sei misure da rifare in configurazione del driver. **Senza di lei `chi comprime d0`
+non comparirebbe**, ed e' esattamente il difetto da curare.
+
+**Nessuna esclusione in silenzio:** le `219` voci `FUORI LISTA` sono **stampate per intero, con la
+loro riga e col motivo proposto** — *gia' curata o chiusa*, *sospetto non acclarato*, *limite
+legittimo (`A11`)*, *riga descrittiva della legge*, *dopo il run base*, *chiusa per dimostrazione*.
+**La decisione di escludere e' di Luca.**
+
+## ✅ **IL COLLAUDO NEI DUE VERSI, E IMPEDISCE** *(`csv/_collaudo_lista_chiusa.py`, 2/2)*
+
+```
+ramo che DEVE passare   il generatore vero            -> uscita 0, documento scritto
+ramo che DEVE fallire   una copia con una voce che    -> uscita 3, e lo sha1 del documento
+                        NON esiste nell'elenco           NON cambia: 668f7538 -> 668f7538
+```
+
+**Le quindici voci di Luca sono diventate il criterio**, e il criterio guarda **la parte IN LISTA**,
+non il documento intero: **una voce che comparisse solo fra le escluse non passerebbe**.
+*(Ho verificato PRIMA di stringerlo che tutte e quindici stanno in lista — lo dico perche' l'ordine
+conta: stringere un criterio DOPO un `FAIL` sarebbe `P1-sexies` violato.)*
+
+## ❌❌ **E DUE DIFETTI TROVATI STRADA FACENDO, entrambi dei REGISTRI, non del codice**
+
+**① `VALE SEMPRE` SIGNIFICA DUE COSE OPPOSTE.** In `RAMIFICAZIONI` vuol dire **chiusa per
+dimostrazione**; in `STATO_RUN` *(«APERTE DA PRIMA»)* vuol dire **la voce vale ANCORA**, cioe'
+**aperta**. **Come esclusione generica aveva buttato fuori proprio `A3` e `B5`** — due delle voci
+che Luca cercava. **Ora la chiusura si legge dalla SEZIONE, non dalle parole.**
+
+**② LA TABELLA DEI DIFETTI ACCLARATI NON E' CONTIGUA:** `D34`-`D38` **cadono sotto l'intestazione
+di `PROVE DI SPEGNIMENTO`**. Un'esclusione per sezione, senza guardia, **avrebbe buttato fuori
+cinque difetti acclarati per la loro POSIZIONE nel file**. La guardia c'e' *(un'etichetta `Dxx` non
+si esclude per sezione)*, ed e' **la stessa forma del difetto di partenza, vista dall'altro lato.**
+
+## ⚠ **COSA MANCA ANCORA, e non lo copro**
+
+- **la DIMENSIONE** di ciascuna voce e **l'ordine per DIPENDENZE**: nessuna fonte li porta in un
+  campo, quindi sarebbero **giudizio mio riga per riga**. **Il mandato li chiede: mancano.**
+- **`111` voci SENZA FAMIGLIA**: nessuna regola ha deciso. **Le elenco in una sezione a parte**
+  invece di metterle in una famiglia a caso.
+- **la stessa voce puo' comparire due volte** se sta in due registri. **Non le ho unificate:** un
+  doppione visibile e' meno dannoso di una voce persa.
+- **`405` in lista NON vuol dire «405 difetti da curare»**: vuol dire che **405 righe non portano un
+  marchio di chiusura**. Fra loro ci sono criteri, previsioni e voci di lavoro. **La potatura la fa
+  Luca**, ed e' il senso della parola *approvazione*.

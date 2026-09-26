@@ -1,0 +1,25 @@
+====================================================================================================
+COLLAUDO DEL PRESIDIO DI `_lista_chiusa.py` -- I DUE RAMI   (2026-09-26)
+====================================================================================================
+
+RAMO CHE DEVE PASSARE -- il generatore vero
+  uscita 0   documento presente: True   sha1 668f7538
+  esito: PASS
+
+RAMO CHE DEVE FALLIRE -- la copia con una voce che NON esiste
+  uscita 3   *(3 = si e' fermato per il collaudo)*
+     [TIMBRO] _lc_collaudo_tmp.py  sha1-BYTE 09b680a3  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
+     *** FERMO: il documento NON e' stato scritto.
+         MANCA la voce che DEVE comparire: COLLAUDO: una voce che NON esiste
+  sha1 del documento   PRIMA 668f7538   DOPO 668f7538   -> INVARIATO
+  esito: PASS
+
+====================================================================================================
+ESITO: 2/2 PASS -- il presidio IMPEDISCE, non avvisa
+====================================================================================================
+
+COSA QUESTO COLLAUDO *NON* DICE:
+  - **non dice che la LISTA sia completa**: dice che le quindici voci dell'elenco `DEVONO`
+    compaiono nella parte IN LISTA, e che il generatore si FERMA se una manca.
+  - **l'elenco `DEVONO` l'ha dettato Luca**, non l'ho ricavato io dai registri: una voce che
+    manca e che nessuno ha nominato **questo collaudo non la vede**.

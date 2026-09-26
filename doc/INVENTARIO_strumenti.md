@@ -760,3 +760,18 @@ python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie
 | `csv/_estrai_ramoD.py` | `48543e87` | `python csv/_estrai_ramoD.py` | estrae dagli snapshot del ramo D il quadro per passo (n, archi, d, d0, peq, contatori delle guardie) senza interpretarlo. | `csv/_test_fork/_diag_D/` |
 | `csv/_sposta_archivi.py` | `df44cf93` | `python csv/_sposta_archivi.py` | sposta le cartelle di `.pkl` sopra i 300 MB sul disco freddo `E:` verificando lo sha1 dei BYTE COMPRESSI, senza mai decomprimere ne caricare. | `doc/SPOSTAMENTO_archivi.tsv` |
 | `csv/_test_fork/_rigiocata_0_120.py` | `402e95d6` | `python csv/_test_fork/_rigiocata_0_120.py` | rigioca la SEMINA del ramo B per 120 passi campionando a OGNI PASSO: l arco 16-481 con d e d0 SEPARATI, i cinque nodi con _deg/phivel/tensione, i percentili della popolazione, n3 ricostruito, e la GEOMETRIA alla semina (correlazione _deg contro distanza dal baricentro). Porta un SIGILLO INTERNO BLOCCANTE: al passo 120 lo stato dev essere identico a _ab_B/scena_000120.pkl.gz. | `doc/REFERTO_rigiocata_0_120.md` |
+
+---
+
+## Aggiunti il 2026-09-26 — **la chiusura della cura A e la LISTA CHIUSA**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_collaudo_criterio_zero.py` | `9a675b90` | `python csv/_collaudo_criterio_zero.py` | COLLAUDO di un CRITERIO su rumore puro (`P1-sexies`): la forma con `|x|` del criterio `C1` contro la forma COL SEGNO, 1e5 prove, 4 valori, seme fisso `20260926` | `doc/COLLAUDO_criterio_zero.txt`: con `|x|` passa il **14.11 %**, col SEGNO l'**86.13 %** -> la forma vecchia **NON era soddisfacibile** |
+| `csv/_seal_fork/_c1_col_segno.py` | `aeebf3dc` | `python csv/_seal_fork/_c1_col_segno.py` | `C1` nella forma COL SEGNO, **dai json GIA' SCRITTI** del sigillo della cura A: nessun rigiro del simulatore, e le pendenze si ricalcolano con **la stessa funzione `pend` del sigillo** | `csv/_seal_fork/_sig_cura_A/C1_COL_SEGNO.txt`: `(a')` **PASS** (`|media|/SE` `0.9656` lunghi, `1.2640` corti), `(b)` **PASS** -> **cura A `6/6`** |
+| `csv/_lista_chiusa.py` | `b27b4a9d` | `python csv/_lista_chiusa.py` | genera `doc/LISTA_CHIUSA.md` da **CINQUE fonti** (`STATO_RUN`, `RAMIFICAZIONI`, `REGISTRO_FISICA`, `INVENTARIO_passo_incompleto`, `CONFIGURAZIONE_misure_2026-09-25`), assegna una famiglia per REGOLA e manda ogni voce in LISTA o in FUORI LISTA **col motivo** | `doc/LISTA_CHIUSA.md`: **624 voci**, `405` in lista, `219` fuori, `48` sezioni dichiarate fuori portata. **Si FERMA** se una delle 15 voci dell'elenco `DEVONO` non compare in lista |
+| `csv/_collaudo_lista_chiusa.py` | `0700fd9c` | `python csv/_collaudo_lista_chiusa.py` | COLLAUDO dei DUE rami del presidio di `_lista_chiusa.py`: il generatore vero deve scrivere, una copia con una voce **che non esiste** deve **fermarsi** e **non toccare** il documento | `doc/COLLAUDO_lista_chiusa.txt`: **2/2 PASS** (uscita `3`, sha1 del documento **invariato**) |
+
+**⚠ E DUE COSE DA DIRE SU QUESTE VOCI, perche' l'inventario serve a chi rigira:**
+- i due `_collaudo_*` **non sono sigilli di una legge**: collaudano **un CRITERIO** e **un PRESIDIO**. Inventariarli come sigilli gonfierebbe il conto dei sigilli veri *(par.5-novies, il triage)*;
+- `_c1_col_segno.py` **non rigira il simulatore**: legge i json del sigillo della cura A. **Se quei json vengono cancellati, lo strumento non e' piu' ri-girabile** — e allora la voce diventa un `Z31`, non un'omissione d'inventario.
