@@ -20067,3 +20067,32 @@ La condizione di fine e' *«nessun consumatore apre piu' i registri per TROVARE 
 quattro fuori perimetro e' gia' vera oggi — ma per una ragione diversa da quella attesa: non li
 aprono per quello.** Per i due consumatori **non e' vera**, e per renderla vera serve una decisione
 sui tre campi. **Chiudere la voce adesso vorrebbe dire dichiarare finito un lavoro che dipende da te.**
+
+
+---
+
+# ⚠ **L'INDICE E' CAMBIATO DOPO IL TAG, ED E' UNA CURA DELLA MACCHINA — IL DELTA E' MISURATO**
+*(2026-09-26)*
+
+Il tag **`lista-chiusa-v1`** congela `7935806`. Subito dopo, il presidio ha rifiutato un commit su
+**`LETTORI-INDICE)`** — **con la parentesi attaccata**: `()` sta nella forma degli ID per
+`INERZIA-1(C)`, e cosi' una parentesi **della prosa** veniva letta come parte del nome.
+
+**Cura:** le parentesi devono essere **BILANCIATE** *(se un token finisce con `)` e non contiene
+`(`, la parentesi non e' sua)*.
+
+**IL DELTA, misurato confrontando l'indice AL TAG con quello di adesso:**
+
+```
+al tag 741 voci      ora 740 voci
+SPARITE (1):  `CLI-1)`        <- un token spurio: la parentesi della prosa
+NUOVE   (0):  nessuna
+```
+
+> ### **Il congelamento regge:** non e' cambiata **nessuna** voce della lista. E' sparito **un
+> ### token che non era un ID**, e con esso `LETTORI-INDICE)`. **«Da qui si spunta, non si
+> ### rigenera» vale per il CONTENUTO; una cura della MACCHINA che toglie un fantasma non e' una
+> ### rigenerazione della lista** — e lo dico col diff, non a parole.
+
+**Le quattro condizioni di fine restano soddisfatte dopo la cura** *(`0`/`0`/`0` + `D11` chiuso)*, e
+i collaudi pure *(presidio `4/4` senza end-to-end perche' c'erano modifiche in stage, vista `2/2`)*.
