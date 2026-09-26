@@ -148,6 +148,18 @@ CURE = [
      "E **toglie una legge** invece di aggiungerla (`STANDARD 10`): `_nasce` non ha piu' niente "
      "da fare su quel sito. Lo Schwinger **non** e' toccato (resta `A3`)",
      "VERIFICATA-SPENTA *(default `False`, accesa dal driver)*"),
+    ("CONTRASTO_INTENSIVO",
+     "**`CURA A`** IL CONTRASTO DELL'INERZIA E' «PER VICINO»: `rho_s / W^2` con "
+     "`W = somma dei pesi` del nodo, **dentro `_contrasto` e SOLO li'**",
+     "`5/6` + `C1'` a 4 semi", "csv/_seal_fork/_sig_cura_A/SIGILLO_cura_A.txt",
+     "in **ogni** run del fork *(`--contrasto-intensivo`)*",
+     "**`|omega|` dei figli da `x47 000` a `x1.4`** rispetto ai maturi dello stesso passo "
+     "*(`F2`: da `16382`-`52738` a `1.05`-`1.86`)*, e il contrasto dei figli da `~8e-06` a "
+     "**`2.43`** volte quello dei maturi — contro **`2.4567` previsto PRIMA** dalla "
+     "scomposizione (`exp(T1+T3)`), scarto `1.2 %`. L'esponente e' **DERIVATO, non scelto**: "
+     "`rho ~ ramp^2.74` e `W ~ ramp^1.37`, quindi `rho ~ W^2.00`. Il pavimento `1e-6` **non "
+     "morde**: minimo `0.115`, cinque ordini sopra",
+     "VERIFICATA-SPENTA *(default `False`, accesa dal driver)*"),
 ]
 
 # Le PROVE DI SPEGNIMENTO: NON sono cure, e stanno a parte perche' il conto resti onesto.

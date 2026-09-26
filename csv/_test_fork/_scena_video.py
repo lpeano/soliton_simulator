@@ -261,7 +261,17 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--
             # mitosi non fabbrica piu' lunghezza. E TOGLIE una legge invece di aggiungerla
             # (`STANDARD 10`): `_nasce` non ha piu' niente da fare su quel sito. Lo SCHWINGER
             # non e' toccato (resta `A3`). Sigillo 8/8.
-            "--mitosi-2lam"] \
+            "--mitosi-2lam",
+            # [CURA A, 2026-09-26] IL CONTRASTO DELL'INERZIA E' «PER VICINO», APPROVATA DA LUCA:
+            # `rho_s / W^2` dentro `_contrasto` e SOLO li' (`rho_s` NON cambia in mitosi,
+            # Schwinger, `lambda_nodi`: lo prova `C3`, byte-identico a flag spento).
+            # LA POTENZA E' DERIVATA, NON SCELTA: `rho ~ ramp^2.74` e `W ~ ramp^1.37`, quindi
+            # `rho ~ W^2.00` (R2 0.95-0.96, 2 semi).
+            # EFFETTO MISURATO: `|omega|` dei figli da **x47 000** a **x1.4** rispetto ai maturi
+            # dello stesso passo, e il loro contrasto da `~8e-06` a **2.43** volte quello dei
+            # maturi -- contro **2.4567 previsto PRIMA** dalla scomposizione. Il pavimento `1e-6`
+            # NON morde (minimo `0.115`, cinque ordini sopra). Sigillo `5/6`, `C1'` a 4 semi.
+            "--contrasto-intensivo"] \
     + (["--chi-basc"] if CHIBASC == "on" else []) \
     + (["--chi-coop"] if CHICOOP == "on" else []) \
     + (["--scala-min"] if SCALAMIN == "on" else []) \
