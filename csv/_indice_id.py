@@ -107,6 +107,13 @@ NON_SONO_ID = [
     (r"^(CLAUDE|README|MEMORY|TODO|NOTA|FILE|PATH|CSV|JSON|YAML|TSV|HTML|PNG|MP4|PKL|GZ)\b",
      "nome di file o di formato"),
     (r"^[A-Z]{2,}_[A-Z]", "nome di FLAG o di costante del codice"),
+    # ⚠ I NUMERALI A PAROLE: `SETTE-OTTO`, `DUE-TRE`. Aggiunti perche' `SETTE-OTTO` in un
+    #   messaggio di commit ha **bloccato il commit** -- e il presidio ha fatto bene: la forma
+    #   *sembra* un ID. **Si chiude classificando, non con un'eccezione dichiarata.**
+    (r"^(UN|UNO|DUE|TRE|QUATTRO|CINQUE|SEI|SETTE|OTTO|NOVE|DIECI|CENTO|MILLE)-",
+     "numerale a parole, non un identificatore"),
+    (r"-(UN|UNO|DUE|TRE|QUATTRO|CINQUE|SEI|SETTE|OTTO|NOVE|DIECI|CENTO|MILLE)$",
+     "numerale a parole, non un identificatore"),
 ]
 
 R = []
@@ -201,11 +208,23 @@ for riga in testo("doc/RINOMINE_ID.txt").split(NL):
         _rin += 1
 
 # ================================================================== LE CITAZIONI
-FILES = []
+# ⚠ I PROPRI OUTPUT NON SI CONTANO, E IL PERCHE' E' UN DIFETTO MISURATO: il referto del
+#   collaudo del presidio **stampa** gli ID inventati `ZZ999` e `D97`; lo sweep li leggeva, li
+#   metteva nell'indice come «citati e mai definiti», e **al giro dopo il collaudo PASSAVA su
+#   entrambi i casi che DEVONO fallire**. **Uno strumento che si nutre dei propri output si
+#   autoconferma.**
+AUTO_PRODOTTI = ("INDICE_ID", "COLLISIONI_ID", "RINOMINE_ID", "COLLAUDO_presidio_indice",
+                 "INVENTARIO_lettori_id")
+FILES, AUTO_SALTATI = [], []
 for base, _d, ff in os.walk(os.path.join(RADICE, "doc")):
     for f2 in ff:
-        if f2.endswith(".md") or f2.endswith(".txt"):
-            FILES.append(os.path.relpath(os.path.join(base, f2), RADICE).replace(os.sep, "/"))
+        if not (f2.endswith(".md") or f2.endswith(".txt")):
+            continue
+        rel2 = os.path.relpath(os.path.join(base, f2), RADICE).replace(os.sep, "/")
+        if any(x in rel2 for x in AUTO_PRODOTTI):
+            AUTO_SALTATI.append(rel2)
+            continue
+        FILES.append(rel2)
 FILES += ["CLAUDE.md", "RELAZIONE_PER_CLAUDE.md"]
 CIT = Counter()
 for p in sorted(set(FILES)):
@@ -301,6 +320,11 @@ _bl = Counter(v["blocca"] for v in VOCI.values())
 P("  per STATO:            %s" % ", ".join("%s=%d" % x for x in _st.most_common()))
 P("  per TIPO:             %s" % ", ".join("%s=%d" % x for x in _tp.most_common()))
 P("  per BLOCCA_RUN_BASE:  %s" % ", ".join("%s=%d" % x for x in _bl.most_common()))
+P()
+P("  file SALTATI perche' sono OUTPUT di questa stessa macchina: %d  (%s)"
+  % (len(AUTO_SALTATI), ", ".join(os.path.basename(x) for x in sorted(AUTO_SALTATI))))
+P("     uno strumento che si nutre dei propri output si AUTOCONFERMA: il referto del collaudo")
+P("     stampa `ZZ999`, e lo sweep lo metteva nell'indice.")
 P()
 P("  CITATI e MAI DEFINITI in un registro (entrano con `da-decidere`): %d" % len(NONDEF))
 P("      di cui citati SOLO in referti/sigilli/task history -> `criterio-locale`: %d" % _loc)

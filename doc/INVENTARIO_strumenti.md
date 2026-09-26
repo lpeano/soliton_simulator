@@ -797,3 +797,11 @@ python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie
 | `csv/_presidio_indice.py` | `e1754107` | `python csv/_presidio_indice.py --collaudo` | PRESIDIO: ogni ID che un commit AGGIUNGE a un documento vivo, o cita nel messaggio, esiste nell'indice o fra gli esclusi. Tre esiti: NOTO, ESCLUSO, **AMBIGUO** *(forma nuda definita da due registri)* | `doc/COLLAUDO_presidio_indice.txt`: **5/5 PASS**, e il quinto e' il **HOOK VERO** *(uscita `1`, ID segnalato, documento tornato identico)* |
 
 **⚠ IL PRESIDIO GUARDA SOLO LE RIGHE AGGIUNTE, ed e' una scelta:** guardare i file interi rifiuterebbe **ogni** commit finche' l'indice non e' perfetto, e verrebbe aggirato il primo giorno (`A9`). **Cosi' il debito vecchio resta visibile nell'indice e il debito NUOVO non si crea.**
+
+---
+
+## Aggiunto il 2026-09-26 — **l'inventario che precede il `PASSO 3`**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_inventario_lettori_id.py` | `d1f3819d` | `python csv/_inventario_lettori_id.py` | classifica in QUATTRO classi gli script che nominano un registro: **copia del simulatore** *(reperto)*, **scrittore una volta**, **IMPORTATORE** *(costruisce l'indice: DEVE leggere il Markdown)*, **LETTORE** *(il perimetro del `PASSO 3`)* | `doc/INVENTARIO_lettori_id.txt`: **83** script nominano un registro, ma i LETTORI che aprono davvero un registro sono **10** |

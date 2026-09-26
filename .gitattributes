@@ -22,6 +22,7 @@
 # operativo di chi lo ha scritto.
 *.md  text eol=lf
 *.csv text eol=lf
+*.tsv text eol=lf
 *.txt text eol=lf
 *.json text eol=lf
 

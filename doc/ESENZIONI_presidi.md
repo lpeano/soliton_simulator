@@ -10,6 +10,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_collaudo_lista_chiusa.py|P5` | non importa il simulatore e non lo fa girare. Collauda un generatore di documenti. |
 | `csv/_collisioni_id.py|P5` | non importa il simulatore e non lo fa girare. Conta occorrenze in documenti. |
 | `csv/_indice_id.py|P5` | non importa il simulatore e non lo fa girare. Genera due indici da documenti. |
+| `csv/_inventario_lettori_id.py|P5` | non importa il simulatore e non lo fa girare. Classifica script per contenuto. |
 | `csv/_letture_rho_s.py|P5` | strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: |
 | `csv/_lista_chiusa.py|P5` | non importa il simulatore e non lo fa girare. Trasforma documenti in un documento; |
 | `csv/_presidio_commenti_flag.py|P8` | legge `HEAD:soliton_simulator.py`, ma **NON come «il codice prima di una |
@@ -20,5 +21,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_esponenti_figli.py|P5` | legge JSON gia' scritti, non fa girare il simulatore. La configurazione di quei dati |
 
 ```
-esenzioni dichiarate   13
+esenzioni dichiarate   14
 ```

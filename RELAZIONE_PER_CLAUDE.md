@@ -19682,3 +19682,79 @@ vecchio resta visibile nell'indice e il debito NUOVO non si crea**.
   dice. La spiegazione resta nel documento.
 - **la fonte e' `file::ancora`, non `file:riga`:** un numero di riga **marcisce al primo
   inserimento**, un frammento di titolo si trova con una ricerca.
+
+
+---
+
+# 📏 **`PASSO 3`: L'INVENTARIO E' FATTO, LA STIMA RADDOPPIA. NON L'HO COMINCIATO**
+*(2026-09-26, come chiesto da Luca: «se il `PASSO 3` allunga troppo la stima, dimmelo prima di
+cominciarlo»)*
+
+*(`csv/_inventario_lettori_id.py` -> `doc/INVENTARIO_lettori_id.txt`. **Nessuna riscrittura
+cominciata.**)*
+
+## ⚠ **«81 SCRIPT NOMINANO UN REGISTRO» NON ERA IL PERIMETRO**
+
+```
+script che nominano un registro       83
+   copia-simulatore                   33   REPERTI da 7000-10500 righe: lo nominano in un COMMENTO
+   scrittore-una-volta                21   `_zNNN_*.py`: hanno AGGIUNTO una voce, hanno gia' girato
+   IMPORTATORE                         3   costruiscono l'indice: DEVONO leggere il Markdown
+   LETTORE                            26   di cui **10** aprono davvero un registro  <- IL PERIMETRO
+```
+
+**I DIECI:** `_lista_chiusa` *(592 righe)*, `_cure_verificate` *(352)*, `_quadro_unico` *(313)*,
+`_triage_difetti` *(302)*, `_inventario_passo` *(269)*, `_presidio_indice` *(240, e legge GIA'
+l'indice)*, `_punto_della_situazione` *(162)*, `_stato_run` *(123, scrive il registro dei run)*,
+`_collaudo_lista_chiusa` *(112)*, `_blob_nelle_voci` *(87)*.
+**Da riscrivere davvero: SETTE-OTTO.**
+
+## ❌ **E L'EURISTICA DELL'INVENTARIO SBAGLIAVA IL PERIMETRO, alla prima stesura**
+
+Cercava il nome del registro **accanto** a un `open(`, e perdeva il caso **normale**:
+`CODA = os.path.join(RADICE, "doc", "STATO_RUN.md")` e poi `io.open(CODA)`.
+**Perdeva `_triage_difetti.py` e `_punto_della_situazione.py`: due lettori VERI**, cioe' proprio il
+perimetro. **Da `6` a `10`.** *(Un inventario che sbaglia il perimetro fa sbagliare la stima, ed e'
+peggio di un inventario assente.)*
+
+## 💰 **LA STIMA: `4-6 h`, cioe' il DOPPIO dei passi 1 e 2 insieme**
+
+```
+i passi 1 e 2, fatti          ~3 h    (stima data prima: 2,5-3 h -- ci siamo stati)
+il PASSO 3, stimato
+   7-8 strumenti x (riscrittura + collaudo nei DUE versi)   ~25-40 min l'uno   = 3,5-5 h
+   di cui `_lista_chiusa.py`: 592 righe il cui DISEGNO INTERO e' parsing di
+   Markdown -> non e' una modifica, e' una RISCRITTURA                        = 1-1,5 h
+```
+
+> ### **Risposta alla domanda di Luca: SI', allunga la stima, e non di poco: la RADDOPPIA.**
+> ### **Non l'ho cominciato.**
+
+## ⚠ **E DUE DECISIONI CHE CAMBIANO IL COSTO, prima di cominciare**
+
+**① L'INDICE NON HA LA COLONNA `famiglia`, E `LISTA_CHIUSA` LA USA.** L'indice porta `id`, `alias`,
+`titolo_breve` *(troncato a 110 caratteri)*, `fonte`, `stato`, `blocca_run_base`, `tipo` — **le
+sette colonne che Luca ha elencato**. Ma la lista chiusa raggruppa **per famiglia `A`-`G`** e stampa
+**la riga intera** della voce. Quindi, una di queste tre:
+```
+(a) l'indice guadagna `famiglia` (e forse `testo`)   -> l'indice cresce, la vista resta ricca
+(b) la vista diventa SOTTILE (id, titolo, stato, tipo) -> si perde il testo delle voci
+(c) la vista continua a leggere i registri PER IL TESTO -> contraddice la regola del PASSO 3
+```
+**La decido io solo se Luca non decide: e allora prendo (a)**, perche' e' l'unica che non perde
+informazione e non contraddice la regola.
+
+**② GLI IMPORTATORI RESTANO A LEGGERE IL MARKDOWN, per necessita':** `_indice_id`,
+`_collisioni_id`, `_rinomina_collisioni` **sono cio' che COSTRUISCE l'indice**. La regola *«nessuno
+strumento deve piu' fare parsing delle tabelle Markdown»* vale per i **CONSUMATORI**. **Lo scrivo
+perche' e' una precisazione di merito, non un'eccezione che mi concedo.**
+
+## ❌❌ **E UN DIFETTO DEL MIO COMMIT PRECEDENTE, trovato dal warning di git**
+
+**`.gitattributes` non copriva `*.tsv`**, quindi `doc/INDICE_ID.tsv` sarebbe stato riscritto in
+**CRLF** al prossimo checkout — e il presidio lo legge con `newline=""`, quindi **l'ultima colonna
+(`tipo`) si sarebbe portata dietro un `\r`**. Aggiunto `*.tsv text eol=lf`.
+**Non e' un'ipotesi: `git` l'ha detto in chiaro** *(«LF will be replaced by CRLF»)* **nel commit
+`a6e105c`, e l'ho visto perche' l'avviso era nell'output.** È la **trappola CRLF del par.5-quinquies**
+in veste nuova: **un file nuovo con un'estensione nuova non e' coperto da una regola scritta per le
+estensioni vecchie.**

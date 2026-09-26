@@ -2,39 +2,43 @@
 `doc/INDICE_ID.tsv` -- L'INDICE DI TUTTI GLI ID   (2026-09-26)
 ========================================================================================================
 
-  voci nell'indice: 667      esclusi (non sono ID): 39
+  voci nell'indice: 664      esclusi (non sono ID): 41
   alias dalle RINOMINE del PASSO 1: 2       alias dalla forma NUDA univoca: 32
 
-  per STATO:            da-decidere=470, chiuso=122, aperto=47, teoria=17, non-difetto=11
-  per TIPO:             altro=225, criterio-locale=207, fronte=141, misura=28, difetto=25, assioma=16, cura=14, presidio=10, standard=1
-  per BLOCCA_RUN_BASE:  DA-DECIDERE=515, NO=147, SI=5
+  per STATO:            da-decidere=467, chiuso=122, aperto=47, teoria=17, non-difetto=11
+  per TIPO:             altro=225, criterio-locale=204, fronte=141, misura=28, difetto=25, assioma=16, cura=14, presidio=10, standard=1
+  per BLOCCA_RUN_BASE:  DA-DECIDERE=512, NO=147, SI=5
 
-  CITATI e MAI DEFINITI in un registro (entrano con `da-decidere`): 292
-      di cui citati SOLO in referti/sigilli/task history -> `criterio-locale`: 123
-      T1                     120 citazioni
-      C95                    84 citazioni
-      E1                     65 citazioni
-      Y5                     63 citazioni
-      K3                     54 citazioni
-      S1                     51 citazioni
-      S3                     42 citazioni
-      T6                     33 citazioni
-      T0                     33 citazioni
-      Z1c                    32 citazioni
-      R1                     31 citazioni
-      M3                     30 citazioni
+  file SALTATI perche' sono OUTPUT di questa stessa macchina: 5  (COLLAUDO_presidio_indice.txt, COLLISIONI_ID.txt, INDICE_ID_referto.txt, INVENTARIO_lettori_id.txt, RINOMINE_ID.txt)
+     uno strumento che si nutre dei propri output si AUTOCONFERMA: il referto del collaudo
+     stampa `ZZ999`, e lo sweep lo metteva nell'indice.
+
+  CITATI e MAI DEFINITI in un registro (entrano con `da-decidere`): 289
+      di cui citati SOLO in referti/sigilli/task history -> `criterio-locale`: 120
+      T1                     119 citazioni
+      C95                    83 citazioni
+      E1                     64 citazioni
+      Y5                     62 citazioni
+      K3                     53 citazioni
+      S1                     50 citazioni
+      S3                     41 citazioni
+      T6                     32 citazioni
+      T0                     32 citazioni
+      Z1c                    31 citazioni
+      R1                     30 citazioni
+      M3                     29 citazioni
 
 ========================================================================================================
 COSA QUESTO INDICE *NON* DICE
 ========================================================================================================
-  - **`blocca_run_base` e' `DA-DECIDERE` su 515 voci su 667**, e non e' pigrizia: **nessun
+  - **`blocca_run_base` e' `DA-DECIDERE` su 512 voci su 664**, e non e' pigrizia: **nessun
     documento lo dichiara**. Vale `SI` solo dove il testo dice «bloccante» o «prima di
     qualunque giro lungo». **Riempirla a intuito sarebbe indovinare, e Luca l'ha vietato.**
   - **`stato = da-decidere` significa che la fonte non porta un marcatore riconoscibile**, non
-    che la voce sia in sospeso. Sono 470 voci.
+    che la voce sia in sospeso. Sono 467 voci.
   - **il titolo e' TRONCATO a 110 caratteri**: l'indice dice DOVE vive una voce, non che cosa
     dice. La spiegazione resta nel documento.
   - **la fonte e' `file::ancora`, non `file:riga`**: un numero di riga marcisce al primo
     inserimento, un frammento di titolo si trova con una ricerca.
-  - **gli ESCLUSI sono 39 forme** riconosciute come locuzioni, nomi di file o di flag: stanno in
+  - **gli ESCLUSI sono 41 forme** riconosciute come locuzioni, nomi di file o di flag: stanno in
     `doc/INDICE_ID_ESCLUSI.tsv` **col motivo e col numero di citazioni**, non in silenzio.

@@ -37,7 +37,7 @@ B7		i reperti DA RIMISURARE sulla scena nuova | Z43, Z46, Z48-Z52, coerg | misur
 B8		IL BLOCCO DEL RUN A 6000 AL PASSO 2700 | doc/REFERTObloccorun6000.md (131 righe), csv/testfork/dump2700.txt | 	doc/STATO_RUN.md::IL BLOCCO DEL RUN A 6000 AL PASSO 2700 |	chiuso	NO	altro
 B9		Z63 / Z64 — i 1455 nodi a 10⁻¹³; la catena f → x → r che non riproduce r | registro, ex-LISTA 2 punto 3 | aper	doc/STATO_RUN.md::Z63 / Z64 — i 1455 nodi a 10⁻¹³; la cate	da-decidere	DA-DECIDERE	altro
 BACKGROUND-INDEPENDENT		(CITATO 1 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
-BIS-ANOM-SIMM		(CITATO 4 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+BIS-ANOM-SIMM		(CITATO 3 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 BIS-DELTA		(CITATO 3 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 C1		C1 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | ESITO (I): nessun bug. omega = coppia/inerzia porta esattamente il −1 ric	doc/RAMIFICAZIONI.md::C1 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | ESI	chiuso	NO	misura
 C10		C10 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | LA BARRA D'ERRORE USATA FINORA E' TRE VOLTE TROPPO PICCOLA. Su questo si	doc/RAMIFICAZIONI.md::C10 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | LA	chiuso	NO	misura
@@ -69,12 +69,12 @@ C6		C6 VALE SEMPRE ⏳[EPOCA 1 · CODICE] | Il rumore non guida omega | Rstoc = 
 C7		C7 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | La cache csnodoprev veniva scartata a ogni mitosi ⇒ nel 72 % delle chiama	doc/RAMIFICAZIONI.md::C7 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | La 	chiuso	NO	misura
 C8		C8 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | LA FASE 2 NON SI CHIUDE. Col tempo-luce cablato la pendenza resta lontani	doc/RAMIFICAZIONI.md::C8 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | LA 	chiuso	NO	misura
 C9		C9 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | --tau-luce ha un effetto GRANDE sulla pendenza (che pero' non basta): il 	doc/RAMIFICAZIONI.md::C9 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | --t	chiuso	NO	misura
-C95		(CITATO 84 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+C95		(CITATO 83 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 CHE-ORDINE		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 CHK3-D		Nel referto del CHK3, la sezione «I DIFETTI NUOVI CONTRO LE MISURE GIA' FATTE» — D27 (quattro componenti) e D2	doc/STATO_RUN.md::Nel referto del CHK3, la sezione «I DIFE	chiuso	NO	cura
 CLI-1		I SIGILLI DI CURA 4 E CURA 5 NON HANNO MAI PROVATO IL PERCORSO CLI: impostavano S.SEMINAMATURA = True e S.MITO	doc/STATO_RUN.md::I SIGILLI DI CURA 4 E CURA 5 NON HANNO M	da-decidere	DA-DECIDERE	altro
 CLI-1)		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
-COES-CAUSALE		(CITATO 4 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+COES-CAUSALE		(CITATO 3 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 COME-MISURARE		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 COMPONENTI:A1		A1. STEP2OROLOGIO — aggancio OROLOGIO ↔ METRICA · omegaclk = (cs/CSM)²	doc/COMPONENTI_PROMOSSE.md::A1. STEP2OROLOGIO — aggancio OROLOGIO ↔ 	da-decidere	DA-DECIDERE	criterio-locale
 COMPONENTI:A2		peq è lo sfondo diffuso locale (Legge I, :265): nessuna statistica globale	doc/COMPONENTI_PROMOSSE.md::peq è lo sfondo diffuso locale (Legge I,	da-decidere	DA-DECIDERE	criterio-locale
@@ -156,12 +156,11 @@ D38		nasce (:3850) e' gated su SCALAMIN or SCALAMINPASSO: la legge «nessun arco
 D4		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 D5		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 D6		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
-D97		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 DIFETTI-NUOVI-FINE		(CITATO 1 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 DIFETTI-NUOVI-INIZIO		(CITATO 1 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 DOMANDE-BUSSOLA		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 DOVE-VA		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
-E1		(CITATO 65 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+E1		(CITATO 64 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 E3		EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run | GLOBALE §4 | 🔒 solo dopo che i c	doc/STATO_RUN.md::EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 	da-decidere	DA-DECIDERE	cura
 E4a		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 E4b		(CITATO 4 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
@@ -216,7 +215,7 @@ K10		(CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigill
 K11		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 K12		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 K2		(CITATO 22 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
-K3		(CITATO 54 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+K3		(CITATO 53 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 K300		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 K4		(CITATO 11 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 K5		(CITATO 11 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
@@ -253,7 +252,7 @@ M1b		(CITATO 23 volte, MAI definito in un registro)	(nessuna definizione trovata
 M1c		(CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 M2		LA MITOSI — DUE DIFETTI DA ACCLARARE. ① il figlio nasce nel PUNTO MEDIO: posfiglio = 0.5 (self.pos[a] + self.p	doc/STATO_RUN.md::LA MITOSI — DUE DIFETTI DA ACCLARARE. ① 	da-decidere	DA-DECIDERE	altro
 M2b		(CITATO 6 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
-M3		(CITATO 30 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+M3		(CITATO 29 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 M3b		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 M3c		(CITATO 20 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 M4		(CITATO 18 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
@@ -287,7 +286,6 @@ O3c		(CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigill
 O4		(CITATO 6 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 OKN-ASSERT		CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) | UN getattr(..., default) CHE DECIDE AL POSTO M	doc/STATO_RUN.md::CHIUSA il 2026-09-26, a run finito (resi	chiuso	NO	altro
 OMEGA-ETA		APERTA il 2026-09-26 (Luca: da seguire nel run base, NON una cura) | IL RAPPORTO |omega| FIGLIO/MATURO SALE CO	doc/STATO_RUN.md::APERTA il 2026-09-26 (Luca: da seguire n	aperto	DA-DECIDERE	altro
-OTTO-NOVE		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 P0		(CITATO 11 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 P04		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 P1		NON USARE L'ASSOCIAZIONE SENZA VERIFICARE LO STORICO.	CLAUDE.md::NON USARE L'ASSOCIAZIONE SENZA VERIFICAR	da-decidere	DA-DECIDERE	presidio
@@ -312,8 +310,8 @@ PASSO-2		UN AVANZAMENTO INCOMPLETO NEL SIMULATORE STESSO, :8404: for in range(30
 PAT-1		dovespingelagravita.py non rispetta il pattern 5 (nessun CONTROLLO DELL'INVOLUCRO) | PATTERN §4 | PRIMA del su	doc/STATO_RUN.md::dovespingelagravita.py non rispetta il p	da-decidere	DA-DECIDERE	cura
 PAT-1/PAT-2		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 PAT-2		spegnigravbifase.py:184 non rispetta il pattern 2 (usa max\|Δ\| invece delle FIRME) | PATTERN §4 | PRIMA del s	doc/STATO_RUN.md::spegnigravbifase.py:184 non rispetta il 	da-decidere	DA-DECIDERE	cura
-PEQ-ESATTO		(CITATO 4 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
-PEQ-NASCITA		(CITATO 4 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+PEQ-ESATTO		(CITATO 3 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+PEQ-NASCITA		(CITATO 3 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 PER-ARCO		(CITATO 1 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 POST-HOC		(CITATO 4 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 POTENZE-1		(CITATO 8 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
@@ -330,13 +328,13 @@ Q4		(CITATO 22 volte, MAI definito in un registro)	(nessuna definizione trovata)
 Q5		(CITATO 6 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 Q6		Q6 (1a) | confrontava i valori dopo il passo, quando il rilassamento li ha gia' mossi in entrambi i rami: 1.00	CLAUDE.md::Q6 (1a) | confrontava i valori dopo il p	da-decidere	DA-DECIDERE	presidio
 Q7		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
-Q777		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
+Q777		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 Q8		(CITATO 12 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 QUADRO-FINE		(CITATO 1 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 QUADRO-INIZIO		(CITATO 1 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 QUASI-CANCELLAZIONE		(CITATO 1 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 R0		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
-R1		(CITATO 31 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+R1		(CITATO 30 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 R11		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 R2		R2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] | NUOVO: il residuo della catena theta = sigma + tau/2 non e' sp	doc/RAMIFICAZIONI.md::R2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MI	da-decidere	DA-DECIDERE	fronte
 R3		pretendeva bias == 0.0 esatto e falliva su due ulp di arrotondamento	CLAUDE.md::pretendeva bias == 0.0 esatto e falliva 	da-decidere	DA-DECIDERE	presidio
@@ -409,7 +407,7 @@ REGISTRO_FISICA:V7	V7	mai sotto LAM: una discesa enorme, dx = −100·d | oggi a
 REGISTRO_FISICA:V8	V8	la DISTRIBUZIONE di \|dx\|/d, non solo il suo tipico | è il numero che decide fra piana e Itô: p50, p99, max. 	doc/REGISTRO_FISICA.md::la DISTRIBUZIONE di \|dx\|/d, non solo i	da-decidere	DA-DECIDERE	criterio-locale
 REGISTRO_FISICA:V9	V9	quante scritture hanno \|dx\|/d 1, e quante 2 | 1: Itô comprime; 2: Itô inverte il verso. Se sono zero, la sce	doc/REGISTRO_FISICA.md::quante scritture hanno \|dx\|/d 1, e qua	da-decidere	DA-DECIDERE	criterio-locale
 REPERTI-IMMUTABILI		(CITATO 4 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
-RES-INVARIANTI		(CITATO 4 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+RES-INVARIANTI		(CITATO 3 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 RIDUZIONE-AL-LIMITE		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 RIPIEGO-1		(CITATO 5 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 RIPRESA-ARGV		(CITATO 4 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
@@ -424,7 +422,7 @@ S06		Il «muro dell'1 %» dell'antifase e' causato da D35: l'antifase «non anni
 S07		dphiarc = angle(exp(1j·Δφ)) (:5894) COLLASSA a 2π una differenza che vive su 4π — e' B3 del mandato | DORMIENT	doc/STATO_RUN.md::dphiarc = angle(exp(1j·Δφ)) (:5894) COLL	da-decidere	DA-DECIDERE	altro
 S08		Se φ non e' l'azimut del Bloch, CHE COS'E'? | Z121 ha refutato la frase del docstring (R ≤ 0.18 contro un null	doc/STATO_RUN.md::Se φ non e' l'azimut del Bloch, CHE COS'	da-decidere	DA-DECIDERE	altro
 S09		IL TETTO DI r E' RAGGIUNTO PER UNA VIA CHE NON CONOSCIAMO — lettura di Luca, 2026-09-22: la quota di nodi al t	doc/STATO_RUN.md::IL TETTO DI r E' RAGGIUNTO PER UNA VIA C	da-decidere	DA-DECIDERE	altro
-S1		(CITATO 51 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+S1		(CITATO 50 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 S10		S10 RITIRATA il 2026-09-24 | Il tetto 1.414213 di r viene da un ramo di ritmo() che NON GIRA | — | RITIRATA, e	doc/STATO_RUN.md::S10 RITIRATA il 2026-09-24 | Il tetto 1.	non-difetto	NO	altro
 S11		r E' SATURO AL SUO TETTO PER UN TERZO DEI NODI, e la quota CRESCE: 0.76 % - 29.57 % in 600 passi (A11 cor.6: u	doc/STATO_RUN.md::r E' SATURO AL SUO TETTO PER UN TERZO DE	non-difetto	NO	altro
 S12		S12 APPROVATO DA LUCA il 2026-09-24 | IL RILASSAMENTO DI rep DENTRO mitosi() (:5280) E' UN EULERO ESPLICITO, e	doc/STATO_RUN.md::S12 APPROVATO DA LUCA il 2026-09-24 | IL	da-decidere	DA-DECIDERE	altro
@@ -436,7 +434,7 @@ S1d		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigill
 S1e		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 S2		S2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] | NON SI RIPRODUCE sul sistema corretto, E CAMBIA SEGNO (2026-09	doc/RAMIFICAZIONI.md::S2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MI	da-decidere	DA-DECIDERE	fronte
 S2b		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
-S3		(CITATO 42 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+S3		(CITATO 41 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 S3a		(CITATO 4 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 S4a		(CITATO 3 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 S6b		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
@@ -448,7 +446,7 @@ S8		(CITATO 19 volte, MAI definito in un registro)	(nessuna definizione trovata)
 S8b		(CITATO 5 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 S8c		(CITATO 2 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 S8d		(CITATO 3 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
-SCALA-MIN-PASSO		(CITATO 4 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+SCALA-MIN-PASSO		(CITATO 3 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 SCALE-FREE		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 SCALE-TW		LE SCALE DELLA TORSIONE: un'analisi completa, DA CAPO | mandato di Luca ricevuto alle 17:44 del 2026-09-22 | N	doc/STATO_RUN.md::LE SCALE DELLA TORSIONE: un'analisi comp	da-decidere	DA-DECIDERE	cura
 SCENA-1		CHIUSA il 2026-09-25, strada (1) (decisione di Luca) | SEMINALAM era approvata ma INCOMPATIBILE con la scena d	doc/STATO_RUN.md::CHIUSA il 2026-09-25, strada (1) (decisi	chiuso	NO	altro
@@ -465,11 +463,11 @@ STANDARD 5		(CITATO 2 volte, MAI definito in un registro)	(nessuna definizione t
 STANDARD 7		(CITATO 1 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 STANDARD 9		(CITATO 11 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 STANDARD ⑤		(CITATO 2 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
-T0		(CITATO 33 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
-T1		(CITATO 120 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+T0		(CITATO 32 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+T1		(CITATO 119 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 T1a		(CITATO 18 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 T1b		(CITATO 22 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
-T6		(CITATO 33 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+T6		(CITATO 32 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 T7		(CITATO 8 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 T8		(CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 T9		(CITATO 6 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
@@ -512,7 +510,7 @@ Y10		(CITATO 1 volte, MAI definito in un registro)	(nessuna definizione trovata)
 Y2		Y2 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | Due osservabili U(1) hanno il nullo SBAGLIATO o NON VERIFICATO, e una e' 	doc/RAMIFICAZIONI.md::Y2 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | Due	chiuso	NO	fronte
 Y3		(CITATO 8 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 Y4		(CITATO 4 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
-Y5		(CITATO 63 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+Y5		(CITATO 62 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 Y5a		(CITATO 1 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 Y5b		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
 Y5c		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale
@@ -570,7 +568,7 @@ Z17		Z17 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] | A6 nell'inerzia e' g
 Z18		Z18 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] | LO SFASAMENTO eta: per mesi il nodo appena nato ha pesato 2e-4 invec	doc/RAMIFICAZIONI.md::Z18 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] 	aperto	DA-DECIDERE	fronte
 Z19		Z19 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | QUARTA VOLTA: una grandezza letta in un momento del passo diverso da que	doc/RAMIFICAZIONI.md::Z19 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | QU	chiuso	NO	fronte
 Z1b		(CITATO 11 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
-Z1c		(CITATO 32 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
+Z1c		(CITATO 31 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro
 Z2		Z2 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | spinta: A2 e A3 sono stati tolti, A1 NO (2026-09-17) | La correzione (2) 	doc/RAMIFICAZIONI.md::Z2 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | spi	chiuso	NO	fronte
 Z20		Z20 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | UN DRIVER CHE FORZA UN FLAG IN TUTTI I BRACCI RENDE L'A/B NON ATTRIBUIBI	doc/RAMIFICAZIONI.md::Z20 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | UN	chiuso	NO	fronte
 Z21		Z21 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] | SPINFEEDBACK con TAUA = 2.0: ESITO MISTO, e non si sceglie un	doc/RAMIFICAZIONI.md::Z21 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · M	da-decidere	SI	fronte
@@ -665,4 +663,3 @@ Z96		Z96 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] | PEQNASCITALOCALE (C2): UNA SO
 Z97		Z97 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] | SCALAMINPASSO (C3): il freno UNA VOLTA PER PASSO. IL CRICCHETTO E' 	doc/RAMIFICAZIONI.md::Z97 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA]	chiuso	NO	fronte
 Z98		Z98 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] | COESCAUSALE (C4): un solo ISTANTE e il CONO DEL LUOGO. E col tetto 	doc/RAMIFICAZIONI.md::Z98 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA]	chiuso	NO	fronte
 Z99		Z99 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] | ANOMSIMM (C1-bis): il pavimento max(peq, 1e-9) E' TOLTO. L'anomalia	doc/RAMIFICAZIONI.md::Z99 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA]	chiuso	NO	fronte
-Z999		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	criterio-locale

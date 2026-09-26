@@ -1,0 +1,67 @@
+================================================================================================================
+CHI LEGGE GLI ID E I REGISTRI -- l'inventario che precede il `PASSO 3`   (2026-09-26)
+================================================================================================================
+
+  script che NOMINANO un registro: 83
+     LETTORE                 26
+     IMPORTATORE              3
+     scrittore-una-volta     21
+     copia-simulatore        33
+
+  ⚠ IL PERIMETRO DEL `PASSO 3` SONO I **LETTORI** CHE APRONO DAVVERO UN REGISTRO: 10
+
+----------------------------------------------------------------------------------------------------------------
+LETTORE
+----------------------------------------------------------------------------------------------------------------
+file                                       righe  apre?  che registri nomina
+csv/_blob_nelle_voci.py                       87     SI  COMPONENTI_PROMOSSE, RAMIFICAZIONI
+csv/_collaudo_lista_chiusa.py                112     SI  LISTA_CHIUSA
+csv/_cure_verificate.py                      352     SI  STATO_RUN
+csv/_inventario_passo.py                     269     SI  INVENTARIO_passo_incompleto
+csv/_lista_chiusa.py                         592     SI  INVENTARIO_passo_incompleto, LISTA_CHIUSA, RAMIFICAZ
+csv/_presidio_indice.py                      240     SI  ASSIOMI, COMPONENTI_PROMOSSE, LISTA_CHIUSA, PATTERN_
+csv/_punto_della_situazione.py               162     SI  STATO_RUN
+csv/_quadro_unico.py                         313     SI  STATO_RUN
+csv/_seal_fork/_triage_difetti.py            302     SI  PATTERN_DI_PROVA, RAMIFICAZIONI, STATO_RUN
+csv/_stato_run.py                            123     SI  STATO_RUN
+csv/_hook_fisica.py                          320      -  REGISTRO_FISICA
+csv/_hook_relazione.py                       189      -  RAMIFICAZIONI, STATO_RUN
+csv/_inventario_lettori_id.py                136      -  INVENTARIO_passo_incompleto, LISTA_CHIUSA, PATTERN_D
+csv/_punto_ripresa.py                         40      -  STATO_RUN
+csv/_seal_fork/_inventario_scrittori.py      286      -  REGISTRO_FISICA
+csv/_seal_fork/_sigillo_cura2.py             396      -  PATTERN_DI_PROVA
+csv/_seal_fork/_sigillo_mem_moto.py          457      -  PATTERN_DI_PROVA
+csv/_seal_fork/_sigillo_mem_moto_tutto.py    630      -  PATTERN_DI_PROVA
+csv/_test_fork/_analisi7_assiomi.py          163      -  ASSIOMI
+csv/_test_fork/_campagna_csfloor.py          121      -  COMPONENTI_PROMOSSE
+csv/_test_fork/_g4_prova.py                  633      -  PATTERN_DI_PROVA
+csv/_test_fork/_osserva_vuoto.py             886      -  RAMIFICAZIONI
+csv/_test_fork/_referto_cura2.py             244      -  REGISTRO_FISICA
+csv/_test_fork/_scena_video.py               502      -  STATO_RUN
+csv/_test_fork/_spegni_grav_bifase.py        318      -  STATO_RUN
+csv/_test_fork/_verdetto_S_R.py              427      -  RAMIFICAZIONI
+
+----------------------------------------------------------------------------------------------------------------
+IMPORTATORE
+----------------------------------------------------------------------------------------------------------------
+file                                       righe  apre?  che registri nomina
+csv/_collisioni_id.py                        243     SI  ASSIOMI, COMPONENTI_PROMOSSE, LISTA_CHIUSA, PATTERN_
+csv/_indice_id.py                            328     SI  ASSIOMI, COMPONENTI_PROMOSSE, PATTERN_DI_PROVA, RAMI
+csv/_rinomina_collisioni.py                  227     SI  LISTA_CHIUSA, RAMIFICAZIONI, STATO_RUN
+
+----------------------------------------------------------------------------------------------------------------
+NON SI TOCCANO (e il conteggio dice perche' «81 file» non era il perimetro)
+----------------------------------------------------------------------------------------------------------------
+  scrittore-una-volta     21 file  -- hanno gia' girato: aggiungevano una voce
+  copia-simulatore        33 file  -- REPERTI da 7000-10500 righe: nominano un documento in un commento
+
+================================================================================================================
+COSA QUESTO INVENTARIO *NON* DICE
+================================================================================================================
+  - **`apre?` e' un'euristica sul sorgente**, non un'esecuzione: dice che lo script apre un
+    registro o dichiara un elenco di fonti. **Un lettore che costruisce il path a pezzi non lo
+    vedo.**
+  - **non dice quanto costa riscrivere ciascuno**: la stima sta nella relazione, e **la parte
+    cara e' il collaudo nei due versi**, uno per strumento.
+  - **gli IMPORTATORI restano a leggere il Markdown**, ed e' una precisazione di merito: sono
+    cio' che COSTRUISCE l'indice. La regola vale per i **consumatori**.
