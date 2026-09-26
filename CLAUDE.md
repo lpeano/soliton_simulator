@@ -239,6 +239,14 @@ impedisce di farlo **senza che git lo mostri**.
 ## 9. L'INDICE DEI DIFETTI: COME SI USA *(dal 2026-09-26)*
 
 - **LA FONTE E' `doc/INDICE_ID.tsv`** — un TSV di **13 colonne**, e **non ce n'e' un'altra**.
+- ### 📌 **L'INDICE NON SI LEGGE INTERO: SI INTERROGA COL COMANDO.** *(171 KB: leggerlo tutto
+  non fa risparmiare contesto, lo consuma.)* `python csv/_indice_id.py` con
+  **`--cerca ID`** *(uguaglianza ESATTA sull'id intero, mai un prefisso)* · **`--aperti`** ·
+  **`--blocca SI`** · **`--famiglia X`** · **`--dettaglio ID`** *(le colonne lunghe di UNA
+  voce)* · **`--testo PAROLA`** *(ricerca sul testo COMPLETO di tutte le colonne; **il
+  troncamento a 80 caratteri e' solo di stampa, mai di confronto**)*.
+- **`titolo_breve` e' `<= 100` caratteri e UNICO**, e il validatore lo impone: la frase
+  intera vive in `stato_da`.
 - **colonne:** `id` · `alias` · `titolo_breve` · `fonte_principale` · `stato` · `blocca_run_base` · `tipo` · `famiglia` · `stato_da` · `avanzamento` · `revisione` · `motivo` · `nota`
 - **`stato`:** `aperto` | `chiuso` | `non-difetto` | `teoria` | `da-decidere`
 - **`blocca_run_base`:** `SI` | `NO` | `DA-DECIDERE` | `DA VERIFICARE`

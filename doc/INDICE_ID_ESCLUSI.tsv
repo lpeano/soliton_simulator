@@ -57,3 +57,5 @@ N-MASSE	nome di una SCENA del simulatore (`TESTS`), non un identificatore di dif
 MASSE-COERENTI	nome di una SCENA del simulatore (`TESTS`), non un identificatore di difetto	0
 TERRA-BUCONERO	nome di una SCENA del simulatore (`TESTS`), non un identificatore di difetto	0
 INSIEME-INSIEME	locuzione del testo: `distanza INSIEME-INSIEME` e' il nome di una misura in prosa, non un identificatore di difetto	0
+D021	ID SINTETICO del collaudo di `INDICE-LEGGERO`: esiste solo dentro un indice finto, per provare che `--cerca D02` NON lo trova. Non e' una voce del repo	0
+DE-DUPLICATI	locuzione del testo (il conteggio dei titoli de-duplicati), non un identificatore	0

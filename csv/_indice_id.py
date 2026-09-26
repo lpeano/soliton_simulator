@@ -56,6 +56,7 @@ BLOCCA = {"SI", "NO", "DA-DECIDERE", "DA VERIFICARE"}
 TIPI = {"difetto", "sospetto", "fronte", "misura", "cura", "presidio", "assioma", "standard",
         "criterio-locale", "altro"}
 FAM = {"A", "B", "C", "D", "E", "F", "G", "?"}
+TITOLO_MAX = 100     # [INDICE-LEGGERO] un titolo breve dev'essere breve: la stampa e' UNA riga
 AVANZ = {"FATTO", "IN CORSO", "IN CODA", "BLOCCATO", "CON RISERVA", "(senza marcatore)"}
 FORMA = re.compile(r"(?:[A-Z]\d{1,3}[a-z]?|STANDARD\s+[0-9①-⑳]+"
                    r"|[A-Z][A-Z0-9]*(?:-[A-Za-z0-9()/]+)+|[A-Z]{2,}\d{1,3}"
@@ -82,6 +83,7 @@ def leggi(percorso):
 def valida(percorso):
     """`(errori, quante_voci)`. Un errore e' una stringa leggibile: nessun `assert` muto."""
     err = []
+    titoli = {}          # titolo_breve -> id, per la regola di UNICITA'
     col, righe = leggi(percorso)
     if col != COL:
         err.append("SCHEMA: intestazione diversa da quella attesa.%s     attesa: %s%s     trovata: %s"
@@ -124,6 +126,22 @@ def valida(percorso):
         if v["blocca_run_base"] == "SI" and not v["motivo"]:
             err.append("riga %d (`%s`): blocca SI **senza `motivo`**: una decisione senza prova"
                        % (k, i))
+        # [INDICE-LEGGERO, 2026-09-27] IL TITOLO BREVE DEV'ESSERE BREVE, E UNICO.
+        #   Breve, perche' l'indice si INTERROGA e la stampa e' una riga: un titolo da 141
+        #   caratteri (il massimo misurato) la fa a pezzi. La frase intera vive in `stato_da`.
+        #   Unico, perche' due voci diverse con lo stesso nome sono la collisione che l'indice
+        #   esiste per curare -- ed e' successo: `A3` era tre cose.
+        if len(v["titolo_breve"]) > TITOLO_MAX:
+            err.append("riga %d (`%s`): titolo_breve di %d caratteri, il tetto e' %d. "
+                       "Si accorcia (csv/_titoli_brevi.py) e la frase intera va in `stato_da`."
+                       % (k, i, len(v["titolo_breve"]), TITOLO_MAX))
+        tb = v["titolo_breve"].strip()
+        if tb:
+            if tb in titoli:
+                err.append("riga %d (`%s`): titolo_breve IDENTICO a quello di `%s`: due voci "
+                           "diverse con lo stesso nome sono una collisione." % (k, i, titoli[tb]))
+            else:
+                titoli[tb] = i
     return err, len(visti)
 
 
@@ -137,6 +155,89 @@ def perdite():
     _c, righe = leggi(FONTE)
     ora = set(x.split(TAB)[0].strip() for x in righe)
     return sorted((al_tag - ora) - set(CANCELLAZIONI)), None
+
+
+def voci(percorso=None):
+    """`[dict]` di tutte le voci, nell'ordine del file. Testo COMPLETO, mai troncato."""
+    c, righe = leggi(percorso or FONTE)
+    fuori = []
+    for r in righe:
+        v = r.split(TAB)
+        while len(v) < len(COL):
+            v.append("")
+        fuori.append(dict(zip(COL, v)))
+    return fuori
+
+
+def _riga_corta(v, largh=80):
+    """UNA riga: id, stato, blocca, famiglia, titolo TAGLIATO A `largh`.
+
+    ⚠ **IL TAGLIO E' SOLO DI VISUALIZZAZIONE, MAI DI CONFRONTO** (mandato di Luca, 2026-09-27):
+    chi cerca guarda il testo INTERO, e solo la stampa e' corta. Confrontare sul troncato
+    significherebbe non trovare cio' che sta oltre l'ottantesimo carattere.
+    """
+    tb = v["titolo_breve"]
+    return "%-16s %-12s %-12s %-3s %s" % (v["id"], v["stato"], v["blocca_run_base"],
+                                          v["famiglia"], tb[:largh])
+
+
+def interroga(a, percorso=None):
+    """I comandi di interrogazione. Restituisce `0` se ha risposto, `None` se non tocca a lui."""
+    vv = voci(percorso)
+
+    def elenca(sel, cosa):
+        print("=" * 96)
+        print("INDICE -- %s: %d voci su %d" % (cosa, len(sel), len(vv)))
+        print("%-16s %-12s %-12s %-3s %s" % ("id", "stato", "blocca", "fam", "titolo (tagliato a 80)"))
+        print("-" * 96)
+        for v in sel:
+            print(_riga_corta(v))
+        print("-" * 96)
+        print("  il DETTAGLIO di una voce:  python csv/_indice_id.py --dettaglio <ID>")
+        return 0
+
+    if "--cerca" in a:
+        # ⚠ UGUAGLIANZA ESATTA SULL'ID INTERO, MAI un prefisso: `D02` non deve trovare `D021`
+        #   ne' `D02-X`. E' la regola che Luca ha dettato, e il collaudo la prova nei due versi.
+        chiave = a[a.index("--cerca") + 1]
+        sel = [v for v in vv if v["id"] == chiave or chiave in
+               [x for x in v["alias"].split(",") if x]]
+        if not sel:
+            print("nessuna voce con id (o alias) ESATTAMENTE `%s`." % chiave)
+            simili = [v["id"] for v in vv if chiave in v["id"] and v["id"] != chiave]
+            if simili:
+                print("  ⚠ ci sono id che lo CONTENGONO, e NON sono lui: %s"
+                      % ", ".join(simili[:12]))
+            return 0
+        return elenca(sel, "id esattamente `%s`" % chiave)
+    if "--dettaglio" in a:
+        chiave = a[a.index("--dettaglio") + 1]
+        sel = [v for v in vv if v["id"] == chiave]
+        if not sel:
+            print("nessuna voce con id ESATTAMENTE `%s`." % chiave)
+            return 0
+        v = sel[0]
+        print("=" * 96)
+        print("DETTAGLIO di `%s`" % v["id"])
+        print("=" * 96)
+        for k in COL:
+            if v[k].strip():
+                print("  %-18s %s" % (k, v[k]))
+        return 0
+    if "--aperti" in a:
+        return elenca([v for v in vv if v["stato"] == "aperto"], "stato `aperto`")
+    if "--blocca" in a:
+        q = a[a.index("--blocca") + 1]
+        return elenca([v for v in vv if v["blocca_run_base"] == q], "blocca_run_base `%s`" % q)
+    if "--famiglia" in a:
+        q = a[a.index("--famiglia") + 1]
+        return elenca([v for v in vv if v["famiglia"] == q], "famiglia `%s`" % q)
+    if "--testo" in a:
+        # la ricerca e' sul testo COMPLETO di TUTTE le colonne. Solo la STAMPA e' troncata.
+        q = a[a.index("--testo") + 1].lower()
+        sel = [v for v in vv if any(q in v[k].lower() for k in COL)]
+        return elenca(sel, "testo `%s` in QUALUNQUE colonna (ricerca sul testo COMPLETO)" % q)
+    return None
 
 
 def collaudo():
@@ -181,6 +282,73 @@ def collaudo():
         ok = bool(e2)
         esiti.append(ok)
         P("  DEVE FALLIRE  %-36s -> %s" % (nome, "RIFIUTA: " + e2[0][:52] if ok else "*** PASSA ***"))
+    # ---------------------------------------------------- [INDICE-LEGGERO] i quattro casi
+    P()
+    P("  INDICE-LEGGERO (2026-09-27) -- i quattro casi, nei DUE versi")
+    # (1) `--cerca` e' UGUAGLIANZA: `D02` non deve trovare `D021`
+    OLTRE = ("parolachiavelontana")
+    finte = [TAB.join(["D02", "", "il difetto vero", "x", "aperto", "NO", "difetto", "F",
+                       "", "(senza marcatore)", "", "", ""]),
+             TAB.join(["D021", "", "un ID SINTETICO che CONTIENE D02", "x", "aperto", "NO",
+                       "difetto", "F", "", "(senza marcatore)", "", "", ""]),
+             TAB.join(["D02-X", "", "un altro che lo contiene col trattino", "x", "aperto", "NO",
+                       "difetto", "F", "", "(senza marcatore)", "", "", ""]),
+             TAB.join(["LUNGA", "", "un titolo di prova", "x", "aperto", "NO", "difetto", "F",
+                       "", "(senza marcatore)", "",
+                       "a" * 95 + " " + OLTRE, ""])]
+    tmp2 = os.path.join(RADICE, "doc", "_indice_finto.tmp")
+    io.open(tmp2, "w", encoding="utf-8", newline=NL).write(
+        TAB.join(COL) + NL + NL.join(finte) + NL)
+    vv = voci(tmp2)
+    trovati = [v["id"] for v in vv if v["id"] == "D02"]
+    ok_c1 = (trovati == ["D02"])
+    P("  DEVE TROVARE SOLO `D02`   cercando `D02` fra D02/D021/D02-X -> %s   %s"
+      % (trovati, "OK" if ok_c1 else "*** SBAGLIATO ***"))
+    esiti.append(ok_c1)
+    # (2) una parola OLTRE l'ottantesimo carattere: `--testo` la TROVA
+    v_l = [v for v in vv if v["id"] == "LUNGA"][0]
+    posizione = v_l["motivo"].lower().find(OLTRE)
+    trova = [v["id"] for v in vv if any(OLTRE in v[k].lower() for k in COL)]
+    corto = [v["id"] for v in vv if any(OLTRE in v[k][:80].lower() for k in COL)]
+    ok_c2 = (trova == ["LUNGA"] and corto == [])
+    P("  DEVE TROVARE la parola al carattere %d   sul testo COMPLETO %s, sul TRONCATO %s   %s"
+      % (posizione, trova, corto, "OK" if ok_c2 else "*** SBAGLIATO ***"))
+    P("      (se il confronto usasse il troncamento, quella parola sarebbe INTROVABILE)")
+    esiti.append(ok_c2)
+    os.remove(tmp2)
+    # (3) due titoli brevi IDENTICI: il validatore RIFIUTA
+    c3 = righe[0].split(TAB)
+    c4 = righe[1].split(TAB)
+    while len(c4) < len(COL):
+        c4.append("")
+    c4[2] = c3[2]
+    g3 = list(righe)
+    g3[1] = TAB.join(c4)
+    io.open(tmp, "w", encoding="utf-8", newline=NL).write(
+        TAB.join(COL) + NL + NL.join(g3) + NL)
+    e3, _n3 = valida(tmp)
+    os.remove(tmp)
+    ok_c3 = any("IDENTICO" in x for x in e3)
+    P("  DEVE FALLIRE  due titoli brevi IDENTICI -> %s   %s"
+      % ("RIFIUTA" if ok_c3 else "*** PASSA ***", "OK" if ok_c3 else "*** SBAGLIATO ***"))
+    esiti.append(ok_c3)
+    # (4) un titolo oltre il tetto: il validatore RIFIUTA
+    c5 = righe[0].split(TAB)
+    while len(c5) < len(COL):
+        c5.append("")
+    c5[2] = "t" * (TITOLO_MAX + 1)
+    g5 = list(righe)
+    g5[0] = TAB.join(c5)
+    io.open(tmp, "w", encoding="utf-8", newline=NL).write(
+        TAB.join(COL) + NL + NL.join(g5) + NL)
+    e5, _n5 = valida(tmp)
+    os.remove(tmp)
+    ok_c4 = any("titolo_breve di %d" % (TITOLO_MAX + 1) in x for x in e5)
+    P("  DEVE FALLIRE  un titolo di %d caratteri (tetto %d) -> %s   %s"
+      % (TITOLO_MAX + 1, TITOLO_MAX, "RIFIUTA" if ok_c4 else "*** PASSA ***",
+         "OK" if ok_c4 else "*** SBAGLIATO ***"))
+    esiti.append(ok_c4)
+
     _p, _err = perdite()
     ok_p = (_p == [])
     esiti.append(ok_p)
@@ -209,6 +377,9 @@ if __name__ == "__main__":
     _presidio.avvia(__file__)
     if "--collaudo" in sys.argv:
         sys.exit(collaudo())
+    _q = interroga(sys.argv[1:])
+    if _q is not None:
+        sys.exit(_q)
     e, n = valida(FONTE)
     p, msg = perdite()
     print("VALIDAZIONE di doc/INDICE_ID.tsv -- %d voci, %d colonne" % (n, len(COL)))

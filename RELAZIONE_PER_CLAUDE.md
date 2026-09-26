@@ -2264,3 +2264,55 @@ esistono al passo 0, NON che resteranno validi a campo maturo.**
 > **Il collaudo a risposta nota si fa dove la risposta si conosce**: una catena, un reticolo, due
 > componenti staccate, il medoide di una catena dispari. **`P1-sexies` chiede un caso a risposta
 > nota, e questo lo e'; «due masse» non lo sarebbe stato.**
+
+---
+
+# 🔎 **`INDICE-LEGGERO`** — l'indice non si legge intero: **si interroga** *(2026-09-27)*
+
+**Il punto di Luca, misurato:** l'indice pesa **171 KB** contro i **202 KB** di `STATO_RUN`.
+**Leggerlo intero non fa risparmiare contesto: lo consuma.**
+
+## I comandi, in `csv/_indice_id.py`
+
+```
+--cerca ID       una riga: id, stato, blocca, famiglia, titolo tagliato a 80
+--aperti         le voci `aperto`          --blocca SI     le voci che bloccano il run base
+--famiglia X     per famiglia              --dettaglio ID  le colonne lunghe di UNA voce
+--testo PAROLA   ricerca libera sul testo COMPLETO di TUTTE le colonne
+```
+
+**Le due regole contro le collisioni, e sono il cuore:**
+
+| regola | perche' |
+|---|---|
+| **`--cerca` e' UGUAGLIANZA ESATTA sull'id intero, mai un prefisso** | `D02` **non deve** trovare `D021` ne' `D02-X`. E se ci sono id che lo CONTENGONO, il comando **lo dice** invece di tacere |
+| **il troncamento a 80 e' SOLO di stampa, mai di confronto** | una parola oltre l'ottantesimo carattere **deve** essere trovabile: confrontare sul troncato la renderebbe **introvabile** |
+
+## I titoli brevi: **330 accorciati, 275 de-duplicati**
+
+Il validatore ora impone **`titolo_breve <= 100`** e **rifiuta due titoli identici su ID diversi**.
+`csv/_titoli_brevi.py` ha fatto il lavoro, e **la frase intera e' in `stato_da`**:
+
+```
+voci 771   accorciati 330 (il piu' lungo era 141)   de-duplicati 275   max DOPO 100   duplicati DOPO 0
+DELTA sulle colonne intoccabili (id, stato, blocca_run_base, famiglia): 0 violazioni
+```
+
+> ### ⚠ **I 275 DUPLICATI NON ERANO COLLISIONI VERE, E VA DETTO.**
+> I gruppi grandi erano **testi SEGNAPOSTO dell'importazione** — *«(CITATO n volte, MAI definito in
+> un registro)»* — e **uno da 91 voci**. **Non e' che due voci diverse portassero lo stesso nome:
+> e' che 91 voci non hanno ancora un nome.** La regola serve **da qui in avanti**, e
+> **accorciarli non li definisce: restano da definire.**
+
+## Il collaudo, nei due versi — **10/10**
+
+```
+DEVE TROVARE SOLO `D02`   cercando `D02` fra D02/D021/D02-X -> ['D02']            OK
+DEVE TROVARE la parola al carattere 96   testo COMPLETO ['LUNGA'], TRONCATO []    OK
+DEVE FALLIRE  due titoli brevi IDENTICI -> RIFIUTA                                OK
+DEVE FALLIRE  un titolo di 101 caratteri (tetto 100) -> RIFIUTA                   OK
+DEVE PASSARE  l'indice VERO (771 voci) -> PASS
+```
+
+**E i controlli del riordino restano 5/5**: `CLAUDE.md` a **370 righe** *(tetto 400)*, con la riga
+nuova nella sezione dell'indice; il collaudo di quella sezione **6/6**, invariato.

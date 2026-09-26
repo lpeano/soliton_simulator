@@ -906,3 +906,10 @@ diversi per lo stesso file.)*
 |---|---|---|---|---|
 | `csv/_osservabile_p1.py` | `77b93d1b` | `python csv/_osservabile_p1.py --scena` · `--snap F` · `--semi 11,12,13,14` · `--collaudo` · `--json F` | **L'OSSERVABILE DELLA `PROVA 1`**: la distanza fra le masse **lungo il grafo, pesi `net.d`** (`A13`, mai `pos`). Centro = **medoide di grafo**; da' anche **insieme-insieme**, i **punti di controllo** nel vuoto e la **dispersione fra semi** (`P3`). `inf` **dichiarato** se le masse sono in componenti diverse | `K1` errore **0.000e+00** su catena, reticolo, componenti staccate e medoide |
 | `csv/_seal_fork/_sigillo_osservabile_p1.py` | `8db2c386` | `python csv/_seal_fork/_sigillo_osservabile_p1.py` · `--corto` | il sigillo: `K1` sintetico, **`K2a`/`K2b`** *(cambio solo `d` -> cambia; solo `pos` -> non cambia)*, `K3` invarianza esatta, `K4` controlli entro il 10 %, `K5` **quattro processi** | **6/6 PASS** (`csv/_seal_fork/_sig_osservabile_p1/REFERTO.txt`) |
+
+## Aggiunto il 2026-09-27 — **`INDICE-LEGGERO`**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_titoli_brevi.py` | `05ca3df8` | `python csv/_titoli_brevi.py` · `--prova` | accorcia i `titolo_breve` oltre i **100** caratteri *(la frase intera va in `stato_da`)* e **de-duplica** quelli identici. **Il delta e' asserito col diff:** `id`, `stato`, `blocca` e `famiglia` non cambiano su nessuna riga | **330 accorciati, 275 de-duplicati, 0 violazioni** sulle colonne intoccabili |
+| `csv/_indice_id.py` | `48510b17` | `--cerca ID` · `--aperti` · `--blocca SI` · `--famiglia X` · `--dettaglio ID` · `--testo PAROLA` | **il VALIDATORE, e ora anche l'INTERROGAZIONE**: l'indice non si legge intero. `--cerca` e' **uguaglianza esatta**; `--testo` cerca sul **testo completo** e tronca **solo la stampa** | **collaudo 10/10**, coi quattro casi di `INDICE-LEGGERO` nei due versi |

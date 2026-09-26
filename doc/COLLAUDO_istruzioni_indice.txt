@@ -7,7 +7,7 @@ COLLAUDO DELLE ISTRUZIONI D'USO (sezione dell'INDICE DEI DIFETTI di CLAUDE.md)  
     colonne ............. 13   id, alias, titolo_breve, fonte_principale, stato, blocca_run_base, tipo, famiglia, stato_da, avanzamento, revisione, motivo, nota
     stati ammessi ....... aperto, chiuso, non-difetto, teoria, da-decidere
     tipi ammessi ........ 10
-    comandi ............. python csv/_lista_chiusa.py | python csv/_vista_smistamento.py | python csv/_punto_della_situazione.py | python csv/_indice_id.py | python csv/_indice_id.py --collaudo
+    comandi ............. python csv/_indice_id.py | python csv/_lista_chiusa.py | python csv/_vista_smistamento.py | python csv/_punto_della_situazione.py | python csv/_indice_id.py | python csv/_indice_id.py --collaudo
     documenti citati .... doc/INDICE_ID.tsv, doc/REVISIONE_SI_2026-09-26.md, doc/SMISTAMENTO_run_base.md, doc/STATO_RUN.md
 
   K0 la sezione dichiara fonte, 13 colonne, 5 stati e i comandi -> OK
@@ -16,6 +16,7 @@ COLLAUDO DELLE ISTRUZIONI D'USO (sezione dell'INDICE DEI DIFETTI di CLAUDE.md)  
     K1 DEVE FALLIRE  solo in `STATO_RUN` ............. uscita 1   OK
     K2 DEVE PASSARE  con la RIGA nell'indice ......... uscita 0   OK
     K3 i comandi della sezione girano tutti:
+         python csv/_indice_id.py                     uscita 0
          python csv/_lista_chiusa.py                  uscita 0
          python csv/_vista_smistamento.py             uscita 0
          python csv/_punto_della_situazione.py        uscita 0
