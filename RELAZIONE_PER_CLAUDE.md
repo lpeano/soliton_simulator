@@ -20160,3 +20160,50 @@ La smentita **c'era**, nel **messaggio** del commit **`48a3555`**:
 
 `Z73` ora porta **`RITIRATA`** con la frase e il commit; `D09` e' **`NON E' UN DIFETTO`**, `blocca NO`.
 **La misura di partenza era su 60 passi e un seme: era CORTA, non sbagliata.**
+
+
+---
+
+# 📐 **IL DELTA RISPETTO AL TAG, E LA VERIFICA DELLA CONDIZIONE DI FINE** *(2026-09-26)*
+
+## ✅ IL DELTA, col diff — e sono ESATTAMENTE le tre decisioni di questo mandato
+
+```
+colonne   al tag  9  ->  ora 10      nuova: `avanzamento`
+voci      al tag 741 ->  ora 740     SPARITE 1: `CLI-1)` (il token spurio della parentesi)
+                                     NUOVE   0
+campi cambiati (3):
+   D09              stato aperto -> non-difetto      blocca DA VERIFICARE -> NO
+   Z73              stato aperto -> non-difetto      blocca NO -> NO
+   LETTORI-INDICE   stato aperto -> chiuso           blocca NO -> NO
+```
+
+> ### **Nessun'altra voce si e' mossa.** Il congelamento tiene: cio' che e' cambiato e' **quello che
+> ### Luca ha deciso**, piu' una colonna nuova e un fantasma in meno.
+
+## ⚠ **LA CONDIZIONE DI FINE: verificata, ma il conteggio GREZZO SALE, e va spiegato**
+
+`csv/_inventario_lettori_id.py` rigirato: i **LETTORI che aprono davvero un registro** passano da
+**10** a **11**. **Non e' una regressione, e non lo dico per rassicurare: lo dico con l'elenco.**
+
+```
+_archivio/_triage_difetti.py   RITIRATO: e' in archivio, non gira piu'
+_punto_della_situazione.py     apre STATO_RUN **nel COLLAUDO**, per provare che `CONTAGIO` --
+                               che vive nel Markdown e NON nell'indice -- **non passa**
+_analisi_lettori_indice.py     NUOVO: nomina i registri perche' il suo mestiere e' dire CHI li apre
+_confronto_pds.py              NUOVO: confronta due output, non cerca difetti
+_lista_chiusa / _presidio_indice / _collaudo_lista_chiusa   nominano `LISTA_CHIUSA` e i registri
+                               come ELENCO DI FONTI, non li aprono per trovare difetti
+_cure_verificate / _quadro_unico   GENERATORI: leggono il CODICE e SCRIVONO in `STATO_RUN`
+_blob_nelle_voci               ha per OGGETTO la prosa dei registri
+_inventario_passo / _stato_run  fuori perimetro (script e registro dei run)
+```
+
+> ### **IL LIMITE E' DELLA VERIFICA, non del lavoro:** l'inventario **non puo' distinguere «apre per
+> ### TROVARE DIFETTI» da «nomina un registro»** — e' un'euristica sul sorgente. **La condizione di
+> ### fine, come Luca l'ha scritta, e' soddisfatta; il numero grezzo no, e i due fatti convivono.**
+> ### Chiamare «11 → 0» quello che l'euristica non sa misurare sarebbe un timbro falso.
+
+**Cio' che si potrebbe fare, e non faccio ora perche' non e' stato chiesto:** dare all'inventario un
+criterio piu' fine *(distinguere `open()` in lettura di un registro **da** la sola comparsa del nome
+in un elenco di fonti o in un collaudo)*. **Sarebbe una voce nuova, e la lista e' congelata.**

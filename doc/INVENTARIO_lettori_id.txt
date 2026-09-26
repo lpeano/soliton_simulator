@@ -2,30 +2,32 @@
 CHI LEGGE GLI ID E I REGISTRI -- l'inventario che precede il `PASSO 3`   (2026-09-26)
 ================================================================================================================
 
-  script che NOMINANO un registro: 83
-     LETTORE                 26
+  script che NOMINANO un registro: 85
+     LETTORE                 28
      IMPORTATORE              3
      scrittore-una-volta     21
      copia-simulatore        33
 
-  ⚠ IL PERIMETRO DEL `PASSO 3` SONO I **LETTORI** CHE APRONO DAVVERO UN REGISTRO: 10
+  ⚠ IL PERIMETRO DEL `PASSO 3` SONO I **LETTORI** CHE APRONO DAVVERO UN REGISTRO: 11
 
 ----------------------------------------------------------------------------------------------------------------
 LETTORE
 ----------------------------------------------------------------------------------------------------------------
 file                                       righe  apre?  che registri nomina
+csv/_analisi_lettori_indice.py               149     SI  INVENTARIO_passo_incompleto, LISTA_CHIUSA, PATTERN_D
+csv/_archivio/_triage_difetti.py             302     SI  PATTERN_DI_PROVA, RAMIFICAZIONI, STATO_RUN
 csv/_blob_nelle_voci.py                       87     SI  COMPONENTI_PROMOSSE, RAMIFICAZIONI
-csv/_collaudo_lista_chiusa.py                112     SI  LISTA_CHIUSA
+csv/_collaudo_lista_chiusa.py                116     SI  LISTA_CHIUSA
 csv/_cure_verificate.py                      352     SI  STATO_RUN
 csv/_inventario_passo.py                     269     SI  INVENTARIO_passo_incompleto
-csv/_lista_chiusa.py                         592     SI  INVENTARIO_passo_incompleto, LISTA_CHIUSA, RAMIFICAZ
-csv/_presidio_indice.py                      240     SI  ASSIOMI, COMPONENTI_PROMOSSE, LISTA_CHIUSA, PATTERN_
-csv/_punto_della_situazione.py               162     SI  STATO_RUN
+csv/_lista_chiusa.py                         308     SI  LISTA_CHIUSA
+csv/_presidio_indice.py                      306     SI  ASSIOMI, COMPONENTI_PROMOSSE, LISTA_CHIUSA, PATTERN_
+csv/_punto_della_situazione.py               194     SI  STATO_RUN
 csv/_quadro_unico.py                         313     SI  STATO_RUN
-csv/_seal_fork/_triage_difetti.py            302     SI  PATTERN_DI_PROVA, RAMIFICAZIONI, STATO_RUN
 csv/_stato_run.py                            123     SI  STATO_RUN
+csv/_confronto_pds.py                        111      -  PATTERN_DI_PROVA, STATO_RUN
 csv/_hook_fisica.py                          320      -  REGISTRO_FISICA
-csv/_hook_relazione.py                       189      -  RAMIFICAZIONI, STATO_RUN
+csv/_hook_relazione.py                       191      -  RAMIFICAZIONI, STATO_RUN
 csv/_inventario_lettori_id.py                136      -  INVENTARIO_passo_incompleto, LISTA_CHIUSA, PATTERN_D
 csv/_punto_ripresa.py                         40      -  STATO_RUN
 csv/_seal_fork/_inventario_scrittori.py      286      -  REGISTRO_FISICA
@@ -45,8 +47,8 @@ csv/_test_fork/_verdetto_S_R.py              427      -  RAMIFICAZIONI
 IMPORTATORE
 ----------------------------------------------------------------------------------------------------------------
 file                                       righe  apre?  che registri nomina
-csv/_collisioni_id.py                        243     SI  ASSIOMI, COMPONENTI_PROMOSSE, LISTA_CHIUSA, PATTERN_
-csv/_indice_id.py                            328     SI  ASSIOMI, COMPONENTI_PROMOSSE, PATTERN_DI_PROVA, RAMI
+csv/_collisioni_id.py                        269     SI  ASSIOMI, COMPONENTI_PROMOSSE, LISTA_CHIUSA, PATTERN_
+csv/_indice_id.py                            771     SI  ASSIOMI, COMPONENTI_PROMOSSE, PATTERN_DI_PROVA, RAMI
 csv/_rinomina_collisioni.py                  227     SI  LISTA_CHIUSA, RAMIFICAZIONI, STATO_RUN
 
 ----------------------------------------------------------------------------------------------------------------
