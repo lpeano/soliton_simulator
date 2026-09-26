@@ -194,6 +194,8 @@ DECISE = [
     # ⚠ QUESTA VOCE CAMBIA ANCHE `blocca_run_base`, e il validatore lo impone: `chiuso`
     #   con `blocca = SI` e' una contraddizione. Il criterio di chiusura era scritto in
     #   doc/REVISIONE_SI_2026-09-26.md e ora e' SODDISFATTO, punto per punto.
+    ("OSSERVABILE-P1", "chiuso", "FATTO", "csv/_osservabile_p1.py",
+     "CHIUSA il 2026-09-27. Il criterio era: un osservabile INVENTARIATO che, dati due insiemi di nodi, dia la distanza SUL GRAFO PESATO CON `d`, col collaudo su due masse a distanza nota. Soddisfatto: `csv/_osservabile_p1.py` (inventariato, blob 77b93d1b), pesi `net.d`, centro = medoide di grafo senza `pos`; sigillo 6/6 con il collaudo su grafi SINTETICI a distanza nota (errore 0.000e+00) invece che su due masse a distanza 'nota' che al passo 0 non e' nota ma MISURATA. K5 da' la barra fra semi: sd 0.146-0.510 su distanze ~10.7, cioe' 1.4-4.8 %."),
     ("DRIVER-SCENA-II", "chiuso", "FATTO", None,
      "CHIUSA il 2026-09-26. Il criterio era: UN COMANDO SOLO che produce la scena (ii)(a) in configurazione del driver, con UN SEME DICHIARATO, e UN COLLAUDO NEI DUE VERSI. Soddisfatto: `python csv/_test_fork/_scena_video.py 1 <dest> --scena=MASSE-COERENTI` (un comando); `--seme` inoltra `--seed` e `SEME_EFFETTIVO` lo legge da `a.seed` (seme dichiarato); sigillo 6/6 con i due versi su T1/T5 e su T3a/T3b (csv/_seal_fork/_sig_scena_ii/REFERTO.txt). net.n 0 -> 4256 col sep del driver, AST della scena INTATTO, 0 differenze su 79 booleani."),
     ("M0b", "chiuso", "FATTO", "csv/_test_fork/_misura0_scena_ii.py",

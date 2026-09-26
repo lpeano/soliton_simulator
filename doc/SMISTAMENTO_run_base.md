@@ -11,12 +11,12 @@ mano**: si rigenera.)*
 > **per regola, non per giudizio**.
 
 ```
-voci nell'indice          768
+voci nell'indice          771
 in questo smistamento     137   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
-di cui blocca SI          7
+di cui blocca SI          6
 ```
 
-## 🎯 **L'ORDINE DI LAVORO DEI `SI`** — 7 voci, e l'ordine E' PER DIPENDENZA
+## 🎯 **L'ORDINE DI LAVORO DEI `SI`** — 6 voci, e l'ordine E' PER DIPENDENZA
 
 > **Il lavoro sui `SI` comincia SOLO col via di Luca.** L'ordine e i motivi vengono da
 > **`doc/ORDINE_SI.tsv`**, che e' un DATO: si cambia la' dentro, non qui.
@@ -35,7 +35,7 @@ di cui blocca SI          7
 | 10 | **RUN BASE** | scena `(ii)`(a), 4 semi, 600 passi, tutte le cure, `P5` attivo, tag `base-epoca-4`; poi la `PROVA 1` | il run: ore-macchina |
 
 **📖 LA REVISIONE STORICA DI OGNI VOCE** *(che cosa e' VERIFICATO sul codice e che cosa e'
-INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D02](REVISIONE_SI_2026-09-26.md#d02) · [D03](REVISIONE_SI_2026-09-26.md#d03) · [D31](REVISIONE_SI_2026-09-26.md#d31) · [OSSERVABILE-P1](REVISIONE_SI_2026-09-26.md#osservabile-p1) · [SCALE-TW](REVISIONE_SI_2026-09-26.md#scale-tw) · [U1](REVISIONE_SI_2026-09-26.md#u1)
+INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D02](REVISIONE_SI_2026-09-26.md#d02) · [D03](REVISIONE_SI_2026-09-26.md#d03) · [D31](REVISIONE_SI_2026-09-26.md#d31) · [SCALE-TW](REVISIONE_SI_2026-09-26.md#scale-tw) · [U1](REVISIONE_SI_2026-09-26.md#u1)
 
 **Le voci che NON bloccano hanno la loro sezione qui:** [NON BLOCCANO](REVISIONE_SI_2026-09-26.md#non-bloccano).
 
@@ -154,7 +154,7 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D02](REVISIONE_SI_202
 | `NO` | **Z82** | Z82 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SOSPETTO NON VERIFICATO: n3 normalizza su median(d), e nel… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 | `NO` | **C23** | C23 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL FATTORE (CSM/cs)^2 NON E' 1 SULLA CODA a 500 passi. La… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 
-## FAMIGLIA **F** — FRENO E CONTRAZIONE   *(33 voci)*
+## FAMIGLIA **F** — FRENO E CONTRAZIONE   *(32 voci)*
 
 | blocca? | id | che cos'e' | **il motivo, in una frase** | fonte |
 |:--:|---|---|---|---|
@@ -178,7 +178,6 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D02](REVISIONE_SI_202
 | `NO` | **D32** | I TEMPI PROPRI DICHIARATI SONO TRE, E SONO TRE GRANDEZZE DIVERSE: r, taupp e d/cs. corr(r, taupp) fra -0.25 e… | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `NO` | **D33** | La repulsione alla massima compressione e' AZZERATA proprio dove serve: dal 75 % al 96 % degli archi oltre… | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `NO` | **D36** | LA SOGLIA DELLA MITOSI E' IN UNITA' ASSOLUTE DI tw, MENTRE LA SCALA DI tw DIPENDE DAL DOMINIO DI phi: le due… | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
-| `SI` | **OSSERVABILE-P1** | APERTA il 2026-09-26 (rilievo di Luca) / NON ESISTE UNO STRUMENTO UFFICIALE PER LA DISTANZA FRA LE MASSE. La… | e' la grandezza che la `PROVA 1` misura: senza, la prova non ha numero | `STATO_RUN.md` |
 | `NO` | **REG-V** | verificaregistro.py: completezza, esistenza, coerenza con la traccia di d0 e col registro dei domini di C5 /… | voce di PROCESSO o di STRUMENTO: non e' una legge del sistema | `STATO_RUN.md` |
 | `NO` | **X2** | X2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / ZETALOC: «smorzamento locale» che dipende da una statistica… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 | `NO` | **Z104** | Z104 APERTA ⏳[EPOCA 3 · DERIVAZIONE] / MEMARCO: LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE — la legge… | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `RAMIFICAZIONI.md` |
@@ -199,7 +198,7 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D02](REVISIONE_SI_202
 | `NO` | **D13** | I sigilli storici non sono stati rigirati sul blob corrente / Z11 / — / APERTO | voce di PROCESSO o di STRUMENTO: non e' una legge del sistema | `STATO_RUN.md` |
 | `NO` | **Z15** | Z15 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / 14 .pkl su 36 non portano il BLOB del codice che li ha prodotti, e… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 
-## FAMIGLIA **?** — SENZA FAMIGLIA — nessuna regola ha deciso   *(12 voci)*
+## FAMIGLIA **?** — SENZA FAMIGLIA — nessuna regola ha deciso   *(13 voci)*
 
 | blocca? | id | che cos'e' | **il motivo, in una frase** | fonte |
 |:--:|---|---|---|---|
@@ -214,12 +213,13 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D02](REVISIONE_SI_202
 | `NO` | **D23** | La cucitura dello snapshot FALLISCE su entrambi i fronti, e si DIMOSTRA perche'. NON CABLATA / Z37 / — / APERTO | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `NO` | **D29** | CINQUE NODI DI VUOTO sono i piu' connessi dell'intero sistema: il vuoto ha degli HUB, e non dovrebbe averne /… | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `NO` | **FATTI-AVVIO** | la catena di AVVIO non ha un solo fatto in FATTI_dal_codice.md: _applica_flag, avvia_test, _massa, semina |  | `FATTI_dal_codice.md` |
+| `NO` | **INDICE-LEGGERO** | l'indice pesa 169 KB e leggerlo intero non fa risparmiare contesto: serve un comando di interrogazione |  | `csv/_indice_id.py` |
 | `NO` | **B7-SHAKE** | SHAKE 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / shake-then-freeze — la precessione mutua non organizza /… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 
 ---
 
 **COSA QUESTA LISTA NON DICE:**
-- **non dice che le altre 631 voci siano irrilevanti**: dice che **non possono bloccare un run
+- **non dice che le altre 634 voci siano irrilevanti**: dice che **non possono bloccare un run
   base** perche' sono chiuse, sono teoria, o sono etichette locali di un sigillo.
 - **il titolo e' UNA riga**: la spiegazione sta nella fonte, e la fonte e' in colonna.
 - **`motivo` viene dalla COLONNA dell'indice**, non da una regola di questo script: se una riga

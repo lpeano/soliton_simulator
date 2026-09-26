@@ -2250,3 +2250,17 @@ stampato **come prova del perche'**.
 esistono al passo 0, NON che resteranno validi a campo maturo.**
 
 ### ⛔ STOP dopo il sigillo. Nessun run lungo: zero passi di dinamica.
+
+### ✅ `OSSERVABILE-P1` chiusa nell'indice — **gli `SI` passano da 7 a 6**
+
+| il criterio diceva | com'e' soddisfatto |
+|---|---|
+| un osservabile **INVENTARIATO** | `csv/_osservabile_p1.py`, blob `77b93d1b`, in `doc/INVENTARIO_strumenti.md` |
+| dati due insiemi di nodi, la distanza **sul grafo pesato con `d`** | pesi `net.d`, centro = **medoide di grafo**, nessun `pos` |
+| col **collaudo su due masse a distanza NOTA** | **su grafi SINTETICI** a distanza nota *(errore `0.000e+00`)* |
+
+> **Una deviazione, e la dichiaro:** il criterio diceva *«due masse a distanza nota»*. **Sulla
+> scena la distanza non e' NOTA: e' MISURATA** — non c'e' un valore vero con cui confrontarla.
+> **Il collaudo a risposta nota si fa dove la risposta si conosce**: una catena, un reticolo, due
+> componenti staccate, il medoide di una catena dispari. **`P1-sexies` chiede un caso a risposta
+> nota, e questo lo e'; «due masse» non lo sarebbe stato.**
