@@ -2436,3 +2436,50 @@ paragone vero** invece di essere il termine di paragone di se stessa.
 
 **Voce nell'indice: `RISCRITTURA-GO`, `da-decidere`**, col criterio — **un profilo che mostri il
 tempo in codice Python e non in kernel C.**
+
+---
+
+# `CURA2-STRUTTURALE`, passi 1-3: **PRIMA SI CONSERVA** *(2026-09-27)*
+
+**La precondizione c'era:** il sigillo di `D32` e' **5/5 PASS**.
+
+| passo | fatto |
+|---|---|
+| **1 — TAG** | **`pre-cura2-strutturale`** su `8e3cf9c`. **Blob del simulatore al tag: `dd4f5ccf`** *(sha1 byte grezzi)*. Si rilancia con `git cat-file -p pre-cura2-strutturale:soliton_simulator.py`, **in BINARIO** *(`git checkout` riscriverebbe le newline: par.5-quinquies)* |
+| **2 — ARCHIVIO** | **`csv/_archivio/rami_off_cura2.py`**: **quattro** rami, **13 righe di codice**, **COPIATE DAL SORGENTE da uno script**, non ricopiate a mano. Per ciascuno: `if` e `else` con le righe **al tag**, **cosa faceva**, **perche' e' uscito**, **il comando per rilanciarlo** |
+| **3 — INDICE** | **`RAMI-OFF-CURA2`** *(tipo `altro`, `chiuso`, blocca `NO`)*, col tag e il file d'archivio nella nota |
+
+**I QUATTRO RAMI SONO QUATTRO, NON DUE**, e va detto perche' cambia il passo 4:
+
+```
+if :5928  else :5945-5952   il gradiente che modula la soglia, preso dalla TORSIONE invece che da `r`
+if :6008  else :6017-6019   l'AMPIEZZA per `1/pos_torsione`: il RITMO FINTO -> uso come TEMPO (1 di 2)
+if :6037  else :6044        la probabilita' senza il fattore di tempo d'arco: dipende SOLO dal primo
+if :6091  else :6113        `_rep` con `pos_torsione` come COSTANTE DI TEMPO, in EULERO -> uso 2 di 2
+```
+
+> **Il mandato dice *«i due usi di `pos_torsione` come tempo e cio' che dipende solo da loro»* — e
+> quelli sono i rami di `:6008`, `:6037`, `:6091`. Il quarto (`:5928`) NON e' un uso come tempo.**
+> **Ma se il flag diventa STRUTTURALE (sempre acceso), TUTTI e quattro gli `else` sono codice
+> morto**, e toglierli e' **byte-inerte per costruzione**. **Li ho archiviati tutti e quattro**, e
+> **la decisione su quanti togliere e' tua**: i tre del mandato, o tutti e quattro.
+
+## ⛔ MI FERMO QUI, come da *«un commit per passo, poi STOP»*
+
+**Il passo 4 e' una RIMOZIONE dal simulatore**, e va con la sua forma del flag *(che non deve
+rompere `P5`)* e col suo sigillo. **Il tag e l'archivio ci sono: nulla si perde comunque.**
+
+## ❗ HAI RAGIONE SU `passo_pieno`, E IL DIFETTO E' PEGGIO DI QUELLO CHE HO CORRETTO
+
+**`csv/_passo.py` ESISTE**, con `passo_pieno` e `frame_pieno`, e il suo docstring dice
+**«l'UNICO modo di avanzare in una sonda»** — **e legge l'ordine DAL CODICE**, quindi non scade.
+**Io ho ricopiato le cinque chiamate A MANO.**
+
+> **Ho curato il sintomo con una copia cablata**, cioe' ho aggiunto il **ventiseiesimo** posto in
+> cui quell'ordine vive scritto a mano. **Il difetto che avevo appena trovato l'ho ripetuto nella
+> correzione.** In coda come **`PASSO-PIENO`**, coi tre passi che hai dettato.
+
+**E `IMPL-2` e' registrata**: una **seconda implementazione scritta dalle LEGGI e non dal codice**,
+**dopo il run base**, per verificare che la gravita' **non dipenda da un bug**. **E' la ragione per
+cui Go avrebbe senso — ma come SECONDA voce, non come sostituzione** *(`doc/VALUTAZIONE_go.md`)*.
+**E se le due implementazioni NON concordassero, sarebbe un riscontro, non un fallimento.**
