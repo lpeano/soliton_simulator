@@ -19532,3 +19532,83 @@ famiglie per parola chiave — MUORE, e deve morire**: e' il pezzo piu' debole, 
 
 ## ⛔ **E MI FERMO QUI: non ho creato nessun `.yaml`.** Il criterio di chiusura della voce e' la
 scelta di Luca fra **(a)** un file per voce, **(b)** un `difetti.yaml` unico, **(c)** no / non ora.
+
+
+---
+
+# ✅ **`PASSO 1` DELL'INDICE: LE COLLISIONI DI ID SONO CHIUSE** *(2026-09-26)*
+
+*(`csv/_collisioni_id.py`, `csv/_rinomina_collisioni.py`; referti `doc/COLLISIONI_ID.txt` e
+`doc/RINOMINE_ID.txt`. **Collaudo 4/4.**)*
+
+## 📉 **DA 60 COLLISIONI APPARENTI A 15 VERE, E POI A ZERO**
+
+```
+primo giro     294 collisioni su 317 ID   <- un numero che non significa niente
+poi             60                        <- tolte le VISTE (`LISTA_CHIUSA`) e le etichette LOCALI
+poi             15                        <- tolti i RIMANDI (37 righe) e COMPONENTI_PROMOSSE
+dopo la rinomina 0                        <- 23 voci rinominate, collaudo 4/4
+```
+
+**TRE CLASSI DI FALSA COLLISIONE, e ciascuna e' una distinzione che serve anche all'indice:**
+
+- **le VISTE GENERATE** — `doc/LISTA_CHIUSA.md` ricopia ogni voce dei registri, quindi **duplica per
+  costruzione**. Non definisce niente.
+- **le etichette LOCALI** — in `REGISTRO_FISICA` `V8`, `A1`, `P2` sono **i criteri di UN sigillo** o
+  **i punti di verifica di UNA scheda**: il nome pieno e' *«`V8` della scheda `freno-legge`»*. In
+  `COMPONENTI_PROMOSSE` `A1`-`A8` sono le **ragioni** di una promozione, `B1`-`B10` i **flag**
+  candidati. **Si citano sempre qualificate**, e nell'indice vanno col **namespace**
+  (`COMPONENTI:B9`), **che disambigua senza toccare il documento**.
+- **i RIMANDI** — `STATO_RUN` ha una tabella **generata** con l'esito di ogni voce `CODICE` di
+  `RAMIFICAZIONI`: i suoi **37** `Zxx` **citano, non definiscono**. Senza questa distinzione la
+  regola avrebbe **rinominato un rimando**, cioe' rotto il collegamento fra i due registri.
+
+## ❌❌ **E DUE DIFETTI MIEI, di cui uno avrebbe corrotto gli assiomi**
+
+**① L'ORDINAMENTO GUARDAVA `kv[0][0]`, cioe' LA PRIMA LETTERA del nome del registro**, non il
+registro: il confronto con `("ASSIOMI", ...)` era **sempre falso** e il peso **sempre 0**. Gli
+assiomi risultavano *«tengono il nome»* **per l'ordine di lettura dei file, non per la regola**.
+> ### **Una regola che sembra funzionare per la ragione sbagliata e' peggio di una regola assente:**
+> ### bastava cambiare l'ordine di `GLOBALI` per rinominare `A1`, `A3`, `A11`.
+
+**② LA RINOMINA NON ERA IDEMPOTENTE:** `\bA1\b` trova `A1` **dentro** `A1-INERZIA` *(il trattino e'
+un confine di parola)*, quindi **la seconda passata avrebbe scritto `A1-INERZIA-INERZIA`**. Un
+difetto che **si vede solo al secondo giro**.
+
+## ⚠ **E UNA DECISIONE DI MERITO CHE LA REGOLA NUDA NON PRENDEVA: LE SERIE**
+
+Le voci stanno in **serie** — le cinque **cure** `C1`-`C5`, le dieci **aperte** `B1`-`B10`, le sei
+**lasciate a meta'** `A1`-`A6` — e **rinominare un solo membro e' peggio della collisione**, perche'
+rompe la leggibilita' della serie.
+
+> ### Percio' **`RAMIFICAZIONI` tiene TUTTA la serie `C1`-`C28`** *(28 voci, e `C7`/`C10`/`C11`/
+> ### `C12`/`C13`/`C14`/`C18`/`C21` sono citate in `CLAUDE.md`)*, e sono **le cinque cure della coda**
+> ### a prendere il nome esplicito. Viceversa `RAMIFICAZIONI` rinomina **tutta** la sua `A1`-`A3` e
+> ### `B4`-`B7`, che sono serie **complete**.
+
+**E il conteggio per registro E' UN PROXY SBAGLIATO per gli assiomi:** `A1` vale `ASSIOMI` **8**
+contro `RAMIFICAZIONI` **23**, ma un assioma e' citato **per nome nudo** in `CLAUDE.md` e in ogni
+referto, e quelle citazioni **non si attribuiscono a nessun registro**. **Il genere viene prima del
+numero: un assioma non si rinomina mai.**
+
+## ✅ IL COLLAUDO, NEI DUE VERSI
+
+```
+(a) collisioni residue nei registri globali           0          PASS
+(b) file NON TOCCABILI con sha1 cambiato              0 su 1029  PASS   (task history, referti,
+                                                                        json, ogni .py, gli
+                                                                        archivi dei sigilli)
+(c) un'ancora inesistente FA FALLIRE l'assert         si'        PASS   <- il ramo che deve fallire
+(d) file modificati fuori dall'elenco permesso        0          PASS
+```
+
+## ⚠ **COSA LA RINOMINA NON FA, e non e' un'omissione**
+
+**Non riscrive le CITAZIONI in prosa.** Una `A3` in prosa **non dice** a quale voce si riferisce, e
+in `STATO_RUN` ce ne sono che citano **l'assioma**: riscriverle tutte **corromperebbe le citazioni
+degli assiomi**. Si risolvono con l'**`alias`** dell'indice (`PASSO 2`).
+**E nei reperti il nome vecchio RESTA** — task history, referti, json, codice — **ed e' giusto: un
+reperto non si riscrive.**
+
+**Effetto collaterale misurato:** le voci lette da `STATO_RUN` passano da **246** a **247**, perche'
+`C1-bis` — che prima si confondeva con `C1` — **e' ora una voce distinta**.

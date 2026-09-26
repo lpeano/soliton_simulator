@@ -1,0 +1,34 @@
+========================================================================================================================
+LE COLLISIONI DI ID -- stesso nome, voci DIVERSE   (2026-09-26)
+========================================================================================================================
+
+  registri GLOBALI letti (4): ASSIOMI, RAMIFICAZIONI, STATO_RUN, PATTERN_DI_PROVA
+  ESCLUSI dalle definizioni, col motivo:
+    LISTA_CHIUSA                     VISTA GENERATA: ricopia le voci dei registri e le duplica
+    REGISTRO_FISICA                  etichette LOCALI a una scheda o a un sigillo (`V8`, `A1`, `P2`): il nome pieno e' «`V8` della scheda `freno-legge`»
+    INVENTARIO_strumenti             elenca STRUMENTI, non voci
+    COMPONENTI_PROMOSSE              etichette LOCALI alle sue tabelle -- `A1`-`A8` le RAGIONI di una promozione, `B1`-`B10` i FLAG candidati, `C1`-`C5` gli ESPERIMENTI -- e si citano SEMPRE qualificate: «COMPONENTI_PROMOSSE.md `B9`». **Nell'indice vanno col namespace** (`COMPONENTI:B9`), che disambigua senza toccare il documento
+
+  ID definiti: 281      IN COLLISIONE (piu' di una voce): 0
+  righe SALTATE perche' in una sezione-VISTA (citano, non definiscono): 37
+      es.  doc/STATO_RUN.md:631  `Z1`  -- tabella GENERATA con l'esito delle voci di RAMIFICAZIONI: le CITA
+      es.  doc/STATO_RUN.md:632  `Z4`  -- tabella GENERATA con l'esito delle voci di RAMIFICAZIONI: le CITA
+      es.  doc/STATO_RUN.md:633  `Z7`  -- tabella GENERATA con l'esito delle voci di RAMIFICAZIONI: le CITA
+  Una VOCE = una coppia (registro, sezione). La stessa voce ripetuta in piu' righe dello
+  stesso registro NON e' una collisione.
+
+========================================================================================================================
+LE COLLISIONI, e la PROPOSTA di chi tiene il nome
+========================================================================================================================
+
+========================================================================================================================
+COSA QUESTO STRUMENTO *NON* DICE
+========================================================================================================================
+  - **non dice quale voce intendeva chi ha scritto una citazione**: nessun conteggio lo puo'
+    dire. Percio' la rinomina tocca **le DEFINIZIONI**, e le citazioni si risolvono con l'ALIAS.
+  - **il conteggio per registro NON e' il conteggio per VOCE**: se un registro definisce due
+    voci con lo stesso ID, le loro citazioni **non sono separabili**. Dove succede, la scelta
+    di chi tiene il nome e' **la sezione, non il numero**, e va decisa a mano.
+  - **non vede una voce che nessun registro GLOBALE definisce** (vive solo in prosa).
+  - gli ID **locali** a una scheda o a un sigillo (`V8`, `T3`, `Q6`) **non sono in questo
+    spazio**: il loro nome pieno include la scheda, e li' non c'e' collisione.

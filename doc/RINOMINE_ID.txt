@@ -1,0 +1,54 @@
+================================================================================================================
+LA RINOMINA DELLE VOCI IN COLLISIONE   (2026-09-26)
+================================================================================================================
+
+file dichiarati NON TOCCABILI, di cui si registra lo sha1 PRIMA: 1029
+  (task history, referti, json, ogni `.py`, gli archivi dei sigilli: REPERTI o STORIA)
+
+file                       prima                dopo                 ancora (frammento unico)
+RAMIFICAZIONI.md           A1                   A1-INERZIA           GIA' FATTA, salto
+RAMIFICAZIONI.md           A2                   A2-BLOCH             GIA' FATTA, salto
+RAMIFICAZIONI.md           A3                   A3-FDT               GIA' FATTA, salto
+RAMIFICAZIONI.md           B4                   B4-FROZEN            GIA' FATTA, salto
+RAMIFICAZIONI.md           B5                   B5-KURAMOTO          GIA' FATTA, salto
+RAMIFICAZIONI.md           B6                   B6-TURBO             GIA' FATTA, salto
+RAMIFICAZIONI.md           B7                   B7-SHAKE             GIA' FATTA, salto
+STATO_RUN.md               A1                   A1-TREVIE            GIA' FATTA, salto
+STATO_RUN.md               A2                   A2-ANELLO            GIA' FATTA, salto
+STATO_RUN.md               A3                   A3-CHIRALE           GIA' FATTA, salto
+STATO_RUN.md               A4                   A4-METRICHE          GIA' FATTA, salto
+STATO_RUN.md               A5                   A5-PANNELLO          GIA' FATTA, salto
+STATO_RUN.md               A6                   A6-PERCCHI           GIA' FATTA, salto
+STATO_RUN.md               A1                   A1-COSTANTI          GIA' FATTA, salto
+STATO_RUN.md               A2                   A2-DXD               GIA' FATTA, salto
+STATO_RUN.md               A3                   A3-DISEGNO           GIA' FATTA, salto
+STATO_RUN.md               C1                   C1-PEQ-ESATTO        GIA' FATTA, salto
+STATO_RUN.md               C1-bis               C1BIS-ANOM-SIMM      GIA' FATTA, salto
+STATO_RUN.md               C2                   C2-PEQ-NASCITA       GIA' FATTA, salto
+STATO_RUN.md               C3                   C3-SCALA-MIN-PASSO   GIA' FATTA, salto
+STATO_RUN.md               C4                   C4-COES-CAUSALE      GIA' FATTA, salto
+STATO_RUN.md               C5                   C5-INVARIANTI        — 42 domini, due livelli
+STATO_RUN.md               C5-res               C5RES-INVARIANTI     I RESIDUI DI `C5`
+
+rinomine applicate: 23
+
+================================================================================================================
+IL COLLAUDO NEI DUE VERSI
+================================================================================================================
+  (a) collisioni residue nei registri globali: 0   -> PASS
+  (b) file NON toccabili con sha1 cambiato: 0   -> PASS
+  (c) un'ancora inesistente FA FALLIRE l'assert: PASS
+  (d) file modificati fuori dall'elenco permesso: 0   -> PASS
+
+================================================================================================================
+ESITO: 4/4 PASS
+================================================================================================================
+
+COSA QUESTA RINOMINA *NON* FA:
+  - **non riscrive le CITAZIONI**: in prosa `A3` resta `A3`, e **non e' un'omissione** — una
+    citazione in prosa non dice a quale voce si riferisce, e in `STATO_RUN` ce ne sono che
+    citano l'ASSIOMA. **Si risolvono con l'`alias` dell'indice** (`PASSO 2`).
+  - **non tocca `REGISTRO_FISICA` ne' `COMPONENTI_PROMOSSE`**: le loro etichette sono LOCALI a
+    una scheda o a una tabella, e si citano qualificate. **Nell'indice vanno col namespace.**
+  - **non tocca i reperti**: task history, referti, json, codice. Li' il nome vecchio RESTA, ed
+    e' giusto: **un reperto non si riscrive.**

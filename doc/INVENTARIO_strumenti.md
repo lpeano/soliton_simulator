@@ -775,3 +775,14 @@ python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie
 **⚠ E DUE COSE DA DIRE SU QUESTE VOCI, perche' l'inventario serve a chi rigira:**
 - i due `_collaudo_*` **non sono sigilli di una legge**: collaudano **un CRITERIO** e **un PRESIDIO**. Inventariarli come sigilli gonfierebbe il conto dei sigilli veri *(par.5-novies, il triage)*;
 - `_c1_col_segno.py` **non rigira il simulatore**: legge i json del sigillo della cura A. **Se quei json vengono cancellati, lo strumento non e' piu' ri-girabile** — e allora la voce diventa un `Z31`, non un'omissione d'inventario.
+
+---
+
+## Aggiunti il 2026-09-26 — **le COLLISIONI di ID (`PASSO 1` dell'indice)**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_collisioni_id.py` | `343eb8f8` | `python csv/_collisioni_id.py` | MISURA le COLLISIONI di ID: stesso nome, voci diverse. Definizione = l'ID sta nell'etichetta di una riga o apre un'intestazione, **in un registro GLOBALE**; citazione = compare nel testo | `doc/COLLISIONI_ID.txt`: da **60** collisioni apparenti a **15** vere, e **0** dopo la rinomina. **37 righe** riconosciute come RIMANDI e non definizioni |
+| `csv/_rinomina_collisioni.py` | `4e3d838e` | `python csv/_rinomina_collisioni.py` | RINOMINA le 23 voci in collisione **nei soli documenti VIVI**, una riga alla volta con l'ancora contata (`P1-quater`), e **collauda nei due versi** | `doc/RINOMINE_ID.txt`: **4/4 PASS** -- `0` collisioni residue, `0` file intoccabili cambiati su **1029**, un'ancora inesistente FA fallire l'assert, `0` file modificati fuori dall'elenco |
+
+**⚠ `_rinomina_collisioni.py` E' IDEMPOTENTE, e non lo era:** `\bA1\b` trova `A1` **dentro** `A1-INERZIA` *(il trattino e' un confine di parola)*, quindi la seconda passata avrebbe scritto `A1-INERZIA-INERZIA`. **Un difetto che si vede solo al secondo giro**, e la guardia e' *«se il nome nuovo c'e' gia', salta»*.

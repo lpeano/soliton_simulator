@@ -185,9 +185,9 @@ l'estrazione **senza flag** di `_cs_arco_da_nodo` — **è certificata**.
 
 | # | fronte | riscontro | sostegno |
 |---|---|---|---|
-| **A1** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · CODICE]` | **Teorema di inerzia** — lo Strato 0 e' inerte: la connessione costruita dagli stessi stati che trasporta e' uno **specchio**, `<psi_i\|N\|psi_j> = 2<psi_i\|psi_j>` esatto | **1.57e-15** su 200 000 coppie | `csv/_seal_fork/_reperto_inerzia.py`, `CLAUDE.md` §6 |
-| **A2** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · CODICE]` | **Invarianza del Bloch sotto Step 2** — `_phc` e' una **fase globale**, e `nb = psi†σpsi` non la vede | **3.3e-16** | `csv/_seal_fork/_sigillo_step2.py`, `CLAUDECONNECT.md` §926 |
-| **A3** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · CODICE]` | **FDT del solo scuotimento** — il drift di `n → (n+a·g)/\|n+a·g\|` e' `−a²n`, funzione del **solo `n`**, senza i vicini: **un rumore locale non puo' allineare ai vicini** | verificato a **1.28e-07** | `doc/PREDIZIONE_fdt_scuotimento.md` |
+| **A1-INERZIA** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · CODICE]` | **Teorema di inerzia** — lo Strato 0 e' inerte: la connessione costruita dagli stessi stati che trasporta e' uno **specchio**, `<psi_i\|N\|psi_j> = 2<psi_i\|psi_j>` esatto | **1.57e-15** su 200 000 coppie | `csv/_seal_fork/_reperto_inerzia.py`, `CLAUDE.md` §6 |
+| **A2-BLOCH** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · CODICE]` | **Invarianza del Bloch sotto Step 2** — `_phc` e' una **fase globale**, e `nb = psi†σpsi` non la vede | **3.3e-16** | `csv/_seal_fork/_sigillo_step2.py`, `CLAUDECONNECT.md` §926 |
+| **A3-FDT** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · CODICE]` | **FDT del solo scuotimento** — il drift di `n → (n+a·g)/\|n+a·g\|` e' `−a²n`, funzione del **solo `n`**, senza i vicini: **un rumore locale non puo' allineare ai vicini** | verificato a **1.28e-07** | `doc/PREDIZIONE_fdt_scuotimento.md` |
 
 > **Sono dimostrazioni**, non misure: valgono a qualunque risoluzione, **anche con lo spin aliasato**.
 
@@ -205,10 +205,10 @@ Se i due numeri vengono da run di Luca fuori dal repo, vanno committati per entr
 
 | # | fronte | riscontro | cosa lo chiuderebbe **davvero** |
 |---|---|---|---|
-| **B4** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · CODICE]` | **Bloch frozen-o-noise** | senza scuotimento `\|<n>\| = 1.000000`; con, `chi = 90.0 ± 39.2` contro il nullo **90.000 ± 39.171** | la stessa misura con `theta < ~1 giro/passo` |
-| **B5** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · CODICE]` | **Kuramoto refutato** | K-frozen **byte-identico** a OFF; K-noise = NO-rumore | idem |
-| **B6** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · MISURA]` | **Esito B del turbo** — con `cs` al **5 %** di `CS_M` lo Step 2 non muove lo spin | `chi` ON 89.9865 / OFF 89.9941 contro 90.000; autocorrelazione piatta su 14 bin | idem, **+ un secondo seme** (§2.7) |
-| **B7** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **shake-then-freeze** — la precessione mutua non organizza | `chi` deriva di **−0.33°** in 600 passi da stato casuale | idem |
+| **B4-FROZEN** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · CODICE]` | **Bloch frozen-o-noise** | senza scuotimento `\|<n>\| = 1.000000`; con, `chi = 90.0 ± 39.2` contro il nullo **90.000 ± 39.171** | la stessa misura con `theta < ~1 giro/passo` |
+| **B5-KURAMOTO** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · CODICE]` | **Kuramoto refutato** | K-frozen **byte-identico** a OFF; K-noise = NO-rumore | idem |
+| **B6-TURBO** 🟩`VALE SEMPRE` ⏳`[EPOCA 1 · MISURA]` | **Esito B del turbo** — con `cs` al **5 %** di `CS_M` lo Step 2 non muove lo spin | `chi` ON 89.9865 / OFF 89.9941 contro 90.000; autocorrelazione piatta su 14 bin | idem, **+ un secondo seme** (§2.7) |
+| **B7-SHAKE** 🟨`VALE PER QUELLA SCENA` ⏳`[EPOCA 1 · MISURA]` | **shake-then-freeze** — la precessione mutua non organizza | `chi` deriva di **−0.33°** in 600 passi da stato casuale | idem |
 
 ---
 
