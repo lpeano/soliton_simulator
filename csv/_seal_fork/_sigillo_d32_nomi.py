@@ -89,8 +89,14 @@ S._NMASSE_VIDEO["n"] = max(2, int(getattr(a, "nmasse", 2)))
 S._NMASSE_VIDEO["sep"] = float(getattr(a, "sep", 3.0))
 S._NMASSE_VIDEO["size"] = None
 S.avvia_test("MASSE-COERENTI")()
+# LE CINQUE CHIAMATE DEL DRIVER, copiate da `update()` -- NON `net.step()` da solo.
+#   `net.step()` NON E' UN PASSO: `mitosi()` e' una delle altre quattro, e con il solo
+#   `step()` viene chiamata ZERO volte (MISURATO: 0 chiamate in 14 giri). Un sigillo che
+#   avanzasse con `step()` misurerebbe la byte-identita' di un codice MAI ESEGUITO.
+S.passo_test()
 for _ in range(%(passi)d):
-    S.net.step()
+    S.scuoti_vuoto(S.net); S.net.step(); S.net.mitosi()
+    S.net.rilassa_disegno(); S.net.memoria_hebbiana_moto()
 o = {"n": int(S.net.n), "archi": int(len(S.net.d)), "firme": {},
      "taupp_tot": int(getattr(S.net, "_rep_taupp_tot", 0)),
      "mitosi_eventi": int(getattr(S.net, "_mit_eventi", -1))}
@@ -242,6 +248,8 @@ if __name__ == "__main__":
     P("  - **`N3` guarda il ramo `else`, e lo trova**: quegli usi CI SONO ancora, e sono il")
     P("    difetto. Sono **proposti** per la rimozione (`STANDARD 10`), non tolti.")
     P("  - **%d passi non sono un run**: bastano a far girare la mitosi, non a dire fisica." % passi)
+    P("  - **e un passo sono CINQUE chiamate, non `step()`**: con il solo `step()`"
+      " `mitosi()` gira ZERO volte, e `N1` misurerebbe codice mai eseguito.")
     io.open(REFERTO, "w", encoding="utf-8", newline=NL).write(NL.join(R) + NL)
     print(NL + "scritto %s" % os.path.relpath(REFERTO, RADICE).replace(chr(92), "/"))
     sys.exit(0 if buoni == len(esiti) else 1)
