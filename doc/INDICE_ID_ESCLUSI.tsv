@@ -16,6 +16,7 @@ PRE-TEMPO	locuzione del testo, non un identificatore	4
 SENZA-FISICA	locuzione del testo, non un identificatore	4
 NON-AB	locuzione del testo, non un identificatore	4
 BYTE-IDENTIT	locuzione del testo, non un identificatore	4
+SENZA-INDICE	locuzione del testo, non un identificatore	3
 SENZA-RELAZIONE	locuzione del testo, non un identificatore	3
 NON-LOCALITA	locuzione del testo, non un identificatore	3
 BYTE-INERZIA	locuzione del testo, non un identificatore	3
@@ -23,7 +24,6 @@ SOLO-MEM	locuzione del testo, non un identificatore	3
 SOLO-SCRITTURA	locuzione del testo, non un identificatore	3
 NON-MONOTONIA	locuzione del testo, non un identificatore	3
 SETTE-OTTO	numerale a parole, non un identificatore	3
-SENZA-INDICE	locuzione del testo, non un identificatore	2
 ON-SITE	locuzione del testo, non un identificatore	2
 PRE-ARCHIVIO	locuzione del testo, non un identificatore	2
 NATO-VUOTO	locuzione del testo, non un identificatore	2

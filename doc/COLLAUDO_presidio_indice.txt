@@ -2,7 +2,7 @@
 COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
 ================================================================================================
 
-  indice: 775 fra id e alias      esclusi: 45      forme nude AMBIGUE: 0
+  indice: 778 fra id e alias      esclusi: 45      forme nude AMBIGUE: 0
 
   sentinelle scelte ORA e verificate ignote: `QX700`, `QX701`
 
@@ -13,10 +13,11 @@ COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
   DEVE FALLIRE  una seconda sentinella: `QX701`            -> RIFIUTA  PASS
                   ignoti: QX701
 
-  END-TO-END NON ESEGUITO: c'erano modifiche in STAGE, e non le tocco.
-    (lo dichiaro invece di dare per buono un ramo che non ho provato.)
+  DEVE FALLIRE  il HOOK VERO su una riga con `QX700`      -> uscita 1, ID segnalato True
+                il documento e' tornato identico: True
+                esito: PASS
 
-  ESITO: 4/4 PASS -- il presidio IMPEDISCE e non solo avvisa
+  ESITO: 5/5 PASS -- il presidio IMPEDISCE e non solo avvisa
 
 COSA QUESTO COLLAUDO *NON* DICE:
   - **non dice che l'indice sia completo**: dice che un ID FUORI dall'indice viene

@@ -3,15 +3,15 @@ COLLAUDO DEL PRESIDIO DI `_lista_chiusa.py` -- I DUE RAMI   (2026-09-26)
 ====================================================================================================
 
 RAMO CHE DEVE PASSARE -- il generatore vero
-  uscita 0   documento presente: True   sha1 74d095dc
+  uscita 0   documento presente: True   sha1 2c7001ce
   esito: PASS
 
 RAMO CHE DEVE FALLIRE -- la copia con una voce che NON esiste
   uscita 3   *(3 = si e' fermato per il collaudo)*
-     [TIMBRO] _lc_collaudo_tmp.py  sha1-BYTE 0d3529ae  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
+     [TIMBRO] _lc_collaudo_tmp.py  sha1-BYTE f89b7928  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
      *** FERMO: il documento NON e' stato scritto.
          MANCA la voce che DEVE comparire: COLLAUDO: una voce che NON esiste
-  sha1 del documento   PRIMA 74d095dc   DOPO 74d095dc   -> INVARIATO
+  sha1 del documento   PRIMA 2c7001ce   DOPO 2c7001ce   -> INVARIATO
   esito: PASS
 
 ====================================================================================================

@@ -19944,3 +19944,88 @@ entrambi gli stadi**.
 **Collaudi rigirati dopo le due cure:** vista **`2/2`**, presidio dell'indice **`4/4`** *(l'end-to-end
 si e' dichiarato NON eseguito: c'erano modifiche in stage — e lo dice invece di darlo per buono)*,
 presidi del pre-commit **`8/8`**.
+
+
+---
+
+# 🧊 **LISTA CHIUSA CONGELATA — 4 condizioni su 4, e un difetto GRAVE del presidio trovato dal
+suo collaudo** *(2026-09-26)*
+
+## ✅ LE CONDIZIONI DI FINE, verificate DA SCRIPT
+
+```
+(1) voci DA-DECIDERE nello smistamento ..............   0   PASS
+(2) contraddizioni stato/blocca .....................   0   PASS
+(3) voci NOMINATE dal mandato e assenti dall'indice ..   0   PASS
+(4) STATO_RUN allineato: D11 "chiuso"   D09 "aperto" (di proposito)
+```
+
+```
+indice            741 voci      blocca: SI 8   NO 520   DA-DECIDERE 212   DA VERIFICARE 1
+smistamento       139 voci      0 DA-DECIDERE
+lista chiusa      352 in lista  389 fuori col motivo   0 voci PERSE
+collaudi          vista 2/2 - presidio indice 5/5 - hook 8/8 - collisioni 0 su 322
+```
+
+**`SI` sono ESATTAMENTE le otto del mandato:** `DRIVER-SCENA-II`, `OSSERVABILE-P1`, `D02`, `D31`,
+`U1`, `CLI-1`, `SCALE-TW`, `D03`.
+
+## ⚠ **UNA VOCE NON TORNA, E NON L'HO FORZATA: `D09`**
+
+Il mandato la dava per **CHIUSA** *(«smentito da `Z73` stesso: 4651 nati nel run lungo»)*.
+**Il numero `4651` NON E' NEL REPO** — cercato in tutti i `.md`, `.txt` e `.py` tracciati — e la riga
+di `Z73` in `RAMIFICAZIONI` e' ancora **`DA RIVERIFICARE`** e dice che `chi_basc` **BLOCCA** la
+mitosi. **Resta `aperto`, con `blocca = DA VERIFICARE` e il motivo stampato nello smistamento.**
+*(Le altre prove le ho verificate sul disco: `pozzo_grafo` usa `self.pos` a `:6541` ✅; `_smorza`
+smorza **solo la discesa** ✅; `01eda44` e' la cura di `Z87` ✅; le quattro righe di
+`DRIVER-SCENA-II` — `:223`, `:328`, `:7187`, `:8681` — ✅.)*
+
+## ❌❌ **IL DIFETTO GRAVE, e l'ha trovato il collaudo end-to-end**
+
+Avevo fatto leggere al `pre-commit` il file `.git/COMMIT_EDITMSG` per poter honorare
+`[SENZA-INDICE: ...]` anche la'.
+
+> ### **Git scrive `COMMIT_EDITMSG` DOPO il `pre-commit`** *(l'ordine e' `pre-commit` →
+> ### `prepare-commit-msg` → `commit-msg`)*: **leggevo il messaggio del commit PRECEDENTE.**
+> ### **Un solo commit con un'eccezione dichiarata avrebbe spento il presidio per tutti i commit
+> ### successivi**, fino al cambio di quel file.
+
+**Cura:** il controllo dell'indice vive in **UN solo stadio, `commit-msg`**, dove il messaggio
+**esiste** — e guarda **le righe aggiunte ai documenti vivi PIU' il messaggio**. Il `pre-commit` non
+lo chiama piu'. **Il ramo end-to-end del collaudo e' l'unico che poteva vederlo**, perche' fra la
+funzione e il hook c'e' git.
+
+## ❌ **E CINQUE DIFETTI DELLE CORREZIONI, tutti visti dai NUMERI**
+
+```
+① le DECISIONI si applicavano DOPO la scrittura del TSV      -> l'indice restava DA-DECIDERE su
+                                                                 D02, D03, D14, D15, SCALE-TW:
+                                                                 **la decisione c'era e l'indice
+                                                                 non la portava**
+② le frasi di chiusura pescavano nelle celle DI MEZZO        -> CLI-1 «chiusa» da «7/7 e 8/8
+   (dove stanno le PROVE, che citano i sigilli di ALTRE voci)    restano validi», D31 da «4/4:
+                                                                 deriva», RAMPA-2 da «RAMPA-1 ne ha
+                                                                 curata UNA»: **tre voci aperte
+                                                                 chiuse dal sigillo di qualcun
+                                                                 altro**
+③ `D31` era `tipo: altro` per la TABELLA SPEZZATA            -> una delle otto voci `SI` **fuori
+                                                                 dallo smistamento**
+④ la parola chiave batteva la regola                         -> Z21, Z25, Z29 uscivano `SI` pur
+                                                                 essendo fronti «vale per quella
+                                                                 scena»: ora **la regola vince**
+⑤ in un mio patch script `\b` e' diventato un BACKSPACE       -> quattro criteri del collaudo
+   (0x08) invece di un confine di parola                         cercavano `\x08D02\x08`: **sempre
+                                                                 falsi**, e il collaudo diceva
+                                                                 «MANCA» su voci presenti
+```
+
+**Il ⑤ e' il piu' istruttivo per me:** un criterio che non puo' mai essere vero **si comporta come
+un criterio severo**. L'unica ragione per cui l'ho visto e' che **il generatore si FERMA** invece di
+avvisare.
+
+## 🧊 **DA QUI SI SPUNTA, NON SI RIGENERA**
+
+Tag **`lista-chiusa-v1`**. L'ordine di lavoro degli otto `SI` e' in testa a
+`doc/SMISTAMENTO_run_base.md`, con il **perche' dell'ordine** e una stima per voce
+*(somma: `8,5-12,5 h`, senza il run e senza le decisioni)*.
+**Il lavoro sui `SI` comincia solo col via di Luca.**

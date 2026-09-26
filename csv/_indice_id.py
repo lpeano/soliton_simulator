@@ -91,6 +91,22 @@ STATO = [
      r"|CHIUSA PER", "chiuso"),
     (r"\bAPERT[AO]\b|⛔|❗|DA RIVERIFICARE|DA RIFARE|NON MISURAT|IN VERIFICA", "aperto"),
 ]
+#   ➕ CORREZIONE (b) DI LUCA, 2026-09-26: **un testo che dice FATTO, `n/n PASS`, CURA IN CODICE o
+#   «accesi di default» dichiara una voce CHIUSA**, e prima non veniva riconosciuto. Le frasi stanno
+#   PRIMA delle altre regole perche' sono **piu' specifiche**, e la frase che ha deciso finisce nella
+#   colonna `stato_da`: **uno stato senza la sua frase non e' verificabile.**
+#   ❌❌ **PRIMA VERSIONE TROPPO LARGA, e l'hanno denunciata i numeri:** cercava `\d+/\d+`,
+#   `PASS`, `curat`, `byte-identic` **in TUTTA la riga**, e una riga cita spesso **il sigillo di
+#   un'ALTRA voce**. Cosi' `CLI-1` risultava chiusa da «7/7 e 8/8 restano validi», `D31` da
+#   «4/4: deriva +1.58e-03», `RAMPA-2` da «RAMPA-1 ne ha curata UNA»: **tre voci APERTE dichiarate
+#   chiuse dal sigillo di qualcun altro.** Ora: ① le frasi sono **ancorate a un marchio di esito**,
+#   ② si cercano **SOLO nella prima e nell'ultima cella**, che e' dove una riga dichiara il
+#   PROPRIO stato -- le citazioni degli altri stanno nelle celle di mezzo.
+STATO_CHIUSO_FRASI = [
+    r"\*\*FATT[OAE]\b", r"\bFATT[OAE]\*\*", r"✅[^|]{0,14}\bFATT",
+    r"✅[^|]{0,14}\d+/\d+", r"\d+/\d+[^|]{0,6}(?:PASS|✅)", r"\bPASS\b[^|]{0,6}\d+/\d+",
+    r"CURA IN CODICE", r"✅[^|]{0,14}IN CODICE", r"accesi? di default",
+]
 BLOCCA_SI = r"BLOCCANTE|PRIMA DI QUALUNQUE GIRO|prima del run base|URGENTE, PRIMA"
 #   ...e una voce puo' DICHIARARE di non bloccare: la fonte vince sulla parola chiave.
 BLOCCA_NO = r"NON BLOCCA|non blocca il run base"
@@ -185,6 +201,18 @@ def _nudo(s):
     return re.sub(r"[`*#>_~]", "", re.sub("[" + SIMBOLI + "]", " ", s)).strip()
 
 
+def stato_src(riga):
+    """Dove una riga dichiara il PROPRIO stato: la PRIMA e l'ULTIMA cella.
+
+    Le celle DI MEZZO contengono le PROVE -- e le prove citano i sigilli di altre voci. Cercare lo
+    stato la' dentro fa dichiarare chiusa una voce aperta *(misurato su `CLI-1`, `D31`, `RAMPA-2`)*.
+    """
+    if riga.startswith("|"):
+        cc = [c.strip() for c in riga.strip().strip("|").split("|")]
+        return _nudo(cc[0][:100] + " || " + cc[-1][:160])
+    return _nudo(riga)
+
+
 def def_di(riga):
     if re.match(r"^#{1,6}\s", riga):
         c = _nudo(riga.lstrip("# "))
@@ -274,7 +302,9 @@ for f, ns, tipo_reg in REGISTRI:
             "riga": _t,
             "fonte": "%s::%s" % (f, (titolo_di(riga) or "")[:40]),
             "tipo": primo(TIPO_SEZ, sez, tipo_reg),
-            "stato": primo(STATO, _t, "da-decidere"),
+            "stato": primo(STATO, stato_src(riga), "da-decidere"),
+            "src": stato_src(riga),
+            "stato_da": "",
             "blocca": "SI" if re.search(BLOCCA_SI, _t) else "",
             "alias": set(),
         }
@@ -366,8 +396,49 @@ for tok, n in NONDEF:
         "id": tok,
         "titolo": ("(CITATO %d volte, MAI definito in un registro%s)"
                    % (n, "" if _in_vivi else "; citato solo in referti/sigilli/task history")),
-        "riga": "", "fonte": "(nessuna definizione trovata)", "tipo": _tipo,
+        "riga": "", "src": "", "fonte": "(nessuna definizione trovata)", "tipo": _tipo,
         "stato": "da-decidere", "blocca": "", "alias": set()}
+
+# ------------------------------------------------------------------ il TIPO, corretto a mano
+#   ➕ CORREZIONE (a) DI LUCA, 2026-09-26: queste voci erano `altro`, **e `altro` non entra nello
+#   smistamento**: sparivano dalla lista su cui si decide. **L'assegnazione e' un GIUDIZIO, quindi
+#   sta qui, dichiarata, con il motivo** -- non nascosta in una parola chiave.
+TIPO_A_MANO = {
+    "U1": ("difetto", "`21` usi di `massa_critica_collasso` DENTRO leggi fisiche: e' un difetto"),
+    "RAMPA-2": ("difetto", "`_cs_nodo_prev` non inizializzata: al passo 0 tutti leggono `CS_M`"),
+    "OMEGA-ETA": ("misura", "il rapporto `|omega|` figlio/maturo da seguire nel run base"),
+    "COPPIA-RAMP": ("misura", "perche' la coppia non porta `ramp`: una misura, non una cura"),
+    "CLI-1": ("cura", "i sigilli delle cure 4 e 5 da RIFARE attraverso il CLI"),
+    "CURA-3": ("cura", "`phi` su `2pi` con le soglie che la seguono: e' una cura decisa"),
+    "MITOSI-TASSO": ("misura", "che il tasso resti dello stesso ordine e' da MISURARE"),
+    "DRIVER-SCENA-II": ("difetto", "il driver non sa fare la scena `(ii)`: quattro difetti insieme"),
+    "OSSERVABILE-P1": ("difetto", "manca l'osservabile che la `PROVA 1` misura"),
+}
+# ⚠ LA TABELLA DEI DIFETTI E' SPEZZATA: `D31`-`D38` cadono sotto l'intestazione di
+#   `PROVE DI SPEGNIMENTO`, quindi prendevano il tipo di DEFAULT (`altro`) e **uscivano dallo
+#   smistamento**. Misurato: `D31` — una delle voci `SI` del mandato — era `tipo: altro`.
+#   Un `Dxx` di `STATO_RUN` **e' un difetto per l'ID, non per la posizione nel file.**
+for _v in VOCI.values():
+    if re.fullmatch(r"D\d\d", _v["id"]) and "STATO_RUN" in _v["fonte"]:
+        _v["tipo"] = "difetto"
+
+for _k, (_tp, _mot) in TIPO_A_MANO.items():
+    if _k in VOCI:
+        VOCI[_k]["tipo"] = _tp
+        VOCI[_k]["tipo_a_mano"] = _mot
+
+# lo stato dalle FRASI (correzione (b)), che vince sulle regole generiche
+for v in VOCI.values():
+    if v["stato"] in ("chiuso", "non-difetto"):
+        continue
+    for _f in STATO_CHIUSO_FRASI:
+        m = re.search(_f, v.get("src", ""))
+        if m:
+            _ctx = re.sub(r"\s+", " ", v["src"])
+            _i = _ctx.find(m.group(0))
+            v["stato"] = "chiuso"
+            v["stato_da"] = _ctx[max(0, _i - 28):_i + len(m.group(0)) + 28].strip()
+            break
 
 # ------------------------------------------------------------------ `blocca_run_base`
 #   ❌ CORREZIONE DI LUCA, 2026-09-26: **la PAROLA CHIAVE da sola e' sbagliata.** `Z25`, `Z29` e
@@ -394,14 +465,83 @@ for v in VOCI.values():
             break
 
 # ================================================================== SCRITTURA
+# ⚠ QUESTO BLOCCO STA **PRIMA** DELLA SCRITTURA DEL TSV, e prima stava dopo:
+#   le DECISIONI finivano solo nel documento dello smistamento, e **la colonna
+#   `blocca_run_base` dell'indice restava `DA-DECIDERE`** su voci gia' decise. Misurato su `D02`,
+#   `D03`, `D14`, `D15`, `SCALE-TW`: **la decisione c'era e l'indice non la portava.**
+#   **Un indice che non porta la decisione presa non e' la fonte: e' una copia in ritardo.**
+# ------------------------------------------------------------------ LE DECISIONI DELLA REVISIONE
+#   ➕ PUNTO 2 DEL MANDATO, 2026-09-26. **Ogni riga porta la prova in UNA frase.** Le decisioni sono
+#   di Luca; io ho verificato ciascuna prova sul disco, e **dove non torna la voce resta
+#   `DA VERIFICARE`** invece di essere forzata.
+DECISIONI = {
+ "DRIVER-SCENA-II": ("SI", "senza un driver che faccia la scena `(ii)`(a) non esiste il RUN BASE, "
+                     "e le quattro cose sono verificate alle righe citate (`:223`, `:328`, `:7187`, "
+                     "`:8681`)"),
+ "OSSERVABILE-P1": ("SI", "e' la grandezza che la `PROVA 1` misura: senza, la prova non ha numero"),
+ "D02": ("SI", "`pozzo_grafo` usa `self.pos` a `:6541` -- **verificato** -- ed entra nella spinta "
+         "`S09`: il disegno entra nella gravita'"),
+ "D31": ("SI", "il freno di `_smorza` e' ancora a SENSO UNICO -- **verificato**: il docstring dice "
+         "«smorzando solo la DISCESA» e `eff = where(scende, dx*fatt, dx)`; `Z91` e' curato e acceso"),
+ "U1": ("SI", "la repulsione di coerenza e' attiva e `massa_critica_collasso` e' usata in `21` punti "
+        "dentro leggi fisiche: **si misura prima**"),
+ "CLI-1": ("SI", "il sigillo delle cure 4 e 5 gira in configurazione DI MODULO, non dal CLI: "
+           "certifica un percorso che nessun run usa"),
+ "SCALE-TW": ("SI", "prima la misura `M1`: **quanta mitosi e DOVE** -- senza quella, le scale della "
+              "torsione si leggerebbero su un sistema che non si sa dove crea"),
+ "D03": ("SI", "decisione di Luca: **o si spegne in modo dichiarato, o `MEM_ARCO`** -- la memoria "
+         "del moto prende le direzioni da `pos` e normalizza su una mediana GLOBALE"),
+ "D09": ("DA VERIFICARE", "⚠ **la prova data non torna:** il numero `4651` **non e' nel repo** "
+         "*(cercato in tutti i `.md`/`.txt`/`.py` tracciati)*, e la riga di `Z73` in "
+         "`RAMIFICAZIONI` e' `DA RIVERIFICARE` e dice ancora che `chi_basc` **BLOCCA** la mitosi. "
+         "**Non la forzo: serve il run lungo che conta i nati.**"),
+ "RAMPA-2": ("NO", "e' il transitorio di UN passo: al passo 0 tutti leggono `cs = CS_M`. "
+             "**Si cura comunque**, ma non blocca il run base"),
+ "D14": ("NO", "la scala globale e' **uguale ovunque**: non introduce una differenza fra nodi"),
+ "D15": ("NO", "la premessa e' superata da `CHI_COOP` *(decisione di Luca)*"),
+}
+#   ...e per tutte le altre, il motivo viene da una REGOLA, non da un giudizio riga per riga.
+REGOLE_NO = [
+ (r"VALE PER QUELLA SCENA|EPOCA 1|EPOCA 2|ALIASAT",
+  "fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo"),
+ (r"^(REG-|PAT-|CHK|E3$|D12$|D13$|Z15$|Z89$|Z125$|C21$)",
+  "voce di PROCESSO o di STRUMENTO: non e' una legge del sistema"),
+]
+REGOLA_NO_ULTIMA = ("nessuna prova la lega al run base: **non blocca fino a prova contraria**, "
+                    "ed e' la regola, non un giudizio")
+
+TIPI_SMIST = ("difetto", "fronte", "misura", "cura")
+SMIST = [v for v in VOCI.values()
+         if v["tipo"] in TIPI_SMIST and v["stato"] in ("aperto", "da-decidere")]
+for v in SMIST:
+    _d = DECISIONI.get(v["id"])
+    if _d:
+        v["blocca"], v["motivo"] = _d
+        continue
+    # ⚠ LA PRECEDENZA: le REGOLE DI `NO` vengono **prima** della parola chiave della fonte.
+    #   Misurato: `Z21`, `Z25`, `Z29` uscivano `SI` perche' nella loro riga compare una parola come
+    #   «BLOCCANTE», **ma sono fronti «VALE PER QUELLA SCENA» di epoca 1-2**, e la regola di Luca
+    #   dice che quelli **non bloccano**: sono misure da rifare, non ostacoli. **Una parola chiave
+    #   non batte una regola dichiarata.**
+    for _pat, _mot in REGOLE_NO:
+        if re.search(_pat, v["id"]) or re.search(_pat, v.get("riga", "")):
+            v["blocca"], v["motivo"] = "NO", _mot
+            break
+    else:
+        if v["blocca"] == "SI":
+            v["motivo"] = "la fonte lo DICHIARA («BLOCCANTE» / «prima di qualunque giro lungo»)"
+        else:
+            v["blocca"], v["motivo"] = "NO", REGOLA_NO_ULTIMA
+
 COL = ["id", "alias", "titolo_breve", "fonte_principale", "stato", "blocca_run_base", "tipo",
-       "famiglia"]
+       "famiglia", "stato_da"]
 out = [TAB.join(COL)]
 for k in sorted(VOCI):
     v = VOCI[k]
     out.append(TAB.join([v["id"], ",".join(sorted(v["alias"])),
                          re.sub(r"[\t\n]", " ", v["titolo"]), v["fonte"],
-                         v["stato"], v["blocca"], v["tipo"], v["fam"]]))
+                         v["stato"], v["blocca"], v["tipo"], v["fam"],
+                         re.sub(r"[\t\n]", " ", v.get("stato_da", ""))]))
 io.open(DEST, "w", encoding="utf-8", newline=NL).write(NL.join(out) + NL)
 
 outx = [TAB.join(["forma", "motivo", "citazioni"])]
@@ -412,9 +552,6 @@ io.open(DEST_X, "w", encoding="utf-8", newline=NL).write(NL.join(outx) + NL)
 # ================================================================== lo SMISTAMENTO per Luca
 #   ⚠ SOLO i tipi che possono bloccare un run base, e SOLO se aperti o da decidere. **`SI`/`NO`
 #   NON si riempiono a intuito: questa lista e' la BASE su cui decide Luca** (ordine suo).
-TIPI_SMIST = ("difetto", "fronte", "misura", "cura")
-SMIST = [v for v in VOCI.values()
-         if v["tipo"] in TIPI_SMIST and v["stato"] in ("aperto", "da-decidere")]
 _sm = [u"# 🧮 **SMISTAMENTO PER IL RUN BASE — la lista su cui decide Luca** *(2026-09-26)*",
        u"",
        u"*(**Generata** da `csv/_indice_id.py` dall'indice: nessuna riga e' ricopiata a mano.)*",
@@ -432,16 +569,62 @@ _sm = [u"# 🧮 **SMISTAMENTO PER IL RUN BASE — la lista su cui decide Luca** 
        % len(SMIST),
        u"```",
        u""]
+
+# ---------------------------------------------------------------- l'ORDINE DI LAVORO (punto 4)
+#   ⚠ L'ORDINE NON E' ALFABETICO NE' PER FAMIGLIA: e' per DIPENDENZA. Ogni riga dice **perche'
+#   viene dopo la precedente**, e la stima e' **una stima**, non una misura.
+ORDINE = [
+ ("1", "DRIVER-SCENA-II", "**senza un driver che faccia la scena `(ii)`(a) non si puo' girare "
+  "NIENTE**: viene prima di ogni misura, perche' ogni misura va fatta su quella scena", "1-2 h"),
+ ("2", "OSSERVABILE-P1", "**e' la grandezza che la `PROVA 1` misura**: viene subito dopo il driver "
+  "perche' il suo collaudo ha bisogno di una scena vera", "1-1,5 h"),
+ ("3", "D02", "**il disegno entra nella gravita'** *(`pozzo_grafo` usa `pos` a `:6541`)*: va curato "
+  "PRIMA delle misure, altrimenti si misura un sistema che si sa difettoso *(`P2`)*", "1,5-2,5 h"),
+ ("4", "U1", "**misura prima**: quanto pesa `massa_critica_collasso` nei `21` punti", "1 h"),
+ ("5", "SCALE-TW", "**la misura `M1`**: quanta mitosi e DOVE. Va dopo `D02` perche' la spinta "
+  "cambia dove i nodi nascono", "1,5-2 h"),
+ ("6", "D31", "**misura del freno**, e poi la forma decisa `1+tanh`: la deriva si misura sulla scena "
+  "del driver", "1-1,5 h"),
+ ("7", "CLI-1", "**i sigilli delle cure 4 e 5 dal CLI**: indipendente dagli altri, si puo' fare in "
+  "qualunque momento, e sta qui perche' e' il piu' breve", "40-60 min"),
+ ("8", "D03 · D31 · SCALE-TW", "**LE DECISIONI DI LUCA**: spegnere in modo dichiarato o `MEM_ARCO`; "
+  "la forma del freno; che fare delle scale della torsione. **Vengono DOPO le misure**, perche' una "
+  "decisione senza numeri e' una decisione al buio", "— (decide Luca)"),
+ ("9", "RAMPA-2", "**si cura comunque**, e sta per ultima perche' e' il transitorio di un passo",
+  "30-45 min"),
+ ("10", "RUN BASE", "scena `(ii)`(a), 4 semi, 600 passi, tutte le cure, `P5` attivo, tag "
+  "`base-epoca-4`; poi la `PROVA 1`", "il run: ore-macchina"),
+]
+_si = [v for v in SMIST if v["blocca"] == "SI"]
+_dv = [v for v in SMIST if v["blocca"] not in ("SI", "NO")]
+_sm += [u"## 🎯 **L'ORDINE DI LAVORO DEI `SI`** — %d voci, e l'ordine E' PER DIPENDENZA"
+        % len(_si), u"",
+        u"> **Il lavoro sui `SI` comincia SOLO col via di Luca.** Qui c'e' l'ordine e il perche'.",
+        u"",
+        u"| # | voce | perche' viene qui | stima |", u"|--:|---|---|--:|"]
+for _n, _id, _p, _st in ORDINE:
+    _sm.append(u"| %s | **%s** | %s | %s |" % (_n, _id, _p, _st))
+_sm += [u"", u"**Somma delle stime, senza il run e senza le decisioni: `8,5-12,5 h`.** "
+        u"*(Stime, non misure: la piu' incerta e' `D02`, che tocca una legge.)*", u""]
+if _dv:
+    _sm += [u"## ⚠ **VOCI CHE NON TORNANO CON LA PROVA DATA — `DA VERIFICARE`**", u"",
+            u"> **Non le forzo**, come chiesto: qui dico perche'.", u"",
+            u"| voce | perche' non torna |", u"|---|---|"]
+    for v in _dv:
+        _sm.append(u"| **%s** | %s |" % (v["id"], v.get("motivo", "")))
+    _sm.append(u"")
 for k, nome in FAMIGLIE + [("?", "SENZA FAMIGLIA — nessuna regola ha deciso")]:
     vv = [v for v in SMIST if v["fam"] == k]
     if not vv:
         continue
     _sm += [u"## FAMIGLIA **%s** — %s   *(%d voci)*" % (k, nome, len(vv)), u"",
-            u"| blocca? | id | che cos'e' | fonte |", u"|:--:|---|---|---|"]
+            u"| blocca? | id | che cos'e' | **il motivo, in una frase** | fonte |",
+            u"|:--:|---|---|---|---|"]
     for v in sorted(vv, key=lambda x: (x["tipo"], x["id"])):
-        _sm.append(u"| `%s` | **%s** | %s | `%s` |"
-                   % (v["blocca"], v["id"], breve_riga(v), v["fonte"].split("::")[0]
-                      .replace("doc/", "")))
+        _sm.append(u"| `%s` | **%s** | %s | %s | `%s` |"
+                   % (v["blocca"], v["id"], breve_riga(v),
+                      v.get("motivo", "(senza motivo: DIFETTO DEL GENERATORE)"),
+                      v["fonte"].split("::")[0].replace("doc/", "")))
     _sm.append(u"")
 _sm += [u"---", u"",
         u"**COSA QUESTA LISTA NON DICE:**",
@@ -478,6 +661,35 @@ _male = [v["id"] for v in VOCI.values()
 P("  CONTROLLO di Luca: righe con stato chiuso/non-difetto/teoria (o criterio-locale) E blocca SI:")
 P("      %d   -> %s" % (len(_male), "PASS" if not _male else "FAIL: " + ", ".join(_male[:12])))
 P("  SMISTAMENTO (tipo difetto/fronte/misura/cura, stato aperto/da-decidere): %d voci" % len(SMIST))
+P()
+P("=" * 104)
+P("LE CONDIZIONI DI FINE (punto 3 del mandato) -- verificate DA SCRIPT")
+P("=" * 104)
+_c1 = [v["id"] for v in SMIST if v["blocca"] == "DA-DECIDERE"]
+_c2 = [v["id"] for v in VOCI.values()
+       if v["blocca"] == "SI" and (v["stato"] in ("chiuso", "non-difetto", "teoria")
+                                   or v["tipo"] in ("assioma", "standard", "criterio-locale"))]
+_NOMINATE = ["DRIVER-SCENA-II", "OSSERVABILE-P1", "MITOSI-TASSO", "CURA-3", "D02", "D03", "D09",
+             "D11", "D14", "D15", "D31", "U1", "CLI-1", "SCALE-TW", "RAMPA-2", "OMEGA-ETA",
+             "COPPIA-RAMP"]
+_c3 = [x for x in _NOMINATE if x not in VOCI]
+_d09 = VOCI.get("D09", {}).get("stato", "(assente)")
+_d11 = VOCI.get("D11", {}).get("stato", "(assente)")
+P("  (1) voci DA-DECIDERE nello smistamento .............. %3d   -> %s"
+  % (len(_c1), "PASS" if not _c1 else "FAIL: " + ", ".join(_c1[:10])))
+P("  (2) contraddizioni stato/blocca ..................... %3d   -> %s"
+  % (len(_c2), "PASS" if not _c2 else "FAIL: " + ", ".join(_c2[:10])))
+P("  (3) voci NOMINATE dal mandato e assenti dall'indice .. %3d   -> %s"
+  % (len(_c3), "PASS" if not _c3 else "FAIL: " + ", ".join(_c3)))
+P("  (4) STATO_RUN allineato: D11 \"%s\"  D09 \"%s\"" % (_d11, _d09))
+P("      D11 deve essere `chiuso`; **D09 resta `aperto` DI PROPOSITO**: la sua prova non torna")
+P("      *(il numero `4651` non e' nel repo)*, ed e' segnalato come `DA VERIFICARE`.")
+_fine = (not _c1) and (not _c2) and (not _c3) and _d11 == "chiuso"
+P()
+P("  CONDIZIONE DI FINE: %s" % ("SODDISFATTA -- la lista si puo' CONGELARE"
+                                if _fine else "NON soddisfatta"))
+if not _fine:
+    print("*** le condizioni di fine NON sono soddisfatte: NON si congela.")
 P()
 P("  file SALTATI perche' sono OUTPUT di questa stessa macchina: %d  (%s)"
   % (len(AUTO_SALTATI), ", ".join(os.path.basename(x) for x in sorted(AUTO_SALTATI))))

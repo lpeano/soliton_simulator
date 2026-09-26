@@ -169,7 +169,7 @@ verita' sono peggio di una.
 |---|---|
 | `commit-msg` | **`P1-bis`** (un referto senza relazione) **+ `REG-R`** (una legge che cambia senza la sua scheda), via `csv/_hook_relazione.py` che chiama `csv/_hook_fisica.py` |
 | `pre-commit` | **`P3`** (un sigillo che configura il modulo a mano), **`P5`** (un referto senza la configurazione INTERA), **`P8`** (il codice «di prima» preso da `HEAD`), via `csv/_hook_presidi.py` |
-| `pre-commit` **+** `commit-msg` | **`INDICE`** — **ogni ID che un commit AGGIUNGE a un documento VIVO, o che cita nel MESSAGGIO, esiste in `doc/INDICE_ID.tsv`** (come `id` o come `alias`) oppure in `doc/INDICE_ID_ESCLUSI.tsv` **col motivo**. Via `csv/_presidio_indice.py`, collaudo **5/5** *(il quinto e' il HOOK VERO)*. Via d'uscita dichiarata: `[SENZA-INDICE: <motivo>]` |
+| `commit-msg` **(uno stadio solo, e il perche' e' misurato)** | **`INDICE`** — **ogni ID che un commit AGGIUNGE a un documento VIVO, o che cita nel MESSAGGIO, esiste in `doc/INDICE_ID.tsv`** (come `id` o come `alias`) oppure in `doc/INDICE_ID_ESCLUSI.tsv` **col motivo**. Via `csv/_presidio_indice.py`, collaudo **5/5** *(il quinto e' il HOOK VERO)*. Via d'uscita dichiarata: `[SENZA-INDICE: <motivo>]`. **⚠ STA IN `commit-msg` E NON IN `pre-commit`, e non e' un dettaglio:** in `pre-commit` il messaggio **non esiste ancora** *(git lo scrive dopo)*, e leggere `.git/COMMIT_EDITMSG` la' significa leggere **il commit PRECEDENTE** — **una sola eccezione dichiarata avrebbe spento il presidio per sempre.** L'ha trovato il collaudo end-to-end. |
 
 **⚠ E FINCHE' QUEL COMANDO NON E' DATO, I PRESIDI NON IMPEDISCONO NIENTE.**
 **`python csv/_hook_presidi.py` LO DICE a ogni invocazione** *(fuori dal caso in cui e' lui

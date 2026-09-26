@@ -134,7 +134,9 @@ def controlla():
     #   gia' scritto. Sta accanto a `REG-R` per la stessa ragione: `commit-msg` e' UNO SOLO.
     try:
         import _presidio_indice
-        _ig, _am = _presidio_indice.esamina(msg0)
+        # le righe AGGIUNTE ai documenti vivi **piu'** il messaggio: e' l'unico stadio in cui
+        #   entrambi sono disponibili, quindi il controllo intero vive qui.
+        _ig, _am = _presidio_indice.esamina(_presidio_indice._aggiunte() + "\n" + msg0)
         if _ig or _am:
             if "[SENZA-INDICE:" in msg0:
                 sys.stderr.write("[INDICE] eccezione DICHIARATA nel messaggio.\n")

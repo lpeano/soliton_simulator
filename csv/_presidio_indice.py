@@ -117,14 +117,14 @@ def _aggiunte():
 def pre_commit(msg_file=None):
     testo = _aggiunte()
     msg = ""
-    if msg_file is None:
-        # ⚠ IN `pre-commit` IL MESSAGGIO NON E' UN ARGOMENTO, ma con `git commit -F` git l'ha
-        #   gia' scritto in `.git/COMMIT_EDITMSG`. Senza questo ripiego la via d'uscita
-        #   `[SENZA-INDICE: ...]` valeva **solo** in `commit-msg`, cioe' **troppo tardi**: il
-        #   `pre-commit` rifiutava prima, e l'eccezione dichiarata non veniva nemmeno letta.
-        _cem = os.path.join(RADICE, ".git", "COMMIT_EDITMSG")
-        if os.path.exists(_cem):
-            msg_file = _cem
+    # ❌❌ RIPIEGO RIMOSSO il 2026-09-26, ed era un difetto GRAVE: leggevo
+    #   `.git/COMMIT_EDITMSG` in `pre-commit` credendo che git l'avesse gia' scritto. **NON e'
+    #   vero: git lo scrive DOPO il `pre-commit`** *(l'ordine e' `pre-commit` -> `prepare-commit-msg`
+    #   -> `commit-msg`)*, quindi leggevo **il messaggio del commit PRECEDENTE**. Un solo commit con
+    #   `[SENZA-INDICE: ...]` **avrebbe spento il presidio per tutti i commit successivi**, fino al
+    #   cambio di quel file. **L'ha trovato il collaudo end-to-end**, che e' esattamente il ramo che
+    #   un presidio non deve saltare. Ora il controllo vive in **UN solo stadio: `commit-msg`**,
+    #   dove il messaggio ESISTE e l'eccezione si puo' leggere.
     if msg_file and os.path.exists(msg_file):
         msg = io.open(msg_file, encoding="utf-8", errors="replace").read()
         if "[SENZA-INDICE:" in msg:
@@ -239,9 +239,14 @@ def collaudo():
                 _f.write(NL + "<!-- collaudo del presidio: %s non esiste -->" % _sent + NL)
             subprocess.run(["git", "add", "--", "doc/LISTA_CHIUSA.md"], cwd=RADICE,
                            capture_output=True, text=True)
-            _h = subprocess.run([sys.executable, os.path.join(RADICE, "csv", "_hook_presidi.py"),
-                                 "--pre-commit"], cwd=RADICE, capture_output=True, text=True,
-                                encoding="utf-8", errors="replace")
+            # il messaggio FINTO, senza eccezione dichiarata: e' il caso che DEVE fallire
+            _msgf = os.path.join(RADICE, "doc", "_collaudo_msg.tmp")
+            io.open(_msgf, "w", encoding="utf-8", newline=NL).write("collaudo" + NL)
+            _h = subprocess.run([sys.executable, os.path.join(RADICE, "csv",
+                                                              "_presidio_indice.py"),
+                                 "--commit-msg", _msgf], cwd=RADICE, capture_output=True,
+                                text=True, encoding="utf-8", errors="replace")
+            os.remove(_msgf)
         finally:
             subprocess.run(["git", "reset", "-q", "--", "doc/LISTA_CHIUSA.md"], cwd=RADICE,
                            capture_output=True, text=True)

@@ -101,18 +101,25 @@ DEVONO = [
     ("la soglia di torsione 3pi", r"\bD36\b",
      "la riga `soglia0 = 3π` fra i limiti `A11` **non ha un ID**: la copre `D36`, che e' la soglia "
      "della mitosi in unita' assolute di `tw` — **copertura per contenuto, non identita'**"),
+    ("DRIVER-SCENA-II", r"DRIVER-SCENA-II", ""),
+    ("OSSERVABILE-P1", r"OSSERVABILE-P1", ""),
+    ("MITOSI-TASSO (era una voce PERSA)", r"MITOSI-TASSO", ""),
+    ("CURA-3 (era `CURA 3`, con lo spazio)", r"CURA-3", ""),
+    ("D02", r"(?<![0-9A-Z])D02(?![0-9])", ""),
+    ("D03", r"(?<![0-9A-Z])D03(?![0-9])", ""),
+    ("D09 — la voce che NON torna", r"(?<![0-9A-Z])D09(?![0-9])", ""),
+    ("D31", r"(?<![0-9A-Z])D31(?![0-9])", ""),
     ("chi comprime d0", r"CONFIG-1",
      "le sei misure da rifare in configurazione del driver **non hanno un ID ciascuna**: le copre "
      "`CONFIG-1`, la voce che le raccoglie"),
 ]
 #   ...e le due che NESSUN ID copre. **Dichiarate qui: se l'elenco cresce, il generatore si ferma.**
 PERSE = [
-    ("il `tasso di mitosi`",
-     "e' un punto di `COSA NON SO DERIVARE` della scheda ⑨, **una voce di elenco in prosa senza "
-     "etichetta**. Per comparire le serve un ID in un registro."),
-    ("`CURA 3`",
-     "l'etichetta e' **`CURA 3` con lo SPAZIO**, e uno spazio non fa un identificatore. Basterebbe "
-     "`CURA-3`: **e' una rinomina, e la decide Luca.**"),
+    # ✅ VUOTO dal 2026-09-26: **le due voci che non avevano un ID ora ce l'hanno.**
+    #   `MITOSI-TASSO` e' entrata come voce di `STATO_RUN` *(prima viveva come punto di un elenco in
+    #   prosa della scheda ⑨)*; `CURA 3` e' diventata **`CURA-3`** *(uno spazio non fa un
+    #   identificatore)*. **La lista resta qui perche' il controllo e' «se CRESCE, il generatore si
+    #   ferma»**: una perdita nuova non deve passare in silenzio.
 ]
 
 # ================================================================== LETTURA
@@ -237,6 +244,10 @@ P()
 P("**Nell'indice entrano solo le voci CON UN ID.** Queste **non ne hanno**, quindi **non possono")
 P("comparire qui** — e lo scrivo **prima** dei numeri, invece di lasciarle sparire:")
 P()
+if not PERSE:
+    P("**✅ NESSUNA: dal 2026-09-26 l'elenco e' VUOTO.** `MITOSI-TASSO` e `CURA-3` — le due voci")
+    P("che vivevano senza etichetta — **hanno un ID**, e compaiono. **Il controllo resta: se")
+    P("l'elenco CRESCE, il generatore si ferma.**")
 for nome, mot in PERSE:
     P("- **%s** — %s" % (nome, mot))
 P()
@@ -279,12 +290,12 @@ P("  **non puo' vedere cio' che l'indice non ha**. E' il prezzo di una fonte sol
 P("  rovescio del guadagno.")
 
 T = NL.join(R) + NL
-if mancano or len(PERSE) != 2:
+if mancano or len(PERSE) != 0:
     print("*** FERMO: il documento NON e' stato scritto.")
     for n in mancano:
         print("    MANCA la voce che DEVE comparire: %s" % n)
-    if len(PERSE) != 2:
-        print("    le voci PERSE dichiarate sono %d invece di 2: una perdita nuova va guardata."
+    if len(PERSE) != 0:
+        print("    le voci PERSE dichiarate sono %d invece di 0: una perdita NUOVA va guardata."
               % len(PERSE))
     sys.exit(3)
 

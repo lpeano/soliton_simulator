@@ -18,9 +18,9 @@
 | il testo | `420` caratteri della riga | `117` del `titolo_breve` **+ la fonte in colonna** |
 
 ```
-voci nell'indice      738
-in LISTA              333   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
-FUORI LISTA           405   col motivo, dai campi dell'indice
+voci nell'indice      741
+in LISTA              352   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
+FUORI LISTA           389   col motivo, dai campi dell'indice
 ```
 
 ---
@@ -29,124 +29,144 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 
 | | famiglia | cosa raccoglie | voci in lista |
 |---|---|---|--:|
-| **A** | **INERZIA E AVVIO** | l'inerzia spinoriale, il contrasto, `rho_s`, la rampa, cio' che decide come nasce un nodo | 54 |
-| **B** | **TEMPO UNICO** | un solo orologio: `dt_n`/`dt_e` contro `DT` nudo, `r`, `tau_pp`, le medie d'arco | 9 |
-| **C** | **DOPPIA COPERTURA E CREAZIONE** | la fase su `2pi`/`4pi`, la torsione `tw`, la mitosi, Schwinger, cio' che si eredita | 14 |
-| **D** | **SOGLIE TARATE E SOTTO PLANCK** | `A11`: ogni clip, pavimento o tetto che non esprima un vincolo dichiarato | 5 |
+| **A** | **INERZIA E AVVIO** | l'inerzia spinoriale, il contrasto, `rho_s`, la rampa, cio' che decide come nasce un nodo | 68 |
+| **B** | **TEMPO UNICO** | un solo orologio: `dt_n`/`dt_e` contro `DT` nudo, `r`, `tau_pp`, le medie d'arco | 10 |
+| **C** | **DOPPIA COPERTURA E CREAZIONE** | la fase su `2pi`/`4pi`, la torsione `tw`, la mitosi, Schwinger, cio' che si eredita | 17 |
+| **D** | **SOGLIE TARATE E SOTTO PLANCK** | `A11`: ogni clip, pavimento o tetto che non esprima un vincolo dichiarato | 7 |
 | **E** | **DISEGNO E STATISTICHE GLOBALI** | `A2`/`A5`: mediane e medie globali dentro una legge locale, e il disegno nella fisica | 9 |
 | **F** | **FRENO E CONTRAZIONE** | `SCALA_MIN`, il freno a senso unico, la coesione, la repulsione, `d0`, `LAM` | 44 |
 | **G** | **ARRETRATO DEGLI STRUMENTI** | presidi, ancore, reperti, ripresa, il passo incompleto: **non e' fisica** | 8 |
-| **?** | **SENZA FAMIGLIA** | nessuna regola dell'indice ha deciso: **le elenco invece di metterle in una famiglia a caso** | 190 |
+| **?** | **SENZA FAMIGLIA** | nessuna regola dell'indice ha deciso: **le elenco invece di metterle in una famiglia a caso** | 189 |
 
 ---
 
-## FAMIGLIA **A** — INERZIA E AVVIO   *(54 voci)*
+## FAMIGLIA **A** — INERZIA E AVVIO   *(68 voci)*
 
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
-| `DA-DECIDERE` | **CLI-1** | — | I SIGILLI DI CURA 4 E CURA 5 NON HANNO MAI PROVATO IL PERCORSO CLI: impostavano S.SEMINAMATURA = True e… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **CONFIG-1** | — | APERTA il 2026-09-25 / LE SEI MISURE DI OGGI GIRAVANO CON 28 LEGGI SU 31 SPENTE, misurato… | `aperto` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D20** | — | La correzione (1) su inerzia NON e' stata cablata, e il gate che la autorizzava aveva misurato UN'ALTRA… | `aperto` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D26** | — | Le coorti non sopravvivevano allo SNAPSHOT: dopo un salva/ricarica il lignaggio ripartiva VUOTO / Z53,… | `da-decidere` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D30** | — | massa chiama semina SENZA massid (:6209), quindi masseinfo non viene MAI popolato e registraconcorrenza non… | `aperto` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **I1** | — | IDEA DI LUCA, per dopo: costruire UNA massa, farla maturare, leggerne la struttura sul grafo e REPLICARLA… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **INERZIA-1** | — | LA LEGGE DELL'INERZIA CEDE A k = 2, ED È UN DIFETTO DIMOSTRATO (misura 3, f8b27d9): coppia ×2.39, inerzia… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **M2** | — | LA MITOSI — DUE DIFETTI DA ACCLARARE. ① il figlio nasce nel PUNTO MEDIO: posfiglio = 0.5 (self.pos[a] +… | `da-decidere` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **OMEGA-ETA** | — | APERTA il 2026-09-26 (Luca: da seguire nel run base, NON una cura) / IL RAPPORTO /omega/ FIGLIO/MATURO SALE… | `aperto` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **RAMPA-2** | — | APERTA il 2026-09-25 (richiesta di Luca) / AL PASSO 0 TUTTI LEGGONO cs = CSM. La cache csnodoprev non esiste… | `aperto` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **S08** | — | Se φ non e' l'azimut del Bloch, CHE COS'E'? / Z121 ha refutato la frase del docstring (R ≤ 0.18 contro un… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **S12** | — | S12 APPROVATO DA LUCA il 2026-09-24 / IL RILASSAMENTO DI rep DENTRO mitosi() (:5280) E' UN EULERO ESPLICITO,… | `da-decidere` | `altro` | `STATO_RUN.md` |
-| `SI` | **U1** | — | URGENTE, PRIMA DI QUALUNQUE GIRO LUNGO — massacriticacollasso: 21 usi DENTRO LEGGI FISICHE (mitosi, step,… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **U2** | — | M2 DIVENTA URGENTE — la mitosi mette figli SOTTO la scala di Planck. Con la semina nuova gli archi stanno fra… | `da-decidere` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **C1-PEQ-ESATTO** | C1 | PEQESATTO — rilassamento in forma esatta / GLOBALE §2① / 7/7 (Z95) | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **C2-PEQ-NASCITA** | C2 | PEQNASCITALOCALE — nascita locale di peq / GLOBALE §2② / 6/6 (Z96) | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **PAT-1** | — | dovespingelagravita.py non rispetta il pattern 5 (nessun CONTROLLO DELL'INVOLUCRO) / PATTERN §4 / PRIMA del… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D38** | — | nasce (:3850) e' gated su SCALAMIN or SCALAMINPASSO: la legge «nessun arco sotto LAM» e' VERIFICATA sempre… | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **REG-B** | — | FASE B: le SCHEDE, a lotti, un commit per lotto / MANDATO-REGISTRO §2 / LE QUATTRO DELL'ORDINE DI LUCA SONO… | `da-decidere` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **R2** | — | R2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / NUOVO: il residuo della catena theta = sigma + tau/2 non e'… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **S2** | — | S2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / NON SI RIPRODUCE sul sistema corretto, E CAMBIA SEGNO… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Y1** | — | Y1 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / Il settore U(1) non ha un'osservabile dell'OROLOGIO / Fra le 256… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z1** | — | Z1 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / inerzia: la correzione (1) NON e' stata cablata — il gate che… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z12** | — | Z12 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / pesi() gira SEDICI volte per passo, a cavallo della… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z125** | — | Z125 DIFETTO DI METODO, MIO ⏳[archivi delle cure · LETTURA] / IL §E NON ESISTE NEL REPO OLTRE E1 ED E2: ho… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z127** | — | Z127 LA LETTURA CADE ⏳[archivi delle cure · PROVA] / E1 NON PASSA: CON FASE2PI LA GENERAZIONE DI MATERIA SI… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z134** | — | Z134 CURA IN CODICE ⏳[archivi delle cure · CURA] / CURA 1 — L'OROLOGIO: RITMOWRAP2PI APPROVATA e accesa dal… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z17** | — | Z17 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / A6 nell'inerzia e' garantito dall'ORDINE, non dalla… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z18** | — | Z18 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / LO SFASAMENTO eta: per mesi il nodo appena nato ha pesato 2e-4… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `SI` | **Z21** | — | Z21 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SPINFEEDBACK con TAUA = 2.0: ESITO MISTO, e non si sceglie… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z23** | — | Z23 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SPINFEEDBACK NON E' ANTISIMMETRICO: sum(out) != 0, e la… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z24** | — | Z24 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL DENOMINATORE PER GRADO: la misura NON distingue (A) da… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z26** | — | Z26 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / A QUATTRO SEMI SPINFEEDBACK NON PRODUCE EFFETTO MISURABILE.… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z3** | — | Z3 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / peq DEGENERE: un fallback a DUE REGIMI, scoperto da un… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z32** | — | Z32 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / Z9 RIMISURATA SUL BLOB ATTUALE: INTATTA (+2.8 %). E il… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z33** | — | Z33 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA MEDIANA IN ritmo() E' ENTRAMBE: normalizzazione… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z34** | — | Z34 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / Z33 MISURATA: NON e' un difetto del GAUGE, e' un difetto di… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z35** | — | Z35 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / NESSUNA delle due vie cura Z33: la (1) E' IL DIFETTO, la (2)… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z37** | — | Z37 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA CUCITURA DELLO SNAPSHOT FALLISCE SU ENTRAMBI I FRONTI, e… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z46** | — | Z46 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL 93 % DEI NODI NON INVECCHIA, SONO SEMPRE GLI STESSI, E… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z48** | — | Z48 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / QUALIFICATA il 2026-09-18: VALE PER IL BATCH. Il «guscio»… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z49** | — | Z49 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL CICLO C'E', MA NON E' NEL CORPO: E' NELLA CODA. E… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z50** | — | Z50 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / QUALIFICATA il 2026-09-18: VALE PER LA REGIONE DENSA. Il… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z52** | — | Z52 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA PREDIZIONE DI LUCA E' SBAGLIATA NELLA SUA FORMA FORTE —… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z57** | — | Z57 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / omegas NON E' UN CRICCHETTO PURO: cresce la CODA, non il… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z60** | — | Z60 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA CRONOLOGIA DELLA DEGENERAZIONE: r NON CRESCE, PARTE… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z66** | — | Z66 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / median(lambdanodi()) SI CONGELA: 0.6092 IDENTICO A QUATTRO… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z87** | — | Z87 DA RIVERIFICARE ⏳[EPOCA 2 · MISURA] / d SCENDE A DIECI VOLTE SOTTO LAM MENTRE SCALAMIN E' ACCESO, E LA… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z88** | — | Z88 DA RIVERIFICARE ⏳[EPOCA 1 · CODICE] / AVVERTENZA SULL'EPOCA 1: OTTO grandezze che la SEMINA legge sono… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z90** | — | Z90 DA RIVERIFICARE ⏳[EPOCA 2 · MISURA] / IL RAMO D DIVERGE: nsub = 22591, E IL VINCOLO VINCENTE E' n1 — LA… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **C20** | — | C20 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / PRIMA MISURA DELLA CONSERVAZIONE DI Ltot =… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **C22** | — | C22 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA CRESCITA DI Ltot E' L'INERZIA CHE SI ACCENDE, NON UNA… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **C24** | — | C24 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA CRESCITA DI Ltot STA NELLA CODA, NON NEL NODO TIPICO —… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
+| `NO` | **C1-PEQ-ESATTO** | C1 | PEQESATTO — rilassamento in forma esatta / GLOBALE §2① / 7/7 (Z95) | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **C2-PEQ-NASCITA** | C2 | PEQNASCITALOCALE — nascita locale di peq / GLOBALE §2② / 6/6 (Z96) | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `SI` | **CLI-1** | — | I SIGILLI DI CURA 4 E CURA 5 NON HANNO MAI PROVATO IL PERCORSO CLI: impostavano S.SEMINAMATURA = True e… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **PAT-1** | — | dovespingelagravita.py non rispetta il pattern 5 (nessun CONTROLLO DELL'INVOLUCRO) / PATTERN §4 / PRIMA del… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **D20** | — | La correzione (1) su inerzia NON e' stata cablata, e il gate che la autorizzava aveva misurato UN'ALTRA… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D26** | — | Le coorti non sopravvivevano allo SNAPSHOT: dopo un salva/ricarica il lignaggio ripartiva VUOTO / Z53,… | `da-decidere` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D30** | — | massa chiama semina SENZA massid (:6209), quindi masseinfo non viene MAI popolato e registraconcorrenza non… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D38** | — | nasce (:3850) e' gated su SCALAMIN or SCALAMINPASSO: la legge «nessun arco sotto LAM» e' VERIFICATA sempre… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `SI` | **DRIVER-SCENA-II** | — | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e sono QUATTRO cose insieme… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **RAMPA-2** | — | APERTA il 2026-09-25 (richiesta di Luca) / AL PASSO 0 TUTTI LEGGONO cs = CSM. La cache csnodoprev non esiste… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **REG-B** | — | FASE B: le SCHEDE, a lotti, un commit per lotto / MANDATO-REGISTRO §2 / LE QUATTRO DELL'ORDINE DI LUCA SONO… | `da-decidere` | `difetto` | `STATO_RUN.md` |
+| `SI` | **U1** | — | URGENTE, PRIMA DI QUALUNQUE GIRO LUNGO — massacriticacollasso: 21 usi DENTRO LEGGI FISICHE (mitosi, step,… | `da-decidere` | `difetto` | `STATO_RUN.md` |
+| `NO` | **R2** | — | R2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / NUOVO: il residuo della catena theta = sigma + tau/2 non e'… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **S2** | — | S2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / NON SI RIPRODUCE sul sistema corretto, E CAMBIA SEGNO… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Y1** | — | Y1 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / Il settore U(1) non ha un'osservabile dell'OROLOGIO / Fra le 256… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z1** | — | Z1 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / inerzia: la correzione (1) NON e' stata cablata — il gate che… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z101** | — | Z101 APERTA ⏳[EPOCA 3 · MISURA] / VALIDAZIONE A 600 PASSI: 6 criteri su 8 REGGONO. L'ESPLOSIONE E' SPARITA,… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z12** | — | Z12 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / pesi() gira SEDICI volte per passo, a cavallo della… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z125** | — | Z125 DIFETTO DI METODO, MIO ⏳[archivi delle cure · LETTURA] / IL §E NON ESISTE NEL REPO OLTRE E1 ED E2: ho… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z127** | — | Z127 LA LETTURA CADE ⏳[archivi delle cure · PROVA] / E1 NON PASSA: CON FASE2PI LA GENERAZIONE DI MATERIA SI… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z13** | — | Z13 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / calcolapsi() ricalcola i pesi in TUTTE le chiamate (100 %), e in… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z17** | — | Z17 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / A6 nell'inerzia e' garantito dall'ORDINE, non dalla… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z18** | — | Z18 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / LO SFASAMENTO eta: per mesi il nodo appena nato ha pesato 2e-4… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z21** | — | Z21 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SPINFEEDBACK con TAUA = 2.0: ESITO MISTO, e non si sceglie… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z23** | — | Z23 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SPINFEEDBACK NON E' ANTISIMMETRICO: sum(out) != 0, e la… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z24** | — | Z24 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL DENOMINATORE PER GRADO: la misura NON distingue (A) da… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z26** | — | Z26 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / A QUATTRO SEMI SPINFEEDBACK NON PRODUCE EFFETTO MISURABILE.… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z27** | — | Z27 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / Z24 MISURATA: i tre punti NON sono lo stesso schema. UNO e' un… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z29** | — | Z29 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / Z24 CHIUSA — dei tre punti UNO era un cricchetto e ora e' CURATO,… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z3** | — | Z3 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / peq DEGENERE: un fallback a DUE REGIMI, scoperto da un… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z30** | — | Z30 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / CHIUSA il 2026-09-18 — INDIFFERENTE, quindi nudo per A1 (decisione… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z32** | — | Z32 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / Z9 RIMISURATA SUL BLOB ATTUALE: INTATTA (+2.8 %). E il… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z33** | — | Z33 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA MEDIANA IN ritmo() E' ENTRAMBE: normalizzazione… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z34** | — | Z34 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / Z33 MISURATA: NON e' un difetto del GAUGE, e' un difetto di… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z35** | — | Z35 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / NESSUNA delle due vie cura Z33: la (1) E' IL DIFETTO, la (2)… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z37** | — | Z37 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA CUCITURA DELLO SNAPSHOT FALLISCE SU ENTRAMBI I FRONTI, e… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z38** | — | Z38 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL §1 DEL MANDATO GAUGE E' CHIUSO: il gauge attuale sta… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z41** | — | Z41 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / median(/f/) FA TRE MESTIERI, NON DUE: E' ANCHE IL… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z42** | — | Z42 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / CURATO E SIGILLATO 10/10 — L'ANELLO ISTANTANEO DI ritmo() E'… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z44** | — | Z44 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / CHIUSA — f = 0 NON E' FISICA: E' IL TRANSITORIO DI NASCITA.… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z45** | — | Z45 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / CHIUSA — L'IPOTESI MATERIA/ANTIMATERIA CADE. L'universo e'… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z46** | — | Z46 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL 93 % DEI NODI NON INVECCHIA, SONO SEMPRE GLI STESSI, E… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z48** | — | Z48 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / QUALIFICATA il 2026-09-18: VALE PER IL BATCH. Il «guscio»… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z49** | — | Z49 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL CICLO C'E', MA NON E' NEL CORPO: E' NELLA CODA. E… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z50** | — | Z50 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / QUALIFICATA il 2026-09-18: VALE PER LA REGIONE DENSA. Il… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z52** | — | Z52 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA PREDIZIONE DI LUCA E' SBAGLIATA NELLA SUA FORMA FORTE —… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z53** | — | Z53 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / LE COORTI SOPRAVVIVEVANO GIA' ALLA MITOSI. NON SOPRAVVIVEVANO ALLO… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z57** | — | Z57 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / omegas NON E' UN CRICCHETTO PURO: cresce la CODA, non il… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z60** | — | Z60 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA CRONOLOGIA DELLA DEGENERAZIONE: r NON CRESCE, PARTE… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z66** | — | Z66 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / median(lambdanodi()) SI CONGELA: 0.6092 IDENTICO A QUATTRO… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z69** | — | Z69 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SEI GUARDIE PROTEGGONO DA UN DIFETTO GIA' CURATO, e le (c)… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z73** | — | Z73 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / chibasc BLOCCA LA MITOSI e DIMEZZA L'OLONOMIA NETTA: fa l'OPPOSTO… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z87** | — | Z87 DA RIVERIFICARE ⏳[EPOCA 2 · MISURA] / d SCENDE A DIECI VOLTE SOTTO LAM MENTRE SCALAMIN E' ACCESO, E LA… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z88** | — | Z88 DA RIVERIFICARE ⏳[EPOCA 1 · CODICE] / AVVERTENZA SULL'EPOCA 1: OTTO grandezze che la SEMINA legge sono… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z9** | — | Z9 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / RISCRITTA IL 2026-09-18 — NON «CHIUSA»: RISCRITTA IN MODO CHE SI… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z90** | — | Z90 DA RIVERIFICARE ⏳[EPOCA 2 · MISURA] / IL RAMO D DIVERGE: nsub = 22591, E IL VINCOLO VINCENTE E' n1 — LA… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **C20** | — | C20 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / PRIMA MISURA DELLA CONSERVAZIONE DI Ltot =… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
+| `NO` | **C22** | — | C22 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA CRESCITA DI Ltot E' L'INERZIA CHE SI ACCENDE, NON UNA… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
+| `NO` | **C24** | — | C24 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA CRESCITA DI Ltot STA NELLA CODA, NON NEL NODO TIPICO —… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
+| `NO` | **OMEGA-ETA** | — | APERTA il 2026-09-26 (Luca: da seguire nel run base, NON una cura) / IL RAPPORTO /omega/ FIGLIO/MATURO SALE… | `aperto` | `misura` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **Q6** | — | Q6 (1a) / confrontava i valori dopo il passo, quando il rilassamento li ha gia' mossi in entrambi i rami:… | `da-decidere` | `presidio` | `CLAUDE.md` |
 
 ---
 
-## FAMIGLIA **B** — TEMPO UNICO   *(9 voci)*
+## FAMIGLIA **B** — TEMPO UNICO   *(10 voci)*
 
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
-| `DA-DECIDERE` | **C4-COES-CAUSALE** | C4 | COESCAUSALE — istante unico e cono locale / GLOBALE §2④ / 5/5 (Z98) | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **FASCE-TAU** | — | LA CRESCITA E' COORDINATA COL TEMPO PROPRIO? — l'espansione non dev'essere omogenea in senso assoluto, ma… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **G1** | — | §1 QUANTO CONTA IL DISEGNO — Ldisegno/d per arco, per regione, nel tempo, e la correlazione col CENTRO del… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **Z43** | — | Z43 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / APERTA — ED E' UNA DECISIONE SULLA DEFINIZIONE DEL TEMPO,… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z5** | — | Z5 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / A3 NON E' UN CASO PARTICOLARE DI A2 — risolta una delle… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z51** | — | Z51 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA Y NON C'E': NE' NEL DENSO, NE' NEL VUOTO, NE' NELLA… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **C12** | — | C12 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SECONDO CASO DEL PUNTO FISSO AUTO-NORMALIZZANTE. r è… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **C13** | — | C13 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL TEMPO-LUCE NON E' TESTABILE A QUESTA DENSITA'. cs non e'… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **C5** | — | C5 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / tauluce = d/cs e' PIATTO ⇒ la sostituzione rompe la… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
+| `NO` | **C4-COES-CAUSALE** | C4 | COESCAUSALE — istante unico e cono locale / GLOBALE §2④ / 5/5 (Z98) | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **CHK3-D** | — | Nel referto del CHK3, la sezione «I DIFETTI NUOVI CONTRO LE MISURE GIA' FATTE» — D27 (quattro componenti) e… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **FASCE-TAU** | — | LA CRESCITA E' COORDINATA COL TEMPO PROPRIO? — l'espansione non dev'essere omogenea in senso assoluto, ma… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **G1** | — | §1 QUANTO CONTA IL DISEGNO — Ldisegno/d per arco, per regione, nel tempo, e la correlazione col CENTRO del… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **Z43** | — | Z43 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / APERTA — ED E' UNA DECISIONE SULLA DEFINIZIONE DEL TEMPO,… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z5** | — | Z5 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / A3 NON E' UN CASO PARTICOLARE DI A2 — risolta una delle… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z51** | — | Z51 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA Y NON C'E': NE' NEL DENSO, NE' NEL VUOTO, NE' NELLA… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **C12** | — | C12 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SECONDO CASO DEL PUNTO FISSO AUTO-NORMALIZZANTE. r è… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
+| `NO` | **C13** | — | C13 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL TEMPO-LUCE NON E' TESTABILE A QUESTA DENSITA'. cs non e'… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
+| `NO` | **C5** | — | C5 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / tauluce = d/cs e' PIATTO ⇒ la sostituzione rompe la… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
 
 ---
 
-## FAMIGLIA **C** — DOPPIA COPERTURA E CREAZIONE   *(14 voci)*
+## FAMIGLIA **C** — DOPPIA COPERTURA E CREAZIONE   *(17 voci)*
 
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
-| `DA-DECIDERE` | **D35** | — | L'antiparticella di Schwinger nasce con +2π (:5443) e nel campo F = Σ exp(iφ) E' IDENTICA alla particella,… | `aperto` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **FRAG1** | — | mitosi() SU UNA RETE SENZA CAMPO VA IN IndexError INVECE DI DICHIARARLO. I = self.rhosorgente() è vuoto… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **PASSO-2** | — | UN AVANZAMENTO INCOMPLETO NEL SIMULATORE STESSO, :8404: for in range(300): net.step() nel percorso di… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **S06** | — | Il «muro dell'1 %» dell'antifase e' causato da D35: l'antifase «non annichila» perche' +2π letto da exp(iφ)… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **S07** | — | dphiarc = angle(exp(1j·Δφ)) (:5894) COLLASSA a 2π una differenza che vive su 4π — e' B3 del mandato /… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **S13** | — | IL TEMPO D'ARCO DOVREBBE ESSERE min(ri, rj) INVECE DELLA MEDIA ARITMETICA? — proposta per TUTTO il sistema,… | `da-decidere` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **PAT-2** | — | spegnigravbifase.py:184 non rispetta il pattern 2 (usa max\/Δ\/ invece delle FIRME) / PATTERN §4 / PRIMA del… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D09** | — | chibasc BLOCCA la mitosi e DIMEZZA l'olonomia netta: fa l'OPPOSTO del suo scopo dichiarato / Z73 / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **REG-A** | — | FASE A del registro della fisica: l'INVENTARIO degli scrittori di stato / MANDATO-REGISTRO §2 / FATTA… | `da-decidere` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **REG-C** | — | FASE C: LA STORIA di ogni legge, e le schede delle leggi TOLTE / MANDATO-REGISTRO §2 / cio' che non si… | `da-decidere` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **REG-R** | — | LA REGOLA MANTENUTA del registro della fisica — la riga in CLAUDE.md («nessuna legge fisica entra, cambia o… | `da-decidere` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **Z36** | — | Z36 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / APERTA, MA RI-LETTA il 2026-09-18 (Z37): il 64.7 % e' UN… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z56** | — | Z56 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / chibasc: NON E' UNA MONOCOLTURA CHE SI RIBALTA — e la… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **C17** | — | C17 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA DISPERSIONE DI r E' RUMORE: la FASE 5 non ha, a oggi,… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
+| `NO` | **CURA-3** | — | - phi su 2pi con le soglie che la seguono / nella forma decisa: frazioni che sul dominio 4pi danno… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **PAT-2** | — | spegnigravbifase.py:184 non rispetta il pattern 2 (usa max\/Δ\/ invece delle FIRME) / PATTERN §4 / PRIMA del… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `DA VERIFICARE` | **D09** | — | chibasc BLOCCA la mitosi e DIMEZZA l'olonomia netta: fa l'OPPOSTO del suo scopo dichiarato / Z73 / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D35** | — | L'antiparticella di Schwinger nasce con +2π (:5443) e nel campo F = Σ exp(iφ) E' IDENTICA alla particella,… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **REG-A** | — | FASE A del registro della fisica: l'INVENTARIO degli scrittori di stato / MANDATO-REGISTRO §2 / FATTA… | `da-decidere` | `difetto` | `STATO_RUN.md` |
+| `NO` | **REG-C** | — | FASE C: LA STORIA di ogni legge, e le schede delle leggi TOLTE / MANDATO-REGISTRO §2 / cio' che non si… | `da-decidere` | `difetto` | `STATO_RUN.md` |
+| `NO` | **REG-R** | — | LA REGOLA MANTENUTA del registro della fisica — la riga in CLAUDE.md («nessuna legge fisica entra, cambia o… | `da-decidere` | `difetto` | `STATO_RUN.md` |
+| `NO` | **Z25** | — | Z25 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / CHIUSA — IL DENOMINATORE PER GRADO ERA UN ERRORE, ed e'… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z36** | — | Z36 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / APERTA, MA RI-LETTA il 2026-09-18 (Z37): il 64.7 % e' UN… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z56** | — | Z56 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / chibasc: NON E' UNA MONOCOLTURA CHE SI RIBALTA — e la… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **C17** | — | C17 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA DISPERSIONE DI r E' RUMORE: la FASE 5 non ha, a oggi,… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
+| `NO` | **MITOSI-TASSO** | — | APERTA il 2026-09-26 (era una voce PERSA: viveva senza ID) / CHE IL TASSO DI MITOSI RESTI DELLO STESSO ORDINE… | `aperto` | `misura` | `STATO_RUN.md` |
 
 ---
 
-## FAMIGLIA **D** — SOGLIE TARATE E SOTTO PLANCK   *(5 voci)*
+## FAMIGLIA **D** — SOGLIE TARATE E SOTTO PLANCK   *(7 voci)*
 
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
 | `DA-DECIDERE` | **A1-COSTANTI** | A1 | AUDIT DELLE COSTANTI TARATE — 90 commenti «misurato/tarato» nel sorgente. Si separano le COSTANTI TARATE (es.… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **RIPRESA-ARGV** | — | APERTA il 2026-09-26 (limite di un meccanismo che ho costruito io) / LA RIPRESA SI FIDA DEL BLOB, E IL BLOB… | `aperto` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **C1BIS-ANOM-SIMM** | C1-bis | ANOMSIMM — il pavimento 1e-9 tolto / 21/9 §② / 6/6 (Z99) | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **Z64** | — | Z64 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / L'ALGEBRA SU x E' FALSIFICATA (fattore 44 000), f CROLLA… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **C21** | — | C21 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / TRE CRITERI DI SIGILLO SBAGLIATI IN UN GIORNO, tutti scritti dal… | `aperto` | `misura` | `RAMIFICAZIONI.md` |
+| `DA-DECIDERE` | **S11** | — | r E' SATURO AL SUO TETTO PER UN TERZO DEI NODI, e la quota CRESCE: 0.76 % - 29.57 % in 600 passi (A11 cor.6:… | `da-decidere` | `altro` | `STATO_RUN.md` |
+| `NO` | **C1BIS-ANOM-SIMM** | C1-bis | ANOMSIMM — il pavimento 1e-9 tolto / 21/9 §② / 6/6 (Z99) | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **Z28** | — | Z28 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / CHIUSA PRIMA DI NASCERE — il limite «serve una topologia a… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z64** | — | Z64 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / L'ALGEBRA SU x E' FALSIFICATA (fattore 44 000), f CROLLA… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **C21** | — | C21 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / TRE CRITERI DI SIGILLO SBAGLIATI IN UN GIORNO, tutti scritti dal… | `aperto` | `misura` | `RAMIFICAZIONI.md` |
 
 ---
 
@@ -155,13 +175,13 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
 | `DA-DECIDERE` | **M1** | — | LA MATERIA È UNO STATO, NON UNA SOSTANZA — e non c'è SCARICO. Nel codice la materia è la condizione I Λ… | `da-decidere` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **CHK2** | — | CHECKPOINT 2 / GLOBALE §3 / raggiunto e riferito a Luca. IL RUN LUNGO NON SI LANCIA | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **CHK3** | — | CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PRIMA / GLOBALE-DISEGNO §5 /… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **E3** | — | EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run / GLOBALE §4 / 🔒 solo dopo che i… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **G4-MEMARCO** | — | MEMARCO — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE (aggiunta di Luca al §4, 2026-09-22) /… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D14** | — | median(\/f\/) fa TRE mestieri, non due: e' anche il rompi-anello / Z41 / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **Z82** | — | Z82 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SOSPETTO NON VERIFICATO: n3 normalizza su median(d), e nel… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **C23** | — | C23 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL FATTORE (CSM/cs)^2 NON E' 1 SULLA CODA a 500 passi. La… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
+| `NO` | **CHK2** | — | CHECKPOINT 2 / GLOBALE §3 / raggiunto e riferito a Luca. IL RUN LUNGO NON SI LANCIA | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **CHK3** | — | CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PRIMA / GLOBALE-DISEGNO §5 /… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **E3** | — | EPOCA 3 + RUN LUNGO — tag epoca-3, 3000 passi, M1/M4 leggere durante il run / GLOBALE §4 / 🔒 solo dopo che i… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **G4-MEMARCO** | — | MEMARCO — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE (aggiunta di Luca al §4, 2026-09-22) /… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **D14** | — | median(\/f\/) fa TRE mestieri, non due: e' anche il rompi-anello / Z41 / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **Z82** | — | Z82 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SOSPETTO NON VERIFICATO: n3 normalizza su median(d), e nel… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **C23** | — | C23 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL FATTORE (CSM/cs)^2 NON E' 1 SULLA CODA a 500 passi. La… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
 | `DA-DECIDERE` | **P3** | — | NESSUNA STATISTICA SENZA BARRA D'ERRORE, e per confronti fra bracci si usa la | `da-decidere` | `presidio` | `CLAUDE.md` |
 
 ---
@@ -172,14 +192,7 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 |:--:|---|---|---|:--:|:--:|---|
 | `DA-DECIDERE` | **A2-DXD** | A2 | RIMISURARE NEL REGIME NUOVO: \/dx\//d del freno-legge (criterio di riapertura: quota 0.5 non nulla) e gli… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **A3-DISEGNO** | A3 | IL DISEGNO ESCE DALLA DINAMICA — cura a sé, prima delle tre prove. pos entra nella fisica in… | `da-decidere` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D24** | — | A2 e' VIOLATO da Lam = mean(I) -- una media GLOBALE dentro una legge locale -- e la violazione e' la ragione… | `aperto` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D25** | — | Il gauge del tempo e' la costante 1e-9, e il 93 % dei nodi non invecchia / Z46 — MISURATO IN EPOCA 1, blob… | `da-decidere` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D28** | — | nsub esplode e lo tira max(/vd/) su POCHISSIMI archi: il costo dell'intero sistema e' governato da una… | `aperto` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D31** | — | Il freno di SCALAMIN (smpchiudi) E' IL MOTORE della crescita di d0: vale il 117.41 % del Δ, mentre gli… | `aperto` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D32** | — | I TEMPI PROPRI DICHIARATI SONO TRE, E SONO TRE GRANDEZZE DIVERSE: r, taupp e d/cs. corr(r, taupp) fra -0.25 e… | `aperto` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D33** | — | La repulsione alla massima compressione e' AZZERATA proprio dove serve: dal 75 % al 96 % degli archi oltre… | `aperto` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D36** | — | LA SOGLIA DELLA MITOSI E' IN UNITA' ASSOLUTE DI tw, MENTRE LA SCALA DI tw DIPENDE DAL DOMINIO DI phi: le due… | `da-decidere` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **E4-LAM** | — | LAM FATTO il 2026-09-24 / LA LEGGE «NESSUNA LUNGHEZZA SOTTO LAM» DEVE DIVENTARE STRUTTURALE — sempre accesa,… | `aperto` | `altro` | `STATO_RUN.md` |
+| `DA-DECIDERE` | **E4-LAM** | — | LAM FATTO il 2026-09-24 / LA LEGGE «NESSUNA LUNGHEZZA SOTTO LAM» DEVE DIVENTARE STRUTTURALE — sempre accesa,… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **PASSO-1** | — | IL PASSO NON È step(): SONO CINQUE CHIAMATE, e 24 script sotto csv/ avanzano in modo INCOMPLETO (inventario… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **REPERTI-IMMUTABILI** | — | APERTA il 2026-09-26 (proposta di Luca), famiglia G / UN COMMIT PUO' TOCCARE UN REPERTO GIA' CITATO DA UN… | `aperto` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **S01** | — | Chi fa crescere d0: in G3 gli scrittori sommano -1.6e+03 e med d0 RADDOPPIA lo stesso / il BILANCIO COMPLETO… | `da-decidere` | `altro` | `STATO_RUN.md` |
@@ -187,32 +200,39 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | `DA-DECIDERE` | **S03** | — | La memoria del moto fa scappare d0 / DECISO da Z109: spegnendola d0 cresce ancora (1.1607), quindi NON e' il… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **S05** | — | La compressione d/d0 < 1 e' un difetto e non una fase / G3 dice che peggiora senza gravita' (0.7489→0.6258):… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **S09** | — | IL TETTO DI r E' RAGGIUNTO PER UNA VIA CHE NON CONOSCIAMO — lettura di Luca, 2026-09-22: la quota di nodi al… | `da-decidere` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **C3-SCALA-MIN-PASSO** | C3 | SCALAMINPASSO — il freno una volta per passo / GLOBALE §2③ / 6/6 (Z97) | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **C5RES-INVARIANTI** | C5-res | I RESIDUI DI C5 — I4 la scatola nera (rigiocare da solo il passo in cui scatta un invariante), I5 la tabella… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D0** | — | CHI FA SCAPPARE d0 / 21/9 / MISURATO: e' IL FRENO. Gli scrittori spingono giu' -1.543e+05, il vincolo… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **G2** | — | §2 DOVE SPINGE LA GRAVITA' / GLOBALE-DISEGNO §2 / FATTO. Il saldo vive sul CONFINE vuoto-massa (-1.4150/arco,… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **G3** | — | §3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE / GLOBALE-DISEGNO §3 / FATTA. sigillo 7/7 · controllo involucro… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **G4** | — | §4 PROVA DI SPEGNIMENTO: la MEMORIA DEL MOTO — flag MEMMOTO / GLOBALE-DISEGNO §4 / FATTO (finito 14:39:27).… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **PROBLEMI-CHK3** | — | IL PIANO DEI PROBLEMI APERTI — per ciascuno: la domanda da chiudere · la misura o derivazione che la chiude ·… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **PROVA-COMB** | — | LA PROVA COMBINATA: TUTTE LE CURE APPROVATE ACCESE INSIEME — 600 passi, stesso seme e scena, letture della… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **SCALE-TW** | — | LE SCALE DELLA TORSIONE: un'analisi completa, DA CAPO / mandato di Luca ricevuto alle 17:44 del 2026-09-22 /… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D01** | — | S09 clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica per median(d0): statistica… | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D02** | — | pozzografo calcola L da self.pos — IL DISEGNO — mentre il suo docstring dichiara «la distanza REALE» / G1… | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D03** | — | La memoria del moto prende le direzioni da pos, normalizza su Imed GLOBALE, e ha un tetto 0.01median(d0) /… | `da-decidere` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D04** | — | smpchiudi() RISCRIVE tutto d0 a fine passo e NON ha nessun tracciad0 attorno: e' una scrittura invisibile… | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D11** | — | d scende DIECI VOLTE sotto LAM mentre SCALAMIN e' acceso, e la causa NON e' trovata / Z87 / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **REG-V** | — | verificaregistro.py: completezza, esistenza, coerenza con la traccia di d0 e col registro dei domini di C5 /… | `da-decidere` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **X2** | — | X2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / ZETALOC: «smorzamento locale» che dipende da una statistica… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z104** | — | Z104 APERTA ⏳[EPOCA 3 · DERIVAZIONE] / MEMARCO: LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE — la legge… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z142** | — | Z142 REPERTO, DIFETTI MIEI ⏳[archivi delle cure · SIGILLO FALLITO] / IL SIGILLO DI E4-LAM FALLISCE 4/5, E I… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z144** | — | Z144 CURA IN CODICE ⏳[archivi delle cure · CURA] / E4-LAM PASSA 6/6: la legge d = LAM si verifica SEMPRE, e… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z148** | — | LA LEGGE d = LAM REGGE PERCHE' UNA CURA E' ACCESA (2026-09-24) | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z39** | — | Z39 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / UN FATTO STABILE DI CLAUDE.md E' CADUTO: cs E' VIVO. csstd/cs =… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z4** | — | Z4 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / floord0: SOSPESA, e i due rami violano assiomi DIVERSI… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z74** | — | Z74 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / il ramo B rallenta x11: nsub esplode, e lo tira \/vd\/.max()… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z89** | — | Z89 DA RIVERIFICARE ⏳[EPOCA 1 · CODICE] / 1755 MB DI .pkl NON HANNO IL COMANDO CHE LI RIGENERA, e il… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **Z92** | — | Z92 🟨LIMITE DICHIARATO ⏳[EPOCA 2 · LETTURA DEL CODICE] / COESADIM legge ISTANTI MISTI, e il suo tetto e'… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `DA-DECIDERE` | **C18** | — | C18 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL FDT RIFATTO SUL SISTEMA NON CASTRATO (FASE 5 attiva,… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
+| `NO` | **C3-SCALA-MIN-PASSO** | C3 | SCALAMINPASSO — il freno una volta per passo / GLOBALE §2③ / 6/6 (Z97) | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **C5RES-INVARIANTI** | C5-res | I RESIDUI DI C5 — I4 la scatola nera (rigiocare da solo il passo in cui scatta un invariante), I5 la tabella… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **D0** | — | CHI FA SCAPPARE d0 / 21/9 / MISURATO: e' IL FRENO. Gli scrittori spingono giu' -1.543e+05, il vincolo… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **G2** | — | §2 DOVE SPINGE LA GRAVITA' / GLOBALE-DISEGNO §2 / FATTO. Il saldo vive sul CONFINE vuoto-massa (-1.4150/arco,… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **G3** | — | §3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE / GLOBALE-DISEGNO §3 / FATTA. sigillo 7/7 · controllo involucro… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **G4** | — | §4 PROVA DI SPEGNIMENTO: la MEMORIA DEL MOTO — flag MEMMOTO / GLOBALE-DISEGNO §4 / FATTO (finito 14:39:27).… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **PROBLEMI-CHK3** | — | IL PIANO DEI PROBLEMI APERTI — per ciascuno: la domanda da chiudere · la misura o derivazione che la chiude ·… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **PROVA-COMB** | — | LA PROVA COMBINATA: TUTTE LE CURE APPROVATE ACCESE INSIEME — 600 passi, stesso seme e scena, letture della… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `SI` | **SCALE-TW** | — | LE SCALE DELLA TORSIONE: un'analisi completa, DA CAPO / mandato di Luca ricevuto alle 17:44 del 2026-09-22 /… | `da-decidere` | `cura` | `STATO_RUN.md` |
+| `NO` | **D01** | — | S09 clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica per median(d0): statistica… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `SI` | **D02** | — | pozzografo calcola L da self.pos — IL DISEGNO — mentre il suo docstring dichiara «la distanza REALE» / G1… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `SI` | **D03** | — | La memoria del moto prende le direzioni da pos, normalizza su Imed GLOBALE, e ha un tetto 0.01median(d0) /… | `da-decidere` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D04** | — | smpchiudi() RISCRIVE tutto d0 a fine passo e NON ha nessun tracciad0 attorno: e' una scrittura invisibile… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D24** | — | A2 e' VIOLATO da Lam = mean(I) -- una media GLOBALE dentro una legge locale -- e la violazione e' la ragione… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D25** | — | Il gauge del tempo e' la costante 1e-9, e il 93 % dei nodi non invecchia / Z46 — MISURATO IN EPOCA 1, blob… | `da-decidere` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D28** | — | nsub esplode e lo tira max(/vd/) su POCHISSIMI archi: il costo dell'intero sistema e' governato da una… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `SI` | **D31** | — | Il freno di SCALAMIN (smpchiudi) E' IL MOTORE della crescita di d0: vale il 117.41 % del Δ, mentre gli… | `da-decidere` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D32** | — | I TEMPI PROPRI DICHIARATI SONO TRE, E SONO TRE GRANDEZZE DIVERSE: r, taupp e d/cs. corr(r, taupp) fra -0.25 e… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D33** | — | La repulsione alla massima compressione e' AZZERATA proprio dove serve: dal 75 % al 96 % degli archi oltre… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D36** | — | LA SOGLIA DELLA MITOSI E' IN UNITA' ASSOLUTE DI tw, MENTRE LA SCALA DI tw DIPENDE DAL DOMINIO DI phi: le due… | `da-decidere` | `difetto` | `STATO_RUN.md` |
+| `SI` | **OSSERVABILE-P1** | — | APERTA il 2026-09-26 (rilievo di Luca) / NON ESISTE UNO STRUMENTO UFFICIALE PER LA DISTANZA FRA LE MASSE. La… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **REG-V** | — | verificaregistro.py: completezza, esistenza, coerenza con la traccia di d0 e col registro dei domini di C5 /… | `da-decidere` | `difetto` | `STATO_RUN.md` |
+| `NO` | **X2** | — | X2 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / ZETALOC: «smorzamento locale» che dipende da una statistica… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z104** | — | Z104 APERTA ⏳[EPOCA 3 · DERIVAZIONE] / MEMARCO: LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE — la legge… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z142** | — | Z142 REPERTO, DIFETTI MIEI ⏳[archivi delle cure · SIGILLO FALLITO] / IL SIGILLO DI E4-LAM FALLISCE 4/5, E I… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z148** | — | LA LEGGE d = LAM REGGE PERCHE' UNA CURA E' ACCESA (2026-09-24) | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z39** | — | Z39 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / UN FATTO STABILE DI CLAUDE.md E' CADUTO: cs E' VIVO. csstd/cs =… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z4** | — | Z4 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / floord0: SOSPESA, e i due rami violano assiomi DIVERSI… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z74** | — | Z74 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / il ramo B rallenta x11: nsub esplode, e lo tira \/vd\/.max()… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z89** | — | Z89 DA RIVERIFICARE ⏳[EPOCA 1 · CODICE] / 1755 MB DI .pkl NON HANNO IL COMANDO CHE LI RIGENERA, e il… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z91** | — | Z91 APERTA ⏳[EPOCA 2 · LETTURA DEL CODICE] / SCALAMIN FRENA OGNI SCRITTURA SEPARATAMENTE, QUINDI IL RISULTATO… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **Z92** | — | Z92 🟨LIMITE DICHIARATO ⏳[EPOCA 2 · LETTURA DEL CODICE] / COESADIM legge ISTANTI MISTI, e il suo tetto e'… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **C18** | — | C18 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL FDT RIFATTO SUL SISTEMA NON CASTRATO (FASE 5 attiva,… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
 | `DA-DECIDERE` | **R5** | — | contava 25 aperture su 24 passi: l'iniezione del test apriva il freno lei stessa | `da-decidere` | `presidio` | `CLAUDE.md` |
 
 ---
@@ -225,14 +245,14 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | `DA-DECIDERE` | **ANCORE-1** | — | APERTA il 2026-09-25 / 25 SIGILLI PRENDONO «IL CODICE DI PRIMA» DA HEAD (43 occorrenze su 310 file di csv/ —… | `aperto` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **B6** | — | le due cure OFF: COPPIARECIPROCA e GRAVAMPIEZZA / :739 e :732 (entrambe = False), doc/REFERTOsomme.md, due… | `aperto` | `altro` | `STATO_RUN.md` |
 | `NO` | **LETTORI-INDICE** | — | APERTA il 2026-09-26 (PASSO 3 ridotto, decisione di Luca) / SEI LETTORI LEGGONO ANCORA I REGISTRI IN MARKDOWN… | `aperto` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D13** | — | I sigilli storici non sono stati rigirati sul blob corrente / Z11 / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **Z15** | — | Z15 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / 14 .pkl su 36 non portano il BLOB del codice che li ha prodotti, e… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
+| `NO` | **D13** | — | I sigilli storici non sono stati rigirati sul blob corrente / Z11 / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **Z15** | — | Z15 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / 14 .pkl su 36 non portano il BLOB del codice che li ha prodotti, e… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
 | `DA-DECIDERE` | **P5** | — | OGNI RAMO else / FALLBACK / getattr(..., default) SU UN PERCORSO FISICO VA CONTATO. | `da-decidere` | `presidio` | `CLAUDE.md` |
 | `DA-DECIDERE` | **P6** | — | OGNI CSV DI MISURA PORTA BLOB, SEME E TUTTI I FLAG che distinguono quel run dagli altri | `da-decidere` | `presidio` | `CLAUDE.md` |
 
 ---
 
-## FAMIGLIA **?** — SENZA FAMIGLIA — da assegnare a mano   *(190 voci)*
+## FAMIGLIA **?** — SENZA FAMIGLIA — da assegnare a mano   *(189 voci)*
 
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
@@ -255,10 +275,7 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | `DA-DECIDERE` | **CURA2-CORTO** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **CURE-FINE** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **CURE-INIZIO** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **D21** | — | floord0 e' SOSPESA, e i due rami violano assiomi DIVERSI: la scelta non e' stata fatta / Z4 / — / APERTO | `aperto` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D23** | — | La cucitura dello snapshot FALLISCE su entrambi i fronti, e si DIMOSTRA perche'. NON CABLATA / Z37 / — / APERTO | `aperto` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D29** | — | CINQUE NODI DI VUOTO sono i piu' connessi dell'intero sistema: il vuoto ha degli HUB, e non dovrebbe averne /… | `aperto` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D3** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **D3** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **DIFETTI-NUOVI-FINE** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **DIFETTI-NUOVI-INIZIO** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **E1** | — | (CITATO 55 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
@@ -276,7 +293,7 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | `DA-DECIDERE` | **G7** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **G8** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **G9** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **GLOBALE-DISEGNO** | — | (CITATO 15 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **GLOBALE-DISEGNO** | — | (CITATO 16 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **H1** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **H2** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **H3** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
@@ -412,15 +429,17 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | `DA-DECIDERE` | **Z1c** | — | (CITATO 30 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **Z4a** | — | (CITATO 16 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **Z4b** | — | (CITATO 10 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **C5-INVARIANTI** | C5 | INVARIANTI — 42 domini, due livelli / mandato C5 / 3/3 (Z100); accesi di default | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D05** | — | I residui di C5: I4 scatola nera, I5 underflow per riga, modalita' fine / il mandato C5 e la coda / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D06** | — | fattcsultimo e' SCRITTO e MAI LETTO (quarto caso della stessa famiglia) / Z7, letto dal codice / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D07** | — | TAUA e' UN SOLO numero per DUE leggi fisiche distinte / Z10, Z9-bis / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D08** | — | Il terzo ramo di calcolapsi (elif sotto REPULSLEGGE) e' DICHIARATO, non corretto / Z14, letto dal codice / —… | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D10** | — | nsub governa il costo dell'intero sistema ed e' INVISIBILE: nessun contatore, nessuna colonna / Z75 / — /… | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D12** | — | 1755 MB di .pkl non hanno il comando che li rigenera (par.5-quinquies: «un dato che nessuno potra' rifare») /… | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **D15** | — | A7: la carica chirale NON si conserva / Z71, letto dal codice / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **B7-SHAKE** | B7 | SHAKE 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / shake-then-freeze — la precessione mutua non organizza /… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
+| `NO` | **D05** | — | I residui di C5: I4 scatola nera, I5 underflow per riga, modalita' fine / il mandato C5 e la coda / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D06** | — | fattcsultimo e' SCRITTO e MAI LETTO (quarto caso della stessa famiglia) / Z7, letto dal codice / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D07** | — | TAUA e' UN SOLO numero per DUE leggi fisiche distinte / Z10, Z9-bis / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D08** | — | Il terzo ramo di calcolapsi (elif sotto REPULSLEGGE) e' DICHIARATO, non corretto / Z14, letto dal codice / —… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D10** | — | nsub governa il costo dell'intero sistema ed e' INVISIBILE: nessun contatore, nessuna colonna / Z75 / — /… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D12** | — | 1755 MB di .pkl non hanno il comando che li rigenera (par.5-quinquies: «un dato che nessuno potra' rifare») /… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D15** | — | A7: la carica chirale NON si conserva / Z71, letto dal codice / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D21** | — | floord0 e' SOSPESA, e i due rami violano assiomi DIVERSI: la scelta non e' stata fatta / Z4 / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D23** | — | La cucitura dello snapshot FALLISCE su entrambi i fronti, e si DIMOSTRA perche'. NON CABLATA / Z37 / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **D29** | — | CINQUE NODI DI VUOTO sono i piu' connessi dell'intero sistema: il vuoto ha degli HUB, e non dovrebbe averne /… | `aperto` | `difetto` | `STATO_RUN.md` |
+| `NO` | **B7-SHAKE** | B7 | SHAKE 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / shake-then-freeze — la precessione mutua non organizza /… | `da-decidere` | `misura` | `RAMIFICAZIONI.md` |
 | `DA-DECIDERE` | **P1** | — | NON USARE L'ASSOCIAZIONE SENZA VERIFICARE LO STORICO. | `da-decidere` | `presidio` | `CLAUDE.md` |
 | `DA-DECIDERE` | **P2** | — | PRIMA DI ESCLUDERE UN FLAG DA UNA MISURA: FORZA IL SISTEMA O LO CORREGGE? | `da-decidere` | `presidio` | `CLAUDE.md` |
 | `DA-DECIDERE` | **P4** | — | PRIMA DI MISURARE SE UNA GRANDEZZA CAMBIA, VERIFICARE CHE SIA LIBERA DI CAMBIARE. | `da-decidere` | `presidio` | `CLAUDE.md` |
@@ -429,9 +448,9 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 
 ---
 
-## 📤 **FUORI LISTA — 405 voci, ciascuna col MOTIVO** *(dai campi dell'indice)*
+## 📤 **FUORI LISTA — 389 voci, ciascuna col MOTIVO** *(dai campi dell'indice)*
 
-### motivo: **etichetta LOCALE a una scheda o a un sigillo: il nome pieno include il sigillo, e non e' un fronte del programma**   *(240 voci)*
+### motivo: **etichetta LOCALE a una scheda o a un sigillo: il nome pieno include il sigillo, e non e' un fronte del programma**   *(239 voci)*
 
 | id | che cos'e' | tipo |
 |---|---|:--:|
@@ -471,12 +490,11 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | COMPONENTI:S3c | a cs = CSM il fattore è 1 esatto / 1.000000000000000 | `criterio-locale` |
 | COMPONENTI:Y0-Y10 | Y10, 11/11 PASS. | `criterio-locale` |
 | COMPONENTI:Z30 | Z30: la forma del denominatore — nudo (attuale, zero scelte) contro linea (la meno | `criterio-locale` |
-| CURA-3 | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | D4 | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | D5 | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | D6 | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | D97 | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
-| DA-DECIDERE | (CITATO 438 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
+| DA-DECIDERE | (CITATO 218 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | DE-ACCOPPIABILITA | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | DOMANDE-BUSSOLA | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | DOVE-VA | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
@@ -489,7 +507,7 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | FORK-FIRST | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | G0 | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | G5b | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
-| GLOBALE-DIS | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
+| GLOBALE-DIS | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | H6b | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | IN-CHE-ORDINE | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | IN-RUN | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
@@ -623,7 +641,7 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | RI-VERIFICARE | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | RI-VERIFICATI | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | RIDUZIONE-AL-LIMITE | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
-| RITMOWRAP2 | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
+| RITMOWRAP2 | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | S0 | (CITATO 6 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | S1c | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | S1d | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
@@ -676,7 +694,7 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | ZZ888 | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | ZZ999 | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 
-### motivo: **gia' curata o chiusa**   *(135 voci)*
+### motivo: **gia' curata o chiusa**   *(128 voci)*
 
 | id | che cos'e' | tipo |
 |---|---|:--:|
@@ -712,21 +730,23 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | C28 | C28 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / 14 FLAG SU 16 NON HANNO ALCUN SIGILLO. Tier 2 (metrica)… | `misura` |
 | C3 | C3 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / Il residuo di 0.34 e' TRANSITORIO, non un termine… | `misura` |
 | C4 | C4 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / inerzia = T² — chiude il buco dimensionale; esponente… | `misura` |
+| C5-INVARIANTI | INVARIANTI — 42 domini, due livelli / mandato C5 / 3/3 (Z100); accesi di default | `cura` |
 | C6 | C6 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / Il rumore non guida omega / Rstoc = 0.041, sotto l'errore… | `misura` |
 | C7 | C7 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / La cache csnodoprev veniva scartata a ogni mitosi ⇒ nel… | `misura` |
 | C8 | C8 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / LA FASE 2 NON SI CHIUDE. Col tempo-luce cablato la… | `misura` |
 | C9 | C9 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / --tau-luce ha un effetto GRANDE sulla pendenza (che pero'… | `misura` |
-| CHK3-D | Nel referto del CHK3, la sezione «I DIFETTI NUOVI CONTRO LE MISURE GIA' FATTE» — D27 (quattro… | `cura` |
+| D11 | d scende DIECI VOLTE sotto LAM mentre SCALAMIN e' acceso, e la causa NON e' trovata / Z87 / la… | `difetto` |
 | D16 | SCALAMIN frenava OGNI scrittura separatamente: il risultato dipendeva dall'ORDINE delle leggi… | `difetto` |
 | D17 | peq diventava NEGATIVO e il pavimento max(peq, 1e-9) NE RIBALTAVA IL SEGNO (da -3.72 a… | `difetto` |
 | D18 | COESADIM leggeva ISTANTI MISTI e il suo tetto era GLOBALE / Z92 · A5 / COESCAUSALE (C4) / CURATO | `difetto` |
 | D19 | OTTO grandezze che la semina legge erano INERTI SUL VUOTO in ogni run di epoca 1 / Z88 / la… | `difetto` |
-| D22 | Il DENOMINATORE PER GRADO: la misura non distingue (A) da (B), ma (B) cade per DIMOSTRAZIONE,… | `altro` |
-| D34 | D34 CURATO IN CODICE il 2026-09-24 / Il wrap «a 4π» di ritmo() (:2584-2585) NON AVVOLGE: su… | `altro` |
-| D37 | D37 CURATO il 2026-09-24 / CHIAVE DUPLICATA NEI DOMINI: 'csnodoprev' compare DUE VOLTE (:226 e… | `altro` |
+| D22 | Il DENOMINATORE PER GRADO: la misura non distingue (A) da (B), ma (B) cade per DIMOSTRAZIONE,… | `difetto` |
+| D34 | D34 CURATO IN CODICE il 2026-09-24 / Il wrap «a 4π» di ritmo() (:2584-2585) NON AVVOLGE: su… | `difetto` |
+| D37 | D37 CURATO il 2026-09-24 / CHIAVE DUPLICATA NEI DOMINI: 'csnodoprev' compare DUE VOLTE (:226 e… | `difetto` |
 | INERZIA-1(C) | 1(C) — CURATA e SIGILLATA 3/6 il 2026-09-25: GIUSTA e INSUFFICIENTE / LA CURA TOGLIE… | `altro` |
 | OKN-ASSERT | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(..., default) CHE… | `altro` |
 | P1BIS-DELTA | in coda per la LISTA CHIUSA, famiglia G (ordine di Luca, 2026-09-25) / P1-bis VERIFICA LA… | `altro` |
+| POTENZE-1 | CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6/6: F2 da x47 000 a x1.4, F1 2.427… | `altro` |
 | RAMPA-1 | CHIUSA il 2026-09-25, strada (3) (decisione di Luca): sigillo 9/9 dal CLI, ramp =… | `altro` |
 | RIPIEGO-1 | APERTA E CHIUSA il 2026-09-25 (difetto mio, rilevato da LUCA) / UN RIPIEGO GLOBALE SU UNA… | `altro` |
 | SCENA-1 | CHIUSA il 2026-09-25, strada (1) (decisione di Luca) / SEMINALAM era approvata ma… | `altro` |
@@ -735,7 +755,6 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | Y2 | Y2 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / Due osservabili U(1) hanno il nullo SBAGLIATO o NON… | `fronte` |
 | Z10 | Z10 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / TAUA E' UN SOLO NUMERO PER DUE LEGGI FISICHE DISTINTE —… | `fronte` |
 | Z100 | Z100 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / INVARIANTI (C5): il programma si ferma quando una… | `fronte` |
-| Z101 | Z101 APERTA ⏳[EPOCA 3 · MISURA] / VALIDAZIONE A 600 PASSI: 6 criteri su 8 REGGONO.… | `fronte` |
 | Z102 | Z102 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / CHI FA SCAPPARE d0: E' IL FRENO DELLA SCALA… | `fronte` |
 | Z103 | Z103 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / IL POZZO GRAVITAZIONALE USA IL DISEGNO, E IL SUO… | `fronte` |
 | Z105 | Z105 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / DOVE SPINGE LA GRAVITA': TUTTO IL SALDO NETTO DI… | `fronte` |
@@ -759,27 +778,20 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | Z122 | Z122 CHIUSA PER MISURA ⏳[archivi delle cure · MISURA] / I TEMPI PROPRI DICHIARATI NON SONO… | `fronte` |
 | Z123 | Z123 CHIUSA PER MISURA ⏳[archivi delle cure · MISURA] / LA PROVA DI RITMOWRAP2PI: 6/8 COME… | `fronte` |
 | Z124 | Z124 CHIUSA PER MISURA ⏳[archivi delle cure · SIGILLO] / IL SIGILLO DI FASE2PI: 6/6 PASS, e il… | `fronte` |
-| Z13 | Z13 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / calcolapsi() ricalcola i pesi in TUTTE le chiamate… | `fronte` |
+| Z134 | Z134 CURA IN CODICE ⏳[archivi delle cure · CURA] / CURA 1 — L'OROLOGIO: RITMOWRAP2PI APPROVATA… | `fronte` |
 | Z135 | Z135 CHIUSA PER MISURA ⏳[archivi delle cure · PROVA] / LA PROVA DI CURA 1: la mitosi NON… | `fronte` |
 | Z136 | Z136 CHIUSA PER DIMOSTRAZIONE ⏳[archivi delle cure · CONTROLLO DI LUCA] / LE DUE STRADE DELLA… | `fronte` |
 | Z14 | Z14 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / IL TERZO RAMO DI calcolapsi (elif sotto REPULSLEGGE):… | `fronte` |
+| Z144 | Z144 CURA IN CODICE ⏳[archivi delle cure · CURA] / E4-LAM PASSA 6/6: la legge d = LAM si… | `fronte` |
 | Z145 | CHIUSO — T5 del sigillo di CURA 2 era invalido: dv 0 letto come effetto (2026-09-24) | `fronte` |
 | Z16 | Z16 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / Y5 ROSSO: la causa e' rhosorgente <= 0, NON peq. E… | `fronte` |
 | Z19 | Z19 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / QUARTA VOLTA: una grandezza letta in un momento del… | `fronte` |
 | Z2 | Z2 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / spinta: A2 e A3 sono stati tolti, A1 NO (2026-09-17) / La… | `fronte` |
 | Z20 | Z20 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / UN DRIVER CHE FORZA UN FLAG IN TUTTI I BRACCI RENDE… | `fronte` |
 | Z22 | Z22 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / REGOLA 9 — par.5-quinquies ESISTEVA, ed e' stato violato… | `fronte` |
-| Z28 | Z28 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / CHIUSA PRIMA DI NASCERE — il limite «serve… | `fronte` |
-| Z30 | Z30 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / CHIUSA il 2026-09-18 — INDIFFERENTE, quindi nudo per… | `fronte` |
 | Z31 | Z31 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / QUATTRO SIGILLI NON SONO PIU' RI-GIRABILI: il loro… | `fronte` |
-| Z38 | Z38 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL §1 DEL MANDATO GAUGE E' CHIUSO: il gauge… | `fronte` |
 | Z40 | Z40 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / A2 E' VIOLATO DA Lam = mean(I), E LA VIOLAZIONE E' LA… | `fronte` |
-| Z41 | Z41 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / median(/f/) FA TRE MESTIERI, NON DUE: E'… | `fronte` |
-| Z42 | Z42 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / CURATO E SIGILLATO 10/10 — L'ANELLO… | `fronte` |
-| Z44 | Z44 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / CHIUSA — f = 0 NON E' FISICA: E' IL… | `fronte` |
-| Z45 | Z45 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / CHIUSA — L'IPOTESI MATERIA/ANTIMATERIA CADE.… | `fronte` |
 | Z47 | Z47 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / PROGETTO DI LUNGO PERIODO — NON INIZIATO. GEOMETRIA… | `fronte` |
-| Z53 | Z53 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / LE COORTI SOPRAVVIVEVANO GIA' ALLA MITOSI. NON… | `fronte` |
 | Z54 | Z54 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / CHIUSA — L'ARCHIVIO A SERIE: --db-serie +… | `fronte` |
 | Z55 | Z55 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / APERTA — PERCHE' NELLA RIGIOCATA LA STRINGA "schwinger"… | `fronte` |
 | Z58 | Z58 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / L'IPOTESI DELLA PORTATA CADE — lambdanodi NON… | `fronte` |
@@ -791,13 +803,13 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | Z65 | Z65 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / NESSUNA DELLE QUATTRO LETTURE: IL GRAFO E' IN… | `fronte` |
 | Z67 | Z67 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / scalap CURATA: il punto fisso e' SCIOLTO, e… | `fronte` |
 | Z68 | Z68 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / PASSO 2: la diagnosi era SBAGLIATA -- non e' la… | `fronte` |
-| Z69 | Z69 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SEI GUARDIE PROTEGGONO DA UN DIFETTO GIA'… | `fronte` |
 | Z7 | Z7 VALE SEMPRE ⏳[EPOCA 1 · CODICE] / fattcsultimo e' SCRITTO e MAI LETTO — quarto caso della… | `fronte` |
 | Z70 | Z70 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / L'ANELLO A6 FRA CHIRALITA' E TORSIONE: C'E', MA NON E'… | `fronte` |
 | Z71 | Z71 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / A7 -- LA CARICA CHIRALE NON SI CONSERVA, E IL PUNTO E'… | `fronte` |
 | Z72 | Z72 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / PHICRIT = 2pi REGGE, e la ragione e'… | `fronte` |
 | Z75 | Z75 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / nsub GOVERNA IL COSTO DELL'INTERO SISTEMA ED E'… | `fronte` |
 | Z76 | Z76 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / I NATI HANNO GRADO 2 E SONO LA MAGGIORANZA DEL SISTEMA:… | `fronte` |
+| Z77 | Z77 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / LA TENSIONE NASCE DAL DENOMINATORE: d0 CROLLA A SCATTI… | `fronte` |
 | Z78 | Z78 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / d0 HA DIECI SCRITTORI E NESSUNO E' CONTATO — e i due… | `fronte` |
 | Z79 | Z79 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / d0 NON E' MOSSO DALLA COESIONE: E' MOSSO DAL SUO CLIP —… | `fronte` |
 | Z8 | Z8 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / Lo 0.3457 % di nodi ancora al pavimento 1e-6 NON e'… | `fronte` |
@@ -807,7 +819,6 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | Z84 | Z84 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / E' cs^2lap CHE ALLUNGA L'ARCO — la TENSIONE DEI VICINI,… | `fronte` |
 | Z85 | Z85 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / I LETTORI DI percchi, CENSITI DAL DISCO: la catena della… | `fronte` |
 | Z86 | Z86 VALE SEMPRE ⏳[EPOCA 2 · CODICE] / IL CRITERIO Z4a DEL SIGILLO DEL RAMO D ERA SBAGLIATO, E… | `fronte` |
-| Z9 | Z9 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / RISCRITTA IL 2026-09-18 — NON «CHIUSA»: RISCRITTA IN… | `fronte` |
 | Z93 | Z93 CHIUSA PER MISURA ⏳[EPOCA 2 · MISURA] / L'ARCO DELL'INNESCO E' 2773-4158, NATO-NATO -- ED… | `fronte` |
 | Z94 | Z94 CHIUSA PER MISURA ⏳[EPOCA 2 · MISURA] / peq DIVENTA NEGATIVO, E IL PAVIMENTO max(peq,… | `fronte` |
 | Z95 | Z95 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / PEQESATTO (C1): il rilassamento di peq in forma… | `fronte` |
@@ -837,23 +848,15 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 | A8b | COROLLARIO: le cache CROSS-PASSO | `assioma` |
 | A9 | UN PRESIDIO CHE NON IMPEDISCE NON E' UN PRESIDIO | `assioma` |
 
-### motivo: **non e' un difetto**   *(13 voci)*
+### motivo: **non e' un difetto**   *(5 voci)*
 
 | id | che cos'e' | tipo |
 |---|---|:--:|
-| COPPIA-RAMP | APERTA il 2026-09-26 / PERCHE' LA COPPIA NON PORTA ramp? Misurato sui figli (2 semi, media… | `altro` |
-| D27 | Il grafo e' in QUATTRO COMPONENTI che non si toccano mai / Z65, misurato in ORIGINE su un… | `altro` |
+| COPPIA-RAMP | APERTA il 2026-09-26 / PERCHE' LA COPPIA NON PORTA ramp? Misurato sui figli (2 semi, media… | `misura` |
+| D27 | Il grafo e' in QUATTRO COMPONENTI che non si toccano mai / Z65, misurato in ORIGINE su un… | `difetto` |
 | NODI-1 | RITIRATA (Luca, 2026-09-25). NON cancellata: resta come storia, col motivo. PERCHE' È CADUTA,… | `altro` |
-| POTENZE-1 | CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6/6: F2 da x47 000 a x1.4, F1 2.427… | `altro` |
 | S10 | S10 RITIRATA il 2026-09-24 / Il tetto 1.414213 di r viene da un ramo di ritmo() che NON GIRA /… | `altro` |
-| S11 | r E' SATURO AL SUO TETTO PER UN TERZO DEI NODI, e la quota CRESCE: 0.76 % - 29.57 % in 600… | `altro` |
 | Z130 | Z130 SOSPETTO RITIRATO, MIO ⏳[archivi delle cure · LETTURA] / S10 E' RITIRATA: la premessa era… | `fronte` |
-| Z25 | Z25 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / CHIUSA — IL DENOMINATORE PER GRADO ERA UN… | `fronte` |
-| Z27 | Z27 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / Z24 MISURATA: i tre punti NON sono lo stesso schema.… | `fronte` |
-| Z29 | Z29 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / Z24 CHIUSA — dei tre punti UNO era un cricchetto e… | `fronte` |
-| Z73 | Z73 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / chibasc BLOCCA LA MITOSI e DIMEZZA L'OLONOMIA NETTA:… | `fronte` |
-| Z77 | Z77 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / LA TENSIONE NASCE DAL DENOMINATORE: d0 CROLLA A SCATTI… | `fronte` |
-| Z91 | Z91 APERTA ⏳[EPOCA 2 · LETTURA DEL CODICE] / SCALAMIN FRENA OGNI SCRITTURA SEPARATAMENTE,… | `fronte` |
 
 ### motivo: **standard di prova: un criterio di metodo, non un fronte**   *(1 voci)*
 
@@ -868,8 +871,9 @@ FUORI LISTA           405   col motivo, dai campi dell'indice
 **Nell'indice entrano solo le voci CON UN ID.** Queste **non ne hanno**, quindi **non possono
 comparire qui** — e lo scrivo **prima** dei numeri, invece di lasciarle sparire:
 
-- **il `tasso di mitosi`** — e' un punto di `COSA NON SO DERIVARE` della scheda ⑨, **una voce di elenco in prosa senza etichetta**. Per comparire le serve un ID in un registro.
-- **`CURA 3`** — l'etichetta e' **`CURA 3` con lo SPAZIO**, e uno spazio non fa un identificatore. Basterebbe `CURA-3`: **e' una rinomina, e la decide Luca.**
+**✅ NESSUNA: dal 2026-09-26 l'elenco e' VUOTO.** `MITOSI-TASSO` e `CURA-3` — le due voci
+che vivevano senza etichetta — **hanno un ID**, e compaiono. **Il controllo resta: se
+l'elenco CRESCE, il generatore si ferma.**
 
 **E TRE compaiono solo attraverso l'ID che le CONTIENE**, dichiarato nel codice:
 
@@ -899,8 +903,16 @@ dichiarate, si ferma anche allora**: una perdita nuova non deve passare come le 
 | i 24 script che avanzano con step() da solo | ✅ |
 | \|dx\|/d = V8/V9, che decide il freno | ✅ |
 | la soglia di torsione 3pi | ✅ |
+| DRIVER-SCENA-II | ✅ |
+| OSSERVABILE-P1 | ✅ |
+| MITOSI-TASSO (era una voce PERSA) | ✅ |
+| CURA-3 (era `CURA 3`, con lo spazio) | ✅ |
+| D02 | ✅ |
+| D03 | ✅ |
+| D09 — la voce che NON torna | ✅ |
+| D31 | ✅ |
 | chi comprime d0 | ✅ |
-| **voci PERSE dichiarate** | 2 |
+| **voci PERSE dichiarate** | 0 |
 
 ## COSA QUESTA BOZZA *NON* DICE
 
