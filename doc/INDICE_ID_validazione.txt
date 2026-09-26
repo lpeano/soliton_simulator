@@ -2,7 +2,7 @@
 COLLAUDO DEL VALIDATORE -- i DUE versi   (2026-09-26)
 ================================================================================================
 
-  DEVE PASSARE  l'indice VERO (741 voci) -> PASS
+  DEVE PASSARE  l'indice VERO (757 voci) -> PASS
   DEVE FALLIRE  uno stato inventato                  -> RIFIUTA: riga 2 (`A1`): stato `verde` non ammesso
   DEVE FALLIRE  un tipo inventato                    -> RIFIUTA: riga 2 (`A1`): tipo `cosa` non ammesso
   DEVE FALLIRE  una famiglia inventata               -> RIFIUTA: riga 2 (`A1`): famiglia `Z` non ammessa

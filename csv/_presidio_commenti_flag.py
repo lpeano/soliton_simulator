@@ -26,14 +26,14 @@ legge il contenuto. **Va detto, invece di chiamarlo «il commento e' giusto».**
 
 ASCII puro. Sola lettura.
 """
-# ESENTE-P8: legge `HEAD:soliton_simulator.py`, ma **NON come «il codice prima di una
+# ESENTE-H-P8: legge `HEAD:soliton_simulator.py`, ma **NON come «il codice prima di una
 #   cura»**: come **il PRIMA di una PATCH**. E' una POSTCONDIZIONE, e una postcondizione ha
 #   bisogno del prima per esistere. **Non scade quando una cura viene committata** -- al
 #   contrario: il suo termine di paragone *deve* essere l'ultimo commit, perche' la domanda e'
 #   *«questa patch ha lasciato un commento orfano?»*.
 #   *(`P8` ha bloccato questo file per un'euristica sul NOME: la variabile si chiama `prima`.
 #   L'euristica ha fatto il suo mestiere, e la distinzione la deve fare chi scrive.)*
-# ESENTE-P5: strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: legge
+# ESENTE-H-P5: strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: legge
 #   UN SORGENTE per AST, e le assegnazioni di modulo sono le stesse con qualunque flag. Una
 #   dichiarazione di configurazione qui sarebbe **una riga vuota**, che e' cio' che `P5` impedisce.
 import ast
@@ -210,7 +210,7 @@ def pre_commit():
     q = subprocess.run(["git", "show", "HEAD:soliton_simulator.py"], cwd=RADICE,
                        capture_output=True)
     if q.returncode:
-        print("[P7] `HEAD:soliton_simulator.py` non leggibile: il controllo NON e' girato,")
+        print("[H-P7] `HEAD:soliton_simulator.py` non leggibile: il controllo NON e' girato,")
         print("     e lo dichiaro invece di far credere che sia passato.")
         return 0
     prima = commenti_per_flag(q.stdout.decode("utf-8", "replace"))
@@ -227,7 +227,7 @@ def pre_commit():
             guasti.append((f, "il commento E' CAMBIATO e non nomina `%s`" % f))
     if not guasti:
         return 0
-    sys.stderr.write(NL + "[P7] *** COMMIT RIFIUTATO: un commento di flag non parla del suo flag"
+    sys.stderr.write(NL + "[H-P7] *** COMMIT RIFIUTATO: un commento di flag non parla del suo flag"
                      " ***" + NL + NL)
     for f, m in guasti:
         sys.stderr.write("  %-26s %s" % (f, m) + NL)

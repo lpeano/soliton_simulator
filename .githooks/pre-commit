@@ -1,6 +1,6 @@
 #!/bin/sh
 # ============================================================================================
-#  PRE-COMMIT VERSIONATO -- presidi `P3` / `P5` / `P8`   (vedi csv/_hook_presidi.py)
+#  PRE-COMMIT VERSIONATO -- presidi `H-P3` / `H-P5` / `H-P8`   (vedi csv/_hook_presidi.py)
 # --------------------------------------------------------------------------------------------
 #  QUESTO FILE E' TRACCIATO DA GIT, a differenza di `.git/hooks/`, che NON viaggia col repo.
 #  Perche' conti, ogni clone deve dare UNA VOLTA:

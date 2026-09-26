@@ -32,7 +32,7 @@ girare**. **Se l'elenco delle perse cresce, il generatore si ferma.**
 
 **NESSUN RUN, nessun simulatore.**
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. Legge un TSV e scrive un documento.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Legge un TSV e scrive un documento.
 import io
 import os
 import re

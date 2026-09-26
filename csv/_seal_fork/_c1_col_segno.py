@@ -25,7 +25,7 @@ copiata, non riscritta.
 
 ASCII puro.
 """
-# ESENTE-P5: legge JSON gia' scritti e non fa girare il simulatore. La configurazione di quei dati
+# ESENTE-H-P5: legge JSON gia' scritti e non fa girare il simulatore. La configurazione di quei dati
 #   e' dichiarata NEL REFERTO DEL SIGILLO che li ha prodotti (`P5` la stampa li'), e ripeterla qui
 #   sarebbe una copia non verificata invece di una dichiarazione.
 import io

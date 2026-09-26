@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""**I PRESIDI CHE IMPEDISCONO** — `P3`, `P5`, `P8` come hook `pre-commit`.
+"""**I PRESIDI CHE IMPEDISCONO** — `H-P3`, `H-P5`, `H-P8` come hook `pre-commit`.
 
 *(Anticipati dal mandato sui presidi automatici, su ordine di Luca del 2026-09-25, perche' i tre
 difetti che coprono sono **accaduti oggi**: `CLI-1`, `CONFIG-1`, `ANCORE-1`.)*
@@ -10,12 +10,12 @@ difetti che coprono sono **accaduti oggi**: `CLI-1`, `CONFIG-1`, `ANCORE-1`.)*
 
 | presidio | cosa impedisce | il difetto REALE da cui nasce |
 |---|---|---|
-| **`P3`** | un **sigillo** che configura il modulo **a mano** invece di passare dal CLI | `CLI-1`: `7/7` e `8/8` **con i flag MORTI da riga di comando** |
-| **`P5`** | un referto che **non dichiara la configurazione INTERA** | `CONFIG-1`: sei misure con **28 leggi su 31 spente**, e ogni referto dichiarava i **4 flag accesi da me** |
-| **`P8`** | un confronto che prende **il codice di prima da `HEAD`** | `ANCORE-1`: **25 sigilli**, e `A1` confrontava **il ramo spento con se stesso** |
+| **`H-P3`** | un **sigillo** che configura il modulo **a mano** invece di passare dal CLI | `CLI-1`: `7/7` e `8/8` **con i flag MORTI da riga di comando** |
+| **`H-P5`** | un referto che **non dichiara la configurazione INTERA** | `CONFIG-1`: sei misure con **28 leggi su 31 spente**, e ogni referto dichiarava i **4 flag accesi da me** |
+| **`H-P8`** | un confronto che prende **il codice di prima da `HEAD`** | `ANCORE-1`: **25 sigilli**, e `A1` confrontava **il ramo spento con se stesso** |
 
 **LA VIA D'USCITA ESISTE E OBBLIGA A DICHIARARE** *(la forma di `[SENZA-RELAZIONE]`)*:
-`ESENTE-P3: <motivo>` in un commento del file *(col cancelletto davanti; qui non si scrive
+`ESENTE-H-P3: <motivo>` in un commento del file *(col cancelletto davanti; qui non si scrive
 per intero, perche' **questo scanner scandisce anche se stesso** -- ed e' giusto che lo
 faccia: escludere un file dal proprio controllo e' il buco che `A9` descrive)*.
 **E l'esenzione va ELENCATA** in `doc/ESENZIONI_presidi.md`,
@@ -47,7 +47,7 @@ RADICE = os.path.abspath(os.path.join(_QUI, ".."))
 ELENCO = os.path.join(RADICE, "doc", "ESENZIONI_presidi.md")
 ALIAS = {"S", "S2", "_S", "_S5", "sim", "SIM"}
 NOMI_PRIMA = ("vecchi", "prima", "_old", "old_", "pre_", "_pre", "precedent", "senza_cura")
-ESENTE = re.compile(r"#\s*ESENTE-(P\d)\s*:\s*(.+)")
+ESENTE = re.compile(r"#\s*ESENTE-(H-P\d)\s*:\s*(.+)")
 
 
 def _ast_sicuro(t):
@@ -124,17 +124,17 @@ def esamina(rel, t):
     if sotto_csv and (base.startswith("_sigillo") or base.startswith("_sig_")):
         am = _assegna_flag(arb)
         if am and not _usa(t, "_cli_flag"):
-            g.append(("P3", "sigillo che configura il modulo A MANO (%s) senza passare dal CLI: "
+            g.append(("H-P3", "sigillo che configura il modulo A MANO (%s) senza passare dal CLI: "
                             "prova LA LEGGE, non IL FLAG" % ", ".join(am[:6])))
     # ---------------------------------------------------------------- P5
     if sotto_csv and _scrive_referto(t, arb):
         if not (_usa(t, "dichiara_configurazione") or _usa(t, "esigi_configurazione")):
-            g.append(("P5", "scrive un referto senza dichiarare LA CONFIGURAZIONE INTERA "
+            g.append(("H-P5", "scrive un referto senza dichiarare LA CONFIGURAZIONE INTERA "
                             "(`_cli_flag.dichiara_configurazione`)"))
     # ---------------------------------------------------------------- P8
     lin = _ancora_head(t, arb)
     if lin and not _usa(t, "sim_prima_del_flag"):
-        g.append(("P8", "prende «il codice di prima» da `HEAD` (:%d): DIVENTA VUOTO appena la "
+        g.append(("H-P8", "prende «il codice di prima» da `HEAD` (:%d): DIVENTA VUOTO appena la "
                         "cura e' committata" % lin))
     return g, esenzioni
 
@@ -218,26 +218,26 @@ def arretrato():
 
 # ============================================================================== IL COLLAUDO
 SORG = {
-    # --- P3: DEVE bloccare / NON deve
-    "blocca_P3": ("csv/_seal_fork/_sigillo_finto.py",
+    # --- H-P3: DEVE bloccare / NON deve
+    "blocca_H-P3": ("csv/_seal_fork/_sigillo_finto.py",
                   "import x" + NL + "S.SEMINA_MATURA = True" + NL),
-    "passa_P3": ("csv/_seal_fork/_sigillo_finto2.py",
+    "passa_H-P3": ("csv/_seal_fork/_sigillo_finto2.py",
                  "import _cli_flag" + NL + "S.SEMINA_MATURA = True" + NL),
-    # --- P5: DEVE bloccare / NON deve
-    "blocca_P5": ("csv/_test_fork/_misura_finta.py",
+    # --- H-P5: DEVE bloccare / NON deve
+    "blocca_H-P5": ("csv/_test_fork/_misura_finta.py",
                   "import io" + NL + "DEST = 'x.txt'" + NL
                   + "io.open(DEST, 'w').write('ciao')" + NL),
-    "passa_P5": ("csv/_test_fork/_misura_finta2.py",
+    "passa_H-P5": ("csv/_test_fork/_misura_finta2.py",
                  "import io" + NL + "import _cli_flag" + NL + "DEST = 'x.txt'" + NL
                  + "_cli_flag.dichiara_configurazione(S, print)" + NL
                  + "io.open(DEST, 'w').write('ciao')" + NL),
-    # --- P8: DEVE bloccare / NON deve
-    "blocca_P8": ("csv/_seal_fork/_sigillo_finto3.py",
+    # --- H-P8: DEVE bloccare / NON deve
+    "blocca_H-P8": ("csv/_seal_fork/_sigillo_finto3.py",
                   "import subprocess" + NL
                   + "VECCHIO = 'v.py'" + NL
                   + "g = subprocess.run(['git', 'cat-file', '-p', 'HEAD:soliton_simulator.py'])"
                   + NL),
-    "passa_P8": ("csv/_seal_fork/_sigillo_finto4.py",
+    "passa_H-P8": ("csv/_seal_fork/_sigillo_finto4.py",
                  "import _cli_flag" + NL + "VECCHIO = 'v.py'" + NL
                  + "_cli_flag.sim_prima_del_flag('X', VECCHIO)" + NL
                  + "# l'ancora e' il PADRE del commit, non `HEAD:soliton_simulator.py`" + NL),
@@ -260,15 +260,15 @@ def collaudo():
               % (nome, os.path.basename(rel), "BLOCCA" if atteso_blocca else "passa",
                  "BLOCCA" if blocca else "passa", "OK" if buono else "!! SBAGLIATO"))
     # e l'ESENZIONE: dichiarata e NON elencata -> deve fallire; elencata -> passa
-    rel, t = SORG["blocca_P3"]
+    rel, t = SORG["blocca_H-P3"]
     # il marcatore si COMPONE, cosi' non compare per intero nel sorgente dello scanner
-    t_es = t + chr(35) + " ESENTE-P3: motivo di prova" + NL
+    t_es = t + chr(35) + " ESENTE-H-P3: motivo di prova" + NL
     _g, non_el = controlla([(rel, t_es)], elenco="")
     print("  %-11s %-34s atteso %-9s ottenuto %-9s %s"
           % ("esenz_nuda", os.path.basename(rel), "BLOCCA", "BLOCCA" if non_el else "passa",
              "OK" if non_el else "!! SBAGLIATO"))
     ok = ok and bool(non_el)
-    _g2, non_el2 = controlla([(rel, t_es)], elenco="%s|P3" % rel)
+    _g2, non_el2 = controlla([(rel, t_es)], elenco="%s|H-P3" % rel)
     print("  %-11s %-34s atteso %-9s ottenuto %-9s %s"
           % ("esenz_elenc", os.path.basename(rel), "passa",
              "BLOCCA" if non_el2 else "passa", "OK" if not non_el2 else "!! SBAGLIATO"))
@@ -311,7 +311,7 @@ def stato_hook():
     else:
         print("  ⛔ **I PRESIDI NON SONO ATTIVI IN QUESTO CLONE.**")
         print("     `core.hooksPath` = %s" % (via or "(non impostato)"))
-        print("     Un commit che viola `P3`, `P5` o `P8` **passa senza dire niente**.")
+        print("     Un commit che viola `H-P3`, `H-P5` o `H-P8` **passa senza dire niente**.")
         if resti:
             print("     *(in `.git/hooks/` ci sono %s: girano, ma NON viaggiano col repo)*"
                   % ", ".join(resti))
@@ -384,7 +384,7 @@ def pre_commit():
                          + NL + NL)
     sys.stderr.write("  CHE FARE: passare dal CLI (`_cli_flag`), dichiarare la configurazione" + NL
                      + "  intera, ancorare al PADRE del commit -- oppure dichiarare" + NL
-                     + "  'ESENTE-<Pn>: <motivo>' (col cancelletto davanti) nel file E"
+                     + "  'ESENTE-<H-Pn>: <motivo>' (col cancelletto davanti) nel file E"
                      + " rigenerare l'elenco." + NL + NL)
     return 1
 

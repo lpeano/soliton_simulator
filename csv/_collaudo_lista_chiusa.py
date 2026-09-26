@@ -19,7 +19,7 @@ era dichiarato `FAIL` — giustamente, ma per un'altra ragione)*. La copia viene
 
 **NESSUN RUN, nessun simulatore.**
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. Collauda un generatore di documenti.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Collauda un generatore di documenti.
 import hashlib
 import io
 import os

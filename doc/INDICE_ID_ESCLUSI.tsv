@@ -42,3 +42,9 @@ OTTO-NOVE	numerale a parole, non un identificatore	1
 NON-TEORICO	locuzione del testo, non un identificatore	1
 NON-ADDITIVITA	locuzione del testo, non un identificatore	1
 COLLO-DI	locuzione del testo, non un identificatore	1
+CLAUDE-OLTRE-400	via d'uscita dichiarata del presidio `H-RIGHE`, non un identificatore	0
+DA-CLAUDE-MD-2026-09-26	marcatore HTML dell'innesto del riordino, non un identificatore	0
+ESENTE-H-P5	marcatore di esenzione ai presidi, non un identificatore	0
+UTF-8	nome di una codifica, non un identificatore	0
+A-B	locuzione del testo (`max|A-B|`), non un identificatore	0
+U-U	locuzione del testo (l'unitarieta' `U^dag U`), non un identificatore	0

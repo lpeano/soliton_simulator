@@ -31,7 +31,7 @@ MOTIVO        ogni voce con `blocca = SI` porta il suo `motivo`: una decisione s
 
 **`--collaudo`** prova i DUE versi: l'indice vero passa, una copia guasta **fallisce**.
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. Valida un TSV.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Valida un TSV.
 import io
 import os
 import re
@@ -58,9 +58,14 @@ TIPI = {"difetto", "sospetto", "fronte", "misura", "cura", "presidio", "assioma"
 FAM = {"A", "B", "C", "D", "E", "F", "G", "?"}
 AVANZ = {"FATTO", "IN CORSO", "IN CODA", "BLOCCATO", "CON RISERVA", "(senza marcatore)"}
 FORMA = re.compile(r"(?:[A-Z]\d{1,3}[a-z]?|STANDARD\s+[0-9①-⑳]+"
-                   r"|[A-Z][A-Z0-9]{1,}(?:-[A-Z0-9()/]+)+|[A-Z]{2,}\d{1,3}"
+                   r"|[A-Z][A-Z0-9]*(?:-[A-Za-z0-9()/]+)+|[A-Z]{2,}\d{1,3}"
                    r"|[A-Z_]+:[A-Za-z0-9\-()/]+)")
 
+#   ⚠ LO STEM DI UNA LETTERA, ammesso il 2026-09-26: `H-P3` e `L-SOGLIA` hanno UNA
+#   lettera prima del trattino -- e `H-P1-bis` ha una CODA MINUSCOLA, come il
+#   `P1-bis` che tutti citano -- e la forma chiedeva DUE lettere e tutto maiuscolo -- quindi il validatore
+#   RIFIUTAVA i nomi che Luca stesso aveva dettato. Misurato: senza questa riga sedici
+#   voci nuove su sedici erano 'senza FORMA'.
 #   ⚠ LE CANCELLAZIONI DICHIARATE: una voce sparita rispetto al tag e' un ERRORE, salvo queste.
 CANCELLAZIONI = {
     "CLI-1)": "token SPURIO: la parentesi della prosa attaccata all'id "

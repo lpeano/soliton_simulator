@@ -22,7 +22,7 @@ locale richiede: una lettura fuori **non deve vedere** la normalizzazione.
 
 ASCII puro. Sola lettura: nessuna riga del simulatore cambia qui.
 """
-# ESENTE-P5: strumento di analisi STATICA. Non importa il simulatore e non lo fa girare:
+# ESENTE-H-P5: strumento di analisi STATICA. Non importa il simulatore e non lo fa girare:
 #   legge UN SORGENTE per AST. **Non esiste una «configurazione» in cui questa lettura sia
 #   stata presa** -- le letture di `rho_s` nel file sono le stesse con qualunque flag -- quindi
 #   dichiararla sarebbe **una riga vuota**, e `P5` esiste per impedire le dichiarazioni vuote.

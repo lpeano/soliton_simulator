@@ -2,12 +2,12 @@
 COLLAUDO DEL PRESIDIO DELL'INDICE -- i DUE versi   (2026-09-26)
 ================================================================================================
 
-  indice: 777 fra id e alias      esclusi: 43      forme nude AMBIGUE: 0
+  indice: 794 fra id e alias      esclusi: 49      forme nude AMBIGUE: 0
 
   sentinelle scelte ORA e verificate ignote: `QX700`, `QX701`
 
   DEVE PASSARE  un ID noto: `D01`                          -> passa    PASS
-  DEVE PASSARE  una forma ESCLUSA: `BYTE-ESATTE`           -> passa    PASS
+  DEVE PASSARE  una forma ESCLUSA: `A-B`                   -> passa    PASS
   DEVE FALLIRE  una sentinella ignota: `QX700`             -> RIFIUTA  PASS
                   ignoti: QX700
   DEVE FALLIRE  una seconda sentinella: `QX701`            -> RIFIUTA  PASS

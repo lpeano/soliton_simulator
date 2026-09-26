@@ -38,7 +38,7 @@ le citazioni si risolvono con l'**alias**.
 
 **NESSUN RUN, nessun simulatore: legge documenti e stampa una tabella.**
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. Conta occorrenze in documenti.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Conta occorrenze in documenti.
 import io
 import os
 import re

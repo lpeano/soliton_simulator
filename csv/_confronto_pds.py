@@ -10,7 +10,7 @@ differenze spiegate»*.
 
 ASCII puro nell'output.
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. Confronta due documenti.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Confronta due documenti.
 import io
 import os
 import re

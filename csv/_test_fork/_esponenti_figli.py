@@ -15,7 +15,7 @@ la lista e' attiva non si aprono indagini nuove se non servono a una voce. Quest
 
 ASCII puro.
 """
-# ESENTE-P5: legge JSON gia' scritti, non fa girare il simulatore. La configurazione di quei dati
+# ESENTE-H-P5: legge JSON gia' scritti, non fa girare il simulatore. La configurazione di quei dati
 #   e' dichiarata NEL REFERTO DEL SIGILLO che li ha prodotti, e ripeterla qui sarebbe una copia
 #   non verificata invece di una dichiarazione.
 import io

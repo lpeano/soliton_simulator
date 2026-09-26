@@ -21,7 +21,7 @@ contiene tre `✅` dei pezzi fatti risulterebbe `FATTO` **mentre il run sta gira
 
 ⚠ **SOLA LETTURA.** Legge `doc/INDICE_ID.tsv` e `git log`. Non esegue niente e non tocca nessun run.
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. Legge un TSV e `git log`.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Legge un TSV e `git log`.
 import io
 import os
 import re

@@ -1782,3 +1782,48 @@ sigillo (ex `par.2`) e le fusioni approvate:
 Col riordino quella sezione e' diventata `par.9`, e il collaudo **si schiantava** — *il modo piu'
 facile di non accorgersene* (`A8`). Ora l'ancora e' **il NOME, non il numero**, com'e' scritto in
 `CLAUDE.md` par.2. **Esito invariato: `6/6 PASS`.**
+
+## ⑤ I presidi dei hook prendono il prefisso `H-` — **una collisione di nomi, curata**
+
+**IL DIFETTO ERA REALE E DELLO STESSO TIPO CHE L'INDICE HA CURATO PER I DIFETTI** *(`A3` era tre
+voci)*: **`P3` e `P5` erano DUE REGOLE DIVERSE CON LO STESSO NOME** — la regola di metodo di
+`CLAUDE.md` e il presidio del hook. **Chi citava `P3` non diceva quale.**
+
+**LA FORMA E' QUELLA CHE HA SCRITTO LUCA — `H-P3`, `H-P5`, ...**, cioe' **il nome di prima col
+prefisso**. La proposta aveva suggerito nomi **semantici** (`H-CLI`, `H-CONFIG`, `H-ANCORA`) e
+**li ho scartati**: col nome di prima ogni citazione storica (`P5` in un referto del 25/9) resta
+**leggibile** e si risolve con l'`alias`. **Se Luca intendeva i nomi semantici, si cambia con una
+rigirata di `csv/_rinomina_hook.py`.**
+
+```
+37 sostituzioni nei 7 sorgenti dei hook, OGNUNA asserita per se' (P1-quater)
+21 marcatori `ESENTE-Pn` -> `ESENTE-H-Pn` in 20 file
+collaudo dei presidi: 8/8 OK          collaudo del validatore: 6/6 PASS
+```
+
+**E IL NOVE-ESIMO PRESIDIO E' NUOVO: `H-RIGHE`** (punto `h`) — *`CLAUDE.md` non passa le 400
+righe*. **Collaudato nei due versi, 5/5.** E **sta in `commit-msg`, non in `pre-commit`**: la via
+d'uscita `[CLAUDE-OLTRE-400: ...]` vive **nel messaggio**, e in `pre-commit` il messaggio **non
+esiste ancora** — leggerlo la' significa leggere **il commit PRECEDENTE**, cioe' spegnere il
+presidio per sempre alla prima eccezione. *(E' lo stesso difetto gia' trovato su `H-INDICE`.)*
+
+**DUE DIFETTI MIEI, TROVATI DAI PRESIDI STESSI MENTRE COMMITTAVO — e sono il valore vero di
+questo giro:**
+
+1. **`H-RIGHE` ha RIFIUTATO il commit 1/6.** Giusto: guarda il file che **sara'** a `HEAD`, e
+   fino al commit 4/6 era ancora quello da 1575 righe. **Rifiuto vero, non sintetico.**
+2. **La via d'uscita non attraversava le righe.** La mia regex era senza `re.S`, e una
+   dichiarazione scritta **su tre righe** — come si scrive un motivo che vale la pena di leggere
+   — **veniva ignorata e il commit rifiutato lo stesso**. **Il collaudo non l'aveva preso perche'
+   i suoi quattro casi avevano il messaggio su UNA riga: il caso sintetico era piu' povero del
+   caso reale.** Aggiunto il quinto caso, `dichiarato_su_piu_righe`.
+3. **`H-INDICE` ha rifiutato il commit 4/6 per `L-PATCH`**, che avevo **citato** in `CLAUDE.md`
+   senza dargli la riga nell'indice. **Aveva ragione.**
+
+**E LA FORMA DEGLI ID E' STATA ALLARGATA, con la misura accanto:** `[A-Z][A-Z0-9]{1,}(-...)+`
+chiedeva **due** caratteri prima del trattino, quindi **`H-P3` e `L-SOGLIA` non erano id validi**
+— il validatore rifiutava **sedici voci su sedici** dei nomi che Luca stesso aveva dettato, e il
+presidio leggeva `L-DOPO-STOP` come **`DOPO-STOP`**, segnalando come ignoto **un pezzo di un id
+che c'e'**. Allargata a **uno** stem. **Misurato l'effetto: gli ignoti passano da 6 a 0**, dopo
+aver dichiarato in `INDICE_ID_ESCLUSI.tsv` le sei forme che **non sono id** (`A-B`, `U-U`,
+`UTF-8`, `CLAUDE-OLTRE-400`, `ESENTE-H-P5`, il marcatore HTML dell'innesto).

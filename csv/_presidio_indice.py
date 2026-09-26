@@ -33,7 +33,7 @@ traccia leggibile in `git log`.**
 
 **COLLAUDO NEI DUE VERSI:** `python csv/_presidio_indice.py --collaudo`.
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. E' un presidio su documenti.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. E' un presidio su documenti.
 import io
 import os
 import re
@@ -63,8 +63,11 @@ VIVI = ["doc/STATO_RUN.md", "doc/RAMIFICAZIONI.md", "doc/ASSIOMI.md", "doc/REGIS
 #   («nomi MAIUSCOLI col trattino»), e accettarla vorrebbe dire prendere ogni parola
 #   maiuscola della prosa. **Quelle voci hanno bisogno di un ID, non di una regex piu'
 #   larga.**
+#   ⚠ LO STEM DI UNA LETTERA, ammesso il 2026-09-26. Senza, `L-DOPO-STOP` veniva
+#   letto come `DOPO-STOP` -- cioe' il presidio segnalava come IGNOTO un pezzo di un
+#   id che nell'indice C'E'. Misurato: 2 falsi ignoti su 6.
 FORMA = re.compile(r"(?:[A-Z]\d{1,3}[a-z]?|STANDARD\s+[0-9①-⑳]+"
-                   r"|[A-Z][A-Z0-9]{1,}(?:-[A-Z0-9()/]+)+|[A-Z]{2,}\d{1,3})")
+                   r"|[A-Z][A-Z0-9]*(?:-[A-Z0-9()/]+)+|[A-Z]{2,}\d{1,3})")
 
 
 def carica():
@@ -154,13 +157,13 @@ def pre_commit(msg_file=None):
     if msg_file and os.path.exists(msg_file):
         msg = io.open(msg_file, encoding="utf-8", errors="replace").read()
         if "[SENZA-INDICE:" in msg:
-            sys.stderr.write("[INDICE] eccezione DICHIARATA nel messaggio: non controllo." + NL)
+            sys.stderr.write("[H-INDICE] eccezione DICHIARATA nel messaggio: non controllo." + NL)
             return 0
         testo += NL + msg
     ign, ambi = esamina(testo)
     if not ign and not ambi:
         return 0
-    sys.stderr.write(NL + "[INDICE] *** COMMIT RIFIUTATO ***" + NL + NL)
+    sys.stderr.write(NL + "[H-INDICE] *** COMMIT RIFIUTATO ***" + NL + NL)
     if ign:
         sys.stderr.write("  ID che il commit AGGIUNGE e che NON sono nell'indice (%d):" % len(ign)
                          + NL + "    " + ", ".join(ign[:30]) + NL + NL)

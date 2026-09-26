@@ -39,7 +39,7 @@ silenzio.
 
 **NESSUN RUN, nessun simulatore.**
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. Genera due indici da documenti.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Genera due indici da documenti.
 import io
 import os
 import re

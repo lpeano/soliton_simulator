@@ -12,7 +12,7 @@ servirebbe**.
 
 **NESSUN RUN, nessun simulatore.**
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. Legge sorgenti e conta.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Legge sorgenti e conta.
 import io
 import os
 import re

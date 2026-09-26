@@ -14,7 +14,7 @@ doc/ORDINE_SI.tsv    l'ordine di lavoro: `n`, `voce`, `perche_viene_qui`, `stima
 
 **La vista NON si modifica a mano:** si rigenera da qui.
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. Legge due TSV e scrive un documento.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Legge due TSV e scrive un documento.
 import io
 import os
 import re

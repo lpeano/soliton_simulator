@@ -1,6 +1,6 @@
 #!/bin/sh
 # ============================================================================================
-#  COMMIT-MSG VERSIONATO -- `P1-bis` (la relazione) + `REG-R` (la scheda di fisica)
+#  COMMIT-MSG VERSIONATO -- `H-P1-bis` (la relazione) + `H-REG-R` (la scheda) + `H-INDICE` + `H-RIGHE`
 # --------------------------------------------------------------------------------------------
 #  `csv/_hook_relazione.py` fa DUE controlli, non uno: rifiuta un commit che tocca un referto
 #  senza toccare `RELAZIONE_PER_CLAUDE.md`, e da li' chiama `csv/_hook_fisica.py` (`REG-R`),

@@ -21,7 +21,7 @@ LETTORE                gli altri: leggono un registro per TROVARE voci. **Sono q
 
 **NESSUN RUN, nessun simulatore.**
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. Classifica script per contenuto.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Classifica script per contenuto.
 import io
 import os
 import re

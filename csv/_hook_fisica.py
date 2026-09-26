@@ -210,9 +210,9 @@ def controlla(staged, msg, leggi_git=True, _finti=None):
 
     m = FUGA.search(msg or "")
     if m:
-        return 0, "[REG-R] eccezione DICHIARATA: %s\n" % m.group(1).strip()
+        return 0, "[H-REG-R] eccezione DICHIARATA: %s\n" % m.group(1).strip()
 
-    t = ["\n[REG-R] *** COMMIT RIFIUTATO: una LEGGE cambia e la sua SCHEDA no. ***\n\n"]
+    t = ["\n[H-REG-R] *** COMMIT RIFIUTATO: una LEGGE cambia e la sua SCHEDA no. ***\n\n"]
     if senza_scheda:
         t.append("  QUESTE LEGGI NON HANNO UNA SCHEDA. **Prima si crea la scheda:**\n")
         for tipo, nome in senza_scheda:

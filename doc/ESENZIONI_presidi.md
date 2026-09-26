@@ -27,6 +27,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_regole_proposta.py|H-P5` | non importa il simulatore e non lo fa girare. Legge documenti e ne scrive uno. |
 | `csv/_rinomina_collisioni.py|H-P5` | non importa il simulatore e non lo fa girare. Rinomina etichette in due documenti. |
 | `csv/_rinomina_hook.py|H-P5` | non importa il simulatore e non lo fa girare. Rinomina etichette in sorgenti. |
+| `csv/_rinomina_hook.py|H-P8` | la stringa `HEAD:soliton_simulator.py` qui dentro NON e' un'ancora al codice di |
 | `csv/_riordino_fatti.py|H-P5` | non importa il simulatore e non lo fa girare. Sposta prosa fra due documenti. |
 | `csv/_riordino_sposta.py|H-P5` | non importa il simulatore e non lo fa girare. Sposta prosa fra documenti. |
 | `csv/_riordino_storia.py|H-P5` | non importa il simulatore e non lo fa girare. Archivia prosa da un tag di git. |
@@ -36,5 +37,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_esponenti_figli.py|H-P5` | legge JSON gia' scritti, non fa girare il simulatore. La configurazione di quei dati |
 
 ```
-esenzioni dichiarate   29
+esenzioni dichiarate   30
 ```

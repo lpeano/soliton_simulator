@@ -28,7 +28,7 @@ Sola lettura, nessun simulatore: e' matematica su numeri casuali.
 
 ASCII puro.
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. E' un collaudo di un CRITERIO
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. E' un collaudo di un CRITERIO
 #   STATISTICO su numeri casuali: non esiste una «configurazione del driver» in cui questo conto
 #   sia stato fatto, e dichiararla sarebbe una riga vuota.
 import io

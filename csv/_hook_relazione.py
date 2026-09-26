@@ -127,7 +127,7 @@ def controlla():
         if _c:
             return _c
     except Exception as _e:            # A8: un presidio che si schianta NON deve bloccare
-        sys.stderr.write("[REG-R] il controllo NON e' girato (%s): dichiarato, non nascosto.\n"
+        sys.stderr.write("[H-REG-R] il controllo NON e' girato (%s): dichiarato, non nascosto.\n"
                          % _e)
 
     # [INDICE, 2026-09-26] gli ID citati NEL MESSAGGIO: qui e' l'unico punto in cui git lo ha
@@ -139,9 +139,9 @@ def controlla():
         _ig, _am = _presidio_indice.esamina(_presidio_indice._aggiunte() + "\n" + msg0)
         if _ig or _am:
             if "[SENZA-INDICE:" in msg0:
-                sys.stderr.write("[INDICE] eccezione DICHIARATA nel messaggio.\n")
+                sys.stderr.write("[H-INDICE] eccezione DICHIARATA nel messaggio.\n")
             else:
-                sys.stderr.write("\n[INDICE] *** COMMIT RIFIUTATO ***\n\n"
+                sys.stderr.write("\n[H-INDICE] *** COMMIT RIFIUTATO ***\n\n"
                                  "  ID citati nel MESSAGGIO e non nell'indice: %s\n"
                                  % ", ".join((_ig + _am)[:20])
                                  + "  CHE FARE: definirli in un registro e rigenerare"
@@ -151,8 +151,23 @@ def controlla():
                                  "    [SENZA-INDICE: <motivo>] nel messaggio.\n\n")
                 return 1
     except Exception as _e2:           # A8: un presidio che si schianta NON deve bloccare
-        sys.stderr.write("[INDICE] il controllo NON e' girato (%s): dichiarato, non nascosto.\n"
+        sys.stderr.write("[H-INDICE] il controllo NON e' girato (%s): dichiarato, non nascosto.\n"
                          % _e2)
+
+    # [H-RIGHE, 2026-09-26] `CLAUDE.md` non passa le 400 righe. Sta QUI per la stessa ragione di
+    #   `H-INDICE`: la via d'uscita `[CLAUDE-OLTRE-400: ...]` si legge **nel messaggio**, e in
+    #   `pre-commit` il messaggio non esiste ancora. `commit-msg` e' UNO SOLO, e i presidi che
+    #   hanno bisogno del messaggio stanno tutti qui dentro.
+    try:
+        import _presidio_righe
+        _cr, _tr = _presidio_righe.controlla(msg0)
+        if _tr:
+            sys.stderr.write(_tr)
+        if _cr:
+            return _cr
+    except Exception as _e3:           # A8: un presidio che si schianta NON deve bloccare
+        sys.stderr.write("[H-RIGHE] il controllo NON e' girato (%s): dichiarato, non nascosto.\n"
+                         % _e3)
 
     if not motivi:
         return 0
@@ -162,10 +177,10 @@ def controlla():
     # `commit-msg`: e' l'unico punto in cui git lo ha gia' scritto (vedi `installa`).
     m = FUGA.search(msg0)
     if m:
-        sys.stderr.write("[P1-bis] eccezione DICHIARATA: %s\n" % m.group(1).strip())
+        sys.stderr.write("[H-P1-bis] eccezione DICHIARATA: %s\n" % m.group(1).strip())
         return 0
     sys.stderr.write(
-        "\n[P1-bis] *** COMMIT RIFIUTATO: c'e' un RISCONTRO e manca la RELAZIONE. ***\n\n"
+        "\n[H-P1-bis] *** COMMIT RIFIUTATO: c'e' un RISCONTRO e manca la RELAZIONE. ***\n\n"
         "  Questi file dicono che il commit contiene un riscontro:\n")
     for f, perche in motivi[:8]:
         sys.stderr.write("    %-50s  (%s)\n" % (f, perche))

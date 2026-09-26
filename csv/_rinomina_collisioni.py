@@ -32,7 +32,7 @@ DEVE FALLIRE         un'ancora che non esiste piu' -> `assert` e nessuna scrittu
 
 **NESSUN RUN, nessun simulatore.**
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. Rinomina etichette in due documenti.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Rinomina etichette in due documenti.
 import hashlib
 import io
 import os

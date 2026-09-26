@@ -874,3 +874,19 @@ python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie
 | strumento | blob (byte) | comando | cosa fa | esito |
 |---|---|---|---|---|
 | `csv/_regole_proposta.py` | `934fb523` | `python csv/_regole_proposta.py` | **inventaria OGNI regola in vigore** *(assiomi, `STANDARD`, i `P` di `CLAUDE.md`, i presidi dei hook, le sezioni di `CLAUDE.md`, le regole di lavoro nuove)*, misura le righe di ogni sezione e documento, e assegna a ciascuna una **destinazione**. **Si FERMA se un id resta senza destinazione** | `doc/REGOLE_proposta.md`: **76 regole, 76 con destinazione, 0 senza**; `CLAUDE.md` `1576 -> ~153`; avvio `2714 -> ~1021`; il posto 2 passa da `16` a `10` con tre fusioni |
+
+## Aggiunto il 2026-09-26 — **l'APPLICAZIONE del riordino delle regole**
+
+*(Il blob e' lo **sha1 dei BYTE GREZZI**, non `git hash-object`: sono due numeri
+diversi per lo stesso file.)*
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_riordino_fatti.py` | `902f045c` | `python csv/_riordino_fatti.py` · `--verifica` | sposta `par.9` (dal **tag** `regole-pre-riordino`) in `doc/FATTI_dal_codice.md`, **ordinato per FUNZIONE**, con le righe del simulatore **misurate dall'AST**. Lo spostamento e' **verbatim** | **53 punti, 11 funzioni, 0 righe perse** |
+| `csv/_riordino_storia.py` | `8ffe675a` | `python csv/_riordino_storia.py` · `--verifica` · `--estrai <sez>` | archivia **verbatim** ogni sezione di `CLAUDE.md` al tag (tranne `par.9`) in `doc/STORIA_REGOLE.md`, con la tabella *dove vive oggi la sua regola* | **23 sezioni, 0 senza destinazione, 0 righe perse** |
+| `csv/_riordino_sposta.py` | `f9b41925` | `python csv/_riordino_sposta.py` · `--prova` | porta `par.4` in coda a `doc/REGISTRO_FISICA.md` e `par.6` in `doc/STATO_RUN.md` **dopo l'INDIRIZZO** (mai in coda: la' `csv/_stato_run.py` cerca la voce APERTA). Idempotente | 27 + 28 righe; `STATO_RUN` resta bilanciato **17 `APERTO` / 17 `chiuso`** |
+| `csv/_archivio_relazioni.py` | `1df67e2c` | `python csv/_archivio_relazioni.py` · `--verifica` | divide `RELAZIONE_PER_CLAUDE.md` in `doc/relazioni/<giorno>.md`; il file vivo tiene **solo il giorno corrente**. La **regola di taglio e' dichiarata** nel docstring | **20437 righe in ingresso = 20437 in uscita**, 9 giorni |
+| `csv/_rinomina_hook.py` | `eb1df579` | `python csv/_rinomina_hook.py` · `--prova` | da' il prefisso **`H-`** ai presidi dei hook (`P3`->`H-P3`, ...) e ai marcatori `ESENTE-Pn`. **Ogni sostituzione e' asserita per se'** (`P1-quater`) | **37 sostituzioni** nei 7 sorgenti + **21 marcatori** in 20 file; collaudo dei presidi **8/8** |
+| `csv/_presidio_righe.py` | `7acf5e65` | `python csv/_presidio_righe.py` · `--collaudo` | **`H-RIGHE`**: rifiuta un commit se `CLAUDE.md` supera le **400 righe**. Sta in `commit-msg`, perche' la via d'uscita `[CLAUDE-OLTRE-400: ...]` vive **nel messaggio** | **collaudo 5/5 nei DUE versi**; e ha **rifiutato davvero** il commit 1/6 della serie |
+| `csv/_indice_riordino.py` | `f7155270` | `python csv/_indice_riordino.py` · `--prova` | aggiunge a `doc/INDICE_ID.tsv` le voci del riordino (`H-*`, `L-*`, `STANDARD 4/6/8`), **annota** i nomi vecchi col rimando, e dichiara in `INDICE_ID_ESCLUSI.tsv` le forme che **non sono id**. Idempotente | **17 voci nuove, 9 annotate, 6 forme escluse**; validatore **TUTTO A POSTO**, 757 voci |
+| `csv/_controlli_riordino.py` | `7fc039ea` | `python csv/_controlli_riordino.py` | i **cinque controlli di fine** del riordino: le 76 regole ritrovate, il tetto del posto 2, le righe di `CLAUDE.md` e quelle **lette all'avvio misurate prima/dopo**, tutti i collaudi, i nomi citati dai hook | vedi `doc/CONTROLLI_riordino.txt` |

@@ -18,7 +18,7 @@ Luca puo' sparire in silenzio*.
 
 **NESSUN RUN, nessuna modifica a `CLAUDE.md` o ai hook.**
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. Legge documenti e ne scrive uno.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Legge documenti e ne scrive uno.
 import io
 import os
 import re

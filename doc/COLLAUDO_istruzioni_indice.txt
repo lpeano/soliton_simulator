@@ -1,5 +1,5 @@
 ====================================================================================================
-COLLAUDO DELLE ISTRUZIONI D'USO (sezione 11 di CLAUDE.md)   (2026-09-26)
+COLLAUDO DELLE ISTRUZIONI D'USO (sezione dell'INDICE DEI DIFETTI di CLAUDE.md)   (2026-09-26)
 ====================================================================================================
 
   LETTO DALLA SEZIONE, non da me:
@@ -26,7 +26,7 @@ COLLAUDO DELLE ISTRUZIONI D'USO (sezione 11 di CLAUDE.md)   (2026-09-26)
     K5 tutti i file sono tornati identici (sha1) ..... True   OK
 
 ====================================================================================================
-ESITO: 6/6 PASS -- **LA SEZIONE 11 BASTA DA SOLA**
+ESITO: 6/6 PASS -- **LA SEZIONE DELL'INDICE BASTA DA SOLA**
 ====================================================================================================
 
 COSA QUESTO COLLAUDO *NON* DICE:

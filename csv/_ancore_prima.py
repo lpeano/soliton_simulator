@@ -23,7 +23,7 @@ incerti si stampano come **DA GUARDARE A MANO** invece di essere assolti.
 
 ASCII puro. Sola lettura.
 """
-# ESENTE-P5: strumento di analisi STATICA. Non importa il simulatore e non lo fa girare:
+# ESENTE-H-P5: strumento di analisi STATICA. Non importa il simulatore e non lo fa girare:
 #   legge SORGENTI per AST. **Non esiste una «configurazione» in cui questa misura sia stata
 #   presa**, quindi dichiararla sarebbe una riga vuota -- e `P5` esiste per impedire le
 #   dichiarazioni vuote, non per aggiungerne una. *(Il presidio ha rifiutato per primo questo

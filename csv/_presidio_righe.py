@@ -18,11 +18,11 @@ quando il commit non lo tocca.
 
 **LA VIA D'USCITA, che obbliga a dichiarare:**   `[CLAUDE-OLTRE-400: <motivo>]` nel messaggio.
 
-**COLLAUDO** (`P1-sexies`): `--collaudo` prova **QUATTRO** casi a risposta NOTA, **nei due versi**
+**COLLAUDO** (`P1-sexies`): `--collaudo` prova **CINQUE** casi a risposta NOTA, **nei due versi**
 — e il caso che **DEVE bloccare** e' il piu' importante.
 
     python csv/_presidio_righe.py            # la misura di oggi
-    python csv/_presidio_righe.py --collaudo # i quattro casi sintetici
+    python csv/_presidio_righe.py --collaudo # i cinque casi sintetici
 
 ASCII puro.
 """
@@ -106,7 +106,7 @@ def controlla(msg):
 
 
 # ============================================================================== IL COLLAUDO
-#   quattro casi a risposta NOTA, nei DUE versi. Il caso che DEVE bloccare e' il piu' importante.
+#   cinque casi a risposta NOTA, nei DUE versi. Il caso che DEVE bloccare e' il piu' importante.
 CASI = [
     ("sotto_il_tetto", LIMITE - 1, "", False),
     ("sul_confine", LIMITE, "", False),
@@ -122,7 +122,7 @@ CASI = [
 
 def collaudo():
     print("=" * 96)
-    print("COLLAUDO DI `H-RIGHE` -- quattro casi a risposta NOTA, nei DUE versi (`P1-sexies`)")
+    print("COLLAUDO DI `H-RIGHE` -- cinque casi a risposta NOTA, nei DUE versi (`P1-sexies`)")
     print("=" * 96)
     ok = True
     for nome, n, msg, deve_bloccare in CASI:
