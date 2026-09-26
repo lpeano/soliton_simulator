@@ -15,7 +15,7 @@ C2  POSTO 2 -- doc/PATTERN_DI_PROVA.md
       regole nella tabella STANDARD ... 10   (tetto 10)
 
 C3  CLAUDE.md E LE RIGHE LETTE ALL'AVVIO
-      CLAUDE.md  PRIMA  1575  ->  DOPO   362   (tetto 400)
+      CLAUDE.md  PRIMA  1575  ->  DOPO   370   (tetto 400)
       righe lette all'avvio, MISURATE:
           PRIMA  CLAUDE.md                                       1575
           PRIMA  doc/ASSIOMI.md                                   543
@@ -26,18 +26,18 @@ C3  CLAUDE.md E LE RIGHE LETTE ALL'AVVIO
           PRIMA  doc/PROTOCOLLO_test_olonomia.md                   78
           PRIMA  doc/SYSTASIS_nota_concettuale.md                  50
           PRIMA  TOTALE (8 documenti)                            2706
-          DOPO   CLAUDE.md                                        362
+          DOPO   CLAUDE.md                                        370
           DOPO   doc/ASSIOMI.md                                   543
           DOPO   doc/PATTERN_DI_PROVA.md                          147
-          DOPO   TOTALE (3 documenti)                            1052
-      riduzione: 1654 righe, cioe' il 61 %
+          DOPO   TOTALE (3 documenti)                            1060
+      riduzione: 1646 righe, cioe' il 61 %
 
 C4  I COLLAUDI
       presidi dei hook                   PASS
       H-RIGHE (CLAUDE.md <= 400)         PASS
       validatore dell'indice             PASS
       presidio dell'indice               PASS
-      istruzioni dell'indice             PASS
+      istruzioni dell'indice             ** FAIL **
       migrazione dei fatti               PASS
       archivio della storia              PASS
       archivio delle relazioni           PASS
@@ -51,7 +51,7 @@ C5  I NOMI CITATI DAI HOOK
   C1  nessuna regola persa                     PASS
   C2  posto 2 <= 10                            PASS
   C3  CLAUDE.md <= 400 righe                   PASS
-  C4  tutti i collaudi passano                 PASS
+  C4  tutti i collaudi passano                 ** FAIL **
   C5  ogni nome citato esiste nell'indice      PASS
-ESITO: 5/5
+ESITO: 4/5
 ================================================================================================
