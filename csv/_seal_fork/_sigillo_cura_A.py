@@ -503,8 +503,8 @@ OK.append(crit("C1''''", "media di |pend(contrasto)-pend(coppia)| ON compatibile
                                                   "ON sta SOTTO" if _b_ok else "ON NON sta sotto")
                + NL + "OFF  : %s" % "  ".join("%.4f" % d for _n, d, _r in dif["off"])
                + NL + "`/W`  : %s" % "  ".join("%.4f" % d for _n, d, _r in dif["suW"])
-               + NL + "  **Nessun numero scelto:** il `2` degli errori standard e' la convenzione",
-               + NL + "  statistica. E con 4 semi `t(0.025,3) = 3.18`, quindi **`2 SE` e' PIU'",
+               + NL + "  **Nessun numero scelto:** il `2` degli errori standard e' la convenzione"
+               + NL + "  statistica. E con 4 semi `t(0.025,3) = 3.18`, quindi **`2 SE` e' PIU'"
                + NL + "  SEVERO** di un IC95 vero: lo dichiaro invece di spacciarlo per uguale."))
 _dsuw = [d for _n, d, _r in dif["suW"]]
 OK.append(crit("P1-sexies", "IL BRACCIO CON `/W` FALLISCE `C1'` (il caso che deve fallire)",
