@@ -827,3 +827,11 @@ python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie
 | `csv/_indice_id.py` | `ca922928` | `python csv/_indice_id.py` | **+ `TIPO_A_MANO`** *(le voci che erano `altro` e sparivano dallo smistamento)*, **+ le FRASI che dichiarano `chiuso`** *(con la frase in `stato_da`)*, **+ le `DECISIONI` della revisione** *(ogni riga con la prova in una frase)*, **+ l'ORDINE DI LAVORO** e **le CONDIZIONI DI FINE** verificate da script | `doc/INDICE_ID_referto.txt`: `741` voci, `blocca SI` **8** *(esattamente le otto del mandato)*, `DA VERIFICARE` **1** *(`D09`)*; **4 condizioni su 4 PASS** |
 | `csv/_lista_chiusa.py` | `1d2dfe33` | `python csv/_lista_chiusa.py` | vista sull'indice; **l'elenco delle voci PERSE e' VUOTO** e il collaudo contiene **tutte** le voci nominate dal mandato | `doc/LISTA_CHIUSA.md`: `741` voci, `352` in lista, `389` fuori, **0 perse** |
 | `csv/_presidio_indice.py` | `c379d913` | `python csv/_presidio_indice.py --collaudo` | il controllo vive in **UNO stadio solo** (`commit-msg`): in `pre-commit` il messaggio non esiste ancora | **5/5 PASS**, end-to-end dallo stadio `commit-msg` |
+
+---
+
+## Aggiunto il 2026-09-26 — **l'analisi dei sei LETTORI (punto 5)**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_analisi_lettori_indice.py` | `9c0a577f` | `python csv/_analisi_lettori_indice.py` | misura **dal sorgente** cosa apre ciascuno dei sei lettori, se legge il CODICE, se SCRIVE, e dichiara **quale campo dell'indice gli manca** | `doc/LETTORI_INDICE_analisi.md`: **nessuno dei sei si converte com'e'** — 2 consumatori a cui manca un campo, 2 generatori che leggono il codice e scrivono nel registro, 1 che misura la prosa, 1 fuori perimetro |

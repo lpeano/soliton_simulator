@@ -91,12 +91,29 @@ def carica():
     return noti, escl, ambigue
 
 
+def _ripulisci(tok):
+    """Toglie una parentesi che appartiene alla PROSA, non all'ID.
+
+    ⚠ `()` sta nella forma per `INERZIA-1(C)`, ma cosi' `(LETTORI-INDICE)` veniva letto
+    **con la parentesi attaccata** -- e il presidio segnalava un ID che non esiste, dentro un
+    messaggio che citava una voce **presente** nell'indice. **Le parentesi devono essere
+    BILANCIATE**: se il token finisce con `)` e non contiene `(`, la parentesi non e' sua.
+    """
+    while tok.endswith(")") and "(" not in tok:
+        tok = tok[:-1]
+    while tok.startswith("(") and ")" not in tok:
+        tok = tok[1:]
+    return tok
+
+
 def esamina(testo):
     """Gli ID di un testo, divisi in `(ignoti, ambigui)`."""
     noti, escl, amb = carica()
     ign, ambi = set(), set()
     for m in FORMA.finditer(testo or ""):
-        t = m.group(0)
+        t = _ripulisci(m.group(0))
+        if not t:
+            continue
         if t in noti or t in escl:
             continue
         if t in amb:

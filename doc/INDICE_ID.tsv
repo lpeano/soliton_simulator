@@ -95,7 +95,6 @@ CHK2		CHECKPOINT 2 | GLOBALE §3 | raggiunto e riferito a Luca. IL RUN LUNGO NON
 CHK3		CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PRIMA | GLOBALE-DISEGNO §5 |…	doc/STATO_RUN.md::CHECKPOINT: referto dei quattro esiti, c	da-decidere	NO	cura	E	
 CHK3-D		Nel referto del CHK3, la sezione «I DIFETTI NUOVI CONTRO LE MISURE GIA' FATTE» — D27 (quattro componenti) e…	doc/STATO_RUN.md::Nel referto del CHK3, la sezione «I DIFE	da-decidere	NO	cura	B	
 CLI-1		I SIGILLI DI CURA 4 E CURA 5 NON HANNO MAI PROVATO IL PERCORSO CLI: impostavano S.SEMINAMATURA = True e…	doc/STATO_RUN.md::I SIGILLI DI CURA 4 E CURA 5 NON HANNO M	da-decidere	SI	cura	A	
-CLI-1)		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	NO	criterio-locale	?	
 COES-CAUSALE		(CITATO 4 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro	?	
 COME-MISURARE		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	NO	criterio-locale	?	
 COMPONENTI:A1		A1. STEP2OROLOGIO — aggancio OROLOGIO ↔ METRICA · omegaclk = (cs/CSM)²	doc/COMPONENTI_PROMOSSE.md::A1. STEP2OROLOGIO — aggancio OROLOGIO ↔ 	da-decidere	NO	criterio-locale	A	
@@ -181,7 +180,7 @@ D4		(CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli
 D5		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	NO	criterio-locale	?	
 D6		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	NO	criterio-locale	?	
 D97		(CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	NO	criterio-locale	?	
-DA-DECIDERE		(CITATO 218 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	NO	criterio-locale	?	
+DA-DECIDERE		(CITATO 222 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	NO	criterio-locale	?	
 DE-ACCOPPIABILITA		(CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)	(nessuna definizione trovata)	da-decidere	NO	criterio-locale	?	
 DIFETTI-NUOVI-FINE		(CITATO 2 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro	?	
 DIFETTI-NUOVI-INIZIO		(CITATO 2 volte, MAI definito in un registro)	(nessuna definizione trovata)	da-decidere	DA-DECIDERE	altro	?	

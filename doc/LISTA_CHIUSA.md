@@ -18,9 +18,9 @@
 | il testo | `420` caratteri della riga | `117` del `titolo_breve` **+ la fonte in colonna** |
 
 ```
-voci nell'indice      741
+voci nell'indice      740
 in LISTA              352   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
-FUORI LISTA           389   col motivo, dai campi dell'indice
+FUORI LISTA           388   col motivo, dai campi dell'indice
 ```
 
 ---
@@ -448,9 +448,9 @@ FUORI LISTA           389   col motivo, dai campi dell'indice
 
 ---
 
-## 📤 **FUORI LISTA — 389 voci, ciascuna col MOTIVO** *(dai campi dell'indice)*
+## 📤 **FUORI LISTA — 388 voci, ciascuna col MOTIVO** *(dai campi dell'indice)*
 
-### motivo: **etichetta LOCALE a una scheda o a un sigillo: il nome pieno include il sigillo, e non e' un fronte del programma**   *(239 voci)*
+### motivo: **etichetta LOCALE a una scheda o a un sigillo: il nome pieno include il sigillo, e non e' un fronte del programma**   *(238 voci)*
 
 | id | che cos'e' | tipo |
 |---|---|:--:|
@@ -459,7 +459,6 @@ FUORI LISTA           389   col motivo, dai campi dell'indice
 | ALLA-NASCITA | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | ANTI-ALLINEAMENTO | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | AUTO-REFERENZIALE | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
-| CLI-1) | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | COME-MISURARE | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | COMPONENTI:A1 | A1. STEP2OROLOGIO — aggancio OROLOGIO ↔ METRICA · omegaclk = (cs/CSM)² | `criterio-locale` |
 | COMPONENTI:A2 | peq è lo sfondo diffuso locale (Legge I, :265): nessuna statistica globale | `criterio-locale` |
@@ -494,7 +493,7 @@ FUORI LISTA           389   col motivo, dai campi dell'indice
 | D5 | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | D6 | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | D97 | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
-| DA-DECIDERE | (CITATO 218 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
+| DA-DECIDERE | (CITATO 222 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | DE-ACCOPPIABILITA | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | DOMANDE-BUSSOLA | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | DOVE-VA | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |

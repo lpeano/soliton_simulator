@@ -2,13 +2,13 @@
 `doc/INDICE_ID.tsv` -- L'INDICE DI TUTTI GLI ID   (2026-09-26)
 ========================================================================================================
 
-  voci nell'indice: 741      esclusi (non sono ID): 45
+  voci nell'indice: 740      esclusi (non sono ID): 43
   alias dalle RINOMINE del PASSO 1: 23       alias dalla forma NUDA univoca: 35
 
-  per STATO:            da-decidere=530, chiuso=131, aperto=58, teoria=17, non-difetto=5
-  per TIPO:             criterio-locale=239, altro=224, fronte=141, difetto=47, misura=38, cura=25, assioma=16, presidio=10, standard=1
-  per BLOCCA_RUN_BASE:  NO=520, DA-DECIDERE=212, SI=8, DA VERIFICARE=1
-  per FAMIGLIA:         ?=399, A=143, B=20, C=37, D=11, E=13, F=96, G=22
+  per STATO:            da-decidere=529, chiuso=131, aperto=58, teoria=17, non-difetto=5
+  per TIPO:             criterio-locale=238, altro=224, fronte=141, difetto=47, misura=38, cura=25, assioma=16, presidio=10, standard=1
+  per BLOCCA_RUN_BASE:  NO=519, DA-DECIDERE=212, SI=8, DA VERIFICARE=1
+  per FAMIGLIA:         ?=398, A=143, B=20, C=37, D=11, E=13, F=96, G=22
 
   CONTROLLO di Luca: righe con stato chiuso/non-difetto/teoria (o criterio-locale) E blocca SI:
       0   -> PASS
@@ -30,9 +30,9 @@ LE CONDIZIONI DI FINE (punto 3 del mandato) -- verificate DA SCRIPT
      uno strumento che si nutre dei propri output si AUTOCONFERMA: il referto del collaudo
      stampa `ZZ999`, e lo sweep lo metteva nell'indice.
 
-  CITATI e MAI DEFINITI in un registro (entrano con `da-decidere`): 321
-      di cui citati SOLO in referti/sigilli/task history -> `criterio-locale`: 151
-      DA-DECIDERE            218 citazioni
+  CITATI e MAI DEFINITI in un registro (entrano con `da-decidere`): 320
+      di cui citati SOLO in referti/sigilli/task history -> `criterio-locale`: 150
+      DA-DECIDERE            222 citazioni
       T1                     112 citazioni
       IC95                   80 citazioni
       SU2                    67 citazioni
@@ -48,14 +48,14 @@ LE CONDIZIONI DI FINE (punto 3 del mandato) -- verificate DA SCRIPT
 ========================================================================================================
 COSA QUESTO INDICE *NON* DICE
 ========================================================================================================
-  - **`blocca_run_base` e' `DA-DECIDERE` su 212 voci su 741**, e non e' pigrizia: **nessun
+  - **`blocca_run_base` e' `DA-DECIDERE` su 212 voci su 740**, e non e' pigrizia: **nessun
     documento lo dichiara**. Vale `SI` solo dove il testo dice «bloccante» o «prima di
     qualunque giro lungo». **Riempirla a intuito sarebbe indovinare, e Luca l'ha vietato.**
   - **`stato = da-decidere` significa che la fonte non porta un marcatore riconoscibile**, non
-    che la voce sia in sospeso. Sono 530 voci.
+    che la voce sia in sospeso. Sono 529 voci.
   - **il titolo e' TRONCATO a 110 caratteri**: l'indice dice DOVE vive una voce, non che cosa
     dice. La spiegazione resta nel documento.
   - **la fonte e' `file::ancora`, non `file:riga`**: un numero di riga marcisce al primo
     inserimento, un frammento di titolo si trova con una ricerca.
-  - **gli ESCLUSI sono 45 forme** riconosciute come locuzioni, nomi di file o di flag: stanno in
+  - **gli ESCLUSI sono 43 forme** riconosciute come locuzioni, nomi di file o di flag: stanno in
     `doc/INDICE_ID_ESCLUSI.tsv` **col motivo e col numero di citazioni**, non in silenzio.

@@ -10,7 +10,7 @@
 > giudizio**.
 
 ```
-voci nell'indice          741
+voci nell'indice          740
 in questo smistamento     139   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
 ```
 
@@ -223,7 +223,7 @@ in questo smistamento     139   (tipo difetto/fronte/misura/cura E stato aperto/
 ---
 
 **COSA QUESTA LISTA NON DICE:**
-- **non dice che le altre 602 voci siano irrilevanti**: dice che **non possono bloccare un
+- **non dice che le altre 601 voci siano irrilevanti**: dice che **non possono bloccare un
   run base** perche' sono chiuse, sono teoria, o sono etichette locali di un sigillo.
 - **il titolo e' UNA riga**: la spiegazione sta nella fonte, e la fonte e' nella colonna.
 - **`DA-DECIDERE` e' la risposta onesta**, non una casella vuota: nessun documento dichiara

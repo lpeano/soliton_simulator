@@ -20029,3 +20029,41 @@ Tag **`lista-chiusa-v1`**. L'ordine di lavoro degli otto `SI` e' in testa a
 `doc/SMISTAMENTO_run_base.md`, con il **perche' dell'ordine** e una stima per voce
 *(somma: `8,5-12,5 h`, senza il run e senza le decisioni)*.
 **Il lavoro sui `SI` comincia solo col via di Luca.**
+
+
+---
+
+# ⛔ **PUNTO 5 (`LETTORI-INDICE`): NESSUNO DEI SEI SI CONVERTE COM'E'. RESTA APERTA.**
+*(2026-09-26, `doc/LETTORI_INDICE_analisi.md`, generata)*
+
+**Luca:** *«se uno ha bisogno di un campo che l'indice non ha, dimmelo invece di rileggere il
+Markdown»*. **Vale per tutti e sei, e per TRE ragioni diverse.**
+
+```
+CONSUMATORE  _punto_della_situazione  162   manca `avanzamento` (IN CORSO / IN CODA / FATTO):
+                                            l'indice ha `stato`, che NON distingue IN CORSO da
+                                            IN CODA -- ed e' la distinzione che quel documento serve
+CONSUMATORE  _triage_difetti          302   mancano `classe` (CODICE/MISURA/PROVA) e `esito`
+GENERATORE   _cure_verificate         352   legge il CODICE e SCRIVE dentro STATO_RUN
+GENERATORE   _quadro_unico            313   legge il CODICE e il DRIVER, e SCRIVE dentro STATO_RUN
+PROSA        _blob_nelle_voci           87   il suo OGGETTO e' la prosa dei registri: convertirlo
+                                            distruggerebbe cio' che misura
+FUORI        _inventario_passo        269   legge gli script di `csv/`: non apre i tre registri
+```
+
+## 📌 **LA PROPOSTA MINIMA: TRE CAMPI, e due strumenti su sei si convertono**
+
+- **`avanzamento`** — dal **primo marcatore della cella** *(e porta con se' il difetto gia' curato
+  di quello strumento: conta il primo nel TESTO, non il primo di una lista)*;
+- **`classe`** — dal tag `[EPOCA n · CLASSE]` delle righe di `RAMIFICAZIONI`, **che l'indice oggi
+  BUTTA VIA** *(lo togliamo dal titolo per renderlo leggibile)*;
+- **`esito`** — **non si ricava**: e' il triage stesso a produrlo. Servirebbe che il triage
+  **SCRIVESSE** nell'indice invece di leggerlo, **e questo cambia il verso del flusso: lo decide
+  Luca.**
+
+## ⚠ **PERCHE' NON HO CHIUSO `LETTORI-INDICE`**
+
+La condizione di fine e' *«nessun consumatore apre piu' i registri per TROVARE DIFETTI»*. **Per i
+quattro fuori perimetro e' gia' vera oggi — ma per una ragione diversa da quella attesa: non li
+aprono per quello.** Per i due consumatori **non e' vera**, e per renderla vera serve una decisione
+sui tre campi. **Chiudere la voce adesso vorrebbe dire dichiarare finito un lavoro che dipende da te.**
