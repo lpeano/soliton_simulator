@@ -2,11 +2,16 @@
 SIGILLO DI `DRIVER-SCENA-II` -- i cinque criteri del task history
 ========================================================================================================
 
-  T1  L'ARGV DEL DEFAULT E' INVARIATA  (`--scena` non passato)
+  T1  IL DEFAULT E' CAMBIATO DI PROPOSITO, E LA DIFFERENZA E' ESATTAMENTE QUELLA DICHIARATA
         driver 'di prima' dal PADRE di 2b273da5 ... 502 righe
-        argv OGGI  42 elementi
-        argv PRIMA 42 elementi
-        identiche elemento per elemento ..... True
+        argv PRIMA 42 elementi   ->   OGGI 44
+        dichiarato  --nodi   None       -> 0                misurato None       -> 0
+        dichiarato  --sep    4.0        -> 6.1158           misurato 4.0        -> 6.1158
+        dichiarato  --test   N-MASSE    -> MASSE-COERENTI   misurato N-MASSE    -> MASSE-COERENTI
+        differenze INATTESE fra le opzioni .. 0 []
+        dichiarate NON avvenute ............. 0 []
+        flag nudi diversi ................... 0 []
+        il sorgente dichiara SCENA/SEP ...... MASSE-COERENTI / 6.1158
 
   T5  IL CASO CHE DEVE FALLIRE: `N-MASSE` con `SEMINA_LAM`
         rifiuta ............................. True
@@ -17,7 +22,7 @@ SIGILLO DI `DRIVER-SCENA-II` -- i cinque criteri del task history
 
   T2  CON LA SCENA (ii) IL VUOTO E' UNO SOLO, E LO FA LA SCENA
         net.n dopo `_applica_flag` .......... 0   (atteso 0)
-        net.n dopo `avvia_test` ............. 4256   (atteso > 0, e con il `sep` del DRIVER: 4.000)
+        net.n dopo `avvia_test` ............. 12814   (atteso > 0, e con il `sep` del DRIVER: 6.116)
         `--nodi 0` nell'argv ................ 0
         AST di `_semina_masse_coerenti` intatto True   (contro 2b273da5^)
 
@@ -40,7 +45,7 @@ LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
 
 
 ========================================================================================================
-  T1  default invariato (argv identica)          PASS
+  T1  la differenza e' ESATTAMENTE quella dichiarata PASS
   T5  N-MASSE rifiuta ancora, stesso messaggio   PASS
   T2  un vuoto solo, costruito dalla scena       PASS
   T4  0 differenze sui booleani                  PASS

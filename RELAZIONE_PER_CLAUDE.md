@@ -2128,3 +2128,26 @@ nuovo e' una tabella di attese, **scritta nel sigillo**:
 e passa **solo** se: **zero differenze INATTESE** fra le opzioni, **zero dichiarate non avvenute**,
 **zero flag nudi diversi**, e **il SORGENTE del driver dichiara davvero quei default** — letti
 **per AST**, non dal mio ricordo.
+
+## ✅ SIGILLO RIGIRATO COL DEFAULT NUOVO: **6/6**
+
+```
+T1  la differenza e' ESATTAMENTE quella dichiarata  PASS
+      --test  N-MASSE -> MASSE-COERENTI     misurato N-MASSE -> MASSE-COERENTI
+      --sep   4.0     -> 6.1158             misurato 4.0     -> 6.1158
+      --nodi  None    -> 0                  misurato None    -> 0
+      INATTESE 0    dichiarate-non-avvenute 0    flag nudi diversi 0
+      il SORGENTE dichiara  MASSE-COERENTI / 6.1158   (letti per AST)
+T5  N-MASSE rifiuta ancora, stesso messaggio ..... PASS
+T2  un vuoto solo, costruito dalla scena ......... PASS   net.n 0 -> 12814  (sep 6.116)
+T4  0 differenze sui booleani .................... PASS   0 su 79
+T3a stesso seme -> byte identici ................. PASS   219 su 219
+T3b semi diversi -> reti diverse ................. PASS   99 su 219
+SIGILLO: 6/6
+```
+
+**⚠ UN NUMERO DA LEGGERE CON LA SUA CONDIZIONE:** `n = 12814` qui, `12 802` nel registro della
+fisica. **Non e' una discrepanza: sono due SEMI diversi** — il registro misuro' la scena `(a)` col
+seme `11`, il driver a default usa il `42`. **La saturazione dipende dal seme** *(gia' misurato:
+`12807 / 12783 / 12812 / 12790`)*, e `12814` sta in quella famiglia. **Citare `12 802` per questo
+run sarebbe sbagliato**, ed e' il genere di trasporto che `P3` vieta.
