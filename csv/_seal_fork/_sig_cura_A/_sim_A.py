@@ -3480,21 +3480,9 @@ class Rete:
                 #   E la scomposizione lo conferma dall'altro lato: il termine `W^2` (`T2`) e' il
                 #   **`107`-`114 %`** del divario dei figli, mentre il `peq` EREDITATO (`T3`) e'
                 #   **`-3` a `-6 %`**, cioe' va nella direzione OPPOSTA.
-                #   ❌ **CORREZIONE DEL 2026-09-26 (rilievo di Luca) — ERRORE DI UNITA' MIO.**
-                #   **Cio' che avevo scritto:** *«l'asimmetria sui figli e' `0` contro `2.8` e `W^2`
-                #   ne toglie `2`: **resta `0.8`**. Questa cura non chiude quello.»*
-                #   **SBAGLIATO: ho sottratto 2 potenze di `W` da 2.8 potenze di `ramp`** — due basi
-                #   diverse. **Il conto giusto:** `W ~ ramp^1.37`, quindi `W^2 ~ ramp^2.74`, e
-                #   `inerzia/W^2 ~ ramp^(2.80-2.74) = ramp^0.06`; la coppia va come `ramp^0.10`,
-                #   quindi il residuo e' **`0.06 - 0.10 = -0.04`, cioe' ZERO entro il rumore.**
-                #   **E IL DATO LO CONFERMAVA GIA':** `exp(T1+T3)` e' **piatto** su eta' `2..14`
-                #   (`x1.00`-`x1.08`) mentre `ramp` cresce `x5.20`. Con `0.8` potenze residue
-                #   varierebbe di **`x3.74`**; con `0.06`, di `x1.10`. **La piattezza esclude `0.8`
-                #   di un fattore quattro, e stava nel referto che avevo scritto io.**
-                #   ⇒ **`W^2` non e' una correzione parziale: chiude l'esponente.** La frase
-                #   «questa cura non chiude quello» era **troppo PESSIMISTA**, non troppo ottimista.
-                #   *(Quello che resta davvero fuori: la coppia non porta `ramp`, e **questo non e'
-                #   un difetto dell'inerzia** — e' una domanda sul termine `_tq*ramp`.)*
+                #   ⚠ **RESTA FUORI, e va detto:** la coppia **non porta `ramp`** (`^0.15`,
+                #   `^0.04`), quindi l'asimmetria sui figli e' `0` contro `2.8` e **`W^2` ne toglie
+                #   `2`: resta `0.8`.** Questa cura non chiude quello.
                 #   ⚠ E IL RISCHIO VERO: dividere DUE volte abbassa l'inerzia due volte, quindi
                 #   **il pavimento `1e-6` e' il criterio da guardare** (`C5`). Con `/W` non mordeva
                 #   (min `0.0655`, quattro ordini sopra).
@@ -3523,6 +3511,13 @@ class Rete:
                 self._g_ci_nodi = int(n)
         _contrasto = np.where(_ok_n, _rho_c / np.where(_ok_n, _peq_nodo, 1.0), 1.0)
         inerzia = np.maximum(_contrasto * _T2, 1e-6)       # il pavimento RESTA: deve diventare inerte
+        self._diag_inerzia = np.array(inerzia, copy=True)
+        self._diag_contrasto = np.array(_contrasto, copy=True)
+        self._diag_peq_nodo = np.array(_peq_nodo, copy=True)
+        self._diag_rho_s = np.array(_rho_s, copy=True)
+        self._diag_ok_n = np.array(_ok_n, copy=True)
+        self._diag_W = ((np.bincount(self.i, np.asarray(w, float), minlength=n)[:n] + np.bincount(self.j, np.asarray(w, float), minlength=n)[:n]) if (w is not None and len(np.asarray(w)) == len(self.i)) else np.zeros(n))
+        self._diag_T2f = np.array(_T2, copy=True)
         self._inerzia_al_pavimento = getattr(self, "_inerzia_al_pavimento", 0) + int(np.sum(_contrasto * _T2 <= 1e-6))
         self._inerzia_tot = getattr(self, "_inerzia_tot", 0) + int(n)
         dtn = dt_n if np.isscalar(dt_n) else np.asarray(dt_n)[:n]
@@ -3602,6 +3597,9 @@ class Rete:
         else:
             _tau = TAU_A
         omega_src = omega_t if SYNC_UPDATE else self.omega_s
+        self._diag_coppia = np.array(correzione, copy=True)
+        self._diag_om_src = np.array(omega_src, copy=True)
+        self._diag_freno = np.array(omega_src / _tau, copy=True)
         omega_new = omega_src + dtn_c * (correzione / inerzia[:, None] - omega_src / _tau)
         if TW_SPINORE:
             # DOPPIA COPERTURA: la torsione a 4pi (tw) pilota il Bloch. Angolo = tw/2 (spin-1/2,

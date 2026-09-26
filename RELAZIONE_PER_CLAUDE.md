@@ -18931,3 +18931,117 @@ Quindi l'asimmetria di esponenti **fra coppia e inerzia non e' `1` contro `2`: e
 *(E `|omega| ~ ramp^+0.16` / `^+0.07`: **sale** leggermente con `ramp`, non scende come `1/ramp`.)*
 
 ## 🛑 MI FERMO. **La scelta fra A e B e' di Luca**, e questi sono i numeri per farla.
+
+
+---
+
+# ✅ **CURA A SIGILLATA `5/6`: L'ESPLOSIONE DI OMEGA DEI FIGLI E' FINITA** *(2026-09-26)*
+
+*(`csv/_seal_fork/_sigillo_cura_A.py`, referto in `csv/_seal_fork/_sig_cura_A/SIGILLO_cura_A.txt`.
+Quattordici bracci, un processo ciascuno. Blob `df465759`; il braccio `/W` viene dal **padre** del
+commit di `_wn * _wn`, non da `HEAD`.)*
+
+```
+C1'        FAIL   <- e il FAIL e' del mio CRITERIO: vedi sotto
+P1-sexies  PASS   il braccio `/W` fallisce `C1'`, e le due popolazioni NON si toccano
+C3         PASS   flag spento byte-identico al codice PRECEDENTE
+C5         PASS   il pavimento non morde
+F1         PASS   contrasto figlio/maturo fra 1.5 e 4
+F2         PASS   |omega| figlio/maturo < 10
+```
+
+## 🎯 **`F2`: IL NUMERO CHE CONTA — DA `x47 000` A `x1.4`**
+
+```
+|omega|_figlio / |omega|_maturo, allo STESSO passo, media geometrica:
+  ON  (`/W^2`)    eta' 2: 1.05    eta' 8: 1.42    eta' 14: 1.86      min 1.052  max 1.857
+  OFF (il NULLO)  eta' 2: 16382   eta' 8: 48226   eta' 14: 44754
+```
+
+> ### **UN FATTORE ~30 000 DI RIDUZIONE.** Il difetto che avevo misurato come *«`|omega|` dei figli
+> ### e' `600` contro `0.013` dei maturi»* **non c'e' piu'**: ora il figlio gira come un maturo,
+> ### entro un fattore `2`.
+
+## 🎯 **`F1`: LA PREVISIONE CALCOLATA PRIMA SI REALIZZA A MENO DELL'1 %**
+
+```
+contrasto_figlio / contrasto_maturo:
+  ON   min 2.331   mediana 2.427   max 2.577      PREVISTO (calcolato PRIMA): mediana 2.4567
+  OFF  7.7e-06 ... 1.6e-03                        <- cinque-sei ordini piu' in basso
+```
+
+**La previsione veniva da `exp(T1+T3)` sui dati del giro precedente**, scritta nel task history
+**prima** di toccare il codice. **Misurata: `2.427` contro `2.4567` previsto, scarto `1.2 %`.**
+*(Non e' una coincidenza fortunata: e' l'identita' della scomposizione che si verifica su un
+sistema diverso — la cura — avendo predetto il residuo `T1+T3` dal sistema senza cura.)*
+
+## ✅ `C5`: IL RISCHIO VERO NON SI E' MATERIALIZZATO
+
+```
+scala dell'inerzia, TUTTI i nodi:      p5        mediana    min        al pavimento
+OFF                                    13.11     40.28      5.76       0/4252
+`/W`                                   1.959     5.928      0.812      0/4252
+`/W^2`                                 0.275     0.889      0.115      0/4252
+```
+
+**Il minimo e' `0.115`: CINQUE ordini sopra `1e-6`.** Dividere due volte abbassa la scala di `~45x`
+rispetto a `OFF`, **e il pavimento resta lontano.** *(Era il criterio che avevo dichiarato come
+rischio principale della cura, e si misura invece di sperarlo.)*
+
+## ❌ **`C1'` FALLISCE, E IL DIFETTO E' DEL MIO CRITERIO — non della cura**
+
+```
+differenza |pend(contrasto) - pend(coppia)|
+  OFF          1.2508   2.7838   1.3344   2.6934
+  `/W`         0.6235   1.4431   0.7013   1.3760
+  `/W^2`       0.0115   0.1167   0.0519   0.0535     <- un fattore 20-100 meglio di OFF
+  spread FRA SEMI (ON) 0.0376   ->   soglia 2x = 0.0752
+```
+
+**Un solo valore su quattro sta sopra la soglia (`0.1167` contro `0.0752`).** E la soglia e'
+**`2 x la deviazione standard dei valori ON stessi`**:
+
+> ### **E' UN CRITERIO AUTO-REFERENZIALE: piu' la cura funziona, piu' i valori ON si stringono, piu'
+> ### lo SPREAD si stringe, piu' la SOGLIA diventa severa.** Nel limite di una cura perfetta, la
+> ### soglia tende a zero e **il criterio non puo' passare.**
+
+**NON LO CORREGGO ADESSO** (`P1-sexies`: un criterio non si aggiusta dopo aver visto i numeri).
+**Lo dichiaro, ed e' la seconda volta oggi** che scrivo un criterio la cui soglia dipende dai dati
+che deve giudicare *(la prima era `C4`, che duplicava `C1`)*. **La forma sana sarebbe una soglia
+ANCORATA al braccio OFF** — per esempio *«la differenza ON sta sotto un decimo di quella OFF»*, che
+qui darebbe `0.12` contro `0.125`: **passerebbe**, e non si stringerebbe da sola. **Decide Luca.**
+
+**E `P1-sexies` PASS dice che `C1'` DISTINGUE le due forme:** `/W` sta fra `0.62` e `1.44`, `/W^2`
+fra `0.01` e `0.12` — **le due popolazioni non si toccano**, quindi il criterio **misura** la
+differenza fra le due cure, anche se la sua soglia e' mal posta.
+
+**E un numero in piu', che non era un criterio:** `|omega| k2/k77` sul taglio, ON:
+**`x0.897`, `x1.187`, `x0.895`** — **sotto o intorno a `1`**, contro `x5.7`-`x176` di OFF.
+**Omega non cresce piu' al calare di `k`.**
+
+## ❌ **E LA CORREZIONE DELL'ERRORE DI UNITA' (rilievo di Luca), in tre posti**
+
+**Avevo scritto:** *«l'asimmetria e' `0` contro `2.8`, `W^2` ne toglie `2`: **resta `0.8`**»*.
+**Ho sottratto 2 potenze di `W` da 2.8 potenze di `ramp`: due basi diverse.**
+
+```
+W ~ ramp^1.37   ->   W^2 ~ ramp^2.74      inerzia/W^2 ~ ramp^(2.80-2.74) = ramp^0.06
+coppia ~ ramp^0.10                        residuo:  0.06 - 0.10 = -0.04   <- ZERO nel rumore
+```
+
+**E IL DATO LO DICEVA GIA', nel referto che avevo scritto io:** `exp(T1+T3)` e' **piatto** su eta'
+`2..14` (`x1.00`-`x1.08`) mentre `ramp` cresce `x5.20`. Con `0.8` potenze residue varierebbe di
+**`x3.74`**; con `0.06`, di `x1.10`. **La piattezza esclude `0.8` di un fattore quattro.**
+
+> ### ⇒ **`W^2` non e' una correzione parziale: CHIUDE L'ESPONENTE.** La mia frase *«questa cura
+> ### non chiude quello»* era **troppo PESSIMISTA**, non troppo ottimista — ed e' un verso in cui
+> ### sbaglio meno spesso, ma resta un errore.
+
+**Corretto nel commento del codice, nel task history e nella scheda `inerzia-spinoriale`, con la
+versione vecchia leggibile accanto** in tutti e tre.
+
+## 🛑 MI FERMO. Il flag resta **OFF e FUORI dal driver**
+
+**Cosa resta aperto, e non lo tocco:** **perche' la coppia non porta `ramp`** (`^0.15`, `^0.04`).
+**Non e' un difetto dell'inerzia**: riguarda il termine `_tq*ramp` di `:3554` e il peso `ramp_i*ramp_j`
+dentro `B`. **E' una domanda nuova, e va in coda, non in questa cura.**

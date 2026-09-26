@@ -1,0 +1,42 @@
+[on_s11_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[off_s11_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[suW_s11_lunghi] si gira: BLOB DIVERSO (df465759/4e369481)
+[on_s11_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[off_s11_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[suW_s11_corti] si gira: BLOB DIVERSO (df465759/4e369481)
+[on_s12_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[off_s12_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[suW_s12_lunghi] si gira: BLOB DIVERSO (df465759/4e369481)
+[on_s12_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[off_s12_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[suW_s12_corti] si gira: BLOB DIVERSO (df465759/4e369481)
+[pf_s11_lunghi] si gira: BLOB DIVERSO (df465759/f3b718e9)
+[pf_s12_lunghi] si gira: BLOB DIVERSO (df465759/f3b718e9)
+[on_s11_lunghi] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK on_s11_lunghi  modo taglio  n 4252
+[off_s11_lunghi] rc=0 ioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK off_s11_lunghi  modo taglio  n 4252
+[suW_s11_lunghi] rc=0 ioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK suW_s11_lunghi  modo taglio  n 4252
+[on_s11_corti] rc=0 egioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK on_s11_corti  modo taglio  n 4252
+[off_s11_corti] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK off_s11_corti  modo taglio  n 4252
+[suW_s11_corti] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK suW_s11_corti  modo taglio  n 4252
+[on_s12_lunghi] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK on_s12_lunghi  modo taglio  n 4297
+[off_s12_lunghi] rc=0 ioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK off_s12_lunghi  modo taglio  n 4297
+[suW_s12_lunghi] rc=0 ioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK suW_s12_lunghi  modo taglio  n 4297
+[on_s12_corti] rc=0 egioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK on_s12_corti  modo taglio  n 4297
+[off_s12_corti] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK off_s12_corti  modo taglio  n 4297
+[suW_s12_corti] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK suW_s12_corti  modo taglio  n 4297
+[pf_s11_lunghi] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK pf_s11_lunghi  modo taglio  n 4252
+[pf_s12_lunghi] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK pf_s12_lunghi  modo taglio  n 4297

@@ -1,0 +1,168 @@
+====================================================================================================================
+SIGILLO **CURA A** -- `rho_s / W^2` NEL SOLO CONTRASTO   (2026-09-26)
+====================================================================================================================
+
+[on_s11_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[off_s11_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[suW_s11_lunghi] si gira: BLOB DIVERSO (df465759/4e369481)
+[on_s11_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[off_s11_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[suW_s11_corti] si gira: BLOB DIVERSO (df465759/4e369481)
+[on_s12_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[off_s12_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[suW_s12_lunghi] si gira: BLOB DIVERSO (df465759/4e369481)
+[on_s12_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[off_s12_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
+[suW_s12_corti] si gira: BLOB DIVERSO (df465759/4e369481)
+[pf_s11_lunghi] si gira: BLOB DIVERSO (df465759/f3b718e9)
+[pf_s12_lunghi] si gira: BLOB DIVERSO (df465759/f3b718e9)
+[on_s11_lunghi] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK on_s11_lunghi  modo taglio  n 4252
+[off_s11_lunghi] rc=0 ioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK off_s11_lunghi  modo taglio  n 4252
+[suW_s11_lunghi] rc=0 ioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK suW_s11_lunghi  modo taglio  n 4252
+[on_s11_corti] rc=0 egioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK on_s11_corti  modo taglio  n 4252
+[off_s11_corti] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK off_s11_corti  modo taglio  n 4252
+[suW_s11_corti] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK suW_s11_corti  modo taglio  n 4252
+[on_s12_lunghi] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK on_s12_lunghi  modo taglio  n 4297
+[off_s12_lunghi] rc=0 ioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK off_s12_lunghi  modo taglio  n 4297
+[suW_s12_lunghi] rc=0 ioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK suW_s12_lunghi  modo taglio  n 4297
+[on_s12_corti] rc=0 egioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK on_s12_corti  modo taglio  n 4297
+[off_s12_corti] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK off_s12_corti  modo taglio  n 4297
+[suW_s12_corti] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK suW_s12_corti  modo taglio  n 4297
+[pf_s11_lunghi] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK pf_s11_lunghi  modo taglio  n 4252
+[pf_s12_lunghi] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK pf_s12_lunghi  modo taglio  n 4297
+[figli_on_s11] si gira: assente
+[figli_off_s11] si gira: assente
+[figli_on_s12] si gira: assente
+[figli_off_s12] si gira: assente
+[figli_on_s11] rc=0 regioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK figli_on_s11  modo figli  n 4512
+[figli_off_s11] rc=0 egioni = 206   QUOTA = 0.0484   fasi_casuali = False
+OK figli_off_s11  modo figli  n 4470
+[figli_on_s12] rc=0 regioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK figli_on_s12  modo figli  n 4530
+[figli_off_s12] rc=0 egioni = 215   QUOTA = 0.0500   fasi_casuali = False
+OK figli_off_s12  modo figli  n 4513
+
+blob del simulatore      df465759     copia diagnostica 1554e2f9  (2 ancore, GENERATA AL RUN)
+il braccio `/W` viene da 5b87f171^   (PADRE del commit di `_wn * _wn`, NON `HEAD`)  copia 8cc54a47
+il codice PRIMA del flag a2a60534^   (per `C3`)                                      copia bba2644a
+semi [11, 12]   versi ['lunghi', 'corti']   k [77, 20, 8, 4, 2]   bersagli 20   budget figli 120
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 79
+  -> FUORI CONFIGURAZIONE DEL DRIVER: 1 differenze su 79
+       CONTRASTO_INTENSIVO        qui True     driver False
+  ESENZIONE DICHIARATA: il flag in prova NON e' ancora nel driver (entra dopo il sigillo): l'argv ON e' quella del driver PIU' --contrasto-intensivo
+
+====================================================================================================================
+`C1'` -- LE PENDENZE SU `log k`: CONTRASTO contro COPPIA
+====================================================================================================================
+braccio            pend.coppia    pend.contrasto differenza     |omega| k2/k77
+on_s11_lunghi      -0.1900        -0.1784        0.0115         x0.9473
+off_s11_lunghi     -0.1878        1.0630         1.2508         x5.747
+suW_s11_lunghi     -0.1882        0.4353         0.6235         x3.214
+on_s11_corti       -0.3001        -0.1834        0.1167         x0.8969
+off_s11_corti      -0.2983        2.4855         2.7838         x176.4
+suW_s11_corti      -0.2989        1.1442         1.4431         x7.322
+on_s12_lunghi      -0.2507        -0.1988        0.0519         x1.187
+off_s12_lunghi     -0.2570        1.0773         1.3344         x4.448
+suW_s12_lunghi     -0.2511        0.4503         0.7013         x2.861
+on_s12_corti       -0.2279        -0.1744        0.0535         x0.8952
+off_s12_corti      -0.2278        2.4656         2.6934         x151.3
+suW_s12_corti      -0.2276        1.1483         1.3760         x4.922
+pf_s11_lunghi      -0.1878        1.0630         1.2508         x5.747
+pf_s12_lunghi      -0.2570        1.0773         1.3344         x4.448
+
+C1'    FAIL  pendenza del CONTRASTO = quella della COPPIA entro 2x lo spread fra semi
+              ON  (`/W^2`): 0.0115  0.1167  0.0519  0.0535
+              OFF          : 1.2508  2.7838  1.3344  2.6934
+              `/W` (il caso che DEVE fallire): 0.6235  1.4431  0.7013  1.3760
+              spread FRA SEMI (ON): 0.0376   ->  soglia 2x = 0.0752
+
+P1-sexies PASS  IL BRACCIO CON `/W` FALLISCE `C1'` (il caso che deve fallire)
+              `/W`  : 0.6235  1.4431  0.7013  1.3760
+              `/W^2`: 0.0115  0.1167  0.0519  0.0535
+              criterio: **il minimo di `/W` sta SOPRA il massimo di `/W^2`**, cioe' le due
+                popolazioni non si toccano. Se si toccassero, `C1'` non distinguerebbe le
+                due forme, e il suo PASS sarebbe casuale.
+
+C3     PASS  flag SPENTO byte-identico al codice PRECEDENTE (a2a60534^)
+              seme 11: campi 121   DIVERSI 0   solo nuovo nessuno   solo vecchio nessuno
+              seme 12: campi 121   DIVERSI 0   solo nuovo nessuno   solo vecchio nessuno
+
+====================================================================================================================
+`C5` -- IL PAVIMENTO `1e-6`: **IL RISCHIO VERO DI QUESTA CURA**
+====================================================================================================================
+braccio            p5            mediana       p95           min           al pav./nodi
+on_s11_lunghi      0.275446      0.888605      1.95988       0.114564      0/4252
+off_s11_lunghi     13.1114       40.2779       91.6181       5.76025       0/4252
+suW_s11_lunghi     1.95859       5.92769       12.5785       0.812191      0/4252
+on_s11_corti       0.275446      0.888605      1.95988       0.114564      0/4252
+off_s11_corti      13.1114       40.2779       91.6181       5.76025       0/4252
+suW_s11_corti      1.95859       5.92769       12.5785       0.812191      0/4252
+on_s12_lunghi      0.280363      1.00688       2.06797       0.135155      0/4297
+off_s12_lunghi     14.2121       44.9539       103.81        6.39588       0/4297
+suW_s12_lunghi     2.00049       6.68723       13.8899       0.960217      0/4297
+on_s12_corti       0.280363      1.00688       2.06797       0.135155      0/4297
+off_s12_corti      14.2121       44.9539       103.81        6.39588       0/4297
+suW_s12_corti      2.00049       6.68723       13.8899       0.960217      0/4297
+pf_s11_lunghi      13.1114       40.2779       91.6181       5.76025       0/4252
+pf_s12_lunghi      14.2121       44.9539       103.81        6.39588       0/4297
+
+C5     PASS  il pavimento `1e-6` non morde con `/W^2`
+              al passo zero, nodi al pavimento (ON): 0
+              nei casi tagliati, nodi al pavimento (ON, sommati): 0
+                **dividere per `W^2` abbassa l'inerzia DUE volte**: con `/W` il minimo era
+                `0.0655`, quattro ordini sopra `1e-6`. **Qui si misura, non si spera.**
+
+====================================================================================================================
+`F1`/`F2` -- I FIGLI contro i MATURI **DELLO STESSO PASSO** (media geometrica)
+====================================================================================================================
+braccio          eta    campioni c_f/c_m       |om|_f/|om|_m in_f/in_m     ramp p50
+figli_on_s11     2      251      2.43128       1.05226       0.41223       0.05545
+figli_on_s11     8      207      2.49003       1.4252        0.437163      0.184
+figli_on_s11     14     165      2.53499       1.85674       0.450196      0.3122
+figli_off_s11    2      202      8.78744e-06   16381.8       1.54415e-06   0.05367
+figli_off_s11    8      161      0.00050542    48226.2       9.19153e-05   0.1668
+figli_off_s11    14     130      0.00142739    44753.7       0.000265749   0.2795
+figli_on_s12     2      223      2.33072       1.08044       0.414036      0.05315
+figli_on_s12     8      173      2.45292       1.41982       0.437006      0.1767
+figli_on_s12     14     139      2.42205       1.83395       0.443917      0.2925
+figli_off_s12    2      205      7.73359e-06   14287.2       1.3617e-06    0.05382
+figli_off_s12    8      172      0.000498439   52738         9.22191e-05   0.1779
+figli_off_s12    14     131      0.00162712    49249.8       0.000312522   0.2923
+
+F1     PASS  `contrasto_figlio/contrasto_maturo` fra `1.5` e `4` (atteso `~2.5`)
+              ON  (`/W^2`): min 2.331   mediana 2.427   max 2.577   (n=26)
+
+F2     PASS  `|omega|_figlio/|omega|_maturo` < 10 dall'eta' 2
+              ON  (`/W^2`): min 1.052   mediana 1.423   max 1.857
+
+====================================================================================================================
+ESITO: 5/6 PASS
+====================================================================================================================
+
+COSA QUESTO SIGILLO *NON* DICE:
+  - **`R3bis` e' caduto**: la coppia non porta `ramp` (`^0.15`, `^0.04`), quindi l'asimmetria
+    sui figli e' `0` contro `2.8` e `W^2` ne toglie `2`: **resta `0.8`**. Questa cura non
+    chiude quello, ed era scritto PRIMA.
+  - `C1'` (taglio) e `F1` (figli) guardano **due popolazioni diverse** e possono dare esiti
+    diversi. **Se succede si riporta, non si scegle quale contare.**
+  - DUE SEMI: per una barra fra semi servono >= 4 (`P3`).
+  - i 20 bersagli non sono adiacenti, ma possono **condividere un vicino**.

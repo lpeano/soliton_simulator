@@ -77,7 +77,13 @@ stesso passo** — e il referto dice **quale domina**, senza proporre nulla.
 
 ## COSA QUESTA CURA **NON** RISOLVE, e va scritto prima
 
-- **`R3bis` è caduto**: la coppia **non porta `ramp`** (`^0.15`/`^0.04`). L'asimmetria fra coppia e
-  inerzia sui figli è **`0` contro `2.8`**, e `W²` ne toglie `2` — **resta `0.8`**.
+- ~~**`R3bis` è caduto**: l'asimmetria è `0` contro `2.8`, e `W²` ne toglie `2` — **resta
+  `0.8`**.~~ **❌ ERRORE DI UNITÀ MIO, corretto il 2026-09-26 (rilievo di Luca), e la versione
+  vecchia resta leggibile qui sopra:** avevo sottratto **2 potenze di `W`** da **2.8 potenze di
+  `ramp`**. **Il conto giusto:** `W ~ ramp^1.37` → `W² ~ ramp^2.74`, quindi
+  `inerzia/W² ~ ramp^0.06`, e contro la coppia (`ramp^0.10`) il residuo è **`-0.04`: zero entro
+  il rumore.** **E il dato lo diceva già:** `exp(T1+T3)` è **piatto** (`×1.00`-`×1.08`) mentre
+  `ramp` cresce `×5.20` — con `0.8` potenze varierebbe di **`×3.74`**.
+  ⇒ **`W²` chiude l'esponente**, e la mia frase era **troppo pessimista**.
 - **il taglio non è i figli**: `C1'` e `F1` guardano due popolazioni diverse, e possono dare esiti
   diversi. **Se succede, si riporta, non si sceglie quale contare.**

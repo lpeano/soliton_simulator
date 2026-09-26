@@ -1279,8 +1279,16 @@ rende la cura una **rimozione di incoerenza** e non un fattore di scala nuovo.
 > precedente, che l'attribuiva a `peq`.
 >
 > ### ⚠ COSA QUESTA CURA **NON** CHIUDE
-> **La coppia non porta `ramp`** (`^0.15`, `^0.04`, `R2` `0.58`/`0.05`): l'asimmetria di esponenti
-> sui figli e' **`0` contro `2.8`**, e `W^2` ne toglie **`2`** — **resta `0.8`**.
+> ~~L'asimmetria e' `0` contro `2.8`, e `W^2` ne toglie `2`: resta `0.8`.~~
+> **❌ ERRORE DI UNITA' MIO, corretto il 2026-09-26** *(rilievo di Luca; la versione vecchia resta
+> leggibile sopra)*: **2 potenze di `W` non sono 2 potenze di `ramp`.**
+> **IL CONTO GIUSTO:** `W ~ ramp^1.37` -> `W^2 ~ ramp^2.74`, e `inerzia/W^2 ~ ramp^0.06`; la
+> coppia va come `ramp^0.10`, quindi **il residuo e' `-0.04`: ZERO entro il rumore.**
+> **E IL DATO LO DICEVA GIA':** `exp(T1+T3)` **piatto** (`x1.00`-`x1.08`) mentre `ramp` cresce
+> `x5.20` — con `0.8` potenze varierebbe di **`x3.74`**. **La piattezza esclude `0.8`.**
+> ⇒ **`W^2` CHIUDE L'ESPONENTE**, e il sigillo lo conferma: `F1` e `F2` PASS.
+> *(Resta fuori una domanda diversa: **perche' la coppia non porta `ramp`** — riguarda il termine
+> `_tq*ramp`, non l'inerzia.)*
 > **E il rischio vero e' il PAVIMENTO:** dividere due volte abbassa l'inerzia due volte. Con `/W`
 > non mordeva (`min 0.0655`, quattro ordini sopra `1e-6`); con `/W^2` **va misurato** (`C5`).
 > **❌❌ E IL SUO PRIMO RIPIEGO ERA UN DIFETTO, rilevato da Luca prima che il sigillo girasse:**
