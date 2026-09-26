@@ -2378,3 +2378,61 @@ niente.**
 collisione che l'indice esiste per curare. Il pavimento ha quindi **una voce propria**, aperta:
 **`RITMO-PAVIMENTO`**, col criterio di chiusura *(e' un vincolo fisico dichiarato o una difesa?
 `A11`)*.
+
+---
+
+# RISCRIVERE IL SIMULATORE IN Go? — domanda di Luca, 2026-09-27. **Valutato, non deciso**
+
+**Valutazione intera in `doc/VALUTAZIONE_go.md`.** Risposta breve: **no, non oggi — e il motivo non
+e' la velocita'.**
+
+## La prima cosa: **la parte sulla velocita' e' un'INFERENZA, non una misura**
+
+**Non esiste un profilo del simulatore, e non l'ho fatto.** Chiunque dica *«in Go andrebbe N volte
+piu' veloce»* — **io compreso** — sta stimando.
+
+## Quello che invece E' misurato
+
+```
+soliton_simulator.py .... 10 592 righe, 164 funzioni, 1754 chiamate numpy, 54 np.add.at
+strumenti sotto csv/ .... 361, di cui 122 (34 %) dipendono dall'INTROSPEZIONE di Python
+i costi di oggi ......... scena (ii)(a) 25.8 s | Dijkstra su 471k archi 9.1 s | import 1.2 s
+```
+
+**I 122 sono i presidi**, e dipendono da cose che in Go **non esistono**: importare **lo stesso
+modulo due volte** nello stesso processo *(cosi' si confrontano due versioni)*, **eseguire il testo
+del driver fino a un'ancora**, elencare i flag da **`vars(S)`** *(cosi' una cura nuova entra da
+se')*, **sostituire un metodo a runtime** per contarlo — ed e' cosi' che `N5` ha scoperto **oggi**
+che `mitosi()` girava zero volte.
+
+**E i costi misurati non sono costi dell'interprete:** stanno nel **KD-tree** e nel **Dijkstra
+sparso**, che sono **gia' C**. Riscriverli in Go vuol dire re-implementare la parte di numpy e scipy
+che serve, per un guadagno *«pari o meglio, se scritto bene»* — non un ordine di grandezza gratuito.
+
+## I tre costi che non si vedono contando le righe
+
+1. **UNA RISCRITTURA NON PUO' ESSERE BYTE-IDENTICA.** Il punto 1 di ogni sigillo e' *«flag OFF =
+   byte-identico»*, e le firme sono `sha1` **dei byte**: fra due linguaggi l'ordine delle somme
+   cambia l'ultimo bit. **Ogni sigillo andrebbe RISTABILITO, non ri-girato.**
+2. **TUTTI I NUMERI CAMBIANO EPOCA** *(par.9-bis)*: i 12 814 nodi, i 471 143 archi, la `sd` fra
+   semi, le 214 firme di `D32`. **Si riparte dal termine di paragone.**
+3. **I NOVE HOOK andrebbero riscritti**, e sono cio' che questa settimana ha preso quasi ogni
+   difetto. **Durante la riscrittura non ci sono.**
+
+## E il punto che decide: **la velocita' non e' il collo di bottiglia**
+
+Cio' che blocca le tre prove sta in `doc/SMISTAMENTO_run_base.md`: **6 voci `SI`**, e **nessuna e'
+«il simulatore e' lento»**. Sono difetti di **legge** e di **misura**.
+
+> **Una riscrittura consumerebbe mesi e azzererebbe i sigilli senza spostare nessuno dei sei.**
+> **`STANDARD 10` applicato al progetto:** non aumenta il numero delle leggi — **aumenta il numero
+> delle cose da ri-dimostrare.**
+
+**Che cosa farei invece:** ① **un profilo** *(senza, ogni scelta e' un'opinione)*; ② **kernel nativi
+mirati** sui pochi punti caldi, lasciando scheletro e presidi dove sono, e si sigilla come qualunque
+cura; ③ se il costo sono i **processi** dei sigilli, riusarli dove `STANDARD 1` lo permette; ④ **se
+un giorno servisse Go**, dopo che le tre prove sono eseguibili: allora avrebbe **un termine di
+paragone vero** invece di essere il termine di paragone di se stessa.
+
+**Voce nell'indice: `RISCRITTURA-GO`, `da-decidere`**, col criterio — **un profilo che mostri il
+tempo in codice Python e non in kernel C.**
