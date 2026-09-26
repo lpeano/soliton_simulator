@@ -197,6 +197,15 @@ if __name__ == "__main__":
     # ---------------------------------------------------------------- T2
     a2 = argv_da(os.path.join(RADICE, DRIVER), ["--scena=" + SCENA2])
     S2, _a2 = _cli_flag.carica_dal_cli(a2, nome="sim_t2")
+    # ⚠ `_NMASSE_VIDEO` VA RIEMPITO COME FA IL DRIVER, e non e' un dettaglio: quelle tre
+    #   righe stanno DOPO l'ancora `_applica_flag`, quindi `argv_da` NON le esegue. Senza
+    #   questo, la scena girava col `sep` di MODULO (`3.0`) invece di quello del driver
+    #   (`4.0`), e T2 riportava **2124** nodi dove il driver ne fa **4256**: un numero
+    #   misurato in una configurazione DIVERSA da quella dichiarata (la famiglia di
+    #   `CONFIG-1`). Trovato confrontando il referto col giro corto del driver.
+    S2._NMASSE_VIDEO["n"] = max(2, int(getattr(_a2, "nmasse", 2)))
+    S2._NMASSE_VIDEO["sep"] = float(getattr(_a2, "sep", 3.0))
+    S2._NMASSE_VIDEO["size"] = None
     n_flag = int(S2.net.n)
     S2.avvia_test(SCENA2)()
     n_scena = int(S2.net.n)
@@ -211,7 +220,8 @@ if __name__ == "__main__":
     P("")
     P("  T2  CON LA SCENA (ii) IL VUOTO E' UNO SOLO, E LO FA LA SCENA")
     P("        net.n dopo `_applica_flag` .......... %d   (atteso 0)" % n_flag)
-    P("        net.n dopo `avvia_test` ............. %d   (atteso > 0)" % n_scena)
+    P("        net.n dopo `avvia_test` ............. %d   (atteso > 0, e con il"
+      " `sep` del DRIVER: %.3f)" % (n_scena, S2._NMASSE_VIDEO["sep"]))
     P("        `--nodi 0` nell'argv ................ %s"
       % ("--nodi" in a2 and a2[a2.index("--nodi") + 1]))
     P("        AST di `_semina_masse_coerenti` intatto %s   (contro %s)"
