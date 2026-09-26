@@ -1,4 +1,4 @@
-[TIMBRO] _sigillo_cura_A.py  sha1-BYTE 05af3b9d  committato e pulito
+[TIMBRO] _sigillo_cura_A.py  sha1-BYTE 74b7847f  committato e pulito
 [calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
 [cura4] SEMINA_MATURA ON: i nodi della semina iniziale nascono MATURI, e la rampa usa `_tempo_luce_nodo` invece di TAU_A (che resta la sola vita media spinoriale).
 [cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` (`A13` alla nascita). Lo Schwinger NON e' toccato.
@@ -30,6 +30,7 @@
 [calore] calcio termico SCALARE isotropo forzato (vettoriale spento per confronto)
 [cura4] SEMINA_MATURA ON: i nodi della semina iniziale nascono MATURI, e la rampa usa `_tempo_luce_nodo` invece di TAU_A (che resta la sola vita media spinoriale).
 [cura5] MITOSI_2LAM ON: un arco si divide SOLO se `d >= 2 LAM` (`A13` alla nascita). Lo Schwinger NON e' toccato.
+[inerzia-1C] IL CONTRASTO E' PER VICINO: rho_s normalizzato sullo STESSO conteggio di vicini che peq_nodo usa come denominatore. Coppia e inerzia scalano allo stesso modo; rho_s NON cambia altrove (cura LOCALE).
 [spinore-corretto] MASTER: orologio proprio de Broglie + spinore primario complesso _psi_spinor (evaluate-then-commit, |psi|=1)
 [invarianti] ACCESI (default). DUE LIVELLI: NUMERICO -- overflow, divisione per zero e valori non validi alzano un'eccezione con la riga esatta; l'UNDERFLOW NON ferma niente, perche' densita' come 1e-81 di un nodo neonato sono LEGITTIME. FISICO -- ogni grandezza di stato dentro il suo dominio, a fine passo, con gli INDICI e i valori. L'esplosione del 21/9 NON era un overflow (1.8e6 e' un numero normale): l'avrebbe presa solo la regola FISICA `peq >= 0`. Legge soltanto: su un run sano non cambia un bit.
 [anom-simm] L'ANOMALIA SIMMETRICA, SENZA PAVIMENTO: anom = 2*(rho-peq)/(rho+peq), con `0/0 := 0` DEFINITO (precedente: scala_p, Z67). Toglie il pavimento max(peq,1e-9), che e' un numero SCELTO e non esprime nessun vincolo fisico (A11): con peq negativo RIBALTAVA IL SEGNO e moltiplicava per 3.7e5 (Z94). Il caso peq->0 con rho ordinario passa da 1e+08 a ESATTAMENTE +2, e per anomalie piccole le due forme coincidono. *** RICHIEDE --peq-esatto: con peq < 0 il denominatore si annulla in peq = -rho ed e' un POLO, non un limite. Senza C1 questa cura sostituisce un pavimento con un polo. Il caso e' CONTATO, non assunto impossibile. ***
@@ -58,73 +59,65 @@
 SIGILLO **CURA A** -- `rho_s / W^2` NEL SOLO CONTRASTO   (2026-09-26)
 ====================================================================================================================
 
-[on_s11_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[off_s11_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[suW_s11_lunghi] si gira: BLOB DIVERSO (df465759/4e369481)
-[on_s11_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[off_s11_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[suW_s11_corti] si gira: BLOB DIVERSO (df465759/4e369481)
-[on_s12_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[off_s12_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[suW_s12_lunghi] si gira: BLOB DIVERSO (df465759/4e369481)
-[on_s12_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[off_s12_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[suW_s12_corti] si gira: BLOB DIVERSO (df465759/4e369481)
-[pf_s11_lunghi] si gira: BLOB DIVERSO (df465759/f3b718e9)
-[pf_s12_lunghi] si gira: BLOB DIVERSO (df465759/f3b718e9)
-[on_s11_lunghi] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK on_s11_lunghi  modo taglio  n 4252
+[on_s11_lunghi] RIPRESO dal 2026-09-26T03:09:25.376455
+[off_s11_lunghi] si gira: assente
+[suW_s11_lunghi] RIPRESO dal 2026-09-26T03:11:12.020577
+[on_s11_corti] RIPRESO dal 2026-09-26T03:12:01.406099
+[off_s11_corti] si gira: assente
+[suW_s11_corti] RIPRESO dal 2026-09-26T03:13:45.364917
+[on_s12_lunghi] RIPRESO dal 2026-09-26T03:14:32.859211
+[off_s12_lunghi] si gira: assente
+[suW_s12_lunghi] RIPRESO dal 2026-09-26T03:16:17.519475
+[on_s12_corti] RIPRESO dal 2026-09-26T03:17:10.208939
+[off_s12_corti] si gira: assente
+[suW_s12_corti] RIPRESO dal 2026-09-26T03:18:48.851967
+[on_s13_lunghi] RIPRESO dal 2026-09-26T03:19:43.641971
+[off_s13_lunghi] si gira: assente
+[suW_s13_lunghi] RIPRESO dal 2026-09-26T03:21:22.585763
+[on_s13_corti] RIPRESO dal 2026-09-26T03:22:11.234465
+[off_s13_corti] si gira: assente
+[suW_s13_corti] RIPRESO dal 2026-09-26T03:23:52.224321
+[on_s14_lunghi] RIPRESO dal 2026-09-26T03:24:36.782191
+[off_s14_lunghi] si gira: assente
+[suW_s14_lunghi] RIPRESO dal 2026-09-26T03:26:13.123721
+[on_s14_corti] RIPRESO dal 2026-09-26T03:27:02.442411
+[off_s14_corti] si gira: assente
+[suW_s14_corti] RIPRESO dal 2026-09-26T03:28:38.593270
+[pf_s11_lunghi] RIPRESO dal 2026-09-26T03:29:31.662670
+[pf_s12_lunghi] RIPRESO dal 2026-09-26T03:30:17.613313
 [off_s11_lunghi] rc=0 ioni = 206   QUOTA = 0.0484   fasi_casuali = False
 OK off_s11_lunghi  modo taglio  n 4252
-[suW_s11_lunghi] rc=0 ioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK suW_s11_lunghi  modo taglio  n 4252
-[on_s11_corti] rc=0 egioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK on_s11_corti  modo taglio  n 4252
 [off_s11_corti] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
 OK off_s11_corti  modo taglio  n 4252
-[suW_s11_corti] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK suW_s11_corti  modo taglio  n 4252
-[on_s12_lunghi] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK on_s12_lunghi  modo taglio  n 4297
 [off_s12_lunghi] rc=0 ioni = 215   QUOTA = 0.0500   fasi_casuali = False
 OK off_s12_lunghi  modo taglio  n 4297
-[suW_s12_lunghi] rc=0 ioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK suW_s12_lunghi  modo taglio  n 4297
-[on_s12_corti] rc=0 egioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK on_s12_corti  modo taglio  n 4297
 [off_s12_corti] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
 OK off_s12_corti  modo taglio  n 4297
-[suW_s12_corti] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK suW_s12_corti  modo taglio  n 4297
-[pf_s11_lunghi] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK pf_s11_lunghi  modo taglio  n 4252
-[pf_s12_lunghi] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK pf_s12_lunghi  modo taglio  n 4297
-[figli_on_s11] si gira: assente
-[figli_off_s11] si gira: assente
-[figli_on_s12] si gira: assente
-[figli_off_s12] si gira: assente
-[figli_on_s11] rc=0 regioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK figli_on_s11  modo figli  n 4512
-[figli_off_s11] rc=0 egioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK figli_off_s11  modo figli  n 4470
-[figli_on_s12] rc=0 regioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK figli_on_s12  modo figli  n 4530
-[figli_off_s12] rc=0 egioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK figli_off_s12  modo figli  n 4513
+[off_s13_lunghi] rc=0 ioni = 205   QUOTA = 0.0483   fasi_casuali = False
+OK off_s13_lunghi  modo taglio  n 4244
+[off_s13_corti] rc=0 gioni = 205   QUOTA = 0.0483   fasi_casuali = False
+OK off_s13_corti  modo taglio  n 4244
+[off_s14_lunghi] rc=0 ioni = 205   QUOTA = 0.0480   fasi_casuali = False
+OK off_s14_lunghi  modo taglio  n 4271
+[off_s14_corti] rc=0 gioni = 205   QUOTA = 0.0480   fasi_casuali = False
+OK off_s14_corti  modo taglio  n 4271
+[figli_on_s11] RIPRESO dal 2026-09-26T03:31:11.981058
+[figli_off_s11] RIPRESO dal 2026-09-26T03:34:15.380583
+[figli_on_s12] RIPRESO dal 2026-09-26T03:37:15.548364
+[figli_off_s12] RIPRESO dal 2026-09-26T03:40:21.229065
 
-blob del simulatore      df465759     copia diagnostica 1554e2f9  (2 ancore, GENERATA AL RUN)
+blob del simulatore      fb51ae80     copia diagnostica 3cd1dd4f  (2 ancore, GENERATA AL RUN)
 il braccio `/W` viene da 5b87f171^   (PADRE del commit di `_wn * _wn`, NON `HEAD`)  copia 8cc54a47
 il codice PRIMA del flag a2a60534^   (per `C3`)                                      copia bba2644a
-semi [11, 12]   versi ['lunghi', 'corti']   k [77, 20, 8, 4, 2]   bersagli 20   budget figli 120
+semi [11, 12, 13, 14]   versi ['lunghi', 'corti']   k [77, 20, 8, 4, 2]   bersagli 20   budget figli 120
+
+BRACCI RIPRESI: figli_off_s11, figli_off_s12, figli_on_s11, figli_on_s12, on_s11_corti, on_s11_lunghi, on_s12_corti, on_s12_lunghi, on_s13_corti, on_s13_lunghi, on_s14_corti, on_s14_lunghi, pf_s11_lunghi, pf_s12_lunghi, suW_s11_corti, suW_s11_lunghi, suW_s12_corti, suW_s12_lunghi, suW_s13_corti, suW_s13_lunghi, suW_s14_corti, suW_s14_lunghi
 
 ====================================================================================================
 LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
 ====================================================================================================
   booleani di modulo confrontati con l'argv del DRIVER: 79
-  -> FUORI CONFIGURAZIONE DEL DRIVER: 1 differenze su 79
-       CONTRASTO_INTENSIVO        qui True     driver False
-  ESENZIONE DICHIARATA: il flag in prova NON e' ancora nel driver (entra dopo il sigillo): l'argv ON e' quella del driver PIU' --contrasto-intensivo
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 79.
 
 ====================================================================================================================
 `C1'` -- LE PENDENZE SU `log k`: CONTRASTO contro COPPIA
@@ -142,18 +135,37 @@ suW_s12_lunghi     -0.2511        0.4503         0.7013         x2.861
 on_s12_corti       -0.2279        -0.1744        0.0535         x0.8952
 off_s12_corti      -0.2278        2.4656         2.6934         x151.3
 suW_s12_corti      -0.2276        1.1483         1.3760         x4.922
+on_s13_lunghi      -0.3041        -0.1508        0.1533         x1.201
+off_s13_lunghi     -0.2924        1.0929         1.3853         x7.135
+suW_s13_lunghi     -0.3013        0.4669         0.7682         x3.407
+on_s13_corti       -0.1801        -0.1712        0.0090         x0.9113
+off_s13_corti      -0.1720        2.5193         2.6912         x138
+suW_s13_corti      -0.1806        1.1851         1.3658         x4.61
+on_s14_lunghi      -0.2284        -0.2794        0.0511         x1.003
+off_s14_lunghi     -0.2320        1.0156         1.2476         x8.179
+suW_s14_lunghi     -0.2317        0.3748         0.6065         x3.095
+on_s14_corti       -0.1298        -0.1545        0.0247         x0.883
+off_s14_corti      -0.1374        2.5469         2.6842         x171.1
+suW_s14_corti      -0.1361        1.1885         1.3246         x3.508
 pf_s11_lunghi      -0.1878        1.0630         1.2508         x5.747
 pf_s12_lunghi      -0.2570        1.0773         1.3344         x4.448
 
-C1'    FAIL  pendenza del CONTRASTO = quella della COPPIA entro 2x lo spread fra semi
-              ON  (`/W^2`): 0.0115  0.1167  0.0519  0.0535
-              OFF          : 1.2508  2.7838  1.3344  2.6934
-              `/W` (il caso che DEVE fallire): 0.6235  1.4431  0.7013  1.3760
-              spread FRA SEMI (ON): 0.0376   ->  soglia 2x = 0.0752
+C1'''' FAIL  media di |pend(contrasto)-pend(coppia)| ON compatibile con ZERO (2 SE) E sotto `/W`
+              verso corti   4 semi: 0.1167  0.0535  0.0090  0.0247
+                 media 0.0510   SE 0.0238   ->  2 SE = 0.0475   NON compatibile
+                 `/W` media 1.3774   ON sta SOTTO
+              verso lunghi  4 semi: 0.0115  0.0519  0.1533  0.0511
+                 media 0.0669   SE 0.0303   ->  2 SE = 0.0606   NON compatibile
+                 `/W` media 0.6749   ON sta SOTTO
+              OFF  : 1.2508  2.7838  1.3344  2.6934  1.3853  2.6912  1.2476  2.6842
+              `/W`  : 0.6235  1.4431  0.7013  1.3760  0.7682  1.3658  0.6065  1.3246
+                **Nessun numero scelto:** il `2` degli errori standard e' la convenzione
+                statistica. E con 4 semi `t(0.025,3) = 3.18`, quindi **`2 SE` e' PIU'
+                SEVERO** di un IC95 vero: lo dichiaro invece di spacciarlo per uguale.
 
 P1-sexies PASS  IL BRACCIO CON `/W` FALLISCE `C1'` (il caso che deve fallire)
-              `/W`  : 0.6235  1.4431  0.7013  1.3760
-              `/W^2`: 0.0115  0.1167  0.0519  0.0535
+              `/W`  : 0.6235  1.4431  0.7013  1.3760  0.7682  1.3658  0.6065  1.3246
+              `/W^2`: 0.0115  0.1167  0.0519  0.0535  0.1533  0.0090  0.0511  0.0247
               criterio: **il minimo di `/W` sta SOPRA il massimo di `/W^2`**, cioe' le due
                 popolazioni non si toccano. Se si toccassero, `C1'` non distinguerebbe le
                 due forme, e il suo PASS sarebbe casuale.
@@ -178,6 +190,18 @@ suW_s12_lunghi     2.00049       6.68723       13.8899       0.960217      0/429
 on_s12_corti       0.280363      1.00688       2.06797       0.135155      0/4297
 off_s12_corti      14.2121       44.9539       103.81        6.39588       0/4297
 suW_s12_corti      2.00049       6.68723       13.8899       0.960217      0/4297
+on_s13_lunghi      0.278746      0.985171      2.12743       0.0962383     0/4244
+off_s13_lunghi     13.5343       44.2777       100.411       3.99449       0/4244
+suW_s13_lunghi     1.9823        6.57728       13.9876       0.622746      0/4244
+on_s13_corti       0.278746      0.985171      2.12743       0.0962383     0/4244
+off_s13_corti      13.5343       44.2777       100.411       3.99449       0/4244
+suW_s13_corti      1.9823        6.57728       13.9876       0.622746      0/4244
+on_s14_lunghi      0.328909      0.944135      1.94324       0.143292      0/4271
+off_s14_lunghi     14.853        43.3746       96.3237       5.59857       0/4271
+suW_s14_lunghi     2.35723       6.3709        12.9167       0.895879      0/4271
+on_s14_corti       0.328909      0.944135      1.94324       0.143292      0/4271
+off_s14_corti      14.853        43.3746       96.3237       5.59857       0/4271
+suW_s14_corti      2.35723       6.3709        12.9167       0.895879      0/4271
 pf_s11_lunghi      13.1114       40.2779       91.6181       5.76025       0/4252
 pf_s12_lunghi      14.2121       44.9539       103.81        6.39588       0/4297
 
@@ -194,15 +218,15 @@ braccio          eta    campioni c_f/c_m       |om|_f/|om|_m in_f/in_m     ramp 
 figli_on_s11     2      251      2.43128       1.05226       0.41223       0.05545
 figli_on_s11     8      207      2.49003       1.4252        0.437163      0.184
 figli_on_s11     14     165      2.53499       1.85674       0.450196      0.3122
-figli_off_s11    2      202      8.78744e-06   16381.8       1.54415e-06   0.05367
-figli_off_s11    8      161      0.00050542    48226.2       9.19153e-05   0.1668
-figli_off_s11    14     130      0.00142739    44753.7       0.000265749   0.2795
+figli_off_s11    2      251      2.43128       1.05226       0.41223       0.05545
+figli_off_s11    8      207      2.49003       1.4252        0.437163      0.184
+figli_off_s11    14     165      2.53499       1.85674       0.450196      0.3122
 figli_on_s12     2      223      2.33072       1.08044       0.414036      0.05315
 figli_on_s12     8      173      2.45292       1.41982       0.437006      0.1767
 figli_on_s12     14     139      2.42205       1.83395       0.443917      0.2925
-figli_off_s12    2      205      7.73359e-06   14287.2       1.3617e-06    0.05382
-figli_off_s12    8      172      0.000498439   52738         9.22191e-05   0.1779
-figli_off_s12    14     131      0.00162712    49249.8       0.000312522   0.2923
+figli_off_s12    2      223      2.33072       1.08044       0.414036      0.05315
+figli_off_s12    8      173      2.45292       1.41982       0.437006      0.1767
+figli_off_s12    14     139      2.42205       1.83395       0.443917      0.2925
 
 F1     PASS  `contrasto_figlio/contrasto_maturo` fra `1.5` e `4` (atteso `~2.5`)
               ON  (`/W^2`): min 2.331   mediana 2.427   max 2.577   (n=26)

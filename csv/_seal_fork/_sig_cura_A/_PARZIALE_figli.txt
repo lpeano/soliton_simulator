@@ -1,54 +1,46 @@
-[on_s11_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[off_s11_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[suW_s11_lunghi] si gira: BLOB DIVERSO (df465759/4e369481)
-[on_s11_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[off_s11_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[suW_s11_corti] si gira: BLOB DIVERSO (df465759/4e369481)
-[on_s12_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[off_s12_lunghi] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[suW_s12_lunghi] si gira: BLOB DIVERSO (df465759/4e369481)
-[on_s12_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[off_s12_corti] si gira: BLOB DIVERSO (df465759/f5bcdc7b)
-[suW_s12_corti] si gira: BLOB DIVERSO (df465759/4e369481)
-[pf_s11_lunghi] si gira: BLOB DIVERSO (df465759/f3b718e9)
-[pf_s12_lunghi] si gira: BLOB DIVERSO (df465759/f3b718e9)
-[on_s11_lunghi] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK on_s11_lunghi  modo taglio  n 4252
+[on_s11_lunghi] RIPRESO dal 2026-09-26T03:09:25.376455
+[off_s11_lunghi] si gira: assente
+[suW_s11_lunghi] RIPRESO dal 2026-09-26T03:11:12.020577
+[on_s11_corti] RIPRESO dal 2026-09-26T03:12:01.406099
+[off_s11_corti] si gira: assente
+[suW_s11_corti] RIPRESO dal 2026-09-26T03:13:45.364917
+[on_s12_lunghi] RIPRESO dal 2026-09-26T03:14:32.859211
+[off_s12_lunghi] si gira: assente
+[suW_s12_lunghi] RIPRESO dal 2026-09-26T03:16:17.519475
+[on_s12_corti] RIPRESO dal 2026-09-26T03:17:10.208939
+[off_s12_corti] si gira: assente
+[suW_s12_corti] RIPRESO dal 2026-09-26T03:18:48.851967
+[on_s13_lunghi] RIPRESO dal 2026-09-26T03:19:43.641971
+[off_s13_lunghi] si gira: assente
+[suW_s13_lunghi] RIPRESO dal 2026-09-26T03:21:22.585763
+[on_s13_corti] RIPRESO dal 2026-09-26T03:22:11.234465
+[off_s13_corti] si gira: assente
+[suW_s13_corti] RIPRESO dal 2026-09-26T03:23:52.224321
+[on_s14_lunghi] RIPRESO dal 2026-09-26T03:24:36.782191
+[off_s14_lunghi] si gira: assente
+[suW_s14_lunghi] RIPRESO dal 2026-09-26T03:26:13.123721
+[on_s14_corti] RIPRESO dal 2026-09-26T03:27:02.442411
+[off_s14_corti] si gira: assente
+[suW_s14_corti] RIPRESO dal 2026-09-26T03:28:38.593270
+[pf_s11_lunghi] RIPRESO dal 2026-09-26T03:29:31.662670
+[pf_s12_lunghi] RIPRESO dal 2026-09-26T03:30:17.613313
 [off_s11_lunghi] rc=0 ioni = 206   QUOTA = 0.0484   fasi_casuali = False
 OK off_s11_lunghi  modo taglio  n 4252
-[suW_s11_lunghi] rc=0 ioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK suW_s11_lunghi  modo taglio  n 4252
-[on_s11_corti] rc=0 egioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK on_s11_corti  modo taglio  n 4252
 [off_s11_corti] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
 OK off_s11_corti  modo taglio  n 4252
-[suW_s11_corti] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK suW_s11_corti  modo taglio  n 4252
-[on_s12_lunghi] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK on_s12_lunghi  modo taglio  n 4297
 [off_s12_lunghi] rc=0 ioni = 215   QUOTA = 0.0500   fasi_casuali = False
 OK off_s12_lunghi  modo taglio  n 4297
-[suW_s12_lunghi] rc=0 ioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK suW_s12_lunghi  modo taglio  n 4297
-[on_s12_corti] rc=0 egioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK on_s12_corti  modo taglio  n 4297
 [off_s12_corti] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
 OK off_s12_corti  modo taglio  n 4297
-[suW_s12_corti] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK suW_s12_corti  modo taglio  n 4297
-[pf_s11_lunghi] rc=0 gioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK pf_s11_lunghi  modo taglio  n 4252
-[pf_s12_lunghi] rc=0 gioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK pf_s12_lunghi  modo taglio  n 4297
-[figli_on_s11] si gira: assente
-[figli_off_s11] si gira: assente
-[figli_on_s12] si gira: assente
-[figli_off_s12] si gira: assente
-[figli_on_s11] rc=0 regioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK figli_on_s11  modo figli  n 4512
-[figli_off_s11] rc=0 egioni = 206   QUOTA = 0.0484   fasi_casuali = False
-OK figli_off_s11  modo figli  n 4470
-[figli_on_s12] rc=0 regioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK figli_on_s12  modo figli  n 4530
-[figli_off_s12] rc=0 egioni = 215   QUOTA = 0.0500   fasi_casuali = False
-OK figli_off_s12  modo figli  n 4513
+[off_s13_lunghi] rc=0 ioni = 205   QUOTA = 0.0483   fasi_casuali = False
+OK off_s13_lunghi  modo taglio  n 4244
+[off_s13_corti] rc=0 gioni = 205   QUOTA = 0.0483   fasi_casuali = False
+OK off_s13_corti  modo taglio  n 4244
+[off_s14_lunghi] rc=0 ioni = 205   QUOTA = 0.0480   fasi_casuali = False
+OK off_s14_lunghi  modo taglio  n 4271
+[off_s14_corti] rc=0 gioni = 205   QUOTA = 0.0480   fasi_casuali = False
+OK off_s14_corti  modo taglio  n 4271
+[figli_on_s11] RIPRESO dal 2026-09-26T03:31:11.981058
+[figli_off_s11] RIPRESO dal 2026-09-26T03:34:15.380583
+[figli_on_s12] RIPRESO dal 2026-09-26T03:37:15.548364
+[figli_off_s12] RIPRESO dal 2026-09-26T03:40:21.229065

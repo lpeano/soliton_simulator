@@ -19045,3 +19045,92 @@ versione vecchia leggibile accanto** in tutti e tre.
 **Cosa resta aperto, e non lo tocco:** **perche' la coppia non porta `ramp`** (`^0.15`, `^0.04`).
 **Non e' un difetto dell'inerzia**: riguarda il termine `_tq*ramp` di `:3554` e il peso `ramp_i*ramp_j`
 dentro `B`. **E' una domanda nuova, e va in coda, non in questa cura.**
+
+
+---
+
+# ⚖️ **`C1 a 4 semi` A 4 SEMI: `FAIL` PER UN PELO, E IL RESIDUO VALE `~0.06`** *(2026-09-26)*
+
+*(`csv/_seal_fork/_sig_cura_A/SIGILLO_cura_A.txt`. Criterio di Luca, committato **prima** in
+`4c104cf`. Esito complessivo **`5/6`**.)*
+
+```
+verso corti    4 semi: 0.1167  0.0535  0.0090  0.0247
+   media 0.0510   SE 0.0238   ->  2 SE = 0.0475      NON compatibile con zero
+   `/W` media 1.3774      ON sta SOTTO
+verso lunghi   4 semi: 0.0115  0.0519  0.1533  0.0511
+   media 0.0669   SE 0.0303   ->  2 SE = 0.0606      NON compatibile con zero
+   `/W` media 0.6749      ON sta SOTTO
+OFF: 1.2508  2.7838  1.3344  2.6934  1.3853  2.6912  1.2476  2.6842
+```
+
+## **`(b)` PASSA IN ENTRAMBI I VERSI, `(a)` FALLISCE PER IL 7 E IL 10 %**
+
+**`(b)`: `ON` sta sotto `/W`** di un fattore **`27`** *(corti)* e **`10`** *(lunghi)*, e sotto `OFF`
+di un fattore **`20`-`50`**. **La cura funziona, e il criterio lo dice.**
+
+**`(a)`: la media e' a `2.1` e `2.2` SE da zero**, non a `≤ 2`. `0.0510` contro `0.0475`,
+`0.0669` contro `0.0606`. **Il residuo NON e' compatibile con zero — ed e' un risultato, non un
+intoppo.**
+
+## 🎯 **E IL NUMERO DEL RESIDUO E' LO STESSO ORDINE CHE L'ARITMETICA DEGLI ESPONENTI PREVEDEVA**
+
+```
+dall'aritmetica (sui FIGLI):     inerzia/W^2 ~ ramp^(2.80 - 2.74) = ramp^0.06
+misurato ora (sul TAGLIO):       residuo di pendenza  0.051  e  0.067
+```
+
+> ### **`~0.06` in entrambi i casi.** Il residuo non sembra rumore: sembra **cio' che resta perche'
+> ### `W` non e' esattamente `rho^(1/2)`** — `rho ~ ramp^2.74` e `W ~ ramp^1.37` danno `2.74/1.37 =
+> ### 2.00` **arrotondato**, e la differenza fra `2.80` (inerzia) e `2.74` (`W^2`) e' proprio `0.06`.
+
+**⚠ E QUI MI FERMO PRIMA DI DIRE TROPPO, perche' oggi ho gia' sbagliato due volte in questo modo:**
+i due `0.06` sono **grandezze DIVERSE su POPOLAZIONI DIVERSE** — uno e' un esponente in `ramp` sui
+**figli**, l'altro una differenza di pendenza in `k` sul **taglio**. **E' una coincidenza di ORDINE
+DI GRANDEZZA che sostiene il quadro, NON un'identita'.** Chiamarla conferma sarebbe l'errore di
+categoria che Luca mi ha corretto stamattina.
+
+## ✅ GLI ALTRI CINQUE
+
+```
+P1-sexies  PASS   `/W` sta fra 0.6065 e 1.4431, `/W^2` fra 0.0090 e 0.1533: NON si toccano
+C3         PASS   flag spento byte-identico al codice PRECEDENTE (a2a60534^)
+C5         PASS   il pavimento non morde
+F1         PASS   contrasto figlio/maturo 2.331-2.577, previsto 2.4567
+F2         PASS   |omega| figlio/maturo 1.05-1.86, contro 16382-52738 di OFF
+```
+
+## ❌❌ **E TRE DIFETTI MIEI, di cui uno GROSSO, nei due referti precedenti**
+
+**① I BRACCI `off_*` GIRAVANO COL FLAG ACCESO.** Appena la cura e' entrata nel driver,
+`ARGV_OFF = list(ARGV)` **conteneva `--contrasto-intensivo`**: il braccio spento era **un secondo
+braccio acceso**, e i due stampavano numeri **identici riga per riga**.
+
+> ### **E' il difetto del DEFAULT RIBALTATO del par.9**, in veste nuova: *«quando si ribalta un
+> ### default, si cercano TUTTI i punti che ottenevano il vecchio comportamento per OMISSIONE»*.
+> **E quel paragrafo l'ho citato IO, stamattina**, per spiegare perche' il driver non puo' dare il
+> braccio OFF di un'obbligatoria. **L'ho scritto e non l'ho applicato al mio stesso sigillo.**
+> Ora si usa `senza()`, che **asserisce** che l'opzione ci fosse.
+
+**② La statistica era su OTTO bracci, non su QUATTRO SEMI** *(`4 semi x 2 versi` mescolati:
+errore di popolazione, `A3`)*. **Ora per verso.**
+**③ `C3` girava su 4 semi mentre i bracci `pf_*` esistono solo su 2** -> `FAIL` **per un difetto
+di ciclo**. Un `FAIL` che viene da un braccio non lanciato **non e' un riscontro**.
+
+## ❌ **E UN DIFETTO DEL MIO PROCESSO, che e' la causa del giro a vuoto**
+
+**Il primo tentativo di patch e' fallito su un'ancora MENTRE GIRAVA IN BACKGROUND.** Non ho visto
+l'`AssertionError`, ho creduto di aver corretto, **il commit non e' passato** *(niente da
+committare)*, e **ho letto un referto del codice VECCHIO** riferendo numeri che non appartenevano a
+nessuna versione corretta.
+
+> ### **LE PATCH SI LANCIANO IN PRIMO PIANO: un patch script in background e' un `assert` che
+> ### nessuno legge.** E il `[TIMBRO] committato e pulito` in testa al log **lo diceva** — un
+> sigillo che gira su un file identico a `HEAD`, dopo che credevo di averlo modificato, **e' la
+> prova che la modifica non c'e'**.
+
+## ⚠ **E UN LIMITE DELLA RIPRESA, che ho costruito io ieri**
+
+Ho dovuto **cancellare a mano** i json dei bracci `off_*`: portavano **il blob giusto con la
+configurazione sbagliata**. **Il blob certifica il CODICE, non l'ARGV**, e la ripresa si fida del
+blob. **-> voce `RIPRESA-ARGV` in coda.**
