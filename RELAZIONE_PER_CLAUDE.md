@@ -1666,3 +1666,46 @@ vivo**, perche' dice *come si legge*, non *che cosa e' successo un giorno.
 **PERCHE' NON E' ESTETICA, ed e' scritto nella proposta:** la relazione e' il file che una sessione
 nuova legge **per primo**, e a 20436 righe **non la leggeva nessuno per intero** — quindi il suo
 scopo era **gia' perso**. L'archivio lo restituisce, e `git log` resta l'indice.
+
+## ② `par.9` esce da `CLAUDE.md`: **671 righe di FATTI, ora ordinate PER FUNZIONE**
+
+**Il numero che decideva, e adesso e' misurato:** `par.9` era **669 righe di corpo su 1575**, e
+**non era una regola: erano FATTI verificati sul codice**. Ora sono `doc/FATTI_dal_codice.md`.
+
+**LA MODIFICA DI LUCA (punto `e`) E' L'ORDINAMENTO PER FUNZIONE**, e non e' cosmetica: prima un
+fatto su `ritmo()` stava in mezzo a un fatto su `mitosi()` e a un presidio di statistica, e chi
+apriva `ritmo()` **non aveva modo di sapere che ce n'era uno**.
+
+```
+punti di primo livello di par.9 ........ 53
+funzioni con almeno un fatto ........... 11
+righe di par.9 NON ritrovate nell'uscita  0      <- lo spostamento e' VERBATIM, e verificato
+```
+
+| funzione | riga di oggi (AST) | fatti |
+|---|--:|--:|
+| `rapporto_guardie` | 606 | 1 |
+| `_eredita_spinore_figli` | 1933 | 1 |
+| `ritmo` | 2983 | 3 |
+| `_passo_spinoriale` | 3100 | **13** |
+| `salva_stato` | 4617 | 3 |
+| `_cs_nodo` | 4734 | 2 |
+| `_bloch_ritardato` | 4789 | 2 |
+| `_tempo_luce_nodo` | 4947 | 3 |
+| `_coppia_interferenza` | 5019 | 1 |
+| `mitosi` | 5871 | 2 |
+| `memoria_hebbiana_moto` | 6547 | 3 |
+
+**LE RIGHE SONO MISURATE DALL'AST, non ricopiate** — e questo cura un difetto che `par.9`
+denunciava da sola: *«le righe citate qui sotto sono SHIFTATE»*. Le righe **dentro** i fatti
+restano quelle di allora, perche' **i reperti non si riscrivono**; l'intestazione porta quella
+di oggi.
+
+**E IN `CLAUDE.md` C'E' LA REGOLA CHE LO RENDE UTILE:** *«prima di toccare una funzione del
+simulatore, leggi i suoi fatti in `doc/FATTI_dal_codice.md`»*.
+
+**⚠ COSA QUESTO *NON* DICE:** che la destinazione di ogni punto sia giusta. **I numeri sono
+misurati, le destinazioni no**: stanno in una mappa `DESTINAZIONE` di 53 righe dentro
+`csv/_riordino_fatti.py`, **una riga per punto**, e si correggono in un posto solo.
+**E diciassette dei 53 punti NON sono fatti su una funzione: sono PRESIDI DI LETTURA**, e stanno
+in una sezione a parte che rimanda alla regola che li copre.
