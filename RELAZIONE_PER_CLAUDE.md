@@ -19185,3 +19185,30 @@ e questa riga esiste per accorgersene.
 **E la direzione conta:** significa che un `FAIL` della forma col segno, su semi correlati,
 **potrebbe essere un artefatto della correlazione** — mentre un `PASS` resterebbe informativo.
 **Non ho misurato la correlazione fra i semi**, e questo limite resta.
+---
+
+# ❌ **CORREZIONE: il disallineamento del reperto C'ERA, e l'ho attribuito al commit sbagliato**
+
+*(rilievo di Luca ripetuto, misurato commit per commit il 2026-09-26)*
+
+```
+3c5e404   copia 1554e2f9   referto cita 1554e2f9    coerente
+e062fdb   copia 1554e2f9   referto cita 3cd1dd4f    ⚠ INCOERENTE
+aae56ba   copia 3cd1dd4f   referto cita 3cd1dd4f    coerente
+HEAD      copia 3cd1dd4f   referto cita 3cd1dd4f    coerente, albero pulito
+```
+
+> ### **IL DISALLINEAMENTO C'ERA, e l'ha creato `e062fdb`** — che ha committato **il referto nuovo
+> ### senza la copia rigenerata**. **`aae56ba`, il commit segnalato, e' quello che l'ha RIPARATO.**
+
+**La mia prima risposta diceva *«oggi non c'e' disallineamento e un ripristino lo creerebbe»*: la
+**conclusione** era giusta, la **storia** no.** E la differenza conta, perche' cambia dove sta il
+difetto: non in `aae56ba` (che ripara) ma in **`e062fdb`** (che ha spezzato la coppia
+referto+copia). **L'ho scoperto solo elencando i blob commit per commit**, cioe' facendo la misura
+invece di ricostruire a memoria — ed era il terzo caso oggi in cui una premessa su *quale commit
+ha fatto cosa* si e' rivelata invertita.
+
+**A `HEAD` non c'e' niente da ripristinare** *(copia e referto coincidono, albero pulito)*.
+**Ma il rilievo di Luca coglie un difetto reale: un commit HA lasciato un reperto incoerente, e
+nessun presidio se n'e' accorto.** -> voce **`REPERTI-IMMUTABILI`**, e ora ha un caso reale da
+cui nascere: **`e062fdb`**, non un'ipotesi.
