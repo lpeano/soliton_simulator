@@ -24,6 +24,7 @@ DUE INVOCAZIONI, e la differenza fra loro e' il punto:
   CHI_COOP                 True       True       **DEVE essere True in ENTRAMBE** -> PASS
   COES_ADIM                True       True       **DEVE essere True in ENTRAMBE** -> PASS
   COES_CAUSALE             True       True       **DEVE essere True in ENTRAMBE** -> PASS
+  CONTRASTO_INTENSIVO      True       True       **DEVE essere True in ENTRAMBE** -> PASS
   FASE_2PI                 False      False      **ESCLUSA, deve restare False** -> PASS
   INVARIANTI               True       True       **DEVE essere True in ENTRAMBE** -> PASS
   MITOSI_2LAM              True       True       **DEVE essere True in ENTRAMBE** -> PASS
@@ -35,7 +36,7 @@ DUE INVOCAZIONI, e la differenza fra loro e' il punto:
   SEMINA_MATURA            True       True       **DEVE essere True in ENTRAMBE** -> PASS
   TEMPO_UNICO_MITOSI       True       True       **DEVE essere True in ENTRAMBE** -> PASS
   ================================================================================================  `S5` -- LA SCENA DI DEFAULT DEL DRIVER E' COMPATIBILE CON `SEMINA_LAM`?  ================================================================================================     vuoto di default: `semina(-1 = SATURAZIONE)` in raggio 4.000000    LAM = 0.800000     con `SEMINA_LAM` acceso: non rifiuta     saturazione vera: 455 nodi   contro 900 chiesti     -> ✅ COMPATIBILE: il vuoto di default e' LA SATURAZIONE (`semina(-1)`), e        `SEMINA_LAM` e' OBBLIGATORIA. Il numero di nodi lo decide la GEOMETRIA, non un        parametro -- e questo e' cio' che rende la compatibilita' STABILE: non c'e' un        numero che possa diventare sbagliato quando il seme cambia.        ⚠ E le scene che seminano masse SOPRA il vuoto RIFIUTANO di partire (`A9`):        `_massa` solleva con `SEMINA_LAM` acceso. Sono di EPOCA PRE-`A13`.
-  CURE OBBLIGATORIE: 13   ESCLUSE: 1   ORFANE: 0
+  CURE OBBLIGATORIE: 14   ESCLUSE: 1   ORFANE: 0
     escl. FASE_2PI             NON e' approvata: la sua prova la BOCCIA (`Z127`, `2/4`, `E1` non passa -- mitosi `62` -> `1` evento). Il driver NON deve accenderla.
 
   ✅ **NUDA = CAMPAGNA su tutte le obbligatorie: UN SOLO MODO DI LANCIARE.**
@@ -49,14 +50,14 @@ L'ARGV INTERA: NUDA contro CAMPAGNA -- **non solo le cure**
   -- il caso esatto che il controllo delle orfane doveva impedire e non poteva vedere.
   **Qui il confronto non ha piu' una lista a cui essere fedele.** (Rilievo di Luca.)
 
-  NUDA     (41 elementi)
-  CAMPAGNA (41 elementi)
+  NUDA     (42 elementi)
+  CAMPAGNA (42 elementi)
 
   ✅ **NESSUNA DIFFERENZA: le due argv COINCIDONO opzione per opzione.**
   (elementi solo in CAMPAGNA: 0, solo in NUDA: 0 -- conteggio grezzo)
 
 ============================================================================================
-ESITO: 15/15 (obbligatorie + escluse + orfane + argv intera)
+ESITO: 16/16 (obbligatorie + escluse + orfane + argv intera)
 ============================================================================================
 *** IL DRIVER LE ACCENDE. ***
 
