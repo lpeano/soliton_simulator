@@ -913,3 +913,11 @@ diversi per lo stesso file.)*
 |---|---|---|---|---|
 | `csv/_titoli_brevi.py` | `05ca3df8` | `python csv/_titoli_brevi.py` · `--prova` | accorcia i `titolo_breve` oltre i **100** caratteri *(la frase intera va in `stato_da`)* e **de-duplica** quelli identici. **Il delta e' asserito col diff:** `id`, `stato`, `blocca` e `famiglia` non cambiano su nessuna riga | **330 accorciati, 275 de-duplicati, 0 violazioni** sulle colonne intoccabili |
 | `csv/_indice_id.py` | `48510b17` | `--cerca ID` · `--aperti` · `--blocca SI` · `--famiglia X` · `--dettaglio ID` · `--testo PAROLA` | **il VALIDATORE, e ora anche l'INTERROGAZIONE**: l'indice non si legge intero. `--cerca` e' **uguaglianza esatta**; `--testo` cerca sul **testo completo** e tronca **solo la stampa** | **collaudo 10/10**, coi quattro casi di `INDICE-LEGGERO` nei due versi |
+
+## Aggiunto il 2026-09-27 — **`CURA2-STRUTTURALE`**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_patch_cura2_strutturale.py` | `5400b1bc` | `python csv/_patch_cura2_strutturale.py` · `--prova` | toglie i **quattro** rami `else` di `TEMPO_UNICO_MITOSI` **per AST** *(de-indenta il corpo del ramo acceso di 4 e nient'altro)*, porta la costante a `True` e toglie l'assegnazione da `_applica_flag`. Si ferma se i blocchi non sono 4 o se il file non compila | 4 blocchi trovati, **0 rimasti**, 1 sola assegnazione (la costante) |
+| `csv/_seal_fork/_sigillo_cura2_strutturale.py` | `365a08a0` | `python csv/_seal_fork/_sigillo_cura2_strutturale.py` · `--corto` | il sigillo: `C1` byte-identici col flag ACCESO contro il **tag**, 2 semi; `C2` **il caso che DEVE fallire** *(al tag col flag SPENTO i byte cambiano)*; `C3` driver 0 differenze; `C4` la mitosi HA girato. **Avanza con `csv/_passo.py passo_pieno`**, non con le cinque chiamate | **4/4 PASS**: 214 campi, **0 diversi** su 2 semi; `C2` **116 campi diversi** (`csv/_seal_fork/_sig_cura2_strutturale/REFERTO.txt`) |
+| `csv/_archivio/rami_off_cura2.py` | — | *(archivio: non si importa e non gira)* | i **quattro** rami `else` **copiati dal sorgente**, con funzione, righe al tag, cosa facevano, perche' sono usciti e il comando per rilanciarli | tag **`pre-cura2-strutturale`**, blob del simulatore al tag **`dd4f5ccf`** |

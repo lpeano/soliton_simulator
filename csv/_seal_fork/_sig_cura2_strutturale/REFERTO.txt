@@ -1,0 +1,47 @@
+========================================================================================================
+SIGILLO DI `CURA2-STRUTTURALE` -- i rami `else` escono   (12 passi, 2 semi)
+========================================================================================================
+
+  avanzamento: `csv/_passo.py passo_pieno` -- NON `net.step()`, NON le cinque
+               chiamate a mano. `passo_pieno` legge l'ordine DAL CODICE (`PASSO-PIENO`).
+  ordine del passo, letto: scuoti_vuoto, step, mitosi, rilassa_disegno, memoria_hebbiana_moto
+  simulatore AL TAG `pre-cura2-strutturale`: blob dd4f5ccf, e contiene `= False` (asserito)
+
+  C1/C4  BYTE-IDENTICI COL FLAG ACCESO, contro il tag -- 2 semi, un processo per braccio
+      seme 11   TAG n 12802  archi 471564   flag True  taupp_tot 5658768
+               NEW n 12802  archi 471564   flag True  taupp_tot 5658768
+               stessa forma True    campi 214   DIVERSI 0 []
+      seme 12   TAG n 12765  archi 468042   flag True  taupp_tot 5616504
+               NEW n 12765  archi 468042   flag True  taupp_tot 5616504
+               stessa forma True    campi 214   DIVERSI 0 []
+
+  C2  IL CASO CHE DEVE FALLIRE -- al tag col flag SPENTO i byte DEVONO cambiare
+      seme 11   flag ACCESO True  taupp_tot 5658768    flag SPENTO False taupp_tot 5658922
+               stessa forma False   campi DIVERSI 116   ['_calcpsi_chiamate', '_calcpsi_w_none', '_chi_core_nodi', '_chi_core_raggio', '_chi_core_rho0', '_chi_core_rhoc']
+
+  C3  IL DRIVER -- 0 differenze di configurazione (`H-P5`)
+      booleani confrontati 79   DIVERSI 0 []
+      `TEMPO_UNICO_MITOSI` nel modulo: True   (ora e' una LEGGE, non un flag)
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 79
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 79.
+
+
+========================================================================================================
+  C1  byte-identici col flag acceso, 2 semi      PASS
+  C4  la mitosi HA girato (taupp_tot > 0)        PASS
+  C2  al tag col flag SPENTO i byte CAMBIANO     PASS
+  C3  driver: 0 differenze sui booleani          PASS
+SIGILLO: 4/4
+========================================================================================================
+
+COSA QUESTO SIGILLO *NON* DICE:
+  - **non dice che la `CURA 2` sia la legge GIUSTA**: dice che togliere i rami spenti non
+    cambia un bit, e che quei rami FACEVANO qualcosa (`C2`), quindi l'archivio conserva
+    codice vero e non codice morto.
+  - **`C2` misura il TAG contro il TAG**, non il nuovo contro il vecchio a flag spento:
+    nel nuovo il ramo spento NON ESISTE PIU', e chiederglielo sarebbe un test vuoto.
+  - **12 passi non sono un run.**

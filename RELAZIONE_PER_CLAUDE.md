@@ -2483,3 +2483,42 @@ rompere `P5`)* e col suo sigillo. **Il tag e l'archivio ci sono: nulla si perde 
 **dopo il run base**, per verificare che la gravita' **non dipenda da un bug**. **E' la ragione per
 cui Go avrebbe senso — ma come SECONDA voce, non come sostituzione** *(`doc/VALUTAZIONE_go.md`)*.
 **E se le due implementazioni NON concordassero, sarebbe un riscontro, non un fallimento.**
+
+## ✅ `CURA2-STRUTTURALE` — **chiusa. Sigillo 4/4, e `C2` dice che i rami tolti FACEVANO qualcosa**
+
+```
+C1  byte-identici col flag ACCESO, contro il TAG, 2 semi ... PASS
+      seme 11  n 12802  archi 471564   214 campi, 0 DIVERSI
+      seme 12  n 12765  archi 468042   214 campi, 0 DIVERSI
+C4  la mitosi HA girato ................................... PASS  taupp_tot 5 658 768 / 5 616 504
+C2  il caso che DEVE fallire: al tag col flag SPENTO ...... PASS  116 campi DIVERSI
+C3  il driver: 0 differenze su 79 booleani ................ PASS
+SIGILLO: 4/4        avanzamento: `csv/_passo.py passo_pieno`
+```
+
+> ### **`C2` E' IL CRITERIO CHE DA' SENSO A `C1`.**
+> `C1` dice *«togliere i rami non cambia un bit»*. **Da solo potrebbe voler dire che quei rami
+> erano codice morto già prima.** `C2` mostra che **al tag, col flag spento, 116 campi su 214
+> cambiano**: quei rami **facevano qualcosa**, e l'archivio conserva **codice vero**, non un
+> reperto vuoto.
+
+## LA FORMA DEL FLAG, come chiesto — e il perche' di ciascuna scelta
+
+| | scelta | perche' |
+|---|---|---|
+| **la costante** | **`= True`, e RESTA un booleano di modulo** | cosi' continua a comparire nella dichiarazione della configurazione: **`H-P5` la enumera con `vars(S)`**, e cancellarla la farebbe **sparire dal referto** proprio mentre diventa obbligatoria |
+| **l'opzione CLI** | **accettata come NO-OP dichiarato, e AVVISA** | il driver la passa in ogni run e ogni comando gia' scritto la contiene: toglierla **farebbe morire `argparse`**. E' la forma di `--step2-orologio` |
+| **l'assegnazione** | **tolta da `_applica_flag`** | e' cio' che rende la legge **strutturale** |
+| **nessun `--senza-`** | **di proposito** | `par.10` lo chiede per una **promozione**, dove il ramo OFF resta nel codice. **Qui i rami ESCONO:** il braccio OFF vive **al tag**. **Un `--senza-` senza un ramo dove andare sarebbe un flag che mente.** |
+
+**Il taglio e' stato fatto PER AST, non a stringhe:** togliere un `if` vuol dire **de-indentare il
+corpo di 4** su quattro blocchi da 2 a 19 righe, e il controllo e' che **il corpo sia lo stesso
+testo de-indentato e nient'altro**. *(4 blocchi trovati, **0 rimasti**, 1 sola assegnazione.)*
+
+**E il passo 6 e' nello stesso commit del 4, non per comodita': `H-REG-R` ha RIFIUTATO il codice
+senza la scheda** — tre volte, chiedendo `tempo-nella-mitosi`, `tempo-proprio` e
+`mitosi-schwinger`. **Ha fatto bene tutte tre.**
+
+**Una voce nuova, aperta:** **`D32-CONTATORE`** — `_rep_taupp_clamp` ora conta **un clamp che non
+esiste piu'** *(viveva nel ramo tolto)*. **Resta di proposito**, perche' serve alla byte-identita'
+di `C1` e alla prova di `C4`, **e perche' e' un reperto nei `json`** *(par.9)*.
