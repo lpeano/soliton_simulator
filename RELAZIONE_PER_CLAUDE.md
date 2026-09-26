@@ -19908,3 +19908,39 @@ I **sei** lettori che leggono ancora il Markdown — `_cure_verificate`, `_quadr
 nell'indice come **una voce**, `stato: aperto`, **`blocca_run_base: NO`** *(la fonte lo dichiara:
 «NON BLOCCA il run base»)*, famiglia `G`. **Gli importatori restano a leggere il Markdown per
 necessita': sono cio' che costruisce l'indice.**
+
+
+---
+
+# ❌❌ **DUE CURE ARRIVATE DOPO IL COMMIT `4a76517`, e le ha chieste il presidio** *(2026-09-26)*
+
+**Il `pre-commit` ha bloccato il commit del `PASSO 3` su due ID:** `CURA-3` e **`GLOBALE-DIS`**.
+
+## ① **`GLOBALE-DIS` NON ESISTE: L'HO INVENTATO IO TRONCANDO**
+
+Il titolo di una voce veniva tagliato a **117 caratteri** *(e a 111 nell'indice)* **a meta' parola**:
+`GLOBALE-DISEGNO §4` diventava **`GLOBALE-DIS`**.
+
+> ### **Un troncamento che taglia a meta' parola INVENTA UN ID**, e il presidio — giustamente — lo
+> ### segnalava come sconosciuto **in un documento che questa stessa macchina aveva scritto.**
+
+**Cura:** si tronca **su un confine di parola** *(`_taglia`, nell'indice e nella vista)*.
+**⚠ E il difetto si e' manifestato due volte in dieci minuti:** la prima patch di `_taglia` **non e'
+stata scritta su disco** *(lo script si e' fermato su un'ancora sbagliata prima della `write`)*,
+mentre la patch che la **chiamava** era passata: il generatore girava con un `NameError`.
+**Un patch script che scrive alla fine lascia il file COERENTE o INTATTO; se le patch sono due
+script diversi, quella garanzia non c'e' piu'.**
+
+## ② **LA VIA D'USCITA VALEVA SOLO NEL `commit-msg`, CIOE' TROPPO TARDI**
+
+`[SENZA-INDICE: <motivo>]` viene letto dal hook `commit-msg` — ma **il `pre-commit` gira PRIMA**, e
+rifiutava senza nemmeno leggere l'eccezione. **Con `git commit -F` il messaggio e' gia' in
+`.git/COMMIT_EDITMSG`**: il `pre-commit` ora lo legge come ripiego, e la via d'uscita funziona **a
+entrambi gli stadi**.
+
+> ### **Una via d'uscita che non si puo' imboccare non e' una via d'uscita**: e' un blocco con una
+> ### promessa scritta accanto.
+
+**Collaudi rigirati dopo le due cure:** vista **`2/2`**, presidio dell'indice **`4/4`** *(l'end-to-end
+si e' dichiarato NON eseguito: c'erano modifiche in stage — e lo dice invece di darlo per buono)*,
+presidi del pre-commit **`8/8`**.
