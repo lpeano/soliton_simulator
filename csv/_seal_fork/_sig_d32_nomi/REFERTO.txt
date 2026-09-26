@@ -18,10 +18,9 @@ SIGILLO DI `D32` -- una RINOMINA non cambia un bit   (12 passi per braccio)
         > 0 su entrambi i bracci, e UGUALI ... True
 
   N3  `pos_torsione` NON E' USATA NEL RAMO CHE GIRA  (per AST, non per `grep`)
-        else (SPENTO)  :6017
-        else (SPENTO)  :6113
+        `if TEMPO_UNICO_MITOSI` nel codice .. 0   (atteso 0: `CURA2-STRUTTURALE` li ha TOLTI)
         usi nel ramo ACCESO ................ 0   (atteso 0)
-        usi nel ramo SPENTO ................ 2   (sono il difetto di `D32`,
+        usi nel ramo SPENTO ................ 0   (sono il difetto di `D32`,
                                                  PROPOSTI per la rimozione)
 
 ====================================================================================================

@@ -2522,3 +2522,53 @@ senza la scheda** — tre volte, chiedendo `tempo-nella-mitosi`, `tempo-proprio`
 **Una voce nuova, aperta:** **`D32-CONTATORE`** — `_rep_taupp_clamp` ora conta **un clamp che non
 esiste piu'** *(viveva nel ramo tolto)*. **Resta di proposito**, perche' serve alla byte-identita'
 di `C1` e alla prova di `C4`, **e perche' e' un reperto nei `json`** *(par.9)*.
+
+---
+
+# ✅ **`PASSO-PIENO` (`H-P9`) e `IMPL-2`** *(2026-09-27)*
+
+## 1. `H-P9` — il presidio rifiuta chi avanza con `net.step()`
+
+**Collaudo `10/10` nei due versi**, coi due casi nuovi:
+
+```
+blocca_H-P9  _sonda_finta.py    (net.step() nudo)          atteso BLOCCA  ottenuto BLOCCA
+passa_H-P9   _sonda_finta2.py   (_passo.passo_pieno)       atteso passa   ottenuto passa
+ARRETRATO su 370 file di csv/:  H-P9 26   (H-P3 19, H-P5 46, H-P8 29)
+```
+
+> **26, e Luca diceva 25: il ventiseiesimo e' il mio sigillo di `D32`**, che questo giro corregge.
+> Il hook guarda **solo lo staged**, quindi l'arretrato **non blocca** — come per gli altri tre.
+
+**Il nome `H-P9` non e' casuale:** la regex delle esenzioni accetta gia' `ESENTE-H-P<cifra>`, e un
+nome fuori da quella forma avrebbe richiesto **di toccare il presidio per aggiungere un presidio**.
+**E le cinque chiamate NON sono ricopiate nel hook:** si leggono da `_passo.ordine()`; se `_passo`
+non si importasse si ripiega su una lista minima **dicendolo nel motivo** (`A9`).
+
+**DUE NUMERI SCADUTI NEL COLLAUDO, corretti:** l'intestazione diceva *«sei casi»* e il totale era
+**la costante `"8/8"`** — con `H-P9` i casi sono **10** e la riga diceva ancora 8. **Un collaudo che
+sbaglia il proprio conteggio non e' un dettaglio: e' il numero che chi legge prende per buono.**
+
+## Il sigillo di `D32` con `passo_pieno`: **gli STESSI numeri**
+
+```
+PRIMA  n 12814  archi 471143  campi 214      DOPO  n 12814  archi 471143  campi 214
+campi DIVERSI 0        `_rep_taupp_tot` 5 653 716 su ENTRAMBI i bracci
+SIGILLO: 5/5
+```
+
+**Identici al giro fatto con le cinque chiamate a mano** — che e' la verifica richiesta: `passo_pieno`
+**riproduce la stessa sequenza**, e lo fa **leggendola dal codice** invece di ricopiarla.
+
+**E `N3` era diventato VUOTO:** dopo `CURA2-STRUTTURALE` i `if TEMPO_UNICO_MITOSI` **non esistono
+piu'**, quindi *«quanti usi nel ramo acceso?»* dava `0` **per assenza del ramo**, non per la cura dei
+nomi. **Criterio rafforzato:** zero rami **e** zero usi. *(Un criterio che sopravvive alla sparizione
+del suo oggetto e' un criterio che ha smesso di misurare.)*
+
+## 2. `IMPL-2` — nell'indice
+
+`tipo = fronte`, `blocca = NO`, **«dopo il run base»**: **una seconda implementazione indipendente,
+scritta dalle LEGGI** *(le schede di `REGISTRO_FISICA`)* **e non dal codice**, per verificare che la
+gravita' **non dipenda da un bug**. **Criterio di chiusura:** riproduce **segno e ordine di
+grandezza** delle tre prove partendo **dalle sole schede** — **e se non li riproducesse, sarebbe un
+riscontro, non un fallimento.**
