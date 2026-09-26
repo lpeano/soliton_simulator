@@ -1895,3 +1895,63 @@ parentetico**, e la sostituzione lasciava *«…LEGGI `(criterio di Luca, 2026-0
 Luca, 2026-09-25)`»* — **due volte**. `P1-quater` conta l'ancora e pretende che sia unica, e
 l'ancora **era** unica: **contare l'ancora non basta se l'ancora e' piu' corta di cio' che si
 sostituisce.** Corretto nello strumento, non solo nel file.
+
+---
+
+# 📋 `DRIVER-SCENA-II` — **il task history, committato PRIMA del codice** *(2026-09-26)*
+
+**Primo `SI` dello smistamento.** Il ragionamento e i **cinque criteri dettati da Luca** stanno in
+`doc/TASK_HISTORY/2026-09-26_driver-scena-ii.md`, **committato prima di scrivere una riga di
+codice**, cosi' l'ordine e' **verificabile da git** invece di essere asserito da me.
+
+## ⚠ UNA DELLE DUE FONTI DEL MANDATO NON ESISTE, e lo dico subito
+
+Il mandato dice *«leggi i fatti di `_applica_flag` e `_massa` in `doc/FATTI_dal_codice.md`»*.
+**Li' non ci sono:**
+
+```
+_applica_flag   occorrenze in doc/FATTI_dal_codice.md: 0
+_massa                                                 1   (ed e' `nuova_massa()`, altra voce)
+avvia_test                                             0
+N-MASSE                                                0
+```
+
+**E non e' il riordino:** `git show regole-pre-riordino:CLAUDE.md | grep -c '_applica_flag'` da'
+**`0`** — **`par.9` non ne parlava neanche prima.** *(Assenza dichiarata da una ricerca
+sull'INTERO file, `STANDARD 9`.)*
+
+> **Ho letto il codice invece dei fatti**, e ne e' uscita una voce **in coda**: `FATTI-AVVIO`.
+> **La catena che decide con che mondo parte ogni run** — `_applica_flag`, `avvia_test`, `_massa`,
+> `semina` — **non ha un solo fatto scritto**, mentre `doc/FATTI_dal_codice.md` ne ha 53 su altre
+> undici funzioni. **Non e' un difetto del riordino: e' un vuoto che il riordino ha reso visibile.**
+
+## ✅ LE DUE `🟨` DI LUCA SONO ORA VERIFICATE DAL CODICE — **erano vere entrambe**
+
+| affermazione | prima | ora |
+|---|---|---|
+| `N-MASSE` **con `SEMINA_LAM`** finisce *proprio* in quel `SystemExit` | 🟨 *di Luca* | ✅ il `raise` a `:7187` e' **la prima istruzione di `_massa` sotto `if SEMINA_LAM:`, senza altre condizioni** |
+| **manca un `--seme` reale** nel driver | 🟨 *di Luca* | ✅ **`--seed` non compare nell'argv del driver** (`grep -c` = `0`): **ogni run del driver gira col seme 42** |
+
+**E una cosa buona, che evita una cura inutile:** il driver **non mente** sul seme —
+`SEME_EFFETTIVO` legge il default di `Rete.__init__` (`42`), che **coincide** con quello che
+`_applica_flag` usa. **Il difetto non e' il riporto: e' che il seme non si puo' cambiare.**
+
+## 🧠 E L'INFERENZA DELLA REVISIONE DIVENTA UNA RIGA DI CODICE
+
+```python
+# soliton_simulator.py :8681, ultima riga utile di `_applica_flag`
+net.semina(-1 if SEMINA_LAM else a.nodi)
+```
+
+**Con `SEMINA_LAM` acceso il ternario NON GUARDA `a.nodi`: `--nodi 0` non e' rispettato.** Il vuoto
+nasce **a saturazione**, `net.n > 0`, e la scena `(ii)` — che pretende una rete vuota — **rifiuta**.
+E `SEMINA_LAM` e' nell'argv del driver **in ogni run**.
+
+> **Il vicolo cieco sta in `_applica_flag`, non nella scena.** La scena fa la cosa giusta: rifiuta
+> invece di sommare due vuoti, **e lo DICE** (`A9`). **Toccare la scena sarebbe curare il sintomo**,
+> e la cura attesa e' **una condizione sola** — **si toglie un'eccezione, non si aggiunge una
+> legge** (`STANDARD 10`).
+
+**Prossimo passo, e si ferma li':** la misura 0 *(che cosa fa il driver oggi con la scena `(ii)`)*,
+poi la cura, il `--scena`, il `--seme`, il sigillo **via CLI e un processo per braccio**, **giro
+corto prima**. **STOP dopo il sigillo: nessun run lungo.**

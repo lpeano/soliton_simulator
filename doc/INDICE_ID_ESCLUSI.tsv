@@ -53,3 +53,6 @@ H-Pn	segnaposto del modello `ESENTE-<H-Pn>` nei messaggi dei presidi, non un id	
 H-CLI	nome SCARTATO: era la proposta di nome semantico per un presidio del hook, e Luca ha deciso il 2026-09-26 di tenere il nome vecchio col prefisso (H-P3, H-P5, ...). Si cita nei referti e nei commit come cosa NON scelta: non deve diventare una voce (RIORDINO-NOMI-H)	0
 H-CONFIG	nome SCARTATO: era la proposta di nome semantico per un presidio del hook, e Luca ha deciso il 2026-09-26 di tenere il nome vecchio col prefisso (H-P3, H-P5, ...). Si cita nei referti e nei commit come cosa NON scelta: non deve diventare una voce (RIORDINO-NOMI-H)	0
 H-ANCORA	nome SCARTATO: era la proposta di nome semantico per un presidio del hook, e Luca ha deciso il 2026-09-26 di tenere il nome vecchio col prefisso (H-P3, H-P5, ...). Si cita nei referti e nei commit come cosa NON scelta: non deve diventare una voce (RIORDINO-NOMI-H)	0
+N-MASSE	nome di una SCENA del simulatore (`TESTS`), non un identificatore di difetto	0
+MASSE-COERENTI	nome di una SCENA del simulatore (`TESTS`), non un identificatore di difetto	0
+TERRA-BUCONERO	nome di una SCENA del simulatore (`TESTS`), non un identificatore di difetto	0

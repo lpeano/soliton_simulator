@@ -147,6 +147,9 @@ NON_ID = [
     ("UTF-8", "nome di una codifica, non un identificatore"),
     ("H-P", "pezzo del modello `ESENTE-H-P<n>` nei messaggi dei presidi, non un id"),
     ("H-Pn", "segnaposto del modello `ESENTE-<H-Pn>` nei messaggi dei presidi, non un id"),
+    ("N-MASSE", "nome di una SCENA del simulatore (`TESTS`), non un identificatore di difetto"),
+    ("MASSE-COERENTI", "nome di una SCENA del simulatore (`TESTS`), non un identificatore di difetto"),
+    ("TERRA-BUCONERO", "nome di una SCENA del simulatore (`TESTS`), non un identificatore di difetto"),
     ("H-CLI", "nome SCARTATO: era la proposta di nome semantico per un presidio del hook, e Luca ha deciso il 2026-09-26 di tenere il nome vecchio col prefisso (H-P3, H-P5, ...). Si cita nei referti e nei commit come cosa NON scelta: non deve diventare una voce (RIORDINO-NOMI-H)"),
     ("H-CONFIG", "nome SCARTATO: era la proposta di nome semantico per un presidio del hook, e Luca ha deciso il 2026-09-26 di tenere il nome vecchio col prefisso (H-P3, H-P5, ...). Si cita nei referti e nei commit come cosa NON scelta: non deve diventare una voce (RIORDINO-NOMI-H)"),
     ("H-ANCORA", "nome SCARTATO: era la proposta di nome semantico per un presidio del hook, e Luca ha deciso il 2026-09-26 di tenere il nome vecchio col prefisso (H-P3, H-P5, ...). Si cita nei referti e nei commit come cosa NON scelta: non deve diventare una voce (RIORDINO-NOMI-H)"),
@@ -188,6 +191,8 @@ APERTE = [
      "P4 dentro P1-sexies), oppure alza il tetto dichiarandolo. NON scelgo io: la fusione "
      "che Luca ha RIFIUTATO il 2026-09-26 era una di queste. Misurato: anche la proposta "
      "ne dava 12, non 10 -- quel numero era sbagliato in aritmetica."),
+    ("FATTI-AVVIO", "la catena di AVVIO non ha un solo fatto in FATTI_dal_codice.md: _applica_flag, avvia_test, _massa, semina", "doc/FATTI_dal_codice.md", "fronte",
+     "CRITERIO DI CHIUSURA: una sezione per ciascuna delle quattro funzioni, coi fatti LETTI DAL CODICE e la riga misurata dall'AST. Trovato il 2026-09-26 lavorando a DRIVER-SCENA-II: il mandato indicava i fatti di _applica_flag e _massa, e non esistono -- ne in FATTI_dal_codice.md ne in par.9 al tag. E' la catena che decide CON CHE MONDO PARTE OGNI RUN."),
     ("RIORDINO-NOMI-H", "il prefisso `H-` e' sui NOMI VECCHI (H-P3) e non sui nomi semantici "
                         "(H-CLI) che la proposta suggeriva",
      "CLAUDE.md par.12", "da-decidere",
