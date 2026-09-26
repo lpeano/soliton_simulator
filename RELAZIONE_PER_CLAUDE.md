@@ -19049,7 +19049,9 @@ dentro `B`. **E' una domanda nuova, e va in coda, non in questa cura.**
 
 ---
 
-# ⚖️ **`C1 a 4 semi` A 4 SEMI: `FAIL` PER UN PELO, E IL RESIDUO VALE `~0.06`** *(2026-09-26)*
+# ⚖️ **`C1` A 4 SEMI: `FAIL` PER UN PELO** *(2026-09-26)*
+
+> ### ❌❌ **IL TITOLO DICEVA ANCHE «E IL RESIDUO VALE `~0.06`»: E' RITIRATO** *(rilievo di Luca, 2026-09-26)*. **Titolo ritirato, leggibile:** *«`C1 a 4 semi` A 4 SEMI: `FAIL` PER UN PELO, E IL RESIDUO VALE `~0.06`»*. **Il motivo e' nel blocco di ritiro piu' sotto, e il `FAIL` stesso e' poi caduto col criterio: vedi `C1` nella forma COL SEGNO.**
 
 *(`csv/_seal_fork/_sig_cura_A/SIGILLO_cura_A.txt`. Criterio di Luca, committato **prima** in
 `4c104cf`. Esito complessivo **`5/6`**.)*
@@ -19073,7 +19075,39 @@ di un fattore **`20`-`50`**. **La cura funziona, e il criterio lo dice.**
 `0.0669` contro `0.0606`. **Il residuo NON e' compatibile con zero — ed e' un risultato, non un
 intoppo.**
 
-## 🎯 **E IL NUMERO DEL RESIDUO E' LO STESSO ORDINE CHE L'ARITMETICA DEGLI ESPONENTI PREVEDEVA**
+## ❌❌ **RITIRATO il 2026-09-26 (rilievo di Luca) — NON C'E' UN RESIDUO CON UN VERSO**
+
+> **Cio' che avevo scritto, leggibile qui sotto per intero:** *«il numero del residuo e' lo stesso
+> ordine che l'aritmetica degli esponenti prevedeva — `~0.06` in entrambi i casi — il residuo non
+> sembra rumore»*.
+
+**PERCHE' CADE, e non serve un dato nuovo: bastano i SEGNI, che il valore assoluto aveva buttato via.**
+
+```
+differenze FIRMATE  pend(contrasto) - pend(coppia)      (dagli STESSI json)
+   corti    +0.1167   +0.0535   +0.0090   -0.0247       <- UNO NEGATIVO
+   lunghi   +0.0115   +0.0519   +0.1533   -0.0511       <- UNO NEGATIVO
+```
+
+> ### **Un residuo che venga da un'asimmetria di esponenti ha UN VERSO: la pendenza del contrasto
+> ### sta SEMPRE dallo stesso lato di quella della coppia.** Qui **due valori su otto hanno il segno
+> ### opposto**, e la media sta a **`0.97`** e **`1.26`** errori standard da zero. **Non c'e' un
+> ### residuo con un verso: c'e' dispersione fra semi.**
+
+**E LA COINCIDENZA NUMERICA NON REGGEVA NEMMENO NEL SEGNO**, ed e' il pezzo che avrei dovuto vedere
+da solo: l'aritmetica prevedeva **`0.06 - 0.10 = -0.04`**, cioe' un residuo **NEGATIVO**, mentre il
+numero con cui lo confrontavo era una **media di valori assoluti**, **positiva per costruzione**.
+**Ho confrontato un numero firmato con un numero che non puo' essere negativo, e ho chiamato
+accordo il fatto che i moduli si somigliassero.**
+
+**⚠ E IL MIO STESSO PARAGRAFO DI PRUDENZA NON MI HA FERMATO:** avevo scritto *«sono grandezze
+DIVERSE su POPOLAZIONI DIVERSE ... una coincidenza di ORDINE DI GRANDEZZA, NON un'identita'»* —
+e **poi ho messo il numero nel TITOLO**. **Dichiarare un limite e poi titolare come se non ci
+fosse e' il modo in cui una cautela diventa decorativa.**
+
+### La versione RITIRATA, leggibile per intero:
+
+## ~~E IL NUMERO DEL RESIDUO E' LO STESSO ORDINE CHE L'ARITMETICA DEGLI ESPONENTI PREVEDEVA~~
 
 ```
 dall'aritmetica (sui FIGLI):     inerzia/W^2 ~ ramp^(2.80 - 2.74) = ramp^0.06
@@ -19258,3 +19292,33 @@ ancora informativo.
 vera, `|media|/SE` e' **gonfiato**, e il criterio fallisce **piu'** spesso — **il rischio e' un
 residuo FALSO**, non un `PASS` regalato. **Un `PASS` resta informativo.** La correlazione fra i
 quattro semi **non e' misurata**.
+
+
+---
+
+# ❌❌ **RITIRO: «IL RESIDUO `~0.06` E' L'ARITMETICA DEGLI ESPONENTI»** *(rilievo di Luca, 2026-09-26)*
+
+**Ritirato in `RELAZIONE_PER_CLAUDE.md` (titolo e sezione, versione vecchia leggibile accanto) e
+registrato in `doc/STATO_RUN.md`.**
+
+```
+differenze FIRMATE  pend(contrasto) - pend(coppia)
+   corti    +0.1167   +0.0535   +0.0090   -0.0247        media/SE = 1.26
+   lunghi   +0.0115   +0.0519   +0.1533   -0.0511        media/SE = 0.97
+```
+
+> ### **Due valori su otto hanno il segno opposto: un residuo da asimmetria di esponenti avrebbe UN
+> ### VERSO.** Non c'e' un residuo di `0.06`: c'e' **dispersione fra semi**.
+
+**E IL CONFRONTO NON REGGEVA NEMMENO NEL SEGNO:** l'aritmetica prevedeva **`0.06 - 0.10 = -0.04`**,
+**negativo**; il numero con cui lo confrontavo era una **media di valori assoluti**, positiva **per
+costruzione**. **Un numero firmato contro un numero che non puo' essere negativo.**
+
+**⚠ E il mio paragrafo di prudenza c'era, sotto quella sezione** *(«grandezze diverse su popolazioni
+diverse, coincidenza di ordine di grandezza, non un'identita'»)* **e non e' servito, perche' il
+numero era nel TITOLO.** **Una cautela scritta sotto un titolo che la contraddice e' decorativa.**
+
+**NB di onesta' sul posto del ritiro:** la frase viveva nella **relazione**, **non** nella riga
+`POTENZE-1` di `STATO_RUN`. L'ho registrata anche la' perche' Luca l'ha chiesto in entrambi i posti
+— **non** perche' ce l'avessi scritta: dire *«corretto in due posti»* lasciando credere che
+l'errore fosse in due posti sarebbe un'esagerazione nella direzione comoda.
