@@ -145,8 +145,18 @@ blob_pf, anc_pf = copia_diag(PRIMA_FLAG, PRIMA_FLAG_DIAG)
 
 _S0, ARGV = _cli_flag.argv_del_driver([], dest=os.path.join(TMP, "_scarto"))
 ARGV = ARGV + ["--nodi", "0"]
-ARGV_ON = ARGV + [OPZ]
-ARGV_OFF = list(ARGV)
+# ❌❌ **DIFETTO GROSSO, trovato il 2026-09-26 leggendo il referto: i bracci `off_*` giravano
+#   CON IL FLAG ACCESO.** Appena la `CURA A` e' entrata nel driver, `--contrasto-intensivo` e'
+#   diventato parte dell'argv **incondizionatamente** (`NUDA = CAMPAGNA`), e
+#   `ARGV_OFF = list(ARGV)` **conteneva il flag**: il braccio spento e' diventato **un secondo
+#   braccio acceso**, e i due stampavano numeri IDENTICI riga per riga.
+#   ⇒ **E' il difetto del DEFAULT RIBALTATO del par.9**, in veste nuova: *«quando si ribalta un
+#     default, si cercano nello stesso commit TUTTI i punti che ottenevano il vecchio
+#     comportamento per OMISSIONE»*. **`list(ARGV)` otteneva l'OFF per omissione.**
+#   ✅ **ORA `senza()`, che ASSERISCE che l'opzione ci fosse:** se il driver smettesse di passarla,
+#     il sigillo **si ferma** invece di misurare due volte lo stesso braccio.
+ARGV_ON = ARGV if OPZ in ARGV else ARGV + [OPZ]
+ARGV_OFF = _cli_flag.senza(ARGV, OPZ)
 
 FIGLIO = r'''
 import copy as _copy
@@ -488,19 +498,39 @@ _sp = float(np.std(_don)) if len(_don) > 1 else float("nan")
 #     STANDARD** *(`SE = std/sqrt(4)`, l'errore DELLA MEDIA, non la dispersione dei valori)*,
 #     **e** sta **sotto** quella del braccio `/W` — che e' **un'altra popolazione MISURATA**,
 #     non se stessa.
+# ❌ **SECONDO DIFETTO MIO: la statistica era su OTTO bracci, non su QUATTRO SEMI.** `dif["on"]`
+#   contiene `4 semi x 2 versi`, e mescolarli mette **la differenza fra i VERSI** dentro la
+#   dispersione **fra semi**: e' l'errore di POPOLAZIONE di `A3`. **Luca ha scritto «sui 4 semi».**
+# ✅ **ORA: PER VERSO, su 4 semi, e SERVONO ENTRAMBI.**
+def _per_verso(fam):
+    fuori = {}
+    for _nm, _d, _r in dif.get(fam, []):
+        fuori.setdefault(_nm.rsplit("_", 1)[-1], []).append(_d)
+    return fuori
+
+
+_pv_on, _pv_suw = _per_verso("on"), _per_verso("suW")
+_stat = {}
+for _v in sorted(_pv_on):
+    _x = _pv_on[_v]
+    _mm = float(np.mean(_x))
+    _ss = (float(np.std(_x, ddof=1)) / np.sqrt(len(_x))) if len(_x) > 1 else float("nan")
+    _ms = float(np.mean(_pv_suw.get(_v, [float("nan")])))
+    _stat[_v] = (len(_x), _mm, _ss, _ms, _mm <= 2.0 * _ss, _mm < _ms)
 _m_on = float(np.mean(_don)) if _don else float("nan")
-_se_on = (float(np.std(_don, ddof=1)) / np.sqrt(len(_don))) if len(_don) > 1 else float("nan")
 _m_suw = float(np.mean([d for _n, d, _r in dif["suW"]])) if dif["suW"] else float("nan")
-_a_ok = bool(_m_on == _m_on and _se_on == _se_on and _m_on <= 2.0 * _se_on)
-_b_ok = bool(_m_on == _m_on and _m_suw == _m_suw and _m_on < _m_suw)
+_a_ok = bool(_stat) and all(v[4] for v in _stat.values())
+_b_ok = bool(_stat) and all(v[5] for v in _stat.values())
 OK.append(crit("C1''''", "media di |pend(contrasto)-pend(coppia)| ON compatibile con ZERO (2 SE) E sotto `/W`",
                _a_ok and _b_ok,
-               "ON  (`/W^2`), %d semi: %s" % (len(_don), "  ".join("%.4f" % d for d in _don))
-               + NL + "   media %.4f   SE %.4f   ->  2 SE = %.4f   %s"
-               % (_m_on, _se_on, 2.0 * _se_on,
-                  "COMPATIBILE CON ZERO" if _a_ok else "NON compatibile")
-               + NL + "`/W`   media %.4f   %s" % (_m_suw,
-                                                  "ON sta SOTTO" if _b_ok else "ON NON sta sotto")
+               NL.join("verso %-7s %d semi: %s" % (_v, _stat[_v][0],
+                                                  "  ".join("%.4f" % x for x in _pv_on[_v]))
+                       + NL + "   media %.4f   SE %.4f   ->  2 SE = %.4f   %s"
+                       % (_stat[_v][1], _stat[_v][2], 2.0 * _stat[_v][2],
+                          "COMPATIBILE CON ZERO" if _stat[_v][4] else "NON compatibile")
+                       + NL + "   `/W` media %.4f   %s"
+                       % (_stat[_v][3], "ON sta SOTTO" if _stat[_v][5] else "ON NON sta sotto")
+                       for _v in sorted(_stat))
                + NL + "OFF  : %s" % "  ".join("%.4f" % d for _n, d, _r in dif["off"])
                + NL + "`/W`  : %s" % "  ".join("%.4f" % d for _n, d, _r in dif["suW"])
                + NL + "  **Nessun numero scelto:** il `2` degli errori standard e' la convenzione"
@@ -516,8 +546,11 @@ OK.append(crit("P1-sexies", "IL BRACCIO CON `/W` FALLISCE `C1'` (il caso che dev
                + NL + "  due forme, e il suo PASS sarebbe casuale."))
 
 # ====================================================================== `C3`
+# ❌ **TERZO DIFETTO MIO: `C3` girava su `SEMI` (4) mentre i bracci `pf_*` esistono solo sui**
+#   **`SEMI_FIGLI` (2)** -> «dati mancanti» e `FAIL` **per un difetto di ciclo**. **Un `FAIL` che
+#   viene da un braccio che non ho lanciato non e' un riscontro.**
 _ok3, _det3 = True, []
-for s in SEMI:
+for s in SEMI_FIGLI:
     a = dati.get("off_s%d_lunghi" % s)
     b = dati.get("pf_s%d_lunghi" % s)
     if not a or not b or "firme" not in a or "firme" not in b:
