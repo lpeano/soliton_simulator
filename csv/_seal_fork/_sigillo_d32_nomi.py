@@ -91,7 +91,9 @@ S._NMASSE_VIDEO["size"] = None
 S.avvia_test("MASSE-COERENTI")()
 for _ in range(%(passi)d):
     S.net.step()
-o = {"n": int(S.net.n), "archi": int(len(S.net.d)), "firme": {}}
+o = {"n": int(S.net.n), "archi": int(len(S.net.d)), "firme": {},
+     "taupp_tot": int(getattr(S.net, "_rep_taupp_tot", 0)),
+     "mitosi_eventi": int(getattr(S.net, "_mit_eventi", -1))}
 for k, v in sorted(vars(S.net).items()):
     if isinstance(v, np.ndarray):
         o["firme"][k] = "%%s|%%s|%%s" %% (v.shape, v.dtype,
@@ -182,6 +184,24 @@ if __name__ == "__main__":
             P("        ** LE FORME DIFFERISCONO: `0 diversi` qui sarebbe MANCANZA DI CONFRONTO **")
         esiti.append(("N1  byte-identico (0 campi diversi)", stessa_forma and not div))
         esiti.append(("N2  il confronto NON e' vuoto", bool(stessa_forma and a_p["firme"])))
+
+    # ------------------------------------------------------------------ N5
+    #   ⚠ SENZA QUESTO, `N1` PUO' PASSARE A VUOTO: se la mitosi non scatta, il blocco
+    #   rinominato non gira e la byte-identita' non dimostra niente -- e' la stessa
+    #   famiglia di `max|A-B| = 0` per mancanza di confronto (`STANDARD 2`). Il contatore
+    #   `_rep_taupp_tot` conta `np.size(pos_torsione)`: se e' > 0, quel codice HA GIRATO.
+    #   MISURATO: a 3 passi `n` non cambiava -- la mitosi NON era scattata.
+    if a_p is not None and a_d is not None:
+        tp, td = a_p["taupp_tot"], a_d["taupp_tot"]
+        P("")
+        P("  N5  IL BLOCCO RINOMINATO HA GIRATO  (senno' `N1` passa a VUOTO)")
+        P("        `_rep_taupp_tot` (conta `size(pos_torsione)`)  PRIMA %d   DOPO %d"
+          % (tp, td))
+        P("        eventi di mitosi                              PRIMA %d   DOPO %d"
+          % (a_p["mitosi_eventi"], a_d["mitosi_eventi"]))
+        ok5 = (tp > 0 and td > 0 and tp == td)
+        P("        > 0 su entrambi i bracci, e UGUALI ... %s" % ok5)
+        esiti.append(("N5  il codice rinominato HA girato", ok5))
 
     # ------------------------------------------------------------------ N3
     usi = n3_dall_ast()
