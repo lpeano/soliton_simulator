@@ -1,0 +1,39 @@
+========================================================================================================
+MISURA 0 -- `DRIVER-SCENA-II`: che cosa fa il driver OGGI con la scena (ii)
+========================================================================================================
+  argv del driver: 42 elementi, catturata dal TESTO del driver (non ricostruita)
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 79
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 79.
+
+
+  M0a  net.n dopo `_applica_flag` con `--nodi 0` ..... 455
+       atteso > 0 (il ternario ignora `a.nodi` con SEMINA_LAM) -> COME ATTESO
+
+  M0b  la scena (ii) su quella rete ................. SystemExit
+         [scena-ii] LA RETE HA GIA' 455 NODI: la scena (ii) vuole UN SOLO VUOTO, e questo si
+           SOMMEREBBE. Si lancia con `--nodi 0`. NON svuoto la rete da solo (`A9`): svuotarla
+           significherebbe buttare via cio' che un altro flag ha chiesto, senza dirlo.
+       atteso: SystemExit «LA RETE HA GIA' ... NODI» -> COME ATTESO
+
+  M0c  la scena N-MASSE con SEMINA_LAM ............... SystemExit
+         [massa] SCENA DI EPOCA PRE-`A13`: `_massa` semina 497 nodi in un raggio scelto per
+           la scena, e quei raggi vengono dall'epoca in cui una distanza sotto `LAM` era
+           ammessa. Con `SEMINA_LAM` acceso questa scena NON PARTE, e NON si adatta in
+       atteso: SystemExit «SCENA DI EPOCA PRE-`A13`» -> COME ATTESO
+
+========================================================================================================
+  M0a  `--nodi 0` NON e' rispettato              COME ATTESO
+  M0b  la scena (ii) RIFIUTA la rete non vuota   COME ATTESO
+  M0c  N-MASSE rifiuta (presidio da NON rompere) COME ATTESO
+MISURA 0: 3/3 come atteso
+========================================================================================================
+
+COSA QUESTA MISURA *NON* DICE:
+  - **non dice che la cura sia quella riga**: dice che il vuoto c'e' PRIMA della scena e
+    che la scena lo rifiuta. Che il punto sia `net.semina(-1 if SEMINA_LAM else a.nodi)`
+    e' una LETTURA del codice, e la prova sara' il criterio 2 del sigillo.
+  - **non misura quanti nodi** faccia la saturazione in generale: quel numero dipende dal
+    seme, e il seme qui e' quello che il driver non puo' cambiare (42).

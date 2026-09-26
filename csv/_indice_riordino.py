@@ -91,6 +91,13 @@ NUOVE = [
                   "fallire e' il piu' importante", "doc/PATTERN_DI_PROVA.md", "standard",
      "col riordino del 2026-09-26 ha ASSORBITO `L-SOGLIA`: una soglia non si calcola dai dati "
      "che giudica. Spostata da `CLAUDE.md` al posto 2."),
+    # i criteri LOCALI della misura 0 di `DRIVER-SCENA-II`: `M0b` e `M0c` esistevano come
+    #   "citato, mai definito"; ora hanno una definizione e un referto.
+    ("M0a", "MISURA 0 di DRIVER-SCENA-II: `--nodi 0` NON e' rispettato -- net.n = 455 "
+            "dopo `_applica_flag` con SEMINA_LAM", "csv/_test_fork/_misura0_scena_ii.py",
+     "criterio-locale",
+     "definito il 2026-09-26. Atteso scritto PRIMA nel task history: > 0. Misurato 455 "
+     "(saturazione col seme 42). E' il termine di paragone del criterio 2 del sigillo."),
     ("L-PATCH", "LE PATCH SI LANCIANO IN PRIMO PIANO; niente git stash con una patch in corso; "
                 "nei patch script niente escape, si usa chr() o replace",
      "CLAUDE.md par.11", "presidio",
@@ -169,6 +176,12 @@ DECISE = [
     ("RIORDINO-NOMI-H", "chiuso", "FATTO", None,
      "CHIUSA il 2026-09-26, decisione di Luca: si tengono `H-P3`, `H-P5`, ... com'e'. I nomi "
      "semantici della proposta (`H-CLI`, `H-CONFIG`, `H-ANCORA`) restano scartati."),
+    ("M0b", "chiuso", "FATTO", "csv/_test_fork/_misura0_scena_ii.py",
+     "ORA DEFINITO (2026-09-26): la scena (ii) RIFIUTA una rete non vuota -- SystemExit "
+     "«LA RETE HA GIA' 455 NODI». Era «citato, mai definito»."),
+    ("M0c", "chiuso", "FATTO", "csv/_test_fork/_misura0_scena_ii.py",
+     "ORA DEFINITO (2026-09-26): N-MASSE con SEMINA_LAM rifiuta -- SystemExit «SCENA DI "
+     "EPOCA PRE-A13». E' il presidio che il criterio 5 del sigillo NON deve rompere."),
     ("STANDARD 10", "teoria", "FATTO", "CLAUDE.md par.9-ter",
      "USCITA DAL POSTO 2 il 2026-09-26, per decisione di Luca: vive in `CLAUDE.md` par.9-ter. "
      "Il posto 2 la RICHIAMA, non la copia."),

@@ -1955,3 +1955,32 @@ E `SEMINA_LAM` e' nell'argv del driver **in ogni run**.
 **Prossimo passo, e si ferma li':** la misura 0 *(che cosa fa il driver oggi con la scena `(ii)`)*,
 poi la cura, il `--scena`, il `--seme`, il sigillo **via CLI e un processo per braccio**, **giro
 corto prima**. **STOP dopo il sigillo: nessun run lungo.**
+
+## 🔬 `MISURA 0` — **il vicolo cieco e' MISURATO, non piu' inferito: 3/3 come atteso**
+
+**`csv/_test_fork/_misura0_scena_ii.py`**, con **l'argv del driver** (42 elementi, catturata
+eseguendone il testo fino all'ancora, **non ricostruita**) e **`--nodi 0`**:
+
+```
+M0a  net.n dopo `_applica_flag` con `--nodi 0` ..... 455    atteso > 0     COME ATTESO
+M0b  la scena (ii) su quella rete .................. SystemExit            COME ATTESO
+       «[scena-ii] LA RETE HA GIA' 455 NODI: la scena (ii) vuole UN SOLO VUOTO...»
+M0c  N-MASSE con SEMINA_LAM ........................ SystemExit           COME ATTESO
+       «[massa] SCENA DI EPOCA PRE-`A13`: `_massa` semina 497 nodi in un raggio...»
+MISURA 0: 3/3 come atteso
+```
+
+> ### **`--nodi 0` chiede zero nodi e ne arrivano 455.**
+> **E' la riga `net.semina(-1 if SEMINA_LAM else a.nodi)`:** con `SEMINA_LAM` acceso `a.nodi`
+> **non viene guardato**, e la saturazione fa **455** nodi col seme 42. La scena `(ii)` li vede e
+> **rifiuta**, correttamente. **L'inferenza 🧠 della revisione e' ora una misura**, e i tre attesi
+> erano scritti **nel task history committato prima**.
+
+**E `M0c` e' il termine di paragone del criterio 5:** `N-MASSE` con `SEMINA_LAM` si ferma **con quel
+messaggio**, e dopo la cura **deve fermarsi ancora, con lo stesso messaggio**.
+
+**Una nota che vale piu' della misura:** il fatto che `_applica_flag` semini il vuoto era **gia'
+scritto**, ma nel docstring di `csv/_cli_flag.carica_dal_cli` — *«`_applica_flag` SEMINA ANCHE IL
+VUOTO... chi la chiama si ritrova un `S.net` gia' seminato»*. **Un fatto sul simulatore scritto in
+uno strumento e non in `doc/FATTI_dal_codice.md`**: e' esattamente `FATTI-AVVIO`, la voce che ho
+messo in coda, e la conferma che quel vuoto di documentazione costa.
