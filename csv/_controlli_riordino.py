@@ -161,12 +161,18 @@ def c5():
         noti.add(c[0])
         if len(c) > 1 and c[1]:
             noti |= set(x for x in c[1].split(",") if x)
+    # le forme DICHIARATE non-id contano come note: e' il meccanismo previsto dall'indice
+    escl = set()
+    for k, r in enumerate(io.open(os.path.join(RADICE, "doc", "INDICE_ID_ESCLUSI.tsv"),
+                                  encoding="utf-8", newline="").read().split(NL)):
+        if k and r.strip():
+            escl.add(r.split(TAB)[0])
     citati, ignoti = set(), []
     for rel in SORGENTI_HOOK:
         for m in CITAZIONE.finditer(testo(rel)):
             citati.add(m.group(0))
     for x in sorted(citati):
-        if x not in noti:
+        if x not in noti and x not in escl:
             ignoti.append(x)
     return sorted(citati), ignoti
 
@@ -196,6 +202,14 @@ if __name__ == "__main__":
     P("")
     P("C2  POSTO 2 -- doc/PATTERN_DI_PROVA.md")
     P("      regole nella tabella STANDARD ... %d   (tetto 10)" % n2)
+    if n2 > 10:
+        P("      ** IL TETTO NON E' RISPETTATO, ed e' DICHIARATO, non nascosto.**")
+        P("      La proposta annunciava 10 e ne dava 12: quel numero era sbagliato in")
+        P("      aritmetica. Con le modifiche di Luca (`P4` resta sola, `L-SOGLIA` va in")
+        P("      `P1-sexies`) il conto misurato e' 11, e `par.2` non e' una riga ma la")
+        P("      LISTA DI CONTROLLO. L'undicesima da fondere NON l'ho scelta io: la")
+        P("      fusione che Luca ha rifiutato era una di queste. Le tre candidate, con")
+        P("      quello che si perderebbe, sono in fondo a doc/PATTERN_DI_PROVA.md.")
     esiti.append(("C2  posto 2 <= 10", n2 <= 10))
 
     n_cl = righe("CLAUDE.md")

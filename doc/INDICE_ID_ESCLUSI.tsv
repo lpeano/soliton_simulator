@@ -48,3 +48,5 @@ ESENTE-H-P5	marcatore di esenzione ai presidi, non un identificatore	0
 UTF-8	nome di una codifica, non un identificatore	0
 A-B	locuzione del testo (`max|A-B|`), non un identificatore	0
 U-U	locuzione del testo (l'unitarieta' `U^dag U`), non un identificatore	0
+H-P	pezzo del modello `ESENTE-H-P<n>` nei messaggi dei presidi, non un id	0
+H-Pn	segnaposto del modello `ESENTE-<H-Pn>` nei messaggi dei presidi, non un id	0

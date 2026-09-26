@@ -1827,3 +1827,39 @@ presidio leggeva `L-DOPO-STOP` come **`DOPO-STOP`**, segnalando come ignoto **un
 che c'e'**. Allargata a **uno** stem. **Misurato l'effetto: gli ignoti passano da 6 a 0**, dopo
 aver dichiarato in `INDICE_ID_ESCLUSI.tsv` le sei forme che **non sono id** (`A-B`, `U-U`,
 `UTF-8`, `CLAUDE-OLTRE-400`, `ESENTE-H-P5`, il marcatore HTML dell'innesto).
+
+## ⑥ I CONTROLLI DI FINE: **4 su 5**, e il quinto e' una decisione di Luca, non un errore
+
+**`csv/_controlli_riordino.py`, e l'inventario NON si ricopia: si LEGGE da
+`doc/REGOLE_proposta.md`**, cosi' il controllo non puo' mentire su quante regole c'erano.
+
+```
+C1  nessuna regola persa ................ PASS   76 su 76 ritrovate, 0 perse
+                                                 (19 / 16 / 9 / 24 / 7 / 1 -- gli stessi
+                                                  conteggi della proposta, posto per posto)
+C2  posto 2 <= 10 ....................... FAIL   11 regole, tetto 10   <- DECIDE LUCA
+C3  CLAUDE.md <= 400 righe .............. PASS   330; avvio 2706 -> 1045 (-61 %)
+C4  tutti i collaudi passano ............ PASS   otto su otto
+C5  ogni nome citato dai hook esiste .... PASS   17 nomi, 0 ignoti
+```
+
+**C5 HA TROVATO UN BUCO VERO, e non era mio:** **`P1-bis`, `P1-quater` e `P1-sexies` erano
+citati dai presidi e NON ESISTEVANO NELL'INDICE.** Un nome che un presidio **stampa** e che
+l'indice non conosce e' un nome che **nessuno puo' risolvere** — ed e' il difetto che l'indice
+esiste per curare. Aggiunti, con la nota di che cosa hanno assorbito.
+
+## ⛔ **DUE DECISIONI IN CODA, e sono le sole. Non le ho prese io.**
+
+**Stanno nell'indice, `stato = da-decidere`, ciascuna COL CRITERIO DI CHIUSURA** — *una voce
+senza criterio non e' un fronte, e' un desiderio*:
+
+| id | la decisione | che cosa la chiude |
+|---|---|---|
+| **`RIORDINO-POSTO2`** | **il posto 2 ha 11 regole e il tetto e' 10** | Luca sceglie fra le **tre candidate** scritte in fondo a `doc/PATTERN_DI_PROVA.md`, **oppure alza il tetto dichiarandolo** |
+| **`RIORDINO-NOMI-H`** | il prefisso e' sui **nomi vecchi** (`H-P3`) e non sui nomi **semantici** (`H-CLI`) che la proposta suggeriva | Luca conferma o chiede i semantici; **si cambia rigirando `csv/_rinomina_hook.py`** |
+
+**SUL PRIMO NON POTEVO DECIDERE IO**, e non per prudenza: **la fusione che Luca ha
+esplicitamente RIFIUTATO oggi** (`P4` + `L-SOGLIA`) **e' una delle tre candidate**. Sceglierne
+un'altra al suo posto sarebbe stato decidere una cosa su cui si era appena pronunciato.
+**Sul secondo ho letto alla lettera il suo `(H-P3, H-P5, ...)`**, che contraddice i nomi della
+proposta: **lo dichiaro perche' e' una lettura, non un dato.**

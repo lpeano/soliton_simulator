@@ -76,6 +76,21 @@ NUOVE = [
     ("L-DOPO-STOP", "DOPO UNO STOP, se Luca non risponde si lavora SOLO la coda: nessuna cura "
                     "fisica, nessun run lungo, nessuna decisione al suo posto",
      "CLAUDE.md par.11", "presidio", "regola di Luca, 2026-09-26."),
+    # ⚠ TRE REGOLE CITATE DAI HOOK E MAI ENTRATE NELL'INDICE: le ha trovate il controllo `C5`
+    #   del riordino. Un nome che un presidio stampa e che l'indice non conosce e' un nome che
+    #   nessuno puo' risolvere -- e' il difetto che l'indice esiste per curare.
+    ("P1-bis", "LA RELAZIONE SI SCRIVE NELLO STESSO COMMIT DEL RISCONTRO", "CLAUDE.md par.4",
+     "presidio",
+     "col riordino del 2026-09-26 ha ASSORBITO `P1-bis-bis`, `par.5-ter`, `par.5-sexies` e "
+     "`par.5-octies` in una regola sola: tutto cio' che si dice a Luca va nel repo nello "
+     "stesso giro. Il PRESIDIO del hook che portava questo nome ora e' `H-P1-bis`."),
+    ("P1-quater", "OGNI SOSTITUZIONE DI TESTO SI ASSERISCE PER SE', MAI IN BLOCCO",
+     "CLAUDE.md par.11", "presidio",
+     "contiene anche `L-PATCH` (patch in primo piano, niente escape nei patch script)."),
+    ("P1-sexies", "UN CRITERIO SI COLLAUDA SU UN CASO A RISPOSTA NOTA, e il caso che DEVE "
+                  "fallire e' il piu' importante", "doc/PATTERN_DI_PROVA.md", "standard",
+     "col riordino del 2026-09-26 ha ASSORBITO `L-SOGLIA`: una soglia non si calcola dai dati "
+     "che giudica. Spostata da `CLAUDE.md` al posto 2."),
     ("L-PATCH", "LE PATCH SI LANCIANO IN PRIMO PIANO; niente git stash con una patch in corso; "
                 "nei patch script niente escape, si usa chr() o replace",
      "CLAUDE.md par.11", "presidio",
@@ -130,6 +145,8 @@ NON_ID = [
     ("DA-CLAUDE-MD-2026-09-26", "marcatore HTML dell'innesto del riordino, non un identificatore"),
     ("ESENTE-H-P5", "marcatore di esenzione ai presidi, non un identificatore"),
     ("UTF-8", "nome di una codifica, non un identificatore"),
+    ("H-P", "pezzo del modello `ESENTE-H-P<n>` nei messaggi dei presidi, non un id"),
+    ("H-Pn", "segnaposto del modello `ESENTE-<H-Pn>` nei messaggi dei presidi, non un id"),
     ("A-B", "locuzione del testo (`max|A-B|`), non un identificatore"),
     ("U-U", "locuzione del testo (l'unitarieta' `U^dag U`), non un identificatore"),
 ]
@@ -141,10 +158,30 @@ def leggi():
     return righe[0], [r for r in righe[1:] if r.strip()]
 
 
-def riga_nuova(i, titolo, fonte, tipo, nota):
+# le DECISIONI che restano a Luca: `stato = da-decidere`, e **col criterio di chiusura**, perche'
+#   una voce senza criterio non e' un fronte, e' un desiderio (`CLAUDE.md` par.4).
+APERTE = [
+    ("RIORDINO-POSTO2", "IL POSTO 2 HA 11 REGOLE E IL TETTO E' 10: quale si fonde",
+     "doc/PATTERN_DI_PROVA.md", "fronte",
+     "CRITERIO DI CHIUSURA: Luca sceglie una delle tre candidate scritte in fondo a "
+     "doc/PATTERN_DI_PROVA.md (STANDARD 10 -> CLAUDE.md par.11; P5 dentro STANDARD 3; "
+     "P4 dentro P1-sexies), oppure alza il tetto dichiarandolo. NON scelgo io: la fusione "
+     "che Luca ha RIFIUTATO il 2026-09-26 era una di queste. Misurato: anche la proposta "
+     "ne dava 12, non 10 -- quel numero era sbagliato in aritmetica."),
+    ("RIORDINO-NOMI-H", "il prefisso `H-` e' sui NOMI VECCHI (H-P3) e non sui nomi semantici "
+                        "(H-CLI) che la proposta suggeriva",
+     "CLAUDE.md par.12", "da-decidere",
+     "CRITERIO DI CHIUSURA: Luca conferma `H-P3`/`H-P5`/... oppure chiede i nomi semantici. "
+     "Ho letto alla lettera il suo `(H-P3, H-P5, ...)`, e la ragione in piu' e' che cosi' "
+     "ogni citazione storica (`P5` in un referto del 25/9) resta leggibile. Si cambia "
+     "rigirando csv/_rinomina_hook.py con le coppie nuove."),
+]
+
+
+def riga_nuova(i, titolo, fonte, tipo, nota, stato="teoria"):
     #  id alias titolo fonte stato blocca tipo famiglia stato_da avanzamento revisione motivo nota
-    return TAB.join([i, ALIAS.get(i, ""), titolo, fonte, "teoria", "NO", tipo, "?", "",
-                     "FATTO", "", "", nota])
+    return TAB.join([i, ALIAS.get(i, ""), titolo, fonte, stato, "NO", tipo, "?", "",
+                     "FATTO" if stato == "teoria" else "IN CODA", "", "", nota])
 
 
 def esclusi(scrivi):
@@ -172,12 +209,15 @@ if __name__ == "__main__":
           % ("" if scrivi else "   (PROVA: non scrivo)"))
     print("=" * 92)
     agg = gia = 0
-    for i, titolo, fonte, tipo, nota in NUOVE:
+    for i, titolo, fonte, tipo, nota in NUOVE + [
+            (a, b, c, ('fronte' if d == 'fronte' else 'altro'), e) for a, b, c, d, e in APERTE]:
         if i in presenti:
             gia += 1
             print("  gia' presente  %-14s (non la tocco)" % i)
             continue
-        corpo.append(riga_nuova(i, titolo, fonte, tipo, nota))
+        _ap = i in [x[0] for x in APERTE]
+        corpo.append(riga_nuova(i, titolo, fonte, tipo, nota,
+                                'da-decidere' if _ap else 'teoria'))
         agg += 1
         print("  AGGIUNTA       %-14s %s" % (i, titolo[:54]))
     presenti = dict((r.split(TAB)[0], k) for k, r in enumerate(corpo))
