@@ -31,6 +31,11 @@ in questo smistamento     137   (tipo difetto/fronte/misura/cura E stato aperto/
 | 9 | **RAMPA-2** | **si cura comunque**, e sta per ultima perche' e' il transitorio di un passo | 30-45 min |
 | 10 | **RUN BASE** | scena `(ii)`(a), 4 semi, 600 passi, tutte le cure, `P5` attivo, tag `base-epoca-4`; poi la `PROVA 1` | il run: ore-macchina |
 
+**📖 LA REVISIONE STORICA DI OGNI VOCE** *(che cosa e' VERIFICATO sul codice e che cosa e' INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D02](REVISIONE_SI_2026-09-26.md#d02) · [D03](REVISIONE_SI_2026-09-26.md#d03) · [D31](REVISIONE_SI_2026-09-26.md#d31) · [DRIVER-SCENA-II](REVISIONE_SI_2026-09-26.md#driver-scena-ii) · [OSSERVABILE-P1](REVISIONE_SI_2026-09-26.md#osservabile-p1) · [SCALE-TW](REVISIONE_SI_2026-09-26.md#scale-tw) · [U1](REVISIONE_SI_2026-09-26.md#u1)
+
+**Le voci che NON bloccano hanno la loro sezione qui:** [NON BLOCCANO](REVISIONE_SI_2026-09-26.md#non-bloccano).
+
+
 **Somma delle stime, senza il run e senza le decisioni: `8,5-12,5 h`.** *(Stime, non misure: la piu' incerta e' `D02`, che tocca una legge.)*
 
 ## FAMIGLIA **A** — INERZIA E AVVIO   *(59 voci)*

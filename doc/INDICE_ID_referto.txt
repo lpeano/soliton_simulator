@@ -33,17 +33,17 @@ LE CONDIZIONI DI FINE (punto 3 del mandato) -- verificate DA SCRIPT
   CITATI e MAI DEFINITI in un registro (entrano con `da-decidere`): 320
       di cui citati SOLO in referti/sigilli/task history -> `criterio-locale`: 150
       DA-DECIDERE            222 citazioni
-      T1                     113 citazioni
-      IC95                   81 citazioni
-      SU2                    68 citazioni
-      STEP2                  67 citazioni
-      Y5                     66 citazioni
-      E1                     58 citazioni
-      S1                     52 citazioni
-      S3                     44 citazioni
-      T6                     33 citazioni
-      T0                     33 citazioni
-      Z1c                    31 citazioni
+      T1                     112 citazioni
+      IC95                   80 citazioni
+      SU2                    67 citazioni
+      STEP2                  66 citazioni
+      Y5                     65 citazioni
+      E1                     56 citazioni
+      S1                     51 citazioni
+      S3                     43 citazioni
+      T6                     32 citazioni
+      T0                     32 citazioni
+      Z1c                    30 citazioni
 
 ========================================================================================================
 COSA QUESTO INDICE *NON* DICE

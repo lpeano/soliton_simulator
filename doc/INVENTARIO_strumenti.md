@@ -846,3 +846,11 @@ python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie
 | `csv/_punto_della_situazione.py` | `04167da9` | `python csv/_punto_della_situazione.py` | **CONVERTITO**: legge **soltanto** `doc/INDICE_ID.tsv` *(campo nuovo `avanzamento`)*, e ha un **collaudo nei due versi** — `SCALE-TW` deve comparire, `CONTAGIO` *(nel Markdown, senza ID)* **non deve** | `doc/PUNTO_DELLA_SITUAZIONE.md`: **95** task con marcatore *(da 60)*, `47` difetti; collaudo **5/5** |
 | `csv/_confronto_pds.py` | `b49cca16` | `PDS_PRIMA=<file> python csv/_confronto_pds.py` | il confronto **prima/dopo** dell'output, con le differenze in **tre classi** | `doc/LETTORI_INDICE_confronto.md`: **+68 comparse** *(l'indice copre tutti i registri)*, **-30 senza marcatore** *(filtro dichiarato)*, **-3 che non erano ID** *(due erano NOMI DI FILE)* |
 | `doc/PUNTO_DELLA_SITUAZIONE_prima_della_conversione.md` | — | — | **il reperto del PRIMA**: l'output del parser salvato **prima** della conversione, committato perche' un confronto senza il termine di paragone non e' verificabile | — |
+
+---
+
+## Aggiunto il 2026-09-26 — **la REVISIONE STORICA degli otto `SI`**
+
+| documento | comando che lo collega | cosa contiene |
+|---|---|---|
+| `doc/REVISIONE_SI_2026-09-26.md` | `python csv/_indice_id.py` *(scrive la colonna `revisione` e i rimandi nello smistamento)* | per ognuno degli otto `SI` e per le sei voci che **non** bloccano: cio' che e' ✅ **VERIFICATO sul codice** *(file, riga, la frase che la riga contiene)*, cio' che e' 🟨 **di Luca e non ho rifatto**, cio' che e' 🧠 **INFERENZA**. **Blob del documento: `06c18fe9`.** |

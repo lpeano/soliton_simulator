@@ -123,6 +123,19 @@ def avanzamento_di(cella):
     return min(trovati)[1] if trovati else "(senza marcatore)"
 
 
+# ------------------------------------------------------------------ IL RIMANDO ALLA REVISIONE
+#   ➕ Ordine di Luca, 2026-09-26: **ogni voce dell'indice che compare nella revisione storica
+#   porta l'ANCORA della sua sezione**, cosi' chi la prende in mano trova il ragionamento senza
+#   avere la conversazione. Il documento separa ✅ VERIFICATO da 🟨 di Luca da 🧠 INFERENZA.
+REVISIONE_DOC = "doc/REVISIONE_SI_2026-09-26.md"
+REVISIONE = {
+    "DRIVER-SCENA-II": "driver-scena-ii", "OSSERVABILE-P1": "osservabile-p1",
+    "D02": "d02", "D31": "d31", "U1": "u1", "CLI-1": "cli-1", "SCALE-TW": "scale-tw",
+    "D03": "d03",
+    "RAMPA-2": "non-bloccano", "D09": "non-bloccano", "Z73": "non-bloccano",
+    "D11": "non-bloccano", "D14": "non-bloccano", "D15": "non-bloccano",
+}
+
 BLOCCA_SI = r"BLOCCANTE|PRIMA DI QUALUNQUE GIRO|prima del run base|URGENTE, PRIMA"
 #   ...e una voce puo' DICHIARARE di non bloccare: la fonte vince sulla parola chiave.
 BLOCCA_NO = r"NON BLOCCA|non blocca il run base"
@@ -582,7 +595,7 @@ for v in SMIST:
             v["blocca"], v["motivo"] = "NO", REGOLA_NO_ULTIMA
 
 COL = ["id", "alias", "titolo_breve", "fonte_principale", "stato", "blocca_run_base", "tipo",
-       "famiglia", "stato_da", "avanzamento"]
+       "famiglia", "stato_da", "avanzamento", "revisione"]
 out = [TAB.join(COL)]
 for k in sorted(VOCI):
     v = VOCI[k]
@@ -590,7 +603,9 @@ for k in sorted(VOCI):
                          re.sub(r"[\t\n]", " ", v["titolo"]), v["fonte"],
                          v["stato"], v["blocca"], v["tipo"], v["fam"],
                          re.sub(r"[\t\n]", " ", v.get("stato_da", "")),
-                         v.get("avanz", "(senza marcatore)")]))
+                         v.get("avanz", "(senza marcatore)"),
+                         ("%s#%s" % (REVISIONE_DOC, REVISIONE[v["id"]])
+                          if v["id"] in REVISIONE else "")]))
 io.open(DEST, "w", encoding="utf-8", newline=NL).write(NL.join(out) + NL)
 
 outx = [TAB.join(["forma", "motivo", "citazioni"])]
@@ -653,6 +668,12 @@ _sm += [u"## 🎯 **L'ORDINE DI LAVORO DEI `SI`** — %d voci, e l'ordine E' PER
         u"| # | voce | perche' viene qui | stima |", u"|--:|---|---|--:|"]
 for _n, _id, _p, _st in ORDINE:
     _sm.append(u"| %s | **%s** | %s | %s |" % (_n, _id, _p, _st))
+_sm += [u"", u"**📖 LA REVISIONE STORICA DI OGNI VOCE** *(che cosa e' VERIFICATO sul codice e "
+        u"che cosa e' INFERENZA)*: " + u" · ".join(
+            u"[%s](%s#%s)" % (_i, REVISIONE_DOC.replace("doc/", ""), _a)
+            for _i, _a in sorted(REVISIONE.items()) if _a != "non-bloccano"),
+        u"", u"**Le voci che NON bloccano hanno la loro sezione qui:** "
+        u"[NON BLOCCANO](%s#non-bloccano)." % REVISIONE_DOC.replace("doc/", ""), u""]
 _sm += [u"", u"**Somma delle stime, senza il run e senza le decisioni: `8,5-12,5 h`.** "
         u"*(Stime, non misure: la piu' incerta e' `D02`, che tocca una legge.)*", u""]
 if _dv:

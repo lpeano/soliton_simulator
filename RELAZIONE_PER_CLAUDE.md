@@ -20207,3 +20207,82 @@ _inventario_passo / _stato_run  fuori perimetro (script e registro dei run)
 **Cio' che si potrebbe fare, e non faccio ora perche' non e' stato chiesto:** dare all'inventario un
 criterio piu' fine *(distinguere `open()` in lettura di un registro **da** la sola comparsa del nome
 in un elenco di fonti o in un collaudo)*. **Sarebbe una voce nuova, e la lista e' congelata.**
+
+
+---
+
+# 🔬 **LA REVISIONE STORICA DEGLI OTTO `SI` E' NEL REPO** *(2026-09-26)*
+
+`doc/REVISIONE_SI_2026-09-26.md`, e **ogni voce dell'indice che vi compare porta l'ancora della sua
+sezione** nella colonna nuova **`revisione`** *(piu' i rimandi in testa allo smistamento)*.
+
+## ⚠ **TRE LIVELLI DI EVIDENZA, e il documento non li mescola**
+
+```
+✅ VERIFICATO          l'ho aperto io: file, riga, e la FRASE che la riga contiene
+🟨 DI LUCA              una misura o un numero della sua revisione: NON l'ho rifatto
+🧠 INFERENZA            un ragionamento: si giudica dalla forma, non da un numero
+```
+
+**Perche' la distinzione e' la prima cosa del documento:** oggi ho **chiuso una voce su un numero che
+non era nei file** *(`D09`)* e **creduto buono un campo vuoto** *(`avanzamento`, 740 su 740)*.
+**Un documento che non dice quale riga ha aperto chi lo ha scritto e' una voce di corridoio.**
+
+## ✅ **CIO' CHE HO VERIFICATO IO, riga per riga**
+
+```
+_scena_video.py:223    l'argv FISSA `--test N-MASSE`
+_scena_video.py:328    `S.avvia_test("N-MASSE")()`  -- il costruttore ufficiale, anche qui N-MASSE
+:7187                  `raise SystemExit(` dentro `_massa` (che comincia a :7169)
+:8681                  `net.semina(-1 if SEMINA_LAM else a.nodi)`
+:7290-7295             il commento della scena (ii): «UN SOLO VUOTO... si SOMMEREBBE... lo DICO»
+:6541                  `v = self.pos[jj] - self.pos[ii]`  -- `L` viene dal DISEGNO
+:4186                  `_smorza`: «smorzando solo la DISCESA», `eff = where(scende, dx*fatt, dx)`
+:580                   `massa_critica_collasso`, forma adattiva
+:2954-2961             `lambda_nodi` ritorna `np.full(self.n, LAM)`: COSTANTE UNIFORME
+:5212                  la repulsione di coerenza: `u = riempimento * coerenza`, con
+                       `massa_critica_collasso()` come fallback  -> **agisce sulle MASSE**
+48a3555                data **2026-09-20**, e il messaggio dice «4651 nati in 1560 passi»
+```
+
+## 🟨 **CIO' CHE HO LASCIATO MARCATO COME TUO, invece di assorbirlo**
+
+`L/d` fino a **x8** *(`Z103`)* · **454418** campioni sopra `0.5` · **78-89 %** di archi saturi
+*(`Z112`)* · nati **218/216** · `lambda_nodi` = **0.7615·LAM** · la capacita' **621** · le **21**
+occorrenze di cui **due mordono** · che `N-MASSE` **con `SEMINA_LAM`** finisca *proprio* in quel
+`SystemExit` · che manchi un `--seme` **reale**.
+**Di queste ho verificato l'ESISTENZA della riga, non il numero.**
+
+## 🧠 **LE INFERENZE PIU' IMPORTANTI, e due RITIRI**
+
+- **`tanh` conserva la MEDIA di `u = d − LAM`, l'esponenziale la MEDIANA; la distanza fra masse e'
+  una SOMMA, quindi segue la MEDIA → `tanh` favorito PER PRINCIPIO**, non per un numero.
+- ❌ **`exp(8.97e4)` su `4239163` e' un conto SBAGLIATO: l'esponente e' PER ARCO** *(`~0.3` a 120
+  passi)*. **Sommare gli esponenti di archi diversi tratta un prodotto di fattori indipendenti come
+  un unico fattore.**
+- ❌ **«`4π` sulle facce» NON REGGE:** per un triangolo l'angolo solido e' **< `2π`**, quindi la fase
+  di Berry **< `π`**. **`3π` non e' un quanto: e' il MASSIMO DELL'INGRESSO ISTANTANEO** *(`2π` di fase
+  + `π` di torsione dipolare)*, e per questo **solo la coda lo raggiunge**.
+- ⚠ **le due forme simmetriche CONGELANO gli archi a `LAM` esatto** *(`u → 0`)*: **non e' un difetto
+  dimostrato, e' una conseguenza della forma** — va guardata sui dati.
+- ⚠ **e un precedente di METODO:** la rimisura del 25 **soddisfaceva il criterio di riapertura** e fu
+  dichiarata *«regge»*, **in configurazione sbagliata**.
+
+## ❌ **UNA DATA CORRETTA, e la regola che ne esce**
+
+Nella riga `Z73` avevo scritto che la ritrattazione era del **2026-09-24**: `git log` dice che
+`48a3555` e' del **2026-09-20**. Corretto, col motivo accanto.
+> ### **La data di un commit si legge da git, non si ricorda.** E' la stessa lezione di stamattina
+> ### *(`STANDARD 9` vale anche per `git log`)*, vista dall'altro lato: **git e' la fonte, non la
+> ### memoria.**
+
+## ✅ **IL DELTA CONTRO IL TAG, col diff**
+
+```
+colonne 9 -> 11   nuove: `avanzamento`, `revisione`
+voci  741 -> 740  sparita: `CLI-1)` (il token spurio)   nuove: nessuna
+campi di DECISIONE cambiati (3):  D09  Z73  LETTORI-INDICE   -- esattamente le decisioni di Luca
+```
+
+**Le quattro condizioni di fine restano soddisfatte, e i collaudi pure** *(vista `2/2`, presidio
+`5/5`, collisioni `0` su `322`)*.

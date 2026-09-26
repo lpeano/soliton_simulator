@@ -93,7 +93,7 @@ elencate qui        485   (tolte le etichette locali, gli assiomi e gli standard
 | **`S10`** | S10 RITIRATA il 2026-09-24 / Il tetto 1.414213 di r viene da un ramo di ritmo() che NON GIRA / — / RITIRATA,… | `altro` | `3eb6b7a 13:01` |
 | **`Z114`** | Z114 CHIUSA PER DIMOSTRAZIONE / GLI SCRITTORI DI d0 NON TRACCIATI SONO DUE, NON TRE: init (fuori perimetro) e… | `fronte` | `bf8aaad 17:45` |
 | **`Z117`** | Z117 CHIUSA PER DIMOSTRAZIONE + MISURA / IL WRAP «A 4π» DI ritmo() NON AVVOLGE NIENTE: su (-2π, 2π) E'… | `fronte` | `29b7846 13:43` |
-| **`Z73`** | Z73 RITIRATA ⏳[EPOCA 1 · MISURA] / RITIRATA UNA SECONDA VOLTA il 2026-09-24, e la smentita sta nel MESSAGGIO… | `fronte` | `7935806 17:03` |
+| **`Z73`** | Z73 RITIRATA ⏳[EPOCA 1 · MISURA] / RITIRATA UNA SECONDA VOLTA il 2026-09-20, e la smentita sta nel MESSAGGIO… | `fronte` | `3566e3b 17:25` |
 
 ## FATTO — 31
 
@@ -109,8 +109,8 @@ elencate qui        485   (tolte le etichette locali, gli assiomi e gli standard
 | **`E4-LAM`** | LAM FATTO il 2026-09-24 / LA LEGGE «NESSUNA LUNGHEZZA SOTTO LAM» DEVE DIVENTARE STRUTTURALE — sempre accesa,… | `altro` | `612e7fa 23:14` |
 | **`G1`** | §1 QUANTO CONTA IL DISEGNO — Ldisegno/d per arco, per regione, nel tempo, e la correlazione col CENTRO del… | `cura` | `4a76517 15:00` |
 | **`G3`** | §3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE / GLOBALE-DISEGNO §3 / FATTA. sigillo 7/7 · controllo involucro… | `cura` | `0be343a 09:21` |
-| **`G4`** | §4 PROVA DI SPEGNIMENTO: la MEMORIA DEL MOTO — flag MEMMOTO / GLOBALE-DISEGNO §4 / FATTO (finito 14:39:27).… | `cura` | `3eb6b7a 13:01` |
-| **`LETTORI-INDICE`** | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FUORI PERIMETRO — e i quattro… | `altro` | `24499f1 17:08` |
+| **`G4`** | §4 PROVA DI SPEGNIMENTO: la MEMORIA DEL MOTO — flag MEMMOTO / GLOBALE-DISEGNO §4 / FATTO (finito 14:39:27).… | `cura` | `8ee4377 17:24` |
+| **`LETTORI-INDICE`** | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FUORI PERIMETRO — e i quattro… | `altro` | `3566e3b 17:25` |
 | **`OKN-ASSERT`** | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(..., default) CHE DECIDE AL POSTO… | `altro` | `e216730 01:33` |
 | **`POTENZE-1`** | CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6/6: F2 da x47 000 a x1.4, F1 2.427 contro 2.4567… | `altro` | `4a76517 15:00` |
 | **`RAMPA-1`** | CHIUSA il 2026-09-25, strada (3) (decisione di Luca): sigillo 9/9 dal CLI, ramp = 1.000000000000000 per 120… | `altro` | `4a5d085 20:33` |
