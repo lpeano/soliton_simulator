@@ -50,3 +50,6 @@ A-B	locuzione del testo (`max|A-B|`), non un identificatore	0
 U-U	locuzione del testo (l'unitarieta' `U^dag U`), non un identificatore	0
 H-P	pezzo del modello `ESENTE-H-P<n>` nei messaggi dei presidi, non un id	0
 H-Pn	segnaposto del modello `ESENTE-<H-Pn>` nei messaggi dei presidi, non un id	0
+H-CLI	nome SCARTATO: era la proposta di nome semantico per un presidio del hook, e Luca ha deciso il 2026-09-26 di tenere il nome vecchio col prefisso (H-P3, H-P5, ...). Si cita nei referti e nei commit come cosa NON scelta: non deve diventare una voce (RIORDINO-NOMI-H)	0
+H-CONFIG	nome SCARTATO: era la proposta di nome semantico per un presidio del hook, e Luca ha deciso il 2026-09-26 di tenere il nome vecchio col prefisso (H-P3, H-P5, ...). Si cita nei referti e nei commit come cosa NON scelta: non deve diventare una voce (RIORDINO-NOMI-H)	0
+H-ANCORA	nome SCARTATO: era la proposta di nome semantico per un presidio del hook, e Luca ha deciso il 2026-09-26 di tenere il nome vecchio col prefisso (H-P3, H-P5, ...). Si cita nei referti e nei commit come cosa NON scelta: non deve diventare una voce (RIORDINO-NOMI-H)	0

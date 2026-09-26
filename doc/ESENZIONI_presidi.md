@@ -31,11 +31,12 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_riordino_fatti.py|H-P5` | non importa il simulatore e non lo fa girare. Sposta prosa fra due documenti. |
 | `csv/_riordino_sposta.py|H-P5` | non importa il simulatore e non lo fa girare. Sposta prosa fra documenti. |
 | `csv/_riordino_storia.py|H-P5` | non importa il simulatore e non lo fa girare. Archivia prosa da un tag di git. |
+| `csv/_sposta_standard10.py|H-P5` | non importa il simulatore e non lo fa girare. Sposta prosa fra due documenti. |
 | `csv/_vista_smistamento.py|H-P5` | non importa il simulatore e non lo fa girare. Legge due TSV e scrive un documento. |
 | `csv/_archivio/_indice_id_importatore.py|H-P5` | non importa il simulatore e non lo fa girare. Genera due indici da documenti. |
 | `csv/_seal_fork/_c1_col_segno.py|H-P5` | legge JSON gia' scritti e non fa girare il simulatore. La configurazione di quei dati |
 | `csv/_test_fork/_esponenti_figli.py|H-P5` | legge JSON gia' scritti, non fa girare il simulatore. La configurazione di quei dati |
 
 ```
-esenzioni dichiarate   30
+esenzioni dichiarate   31
 ```

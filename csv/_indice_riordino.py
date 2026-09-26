@@ -147,8 +147,28 @@ NON_ID = [
     ("UTF-8", "nome di una codifica, non un identificatore"),
     ("H-P", "pezzo del modello `ESENTE-H-P<n>` nei messaggi dei presidi, non un id"),
     ("H-Pn", "segnaposto del modello `ESENTE-<H-Pn>` nei messaggi dei presidi, non un id"),
+    ("H-CLI", "nome SCARTATO: era la proposta di nome semantico per un presidio del hook, e Luca ha deciso il 2026-09-26 di tenere il nome vecchio col prefisso (H-P3, H-P5, ...). Si cita nei referti e nei commit come cosa NON scelta: non deve diventare una voce (RIORDINO-NOMI-H)"),
+    ("H-CONFIG", "nome SCARTATO: era la proposta di nome semantico per un presidio del hook, e Luca ha deciso il 2026-09-26 di tenere il nome vecchio col prefisso (H-P3, H-P5, ...). Si cita nei referti e nei commit come cosa NON scelta: non deve diventare una voce (RIORDINO-NOMI-H)"),
+    ("H-ANCORA", "nome SCARTATO: era la proposta di nome semantico per un presidio del hook, e Luca ha deciso il 2026-09-26 di tenere il nome vecchio col prefisso (H-P3, H-P5, ...). Si cita nei referti e nei commit come cosa NON scelta: non deve diventare una voce (RIORDINO-NOMI-H)"),
     ("A-B", "locuzione del testo (`max|A-B|`), non un identificatore"),
     ("U-U", "locuzione del testo (l'unitarieta' `U^dag U`), non un identificatore"),
+]
+
+
+# le voci DECISE da Luca: (id, stato, avanzamento, fonte_nuova|None, nota_da_aggiungere)
+#   Idempotente: se la nota c'e' gia', la riga non si tocca.
+DECISE = [
+    ("RIORDINO-POSTO2", "chiuso", "FATTO", None,
+     "CHIUSA il 2026-09-26, decisione di Luca: `STANDARD 10` ESCE dal posto 2 e va in "
+     "`CLAUDE.md` par.9-ter, perche' e' il criterio con cui si sceglie fra CURE e non il "
+     "metodo di una MISURA. Il posto 2 torna a 10 e IL TETTO NON SI ALZA. Misurato: "
+     "la tabella `STANDARD` ha 10 righe su un tetto di 10."),
+    ("RIORDINO-NOMI-H", "chiuso", "FATTO", None,
+     "CHIUSA il 2026-09-26, decisione di Luca: si tengono `H-P3`, `H-P5`, ... com'e'. I nomi "
+     "semantici della proposta (`H-CLI`, `H-CONFIG`, `H-ANCORA`) restano scartati."),
+    ("STANDARD 10", "teoria", "FATTO", "CLAUDE.md par.9-ter",
+     "USCITA DAL POSTO 2 il 2026-09-26, per decisione di Luca: vive in `CLAUDE.md` par.9-ter. "
+     "Il posto 2 la RICHIAMA, non la copia."),
 ]
 
 
@@ -248,6 +268,26 @@ if __name__ == "__main__":
             c[1] = (c[1] + "," if c[1] else "") + al
             corpo[presenti[i]] = TAB.join(c)
             print("  ALIAS          %-14s -> %s" % (i, al))
+    # le DECISIONI di Luca: stato, avanzamento, fonte, e la nota che dice perche'
+    dec = 0
+    for i, stato, avanz, fonte, nota in DECISE:
+        if i not in presenti:
+            print("  ** non trovata, NON decisa: %s **" % i)
+            saltate += 1
+            continue
+        c = corpo[presenti[i]].split(TAB)
+        while len(c) < 13:
+            c.append("")
+        if nota in c[12]:
+            print("  decisione gia' li' %-16s" % i)
+            continue
+        c[4], c[9] = stato, avanz
+        if fonte:
+            c[3] = fonte
+        c[12] = (c[12] + "  " if c[12] else "") + nota
+        corpo[presenti[i]] = TAB.join(c)
+        dec += 1
+        print("  DECISA         %-14s -> stato `%s`" % (i, stato))
     n_esc, tot_esc = esclusi(scrivi)
     print("  ESCLUSI        %d forme nuove dichiarate (totale %d)" % (n_esc, tot_esc))
     print("  --------------------------------------------------")

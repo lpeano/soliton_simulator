@@ -258,6 +258,38 @@ history, nei referti, nei `json` e nel codice il nome vecchio **resta**, e si ri
 
 ---
 
+## 9-ter. UNA CURA NON AUMENTA IL NUMERO DELLE LEGGI *(criterio di Luca, 2026-09-25)*
+
+> ### **«Una cura non aumenta il numero delle leggi; a parità di effetto si preferisce togliere
+> ### un'eccezione.»**
+
+**IL CASO CHE L'HA GENERATO:** `NODI-1` proponeva di far allacciare i nodi nati in
+dinamica **con la stessa regola della semina** *(`R_CONN`)*. Sembrava *togliere* un'eccezione
+— «nessun nodo di seconda classe» — e invece **ne aggiungeva una di fisica**: avrebbe
+trasformato la mitosi da **creazione di spazio** *(il figlio non accorcia niente: la relazione fra
+i genitori passa da `1` a `2` passi)* in **addensamento** *(`~77` scorciatoie per figlio)*.
+
+> **La forma dell'errore:** una regola che rende **uniforme il CODICE** può rendere **non uniforme
+> la FISICA**. «Togliere un'eccezione» va misurato **sulle leggi**, non sui rami del programma.
+
+**COME SI APPLICA, operativamente:**
+
+1. **si conta:** quante leggi c'erano prima, quante dopo. Una cura che ne aggiunge una **deve
+   dire perché non si poteva togliere niente**;
+2. **a parità di effetto misurato, vince la variante con MENO leggi** — e «parità» significa
+   *entro la barra d'errore*, non a occhio;
+3. **un'eccezione che si toglie va verificata SULLA FISICA:** *che cosa cambia nel sistema*, non
+   *quante righe in meno ha il file*.
+
+**⚠ E NON È UN INVITO A NON CURARE:** `A12` resta — *un difetto dimostrato si cura*. Questo dice
+**come** si sceglie fra due cure, non **se** curare.
+
+---
+
+> *(Stava in `doc/PATTERN_DI_PROVA.md` come `STANDARD 10`. **Esce dal posto 2 per decisione di Luca del 2026-09-26:** e' il criterio con cui si sceglie fra **CURE**, non il metodo di una **MISURA** — e il posto 2 torna a 10 **senza alzare il tetto**. Il numero e' `9-ter` e non `10`: in ogni reperto di questo repo `par.10` significa **promozione delle componenti**, e un'etichetta non si ricicla.)*
+
+---
+
 ## 10. IL PRINCIPIO GUIDA *(per capire il «perche'»)*
 
 > *«Lo spinore E' il tempo proprio della massa; da esso discendono l'interazione con la luce, con

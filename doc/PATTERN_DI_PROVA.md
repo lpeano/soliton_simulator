@@ -48,7 +48,6 @@
 | **STANDARD 5** | **Il controllo dell'involucro, prima di ogni prova.** Lo strumento di lancio *(runpy, monkeypatch, tracce)* deve riprodurre il riferimento **campo per campo a flag invariato**. | `b812f92`, `c901456` | Il sigillo dimostra che **il flag** è chirurgico; **non** che **l'involucro** sia inerte. Sono due affermazioni diverse, e senza la seconda una differenza è attribuibile allo strumento. | Un giro corto a **flag invariato** contro il riferimento: **`0` campi diversi**. **Dimostra anche che le tracce sono di sola lettura.** |
 | **STANDARD 7** | **Un giro CORTO prima del giro vero.** Prima di un run che costa più di qualche minuto, lo stesso strumento gira **end-to-end** coi parametri minimi. | `438da39`, `53e08f3` · *ammessa da Luca il 2026-09-22* | **I collaudi passano e il run muore lo stesso**: collaudano i **criteri**, non l'**impianto** che li alimenta. ① un `UnboundLocalError` ha ucciso un run di **400 s al passo 1**, con dodici collaudi tutti `OK`; ② il **bilancio di `G4` non chiudeva** *(`8.0e-05`)*, e il giro corto lo ha preso **in 43 s invece che in mezz'ora**. | Lo strumento accetta un modo ridotto *(`--frame=3`, `--passi=2`)*, **ed è stato ESEGUITO** prima del giro vero. |
 | **STANDARD 9** | **Un'ASSENZA si dichiara solo da una ricerca sull'INTERO FILE, dall'AST o da `git log`.** Mai da una finestra di righe, mai da un `in` sul testo. | *decisione di Luca, 2026-09-24* · `2070aab` · **ampliata il 2026-09-26** | **TRE casi in un giorno, e sbagliano nei DUE versi opposti:** `S10` *(dedotto da un contatore — **ritirato**)* · `T1` di `E4-LAM` *(`"_lam_attivo" not in sorg` trova le sue occorrenze nei **COMMENTI** → **`FAIL` falso su codice corretto**)* · `D37` *(cercato in una finestra di **28 righe**, la voce stava a `:257` → **chiave duplicata**, codice morto in silenzio)*. **E il quarto è del `git log`:** una smentita può vivere **in un messaggio di commit** e non nei file — **misurato su `D09`**. | Ogni affermazione di assenza porta **il comando che l'ha prodotta**, e quel comando **non ha un intervallo di righe**. Per una domanda su un riferimento di **codice**: **l'AST**, non un `in`. **`git log` è il repo**, e va cercato anche lui. |
-| **STANDARD 10** | **Una cura non aumenta il numero delle leggi**; a parità di effetto si preferisce **togliere un'eccezione**. *(la sezione lunga è in fondo a questo documento)* | *criterio di Luca, 2026-09-25* | `NODI-1` sembrava *togliere* un'eccezione e ne **aggiungeva una di fisica**: avrebbe trasformato la mitosi da **creazione di spazio** in **addensamento** *(~77 scorciatoie per figlio)*. | ① si **conta** quante leggi prima e quante dopo; ② a parità **entro la barra d'errore**, vince la variante con **meno leggi**; ③ l'eccezione tolta si verifica **SULLA FISICA**, non sulle righe in meno. |
 | **`P1-sexies`** | **Un criterio si collauda su casi a risposta NOTA prima di puntarlo sul codice vero — e la SOGLIA non si calcola dai dati che giudica.** Due casi: **uno che DEVE passare e uno che DEVE fallire**; e il caso nullo *(che cosa varrebbe questo criterio **se non ci fosse niente**?)* fa parte del collaudo. | *decisione di Luca, 2026-09-21* · **`L-SOGLIA` fusa qui il 2026-09-26** | **CINQUE criteri sbagliati in un giorno**, e ogni volta il `FAIL` era **del criterio, non della cura**: `Q6` *(confronto dopo il rilassamento: assenza di CONTRASTO letta come assenza di effetto)* · `Q6` *(«>= 100 volte» una dispersione che a flag spento è **ZERO ESATTO**: `100*0 = 0`, passava con qualunque valore)* · `R3` *(pretendeva `== 0.0` esatto e falliva su **due ulp**)* · `R5` *(contava **25 aperture su 24 passi**: era l'iniezione del test ad aprire il freno)* · `U3` *(confrontava col mio **sviluppo** invece che col valore **esatto**)*. **E le soglie auto-referenziali:** una soglia `2*std(ON)` **si stringe proprio quando la cura funziona**; un criterio con `|x|` **falliva l'85.89 % su rumore puro**. | Due casi sintetici prima del codice vero, **e il caso che DEVE fallire è il più importante** *(quattro dei cinque errori sarebbero stati presi così)*. La soglia si **deriva dal valore sotto ipotesi nulla**, non si sceglie: `\|corr\| < 0.15` era inventato, il nullo della correlazione campionaria è `sigma ~ 1/sqrt(3N)` → `3 sigma = 0.165` su 110 coppie. |
 | **`P3`** | **Un numero senza la sua BARRA D'ERRORE, il suo SEME, i suoi FLAG e la sua EPOCA non è un dato.** ① fra bracci si usa la **dispersione FRA SEMI**, mai la `SE` interna a un run, **e per una barra fra semi servono ALMENO 4 SEMI**; ② ogni CSV porta **blob, seme e TUTTI i flag** che distinguono quel braccio; ③ ogni numero porta la sua **EPOCA**, e un numero dell'epoca 1 non è una premessa per l'epoca 2. *(fonde `P3` + `P6` + `par.9-bis`)* | *regole di Luca, 2026-09-15 / 2026-09-21* | ① la pendenza trasversale cambia di **0.0302** da seme a seme **a codice INVARIATO**, contro una `SE` interna di **~0.010**: `Δ = -0.0445 ± 0.0141`, `z = 3.16` su **un** seme sembrava un effetto a 3 sigma, e su tre semi **il segno non era nemmeno concorde**. ② il braccio OFF della prima misura spinoriale aveva **sette** colonne di flag e **non** `TAU_LUCE`, che era **l'unica** variabile del confronto: i due bracci erano distinguibili **solo dal nome del file**. ③ il vuoto nasceva **prima** dei flag, e **otto** grandezze sono state inerti in ogni run di epoca 1, in silenzio. | **Con 2 semi la `std` ha UN grado di libertà** e `t(0.025,1) = 12.706`: l'IC95 è inutilizzabile — con 4, `t(3) = 3.18`. Il CSV si controlla **campo per campo**, non dal log *(il log si perde, il CSV resta)*, e **i dati già scritti non acquisiscono una colonna aggiunta dopo**. L'epoca si cita **col blob e con la configurazione**, che sono **due cose insieme**. |
 | **`P4`** | **Prima di misurare se una grandezza cambia, verifica che sia LIBERA di cambiare.** Se `x = f/median(f)` e la mappa è monotona, `median(y)` vale **una costante ESATTA**: su quel punto fisso **non si misura nulla**. | *regola di Luca, 2026-09-15* | `ritmo()`: `median(r) = 1.0 ESATTAMENTE` con **qualunque** orologio — il sigillo `S4` diede `z = 0.00`, che **non** è «nessun effetto» ma **«nessuna misura»**. *(E il caso gemello mostra che la verifica va fatta **sull'espressione effettiva**: `_tau` sembrava avere lo stesso punto fisso e **non ce l'ha**, perché `_dens_rif` è la mediana di un **SOTTOINSIEME**.)* | Prima di confrontare una statistica riassuntiva fra due rami, **si controlla se il codice la ancora a se stessa** — e si guarda l'espressione che gira, non la sua forma ricordata. |
@@ -56,6 +55,7 @@
 
 ### Le regole che valgono qui e stanno già altrove — **richiamo, non copia**
 
+- **Una cura non aumenta il numero delle leggi; a parita' di effetto si preferisce togliere un'eccezione** *(era `STANDARD 10`)* → **`CLAUDE.md` par.9-ter**. **Decisione di Luca, 2026-09-26:** e' il criterio con cui si scegle fra **CURE**, non il metodo di una **MISURA** — e con la sua uscita **il posto 2 torna a 10, senza alzare il tetto**.
 - **Un difetto DIMOSTRATO si cura: misurare non è curare** → `doc/ASSIOMI.md` **`A12`**
   *(era `STANDARD 8`, ed era `A12` parola per parola: **una regola in due posti è una regola che si
   può aggiornare a metà**)*.
@@ -76,24 +76,26 @@
 
 ---
 
-## ⚠ IL CONTO NON TORNA: **ELEVEN REGOLE PER UN TETTO DI DIECI** *(2026-09-26)*
+## ✅ IL CONTO TORNA: **DIECI REGOLE PER UN TETTO DI DIECI** *(2026-09-26)*
 
-**Lo dico invece di arrotondarlo.** La proposta approvata prevedeva **tre** fusioni e annunciava
-**10**; con le modifiche di Luca *(`P4` resta sola, `L-SOGLIA` va dentro `P1-sexies`)* il conto
-misurato è **11**, e **anche la proposta originale ne dava 12, non 10: quel «10» era sbagliato in
-aritmetica.** *(16 righe − 2 per `P3`+`P6`+`par.9-bis` − 1 per la coppia di `L-SOGLIA` − 1 per
-`STANDARD 3`+`4` = 12, e `par.2` non è una riga ma **la lista di controllo**, quindi 11.)*
+**Per un giorno sono state ELEVEN, e lo avevo dichiarato invece di arrotondarlo.**
+**Ha deciso Luca, e non alzando il tetto:** `STANDARD 10` **esce dal posto 2** e va in
+`CLAUDE.md` par.9-ter, *perche' e' il criterio per scegliere fra **CURE**, non un metodo di
+misura*. **Il tetto resta 10.**
 
-> **NON ho scelto io l'undicesima da fondere: sarebbe decidere al posto di Luca**, e la fusione
-> che lui ha **esplicitamente rifiutato** era proprio una di queste. **La decisione è in coda.**
+| | |
+|---|--:|
+| righe della tabella `STANDARD` al 2026-09-26 sera | **10** |
+| tetto | **10** |
 
-**Le tre candidate, con quello che si perderebbe:**
+**LE DUE CANDIDATE NON SCELTE, e restano scritte perche' la strada scartata informa:**
+**`P5` dentro `STANDARD 3`** *(ma `P5` conta **rami** e `STANDARD 3` confronta **istanti**:
+fonderle mescola due presidi)* e **`P4` dentro `P1-sexies`** *(la fusione che Luca aveva
+**rifiutato** lo stesso giorno)*.
 
-| candidata | a favore | contro |
-|---|---|---|
-| **`STANDARD 10` → `CLAUDE.md` par.11** | è un **criterio di scelta fra due cure**, non il metodo di una misura | è il criterio con cui questo stesso riordino è stato giudicato |
-| **`P5` dentro `STANDARD 3`** | entrambe dicono *«ciò che non si vede va registrato»* | `P5` conta **rami**, `STANDARD 3` confronta **istanti**: fonderle mescola due presidi |
-| **`P4` dentro `P1-sexies`** | è la fusione che la proposta chiedeva | **Luca l'ha rifiutata il 2026-09-26** |
+> **E IL MODO IN CUI E' STATA DECISA E' IL PUNTO:** il conto sbagliato era **nella proposta**
+> *(annunciava 10 e ne dava 12)*, e a trovarlo e' stato **un controllo che legge l'inventario
+> invece di ricopiarlo**. **Un tetto che si alza quando non ci si sta dentro non e' un tetto.**
 
 ---
 
@@ -128,39 +130,12 @@ aritmetica.** *(16 righe − 2 per `P3`+`P6`+`par.9-bis` − 1 per la coppia di 
 
 ---
 
-## `STANDARD 10` — **UNA CURA NON AUMENTA IL NUMERO DELLE LEGGI** *(criterio di Luca, 2026-09-25)*
-
-> ### **«Una cura non aumenta il numero delle leggi; a parità di effetto si preferisce togliere
-> ### un'eccezione.»**
-
-**IL CASO CHE L'HA GENERATO:** `NODI-1` proponeva di far allacciare i nodi nati in
-dinamica **con la stessa regola della semina** *(`R_CONN`)*. Sembrava *togliere* un'eccezione
-— «nessun nodo di seconda classe» — e invece **ne aggiungeva una di fisica**: avrebbe
-trasformato la mitosi da **creazione di spazio** *(il figlio non accorcia niente: la relazione fra
-i genitori passa da `1` a `2` passi)* in **addensamento** *(`~77` scorciatoie per figlio)*.
-
-> **La forma dell'errore:** una regola che rende **uniforme il CODICE** può rendere **non uniforme
-> la FISICA**. «Togliere un'eccezione» va misurato **sulle leggi**, non sui rami del programma.
-
-**COME SI APPLICA, operativamente:**
-
-1. **si conta:** quante leggi c'erano prima, quante dopo. Una cura che ne aggiunge una **deve
-   dire perché non si poteva togliere niente**;
-2. **a parità di effetto misurato, vince la variante con MENO leggi** — e «parità» significa
-   *entro la barra d'errore*, non a occhio;
-3. **un'eccezione che si toglie va verificata SULLA FISICA:** *che cosa cambia nel sistema*, non
-   *quante righe in meno ha il file*.
-
-**⚠ E NON È UN INVITO A NON CURARE:** `A12` resta — *un difetto dimostrato si cura*. Questo dice
-**come** si sceglie fra due cure, non **se** curare.
-
----
-
 ## ⚠ I NOMI CHE SONO CAMBIATI IL 2026-09-26, e perché **i reperti non si riscrivono**
 
 | nome di allora | oggi | dove |
 |---|---|---|
 | `STANDARD 4` | **fusa dentro `STANDARD 3`** | questo documento |
+| `STANDARD 10` | **uscita dal posto 2**, per decisione di Luca | `CLAUDE.md` par.9-ter |
 | `STANDARD 6` | **assorbita dall'indice** e dal hook `H-INDICE` | `doc/INDICE_ID.tsv` |
 | `STANDARD 8` | **è `A12`**, e non si duplica | `doc/ASSIOMI.md` |
 | `P6`, `par.9-bis` | **fuse dentro `P3`** | questo documento |

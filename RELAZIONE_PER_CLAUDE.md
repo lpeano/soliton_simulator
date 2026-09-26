@@ -1863,3 +1863,35 @@ esplicitamente RIFIUTATO oggi** (`P4` + `L-SOGLIA`) **e' una delle tre candidate
 un'altra al suo posto sarebbe stato decidere una cosa su cui si era appena pronunciato.
 **Sul secondo ho letto alla lettera il suo `(H-P3, H-P5, ...)`**, che contraddice i nomi della
 proposta: **lo dichiaro perche' e' una lettura, non un dato.**
+
+## ✅ LE DUE DECISIONI DI LUCA SONO APPLICATE — **i controlli vanno a 5/5**
+
+**`RIORDINO-POSTO2` — CHIUSA.** *«`STANDARD 10` esce dal posto 2 e va in `CLAUDE.md`, accanto alla
+sezione dell'indice: e' il criterio per scegliere fra **CURE**, non un metodo di misura. Il posto 2
+torna a 10. **Il tetto NON si alza.**»*
+
+La sezione lunga (28 righe) e' ora **`CLAUDE.md` par.9-ter**, subito dopo la sezione dell'indice;
+nel posto 2 resta **un richiamo**, cosi' chi cerca `STANDARD 10` lo trova dove l'ha sempre cercato.
+
+> **IL NUMERO E' `9-ter` E NON `10`, e la scelta va dichiarata:** in **ogni reperto di questo
+> repo** `par.10` significa **promozione delle componenti**, e riusarlo creerebbe **la stessa
+> collisione che il 2026-09-26 abbiamo curato per gli ID**. E nemmeno `par.9-bis`: quello era
+> **l'epoca di un numero**, che ora vive dentro `P3`. **Un'etichetta non si ricicla.**
+
+**`RIORDINO-NOMI-H` — CHIUSA.** Si tengono **`H-P3`, `H-P5`, ...** com'e'. I nomi semantici della
+proposta (`H-CLI`, `H-CONFIG`, `H-ANCORA`) **restano scartati**, e la voce lo registra.
+
+```
+C1 nessuna regola persa ....... PASS   76/76
+C2 posto 2 <= 10 .............. PASS   10 righe, tetto 10   <- era il FAIL di ieri sera
+C3 CLAUDE.md <= 400 ........... PASS   362; avvio 2706 -> 1052 (-61 %)
+C4 tutti i collaudi ........... PASS   8 su 8
+C5 nomi citati dai hook ....... PASS   0 ignoti
+ESITO: 5/5
+```
+
+**UN DIFETTO MIO, TROVATO RIGIRANDO LO STRUMENTO:** l'ancora del titolo **non includeva il
+parentetico**, e la sostituzione lasciava *«…LEGGI `(criterio di Luca, 2026-09-25)` `(criterio di
+Luca, 2026-09-25)`»* — **due volte**. `P1-quater` conta l'ancora e pretende che sia unica, e
+l'ancora **era** unica: **contare l'ancora non basta se l'ancora e' piu' corta di cio' che si
+sostituisce.** Corretto nello strumento, non solo nel file.

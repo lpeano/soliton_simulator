@@ -12,17 +12,10 @@ C1  LE 76 REGOLE DELL'INVENTARIO
       RITROVATE 76 su 76      PERSE 0
 
 C2  POSTO 2 -- doc/PATTERN_DI_PROVA.md
-      regole nella tabella STANDARD ... 11   (tetto 10)
-      ** IL TETTO NON E' RISPETTATO, ed e' DICHIARATO, non nascosto.**
-      La proposta annunciava 10 e ne dava 12: quel numero era sbagliato in
-      aritmetica. Con le modifiche di Luca (`P4` resta sola, `L-SOGLIA` va in
-      `P1-sexies`) il conto misurato e' 11, e `par.2` non e' una riga ma la
-      LISTA DI CONTROLLO. L'undicesima da fondere NON l'ho scelta io: la
-      fusione che Luca ha rifiutato era una di queste. Le tre candidate, con
-      quello che si perderebbe, sono in fondo a doc/PATTERN_DI_PROVA.md.
+      regole nella tabella STANDARD ... 10   (tetto 10)
 
 C3  CLAUDE.md E LE RIGHE LETTE ALL'AVVIO
-      CLAUDE.md  PRIMA  1575  ->  DOPO   330   (tetto 400)
+      CLAUDE.md  PRIMA  1575  ->  DOPO   362   (tetto 400)
       righe lette all'avvio, MISURATE:
           PRIMA  CLAUDE.md                                       1575
           PRIMA  doc/ASSIOMI.md                                   543
@@ -33,11 +26,11 @@ C3  CLAUDE.md E LE RIGHE LETTE ALL'AVVIO
           PRIMA  doc/PROTOCOLLO_test_olonomia.md                   78
           PRIMA  doc/SYSTASIS_nota_concettuale.md                  50
           PRIMA  TOTALE (8 documenti)                            2706
-          DOPO   CLAUDE.md                                        330
+          DOPO   CLAUDE.md                                        362
           DOPO   doc/ASSIOMI.md                                   543
-          DOPO   doc/PATTERN_DI_PROVA.md                          172
-          DOPO   TOTALE (3 documenti)                            1045
-      riduzione: 1661 righe, cioe' il 61 %
+          DOPO   doc/PATTERN_DI_PROVA.md                          147
+          DOPO   TOTALE (3 documenti)                            1052
+      riduzione: 1654 righe, cioe' il 61 %
 
 C4  I COLLAUDI
       presidi dei hook                   PASS
@@ -56,9 +49,9 @@ C5  I NOMI CITATI DAI HOOK
 
 ================================================================================================
   C1  nessuna regola persa                     PASS
-  C2  posto 2 <= 10                            ** FAIL **
+  C2  posto 2 <= 10                            PASS
   C3  CLAUDE.md <= 400 righe                   PASS
   C4  tutti i collaudi passano                 PASS
   C5  ogni nome citato esiste nell'indice      PASS
-ESITO: 4/5
+ESITO: 5/5
 ================================================================================================
