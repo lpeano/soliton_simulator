@@ -1,4 +1,4 @@
-r"""**COLLAUDO DELLE ISTRUZIONI D'USO** — la sezione 11 di `CLAUDE.md` basta, da sola?
+r"""**COLLAUDO DELLE ISTRUZIONI D'USO** — la sezione dell'INDICE DEI DIFETTI di `CLAUDE.md` basta, da sola?
 
 **Punto 5 del mandato (Luca, 2026-09-26):** *«una sessione che legge SOLO questa sezione deve saper
 aggiungere un difetto finto (poi rimosso) e farlo passare dal hook»*.
@@ -7,7 +7,7 @@ aggiungere un difetto finto (poi rimosso) e farlo passare dal hook»*.
 
 **Non uso cio' che so: uso cio' che la sezione DICE.** Lo script
 
-1. **estrae la sezione 11** da `CLAUDE.md` e **legge da li'** — le **colonne**, i **vocabolari**, i
+1. **estrae la sezione dell'INDICE DEI DIFETTI** da `CLAUDE.md` (cercata PER NOME, non per numero) e **legge da li'** — le **colonne**, i **vocabolari**, i
    **comandi** *(ogni `python csv/...` fra apici)*, i **nomi dei file**;
 2. **costruisce la riga** del difetto finto **dalle colonne dichiarate nella sezione**, non da una
    lista scritta qui;
@@ -21,7 +21,7 @@ aggiungere un difetto finto (poi rimosso) e farlo passare dal hook»*.
 
 ASCII puro nell'output.
 """
-# ESENTE-P5: non importa il simulatore e non lo fa girare. Collauda una sezione di documentazione.
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Collauda una sezione di documentazione.
 import hashlib
 import io
 import os
@@ -54,8 +54,12 @@ def sha(p):
 
 # ================================================================== 1. LEGGO LA SEZIONE
 t = io.open(os.path.join(RADICE, "CLAUDE.md"), encoding="utf-8", newline="").read()
-m = re.search(r"^## 11\. L'INDICE DEI DIFETTI.*?$(.*)", t, re.S | re.M)
-assert m, "la sezione 11 non c'e': il collaudo non ha niente da provare"
+# ⚠ L'ANCORA E' IL NOME, NON IL NUMERO (par.2 di `CLAUDE.md`: si cerca per nome, mai per riga).
+#   Col riordino del 2026-09-26 la sezione e' passata da `11.` a `9.`: un'ancora sul NUMERO
+#   avrebbe fatto **schiantare** il collaudo, che e' il modo piu' facile di non accorgersene.
+#   La sezione finisce al titolo di secondo livello successivo, o a fine file.
+m = re.search(r"^## \d+[\-a-z]*\. L'INDICE DEI DIFETTI.*?$(.*?)(?=^## |\Z)", t, re.S | re.M)
+assert m, "la sezione dell'INDICE DEI DIFETTI non c'e': il collaudo non ha niente da provare"
 SEZ = m.group(1)
 
 _col = re.search(r"\*\*colonne:\*\*(.+)", SEZ)
@@ -70,7 +74,7 @@ TIPI = [x.strip(" `") for x in _tipi.group(1).split("|")] if _tipi else []
 _doc = re.findall(r"`(doc/[A-Za-z0-9_.\-]+)`", SEZ)
 
 P("=" * 100)
-P("COLLAUDO DELLE ISTRUZIONI D'USO (sezione 11 di CLAUDE.md)   (2026-09-26)")
+P("COLLAUDO DELLE ISTRUZIONI D'USO (sezione dell'INDICE DEI DIFETTI di CLAUDE.md)   (2026-09-26)")
 P("=" * 100)
 P()
 P("  LETTO DALLA SEZIONE, non da me:")
@@ -176,7 +180,7 @@ esiti += [okA, okB, okC, okD, okE]
 P()
 tutto = all(esiti)
 P("=" * 100)
-P("ESITO: %s" % ("%d/%d PASS -- **LA SEZIONE 11 BASTA DA SOLA**" % (len(esiti), len(esiti))
+P("ESITO: %s" % ("%d/%d PASS -- **LA SEZIONE DELL'INDICE BASTA DA SOLA**" % (len(esiti), len(esiti))
                if tutto else "FAIL -- la sezione NON basta, e va corretta"))
 P("=" * 100)
 P()

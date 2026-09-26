@@ -1744,3 +1744,41 @@ il NUL e' diventato due caratteri visibili, **con l'ancora contata** (`P1-quater
 quel file e' letto da `csv/_stato_run.py`, che cerca `## APERTO` e `**chiuso` per rifiutare
 l'apertura di un run quando il precedente e' ancora aperto. **Verificato dopo l'innesto: 17
 `APERTO` e 17 `chiuso`, il bilancio regge.**
+
+## ④ `CLAUDE.md`: **da 1575 a 330 righe**, e il posto 2 riscritto
+
+| | PRIMA | DOPO | |
+|---|--:|--:|---|
+| `CLAUDE.md` | **1575** | **330** | tetto 400, e un presidio lo impedisce |
+| **righe lette all'avvio** *(misurate, non stimate)* | **2706** | **1045** | **-61 %**, e da **8** documenti a **3** |
+
+**IL PUNTO `i` DEL MANDATO — LA DISCREPANZA `~1021` CONTRO `~1291` — E' RISOLTA, E LA CAUSA E'
+UN NUMERO CALCOLATO DUE VOLTE CON DUE FORMULE:** in `csv/_regole_proposta.py` il **documento**
+stampava `_avvio - _fuori_cl` *(→ ~1291)* e lo **stdout del commit** stampava
+`_avvio - _fuori_cl - int(_storia * 0.8)` *(→ ~1021)*. **Nessuna delle due era sbagliata di
+aritmetica: erano due grandezze diverse col medesimo nome** — una scontava la storia, l'altra no.
+**E' esattamente `L-NUMERI` al contrario:** il numero usciva da uno script, ma **da due
+espressioni**, e nessuno le confrontava. **Adesso e' MISURATO: 2706 → 1045**, e il conto sta in
+`csv/_controlli_riordino.py`, che lo stampa documento per documento.
+
+**IL POSTO 2 (`doc/PATTERN_DI_PROVA.md`): 93 → 172 righe**, con la lista di controllo di un
+sigillo (ex `par.2`) e le fusioni approvate:
+
+- **`P3` + `P6` + `par.9-bis`** → *«un numero senza la sua BARRA D'ERRORE, il suo SEME, i suoi
+  FLAG e la sua EPOCA non e' un dato»*, **e il «almeno 4 semi» resta esplicito** (modifica `a`);
+- **`L-SOGLIA` dentro `P1-sexies`** — *«un criterio si collauda su un caso a risposta nota,
+  compreso il caso nullo, e la sua soglia non dipende dai dati che giudica»* (modifica `b`);
+- **`STANDARD 3` + `STANDARD 4`**, con **entrambe** le clausole (modifica `c`);
+- **`P4` resta SOLA**: Luca ha rifiutato la fusione che la proposta chiedeva.
+
+> ### ⚠ **E IL CONTO DEL POSTO 2 NON TORNA: 11 REGOLE PER UN TETTO DI 10. LO DICO.**
+> **Anche la proposta ne dava 12, non 10: quel «10» era sbagliato in aritmetica** *(16 righe −2
+> −1 −1 = 12; togliendo `par.2`, che diventa la **lista di controllo** e non una riga, fa 11)*.
+> **Non ho scelto io l'undicesima da fondere**, perche' sarebbe decidere al posto di Luca — e la
+> fusione che lui ha **esplicitamente rifiutato** era proprio una di queste. **Le tre candidate,
+> con quello che si perderebbe, sono scritte in fondo a `doc/PATTERN_DI_PROVA.md`. E' in coda.**
+
+**E UN'ANCORA CORRETTA:** `csv/_collaudo_istruzioni.py` cercava `^## 11\. L'INDICE DEI DIFETTI`.
+Col riordino quella sezione e' diventata `par.9`, e il collaudo **si schiantava** — *il modo piu'
+facile di non accorgersene* (`A8`). Ora l'ancora e' **il NOME, non il numero**, com'e' scritto in
+`CLAUDE.md` par.2. **Esito invariato: `6/6 PASS`.**
