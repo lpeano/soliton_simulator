@@ -2092,3 +2092,39 @@ barra fra semi, e `P3` ne chiede almeno quattro.**
 
 **`blocca_run_base` passa da `SI` a `NO`** *(il validatore vieta `chiuso` con `blocca = SI`)*, e
 la vista si rigenera da se': **`137` voci smistate, `7` `SI`, `0` da verificare.**
+
+---
+
+# 🎬 **A) IL DEFAULT DEL DRIVER E' LA SCENA `(ii)`(a)** *(decisione di Luca, 2026-09-26)*
+
+> **«`N-MASSE` e' morta con `SEMINA_LAM`; tenerla come default e' un run che si ferma.»**
+
+| | da | a |
+|---|---|---|
+| **scena** di default | `N-MASSE` | **`MASSE-COERENTI`** |
+| **`--sep`** di default | `4.0` *(la scena `(b)`)* | **`6.1158`** *(la `(a)`, «stesso raggio»)* |
+
+**NON E' BYTE-INERTE, ED E' IL PUNTO:** chi lanciava il driver nudo otteneva **un `SystemExit`**
+*(`M0c`)*; ora ottiene **la scena del run base**. **`N-MASSE` resta raggiungibile** con
+`--scena=N-MASSE`, e **li' rifiutera'** — che e' il presidio delle scene pre-`A13`, non un difetto.
+**`(b)` resta raggiungibile esplicita:** `--sep=4.0`.
+
+**I due valori vengono dal registro della fisica, non da me** *(`doc/REGISTRO_FISICA.md`)*:
+`(a)` `sep 6.1158` → `r_regione 4.096438`, `raggio_vuoto 12.612238`, **`n 12 802`**, **`471 564`
+archi**, `QUOTA 0.0966`; `(b)` `sep 4.0` → `n 4 252`, `148 237` archi, `QUOTA 0.0484`.
+
+## `T1` non puo' piu' dire «identiche»: ora dice «**la differenza e' ESATTAMENTE quella dichiarata**»
+
+Il default e' cambiato **di proposito**, quindi un `T1` che chiedesse l'identita' **fallirebbe per
+costruzione**, e uno che dicesse solo *«diverse»* **non impedirebbe niente** (`A9`). Il criterio
+nuovo e' una tabella di attese, **scritta nel sigillo**:
+
+```
+--test   N-MASSE  ->  MASSE-COERENTI
+--sep    4.0      ->  6.1158
+--nodi   (assente)->  0
+```
+
+e passa **solo** se: **zero differenze INATTESE** fra le opzioni, **zero dichiarate non avvenute**,
+**zero flag nudi diversi**, e **il SORGENTE del driver dichiara davvero quei default** — letti
+**per AST**, non dal mio ricordo.

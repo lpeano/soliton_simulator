@@ -76,7 +76,16 @@ RIPRENDI = False
 # fosse posizionale, passarlo costringerebbe a passare anche i precedenti e il comando di `Z49`
 # non resterebbe riproducibile VERBATIM. A default il driver fa ESATTAMENTE quello che faceva:
 # lo prova `csv/_seal_fork/_sigillo_sep_driver.py`, non questo commento.
-SEP = "4.0"             # [DECISIONE DI LUCA, 2026-09-24] IL DEFAULT SEGUE LA CAMPAGNA.
+SEP = "6.1158"          # [DECISIONE DI LUCA, 2026-09-26] IL DEFAULT E' LA SCENA `(ii)`(a).
+                        # `6.1158` e' la scena **`(a)` «STESSO RAGGIO»**; `4.0` e' la **`(b)`**,
+                        # e resta raggiungibile ESPLICITA con `--sep=4.0`.
+                        # I numeri vengono da `doc/REGISTRO_FISICA.md`, non da me:
+                        #   `(a)` sep 6.1158 -> r_regione 4.096438, raggio_vuoto 12.612238,
+                        #         n 12 802, archi 471 564, QUOTA 0.0966
+                        #   `(b)` sep 4.0    -> n 4 252, archi 148 237, QUOTA 0.0484
+                        # **NON E' BYTE-INERTE, ed e' il punto**: il default segue cio' che
+                        # si lancia davvero. Stessa forma della decisione qui sotto.
+                        # [DECISIONE DI LUCA, 2026-09-24] IL DEFAULT SEGUE LA CAMPAGNA.
                         # Era `"8"`, e OGNI comando di campagna passava `--sep=4.0`: il
                         # default non riproduceva piu' il comportamento attuale -- **la
                         # stessa scadenza di `CHICOOP`**. Con questo `NUDA = CAMPAGNA` non
@@ -100,7 +109,13 @@ CHIBASC = "on"
 #   ⚠ IL DEFAULT RESTA `N-MASSE`, E LO DICHIARO: e' l'unico valore che riproduce VERBATIM il
 #   comportamento di prima, e senza quello la byte-identita' del criterio 1 non avrebbe niente
 #   da dimostrare. **Nessun comando gia' scritto cambia di un bit.**
-SCENA = "N-MASSE"
+# ⚠ IL DEFAULT E' LA SCENA `(ii)` DAL 2026-09-26 (decisione di Luca), E NON E' BYTE-INERTE.
+#   `N-MASSE` con `SEMINA_LAM` **RIFIUTA DI PARTIRE** (`_massa`, e la misura 0 lo ha
+#   misurato: `M0c`): tenerla come default significava **un default che e' un run che si
+#   ferma**. Chi lancia nudo ora ottiene **la scena del RUN BASE**.
+#   `N-MASSE` resta raggiungibile, esplicita: `--scena=N-MASSE` -- e li' rifiutera',
+#   che e' il presidio delle scene di epoca pre-`A13` e non un difetto.
+SCENA = "MASSE-COERENTI"
 # `--nodi=` NON si passa per default: `None` significa «non inoltrare l'opzione», cioe' il
 #   default del simulatore (`SEME_INIZIALE`). La scena `(ii)` vuole `0`, e il driver lo passa
 #   DICENDOLO (vedi sotto): non lo aggiunge in silenzio (`A9`).

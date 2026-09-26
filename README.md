@@ -161,13 +161,14 @@ per i batch.
 | `--spin-positivi` | registra il sottogruppo `perc_chi=+1` | sola diagnostica |
 | `--cs-dinamico` | velocità metrica locale `cs_eff(rho)` con profilo `tanh` e media armonica sugli archi | A/B metrico, default off |
 | `--sync-db FILE` | salva o ricarica lo stato versionato | esecuzioni spezzate |
+| `--sep=X` *(del DRIVER, default CAMBIATO il 2026-09-26)* | la separazione delle masse. **Default `6.1158` = la scena `(ii)`(a) «STESSO RAGGIO»**; la `(b)` e' `--sep=4.0`, **esplicita**. I numeri vengono da `doc/REGISTRO_FISICA.md`: `(a)` -> `n 12 802`, `471 564` archi, `QUOTA 0.0966`; `(b)` -> `n 4 252`, `148 237` archi, `QUOTA 0.0484`. **NON e' byte-inerte, ed e' il punto:** il default segue cio' che si lancia davvero | era `4.0`, e prima `8` |
 | `--nodi N` *(del SIMULATORE, comportamento CAMBIATO il 2026-09-26)* | **`--nodi 0` = NESSUN VUOTO: lo costruisce la SCENA.** Prima `a.nodi` era guardato **solo a flag `--semina-lam` spento**: acceso, il ternario andava in **saturazione** e `--nodi 0` chiedeva zero nodi ottenendone **455** *(misura 0, `M0a`)*. **NON e' byte-inerte per `--nodi 0` con `--semina-lam`** *(era l'unico caso rotto)*; **per ogni altro valore, e per `--nodi 0` a flag spento, il comportamento e' invariato di un bit.** E' **un'eccezione in meno**, non una legge in piu' (`STANDARD 10`): un valore aveva **due** significati. | serve la scena `(ii)` |
 
 ### Le opzioni del DRIVER `csv/_test_fork/_scena_video.py` *(nuove il 2026-09-26)*
 
 | opzione | che cosa fa | DEFAULT, e se e' inerte |
 |---|---|---|
-| `--scena=NOME` | scegle la **scena** del simulatore *(il vocabolario si legge da `S.TESTS`, non si ricopia)*. Prima il driver **FISSAVA `N-MASSE`** in **due** punti, e la scena `(ii)` -- quella del **run base** -- non era raggiungibile da nessun comando | **`N-MASSE`**, cioe' **esattamente il comportamento di prima**: nessun comando gia' scritto cambia di un bit |
+| `--scena=NOME` | scegle la **scena** del simulatore *(il vocabolario si legge da `S.TESTS`, non si ricopia)*. Prima il driver **FISSAVA `N-MASSE`** in **due** punti, e la scena `(ii)` -- quella del **run base** -- non era raggiungibile da nessun comando | **`MASSE-COERENTI` dal 2026-09-26** *(decisione di Luca)*, **e NON e' byte-inerte:** `N-MASSE` con `--semina-lam` **RIFIUTA DI PARTIRE**, quindi il vecchio default era **un run che si ferma**. `N-MASSE` resta raggiungibile con `--scena=N-MASSE`, e li' rifiutera': e' il presidio delle scene pre-`A13`, non un difetto |
 | `--nodi=N` | inoltra `--nodi` al simulatore | **non passato**, cioe' il default del simulatore. **Con `--scena=MASSE-COERENTI` il driver passa `0` e LO STAMPA**, invece di aggiungerlo in silenzio (`A9`); un `--nodi=` esplicito vince |
 | `--seme=N` | inoltra `--seed` al simulatore. **Prima `--seed` non era MAI passato: ogni run del driver girava col seme 42**, e senza un seme variabile non esiste una barra fra semi (`P3` ne chiede almeno quattro) | **non passato**, cioe' **42 come prima**. E `SEME_EFFETTIVO` ora si legge da `a.seed`, non dalla firma della classe |
 

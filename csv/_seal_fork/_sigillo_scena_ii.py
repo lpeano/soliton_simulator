@@ -105,10 +105,42 @@ def argv_da(driver_path, extra):
     return list(g.get("_ARGV_SIM") or [])
 
 
+def spezza(argv):
+    """`(opzioni, flag)`: `--x V` diventa `opzioni["--x"] = V`; `--y` nudo va in `flag`.
+
+    Serve perche' `T1` non confronta piu' due liste UGUALI: il default **e' cambiato di
+    proposito**, e il criterio e' che la differenza sia **ESATTAMENTE quella dichiarata**.
+    Confrontare le liste come testo direbbe solo «diverse», che non e' un criterio."""
+    op, fl, i = {}, [], 1
+    while i < len(argv):
+        x = argv[i]
+        if x.startswith('--'):
+            if i + 1 < len(argv) and not argv[i + 1].startswith('--'):
+                op[x] = argv[i + 1]; i += 2; continue
+            fl.append(x)
+        i += 1
+    return op, sorted(fl)
+
+
 def funzione_ast(testo, nome):
     for nd in ast.walk(ast.parse(testo)):
         if isinstance(nd, ast.FunctionDef) and nd.name == nome:
             return ast.dump(nd, include_attributes=False)
+    return None
+
+
+def _default_sorgente(nome):
+    """Il valore di default di `SCENA`/`SEP` letto DAL SORGENTE del driver, per AST.
+
+    Non da un `import` (il driver non e' importabile: esegue) e non dal mio ricordo: un
+    criterio che si fida della memoria di chi lo scrive non impedisce niente.
+    Si prende la PRIMA assegnazione di modulo, che e' il default."""
+    arb = ast.parse(io.open(os.path.join(RADICE, DRIVER), encoding='utf-8').read())
+    for nd in arb.body:
+        if isinstance(nd, ast.Assign) and any(
+                isinstance(x, ast.Name) and x.id == nome for x in nd.targets):
+            if isinstance(nd.value, ast.Constant):
+                return str(nd.value.value)
     return None
 
 
@@ -158,18 +190,43 @@ if __name__ == "__main__":
     sha, nr, REF_PRIMA = driver_prima(prima)
     a_oggi = argv_da(os.path.join(RADICE, DRIVER), [])
     a_prima = argv_da(prima, [])
-    uguali = (a_oggi == a_prima)
+    op_o, fl_o = spezza(a_oggi)
+    op_p, fl_p = spezza(a_prima)
+    # ⚠ IL DEFAULT E' CAMBIATO DI PROPOSITO il 2026-09-26 (decisione di Luca), quindi `T1` non
+    #   chiede piu' «identiche»: chiede che la differenza sia **ESATTAMENTE QUESTA**, e nulla
+    #   di piu'. Un criterio che dicesse solo «diverse» non impedirebbe niente (`A9`).
+    ATTESE = {'--test': ('N-MASSE', 'MASSE-COERENTI'),
+              '--sep': ('4.0', '6.1158'),
+              '--nodi': (None, '0')}
+    cambiate = sorted(set(op_o) | set(op_p))
+    inattese, mancate = [], []
+    for k in cambiate:
+        prima_v, oggi_v = op_p.get(k), op_o.get(k)
+        if prima_v == oggi_v:
+            continue
+        if ATTESE.get(k) == (prima_v, oggi_v):
+            continue
+        inattese.append((k, prima_v, oggi_v))
+    for k, (pv, ov) in ATTESE.items():
+        if (op_p.get(k), op_o.get(k)) != (pv, ov):
+            mancate.append((k, pv, ov, op_p.get(k), op_o.get(k)))
+    flag_div = sorted(set(fl_o) ^ set(fl_p))
     P("")
-    P("  T1  L'ARGV DEL DEFAULT E' INVARIATA  (`--scena` non passato)")
+    P("  T1  IL DEFAULT E' CAMBIATO DI PROPOSITO, E LA DIFFERENZA E' ESATTAMENTE QUELLA DICHIARATA")
     P("        driver 'di prima' dal PADRE di %s ... %d righe" % (sha, nr))
-    P("        argv OGGI  %d elementi" % len(a_oggi))
-    P("        argv PRIMA %d elementi" % len(a_prima))
-    if not uguali:
-        d1 = [x for x in a_oggi if x not in a_prima]
-        d2 = [x for x in a_prima if x not in a_oggi]
-        P("        ** DIFFERENZE: solo-oggi %s   solo-prima %s **" % (d1[:6], d2[:6]))
-    P("        identiche elemento per elemento ..... %s" % uguali)
-    esiti.append(("T1  default invariato (argv identica)", uguali))
+    P("        argv PRIMA %d elementi   ->   OGGI %d" % (len(a_prima), len(a_oggi)))
+    for k, (pv, ov) in sorted(ATTESE.items()):
+        P("        dichiarato  %-8s %-10s -> %-14s   misurato %-10s -> %s"
+          % (k, pv, ov, op_p.get(k), op_o.get(k)))
+    P("        differenze INATTESE fra le opzioni .. %d %s" % (len(inattese), inattese[:4]))
+    P("        dichiarate NON avvenute ............. %d %s" % (len(mancate), mancate[:4]))
+    P("        flag nudi diversi ................... %d %s" % (len(flag_div), flag_div[:6]))
+    P("        il sorgente dichiara SCENA/SEP ...... %s / %s"
+      % (_default_sorgente("SCENA"), _default_sorgente("SEP")))
+    ok1 = (not inattese and not mancate and not flag_div
+           and _default_sorgente('SCENA') == 'MASSE-COERENTI'
+           and _default_sorgente('SEP') == '6.1158')
+    esiti.append(("T1  la differenza e' ESATTAMENTE quella dichiarata", ok1))
 
     # ---------------------------------------------------------------- T5 (il caso che DEVE fallire)
     # ⚠ NON si usa `_cli_flag.senza`: l'argv di DEFAULT **non contiene** `--nodi` (lo passa
