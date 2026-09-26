@@ -169,11 +169,24 @@ verita' sono peggio di una.
 |---|---|
 | `commit-msg` | **`P1-bis`** (un referto senza relazione) **+ `REG-R`** (una legge che cambia senza la sua scheda), via `csv/_hook_relazione.py` che chiama `csv/_hook_fisica.py` |
 | `pre-commit` | **`P3`** (un sigillo che configura il modulo a mano), **`P5`** (un referto senza la configurazione INTERA), **`P8`** (il codice «di prima» preso da `HEAD`), via `csv/_hook_presidi.py` |
+| `pre-commit` **+** `commit-msg` | **`INDICE`** — **ogni ID che un commit AGGIUNGE a un documento VIVO, o che cita nel MESSAGGIO, esiste in `doc/INDICE_ID.tsv`** (come `id` o come `alias`) oppure in `doc/INDICE_ID_ESCLUSI.tsv` **col motivo**. Via `csv/_presidio_indice.py`, collaudo **5/5** *(il quinto e' il HOOK VERO)*. Via d'uscita dichiarata: `[SENZA-INDICE: <motivo>]` |
 
 **⚠ E FINCHE' QUEL COMANDO NON E' DATO, I PRESIDI NON IMPEDISCONO NIENTE.**
 **`python csv/_hook_presidi.py` LO DICE a ogni invocazione** *(fuori dal caso in cui e' lui
 stesso il hook)*, con il comando da dare: **uno strumento che TACE quando il presidio e'
 spento non e' un presidio** (`A9`).
+**⚠ E GLI ID HANNO UN INDICE UNICO, dal 2026-09-26: `doc/INDICE_ID.tsv`.**
+Un ID non e' un nome: e' una **chiave**, e prima di quel giorno la stessa chiave indicava
+**voci diverse** — `A3` era **tre** cose *(l'assioma, il fronte chiuso di `RAMIFICAZIONI`, la voce
+aperta di `STATO_RUN`)*. **Chi citava `A3` non diceva quale.**
+**Le regole, e sono tre:**
+- **un ASSIOMA e uno STANDARD non si rinominano mai** *(sono citati per nome nudo in questo file e
+  in ogni referto: il conteggio «per registro» e' un proxy sbagliato)*;
+- **le etichette LOCALI a una scheda o a un sigillo** — `V8`, `T1`, `A1` dei criteri — **vivono col
+  namespace** (`REGISTRO_FISICA:V8`), e la forma nuda e' un `alias` **solo se univoca**;
+- **i REPERTI non si riscrivono:** nei task history, nei referti, nei `json` e nel codice il nome
+  vecchio **resta**, e si risolve con l'`alias`.
+
 **Le esenzioni si dichiarano nel file** (`ESENTE-<Pn>: <motivo>`, col cancelletto) **e devono
 comparire in `doc/ESENZIONI_presidi.md`** (`python csv/_hook_presidi.py --elenca`):
 un'esenzione non elencata **fa fallire il commit comunque**.

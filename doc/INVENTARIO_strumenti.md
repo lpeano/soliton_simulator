@@ -786,3 +786,14 @@ python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie
 | `csv/_rinomina_collisioni.py` | `4e3d838e` | `python csv/_rinomina_collisioni.py` | RINOMINA le 23 voci in collisione **nei soli documenti VIVI**, una riga alla volta con l'ancora contata (`P1-quater`), e **collauda nei due versi** | `doc/RINOMINE_ID.txt`: **4/4 PASS** -- `0` collisioni residue, `0` file intoccabili cambiati su **1029**, un'ancora inesistente FA fallire l'assert, `0` file modificati fuori dall'elenco |
 
 **⚠ `_rinomina_collisioni.py` E' IDEMPOTENTE, e non lo era:** `\bA1\b` trova `A1` **dentro** `A1-INERZIA` *(il trattino e' un confine di parola)*, quindi la seconda passata avrebbe scritto `A1-INERZIA-INERZIA`. **Un difetto che si vede solo al secondo giro**, e la guardia e' *«se il nome nuovo c'e' gia', salta»*.
+
+---
+
+## Aggiunti il 2026-09-26 — **l'INDICE DEGLI ID (`PASSO 2`)**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_indice_id.py` | `7127a4e7` | `python csv/_indice_id.py` | GENERA `doc/INDICE_ID.tsv` (id, alias, titolo, fonte, stato, blocca_run_base, tipo) e `doc/INDICE_ID_ESCLUSI.tsv` (le forme che NON sono ID, **col motivo**) da SEI registri, `CLAUDE.md` compreso | `doc/INDICE_ID_referto.txt`: **663** voci, **38** escluse; stato `da-decidere` su **466**, `blocca_run_base` `DA-DECIDERE` su **511** — e non e' pigrizia: **nessun documento lo dichiara** |
+| `csv/_presidio_indice.py` | `e1754107` | `python csv/_presidio_indice.py --collaudo` | PRESIDIO: ogni ID che un commit AGGIUNGE a un documento vivo, o cita nel messaggio, esiste nell'indice o fra gli esclusi. Tre esiti: NOTO, ESCLUSO, **AMBIGUO** *(forma nuda definita da due registri)* | `doc/COLLAUDO_presidio_indice.txt`: **5/5 PASS**, e il quinto e' il **HOOK VERO** *(uscita `1`, ID segnalato, documento tornato identico)* |
+
+**⚠ IL PRESIDIO GUARDA SOLO LE RIGHE AGGIUNTE, ed e' una scelta:** guardare i file interi rifiuterebbe **ogni** commit finche' l'indice non e' perfetto, e verrebbe aggirato il primo giorno (`A9`). **Cosi' il debito vecchio resta visibile nell'indice e il debito NUOVO non si crea.**

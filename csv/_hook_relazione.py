@@ -130,6 +130,28 @@ def controlla():
         sys.stderr.write("[REG-R] il controllo NON e' girato (%s): dichiarato, non nascosto.\n"
                          % _e)
 
+    # [INDICE, 2026-09-26] gli ID citati NEL MESSAGGIO: qui e' l'unico punto in cui git lo ha
+    #   gia' scritto. Sta accanto a `REG-R` per la stessa ragione: `commit-msg` e' UNO SOLO.
+    try:
+        import _presidio_indice
+        _ig, _am = _presidio_indice.esamina(msg0)
+        if _ig or _am:
+            if "[SENZA-INDICE:" in msg0:
+                sys.stderr.write("[INDICE] eccezione DICHIARATA nel messaggio.\n")
+            else:
+                sys.stderr.write("\n[INDICE] *** COMMIT RIFIUTATO ***\n\n"
+                                 "  ID citati nel MESSAGGIO e non nell'indice: %s\n"
+                                 % ", ".join((_ig + _am)[:20])
+                                 + "  CHE FARE: definirli in un registro e rigenerare"
+                                 " (python csv/_indice_id.py), oppure\n"
+                                 "    aggiungerli a doc/INDICE_ID_ESCLUSI.tsv col motivo,"
+                                 " oppure dichiarare\n"
+                                 "    [SENZA-INDICE: <motivo>] nel messaggio.\n\n")
+                return 1
+    except Exception as _e2:           # A8: un presidio che si schianta NON deve bloccare
+        sys.stderr.write("[INDICE] il controllo NON e' girato (%s): dichiarato, non nascosto.\n"
+                         % _e2)
+
     if not motivi:
         return 0
     if RELAZIONE in st:

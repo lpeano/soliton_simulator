@@ -19612,3 +19612,73 @@ reperto non si riscrive.**
 
 **Effetto collaterale misurato:** le voci lette da `STATO_RUN` passano da **246** a **247**, perche'
 `C1-bis` — che prima si confondeva con `C1` — **e' ora una voce distinta**.
+
+
+---
+
+# ✅ **`PASSO 2`: `doc/INDICE_ID.tsv` — 663 VOCI, E UN PRESIDIO CHE IMPEDISCE** *(2026-09-26)*
+
+*(`csv/_indice_id.py`, `csv/_presidio_indice.py`; referti `doc/INDICE_ID_referto.txt` e
+`doc/COLLAUDO_presidio_indice.txt`. **Collaudo 5/5**, e il quinto e' il **hook vero**.)*
+
+```
+voci nell'indice                 663        esclusi (non sono ID)        38
+per STATO       da-decidere 466   chiuso 122   aperto 47   teoria 17   non-difetto 11
+per TIPO        altro 225   criterio-locale 203   fronte 141   misura 28   difetto 25
+                assioma 16   cura 14   presidio 10   standard 1
+per BLOCCA      DA-DECIDERE 511   NO 147   SI 5
+```
+
+## 📌 **I NUMERI SCOMODI LI DICO PRIMA: `466` `da-decidere` e `511` `DA-DECIDERE`**
+
+**Non e' pigrizia, ed e' l'ordine di Luca** *(«lo stato si prende dalla fonte; dove e' ambiguo
+`da-decidere`. Non indovinare»)*: `blocca_run_base` vale `SI` **solo** dove il testo dice
+*«bloccante»* o *«prima di qualunque giro lungo»* — **sono cinque voci** — e `NO` dove la voce e'
+chiusa, e' teoria o non e' un difetto.
+
+> ### **Riempire quella colonna a intuito sarebbe il difetto di oggi moltiplicato per cinquecento.**
+
+## ✅ **DUE LACUNE CHIUSE CLASSIFICANDO, NON ESCLUDENDO**
+
+**① `CLAUDE.md` DEFINISCE I PRESIDI, e l'indice non lo leggeva:** `P6` risultava *«citato 59 volte
+e mai definito»*. **Un registro che si legge per primo e che l'indice non guarda e' esattamente il
+difetto che l'indice deve togliere.** *(E in `CLAUDE.md` i presidi si aprono in **grassetto**, non
+con un'intestazione: senza quel ramo `P1`-`P6` non esistevano.)*
+
+**② I `288` «CITATI E MAI DEFINITI» NON SONO VOCI PERSE:** **119** sono citati **solo** in referti,
+sigilli e task history, e sono **etichette di CRITERIO di quel sigillo** (`T1`, `S1`, `R3`, `K3`) —
+il loro nome pieno include il sigillo. **Entrano con `tipo: criterio-locale`**, e la
+classificazione viene da **DOVE sono citati**, che e' un dato e non un giudizio. **Chiamarli
+`altro` li avrebbe nascosti fra le voci vere.**
+
+## ✅ **IL PRESIDIO: TRE ESITI, NON DUE**
+
+```
+NOTO       l'ID e' nell'indice come `id` o come `alias`                    -> passa
+ESCLUSO    e' fra le 38 forme dichiarate NON identificatori, col motivo    -> passa
+AMBIGUO    forma NUDA di un ID con namespace, definita da DUE registri     -> AVVISA e RIFIUTA
+IGNOTO     non e' in nessuno dei due                                       -> RIFIUTA
+```
+
+**L'`AMBIGUO` e' il servizio vero:** se una forma nuda e' definita in due posti, **il presidio lo
+dice** invece di scegliere per conto proprio. *(Oggi sono zero, e lo dico: lo `AMBIGUO` e' un ramo
+**non ancora esercitato sui dati veri**, provato solo per costruzione.)*
+
+**COLLAUDO `5/5`, e il quinto conta piu' degli altri quattro:** i primi provano **la funzione**; il
+quinto mette una riga con `QQ777` in un documento vivo, la mette in **stage** e chiama il **HOOK
+VERO** — `uscita 1`, ID segnalato, **e il documento torna con lo stesso sha1**. *(Fra la funzione e
+il hook c'e' `git diff --cached`, ed e' la' che un presidio si spegne in silenzio.)*
+
+**E GUARDA SOLO LE RIGHE AGGIUNTE, dichiarato:** guardare i file interi rifiuterebbe **ogni** commit
+finche' l'indice non e' perfetto, e **verrebbe aggirato il primo giorno** (`A9`). Cosi' **il debito
+vecchio resta visibile nell'indice e il debito NUOVO non si crea**.
+
+## ⚠ **TRE LIMITI, dichiarati**
+
+- **la forma estratta puo' essere un SOTTOINSIEME del token scritto:** `ZZ888` viene segnalato come
+  `Z888`. **Il presidio rifiuta comunque**, ma il nome nel messaggio d'errore puo' non coincidere
+  con quello scritto.
+- **`titolo_breve` e' troncato a 110 caratteri:** l'indice dice **dove** vive una voce, non che cosa
+  dice. La spiegazione resta nel documento.
+- **la fonte e' `file::ancora`, non `file:riga`:** un numero di riga **marcisce al primo
+  inserimento**, un frammento di titolo si trova con una ricerca.

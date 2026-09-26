@@ -353,6 +353,13 @@ def pre_commit():
     if _q.returncode:
         sys.stderr.write(_q.stderr or '')
         return 1
+    # [INDICE, 2026-09-26] ogni ID che il commit AGGIUNGE a un documento VIVO esiste in
+    #   `doc/INDICE_ID.tsv` (come id o alias) oppure fra gli ESCLUSI col motivo.
+    _qi = _sp.run([sys.executable, os.path.join(RADICE, 'csv', '_presidio_indice.py'),
+                   '--pre-commit'], cwd=RADICE, capture_output=True, text=True)
+    if _qi.returncode:
+        sys.stderr.write(_qi.stderr or '')
+        return 1
     coppie = []
     for rel in staged():
         p = os.path.join(RADICE, rel)
