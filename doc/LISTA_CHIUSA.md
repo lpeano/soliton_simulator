@@ -19,8 +19,8 @@
 
 ```
 voci nell'indice      740
-in LISTA              352   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
-FUORI LISTA           388   col motivo, dai campi dell'indice
+in LISTA              349   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
+FUORI LISTA           391   col motivo, dai campi dell'indice
 ```
 
 ---
@@ -29,18 +29,18 @@ FUORI LISTA           388   col motivo, dai campi dell'indice
 
 | | famiglia | cosa raccoglie | voci in lista |
 |---|---|---|--:|
-| **A** | **INERZIA E AVVIO** | l'inerzia spinoriale, il contrasto, `rho_s`, la rampa, cio' che decide come nasce un nodo | 68 |
+| **A** | **INERZIA E AVVIO** | l'inerzia spinoriale, il contrasto, `rho_s`, la rampa, cio' che decide come nasce un nodo | 67 |
 | **B** | **TEMPO UNICO** | un solo orologio: `dt_n`/`dt_e` contro `DT` nudo, `r`, `tau_pp`, le medie d'arco | 10 |
-| **C** | **DOPPIA COPERTURA E CREAZIONE** | la fase su `2pi`/`4pi`, la torsione `tw`, la mitosi, Schwinger, cio' che si eredita | 17 |
+| **C** | **DOPPIA COPERTURA E CREAZIONE** | la fase su `2pi`/`4pi`, la torsione `tw`, la mitosi, Schwinger, cio' che si eredita | 16 |
 | **D** | **SOGLIE TARATE E SOTTO PLANCK** | `A11`: ogni clip, pavimento o tetto che non esprima un vincolo dichiarato | 7 |
 | **E** | **DISEGNO E STATISTICHE GLOBALI** | `A2`/`A5`: mediane e medie globali dentro una legge locale, e il disegno nella fisica | 9 |
 | **F** | **FRENO E CONTRAZIONE** | `SCALA_MIN`, il freno a senso unico, la coesione, la repulsione, `d0`, `LAM` | 44 |
-| **G** | **ARRETRATO DEGLI STRUMENTI** | presidi, ancore, reperti, ripresa, il passo incompleto: **non e' fisica** | 8 |
+| **G** | **ARRETRATO DEGLI STRUMENTI** | presidi, ancore, reperti, ripresa, il passo incompleto: **non e' fisica** | 7 |
 | **?** | **SENZA FAMIGLIA** | nessuna regola dell'indice ha deciso: **le elenco invece di metterle in una famiglia a caso** | 189 |
 
 ---
 
-## FAMIGLIA **A** — INERZIA E AVVIO   *(68 voci)*
+## FAMIGLIA **A** — INERZIA E AVVIO   *(67 voci)*
 
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
@@ -102,7 +102,6 @@ FUORI LISTA           388   col motivo, dai campi dell'indice
 | `NO` | **Z60** | — | Z60 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / LA CRONOLOGIA DELLA DEGENERAZIONE: r NON CRESCE, PARTE… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
 | `NO` | **Z66** | — | Z66 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / median(lambdanodi()) SI CONGELA: 0.6092 IDENTICO A QUATTRO… | `da-decidere` | `fronte` | `RAMIFICAZIONI.md` |
 | `NO` | **Z69** | — | Z69 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SEI GUARDIE PROTEGGONO DA UN DIFETTO GIA' CURATO, e le (c)… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
-| `NO` | **Z73** | — | Z73 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / chibasc BLOCCA LA MITOSI e DIMEZZA L'OLONOMIA NETTA: fa l'OPPOSTO… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
 | `NO` | **Z87** | — | Z87 DA RIVERIFICARE ⏳[EPOCA 2 · MISURA] / d SCENDE A DIECI VOLTE SOTTO LAM MENTRE SCALAMIN E' ACCESO, E LA… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
 | `NO` | **Z88** | — | Z88 DA RIVERIFICARE ⏳[EPOCA 1 · CODICE] / AVVERTENZA SULL'EPOCA 1: OTTO grandezze che la SEMINA legge sono… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
 | `NO` | **Z9** | — | Z9 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / RISCRITTA IL 2026-09-18 — NON «CHIUSA»: RISCRITTA IN MODO CHE SI… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
@@ -132,7 +131,7 @@ FUORI LISTA           388   col motivo, dai campi dell'indice
 
 ---
 
-## FAMIGLIA **C** — DOPPIA COPERTURA E CREAZIONE   *(17 voci)*
+## FAMIGLIA **C** — DOPPIA COPERTURA E CREAZIONE   *(16 voci)*
 
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
@@ -143,7 +142,6 @@ FUORI LISTA           388   col motivo, dai campi dell'indice
 | `DA-DECIDERE` | **S13** | — | IL TEMPO D'ARCO DOVREBBE ESSERE min(ri, rj) INVECE DELLA MEDIA ARITMETICA? — proposta per TUTTO il sistema,… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `NO` | **CURA-3** | — | - phi su 2pi con le soglie che la seguono / nella forma decisa: frazioni che sul dominio 4pi danno… | `da-decidere` | `cura` | `STATO_RUN.md` |
 | `NO` | **PAT-2** | — | spegnigravbifase.py:184 non rispetta il pattern 2 (usa max\/Δ\/ invece delle FIRME) / PATTERN §4 / PRIMA del… | `da-decidere` | `cura` | `STATO_RUN.md` |
-| `DA VERIFICARE` | **D09** | — | chibasc BLOCCA la mitosi e DIMEZZA l'olonomia netta: fa l'OPPOSTO del suo scopo dichiarato / Z73 / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
 | `NO` | **D35** | — | L'antiparticella di Schwinger nasce con +2π (:5443) e nel campo F = Σ exp(iφ) E' IDENTICA alla particella,… | `aperto` | `difetto` | `STATO_RUN.md` |
 | `NO` | **REG-A** | — | FASE A del registro della fisica: l'INVENTARIO degli scrittori di stato / MANDATO-REGISTRO §2 / FATTA… | `da-decidere` | `difetto` | `STATO_RUN.md` |
 | `NO` | **REG-C** | — | FASE C: LA STORIA di ogni legge, e le schede delle leggi TOLTE / MANDATO-REGISTRO §2 / cio' che non si… | `da-decidere` | `difetto` | `STATO_RUN.md` |
@@ -237,14 +235,13 @@ FUORI LISTA           388   col motivo, dai campi dell'indice
 
 ---
 
-## FAMIGLIA **G** — ARRETRATO DEGLI STRUMENTI   *(8 voci)*
+## FAMIGLIA **G** — ARRETRATO DEGLI STRUMENTI   *(7 voci)*
 
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
 | `DA-DECIDERE` | **A4-METRICHE** | A4 | le METRICHE DEL SETTORE CHIRALE / doc/TASKHISTORY/2026-09-20metriche-settore-chirale.md ( il documento… | `aperto` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **ANCORE-1** | — | APERTA il 2026-09-25 / 25 SIGILLI PRENDONO «IL CODICE DI PRIMA» DA HEAD (43 occorrenze su 310 file di csv/ —… | `aperto` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **B6** | — | le due cure OFF: COPPIARECIPROCA e GRAVAMPIEZZA / :739 e :732 (entrambe = False), doc/REFERTOsomme.md, due… | `aperto` | `altro` | `STATO_RUN.md` |
-| `NO` | **LETTORI-INDICE** | — | APERTA il 2026-09-26 (PASSO 3 ridotto, decisione di Luca) / SEI LETTORI LEGGONO ANCORA I REGISTRI IN MARKDOWN… | `aperto` | `altro` | `STATO_RUN.md` |
 | `NO` | **D13** | — | I sigilli storici non sono stati rigirati sul blob corrente / Z11 / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
 | `NO` | **Z15** | — | Z15 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / 14 .pkl su 36 non portano il BLOB del codice che li ha prodotti, e… | `aperto` | `fronte` | `RAMIFICAZIONI.md` |
 | `DA-DECIDERE` | **P5** | — | OGNI RAMO else / FALLBACK / getattr(..., default) SU UN PERCORSO FISICO VA CONTATO. | `da-decidere` | `presidio` | `CLAUDE.md` |
@@ -256,179 +253,179 @@ FUORI LISTA           388   col motivo, dai campi dell'indice
 
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
-| `DA-DECIDERE` | **A3b** | — | (CITATO 15 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **AAAA-MM-GG** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **ARCHI-PASSO** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **AUTO-ATTENUA** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **AUTO-MANUTENZIONE** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **AUTO-NORMALIZZANTE** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **A3b** | — | (CITATO 16 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **AAAA-MM-GG** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **ARCHI-PASSO** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **AUTO-ATTENUA** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **AUTO-MANUTENZIONE** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **AUTO-NORMALIZZANTE** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **B7** | — | i reperti DA RIMISURARE sulla scena nuova / Z43, Z46, Z48-Z52, coerg / misurati su sep = 8 / rimisura sulla… | `da-decidere` | `altro` | `STATO_RUN.md` |
 | `DA-DECIDERE` | **B9** | — | Z63 / Z64 — i 1455 nodi a 10⁻¹³; la catena f → x → r che non riproduce r / registro, ex-LISTA 2 punto 3 /… | `da-decidere` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **BACKGROUND-INDEPENDENT** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **BIS-ANOM-SIMM** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **BIS-DELTA** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **COES-CAUSALE** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **CONFIG-1/** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **COSA-RICONTROLLARE** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **CROSS-PASSO** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **CURA1-CORTO** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **CURA2-CORTO** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **CURE-FINE** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **CURE-INIZIO** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **D3** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **DIFETTI-NUOVI-FINE** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **DIFETTI-NUOVI-INIZIO** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **E1** | — | (CITATO 55 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **E4b** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **F1** | — | (CITATO 18 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **F2** | — | (CITATO 16 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **F3** | — | (CITATO 14 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **F4** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **F5** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **FASE-5** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **FASE1** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **FRENO-LEGGE** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **G5** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **G6** | — | (CITATO 16 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **G7** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **G8** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **G9** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **GLOBALE-DISEGNO** | — | (CITATO 16 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **H1** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **H2** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **H3** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **H3b** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **H4** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **H5** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **H6** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **HDF5** | — | (CITATO 8 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **I2** | — | (CITATO 28 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **I3** | — | (CITATO 8 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **I4** | — | (CITATO 12 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **I5** | — | (CITATO 12 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **IC95** | — | (CITATO 80 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **INTERO-BLOCCO** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **K1** | — | (CITATO 26 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **K2** | — | (CITATO 19 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **K3** | — | (CITATO 17 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **K4** | — | (CITATO 12 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **K5** | — | (CITATO 12 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **K7** | — | (CITATO 28 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **K8** | — | (CITATO 10 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **L1** | — | (CITATO 9 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **M1b** | — | (CITATO 23 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **M2b** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **M3** | — | (CITATO 27 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **M3c** | — | (CITATO 20 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **M4** | — | (CITATO 18 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **MANDATO-PATTERN** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **MANDATO-REGISTRO** | — | (CITATO 12 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **MASSE-COERENTI** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **MIT1** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **MIT2** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **MODEL-FREE** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **N1** | — | (CITATO 15 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **N1b** | — | (CITATO 8 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **N2** | — | (CITATO 17 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **N3** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **N3b** | — | (CITATO 22 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **N6** | — | (CITATO 12 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **N7** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **O2** | — | (CITATO 9 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **P1b** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **P2b** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **P5a** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **P5b** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **P7** | — | (CITATO 18 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **P8** | — | (CITATO 20 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **P9** | — | (CITATO 12 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **PEQ-ESATTO** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **PEQ-NASCITA** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **PER-ARCO** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **POST-HOC** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **PUNTO-DI-RIPRESA** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Q0** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Q1** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Q1a** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Q1b** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Q2** | — | (CITATO 9 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Q3** | — | (CITATO 9 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Q4** | — | (CITATO 23 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Q5** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Q8** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **QUADRO-FINE** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **QUADRO-INIZIO** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **QUASI-CANCELLAZIONE** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **BACKGROUND-INDEPENDENT** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **BIS-ANOM-SIMM** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **BIS-DELTA** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **COES-CAUSALE** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **CONFIG-1/** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **COSA-RICONTROLLARE** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **CROSS-PASSO** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **CURA1-CORTO** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **CURA2-CORTO** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **CURE-FINE** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **CURE-INIZIO** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **D3** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **DIFETTI-NUOVI-FINE** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **DIFETTI-NUOVI-INIZIO** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **E1** | — | (CITATO 58 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **E4b** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **F1** | — | (CITATO 20 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **F2** | — | (CITATO 18 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **F3** | — | (CITATO 15 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **F4** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **F5** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **FASE-5** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **FASE1** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **FRENO-LEGGE** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **G5** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **G6** | — | (CITATO 17 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **G7** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **G8** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **G9** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **GLOBALE-DISEGNO** | — | (CITATO 21 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **H1** | — | (CITATO 8 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **H2** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **H3** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **H3b** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **H4** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **H5** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **H6** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **HDF5** | — | (CITATO 9 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **I2** | — | (CITATO 29 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **I3** | — | (CITATO 9 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **I4** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **I5** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **IC95** | — | (CITATO 81 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **INTERO-BLOCCO** | — | (CITATO 8 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **K1** | — | (CITATO 27 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **K2** | — | (CITATO 20 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **K3** | — | (CITATO 18 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **K4** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **K5** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **K7** | — | (CITATO 29 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **K8** | — | (CITATO 11 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **L1** | — | (CITATO 10 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **M1b** | — | (CITATO 24 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **M2b** | — | (CITATO 8 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **M3** | — | (CITATO 28 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **M3c** | — | (CITATO 21 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **M4** | — | (CITATO 19 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **MANDATO-PATTERN** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **MANDATO-REGISTRO** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **MASSE-COERENTI** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **MIT1** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **MIT2** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **MODEL-FREE** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **N1** | — | (CITATO 16 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **N1b** | — | (CITATO 9 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **N2** | — | (CITATO 18 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **N3** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **N3b** | — | (CITATO 23 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **N6** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **N7** | — | (CITATO 14 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **O2** | — | (CITATO 10 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **P1b** | — | (CITATO 8 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **P2b** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **P5a** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **P5b** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **P7** | — | (CITATO 19 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **P8** | — | (CITATO 21 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **P9** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **PEQ-ESATTO** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **PEQ-NASCITA** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **PER-ARCO** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **POST-HOC** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **PUNTO-DI-RIPRESA** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Q0** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Q1** | — | (CITATO 14 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Q1a** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Q1b** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Q2** | — | (CITATO 10 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Q3** | — | (CITATO 10 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Q4** | — | (CITATO 24 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Q5** | — | (CITATO 8 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Q8** | — | (CITATO 14 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **QUADRO-FINE** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **QUADRO-INIZIO** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **QUASI-CANCELLAZIONE** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **R1** | — | (CITATO 30 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **R3b** | — | (CITATO 12 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **R4** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **R6** | — | (CITATO 27 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **RAMPA-2/** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **RAMPA2** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **RES-INVARIANTI** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **RI-GIRABILE** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **RI-GIRABILI** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **RI-INTERROGA** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **RI-LETTA** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **ROMPI-ANELLO** | — | (CITATO 8 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **R3b** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **R4** | — | (CITATO 14 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **R6** | — | (CITATO 28 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **RAMPA-2/** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **RAMPA2** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **RES-INVARIANTI** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **RI-GIRABILE** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **RI-GIRABILI** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **RI-INTERROGA** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **RI-LETTA** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **ROMPI-ANELLO** | — | (CITATO 9 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **S04** | — | La crescita e' NUCLEAZIONE, non stiramento / CADE con Z108: nascite meno morti valgono lo 0.01 % del Δ… | `da-decidere` | `altro` | `STATO_RUN.md` |
-| `DA-DECIDERE` | **S1** | — | (CITATO 51 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **S1a** | — | (CITATO 15 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **S1b** | — | (CITATO 19 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **S3** | — | (CITATO 43 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **S3a** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **S4a** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **S8** | — | (CITATO 20 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **S8b** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **S8c** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **S8d** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **SCALA-MIN-PASSO** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **SIGILLO-CURA2** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **SIGILLO-CURA2-RIPARATO** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **SOTTO-PASSO** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **STANDARD 1** | — | (CITATO 10 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **STANDARD 2** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **STANDARD 5** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **STANDARD 7** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **STANDARD 9** | — | (CITATO 10 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **STANDARD ⑤** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **STEP2** | — | (CITATO 66 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **SU2** | — | (CITATO 67 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **T0** | — | (CITATO 32 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **T1** | — | (CITATO 112 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **T1a** | — | (CITATO 19 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **T1b** | — | (CITATO 23 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **T6** | — | (CITATO 32 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **T7** | — | (CITATO 9 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **T9** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **TEMPO-LUCE** | — | (CITATO 10 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **TERRA-BUCONERO** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **TRIAGE-FINE** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **TRIAGE-INIZIO** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **U4** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **U5** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **U6** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **U7b** | — | (CITATO 12 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **V10** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **V5b** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **V6b** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **VUOTO-MASSA** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **W2** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **W4** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Y0** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Y10** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Y3** | — | (CITATO 9 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Y4** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Y5** | — | (CITATO 64 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Y6** | — | (CITATO 9 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Y7** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Y8** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Z128** | — | (CITATO 2 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Z147** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Z1b** | — | (CITATO 12 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Z1c** | — | (CITATO 30 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Z4a** | — | (CITATO 16 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
-| `DA-DECIDERE` | **Z4b** | — | (CITATO 10 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **S1** | — | (CITATO 52 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **S1a** | — | (CITATO 16 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **S1b** | — | (CITATO 20 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **S3** | — | (CITATO 44 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **S3a** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **S4a** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **S8** | — | (CITATO 21 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **S8b** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **S8c** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **S8d** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **SCALA-MIN-PASSO** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **SIGILLO-CURA2** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **SIGILLO-CURA2-RIPARATO** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **SOTTO-PASSO** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **STANDARD 1** | — | (CITATO 11 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **STANDARD 2** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **STANDARD 5** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **STANDARD 7** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **STANDARD 9** | — | (CITATO 11 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **STANDARD ⑤** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **STEP2** | — | (CITATO 67 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **SU2** | — | (CITATO 68 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **T0** | — | (CITATO 33 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **T1** | — | (CITATO 113 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **T1a** | — | (CITATO 20 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **T1b** | — | (CITATO 24 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **T6** | — | (CITATO 33 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **T7** | — | (CITATO 10 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **T9** | — | (CITATO 8 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **TEMPO-LUCE** | — | (CITATO 12 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **TERRA-BUCONERO** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **TRIAGE-FINE** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **TRIAGE-INIZIO** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **U4** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **U5** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **U6** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **U7b** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **V10** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **V5b** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **V6b** | — | (CITATO 7 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **VUOTO-MASSA** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **W2** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **W4** | — | (CITATO 8 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Y0** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Y10** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Y3** | — | (CITATO 10 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Y4** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Y5** | — | (CITATO 66 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Y6** | — | (CITATO 10 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Y7** | — | (CITATO 6 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Y8** | — | (CITATO 5 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Z128** | — | (CITATO 3 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Z147** | — | (CITATO 4 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Z1b** | — | (CITATO 13 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Z1c** | — | (CITATO 31 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Z4a** | — | (CITATO 18 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
+| `DA-DECIDERE` | **Z4b** | — | (CITATO 11 volte, MAI definito in un registro) | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `NO` | **D05** | — | I residui di C5: I4 scatola nera, I5 underflow per riga, modalita' fine / il mandato C5 e la coda / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
 | `NO` | **D06** | — | fattcsultimo e' SCRITTO e MAI LETTO (quarto caso della stessa famiglia) / Z7, letto dal codice / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
 | `NO` | **D07** | — | TAUA e' UN SOLO numero per DUE leggi fisiche distinte / Z10, Z9-bis / — / APERTO | `aperto` | `difetto` | `STATO_RUN.md` |
@@ -448,7 +445,7 @@ FUORI LISTA           388   col motivo, dai campi dell'indice
 
 ---
 
-## 📤 **FUORI LISTA — 388 voci, ciascuna col MOTIVO** *(dai campi dell'indice)*
+## 📤 **FUORI LISTA — 391 voci, ciascuna col MOTIVO** *(dai campi dell'indice)*
 
 ### motivo: **etichetta LOCALE a una scheda o a un sigillo: il nome pieno include il sigillo, e non e' un fronte del programma**   *(238 voci)*
 
@@ -502,7 +499,7 @@ FUORI LISTA           388   col motivo, dai campi dell'indice
 | ESENTE-P3 | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | EVALUATE-THEN-COMMIT | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | F7 | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
-| FASE2 | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
+| FASE2 | (CITATO 6 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | FORK-FIRST | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | G0 | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | G5b | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
@@ -640,7 +637,7 @@ FUORI LISTA           388   col motivo, dai campi dell'indice
 | RI-VERIFICARE | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | RI-VERIFICATI | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | RIDUZIONE-AL-LIMITE | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
-| RITMOWRAP2 | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
+| RITMOWRAP2 | (CITATO 5 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | S0 | (CITATO 6 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | S1c | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | S1d | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
@@ -693,7 +690,7 @@ FUORI LISTA           388   col motivo, dai campi dell'indice
 | ZZ888 | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 | ZZ999 | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history) | `criterio-locale` |
 
-### motivo: **gia' curata o chiusa**   *(128 voci)*
+### motivo: **gia' curata o chiusa**   *(129 voci)*
 
 | id | che cos'e' | tipo |
 |---|---|:--:|
@@ -743,6 +740,7 @@ FUORI LISTA           388   col motivo, dai campi dell'indice
 | D34 | D34 CURATO IN CODICE il 2026-09-24 / Il wrap «a 4π» di ritmo() (:2584-2585) NON AVVOLGE: su… | `difetto` |
 | D37 | D37 CURATO il 2026-09-24 / CHIAVE DUPLICATA NEI DOMINI: 'csnodoprev' compare DUE VOLTE (:226 e… | `difetto` |
 | INERZIA-1(C) | 1(C) — CURATA e SIGILLATA 3/6 il 2026-09-25: GIUSTA e INSUFFICIENTE / LA CURA TOGLIE… | `altro` |
+| LETTORI-INDICE | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FUORI PERIMETRO… | `altro` |
 | OKN-ASSERT | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(..., default) CHE… | `altro` |
 | P1BIS-DELTA | in coda per la LISTA CHIUSA, famiglia G (ordine di Luca, 2026-09-25) / P1-bis VERIFICA LA… | `altro` |
 | POTENZE-1 | CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6/6: F2 da x47 000 a x1.4, F1 2.427… | `altro` |
@@ -847,15 +845,17 @@ FUORI LISTA           388   col motivo, dai campi dell'indice
 | A8b | COROLLARIO: le cache CROSS-PASSO | `assioma` |
 | A9 | UN PRESIDIO CHE NON IMPEDISCE NON E' UN PRESIDIO | `assioma` |
 
-### motivo: **non e' un difetto**   *(5 voci)*
+### motivo: **non e' un difetto**   *(7 voci)*
 
 | id | che cos'e' | tipo |
 |---|---|:--:|
 | COPPIA-RAMP | APERTA il 2026-09-26 / PERCHE' LA COPPIA NON PORTA ramp? Misurato sui figli (2 semi, media… | `misura` |
+| D09 | chibasc BLOCCA la mitosi e DIMEZZA l'olonomia netta: fa l'OPPOSTO del suo scopo dichiarato /… | `difetto` |
 | D27 | Il grafo e' in QUATTRO COMPONENTI che non si toccano mai / Z65, misurato in ORIGINE su un… | `difetto` |
 | NODI-1 | RITIRATA (Luca, 2026-09-25). NON cancellata: resta come storia, col motivo. PERCHE' È CADUTA,… | `altro` |
 | S10 | S10 RITIRATA il 2026-09-24 / Il tetto 1.414213 di r viene da un ramo di ritmo() che NON GIRA /… | `altro` |
 | Z130 | Z130 SOSPETTO RITIRATO, MIO ⏳[archivi delle cure · LETTURA] / S10 E' RITIRATA: la premessa era… | `fronte` |
+| Z73 | Z73 RITIRATA ⏳[EPOCA 1 · MISURA] / RITIRATA UNA SECONDA VOLTA il 2026-09-24, e la smentita sta… | `fronte` |
 
 ### motivo: **standard di prova: un criterio di metodo, non un fronte**   *(1 voci)*
 

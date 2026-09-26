@@ -5,14 +5,14 @@
   voci nell'indice: 740      esclusi (non sono ID): 43
   alias dalle RINOMINE del PASSO 1: 23       alias dalla forma NUDA univoca: 35
 
-  per STATO:            da-decidere=529, chiuso=131, aperto=58, teoria=17, non-difetto=5
+  per STATO:            da-decidere=529, chiuso=132, aperto=55, teoria=17, non-difetto=7
   per TIPO:             criterio-locale=238, altro=224, fronte=141, difetto=47, misura=38, cura=25, assioma=16, presidio=10, standard=1
-  per BLOCCA_RUN_BASE:  NO=519, DA-DECIDERE=212, SI=8, DA VERIFICARE=1
-  per FAMIGLIA:         ?=398, A=143, B=20, C=37, D=11, E=13, F=96, G=22
+  per BLOCCA_RUN_BASE:  NO=520, DA-DECIDERE=212, SI=8
+  per FAMIGLIA:         ?=398, A=143, B=20, C=37, D=11, E=13, F=97, G=21
 
   CONTROLLO di Luca: righe con stato chiuso/non-difetto/teoria (o criterio-locale) E blocca SI:
       0   -> PASS
-  SMISTAMENTO (tipo difetto/fronte/misura/cura, stato aperto/da-decidere): 139 voci
+  SMISTAMENTO (tipo difetto/fronte/misura/cura, stato aperto/da-decidere): 137 voci
 
 ========================================================================================================
 LE CONDIZIONI DI FINE (punto 3 del mandato) -- verificate DA SCRIPT
@@ -20,7 +20,7 @@ LE CONDIZIONI DI FINE (punto 3 del mandato) -- verificate DA SCRIPT
   (1) voci DA-DECIDERE nello smistamento ..............   0   -> PASS
   (2) contraddizioni stato/blocca .....................   0   -> PASS
   (3) voci NOMINATE dal mandato e assenti dall'indice ..   0   -> PASS
-  (4) STATO_RUN allineato: D11 "chiuso"  D09 "aperto"
+  (4) STATO_RUN allineato: D11 "chiuso"  D09 "non-difetto"
       D11 deve essere `chiuso`; **D09 resta `aperto` DI PROPOSITO**: la sua prova non torna
       *(il numero `4651` non e' nel repo)*, ed e' segnalato come `DA VERIFICARE`.
 
@@ -33,17 +33,17 @@ LE CONDIZIONI DI FINE (punto 3 del mandato) -- verificate DA SCRIPT
   CITATI e MAI DEFINITI in un registro (entrano con `da-decidere`): 320
       di cui citati SOLO in referti/sigilli/task history -> `criterio-locale`: 150
       DA-DECIDERE            222 citazioni
-      T1                     112 citazioni
-      IC95                   80 citazioni
-      SU2                    67 citazioni
-      STEP2                  66 citazioni
-      Y5                     64 citazioni
-      E1                     55 citazioni
-      S1                     51 citazioni
-      S3                     43 citazioni
-      T6                     32 citazioni
-      T0                     32 citazioni
-      Z1c                    30 citazioni
+      T1                     113 citazioni
+      IC95                   81 citazioni
+      SU2                    68 citazioni
+      STEP2                  67 citazioni
+      Y5                     66 citazioni
+      E1                     58 citazioni
+      S1                     52 citazioni
+      S3                     44 citazioni
+      T6                     33 citazioni
+      T0                     33 citazioni
+      Z1c                    31 citazioni
 
 ========================================================================================================
 COSA QUESTO INDICE *NON* DICE

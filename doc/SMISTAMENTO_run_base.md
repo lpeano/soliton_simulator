@@ -11,7 +11,7 @@
 
 ```
 voci nell'indice          740
-in questo smistamento     139   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
+in questo smistamento     137   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
 ```
 
 ## 🎯 **L'ORDINE DI LAVORO DEI `SI`** — 8 voci, e l'ordine E' PER DIPENDENZA
@@ -33,15 +33,7 @@ in questo smistamento     139   (tipo difetto/fronte/misura/cura E stato aperto/
 
 **Somma delle stime, senza il run e senza le decisioni: `8,5-12,5 h`.** *(Stime, non misure: la piu' incerta e' `D02`, che tocca una legge.)*
 
-## ⚠ **VOCI CHE NON TORNANO CON LA PROVA DATA — `DA VERIFICARE`**
-
-> **Non le forzo**, come chiesto: qui dico perche'.
-
-| voce | perche' non torna |
-|---|---|
-| **D09** | ⚠ **la prova data non torna:** il numero `4651` **non e' nel repo** *(cercato in tutti i `.md`/`.txt`/`.py` tracciati)*, e la riga di `Z73` in `RAMIFICAZIONI` e' `DA RIVERIFICARE` e dice ancora che `chi_basc` **BLOCCA** la mitosi. **Non la forzo: serve il run lungo che conta i nati.** |
-
-## FAMIGLIA **A** — INERZIA E AVVIO   *(60 voci)*
+## FAMIGLIA **A** — INERZIA E AVVIO   *(59 voci)*
 
 | blocca? | id | che cos'e' | **il motivo, in una frase** | fonte |
 |:--:|---|---|---|---|
@@ -96,7 +88,6 @@ in questo smistamento     139   (tipo difetto/fronte/misura/cura E stato aperto/
 | `NO` | **Z60** | 🟨VALE PER QUELLA SCENA ⏳/ LA CRONOLOGIA DELLA DEGENERAZIONE: r NON CRESCE, PARTE… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 | `NO` | **Z66** | 🟨VALE PER QUELLA SCENA ⏳/ median(lambdanodi()) SI CONGELA: 0.6092 IDENTICO A QUATTRO… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 | `NO` | **Z69** | 🟨VALE PER QUELLA SCENA ⏳/ SEI GUARDIE PROTEGGONO DA UN DIFETTO GIA' CURATO, e le (c)… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
-| `NO` | **Z73** | ⏳/ chibasc BLOCCA LA MITOSI e DIMEZZA L'OLONOMIA NETTA: fa l'OPPOSTO… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 | `NO` | **Z87** | ⏳/ d SCENDE A DIECI VOLTE SOTTO LAM MENTRE SCALAMIN E' ACCESO, E LA… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 | `NO` | **Z88** | ⏳/ AVVERTENZA SULL'EPOCA 1: OTTO grandezze che la SEMINA legge sono… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 | `NO` | **Z9** | ⏳/ RISCRITTA IL 2026-09-18 — NON «CHIUSA»: RISCRITTA IN MODO CHE SI… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
@@ -121,13 +112,12 @@ in questo smistamento     139   (tipo difetto/fronte/misura/cura E stato aperto/
 | `NO` | **C13** | 🟨VALE PER QUELLA SCENA ⏳/ IL TEMPO-LUCE NON E' TESTABILE A QUESTA DENSITA'. cs non e'… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 | `NO` | **C5** | 🟨VALE PER QUELLA SCENA ⏳/ tauluce = d/cs e' PIATTO ⇒ la sostituzione rompe la… | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 
-## FAMIGLIA **C** — DOPPIA COPERTURA E CREAZIONE   *(12 voci)*
+## FAMIGLIA **C** — DOPPIA COPERTURA E CREAZIONE   *(11 voci)*
 
 | blocca? | id | che cos'e' | **il motivo, in una frase** | fonte |
 |:--:|---|---|---|---|
 | `NO` | **CURA-3** | phi su 2pi con le soglie che la seguono / nella forma decisa: frazioni che sul dominio 4pi danno… | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `NO` | **PAT-2** | spegnigravbifase.py:184 non rispetta il pattern 2 (usa max\/Δ\/ invece delle FIRME) / PATTERN §4 / PRIMA del… | voce di PROCESSO o di STRUMENTO: non e' una legge del sistema | `STATO_RUN.md` |
-| `DA VERIFICARE` | **D09** | chibasc BLOCCA la mitosi e DIMEZZA l'olonomia netta: fa l'OPPOSTO del suo scopo dichiarato / Z73 / — / APERTO | ⚠ **la prova data non torna:** il numero `4651` **non e' nel repo** *(cercato in tutti i `.md`/`.txt`/`.py` tracciati)*, e la riga di `Z73` in `RAMIFICAZIONI` e' `DA RIVERIFICARE` e dice ancora che `chi_basc` **BLOCCA** la mitosi. **Non la forzo: serve il run lungo che conta i nati.** | `STATO_RUN.md` |
 | `NO` | **D35** | L'antiparticella di Schwinger nasce con +2π (:5443) e nel campo F = Σ exp(iφ) E' IDENTICA alla particella,… | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `NO` | **REG-A** | FASE A del registro della fisica: l'INVENTARIO degli scrittori di stato / MANDATO-REGISTRO §2 / FATTA… | voce di PROCESSO o di STRUMENTO: non e' una legge del sistema | `STATO_RUN.md` |
 | `NO` | **REG-C** | FASE C: LA STORIA di ogni legge, e le schede delle leggi TOLTE / MANDATO-REGISTRO §2 / cio' che non si… | voce di PROCESSO o di STRUMENTO: non e' una legge del sistema | `STATO_RUN.md` |
@@ -223,7 +213,7 @@ in questo smistamento     139   (tipo difetto/fronte/misura/cura E stato aperto/
 ---
 
 **COSA QUESTA LISTA NON DICE:**
-- **non dice che le altre 601 voci siano irrilevanti**: dice che **non possono bloccare un
+- **non dice che le altre 603 voci siano irrilevanti**: dice che **non possono bloccare un
   run base** perche' sono chiuse, sono teoria, o sono etichette locali di un sigillo.
 - **il titolo e' UNA riga**: la spiegazione sta nella fonte, e la fonte e' nella colonna.
 - **`DA-DECIDERE` e' la risposta onesta**, non una casella vuota: nessun documento dichiara

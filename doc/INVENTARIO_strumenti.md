@@ -835,3 +835,14 @@ python csv/_test_fork/_scena_video.py 500 csv/_test_fork/_ab_B --sep=4.0 --serie
 | strumento | blob (byte) | comando | cosa fa | esito |
 |---|---|---|---|---|
 | `csv/_analisi_lettori_indice.py` | `9c0a577f` | `python csv/_analisi_lettori_indice.py` | misura **dal sorgente** cosa apre ciascuno dei sei lettori, se legge il CODICE, se SCRIVE, e dichiara **quale campo dell'indice gli manca** | `doc/LETTORI_INDICE_analisi.md`: **nessuno dei sei si converte com'e'** — 2 consumatori a cui manca un campo, 2 generatori che leggono il codice e scrivono nel registro, 1 che misura la prosa, 1 fuori perimetro |
+
+---
+
+## Aggiornati il 2026-09-26 — **`LETTORI-INDICE` chiusa: 1 ritirato, 1 convertito, 4 fuori**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_archivio/_triage_difetti.py` | `d84ad423` | — **RITIRATO** | **spostato in archivio il 2026-09-26** *(`STANDARD 10`: lo smistamento dell'indice fa lo stesso lavoro — una cura non aumenta il numero degli strumenti)*. **Non si cancella**: resta come storia, e la tabella che generava in `STATO_RUN` resta valida fino alla prossima rigenerazione | — |
+| `csv/_punto_della_situazione.py` | `04167da9` | `python csv/_punto_della_situazione.py` | **CONVERTITO**: legge **soltanto** `doc/INDICE_ID.tsv` *(campo nuovo `avanzamento`)*, e ha un **collaudo nei due versi** — `SCALE-TW` deve comparire, `CONTAGIO` *(nel Markdown, senza ID)* **non deve** | `doc/PUNTO_DELLA_SITUAZIONE.md`: **95** task con marcatore *(da 60)*, `47` difetti; collaudo **5/5** |
+| `csv/_confronto_pds.py` | `b49cca16` | `PDS_PRIMA=<file> python csv/_confronto_pds.py` | il confronto **prima/dopo** dell'output, con le differenze in **tre classi** | `doc/LETTORI_INDICE_confronto.md`: **+68 comparse** *(l'indice copre tutti i registri)*, **-30 senza marcatore** *(filtro dichiarato)*, **-3 che non erano ID** *(due erano NOMI DI FILE)* |
+| `doc/PUNTO_DELLA_SITUAZIONE_prima_della_conversione.md` | — | — | **il reperto del PRIMA**: l'output del parser salvato **prima** della conversione, committato perche' un confronto senza il termine di paragone non e' verificabile | — |

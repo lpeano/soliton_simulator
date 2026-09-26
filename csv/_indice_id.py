@@ -107,6 +107,22 @@ STATO_CHIUSO_FRASI = [
     r"✅[^|]{0,14}\d+/\d+", r"\d+/\d+[^|]{0,6}(?:PASS|✅)", r"\bPASS\b[^|]{0,6}\d+/\d+",
     r"CURA IN CODICE", r"✅[^|]{0,14}IN CODICE", r"accesi? di default",
 ]
+# ------------------------------------------------------------------ l'AVANZAMENTO (campo nuovo)
+#   ➕ CHIESTO DA LUCA il 2026-09-26 per convertire `_punto_della_situazione`: l'indice aveva
+#   `stato` *(aperto/chiuso/...)*, che **non distingue `IN CORSO` da `IN CODA`** -- ed e' proprio
+#   la distinzione che quel documento serve a mostrare.
+#   ⚠ **VINCE IL PRIMO MARCATORE NEL TESTO, non il primo di questa lista**, e non e' un dettaglio:
+#   e' il difetto che quello strumento aveva GIA' curato *(una riga `▶ IN CORSO` che contiene tre
+#   `✅` dei pezzi fatti risultava `FATTO`, mentre il run stava girando)*.
+AVANZAMENTO = [("✅", "FATTO"), ("▶", "IN CORSO"), ("⏸", "IN CODA"),
+               ("❌", "BLOCCATO"), ("⚠", "CON RISERVA")]
+
+
+def avanzamento_di(cella):
+    trovati = [(cella.index(m), nome) for m, nome in AVANZAMENTO if m in cella]
+    return min(trovati)[1] if trovati else "(senza marcatore)"
+
+
 BLOCCA_SI = r"BLOCCANTE|PRIMA DI QUALUNQUE GIRO|prima del run base|URGENTE, PRIMA"
 #   ...e una voce puo' DICHIARARE di non bloccare: la fonte vince sulla parola chiave.
 BLOCCA_NO = r"NON BLOCCA|non blocca il run base"
@@ -216,6 +232,20 @@ def _nudo(s):
     return re.sub(r"[`*#>_~]", "", re.sub("[" + SIMBOLI + "]", " ", s)).strip()
 
 
+def src_grezza(riga):
+    """La prima e l'ultima cella **SENZA togliere i simboli**.
+
+    ❌ DIFETTO MIO, CORRETTO SUBITO: calcolavo `avanzamento` da `stato_src`, che passa per
+    `_nudo()` -- e `_nudo()` **cancella le emoji**. Cercavo `✅`/`▶`/`⏸` **dopo averli
+    rimossi**: il campo usciva `(senza marcatore)` su **740 voci su 740**, cioe' era un campo
+    VUOTO travestito da campo pieno. **Se l'avessi solo guardato in tabella l'avrei creduto
+    buono.**"""
+    if riga.startswith("|"):
+        cc = [c.strip() for c in riga.strip().strip("|").split("|")]
+        return cc[0][:120] + " || " + cc[-1][:200]
+    return riga
+
+
 def stato_src(riga):
     """Dove una riga dichiara il PROPRIO stato: la PRIMA e l'ULTIMA cella.
 
@@ -319,6 +349,7 @@ for f, ns, tipo_reg in REGISTRI:
             "tipo": primo(TIPO_SEZ, sez, tipo_reg),
             "stato": primo(STATO, stato_src(riga), "da-decidere"),
             "src": stato_src(riga),
+            "avanz": avanzamento_di(src_grezza(riga)),
             "stato_da": "",
             "blocca": "SI" if re.search(BLOCCA_SI, _t) else "",
             "alias": set(),
@@ -413,7 +444,7 @@ for tok, n in NONDEF:
         "id": tok,
         "titolo": ("(CITATO %d volte, MAI definito in un registro%s)"
                    % (n, "" if _in_vivi else "; citato solo in referti/sigilli/task history")),
-        "riga": "", "src": "", "fonte": "(nessuna definizione trovata)", "tipo": _tipo,
+        "riga": "", "src": "", "avanz": "(senza marcatore)", "fonte": "(nessuna definizione trovata)", "tipo": _tipo,
         "stato": "da-decidere", "blocca": "", "alias": set()}
 
 # ------------------------------------------------------------------ il TIPO, corretto a mano
@@ -551,14 +582,15 @@ for v in SMIST:
             v["blocca"], v["motivo"] = "NO", REGOLA_NO_ULTIMA
 
 COL = ["id", "alias", "titolo_breve", "fonte_principale", "stato", "blocca_run_base", "tipo",
-       "famiglia", "stato_da"]
+       "famiglia", "stato_da", "avanzamento"]
 out = [TAB.join(COL)]
 for k in sorted(VOCI):
     v = VOCI[k]
     out.append(TAB.join([v["id"], ",".join(sorted(v["alias"])),
                          re.sub(r"[\t\n]", " ", v["titolo"]), v["fonte"],
                          v["stato"], v["blocca"], v["tipo"], v["fam"],
-                         re.sub(r"[\t\n]", " ", v.get("stato_da", ""))]))
+                         re.sub(r"[\t\n]", " ", v.get("stato_da", "")),
+                         v.get("avanz", "(senza marcatore)")]))
 io.open(DEST, "w", encoding="utf-8", newline=NL).write(NL.join(out) + NL)
 
 outx = [TAB.join(["forma", "motivo", "citazioni"])]

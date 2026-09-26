@@ -20096,3 +20096,67 @@ NUOVE   (0):  nessuna
 
 **Le quattro condizioni di fine restano soddisfatte dopo la cura** *(`0`/`0`/`0` + `D11` chiuso)*, e
 i collaudi pure *(presidio `4/4` senza end-to-end perche' c'erano modifiche in stage, vista `2/2`)*.
+
+
+---
+
+# ✅ **`LETTORI-INDICE` CHIUSA, e `D09` con lei** *(decisioni di Luca, 2026-09-26)*
+
+## ① **`_triage_difetti` RITIRATO** *(`STANDARD 10`)*
+
+Spostato in **`csv/_archivio/`** *(`git mv`, non cancellato)*: **lo smistamento dell'indice fa lo
+stesso lavoro**, e una cura non aumenta il numero degli strumenti.
+
+## ② **`_punto_della_situazione` CONVERTITO, e il campo `avanzamento` esiste**
+
+**Legge soltanto `doc/INDICE_ID.tsv`.** Collaudo **5/5 nei due versi**, e il caso che deve fallire
+e' quello vero: **`CONTAGIO` e' nel Markdown e NON nell'indice** *(un'etichetta di una parola sola
+non e' un ID)* — **non compare, ed e' il prezzo dichiarato della fonte unica.**
+
+**❌ E UN DIFETTO MIO, preso al primo giro:** calcolavo `avanzamento` da `stato_src`, che passa per
+`_nudo()` — **e `_nudo()` cancella le emoji**. Cercavo `✅`/`▶`/`⏸` **dopo averli rimossi**: il campo
+usciva `(senza marcatore)` su **740 voci su 740**.
+> ### **Un campo vuoto travestito da campo pieno.** Se l'avessi solo guardato in tabella l'avrei
+> ### creduto buono: l'ha denunciato il CONFRONTO prima/dopo, che mostrava `438` righe tutte uguali.
+
+**IL CONFRONTO PRIMA/DOPO** *(`doc/LETTORI_INDICE_confronto.md`, generato; il PRIMA e' committato
+come reperto)*:
+
+```
+gruppo               PRIMA   DOPO          task elencati   PRIMA 60   DOPO 95
+(senza marcatore)       23      -  (filtrati e dichiarati)
+CON RISERVA              3     43
+FATTO                   17     31
+IN CODA                 13      9
+BLOCCATO                 -      5
+DIFETTI E SOSPETTI      47     47
+```
+
+**TRE CLASSI DI DIFFERENZA, e due sono GUADAGNI:**
+- **`+68` comparse** — il vecchio leggeva **solo `STATO_RUN`**, l'indice copre **tutti i registri**;
+- **`-30` sparite perche' SENZA MARCATORE** — il vecchio lo prendeva dalla **quarta cella**, l'indice
+  dalla **prima e dall'ultima**, che e' dove una riga dichiara **il proprio** stato. **Non allargo:**
+  le celle di mezzo contengono **le prove**, che citano i `✅` di **altre** voci — ed e' il difetto
+  che quello strumento aveva gia' curato una volta;
+- **`-3` sparite perche' NON SONO ID** — e due erano **NOMI DI FILE** *(`_verifica_registro.py`,
+  `doc/PATTERN_DI_PROVA.md`)*: **il vecchio parser le listava come task.**
+
+## ③ **I QUATTRO FUORI PERIMETRO, dichiarati nella voce**
+
+`_cure_verificate` e `_quadro_unico` leggono **il CODICE** e aprono `STATO_RUN` **per SCRIVERCI**;
+`_blob_nelle_voci` ha per **oggetto la PROSA**; `_inventario_passo` legge **gli script**. **Nessuno
+dei quattro apre un registro per TROVARE DIFETTI**, che e' la condizione di fine.
+
+## ④ **`D09` CHIUSO, e la lezione e' mia: `STANDARD 9` vale anche per `git log`**
+
+La smentita **c'era**, nel **messaggio** del commit **`48a3555`**:
+> *«Z73 CORRETTA IN LOCO, RITIRATA UNA SECONDA VOLTA: `chi_basc` NON BLOCCA LA MITOSI. Il ramo A gira
+> CON `chi_basc` acceso ed e' andato **da 2672 a 7323 nodi, 4651 nati in 1560 passi**»*.
+
+**Io avevo cercato `4651` nei soli file tracciati** e avevo concluso *«non e' nel repo»*.
+> ### **`STANDARD 9` — non si deduce l'assenza da una ricerca parziale — VALE ANCHE PER `git log`.**
+> ### **Un messaggio di commit E' il repo.** E' la stessa forma dell'errore che avevo appena curato
+> ### *(cinque fonti invece di una)*, ripetuta su un'altra superficie: **i file non sono tutto.**
+
+`Z73` ora porta **`RITIRATA`** con la frase e il commit; `D09` e' **`NON E' UN DIFETTO`**, `blocca NO`.
+**La misura di partenza era su 60 passi e un seme: era CORTA, non sbagliata.**
