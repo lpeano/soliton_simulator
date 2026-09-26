@@ -182,6 +182,11 @@ DECISE = [
     ("RIORDINO-NOMI-H", "chiuso", "FATTO", None,
      "CHIUSA il 2026-09-26, decisione di Luca: si tengono `H-P3`, `H-P5`, ... com'e'. I nomi "
      "semantici della proposta (`H-CLI`, `H-CONFIG`, `H-ANCORA`) restano scartati."),
+    # ⚠ QUESTA VOCE CAMBIA ANCHE `blocca_run_base`, e il validatore lo impone: `chiuso`
+    #   con `blocca = SI` e' una contraddizione. Il criterio di chiusura era scritto in
+    #   doc/REVISIONE_SI_2026-09-26.md e ora e' SODDISFATTO, punto per punto.
+    ("DRIVER-SCENA-II", "chiuso", "FATTO", None,
+     "CHIUSA il 2026-09-26. Il criterio era: UN COMANDO SOLO che produce la scena (ii)(a) in configurazione del driver, con UN SEME DICHIARATO, e UN COLLAUDO NEI DUE VERSI. Soddisfatto: `python csv/_test_fork/_scena_video.py 1 <dest> --scena=MASSE-COERENTI` (un comando); `--seme` inoltra `--seed` e `SEME_EFFETTIVO` lo legge da `a.seed` (seme dichiarato); sigillo 6/6 con i due versi su T1/T5 e su T3a/T3b (csv/_seal_fork/_sig_scena_ii/REFERTO.txt). net.n 0 -> 4256 col sep del driver, AST della scena INTATTO, 0 differenze su 79 booleani."),
     ("M0b", "chiuso", "FATTO", "csv/_test_fork/_misura0_scena_ii.py",
      "ORA DEFINITO (2026-09-26): la scena (ii) RIFIUTA una rete non vuota -- SystemExit "
      "«LA RETE HA GIA' 455 NODI». Era «citato, mai definito»."),
@@ -312,6 +317,8 @@ if __name__ == "__main__":
             print("  decisione gia' li' %-16s" % i)
             continue
         c[4], c[9] = stato, avanz
+        if stato == "chiuso" and c[5] == "SI":
+            c[5] = "NO"          # il validatore vieta `chiuso` + `blocca SI`
         if fonte:
             c[3] = fonte
         c[12] = (c[12] + "  " if c[12] else "") + nota

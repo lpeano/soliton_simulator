@@ -2078,3 +2078,17 @@ barra fra semi, e `P3` ne chiede almeno quattro.**
 | **`FUGA-MULTIRIGA`** | la via d'uscita di `H-REG-R` e `H-P1-bis` **non attraversa le righe** *(regex senza `re.S`)* — **lo stesso difetto curato oggi su `H-RIGHE`** |
 | **`H-REGR-LARGA`** | `H-REG-R` associa una scheda **per nome di funzione**: scatta su qualunque modifica a `_applica_flag` |
 | **`OSSERVABILE-P1`** | il prossimo `SI` dello smistamento, **non toccato** |
+
+### ✅ `DRIVER-SCENA-II` E' CHIUSA NELL'INDICE — **gli `SI` passano da 8 a 7**
+
+**Il criterio di chiusura era scritto** in `doc/REVISIONE_SI_2026-09-26.md`, e ora e' soddisfatto
+**punto per punto**:
+
+| il criterio diceva | com'e' soddisfatto |
+|---|---|
+| **un comando solo** che produce la scena `(ii)`(a) in configurazione del driver | `python csv/_test_fork/_scena_video.py 1 <dest> --scena=MASSE-COERENTI` |
+| **con un seme dichiarato** | `--seme` inoltra `--seed`, e `SEME_EFFETTIVO` lo legge da `a.seed` invece che dalla firma della classe |
+| **e un collaudo nei due versi** | `T1` *(default invariato)* contro `T5` *(il caso che DEVE fallire)*, e `T3a` contro `T3b` |
+
+**`blocca_run_base` passa da `SI` a `NO`** *(il validatore vieta `chiuso` con `blocca = SI`)*, e
+la vista si rigenera da se': **`137` voci smistate, `7` `SI`, `0` da verificare.**
