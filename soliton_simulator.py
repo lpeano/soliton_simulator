@@ -8678,8 +8678,20 @@ def _applica_flag(a):
     #   `semina(-1)` chiede la SATURAZIONE: il numero lo decide la GEOMETRIA.
     #   ⚠ SOLO a flag ACCESO: a flag spento la saturazione NON ESISTE (senza distanza minima
     #     non c'e' un limite), e `semina` lo dice da se' rifiutando `n < 0`.
-    net.semina(-1 if SEMINA_LAM else a.nodi)
-    if a.seed is not None or a.nodi != SEME_INIZIALE:
+    # [DRIVER-SCENA-II, 2026-09-26] `--nodi 0` = **NESSUN VUOTO QUI: lo costruisce la SCENA.**
+    #   Prima `a.nodi` era guardato SOLO a flag spento: con `SEMINA_LAM` il ternario andava in
+    #   saturazione e `--nodi 0` chiedeva ZERO nodi ottenendone **455** (misura 0, `M0a`). La
+    #   scena `(ii)` vuole UN SOLO VUOTO e rifiutava -- correttamente: il difetto era QUI.
+    #   ⚠ E' UN'ECCEZIONE IN MENO, NON UNA LEGGE IN PIU' (`STANDARD 10`): `--nodi 0` significava
+    #   «niente» a flag spento e «saturazione» a flag acceso, DUE significati per un valore.
+    #   Ora e' UNO SOLO in entrambi i rami. *(A flag spento il comportamento non cambia di un
+    #   bit: `semina(0)` ritornava subito da se'.)*
+    if a.nodi:
+        net.semina(-1 if SEMINA_LAM else a.nodi)
+    # ⚠ E IL PRE-RILASSAMENTO NON GIRA SU UNA RETE VUOTA: 300 `step()` con `n = 0` non sono un
+    #   rilassamento, sono un giro a vuoto -- e su una rete vuota non c'e' niente da rilassare.
+    #   Il ramo con `net.n > 0` e' INVARIATO.
+    if net.n and (a.seed is not None or a.nodi != SEME_INIZIALE):
         for _ in range(300): net.step()
         net.rilassa_disegno(30)
 

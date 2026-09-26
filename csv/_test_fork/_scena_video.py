@@ -94,6 +94,22 @@ SEP = "4.0"             # [DECISIONE DI LUCA, 2026-09-24] IL DEFAULT SEGUE LA CA
 # ⚠ E NON E' UNA MODIFICA AL SIMULATORE: `CHI_BASC = False` e' gia' il default di MODULO (`:746`).
 #   Era il DRIVER ad accenderlo. Qui si rende esplicito un interruttore che c'era gia'.
 CHIBASC = "on"
+# [DRIVER-SCENA-II, 2026-09-26] LA SCENA E' UN'OPZIONE, NON UNA COSTANTE.
+#   Il driver FISSAVA `N-MASSE` in DUE punti (l'argv del simulatore e `avvia_test`), e la scena
+#   `(ii)` -- quella del RUN BASE -- non era raggiungibile da nessun comando.
+#   ⚠ IL DEFAULT RESTA `N-MASSE`, E LO DICHIARO: e' l'unico valore che riproduce VERBATIM il
+#   comportamento di prima, e senza quello la byte-identita' del criterio 1 non avrebbe niente
+#   da dimostrare. **Nessun comando gia' scritto cambia di un bit.**
+SCENA = "N-MASSE"
+# `--nodi=` NON si passa per default: `None` significa «non inoltrare l'opzione», cioe' il
+#   default del simulatore (`SEME_INIZIALE`). La scena `(ii)` vuole `0`, e il driver lo passa
+#   DICENDOLO (vedi sotto): non lo aggiunge in silenzio (`A9`).
+NODI = None
+# [DRIVER-SCENA-II] IL SEME E' UN'OPZIONE, NON UNA COSTANTE NASCOSTA. `--seed` non era mai
+#   passato: OGNI run del driver girava col seme **42** (`_applica_flag`: `Rete(a.seed if
+#   a.seed is not None else 42)`). Senza un seme variabile non esiste una barra fra semi, e
+#   `P3` ne chiede **almeno quattro**. `None` = non inoltrare, cioe' 42 come prima.
+SEME = None
 # [RAMO C a cooperazione, 2026-09-21] --chi-coop=on|off NOMINALE.
 # ⚠ IL DEFAULT ERA `off`, ED E' PASSATO A `on` IL 2026-09-24. La ragione del `off` era
 #   valida QUANDO il flag nasceva: *il default e' quello che riproduce il comportamento
@@ -199,6 +215,12 @@ for _x in _ARGV[1:]:
         if _v not in ("on", "off"):
             raise SystemExit("--invarianti vuole `on` o `off`, non %r" % _v)
         INVARIANTI_OPT = _v      # si INOLTRA verbatim, non si traduce in booleano
+    elif _x.startswith("--scena="):
+        SCENA = _x.split("=", 1)[1].strip()
+    elif _x.startswith("--nodi="):
+        NODI = int(_x.split("=", 1)[1])
+    elif _x.startswith("--seme="):
+        SEME = int(_x.split("=", 1)[1])
     elif _x == "--riprendi":
         # LA RIPRESA E' UNA SCELTA ESPLICITA, MAI UN RIPIEGO AUTOMATICO: senza questo flag il
         # comportamento resta quello dell'originale (cartella sporca -> RIFIUTO).
@@ -220,7 +242,12 @@ os.makedirs(DEST, exist_ok=True)
 # masse (`Z49`) e quello di controllo a due. Si passa da riga di comando come 5o argomento; il
 # default resta 3, cosi' il comando di `Z49` resta riproducibile VERBATIM.
 NMASSE = _ARGV[5] if len(_ARGV) > 5 else "3"
-sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--sep", SEP,
+# [DRIVER-SCENA-II] la scena `(ii)` COSTRUISCE IL SUO VUOTO, e ne vuole UNO SOLO: qui il
+#   driver passa `--nodi 0` e **LO STAMPA** (poco sotto), invece di aggiungerlo in silenzio.
+#   Un `--nodi=` esplicito vince, perche' chi lo scrive sa cosa sta chiedendo.
+if NODI is None and SCENA == "MASSE-COERENTI":
+    NODI = 0
+sys.argv = ["soliton_simulator.py", "--test", SCENA, "--nmasse", NMASSE, "--sep", SEP,
             "--giri", "0", "--campo-spinoriale", "--spinore-vivo", "--spinore-corretto",
             "--chi-core", "--calore-scal", "--deparam-orologio", "--verlet", "--fork-su2",
             "--fork-su2-mem", "--cs-dinamico", "--tau-luce", "--rumore-colorato",
@@ -272,6 +299,8 @@ sys.argv = ["soliton_simulator.py", "--test", "N-MASSE", "--nmasse", NMASSE, "--
             # maturi -- contro **2.4567 previsto PRIMA** dalla scomposizione. Il pavimento `1e-6`
             # NON morde (minimo `0.115`, cinque ordini sopra). Sigillo `5/6`, `C1'` a 4 semi.
             "--contrasto-intensivo"] \
+    + ([] if NODI is None else ["--nodi", str(NODI)]) \
+    + ([] if SEME is None else ["--seed", str(SEME)]) \
     + (["--chi-basc"] if CHIBASC == "on" else []) \
     + (["--chi-coop"] if CHICOOP == "on" else []) \
     + (["--scala-min"] if SCALAMIN == "on" else []) \
@@ -325,20 +354,38 @@ else:
     print("  ⚠ `--chi-basc` e' SPENTO (--chi-basc=off): `perc_chi` e' scritta SOLO dalle nascite,")
     print("    `:4294` (eredita UGUALE) e `:4415` (antinodo OPPOSTO). E' il braccio B dell'A/B.")
 
-S.avvia_test("N-MASSE")()    # il costruttore UFFICIALE della scena -> _semina_n_masse()
-print("\n  scena avviata: n = %d nodi alla semina (N_c*0.8 per massa, %s masse)"
-      % (S.net.n, NMASSE))   # il NUMERO DI MASSE si STAMPA, non si assume: era cablato a "3"
+if SCENA not in S.TESTS:      # il vocabolario si LEGGE dal modulo, non si ricopia
+    raise SystemExit("--scena=%s non esiste. Le scene del simulatore sono: %s"
+                     % (SCENA, ", ".join(sorted(S.TESTS))))
+print("\n  SCENA: %s%s" % (SCENA, "" if NODI is None else
+                            ("   `--nodi %d` PASSATO AL SIMULATORE (la scena costruisce il suo "
+                             "vuoto: non lo aggiungo in silenzio)" % NODI)))
+S.avvia_test(SCENA)()        # il costruttore UFFICIALE della scena
+# [DRIVER-SCENA-II, 2026-09-26] la didascalia NON puo' essere quella di `N-MASSE` per ogni
+#   scena: `N_c*0.8 per massa` e' vero per `N-MASSE` e FALSO per la scena `(ii)`, dove le
+#   masse sono REGIONI di un vuoto solo e non aggiungono nodi. Una didascalia sbagliata
+#   accanto a un numero giusto e' peggio di nessuna didascalia.
+print("\n  scena avviata: n = %d nodi%s"
+      % (S.net.n, ("   (N_c*0.8 per massa, %s masse)" % NMASSE) if SCENA == "N-MASSE"
+         else "   (la scena ha costruito il suo vuoto: le masse sono REGIONI, non nodi in piu')"))
 
 # [ARCHIVIO] IL SEME SI LEGGE, NON SI ASSUME. `net = Rete()` (:4531) usa il DEFAULT della classe;
 # `SEME_INIZIALE = 900` e' il NUMERO DI NODI seminati (:4532), non il seme -- e nel batch lo stesso
 # 900 viene riusato COME seme (:6407). Scrivere "seed 900" qui sarebbe FALSO.
 import inspect as _insp
-SEME_EFFETTIVO = _insp.signature(S.Rete.__init__).parameters["seed"].default
+# [DRIVER-SCENA-II, 2026-09-26] IL SEME SI LEGGE DA `a.seed`, NON DALLA FIRMA DELLA CLASSE.
+#   La firma dice il DEFAULT (42); `a.seed` dice quello che il run USA. Finche' `--seed` non era
+#   passato i due coincidevano -- quindi il driver non mentiva -- ma con `--seme` NON coincidono
+#   piu', e leggere la firma scriverebbe `42` in un run con un altro seme (`P6`).
+SEME_EFFETTIVO = (a.seed if a.seed is not None
+                  else _insp.signature(S.Rete.__init__).parameters["seed"].default)
 BLOB_RUN = (S.net._versione_codice() or {}).get("blob")
 BASE_SERIE = os.path.join(DEST, "scena.pkl.gz")     # `.gz` -> compressione a livello 1
 _n_scritti = _n_saltati = _n_falliti = 0
 _peso_tot = 0
-print("\n  SEME EFFETTIVO (letto da Rete.__init__): %s    BLOB: %s" % (SEME_EFFETTIVO, BLOB_RUN))
+print("\n  SEME EFFETTIVO (%s): %s    BLOB: %s"
+      % ("da --seme" if SEME is not None else "default di Rete.__init__",
+         SEME_EFFETTIVO, BLOB_RUN))
 
 # ---------------------------------------------------------------------------------------
 # [REFERTO DI CONFIGURAZIONE, decisione di Luca 2026-09-24] NESSUN RUN PARTE SENZA.

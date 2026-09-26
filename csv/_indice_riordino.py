@@ -204,6 +204,12 @@ APERTE = [
      "P4 dentro P1-sexies), oppure alza il tetto dichiarandolo. NON scelgo io: la fusione "
      "che Luca ha RIFIUTATO il 2026-09-26 era una di queste. Misurato: anche la proposta "
      "ne dava 12, non 10 -- quel numero era sbagliato in aritmetica."),
+    ("FUGA-MULTIRIGA", "la via d'uscita di H-REG-R e H-P1-bis e' una regex SENZA re.S: una dichiarazione su PIU' RIGHE viene IGNORATA e il commit rifiutato lo stesso",
+     "csv/_hook_fisica.py", "difetto",
+     "CRITERIO DI CHIUSURA: `re.S` nelle due FUGA, piu' un caso di collaudo col messaggio su piu' righe in ciascuno dei due collaudi. Trovato il 2026-09-26 scrivendo un motivo su sette righe: e' lo STESSO difetto curato lo stesso giorno su `H-RIGHE`. `H-INDICE` non ce l'ha: usa un test di sottostringa, non una regex. Non curato dentro DRIVER-SCENA-II per `L-UN-PROMPT`."),
+    ("H-REGR-LARGA", "H-REG-R associa una scheda per NOME DI FUNZIONE: scatta su qualunque modifica a `_applica_flag`, 450 righe che applicano TUTTI i flag",
+     "csv/_hook_fisica.py", "da-decidere",
+     "CRITERIO DI CHIUSURA: Luca decide se l'associazione va STRETTA (per legge toccata, non per nome citato nella scheda) o se il costo dell'eccezione dichiarata e' accettabile. Misurato il 2026-09-26: la cura di DRIVER-SCENA-II non tocca la scheda `tempo-proprio`, e il presidio l'ha chiesta comunque."),
     ("FATTI-AVVIO", "la catena di AVVIO non ha un solo fatto in FATTI_dal_codice.md: _applica_flag, avvia_test, _massa, semina", "doc/FATTI_dal_codice.md", "fronte",
      "CRITERIO DI CHIUSURA: una sezione per ciascuna delle quattro funzioni, coi fatti LETTI DAL CODICE e la riga misurata dall'AST. Trovato il 2026-09-26 lavorando a DRIVER-SCENA-II: il mandato indicava i fatti di _applica_flag e _massa, e non esistono -- ne in FATTI_dal_codice.md ne in par.9 al tag. E' la catena che decide CON CHE MONDO PARTE OGNI RUN."),
     ("RIORDINO-NOMI-H", "il prefisso `H-` e' sui NOMI VECCHI (H-P3) e non sui nomi semantici "

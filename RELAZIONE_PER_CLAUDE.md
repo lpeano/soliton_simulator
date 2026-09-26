@@ -1984,3 +1984,37 @@ scritto**, ma nel docstring di `csv/_cli_flag.carica_dal_cli` — *«`_applica_f
 VUOTO... chi la chiama si ritrova un `S.net` gia' seminato»*. **Un fatto sul simulatore scritto in
 uno strumento e non in `doc/FATTI_dal_codice.md`**: e' esattamente `FATTI-AVVIO`, la voce che ho
 messo in coda, e la conferma che quel vuoto di documentazione costa.
+
+## 🔧 LA CURA DI `DRIVER-SCENA-II` E' IN CODICE — **e la scena `(ii)` GIRA**
+
+**Nove sostituzioni, ognuna asserita per se'** (`csv/_patch_scena_ii.py`, `P1-quater`):
+
+| dove | che cosa |
+|---|---|
+| `soliton_simulator.py` | **`--nodi 0` = nessun vuoto qui**, anche con `SEMINA_LAM`; e il **pre-rilassamento non gira su una rete vuota** |
+| driver | **`--scena=`** *(default `N-MASSE`, invariato e dichiarato)*, **`--nodi=`**, **`--seme=`** |
+| driver | la **didascalia** e l'etichetta del **seme** non sono piu' quelle di `N-MASSE` per ogni scena |
+
+> **LA CURA TOGLIE UN'ECCEZIONE, NON AGGIUNGE UNA LEGGE** (`STANDARD 10`): `--nodi 0` significava
+> **«niente»** a flag spento e **«saturazione»** a flag acceso — **due significati per un valore**.
+> Ora e' **uno solo**, in entrambi i rami. *(A flag spento non cambia un bit: `semina(0)` ritornava
+> subito da se'.)*
+
+**GIRO CORTO, un frame** (`STANDARD 7`), con `--scena=MASSE-COERENTI`:
+
+```
+SCENA: MASSE-COERENTI   `--nodi 0` PASSATO AL SIMULATORE (e lo STAMPA, non lo aggiunge in silenzio)
+[scena-ii] sep 4.000000  r_regione 2.264102  raggio_vuoto 8.664102  R_CONN 2.400000
+[scena-ii] n = 4256   dentro le regioni = 212   QUOTA = 0.0498   fasi_casuali = False
+frame 1     n=4256    archi=148520   coer_l=0.1905   dil=-0.894%   [8.4 s]
+```
+
+**Un vuoto solo, costruito dalla scena: 4256 nodi, 212 nelle regioni.** E il plumbing delle tre
+opzioni e' verificato dall'argv che il driver costruisce: `--test MASSE-COERENTI`, `--nodi 0`,
+`--seed 7`, e **`net.n = 0` dopo `_applica_flag`** — che e' il meccanismo del criterio 2.
+
+**UN ERRORE MIO, E L'HA PRESO LA REGOLA CHE LUCA HA DETTATO STAMATTINA:** ho scritto due ancore
+con l'escape `barra-n` **dentro un heredoc**, e l'escape **e' morto** — e' diventato un fine-riga
+vero, l'ancora non si e' trovata *(`0 volte`)* e lo script **si e' fermato**. **`L-PATCH` vieta
+esattamente questo**, e il conteggio dell'ancora di `P1-quater` **ha impedito il danno invece di
+segnalarlo dopo**. Riscritte con `chr(92) + "n"`.

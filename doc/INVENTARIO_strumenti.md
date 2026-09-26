@@ -890,3 +890,10 @@ diversi per lo stesso file.)*
 | `csv/_presidio_righe.py` | `7acf5e65` | `python csv/_presidio_righe.py` · `--collaudo` | **`H-RIGHE`**: rifiuta un commit se `CLAUDE.md` supera le **400 righe**. Sta in `commit-msg`, perche' la via d'uscita `[CLAUDE-OLTRE-400: ...]` vive **nel messaggio** | **collaudo 5/5 nei DUE versi**; e ha **rifiutato davvero** il commit 1/6 della serie |
 | `csv/_indice_riordino.py` | `f7155270` | `python csv/_indice_riordino.py` · `--prova` | aggiunge a `doc/INDICE_ID.tsv` le voci del riordino (`H-*`, `L-*`, `STANDARD 4/6/8`), **annota** i nomi vecchi col rimando, e dichiara in `INDICE_ID_ESCLUSI.tsv` le forme che **non sono id**. Idempotente | **17 voci nuove, 9 annotate, 6 forme escluse**; validatore **TUTTO A POSTO**, 757 voci |
 | `csv/_controlli_riordino.py` | `7fc039ea` | `python csv/_controlli_riordino.py` | i **cinque controlli di fine** del riordino: le 76 regole ritrovate, il tetto del posto 2, le righe di `CLAUDE.md` e quelle **lette all'avvio misurate prima/dopo**, tutti i collaudi, i nomi citati dai hook | vedi `doc/CONTROLLI_riordino.txt` |
+
+## Aggiunto il 2026-09-26 — **`DRIVER-SCENA-II`** *(il primo `SI`)*
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_misura0_scena_ii.py` | `2d502a4d` | `python csv/_test_fork/_misura0_scena_ii.py` | **MISURA 0** di `DRIVER-SCENA-II`: `net.n` dopo `_applica_flag` con `--nodi 0`, e che cosa fanno la scena `(ii)` e `N-MASSE`. Passa dall'**argv del driver** catturata dal suo testo | **3/3 come atteso**: `455` nodi con `--nodi 0`, `SystemExit` su entrambe le scene (`csv/_test_fork/_misura0_scena_ii.txt`) |
+| `csv/_patch_scena_ii.py` | `3b3bd1d4` | `python csv/_patch_scena_ii.py` · `--prova` | la **cura** di `DRIVER-SCENA-II`: nove sostituzioni, **ognuna asserita per se'** (`P1-quater`), su `soliton_simulator.py` e sul driver. Idempotente | applicata; sintassi verificata dall'AST su entrambi i file |

@@ -19,6 +19,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_inventario_lettori_id.py|H-P5` | non importa il simulatore e non lo fa girare. Classifica script per contenuto. |
 | `csv/_letture_rho_s.py|H-P5` | strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: |
 | `csv/_lista_chiusa.py|H-P5` | non importa il simulatore e non lo fa girare. Legge un TSV e scrive un documento. |
+| `csv/_patch_scena_ii.py|H-P5` | non importa il simulatore e non lo fa girare. Sostituisce testo in due sorgenti. |
 | `csv/_presidio_commenti_flag.py|H-P8` | legge `HEAD:soliton_simulator.py`, ma **NON come «il codice prima di una |
 | `csv/_presidio_commenti_flag.py|H-P5` | strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: legge |
 | `csv/_presidio_indice.py|H-P5` | non importa il simulatore e non lo fa girare. E' un presidio su documenti. |
@@ -38,5 +39,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_esponenti_figli.py|H-P5` | legge JSON gia' scritti, non fa girare il simulatore. La configurazione di quei dati |
 
 ```
-esenzioni dichiarate   31
+esenzioni dichiarate   32
 ```
