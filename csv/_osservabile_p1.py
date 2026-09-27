@@ -4,8 +4,12 @@
 *(Strumento UFFICIALE. Mandato di Luca, 2026-09-27. I criteri sono in
 `doc/TASK_HISTORY/2026-09-27_osservabile-p1.md`, committato prima.)*
 
+> *(❗ ETICHETTA CORRETTA il 2026-09-27, rilievo di Luca: la regola e' **`A3-DISEGNO`**,
+> non `A13` -- `A13` e' «`LAM` e' la scala di Planck del sistema». L'avevo propagata
+> dalla revisione senza verificarla: `P1` applicato a un'etichetta.)*
+>
 > ### **La `PROVA 1` chiede *«due masse si avvicinano?»*, e la distanza del sistema STA SUGLI
-> ### ARCHI (`A13`), NON SU `pos`.** I pesi sono **`net.d`**. **`pos` non entra mai** nel cammino:
+> ### ARCHI (`A3-DISEGNO`), NON SU `pos`.** I pesi sono **`net.d`**. **`pos` non entra mai**:
 > ### compare solo in un **diagnostico** che serve a DIMOSTRARE che non entra.
 
 **CHE COSA DA', su uno snapshot o su una rete viva:**
@@ -275,7 +279,7 @@ def da_snapshot(percorso):
     if not coorti:
         raise SystemExit(
             "[osservabile-p1] LO SNAPSHOT NON PORTA LE COORTI, e senza quelle non si sa DOVE"
-            + NL + "  sono le masse. Non le invento da `pos` (`A13`): si rigira la scena, o si"
+            + NL + "  sono le masse. Non le invento da `pos` (`A3-DISEGNO`): si rigira la scena,"
             + NL + "  usa `--scena`. *(`conc_nodi` presente: %s -- ma la scena (ii) NON lo tocca,"
             % (co is not None) + NL + "  di proposito: le regioni non sono masse seminate.)*")
     return net, coorti, float(dati.get("scena_ii", {}).get("r_regione", 0.0))

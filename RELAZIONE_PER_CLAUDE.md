@@ -2790,3 +2790,26 @@ muovere solo `pos` non sposta il pozzo di un bit) e **inerte a flag spento** (`W
 effetto sulla distanza fra le masse a 120 passi non e' misurabile** con 4 semi. **Accenderla e' una
 scelta di PRINCIPIO** — `pos` e' il disegno e non deve entrare nella gravita' (**`A3-DISEGNO`**) —
 **non una scelta sostenuta da un effetto misurato.** **Decidi tu.**
+
+## ✅ `ETICHETTA-A13` — **chiusa: le citazioni nel codice sono corrette** *(run finito, `par.5` non blocca piu')*
+
+| file | |
+|---|---|
+| `soliton_simulator.py` | il **commento del flag `POZZO_D`**, **la nota dentro la cura** (`:6571`) e **l'help del CLI** (`:9007`) |
+| `csv/_osservabile_p1.py` | le **due citazioni** piu' una nota in testa che dice **perche'** e' cambiata |
+
+> ### ❗ **NE AVEVO MANCATE DUE, e le ha trovate un controllo che ho fatto DOPO aver detto «fatto».**
+> Dopo la prima passata ho contato i residui e filtrato quelli legittimi *(quelli che parlano
+> davvero di `LAM` e della scala)*: sono rimaste **`:6571`** — *dentro la cura stessa* — e
+> **`:9007`**, l'**help del flag**, cioe' **il testo che un utente legge quando chiede
+> `--help`**. **Una correzione dichiarata completa e non completa e' peggio di una non fatta**,
+> perche' chi legge il commit smette di cercare.
+> **Il controllo che le ha prese e' banale e va scritto:** contare le occorrenze residue e
+> **guardarle una per una**, invece di fidarsi della sostituzione.
+
+**Sigillo `POZZO-D` rigirato: `4/4`, invariato** — i commenti non cambiano un bit, ed e' cio' che
+il sigillo dice.
+
+**E i residui che RESTANO sono giusti:** `soliton_simulator.py` cita `A13` altre volte, e **li'
+parla davvero di `LAM` e della scala** *(`d >= 2 LAM` alla nascita, l'arresto, la semina)*.
+**`A13` non era l'etichetta sbagliata: era l'etichetta sbagliata IN QUEL POSTO.**

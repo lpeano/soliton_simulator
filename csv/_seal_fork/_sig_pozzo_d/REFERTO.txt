@@ -1,5 +1,5 @@
 ========================================================================================================
-SIGILLO DI `POZZO-D` (`D02`) -- `L` dal grafo, non dal disegno   (12 passi)
+SIGILLO DI `POZZO-D` (`D02`) -- `L` dal grafo, non dal disegno   (4 passi)
 ========================================================================================================
 
   W1  A FLAG SPENTO, BYTE-IDENTICO  (contro il PADRE di 44f37d90, blob 83945ff9)
@@ -8,17 +8,17 @@ SIGILLO DI `POZZO-D` (`D02`) -- `L` dal grafo, non dal disegno   (12 passi)
       stessa forma True    DIVERSI 0 []
 
   W2  A FLAG ACCESO LA SPINTA CAMBIA  (dichiarato: e' la cura)
-      archi confrontati 471143   max|dpozzo_ON - dpozzo_OFF| 1.066229e-01
-      max|phi_g_ON - phi_g_OFF| 1.114271e-01
-      L_pos/L_d   mediano 0.999961   max 1.000776   min 0.996158
+      archi confrontati 471143   max|dpozzo_ON - dpozzo_OFF| 3.205634e-03
+      max|phi_g_ON - phi_g_OFF| 3.646139e-03
+      L_pos/L_d   mediano 0.999996   max 1.000019   min 0.999902
 
   W3  IL PAVIMENTO `1e-9` NON SERVE PIU'  (e si CONTA, non si assume)
-      `_pozzo_d_nonpos` 0 su 6124859 archi   (atteso 0)
-      min(d) 8.000377e-01   LAM 0.800000
+      `_pozzo_d_nonpos` 0 su 2355715 archi   (atteso 0)
+      min(d) 8.000046e-01   LAM 0.800000
 
   W4  IL CASO CHE DEVE FALLIRE -- `pos` alterato a `d` costante
       flag ACCESO  max|dpozzo(pos alterato) - dpozzo| = 0.000000e+00   (atteso 0: `pos` NON entra)
-      flag SPENTO  max|dpozzo(pos alterato) - dpozzo| = 5.375372e+02   (atteso > 0: il banco c'e')
+      flag SPENTO  max|dpozzo(pos alterato) - dpozzo| = 5.550194e+02   (atteso > 0: il banco c'e')
 
 ====================================================================================================
 LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI

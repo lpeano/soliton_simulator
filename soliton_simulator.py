@@ -1346,8 +1346,12 @@ POZZO_D = False             # [D02, 2026-09-27] NEL POZZO DEL GRAFO `L` VIENE DA
                         # IL DIFETTO: `pozzo_grafo` calcola `L` da `self.pos` (il DISEGNO) e
                         # il risultato entra nella SPINTA `S09` -- mentre il suo stesso
                         # docstring dichiara «diviso per la DISTANZA REALE DELL'ARCO».
-                        # La distanza reale dell'arco e' `self.d` (`A13`): `pos` e' il
-                        # disegno, e non deve entrare nella gravita'.
+                        # La distanza reale dell'arco e' `self.d`: `pos` e' il disegno, e
+                        # non deve entrare nella gravita'. LA REGOLA E' `A3-DISEGNO`,
+                        # NON `A13` -- che e' «`LAM` e' la scala di Planck del sistema».
+                        # (Correzione di Luca, 2026-09-27: avevo citato `A13`, e l'avevo
+                        # PROPAGATA dalla revisione. Un'etichetta sbagliata manda chi
+                        # legge a cercare la regola nel posto sbagliato.)
                         # ⚠ TOCCA SOLO `pozzo_grafo`: le altre due letture di `pos` in
                         # `memoria_hebbiana_moto` (`:6590`, `:6978`) sono DIREZIONI, non
                         # lunghezze, e sono `D03` -- un altro fronte. Un flag che le
@@ -6564,7 +6568,8 @@ class Rete:
              else np.asarray(intensita, dtype=float)[:n])
         if POZZO_D:
             # [D02] LA LUNGHEZZA E' `self.d`, NON `pos`: e' la distanza REALE dell'arco
-            #   (`A13`), cioe' quella che il docstring di questa funzione dichiara GIA'.
+            #   (`A3-DISEGNO`, NON `A13`), cioe' quella che il docstring di questa funzione
+            #   dichiara GIA'.
             #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poiche' e'
             #   una MISURA e non un'invariante, i `d <= 0` si CONTANO (`A8`) -- il
             #   contatore nasce QUI, cosi' a flag spento lo snapshot non cambia.
@@ -9000,7 +9005,8 @@ def _cli():
                         "Zero numeri nuovi. Default off.")
     p.add_argument("--pozzo-d", action="store_true", dest="pozzo_d",
                    help="[D02] Nel pozzo del grafo la lunghezza `L` viene da `self.d` (la "
-                        "distanza REALE dell'arco, `A13`) invece che da `self.pos` (il "
+                        "distanza REALE dell'arco, `A3-DISEGNO`) invece che da `self.pos` "
+                        "(il "
                         "DISEGNO). Il risultato entra nella spinta `S09`, quindi a flag "
                         "acceso LA SPINTA CAMBIA: e' la cura, non un effetto collaterale. "
                         "Toglie anche il pavimento `1e-9`, che con `d >= LAM` non serve, e "
