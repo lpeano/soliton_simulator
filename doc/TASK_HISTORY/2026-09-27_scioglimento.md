@@ -148,3 +148,77 @@ misure — e finché non le ho, non lo dico.**
 - [ ] `S1`, `S1b`, `S2`, `S2b`, `S2c`, `S3`, `S5` — **a run chiuso**, su file nuovi;
 - [ ] il referto **per ipotesi**: confermata / smentita / non determinata, **coi numeri e le barre**;
 - [ ] **nessuna cura**: la scelta è di Luca.
+
+---
+
+# 5. `H6` — **IL FLASH DI `|psi|` NEI PASSI CON NASCITE** *(rilievo del guardiano, 2026-09-27)*
+
+> **Solo misura. Nessuna legge si tocca, nessuna cura si propone.**
+> **Criteri PRIMA; l'arm strumentato è SOLA LETTURA.**
+
+## 5.1 ✅ **IL FLASH È GIÀ MISURATO, dai fotogrammi salvati — e segue le NASCITE**
+
+*(`max(phi_g)` e `mean(phi_g)` per fotogramma, seme 11. `phi_g ∝ |psi|²`.)*
+
+| passo | `max(phi_g)` | `mean(phi_g)` | `n` | |
+|--:|--:|--:|--:|---|
+| 40 | `736.39` | `138.68` | `12802` | |
+| **42** | ### **`1816.91`** | ### **`366.18`** | `12803` | **`n +1`** ← **prima nascita** |
+| 44 | `710.50` | `139.72` | `12803` | rientra |
+| 56 | `620.54` | `131.94` | `12803` | |
+| **58** | **`1572.14`** | **`352.94`** | `12805` | **`n +2`** |
+| 60 | `532.55` | `118.26` | `12806` | `n +1` **ma NON alto** |
+| **62** | **`1499.33`** | **`346.58`** | `12811` | **`n +5`** |
+| 64 | `1454.70` | `342.52` | `12814` | `n +3`, resta alto |
+| 66 | `481.51` | `113.28` | `12816` | `n +2` **ma NON alto** |
+| **68** | **`1359.20`** | **`333.97`** | `12822` | **`n +6`** |
+
+> ### 🎯 **NON È UN PICCO LOCALE: È TUTTO IL CAMPO.** `mean(phi_g)` fa `138.7 → 366.2 → 139.7`,
+> ### un fattore **`2.64`** su `|psi|²`, cioè **`1.62` su `|psi|`**, e torna indietro.
+> **E il primo flash è ESATTAMENTE alla prima nascita** *(passo 42, `n: 12802 → 12803`)*.
+> ⚠ **MA LA REGOLA «nascite → flash» NON BASTA:** ai passi `60` e `66` ci sono nascite e **il
+> flash NON c'è**. **Quella è la cosa che la misura deve spiegare**, e finché non è spiegata
+> l'ipotesi non è confermata.
+
+## 5.2 ❗ **IL MECCANISMO CANDIDATO È NEL SORGENTE, ed è DOPPIO**
+
+**Due punti ricalcolano `psi` con la STESSA guardia**, e girano **dopo** `mitosi()` *(che fa
+crescere `n`)*, nello stesso passo:
+
+```python
+:6529  _togli_rotazione_rigida()      if not hasattr(self,"psi") or len(self.psi) < n: calcola_psi()
+:6608  memoria_hebbiana_moto()        if not hasattr(self,"psi") or len(self.psi) < n: calcola_psi()
+```
+
+**L'ordine del passo è `… mitosi → rilassa_disegno → memoria_hebbiana_moto`.** Quindi:
+
+* **passo SENZA nascite** → `len(psi) == n` → **nessuno dei due ricalcola**: `psi` resta quella di
+  `step()`, calcolata col `w` di **inizio passo**;
+* **passo CON nascite** → `len(psi) < n` → **RICALCOLA IL PRIMO CHE ARRIVA**, e `calcola_psi()`
+  **senza `w`** rifà i pesi **sulla `d` CORRENTE** — cioè **dopo** mitosi e rilassamento.
+
+### **Due `psi` diverse, a seconda di CHI arriva per primo. È esattamente la «lettura mista t/t+1» della nota `A8` del 17/9.**
+
+**E i passi `60` e `66` sono il banco di prova**: hanno nascite e **non** flashano. **Se il
+meccanismo è questo, deve esistere una differenza di PERCORSO** *(per esempio: `rilassa_disegno`
+ha già ricalcolato, quindi `memoria_hebbiana_moto` trova `len(psi) == n` e non rifà nulla)*.
+**Se quella differenza non c'è, l'ipotesi cade.**
+
+## 5.3 I criteri
+
+| # | misura | conferma se | **il caso che DEVE fallire** |
+|--:|---|---|---|
+| **`S6`** | per passo: `max(phi_g)`, `mean(\|psi\|²)` **dentro le masse** e **nel vuoto**, **nascite nel passo** | il flash è **globale**, non delle masse | se fosse **solo dentro le masse**, non è `psi`: è la scena |
+| **`S6b`** | **`_calcpsi_origini`** — chi ha chiamato `calcola_psi` e **quante volte** — e **CHI PER ULTIMO**, per passo | identifica il meccanismo | **i passi SENZA flash DEVONO avere lo stesso ultimo chiamante**. **Se l'ultimo chiamante fosse lo stesso anche nei passi CON flash, `H6` è SMENTITA** |
+| **`S6c`** | correlazione **flash ↔ nascite ↔ ultimo chiamante**, coi passi `60` e `66` **guardati uno per uno** | spiega le eccezioni | se `60` e `66` **non** si distinguessero per percorso, `H6` **non spiega i dati** |
+| **`S6d`** | **`r_k` ai passi del flash** *(legame con `H5`)* | se il tempo proprio sobbalza | ⚠ **PREDIZIONE DA SORGENTE: col driver `ritmo()` legge `psi_spin`, NON `psi`** *(par.1.4)*. **Quindi un salto di `psi` NON dovrebbe muovere `r_k`.** **Se `r_k` sobbalzasse lo stesso**, la mia lettura di `ritmo()` è sbagliata e **va ritirata** |
+
+### 5.4 Le letture si fissano QUI
+
+* **l'ultimo chiamante si rileva avvolgendo `calcola_psi` SULL'ISTANZA** *(la stessa tecnica della
+  `Spia`)*: **nessun file del simulatore viene toccato**;
+* **`_calcpsi_origini` conta per SITO, non in ORDINE** — quindi **da solo non dice chi è stato
+  l'ultimo**, e va detto invece di usarlo come se lo dicesse;
+* **il flash si misura sul campo, non sui pixel:** il conteggio dei pixel saturi del guardiano è
+  **il segnale**; `max(phi_g)` e `mean(phi_g)` sono **la grandezza**.
+

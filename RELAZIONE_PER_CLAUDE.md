@@ -3720,3 +3720,62 @@ ESATTAMENTE**, perché la scena costruisce `r = 0.5·(sep·√3 − R_CONN)`.
 > allora il `MAX` non sarebbe più inerte, e **prima di usarlo andrebbe detto di quanto cambia i
 > numeri già scritti**.
 
+
+---
+
+# ⚡ **`PSI-FLASH`: `|psi|` salta di `1.6×` nei passi con NASCITE — e il meccanismo è nel sorgente** *(2026-09-27)*
+
+*(Rilievo del **guardiano** sul video: flash nel pannello sinistro a singoli passi, con scala
+**fissa** e fase media e dispersione **continue** — quindi salta `|psi|`, non la coerenza.
+Criteri in `doc/TASK_HISTORY/2026-09-27_scioglimento.md` par.5; voce `PSI-FLASH`.)*
+
+## ✅ **Il flash è già misurato SUL CAMPO, non sui pixel — e non è un picco locale**
+
+| passo | `max(phi_g)` | `mean(phi_g)` | `n` | |
+|--:|--:|--:|--:|---|
+| 40 | `736.39` | `138.68` | `12802` | |
+| **42** | ### **`1816.91`** | ### **`366.18`** | `12803` | **`n +1`** ← **la PRIMA nascita** |
+| 44 | `710.50` | `139.72` | `12803` | rientra |
+| **58** | `1572.14` | `352.94` | `12805` | `n +2` |
+| 60 | `532.55` | `118.26` | `12806` | `n +1` **e NON alto** |
+| **62** | `1499.33` | `346.58` | `12811` | `n +5` |
+| 66 | `481.51` | `113.28` | `12816` | `n +2` **e NON alto** |
+
+**`mean(phi_g)` fa `138.7 → 366.2 → 139.7`: un fattore `2.64` su `|psi|²`, cioè `1.62` su `|psi|`,
+e torna indietro. È TUTTO IL CAMPO.** E il primo flash è **esattamente alla prima nascita**.
+
+> ### ⚠ **MA «nascite → flash» NON BASTA:** ai passi `60` e `66` ci sono nascite e **il flash non
+> c'è**. **Quella è la cosa che la misura deve spiegare**, e finché non è spiegata **l'ipotesi non
+> è confermata**.
+
+## ❗ **Il meccanismo candidato è nel sorgente, ed è DOPPIO**
+
+```python
+:6529  _togli_rotazione_rigida()    if not hasattr(self,"psi") or len(self.psi) < n: calcola_psi()
+:6608  memoria_hebbiana_moto()      if not hasattr(self,"psi") or len(self.psi) < n: calcola_psi()
+```
+
+L'ordine del passo è `… mitosi → rilassa_disegno → memoria_hebbiana_moto`, e **`mitosi` fa crescere
+`n`**. Quindi:
+
+* **senza nascite** → `len(psi) == n` → **nessuno ricalcola**: `psi` resta quella di `step()`, col
+  `w` di **inizio passo**;
+* **con nascite** → `len(psi) < n` → **ricalcola IL PRIMO CHE ARRIVA**, e `calcola_psi()` **senza
+  `w`** rifà i pesi **sulla `d` corrente** — cioè **dopo** mitosi e rilassamento.
+
+### **Due `psi` diverse a seconda di chi arriva per primo: è la «lettura mista t/t+1» della nota `A8` del 17/9.**
+
+**E i passi `60` e `66` sono il banco di prova:** se il meccanismo è questo, **deve esistere una
+differenza di percorso**. **Se non c'è, l'ipotesi cade.**
+
+## 📌 Una predizione che lega `PSI-FLASH` a `H5`, e che può smentirmi
+
+**Col driver `ritmo()` legge `psi_spin`, NON `psi`** *(verificato ieri)*. **Quindi un salto di
+`psi` NON dovrebbe muovere `r_k`.** **Se `r_k` sobbalzasse lo stesso, la mia lettura di `ritmo()`
+è sbagliata e va ritirata.**
+
+> **Nota di metodo:** `_calcpsi_origini` conta **per sito, non in ordine** — da solo **non dice chi
+> è stato l'ultimo**, e vado detto invece di usarlo come se lo dicesse. L'ultimo chiamante si
+> rileva **avvolgendo `calcola_psi` sull'istanza** *(la tecnica della `Spia`)*: **nessun file del
+> simulatore viene toccato.**
+
