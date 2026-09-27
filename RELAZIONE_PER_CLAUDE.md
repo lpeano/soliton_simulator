@@ -52,6 +52,78 @@
 | `2026-09-25` | 3094 | [`doc/relazioni/2026-09-25.md`](doc/relazioni/2026-09-25.md) |
 
 
+
+---
+
+# 🔮 **PREVISIONE DAL CODICE, SCRITTA PRIMA DEL REFERTO DEL PILOTA** *(2026-09-27)*
+
+*(`doc/TASK_HISTORY/2026-09-27_pilota-prova1.md` par.4, committata **mentre il pilota gira**: il
+commit e' **antenato** del referto, quindi l'ordine e' verificabile da git.)*
+
+**Mandato di Luca:** *«cosa faranno le masse nella scena `(ii)`(a) con la configurazione del
+driver?»* — **letto dalle leggi, non dai risultati.** Ho elencato **ogni** sito che scrive `d` o
+`d0`, col segno e con la riga.
+
+## ⚠ **IL TERMINE PIU' GROSSO E' UNIFORME, E NON E' LA GRAVITA'**
+
+```python
+:6894   richiamo_elastico = -(d0 - LAM)/LAM        # dentro S12_coesione
+```
+
+**Tira OGNI arco verso `LAM`, dappertutto, masse e vuoto allo stesso modo** — non perche' usi una
+statistica globale, ma perche' **`LAM` e' la stessa costante ovunque**.
+**Conseguenza diretta: il vuoto si contrae DA SOLO, e i punti di controllo lo vedranno.**
+
+## 🎯 **LA SPINTA NON GUARDA LA CONGIUNGENTE**
+
+```python
+:6710   s        = |tw|/PHI_CRIT - 1
+:6713   ampiezza = tanh( |dpozzo| / (0.5*(phi_g_i + phi_g_j)) )      # ripidezza RELATIVA
+:6724   grav     = -tanh(s) * ampiezza
+:6744   grav    *= <n_i . n_j> * sign(dpozzo)
+```
+
+**Il verso non e' «verso l'altra massa»: e' «verso la torsione critica».** L'ampiezza e' un
+**gradiente relativo**, adimensionale, limitato a `tanh(2) = 0.964` **per costruzione**, e **non
+contiene la distanza da una massa**. E il segno e' moltiplicato da **`<n_i . n_j>`**, il prodotto
+di due direzioni di Bloch: `CLAUDE.md` par.9 misura **`spin_ovl = 0.5000`**, cioe' **direzioni
+CASUALI**. **INFERENZA: la spinta si media via sulle scale lunghe.**
+
+## ❗ **E LEGGENDO HO TROVATO UN RESIDUO `A2` CHE NON SAPEVO: `S09-MEDIANA`**
+
+```python
+:6808   self.d0[mask] += self._sd0(spinta * float(np.median(self.d0[mask])), mask)
+```
+
+**La scala di lunghezza della gravita' e' la MEDIANA GLOBALE di `d0`:** ogni arco riceve **la
+stessa** lunghezza di spinta, qualunque sia la propria. **E' ESATTAMENTE il difetto che il codice
+dichiara curato nel sito FRATELLO, quattro righe sopra** (`:6142`: *«Era: `spinta = 0.02 *
+np.median(self.d0) * rep` … `A2` violato … ogni arco riceveva LA STESSA lunghezza di spinta»*).
+**La cura del 2026-09-17 ha toccato `S05` e NON `S09`.** **Non misurato, non curato in questo giro
+(un prompt alla volta): voce `S09-MEDIANA`, col criterio di chiusura.**
+
+## LE TRE PREVISIONI, con fiducia e con la misura che le FALSIFICA
+
+| | previsione | fiducia | falsificante |
+|---|---|---|--:|
+| **(a)** masse piu' vicine dei controlli? | **NO**, o sotto la barra: il calo di `W5` *(`-4.3 %`/`-8.5 %`)* dovrebbe comparire **quasi tutto anche nei controlli** | **media-alta** | `A(t) < 0` oltre l'IC95 fra 4 semi su **>= 2 coppie su 3** |
+| **(b)** allungamento mareale? | **un allungamento SI', ma NON mareale**: la coesione vive sul **gradiente di densita'**, massimo **alle superfici** | **media** | il raggio e i quantili interni **fermi** mentre le superfici si avvicinano |
+| **(c)** la coerenza migra o si scioglie? | **SI SCIOGLIE**: `coer_campo` scende, ma sovrapposizione **alta** e medoide **fermo**, perche' **non c'e' trasporto della fase** | **media-alta** | sovrapposizione `< 90 %` **oppure** medoide `>= LAM`; oppure `coer_campo` che **non scende** |
+
+> **⚠ E UNA LACUNA DEL DISEGNO, DETTA PRIMA E NON DOPO:** il pilota misura `insieme-insieme`, che
+> **e' gia' la superficie affacciata**. Per separare **marea** da **coesione di superficie**
+> servirebbe la superficie **OPPOSTA**, che **non e' misurata**. **Se `V6` riporta un allungamento,
+> NON si potra' chiamarlo mareale.**
+
+> **COSA NON SO, e non fingo:** quanto valga `median(d0)` rispetto a `LAM` — **se fosse `~LAM`, il
+> freno `1 - LAM/d0` congela le discese e tutto il quadro cambia**; se `_nb_grav()` in FASE 2 sia
+> piu' correlato dei Bloch; **e se la torsione supercritica sia concentrata NEL VARCO fra le masse:
+> se lo fosse, la previsione (a) cade, ed e' la via piu' probabile per cui cada.**
+
+**La parte piu' utile sara' dove ho sbagliato, e il confronto si scrivera' ACCANTO, senza
+riscrivere questa pagina.**
+
+
 ---
 
 # 🛑 **IL PILOTA E' STATO FERMATO: I CONTROLLI SI RISCEGLIEVANO, E L'OSSERVABILE ANDAVA A ZERO PER COSTRUZIONE** *(2026-09-27, voce `CTRL-RISCELTA`)*
