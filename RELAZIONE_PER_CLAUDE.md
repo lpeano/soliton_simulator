@@ -2653,3 +2653,42 @@ SIGILLO: 4/4      avanzamento: `passo_pieno`
 **E `W3` porta un numero che vale da se':** `min(d) = 0.8000377` contro `LAM = 0.8`. **`d >= LAM`
 regge, ed e' appena sopra** — il pavimento `1e-9` non morde, **ma il margine e' `4.7e-05`**, quindi
 il contatore resta: **un'invariante misurata non e' un'invariante dimostrata.**
+
+## `W5` — l'A/B e' **IN CORSO**, e il giro corto d'impianto dice gia' due cose
+
+**Giro corto a 4 passi, 8 bracci** *(`STANDARD 7`: l'impianto prima del giro vero)*:
+
+```
+seme 11  OFF n 12802   ON n 12802   nonpos 0        seme 13  OFF 12787  ON 12787  nonpos 0
+seme 12  OFF n 12765   ON n 12765   nonpos 0        seme 14  OFF 12771  ON 12771  nonpos 0
+Delta (ON - OFF) su tutte e tre le coppie, tutti e 4 i semi:  0.000000
+```
+
+1. **`W3` e' confermato su QUATTRO semi, non uno:** `_pozzo_d_nonpos = 0` su tutti i bracci ON.
+   **`d > 0` non e' un'assunzione: e' un conteggio, e su 4 semi vale 0.**
+2. **A 4 passi la cura NON sposta la distanza fra le masse: `0.000000` esatto.** E' coerente con
+   `L_pos/L_d = 0.999996` a 4 passi — **il pozzo cambia, la distanza non ancora.**
+
+**Il giro vero (120 passi, 8 bracci) sta girando in background.** **Non anticipo il suo esito**, e
+il referto sara' un commit a parte: `csv/_test_fork/_ab_pozzo_d/REFERTO.txt`.
+
+> **E qualunque esso sia, si legge con questo davanti:** la divergenza `L_pos/L_d` **si accumula**
+> *(`3.2e-03` a 4 passi, `1.07e-01` a 12)*, quindi **un effetto piccolo a 120 passi NON dice che sia
+> piccolo a campo maturo.** Se l'IC95 contiene lo zero, lo strumento **scrive il LIMITE** — *«il
+> flag non sposta la distanza di piu' di X»* — **non «nessun effetto»**.
+
+## ⛔ STOP: **decide Luca se accendere `POZZO_D` nel driver**
+
+**Quello che la decisione ha in mano adesso:**
+
+| | |
+|---|---|
+| **la cura e' CORRETTA** | `W4`: muovere **solo `pos`** non sposta il pozzo **di un bit** *(`0.000000e+00` esatto)*; a flag spento lo sposta di `5.38e+02` |
+| **e' INERTE a flag spento** | `W1`: 214 campi, **0 diversi** |
+| **il pavimento non serve** | `W3`: **0** `d <= 0` su `6.1e6` archi e su **4 semi**; `min(d) = 0.8000377` contro `LAM = 0.8` — **margine `4.7e-05`**, quindi il contatore resta |
+| **l'effetto e' piccolo a tempi corti e CRESCE** | `3.2e-03` (4 passi) → `1.07e-01` (12). **Il `x8` di `Z103` non e' riprodotto a tempi corti** |
+| **quanto sposti la distanza** | **`W5`, in corso** |
+
+**E l'argomento che non dipende dai numeri:** `pos` e' **il disegno**, e non deve entrare nella
+gravita' (`A13`). **Si misura per PROMUOVERE, si DIMOSTRA per ESCLUDERE** — e qui la dimostrazione
+c'e' *(`W4`)*, **anche se l'effetto fosse piccolo**.
