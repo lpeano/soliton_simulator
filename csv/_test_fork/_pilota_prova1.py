@@ -13,6 +13,16 @@ con `m` la distanza fra i CENTRI di due masse e `c` quella fra i due punti di **
 vuoto **alla stessa distanza iniziale**. **Adimensionale**, e la barra e' **fra semi** (`P3`,
 `t(3) = 3.182`). **Se `m` e `c` calano uguale, `A = 0` e non e' gravita': e' contrazione globale.**
 
+> ### ⚠ **I CONTROLLI SONO FISSI: scelti UNA VOLTA al passo 0 e poi SEGUITI.**
+> **Con la RISCELTA l'osservabile va a ZERO per costruzione**, perche' la coppia di vuoto
+> viene cercata alla distanza **del momento** fra le masse: `c(t) ~ m(t)`, quindi `A -> 0`
+> **qualunque cosa faccia la gravita'**. **Misurato in `K5b`** *(`csv/_osservabile_p1.py
+> --collaudo-controlli`)*: su un effetto vero del `-5 %` la riscelta legge **`+0.025 %`**.
+> *(`CTRL-RISCELTA`, difetto trovato da Luca il 2026-09-27 dentro il mio stesso
+> `COSA-RICONTROLLARE`: l'avevo chiamato «limite DICHIARATO», e dichiararlo non basta -- `A9`.)*
+> **La riscelta resta nel referto come DIAGNOSTICO**, cosi' il difetto e' visibile nei dati
+> del run stesso invece di essere solo raccontato.
+
     python csv/_test_fork/_pilota_prova1.py                 # 4 semi, 120 passi
     python csv/_test_fork/_pilota_prova1.py --passi 4 --checkpoint 0,2,4    # impianto
     python csv/_test_fork/_pilota_prova1.py --solo-referto  # rilegge i json e rifa' il referto
@@ -167,16 +177,22 @@ def referto(dati, passi, cps):
     # ------------------------------------------------------------------ `V1` I CONTROLLI
     P()
     P("-" * 108)
-    P("`V1` -- I PUNTI DI CONTROLLO (senza i quali la `PROVA 1` non ha braccio di confronto)")
+    P("`V1` -- I PUNTI DI CONTROLLO **FISSI** (scelti al passo 0 e SEGUITI)")
     P("-" * 108)
+    f0 = blocco(d0, 0)["controlli_fissi"]
+    P("  metro di <<lontano dalle masse>>: distanza di grafo > r_regione = %.4f da OGNI nodo"
+      % f0["metro_lontananza"])
+    P("  coppie chieste per coppia di masse: %d     candidati nel vuoto: %s"
+      % (f0["quante_chieste"],
+         [blocco(dati[s], 0)["controlli_fissi"]["candidati_lontani"] for s in semi]))
     for c in cps:
-        tr = [blocco(dati[s], c)["controlli"]["trovati"] for s in semi]
-        sc = [v["scarto_relativo"] for s in semi
-              for v in blocco(dati[s], c)["controlli"]["coppie"].values()]
-        en = [v["entro_toll"] for s in semi
-              for v in blocco(dati[s], c)["controlli"]["coppie"].values()]
-        P("  passo %4d   coppie trovate %s   scarto relativo max %.2e   entro toll %d/%d"
-          % (c, tr, (max(sc) if sc else float("nan")), sum(1 for x in en if x), len(en)))
+        f = [blocco(dati[s], c)["controlli_fissi"] for s in semi]
+        P("  passo %4d   usate %s su %s   ESCLUSE: dentro una regione %s  componenti %s  inf %s"
+          % (c, [x["usate"] for x in f], [x["totali"] for x in f],
+             [x["esclusi_dentro"] for x in f], [x["esclusi_componenti"] for x in f],
+             [x["esclusi_inf"] for x in f]))
+    P("  (le esclusioni si CONTANO e NON si sostituiscono: sostituirle rifarebbe la riscelta"
+      " con un altro nome.)")
 
     # ------------------------------------------------------------------ `V2` L'OSSERVABILE
     P()
@@ -189,27 +205,38 @@ def referto(dati, passi, cps):
             continue
         P("  passo %d:" % c)
         for cp in coppie:
-            am, ac, aa = [], [], []
+            am, ac, aa, ar, arA = [], [], [], [], []
             for s in semi:
                 b0, bt = blocco(dati[s], 0), blocco(dati[s], c)
                 m0 = b0["coppie_passo0"][cp]["centro_centro"]
                 mt = bt["coppie_passo0"][cp]["centro_centro"]
-                k0 = b0["controlli"]["coppie"].get(cp)
-                kt = bt["controlli"]["coppie"].get(cp)
                 if not (np.isfinite(m0) and m0 > 0):
                     continue
                 am.append((mt - m0) / m0)
+                # i controlli FISSI: la MEDIA sulle coppie non escluse, per seme
+                righe = bt["controlli_fissi"]["coppie"].get(cp, [])
+                v = [(r["distanza"] - r["distanza_0"]) / m0 for r in righe
+                     if not r["escluso"] and np.isfinite(r["distanza"])]
+                if v:
+                    ac.append(float(np.mean(v)))
+                    aa.append((mt - m0) / m0 - float(np.mean(v)))
+                # e la RISCELTA, come DIAGNOSTICO del difetto `CTRL-RISCELTA`
+                k0 = b0["controlli"]["coppie"].get(cp)
+                kt = bt["controlli"]["coppie"].get(cp)
                 if k0 and kt:
-                    ac.append((kt["distanza"] - k0["distanza"]) / m0)
-                    aa.append(((mt - m0) - (kt["distanza"] - k0["distanza"])) / m0)
-            barra(am, "%s  masse    (m(t)-m(0))/m(0)" % cp)
-            barra(ac, "%s  CONTROLLI (c(t)-c(0))/m(0)" % cp)
-            barra(aa, "%s  A(t) = masse - controlli" % cp)
+                    ar.append((kt["distanza"] - k0["distanza"]) / m0)
+                    arA.append((mt - m0) / m0 - (kt["distanza"] - k0["distanza"]) / m0)
+            barra(am, "%s  masse         (m(t)-m(0))/m(0)" % cp)
+            barra(ac, "%s  CONTROLLI FISSI  (c(t)-c(0))/m(0)" % cp)
+            barra(aa, "%s  A(t) = masse - FISSI   <- L'OSSERVABILE" % cp)
+            barra(ar, "%s  [diagn.] controlli RISCELTI" % cp)
+            barra(arA, "%s  [diagn.] A con la RISCELTA (difettosa)" % cp)
         P()
-    P("  ⚠ I PUNTI DI CONTROLLO NON SONO GLI STESSI NODI A OGNI CHECKPOINT: `controlli()` li")
-    P("    RISCEGLIE sulla distanza del momento. Quindi `c(t)-c(0)` NON e' il moto di due nodi")
-    P("    fissi -- e' la differenza fra due coppie scelte con lo stesso criterio. E' un limite")
-    P("    DICHIARATO di questo pilota, non un risultato.")
+    P("  ⚠ LE DUE ULTIME RIGHE DI OGNI COPPIA SONO IL DIFETTO `CTRL-RISCELTA`, TENUTO A VISTA:")
+    P("    `controlli()` RISCEGLIE la coppia di vuoto alla distanza DEL MOMENTO fra le masse,")
+    P("    quindi `c(t) ~ m(t)` e `A -> 0` PER COSTRUZIONE. Se la riga [diagn.] A e' vicina a")
+    P("    zero mentre l'osservabile NON lo e', si sta vedendo il difetto, non la fisica.")
+    P("    (`K5b`: su un effetto vero del -5 %% la riscelta legge +0.025 %%.)")
 
     # ------------------------------------------------------------------ `V5` MIGRAZIONE
     P()

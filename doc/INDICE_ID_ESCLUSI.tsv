@@ -66,3 +66,5 @@ K-FOGLIO	etichetta LOCALE di un collaudo (csv/_test_fork/_pilota_prova1_braccio.
 R-VICINO	etichetta LOCALE di una regola di assegnazione nel pilota della PROVA 1, non un identificatore	0
 R-COMP	etichetta LOCALE della regola di assegnazione SCARTATA nel pilota (componenti connesse), non un identificatore	0
 PRE-CORREZIONE	locuzione del testo (<<col codice pre-correzione>>), non un identificatore	0
+K5a	etichetta LOCALE di un caso di collaudo in csv/_osservabile_p1.py, non un identificatore	0
+K5b	etichetta LOCALE del caso di collaudo che DEVE fallire in csv/_osservabile_p1.py, non un identificatore	0

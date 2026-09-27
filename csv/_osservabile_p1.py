@@ -19,7 +19,12 @@
    uno qualunque di `B`)* -- **non ha bisogno di un centro**, e risponde a *«quanto distano le
    superfici»* invece di *«quanto distano i cuori»*;
 3. gli stessi due numeri fra **punti di CONTROLLO nel vuoto**, alla **stessa distanza iniziale** e
-   **lontani dalle masse**: e' **il braccio di confronto della `PROVA 1`**;
+   **lontani dalle masse**: e' **il braccio di confronto della `PROVA 1`**.
+   **⚠ E LE COPPIE DI CONTROLLO SI SCELGONO UNA VOLTA, AL PASSO 0, E POI SI SEGUONO**
+   (`controlli_fissi()` + `segui_controlli()`). **`controlli()` RISCEGLIE, e con la riscelta
+   l'osservabile va a ZERO per costruzione** -- misurato in `K5b`: su un effetto vero del
+   `-5 %` la riscelta legge `~0 %`. *(`CTRL-RISCELTA`, difetto trovato da Luca il 2026-09-27
+   dentro il mio stesso `COSA-RICONTROLLARE`.)*;
 4. la **dispersione FRA SEMI** su `>= 4` semi, con il `t` di Student giusto (`P3`).
 
 **IL CENTRO E' IL MEDOIDE DI GRAFO**, non un baricentro: il nodo della regione che **minimizza la
@@ -34,6 +39,7 @@ un `inf` stampato come numero sarebbe illeggibile (`A8`).
     python csv/_osservabile_p1.py --snap <file.pkl[.gz]>  # misura su uno snapshot
     python csv/_osservabile_p1.py --scena --semi 11,12,13,14   # la dispersione fra semi
     python csv/_osservabile_p1.py --collaudo              # K1: i grafi sintetici
+    python csv/_osservabile_p1.py --collaudo-controlli    # K5: fissi contro riscelta
 
 ASCII puro.
 """
@@ -58,6 +64,9 @@ _presidio.avvia(__file__)
 
 NL = chr(10)
 TOLL_CONTROLLO = 0.10          # la tolleranza dei punti di controllo: SCRITTA PRIMA (`K4`)
+QUANTE_CONTROLLO = 4           # coppie di controllo PER coppia di masse: con una non c'e'
+#                                barra, e la barra qui serve (ordine di Luca, `CTRL-RISCELTA`)
+MAX_CANDIDATI = 120            # quanti nodi di vuoto si mettono nella matrice dei candidati
 SCENA2 = "MASSE-COERENTI"
 
 
@@ -158,7 +167,23 @@ def misura(net, coorti, r_regione=None, pesi_da_pos=False):
 
 
 def controlli(o, coorti, r_regione, toll=TOLL_CONTROLLO):
-    """I punti di CONTROLLO nel vuoto: **stessa distanza entro `toll`**, **lontani dalle masse**.
+    """⚠⚠ **RISCEGLIE A OGNI ISTANTE: NON SI USA PER L'OSSERVABILE DELLA `PROVA 1`.**
+
+    **MARCHIO, 2026-09-27 (`CTRL-RISCELTA`, difetto trovato da Luca).** Questa funzione cerca,
+    **ogni volta che viene chiamata**, la coppia di vuoto piu' vicina alla distanza **DEL
+    MOMENTO** fra le masse. Quindi `c(t) ~ m(t)` **per costruzione**, e
+
+        A(t) = [(m(t) - m(0)) - (c(t) - c(0))] / m(0)  ->  0
+
+    **qualunque cosa faccia la gravita'.** Misurato in `K5b`: su un effetto VERO del `-5 %`
+    la riscelta porta `A` a **`~0 %`**. **Per l'osservabile si usa `controlli_fissi()` +
+    `segui_controlli()`.**
+
+    **NON SI CANCELLA**, per due ragioni: (1) e' **l'evidenza** che spiega perche' esiste il
+    suo sostituto *(`CLAUDE.md`: il codice di una legge esclusa non si cancella mai)*; (2) e'
+    il **ramo che DEVE fallire** in `K5b`, cioe' il criterio che dimostra la cura.
+
+    I punti di CONTROLLO nel vuoto: **stessa distanza entro `toll`**, **lontani dalle masse**.
 
     «Lontani» ha un metro DICHIARATO e preso dalla scena, non scelto: la distanza di grafo da
     **ogni** nodo di massa deve superare `r_regione`. Se non se ne trovano, si DICE -- e `K4`
@@ -200,6 +225,124 @@ def controlli(o, coorti, r_regione, toll=TOLL_CONTROLLO):
                          "scarto_relativo": float(rel[a, b]),
                          "entro_toll": bool(rel[a, b] <= toll)}
     fuori.update(trovati=len(trovate), coppie=trovate, toll=float(toll))
+    return fuori
+
+
+# ==================================================== I CONTROLLI **FISSI** (la cura di `CTRL-RISCELTA`)
+def controlli_fissi(o, coorti, r_regione, quante=QUANTE_CONTROLLO, toll=TOLL_CONTROLLO,
+                    seme=0):
+    """**LE COPPIE DI CONTROLLO SI SCELGONO UNA VOLTA, AL PASSO 0, E POI SI SEGUONO.**
+
+    ⚠ **PERCHE' ESISTE, e non e' un raffinamento: `controlli()` RISCEGLIE, e cosi' l'osservabile
+    della `PROVA 1` PERDE IL SUO UNICO SCOPO.** `controlli()` cerca, a ogni istante, la coppia di
+    vuoto piu' vicina alla distanza **DEL MOMENTO** fra le masse. Quindi, per costruzione,
+    `c(t) ~ m(t)`, e
+
+        A(t) = [(m(t) - m(0)) - (c(t) - c(0))] / m(0)  ->  0
+
+    **qualunque cosa faccia la gravita'.** L'osservabile nasce per separare *«le masse si
+    avvicinano»* da *«tutto si contrae»*, e con la riscelta **non puo' piu' distinguerle**.
+    *(Difetto trovato da Luca il 2026-09-27 dentro il mio stesso `COSA-RICONTROLLARE`: l'avevo
+    scritto come «limite DICHIARATO». Dichiararlo non basta -- `A9`.)*
+
+    **COME SI SCEGLIE, e ogni metro viene dalla scena:**
+
+    * **nel VUOTO** (`coorti["vuoto"]`), e **lontano dalle masse**: distanza di grafo `> r_regione`
+      da **ogni** nodo di massa -- lo stesso metro di `controlli()`;
+    * alla **stessa distanza iniziale** della coppia di masse, entro `toll`;
+    * **`quante` coppie per ogni coppia di masse**, non una: una coppia sola non ha una barra, e
+      qui la barra serve *(chiesto da Luca)*. Si prendono le `quante` migliori per scarto, e
+      **disgiunte**: un nodo non sta in due coppie di controllo.
+
+    **COSA RESTITUISCE:** un dizionario `{coppia: [(a, b), ...]}` di **indici di NODO**, piu' la
+    provenienza. **Gli indici si SEGUONO con `segui_controlli()`.**
+    """
+    g = o["_g"]
+    vuoto = np.asarray(sorted(set(int(x) for x in coorti.get("vuoto", []))), int)
+    tutte = np.asarray(sorted(set(int(x) for k in o["masse"] for x in coorti[k])), int)
+    fuori = {"coppie": {}, "metro_lontananza": float(r_regione), "toll": float(toll),
+             "quante_chieste": int(quante), "nota": ""}
+    if not len(vuoto) or not len(tutte):
+        fuori["nota"] = "nessun vuoto o nessuna massa"
+        return fuori
+    dm = distanze(g, tutte).min(axis=0)
+    lontani = vuoto[np.isfinite(dm[vuoto]) & (dm[vuoto] > float(r_regione))]
+    fuori["candidati_lontani"] = int(len(lontani))
+    if len(lontani) < 2:
+        fuori["nota"] = "meno di due nodi di vuoto oltre `r_regione` dalle masse"
+        return fuori
+    rng = np.random.default_rng(seme)      # la scelta dei candidati e' DETERMINISTICA
+    quanti = min(MAX_CANDIDATI, len(lontani))
+    scelti = (np.sort(rng.choice(lontani, size=quanti, replace=False))
+              if len(lontani) > quanti else lontani)
+    dd = distanze(g, scelti)[:, scelti]
+    for nome, v in o["coppie"].items():
+        bersaglio = v["centro_centro"]
+        if not np.isfinite(bersaglio) or bersaglio <= 0:
+            fuori["coppie"][nome] = []
+            continue
+        rel = np.abs(dd - bersaglio) / bersaglio
+        np.fill_diagonal(rel, np.inf)
+        ordine = np.argsort(rel, axis=None)
+        prese, usati = [], set()
+        for k in ordine:
+            a, b = np.unravel_index(k, rel.shape)
+            if a >= b:                              # la matrice e' simmetrica: una volta sola
+                continue
+            if not np.isfinite(rel[a, b]) or rel[a, b] > toll:
+                break
+            na, nb = int(scelti[a]), int(scelti[b])
+            if na in usati or nb in usati:          # coppie DISGIUNTE
+                continue
+            prese.append({"nodo_a": na, "nodo_b": nb,
+                          "distanza_0": float(dd[a, b]), "bersaglio_0": float(bersaglio),
+                          "scarto_relativo_0": float(rel[a, b])})
+            usati.add(na)
+            usati.add(nb)
+            if len(prese) >= quante:
+                break
+        fuori["coppie"][nome] = prese
+    fuori["trovate"] = {k: len(v) for k, v in fuori["coppie"].items()}
+    return fuori
+
+
+def segui_controlli(o, fissi, dentro_coerenti=None):
+    """**A ogni checkpoint: la distanza fra GLI STESSI nodi.** Nessuna riscelta.
+
+    **Le esclusioni si CONTANO e NON SI SOSTITUISCONO** *(ordine di Luca)*: se un nodo di controllo
+    finisce **dentro una regione coerente**, o se la coppia **si spezza in componenti diverse**,
+    quella coppia **esce** e viene **contata**. Sostituirla rifarebbe la riscelta con un altro nome.
+    """
+    g, lab = o["_g"], o["_lab"]
+    # ⚠ NON `(dentro_coerenti or [])`: su un `ndarray` il test di verita' ALZA
+    #   `ValueError` (<<truth value of an array ... is ambiguous>>). Preso dal giro corto.
+    dentro = set(int(x) for x in
+                 ([] if dentro_coerenti is None else np.asarray(dentro_coerenti).ravel()))
+    fuori = {"coppie": {}, "esclusi_dentro": 0, "esclusi_componenti": 0, "esclusi_inf": 0,
+             "usate": 0, "totali": 0}
+    for nome, prese in fissi.get("coppie", {}).items():
+        righe = []
+        for p in prese:
+            a, b = int(p["nodo_a"]), int(p["nodo_b"])
+            fuori["totali"] += 1
+            motivo = ""
+            if a in dentro or b in dentro:
+                fuori["esclusi_dentro"] += 1
+                motivo = "un nodo e' finito DENTRO una regione coerente"
+            elif not (a < len(lab) and b < len(lab) and lab[a] == lab[b]):
+                fuori["esclusi_componenti"] += 1
+                motivo = "la coppia si e' spezzata in componenti diverse"
+            d = float(distanze(g, [a])[0, b]) if a < g.shape[0] and b < g.shape[0] \
+                else float("inf")
+            if not motivo and not np.isfinite(d):
+                fuori["esclusi_inf"] += 1
+                motivo = "distanza infinita"
+            if not motivo:
+                fuori["usate"] += 1
+            righe.append({"nodo_a": a, "nodo_b": b, "distanza": d,
+                          "distanza_0": float(p["distanza_0"]),
+                          "escluso": bool(motivo), "motivo": motivo})
+        fuori["coppie"][nome] = righe
     return fuori
 
 
@@ -344,6 +487,114 @@ def collaudo():
 
 
 # ============================================================================ LA STAMPA
+def _anello(n=1200, masse=((0, 20), (200, 220), (400, 420)), peso=1.0):
+    """Un ANELLO sintetico con tre regioni: le distanze di grafo sono NOTE per costruzione."""
+    i = np.arange(n)
+    j = (i + 1) % n
+    d = np.full(n, float(peso))
+    coorti = {}
+    dentro = np.zeros(n, bool)
+    for k, (a, b) in enumerate(masse):
+        idx = np.arange(a, b)
+        coorti["massa_%d" % k] = idx
+        dentro[idx] = True
+    coorti["vuoto"] = np.where(~dentro)[0]
+
+    class Finta(object):
+        pass
+    net = Finta()
+    net.n, net.i, net.j, net.d = n, i, j, d
+    net.pos = np.zeros((n, 3))            # NON usato: i pesi sono `d`
+    return net, coorti
+
+
+def collaudo_controlli():
+    """**`K5`** -- i controlli FISSI contro la RISCELTA, su due casi a risposta NOTA.
+
+    **`K5a` -- TUTTO si contrae del 5 %** *(il caso chiesto da Luca)*. Verita': **nessun effetto
+    specifico delle masse**. I controlli FISSI devono vedere **`-5 %`** e `A ~ 0`.
+    **⚠ E VA DETTO CHE QUESTO CASO NON DISCRIMINA:** con una contrazione UNIFORME anche la
+    riscelta vede `-5 %`, perche' il bersaglio `m(t)` e le distanze dei candidati si scalano
+    **dello stesso fattore**. **Serve a mostrare che i controlli fissi sono TARATI**, non che la
+    riscelta sia rotta.
+
+    **`K5b` -- SOLO LE MASSE si avvicinano del 5 %, il vuoto FERMO.** E' **il caso che DEVE FARE
+    FALLIRE la riscelta** (`P1-sexies`), e quindi il piu' importante:
+
+    | | controlli FISSI | RISCELTA |
+    |---|---|---|
+    | `c(t) - c(0)` | **`0 %`** *(gli stessi nodi non si sono mossi)* | **`-5 %`** *(inseguono il bersaglio)* |
+    | `A(t)` | **`-5 %`** = l'effetto VERO | **`~0 %`** = **l'effetto SPARISCE** |
+
+    Si contrae **solo il segmento fra `massa_0` e `massa_1`** *(gli archi interni a `20..199`)*,
+    che e' il cammino minimo fra quelle due, mentre le coppie di controllo stanno **nell'arco
+    grande** `420..1199`, **intatto**.
+    """
+    fuori = []
+    net0, coorti = _anello()
+    o0 = misura(net0, coorti)
+    fissi = controlli_fissi(o0, coorti, r_regione=25.0, quante=4)
+    CP = "massa_0|massa_1"
+
+    def leggi(net1):
+        o1 = misura(net1, coorti)
+        m0 = o0["coppie"][CP]["centro_centro"]
+        m1 = o1["coppie"][CP]["centro_centro"]
+        seg = segui_controlli(o1, fissi)
+        vf = [(r["distanza"] - r["distanza_0"]) / m0
+              for r in seg["coppie"][CP] if not r["escluso"]]
+        cfisso = float(np.mean(vf)) if vf else float("nan")
+        ris = controlli(o1, coorti, 25.0)
+        ris0 = controlli(o0, coorti, 25.0)
+        a1, b1 = ris["coppie"].get(CP), ris0["coppie"].get(CP)
+        criscelta = ((a1["distanza"] - b1["distanza"]) / m0) if (a1 and b1) else float("nan")
+        dm = (m1 - m0) / m0
+        return dm, cfisso, criscelta, dm - cfisso, dm - criscelta
+
+    # --- `K5a`: TUTTO x0.95
+    na, _ = _anello()
+    na.d = net0.d * 0.95
+    dm, cf, cr, af, ar = leggi(na)
+    fuori.append(("K5a  TUTTO contratto del 5 %", dm, cf, cr, af, ar,
+                  abs(dm + 0.05) < 1e-9 and abs(cf + 0.05) < 1e-9 and abs(af) < 1e-9,
+                  "i FISSI vedono -5 %% e A ~ 0. NON discrimina: la riscelta fa lo stesso."))
+
+    # --- `K5b`: SOLO il segmento fra massa_0 e massa_1
+    nb, _ = _anello()
+    w = net0.d.copy()
+    sel = (nb.i >= 20) & (nb.i < 199)                      # gli archi interni al segmento
+    w[sel] = w[sel] * 0.95
+    nb.d = w
+    dm, cf, cr, af, ar = leggi(nb)
+    fuori.append(("K5b  SOLO le masse, il vuoto FERMO", dm, cf, cr, af, ar,
+                  abs(cf) < 1e-9 and af < -0.04 and abs(ar) < 0.01,
+                  "i FISSI vedono 0 %% e A = l'effetto VERO; la RISCELTA lo CANCELLA."))
+    return fuori
+
+
+def stampa_collaudo_controlli(P=print):
+    """Stampa `K5` e restituisce quante righe passano su due."""
+    P("=" * 112)
+    P("`K5` -- I CONTROLLI **FISSI** CONTRO LA **RISCELTA**, su casi a risposta NOTA")
+    P("=" * 112)
+    P("  A(t) = [(m(t)-m(0)) - (c(t)-c(0))] / m(0).   L'effetto VERO e' nella colonna `A fissi`.")
+    P("")
+    P("  %-36s %9s %9s %9s %9s %9s" % ("caso", "masse", "c FISSI", "c risc.", "A fissi", "A risc."))
+    ok = 0
+    for nome, dm, cf, cr, af, ar, buono, nota in collaudo_controlli():
+        ok += 1 if buono else 0
+        P("  %-36s %+8.4f%% %+8.4f%% %+8.4f%% %+8.4f%% %+8.4f%%   %s"
+          % (nome, 100 * dm, 100 * cf, 100 * cr, 100 * af, 100 * ar,
+             "PASS" if buono else "** FAIL **"))
+        P("        %s" % (nota % () if "%%" not in nota else nota.replace("%%", "%")))
+    P("")
+    P("  LA RIGA CHE CONTA E' `K5b`: la riscelta porta `A` a ZERO su un effetto che ESISTE.")
+    P("  E' il criterio che DEVE fallire, e senza di esso `K5a` da solo non proverebbe nulla.")
+    P("")
+    P("  %d/2" % ok)
+    return ok
+
+
 def stampa(o, ctrl, P=print):
     P("  pesi del cammino ......... %s" % o["pesi"])
     P("  n %d   archi usati %d   scartati %d   componenti %d"
@@ -370,6 +621,8 @@ def stampa(o, ctrl, P=print):
 
 if __name__ == "__main__":
     a = sys.argv[1:]
+    if "--collaudo-controlli" in a:
+        sys.exit(0 if stampa_collaudo_controlli() == 2 else 1)
     if "--collaudo" in a:
         sys.exit(collaudo())
     semi = None

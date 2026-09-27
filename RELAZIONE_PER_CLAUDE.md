@@ -51,6 +51,63 @@
 | `2026-09-24` | 1360 | [`doc/relazioni/2026-09-24.md`](doc/relazioni/2026-09-24.md) |
 | `2026-09-25` | 3094 | [`doc/relazioni/2026-09-25.md`](doc/relazioni/2026-09-25.md) |
 
+
+---
+
+# 🛑 **IL PILOTA E' STATO FERMATO: I CONTROLLI SI RISCEGLIEVANO, E L'OSSERVABILE ANDAVA A ZERO PER COSTRUZIONE** *(2026-09-27, voce `CTRL-RISCELTA`)*
+
+> **Difetto trovato da LUCA dentro il mio stesso `COSA-RICONTROLLARE`.** L'avevo scritto — nel
+> referto e nel messaggio di commit — come *«limite DICHIARATO di questo pilota, non un
+> risultato»*. **Dichiarare un difetto non lo impedisce (`A9`)**, e **un osservabile che non puo'
+> misurare la propria alternativa non e' un osservabile: e' un numero.**
+
+**IL DIFETTO, in una riga:** `csv/_osservabile_p1.py controlli()` cerca, **ogni volta che viene
+chiamata**, la coppia di nodi di vuoto la cui distanza e' piu' vicina alla distanza **DEL MOMENTO**
+fra le masse. Quindi **`c(t) ~ m(t)` per costruzione**, e
+
+```
+A(t) = [ (m(t) - m(0)) - (c(t) - c(0)) ] / m(0)   ->   0
+```
+
+**qualunque cosa faccia la gravita'.** L'osservabile nasce per separare *«le masse si avvicinano»*
+da *«tutto si contrae»*, e con la riscelta **non puo' piu' distinguerle.**
+
+## LA CURA — le coppie si scelgono UNA VOLTA e poi SI SEGUONO
+
+`controlli_fissi()` + `segui_controlli()`, **nessun flag** *(categoria D)*. Al passo 0: **nel vuoto**,
+oltre `r_regione` di distanza **di grafo** da ogni nodo di massa, alla **stessa distanza iniziale**
+della coppia di masse entro il `10 %`, **quattro coppie DISGIUNTE** per coppia di masse *(una coppia
+sola non ha barra)*. Poi, a ogni checkpoint, **la distanza fra GLI STESSI nodi**.
+**Le esclusioni si CONTANO e NON si sostituiscono** *(un nodo finito dentro una regione coerente,
+una coppia spezzata in componenti diverse)*: **sostituirla rifarebbe la riscelta con un altro nome.**
+**`controlli()` NON si cancella:** resta col suo marchio, perche' e' **l'evidenza** che spiega perche'
+esiste il sostituto, **ed e' il ramo che DEVE fallire nel collaudo**.
+
+## `K5` — 2/2 SU CASI A RISPOSTA NOTA, e la riga che conta e' la seconda
+
+*(anello sintetico da 1200 nodi; `python csv/_osservabile_p1.py --collaudo-controlli`)*
+
+| caso | masse | `c` FISSI | `c` riscelta | **`A` FISSI** | `A` riscelta |
+|---|--:|--:|--:|--:|--:|
+| **`K5a`** tutto contratto del `5 %` | `-5.0000 %` | **`-5.0000 %`** | `-5.0000 %` | **`+0.0000 %`** | `+0.0000 %` |
+| **`K5b`** solo le masse, vuoto FERMO | `-4.4750 %` | **`+0.0000 %`** | `-4.5000 %` | **`-4.4750 %`** | **`+0.0250 %`** |
+
+**`K5a` NON DISCRIMINA, e lo dico invece di contarlo come prova:** con una contrazione **uniforme**
+anche la riscelta legge `-5 %`, perche' **bersaglio e candidati si scalano dello stesso fattore**.
+Serve a mostrare che i fissi sono **tarati**. *(Luca aveva chiesto questo caso; il caso che
+discrimina e' l'altro, e l'ho aggiunto.)*
+
+**`K5b` E' LA PROVA:** su un effetto **vero** del `-4.475 %`, i controlli fissi stanno **fermi a
+`+0.0000 %`** e l'osservabile lo **vede tutto**; la riscelta **insegue** (`-4.5 %`) e porta `A` a
+**`+0.025 %`** — **l'effetto SPARISCE.** E' il **criterio che DEVE fallire** (`P1-sexies`): senza di
+esso, `K5a` da solo non proverebbe nulla.
+
+**COSTO, e va detto:** il pilota era **partito** ed e' stato **fermato a ~4 minuti** *(nessun
+checkpoint oltre il passo 0, nessun `json` scritto)*, perche' `par.5` vieta di modificare un file
+che un run ha importato. **Nel referto la riscelta resta stampata ACCANTO all'osservabile, come
+diagnostico:** cosi' il difetto e' visibile **nei dati del run**, non solo in questa pagina.
+
+
 ---
 
 # 🧭 **PILOTA DELLA `PROVA 1`: i criteri sono COMMITTATI, e una PREMESSA DEL MANDATO NON REGGE** *(2026-09-27)*

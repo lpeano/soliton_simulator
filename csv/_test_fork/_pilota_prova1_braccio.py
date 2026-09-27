@@ -11,7 +11,11 @@ r"""**UN BRACCIO del pilota della `PROVA 1`** — un seme, un processo (`STANDAR
 * avanzamento con **`_passo.passo_pieno`** (`H-P9`): **mai `net.step()` da solo**;
 * **tutte le distanze LUNGO IL GRAFO pesate con `net.d`**, da `csv/_osservabile_p1.py`;
   **mai `pos`** — `A3-DISEGNO`;
-* checkpoint `0, 40, 80, 120`.
+* checkpoint `0, 40, 80, 120`;
+* **le coppie di CONTROLLO sono FISSE**: scelte **una volta al passo 0** e poi **seguite**
+  (`OP.controlli_fissi` + `OP.segui_controlli`). **La riscelta si tiene come DIAGNOSTICO**,
+  perche' e' il difetto: `K5b` misura che porta l'osservabile a `~0` su un effetto vero del
+  `-5 %`. *(`CTRL-RISCELTA`.)*
 
 > ### ⚠ DUE PREMESSE DEL MANDATO **NON REGGONO**, e sono verificate dal sorgente
 >
@@ -382,9 +386,18 @@ class Spia(object):
 
 
 # ======================================================================= UN CHECKPOINT
-def checkpoint(S, net, coorti0, rr, dphi, kappa, spia, passo, LAM=0.8, calibra=False):
+def checkpoint(S, net, coorti0, rr, dphi, kappa, spia, passo, LAM=0.8, calibra=False,
+               stato=None):
     o = OP.misura(net, coorti0)                     # LO STRUMENTO UFFICIALE, pesi = `net.d`
-    ctrl = OP.controlli(o, coorti0, rr)             # `V1`: i punti di CONTROLLO nel vuoto
+    # `V1` -- I PUNTI DI CONTROLLO, **FISSI**: scelti UNA VOLTA al passo 0 e poi SEGUITI.
+    #   `OP.controlli()` RISCEGLIE a ogni istante, e con la riscelta l'osservabile va a ZERO
+    #   PER COSTRUZIONE (`K5b`: su un effetto vero del -5 % legge ~0 %). Si tiene ANCHE la
+    #   riscelta, ma come DIAGNOSTICO: cosi' il difetto e' visibile nei dati del run stesso.
+    #   *(`CTRL-RISCELTA`, difetto trovato da Luca il 2026-09-27.)*
+    if stato is not None and "fissi" not in stato:
+        stato["fissi"] = OP.controlli_fissi(o, coorti0, rr)
+    fissi = (stato or {}).get("fissi") or OP.controlli_fissi(o, coorti0, rr)
+    ctrl = OP.controlli(o, coorti0, rr)             # DIAGNOSTICO: la RISCELTA, che e' il difetto
     g = o["_g"]
     masse = o["masse"]
     # la distanza di grafo dalla regione del passo 0 di OGNI massa: serve a `R-VICINO`
@@ -407,7 +420,22 @@ def checkpoint(S, net, coorti0, rr, dphi, kappa, spia, passo, LAM=0.8, calibra=F
                                                "nodo_a": int(v["nodo_a"]),
                                                "nodo_b": int(v["nodo_b"])})
                                           for k, v in ctrl.get("coppie", {}).items()),
-                           "nota": ctrl.get("nota", "")}}
+                           "nota": ctrl.get("nota", ""),
+                           "MARCHIO": "RISCELTA: diagnostico, NON l'osservabile (K5b)"}}
+
+    # i controlli FISSI: la distanza fra GLI STESSI nodi. Le esclusioni si CONTANO.
+    sel_coer = regione_da_fase(net, dphi, kappa)
+    seg = OP.segui_controlli(o, fissi, dentro_coerenti=sel_coer)
+    fuori["controlli_fissi"] = {
+        "trovate": fissi.get("trovate", {}),
+        "candidati_lontani": int(fissi.get("candidati_lontani", 0)),
+        "metro_lontananza": float(fissi.get("metro_lontananza", float("nan"))),
+        "quante_chieste": int(fissi.get("quante_chieste", 0)),
+        "esclusi_dentro": int(seg["esclusi_dentro"]),
+        "esclusi_componenti": int(seg["esclusi_componenti"]),
+        "esclusi_inf": int(seg["esclusi_inf"]),
+        "usate": int(seg["usate"]), "totali": int(seg["totali"]),
+        "coppie": seg["coppie"]}
 
     # ---------------------------------------------------- `V5`: LA CALIBRAZIONE (solo al passo 0)
     if calibra:
@@ -446,7 +474,7 @@ def checkpoint(S, net, coorti0, rr, dphi, kappa, spia, passo, LAM=0.8, calibra=F
         fuori["calibrazione"] = tab
 
     # ------------------------------------------- `V5`: la regione DALLA FASE, al `kappa` fissato
-    sel = regione_da_fase(net, dphi, kappa)
+    sel = sel_coer                 # gia' calcolata sopra per le esclusioni dei controlli
     comp, scart = componenti_regione(g, sel)
     reg, orfane = assegna_vicino(g, sel, dist, masse)     # `R-VICINO`: la regola che REGGE
     quante = dict((k, 1 if len(reg[k]) else 0) for k in masse)
@@ -582,8 +610,9 @@ def principale(seme, passi, cps, out):
              "blocchi": []}
 
     LAM = float(S.LAM)
+    stato = {}                     # ci vivono le coppie di controllo FISSE, scelte al passo 0
     b0 = checkpoint(S, net, coorti0, rr, dphi, KAPPA_PROVE[0], spia, 0,
-                    LAM=LAM, calibra=True)
+                    LAM=LAM, calibra=True, stato=stato)
     # ⚠ LA REGOLA DI SCELTA DI `KAPPA` E' SCRITTA PRIMA DI GUARDARE: il piu' PICCOLO fra
     #   `KAPPA_PROVE` col richiamo >= 0.99 su OGNI massa; se nessuno ce l'ha, quello col
     #   `f1` minimo piu' alto, **e si dichiara che nessuno arrivava a 0.99**.
@@ -600,7 +629,8 @@ def principale(seme, passi, cps, out):
     fuori["kappa_regola"] = regola
     # il passo 0 si RIFA' col `kappa` scelto, cosi' il blocco 0 e i seguenti sono OMOGENEI
     fuori["blocchi"].append(
-        checkpoint(S, net, coorti0, rr, dphi, kappa, spia, 0, LAM=LAM, calibra=True))
+        checkpoint(S, net, coorti0, rr, dphi, kappa, spia, 0, LAM=LAM, calibra=True,
+                   stato=stato))
 
     if hasattr(S, "passo_test"):
         S.passo_test()
@@ -609,7 +639,8 @@ def principale(seme, passi, cps, out):
         _passo.passo_pieno(S, net)              # `H-P9`: mai `net.step()` da solo
         if p in cps:
             fuori["blocchi"].append(
-                checkpoint(S, net, coorti0, rr, dphi, kappa, spia, p, LAM=LAM))
+                checkpoint(S, net, coorti0, rr, dphi, kappa, spia, p, LAM=LAM,
+                           stato=stato))
     fuori["n_finale"] = int(net.n)
     io.open(out, "w", encoding="utf-8", newline=chr(10)).write(
         json.dumps(fuori, sort_keys=True, indent=1, default=float))

@@ -73,7 +73,7 @@ default del driver)*, **scena `(ii)`(a)**, **4 semi**, **120 passi**, **`passo_p
 
 | # | criterio | che cosa decide | che cosa mi fa FERMARE |
 |--:|---|---|---|
-| **V1** | **masse E punti di CONTROLLO** a ogni checkpoint | **`AB-CONTROLLI` chiuso**: il braccio li **salva** | se i controlli non si trovano *(`K4` fallisce)*, la `PROVA 1` **non ha braccio di confronto** |
+| **V1** | **masse E punti di CONTROLLO**, **FISSI**: scelti **una volta al passo 0** e poi **SEGUITI**, 4 coppie disgiunte per coppia di masse | **`AB-CONTROLLI` chiuso**: il braccio li **salva** | se i controlli non si trovano *(`K4` fallisce)*, la `PROVA 1` **non ha braccio di confronto** |
 | **V2** | l'osservabile e' **`(masse − controlli)` RELATIVO alla distanza iniziale**, con **IC95 fra semi** `t(3)` | se il calo e' **specifico delle masse** o **globale** | se `masse` e `controlli` calano **uguale**, e' **contrazione globale e NON e' gravita'** — e va scritto cosi' |
 | **V3** | **DOVE nascono i nodi** *(masse / varco fra le masse / vuoto)*, **mitosi e Schwinger SEPARATI** | e' la **misura `M1` di `SCALE-TW`**, quasi gratis | — *(e' una misura, non ha un fallire)* |
 | **V4** | quante coppie Schwinger hanno **`2*dd < d`** dell'arco | le **scorciatoie** da `A3-DISEGNO`: sono **l'unico** cammino nuovo | se fossero molte, il grafo **si accorcia anche per nascita**, e `FILI-CORTI` cambia |
@@ -81,6 +81,25 @@ default del driver)*, **scena `(ii)`(a)**, **4 semi**, **120 passi**, **`passo_p
 | **V6** | **`MASSA-MIGRA` (b) — LA FORMA**: `n` nodi, **raggio** *(distanza media dal medoide)*, **quantili `p10/p50/p90`** delle distanze interne, **coerenza** *(parametro d'ordine della fase)*; per coppia, **centri** e **superfici affacciate** *(insieme-insieme)* | la forma e' **«costante»** se **ogni** grandezza resta **entro la dispersione fra semi del passo 0** | **se le superfici si avvicinano PIU' dei centri oltre la barra: ALLUNGAMENTO** *(possibile effetto mareale)* — **e' un RISULTATO, non un difetto, e NON VA CORRETTO** |
 
 ### 2.1 Le letture si fissano QUI
+
+- **❗ CORREZIONE DI LUCA, 2026-09-27 — I CONTROLLI SONO FISSI, NON RISCELTI.** **Cio' che il
+  primo strumento faceva, e che lascio leggibile:** `OP.controlli()` cercava, **a ogni**
+  **checkpoint**, la coppia di vuoto piu' vicina alla distanza **del momento** fra le masse.
+  **Quindi `c(t) ~ m(t)` PER COSTRUZIONE e `A(t) -> 0` qualunque cosa faccia la gravita'**: `V2`
+  perdeva **esattamente** cio' per cui esiste. **L'avevo scritto come «limite DICHIARATO»** nel
+  referto e nel commit — **e dichiararlo non basta** (`A9`): **un osservabile che non puo'
+  misurare la propria alternativa non e' un osservabile, e' un numero.** **L'ha visto Luca
+  leggendo il mio stesso `COSA-RICONTROLLARE`.**
+  **CURA:** `controlli_fissi()` al passo 0 *(vuoto, oltre `r_regione` di distanza di grafo da
+  ogni nodo di massa, stessa distanza iniziale entro il `10 %`, **4 coppie disgiunte**)* piu'
+  `segui_controlli()` a ogni checkpoint **sugli STESSI nodi**. **Le esclusioni si CONTANO e non
+  si sostituiscono**: sostituirle rifarebbe la riscelta con un altro nome.
+  **`K5` 2/2**, e **la riga che conta e' `K5b`**: su un effetto vero del **`-4.475 %`** i fissi
+  stanno a **`+0.0000 %`** e l'osservabile lo vede tutto, mentre **la riscelta porta `A` a
+  `+0.025 %`** — **l'effetto sparisce**. **`K5a` (tutto contratto del `5 %`) NON discrimina**, e
+  lo dico: con una contrazione uniforme anche la riscelta legge `-5 %`, perche' bersaglio e
+  candidati si scalano dello stesso fattore. **-> voce `CTRL-RISCELTA`.**
+
 
 - **tutte le distanze sono LUNGO IL GRAFO pesato con `d`** *(`csv/_osservabile_p1.py`)*, **mai
   `pos`** — e il centro e' **il medoide di grafo** (`A3-DISEGNO`);
