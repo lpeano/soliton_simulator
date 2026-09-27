@@ -50,6 +50,11 @@ def confronta(pa, pb):
         return str(z["_blob_sim"])[:8] if "_blob_sim" in z.files else "(non registrato)"
     print("HASHSEED di A: %s   di B: %s" % (str(A["_hashseed"]), str(B["_hashseed"])))
     print("BLOB del simulatore, A: %s   B: %s" % (_bl(A), _bl(B)))
+    def _av(z):
+        return str(z["_argv"]) if "_argv" in z.files else "(non registrato)"
+    print("ARGV di A: %s" % _av(A))
+    print("ARGV di B: %s" % _av(B))
+    print("  -> configurazioni %s" % ("UGUALI" if _av(A) == _av(B) else "### DIVERSE"))
     print("n di A: %s   n di B: %s" % (str(A["n"]), str(B["n"])))
     print("")
     print("  %-14s %-10s %-12s %s" % ("grandezza", "forma", "identico?", "elementi diversi"))
@@ -103,7 +108,7 @@ def confronta(pa, pb):
     return 1 if diversi else 0
 
 
-def gira(out, seme, passi):
+def gira(out, seme, passi, extra=None):
     import _cli_flag
     import _passo
     hs = os.environ.get("PYTHONHASHSEED")
@@ -112,6 +117,12 @@ def gira(out, seme, passi):
     print("")
     S0, argv = _cli_flag.argv_del_driver(extra=["--seme=%d" % seme],
                                          dest=os.path.join(_QUI, "_scarto_cli"))
+    # `--extra`: flag AGGIUNTI a quelli del driver. Serve a misurare una configurazione che il
+    # driver non usa (per esempio `--scala-min` INSIEME a `--scala-min-passo`), e finisce nel
+    # referto perche' `P5` vuole la configurazione INTERA, non la differenza.
+    if extra:
+        argv = list(argv) + list(extra)
+        print("FLAG EXTRA, aggiunti a quelli del driver: %s" % " ".join(extra))
     S, a = _cli_flag.carica_dal_cli(list(argv), nome="sim_hs")
     print("CONFIGURAZIONE INTERA (%d voci): %s" % (len(argv), " ".join(argv[1:])))
     S._NMASSE_VIDEO["n"] = 2
@@ -134,7 +145,7 @@ def gira(out, seme, passi):
     print("blob del simulatore (sha1 dei byte): %s" % _bl[:8])
     dati = {"n": np.asarray(net.n), "_hashseed": np.asarray(str(hs)),
             "_blob_sim": np.asarray(_bl), "_passi": np.asarray(passi),
-            "_seme": np.asarray(seme)}
+            "_seme": np.asarray(seme), "_argv": np.asarray(" ".join(argv[1:]))}
     for k in STATO + ["i", "j"]:
         v = getattr(net, k, None)
         if v is not None:
@@ -151,12 +162,14 @@ if __name__ == "__main__":
     if "--confronta" in A:
         k = A.index("--confronta")
         sys.exit(confronta(A[k + 1], A[k + 2]))
-    out, seme, passi = os.path.join(_QUI, "_hs.npz"), 11, 3
+    out, seme, passi, extra = os.path.join(_QUI, "_hs.npz"), 11, 3, []
     for x in A:
         if x.startswith("--out="):
             out = x.split("=", 1)[1]
-        if x.startswith("--seme="):
+        elif x.startswith("--seme="):
             seme = int(x.split("=", 1)[1])
-        if x.startswith("--passi="):
+        elif x.startswith("--passi="):
             passi = int(x.split("=", 1)[1])
-    sys.exit(gira(out, seme, passi))
+        elif x.startswith("--extra="):
+            extra += x.split("=", 1)[1].split(",")
+    sys.exit(gira(out, seme, passi, extra))

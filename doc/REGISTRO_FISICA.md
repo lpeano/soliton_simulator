@@ -98,6 +98,28 @@ voce `Z…` della `FASE A`, commit `9a82bfb`)*.
 > *(configurazione che il driver NON usa)* prima `d0` aveva un pavimento e **ora non l'ha piu'**.
 > **`PAV_COM` diventa INERTE** in entrambi i suoi stati, e lo dichiara all'avvio.
 >
+> ### ⚠ **CORREZIONE del 2026-09-27 (Luca, su `7840039`): LA PRECEDENZA**
+>
+> Togliendo il pavimento avevo collassato la catena
+> `if SCALA_MIN_PASSO: nudo / elif SCALA_MIN: freno / else: 0.05` in
+> `if SCALA_MIN: freno / else: nudo`, **e questo ROVESCIA LA PRECEDENZA.**
+> **Col driver e' identico** *(`SCALA_MIN` e' spento)*, **ma con ENTRAMBI i flag accesi si
+> frenerebbe DUE VOLTE** -- per scrittura **e** a fine passo -- mentre **deve vincere il freno
+> PER PASSO** (`C3`), che e' l'intero punto della cura: frenare scrittura per scrittura fa
+> dipendere il risultato dall'**ORDINE**.
+>
+> **LA FORMA GIUSTA, ora esplicita in entrambi i sottocicli:**
+> `if SCALA_MIN and not SCALA_MIN_PASSO: freno` / `else: nudo`.
+>
+> ### **E la precedenza sulle scritture di `d0` era GIA' intatta:** `_sd0` controlla
+> `SCALA_MIN_PASSO` **per primo** e **ritorna**, quindi non l'ho toccata -- verificato dal
+> codice, non assunto.
+>
+> **La lezione, e vale oltre questo caso:** un `elif` che diventa `else` **non e' una
+> semplificazione, e' un cambio di ordine fra due condizioni**. Il sigillo byte-identico col
+> driver **non poteva vederlo**, perche' col driver una delle due e' spenta: **un sigillo su UNA
+> configurazione non certifica una PRECEDENZA fra due flag.**
+
 > **`D31` NON E' TOCCATA:** *il freno e' solo in discesa* resta il difetto aperto di questa
 > scheda, ed e' della cura **(d)**.
 
@@ -929,6 +951,16 @@ distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifi
 > scende.** Via anche una chiamata `self.d0 = self._pav_d0(self.d0)`, che era un no-op.
 > **La legge sulla FASE non e' toccata:** `_dphi`, `_wphi` e il dominio a `4 pi` restano come
 > erano. Qui cambia solo il settore METRICO di `step`.
+
+> ### ⚠ **E UNA CORREZIONE, il 2026-09-27 (Luca, su `7840039`): LA PRECEDENZA**
+>
+> Nel collassare i tre rami in due avevo scritto `if SCALA_MIN: freno / else: nudo`, che
+> **ROVESCIA la precedenza**: prima `SCALA_MIN_PASSO` era la **prima** condizione della catena e
+> **vinceva**. Con entrambi i flag accesi si sarebbe frenato **due volte**, per scrittura e a
+> fine passo. **Ora la forma e' esplicita:** `if SCALA_MIN and not SCALA_MIN_PASSO`.
+> **Il sigillo byte-identico col driver non poteva vederlo**, perche' col driver `SCALA_MIN` e'
+> spento: **un sigillo su UNA configurazione non certifica una PRECEDENZA fra due flag.**
+
 
 
 > **STATO: `DIFETTOSA`.** Difetti **`D34`** *(il wrap del ritmo)*, **`D35`** *(l'antifase di

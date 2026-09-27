@@ -5719,7 +5719,13 @@ class Rete:
                 #   LA GARANZIA RESTA `LAM`, che non si tocca. E i rami scendono da TRE a DUE:
                 #   il freno di `SCALA_MIN`, e l'aggiornamento nudo che `SCALA_MIN_PASSO`
                 #   frena UNA VOLTA a fine passo (`C3`).
-                if SCALA_MIN:
+                # ⚠ LA PRECEDENZA E' `SCALA_MIN_PASSO` SOPRA `SCALA_MIN`, e va scritta
+                #   ESPLICITA: quando c'era il ramo del pavimento questa era la prima
+                #   condizione di una catena `if/elif/else`, e collassarla in `if SCALA_MIN`
+                #   la ROVESCIA -- con ENTRAMBI i flag accesi si frenerebbe DUE VOLTE, per
+                #   scrittura E a fine passo, mentre deve vincere il freno PER PASSO (`C3`).
+                #   (Correzione di Luca su `7840039`: l'avevo rovesciata togliendo il pavimento.)
+                if SCALA_MIN and not SCALA_MIN_PASSO:
                     d_new = self.d + self._smorza(self.d, dts * vd_half, 'd')
                 else:
                     d_new = self.d + dts * vd_half
@@ -5764,7 +5770,8 @@ class Rete:
                 self.vd = self.vd + dts * (cs_arco ** 2 * lap + src - beta * self.vd)
                 # [(b)1, 2026-09-27] IDEM: il pavimento `0.05` e' archiviato. Questo ramo
                 #   era DOPPIAMENTE morto col driver, che passa `--verlet`: Eulero non gira.
-                if SCALA_MIN:
+                # ⚠ STESSA PRECEDENZA ESPLICITA del ramo Verlet, e per la stessa ragione.
+                if SCALA_MIN and not SCALA_MIN_PASSO:
                     self.d = self.d + self._smorza(self.d, dts * self.vd, 'd')
                 else:
                     self.d = self.d + dts * self.vd
