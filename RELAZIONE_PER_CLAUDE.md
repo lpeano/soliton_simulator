@@ -3518,3 +3518,39 @@ esattamente l'errore che `T4` non sapeva prendere.
 silenzio sulle coorti del passo 0: sono **l'insieme congelato** che `MASSA-ID` esiste per superare,
 e usarle darebbe **un numero che sembra nuovo ed è quello vecchio**.
 
+
+---
+
+# 📌 **`SCALE-TW`: `M1` È MISURATA — il prerequisito, non la chiusura** *(2026-09-27)*
+
+Il `motivo` della voce diceva: *«prima la misura `M1`: **quanta mitosi e DOVE** — senza quella, le
+scale della torsione si leggerebbero su un sistema che non si sa dove crea»*.
+**Il pilota l'ha misurata** *(`V3`; 4 semi, 120 passi; fonte `csv/_test_fork/_pilota_prova1/
+REFERTO.txt` e `CONFRONTO_previsione.txt`)*.
+
+| passo | mitosi *(massa / varco / vuoto)* | Schwinger *(massa / varco / vuoto)* |
+|--:|---|---|
+| 40 | `0.0` / `0.0` / `0.2` | `0.0` / `0.0` / `0.0` |
+| 80 | `0.0` / `0.0` / `52.2` | `0.0` / `0.0` / `10.0` |
+| **120** | ### **`0.0` / `0.0` / `526.5`** | ### **`0.0` / `0.0` / `122.2`** |
+
+### **Zero nascite nelle masse e zero nel varco, a ogni checkpoint: tutte nel vuoto.**
+
+E vengono **tutte da `mitosi()`**: nodi creati per chiamata del passo — `mitosi 648.8`, `step 0.0`,
+`rilassa_disegno 0.0`, `memoria_hebbiana_moto 0.0`.
+**Il dato grezzo accanto alla classificazione** *(`A8`, così non si è obbligati a fidarsi del
+metro)*: distanza di grafo dei nati dalla massa più vicina, al passo 120, **`p05 1.083 · p50 3.941
+· p95 7.418`** — contro un raggio di regione di `3.15`.
+
+> ### **Che cosa dà a `SCALE-TW`:** la mitosi scatta sull'**eccesso di torsione**, quindi le nascite
+> dicono **dove** la torsione supera il quanto critico — e la risposta è **nel vuoto**, non nelle
+> masse né fra esse.
+
+> ### ⚠ **LA VOCE NON SI CHIUDE.**
+> `M1` era il **prerequisito**, non il criterio di chiusura: `SCALE-TW` chiede *«un'analisi
+> completa, DA CAPO»* delle scale della torsione, e **quella non è stata fatta**.
+> **Chiuderla qui sarebbe scambiare la condizione d'ingresso per il risultato.**
+> Resta `stato = da-decidere`, `blocca_run_base = SI`.
+> **E il limite della misura è dichiarato:** è un **pilota**, non il run base, e la zona è misurata
+> **al checkpoint successivo** alla nascita, non all'istante in cui il nodo nasce.
+
