@@ -1,0 +1,44 @@
+========================================================================================================
+SIGILLO DI `POZZO-D` (`D02`) -- `L` dal grafo, non dal disegno   (12 passi)
+========================================================================================================
+
+  W1  A FLAG SPENTO, BYTE-IDENTICO  (contro il PADRE di 44f37d90, blob 83945ff9)
+      PRIMA  n 12814  archi 471143   campi 214
+      DOPO   n 12814  archi 471143   campi 214   flag False
+      stessa forma True    DIVERSI 0 []
+
+  W2  A FLAG ACCESO LA SPINTA CAMBIA  (dichiarato: e' la cura)
+      archi confrontati 471143   max|dpozzo_ON - dpozzo_OFF| 1.066229e-01
+      max|phi_g_ON - phi_g_OFF| 1.114271e-01
+      L_pos/L_d   mediano 0.999961   max 1.000776   min 0.996158
+
+  W3  IL PAVIMENTO `1e-9` NON SERVE PIU'  (e si CONTA, non si assume)
+      `_pozzo_d_nonpos` 0 su 6124859 archi   (atteso 0)
+      min(d) 8.000377e-01   LAM 0.800000
+
+  W4  IL CASO CHE DEVE FALLIRE -- `pos` alterato a `d` costante
+      flag ACCESO  max|dpozzo(pos alterato) - dpozzo| = 0.000000e+00   (atteso 0: `pos` NON entra)
+      flag SPENTO  max|dpozzo(pos alterato) - dpozzo| = 5.375372e+02   (atteso > 0: il banco c'e')
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 80
+  -> FUORI CONFIGURAZIONE DEL DRIVER: 1 differenze su 80
+       POZZO_D                    qui True     driver False
+
+
+========================================================================================================
+  W1  a flag spento, byte-identico               PASS
+  W2  a flag acceso la spinta CAMBIA             PASS
+  W3  zero `d <= 0`, contati                     PASS
+  W4  solo `pos` mosso: ON non cambia, OFF si'   PASS
+SIGILLO: 4/4
+========================================================================================================
+
+COSA QUESTO SIGILLO *NON* DICE:
+  - **non dice che la cura AVVICINI le masse**: quello e' `W5`, l'A/B a 4 semi.
+  - **`W2` misura al passo 0 della scena**, non dopo una dinamica: dice che il pozzo e'
+    un'altra funzione, non che la gravita' cambi di tanto.
+  - **`W3` dice che a questa configurazione `d > 0` sempre**, NON che sia un'invariante:
+    e' un CONTATORE, e serve proprio perche' l'invariante non e' dimostrata.

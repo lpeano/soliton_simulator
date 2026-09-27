@@ -2618,3 +2618,38 @@ e non e' piu' solo la catena di avvio.
 **E il contatore vive SOLO nel ramo acceso**, cosi' `W1` *(byte-identico a flag spento)* resta vero:
 un contatore creato in entrambi i rami aggiungerebbe un campo allo snapshot e **romperebbe la
 byte-identita' che deve dimostrare**.
+
+## ✅ `D02` / `POZZO-D` — **sigillo 4/4**, e un dato che serve alla decisione
+
+```
+W1  a flag spento, byte-identico ............... PASS   214 campi, 0 DIVERSI, flag False
+W2  a flag acceso la spinta CAMBIA ............. PASS   max|dpozzo| 1.066229e-01
+W3  zero `d <= 0`, CONTATI ..................... PASS   0 su 6 124 859   min(d) 0.8000377, LAM 0.8
+W4  solo `pos` mosso: ON non cambia, OFF si' ... PASS   ON 0.000000e+00   OFF 5.375372e+02
+SIGILLO: 4/4      avanzamento: `passo_pieno`
+```
+
+> ### **`W4` E' LA PROVA, e `W2` da solo non lo sarebbe.**
+> **A flag acceso, muovere SOLO `pos` non sposta il pozzo di un bit: `0.000000e+00` ESATTO.**
+> A flag spento lo sposta di **`5.38e+02`**. **`pos` e' uscito dalla gravita', e la meta' OFF dice
+> che il banco funziona** — senza quella, uno zero potrebbe voler dire *«non ho misurato niente»*.
+
+### ⚠ IL NUMERO CHE DEVI SAPERE PRIMA DI DECIDERE: **l'effetto e' PICCOLO A TEMPI CORTI, e CRESCE**
+
+| passi | `max|dpozzo_ON − dpozzo_OFF|` | `L_pos/L_d` mediano | max | min |
+|--:|--:|--:|--:|--:|
+| **4** | `3.205634e-03` | `0.999996` | `1.000019` | `0.999902` |
+| **12** | `1.066229e-01` | `0.999961` | `1.000776` | `0.996158` |
+
+**A 12 passi `pos` e `d` coincidono ancora a quattro decimali**, e l'effetto sulla spinta e'
+`1.07e-01`. **Il `x8` di `Z103` NON e' riprodotto a tempi corti** — e non lo contraddice: dice che
+**la divergenza si accumula**, di un fattore ~33 passando da 4 a 12 passi.
+
+> **La cura resta giusta anche se l'effetto fosse piccolo:** `pos` e' il **disegno**, e non deve
+> entrare nella gravita' (`A13`) — **si misura per promuovere, si DIMOSTRA per escludere**. Ma
+> **quanto** cambia lo dira' `W5`, a 120 passi e 4 semi, **contro la barra fra semi** *(`sd`
+> `0.146`-`0.510` al passo 0)*.
+
+**E `W3` porta un numero che vale da se':** `min(d) = 0.8000377` contro `LAM = 0.8`. **`d >= LAM`
+regge, ed e' appena sopra** — il pavimento `1e-9` non morde, **ma il margine e' `4.7e-05`**, quindi
+il contatore resta: **un'invariante misurata non e' un'invariante dimostrata.**
