@@ -4609,3 +4609,49 @@ il confronto stampa *«configurazioni DIVERSE»*. **È un campo assente, non un 
 braccio B, dove entrambi lo portano, dichiara **«configurazioni UGUALI»**.
 
 > ### 🛑 **STOP.** Prossimo: **(b)2**, e con il braccio in più che questa correzione ha insegnato.
+
+---
+
+# 🗄 **(b)2 — `SYNC_UPDATE` ESCE DAL SIMULATORE, `--sync` diventa un no-op accettato** *(2026-09-27)*
+
+### **Blob: `f845d30d` → `7439d5c3`.** Tag **`pre-archivio-sync`** pushato.
+**Archivio:** `csv/_archivio/_sync_update.py` — **7 blocchi e 9 ternari**, tolti **per AST e non per
+testo**: i rami sono **blocchi**, e trascriverli a mano nell'ancora è il modo più facile di perdere
+una riga in silenzio.
+
+## Precondizione misurata **prima** di toccare
+
+### **`--sync` agiva davvero in questa scena: 19 grandezze su 23 diverse** fra acceso e spento, sul
+codice di prima. **Senza questa misura i bracci B e C del sigillo non proverebbero niente** — se
+`--sync` non avesse fatto nulla già prima, «adesso non fa nulla» non direbbe niente.
+
+## Due cose trovate rilevando
+
+**①** ### `if SCUOTIMENTO and not SYNC_UPDATE` diventa `if SCUOTIMENTO`: **lo scuotimento del vuoto
+sullo spinore ora agisce SEMPRE.**
+**Non è una legge nuova: è la stessa legge senza l'eccezione** — e il suo commento **diceva già**
+che le due forme *«devono essere identiche: il vuoto è lo stesso vuoto»*.
+
+**②** `_peq_t`, la fotografia di `peq`, dopo la rimozione **non aveva più lettori**: è uscita anche
+lei. *(Era stata scritta per il ramo sincrono e nessun altro la leggeva.)*
+
+## Due cose che **restano**, e non sono dimenticanze
+
+**`_phi_t`** — la fotografia della **fase** — la legge **il percorso vivo** (`z = np.exp(1j*_phi_t)`):
+**non era parte di `SYNC_UPDATE`.**
+### **E `SYNC_SPINORE` non è `SYNC_UPDATE`:** `_forza_sync`, `_wI_sync`, `_uno_sync` sono gli
+ingredienti del torque `SU(2)` e **restano**. **Due flag con `SYNC` nel nome, due cose diverse**, e
+confonderli avrebbe rotto una legge viva.
+
+## E un secondo avviso caduto col ramo
+
+`--rumore-colorato` avvisava di agire *«solo sul percorso VIVO (`not SYNC_UPDATE`)»* e di essere
+quindi **inerte sotto `--sync`**. **Ora il percorso vivo è l'UNICO**, quindi il rumore colorato
+agisce **sempre** e quell'avviso **non ha più oggetto**.
+
+**`H-REG-R` ha chiesto quattro schede** e le ho scritte: `inerzia-spinoriale`, `torsione-spinore`,
+`fase-phi`, `tempo-proprio`.
+
+> ### ⏳ **IL SIGILLO NON È ANCORA GIRATO** *(par.5: il codice va committato prima del run)*.
+> Tre bracci nel commit successivo: **(A)** col driver, atteso **identico**; **(B)** con `--sync`,
+> atteso ### **DIVERSO** *(perché `--sync` non fa più niente)*; **(C)** il caso che deve fallire.

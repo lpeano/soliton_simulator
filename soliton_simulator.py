@@ -938,12 +938,16 @@ VERSO_CHI = False       # AGGANCIO AL VERSO STABILE (legge): se True, FRAME_DRAG
 # pilotato dalla circolazione del solo twist_dip CHIRALE (segno fisso, gradiente vecchio/nuovo)
 # invece che dal tw pieno (dominato da dph oscillante -> il verso si inverte). Aggancia l'orbita
 # al verso che NON batte. Default off = comportamento attuale (FRAME_DRAG su tw pieno).
-SYNC_UPDATE = False     # AGGIORNAMENTO SINCRONO (transazionale): se True, dph (il ponte fase->
-# twist/metrica) legge la fase dallo SNAPSHOT di inizio passo, non da quella appena aggiornata.
-# Cosi' pesi materia (gia' calcolati a inizio passo) e dph vedono la STESSA fase (t-1): il passo
-# diventa coerente e indipendente dall'ordine di aggiornamento (Jacobi invece di Gauss-Seidel).
-# Il cuore simplettico (phivel->phi) resta sequenziale. Snapshot -> commit globale a fine passo.
-# Default off = comportamento attuale (non-regressione).
+SYNC_UPDATE = False     # ⚠⚠ `SYNC_UPDATE` E' UN NO-OP ACCETTATO DAL 2026-09-27.
+# Prometteva l'aggiornamento sincrono (Jacobi invece di Gauss-Seidel), MA IL SUO RAGGIO ERA UNA
+# LEGGE SU CINQUE: misurato nella FASE 0 di `ETC-PASSO`, 7 usi in `_passo_spinoriale`, 6 in `step`,
+# e ZERO in `scuoti_vuoto`, `mitosi`, `rilassa_disegno`, `memoria_hebbiana_moto`. Tutte e 56 le
+# letture miste t/t+1 misurate stavano FUORI dal suo raggio.
+# I suoi rami sono ARCHIVIATI in `csv/_archivio/_sync_update.py` (tag `pre-archivio-sync`), e la
+# sincronia del passo INTERO la fa la cura `ETC-PASSO`.
+# IL FLAG NON E' STATO TOLTO (decisione 3 di Luca: si conserva tutto): `--sync` si accetta, non
+# fallisce, e DICHIARA a voce di non fare niente. Il default non conta piu': e' inerte in entrambi
+# gli stati.
 ZETA_VIR = False        # FRENO ANISOTROPO (legge, zero parametri): se True, lo smorzamento
 # metrico beta viene moltiplicato per cos2 (la quota RADIALE della viriale): pieno sul moto
 # radiale (cos2=1), scende a zero sul tangenziale (sin2=1). Non toglie il freno ovunque nella
@@ -3169,18 +3173,12 @@ class Rete:
         # Nel ramo sincrono il settore spinoriale legge una snapshot immutabile
         # dello stato t. Le copie vengono usate solo a destra dell'equazione;
         # le assegnazioni a _nb/omega_s sono il commit verso t+1.
-        if SYNC_UPDATE:
-            nb_t = self._nb.copy()
-            nb_prec_t = (self._nb_prec.copy()
-                         if hasattr(self, "_nb_prec") and self._nb_prec is not None
-                         and len(self._nb_prec) == n else nb_t.copy())
-            omega_t = self.omega_s.copy()
         # ECCITAZIONE DEL VUOTO sullo spinore, integrata nel passo (cosi' e' parte del ciclo di
         # evoluzione fisica, non dipende dal loop di disegno). Il rumore del vuoto perturba il
         # Bloch spingendolo fuori dal polo; la memoria hebbiana poi mantiene la rotazione.
         # STESSA legge dello scuotimento scalare: soppressione per COERENZA |Psi|^2, non per
         # curvatura (le due leggi devono essere identiche - il vuoto e' lo stesso vuoto).
-        if SCUOTIMENTO and not SYNC_UPDATE:
+        if SCUOTIMENTO:
             Lam = lambda_vuoto(self)
             if Lam > 0:
                 if not hasattr(self, "psi") or len(self.psi) < n:
@@ -3231,12 +3229,10 @@ class Rete:
                     _calcio = _g
                 self._nb = self._nb + _calcio * amp[:, None]
                 self._nb = self._nb / np.maximum(np.linalg.norm(self._nb, axis=1, keepdims=True), 1e-9)
-        nb = nb_t if SYNC_UPDATE else self._nb
+        nb = self._nb
         # CAUSALITA': campo dai vicini allo stato RITARDATO (Bloch del passo precedente)
         self._g_nb_prec_tot = getattr(self, "_g_nb_prec_tot", 0) + 1
-        if SYNC_UPDATE:
-            nb_vic = nb_prec_t
-        elif not hasattr(self, "_nb_prec") or self._nb_prec is None or len(self._nb_prec) != n:
+        if not hasattr(self, "_nb_prec") or self._nb_prec is None or len(self._nb_prec) != n:
             # [A8, 2026-09-20] (a) NESSUNA RAGIONE DICHIARATA, e il fallback NON e' innocuo.
             # Due righe sopra il codice dichiara `CAUSALITA': campo dai vicini allo stato
             # RITARDATO (Bloch del passo precedente)`, e qui si usa `nb`, cioe' il Bloch
@@ -3637,7 +3633,7 @@ class Rete:
             _tau = _tau[:, None]
         else:
             _tau = TAU_A
-        omega_src = omega_t if SYNC_UPDATE else self.omega_s
+        omega_src = self.omega_s
         omega_new = omega_src + dtn_c * (correzione / inerzia[:, None] - omega_src / _tau)
         if TW_SPINORE:
             # DOPPIA COPERTURA: la torsione a 4pi (tw) pilota il Bloch. Angolo = tw/2 (spin-1/2,
@@ -3774,14 +3770,6 @@ class Rete:
                 _na1 = (_ck - 1j*_sk*_kz)*a1 + (-1j*_sk*(_kx - 1j*_ky))*b1
                 _nb1 = (-1j*_sk*(_kx + 1j*_ky))*a1 + (_ck + 1j*_sk*_kz)*b1
                 a1, b1 = _na1, _nb1
-            if SYNC_UPDATE and SCUOTIMENTO:
-                # eccitazione del vuoto sul PRIMARIO complesso (t->t+1): perturba psi, non il B letto
-                Lam = lambda_vuoto(self)
-                if Lam > 0:
-                    I2 = (np.abs(psi_snapshot[:n]) ** 2 if psi_snapshot is not None else np.zeros(n))
-                    amp = np.sqrt(Lam) / (1.0 + I2 / Lam)
-                    a1 = a1 + (self.rng.normal(0, 1.0, n) + 1j * self.rng.normal(0, 1.0, n)) * amp
-                    b1 = b1 + (self.rng.normal(0, 1.0, n) + 1j * self.rng.normal(0, 1.0, n)) * amp
             nrm = np.maximum(np.sqrt(np.abs(a1) ** 2 + np.abs(b1) ** 2), 1e-12)  # |psi|=1 ATOMICO
             a1 = a1 / nrm; b1 = b1 / nrm
             psi_sp_new = np.stack([a1, b1], axis=1)
@@ -3797,15 +3785,6 @@ class Rete:
             cA = np.cos(ang); sA = np.sin(ang)
             dot = np.sum(ohat * nb, axis=1, keepdims=True)
             nb_new = nb * cA + np.cross(ohat, nb) * sA + ohat * dot * (1 - cA)
-            if SYNC_UPDATE and SCUOTIMENTO:
-                # Il rumore e' un aggiornamento t -> t+1: non puo' contaminare il
-                # campo B letto dalla snapshot. Usa comunque la stessa psi_t.
-                Lam = lambda_vuoto(self)
-                if Lam > 0:
-                    I2 = (np.abs(psi_snapshot[:n]) ** 2
-                          if psi_snapshot is not None else np.zeros(n))
-                    amp = np.sqrt(Lam) / (1.0 + I2 / Lam)
-                    nb_new = nb_new + self.rng.normal(0, 1.0, (n, 3)) * amp[:, None]
         nb_new = nb_new / np.maximum(np.linalg.norm(nb_new, axis=1, keepdims=True), 1e-9)
         # --- COMMIT ATOMICO del settore spinoriale ---
         self.omega_s = omega_new.copy()
@@ -5096,7 +5075,6 @@ class Rete:
         _phi_t = self.phi.copy()
         _tw_t = self.tw.copy()
         _phivel_t = self.phivel.copy()
-        _peq_t = self.peq.copy()
 
         r = self.ritmo()                       # None se l'orologio e' globale
         if r is None:
@@ -5171,10 +5149,6 @@ class Rete:
         # In modalita' sincrona tutte le leggi del passo leggono un unico campo
         # calcolato dalla snapshot t. Non ricalcolare psi in punti diversi del
         # passo: quello introdurrebbe letture miste t/t+1.
-        psi_t = None
-        if SYNC_UPDATE:
-            psi_t = self.satura(self._mat(w) @ np.exp(1j * _phi_t))
-            self.psi = psi_t.copy()
         A = w * np.cos(self.phi0[i] - self.phi0[j])
         z = np.exp(1j * _phi_t)  # <-- USA LO SNAPSHOT t
         coppia = self._coppia_interferenza(A, z)  # [FASE 3] scalare (off) o overlap spinoriale (on)
@@ -5201,7 +5175,7 @@ class Rete:
             # e stava una riga sopra la sua stessa cura. Il parametro esisteva gia'.
             # ASSIOMA A8: il ramo `w is None` era un fallback silenzioso, preso nel 100 % delle
             # chiamate (misurato: _calcpsi_w_none = 134/134) senza che nulla lo segnalasse.
-            psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi(w)
+            psi_forces = self.calcola_psi(w)
             MtPsi = self._mat(w) @ psi_forces
             dHdphi = 2.0 * np.imag(np.conj(z) * MtPsi)   # direzione: de-concentra l'interferenza
             zc = np.exp(1j * _phi_t[:self.n])  # <-- USA SNAPSHOT
@@ -5242,7 +5216,7 @@ class Rete:
             # spegne deve saperlo: e' scritto qui e nella voce Z13 del registro.
             # REGOLA GENERALE: un ramo sotto flag non si corregge e non si cancella -- SI DICHIARA,
             # perche' il difetto e' LATENTE, non assente.
-            psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()
+            psi_forces = self.calcola_psi()
             MtPsi = self._mat(w) @ psi_forces            # M simmetrica: M^T Psi = M Psi
             dHdphi = 2.0 * np.imag(np.conj(z) * MtPsi)  # d(sum|Psi|^2)/dphi_n
             coppia = coppia + MU_PSI * dHdphi           # (vecchia repulsione a parametro, fallback)
@@ -5329,7 +5303,7 @@ class Rete:
             # RIGIDITA' DEL MEZZO: con cs-dinamico il mezzo NON e' omogeneo. Il target (grandezza
             # globale, gauge del vuoto) usa la rigidita' rappresentativa = mediana del campo cs locale.
             if CS_DINAMICO:
-                _psi_ct = psi_t if psi_t is not None else (self.psi if len(self.psi) >= self.n else None)
+                _psi_ct = (self.psi if len(self.psi) >= self.n else None)
                 cs_rappr = (float(np.median(self._cs_nodo(np.abs(_psi_ct[:self.n]) ** 2, w)))
                             if _psi_ct is not None else CS_M)
             else:
@@ -5363,7 +5337,7 @@ class Rete:
             # [Z13 - TEMPO 2] `w` PASSATO: stessa ragione di ~:3006, e `w` e' usato poche righe
             # sotto (`wI = self._mat(w)`). Topologia verificata INVARIATA fra il calcolo di `w` e
             # questo punto: 100 % su 40 chiamate (csv/_test_fork, verifica preliminare 1).
-            psi_sync = psi_t if SYNC_UPDATE else self.calcola_psi(w)
+            psi_sync = self.calcola_psi(w)
             I2 = np.abs(psi_sync) ** 2
             cmv = (self.pos[:self.n] * I2[:, None]).sum(0) / max(I2.sum(), 1e-9)
             r_cm = np.linalg.norm(self.pos[:self.n] - cmv, axis=1) + LAM * 0.5
@@ -5418,7 +5392,7 @@ class Rete:
             self._g_spinore_vivo_shape = (len(self.phi_s), self.n)
             self._g_spinore_vivo_quando = self._g_spinore_vivo_tot
         if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) == self.n:
-            self._passo_spinoriale(i, j, w, dt_n_s, psi_snapshot=psi_t,
+            self._passo_spinoriale(i, j, w, dt_n_s, psi_snapshot=None,
                                    forza_sync=_forza_sync, wI_sync=_wI_sync, uno_sync=_uno_sync)
 
         # --- COMMIT ATOMICO DELLE FASI (Unico punto di scrittura sincrono) ---
@@ -5503,13 +5477,8 @@ class Rete:
         # Con --sync la materia viene valutata sullo snapshot t, nello stesso istante
         # delle coppie di fase e del ponte fase->torsione. Senza flag resta il percorso
         # storico: la materia legge la fase appena committata.
-        if SYNC_UPDATE:
-            # Il campo della metrica resta quello della snapshot t, uguale a
-            # quello usato da repulsione, sync, spinore e pozzo del passo.
-            self.psi = psi_t.copy()
-        else:
-            F = Mw @ np.exp(1j * self.phi)
-            self.psi = self.satura(F)
+        F = Mw @ np.exp(1j * self.phi)
+        self.psi = self.satura(F)
         I = np.abs(self.psi) ** 2
         rho = 0.5 * (I[i] + I[j])
 
@@ -5598,8 +5567,7 @@ class Rete:
         if HAM_SRC == 0.0:
             # Gli archi nuovi non hanno ancora un peq storico: per loro il valore appena
             # inizializzato è il dato di t. Gli altri usano esclusivamente lo snapshot.
-            _peq_src = (np.where(np.isfinite(_peq_t), _peq_t, self.peq)
-                        if SYNC_UPDATE else self.peq)
+            _peq_src = self.peq
             if ANOM_SIMM:
                 # [C1-bis] LA FORMA SIMMETRICA. Il denominatore e' `rho + peq`, che con
                 #   `rho >= 0` e `peq >= 0` e' `>= 0` e si annulla SOLO quando sono ENTRAMBI
@@ -8576,9 +8544,11 @@ def _applica_flag(a):
         if not SCUOTIMENTO:
             print("[rumore-colorato] AVVISO: SCUOTIMENTO e' SPENTO, quindi il flag e' INERTE "
                   "(non c'e' nessun calcio da colorare).")
-        if SYNC_UPDATE:
-            print("[rumore-colorato] AVVISO: SYNC_UPDATE e' ACCESO: il flag agisce solo sul "
-                  "percorso VIVO (`not SYNC_UPDATE`) ed e' quindi INERTE in questo run.")
+        # [(b)2, 2026-09-27] L'AVVISO E' CADUTO CON IL RAMO: diceva che il rumore colorato
+        #   agisce <<solo sul percorso VIVO (`not SYNC_UPDATE`)>> e quindi sarebbe inerte
+        #   sotto `--sync`. Ora il percorso vivo E' L'UNICO -- i rami di `SYNC_UPDATE` sono
+        #   archiviati -- quindi il rumore colorato agisce SEMPRE e l'avviso non ha piu' oggetto.
+
     if TAU_LUCE:
         print("[tau-luce] Il rilassamento di omega_s usa tau = d_nodo/cs_nodo (`_tempo_luce_nodo`), lo "
               "STESSO tau dello Strato 1, al posto di TAU_A*max(dens/dens_rif, 0.05). MOTIVO: "
@@ -8667,7 +8637,9 @@ def _applica_flag(a):
     if VERSO_CHI:
         print("[verso-chi] FRAME_DRAG pilotato dal verso CHIRALE stabile (non dal tw oscillante)")
     if SYNC_UPDATE:
-        print("[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)")
+        print("[sync] ⚠ NO-OP ACCETTATO dal 2026-09-27: i rami di SYNC_UPDATE sono "
+              "ARCHIVIATI (csv/_archivio/_sync_update.py). Il flag NON FA NIENTE: il suo "
+              "raggio era UNA legge su cinque. La sincronia del passo intero e' ETC-PASSO.")
     if PAV_COM:
         print("[pav-com] ⚠ FLAG INERTE dal 2026-09-27: il pavimento di d0 e' ARCHIVIATO "
               "(csv/_archivio/_pavimenti_morti.py) e questo flag NON FA NIENTE. La "

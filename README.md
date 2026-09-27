@@ -531,3 +531,25 @@ Ogni rifiuto dice **cosa fare**, e l'eccezione si dichiara nel file
 > **spenti** — una configurazione che **il driver non usa** — prima `d0` aveva un pavimento e ora
 > **non l'ha più**. Non è una regressione nascosta: **è il senso dell'archiviazione**, e quel
 > comportamento si ritrova nel tag e in `csv/_archivio/_pavimenti_morti.py`.
+
+---
+
+## ⚠ `--sync` è un **NO-OP ACCETTATO** dal 2026-09-27 *(passo (b)2 di `ETC-PASSO`)*
+
+| | |
+|---|---|
+| **cosa prometteva** | l'**aggiornamento sincrono** (Jacobi invece di Gauss-Seidel): tutte le leggi leggono la fase dallo **snapshot di inizio passo** |
+| **default** | `False`, **e da oggi non conta più**: il flag **non fa niente in nessuno dei due stati** |
+| **byte-inerte?** | ### **sì, in entrambi gli stati** |
+| **il flag resta accettato** | `--sync` **non fallisce**, e all'avvio **dichiara di non fare niente**. Decisione 3: **si conserva tutto** |
+| **perché** | ### **il suo raggio era UNA legge su cinque.** Misurato nella FASE 0: **7** usi in `_passo_spinoriale`, **6** in `step`, e ### **ZERO** in `scuoti_vuoto`, `mitosi`, `rilassa_disegno`, `memoria_hebbiana_moto`. **Tutte e 56** le letture miste `t`/`t+1` misurate stavano **fuori** da quel raggio |
+| **dove è finito** | `csv/_archivio/_sync_update.py`, tag **`pre-archivio-sync`** |
+| **chi lo sostituisce** | la cura **`ETC-PASSO`**, che rende sincrono il **passo intero** |
+
+> ### ⚠ **E cosa cambia davvero, dichiarato:** chi passava `--sync` **prima otteneva un
+> comportamento diverso** — misurato: **19 grandezze su 23** differivano fra `--sync` acceso e
+> spento. **Da oggi `--sync` non cambia più niente**, quindi **i run vecchi fatti con `--sync` non
+> si confrontano con quelli nuovi senza dirlo.** Il comportamento di prima si ritrova nel tag.
+>
+> **Due flag con `SYNC` nel nome, due cose diverse:** `--sync-spinore` (`SYNC_SPINORE`) **non è
+> toccato** e continua a funzionare.

@@ -727,6 +727,22 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 > vuole il braccio di confronto **omette il flag**, e il referto lo mostra.
 # ⑤ IL TEMPO PROPRIO — **`ritmo()` / `r` / `dt_n = DT·r`**, e il surrogato **`tau_pp`**
 
+> ### 🗄 **(b)2, 2026-09-27: `--sync` si dichiara no-op, e un avviso cade**
+>
+> **`SYNC_UPDATE` e' un NO-OP ACCETTATO dal 2026-09-27** *(passo `(b)2` di `ETC-PASSO`)*: i
+> suoi rami sono in **`csv/_archivio/_sync_update.py`**, tag **`pre-archivio-sync`**, e `--sync`
+> si accetta senza fare niente. **Il suo raggio era UNA legge su cinque** -- `7` usi in
+> `_passo_spinoriale`, `6` in `step`, **ZERO** nelle altre quattro -- e **tutte e 56 le letture
+> miste `t`/`t+1` misurate nella FASE 0 stavano FUORI da quel raggio.**
+>
+> `_applica_flag` stampava *<<aggiornamento sincrono attivo: dph legge la fase dallo snapshot
+> t-1 (Jacobi)>>*. **Ora dichiara di non fare niente.**
+> **E un secondo avviso e' caduto col ramo:** quello di `--rumore-colorato`, che diceva di
+> agire <<solo sul percorso VIVO (`not SYNC_UPDATE`)>> e di essere quindi **inerte sotto**
+> `--sync`. **Ora il percorso vivo e' l'UNICO**, quindi il rumore colorato agisce **sempre** e
+> quell'avviso **non ha piu' oggetto**. *(Sostituito da un commento che dice perche'.)*
+
+
 > ### 🗄 **(b)1, 2026-09-27: `_applica_flag` non annuncia piu' una legge che non applica**
 >
 > Il messaggio d'avvio di `PAV_COM` diceva *<<pavimento comovente attivo: d0 >=
@@ -940,6 +956,24 @@ distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifi
 
 <!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,_dphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
 # ⑥ LA FASE `φ` E IL SUO DOMINIO — **`semina` / `_w4` / `_w8` / `step`**
+
+> ### 🗄 **(b)2, 2026-09-27: `step` perde il campo `psi_t` della snapshot**
+>
+> **`SYNC_UPDATE` e' un NO-OP ACCETTATO dal 2026-09-27** *(passo `(b)2` di `ETC-PASSO`)*: i
+> suoi rami sono in **`csv/_archivio/_sync_update.py`**, tag **`pre-archivio-sync`**, e `--sync`
+> si accetta senza fare niente. **Il suo raggio era UNA legge su cinque** -- `7` usi in
+> `_passo_spinoriale`, `6` in `step`, **ZERO** nelle altre quattro -- e **tutte e 56 le letture
+> miste `t`/`t+1` misurate nella FASE 0 stavano FUORI da quel raggio.**
+>
+> **Che cosa e' uscito da `step`:** il calcolo di `psi_t` dalla snapshot; le **tre** letture
+> `psi_forces`/`psi_sync` che lo preferivano a `calcola_psi`; il ramo della **materia della
+> metrica** (`self.psi = psi_t.copy()`), di cui resta il percorso storico `F = Mw @ exp(i phi)`;
+> la fotografia `_peq_t`, che dopo la rimozione **non aveva piu' lettori**.
+> ### **`_phi_t` RESTA, e va detto perche' non e' una dimenticanza:** la fotografia della FASE
+> la legge **il percorso vivo** (`z = np.exp(1j * _phi_t)`), non il ramo sincrono. **Non era
+> parte di `SYNC_UPDATE`.**
+> **Il dominio a `4 pi` e `_dphi`/`_wphi` non sono toccati.**
+
 
 > ### 🗄 **(b)1, 2026-09-27: `step` perde il pavimento su `d` e una chiamata su `d0`**
 >
@@ -1413,6 +1447,26 @@ mitosi col tempo invece di regolarla.** `C3` guarda questo, e `300` passi **non 
 <!-- SCHEDA nome=inerzia-spinoriale funzioni=_passo_spinoriale,_rho_sorgente,_applica_flag,_cli flag=CONTRASTO_INTENSIVO,CAMPO_SPINORIALE,TAU_A -->
 # Ⓐ `inerzia-spinoriale` — **QUANTO COSTA GIRARE A UNO SPINORE**
 
+> ### 🗄 **(b)2, 2026-09-27: il settore spinoriale ha UN SOLO percorso**
+>
+> **`SYNC_UPDATE` e' un NO-OP ACCETTATO dal 2026-09-27** *(passo `(b)2` di `ETC-PASSO`)*: i
+> suoi rami sono in **`csv/_archivio/_sync_update.py`**, tag **`pre-archivio-sync`**, e `--sync`
+> si accetta senza fare niente. **Il suo raggio era UNA legge su cinque** -- `7` usi in
+> `_passo_spinoriale`, `6` in `step`, **ZERO** nelle altre quattro -- e **tutte e 56 le letture
+> miste `t`/`t+1` misurate nella FASE 0 stavano FUORI da quel raggio.**
+>
+> **Che cosa e' uscito da `_passo_spinoriale`:** le copie `nb_t` / `nb_prec_t` / `omega_t`
+> della <<snapshot immutabile dello stato t>>, e i **due** rami `SYNC_UPDATE and SCUOTIMENTO`
+> del rumore sul primario complesso e sul Bloch ruotato.
+> **E UNO SCUOTIMENTO CHE ORA AGISCE SEMPRE:** `if SCUOTIMENTO and not SYNC_UPDATE` diventa
+> `if SCUOTIMENTO`. **Non e' una legge nuova: e' la stessa legge senza l'eccezione**, e il suo
+> commento diceva gia' che le due forme <<devono essere identiche -- il vuoto e' lo stesso
+> vuoto>>.
+> **`omega_src` e `nb` leggono ora `self.omega_s` e `self._nb` e basta:** la forma della legge
+> non cambia, sparisce la scelta fra due sorgenti.
+> **`9-ter`: il numero delle leggi SCENDE.** Sette blocchi condizionali in meno, zero aggiunti.
+
+
 > **QUESTA SCHEDA NASCE IL 2026-09-25, E IL FATTO CHE NON CI FOSSE E' PARTE DEL DIFETTO.**
 > La legge che divide la coppia — **`omega = coppia/inerzia`** — governa il settore di spin da
 > sempre, ed era descritta **solo nei commenti del codice e nei registri dei difetti**. Il
@@ -1572,6 +1626,22 @@ termine.
 <!-- SCHEDA nome=torsione-spinore funzioni=_passo_spinoriale,_applica_flag flag=TW_SPINORE,SYNC_SPINORE,SPIN_LARMOR,SPIN_FEEDBACK -->
 
 # ⑧ TORSIONE → SPINORE — **il ponte INVERSO**
+
+> ### 🗄 **(b)2, 2026-09-27: `nb_vic` non ha piu' il ramo sincrono**
+>
+> **`SYNC_UPDATE` e' un NO-OP ACCETTATO dal 2026-09-27** *(passo `(b)2` di `ETC-PASSO`)*: i
+> suoi rami sono in **`csv/_archivio/_sync_update.py`**, tag **`pre-archivio-sync`**, e `--sync`
+> si accetta senza fare niente. **Il suo raggio era UNA legge su cinque** -- `7` usi in
+> `_passo_spinoriale`, `6` in `step`, **ZERO** nelle altre quattro -- e **tutte e 56 le letture
+> miste `t`/`t+1` misurate nella FASE 0 stavano FUORI da quel raggio.**
+>
+> Il campo dai vicini leggeva `nb_prec_t` sotto `SYNC_UPDATE` e `self._nb_prec` altrimenti.
+> **Ora resta solo la causalita' vera** -- il Bloch **ritardato** del passo precedente -- con
+> il suo fallback `A8` gia' contato (`_g_nb_prec_tot`, `_g_nb_prec_quando`), **che non e'
+> toccato**.
+> ⚠ **`SYNC_SPINORE` NON e' `SYNC_UPDATE`:** `_forza_sync`, `_wI_sync`, `_uno_sync` sono gli
+> ingredienti del torque `SU(2)` e **restano**. Due flag con `SYNC` nel nome, due cose diverse.
+
 
 > **→ LA LEGGE DELL'INERZIA (`omega = coppia/inerzia`) HA UNA SCHEDA SUA dal 2026-09-25:**
 > **`inerzia-spinoriale`**. Sta qui il rimando perche' `_passo_spinoriale` compare in
@@ -3794,3 +3864,74 @@ di far sembrare che scatti da sé.
 
 <!-- DA-CLAUDE-MD-2026-09-26:par.4 FINE -->
 
+
+---
+
+<!-- SCHEDA nome=aggiornamento-sincrono funzioni=step,_passo_spinoriale,_applica_flag flag=SYNC_UPDATE -->
+# ㉕ L'AGGIORNAMENTO SINCRONO — **`SYNC_UPDATE` / `--sync`**, e perché è **archiviato**
+
+> ### **STATO: `ARCHIVIATA`** *(2026-09-27, passo `(b)2` di `ETC-PASSO`)*.
+> **`--sync` resta ACCETTATO come no-op che si dichiara.** I rami sono in
+> `csv/_archivio/_sync_update.py`, tag **`pre-archivio-sync`**, blob `f845d30d`.
+>
+> ### ⚠ **E LA SCHEDA NASCE ADESSO, che è tardi.** `SYNC_UPDATE` è vissuto nel simulatore senza
+> una scheda propria: `H-REG-R` l'ha imposta **nel commit che lo archivia**. **Una legge senza
+> scheda è una legge che nessuno ha dovuto scrivere in forma chiusa** — ed è esattamente il modo
+> in cui, dice il presidio, sono nati `D01`-`D33`.
+
+## LA FORMA che dichiarava
+
+Il commento del flag diceva: *«`dph` (il ponte fase→twist/metrica) legge la fase dallo **SNAPSHOT**
+di inizio passo, non da quella appena aggiornata. Così pesi materia e `dph` vedono la **STESSA**
+fase (`t-1`): il passo diventa coerente e **indipendente dall'ordine di aggiornamento (Jacobi
+invece di Gauss-Seidel)**. Il cuore simplettico (`phivel→phi`) resta sequenziale.»*
+
+**In formula:** dato lo stato `S(t)`, ogni legge `L_k` calcola `L_k(S(t))` — non `L_k(S'(t))` con
+`S'` già mosso dalle leggi precedenti — e le scritture si applicano insieme.
+**Dimensioni:** nessuna grandezza nuova; è una regola sull'**ordine di lettura**, non sui valori.
+**Limiti (`A11`):** non introduceva né `clip` né pavimenti.
+
+## ✅ PERCHÉ È ARCHIVIATA, e non è un ripudio della forma
+
+### **La forma era giusta. Il RAGGIO era un quinto del passo.**
+
+| dove | usi di `SYNC_UPDATE` |
+|---|---|
+| `_passo_spinoriale` | **7** |
+| `step` | **6** |
+| `_applica_flag`, modulo, `batch_condensazione` | 4 + 1 + 1 |
+| ### `scuoti_vuoto` · `mitosi` · `rilassa_disegno` · `memoria_hebbiana_moto` | ### **0** |
+
+**E il numero che decide:** delle **56** letture miste `t`/`t+1` misurate dall'AST nella FASE 0 di
+`ETC-PASSO`, ### **tutte e 56 stavano FUORI dal suo raggio** — compresa l'unica di `step`, che viene
+da `scuoti_vuoto`.
+
+> ### **Quindi `--sync` non era una cura parziale di un difetto: era una cura di un difetto
+> DIVERSO.** Rendeva Jacobi l'**interno** di `step`, mentre le letture miste stanno **fra le
+> leggi**. **`ETC-PASSO` non lo estende: lo sostituisce sul passo intero**, ed è per questo che
+> archiviarlo **non lascia scoperta** nessuna proprietà.
+
+## MISURATO, prima di toccarlo
+
+**`--sync` AGIVA** — non era già inerte, e questo va detto perché è ciò che rende l'archiviazione
+una **decisione** e non una pulizia: su scena `(ii)(a)`, seme `11`, 3 passi,
+### **19 grandezze su 23 differivano** fra `--sync` acceso e spento.
+
+**Conseguenza per chi legge numeri vecchi:** ### i run fatti con `--sync` **non si confrontano** con
+quelli di oggi **senza dirlo**.
+
+## ⚠ DUE CONFUSIONI DA NON FARE
+
+| | |
+|---|---|
+| ### **`SYNC_SPINORE` NON è `SYNC_UPDATE`** | `_forza_sync`, `_wI_sync`, `_uno_sync` sono gli ingredienti del **torque `SU(2)`** e **restano vivi**. Due flag con `SYNC` nel nome, **due leggi diverse** *(scheda `torsione-spinore`)* |
+| **`_phi_t` NON era suo** | la fotografia della **fase** la legge **il percorso vivo** — `z = np.exp(1j*_phi_t)` — e **resta** |
+
+## E UNA LEGGE CHE PERDE UN'ECCEZIONE
+
+`if SCUOTIMENTO and not SYNC_UPDATE` → ### `if SCUOTIMENTO`.
+**Lo scuotimento del vuoto sullo spinore ora agisce SEMPRE**, e **non è una legge nuova: è la
+stessa senza l'eccezione**. Il suo commento lo chiedeva già: *«le due leggi devono essere identiche
+— il vuoto è lo stesso vuoto»*.
+**`9-ter`: il numero delle leggi SCENDE** — 7 blocchi condizionali e 9 ternari in meno, **zero
+aggiunti**.
