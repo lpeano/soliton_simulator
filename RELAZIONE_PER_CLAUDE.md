@@ -4110,3 +4110,43 @@ impediscono nulla)*.
 
 **Il prossimo passo è `H-ETC-2` DA SOLO, prima della cura: è lui a decidere se la cura è
 misurabile.** Non parte senza l'approvazione.
+
+---
+
+# ⚖ **LE DIECI AMBIGUE SONO DECISE — e una era un mio errore** *(risposte di Luca, 2026-09-27)*
+
+**`blocca_run_base` delle 23 `CENS-*` ora è: 5 `SI` · 18 `NO` · 0 aperte.**
+*(Tabella intera: `doc/CURE_fisica_ordine.md` par.6, **rigenerata** dall'indice — `L-NUMERI`.
+La colonna **chi** distingue le decisioni di Luca dall'applicazione della regola da parte mia.)*
+
+## La correzione del guardiano, e va detta per prima
+
+> ### ⚠ **`CENS-B12` (`KERNEL_ALPHA`) era un mio `SI`, e Luca l'ha messo a `NO`.**
+> **Non blocca il run base: blocca la PROVA 3** *(universalità)* — la misura del principio di
+> equivalenza va fatta **prima della PROVA 3**.
+> ### **Il mio `SI` avrebbe bloccato il run base con una misura SOSPESA** dalla decisione (1).
+> **E questo è il punto che brucia:** è **esattamente** la conseguenza che avevo segnalato come
+> aperta — *«se una voce prende `SI`, il run base resta bloccato da una misura appena sospesa»* —
+> e l'avevo **applicata io stesso alla voce sbagliata**, nella stessa pagina in cui la segnalavo.
+> **Avere visto la forma dell'errore non mi ha impedito di commetterlo.**
+
+## Le altre nove
+
+| voci | decisione | che cosa significa |
+|---|---|---|
+| **`CENS-A1`** | ### **`SI`** | si chiude con la decisione **(e)** sul legame `phi`-spinore |
+| `CENS-B1` `B2` `B5` `B8` `B13` `B14` | `NO` | **leggi ATTIVE, restano attive** *(decisione 3)*; la nota di ciascuna dice **«da misurare dopo il run base»** |
+| `CENS-B3` `B4` | `NO` | **la cura è DICHIARARE che il ramo OFF non esiste** — non si misura un ramo che non c'è, si scrive che non c'è |
+| `CENS-B6` | `NO` | progetto |
+
+## E nello stesso commit, il punto 4 del TODO della FASE 0
+
+**`CENS-B7` aveva un `motivo` scritto da me, e la FASE 0 l'ha smentito.** Diceva *«`--sync` è la
+cura (a) stessa»*. **Non lo è:** il raggio di `SYNC_UPDATE` è `step` + `_passo_spinoriale`, cioè
+**una legge su cinque**, e **tutte e 56** le letture sporche stanno **fuori** da quel raggio.
+**(a) non MISURA `--sync`: lo ESTENDE.** Il `blocca_run_base = SI` resta corretto.
+
+> ### 🛑 **STOP, come da tuo chiarimento.** La FASE 0 è chiusa e pushata *(`ae8d056`)*, le risposte
+> sono applicate, **e non scrivo una riga di codice per (a) finché non approvi**.
+> **Il primo passo quando approvi è `H-ETC-2` DA SOLO** — è lui a decidere se la cura è misurabile,
+> e se **passa** sul codice di oggi mi fermo invece di consegnarlo.
