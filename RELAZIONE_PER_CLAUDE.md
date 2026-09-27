@@ -3554,3 +3554,125 @@ metro)*: distanza di grafo dei nati dalla massa più vicina, al passo 120, **`p0
 > **E il limite della misura è dichiarato:** è un **pilota**, non il run base, e la zona è misurata
 > **al checkpoint successivo** alla nascita, non all'istante in cui il nodo nasce.
 
+
+---
+
+# 🔬 **SCIOGLIMENTO: `H1` e `H2` sono CONFERMATE DAL SORGENTE, prima di qualunque run** *(2026-09-27)*
+
+*(Mandato di Luca: **solo diagnosi**, nessuna legge si tocca, criteri prima, test a run chiuso.
+**Non propongo cure:** la scelta fra *«cambiare la scena»* e *«collegare `phi` allo spinore»* è
+sua. Criteri in `doc/TASK_HISTORY/2026-09-27_scioglimento.md`; voce `SCIOGLIMENTO-FASE`.)*
+
+## ✅ `H1` — **la scena NON tocca `phivel`**
+
+`_semina_masse_coerenti` scrive **due** cose e basta: `net.phi[idx]` e `net.phi0[idx]`.
+**`phivel` non compare.** I nodi delle masse tengono il `phivel` della **semina** (`:2767`):
+`normal(0, _CALORE_INIT)`, oppure `chi * normal(_CALORE_INIT, _CALORE_INIT*0.5)` col calore
+vettoriale.
+
+> **La scena mette i nodi IN FASE e li lascia con VELOCITÀ DI FASE CASUALI.**
+
+## ❗ `H2` — **confermata PER STRUTTURA, non come sospetto**
+
+Al sito di chiamata (`:5194-5196`):
+
+```python
+A = w * np.cos(self.phi0[i] - self.phi0[j])      # pesi d'arco  x  cos della fase INIZIALE
+z = np.exp(1j * _phi_t)                          # la fase CORRENTE
+coppia = self._coppia_interferenza(A, z)
+```
+
+Nel ramo **`CAMPO_SPINORIALE + FORK_SU2`** — quello del driver — il ritorno è
+
+```python
+K_C * np.imag(np.conj(_a) * (_c00 + _c01) + np.conj(_b) * (_c10 + _c11))
+```
+
+### **`z` non compare.** Compaiono solo `_a`, `_b` *(da `_psi_spinor`)* e `A`.
+
+E **`A` non contiene la fase corrente**: contiene `w` e **`phi0`**, la fase **iniziale**.
+E **`_psi_spinor` non contiene `phi`**: nasce da `_bloch_a_spinore(nb)` (`:1957`), che usa
+`th = arccos(nb_z)` e `ph = arctan2(nb_y, nb_x)` — **l'azimut del Bloch**.
+
+> ### 🎯 **In quel ramo `d(coppia)/d(phi) = 0` ESATTAMENTE. Non è un effetto piccolo: è ASSENZA DI DIPENDENZA.**
+>
+> **⚠ Ma c'è una guardia**, ed è perché il test numerico serve lo stesso: il ramo richiede
+> `len(_psi_spinor) >= n`, e se **fallisce** si cade sul ramo scalare finale
+> `K_C*imag(conj(z)*(mat(A)@z))`, che **dipende da `phi`**.
+> **Quante volte la guardia tiene nel run è `S2b`** — la verifica sui flag che hai chiesto.
+
+## ❗ **La riduzione al limite `(e^{i phi}, 0)`: nell'inizializzazione reale NON vale**
+
+| | |
+|---|---|
+| il limite **dichiarato** nel docstring | `(e^{i phi}, 0)` — prima componente **di modulo 1 e fase `phi`** |
+| l'inizializzazione **reale** (`_estendi_psi_spinor`, `:1952-1962`) | `(cos(th/2), sin(th/2) e^{i ph_Bloch})` — prima componente **REALE**, e **`phi` non entra affatto** |
+
+**Coincidono solo se `th = 0`, e nemmeno allora**: lì la prima componente vale `1`, non `e^{i phi}`.
+### **È un REGIME DICHIARATO, non lo stato iniziale.**
+
+## ❗ `H5` — **anche `ritmo()` NON legge `phi`**, e i residui su `r_k` sono DUE
+
+**Da dove prende la frequenza, nel run:** con `CAMPO_SPINORIALE` acceso, da **`psi_spin[:,0]`**,
+non da `self.psi`. E `psi_spin = mat(w) @ (amp * _psi_spinor)` (`:4018-4020`) — cioè **dallo
+spinore, che non contiene `phi`**. *(Il ramo su `phi` è solo un **fallback** se `_psi_spinor`
+manca.)*
+
+| | |
+|---|---|
+| **`A3` — CURATO** | la normalizzazione usa la mediana di `\|f\|` del passo **PRECEDENTE**: il punto fisso `median(x) = 1` **per identità** è stato tolto |
+| **`A2` — RESIDUO** | ma quella mediana è **GLOBALE**: **`r_k` di una massa è misurato contro l'intero universo**, non contro il proprio vicinato |
+
+## ❗ `H4` — **il Kuramoto usa `pos` e il centro di massa GLOBALE**, e una parte **si cancella**
+
+```python
+cmv   = (pos * I2).sum(0) / I2.sum()        # centro di massa GLOBALE
+r_cm  = norm(pos - cmv) + LAM*0.5           # <- `pos`
+pozzo = I2.sum() / r_cm                     # <- somma GLOBALE
+prof_rel = pozzo / media_p                  # media pesata sui VICINI
+```
+
+* **`I2.sum()` SI CANCELLA in `prof_rel`** *(numeratore e denominatore)*: quel residuo `A2` è
+  **INERTE**. **Dirlo è ciò che distingue una lettura attenta da una frettolosa.**
+* **`cmv` e `pos` NON si cancellano:** `r_cm` è la distanza dal **centro di massa globale**,
+  calcolata **sul disegno**. ### **Residuo `A3-DISEGNO` + `A2`, attivo.**
+
+> **E il commento lì accanto — *«Nessuna media globale entra nella legge locale»* — è riferito a
+> `scala_shear_locale`: è vero di quello e falso di `pozzo`, quattro righe sopra.**
+> **Non è una bugia: è un commento che parla di meno di quanto il lettore gli attribuisce.**
+
+## 🎯 **IL QUADRO DI STRUTTURA** — e va letto come struttura, **non ancora come causa**
+
+`phi` evolve **solo** per `phivel` e Kuramoto (`:5442`). **La coppia non la legge; `ritmo()` non la
+legge.**
+
+### **L'UNICA cosa che agisce su `phi` per riallinearlo è il Kuramoto — la cui forza passa da `pos` e dal centro di massa globale.**
+
+**Quanto pesi, e se basti a spiegare `0.999 → 0.20`, lo dicono le misure. Finché non le ho, non lo
+dico.**
+
+## 📌 L'ORIENTAMENTO DI LUCA — **registrato, NON deciso, NON implementato**
+
+*(Lo dichiara lui stesso: non è una decisione e non si implementa prima delle misure. Sta qui
+perché chi legge il repo lo trovi.)*
+**(1)** la fase come **orologio**: `dphi/dt = omega0*r_k + delta_k`, con `delta_k` *(l'attuale
+`phivel`)* come **eccitazione**, nulla o quasi per una massa a riposo; **(2)** conta la differenza
+di **`r_k` fra massa e vuoto** *(dilatazione del tempo)*, non `omega0` — **possibile origine della
+spinta come gradiente di fase**; **(3)** **una sola fase**: lo spinore porta `phi` come fase globale
+`e^{i phi/2}`, così **coppia, ritmo e campo vedono la stessa `phi`**.
+**Alternativa aperta:** `phi` come **onda con inerzia** *(sine-Gordon)* — e allora basterebbe una
+**condizione iniziale coerente**.
+
+### **Le misure `H1`-`H5` devono dire QUALE di queste letture regge.**
+
+## 🛑 Due cose che **decidi tu**, e le dico invece di prenderle
+
+1. ❗ **`S1b` NON richiede di modificare il simulatore, e CORREGGO ciò che avevo scritto poco
+   sopra:** `phivel` si impone **nello script di test**, subito dopo `avvia_test(...)()`, con
+   `net.phivel[idx] = media`. **Nessun file del simulatore viene toccato**, e lo `STOP` che
+   avevo messo su `S1b` **cade**.
+2. **`H1` e `H2` non sono alternative:** `H1` dice che le masse **partono** con velocità casuali,
+   `H2` che **nulla le riallinea**. **Se `H2` è vera, `H1` da sola non spiegherebbe un recupero —
+   perché non c'è recupero possibile.** Quale sia dominante è **misurabile** (`S1` + `S2`), e va
+   misurato prima di raccontarlo.
+
