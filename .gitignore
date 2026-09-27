@@ -36,3 +36,5 @@ db/
 # Non vanno in git (decisione di Luca): stessa regola dei `.pkl`. Nell'INVENTARIO si
 # committano percorso, sha1 dei byte grezzi e il comando che li rigenera.
 csv/_test_fork/_pilota_prova1/stati/
+csv/_test_fork/_pilota_prova1/*.mp4
+csv/_test_fork/_pilota_prova1/FOTOGRAMMA_*.png

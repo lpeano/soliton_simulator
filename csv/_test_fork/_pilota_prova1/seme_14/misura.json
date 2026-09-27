@@ -1,5 +1,6 @@
 {
  "LAM": 0.8,
+ "blob_sim": "e203f9a8",
  "blocchi": [
   {
    "archi": 468985,
@@ -1602,14 +1603,23 @@
   "vuoto": 11559
  },
  "dphi": 12.566370614359172,
+ "frames": [],
  "kappa": 3,
  "kappa_regola": "il piu' piccolo `kappa` con richiamo >= 0.99 su ogni massa",
  "n0": 12771,
  "n_finale": 13372,
+ "ogni": 0,
  "passi": 120,
  "pozzo_d": true,
  "r_regione": 4.096438164464869,
+ "salvataggio": true,
  "seme": 14,
  "sep": 6.1158,
- "sigma_scena": 0.05
+ "sigma_scena": 0.05,
+ "stati": [
+  "C:\\Users\\lpeano\\soliton_simulator\\csv\\_test_fork\\_pilota_prova1\\stati\\stato_seme14_passo000000.npz",
+  "C:\\Users\\lpeano\\soliton_simulator\\csv\\_test_fork\\_pilota_prova1\\stati\\stato_seme14_passo000040.npz",
+  "C:\\Users\\lpeano\\soliton_simulator\\csv\\_test_fork\\_pilota_prova1\\stati\\stato_seme14_passo000080.npz",
+  "C:\\Users\\lpeano\\soliton_simulator\\csv\\_test_fork\\_pilota_prova1\\stati\\stato_seme14_passo000120.npz"
+ ]
 }

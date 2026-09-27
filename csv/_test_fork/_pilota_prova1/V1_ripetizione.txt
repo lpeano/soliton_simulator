@@ -1,0 +1,24 @@
+============================================================================================================
+`V1` GRATIS -- il salvataggio ha toccato la FISICA?
+============================================================================================================
+  primo pilota  : i `misura.json` al commit c4517a9
+  secondo run   : i `misura.json` sul disco (con `--salva-stati --ogni 2`)
+  Il blob del simulatore e' LO STESSO nei due run: `e203f9a8` (byte grezzi) /
+  `c968d4d8` (git), dal registro dei run. Quindi il confronto VALE.
+
+  ⚠ E I SEMI NON VALGONO UGUALE: `--ogni 2` e' andato SOLO al seme 11, che quindi esercita
+    `salva_fotogramma` -> `pozzo_grafo` (il test FORTE). Gli altri tre esercitano solo
+    `salva_stato`, che copia array (test DEBOLE).
+
+  seme | forza del test          | campi diversi | esito
+    11 | FORTE (pozzo_grafo)     |             0 | IDENTICI
+    12 | debole (solo salva_stato) |             0 | IDENTICI
+    13 | debole (solo salva_stato) |             0 | IDENTICI
+    14 | debole (solo salva_stato) |             0 | IDENTICI
+
+  ✅ **`V1` E' PROVATO: ZERO campi diversi su 4 semi e 120 passi.**
+  Il salvataggio degli stati e dei fotogrammi NON tocca la fisica, e la prova non e' un
+  giro corto: e' il run intero, ripetuto.
+  ⚠ Con la distinzione detta sopra: il seme 11 prova anche `pozzo_grafo` con lo
+    snapshot/restore dei contatori; gli altri tre provano il solo `salva_stato`.
+============================================================================================================

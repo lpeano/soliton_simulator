@@ -964,3 +964,28 @@ committeranno **percorso**, **`sha1` dei byte grezzi** e il **comando verbatim**
 rigenera. -> `STATI-LOCALI`.
 
 **E non ci sono `.pkl` ne' dati nuovi:** entrambi leggono i `misura.json` committati in `c4517a9`. **Per rigenerare i referti basta rilanciare i due comandi.**
+
+## Aggiunto il 2026-09-27 — **il VIDEO della scena del pilota** *(`VIDEO-SCENA`)*
+
+> **⚠ IL VIDEO E I FOTOGRAMMI NON SONO IN GIT** *(`STATI-LOCALI`)*: `8.56 MB` il video,
+> `~2 MB` ciascun PNG. **Qui ci sono `sha1`, percorso e comando**, che e' cio' che li rende
+> rigenerabili — **il sistema e' deterministico, quindi il dato E' il comando.**
+
+| file | sha1 (byte grezzi) | come si rigenera |
+|---|---|---|
+| `csv/_test_fork/_pilota_prova1/VIDEO_scena_seme11.mp4` | `bcfb95cb2cce4a6e` | `python csv/_test_fork/_video_scena.py --fps 8 --dpi 120` |
+| `csv/_test_fork/_pilota_prova1/FOTOGRAMMA_passo000.png` | `a9959ed48811fff2` | `ffmpeg -i VIDEO_scena_seme11.mp4 -vf "select=eq(n\,0)" -vframes 1 FOTOGRAMMA_passo000.png` |
+| `csv/_test_fork/_pilota_prova1/FOTOGRAMMA_passo040.png` | `066b5daccf067302` | `ffmpeg -i VIDEO_scena_seme11.mp4 -vf "select=eq(n\,20)" -vframes 1 FOTOGRAMMA_passo040.png` |
+| `csv/_test_fork/_pilota_prova1/FOTOGRAMMA_passo080.png` | `2e203d0d3fb9fa6a` | `ffmpeg -i VIDEO_scena_seme11.mp4 -vf "select=eq(n\,40)" -vframes 1 FOTOGRAMMA_passo080.png` |
+| `csv/_test_fork/_pilota_prova1/FOTOGRAMMA_passo120.png` | `677dd3ec5348f094` | `ffmpeg -i VIDEO_scena_seme11.mp4 -vf "select=eq(n\,60)" -vframes 1 FOTOGRAMMA_passo120.png` |
+
+**E i fotogrammi `.npz` da cui il video nasce** *(61 file, `21.59 MB`, **locali**)*:
+`csv/_test_fork/_pilota_prova1/stati/frame_seme11_passo*.npz`, rigenerati da
+`python csv/_test_fork/_pilota_prova1.py --salva-stati --ogni 2` *(4 semi, 120 passi, ~48 min)*,
+col blob del simulatore **`e203f9a8`** *(byte grezzi)*, semi `11,12,13,14`, checkpoint
+`0/40/80/120`, data `2026-09-27`.
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_video_scena.py` | `25aedde8` | `--fps 8 --dpi 120` · `--max-frame N` | **il renderer a DUE pannelli**: a sinistra la **vista di sempre** col `vmax` **FISSO**, a destra la **coerenza interna** col riferimento **co-rotante per massa**; contorno delle regioni, diagnostici **per fotogramma**, didascalia `A3-DISEGNO` | **61/61 fotogrammi**, `8.56 MB`, `60.5 s` di rendering |
+| `csv/_test_fork/_pilota_prova1_braccio.py` | `6a80d3eb` | `--salva-stati --ogni 2` | salva stati, fotogrammi e coorti, **tutti LOCALI** | `V1` **provato**: `0` campi diversi contro il primo pilota |

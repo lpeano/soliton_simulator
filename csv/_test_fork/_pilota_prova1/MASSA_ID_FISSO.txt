@@ -1,0 +1,45 @@
+============================================================================================================
+`MASSA-ID-FISSO` -- le masse per lignaggio SOTTO UNA CONDIZIONE VERIFICATA
+============================================================================================================
+  ⚠ NON E' `MASSA-ID`: quella usa il lignaggio VERO (`conc_nodi`) ed e' BLOCCATA. Qui le
+    coorti del passo 0 si usano COME SE fossero il lignaggio, e vale SOLO SE `V-PRE` regge.
+
+------------------------------------------------------------------------------------------------------------
+`V-PRE` -- nessun nodo NATO tocca un nodo di massa. Verificata sull'ADIACENZA, che e' un
+           SOVRAINSIEME della parentela (il figlio nasce collegato a ENTRAMBI i genitori,
+           :6292-6293; l'antinodo Schwinger a `aa` e `bb`, :6413-6414).
+------------------------------------------------------------------------------------------------------------
+  seme | passo | n     | nati | archi | a contatto | d min  | d mediano | d <= LAM
+    11 |     0 | 12802 |    0 |     0 |          0 |      - |         - | 0
+    11 |    40 | 12802 |    0 |     0 |          0 |      - |         - | 0
+    11 |    80 | 12879 |   77 |     7 |          6 | 0.8816 |    0.9327 | 0
+    11 |   120 | 13444 |  642 |    58 |         49 | 0.8360 |    1.0260 | 0
+    12 |     0 | 12765 |    0 |     0 |          0 |      - |         - | 0
+    12 |    40 | 12766 |    1 |     0 |          0 |      - |         - | 0
+    12 |    80 | 12825 |   60 |     7 |          6 | 0.8727 |    1.0660 | 0
+    12 |   120 | 13445 |  680 |    73 |         55 | 0.8017 |    0.9959 | 0
+    13 |     0 | 12787 |    0 |     0 |          0 |      - |         - | 0
+    13 |    40 | 12787 |    0 |     0 |          0 |      - |         - | 0
+    13 |    80 | 12848 |   61 |     1 |          1 | 0.9805 |    0.9805 | 0
+    13 |   120 | 13459 |  672 |    46 |         37 | 0.8489 |    1.0029 | 0
+    14 |     0 | 12771 |    0 |     0 |          0 |      - |         - | 0
+    14 |    40 | 12771 |    0 |     0 |          0 |      - |         - | 0
+    14 |    80 | 12822 |   51 |     5 |          4 | 1.0655 |    1.1047 | 0
+    14 |   120 | 13372 |  601 |    60 |         48 | 0.8538 |    1.0022 | 0
+
+  ** `V-PRE` NON REGGE: 8 checkpoint con nodi nati a contatto con una massa. **
+  MI FERMO, come chiesto: la versione a lignaggio fisso NON e' applicabile, e i numeri
+  che ne uscirebbero sarebbero quelli di un insieme che NON e' la massa.
+
+  ⚠ E QUESTO NON CONTRADDICE IL `V3` DEL PILOTA (<<0 nascite nelle masse>>): i due
+    criteri usano METRI DIVERSI, e `V-PRE` e' piu' STRETTO.
+    `V3` chiama <<in massa>> un nodo entro `LAM = 0.8` di distanza DI GRAFO dalla
+    regione; `V-PRE` guarda l'ADIACENZA, qualunque sia la lunghezza dell'arco.
+    MISURATO: gli archi `nato--massa` hanno `d` fra 0.80 e 1.58, e QUELLI CON
+    `d <= LAM` SONO ZERO su tutti i semi e tutti i checkpoint. Quindi `V3` li
+    classifica <<vuoto>> A RAGIONE, e `V-PRE` li trova a contatto A RAGIONE.
+    IL FATTO NUOVO E': I NATI TOCCANO LE MASSE, anche se stanno APPENA OLTRE `LAM`.
+
+  ⚠ E L'ADIACENZA NON E' PARENTELA: e' un SOVRAINSIEME. Il contatto NON DIMOSTRA che
+    quei nodi siano figli di nodi di massa -- dimostra che NON SI PUO' ESCLUDERLO.
+    Il lignaggio vero non sta negli stati, ed e' il blocco di `MASSA-ID`.
