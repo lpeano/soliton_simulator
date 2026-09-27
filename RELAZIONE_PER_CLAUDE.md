@@ -2840,3 +2840,51 @@ booleani confrontati ....... 80   (erano 79: il flag nuovo entra nella configura
 > **inattesi** *(l'allarme)*, e i **`mancati`** — **cosi' se un giorno il driver smettesse di
 > passare `--pozzo-d`, il criterio lo DIREBBE** invece di tacere. Un criterio che accetta un flag
 > nuovo senza pretenderlo **si sarebbe spento da solo** alla prima dimenticanza (`A9`).
+
+---
+
+# ② ❌❌ **RITIRO: «piu' nodi = piu' scorciatoie» E' FALSA** *(rilievo di Luca, 2026-09-27)*
+
+**Cio' che avevo scritto** *(e resta leggibile nel referto di `W5`, perche' una versione ritirata
+che sparisce non insegna niente)*: *«nello stesso intervallo nascono ~640 nodi, e PIU' NODI = PIU'
+SCORCIATOIE = DISTANZA DI GRAFO PIU' CORTA, MECCANICAMENTE»*.
+
+## Perche' e' falsa — **verificato dal sorgente, riga per riga**
+
+**LA MITOSI NON ACCORCIA NIENTE:**
+
+```
+:6272   dh = self.d[sel] / 2
+:6292   self.i = np.concatenate([self.i[keep], a, m])
+:6293   self.j = np.concatenate([self.j[keep], m, b])
+```
+
+**L'arco `(a,b)` e' SOSTITUITO da `(a,m)` e `(m,b)`, ciascuno lungo `d/2`.** Il cammino attraverso
+il figlio e' lungo **`d/2 + d/2 = d`, cioe' QUANTO PRIMA.** **La mitosi non AGGIUNGE un cammino:
+ne SPEZZA uno in due pezzi che sommano allo stesso** — **ed e' la fonte dominante delle nascite**
+*(~640 su 120 passi)*.
+
+**L'UNICO CAMMINO DAVVERO NUOVO E' LO SCHWINGER, e porta un residuo `A3-DISEGNO`:**
+
+```
+:6368-6369   dd = _nasce(max(0.5 * ||pos[aa] - pos[bb]||, 0.05), 'schwinger', 2, 2)
+:6416        self.d = np.concatenate([self.d, dd, dd])
+```
+
+Aggiunge un cammino **PARALLELO** di lunghezza **`2*dd = ||pos_a − pos_b||`**, cioe' **la distanza
+euclidea da `pos`**. **E' una scorciatoia SOLO SE `2*dd < d` dell'arco**, e **quanto spesso lo sia
+NON E' MISURATO**: entra nel pilota.
+
+> ### **QUINDI: LE NASCITE NON ACCORCIANO IL GRAFO.**
+> **L'avvicinamento misurato viene dalle LUNGHEZZE DEI FILI** — i `d` degli archi si accorciano.
+> **E la domanda aperta e': si accorciano SOLO FRA LE MASSE, o OVUNQUE?** Se ovunque, il calo e'
+> **contrazione globale e non e' gravita'** — ed e' esattamente cio' che i **punti di controllo nel
+> vuoto** separano. **In coda come `FILI-CORTI`.**
+
+**⚠ IL MIO ERRORE NON ERA UN CALCOLO: ERA UN'ANALOGIA** *(«piu' nodi, piu' strade»)* **non
+verificata sul codice.** E' **`P1`**: l'associazione genera **candidati**, non conclusioni — **e la
+frase-spia era proprio «MECCANICAMENTE»**, che e' il modo in cui un'analogia si traveste da
+deduzione.
+
+**Il ritiro sta nel referto di `W5` E nello script che lo genera**, cosi' **una rigirata lo
+riproduce** invece di perderlo.

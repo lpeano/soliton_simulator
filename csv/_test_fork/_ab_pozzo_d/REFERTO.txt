@@ -54,3 +54,43 @@ COSA QUESTO A/B *NON* DICE:
     `3.2e-03` a 4 passi, `1.07e-01` a 12), quindi un effetto piccolo qui **non dice** che
     sia piccolo a campo maturo. Si scrive come LIMITE, non come «nessun effetto».
   - **la barra e' fra 4 semi**, il minimo che `P3` ammette: `t(3) = 3.182`.
+
+========================================================================================================
+❌❌ RITIRO DELLA MIA SPIEGAZIONE: «piu' nodi = piu' scorciatoie» E' FALSA
+     (rilievo di Luca, 2026-09-27, e VERIFICATO DAL SORGENTE riga per riga)
+========================================================================================================
+
+  CIO' CHE AVEVO SCRITTO, e resta leggibile qui perche' una versione ritirata
+  che sparisce non insegna niente:
+      «La distanza fra le masse CALA in entrambi i bracci... ma nello stesso
+       intervallo nascono ~640 nodi, e PIU' NODI = PIU' SCORCIATOIE = DISTANZA DI
+       GRAFO PIU' CORTA, MECCANICAMENTE.»
+
+  PERCHE' E' FALSA -- LA MITOSI NON ACCORCIA NIENTE:
+      :6272   dh = self.d[sel] / 2
+      :6292   self.i = np.concatenate([self.i[keep], a, m])
+      :6293   self.j = np.concatenate([self.j[keep], m, b])
+  L'arco (a,b) e' SOSTITUITO da (a,m) e (m,b), ciascuno lungo d/2. Il cammino
+  attraverso il figlio e' lungo d/2 + d/2 = d, cioe' QUANTO PRIMA. La mitosi
+  NON aggiunge un cammino: ne SPEZZA uno in due pezzi che sommano allo stesso.
+  E la mitosi e' la fonte DOMINANTE delle nascite (~640 su 120 passi).
+
+  L'UNICO CAMMINO DAVVERO NUOVO E' LO SCHWINGER, e porta un residuo `A3-DISEGNO`:
+      :6368-6369   dd = _nasce(max(0.5 * ||pos[aa] - pos[bb]||, 0.05), 'schwinger', 2, 2)
+      :6416        self.d = np.concatenate([self.d, dd, dd])
+  Aggiunge un cammino PARALLELO di lunghezza 2*dd = ||pos_a - pos_b||, cioe' LA
+  DISTANZA EUCLIDEA DA `pos`. E' una scorciatoia SOLO SE 2*dd < d dell'arco, e
+  QUANTO SPESSO lo sia NON E' MISURATO: e' una misura del pilota della PROVA 1.
+
+  QUINDI: LE NASCITE NON ACCORCIANO IL GRAFO. L'avvicinamento misurato viene
+  dalle LUNGHEZZE DEI FILI -- i `d` degli archi si accorciano.
+
+  LA DOMANDA APERTA, e il pilota della PROVA 1 la decide:
+      i fili si accorciano SOLO FRA LE MASSE, o OVUNQUE?
+  Se ovunque, il calo e' contrazione globale e NON e' gravita'. E' esattamente
+  cio' che i punti di CONTROLLO nel vuoto separano.
+
+  ⚠ IL MIO ERRORE NON ERA UN CALCOLO: era un'ANALOGIA («piu' nodi, piu' strade»)
+  non verificata sul codice. E' `P1`: l'associazione genera candidati, non
+  conclusioni -- e la frase-spia era proprio «MECCANICAMENTE».
+========================================================================================================
