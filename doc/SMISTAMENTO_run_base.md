@@ -11,7 +11,7 @@ mano**: si rigenera.)*
 > **per regola, non per giudizio**.
 
 ```
-voci nell'indice          777
+voci nell'indice          784
 in questo smistamento     137   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
 di cui blocca SI          6
 ```
@@ -219,7 +219,7 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D02](REVISIONE_SI_202
 ---
 
 **COSA QUESTA LISTA NON DICE:**
-- **non dice che le altre 640 voci siano irrilevanti**: dice che **non possono bloccare un run
+- **non dice che le altre 647 voci siano irrilevanti**: dice che **non possono bloccare un run
   base** perche' sono chiuse, sono teoria, o sono etichette locali di un sigillo.
 - **il titolo e' UNA riga**: la spiegazione sta nella fonte, e la fonte e' in colonna.
 - **`motivo` viene dalla COLONNA dell'indice**, non da una regola di questo script: se una riga
