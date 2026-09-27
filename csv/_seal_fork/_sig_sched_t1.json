@@ -1,0 +1,216 @@
+{
+ "blob": {
+  "dopo": "e287a43e",
+  "prima": "e06dcb4e"
+ },
+ "condizioni": {
+  "composizione": [
+   "apri",
+   "scuoti_vuoto",
+   "step",
+   "mitosi",
+   "rilassa_disegno",
+   "memoria_hebbiana_moto",
+   "chiudi",
+   "verifica_invarianti"
+  ],
+  "m": 70199,
+  "n": 2107,
+  "passi": 3,
+  "scena": "(ii)(a)",
+  "seme": 11
+ },
+ "criterio_1_stato": {
+  "atteso": "byte-identico",
+  "diverse": [],
+  "grandezze": 23,
+  "passa": true
+ },
+ "criterio_2_contatori": {
+  "atteso": "aperture == chiusure == passi == 3, disallineati == 0",
+  "nota": "_g_smp_gia_aperta passa da 4 per passo (in (c)1) a ZERO: l'IDEMPOTENZA NON SERVE PIU', il compositore SA di essere il primo. E' la misura che conferma il progetto.",
+  "passa": true,
+  "valori": {
+   "_g_sm_nascite": 1,
+   "_g_sm_patol": 0,
+   "_g_smp_aperture": 3,
+   "_g_smp_chirurgie": 0,
+   "_g_smp_chiusure": 3,
+   "_g_smp_d_chiusure": 3,
+   "_g_smp_disallineati": 0,
+   "_g_smp_gia_aperta": 0
+  }
+ },
+ "criterio_3_deve_fallire": {
+  "atteso": "un chiamante che SALTA l'esecutore deve essere RIFIUTATO; chi lo usa deve passare",
+  "casi": {
+   "salta.py": {
+    "atteso_rifiutato": true,
+    "motivo": "fa avanzare una rete con `.step()` (:4) senza `passo_pieno`: `net.step()` NON E' UN PASSO, e cosi' `scuoti_vuoto`, `mitosi`, `rilassa_disegno`, `memoria_hebbiana_moto` non gira",
+    "passa": true,
+    "rifiutato": true,
+    "riga": 4
+   },
+   "usa.py": {
+    "atteso_rifiutato": false,
+    "motivo": null,
+    "passa": true,
+    "rifiutato": false,
+    "riga": 0
+   }
+  },
+  "passa": true,
+  "presidio": "H-P9"
+ },
+ "dettaglio_confronto": {
+  "a": "AVV_dopo.npz",
+  "b": "T1_dopo.npz",
+  "blob_sim_a": "e06dcb4e",
+  "blob_sim_b": "e287a43e",
+  "diverse": [],
+  "hashseed_a": "None",
+  "hashseed_b": "None",
+  "righe": [
+   {
+    "diversi": 0,
+    "grandezza": "d",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "d0",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "phi",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "phi_s",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "phivel",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "psi",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "psi_spin",
+    "identico": true,
+    "n": 4214
+   },
+   {
+    "diversi": 0,
+    "grandezza": "_psi_spinor",
+    "identico": true,
+    "n": 4214
+   },
+   {
+    "diversi": 0,
+    "grandezza": "_psi_prec",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "_spinor_lift",
+    "identico": true,
+    "n": 4214
+   },
+   {
+    "diversi": 0,
+    "grandezza": "omega_s",
+    "identico": true,
+    "n": 6321
+   },
+   {
+    "diversi": 0,
+    "grandezza": "_nb",
+    "identico": true,
+    "n": 6321
+   },
+   {
+    "diversi": 0,
+    "grandezza": "_nb_prec",
+    "identico": true,
+    "n": 6321
+   },
+   {
+    "diversi": 0,
+    "grandezza": "eta",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "tw",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "twp",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "vd",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "peq",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "mem_mot",
+    "identico": true,
+    "n": 6321
+   },
+   {
+    "diversi": 0,
+    "grandezza": "perc_chi",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "perc_geom",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "i",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "j",
+    "identico": true,
+    "n": 70199
+   }
+  ]
+ },
+ "sigillo": "T1 dello schedulatore: la composizione e' una lista, un solo esecutore",
+ "tutti_i_criteri": true
+}

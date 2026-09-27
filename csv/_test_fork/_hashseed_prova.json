@@ -1,8 +1,8 @@
 {
- "a": "C1_cnt.npz",
- "b": "AVV_dopo.npz",
- "blob_sim_a": "b5a713d1",
- "blob_sim_b": "e06dcb4e",
+ "a": "AVV_dopo.npz",
+ "b": "T1_dopo.npz",
+ "blob_sim_a": "e06dcb4e",
+ "blob_sim_b": "e287a43e",
  "diverse": [],
  "hashseed_a": "None",
  "hashseed_b": "None",

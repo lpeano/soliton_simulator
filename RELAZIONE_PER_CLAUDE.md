@@ -5055,3 +5055,82 @@ proposta che lo chiude davvero**.
 > ### ⚠ **E un limite mio:** tutte le tabelle vengono da analisi **statiche e per nome**, e in questa
 > sessione quel metodo mi ha ingannato **tre volte** sulla granularità delle righe. **I numeri sono
 > una base per decidere, non un verdetto**, e `T4` ha bisogno di **lettura umana sito per sito**.
+
+---
+
+# 🏗 **T1 — LO SCHELETRO DELLO SCHEDULATORE. Sigillo: tre criteri su tre** *(2026-09-28)*
+
+*(Piano approvato con le mie tre correzioni. `doc/PIANO_schedulatore_passo.md`, referto
+`csv/_seal_fork/_sig_sched_t1.json`.)*
+### **Blob: `e06dcb4e` → `e287a43e`.** Tag `pre-schedulatore-t1`.
+
+```
+PASSO_COMPOSIZIONE = ('apri', 'scuoti_vuoto', 'step', 'mitosi',
+                      'rilassa_disegno', 'memoria_hebbiana_moto', 'chiudi',
+                      'verifica_invarianti')
+```
+
+**`esegui_passo(net)` è l'unico esecutore**, e **tutti e sei i chiamanti** ci passano: `update()`, il
+benchmark, i due costruttori di scena, e il driver **in due punti**.
+
+## Il sigillo
+
+| criterio | atteso | esito |
+|---|---|---|
+| **① lo stato** | byte-identico | ### **23/23, 0 diverse** |
+| **② i contatori** | `aperture = chiusure = passi = 3`, `disallineati = 0` | ### **`3 · 3 · 3 · 0`** |
+| **③ il caso che deve FALLIRE** | un chiamante che **salta** l'esecutore va **rifiutato** da `H-P9` | ### **rifiutato** (e chi lo usa **passa**) |
+
+> ### 📌 **E una misura che conferma il progetto da sola:** `_g_smp_gia_aperta` passa da **4 per
+> passo** *(in `(c)1`)* a ### **ZERO**. **L'idempotenza non serve più: il compositore SA di essere il
+> primo.** `(c)1` era il primo abbozzo di questo confine, e il tag lo conserva.
+
+## Il timore di `(c)2` non si realizza, e ora so perché
+
+In `(c)1` avevo dichiarato che spostare `_smp_chiudi` fuori dalla legge avrebbe fatto controllare gli
+invarianti su **`d0` non ancora frenata**. ### **Era giusto per lo spostamento della SOLA chiusura.
+La tua lista li sposta INSIEME**, e fra i due non c'era nient'altro: **l'ordine relativo
+`chiudi → verifica_invarianti` è preservato**, quindi il controllo guarda `d0` **già frenata**.
+
+## Il caso che dice perché l'architettura batte la regola
+
+Il **ritorno anticipato** di `memoria_hebbiana_moto` chiudeva il freno **da sé**, con un commento che
+spiegava con cura *«sennò lo snapshot resterebbe aperto e il passo DOPO confronterebbe `d0` con quello
+del passo PRIMA»*. ### **Era una regola scritta e rispettata a mano in un punto solo.** Ora il confine
+**non dipende più da quale uscita la legge prende.**
+
+## Tre cose che cambiano e **non sono stato**
+
+**①** `verifica_invarianti` riceve `dove='esegui_passo'`: cambia **la stringa** in un referto
+d'eccezione. **②** ### **il benchmark perde il dettaglio per legge** — misurava le cinque chiamate
+una per una, ora il passo intero. **Lo dichiaro invece di lasciarlo scoprire**, e tornerà strumentando
+lo **schedulatore** (strato 5), **non ricopiando l'ordine**. **③** il ritorno anticipato non chiude
+più da sé.
+
+## Il contratto di `csv/_passo.py`, sostituito
+
+`composizione()` legge `PASSO_COMPOSIZIONE` **per AST** e **verifica che il driver usi
+`esegui_passo`**. Prima confrontava **due sequenze**, e serviva perché l'ordine viveva in **sei
+posti**: ora vive in **uno**. `passo_pieno` diventa **un involucro** — ### **prima ricostruiva il
+passo iterando la sequenza, cioè era il SETTIMO posto in cui l'ordine viveva.**
+**Il vecchio contratto non è cancellato** *(decisione 3)*: `_sequenze` resta, e `soli()` continua a
+cercare chi avanza con `step()` da solo.
+
+## E la mappa degli strati, nel piano (par.8)
+
+**1 Stato · 2 Leggi · 3 Schedulatore · 4 Configurazione · 5 Strumenti · 6 Interfacce**, con dove cade
+ogni pezzo di oggi. **Tre cose che la mappa rende visibili:**
+### **① lo strato 4 è il pezzo più grosso e NON è in `T1`-`T5`** — ~130 flag globali riassegnati da
+almeno tre funzioni *(e con lo strato 4 sparisce il limite che `_etc_rami_morti.py` ha dovuto
+dichiarare)*;
+**②** `pos` sta nello **strato 1 ma non nella fotografia**: ### **non è un divieto, è che il parametro
+non c'è**;
+**③** le 44 `osservatore` si dividono fra strato 2 e 5, e **il criterio non è il tipo** ma *«qualcuno
+dipende dal suo valore?»* — **da decidere 44 volte**.
+
+**E la facciata di compatibilità non è negoziabile:** gli script di `csv/` fanno
+`import soliton_simulator as S`, e ### **un `ImportError` in uno strumento vecchio è un reperto che non
+si rigira più**, cioè un difetto nuovo (par.7).
+
+> ### 🛑 **STOP. Il file non è spezzato**, come da tua decisione.
+> **Prossimo: `T2`** — i tipi, **e `mitosi` spezzata** mentre tutto è ancora byte-identico.

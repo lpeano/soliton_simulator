@@ -1192,3 +1192,25 @@ python csv/_test_fork/_hashseed_prova.py --confronta PRIMA.npz DOPO.npz
 **Referto:** `csv/_test_fork/_etc_schedulatore.json`. **Piano:** `doc/PIANO_schedulatore_passo.md`.
 **⚠ Analisi STATICA e PER NOME**, come la FASE 0: i tipi sono una **proposta da confermare
 leggendo**, e le `AMBIGUA` sono quelle che il mandato chiede di segnalare.
+
+## `T1` dello schedulatore, e il suo sigillo *(2026-09-28)*
+
+| referto | blob (byte) | esito |
+|---|---|---|
+| `csv/_seal_fork/_sig_sched_t1.json` | `48537064` | ### **tre criteri su tre**, blob `e06dcb4e` → `e287a43e` |
+
+**I tre criteri:** ① **byte-identico 23/23** · ② **contatori** `aperture = chiusure = passi = 3`,
+`disallineati = 0`, e ### **`gia_aperta` da 4 per passo a ZERO** · ③ **il caso che deve fallire**:
+`H-P9` **rifiuta** un chiamante che salta l'esecutore e **accetta** chi lo usa.
+
+```
+git checkout acaf86b~1 -- soliton_simulator.py
+python csv/_test_fork/_hashseed_prova.py --out=PRIMA.npz --seme=11 --passi=3
+git checkout HEAD -- soliton_simulator.py
+python csv/_test_fork/_hashseed_prova.py --out=DOPO.npz --seme=11 --passi=3
+python csv/_test_fork/_hashseed_prova.py --confronta PRIMA.npz DOPO.npz
+```
+
+**Il controllo ③ si rigira** creando due sorgenti sintetici — uno che fa `net.step()` in un ciclo,
+uno che chiama `esegui_passo` — e passandoli a `csv/_hook_presidi.py::_avanza_con_step`: **il primo
+deve essere rifiutato, il secondo deve passare.** *(I due file sono locali: il dato è il comando.)*
