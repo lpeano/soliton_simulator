@@ -1,0 +1,56 @@
+========================================================================================================
+`W5` -- A/B DI `POZZO-D`: la distanza fra le masse, ON contro OFF   (120 passi, 4 semi)
+========================================================================================================
+  un processo per braccio (`STANDARD 1`): 8 bracci. Avanzamento `passo_pieno` (`H-P9`).
+  seme 11   OFF n 12802 -> 13429   nonpos -1
+  seme 11   ON  n 12802 -> 13444   nonpos 0
+  seme 12   OFF n 12765 -> 13426   nonpos -1
+  seme 12   ON  n 12765 -> 13445   nonpos 0
+  seme 13   OFF n 12787 -> 13446   nonpos -1
+  seme 13   ON  n 12787 -> 13459   nonpos 0
+  seme 14   OFF n 12771 -> 13382   nonpos -1
+  seme 14   ON  n 12771 -> 13372   nonpos 0
+
+  LA DISTANZA DOPO 120 PASSI, per seme e per coppia
+  coppia                 seme              OFF           ON       ON-OFF   (passo 0 OFF)
+  massa_0|massa_1        11          10.371907    10.438317    +0.066411      10.911450
+  massa_0|massa_1        12           9.924306     9.921328    -0.002978      10.339683
+  massa_0|massa_1        13           9.600420     9.952564    +0.352144      10.706263
+  massa_0|massa_1        14          10.606205    10.564275    -0.041930      10.720379
+  massa_0|massa_2        11          10.254992    10.192975    -0.062017      11.060945
+  massa_0|massa_2        12           9.815973     9.729043    -0.086930      10.755176
+  massa_0|massa_2        13           9.662834     9.598092    -0.064742      10.883329
+  massa_0|massa_2        14          10.962800    11.051728    +0.088928      10.751834
+  massa_1|massa_2        11           9.854163    10.105077    +0.250914      10.213584
+  massa_1|massa_2        12           9.538281     9.517800    -0.020481      10.807937
+  massa_1|massa_2        13           9.420395     9.612845    +0.192450      10.019708
+  massa_1|massa_2        14           9.774839     9.796325    +0.021486      11.116221
+
+  LA BARRA E' FRA SEMI (`P3`), e i bracci sono APPAIATI sul seme
+  massa_0|massa_1        Delta medio  +0.093412   sd  0.178213   t(3) 3.182   IC95 [-0.190125, +0.376949]   CONTIENE LO ZERO
+        -> si scrive come LIMITE: il flag non sposta la distanza di piu' di
+           0.283537 (risoluzione di QUESTO test), su una distanza di ~10.37.
+  massa_0|massa_2        Delta medio  -0.031190   sd  0.080853   t(3) 3.182   IC95 [-0.159827, +0.097446]   CONTIENE LO ZERO
+        -> si scrive come LIMITE: il flag non sposta la distanza di piu' di
+           0.128637 (risoluzione di QUESTO test), su una distanza di ~10.25.
+  massa_1|massa_2        Delta medio  +0.111092   sd  0.131034   t(3) 3.182   IC95 [-0.097383, +0.319567]   CONTIENE LO ZERO
+        -> si scrive come LIMITE: il flag non sposta la distanza di piu' di
+           0.208475 (risoluzione di QUESTO test), su una distanza di ~9.85.
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 80
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 80.
+
+  (ramo OFF. Il ramo ON aggiunge SOLO `--pozzo-d`: lo dice la colonna `flag` di
+   ogni braccio, letta dal modulo e non da questa riga.)
+
+========================================================================================================
+COSA QUESTO A/B *NON* DICE:
+  - **non e' la `PROVA 1`**: dice se la CURA sposta la distanza a 120 passi, non se le
+    masse si avvicinano.
+  - **120 passi sono un GIRO CORTO**: la divergenza `L_pos/L_d` si ACCUMULA (misurato:
+    `3.2e-03` a 4 passi, `1.07e-01` a 12), quindi un effetto piccolo qui **non dice** che
+    sia piccolo a campo maturo. Si scrive come LIMITE, non come «nessun effetto».
+  - **la barra e' fra 4 semi**, il minimo che `P3` ammette: `t(3) = 3.182`.

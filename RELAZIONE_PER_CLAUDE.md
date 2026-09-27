@@ -2740,3 +2740,53 @@ rimanenti su un blob diverso dai primi**, e l'A/B misurerebbe **due codici**.
 
 **In coda come `ETICHETTA-A13`**, col criterio di chiusura: a run finito, le tre citazioni nel
 codice; **e la revisione — che e' un reperto datato — la decidi tu**: si annota o si lascia.
+
+---
+
+# `W5` — **IL REFERTO: la cura NON SPOSTA la distanza a 120 passi.** *(4 semi, 2026-09-27)*
+
+```
+coppia            Delta medio (ON-OFF)   sd fra semi   IC95 con t(3)=3.182         esito
+massa_0|massa_1        +0.093412           0.178213    [-0.190125, +0.376949]   contiene lo zero
+massa_0|massa_2        -0.031190           0.080853    [-0.159827, +0.097446]   contiene lo zero
+massa_1|massa_2        +0.111092           0.131034    [-0.097383, +0.319567]   contiene lo zero
+```
+
+**Tutti e tre contengono lo zero, e i segni NON sono concordi** *(due positivi, uno negativo)*.
+**E i quattro semi, per coppia, cambiano segno fra loro** — per `massa_0|massa_1`:
+`+0.066 / -0.003 / +0.352 / -0.042`.
+
+> ### **SI SCRIVE COME LIMITE, NON COME «NESSUN EFFETTO».**
+> **A 120 passi il flag non sposta la distanza di piu' di `0.284` / `0.129` / `0.208`** — la
+> **risoluzione di questo test** — su distanze di `~10.4` / `10.3` / `9.9`, cioe' **fra l'`1.3 %`
+> e il `2.7 %`**. **NON E' MISURATO.** *(E il nullo non era zero: la dispersione fra semi al passo 0
+> valeva `sd 0.146`-`0.510`, e questa risoluzione e' della stessa taglia — il test ha la potenza che
+> il nullo prometteva, ne' piu' ne' meno.)*
+
+**`W3` tiene anche a 120 passi e con la mitosi viva:** `_pozzo_d_nonpos = 0` su **tutti** i bracci
+ON, e i nodi crescono da `~12 780` a `~13 420` *(`639.5` nati a OFF, `648.8` a ON)*.
+
+## ⚠ UN DATO CHE NON E' DELLA CURA, E UN CONFONDENTE CHE NON POSSO SCIOGLIERE CON QUESTI DATI
+
+**La distanza fra le masse CALA, in ENTRAMBI i bracci** *(media su 4 semi, `dopo − passo0`)*:
+
+```
+OFF  m0|m1 -0.543734   m0|m2 -0.688671   m1|m2 -0.892443   (l'ultimo: IC95 NON contiene lo zero)
+ON   m0|m1 -0.450323   m0|m2 -0.719862   m1|m2 -0.781351   (il primo: IC95 NON contiene lo zero)
+```
+
+> ### **NON E' LA `PROVA 1`, E NON VA LETTO COME «LE MASSE SI AVVICINANO».**
+> **Nello stesso intervallo nascono `~640` nodi.** **Piu' nodi = piu' scorciatoie = distanza di
+> grafo piu' corta, MECCANICAMENTE** — la densificazione accorcia i cammini **senza che nulla si
+> attragga**. **I due effetti, con questi dati, non si separano.**
+>
+> **E la separazione ESISTE ed e' gia' scritta:** sono i **punti di CONTROLLO nel vuoto**, alla
+> stessa distanza iniziale e lontani dalle masse, che `csv/_osservabile_p1.py` sa calcolare
+> *(`K4`)*. **Il mio braccio NON li ha salvati** — ha registrato solo le coppie di masse. **E' un
+> difetto dello strumento di misura, non del sistema**, e va in coda.
+
+**Che cosa questo dice alla decisione su `POZZO_D`:** la cura e' **corretta e dimostrata** (`W4`:
+muovere solo `pos` non sposta il pozzo di un bit) e **inerte a flag spento** (`W1`), **ma il suo
+effetto sulla distanza fra le masse a 120 passi non e' misurabile** con 4 semi. **Accenderla e' una
+scelta di PRINCIPIO** — `pos` e' il disegno e non deve entrare nella gravita' (**`A3-DISEGNO`**) —
+**non una scelta sostenuta da un effetto misurato.** **Decidi tu.**
