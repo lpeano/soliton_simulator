@@ -1,0 +1,18 @@
+[TIMBRO] _osservabile_p1.py  sha1-BYTE 7854c7b7  committato e pulito
+[TIMBRO] _massa_id.py  sha1-BYTE 1f76a99b  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
+========================================================================================================
+`Y`-MEDOIDE PESATO -- il collaudo su CASO NOTO (cammino di 21 nodi)
+========================================================================================================
+  uniformi -> lo stesso di `OP.medoide`        PASS
+      medoide non pesato 10   pesato con pesi uniformi 10
+  peso a SINISTRA -> il centro si SPOSTA       PASS
+      medoide 10 -> 2   (se i pesi fossero IGNORATI resterebbe 10: e' la riga che fallisce)
+  negativi TAGLIATI a zero, e CONTATI          PASS
+      col taglio 4, con quei nodi assenti 4   negativi contati 11 (52.4 %)
+  somma ZERO -> ripiego NON pesato, CONTATO    PASS
+      ripiego 1 volta, medoide 10 = quello non pesato 10
+
+  4/4
+
+  ⚠ E QUESTO NON E' `MASSA-ID`: e' il suo CENTRO. `Y1`/`Y2` richiedono di registrare le
+  regioni nel simulatore, e il mandato dice di FERMARSI e dirlo. Vedi il docstring.

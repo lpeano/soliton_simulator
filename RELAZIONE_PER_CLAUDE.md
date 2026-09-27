@@ -3471,3 +3471,50 @@ qui lo si **importa** e si aggiunge ciò che manca.)*
 > **Dichiarare un limite non è misurarlo** — è la stessa lezione di `CTRL-RISCELTA`, e stavolta
 > l'ho applicata **prima** che il numero servisse a concludere qualcosa.
 
+
+---
+
+# 🛑 **`MASSA-ID` È BLOCCATA, e i blocchi sono DUE — verificati dal disco** *(2026-09-27)*
+
+Il mandato dice *«se un criterio richiede di modificare il simulatore, FERMATI e dillo»*.
+**Lo richiede. Mi fermo, e dico perché.**
+
+### ① La scena **non registra** le regioni nel tracking — `soliton_simulator.py:7398`
+
+```
+# ⚠ `conc_nodi` NON viene toccato, di proposito: le regioni NON sono masse SEMINATE, e
+#   marcarle come tali direbbe che il lignaggio viene da una semina che non c'e' stata.
+```
+
+**Nessun `mass_id` esiste**, e `indici_massa_vivi()` non restituirebbe niente. Registrarle — con
+l'`origine="regione coerente"` che la preoccupazione del commento richiede — significa
+**modificare `_semina_masse_coerenti`**, cioè **il simulatore**.
+
+### ② Gli stati salvati **non portano il lignaggio**
+
+Campi nello `.npz`: **`i, j, d, phi, pos, n, passo, seme, blob`**. **`conc_nodi` non c'è.**
+Quindi **anche se la registrazione ci fosse**, `MASSA-ID` **non sarebbe calcolabile offline da
+questi stati**: servirebbe estendere il salvataggio in `_pilota_prova1_braccio.py`, che è **nel
+percorso del run in corso**.
+
+> ### **CONSEGUENZA, detta chiaramente: `MASSA-ID` NON entra in questo run, nemmeno a posteriori.**
+> **Serve una decisione di Luca**, e le strade sono due: *(a)* registrare nel simulatore **e**
+> salvare `conc_nodi`, **e rifare il run**; *(b)* tenere il run com'è e rimandare `MASSA-ID`.
+> **Non la prendo io.**
+
+## ✅ Ciò che è stato consegnato lo stesso: **il MEDOIDE PESATO**, collaudo **4/4**
+
+| caso | risposta nota | misurato |
+|---|---|--:|
+| pesi **uniformi** | = `OP.medoide` | `10 = 10` |
+| ### peso tutto a **SINISTRA** | ### il centro **si sposta** | ### **`10 → 2`** |
+| negativi **tagliati** e contati | = togliere quei nodi | `4 = 4`, negativi `11/21` *(`52.4 %`)* |
+| somma pesi **zero** | ripiego non pesato, **contato** | `1 ripiego`, `10 = 10` |
+
+**La riga che conta è la seconda:** è quella che **fallisce se i pesi vengono ignorati** — cioè
+esattamente l'errore che `T4` non sapeva prendere.
+
+**E quando il lignaggio manca, lo strumento SI FERMA con la ragione esatta**, invece di ricadere in
+silenzio sulle coorti del passo 0: sono **l'insieme congelato** che `MASSA-ID` esiste per superare,
+e usarle darebbe **un numero che sembra nuovo ed è quello vecchio**.
+
