@@ -1,0 +1,85 @@
+{
+ "atteso_oggi": 8,
+ "blob_sim": "e203f9a8b9b74278e610c6c0997f01659d6e9f6d",
+ "collaudo": [
+  {
+   "caso": "BUONO (deve dare 0 senza-w)",
+   "con_w": 4,
+   "passa": true,
+   "senza_w": 0
+  },
+  {
+   "caso": "CATTIVO (deve dare 1, in `_aiuto`)",
+   "con_w": 3,
+   "dove": "_aiuto",
+   "passa": true,
+   "senza_w": 1
+  },
+  {
+   "caso": "`fuori_dal_passo` NON deve essere contata",
+   "passa": true
+  }
+ ],
+ "con_w": [
+  {
+   "dentro": "step",
+   "riga": 5220,
+   "sorgente": "psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi(w)"
+  },
+  {
+   "dentro": "step",
+   "riga": 5382,
+   "sorgente": "psi_sync = psi_t if SYNC_UPDATE else self.calcola_psi(w)"
+  }
+ ],
+ "leggi": [
+  "scuoti_vuoto",
+  "step",
+  "mitosi",
+  "rilassa_disegno",
+  "memoria_hebbiana_moto"
+ ],
+ "raggiungibili": 59,
+ "senza_w": [
+  {
+   "dentro": "lambda_vuoto",
+   "riga": 776,
+   "sorgente": "net.calcola_psi()"
+  },
+  {
+   "dentro": "scuoti_vuoto",
+   "riga": 792,
+   "sorgente": "net.calcola_psi()"
+  },
+  {
+   "dentro": "chiralita_core_locale",
+   "riga": 2164,
+   "sorgente": "self.calcola_psi()"
+  },
+  {
+   "dentro": "_passo_spinoriale",
+   "riga": 3182,
+   "sorgente": "self.calcola_psi()"
+  },
+  {
+   "dentro": "_passo_spinoriale",
+   "riga": 3298,
+   "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < n: self.calcola_psi()"
+  },
+  {
+   "dentro": "step",
+   "riga": 5261,
+   "sorgente": "psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()"
+  },
+  {
+   "dentro": "_togli_rotazione_rigida",
+   "riga": 6529,
+   "sorgente": "try: self.calcola_psi()"
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "riga": 6608,
+   "sorgente": "self.calcola_psi()"
+  }
+ ]
+}

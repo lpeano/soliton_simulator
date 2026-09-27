@@ -1060,3 +1060,9 @@ esercitata**, perché in 3 passi nessuna mitosi ha diviso un arco.
 comando è il dato.)*
 **E `csv/_seal_fork/_h_etc_2.py` passa a `708e1b6e`**: il rilancio automatico con
 `PYTHONHASHSEED=0` è **rimosso**. L'esito e il referto *(`sha1 1da33034`)* **non cambiano**.
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_seal_fork/_h_etc_1.py` | `7851ef01` | `python csv/_seal_fork/_h_etc_1.py` | **`H-ETC-1`**: chiamate a `calcola_psi` **prive di `w`** fra le funzioni raggiungibili dalle cinque leggi. **Collaudo a due facce** con sorgenti sintetici incorporati | ### **FALLISCE, conta 8** sul blob `e203f9a8` *(è l'esito richiesto, e coincide con la FASE 0)*. Collaudo **3/3**. **Esce `1`** |
+
+**Referto:** `csv/_seal_fork/_h_etc_1.json` *(blob byte `a1b36398`)*.

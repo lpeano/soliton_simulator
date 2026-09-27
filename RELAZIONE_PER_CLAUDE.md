@@ -4410,3 +4410,55 @@ più né la cura né il difetto.)*
 
 **Il par.4 del task history resta come era, annotato come smentito** *(par.8: un ragionamento
 sbagliato si annota, non si riscrive)*.
+
+---
+
+# ✅ **FASE 1 (a) chiusa: `H-ETC-1` fallisce e conta ESATTAMENTE 8** *(2026-09-27)*
+
+*(`doc/TASK_HISTORY/2026-09-27_h-etc-1.md`. Blob del simulatore `e203f9a8` **prima e dopo**: il
+presidio **legge**, non esegue.)*
+
+**10 chiamate a `calcola_psi` dentro il passo: 2 con `w`, 8 senza.** Uscita `1`.
+**Lo stesso numero della FASE 0** — e il presidio **lo verifica da sé**: se il conto non fosse `8`
+lo dice in chiaro invece di passare in silenzio.
+
+| senza `w` | dentro |
+|---|---|
+| `:776` `:792` | `lambda_vuoto` · `scuoti_vuoto` |
+| `:2164` | `chiralita_core_locale` |
+| `:3182` `:3298` | `_passo_spinoriale` |
+| `:5261` | ### `step` — **nella stessa funzione che altrove lo passa** |
+| `:6529` | `_togli_rotazione_rigida` *(ramo morto, `L_CONSERVA = False`)* |
+| `:6608` | ### `memoria_hebbiana_moto` — **la sorgente di `PSI-FLASH`** |
+
+## Il collaudo a due facce, e perché il caso CATTIVO è quello che conta
+
+Su `H-ETC-2` il controllo positivo ha impedito di consegnare una macchina che dice sempre NO; qui
+serviva il simmetrico. **Due sorgenti sintetici incorporati nel presidio**, così il collaudo è
+riproducibile senza file esterni: caso **buono** `0` senza-`w` e `4` con; caso **cattivo**
+esattamente `1`, **e dentro `_aiuto`**; e una chiamata in `fuori_dal_passo` **non viene contata**.
+**3 su 3.**
+
+> ### 📌 **Nel caso cattivo la chiamata senza `w` NON sta in una delle cinque leggi: sta in una
+> funzione che `step` chiama.** Quindi il collaudo prova **la ricorsione**, non solo il conteggio —
+> ed è esattamente come `:776` e `:3182` sono raggiunte nel codice vero. **Senza la terza riga** il
+> presidio confonderebbe *«8 dentro il passo»* con *«17 in tutto il file»*, e chiederebbe di curare
+> codice che non c'entra.
+
+**⚠ E il limite:** analisi **statica e per nome** — un alias non si vede, un ramo morto viene
+contato *(`:6529`)*. **Il conto è un limite inferiore**, e il presidio **non certifica l'assenza**.
+**Chi certifica il comportamento è `H-ETC-2`: uno guarda il TESTO, l'altro lo STATO**, e serve che
+siano due.
+
+## Lo stato dei due presidi
+
+| | sul blob `e203f9a8` | collaudo |
+|---|---|---|
+| **`H-ETC-2`** | ### **fallisce 3/3**, uscita `1` | controllo positivo `0.000000e+00` esatto |
+| **`H-ETC-1`** | ### **fallisce, conta 8**, uscita `1` | due facce + ricorsione, 3/3 |
+
+### **Entrambi falliscono sul codice di oggi, come richiesto. Il passo (a) è chiuso.**
+
+> ### 🛑 **STOP.** Prossimo: **(b) l'archiviazione**, e **senza il problema che avevo annunciato** —
+> il sigillo byte-identico è riproducibile senza fissare niente. E ricordo che **ciò che esce è il
+> DOPPIONE, non la legge**: la scala minima `LAM` resta, ed è quella che tiene.
