@@ -4119,3 +4119,58 @@ disegno)*. ### **`L_CONSERVA = False` a runtime, e il codice lo marca «ERRATA, 
 ramo è **morto**, e con lui la chiamata `calcola_psi()` di `:6529` che `H-ETC-1` conta fra le 8.
 **È l'unico degli 8 siti senza `w` che sta in un ramo morto**, e la scheda lo dice **perché il conto
 di `H-ETC-1` non vada letto come «8 problemi vivi»**.
+
+---
+
+<!-- SCHEDA nome=leggi-in-uso funzioni=_applica_regime,_avvisa_leggi_in_uso flag=VERLET,REGIME -->
+# ㉘ LE LEGGI IN USO — **`VERLET` e il `REGIME` deterministico**, e l'avviso che le sorveglia
+
+> ### **DECISIONE DI LUCA, 2026-09-27:** *«`VERLET` e `REGIME` deterministico si TENGONO COME SONO.
+> Nessuna archiviazione, nessun cambiamento. **L'importante è che siano USATI.**»*
+
+## CHE COSA SONO, e la forma
+
+| | |
+|---|---|
+| **`VERLET`** | il sottociclo metrico integra `d`/`vd` con **Velocity-Verlet (secondo ordine)** invece di Eulero esplicito. `vd_half = vd + ½·dts·acc(t)`, poi `d_new`, poi `acc(t+dt)`, poi `vd = vd_half + ½·dts·acc_next`. **È il percorso vivo**, e `REGISTRO_FISICA` impone già *Verlet solo sul second'ordine* |
+| **`REGIME`** | **non è un flag: è un INTERRUTTORE COMPOSTO.** `"deterministico"` fissa **quattro** cose insieme — `SCUOTIMENTO`, `G_PH = 3e-3`, `TAU_A = 50.0`, `_CALORE_INIT = 0.4` — contro `"stocastico"` che dà `0.15`, `2.0`, `0.0` |
+
+> ### ⚠ **E qui c'è una cosa che va detta sulla PROMOZIONE.** Il par.10 chiede **tre** criteri per
+> promuovere una componente a fisica di default: **derivata e non tarata**, **sigillata col
+> controllo positivo**, e **la sua assenza è un difetto**. ### **Qui il criterio è LA DECISIONE DI
+> LUCA**, e va scritto in chiaro: sono leggi in uso **per decisione**, non perché una misura le
+> abbia mostrate migliori.
+> **`CENS-B8` resta aperta e dice proprio questo:** la **deriva d'energia del ramo Eulero non è MAI
+> stata misurata**. La decisione di tenere Verlet **non la misura**: la rende una legge in uso.
+> **E `COMPONENTI:C3` dice che `--regime` cambia quattro interruttori insieme**, cioè che non è
+> isolabile: un A/B sul regime **non è un A/B su un meccanismo**.
+
+## L'AVVISO — `_avvisa_leggi_in_uso()`
+
+Se il run **non** usa `VERLET`, oppure **non** è in regime `deterministico`, **lo dice in chiaro**
+all'avvio, nominando la voce d'indice *(`CENS-B8`, `COMPONENTI:C3`)*.
+
+### ⚠⚠ **È UN AVVISO, NON UN PRESIDIO** (`A9`): **non impedisce niente.**
+Luca l'ha chiesto così — *«avviso, non blocco»* — e **chi conta i presidi non lo deve contare fra
+loro**: vale quanto l'attenzione di chi legge lo stdout. **Un avviso presentato come presidio
+sarebbe esattamente il difetto che `A9` esiste per intercettare.**
+
+## DOVE STA, e perché non in `_applica_flag`
+
+`--regime` si applica in **`_applica_regime`**, che gira **DOPO** `_applica_flag`. Un controllo
+messo là leggerebbe il `REGIME` **di testa al file** e non quello del run: ### **direbbe la cosa
+sbagliata proprio quando conta.**
+**E sta su ENTRAMBI i rami** di `_applica_regime`: il ramo senza override faceva un `return` secco
+che l'avrebbe **saltato nel caso più comune** *(nessun `--regime` sulla riga di comando)*.
+
+## COLLAUDO, girato a tre casi
+
+| caso | esito |
+|---|---|
+| argv del driver | *«VERLET attivo e REGIME deterministico: le leggi in uso ci sono»* |
+| `VERLET` spento | avvisa **1**, e nomina `CENS-B8` |
+| `VERLET` spento **e** `--regime stocastico` | avvisa **2**, e nomina i **quattro** interruttori |
+
+## LIMITI, `A11`
+
+**Nessuno:** la funzione **stampa** e non scrive stato. Il costo è una stampa per run.

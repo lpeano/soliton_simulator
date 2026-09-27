@@ -10581,13 +10581,50 @@ def batch_condensazione(a):
     print("        = massa di scala superiore (il guscio del sistema e antifase, non materia).")
 
 
+def _avvisa_leggi_in_uso():
+    """AVVISA se il run NON usa le leggi che Luca ha deciso di TENERE IN USO.
+
+    **Decisione di Luca del 2026-09-27:** `VERLET` e il `REGIME` deterministico **si tengono
+    come sono** -- nessuna archiviazione, nessun cambiamento -- e **l'importante e' che siano
+    USATI**. Quindi un run che parte senza di loro **lo dice in chiaro**.
+
+    ⚠⚠ **E' UN AVVISO, NON UN PRESIDIO** (`A9`): **non impedisce niente.** Luca l'ha
+    chiesto cosi' (<<avviso, non blocco>>), e chi conta i presidi **non lo deve contare fra
+    loro**. Un avviso vale quanto l'attenzione di chi legge lo stdout.
+
+    Sta in coda a `_applica_regime` e **su entrambi i rami**, perche' `--regime` si applica
+    DOPO `_applica_flag`: un controllo messo li' leggerebbe il `REGIME` di testa al file e
+    **direbbe la cosa sbagliata proprio quando conta**.
+    """
+    _manca = []
+    if not VERLET:
+        _manca.append("VERLET e' SPENTO: il sottociclo metrico gira con EULERO ESPLICITO. "
+              "`CENS-B8` -- il ramo detto <<sperimentale>> E' il percorso vivo, e Luca ha "
+              "deciso di TENERLO. Un run senza Verlet non e' il percorso in uso.")
+    if REGIME != "deterministico":
+        _manca.append("il REGIME e' '%s' e non 'deterministico'. Il regime deterministico "
+              "e' quello in uso per decisione di Luca (`COMPONENTI:C3`), e cambia QUATTRO "
+              "interruttori insieme: SCUOTIMENTO, G_PH, TAU_A, calore_init." % REGIME)
+    if _manca:
+        print("[leggi-in-uso] ⚠ AVVISO (non blocco): questo run NON usa %d delle leggi "
+              "che Luca ha deciso di tenere in uso." % len(_manca), flush=True)
+        for _m in _manca:
+            print("[leggi-in-uso]    - " + _m, flush=True)
+    else:
+        print("[leggi-in-uso] VERLET attivo e REGIME deterministico: le leggi in uso ci sono.",
+              flush=True)
+
+
 def _applica_regime(a):
     """Applica il --regime da riga di comando, rivalutando i globali che dipendono dal REGIME
     (SCUOTIMENTO, G_PH, TAU_A, _CALORE_INIT), valutati al caricamento del modulo prima del parsing.
     Vale per headless e interattivo: va chiamata dopo il parsing e prima di evolvere la rete."""
     reg = getattr(a, "regime", None)
     if reg is None:
-        return  # nessun override: resta il REGIME impostato in testa al file
+        # nessun override: resta il REGIME di testa al file. MA L'AVVISO GIRA COMUNQUE --
+        #   un `return` secco qui lo salterebbe proprio nel caso piu' comune.
+        _avvisa_leggi_in_uso()
+        return
     global REGIME, SCUOTIMENTO, G_PH, TAU_A, _CALORE_INIT
     REGIME = reg
     if reg == "deterministico":
@@ -10596,6 +10633,7 @@ def _applica_regime(a):
         SCUOTIMENTO = True;  G_PH = 0.15; TAU_A = 2.0;  _CALORE_INIT = 0.0
     print(f"[regime] '{reg}' da riga di comando: SCUOTIMENTO={SCUOTIMENTO} G_PH={G_PH} "
           f"TAU_A={TAU_A} calore_init={_CALORE_INIT}", flush=True)
+    _avvisa_leggi_in_uso()
 
 
 if __name__ == "__main__":
