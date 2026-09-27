@@ -46,11 +46,12 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_esponenti_figli.py|H-P5` | legge JSON gia' scritti, non fa girare il simulatore. La configurazione di quei dati |
 | `csv/_test_fork/_massa_id.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Il `--collaudo` gira su un |
 | `csv/_test_fork/_massa_id_fisso.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Legge gli `.npz` di un run |
+| `csv/_test_fork/_partecipazioni.py|H-P5` | legge le coorti e i `misura.json` di un run che ha gia' dichiarato la propria |
 | `csv/_test_fork/_scomposizione_tratti.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Legge i `misura.json` di un |
 | `csv/_test_fork/_tratti_cammino.py|H-P5` | non costruisce nessuna scena e non carica il simulatore. Il `--collaudo` gira su |
 | `csv/_test_fork/_v1_ripetizione.py|H-P5` | confronta due `misura.json` gia' prodotti, ciascuno da un run che ha dichiarato la |
 | `csv/_test_fork/_video_scena.py|H-P5` | non costruisce nessuna scena e non carica il simulatore: legge i fotogrammi `.npz` |
 
 ```
-esenzioni dichiarate   45
+esenzioni dichiarate   46
 ```

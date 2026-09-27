@@ -1,0 +1,38 @@
+========================================================================================================
+PARTECIPAZIONI MULTIPLE -- la regola del MAX, e la verifica che qui non cambi nulla
+========================================================================================================
+  w_k = MAX sulle masse m di max(0, cos(phi_k - phibar_m(t)))
+  Scartate da Luca: la MEDIA ARMONICA (dominata dal peso minimo, non definita con pesi
+  nulli) e la SOMMA LIMITATA A 1 (non ora: e' una scelta di TEORIA, non di misura).
+
+--------------------------------------------------------------------------------------------------------
+LA VERIFICA: quanti nodi partecipano a PIU' DI UNA massa?   (atteso: 0)
+--------------------------------------------------------------------------------------------------------
+  seme | nodi in 1 massa | in 2 | in 3 | totale nodi di massa | sovrapposizione
+    11 |            1237 |    0 |    0 |                 1237 | NESSUNA
+    12 |            1217 |    0 |    0 |                 1217 | NESSUNA
+    13 |            1239 |    0 |    0 |                 1239 | NESSUNA
+    14 |            1212 |    0 |    0 |                 1212 | NESSUNA
+
+  ✅ ZERO nodi con piu' di una partecipazione, su tutti e 4 i semi.
+  QUINDI IN QUESTA SCENA LA REGOLA DEL MAX E' INERTE: il massimo su un solo termine non
+  nullo E' quel termine. Dichiarato e MISURATO, non dedotto.
+
+--------------------------------------------------------------------------------------------------------
+E LA DISGIUNZIONE NON E' UN CASO: E' PER COSTRUZIONE, e il margine si calcola
+--------------------------------------------------------------------------------------------------------
+  la scena mette i centri a `sep` dall'origine, a 120 gradi: il LATO del triangolo e'
+  sep*sqrt(3) = 10.5929, e il raggio di ogni regione e' r_regione = 4.0964.
+  Due dischi di raggio r sono disgiunti se 2r < lato:  2r = 8.1929  <  10.5929   ->  DISGIUNTI
+  IL VARCO fra due regioni vale lato - 2r = 2.4000
+  ⚠ E NON E' UN NUMERO QUALUNQUE: la scena costruisce `r = 0.5*(sep*sqrt(3) - R_CONN)`,
+    quindi il varco e' `R_CONN` ESATTAMENTE -- il raggio con cui il vuoto si allaccia.
+    La disgiunzione e' VOLUTA, e il margine e' UNA CONNESSIONE di larghezza.
+
+--------------------------------------------------------------------------------------------------------
+RIDUZIONE AL LIMITE: col `MAX` e senza, lo STESSO numero (regioni disgiunte)
+--------------------------------------------------------------------------------------------------------
+  max |w_MAX - w_una_massa| = 0.000e+00   su 12802 nodi   ->  IDENTICI
+  (con regioni disgiunte le due forme DEVONO coincidere: se non coincidessero, la
+   disgiunzione non sarebbe quella che la misura sopra dice.)
+========================================================================================================

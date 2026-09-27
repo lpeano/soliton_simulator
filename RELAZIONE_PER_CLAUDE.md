@@ -3676,3 +3676,47 @@ spinta come gradiente di fase**; **(3)** **una sola fase**: lo spinore porta `ph
    perché non c'è recupero possibile.** Quale sia dominante è **misurabile** (`S1` + `S2`), e va
    misurato prima di raccontarlo.
 
+
+---
+
+# 🧩 **PARTECIPAZIONI MULTIPLE: la regola è il MAX, e qui è INERTE — misurato** *(2026-09-27)*
+
+*(Osservazione e regola di Luca. Strumento `csv/_test_fork/_partecipazioni.py`, referto
+`csv/_test_fork/_pilota_prova1/PARTECIPAZIONI.txt`. Voce `PESO-MAX`.)*
+
+```
+w_k = MAX sulle masse m  di  max(0, cos(phi_k - phibar_m(t)))
+```
+
+| forma scartata | **perché**, e resta scritto perché non ci si torni |
+|---|---|
+| **media armonica** | è dominata dal **peso MINIMO** *(un nodo quasi ortogonale a UNA sola massa la trascinerebbe a zero)*, e **non è definita con pesi nulli** |
+| **somma limitata a 1** | **non ora: è una scelta di TEORIA**, non di misura — e una scelta di teoria **non si prende dentro uno strumento** |
+
+**Il `max(0, ...)` interno** resta quello già dichiarato *(antifase = «proietta CONTRO», quindi non
+è «dove la massa è densa»)*; **il `MAX` esterno è la partecipazione: un nodo è opaco quanto la
+massa a cui appartiene di più.**
+
+## ✅ **In questa scena la regola è INERTE — e non è dedotto, è MISURATO**
+
+| seme | nodi in 1 massa | **in 2** | **in 3** |
+|--:|--:|--:|--:|
+| 11 | `1237` | **`0`** | **`0`** |
+| 12 | `1217` | **`0`** | **`0`** |
+| 13 | `1239` | **`0`** | **`0`** |
+| 14 | `1212` | **`0`** | **`0`** |
+
+**E la riduzione al limite lo conferma:** `max |w_MAX − w_una_massa| = 0.000e+00` su `12802` nodi.
+
+## 📌 **E la disgiunzione non è un caso: è PER COSTRUZIONE**
+
+I tre centri sono i vertici di un triangolo equilatero di lato `sep·√3 = 10.5929`, con raggio di
+regione `4.0964`: **`2r = 8.1929 < 10.5929`**. **Il varco vale `2.4000` — cioè `R_CONN`
+ESATTAMENTE**, perché la scena costruisce `r = 0.5·(sep·√3 − R_CONN)`.
+### **La disgiunzione è VOLUTA, e il margine è UNA CONNESSIONE di larghezza.**
+
+> **La regola è cablata lo stesso**, pronta per quando le regioni **non** saranno disgiunte: se un
+> giorno i nodi con più di una partecipazione fossero `> 0`, **lo strumento si ferma** — perché
+> allora il `MAX` non sarebbe più inerte, e **prima di usarlo andrebbe detto di quanto cambia i
+> numeri già scritti**.
+
