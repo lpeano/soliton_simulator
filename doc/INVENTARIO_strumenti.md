@@ -968,7 +968,8 @@ rigenera. -> `STATI-LOCALI`.
 ## Aggiunto il 2026-09-27 — **il VIDEO della scena del pilota** *(`VIDEO-SCENA`)*
 
 > ### 📦 **MA UNA COPIA STA SU GITHUB, NEL RAMO ORFANO `media`** *(richiesta di Luca,
-> 2026-09-27: il guardiano legge solo da GitHub)*. **Commit `acb235c`**, ramo **`media`**,
+> 2026-09-27: il guardiano legge solo da GitHub)*. **Ramo `media`, aggiornato al commit
+> `182e30f`** *(prima `acb235c`)*,
 > che contiene **SOLO** `video_scena_seme11.mp4`, i quattro `FOTOGRAMMA_*.png` e un `README.md`
 > con gli `sha1`, i commit di `fork-su2` che li hanno prodotti e il comando per rigenerarli.
 >
@@ -986,11 +987,11 @@ rigenera. -> `STATI-LOCALI`.
 
 | file | sha1 (byte grezzi) | come si rigenera |
 |---|---|---|
-| `csv/_test_fork/_pilota_prova1/VIDEO_scena_seme11.mp4` | `bcfb95cb2cce4a6e` | `python csv/_test_fork/_video_scena.py --fps 8 --dpi 120` |
-| `csv/_test_fork/_pilota_prova1/FOTOGRAMMA_passo000.png` | `a9959ed48811fff2` | `ffmpeg -i VIDEO_scena_seme11.mp4 -vf "select=eq(n\,0)" -vframes 1 FOTOGRAMMA_passo000.png` |
-| `csv/_test_fork/_pilota_prova1/FOTOGRAMMA_passo040.png` | `066b5daccf067302` | `ffmpeg -i VIDEO_scena_seme11.mp4 -vf "select=eq(n\,20)" -vframes 1 FOTOGRAMMA_passo040.png` |
-| `csv/_test_fork/_pilota_prova1/FOTOGRAMMA_passo080.png` | `2e203d0d3fb9fa6a` | `ffmpeg -i VIDEO_scena_seme11.mp4 -vf "select=eq(n\,40)" -vframes 1 FOTOGRAMMA_passo080.png` |
-| `csv/_test_fork/_pilota_prova1/FOTOGRAMMA_passo120.png` | `677dd3ec5348f094` | `ffmpeg -i VIDEO_scena_seme11.mp4 -vf "select=eq(n\,60)" -vframes 1 FOTOGRAMMA_passo120.png` |
+| `csv/_test_fork/_pilota_prova1/VIDEO_scena_seme11.mp4` | `bbeee48ddac0a8b4` | `python csv/_test_fork/_video_scena.py --fps 8 --dpi 120` |
+| `csv/_test_fork/_pilota_prova1/FOTOGRAMMA_passo000.png` | `b872374abe4f31c0` | `ffmpeg -i VIDEO_scena_seme11.mp4 -vf "select=eq(n\,0)" -vframes 1 FOTOGRAMMA_passo000.png` |
+| `csv/_test_fork/_pilota_prova1/FOTOGRAMMA_passo040.png` | `f4495f6baa7d84bc` | `ffmpeg -i VIDEO_scena_seme11.mp4 -vf "select=eq(n\,20)" -vframes 1 FOTOGRAMMA_passo040.png` |
+| `csv/_test_fork/_pilota_prova1/FOTOGRAMMA_passo080.png` | `e9ce704aa28c2896` | `ffmpeg -i VIDEO_scena_seme11.mp4 -vf "select=eq(n\,40)" -vframes 1 FOTOGRAMMA_passo080.png` |
+| `csv/_test_fork/_pilota_prova1/FOTOGRAMMA_passo120.png` | `c563dd1c332d5fce` | `ffmpeg -i VIDEO_scena_seme11.mp4 -vf "select=eq(n\,60)" -vframes 1 FOTOGRAMMA_passo120.png` |
 
 **E i fotogrammi `.npz` da cui il video nasce** *(61 file, `21.59 MB`, **locali**)*:
 `csv/_test_fork/_pilota_prova1/stati/frame_seme11_passo*.npz`, rigenerati da

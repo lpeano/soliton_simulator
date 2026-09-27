@@ -455,7 +455,19 @@ def salva_fotogramma(net, seme, passo, blob, arco_max=24000):
         else:
             setattr(net, _k, _v)
     valid = ((net.i < n) & (net.j < n)) if len(net.i) else np.zeros(0, bool)
-    indici = np.flatnonzero(valid)[:arco_max]
+    # ⚠ CAMPIONE CASUALE A SEME FISSO, non i PRIMI per indice (`ARCHI-PRIMI`).
+    #   `[:arco_max]` e' quello che fa la vista del simulatore (:7685), e MISURATO produce una
+    #   distorsione TOTALE: il 100 % degli archi disegnati finisce in UN quadrante, baricentro
+    #   (-4.392, -4.283) contro (0, 0) di tutti i nodi. L'indice d'arco correla con l'ordine di
+    #   semina, che correla con la posizione.
+    #   IL SEME E' FISSO (0) perche' due fotogrammi vicini devono mostrare GLI STESSI archi: un
+    #   campione che cambia a ogni passo farebbe sfarfallare il disegno e sembrare dinamica
+    #   cio' che e' rumore di campionamento.
+    _v = np.flatnonzero(valid)
+    if len(_v) > arco_max:
+        indici = np.sort(np.random.default_rng(0).choice(_v, size=arco_max, replace=False))
+    else:
+        indici = _v
     na = len(indici)
     ii = np.asarray(net.i[indici], np.int32) if na else np.zeros(0, np.int32)
     jj = np.asarray(net.j[indici], np.int32) if na else np.zeros(0, np.int32)

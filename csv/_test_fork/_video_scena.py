@@ -257,6 +257,8 @@ def principale(seme, fps, dpi, max_frame):
             axS.scatter(pos[:, 0], pos[:, 1], c=phi_g, s=dim, cmap="magma",
                         vmin=0.0, vmax=VMAX_POZZO, edgecolors="white", linewidths=0.35, zorder=3)
             axS.set_title("VISTA DI SEMPRE - pozzo `phi_g` (magma), archi `|dpozzo|` (plasma)"
+                          + NL + "⚠ ARCHI: i PRIMI 24000 per indice, il 100 % in UN quadrante "
+                          "(`ARCHI-PRIMI`) - non correggibile offline"
                           + NL + "vmax FISSO al passo %d (%.4g), non al fotogramma: senza, lo "
                           "scioglimento si ricalibra via" % (PASSO_RIF, VMAX_POZZO),
                           color="white", fontsize=9.5)
@@ -282,8 +284,18 @@ def principale(seme, fps, dpi, max_frame):
             else:
                 rif[:] = DPHI / 2.0          # nessuna massa nota: si ricade sul riferimento fisso
             coer = np.cos(phi - rif)
-            axD.scatter(pos[:, 0], pos[:, 1], c=coer, s=9.0, cmap="coolwarm",
-                        vmin=-1.0, vmax=1.0, linewidths=0.0, zorder=2)
+            # `V12` -- L'OPACITA' E' IL `PESO-MAX`: w = max_m max(0, cos(phi - phibar_m)).
+            #   Fuori dalle masse `rif` e' il riferimento delle TRE INSIEME, quindi `coer` e'
+            #   gia' quel massimo su un solo termine (le regioni sono DISGIUNTE: misurato in
+            #   `PESO-MAX`, zero nodi con piu' di una partecipazione).
+            #   alpha = 0.08 + 0.92*w^2: IL QUADRATO, cosi' i poco partecipanti SVANISCONO
+            #   invece di grigiare; 0.08 di fondo perche' un nodo a w = 0 resti VISIBILE ma
+            #   spento -- sparire del tutto cancellerebbe l'informazione <<qui c'e' un nodo>>.
+            w_max = np.maximum(0.0, coer)
+            alpha = 0.08 + 0.92 * w_max ** 2
+            ordine = np.argsort(w_max)          # per peso CRESCENTE: i coerenti finiscono SOPRA
+            axD.scatter(pos[ordine, 0], pos[ordine, 1], c=coer[ordine], s=9.0, cmap="coolwarm",
+                        vmin=-1.0, vmax=1.0, linewidths=0.0, zorder=2, alpha=alpha[ordine])
             # `V8`: IL CONTORNO DELLA REGIONE, non un bordo sui nodi.
             #   PRIMA era un secondo scatter piu' GRANDE (`s=26`, `lw=0.55`) e COPRIVA il colore
             #   di fase dentro la massa -- cioe' la grandezza che questo pannello esiste per
@@ -306,8 +318,9 @@ def principale(seme, fps, dpi, max_frame):
                     _hull_saltati[0] += 1
             axD.set_title("COERENZA INTERNA  cos(phi - phibar_m(t))   riferimento CO-ROTANTE "
                           "per massa, scala FISSA [-1, +1]" + NL + "bordo verde = i nodi delle tre "
-                          "masse AL PASSO 0 (contorno)   |   VUOTO riferito alle TRE MASSE"
-                          + NL + "INSIEME, non alla piu' vicina: `pos` non entra in una fase",
+                          "masse AL PASSO 0 (contorno)   |   opacita' = PESO-MAX   |   VUOTO"
+                          + NL + "riferito alle TRE MASSE INSIEME, non alla piu' vicina: `pos` "
+                          "non entra in una fase",
                           color="white", fontsize=9.0)
 
             # ---------------------------------------------- la sovrimpressione
