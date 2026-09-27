@@ -34,6 +34,8 @@ r"""**UN BRACCIO del pilota della `PROVA 1`** — un seme, un processo (`STANDAR
 > **sovrapposizione massima** con la regione del passo 0. **E' dichiarato qui, non tacito.**
 
     python csv/_test_fork/_pilota_prova1_braccio.py --seme 11 --passi 120
+    ...  --salva-stati            # gli stati del grafo ai checkpoint (LOCALI, `STATI-LOCALI`)
+    ...  --salva-stati --ogni 2   # e i fotogrammi `pos`/`phi` ogni 2 passi (`VIDEO-SCENA`)
 
 ASCII puro.
 """
@@ -385,6 +387,89 @@ class Spia(object):
                 self.schw["scorciatoie"] += 1
 
 
+# ============================================== IL SALVATAGGIO (LOCALE, mai in git)
+def _blob_sim():
+    """Lo `sha1` dei BYTE GREZZI del simulatore: la convenzione dei presidi."""
+    import hashlib
+    with open(os.path.join(RADICE, "soliton_simulator.py"), "rb") as f:
+        return hashlib.sha1(f.read()).hexdigest()[:8]
+
+
+def cartella_stati():
+    """`csv/_test_fork/_pilota_prova1/stati/` -- **in `.gitignore`** (`STATI-LOCALI`)."""
+    d = os.path.join(_QUI, "_pilota_prova1", "stati")
+    if not os.path.isdir(d):
+        os.makedirs(d)
+    return d
+
+
+def salva_stato(net, seme, passo, blob):
+    """LO STATO DEL GRAFO a un checkpoint: i soli campi che servono al CAMMINO e alla FASE.
+
+    **Non e' uno snapshot del simulatore** *(quelli sono `.pkl` da ~18 MB)*: sono `i`, `j`,
+    `d`, `phi`, `pos` e `n`. **Resta in LOCALE** e in git ne vanno `sha1`, percorso e comando.
+
+    ⚠ **PURE-READ:** legge e basta. Non tocca `psi`, non tocca l'RNG, non avanza niente.
+    """
+    p = os.path.join(cartella_stati(), "stato_seme%d_passo%06d.npz" % (seme, passo))
+    np.savez_compressed(
+        p, i=np.asarray(net.i, np.int32), j=np.asarray(net.j, np.int32),
+        d=np.asarray(net.d, np.float64), phi=np.asarray(net.phi, np.float64),
+        pos=np.asarray(net.pos, np.float64), n=np.int64(net.n),
+        passo=np.int64(passo), seme=np.int64(seme), blob=np.str_(blob))
+    return p
+
+
+def salva_fotogramma(net, seme, passo, blob, arco_max=24000):
+    """IL FOTOGRAMMA per il video (`VIDEO-SCENA`). **Piccolo, e PURE-READ.**
+
+    **Che cosa porta, e perche' ciascuna cosa:**
+
+    * `pos`, `phi` -- il pannello di **destra**: `cos(phi - dphi/2)`, la coerenza con le masse;
+    * `phi_g` *(per nodo)* e `dpozzo` *(per arco)* -- il pannello di **sinistra**, che e' **la
+      vista di sempre del simulatore**: nodi `magma` su `phi_g`, archi `plasma` su `|dpozzo|`;
+    * `ii`, `jj` -- gli estremi degli archi disegnati. **Il taglio a `24000` NON e' mio: e' quello
+      della vista del simulatore** (`indici = flatnonzero(valid)[:24000]`), e riprodurlo e' l'unico
+      modo di mostrare *la vista di sempre* invece di una diversa.
+
+    ⚠ **PURE-READ, e su due punti non e' gratis:**
+
+    1. **`Ivis` si legge dalla `psi` ESISTENTE**, senza chiamare `calcola_psi()`: ricalcolarla
+       cambierebbe `self.psi`, che `step()` fotografa in `_psi_prec` al passo dopo -- e' il difetto
+       che `MASSA-ID` ha trovato, e qui **non lo si rifa'**.
+    2. **`pozzo_grafo` INCREMENTA due contatori** (`_pozzo_d_nonpos`, `_pozzo_d_tot`) nel ramo a
+       flag acceso. Si **fotografano e si ripristinano**, cosi' il run riporta i SUOI numeri e non
+       quelli gonfiati dal diagnostico.
+    """
+    n = int(net.n)
+    Ivis = (np.abs(net.psi[:n]) ** 2
+            if hasattr(net, "psi") and len(net.psi) >= n else np.zeros(n))
+    # (2) fotografia dei contatori che `pozzo_grafo` tocca
+    _c1 = getattr(net, "_pozzo_d_nonpos", None)
+    _c2 = getattr(net, "_pozzo_d_tot", None)
+    phi_g, _m, dpozzo_tutti = net.pozzo_grafo(Ivis)
+    for _k, _v in (("_pozzo_d_nonpos", _c1), ("_pozzo_d_tot", _c2)):
+        if _v is None:
+            if hasattr(net, _k):
+                delattr(net, _k)
+        else:
+            setattr(net, _k, _v)
+    valid = ((net.i < n) & (net.j < n)) if len(net.i) else np.zeros(0, bool)
+    indici = np.flatnonzero(valid)[:arco_max]
+    na = len(indici)
+    ii = np.asarray(net.i[indici], np.int32) if na else np.zeros(0, np.int32)
+    jj = np.asarray(net.j[indici], np.int32) if na else np.zeros(0, np.int32)
+    dpz = (np.abs(np.asarray(dpozzo_tutti, float)[:na]).astype(np.float32) if na
+           else np.zeros(0, np.float32))
+    p = os.path.join(cartella_stati(), "frame_seme%d_passo%06d.npz" % (seme, passo))
+    np.savez_compressed(
+        p, pos=np.asarray(net.pos[:n], np.float32), phi=np.asarray(net.phi[:n], np.float32),
+        phi_g=np.asarray(phi_g, np.float32), dpozzo=dpz, ii=ii, jj=jj,
+        n=np.int64(n), na=np.int64(na), passo=np.int64(passo), seme=np.int64(seme),
+        dphi=np.float64(net._dphi()), blob=np.str_(blob))
+    return p
+
+
 # ======================================================================= UN CHECKPOINT
 def checkpoint(S, net, coorti0, rr, dphi, kappa, spia, passo, LAM=0.8, calibra=False,
                stato=None):
@@ -584,7 +669,7 @@ def medoide_di(g, idx):
 
 
 # ======================================================================= IL BRACCIO
-def principale(seme, passi, cps, out):
+def principale(seme, passi, cps, out, salva=False, ogni=0):
     _S0, argv = _cli_flag.argv_del_driver(
         extra=["--seme=%d" % seme],
         dest=os.path.join(RADICE, "csv", "_test_fork", "_scarto_cli"))
@@ -602,7 +687,11 @@ def principale(seme, passi, cps, out):
     spia.passo = 0
     spia.installa()
 
+    # `VIDEO-SCENA` / `STATI-LOCALI`: il blob del simulatore accompagna ogni file salvato,
+    # cosi' un `.npz` rimasto li' da un run vecchio si riconosce SENZA fidarsi della data.
+    _blob = _blob_sim()
     fuori = {"seme": int(seme), "passi": int(passi), "checkpoint": list(cps),
+             "salvataggio": bool(salva), "ogni": int(ogni), "blob_sim": _blob,
              "pozzo_d": bool(S.POZZO_D), "sep": float(S._NMASSE_VIDEO["sep"]),
              "r_regione": rr, "dphi": dphi, "LAM": float(S.LAM),
              "sigma_scena": SIGMA_SCENA, "n0": int(net.n),
@@ -632,11 +721,22 @@ def principale(seme, passi, cps, out):
         checkpoint(S, net, coorti0, rr, dphi, kappa, spia, 0, LAM=LAM, calibra=True,
                    stato=stato))
 
+    if salva:
+        # le COORTI del passo 0: servono al BORDO del video (`V3`). Indici, non taglie.
+        np.savez_compressed(
+            os.path.join(cartella_stati(), "coorti_seme%d.npz" % seme),
+            **dict((k, np.asarray(v, np.int32)) for k, v in coorti0.items()))
+        fuori["stati"] = [salva_stato(net, seme, 0, _blob)]
+        fuori["frames"] = ([salva_fotogramma(net, seme, 0, _blob)] if ogni else [])
     if hasattr(S, "passo_test"):
         S.passo_test()
     for p in range(1, int(passi) + 1):
         spia.passo = p
         _passo.passo_pieno(S, net)              # `H-P9`: mai `net.step()` da solo
+        if salva and ogni and (p % ogni == 0):
+            fuori["frames"].append(salva_fotogramma(net, seme, p, _blob))
+        if salva and p in cps:
+            fuori["stati"].append(salva_stato(net, seme, p, _blob))
         if p in cps:
             fuori["blocchi"].append(
                 checkpoint(S, net, coorti0, rr, dphi, kappa, spia, p, LAM=LAM,
@@ -661,4 +761,5 @@ if __name__ == "__main__":
     if not os.path.isdir(dest):
         os.makedirs(dest)
     principale(seme, passi, [c for c in cps if c > 0],
-               opz("--out", os.path.join(dest, "misura.json")))
+               opz("--out", os.path.join(dest, "misura.json")),
+               salva=("--salva-stati" in A), ogni=int(opz("--ogni", "0")))
