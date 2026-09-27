@@ -1066,3 +1066,30 @@ comando è il dato.)*
 | `csv/_seal_fork/_h_etc_1.py` | `7851ef01` | `python csv/_seal_fork/_h_etc_1.py` | **`H-ETC-1`**: chiamate a `calcola_psi` **prive di `w`** fra le funzioni raggiungibili dalle cinque leggi. **Collaudo a due facce** con sorgenti sintetici incorporati | ### **FALLISCE, conta 8** sul blob `e203f9a8` *(è l'esito richiesto, e coincide con la FASE 0)*. Collaudo **3/3**. **Esce `1`** |
 
 **Referto:** `csv/_seal_fork/_h_etc_1.json` *(blob byte `a1b36398`)*.
+
+## `(b)1` — l'archiviazione dei pavimenti morti, e il suo sigillo *(2026-09-27)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_hashseed_prova.py` | `71fa4f9b` | `python csv/_test_fork/_hashseed_prova.py --out=X.npz --seme=11 --passi=3` · `… --confronta A.npz B.npz` | **confronta DUE STATI byte per byte** *(23 grandezze)*. Il dump registra `PYTHONHASHSEED` **e il blob del simulatore** | ### `(b)1`: **23/23 identiche**, `e203f9a8` → `59c23942` |
+
+**Referto del sigillo:** `csv/_seal_fork/_sig_arch_pavimenti.json` *(blob byte `02222028`)*.
+**Archivio:** `csv/_archivio/_pavimenti_morti.py` *(blob byte `346fdd15`)* — **non gira**.
+**Lo stato PRIMA si rigenera dal tag**, e questo è il comando *(gli `.npz` sono locali: il dato è
+il comando)*:
+
+```
+git checkout pre-archivio-pavimenti -- soliton_simulator.py
+python csv/_test_fork/_hashseed_prova.py --out=PRIMA.npz --seme=11 --passi=3
+git checkout HEAD -- soliton_simulator.py
+python csv/_test_fork/_hashseed_prova.py --out=DOPO.npz --seme=11 --passi=3
+python csv/_test_fork/_hashseed_prova.py --confronta PRIMA.npz DOPO.npz
+```
+
+> ### ⚠ **DUE STRUMENTI DIVENTANO REPERTI, e la voce va letta così:**
+> **`csv/_test_fork/_etc_pavimenti.py`** *(blob `04a6ec32`)* **NON è più ri-girabile come sigillo**:
+> cita `:4453` `:4456` `:5737` `:5782`, **righe che dopo la rimozione non significano più quello**.
+> **È un REPERTO**, e il suo referto `_etc_pavimenti.json` **è il dato**. *(Non è un difetto nuovo:
+> era una verifica una-volta-sola.)*
+> **`csv/_seal_fork/_sigillo_Z1c.py`** nomina `_pav_d0` nel docstring fra le funzioni che **non**
+> toccava: **va riletto prima di ri-girarlo.**

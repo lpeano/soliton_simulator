@@ -4510,3 +4510,52 @@ median(d0)-MAD(d0)»*, cioè **una legge che non applicava**.
 > ### ⏳ **IL SIGILLO BYTE-IDENTICO NON È ANCORA GIRATO.** Il par.5 vuole il codice **committato
 > prima** del run, quindi questo commit porta **il cambiamento**, e il sigillo arriva nel
 > **successivo**. **Se fallisce, il pavimento non era morto e mi fermo.**
+
+---
+
+# ✅ **(b)1 — IL SIGILLO BYTE-IDENTICO PASSA: 23 su 23** *(2026-09-27)*
+
+*(`doc/TASK_HISTORY/2026-09-27_archivio-pavimenti.md`, referto
+`csv/_seal_fork/_sig_arch_pavimenti.json`.)*
+
+### **`e203f9a8` → `59c23942`, e tutte e 23 le grandezze sono IDENTICHE byte per byte.**
+*(le 21 di stato più `i` e `j`; scena `(ii)(a)`, seme `11`, `n = 2107`, `m = 70199`, 3 passi pieni,
+ordine canonico, nessuna iniezione di `rng`, nessun presidio. `PRIMA` = il blob del tag
+`pre-archivio-pavimenti`; `DOPO` registrato **dentro il dump**.)*
+
+> ### 📌 **E il sigillo è la prova che il pavimento non mordeva.** Se avesse morso **una sola
+> volta** in 3 passi, una delle 23 sarebbe diversa. **Il par.(b)1 è dimostrato, non asserito.**
+
+## La fisica: `H-REG-R` mi ha rifiutato **due volte**, e aveva ragione due volte
+
+**La prima** perché non avevo toccato `REGISTRO_FISICA`: un pavimento **è un limite**, e `A11` dice
+che **un limite è una legge** — non potevo trattarlo come pulizia.
+**La seconda** perché avevo aggiornato **solo** `freno-scala-min`, mentre la rimozione cade in
+**quattro** funzioni con scheda propria. Aggiornate tutte e quattro: `freno-scala-min`
+*(la lista `funzioni=` perde `_pav_d0` e `_floor_d0`, e con essa **la forma della legge**: il
+vincolo sulle lunghezze **era DUE sovrapposti** e ora è **UNO**, `LAM`)*, `memoria-del-moto`,
+`fase-phi`, `mitosi-schwinger`. **`D31` non è toccata.**
+
+> **E una cosa che la scheda ora dice meglio di prima:** il docstring di `_pav_d0` **già** diceva
+> *«lasciare anche il pavimento comovente vorrebbe dire DUE leggi sovrapposte, con la vecchia che
+> continua a mordere»*. **Era risolto a runtime con un `return v`. Ora è risolto nella FORMA.**
+
+## ⚠ Due strumenti diventano **reperti**, e lo dichiaro invece di lasciarli rompersi in silenzio
+
+**`_etc_pavimenti.py`** cita `:4453` `:4456` `:5737` `:5782` — **righe che dopo la rimozione non
+significano più quello**: **non è più ri-girabile come sigillo**, è un **reperto** col suo referto
+committato. *(Non è un difetto nuovo: era una verifica una-volta-sola.)*
+**`_sigillo_Z1c.py`** nomina `_pav_d0` fra le funzioni che **non** toccava: **da rileggere prima di
+ri-girarlo.**
+
+## E un difetto **dello strumento di confronto**, curato
+
+`_hashseed_prova.py` stampava *«`PYTHONHASHSEED` non cambia niente»* ### **anche confrontando due
+blob di simulatore diversi — cioè anche in questo sigillo.**
+**Una conclusione cablata nello strumento diventa vera per qualunque cosa gli si dia da
+confrontare.** Ora il verdetto dice **solo se sono uguali**, e **il dump registra il blob del
+simulatore**, così un confronto può **dire** quali due versioni ha confrontato invece di asserirlo.
+
+> ### 🛑 **STOP.** Prossimo: **(b)2 — `SYNC_UPDATE`** in archivio e `--sync` no-op accettato.
+> Ricordo il raggio misurato nella FASE 0: vive in `step` + `_passo_spinoriale`, **7 + 6 usi**, e
+> **zero** nelle altre quattro leggi. Col driver è **spento**, quindi **niente deve cambiare**.

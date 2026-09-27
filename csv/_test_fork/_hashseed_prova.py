@@ -46,7 +46,10 @@ STATO = ["d", "d0", "phi", "phi_s", "phivel", "psi", "psi_spin", "_psi_spinor", 
 def confronta(pa, pb):
     """Le 21 grandezze, byte per byte. `nan` allineati contano UGUALI."""
     A, B = np.load(pa, allow_pickle=True), np.load(pb, allow_pickle=True)
+    def _bl(z):
+        return str(z["_blob_sim"])[:8] if "_blob_sim" in z.files else "(non registrato)"
     print("HASHSEED di A: %s   di B: %s" % (str(A["_hashseed"]), str(B["_hashseed"])))
+    print("BLOB del simulatore, A: %s   B: %s" % (_bl(A), _bl(B)))
     print("n di A: %s   n di B: %s" % (str(A["n"]), str(B["n"])))
     print("")
     print("  %-14s %-10s %-12s %s" % ("grandezza", "forma", "identico?", "elementi diversi"))
@@ -78,18 +81,22 @@ def confronta(pa, pb):
         righe.append({"grandezza": k, "identico": ident, "diversi": nd, "n": int(va.size)})
     print("")
     print("=" * 78)
+    # ⚠ IL VERDETTO E' NEUTRO, E NON E' UN DETTAGLIO: questo confronto serve a DUE sigilli
+    #   diversi -- la prova su PYTHONHASHSEED e il sigillo byte-identico dell'archiviazione --
+    #   e la prima stesura stampava <<PYTHONHASHSEED non cambia niente>> anche quando i due
+    #   stati venivano da DUE BLOB DI SIMULATORE diversi. **Una conclusione cablata nello
+    #   strumento diventa vera per qualunque cosa gli si dia da confrontare**: lo strumento dice
+    #   se sono uguali, l'interpretazione sta nel referto di chi lo chiama.
     if diversi:
         print("### DIVERSE: %d grandezze -> %s" % (len(diversi), ", ".join(diversi)))
-        print("    PYTHONHASHSEED CAMBIA LO STATO. HASHSEED-RIPROD e' CONFERMATO.")
     else:
-        print("### IDENTICHE: tutte e %d le grandezze, byte per byte." % len(righe))
-        print("    PYTHONHASHSEED NON CAMBIA NIENTE: HASHSEED-RIPROD e' un FALSO ALLARME,")
-        print("    e la causa delle differenze era hash() dentro il presidio (difetto 2).")
+        print("### IDENTICHE: tutte e %d le grandezze confrontate, byte per byte." % len(righe))
     print("=" * 78)
     OUT = os.path.join(_QUI, "_hashseed_prova.json")
     io.open(OUT, "w", encoding="utf-8", newline=chr(10)).write(json.dumps(
         {"a": os.path.basename(pa), "b": os.path.basename(pb),
          "hashseed_a": str(A["_hashseed"]), "hashseed_b": str(B["_hashseed"]),
+         "blob_sim_a": _bl(A), "blob_sim_b": _bl(B),
          "diverse": diversi, "righe": righe}, indent=1, ensure_ascii=False, sort_keys=True))
     print("")
     print("scritto: " + OUT)
@@ -118,8 +125,16 @@ def gira(out, seme, passi):
     print("iniezione di rng, nessun presidio.")
     for _ in range(passi):
         _passo.passo_pieno(S, net)
+    # ⚠ IL BLOB DEL SIMULATORE VA DENTRO IL DUMP: senza, un confronto fra due stati non puo'
+    #   dire QUALI due versioni ha confrontato, e il referto asserisce invece di provare.
+    #   `PRIMA.npz` del sigillo (b)1 e' nato prima di questa riga e NON lo porta: per quello
+    #   la provenienza e' il tag `pre-archivio-pavimenti`, dichiarata nel task history.
+    import hashlib as _hl
+    _bl = _hl.sha1(io.open(os.path.join(RADICE, "soliton_simulator.py"), "rb").read()).hexdigest()
+    print("blob del simulatore (sha1 dei byte): %s" % _bl[:8])
     dati = {"n": np.asarray(net.n), "_hashseed": np.asarray(str(hs)),
-            "_passi": np.asarray(passi), "_seme": np.asarray(seme)}
+            "_blob_sim": np.asarray(_bl), "_passi": np.asarray(passi),
+            "_seme": np.asarray(seme)}
     for k in STATO + ["i", "j"]:
         v = getattr(net, k, None)
         if v is not None:
