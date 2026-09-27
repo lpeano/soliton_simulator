@@ -3863,3 +3863,58 @@ specifico resta chiuso — ma la fotografia c'è.)*
 > **⚠ E resta da misurare QUANTO:** che `I` cambi non dice **di quanto** cambi `d0`. Il `tanh` di
 > `ampiezza` e il tetto causale potrebbero assorbirne gran parte — **o no**.
 
+
+---
+
+# 📋 **CENSIMENTO DELLE INTENZIONI MAI FATTE RISPETTARE: 41 voci, e 7 sono FALSE nel codice** *(2026-09-27)*
+
+*(`doc/CENSIMENTO_intenzioni.md`, prodotto da un **sotto-agente** in sola lettura.
+**Verificato da me su un campione prima di committarlo**, e una sua affermazione era **sbagliata**:
+la correzione è nel file, in testa.)*
+
+| classe | voci |
+|---|--:|
+| **(A)** dichiarata e **FALSA** nel codice | **7** |
+| **(B)** costruita e **mai misurata** | **16** |
+| (C) misurata, con citazione | 12 |
+| (D) obsoleta o superata | 6 |
+
+## 🎯 **IL RISCONTRO CHE VALE PIÙ DELLE SINGOLE VOCI**
+
+`--testo` sull'indice (805 voci): **`sperimentale` 0 · `in verifica` 0 · `esplorativo` 0 ·
+`orfano` 0 · `mai validato` 0 · `TORS_4PI` 0 · `COPPIA_MIT` 0 · `MITOSI_DIR` 0 · `KERNEL_ALPHA` 0.**
+### **Delle sette voci di (A), NESSUNA ha un ID.** La famiglia «dichiarato e mai fatto rispettare» **non ha una casa nell'indice**.
+*(Riverificato da me su quattro flag: confermato.)*
+
+## Le più gravi di **(A)** — verificate da me una per una
+
+* **`A2` `TORS_4PI`**: il commento dice *«prova sperimentale»*, il valore è **`True` dal primo
+  blob**, e **`--tors-4pi` non esiste** *(0 occorrenze)*. **Il braccio OFF che il commento promette
+  non è raggiungibile.**
+* **`A3` `COPPIA_MIT`**: *«ATTIVA (default B)»* e *«(opzione, spenta di default)»* — **sulla stessa
+  riga**. Default `1.0`, il ramo gira. Le tre misure promesse: **nessuna prova**.
+* **`A6` `README.md:175`**: *«Tutti gli script di lancio includono esplicitamente `--sync`»* —
+  **`SYNC_UPDATE = False` a runtime** nell'argv del driver.
+* **`A1`** la **riduzione al limite dello spinore**: il sigillo che la prova (`_seal_fase1`)
+  **inietta lo stato a mano** e in quella cartella **non c'è nessun referto**.
+
+## Le più gravi di **(B)**
+
+* **`B1` `SPINORE_VIVO`** si autodenuncia: *«NON È MAI STATO VALIDATO COME DEFAULT … NESSUN SIGILLO
+  è mai stato girato con questo valore»* **(2026-09-18)**. Nessuna prova del rigiro. **Attiva.**
+* **`B12` `KERNEL_ALPHA = 1.0`**, *«SEMPRE ATTIVO»*, **rivendica il principio di equivalenza** —
+  che è **la prova ③ del bersaglio di progetto**. Zero voci d'indice, nessun flag CLI.
+* **`B8` `VERLET`**: il ramo che il commento chiama *«SPERIMENTALE»* **è il percorso vivo**.
+
+## ❗ **Dove il sotto-agente ha sbagliato, e perché lo dico**
+
+Affermava che `KERNEL_ALPHA` non avesse *«nemmeno una traccia: 0 file in `doc/`»*. **I file sono
+due**, e uno lo censisce come **guardia silenziosa** il 2026-09-20. **La voce resta in (B) —
+indebolita, non annullata**: è censito come guardia, **mai misurato come legge**.
+**Un rapporto di un sotto-agente è model output, non una misura: l'ho trattato così.**
+
+> **⚠ E la copertura è PARZIALE, dichiarata in 9 punti nel file.** I due buchi che pesano di più:
+> **`csv/_test_fork/` non censito** *(potrebbe contenere sonde che smentiscono qualche «nessuna
+> prova trovata»)* e **le 18 `doc/PREDIZIONE_*.md` non confrontate col loro esito** — che è
+> esattamente il filone del censimento, e resta scoperto.
+
