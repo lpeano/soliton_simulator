@@ -53,6 +53,59 @@
 
 ---
 
+# 🧭 **PILOTA DELLA `PROVA 1`: i criteri sono COMMITTATI, e una PREMESSA DEL MANDATO NON REGGE** *(2026-09-27)*
+
+*(`doc/TASK_HISTORY/2026-09-27_pilota-prova1.md`, committato **prima** del codice.)*
+
+> **⚠ QUESTO NON E' IL RUN BASE.** `doc/SMISTAMENTO_run_base.md` conta ancora **5 `SI` aperti**.
+> Il pilota serve a vedere **se le grandezze si misurano**, e **non conclude sulla gravita'**.
+
+## ⚠ LA PREMESSA CHE NON REGGE: **il criterio di fase NON E' SCRITTO NEL CODICE**
+
+Il mandato chiede di *«ridefinire la regione dalla FASE, stesso criterio con cui la scena `(ii)` la
+costruisce, **scritto nel codice, non reinventato**»*. **Ho letto la scena, e quel criterio non
+esiste: la scena costruisce la regione DA `pos`, e POI le assegna la fase.**
+
+```python
+# _semina_masse_coerenti
+idx = np.where(np.linalg.norm(pos - c, axis=1) <= r)[0]     # <- la regione viene da `pos`
+ph  = net._dphi() / 2.0 + net.rng.normal(0, 0.05, len(idx)) # <- POI le assegna la fase
+```
+
+**Lo dico invece di inventare un criterio e chiamarlo «letto dal codice»** *(sarebbe `P1`: un
+candidato per analogia spacciato per fatto stabilito)*. **Cio' che il codice da' davvero e' la
+FASE CHE LA SCENA SCRIVE**, e da quella il criterio si **deriva**:
+**`|wrap(phi - _dphi()/2)| <= k * 0.05`**, dove **`_dphi()/2` e `0.05` vengono dalla scena** e
+**l'unica scelta e' `k`**.
+
+**E `k` non si scegle guardando i risultati: si CALIBRA al passo 0, dove la risposta e' NOTA** — la
+scena dice **esattamente** quali nodi sono nella regione, quindi si misurano **precisione e
+richiamo** per `k = 2, 3, 4` e si **fissa `k` prima** dei checkpoint *(`P1-sexies`: un criterio si
+collauda su un caso a risposta nota)*.
+
+**E IL CRITERIO POTREBBE NON BASTARE, calcolato prima di girare:** il vuoto ha `phi` **uniforme su
+`[0, 4pi)`**, quindi una frazione `2k*0.05/(4pi)` dei nodi di vuoto cade dentro **per caso** — con
+`k = 3` e' lo **`2.4 %` del vuoto**, che essendo il `~90 %` dei nodi vale **~`22 %` della taglia
+della regione**. **Se la contaminazione e' quella, la fase da sola non identifica la massa**, e va
+detto invece di pubblicare una sovrapposizione gonfiata.
+
+## I CRITERI, tutti e sei, scritti PRIMA
+
+| # | che cosa decide |
+|--:|---|
+| **V1** | masse **E punti di controllo**: il braccio li **salva** → `AB-CONTROLLI` chiuso |
+| **V2** | osservabile **`(masse - controlli)` relativo alla distanza iniziale**, IC95 fra semi `t(3)`. **Se masse e controlli calano UGUALE e' contrazione globale e NON e' gravita'** |
+| **V3** | **dove nascono i nodi** *(masse / varco / vuoto)*, mitosi e Schwinger **separati** = `M1` di `SCALE-TW` |
+| **V4** | quante coppie Schwinger hanno **`2*dd < d`**: le **scorciatoie** da `A3-DISEGNO` |
+| **V5** | **sovrapposizione `>= 90 %` E spostamento del medoide `< LAM`** → la massa segue i nodi; **altrimenti MIGRA**, e la `PROVA 1` va misurata **sulle regioni** |
+| **V6** | **la forma**: `n`, raggio, quantili `p10/p50/p90`, coerenza; **centri contro superfici affacciate**. **Se le superfici si avvicinano piu' dei centri oltre la barra: ALLUNGAMENTO — e' un RISULTATO, non un difetto, e NON VA CORRETTO** |
+
+**La coerenza e' `|<e^{i phi}>|`, non `std(phi)`:** su un cerchio la `std` legge il **disordine
+massimo** dove la fase e' coerente *(la scena stessa lo mostra: `std = 6.08` contro `0.05`)*.
+
+
+---
+
 # ⚖️ **LE TRE FRAZIONI, DAL GIRO VALIDO: IL DIVARIO DEI FIGLI E' `W^2`, NON `peq`** *(2026-09-26)*
 
 *(`csv/_test_fork/_scomposizione_figli.py`, referto in
