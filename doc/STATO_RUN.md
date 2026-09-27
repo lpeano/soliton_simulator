@@ -1383,3 +1383,12 @@ ramo B (chi_basc OFF):
 - **note** PILOTA della PROVA 1, NON il run base (5 SI aperti). Driver con POZZO_D acceso, scena (ii)(a) sep 6.1158, passo_pieno (H-P9), un processo per seme. Criteri V1-V6 in doc/TASK_HISTORY/2026-09-27_pilota-prova1.md, committati PRIMA. Nessuna conclusione sulla gravita' dal pilota: solo i numeri e i limiti.
 
 **chiuso 2026-09-27 09:09:11 — FERMATO** FERMATO da Luca dopo ~4 minuti (nessun checkpoint oltre il passo 0 raggiunto: il primo e' a 40). DIFETTO BLOCCANTE nello strumento, non nel run: `controlli()` RISCEGLIE i punti di controllo a ogni checkpoint sulla distanza del momento, quindi la loro variazione e' ~0 PER COSTRUZIONE e l'osservabile (masse - controlli) si riduce al solo avvicinamento delle masse: V2 non separa piu' la gravita' dalla contrazione globale, che e' il suo UNICO scopo. I DATI PARZIALI NON SERVONO: nessun json e' stato scritto (il braccio scrive alla fine). Si rilancia dopo la cura dei controlli FISSI, committata prima.
+
+## APERTO pilota-prova1-bis
+
+- **avvio** `2026-09-27 09:22:28` · **blob** `c968d4d8 (git) / e203f9a8 (byte grezzi)` · **HEAD** `2ebbd25`
+- **comando**
+  ```
+  python csv/_test_fork/_pilota_prova1.py   (4 semi 11-14, 120 passi, checkpoint 0/40/80/120)
+  ```
+- **note** RILANCIO dopo la cura CTRL-RISCELTA (controlli FISSI, K5 2/2). PILOTA, NON il run base (5 SI aperti). Driver con POZZO_D acceso, scena (ii)(a) sep 6.1158, passo_pieno (H-P9), un processo per seme. Criteri V1-V6 committati PRIMA. Nessuna conclusione sulla gravita'.
