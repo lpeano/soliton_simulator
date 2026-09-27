@@ -432,6 +432,15 @@ contro un nullo di `1.4e-03` — **da `140` a `310` volte il suo valore sotto ip
 > posto sbagliato**, e in un repo dove le regole si citano per nome quella e' la forma piu'
 > facile di errore silenzioso. **L'etichetta vecchia resta leggibile, con cio' che l'ha
 > corretta** *(stessa convenzione dei marchi storici: si legge com'era e cosa l'ha cambiata)*.
+> ### ✅ **ACCESA NEL DRIVER DAL 2026-09-27** *(decisione di Luca, dopo `W5`)*.
+> **E' una scelta DI PRINCIPIO, non sostenuta da un effetto misurato, e la decisione lo dice:**
+> **`W4` DIMOSTRA** che `pos` non entra piu' *(muovendo **solo** `pos` il pozzo non cambia
+> di un bit: `0.000000e+00` esatto; a flag spento cambia di `5.38e+02`)*; **`W5` dice che a
+> 120 passi l'effetto sulla distanza fra le masse e' SOTTO l'`1.3`-`2.7 %`**, cioe' **NON MISURATO**
+> *(IC95 che contengono lo zero su tutte e tre le coppie, segni non concordi)*.
+> **`A3-DISEGNO` basta da sola:** si misura per PROMUOVERE, **si DIMOSTRA per ESCLUDERE**.
+> **NON e' byte-inerte**, e i numeri di prima non si confrontano con questi *(par.9-bis)*.
+>
 > **LA CURA, derivata e senza coefficienti:** `L = self.d[mask]`, dietro **`POZZO_D`**
 > *(`--pozzo-d`, **spento di default**)*. **`STANDARD 10`: si TOGLIE una dipendenza (`pos`),
 > non si aggiunge una legge.**

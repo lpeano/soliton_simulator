@@ -313,6 +313,16 @@ sys.argv = ["soliton_simulator.py", "--test", SCENA, "--nmasse", NMASSE, "--sep"
             # dello stesso passo, e il loro contrasto da `~8e-06` a **2.43** volte quello dei
             # maturi -- contro **2.4567 previsto PRIMA** dalla scomposizione. Il pavimento `1e-6`
             # NON morde (minimo `0.115`, cinque ordini sopra). Sigillo `5/6`, `C1'` a 4 semi.
+            # [D02 / POZZO_D, 2026-09-27] LA CURA DEL POZZO, APPROVATA DA LUCA: il driver la
+            # ACCENDE IN OGNI RUN. `pozzo_grafo` prendeva `L` da `self.pos` -- IL DISEGNO -- e
+            # il risultato entra nella spinta `S09`. Ora `L = self.d[mask]`.
+            # E' UNA SCELTA DI PRINCIPIO, e la decisione lo dice: `A3-DISEGNO` -- il disegno
+            # esce dalla dinamica. `W4` DIMOSTRA che `pos` non entra piu' (muovendo SOLO `pos`
+            # il pozzo non cambia di un bit, `0.000000e+00`); `W5` dice che a 120 passi
+            # l'effetto sulla distanza fra le masse e' SOTTO l'1.3-2.7 %, cioe' NON MISURATO.
+            # **NON e' byte-inerte, ed e' il punto**: e' una cura, non un'opzione, e i numeri
+            # di prima non si confrontano con questi senza dirlo (par.9-bis).
+            "--pozzo-d",
             "--contrasto-intensivo"] \
     + ([] if NODI is None else ["--nodi", str(NODI)]) \
     + ([] if SEME is None else ["--seed", str(SEME)]) \

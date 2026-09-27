@@ -195,9 +195,14 @@ if __name__ == "__main__":
     # ⚠ IL DEFAULT E' CAMBIATO DI PROPOSITO il 2026-09-26 (decisione di Luca), quindi `T1` non
     #   chiede piu' «identiche»: chiede che la differenza sia **ESATTAMENTE QUESTA**, e nulla
     #   di piu'. Un criterio che dicesse solo «diverse» non impedirebbe niente (`A9`).
+    # ⚠ LA TABELLA CRESCE QUANDO IL DEFAULT CAMBIA DI PROPOSITO, e ogni riga e' una
+    #   DECISIONE di Luca con la sua data. `--pozzo-d` e' un FLAG NUDO, non un'opzione con
+    #   valore: si confronta nella lista dei flag, non qui.
     ATTESE = {'--test': ('N-MASSE', 'MASSE-COERENTI'),
               '--sep': ('4.0', '6.1158'),
               '--nodi': (None, '0')}
+    # i FLAG NUDI attesi in piu' rispetto al driver di prima (`D02`, 2026-09-27)
+    FLAG_ATTESI = ['--pozzo-d']
     cambiate = sorted(set(op_o) | set(op_p))
     inattese, mancate = [], []
     for k in cambiate:
@@ -210,7 +215,8 @@ if __name__ == "__main__":
     for k, (pv, ov) in ATTESE.items():
         if (op_p.get(k), op_o.get(k)) != (pv, ov):
             mancate.append((k, pv, ov, op_p.get(k), op_o.get(k)))
-    flag_div = sorted(set(fl_o) ^ set(fl_p))
+    flag_div = sorted((set(fl_o) ^ set(fl_p)) - set(FLAG_ATTESI))
+    flag_mancati = [x for x in FLAG_ATTESI if x not in fl_o or x in fl_p]
     P("")
     P("  T1  IL DEFAULT E' CAMBIATO DI PROPOSITO, E LA DIFFERENZA E' ESATTAMENTE QUELLA DICHIARATA")
     P("        driver 'di prima' dal PADRE di %s ... %d righe" % (sha, nr))
@@ -220,10 +226,12 @@ if __name__ == "__main__":
           % (k, pv, ov, op_p.get(k), op_o.get(k)))
     P("        differenze INATTESE fra le opzioni .. %d %s" % (len(inattese), inattese[:4]))
     P("        dichiarate NON avvenute ............. %d %s" % (len(mancate), mancate[:4]))
-    P("        flag nudi diversi ................... %d %s" % (len(flag_div), flag_div[:6]))
+    P("        flag nudi ATTESI in piu' ........... %s   mancati %s"
+      % (FLAG_ATTESI, flag_mancati))
+    P("        flag nudi INATTESI ................. %d %s" % (len(flag_div), flag_div[:6]))
     P("        il sorgente dichiara SCENA/SEP ...... %s / %s"
       % (_default_sorgente("SCENA"), _default_sorgente("SEP")))
-    ok1 = (not inattese and not mancate and not flag_div
+    ok1 = (not inattese and not mancate and not flag_div and not flag_mancati
            and _default_sorgente('SCENA') == 'MASSE-COERENTI'
            and _default_sorgente('SEP') == '6.1158')
     esiti.append(("T1  la differenza e' ESATTAMENTE quella dichiarata", ok1))

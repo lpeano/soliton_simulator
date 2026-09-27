@@ -12,11 +12,11 @@ mano**: si rigenera.)*
 
 ```
 voci nell'indice          784
-in questo smistamento     137   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
-di cui blocca SI          6
+in questo smistamento     136   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
+di cui blocca SI          5
 ```
 
-## 🎯 **L'ORDINE DI LAVORO DEI `SI`** — 6 voci, e l'ordine E' PER DIPENDENZA
+## 🎯 **L'ORDINE DI LAVORO DEI `SI`** — 5 voci, e l'ordine E' PER DIPENDENZA
 
 > **Il lavoro sui `SI` comincia SOLO col via di Luca.** L'ordine e i motivi vengono da
 > **`doc/ORDINE_SI.tsv`**, che e' un DATO: si cambia la' dentro, non qui.
@@ -35,7 +35,7 @@ di cui blocca SI          6
 | 10 | **RUN BASE** | scena `(ii)`(a), 4 semi, 600 passi, tutte le cure, `P5` attivo, tag `base-epoca-4`; poi la `PROVA 1` | il run: ore-macchina |
 
 **📖 LA REVISIONE STORICA DI OGNI VOCE** *(che cosa e' VERIFICATO sul codice e che cosa e'
-INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D02](REVISIONE_SI_2026-09-26.md#d02) · [D03](REVISIONE_SI_2026-09-26.md#d03) · [D31](REVISIONE_SI_2026-09-26.md#d31) · [SCALE-TW](REVISIONE_SI_2026-09-26.md#scale-tw) · [U1](REVISIONE_SI_2026-09-26.md#u1)
+INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D03](REVISIONE_SI_2026-09-26.md#d03) · [D31](REVISIONE_SI_2026-09-26.md#d31) · [SCALE-TW](REVISIONE_SI_2026-09-26.md#scale-tw) · [U1](REVISIONE_SI_2026-09-26.md#u1)
 
 **Le voci che NON bloccano hanno la loro sezione qui:** [NON BLOCCANO](REVISIONE_SI_2026-09-26.md#non-bloccano).
 
@@ -154,7 +154,7 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D02](REVISIONE_SI_202
 | `NO` | **Z82** | Z82 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / SOSPETTO NON VERIFICATO: n3 normalizza su... | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 | `NO` | **C23** | C23 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / IL FATTORE (CSM/cs)^2 NON E' 1 SULLA CODA a 500... | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 
-## FAMIGLIA **F** — FRENO E CONTRAZIONE   *(31 voci)*
+## FAMIGLIA **F** — FRENO E CONTRAZIONE   *(30 voci)*
 
 | blocca? | id | che cos'e' | **il motivo, in una frase** | fonte |
 |:--:|---|---|---|---|
@@ -168,7 +168,6 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D02](REVISIONE_SI_202
 | `NO` | **PROVA-COMB** | LA PROVA COMBINATA: TUTTE LE CURE APPROVATE ACCESE INSIEME — 600 passi, stesso seme e scena... | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `SI` | **SCALE-TW** | LE SCALE DELLA TORSIONE: un'analisi completa, DA CAPO / mandato di Luca ricevuto alle 17:44 del... | prima la misura `M1`: **quanta mitosi e DOVE** -- senza quella, le scale della torsione si leggerebbero su un sistema che non si sa dove crea | `STATO_RUN.md` |
 | `NO` | **D01** | S09 clippa al passo causale — quindi e' gia' una LUNGHEZZA — e poi moltiplica per median(d0)... | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
-| `SI` | **D02** | pozzografo calcola L da self.pos — IL DISEGNO — mentre il suo docstring dichiara «la distanza... | `pozzo_grafo` usa `self.pos` a `:6541` -- **verificato** -- ed entra nella spinta `S09`: il disegno entra nella gravita' | `STATO_RUN.md` |
 | `SI` | **D03** | La memoria del moto prende le direzioni da pos, normalizza su Imed GLOBALE, e ha un tetto... | decisione di Luca: **o si spegne in modo dichiarato, o `MEM_ARCO`** -- la memoria del moto prende le direzioni da `pos` e normalizza su una mediana GLOBALE | `STATO_RUN.md` |
 | `NO` | **D04** | smpchiudi() RISCRIVE tutto d0 a fine passo e NON ha nessun tracciad0 attorno: e' una scrittura... | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `NO` | **D24** | A2 e' VIOLATO da Lam = mean(I) -- una media GLOBALE dentro una legge locale -- e la violazione... | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
@@ -219,7 +218,7 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D02](REVISIONE_SI_202
 ---
 
 **COSA QUESTA LISTA NON DICE:**
-- **non dice che le altre 647 voci siano irrilevanti**: dice che **non possono bloccare un run
+- **non dice che le altre 648 voci siano irrilevanti**: dice che **non possono bloccare un run
   base** perche' sono chiuse, sono teoria, o sono etichette locali di un sigillo.
 - **il titolo e' UNA riga**: la spiegazione sta nella fonte, e la fonte e' in colonna.
 - **`motivo` viene dalla COLONNA dell'indice**, non da una regola di questo script: se una riga
