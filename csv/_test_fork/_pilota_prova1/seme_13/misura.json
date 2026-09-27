@@ -1,0 +1,1615 @@
+{
+ "LAM": 0.8,
+ "blocchi": [
+  {
+   "archi": 470836,
+   "calibrazione": [
+    {
+     "componenti": 2,
+     "contaminanti_misurati": 176.0,
+     "contaminanti_previsti": 183.79212828252074,
+     "kappa": 2,
+     "orfani_comp": 10,
+     "orfani_vicino": 0,
+     "regole": {
+      "R-COMP": {
+       "f1_min": 0.0,
+       "masse_vuote": 2,
+       "per_massa": {
+        "massa_0": {
+         "f1": 0.0,
+         "n": 0,
+         "precisione": 0.0,
+         "richiamo": 0.0
+        },
+        "massa_1": {
+         "f1": 0.0,
+         "n": 0,
+         "precisione": 0.0,
+         "richiamo": 0.0
+        },
+        "massa_2": {
+         "f1": 0.47836538461538464,
+         "n": 1249,
+         "precisione": 0.31865492393915135,
+         "richiamo": 0.9590361445783132
+        }
+       },
+       "precisione_min": 0.0,
+       "richiamo_min": 0.0
+      },
+      "R-VICINO": {
+       "f1_min": 0.8993135011441646,
+       "masse_vuote": 0,
+       "per_massa": {
+        "massa_0": {
+         "f1": 0.8993135011441646,
+         "n": 460,
+         "precisione": 0.8543478260869565,
+         "richiamo": 0.9492753623188406
+        },
+        "massa_1": {
+         "f1": 0.9148191365227538,
+         "n": 447,
+         "precisione": 0.8769574944071589,
+         "richiamo": 0.9560975609756097
+        },
+        "massa_2": {
+         "f1": 0.9181084198385236,
+         "n": 452,
+         "precisione": 0.8805309734513275,
+         "richiamo": 0.9590361445783132
+        }
+       },
+       "precisione_min": 0.8543478260869565,
+       "richiamo_min": 0.9492753623188406
+      }
+     },
+     "scartati_piccoli": 100,
+     "selezionati": 1359
+    },
+    {
+     "componenti": 3,
+     "contaminanti_misurati": 265.0,
+     "contaminanti_previsti": 275.6881924237812,
+     "kappa": 3,
+     "orfani_comp": 22,
+     "orfani_vicino": 0,
+     "regole": {
+      "R-COMP": {
+       "f1_min": 0.0,
+       "masse_vuote": 2,
+       "per_massa": {
+        "massa_0": {
+         "f1": 0.0,
+         "n": 0,
+         "precisione": 0.0,
+         "richiamo": 0.0
+        },
+        "massa_1": {
+         "f1": 0.0,
+         "n": 0,
+         "precisione": 0.0,
+         "richiamo": 0.0
+        },
+        "massa_2": {
+         "f1": 0.46700507614213205,
+         "n": 1358,
+         "precisione": 0.30486008836524303,
+         "richiamo": 0.9975903614457832
+        }
+       },
+       "precisione_min": 0.0,
+       "richiamo_min": 0.0
+      },
+      "R-VICINO": {
+       "f1_min": 0.8961038961038961,
+       "masse_vuote": 0,
+       "per_massa": {
+        "massa_0": {
+         "f1": 0.8961038961038961,
+         "n": 510,
+         "precisione": 0.8117647058823529,
+         "richiamo": 1.0
+        },
+        "massa_1": {
+         "f1": 0.8971553610503282,
+         "n": 504,
+         "precisione": 0.8134920634920635,
+         "richiamo": 1.0
+        },
+        "massa_2": {
+         "f1": 0.915929203539823,
+         "n": 489,
+         "precisione": 0.8466257668711656,
+         "richiamo": 0.9975903614457832
+        }
+       },
+       "precisione_min": 0.8117647058823529,
+       "richiamo_min": 0.9975903614457832
+      }
+     },
+     "scartati_piccoli": 123,
+     "selezionati": 1503
+    },
+    {
+     "componenti": 4,
+     "contaminanti_misurati": 357.0,
+     "contaminanti_previsti": 367.58425656504147,
+     "kappa": 4,
+     "orfani_comp": 34,
+     "orfani_vicino": 0,
+     "regole": {
+      "R-COMP": {
+       "f1_min": 0.0,
+       "masse_vuote": 2,
+       "per_massa": {
+        "massa_0": {
+         "f1": 0.0,
+         "n": 0,
+         "precisione": 0.0,
+         "richiamo": 0.0
+        },
+        "massa_1": {
+         "f1": 0.0,
+         "n": 0,
+         "precisione": 0.0,
+         "richiamo": 0.0
+        },
+        "massa_2": {
+         "f1": 0.445996775926921,
+         "n": 1446,
+         "precisione": 0.2869986168741355,
+         "richiamo": 1.0
+        }
+       },
+       "precisione_min": 0.0,
+       "richiamo_min": 0.0
+      },
+      "R-VICINO": {
+       "f1_min": 0.8688352570828961,
+       "masse_vuote": 0,
+       "per_massa": {
+        "massa_0": {
+         "f1": 0.8688352570828961,
+         "n": 539,
+         "precisione": 0.7680890538033395,
+         "richiamo": 1.0
+        },
+        "massa_1": {
+         "f1": 0.8704883227176221,
+         "n": 532,
+         "precisione": 0.7706766917293233,
+         "richiamo": 1.0
+        },
+        "massa_2": {
+         "f1": 0.8829787234042553,
+         "n": 525,
+         "precisione": 0.7904761904761904,
+         "richiamo": 1.0
+        }
+       },
+       "precisione_min": 0.7680890538033395,
+       "richiamo_min": 1.0
+      }
+     },
+     "scartati_piccoli": 116,
+     "selezionati": 1596
+    }
+   ],
+   "centri_passo0": {
+    "massa_0": 3376,
+    "massa_1": 3012,
+    "massa_2": 782
+   },
+   "componenti_grafo": 1,
+   "controlli": {
+    "MARCHIO": "RISCELTA: diagnostico, NON l'osservabile (K5b)",
+    "candidati_lontani": 5416,
+    "coppie": {
+     "massa_0|massa_1": {
+      "bersaglio": 10.706263232937207,
+      "distanza": 10.705430810956209,
+      "entro_toll": true,
+      "nodo_a": 40,
+      "nodo_b": 12763,
+      "scarto_relativo": 7.775093539990999e-05
+     },
+     "massa_0|massa_2": {
+      "bersaglio": 10.883329321151864,
+      "distanza": 10.88392414636621,
+      "entro_toll": true,
+      "nodo_a": 8334,
+      "nodo_b": 7592,
+      "scarto_relativo": 5.4654710593947015e-05
+     },
+     "massa_1|massa_2": {
+      "bersaglio": 10.019708382662198,
+      "distanza": 10.017896912390885,
+      "entro_toll": true,
+      "nodo_a": 10179,
+      "nodo_b": 6630,
+      "scarto_relativo": 0.0001807907178663969
+     }
+    },
+    "metro_lontananza": 4.096438164464869,
+    "nota": "",
+    "trovati": 3
+   },
+   "controlli_fissi": {
+    "candidati_lontani": 5416,
+    "coppie": {
+     "massa_0|massa_1": [
+      {
+       "distanza": 10.705430810956209,
+       "distanza_0": 10.705430810956209,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 40,
+       "nodo_b": 12763
+      },
+      {
+       "distanza": 10.70361303685959,
+       "distanza_0": 10.70361303685959,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 4051,
+       "nodo_b": 4473
+      },
+      {
+       "distanza": 10.710334982614418,
+       "distanza_0": 10.710334982614418,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 1617,
+       "nodo_b": 6538
+      },
+      {
+       "distanza": 10.715157054516522,
+       "distanza_0": 10.715157054516522,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 5039,
+       "nodo_b": 7522
+      }
+     ],
+     "massa_0|massa_2": [
+      {
+       "distanza": 10.883924146366212,
+       "distanza_0": 10.883924146366212,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 7592,
+       "nodo_b": 8334
+      },
+      {
+       "distanza": 10.880142964225065,
+       "distanza_0": 10.880142964225065,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 6349,
+       "nodo_b": 6981
+      },
+      {
+       "distanza": 10.886677233106631,
+       "distanza_0": 10.886677233106631,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 7213,
+       "nodo_b": 12056
+      },
+      {
+       "distanza": 10.886735588094595,
+       "distanza_0": 10.886735588094595,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 678,
+       "nodo_b": 10311
+      }
+     ],
+     "massa_1|massa_2": [
+      {
+       "distanza": 10.017896912390883,
+       "distanza_0": 10.017896912390883,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 6630,
+       "nodo_b": 10179
+      },
+      {
+       "distanza": 10.02575501414492,
+       "distanza_0": 10.02575501414492,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 5039,
+       "nodo_b": 5176
+      },
+      {
+       "distanza": 10.026894087139148,
+       "distanza_0": 10.026894087139148,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 1165,
+       "nodo_b": 4235
+      },
+      {
+       "distanza": 10.027650814742028,
+       "distanza_0": 10.027650814742028,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 5285,
+       "nodo_b": 8695
+      }
+     ]
+    },
+    "esclusi_componenti": 0,
+    "esclusi_dentro": 0,
+    "esclusi_inf": 0,
+    "metro_lontananza": 4.096438164464869,
+    "quante_chieste": 4,
+    "totali": 12,
+    "trovate": {
+     "massa_0|massa_1": 4,
+     "massa_0|massa_2": 4,
+     "massa_1|massa_2": 4
+    },
+    "usate": 12
+   },
+   "coppie_fase": {
+    "massa_0|massa_1": {
+     "centro_centro": 10.706263232937207,
+     "insieme_insieme": 0.8104245194352218
+    },
+    "massa_0|massa_2": {
+     "centro_centro": 10.883329321151864,
+     "insieme_insieme": 1.1465305397110133
+    },
+    "massa_1|massa_2": {
+     "centro_centro": 10.019708382662198,
+     "insieme_insieme": 1.1456673821578658
+    }
+   },
+   "coppie_passo0": {
+    "massa_0|massa_1": {
+     "centro_centro": 10.706263232937207,
+     "insieme_insieme": 3.048530671676862
+    },
+    "massa_0|massa_2": {
+     "centro_centro": 10.883329321151864,
+     "insieme_insieme": 2.753463624353123
+    },
+    "massa_1|massa_2": {
+     "centro_centro": 10.019708382662198,
+     "insieme_insieme": 3.005414931608208
+    }
+   },
+   "fase": {
+    "componenti": 3,
+    "kappa": 3,
+    "orfani": 0,
+    "per_massa": {
+     "massa_0": {
+      "componenti": 1,
+      "medoide_fase": 3376,
+      "medoide_passo0": 3376,
+      "n": 510,
+      "sovrapposizione": 1.0,
+      "spostamento_medoide": 0.0
+     },
+     "massa_1": {
+      "componenti": 1,
+      "medoide_fase": 3012,
+      "medoide_passo0": 3012,
+      "n": 504,
+      "sovrapposizione": 1.0,
+      "spostamento_medoide": 0.0
+     },
+     "massa_2": {
+      "componenti": 1,
+      "medoide_fase": 782,
+      "medoide_passo0": 782,
+      "n": 489,
+      "sovrapposizione": 0.9975903614457832,
+      "spostamento_medoide": 0.0
+     }
+    },
+    "regola": "R-VICINO",
+    "scartati_piccoli": 123,
+    "selezionati": 1503
+   },
+   "forma_fase": {
+    "massa_0": {
+     "coer_campo": 0.9982649199220804,
+     "coer_dominio": 0.9995659588856526,
+     "foglio_0": 0.4627450980392157,
+     "foglio_1": 0.5372549019607843,
+     "medoide": 3376,
+     "n": 510,
+     "p10": 2.2886593550134564,
+     "p50": 4.652013127435365,
+     "p90": 7.245956518819998,
+     "raggio": 3.4472574423142284,
+     "raggiungibili": 456
+    },
+    "massa_1": {
+     "coer_campo": 0.9982639878648272,
+     "coer_dominio": 0.99956572091001,
+     "foglio_0": 0.5079365079365079,
+     "foglio_1": 0.49206349206349204,
+     "medoide": 3012,
+     "n": 504,
+     "p10": 2.2969306235866513,
+     "p50": 4.712060157605954,
+     "p90": 7.845841917378662,
+     "raggio": 3.6058794815899913,
+     "raggiungibili": 454
+    },
+    "massa_2": {
+     "coer_campo": 0.9984880886284524,
+     "coer_dominio": 0.9996218121262129,
+     "foglio_0": 0.49079754601226994,
+     "foglio_1": 0.50920245398773,
+     "medoide": 782,
+     "n": 489,
+     "p10": 2.2788654610445893,
+     "p50": 4.6520802173213145,
+     "p90": 7.2856885008717365,
+     "raggio": 3.498713143435341,
+     "raggiungibili": 447
+    }
+   },
+   "forma_passo0": {
+    "massa_0": {
+     "coer_campo": 0.9987424272545532,
+     "coer_dominio": 0.9996854612816491,
+     "foglio_0": 0.4613526570048309,
+     "foglio_1": 0.538647342995169,
+     "medoide": 3376,
+     "n": 414,
+     "p10": 2.1486141759554247,
+     "p50": 4.315316143985039,
+     "p90": 6.3924292924235875,
+     "raggio": 3.1518752562428194,
+     "raggiungibili": 414
+    },
+    "massa_1": {
+     "coer_campo": 0.9988183313398445,
+     "coer_dominio": 0.9997044572960888,
+     "foglio_0": 0.5219512195121951,
+     "foglio_1": 0.47804878048780486,
+     "medoide": 3012,
+     "n": 410,
+     "p10": 2.142199917121843,
+     "p50": 4.3070293737148715,
+     "p90": 6.378318027236629,
+     "raggio": 3.159198887834657,
+     "raggiungibili": 410
+    },
+    "massa_2": {
+     "coer_campo": 0.9987929213023535,
+     "coer_dominio": 0.9996980934599289,
+     "foglio_0": 0.4867469879518072,
+     "foglio_1": 0.5132530120481927,
+     "medoide": 782,
+     "n": 415,
+     "p10": 2.1680122177223207,
+     "p50": 4.37443263765076,
+     "p90": 6.46610129999765,
+     "raggio": 3.1863857267721305,
+     "raggiungibili": 415
+    }
+   },
+   "n": 12787,
+   "nascite_per_chiamata": {
+    "memoria_hebbiana_moto": 0,
+    "mitosi": 0,
+    "rilassa_disegno": 0,
+    "step": 0
+   },
+   "nascite_per_zona": {
+    "altro": {
+     "massa": 0,
+     "varco": 0,
+     "vuoto": 0
+    },
+    "mitosi": {
+     "massa": 0,
+     "varco": 0,
+     "vuoto": 0
+    },
+    "schwinger": {
+     "massa": 0,
+     "varco": 0,
+     "vuoto": 0
+    }
+   },
+   "passo": 0,
+   "schwinger": {
+    "ambigui": 0,
+    "arco_non_trovato": 0,
+    "coppie": 0,
+    "scorciatoie": 0
+   },
+   "zone_tutti": {
+    "massa": 1239,
+    "metro_massa": 0.8,
+    "toll_varco": 0.1,
+    "varco": 32,
+    "vuoto": 11516
+   }
+  },
+  {
+   "archi": 470836,
+   "centri_passo0": {
+    "massa_0": 3376,
+    "massa_1": 3012,
+    "massa_2": 782
+   },
+   "componenti_grafo": 1,
+   "controlli": {
+    "MARCHIO": "RISCELTA: diagnostico, NON l'osservabile (K5b)",
+    "candidati_lontani": 5410,
+    "coppie": {
+     "massa_0|massa_1": {
+      "bersaglio": 10.71306982305959,
+      "distanza": 10.71357539389281,
+      "entro_toll": true,
+      "nodo_a": 10913,
+      "nodo_b": 4981,
+      "scarto_relativo": 4.719196659512912e-05
+     },
+     "massa_0|massa_2": {
+      "bersaglio": 10.838797642128908,
+      "distanza": 10.844814570215885,
+      "entro_toll": true,
+      "nodo_a": 10228,
+      "nodo_b": 12060,
+      "scarto_relativo": 0.0005551287408106855
+     },
+     "massa_1|massa_2": {
+      "bersaglio": 9.997120646824248,
+      "distanza": 9.995742385177591,
+      "entro_toll": true,
+      "nodo_a": 11777,
+      "nodo_b": 5041,
+      "scarto_relativo": 0.00013786586111621412
+     }
+    },
+    "metro_lontananza": 4.096438164464869,
+    "nota": "",
+    "trovati": 3
+   },
+   "controlli_fissi": {
+    "candidati_lontani": 5416,
+    "coppie": {
+     "massa_0|massa_1": [
+      {
+       "distanza": 10.747604769357565,
+       "distanza_0": 10.705430810956209,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 40,
+       "nodo_b": 12763
+      },
+      {
+       "distanza": 10.743157484228798,
+       "distanza_0": 10.70361303685959,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 4051,
+       "nodo_b": 4473
+      },
+      {
+       "distanza": 10.749097059737492,
+       "distanza_0": 10.710334982614418,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 1617,
+       "nodo_b": 6538
+      },
+      {
+       "distanza": 10.722830855437378,
+       "distanza_0": 10.715157054516522,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 5039,
+       "nodo_b": 7522
+      }
+     ],
+     "massa_0|massa_2": [
+      {
+       "distanza": 10.898378035130381,
+       "distanza_0": 10.883924146366212,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 7592,
+       "nodo_b": 8334
+      },
+      {
+       "distanza": 10.973318958670758,
+       "distanza_0": 10.880142964225065,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 6349,
+       "nodo_b": 6981
+      },
+      {
+       "distanza": 10.882812200279028,
+       "distanza_0": 10.886677233106631,
+       "escluso": true,
+       "motivo": "un nodo e' finito DENTRO una regione coerente",
+       "nodo_a": 7213,
+       "nodo_b": 12056
+      },
+      {
+       "distanza": 10.921185052403956,
+       "distanza_0": 10.886735588094595,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 678,
+       "nodo_b": 10311
+      }
+     ],
+     "massa_1|massa_2": [
+      {
+       "distanza": 10.0062894253729,
+       "distanza_0": 10.017896912390883,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 6630,
+       "nodo_b": 10179
+      },
+      {
+       "distanza": 10.050357446061062,
+       "distanza_0": 10.02575501414492,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 5039,
+       "nodo_b": 5176
+      },
+      {
+       "distanza": 10.087337499185896,
+       "distanza_0": 10.026894087139148,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 1165,
+       "nodo_b": 4235
+      },
+      {
+       "distanza": 10.049984098335505,
+       "distanza_0": 10.027650814742028,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 5285,
+       "nodo_b": 8695
+      }
+     ]
+    },
+    "esclusi_componenti": 0,
+    "esclusi_dentro": 1,
+    "esclusi_inf": 0,
+    "metro_lontananza": 4.096438164464869,
+    "quante_chieste": 4,
+    "totali": 12,
+    "trovate": {
+     "massa_0|massa_1": 4,
+     "massa_0|massa_2": 4,
+     "massa_1|massa_2": 4
+    },
+    "usate": 11
+   },
+   "coppie_fase": {
+    "massa_0|massa_1": {
+     "centro_centro": 10.600872999690683,
+     "insieme_insieme": 0.889936755803969
+    },
+    "massa_0|massa_2": {
+     "centro_centro": 11.086031840351174,
+     "insieme_insieme": 0.9637657324417978
+    },
+    "massa_1|massa_2": {
+     "centro_centro": 11.38963095766627,
+     "insieme_insieme": 0.8202975329928369
+    }
+   },
+   "coppie_passo0": {
+    "massa_0|massa_1": {
+     "centro_centro": 10.71306982305959,
+     "insieme_insieme": 3.0726367600067066
+    },
+    "massa_0|massa_2": {
+     "centro_centro": 10.838797642128908,
+     "insieme_insieme": 2.732080587208547
+    },
+    "massa_1|massa_2": {
+     "centro_centro": 9.997120646824248,
+     "insieme_insieme": 3.1067907430041632
+    }
+   },
+   "fase": {
+    "componenti": 1,
+    "kappa": 3,
+    "orfani": 0,
+    "per_massa": {
+     "massa_0": {
+      "componenti": 1,
+      "medoide_fase": 895,
+      "medoide_passo0": 3376,
+      "n": 215,
+      "sovrapposizione": 0.22946859903381642,
+      "spostamento_medoide": 0.8330154073613043
+     },
+     "massa_1": {
+      "componenti": 1,
+      "medoide_fase": 3012,
+      "medoide_passo0": 3012,
+      "n": 195,
+      "sovrapposizione": 0.26097560975609757,
+      "spostamento_medoide": 0.0
+     },
+     "massa_2": {
+      "componenti": 1,
+      "medoide_fase": 2115,
+      "medoide_passo0": 782,
+      "n": 195,
+      "sovrapposizione": 0.2216867469879518,
+      "spostamento_medoide": 1.7258616409348546
+     }
+    },
+    "regola": "R-VICINO",
+    "scartati_piccoli": 174,
+    "selezionati": 605
+   },
+   "forma_fase": {
+    "massa_0": {
+     "coer_campo": 0.9959977853293611,
+     "coer_dominio": 0.9989986170283545,
+     "foglio_0": 0.4930232558139535,
+     "foglio_1": 0.5069767441860465,
+     "medoide": 895,
+     "n": 215,
+     "p10": 2.6553185388920095,
+     "p50": 6.137799569250005,
+     "p90": 11.850304182229943,
+     "raggio": 4.585901464250493,
+     "raggiungibili": 150
+    },
+    "massa_1": {
+     "coer_campo": 0.9965281468103782,
+     "coer_dominio": 0.9991313372965357,
+     "foglio_0": 0.5230769230769231,
+     "foglio_1": 0.47692307692307695,
+     "medoide": 3012,
+     "n": 195,
+     "p10": 2.1721657330951847,
+     "p50": 4.91395434570409,
+     "p90": 9.668563694777465,
+     "raggio": 3.7618643710556308,
+     "raggiungibili": 140
+    },
+    "massa_2": {
+     "coer_campo": 0.9961270682177337,
+     "coer_dominio": 0.9990308834390101,
+     "foglio_0": 0.41025641025641024,
+     "foglio_1": 0.5897435897435898,
+     "medoide": 2115,
+     "n": 195,
+     "p10": 2.3168129100123456,
+     "p50": 5.33374727786164,
+     "p90": 9.701017030088485,
+     "raggio": 4.015088213867003,
+     "raggiungibili": 126
+    }
+   },
+   "forma_passo0": {
+    "massa_0": {
+     "coer_campo": 0.6303606333120001,
+     "coer_dominio": 0.7688609954265065,
+     "foglio_0": 0.4855072463768116,
+     "foglio_1": 0.5144927536231884,
+     "medoide": 3376,
+     "n": 414,
+     "p10": 2.1436869744798104,
+     "p50": 4.3220338962429645,
+     "p90": 6.397477122214449,
+     "raggio": 3.159038147349162,
+     "raggiungibili": 414
+    },
+    "massa_1": {
+     "coer_campo": 0.562736102821149,
+     "coer_dominio": 0.6914872740308163,
+     "foglio_0": 0.5121951219512195,
+     "foglio_1": 0.4878048780487805,
+     "medoide": 3012,
+     "n": 410,
+     "p10": 2.1366564886679034,
+     "p50": 4.311468442709105,
+     "p90": 6.380433864020776,
+     "raggio": 3.166130642534716,
+     "raggiungibili": 410
+    },
+    "massa_2": {
+     "coer_campo": 0.6210463752636342,
+     "coer_dominio": 0.8130121943267018,
+     "foglio_0": 0.4650602409638554,
+     "foglio_1": 0.5349397590361445,
+     "medoide": 782,
+     "n": 415,
+     "p10": 2.16203431525863,
+     "p50": 4.380308023944288,
+     "p90": 6.469482247729834,
+     "raggio": 3.1901249171435775,
+     "raggiungibili": 415
+    }
+   },
+   "n": 12787,
+   "nascite_per_chiamata": {
+    "memoria_hebbiana_moto": 0,
+    "mitosi": 0,
+    "rilassa_disegno": 0,
+    "step": 0
+   },
+   "nascite_per_zona": {
+    "altro": {
+     "massa": 0,
+     "varco": 0,
+     "vuoto": 0
+    },
+    "mitosi": {
+     "massa": 0,
+     "varco": 0,
+     "vuoto": 0
+    },
+    "schwinger": {
+     "massa": 0,
+     "varco": 0,
+     "vuoto": 0
+    }
+   },
+   "passo": 40,
+   "schwinger": {
+    "ambigui": 0,
+    "arco_non_trovato": 0,
+    "coppie": 0,
+    "scorciatoie": 0
+   },
+   "zone_tutti": {
+    "massa": 1239,
+    "metro_massa": 0.8,
+    "toll_varco": 0.1,
+    "varco": 31,
+    "vuoto": 11517
+   }
+  },
+  {
+   "archi": 470907,
+   "centri_passo0": {
+    "massa_0": 3376,
+    "massa_1": 3012,
+    "massa_2": 782
+   },
+   "componenti_grafo": 1,
+   "controlli": {
+    "MARCHIO": "RISCELTA: diagnostico, NON l'osservabile (K5b)",
+    "candidati_lontani": 5317,
+    "coppie": {
+     "massa_0|massa_1": {
+      "bersaglio": 10.512238420589238,
+      "distanza": 10.51259685607601,
+      "entro_toll": true,
+      "nodo_a": 4141,
+      "nodo_b": 10377,
+      "scarto_relativo": 3.4096970828805476e-05
+     },
+     "massa_0|massa_2": {
+      "bersaglio": 10.651985138849628,
+      "distanza": 10.652452936056916,
+      "entro_toll": true,
+      "nodo_a": 4473,
+      "nodo_b": 7987,
+      "scarto_relativo": 4.391643446639381e-05
+     },
+     "massa_1|massa_2": {
+      "bersaglio": 9.889948724810337,
+      "distanza": 9.890080289420752,
+      "entro_toll": true,
+      "nodo_a": 377,
+      "nodo_b": 5924,
+      "scarto_relativo": 1.3302860720088548e-05
+     }
+    },
+    "metro_lontananza": 4.096438164464869,
+    "nota": "",
+    "trovati": 3
+   },
+   "controlli_fissi": {
+    "candidati_lontani": 5416,
+    "coppie": {
+     "massa_0|massa_1": [
+      {
+       "distanza": 10.813528795250772,
+       "distanza_0": 10.705430810956209,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 40,
+       "nodo_b": 12763
+      },
+      {
+       "distanza": 10.789765512894029,
+       "distanza_0": 10.70361303685959,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 4051,
+       "nodo_b": 4473
+      },
+      {
+       "distanza": 10.79450208997319,
+       "distanza_0": 10.710334982614418,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 1617,
+       "nodo_b": 6538
+      },
+      {
+       "distanza": 10.566439838813821,
+       "distanza_0": 10.715157054516522,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 5039,
+       "nodo_b": 7522
+      }
+     ],
+     "massa_0|massa_2": [
+      {
+       "distanza": 10.752127821919261,
+       "distanza_0": 10.883924146366212,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 7592,
+       "nodo_b": 8334
+      },
+      {
+       "distanza": 11.017106763058113,
+       "distanza_0": 10.880142964225065,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 6349,
+       "nodo_b": 6981
+      },
+      {
+       "distanza": 10.74768787129746,
+       "distanza_0": 10.886677233106631,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 7213,
+       "nodo_b": 12056
+      },
+      {
+       "distanza": 10.760505260409019,
+       "distanza_0": 10.886735588094595,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 678,
+       "nodo_b": 10311
+      }
+     ],
+     "massa_1|massa_2": [
+      {
+       "distanza": 9.958292143875031,
+       "distanza_0": 10.017896912390883,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 6630,
+       "nodo_b": 10179
+      },
+      {
+       "distanza": 9.928677716078406,
+       "distanza_0": 10.02575501414492,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 5039,
+       "nodo_b": 5176
+      },
+      {
+       "distanza": 9.924572907444489,
+       "distanza_0": 10.026894087139148,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 1165,
+       "nodo_b": 4235
+      },
+      {
+       "distanza": 10.039353735765106,
+       "distanza_0": 10.027650814742028,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 5285,
+       "nodo_b": 8695
+      }
+     ]
+    },
+    "esclusi_componenti": 0,
+    "esclusi_dentro": 0,
+    "esclusi_inf": 0,
+    "metro_lontananza": 4.096438164464869,
+    "quante_chieste": 4,
+    "totali": 12,
+    "trovate": {
+     "massa_0|massa_1": 4,
+     "massa_0|massa_2": 4,
+     "massa_1|massa_2": 4
+    },
+    "usate": 12
+   },
+   "coppie_fase": {
+    "massa_0|massa_1": {
+     "centro_centro": 10.677673091393078,
+     "insieme_insieme": 1.5727536548548484
+    },
+    "massa_0|massa_2": {
+     "centro_centro": 12.91619144710677,
+     "insieme_insieme": 1.2131317472875047
+    },
+    "massa_1|massa_2": {
+     "centro_centro": 12.372793088286228,
+     "insieme_insieme": 1.9074995261313548
+    }
+   },
+   "coppie_passo0": {
+    "massa_0|massa_1": {
+     "centro_centro": 10.512238420589238,
+     "insieme_insieme": 3.0816753316511987
+    },
+    "massa_0|massa_2": {
+     "centro_centro": 10.651985138849628,
+     "insieme_insieme": 2.633987544567358
+    },
+    "massa_1|massa_2": {
+     "centro_centro": 9.889948724810337,
+     "insieme_insieme": 3.1315100076855673
+    }
+   },
+   "fase": {
+    "componenti": 3,
+    "kappa": 3,
+    "orfani": 0,
+    "per_massa": {
+     "massa_0": {
+      "componenti": 1,
+      "medoide_fase": 1782,
+      "medoide_passo0": 3376,
+      "n": 132,
+      "sovrapposizione": 0.0748792270531401,
+      "spostamento_medoide": 1.7457591137794193
+     },
+     "massa_1": {
+      "componenti": 1,
+      "medoide_fase": 5327,
+      "medoide_passo0": 3012,
+      "n": 127,
+      "sovrapposizione": 0.07317073170731707,
+      "spostamento_medoide": 3.682033369068992
+     },
+     "massa_2": {
+      "componenti": 1,
+      "medoide_fase": 578,
+      "medoide_passo0": 782,
+      "n": 155,
+      "sovrapposizione": 0.0819277108433735,
+      "spostamento_medoide": 3.709826319821423
+     }
+    },
+    "regola": "R-VICINO",
+    "scartati_piccoli": 148,
+    "selezionati": 414
+   },
+   "forma_fase": {
+    "massa_0": {
+     "coer_campo": 0.9962971885868965,
+     "coer_dominio": 0.9990735193611364,
+     "foglio_0": 0.4621212121212121,
+     "foglio_1": 0.5378787878787878,
+     "medoide": 1782,
+     "n": 132,
+     "p10": 1.9129764916465513,
+     "p50": 5.732100530489984,
+     "p90": 10.757802597742401,
+     "raggio": 4.364773915717791,
+     "raggiungibili": 44
+    },
+    "massa_1": {
+     "coer_campo": 0.9962923455125976,
+     "coer_dominio": 0.9990723225637836,
+     "foglio_0": 0.4251968503937008,
+     "foglio_1": 0.5748031496062992,
+     "medoide": 5327,
+     "n": 127,
+     "p10": 3.3756639065881977,
+     "p50": 10.228980110719199,
+     "p90": 20.904673929571576,
+     "raggio": 7.533139340227014,
+     "raggiungibili": 67
+    },
+    "massa_2": {
+     "coer_campo": 0.9959206073802561,
+     "coer_dominio": 0.9989792486676655,
+     "foglio_0": 0.5290322580645161,
+     "foglio_1": 0.47096774193548385,
+     "medoide": 578,
+     "n": 155,
+     "p10": 3.9191638015783665,
+     "p50": 11.62285747527052,
+     "p90": 22.727589529088625,
+     "raggio": 8.31229802020582,
+     "raggiungibili": 104
+    }
+   },
+   "forma_passo0": {
+    "massa_0": {
+     "coer_campo": 0.2964925184925404,
+     "coer_dominio": 0.4197605187366987,
+     "foglio_0": 0.47101449275362317,
+     "foglio_1": 0.5289855072463768,
+     "medoide": 3376,
+     "n": 414,
+     "p10": 2.1093242802997922,
+     "p50": 4.266420768061793,
+     "p90": 6.32262345270314,
+     "raggio": 3.176880486476157,
+     "raggiungibili": 414
+    },
+    "massa_1": {
+     "coer_campo": 0.3287554754374693,
+     "coer_dominio": 0.4444949643483801,
+     "foglio_0": 0.4926829268292683,
+     "foglio_1": 0.5073170731707317,
+     "medoide": 3012,
+     "n": 410,
+     "p10": 2.100483632123099,
+     "p50": 4.251151990507704,
+     "p90": 6.286124309711527,
+     "raggio": 3.1857010171575593,
+     "raggiungibili": 410
+    },
+    "massa_2": {
+     "coer_campo": 0.3452603224620695,
+     "coer_dominio": 0.549252018424676,
+     "foglio_0": 0.4939759036144578,
+     "foglio_1": 0.5060240963855421,
+     "medoide": 782,
+     "n": 415,
+     "p10": 2.1249422718090725,
+     "p50": 4.326894013018775,
+     "p90": 6.398656090546017,
+     "raggio": 3.2044006956108206,
+     "raggiungibili": 415
+    }
+   },
+   "n": 12848,
+   "nascite_per_chiamata": {
+    "memoria_hebbiana_moto": 0,
+    "mitosi": 61,
+    "rilassa_disegno": 0,
+    "step": 0
+   },
+   "nascite_per_zona": {
+    "altro": {
+     "massa": 0,
+     "varco": 0,
+     "vuoto": 0
+    },
+    "mitosi": {
+     "massa": 0,
+     "varco": 0,
+     "vuoto": 51
+    },
+    "schwinger": {
+     "massa": 0,
+     "varco": 0,
+     "vuoto": 10
+    }
+   },
+   "nati_distanza_massa": {
+    "minimo": 0.9805127968804818,
+    "n": 61,
+    "p05": 1.9460495133477949,
+    "p50": 3.114135843184913,
+    "p95": 7.350220474161701
+   },
+   "passo": 80,
+   "schwinger": {
+    "ambigui": 0,
+    "arco_non_trovato": 0,
+    "coppie": 10,
+    "d_arco_mediano": 1.9725556959712984,
+    "dd_mediano": 1.0037194689630446,
+    "rapporto_mediano": 1.0018176096002562,
+    "rapporto_min": 0.8915943601019025,
+    "scorciatoie": 4
+   },
+   "zone_tutti": {
+    "massa": 1239,
+    "metro_massa": 0.8,
+    "toll_varco": 0.1,
+    "varco": 29,
+    "vuoto": 11580
+   }
+  },
+  {
+   "archi": 471634,
+   "centri_passo0": {
+    "massa_0": 8711,
+    "massa_1": 1025,
+    "massa_2": 782
+   },
+   "componenti_grafo": 1,
+   "controlli": {
+    "MARCHIO": "RISCELTA: diagnostico, NON l'osservabile (K5b)",
+    "candidati_lontani": 4969,
+    "coppie": {
+     "massa_0|massa_1": {
+      "bersaglio": 9.952564181689336,
+      "distanza": 9.952797117679705,
+      "entro_toll": true,
+      "nodo_a": 63,
+      "nodo_b": 109,
+      "scarto_relativo": 2.340462077068407e-05
+     },
+     "massa_0|massa_2": {
+      "bersaglio": 9.598091718711897,
+      "distanza": 9.59631519668172,
+      "entro_toll": true,
+      "nodo_a": 266,
+      "nodo_b": 1151,
+      "scarto_relativo": 0.00018509117043687514
+     },
+     "massa_1|massa_2": {
+      "bersaglio": 9.612844633463165,
+      "distanza": 9.615140940418087,
+      "entro_toll": true,
+      "nodo_a": 8124,
+      "nodo_b": 7133,
+      "scarto_relativo": 0.00023887902514596834
+     }
+    },
+    "metro_lontananza": 4.096438164464869,
+    "nota": "",
+    "trovati": 3
+   },
+   "controlli_fissi": {
+    "candidati_lontani": 5416,
+    "coppie": {
+     "massa_0|massa_1": [
+      {
+       "distanza": 10.506053526792869,
+       "distanza_0": 10.705430810956209,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 40,
+       "nodo_b": 12763
+      },
+      {
+       "distanza": 10.57439283795188,
+       "distanza_0": 10.70361303685959,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 4051,
+       "nodo_b": 4473
+      },
+      {
+       "distanza": 10.350461696466441,
+       "distanza_0": 10.710334982614418,
+       "escluso": true,
+       "motivo": "un nodo e' finito DENTRO una regione coerente",
+       "nodo_a": 1617,
+       "nodo_b": 6538
+      },
+      {
+       "distanza": 9.938763642504579,
+       "distanza_0": 10.715157054516522,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 5039,
+       "nodo_b": 7522
+      }
+     ],
+     "massa_0|massa_2": [
+      {
+       "distanza": 10.600109573647362,
+       "distanza_0": 10.883924146366212,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 7592,
+       "nodo_b": 8334
+      },
+      {
+       "distanza": 10.985790743460417,
+       "distanza_0": 10.880142964225065,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 6349,
+       "nodo_b": 6981
+      },
+      {
+       "distanza": 10.289940968624654,
+       "distanza_0": 10.886677233106631,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 7213,
+       "nodo_b": 12056
+      },
+      {
+       "distanza": 9.865382481080985,
+       "distanza_0": 10.886735588094595,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 678,
+       "nodo_b": 10311
+      }
+     ],
+     "massa_1|massa_2": [
+      {
+       "distanza": 9.63247084311369,
+       "distanza_0": 10.017896912390883,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 6630,
+       "nodo_b": 10179
+      },
+      {
+       "distanza": 9.46186362357052,
+       "distanza_0": 10.02575501414492,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 5039,
+       "nodo_b": 5176
+      },
+      {
+       "distanza": 9.737966285859132,
+       "distanza_0": 10.026894087139148,
+       "escluso": false,
+       "motivo": "",
+       "nodo_a": 1165,
+       "nodo_b": 4235
+      },
+      {
+       "distanza": 9.690504992609338,
+       "distanza_0": 10.027650814742028,
+       "escluso": true,
+       "motivo": "un nodo e' finito DENTRO una regione coerente",
+       "nodo_a": 5285,
+       "nodo_b": 8695
+      }
+     ]
+    },
+    "esclusi_componenti": 0,
+    "esclusi_dentro": 2,
+    "esclusi_inf": 0,
+    "metro_lontananza": 4.096438164464869,
+    "quante_chieste": 4,
+    "totali": 12,
+    "trovate": {
+     "massa_0|massa_1": 4,
+     "massa_0|massa_2": 4,
+     "massa_1|massa_2": 4
+    },
+    "usate": 10
+   },
+   "coppie_fase": {
+    "massa_0|massa_1": {
+     "centro_centro": 10.26433371636211,
+     "insieme_insieme": 1.0630717042327908
+    },
+    "massa_0|massa_2": {
+     "centro_centro": 9.754266066688587,
+     "insieme_insieme": 1.1561793215455198
+    },
+    "massa_1|massa_2": {
+     "centro_centro": 8.930110728098477,
+     "insieme_insieme": 1.648503202426865
+    }
+   },
+   "coppie_passo0": {
+    "massa_0|massa_1": {
+     "centro_centro": 9.952564181689336,
+     "insieme_insieme": 2.9654783858084763
+    },
+    "massa_0|massa_2": {
+     "centro_centro": 9.598091718711897,
+     "insieme_insieme": 2.5408814309731094
+    },
+    "massa_1|massa_2": {
+     "centro_centro": 9.612844633463165,
+     "insieme_insieme": 2.911300496333181
+    }
+   },
+   "fase": {
+    "componenti": 6,
+    "kappa": 3,
+    "orfani": 0,
+    "per_massa": {
+     "massa_0": {
+      "componenti": 1,
+      "medoide_fase": 2576,
+      "medoide_passo0": 8711,
+      "n": 111,
+      "sovrapposizione": 0.04830917874396135,
+      "spostamento_medoide": 2.1394466430836245
+     },
+     "massa_1": {
+      "componenti": 1,
+      "medoide_fase": 11972,
+      "medoide_passo0": 1025,
+      "n": 139,
+      "sovrapposizione": 0.05609756097560976,
+      "spostamento_medoide": 2.022842502964867
+     },
+     "massa_2": {
+      "componenti": 1,
+      "medoide_fase": 2701,
+      "medoide_passo0": 782,
+      "n": 152,
+      "sovrapposizione": 0.0819277108433735,
+      "spostamento_medoide": 2.0971913295065314
+     }
+    },
+    "regola": "R-VICINO",
+    "scartati_piccoli": 164,
+    "selezionati": 402
+   },
+   "forma_fase": {
+    "massa_0": {
+     "coer_campo": 0.9959783742424596,
+     "coer_dominio": 0.9989937376383295,
+     "foglio_0": 0.5315315315315315,
+     "foglio_1": 0.46846846846846846,
+     "medoide": 2576,
+     "n": 111,
+     "p10": 2.012976462506094,
+     "p50": 7.63803362750963,
+     "p90": 14.39386186978298,
+     "raggio": 5.6566762372414265,
+     "raggiungibili": 30
+    },
+    "massa_1": {
+     "coer_campo": 0.9963443318946312,
+     "coer_dominio": 0.9990853742025012,
+     "foglio_0": 0.5035971223021583,
+     "foglio_1": 0.49640287769784175,
+     "medoide": 11972,
+     "n": 139,
+     "p10": 3.718170334876224,
+     "p50": 11.291301722810285,
+     "p90": 21.26371305614124,
+     "raggio": 7.860502926936641,
+     "raggiungibili": 76
+    },
+    "massa_2": {
+     "coer_campo": 0.9963590776291513,
+     "coer_dominio": 0.9990890419824542,
+     "foglio_0": 0.5,
+     "foglio_1": 0.5,
+     "medoide": 2701,
+     "n": 152,
+     "p10": 3.1082830996470223,
+     "p50": 9.26720945837674,
+     "p90": 21.048382486930503,
+     "raggio": 7.342384150325487,
+     "raggiungibili": 59
+    }
+   },
+   "forma_passo0": {
+    "massa_0": {
+     "coer_campo": 0.16029483794776497,
+     "coer_dominio": 0.24076447432562598,
+     "foglio_0": 0.42995169082125606,
+     "foglio_1": 0.5700483091787439,
+     "medoide": 8711,
+     "n": 414,
+     "p10": 2.0556607198187473,
+     "p50": 4.115693056811965,
+     "p90": 6.1019058494150595,
+     "raggio": 3.1704741870138196,
+     "raggiungibili": 414
+    },
+    "massa_1": {
+     "coer_campo": 0.19934713085669367,
+     "coer_dominio": 0.3012176553178677,
+     "foglio_0": 0.5048780487804878,
+     "foglio_1": 0.4951219512195122,
+     "medoide": 1025,
+     "n": 410,
+     "p10": 2.0434079587971437,
+     "p50": 4.058756428191993,
+     "p90": 5.983119884884876,
+     "raggio": 3.1898417658794447,
+     "raggiungibili": 410
+    },
+    "massa_2": {
+     "coer_campo": 0.23575141004918057,
+     "coer_dominio": 0.36924160390073824,
+     "foglio_0": 0.5228915662650603,
+     "foglio_1": 0.4771084337349398,
+     "medoide": 782,
+     "n": 415,
+     "p10": 2.065861944290548,
+     "p50": 4.142815553288857,
+     "p90": 6.1041941719744255,
+     "raggio": 3.202673932508963,
+     "raggiungibili": 415
+    }
+   },
+   "n": 13459,
+   "nascite_per_chiamata": {
+    "memoria_hebbiana_moto": 0,
+    "mitosi": 672,
+    "rilassa_disegno": 0,
+    "step": 0
+   },
+   "nascite_per_zona": {
+    "altro": {
+     "massa": 0,
+     "varco": 0,
+     "vuoto": 0
+    },
+    "mitosi": {
+     "massa": 0,
+     "varco": 0,
+     "vuoto": 546
+    },
+    "schwinger": {
+     "massa": 0,
+     "varco": 0,
+     "vuoto": 126
+    }
+   },
+   "nati_distanza_massa": {
+    "minimo": 0.8488830736310395,
+    "n": 672,
+    "p05": 1.2211348283872603,
+    "p50": 4.014847932854746,
+    "p95": 7.4664325673519265
+   },
+   "passo": 120,
+   "schwinger": {
+    "ambigui": 0,
+    "arco_non_trovato": 0,
+    "coppie": 126,
+    "d_arco_mediano": 2.005868645764246,
+    "dd_mediano": 1.0140304237957252,
+    "rapporto_mediano": 1.011876593192163,
+    "rapporto_min": 0.7000929772157719,
+    "scorciatoie": 50
+   },
+   "zone_tutti": {
+    "massa": 1239,
+    "metro_massa": 0.8,
+    "toll_varco": 0.1,
+    "varco": 19,
+    "vuoto": 12201
+   }
+  }
+ ],
+ "checkpoint": [
+  40,
+  80,
+  120
+ ],
+ "coorti0": {
+  "massa_0": 414,
+  "massa_1": 410,
+  "massa_2": 415,
+  "vuoto": 11548
+ },
+ "dphi": 12.566370614359172,
+ "kappa": 3,
+ "kappa_regola": "il piu' piccolo `kappa` con richiamo >= 0.99 su ogni massa",
+ "n0": 12787,
+ "n_finale": 13459,
+ "passi": 120,
+ "pozzo_d": true,
+ "r_regione": 4.096438164464869,
+ "seme": 13,
+ "sep": 6.1158,
+ "sigma_scena": 0.05
+}

@@ -927,3 +927,19 @@ diversi per lo stesso file.)*
 | strumento | blob (byte) | comando | cosa fa | esito |
 |---|---|---|---|---|
 | `csv/_seal_fork/_sigillo_pozzo_d.py` | `16c298d3` | `python csv/_seal_fork/_sigillo_pozzo_d.py` · `--corto` | il sigillo di **`POZZO-D`** (`D02`): `W1` byte-identico a flag spento *(contro il PADRE del commit del flag)*, `W2` la spinta cambia **col rapporto `L_pos/L_d`**, `W3` i `d <= 0` **contati**, `W4` **il caso che DEVE fallire** *(solo `pos` mosso: ON non cambia, OFF si')*. Avanza con **`passo_pieno`** | **4/4 PASS**; `W4`: ON **`0.000000e+00`** esatto, OFF **`5.38e+02`** (`csv/_seal_fork/_sig_pozzo_d/REFERTO.txt`) |
+
+## Aggiunto il 2026-09-27 — **il PILOTA della `PROVA 1`**, e la cura `CTRL-RISCELTA`
+
+> **⚠ QUESTA SEZIONE ARRIVA UN COMMIT IN RITARDO, e lo dichiaro invece di lasciarlo passare:**
+> `CLAUDE.md` par.6 vuole l'inventario **nello stesso commit** del cambiamento, e gli strumenti
+> sono stati committati in `4a7597e`, `2ebbd25` e `8c2997c`. **Un blocco di recupero non sana
+> la violazione: la conferma.**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_pilota_prova1.py` | `b5e1c4a5` | `python csv/_test_fork/_pilota_prova1.py` · `--passi N` · `--checkpoint 0,40,80,120` · `--semi 11,12,13,14` · `--solo-referto` · `--collaudo` | **IL PILOTA DELLA `PROVA 1`** *(NON il run base: `5 SI` aperti)*. Lancia **un processo per seme** (`STANDARD 1`) e scrive il referto: `V1` controlli **FISSI**, `V2` l'osservabile `A(t)` con IC95 fra semi, `V5` migrazione, `V6` forma e allungamento, `V3` dove nascono i nodi, `V4` scorciatoie Schwinger. Dichiara la **configurazione intera** (`H-P5`) | **4 semi su 4**, 120 passi; `A(t) < 0` oltre la barra su **2 coppie su 3 a 40 e a 80 passi** |
+| `csv/_test_fork/_pilota_prova1_braccio.py` | `f79a6aae` | `python csv/_test_fork/_pilota_prova1_braccio.py --seme 11 --passi 120 --checkpoint 40,80,120` | **un braccio, un seme.** Avanza con **`_passo.passo_pieno`** (`H-P9`), misura ai checkpoint, e **CALIBRA `kappa`** al passo 0 sulla risposta NOTA. Contiene la `Spia` che separa **mitosi** e **Schwinger** *(dagli indici e da `_g_nati_schwinger`)* e conta le **scorciatoie** `2*dd < d` | `kappa = 3` scelto dalla regola scritta prima; contaminazione **prevista `276.1` contro misurata `284.0`** |
+| `csv/_test_fork/_confronto_previsione.py` | `231c78b7` | `python csv/_test_fork/_confronto_previsione.py` | **IL CONFRONTO fra la previsione e il pilota**, e i numeri del referto escono da qui (`L-NUMERI`). Stampa ogni previsione **col suo falsificante** e l'esito | **2 previsioni su 3 FALSIFICATE**; referto in `_pilota_prova1/CONFRONTO_previsione.txt` |
+| `csv/_osservabile_p1.py` | `7854c7b7` | `--scena` · `--snap F` · `--semi …` · `--collaudo` · **`--collaudo-controlli`** | **AGGIORNATO**: `controlli_fissi()` + `segui_controlli()` — le coppie di controllo si scelgono **una volta al passo 0** e poi **si SEGUONO**. `controlli()` RESTA col suo **marchio**, perche' e' l'evidenza del difetto e il ramo che **deve fallire** | **`K5` 2/2**; `K5b`: su un effetto vero del `-4.475 %` i fissi vedono `+0.0000 %` e la riscelta porta `A` a `+0.025 %` |
+
+**E i `.pkl`: NESSUNO.** Il pilota non scrive snapshot: ogni braccio produce **un `misura.json`** *(`csv/_test_fork/_pilota_prova1/seme_<N>/misura.json`)*, che **e' committabile** e porta seme, passi, `kappa`, blob e configurazione. **Per rigenerarli:** `python csv/_test_fork/_pilota_prova1.py` *(4 semi, 120 passi, ~40 min in parallelo)*.
