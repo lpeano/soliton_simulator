@@ -222,3 +222,52 @@ ha già ricalcolato, quindi `memoria_hebbiana_moto` trova `len(psi) == n` e non 
 * **il flash si misura sul campo, non sui pixel:** il conteggio dei pixel saturi del guardiano è
   **il segnale**; `max(phi_g)` e `mean(phi_g)` sono **la grandezza**.
 
+
+---
+
+## 5.5 ❗ **IL GUARDIANO HA RAGIONE: DEI DUE SITI, UNO È MORTO** *(2026-09-27)*
+
+**Verificato non solo dal sorgente ma A RUNTIME, caricando il simulatore con l'argv del driver:**
+
+| flag | valore **nel driver** | conseguenza |
+|---|---|---|
+| **`L_CONSERVA`** | ### **`False`** | il gate `if L_CONSERVA and pos0 is not None:` (`:6515`) **non passa** → **`_togli_rotazione_rigida` NON gira** → **`:6529` è MORTO** |
+| **`MEM_HEBB`** | ### **`True`** | `memoria_hebbiana_moto` gira → **`:6608` è l'UNICO candidato attivo** |
+
+E il commento di `L_CONSERVA` (`:846`) dice **«ERRATA, NON usare»**, con la ragione: *«AZZERA tutta
+la rotazione rigida ad ogni passo → distrugge la PRECESSIONE FISICA REALE»*.
+
+> ### **Quindi `H6` si semplifica: il candidato è UNO SOLO, `memoria_hebbiana_moto`.**
+> **E la spiegazione dei passi `60` e `66` — quelli con nascite e senza flash — NON può più essere
+> «ha ricalcolato l'altro sito»: quell'alternativa non esiste.** **La mia ipotesi di percorso
+> alternativo (par.5.2) CADE**, e la spiegazione va cercata altrove. **Lo dico invece di lasciarla
+> in piedi.**
+
+## 5.6 🎯 **E LA `psi` RICALCOLATA ENTRA NELLA FISICA — non è un difetto del fotogramma**
+
+**Alla domanda del guardiano — *«quale delle due `psi` usa la FISICA del passo successivo?»* — la
+risposta è peggiore: la usa la fisica dello STESSO passo.**
+
+```python
+:6607   if not hasattr(self, "psi") or len(self.psi) < n:
+:6608       self.calcola_psi()                       # <- RICALCOLA, solo se ci sono state nascite
+:6609   I = np.abs(self.psi[:n]) ** 2                # <- e QUESTA `I` e' quella che si usa
+  …
+:6669   phi_g, _, dpozzo = self.pozzo_grafo(I)       # <- IL POZZO DI GRAVITA'
+  …
+:6808   self.d0[mask] += self._sd0(spinta * median(self.d0[mask]), mask)   # <- LA SPINTA `S09`
+```
+
+### **Nei passi con nascite il pozzo di gravità è calcolato da una `psi` DIVERSA — ricalcolata sui pesi della `d` CORRENTE, dopo mitosi e rilassamento.**
+
+**E nel passo DOPO:** `step()` fa `self._psi_prec = self.psi.copy()` (`:5123`), quindi `_psi_prec`
+fotografa **la `psi` ricalcolata**. *(Col driver `ritmo()` legge `psi_spin`, non `_psi_prec`, quindi
+quel canale specifico resta chiuso — ma la fotografia c'è.)*
+
+> ### 🛑 **CONSEGUENZA: `PSI-FLASH` NON È UN DIFETTO DEL DIAGNOSTICO. È NELLA FISICA.**
+> **Il flash che si vede nel video è lo stesso fattore `~2.6` su `I` che entra in `pozzo_grafo` e
+> quindi nella spinta `S09` di quel passo.** **`blocca_run_base` va riconsiderato**, e **non lo
+> decido io.**
+> **⚠ E resta da misurare QUANTO**: che `I` cambi non dice di quanto cambi `d0`. Il `tanh` di
+> `ampiezza` e il tetto causale potrebbero assorbirne gran parte — **o no**.
+

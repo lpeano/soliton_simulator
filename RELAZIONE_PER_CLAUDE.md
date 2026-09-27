@@ -3819,3 +3819,47 @@ fotogrammi)*: opacità = **`PESO-MAX`**, `alpha = 0.08 + 0.92·w²` — **il qua
 partecipanti **svaniscono** invece di grigiare — e **ordine di disegno per peso crescente**, così i
 coerenti finiscono **sopra** e non vengono coperti dal vuoto.
 
+
+---
+
+# 🛑 **`PSI-FLASH` NON È UN DIFETTO DEL FOTOGRAMMA: È NELLA FISICA** *(nota del guardiano, 2026-09-27)*
+
+## Il guardiano ha ragione: **dei due siti candidati, uno è MORTO**
+
+**Verificato non solo dal sorgente ma A RUNTIME**, caricando il simulatore con l'argv del driver:
+
+| flag | valore nel driver | |
+|---|---|---|
+| **`L_CONSERVA`** | ### **`False`** | il gate `if L_CONSERVA and pos0 is not None:` (`:6515`) non passa → **`:6529` è MORTO** |
+| **`MEM_HEBB`** | ### **`True`** | → **`:6608` è l'UNICO candidato attivo** |
+
+E il commento di `L_CONSERVA` (`:846`) dice **«ERRATA, NON usare»**.
+
+> ### ❗ **E LA MIA IPOTESI SUI PASSI `60` E `66` CADE.**
+> Avevo proposto che i passi con nascite ma senza flash si spiegassero con *«ha ricalcolato l'ALTRO
+> sito»*. **Quell'alternativa non esiste.** La spiegazione va cercata altrove — **e lo dico invece
+> di lasciare in piedi un'ipotesi che il guardiano ha appena tolto da sotto.**
+
+## 🎯 **E la risposta alla sua seconda domanda è PEGGIORE di come l'aveva posta**
+
+Chiedeva *«quale delle due `psi` usa la fisica del passo SUCCESSIVO?»*. **La usa la fisica dello
+STESSO passo:**
+
+```python
+:6608   self.calcola_psi()                     # ricalcola, SOLO se ci sono state nascite
+:6609   I = np.abs(self.psi[:n]) ** 2          # e questa `I` e' quella che si usa
+:6669   phi_g, _, dpozzo = self.pozzo_grafo(I) # IL POZZO DI GRAVITA'
+:6808   self.d0[mask] += self._sd0(spinta * median(self.d0[mask]), mask)   # LA SPINTA S09
+```
+
+### **Nei passi con nascite il pozzo di gravità è calcolato da una `psi` DIVERSA** — ricalcolata sui pesi della `d` **corrente**, dopo mitosi e rilassamento.
+
+E nel passo dopo, `step()` fa `self._psi_prec = self.psi.copy()` (`:5123`): **`_psi_prec` fotografa
+la `psi` ricalcolata.** *(Col driver `ritmo()` legge `psi_spin`, non `_psi_prec`, quindi quel canale
+specifico resta chiuso — ma la fotografia c'è.)*
+
+> ### **Il fattore `~2.6` su `I` che si vede nel video entra in `pozzo_grafo` e quindi nella spinta `S09` di quel passo.**
+> **`blocca_run_base` di `PSI-FLASH` va riconsiderato, e non lo decido io.**
+> **⚠ E resta da misurare QUANTO:** che `I` cambi non dice **di quanto** cambi `d0`. Il `tanh` di
+> `ampiezza` e il tetto causale potrebbero assorbirne gran parte — **o no**.
+
