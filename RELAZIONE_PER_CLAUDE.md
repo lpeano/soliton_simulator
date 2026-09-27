@@ -4304,3 +4304,57 @@ non è stato esercitato.**
 byte-identico su 3 passi è **esattamente la prova che il doppione non mordeva**. Corretto
 nell'indice *(`CLIP-INVENTARIO`, `ETC-PASSO`)* e annotato in coda al task history, **senza
 riscrivere i paragrafi precedenti** *(par.8: un ragionamento impreciso si annota, non si riscrive)*.
+
+---
+
+# ✅ **FASE 1 (a), primo presidio: `H-ETC-2` FALLISCE 3 su 3** *(2026-09-27)*
+
+*(`doc/TASK_HISTORY/2026-09-27_h-etc-2.md`. Blob del simulatore `e203f9a8` **prima e dopo**: il
+presidio inietta i flussi casuali **dall'esterno**, il simulatore non è toccato.)*
+
+| permutazione | grandezze diverse | peggiore |
+|---|---|---|
+| ### **controllo positivo: ordine identico** | ### **0 su 21** | ### **`0.000000e+00` esatto** |
+| le due leggi **prima** di `mitosi` | **16 su 21** | ### **`2.000`** su `vd`, **70199/70199 archi** |
+| le due leggi **dopo** `mitosi` | 3 su 21 | `7.53e-05` su `mem_mot` |
+| **entrambe** le coppie | **16 su 21** | ### **`2.000`** su `vd` |
+
+> **Una differenza relativa di `2.000` vuol dire segno opposto e modulo simile.** Permutare
+> `scuoti_vuoto` e `step` non perturba il passo: **lo ribalta**, su tutti i 70199 archi.
+> **Tolleranza derivata e non tarata:** `5·2⁻⁵² = 1.110e-15` *(cinque leggi, `float64`, non
+> associatività della somma)*. Il caso più tenue sta **dieci ordini di grandezza sopra**.
+
+**Ho aggiunto un controllo positivo che non era nel mandato:** un presidio che fallisce comunque
+non distingue niente. L'ordine identico dà **zero** differenze — se fallisse, il presidio esce `2`
+e non si consegna.
+
+## ⚠ Tre difetti **del presidio stesso**, trovati e curati prima di consegnarlo
+
+**Tutti e tre avrebbero prodotto un verdetto sbagliato, non un errore visibile:**
+**①** confrontava **sottraendo prima** di verificare l'uguaglianza, e poiché `eta` contiene
+**infiniti** (`inf − inf = nan`) segnalava `eta` **diversa** stampando `elementi diversi 0/2107` —
+**si contraddiceva da sola**, e dopo la cura **non sarebbe passato mai**.
+**②** derivava il seme con `hash()`, randomizzato per processo.
+**③** ### si rilanciava con `os.execve`, e **su Windows quello fa uscire `0` SEMPRE**: il referto
+diceva `falliti: 3` e `echo $?` diceva **`0`**. **Il presidio passava sempre.**
+**È il più insidioso: non sbaglia la misura, sbaglia il verdetto.** Curato con `subprocess`, e
+verificato che esca `1`.
+
+## 🆕 E un difetto NUOVO, che non cercavo: **`HASHSEED-RIPROD`**
+
+> ### **Il simulatore non è riproducibile fra processi se `PYTHONHASHSEED` non è fissato.**
+
+Tre invocazioni dello **stesso** comando davano differenze peggiori `1.999884`, `1.999889`,
+`1.999890`, e `phi` diversa su `2053`/`2054`/`2060` elementi. **Con `PYTHONHASHSEED=0` due giri
+danno il referto byte-identico** (`sha1 1da33034cbe3`); senza, no.
+
+**`blocca_run_base = NO`, e il perché:** dentro **un solo processo** tutto è deterministico, quindi
+un run base singolo non è toccato. Ciò che si rompe è ### **il confronto fra due run** — ogni A/B,
+ogni sigillo prima/dopo, **ogni sigillo byte-identico**.
+
+> ### ⚠ **E tocca subito il passo (b):** il *«sigillo byte-identico»* della rimozione dei pavimenti
+> morti **non sarebbe stato riproducibile** senza questo. **Andava trovato prima di (b), non dopo.**
+> L'ho cablato **solo dentro `H-ETC-2`** *(che si rilancia da sé)*. **Come governarlo in tutto il
+> repo è una decisione tua: tocca ogni sigillo esistente, e non la prendo io.**
+
+> ### 🛑 **STOP.** Prossimo: **`H-ETC-1`**, l'altro presidio — oggi `8`, dopo `0`, e deve fallire oggi.

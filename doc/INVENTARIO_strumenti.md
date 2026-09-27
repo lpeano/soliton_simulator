@@ -1043,3 +1043,11 @@ esercitata**, perché in 3 passi nessuna mitosi ha diviso un arco.
 | `csv/_test_fork/_etc_lam_stati.py` | `0b89b496` | `python csv/_test_fork/_etc_lam_stati.py` | **`min(d)` e quanti archi stanno sotto `LAM`** nei **16 stati salvati** del pilota. **Sola lettura, nessun run.** `LAM` si legge **dal sorgente** | ### **`min(d) = 0.800000 = LAM` esatto** in 16/16 stati · **0 archi sotto `LAM`** · il pavimento vecchio (`0.05`) sta **16×** più in basso |
 
 **Referto:** `csv/_test_fork/_etc_lam_stati.json` *(blob byte `0ec8cc57`)*.
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_seal_fork/_h_etc_2.py` | `a75ce816` | `python csv/_seal_fork/_h_etc_2.py --passi=1 --seme=11` | **`H-ETC-2`**: permutare l'ordine delle cinque leggi dà lo **stesso stato**? Tre permutazioni che **non spostano `mitosi`**, flussi casuali **per legge** iniettati dall'esterno, tolleranza **derivata** `5·2⁻⁵²` | ### **FALLISCE 3/3** sul blob `e203f9a8` *(è l'esito richiesto)*. Controllo positivo: **`0.000000e+00`** esatto. **Esce `1`** |
+
+**Referto:** `csv/_seal_fork/_h_etc_2.json` *(blob byte `1da33034`)*.
+**⚠ Il presidio RILANCIA SE STESSO con `PYTHONHASHSEED=0`** *(`HASHSEED-RIPROD`)*: senza,
+**il referto non è riproducibile fra processi**.
