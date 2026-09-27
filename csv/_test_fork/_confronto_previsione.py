@@ -1,0 +1,322 @@
+r"""**IL CONFRONTO FRA LA PREVISIONE E IL PILOTA** — e i numeri escono da qui, non dalle dita.
+
+*(`L-NUMERI`: ogni numero scritto in un commit o in un referto esce da uno script. La previsione
+sta in `doc/TASK_HISTORY/2026-09-27_pilota-prova1.md` par.4, **committata prima** del referto.)*
+
+**Legge i `misura.json` dei quattro semi** e stampa, per ogni previsione, **l'esito col suo
+falsificante**. **Non riscrive la previsione:** la mette accanto ai numeri.
+
+    python csv/_test_fork/_confronto_previsione.py
+
+ASCII puro.
+"""
+import io
+import json
+import os
+import sys
+
+import numpy as np
+
+_QUI = os.path.dirname(os.path.abspath(__file__))
+RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
+sys.path.insert(0, os.path.join(RADICE, "csv"))
+
+import _presidio                                                       # noqa: E402
+import _osservabile_p1 as OP                                           # noqa: E402
+
+_presidio.avvia(__file__)
+
+# ESENTE-H-P5: non costruisce nessuna scena e non carica il simulatore: legge i `json` di un run
+#   che ha GIA' dichiarato la propria configurazione intera nel suo referto. Non c'e' un modulo
+#   configurato da dichiarare.
+
+NL = chr(10)
+DEST = os.path.join(_QUI, "_pilota_prova1")
+FUORI = os.path.join(DEST, "CONFRONTO_previsione.txt")
+SEMI = [11, 12, 13, 14]
+CPS = [40, 80, 120]
+R = []
+
+
+def P(s=""):
+    print(s)
+    R.append(s)
+
+
+def leggi():
+    d = {}
+    for s in SEMI:
+        p = os.path.join(DEST, "seme_%d" % s, "misura.json")
+        if os.path.exists(p):
+            d[s] = json.load(io.open(p, encoding="utf-8"))
+    return d
+
+
+def blocco(x, passo):
+    for b in x["blocchi"]:
+        if int(b["passo"]) == int(passo):
+            return b
+    return None
+
+
+def barra(v):
+    """`(media, sd, lo, hi, contiene_zero)` con il `t` di Student giusto (`P3`)."""
+    o = OP.dispersione([x for x in v if np.isfinite(x)])
+    if o["ic95"] is None:
+        return o["media"], float("nan"), float("nan"), float("nan"), True
+    lo, hi = o["ic95"]
+    return o["media"], o["sd"], lo, hi, bool(lo <= 0.0 <= hi)
+
+
+def oss(d, passo, cp):
+    """`A(t)` per seme sulla coppia `cp`, coi controlli FISSI."""
+    fuori = []
+    for s in sorted(d):
+        b0, bt = blocco(d[s], 0), blocco(d[s], passo)
+        m0 = b0["coppie_passo0"][cp]["centro_centro"]
+        mt = bt["coppie_passo0"][cp]["centro_centro"]
+        righe = bt["controlli_fissi"]["coppie"].get(cp, [])
+        v = [(r["distanza"] - r["distanza_0"]) / m0 for r in righe
+             if not r["escluso"] and np.isfinite(r["distanza"])]
+        if not (np.isfinite(m0) and m0 > 0 and v):
+            continue
+        fuori.append((mt - m0) / m0 - float(np.mean(v)))
+    return fuori
+
+
+def campo(d, passo, nome, dove="forma_passo0"):
+    return [blocco(d[s], passo)[dove][k][nome]
+            for s in sorted(d) for k in sorted(blocco(d[s], passo)[dove])]
+
+
+def fase(d, passo, nome):
+    return [blocco(d[s], passo)["fase"]["per_massa"][k][nome]
+            for s in sorted(d) for k in sorted(blocco(d[s], passo)["fase"]["per_massa"])]
+
+
+def principale():
+    d = leggi()
+    if not d:
+        P("NESSUN `misura.json`: il confronto si fermerebbe qui.")
+        return
+    coppie = sorted(blocco(d[sorted(d)[0]], 0)["coppie_passo0"].keys())
+    P("=" * 112)
+    P("CONFRONTO  PREVISIONE (committata PRIMA)  contro  PILOTA   --   %d semi" % len(d))
+    P("=" * 112)
+    P("  La previsione sta in doc/TASK_HISTORY/2026-09-27_pilota-prova1.md par.4, commit 1486cac,")
+    P("  ANTENATO del referto. Non si riscrive: si mette accanto ai numeri.")
+
+    # ---------------------------------------------------------------- (a)
+    P()
+    P("-" * 112)
+    P("(a)  PREVEDEVO: le masse NON si avvicinano piu' dei controlli, o sotto la barra.")
+    P("     FALSIFICANTE SCRITTO PRIMA: `A(t) < 0` oltre l'IC95 su ALMENO 2 COPPIE SU 3.")
+    P("-" * 112)
+    P("  passo | coppia            |    A(t)   |    sd    |       IC95        | oltre la barra?")
+    scatti = {}
+    for c in CPS:
+        n_ok = 0
+        for cp in coppie:
+            m, sd, lo, hi, zero = barra(oss(d, c, cp))
+            forte = (not zero) and hi < 0.0
+            n_ok += 1 if forte else 0
+            P("  %5d | %-17s | %+.5f | %.5f | [%+.5f,%+.5f] | %s"
+              % (c, cp, m, sd, lo, hi, "SI, NEGATIVO" if forte else "no (contiene lo zero)"))
+        scatti[c] = n_ok
+        P("        -> coppie significative NEGATIVE: %d su %d" % (n_ok, len(coppie)))
+    P()
+    caduta = [c for c in CPS if scatti[c] >= 2]
+    if caduta:
+        P("  ESITO: **LA PREVISIONE (a) E' FALSIFICATA** ai passi %s, dal falsificante che avevo"
+          % caduta)
+        P("         scritto io. Al passo 120 il criterio NON scatta, e il perche' e' nella barra:")
+    else:
+        P("  ESITO: la previsione (a) REGGE: il falsificante non scatta a nessun passo.")
+
+    # la barra: masse contro controlli
+    P()
+    P("  PERCHE' A 120 NON SCATTA -- la dispersione FRA SEMI delle MASSE, contro quella dei CONTROLLI:")
+    P("  passo | coppia            | sd masse | sd controlli | rapporto")
+    for c in CPS:
+        for cp in coppie:
+            vm, vc = [], []
+            for s in sorted(d):
+                b0, bt = blocco(d[s], 0), blocco(d[s], c)
+                m0 = b0["coppie_passo0"][cp]["centro_centro"]
+                mt = bt["coppie_passo0"][cp]["centro_centro"]
+                righe = bt["controlli_fissi"]["coppie"].get(cp, [])
+                v = [(r["distanza"] - r["distanza_0"]) / m0 for r in righe if not r["escluso"]]
+                if np.isfinite(m0) and m0 > 0 and v:
+                    vm.append((mt - m0) / m0)
+                    vc.append(float(np.mean(v)))
+            sm = float(np.std(vm, ddof=1)) if len(vm) > 1 else float("nan")
+            sc = float(np.std(vc, ddof=1)) if len(vc) > 1 else float("nan")
+            P("  %5d | %-17s | %.5f  |   %.5f    | x%.2f" % (c, cp, sm, sc, sm / sc))
+
+    # ---------------------------------------------------------------- la parte uniforme
+    P()
+    P("-" * 112)
+    P("(a-bis)  PREVEDEVO: <<il calo di `W5` dovrebbe comparire QUASI TUTTO anche nei controlli>>.")
+    P("-" * 112)
+    P("  passo | coppia            | masse     | controlli | frazione UNIFORME  (controlli/masse)")
+    for c in CPS:
+        for cp in coppie:
+            vm, vc = [], []
+            for s in sorted(d):
+                b0, bt = blocco(d[s], 0), blocco(d[s], c)
+                m0 = b0["coppie_passo0"][cp]["centro_centro"]
+                mt = bt["coppie_passo0"][cp]["centro_centro"]
+                righe = bt["controlli_fissi"]["coppie"].get(cp, [])
+                v = [(r["distanza"] - r["distanza_0"]) / m0 for r in righe if not r["escluso"]]
+                if np.isfinite(m0) and m0 > 0 and v:
+                    vm.append((mt - m0) / m0)
+                    vc.append(float(np.mean(v)))
+            mm, mc = float(np.mean(vm)), float(np.mean(vc))
+            fr = (mc / mm) if abs(mm) > 1e-12 else float("nan")
+            P("  %5d | %-17s | %+.5f  | %+.5f  | %s"
+              % (c, cp, mm, mc, ("%.1f %%" % (100 * fr)) if np.isfinite(fr) and mm < 0
+                 else "il segno differisce: non e' una frazione"))
+
+    # ---------------------------------------------------------------- (b)
+    P()
+    P("-" * 112)
+    P("(b)  PREVEDEVO: un ALLUNGAMENTO si', ma NON mareale (coesione di superficie).")
+    P("     FALSIFICANTE DELLA SPIEGAZIONE: raggio e quantili interni FERMI mentre le superfici")
+    P("     si avvicinano. E il criterio `V6`: superfici piu' dei centri OLTRE LA BARRA.")
+    P("-" * 112)
+    P("  passo | coppia            | ALLUNGAMENTO (sup - centri) |       IC95        | oltre la barra?")
+    quanti = 0
+    for c in CPS:
+        for cp in coppie:
+            v = []
+            for s in sorted(d):
+                b0, bt = blocco(d[s], 0), blocco(d[s], c)
+                c0 = b0["coppie_passo0"][cp]["centro_centro"]
+                ct = bt["coppie_passo0"][cp]["centro_centro"]
+                s0 = b0["coppie_passo0"][cp]["insieme_insieme"]
+                st = bt["coppie_passo0"][cp]["insieme_insieme"]
+                if np.isfinite(c0) and c0 > 0 and np.isfinite(s0) and s0 > 0:
+                    v.append((st - s0) / s0 - (ct - c0) / c0)
+            m, sd, lo, hi, zero = barra(v)
+            if not zero:
+                quanti += 1
+            P("  %5d | %-17s |         %+.5f          | [%+.5f,%+.5f] | %s"
+              % (c, cp, m, lo, hi, "** SI **" if not zero else "no"))
+    P()
+    P("  ESITO: allungamenti oltre la barra: %d su %d." % (quanti, len(CPS) * len(coppie)))
+    if quanti == 0:
+        P("         **LA PREVISIONE (b) E' FALSIFICATA**: nessun allungamento. Centri e superfici")
+        P("         si muovono INSIEME entro la barra. E la mia spiegazione (coesione di")
+        P("         superficie) non ha nulla da spiegare.")
+
+    # ---------------------------------------------------------------- (c)
+    P()
+    P("-" * 112)
+    P("(c)  PREVEDEVO: la coerenza SI SCIOGLIE, non migra -- con sovrapposizione >= 90 %% e")
+    P("     spostamento del medoide < LAM.")
+    P("-" * 112)
+    P("  passo | coer_campo | n_fase | sovrapposizione | max spost. medoide | raggio (riferimento)")
+    for c in [0] + CPS:
+        cc = float(np.mean(campo(d, c, "coer_campo")))
+        nf = float(np.mean(fase(d, c, "n")))
+        so = float(np.mean(fase(d, c, "sovrapposizione")))
+        sp = float(np.nanmax(fase(d, c, "spostamento_medoide")))
+        rg = float(np.mean(campo(d, c, "raggio")))
+        P("  %5d |   %.5f  | %6.1f |     %.4f      |       %.3f        |  %.3f"
+          % (c, cc, nf, so, sp, rg))
+    lam = d[sorted(d)[0]]["LAM"]
+    P()
+    P("  IL MECCANISMO E' CONFERMATO: `coer_campo` CROLLA (%.5f -> %.5f) e `n_fase` si DIMEZZA"
+      % (float(np.mean(campo(d, 0, "coer_campo"))), float(np.mean(campo(d, 120, "coer_campo")))))
+    P("  e oltre (%.1f -> %.1f). La coerenza SI SCIOGLIE."
+      % (float(np.mean(fase(d, 0, "n"))), float(np.mean(fase(d, 120, "n")))))
+    P("  MA I NUMERI CHE AVEVO ATTACCATO ALLA PREVISIONE SONO SBAGLIATI: la sovrapposizione")
+    P("  scende a %.4f (prevedevo >= 0.90) e lo spostamento del medoide arriva a %.3f contro"
+      % (float(np.mean(fase(d, 120, "sovrapposizione"))),
+         float(np.nanmax(fase(d, 120, "spostamento_medoide")))))
+    P("  `LAM = %.3f` (prevedevo < LAM). **Il meccanismo giusto, la soglia sbagliata.**" % lam)
+    P()
+    P("  E IL CRITERIO `V5` CONFONDE DUE COSE, ed e' un difetto del criterio, non del sistema:")
+    P("  <<sovrapposizione bassa + medoide spostato>> lo legge come MIGRAZIONE, ma qui la")
+    P("  sovrapposizione cala perche' L'INSIEME SI SVUOTA (n_fase %.1f -> %.1f, il %.0f %% in meno),"
+      % (float(np.mean(fase(d, 0, "n"))), float(np.mean(fase(d, 120, "n"))),
+         100 * (1 - float(np.mean(fase(d, 120, "n"))) / float(np.mean(fase(d, 0, "n"))))))
+    P("  non perche' si SPOSTI. Il metro giusto dello spostamento e' IL RAGGIO DELLA REGIONE")
+    P("  (%.3f), non `LAM` (%.3f): un medoide che si muove di %.3f su un raggio di %.3f si e'"
+      % (float(np.mean(campo(d, 0, "raggio"))), lam,
+         float(np.mean(fase(d, 120, "spostamento_medoide"))),
+         float(np.mean(campo(d, 0, "raggio")))))
+    P("  mosso DENTRO la propria regione.")
+
+    # ---------------------------------------------------------------- la via che NON e' stata
+    P()
+    P("-" * 112)
+    P("LA VIA CHE AVEVO INDICATO COME <<LA PIU' PROBABILE PER CUI (a) CADA>>: NON E' QUELLA.")
+    P("-" * 112)
+    P("  Avevo scritto: <<se la torsione supercritica fosse concentrata NEL VARCO, (a) cade>>.")
+    P("  Le NASCITE seguono la torsione supercritica (la mitosi scatta sull'eccesso di torsione),")
+    P("  quindi dicono DOVE e': ")
+    P("  passo | nati per mitosi (massa/varco/vuoto) | nati per schwinger | zone di TUTTI i nodi")
+    for c in CPS:
+        nm = {z: float(np.mean([blocco(d[s], c)["nascite_per_zona"]["mitosi"][z]
+                                for s in sorted(d)])) for z in ("massa", "varco", "vuoto")}
+        ns = {z: float(np.mean([blocco(d[s], c)["nascite_per_zona"]["schwinger"][z]
+                                for s in sorted(d)])) for z in ("massa", "varco", "vuoto")}
+        zt = {z: float(np.mean([blocco(d[s], c)["zone_tutti"][z] for s in sorted(d)]))
+              for z in ("massa", "varco", "vuoto")}
+        P("  %5d | %5.1f / %5.1f / %7.1f          | %5.1f / %4.1f / %6.1f | %6.1f / %5.1f / %8.1f"
+          % (c, nm["massa"], nm["varco"], nm["vuoto"],
+             ns["massa"], ns["varco"], ns["vuoto"], zt["massa"], zt["varco"], zt["vuoto"]))
+    P()
+    P("  **ZERO nascite nelle masse e ZERO nel varco, a tutti i checkpoint: TUTTE nel vuoto.**")
+    P("  Quindi la torsione supercritica NON e' concentrata nel varco, e (a) NON e' caduta per la")
+    P("  ragione che avevo indicato. **E' caduta per una ragione che non avevo previsto.**")
+
+    # ---------------------------------------------------------------- V4
+    P()
+    P("-" * 112)
+    P("`V4` -- E LE SCORCIATOIE DI SCHWINGER CI SONO, MISURATE (residuo `A3-DISEGNO`)")
+    P("-" * 112)
+    P("  passo | coppie | scorciatoie | frazione | `2*dd/d` mediano | minimo")
+    for c in CPS:
+        sw = [blocco(d[s], c)["schwinger"] for s in sorted(d)]
+        tot = float(np.mean([x["coppie"] for x in sw]))
+        sc = float(np.mean([x["scorciatoie"] for x in sw]))
+        rm = [x.get("rapporto_mediano") for x in sw if x.get("rapporto_mediano") is not None]
+        mi = [x.get("rapporto_min") for x in sw if x.get("rapporto_min") is not None]
+        P("  %5d | %6.1f | %11.1f | %7s | %16s | %s"
+          % (c, tot, sc, ("%.2f %%" % (100 * sc / tot)) if tot > 0 else "-",
+             ("%.4f" % float(np.mean(rm))) if rm else "-",
+             ("%.4f" % float(np.min(mi))) if mi else "-"))
+    P()
+    P("  IL RITIRO DI IERI RESTA GIUSTO PER LA MITOSI (l'arco (a,b) diventa (a,m),(m,b) lunghi")
+    P("  d/2: il cammino e' lungo QUANTO prima), E ORA LA CODA SCHWINGER E' QUANTIFICATA.")
+
+    # ---------------------------------------------------------------- due righe VUOTE
+    P()
+    P("-" * 112)
+    P("DUE RIGHE DEL REFERTO NON PORTANO INFORMAZIONE, E VANNO DETTE (`P4`, `A8`)")
+    P("-" * 112)
+    n0 = [blocco(d[s], c)["forma_passo0"][k]["n"]
+          for s in sorted(d) for k in sorted(blocco(d[s], 0)["forma_passo0"]) for c in [0] + CPS]
+    P("  1. `n` in `forma_passo0` vale SEMPRE lo stesso (%d valori, %d distinti per massa e seme):"
+      % (len(n0), len(set(n0))))
+    P("     e' l'insieme CONGELATO del passo 0, quindi NON PUO' cambiare. Misurarlo e' un test")
+    P("     vuoto (`P4`). L'`n` informativo e' `n_fase`.")
+    f0 = float(np.mean(campo(d, 0, "foglio_0")))
+    P("  2. `foglio_0` vale %.5f AL PASSO 0, cioe' meta' e meta'. E' IL SUO VALORE SOTTO IPOTESI"
+      % f0)
+    P("     NULLA, non un risultato: la scena scrive `phi = _dphi()/2 = 2 pi` ESATTAMENTE, che e'")
+    P("     il CONFINE fra i due fogli di `floor(phi/2pi)`, e la gaussiana `sigma = 0.05` lo")
+    P("     attraversa. Il diagnostico dei fogli, COSI' COM'E', su questa scena non misura nulla.")
+
+    P()
+    P("=" * 112)
+    P("FINE DEL CONFRONTO. Nessuna conclusione sulla gravita': il pilota non e' il run base.")
+    P("=" * 112)
+
+
+if __name__ == "__main__":
+    principale()
+    io.open(FUORI, "w", encoding="utf-8", newline=NL).write(NL.join(R) + NL)
+    print(NL + "confronto in %s" % FUORI)

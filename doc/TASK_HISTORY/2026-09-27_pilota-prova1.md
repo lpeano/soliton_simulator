@@ -367,3 +367,145 @@ alle nascite.
 
 > **E LA PARTE PIU' UTILE SARA' DOVE HO SBAGLIATO.** Il confronto con il referto va scritto
 > **accanto a questa pagina, senza riscriverla.**
+
+---
+
+# 5. **IL CONFRONTO: DOVE LA PREVISIONE HA SBAGLIATO** *(2026-09-27, dopo il referto)*
+
+> **La previsione del par.4 NON E' RISCRITTA.** Sta nel commit **`1486cac`**, **antenato** del
+> referto: l'ordine e' verificabile da git. Questa sezione le sta **accanto**.
+>
+> **I numeri escono da `csv/_test_fork/_confronto_previsione.py`** (`L-NUMERI`), referto in
+> `csv/_test_fork/_pilota_prova1/CONFRONTO_previsione.txt`. **4 semi, IC95 con `t(3) = 3.182`.**
+
+## 📊 IL BILANCIO IN UNA TABELLA
+
+| | previsione | esito |
+|---|---|---|
+| **(a)** | le masse **NON** si avvicinano piu' dei controlli | ### ❌ **FALSIFICATA** ai passi `40` e `80`, **dal falsificante che avevo scritto io** |
+| **(a-bis)** | il calo di `W5` *«quasi tutto uniforme»* | ### ❌ **FALSIFICATA a `40` e `80`**, **giusta a `120`** |
+| **(b)** | un **allungamento** si', ma non mareale | ### ❌ **FALSIFICATA**: `0` allungamenti su `9` oltre la barra |
+| **(c)** | la coerenza **si scioglie, non migra** | ### ✅ **MECCANISMO CONFERMATO**, ❌ **soglie sbagliate** |
+| | la via per cui `(a)` sarebbe caduta: torsione **nel varco** | ### ❌ **NO**: `0` nascite nel varco. **`(a)` e' caduta per una ragione che non avevo previsto** |
+
+---
+
+## ❌ (a) — **LE MASSE SI AVVICINANO PIU' DEI CONTROLLI, MISURATO**
+
+| passo | coppia | `A(t)` | IC95 | oltre la barra? |
+|--:|---|--:|---|---|
+| **40** | `massa_0\|massa_1` | **`-0.00296`** | `[-0.00376, -0.00215]` | ### **SI** |
+| 40 | `massa_0\|massa_2` | `-0.00287` | `[-0.00898, +0.00324]` | no |
+| **40** | `massa_1\|massa_2` | **`-0.00379`** | `[-0.00696, -0.00062]` | ### **SI** |
+| **80** | `massa_0\|massa_1` | **`-0.01408`** | `[-0.02158, -0.00657]` | ### **SI** |
+| **80** | `massa_0\|massa_2` | **`-0.01047`** | `[-0.01625, -0.00469]` | ### **SI** |
+| 80 | `massa_1\|massa_2` | `-0.01230` | `[-0.02609, +0.00148]` | no |
+| 120 | tutte e tre | `-0.0006` / `-0.0346` / `-0.0279` | tutti contengono lo zero | no |
+
+**Il falsificante che avevo scritto era: «`A < 0` oltre la barra su almeno 2 coppie su 3».
+Scatta a `40` (2 su 3) e a `80` (2 su 3). LA PREVISIONE (a) E' FALSIFICATA.**
+
+### ⚠ **E A 120 NON SCATTA — NON PERCHE' L'EFFETTO SVANISCA, MA PERCHE' LA BARRA ESPLODE**
+
+| passo | `sd` masse | `sd` controlli | rapporto |
+|--:|--:|--:|--:|
+| 40 | `0.0015`-`0.0021` | `0.0012`-`0.0019` | `x1.1`-`x1.3` |
+| 80 | `0.0018`-`0.0073` | `0.0021`-`0.0047` | `x0.4`-`x2.7` |
+| **120** | **`0.023`-`0.065`** | `0.009`-`0.011` | ### **`x2.1`-`x7.6`** |
+
+**La dispersione fra semi della distanza fra le MASSE cresce di un fattore ~30 da 40 a 120 passi,
+mentre quella dei CONTROLLI cresce di ~6.** **Il segnale non svanisce: affoga.**
+**Questo e' un LIMITE DI RISOLUZIONE, e va scritto cosi':** a 120 passi *«non misurato»*, con
+limite `|A| < 0.05`-`0.14`; a 40 e 80 passi **misurato**.
+**→ conseguenza per il run base: 4 semi bastano a 40-80 passi e NON bastano a 120.**
+
+## ❌ (a-bis) — **A 40 PASSI IL VUOTO SI ESPANDE MENTRE LE MASSE SI CONTRAGGONO**
+
+| passo | masse | controlli | quanto e' uniforme |
+|--:|--:|--:|---|
+| **40** | `-0.0013` / `-0.0011` / `-0.0020` | **`+0.0016` / `+0.0018` / `+0.0017`** | ### **segno OPPOSTO** |
+| 80 | `-0.0177` / `-0.0143` / `-0.0175` | `-0.0036` / `-0.0038` / `-0.0052` | **`20`-`30 %`** |
+| 120 | `-0.0422` / `-0.0660` / `-0.0723` | `-0.0416` / `-0.0314` / `-0.0445` | `48`-`99 %` |
+
+**Avevo previsto «quasi tutto uniforme». A 40 passi il vuoto va nell'ALTRA DIREZIONE**, e a 80
+l'uniforme e' solo il `20`-`30 %`. **La mia previsione e' giusta solo a `120`**, cioe' **dove la
+barra non permette di concluderlo.**
+**Il contrasto piu' pulito e' a 40 passi, ed e' l'opposto di quello che avevo scritto.**
+
+## ❌ (b) — **NESSUN ALLUNGAMENTO: `0` su `9`**
+
+Centri e superfici si muovono **insieme** entro la barra, a tutti e tre i checkpoint e su tutte e
+tre le coppie. **La mia spiegazione — la coesione di superficie — non ha nulla da spiegare.**
+**E la lacuna che avevo dichiarato prima (non poter distinguere marea da coesione) NON si e'
+presentata**, perche' non c'e' niente da distinguere.
+
+## ✅❌ (c) — **IL MECCANISMO GIUSTO, LE SOGLIE SBAGLIATE**
+
+| passo | `coer_campo` | `n_fase` | sovrapposizione | max spost. medoide | raggio |
+|--:|--:|--:|--:|--:|--:|
+| 0 | `0.99877` | `499.1` | `0.9976` | `1.036` | `3.153` |
+| 40 | `0.62990` | `196.6` | `0.2472` | `1.971` | `3.161` |
+| 80 | `0.34035` | `136.3` | `0.0827` | `3.710` | `3.180` |
+| **120** | **`0.19555`** | **`124.7`** | `0.0491` | `7.250` | `3.175` |
+
+**IL MECCANISMO E' CONFERMATO, e con un margine enorme:** `coer_campo` **crolla da `0.9988` a
+`0.1956`** e `n_fase` perde il **`75 %`**. **La coerenza SI SCIOGLIE.**
+**MA LE SOGLIE CHE AVEVO SCRITTO SONO SBAGLIATE:** prevedevo sovrapposizione `>= 0.90`
+*(misurata `0.049`)* e spostamento `< LAM = 0.8` *(misurato fino a `7.25`)*.
+
+### ⚠ **E IL CRITERIO `V5` CONFONDE DUE COSE — e' un difetto del CRITERIO, non del sistema**
+
+`V5` legge *«sovrapposizione bassa + medoide spostato»* come **MIGRAZIONE**. **Ma qui la
+sovrapposizione cala perche' L'INSIEME SI SVUOTA** (`n_fase 499 -> 125`), **non perche' si sposti.**
+**E il metro dello spostamento e' sbagliato:** `LAM = 0.8` e' la scala **minima** del sistema, non
+la scala della **regione**, che ha **raggio `3.15`**. Un medoide che si muove di `3.7` su un raggio
+di `3.15` **si e' mosso dentro la propria regione**.
+**→ voce `V5-SOGLIA`.** *(E' `P1-sexies`: il criterio era scritto dal mio modello mentale, non da
+una misura.)*
+
+## ❌ **LA VIA CHE AVEVO INDICATO NON E' QUELLA**
+
+Avevo scritto: *«se la torsione supercritica fosse concentrata NEL VARCO, `(a)` cade, ed e' la via
+piu' probabile per cui cada»*. **Le nascite dicono dove sta la torsione supercritica** *(la mitosi
+scatta sull'eccesso di torsione)*:
+
+| passo | mitosi (massa / varco / vuoto) | schwinger (massa / varco / vuoto) |
+|--:|---|---|
+| 40 | `0` / `0` / `0.2` | `0` / `0` / `0` |
+| 80 | `0` / `0` / `52.2` | `0` / `0` / `10.0` |
+| 120 | `0` / **`0`** / `526.5` | `0` / **`0`** / `122.2` |
+
+### **ZERO nascite nelle masse e ZERO nel varco, a ogni checkpoint: TUTTE nel vuoto.**
+**Quindi `(a)` e' caduta per una ragione che NON avevo previsto**, e questa e' la parte piu' utile
+del confronto: **avevo indicato la via sbagliata pur avendo la conclusione giusta sul fatto che
+cadesse.**
+
+## 📌 **`V4`: LE SCORCIATOIE DI SCHWINGER CI SONO, E ORA SONO QUANTIFICATE**
+
+| passo | coppie | scorciatoie | frazione | `2*dd/d` mediano | minimo |
+|--:|--:|--:|--:|--:|--:|
+| 80 | `10.0` | `2.5` | `25.00 %` | `1.0077` | `0.8916` |
+| **120** | `122.2` | `47.8` | ### **`39.06 %`** | `1.0131` | `0.6256` |
+
+**Il ritiro di ieri resta giusto per la MITOSI** *(l'arco `(a,b)` diventa `(a,m)`,`(m,b)` lunghi
+`d/2`: il cammino e' lungo **quanto prima**)*, **e la coda Schwinger e' ora misurata: il `39 %`
+delle coppie ACCORCIA il grafo**, col rapporto minimo `0.63`. **→ `SCHW-CORTI`**, che raffina
+`FILI-CORTI`.
+
+## ⚠ **DUE RIGHE DEL REFERTO NON PORTANO INFORMAZIONE, E LO DICO** *(`P4`, `A8`)*
+
+1. **`n` in `forma_passo0` e' COSTANTE per costruzione**: e' l'insieme **congelato** del passo 0.
+   Misurarlo e' un **test vuoto**. L'`n` informativo e' **`n_fase`**. **→ `FORMA-N-VUOTO`.**
+2. **`foglio_0 = 0.50384` AL PASSO 0** — cioe' **il suo valore sotto ipotesi nulla**, non un
+   risultato: la scena scrive `phi = _dphi()/2 = 2 pi` **esattamente sul confine** fra i due fogli
+   di `floor(phi/2pi)`, e la gaussiana `sigma = 0.05` **lo attraversa**. **Il diagnostico dei fogli,
+   cosi' com'e', su questa scena non misura nulla** — ed e' il presidio del *«quanto varrebbe se non
+   ci fosse niente»*. **→ `FOGLIO-NULLO`.**
+
+---
+
+> ## 🛑 **E IL PILOTA NON CONCLUDE SULLA GRAVITA', COME DETTO IN TESTA**
+> **`5 SI` sono aperti**, i controlli sono **punti di vuoto** e non masse di prova, e l'osservabile
+> **non separa** *«spinta»* da *«qualunque altra cosa acceleri la contrazione dove c'e' materia»*.
+> **Cio' che il pilota dice e' che la grandezza SI MISURA, a 40-80 passi e con 4 semi** — ed e'
+> **esattamente il suo scopo.**

@@ -1,0 +1,137 @@
+================================================================================================================
+CONFRONTO  PREVISIONE (committata PRIMA)  contro  PILOTA   --   4 semi
+================================================================================================================
+  La previsione sta in doc/TASK_HISTORY/2026-09-27_pilota-prova1.md par.4, commit 1486cac,
+  ANTENATO del referto. Non si riscrive: si mette accanto ai numeri.
+
+----------------------------------------------------------------------------------------------------------------
+(a)  PREVEDEVO: le masse NON si avvicinano piu' dei controlli, o sotto la barra.
+     FALSIFICANTE SCRITTO PRIMA: `A(t) < 0` oltre l'IC95 su ALMENO 2 COPPIE SU 3.
+----------------------------------------------------------------------------------------------------------------
+  passo | coppia            |    A(t)   |    sd    |       IC95        | oltre la barra?
+     40 | massa_0|massa_1   | -0.00296 | 0.00051 | [-0.00376,-0.00215] | SI, NEGATIVO
+     40 | massa_0|massa_2   | -0.00287 | 0.00384 | [-0.00898,+0.00324] | no (contiene lo zero)
+     40 | massa_1|massa_2   | -0.00379 | 0.00199 | [-0.00696,-0.00062] | SI, NEGATIVO
+        -> coppie significative NEGATIVE: 2 su 3
+     80 | massa_0|massa_1   | -0.01408 | 0.00472 | [-0.02158,-0.00657] | SI, NEGATIVO
+     80 | massa_0|massa_2   | -0.01047 | 0.00363 | [-0.01625,-0.00469] | SI, NEGATIVO
+     80 | massa_1|massa_2   | -0.01230 | 0.00866 | [-0.02609,+0.00148] | no (contiene lo zero)
+        -> coppie significative NEGATIVE: 2 su 3
+    120 | massa_0|massa_1   | -0.00062 | 0.03199 | [-0.05152,+0.05028] | no (contiene lo zero)
+    120 | massa_0|massa_2   | -0.03464 | 0.06600 | [-0.13965,+0.07036] | no (contiene lo zero)
+    120 | massa_1|massa_2   | -0.02785 | 0.06403 | [-0.12972,+0.07402] | no (contiene lo zero)
+        -> coppie significative NEGATIVE: 0 su 3
+
+  ESITO: **LA PREVISIONE (a) E' FALSIFICATA** ai passi [40, 80], dal falsificante che avevo
+         scritto io. Al passo 120 il criterio NON scatta, e il perche' e' nella barra:
+
+  PERCHE' A 120 NON SCATTA -- la dispersione FRA SEMI delle MASSE, contro quella dei CONTROLLI:
+  passo | coppia            | sd masse | sd controlli | rapporto
+     40 | massa_0|massa_1   | 0.00145  |   0.00115    | x1.26
+     40 | massa_0|massa_2   | 0.00207  |   0.00192    | x1.08
+     40 | massa_1|massa_2   | 0.00174  |   0.00132    | x1.32
+     80 | massa_0|massa_1   | 0.00177  |   0.00471    | x0.38
+     80 | massa_0|massa_2   | 0.00563  |   0.00210    | x2.69
+     80 | massa_1|massa_2   | 0.00726  |   0.00371    | x1.95
+    120 | massa_0|massa_1   | 0.02283  |   0.01094    | x2.09
+    120 | massa_0|massa_2   | 0.06468  |   0.00857    | x7.55
+    120 | massa_1|massa_2   | 0.05532  |   0.01042    | x5.31
+
+----------------------------------------------------------------------------------------------------------------
+(a-bis)  PREVEDEVO: <<il calo di `W5` dovrebbe comparire QUASI TUTTO anche nei controlli>>.
+----------------------------------------------------------------------------------------------------------------
+  passo | coppia            | masse     | controlli | frazione UNIFORME  (controlli/masse)
+     40 | massa_0|massa_1   | -0.00131  | +0.00164  | -124.7 %
+     40 | massa_0|massa_2   | -0.00106  | +0.00180  | -169.7 %
+     40 | massa_1|massa_2   | -0.00204  | +0.00174  | -85.2 %
+     80 | massa_0|massa_1   | -0.01765  | -0.00358  | 20.3 %
+     80 | massa_0|massa_2   | -0.01429  | -0.00382  | 26.7 %
+     80 | massa_1|massa_2   | -0.01750  | -0.00520  | 29.7 %
+    120 | massa_0|massa_1   | -0.04220  | -0.04158  | 98.5 %
+    120 | massa_0|massa_2   | -0.06602  | -0.03138  | 47.5 %
+    120 | massa_1|massa_2   | -0.07233  | -0.04448  | 61.5 %
+
+----------------------------------------------------------------------------------------------------------------
+(b)  PREVEDEVO: un ALLUNGAMENTO si', ma NON mareale (coesione di superficie).
+     FALSIFICANTE DELLA SPIEGAZIONE: raggio e quantili interni FERMI mentre le superfici
+     si avvicinano. E il criterio `V6`: superfici piu' dei centri OLTRE LA BARRA.
+----------------------------------------------------------------------------------------------------------------
+  passo | coppia            | ALLUNGAMENTO (sup - centri) |       IC95        | oltre la barra?
+     40 | massa_0|massa_1   |         +0.00710          | [-0.00875,+0.02296] | no
+     40 | massa_0|massa_2   |         +0.00389          | [-0.01340,+0.02117] | no
+     40 | massa_1|massa_2   |         +0.00841          | [-0.02192,+0.03874] | no
+     80 | massa_0|massa_1   |         +0.02505          | [-0.00484,+0.05495] | no
+     80 | massa_0|massa_2   |         -0.00332          | [-0.03326,+0.02661] | no
+     80 | massa_1|massa_2   |         +0.01170          | [-0.03532,+0.05873] | no
+    120 | massa_0|massa_1   |         +0.00196          | [-0.05094,+0.05485] | no
+    120 | massa_0|massa_2   |         +0.00607          | [-0.03391,+0.04605] | no
+    120 | massa_1|massa_2   |         +0.00983          | [-0.06223,+0.08189] | no
+
+  ESITO: allungamenti oltre la barra: 0 su 9.
+         **LA PREVISIONE (b) E' FALSIFICATA**: nessun allungamento. Centri e superfici
+         si muovono INSIEME entro la barra. E la mia spiegazione (coesione di
+         superficie) non ha nulla da spiegare.
+
+----------------------------------------------------------------------------------------------------------------
+(c)  PREVEDEVO: la coerenza SI SCIOGLIE, non migra -- con sovrapposizione >= 90 %% e
+     spostamento del medoide < LAM.
+----------------------------------------------------------------------------------------------------------------
+  passo | coer_campo | n_fase | sovrapposizione | max spost. medoide | raggio (riferimento)
+      0 |   0.99877  |  499.1 |     0.9976      |       1.036        |  3.153
+     40 |   0.62990  |  196.6 |     0.2472      |       1.971        |  3.161
+     80 |   0.34035  |  136.3 |     0.0827      |       3.710        |  3.180
+    120 |   0.19555  |  124.7 |     0.0491      |       7.250        |  3.175
+
+  IL MECCANISMO E' CONFERMATO: `coer_campo` CROLLA (0.99877 -> 0.19555) e `n_fase` si DIMEZZA
+  e oltre (499.1 -> 124.7). La coerenza SI SCIOGLIE.
+  MA I NUMERI CHE AVEVO ATTACCATO ALLA PREVISIONE SONO SBAGLIATI: la sovrapposizione
+  scende a 0.0491 (prevedevo >= 0.90) e lo spostamento del medoide arriva a 7.250 contro
+  `LAM = 0.800` (prevedevo < LAM). **Il meccanismo giusto, la soglia sbagliata.**
+
+  E IL CRITERIO `V5` CONFONDE DUE COSE, ed e' un difetto del criterio, non del sistema:
+  <<sovrapposizione bassa + medoide spostato>> lo legge come MIGRAZIONE, ma qui la
+  sovrapposizione cala perche' L'INSIEME SI SVUOTA (n_fase 499.1 -> 124.7, il 75 % in meno),
+  non perche' si SPOSTI. Il metro giusto dello spostamento e' IL RAGGIO DELLA REGIONE
+  (3.153), non `LAM` (0.800): un medoide che si muove di 3.726 su un raggio di 3.153 si e'
+  mosso DENTRO la propria regione.
+
+----------------------------------------------------------------------------------------------------------------
+LA VIA CHE AVEVO INDICATO COME <<LA PIU' PROBABILE PER CUI (a) CADA>>: NON E' QUELLA.
+----------------------------------------------------------------------------------------------------------------
+  Avevo scritto: <<se la torsione supercritica fosse concentrata NEL VARCO, (a) cade>>.
+  Le NASCITE seguono la torsione supercritica (la mitosi scatta sull'eccesso di torsione),
+  quindi dicono DOVE e': 
+  passo | nati per mitosi (massa/varco/vuoto) | nati per schwinger | zone di TUTTI i nodi
+     40 |   0.0 /   0.0 /     0.2          |   0.0 /  0.0 /    0.0 | 1226.2 /  31.8 /  11523.5
+     80 |   0.0 /   0.0 /    52.2          |   0.0 /  0.0 /   10.0 | 1226.2 /  24.0 /  11593.2
+    120 |   0.0 /   0.0 /   526.5          |   0.0 /  0.0 /  122.2 | 1226.2 /  11.5 /  12192.2
+
+  **ZERO nascite nelle masse e ZERO nel varco, a tutti i checkpoint: TUTTE nel vuoto.**
+  Quindi la torsione supercritica NON e' concentrata nel varco, e (a) NON e' caduta per la
+  ragione che avevo indicato. **E' caduta per una ragione che non avevo previsto.**
+
+----------------------------------------------------------------------------------------------------------------
+`V4` -- E LE SCORCIATOIE DI SCHWINGER CI SONO, MISURATE (residuo `A3-DISEGNO`)
+----------------------------------------------------------------------------------------------------------------
+  passo | coppie | scorciatoie | frazione | `2*dd/d` mediano | minimo
+     40 |    0.0 |         0.0 |       - |                - | -
+     80 |   10.0 |         2.5 | 25.00 % |           1.0077 | 0.8916
+    120 |  122.2 |        47.8 | 39.06 % |           1.0131 | 0.6256
+
+  IL RITIRO DI IERI RESTA GIUSTO PER LA MITOSI (l'arco (a,b) diventa (a,m),(m,b) lunghi
+  d/2: il cammino e' lungo QUANTO prima), E ORA LA CODA SCHWINGER E' QUANTIFICATA.
+
+----------------------------------------------------------------------------------------------------------------
+DUE RIGHE DEL REFERTO NON PORTANO INFORMAZIONE, E VANNO DETTE (`P4`, `A8`)
+----------------------------------------------------------------------------------------------------------------
+  1. `n` in `forma_passo0` vale SEMPRE lo stesso (48 valori, 9 distinti per massa e seme):
+     e' l'insieme CONGELATO del passo 0, quindi NON PUO' cambiare. Misurarlo e' un test
+     vuoto (`P4`). L'`n` informativo e' `n_fase`.
+  2. `foglio_0` vale 0.50384 AL PASSO 0, cioe' meta' e meta'. E' IL SUO VALORE SOTTO IPOTESI
+     NULLA, non un risultato: la scena scrive `phi = _dphi()/2 = 2 pi` ESATTAMENTE, che e'
+     il CONFINE fra i due fogli di `floor(phi/2pi)`, e la gaussiana `sigma = 0.05` lo
+     attraversa. Il diagnostico dei fogli, COSI' COM'E', su questa scena non misura nulla.
+
+================================================================================================================
+FINE DEL CONFRONTO. Nessuna conclusione sulla gravita': il pilota non e' il run base.
+================================================================================================================

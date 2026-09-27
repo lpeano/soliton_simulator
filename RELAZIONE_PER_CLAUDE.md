@@ -54,6 +54,104 @@
 
 
 
+
+---
+
+# 🎯 **IL PILOTA DELLA `PROVA 1`: LE MASSE SI AVVICINANO PIÙ DEI CONTROLLI A 40 E 80 PASSI — E DUE MIE PREVISIONI SU TRE SONO FALSIFICATE** *(2026-09-27)*
+
+*(4 semi, `POZZO_D` acceso, scena `(ii)`(a), 120 passi, `passo_pieno`, controlli **FISSI**.
+Referto `csv/_test_fork/_pilota_prova1/REFERTO.txt`; confronto
+`csv/_test_fork/_pilota_prova1/CONFRONTO_previsione.txt`, generato da
+`csv/_test_fork/_confronto_previsione.py` — `L-NUMERI`.
+**La previsione sta nel commit `1486cac`, ANTENATO del referto: non è riscritta, le sta accanto.**)*
+
+> ## 🛑 **NON È IL RUN BASE, E NON CONCLUDE SULLA GRAVITÀ.** `5 SI` sono aperti; i controlli sono
+> **punti di vuoto**, non masse di prova; l'osservabile **non separa** *«spinta»* da *«qualunque
+> altra cosa acceleri la contrazione dove c'è materia»*. **Dice che la grandezza SI MISURA** — ed
+> era il suo scopo.
+
+## ❌ **(a) FALSIFICATA, dal falsificante che avevo scritto io**
+
+`A(t) = [(m(t)−m(0)) − (c(t)−c(0))] / m(0)`, IC95 fra 4 semi, `t(3) = 3.182`:
+
+| passo | coppie `A < 0` **oltre la barra** | i valori |
+|--:|---|---|
+| **40** | ### **2 su 3** | `−0.00296` `[−0.00376,−0.00215]` · `−0.00379` `[−0.00696,−0.00062]` |
+| **80** | ### **2 su 3** | `−0.01408` `[−0.02158,−0.00657]` · `−0.01047` `[−0.01625,−0.00469]` |
+| 120 | 0 su 3 | tutti contengono lo zero, limiti `\|A\| < 0.05`-`0.14` |
+
+**Avevo previsto NO, o sotto la barra. Il falsificante era «2 coppie su 3»: scatta a 40 e a 80.**
+
+### ⚠ **E A 120 NON SCATTA PERCHÉ LA BARRA ESPLODE, NON PERCHÉ L'EFFETTO SVANISCA**
+
+La `sd` fra semi della distanza fra le **MASSE** va da `0.0015`-`0.0021` (passo 40) a
+**`0.023`-`0.065`** (passo 120); quella dei **CONTROLLI** da `0.0012`-`0.0019` a `0.009`-`0.011`.
+**Il rapporto masse/controlli passa da `x1.1`-`x1.3` a `x2.1`-`x7.6`.**
+**Conseguenza operativa per il run base: 4 semi BASTANO a 40-80 passi e NON BASTANO a 120.**
+
+## ❌ **(a-bis) E IL CONTRASTO PIÙ PULITO È A 40 PASSI, COL SEGNO OPPOSTO AL MIO**
+
+| passo | masse | controlli | quanto è uniforme |
+|--:|---|---|---|
+| **40** | `−0.0013` / `−0.0011` / `−0.0020` | ### **`+0.0016` / `+0.0018` / `+0.0017`** | **segno OPPOSTO** |
+| 80 | `−0.0177` / `−0.0143` / `−0.0175` | `−0.0036` / `−0.0038` / `−0.0052` | **`20`-`30 %`** |
+| 120 | `−0.0422` / `−0.0660` / `−0.0723` | `−0.0416` / `−0.0314` / `−0.0445` | `48`-`99 %` |
+
+**Avevo previsto «il calo è quasi tutto uniforme». A 40 passi IL VUOTO SI ESPANDE mentre le masse si
+contraggono**, e a 80 l'uniforme è solo il `20`-`30 %`. **La mia previsione è giusta solo a 120,
+cioè dove la barra non permette di concluderlo.**
+
+## ❌ **(b) FALSIFICATA: `0` allungamenti su `9`**
+
+Centri e superfici si muovono **insieme** entro la barra, su tutti i checkpoint e tutte le coppie.
+**La mia spiegazione — la coesione di superficie — non ha nulla da spiegare.**
+
+## ✅❌ **(c) IL MECCANISMO GIUSTO, LE SOGLIE SBAGLIATE**
+
+| passo | `coer_campo` | `n_fase` | sovrapposizione | max spost. medoide | raggio |
+|--:|--:|--:|--:|--:|--:|
+| 0 | `0.99877` | `499.1` | `0.9976` | `1.036` | `3.153` |
+| **120** | ### **`0.19555`** | ### **`124.7`** | `0.0491` | `7.250` | `3.175` |
+
+**La coerenza SI SCIOGLIE, e con margine enorme.** Ma avevo scritto sovrapposizione `>= 0.90`
+*(misurata `0.049`)* e spostamento `< LAM = 0.8` *(misurato `7.25`)*.
+**E il criterio `V5` che avevo scritto CONFONDE due cose:** legge *«sovrapposizione bassa + medoide
+spostato»* come **migrazione**, mentre qui **l'insieme si SVUOTA** (`−75 %`); e usa **`LAM`**, la
+scala **minima**, invece del **raggio della regione** (`3.15`). **`V5` non passa la soglia nemmeno al
+passo 0** *(`max spost = 1.036 > 0.8`)* — **un criterio che fallisce dove la risposta è nota era
+scaduto prima di partire** (`P1-sexies`). **→ `V5-SOGLIA`.**
+
+## ❌ **LA VIA CHE AVEVO INDICATO NON È QUELLA — ed è la parte più utile**
+
+Avevo scritto: *«se la torsione supercritica fosse concentrata NEL VARCO, `(a)` cade, ed è la via più
+probabile per cui cada»*. Le nascite dicono dove sta la torsione supercritica:
+
+### **`0` nascite nelle masse e `0` nel varco, a ogni checkpoint: TUTTE nel vuoto** *(mitosi `526.5`, Schwinger `122.2` al passo 120)*.
+
+**Quindi `(a)` è caduta per una ragione che NON avevo previsto.** Avevo la conclusione giusta sul
+*fatto* che cadesse e la via sbagliata sul *perché*.
+
+## 📌 **`V4`: IL 39 % DELLE COPPIE SCHWINGER ACCORCIA IL GRAFO**
+
+| passo | coppie | scorciatoie | frazione | `2*dd/d` mediano | minimo |
+|--:|--:|--:|--:|--:|--:|
+| 80 | `10.0` | `2.5` | `25.00 %` | `1.0077` | `0.8916` |
+| **120** | `122.2` | `47.8` | ### **`39.06 %`** | `1.0131` | `0.6256` |
+
+**Il ritiro del 26/9 resta giusto per la MITOSI** *(l'arco è SOSTITUITO da due tronconi `d/2`)*,
+**e la coda Schwinger è ora quantificata**: lo Schwinger **AGGIUNGE** un cammino parallelo lungo
+`2*dd` con `dd` preso da `pos` — residuo `A3-DISEGNO`. **→ `SCHW-CORTI`**, che raffina `FILI-CORTI`.
+
+## ⚠ **DUE RIGHE DEL MIO REFERTO NON PORTANO INFORMAZIONE, E LO DICO**
+
+1. **`n` in `forma_passo0` è COSTANTE per costruzione** — è l'insieme **congelato** del passo 0, e
+   tre `delta +0.00000` avrebbero dovuto insospettirmi. **Test vuoto** (`P4`). **→ `FORMA-N-VUOTO`.**
+2. **`foglio_0 = 0.50384` al passo 0 È IL SUO NULLO:** la scena scrive `phi = 2 pi`
+   **esattamente sul confine** fra i due fogli di `floor(phi/2pi)`, e `sigma = 0.05` lo attraversa.
+   **Il diagnostico dei fogli, così com'è, su questa scena non misura nulla.** *(`coer_dominio`
+   invece porta informazione: `0.99969 → 0.32572`.)* **→ `FOGLIO-NULLO`.**
+
+
 ---
 
 # 🆔 **`MASSA-ID`: LE MASSE SI IDENTIFICANO COL LIGNAGGIO — criteri scritti PRIMA** *(2026-09-27)*
