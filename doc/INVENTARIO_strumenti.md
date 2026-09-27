@@ -967,6 +967,19 @@ rigenera. -> `STATI-LOCALI`.
 
 ## Aggiunto il 2026-09-27 — **il VIDEO della scena del pilota** *(`VIDEO-SCENA`)*
 
+> ### 📦 **MA UNA COPIA STA SU GITHUB, NEL RAMO ORFANO `media`** *(richiesta di Luca,
+> 2026-09-27: il guardiano legge solo da GitHub)*. **Commit `acb235c`**, ramo **`media`**,
+> che contiene **SOLO** `video_scena_seme11.mp4`, i quattro `FOTOGRAMMA_*.png` e un `README.md`
+> con gli `sha1`, i commit di `fork-su2` che li hanno prodotti e il comando per rigenerarli.
+>
+> **⚠ E' UN RAMO ORFANO: NESSUNA STORIA CONDIVISA con `fork-su2`**, verificato
+> (`git merge-base --is-ancestor` dice di no). E' stato creato in un **worktree separato**,
+> cosi' l'albero di lavoro di `fork-su2` non e' stato toccato: `HEAD` invariato a `8718fb5`,
+> `git status` pulito **prima e dopo**.
+>
+> **NON si fa il merge di `media` in `fork-su2`**, e non e' una formalita': ci rientrerebbero
+> i 16 MB di binari che `.gitignore` tiene fuori apposta.
+
 > **⚠ IL VIDEO E I FOTOGRAMMI NON SONO IN GIT** *(`STATI-LOCALI`)*: `8.56 MB` il video,
 > `~2 MB` ciascun PNG. **Qui ci sono `sha1`, percorso e comando**, che e' cio' che li rende
 > rigenerabili — **il sistema e' deterministico, quindi il dato E' il comando.**
