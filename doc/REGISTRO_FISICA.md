@@ -424,7 +424,14 @@ contro un nullo di `1.4e-03` — **da `140` a `310` volte il suo valore sotto ip
 > ### ⚠ **`D02`: IL DISEGNO ENTRA NELLA GRAVITA', e la cura e' `POZZO_D`** *(2026-09-27)*.
 > **`pozzo_grafo` calcolava `L` da `self.pos`** — *il DISEGNO* — **e il risultato entra nella
 > spinta `S09`.** E **il docstring della funzione dichiara l'opposto**: *«diviso per la
-> DISTANZA REALE DELL'ARCO»*. **La distanza reale dell'arco e' `self.d` (`A13`).**
+> DISTANZA REALE DELL'ARCO»*. **La distanza reale dell'arco e' `self.d`.**
+> ### ❗ **CORREZIONE DI ETICHETTA, 2026-09-27 (rilievo di Luca): la regola e' `A3-DISEGNO`, NON `A13`.**
+> **Avevo citato `A13`, che e' *«`LAM` e' la scala di Planck del sistema»*.** La regola che
+> dice **«il disegno esce dalla dinamica: `pos` non entra nella fisica»** e' **`A3-DISEGNO`**.
+> **Non e' un dettaglio:** un'etichetta sbagliata **manda chi legge a cercare la regola nel
+> posto sbagliato**, e in un repo dove le regole si citano per nome quella e' la forma piu'
+> facile di errore silenzioso. **L'etichetta vecchia resta leggibile, con cio' che l'ha
+> corretta** *(stessa convenzione dei marchi storici: si legge com'era e cosa l'ha cambiata)*.
 > **LA CURA, derivata e senza coefficienti:** `L = self.d[mask]`, dietro **`POZZO_D`**
 > *(`--pozzo-d`, **spento di default**)*. **`STANDARD 10`: si TOGLIE una dipendenza (`pos`),
 > non si aggiunge una legge.**

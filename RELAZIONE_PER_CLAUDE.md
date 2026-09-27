@@ -2692,3 +2692,51 @@ il referto sara' un commit a parte: `csv/_test_fork/_ab_pozzo_d/REFERTO.txt`.
 **E l'argomento che non dipende dai numeri:** `pos` e' **il disegno**, e non deve entrare nella
 gravita' (`A13`). **Si misura per PROMUOVERE, si DIMOSTRA per ESCLUDERE** — e qui la dimostrazione
 c'e' *(`W4`)*, **anche se l'effetto fosse piccolo**.
+
+---
+
+# ❗ CORREZIONE DI ETICHETTA: **la regola e' `A3-DISEGNO`, non `A13`** *(rilievo di Luca, 2026-09-27)*
+
+**Luca ha ragione, e l'ho verificato dall'indice invece di prenderlo per buono:**
+
+| | che cosa dice davvero |
+|---|---|
+| **`A13`** | *«`LAM` E' LA SCALA DI PLANCK DEL SISTEMA»* *(decisione di Luca, 2026-09-24)* |
+| **`A3-DISEGNO`** *(alias `A3`)* | *«IL DISEGNO ESCE DALLA DINAMICA — `pos` entra nella fisica in…»* |
+
+**La regola che dice «`pos` non deve entrare nella gravita'» e' `A3-DISEGNO`.** `A13` parla della
+**scala**, non del disegno.
+
+> ### **E NON L'HO INVENTATA: L'HO PROPAGATA.**
+> L'etichetta sbagliata sta **nella revisione stessa**, righe **55** e **76** di
+> `doc/REVISIONE_SI_2026-09-26.md` — *«non su `pos` (`A13`: la distanza sta sugli archi)»*. **Io
+> l'ho ricopiata senza verificare cosa `A13` dicesse**, ed e' **`P1` applicato a un'etichetta**:
+> *l'associazione genera candidati, non conclusioni*. **Un'etichetta sbagliata manda chi legge a
+> cercare la regola nel posto sbagliato**, e in un repo dove le regole si citano **per nome** e'
+> la forma piu' facile di errore silenzioso.
+
+## CORRETTI ORA
+
+| file | |
+|---|---|
+| `doc/TASK_HISTORY/2026-09-27_d02-pozzo-d.md` | l'etichetta vecchia **resta leggibile**, con cio' che l'ha corretta |
+| `doc/REGISTRO_FISICA.md` *(scheda ③)* | idem, **stessa convenzione dei marchi storici** |
+
+## ⛔ NON CORRETTI, E NON PER DIMENTICANZA: **un run sta girando**
+
+| file | perche' |
+|---|---|
+| `soliton_simulator.py` *(il commento del flag `POZZO_D`)* | **il run A/B di `W5` lo IMPORTA a ogni braccio** |
+| `csv/_osservabile_p1.py` *(due citazioni)* | **anche questo e' importato dai bracci** |
+
+**`par.5` vieta di modificare un file del percorso in uso mentre un run gira** — *non solo il
+simulatore, ma ogni script che il processo ha importato*. **Toccarli ora farebbe girare i bracci
+rimanenti su un blob diverso dai primi**, e l'A/B misurerebbe **due codici**.
+
+> **Ed e' esattamente il caso reale che ha generato quella regola** *(la patch al driver applicata
+> mentre un run da 6000 passi girava, 2026-09-19)*. **Quella volta non ci fu danno, e la prova
+> disse «non che fosse sicuro».** Qui la finestra e' nota: il run fa **~7.5 min per braccio**,
+> `seme11_off` alle `02:48:49`, `seme11_on` alle `02:56:18` — **finisce verso le `03:41`**.
+
+**In coda come `ETICHETTA-A13`**, col criterio di chiusura: a run finito, le tre citazioni nel
+codice; **e la revisione — che e' un reperto datato — la decidi tu**: si annota o si lascia.
