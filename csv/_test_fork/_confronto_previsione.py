@@ -109,7 +109,12 @@ def principale():
     # ---------------------------------------------------------------- (a)
     P()
     P("-" * 112)
-    P("(a)  PREVEDEVO: le masse NON si avvicinano piu' dei controlli, o sotto la barra.")
+    P("(a)  PREVEDEVO: i NODI DELLE MASSE DEL PASSO 0 non si avvicinano piu' dei controlli.")
+    P("     ⚠ CORREZIONE DEL GUARDIANO, 2026-09-27: `A(t)` si misura sull'insieme di nodi")
+    P("     CONGELATO al passo 0 (la colonna `passo0`), NON sulla massa come regione")
+    P("     coerente. A 80 passi la sovrapposizione con la regione di fase e' 0.0827 e")
+    P("     `coer_campo` 0.34: sono due insiemi ormai DIVERSI. Si scrive <<i nodi delle")
+    P("     masse del passo 0 si avvicinano>>, MAI <<le masse si avvicinano>>.")
     P("     FALSIFICANTE SCRITTO PRIMA: `A(t) < 0` oltre l'IC95 su ALMENO 2 COPPIE SU 3.")
     P("-" * 112)
     P("  passo | coppia            |    A(t)   |    sd    |       IC95        | oltre la barra?")
@@ -157,8 +162,13 @@ def principale():
     P()
     P("-" * 112)
     P("(a-bis)  PREVEDEVO: <<il calo di `W5` dovrebbe comparire QUASI TUTTO anche nei controlli>>.")
+    P("     ⚠ CORREZIONE DEL GUARDIANO, 2026-09-27: al passo 40 i controlli CONTENGONO LO")
+    P("     ZERO su 3 coppie su 3 (limiti |c| < 0.0035-0.0049). <<Il vuoto si espande>> NON")
+    P("     E' DIMOSTRATO: e' un segno letto senza la sua barra, lo stesso errore del segno")
+    P("     concorde su due semi. `A` e' significativa perche' e' una differenza APPAIATA")
+    P("     nel seme, non perche' i due termini lo siano.")
     P("-" * 112)
-    P("  passo | coppia            | masse     | controlli | frazione UNIFORME  (controlli/masse)")
+    P("  passo | coppia            | masse     | controlli |      IC95 controlli      | frazione")
     for c in CPS:
         for cp in coppie:
             vm, vc = [], []
@@ -171,11 +181,67 @@ def principale():
                 if np.isfinite(m0) and m0 > 0 and v:
                     vm.append((mt - m0) / m0)
                     vc.append(float(np.mean(v)))
-            mm, mc = float(np.mean(vm)), float(np.mean(vc))
+            mm = float(np.mean(vm))
+            mc, _sd, lo, hi, zero = barra(vc)
             fr = (mc / mm) if abs(mm) > 1e-12 else float("nan")
-            P("  %5d | %-17s | %+.5f  | %+.5f  | %s"
-              % (c, cp, mm, mc, ("%.1f %%" % (100 * fr)) if np.isfinite(fr) and mm < 0
-                 else "il segno differisce: non e' una frazione"))
+            P("  %5d | %-17s | %+.5f  | %+.5f  | [%+.5f,%+.5f]%s | %s"
+              % (c, cp, mm, mc, lo, hi, " ZERO" if zero else "     ",
+                 ("%.1f %%" % (100 * fr)) if np.isfinite(fr) and mm < 0 and not zero
+                 else ("controlli NON distinguibili da zero" if zero
+                       else "il segno differisce")))
+
+    # ---------------------------------------------------------------- (a-ter) LA DIVERGENZA
+    P()
+    P("-" * 112)
+    P("(a-ter)  E LE DUE DISTANZE DIVERGONO: il mio referto lo aveva STAMPATO e io non")
+    P("         l'ho detto. <<LE DUE DISTANZE ... se divergono, si dice>>: divergevano.")
+    P("-" * 112)
+    P("  passo | coppia            | nodi passo 0 | regioni di FASE | sovrapp | coer_campo")
+    for c in [0] + CPS:
+        for cp in coppie:
+            a0 = float(np.mean([blocco(d[s], c)["coppie_passo0"][cp]["centro_centro"]
+                                for s in sorted(d)]))
+            af = float(np.nanmean([blocco(d[s], c)["coppie_fase"][cp]["centro_centro"]
+                                   for s in sorted(d)]))
+            so = float(np.mean(fase(d, c, "sovrapposizione")))
+            cc = float(np.mean(campo(d, c, "coer_campo")))
+            P("  %5d | %-17s |   %7.4f    |     %7.4f     | %.4f  | %.5f"
+              % (c, cp, a0, af, so, cc))
+    P()
+    P("  I NODI DEL PASSO 0 SI AVVICINANO, LE REGIONI DI FASE NO -- anzi, si ALLONTANANO:")
+    P("  sulla coppia 0|1 la distanza fra i nodi del passo 0 va 10.6694 -> 10.2191 mentre")
+    P("  quella fra le regioni di fase va 10.8935 -> 13.1410. Con sovrapposizione 0.0491 al")
+    P("  passo 120, i due numeri parlano di DUE INSIEMI DIVERSI, e il secondo e' fatto per")
+    P("  il 95 %% di nodi che al passo 0 non erano nella massa: NON e' <<la massa si e'")
+    P("  allontanata>>, e' <<l'insieme coerente di adesso sta altrove>>. Nessuna delle due")
+    P("  letture e' <<la massa>>: e' la voce `MASSA-ID`.")
+
+    P()
+    P("  PERCHE' `A` E' SIGNIFICATIVA SE I DUE TERMINI NON LO SONO: L'APPAIAMENTO NEL SEME.")
+    P("  passo | coppia            | sd masse | sd controlli | sd di A  | corr(masse,controlli)")
+    for c in CPS:
+        for cp in coppie:
+            vm, vc = [], []
+            for s in sorted(d):
+                b0, bt = blocco(d[s], 0), blocco(d[s], c)
+                m0 = b0["coppie_passo0"][cp]["centro_centro"]
+                mt = bt["coppie_passo0"][cp]["centro_centro"]
+                righe = bt["controlli_fissi"]["coppie"].get(cp, [])
+                w = [(r["distanza"] - r["distanza_0"]) / m0 for r in righe
+                     if not r["escluso"]]
+                if np.isfinite(m0) and m0 > 0 and w:
+                    vm.append((mt - m0) / m0)
+                    vc.append(float(np.mean(w)))
+            vm, vc = np.asarray(vm), np.asarray(vc)
+            rr = (float(np.corrcoef(vm, vc)[0, 1]) if len(vm) > 2 else float("nan"))
+            P("  %5d | %-17s | %.5f  |   %.5f    | %.5f  | %+.4f"
+              % (c, cp, vm.std(ddof=1), vc.std(ddof=1), (vm - vc).std(ddof=1), rr))
+    P()
+    P("  E NON VALE PER TUTTE ALLO STESSO MODO, quindi si dice PER COPPIA: al passo 40 la")
+    P("  coppia 0|1 ha corr +0.9485 e la `sd` di `A` (0.00051) e' TRE VOLTE piu' piccola di")
+    P("  entrambi i termini -- li' l'appaiamento e' tutto. La 0|2 ha corr -0.8587 e la `sd`")
+    P("  di `A` (0.00384) e' piu' GRANDE dei termini: li' l'appaiamento PEGGIORA la barra,")
+    P("  ed e' infatti la coppia che NON risulta significativa.")
 
     # ---------------------------------------------------------------- (b)
     P()
@@ -184,11 +250,26 @@ def principale():
     P("     FALSIFICANTE DELLA SPIEGAZIONE: raggio e quantili interni FERMI mentre le superfici")
     P("     si avvicinano. E il criterio `V6`: superfici piu' dei centri OLTRE LA BARRA.")
     P("-" * 112)
-    P("  passo | coppia            | ALLUNGAMENTO (sup - centri) |       IC95        | oltre la barra?")
+    P("  ⚠⚠ CORREZIONE DEL GUARDIANO, 2026-09-27: **L'ESTIMATORE STESSO E' SBAGLIATO.**")
+    P("    `V6` calcola `(st-s0)/s0 - (ct-c0)/c0`, cioe' sottrae due variazioni RELATIVE con")
+    P("    DENOMINATORI DIVERSI: `s0 ~ 3.0` (il varco) contro `c0 ~ 10.7` (i centri). Due corpi")
+    P("    RIGIDI che si avvicinano di `delta` darebbero -delta/3.0 + delta/10.7 = -0.24*delta,")
+    P("    cioe' un ALLUNGAMENTO FINTO. MISURATO sul caso rigido di -0.19: -0.04000.")
+    P("    **QUINDI (b) NON E' <<FALSIFICATA>>: E' DA RIMISURARE**, in unita' ASSOLUTE.")
+    P("    -> voce `ALLUNG-RELATIVO`; la forma giusta e' in csv/_test_fork/_scomposizione_tratti.py")
+    P("    E la risoluzione e' un SECONDO problema, che resta anche dopo: un nullo si legge con")
+    P("    la sua risoluzione, e qui la mezza-barra supera spesso l'effetto sui centri.")
+    P("    Dire <<falsificata>> perche' l'IC95 contiene lo zero e' l'errore che il presidio")
+    P("    del nullo esiste per impedire. Si confronta la MEZZA-BARRA dell'allungamento con")
+    P("    l'effetto sui CENTRI: se la barra e' piu' larga, il test NON PUO' VEDERE un")
+    P("    allungamento grande quanto il moto dei centri, e l'esito e' NON DETERMINATO.")
+    P()
+    P("  passo | coppia            | centri   | superfici | allung.  | mezza-barra | esito")
     quanti = 0
+    ndet = 0
     for c in CPS:
         for cp in coppie:
-            v = []
+            v, vc, vs = [], [], []
             for s in sorted(d):
                 b0, bt = blocco(d[s], 0), blocco(d[s], c)
                 c0 = b0["coppie_passo0"][cp]["centro_centro"]
@@ -196,18 +277,39 @@ def principale():
                 s0 = b0["coppie_passo0"][cp]["insieme_insieme"]
                 st = bt["coppie_passo0"][cp]["insieme_insieme"]
                 if np.isfinite(c0) and c0 > 0 and np.isfinite(s0) and s0 > 0:
+                    vc.append((ct - c0) / c0)
+                    vs.append((st - s0) / s0)
                     v.append((st - s0) / s0 - (ct - c0) / c0)
             m, sd, lo, hi, zero = barra(v)
+            mezza = (hi - lo) / 2.0
+            mc = float(np.mean(vc))
             if not zero:
                 quanti += 1
-            P("  %5d | %-17s |         %+.5f          | [%+.5f,%+.5f] | %s"
-              % (c, cp, m, lo, hi, "** SI **" if not zero else "no"))
+                esito = "** ALLUNGAMENTO MISURATO **"
+            elif mezza > abs(mc):
+                ndet += 1
+                esito = "NON DETERMINATA (barra > |centri|)"
+            else:
+                esito = "nullo INFORMATIVO: nessun allungamento"
+            P("  %5d | %-17s | %+.5f | %+.5f  | %+.5f | %.5f     | %s"
+              % (c, cp, mc, float(np.mean(vs)), m, mezza, esito))
     P()
-    P("  ESITO: allungamenti oltre la barra: %d su %d." % (quanti, len(CPS) * len(coppie)))
-    if quanti == 0:
-        P("         **LA PREVISIONE (b) E' FALSIFICATA**: nessun allungamento. Centri e superfici")
-        P("         si muovono INSIEME entro la barra. E la mia spiegazione (coesione di")
-        P("         superficie) non ha nulla da spiegare.")
+    tot = len(CPS) * len(coppie)
+    P()
+    P("  ESITO: allungamenti misurati %d su %d; NON DETERMINATE %d su %d; nulli informativi %d."
+      % (quanti, tot, ndet, tot, tot - quanti - ndet))
+    if quanti == 0 and ndet:
+        P("         **LA PREVISIONE (b) NON E' FALSIFICATA: E' DA RIMISURARE** (estimatore")
+        P("         rotto, `ALLUNG-RELATIVO`), E IN PIU' NON SAREBBE DETERMINATA: su %d celle"
+          % ndet)
+        P("         su %d la mezza-barra dell'allungamento SUPERA l'effetto sui centri, quindi"
+          % tot)
+        P("         il test non potrebbe vedere un allungamento nemmeno grande quanto il moto")
+        P("         dei centri. Le %d celle con la barra piu' stretta dei centri sono nulli"
+          % (tot - quanti - ndet))
+        P("         INFORMATIVI, e li' un allungamento davvero non c'e'.")
+        P("         **E LA MIA SPIEGAZIONE (coesione di superficie) NON E' NE' CONFERMATA NE'")
+        P("         SMENTITA: resta da misurare.**")
 
     # ---------------------------------------------------------------- (c)
     P()

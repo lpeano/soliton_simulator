@@ -943,3 +943,12 @@ diversi per lo stesso file.)*
 | `csv/_osservabile_p1.py` | `7854c7b7` | `--scena` · `--snap F` · `--semi …` · `--collaudo` · **`--collaudo-controlli`** | **AGGIORNATO**: `controlli_fissi()` + `segui_controlli()` — le coppie di controllo si scelgono **una volta al passo 0** e poi **si SEGUONO**. `controlli()` RESTA col suo **marchio**, perche' e' l'evidenza del difetto e il ramo che **deve fallire** | **`K5` 2/2**; `K5b`: su un effetto vero del `-4.475 %` i fissi vedono `+0.0000 %` e la riscelta porta `A` a `+0.025 %` |
 
 **E i `.pkl`: NESSUNO.** Il pilota non scrive snapshot: ogni braccio produce **un `misura.json`** *(`csv/_test_fork/_pilota_prova1/seme_<N>/misura.json`)*, che **e' committabile** e porta seme, passi, `kappa`, blob e configurazione. **Per rigenerarli:** `python csv/_test_fork/_pilota_prova1.py` *(4 semi, 120 passi, ~40 min in parallelo)*.
+
+## Aggiornati il 2026-09-27 — **la VERIFICA DEL GUARDIANO su `8c2997c`**
+
+| strumento | blob (byte) | comando | cosa fa | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_scomposizione_tratti.py` | `3c83bd61` | `python csv/_test_fork/_scomposizione_tratti.py` · `--collaudo` | **`TRATTI`: il calo sta nel VARCO o negli INTERNI?** In unita' **ASSOLUTE** *(`D_centri`, `D_varco`, `D_interni`)*, IC95 fra semi. **Legge i `misura.json` GIA' COMMITTATI: nessun run nuovo.** `D_interni` e' un **INDICATORE** dichiarato, non il tratto interno del cammino | **`T4` 3/3**; **a 80 passi `D_interni` esclude lo zero 3 su 3, `D_varco` lo contiene 3 su 3** |
+| `csv/_test_fork/_confronto_previsione.py` | `dcdf6165` | `python csv/_test_fork/_confronto_previsione.py` | **AGGIORNATO** con le tre correzioni del guardiano: *«i NODI del passo 0»* invece di *«le masse»*, il blocco **`(a-ter)`** sulla **divergenza** delle due distanze, `(b)` **da rimisurare** *(estimatore rotto, `ALLUNG-RELATIVO`)*, e i controlli col loro **IC95** piu' la **correlazione appaiata** | il referto rigenerato: `0` allungamenti, `7` non determinate, `2` nulli informativi |
+
+**E non ci sono `.pkl` ne' dati nuovi:** entrambi leggono i `misura.json` committati in `c4517a9`. **Per rigenerare i referti basta rilanciare i due comandi.**

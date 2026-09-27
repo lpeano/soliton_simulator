@@ -57,7 +57,11 @@
 
 ---
 
-# 🎯 **IL PILOTA DELLA `PROVA 1`: LE MASSE SI AVVICINANO PIÙ DEI CONTROLLI A 40 E 80 PASSI — E DUE MIE PREVISIONI SU TRE SONO FALSIFICATE** *(2026-09-27)*
+# 🎯 **IL PILOTA DELLA `PROVA 1`: I NODI DELLE MASSE DEL PASSO 0 SI AVVICINANO PIÙ DEI CONTROLLI — MA IL CALO STA NEGLI INTERNI, NON NEL VARCO** *(2026-09-27)*
+
+> ### ❗❗ **TITOLO CORRETTO DUE VOLTE DALLA VERIFICA DEL GUARDIANO.**
+> Diceva *«LE MASSE si avvicinano»* e *«due previsioni su tre FALSIFICATE»*: **sbagliato l'oggetto** *(sono i **nodi congelati del passo 0**, non le masse)* **e sbagliato il verbo** *(una previsione non era falsificata: l'estimatore era rotto)*. **E la scomposizione in unità ASSOLUTE dice che a 80 passi il calo è CONTRAZIONE INTERNA, non avvicinamento.**
+> **I conti erano giusti; il testo no.** I dettagli nel blocco in fondo a questo paragrafo.
 
 *(4 semi, `POZZO_D` acceso, scena `(ii)`(a), 120 passi, `passo_pieno`, controlli **FISSI**.
 Referto `csv/_test_fork/_pilota_prova1/REFERTO.txt`; confronto
@@ -3267,3 +3271,117 @@ deduzione.
 
 **Il ritiro sta nel referto di `W5` E nello script che lo genera**, cosi' **una rigirata lo
 riproduce** invece di perderlo.
+
+---
+
+# 6. ❗❗ **LA VERIFICA DEL GUARDIANO su `8c2997c` + `c4517a9`** *(Luca, 2026-09-27)*
+
+> **I CONTI SONO GIUSTI — riprodotti esattamente dai `misura.json`, e i 4 blob dell'inventario
+> corrispondono. SBAGLIAVO NEL TESTO**, e una volta anche **nell'estimatore**.
+> Le correzioni sono **verificate dai dati**, non prese per buone, e sono applicate **allo SCRIPT**
+> `csv/_test_fork/_confronto_previsione.py` — così una rigirata **non rimette l'errore**.
+
+## 🎯 **IL RISULTATO CHE CAMBIA TUTTO: A 80 PASSI IL CALO STA NEGLI INTERNI**
+
+*(`csv/_test_fork/_scomposizione_tratti.py`, dai `misura.json` **già committati**, **nessun run
+nuovo**; unità **ASSOLUTE**, IC95 fra 4 semi, `t(3) = 3.182`.)*
+
+```
+D_centri  = centro_centro(t)   - centro_centro(0)
+D_varco   = insieme_insieme(t) - insieme_insieme(0)
+D_interni = D_centri - D_varco
+```
+
+| passo 80 | `D_centri` | `D_varco` | **`D_interni`** |
+|---|--:|--:|--:|
+| `massa_0\|massa_1` | `-0.18854` **esclude lo 0** | `+0.02309` *(zero)* | ### **`-0.21163`** `[-0.27330,-0.14995]` |
+| `massa_0\|massa_2` | `-0.15545` **esclude lo 0** | `-0.05096` *(zero)* | ### **`-0.10449`** `[-0.15332,-0.05565]` |
+| `massa_1\|massa_2` | `-0.18656` **esclude lo 0** | `-0.01731` *(zero)* | ### **`-0.16925`** `[-0.27603,-0.06246]` |
+
+### **`D_interni` esclude lo zero su `3` coppie su `3`; `D_varco` lo contiene su TUTTE E TRE.**
+
+> **Il moto dei CENTRI non è spiegato dall'avvicinarsi delle superfici più vicine.**
+> **È compatibile con LE REGIONI CHE SI CONTRAGGONO, e NON con I CORPI CHE SI AVVICINANO.**
+> ### **NON È GRAVITÀ — ed è esattamente ciò che la `PROVA 1` deve poter escludere.**
+
+**A 40 passi nulla esclude lo zero** *(la barra è più larga dell'effetto)*; **a 120 la dispersione
+esplode** e solo `D_varco` della `1|2` esclude lo zero.
+**Il quadro pulito è a 80 passi, ed è negativo per l'ipotesi.**
+
+**COLLAUDO `T4`, 3/3, su casi a risposta NOTA:** due insiemi **rigidi** traslati di `-0.19` danno
+`D_interni = +0.00000` **esatto**; una contrazione **solo interna** mette tutto negli interni; un
+avvicinamento **solo del varco** dà `D_interni = 0`.
+
+> **⚠ E IL LIMITE, DICHIARATO E NON SOTTINTESO: `D_interni` È UN INDICATORE**, cioè *«centri meno
+> varco minimo»*. `insieme_insieme` è la distanza fra i **due nodi più vicini**, che **non sta
+> necessariamente sul cammino** `medoide → medoide`. **Per dire «il tratto DENTRO le regioni si è
+> accorciato» serve la scomposizione del CAMMINO**, e quindi **gli stati del grafo ai checkpoint,
+> che questo run non ha salvato** → `doc/TASK_HISTORY/2026-09-27_tratti.md`.
+
+## ❗ 1. **«LE MASSE SI AVVICINANO» È SBAGLIATO: sono i NODI DEL PASSO 0**
+
+| passo | sovrapposizione | `coer_campo` | **nodi passo 0** `0\|1` | **regioni di FASE** `0\|1` |
+|--:|--:|--:|--:|--:|
+| 0 | `0.9976` | `0.99877` | `10.6694` | `10.8935` |
+| 80 | `0.0827` | `0.34035` | `10.4809` | `11.0826` |
+| **120** | **`0.0491`** | **`0.19555`** | ### **`10.2191`** | ### **`13.1410`** |
+
+**I nodi del passo 0 si AVVICINANO; le regioni di fase si ALLONTANANO.** Con sovrapposizione
+`0.049`, il secondo numero è fatto per il **`95 %`** di nodi che al passo 0 **non erano nella
+massa**. **Si scrive «i nodi delle masse del passo 0», MAI «le masse».**
+
+> ### ⚠ **E IL MIO REFERTO LO AVEVA GIÀ STAMPATO.**
+> Il blocco si intitola *«LE DUE DISTANZE … **se divergono, si dice**»*, e i numeri dicevano
+> `+0.60` a 80 passi e **`+2.92`** a 120. **Divergevano, e non l'ho detto.** Non è una misura
+> mancante: è **un criterio che avevo scritto io, che ha risposto, e che non ho letto.**
+
+## ❗❗ 2. **`(b)` NON È FALSIFICATA: L'ESTIMATORE ERA ROTTO**
+
+`V6` calcolava `(st-s0)/s0 - (ct-c0)/c0`: **due variazioni RELATIVE con DENOMINATORI DIVERSI** —
+`s0 ≈ 2.99` *(il varco)* contro `c0 ≈ 10.67` *(i centri)*, **rapporto `3.55`-`3.66`**.
+
+### **Due corpi RIGIDI che si avvicinano di `δ` danno `-δ/3.0 + δ/10.7 = -0.24 δ`: un ALLUNGAMENTO FINTO.**
+
+**Misurato sul caso rigido `δ = -0.19`: `-0.04000`.** **Non è un problema di risoluzione: è
+l'estimatore.** **→ voce `ALLUNG-RELATIVO`.**
+**In unità assolute il problema sparisce per costruzione**, e il caso rigido dà **`0` esatto**.
+
+*(E la risoluzione resta un **secondo** problema, che vale anche dopo: su `7` celle su `9` la
+mezza-barra dell'allungamento **supera** l'effetto sui centri. La mia lettura *«falsificata»* era
+sbagliata **due volte**.)*
+
+## ❗ 3. **«A 40 PASSI IL VUOTO SI ESPANDE» NON È DIMOSTRATO**
+
+| passo 40 | controlli | IC95 | |
+|---|--:|---|---|
+| `0\|1` | `+0.00164` | `[-0.00019, +0.00347]` | **contiene lo zero** |
+| `0\|2` | `+0.00180` | `[-0.00125, +0.00485]` | **contiene lo zero** |
+| `1\|2` | `+0.00174` | `[-0.00036, +0.00385]` | **contiene lo zero** |
+
+**Tre su tre.** Il segno c'era, la **barra** no — **lo stesso errore del «segno concorde su due
+semi»**, già catalogato in questo repo. **Si scrive come LIMITE:** *«a 40 passi i controlli non si
+spostano di più di `0.0035`-`0.0049`»*.
+
+**E allora perché `A` è significativa? Perché è una differenza APPAIATA nel seme** — e **non vale
+per tutte allo stesso modo, quindi si dice per COPPIA**:
+
+| passo 40 | `sd` masse | `sd` controlli | **`sd` di `A`** | `corr` |
+|---|--:|--:|--:|--:|
+| `0\|1` | `0.00145` | `0.00115` | ### **`0.00051`** | **`+0.9485`** |
+| `0\|2` | `0.00207` | `0.00192` | `0.00384` | `-0.8587` |
+| `1\|2` | `0.00174` | `0.00132` | `0.00199` | `+0.1780` |
+
+Sulla `0|1` la correlazione è **`+0.95`** e la barra di `A` è **tre volte più piccola di entrambi i
+termini**. Sulla `0|2` è **`-0.86`** e la barra **peggiora** — **ed è infatti la coppia che NON
+risulta significativa.**
+
+---
+
+> ## 🎯 **CHE COSA RESTA IN PIEDI**
+> **`A(t)` è significativa e negativa su 2 coppie su 3 a 40 passi e 2 su 3 a 80: questo non
+> cambia.** Cambia **che cosa significa**: *«i nodi che al passo 0 formavano le masse si avvicinano
+> fra loro più di coppie di nodi di vuoto alla stessa distanza iniziale»* — **e la scomposizione
+> dice che quel calo sta negli INTERNI, non nel varco.**
+> ### **Quindi: NON è «due masse si avvicinano». È «le regioni si contraggono».**
+> **Per chiuderla serve la scomposizione del CAMMINO** *(`TRATTI`, con gli stati salvati)* **e
+> l'identità di massa per lignaggio** *(`MASSA-ID`)*.

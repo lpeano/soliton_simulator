@@ -1,0 +1,102 @@
+========================================================================================================
+`T4` -- I DUE CASI A RISPOSTA NOTA, in unita' ASSOLUTE
+========================================================================================================
+  T4   due insiemi RIGIDI traslati di -0.19
+       D_centri -0.19000   D_varco -0.19000   D_interni +0.00000   -> PASS (zero esatto)
+       ** e il criterio RELATIVO di `V6` su questo STESSO caso rigido darebbe
+          (st-s0)/s0 - (ct-c0)/c0 = -0.04000, cioe' un ALLUNGAMENTO che NON ESISTE.
+          E' il difetto `ALLUNG-RELATIVO`: denominatori diversi (3.2869 contro 10.6694).
+  T4b  contrazione SOLO INTERNA (superfici FERME, centri -0.19)
+       D_centri -0.19000   D_varco +0.00000   D_interni -0.19000   -> PASS (tutto negli interni)
+  T4c  avvicinamento SOLO DEL VARCO (superfici e centri di pari passo)
+       D_centri -0.19000   D_varco -0.19000   D_interni +0.00000   -> PASS (zero negli interni)
+
+  LA RIGA CHE CONTA E' `T4`: due corpi RIGIDI danno `D_interni = 0` ESATTO con la forma
+  assoluta, e un allungamento FINTO di -0.04000 con la forma relativa di `V6`.
+
+  3/3
+
+========================================================================================================
+`TRATTI` -- IL CALO STA NEL VARCO O NEGLI INTERNI?   4 semi, unita' ASSOLUTE, IC95 `t(3)`
+========================================================================================================
+  D_centri  = centro_centro(t)   - centro_centro(0)
+  D_varco   = insieme_insieme(t) - insieme_insieme(0)
+  D_interni = D_centri - D_varco
+
+  ⚠ `D_interni` E' UN INDICATORE, NON IL TRATTO INTERNO DEL CAMMINO: e' <<centri meno varco
+    minimo>>, e `insieme_insieme` e' la distanza fra i due nodi PIU' VICINI, che non sta
+    necessariamente sul cammino medoide->medoide. La scomposizione VERA richiede il
+    CAMMINO, e quindi gli stati del grafo ai checkpoint, che questo run NON ha salvato.
+
+  LE SCALE AL PASSO 0 (e sono la ragione per cui la forma RELATIVA sbagliava):
+    massa_0|massa_1   centro_centro 10.6694   insieme_insieme 2.9968   rapporto 3.56
+    massa_0|massa_2   centro_centro 10.8628   insieme_insieme 2.9706   rapporto 3.66
+    massa_1|massa_2   centro_centro 10.5394   insieme_insieme 2.9675   rapporto 3.55
+
+--------------------------------------------------------------------------------------------------------
+  PASSO 40
+--------------------------------------------------------------------------------------------------------
+  massa_0|massa_1
+    D_centri                           -0.01392   sd 0.01518   IC95 [-0.03808,+0.01024]   CONTIENE LO ZERO -> limite |x| < 0.03808
+    D_varco                            +0.01888   sd 0.03089   IC95 [-0.03025,+0.06802]   CONTIENE LO ZERO -> limite |x| < 0.06802
+    D_interni  <- l'indicatore         -0.03280   sd 0.03489   IC95 [-0.08831,+0.02270]   CONTIENE LO ZERO -> limite |x| < 0.08831
+  massa_0|massa_2
+    D_centri                           -0.01152   sd 0.02252   IC95 [-0.04735,+0.02430]   CONTIENE LO ZERO -> limite |x| < 0.04735
+    D_varco                            +0.00893   sd 0.03465   IC95 [-0.04619,+0.06405]   CONTIENE LO ZERO -> limite |x| < 0.06405
+    D_interni  <- l'indicatore         -0.02045   sd 0.03234   IC95 [-0.07191,+0.03100]   CONTIENE LO ZERO -> limite |x| < 0.07191
+  massa_1|massa_2
+    D_centri                           -0.02168   sd 0.01881   IC95 [-0.05161,+0.00824]   CONTIENE LO ZERO -> limite |x| < 0.05161
+    D_varco                            +0.01889   sd 0.05852   IC95 [-0.07423,+0.11200]   CONTIENE LO ZERO -> limite |x| < 0.112
+    D_interni  <- l'indicatore         -0.04057   sd 0.05578   IC95 [-0.12931,+0.04817]   CONTIENE LO ZERO -> limite |x| < 0.1293
+
+--------------------------------------------------------------------------------------------------------
+  PASSO 80
+--------------------------------------------------------------------------------------------------------
+  massa_0|massa_1
+    D_centri                           -0.18854   sd 0.02128   IC95 [-0.22240,-0.15468]   ** ESCLUDE LO ZERO **
+    D_varco                            +0.02309   sd 0.05823   IC95 [-0.06956,+0.11573]   CONTIENE LO ZERO -> limite |x| < 0.1157
+    D_interni  <- l'indicatore         -0.21163   sd 0.03876   IC95 [-0.27330,-0.14995]   ** ESCLUDE LO ZERO **
+  massa_0|massa_2
+    D_centri                           -0.15545   sd 0.06171   IC95 [-0.25363,-0.05726]   ** ESCLUDE LO ZERO **
+    D_varco                            -0.05096   sd 0.06807   IC95 [-0.15926,+0.05734]   CONTIENE LO ZERO -> limite |x| < 0.1593
+    D_interni  <- l'indicatore         -0.10449   sd 0.03069   IC95 [-0.15332,-0.05565]   ** ESCLUDE LO ZERO **
+  massa_1|massa_2
+    D_centri                           -0.18656   sd 0.08340   IC95 [-0.31924,-0.05387]   ** ESCLUDE LO ZERO **
+    D_varco                            -0.01731   sd 0.10380   IC95 [-0.18245,+0.14783]   CONTIENE LO ZERO -> limite |x| < 0.1825
+    D_interni  <- l'indicatore         -0.16925   sd 0.06712   IC95 [-0.27603,-0.06246]   ** ESCLUDE LO ZERO **
+
+--------------------------------------------------------------------------------------------------------
+  PASSO 120
+--------------------------------------------------------------------------------------------------------
+  massa_0|massa_1
+    D_centri                           -0.45032   sd 0.24505   IC95 [-0.84019,-0.06045]   ** ESCLUDE LO ZERO **
+    D_varco                            -0.12367   sd 0.07971   IC95 [-0.25049,+0.00314]   CONTIENE LO ZERO -> limite |x| < 0.2505
+    D_interni  <- l'indicatore         -0.32665   sd 0.25628   IC95 [-0.73439,+0.08109]   CONTIENE LO ZERO -> limite |x| < 0.7344
+  massa_0|massa_2
+    D_centri                           -0.71986   sd 0.70126   IC95 [-1.83556,+0.39584]   CONTIENE LO ZERO -> limite |x| < 1.836
+    D_varco                            -0.17760   sd 0.13919   IC95 [-0.39905,+0.04386]   CONTIENE LO ZERO -> limite |x| < 0.3991
+    D_interni  <- l'indicatore         -0.54226   sd 0.57561   IC95 [-1.45806,+0.37354]   CONTIENE LO ZERO -> limite |x| < 1.458
+  massa_1|massa_2
+    D_centri                           -0.78135   sd 0.61694   IC95 [-1.76291,+0.20020]   CONTIENE LO ZERO -> limite |x| < 1.763
+    D_varco                            -0.18537   sd 0.10837   IC95 [-0.35779,-0.01295]   ** ESCLUDE LO ZERO **
+    D_interni  <- l'indicatore         -0.59598   sd 0.55487   IC95 [-1.47878,+0.28681]   CONTIENE LO ZERO -> limite |x| < 1.479
+
+========================================================================================================
+IL VERDETTO, col criterio scritto PRIMA
+========================================================================================================
+  passo   40   `D_interni` esclude lo zero su 0 coppie su 3;  `D_varco` su 0 su 3
+  passo   80   `D_interni` esclude lo zero su 3 coppie su 3;  `D_varco` su 0 su 3
+  passo  120   `D_interni` esclude lo zero su 0 coppie su 3;  `D_varco` su 1 su 3
+
+  **A 80 PASSI IL CALO STA NEGLI INTERNI, NON NEL VARCO.**
+  `D_interni` esclude lo zero su 3 coppie su 3; `D_varco` lo contiene su TUTTE.
+  LETTURA, e va detta cosi': il moto dei CENTRI non e' spiegato dall'avvicinarsi delle
+  superfici piu' vicine. E' compatibile con **le regioni che si CONTRAGGONO**, e NON
+  con **i corpi che si avvicinano**. NON E' GRAVITA', ed e' esattamente cio' che la
+  `PROVA 1` deve poter escludere.
+
+  ⚠ E IL LIMITE RESTA: `D_interni` e' un INDICATORE. Per dire <<il tratto DENTRO le regioni
+    si e' accorciato>> serve la scomposizione del CAMMINO, con gli stati del grafo salvati
+    ai checkpoint. -> `doc/TASK_HISTORY/2026-09-27_tratti.md`, punto ⓵ del TODO.
+
+========================================================================================================
