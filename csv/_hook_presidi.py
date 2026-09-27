@@ -120,7 +120,12 @@ def _avanza_con_step(t, arb):
     **`passo_pieno`**, che l'ordine lo **legge dal codice**.
     """
     cinque, da_passo = _le_cinque()
-    if _usa(t, 'passo_pieno') or _usa(t, 'frame_pieno'):
+    # [T1, 2026-09-28] `esegui_passo` E' L'ESECUTORE UNICO DELLO SCHEDULATORE, e da oggi
+    #   e' il modo CANONICO di avanzare: chi lo usa NON ricopia l'ordine, lo legge da
+    #   `PASSO_COMPOSIZIONE`. `passo_pieno` resta accettato perche' e' il suo involucro
+    #   per le sonde, e `frame_pieno` perche' aggiunge `passo_test` una volta per frame.
+    if (_usa(t, 'esegui_passo') or _usa(t, 'passo_pieno')
+            or _usa(t, 'frame_pieno')):
         return 0, None
     riga = 0
     for nd in ast.walk(arb):

@@ -781,10 +781,6 @@ def scuoti_vuoto(net):
     """Applica lo scuotimento del vuoto guidato dallo stress metrico locale (senza numeri fissi).
     L'intensità emerge dallo scostamento fra la distanza reale (d) e la distanza di riposo (d0)
     degli archi connessi al nodo, pesata dalla soppressione della coerenza locale |Psi|^2."""
-    # [(c)1] IL CONFINE DEL PASSO: la prima legge che gira APRE la fotografia. Sta PRIMA
-    #   della guardia di proposito -- se `scuoti_vuoto` esce subito, il passo comincia
-    #   comunque, e la legge dopo non deve accorgersene.
-    net._smp_apri()
     if not SCUOTIMENTO or net.n == 0 or not len(net.i):
         return
     
@@ -841,6 +837,66 @@ def scuoti_vuoto(net):
         calcio = calcio * net.perc_chi  # Firma antichirale (rompe simmetria speculare); SCALARE se --calore-scal
         
     net.phivel[:net.n] += calcio
+
+# ==========================================================================
+# [T1, 2026-09-28] LO SCHEDULATORE DEL PASSO: la COMPOSIZIONE e' una LISTA ESPLICITA,
+#   e c'e' UN SOLO ESECUTORE.
+# ==========================================================================
+#   Decisione di Luca: lo schedulatore POSSIEDE il passo. Le regole del passo (sincronia,
+#   scala minima, 4 pi, ordine) non sono piu' intenzioni dentro le leggi controllate a
+#   posteriori dai presidi: sono l'ARCHITETTURA.
+#
+#   CHE COSA FA T1, E CHE COSA NON FA: T1 e' SOLO lo scheletro. L'ordine e le fasi
+#   diventano ESPLICITI e passano per un punto solo; LA FISICA NON CAMBIA, e il sigillo di
+#   T1 e' BYTE-IDENTICO. Fotografia, variazioni e vincoli-una-volta sono T3.
+#
+#   APERTURA E CHIUSURA SONO FISSE, in testa e in coda. Prima l'apertura era dentro
+#   ognuna delle cinque leggi (idempotente, cura `(c)1`) e la chiusura in fondo a
+#   `memoria_hebbiana_moto`: DUE CONFINI CHE DIPENDEVANO DA CHI GIRAVA. Ora dipendono
+#   dallo SCHEDULATORE, e l'idempotenza di `(c)1` non serve piu' -- il compositore SA di
+#   essere il primo. `(c)1` era il primo abbozzo di questo confine, e il tag
+#   `pre-schedulatore-t1` conserva il suo stato.
+#
+#   ⚠ `verifica_invarianti` era chiamata DENTRO `memoria_hebbiana_moto` con
+#   `dove='memoria_hebbiana_moto'`, e ora la chiama lo schedulatore con
+#   `dove='esegui_passo'`: cambia LA STRINGA che finisce nel referto di un'eccezione, non
+#   lo stato. E l'ORDINE relativo `chiudi -> verifica_invarianti` E' PRESERVATO, che e'
+#   cio' che rende T1 byte-identico: il controllo guarda `d0` GIA' frenata, come prima.
+
+PASSO_COMPOSIZIONE = ('apri', 'scuoti_vuoto', 'step', 'mitosi',
+                      'rilassa_disegno', 'memoria_hebbiana_moto', 'chiudi',
+                      'verifica_invarianti')
+# le fasi che NON sono leggi: le esegue lo schedulatore, e non hanno un metodo omonimo
+_PASSO_FASI = {'apri': '_smp_apri', 'chiudi': '_smp_chiudi'}
+# le leggi che sono FUNZIONI DI MODULO e non metodi (prendono `net`)
+_PASSO_MODULO = ('scuoti_vuoto',)
+
+
+def esegui_passo(net, composizione=None):
+    """L'UNICO modo di avanzare di un passo. Esegue `PASSO_COMPOSIZIONE` in ordine.
+
+    `composizione` serve agli INNESTI (`T5`) e al presidio `H-ETC-2`, che permuta
+    l'ordine: di default e' la composizione standard, e chi la cambia LO DICHIARA
+    (contatore `_g_passi_composizione_altra`).
+
+    ⚠ NON CONTIENE FISICA. Se un giorno ci finisse un `if` su un flag, la composizione
+    smetterebbe di essere un DATO e tornerebbe a essere codice.
+    """
+    comp = tuple(PASSO_COMPOSIZIONE if composizione is None else composizione)
+    for _nome in comp:
+        if _nome in _PASSO_FASI:
+            getattr(net, _PASSO_FASI[_nome])()
+        elif _nome in _PASSO_MODULO:
+            globals()[_nome](net)
+        elif _nome == 'verifica_invarianti':
+            net.verifica_invarianti(dove='esegui_passo')
+        else:
+            getattr(net, _nome)()
+    net._g_passi_eseguiti = getattr(net, '_g_passi_eseguiti', 0) + 1
+    if comp != tuple(PASSO_COMPOSIZIONE):
+        net._g_passi_composizione_altra = getattr(net, '_g_passi_composizione_altra', 0) + 1
+    return net
+
 # ============================================================================
 MU_PSI   = -0.05
 REPULS_LEGGE = True      # repulsione EMERGENTE con conversione dinamica (riempimento*coerenza vs Ncrit adattivo): legge, non parametro        # AUTO-INTERAZIONE repulsiva ATTIVA (default B): pressione
@@ -5083,10 +5139,6 @@ class Rete:
         return K_C * np.imag(np.conj(z) * (self._mat(A) @ z))
 
     def step(self):
-        # [(c)1, 2026-09-27] L'APERTURA STA PRIMA DELLA GUARDIA, e prima era dopo: se `step`
-        #   usciva subito (`n < 2`), il passo non apriva e il freno del passo non chiudeva.
-        #   Ora la fotografia e' del PASSO, non di `step`.
-        self._smp_apri()
         if self.n < 2 or not len(self.i): return
         i, j = self.i, self.j
         
@@ -5883,7 +5935,6 @@ class Rete:
         if TRACCIA_D0: self._traccia_d0('P1_dopo_rilass', _tr_pre)
         
     def mitosi(self):
-        self._smp_apri()          # [(c)1] il confine del passo, idempotente
         if self.n >= MAX_NODI or not len(self.tw): return 0
         avv = np.abs(self.tw)
         # soglia della mitosi: 2pi classico, oppure 3pi se la torsione vive sul dominio
@@ -6480,7 +6531,6 @@ class Rete:
         fra creazione e rilassamento e' auto-regolato dallo stato (lo stress stesso),
         indipendentemente da quante volte il chiamante invoca il rilassamento. Non e' un
         tetto: e' un feedback che accelera il rilassamento dove serve."""
-        self._smp_apri()          # [(c)1] il confine del passo, idempotente
         if self.n < 2 or not len(self.i): return
         pos0 = self.pos.copy() if L_CONSERVA else None   # per misurare la rotazione spuria
         for _ in range(it):
@@ -6581,12 +6631,13 @@ class Rete:
           - CONSERVAZIONE: mem(t+1) = mem(t) + correzione_dal_campo. Il momento si mantiene
             (inerzia hebbiana), la correzione lo piega lungo la geodetica. Cosi' non insegue
             lo zero: genera e protegge il moto, assecondando la curvatura."""
-        self._smp_apri()          # [(c)1] il confine del passo, idempotente
         if not MEM_HEBB or self.n < 2 or not len(self.i):
             # [SCALA_MIN_PASSO, C3] ANCHE SUL RITORNO ANTICIPATO il freno va chiuso: senno' lo
             # snapshot resterebbe aperto e il passo DOPO confronterebbe `d0` con quello del passo
             # PRIMA -- una variazione di DUE passi frenata come se fosse di uno.
-            self._smp_chiudi()
+            # [T1] LA CHIUSURA NON STA PIU' QUI: la fa lo SCHEDULATORE, in coda alla
+            #   composizione. Era il difetto che il commento qui sopra descriveva -- un
+            #   confine che dipendeva da CHI girava e da QUALE uscita prendeva.
             return
         n = self.n
         if not hasattr(self, "psi") or len(self.psi) < n:
@@ -7023,10 +7074,12 @@ class Rete:
                 if TRACCIA_D0: self._traccia_d0('P7_dopo_4917', _tr_pre)
         # [SCALA_MIN_PASSO, C3] IL FRENO SU `d0`, UNA VOLTA SOLA, a fine ciclo. `memoria_
         # hebbiana_moto` e' l'ULTIMA chiamata del passo nel driver e nelle rigiocate sigillate.
-        self._smp_chiudi()
+        # [T1] la CHIUSURA e il controllo degli INVARIANTI sono passati allo SCHEDULATORE
+        #   (`esegui_passo`), in coda alla composizione. L'ORDINE RELATIVO E' PRESERVATO
+        #   -- chiudi, poi verifica -- ed e' cio' che rende T1 byte-identico: il controllo
+        #   guarda `d0` GIA' frenata, esattamente come prima.
         # [C5] IL CONTROLLO GIRA A FINE PASSO, su TUTTO lo stato. `memoria_hebbiana_moto` e'
         #   l'ULTIMA chiamata del ciclo nel driver e nelle rigiocate sigillate.
-        self.verifica_invarianti(dove='memoria_hebbiana_moto')
 
     def diagnostica(self):
         I = self.intensita()
@@ -7086,14 +7139,14 @@ def _dbg_init():
     N_PASSI = 300
     t_tot = _t.time()
     # timing per operazione: cosi' si vede DOVE va il tempo nel ciclo completo
-    acc = dict(scuoti=0.0, step=0.0, mitosi=0.0, rilassa=0.0, hebb=0.0)
+    acc = dict(passo=0.0)   # [T1] un solo tempo: il passo. Vedi il commento sotto.
     for k in range(N_PASSI):
         # CICLO COMPLETO identico al runtime (update): stessa fisica, stesse leggi, stesso ordine.
-        t0 = _t.time(); scuoti_vuoto(net);           acc["scuoti"]  += _t.time() - t0
-        t0 = _t.time(); net.step();                  acc["step"]    += _t.time() - t0
-        t0 = _t.time(); net.mitosi();                acc["mitosi"]  += _t.time() - t0
-        t0 = _t.time(); net.rilassa_disegno();       acc["rilassa"] += _t.time() - t0
-        t0 = _t.time(); net.memoria_hebbiana_moto(); acc["hebb"]    += _t.time() - t0
+        # [T1] IL BENCHMARK PASSA DALL'ESECUTORE, e con questo PERDE il dettaglio per
+        #   legge: prima cronometrava le cinque chiamate una per una. LO DICHIARO invece
+        #   di lasciarlo scoprire: oggi misura il PASSO INTERO. Il dettaglio per legge
+        #   tornera' strumentando lo SCHEDULATORE (strato 5), non ricopiando l'ordine qui.
+        t0 = _t.time(); esegui_passo(net);           acc["passo"]   += _t.time() - t0
         if DEBUG_INIT and (k % 20 == 19 or k == 0):
             try:
                 d = net.diagnostica()
@@ -7827,10 +7880,9 @@ def update(frame):
     # regolabile (stato['passi_frame']); il passo_test/scuotimento restano una volta per frame.
     _npf = max(1, int(stato.get("passi_frame", PASSI_PER_FRAME)))
     for _ip in range(_npf):
-        scuoti_vuoto(net)      # LEGGE DELLO SCUOTIMENTO LOCALE: il vuoto ribolle e
-                               # genera materia stocasticamente ai bordi morbidi. Sempre attiva.
-        net.step(); net.mitosi(); net.rilassa_disegno()
-        net.memoria_hebbiana_moto()  # MEMORIA HEBBIANA DEL MOTO: inerzia plastica, segue geodetiche
+        # [T1] UN SOLO ESECUTORE: l'ordine e le fasi stanno in `PASSO_COMPOSIZIONE`, non
+        #   ricopiati qui. Era il 26esimo posto in cui quell'ordine viveva cablato.
+        esegui_passo(net)
     dg = net.diagnostica()
     ax.clear(); ax3d.clear(); ax2.clear(); axt.clear(); axt.axis("off"); axc.clear(); axc.axis("off")
 
@@ -9463,6 +9515,10 @@ def batch_condensazione(a):
             "SPIN_FEEDBACK": SPIN_FEEDBACK, "SPIN_LARMOR": SPIN_LARMOR,
             "CHI_CORE": CHI_CORE, "CS_DINAMICO": CS_DINAMICO,
             "SYNC_UPDATE": SYNC_UPDATE, "VERLET": VERLET,
+            # [T1, P5] LA COMPOSIZIONE EFFETTIVA DEL PASSO nei risultati: con gli innesti
+            #   (T5) l'ordine non sta piu' nel codice, quindi un referto che non lo scrive
+            #   non dichiara la configurazione intera.
+            "PASSO_COMPOSIZIONE": list(PASSO_COMPOSIZIONE),
             "VIRIALE": VIRIALE, "ZETA_VIR": ZETA_VIR, "PAV_COM": PAV_COM,
             "PLAST_DIN": PLAST_DIN, "TAU_USA_D0": TAU_USA_D0,
             "OLON_PART": OLON_PART, "POLO_MATURO": POLO_MATURO,
@@ -9483,7 +9539,7 @@ def batch_condensazione(a):
     Nc = massa_critica_collasso()
     net = Rete(seed); net.semina(80)
     for _ in range(6):
-        scuoti_vuoto(net); net.step(); net.mitosi(); net.rilassa_disegno(); net.memoria_hebbiana_moto()
+        esegui_passo(net)
     # N MASSE disposte in cerchio di raggio 'sep' attorno all'origine (equidistanti dal centro,
     # simmetriche: il sistema scala in modo pulito con N). Traccio gli indici di ogni coorte per
     # distinguere la materia NATA dalla materia delle masse iniziali.
@@ -9507,7 +9563,7 @@ def batch_condensazione(a):
     n_orig = net.n   # nodi che esistono PRIMA dell'evoluzione: tutto cio' che nasce dopo e' >= n_orig
 
     def _passo(net):
-        scuoti_vuoto(net); net.step(); net.mitosi(); net.rilassa_disegno(); net.memoria_hebbiana_moto()
+        esegui_passo(net)
 
     def _stat(v):
         """statistiche compatte di un array: min, max, media, |max| (per diagnostica)."""

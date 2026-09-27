@@ -112,37 +112,64 @@ def _sequenze(percorso):
     return trovate
 
 
+def composizione():
+    """**LA COMPOSIZIONE DEL PASSO, letta da `PASSO_COMPOSIZIONE` nel simulatore.**
+
+    ### IL CONTRATTO E' CAMBIATO CON `T1` (2026-09-28), e va detto in chiaro
+    **Prima** questa funzione leggeva **la SEQUENZA DELLE CINQUE CHIAMATE** dall'AST di
+    `update()` e **verificava che il driver coincidesse**. Serviva perche' l'ordine viveva
+    **cablato in sei posti**, e una divergenza fra due di loro era invisibile.
+    **Da `T1` l'ordine vive in UN POSTO SOLO** -- `PASSO_COMPOSIZIONE` -- e c'e' **un solo
+    esecutore**, `esegui_passo`. ### **Quindi non c'e' piu' niente da confrontare fra due
+    copie: si legge la lista, e si verifica che il driver PASSI DALL'ESECUTORE.**
+
+    ⚠ **Il vecchio contratto NON e' cancellato:** `_sequenze` e `_metodi_rete` restano qui
+    sotto *(decisione 3: cio' che esce si archivia)*, e `soli()` continua a usarli per
+    trovare chi avanza con `step()` da solo -- che **resta un difetto** e che `H-P9` cerca.
+
+    **Si legge dal SORGENTE per AST, non importando il modulo:** importare
+    `soliton_simulator` lo farebbe girare.
+    """
+    if "composizione" in _CACHE:
+        return _CACHE["composizione"]
+    arb = ast.parse(io.open(SIM, encoding="utf-8").read())
+    trovata = None
+    for n in arb.body:
+        if isinstance(n, ast.Assign):
+            for b in n.targets:
+                if isinstance(b, ast.Name) and b.id == "PASSO_COMPOSIZIONE":
+                    trovata = ast.literal_eval(n.value)
+    if not trovata:
+        raise SystemExit("[passo] `PASSO_COMPOSIZIONE` NON si trova in %s. Non invento un "
+                         "fallback: una composizione inventata girerebbe una fisica che "
+                         "nessuno ha dichiarato (`A9`)." % SIM)
+    # ⚠ IL DRIVER DEVE PASSARE DALL'ESECUTORE. E' cio' che resta del vecchio confronto: non
+    #   piu' <<le due sequenze coincidono>>, ma <<il driver non ha una sequenza propria>>.
+    td = io.open(DRIVER, encoding="utf-8").read()
+    if "esegui_passo" not in td:
+        raise SystemExit(
+            "[passo] IL DRIVER NON USA `esegui_passo`: %s -- con T1 l'ordine del passo "
+            "vive in PASSO_COMPOSIZIONE e c'e' UN SOLO esecutore. Un driver che avanza "
+            "per conto suo fa girare una fisica DIVERSA da quella delle sonde, ed e' "
+            "il difetto che questo modulo esiste per impedire." % DRIVER)
+    _CACHE["composizione"] = list(trovata)
+    return _CACHE["composizione"]
+
+
 def ordine():
-    """L'ORDINE DEL PASSO, letto dall'ORIGINALE (`update()`) e VERIFICATO contro il driver."""
+    """**COMPATIBILITA'**: le sole LEGGI della composizione, come `(tipo, nome)`.
+
+    Serve agli strumenti scritti prima di `T1`, che chiedevano `ordine()` e si aspettavano
+    coppie `(tipo, nome)`. **Le fasi dello schedulatore (`apri`, `chiudi`,
+    `verifica_invarianti`) NON sono leggi e non compaiono**: chi vuole la composizione
+    INTERA usa `composizione()`.
+    """
     if "ordine" in _CACHE:
         return _CACHE["ordine"]
-    # ⚠ UNA CHIAMATA SOLA NON E' UNA SEQUENZA: non porta nessuna informazione di ORDINE.
-    #   Si tengono i blocchi con >= 2 chiamate. **Non e' una scelta fra sequenze diverse**: e'
-    #   il criterio che dice che cosa sia una sequenza.
-    #   E I BLOCCHI DA UNA SOLA CHIAMATA SI RESTITUISCONO COMUNQUE, come RISCONTRO (vedi
-    #   `soli()`): nel simulatore sono DUE, e uno dei due e' un difetto vero.
-    s_sim = [x for x in _sequenze(SIM) if len(x[1]) >= 2]
-    s_drv = [x for x in _sequenze(DRIVER) if len(x[1]) >= 2]
-    if not s_sim:
-        raise SystemExit("[passo] la sequenza del passo NON si trova in %s. Non invento un "
-                         "fallback: un `passo_pieno` che ricadesse su `step()` da solo "
-                         "rifarebbe il difetto in silenzio (`A9`)." % SIM)
-    # nel simulatore la sequenza compare piu' volte (interattivo e headless): devono coincidere
-    uniche = {tuple(x[1]) for x in s_sim}
-    if len(uniche) != 1:
-        raise SystemExit("[passo] il SIMULATORE ha %d sequenze DIVERSE del passo:\n  %s\n"
-                         "  Non scelgo io quale sia il passo." % (len(uniche), uniche))
-    seq = list(next(iter(uniche)))
-    if s_drv:
-        uniche_d = {tuple(x[1]) for x in s_drv}
-        if uniche_d != uniche:
-            raise SystemExit(
-                "[passo] IL DRIVER E L'ORIGINALE HANNO SEQUENZE DIVERSE.\n"
-                "  originale (`update()`): %s\n"
-                "  driver:                 %s\n"
-                "  Il docstring del driver dice che il ciclo e' COPIATO da `update()`: se non\n"
-                "  coincidono, le sonde e la campagna avanzano in modo DIVERSO, ed e'\n"
-                "  esattamente il difetto che questo modulo deve impedire." % (uniche, uniche_d))
+    metodi = _metodi_rete()
+    fasi = {"apri", "chiudi", "verifica_invarianti"}
+    seq = [("metodo" if n in metodi else "modulo", n)
+           for n in composizione() if n not in fasi]
     _CACHE["ordine"] = seq
     return seq
 
@@ -185,12 +212,16 @@ def soli(percorso=None):
 
 
 def passo_pieno(S, net):
-    """UN PASSO, nell'ordine letto dal codice. **L'UNICO modo di avanzare in una sonda.**"""
-    for tipo, nome in ordine():
-        if tipo == "metodo":
-            getattr(net, nome)()
-        else:
-            getattr(S, nome)(net)
+    """UN PASSO. **L'UNICO modo di avanzare in una sonda**, e da `T1` e' un INVOLUCRO.
+
+    ### Non ricopia piu' niente: chiama `S.esegui_passo(net)`.
+    Prima ricostruiva il passo iterando la sequenza letta dall'AST -- il che era giusto
+    quando l'ordine viveva in sei posti, **ma era il settimo posto in cui viveva**.
+    `composizione()` si chiama comunque, perche' **verifica che il driver passi
+    dall'esecutore**: se non lo fa, si solleva qui invece di far girare due fisiche.
+    """
+    composizione()          # il controllo del contratto: solleva se il driver va per conto suo
+    return S.esegui_passo(net)
 
 
 def frame_pieno(S, net, passi=None):

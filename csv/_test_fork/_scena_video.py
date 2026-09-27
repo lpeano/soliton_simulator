@@ -34,7 +34,8 @@ e la scena si avvia col SUO costruttore, `avvia_test("N-MASSE")` -> `_semina_n_m
 Il ciclo per frame e' COPIATO da `update()` (`:5091-5100`), non reinventato:
     passo_test()                                   # una volta per frame: fa avanzare le fasi
     for _ in range(PASSI_PER_FRAME):               # = 6
-        scuoti_vuoto(net); net.step(); net.mitosi(); net.rilassa_disegno(); net.memoria_hebbiana_moto()
+        # [T1] UN SOLO ESECUTORE: l'ordine sta in `PASSO_COMPOSIZIONE`, non ricopiato qui.
+        esegui_passo(net)
 
 USO:  python _scena_video.py <n_frame> <destinazione> [frame,di,snapshot]
 ASCII PURO.
@@ -493,8 +494,8 @@ prog = []
 for k in range(FRAME0, NFRAME):
     S.passo_test()
     for _ in range(int(S.PASSI_PER_FRAME)):
-        S.scuoti_vuoto(S.net); S.net.step(); S.net.mitosi()
-        S.net.rilassa_disegno(); S.net.memoria_hebbiana_moto()
+        # [T1] idem: un solo esecutore.
+        S.esegui_passo(S.net)
     S.stato["nframe"] += 1
     fr = k + 1
     if MODO == "fedele":

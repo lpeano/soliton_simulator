@@ -245,3 +245,75 @@ sigillo, e `T4` in particolare ha bisogno di **lettura umana sito per sito**.
 
 `SCHED-PASSO` *(nuova)* · `ETC-PASSO` · `ETC-C1-CONFINE` · `A3-DISEGNO` · `PSI-FLASH` ·
 `H-ETC-1` · `H-ETC-2` · `CLIP-INVENTARIO` · `DOPPIA-COP` · `D02` · `A1` · `A9`
+
+---
+
+# 8. LA MAPPA DEGLI STRATI, e dove cade ogni pezzo di oggi *(decisione di Luca, 2026-09-27)*
+
+> **Decisione:** *«Il software va strutturato in CLASSI e STRATI, con dipendenze SOLO VERSO IL BASSO.»*
+> **Ordine:** gli strati **1-3 nascono DENTRO lo schedulatore** *(`T1`-`T3`)*, non dopo. Gli strati
+> **4-6** e la **divisione del file in moduli** sono un **progetto SEPARATO**, dopo `T3`, con una
+> **facciata di compatibilità** e sigilli byte-identici.
+> ### 🛑 **IL FILE NON SI SPEZZA ORA.**
+
+| strato | che cos'è | dipende da |
+|---|---|---|
+| **1 · Stato** | **dati puri**: la fotografia, e nient'altro | — |
+| **2 · Leggi** | **una classe per legge**, col contratto del suo tipo | 1 |
+| **3 · Schedulatore** | possiede il passo: fasi, composizione, vincoli | 1, 2 |
+| **4 · Configurazione** | **un oggetto unico**, costruito una volta, **immutabile durante il passo**, validato | — |
+| **5 · Strumenti** | diagnostica, presidi, I/O | 1-4 |
+| **6 · Interfacce** | CLI, driver, GUI | 1-5 |
+
+## 8.1 — Dove cade ogni pezzo di OGGI
+
+| oggi | strato | note |
+|---|---|---|
+| i **21 array di stato fisico** + `i`, `j`, `n` | ### **1** | sono già dati puri: vivono come attributi di `Rete` |
+| ### **`pos`** | ### **1, ma SEPARATO** | ### **non entra nella fotografia fisica** — decisione (2) di Luca. È dato del **disegno** |
+| `scuoti_vuoto` · `step` · `memoria_hebbiana_moto` · `_passo_spinoriale` · `calcola_psi` · `ritmo` · `_aggiorna_lift_spinoriale` · `_estendi_psi_spinor` · `_eredita_spinore_figli` | **2** *(`dinamica`)* | **9 funzioni**, dal referto |
+| **`mitosi`** | ### **2, ma DA SPEZZARE** | **`AMBIGUA`**: struttura **e** stato. Si spezza in `T2` |
+| `_nasce` · `_smorza` · `_sd0` · `satura` · `% _dphi()` · la normalizzazione di `_nb` | **2** *(`vincolo`)* | ### oggi sono **funzioni pure applicate dai writer**: nello strato 2 diventano **vincoli che il compositore applica** |
+| `_smp_chiudi` | **2** *(`vincolo`)* | ### **è già il modello giusto** (`C3`): scrive lui il vincolo, una volta |
+| `rilassa_disegno` · `_togli_rotazione_rigida` | ### **2, tipo `disegno`** | **esce dalla sequenza fisica**: muove **solo `pos`** |
+| le **44 funzioni `osservatore`** | **2** *(`osservatore`)* o **5** | quelle che servono a una legge restano in **2**; le diagnostiche pure vanno in **5** |
+| ### `verifica_invarianti` · `_traccia_d0` · `_traccia_vd` · i contatori `_g_*` | ### **5** | **leggono soltanto** |
+| `esegui_passo` + `PASSO_COMPOSIZIONE` *(nasce in `T1`)* | ### **3** | **è lo schedulatore** |
+| `_smp_apri` / `_smp_chiudi` come **confine** | **3** | le fasi 1 e 3; `(c)1` è il loro primo abbozzo |
+| ### i **~130 flag globali** di modulo | ### **4** | ### **oggi sono globali riassegnati da più funzioni** — `_applica_flag`, `_applica_regime`, `_fattori_coarse` — ed è esattamente ciò che lo strato 4 deve chiudere |
+| `_applica_flag` · `_applica_regime` · `_avvisa_leggi_in_uso` · `_cli` | **4** *(costruzione)* e **6** *(la CLI)* | la **costruzione** della configurazione è 4; il **parsing** è 6 |
+| `.githooks/*` · `csv/_hook_presidi.py` · `csv/_indice_id.py` · `csv/_presidio.py` | **5** | i presidi |
+| `update()` · la GUI · `_scena_video.py` · `csv/_passo.py` · gli script di `csv/` | **6** | le interfacce |
+
+## 8.2 — ⚠ LE TRE COSE CHE LA MAPPA RENDE VISIBILI, e che non erano evidenti prima
+
+### **① Lo strato 4 è il più grosso pezzo di lavoro, e non è nel piano `T1`-`T5`.**
+**~130 flag** letti da tutto il file **come globali**, e **riassegnati** da almeno tre funzioni
+*(`_applica_flag`, `_applica_regime`, `_fattori_coarse` per `SCALA_B`)*. Un oggetto **immutabile
+durante il passo** significa che **ogni lettura di flag diventa una lettura di quell'oggetto**:
+### **è il refactor più esteso del progetto**, e va stimato a parte.
+> **E ha un effetto collaterale che vale da solo:** `csv/_test_fork/_etc_rami_morti.py` ha dovuto
+> **leggere i flag dal modulo dopo la configurazione** e **dichiarare come limite** che *«un flag
+> riassegnato durante il passo renderebbe il verdetto falso»*. **Con lo strato 4 quel limite
+> sparisce.**
+
+### **② `pos` sta nello strato 1 ma non nella fotografia: è la cosa che rende la decisione (2) implementabile.**
+Se `pos` fosse *fuori* dallo stato sarebbe un'invenzione *(esiste, si salva, si disegna)*. **Sta nello
+strato 1 come dato del disegno**, e ### **la fotografia che lo strato 3 passa alle leggi fisiche non
+lo contiene**. **Non è un divieto: è che il parametro non c'è.**
+
+### **③ Le 44 `osservatore` si dividono fra strato 2 e strato 5, e il criterio NON è il tipo.**
+Un `osservatore` **di cui una legge usa il risultato** *(`_pesi`, `_mat`, `_grado`, `_lam_archi`)* è
+**strato 2**: la legge ne dipende. Un `osservatore` che **scrive solo una traccia**
+*(`_traccia_d0`, `verifica_invarianti`)* è **strato 5**. ### **Il criterio è «qualcuno dipende dal
+suo valore?», e va deciso funzione per funzione** — 44 volte.
+
+## 8.3 — La facciata di compatibilità, e perché non è negoziabile
+
+**Gli script di `csv/` fanno `import soliton_simulator as S`** e poi `S.LAM`, `S.Rete`,
+`S.scuoti_vuoto`, `S.avvia_test`, `S._NMASSE_VIDEO`… ### **Sono decine di strumenti, e ognuno è un
+reperto committato** *(par.7 di `CLAUDE.md`: il codice di una misura dev'essere recuperabile)*.
+
+**Quindi la divisione in moduli mantiene `soliton_simulator.py` come FACCIATA** che re-esporta i
+nomi, e ogni passo ha il suo **sigillo byte-identico**. **Un `ImportError` in uno strumento vecchio
+non è un fastidio: è un reperto che non si rigira più**, e `CLAUDE.md` lo chiama **un difetto nuovo**.

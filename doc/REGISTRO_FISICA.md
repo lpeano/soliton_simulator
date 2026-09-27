@@ -369,6 +369,23 @@ tronca nulla lo fa salire ugualmente — è il presidio di `D38`, non una misura
 <!-- SCHEDA nome=memoria-del-moto funzioni=memoria_hebbiana_moto flag=MEM_HEBB,MEM_MOTO,MEM_MOTO_TUTTO,SCALA_P_MEDIANA,ZETA_VIR -->
 # ② LA MEMORIA DEL MOTO — **`memoria_hebbiana_moto` / `S08_proj` / `mem_mot`**
 
+> ### 🏗 **T1: escono da questa legge l'apertura, LE DUE CHIUSURE e il controllo degli invarianti**
+> **`T1`, 2026-09-28: l'apertura del passo NON sta piu' qui.** La fa lo **SCHEDULATORE**
+> (`esegui_passo`), in testa alla composizione, e **l'idempotenza di `(c)1` non serve piu'** --
+> il compositore **sa** di essere il primo. **Misurato:** `_g_smp_gia_aperta` passa da **4 per
+> passo** a ### **0**. *(Scheda `schedulatore-del-passo`; tag `pre-schedulatore-t1`.)*
+>
+> **Questa legge portava il confine del passo per tutti:** chiudeva il freno **in coda** e **anche
+> sul ritorno anticipato** *(`if not MEM_HEBB or self.n < 2 ...`)*, e chiamava
+> `verifica_invarianti(dove='memoria_hebbiana_moto')`. ### **Tutto questo e' dello schedulatore.**
+> ### 📌 **E il ritorno anticipato e' il caso che dice perche' l'architettura batte la regola:** il
+> suo commento spiegava con cura che *<<anche sul ritorno anticipato il freno va chiuso, senno' lo
+> snapshot resterebbe aperto e il passo DOPO confronterebbe `d0` con quello del passo PRIMA>>*.
+> **Era una regola scritta e rispettata a mano in un punto solo.** Ora il confine **non dipende
+> piu' da quale uscita la legge prende.**
+> **La fisica della memoria del moto non e' toccata:** il sigillo di `T1` e' **byte-identico**.
+
+
 > ### 🔓 **(c)1, 2026-09-27: anche questa legge APRE il passo**
  > **`(c)1` di `ETC-PASSO`, 2026-09-27: `_smp_apri()` e' IDEMPOTENTE e la chiamano TUTTE
 > e CINQUE le leggi**, in testa. **La prima che gira apre**, le altre quattro escono subito, e
@@ -991,6 +1008,16 @@ distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifi
 <!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,_dphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
 # ⑥ LA FASE `φ` E IL SUO DOMINIO — **`semina` / `_w4` / `_w8` / `step`**
 
+> ### 🏗 **T1, 2026-09-28: `step` non apre piu' il passo, e non e' piu' il proprietario di niente**
+>
+> In `(c)1` l'apertura era **passata prima della guardia** `if self.n < 2 ...`; ### **ora e' uscita
+> del tutto**: la fa lo schedulatore, in testa alla composizione. **Il commento storico che diceva
+> *<<il passo, per il freno, e' il ciclo INTERO del driver>>* e' finalmente vero nel codice e non
+> solo nel testo** -- e sta scritto in `PASSO_COMPOSIZIONE`, non in un commento.
+> **La legge sulla FASE non e' toccata:** `_dphi`, `_wphi`, il dominio a `4 pi` e il cuore
+> simplettico `phivel -> phi` restano come erano. *(Scheda `schedulatore-del-passo`.)*
+
+
 > ### 🔓 **(c)1, 2026-09-27: `step` non e' piu' il proprietario della fotografia**
 >
 > `_smp_apri()` era chiamata **qui**, e il suo commento diceva che <<il passo, per il freno, e' il
@@ -1259,6 +1286,20 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 > `MITOSI_2LAM`, e **ha fatto bene a chiederla**: dal diff non si vede se la riga toccata sia
 > un commento o una legge. **La risposta va scritta, non assunta.**)*
 # ⑦ LA MITOSI E SCHWINGER — **`mitosi()`**
+
+> ### 🏗 **T1: la mitosi non apre piu' il passo**
+> **`T1`, 2026-09-28: l'apertura del passo NON sta piu' qui.** La fa lo **SCHEDULATORE**
+> (`esegui_passo`), in testa alla composizione, e **l'idempotenza di `(c)1` non serve piu'** --
+> il compositore **sa** di essere il primo. **Misurato:** `_g_smp_gia_aperta` passa da **4 per
+> passo** a ### **0**. *(Scheda `schedulatore-del-passo`; tag `pre-schedulatore-t1`.)*
+>
+> **Le regole di nascita non sono toccate**, e `_smp_chirurgia` continua a far seguire la
+> fotografia alla ristrutturazione: ### **e ora la fotografia e' garantita aperta dallo
+> schedulatore**, invece di dipendere dal fatto che una delle cinque leggi ci si fosse ricordata.
+> ⚠ **E la mitosi resta l'unica legge `AMBIGUA`** *(scrive STRUTTURA e STATO: 30 scritture di
+> stato)*. **Si spezza in `T2`**, mentre tutto il resto e' ancora byte-identico -- correzione (b)
+> del piano, approvata da Luca.
+
 
 > ### 🔓 **(c)1, 2026-09-27: anche la mitosi APRE il passo**
  > **`(c)1` di `ETC-PASSO`, 2026-09-27: `_smp_apri()` e' IDEMPOTENTE e la chiamano TUTTE
@@ -4002,6 +4043,17 @@ aggiunti**.
 <!-- SCHEDA nome=scuotimento-vuoto funzioni=scuoti_vuoto,lambda_vuoto flag=SCUOTIMENTO,CALORE_VETTORIALE,RUMORE_COLORATO -->
 # ㉖ LO SCUOTIMENTO DEL VUOTO — **`scuoti_vuoto`**, la **prima** legge del passo
 
+> ### 🏗 **T1, 2026-09-28: l'apertura del passo non sta piu' qui**
+>
+> In `(c)1` **questa legge apriva il passo**, perche' e' la prima dell'ordine canonico, e
+> l'apertura stava **prima della guardia** `if not SCUOTIMENTO ... return`. ### **Ora la fa lo
+> SCHEDULATORE**, e la domanda *<<e se la prima legge esce subito?>>* **non esiste piu'**: il
+> passo comincia prima che una legge possa uscire.
+> **La legge dello scuotimento non e' toccata**, e resta vero il fatto che rendeva `(c)1`
+> byte-identico: ### **`scuoti_vuoto` scrive `phivel` e nient'altro.** *(Scheda
+> `schedulatore-del-passo`.)*
+
+
 > ### ⚠ **LA SCHEDA NASCE IL 2026-09-27, E NASCE TARDI.** `scuoti_vuoto` è **la prima delle cinque
 > leggi del passo pieno** e **non aveva una scheda**: `H-REG-R` l'ha imposta nel commit `(c)1` di
 > `ETC-PASSO`. **Una legge senza scheda è una legge la cui forma nessuno ha dovuto scrivere
@@ -4064,6 +4116,18 @@ quindi `sqrt(Lam)` quelle di `|psi|`; `ampiezza` esce in unità di `phivel`, cio
 
 <!-- SCHEDA nome=rilassamento-disegno funzioni=rilassa_disegno flag=L_CONSERVA,EMB_IT,EMB_ETA -->
 # ㉗ IL RILASSAMENTO DEL DISEGNO — **`rilassa_disegno`**, e **`A3-DISEGNO`**
+
+> ### 🏗 **T1: il disegno non apre piu' il passo**
+> **`T1`, 2026-09-28: l'apertura del passo NON sta piu' qui.** La fa lo **SCHEDULATORE**
+> (`esegui_passo`), in testa alla composizione, e **l'idempotenza di `(c)1` non serve piu'** --
+> il compositore **sa** di essere il primo. **Misurato:** `_g_smp_gia_aperta` passa da **4 per
+> passo** a ### **0**. *(Scheda `schedulatore-del-passo`; tag `pre-schedulatore-t1`.)*
+>
+> **E' la legge che meno c'entra col confine del freno** -- scrive `pos` e **zero stato fisico** --
+> e in `(c)1` doveva comunque chiamare l'apertura, perche' **una permutazione poteva metterla per
+> prima**. ### **Con lo schedulatore quel dovere sparisce**, e resta solo il fatto che conta:
+> **questa non e' una legge del passo fisico**, ed **esce dalla sequenza in `T4`**.
+
 
 > ### ⚠ **ANCHE QUESTA SCHEDA NASCE IL 2026-09-27**, imposta da `H-REG-R` nel commit `(c)1`.
 > **È la quarta delle cinque leggi del passo, e non aveva forma scritta.**
@@ -4174,3 +4238,93 @@ che l'avrebbe **saltato nel caso più comune** *(nessun `--regime` sulla riga di
 ## LIMITI, `A11`
 
 **Nessuno:** la funzione **stampa** e non scrive stato. Il costo è una stampa per run.
+
+---
+
+<!-- SCHEDA nome=schedulatore-del-passo funzioni=esegui_passo,update,_passo,batch_condensazione,_dbg_init flag=PASSO_COMPOSIZIONE,_PASSO_FASI,_PASSO_MODULO -->
+# ㉙ LO SCHEDULATORE DEL PASSO — **`esegui_passo` / `PASSO_COMPOSIZIONE`**
+
+> ### **`T1` del piano `SCHED-PASSO`** *(2026-09-28, decisione di Luca)*: **lo schedulatore possiede
+> il passo.** Le regole del passo — sincronia, scala minima, `4π`, ordine — **non sono più intenzioni
+> dentro le leggi controllate a posteriori dai presidi: sono l'ARCHITETTURA.**
+
+## LA FORMA
+
+```
+PASSO_COMPOSIZIONE = ('apri', 'scuoti_vuoto', 'step', 'mitosi',
+                      'rilassa_disegno', 'memoria_hebbiana_moto', 'chiudi',
+                      'verifica_invarianti')
+```
+
+**Otto fasi, con apertura e chiusura FISSE in testa e in coda.** `esegui_passo(net, composizione=None)`
+le esegue in ordine; `_PASSO_FASI` mappa `apri`/`chiudi` su `_smp_apri`/`_smp_chiudi`, `_PASSO_MODULO`
+dice quali leggi sono **funzioni di modulo** *(oggi solo `scuoti_vuoto`)*.
+
+### ⚠ **`PASSO_COMPOSIZIONE` NON È UN FLAG: è la COMPOSIZIONE, cioè un DATO.**
+`H-REG-R` l'ha classificata come flag e ha imposto questa scheda — **e ha fatto bene**: una lista che
+decide **quali leggi girano e in che ordine** è **fisica**, non configurazione. **Ma va detto che non
+ha due stati:** non si «accende», si **compone**.
+
+## CHE COSA FA `T1`, E CHE COSA NON FA
+
+| | |
+|---|---|
+| **fa** | l'ordine e le fasi diventano **espliciti** e passano per **un punto solo** |
+| ### **non fa** | ### **la fisica NON cambia.** Fotografia, variazioni e vincoli-una-volta sono `T3` |
+| il criterio | ### **sigillo BYTE-IDENTICO** |
+
+## PERCHÉ È BYTE-IDENTICO ANCHE SPOSTANDO LA CHIUSURA
+
+**In `(c)1` avevo dichiarato un timore:** spostare `_smp_chiudi` fuori da `memoria_hebbiana_moto`
+avrebbe fatto girare `verifica_invarianti` su **`d0` non ancora frenata**.
+### **Il timore era giusto per lo spostamento della SOLA chiusura. La lista di Luca li sposta
+INSIEME**, e fra i due non c'era nient'altro: ### **l'ordine relativo `chiudi → verifica_invarianti`
+è preservato**, quindi il controllo guarda `d0` **già frenata**, esattamente come prima.
+
+## COSA È USCITO DALLE LEGGI
+
+le **cinque** aperture idempotenti di `(c)1` · la chiusura del **ritorno anticipato** di
+`memoria_hebbiana_moto` · la chiusura **in coda** alla legge · la chiamata a
+`verifica_invarianti(dove='memoria_hebbiana_moto')`.
+
+> **E il ritorno anticipato è il caso che dice perché l'architettura è meglio di una regola:** il suo
+> commento spiegava, con cura, che *«anche sul ritorno anticipato il freno va chiuso, sennò lo
+> snapshot resterebbe aperto»*. ### **Era una regola scritta e rispettata a mano in un punto solo.
+> Ora il confine non dipende più da quale uscita la legge prende.**
+
+## TRE COSE CHE CAMBIANO E **NON SONO STATO**
+
+**①** `verifica_invarianti` riceve `dove='esegui_passo'`: cambia **la stringa** in un referto
+d'eccezione.
+**②** ### **il benchmark perde il dettaglio per legge**: prima cronometrava le cinque chiamate una
+per una, ora misura **il passo intero**. **Tornerà strumentando lo SCHEDULATORE (strato 5), non
+ricopiando l'ordine.**
+**③** il ritorno anticipato non chiude più il freno da sé.
+
+## DIMENSIONI E LIMITI
+
+**Nessuna grandezza nuova, nessun `clip`.** `esegui_passo` **non contiene fisica**: se un giorno ci
+finisse un `if` su un flag, ### **la composizione smetterebbe di essere un DATO e tornerebbe a
+essere codice** — ed è la cosa da non fare.
+
+## ⚠ PERCHE' I CHIAMANTI STANNO IN QUESTA SCHEDA, e non in una loro
+
+`update` · `_passo` · `batch_condensazione` · `_dbg_init` sono **INTERFACCE** *(strato 6 della mappa
+degli strati)*: **non hanno fisica propria**. `H-REG-R` ha chiesto una scheda per ognuna, e **creare
+quattro schede di fisica per quattro chiamanti sarebbe stato peggio che non crearne nessuna** -- le
+avrei riempite di niente.
+
+### **Ma il presidio ha ragione sul fatto che conta: la loro modifica E' la modifica dello
+### schedulatore.** Prima ognuna **ricopiava l'ordine**; ora **chiama la composizione**. Quindi
+stanno qui, nella scheda della legge che le governa, **come SITI DI CHIAMATA** -- ed e' anche il
+posto dove si vede che sono **sei** *(i quattro qui piu' i due di*
+`csv/_test_fork/_scena_video.py`*)*, cioe' quanti punti dovevano restare d'accordo **prima** di `T1`.
+
+## I CONTATORI (`A8`)
+
+`_g_passi_eseguiti` · `_g_passi_composizione_altra` *(quante volte si è girato con una composizione
+**non** standard: serve agli innesti di `T5` e a `H-ETC-2`, che **permuta**)*.
+
+> ### 📌 **E una misura che conferma il progetto:** dopo `T1`, `_g_smp_gia_aperta = 0` — mentre in
+> `(c)1` valeva `4` per passo. ### **L'idempotenza non serve più: il compositore SA di essere il
+> primo.** `(c)1` era il primo abbozzo di questo confine, e il tag `pre-schedulatore-t1` lo conserva.
