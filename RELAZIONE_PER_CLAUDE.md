@@ -2572,3 +2572,49 @@ scritta dalle LEGGI** *(le schede di `REGISTRO_FISICA`)* **e non dal codice**, p
 gravita' **non dipenda da un bug**. **Criterio di chiusura:** riproduce **segno e ordine di
 grandezza** delle tre prove partendo **dalle sole schede** — **e se non li riproducesse, sarebbe un
 riscontro, non un fallimento.**
+
+---
+
+# `D02` — **il task history, committato prima del codice** *(2026-09-27)*
+
+**Primo `SI` di FISICA della spinta.** I cinque criteri `W1`-`W5` stanno in
+`doc/TASK_HISTORY/2026-09-27_d02-pozzo-d.md`, **prima di una riga di codice**.
+
+## Il difetto, verificato dal sorgente — e il docstring dice l'OPPOSTO
+
+```python
+# pozzo_grafo, :6533-6553
+v = self.pos[jj] - self.pos[ii]                       # :6549   <- IL DISEGNO
+L = np.maximum(np.linalg.norm(v, axis=1), 1e-9)       # :6550
+np.add.at(phi_g, ii, I[jj] / L)  ...                  #          -> `dpozzo` -> spinta `S09`
+```
+
+**Il docstring della funzione dichiara:** *«il contributo dei vicini diviso per la **distanza reale
+dell'arco**»*. **La distanza reale dell'arco e' `self.d` (`A13`); `pos` e' il disegno.**
+**Intenzione e implementazione divergono, e il commento dichiara l'intenzione** — la forma che
+`par.0` insegna a non credere.
+
+**E il risultato entra nella spinta:** `pozzo_grafo` e' chiamata a **`:6637`**, dentro
+`if GRAV_BIFASE and len(proj)`, e il suo `dpozzo` diventa la scala di `S09`.
+
+## ⚠ E `pozzo_grafo` NON HA UN SOLO FATTO in `doc/FATTI_dal_codice.md`
+
+**Zero occorrenze**, come `_applica_flag` e `_massa`. **La funzione che mette il pozzo dentro la
+gravita' non ha una riga di fatti**, mentre undici altre ne hanno 53. **`FATTI-AVVIO` si allarga**,
+e non e' piu' solo la catena di avvio.
+
+## Le due cose che NON so, e che i criteri devono decidere
+
+1. **Di quanto cambiera' la spinta.** `Z103` dice `L/d` fino a **x8 fra le masse**, ma quella misura
+   e' **🟨 di Luca e non l'ho rifatta**. **Se la cura non cambiasse nulla sarebbe un RISCONTRO** —
+   direbbe che `pos` e `d` coincidono dove conta. `W2` lo riporta **come rapporto**, non come
+   *«diversi»*.
+2. **Che `d >= LAM` sia invariante.** Luca dice che il pavimento `1e-9` non serve piu' per quello, e
+   **ha una misura dalla sua** *(`D11`: 0 archi sotto `LAM` in scena `(ii)`)*. **Ma e' una MISURA,
+   non un'invariante del codice:** quindi il pavimento si toglie **E si contano i casi `d <= 0`**
+   (`W3`) — `A11` dice di trovare l'errore invece di tapparlo, e `A8` che un ramo silenzioso non e'
+   un ramo. **Se il contatore fosse `> 0`, il pavimento va tenuto e detto.**
+
+**E il contatore vive SOLO nel ramo acceso**, cosi' `W1` *(byte-identico a flag spento)* resta vero:
+un contatore creato in entrambi i rami aggiungerebbe un campo allo snapshot e **romperebbe la
+byte-identita' che deve dimostrare**.
