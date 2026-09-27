@@ -884,6 +884,43 @@ _PASSO_REGISTRO = frozenset(('apri', 'chiudi', 'verifica_invarianti',
 _PASSO_CODA = ('chiudi', 'verifica_invarianti')
 
 
+# I TIPI DELLE VOCI DEL PASSO (`T2b`, 2026-09-28). **DICHIARATI, non ancora FATTI
+#   RISPETTARE:** in `T2b` nessun comportamento cambia, e il sigillo e' byte-identico. Sara'
+#   `T3` a dare a ogni tipo il suo CONTRATTO (la dinamica riceve la fotografia e restituisce
+#   variazioni, il vincolo corregge la somma una volta, ecc.).
+#
+#   I TIPI vengono dall'analisi del 2026-09-27 (`csv/_test_fork/_etc_schedulatore.py`), che li
+#   deduce da CIO' CHE OGNI FUNZIONE SCRIVE -- non da come si chiama.
+#
+#   ⚠⚠ **`fase` NON E' UNO DEI CINQUE TIPI DI LUCA, E L'HO AGGIUNTO IO.** I cinque sono
+#   `dinamica`, `vincolo`, `strutturale`, `osservatore`, `disegno`, e sono i tipi delle
+#   **LEGGI**. Ma `apri` **non e' una legge**: e' la FOTOGRAFIA, cioe' una fase dello
+#   schedulatore, e **non scrive nessuno stato fisico** -- scrive solo lo snapshot
+#   (`_smp_d0`, `_smp_d`). Chiamarla `osservatore` sarebbe falso (scrive), `vincolo` sarebbe
+#   falso (non corregge niente), `dinamica` sarebbe il peggiore dei tre (non fa fisica).
+#   **Lo dichiaro come mio invece di forzarlo in una casella che non gli appartiene**, e la
+#   decisione se tenerlo e' di Luca.
+#   *(`chiudi` invece E' un `vincolo` vero -- applica il freno di scala minima una volta sulla
+#   variazione totale -- e l'analisi lo classificava gia' cosi'.)*
+#
+#   ⚠ **`mitosi` resta `AMBIGUA`**: scrive **struttura E stato** (30 scritture di stato).
+#   `T2c` la spezza in una voce STRUTTURALE e una di STATO, e finche' non e' spezzata il tipo
+#   dice la verita' invece di scegliere una delle due meta'.
+_PASSO_TIPI = {
+    'apri':                  'fase',          # la FOTOGRAFIA: scrive solo lo snapshot
+    'scuoti_vuoto':          'dinamica',      # scrive `phivel` e nient'altro
+    'step':                  'dinamica',      # 26 scritture di stato
+    'mitosi':                'AMBIGUA',       # struttura E stato: T2c la spezza
+    'rilassa_disegno':       'disegno',       # scrive `pos`, ZERO stato fisico
+    'memoria_hebbiana_moto': 'dinamica',      # 10 scritture di stato
+    'chiudi':                'vincolo',       # il freno, UNA volta sul totale (`C3`)
+    'verifica_invarianti':   'osservatore',   # LEGGE SOLTANTO
+}
+# la FUNZIONE che sta dietro ogni voce, per chi vuole verificare il tipo sul codice
+_PASSO_FUNZIONE = dict(_PASSO_FASI)
+for _k in _PASSO_REGISTRO:
+    _PASSO_FUNZIONE.setdefault(_k, _k)
+
 class ComposizioneNonValida(ValueError):
     """La composizione del passo viola la struttura della transazione."""
 
@@ -910,6 +947,15 @@ def valida_composizione(comp):
     commit puo' aggirare.
     """
     comp = tuple(comp)
+    # ⚠ OGNI VOCE DEL REGISTRO DEVE AVERE UN TIPO (`T2b`): se il registro e i tipi
+    #   divergono, la composizione sarebbe validata su un registro che il resto del
+    #   codice non conosce. E' un controllo sul CODICE, non sull'ingresso, e quindi
+    #   sta qui una volta sola invece che in un presidio di `git`.
+    _senza = sorted(_PASSO_REGISTRO - set(_PASSO_TIPI))
+    if _senza:
+        raise ComposizioneNonValida(
+            'voci del registro SENZA TIPO: %s -- `_PASSO_TIPI` e `_PASSO_REGISTRO` '
+            'sono divergenti' % _senza)
     if not comp:
         raise ComposizioneNonValida('la composizione del passo e\' VUOTA')
     fuori = [x for x in comp if x not in _PASSO_REGISTRO]

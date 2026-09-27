@@ -4241,7 +4241,7 @@ che l'avrebbe **saltato nel caso più comune** *(nessun `--regime` sulla riga di
 
 ---
 
-<!-- SCHEDA nome=schedulatore-del-passo funzioni=esegui_passo,valida_composizione,update,_passo,batch_condensazione,_dbg_init flag=PASSO_COMPOSIZIONE,_PASSO_FASI,_PASSO_MODULO,_PASSO_REGISTRO,_PASSO_CODA -->
+<!-- SCHEDA nome=schedulatore-del-passo funzioni=esegui_passo,valida_composizione,update,_passo,batch_condensazione,_dbg_init flag=PASSO_COMPOSIZIONE,_PASSO_FASI,_PASSO_MODULO,_PASSO_REGISTRO,_PASSO_CODA,_PASSO_TIPI,_PASSO_FUNZIONE -->
 # ㉙ LO SCHEDULATORE DEL PASSO — **`esegui_passo` / `PASSO_COMPOSIZIONE`**
 
 > ### **`T1` del piano `SCHED-PASSO`** *(2026-09-28, decisione di Luca)*: **lo schedulatore possiede
@@ -4306,6 +4306,44 @@ ricopiando l'ordine.**
 **Nessuna grandezza nuova, nessun `clip`.** `esegui_passo` **non contiene fisica**: se un giorno ci
 finisse un `if` su un flag, ### **la composizione smetterebbe di essere un DATO e tornerebbe a
 essere codice** — ed è la cosa da non fare.
+
+## 🏷 I TIPI DELLE VOCI *(`T2` (i tipi), 2026-09-28)* — **DICHIARATI, non fatti rispettare**
+
+| voce | tipo | coerente col codice? |
+|---|---|---|
+| `apri` | **`fase`** | ✅ scrive solo lo snapshot |
+| `scuoti_vuoto` · `step` · `memoria_hebbiana_moto` | `dinamica` | ✅ |
+| `mitosi` | `AMBIGUA` | ✅ *(struttura **e** stato: l'ambiguita' dichiarata)* |
+| ### `rilassa_disegno` | `disegno` | ### ❌ **scrive anche `psi`, `psi_spin`** |
+| `chiudi` | `vincolo` | ✅ |
+| `verifica_invarianti` | `osservatore` | ✅ |
+
+**In `T2` (i tipi) nessun comportamento cambia** *(sigillo byte-identico)*: sara' **`T3`** a dare a ogni
+tipo il suo **contratto**.
+
+### ⚠⚠ **`fase` NON e' uno dei cinque tipi, e l'ho aggiunto io.**
+`apri` **non e' una legge**: e' la **fotografia**, e non scrive stato fisico. **`osservatore` sarebbe
+falso** *(scrive)*, **`vincolo` sarebbe falso** *(non corregge)*, **`dinamica` sarebbe il peggiore**
+*(non fa fisica)*. **Dichiarato come mio invece di forzato in una casella che non gli appartiene.**
+
+### 🛑 **E LA VOCE NON COERENTE, per cui ci si e' FERMATI** *(mandato di Luca)*
+
+```
+rilassa_disegno -> :6666 self._togli_rotazione_rigida(pos0) -> calcola_psi() -> psi, psi_spin
+```
+
+Il sito e' dentro `if L_CONSERVA and pos0 is not None:`, e ### **`L_CONSERVA` e' `False` col
+driver** -- e' **uno dei 121 rami morti** di `(b)3`, e il codice lo marca **<<ERRATA, NON usare>>**.
+### **Staticamente `rilassa_disegno` puo' scrivere `psi`; a runtime col driver non puo'.**
+
+**Tre strade, e la decisione e' di Luca:** **(a)** il tipo e' sbagliato e la voce e' `AMBIGUA` anche
+lei; ### **(b)** il ramo morto si ARCHIVIA e il tipo diventa coerente **per costruzione**;
+**(c)** il controllo ignora i rami morti -- **e sarebbe la terza volta che la granularita' dei rami
+inganna**. **Raccomandazione: (b)**, e porta con se' la `calcola_psi()` di `:6529`, l'unico degli 8
+siti di `H-ETC-1` in un ramo morto.
+
+**Il controllo:** `csv/_seal_fork/_sig_sched_tipi.py` -- **statico e per nome (`A9`)**: certifica la
+**coerenza della dichiarazione**, non il comportamento.
 
 ## 🔒 LA VALIDAZIONE DELLA COMPOSIZIONE *(T2, 2026-09-28, su richiesta di Luca)*
 

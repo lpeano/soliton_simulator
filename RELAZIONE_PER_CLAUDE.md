@@ -5177,3 +5177,60 @@ il pezzo successivo.
 
 > ### 🛑 **STOP.** Restano in `T2`: **i tipi** di ogni legge, e la ### **`mitosi` spezzata** in
 > struttura e stato — mentre tutto è ancora byte-identico *(correzione (b) del piano)*.
+
+---
+
+# 🛑 **T2 (i tipi) — I TIPI. Una voce su otto NON è coerente, e mi fermo** *(2026-09-28)*
+
+*(Referto `csv/_seal_fork/_sig_sched_tipi.json`.)* ### **Blob: `4dc59cad` → `fe00b48a`**, e il codice
+è **byte-identico** *(i tipi sono dichiarazioni)*: **23/23, 0 diverse**.
+
+| voce | tipo | coerente? |
+|---|---|---|
+| `apri` | **`fase`** | ✅ scrive solo lo snapshot |
+| `scuoti_vuoto` | `dinamica` | ✅ |
+| `step` | `dinamica` | ✅ |
+| `mitosi` | `AMBIGUA` | ✅ *(struttura **e** stato: è l'ambiguità dichiarata)* |
+| ### `rilassa_disegno` | ### `disegno` | ### ❌ **scrive anche `psi` e `psi_spin`** |
+| `memoria_hebbiana_moto` | `dinamica` | ✅ |
+| `chiudi` | `vincolo` | ✅ |
+| `verifica_invarianti` | `osservatore` | ✅ |
+
+## ⚠ **`fase` non è uno dei tuoi cinque tipi, e l'ho aggiunto io**
+
+`apri` **non è una legge**: è la **fotografia**, e **non scrive nessuno stato fisico** — scrive solo
+lo snapshot. **`osservatore` sarebbe falso** *(scrive)*, **`vincolo` sarebbe falso** *(non corregge
+niente)*, **`dinamica` sarebbe il peggiore dei tre** *(non fa fisica)*.
+### **Lo dichiaro come mio invece di forzarlo in una casella che non gli appartiene**, e se tenerlo
+lo decidi tu. *(`chiudi` invece **è** un `vincolo` vero, e l'analisi lo classificava già così.)*
+
+## La voce non coerente, con la catena verificata dal codice
+
+```
+rilassa_disegno  →  :6666  self._togli_rotazione_rigida(pos0)  →  calcola_psi()  →  psi, psi_spin
+```
+
+### **E la causa:** quel sito è dentro `if L_CONSERVA and pos0 is not None:`, e **`L_CONSERVA` è
+`False` col driver** — è **uno dei 121 rami morti** del rilievo `(b)3`, e **il codice lo marca
+«ERRATA, NON usare»**.
+
+> ### **Quindi: STATICAMENTE `rilassa_disegno` può scrivere `psi`; A RUNTIME col driver non può.**
+
+## Le tre strade, e la decisione è tua
+
+| | |
+|---|---|
+| **(a)** | il tipo dichiarato è **sbagliato**: `rilassa_disegno` è **`AMBIGUA`** anche lei *(disegno + dinamica)*. **Onesto ma brutto**, e renderebbe ambigue **due voci su otto** |
+| ### **(b)** | il tipo è **giusto** e **il codice va archiviato**: `_togli_rotazione_rigida` è un ramo **morto** marcato **ERRATA**, e per la **decisione 3** va in `csv/_archivio/` con tag. ### **Dopo, `rilassa_disegno` scrive SOLO `pos` e il tipo è coerente PER COSTRUZIONE** |
+| **(c)** | il controllo **ignora i rami morti** — ma sarebbe la ### **terza volta** che la granularità dei rami mi inganna, e **indebolirebbe il controllo** |
+
+### **La mia raccomandazione è (b).** È già noto morto, è marcato ERRATA, sta nell'elenco di `(b)3`,
+e **archiviarlo rende il tipo VERO invece che SCUSATO.**
+**E porta con sé un secondo effetto:** quel ramo contiene la `calcola_psi()` di `:6529`, cioè
+### **l'unico degli 8 siti di `H-ETC-1` che sta in un ramo morto** — dopo, l'atteso di `H-ETC-1`
+passerebbe da **8** a **7 vivi + 0 morti**, e il conto direbbe una cosa sola invece di due.
+
+> ### 🛑 **MI FERMO QUI, come da mandato.** Il codice e il fallimento sono **committati insieme**
+> *(par.5)*, e la correzione sarà **un commit a sé**. **`T2` (la mitosi) — la mitosi spezzata — non parte**
+> finché questa non è decisa: spezzare la mitosi mentre una voce su otto dichiara il falso
+> aggiungerebbe un'ambiguità sopra un'incoerenza.

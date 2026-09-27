@@ -1,8 +1,8 @@
 {
- "a": "T1_dopo.npz",
- "b": "T2a_dopo.npz",
- "blob_sim_a": "e287a43e",
- "blob_sim_b": "4dc59cad",
+ "a": "T2a_dopo.npz",
+ "b": "T2b_dopo.npz",
+ "blob_sim_a": "4dc59cad",
+ "blob_sim_b": "fe00b48a",
  "diverse": [],
  "hashseed_a": "None",
  "hashseed_b": "None",

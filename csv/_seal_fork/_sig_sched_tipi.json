@@ -1,0 +1,185 @@
+{
+ "blob_sim": "fe00b48a403717f2fe0fa06645d3bb6849472391",
+ "non_coerenti": 1,
+ "passa": false,
+ "registro": [
+  "apri",
+  "chiudi",
+  "memoria_hebbiana_moto",
+  "mitosi",
+  "rilassa_disegno",
+  "scuoti_vuoto",
+  "step",
+  "verifica_invarianti"
+ ],
+ "righe": [
+  {
+   "coerente": true,
+   "funzione": "_smp_apri",
+   "motivo": null,
+   "pos": false,
+   "snapshot": [
+    "_smp_d",
+    "_smp_d0"
+   ],
+   "stato": [],
+   "struttura": [],
+   "tipo": "fase",
+   "voce": "apri"
+  },
+  {
+   "coerente": true,
+   "funzione": "_smp_chiudi",
+   "motivo": null,
+   "pos": false,
+   "snapshot": [
+    "_smp_d",
+    "_smp_d0"
+   ],
+   "stato": [
+    "d0"
+   ],
+   "struttura": [],
+   "tipo": "vincolo",
+   "voce": "chiudi"
+  },
+  {
+   "coerente": true,
+   "funzione": "memoria_hebbiana_moto",
+   "motivo": null,
+   "pos": false,
+   "snapshot": [],
+   "stato": [
+    "_nb",
+    "d0",
+    "mem_mot",
+    "phi",
+    "psi",
+    "psi_spin"
+   ],
+   "struttura": [],
+   "tipo": "dinamica",
+   "voce": "memoria_hebbiana_moto"
+  },
+  {
+   "coerente": true,
+   "funzione": "mitosi",
+   "motivo": null,
+   "pos": true,
+   "snapshot": [],
+   "stato": [
+    "_nb",
+    "_nb_prec",
+    "_psi_prec",
+    "_psi_spinor",
+    "_spinor_lift",
+    "d",
+    "d0",
+    "eta",
+    "mem_mot",
+    "omega_s",
+    "peq",
+    "perc_chi",
+    "perc_geom",
+    "phi",
+    "phi_s",
+    "phivel",
+    "tw",
+    "twp",
+    "vd"
+   ],
+   "struttura": [
+    "_rep",
+    "conc_archi",
+    "i",
+    "j",
+    "perc_tw",
+    "phi0"
+   ],
+   "tipo": "AMBIGUA",
+   "voce": "mitosi"
+  },
+  {
+   "coerente": false,
+   "funzione": "rilassa_disegno",
+   "motivo": "un `disegno` deve scrivere SOLO `pos`, e scrive anche ['psi', 'psi_spin']",
+   "pos": true,
+   "snapshot": [],
+   "stato": [
+    "psi",
+    "psi_spin"
+   ],
+   "struttura": [],
+   "tipo": "disegno",
+   "voce": "rilassa_disegno"
+  },
+  {
+   "coerente": true,
+   "funzione": "scuoti_vuoto",
+   "motivo": null,
+   "pos": false,
+   "snapshot": [],
+   "stato": [
+    "phivel",
+    "psi",
+    "psi_spin"
+   ],
+   "struttura": [],
+   "tipo": "dinamica",
+   "voce": "scuoti_vuoto"
+  },
+  {
+   "coerente": true,
+   "funzione": "step",
+   "motivo": null,
+   "pos": false,
+   "snapshot": [],
+   "stato": [
+    "_nb",
+    "_nb_prec",
+    "_psi_prec",
+    "_psi_spinor",
+    "_spinor_lift",
+    "d",
+    "d0",
+    "eta",
+    "omega_s",
+    "peq",
+    "perc_chi",
+    "perc_geom",
+    "phi",
+    "phi_s",
+    "phivel",
+    "psi",
+    "psi_spin",
+    "tw",
+    "twp",
+    "vd"
+   ],
+   "struttura": [],
+   "tipo": "dinamica",
+   "voce": "step"
+  },
+  {
+   "coerente": true,
+   "funzione": "verifica_invarianti",
+   "motivo": null,
+   "pos": false,
+   "snapshot": [],
+   "stato": [],
+   "struttura": [],
+   "tipo": "osservatore",
+   "voce": "verifica_invarianti"
+  }
+ ],
+ "tipi": {
+  "apri": "fase",
+  "chiudi": "vincolo",
+  "memoria_hebbiana_moto": "dinamica",
+  "mitosi": "AMBIGUA",
+  "rilassa_disegno": "disegno",
+  "scuoti_vuoto": "dinamica",
+  "step": "dinamica",
+  "verifica_invarianti": "osservatore"
+ }
+}
