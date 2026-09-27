@@ -3976,3 +3976,53 @@ documento o si ferma lì? **Fino alla risposta, nessuna cura inizia.**
 fisica**. **Non l'ho verificata:** è una segnalazione con la sua fonte *(il docstring)*, e prima di
 curarla va letta dal codice — **è esattamente la classe di affermazione che il censimento ha appena
 mostrato poter essere falsa.**
+
+---
+
+# ⚖ **LA REGOLA DI LUCA APPLICATA ALLE 23 `CENS-*`: 5 `SI` · 8 `NO` · 10 AMBIGUE** *(2026-09-27)*
+
+*(La tabella intera, con i motivi, e' il **par.6 di `doc/CURE_fisica_ordine.md`**. **Generata
+dall'indice, non ricopiata** — `L-NUMERI`.)*
+
+**La regola, verbatim:** `SI` = *la falsita' cambia i NUMERI della fisica del run*; `NO` = *si
+risolve riscrivendo un commento o un documento*. **L'ho applicata a tutte e 23**, non solo alle
+cinque nominate.
+
+## I cinque `SI` — e sono esattamente i cinque che Luca ha nominato
+
+| ID | motivo in una riga |
+|---|---|
+| **`CENS-A6`** | chiusa da **(a)**: la cura rende l'aggiornamento **SINCRONO**, e cio' cambia i numeri |
+| **`CENS-A7`** | chiusa da **(a)**: imporre `w` a ogni `calcola_psi` cambia **quale `psi` legge la fisica** |
+| **`CENS-B7`** | chiusa da **(a)**: `--sync` **e' la cura (a) stessa** |
+| **`CENS-A2`** | chiusa da **(b)**: rendere `4 pi` strutturale **puo' spostare la soglia di mitosi** |
+| **`CENS-B12`** | `KERNEL_ALPHA`: rivendica il **principio di equivalenza = la prova (3)**, ed e' **sempre attivo** |
+
+## Gli otto `NO` — due forme sole
+
+**① il ramo non gira**, quindi non puo' muovere un numero: `CENS-A4` *(`MITOSI_DIR = 0.0`)*,
+`CENS-B9`, `CENS-B10`, `CENS-B11` *(non attive nel driver)*.
+**② e' letteralmente un commento**: `CENS-A3` *(il ramo gira uguale prima e dopo)*, `CENS-A5` *(due
+commenti che si contraddicono)*, `CENS-B15` *(un condizionale scritto in un commento)*, `CENS-B16`
+*(processo: inventario e README)*.
+
+> ### ⚠ **LE DIECI AMBIGUE, E L'AMBIGUITA' NON E' CASO PER CASO: E' STRUTTURALE, E STA NELLA CLASSE (B).**
+> **Sulla (A) la regola e' netta** e ha deciso da sola. **Sulla (B) non e' decidibile come scritta,**
+> e lo dico invece di forzarla: **in una (B) non c'e' una falsita' — c'e' un'ASSENZA DI MISURA.**
+> Cio' che *«cambia i numeri»* **non e' la lacuna: e' la LEGGE, che e' GIA' ATTIVA.**
+> Quindi ogni (B) attiva si legge **sia `SI`** *(la legge muove i numeri e nessuno l'ha verificata)*
+> **sia `NO`** *(la lacuna si colma con una misura, non con parole)*.
+>
+> **E ne discende una conseguenza che non e' mia da chiudere:** se una (B) attiva prende `SI`, **il
+> run base resta bloccato da una MISURA che la decisione (1) ha appena sospeso.**
+
+**Le dieci, in tre gruppi per come si somigliano:**
+
+| gruppo | voci | la forma dell'ambiguita' |
+|---|---|---|
+| **la legge e' attiva, manca la misura** | `CENS-B1` *(`SPINORE_VIVO`)* · `CENS-B2` *(`SPIN_FEEDBACK`: forma misurata 12/12, effetto no)* · `CENS-B5` *(`SCHERMATURA`, su tempi lunghi)* · `CENS-B8` *(`VERLET`: il ramo detto «sperimentale» **e' il percorso vivo**)* · `CENS-B13` *(il pavimento dell'inerzia: limite attivo, contatori cablati e **mai letti**)* · `CENS-B14` *(osservabile **gia' calcolata** e mai letta)* | la misura sanerebbe, **ma le misure sono sospese** |
+| **non esiste il ramo OFF** | `CENS-B3` *(`TAU_A_LOCALE`)* · `CENS-B4` *(`TAU_LOCALI`)* | **senza flag CLI il criterio non e' nemmeno VERIFICABILE**: ne' parole ne' misura possibile |
+| **non e' lacuna, e' progetto** | `CENS-A1` *(riduzione al limite dello spinore: **documentaria nella forma, portante nella sostanza** — se e' falsa, i sigilli di riduzione al limite certificano uno stato **fuori dall'orbita**)* · `CENS-B6` *(`REGIME`: *«da riprendere»* chiede un **meccanismo nuovo**)* | chiede una **decisione di teoria**, non un verdetto |
+
+**Serve da Luca:** il `SI`/`NO` di queste dieci. **Nel frattempo restano `DA-DECIDERE` e non
+bloccano**, e **parto con (a) FASE 0** come da mandato.

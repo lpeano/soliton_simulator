@@ -124,3 +124,65 @@ ciascuna comporta, e **decide Luca**.
 3. **(e) è un documento o si ferma qui?**
 
 **Fino alla risposta: nessuna cura inizia.**
+
+---
+
+# 6. **LA REGOLA DI LUCA APPLICATA ALLE 23 `CENS-*`** *(2026-09-27)*
+
+> **La regola, verbatim:** `SI` = **la falsita' cambia i NUMERI della fisica del run**;
+> `NO` = **si risolve riscrivendo un commento o un documento**.
+> **Applicata a TUTTE e 23, non solo alle cinque nominate.** Esito: **5 `SI` · 8 `NO` ·
+> 10 AMBIGUE**, che restano `DA-DECIDERE` e **le decide Luca**.
+
+## ✅ `SI` — 5 voci
+
+| ID | che cos'e' | motivo |
+|---|---|---|
+| **`CENS-A2`** | `TORS_4PI`: *"Prova sperimentale, default off"*, e il defa | chiusa da (b): rendere `4 pi` strutturale puo' spostare la soglia di mitosi |
+| **`CENS-A6`** | `README.md`: *"Tutti gli script di lancio includono esplic | chiusa da (a): la cura rende l'aggiornamento SINCRONO, e cio' cambia i numeri |
+| **`CENS-A7`** | il commento di `calcola_psi`: *"~19 chiamanti"*, misurato  | chiusa da (a): imporre `w` a ogni `calcola_psi` cambia quale `psi` legge la fisica |
+| **`CENS-B7`** | *"Default ancora off; **convergenza e superiorita' rispett | chiusa da (a): `--sync` e' la cura (a) stessa, e cambia i numeri |
+| **`CENS-B12`** | *"KERNEL BILANCIATO DAL TEMPO PROPRIO (tau^alpha) **SEMPRE | rivendica il PRINCIPIO DI EQUIVALENZA = la prova (3) del bersaglio, ed e' sempre attivo |
+
+## `NO` — 8 voci
+
+| ID | che cos'e' | motivo |
+|---|---|---|
+| `CENS-A3` | `COPPIA_MIT`: *"(opzione, spenta di default)"*, e il defau | il ramo gira UGUALE prima e dopo: la falsita' e' nel commento, e si riscrive |
+| `CENS-A4` | `MITOSI_DIR`: *"MITOSI DIREZIONALE ATTIVA"*, e il valore e | il ramo e' MORTO (`MITOSI_DIR = 0.0`): un commento falso su codice che non gira |
+| `CENS-A5` | `_passo_spinoriale` *"ORFANO"*: smentito da un altro comme | due commenti che si contraddicono: nessuno dei due esegue niente |
+| `CENS-B9` | *"LEGGE DI STABILITA' (**esplorativa**): i nuovi nodi in r | NON attiva nel driver: non puo' cambiare i numeri di questo run |
+| `CENS-B10` | *"**ESPLORATIVO**: lega la creazione di coppia anche all'a | NON attiva nel driver: non puo' cambiare i numeri di questo run |
+| `CENS-B11` | tre osservabili di controllo nominate una per una -- *"esp | NON attiva (`PLAST_DIN` e' il sostituto): la promessa e' rimasta senza esecutore |
+| `CENS-B15` | il **condizionale** scritto nel commento: *"Un esito posit | e' un CONDIZIONALE scritto in un commento: si risolve riscrivendolo |
+| `CENS-B16` | (1) INVENTARIO e (2) README sono prescritti *"nello stesso | e' di PROCESSO (inventario e README), non di fisica: nessun numero lo tocca |
+
+## ⚠ **AMBIGUE — 10 voci, LE DECIDE LUCA**
+
+> ### **E L'AMBIGUITA' NON E' CASO PER CASO: E' STRUTTURALE, E STA NELLA CLASSE (B).**
+> La regola e' **netta sulla classe (A)**: una falsita' di commento **non cambia i
+> numeri** — il codice fa quel che fa — quindi si risolve **riscrivendo**, ed e' `NO`;
+> tranne dove la cura **(a)** o **(b)** cambia il comportamento, ed e' `SI`.
+> **Sulla classe (B) la regola non e' decidibile come scritta, e lo dico invece di
+> forzarla:** in una (B) **non c'e' una falsita'** — c'e' **un'assenza di misura**.
+> Cio' che *«cambia i numeri»* **non e' la lacuna: e' la LEGGE, che e' gia' attiva.**
+> Quindi ogni (B) **attiva e portante** puo' leggersi `SI` *(la legge muove i numeri e
+> nessuno l'ha verificata)* **oppure** `NO` *(la lacuna si colma con una MISURA, non con
+> parole — ma le misure sono SOSPESE dalla decisione (1))*.
+>
+> **Ne discende una domanda che non e' mia da chiudere:** se una (B) attiva prende `SI`,
+> **il run base resta bloccato da una misura che la decisione (1) ha appena sospeso.**
+
+| ID | che cos'e' | perche' e' ambigua |
+|---|---|---|
+| ⚠ `CENS-A1` | la RIDUZIONE AL LIMITE dello spinore: lo stato che la gara | la RIDUZIONE AL LIMITE dello spinore. Riscrivere il commento NON cambia i numeri, ma cio' che il commento dichiara e' la PROPRIETA' su cui poggiano i sigilli di riduzione al limite del fork: se e' falsa, quei sigilli certificano uno stato fuori dall'orbita del sistema. E' documentaria nella forma e portante nella sostanza |
+| ⚠ `CENS-B1` | *"`SPINORE_VIVO = True` **NON E' MAI STATO VALIDATO COME D | `SPINORE_VIVO` e' ATTIVO e muove i numeri, ma la lacuna e' una MISURA mancante (il rigiro dei sigilli), non una falsita'. E le misure sono SOSPESE |
+| ⚠ `CENS-B2` | ON di default *"PER DECISIONE DI LUCA E SU BASI DI FORMA,  | `SPIN_FEEDBACK` attivo; la FORMA e' misurata (12/12), l'EFFETTO no. La voce e' gia' dichiarata AMBIGUA nel censimento stesso |
+| ⚠ `CENS-B3` | *"IN VERIFICA"*, e nel corpo: *"stabile, ma **il guadagno  | `TAU_A_LOCALE` attivo e SENZA flag CLI: non esiste il ramo OFF, quindi il criterio non e' nemmeno VERIFICABILE. Non si risolve con parole ne' con una misura possibile |
+| ⚠ `CENS-B4` | *"costanti temporali TAU_P/TAU_BG/TAU_TW come RAPPORTI adi | `TAU_LOCALI` attivo e senza flag CLI, stessa forma di `CENS-B3` |
+| ⚠ `CENS-B5` | *"**Da validare su TEMPI LUNGHI** (hardware di Luca): tagl | `SCHERMATURA` attiva; *da validare su TEMPI LUNGHI* e' una MISURA lunga, oggi sospesa |
+| ⚠ `CENS-B6` | *"**DA RIPRENDERE**: seme iniziale di asimmetria struttura | `REGIME` deterministico attivo; *DA RIPRENDERE* chiede un meccanismo NUOVO (seme di asimmetria), che non e' ne' parole ne' misura: e' progetto |
+| ⚠ `CENS-B8` | *"INTEGRATORE METRICO **SPERIMENTALE** ... Default off per | `VERLET`: il ramo detto SPERIMENTALE E' il percorso vivo. Riscrivere il commento e' parole, ma la deriva d'energia del ramo Eulero non e' MAI stata misurata |
+| ⚠ `CENS-B13` | *"`inerzia = np.maximum(_contrasto * _T2, 1e-6)` -- **il p | il PAVIMENTO dell'inerzia: e' un limite ATTIVO che muove i numeri (`A11`), e i contatori sono cablati ma mai letti. Leggerli e' una misura, oggi sospesa |
+| ⚠ `CENS-B14` | l'osservabile e' calcolata (`m0_spin_core`, `m0_spin_core_ | l'osservabile e' gia' CALCOLATA e mai letta: leggerla e' una misura, oggi sospesa |
+
