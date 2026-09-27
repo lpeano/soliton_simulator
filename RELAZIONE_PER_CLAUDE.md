@@ -4722,3 +4722,66 @@ il raggio misurato; aggiornate le quattro esistenti.
 > ### 🛑 **STOP.** Prossimo: **(b)3**, i rami morti di `CLIP-INVENTARIO`, uno alla volta — e col
 > criterio di `(b)1`: dove un ramo morto convive con un altro flag, **serve anche il braccio in cui
 > quell'altro è acceso**.
+
+---
+
+# 📋 **(b)3 — IL RILIEVO: 121 rami morti nel perimetro della cura (c)** *(2026-09-27)*
+
+*(`doc/RAMI_MORTI_perimetro_c.md`, strumento `csv/_test_fork/_etc_rami_morti.py`.)*
+### 🛑 **Nessun ramo è stato archiviato. Blob del simulatore `7439d5c3`, prima e dopo.**
+
+**Perimetro come hai chiesto:** le cinque leggi del passo pieno e ciò che chiamano = **57 funzioni**.
+
+## Il criterio è deciso dai **flag**, non dal campionamento
+
+| | |
+|---|---|
+| **MORTO** | la condizione dipende **solo da flag di modulo** e coi valori dell'argv del driver **non è raggiungibile**. È una proprietà della **configurazione** |
+| **NON ESERCITATO** | in `N` passi non è girato **ma potrebbe**. ### **Non è morto**, e archiviarlo sarebbe un errore |
+
+**Un conteggio sui soli 3 passi non distinguerebbe le due cose.** I **319** test non decidibili
+*(dipendono da runtime)* **non entrano nell'elenco**.
+
+**Corroborazione:** **172 righe esclusive** dei rami morti, e in 3 passi pieni ### **zero hanno
+eseguito**. I **61** rami senza righe esclusive *(ternari e `if` di una riga)* sono **dichiarati non
+corroborabili per riga**, non spacciati per verificati.
+
+> **⚠ Ci sono arrivato in TRE giri, perché la RIGA non è l'unità giusta:** al primo giro **37 righe
+> «morte» avevano eseguito** *(in un ternario il ramo morto condivide la riga con quello vivo)*;
+> corretto, ne restava **una**, `:5272` — un ternario su due righe dove **il test sta sulla riga del
+> ramo morto**. **Lo strumento me li ha urlati entrambi**, invece di lasciarmi consegnare 121 rami
+> di cui 37 vivi.
+
+## Le 121, in quattro famiglie
+
+| famiglia | rami | righe | che farne |
+|---|---|---|---|
+| ① **diagnostici switchabili** | 41 | 41 | ### **NON si archiviano** |
+| ② **rami di controllo di cure già promosse** | ### **43** | ### **111** | ### **il candidato** |
+| ③ **esperimenti spenti** | 17 | 70 | sono **alternative**, non doppioni |
+| ④ **da guardare uno a uno** | 20 | 21 | non entrano in una famiglia netta |
+
+### ⚠ Due cose che **non** vanno archiviate, e le dico subito
+
+**①** i **41 diagnostici** — `TRACCIA_D0` da sola ne fa **37**, più `TRACCIA_VD`, `TRACCIA_PEQ`,
+`INVARIANTI`. ### **Sono spenti PERCHÉ sono strumenti**, e archiviarli vorrebbe dire **perdere lo
+strumento**. È `A8`.
+
+**②** ### `:5696` e `:5742` sono **la precedenza che mi hai appena chiesto di ripristinare**
+(`if SCALA_MIN and not SCALA_MIN_PASSO`). Col driver sono morti **per costruzione** — `SCALA_MIN` è
+spento — **ma archiviarli cancellerebbe la correzione di stamattina.**
+### **È l'esempio che mostra perché «morto col driver» non basta come criterio.**
+
+## Cosa propongo
+
+### **Archiviare la sola famiglia ②: 43 rami, 111 righe** — i percorsi **vecchi** di cure già
+promesse, la stessa forma di `tempo-unico-mitosi` e `SYNC_UPDATE`, quella che ha appena superato due
+sigilli. *(I flag: `VERLET`, `REPULS_LEGGE`, `TAU_LUCE`, `SPINORE_CORRETTO`, `CS_DINAMICO`,
+`PEQ_ESATTO`, `COES_ADIM`, `CHI_COOP`, `CHI_CORE`, `ANOM_SIMM`, `COES_CAUSALE`, `DEPARAM_OROLOGIO`,
+`MEM_MOTO_TUTTO`, `OLON_PART`, `PEQ_NASCITA_LOCALE`, `PLAST_DIN`, `TAU_LOCALI`, `TAU_A_LOCALE`,
+`RITMO_WRAP_2PI`, `RUMORE_COLORATO`, `SCHERMATURA`, `SEMINA_MATURA`, `TORS_4PI`, `VIRIALE`,
+`SCALA_MIN_PASSO`, `POZZO_D`, `SPIN_FEEDBACK`, `CAMPO_SPINORIALE`.)*
+
+**Le altre tre restano voce aperta di `CLIP-INVENTARIO`, da fare dopo la cura**, come hai detto.
+
+> ### 🛑 **STOP. La priorità resta (c).**

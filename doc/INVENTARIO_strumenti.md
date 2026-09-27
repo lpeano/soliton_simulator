@@ -1153,3 +1153,11 @@ python csv/_test_fork/_hashseed_prova.py --confronta S_prima_off.npz S_dopo_on.n
 > ### ⚠ **`B` e `D` sono la STESSA comparazione**: poiché `E` prova `dopo+sync == prima-senza-sync`,
 > `B` coincide con `D` — **e infatti danno le stesse 19 grandezze**. **I bracci indipendenti sono
 > QUATTRO: `A`, `C`, `D`, `E`.**
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_etc_rami_morti.py` | `900d19c0` | `python csv/_test_fork/_etc_rami_morti.py --passi=3` | **i rami MORTI col driver** dentro il perimetro della cura (c). Criterio deciso **dai flag** e non dal campionamento; corroborato con la copertura sulle **righe esclusive** | ### **121 rami, 243 righe**, in **57** funzioni. **0 righe esclusive hanno eseguito** |
+
+**Referto:** `csv/_test_fork/_etc_rami_morti.json`. **Tabella intera:** `doc/RAMI_MORTI_perimetro_c.md`.
+**⚠ 61 rami NON sono corroborabili per riga** *(ternari e `if` di una riga: il ramo morto condivide
+la riga col vivo)* e sono **dichiarati tali**.

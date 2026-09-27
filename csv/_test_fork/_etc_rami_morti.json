@@ -1,0 +1,3826 @@
+{
+ "argv": [
+  "--test",
+  "MASSE-COERENTI",
+  "--nmasse",
+  "3",
+  "--sep",
+  "6.1158",
+  "--giri",
+  "0",
+  "--campo-spinoriale",
+  "--spinore-vivo",
+  "--spinore-corretto",
+  "--chi-core",
+  "--calore-scal",
+  "--deparam-orologio",
+  "--verlet",
+  "--fork-su2",
+  "--fork-su2-mem",
+  "--cs-dinamico",
+  "--tau-luce",
+  "--rumore-colorato",
+  "--pav-com",
+  "--guscio-morbido",
+  "--zeta-vir",
+  "--ritmo-wrap-2pi",
+  "--tempo-unico-mitosi",
+  "--semina-lam",
+  "--semina-matura",
+  "--mitosi-2lam",
+  "--pozzo-d",
+  "--contrasto-intensivo",
+  "--nodi",
+  "0",
+  "--seed",
+  "11",
+  "--chi-basc",
+  "--chi-coop",
+  "--coes-adim",
+  "--peq-esatto",
+  "--peq-nascita-locale",
+  "--scala-min-passo",
+  "--coes-causale",
+  "--anom-simm",
+  "--invarianti=on",
+  "--plast-din",
+  "--viriale",
+  "--olon-part"
+ ],
+ "blob_sim": "7439d5c3ec14a7ef3deca04e2108f61fde96da7d",
+ "copertura_ha_eseguito": [],
+ "flag_coinvolti": {
+  "ALPHA_NAT": 1,
+  "ANOM_SIMM": 1,
+  "ANTIFASE_ADD": 1,
+  "CAMPO_SPINORIALE": 1,
+  "CHI_COOP": 6,
+  "CHI_CORE": 1,
+  "COES_ADIM": 1,
+  "COES_CAUSALE": 1,
+  "COMPAT_CHI": 1,
+  "COPPIA_DENSITA": 1,
+  "COPPIA_RECIPROCA": 1,
+  "CS_DINAMICO": 8,
+  "DEPARAM_OROLOGIO": 1,
+  "DIFF_RES": 2,
+  "FASE_2PI": 3,
+  "FERMA_DOPO_NSUB": 2,
+  "GRAV_AMPIEZZA": 1,
+  "HAM_SRC": 1,
+  "INVARIANTI": 1,
+  "KURAMOTO_SU2": 1,
+  "L_CONSERVA": 1,
+  "MEM_MOTO_TUTTO": 1,
+  "MITMAX": 1,
+  "MITOSI_DIR": 1,
+  "OLON_PART": 1,
+  "PEQ_ESATTO": 2,
+  "PEQ_NASCITA_LOCALE": 1,
+  "PLAST_DIN": 1,
+  "PLAST_MIT": 1,
+  "POLO_MATURO": 1,
+  "POZZO_D": 1,
+  "REGIME": 2,
+  "REPULS_LEGGE": 1,
+  "RITMO_WRAP_2PI": 1,
+  "RUMORE_COLORATO": 1,
+  "SCALA_MIN": 2,
+  "SCALA_MIN_PASSO": 4,
+  "SCALA_P_MEDIANA": 1,
+  "SCHERMATURA": 1,
+  "SEMINA_MATURA": 1,
+  "SPINORE_CORRETTO": 3,
+  "SPIN_FEEDBACK": 1,
+  "SPIN_LARMOR": 1,
+  "SYNC_FASE_OROLOGIO": 1,
+  "SYNC_SPINORE": 1,
+  "TAU_A_LOCALE": 1,
+  "TAU_LOC": 1,
+  "TAU_LOCALI": 4,
+  "TAU_LUCE": 1,
+  "TAU_USA_D0": 1,
+  "TEMPO_PROPRIO_ORIENTATO": 1,
+  "TORS_4PI": 2,
+  "TRACCIA_D0": 37,
+  "TRACCIA_PEQ": 2,
+  "TRACCIA_VD": 1,
+  "TW_SPINORE": 1,
+  "VERLET": 2,
+  "VIRIALE": 1,
+  "ZETA_LOC": 2,
+  "ZETA_M": 2
+ },
+ "funzioni_vive": [
+  "_aggiorna_lift_spinoriale",
+  "_bloch_a_spinore",
+  "_bloch_ritardato",
+  "_coppia_interferenza",
+  "_costruisci_struttura",
+  "_cs_arco_da_nodo",
+  "_cs_nodo",
+  "_dphi",
+  "_eredita_spinore_figli",
+  "_estendi_psi_spinor",
+  "_fattore_tempo_arco",
+  "_feedback_spinoriale_archi",
+  "_grado",
+  "_lam_archi",
+  "_link_su2_N",
+  "_mat",
+  "_mat2",
+  "_nasce",
+  "_nb_grav",
+  "_passo_spinoriale",
+  "_peq_esatto",
+  "_pesi",
+  "_r_nodo_mitosi",
+  "_rho_sorgente",
+  "_sd0",
+  "_smorza",
+  "_smp_apri",
+  "_smp_chirurgia",
+  "_smp_chiudi",
+  "_tau_arco_causale",
+  "_tau_tw_locale",
+  "_tempo_luce_nodo",
+  "_tempo_rampa",
+  "_togli_rotazione_rigida",
+  "_traccia_coesione",
+  "_traccia_d0",
+  "_traccia_peq",
+  "_traccia_vd",
+  "_w4",
+  "_w8",
+  "_wphi",
+  "calcola_psi",
+  "chiralita_core_locale",
+  "lambda_nodi",
+  "lambda_vuoto",
+  "massa_critica_adattiva",
+  "massa_critica_collasso",
+  "memoria_hebbiana_moto",
+  "mitosi",
+  "pozzo_grafo",
+  "rilassa_disegno",
+  "ritmo",
+  "satura",
+  "scuoti_vuoto",
+  "stato_crossover",
+  "step",
+  "verifica_invarianti"
+ ],
+ "leggi": [
+  "scuoti_vuoto",
+  "step",
+  "mitosi",
+  "rilassa_disegno",
+  "memoria_hebbiana_moto"
+ ],
+ "morti": [
+  {
+   "dentro": "massa_critica_collasso",
+   "flag": [
+    "COMPAT_CHI",
+    "TORS_4PI"
+   ],
+   "perche": "muore il ramo `if`: il test e' False coi flag del driver",
+   "riga": 597,
+   "righe_esclusive": [],
+   "righe_morte": [
+    597,
+    597
+   ],
+   "righe_test": [
+    597
+   ],
+   "righe_vive": [
+    597
+   ],
+   "sorgente": "C = DENS_CRIT_C * (389.0/484.0) if (COMPAT_CHI and TORS_4PI) else DENS_CRIT_C",
+   "test": "COMPAT_CHI and TORS_4PI",
+   "tipo": "ternario",
+   "valori": {
+    "COMPAT_CHI": false,
+    "TORS_4PI": true
+   }
+  },
+  {
+   "dentro": "_eredita_spinore_figli",
+   "flag": [
+    "CAMPO_SPINORIALE",
+    "SPINORE_CORRETTO"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 1997,
+   "righe_esclusive": [
+    1998
+   ],
+   "righe_morte": [
+    1998,
+    1998
+   ],
+   "righe_test": [
+    1997
+   ],
+   "righe_vive": [],
+   "sorgente": "if not (SPINORE_CORRETTO or CAMPO_SPINORIALE):   # [FASE 5] eredita' spinore attiva anche nei run --campo-spin",
+   "test": "not (SPINORE_CORRETTO or CAMPO_SPINORIALE)",
+   "tipo": "if",
+   "valori": {
+    "CAMPO_SPINORIALE": true,
+    "SPINORE_CORRETTO": true
+   }
+  },
+  {
+   "dentro": "_feedback_spinoriale_archi",
+   "flag": [
+    "SPIN_FEEDBACK"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 2122,
+   "righe_esclusive": [
+    2123,
+    2124
+   ],
+   "righe_morte": [
+    2123,
+    2124
+   ],
+   "righe_test": [
+    2122
+   ],
+   "righe_vive": [],
+   "sorgente": "if not SPIN_FEEDBACK:",
+   "test": "not SPIN_FEEDBACK",
+   "tipo": "if",
+   "valori": {
+    "SPIN_FEEDBACK": true
+   }
+  },
+  {
+   "dentro": "_lam_archi",
+   "flag": [
+    "SCHERMATURA"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 3018,
+   "righe_esclusive": [
+    3019
+   ],
+   "righe_morte": [
+    3019,
+    3019
+   ],
+   "righe_test": [
+    3018
+   ],
+   "righe_vive": [],
+   "sorgente": "if not SCHERMATURA:",
+   "test": "not SCHERMATURA",
+   "tipo": "if",
+   "valori": {
+    "SCHERMATURA": true
+   }
+  },
+  {
+   "dentro": "ritmo",
+   "flag": [
+    "TAU_LOC"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 3030,
+   "righe_esclusive": [],
+   "righe_morte": [
+    3030,
+    3030
+   ],
+   "righe_test": [
+    3030
+   ],
+   "righe_vive": [],
+   "sorgente": "if TAU_LOC == 0.0: return None",
+   "test": "TAU_LOC == 0.0",
+   "tipo": "if",
+   "valori": {
+    "TAU_LOC": 1.0
+   }
+  },
+  {
+   "dentro": "ritmo",
+   "flag": [
+    "RITMO_WRAP_2PI"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 3072,
+   "righe_esclusive": [
+    3078
+   ],
+   "righe_morte": [
+    3078,
+    3078
+   ],
+   "righe_test": [
+    3072
+   ],
+   "righe_vive": [
+    3076
+   ],
+   "sorgente": "if RITMO_WRAP_2PI:",
+   "test": "RITMO_WRAP_2PI",
+   "tipo": "else",
+   "valori": {
+    "RITMO_WRAP_2PI": true
+   }
+  },
+  {
+   "dentro": "ritmo",
+   "flag": [
+    "TEMPO_PROPRIO_ORIENTATO"
+   ],
+   "perche": "muore il ramo `if`: il test e' False coi flag del driver",
+   "riga": 3081,
+   "righe_esclusive": [],
+   "righe_morte": [
+    3081,
+    3081
+   ],
+   "righe_test": [
+    3081
+   ],
+   "righe_vive": [
+    3081
+   ],
+   "sorgente": "f = signed if TEMPO_PROPRIO_ORIENTATO else np.abs(signed)",
+   "test": "TEMPO_PROPRIO_ORIENTATO",
+   "tipo": "ternario",
+   "valori": {
+    "TEMPO_PROPRIO_ORIENTATO": false
+   }
+  },
+  {
+   "dentro": "_passo_spinoriale",
+   "flag": [
+    "RUMORE_COLORATO"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 3189,
+   "righe_esclusive": [
+    3229
+   ],
+   "righe_morte": [
+    3229,
+    3229
+   ],
+   "righe_test": [
+    3189
+   ],
+   "righe_vive": [
+    3193,
+    3194,
+    3200,
+    3201,
+    3202,
+    3203,
+    3204,
+    3205,
+    3206,
+    3207,
+    3208,
+    3209,
+    3210,
+    3211,
+    3212,
+    3213,
+    3214,
+    3215,
+    3216,
+    3217,
+    3218,
+    3219,
+    3220,
+    3221,
+    3222,
+    3223,
+    3224,
+    3225,
+    3226,
+    3227
+   ],
+   "sorgente": "if RUMORE_COLORATO:",
+   "test": "RUMORE_COLORATO",
+   "tipo": "else",
+   "valori": {
+    "RUMORE_COLORATO": true
+   }
+  },
+  {
+   "dentro": "_passo_spinoriale",
+   "flag": [
+    "SPIN_LARMOR"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 3284,
+   "righe_esclusive": [
+    3290,
+    3291,
+    3292,
+    3293,
+    3294,
+    3295,
+    3296,
+    3297
+   ],
+   "righe_morte": [
+    3290,
+    3297
+   ],
+   "righe_test": [
+    3284
+   ],
+   "righe_vive": [],
+   "sorgente": "if SPIN_LARMOR:",
+   "test": "SPIN_LARMOR",
+   "tipo": "if",
+   "valori": {
+    "SPIN_LARMOR": false
+   }
+  },
+  {
+   "dentro": "_passo_spinoriale",
+   "flag": [
+    "GRAV_AMPIEZZA"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 3587,
+   "righe_esclusive": [
+    3604
+   ],
+   "righe_morte": [
+    3604,
+    3604
+   ],
+   "righe_test": [
+    3587
+   ],
+   "righe_vive": [],
+   "sorgente": "if GRAV_AMPIEZZA:",
+   "test": "GRAV_AMPIEZZA",
+   "tipo": "if",
+   "valori": {
+    "GRAV_AMPIEZZA": false
+   }
+  },
+  {
+   "dentro": "_passo_spinoriale",
+   "flag": [
+    "COPPIA_RECIPROCA"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 3605,
+   "righe_esclusive": [
+    3612,
+    3613,
+    3614
+   ],
+   "righe_morte": [
+    3612,
+    3614
+   ],
+   "righe_test": [
+    3605
+   ],
+   "righe_vive": [],
+   "sorgente": "if COPPIA_RECIPROCA:",
+   "test": "COPPIA_RECIPROCA",
+   "tipo": "if",
+   "valori": {
+    "COPPIA_RECIPROCA": false
+   }
+  },
+  {
+   "dentro": "_passo_spinoriale",
+   "flag": [
+    "TAU_LUCE"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 3624,
+   "righe_esclusive": [
+    3629,
+    3630,
+    3631,
+    3632,
+    3633,
+    3634,
+    3635
+   ],
+   "righe_morte": [
+    3629,
+    3635
+   ],
+   "righe_test": [
+    3624
+   ],
+   "righe_vive": [
+    3628
+   ],
+   "sorgente": "if TAU_LUCE:",
+   "test": "TAU_LUCE",
+   "tipo": "else",
+   "valori": {
+    "TAU_LUCE": true
+   }
+  },
+  {
+   "dentro": "_passo_spinoriale",
+   "flag": [
+    "TAU_A_LOCALE"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 3629,
+   "righe_esclusive": [
+    3635
+   ],
+   "righe_morte": [
+    3635,
+    3635
+   ],
+   "righe_test": [
+    3629
+   ],
+   "righe_vive": [
+    3630,
+    3631,
+    3632,
+    3633
+   ],
+   "sorgente": "elif TAU_A_LOCALE:",
+   "test": "TAU_A_LOCALE",
+   "tipo": "else",
+   "valori": {
+    "TAU_A_LOCALE": true
+   }
+  },
+  {
+   "dentro": "_passo_spinoriale",
+   "flag": [
+    "TW_SPINORE"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 3638,
+   "righe_esclusive": [
+    3643,
+    3644,
+    3645,
+    3646,
+    3647,
+    3648
+   ],
+   "righe_morte": [
+    3643,
+    3648
+   ],
+   "righe_test": [
+    3638
+   ],
+   "righe_vive": [],
+   "sorgente": "if TW_SPINORE:",
+   "test": "TW_SPINORE",
+   "tipo": "if",
+   "valori": {
+    "TW_SPINORE": false
+   }
+  },
+  {
+   "dentro": "_passo_spinoriale",
+   "flag": [
+    "SPINORE_CORRETTO"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 3659,
+   "righe_esclusive": [
+    3781,
+    3782,
+    3783,
+    3784,
+    3785,
+    3786,
+    3787
+   ],
+   "righe_morte": [
+    3781,
+    3787
+   ],
+   "righe_test": [
+    3659
+   ],
+   "righe_vive": [
+    3667,
+    3668,
+    3669,
+    3670,
+    3671,
+    3672,
+    3673,
+    3674,
+    3675,
+    3676,
+    3677,
+    3678,
+    3679,
+    3680,
+    3681,
+    3682,
+    3683,
+    3684,
+    3685,
+    3686,
+    3687,
+    3688,
+    3689,
+    3690,
+    3691,
+    3692,
+    3693,
+    3694,
+    3695,
+    3696,
+    3697,
+    3700,
+    3701,
+    3702,
+    3703,
+    3704,
+    3705,
+    3706,
+    3706,
+    3707,
+    3708,
+    3708,
+    3710,
+    3711,
+    3712,
+    3713,
+    3714,
+    3715,
+    3716,
+    3717,
+    3718,
+    3719,
+    3720,
+    3721,
+    3722,
+    3723,
+    3724,
+    3725,
+    3726,
+    3727,
+    3728,
+    3729,
+    3730,
+    3731,
+    3732,
+    3733,
+    3734,
+    3735,
+    3736,
+    3737,
+    3738,
+    3739,
+    3740,
+    3741,
+    3742,
+    3743,
+    3744,
+    3745,
+    3746,
+    3747,
+    3748,
+    3749,
+    3750,
+    3751,
+    3752,
+    3753,
+    3754,
+    3755,
+    3756,
+    3757,
+    3758,
+    3759,
+    3760,
+    3761,
+    3762,
+    3763,
+    3764,
+    3765,
+    3766,
+    3767,
+    3768,
+    3769,
+    3770,
+    3771,
+    3772,
+    3773,
+    3774,
+    3774,
+    3775,
+    3777,
+    3778,
+    3779
+   ],
+   "sorgente": "if SPINORE_CORRETTO:",
+   "test": "SPINORE_CORRETTO",
+   "tipo": "else",
+   "valori": {
+    "SPINORE_CORRETTO": true
+   }
+  },
+  {
+   "dentro": "_passo_spinoriale",
+   "flag": [
+    "DEPARAM_OROLOGIO"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 3678,
+   "righe_esclusive": [
+    3694,
+    3695,
+    3696,
+    3697
+   ],
+   "righe_morte": [
+    3694,
+    3697
+   ],
+   "righe_test": [
+    3678
+   ],
+   "righe_vive": [
+    3683,
+    3684,
+    3685,
+    3686,
+    3686,
+    3687,
+    3687,
+    3688,
+    3688,
+    3689,
+    3692
+   ],
+   "sorgente": "if DEPARAM_OROLOGIO:",
+   "test": "DEPARAM_OROLOGIO",
+   "tipo": "else",
+   "valori": {
+    "DEPARAM_OROLOGIO": true
+   }
+  },
+  {
+   "dentro": "_passo_spinoriale",
+   "flag": [
+    "SPINORE_CORRETTO"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 3793,
+   "righe_esclusive": [
+    3797
+   ],
+   "righe_morte": [
+    3797,
+    3797
+   ],
+   "righe_test": [
+    3793
+   ],
+   "righe_vive": [
+    3794,
+    3795
+   ],
+   "sorgente": "if SPINORE_CORRETTO:",
+   "test": "SPINORE_CORRETTO",
+   "tipo": "else",
+   "valori": {
+    "SPINORE_CORRETTO": true
+   }
+  },
+  {
+   "dentro": "_tempo_rampa",
+   "flag": [
+    "SEMINA_MATURA"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 3842,
+   "righe_esclusive": [
+    3843
+   ],
+   "righe_morte": [
+    3843,
+    3843
+   ],
+   "righe_test": [
+    3842
+   ],
+   "righe_vive": [],
+   "sorgente": "if not SEMINA_MATURA:",
+   "test": "not SEMINA_MATURA",
+   "tipo": "if",
+   "valori": {
+    "SEMINA_MATURA": true
+   }
+  },
+  {
+   "dentro": "_dphi",
+   "flag": [
+    "FASE_2PI"
+   ],
+   "perche": "muore il ramo `if`: il test e' False coi flag del driver",
+   "riga": 4062,
+   "righe_esclusive": [],
+   "righe_morte": [
+    4062,
+    4062
+   ],
+   "righe_test": [
+    4062
+   ],
+   "righe_vive": [
+    4062
+   ],
+   "sorgente": "return (2.0 * np.pi) if FASE_2PI else (4.0 * np.pi)",
+   "test": "FASE_2PI",
+   "tipo": "ternario",
+   "valori": {
+    "FASE_2PI": false
+   }
+  },
+  {
+   "dentro": "_wphi",
+   "flag": [
+    "FASE_2PI"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 4070,
+   "righe_esclusive": [
+    4071
+   ],
+   "righe_morte": [
+    4071,
+    4071
+   ],
+   "righe_test": [
+    4070
+   ],
+   "righe_vive": [],
+   "sorgente": "if FASE_2PI:",
+   "test": "FASE_2PI",
+   "tipo": "if",
+   "valori": {
+    "FASE_2PI": false
+   }
+  },
+  {
+   "dentro": "verifica_invarianti",
+   "flag": [
+    "INVARIANTI"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 4257,
+   "righe_esclusive": [
+    4258
+   ],
+   "righe_morte": [
+    4258,
+    4258
+   ],
+   "righe_test": [
+    4257
+   ],
+   "righe_vive": [],
+   "sorgente": "if not INVARIANTI:",
+   "test": "not INVARIANTI",
+   "tipo": "if",
+   "valori": {
+    "INVARIANTI": true
+   }
+  },
+  {
+   "dentro": "_smp_chiudi",
+   "flag": [
+    "SCALA_MIN_PASSO"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 4407,
+   "righe_esclusive": [
+    4408
+   ],
+   "righe_morte": [
+    4408,
+    4408
+   ],
+   "righe_test": [
+    4407
+   ],
+   "righe_vive": [],
+   "sorgente": "if not SCALA_MIN_PASSO:",
+   "test": "not SCALA_MIN_PASSO",
+   "tipo": "if",
+   "valori": {
+    "SCALA_MIN_PASSO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "REPULS_LEGGE"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5170,
+   "righe_esclusive": [
+    5208,
+    5209,
+    5210,
+    5211,
+    5212,
+    5213,
+    5214,
+    5215,
+    5216,
+    5217,
+    5218,
+    5219,
+    5220,
+    5221,
+    5222
+   ],
+   "righe_morte": [
+    5208,
+    5222
+   ],
+   "righe_test": [
+    5170
+   ],
+   "righe_vive": [
+    5178,
+    5179,
+    5180,
+    5181,
+    5189,
+    5190,
+    5191,
+    5192,
+    5195,
+    5196,
+    5197,
+    5198,
+    5198,
+    5199,
+    5200,
+    5201,
+    5202,
+    5203,
+    5204,
+    5205,
+    5206,
+    5207
+   ],
+   "sorgente": "if REPULS_LEGGE:",
+   "test": "REPULS_LEGGE",
+   "tipo": "else",
+   "valori": {
+    "REPULS_LEGGE": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CHI_COOP"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5271,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5272,
+    5272
+   ],
+   "righe_test": [
+    5272
+   ],
+   "righe_vive": [
+    5271
+   ],
+   "sorgente": "chi_core = (self.chiralita_core_locale(self.perc_geom, geom=True)",
+   "test": "CHI_COOP",
+   "tipo": "ternario",
+   "valori": {
+    "CHI_COOP": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CHI_COOP"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5280,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5280,
+    5280
+   ],
+   "righe_test": [
+    5280
+   ],
+   "righe_vive": [
+    5280
+   ],
+   "sorgente": "_pc_vc = self.perc_geom if CHI_COOP else self.perc_chi",
+   "test": "CHI_COOP",
+   "tipo": "ternario",
+   "valori": {
+    "CHI_COOP": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "REGIME"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5290,
+   "righe_esclusive": [
+    5331
+   ],
+   "righe_morte": [
+    5331,
+    5331
+   ],
+   "righe_test": [
+    5290
+   ],
+   "righe_vive": [
+    5297,
+    5302,
+    5305,
+    5306,
+    5307,
+    5308,
+    5309,
+    5310,
+    5311,
+    5321,
+    5322,
+    5323,
+    5324,
+    5327,
+    5328,
+    5329
+   ],
+   "sorgente": "if REGIME == \"deterministico\":",
+   "test": "REGIME == 'deterministico'",
+   "tipo": "else",
+   "valori": {
+    "REGIME": "deterministico"
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CS_DINAMICO"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5305,
+   "righe_esclusive": [
+    5310
+   ],
+   "righe_morte": [
+    5310,
+    5310
+   ],
+   "righe_test": [
+    5305
+   ],
+   "righe_vive": [
+    5306,
+    5307,
+    5308
+   ],
+   "sorgente": "if CS_DINAMICO:",
+   "test": "CS_DINAMICO",
+   "tipo": "else",
+   "valori": {
+    "CS_DINAMICO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "KURAMOTO_SU2",
+    "SYNC_FASE_OROLOGIO",
+    "SYNC_SPINORE"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5369,
+   "righe_esclusive": [
+    5370
+   ],
+   "righe_morte": [
+    5370,
+    5370
+   ],
+   "righe_test": [
+    5369
+   ],
+   "righe_vive": [],
+   "sorgente": "if SYNC_SPINORE or SYNC_FASE_OROLOGIO or KURAMOTO_SU2:",
+   "test": "SYNC_SPINORE or SYNC_FASE_OROLOGIO or KURAMOTO_SU2",
+   "tipo": "if",
+   "valori": {
+    "KURAMOTO_SU2": false,
+    "SYNC_FASE_OROLOGIO": false,
+    "SYNC_SPINORE": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CHI_COOP"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5409,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5409,
+    5409
+   ],
+   "righe_test": [
+    5409
+   ],
+   "righe_vive": [
+    5409
+   ],
+   "sorgente": "_cache_tors = '_chi_geom_nodi' if CHI_COOP else '_chi_core_nodi'",
+   "test": "CHI_COOP",
+   "tipo": "ternario",
+   "valori": {
+    "CHI_COOP": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CHI_CORE"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5412,
+   "righe_esclusive": [
+    5414,
+    5415
+   ],
+   "righe_morte": [
+    5414,
+    5415
+   ],
+   "righe_test": [
+    5413
+   ],
+   "righe_vive": [
+    5412,
+    5413
+   ],
+   "sorgente": "else ((self.chiralita_core_locale(self.perc_geom, geom=True)",
+   "test": "CHI_CORE",
+   "tipo": "ternario",
+   "valori": {
+    "CHI_CORE": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CHI_COOP"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5412,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5413,
+    5413
+   ],
+   "righe_test": [
+    5413
+   ],
+   "righe_vive": [
+    5412
+   ],
+   "sorgente": "else ((self.chiralita_core_locale(self.perc_geom, geom=True)",
+   "test": "CHI_COOP",
+   "tipo": "ternario",
+   "valori": {
+    "CHI_COOP": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CHI_COOP"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5414,
+   "righe_esclusive": [
+    5415
+   ],
+   "righe_morte": [
+    5415,
+    5415
+   ],
+   "righe_test": [
+    5414
+   ],
+   "righe_vive": [
+    5414
+   ],
+   "sorgente": "(self.perc_geom if CHI_COOP",
+   "test": "CHI_COOP",
+   "tipo": "ternario",
+   "valori": {
+    "CHI_COOP": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "POLO_MATURO"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5416,
+   "righe_esclusive": [
+    5417,
+    5418,
+    5419,
+    5420,
+    5421,
+    5422
+   ],
+   "righe_morte": [
+    5417,
+    5422
+   ],
+   "righe_test": [
+    5416
+   ],
+   "righe_vive": [
+    5424
+   ],
+   "sorgente": "if POLO_MATURO:",
+   "test": "POLO_MATURO",
+   "tipo": "if",
+   "valori": {
+    "POLO_MATURO": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TAU_LOCALI"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5425,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5425,
+    5425
+   ],
+   "righe_test": [
+    5425
+   ],
+   "righe_vive": [
+    5425
+   ],
+   "sorgente": "_ttw = _tau_tw_locale(self) if TAU_LOCALI else TAU_TW",
+   "test": "TAU_LOCALI",
+   "tipo": "ternario",
+   "valori": {
+    "TAU_LOCALI": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TAU_LOCALI"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5429,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5429,
+    5429
+   ],
+   "righe_test": [
+    5429
+   ],
+   "righe_vive": [
+    5429
+   ],
+   "sorgente": "_ttw = _tau_tw_locale(self) if TAU_LOCALI else TAU_TW",
+   "test": "TAU_LOCALI",
+   "tipo": "ternario",
+   "valori": {
+    "TAU_LOCALI": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CHI_COOP"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5444,
+   "righe_esclusive": [
+    5448,
+    5449
+   ],
+   "righe_morte": [
+    5448,
+    5449
+   ],
+   "righe_test": [
+    5444
+   ],
+   "righe_vive": [
+    5445,
+    5446
+   ],
+   "sorgente": "if CHI_COOP:",
+   "test": "CHI_COOP",
+   "tipo": "else",
+   "valori": {
+    "CHI_COOP": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CS_DINAMICO"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5489,
+   "righe_esclusive": [
+    5501,
+    5502
+   ],
+   "righe_morte": [
+    5501,
+    5502
+   ],
+   "righe_test": [
+    5489
+   ],
+   "righe_vive": [
+    5490,
+    5491,
+    5492,
+    5493,
+    5494,
+    5495,
+    5498,
+    5499
+   ],
+   "sorgente": "if CS_DINAMICO:",
+   "test": "CS_DINAMICO",
+   "tipo": "else",
+   "valori": {
+    "CS_DINAMICO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "DIFF_RES"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5543,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5543,
+    5543
+   ],
+   "righe_test": [
+    5543
+   ],
+   "righe_vive": [
+    5543
+   ],
+   "sorgente": "campo = self.peq if DIFF_RES == 0.0 else (rho - self.peq)",
+   "test": "DIFF_RES == 0.0",
+   "tipo": "ternario",
+   "valori": {
+    "DIFF_RES": 0.0
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "DIFF_RES"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5548,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5548,
+    5548
+   ],
+   "righe_test": [
+    5548
+   ],
+   "righe_vive": [
+    5548
+   ],
+   "sorgente": "flusso = (c_arco - self.peq) if DIFF_RES == 0.0 else ((rho - self.peq) - c_arco)",
+   "test": "DIFF_RES == 0.0",
+   "tipo": "ternario",
+   "valori": {
+    "DIFF_RES": 0.0
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TAU_LOCALI"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5550,
+   "righe_esclusive": [
+    5561,
+    5562,
+    5563,
+    5564,
+    5565
+   ],
+   "righe_morte": [
+    5561,
+    5565
+   ],
+   "righe_test": [
+    5550
+   ],
+   "righe_vive": [
+    5551,
+    5552,
+    5553,
+    5554,
+    5555,
+    5556,
+    5557,
+    5558,
+    5559
+   ],
+   "sorgente": "if TAU_LOCALI:",
+   "test": "TAU_LOCALI",
+   "tipo": "else",
+   "valori": {
+    "TAU_LOCALI": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TRACCIA_PEQ"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5555,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5555,
+    5555
+   ],
+   "righe_test": [
+    5555
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_PEQ: self._traccia_peq(rho, flusso, dt_e, tau_bg_loc, i, j)",
+   "test": "TRACCIA_PEQ",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_PEQ": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "PEQ_ESATTO"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5556,
+   "righe_esclusive": [
+    5559
+   ],
+   "righe_morte": [
+    5559,
+    5559
+   ],
+   "righe_test": [
+    5556
+   ],
+   "righe_vive": [
+    5557
+   ],
+   "sorgente": "if PEQ_ESATTO:",
+   "test": "PEQ_ESATTO",
+   "tipo": "else",
+   "valori": {
+    "PEQ_ESATTO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TRACCIA_PEQ"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5561,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5561,
+    5561
+   ],
+   "righe_test": [
+    5561
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_PEQ: self._traccia_peq(rho, flusso, dt_e, TAU_BG, i, j)",
+   "test": "TRACCIA_PEQ",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_PEQ": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "PEQ_ESATTO"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5562,
+   "righe_esclusive": [
+    5565
+   ],
+   "righe_morte": [
+    5565,
+    5565
+   ],
+   "righe_test": [
+    5562
+   ],
+   "righe_vive": [
+    5563
+   ],
+   "sorgente": "if PEQ_ESATTO:",
+   "test": "PEQ_ESATTO",
+   "tipo": "else",
+   "valori": {
+    "PEQ_ESATTO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "HAM_SRC"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5567,
+   "righe_esclusive": [
+    5600
+   ],
+   "righe_morte": [
+    5600,
+    5600
+   ],
+   "righe_test": [
+    5567
+   ],
+   "righe_vive": [
+    5570,
+    5571,
+    5572,
+    5573,
+    5574,
+    5575,
+    5576,
+    5577,
+    5578,
+    5579,
+    5580,
+    5581,
+    5582,
+    5583,
+    5584,
+    5585,
+    5586,
+    5587,
+    5588,
+    5589,
+    5590,
+    5591,
+    5592,
+    5593,
+    5594,
+    5596,
+    5597,
+    5598
+   ],
+   "sorgente": "if HAM_SRC == 0.0:",
+   "test": "HAM_SRC == 0.0",
+   "tipo": "else",
+   "valori": {
+    "HAM_SRC": 0.0
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "ANOM_SIMM"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5571,
+   "righe_esclusive": [
+    5594
+   ],
+   "righe_morte": [
+    5594,
+    5594
+   ],
+   "righe_test": [
+    5571
+   ],
+   "righe_vive": [
+    5575,
+    5576,
+    5577,
+    5582,
+    5583,
+    5584,
+    5585,
+    5586,
+    5587,
+    5588,
+    5589,
+    5590,
+    5591,
+    5592
+   ],
+   "sorgente": "if ANOM_SIMM:",
+   "test": "ANOM_SIMM",
+   "tipo": "else",
+   "valori": {
+    "ANOM_SIMM": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CS_DINAMICO"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5596,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5596,
+    5596
+   ],
+   "righe_test": [
+    5596
+   ],
+   "righe_vive": [
+    5596
+   ],
+   "sorgente": "cs2_src = (cs_arco ** 2 if CS_DINAMICO else CS_M ** 2)",
+   "test": "CS_DINAMICO",
+   "tipo": "ternario",
+   "valori": {
+    "CS_DINAMICO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "ALPHA_NAT"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5597,
+   "righe_esclusive": [
+    5598
+   ],
+   "righe_morte": [
+    5598,
+    5598
+   ],
+   "righe_test": [
+    5597
+   ],
+   "righe_vive": [
+    5597
+   ],
+   "sorgente": "src = (ALPHA_M * anom if ALPHA_NAT == 0.0",
+   "test": "ALPHA_NAT == 0.0",
+   "tipo": "ternario",
+   "valori": {
+    "ALPHA_NAT": 0.0
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "ZETA_M"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5602,
+   "righe_esclusive": [
+    5603
+   ],
+   "righe_morte": [
+    5603,
+    5603
+   ],
+   "righe_test": [
+    5602
+   ],
+   "righe_vive": [
+    5604,
+    5605,
+    5606,
+    5607,
+    5608,
+    5609,
+    5610
+   ],
+   "sorgente": "if ZETA_M == 0.0:",
+   "test": "ZETA_M == 0.0",
+   "tipo": "if",
+   "valori": {
+    "ZETA_M": 0.75
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "ZETA_LOC"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5604,
+   "righe_esclusive": [
+    5605,
+    5606,
+    5607,
+    5608
+   ],
+   "righe_morte": [
+    5605,
+    5608
+   ],
+   "righe_test": [
+    5604
+   ],
+   "righe_vive": [
+    5610
+   ],
+   "sorgente": "elif ZETA_LOC:",
+   "test": "ZETA_LOC",
+   "tipo": "if",
+   "valori": {
+    "ZETA_LOC": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CS_DINAMICO"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5608,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5608,
+    5608
+   ],
+   "righe_test": [
+    5608
+   ],
+   "righe_vive": [
+    5608
+   ],
+   "sorgente": "beta = 2.0 * zeta_loc * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(self.d, 1e-6)",
+   "test": "CS_DINAMICO",
+   "tipo": "ternario",
+   "valori": {
+    "CS_DINAMICO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CS_DINAMICO"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5610,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5610,
+    5610
+   ],
+   "righe_test": [
+    5610
+   ],
+   "righe_vive": [
+    5610
+   ],
+   "sorgente": "beta = 2.0 * ZETA_M * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(self.d, 1e-6)",
+   "test": "CS_DINAMICO",
+   "tipo": "ternario",
+   "valori": {
+    "CS_DINAMICO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "VERLET"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5642,
+   "righe_esclusive": [
+    5653,
+    5654,
+    5655,
+    5656,
+    5657,
+    5658,
+    5659,
+    5660,
+    5661
+   ],
+   "righe_morte": [
+    5653,
+    5661
+   ],
+   "righe_test": [
+    5642
+   ],
+   "righe_vive": [
+    5643,
+    5644,
+    5645,
+    5646,
+    5647,
+    5648,
+    5649,
+    5650,
+    5651
+   ],
+   "sorgente": "if VERLET:",
+   "test": "VERLET",
+   "tipo": "else",
+   "valori": {
+    "VERLET": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "FERMA_DOPO_NSUB"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5647,
+   "righe_esclusive": [
+    5648,
+    5649,
+    5650,
+    5651
+   ],
+   "righe_morte": [
+    5648,
+    5651
+   ],
+   "righe_test": [
+    5647
+   ],
+   "righe_vive": [],
+   "sorgente": "if FERMA_DOPO_NSUB:",
+   "test": "FERMA_DOPO_NSUB",
+   "tipo": "if",
+   "valori": {
+    "FERMA_DOPO_NSUB": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "FERMA_DOPO_NSUB"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5657,
+   "righe_esclusive": [
+    5658,
+    5659,
+    5660,
+    5661
+   ],
+   "righe_morte": [
+    5658,
+    5661
+   ],
+   "righe_test": [
+    5657
+   ],
+   "righe_vive": [],
+   "sorgente": "if FERMA_DOPO_NSUB:",
+   "test": "FERMA_DOPO_NSUB",
+   "tipo": "if",
+   "valori": {
+    "FERMA_DOPO_NSUB": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "SCALA_MIN_PASSO"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5666,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5666,
+    5666
+   ],
+   "righe_test": [
+    5666
+   ],
+   "righe_vive": [
+    5666
+   ],
+   "sorgente": "_smp_d_ini = (np.array(self.d, dtype=float, copy=True) if SCALA_MIN_PASSO else None)",
+   "test": "SCALA_MIN_PASSO",
+   "tipo": "ternario",
+   "valori": {
+    "SCALA_MIN_PASSO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "VERLET"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5668,
+   "righe_esclusive": [
+    5733,
+    5734,
+    5735,
+    5736,
+    5737,
+    5738,
+    5739,
+    5740,
+    5741,
+    5742,
+    5743,
+    5744,
+    5745
+   ],
+   "righe_morte": [
+    5733,
+    5745
+   ],
+   "righe_test": [
+    5668
+   ],
+   "righe_vive": [
+    5671,
+    5672,
+    5673,
+    5674,
+    5675,
+    5676,
+    5677,
+    5678,
+    5679,
+    5680,
+    5681,
+    5682,
+    5683,
+    5684,
+    5685,
+    5686,
+    5687,
+    5688,
+    5689,
+    5690,
+    5691,
+    5692,
+    5693,
+    5694,
+    5695,
+    5696,
+    5697,
+    5698,
+    5699,
+    5700,
+    5701,
+    5702,
+    5703,
+    5704,
+    5705,
+    5706,
+    5707,
+    5708,
+    5709,
+    5710,
+    5711,
+    5712,
+    5713,
+    5714,
+    5715,
+    5716,
+    5717,
+    5718,
+    5719,
+    5720,
+    5721,
+    5722,
+    5723,
+    5724,
+    5725,
+    5726,
+    5727,
+    5728,
+    5729,
+    5730
+   ],
+   "sorgente": "if VERLET:",
+   "test": "VERLET",
+   "tipo": "else",
+   "valori": {
+    "VERLET": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TRACCIA_VD"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5677,
+   "righe_esclusive": [
+    5678
+   ],
+   "righe_morte": [
+    5678,
+    5678
+   ],
+   "righe_test": [
+    5677
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_VD:",
+   "test": "TRACCIA_VD",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_VD": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "SCALA_MIN",
+    "SCALA_MIN_PASSO"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5696,
+   "righe_esclusive": [
+    5697
+   ],
+   "righe_morte": [
+    5697,
+    5697
+   ],
+   "righe_test": [
+    5696
+   ],
+   "righe_vive": [
+    5699
+   ],
+   "sorgente": "if SCALA_MIN and not SCALA_MIN_PASSO:",
+   "test": "SCALA_MIN and (not SCALA_MIN_PASSO)",
+   "tipo": "if",
+   "valori": {
+    "SCALA_MIN": false,
+    "SCALA_MIN_PASSO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "ZETA_M"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5705,
+   "righe_esclusive": [
+    5706
+   ],
+   "righe_morte": [
+    5706,
+    5706
+   ],
+   "righe_test": [
+    5705
+   ],
+   "righe_vive": [
+    5707,
+    5708,
+    5709,
+    5710
+   ],
+   "sorgente": "if ZETA_M == 0.0:",
+   "test": "ZETA_M == 0.0",
+   "tipo": "if",
+   "valori": {
+    "ZETA_M": 0.75
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "ZETA_LOC"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5707,
+   "righe_esclusive": [
+    5708
+   ],
+   "righe_morte": [
+    5708,
+    5708
+   ],
+   "righe_test": [
+    5707
+   ],
+   "righe_vive": [
+    5710
+   ],
+   "sorgente": "elif ZETA_LOC:",
+   "test": "ZETA_LOC",
+   "tipo": "if",
+   "valori": {
+    "ZETA_LOC": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CS_DINAMICO"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5708,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5708,
+    5708
+   ],
+   "righe_test": [
+    5708
+   ],
+   "righe_vive": [
+    5708
+   ],
+   "sorgente": "beta_new = 2.0 * zeta_loc * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(d_new, 1e-6)",
+   "test": "CS_DINAMICO",
+   "tipo": "ternario",
+   "valori": {
+    "CS_DINAMICO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CS_DINAMICO"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5710,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5710,
+    5710
+   ],
+   "righe_test": [
+    5710
+   ],
+   "righe_vive": [
+    5710
+   ],
+   "sorgente": "beta_new = 2.0 * ZETA_M * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(d_new, 1e-6)",
+   "test": "CS_DINAMICO",
+   "tipo": "ternario",
+   "valori": {
+    "CS_DINAMICO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "SCALA_MIN",
+    "SCALA_MIN_PASSO"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5742,
+   "righe_esclusive": [
+    5743
+   ],
+   "righe_morte": [
+    5743,
+    5743
+   ],
+   "righe_test": [
+    5742
+   ],
+   "righe_vive": [
+    5745
+   ],
+   "sorgente": "if SCALA_MIN and not SCALA_MIN_PASSO:",
+   "test": "SCALA_MIN and (not SCALA_MIN_PASSO)",
+   "tipo": "if",
+   "valori": {
+    "SCALA_MIN": false,
+    "SCALA_MIN_PASSO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TAU_LOCALI"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5755,
+   "righe_esclusive": [
+    5857,
+    5858,
+    5859
+   ],
+   "righe_morte": [
+    5857,
+    5859
+   ],
+   "righe_test": [
+    5755
+   ],
+   "righe_vive": [
+    5769,
+    5770,
+    5771,
+    5772,
+    5777,
+    5778,
+    5779,
+    5780,
+    5781,
+    5782,
+    5806,
+    5808,
+    5809,
+    5810,
+    5811,
+    5812,
+    5813,
+    5814,
+    5815,
+    5816,
+    5817,
+    5818,
+    5819,
+    5820,
+    5821,
+    5822,
+    5823,
+    5826,
+    5827,
+    5828,
+    5833,
+    5834,
+    5839,
+    5840,
+    5841,
+    5842,
+    5843,
+    5844,
+    5845,
+    5846,
+    5847,
+    5848,
+    5849,
+    5850,
+    5851,
+    5852,
+    5853,
+    5854,
+    5855
+   ],
+   "sorgente": "if TAU_LOCALI:",
+   "test": "TAU_LOCALI",
+   "tipo": "else",
+   "valori": {
+    "TAU_LOCALI": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TAU_USA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5769,
+   "righe_esclusive": [
+    5770
+   ],
+   "righe_morte": [
+    5770,
+    5770
+   ],
+   "righe_test": [
+    5769
+   ],
+   "righe_vive": [
+    5772
+   ],
+   "sorgente": "if TAU_USA_D0:",
+   "test": "TAU_USA_D0",
+   "tipo": "if",
+   "valori": {
+    "TAU_USA_D0": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "CS_DINAMICO"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 5806,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5806,
+    5806
+   ],
+   "righe_test": [
+    5806
+   ],
+   "righe_vive": [
+    5806
+   ],
+   "sorgente": "cs_taup = (cs_arco if CS_DINAMICO else CS_M)",
+   "test": "CS_DINAMICO",
+   "tipo": "ternario",
+   "valori": {
+    "CS_DINAMICO": true
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5842,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5842,
+    5842
+   ],
+   "righe_test": [
+    5842
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5844,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5844,
+    5844
+   ],
+   "righe_test": [
+    5844
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('S02_rilass_visco', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5853,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5853,
+    5853
+   ],
+   "righe_test": [
+    5853
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5855,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5855,
+    5855
+   ],
+   "righe_test": [
+    5855
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('S03_diff_guscio', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5857,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5857,
+    5857
+   ],
+   "righe_test": [
+    5857
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5859,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5859,
+    5859
+   ],
+   "righe_test": [
+    5859
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('S04_rilass_TAU_P', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5861,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5861,
+    5861
+   ],
+   "righe_test": [
+    5861
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "step",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 5862,
+   "righe_esclusive": [],
+   "righe_morte": [
+    5862,
+    5862
+   ],
+   "righe_test": [
+    5862
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('P1_dopo_rilass', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "FASE_2PI",
+    "TORS_4PI"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 5884,
+   "righe_esclusive": [
+    5888
+   ],
+   "righe_morte": [
+    5888,
+    5888
+   ],
+   "righe_test": [
+    5884
+   ],
+   "righe_vive": [
+    5885,
+    5886
+   ],
+   "sorgente": "if TORS_4PI and not FASE_2PI:",
+   "test": "TORS_4PI and (not FASE_2PI)",
+   "tipo": "else",
+   "valori": {
+    "FASE_2PI": false,
+    "TORS_4PI": true
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6115,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6115,
+    6115
+   ],
+   "righe_test": [
+    6115
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6117,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6117,
+    6117
+   ],
+   "righe_test": [
+    6117
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('S05_spinta_locale', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6118,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6118,
+    6118
+   ],
+   "righe_test": [
+    6118
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6120,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6120,
+    6120
+   ],
+   "righe_test": [
+    6120
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('P2_dopo_spinta', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "MITMAX"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 6123,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6123,
+    6123
+   ],
+   "righe_test": [
+    6123
+   ],
+   "righe_vive": [
+    6123
+   ],
+   "sorgente": "c = c if MITMAX == 0 else c[np.argsort(avv[c])[::-1]][:MITMAX]",
+   "test": "MITMAX == 0",
+   "tipo": "ternario",
+   "valori": {
+    "MITMAX": 0
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "MITOSI_DIR"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6153,
+   "righe_esclusive": [
+    6154,
+    6155,
+    6156,
+    6157,
+    6158,
+    6159,
+    6160
+   ],
+   "righe_morte": [
+    6154,
+    6160
+   ],
+   "righe_test": [
+    6153
+   ],
+   "righe_vive": [
+    6162
+   ],
+   "sorgente": "if MITOSI_DIR != 0.0:",
+   "test": "MITOSI_DIR != 0.0",
+   "tipo": "if",
+   "valori": {
+    "MITOSI_DIR": 0.0
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "ANTIFASE_ADD"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6172,
+   "righe_esclusive": [
+    6173,
+    6174,
+    6175,
+    6176,
+    6177,
+    6178,
+    6179,
+    6180,
+    6181,
+    6182,
+    6183,
+    6184,
+    6185
+   ],
+   "righe_morte": [
+    6173,
+    6185
+   ],
+   "righe_test": [
+    6172
+   ],
+   "righe_vive": [],
+   "sorgente": "if ANTIFASE_ADD:",
+   "test": "ANTIFASE_ADD",
+   "tipo": "if",
+   "valori": {
+    "ANTIFASE_ADD": false
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "REGIME"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 6215,
+   "righe_esclusive": [
+    6230,
+    6231
+   ],
+   "righe_morte": [
+    6230,
+    6231
+   ],
+   "righe_test": [
+    6215
+   ],
+   "righe_vive": [
+    6220,
+    6221,
+    6222,
+    6222,
+    6223,
+    6224,
+    6225,
+    6226,
+    6227
+   ],
+   "sorgente": "if REGIME == \"deterministico\":",
+   "test": "REGIME == 'deterministico'",
+   "tipo": "else",
+   "valori": {
+    "REGIME": "deterministico"
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "PLAST_DIN"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 6241,
+   "righe_esclusive": [
+    6248,
+    6249,
+    6250,
+    6251,
+    6252
+   ],
+   "righe_morte": [
+    6248,
+    6252
+   ],
+   "righe_test": [
+    6241
+   ],
+   "righe_vive": [
+    6243,
+    6244,
+    6245,
+    6246,
+    6247
+   ],
+   "sorgente": "if PLAST_DIN:",
+   "test": "PLAST_DIN",
+   "tipo": "else",
+   "valori": {
+    "PLAST_DIN": true
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "PLAST_MIT"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6248,
+   "righe_esclusive": [
+    6249,
+    6250
+   ],
+   "righe_morte": [
+    6249,
+    6250
+   ],
+   "righe_test": [
+    6248
+   ],
+   "righe_vive": [
+    6252
+   ],
+   "sorgente": "elif PLAST_MIT > 0.0:",
+   "test": "PLAST_MIT > 0.0",
+   "tipo": "if",
+   "valori": {
+    "PLAST_MIT": 0.0
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6267,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6267,
+    6267
+   ],
+   "righe_test": [
+    6267
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6270,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6270,
+    6270
+   ],
+   "righe_test": [
+    6270
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('S06_mitosi', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "COPPIA_DENSITA"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6304,
+   "righe_esclusive": [
+    6305,
+    6306,
+    6307,
+    6308,
+    6309,
+    6310
+   ],
+   "righe_morte": [
+    6305,
+    6310
+   ],
+   "righe_test": [
+    6304
+   ],
+   "righe_vive": [
+    6312
+   ],
+   "sorgente": "if COPPIA_DENSITA:",
+   "test": "COPPIA_DENSITA",
+   "tipo": "if",
+   "valori": {
+    "COPPIA_DENSITA": false
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "PEQ_NASCITA_LOCALE"
+   ],
+   "perche": "muore il ramo `else`: il test e' True coi flag del driver",
+   "riga": 6336,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6336,
+    6336
+   ],
+   "righe_test": [
+    6336
+   ],
+   "righe_vive": [
+    6336
+   ],
+   "sorgente": "pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))",
+   "test": "PEQ_NASCITA_LOCALE",
+   "tipo": "ternario",
+   "valori": {
+    "PEQ_NASCITA_LOCALE": true
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6378,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6378,
+    6378
+   ],
+   "righe_test": [
+    6378
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "mitosi",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6381,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6381,
+    6381
+   ],
+   "righe_test": [
+    6381
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('S07_schwinger', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "rilassa_disegno",
+   "flag": [
+    "L_CONSERVA"
+   ],
+   "perche": "muore il ramo `if`: il test e' False coi flag del driver",
+   "riga": 6462,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6462,
+    6462
+   ],
+   "righe_test": [
+    6462
+   ],
+   "righe_vive": [
+    6462
+   ],
+   "sorgente": "pos0 = self.pos.copy() if L_CONSERVA else None   # per misurare la rotazione spuria",
+   "test": "L_CONSERVA",
+   "tipo": "ternario",
+   "valori": {
+    "L_CONSERVA": false
+   }
+  },
+  {
+   "dentro": "pozzo_grafo",
+   "flag": [
+    "POZZO_D"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 6530,
+   "righe_esclusive": [
+    6542,
+    6543
+   ],
+   "righe_morte": [
+    6542,
+    6543
+   ],
+   "righe_test": [
+    6530
+   ],
+   "righe_vive": [
+    6537,
+    6538,
+    6539,
+    6540
+   ],
+   "sorgente": "if POZZO_D:",
+   "test": "POZZO_D",
+   "tipo": "else",
+   "valori": {
+    "POZZO_D": true
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "MEM_MOTO_TUTTO"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 6595,
+   "righe_esclusive": [
+    6606
+   ],
+   "righe_morte": [
+    6606,
+    6606
+   ],
+   "righe_test": [
+    6595
+   ],
+   "righe_vive": [
+    6596,
+    6598,
+    6599,
+    6600
+   ],
+   "sorgente": "if MEM_MOTO_TUTTO:",
+   "test": "MEM_MOTO_TUTTO",
+   "tipo": "else",
+   "valori": {
+    "MEM_MOTO_TUTTO": true
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6621,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6621,
+    6621
+   ],
+   "righe_test": [
+    6621
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6623,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6623,
+    6623
+   ],
+   "righe_test": [
+    6623
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('S08_proj', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6624,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6624,
+    6624
+   ],
+   "righe_test": [
+    6624
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6625,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6625,
+    6625
+   ],
+   "righe_test": [
+    6625
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('P3_dopo_proj', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "SCALA_P_MEDIANA"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6665,
+   "righe_esclusive": [
+    6667,
+    6668
+   ],
+   "righe_morte": [
+    6667,
+    6668
+   ],
+   "righe_test": [
+    6665
+   ],
+   "righe_vive": [
+    6670
+   ],
+   "sorgente": "if SCALA_P_MEDIANA:",
+   "test": "SCALA_P_MEDIANA",
+   "tipo": "if",
+   "valori": {
+    "SCALA_P_MEDIANA": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "VIRIALE"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 6710,
+   "righe_esclusive": [
+    6772,
+    6773,
+    6774,
+    6775
+   ],
+   "righe_morte": [
+    6772,
+    6775
+   ],
+   "righe_test": [
+    6710
+   ],
+   "righe_vive": [
+    6711,
+    6712,
+    6712,
+    6713,
+    6713,
+    6714,
+    6714,
+    6715,
+    6716,
+    6717,
+    6718,
+    6719,
+    6720,
+    6721,
+    6722,
+    6723,
+    6724,
+    6725,
+    6726,
+    6727,
+    6728,
+    6729,
+    6730,
+    6731,
+    6732,
+    6733,
+    6734,
+    6735,
+    6736,
+    6737,
+    6738,
+    6739,
+    6740,
+    6741,
+    6742,
+    6743,
+    6744,
+    6745,
+    6746,
+    6747,
+    6748,
+    6749,
+    6750,
+    6751,
+    6752,
+    6753,
+    6754,
+    6755,
+    6756,
+    6757,
+    6758,
+    6759,
+    6760,
+    6761,
+    6765,
+    6766,
+    6767,
+    6768,
+    6769
+   ],
+   "sorgente": "if VIRIALE:",
+   "test": "VIRIALE",
+   "tipo": "else",
+   "valori": {
+    "VIRIALE": true
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "OLON_PART"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 6718,
+   "righe_esclusive": [
+    6721
+   ],
+   "righe_morte": [
+    6721,
+    6721
+   ],
+   "righe_test": [
+    6718
+   ],
+   "righe_vive": [
+    6719
+   ],
+   "sorgente": "if OLON_PART:",
+   "test": "OLON_PART",
+   "tipo": "else",
+   "valori": {
+    "OLON_PART": true
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6767,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6767,
+    6767
+   ],
+   "righe_test": [
+    6767
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6769,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6769,
+    6769
+   ],
+   "righe_test": [
+    6769
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('S09_spinta_med', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6773,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6773,
+    6773
+   ],
+   "righe_test": [
+    6773
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6775,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6775,
+    6775
+   ],
+   "righe_test": [
+    6775
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('S10_grav_med', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6776,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6776,
+    6776
+   ],
+   "righe_test": [
+    6776
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6777,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6777,
+    6777
+   ],
+   "righe_test": [
+    6777
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('P4_dopo_grav', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6795,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6795,
+    6795
+   ],
+   "righe_test": [
+    6795
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6797,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6797,
+    6797
+   ],
+   "righe_test": [
+    6797
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('S11_flusso', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6798,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6798,
+    6798
+   ],
+   "righe_test": [
+    6798
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6799,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6799,
+    6799
+   ],
+   "righe_test": [
+    6799
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('P5_dopo_flusso', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "COES_CAUSALE"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 6891,
+   "righe_esclusive": [
+    6914
+   ],
+   "righe_morte": [
+    6914,
+    6914
+   ],
+   "righe_test": [
+    6891
+   ],
+   "righe_vive": [
+    6892,
+    6893,
+    6894,
+    6895,
+    6896,
+    6897,
+    6898,
+    6899,
+    6900,
+    6901,
+    6902,
+    6903,
+    6904,
+    6905,
+    6906,
+    6907,
+    6908,
+    6909,
+    6910,
+    6911,
+    6912
+   ],
+   "sorgente": "if COES_CAUSALE:",
+   "test": "COES_CAUSALE",
+   "tipo": "else",
+   "valori": {
+    "COES_CAUSALE": true
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6943,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6943,
+    6943
+   ],
+   "righe_test": [
+    6943
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_coesione(coesione_relazionale, tasso_dinamico, mask)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6944,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6944,
+    6944
+   ],
+   "righe_test": [
+    6944
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "COES_ADIM"
+   ],
+   "perche": "il test e' VERO coi flag del driver: muore l'else",
+   "riga": 6945,
+   "righe_esclusive": [
+    6948,
+    6949
+   ],
+   "righe_morte": [
+    6948,
+    6949
+   ],
+   "righe_test": [
+    6945
+   ],
+   "righe_vive": [
+    6946
+   ],
+   "sorgente": "if COES_ADIM:",
+   "test": "COES_ADIM",
+   "tipo": "else",
+   "valori": {
+    "COES_ADIM": true
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6950,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6950,
+    6950
+   ],
+   "righe_test": [
+    6950
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('S12_coesione', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6951,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6951,
+    6951
+   ],
+   "righe_test": [
+    6951
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6952,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6952,
+    6952
+   ],
+   "righe_test": [
+    6952
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('P6_dopo_coesione', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6998,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6998,
+    6998
+   ],
+   "righe_test": [
+    6998
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: _tr_pre = self.d0.copy()",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  },
+  {
+   "dentro": "memoria_hebbiana_moto",
+   "flag": [
+    "TRACCIA_D0"
+   ],
+   "perche": "il test e' FALSO coi flag del driver",
+   "riga": 6999,
+   "righe_esclusive": [],
+   "righe_morte": [
+    6999,
+    6999
+   ],
+   "righe_test": [
+    6999
+   ],
+   "righe_vive": [],
+   "sorgente": "if TRACCIA_D0: self._traccia_d0('P7_dopo_4917', _tr_pre)",
+   "test": "TRACCIA_D0",
+   "tipo": "if",
+   "valori": {
+    "TRACCIA_D0": false
+   }
+  }
+ ],
+ "n_morti": 121,
+ "n_non_corroborabili_per_riga": 61,
+ "n_non_decidibili": 319,
+ "passi": 3,
+ "righe_esclusive_totali": 172
+}
