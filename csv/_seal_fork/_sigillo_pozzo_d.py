@@ -129,7 +129,7 @@ def diff(a, b):
     return forma, sorted(k for k in a["firme"] if a["firme"][k] != b["firme"].get(k))
 
 
-def scena(flag, pos_costante=False, seme=None):
+def scena(flag, pos_costante=False, seme=None, passi=4):
     """La scena `(ii)`(a) in-process, e `pozzo_grafo` chiamata direttamente. `(phi_g, dpozzo, S)`."""
     extra = (["--seme=%d" % seme] if seme is not None else [])
     _S0, argv = _cli_flag.argv_del_driver(
@@ -142,6 +142,14 @@ def scena(flag, pos_costante=False, seme=None):
     S._NMASSE_VIDEO["sep"] = float(getattr(a, "sep", 3.0))
     S._NMASSE_VIDEO["size"] = None
     S.avvia_test(SCENA2)()
+    # ⚠ SI AVANZA PRIMA DI CHIAMARE IL POZZO, e non e' un dettaglio: al passo 0 `psi` non
+    #   esiste ancora (`len(psi) < n`), e `pozzo_grafo(None)` cade su un ramo che indicizza
+    #   `None`. E' anche PIU' FEDELE: la chiamata vera (`:6637`) avviene DENTRO un passo.
+    import _passo
+    if hasattr(S, "passo_test"):
+        S.passo_test()
+    for _ in range(max(1, passi)):
+        _passo.passo_pieno(S, S.net)          # `H-P9`
     if pos_costante:
         # ⚠ SI ALTERA SOLO `pos`, e in modo che le LUNGHEZZE da `pos` diventino COSTANTI: i nodi
         #   si mettono su una retta a passo 1. `self.d` NON si tocca. E' il banco di `W4`.
@@ -149,7 +157,12 @@ def scena(flag, pos_costante=False, seme=None):
         p = np.zeros((n, 3), dtype=float)
         p[:, 0] = np.arange(n, dtype=float)
         S.net.pos = p
-    I = np.abs(S.net.psi[:S.net.n]) ** 2 if len(S.net.psi) >= S.net.n else None
+    # l'intensita' si passa ESPLICITA, come fa il chiamante vero: `pozzo_grafo(None)` con
+    #   `psi` corto indicizza `None`, e sarebbe un errore mio, non del simulatore.
+    if len(S.net.psi) >= S.net.n:
+        I = np.abs(S.net.psi[:S.net.n]) ** 2
+    else:
+        I = np.abs(S.net.phi[:S.net.n]) * 0.0 + 1.0     # intensita' UNIFORME, dichiarata
     phi_g, _m, dpozzo = S.net.pozzo_grafo(I)
     return np.asarray(phi_g, float), np.asarray(dpozzo, float), S
 
@@ -188,8 +201,8 @@ if __name__ == "__main__":
     # ------------------------------------------------------------------ W2
     P("")
     P("  W2  A FLAG ACCESO LA SPINTA CAMBIA  (dichiarato: e' la cura)")
-    phi_off, dp_off, S_off = scena(False)
-    phi_on, dp_on, S_on = scena(True)
+    phi_off, dp_off, S_off = scena(False, passi=passi)
+    phi_on, dp_on, S_on = scena(True, passi=passi)
     n_arc = min(len(dp_off), len(dp_on))
     dmax = float(np.max(np.abs(dp_on[:n_arc] - dp_off[:n_arc]))) if n_arc else float("nan")
     pmax = float(np.max(np.abs(phi_on - phi_off))) if len(phi_on) == len(phi_off) else float("nan")
@@ -227,8 +240,8 @@ if __name__ == "__main__":
     # ------------------------------------------------------------------ W4
     P("")
     P("  W4  IL CASO CHE DEVE FALLIRE -- `pos` alterato a `d` costante")
-    phi_on2, dp_on2, _ = scena(True, pos_costante=True)
-    phi_off2, dp_off2, _ = scena(False, pos_costante=True)
+    phi_on2, dp_on2, _ = scena(True, pos_costante=True, passi=passi)
+    phi_off2, dp_off2, _ = scena(False, pos_costante=True, passi=passi)
     k1 = min(len(dp_on), len(dp_on2))
     k2 = min(len(dp_off), len(dp_off2))
     d_on = float(np.max(np.abs(dp_on2[:k1] - dp_on[:k1]))) if k1 else float("nan")
