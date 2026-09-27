@@ -53,6 +53,70 @@
 
 
 
+
+---
+
+# 🆔 **`MASSA-ID`: LE MASSE SI IDENTIFICANO COL LIGNAGGIO — criteri scritti PRIMA** *(2026-09-27)*
+
+*(mandato di Luca, messo **IN CODA** dietro il pilota; criteri in
+`doc/TASK_HISTORY/2026-09-27_massa-id.md`, committati **prima** dello strumento.)*
+
+**IL PROBLEMA CHE CHIUDE:** il pilota identifica le masse in **due** modi e **nessuno e' l'identita'
+della massa** — i **nodi del passo 0** sono un insieme **congelato** *(se la massa reclutasse, il
+metro non se ne accorgerebbe)*, e la **regione di fase** ha **precisione `0.7965`** *(un quinto e'
+vuoto entrato per caso)* **e non distingue le tre masse**, perche' la fase e' **la stessa per tutte
+e tre**.
+**Il terzo modo c'e' gia' nel simulatore: il LIGNAGGIO.** `conc_nodi` registra a quale massa ogni
+nodo **concorre**, e **la mitosi lo EREDITA** (`:3951-3954`; ramo Schwinger `:4076-4082`).
+
+## ✅ VERIFICATO — il meccanismo c'e', e `aggiorna_pesi_concorrenza` **non e' nel passo**
+
+`csv/_passo.py ordine()` da' **cinque** chiamate e **non la contiene**: la premessa del mandato
+**regge**. Le funzioni: `_registra_concorrenza` `:2856`, `_agg_voce` `:2871` *(aggiorna invece di
+appendere → **idempotente**)*, `_riallinea_tracking` `:2880`, `aggiorna_pesi_concorrenza` `:2892`,
+`indici_massa_vivi` `:2344`, `tracking_masse` `:2919`.
+
+## ❗❗ **MA «PURAMENTE DIAGNOSTICA» NON E' VERO, e cambia il disegno**
+
+Il mandato chiedeva di **verificarlo dal sorgente**. **L'ho fatto, e la risposta e' NO:**
+`aggiorna_pesi_concorrenza` chiama **`self.calcola_psi()`** (`:2903`) **senza passare `w`**, quindi
+**RISCRIVE `self.psi`** — che **non e' tracking: e' stato che la fisica legge**.
+
+**E il punto in cui morde e' preciso:**
+
+```python
+:5123   self._psi_prec = self.psi.copy()        # step() fotografa la psi del passo PRECEDENTE
+```
+
+`_psi_prec` alimenta **`ritmo()`**. **Se lo strumento ricalcola `psi` fra due passi, il passo dopo
+fotografa la `psi` dello STRUMENTO** invece di quella del sistema — e `phi` e `d` sono cambiati nel
+frattempo. **E almeno otto punti leggono `self.psi` senza ricalcolarla** *(`:2163`, `:2219`,
+`:2299`, `:2398`, `:2986`, `:3181`, `:3629`, e `memoria_hebbiana_moto`)*.
+
+> **CONSEGUENZA:** la chiamata a ogni checkpoint va fatta con **SNAPSHOT/RESTORE di `self.psi`** — la
+> disciplina **pure-read** — **e poi PROVATA, non assunta.** E' il criterio **`Y1b`, il caso che DEVE
+> fallire: senza lo snapshot, `Y1` deve FALLIRE.** *(Una docstring che dice «chiamabile a ogni
+> passo» non e' un presidio che lo renda vero — `A9`.)*
+
+## LE LETTURE FISSATE PRIMA
+
+**Centro = MEDOIDE PESATO** sul sottografo indotto, distanze di grafo pesate con **`d`** *(mai
+`pos`)*. **I pesi negativi si TAGLIANO A ZERO, e la scelta e' DICHIARATA:** `cos(phi − phi_massa)`
+sta in `[−1,+1]` e il codice dice che **`−1` e' antifase, «proietta CONTRO»** — quindi quel nodo
+**non fa parte di «dove la massa e' densa»**. **E si CONTANO** (`Y5`). Se la somma dei pesi fosse
+`0`, si ricade sul medoide **non pesato**, **contando** le volte (`A8`).
+**La regione di fase resta come CONFRONTO:** concordi → massa **ben definita**; la fase trova **piu'**
+nodi → la massa **RECLUTA**; l'ID trova **piu'** nodi → la massa **si SCIOGLIE**.
+**⚠ Con precisione `0.7965`, un eccesso fino al `~20 %` e' CONTAMINAZIONE, non reclutamento: sotto
+quella soglia non si conclude nulla.**
+
+## `D30` RIVALUTATA, E **RESTA APERTA**
+
+La scena `(ii)` **non passa da `_massa` ne' da `semina`** *(non crea nodi: assegna la fase a nodi
+che esistono)*. **Quindi registrare le tre regioni NON cura `D30`: lo AGGIRA per quella scena.**
+**`D30` resta aperta** per il percorso delle masse **seminate**. **Lo dico invece di chiudere una
+voce che non e' stata curata.**
+
 ---
 
 # 🔮 **PREVISIONE DAL CODICE, SCRITTA PRIMA DEL REFERTO DEL PILOTA** *(2026-09-27)*

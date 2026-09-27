@@ -68,3 +68,4 @@ R-COMP	etichetta LOCALE della regola di assegnazione SCARTATA nel pilota (compon
 PRE-CORREZIONE	locuzione del testo (<<col codice pre-correzione>>), non un identificatore	0
 K5a	etichetta LOCALE di un caso di collaudo in csv/_osservabile_p1.py, non un identificatore	0
 K5b	etichetta LOCALE del caso di collaudo che DEVE fallire in csv/_osservabile_p1.py, non un identificatore	0
+Y1b	etichetta LOCALE del criterio che DEVE fallire nel sigillo di MASSA-ID, non un identificatore	0
