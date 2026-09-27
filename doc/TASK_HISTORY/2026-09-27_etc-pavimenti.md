@@ -147,3 +147,43 @@ stati tracciati uno per uno: **5 sono stati chiamati** *(3 volte ciascuno = 15)*
 ## LE VOCI D'INDICE CHE QUESTO DOCUMENTO TOCCA
 
 `ETC-PASSO` · `CLIP-INVENTARIO` · `H-ETC-1` · `H-ETC-2` · `D31` · `A9`
+
+---
+
+# 6. ⚠ **CORREZIONE DI FORMULAZIONE** *(Luca, 2026-09-27, subito dopo `973ac8b`)*
+
+> ### **«Gli 8 pavimenti sono MORTI» è impreciso, e va letto così.**
+> **È morto il PAVIMENTO VECCHIO** — `_floor_d0` = `0.05` assoluto, oppure il **5 %** della
+> mediana di `d0` con `PAV_COM`. **È stato SOSTITUITO dalla SCALA MINIMA `LAM`**
+> *(`SCALA_MIN_PASSO`, `_nasce`, `SEMINA_LAM`, `MITOSI_2LAM`)*.
+> ### **LA SCALA MINIMA È VIVA, E MORDE.**
+>
+> **Non si è tolta una garanzia: si è tolto un DOPPIONE INERTE**, mentre la garanzia *«nessuna
+> lunghezza sotto `LAM`»* **resta in piedi ed è quella che lavora**. Il titolo di questo documento
+> e i paragrafi 1-5 vanno letti con questa correzione; **non li riscrivo** *(par.8: un
+> ragionamento non si riscrive quando si rivela impreciso, **si annota**)*.
+
+## La misura che lo dimostra — **sola lettura, nessun run**
+
+`csv/_test_fork/_etc_lam_stati.py` *(blob sha1-BYTE `0b89b496`)* sui **16 stati salvati** del
+pilota. `LAM = 0.8`, letto **dal sorgente**.
+
+| seme | passo 0 | passo 40 | passo 80 | passo 120 |
+|---|---|---|---|---|
+| **11** | `0.800006` | `0.800039` | `0.800000` | `0.800000` |
+| **12** | `0.800003` | `0.800070` | `0.800143` | `0.800000` |
+| **13** | `0.800001` | `0.800049` | `0.800049` | `0.800000` |
+| **14** | `0.800002` | `0.800035` | `0.800095` | `0.800000` |
+
+### **`min(d) = LAM` ESATTAMENTE, in ogni stato e ogni checkpoint.**
+### **ZERO archi con `d < LAM`, sommati su tutti e 16.**
+
+> ### 📌 **E il confronto che chiude la questione:** il pavimento vecchio, `0.05`, sta **16 volte
+> più in basso** del minimo osservato. **Non avrebbe potuto mordere nemmeno se fosse stato vivo.**
+> Il fatto che `:4456` non esegua **non è quello che tiene `d` sopra `LAM`**: a tenerlo è la
+> **scala minima**, e si vede dal fatto che il minimo sta **appoggiato esattamente su `LAM`**,
+> non a caso sopra.
+
+**Conseguenza per il passo (b):** ciò che esce dal simulatore è **il doppione**, non la legge.
+**E il sigillo della rimozione — stato byte-identico su 3 passi — è esattamente la prova che il
+doppione non mordeva.**

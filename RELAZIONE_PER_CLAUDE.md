@@ -4274,3 +4274,33 @@ non è stato esercitato.**
 
 > ### 🛑 **STOP.** Prossimo passo: **FASE 1 (a), i presidi**, e `H-ETC-2` **per primo e da solo**.
 > Deve **fallire** sul blob `e203f9a8`; se passa, mi fermo e non lo consegno.
+
+---
+
+# ⚠ **CORREZIONE: non è morto «il pavimento». È morto il DOPPIONE** *(2026-09-27)*
+
+**Hai ragione, e la formulazione era imprecisa in modo che contava.** Quello che non gira è il
+**pavimento VECCHIO** — `_floor_d0` = `0.05` assoluto, o il **5 %** della mediana di `d0` con
+`PAV_COM`. **Al suo posto c'è la SCALA MINIMA `LAM`** *(`SCALA_MIN_PASSO`, `_nasce`, `SEMINA_LAM`,
+`MITOSI_2LAM`)*, ### **che è viva e che morde.**
+
+## La misura, **sola lettura, nessun run**, sui 16 stati del pilota
+
+| seme | passo 0 | passo 40 | passo 80 | passo 120 |
+|---|---|---|---|---|
+| **11** | `0.800006` | `0.800039` | `0.800000` | `0.800000` |
+| **12** | `0.800003` | `0.800070` | `0.800143` | `0.800000` |
+| **13** | `0.800001` | `0.800049` | `0.800049` | `0.800000` |
+| **14** | `0.800002` | `0.800035` | `0.800095` | `0.800000` |
+
+### **`min(d) = LAM = 0.8` ESATTAMENTE, 16 stati su 16. Zero archi sotto `LAM`.**
+
+> ### 📌 **E il confronto che chiude la questione:** il pavimento vecchio, `0.05`, sta **16 volte
+> più in basso** del minimo osservato — **non avrebbe potuto mordere nemmeno se fosse stato vivo.**
+> Che `:4456` non esegua **non è ciò che tiene `d` sopra `LAM`**: a tenerlo è la **scala minima**,
+> e si vede dal fatto che il minimo è **appoggiato esattamente su `LAM`**, non a caso sopra.
+
+**Quindi al passo (b) esce dal simulatore un DOPPIONE INERTE, non una garanzia** — e il sigillo
+byte-identico su 3 passi è **esattamente la prova che il doppione non mordeva**. Corretto
+nell'indice *(`CLIP-INVENTARIO`, `ETC-PASSO`)* e annotato in coda al task history, **senza
+riscrivere i paragrafi precedenti** *(par.8: un ragionamento impreciso si annota, non si riscrive)*.

@@ -1037,3 +1037,9 @@ si rigenera, non si riusa»* — non veniva dal sorgente accanto.
 **Condizioni:** scena `(ii)(a)`, seme `11`, `n = 2107`, `m = 70199`, **3 passi**, simulatore
 `e203f9a8`. **⚠ LIMITE:** `_g_smp_chirurgie = 0` — **la chirurgia sullo snapshot non è stata
 esercitata**, perché in 3 passi nessuna mitosi ha diviso un arco.
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_etc_lam_stati.py` | `0b89b496` | `python csv/_test_fork/_etc_lam_stati.py` | **`min(d)` e quanti archi stanno sotto `LAM`** nei **16 stati salvati** del pilota. **Sola lettura, nessun run.** `LAM` si legge **dal sorgente** | ### **`min(d) = 0.800000 = LAM` esatto** in 16/16 stati · **0 archi sotto `LAM`** · il pavimento vecchio (`0.05`) sta **16×** più in basso |
+
+**Referto:** `csv/_test_fork/_etc_lam_stati.json` *(blob byte `0ec8cc57`)*.
