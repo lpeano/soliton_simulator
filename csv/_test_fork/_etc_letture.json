@@ -1,0 +1,1359 @@
+{
+ "leggi": {
+  "memoria_hebbiana_moto": {
+   "legge": [
+    "_S",
+    "_costruisci_struttura",
+    "_deg",
+    "_dphi",
+    "_floor_d0",
+    "_g_inv_giri",
+    "_g_kernel_alpha_tot",
+    "_g_nb_grav_proiez_tot",
+    "_g_rampa_tot",
+    "_g_s2full_tot",
+    "_g_tempo_luce_tot",
+    "_g_traccia_d0",
+    "_lam_archi",
+    "_mat",
+    "_nb",
+    "_nb_grav",
+    "_pav_d0",
+    "_perm",
+    "_pesi",
+    "_rho_sorgente",
+    "_sd0",
+    "_smorza",
+    "_smp_chiudi",
+    "_tempo_luce_nodo",
+    "_tempo_rampa",
+    "_traccia_coesione",
+    "_traccia_d0",
+    "calcola_psi",
+    "copy",
+    "d",
+    "d0",
+    "eta",
+    "get",
+    "i",
+    "j",
+    "lambda_nodi",
+    "mean",
+    "mem_mot",
+    "n",
+    "phi",
+    "phi_s",
+    "pos",
+    "pozzo_grafo",
+    "psi",
+    "psi_spin",
+    "satura",
+    "tw",
+    "verifica_invarianti"
+   ],
+   "scrive": [
+    "_S",
+    "_calcolo_schermatura",
+    "_calcpsi_chiamate",
+    "_calcpsi_origini",
+    "_calcpsi_w_none",
+    "_cs_chiamate",
+    "_cs_fallback",
+    "_cs_fallback_ultimo",
+    "_diag_amp_med",
+    "_diag_sin2_med",
+    "_diag_sin2_p95",
+    "_g_cc_salti",
+    "_g_cc_scarto_d0",
+    "_g_cc_shape",
+    "_g_cc_tot",
+    "_g_cc_usi",
+    "_g_cct_allarga",
+    "_g_cct_archi",
+    "_g_cct_min",
+    "_g_cct_rapmax",
+    "_g_cct_salti",
+    "_g_cct_stringe",
+    "_g_cct_tot",
+    "_g_cct_usi",
+    "_g_cct_viol",
+    "_g_coes_adim_usi",
+    "_g_coes_archi",
+    "_g_coes_max",
+    "_g_coes_satura",
+    "_g_coes_tetto",
+    "_g_inv_controllate",
+    "_g_inv_giri",
+    "_g_inv_peq_nan_ok",
+    "_g_inv_violati",
+    "_g_k_frange_spento",
+    "_g_k_frange_tot",
+    "_g_kernel_alpha_quando",
+    "_g_kernel_alpha_salti",
+    "_g_kernel_alpha_shape",
+    "_g_kernel_alpha_tot",
+    "_g_nb_grav_proiez_quando",
+    "_g_nb_grav_proiez_salti",
+    "_g_nb_grav_proiez_shape",
+    "_g_nb_grav_proiez_tot",
+    "_g_rampa_cali",
+    "_g_rampa_calo_max",
+    "_g_rampa_calo_quando",
+    "_g_rampa_calo_somma",
+    "_g_rampa_forma",
+    "_g_rampa_nodi",
+    "_g_rampa_prec",
+    "_g_rampa_prec_disallineata",
+    "_g_rampa_prec_shape",
+    "_g_rampa_quando",
+    "_g_rampa_senza_archi",
+    "_g_rampa_shape",
+    "_g_rampa_sotto1",
+    "_g_rampa_tot",
+    "_g_s2full_conmask",
+    "_g_s2full_fuori",
+    "_g_s2full_fuori_max",
+    "_g_s2full_quando",
+    "_g_s2full_tot",
+    "_g_sm_discese",
+    "_g_sm_max_giu",
+    "_g_sm_patol",
+    "_g_sm_pav_saltati",
+    "_g_sm_tot",
+    "_g_sm_viol_giu",
+    "_g_sm_viol_id",
+    "_g_smp_chiusure",
+    "_g_smp_disallineati",
+    "_g_smp_discese",
+    "_g_smp_nulli",
+    "_g_smp_passanti",
+    "_g_smp_salite",
+    "_g_smp_shape",
+    "_g_tempo_luce_quando",
+    "_g_tempo_luce_salti",
+    "_g_tempo_luce_shape",
+    "_g_tempo_luce_tot",
+    "_g_traccia_d0",
+    "_nb",
+    "_perm",
+    "_pozzo_d_nonpos",
+    "_pozzo_d_tot",
+    "_sin2_vir",
+    "_smp_d",
+    "_smp_d0",
+    "_traccia_coes_log",
+    "_traccia_d0_log",
+    "d0",
+    "data",
+    "mem_mot",
+    "phi",
+    "psi",
+    "psi_spin",
+    "rho_spin"
+   ],
+   "sporche": {
+    "_S": [
+     "step",
+     "mitosi",
+     "rilassa_disegno"
+    ],
+    "_deg": [
+     "mitosi"
+    ],
+    "_g_kernel_alpha_tot": [
+     "step",
+     "rilassa_disegno"
+    ],
+    "_g_rampa_tot": [
+     "step",
+     "rilassa_disegno"
+    ],
+    "_g_tempo_luce_tot": [
+     "step",
+     "rilassa_disegno"
+    ],
+    "_g_traccia_d0": [
+     "step",
+     "mitosi"
+    ],
+    "_nb": [
+     "step",
+     "mitosi"
+    ],
+    "_perm": [
+     "step",
+     "mitosi",
+     "rilassa_disegno"
+    ],
+    "d": [
+     "step",
+     "mitosi"
+    ],
+    "d0": [
+     "step",
+     "mitosi"
+    ],
+    "eta": [
+     "step",
+     "mitosi"
+    ],
+    "i": [
+     "mitosi"
+    ],
+    "j": [
+     "mitosi"
+    ],
+    "mem_mot": [
+     "mitosi"
+    ],
+    "phi": [
+     "step",
+     "mitosi"
+    ],
+    "phi_s": [
+     "step",
+     "mitosi"
+    ],
+    "pos": [
+     "mitosi",
+     "rilassa_disegno"
+    ],
+    "psi": [
+     "step",
+     "rilassa_disegno"
+    ],
+    "psi_spin": [
+     "step",
+     "rilassa_disegno"
+    ],
+    "tw": [
+     "step",
+     "mitosi"
+    ]
+   }
+  },
+  "mitosi": {
+   "legge": [
+    "_costruisci_struttura",
+    "_cs_arco_da_nodo",
+    "_deg",
+    "_dphi",
+    "_eredita_spinore_figli",
+    "_fattore_tempo_arco",
+    "_floor_d0",
+    "_g_tors4pi_tot",
+    "_g_traccia_d0",
+    "_grado",
+    "_nasce",
+    "_nb",
+    "_nb_prec",
+    "_pav_d0",
+    "_psi_prec",
+    "_psi_spinor",
+    "_r_nodo_mitosi",
+    "_rep",
+    "_rho_sorgente",
+    "_sd0",
+    "_smorza",
+    "_smp_chirurgia",
+    "_spinor_lift",
+    "_tau_arco_causale",
+    "_traccia_d0",
+    "_tum_cs_tot",
+    "_tum_r_tot",
+    "_tum_t_tot",
+    "_wphi",
+    "append",
+    "conc_archi",
+    "conc_nodi",
+    "coppie_nate",
+    "copy",
+    "d",
+    "d0",
+    "eta",
+    "get",
+    "i",
+    "j",
+    "mem_mot",
+    "n",
+    "nati",
+    "negate",
+    "normal",
+    "omega_s",
+    "peq",
+    "perc_chi",
+    "perc_geom",
+    "perc_tw",
+    "phi",
+    "phi0",
+    "phi_s",
+    "phivel",
+    "pos",
+    "psi",
+    "random",
+    "rng",
+    "satura",
+    "tw",
+    "twp",
+    "vd"
+   ],
+   "scrive": [
+    "_S",
+    "_cicli_topologici",
+    "_cs_nodo_prev",
+    "_deg",
+    "_g_m2l_dmin",
+    "_g_m2l_negati",
+    "_g_m2l_tot",
+    "_g_nati_mitosi",
+    "_g_nati_mitosi_ev",
+    "_g_nati_schwinger",
+    "_g_nati_schwinger_ev",
+    "_g_peqn_archi",
+    "_g_peqn_ev",
+    "_g_peqn_mediana",
+    "_g_sm_discese",
+    "_g_sm_max_giu",
+    "_g_sm_nascite",
+    "_g_sm_patol",
+    "_g_sm_pav_saltati",
+    "_g_sm_tot",
+    "_g_sm_viol_giu",
+    "_g_sm_viol_id",
+    "_g_smp_chirurgie",
+    "_g_smp_passanti",
+    "_g_tors4pi_quando",
+    "_g_tors4pi_salti",
+    "_g_tors4pi_shape",
+    "_g_tors4pi_tot",
+    "_g_traccia_d0",
+    "_nb",
+    "_nb_prec",
+    "_nb_ret",
+    "_peqn_idx",
+    "_perm",
+    "_psi_prec",
+    "_psi_spin_prec",
+    "_psi_spinor",
+    "_rep",
+    "_rep_dte_assente",
+    "_rep_dte_fallback",
+    "_rep_guardia_salti",
+    "_rep_guardia_shape",
+    "_rep_guardia_tot",
+    "_rep_realloc",
+    "_rep_scarto_max",
+    "_rep_taupp_clamp",
+    "_rep_taupp_tot",
+    "_spinor_lift",
+    "_traccia_d0_log",
+    "_tum_clip0_prob",
+    "_tum_clip_prob",
+    "_tum_clip_prob_tot",
+    "_tum_clip_rep",
+    "_tum_clip_rep_tot",
+    "_tum_cs_forma",
+    "_tum_cs_quando",
+    "_tum_cs_salti",
+    "_tum_cs_tot",
+    "_tum_eulero_gt1",
+    "_tum_eulero_tot",
+    "_tum_r_forma",
+    "_tum_r_quando",
+    "_tum_r_salti",
+    "_tum_r_tot",
+    "_tum_t_forma",
+    "_tum_t_quando",
+    "_tum_t_salti",
+    "_tum_t_tot",
+    "conc_archi",
+    "coppie_nate",
+    "d",
+    "d0",
+    "eta",
+    "i",
+    "j",
+    "mem_mot",
+    "nati",
+    "negate",
+    "omega_s",
+    "peq",
+    "perc_chi",
+    "perc_geom",
+    "perc_tw",
+    "phi",
+    "phi0",
+    "phi_s",
+    "phivel",
+    "pos",
+    "tw",
+    "twp",
+    "ultima_frac_antifase",
+    "ultima_prob_coppia",
+    "vd"
+   ],
+   "sporche": {
+    "_g_traccia_d0": [
+     "step"
+    ],
+    "_nb": [
+     "step"
+    ],
+    "_nb_prec": [
+     "step"
+    ],
+    "_psi_prec": [
+     "step"
+    ],
+    "_psi_spinor": [
+     "step"
+    ],
+    "_spinor_lift": [
+     "step"
+    ],
+    "d": [
+     "step"
+    ],
+    "d0": [
+     "step"
+    ],
+    "eta": [
+     "step"
+    ],
+    "omega_s": [
+     "step"
+    ],
+    "peq": [
+     "step"
+    ],
+    "perc_chi": [
+     "step"
+    ],
+    "perc_geom": [
+     "step"
+    ],
+    "phi": [
+     "step"
+    ],
+    "phi_s": [
+     "step"
+    ],
+    "phivel": [
+     "scuoti_vuoto",
+     "step"
+    ],
+    "psi": [
+     "step"
+    ],
+    "tw": [
+     "step"
+    ],
+    "twp": [
+     "step"
+    ],
+    "vd": [
+     "step"
+    ]
+   }
+  },
+  "rilassa_disegno": {
+   "legge": [
+    "_S",
+    "_costruisci_struttura",
+    "_deg",
+    "_g_kernel_alpha_tot",
+    "_g_rampa_tot",
+    "_g_tempo_luce_tot",
+    "_lam_archi",
+    "_mat",
+    "_perm",
+    "_pesi",
+    "_rho_sorgente",
+    "_tempo_luce_nodo",
+    "_tempo_rampa",
+    "_togli_rotazione_rigida",
+    "calcola_psi",
+    "copy",
+    "d",
+    "eta",
+    "i",
+    "j",
+    "lambda_nodi",
+    "mean",
+    "n",
+    "phi",
+    "pos",
+    "psi",
+    "psi_spin",
+    "satura",
+    "tw"
+   ],
+   "scrive": [
+    "_S",
+    "_calcolo_schermatura",
+    "_calcpsi_chiamate",
+    "_calcpsi_origini",
+    "_calcpsi_w_none",
+    "_cs_chiamate",
+    "_cs_fallback",
+    "_cs_fallback_ultimo",
+    "_g_kernel_alpha_quando",
+    "_g_kernel_alpha_salti",
+    "_g_kernel_alpha_shape",
+    "_g_kernel_alpha_tot",
+    "_g_rampa_cali",
+    "_g_rampa_calo_max",
+    "_g_rampa_calo_quando",
+    "_g_rampa_calo_somma",
+    "_g_rampa_forma",
+    "_g_rampa_nodi",
+    "_g_rampa_prec",
+    "_g_rampa_prec_disallineata",
+    "_g_rampa_prec_shape",
+    "_g_rampa_quando",
+    "_g_rampa_senza_archi",
+    "_g_rampa_shape",
+    "_g_rampa_sotto1",
+    "_g_rampa_tot",
+    "_g_tempo_luce_quando",
+    "_g_tempo_luce_salti",
+    "_g_tempo_luce_shape",
+    "_g_tempo_luce_tot",
+    "_perm",
+    "data",
+    "pos",
+    "psi",
+    "psi_spin",
+    "rho_spin"
+   ],
+   "sporche": {
+    "_S": [
+     "step",
+     "mitosi"
+    ],
+    "_deg": [
+     "mitosi"
+    ],
+    "_g_kernel_alpha_tot": [
+     "step"
+    ],
+    "_g_rampa_tot": [
+     "step"
+    ],
+    "_g_tempo_luce_tot": [
+     "step"
+    ],
+    "_perm": [
+     "step",
+     "mitosi"
+    ],
+    "d": [
+     "step",
+     "mitosi"
+    ],
+    "eta": [
+     "step",
+     "mitosi"
+    ],
+    "i": [
+     "mitosi"
+    ],
+    "j": [
+     "mitosi"
+    ],
+    "phi": [
+     "step",
+     "mitosi"
+    ],
+    "pos": [
+     "mitosi"
+    ],
+    "psi": [
+     "step"
+    ],
+    "psi_spin": [
+     "step"
+    ],
+    "tw": [
+     "step",
+     "mitosi"
+    ]
+   }
+  },
+  "scuoti_vuoto": {
+   "legge": [
+    "_g_calore_chi_tot",
+    "calcola_psi",
+    "d",
+    "d0",
+    "i",
+    "j",
+    "n",
+    "normal",
+    "perc_chi",
+    "phivel",
+    "psi",
+    "rng"
+   ],
+   "scrive": [
+    "_g_calore_chi_quando",
+    "_g_calore_chi_salti",
+    "_g_calore_chi_shape",
+    "_g_calore_chi_tot",
+    "phivel"
+   ],
+   "sporche": {}
+  },
+  "step": {
+   "legge": [
+    "_S",
+    "_aggiorna_lift_spinoriale",
+    "_bloch_a_spinore",
+    "_bloch_ritardato",
+    "_coppia_interferenza",
+    "_costruisci_struttura",
+    "_cs_arco_da_nodo",
+    "_cs_nodo",
+    "_deg",
+    "_dphi",
+    "_estendi_psi_spinor",
+    "_feedback_spinoriale_archi",
+    "_floor_d0",
+    "_g_chi_da_spinore_tot",
+    "_g_chicore_passo_tot",
+    "_g_ci_tot",
+    "_g_kernel_alpha_tot",
+    "_g_peq_passi",
+    "_g_rampa_tot",
+    "_g_snap_psispin_tot",
+    "_g_spinore_vivo_tot",
+    "_g_tempo_luce_tot",
+    "_g_temposegno_tot",
+    "_g_traccia_d0",
+    "_g_zeta_vir_a_tot",
+    "_g_zeta_vir_b_tot",
+    "_inerzia_invocazioni",
+    "_lam_archi",
+    "_link_su2_N",
+    "_mat",
+    "_mat2",
+    "_nb",
+    "_nb_grav",
+    "_nb_prec",
+    "_nb_ret",
+    "_passo_spinoriale",
+    "_pav_d0",
+    "_peq_esatto",
+    "_perm",
+    "_pesi",
+    "_por_invoc",
+    "_psi_prec",
+    "_psi_spinor",
+    "_rho_sorgente",
+    "_sd0",
+    "_sin2_vir",
+    "_smorza",
+    "_smp_apri",
+    "_spinor_lift",
+    "_tempo_luce_nodo",
+    "_tempo_rampa",
+    "_traccia_d0",
+    "_traccia_peq",
+    "_traccia_vd",
+    "_w4",
+    "_w8",
+    "_wphi",
+    "astype",
+    "calcola_psi",
+    "chiralita_core_locale",
+    "copy",
+    "d",
+    "d0",
+    "dtype",
+    "eta",
+    "get",
+    "i",
+    "j",
+    "lambda_nodi",
+    "n",
+    "normal",
+    "omega_s",
+    "peq",
+    "perc_chi",
+    "perc_geom",
+    "phi",
+    "phi0",
+    "phi_s",
+    "phivel",
+    "pos",
+    "psi",
+    "psi_spin",
+    "ritmo",
+    "rng",
+    "satura",
+    "tw",
+    "twp",
+    "vd",
+    "xi_termo"
+   ],
+   "scrive": [
+    "_S",
+    "_calcolo_schermatura",
+    "_calcpsi_chiamate",
+    "_calcpsi_origini",
+    "_calcpsi_w_none",
+    "_chi_core_nodi",
+    "_chi_core_raggio",
+    "_chi_core_rho0",
+    "_chi_core_rhoc",
+    "_chi_geom_nodi",
+    "_cs_chiamate",
+    "_cs_fallback",
+    "_cs_fallback_ultimo",
+    "_cs_in_chiamate",
+    "_cs_in_fallback",
+    "_cs_lam_degenere",
+    "_cs_nodo_prev",
+    "_dt_e_ultimo",
+    "_fatt_cs_ultimo",
+    "_g_as_archi",
+    "_g_as_fuori",
+    "_g_as_max",
+    "_g_as_polo",
+    "_g_as_usi",
+    "_g_as_zero",
+    "_g_ccl_chi",
+    "_g_ccl_geom",
+    "_g_ccl_tot",
+    "_g_chi_da_spinore_quando",
+    "_g_chi_da_spinore_salti",
+    "_g_chi_da_spinore_shape",
+    "_g_chi_da_spinore_tot",
+    "_g_chibasc_su_chi",
+    "_g_chibasc_su_geom",
+    "_g_chicore_passo_quando",
+    "_g_chicore_passo_salti",
+    "_g_chicore_passo_shape",
+    "_g_chicore_passo_tot",
+    "_g_ci_nodi",
+    "_g_ci_nodi_senza_peso",
+    "_g_ci_nodi_tot",
+    "_g_ci_senza_array",
+    "_g_ci_senza_array_forma",
+    "_g_ci_senza_array_quando",
+    "_g_ci_senza_peso_nati",
+    "_g_ci_senza_peso_quando",
+    "_g_ci_tot",
+    "_g_ci_w_max",
+    "_g_ci_w_min",
+    "_g_ci_w_p50",
+    "_g_kernel_alpha_quando",
+    "_g_kernel_alpha_salti",
+    "_g_kernel_alpha_shape",
+    "_g_kernel_alpha_tot",
+    "_g_nb_prec_quando",
+    "_g_nb_prec_salti",
+    "_g_nb_prec_shape",
+    "_g_nb_prec_tot",
+    "_g_nsub_stop",
+    "_g_peq_archi",
+    "_g_peq_cfl_max",
+    "_g_peq_cfl_sopra1",
+    "_g_peq_cfl_sopra2",
+    "_g_peq_min",
+    "_g_peq_min_arco",
+    "_g_peq_min_dett",
+    "_g_peq_min_quando",
+    "_g_peq_neg",
+    "_g_peq_neg_dif",
+    "_g_peq_neg_ril",
+    "_g_peq_passi",
+    "_g_peqn_cal",
+    "_g_peqn_scarto_max",
+    "_g_peqn_uguali_rho",
+    "_g_peqn_vs_med",
+    "_g_peqx_bers_neg",
+    "_g_peqx_min",
+    "_g_peqx_neg",
+    "_g_peqx_salvati",
+    "_g_peqx_usi",
+    "_g_rampa_cali",
+    "_g_rampa_calo_max",
+    "_g_rampa_calo_quando",
+    "_g_rampa_calo_somma",
+    "_g_rampa_forma",
+    "_g_rampa_nodi",
+    "_g_rampa_prec",
+    "_g_rampa_prec_disallineata",
+    "_g_rampa_prec_shape",
+    "_g_rampa_quando",
+    "_g_rampa_senza_archi",
+    "_g_rampa_shape",
+    "_g_rampa_sotto1",
+    "_g_rampa_tot",
+    "_g_sm_discese",
+    "_g_sm_max_giu",
+    "_g_sm_patol",
+    "_g_sm_pav_saltati",
+    "_g_sm_tot",
+    "_g_sm_viol_giu",
+    "_g_sm_viol_id",
+    "_g_smp_aperture",
+    "_g_smp_d_chiusure",
+    "_g_smp_d_nsub",
+    "_g_smp_passanti",
+    "_g_snap_psispin_quando",
+    "_g_snap_psispin_salti",
+    "_g_snap_psispin_shape",
+    "_g_snap_psispin_tot",
+    "_g_spinore_vivo_quando",
+    "_g_spinore_vivo_salti",
+    "_g_spinore_vivo_shape",
+    "_g_spinore_vivo_tot",
+    "_g_tempo_luce_quando",
+    "_g_tempo_luce_salti",
+    "_g_tempo_luce_shape",
+    "_g_tempo_luce_tot",
+    "_g_temposegno_quando",
+    "_g_temposegno_salti",
+    "_g_temposegno_shape",
+    "_g_temposegno_tot",
+    "_g_traccia_d0",
+    "_g_traccia_vd",
+    "_g_zeta_vir_a_quando",
+    "_g_zeta_vir_a_salti",
+    "_g_zeta_vir_a_shape",
+    "_g_zeta_vir_a_tot",
+    "_g_zeta_vir_b_quando",
+    "_g_zeta_vir_b_salti",
+    "_g_zeta_vir_b_shape",
+    "_g_zeta_vir_b_tot",
+    "_inerzia_al_pavimento",
+    "_inerzia_invocazioni",
+    "_inerzia_sfondo_chiamate",
+    "_inerzia_sfondo_fallback",
+    "_inerzia_sfondo_passi",
+    "_inerzia_sfondo_ultima",
+    "_inerzia_tot",
+    "_med_f_prec",
+    "_med_f_ultimo",
+    "_nb",
+    "_nb_prec",
+    "_nb_ret",
+    "_peqn_idx",
+    "_perm",
+    "_por_invoc",
+    "_porta_A",
+    "_porta_A_shape",
+    "_porta_A_ultima",
+    "_porta_B",
+    "_porta_B_nan",
+    "_porta_B_nonpos",
+    "_porta_B_ultima",
+    "_psi_prec",
+    "_psi_spin_prec",
+    "_psi_spinor",
+    "_r_corrente",
+    "_ritmo_chiamate",
+    "_ritmo_f_mediana_nulla",
+    "_ritmo_f_tutto_nullo",
+    "_ritmo_guard4pi_ko",
+    "_ritmo_guard4pi_shape",
+    "_ritmo_med_assente",
+    "_ritmo_med_identico",
+    "_ritmo_med_non_promosso",
+    "_ritmo_med_sul_pavimento",
+    "_ritmo_sicurezza",
+    "_ritmo_sicurezza_shape",
+    "_ritmo_snap_identico",
+    "_sfb_amp_coppia",
+    "_sfb_amp_fb",
+    "_sfb_applicato",
+    "_sfb_chiamate",
+    "_sfb_lift_corto",
+    "_sfb_lift_shape",
+    "_sfb_mask_vuota",
+    "_sfb_off",
+    "_sfb_rapporto_max",
+    "_sfb_rapporto_n",
+    "_sfb_rapporto_som",
+    "_sfondo_ko_con_archi",
+    "_sfondo_ko_peq",
+    "_sfondo_ko_rho",
+    "_sfondo_ko_senza_archi",
+    "_sfondo_ko_ultima_peq",
+    "_sfondo_ko_ultima_rho",
+    "_smp_d",
+    "_smp_d0",
+    "_spin_feedback_last",
+    "_spinor_lift",
+    "_taup_Inodi_chiamate",
+    "_taup_Inodi_fallback",
+    "_taup_causale_scatti",
+    "_taup_causale_su_degenere",
+    "_taup_causale_tot",
+    "_taup_cfl_max",
+    "_taup_cs_clamp",
+    "_taup_cs_clamp_tot",
+    "_taup_peq_deg_passi",
+    "_taup_peq_deg_ultimo",
+    "_taup_peq_degenere",
+    "_traccia_d0_log",
+    "_traccia_vd_log",
+    "_xi_chiamate",
+    "_xi_esteso",
+    "_xi_nuovi",
+    "_xi_rumore",
+    "d",
+    "d0",
+    "data",
+    "eta",
+    "omega_s",
+    "peq",
+    "perc_chi",
+    "perc_geom",
+    "phi",
+    "phi_s",
+    "phivel",
+    "psi",
+    "psi_spin",
+    "rho_spin",
+    "tw",
+    "twp",
+    "vd",
+    "xi_termo"
+   ],
+   "sporche": {
+    "phivel": [
+     "scuoti_vuoto"
+    ]
+   }
+  }
+ },
+ "ordine": [
+  "scuoti_vuoto",
+  "step",
+  "mitosi",
+  "rilassa_disegno",
+  "memoria_hebbiana_moto"
+ ],
+ "sporche": [
+  {
+   "attributo": "phivel",
+   "legge": "step",
+   "scritto_da": [
+    "scuoti_vuoto"
+   ]
+  },
+  {
+   "attributo": "_g_traccia_d0",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_nb",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_nb_prec",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_psi_prec",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_psi_spinor",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_spinor_lift",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "d",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "d0",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "eta",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "omega_s",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "peq",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "perc_chi",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "perc_geom",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "phi",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "phi_s",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "phivel",
+   "legge": "mitosi",
+   "scritto_da": [
+    "scuoti_vuoto",
+    "step"
+   ]
+  },
+  {
+   "attributo": "psi",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "tw",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "twp",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "vd",
+   "legge": "mitosi",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_S",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "_deg",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "_g_kernel_alpha_tot",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_g_rampa_tot",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_g_tempo_luce_tot",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_perm",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "d",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "eta",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "i",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "j",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "phi",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "pos",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "psi",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "psi_spin",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "tw",
+   "legge": "rilassa_disegno",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "_S",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "mitosi",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "_deg",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "_g_kernel_alpha_tot",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "_g_rampa_tot",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "_g_tempo_luce_tot",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "_g_traccia_d0",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "_nb",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "_perm",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "mitosi",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "d",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "d0",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "eta",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "i",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "j",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "mem_mot",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "phi",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "phi_s",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "pos",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "mitosi",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "psi",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "psi_spin",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "tw",
+   "legge": "memoria_hebbiana_moto",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  }
+ ]
+}

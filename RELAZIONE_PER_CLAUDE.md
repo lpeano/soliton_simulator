@@ -4026,3 +4026,87 @@ commenti che si contraddicono)*, `CENS-B15` *(un condizionale scritto in un comm
 
 **Serve da Luca:** il `SI`/`NO` di queste dieci. **Nel frattempo restano `DA-DECIDERE` e non
 bloccano**, e **parto con (a) FASE 0** come da mandato.
+
+---
+
+# ⚙ **`ETC-PASSO`, LA CURA (a): FASE 0 — ANALISI E CRITERI** *(2026-09-27)*
+
+*(`doc/TASK_HISTORY/2026-09-27_etc-passo.md`.)*
+
+> ### 🛑 **NESSUN CODICE DEL SIMULATORE È CAMBIATO.** Blob `e203f9a8`, **lo stesso di `HEAD`**.
+> **E la FASE 1 non parte** finché Luca non approva *(suo chiarimento di oggi)*.
+
+## Il numero che regge tutto: **56 letture sporche**
+
+`csv/_test_fork/_etc_letture.py` censisce **dall'AST** chi legge stato che una legge **precedente
+dello stesso passo** ha già scritto, seguendo le chiamate a metodi di `Rete`.
+
+| legge | sporche |
+|---|---|
+| `scuoti_vuoto` | **0** |
+| `step` | **1** *(`phivel`, da `scuoti_vuoto`)* |
+| `mitosi` | **20** |
+| `rilassa_disegno` | **15** |
+| `memoria_hebbiana_moto` | **20** |
+
+### **56 letture sporche, 31 attributi, 4 leggi su 5.**
+
+**E il limite lo dico prima dei numeri (`A9`):** è un'analisi **statica e per nome** — alias,
+`getattr` e rami mai eseguiti non si vedono. **`56` è un LIMITE INFERIORE.** Serve a **progettare**
+la cura, **non** a certificarla.
+
+## ⚠ **Il fatto che cambia la forma della cura: `SYNC_UPDATE` ESISTE GIÀ**
+
+`:936`, flag `--sync`, default OFF, e il suo commento promette **proprio** *«indipendente
+dall'ordine di aggiornamento (Jacobi invece di Gauss-Seidel)»*. **Ma il suo raggio è UNA legge su
+cinque:** 7 usi in `_passo_spinoriale`, 6 in `step`, e ### **ZERO** nelle altre quattro.
+
+> **Quindi tutte e 56 le letture sporche stanno FUORI dal raggio di `--sync`** — compresa l'unica
+> di `step`, che arriva da `scuoti_vuoto`.
+> ### **E ne discende una correzione a una mia riga di stamattina:** avevo scritto che (a) *chiude*
+> `CENS-B7` *(«`--sync` mai misurata»)*. **(a) non MISURA `--sync`: lo ESTENDE.** Il
+> `blocca_run_base = SI` resta giusto, **il motivo no**, ed è nel TODO da riscrivere.
+
+## Le altre due misure
+
+**`calcola_psi` senza `w`:** 19 siti nel file, 17 senza `w`; ristretti a ciò che è **raggiungibile
+dalle cinque leggi**, **10 siti, 8 senza `w`** — 7 vivi e 1 nel ramo morto `L_CONSERVA`.
+**È la soglia di `H-ETC-1`**, e il suo caso-che-deve-fallire non è solo *«rimetti una chiamata
+senza `w`»*: è **«girato sul codice di oggi deve contare 8, non 0»**.
+
+**`pos` (il DISEGNO) entra nella fisica**, e **non è un difetto nuovo** — `A3-DISEGNO` è già
+nell'indice e il suo titolo lo dice già. La FASE 0 aggiunge i siti: `:6622` in
+`memoria_hebbiana_moto` **senza nessuna guardia** → `grad_tw` → `mem_mot` e il blocco
+`GRAV_BIFASE`; `:7010` → con `MEM_MOTO_TUTTO` **scrive `self.phi`**.
+
+> ### ⚠ **E LA RIGA CHE CONTA: la cura (a) NON chiude `A3-DISEGNO`, e non fingerò che lo faccia.**
+> Congelare `pos` a inizio passo rende la dipendenza **sincrona**; **non la toglie**. Dopo (a),
+> `pos` entrerebbe ancora nella fisica — solo quello di ieri invece di quello di oggi.
+> **Un difetto reso ordinato resta un difetto.**
+
+## Il progetto, e ciò che **non si può** rendere sincrono
+
+I 31 attributi stanno in **quattro classi**, e **solo una si fotografa**: ① **stato fisico** *(21
+attributi)* **sì**; ② **struttura** *(`i`, `j`, `n`, le lunghezze)* **no — una nascita non si
+nasconde**, e per `9-ter` la mitosi è *creazione di spazio*; ③ **cache** *(`_S`, `_perm`, `_deg`)*
+**no, si ricostruiscono** — congelare una cache mentre la struttura cresce è un **bug**, non
+sincronia; ④ **contatori** *(`_g_*_tot`)* **no — l'accumulo È il loro scopo**.
+**Fuori da tutto resta il cuore simplettico `phivel → phi`:** sequenziale **per costruzione**, e
+il codice lo dichiara già a `:940`.
+
+## I due presidi, ciascuno col caso che **deve fallire**
+
+**`H-ETC-1`** *(zero `calcola_psi` senza `w`)* e **`H-ETC-2`** *(permutare le cinque leggi dà lo
+stesso stato)*. **Sono nell'indice come `presidio` APERTI e NON CABLATI** *(`A9`: oggi non
+impediscono nulla)*.
+
+> ### 🛑 **IL CASO PIÙ IMPORTANTE, e fissa in anticipo quando mi fermo:** `H-ETC-2`, girato sul
+> codice di **OGGI** — cura spenta — **DEVE FALLIRE**. Con 56 letture sporche, un passo che
+> risultasse già indipendente dall'ordine vorrebbe dire che **il presidio non sta guardando lo
+> stato**. **In quel caso mi fermo e non lo consegno.**
+> **E una permutazione non è lecita:** `mitosi` cambia la struttura, quindi si ammettono **solo le
+> permutazioni che non spostano `mitosi`** — una che la sposta non misura la sincronia, **misura
+> la nascita**.
+
+**Il prossimo passo è `H-ETC-2` DA SOLO, prima della cura: è lui a decidere se la cura è
+misurabile.** Non parte senza l'approvazione.

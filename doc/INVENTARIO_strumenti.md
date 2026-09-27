@@ -1003,3 +1003,16 @@ col blob del simulatore **`e203f9a8`** *(byte grezzi)*, semi `11,12,13,14`, chec
 |---|---|---|---|---|
 | `csv/_test_fork/_video_scena.py` | `25aedde8` | `--fps 8 --dpi 120` · `--max-frame N` | **il renderer a DUE pannelli**: a sinistra la **vista di sempre** col `vmax` **FISSO**, a destra la **coerenza interna** col riferimento **co-rotante per massa**; contorno delle regioni, diagnostici **per fotogramma**, didascalia `A3-DISEGNO` | **61/61 fotogrammi**, `8.56 MB`, `60.5 s` di rendering |
 | `csv/_test_fork/_pilota_prova1_braccio.py` | `6a80d3eb` | `--salva-stati --ogni 2` | salva stati, fotogrammi e coorti, **tutti LOCALI** | `V1` **provato**: `0` campi diversi contro il primo pilota |
+
+---
+
+## `ETC-PASSO` — la cura (a), **FASE 0** *(2026-09-27)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_etc_letture.py` | `cea93194` | `python csv/_test_fork/_etc_letture.py` | **chi legge stato che una legge precedente dello STESSO passo ha gia' scritto**: censimento **dall'AST**, ricorsivo sulle chiamate a metodi di `Rete`, per le cinque leggi lette da `csv/_passo.py` | **56 letture sporche** su **31 attributi**, in **4 leggi su 5** *(`0/1/20/15/20`)*, sul blob del simulatore **`e203f9a8`** |
+
+**Referto:** `csv/_test_fork/_etc_letture.json` *(committato)*.
+**⚠ IL LIMITE E' DICHIARATO NEL DOCSTRING:** analisi **statica e per nome** — alias, `getattr` e
+rami mai eseguiti non si vedono. **`56` e' un LIMITE INFERIORE**, e serve a **progettare** la cura,
+non a certificarla: chi certifica e' `H-ETC-2`.
