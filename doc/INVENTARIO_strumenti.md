@@ -1184,3 +1184,11 @@ python csv/_test_fork/_hashseed_prova.py --confronta PRIMA.npz DOPO.npz
 > ### ⚠ **Il byte-identico DA SOLO non basta per questo sigillo:** la fotografia serve al freno, e il
 > freno chiude **solo se è aperta** — un confine sparito darebbe lo stesso stato. **Sono i contatori
 > a distinguere le due cose.**
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_etc_schedulatore.py` | `83405bd9` | `python csv/_test_fork/_etc_schedulatore.py` | i **tre inventari** del piano dello schedulatore: il **TIPO** di ogni funzione del passo *(dedotto da cosa scrive)*, **cosa scrive ogni legge** e in che forma, e **tutte le letture di `pos`** nelle leggi fisiche | **57** funzioni: `dinamica` 9, `vincolo` 1, `disegno` 2, `osservatore` 44, **`AMBIGUA` 1** *(`mitosi`)* · **11** letture di `pos` in 5 funzioni |
+
+**Referto:** `csv/_test_fork/_etc_schedulatore.json`. **Piano:** `doc/PIANO_schedulatore_passo.md`.
+**⚠ Analisi STATICA e PER NOME**, come la FASE 0: i tipi sono una **proposta da confermare
+leggendo**, e le `AMBIGUA` sono quelle che il mandato chiede di segnalare.

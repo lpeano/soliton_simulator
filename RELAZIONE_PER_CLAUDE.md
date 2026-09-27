@@ -4956,3 +4956,102 @@ esattamente la forma di divergenza che `(c)1` ha evitato. **Lo apro come primo l
 giro, con il suo tag e il suo sigillo**, invece di cominciarlo in coda a una sessione lunga: un
 refactor a sei siti lasciato a metà lascerebbe il repo in uno stato che nessuno ha dichiarato
 *(`L-UN-PROMPT`)*.
+
+---
+
+# 🏗 **LO SCHEDULATORE DEL PASSO: analisi e piano** *(2026-09-27)*
+
+*(`doc/PIANO_schedulatore_passo.md`, dati da `csv/_test_fork/_etc_schedulatore.py`.)*
+### 🛑 **Nessun codice. Blob del simulatore `e06dcb4e`, prima e dopo.**
+
+## 1. I tipi, dedotti da **ciò che ogni funzione scrive**
+
+Su **57 funzioni** del passo: **`dinamica` 9 · `vincolo` 1 · `disegno` 2 · `osservatore` 44 ·
+`AMBIGUA` 1** *(`mitosi`)*.
+
+**E tre cose che la tassonomia NON cattura:**
+**①** ### **i vincoli non sono funzioni di tipo `vincolo`: sono funzioni PURE applicate dai writer**
+*(`_nasce`, `_smorza`, `_sd0`, `satura`, `% _dphi()`)*. **È esattamente l'inversione che lo
+schedulatore deve fare.** *(Solo `_smp_chiudi` è un vincolo vero — ed è **già** il modello giusto,
+`C3`.)*
+**②** `mitosi` è ambigua perché scrive **struttura e stato insieme** — 30 scritture di stato. Non è
+un difetto della tassonomia: **è il cuore del problema**.
+**③** ### **un `osservatore` può violare `A3-DISEGNO` senza scrivere niente:** `chiralita_core_locale`
+legge `pos` e **il suo risultato entra in `step:5271`** quando `CHI_CORE` è acceso — **e il driver lo
+accende**. Il tipo per *scritture* non basta: serve anche **da dove legge**.
+
+## 2. Le cinque leggi, e ### **un buco nel progetto**
+
+`scuoti_vuoto` **1** scrittura di stato · `step` **26** · `mitosi` **30** ·
+`memoria_hebbiana_moto` **10** · `rilassa_disegno` ### **ZERO** — la conferma che **non è una legge
+del passo**.
+
+I **13** casi non componibili della 0-bis sono **già sciolti** *(8 pavimenti usciti in `(b)1`, `phi`
+e `_nb` approvati una volta sola)*. **Ma:**
+
+> ### ⚠ **«Somma delle variazioni» NON È DEFINITO dove due leggi ASSEGNANO lo stesso attributo — e
+> la 0-bis ha misurato che TUTTI E 21 gli attributi sono CONCORRENTI.**
+> `d0` è assegnato da `step`(4) + `mitosi`(4) + `memoria_hebbiana_moto`(12). Le **46** assegnazioni
+> indipendenti sono la classe più numerosa. ### **È la prima domanda che `T3` deve rispondere, e la
+> decisione è tua.**
+
+## 3. Le letture di `pos`: **11 siti in 5 funzioni** — e un mio errore di metodo
+
+`chiralita_core_locale :2200 :2201` · `step :5363 :5364` *(il Kuramoto)* · `mitosi :6185 :6352` ·
+`pozzo_grafo :6565` · `memoria_hebbiana_moto :6607 :6777 :6778 :6991`.
+
+> ### ⚠⚠ **L'incrocio «è in un ramo morto?» NON È AFFIDABILE, per la TERZA volta.** Dice che `:6185`
+> sarebbe morto: **è falso**, è `pos_figlio = 0.5·(pos[a]+pos[b])` — **come nasce la posizione di un
+> figlio**. È la stessa fragilità che `(b)3` ha già trovato **due volte**: **l'intervallo di RIGHE
+> non è l'unità giusta per un RAMO.**
+> ### **Quindi la lista di `T4` sono gli 11 siti, ognuno da validare LEGGENDO**, e **non scrivo un
+> conteggio automatico di quanti sono vivi.** Morti con certezza solo `:6777`/`:6778` *(`LS_AZIM` non
+> è nell'argv del driver)* e `:6565` *(ramo `else` di `POZZO_D`, già curato da `D02`)*.
+
+## 4. I presidi
+
+`H-P9` **si rafforza** *(da regola sul chiamante a architettura)* **ma va riscritto**: il nome
+`passo_pieno` cambia. `H-ETC-1` diventa **in gran parte superfluo** — se `w` sta nella fotografia,
+una legge **non ha modo di non riceverlo** — e resta **sentinella**, con l'atteso da **8** a **0**.
+### **`H-ETC-2` resta, ed è IL presidio dello schedulatore**, e si può **estendere** a permutare
+**tutte** le dinamiche. ### **Il contratto AST di `csv/_passo.py` CADE** e va sostituito da *«l'elenco
+effettivo si scrive nei risultati»* (`P5`). **`H-REG-R` diventa il cancello del registro.**
+**E `(c)1` non è lavoro buttato: `_smp_apri`/`_smp_chiudi` diventano FASE 1 e FASE 3, e `T1` lo
+assorbe.**
+
+## 5-6. Byte-identico, rischi, stima
+
+`T1` **sì, ed è il criterio** · `T2` **sì** · `T3` ### **no, e non deve esserlo** · `T4` **no** ·
+`T5` **sì** col default.
+### **Il rischio più alto è `T1`:** sei chiamanti devono passare per l'esecutore unico, ed **è la
+forma di divergenza che `(c)1` ha evitato con l'idempotenza**.
+**Stima: 17-19 commit + N** *(le cure di `T4`)*. **Nessuna stima di tempi:** non ho una misura di
+quanto duro io, e inventarla sarebbe un numero senza provenienza.
+
+## 7. La mia valutazione: **il progetto regge**
+
+> **Le regole che inseguiamo da tre giorni sono tutte della forma «questa legge non deve poter fare
+> X». Un presidio dice «non l'hai fatto». L'architettura dice «non puoi».**
+> **E la prova è nei numeri di questa sessione:** `PSI-FLASH` era un'intenzione **scritta nel
+> commento di `calcola_psi`** e non fatta rispettare; `SYNC_UPDATE` **prometteva Jacobi** e lo dava a
+> **un quinto** del passo; `A3-DISEGNO` è nell'indice **da giorni** ed è sopravvissuto a **due cure**.
+> ### **Tre regole scritte, tre non rispettate. Non è attenzione: è architettura.**
+
+**Tre cose che cambierei:**
+### **① il PRIMO commit di `T3` sia un DOCUMENTO** che elenca, per ogni attributo, quali leggi lo
+assegnano e quale regola di composizione serve — **e la decisione sia tua**. Altrimenti la scelgo io
+scrivendo codice, **che è `A1` al contrario**.
+### **② `mitosi` va spezzata in `T2`, non in `T3`:** così è un cambiamento **isolabile** mentre tutto
+il resto è ancora byte-identico. Un interruttore alla volta.
+### **③ `T4` va separato:** **la prima sotto-tappa** = `pos` esce dalla fotografia e i siti che restano **falliscono
+rumorosamente**; **la seconda** = le cure, una per caso, con te. **Perché `T4` chiede una risposta che il
+modello forse non ha: che cos'è una DIREZIONE in un grafo puro?** `dirarc` e `dir_radiale` **sono
+direzioni**, e con solo `(i, j, d)` **non esistono**. ### **Non è un refactor: è fisica da fare.**
+
+**Ciò che non cambierei:** *«la fotografia non contiene `pos`»* è **la parte migliore del progetto**.
+Rende `A3-DISEGNO` **impossibile per costruzione** invece che vietato per iscritto, ed è **la prima
+proposta che lo chiude davvero**.
+
+> ### ⚠ **E un limite mio:** tutte le tabelle vengono da analisi **statiche e per nome**, e in questa
+> sessione quel metodo mi ha ingannato **tre volte** sulla granularità delle righe. **I numeri sono
+> una base per decidere, non un verdetto**, e `T4` ha bisogno di **lettura umana sito per sito**.

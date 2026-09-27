@@ -1,0 +1,4291 @@
+{
+ "blob_sim": "e06dcb4eaa16ee5b1b1fba0071341006463db617",
+ "conta_tipi": {
+  "AMBIGUA": 1,
+  "dinamica": 9,
+  "disegno": 2,
+  "osservatore": 44,
+  "vincolo": 1
+ },
+ "forme_delle_cinque": {
+  "memoria_hebbiana_moto": {
+   "attributi": [
+    "_nb",
+    "d0",
+    "mem_mot",
+    "phi"
+   ],
+   "forme": {
+    "assegnazione": 3,
+    "incremento": 6,
+    "vincolo": 1
+   },
+   "scritture_di_stato": 10,
+   "tipo": "dinamica"
+  },
+  "mitosi": {
+   "attributi": [
+    "d",
+    "d0",
+    "eta",
+    "mem_mot",
+    "peq",
+    "perc_chi",
+    "perc_geom",
+    "phi",
+    "phi_s",
+    "phivel",
+    "tw",
+    "twp",
+    "vd"
+   ],
+   "forme": {
+    "assegnazione": 26,
+    "vincolo": 4
+   },
+   "scritture_di_stato": 30,
+   "tipo": "AMBIGUA"
+  },
+  "rilassa_disegno": {
+   "attributi": [],
+   "forme": {},
+   "scritture_di_stato": 0,
+   "tipo": "disegno"
+  },
+  "scuoti_vuoto": {
+   "attributi": [
+    "phivel"
+   ],
+   "forme": {
+    "incremento": 1
+   },
+   "scritture_di_stato": 1,
+   "tipo": "dinamica"
+  },
+  "step": {
+   "attributi": [
+    "_psi_prec",
+    "d",
+    "d0",
+    "eta",
+    "peq",
+    "perc_chi",
+    "perc_geom",
+    "phi",
+    "phivel",
+    "psi",
+    "tw",
+    "twp",
+    "vd"
+   ],
+   "forme": {
+    "assegnazione": 14,
+    "incremento": 8,
+    "vincolo": 4
+   },
+   "scritture_di_stato": 26,
+   "tipo": "dinamica"
+  }
+ },
+ "funzioni": 57,
+ "leggi": [
+  "scuoti_vuoto",
+  "step",
+  "mitosi",
+  "rilassa_disegno",
+  "memoria_hebbiana_moto"
+ ],
+ "letture_pos": [
+  {
+   "funzione": "chiralita_core_locale",
+   "riga": 2200,
+   "sorgente": "centro = np.average(self.pos[gruppo], axis=0, weights=np.maximum(intensita, 1e-12))",
+   "tipo": "osservatore"
+  },
+  {
+   "funzione": "chiralita_core_locale",
+   "riga": 2201,
+   "sorgente": "dentro = np.linalg.norm(self.pos[gruppo] - centro, axis=1) <= r",
+   "tipo": "osservatore"
+  },
+  {
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 6607,
+   "sorgente": "v = self.pos[jj] - self.pos[ii]",
+   "tipo": "dinamica"
+  },
+  {
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 6991,
+   "sorgente": "v_rel = self.pos[jj] - self.pos[ii]",
+   "tipo": "dinamica"
+  },
+  {
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 6777,
+   "sorgente": "_cen = self.pos[:self.n].mean(0)",
+   "tipo": "dinamica"
+  },
+  {
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 6778,
+   "sorgente": "_rmid = 0.5 * (self.pos[ii] + self.pos[jj]) - _cen",
+   "tipo": "dinamica"
+  },
+  {
+   "funzione": "mitosi",
+   "riga": 6185,
+   "sorgente": "pos_figlio = 0.5 * (self.pos[a] + self.pos[b])",
+   "tipo": "AMBIGUA"
+  },
+  {
+   "funzione": "mitosi",
+   "riga": 6352,
+   "sorgente": "0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05),",
+   "tipo": "AMBIGUA"
+  },
+  {
+   "funzione": "pozzo_grafo",
+   "riga": 6565,
+   "sorgente": "v = self.pos[jj] - self.pos[ii]",
+   "tipo": "osservatore"
+  },
+  {
+   "funzione": "step",
+   "riga": 5364,
+   "sorgente": "r_cm = np.linalg.norm(self.pos[:self.n] - cmv, axis=1) + LAM * 0.5",
+   "tipo": "dinamica"
+  },
+  {
+   "funzione": "step",
+   "riga": 5363,
+   "sorgente": "cmv = (self.pos[:self.n] * I2[:, None]).sum(0) / max(I2.sum(), 1e-9)",
+   "tipo": "dinamica"
+  }
+ ],
+ "tipi": {
+  "_aggiorna_lift_spinoriale": {
+   "n_scritture": 1,
+   "scrive": [
+    "_spinor_lift"
+   ],
+   "siti": [
+    {
+     "attributo": "_spinor_lift",
+     "forma": "=",
+     "riga": 1878,
+     "sorgente": "self._spinor_lift = candidato",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "dinamica"
+  },
+  "_bloch_a_spinore": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_bloch_ritardato": {
+   "n_scritture": 2,
+   "scrive": [
+    "_nb_ret"
+   ],
+   "siti": [
+    {
+     "attributo": "_nb_ret",
+     "forma": "=",
+     "riga": 4836,
+     "sorgente": "self._nb_ret = nb_cur.copy()",
+     "vincolo": false
+    },
+    {
+     "attributo": "_nb_ret",
+     "forma": "=",
+     "riga": 4880,
+     "sorgente": "self._nb_ret = out",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_coppia_interferenza": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_costruisci_struttura": {
+   "n_scritture": 3,
+   "scrive": [
+    "_S",
+    "_perm"
+   ],
+   "siti": [
+    {
+     "attributo": "_S",
+     "forma": "=",
+     "riga": 2535,
+     "sorgente": "if not len(self.i): self._S = None; return",
+     "vincolo": false
+    },
+    {
+     "attributo": "_perm",
+     "forma": "=",
+     "riga": 2539,
+     "sorgente": "self._perm = S.data.astype(np.int64)      # posizione CSR -> indice originale",
+     "vincolo": false
+    },
+    {
+     "attributo": "_S",
+     "forma": "=",
+     "riga": 2541,
+     "sorgente": "self._S = S",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_cs_arco_da_nodo": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_cs_nodo": {
+   "n_scritture": 1,
+   "scrive": [
+    "_cs_lam_degenere"
+   ],
+   "siti": [
+    {
+     "attributo": "_cs_lam_degenere",
+     "forma": "=",
+     "riga": 4797,
+     "sorgente": "self._cs_lam_degenere = getattr(self, \"_cs_lam_degenere\", 0) + 1",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_dphi": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_eredita_spinore_figli": {
+   "n_scritture": 9,
+   "scrive": [
+    "_cs_nodo_prev",
+    "_nb",
+    "_nb_prec",
+    "_nb_ret",
+    "_psi_prec",
+    "_psi_spin_prec",
+    "_psi_spinor",
+    "_spinor_lift",
+    "omega_s"
+   ],
+   "siti": [
+    {
+     "attributo": "_cs_nodo_prev",
+     "forma": "=",
+     "riga": 2000,
+     "sorgente": "self._cs_nodo_prev = np.concatenate([_csp_er, np.asarray(_csp_er, float)[src]])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_nb",
+     "forma": "=",
+     "riga": 2004,
+     "sorgente": "self._nb = np.vstack([self._nb, self._nb[src]])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_nb_prec",
+     "forma": "=",
+     "riga": 2006,
+     "sorgente": "self._nb_prec = np.vstack([self._nb_prec, self._nb_prec[src]])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_nb_ret",
+     "forma": "=",
+     "riga": 2012,
+     "sorgente": "self._nb_ret = np.vstack([_nbr_er, _nbr_er[src]])",
+     "vincolo": false
+    },
+    {
+     "attributo": "omega_s",
+     "forma": "=",
+     "riga": 2014,
+     "sorgente": "self.omega_s = np.vstack([self.omega_s, self.omega_s[src]])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_psi_spinor",
+     "forma": "=",
+     "riga": 2019,
+     "sorgente": "self._psi_spinor = np.vstack([self._psi_spinor, er])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_spinor_lift",
+     "forma": "=",
+     "riga": 2024,
+     "sorgente": "self._spinor_lift = np.vstack([self._spinor_lift, el])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_psi_prec",
+     "forma": "=",
+     "riga": 2026,
+     "sorgente": "self._psi_prec = np.concatenate([self._psi_prec, self._psi_prec[src]])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_psi_spin_prec",
+     "forma": "=",
+     "riga": 2038,
+     "sorgente": "self._psi_spin_prec = np.vstack([_pspr, np.asarray(_pspr)[src]])",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "dinamica"
+  },
+  "_estendi_psi_spinor": {
+   "n_scritture": 3,
+   "scrive": [
+    "_psi_spinor"
+   ],
+   "siti": [
+    {
+     "attributo": "_psi_spinor",
+     "forma": "=",
+     "riga": 1970,
+     "sorgente": "self._psi_spinor = self._bloch_a_spinore(nb_rif[:n])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_psi_spinor",
+     "forma": "=",
+     "riga": 1973,
+     "sorgente": "self._psi_spinor = np.vstack([cur, manca])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_psi_spinor",
+     "forma": "=",
+     "riga": 1975,
+     "sorgente": "self._psi_spinor = cur[:n]",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "dinamica"
+  },
+  "_fattore_tempo_arco": {
+   "n_scritture": 4,
+   "scrive": [
+    "_tum_t_forma",
+    "_tum_t_quando",
+    "_tum_t_salti",
+    "_tum_t_tot"
+   ],
+   "siti": [
+    {
+     "attributo": "_tum_t_tot",
+     "forma": "=",
+     "riga": 4927,
+     "sorgente": "self._tum_t_tot = getattr(self, \"_tum_t_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_t_salti",
+     "forma": "=",
+     "riga": 4931,
+     "sorgente": "self._tum_t_salti = getattr(self, \"_tum_t_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_t_forma",
+     "forma": "=",
+     "riga": 4932,
+     "sorgente": "self._tum_t_forma = (-1 if a is None else (0 if a.ndim == 0 else len(a)), n_archi)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_t_quando",
+     "forma": "=",
+     "riga": 4933,
+     "sorgente": "self._tum_t_quando = self._tum_t_tot",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_feedback_spinoriale_archi": {
+   "n_scritture": 8,
+   "scrive": [
+    "_sfb_applicato",
+    "_sfb_chiamate",
+    "_sfb_lift_corto",
+    "_sfb_lift_shape",
+    "_sfb_mask_vuota",
+    "_sfb_off",
+    "_spin_feedback_last"
+   ],
+   "siti": [
+    {
+     "attributo": "_spin_feedback_last",
+     "forma": "=",
+     "riga": 2119,
+     "sorgente": "self._spin_feedback_last = 0.0",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfb_chiamate",
+     "forma": "=",
+     "riga": 2125,
+     "sorgente": "self._sfb_chiamate = getattr(self, \"_sfb_chiamate\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfb_off",
+     "forma": "=",
+     "riga": 2127,
+     "sorgente": "self._sfb_off = getattr(self, \"_sfb_off\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfb_lift_corto",
+     "forma": "=",
+     "riga": 2130,
+     "sorgente": "self._sfb_lift_corto = getattr(self, \"_sfb_lift_corto\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfb_lift_shape",
+     "forma": "=",
+     "riga": 2131,
+     "sorgente": "self._sfb_lift_shape = (len(self._spinor_lift), self.n)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfb_mask_vuota",
+     "forma": "=",
+     "riga": 2135,
+     "sorgente": "self._sfb_mask_vuota = getattr(self, \"_sfb_mask_vuota\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfb_applicato",
+     "forma": "=",
+     "riga": 2137,
+     "sorgente": "self._sfb_applicato = getattr(self, \"_sfb_applicato\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_spin_feedback_last",
+     "forma": "=",
+     "riga": 2148,
+     "sorgente": "self._spin_feedback_last = float(np.mean(np.abs(flusso))) if len(flusso) else 0.0",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_grado": {
+   "n_scritture": 2,
+   "scrive": [
+    "_cicli_topologici",
+    "_deg"
+   ],
+   "siti": [
+    {
+     "attributo": "_deg",
+     "forma": "=",
+     "riga": 1775,
+     "sorgente": "self._deg = np.maximum(np.bincount(self.i, minlength=self.n) +",
+     "vincolo": true
+    },
+    {
+     "attributo": "_cicli_topologici",
+     "forma": "=",
+     "riga": 1777,
+     "sorgente": "self._cicli_topologici = None",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_lam_archi": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_link_su2_N": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_mat": {
+   "n_scritture": 1,
+   "scrive": [
+    "data"
+   ],
+   "siti": [
+    {
+     "attributo": "data",
+     "forma": "=",
+     "riga": 3947,
+     "sorgente": "self._S.data = np.concatenate([val, val])[self._perm]",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_mat2": {
+   "n_scritture": 1,
+   "scrive": [
+    "data"
+   ],
+   "siti": [
+    {
+     "attributo": "data",
+     "forma": "=",
+     "riga": 3962,
+     "sorgente": "self._S.data = np.concatenate([val_dir, val_rev])[self._perm]",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_nasce": {
+   "n_scritture": 1,
+   "scrive": [
+    "_g_sm_nascite"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_sm_nascite",
+     "forma": "=",
+     "riga": 4467,
+     "sorgente": "self._g_sm_nascite = getattr(self, '_g_sm_nascite', 0) + 1",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_sm_nascite"
+   ],
+   "tipo": "osservatore"
+  },
+  "_nb_grav": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_passo_spinoriale": {
+   "n_scritture": 61,
+   "scrive": [
+    "_cs_in_chiamate",
+    "_cs_in_fallback",
+    "_fatt_cs_ultimo",
+    "_g_chicore_passo_quando",
+    "_g_chicore_passo_salti",
+    "_g_chicore_passo_shape",
+    "_g_chicore_passo_tot",
+    "_g_ci_nodi",
+    "_g_ci_nodi_senza_peso",
+    "_g_ci_nodi_tot",
+    "_g_ci_senza_array",
+    "_g_ci_senza_array_forma",
+    "_g_ci_senza_array_quando",
+    "_g_ci_senza_peso_nati",
+    "_g_ci_senza_peso_quando",
+    "_g_ci_tot",
+    "_g_ci_w_max",
+    "_g_ci_w_min",
+    "_g_ci_w_p50",
+    "_g_nb_prec_quando",
+    "_g_nb_prec_salti",
+    "_g_nb_prec_shape",
+    "_g_nb_prec_tot",
+    "_inerzia_al_pavimento",
+    "_inerzia_invocazioni",
+    "_inerzia_sfondo_chiamate",
+    "_inerzia_sfondo_fallback",
+    "_inerzia_sfondo_passi",
+    "_inerzia_sfondo_ultima",
+    "_inerzia_tot",
+    "_nb",
+    "_nb_prec",
+    "_por_invoc",
+    "_porta_A",
+    "_porta_A_shape",
+    "_porta_A_ultima",
+    "_porta_B",
+    "_porta_B_nan",
+    "_porta_B_nonpos",
+    "_porta_B_ultima",
+    "_psi_spinor",
+    "_sfondo_ko_con_archi",
+    "_sfondo_ko_peq",
+    "_sfondo_ko_rho",
+    "_sfondo_ko_senza_archi",
+    "_sfondo_ko_ultima_peq",
+    "_sfondo_ko_ultima_rho",
+    "_spinor_lift",
+    "_xi_chiamate",
+    "_xi_esteso",
+    "_xi_nuovi",
+    "_xi_rumore",
+    "omega_s",
+    "phi_s"
+   ],
+   "siti": [
+    {
+     "attributo": "omega_s",
+     "forma": "=",
+     "riga": 3165,
+     "sorgente": "self.omega_s = np.vstack([self.omega_s, np.zeros((n - len(self.omega_s), 3))])",
+     "vincolo": false
+    },
+    {
+     "attributo": "omega_s",
+     "forma": "=",
+     "riga": 3167,
+     "sorgente": "self.omega_s = self.omega_s[:n]",
+     "vincolo": false
+    },
+    {
+     "attributo": "_nb",
+     "forma": "=",
+     "riga": 3170,
+     "sorgente": "self._nb = np.stack([np.sin(b0), np.zeros(n), np.cos(b0)], axis=1)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_nb",
+     "forma": "=",
+     "riga": 3174,
+     "sorgente": "self._nb = np.vstack([self._nb, nuovi])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_nb",
+     "forma": "=",
+     "riga": 3176,
+     "sorgente": "self._nb = self._nb[:n]",
+     "vincolo": false
+    },
+    {
+     "attributo": "_xi_chiamate",
+     "forma": "=",
+     "riga": 3207,
+     "sorgente": "self._xi_chiamate = getattr(self, \"_xi_chiamate\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_xi_esteso",
+     "forma": "=",
+     "riga": 3218,
+     "sorgente": "self._xi_esteso = getattr(self, \"_xi_esteso\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_xi_nuovi",
+     "forma": "=",
+     "riga": 3219,
+     "sorgente": "self._xi_nuovi = (getattr(self, \"_xi_nuovi\", 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_xi_rumore",
+     "forma": "=",
+     "riga": 3230,
+     "sorgente": "self._xi_rumore = _xi",
+     "vincolo": false
+    },
+    {
+     "attributo": "_nb",
+     "forma": "=",
+     "riga": 3234,
+     "sorgente": "self._nb = self._nb + _calcio * amp[:, None]",
+     "vincolo": false
+    },
+    {
+     "attributo": "_nb",
+     "forma": "=",
+     "riga": 3235,
+     "sorgente": "self._nb = self._nb / np.maximum(np.linalg.norm(self._nb, axis=1, keepdims=True), 1e-9)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nb_prec_tot",
+     "forma": "=",
+     "riga": 3238,
+     "sorgente": "self._g_nb_prec_tot = getattr(self, \"_g_nb_prec_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nb_prec_salti",
+     "forma": "=",
+     "riga": 3251,
+     "sorgente": "self._g_nb_prec_salti = getattr(self, \"_g_nb_prec_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nb_prec_shape",
+     "forma": "=",
+     "riga": 3252,
+     "sorgente": "self._g_nb_prec_shape = (-1 if getattr(self, \"_nb_prec\", None) is None",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nb_prec_quando",
+     "forma": "=",
+     "riga": 3254,
+     "sorgente": "self._g_nb_prec_quando = getattr(self, \"_g_nb_prec_tot\", 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_chicore_passo_tot",
+     "forma": "=",
+     "riga": 3267,
+     "sorgente": "self._g_chicore_passo_tot = getattr(self, \"_g_chicore_passo_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_chicore_passo_salti",
+     "forma": "=",
+     "riga": 3272,
+     "sorgente": "self._g_chicore_passo_salti = getattr(self, \"_g_chicore_passo_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_chicore_passo_shape",
+     "forma": "=",
+     "riga": 3273,
+     "sorgente": "self._g_chicore_passo_shape = (len(self.perc_chi), n)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_chicore_passo_quando",
+     "forma": "=",
+     "riga": 3274,
+     "sorgente": "self._g_chicore_passo_quando = self._g_chicore_passo_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "_cs_in_chiamate",
+     "forma": "=",
+     "riga": 3334,
+     "sorgente": "self._cs_in_chiamate = getattr(self, \"_cs_in_chiamate\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_cs_in_fallback",
+     "forma": "=",
+     "riga": 3338,
+     "sorgente": "self._cs_in_fallback = getattr(self, \"_cs_in_fallback\", 0) + 1   # P5: si CONTA",
+     "vincolo": false
+    },
+    {
+     "attributo": "_fatt_cs_ultimo",
+     "forma": "=",
+     "riga": 3345,
+     "sorgente": "self._fatt_cs_ultimo = _fatt_cs                    # DIAGNOSTICO: nessun lettore (Z7)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_por_invoc",
+     "forma": "=",
+     "riga": 3388,
+     "sorgente": "self._por_invoc = getattr(self, \"_por_invoc\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_porta_A",
+     "forma": "=",
+     "riga": 3390,
+     "sorgente": "self._porta_A = getattr(self, \"_porta_A\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_porta_A_ultima",
+     "forma": "=",
+     "riga": 3391,
+     "sorgente": "self._porta_A_ultima = self._por_invoc",
+     "vincolo": false
+    },
+    {
+     "attributo": "_porta_A_shape",
+     "forma": "=",
+     "riga": 3392,
+     "sorgente": "self._porta_A_shape = (len(_peq_a), len(self.i))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_porta_B",
+     "forma": "=",
+     "riga": 3397,
+     "sorgente": "self._porta_B = getattr(self, \"_porta_B\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_porta_B_ultima",
+     "forma": "=",
+     "riga": 3398,
+     "sorgente": "self._porta_B_ultima = self._por_invoc",
+     "vincolo": false
+    },
+    {
+     "attributo": "_porta_B_nan",
+     "forma": "=",
+     "riga": 3399,
+     "sorgente": "self._porta_B_nan = getattr(self, \"_porta_B_nan\", 0) + _nan",
+     "vincolo": false
+    },
+    {
+     "attributo": "_porta_B_nonpos",
+     "forma": "=",
+     "riga": 3400,
+     "sorgente": "self._porta_B_nonpos = getattr(self, \"_porta_B_nonpos\", 0) + _nonpos",
+     "vincolo": false
+    },
+    {
+     "attributo": "_inerzia_sfondo_chiamate",
+     "forma": "=",
+     "riga": 3426,
+     "sorgente": "self._inerzia_sfondo_chiamate = getattr(self, \"_inerzia_sfondo_chiamate\", 0) + int(n)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_inerzia_invocazioni",
+     "forma": "=",
+     "riga": 3427,
+     "sorgente": "self._inerzia_invocazioni = getattr(self, \"_inerzia_invocazioni\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfondo_ko_peq",
+     "forma": "=",
+     "riga": 3435,
+     "sorgente": "self._sfondo_ko_peq = getattr(self, \"_sfondo_ko_peq\", 0) + _ko_peq",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfondo_ko_rho",
+     "forma": "=",
+     "riga": 3436,
+     "sorgente": "self._sfondo_ko_rho = getattr(self, \"_sfondo_ko_rho\", 0) + _ko_rho",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfondo_ko_ultima_rho",
+     "forma": "=",
+     "riga": 3437,
+     "sorgente": "self._sfondo_ko_ultima_rho = self._por_invoc if _ko_rho else getattr(self, \"_sfondo_ko_ultima_rho\", 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfondo_ko_ultima_peq",
+     "forma": "=",
+     "riga": 3438,
+     "sorgente": "self._sfondo_ko_ultima_peq = self._por_invoc if _ko_peq else getattr(self, \"_sfondo_ko_ultima_peq\", 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfondo_ko_con_archi",
+     "forma": "=",
+     "riga": 3444,
+     "sorgente": "self._sfondo_ko_con_archi = getattr(self, \"_sfondo_ko_con_archi\", 0) + _con_archi",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfondo_ko_senza_archi",
+     "forma": "=",
+     "riga": 3445,
+     "sorgente": "self._sfondo_ko_senza_archi = (getattr(self, \"_sfondo_ko_senza_archi\", 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_inerzia_sfondo_fallback",
+     "forma": "=",
+     "riga": 3447,
+     "sorgente": "self._inerzia_sfondo_fallback = getattr(self, \"_inerzia_sfondo_fallback\", 0) + int((~_ok_n).sum())",
+     "vincolo": false
+    },
+    {
+     "attributo": "_inerzia_sfondo_passi",
+     "forma": "=",
+     "riga": 3448,
+     "sorgente": "self._inerzia_sfondo_passi = getattr(self, \"_inerzia_sfondo_passi\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_inerzia_sfondo_ultima",
+     "forma": "=",
+     "riga": 3452,
+     "sorgente": "self._inerzia_sfondo_ultima = self._inerzia_invocazioni",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ci_tot",
+     "forma": "=",
+     "riga": 3482,
+     "sorgente": "self._g_ci_tot = getattr(self, '_g_ci_tot', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ci_senza_array",
+     "forma": "=",
+     "riga": 3491,
+     "sorgente": "self._g_ci_senza_array = getattr(self, '_g_ci_senza_array', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ci_senza_array_quando",
+     "forma": "=",
+     "riga": 3492,
+     "sorgente": "self._g_ci_senza_array_quando = int(self._g_ci_tot)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ci_senza_array_forma",
+     "forma": "=",
+     "riga": 3493,
+     "sorgente": "self._g_ci_senza_array_forma = (int(len(np.asarray(w))) if w is not None else -1,",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ci_nodi_senza_peso",
+     "forma": "=",
+     "riga": 3539,
+     "sorgente": "self._g_ci_nodi_senza_peso = getattr(self, '_g_ci_nodi_senza_peso', 0) + _senza",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ci_nodi_tot",
+     "forma": "=",
+     "riga": 3540,
+     "sorgente": "self._g_ci_nodi_tot = getattr(self, '_g_ci_nodi_tot', 0) + int(n)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ci_senza_peso_quando",
+     "forma": "=",
+     "riga": 3542,
+     "sorgente": "self._g_ci_senza_peso_quando = int(self._g_ci_tot)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ci_senza_peso_nati",
+     "forma": "=",
+     "riga": 3552,
+     "sorgente": "self._g_ci_senza_peso_nati = (getattr(self, '_g_ci_senza_peso_nati', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ci_w_p50",
+     "forma": "=",
+     "riga": 3556,
+     "sorgente": "self._g_ci_w_p50 = float(np.median(_wv))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ci_w_min",
+     "forma": "=",
+     "riga": 3557,
+     "sorgente": "self._g_ci_w_min = float(_wv.min())",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ci_w_max",
+     "forma": "=",
+     "riga": 3558,
+     "sorgente": "self._g_ci_w_max = float(_wv.max())",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ci_nodi",
+     "forma": "=",
+     "riga": 3559,
+     "sorgente": "self._g_ci_nodi = int(n)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_inerzia_al_pavimento",
+     "forma": "=",
+     "riga": 3562,
+     "sorgente": "self._inerzia_al_pavimento = getattr(self, \"_inerzia_al_pavimento\", 0) + int(np.sum(_contrasto * _T2 <= 1e-6))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_inerzia_tot",
+     "forma": "=",
+     "riga": 3563,
+     "sorgente": "self._inerzia_tot = getattr(self, \"_inerzia_tot\", 0) + int(n)",
+     "vincolo": false
+    },
+    {
+     "attributo": "omega_s",
+     "forma": "=",
+     "riga": 3794,
+     "sorgente": "self.omega_s = omega_new.copy()",
+     "vincolo": false
+    },
+    {
+     "attributo": "_nb",
+     "forma": "=",
+     "riga": 3795,
+     "sorgente": "self._nb = nb_new.copy()                          # Bloch (derivato dal primario se SPINORE_CORRETTO)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_nb_prec",
+     "forma": "=",
+     "riga": 3796,
+     "sorgente": "self._nb_prec = nb_new.copy()                     # memorizzo per il ritardo causale",
+     "vincolo": false
+    },
+    {
+     "attributo": "_psi_spinor",
+     "forma": "=",
+     "riga": 3798,
+     "sorgente": "self._psi_spinor = psi_sp_new                 # primario complesso: segno di doppia-copertura robusto",
+     "vincolo": false
+    },
+    {
+     "attributo": "_spinor_lift",
+     "forma": "=",
+     "riga": 3799,
+     "sorgente": "self._spinor_lift = psi_sp_new.copy()         # il lift E' il primario (niente ri-derivazione da nb)",
+     "vincolo": false
+    },
+    {
+     "attributo": "phi_s",
+     "forma": "=",
+     "riga": 3803,
+     "sorgente": "self.phi_s = np.arccos(np.clip(nb_new[:, 2], -1, 1))            # b = angolo polare [0,pi]",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_chicore_passo_quando",
+    "_g_chicore_passo_salti",
+    "_g_chicore_passo_shape",
+    "_g_chicore_passo_tot",
+    "_g_ci_nodi",
+    "_g_ci_nodi_senza_peso",
+    "_g_ci_nodi_tot",
+    "_g_ci_senza_array",
+    "_g_ci_senza_array_forma",
+    "_g_ci_senza_array_quando",
+    "_g_ci_senza_peso_nati",
+    "_g_ci_senza_peso_quando",
+    "_g_ci_tot",
+    "_g_ci_w_max",
+    "_g_ci_w_min",
+    "_g_ci_w_p50",
+    "_g_nb_prec_quando",
+    "_g_nb_prec_salti",
+    "_g_nb_prec_shape",
+    "_g_nb_prec_tot"
+   ],
+   "tipo": "dinamica"
+  },
+  "_peq_esatto": {
+   "n_scritture": 5,
+   "scrive": [
+    "_g_peqx_bers_neg",
+    "_g_peqx_min",
+    "_g_peqx_neg",
+    "_g_peqx_salvati",
+    "_g_peqx_usi"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_peqx_usi",
+     "forma": "=",
+     "riga": 4535,
+     "sorgente": "self._g_peqx_usi = getattr(self, '_g_peqx_usi', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peqx_salvati",
+     "forma": "=",
+     "riga": 4539,
+     "sorgente": "self._g_peqx_salvati = (getattr(self, '_g_peqx_salvati', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peqx_neg",
+     "forma": "=",
+     "riga": 4541,
+     "sorgente": "self._g_peqx_neg = getattr(self, '_g_peqx_neg', 0) + int(np.sum(p2 < 0.0))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peqx_bers_neg",
+     "forma": "=",
+     "riga": 4544,
+     "sorgente": "self._g_peqx_bers_neg = (getattr(self, '_g_peqx_bers_neg', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peqx_min",
+     "forma": "=",
+     "riga": 4546,
+     "sorgente": "self._g_peqx_min = min(getattr(self, '_g_peqx_min', float('inf')), float(p2.min()))",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_peqx_bers_neg",
+    "_g_peqx_min",
+    "_g_peqx_neg",
+    "_g_peqx_salvati",
+    "_g_peqx_usi"
+   ],
+   "tipo": "osservatore"
+  },
+  "_pesi": {
+   "n_scritture": 13,
+   "scrive": [
+    "_g_kernel_alpha_quando",
+    "_g_kernel_alpha_salti",
+    "_g_kernel_alpha_shape",
+    "_g_kernel_alpha_tot",
+    "_g_rampa_cali",
+    "_g_rampa_calo_max",
+    "_g_rampa_calo_quando",
+    "_g_rampa_calo_somma",
+    "_g_rampa_nodi",
+    "_g_rampa_prec",
+    "_g_rampa_prec_disallineata",
+    "_g_rampa_prec_shape",
+    "_g_rampa_sotto1"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_rampa_sotto1",
+     "forma": "=",
+     "riga": 3874,
+     "sorgente": "self._g_rampa_sotto1 = getattr(self, \"_g_rampa_sotto1\", 0) + int(np.sum(ramp < 1.0))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_rampa_nodi",
+     "forma": "=",
+     "riga": 3875,
+     "sorgente": "self._g_rampa_nodi = getattr(self, \"_g_rampa_nodi\", 0) + int(ramp.size)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_rampa_cali",
+     "forma": "=",
+     "riga": 3886,
+     "sorgente": "self._g_rampa_cali = getattr(self, \"_g_rampa_cali\", 0) + _nc",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_rampa_calo_somma",
+     "forma": "=",
+     "riga": 3887,
+     "sorgente": "self._g_rampa_calo_somma = (getattr(self, \"_g_rampa_calo_somma\", 0.0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_rampa_calo_max",
+     "forma": "=",
+     "riga": 3889,
+     "sorgente": "self._g_rampa_calo_max = max(getattr(self, \"_g_rampa_calo_max\", 0.0),",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_rampa_calo_quando",
+     "forma": "=",
+     "riga": 3891,
+     "sorgente": "self._g_rampa_calo_quando = self._g_rampa_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_rampa_prec_disallineata",
+     "forma": "=",
+     "riga": 3893,
+     "sorgente": "self._g_rampa_prec_disallineata = (",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_rampa_prec_shape",
+     "forma": "=",
+     "riga": 3895,
+     "sorgente": "self._g_rampa_prec_shape = (len(_prec), len(ramp))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_rampa_prec",
+     "forma": "=",
+     "riga": 3896,
+     "sorgente": "self._g_rampa_prec = np.array(ramp, dtype=float, copy=True)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_kernel_alpha_tot",
+     "forma": "=",
+     "riga": 3907,
+     "sorgente": "self._g_kernel_alpha_tot = getattr(self, \"_g_kernel_alpha_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_kernel_alpha_salti",
+     "forma": "=",
+     "riga": 3919,
+     "sorgente": "self._g_kernel_alpha_salti = getattr(self, \"_g_kernel_alpha_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_kernel_alpha_shape",
+     "forma": "=",
+     "riga": 3920,
+     "sorgente": "self._g_kernel_alpha_shape = (len(self.tw), len(self.d))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_kernel_alpha_quando",
+     "forma": "=",
+     "riga": 3921,
+     "sorgente": "self._g_kernel_alpha_quando = self._g_kernel_alpha_tot",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_kernel_alpha_quando",
+    "_g_kernel_alpha_salti",
+    "_g_kernel_alpha_shape",
+    "_g_kernel_alpha_tot",
+    "_g_rampa_cali",
+    "_g_rampa_calo_max",
+    "_g_rampa_calo_quando",
+    "_g_rampa_calo_somma",
+    "_g_rampa_nodi",
+    "_g_rampa_prec",
+    "_g_rampa_prec_disallineata",
+    "_g_rampa_prec_shape",
+    "_g_rampa_sotto1"
+   ],
+   "tipo": "osservatore"
+  },
+  "_r_nodo_mitosi": {
+   "n_scritture": 4,
+   "scrive": [
+    "_tum_r_forma",
+    "_tum_r_quando",
+    "_tum_r_salti",
+    "_tum_r_tot"
+   ],
+   "siti": [
+    {
+     "attributo": "_tum_r_tot",
+     "forma": "=",
+     "riga": 4911,
+     "sorgente": "self._tum_r_tot = getattr(self, \"_tum_r_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_r_salti",
+     "forma": "=",
+     "riga": 4914,
+     "sorgente": "self._tum_r_salti = getattr(self, \"_tum_r_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_r_forma",
+     "forma": "=",
+     "riga": 4915,
+     "sorgente": "self._tum_r_forma = (-1 if r is None else len(r), n)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_r_quando",
+     "forma": "=",
+     "riga": 4916,
+     "sorgente": "self._tum_r_quando = self._tum_r_tot",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_rho_sorgente": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_sd0": {
+   "n_scritture": 1,
+   "scrive": [
+    "_g_smp_passanti"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_smp_passanti",
+     "forma": "=",
+     "riga": 4448,
+     "sorgente": "self._g_smp_passanti = getattr(self, '_g_smp_passanti', 0) + 1",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_smp_passanti"
+   ],
+   "tipo": "osservatore"
+  },
+  "_smorza": {
+   "n_scritture": 6,
+   "scrive": [
+    "_g_sm_discese",
+    "_g_sm_max_giu",
+    "_g_sm_patol",
+    "_g_sm_tot",
+    "_g_sm_viol_giu",
+    "_g_sm_viol_id"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_sm_tot",
+     "forma": "=",
+     "riga": 4216,
+     "sorgente": "self._g_sm_tot = getattr(self, '_g_sm_tot', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_sm_discese",
+     "forma": "=",
+     "riga": 4218,
+     "sorgente": "self._g_sm_discese = getattr(self, '_g_sm_discese', 0) + int(np.sum(scende))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_sm_patol",
+     "forma": "=",
+     "riga": 4220,
+     "sorgente": "self._g_sm_patol = (getattr(self, '_g_sm_patol', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_sm_viol_id",
+     "forma": "=",
+     "riga": 4243,
+     "sorgente": "self._g_sm_viol_id = (getattr(self, '_g_sm_viol_id', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_sm_max_giu",
+     "forma": "=",
+     "riga": 4246,
+     "sorgente": "self._g_sm_max_giu = max(getattr(self, '_g_sm_max_giu', -np.inf),",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_sm_viol_giu",
+     "forma": "=",
+     "riga": 4248,
+     "sorgente": "self._g_sm_viol_giu = (getattr(self, '_g_sm_viol_giu', 0)",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_sm_discese",
+    "_g_sm_max_giu",
+    "_g_sm_patol",
+    "_g_sm_tot",
+    "_g_sm_viol_giu",
+    "_g_sm_viol_id"
+   ],
+   "tipo": "osservatore"
+  },
+  "_smp_apri": {
+   "n_scritture": 4,
+   "scrive": [
+    "_g_smp_aperture",
+    "_g_smp_gia_aperta",
+    "_smp_d",
+    "_smp_d0"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_smp_gia_aperta",
+     "forma": "=",
+     "riga": 4384,
+     "sorgente": "self._g_smp_gia_aperta = getattr(self, '_g_smp_gia_aperta', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_smp_d0",
+     "forma": "=",
+     "riga": 4388,
+     "sorgente": "self._smp_d0 = np.array(self.d0, dtype=float, copy=True)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_smp_d",
+     "forma": "=",
+     "riga": 4389,
+     "sorgente": "self._smp_d = np.array(self.d, dtype=float, copy=True)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_smp_aperture",
+     "forma": "=",
+     "riga": 4390,
+     "sorgente": "self._g_smp_aperture = getattr(self, '_g_smp_aperture', 0) + 1",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_smp_aperture",
+    "_g_smp_gia_aperta"
+   ],
+   "tipo": "osservatore"
+  },
+  "_smp_chirurgia": {
+   "n_scritture": 1,
+   "scrive": [
+    "_g_smp_chirurgie"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_smp_chirurgie",
+     "forma": "=",
+     "riga": 4413,
+     "sorgente": "self._g_smp_chirurgie = getattr(self, '_g_smp_chirurgie', 0) + 1",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_smp_chirurgie"
+   ],
+   "tipo": "osservatore"
+  },
+  "_smp_chiudi": {
+   "n_scritture": 9,
+   "scrive": [
+    "_g_smp_chiusure",
+    "_g_smp_disallineati",
+    "_g_smp_discese",
+    "_g_smp_nulli",
+    "_g_smp_salite",
+    "_g_smp_shape",
+    "_smp_d",
+    "_smp_d0",
+    "d0"
+   ],
+   "siti": [
+    {
+     "attributo": "_smp_d0",
+     "forma": "=",
+     "riga": 4426,
+     "sorgente": "self._smp_d0 = None",
+     "vincolo": false
+    },
+    {
+     "attributo": "_smp_d",
+     "forma": "=",
+     "riga": 4427,
+     "sorgente": "self._smp_d = None",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_smp_disallineati",
+     "forma": "=",
+     "riga": 4432,
+     "sorgente": "self._g_smp_disallineati = getattr(self, '_g_smp_disallineati', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_smp_shape",
+     "forma": "=",
+     "riga": 4433,
+     "sorgente": "self._g_smp_shape = (len(v), len(self.d0))",
+     "vincolo": false
+    },
+    {
+     "attributo": "d0",
+     "forma": "=",
+     "riga": 4436,
+     "sorgente": "self.d0 = v + self._smorza(v, dx, 'd0_passo')",
+     "vincolo": true
+    },
+    {
+     "attributo": "_g_smp_chiusure",
+     "forma": "=",
+     "riga": 4437,
+     "sorgente": "self._g_smp_chiusure = getattr(self, '_g_smp_chiusure', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_smp_discese",
+     "forma": "=",
+     "riga": 4438,
+     "sorgente": "self._g_smp_discese = (getattr(self, '_g_smp_discese', 0) + int(np.sum(dx < 0.0)))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_smp_salite",
+     "forma": "=",
+     "riga": 4439,
+     "sorgente": "self._g_smp_salite = (getattr(self, '_g_smp_salite', 0) + int(np.sum(dx > 0.0)))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_smp_nulli",
+     "forma": "=",
+     "riga": 4440,
+     "sorgente": "self._g_smp_nulli = (getattr(self, '_g_smp_nulli', 0) + int(np.sum(dx == 0.0)))",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_smp_chiusure",
+    "_g_smp_disallineati",
+    "_g_smp_discese",
+    "_g_smp_nulli",
+    "_g_smp_salite",
+    "_g_smp_shape"
+   ],
+   "tipo": "vincolo"
+  },
+  "_tau_arco_causale": {
+   "n_scritture": 4,
+   "scrive": [
+    "_tum_cs_forma",
+    "_tum_cs_quando",
+    "_tum_cs_salti",
+    "_tum_cs_tot"
+   ],
+   "siti": [
+    {
+     "attributo": "_tum_cs_tot",
+     "forma": "=",
+     "riga": 4951,
+     "sorgente": "self._tum_cs_tot = getattr(self, \"_tum_cs_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_cs_salti",
+     "forma": "=",
+     "riga": 4954,
+     "sorgente": "self._tum_cs_salti = getattr(self, \"_tum_cs_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_cs_forma",
+     "forma": "=",
+     "riga": 4955,
+     "sorgente": "self._tum_cs_forma = (-1 if csn is None else len(csn), self.n)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_cs_quando",
+     "forma": "=",
+     "riga": 4956,
+     "sorgente": "self._tum_cs_quando = self._tum_cs_tot",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_tau_tw_locale": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_tempo_luce_nodo": {
+   "n_scritture": 7,
+   "scrive": [
+    "_cs_chiamate",
+    "_cs_fallback",
+    "_cs_fallback_ultimo",
+    "_g_tempo_luce_quando",
+    "_g_tempo_luce_salti",
+    "_g_tempo_luce_shape",
+    "_g_tempo_luce_tot"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_tempo_luce_tot",
+     "forma": "=",
+     "riga": 5002,
+     "sorgente": "self._g_tempo_luce_tot = getattr(self, \"_g_tempo_luce_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_tempo_luce_salti",
+     "forma": "=",
+     "riga": 5014,
+     "sorgente": "self._g_tempo_luce_salti = getattr(self, \"_g_tempo_luce_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_tempo_luce_shape",
+     "forma": "=",
+     "riga": 5015,
+     "sorgente": "self._g_tempo_luce_shape = (len(ii), len(dd))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_tempo_luce_quando",
+     "forma": "=",
+     "riga": 5016,
+     "sorgente": "self._g_tempo_luce_quando = self._g_tempo_luce_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "_cs_chiamate",
+     "forma": "=",
+     "riga": 5022,
+     "sorgente": "self._cs_chiamate = getattr(self, \"_cs_chiamate\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_cs_fallback",
+     "forma": "=",
+     "riga": 5026,
+     "sorgente": "self._cs_fallback = getattr(self, \"_cs_fallback\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_cs_fallback_ultimo",
+     "forma": "=",
+     "riga": 5027,
+     "sorgente": "self._cs_fallback_ultimo = (int(n), int(len(csp)) if csp is not None else -1)",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_tempo_luce_quando",
+    "_g_tempo_luce_salti",
+    "_g_tempo_luce_shape",
+    "_g_tempo_luce_tot"
+   ],
+   "tipo": "osservatore"
+  },
+  "_tempo_rampa": {
+   "n_scritture": 6,
+   "scrive": [
+    "_g_rampa_forma",
+    "_g_rampa_quando",
+    "_g_rampa_senza_archi",
+    "_g_rampa_shape",
+    "_g_rampa_tot"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_rampa_tot",
+     "forma": "=",
+     "riga": 3848,
+     "sorgente": "self._g_rampa_tot = getattr(self, \"_g_rampa_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_rampa_senza_archi",
+     "forma": "=",
+     "riga": 3850,
+     "sorgente": "self._g_rampa_senza_archi = getattr(self, \"_g_rampa_senza_archi\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_rampa_quando",
+     "forma": "=",
+     "riga": 3851,
+     "sorgente": "self._g_rampa_quando = self._g_rampa_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_rampa_forma",
+     "forma": "=",
+     "riga": 3856,
+     "sorgente": "self._g_rampa_forma = getattr(self, \"_g_rampa_forma\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_rampa_shape",
+     "forma": "=",
+     "riga": 3857,
+     "sorgente": "self._g_rampa_shape = (int(tl.size), int(self.n))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_rampa_quando",
+     "forma": "=",
+     "riga": 3858,
+     "sorgente": "self._g_rampa_quando = self._g_rampa_tot",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_rampa_forma",
+    "_g_rampa_quando",
+    "_g_rampa_senza_archi",
+    "_g_rampa_shape",
+    "_g_rampa_tot"
+   ],
+   "tipo": "osservatore"
+  },
+  "_togli_rotazione_rigida": {
+   "n_scritture": 1,
+   "scrive": [
+    "pos"
+   ],
+   "siti": [
+    {
+     "attributo": "pos",
+     "forma": "[]=",
+     "riga": 6534,
+     "sorgente": "self.pos[:n] = P - rot",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "disegno"
+  },
+  "_traccia_coesione": {
+   "n_scritture": 1,
+   "scrive": [
+    "_traccia_coes_log"
+   ],
+   "siti": [
+    {
+     "attributo": "_traccia_coes_log",
+     "forma": "=",
+     "riga": 4186,
+     "sorgente": "reg = self._traccia_coes_log = []",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_traccia_coes_log"
+   ],
+   "tipo": "osservatore"
+  },
+  "_traccia_d0": {
+   "n_scritture": 3,
+   "scrive": [
+    "_g_traccia_d0",
+    "_traccia_d0_log"
+   ],
+   "siti": [
+    {
+     "attributo": "_traccia_d0_log",
+     "forma": "=",
+     "riga": 4100,
+     "sorgente": "reg = self._traccia_d0_log = []",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_traccia_d0",
+     "forma": "=",
+     "riga": 4131,
+     "sorgente": "self._g_traccia_d0 = getattr(self, \"_g_traccia_d0\", {})",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_traccia_d0",
+     "forma": "[]=",
+     "riga": 4132,
+     "sorgente": "self._g_traccia_d0[sito] = self._g_traccia_d0.get(sito, 0) + 1",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_traccia_d0",
+    "_traccia_d0_log"
+   ],
+   "tipo": "osservatore"
+  },
+  "_traccia_peq": {
+   "n_scritture": 12,
+   "scrive": [
+    "_g_peq_archi",
+    "_g_peq_cfl_max",
+    "_g_peq_cfl_sopra1",
+    "_g_peq_cfl_sopra2",
+    "_g_peq_min",
+    "_g_peq_min_arco",
+    "_g_peq_min_dett",
+    "_g_peq_min_quando",
+    "_g_peq_neg",
+    "_g_peq_neg_dif",
+    "_g_peq_neg_ril",
+    "_g_peq_passi"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_peq_cfl_max",
+     "forma": "=",
+     "riga": 4567,
+     "sorgente": "self._g_peq_cfl_max = max(getattr(self, '_g_peq_cfl_max', 0.0), float(x.max()))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peq_cfl_sopra1",
+     "forma": "=",
+     "riga": 4568,
+     "sorgente": "self._g_peq_cfl_sopra1 = (getattr(self, '_g_peq_cfl_sopra1', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peq_cfl_sopra2",
+     "forma": "=",
+     "riga": 4570,
+     "sorgente": "self._g_peq_cfl_sopra2 = (getattr(self, '_g_peq_cfl_sopra2', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peq_neg",
+     "forma": "=",
+     "riga": 4575,
+     "sorgente": "self._g_peq_neg = getattr(self, '_g_peq_neg', 0) + int(np.sum(insieme < 0.0))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peq_neg_ril",
+     "forma": "=",
+     "riga": 4576,
+     "sorgente": "self._g_peq_neg_ril = (getattr(self, '_g_peq_neg_ril', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peq_neg_dif",
+     "forma": "=",
+     "riga": 4578,
+     "sorgente": "self._g_peq_neg_dif = (getattr(self, '_g_peq_neg_dif', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peq_archi",
+     "forma": "=",
+     "riga": 4580,
+     "sorgente": "self._g_peq_archi = getattr(self, '_g_peq_archi', 0) + int(len(peq))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peq_passi",
+     "forma": "=",
+     "riga": 4581,
+     "sorgente": "self._g_peq_passi = getattr(self, '_g_peq_passi', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peq_min",
+     "forma": "=",
+     "riga": 4585,
+     "sorgente": "self._g_peq_min = float(insieme[k])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peq_min_arco",
+     "forma": "=",
+     "riga": 4586,
+     "sorgente": "self._g_peq_min_arco = (int(i[k]), int(j[k]))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peq_min_quando",
+     "forma": "=",
+     "riga": 4587,
+     "sorgente": "self._g_peq_min_quando = self._g_peq_passi",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peq_min_dett",
+     "forma": "=",
+     "riga": 4588,
+     "sorgente": "self._g_peq_min_dett = dict(",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_peq_archi",
+    "_g_peq_cfl_max",
+    "_g_peq_cfl_sopra1",
+    "_g_peq_cfl_sopra2",
+    "_g_peq_min",
+    "_g_peq_min_arco",
+    "_g_peq_min_dett",
+    "_g_peq_min_quando",
+    "_g_peq_neg",
+    "_g_peq_neg_dif",
+    "_g_peq_neg_ril",
+    "_g_peq_passi"
+   ],
+   "tipo": "osservatore"
+  },
+  "_traccia_vd": {
+   "n_scritture": 2,
+   "scrive": [
+    "_g_traccia_vd",
+    "_traccia_vd_log"
+   ],
+   "siti": [
+    {
+     "attributo": "_traccia_vd_log",
+     "forma": "=",
+     "riga": 4145,
+     "sorgente": "reg = self._traccia_vd_log = []",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_traccia_vd",
+     "forma": "=",
+     "riga": 4172,
+     "sorgente": "self._g_traccia_vd = getattr(self, \"_g_traccia_vd\", 0) + 1",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_traccia_vd",
+    "_traccia_vd_log"
+   ],
+   "tipo": "osservatore"
+  },
+  "_w4": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_w8": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "_wphi": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "calcola_psi": {
+   "n_scritture": 7,
+   "scrive": [
+    "_calcpsi_chiamate",
+    "_calcpsi_origini",
+    "_calcpsi_w_none",
+    "psi",
+    "psi_spin",
+    "rho_spin"
+   ],
+   "siti": [
+    {
+     "attributo": "_calcpsi_chiamate",
+     "forma": "=",
+     "riga": 3974,
+     "sorgente": "self._calcpsi_chiamate = getattr(self, \"_calcpsi_chiamate\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_calcpsi_w_none",
+     "forma": "=",
+     "riga": 3976,
+     "sorgente": "self._calcpsi_w_none = getattr(self, \"_calcpsi_w_none\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_calcpsi_origini",
+     "forma": "=",
+     "riga": 3984,
+     "sorgente": "_d = {}; self._calcpsi_origini = _d",
+     "vincolo": false
+    },
+    {
+     "attributo": "psi",
+     "forma": "=",
+     "riga": 3988,
+     "sorgente": "self.psi = np.zeros(self.n, complex); return self.psi",
+     "vincolo": false
+    },
+    {
+     "attributo": "psi",
+     "forma": "=",
+     "riga": 3995,
+     "sorgente": "self.psi = self.satura(F)                          # saturazione regolarizzata (Leggi XV/XVIII)",
+     "vincolo": true
+    },
+    {
+     "attributo": "psi_spin",
+     "forma": "=",
+     "riga": 4009,
+     "sorgente": "self.psi_spin = _Fs / (1.0 + GAMMA * _norm)[:, None]               # saturazione sulla NORMA (non ruota lo spi",
+     "vincolo": false
+    },
+    {
+     "attributo": "rho_spin",
+     "forma": "=",
+     "riga": 4010,
+     "sorgente": "self.rho_spin = np.real(np.sum(np.conj(self.psi_spin) * self.psi_spin, axis=1))  # rho = psi^dag psi",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_calcpsi_chiamate",
+    "_calcpsi_origini",
+    "_calcpsi_w_none"
+   ],
+   "tipo": "dinamica"
+  },
+  "chiralita_core_locale": {
+   "n_scritture": 8,
+   "scrive": [
+    "_chi_core_nodi",
+    "_chi_core_raggio",
+    "_chi_core_rho0",
+    "_chi_core_rhoc",
+    "_chi_geom_nodi",
+    "_g_ccl_chi",
+    "_g_ccl_geom",
+    "_g_ccl_tot"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_ccl_tot",
+     "forma": "=",
+     "riga": 2169,
+     "sorgente": "self._g_ccl_tot = getattr(self, \"_g_ccl_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ccl_geom",
+     "forma": "=",
+     "riga": 2171,
+     "sorgente": "self._g_ccl_geom = getattr(self, \"_g_ccl_geom\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_ccl_chi",
+     "forma": "=",
+     "riga": 2173,
+     "sorgente": "self._g_ccl_chi = getattr(self, \"_g_ccl_chi\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_chi_geom_nodi",
+     "forma": "=",
+     "riga": 2207,
+     "sorgente": "self._chi_geom_nodi = chi_core",
+     "vincolo": false
+    },
+    {
+     "attributo": "_chi_core_nodi",
+     "forma": "=",
+     "riga": 2209,
+     "sorgente": "self._chi_core_nodi = chi_core",
+     "vincolo": false
+    },
+    {
+     "attributo": "_chi_core_rho0",
+     "forma": "=",
+     "riga": 2210,
+     "sorgente": "self._chi_core_rho0 = rho0",
+     "vincolo": false
+    },
+    {
+     "attributo": "_chi_core_rhoc",
+     "forma": "=",
+     "riga": 2211,
+     "sorgente": "self._chi_core_rhoc = rho_c",
+     "vincolo": false
+    },
+    {
+     "attributo": "_chi_core_raggio",
+     "forma": "=",
+     "riga": 2212,
+     "sorgente": "self._chi_core_raggio = r_core",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_ccl_chi",
+    "_g_ccl_geom",
+    "_g_ccl_tot"
+   ],
+   "tipo": "osservatore"
+  },
+  "lambda_nodi": {
+   "n_scritture": 2,
+   "scrive": [
+    "_calcolo_schermatura"
+   ],
+   "siti": [
+    {
+     "attributo": "_calcolo_schermatura",
+     "forma": "=",
+     "riga": 3006,
+     "sorgente": "self._calcolo_schermatura = True",
+     "vincolo": false
+    },
+    {
+     "attributo": "_calcolo_schermatura",
+     "forma": "=",
+     "riga": 3010,
+     "sorgente": "self._calcolo_schermatura = False",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "lambda_vuoto": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "massa_critica_adattiva": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "massa_critica_collasso": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "memoria_hebbiana_moto": {
+   "n_scritture": 44,
+   "scrive": [
+    "_diag_amp_med",
+    "_diag_sin2_med",
+    "_diag_sin2_p95",
+    "_g_cc_salti",
+    "_g_cc_scarto_d0",
+    "_g_cc_shape",
+    "_g_cc_tot",
+    "_g_cc_usi",
+    "_g_cct_allarga",
+    "_g_cct_archi",
+    "_g_cct_min",
+    "_g_cct_rapmax",
+    "_g_cct_salti",
+    "_g_cct_stringe",
+    "_g_cct_tot",
+    "_g_cct_usi",
+    "_g_cct_viol",
+    "_g_coes_adim_usi",
+    "_g_coes_archi",
+    "_g_coes_max",
+    "_g_coes_satura",
+    "_g_coes_tetto",
+    "_g_k_frange_spento",
+    "_g_k_frange_tot",
+    "_g_nb_grav_proiez_quando",
+    "_g_nb_grav_proiez_salti",
+    "_g_nb_grav_proiez_shape",
+    "_g_nb_grav_proiez_tot",
+    "_g_s2full_conmask",
+    "_g_s2full_fuori",
+    "_g_s2full_fuori_max",
+    "_g_s2full_quando",
+    "_g_s2full_tot",
+    "_nb",
+    "_sin2_vir",
+    "d0",
+    "mem_mot",
+    "phi"
+   ],
+   "siti": [
+    {
+     "attributo": "mem_mot",
+     "forma": "=",
+     "riga": 6600,
+     "sorgente": "self.mem_mot = np.vstack([self.mem_mot, np.zeros((n - len(self.mem_mot), 3))])",
+     "vincolo": false
+    },
+    {
+     "attributo": "mem_mot",
+     "forma": "[]=",
+     "riga": 6620,
+     "sorgente": "self.mem_mot[:self.n] = (1.0 - plast) * self.mem_mot[:self.n] + plast * grad_tw",
+     "vincolo": false
+    },
+    {
+     "attributo": "d0",
+     "forma": "[]+=",
+     "riga": 6646,
+     "sorgente": "self.d0[mask] += self._sd0(proj, mask)",
+     "vincolo": true
+    },
+    {
+     "attributo": "_diag_amp_med",
+     "forma": "=",
+     "riga": 6703,
+     "sorgente": "self._diag_amp_med = float(np.median(ampiezza)) if len(ampiezza) else float(\"nan\")",
+     "vincolo": false
+    },
+    {
+     "attributo": "_nb",
+     "forma": "=",
+     "riga": 6707,
+     "sorgente": "self._nb = np.stack([np.sin(b0), np.zeros(self.n), np.cos(b0)], axis=1)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nb_grav_proiez_tot",
+     "forma": "=",
+     "riga": 6718,
+     "sorgente": "self._g_nb_grav_proiez_tot = getattr(self, \"_g_nb_grav_proiez_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nb_grav_proiez_salti",
+     "forma": "=",
+     "riga": 6720,
+     "sorgente": "self._g_nb_grav_proiez_salti = getattr(self, \"_g_nb_grav_proiez_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nb_grav_proiez_shape",
+     "forma": "=",
+     "riga": 6721,
+     "sorgente": "self._g_nb_grav_proiez_shape = (-1 if self._nb is None else len(self._nb), self.n)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nb_grav_proiez_quando",
+     "forma": "=",
+     "riga": 6722,
+     "sorgente": "self._g_nb_grav_proiez_quando = self._g_nb_grav_proiez_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "_diag_sin2_med",
+     "forma": "=",
+     "riga": 6749,
+     "sorgente": "self._diag_sin2_med = float(np.median(sin2)) if len(sin2) else float(\"nan\")",
+     "vincolo": false
+    },
+    {
+     "attributo": "_diag_sin2_p95",
+     "forma": "=",
+     "riga": 6750,
+     "sorgente": "self._diag_sin2_p95 = (float(np.percentile(sin2, 95)) if len(sin2)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sin2_vir",
+     "forma": "=",
+     "riga": 6766,
+     "sorgente": "self._sin2_vir = s2full",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_s2full_tot",
+     "forma": "=",
+     "riga": 6767,
+     "sorgente": "self._g_s2full_tot = getattr(self, \"_g_s2full_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_s2full_fuori",
+     "forma": "=",
+     "riga": 6769,
+     "sorgente": "self._g_s2full_fuori = _fuori",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_s2full_fuori_max",
+     "forma": "=",
+     "riga": 6770,
+     "sorgente": "self._g_s2full_fuori_max = max(int(getattr(self, \"_g_s2full_fuori_max\", 0)),",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_s2full_conmask",
+     "forma": "=",
+     "riga": 6773,
+     "sorgente": "self._g_s2full_conmask = getattr(self, \"_g_s2full_conmask\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_s2full_quando",
+     "forma": "=",
+     "riga": 6774,
+     "sorgente": "self._g_s2full_quando = self._g_s2full_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "d0",
+     "forma": "[]+=",
+     "riga": 6792,
+     "sorgente": "self.d0[mask] += self._sd0(spinta * float(np.median(self.d0[mask])), mask)",
+     "vincolo": true
+    },
+    {
+     "attributo": "d0",
+     "forma": "[]+=",
+     "riga": 6798,
+     "sorgente": "self.d0[mask] += self._sd0(grav * float(np.median(self.d0[mask])), mask)",
+     "vincolo": true
+    },
+    {
+     "attributo": "_g_k_frange_tot",
+     "forma": "=",
+     "riga": 6808,
+     "sorgente": "self._g_k_frange_tot = getattr(self, \"_g_k_frange_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_k_frange_spento",
+     "forma": "=",
+     "riga": 6810,
+     "sorgente": "self._g_k_frange_spento = getattr(self, \"_g_k_frange_spento\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "d0",
+     "forma": "[]+=",
+     "riga": 6820,
+     "sorgente": "self.d0[mask] += self._sd0(flusso, mask)",
+     "vincolo": true
+    },
+    {
+     "attributo": "_g_cc_tot",
+     "forma": "=",
+     "riga": 6849,
+     "sorgente": "self._g_cc_tot = getattr(self, '_g_cc_tot', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_cc_usi",
+     "forma": "=",
+     "riga": 6853,
+     "sorgente": "self._g_cc_usi = getattr(self, '_g_cc_usi', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_cc_scarto_d0",
+     "forma": "=",
+     "riga": 6854,
+     "sorgente": "self._g_cc_scarto_d0 = max(",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_cc_salti",
+     "forma": "=",
+     "riga": 6858,
+     "sorgente": "self._g_cc_salti = getattr(self, '_g_cc_salti', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_cc_shape",
+     "forma": "=",
+     "riga": 6859,
+     "sorgente": "self._g_cc_shape = (-1 if _f_d0 is None else len(_f_d0), len(self.d0))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_cct_tot",
+     "forma": "=",
+     "riga": 6917,
+     "sorgente": "self._g_cct_tot = getattr(self, '_g_cct_tot', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_cct_usi",
+     "forma": "=",
+     "riga": 6921,
+     "sorgente": "self._g_cct_usi = getattr(self, '_g_cct_usi', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_cct_salti",
+     "forma": "=",
+     "riga": 6926,
+     "sorgente": "self._g_cct_salti = getattr(self, '_g_cct_salti', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_cct_stringe",
+     "forma": "=",
+     "riga": 6929,
+     "sorgente": "self._g_cct_stringe = (getattr(self, '_g_cct_stringe', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_cct_allarga",
+     "forma": "=",
+     "riga": 6931,
+     "sorgente": "self._g_cct_allarga = (getattr(self, '_g_cct_allarga', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_cct_archi",
+     "forma": "=",
+     "riga": 6933,
+     "sorgente": "self._g_cct_archi = (getattr(self, '_g_cct_archi', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_cct_min",
+     "forma": "=",
+     "riga": 6935,
+     "sorgente": "self._g_cct_min = min(getattr(self, '_g_cct_min', float('inf')),",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_cct_viol",
+     "forma": "=",
+     "riga": 6945,
+     "sorgente": "self._g_cct_viol = (getattr(self, '_g_cct_viol', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_cct_rapmax",
+     "forma": "=",
+     "riga": 6949,
+     "sorgente": "self._g_cct_rapmax = max(getattr(self, '_g_cct_rapmax', 0.0),",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_coes_adim_usi",
+     "forma": "=",
+     "riga": 6951,
+     "sorgente": "self._g_coes_adim_usi = getattr(self, '_g_coes_adim_usi', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_coes_tetto",
+     "forma": "=",
+     "riga": 6952,
+     "sorgente": "self._g_coes_tetto = float(np.min(_passo_causale)) \\",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_coes_max",
+     "forma": "=",
+     "riga": 6954,
+     "sorgente": "self._g_coes_max = max(getattr(self, '_g_coes_max', 0.0),",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_coes_satura",
+     "forma": "=",
+     "riga": 6957,
+     "sorgente": "self._g_coes_satura = (getattr(self, '_g_coes_satura', 0)",
+     "vincolo": true
+    },
+    {
+     "attributo": "_g_coes_archi",
+     "forma": "=",
+     "riga": 6959,
+     "sorgente": "self._g_coes_archi = getattr(self, '_g_coes_archi', 0) + int(len(_F_adim))",
+     "vincolo": false
+    },
+    {
+     "attributo": "d0",
+     "forma": "[]+=",
+     "riga": 6970,
+     "sorgente": "self.d0[mask] += self._sd0(_delta_coes, mask)",
+     "vincolo": true
+    },
+    {
+     "attributo": "d0",
+     "forma": "[]+=",
+     "riga": 6972,
+     "sorgente": "self.d0[mask] += self._sd0(",
+     "vincolo": true
+    },
+    {
+     "attributo": "phi",
+     "forma": "[]=",
+     "riga": 7021,
+     "sorgente": "self.phi[ii] = (self.phi[ii] + shift_fase_dinamico) % self._dphi()",
+     "vincolo": true
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_cc_salti",
+    "_g_cc_scarto_d0",
+    "_g_cc_shape",
+    "_g_cc_tot",
+    "_g_cc_usi",
+    "_g_cct_allarga",
+    "_g_cct_archi",
+    "_g_cct_min",
+    "_g_cct_rapmax",
+    "_g_cct_salti",
+    "_g_cct_stringe",
+    "_g_cct_tot",
+    "_g_cct_usi",
+    "_g_cct_viol",
+    "_g_coes_adim_usi",
+    "_g_coes_archi",
+    "_g_coes_max",
+    "_g_coes_satura",
+    "_g_coes_tetto",
+    "_g_k_frange_spento",
+    "_g_k_frange_tot",
+    "_g_nb_grav_proiez_quando",
+    "_g_nb_grav_proiez_salti",
+    "_g_nb_grav_proiez_shape",
+    "_g_nb_grav_proiez_tot",
+    "_g_s2full_conmask",
+    "_g_s2full_fuori",
+    "_g_s2full_fuori_max",
+    "_g_s2full_quando",
+    "_g_s2full_tot"
+   ],
+   "tipo": "dinamica"
+  },
+  "mitosi": {
+   "n_scritture": 82,
+   "scrive": [
+    "_g_m2l_dmin",
+    "_g_m2l_negati",
+    "_g_m2l_tot",
+    "_g_nati_mitosi",
+    "_g_nati_mitosi_ev",
+    "_g_nati_schwinger",
+    "_g_nati_schwinger_ev",
+    "_g_peqn_archi",
+    "_g_peqn_ev",
+    "_g_peqn_mediana",
+    "_g_tors4pi_quando",
+    "_g_tors4pi_salti",
+    "_g_tors4pi_shape",
+    "_g_tors4pi_tot",
+    "_peqn_idx",
+    "_rep",
+    "_rep_dte_assente",
+    "_rep_dte_fallback",
+    "_rep_guardia_salti",
+    "_rep_guardia_shape",
+    "_rep_guardia_tot",
+    "_rep_realloc",
+    "_rep_scarto_max",
+    "_rep_taupp_clamp",
+    "_rep_taupp_tot",
+    "_tum_clip0_prob",
+    "_tum_clip_prob",
+    "_tum_clip_prob_tot",
+    "_tum_clip_rep",
+    "_tum_clip_rep_tot",
+    "_tum_eulero_gt1",
+    "_tum_eulero_tot",
+    "conc_archi",
+    "coppie_nate",
+    "d",
+    "d0",
+    "eta",
+    "i",
+    "j",
+    "mem_mot",
+    "nati",
+    "negate",
+    "peq",
+    "perc_chi",
+    "perc_geom",
+    "perc_tw",
+    "phi",
+    "phi0",
+    "phi_s",
+    "phivel",
+    "pos",
+    "tw",
+    "twp",
+    "ultima_frac_antifase",
+    "ultima_prob_coppia",
+    "vd"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_tors4pi_tot",
+     "forma": "=",
+     "riga": 5928,
+     "sorgente": "self._g_tors4pi_tot = getattr(self, \"_g_tors4pi_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_tors4pi_salti",
+     "forma": "=",
+     "riga": 5936,
+     "sorgente": "self._g_tors4pi_salti = getattr(self, \"_g_tors4pi_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_tors4pi_shape",
+     "forma": "=",
+     "riga": 5937,
+     "sorgente": "self._g_tors4pi_shape = (len(self.i), len(avv))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_tors4pi_quando",
+     "forma": "=",
+     "riga": 5938,
+     "sorgente": "self._g_tors4pi_quando = self._g_tors4pi_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_clip_prob_tot",
+     "forma": "=",
+     "riga": 6026,
+     "sorgente": "self._tum_clip_prob_tot = getattr(self, \"_tum_clip_prob_tot\", 0) + int(np.size(resp))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_clip_prob",
+     "forma": "=",
+     "riga": 6027,
+     "sorgente": "self._tum_clip_prob = (getattr(self, \"_tum_clip_prob\", 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_clip0_prob",
+     "forma": "=",
+     "riga": 6036,
+     "sorgente": "self._tum_clip0_prob = (getattr(self, \"_tum_clip0_prob\", 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_clip_rep_tot",
+     "forma": "=",
+     "riga": 6054,
+     "sorgente": "self._tum_clip_rep_tot = getattr(self, \"_tum_clip_rep_tot\", 0) + int(np.size(_resp_rep))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_clip_rep",
+     "forma": "=",
+     "riga": 6055,
+     "sorgente": "self._tum_clip_rep = (getattr(self, \"_tum_clip_rep\", 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_rep_dte_assente",
+     "forma": "=",
+     "riga": 6075,
+     "sorgente": "self._rep_dte_assente = getattr(self, \"_rep_dte_assente\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_rep_dte_fallback",
+     "forma": "=",
+     "riga": 6079,
+     "sorgente": "self._rep_dte_fallback = getattr(self, \"_rep_dte_fallback\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_rep_realloc",
+     "forma": "=",
+     "riga": 6083,
+     "sorgente": "self._rep_realloc = getattr(self, \"_rep_realloc\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_rep",
+     "forma": "=",
+     "riga": 6084,
+     "sorgente": "self._rep = np.zeros(len(rep))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_rep_taupp_clamp",
+     "forma": "=",
+     "riga": 6089,
+     "sorgente": "self._rep_taupp_clamp = getattr(self, \"_rep_taupp_clamp\", 0) + int(np.sum(np.asarray(pos_torsione) < 1e-12))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_rep_taupp_tot",
+     "forma": "=",
+     "riga": 6090,
+     "sorgente": "self._rep_taupp_tot = getattr(self, \"_rep_taupp_tot\", 0) + int(np.size(pos_torsione))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_eulero_gt1",
+     "forma": "=",
+     "riga": 6107,
+     "sorgente": "self._tum_eulero_gt1 = (getattr(self, \"_tum_eulero_gt1\", 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_tum_eulero_tot",
+     "forma": "=",
+     "riga": 6109,
+     "sorgente": "self._tum_eulero_tot = getattr(self, \"_tum_eulero_tot\", 0) + int(np.size(_rap))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_rep",
+     "forma": "=",
+     "riga": 6110,
+     "sorgente": "self._rep = rep + (self._rep - rep) * np.exp(-_rap)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_rep_scarto_max",
+     "forma": "=",
+     "riga": 6114,
+     "sorgente": "self._rep_scarto_max = max(getattr(self, \"_rep_scarto_max\", 0.0),",
+     "vincolo": false
+    },
+    {
+     "attributo": "_rep_guardia_tot",
+     "forma": "=",
+     "riga": 6120,
+     "sorgente": "self._rep_guardia_tot = getattr(self, \"_rep_guardia_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_rep_guardia_salti",
+     "forma": "=",
+     "riga": 6122,
+     "sorgente": "self._rep_guardia_salti = getattr(self, \"_rep_guardia_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_rep_guardia_shape",
+     "forma": "=",
+     "riga": 6123,
+     "sorgente": "self._rep_guardia_shape = (len(self.d0), len(avv))",
+     "vincolo": false
+    },
+    {
+     "attributo": "d0",
+     "forma": "=",
+     "riga": 6138,
+     "sorgente": "self.d0 = self.d0 + self._sd0(spinta)          # Locale pura",
+     "vincolo": true
+    },
+    {
+     "attributo": "_g_m2l_tot",
+     "forma": "=",
+     "riga": 6155,
+     "sorgente": "self._g_m2l_tot = getattr(self, \"_g_m2l_tot\", 0) + int(np.size(c))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_m2l_negati",
+     "forma": "=",
+     "riga": 6159,
+     "sorgente": "self._g_m2l_negati = getattr(self, \"_g_m2l_negati\", 0) + int(np.sum(~_conforme))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_m2l_dmin",
+     "forma": "=",
+     "riga": 6160,
+     "sorgente": "self._g_m2l_dmin = min(getattr(self, \"_g_m2l_dmin\", float(\"inf\")),",
+     "vincolo": false
+    },
+    {
+     "attributo": "negate",
+     "forma": "+=",
+     "riga": 6163,
+     "sorgente": "self.negate += int((~ok).sum()); sel = c[ok]",
+     "vincolo": false
+    },
+    {
+     "attributo": "ultima_frac_antifase",
+     "forma": "=",
+     "riga": 6207,
+     "sorgente": "self.ultima_frac_antifase = float(flip.mean()) if len(flip) else 0.0",
+     "vincolo": false
+    },
+    {
+     "attributo": "pos",
+     "forma": "=",
+     "riga": 6208,
+     "sorgente": "self.pos = np.vstack([self.pos, pos_figlio])",
+     "vincolo": false
+    },
+    {
+     "attributo": "phi",
+     "forma": "=",
+     "riga": 6209,
+     "sorgente": "self.phi = np.concatenate([self.phi, fm]); self.phi0 = np.concatenate([self.phi0, fm])",
+     "vincolo": false
+    },
+    {
+     "attributo": "phi0",
+     "forma": "=",
+     "riga": 6209,
+     "sorgente": "self.phi = np.concatenate([self.phi, fm]); self.phi0 = np.concatenate([self.phi0, fm])",
+     "vincolo": false
+    },
+    {
+     "attributo": "phi_s",
+     "forma": "=",
+     "riga": 6210,
+     "sorgente": "self.phi_s = np.concatenate([self.phi_s, self.phi_s[a]])   # spinore del figlio: eredita dal genitore",
+     "vincolo": false
+    },
+    {
+     "attributo": "phivel",
+     "forma": "=",
+     "riga": 6211,
+     "sorgente": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[a] + self.phivel[b])])",
+     "vincolo": false
+    },
+    {
+     "attributo": "eta",
+     "forma": "=",
+     "riga": 6212,
+     "sorgente": "self.eta = np.concatenate([self.eta, np.zeros(len(sel))])",
+     "vincolo": false
+    },
+    {
+     "attributo": "perc_chi",
+     "forma": "=",
+     "riga": 6215,
+     "sorgente": "self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])",
+     "vincolo": false
+    },
+    {
+     "attributo": "perc_geom",
+     "forma": "=",
+     "riga": 6218,
+     "sorgente": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[a]])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nati_mitosi",
+     "forma": "=",
+     "riga": 6224,
+     "sorgente": "self._g_nati_mitosi = getattr(self, \"_g_nati_mitosi\", 0) + int(len(a))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nati_mitosi_ev",
+     "forma": "=",
+     "riga": 6225,
+     "sorgente": "self._g_nati_mitosi_ev = getattr(self, \"_g_nati_mitosi_ev\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "perc_tw",
+     "forma": "=",
+     "riga": 6226,
+     "sorgente": "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(len(sel))])",
+     "vincolo": false
+    },
+    {
+     "attributo": "mem_mot",
+     "forma": "=",
+     "riga": 6227,
+     "sorgente": "self.mem_mot = np.vstack([self.mem_mot, self.mem_mot[a]]) if len(self.mem_mot) else np.zeros((len(sel), 3))",
+     "vincolo": false
+    },
+    {
+     "attributo": "phi",
+     "forma": "[]=",
+     "riga": 6248,
+     "sorgente": "self.phi[a] = (self.phi[a] + calcio_a) % self._dphi()",
+     "vincolo": true
+    },
+    {
+     "attributo": "phi",
+     "forma": "[]=",
+     "riga": 6249,
+     "sorgente": "self.phi[b] = (self.phi[b] + calcio_b) % self._dphi()",
+     "vincolo": true
+    },
+    {
+     "attributo": "phi",
+     "forma": "[]=",
+     "riga": 6252,
+     "sorgente": "self.phi[g] = (self.phi[g] + self.rng.normal(0, 1, len(g)) *",
+     "vincolo": true
+    },
+    {
+     "attributo": "i",
+     "forma": "=",
+     "riga": 6275,
+     "sorgente": "self.i = np.concatenate([self.i[keep], a, m])",
+     "vincolo": false
+    },
+    {
+     "attributo": "j",
+     "forma": "=",
+     "riga": 6276,
+     "sorgente": "self.j = np.concatenate([self.j[keep], m, b])",
+     "vincolo": false
+    },
+    {
+     "attributo": "conc_archi",
+     "forma": "=",
+     "riga": 6281,
+     "sorgente": "self.conc_archi = ([self.conc_archi[e] if e < len(self.conc_archi) else []",
+     "vincolo": false
+    },
+    {
+     "attributo": "d",
+     "forma": "=",
+     "riga": 6288,
+     "sorgente": "self.d = np.concatenate([self.d[keep], dh, dh])",
+     "vincolo": false
+    },
+    {
+     "attributo": "d0",
+     "forma": "=",
+     "riga": 6291,
+     "sorgente": "self.d0 = np.concatenate([self.d0[keep], d0new])",
+     "vincolo": false
+    },
+    {
+     "attributo": "vd",
+     "forma": "=",
+     "riga": 6293,
+     "sorgente": "self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])",
+     "vincolo": false
+    },
+    {
+     "attributo": "peq",
+     "forma": "=",
+     "riga": 6294,
+     "sorgente": "self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_rep",
+     "forma": "=",
+     "riga": 6298,
+     "sorgente": "self._rep = np.concatenate([self._rep[keep], self._rep[sel], self._rep[sel]])",
+     "vincolo": false
+    },
+    {
+     "attributo": "tw",
+     "forma": "=",
+     "riga": 6300,
+     "sorgente": "self.tw = np.concatenate([self.tw[keep], zz, zz])",
+     "vincolo": false
+    },
+    {
+     "attributo": "twp",
+     "forma": "=",
+     "riga": 6301,
+     "sorgente": "self.twp = np.concatenate([self.twp[keep], self._wphi(self.phi[a] - fm),",
+     "vincolo": false
+    },
+    {
+     "attributo": "nati",
+     "forma": "+=",
+     "riga": 6303,
+     "sorgente": "self._grado(); self.nati += len(sel)",
+     "vincolo": false
+    },
+    {
+     "attributo": "ultima_prob_coppia",
+     "forma": "=",
+     "riga": 6336,
+     "sorgente": "self.ultima_prob_coppia = float(prob_coppia.mean()) if len(prob_coppia) else 0.0",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peqn_archi",
+     "forma": "=",
+     "riga": 6360,
+     "sorgente": "self._g_peqn_archi = getattr(self, '_g_peqn_archi', 0) + int(2 * nc)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peqn_ev",
+     "forma": "=",
+     "riga": 6361,
+     "sorgente": "self._g_peqn_ev = getattr(self, '_g_peqn_ev', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peqn_mediana",
+     "forma": "=",
+     "riga": 6362,
+     "sorgente": "self._g_peqn_mediana = float(np.median(self.peq))   # cio' che si EVITA",
+     "vincolo": false
+    },
+    {
+     "attributo": "pos",
+     "forma": "=",
+     "riga": 6363,
+     "sorgente": "self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])",
+     "vincolo": false
+    },
+    {
+     "attributo": "phi",
+     "forma": "=",
+     "riga": 6364,
+     "sorgente": "self.phi = np.concatenate([self.phi, anti])",
+     "vincolo": false
+    },
+    {
+     "attributo": "phi0",
+     "forma": "=",
+     "riga": 6365,
+     "sorgente": "self.phi0 = np.concatenate([self.phi0, anti])",
+     "vincolo": false
+    },
+    {
+     "attributo": "phi_s",
+     "forma": "=",
+     "riga": 6366,
+     "sorgente": "self.phi_s = np.concatenate([self.phi_s, np.zeros(nc)])   # spinore antinodo: 0 (inerte se spento)",
+     "vincolo": false
+    },
+    {
+     "attributo": "phivel",
+     "forma": "=",
+     "riga": 6367,
+     "sorgente": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[aa] + self.phivel[bb])])",
+     "vincolo": false
+    },
+    {
+     "attributo": "eta",
+     "forma": "=",
+     "riga": 6368,
+     "sorgente": "self.eta = np.concatenate([self.eta, np.zeros(nc)])",
+     "vincolo": false
+    },
+    {
+     "attributo": "perc_chi",
+     "forma": "=",
+     "riga": 6371,
+     "sorgente": "self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])",
+     "vincolo": false
+    },
+    {
+     "attributo": "perc_geom",
+     "forma": "=",
+     "riga": 6375,
+     "sorgente": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[aa]])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nati_schwinger",
+     "forma": "=",
+     "riga": 6379,
+     "sorgente": "self._g_nati_schwinger = getattr(self, \"_g_nati_schwinger\", 0) + int(nc)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nati_schwinger_ev",
+     "forma": "=",
+     "riga": 6380,
+     "sorgente": "self._g_nati_schwinger_ev = getattr(self, \"_g_nati_schwinger_ev\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "perc_tw",
+     "forma": "=",
+     "riga": 6381,
+     "sorgente": "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(nc)])",
+     "vincolo": false
+    },
+    {
+     "attributo": "mem_mot",
+     "forma": "=",
+     "riga": 6382,
+     "sorgente": "self.mem_mot = np.vstack([self.mem_mot, np.zeros((nc, 3))]) if len(self.mem_mot) else np.zeros((nc, 3))",
+     "vincolo": false
+    },
+    {
+     "attributo": "i",
+     "forma": "=",
+     "riga": 6397,
+     "sorgente": "self.i = np.concatenate([self.i, aa, k])",
+     "vincolo": false
+    },
+    {
+     "attributo": "j",
+     "forma": "=",
+     "riga": 6398,
+     "sorgente": "self.j = np.concatenate([self.j, k, bb])",
+     "vincolo": false
+    },
+    {
+     "attributo": "d",
+     "forma": "=",
+     "riga": 6399,
+     "sorgente": "self.d = np.concatenate([self.d, dd, dd])",
+     "vincolo": false
+    },
+    {
+     "attributo": "d0",
+     "forma": "=",
+     "riga": 6402,
+     "sorgente": "self.d0 = np.concatenate([self.d0, dd, dd])",
+     "vincolo": false
+    },
+    {
+     "attributo": "vd",
+     "forma": "=",
+     "riga": 6404,
+     "sorgente": "self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])",
+     "vincolo": false
+    },
+    {
+     "attributo": "peq",
+     "forma": "=",
+     "riga": 6405,
+     "sorgente": "self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])",
+     "vincolo": false
+    },
+    {
+     "attributo": "_peqn_idx",
+     "forma": "=",
+     "riga": 6410,
+     "sorgente": "self._peqn_idx = np.arange(len(self.peq) - 2 * nc, len(self.peq))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_rep",
+     "forma": "=",
+     "riga": 6411,
+     "sorgente": "self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])   # [(3)] archi nuovi",
+     "vincolo": false
+    },
+    {
+     "attributo": "tw",
+     "forma": "=",
+     "riga": 6413,
+     "sorgente": "self.tw = np.concatenate([self.tw, zz2, zz2])",
+     "vincolo": false
+    },
+    {
+     "attributo": "twp",
+     "forma": "=",
+     "riga": 6414,
+     "sorgente": "self.twp = np.concatenate([self.twp, self._wphi(self.phi[aa] - anti),",
+     "vincolo": false
+    },
+    {
+     "attributo": "nati",
+     "forma": "+=",
+     "riga": 6416,
+     "sorgente": "self._grado(); self.nati += nc; self.coppie_nate += nc",
+     "vincolo": false
+    },
+    {
+     "attributo": "coppie_nate",
+     "forma": "+=",
+     "riga": 6416,
+     "sorgente": "self._grado(); self.nati += nc; self.coppie_nate += nc",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_m2l_dmin",
+    "_g_m2l_negati",
+    "_g_m2l_tot",
+    "_g_nati_mitosi",
+    "_g_nati_mitosi_ev",
+    "_g_nati_schwinger",
+    "_g_nati_schwinger_ev",
+    "_g_peqn_archi",
+    "_g_peqn_ev",
+    "_g_peqn_mediana",
+    "_g_tors4pi_quando",
+    "_g_tors4pi_salti",
+    "_g_tors4pi_shape",
+    "_g_tors4pi_tot"
+   ],
+   "tipo": "AMBIGUA"
+  },
+  "pozzo_grafo": {
+   "n_scritture": 2,
+   "scrive": [
+    "_pozzo_d_nonpos",
+    "_pozzo_d_tot"
+   ],
+   "siti": [
+    {
+     "attributo": "_pozzo_d_nonpos",
+     "forma": "=",
+     "riga": 6561,
+     "sorgente": "self._pozzo_d_nonpos = (getattr(self, '_pozzo_d_nonpos', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_pozzo_d_tot",
+     "forma": "=",
+     "riga": 6563,
+     "sorgente": "self._pozzo_d_tot = getattr(self, '_pozzo_d_tot', 0) + int(np.size(L))",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "rilassa_disegno": {
+   "n_scritture": 3,
+   "scrive": [
+    "pos"
+   ],
+   "siti": [
+    {
+     "attributo": "pos",
+     "forma": "+=",
+     "riga": 6495,
+     "sorgente": "self.pos += EMB_ETA * np.clip(acc, -0.5, 0.5)",
+     "vincolo": false
+    },
+    {
+     "attributo": "pos",
+     "forma": "=",
+     "riga": 6497,
+     "sorgente": "self.pos = np.nan_to_num(self.pos, nan=0.0, posinf=0.0, neginf=0.0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "pos",
+     "forma": "+=",
+     "riga": 6498,
+     "sorgente": "self.pos -= self.pos.mean(axis=0)",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [],
+   "tipo": "disegno"
+  },
+  "ritmo": {
+   "n_scritture": 13,
+   "scrive": [
+    "_med_f_ultimo",
+    "_psi_prec",
+    "_ritmo_chiamate",
+    "_ritmo_f_mediana_nulla",
+    "_ritmo_f_tutto_nullo",
+    "_ritmo_guard4pi_ko",
+    "_ritmo_guard4pi_shape",
+    "_ritmo_med_assente",
+    "_ritmo_med_identico",
+    "_ritmo_med_sul_pavimento",
+    "_ritmo_sicurezza",
+    "_ritmo_sicurezza_shape",
+    "_ritmo_snap_identico"
+   ],
+   "siti": [
+    {
+     "attributo": "_ritmo_chiamate",
+     "forma": "=",
+     "riga": 3048,
+     "sorgente": "self._ritmo_chiamate = getattr(self, \"_ritmo_chiamate\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_ritmo_sicurezza",
+     "forma": "=",
+     "riga": 3050,
+     "sorgente": "self._ritmo_sicurezza = getattr(self, \"_ritmo_sicurezza\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_ritmo_sicurezza_shape",
+     "forma": "=",
+     "riga": 3051,
+     "sorgente": "self._ritmo_sicurezza_shape = (",
+     "vincolo": false
+    },
+    {
+     "attributo": "_psi_prec",
+     "forma": "=",
+     "riga": 3053,
+     "sorgente": "self._psi_prec = self.psi.copy() if len(self.psi) == self.n else np.ones(self.n, complex)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_ritmo_guard4pi_ko",
+     "forma": "=",
+     "riga": 3066,
+     "sorgente": "self._ritmo_guard4pi_ko = getattr(self, \"_ritmo_guard4pi_ko\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_ritmo_guard4pi_shape",
+     "forma": "=",
+     "riga": 3067,
+     "sorgente": "self._ritmo_guard4pi_shape = (-1 if _ps is None else len(_ps),",
+     "vincolo": false
+    },
+    {
+     "attributo": "_ritmo_snap_identico",
+     "forma": "=",
+     "riga": 3073,
+     "sorgente": "self._ritmo_snap_identico = getattr(self, \"_ritmo_snap_identico\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_ritmo_f_tutto_nullo",
+     "forma": "=",
+     "riga": 3093,
+     "sorgente": "self._ritmo_f_tutto_nullo = getattr(self, \"_ritmo_f_tutto_nullo\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_ritmo_f_mediana_nulla",
+     "forma": "=",
+     "riga": 3095,
+     "sorgente": "self._ritmo_f_mediana_nulla = getattr(self, \"_ritmo_f_mediana_nulla\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_ritmo_med_sul_pavimento",
+     "forma": "=",
+     "riga": 3097,
+     "sorgente": "self._ritmo_med_sul_pavimento = getattr(self, \"_ritmo_med_sul_pavimento\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_med_f_ultimo",
+     "forma": "=",
+     "riga": 3124,
+     "sorgente": "self._med_f_ultimo = _med_corrente             # REGISTRO, non snapshot: lo promuove step()",
+     "vincolo": false
+    },
+    {
+     "attributo": "_ritmo_med_assente",
+     "forma": "=",
+     "riga": 3131,
+     "sorgente": "self._ritmo_med_assente = getattr(self, \"_ritmo_med_assente\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_ritmo_med_identico",
+     "forma": "=",
+     "riga": 3137,
+     "sorgente": "self._ritmo_med_identico = getattr(self, \"_ritmo_med_identico\", 0) + 1",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_ritmo_chiamate",
+    "_ritmo_f_mediana_nulla",
+    "_ritmo_f_tutto_nullo",
+    "_ritmo_guard4pi_ko",
+    "_ritmo_guard4pi_shape",
+    "_ritmo_med_assente",
+    "_ritmo_med_identico",
+    "_ritmo_med_sul_pavimento",
+    "_ritmo_sicurezza",
+    "_ritmo_sicurezza_shape",
+    "_ritmo_snap_identico"
+   ],
+   "tipo": "dinamica"
+  },
+  "satura": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "scuoti_vuoto": {
+   "n_scritture": 5,
+   "scrive": [
+    "_g_calore_chi_quando",
+    "_g_calore_chi_salti",
+    "_g_calore_chi_shape",
+    "_g_calore_chi_tot",
+    "phivel"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_calore_chi_tot",
+     "forma": "=",
+     "riga": 835,
+     "sorgente": "net._g_calore_chi_tot = getattr(net, \"_g_calore_chi_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_calore_chi_salti",
+     "forma": "=",
+     "riga": 837,
+     "sorgente": "net._g_calore_chi_salti = getattr(net, \"_g_calore_chi_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_calore_chi_shape",
+     "forma": "=",
+     "riga": 838,
+     "sorgente": "net._g_calore_chi_shape = (len(getattr(net, \"perc_chi\", [])), net.n)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_calore_chi_quando",
+     "forma": "=",
+     "riga": 839,
+     "sorgente": "net._g_calore_chi_quando = net._g_calore_chi_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "phivel",
+     "forma": "[]+=",
+     "riga": 843,
+     "sorgente": "net.phivel[:net.n] += calcio",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_calore_chi_quando",
+    "_g_calore_chi_salti",
+    "_g_calore_chi_shape",
+    "_g_calore_chi_tot"
+   ],
+   "tipo": "dinamica"
+  },
+  "stato_crossover": {
+   "n_scritture": 0,
+   "scrive": [],
+   "siti": [],
+   "solo_diagnostici": [],
+   "tipo": "osservatore"
+  },
+  "step": {
+   "n_scritture": 91,
+   "scrive": [
+    "_cs_nodo_prev",
+    "_dt_e_ultimo",
+    "_g_as_archi",
+    "_g_as_fuori",
+    "_g_as_max",
+    "_g_as_polo",
+    "_g_as_usi",
+    "_g_as_zero",
+    "_g_chi_da_spinore_quando",
+    "_g_chi_da_spinore_salti",
+    "_g_chi_da_spinore_shape",
+    "_g_chi_da_spinore_tot",
+    "_g_chibasc_su_chi",
+    "_g_chibasc_su_geom",
+    "_g_nsub_stop",
+    "_g_peqn_cal",
+    "_g_peqn_scarto_max",
+    "_g_peqn_uguali_rho",
+    "_g_peqn_vs_med",
+    "_g_smp_d_chiusure",
+    "_g_smp_d_nsub",
+    "_g_snap_psispin_quando",
+    "_g_snap_psispin_salti",
+    "_g_snap_psispin_shape",
+    "_g_snap_psispin_tot",
+    "_g_spinore_vivo_quando",
+    "_g_spinore_vivo_salti",
+    "_g_spinore_vivo_shape",
+    "_g_spinore_vivo_tot",
+    "_g_temposegno_quando",
+    "_g_temposegno_salti",
+    "_g_temposegno_shape",
+    "_g_temposegno_tot",
+    "_g_zeta_vir_a_quando",
+    "_g_zeta_vir_a_salti",
+    "_g_zeta_vir_a_shape",
+    "_g_zeta_vir_a_tot",
+    "_g_zeta_vir_b_quando",
+    "_g_zeta_vir_b_salti",
+    "_g_zeta_vir_b_shape",
+    "_g_zeta_vir_b_tot",
+    "_med_f_prec",
+    "_peqn_idx",
+    "_psi_prec",
+    "_psi_spin_prec",
+    "_r_corrente",
+    "_ritmo_med_non_promosso",
+    "_sfb_amp_coppia",
+    "_sfb_amp_fb",
+    "_sfb_rapporto_max",
+    "_sfb_rapporto_n",
+    "_sfb_rapporto_som",
+    "_taup_Inodi_chiamate",
+    "_taup_Inodi_fallback",
+    "_taup_causale_scatti",
+    "_taup_causale_su_degenere",
+    "_taup_causale_tot",
+    "_taup_cfl_max",
+    "_taup_cs_clamp",
+    "_taup_cs_clamp_tot",
+    "_taup_peq_deg_passi",
+    "_taup_peq_deg_ultimo",
+    "_taup_peq_degenere",
+    "d",
+    "d0",
+    "eta",
+    "peq",
+    "perc_chi",
+    "perc_geom",
+    "phi",
+    "phivel",
+    "psi",
+    "tw",
+    "twp",
+    "vd",
+    "xi_termo"
+   ],
+   "siti": [
+    {
+     "attributo": "_psi_prec",
+     "forma": "=",
+     "riga": 5106,
+     "sorgente": "self._psi_prec = self.psi.copy()",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_snap_psispin_tot",
+     "forma": "=",
+     "riga": 5112,
+     "sorgente": "self._g_snap_psispin_tot = getattr(self, \"_g_snap_psispin_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_snap_psispin_salti",
+     "forma": "=",
+     "riga": 5115,
+     "sorgente": "self._g_snap_psispin_salti = getattr(self, \"_g_snap_psispin_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_snap_psispin_shape",
+     "forma": "=",
+     "riga": 5116,
+     "sorgente": "self._g_snap_psispin_shape = (len(getattr(self, \"psi_spin\", [])), self.n)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_snap_psispin_quando",
+     "forma": "=",
+     "riga": 5117,
+     "sorgente": "self._g_snap_psispin_quando = self._g_snap_psispin_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "_psi_spin_prec",
+     "forma": "=",
+     "riga": 5119,
+     "sorgente": "self._psi_spin_prec = self.psi_spin.copy()   # [FASE 5] snapshot per il ritmo spinoriale (4pi)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_med_f_prec",
+     "forma": "=",
+     "riga": 5135,
+     "sorgente": "self._med_f_prec = _mu",
+     "vincolo": false
+    },
+    {
+     "attributo": "_ritmo_med_non_promosso",
+     "forma": "=",
+     "riga": 5137,
+     "sorgente": "self._ritmo_med_non_promosso = getattr(self, \"_ritmo_med_non_promosso\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_dt_e_ultimo",
+     "forma": "=",
+     "riga": 5143,
+     "sorgente": "self._dt_e_ultimo = dt_e",
+     "vincolo": false
+    },
+    {
+     "attributo": "_r_corrente",
+     "forma": "=",
+     "riga": 5150,
+     "sorgente": "self._r_corrente = r",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_temposegno_tot",
+     "forma": "=",
+     "riga": 5159,
+     "sorgente": "self._g_temposegno_tot = getattr(self, \"_g_temposegno_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_temposegno_salti",
+     "forma": "=",
+     "riga": 5162,
+     "sorgente": "self._g_temposegno_salti = getattr(self, \"_g_temposegno_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_temposegno_shape",
+     "forma": "=",
+     "riga": 5163,
+     "sorgente": "self._g_temposegno_shape = (len(self.perc_chi), len(self.psi), self.n)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_temposegno_quando",
+     "forma": "=",
+     "riga": 5164,
+     "sorgente": "self._g_temposegno_quando = self._g_temposegno_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "eta",
+     "forma": "+=",
+     "riga": 5169,
+     "sorgente": "w = self._pesi(); self.eta += dt_n",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfb_amp_coppia",
+     "forma": "=",
+     "riga": 5258,
+     "sorgente": "self._sfb_amp_coppia = max(getattr(self, \"_sfb_amp_coppia\", 0.0), _cm)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfb_amp_fb",
+     "forma": "=",
+     "riga": 5259,
+     "sorgente": "self._sfb_amp_fb = max(getattr(self, \"_sfb_amp_fb\", 0.0), _fm)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfb_rapporto_max",
+     "forma": "=",
+     "riga": 5260,
+     "sorgente": "self._sfb_rapporto_max = max(getattr(self, \"_sfb_rapporto_max\", 0.0), _r)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfb_rapporto_som",
+     "forma": "=",
+     "riga": 5261,
+     "sorgente": "self._sfb_rapporto_som = getattr(self, \"_sfb_rapporto_som\", 0.0) + _r",
+     "vincolo": false
+    },
+    {
+     "attributo": "_sfb_rapporto_n",
+     "forma": "=",
+     "riga": 5262,
+     "sorgente": "self._sfb_rapporto_n = getattr(self, \"_sfb_rapporto_n\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "xi_termo",
+     "forma": "+=",
+     "riga": 5348,
+     "sorgente": "self.xi_termo += dt_scal * (err_rel - self.xi_termo) / tau_termo",
+     "vincolo": false
+    },
+    {
+     "attributo": "xi_termo",
+     "forma": "=",
+     "riga": 5349,
+     "sorgente": "self.xi_termo = float(np.clip(self.xi_termo, -2.0, 2.0))   # guardia: attrito fisico limitato",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_spinore_vivo_tot",
+     "forma": "=",
+     "riga": 5410,
+     "sorgente": "self._g_spinore_vivo_tot = getattr(self, \"_g_spinore_vivo_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_spinore_vivo_salti",
+     "forma": "=",
+     "riga": 5412,
+     "sorgente": "self._g_spinore_vivo_salti = getattr(self, \"_g_spinore_vivo_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_spinore_vivo_shape",
+     "forma": "=",
+     "riga": 5413,
+     "sorgente": "self._g_spinore_vivo_shape = (len(self.phi_s), self.n)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_spinore_vivo_quando",
+     "forma": "=",
+     "riga": 5414,
+     "sorgente": "self._g_spinore_vivo_quando = self._g_spinore_vivo_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "phivel",
+     "forma": "=",
+     "riga": 5420,
+     "sorgente": "self.phivel = _phivel_t + delta_phivel",
+     "vincolo": false
+    },
+    {
+     "attributo": "phi",
+     "forma": "=",
+     "riga": 5421,
+     "sorgente": "self.phi = (_phi_t + (dt_n_s * self.phivel) + delta_sync_phi) % self._dphi()  # dt_n_s = verso firmato (5.3a)",
+     "vincolo": true
+    },
+    {
+     "attributo": "tw",
+     "forma": "+=",
+     "riga": 5447,
+     "sorgente": "self.tw += self._w8(dph + twist_dip - self.twp) - dt_e * self.tw / _ttw",
+     "vincolo": false
+    },
+    {
+     "attributo": "twp",
+     "forma": "=",
+     "riga": 5448,
+     "sorgente": "self.twp = self._w8(dph + twist_dip)",
+     "vincolo": false
+    },
+    {
+     "attributo": "tw",
+     "forma": "+=",
+     "riga": 5451,
+     "sorgente": "self.tw += self._w4(dph - self.twp) - dt_e * self.tw / _ttw",
+     "vincolo": false
+    },
+    {
+     "attributo": "twp",
+     "forma": "=",
+     "riga": 5452,
+     "sorgente": "self.twp = dph",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_chibasc_su_geom",
+     "forma": "=",
+     "riga": 5466,
+     "sorgente": "self._g_chibasc_su_geom = getattr(self, \"_g_chibasc_su_geom\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "perc_geom",
+     "forma": "[]=",
+     "riga": 5467,
+     "sorgente": "self.perc_geom[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_geom.dtype)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_chibasc_su_chi",
+     "forma": "=",
+     "riga": 5469,
+     "sorgente": "self._g_chibasc_su_chi = getattr(self, \"_g_chibasc_su_chi\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "perc_chi",
+     "forma": "[]=",
+     "riga": 5470,
+     "sorgente": "self.perc_chi[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_chi.dtype)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_chi_da_spinore_tot",
+     "forma": "=",
+     "riga": 5482,
+     "sorgente": "self._g_chi_da_spinore_tot = getattr(self, \"_g_chi_da_spinore_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_chi_da_spinore_salti",
+     "forma": "=",
+     "riga": 5486,
+     "sorgente": "self._g_chi_da_spinore_salti = getattr(self, \"_g_chi_da_spinore_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_chi_da_spinore_shape",
+     "forma": "=",
+     "riga": 5487,
+     "sorgente": "self._g_chi_da_spinore_shape = (len(self.perc_chi),",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_chi_da_spinore_quando",
+     "forma": "=",
+     "riga": 5489,
+     "sorgente": "self._g_chi_da_spinore_quando = self._g_chi_da_spinore_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "perc_chi",
+     "forma": "[]=",
+     "riga": 5494,
+     "sorgente": "self.perc_chi[:self.n] = np.where(np.real(_ov) >= 0.0, 1, -1).astype(self.perc_chi.dtype)",
+     "vincolo": false
+    },
+    {
+     "attributo": "psi",
+     "forma": "=",
+     "riga": 5502,
+     "sorgente": "self.psi = self.satura(F)",
+     "vincolo": true
+    },
+    {
+     "attributo": "_cs_nodo_prev",
+     "forma": "=",
+     "riga": 5516,
+     "sorgente": "self._cs_nodo_prev = cs_nodo.copy()",
+     "vincolo": false
+    },
+    {
+     "attributo": "peq",
+     "forma": "[]=",
+     "riga": 5526,
+     "sorgente": "if nuevos := nuovi.any(): self.peq[nuovi] = rho[nuovi]",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peqn_cal",
+     "forma": "=",
+     "riga": 5550,
+     "sorgente": "self._g_peqn_cal = getattr(self, '_g_peqn_cal', 0) + int(len(_sel_n))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peqn_vs_med",
+     "forma": "=",
+     "riga": 5551,
+     "sorgente": "self._g_peqn_vs_med = (getattr(self, '_g_peqn_vs_med', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peqn_uguali_rho",
+     "forma": "=",
+     "riga": 5553,
+     "sorgente": "self._g_peqn_uguali_rho = (getattr(self, '_g_peqn_uguali_rho', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_peqn_scarto_max",
+     "forma": "=",
+     "riga": 5556,
+     "sorgente": "self._g_peqn_scarto_max = max(",
+     "vincolo": false
+    },
+    {
+     "attributo": "_peqn_idx",
+     "forma": "=",
+     "riga": 5559,
+     "sorgente": "self._peqn_idx = None      # consumata: vale per UNA calibrazione sola",
+     "vincolo": false
+    },
+    {
+     "attributo": "peq",
+     "forma": "=",
+     "riga": 5578,
+     "sorgente": "self.peq = self._peq_esatto(rho, flusso, dt_e, tau_bg_loc)",
+     "vincolo": false
+    },
+    {
+     "attributo": "peq",
+     "forma": "+=",
+     "riga": 5580,
+     "sorgente": "self.peq += dt_e * ((rho - self.peq) / tau_bg_loc + flusso / TAU_DIFF)",
+     "vincolo": false
+    },
+    {
+     "attributo": "peq",
+     "forma": "=",
+     "riga": 5584,
+     "sorgente": "self.peq = self._peq_esatto(rho, flusso, dt_e, TAU_BG)",
+     "vincolo": false
+    },
+    {
+     "attributo": "peq",
+     "forma": "+=",
+     "riga": 5586,
+     "sorgente": "self.peq += dt_e * ((rho - self.peq) / TAU_BG + flusso / TAU_DIFF)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_as_usi",
+     "forma": "=",
+     "riga": 5603,
+     "sorgente": "self._g_as_usi = getattr(self, '_g_as_usi', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_as_zero",
+     "forma": "=",
+     "riga": 5604,
+     "sorgente": "self._g_as_zero = (getattr(self, '_g_as_zero', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_as_polo",
+     "forma": "=",
+     "riga": 5606,
+     "sorgente": "self._g_as_polo = (getattr(self, '_g_as_polo', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_as_archi",
+     "forma": "=",
+     "riga": 5608,
+     "sorgente": "self._g_as_archi = getattr(self, '_g_as_archi', 0) + int(len(anom))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_as_max",
+     "forma": "=",
+     "riga": 5610,
+     "sorgente": "self._g_as_max = max(getattr(self, '_g_as_max', 0.0),",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_as_fuori",
+     "forma": "=",
+     "riga": 5612,
+     "sorgente": "self._g_as_fuori = (getattr(self, '_g_as_fuori', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_zeta_vir_a_tot",
+     "forma": "=",
+     "riga": 5642,
+     "sorgente": "self._g_zeta_vir_a_tot = getattr(self, \"_g_zeta_vir_a_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_zeta_vir_a_salti",
+     "forma": "=",
+     "riga": 5658,
+     "sorgente": "self._g_zeta_vir_a_salti = getattr(self, \"_g_zeta_vir_a_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_zeta_vir_a_shape",
+     "forma": "=",
+     "riga": 5659,
+     "sorgente": "self._g_zeta_vir_a_shape = (-1 if self._sin2_vir is None else len(self._sin2_vir),",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_zeta_vir_a_quando",
+     "forma": "=",
+     "riga": 5661,
+     "sorgente": "self._g_zeta_vir_a_quando = self._g_zeta_vir_a_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nsub_stop",
+     "forma": "=",
+     "riga": 5669,
+     "sorgente": "self._g_nsub_stop = dict(nsub=int(nsub), n1=float(n1), n2=float(n2),",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_nsub_stop",
+     "forma": "=",
+     "riga": 5679,
+     "sorgente": "self._g_nsub_stop = dict(nsub=int(nsub), n1=float(n1), n2=float(n2),",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_zeta_vir_b_tot",
+     "forma": "=",
+     "riga": 5736,
+     "sorgente": "self._g_zeta_vir_b_tot = getattr(self, \"_g_zeta_vir_b_tot\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_zeta_vir_b_salti",
+     "forma": "=",
+     "riga": 5744,
+     "sorgente": "self._g_zeta_vir_b_salti = getattr(self, \"_g_zeta_vir_b_salti\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_zeta_vir_b_shape",
+     "forma": "=",
+     "riga": 5745,
+     "sorgente": "self._g_zeta_vir_b_shape = (-1 if self._sin2_vir is None",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_zeta_vir_b_quando",
+     "forma": "=",
+     "riga": 5747,
+     "sorgente": "self._g_zeta_vir_b_quando = self._g_zeta_vir_b_tot",
+     "vincolo": false
+    },
+    {
+     "attributo": "vd",
+     "forma": "=",
+     "riga": 5749,
+     "sorgente": "self.vd = vd_half + 0.5 * dts * acc_next",
+     "vincolo": false
+    },
+    {
+     "attributo": "d",
+     "forma": "=",
+     "riga": 5750,
+     "sorgente": "self.d = d_new",
+     "vincolo": false
+    },
+    {
+     "attributo": "vd",
+     "forma": "=",
+     "riga": 5759,
+     "sorgente": "self.vd = self.vd + dts * (cs_arco ** 2 * lap + src - beta * self.vd)",
+     "vincolo": false
+    },
+    {
+     "attributo": "d",
+     "forma": "=",
+     "riga": 5764,
+     "sorgente": "self.d = self.d + self._smorza(self.d, dts * self.vd, 'd')",
+     "vincolo": true
+    },
+    {
+     "attributo": "d",
+     "forma": "=",
+     "riga": 5766,
+     "sorgente": "self.d = self.d + dts * self.vd",
+     "vincolo": false
+    },
+    {
+     "attributo": "d",
+     "forma": "=",
+     "riga": 5773,
+     "sorgente": "self.d = _smp_d_ini + self._smorza(_smp_d_ini, _dxd, 'd_passo')",
+     "vincolo": true
+    },
+    {
+     "attributo": "_g_smp_d_chiusure",
+     "forma": "=",
+     "riga": 5774,
+     "sorgente": "self._g_smp_d_chiusure = getattr(self, '_g_smp_d_chiusure', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_smp_d_nsub",
+     "forma": "=",
+     "riga": 5775,
+     "sorgente": "self._g_smp_d_nsub = max(getattr(self, '_g_smp_d_nsub', 0), int(nsub))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_taup_Inodi_fallback",
+     "forma": "=",
+     "riga": 5800,
+     "sorgente": "self._taup_Inodi_fallback = getattr(self, \"_taup_Inodi_fallback\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_taup_Inodi_chiamate",
+     "forma": "=",
+     "riga": 5801,
+     "sorgente": "self._taup_Inodi_chiamate = getattr(self, \"_taup_Inodi_chiamate\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_taup_cs_clamp",
+     "forma": "=",
+     "riga": 5829,
+     "sorgente": "self._taup_cs_clamp = getattr(self, \"_taup_cs_clamp\", 0) + int(np.sum(np.asarray(cs_taup) < 1e-9))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_taup_cs_clamp_tot",
+     "forma": "=",
+     "riga": 5830,
+     "sorgente": "self._taup_cs_clamp_tot = getattr(self, \"_taup_cs_clamp_tot\", 0) + int(np.size(cs_taup))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_taup_peq_degenere",
+     "forma": "=",
+     "riga": 5835,
+     "sorgente": "self._taup_peq_degenere = getattr(self, \"_taup_peq_degenere\", 0) + int((~_peq_ok).sum())",
+     "vincolo": false
+    },
+    {
+     "attributo": "_taup_peq_deg_passi",
+     "forma": "=",
+     "riga": 5840,
+     "sorgente": "self._taup_peq_deg_passi = getattr(self, \"_taup_peq_deg_passi\", 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_taup_peq_deg_ultimo",
+     "forma": "=",
+     "riga": 5841,
+     "sorgente": "self._taup_peq_deg_ultimo = getattr(self, \"_passo_corrente\", -1)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_taup_causale_scatti",
+     "forma": "=",
+     "riga": 5848,
+     "sorgente": "self._taup_causale_scatti = getattr(self, \"_taup_causale_scatti\", 0) + int(_scatta.sum())",
+     "vincolo": false
+    },
+    {
+     "attributo": "_taup_causale_tot",
+     "forma": "=",
+     "riga": 5849,
+     "sorgente": "self._taup_causale_tot = getattr(self, \"_taup_causale_tot\", 0) + int(len(tau_p_loc))",
+     "vincolo": false
+    },
+    {
+     "attributo": "_taup_causale_su_degenere",
+     "forma": "=",
+     "riga": 5854,
+     "sorgente": "self._taup_causale_su_degenere = (getattr(self, \"_taup_causale_su_degenere\", 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_taup_cfl_max",
+     "forma": "=",
+     "riga": 5862,
+     "sorgente": "self._taup_cfl_max = max(getattr(self, \"_taup_cfl_max\", 0.0), _cfl)",
+     "vincolo": false
+    },
+    {
+     "attributo": "d0",
+     "forma": "+=",
+     "riga": 5864,
+     "sorgente": "self.d0 += self._sd0(dt_e * (self.d - self.d0) / tau_p_loc)",
+     "vincolo": true
+    },
+    {
+     "attributo": "d0",
+     "forma": "+=",
+     "riga": 5875,
+     "sorgente": "self.d0 += self._sd0(np.clip(dt_e * cs_taup * d_arco * _lap_d0, -_cfl, _cfl))",
+     "vincolo": true
+    },
+    {
+     "attributo": "d0",
+     "forma": "+=",
+     "riga": 5879,
+     "sorgente": "self.d0 += self._sd0(dt_e * (self.d - self.d0) / TAU_P)",
+     "vincolo": true
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_as_archi",
+    "_g_as_fuori",
+    "_g_as_max",
+    "_g_as_polo",
+    "_g_as_usi",
+    "_g_as_zero",
+    "_g_chi_da_spinore_quando",
+    "_g_chi_da_spinore_salti",
+    "_g_chi_da_spinore_shape",
+    "_g_chi_da_spinore_tot",
+    "_g_chibasc_su_chi",
+    "_g_chibasc_su_geom",
+    "_g_nsub_stop",
+    "_g_peqn_cal",
+    "_g_peqn_scarto_max",
+    "_g_peqn_uguali_rho",
+    "_g_peqn_vs_med",
+    "_g_smp_d_chiusure",
+    "_g_smp_d_nsub",
+    "_g_snap_psispin_quando",
+    "_g_snap_psispin_salti",
+    "_g_snap_psispin_shape",
+    "_g_snap_psispin_tot",
+    "_g_spinore_vivo_quando",
+    "_g_spinore_vivo_salti",
+    "_g_spinore_vivo_shape",
+    "_g_spinore_vivo_tot",
+    "_g_temposegno_quando",
+    "_g_temposegno_salti",
+    "_g_temposegno_shape",
+    "_g_temposegno_tot",
+    "_g_zeta_vir_a_quando",
+    "_g_zeta_vir_a_salti",
+    "_g_zeta_vir_a_shape",
+    "_g_zeta_vir_a_tot",
+    "_g_zeta_vir_b_quando",
+    "_g_zeta_vir_b_salti",
+    "_g_zeta_vir_b_shape",
+    "_g_zeta_vir_b_tot",
+    "_ritmo_med_non_promosso"
+   ],
+   "tipo": "dinamica"
+  },
+  "verifica_invarianti": {
+   "n_scritture": 4,
+   "scrive": [
+    "_g_inv_controllate",
+    "_g_inv_giri",
+    "_g_inv_peq_nan_ok",
+    "_g_inv_violati"
+   ],
+   "siti": [
+    {
+     "attributo": "_g_inv_giri",
+     "forma": "=",
+     "riga": 4263,
+     "sorgente": "self._g_inv_giri = getattr(self, '_g_inv_giri', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_inv_peq_nan_ok",
+     "forma": "=",
+     "riga": 4286,
+     "sorgente": "self._g_inv_peq_nan_ok = (getattr(self, '_g_inv_peq_nan_ok', 0)",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_inv_violati",
+     "forma": "=",
+     "riga": 4360,
+     "sorgente": "self._g_inv_violati = getattr(self, '_g_inv_violati', 0) + 1",
+     "vincolo": false
+    },
+    {
+     "attributo": "_g_inv_controllate",
+     "forma": "=",
+     "riga": 4363,
+     "sorgente": "self._g_inv_controllate = controllate",
+     "vincolo": false
+    }
+   ],
+   "solo_diagnostici": [
+    "_g_inv_controllate",
+    "_g_inv_giri",
+    "_g_inv_peq_nan_ok",
+    "_g_inv_violati"
+   ],
+   "tipo": "osservatore"
+  }
+ }
+}
