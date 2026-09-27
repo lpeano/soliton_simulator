@@ -1051,3 +1051,12 @@ esercitata**, perché in 3 passi nessuna mitosi ha diviso un arco.
 **Referto:** `csv/_seal_fork/_h_etc_2.json` *(blob byte `1da33034`)*.
 **⚠ Il presidio RILANCIA SE STESSO con `PYTHONHASHSEED=0`** *(`HASHSEED-RIPROD`)*: senza,
 **il referto non è riproducibile fra processi**.
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_hashseed_prova.py` | `02136001` | `PYTHONHASHSEED=1 python csv/_test_fork/_hashseed_prova.py --out=hs1.npz` · idem con `=2` · `python csv/_test_fork/_hashseed_prova.py --confronta hs1.npz hs2.npz` | **`PYTHONHASHSEED` cambia lo stato del simulatore?** Solo il simulatore: nessun presidio, nessuna iniezione di `rng`, **e lo strumento non contiene `hash()`** | ### **23/23 grandezze IDENTICHE byte per byte** → **`HASHSEED-RIPROD` è un falso allarme**, chiuso come `non-difetto` |
+
+**Referto:** `csv/_test_fork/_hashseed_prova.json`. *(Gli `.npz` sono locali e non committati: il
+comando è il dato.)*
+**E `csv/_seal_fork/_h_etc_2.py` passa a `708e1b6e`**: il rilancio automatico con
+`PYTHONHASHSEED=0` è **rimosso**. L'esito e il referto *(`sha1 1da33034`)* **non cambiano**.

@@ -4358,3 +4358,55 @@ ogni sigillo prima/dopo, **ogni sigillo byte-identico**.
 > repo è una decisione tua: tocca ogni sigillo esistente, e non la prendo io.**
 
 > ### 🛑 **STOP.** Prossimo: **`H-ETC-1`**, l'altro presidio — oggi `8`, dopo `0`, e deve fallire oggi.
+
+---
+
+# ❌ **`HASHSEED-RIPROD` È UN FALSO ALLARME MIO. Chiusa** *(2026-09-27)*
+
+**Avevi ragione su tutti e tre i punti.** `PYTHONHASHSEED` non c'entra niente.
+
+## La prova decisiva
+
+`csv/_test_fork/_hashseed_prova.py` — **il simulatore e basta**: argv del driver, scena `(ii)(a)`,
+seme `11`, 3 passi pieni nell'ordine canonico, **nessuna iniezione di `rng`, nessun presidio**, e
+**lo strumento non contiene `hash()`**.
+
+### **`PYTHONHASHSEED=1` vs `=2`: tutte e 23 le grandezze IDENTICHE, byte per byte.**
+*(le 21 di stato più `i` e `j`, `n = 2107` in entrambi)*
+
+**La causa delle differenze fra invocazioni era `hash()` dentro il presidio** — il suo difetto 2,
+che avevo **già curato**. Quindi stavo inseguendo un difetto **che avevo appena chiuso**.
+
+## E il terzo dei tuoi punti è quello che conta
+
+**①** il `V1` di `4f2b224` — altro processo, 4 semi, 120 passi, **0 campi diversi**, nessun
+`PYTHONHASHSEED` nel repo — **era già una prova contraria, e non l'ho pesata.**
+**②** le differenze sono emerse quando il presidio usava ancora `hash()`: era la causa più
+probabile, e l'ho scavalcata per una più grossa.
+**③** ### la mia riga *«senza fissare nulla»* **passava dal rilancio automatico con `0`.**
+
+> ### 📌 **Il terzo non è un dettaglio tecnico: avevo costruito la tabella in modo che non potesse
+> smentirmi.** Le due righe dicevano *«con `0`: identici»* e *«senza fissare nulla: identici»*, e
+> **la seconda fissava `0` da sé**. Non erano due verifiche: era **la stessa, scritta due volte.**
+> **Un controllo che non può fallire non è un controllo** — ed è esattamente ciò che `P1-sexies`
+> esiste per impedire. **L'ho fatto nella pagina in cui aggiungevo un controllo positivo a
+> `H-ETC-2` proprio per quella ragione.**
+
+## Che cosa ho tolto
+
+**Il rilancio automatico con `PYTHONHASHSEED=0` è RIMOSSO** da `H-ETC-2`: era una protezione da un
+errore inesistente (`A11` dice di **cercare l'errore** prima di scrivere la protezione — e
+l'errore era mio, nel presidio).
+
+| | |
+|---|---|
+| esito del presidio | ### **non cambia**: 3/3 falliscono, controllo positivo `0.000000e+00`, uscita `1` |
+| referto | ### **stesso `sha1 1da33034cbe3`** di quando il rilancio c'era |
+
+### **Cioè il rilancio non stava facendo niente: peso morto giustificato da un'analisi sbagliata.**
+**Nuovo blob del presidio: `708e1b6e`.** *(E dei tre difetti del presidio, il terzo —
+`os.execve` che su Windows esce `0` — era **il difetto di una cura che non serviva**. Ora non c'è
+più né la cura né il difetto.)*
+
+**Il par.4 del task history resta come era, annotato come smentito** *(par.8: un ragionamento
+sbagliato si annota, non si riscrive)*.

@@ -1,0 +1,147 @@
+{
+ "a": "hs1.npz",
+ "b": "hs2.npz",
+ "diverse": [],
+ "hashseed_a": "1",
+ "hashseed_b": "2",
+ "righe": [
+  {
+   "diversi": 0,
+   "grandezza": "d",
+   "identico": true,
+   "n": 70199
+  },
+  {
+   "diversi": 0,
+   "grandezza": "d0",
+   "identico": true,
+   "n": 70199
+  },
+  {
+   "diversi": 0,
+   "grandezza": "phi",
+   "identico": true,
+   "n": 2107
+  },
+  {
+   "diversi": 0,
+   "grandezza": "phi_s",
+   "identico": true,
+   "n": 2107
+  },
+  {
+   "diversi": 0,
+   "grandezza": "phivel",
+   "identico": true,
+   "n": 2107
+  },
+  {
+   "diversi": 0,
+   "grandezza": "psi",
+   "identico": true,
+   "n": 2107
+  },
+  {
+   "diversi": 0,
+   "grandezza": "psi_spin",
+   "identico": true,
+   "n": 4214
+  },
+  {
+   "diversi": 0,
+   "grandezza": "_psi_spinor",
+   "identico": true,
+   "n": 4214
+  },
+  {
+   "diversi": 0,
+   "grandezza": "_psi_prec",
+   "identico": true,
+   "n": 2107
+  },
+  {
+   "diversi": 0,
+   "grandezza": "_spinor_lift",
+   "identico": true,
+   "n": 4214
+  },
+  {
+   "diversi": 0,
+   "grandezza": "omega_s",
+   "identico": true,
+   "n": 6321
+  },
+  {
+   "diversi": 0,
+   "grandezza": "_nb",
+   "identico": true,
+   "n": 6321
+  },
+  {
+   "diversi": 0,
+   "grandezza": "_nb_prec",
+   "identico": true,
+   "n": 6321
+  },
+  {
+   "diversi": 0,
+   "grandezza": "eta",
+   "identico": true,
+   "n": 2107
+  },
+  {
+   "diversi": 0,
+   "grandezza": "tw",
+   "identico": true,
+   "n": 70199
+  },
+  {
+   "diversi": 0,
+   "grandezza": "twp",
+   "identico": true,
+   "n": 70199
+  },
+  {
+   "diversi": 0,
+   "grandezza": "vd",
+   "identico": true,
+   "n": 70199
+  },
+  {
+   "diversi": 0,
+   "grandezza": "peq",
+   "identico": true,
+   "n": 70199
+  },
+  {
+   "diversi": 0,
+   "grandezza": "mem_mot",
+   "identico": true,
+   "n": 6321
+  },
+  {
+   "diversi": 0,
+   "grandezza": "perc_chi",
+   "identico": true,
+   "n": 2107
+  },
+  {
+   "diversi": 0,
+   "grandezza": "perc_geom",
+   "identico": true,
+   "n": 2107
+  },
+  {
+   "diversi": 0,
+   "grandezza": "i",
+   "identico": true,
+   "n": 70199
+  },
+  {
+   "diversi": 0,
+   "grandezza": "j",
+   "identico": true,
+   "n": 70199
+  }
+ ]
+}

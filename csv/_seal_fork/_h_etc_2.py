@@ -49,31 +49,18 @@ import numpy as np
 _QUI = os.path.dirname(os.path.abspath(__file__))
 RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))
 
-# ====================================================================== `HASHSEED-RIPROD`
-# ⚠ **IL SIMULATORE NON E' RIPRODUCIBILE FRA PROCESSI SE `PYTHONHASHSEED` NON E' FISSATO.**
-#   **Misurato qui, il 2026-09-27:** tre invocazioni dello STESSO comando davano differenze
-#   peggiori `1.999884`, `1.999889`, `1.999890` e `phi` diversa su `2053`/`2054`/`2060`
-#   elementi. Con `PYTHONHASHSEED=0` **due giri danno il referto BYTE-IDENTICO**
-#   (`sha1 1da33034cbe3` entrambi).
-#   **Non e' un difetto di questo presidio** -- che non usa piu' `hash()` -- ma della catena
-#   scena + simulatore, dove l'ordine di iterazione di qualche insieme dipende dall'hash.
-#   **Quindi il presidio NON SPERA: rimette in moto se stesso col seme fissato.** Un presidio
-#   che chiedesse all'utente di ricordarsi una variabile d'ambiente non impedirebbe nulla (`A9`).
-#   ⚠⚠ **E NON SI USA `os.execve`: SU WINDOWS NON SOSTITUISCE IL PROCESSO.** La `exec` del CRT
-#   di Windows **avvia un processo nuovo e TERMINA quello corrente con codice `0`**. Il risultato
-#   e' che il presidio **usciva sempre `0`** -- cioe' **PASSAVA SEMPRE** -- anche con 3 permutazioni
-#   su 3 fallite. **L'ho visto:** il referto diceva `falliti: 3` e `echo $?` diceva `0`.
-#   **Un presidio che esce 0 qualunque cosa accada non e' un presidio** (`A9`), ed e' il difetto
-#   piu' insidioso possibile qui: non sbaglia la misura, sbaglia il VERDETTO.
-#   Si usa `subprocess` e **si propaga il codice d'uscita**.
-if os.environ.get("PYTHONHASHSEED") != "0":
-    import subprocess
-    _amb = dict(os.environ)
-    _amb["PYTHONHASHSEED"] = "0"
-    sys.stderr.write("[H-ETC-2] PYTHONHASHSEED non era 0: mi rilancio con 0 "
-                     "(vedi HASHSEED-RIPROD).\n")
-    sys.stderr.flush()
-    sys.exit(subprocess.run([sys.executable] + sys.argv, env=_amb).returncode)
+# ====================================================================== riproducibilita'
+# ✅ **`PYTHONHASHSEED` NON C'ENTRA, ed e' MISURATO** (`csv/_test_fork/_hashseed_prova.py`,
+#   2026-09-27): lo STESSO comando del simulatore girato con `PYTHONHASHSEED=1` e con `=2` da'
+#   **tutte e 23 le grandezze IDENTICHE byte per byte**.
+#   **Qui c'era un rilancio automatico con `PYTHONHASHSEED=0`, e L'HO TOLTO.** Era una cura per
+#   un difetto che NON ESISTE: le differenze fra invocazioni che avevo osservato venivano da
+#   `hash()` dentro QUESTO file (il difetto 2, gia' curato con `crc32`). Lasciare il rilancio
+#   sarebbe stata una protezione da un errore inesistente -- `A11`, e l'obiezione di Luca a
+#   `c7f1573` era giusta su tutti e tre i punti, compreso che la mia riga *<<senza fissare
+#   nulla>>* passava dal rilancio stesso e **non provava niente**.
+#   **La riproducibilita' di questo presidio si verifica invece che assumerla:** vedi
+#   `doc/TASK_HISTORY/2026-09-27_h-etc-2.md` par.4.
 sys.path.insert(0, os.path.join(RADICE, "csv"))
 import _presidio  # noqa: E402
 
