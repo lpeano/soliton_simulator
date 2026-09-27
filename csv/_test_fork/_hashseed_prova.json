@@ -1,107 +1,88 @@
 {
- "a": "B_tag.npz",
- "b": "B_rotto.npz",
- "blob_sim_a": "e203f9a8",
- "blob_sim_b": "59c23942",
- "diverse": [
-  "d",
-  "d0",
-  "phi",
-  "phi_s",
-  "phivel",
-  "psi",
-  "psi_spin",
-  "_psi_spinor",
-  "_psi_prec",
-  "_spinor_lift",
-  "omega_s",
-  "_nb",
-  "_nb_prec",
-  "tw",
-  "twp",
-  "vd",
-  "peq",
-  "mem_mot"
- ],
+ "a": "S_prima_off.npz",
+ "b": "S_dopo_on.npz",
+ "blob_sim_a": "f845d30d",
+ "blob_sim_b": "7439d5c3",
+ "diverse": [],
  "hashseed_a": "None",
  "hashseed_b": "None",
  "righe": [
   {
-   "diversi": 70199,
+   "diversi": 0,
    "grandezza": "d",
-   "identico": false,
+   "identico": true,
    "n": 70199
   },
   {
-   "diversi": 70199,
+   "diversi": 0,
    "grandezza": "d0",
-   "identico": false,
+   "identico": true,
    "n": 70199
   },
   {
-   "diversi": 2107,
+   "diversi": 0,
    "grandezza": "phi",
-   "identico": false,
+   "identico": true,
    "n": 2107
   },
   {
-   "diversi": 2107,
+   "diversi": 0,
    "grandezza": "phi_s",
-   "identico": false,
+   "identico": true,
    "n": 2107
   },
   {
-   "diversi": 2107,
+   "diversi": 0,
    "grandezza": "phivel",
-   "identico": false,
+   "identico": true,
    "n": 2107
   },
   {
-   "diversi": 2107,
+   "diversi": 0,
    "grandezza": "psi",
-   "identico": false,
+   "identico": true,
    "n": 2107
   },
   {
-   "diversi": 4214,
+   "diversi": 0,
    "grandezza": "psi_spin",
-   "identico": false,
+   "identico": true,
    "n": 4214
   },
   {
-   "diversi": 4214,
+   "diversi": 0,
    "grandezza": "_psi_spinor",
-   "identico": false,
+   "identico": true,
    "n": 4214
   },
   {
-   "diversi": 2107,
+   "diversi": 0,
    "grandezza": "_psi_prec",
-   "identico": false,
+   "identico": true,
    "n": 2107
   },
   {
-   "diversi": 4214,
+   "diversi": 0,
    "grandezza": "_spinor_lift",
-   "identico": false,
+   "identico": true,
    "n": 4214
   },
   {
-   "diversi": 6321,
+   "diversi": 0,
    "grandezza": "omega_s",
-   "identico": false,
+   "identico": true,
    "n": 6321
   },
   {
-   "diversi": 6321,
+   "diversi": 0,
    "grandezza": "_nb",
-   "identico": false,
+   "identico": true,
    "n": 6321
   },
   {
-   "diversi": 6321,
+   "diversi": 0,
    "grandezza": "_nb_prec",
-   "identico": false,
+   "identico": true,
    "n": 6321
   },
   {
@@ -111,33 +92,33 @@
    "n": 2107
   },
   {
-   "diversi": 70199,
+   "diversi": 0,
    "grandezza": "tw",
-   "identico": false,
+   "identico": true,
    "n": 70199
   },
   {
-   "diversi": 70198,
+   "diversi": 0,
    "grandezza": "twp",
-   "identico": false,
+   "identico": true,
    "n": 70199
   },
   {
-   "diversi": 70199,
+   "diversi": 0,
    "grandezza": "vd",
-   "identico": false,
+   "identico": true,
    "n": 70199
   },
   {
-   "diversi": 70199,
+   "diversi": 0,
    "grandezza": "peq",
-   "identico": false,
+   "identico": true,
    "n": 70199
   },
   {
-   "diversi": 6321,
+   "diversi": 0,
    "grandezza": "mem_mot",
-   "identico": false,
+   "identico": true,
    "n": 6321
   },
   {

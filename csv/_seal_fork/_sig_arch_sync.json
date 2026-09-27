@@ -1,0 +1,121 @@
+{
+ "blob": {
+  "dopo": "7439d5c3",
+  "prima": "f845d30d"
+ },
+ "bracci": [
+  {
+   "a": "S_prima_off",
+   "atteso": "IDENTICO",
+   "b": "S_dopo_off",
+   "blob_a": "f845d30d",
+   "blob_b": "7439d5c3",
+   "braccio": "A",
+   "diverse": [],
+   "n_diverse": 0,
+   "nota": "col driver: niente deve cambiare",
+   "passa": true
+  },
+  {
+   "a": "S_prima_on",
+   "atteso": "DIVERSO",
+   "b": "S_dopo_on",
+   "blob_a": "f845d30d",
+   "blob_b": "7439d5c3",
+   "braccio": "B",
+   "diverse": [
+    "d",
+    "d0",
+    "phi",
+    "phi_s",
+    "phivel",
+    "psi",
+    "psi_spin",
+    "_psi_spinor",
+    "_psi_prec",
+    "_spinor_lift",
+    "omega_s",
+    "_nb",
+    "_nb_prec",
+    "tw",
+    "twp",
+    "vd",
+    "peq",
+    "mem_mot",
+    "perc_chi"
+   ],
+   "n_diverse": 19,
+   "nota": "con --sync: non fa piu' niente, quindi DEVE differire",
+   "passa": true
+  },
+  {
+   "a": "S_dopo_off",
+   "atteso": "IDENTICO",
+   "b": "S_dopo_on",
+   "blob_a": "7439d5c3",
+   "blob_b": "7439d5c3",
+   "braccio": "C",
+   "diverse": [],
+   "n_diverse": 0,
+   "nota": "LA PROVA DEL NO-OP: dopo, --sync acceso == spento",
+   "passa": true
+  },
+  {
+   "a": "S_prima_off",
+   "atteso": "DIVERSO",
+   "b": "S_prima_on",
+   "blob_a": "f845d30d",
+   "blob_b": "f845d30d",
+   "braccio": "D",
+   "diverse": [
+    "d",
+    "d0",
+    "phi",
+    "phi_s",
+    "phivel",
+    "psi",
+    "psi_spin",
+    "_psi_spinor",
+    "_psi_prec",
+    "_spinor_lift",
+    "omega_s",
+    "_nb",
+    "_nb_prec",
+    "tw",
+    "twp",
+    "vd",
+    "peq",
+    "mem_mot",
+    "perc_chi"
+   ],
+   "n_diverse": 19,
+   "nota": "IL CASO CHE DEVE FALLIRE: prima --sync AGIVA",
+   "passa": true
+  },
+  {
+   "a": "S_prima_off",
+   "atteso": "IDENTICO",
+   "b": "S_dopo_on",
+   "blob_a": "f845d30d",
+   "blob_b": "7439d5c3",
+   "braccio": "E",
+   "diverse": [],
+   "n_diverse": 0,
+   "nota": "con --sync si ottiene ora il percorso vivo di sempre",
+   "passa": true
+  }
+ ],
+ "condizioni": {
+  "m": 70199,
+  "n": 2107,
+  "ordine": "canonico",
+  "passi": 3,
+  "presidi": "nessuno",
+  "rng": "nessuna iniezione",
+  "scena": "(ii)(a)",
+  "seme": 11
+ },
+ "dipendenza_dichiarata": "B NON e' informazione indipendente: dato che E prova dopo_on == prima_off, il braccio B (prima_on vs dopo_on) COINCIDE con D (prima_off vs prima_on). Infatti danno le stesse 19 grandezze. I bracci INDIPENDENTI sono A, C, D ed E.",
+ "sigillo": "(b)2 ARCH-SYNC: SYNC_UPDATE archiviato, --sync no-op accettato",
+ "tutti_passano": true
+}

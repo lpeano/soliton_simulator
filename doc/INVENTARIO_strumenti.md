@@ -1122,3 +1122,34 @@ python csv/_test_fork/_hashseed_prova.py --out=B_rotto.npz --seme=11 --passi=3 -
 git checkout HEAD -- soliton_simulator.py
 python csv/_test_fork/_hashseed_prova.py --confronta B_tag.npz B_rotto.npz     # DEVE dare DIVERSE
 ```
+
+## `(b)2` — l'archiviazione di `SYNC_UPDATE`, e il suo sigillo *(2026-09-27)*
+
+| referto | blob (byte) | esito |
+|---|---|---|
+| `csv/_seal_fork/_sig_arch_sync.json` | `6de5a9d2` | ### **5 bracci su 5**, blob `f845d30d` → `7439d5c3` |
+| `csv/_archivio/_sync_update.py` *(archivio, non gira)* | `2ed18d5e` | 7 blocchi + 9 ternari |
+
+**I comandi, verbatim** *(gli `.npz` sono locali: il dato è il comando; lo strumento è
+`csv/_test_fork/_hashseed_prova.py`, blob `2df2dbc3`)*:
+
+```
+# i due stati PRIMA (dal tag)
+git checkout pre-archivio-sync -- soliton_simulator.py
+python csv/_test_fork/_hashseed_prova.py --out=S_prima_off.npz --seme=11 --passi=3
+python csv/_test_fork/_hashseed_prova.py --out=S_prima_on.npz  --seme=11 --passi=3 --extra=--sync
+git checkout HEAD -- soliton_simulator.py
+# i due stati DOPO
+python csv/_test_fork/_hashseed_prova.py --out=S_dopo_off.npz --seme=11 --passi=3
+python csv/_test_fork/_hashseed_prova.py --out=S_dopo_on.npz  --seme=11 --passi=3 --extra=--sync
+# i cinque bracci
+python csv/_test_fork/_hashseed_prova.py --confronta S_prima_off.npz S_dopo_off.npz   # A: IDENTICO
+python csv/_test_fork/_hashseed_prova.py --confronta S_prima_on.npz  S_dopo_on.npz    # B: DIVERSO
+python csv/_test_fork/_hashseed_prova.py --confronta S_dopo_off.npz  S_dopo_on.npz    # C: IDENTICO
+python csv/_test_fork/_hashseed_prova.py --confronta S_prima_off.npz S_prima_on.npz   # D: DIVERSO
+python csv/_test_fork/_hashseed_prova.py --confronta S_prima_off.npz S_dopo_on.npz    # E: IDENTICO
+```
+
+> ### ⚠ **`B` e `D` sono la STESSA comparazione**: poiché `E` prova `dopo+sync == prima-senza-sync`,
+> `B` coincide con `D` — **e infatti danno le stesse 19 grandezze**. **I bracci indipendenti sono
+> QUATTRO: `A`, `C`, `D`, `E`.**

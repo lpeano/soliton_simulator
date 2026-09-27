@@ -4655,3 +4655,70 @@ agisce **sempre** e quell'avviso **non ha più oggetto**.
 > ### ⏳ **IL SIGILLO NON È ANCORA GIRATO** *(par.5: il codice va committato prima del run)*.
 > Tre bracci nel commit successivo: **(A)** col driver, atteso **identico**; **(B)** con `--sync`,
 > atteso ### **DIVERSO** *(perché `--sync` non fa più niente)*; **(C)** il caso che deve fallire.
+
+---
+
+# ✅ **(b)2 — IL SIGILLO PASSA: cinque bracci su cinque** *(2026-09-27)*
+
+*(`doc/TASK_HISTORY/2026-09-27_archivio-sync.md`, referto `csv/_seal_fork/_sig_arch_sync.json`.)*
+### **`f845d30d` → `7439d5c3`.**
+
+| | confronto | atteso | esito |
+|---|---|---|---|
+| **A** | `prima` vs `dopo`, **col driver** | IDENTICO | ### **0 diverse** |
+| **B** | `prima`+`--sync` vs `dopo`+`--sync` | ### **DIVERSO** | ### **19 grandezze** |
+| **C** | `dopo` senza vs `dopo`+`--sync` | IDENTICO | ### **0 diverse — la prova del no-op** |
+| **D** | `prima` senza vs `prima`+`--sync` | ### **DIVERSO** | ### **19 — il caso che deve fallire** |
+| **E** | `prima` senza `--sync` vs `dopo`+`--sync` | IDENTICO | ### **0 diverse** |
+
+**Su B, come chiedevi, l'attesa era dichiarata prima:** dopo l'archiviazione `--sync` non fa più
+niente, quindi `dopo+sync` **deve** valere quanto il percorso vivo, mentre `prima+sync` valeva il
+ramo sincrono. ### **Differire è il successo, non il fallimento.**
+
+**D l'ho misurato PRIMA di scrivere una riga**, ed è la precondizione di tutto: **`--sync` agiva
+davvero**, 19 su 23. Se D fosse stato «identico», B e C non avrebbero provato niente — *«adesso non
+fa nulla»* è vuoto se **non faceva nulla nemmeno prima**.
+
+**E dice la cosa più forte:** `--sync` acceso sul codice nuovo dà **esattamente** ciò che il
+percorso vivo ha sempre dato, **byte per byte**. È la definizione operativa di *no-op*, misurata.
+
+> ### ⚠ **E una dipendenza che dichiaro invece di far sembrare cinque prove:** poiché **E** prova
+> `dopo+sync == prima-senza-sync`, il braccio **B coincide con D** — **e infatti danno le stesse 19
+> grandezze**, elenchi identici, verificato e non supposto.
+> ### **I bracci indipendenti sono QUATTRO: A, C, D, E.** Chiamare B una quinta prova gonfierebbe
+> il conto.
+
+## Due cose trovate rilevando, e due che restano
+
+**①** `if SCUOTIMENTO and not SYNC_UPDATE` → `if SCUOTIMENTO`: **lo scuotimento del vuoto sullo
+spinore ora agisce sempre.** Non è una legge nuova — il suo commento **lo chiedeva già**: *«le due
+leggi devono essere identiche: il vuoto è lo stesso vuoto»*.
+**②** `_peq_t` era **assegnata e mai letta** dopo la rimozione: uscita anche lei.
+
+**Restano**, e non sono dimenticanze: **`_phi_t`** *(la legge il percorso vivo)*, e
+### **`SYNC_SPINORE`, che NON è `SYNC_UPDATE`** — `_forza_sync`, `_wI_sync`, `_uno_sync` sono il
+torque `SU(2)` e **restano vivi**. **Due flag con `SYNC` nel nome, due leggi diverse:** confonderli
+avrebbe rotto una legge viva.
+
+**E un secondo avviso caduto col ramo:** `--rumore-colorato` diceva di essere **inerte sotto
+`--sync`**; ora il percorso vivo è l'unico, quindi **agisce sempre** e quell'avviso non ha più
+oggetto. **Non l'avevo cercato: l'ha trovato il rilievo dei 19 usi.** Un avviso che resta dopo che
+la sua condizione è sparita **è una falsità che si stampa a ogni run**.
+
+## `H-REG-R` ha imposto una scheda che non c'era
+
+Il presidio ha rifiutato due volte, e la seconda diceva una cosa precisa: ### **`SYNC_UPDATE` non
+aveva una scheda propria.** Creata `aggiornamento-sincrono`, con la forma, le dimensioni, i limiti e
+il raggio misurato; aggiornate le quattro esistenti.
+
+> **E la scheda dice la cosa che conta: la FORMA era giusta, il RAGGIO era un quinto del passo.**
+> Delle 56 letture miste, **tutte e 56 stavano fuori** da quel raggio. **Quindi `--sync` non era una
+> cura parziale del difetto: era la cura di un difetto DIVERSO**, e `ETC-PASSO` non lo estende — **lo
+> sostituisce sul passo intero.**
+>
+> ### ⚠ **Una scheda che nasce nel commit che archivia la sua legge arriva TARDI.** `SYNC_UPDATE` è
+> vissuto nel simulatore **senza forma chiusa scritta**, e nessuno ha dovuto derivarla.
+
+> ### 🛑 **STOP.** Prossimo: **(b)3**, i rami morti di `CLIP-INVENTARIO`, uno alla volta — e col
+> criterio di `(b)1`: dove un ramo morto convive con un altro flag, **serve anche il braccio in cui
+> quell'altro è acceso**.
