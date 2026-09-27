@@ -417,10 +417,27 @@ contro un nullo di `1.4e-03` — **da `140` a `310` volte il suo valore sotto ip
 
 ---
 
-<!-- SCHEDA nome=gravita-bifase funzioni=pozzo_grafo,_nb_grav flag=GRAV_BIFASE,VIRIALE,LS_AZIM,PHI_CRIT,K_FRANGE -->
+<!-- SCHEDA nome=gravita-bifase funzioni=pozzo_grafo,_nb_grav flag=GRAV_BIFASE,VIRIALE,LS_AZIM,PHI_CRIT,K_FRANGE,POZZO_D -->
 # ③ LA GRAVITA' BIFASE — **`GRAV_BIFASE` / `S09_spinta_med` / `S10_grav_med`**
 
-> **STATO: `DIFETTOSA`.** Difetto **`D01`**. **Viola `A2`, `A5` e `A11` corollario 6.**
+> **STATO: `DIFETTOSA`.** Difetti **`D01`** e **`D02`**. **Viola `A2`, `A5` e `A11` cor. 6.**
+> ### ⚠ **`D02`: IL DISEGNO ENTRA NELLA GRAVITA', e la cura e' `POZZO_D`** *(2026-09-27)*.
+> **`pozzo_grafo` calcolava `L` da `self.pos`** — *il DISEGNO* — **e il risultato entra nella
+> spinta `S09`.** E **il docstring della funzione dichiara l'opposto**: *«diviso per la
+> DISTANZA REALE DELL'ARCO»*. **La distanza reale dell'arco e' `self.d` (`A13`).**
+> **LA CURA, derivata e senza coefficienti:** `L = self.d[mask]`, dietro **`POZZO_D`**
+> *(`--pozzo-d`, **spento di default**)*. **`STANDARD 10`: si TOGLIE una dipendenza (`pos`),
+> non si aggiunge una legge.**
+> **E IL PAVIMENTO `1e-9` ESCE dal ramo acceso**, perche' `d >= LAM` con
+> `SEMINA_LAM`/`MITOSI_2LAM` — **⚠ ma quella e' una MISURA (`D11`), non un'invariante del
+> codice**, quindi i casi `d <= 0` **si CONTANO** *(`_pozzo_d_nonpos`, `A8`)* invece di
+> assumerli impossibili *(`A11`)*. **Il contatore nasce SOLO nel ramo acceso**, cosi' la
+> byte-identita' a flag spento resta vera.
+> **⚠ E TOCCA SOLO `pozzo_grafo`:** le altre due letture di `pos` in `memoria_hebbiana_moto`
+> *(`:6590`, `:6978`)* sono **DIREZIONI**, non lunghezze, e sono **`D03`** — un altro fronte.
+> **Un flag che le cambiasse insieme misurerebbe due cose** *(par.1)*.
+> **Criteri e sigillo:** `doc/TASK_HISTORY/2026-09-27_d02-pozzo-d.md`,
+> `csv/_seal_fork/_sigillo_pozzo_d.py`. **`W5`** *(A/B a 4 semi)* **decide se accenderla.**
 > **NON è il motore della fuga di `d0`** *(`Z107`: spegnendola il rapporto passa da `1.2321` a
 > `1.2211`, lo `0.9 %`)*, **ma è il maggior scrittore in ampiezza**: `±2.5e+06`–`3.7e+06`
 > per 600 passi.
@@ -621,6 +638,13 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 # ⑤ IL TEMPO PROPRIO — **`ritmo()` / `r` / `dt_n = DT·r`**, e il surrogato **`tau_pp`**
 
 > **STATO: `DIFETTOSA`.** Difetto **`D34`** *(il wrap «a `4π`» non avvolge)*.
+> **→ NOTA DEL 2026-09-27 (`D02`): `_applica_flag` e `_cli` hanno UN FLAG IN PIU', `POZZO_D`,
+> e NON tocca il tempo proprio.** E' la cura di `D02` *(la lunghezza del pozzo dal grafo e
+> non dal disegno)*, e la sua scheda e' **③ `gravita-bifase`**, dove vive `pozzo_grafo`.
+> *(Questa nota esiste perche' `H-REG-R` ha chiesto questa scheda: `_applica_flag` e `_cli`
+> sono elencate qui, e **ogni** flag nuovo le tocca. **Ha fatto bene a chiederla** — dal diff
+> non si vede a quale legge appartenga una riga di `argparse`.)*
+>
 > **✅ E DAL 2026-09-27 `_applica_flag` NON ASSEGNA PIU' `TEMPO_UNICO_MITOSI`:** la `CURA 2`
 > e' **strutturale** *(scheda ⑨)*, quindi qui non c'e' piu' un interruttore da applicare.
 > **Il `global` resta**, e non fa danno: nessuno assegna piu'.

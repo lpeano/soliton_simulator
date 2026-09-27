@@ -1342,6 +1342,22 @@ SEMINA_LAM = False      # [CURA DELLA SEMINA, 2026-09-24] `A13`: **`LAM` E' LA S
                         # Scheda 12 `nascita-archi`. Default SPENTO.
                         # ⚠ NON e' `NASCITA_LAM`, che e' RITIRATA: filtrare gli ARCHI lascia i
                         #   NODI sotto `LAM`, cioe' toglie il sintomo e lascia la violazione.
+POZZO_D = False             # [D02, 2026-09-27] NEL POZZO DEL GRAFO `L` VIENE DA `self.d`.
+                        # IL DIFETTO: `pozzo_grafo` calcola `L` da `self.pos` (il DISEGNO) e
+                        # il risultato entra nella SPINTA `S09` -- mentre il suo stesso
+                        # docstring dichiara «diviso per la DISTANZA REALE DELL'ARCO».
+                        # La distanza reale dell'arco e' `self.d` (`A13`): `pos` e' il
+                        # disegno, e non deve entrare nella gravita'.
+                        # ⚠ TOCCA SOLO `pozzo_grafo`: le altre due letture di `pos` in
+                        # `memoria_hebbiana_moto` (`:6590`, `:6978`) sono DIREZIONI, non
+                        # lunghezze, e sono `D03` -- un altro fronte. Un flag che le
+                        # cambiasse insieme misurerebbe due cose (par.1).
+                        # A flag acceso `L = self.d[mask]`, e il PAVIMENTO `1e-9` NON SERVE
+                        # PIU': con `SEMINA_LAM` e `MITOSI_2LAM` si ha `d >= LAM`. ⚠ MA E'
+                        # UNA MISURA, NON UN'INVARIANTE DEL CODICE (`D11`), quindi i casi
+                        # `d <= 0` si CONTANO (`A8`) invece di assumerli impossibili
+                        # (`A11`): `_pozzo_d_nonpos`, creato SOLO nel ramo acceso, cosi' la
+                        # byte-identita' a flag spento resta vera. Default SPENTO.
 TEMPO_UNICO_MITOSI = True   # [CURA 2 -> STRUTTURALE, 2026-09-27: decisione di Luca]
                         # ⚠ NON E' PIU' UN FLAG: E' UNA LEGGE. I quattro rami `else`
                         # sono USCITI dal simulatore, e l'assegnazione da `_applica_flag`
@@ -6546,8 +6562,19 @@ class Rete:
             return phi_g, mask, np.zeros(0, dtype=float)
         I = (np.abs(self.psi[:n]) ** 2 if intensita is None and len(self.psi) >= n
              else np.asarray(intensita, dtype=float)[:n])
-        v = self.pos[jj] - self.pos[ii]
-        L = np.maximum(np.linalg.norm(v, axis=1), 1e-9)
+        if POZZO_D:
+            # [D02] LA LUNGHEZZA E' `self.d`, NON `pos`: e' la distanza REALE dell'arco
+            #   (`A13`), cioe' quella che il docstring di questa funzione dichiara GIA'.
+            #   NESSUN PAVIMENTO: `d >= LAM` con `SEMINA_LAM`/`MITOSI_2LAM`. E poiche' e'
+            #   una MISURA e non un'invariante, i `d <= 0` si CONTANO (`A8`) -- il
+            #   contatore nasce QUI, cosi' a flag spento lo snapshot non cambia.
+            L = self.d[mask]
+            self._pozzo_d_nonpos = (getattr(self, '_pozzo_d_nonpos', 0)
+                                    + int(np.sum(L <= 0.0)))
+            self._pozzo_d_tot = getattr(self, '_pozzo_d_tot', 0) + int(np.size(L))
+        else:
+            v = self.pos[jj] - self.pos[ii]
+            L = np.maximum(np.linalg.norm(v, axis=1), 1e-9)
         np.add.at(phi_g, ii, I[jj] / L)
         np.add.at(phi_g, jj, I[ii] / L)
         return phi_g, mask, phi_g[jj] - phi_g[ii]
@@ -8257,7 +8284,7 @@ def _applica_flag(a):
     global PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO, COES_CAUSALE, ANOM_SIMM
     global INVARIANTI
     global SEMINA_LAM
-    global TEMPO_UNICO_MITOSI
+    global TEMPO_UNICO_MITOSI, POZZO_D
     global COPPIA_MIT, MU_PSI, MITMAX, GAMMA, LAM, SCALA_B, SCALA_AMP, TAU_USA_D0, CALORE_VETTORIALE, K_FRANGE, VIRIALE, CHI_BASC, ZETA_VIR, PAV_COM, SYNC_UPDATE, VERSO_CHI, LS_AZIM, POLO_MATURO, OLON_PART, SPINORE_VIVO, SPIN_LARMOR, SPIN_FEEDBACK, SPIN_POSITIVI, CHI_CORE, CS_DINAMICO, VISTA_RETE, TW_SPINORE, SPINORE_CORRETTO, CHI_DA_SPINORE, CHI_COOP, SCALA_MIN, COES_ADIM, RITMO_WRAP_2PI, TEMPO_PROPRIO_ORIENTATO, SYNC_SPINORE, DEPARAM_OROLOGIO, SYNC_FASE_OROLOGIO, KURAMOTO_SU2, DT, CAMPO_SPINORIALE, TEMPO_SEGNO, OROLOGIO_SEGNO, FORK_SU2, FORK_SU2_MEM, STEP2_OROLOGIO, GAMMA_TURBO
     if getattr(a, "dt", None) is not None:
         DT = float(a.dt); print(f"[dt] passo di tempo coordinata DT={DT} (test di convergenza; con dt/2 raddoppia --passi)")
@@ -8322,6 +8349,7 @@ def _applica_flag(a):
     #   a 600 passi `Z123`. FINO A OGGI ERA ACCENDIBILE SOLO IN-PROCESS: senza opzione, il
     #   driver non poteva accenderla, e una cura che nessun run accende e' un ramo morto.
     RITMO_WRAP_2PI = bool(getattr(a, "ritmo_wrap_2pi", False))  # cura D34: default off, il driver la accende
+    POZZO_D = bool(getattr(a, "pozzo_d", False))        # [D02] default SPENTO
     # [CURA 2 STRUTTURALE, 2026-09-27] L'ASSEGNAZIONE E' TOLTA: la legge non si spegne.
     #   `--tempo-unico-mitosi` resta ACCETTATA come NO-OP dichiarato (il driver la passa
     #   in ogni run, e ogni comando gia' scritto la contiene), e AVVISA.
@@ -8970,6 +8998,15 @@ def _cli():
                         "casuale e scarto (RSA). Se n non entra nel raggio, la semina RIFIUTA "
                         "nominando n, raggio e massimo raggiunto: niente riduzioni silenziose. "
                         "Zero numeri nuovi. Default off.")
+    p.add_argument("--pozzo-d", action="store_true", dest="pozzo_d",
+                   help="[D02] Nel pozzo del grafo la lunghezza `L` viene da `self.d` (la "
+                        "distanza REALE dell'arco, `A13`) invece che da `self.pos` (il "
+                        "DISEGNO). Il risultato entra nella spinta `S09`, quindi a flag "
+                        "acceso LA SPINTA CAMBIA: e' la cura, non un effetto collaterale. "
+                        "Toglie anche il pavimento `1e-9`, che con `d >= LAM` non serve, e "
+                        "CONTA i casi `d <= 0` invece di assumerli impossibili. NON tocca le "
+                        "letture di `pos` come DIREZIONE in `memoria_hebbiana_moto`: quelle "
+                        "sono `D03`. Default off.")
     p.add_argument("--tempo-unico-mitosi", action="store_true", dest="tempo_unico_mitosi",
                    help="[CURA 2] UN SOLO OROLOGIO dentro `mitosi()`. Gli usi di `tau_pp` come "
                         "TEMPO (il ritmo, la costante di rilassamento di `_rep`, il gradiente "
