@@ -59,6 +59,10 @@ def P(s=""):
     R.append(s)
 
 
+SALVA = False
+OGNI = 0
+
+
 def lancia(semi, passi, cps):
     """Un processo per seme, **in parallelo**: sono bracci indipendenti (`STANDARD 1`)."""
     proc = {}
@@ -73,7 +77,11 @@ def lancia(semi, passi, cps):
         proc[s] = (subprocess.Popen(
             [sys.executable, os.path.join(_QUI, "_pilota_prova1_braccio.py"),
              "--seme", str(s), "--passi", str(passi),
-             "--checkpoint", ",".join(str(c) for c in cps), "--out", out],
+             "--checkpoint", ",".join(str(c) for c in cps), "--out", out]
+            # `VIDEO-SCENA` / `STATI-LOCALI`: gli stati a TUTTI i semi, i fotogrammi SOLO al
+            # primo (il video ne vuole uno, e 61 fotogrammi per quattro semi non servono).
+            + (["--salva-stati"] if SALVA else [])
+            + (["--ogni", str(OGNI)] if (SALVA and OGNI and s == semi[0]) else []),
             cwd=RADICE, stdout=log, stderr=subprocess.STDOUT), log, out)
     fuori = {}
     for s, (q, log, out) in proc.items():
@@ -411,6 +419,8 @@ if __name__ == "__main__":
         sys.path.insert(0, _QUI)
         import _pilota_prova1_braccio as B
         raise SystemExit(0 if B.stampa_collaudo_coerenza() == 4 else 1)
+    SALVA = "--salva-stati" in A
+    OGNI = int(opz("--ogni", "0"))
     dati = leggi(semi) if "--solo-referto" in A else lancia(semi, passi, [c for c in cps if c > 0])
     referto(dati, passi, cps)
     io.open(REFERTO, "w", encoding="utf-8", newline=NL).write(NL.join(R) + NL)

@@ -1394,3 +1394,12 @@ ramo B (chi_basc OFF):
 - **note** RILANCIO dopo la cura CTRL-RISCELTA (controlli FISSI, K5 2/2). PILOTA, NON il run base (5 SI aperti). Driver con POZZO_D acceso, scena (ii)(a) sep 6.1158, passo_pieno (H-P9), un processo per seme. Criteri V1-V6 committati PRIMA. Nessuna conclusione sulla gravita'.
 
 **chiuso 2026-09-27 09:58:32 — FINITO** 4 semi su 4 arrivati in fondo, 120 passi, checkpoint 0/40/80/120. Referto in csv/_test_fork/_pilota_prova1/REFERTO.txt, confronto con la previsione in CONFRONTO_previsione.txt. ESITO: l'osservabile A(t) coi controlli FISSI e' negativo OLTRE l'IC95 su 2 coppie su 3 al passo 40 e 2 su 3 al passo 80; a 120 nessuna, perche' la sd fra semi delle masse cresce di ~30x (voce PROVA1-40-80). Due mie previsioni su tre FALSIFICATE (a: le masse si avvicinano piu' dei controlli; b: nessun allungamento), la terza col meccanismo giusto e le soglie sbagliate (c). ZERO nascite nelle masse e nel varco: tutte nel vuoto. Il 39 % delle coppie Schwinger accorcia il grafo (SCHW-CORTI). Quattro difetti nuovi dai miei criteri: V5-SOGLIA, FOGLIO-NULLO, FORMA-N-VUOTO, e il residuo A2 S09-MEDIANA trovato leggendo. NESSUNA conclusione sulla gravita': il pilota non e' il run base (5 SI aperti).
+
+## APERTO pilota-prova1-stati
+
+- **avvio** `2026-09-27 10:46:43` · **blob** `c968d4d8 (git) / e203f9a8 (byte grezzi)` · **HEAD** `0e7810b`
+- **comando**
+  ```
+  python csv/_test_fork/_pilota_prova1.py --salva-stati --ogni 2   (4 semi, 120 passi)
+  ```
+- **note** IL RUN UNICO che serve a TRE cose: (1) gli STATI del grafo ai checkpoint per la scomposizione del CAMMINO (TRATTI) e per MASSA-ID offline; (2) i FOTOGRAMMI ogni 2 passi sul seme 11 per il video (VIDEO-SCENA); (3) la ripetizione della misura del pilota. Tutti i .npz restano LOCALI (STATI-LOCALI, gia' in .gitignore). Strumenti committati in 0e7810b PRIMA del lancio (par.5).
