@@ -103,6 +103,41 @@ detto invece di pubblicare una sovrapposizione gonfiata.
 **La coerenza e' `|<e^{i phi}>|`, non `std(phi)`:** su un cerchio la `std` legge il **disordine
 massimo** dove la fase e' coerente *(la scena stessa lo mostra: `std = 6.08` contro `0.05`)*.
 
+## ❗ **UN GIRO CORREZIONE + RITIRO SULLA COERENZA, NELLO STESSO GIORNO — e il conto era giusto, la premessa no**
+
+*(voce `COER-4PI`; i tre strati stanno nel task history del pilota, tutti leggibili.)*
+
+**① Avevo dichiarato** la coerenza `|<e^{i phi}>|`, **copiandola dal commento della scena**.
+**② Luca l'ha corretta la mattina:** con `FASE_2PI` spenta `_dphi() = 4 pi`, le masse stanno a
+`2 pi`, e `e^{i phi}` rende **identico** un nodo a fase `0` — che sul dominio e' in **antifase**.
+**L'ho applicata e collaudata sul caso noto** *(meta' a `2 pi`, meta' a `0`)*:
+
+| forma | meta' a `2pi` + meta' a `0` |
+|---|--:|
+| `\|<e^{i phi}>\|` | **`1.000000`** |
+| `\|<e^{i 2pi phi/_dphi()}>\|` | **`0.000000`** |
+
+**③ Luca ha ANNULLATO la propria correzione** nel pomeriggio, e **il ritiro REGGE SUL CODICE —
+verificato da me dal sorgente prima di applicarlo, non sulla fiducia.** Il commento di `FASE_2PI`
+(`soliton_simulator.py:1300`) porta **`Z118`/`Z120`**: *«in 31 righe su 31 il campo legge `phi` da
+`exp`/`cos`/`sin` … e' un conto, non un'interpretazione»*. **Per la fisica del campo `phi` e
+`phi + 2 pi` SONO LO STESSO STATO**, e la doppia copertura vive nel **segno** dello spinore e nei
+**mezzi angoli**. **Quindi `|<e^{i phi}>|` non CONFONDE due stati: li IDENTIFICA perche' la fisica
+li identifica**, e il commento della scena e' **giusto**.
+
+> **COSA RESTA, e non e' niente:** il numero della correzione ② e' diventato un **DIAGNOSTICO** —
+> `coer_dominio` piu' le frazioni **`foglio_0`/`foglio_1`** (`floor(phi / 2 pi)`), **chieste da
+> Luca** — perche' **la fisica del campo non distingue i fogli ma la TORSIONE si'**.
+> Collaudo **`K-FOGLIO` 4/4**: **il criterio deve essere CIECO al foglio e il diagnostico NO**, e la
+> riga che conta e' quella in cui danno valori **opposti** (`P1-sexies`).
+>
+> **E LA LEZIONE DI METODO:** **il conto di ② era GIUSTO e la premessa NO.** Una verifica numerica
+> **non protegge** da una premessa fisica sbagliata — ed e' la ragione per cui i tre strati restano
+> scritti invece di essere riassorbiti nell'esito. **`P1` vale anche quando il candidato arriva da
+> Luca**: se la premessa del ritiro non avesse retto, avrei dovuto dirlo.
+
+
+
 
 ---
 

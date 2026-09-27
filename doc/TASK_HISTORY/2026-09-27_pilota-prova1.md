@@ -88,9 +88,53 @@ default del driver)*, **scena `(ii)`(a)**, **4 semi**, **120 passi**, **`passo_p
   adimensionale e la barra si confronta col nullo di `W5` *(`1.3`-`2.7 %`)*;
 - **se un IC95 contiene lo zero si scrive il LIMITE**, non *«nessun effetto»*, **con la
   risoluzione accanto**;
-- **la coerenza e' `|<e^{i phi}>|` sulla regione** — non `std(phi)`, che **su un cerchio legge il
-  disordine massimo** dove la fase e' coerente *(e' scritto nella scena stessa: `std = 6.08`
-  contro `0.05`, a fase identicamente coerente)*.
+- **LA COERENZA DELLA MASSA E' `|<e^{i phi}>|`**, e la ragione e' **misurata nel simulatore**, non
+  scelta: il commento di `FASE_2PI` (`soliton_simulator.py:1300`) porta **`Z118`/`Z120`** —
+  **in 31 righe su 31 il campo legge `phi` da `exp`/`cos`/`sin`**, e li'
+  `exp(i(phi + 2 pi)) = exp(i phi)`. **Per la fisica del campo `phi` e `phi + 2 pi` sono LO STESSO
+  STATO**; la doppia copertura vive nel **SEGNO** dello spinore (`_spinor_lift`, `sign(perc_chi)`)
+  e nei **MEZZI ANGOLI**, **non in `phi`**. E `std(phi)` resta esclusa per la ragione che la scena
+  da': su un cerchio legge **disordine massimo** dove la fase e' coerente (`std = 6.08` contro
+  `0.05`).
+- **IN PIU', SOLO COME DIAGNOSTICO, LA MISCELA DI FOGLI** *(richiesta di Luca)*: `coer_dominio =
+  |<e^{i 2 pi phi / _dphi()}>|` e le frazioni **`foglio_0`/`foglio_1`** = `floor(phi / 2 pi)` dentro
+  `_dphi()`. **La fisica del campo non li vede, ma la TORSIONE li distingue**, quindi sono
+  un'informazione — **e non sono un criterio**.
+- **COLLAUDATI SUL CASO NOTO, `K-FOGLIO` 4/4** *(`python csv/_test_fork/_pilota_prova1.py
+  --collaudo`)*: meta' nodi a `2 pi` e meta' a `0` danno **`coer_campo = 1.000000`** *(per il campo
+  sono lo stesso stato)* e **`coer_dominio = 0.000000`** *(i fogli sono mescolati)*, con
+  `foglio_0 = 0.500`. **Il valore OPPOSTO e' la riga che conta** (`P1-sexies`): se i due numeri
+  coincidessero, il diagnostico non diagnosticherebbe nulla. Fasi casuali sul dominio danno
+  `0.0062` / `0.0123`, cioe' il nullo.
+
+> ### ❗❗ **LA STORIA DI QUESTA RIGA, IN TRE STRATI, E RESTA TUTTA LEGGIBILE** *(2026-09-27)*
+>
+> **① CIO' CHE AVEVO SCRITTO** *(e che e' tornato a essere il criterio)*:
+> *«la coerenza e' `|<e^{i phi}>|` sulla regione — non `std(phi)`, che su un cerchio legge il
+> disordine massimo dove la fase e' coerente (e' scritto nella scena stessa: `std = 6.08` contro
+> `0.05`)»*.
+>
+> **② LA CORREZIONE DI LUCA, la mattina** — **applicata, collaudata `3/3`, e POI ANNULLATA**:
+> *«la coerenza `|<e^{i phi}>|` e' SBAGLIATA per il dominio attivo: con `_dphi() = 4 pi` le masse
+> stanno a `2 pi` e un nodo a fase `0` (antifase) verrebbe contato come coerente. Usa
+> `|<exp(i 2 pi phi / _dphi())>|`»*. **Il conto era giusto:** le due forme **danno davvero** `1` e
+> `0` su quel caso. **Cio' che non reggeva era la PREMESSA FISICA** — che `phi` e `phi + 2 pi`
+> fossero stati **diversi** per la dinamica.
+>
+> **③ IL RITIRO DI LUCA, il pomeriggio** *(«errore del guardiano»)*: `Z118`/`Z120` dicono che il
+> campo **non li distingue**, quindi `|<e^{i phi}>|` **non confonde** due stati: **li identifica
+> perche' la fisica li identifica.**
+>
+> **PERCHE' I TRE STRATI RESTANO QUI, e non e' pedanteria:** cancellare ② lascerebbe il repo senza
+> il **numero** che distingue le due forme — che e' vero e utile, ed e' diventato il **diagnostico
+> dei fogli**. E lascerebbe senza la lezione: **il conto era giusto e la premessa no**, cioe'
+> esattamente il caso in cui una verifica numerica **non** protegge. **`P1`: l'associazione genera
+> candidati, non conclusioni** — e vale anche quando il candidato arriva da Luca.
+> **Ed e' la ragione per cui ho verificato `Z118`/`Z120` DAL SORGENTE prima di annullare**, invece
+> di applicare il ritiro sulla fiducia: se la premessa del ritiro non avesse retto, avrei dovuto
+> dirlo.
+>
+> **-> voce `COER-4PI` dell'indice.**
 
 ### 2.2 Che cosa questo pilota **NON** fa
 
@@ -105,6 +149,7 @@ default del driver)*, **scena `(ii)`(a)**, **4 semi**, **120 passi**, **`passo_p
 - [ ] il braccio **salva** controlli, nascite *(per zona e per meccanismo)*, Schwinger `2*dd < d`,
       e per ogni massa **nodi/raggio/quantili/coerenza** e le due regioni *(passo 0 e attuale)*;
 - [ ] la **calibrazione di `k`** al passo 0, con **precisione e richiamo** per `k = 2, 3, 4`;
+- [x] **`K-FOGLIO` 4/4**: il criterio e' CIECO al foglio, il diagnostico NO *(collaudo su caso noto)*;
 - [ ] il referto con gli IC95 fra semi e **i limiti** dove contengono lo zero;
 - [ ] inventario + relazione **nello stesso commit**; `AB-CONTROLLI` chiuso;
 - [ ] **STOP: nessuna conclusione sulla gravita'.**

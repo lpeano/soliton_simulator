@@ -62,3 +62,7 @@ DE-DUPLICATI	locuzione del testo (il conteggio dei titoli de-duplicati), non un 
 DE-INDENTARE	verbo della prosa (togliere indentazione), non un identificatore	0
 ESENTE-H-P9	marcatore di esenzione al presidio H-P9, non un identificatore	0
 ESENTE-H-P	pezzo del marcatore `ESENTE-H-P<n>`, non un identificatore	0
+K-FOGLIO	etichetta LOCALE di un collaudo (csv/_test_fork/_pilota_prova1_braccio.py), non un identificatore del registro	0
+R-VICINO	etichetta LOCALE di una regola di assegnazione nel pilota della PROVA 1, non un identificatore	0
+R-COMP	etichetta LOCALE della regola di assegnazione SCARTATA nel pilota (componenti connesse), non un identificatore	0
+PRE-CORREZIONE	locuzione del testo (<<col codice pre-correzione>>), non un identificatore	0
