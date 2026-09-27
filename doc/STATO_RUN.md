@@ -1372,3 +1372,12 @@ ramo B (chi_basc OFF):
 - **note** Decisione di Luca (1a): T4 byte-inerzia sul blob 49fc54d2 col sigillo RIPARATO, UN PROCESSO PER BRACCIO (standard 1). Due bracci in subprocess, ~17 min. Il T4 precedente era sul blob b881db89, PRIMA del contatore del clip a zero: questo ri-certifica la byte-inerzia sul blob che ha girato il giro corto. Sigillo 2f5155b.
 
 **chiuso 2026-09-24 19:42:22 — FINITO** 5/5. T4 PASS sul blob 49fc54d2: 206 campi identici, 0 diversi -- la byte-inerzia del contatore del clip a zero era DICHIARATA per costruzione, ora e MISURATA. T5 PASS, e l n del braccio acceso e 2575, lo stesso del giro corto: riproducibilita fra processi diversi. Bracci: SPENTO 398.3 s, ACCESO 379.9 s, ciascuno nel suo processo. I dati SERVONO. E ne e uscito il controllo STANDARD 5 (involucro di _g4_prova inerte, 217 firme identiche) e un difetto del mio confronta_snap: usa array_equal, che su NaN dichiara diversi due array identici.
+
+## APERTO pilota-prova1
+
+- **avvio** `2026-09-27 09:06:45` · **blob** `c968d4d8 (git) / e203f9a8 (byte grezzi)` · **HEAD** `4a7597e`
+- **comando**
+  ```
+  python csv/_test_fork/_pilota_prova1.py   (4 semi 11-14, 120 passi, checkpoint 0/40/80/120)
+  ```
+- **note** PILOTA della PROVA 1, NON il run base (5 SI aperti). Driver con POZZO_D acceso, scena (ii)(a) sep 6.1158, passo_pieno (H-P9), un processo per seme. Criteri V1-V6 in doc/TASK_HISTORY/2026-09-27_pilota-prova1.md, committati PRIMA. Nessuna conclusione sulla gravita' dal pilota: solo i numeri e i limiti.
