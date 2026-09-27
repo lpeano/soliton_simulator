@@ -781,6 +781,10 @@ def scuoti_vuoto(net):
     """Applica lo scuotimento del vuoto guidato dallo stress metrico locale (senza numeri fissi).
     L'intensità emerge dallo scostamento fra la distanza reale (d) e la distanza di riposo (d0)
     degli archi connessi al nodo, pesata dalla soppressione della coerenza locale |Psi|^2."""
+    # [(c)1] IL CONFINE DEL PASSO: la prima legge che gira APRE la fotografia. Sta PRIMA
+    #   della guardia di proposito -- se `scuoti_vuoto` esce subito, il passo comincia
+    #   comunque, e la legge dopo non deve accorgersene.
+    net._smp_apri()
     if not SCUOTIMENTO or net.n == 0 or not len(net.i):
         return
     
@@ -4360,8 +4364,25 @@ class Rete:
         return controllate
 
     def _smp_apri(self):
-        """[SCALA_MIN_PASSO] Fotografa `d0` a INIZIO PASSO. Da qui si misurera' la variazione
-        TOTALE, una volta sola."""
+        """[SCALA_MIN_PASSO] Fotografa `d0` e `d` a INIZIO PASSO PIENO: da qui si misura la
+        variazione TOTALE, una volta sola.
+
+        ⚠ **E' IDEMPOTENTE, dalla cura `(c)1` del 2026-09-27:** la chiamano **tutte e
+        cinque le leggi** del passo, in testa, e **la PRIMA che gira apre**. Le altre quattro
+        escono subito.
+
+        **Perche' cosi' e non nel chiamante:** i chiamanti delle cinque leggi sono **SEI**
+        (`update()`, il benchmark, due costruttori di scena, `csv/_test_fork/_scena_video.py`,
+        e `csv/_passo.py` che li legge per AST), e **una divergenza fra due di loro sarebbe
+        invisibile**. L'idempotenza mette il confine **dentro** la cosa che deve rispettarlo,
+        e lo rende **indipendente dall'ORDINE** -- che e' cio' che `H-ETC-2` permuta.
+        """
+        # APERTURA GIA' FATTA in questo passo: non si rifotografa, e si CONTA (`A8`), cosi'
+        #   <<quante leggi hanno trovato la fotografia gia' aperta>> e' leggibile invece che
+        #   supposto. Con le cinque leggi canoniche il contatore sale di 4 per passo.
+        if getattr(self, '_smp_d0', None) is not None:
+            self._g_smp_gia_aperta = getattr(self, '_g_smp_gia_aperta', 0) + 1
+            return
         # [C4] la stessa fotografia serve alla coesione causale: UNA macchina, DUE utenti.
         if SCALA_MIN_PASSO or COES_CAUSALE:
             self._smp_d0 = np.array(self.d0, dtype=float, copy=True)
@@ -5062,11 +5083,11 @@ class Rete:
         return K_C * np.imag(np.conj(z) * (self._mat(A) @ z))
 
     def step(self):
-        if self.n < 2 or not len(self.i): return
-        # [SCALA_MIN_PASSO, C3] la fotografia di INIZIO PASSO. Il passo, per il freno, e' il
-        # ciclo INTERO del driver -- `step` + `mitosi` + `memoria_hebbiana_moto` -- perche' e'
-        # li' che stanno le sei scritture di `d0`.
+        # [(c)1, 2026-09-27] L'APERTURA STA PRIMA DELLA GUARDIA, e prima era dopo: se `step`
+        #   usciva subito (`n < 2`), il passo non apriva e il freno del passo non chiudeva.
+        #   Ora la fotografia e' del PASSO, non di `step`.
         self._smp_apri()
+        if self.n < 2 or not len(self.i): return
         i, j = self.i, self.j
         
         # --- EVALUATE-THEN-COMMIT: Snapshot rigoroso di inizio passo (tempo t) ---
@@ -5862,6 +5883,7 @@ class Rete:
         if TRACCIA_D0: self._traccia_d0('P1_dopo_rilass', _tr_pre)
         
     def mitosi(self):
+        self._smp_apri()          # [(c)1] il confine del passo, idempotente
         if self.n >= MAX_NODI or not len(self.tw): return 0
         avv = np.abs(self.tw)
         # soglia della mitosi: 2pi classico, oppure 3pi se la torsione vive sul dominio
@@ -6458,6 +6480,7 @@ class Rete:
         fra creazione e rilassamento e' auto-regolato dallo stato (lo stress stesso),
         indipendentemente da quante volte il chiamante invoca il rilassamento. Non e' un
         tetto: e' un feedback che accelera il rilassamento dove serve."""
+        self._smp_apri()          # [(c)1] il confine del passo, idempotente
         if self.n < 2 or not len(self.i): return
         pos0 = self.pos.copy() if L_CONSERVA else None   # per misurare la rotazione spuria
         for _ in range(it):
@@ -6558,6 +6581,7 @@ class Rete:
           - CONSERVAZIONE: mem(t+1) = mem(t) + correzione_dal_campo. Il momento si mantiene
             (inerzia hebbiana), la correzione lo piega lungo la geodetica. Cosi' non insegue
             lo zero: genera e protegge il moto, assecondando la curvatura."""
+        self._smp_apri()          # [(c)1] il confine del passo, idempotente
         if not MEM_HEBB or self.n < 2 or not len(self.i):
             # [SCALA_MIN_PASSO, C3] ANCHE SUL RITORNO ANTICIPATO il freno va chiuso: senno' lo
             # snapshot resterebbe aperto e il passo DOPO confronterebbe `d0` con quello del passo

@@ -63,6 +63,26 @@ voce `Z…` della `FASE A`, commit `9a82bfb`)*.
 <!-- SCHEDA nome=freno-scala-min funzioni=_smorza,_smp_apri,_smp_chiudi,_smp_snap,_sd0,_nasce flag=SCALA_MIN,SCALA_MIN_PASSO,PAV_COM -->
 # ① IL FRENO DI `SCALA_MIN` — **`SCALA_MIN_PASSO` / `_smorza` / `_smp_chiudi`**
 
+> ### 🔓 **(c)1, 2026-09-27: IL CONFINE DELLA FOTOGRAFIA SI SPOSTA A INIZIO PASSO**
+ > **`(c)1` di `ETC-PASSO`, 2026-09-27: `_smp_apri()` e' IDEMPOTENTE e la chiamano TUTTE
+> e CINQUE le leggi**, in testa. **La prima che gira apre**, le altre quattro escono subito, e
+> cosi' il confine della transazione e' a **inizio passo pieno qualunque sia l'ORDINE** -- che e'
+> cio' che `H-ETC-2` permuta. **I chiamanti delle cinque leggi sono SEI**, e una divergenza fra
+> due di loro sarebbe invisibile: l'idempotenza mette il confine **dentro** la cosa che deve
+> rispettarlo. Contatore `A8`: **`_g_smp_gia_aperta`** = quante leggi l'hanno trovata gia' aperta
+> *(4 per passo con le cinque canoniche)*.
+>
+> ### **E un difetto curato di passaggio:** in `step()` l'apertura stava **DOPO** la guardia
+> `if self.n < 2 or not len(self.i): return`. **Un passo con meno di 2 nodi NON APRIVA la
+> fotografia, e il freno del passo non chiudeva.** Ora sta **prima**.
+> ### ⚠ **LA CHIUSURA NON E' TOCCATA, ed e' una decisione:** `_smp_chiudi()` sta in fondo a
+> `memoria_hebbiana_moto` e **subito dopo c'e' `verifica_invarianti()`**. Spostarla fuori dalla
+> legge farebbe girare il controllo degli invarianti su **`d0` non ancora frenata**: cambierebbe
+> **quando** il controllo guarda, non solo dove sta il freno. **Secondo meccanismo, secondo
+> commit** (regola d'oro). *(Verificato dal codice che `verifica_invarianti` **legge soltanto**:
+> lo stato non cambierebbe, cambierebbe su quali valori il controllo scatta.)*
+
+
 > ### 🗄 **I DUE PAVIMENTI VECCHI SONO USCITI DALLA LEGGE** *(2026-09-27, `(b)1`
 > ### di `ETC-PASSO`)*
 >
@@ -348,6 +368,20 @@ tronca nulla lo fa salire ugualmente — è il presidio di `D38`, non una misura
 
 <!-- SCHEDA nome=memoria-del-moto funzioni=memoria_hebbiana_moto flag=MEM_HEBB,MEM_MOTO,MEM_MOTO_TUTTO,SCALA_P_MEDIANA,ZETA_VIR -->
 # ② LA MEMORIA DEL MOTO — **`memoria_hebbiana_moto` / `S08_proj` / `mem_mot`**
+
+> ### 🔓 **(c)1, 2026-09-27: anche questa legge APRE il passo**
+ > **`(c)1` di `ETC-PASSO`, 2026-09-27: `_smp_apri()` e' IDEMPOTENTE e la chiamano TUTTE
+> e CINQUE le leggi**, in testa. **La prima che gira apre**, le altre quattro escono subito, e
+> cosi' il confine della transazione e' a **inizio passo pieno qualunque sia l'ORDINE** -- che e'
+> cio' che `H-ETC-2` permuta. **I chiamanti delle cinque leggi sono SEI**, e una divergenza fra
+> due di loro sarebbe invisibile: l'idempotenza mette il confine **dentro** la cosa che deve
+> rispettarlo. Contatore `A8`: **`_g_smp_gia_aperta`** = quante leggi l'hanno trovata gia' aperta
+> *(4 per passo con le cinque canoniche)*.
+>
+> **Qui la chiamata e' inserita dopo il docstring**, e nell'ordine canonico **trova sempre la
+> fotografia gia' aperta**: e' l'ultima delle cinque. **Serve per le PERMUTAZIONI** -- se
+> `H-ETC-2` la mette prima, deve poter aprire lei.
+
 
 > ### 🗄 **(b)1, 2026-09-27: le CINQUE chiamate al pavimento vecchio sono uscite**
 >
@@ -957,6 +991,19 @@ distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifi
 <!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,_dphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
 # ⑥ LA FASE `φ` E IL SUO DOMINIO — **`semina` / `_w4` / `_w8` / `step`**
 
+> ### 🔓 **(c)1, 2026-09-27: `step` non e' piu' il proprietario della fotografia**
+>
+> `_smp_apri()` era chiamata **qui**, e il suo commento diceva che <<il passo, per il freno, e' il
+> ciclo INTERO del driver>>: **lo diceva e non lo faceva** -- la fotografia si apriva all'inizio di
+> `step`, cioe' **dopo** `scuoti_vuoto`. Ora la aprono **tutte e cinque le leggi**, idempotente, e
+> la prima che gira apre. **Il commento e il codice ora dicono la stessa cosa.**
+> ### **E l'apertura e' passata PRIMA della guardia `if self.n < 2 or not len(self.i): return`:**
+> con meno di 2 nodi il passo **non apriva** la fotografia, e il freno del passo **non chiudeva**.
+> **La legge sulla FASE non e' toccata:** `_dphi`, `_wphi`, il dominio a `4 pi`, il cuore
+> simplettico `phivel -> phi` restano come erano. Qui cambia **soltanto** dove nasce la
+> transazione del freno.
+
+
 > ### 🗄 **(b)2, 2026-09-27: `step` perde il campo `psi_t` della snapshot**
 >
 > **`SYNC_UPDATE` e' un NO-OP ACCETTATO dal 2026-09-27** *(passo `(b)2` di `ETC-PASSO`)*: i
@@ -1212,6 +1259,20 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 > `MITOSI_2LAM`, e **ha fatto bene a chiederla**: dal diff non si vede se la riga toccata sia
 > un commento o una legge. **La risposta va scritta, non assunta.**)*
 # ⑦ LA MITOSI E SCHWINGER — **`mitosi()`**
+
+> ### 🔓 **(c)1, 2026-09-27: anche la mitosi APRE il passo**
+ > **`(c)1` di `ETC-PASSO`, 2026-09-27: `_smp_apri()` e' IDEMPOTENTE e la chiamano TUTTE
+> e CINQUE le leggi**, in testa. **La prima che gira apre**, le altre quattro escono subito, e
+> cosi' il confine della transazione e' a **inizio passo pieno qualunque sia l'ORDINE** -- che e'
+> cio' che `H-ETC-2` permuta. **I chiamanti delle cinque leggi sono SEI**, e una divergenza fra
+> due di loro sarebbe invisibile: l'idempotenza mette il confine **dentro** la cosa che deve
+> rispettarlo. Contatore `A8`: **`_g_smp_gia_aperta`** = quante leggi l'hanno trovata gia' aperta
+> *(4 per passo con le cinque canoniche)*.
+>
+> **Le regole di nascita non sono toccate.** Cambia solo **chi puo' aprire la transazione**, e
+> per la mitosi conta doppio: e' **lei** che chiama `_smp_chirurgia`, cioe' che fa subire alla
+> fotografia le stesse operazioni di `d0`. **Una fotografia non aperta non potrebbe seguirla.**
+
 
 > ### 🗄 **(b)1, 2026-09-27: via la chiamata al pavimento vecchio dopo la spinta**
 >
@@ -3935,3 +3996,126 @@ stessa senza l'eccezione**. Il suo commento lo chiedeva già: *«le due leggi de
 — il vuoto è lo stesso vuoto»*.
 **`9-ter`: il numero delle leggi SCENDE** — 7 blocchi condizionali e 9 ternari in meno, **zero
 aggiunti**.
+
+---
+
+<!-- SCHEDA nome=scuotimento-vuoto funzioni=scuoti_vuoto,lambda_vuoto flag=SCUOTIMENTO,CALORE_VETTORIALE,RUMORE_COLORATO -->
+# ㉖ LO SCUOTIMENTO DEL VUOTO — **`scuoti_vuoto`**, la **prima** legge del passo
+
+> ### ⚠ **LA SCHEDA NASCE IL 2026-09-27, E NASCE TARDI.** `scuoti_vuoto` è **la prima delle cinque
+> leggi del passo pieno** e **non aveva una scheda**: `H-REG-R` l'ha imposta nel commit `(c)1` di
+> `ETC-PASSO`. **Una legge senza scheda è una legge la cui forma nessuno ha dovuto scrivere
+> chiusa**, ed è il modo in cui — dice il presidio — sono nati `D01`-`D33`.
+
+## LA FORMA, letta dal codice
+
+Per **arco** lo stress metrico, per **nodo** la sua media sui vicini, e da lì l'ampiezza:
+
+```
+stress_arco(e) = |d(e) - d0(e)| / max(d0(e), 1e-6)
+stress_nodo(k) = ( SUM_{e: k in e} stress_arco(e) ) / max(grado(k), 1)
+ampiezza(k)    = sqrt( stress_nodo(k) + 1e-9 ) * sqrt(Lam) / ( 1 + I2(k)/Lam )
+calcio(k)      = N(0,1) * ampiezza(k)            [ * perc_chi(k) se CALORE_VETTORIALE ]
+phivel(k)      += calcio(k)
+```
+
+con `Lam = lambda_vuoto(net)` *(l'energia del vuoto, dinamica)* e `I2 = |psi|²`.
+
+## CHE COSA LEGGE E CHE COSA SCRIVE
+
+| | |
+|---|---|
+| **legge** | `d`, `d0` *(per arco)*, `psi` → `I2`, `perc_chi`, `rng`, `n`, `i`, `j`, `_deg` implicito nel grado ricalcolato |
+| ### **scrive** | ### **`phivel` e NIENT'ALTRO** |
+
+### **È il fatto che rende `(c)1` byte-identico:** fra `scuoti_vuoto` e `step` **non c'è nessuna
+scrittura di `d` o `d0`**, quindi spostare la fotografia da `step` a `scuoti_vuoto` **non cambia la
+fotografia**. *(E il sigillo di `(c)1` lo verifica invece di fidarsi di questa riga.)*
+
+## DIMENSIONI
+
+`stress` è **adimensionale** *(un rapporto di lunghezze)*; `Lam` ha le dimensioni di `|psi|²`,
+quindi `sqrt(Lam)` quelle di `|psi|`; `ampiezza` esce in unità di `phivel`, cioè **fase su tempo**.
+**Nessuna costante con dimensioni scelte a mano.**
+
+## LIMITI, classificati con `A11`
+
+| sito | forma | natura |
+|---|---|---|
+| `max(d0, 1e-6)` | denominatore | **anti-zero** |
+| `max(grado, 1.0)` | denominatore | **anti-zero** *(un nodo isolato)* |
+| `sqrt(stress + 1e-9)` | dominio di `sqrt` | **condizione di esistenza** |
+| `1/(1 + I2/Lam)` | soppressione | ### **non è un limite: è la LEGGE** — dove c'è materia coerente il vuoto non scuote |
+
+### **Nessun `clip`, nessun pavimento, nessun tetto.** *(Verificato con `CLIP-INVENTARIO`.)*
+
+## LA COSA CHE VA DETTA, e non è una critica alla legge
+
+> **`SCUOTIMENTO` è il flag che la accende, e la guardia `if not SCUOTIMENTO ... return` sta
+> DOPO l'apertura del passo** *(cura `(c)1`)*: **se la prima legge esce subito, il passo deve
+> cominciare comunque.** Prima di `(c)1` la fotografia si apriva in `step`, e questa domanda non
+> esisteva.
+
+**E `RUMORE_COLORATO`** *(taglio spettrale, `tau_c = LAM/CS_M`)* **agisce sul `calcio`**: da `(b)2`
+**agisce sempre**, perché il percorso `not SYNC_UPDATE` è diventato l'unico *(scheda
+`aggiornamento-sincrono`)*.
+
+---
+
+<!-- SCHEDA nome=rilassamento-disegno funzioni=rilassa_disegno flag=L_CONSERVA,EMB_IT,EMB_ETA -->
+# ㉗ IL RILASSAMENTO DEL DISEGNO — **`rilassa_disegno`**, e **`A3-DISEGNO`**
+
+> ### ⚠ **ANCHE QUESTA SCHEDA NASCE IL 2026-09-27**, imposta da `H-REG-R` nel commit `(c)1`.
+> **È la quarta delle cinque leggi del passo, e non aveva forma scritta.**
+
+## LA FORMA
+
+Le coordinate **inseguono** le distanze relazionali. Per `it = EMB_IT` iterazioni:
+
+```
+v(e)    = pos(j) - pos(i)                   L(e) = max(|v(e)|, 1e-9)
+corr(e) = ((L(e) - d(e)) / L(e)) * v(e) * 0.5
+acc(k)  = ( SUM_{e: i=k} corr(e) - SUM_{e: j=k} corr(e) ) / deg(k)
+pos     += EMB_ETA * clip(acc, -0.5, +0.5)
+pos     -= mean(pos)                        # il baricentro resta nell'origine
+```
+
+## ⛔ CHE COSA **NON** È
+
+### **NON è fisica: è il DISEGNO.** `pos` non è una grandezza del sistema relazionale — è la
+**proiezione** che rende visibile `d`. Il sistema vive su `(i, j, d)`.
+
+> ### 📌 **E qui sta `A3-DISEGNO`, che è un difetto APERTO e non di questa scheda:**
+> `pos`, scritto qui, **è riletto dalla FISICA** — `memoria_hebbiana_moto:6622` **senza nessuna
+> guardia** *(→ `grad_tw` → `mem_mot` → il blocco `GRAV_BIFASE`)* e `:7010` *(→ `dir_radiale` → con
+> `MEM_MOTO_TUTTO` **scrive `self.phi`**)*.
+> **La cura `ETC-PASSO` NON lo chiude**, e non deve fingere di farlo: congelare `pos` nella
+> fotografia rende la dipendenza **sincrona**, **non la toglie**. **Un difetto reso ordinato resta
+> un difetto**, ed è la cura **(c)** dell'elenco *(voce `A3-DISEGNO`)*.
+
+## CHE COSA LEGGE E CHE COSA SCRIVE
+
+| | |
+|---|---|
+| **legge** | `pos`, `i`, `j`, `d`, `_deg`, `n` |
+| **scrive** | ### **`pos` e nient'altro** *(più `psi` e `psi_spin` se qualcosa a valle le ricalcola: vedi `PSI-FLASH`)* |
+
+## LIMITI, classificati con `A11`
+
+| sito | forma | natura |
+|---|---|---|
+| `max(|v|, 1e-9)` | denominatore | **anti-zero** |
+| `clip(acc, ±0.5)` | ### **TETTO FISICO** | ### **è un limite su quanto il disegno può muoversi in un'iterazione** |
+| `nan_to_num(pos)` | difesa | **non è un limite: è una toppa su un `NaN`** — e `A11` dice di **cercare l'errore** |
+
+> ### ⚠ **I due ultimi sono in `CLIP-INVENTARIO` come TETTI FISICI del disegno**, ed è il posto
+> giusto: **stanno fuori dalla fisica**, quindi toccarli **non cambia il sistema** — cambia solo
+> come lo si vede. **Per questo NON sono nella famiglia da archiviare.**
+
+## `L_CONSERVA`
+
+Il ramo che sottrarrebbe la **rotazione rigida spuria** *(conservazione del momento angolare del
+disegno)*. ### **`L_CONSERVA = False` a runtime, e il codice lo marca «ERRATA, NON usare»:** il
+ramo è **morto**, e con lui la chiamata `calcola_psi()` di `:6529` che `H-ETC-1` conta fra le 8.
+**È l'unico degli 8 siti senza `w` che sta in un ramo morto**, e la scheda lo dice **perché il conto
+di `H-ETC-1` non vada letto come «8 problemi vivi»**.
