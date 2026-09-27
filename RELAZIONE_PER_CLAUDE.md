@@ -3918,3 +3918,61 @@ indebolita, non annullata**: è censito come guardia, **mai misurato come legge*
 > prova trovata»)* e **le 18 `doc/PREDIZIONE_*.md` non confrontate col loro esito** — che è
 > esattamente il filone del censimento, e resta scoperto.
 
+
+---
+
+# 🛑 **STOP SULLE MISURE. L'ELENCO DELLE CURE DI FISICA, DA APPROVARE** *(decisioni di Luca, 2026-09-27)*
+
+*(`doc/CURE_fisica_ordine.md`. **Nessuna cura è iniziata**, nessun codice è cambiato.)*
+
+**Le tre decisioni che governano tutto:** **(1)** priorità assoluta alle cure di fisica, e
+**l'aggiornamento sincrono È fisica**; **(2)** la **doppia copertura è un ASSIOMA** — non si misura
+se sia migliore, **si verifica che sia dove si dichiara**; **(3)** **tutto si mantiene**: ciò che è
+attivo resta attivo *(le cure lo **dichiarano**, non lo spengono)*, ciò che esce si **archivia**.
+
+## Lo stato dello STOP
+
+| | |
+|---|---|
+| run in corso | ### **NESSUNO** — zero processi Python |
+| l'A/B di `--sync` | ### **NON È MAI PARTITO.** Nulla da fermare, nulla da registrare come interrotto. **Lo dico perché il mandato lo dava per avviato** |
+| voci **SOSPESE** | **14**, `avanzamento = BLOCCATO`, **aperte e non cancellate**, con la ragione nella nota |
+| gli stati del pilota | **conservati** |
+
+## Le 23 voci del censimento sono nell'indice
+
+`CENS-A1`…`CENS-A7` *(difetti)* e `CENS-B1`…`CENS-B16` *(sospetti)*, con **alias namespacizzato**
+`CENSIMENTO:A1`… — le etichette locali del censimento **sono reperti e non si riscrivono**.
+**Le righe sono GENERATE dal censimento, non ricopiate** (`L-NUMERI`).
+**`blocca_run_base` è `DA-DECIDERE` per tutte e 23**, e non l'ho deciso io: **una decisione senza
+prova non passa il validatore**, e l'ordine lo approva Luca.
+
+## L'ordine proposto
+
+**(a) `ETC-PASSO` da sola, prima di tutto** — fotografia di inizio passo, scritture applicate
+insieme a fine passo, `calcola_psi` sempre con `w`. Presidi **`H-ETC-1`** *(zero chiamate senza
+`w`)* e **`H-ETC-2`** *(permutare l'ordine dà lo stesso stato: **Jacobi**)*. Chiude `PSI-FLASH`,
+`CENS-A6`, `CENS-A7`, `CENS-B7`.
+**È prima perché `PSI-FLASH` non è un difetto del diagnostico:** la `psi` ricalcolata entra in `I`,
+quindi in `pozzo_grafo`, quindi **nella spinta `S09` dello stesso passo**.
+**(b) `DOPPIA-COP`** strutturale, col sigillo che **verifica l'assioma** e **non misura se sia
+migliore**. **(c)** i residui `A3`/`A2` con cura chiara. **(d)** gli altri `SI` e le voci di fisica
+del censimento — **dichiarare, non spegnere**. **(e)** solo il documento delle opzioni di modello.
+
+> ### ⚠ **Due cose che ho messo nell'elenco perché NON si curi un non-difetto:**
+> nel Kuramoto **`I2.sum()` si CANCELLA** in `prof_rel` — quel residuo `A2` è **inerte**, e la cura
+> riguarda **solo `pos` e `cmv`**; e in `ritmo()` **`A3` è già curato** *(mediana del passo
+> precedente)*, **resta solo la globalità**.
+>
+> ### ⚠ **E un'attesa dichiarata e NON misurata**, come chiesto: con `FASE_2PI` le mitosi passavano
+> da **62 a 1** *(soglia `3 pi`, `D36`)*. Portare tutto a `4 pi` può spostare quell'equilibrio —
+> **me l'aspetto nella direzione opposta** *(dominio doppio → **meno** mitosi)*, **ma non lo misuro
+> ora e non so di quanto**.
+
+**Serve da Luca:** l'ordine è approvato? quali `CENS-*` diventano `blocca = SI`? **(e)** è un
+documento o si ferma lì? **Fino alla risposta, nessuna cura inizia.**
+
+**A parte:** `--sync-db` in headless carica ma non salva → voce `SYNCDB-HEADLESS`, **strumento e non
+fisica**. **Non l'ho verificata:** è una segnalazione con la sua fonte *(il docstring)*, e prima di
+curarla va letta dal codice — **è esattamente la classe di affermazione che il censimento ha appena
+mostrato poter essere falsa.**

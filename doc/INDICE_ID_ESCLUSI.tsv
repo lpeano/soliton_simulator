@@ -76,3 +76,12 @@ T8b	etichetta LOCALE di un criterio del collaudo T7/T8 in doc/TASK_HISTORY/2026-
 T8c	etichetta LOCALE di un criterio del collaudo T7/T8 in doc/TASK_HISTORY/2026-09-27_tratti.md, non un identificatore	0
 CO-RUOTA	verbo della prosa (<<il riferimento CO-RUOTA con le masse>>), non un identificatore	0
 V-PRE	etichetta LOCALE della precondizione di MASSA-ID-FISSO, non un identificatore	0
+ETC-PASSO	ID PROPOSTO in doc/CURE_fisica_ordine.md, non ancora creato	0
+DOPPIA-COP	ID PROPOSTO in doc/CURE_fisica_ordine.md, non ancora creato	0
+KURA-POS	ID PROPOSTO in doc/CURE_fisica_ordine.md, non ancora creato	0
+RITMO-MEDIANA	ID PROPOSTO in doc/CURE_fisica_ordine.md, non ancora creato	0
+MODELLO-FASE	ID PROPOSTO in doc/CURE_fisica_ordine.md, non ancora creato	0
+H-ETC-1	etichetta LOCALE di un presidio PROPOSTO, non ancora cablato	0
+H-ETC-2	etichetta LOCALE di un presidio PROPOSTO, non ancora cablato	0
+B16	etichetta LOCALE del censimento (CENS-B16 e il suo ID); nel testo compare come CENS-B1..B16	0
+NON-DIFETTO	locuzione del testo (<<non si curi un NON-DIFETTO>>), non un identificatore	0
