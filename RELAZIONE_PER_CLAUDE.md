@@ -4896,3 +4896,63 @@ disegno**, e ci vive `A3-DISEGNO` — che **la cura non chiude**.
 > ### 🛑 **STOP.** Prossimo: **`(c)2`, la chiusura** — e va spostata **insieme a
 > `verifica_invarianti()`**, così il controllo guarda lo stato **committato**. Due movimenti legati,
 > un commit. **E il byte-identico non basterà**, perché il controllo invarianti non scrive.
+
+---
+
+# 📌 **`VERLET` e `REGIME` deterministico sono LEGGI IN USO** *(decisione di Luca, 2026-09-27)*
+
+### **Blob: `b5a713d1` → `e06dcb4e`. Byte-inerte: 23/23 identiche, contatori invariati.**
+
+**Nessuna archiviazione, nessun cambiamento.** Registrate come tali in `CENS-B8` *(Verlet)* e
+`COMPONENTI:C3` *(il regime)*, **avanzamento `FATTO`**.
+
+## L'avviso, e cosa NON è
+
+`_avvisa_leggi_in_uso()` stampa in chiaro all'avvio se il run **non** usa Verlet o **non** è in
+regime deterministico, **nominando la voce d'indice**.
+
+> ### ⚠⚠ **È UN AVVISO, NON UN PRESIDIO** (`A9`): **non impedisce niente.** L'hai chiesto così
+> — *«avviso, non blocco»* — e lo scrivo perché ### **un avviso presentato come presidio sarebbe
+> esattamente il difetto che `A9` esiste per intercettare.** Chi conta i presidi **non lo conti fra
+> loro**: vale quanto l'attenzione di chi legge lo stdout.
+
+**Dove sta, e perché non in `_applica_flag`:** `--regime` si applica in `_applica_regime`, che gira
+**dopo** `_applica_flag`. Un controllo messo là leggerebbe il `REGIME` **di testa al file** e non
+quello del run — ### **direbbe la cosa sbagliata proprio quando conta.** E sta su **entrambi** i
+rami: quello senza override faceva un `return` secco che l'avrebbe **saltato nel caso più comune**.
+
+**Collaudo a tre casi, girato:** driver → *«le leggi in uso ci sono»*; Verlet spento → avvisa **1**
+e nomina `CENS-B8`; Verlet spento **e** `--regime stocastico` → avvisa **2** e nomina i **quattro**
+interruttori che il regime cambia insieme.
+
+## E una cosa sulla promozione, che va detta
+
+Il par.10 chiede **tre** criteri per promuovere una componente a fisica di default. ### **Qui il
+criterio è la tua decisione**, e le due voci lo dicono in chiaro: sono leggi in uso **per
+decisione**, non perché una misura le abbia mostrate migliori.
+**`CENS-B8` resta aperta e dice proprio questo:** la deriva d'energia del ramo Eulero **non è mai
+stata misurata**. **E `COMPONENTI:C3` dice che `--regime` cambia quattro interruttori insieme**,
+cioè che **non è isolabile**: un A/B sul regime non è un A/B su un meccanismo.
+
+**Nuova scheda `leggi-in-uso`** in `REGISTRO_FISICA`, imposta da `H-REG-R`: `_applica_regime` e
+`_avvisa_leggi_in_uso` **non avevano scheda**.
+
+---
+
+# ➜ **(c)2, e perché mi fermo qui invece di iniziarlo male**
+
+**Il progetto è già fissato, ed è nel task history di `(c)1`:** `_smp_chiudi()` va **dopo l'ultima
+legge**, e **insieme a `verifica_invarianti()`** — così il controllo guarda lo stato **committato**
+invece di `d0` non ancora frenata.
+
+> ### ⚠ **Ma la chiusura NON può usare il trucco dell'idempotenza di `(c)1`:** una legge può sapere
+> di essere **la prima** *(la fotografia non è aperta)*, **non di essere l'ultima**.
+> ### **Quindi la chiusura deve andare nei SEI chiamanti** — `update()`, il benchmark, i due
+> costruttori di scena, la copia del driver, e `csv/_passo.py` che li legge per AST — **e con essa
+> il contratto di `_passo.py`, che verifica che l'originale e il driver coincidano.**
+
+**È il pezzo più rischioso di `(c)`**, perché sei siti che devono cambiare **identicamente** sono
+esattamente la forma di divergenza che `(c)1` ha evitato. **Lo apro come primo lavoro del prossimo
+giro, con il suo tag e il suo sigillo**, invece di cominciarlo in coda a una sessione lunga: un
+refactor a sei siti lasciato a metà lascerebbe il repo in uno stato che nessuno ha dichiarato
+*(`L-UN-PROMPT`)*.
