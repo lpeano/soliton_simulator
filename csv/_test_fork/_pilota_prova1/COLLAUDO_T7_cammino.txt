@@ -1,0 +1,25 @@
+[TIMBRO] _osservabile_p1.py  sha1-BYTE 7854c7b7  committato e pulito
+[TIMBRO] _tratti_cammino.py  sha1-BYTE a8e67b9f  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
+============================================================================================================
+`T7`/`T8` -- IL COLLAUDO SUL GRAFO (non l'aritmetica: `T4` era tautologico)
+============================================================================================================
+  T7a  traslazione RIGIDA (solo il varco)        PASS
+      D_centri -9.0500   D_varco -9.0500   D_interni -0.0000   (medoidi 9->9, 209->209)
+  T7b  contrazione SOLO INTERNA                  PASS
+      D_centri -0.9500   D_varco +0.0000   D_interni -0.9500   -> tutto negli interni, come deve
+  T7c  lo SPERONE: l'indicatore DEVE sbagliare   PASS
+      D_centri +0.0000 (il cammino NON usa lo sperone)   D_varco -10.0000   D_interni +10.0000  <- INVENTATO
+  T8b  il CAMMINO da' la risposta GIUSTA         PASS
+      tratti prima  A 0.00  varco 100.00  B 0.00  (L 100.00)
+      tratti dopo   A 0.00  varco 100.00  B 0.00  (L 100.00)   max|delta| 0.00e+00
+  T8   la somma CHIUDE su tutti i casi           PASS
+      max |interno_A + varco + interno_B - L_tot| = 1.137e-13 su 5 casi
+  T8c  gli archi di CONFINE si CONTANO           PASS
+      anello: 2 archi di confine su 200, lunghezza 2.00 su 181.00 del varco
+      (se pesassero quanto il varco, la ripartizione sarebbe una CONVENZIONE)
+
+  LA RIGA CHE CONTA E' `T7c`: costruisce il caso in cui l'indicatore SBAGLIA, e `T8b`
+  mostra che la scomposizione del CAMMINO, sullo STESSO grafo, non sbaglia. Senza `T7c`
+  il limite di `D_interni` resterebbe DICHIARATO invece che MISURATO.
+
+  6/6

@@ -3440,3 +3440,34 @@ blob del simulatore e data. **→ `STATI-LOCALI`.**
 > precedente cambierebbe un risultato **in silenzio**, e il numero non avrebbe più provenienza
 > (`L-NUMERI`).
 
+
+---
+
+# ✅ **`T7` SUL GRAFO: 6/6, E L'INDICATORE SBAGLIA DAVVERO — MISURATO, non più dichiarato** *(2026-09-27)*
+
+*(`csv/_test_fork/_tratti_cammino.py --collaudo`, referto in
+`csv/_test_fork/_pilota_prova1/COLLAUDO_T7_cammino.txt`. **File NUOVO di proposito:**
+`csv/_osservabile_p1.py` è importato dai bracci del run in corso e `par.5` vieta di modificarlo —
+qui lo si **importa** e si aggiunge ciò che manca.)*
+
+| # | caso | esito |
+|---|---|---|
+| **`T7a`** | traslazione **rigida** *(solo il varco)* | `D_centri −9.0500` · `D_varco −9.0500` · **`D_interni −0.0000`**, e **i medoidi non si spostano** *(9→9, 209→209)* — il caso poteva fallire proprio lì |
+| **`T7b`** | contrazione **solo interna** | `D_varco +0.0000` · **`D_interni −0.9500 = D_centri`** |
+| **`T7c`** | ### **lo SPERONE** | `D_centri +0.0000` · `D_varco −10.0000` · ### **`D_interni +10.0000` ← INVENTATO** |
+| **`T8b`** | il **cammino**, sullo stesso grafo | `interno_A 0.00 · varco 100.00 · interno_B 0.00` **prima e dopo**, `max\|delta\| 0.00e+00` |
+| **`T8`** | la somma **chiude** | `1.137e-13` su **5 casi su 5** |
+| **`T8c`** | archi di **confine** | `2` su `200`, lunghezza `2.00` contro `181.00` del varco → **la convenzione non decide il risultato** |
+
+> ### 🎯 **`T7c` È LA RIGA CHE CONTA.**
+> Costruisce un grafo in cui **il nodo più vicino NON sta sul cammino** — `p0 —60— m0 —100— m1
+> —60— p1`, più uno sperone `p0—p1` da `30`: il cammino medoide-medoide usa la via diretta da
+> `100`, mentre `insieme_insieme = 30` **sta sullo sperone**.
+> **Accorciando SOLO lo sperone**, l'indicatore **inventa** una variazione degli interni di
+> **`+10`** su un effetto che vale **zero**; la scomposizione del **cammino**, sullo **stesso**
+> grafo, **non sbaglia**.
+>
+> **Il limite di `D_interni` finora era DICHIARATO. Ora è MISURATO.**
+> **Dichiarare un limite non è misurarlo** — è la stessa lezione di `CTRL-RISCELTA`, e stavolta
+> l'ho applicata **prima** che il numero servisse a concludere qualcosa.
+
