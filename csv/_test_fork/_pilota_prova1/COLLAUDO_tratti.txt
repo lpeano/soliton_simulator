@@ -1,0 +1,24 @@
+========================================================================================================
+`T4` -- CONTROLLO DI ARITMETICA (NON un collaudo: non puo' fallire)
+========================================================================================================
+  ⚠ `D_interni = D_centri - D_varco` e' ZERO PER IDENTITA' se i due si spostano
+    uguale, e qui `ct` e `st` sono costruiti per ARITMETICA: niente grafo, niente
+    medoide, niente cammino. Un criterio che non puo' dare FAIL non e' un presidio.
+    RESTA perche' MISURA quanto effetto inventa la forma RELATIVA. Il collaudo VERO
+    e' `T7`, SUL GRAFO, e arriva col passo del CAMMINO.
+
+  T4   due insiemi RIGIDI traslati di -0.19
+       D_centri -0.19000   D_varco -0.19000   D_interni +0.00000   -> PASS (zero esatto)
+       ** e il criterio RELATIVO di `V6` su questo STESSO caso rigido darebbe
+          (st-s0)/s0 - (ct-c0)/c0 = -0.04000, cioe' un ALLUNGAMENTO che NON ESISTE.
+          E' il difetto `ALLUNG-RELATIVO`: denominatori diversi (3.2869 contro 10.6694).
+  T4b  contrazione SOLO INTERNA (superfici FERME, centri -0.19)
+       D_centri -0.19000   D_varco +0.00000   D_interni -0.19000   -> PASS (tutto negli interni)
+  T4c  avvicinamento SOLO DEL VARCO (superfici e centri di pari passo)
+       D_centri -0.19000   D_varco -0.19000   D_interni +0.00000   -> PASS (zero negli interni)
+
+  LA RIGA CHE CONTA NON E' LO ZERO (quello e' aritmetica): E' IL -0.04000 della forma
+  RELATIVA, cioe' L'EFFETTO CHE `V6` INVENTA su due corpi rigidi. Quello e' un numero
+  misurato, ed e' la prova del difetto `ALLUNG-RELATIVO`.
+
+  3/3

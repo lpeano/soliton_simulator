@@ -32,3 +32,7 @@ db/
 
 # Legacy: i vecchi out_<campagna>/ sono stati migrati a db/ /csv/ /log/. Restano
 # ignorati (out_*/ sopra). I loro CSV storici sono ora sotto csv/<campagna>/.
+# [TRATTI, 2026-09-27] gli STATI del grafo ai checkpoint: 16 file da ~470k archi.
+# Non vanno in git (decisione di Luca): stessa regola dei `.pkl`. Nell'INVENTARIO si
+# committano percorso, sha1 dei byte grezzi e il comando che li rigenera.
+csv/_test_fork/_pilota_prova1/stati/

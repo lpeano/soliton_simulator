@@ -948,7 +948,19 @@ diversi per lo stesso file.)*
 
 | strumento | blob (byte) | comando | cosa fa | esito |
 |---|---|---|---|---|
-| `csv/_test_fork/_scomposizione_tratti.py` | `3c83bd61` | `python csv/_test_fork/_scomposizione_tratti.py` · `--collaudo` | **`TRATTI`: il calo sta nel VARCO o negli INTERNI?** In unita' **ASSOLUTE** *(`D_centri`, `D_varco`, `D_interni`)*, IC95 fra semi. **Legge i `misura.json` GIA' COMMITTATI: nessun run nuovo.** `D_interni` e' un **INDICATORE** dichiarato, non il tratto interno del cammino | **`T4` 3/3**; **a 80 passi `D_interni` esclude lo zero 3 su 3, `D_varco` lo contiene 3 su 3** |
+| `csv/_test_fork/_scomposizione_tratti.py` | `62a56361` | `python csv/_test_fork/_scomposizione_tratti.py` · `--collaudo` | **`TRATTI`: il calo sta nel VARCO o negli INTERNI?** In unita' **ASSOLUTE** *(`D_centri`, `D_varco`, `D_interni`)*, IC95 fra semi. **Legge i `misura.json` GIA' COMMITTATI: nessun run nuovo.** `D_interni` e' un **INDICATORE** dichiarato, non il tratto interno del cammino | **`T4` 3/3**; **a 80 passi `D_interni` esclude lo zero 3 su 3, `D_varco` lo contiene 3 su 3** |
 | `csv/_test_fork/_confronto_previsione.py` | `dcdf6165` | `python csv/_test_fork/_confronto_previsione.py` | **AGGIORNATO** con le tre correzioni del guardiano: *«i NODI del passo 0»* invece di *«le masse»*, il blocco **`(a-ter)`** sulla **divergenza** delle due distanze, `(b)` **da rimisurare** *(estimatore rotto, `ALLUNG-RELATIVO`)*, e i controlli col loro **IC95** piu' la **correlazione appaiata** | il referto rigenerato: `0` allungamenti, `7` non determinate, `2` nulli informativi |
+
+**⚠ E `T4` E' UN CONTROLLO DI ARITMETICA, NON UN COLLAUDO** *(rilievo di Luca, 2026-09-27):
+`D_interni = D_centri - D_varco` e' **zero per identita'** se i due si spostano uguale, e nel
+`--collaudo` i valori sono costruiti **per aritmetica** -- **non puo' fallire** (`A9`).
+**Resta perche' MISURA** quanto effetto inventa la forma **relativa** (`-0.04000` su una
+traslazione rigida di `-0.19`): e' la prova di `ALLUNG-RELATIVO`. **Il collaudo VERO e' `T7`,
+SUL GRAFO**, coi criteri in `doc/TASK_HISTORY/2026-09-27_tratti.md` par.4. -> `T4-TAUTOLOGICO`.
+
+**⚠ E GLI STATI `.npz` DEL PROSSIMO RUN NON VANNO IN GIT** *(decisione di Luca)*: restano in
+locale sotto `csv/_test_fork/_pilota_prova1/stati/` *(gia' in `.gitignore`)*, e qui si
+committeranno **percorso**, **`sha1` dei byte grezzi** e il **comando verbatim** che li
+rigenera. -> `STATI-LOCALI`.
 
 **E non ci sono `.pkl` ne' dati nuovi:** entrambi leggono i `misura.json` committati in `c4517a9`. **Per rigenerare i referti basta rilanciare i due comandi.**

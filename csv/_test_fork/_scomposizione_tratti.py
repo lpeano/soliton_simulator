@@ -19,6 +19,12 @@ sono in `doc/TASK_HISTORY/2026-09-27_tratti.md`, committati **prima**.)*
 > **La scomposizione VERA richiede il CAMMINO**, e quindi gli stati del grafo ai checkpoint, che
 > **questo run non ha salvato**: e' il `TODO` del task history. **Dichiarato, non sottinteso.**
 
+> ### ⚠⚠ **E `T4` NON E' UN COLLAUDO: E' UN CONTROLLO DI ARITMETICA** *(rilievo di Luca)*.
+> `D_interni = D_centri - D_varco` e' **zero per identita'** se i due si spostano uguale, e
+> nel `--collaudo` i valori sono costruiti **per aritmetica**: **non puo' fallire**. Cio' che
+> misura davvero e' **quanto effetto inventa la forma RELATIVA** (`-0.04000`). **Il collaudo
+> VERO e' `T7`, SUL GRAFO**, e arriva col passo del cammino.
+>
 > ### ⚠ **E PERCHE' IN UNITA' ASSOLUTE, ed e' il difetto `ALLUNG-RELATIVO`:**
 > il criterio `V6` del pilota calcolava **`(st-s0)/s0 - (ct-c0)/c0`**, cioe' sottraeva due
 > variazioni **RELATIVE con DENOMINATORI DIVERSI** — `s0 ~ 3.0` contro `c0 ~ 10.7`. **Due corpi
@@ -27,7 +33,7 @@ sono in `doc/TASK_HISTORY/2026-09-27_tratti.md`, committati **prima**.)*
 > **In unita' assolute il problema sparisce per costruzione.**
 
     python csv/_test_fork/_scomposizione_tratti.py
-    python csv/_test_fork/_scomposizione_tratti.py --collaudo    # i due casi a risposta NOTA
+    python csv/_test_fork/_scomposizione_tratti.py --collaudo    # `T4`: controllo di ARITMETICA
 
 ASCII puro.
 """
@@ -83,10 +89,33 @@ def riga(nome, v, P=P):
 
 # ============================================================================ IL COLLAUDO
 def collaudo():
-    """**Due casi a risposta NOTA.** Il primo e' quello che DEVE far vedere lo zero (`P1-sexies`)."""
+    """⚠ **`T4` E' UN CONTROLLO DI ARITMETICA, NON UN COLLAUDO** *(rilievo di Luca, 2026-09-27)*.
+
+    **NON PUO' FALLIRE, e il perche' e' in queste righe stesse:** i valori `ct` e `st` sono
+    costruiti **per aritmetica** (`ct = c0 + delta`, `st = s0 + delta`), e allora
+
+        D_interni = (ct - c0) - (st - s0) = delta - delta = 0
+
+    **e' un'IDENTITA', non una misura.** Non c'e' nessun grafo, nessun medoide e nessun
+    cammino: **un criterio che non puo' dare `FAIL` non e' un presidio** (`A9`, `P1-sexies`).
+
+    **A che cosa serve ALLORA, e va tenuto per questo e solo per questo:** verifica che la
+    **forma ASSOLUTA** non inventi l'effetto che deve misurare, e **misura quanto ne
+    inventa quella RELATIVA** (`-0.04000` su una traslazione rigida di `-0.19`). **Quello**
+    e' un numero utile, ed e' la prova del difetto `ALLUNG-RELATIVO`.
+
+    **IL COLLAUDO VERO E' `T7`, SUL GRAFO**, e arriva col passo del CAMMINO:
+    `doc/TASK_HISTORY/2026-09-27_tratti.md`.
+    """
     P("=" * 104)
-    P("`T4` -- I DUE CASI A RISPOSTA NOTA, in unita' ASSOLUTE")
+    P("`T4` -- CONTROLLO DI ARITMETICA (NON un collaudo: non puo' fallire)")
     P("=" * 104)
+    P("  ⚠ `D_interni = D_centri - D_varco` e' ZERO PER IDENTITA' se i due si spostano")
+    P("    uguale, e qui `ct` e `st` sono costruiti per ARITMETICA: niente grafo, niente")
+    P("    medoide, niente cammino. Un criterio che non puo' dare FAIL non e' un presidio.")
+    P("    RESTA perche' MISURA quanto effetto inventa la forma RELATIVA. Il collaudo VERO")
+    P("    e' `T7`, SUL GRAFO, e arriva col passo del CAMMINO.")
+    P()
     ok = 0
 
     # --- T4: due insiemi RIGIDI traslati di -0.19: D_interni DEVE essere ~0
@@ -126,8 +155,10 @@ def collaudo():
     P("       D_centri %+.5f   D_varco %+.5f   D_interni %+.5f   -> %s"
       % (d_c3, d_v3, d_i3, "PASS (zero negli interni)" if buono3 else "** FAIL **"))
     P()
-    P("  LA RIGA CHE CONTA E' `T4`: due corpi RIGIDI danno `D_interni = 0` ESATTO con la forma")
-    P("  assoluta, e un allungamento FINTO di %+.5f con la forma relativa di `V6`." % vecchio)
+    P("  LA RIGA CHE CONTA NON E' LO ZERO (quello e' aritmetica): E' IL %+.5f della forma"
+      % vecchio)
+    P("  RELATIVA, cioe' L'EFFETTO CHE `V6` INVENTA su due corpi rigidi. Quello e' un numero")
+    P("  misurato, ed e' la prova del difetto `ALLUNG-RELATIVO`.")
     P()
     P("  %d/3" % ok)
     return ok

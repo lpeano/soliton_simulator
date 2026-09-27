@@ -69,3 +69,8 @@ PRE-CORREZIONE	locuzione del testo (<<col codice pre-correzione>>), non un ident
 K5a	etichetta LOCALE di un caso di collaudo in csv/_osservabile_p1.py, non un identificatore	0
 K5b	etichetta LOCALE del caso di collaudo che DEVE fallire in csv/_osservabile_p1.py, non un identificatore	0
 Y1b	etichetta LOCALE del criterio che DEVE fallire nel sigillo di MASSA-ID, non un identificatore	0
+T7a	etichetta LOCALE di un criterio del collaudo T7/T8 in doc/TASK_HISTORY/2026-09-27_tratti.md, non un identificatore	0
+T7b	etichetta LOCALE di un criterio del collaudo T7/T8 in doc/TASK_HISTORY/2026-09-27_tratti.md, non un identificatore	0
+T7c	etichetta LOCALE di un criterio del collaudo T7/T8 in doc/TASK_HISTORY/2026-09-27_tratti.md, non un identificatore	0
+T8b	etichetta LOCALE di un criterio del collaudo T7/T8 in doc/TASK_HISTORY/2026-09-27_tratti.md, non un identificatore	0
+T8c	etichetta LOCALE di un criterio del collaudo T7/T8 in doc/TASK_HISTORY/2026-09-27_tratti.md, non un identificatore	0

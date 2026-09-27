@@ -3385,3 +3385,58 @@ risulta significativa.**
 > ### **Quindi: NON è «due masse si avvicinano». È «le regioni si contraggono».**
 > **Per chiuderla serve la scomposizione del CAMMINO** *(`TRATTI`, con gli stati salvati)* **e
 > l'identità di massa per lignaggio** *(`MASSA-ID`)*.
+
+---
+
+# ❗ **UN COLLAUDO CHE NON POTEVA FALLIRE: `T4` È TAUTOLOGICO** *(rilievo di Luca, 2026-09-27, su `57236bf`)*
+
+> **La richiesta era sua e l'ha ritirata lui. La parte che mi riguarda è che l'ho eseguita senza
+> accorgermi che non poteva fallire** — e `P1-sexies` dice che **il caso che deve fallire è il più
+> importante**. Ne ho scritto uno che **non poteva**.
+
+## Dal codice che ho scritto io
+
+```python
+ct, st = c0 + delta, s0 + delta        # costruiti per ARITMETICA
+d_i = (ct - c0) - (st - s0)            # = delta - delta = 0
+```
+
+**`D_interni = D_centri − D_varco` è zero per IDENTITÀ** quando i due si spostano uguale. **Nessun
+grafo, nessun medoide, nessun cammino**: quel test lo passa **qualunque** implementazione,
+**compresa una sbagliata**. **Un criterio che non può dare `FAIL` non è un presidio** (`A9`).
+
+**Riclassificato nello script**, non cancellato: *«CONTROLLO DI ARITMETICA (NON un collaudo: non può
+fallire)»*, col perché scritto nelle righe stesse. **Perché resta:** misura **quanto effetto
+INVENTA la forma RELATIVA** su due corpi rigidi — **`−0.04000`** su `−0.19` — ed è **la prova** di
+`ALLUNG-RELATIVO`. **→ `T4-TAUTOLOGICO`, chiusa.**
+
+## `T7` — il collaudo vero, **sul grafo**, coi criteri scritti PRIMA
+
+Anello sintetico di `csv/_osservabile_p1.py`, misurato con **gli stessi** `medoide()`,
+`fra_insiemi()` e `cammino()` dello strumento vero. **Nessun valore costruito a mano.**
+
+| # | caso | deve dare | **come può FALLIRE** |
+|--:|---|---|---|
+| `T7a` | traslazione **RIGIDA** *(solo gli archi fra le regioni)* | `D_interni ≈ 0` | se il **medoide si sposta** o la **coppia più vicina cambia** |
+| `T7b` | contrazione **SOLO INTERNA** | `D_varco ≈ 0`, `D_interni = D_centri` | se il **cammino non attraversa gli interni** *(sull'anello può girare dall'altra parte)* |
+| **`T7c`** | ### **lo SPERONE: il nodo più vicino NON sta sul cammino** | l'indicatore segue lo sperone, **il cammino no** | ### **qui l'INDICATORE DEVE SBAGLIARE**, e la scomposizione del cammino dare la risposta giusta |
+
+> ### 🎯 **`T7c` è la ragione per cui `T7` esiste.**
+> Il limite di `D_interni` finora l'ho **dichiarato**. **`T7c` lo MISURA**, e misura **di quanto**
+> l'indicatore sbaglia quando sbaglia. **Dichiarare un limite non è misurarlo** — è la stessa
+> lezione di `CTRL-RISCELTA`.
+
+## Gli stati `.npz` restano **LOCALI** *(decisione di Luca)*
+
+`16` stati × `~470 000` archi: **stessa famiglia dei `.pkl`, stessa regola** — *il sistema è
+deterministico, quindi **il dato È il comando che lo produce***.
+**In questo commit:** la riga in `.gitignore` col perché. **Col passo del cammino:** la voce
+d'inventario con **percorso**, **`sha1` dei byte grezzi**, **comando verbatim**, seme, checkpoint,
+blob del simulatore e data. **→ `STATI-LOCALI`.**
+
+> ### 📌 **E UN PRESIDIO CHE NE DISCENDE, altrimenti è una nota (`A9`): `T9`.**
+> **Uno script di rianalisi che legge uno stato NON committato deve VERIFICARNE lo `sha1` contro
+> l'inventario, e FERMARSI se non corrisponde.** Senza, un file locale rimasto lì da un run
+> precedente cambierebbe un risultato **in silenzio**, e il numero non avrebbe più provenienza
+> (`L-NUMERI`).
+
