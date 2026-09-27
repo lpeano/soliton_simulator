@@ -94,3 +94,60 @@ masse**, ed e' **esattamente la grandezza che il pilota ha misurato crollare** *
 - [ ] il sigillo `V1`/`V1b` **prima del run lungo** *(giro corto, `STANDARD 5`)*;
 - [ ] **un run** *(4 semi, 120 passi)*, poi il rendering;
 - [ ] inventario con `sha1` + percorso + comando di **video e stati**; relazione; **STOP**.
+
+---
+
+# 4. ❗ **TRE CORREZIONI DAL FOTOGRAMMA DI PROVA** *(verifica del guardiano, 2026-09-27)*
+
+> **Fatte OFFLINE dai fotogrammi già salvati**, senza rigirare e **senza toccare nessun file che
+> il run in corso importa**: il renderer non è importato da nessun braccio.
+> **Criteri scritti PRIMA della correzione.**
+
+## `V8` — **il bordo non deve coprire il colore che deve sbiadire**
+
+**Il difetto, visto su un PNG estratto dal video:** il bordo `lime` era disegnato come **un secondo
+scatter più grande** (`s=26` contro `s=9`, `lw=0.55`), e **copriva il colore di fase dentro la
+massa** — cioè **esattamente la grandezza che il pannello esiste per mostrare**.
+
+**CURA:** stessa dimensione del nodo, bordo **sottile e semitrasparente**. **Criterio:** il colore
+di fase dentro la massa **resta leggibile**, e il bordo serve solo a dire **dove** era la massa.
+**Si verifica GUARDANDO un fotogramma**, non deducendolo — è così che il difetto è uscito.
+
+## `V9` — **`coer_campo` e `n_fase` si calcolano PER FOTOGRAMMA, non dal checkpoint più vicino**
+
+**Il difetto:** i diagnostici venivano dal **blocco del checkpoint più vicino** *(`0/40/80/120`)*,
+quindi **su 61 fotogrammi ne mostravano 4 valori**, e un fotogramma al passo `38` portava i numeri
+del passo `40`. **Un numero accanto a un'immagine che non è di quell'immagine è peggio di nessun
+numero.**
+
+**CURA, dal `phi` salvato e dalle coorti del passo 0:**
+
+| grandezza | come si calcola | ⚠ che cosa NON è |
+|---|---|---|
+| **`coer_campo_m`** | `\|mean(e^{i phi})\|` sui **nodi della massa `m` al passo 0** | — *(coincide con quello del pilota, che usa gli stessi insiemi)* |
+| **`n_coer_m`** | quanti **nodi della massa `m` al passo 0** sono ancora entro `kappa*sigma` dalla **propria `phibar_m(t)`** | ### **NON è il `n_fase` del pilota.** Quello conta la **regione di fase** assegnata **SUL GRAFO** (`R-VICINO`), e **il grafo completo non sta nel fotogramma** *(gli archi sono sottocampionati a 24000)*. **Si chiama diversamente e si dichiara**, invece di dare lo stesso nome a due cose diverse. |
+
+**E la sovrapposizione di `n 12802` col testo accanto si sistema** *(difetto di forma, visto sul
+PNG)*.
+
+## `V10` — **il riferimento del VUOTO: la scelta, e perché**
+
+Luca lascia due opzioni e chiede di **sceglierne una e dichiararla**. **Ne tengo una terza, e dico
+perché le altre due no:**
+
+| opzione | scartata perché |
+|---|---|
+| **la `phibar` della massa più vicina SUL DISEGNO** | ### mette **`pos` dentro una grandezza di FASE**. Il colore cambierebbe quando **il disegno si rilassa**, non quando la fisica si muove. È `A3-DISEGNO` fatto rientrare dalla finestra. |
+| **`dphi/2` fisso** | **non co-ruota.** Con una **rotazione rigida globale** le masse resterebbero **accese** *(riferimento co-rotante)* e il vuoto **cambierebbe colore** *(riferimento fisso)*: **le due metà dello stesso pannello direbbero cose incoerenti.** |
+| ### **✅ le TRE MASSE PRESE INSIEME** | **co-ruota con le masse**, quindi una rotazione rigida globale **non muove né le masse né il vuoto**; e risponde alla domanda che ha senso per il vuoto — *«è in fase con le masse?»* — dato che **la scena non gli ha mai assegnato una fase** *(è uniforme casuale)*. |
+
+> **⚠ E IL LIMITE DI QUESTA SCELTA, dichiarato:** se le tre `phibar_m` **divergessero fra loro**, un
+> riferimento comune **perderebbe senso**. **Per questo la loro dispersione si STAMPA in
+> sovrimpressione** invece di restare implicita (`A8`): se cresce, il colore del vuoto va letto con
+> cautela — **e quello è un riscontro, non un difetto del video.**
+
+## TODO
+
+- [ ] `V8` bordo sottile e semitrasparente; `V9` diagnostici per fotogramma; `V10` dichiarato nel
+      pannello; la sovrapposizione del testo;
+- [ ] **un commit, poi STOP**; **il video si consegna dopo il run**.
