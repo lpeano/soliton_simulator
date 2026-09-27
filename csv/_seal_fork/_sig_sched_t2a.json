@@ -1,0 +1,304 @@
+{
+ "blob": {
+  "dopo": "4dc59cad",
+  "prima": "e287a43e"
+ },
+ "criterio_1_stato": {
+  "atteso": "byte-identico",
+  "diverse": [],
+  "passa": true
+ },
+ "criterio_2_collaudo": {
+  "atteso": "8 casi con la risposta NOTA",
+  "casi": [
+   {
+    "atteso_valida": true,
+    "caso": "standard",
+    "composizione": [
+     "apri",
+     "scuoti_vuoto",
+     "step",
+     "mitosi",
+     "rilassa_disegno",
+     "memoria_hebbiana_moto",
+     "chiudi",
+     "verifica_invarianti"
+    ],
+    "errore": null,
+    "passa": true,
+    "valida": true
+   },
+   {
+    "atteso_valida": false,
+    "caso": "chiudi IN MEZZO (il caso che deve fallire)",
+    "composizione": [
+     "apri",
+     "scuoti_vuoto",
+     "step",
+     "chiudi",
+     "mitosi",
+     "rilassa_disegno",
+     "memoria_hebbiana_moto",
+     "verifica_invarianti"
+    ],
+    "errore": "la CODA deve essere ['chiudi', 'verifica_invarianti'] e invece e' ['memoria_hebbiana_moto', 'verifica_invarianti']: se `chiudi` non e' penultimo il freno gira su una variazione PARZIALE, e se il controllo precede il comm",
+    "passa": true,
+    "valida": false
+   },
+   {
+    "atteso_valida": false,
+    "caso": "apri non primo",
+    "composizione": [
+     "scuoti_vuoto",
+     "apri",
+     "step",
+     "mitosi",
+     "rilassa_disegno",
+     "memoria_hebbiana_moto",
+     "chiudi",
+     "verifica_invarianti"
+    ],
+    "errore": "la composizione NON comincia con `apri` ma con `scuoti_vuoto`: una legge girerebbe prima che la fotografia esista",
+    "passa": true,
+    "valida": false
+   },
+   {
+    "atteso_valida": false,
+    "caso": "coda invertita",
+    "composizione": [
+     "apri",
+     "scuoti_vuoto",
+     "step",
+     "mitosi",
+     "rilassa_disegno",
+     "memoria_hebbiana_moto",
+     "verifica_invarianti",
+     "chiudi"
+    ],
+    "errore": "la CODA deve essere ['chiudi', 'verifica_invarianti'] e invece e' ['verifica_invarianti', 'chiudi']: se `chiudi` non e' penultimo il freno gira su una variazione PARZIALE, e se il controllo precede il commit guarda `d0` ",
+    "passa": true,
+    "valida": false
+   },
+   {
+    "atteso_valida": false,
+    "caso": "nome fuori registro",
+    "composizione": [
+     "apri",
+     "scuoti_vuoto",
+     "step",
+     "mitosi",
+     "rilassa_disegno",
+     "memoria_hebbiana_moto",
+     "inventata",
+     "chiudi",
+     "verifica_invarianti"
+    ],
+    "errore": "voci NON nel registro: ['inventata'] -- il registro e' ['apri', 'chiudi', 'memoria_hebbiana_moto', 'mitosi', 'rilassa_disegno', 'scuoti_vuoto', 'step', 'verifica_invarianti']",
+    "passa": true,
+    "valida": false
+   },
+   {
+    "atteso_valida": false,
+    "caso": "legge duplicata",
+    "composizione": [
+     "apri",
+     "scuoti_vuoto",
+     "step",
+     "step",
+     "mitosi",
+     "rilassa_disegno",
+     "memoria_hebbiana_moto",
+     "chiudi",
+     "verifica_invarianti"
+    ],
+    "errore": "voci DUPLICATE: ['step'] -- una legge due volte nello stesso passo e' due volte la stessa variazione",
+    "passa": true,
+    "valida": false
+   },
+   {
+    "atteso_valida": false,
+    "caso": "vuota",
+    "composizione": [],
+    "errore": "la composizione del passo e' VUOTA",
+    "passa": true,
+    "valida": false
+   },
+   {
+    "atteso_valida": true,
+    "caso": "permutazione LECITA (le due prima di mitosi)",
+    "composizione": [
+     "apri",
+     "step",
+     "scuoti_vuoto",
+     "mitosi",
+     "rilassa_disegno",
+     "memoria_hebbiana_moto",
+     "chiudi",
+     "verifica_invarianti"
+    ],
+    "errore": null,
+    "passa": true,
+    "valida": true
+   }
+  ],
+  "nota": "il CASO CHE DEVE FALLIRE e' `chiudi` spostato IN MEZZO, e viene RIFIUTATO. E c'e' anche il simmetrico: una PERMUTAZIONE LECITA delle due leggi prima di mitosi resta VALIDA -- senza quel caso il validatore potrebbe rifiutare tutto, e H-ETC-2 non potrebbe piu' permutare.",
+  "passa": true
+ },
+ "dettaglio_confronto": {
+  "a": "T1_dopo.npz",
+  "b": "T2a_dopo.npz",
+  "blob_sim_a": "e287a43e",
+  "blob_sim_b": "4dc59cad",
+  "diverse": [],
+  "hashseed_a": "None",
+  "hashseed_b": "None",
+  "righe": [
+   {
+    "diversi": 0,
+    "grandezza": "d",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "d0",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "phi",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "phi_s",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "phivel",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "psi",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "psi_spin",
+    "identico": true,
+    "n": 4214
+   },
+   {
+    "diversi": 0,
+    "grandezza": "_psi_spinor",
+    "identico": true,
+    "n": 4214
+   },
+   {
+    "diversi": 0,
+    "grandezza": "_psi_prec",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "_spinor_lift",
+    "identico": true,
+    "n": 4214
+   },
+   {
+    "diversi": 0,
+    "grandezza": "omega_s",
+    "identico": true,
+    "n": 6321
+   },
+   {
+    "diversi": 0,
+    "grandezza": "_nb",
+    "identico": true,
+    "n": 6321
+   },
+   {
+    "diversi": 0,
+    "grandezza": "_nb_prec",
+    "identico": true,
+    "n": 6321
+   },
+   {
+    "diversi": 0,
+    "grandezza": "eta",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "tw",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "twp",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "vd",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "peq",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "mem_mot",
+    "identico": true,
+    "n": 6321
+   },
+   {
+    "diversi": 0,
+    "grandezza": "perc_chi",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "perc_geom",
+    "identico": true,
+    "n": 2107
+   },
+   {
+    "diversi": 0,
+    "grandezza": "i",
+    "identico": true,
+    "n": 70199
+   },
+   {
+    "diversi": 0,
+    "grandezza": "j",
+    "identico": true,
+    "n": 70199
+   }
+  ]
+ },
+ "regole": [
+  "apri e' il PRIMO",
+  "chiudi e verifica_invarianti sono gli ULTIMI in quest'ordine",
+  "ogni nome sta nel registro",
+  "nessun duplicato"
+ ],
+ "sigillo": "T2 primo pezzo: la VALIDAZIONE della composizione dentro esegui_passo",
+ "tutti": true
+}

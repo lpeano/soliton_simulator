@@ -5134,3 +5134,46 @@ si rigira più**, cioè un difetto nuovo (par.7).
 
 > ### 🛑 **STOP. Il file non è spezzato**, come da tua decisione.
 > **Prossimo: `T2`** — i tipi, **e `mitosi` spezzata** mentre tutto è ancora byte-identico.
+
+---
+
+# 🔒 **T2, primo pezzo: `esegui_passo` VALIDA la composizione** *(2026-09-28)*
+
+*(Referto `csv/_seal_fork/_sig_sched_t2a.json`.)* ### **Blob: `e287a43e` → `4dc59cad`.**
+
+**Quattro regole, e ognuna dice che cosa romperebbe:**
+
+| regola | che cosa romperebbe |
+|---|---|
+| **`apri` è il PRIMO** | una legge girerebbe **prima che la fotografia esista**, e leggerebbe uno stato di cui nessuno ha preso nota |
+| ### **`chiudi` e `verifica_invarianti` sono gli ULTIMI, in quest'ordine** | se `chiudi` stesse in mezzo, il freno girerebbe su una variazione **PARZIALE** e le leggi dopo scriverebbero **fuori transazione**; se il controllo precedesse il commit, guarderebbe **`d0` non ancora frenata** — ### **è esattamente il timore dichiarato in `(c)1`, e ora è impossibile invece che evitato** |
+| **ogni nome sta nel registro** | un nome fuori registro darebbe `AttributeError` **a metà passo**, cioè **dopo** che alcune leggi hanno già scritto |
+| **nessun duplicato** | una legge due volte è **due volte la stessa variazione** |
+
+### **SOLLEVA, non avvisa.** Una composizione non valida non è una configurazione insolita da
+segnalare: **è un passo che non è un passo.** E ### **non è un presidio di `git`: è un controllo a
+RUNTIME**, che vive nel codice e che **nessun commit può aggirare**.
+**Si valida prima di toccare `net`:** una composizione rotta deve fallire **con il passo ancora da
+cominciare**.
+
+## Il sigillo, due criteri
+
+| | atteso | esito |
+|---|---|---|
+| ① lo stato | byte-identico | ### **23/23, 0 diverse** |
+| ② il collaudo | 8 casi con la risposta **nota** | ### **8 su 8** |
+
+**Il caso che hai nominato — `chiudi` spostato in mezzo — è rifiutato**, e il messaggio dice perché.
+Gli altri: `apri` non primo, coda invertita, nome fuori registro, legge duplicata, composizione vuota
+— **tutti rifiutati**.
+
+> ### 📌 **E ho aggiunto il simmetrico, che non era nel mandato e serve:** una **permutazione LECITA**
+> — le due leggi prima di `mitosi` scambiate — ### **resta VALIDA.**
+> **Senza quel caso il validatore potrebbe rifiutare tutto e sembrare corretto**, e `H-ETC-2` — che
+> **permuta** — non potrebbe più girare. **Un validatore che dice sempre no non valida: blocca.**
+
+**`_PASSO_REGISTRO` è la prima forma del registro di `T2`:** oggi elenca **i nomi**, e i **tipi** sono
+il pezzo successivo.
+
+> ### 🛑 **STOP.** Restano in `T2`: **i tipi** di ogni legge, e la ### **`mitosi` spezzata** in
+> struttura e stato — mentre tutto è ancora byte-identico *(correzione (b) del piano)*.

@@ -872,6 +872,68 @@ _PASSO_FASI = {'apri': '_smp_apri', 'chiudi': '_smp_chiudi'}
 _PASSO_MODULO = ('scuoti_vuoto',)
 
 
+# IL REGISTRO delle voci ammesse nella composizione. **E' la prima forma del registro di
+#   `T2`**: oggi elenca i NOMI, e `T2` gli aggiungera' il TIPO di ogni legge.
+#   ⚠ Una voce non nel registro NON si esegue: si SOLLEVA. Un `getattr` su un nome
+#     sbagliato darebbe `AttributeError` a meta' passo, cioe' **dopo** che alcune leggi hanno
+#     gia' scritto -- e uno stato mezzo avanzato non e' uno stato che qualcuno ha dichiarato.
+_PASSO_REGISTRO = frozenset(('apri', 'chiudi', 'verifica_invarianti',
+                            'scuoti_vuoto', 'step', 'mitosi', 'rilassa_disegno',
+                            'memoria_hebbiana_moto'))
+# la CODA OBBLIGATORIA, in quest'ordine: il commit del passo, poi il controllo.
+_PASSO_CODA = ('chiudi', 'verifica_invarianti')
+
+
+class ComposizioneNonValida(ValueError):
+    """La composizione del passo viola la struttura della transazione."""
+
+
+def valida_composizione(comp):
+    """**Il passo e' una TRANSAZIONE: la sua struttura non e' negoziabile.**
+
+    Le quattro regole, e ognuna dice **che cosa romperebbe**:
+
+    1. **`apri` e' il PRIMO.** Se non lo fosse, una legge girerebbe **prima** che la
+       fotografia esista, e leggerebbe uno stato di cui nessuno ha preso nota.
+    2. **`chiudi` e `verifica_invarianti` sono gli ULTIMI, in quest'ordine.** Se `chiudi`
+       stesse in mezzo, il freno di scala minima girerebbe su una variazione PARZIALE
+       e le leggi dopo scriverebbero **fuori transazione**. Se il controllo venisse
+       prima del commit, guarderebbe `d0` **non ancora frenata** -- ed e' esattamente il
+       timore dichiarato in `(c)1`, che `T1` ha evitato tenendoli **insieme**.
+    3. **Ogni nome sta nel registro.** Un nome fuori registro solleverebbe a meta' passo.
+    4. **Nessun duplicato.** Una legge due volte nello stesso passo e' due volte la stessa
+       variazione: non e' una composizione, e' un errore di scrittura.
+
+    ⚠ **SOLLEVA, non avvisa.** Una composizione non valida non e' una
+    configurazione insolita da segnalare: e' un passo che non e' un passo. E questo **non e'
+    un presidio di `git`** -- e' un controllo **a runtime**, che vive nel codice e che nessun
+    commit puo' aggirare.
+    """
+    comp = tuple(comp)
+    if not comp:
+        raise ComposizioneNonValida('la composizione del passo e\' VUOTA')
+    fuori = [x for x in comp if x not in _PASSO_REGISTRO]
+    if fuori:
+        raise ComposizioneNonValida(
+            'voci NON nel registro: %s -- il registro e\' %s'
+            % (fuori, sorted(_PASSO_REGISTRO)))
+    doppie = sorted({x for x in comp if comp.count(x) > 1})
+    if doppie:
+        raise ComposizioneNonValida(
+            'voci DUPLICATE: %s -- una legge due volte nello stesso passo e\' due '
+            'volte la stessa variazione' % doppie)
+    if comp[0] != 'apri':
+        raise ComposizioneNonValida(
+            'la composizione NON comincia con `apri` ma con `%s`: una legge girerebbe '
+            'prima che la fotografia esista' % comp[0])
+    if comp[-len(_PASSO_CODA):] != _PASSO_CODA:
+        raise ComposizioneNonValida(
+            'la CODA deve essere %s e invece e\' %s: se `chiudi` non e\' penultimo il '
+            'freno gira su una variazione PARZIALE, e se il controllo precede il commit '
+            'guarda `d0` non ancora frenata'
+            % (list(_PASSO_CODA), list(comp[-len(_PASSO_CODA):])))
+    return comp
+
 def esegui_passo(net, composizione=None):
     """L'UNICO modo di avanzare di un passo. Esegue `PASSO_COMPOSIZIONE` in ordine.
 
@@ -882,7 +944,10 @@ def esegui_passo(net, composizione=None):
     ⚠ NON CONTIENE FISICA. Se un giorno ci finisse un `if` su un flag, la composizione
     smetterebbe di essere un DATO e tornerebbe a essere codice.
     """
-    comp = tuple(PASSO_COMPOSIZIONE if composizione is None else composizione)
+    # ⚠ SI VALIDA PRIMA DI ESEGUIRE, e prima di toccare `net`: una composizione rotta
+    #   deve fallire **con il passo ancora da cominciare**, non a meta'.
+    comp = valida_composizione(PASSO_COMPOSIZIONE if composizione is None
+                             else composizione)
     for _nome in comp:
         if _nome in _PASSO_FASI:
             getattr(net, _PASSO_FASI[_nome])()

@@ -4241,7 +4241,7 @@ che l'avrebbe **saltato nel caso più comune** *(nessun `--regime` sulla riga di
 
 ---
 
-<!-- SCHEDA nome=schedulatore-del-passo funzioni=esegui_passo,update,_passo,batch_condensazione,_dbg_init flag=PASSO_COMPOSIZIONE,_PASSO_FASI,_PASSO_MODULO -->
+<!-- SCHEDA nome=schedulatore-del-passo funzioni=esegui_passo,valida_composizione,update,_passo,batch_condensazione,_dbg_init flag=PASSO_COMPOSIZIONE,_PASSO_FASI,_PASSO_MODULO,_PASSO_REGISTRO,_PASSO_CODA -->
 # ㉙ LO SCHEDULATORE DEL PASSO — **`esegui_passo` / `PASSO_COMPOSIZIONE`**
 
 > ### **`T1` del piano `SCHED-PASSO`** *(2026-09-28, decisione di Luca)*: **lo schedulatore possiede
@@ -4306,6 +4306,36 @@ ricopiando l'ordine.**
 **Nessuna grandezza nuova, nessun `clip`.** `esegui_passo` **non contiene fisica**: se un giorno ci
 finisse un `if` su un flag, ### **la composizione smetterebbe di essere un DATO e tornerebbe a
 essere codice** — ed è la cosa da non fare.
+
+## 🔒 LA VALIDAZIONE DELLA COMPOSIZIONE *(T2, 2026-09-28, su richiesta di Luca)*
+
+**`esegui_passo` valida prima di eseguire**, e `valida_composizione` solleva
+`ComposizioneNonValida`. **Quattro regole, e ognuna dice che cosa romperebbe:**
+
+| regola | che cosa romperebbe |
+|---|---|
+| **`apri` e' il PRIMO** | una legge girerebbe **prima che la fotografia esista** |
+| ### **`chiudi` e `verifica_invarianti` sono gli ULTIMI, in quest'ordine** | `chiudi` in mezzo: il freno gira su una variazione **PARZIALE** e le leggi dopo scrivono **fuori transazione**. Controllo prima del commit: guarda **`d0` non ancora frenata** |
+| **ogni nome sta in `_PASSO_REGISTRO`** | `AttributeError` **a meta' passo**, dopo che alcune leggi hanno scritto |
+| **nessun duplicato** | due volte la stessa variazione |
+
+### ➜ **E' QUI CHE IL TIMORE DI `(c)1` DIVENTA IMPOSSIBILE invece che EVITATO.**
+In `(c)1` avevo dichiarato che spostare la chiusura avrebbe fatto controllare gli invarianti su `d0`
+non frenata; `T1` l'ha evitato **tenendoli insieme**; ### **`T2` lo rende irrappresentabile**: una
+composizione che li separa **non gira**.
+
+**SOLLEVA, NON AVVISA**, e **non e' un presidio di `git`: e' un controllo a RUNTIME** che nessun
+commit puo' aggirare. **E si valida prima di toccare `net`**: una composizione rotta fallisce **col
+passo ancora da cominciare**.
+
+**⚠ `_PASSO_REGISTRO` e' LA PRIMA FORMA del registro di `T2`:** oggi elenca **i nomi**, e i **tipi**
+sono il pezzo successivo.
+
+**COLLAUDO, 8 casi con la risposta NOTA, 8 su 8** *(referto `csv/_seal_fork/_sig_sched_t2a.json`)*.
+Il caso che deve fallire e' **`chiudi` in mezzo**. ### **E c'e' il simmetrico: una PERMUTAZIONE
+### LECITA resta VALIDA** -- senza quel caso il validatore potrebbe rifiutare tutto e sembrare
+corretto, e `H-ETC-2`, che **permuta**, non potrebbe piu' girare. **Un validatore che dice sempre no
+non valida: blocca.**
 
 ## ⚠ PERCHE' I CHIAMANTI STANNO IN QUESTA SCHEDA, e non in una loro
 
