@@ -4785,3 +4785,49 @@ sigilli. *(I flag: `VERLET`, `REPULS_LEGGE`, `TAU_LUCE`, `SPINORE_CORRETTO`, `CS
 **Le altre tre restano voce aperta di `CLIP-INVENTARIO`, da fare dopo la cura**, come hai detto.
 
 > ### 🛑 **STOP. La priorità resta (c).**
+
+---
+
+# 🛑 **(b)3 SOSPESO, e la mia proposta era sbagliata** *(decisione di Luca, 2026-09-27)*
+
+**Avevo proposto di archiviare la famiglia ② — 43 rami, 111 righe — chiamandola «i percorsi vecchi
+di cure già promosse». È una descrizione che nasconde ciò che conta:**
+
+> ### **sono gli `else` dei flag che il DRIVER ACCENDE, e archiviarli rende quei flag LEGGI
+> STRUTTURALI — nella direzione del driver, non in quella dell'assioma.**
+
+## Il caso che lo dimostra, e l'ho verificato dal codice
+
+`soliton_simulator.py:3072`:
+
+```
+if RITMO_WRAP_2PI:
+    signed = ((a + np.pi) % (2 * np.pi) - np.pi) / DT
+else:
+    signed = ((a + 2 * np.pi) % (4 * np.pi) - 2 * np.pi) / DT   # wrapping su 4pi (l'otto)
+```
+
+**Il driver passa `--ritmo-wrap-2pi`**, quindi ### **il ramo morto è il `4 pi`.**
+### **Archiviarlo renderebbe strutturale il `2 pi`: esattamente il contrario della decisione (2).**
+**Va INVERTITO nella cura (b), non archiviato.**
+
+## Cosa ho fatto
+
+**Ho creato la voce `DOPPIA-COP`** — la cura (b) — **perché non esisteva.** L'ordine delle cure la
+nominava, l'indice no: ### **una cura approvata e senza voce d'indice.** Il rilievo di `:3072` è
+dentro quella voce, con la verifica dal codice.
+
+**Gli altri casi che hai nominato**, e sono **decisioni di teoria flag per flag**: `VERLET`
+*(è `CENS-B8`, «sperimentale ma vivo»)*, `REGIME` deterministico *(archiviare l'`else` toglie il
+regime **stocastico**)*, `CS_DINAMICO`, e gli altri **spenti di default nel sorgente ma accesi dal
+driver**.
+
+## Che cosa servirà per riprendere (b)3
+
+**Per la famiglia ② una tabella PER FLAG e non per ramo**, con cinque colonne: **flag · default nel
+simulatore · valore nel driver · cura promossa da chi e quando** *(commit o decisione)* **· rischio
+se diventa strutturale**. **La decidi tu.**
+
+**Le 121 restano nel rilievo come voce aperta** *(`CLIP-INVENTARIO`)*. **Nessun ramo archiviato.**
+
+> ### ➜ **La priorità passa alla cura (c).**
