@@ -4831,3 +4831,68 @@ se diventa strutturale**. **La decidi tu.**
 **Le 121 restano nel rilievo come voce aperta** *(`CLIP-INVENTARIO`)*. **Nessun ramo archiviato.**
 
 > ### ➜ **La priorità passa alla cura (c).**
+
+---
+
+# ✅ **(c)1 — IL CONFINE DEL PASSO. Sigillo passato su DUE criteri** *(2026-09-27)*
+
+*(`doc/TASK_HISTORY/2026-09-27_etc-c1-confine.md`, referto `csv/_seal_fork/_sig_etc_c1.json`.)*
+### **`7439d5c3` → `b5a713d1`.**
+
+**`_smp_apri()` è idempotente e la chiamano tutte e cinque le leggi**, in testa: la prima che gira
+apre, le altre quattro escono subito. ### **Così il confine è a inizio passo qualunque sia l'ordine
+— che è ciò che `H-ETC-2` permuta.**
+
+**Non l'ho messo nel chiamante perché i chiamanti sono SEI** *(`update()`, il benchmark, due
+costruttori di scena, la copia del driver, e `csv/_passo.py` che li legge per AST)*: **una divergenza
+fra due di loro sarebbe invisibile.**
+
+## ⚠ Un difetto curato di passaggio, e non lo cercavo
+
+In `step()` l'apertura stava **dopo** la guardia `if self.n < 2 ...`: ### **un passo con meno di 2
+nodi non apriva la fotografia, e il freno del passo non chiudeva.** Ora sta prima.
+**E il commento su quella riga diceva già la cosa giusta** — *«il passo, per il freno, è il ciclo
+INTERO del driver»* — ### **lo diceva e non lo faceva.**
+
+## Il sigillo, **due criteri e non uno**
+
+| criterio | atteso | esito |
+|---|---|---|
+| ① lo stato | byte-identico | ### **23/23, 0 diverse** |
+| ② i contatori del confine | `aperture = 3`, `gia_aperta = 12` | ### **`3` e `12` esatti** |
+
+> ### 📌 **Il byte-identico DA SOLO non bastava, e qui sta il punto:** la fotografia serve **al
+> freno**, e il freno **chiude solo se è aperta**. Se l'apertura fosse sparita, `_smp_chiudi` non
+> avrebbe frenato e su 3 passi lo stato poteva restare **identico entro i byte**. **Avrei letto
+> «tutto bene» mentre il confine non esisteva più.**
+> **I contatori distinguono «la fisica non è cambiata» da «la fisica non è cambiata E il confine si è
+> spostato».** L'attesa `aperture == passi` e `gia_aperta == 4·passi` era **dichiarata nel commit del
+> codice**, prima di girare.
+
+## ⛔ La chiusura **non** è toccata, ed è una decisione
+
+`_smp_chiudi()` è in fondo a `memoria_hebbiana_moto` e **subito dopo c'è `verifica_invarianti()`**.
+Spostarla fuori farebbe girare il controllo su **`d0` non ancora frenata**: cambierebbe **quando** il
+controllo guarda. ### **Secondo meccanismo, secondo commit.**
+*(Verificato dal codice che `verifica_invarianti` **legge soltanto** — e `INVARIANTI` è **acceso** nel
+driver, quindi il controllo gira davvero.)*
+
+## E due schede di fisica che **non c'erano**
+
+`H-REG-R` ha rifiutato il commit **quattro volte**, e la prima diceva la cosa più grossa:
+
+> ### **`scuoti_vuoto` e `rilassa_disegno` — la PRIMA e la QUARTA delle cinque leggi del passo —
+> non avevano una scheda.**
+
+**Create entrambe.** In `scuotimento-vuoto` ho messo il fatto che regge questo sigillo:
+### **`scuoti_vuoto` scrive `phivel` e nient'altro**, quindi fra lei e `step` non c'è nessuna
+scrittura di `d`/`d0` e la fotografia non cambia. In `rilassamento-disegno`: **non è fisica, è il
+disegno**, e ci vive `A3-DISEGNO` — che **la cura non chiude**.
+
+> ### ⚠ **Due delle cinque leggi sono vissute senza forma scritta fino al commit che le rende
+> sincrone.** Non è processo: **la cura `(c)` deve riscriverle**, e fino a stamattina **non c'era
+> niente da cui derivarla.**
+
+> ### 🛑 **STOP.** Prossimo: **`(c)2`, la chiusura** — e va spostata **insieme a
+> `verifica_invarianti()`**, così il controllo guarda lo stato **committato**. Due movimenti legati,
+> un commit. **E il byte-identico non basterà**, perché il controllo invarianti non scrive.

@@ -146,6 +146,15 @@ def gira(out, seme, passi, extra=None):
     dati = {"n": np.asarray(net.n), "_hashseed": np.asarray(str(hs)),
             "_blob_sim": np.asarray(_bl), "_passi": np.asarray(passi),
             "_seme": np.asarray(seme), "_argv": np.asarray(" ".join(argv[1:]))}
+    # I CONTATORI DEL CONFINE DEL PASSO, nel dump: dalla cura `(c)1` il confine e' idempotente e
+    # <<quante leggi hanno trovato la fotografia gia' aperta>> e' un numero che il sigillo deve
+    # poter LEGGERE, non supporre (`A8`).
+    CONT = ("_g_smp_aperture", "_g_smp_gia_aperta", "_g_smp_chiusure", "_g_smp_d_chiusure",
+            "_g_smp_chirurgie", "_g_smp_disallineati", "_g_sm_patol", "_g_sm_nascite")
+    for _k in CONT:
+        dati["cnt_" + _k] = np.asarray(int(getattr(net, _k, 0)))
+    print("contatori del confine: " + "  ".join("%s=%d" % (_k, int(getattr(net, _k, 0)))
+                                                for _k in CONT))
     for k in STATO + ["i", "j"]:
         v = getattr(net, k, None)
         if v is not None:

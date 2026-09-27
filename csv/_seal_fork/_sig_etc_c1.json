@@ -1,11 +1,34 @@
 {
  "a": "S_dopo_off.npz",
+ "atteso": "BYTE-IDENTICO col driver",
  "b": "C1_cnt.npz",
  "blob_sim_a": "7439d5c3",
  "blob_sim_b": "b5a713d1",
+ "condizioni": {
+  "m": 70199,
+  "n": 2107,
+  "ordine": "canonico",
+  "passi": 3,
+  "presidi": "nessuno",
+  "rng": "nessuna iniezione",
+  "scena": "(ii)(a)",
+  "seme": 11
+ },
+ "contatori_del_confine": {
+  "_g_sm_nascite": 1,
+  "_g_sm_patol": 0,
+  "_g_smp_aperture": 3,
+  "_g_smp_chirurgie": 0,
+  "_g_smp_chiusure": 3,
+  "_g_smp_d_chiusure": 3,
+  "_g_smp_disallineati": 0,
+  "_g_smp_gia_aperta": 12
+ },
+ "criterio_contatori": "con 3 passi e cinque leggi: aperture == passi == 3 (UNA apertura per passo) e gia_aperta == 4*passi == 12 (le altre quattro leggi la trovano aperta). Entrambi verificati, non supposti.",
  "diverse": [],
  "hashseed_a": "None",
  "hashseed_b": "None",
+ "passa": true,
  "righe": [
   {
    "diversi": 0,
@@ -145,5 +168,6 @@
    "identico": true,
    "n": 70199
   }
- ]
+ ],
+ "sigillo": "(c)1 ETC-C1-CONFINE: la fotografia si apre a inizio PASSO PIENO"
 }

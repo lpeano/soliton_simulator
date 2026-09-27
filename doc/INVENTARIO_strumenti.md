@@ -1161,3 +1161,26 @@ python csv/_test_fork/_hashseed_prova.py --confronta S_prima_off.npz S_dopo_on.n
 **Referto:** `csv/_test_fork/_etc_rami_morti.json`. **Tabella intera:** `doc/RAMI_MORTI_perimetro_c.md`.
 **⚠ 61 rami NON sono corroborabili per riga** *(ternari e `if` di una riga: il ramo morto condivide
 la riga col vivo)* e sono **dichiarati tali**.
+
+## `(c)1` — il confine del passo, e il suo sigillo *(2026-09-27)*
+
+| referto | blob (byte) | esito |
+|---|---|---|
+| `csv/_seal_fork/_sig_etc_c1.json` | `2dfeadd6` | ### **byte-identico 23/23** + **contatori `3` e `12`**, blob `7439d5c3` → `b5a713d1` |
+
+**Lo strumento passa a `e6e1f212`**: il dump registra ora gli **otto contatori del confine del
+passo** (`_g_smp_aperture`, `_g_smp_gia_aperta`, `_g_smp_chiusure`, `_g_smp_d_chiusure`,
+`_g_smp_chirurgie`, `_g_smp_disallineati`, `_g_sm_patol`, `_g_sm_nascite`), così **ogni sigillo
+futuro li porta** invece di supporli.
+
+```
+git checkout adbaca9~1 -- soliton_simulator.py
+python csv/_test_fork/_hashseed_prova.py --out=PRIMA.npz --seme=11 --passi=3
+git checkout HEAD -- soliton_simulator.py
+python csv/_test_fork/_hashseed_prova.py --out=DOPO.npz --seme=11 --passi=3
+python csv/_test_fork/_hashseed_prova.py --confronta PRIMA.npz DOPO.npz
+```
+
+> ### ⚠ **Il byte-identico DA SOLO non basta per questo sigillo:** la fotografia serve al freno, e il
+> freno chiude **solo se è aperta** — un confine sparito darebbe lo stesso stato. **Sono i contatori
+> a distinguere le due cose.**
