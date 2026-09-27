@@ -151,3 +151,55 @@ perché le altre due no:**
 - [ ] `V8` bordo sottile e semitrasparente; `V9` diagnostici per fotogramma; `V10` dichiarato nel
       pannello; la sovrapposizione del testo;
 - [ ] **un commit, poi STOP**; **il video si consegna dopo il run**.
+
+---
+
+# 5. **DUE CORREZIONI, E UNA NON SI PUÒ FARE OFFLINE** *(rilievo di Luca, 2026-09-27)*
+
+## 5.1 ❗ `V11` — **gli archi disegnati stanno TUTTI in un quadrante. MISURATO.**
+
+Luca lo ha visto; **il numero è peggiore di quanto sembrasse**. Al passo 40, seme 11:
+
+| | baricentro | raggio `p95` |
+|---|---|--:|
+| **tutti i nodi** | `(+0.000, +0.000)` | `11.971` |
+| **archi disegnati** | ### **`(-4.392, -4.283)`** | `10.444` |
+
+| quadrante | frazione dei 24000 |
+|---|--:|
+| `(+,+)` | `0.0 %` |
+| `(-,+)` | `0.0 %` |
+| ### `(-,-)` | ### **`100.0 %`** |
+| `(+,-)` | `0.0 %` |
+
+### **Il `100 %` degli archi disegnati sta in UN quadrante**, e sono solo il **`5.1 %`** dei `471 564` validi.
+
+**La causa è `indici = np.flatnonzero(valid)[:24000]`: prende i PRIMI per indice**, e l'indice
+d'arco correla con l'ordine di semina, che correla con la posizione.
+**⚠ È EREDITATO DALLA VISTA DEL SIMULATORE (`:7685`)**, quindi **ogni figura che il simulatore ha
+disegnato di un grafo con più di 24000 archi ha questa distorsione.** → voce `ARCHI-PRIMI`.
+**Il simulatore NON si tocca**, come chiesto.
+
+> ### 🛑 **E LA CORREZIONE NON SI PUÒ FARE OFFLINE SU QUESTO VIDEO, e lo dico invece di farla a metà.**
+> **Il sottocampione NON è nel renderer: è nel BRACCIO** (`salva_fotogramma`). I fotogrammi
+> contengono **solo quei 24000 archi**, con il loro `dpozzo`. **Un campione casuale non è
+> recuperabile da ciò che è stato salvato**, e gli stati *(che hanno `i, j, d` completi)* **non
+> hanno `dpozzo`**, che dipende da `psi` e non è stato salvato.
+> **Quindi: il campione casuale a seme fisso si cabla nel braccio PER I RUN FUTURI, e QUESTO video
+> tiene il campione distorto — dichiarato nel pannello.** *(Il run è chiuso, quindi toccare il
+> braccio non viola più `par.5`.)*
+
+## 5.2 `V12` — **il pannello destro: opacità = `PESO-MAX`** *(questa SI fa offline)*
+
+| | |
+|---|---|
+| **opacità** | `w = PESO-MAX` = `max_m max(0, cos(phi_k - phibar_m(t)))` *(la regola di `PESO-MAX`)* |
+| **alpha** | `0.08 + 0.92 * w²` — **il quadrato**, così i nodi poco partecipanti **svaniscono** invece di grigiare |
+| **ordine di disegno** | **per peso CRESCENTE**: i coerenti finiscono **sopra**, e non vengono coperti dal vuoto |
+
+**Si fa offline perché serve solo `phi` e le coorti, e sono entrambi nei fotogrammi.**
+
+**Criterio:** con `alpha` minima `0.08` un nodo a `w = 0` **resta visibile ma spento**; a `w = 1`
+è pieno. **E la riduzione al limite:** con `alpha` costante `1` il fotogramma deve tornare **quello
+di prima** — se non tornasse, il cambiamento non è solo di opacità.
+

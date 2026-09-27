@@ -3779,3 +3779,43 @@ differenza di percorso**. **Se non c'è, l'ipotesi cade.**
 > rileva **avvolgendo `calcola_psi` sull'istanza** *(la tecnica della `Spia`)*: **nessun file del
 > simulatore viene toccato.**
 
+
+---
+
+# 📐 **`ARCHI-PRIMI`: il `100 %` degli archi disegnati sta in UN quadrante — misurato** *(2026-09-27)*
+
+Luca l'ha visto sul video; **il numero è peggiore di quanto sembrasse**. Passo 40, seme 11:
+
+| | baricentro | `p95` del raggio |
+|---|---|--:|
+| tutti i nodi | `(+0.000, +0.000)` | `11.971` |
+| **archi disegnati** | ### **`(-4.392, -4.283)`** | `10.444` |
+
+| quadrante | `(+,+)` | `(-,+)` | ### `(-,-)` | `(+,-)` |
+|---|--:|--:|--:|--:|
+| frazione dei 24000 | `0.0 %` | `0.0 %` | ### **`100.0 %`** | `0.0 %` |
+
+**La causa:** `indici = np.flatnonzero(valid)[:24000]` — **i PRIMI per indice**, e l'indice d'arco
+correla con l'ordine di semina, che correla con la posizione. Sono anche solo il **`5.1 %`** dei
+`471 564` archi validi.
+
+> ### ⚠ **È EREDITATO DALLA VISTA DEL SIMULATORE (`:7685`): ogni figura di un grafo con più di
+> ### 24000 archi che questo repo ha prodotto ha la stessa distorsione.**
+> **Il simulatore non si tocca** *(ordine di Luca)*: la voce **registra** il difetto, non lo cura.
+
+## 🛑 **E la correzione NON si può fare offline su questo video — lo dico invece di farla a metà**
+
+**Il sottocampione non è nel renderer: è nel BRACCIO** (`salva_fotogramma`). I fotogrammi
+contengono **solo quei 24000 archi**, col loro `dpozzo`; **un campione casuale non è recuperabile
+da ciò che è stato salvato**, e gli **stati** *(che hanno `i, j, d` completi)* **non hanno
+`dpozzo`**, che dipende da `psi` e non è stato salvato.
+
+**Quindi:** il campione casuale a seme fisso si cabla **nel braccio, per i run futuri**, e **questo
+video tiene il campione distorto — dichiarato nel pannello.** *(Il run è chiuso, quindi toccare il
+braccio non viola più `par.5`.)*
+
+**Il pannello destro invece SI corregge offline** *(serve solo `phi` e le coorti, entrambi nei
+fotogrammi)*: opacità = **`PESO-MAX`**, `alpha = 0.08 + 0.92·w²` — **il quadrato**, così i nodi poco
+partecipanti **svaniscono** invece di grigiare — e **ordine di disegno per peso crescente**, così i
+coerenti finiscono **sopra** e non vengono coperti dal vuoto.
+
