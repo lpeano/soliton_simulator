@@ -127,6 +127,8 @@ ciascuna comporta, e **decide Luca**.
 
 
 
+
+
 ---
 
 # 6. **LA REGOLA DI LUCA APPLICATA ALLE 23 `CENS-*`** *(2026-09-27)*
@@ -167,7 +169,7 @@ l'applicazione della regola da parte mia.)*
 | `CENS-B9` | *"LEGGE DI STABILITA' (**esplorativa**): i nuovi nodi in r | regola | NON attiva nel driver: non puo' cambiare i numeri di questo run |
 | `CENS-B10` | *"**ESPLORATIVO**: lega la creazione di coppia anche all'a | regola | NON attiva nel driver: non puo' cambiare i numeri di questo run |
 | `CENS-B11` | tre osservabili di controllo nominate una per una -- *"esp | regola | NON attiva (`PLAST_DIN` e' il sostituto): la promessa e' rimasta senza esecutore |
-| `CENS-B12` | *"KERNEL BILANCIATO DAL TEMPO PROPRIO (tau^alpha) **SEMPRE | **LUCA** | NON blocca il run base, BLOCCA LA PROVA 3 (universalita'): la misura del principio di equivalenza va fatta prima della PROVA 3. Correzione del guardiano al mio SI: un SI avrebbe bloccato il run base con una misura SOSPESA dalla decisione (1). |
+| `CENS-B12` | *"KERNEL BILANCIATO DAL TEMPO PROPRIO (tau^alpha) **SEMPRE | **LUCA** | NON blocca il run base, BLOCCA LA PROVA 3 (universalita'): la misura del principio di equivalenza va fatta prima della PROVA 3. CORREZIONE DI ATTRIBUZIONE (Luca, 2026-09-27): il SI precedente NON era un mio errore, era un CONSIGLIO DEL GUARDIANO -- la regola come mi e' stata data nominava KERNEL_ALPHA fra i SI, e io l'ho applicata. La correzione a NO viene dal guardiano stesso: un SI avrebbe bloccato il run base con una misura SOSPESA dalla decisione (1). |
 | `CENS-B13` | *"`inerzia = np.maximum(_contrasto * _T2, 1e-6)` -- **il p | **LUCA** | legge ATTIVA, resta attiva (decisione 3). da misurare dopo il run base. |
 | `CENS-B14` | l'osservabile e' calcolata (`m0_spin_core`, `m0_spin_core_ | **LUCA** | legge ATTIVA, resta attiva (decisione 3). da misurare dopo il run base. |
 | `CENS-B15` | il **condizionale** scritto nel commento: *"Un esito posit | regola | e' un CONDIZIONALE scritto in un commento: si risolve riscrivendolo |
@@ -182,11 +184,13 @@ l'applicazione della regola da parte mia.)*
 > `CENS-B3 B4` **`NO`**, e la cura e' **dichiarare che il ramo OFF non esiste**;
 > `CENS-B6` **`NO`** *(progetto)*.
 >
-> ### ⚠ **E UNA CORREZIONE DEL GUARDIANO SU UN MIO `SI`: `CENS-B12`
-> ### (`KERNEL_ALPHA`) E' `NO`.**
+> ### ⚠ **E UNA CORREZIONE DEL GUARDIANO SU `CENS-B12` (`KERNEL_ALPHA`): e' `NO`.**
 > Non blocca il **run base**: **blocca la PROVA 3** *(universalita')*, e la misura
-> del principio di equivalenza va fatta **prima della PROVA 3**.
-> **Il mio `SI` avrebbe bloccato il run base con una misura SOSPESA** dalla
-> decisione (1) — cioe' esattamente la conseguenza che avevo segnalato come aperta,
-> **applicata alla voce sbagliata**.
+> del principio di equivalenza va fatta **prima della PROVA 3**. Un `SI` avrebbe
+> bloccato il run base con una misura **SOSPESA** dalla decisione (1).
+>
+> **ATTRIBUZIONE, corretta da Luca:** il `SI` precedente **non era un mio errore**.
+> **Era un consiglio del guardiano**: la regola come mi e' stata data nominava
+> `KERNEL_ALPHA` **fra i `SI`**, e io l'ho applicata. La correzione a `NO` viene dal
+> guardiano stesso.
 

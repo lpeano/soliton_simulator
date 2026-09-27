@@ -4150,3 +4150,73 @@ cura (a) stessa»*. **Non lo è:** il raggio di `SYNC_UPDATE` è `step` + `_pass
 > sono applicate, **e non scrivo una riga di codice per (a) finché non approvi**.
 > **Il primo passo quando approvi è `H-ETC-2` DA SOLO** — è lui a decidere se la cura è misurabile,
 > e se **passa** sul codice di oggi mi fermo invece di consegnarlo.
+
+---
+
+# ⚙ **`ETC-PASSO` — SCHEMA A: FASE 0-bis, il progetto dettagliato** *(2026-09-27)*
+
+*(`doc/TASK_HISTORY/2026-09-27_etc-passo-0bis.md`. Blob del simulatore `e203f9a8`, **prima e dopo**:
+nessun codice del simulatore è cambiato.)*
+
+## 🛑 **IL BIVIO: 13 scritture non sono variazioni, e 8 sono il problema vero**
+
+Su **120 scritture** di stato: **20 incrementi** *(si sommano)*, **1 mescola** *(è una variazione:
+`δ = p·(E−X)`)*, **40 estensioni strutturali** *(vanno dopo)*, **46 assegnazioni indipendenti dal
+corrente** *(variazione implicita)*, e **13 che non sono variazioni**.
+
+| gruppo | siti | |
+|---|---|---|
+| ### **① pavimenti** | ### **8** | `d0` **7 volte** `_pav_d0`, `d` **1 volta** `maximum(…, 0.05)` |
+| ② vincoli geometrici | 5 | `phi` **4 volte** `% dphi` *(la fase vive su un cerchio)*, `_nb` **1 volta** la normalizzazione *(il Bloch è un versore)* |
+
+> ### **Perché il gruppo ① non lo decido io:** sommare le variazioni e applicare il pavimento
+> **una volta** non dà lo stesso risultato che applicarlo **sette volte**. Oggi ogni legge vede
+> `d0` **già rialzato** dalla legge prima e ci costruisce sopra la propria variazione.
+> **Scegliere «una volta sola» è scegliere una legge diversa.**
+> **E la regola «nessun clip» non scioglie questo, lo stringe:** questi **c'erano già**, e la cura
+> **deve** decidere **quante volte** girano. Le tre risposte che vedo — *(i)* una volta a fine
+> passo · *(ii)* dopo ciascuna legge, e allora **non è Jacobi** su `d0` e `d` · *(iii)* il
+> pavimento **non è un clip ma una legge** (`A11`) e va **derivato** — **sono tutte e tre decisioni
+> di teoria. Non ne scelgo nessuna.**
+>
+> **Sul gruppo ② ho una raccomandazione:** sommare e avvolgere/normalizzare **una volta sola** è
+> algebricamente equivalente per `phi` e **geometricamente più corretto** per `_nb`. **Ma non le
+> tolgo dalla lista:** hai scritto *«normalizzazione»* esplicitamente, e *«una volta invece di
+> quattro»* cambia i numeri sul galleggiante.
+
+**⚠ Il numero 13 è il QUARTO criterio.** I primi tre davano **59 → 18 → 13**: contavo come non
+componibili le `concatenate` *(estensione)*, i `self.X = self.X + δ` *(incrementi travestiti)* e
+gli `astype(self.X.dtype)` *(dipendenza dal **tipo**, non dal **valore**)*.
+
+## ✅ **Il punto 2 si è sciolto da solo: gli archi divisi non servono una regola nuova**
+
+L'ordine che hai fissato — **prima le variazioni, poi la struttura** — rende la domanda **vuota**:
+`δ` si applica **mentre l'arco esiste ancora**, e poi le quattro regole di nascita di oggi
+*(`d` si dimezza · `vd`/`peq` si copiano · `tw` si azzera · `twp` si ricalcola dalla fase)* girano
+sul valore **già aggiornato**. **Nessuna nuova, nessuna cambiata.**
+**Ma una conseguenza resta e la dichiaro:** la mitosi decide **dove** nascere **sulla fotografia**,
+quindi **quali archi si dividono può cambiare**. Non è un difetto — è cosa significa «simultaneo».
+
+## ✅ **E il punto 3 ha trovato la radice di `PSI-FLASH`**
+
+**`psi` e `psi_spin` sono le uniche DUE grandezze di stato che la mitosi NON estende** *(le altre
+19: 13 per nodo, 6 per arco)*. Per questo dopo una nascita `len(psi) < n` e `:6608` le **ricalcola
+tutte**. **La cura toglie un'eccezione invece di aggiungere una legge** (`9-ter`): si estendono
+come le altre, **calcolate solo per i nati**.
+
+## Gli altri punti, in breve
+
+**`CLIP-INVENTARIO`** *(voce d'indice nuova)*: **117 guardie**, e la natura si decide **dal POSTO**
+— hai ragione, `np.maximum(self._deg, 1)` è una guardia. **27 tetti fisici**, 48 anti-zero, 19
+epsilon, 9 parte-positiva, 8 dominio, 6 selezione. **E «27» è un limite SUPERIORE**: tre pavimenti
+di grado restano dentro perché la divisione che proteggono sta altrove.
+**Casuali:** `scuoti_vuoto` 1, `step` 7, `mitosi` 4 — **3 leggi su 5**. Un flusso per legge
+**cambia i numeri anche a cura spenta**, e non c'è modo di renderlo byte-inerte: lo dico prima.
+**Le 56 letture:** 36 → fotografia, 8 contatore, 6 cache, 4 struttura, 2 `pos`. **Zero non
+classificate.**
+**Costo: `24.97 MB` per fotografia, una copia per passo**, e **l'86 % sono i sei array per arco**
+*(`m/n = 35.1`)*. **Il tempo non lo stimo:** dipende dalla banda di memoria, e una stima inventata
+sarebbe peggio di nessuna.
+
+> ### 🛑 **STOP. Servono le tue decisioni sulle 13 del par.1.3 — le 8 di pavimento per prime.**
+> Poi la FASE 1, e `H-ETC-2` **per primo e da solo**.

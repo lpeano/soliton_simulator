@@ -1,0 +1,3205 @@
+{
+ "classi": {
+  "A": [
+   {
+    "attributo": "_nb",
+    "classe": "A",
+    "dentro": "_passo_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": "incremento",
+    "riga": 3227,
+    "sorgente": "self._nb = self._nb + _calcio * amp[:, None]"
+   },
+   {
+    "attributo": "d",
+    "classe": "A",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": "incremento",
+    "riga": 5778,
+    "sorgente": "self.d = self.d + dts * self.vd"
+   },
+   {
+    "attributo": "d",
+    "classe": "A",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": "incremento",
+    "riga": 5780,
+    "sorgente": "self.d = self.d + self._smorza(self.d, dts * self.vd, 'd')"
+   },
+   {
+    "attributo": "d0",
+    "classe": "A",
+    "dentro": "step",
+    "forma": "+=",
+    "legge": "step",
+    "rhs": "incremento",
+    "riga": 5880,
+    "sorgente": "self.d0 += self._sd0(dt_e * (self.d - self.d0) / tau_p_loc)"
+   },
+   {
+    "attributo": "d0",
+    "classe": "A",
+    "dentro": "step",
+    "forma": "+=",
+    "legge": "step",
+    "rhs": "incremento",
+    "riga": 5891,
+    "sorgente": "self.d0 += self._sd0(np.clip(dt_e * cs_taup * d_arco * _lap_d0, -_cfl, _cfl))"
+   },
+   {
+    "attributo": "d0",
+    "classe": "A",
+    "dentro": "step",
+    "forma": "+=",
+    "legge": "step",
+    "rhs": "incremento",
+    "riga": 5895,
+    "sorgente": "self.d0 += self._sd0(dt_e * (self.d - self.d0) / TAU_P)"
+   },
+   {
+    "attributo": "d0",
+    "classe": "A",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "incremento",
+    "riga": 6154,
+    "sorgente": "self.d0 = self.d0 + self._sd0(spinta)          # Locale pura"
+   },
+   {
+    "attributo": "d0",
+    "classe": "A",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "[]+=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "incremento",
+    "riga": 6661,
+    "sorgente": "self.d0[mask] += self._sd0(proj, mask)"
+   },
+   {
+    "attributo": "d0",
+    "classe": "A",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "[]+=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "incremento",
+    "riga": 6808,
+    "sorgente": "self.d0[mask] += self._sd0(spinta * float(np.median(self.d0[mask])), mask)"
+   },
+   {
+    "attributo": "d0",
+    "classe": "A",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "[]+=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "incremento",
+    "riga": 6814,
+    "sorgente": "self.d0[mask] += self._sd0(grav * float(np.median(self.d0[mask])), mask)"
+   },
+   {
+    "attributo": "d0",
+    "classe": "A",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "[]+=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "incremento",
+    "riga": 6837,
+    "sorgente": "self.d0[mask] += self._sd0(flusso, mask)"
+   },
+   {
+    "attributo": "d0",
+    "classe": "A",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "[]+=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "incremento",
+    "riga": 6988,
+    "sorgente": "self.d0[mask] += self._sd0(_delta_coes, mask)"
+   },
+   {
+    "attributo": "d0",
+    "classe": "A",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "[]+=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "incremento",
+    "riga": 6990,
+    "sorgente": "self.d0[mask] += self._sd0("
+   },
+   {
+    "attributo": "eta",
+    "classe": "A",
+    "dentro": "step",
+    "forma": "+=",
+    "legge": "step",
+    "rhs": "incremento",
+    "riga": 5186,
+    "sorgente": "w = self._pesi(); self.eta += dt_n"
+   },
+   {
+    "attributo": "peq",
+    "classe": "A",
+    "dentro": "step",
+    "forma": "+=",
+    "legge": "step",
+    "rhs": "incremento",
+    "riga": 5606,
+    "sorgente": "self.peq += dt_e * ((rho - self.peq) / tau_bg_loc + flusso / TAU_DIFF)"
+   },
+   {
+    "attributo": "peq",
+    "classe": "A",
+    "dentro": "step",
+    "forma": "+=",
+    "legge": "step",
+    "rhs": "incremento",
+    "riga": 5612,
+    "sorgente": "self.peq += dt_e * ((rho - self.peq) / TAU_BG + flusso / TAU_DIFF)"
+   },
+   {
+    "attributo": "phivel",
+    "classe": "A",
+    "dentro": "scuoti_vuoto",
+    "forma": "[]+=",
+    "legge": "scuoti_vuoto",
+    "rhs": "incremento",
+    "riga": 838,
+    "sorgente": "net.phivel[:net.n] += calcio"
+   },
+   {
+    "attributo": "tw",
+    "classe": "A",
+    "dentro": "step",
+    "forma": "+=",
+    "legge": "step",
+    "rhs": "incremento",
+    "riga": 5468,
+    "sorgente": "self.tw += self._w8(dph + twist_dip - self.twp) - dt_e * self.tw / _ttw"
+   },
+   {
+    "attributo": "tw",
+    "classe": "A",
+    "dentro": "step",
+    "forma": "+=",
+    "legge": "step",
+    "rhs": "incremento",
+    "riga": 5472,
+    "sorgente": "self.tw += self._w4(dph - self.twp) - dt_e * self.tw / _ttw"
+   },
+   {
+    "attributo": "vd",
+    "classe": "A",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": "incremento",
+    "riga": 5776,
+    "sorgente": "self.vd = self.vd + dts * (cs_arco ** 2 * lap + src - beta * self.vd)"
+   }
+  ],
+  "A-bis": [
+   {
+    "attributo": "mem_mot",
+    "classe": "A-bis",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "[]=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "mescola",
+    "riga": 6635,
+    "sorgente": "self.mem_mot[:self.n] = (1.0 - plast) * self.mem_mot[:self.n] + plast * grad_tw"
+   }
+  ],
+  "B": [
+   {
+    "attributo": "_nb",
+    "classe": "B",
+    "dentro": "_passo_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": "vincolo",
+    "riga": 3228,
+    "sorgente": "self._nb = self._nb / np.maximum(np.linalg.norm(self._nb, axis=1, keepdims=True), 1e-9)"
+   },
+   {
+    "attributo": "d",
+    "classe": "B",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": "vincolo",
+    "riga": 5782,
+    "sorgente": "self.d = np.maximum(self.d + dts * self.vd, 0.05)"
+   },
+   {
+    "attributo": "d0",
+    "classe": "B",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": "vincolo",
+    "riga": 5899,
+    "sorgente": "self.d0 = self._pav_d0(self.d0)"
+   },
+   {
+    "attributo": "d0",
+    "classe": "B",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "vincolo",
+    "riga": 6157,
+    "sorgente": "self.d0 = self._pav_d0(self.d0)       # PAVIMENTO: la spinta non deve"
+   },
+   {
+    "attributo": "d0",
+    "classe": "B",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "vincolo",
+    "riga": 6664,
+    "sorgente": "self.d0 = self._pav_d0(self.d0)          # PAVIMENTO"
+   },
+   {
+    "attributo": "d0",
+    "classe": "B",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "vincolo",
+    "riga": 6817,
+    "sorgente": "self.d0 = self._pav_d0(self.d0)"
+   },
+   {
+    "attributo": "d0",
+    "classe": "B",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "vincolo",
+    "riga": 6840,
+    "sorgente": "self.d0 = self._pav_d0(self.d0)"
+   },
+   {
+    "attributo": "d0",
+    "classe": "B",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "vincolo",
+    "riga": 6994,
+    "sorgente": "self.d0 = self._pav_d0(self.d0)"
+   },
+   {
+    "attributo": "d0",
+    "classe": "B",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "vincolo",
+    "riga": 7042,
+    "sorgente": "self.d0 = self._pav_d0(self.d0)"
+   },
+   {
+    "attributo": "phi",
+    "classe": "B",
+    "dentro": "mitosi",
+    "forma": "[]=",
+    "legge": "mitosi",
+    "rhs": "vincolo",
+    "riga": 6265,
+    "sorgente": "self.phi[a] = (self.phi[a] + calcio_a) % self._dphi()"
+   },
+   {
+    "attributo": "phi",
+    "classe": "B",
+    "dentro": "mitosi",
+    "forma": "[]=",
+    "legge": "mitosi",
+    "rhs": "vincolo",
+    "riga": 6266,
+    "sorgente": "self.phi[b] = (self.phi[b] + calcio_b) % self._dphi()"
+   },
+   {
+    "attributo": "phi",
+    "classe": "B",
+    "dentro": "mitosi",
+    "forma": "[]=",
+    "legge": "mitosi",
+    "rhs": "vincolo",
+    "riga": 6269,
+    "sorgente": "self.phi[g] = (self.phi[g] + self.rng.normal(0, 1, len(g)) *"
+   },
+   {
+    "attributo": "phi",
+    "classe": "B",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "[]=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "vincolo",
+    "riga": 7040,
+    "sorgente": "self.phi[ii] = (self.phi[ii] + shift_fase_dinamico) % self._dphi()"
+   }
+  ],
+  "C": [
+   {
+    "attributo": "_nb",
+    "classe": "C",
+    "dentro": "_passo_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 3807,
+    "sorgente": "self._nb = nb_new.copy()                          # Bloch (derivato dal primario se SPINORE_CORRETTO)"
+   },
+   {
+    "attributo": "_nb_prec",
+    "classe": "C",
+    "dentro": "_passo_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 3808,
+    "sorgente": "self._nb_prec = nb_new.copy()                     # memorizzo per il ritardo causale"
+   },
+   {
+    "attributo": "_psi_prec",
+    "classe": "C",
+    "dentro": "ritmo",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 3040,
+    "sorgente": "self._psi_prec = self.psi.copy() if len(self.psi) == self.n else np.ones(self.n, complex)"
+   },
+   {
+    "attributo": "_psi_prec",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5123,
+    "sorgente": "self._psi_prec = self.psi.copy()"
+   },
+   {
+    "attributo": "_psi_spinor",
+    "classe": "C",
+    "dentro": "_estendi_psi_spinor",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 1957,
+    "sorgente": "self._psi_spinor = self._bloch_a_spinore(nb_rif[:n])"
+   },
+   {
+    "attributo": "_psi_spinor",
+    "classe": "C",
+    "dentro": "_estendi_psi_spinor",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 1962,
+    "sorgente": "self._psi_spinor = cur[:n]"
+   },
+   {
+    "attributo": "_psi_spinor",
+    "classe": "C",
+    "dentro": "_passo_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 3810,
+    "sorgente": "self._psi_spinor = psi_sp_new                 # primario complesso: segno di doppia-copertura robusto"
+   },
+   {
+    "attributo": "_spinor_lift",
+    "classe": "C",
+    "dentro": "_aggiorna_lift_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 1865,
+    "sorgente": "self._spinor_lift = candidato"
+   },
+   {
+    "attributo": "_spinor_lift",
+    "classe": "C",
+    "dentro": "_passo_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 3811,
+    "sorgente": "self._spinor_lift = psi_sp_new.copy()         # il lift E' il primario (niente ri-derivazione da nb)"
+   },
+   {
+    "attributo": "d",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5767,
+    "sorgente": "self.d = d_new"
+   },
+   {
+    "attributo": "d",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5789,
+    "sorgente": "self.d = _smp_d_ini + self._smorza(_smp_d_ini, _dxd, 'd_passo')"
+   },
+   {
+    "attributo": "d0",
+    "classe": "C",
+    "dentro": "_smp_chiudi",
+    "forma": "=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": null,
+    "riga": 4431,
+    "sorgente": "self.d0 = v + self._smorza(v, dx, 'd0_passo')"
+   },
+   {
+    "attributo": "omega_s",
+    "classe": "C",
+    "dentro": "_passo_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 3806,
+    "sorgente": "self.omega_s = omega_new.copy()"
+   },
+   {
+    "attributo": "peq",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "[]=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5552,
+    "sorgente": "if nuevos := nuovi.any(): self.peq[nuovi] = rho[nuovi]"
+   },
+   {
+    "attributo": "peq",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5604,
+    "sorgente": "self.peq = self._peq_esatto(rho, flusso, dt_e, tau_bg_loc)"
+   },
+   {
+    "attributo": "peq",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5610,
+    "sorgente": "self.peq = self._peq_esatto(rho, flusso, dt_e, TAU_BG)"
+   },
+   {
+    "attributo": "perc_chi",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "[]=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5491,
+    "sorgente": "self.perc_chi[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_chi.dtype)"
+   },
+   {
+    "attributo": "perc_chi",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "[]=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5515,
+    "sorgente": "self.perc_chi[:self.n] = np.where(np.real(_ov) >= 0.0, 1, -1).astype(self.perc_chi.dtype)"
+   },
+   {
+    "attributo": "perc_geom",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "[]=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5488,
+    "sorgente": "self.perc_geom[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_geom.dtype)"
+   },
+   {
+    "attributo": "phi",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5442,
+    "sorgente": "self.phi = (_phi_t + (dt_n_s * self.phivel) + delta_sync_phi) % self._dphi()  # dt_n_s = verso firmato (5.3a)"
+   },
+   {
+    "attributo": "phi_s",
+    "classe": "C",
+    "dentro": "_passo_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 3815,
+    "sorgente": "self.phi_s = np.arccos(np.clip(nb_new[:, 2], -1, 1))            # b = angolo polare [0,pi]"
+   },
+   {
+    "attributo": "phivel",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5441,
+    "sorgente": "self.phivel = _phivel_t + delta_phivel"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 4000,
+    "sorgente": "self.psi = np.zeros(self.n, complex); return self.psi"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 4000,
+    "sorgente": "self.psi = np.zeros(self.n, complex); return self.psi"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 4000,
+    "sorgente": "self.psi = np.zeros(self.n, complex); return self.psi"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 4000,
+    "sorgente": "self.psi = np.zeros(self.n, complex); return self.psi"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "rilassa_disegno",
+    "rhs": null,
+    "riga": 4000,
+    "sorgente": "self.psi = np.zeros(self.n, complex); return self.psi"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": null,
+    "riga": 4000,
+    "sorgente": "self.psi = np.zeros(self.n, complex); return self.psi"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 4007,
+    "sorgente": "self.psi = self.satura(F)                          # saturazione regolarizzata (Leggi XV/XVIII)"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 4007,
+    "sorgente": "self.psi = self.satura(F)                          # saturazione regolarizzata (Leggi XV/XVIII)"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 4007,
+    "sorgente": "self.psi = self.satura(F)                          # saturazione regolarizzata (Leggi XV/XVIII)"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 4007,
+    "sorgente": "self.psi = self.satura(F)                          # saturazione regolarizzata (Leggi XV/XVIII)"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "rilassa_disegno",
+    "rhs": null,
+    "riga": 4007,
+    "sorgente": "self.psi = self.satura(F)                          # saturazione regolarizzata (Leggi XV/XVIII)"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": null,
+    "riga": 4007,
+    "sorgente": "self.psi = self.satura(F)                          # saturazione regolarizzata (Leggi XV/XVIII)"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5193,
+    "sorgente": "self.psi = psi_t.copy()"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5525,
+    "sorgente": "self.psi = psi_t.copy()"
+   },
+   {
+    "attributo": "psi",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5528,
+    "sorgente": "self.psi = self.satura(F)"
+   },
+   {
+    "attributo": "psi_spin",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 4021,
+    "sorgente": "self.psi_spin = _Fs / (1.0 + GAMMA * _norm)[:, None]               # saturazione sulla NORMA (non ruota lo spinore)"
+   },
+   {
+    "attributo": "psi_spin",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 4021,
+    "sorgente": "self.psi_spin = _Fs / (1.0 + GAMMA * _norm)[:, None]               # saturazione sulla NORMA (non ruota lo spinore)"
+   },
+   {
+    "attributo": "psi_spin",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 4021,
+    "sorgente": "self.psi_spin = _Fs / (1.0 + GAMMA * _norm)[:, None]               # saturazione sulla NORMA (non ruota lo spinore)"
+   },
+   {
+    "attributo": "psi_spin",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 4021,
+    "sorgente": "self.psi_spin = _Fs / (1.0 + GAMMA * _norm)[:, None]               # saturazione sulla NORMA (non ruota lo spinore)"
+   },
+   {
+    "attributo": "psi_spin",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "rilassa_disegno",
+    "rhs": null,
+    "riga": 4021,
+    "sorgente": "self.psi_spin = _Fs / (1.0 + GAMMA * _norm)[:, None]               # saturazione sulla NORMA (non ruota lo spinore)"
+   },
+   {
+    "attributo": "psi_spin",
+    "classe": "C",
+    "dentro": "calcola_psi",
+    "forma": "=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": null,
+    "riga": 4021,
+    "sorgente": "self.psi_spin = _Fs / (1.0 + GAMMA * _norm)[:, None]               # saturazione sulla NORMA (non ruota lo spinore)"
+   },
+   {
+    "attributo": "twp",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5469,
+    "sorgente": "self.twp = self._w8(dph + twist_dip)"
+   },
+   {
+    "attributo": "twp",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5473,
+    "sorgente": "self.twp = dph"
+   },
+   {
+    "attributo": "vd",
+    "classe": "C",
+    "dentro": "step",
+    "forma": "=",
+    "legge": "step",
+    "rhs": null,
+    "riga": 5766,
+    "sorgente": "self.vd = vd_half + 0.5 * dts * acc_next"
+   }
+  ],
+  "S": [
+   {
+    "attributo": "_nb",
+    "classe": "S",
+    "dentro": "_eredita_spinore_figli",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 1991,
+    "sorgente": "self._nb = np.vstack([self._nb, self._nb[src]])"
+   },
+   {
+    "attributo": "_nb",
+    "classe": "S",
+    "dentro": "_passo_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": "estensione",
+    "riga": 3157,
+    "sorgente": "self._nb = np.stack([np.sin(b0), np.zeros(n), np.cos(b0)], axis=1)"
+   },
+   {
+    "attributo": "_nb",
+    "classe": "S",
+    "dentro": "_passo_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": "estensione",
+    "riga": 3161,
+    "sorgente": "self._nb = np.vstack([self._nb, nuovi])"
+   },
+   {
+    "attributo": "_nb",
+    "classe": "S",
+    "dentro": "_passo_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": "estensione",
+    "riga": 3163,
+    "sorgente": "self._nb = self._nb[:n]"
+   },
+   {
+    "attributo": "_nb",
+    "classe": "S",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "estensione",
+    "riga": 6723,
+    "sorgente": "self._nb = np.stack([np.sin(b0), np.zeros(self.n), np.cos(b0)], axis=1)"
+   },
+   {
+    "attributo": "_nb_prec",
+    "classe": "S",
+    "dentro": "_eredita_spinore_figli",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 1993,
+    "sorgente": "self._nb_prec = np.vstack([self._nb_prec, self._nb_prec[src]])"
+   },
+   {
+    "attributo": "_psi_prec",
+    "classe": "S",
+    "dentro": "_eredita_spinore_figli",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 2013,
+    "sorgente": "self._psi_prec = np.concatenate([self._psi_prec, self._psi_prec[src]])"
+   },
+   {
+    "attributo": "_psi_spinor",
+    "classe": "S",
+    "dentro": "_estendi_psi_spinor",
+    "forma": "=",
+    "legge": "step",
+    "rhs": "estensione",
+    "riga": 1960,
+    "sorgente": "self._psi_spinor = np.vstack([cur, manca])"
+   },
+   {
+    "attributo": "_psi_spinor",
+    "classe": "S",
+    "dentro": "_eredita_spinore_figli",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 2006,
+    "sorgente": "self._psi_spinor = np.vstack([self._psi_spinor, er])"
+   },
+   {
+    "attributo": "_spinor_lift",
+    "classe": "S",
+    "dentro": "_eredita_spinore_figli",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 2011,
+    "sorgente": "self._spinor_lift = np.vstack([self._spinor_lift, el])"
+   },
+   {
+    "attributo": "d",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6305,
+    "sorgente": "self.d = np.concatenate([self.d[keep], dh, dh])"
+   },
+   {
+    "attributo": "d",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6416,
+    "sorgente": "self.d = np.concatenate([self.d, dd, dd])"
+   },
+   {
+    "attributo": "d0",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6308,
+    "sorgente": "self.d0 = np.concatenate([self.d0[keep], d0new])"
+   },
+   {
+    "attributo": "d0",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6419,
+    "sorgente": "self.d0 = np.concatenate([self.d0, dd, dd])"
+   },
+   {
+    "attributo": "eta",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6229,
+    "sorgente": "self.eta = np.concatenate([self.eta, np.zeros(len(sel))])"
+   },
+   {
+    "attributo": "eta",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6385,
+    "sorgente": "self.eta = np.concatenate([self.eta, np.zeros(nc)])"
+   },
+   {
+    "attributo": "mem_mot",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6244,
+    "sorgente": "self.mem_mot = np.vstack([self.mem_mot, self.mem_mot[a]]) if len(self.mem_mot) else np.zeros((len(sel), 3))"
+   },
+   {
+    "attributo": "mem_mot",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6399,
+    "sorgente": "self.mem_mot = np.vstack([self.mem_mot, np.zeros((nc, 3))]) if len(self.mem_mot) else np.zeros((nc, 3))"
+   },
+   {
+    "attributo": "mem_mot",
+    "classe": "S",
+    "dentro": "memoria_hebbiana_moto",
+    "forma": "=",
+    "legge": "memoria_hebbiana_moto",
+    "rhs": "estensione",
+    "riga": 6615,
+    "sorgente": "self.mem_mot = np.vstack([self.mem_mot, np.zeros((n - len(self.mem_mot), 3))])"
+   },
+   {
+    "attributo": "omega_s",
+    "classe": "S",
+    "dentro": "_eredita_spinore_figli",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 2001,
+    "sorgente": "self.omega_s = np.vstack([self.omega_s, self.omega_s[src]])"
+   },
+   {
+    "attributo": "omega_s",
+    "classe": "S",
+    "dentro": "_passo_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": "estensione",
+    "riga": 3152,
+    "sorgente": "self.omega_s = np.vstack([self.omega_s, np.zeros((n - len(self.omega_s), 3))])"
+   },
+   {
+    "attributo": "omega_s",
+    "classe": "S",
+    "dentro": "_passo_spinoriale",
+    "forma": "=",
+    "legge": "step",
+    "rhs": "estensione",
+    "riga": 3154,
+    "sorgente": "self.omega_s = self.omega_s[:n]"
+   },
+   {
+    "attributo": "peq",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6311,
+    "sorgente": "self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])"
+   },
+   {
+    "attributo": "peq",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6422,
+    "sorgente": "self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])"
+   },
+   {
+    "attributo": "perc_chi",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6232,
+    "sorgente": "self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])"
+   },
+   {
+    "attributo": "perc_chi",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6388,
+    "sorgente": "self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])"
+   },
+   {
+    "attributo": "perc_geom",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6235,
+    "sorgente": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[a]])"
+   },
+   {
+    "attributo": "perc_geom",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6392,
+    "sorgente": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[aa]])"
+   },
+   {
+    "attributo": "phi",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6226,
+    "sorgente": "self.phi = np.concatenate([self.phi, fm]); self.phi0 = np.concatenate([self.phi0, fm])"
+   },
+   {
+    "attributo": "phi",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6381,
+    "sorgente": "self.phi = np.concatenate([self.phi, anti])"
+   },
+   {
+    "attributo": "phi_s",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6227,
+    "sorgente": "self.phi_s = np.concatenate([self.phi_s, self.phi_s[a]])   # spinore del figlio: eredita dal genitore"
+   },
+   {
+    "attributo": "phi_s",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6383,
+    "sorgente": "self.phi_s = np.concatenate([self.phi_s, np.zeros(nc)])   # spinore antinodo: 0 (inerte se spento)"
+   },
+   {
+    "attributo": "phivel",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6228,
+    "sorgente": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[a] + self.phivel[b])])"
+   },
+   {
+    "attributo": "phivel",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6384,
+    "sorgente": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[aa] + self.phivel[bb])])"
+   },
+   {
+    "attributo": "tw",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6317,
+    "sorgente": "self.tw = np.concatenate([self.tw[keep], zz, zz])"
+   },
+   {
+    "attributo": "tw",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6430,
+    "sorgente": "self.tw = np.concatenate([self.tw, zz2, zz2])"
+   },
+   {
+    "attributo": "twp",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6318,
+    "sorgente": "self.twp = np.concatenate([self.twp[keep], self._wphi(self.phi[a] - fm),"
+   },
+   {
+    "attributo": "twp",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6431,
+    "sorgente": "self.twp = np.concatenate([self.twp, self._wphi(self.phi[aa] - anti),"
+   },
+   {
+    "attributo": "vd",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6310,
+    "sorgente": "self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])"
+   },
+   {
+    "attributo": "vd",
+    "classe": "S",
+    "dentro": "mitosi",
+    "forma": "=",
+    "legge": "mitosi",
+    "rhs": "estensione",
+    "riga": 6421,
+    "sorgente": "self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])"
+   }
+  ]
+ },
+ "clip": [
+  {
+   "chiamata": "clip",
+   "costanti": [
+    -1.0,
+    1.0
+   ],
+   "funzione": "_aggiorna_lift_spinoriale",
+   "natura": "dominio",
+   "riga": 1852,
+   "sorgente": "th = np.arccos(np.clip(nb[:, 2], -1.0, 1.0))"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [
+    -1.0,
+    1.0
+   ],
+   "funzione": "_bloch_a_spinore",
+   "natura": "dominio",
+   "riga": 1871,
+   "sorgente": "th = np.arccos(np.clip(nb[:, 2], -1.0, 1.0))"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [
+    -1.0,
+    1.0
+   ],
+   "funzione": "_bloch_ritardato",
+   "natura": "TETTO-FISICO",
+   "riga": 4872,
+   "sorgente": "dot = np.clip(np.sum(nbr * nb_cur, axis=1), -1.0, 1.0)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-30
+   ],
+   "funzione": "_bloch_ritardato",
+   "natura": "anti-zero",
+   "riga": 4882,
+   "sorgente": "nb_cur * np.sin(alpha * Om)[:, None]) / np.maximum(sinOm, 1e-30)[:, None]"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-30
+   ],
+   "funzione": "_bloch_ritardato",
+   "natura": "anti-zero",
+   "riga": 4889,
+   "sorgente": "out = out / np.maximum(nor, 1e-30)[:, None]"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-30
+   ],
+   "funzione": "_coppia_interferenza",
+   "natura": "anti-zero",
+   "riga": 5078,
+   "sorgente": "_nb = _nb / np.maximum(np.linalg.norm(_nb, axis=1), 1e-30)[:, None]"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-12
+   ],
+   "funzione": "_cs_arco_da_nodo",
+   "natura": "anti-zero",
+   "riga": 4915,
+   "sorgente": "np.maximum(cs_nodo[ii] + cs_nodo[jj], 1e-12))"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.0
+   ],
+   "funzione": "_cs_nodo",
+   "natura": "parte-positiva",
+   "riga": 4808,
+   "sorgente": "_I = np.maximum(I[:n], 0.0)"
+  },
+  {
+   "chiamata": "minimum",
+   "costanti": [],
+   "funzione": "_cs_nodo",
+   "natura": "selezione",
+   "riga": 4816,
+   "sorgente": "cs_floor = np.minimum(cs_floor, CS_M)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "_cs_nodo",
+   "natura": "anti-zero",
+   "riga": 4771,
+   "sorgente": "media_vicini = (W_loc @ I[:n]) / np.maximum(W_loc @ np.ones(n), 1e-9)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "_cs_nodo",
+   "natura": "anti-zero",
+   "riga": 4772,
+   "sorgente": "u_nodo = I[:n] / np.maximum(media_vicini, 1e-9)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "_grado",
+   "natura": "TETTO-FISICO",
+   "riga": 1762,
+   "sorgente": "self._deg = np.maximum(np.bincount(self.i, minlength=self.n) +"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "_lam_archi",
+   "natura": "epsilon",
+   "riga": 3012,
+   "sorgente": "return np.maximum(0.5 * (li[self.i] + li[self.j]), 1e-6)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [],
+   "funzione": "_nasce",
+   "natura": "selezione",
+   "riga": 4515,
+   "sorgente": "return np.maximum(v, LAM)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-30
+   ],
+   "funzione": "_nb_grav",
+   "natura": "anti-zero",
+   "riga": 4053,
+   "sorgente": "_nbn = _nbn / np.maximum(_rs, 1e-30)[:, None]"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "epsilon",
+   "riga": 3556,
+   "sorgente": "inerzia = np.maximum(_contrasto * _T2, 1e-6)       # il pavimento RESTA: deve diventare inerte"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "anti-zero",
+   "riga": 3282,
+   "sorgente": "B = B / np.maximum(deg[:, None], 1e-9)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-12
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "epsilon",
+   "riga": 3331,
+   "sorgente": "_cs_in = np.maximum(np.asarray(_csp_in, float)[:n], 1e-12)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-12
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "epsilon",
+   "riga": 3780,
+   "sorgente": "nrm = np.maximum(np.sqrt(np.abs(a1) ** 2 + np.abs(b1) ** 2), 1e-12)  # |psi|=1 ATOMICO"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "anti-zero",
+   "riga": 3804,
+   "sorgente": "nb_new = nb_new / np.maximum(np.linalg.norm(nb_new, axis=1, keepdims=True), 1e-9)"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [
+    -1.0,
+    1.0
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "dominio",
+   "riga": 3815,
+   "sorgente": "self.phi_s = np.arccos(np.clip(nb_new[:, 2], -1, 1))            # b = angolo polare [0,pi]"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "anti-zero",
+   "riga": 3295,
+   "sorgente": "Bg = Bg / np.maximum(degg[:, None], 1e-9)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-12
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "anti-zero",
+   "riga": 3704,
+   "sorgente": "nhat = omega_tot / np.maximum(_on[:, None], 1e-12)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "anti-zero",
+   "riga": 3790,
+   "sorgente": "ohat = omega_rot / np.maximum(on, 1e-9)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "anti-zero",
+   "riga": 3228,
+   "sorgente": "self._nb = self._nb / np.maximum(np.linalg.norm(self._nb, axis=1, keepdims=True), 1e-9)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "anti-zero",
+   "riga": 3402,
+   "sorgente": "_peq_nodo = np.where(_cn[:n] > 0, _sp[:n] / np.maximum(_cn[:n], 1), 0.0)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.05
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "TETTO-FISICO",
+   "riga": 3631,
+   "sorgente": "_tau = TAU_A * np.maximum(_dens / _dens_rif, 0.05)   # vita media locale, pavimento 0.05"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "anti-zero",
+   "riga": 3647,
+   "sorgente": "omega_new = omega_new + _otw / np.maximum(_degt[:, None], 1.0)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-12
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "anti-zero",
+   "riga": 3744,
+   "sorgente": "_za = _ov_s / np.maximum(np.abs(_ov_s), 1e-12)               # fasore unitario del segno"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-12
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "anti-zero",
+   "riga": 3757,
+   "sorgente": "_pb = _pb / np.maximum(np.linalg.norm(_pb, axis=1, keepdims=True), 1e-12)   # media SU(2) rinormalizzata"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [
+    0.0,
+    1.0
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "dominio",
+   "riga": 3763,
+   "sorgente": "_amp = np.arcsin(np.clip(_sink, 0.0, 1.0))                  # angolo geodetico verso nb_bar"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-12
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "anti-zero",
+   "riga": 3766,
+   "sorgente": "_uk = _Om / np.maximum(np.linalg.norm(_Om, axis=1, keepdims=True), 1e-12)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.0
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "dominio",
+   "riga": 3198,
+   "sorgente": "_b = np.sqrt(np.maximum(1.0 - _a * _a, 0.0))"
+  },
+  {
+   "chiamata": "minimum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "TETTO-FISICO",
+   "riga": 3613,
+   "sorgente": "_tq = _tq * np.minimum(1.0, self.eta[:n] / _trq)[:, None]"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-12
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "anti-zero",
+   "riga": 3688,
+   "sorgente": "omega_clk = (_num / np.maximum(_den, 1e-12)) * r_node   # coerenza d'arco [-1,1] * ritmo proprio"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.0
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "parte-positiva",
+   "riga": 3729,
+   "sorgente": "_csn2 = np.maximum(np.asarray(_csp2, float)[:n], 0.0)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-12
+   ],
+   "funzione": "_passo_spinoriale",
+   "natura": "anti-zero",
+   "riga": 3764,
+   "sorgente": "_Om = (np.asarray(forza_sync[:n]) * _amp)[:, None] * (_crx / np.maximum(_sink[:, None], 1e-12))"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [],
+   "funzione": "_pav_d0",
+   "natura": "selezione",
+   "riga": 4456,
+   "sorgente": "return np.maximum(v, self._floor_d0())"
+  },
+  {
+   "chiamata": "minimum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "_pesi",
+   "natura": "TETTO-FISICO",
+   "riga": 3878,
+   "sorgente": "ramp = np.minimum(1.0, self.eta / _tr)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.0
+   ],
+   "funzione": "_smorza",
+   "natura": "parte-positiva",
+   "riga": 4227,
+   "sorgente": "fatt = np.where(pos, np.maximum(0.0, 1.0 - LAM / base), 0.0)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.001
+   ],
+   "funzione": "_tau_tw_locale",
+   "natura": "TETTO-FISICO",
+   "riga": 531,
+   "sorgente": "return _np.maximum((2*_np.pi) / dom, 1e-3)   # kappa=1: tau_tw = 2pi/|dw_locale|"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-12
+   ],
+   "funzione": "_tempo_luce_nodo",
+   "natura": "epsilon",
+   "riga": 5033,
+   "sorgente": "d_nodo = np.maximum(d_nodo, 1e-12)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-30
+   ],
+   "funzione": "_tempo_luce_nodo",
+   "natura": "epsilon",
+   "riga": 5048,
+   "sorgente": "return np.maximum(d_nodo / cs_nodo, 1e-30)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-12
+   ],
+   "funzione": "_tempo_luce_nodo",
+   "natura": "epsilon",
+   "riga": 5040,
+   "sorgente": "cs_nodo = np.maximum(np.asarray(csp, float)[:n], 1e-12)   # cs di UN PASSO FA (e' un ritardo)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "_tempo_luce_nodo",
+   "natura": "anti-zero",
+   "riga": 5023,
+   "sorgente": "d_nodo = somma / np.maximum(grado, 1.0)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-300
+   ],
+   "funzione": "_traccia_coesione",
+   "natura": "anti-zero",
+   "riga": 4202,
+   "sorgente": "rap = ac / _np.maximum(at, 1e-300)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-12
+   ],
+   "funzione": "chiralita_core_locale",
+   "natura": "epsilon",
+   "riga": 2187,
+   "sorgente": "centro = np.average(self.pos[gruppo], axis=0, weights=np.maximum(intensita, 1e-12))"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [],
+   "funzione": "lambda_nodi",
+   "natura": "selezione",
+   "riga": 3003,
+   "sorgente": "return np.maximum(LAM * fattore, portata_minima)"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [
+    -30.0,
+    30.0
+   ],
+   "funzione": "lambda_nodi",
+   "natura": "dominio",
+   "riga": 3000,
+   "sorgente": "softplus = np.log1p(np.exp(np.clip(u - 1.0, -30, 30)))"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "epsilon",
+   "riga": 6623,
+   "sorgente": "L = np.maximum(np.linalg.norm(v, axis=1), 1e-9)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "anti-zero",
+   "riga": 6621,
+   "sorgente": "twn = twn / np.maximum(self._deg, 1)"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "TETTO-FISICO",
+   "riga": 6650,
+   "sorgente": "proj = np.clip(proj, -passo_max, passo_max)"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "TETTO-FISICO",
+   "riga": 6835,
+   "sorgente": "flusso = np.clip(flusso, -passo_max, passo_max)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "epsilon",
+   "riga": 6846,
+   "sorgente": "d_archi = np.maximum(self.d[mask], 1e-6)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "TETTO-FISICO",
+   "riga": 6851,
+   "sorgente": "deg_loc = np.maximum(self._deg[:n], 1)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "epsilon",
+   "riga": 6762,
+   "sorgente": "H = np.maximum(np.hypot(r_rad, t_tan), 1e-9)"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "TETTO-FISICO",
+   "riga": 6806,
+   "sorgente": "spinta = np.clip(spinta, -passo_causale, passo_causale)"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "TETTO-FISICO",
+   "riga": 6812,
+   "sorgente": "grav = np.clip(grav, -passo_causale, passo_causale)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "anti-zero",
+   "riga": 6899,
+   "sorgente": "stress_metrico = np.abs(self.d[mask] - self.d0[mask]) / np.maximum(self.d0[mask], 1e-6)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "epsilon",
+   "riga": 7011,
+   "sorgente": "v_norm = np.maximum(np.linalg.norm(v_rel, axis=1, keepdims=True), 1e-9)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.001
+   ],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "TETTO-FISICO",
+   "riga": 7018,
+   "sorgente": "inerzia_locale = np.maximum(0.5 * (I_nodi[ii] + I_nodi[jj]) / I_med, 1e-3)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "anti-zero",
+   "riga": 6755,
+   "sorgente": "circ_nodo = circ_nodo / np.maximum(grado_c, 1.0)"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "TETTO-FISICO",
+   "riga": 6991,
+   "sorgente": "np.clip(coesione_relazionale, -tasso_dinamico, tasso_dinamico), mask)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "epsilon",
+   "riga": 7032,
+   "sorgente": "d_archi = np.maximum(self.d[mask], 1e-6)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "epsilon",
+   "riga": 7033,
+   "sorgente": "d0_archi = np.maximum(self.d0[mask], 1e-6)"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "TETTO-FISICO",
+   "riga": 7037,
+   "sorgente": "shift_fase_dinamico = np.clip(shift_fase_dinamico, -np.pi * 0.25, np.pi * 0.25)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "anti-zero",
+   "riga": 6795,
+   "sorgente": "_rhat = _rmid / np.maximum(np.linalg.norm(_rmid, axis=1, keepdims=True), 1e-9)"
+  },
+  {
+   "chiamata": "minimum",
+   "costanti": [],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "selezione",
+   "riga": 6937,
+   "sorgente": "_csa = np.minimum(np.asarray(_csn, dtype=float)[ii[mask]],"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-300
+   ],
+   "funzione": "memoria_hebbiana_moto",
+   "natura": "anti-zero",
+   "riga": 6966,
+   "sorgente": "_rap = np.abs(_delta_coes) / np.maximum(_passo_causale, 1e-300)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.0
+   ],
+   "funzione": "mitosi",
+   "natura": "parte-positiva",
+   "riga": 6004,
+   "sorgente": "ecc = np.maximum(ecc, 0.0)                         # zero sotto soglia: niente mitosi"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [
+    0.0,
+    1.0
+   ],
+   "funzione": "mitosi",
+   "natura": "TETTO-FISICO",
+   "riga": 6006,
+   "sorgente": "discesa = np.clip(1.0 - avv / TW_TETTO, 0.0, 1.0) # -> 0 quando tw -> 4pi (spegnimento)"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [
+    0.0,
+    1.0
+   ],
+   "funzione": "mitosi",
+   "natura": "TETTO-FISICO",
+   "riga": 6073,
+   "sorgente": "rep = np.clip(-_resp_rep, 0.0, 1.0)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.0
+   ],
+   "funzione": "mitosi",
+   "natura": "parte-positiva",
+   "riga": 6333,
+   "sorgente": "eccesso_torsione = np.maximum(0.0, sciolta - 1.0)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "mitosi",
+   "natura": "anti-zero",
+   "riga": 6003,
+   "sorgente": "ecc = avv / np.maximum(soglia, 1e-9) - 1.0        # eccesso oltre la soglia LOCALE"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "mitosi",
+   "natura": "anti-zero",
+   "riga": 6196,
+   "sorgente": "twn = twn / np.maximum(self._deg, 1)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "mitosi",
+   "natura": "epsilon",
+   "riga": 6217,
+   "sorgente": "rho_c = np.maximum(peq_sel, 1e-6) * max(massa_critica_collasso() / max(self.n, 1), 1e-3)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "mitosi",
+   "natura": "anti-zero",
+   "riga": 6218,
+   "sorgente": "s = (rho_sel - peq_sel) / np.maximum(rho_c, 1e-6)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "mitosi",
+   "natura": "anti-zero",
+   "riga": 6282,
+   "sorgente": "stress_arco = np.abs(self.d[sel] - self.d0[sel]) / np.maximum(self.d0[sel], 1e-6)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.0
+   ],
+   "funzione": "mitosi",
+   "natura": "parte-positiva",
+   "riga": 6284,
+   "sorgente": "fattore_plastico = np.tanh(np.maximum(sciolta_ecc * stress_arco, 0.0))"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.0
+   ],
+   "funzione": "mitosi",
+   "natura": "parte-positiva",
+   "riga": 6348,
+   "sorgente": "anom = np.maximum(0.0, (rho_sel - peq_sel) / np.maximum(peq_sel, 1e-6))"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.0
+   ],
+   "funzione": "mitosi",
+   "natura": "parte-positiva",
+   "riga": 6060,
+   "sorgente": "prob = 1.0 - np.exp(-np.maximum(resp, 0.0))"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.05
+   ],
+   "funzione": "mitosi",
+   "natura": "TETTO-FISICO",
+   "riga": 6368,
+   "sorgente": "dd = self._nasce(np.maximum("
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "mitosi",
+   "natura": "anti-zero",
+   "riga": 6348,
+   "sorgente": "anom = np.maximum(0.0, (rho_sel - peq_sel) / np.maximum(peq_sel, 1e-6))"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "pozzo_grafo",
+   "natura": "epsilon",
+   "riga": 6582,
+   "sorgente": "L = np.maximum(np.linalg.norm(v, axis=1), 1e-9)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "rilassa_disegno",
+   "natura": "epsilon",
+   "riga": 6504,
+   "sorgente": "L = np.maximum(np.linalg.norm(v, axis=1), 1e-9)"
+  },
+  {
+   "chiamata": "nan_to_num",
+   "costanti": [],
+   "funzione": "rilassa_disegno",
+   "natura": "TETTO-FISICO",
+   "riga": 6513,
+   "sorgente": "self.pos = np.nan_to_num(self.pos, nan=0.0, posinf=0.0, neginf=0.0)"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [
+    -0.5,
+    0.5
+   ],
+   "funzione": "rilassa_disegno",
+   "natura": "TETTO-FISICO",
+   "riga": 6511,
+   "sorgente": "self.pos += EMB_ETA * np.clip(acc, -0.5, 0.5)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "ritmo",
+   "natura": "anti-zero",
+   "riga": 3031,
+   "sorgente": "return 1.0 + (twn / np.maximum(deg, 1.0)) / max(PHI_CRIT, 1e-9)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "scuoti_vuoto",
+   "natura": "anti-zero",
+   "riga": 798,
+   "sorgente": "stress_archi = np.abs(net.d - net.d0) / np.maximum(net.d0, 1e-6)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "scuoti_vuoto",
+   "natura": "anti-zero",
+   "riga": 811,
+   "sorgente": "stress_nodo = stress_nodo / np.maximum(grado_nodo, 1.0)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-12
+   ],
+   "funzione": "step",
+   "natura": "epsilon",
+   "riga": 5588,
+   "sorgente": "den_w = np.maximum(np.bincount(i, w, minlength=self.n) +"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [
+    0.0,
+    1.0
+   ],
+   "funzione": "step",
+   "natura": "TETTO-FISICO",
+   "riga": 5183,
+   "sorgente": "_mcoer = np.clip(np.cos(self.phi[:self.n] - np.angle(self.psi[:self.n] + 1e-12)), 0.0, 1.0)"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [
+    0.0,
+    1.0
+   ],
+   "funzione": "step",
+   "natura": "TETTO-FISICO",
+   "riga": 5234,
+   "sorgente": "coerenza = np.clip(coerenza, 0.0, 1.0)       # solo il nucleo costruttivo alimenta la repulsione"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "step",
+   "natura": "TETTO-FISICO",
+   "riga": 5237,
+   "sorgente": "deg = np.maximum(np.bincount(i, minlength=self.n)[:self.n] +"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "step",
+   "natura": "epsilon",
+   "riga": 5389,
+   "sorgente": "uno = np.maximum(wI @ np.ones(self.n), 1e-9)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.001
+   ],
+   "funzione": "step",
+   "natura": "TETTO-FISICO",
+   "riga": 5601,
+   "sorgente": "tau_bg_loc = np.maximum(1.0 / np.maximum(r_arco, 1e-3), 1e-3)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [],
+   "funzione": "step",
+   "natura": "selezione",
+   "riga": 5860,
+   "sorgente": "tau_p_loc = np.maximum(t_luce, t_visco)                           # IL PIU' LENTO DEI DUE"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [
+    -2.0,
+    2.0
+   ],
+   "funzione": "step",
+   "natura": "TETTO-FISICO",
+   "riga": 5370,
+   "sorgente": "self.xi_termo = float(np.clip(self.xi_termo, -2.0, 2.0))   # guardia: attrito fisico limitato"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.0
+   ],
+   "funzione": "step",
+   "natura": "dominio",
+   "riga": 5395,
+   "sorgente": "disp_shear = np.sqrt(np.maximum(wI @ (pv ** 2) / uno - media_pv ** 2, 0.0))"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "step",
+   "natura": "anti-zero",
+   "riga": 5400,
+   "sorgente": "prof_rel = pozzo / np.maximum(media_p, 1e-9)  # profondita' relativa locale"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.0
+   ],
+   "funzione": "step",
+   "natura": "dominio",
+   "riga": 5405,
+   "sorgente": "scala_shear_locale = np.sqrt(np.maximum(wI @ (disp_shear ** 2) / uno, 0.0))"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "step",
+   "natura": "anti-zero",
+   "riga": 5484,
+   "sorgente": "twn = twn / np.maximum(self._deg, 1)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.0
+   ],
+   "funzione": "step",
+   "natura": "parte-positiva",
+   "riga": 5654,
+   "sorgente": "eccesso = np.maximum(rho / med_rho - 1.0, 0.0)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "step",
+   "natura": "anti-zero",
+   "riga": 5847,
+   "sorgente": "t_luce = d_arco / np.maximum(cs_taup, 1e-9)                       # tempo-luce dell'arco"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "step",
+   "natura": "anti-zero",
+   "riga": 5407,
+   "sorgente": "np.maximum(scala_shear_locale, 1e-9))"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "step",
+   "natura": "anti-zero",
+   "riga": 5462,
+   "sorgente": "_twn = _twn / np.maximum(self._deg[:self.n] if len(self._deg) >= self.n else 1.0, 1.0)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.001
+   ],
+   "funzione": "step",
+   "natura": "anti-zero",
+   "riga": 5601,
+   "sorgente": "tau_bg_loc = np.maximum(1.0 / np.maximum(r_arco, 1e-3), 1e-3)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-09
+   ],
+   "funzione": "step",
+   "natura": "anti-zero",
+   "riga": 5642,
+   "sorgente": "anom = (rho - _peq_src) / np.maximum(_peq_src, 1e-9)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "step",
+   "natura": "anti-zero",
+   "riga": 5656,
+   "sorgente": "beta = 2.0 * zeta_loc * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(self.d, 1e-6)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "step",
+   "natura": "anti-zero",
+   "riga": 5658,
+   "sorgente": "beta = 2.0 * ZETA_M * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(self.d, 1e-6)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1.0
+   ],
+   "funzione": "step",
+   "natura": "anti-zero",
+   "riga": 5887,
+   "sorgente": "_med0 = _sm0 / np.maximum(self._deg, 1)"
+  },
+  {
+   "chiamata": "clip",
+   "costanti": [],
+   "funzione": "step",
+   "natura": "TETTO-FISICO",
+   "riga": 5891,
+   "sorgente": "self.d0 += self._sd0(np.clip(dt_e * cs_taup * d_arco * _lap_d0, -_cfl, _cfl))"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.05
+   ],
+   "funzione": "step",
+   "natura": "TETTO-FISICO",
+   "riga": 5737,
+   "sorgente": "d_new = np.maximum(self.d + dts * vd_half, 0.05)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    0.05
+   ],
+   "funzione": "step",
+   "natura": "TETTO-FISICO",
+   "riga": 5782,
+   "sorgente": "self.d = np.maximum(self.d + dts * self.vd, 0.05)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "step",
+   "natura": "anti-zero",
+   "riga": 5646,
+   "sorgente": "else ALPHA_NAT * (cs2_src / np.maximum(self.d, 1e-6)) * anom)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "step",
+   "natura": "anti-zero",
+   "riga": 5746,
+   "sorgente": "beta_new = 2.0 * zeta_loc * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(d_new, 1e-6)"
+  },
+  {
+   "chiamata": "maximum",
+   "costanti": [
+    1e-06
+   ],
+   "funzione": "step",
+   "natura": "anti-zero",
+   "riga": 5748,
+   "sorgente": "beta_new = 2.0 * ZETA_M * (cs_arco if CS_DINAMICO else CS_M) / np.maximum(d_new, 1e-6)"
+  }
+ ],
+ "concorrenti": {
+  "_nb": {
+   "memoria_hebbiana_moto": [
+    6723
+   ],
+   "mitosi": [
+    1991
+   ],
+   "step": [
+    3157,
+    3161,
+    3163,
+    3227,
+    3228,
+    3807
+   ]
+  },
+  "_nb_prec": {
+   "mitosi": [
+    1993
+   ],
+   "step": [
+    3808
+   ]
+  },
+  "_psi_prec": {
+   "mitosi": [
+    2013
+   ],
+   "step": [
+    5123,
+    3040
+   ]
+  },
+  "_psi_spinor": {
+   "mitosi": [
+    2006
+   ],
+   "step": [
+    3810,
+    1957,
+    1960,
+    1962
+   ]
+  },
+  "_spinor_lift": {
+   "mitosi": [
+    2011
+   ],
+   "step": [
+    3811,
+    1865
+   ]
+  },
+  "d": {
+   "mitosi": [
+    6305,
+    6416
+   ],
+   "step": [
+    5767,
+    5778,
+    5780,
+    5782,
+    5789
+   ]
+  },
+  "d0": {
+   "memoria_hebbiana_moto": [
+    6661,
+    6664,
+    6808,
+    6814,
+    6817,
+    6837,
+    6840,
+    6988,
+    6990,
+    6994,
+    7042,
+    4431
+   ],
+   "mitosi": [
+    6154,
+    6157,
+    6308,
+    6419
+   ],
+   "step": [
+    5880,
+    5891,
+    5895,
+    5899
+   ]
+  },
+  "eta": {
+   "mitosi": [
+    6229,
+    6385
+   ],
+   "step": [
+    5186
+   ]
+  },
+  "mem_mot": {
+   "memoria_hebbiana_moto": [
+    6615,
+    6635
+   ],
+   "mitosi": [
+    6244,
+    6399
+   ]
+  },
+  "omega_s": {
+   "mitosi": [
+    2001
+   ],
+   "step": [
+    3152,
+    3154,
+    3806
+   ]
+  },
+  "peq": {
+   "mitosi": [
+    6311,
+    6422
+   ],
+   "step": [
+    5552,
+    5604,
+    5606,
+    5610,
+    5612
+   ]
+  },
+  "perc_chi": {
+   "mitosi": [
+    6232,
+    6388
+   ],
+   "step": [
+    5491,
+    5515
+   ]
+  },
+  "perc_geom": {
+   "mitosi": [
+    6235,
+    6392
+   ],
+   "step": [
+    5488
+   ]
+  },
+  "phi": {
+   "memoria_hebbiana_moto": [
+    7040
+   ],
+   "mitosi": [
+    6226,
+    6265,
+    6266,
+    6269,
+    6381
+   ],
+   "step": [
+    5442
+   ]
+  },
+  "phi_s": {
+   "mitosi": [
+    6227,
+    6383
+   ],
+   "step": [
+    3815
+   ]
+  },
+  "phivel": {
+   "mitosi": [
+    6228,
+    6384
+   ],
+   "scuoti_vuoto": [
+    838
+   ],
+   "step": [
+    5441
+   ]
+  },
+  "psi": {
+   "memoria_hebbiana_moto": [
+    4000,
+    4007
+   ],
+   "rilassa_disegno": [
+    4000,
+    4007
+   ],
+   "step": [
+    5193,
+    5525,
+    5528,
+    4000,
+    4007,
+    4000,
+    4007,
+    4000,
+    4007,
+    4000,
+    4007
+   ]
+  },
+  "psi_spin": {
+   "memoria_hebbiana_moto": [
+    4021
+   ],
+   "rilassa_disegno": [
+    4021
+   ],
+   "step": [
+    4021,
+    4021,
+    4021,
+    4021
+   ]
+  },
+  "tw": {
+   "mitosi": [
+    6317,
+    6430
+   ],
+   "step": [
+    5468,
+    5472
+   ]
+  },
+  "twp": {
+   "mitosi": [
+    6318,
+    6431
+   ],
+   "step": [
+    5469,
+    5473
+   ]
+  },
+  "vd": {
+   "mitosi": [
+    6310,
+    6421
+   ],
+   "step": [
+    5766,
+    5776
+   ]
+  }
+ },
+ "costo": {
+  "byte": 26182880,
+  "m": 469702,
+  "n": 13372,
+  "non_coperti": [],
+  "stato": "stato_seme14_passo000120.npz"
+ },
+ "letture_dopo": [
+  {
+   "attributo": "phivel",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "step",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "scuoti_vuoto"
+   ]
+  },
+  {
+   "attributo": "_g_traccia_d0",
+   "destinazione": "CONTATORE VIVO",
+   "legge": "mitosi",
+   "perche": "l'accumulo E' il suo scopo (A8)",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_nb",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_nb_prec",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_psi_prec",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_psi_spinor",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_spinor_lift",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "d",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "d0",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "eta",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "omega_s",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "peq",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "perc_chi",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "perc_geom",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "phi",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "phi_s",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "phivel",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "scuoti_vuoto",
+    "step"
+   ]
+  },
+  {
+   "attributo": "psi",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "tw",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "twp",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "vd",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "mitosi",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_S",
+   "destinazione": "CACHE RICOSTRUITA",
+   "legge": "rilassa_disegno",
+   "perche": "derivata: si ricostruisce, non si fotografa",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "_deg",
+   "destinazione": "CACHE RICOSTRUITA",
+   "legge": "rilassa_disegno",
+   "perche": "derivata: si ricostruisce, non si fotografa",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "_g_kernel_alpha_tot",
+   "destinazione": "CONTATORE VIVO",
+   "legge": "rilassa_disegno",
+   "perche": "l'accumulo E' il suo scopo (A8)",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_g_rampa_tot",
+   "destinazione": "CONTATORE VIVO",
+   "legge": "rilassa_disegno",
+   "perche": "l'accumulo E' il suo scopo (A8)",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_g_tempo_luce_tot",
+   "destinazione": "CONTATORE VIVO",
+   "legge": "rilassa_disegno",
+   "perche": "l'accumulo E' il suo scopo (A8)",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "_perm",
+   "destinazione": "CACHE RICOSTRUITA",
+   "legge": "rilassa_disegno",
+   "perche": "derivata: si ricostruisce, non si fotografa",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "d",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "rilassa_disegno",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "eta",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "rilassa_disegno",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "i",
+   "destinazione": "STRUTTURA VIVA",
+   "legge": "rilassa_disegno",
+   "perche": "una nascita non si nasconde (9-ter)",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "j",
+   "destinazione": "STRUTTURA VIVA",
+   "legge": "rilassa_disegno",
+   "perche": "una nascita non si nasconde (9-ter)",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "phi",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "rilassa_disegno",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "pos",
+   "destinazione": "FOTOGRAFIA (ma resta A3-DISEGNO)",
+   "legge": "rilassa_disegno",
+   "perche": "il disegno non deve entrare: cura (c)",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "psi",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "rilassa_disegno",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "psi_spin",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "rilassa_disegno",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step"
+   ]
+  },
+  {
+   "attributo": "tw",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "rilassa_disegno",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "_S",
+   "destinazione": "CACHE RICOSTRUITA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "derivata: si ricostruisce, non si fotografa",
+   "scritto_da": [
+    "step",
+    "mitosi",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "_deg",
+   "destinazione": "CACHE RICOSTRUITA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "derivata: si ricostruisce, non si fotografa",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "_g_kernel_alpha_tot",
+   "destinazione": "CONTATORE VIVO",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "l'accumulo E' il suo scopo (A8)",
+   "scritto_da": [
+    "step",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "_g_rampa_tot",
+   "destinazione": "CONTATORE VIVO",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "l'accumulo E' il suo scopo (A8)",
+   "scritto_da": [
+    "step",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "_g_tempo_luce_tot",
+   "destinazione": "CONTATORE VIVO",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "l'accumulo E' il suo scopo (A8)",
+   "scritto_da": [
+    "step",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "_g_traccia_d0",
+   "destinazione": "CONTATORE VIVO",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "l'accumulo E' il suo scopo (A8)",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "_nb",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "_perm",
+   "destinazione": "CACHE RICOSTRUITA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "derivata: si ricostruisce, non si fotografa",
+   "scritto_da": [
+    "step",
+    "mitosi",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "d",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "d0",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "eta",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "i",
+   "destinazione": "STRUTTURA VIVA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "una nascita non si nasconde (9-ter)",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "j",
+   "destinazione": "STRUTTURA VIVA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "una nascita non si nasconde (9-ter)",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "mem_mot",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "phi",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "phi_s",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  },
+  {
+   "attributo": "pos",
+   "destinazione": "FOTOGRAFIA (ma resta A3-DISEGNO)",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "il disegno non deve entrare: cura (c)",
+   "scritto_da": [
+    "mitosi",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "psi",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "psi_spin",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step",
+    "rilassa_disegno"
+   ]
+  },
+  {
+   "attributo": "tw",
+   "destinazione": "FOTOGRAFIA",
+   "legge": "memoria_hebbiana_moto",
+   "perche": "classe stato: la fotografia la contiene",
+   "scritto_da": [
+    "step",
+    "mitosi"
+   ]
+  }
+ ],
+ "natura_nodo_arco": {
+  "_nb": "per-NODO",
+  "_nb_prec": "per-NODO",
+  "_psi_prec": "per-NODO",
+  "_psi_spinor": "per-NODO",
+  "_spinor_lift": "per-NODO",
+  "d": "per-ARCO",
+  "d0": "per-ARCO",
+  "eta": "per-NODO",
+  "mem_mot": "per-NODO",
+  "omega_s": "per-NODO",
+  "peq": "per-ARCO",
+  "perc_chi": "per-NODO",
+  "perc_geom": "per-NODO",
+  "phi": "per-NODO",
+  "phi_s": "per-NODO",
+  "phivel": "per-NODO",
+  "psi": "non-esteso-da-mitosi",
+  "psi_spin": "non-esteso-da-mitosi",
+  "tw": "per-ARCO",
+  "twp": "per-ARCO",
+  "vd": "per-ARCO"
+ },
+ "ordine": [
+  "scuoti_vuoto",
+  "step",
+  "mitosi",
+  "rilassa_disegno",
+  "memoria_hebbiana_moto"
+ ],
+ "rng": {
+  "memoria_hebbiana_moto": 0,
+  "mitosi": 4,
+  "rilassa_disegno": 0,
+  "scuoti_vuoto": 1,
+  "step": 7
+ }
+}

@@ -115,14 +115,16 @@ else:
     B.append("> `CENS-B3 B4` **`NO`**, e la cura e' **dichiarare che il ramo OFF non esiste**;")
     B.append("> `CENS-B6` **`NO`** *(progetto)*.")
     B.append(">")
-    B.append("> ### %s **E UNA CORREZIONE DEL GUARDIANO SU UN MIO `SI`: `CENS-B12`" % ATTENZIONE)
-    B.append("> ### (`KERNEL_ALPHA`) E' `NO`.**")
+    B.append("> ### %s **E UNA CORREZIONE DEL GUARDIANO SU `CENS-B12` (`KERNEL_ALPHA`): e' `NO`.**"
+             % ATTENZIONE)
     B.append("> Non blocca il **run base**: **blocca la PROVA 3** *(universalita')*, e la misura")
-    B.append("> del principio di equivalenza va fatta **prima della PROVA 3**.")
-    B.append("> **Il mio `SI` avrebbe bloccato il run base con una misura SOSPESA** dalla")
-    B.append("> decisione (1) %s cioe' esattamente la conseguenza che avevo segnalato come aperta,"
-             % chr(0x2014))
-    B.append("> **applicata alla voce sbagliata**.")
+    B.append("> del principio di equivalenza va fatta **prima della PROVA 3**. Un `SI` avrebbe")
+    B.append("> bloccato il run base con una misura **SOSPESA** dalla decisione (1).")
+    B.append(">")
+    B.append("> **ATTRIBUZIONE, corretta da Luca:** il `SI` precedente **non era un mio errore**.")
+    B.append("> **Era un consiglio del guardiano**: la regola come mi e' stata data nominava")
+    B.append("> `KERNEL_ALPHA` **fra i `SI`**, e io l'ho applicata. La correzione a `NO` viene dal")
+    B.append("> guardiano stesso.")
     B.append("")
 
 io.open(DOC, "a", encoding="utf-8", newline=NL).write(NL.join(B) + NL)

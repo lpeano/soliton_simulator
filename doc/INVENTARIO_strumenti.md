@@ -1016,3 +1016,15 @@ col blob del simulatore **`e203f9a8`** *(byte grezzi)*, semi `11,12,13,14`, chec
 **⚠ IL LIMITE E' DICHIARATO NEL DOCSTRING:** analisi **statica e per nome** — alias, `getattr` e
 rami mai eseguiti non si vedono. **`56` e' un LIMITE INFERIORE**, e serve a **progettare** la cura,
 non a certificarla: chi certifica e' `H-ETC-2`.
+
+## `ETC-PASSO` — la cura (a), **FASE 0-bis** *(2026-09-27)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_etc_progetto.py` | `92fb2285` | `python csv/_test_fork/_etc_progetto.py` | **le SCRITTURE CONCORRENTI** e quali **non sono variazioni**; l'**inventario dei clip** (`CLIP-INVENTARIO`); **per nodo o per arco**; i **flussi casuali**; le **56 letture** dopo la cura; il **costo** della fotografia | **21/21 attributi concorrenti** · **13 scritture non componibili** · **117 guardie**, di cui **27 tetti fisici** · **24.97 MB** per fotografia |
+
+**Referto:** `csv/_test_fork/_etc_progetto.json` *(blob byte `0c362f32`, committato)*.
+**Il `.json` precedente è stato CANCELLATO e rigenerato**, su istruzione di Luca: *«il json vecchio
+si rigenera, non si riusa»* — non veniva dal sorgente accanto.
+**⚠ IL LIMITE, nel docstring:** analisi **statica e per nome**; per i tetti fisici il conto **27**
+è un **limite SUPERIORE** *(tre pavimenti di grado sono guardie la cui divisione sta altrove)*.
