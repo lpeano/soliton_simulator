@@ -4559,3 +4559,53 @@ simulatore**, così un confronto può **dire** quali due versioni ha confrontato
 > ### 🛑 **STOP.** Prossimo: **(b)2 — `SYNC_UPDATE`** in archivio e `--sync` no-op accettato.
 > Ricordo il raggio misurato nella FASE 0: vive in `step` + `_passo_spinoriale`, **7 + 6 usi**, e
 > **zero** nelle altre quattro leggi. Col driver è **spento**, quindi **niente deve cambiare**.
+
+---
+
+# ⚠ **LA PRECEDENZA ERA ROVESCIATA. Corretta, e il sigillo ha TRE bracci** *(2026-09-27)*
+
+**Hai ragione, ed è un errore che il sigillo di `(b)1` non poteva vedere.**
+### **Blob: `59c23942` *(rotto)* → `f845d30d` *(corretto)*.**
+
+Togliendo il ramo del pavimento avevo collassato
+`if SCALA_MIN_PASSO: nudo / elif SCALA_MIN: freno / else: 0.05` in
+`if SCALA_MIN: freno / else: nudo`. **Prima `SCALA_MIN_PASSO` era la prima condizione e vinceva**;
+dopo, con entrambi accesi, avrebbe vinto `SCALA_MIN` e **si sarebbe frenato due volte** — per
+scrittura **e** a fine passo — mentre deve vincere il freno **per passo** (`C3`).
+
+**Ora è esplicita in entrambi i sottocicli:** `if SCALA_MIN and not SCALA_MIN_PASSO`.
+**E `_sd0` era già intatta** — verificato dal codice: controlla `SCALA_MIN_PASSO` **per primo e
+ritorna**. Quella catena non l'avevo toccata.
+
+## Il sigillo, tre bracci
+
+| | confronto | atteso | esito |
+|---|---|---|---|
+| **A** | tag vs corretto, **col driver** | IDENTICO | ### **PASSA, 0 diverse** |
+| **B** | tag vs corretto, **con `--scala-min` E `--scala-min-passo`** | IDENTICO | ### **PASSA, 0 diverse** |
+| **C** | ### tag vs **il blob ROTTO**, entrambi i flag | ### **DIVERSO** | ### **fallisce come deve: 18 grandezze** |
+
+**Il braccio C:** `d` e `d0` diversi su **tutti i 70199 archi**, e con loro `tw` `twp` `vd` `peq`
+`phi` `psi` `_nb` … Restano identiche solo `eta`, `perc_chi`, `perc_geom`, `i`, `j` — **cioè
+esattamente ciò che il freno non tocca**.
+
+> ### 📌 **Senza il braccio C questo sigillo non proverebbe niente.** Due «identici» dicono solo
+> che qualcosa non è cambiato; **è il caso che FALLISCE a dimostrare che il sigillo guarda proprio
+> la precedenza.** Stessa lezione di `HASHSEED-RIPROD`, applicata **prima** di consegnare invece
+> che dopo.
+
+## La lezione, e vale oltre questo caso
+
+> ### **Un `elif` che diventa `else` non è una semplificazione: è un cambio di ordine fra due
+> condizioni.**
+> **E il sigillo byte-identico di `(b)1` non poteva vederlo**, perché col driver `SCALA_MIN` è
+> spento: ### **un sigillo su UNA configurazione non certifica una PRECEDENZA fra due flag.**
+> **Me ne porto dietro il criterio per (b)2 e (b)3:** `SYNC_UPDATE` col driver è **spento**, quindi
+> il suo sigillo byte-identico avrà lo **stesso punto cieco** — e servirà il braccio **con `--sync`
+> acceso**, non solo quello col driver.
+
+**⚠ Una nota sul braccio A:** `PRIMA.npz` non registra l'`ARGV` *(è nato prima del campo)*, quindi
+il confronto stampa *«configurazioni DIVERSE»*. **È un campo assente, non un disallineamento**: nel
+braccio B, dove entrambi lo portano, dichiara **«configurazioni UGUALI»**.
+
+> ### 🛑 **STOP.** Prossimo: **(b)2**, e con il braccio in più che questa correzione ha insegnato.

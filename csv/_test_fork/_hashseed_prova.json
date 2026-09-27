@@ -1,88 +1,107 @@
 {
- "a": "PRIMA.npz",
- "b": "DOPO2.npz",
- "blob_sim_a": "(non registrato)",
+ "a": "B_tag.npz",
+ "b": "B_rotto.npz",
+ "blob_sim_a": "e203f9a8",
  "blob_sim_b": "59c23942",
- "diverse": [],
+ "diverse": [
+  "d",
+  "d0",
+  "phi",
+  "phi_s",
+  "phivel",
+  "psi",
+  "psi_spin",
+  "_psi_spinor",
+  "_psi_prec",
+  "_spinor_lift",
+  "omega_s",
+  "_nb",
+  "_nb_prec",
+  "tw",
+  "twp",
+  "vd",
+  "peq",
+  "mem_mot"
+ ],
  "hashseed_a": "None",
  "hashseed_b": "None",
  "righe": [
   {
-   "diversi": 0,
+   "diversi": 70199,
    "grandezza": "d",
-   "identico": true,
+   "identico": false,
    "n": 70199
   },
   {
-   "diversi": 0,
+   "diversi": 70199,
    "grandezza": "d0",
-   "identico": true,
+   "identico": false,
    "n": 70199
   },
   {
-   "diversi": 0,
+   "diversi": 2107,
    "grandezza": "phi",
-   "identico": true,
+   "identico": false,
    "n": 2107
   },
   {
-   "diversi": 0,
+   "diversi": 2107,
    "grandezza": "phi_s",
-   "identico": true,
+   "identico": false,
    "n": 2107
   },
   {
-   "diversi": 0,
+   "diversi": 2107,
    "grandezza": "phivel",
-   "identico": true,
+   "identico": false,
    "n": 2107
   },
   {
-   "diversi": 0,
+   "diversi": 2107,
    "grandezza": "psi",
-   "identico": true,
+   "identico": false,
    "n": 2107
   },
   {
-   "diversi": 0,
+   "diversi": 4214,
    "grandezza": "psi_spin",
-   "identico": true,
+   "identico": false,
    "n": 4214
   },
   {
-   "diversi": 0,
+   "diversi": 4214,
    "grandezza": "_psi_spinor",
-   "identico": true,
+   "identico": false,
    "n": 4214
   },
   {
-   "diversi": 0,
+   "diversi": 2107,
    "grandezza": "_psi_prec",
-   "identico": true,
+   "identico": false,
    "n": 2107
   },
   {
-   "diversi": 0,
+   "diversi": 4214,
    "grandezza": "_spinor_lift",
-   "identico": true,
+   "identico": false,
    "n": 4214
   },
   {
-   "diversi": 0,
+   "diversi": 6321,
    "grandezza": "omega_s",
-   "identico": true,
+   "identico": false,
    "n": 6321
   },
   {
-   "diversi": 0,
+   "diversi": 6321,
    "grandezza": "_nb",
-   "identico": true,
+   "identico": false,
    "n": 6321
   },
   {
-   "diversi": 0,
+   "diversi": 6321,
    "grandezza": "_nb_prec",
-   "identico": true,
+   "identico": false,
    "n": 6321
   },
   {
@@ -92,33 +111,33 @@
    "n": 2107
   },
   {
-   "diversi": 0,
+   "diversi": 70199,
    "grandezza": "tw",
-   "identico": true,
+   "identico": false,
    "n": 70199
   },
   {
-   "diversi": 0,
+   "diversi": 70198,
    "grandezza": "twp",
-   "identico": true,
+   "identico": false,
    "n": 70199
   },
   {
-   "diversi": 0,
+   "diversi": 70199,
    "grandezza": "vd",
-   "identico": true,
+   "identico": false,
    "n": 70199
   },
   {
-   "diversi": 0,
+   "diversi": 70199,
    "grandezza": "peq",
-   "identico": true,
+   "identico": false,
    "n": 70199
   },
   {
-   "diversi": 0,
+   "diversi": 6321,
    "grandezza": "mem_mot",
-   "identico": true,
+   "identico": false,
    "n": 6321
   },
   {

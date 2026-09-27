@@ -158,3 +158,69 @@ due versioni ha confrontato invece di asserirlo.
 ## LE VOCI D'INDICE CHE QUESTO DOCUMENTO TOCCA
 
 `ARCH-PAVIMENTI` · `CLIP-INVENTARIO` · `ETC-PASSO` · `D31` · `A8` · `A11` · `A13`
+
+---
+
+# 7. ⚠ **LA PRECEDENZA ERA ROVESCIATA, e il sigillo di (b)1 non poteva vederlo**
+
+> **Correzione di Luca su `7840039`, ed è giusta.**
+> ### **Blob: `59c23942` *(rotto)* → `f845d30d` *(corretto)*.**
+
+## 7.1 — L'errore
+
+Togliendo il ramo del pavimento avevo collassato
+
+```
+if SCALA_MIN_PASSO:  nudo          elif SCALA_MIN:  freno          else:  0.05
+```
+
+in `if SCALA_MIN: freno / else: nudo`. ### **Questo ROVESCIA la precedenza.**
+Prima `SCALA_MIN_PASSO` era la **prima** condizione della catena e **vinceva**; dopo, con
+**entrambi** i flag accesi, avrebbe vinto `SCALA_MIN` e **si sarebbe frenato DUE volte** — per
+scrittura **e** a fine passo — **mentre deve vincere il freno PER PASSO** (`C3`), che è l'intero
+punto della cura: frenare scrittura per scrittura fa dipendere il risultato **dall'ordine**.
+
+**La forma, ora esplicita in entrambi i sottocicli:**
+### `if SCALA_MIN and not SCALA_MIN_PASSO: freno` · `else: nudo`
+
+**E la precedenza sulle scritture di `d0` era GIÀ intatta** — verificato dal codice, non assunto:
+`_sd0` controlla `SCALA_MIN_PASSO` **per primo e ritorna**, poi `if not SCALA_MIN: return dx`.
+**Quella catena non l'avevo toccata.**
+
+## 7.2 — Il sigillo, **tre bracci**
+
+| | confronto | atteso | esito |
+|---|---|---|---|
+| **A** | `PRIMA` *(tag `e203f9a8`)* vs **corretto** `f845d30d`, **col driver** | IDENTICO | ### **PASSA — 0 diverse** |
+| **B** | tag `e203f9a8` vs corretto `f845d30d`, **con `--scala-min` E `--scala-min-passo`** | IDENTICO | ### **PASSA — 0 diverse** |
+| **C** | ### **CONTROLLO CHE DEVE FALLIRE** | DIVERSO | ### **FALLISCE come deve — 18 grandezze diverse** |
+
+**Il braccio C** confronta il tag col **blob ROTTO** `59c23942`, con entrambi i flag: **18
+grandezze diverse**, `d` e `d0` su **tutti i 70199 archi**, `tw` `twp` `vd` `peq` idem.
+*(Restano identiche solo `eta`, `perc_chi`, `perc_geom`, `i`, `j` — cioè ciò che il freno non
+tocca.)*
+
+> ### 📌 **Senza il braccio C questo sigillo non proverebbe niente.** Due «identici» dicono solo
+> che qualcosa non è cambiato; **è il caso che FALLISCE a dimostrare che il sigillo guarda proprio
+> la precedenza.** È `P1-sexies`, ed è la stessa lezione di `HASHSEED-RIPROD`: **una prova
+> costruita in modo che non possa smentirti non è una prova.**
+
+**Referto:** `csv/_seal_fork/_sig_precedenza_scalamin.json` *(i tre bracci, col dettaglio)*.
+**Condizioni:** scena `(ii)(a)`, seme `11`, `n = 2107`, `m = 70199`, 3 passi pieni, ordine
+canonico, nessuna iniezione di `rng`, nessun presidio. **Il confronto dichiara l'ARGV INTERO di
+entrambi gli stati** *(`P5`)*, e per il braccio B stampa *«configurazioni UGUALI»*.
+
+## 7.3 — ### La lezione, e vale oltre questo caso
+
+> ### **Un `elif` che diventa `else` non è una semplificazione: è un cambio di ordine fra due
+> condizioni.**
+>
+> **E il sigillo byte-identico di `(b)1` non poteva vederlo**, perché col driver `SCALA_MIN` è
+> **spento**: ### **un sigillo su UNA configurazione non certifica una PRECEDENZA fra due flag.**
+> Per quella serve **la configurazione in cui entrambe sono accese**, ed è esattamente il braccio
+> che mancava.
+
+**⚠ E una cosa sul braccio A:** `PRIMA.npz` non registra l'`ARGV` *(è nato prima del campo)*,
+quindi il confronto stampa *«configurazioni DIVERSE»*. **Non è un disallineamento di
+configurazione: è un campo assente**, e il braccio B — dove entrambi i file lo portano — dichiara
+*«configurazioni UGUALI»*.

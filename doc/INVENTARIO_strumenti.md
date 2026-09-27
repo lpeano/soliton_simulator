@@ -1093,3 +1093,32 @@ python csv/_test_fork/_hashseed_prova.py --confronta PRIMA.npz DOPO.npz
 > era una verifica una-volta-sola.)*
 > **`csv/_seal_fork/_sigillo_Z1c.py`** nomina `_pav_d0` nel docstring fra le funzioni che **non**
 > toccava: **va riletto prima di ri-girarlo.**
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_hashseed_prova.py` | `2df2dbc3` | `… --out=X.npz --seme=11 --passi=3 [--extra=--scala-min]` · `… --confronta A.npz B.npz` | ora accetta **`--extra`** *(flag aggiunti a quelli del driver)* e **registra l'ARGV INTERO** nel dump, così un confronto **dichiara** la configurazione invece di assumerla *(`P5`)* | sigillo della **precedenza**: **3 bracci su 3** |
+
+**Referto:** `csv/_seal_fork/_sig_precedenza_scalamin.json` *(blob byte `cf99c93d`)* — i tre bracci
+col dettaglio. **I comandi dei tre bracci** *(gli `.npz` sono locali: il dato è il comando)*:
+
+```
+# A - col driver: tag contro corretto
+git checkout pre-archivio-pavimenti -- soliton_simulator.py
+python csv/_test_fork/_hashseed_prova.py --out=PRIMA.npz --seme=11 --passi=3
+git checkout HEAD -- soliton_simulator.py
+python csv/_test_fork/_hashseed_prova.py --out=A_dopo.npz --seme=11 --passi=3
+python csv/_test_fork/_hashseed_prova.py --confronta PRIMA.npz A_dopo.npz
+
+# B - con --scala-min E --scala-min-passo insieme
+git checkout pre-archivio-pavimenti -- soliton_simulator.py
+python csv/_test_fork/_hashseed_prova.py --out=B_tag.npz --seme=11 --passi=3 --extra=--scala-min
+git checkout HEAD -- soliton_simulator.py
+python csv/_test_fork/_hashseed_prova.py --out=B_dopo.npz --seme=11 --passi=3 --extra=--scala-min
+python csv/_test_fork/_hashseed_prova.py --confronta B_tag.npz B_dopo.npz
+
+# C - IL CONTROLLO CHE DEVE FALLIRE: il blob ROTTO
+git checkout 7840039 -- soliton_simulator.py
+python csv/_test_fork/_hashseed_prova.py --out=B_rotto.npz --seme=11 --passi=3 --extra=--scala-min
+git checkout HEAD -- soliton_simulator.py
+python csv/_test_fork/_hashseed_prova.py --confronta B_tag.npz B_rotto.npz     # DEVE dare DIVERSE
+```
