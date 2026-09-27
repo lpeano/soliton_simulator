@@ -1403,3 +1403,5 @@ ramo B (chi_basc OFF):
   python csv/_test_fork/_pilota_prova1.py --salva-stati --ogni 2   (4 semi, 120 passi)
   ```
 - **note** IL RUN UNICO che serve a TRE cose: (1) gli STATI del grafo ai checkpoint per la scomposizione del CAMMINO (TRATTI) e per MASSA-ID offline; (2) i FOTOGRAMMI ogni 2 passi sul seme 11 per il video (VIDEO-SCENA); (3) la ripetizione della misura del pilota. Tutti i .npz restano LOCALI (STATI-LOCALI, gia' in .gitignore). Strumenti committati in 0e7810b PRIMA del lancio (par.5).
+
+**chiuso 2026-09-27 11:29:11 — FINITO** 4 semi su 4 in fondo, 120 passi. Prodotti: 16 stati del grafo ai checkpoint (i, j, d, phi, pos, n), 61 fotogrammi pos/phi/phi_g/dpozzo/ii/jj sul seme 11, 4 file di coorti del passo 0 -- 81 .npz in tutto, TUTTI LOCALI (STATI-LOCALI, .gitignore). Piu' i 4 misura.json, committabili. kappa scelto 3. Il run serve a TRE cose: la scomposizione del CAMMINO (TRATTI), MASSA-ID-FISSO offline, e il video (VIDEO-SCENA). Strumenti committati in 0e7810b e c8b6dd9 PRIMA del lancio.
