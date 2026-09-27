@@ -1028,3 +1028,12 @@ non a certificarla: chi certifica e' `H-ETC-2`.
 si rigenera, non si riusa»* — non veniva dal sorgente accanto.
 **⚠ IL LIMITE, nel docstring:** analisi **statica e per nome**; per i tetti fisici il conto **27**
 è un **limite SUPERIORE** *(tre pavimenti di grado sono guardie la cui divisione sta altrove)*.
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_etc_pavimenti.py` | `04a6ec32` | `python csv/_test_fork/_etc_pavimenti.py --passi=3` | **se gli 8 pavimenti del gruppo 1 GIRANO col driver**: copertura di riga (`sys.settrace`) sui siti esatti, più i contatori già cablati, con l'**argv costruito dal driver** e non ricostruito | ### **TUTTI E 8 MORTI**: `:4456` `:5737` `:5782` **0 esecuzioni** su 3 passi; `_g_sm_pav_saltati = 15` = le 15 chiamate tracciate. E il freno di scala minima è **già 1 volta per passo pieno** (`3/3/3`, `nsub = 4`) |
+
+**Referto:** `csv/_test_fork/_etc_pavimenti.json` *(blob byte `7c464c26`, committato)*.
+**Condizioni:** scena `(ii)(a)`, seme `11`, `n = 2107`, `m = 70199`, **3 passi**, simulatore
+`e203f9a8`. **⚠ LIMITE:** `_g_smp_chirurgie = 0` — **la chirurgia sullo snapshot non è stata
+esercitata**, perché in 3 passi nessuna mitosi ha diviso un arco.

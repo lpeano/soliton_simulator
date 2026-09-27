@@ -4220,3 +4220,57 @@ sarebbe peggio di nessuna.
 
 > ### 🛑 **STOP. Servono le tue decisioni sulle 13 del par.1.3 — le 8 di pavimento per prime.**
 > Poi la FASE 1, e `H-ETC-2` **per primo e da solo**.
+
+---
+
+# ✅ **GLI 8 PAVIMENTI SONO MORTI COL DRIVER: il bivio è sciolto senza deciderlo** *(2026-09-27)*
+
+*(`doc/TASK_HISTORY/2026-09-27_etc-pavimenti.md`. Blob del simulatore `e203f9a8` **prima e dopo**.)*
+
+**Avevi ragione a chiedere la verifica prima della decisione.** La FASE 0-bis li aveva elencati da
+un'analisi **statica**; a runtime, con l'argv vero del driver, **nessuno dei tre siti di pavimento
+esegue**.
+
+| riga | esecuzioni su 3 passi |
+|---|---|
+| `:4456` **il pavimento su `d0`** *(`np.maximum(v, _floor_d0())`)* | ### **0** |
+| `:5737` **il pavimento su `d`**, ramo Verlet | ### **0** |
+| `:5782` **il pavimento su `d`**, ramo Eulero | ### **0** |
+| `:4453` il ramo **inerte** di `_pav_d0` | **15** |
+| `:5733` Verlet **senza pavimento** | **12** |
+
+**L'integratore vivo è `VERLET`** *(il driver passa `--verlet`)*, quindi `:5782` è **doppiamente
+morto**: è il ramo `else` di `SCALA_MIN_PASSO` **e** sta nell'integratore che non gira — infatti
+anche `:5778`, il ramo *vivo* di Eulero, ha **0** esecuzioni.
+
+> ### **E la prova è più forte della copertura.** Due dei sette siti che chiamano `_pav_d0`
+> (`:6157`, `:6840`) in 3 passi non sono stati raggiunti. **Non importa:** tutte e sette le
+> chiamate passano per **la stessa funzione**, e **l'unica riga che applica il pavimento è
+> `:4456`**, che ha eseguito **zero** volte. Anche i due siti non raggiunti **non potrebbero**
+> applicarlo. **E il contatore lo conferma da fuori:** `_g_sm_pav_saltati = 15`, **esattamente**
+> le 15 chiamate tracciate.
+
+## ✅ E il freno di scala minima è **già** «una volta per passo pieno»
+
+`_g_smp_aperture = 3`, `_g_smp_chiusure = 3`, `_g_smp_d_chiusure = 3` su **3 passi**, con
+`_g_smp_disallineati = 0` e `_g_smp_d_nsub = 4` *(prima il freno girava **4 volte** per passo)*.
+
+### **Quindi per `d` e `d0` la cura non inventa niente: ESTENDE `C3` alle altre 19 grandezze.**
+Il docstring di `_smp_chiudi` lo dice già: *«con spinte opposte di somma nulla `dx = 0` … **non
+contiene l'ordine delle leggi**»* — **è la definizione di Jacobi, scritta due settimane fa per due
+array su ventuno.**
+
+> ### ⚠ **DUE SCOSTAMENTI CHE DICHIARO ORA, non al sigillo:**
+> **①** `_smp_apri()` è chiamata a `:5106`, cioè a inizio **`step`** e non di `passo_pieno`: la
+> fotografia si apre **una legge in ritardo**. Oggi innocuo *(`scuoti_vuoto` tocca `phivel`)*,
+> ma va corretto.
+> **②** `_smp_chiudi()` è **dentro** `memoria_hebbiana_moto`, non **dopo**. Funziona perché quella
+> legge è l'ultima — **ma è una coincidenza d'ordine, e `H-ETC-2` permuta l'ordine.** Va spostata,
+> **o il presidio fallirebbe per il motivo sbagliato.**
+
+**⚠ E il limite di questa verifica:** `_g_smp_chirurgie = 0` — in 3 passi **nessuna mitosi ha
+diviso un arco**, quindi **il percorso della chirurgia sullo snapshot, il più delicato di `C3`,
+non è stato esercitato.**
+
+> ### 🛑 **STOP.** Prossimo passo: **FASE 1 (a), i presidi**, e `H-ETC-2` **per primo e da solo**.
+> Deve **fallire** sul blob `e203f9a8`; se passa, mi fermo e non lo consegno.
