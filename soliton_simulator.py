@@ -152,9 +152,10 @@ LAM_BASE = 0.8   # lunghezza d'onda del solitone fondamentale (~2 lunghezze di P
 # ⚠ E PERCHE' UN CONTATORE GLOBALE NON BASTA: direbbe QUANTE VOLTE, non SU QUALE ARCO. Qui si
 #   registra il `d0` PRIMA e DOPO ogni sito per un insieme di archi DICHIARATO, piu' la somma
 #   ALGEBRICA del delta -- il conteggio da solo non dice chi spinge IN GIU'.
-# ⚠ I PAVIMENTI SONO SITI A PIENO TITOLO, non un dettaglio: un pavimento non spinge, TAGLIA, e
-#   produce esattamente un profilo a scatti. Per loro si registra QUANTI ARCHI HA TAGLIATO e il
-#   VALORE del pavimento -- che NON e' una costante: `_floor_d0` e' COMOVENTE, `f*median(d0)`.
+# ⚠ I PAVIMENTI ERANO SITI A PIENO TITOLO, e il `pavimento=` di `_traccia_d0` ne registrava
+#   il VALORE. DAL 2026-09-27 QUEI PAVIMENTI SONO ARCHIVIATI (`_floor_d0` e `_pav_d0`, in
+#   `csv/_archivio/_pavimenti_morti.py`): `pavimento=` resta nella firma -- e' `None` per
+#   difetto -- ma nessun chiamante lo passa piu'.
 TRACCIA_D0 = False
 # [TRACCIA_VD, 2026-09-21] I TRE TERMINI DI `acc` SEPARATI, COL SEGNO. OFF di default.
 # ⚠ PERCHE': imporre `d0 >= LAM` limita lo stress a `d_max/LAM - 1`, e nel ramo B al passo 360
@@ -915,9 +916,13 @@ MEM_HEBB  = True        # MEMORIA HEBBIANA DEL MOTO ATTIVA (inerzia plastica). Q
 # e' tangenziale e produce orbita e precessione. Il feedback spinge ogni solitone lungo il
 # gradiente di fase locale (grad theta pesato da |Psi|^2), la direzione delle frange.
 K_FRANGE = 0.0
-PAV_COM  = False        # PAVIMENTO COMOVENTE (legge): se True, il pavimento di d0 diventa
-# median(d0)-MAD(d0) (una dispersione sotto la mediana, scala col sistema) invece del muro
-# assoluto 0.05. Blocca il collasso anomalo locale, non il respiro comovente. Default off = 0.05.
+PAV_COM  = False        # ⚠⚠ `PAV_COM` E' INERTE DAL 2026-09-27: il default non conta piu'.
+# Rendeva COMOVENTE il pavimento di `d0` (`f*median(d0)` invece del muro assoluto `0.05`), ma
+# quel pavimento -- `_floor_d0` e `_pav_d0` -- E' STATO ARCHIVIATO in
+# `csv/_archivio/_pavimenti_morti.py` (tag `pre-archivio-pavimenti`), perche' col driver non
+# eseguiva mai: `_g_sm_pav_saltati = 15` su 15 chiamate, e la riga del pavimento 0 esecuzioni.
+# `PAV_COM` NON E' STATO TOLTO (decisione 3 di Luca: si conserva tutto) e il driver lo
+# passa ancora, ma DA OGGI NON FA NIENTE. La garanzia sulle lunghezze e' `LAM`.
 LS_AZIM = False         # L·S VETTORIALE (legge): se True, il verso tangenziale della
 # viriale viene dalla componente azimutale di (radiale x spinore _nb), non da circ_arc oscillante.
 # Il gradiente radiale incrociato con l'asse dello spinore (che non batte) da' un verso azimutale
@@ -4446,15 +4451,6 @@ class Rete:
             return dx
         return self._smorza(self.d0 if mask is None else self.d0[mask], dx, 'd0')
 
-    def _pav_d0(self, v):
-        """⚠ A `SCALA_MIN` ACCESO IL PAVIMENTO SPARISCE: la discesa e' gia' stata smorzata
-        alla scrittura, e lasciare anche il pavimento comovente vorrebbe dire DUE leggi
-        sovrapposte, con la vecchia che continua a mordere."""
-        if SCALA_MIN or SCALA_MIN_PASSO:
-            self._g_sm_pav_saltati = getattr(self, '_g_sm_pav_saltati', 0) + 1
-            return v
-        return np.maximum(v, self._floor_d0())
-
     def _nasce(self, v, dove="?", md=1, md0=1):
         """NASCITA (concatenazione): il troncone sotto `LAM` si porta A `LAM`. Da li' in poi
         vale lo smorzamento. Non e' una regola di arresto nuova: e' il punto di partenza."""
@@ -4594,18 +4590,6 @@ class Rete:
                 dt_e=float(dte[k]), tau_bg=float(tb[k]), x=float(x[k]),
                 solo_rilassamento=float(solo_ril[k]), solo_diffusione=float(solo_dif[k]),
                 insieme=float(insieme[k]))
-
-    def _floor_d0(self):
-        # PAVIMENTO di d0. Assoluto (0.05) di default; COMOVENTE se PAV_COM: f*median(d0), con
-        # f = 0.05/LAM_BASE = il RAPPORTO DI NASCITA (il vecchio pavimento assoluto diviso la
-        # lunghezza d'onda fondamentale). LAM caratterizza la nascita: fissa la frazione, poi il
-        # pavimento SCALA comovente con median(d0). Sta nella CODA (~6% della mediana), non nel
-        # corpo (come median-MAD, che clampava il 73% e falsava la misura). Non-regressivo alla
-        # nascita (median~LAM_BASE -> pavimento~0.05). Circolarita' 1/(1-q*f) trascurabile: f<<1.
-        if not PAV_COM or not len(self.d0):
-            return 0.05
-        f = 0.05 / LAM_BASE                       # rapporto di nascita (adimensionale), NON scelto
-        return f * float(np.median(self.d0))
 
     def _versione_codice(self):
         """IDENTITA' DI VERSIONE del codice in esecuzione, per il versionamento del DB.
@@ -5729,12 +5713,16 @@ class Rete:
                 # [SCALA_MIN_PASSO, C3] dentro il sotto-passo NON si frena e NON c'e' pavimento:
                 #   il freno e' UNO SOLO, dopo il ciclo, sulla variazione TOTALE. Cosi'
                 #   `nsub` non moltiplica piu' il bias.
-                if SCALA_MIN_PASSO:
-                    d_new = self.d + dts * vd_half
-                elif SCALA_MIN:
+                # [(b)1, 2026-09-27] IL PAVIMENTO `0.05` E' ARCHIVIATO in
+                #   `csv/_archivio/_pavimenti_morti.py`: era il ramo `else`, e col driver NON
+                #   girava mai (0 esecuzioni su 3 passi, copertura di riga con settrace).
+                #   LA GARANZIA RESTA `LAM`, che non si tocca. E i rami scendono da TRE a DUE:
+                #   il freno di `SCALA_MIN`, e l'aggiornamento nudo che `SCALA_MIN_PASSO`
+                #   frena UNA VOLTA a fine passo (`C3`).
+                if SCALA_MIN:
                     d_new = self.d + self._smorza(self.d, dts * vd_half, 'd')
                 else:
-                    d_new = np.maximum(self.d + dts * vd_half, 0.05)
+                    d_new = self.d + dts * vd_half
 
                 q_new = d_new - self.d0
                 sm_new = np.bincount(i, q_new, minlength=self.n) + np.bincount(j, q_new, minlength=self.n)
@@ -5774,12 +5762,12 @@ class Rete:
                 med = sm / self._deg
                 lap = 0.5 * (med[i] + med[j]) - q
                 self.vd = self.vd + dts * (cs_arco ** 2 * lap + src - beta * self.vd)
-                if SCALA_MIN_PASSO:
-                    self.d = self.d + dts * self.vd
-                elif SCALA_MIN:
+                # [(b)1, 2026-09-27] IDEM: il pavimento `0.05` e' archiviato. Questo ramo
+                #   era DOPPIAMENTE morto col driver, che passa `--verlet`: Eulero non gira.
+                if SCALA_MIN:
                     self.d = self.d + self._smorza(self.d, dts * self.vd, 'd')
                 else:
-                    self.d = np.maximum(self.d + dts * self.vd, 0.05)
+                    self.d = self.d + dts * self.vd
             
         # [SCALA_MIN_PASSO, C3] IL FRENO SU `d`, UNA VOLTA SOLA, dopo TUTTI i sotto-passi.
         #   Prima girava `nsub` volte -- 22591 in un solo passo al picco del ramo D -- e ogni
@@ -5896,8 +5884,7 @@ class Rete:
             if TRACCIA_D0: self._traccia_d0('S04_rilass_TAU_P', _tr_pre)
             
         if TRACCIA_D0: _tr_pre = self.d0.copy()
-        self.d0 = self._pav_d0(self.d0)
-        if TRACCIA_D0: self._traccia_d0('P1_dopo_rilass', _tr_pre, pavimento=self._floor_d0())
+        if TRACCIA_D0: self._traccia_d0('P1_dopo_rilass', _tr_pre)
         
     def mitosi(self):
         if self.n >= MAX_NODI or not len(self.tw): return 0
@@ -6154,9 +6141,8 @@ class Rete:
             self.d0 = self.d0 + self._sd0(spinta)          # Locale pura
             if TRACCIA_D0: self._traccia_d0('S05_spinta_locale', _tr_pre)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0 = self._pav_d0(self.d0)       # PAVIMENTO: la spinta non deve
             #   portare d0 sotto la scala minima, o lo stress |d-d0|/d0 diverge (bug rientrante)
-            if TRACCIA_D0: self._traccia_d0('P2_dopo_spinta', _tr_pre, pavimento=self._floor_d0())
+            if TRACCIA_D0: self._traccia_d0('P2_dopo_spinta', _tr_pre)
         c = np.where(nasce)[0]
         if not len(c): return 0
         c = c if MITMAX == 0 else c[np.argsort(avv[c])[::-1]][:MITMAX]
@@ -6661,8 +6647,7 @@ class Rete:
                 self.d0[mask] += self._sd0(proj, mask)
                 if TRACCIA_D0: self._traccia_d0('S08_proj', _tr_pre)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0 = self._pav_d0(self.d0)          # PAVIMENTO
-            if TRACCIA_D0: self._traccia_d0('P3_dopo_proj', _tr_pre, pavimento=self._floor_d0())
+            if TRACCIA_D0: self._traccia_d0('P3_dopo_proj', _tr_pre)
             
         if GRAV_BIFASE and len(proj):
             s = np.abs(self.tw[mask]) / PHI_CRIT - 1.0    # grandezza FIRMATA: segno = direzione
@@ -6814,8 +6799,7 @@ class Rete:
                 self.d0[mask] += self._sd0(grav * float(np.median(self.d0[mask])), mask)
                 if TRACCIA_D0: self._traccia_d0('S10_grav_med', _tr_pre)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0 = self._pav_d0(self.d0)
-            if TRACCIA_D0: self._traccia_d0('P4_dopo_grav', _tr_pre, pavimento=self._floor_d0())
+            if TRACCIA_D0: self._traccia_d0('P4_dopo_grav', _tr_pre)
             
         # [A8, 2026-09-20] (b) RAGIONE VALIDA: `K_FRANGE = 0.0`, quindi il ramo e' morto per
         # COSTANTE, non per condizione. Come per COMPAT_CHI il contatore si chiama `_spento` e non
@@ -6837,8 +6821,7 @@ class Rete:
             self.d0[mask] += self._sd0(flusso, mask)
             if TRACCIA_D0: self._traccia_d0('S11_flusso', _tr_pre)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0 = self._pav_d0(self.d0)
-            if TRACCIA_D0: self._traccia_d0('P5_dopo_flusso', _tr_pre, pavimento=self._floor_d0())
+            if TRACCIA_D0: self._traccia_d0('P5_dopo_flusso', _tr_pre)
             
         # --- COESIONE RELAZIONALE CON ANCORA ELASTICA VERSO LA SCALA NATIVA (LAM) ---
         if len(mask) and mask.any():
@@ -6991,8 +6974,7 @@ class Rete:
                     np.clip(coesione_relazionale, -tasso_dinamico, tasso_dinamico), mask)
             if TRACCIA_D0: self._traccia_d0('S12_coesione', _tr_pre)
             if TRACCIA_D0: _tr_pre = self.d0.copy()
-            self.d0 = self._pav_d0(self.d0)
-            if TRACCIA_D0: self._traccia_d0('P6_dopo_coesione', _tr_pre, pavimento=self._floor_d0())
+            if TRACCIA_D0: self._traccia_d0('P6_dopo_coesione', _tr_pre)
         #--- ACCOPPIAMENTO LATERALE DINAMICO E RELATIVO (Senza costanti improprie) ---
         if len(self.tw) and len(self.i) and self.n > 0:
             mask = (self.i < n) & (self.j < n)
@@ -7039,8 +7021,7 @@ class Rete:
                     # Applica lo shift al campo di fase senza alterare le coordinate fisse dei puntatori (net.pos)
                     self.phi[ii] = (self.phi[ii] + shift_fase_dinamico) % self._dphi()
                 if TRACCIA_D0: _tr_pre = self.d0.copy()
-                self.d0 = self._pav_d0(self.d0)
-                if TRACCIA_D0: self._traccia_d0('P7_dopo_4917', _tr_pre, pavimento=self._floor_d0())
+                if TRACCIA_D0: self._traccia_d0('P7_dopo_4917', _tr_pre)
         # [SCALA_MIN_PASSO, C3] IL FRENO SU `d0`, UNA VOLTA SOLA, a fine ciclo. `memoria_
         # hebbiana_moto` e' l'ULTIMA chiamata del passo nel driver e nelle rigiocate sigillate.
         self._smp_chiudi()
@@ -8681,7 +8662,9 @@ def _applica_flag(a):
     if SYNC_UPDATE:
         print("[sync] aggiornamento sincrono attivo: dph legge la fase dallo snapshot t-1 (Jacobi)")
     if PAV_COM:
-        print("[pav-com] pavimento comovente attivo: d0 >= median(d0)-MAD(d0) invece di 0.05 assoluto")
+        print("[pav-com] ⚠ FLAG INERTE dal 2026-09-27: il pavimento di d0 e' ARCHIVIATO "
+              "(csv/_archivio/_pavimenti_morti.py) e questo flag NON FA NIENTE. La "
+              "garanzia sulle lunghezze e' LAM (--scala-min-passo, --semina-lam).")
     if ZETA_VIR:
         print("[zeta-vir] freno anisotropo attivo: beta *= cos2 della viriale (dissipa radiale, libera tangenziale)")
     if CHI_BASC:

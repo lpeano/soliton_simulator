@@ -508,3 +508,26 @@ Ogni rifiuto dice **cosa fare**, e l'eccezione si dichiara nel file
 `doc/ESENZIONI_presidi.md` (`python csv/_hook_presidi.py --elenca`).
 **Finche' il comando non e' dato i presidi non impediscono niente, e
 `python csv/_hook_presidi.py` lo dice** (`A9`).
+
+---
+
+## ⚠ `--pav-com` È **INERTE** dal 2026-09-27 *(passo (b)1 di `ETC-PASSO`)*
+
+| | |
+|---|---|
+| **cosa faceva** | rendeva **comovente** il pavimento di `d0` — `f·median(d0)` invece del muro assoluto `0.05` |
+| **default** | `False`, **e da oggi il default non conta più**: il flag non fa niente in nessuno dei due stati |
+| **byte-inerte a default spento?** | ### **è inerte in ENTRAMBI gli stati**, acceso o spento |
+| **perché** | il pavimento che governava — `_floor_d0` e `_pav_d0` — **è stato ARCHIVIATO** in `csv/_archivio/_pavimenti_morti.py` *(tag `pre-archivio-pavimenti`)*, perché **col driver non eseguiva mai**: `_g_sm_pav_saltati = 15` su 15 chiamate, e la riga del pavimento **0 esecuzioni** su 3 passi *(copertura di riga con `settrace`)* |
+| **non è stato TOLTO** | decisione 3 di Luca: **si conserva tutto**. Il driver lo passa ancora, e all'avvio **stampa che è inerte** invece di annunciare una legge che non applica |
+
+> ### **E la garanzia sulle lunghezze NON se ne va con lui: è `LAM`**
+> *(`--scala-min-passo`, `--semina-lam`, `--mitosi-2lam`, `_nasce`)*, **che non si tocca**.
+> Misurato sui 16 stati del pilota: **`min(d) = 0.800000 = LAM` esattamente**, in ogni stato e ogni
+> checkpoint, **0 archi sotto `LAM`**. Il pavimento vecchio, `0.05`, stava **16 volte più in basso**
+> del minimo osservato: **non avrebbe potuto mordere nemmeno se fosse stato vivo.**
+>
+> **⚠ E cosa cambia davvero, dichiarato:** con **entrambi** `--scala-min` e `--scala-min-passo`
+> **spenti** — una configurazione che **il driver non usa** — prima `d0` aveva un pavimento e ora
+> **non l'ha più**. Non è una regressione nascosta: **è il senso dell'archiviazione**, e quel
+> comportamento si ritrova nel tag e in `csv/_archivio/_pavimenti_morti.py`.

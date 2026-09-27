@@ -4462,3 +4462,51 @@ siano due.
 > ### 🛑 **STOP.** Prossimo: **(b) l'archiviazione**, e **senza il problema che avevo annunciato** —
 > il sigillo byte-identico è riproducibile senza fissare niente. E ricordo che **ciò che esce è il
 > DOPPIONE, non la legge**: la scala minima `LAM` resta, ed è quella che tiene.
+
+---
+
+# 🗄 **(b)1 — I PAVIMENTI MORTI ESCONO DAL SIMULATORE** *(2026-09-27)*
+
+### **Blob del simulatore: `e203f9a8` → `59c23942`** *(sha1 dei byte)*.
+**Tag `pre-archivio-pavimenti`** *(pushato)* conserva il prima, e il file d'archivio
+`csv/_archivio/_pavimenti_morti.py` estrae il testo **verbatim con `git cat-file -p`** da quel tag
+— **non ricopiato a mano**.
+
+## Che cosa è uscito
+
+| | |
+|---|---|
+| `_pav_d0` e le sue **7 chiamate** | erano `self.d0 = self._pav_d0(self.d0)`, cioè **un no-op col driver** |
+| `_floor_d0` | il valore del pavimento *(`0.05` assoluto o comovente)* |
+| i **due** rami `else` con `np.maximum(…, 0.05)` su `d` | Verlet **e** Eulero |
+
+### **I due sottocicli metrici scendono da TRE rami a DUE** — `9-ter`: una cura non aumenta il
+numero delle leggi, **e qui le diminuisce**.
+
+## ⚠ Due dipendenze che **non erano nel tuo elenco**, trovate rilevando
+
+**①** `_floor_d0` era usato **anche** da **sette** chiamate di `TRACCIA_D0`, come
+`pavimento=self._floor_d0()`. `pavimento=` era **già `None` per difetto**, quindi ho **tolto
+l'argomento** dalle sette e **la firma di `_traccia_d0` resta**: chi traccia continua a funzionare,
+senza un valore che non esiste più.
+
+**②** ### `PAV_COM` governava **solo** `_floor_d0`, quindi **diventa INERTE.**
+**E il driver lo passa** (`--pav-com`). Dichiarato in **tre** posti: il `README`, il commento del
+flag, e **il messaggio d'avvio** — che prima annunciava *«pavimento comovente attivo: d0 >=
+median(d0)-MAD(d0)»*, cioè **una legge che non applicava**.
+**Non l'ho tolto** *(decisione 3: si conserva tutto)*.
+
+## E cosa cambia davvero, dichiarato invece di lasciarlo scoprire
+
+> Con **entrambi** `--scala-min` e `--scala-min-passo` **spenti** — **una configurazione che il
+> driver non usa** — prima `d0` aveva un pavimento e **ora non l'ha più**.
+> **Non è una regressione nascosta: è il senso dell'archiviazione**, e quel comportamento si
+> ritrova nel tag e nel file d'archivio.
+>
+> ### **La garanzia sulle lunghezze NON se ne va con loro: è `LAM`**, che non si tocca.
+> `min(d) = LAM` esatto in 16/16 stati, 0 archi sotto, e il pavimento vecchio stava **16 volte più
+> in basso** del minimo.
+
+> ### ⏳ **IL SIGILLO BYTE-IDENTICO NON È ANCORA GIRATO.** Il par.5 vuole il codice **committato
+> prima** del run, quindi questo commit porta **il cambiamento**, e il sigillo arriva nel
+> **successivo**. **Se fallisce, il pavimento non era morto e mi fermo.**

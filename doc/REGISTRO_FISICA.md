@@ -60,8 +60,47 @@ voce `Z…` della `FASE A`, commit `9a82bfb`)*.
 
 ---
 
-<!-- SCHEDA nome=freno-scala-min funzioni=_smorza,_smp_apri,_smp_chiudi,_smp_snap,_sd0,_pav_d0,_floor_d0,_nasce flag=SCALA_MIN,SCALA_MIN_PASSO -->
+<!-- SCHEDA nome=freno-scala-min funzioni=_smorza,_smp_apri,_smp_chiudi,_smp_snap,_sd0,_nasce flag=SCALA_MIN,SCALA_MIN_PASSO,PAV_COM -->
 # ① IL FRENO DI `SCALA_MIN` — **`SCALA_MIN_PASSO` / `_smorza` / `_smp_chiudi`**
+
+> ### 🗄 **I DUE PAVIMENTI VECCHI SONO USCITI DALLA LEGGE** *(2026-09-27, `(b)1`
+> ### di `ETC-PASSO`)*
+>
+> **`_pav_d0` e `_floor_d0` non stanno piu' nel simulatore**, e la scheda non li elenca piu' fra
+> le sue funzioni. Sono in **`csv/_archivio/_pavimenti_morti.py`**, col tag
+> **`pre-archivio-pavimenti`**; con loro sono usciti i **due rami `else`** con
+> `np.maximum(..., 0.05)` su `d` *(Verlet e Eulero)*.
+>
+> ### **LA FORMA DELLA LEGGE, dopo:** il vincolo sulle lunghezze e' **UNO SOLO**, ed e' `LAM`.
+> Prima erano **DUE sovrapposti** -- il freno di `SCALA_MIN`/`SCALA_MIN_PASSO` **e** il pavimento
+> comovente -- e il docstring di `_pav_d0` lo diceva: *<<lasciare anche il pavimento comovente
+> vorrebbe dire DUE leggi sovrapposte, con la vecchia che continua a mordere>>*. **Quella
+> sovrapposizione era gia' risolta a RUNTIME con un `return v`; ora e' risolta nella FORMA.**
+>
+> **`9-ter`: il numero delle leggi SCENDE.** I due sottocicli metrici passano da **tre rami a
+> due**: il freno di `SCALA_MIN`, e l'aggiornamento nudo che `SCALA_MIN_PASSO` frena **una volta
+> sola** a fine passo (`C3`).
+>
+> **DERIVAZIONE, e perche' non e' una perdita:** il pavimento vecchio era `0.05` assoluto, oppure
+> `f*median(d0)` con `f = 0.05/LAM_BASE` se `PAV_COM`. **Misurato sui 16 stati del pilota:**
+> `min(d) = 0.800000 = LAM` **esattamente**, in ogni stato e ogni checkpoint, **0 archi sotto
+> `LAM`** -- e `0.05` sta **16 volte piu' in basso** del minimo osservato. **Il pavimento vecchio
+> non definiva il vincolo: lo seguiva da sedici volte piu' giu'.**
+>
+> **DIMENSIONI:** invariate. `LAM` e' una lunghezza (`A13`: la scala di Planck del modello), e il
+> vincolo `d >= LAM` resta quello di prima.
+>
+> **LIMITI, e `A11`:** il limite che RESTA e' `LAM`, e la scheda lo classifica gia' *(corollario
+> 2: `LAM` e' costante e non insegue `d0`, a differenza del pavimento comovente di `Z91`)*.
+> **Il limite che ESCE era proprio quello che il corollario 2 accusava.**
+>
+> **⚠ E COSA CAMBIA, dichiarato:** con **entrambi** `SCALA_MIN` e `SCALA_MIN_PASSO` **spenti**
+> *(configurazione che il driver NON usa)* prima `d0` aveva un pavimento e **ora non l'ha piu'**.
+> **`PAV_COM` diventa INERTE** in entrambi i suoi stati, e lo dichiara all'avvio.
+>
+> **`D31` NON E' TOCCATA:** *il freno e' solo in discesa* resta il difetto aperto di questa
+> scheda, ed e' della cura **(d)**.
+
 
 > **STATO: `DIFETTOSA`.** Difetto **`D31`**. **Viola `A11` corollario 4 e corollario 7(b).**
 > **È IL MOTORE DELLA CRESCITA DI `d0`**, misurato due volte con un bilancio che chiude.
@@ -287,6 +326,19 @@ tronca nulla lo fa salire ugualmente — è il presidio di `D38`, non una misura
 
 <!-- SCHEDA nome=memoria-del-moto funzioni=memoria_hebbiana_moto flag=MEM_HEBB,MEM_MOTO,MEM_MOTO_TUTTO,SCALA_P_MEDIANA,ZETA_VIR -->
 # ② LA MEMORIA DEL MOTO — **`memoria_hebbiana_moto` / `S08_proj` / `mem_mot`**
+
+> ### 🗄 **(b)1, 2026-09-27: le CINQUE chiamate al pavimento vecchio sono uscite**
+>
+> `memoria_hebbiana_moto` chiamava **cinque volte** `self.d0 = self._pav_d0(self.d0)`, dopo
+> `S08_proj`, dopo la gravita', dopo il flusso, dopo la coesione e dopo `:7042`. **Col driver
+> erano cinque NO-OP** *(`_pav_d0` usciva dal ramo inerte: `_g_sm_pav_saltati = 15` su 15
+> chiamate totali, riga del pavimento **0 esecuzioni**)*, e ora **non ci sono piu'**.
+> **La forma della legge non cambia:** questa scheda scrive `d0` con `_sd0`, e il freno di
+> `SCALA_MIN_PASSO` chiude **una volta sola** a fine passo (`_smp_chiudi`, chiamata proprio da
+> qui). **Quello che esce e' il secondo vincolo, quello sovrapposto.**
+> Anche i cinque `pavimento=self._floor_d0()` delle tracce `TRACCIA_D0` sono usciti:
+> l'argomento era **`None` per difetto** e la firma di `_traccia_d0` **resta**.
+
 
 > **STATO: `DIFETTOSA`.** Difetti **`D03`** *(direzioni dal disegno, `Imed` globale, tetto
 > `0.01·median(d0)`)* e **`D02`** *(il pozzo usa `pos`)*.
@@ -653,6 +705,17 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 > vuole il braccio di confronto **omette il flag**, e il referto lo mostra.
 # ⑤ IL TEMPO PROPRIO — **`ritmo()` / `r` / `dt_n = DT·r`**, e il surrogato **`tau_pp`**
 
+> ### 🗄 **(b)1, 2026-09-27: `_applica_flag` non annuncia piu' una legge che non applica**
+>
+> Il messaggio d'avvio di `PAV_COM` diceva *<<pavimento comovente attivo: d0 >=
+> median(d0)-MAD(d0) invece di 0.05 assoluto>>*. **Quel pavimento e' ARCHIVIATO**
+> (`csv/_archivio/_pavimenti_morti.py`), quindi il flag **e' INERTE in entrambi i suoi stati**
+> e ora lo **dichiara**. **`PAV_COM` non e' stato TOLTO** *(decisione 3: si conserva tutto)*, e
+> il driver lo passa ancora. **Nessuna legge del tempo proprio e' toccata:** cambia solo cio'
+> che `_applica_flag` **dice** di se stesso, ed e' `A8` -- un ramo che annuncia un effetto che
+> non produce e' un ramo silenzioso al contrario.
+
+
 > **STATO: `DIFETTOSA`.** Difetto **`D34`** *(il wrap «a `4π`» non avvolge)*.
 > **→ NOTA DEL 2026-09-27 (`D02`): `_applica_flag` e `_cli` hanno UN FLAG IN PIU', `POZZO_D`,
 > e NON tocca il tempo proprio.** E' la cura di `D02` *(la lunghezza del pozzo dal grafo e
@@ -855,6 +918,18 @@ distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifi
 
 <!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,_dphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
 # ⑥ LA FASE `φ` E IL SUO DOMINIO — **`semina` / `_w4` / `_w8` / `step`**
+
+> ### 🗄 **(b)1, 2026-09-27: `step` perde il pavimento su `d` e una chiamata su `d0`**
+>
+> Nei **due** sottocicli metrici di `step` il ramo `else` faceva
+> `np.maximum(self.d + dts*vd, 0.05)`. **Col driver non girava mai** *(0 esecuzioni; e quello di
+> Eulero era doppiamente morto, perche' il driver passa `--verlet`)*, ed e' **uscito**: restano
+> **DUE rami invece di tre** -- il freno di `SCALA_MIN`, e l'aggiornamento nudo che
+> `SCALA_MIN_PASSO` frena **una volta sola** dopo il ciclo. **`9-ter`: il numero delle leggi
+> scende.** Via anche una chiamata `self.d0 = self._pav_d0(self.d0)`, che era un no-op.
+> **La legge sulla FASE non e' toccata:** `_dphi`, `_wphi` e il dominio a `4 pi` restano come
+> erano. Qui cambia solo il settore METRICO di `step`.
+
 
 > **STATO: `DIFETTOSA`.** Difetti **`D34`** *(il wrap del ritmo)*, **`D35`** *(l'antifase di
 > Schwinger)*, e i sospetti **`S07`**, **`S08`**.
@@ -1071,6 +1146,16 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 > `MITOSI_2LAM`, e **ha fatto bene a chiederla**: dal diff non si vede se la riga toccata sia
 > un commento o una legge. **La risposta va scritta, non assunta.**)*
 # ⑦ LA MITOSI E SCHWINGER — **`mitosi()`**
+
+> ### 🗄 **(b)1, 2026-09-27: via la chiamata al pavimento vecchio dopo la spinta**
+>
+> `mitosi` faceva `self.d0 = self._pav_d0(self.d0)` subito dopo la spinta locale, col commento
+> *<<PAVIMENTO: la spinta non deve>>*. **Col driver era un no-op** e ora non c'e' piu'.
+> ### **E le REGOLE DI NASCITA non sono toccate:** `_nasce` resta, e con lui la garanzia che un
+> troncone sotto `LAM` **parta da `LAM`** -- che e' il vincolo vero, ed e' `MITOSI_2LAM` +
+> `SEMINA_LAM`. **Quello che esce e' il pavimento VECCHIO su `d0`, non la scala minima.**
+> *(Misurato: `min(d) = LAM` esatto in 16/16 stati del pilota, 0 archi sotto `LAM`.)*
+
 
 > **→ NOTA DEL 2026-09-27 (seconda): DENTRO `mitosi()` SONO USCITI QUATTRO RAMI `else`.**
 > La `CURA 2` e' **strutturale** *(scheda ⑨, decisione di Luca)*: i quattro `if
