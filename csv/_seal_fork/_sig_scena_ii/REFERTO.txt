@@ -4,13 +4,14 @@ SIGILLO DI `DRIVER-SCENA-II` -- i cinque criteri del task history
 
   T1  IL DEFAULT E' CAMBIATO DI PROPOSITO, E LA DIFFERENZA E' ESATTAMENTE QUELLA DICHIARATA
         driver 'di prima' dal PADRE di 2b273da5 ... 502 righe
-        argv PRIMA 42 elementi   ->   OGGI 44
+        argv PRIMA 42 elementi   ->   OGGI 45
         dichiarato  --nodi   None       -> 0                misurato None       -> 0
         dichiarato  --sep    4.0        -> 6.1158           misurato 4.0        -> 6.1158
         dichiarato  --test   N-MASSE    -> MASSE-COERENTI   misurato N-MASSE    -> MASSE-COERENTI
         differenze INATTESE fra le opzioni .. 0 []
         dichiarate NON avvenute ............. 0 []
-        flag nudi diversi ................... 0 []
+        flag nudi ATTESI in piu' ........... ['--pozzo-d']   mancati []
+        flag nudi INATTESI ................. 0 []
         il sorgente dichiara SCENA/SEP ...... MASSE-COERENTI / 6.1158
 
   T5  IL CASO CHE DEVE FALLIRE: `N-MASSE` con `SEMINA_LAM`
@@ -27,21 +28,21 @@ SIGILLO DI `DRIVER-SCENA-II` -- i cinque criteri del task history
         AST di `_semina_masse_coerenti` intatto True   (contro 2b273da5^)
 
   T4  CONFIGURAZIONE INTERA  (`H-P5`)
-        booleani confrontati ................ 79
+        booleani confrontati ................ 80
         DIVERSI dall'argv del driver ........ 0 []
 
   T3  IL SEME E' REALE  -- tre processi, uno per braccio (`STANDARD 1`)
-        seme7a   seme 7  uscita 0  campi firmati 219
-        seme7b   seme 7  uscita 0  campi firmati 219
-        seme8    seme 8  uscita 0  campi firmati 219
-        T3a  seme 7 contro seme 7: campi IDENTICI 219 su 219
-        T3b  seme 7 contro seme 8: campi DIVERSI  99 su 219   ['_chi_core_nodi', '_chi_core_raggio', '_chi_core_rho0', '_chi_core_rhoc', '_chi_geom_nodi', '_cs_nodo_prev']
+        seme7a   seme 7  uscita 0  campi firmati 221
+        seme7b   seme 7  uscita 0  campi firmati 221
+        seme8    seme 8  uscita 0  campi firmati 221
+        T3a  seme 7 contro seme 7: campi IDENTICI 221 su 221
+        T3b  seme 7 contro seme 8: campi DIVERSI  100 su 221   ['_chi_core_nodi', '_chi_core_raggio', '_chi_core_rho0', '_chi_core_rhoc', '_chi_geom_nodi', '_cs_nodo_prev']
 
 ====================================================================================================
 LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
 ====================================================================================================
-  booleani di modulo confrontati con l'argv del DRIVER: 79
-  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 79.
+  booleani di modulo confrontati con l'argv del DRIVER: 80
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 80.
 
 
 ========================================================================================================

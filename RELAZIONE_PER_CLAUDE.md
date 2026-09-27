@@ -2813,3 +2813,30 @@ il sigillo dice.
 **E i residui che RESTANO sono giusti:** `soliton_simulator.py` cita `A13` altre volte, e **li'
 parla davvero di `LAM` e della scala** *(`d >= 2 LAM` alla nascita, l'arresto, la semina)*.
 **`A13` non era l'etichetta sbagliata: era l'etichetta sbagliata IN QUEL POSTO.**
+
+---
+
+# ① **`POZZO_D` E' ACCESO NEL DRIVER. `D02` chiuso: gli `SI` da 6 a 5** *(decisione di Luca, 2026-09-27)*
+
+**E' una scelta DI PRINCIPIO, e la decisione lo dice:** `A3-DISEGNO` — **il disegno esce dalla
+dinamica**. `W4` **dimostra** che `pos` non entra piu'; `W5` dice che a 120 passi l'effetto e'
+**sotto l'`1.3`-`2.7 %`**, cioe' **non misurato**. **`A3-DISEGNO` basta da sola:** si misura per
+**promuovere**, si **DIMOSTRA** per **escludere**.
+
+**Forma scelta, dichiarata:** il flag resta **`False` nel sorgente** e **lo accende il driver** —
+e' una **cura accesa dalla campagna**, non una promozione a default *(par.10)*. Cosi' **il braccio
+di confronto resta raggiungibile con l'argv nudo**, e la byte-identita' che `W1` dimostra **resta
+verificabile**.
+
+**Sigillo del driver rigirato: `6/6`**, e `T1` ha una forma nuova che vale la pena di dire:
+
+```
+flag nudi ATTESI in piu' ... ['--pozzo-d']   mancati []
+flag nudi INATTESI ......... 0 []
+booleani confrontati ....... 80   (erano 79: il flag nuovo entra nella configurazione)
+```
+
+> **`T1` ora distingue tre cose invece di due:** i flag **attesi in piu'** *(la decisione)*, quelli
+> **inattesi** *(l'allarme)*, e i **`mancati`** — **cosi' se un giorno il driver smettesse di
+> passare `--pozzo-d`, il criterio lo DIREBBE** invece di tacere. Un criterio che accetta un flag
+> nuovo senza pretenderlo **si sarebbe spento da solo** alla prima dimenticanza (`A9`).
