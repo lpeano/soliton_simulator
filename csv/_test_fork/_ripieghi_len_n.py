@@ -7,7 +7,7 @@
 | | sito | il valore di scorta |
 |---|---|---|
 | **1** | `lambda_nodi` `len(psi) < n` | ### `LAM` -- **la schermatura si spegneva** |
-| **2** | `_rho_sorgente` `len(rho_spin) < n` | ### `\|psi\|^2` -- **un'altra densita'** |
+| **2** | `_rho_sorgente` `len(rho_spin) < n` | ### `abs(psi)^2` -- **un'altra densita'** |
 | **3** | `_nb_grav` `len(psi_spin) < n` | ### `self._nb` -- **un'altra direzione di Bloch** |
 
 **E le tre si assomigliano perche' sono LA STESSA COSA:** *una cache che la nascita non ha estesa,
@@ -89,10 +89,17 @@ def statico():
 
 
 def principale():
-    passi = 46
+    # ⚠ LA TRACCIA SI ACCENDE TARDI, E NON E' UN'OTTIMIZZAZIONE: una `settrace` su TUTTE le
+    #   righe del simulatore, su una scena da 471564 archi, rende il run ~20 volte piu'
+    #   lento -- MISURATO: il primo giro non finiva, e l'ho fermato. Il passo di nascita e'
+    #   42, MISURATO due volte, quindi si traccia da 41. **Il prezzo, dichiarato:** dei passi
+    #   PRIMA di 41 non si sa niente. Per quelli basta sapere che `n` non cresce.
+    passi, traccia_da = 46, 41
     for x in sys.argv[1:]:
         if x.startswith("--passi="):
             passi = int(x.split("=", 1)[1])
+        elif x.startswith("--traccia-da="):
+            traccia_da = int(x.split("=", 1)[1])
     if not os.path.isdir(FUORI):
         os.makedirs(FUORI)
     siti = statico()
@@ -152,20 +159,23 @@ def principale():
         return _tr
 
     nascita, serie = None, {}
-    sys.settrace(_tr)
-    try:
-        for k in range(1, passi + 1):
-            stato["passo"] = k
-            n_prima = int(net.n)
+    print("  la traccia si accende dal passo %d (prima: run NUDO)" % traccia_da)
+    for k in range(1, passi + 1):
+        stato["passo"] = k
+        n_prima = int(net.n)
+        if k == traccia_da:
+            sys.settrace(_tr)
+        try:
             with contextlib.redirect_stdout(io.StringIO()):
                 _passo.passo_pieno(S, net)
-            serie[k] = int(net.n) - n_prima
-            if nascita is None and int(net.n) > n_prima:
-                nascita = k
-            if nascita and k >= nascita + 2:
-                break
-    finally:
-        sys.settrace(None)
+        finally:
+            pass
+        serie[k] = int(net.n) - n_prima
+        if nascita is None and int(net.n) > n_prima:
+            nascita = k
+        if nascita and k >= nascita + 2:
+            break
+    sys.settrace(None)
 
     print("=" * 100)
     print("PASSAGGIO 2 -- A RUNTIME: quali prendono il RAMO DI SCORTA, e quando")
