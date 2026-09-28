@@ -1400,3 +1400,23 @@ porta il `2.6`?>> -- e' chiusa: lo porta la schermatura che si spegne.**
 **E perche' non ci e' arrivato:** il suo criterio ④ confrontava `psi` calcolato **dentro** `step` con
 un ricalcolo su uno stato **gia' cambiato**. ### **Era MAL POSTO, e l'avevo scritto io.**
 *(Un banco archiviato senza il perche' e' un reperto muto.)*
+
+## L'elenco dei ripieghi `len(x) < n` -> valore di scorta *(2026-09-28)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_ripieghi_len_n.py` | `7f32fbbd` | `python csv/_test_fork/_ripieghi_len_n.py --passi=46` | **due passaggi**: ① dall'**AST**, ogni confronto fra un `len(...)` e `n`/`self.n` · ② **a RUNTIME**, quali prendono davvero il **ramo di scorta**, e in quale passo | ① ### **100 confronti in 26 funzioni** · ② al passo di **nascita** ### **NESSUNO**; al passo **dopo** ### **DUE**: `_rho_sorgente` :4384 *(2 su 15)* e `_passo_spinoriale` :3570 *(1)* |
+
+**Referto:** `csv/_test_fork/_ripieghi_len_n.json` *(blob byte `de9c12ed`)*; la stampa in
+`csv/_seal_fork/_sig_nascita_psi/_ripieghi.txt`.
+
+> ### 📌 **E l'elenco NON e' un verdetto, che e' il punto:** dei due siti che mordono al passo dopo,
+> **uno e' il DIFETTO** *(`_rho_sorgente` da' un'altra densita' a tutta la rete, in silenzio)* e
+> ### **l'altro e' LEGITTIMO E DICHIARATO** -- `_xi_rumore` :3570, dove il codice scrive *«questo
+> NON e' un fallback: e' il percorso normale della mitosi; `xi` e' l'AMBIENTE, non una proprieta'
+> del nodo, quindi il figlio NON lo eredita»*, ed e' **gia' contato**.
+> ### **Su 100 confronti della stessa FORMA, quelli che mordono sono 2 e uno e' giusto: la forma non
+> basta a giudicare.**
+
+**⚠ La traccia si accende dal passo 41**, e il prezzo e' dichiarato: dei passi prima non si sa
+niente. **Con `settrace` su tutto, su 471564 archi, il run NON FINIVA** -- misurato, e fermato.

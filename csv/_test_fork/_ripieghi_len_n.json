@@ -1,0 +1,998 @@
+{
+ "al_passo_di_nascita": [],
+ "al_passo_dopo": [
+  {
+   "corte": 1,
+   "cosa": "_xi",
+   "dentro": "_passo_spinoriale",
+   "len": 12802,
+   "n": 12803,
+   "passo": 43,
+   "riga": 3570,
+   "volte": 1
+  },
+  {
+   "corte": 2,
+   "cosa": "_rs",
+   "dentro": "_rho_sorgente",
+   "len": 12802,
+   "n": 12803,
+   "passo": 43,
+   "riga": 4384,
+   "volte": 15
+  }
+ ],
+ "nati_per_passo": {
+  "1": 0,
+  "2": 0,
+  "3": 0,
+  "4": 0,
+  "5": 0,
+  "6": 0,
+  "7": 0,
+  "8": 0,
+  "9": 0,
+  "10": 0,
+  "11": 0,
+  "12": 0,
+  "13": 0,
+  "14": 0,
+  "15": 0,
+  "16": 0,
+  "17": 0,
+  "18": 0,
+  "19": 0,
+  "20": 0,
+  "21": 0,
+  "22": 0,
+  "23": 0,
+  "24": 0,
+  "25": 0,
+  "26": 0,
+  "27": 0,
+  "28": 0,
+  "29": 0,
+  "30": 0,
+  "31": 0,
+  "32": 0,
+  "33": 0,
+  "34": 0,
+  "35": 0,
+  "36": 0,
+  "37": 0,
+  "38": 0,
+  "39": 0,
+  "40": 0,
+  "41": 0,
+  "42": 1,
+  "43": 0,
+  "44": 0
+ },
+ "nmasse": 3,
+ "passo_nascita": 42,
+ "runtime_corte": [
+  {
+   "corte": 1,
+   "cosa": "_xi",
+   "dentro": "_passo_spinoriale",
+   "len": 12802,
+   "n": 12803,
+   "passo": 43,
+   "riga": 3570,
+   "volte": 1
+  },
+  {
+   "corte": 2,
+   "cosa": "_rs",
+   "dentro": "_rho_sorgente",
+   "len": 12802,
+   "n": 12803,
+   "passo": 43,
+   "riga": 4384,
+   "volte": 15
+  }
+ ],
+ "sep": 6.1158,
+ "statico": [
+  {
+   "contro": "n",
+   "cosa": "net.psi",
+   "dentro": "_righe_stato_universo",
+   "op": "Lt",
+   "riga": 729,
+   "sorgente": "if not hasattr(net, \"psi\") or len(net.psi) < n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._nb",
+   "dentro": "_aggiorna_lift_spinoriale",
+   "op": "Lt",
+   "riga": 2113,
+   "sorgente": "if not hasattr(self, \"_nb\") or self._nb is None or len(self._nb) < self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "cur",
+   "dentro": "_estendi_psi_spinor",
+   "op": "Lt",
+   "riga": 2222,
+   "sorgente": "elif len(cur) < n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "cur",
+   "dentro": "_estendi_psi_spinor",
+   "op": "Gt",
+   "riga": 2225,
+   "sorgente": "elif len(cur) > n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._spinor_lift",
+   "dentro": "olonomia_lift_ciclo",
+   "op": "Lt",
+   "riga": 2353,
+   "sorgente": "if len(self._spinor_lift) < self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._spinor_lift",
+   "dentro": "_feedback_spinoriale_archi",
+   "op": "Lt",
+   "riga": 2428,
+   "sorgente": "if len(self._spinor_lift) < self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.psi",
+   "dentro": "chiralita_core_locale",
+   "op": "Lt",
+   "riga": 2475,
+   "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.psi",
+   "dentro": "misura_spin_picco_massa",
+   "op": "Lt",
+   "riga": 2531,
+   "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._nb",
+   "dentro": "misura_spin_picco_massa",
+   "op": "Lt",
+   "riga": 2533,
+   "sorgente": "if not hasattr(self, \"_nb\") or len(self._nb) < self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._spinor_lift",
+   "dentro": "misura_spin_picco_massa",
+   "op": "Lt",
+   "riga": 2537,
+   "sorgente": "if len(self._spinor_lift) < self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.perc_chi",
+   "dentro": "misura_spin_picco_massa",
+   "op": "GtE",
+   "riga": 2566,
+   "sorgente": "chi = self.perc_chi[dominio].astype(float) if len(self.perc_chi) >= self.n else np.zeros(len(dom",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._nb",
+   "dentro": "misura_spin_picco_massa",
+   "op": "GtE",
+   "riga": 2567,
+   "sorgente": "nb = self._nb[dominio] if hasattr(self, \"_nb\") and len(self._nb) >= self.n else np.zeros((len(do",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._spinor_lift",
+   "dentro": "misura_spin_picco_massa",
+   "op": "Lt",
+   "riga": 2572,
+   "sorgente": "if len(self._spinor_lift) < self.n and hasattr(self, \"_nb\") and len(self._nb) >= self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._nb",
+   "dentro": "misura_spin_picco_massa",
+   "op": "GtE",
+   "riga": 2572,
+   "sorgente": "if len(self._spinor_lift) < self.n and hasattr(self, \"_nb\") and len(self._nb) >= self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._spinor_lift",
+   "dentro": "misura_spin_picco_massa",
+   "op": "GtE",
+   "riga": 2575,
+   "sorgente": "if len(self._spinor_lift) >= self.n",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.perc_chi",
+   "dentro": "misura_spin_picco_positivi",
+   "op": "Lt",
+   "riga": 2643,
+   "sorgente": "if len(self.perc_chi) < self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.psi",
+   "dentro": "circolazione_topologica",
+   "op": "Lt",
+   "riga": 2710,
+   "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._nb",
+   "dentro": "circolazione_topologica",
+   "op": "GtE",
+   "riga": 2717,
+   "sorgente": "ha_spin = SPINORE and hasattr(self, \"_nb\") and self._nb is not None and len(self._nb) >= self.n",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "_psp",
+   "dentro": "circolazione_topologica",
+   "op": "GtE",
+   "riga": 2756,
+   "sorgente": "if _psp is not None and len(_psp) >= self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.perc_chi",
+   "dentro": "circolazione_topologica",
+   "op": "GtE",
+   "riga": 2785,
+   "sorgente": "if ha_spin and len(self.perc_chi) >= self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.conc_nodi",
+   "dentro": "_riallinea_tracking",
+   "op": "Lt",
+   "riga": 3224,
+   "sorgente": "while len(self.conc_nodi) < self.n: self.conc_nodi.append([])",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.conc_nodi",
+   "dentro": "_riallinea_tracking",
+   "op": "Gt",
+   "riga": 3225,
+   "sorgente": "if len(self.conc_nodi) > self.n: del self.conc_nodi[self.n:]",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.perc_chi",
+   "dentro": "_allaccia",
+   "op": "GtE",
+   "riga": 3302,
+   "sorgente": "if COMPAT_CHI and len(a) and len(self.perc_chi) >= self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.psi",
+   "dentro": "lambda_nodi",
+   "op": "Lt",
+   "riga": 3341,
+   "sorgente": "if len(self.psi) < self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._psi_prec",
+   "dentro": "ritmo",
+   "op": "NotEq",
+   "riga": 3411,
+   "sorgente": "if self._psi_prec is None or len(self._psi_prec) != self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.psi",
+   "dentro": "ritmo",
+   "op": "Eq",
+   "riga": 3415,
+   "sorgente": "self._psi_prec = self.psi.copy() if len(self.psi) == self.n else np.ones(self.n, complex)",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "_ps",
+   "dentro": "ritmo",
+   "op": "NotEq",
+   "riga": 3427,
+   "sorgente": "if _ps is None or _psp is None or len(_ps) != self.n or len(_psp) != self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "_psp",
+   "dentro": "ritmo",
+   "op": "NotEq",
+   "riga": 3427,
+   "sorgente": "if _ps is None or _psp is None or len(_ps) != self.n or len(_psp) != self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "_ps",
+   "dentro": "ritmo",
+   "op": "Eq",
+   "riga": 3436,
+   "sorgente": "if CAMPO_SPINORIALE and _ps is not None and _psp is not None and len(_ps) == self.n and len(_psp",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "_psp",
+   "dentro": "ritmo",
+   "op": "Eq",
+   "riga": 3436,
+   "sorgente": "if CAMPO_SPINORIALE and _ps is not None and _psp is not None and len(_ps) == self.n and len(_psp",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self.omega_s",
+   "dentro": "_passo_spinoriale",
+   "op": "Lt",
+   "riga": 3526,
+   "sorgente": "if len(self.omega_s) < n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self.omega_s",
+   "dentro": "_passo_spinoriale",
+   "op": "Gt",
+   "riga": 3528,
+   "sorgente": "elif len(self.omega_s) > n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self.phi_s",
+   "dentro": "_passo_spinoriale",
+   "op": "Eq",
+   "riga": 3531,
+   "sorgente": "b0 = self.phi_s if len(self.phi_s) == n else np.zeros(n)",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self._nb",
+   "dentro": "_passo_spinoriale",
+   "op": "Lt",
+   "riga": 3533,
+   "sorgente": "elif len(self._nb) < n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self._nb",
+   "dentro": "_passo_spinoriale",
+   "op": "Gt",
+   "riga": 3537,
+   "sorgente": "elif len(self._nb) > n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self.psi",
+   "dentro": "_passo_spinoriale",
+   "op": "Lt",
+   "riga": 3550,
+   "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "_xi",
+   "dentro": "_passo_spinoriale",
+   "op": "Lt",
+   "riga": 3570,
+   "sorgente": "if _xi is None or len(_xi) < n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self._nb_prec",
+   "dentro": "_passo_spinoriale",
+   "op": "NotEq",
+   "riga": 3601,
+   "sorgente": "if not hasattr(self, \"_nb_prec\") or self._nb_prec is None or len(self._nb_prec) != n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self.perc_chi",
+   "dentro": "_passo_spinoriale",
+   "op": "GtE",
+   "riga": 3630,
+   "sorgente": "if CHI_CORE and len(self.perc_chi) >= n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self.psi",
+   "dentro": "_passo_spinoriale",
+   "op": "Lt",
+   "riga": 3665,
+   "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < n: self.calcola_psi()",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "_csp_in",
+   "dentro": "_passo_spinoriale",
+   "op": "GtE",
+   "riga": 3697,
+   "sorgente": "if _csp_in is not None and len(_csp_in) >= n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "psi_snapshot",
+   "dentro": "_passo_spinoriale",
+   "op": "GtE",
+   "riga": 4034,
+   "sorgente": "if psi_snapshot is not None and len(psi_snapshot) >= n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self.psi",
+   "dentro": "_passo_spinoriale",
+   "op": "GtE",
+   "riga": 4036,
+   "sorgente": "elif len(self.psi) >= n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self.perc_chi",
+   "dentro": "_passo_spinoriale",
+   "op": "GtE",
+   "riga": 4088,
+   "sorgente": "if (OROLOGIO_SEGNO and hasattr(self, \"perc_chi\") and len(self.perc_chi) >= n) else 1.0)",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "_csp2",
+   "dentro": "_passo_spinoriale",
+   "op": "GtE",
+   "riga": 4095,
+   "sorgente": "if _csp2 is not None and len(_csp2) >= n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "_rs",
+   "dentro": "_rho_sorgente",
+   "op": "GtE",
+   "riga": 4384,
+   "sorgente": "if _rs is not None and len(_rs) >= n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "_ps",
+   "dentro": "_nb_grav",
+   "op": "GtE",
+   "riga": 4395,
+   "sorgente": "if _ps is not None and len(_ps) >= n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "nbr",
+   "dentro": "_bloch_ritardato",
+   "op": "NotEq",
+   "riga": 5195,
+   "sorgente": "if nbr is None or len(nbr) != n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "r_loc",
+   "dentro": "_bloch_ritardato",
+   "op": "Lt",
+   "riga": 5211,
+   "sorgente": "if r_loc is None or len(r_loc) < n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "r",
+   "dentro": "_r_nodo_mitosi",
+   "op": "Lt",
+   "riga": 5275,
+   "sorgente": "if r is None or len(r) < n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "csn",
+   "dentro": "_tau_arco_causale",
+   "op": "Lt",
+   "riga": 5315,
+   "sorgente": "if csn is None or len(csn) < self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "csp",
+   "dentro": "_tempo_luce_nodo",
+   "op": "GtE",
+   "riga": 5385,
+   "sorgente": "if csp is not None and len(csp) >= n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "_ps",
+   "dentro": "_coppia_interferenza",
+   "op": "GtE",
+   "riga": 5408,
+   "sorgente": "if _ps is not None and len(_ps) >= n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "getattr(self, 'psi_spin', [])",
+   "dentro": "step",
+   "op": "Eq",
+   "riga": 5472,
+   "sorgente": "and len(getattr(self, \"psi_spin\", [])) == self.n):",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "getattr(self, 'psi_spin', [])",
+   "dentro": "step",
+   "op": "Eq",
+   "riga": 5476,
+   "sorgente": "if CAMPO_SPINORIALE and hasattr(self, \"psi_spin\") and len(getattr(self, \"psi_spin\", [])) == self",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.perc_chi",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5518,
+   "sorgente": "if TEMPO_SEGNO and not (not np.isscalar(dt_n) and len(self.perc_chi) >= self.n",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.psi",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5519,
+   "sorgente": "and len(self.psi) >= self.n):",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.perc_chi",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5523,
+   "sorgente": "if TEMPO_SEGNO and not np.isscalar(dt_n) and len(self.perc_chi) >= self.n and len(self.psi) >= s",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.psi",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5523,
+   "sorgente": "if TEMPO_SEGNO and not np.isscalar(dt_n) and len(self.perc_chi) >= self.n and len(self.psi) >= s",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.perc_chi",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5646,
+   "sorgente": "if CHI_CORE and len(self.perc_chi) >= self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.perc_chi",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5653,
+   "sorgente": "elif VERSO_CHI and len(self.perc_chi) >= self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.perc_chi",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5661,
+   "sorgente": "elif not (CHI_CORE and len(self.perc_chi) >= self.n):",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.d0",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5681,
+   "sorgente": "P_eq = float(np.median(self.d0[:self.n])) if self.n > 0 and len(self.d0) >= self.n else 1.0",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.psi",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5685,
+   "sorgente": "_psi_ct = (self.psi if len(self.psi) >= self.n else None)",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.phivel",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5730,
+   "sorgente": "pv = self.phivel[:self.n] if len(self.phivel) >= self.n else np.zeros(self.n)",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.phi_s",
+   "dentro": "step",
+   "op": "NotEq",
+   "riga": 5769,
+   "sorgente": "if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) != self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.phi_s",
+   "dentro": "step",
+   "op": "Eq",
+   "riga": 5773,
+   "sorgente": "if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) == self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.perc_chi",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5783,
+   "sorgente": "if TORS_4PI and len(self.perc_chi) >= self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "getattr(self, _cache_tors, [])",
+   "dentro": "step",
+   "op": "Eq",
+   "riga": 5790,
+   "sorgente": "len(getattr(self, _cache_tors, [])) == self.n",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._deg",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5799,
+   "sorgente": "_twn = _twn / np.maximum(self._deg[:self.n] if len(self._deg) >= self.n else 1.0, 1.0)",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.perc_chi",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5816,
+   "sorgente": "if CHI_BASC and (CHI_COOP or not CHI_DA_SPINORE) and len(self.perc_chi) >= self.n and len(self.t",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.perc_chi",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5842,
+   "sorgente": "len(self.perc_chi) >= self.n",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "getattr(self, '_psi_spinor', [])",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5843,
+   "sorgente": "and len(getattr(self, \"_psi_spinor\", [])) >= self.n):",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.perc_chi",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5848,
+   "sorgente": "if (_chi_da_psi and SPINORE_CORRETTO and len(self.perc_chi) >= self.n",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "getattr(self, '_psi_spinor', [])",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5849,
+   "sorgente": "and len(getattr(self, \"_psi_spinor\", [])) >= self.n):",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "_pv_src",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 5931,
+   "sorgente": "r_nodo = np.abs(_pv_src[:self.n]) if len(_pv_src) >= self.n else np.ones(self.n)",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.psi",
+   "dentro": "step",
+   "op": "GtE",
+   "riga": 6156,
+   "sorgente": "_I_ok = hasattr(self, \"psi\") and len(self.psi) >= self.n",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self.psi",
+   "dentro": "pozzo_grafo",
+   "op": "GtE",
+   "riga": 6891,
+   "sorgente": "I = (np.abs(self.psi[:n]) ** 2 if intensita is None and len(self.psi) >= n",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self.psi",
+   "dentro": "memoria_hebbiana_moto",
+   "op": "Lt",
+   "riga": 6933,
+   "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self.mem_mot",
+   "dentro": "memoria_hebbiana_moto",
+   "op": "Lt",
+   "riga": 6940,
+   "sorgente": "if len(self.mem_mot) < n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._nb",
+   "dentro": "memoria_hebbiana_moto",
+   "op": "Lt",
+   "riga": 7046,
+   "sorgente": "if not hasattr(self, \"_nb\") or self._nb is None or len(self._nb) < self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self.phi_s",
+   "dentro": "memoria_hebbiana_moto",
+   "op": "Eq",
+   "riga": 7047,
+   "sorgente": "b0 = self.phi_s if len(self.phi_s) == self.n else np.zeros(self.n)",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._nb",
+   "dentro": "memoria_hebbiana_moto",
+   "op": "GtE",
+   "riga": 7060,
+   "sorgente": "if SPINORE and not (self._nb is not None and len(self._nb) >= self.n):",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._nb",
+   "dentro": "memoria_hebbiana_moto",
+   "op": "GtE",
+   "riga": 7064,
+   "sorgente": "if SPINORE and self._nb is not None and len(self._nb) >= self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "self._nb",
+   "dentro": "memoria_hebbiana_moto",
+   "op": "GtE",
+   "riga": 7117,
+   "sorgente": "if LS_AZIM and self._nb is not None and len(self._nb) >= self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "self.n",
+   "cosa": "_csn",
+   "dentro": "memoria_hebbiana_moto",
+   "op": "GtE",
+   "riga": 7259,
+   "sorgente": "if _csn is not None and len(_csn) >= self.n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "self.psi",
+   "dentro": "memoria_hebbiana_moto",
+   "op": "GtE",
+   "riga": 7325,
+   "sorgente": "I_nodi = np.abs(self.psi[:n]) ** 2 if hasattr(self, \"psi\") and len(self.psi) >= n else np.ones(n",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "net.psi",
+   "dentro": "_render_vista_rete_sola",
+   "op": "GtE",
+   "riga": 7999,
+   "sorgente": "if hasattr(net, \"psi\") and len(net.psi) >= n:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "net.perc_chi",
+   "dentro": "_render_vista_rete_sola",
+   "op": "GtE",
+   "riga": 8004,
+   "sorgente": "chi = (net.perc_chi[:n] if hasattr(net, \"perc_chi\") and len(net.perc_chi) >= n",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "net.d",
+   "dentro": "_diag_completa",
+   "op": "GtE",
+   "riga": 9929,
+   "sorgente": "cols['d_min'], cols['d_max'], cols['d_mean'], _ = _stat(net.d[:n] if len(net.d) >= n else net.d)",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "net.d0",
+   "dentro": "_diag_completa",
+   "op": "GtE",
+   "riga": 9930,
+   "sorgente": "cols['d0_min'], cols['d0_max'], cols['d0_mean'], _ = _stat(net.d0[:n] if len(net.d0) >= n else n",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "net.eta",
+   "dentro": "_diag_completa",
+   "op": "GtE",
+   "riga": 9940,
+   "sorgente": "_eta_v = net.eta[:n] if len(net.eta) >= n else net.eta",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "_nb_g",
+   "dentro": "_diag_completa",
+   "op": "GtE",
+   "riga": 9983,
+   "sorgente": "if _nb_g is not None and len(_nb_g) >= n and n > 0:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "_psp",
+   "dentro": "_diag_completa",
+   "op": "GtE",
+   "riga": 10000,
+   "sorgente": "if (_nb_g is not None and _psp is not None and len(_psp) >= n and len(_nb_g) >= n and n > 0 and ",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "_nb_g",
+   "dentro": "_diag_completa",
+   "op": "GtE",
+   "riga": 10000,
+   "sorgente": "if (_nb_g is not None and _psp is not None and len(_psp) >= n and len(_nb_g) >= n and n > 0 and ",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "net.perc_chi",
+   "dentro": "_diag_completa",
+   "op": "GtE",
+   "riga": 10019,
+   "sorgente": "_pcm = np.sign(np.asarray(net.perc_chi[:n])) if len(net.perc_chi) >= n else np.ones(n)",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "_nbm",
+   "dentro": "_diag_completa",
+   "op": "GtE",
+   "riga": 10134,
+   "sorgente": "if _nbm is not None and len(_nbm) >= n and nuc.sum() >= 3:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "_omm",
+   "dentro": "_diag_completa",
+   "op": "GtE",
+   "riga": 10141,
+   "sorgente": "if _omm is not None and len(_omm) >= n and nuc.sum() >= 3:",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "net.phivel",
+   "dentro": "_diag_completa",
+   "op": "GtE",
+   "riga": 10388,
+   "sorgente": "if len(net.phivel) >= n and len(ii):",
+   "verso": "sx"
+  },
+  {
+   "contro": "n",
+   "cosa": "net.perc_chi",
+   "dentro": "_diag_completa",
+   "op": "GtE",
+   "riga": 10405,
+   "sorgente": "if len(net.perc_chi) >= n and n > 10:",
+   "verso": "sx"
+  }
+ ]
+}

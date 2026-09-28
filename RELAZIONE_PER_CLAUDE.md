@@ -6149,3 +6149,64 @@ serve a distinguere `1.05` da `2.81`, non a misurare.**
 > non lo faccio senza il tuo via:** il **riordino** della mitosi nelle quattro fasi *(decisione ·
 > struttura · nascita · derivate)*. ### **Questo pezzo lo ha reso MISURABILE — si sa che il flash
 > non c'è più e che la byte-identità nei passi senza nascite tiene — ma NON lo ha fatto.**
+
+---
+
+# ✗ **«Ipotesi ④ corroborata» era una LETTURA SBAGLIATA. E l'elenco dei ripieghi** *(2026-09-28)*
+
+> ### **Rilievo del guardiano, e ha ragione:** il passo dopo la nascita, curato, fa
+> **`146.2450 = 1.1107×` la base**, cioè ### **l'11 % SOPRA.** ### **Ho letto «non più sotto» come
+> «a posto».** Il livello sotto la base **non è sparito per la cura: è stato COPERTO da un altro
+> difetto di segno opposto.**
+
+### ⛔ **E il mio sigillo è passato lasciando un difetto visibile nei SUOI STESSI numeri:** il braccio
+`C` guardava **solo il passo di nascita**. ### **Il numero `1.1107` sta scritto nel referto che ho
+committato dicendo che tutto passava.**
+
+**`PSI-FLASH` è RIAPERTA.** Il flash **grande** al passo di nascita **è curato** *(pozzo `138.6`
+contro `366.2`)*; quello che resta è ### **il gradino al passo dopo**: `140.0 → 138.6 → 146.2 (+5 %)
+→ 137.6`.
+
+**La causa, misurata dal guardiano** *(e il suo `146.24` è lo stesso che ho misurato io)*:
+`_rho_sorgente` `:4382-4386` ha un **secondo ripiego silenzioso** — se `len(rho_spin) < n`
+restituisce `|psi|²` **invece di `rho_spin`, per tutta la rete**. `_eredita_psi_figli` estende `psi` e
+`psi_spin` ### **ma NON `rho_spin`.**
+
+---
+
+# 📋 **L'ELENCO, come chiesto: tutti i ripieghi `len(x) < n` → valore di scorta**
+
+*(`csv/_test_fork/_ripieghi_len_n.py`, due passaggi.)*
+
+## ① STATICO, dall'AST
+
+### **`100` confronti fra un `len(...)` e `n`/`self.n`, in `26` funzioni.**
+### **La famiglia è molto più larga dei tre ripieghi noti** — ed è esattamente perché l'elenco viene
+**prima** della cura.
+
+## ② ### **A RUNTIME: chi prende DAVVERO il ramo di scorta**
+
+| passo | sito | volte / chiamate | `len` → `n` |
+|---|---|---|---|
+| ### **42** *(la nascita)* | — | ### **NESSUNO** | — |
+| **43** | ### `_rho_sorgente` `:4384` `_rs` | **2 su 15** | `12802 → 12803` |
+| **43** | `_passo_spinoriale` `:3570` `_xi` | **1** | `12802 → 12803` |
+
+> ### 📌 **Al passo di NASCITA nessun ripiego scatta più: lì la cura è COMPLETA.** Quello che resta
+> è **il passo dopo**, e sono **due** siti — di cui ### **uno solo è un difetto.**
+
+## ⚠ **E la differenza fra i due è la ragione per cui l'elenco non è un verdetto**
+
+| | |
+|---|---|
+| ### `_rho_sorgente` | ### **È IL DIFETTO.** Restituisce **un'altra densità** *(`\|psi\|²` invece di `rho_spin`)* per tutta la rete, **in silenzio** |
+| ### `_xi_rumore` `:3570` | ### **NON è un difetto, e lo dice il codice:** *«questo NON è un fallback: è il percorso normale della mitosi. `xi` è l'AMBIENTE, non una proprietà del nodo, quindi il figlio NON lo eredita»*. **Estrae un campione fresco per i soli nuovi**, tiene intatti gli esistenti, ### **ed è già CONTATO** *(`_xi_chiamate`, `_xi_esteso`)* |
+
+**E `_nb_grav`** *(`psi_spin` corto → `self._nb`)*: ### **stessa FORMA, ma non scatta mai in questa
+finestra.** Riceve lo stesso trattamento per decisione tua — e ### **la sua cura sarà byte-inerte su
+questa scena**, che va detto prima di misurarla.
+
+> ### 📌 **La lezione dell'elenco:** su `100` confronti della stessa forma, **quelli che mordono qui
+> sono `2`, e uno dei due è legittimo e dichiarato.** ### **La forma non basta a giudicare: serve
+> sapere CHE COSA restituisce il ramo di scorta.** *(Ed è il motivo per cui non ho curato niente
+> prima di elencare.)*
