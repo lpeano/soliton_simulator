@@ -5636,3 +5636,44 @@ default** · **REGISTRO_FISICA** — la scheda *«una guardia di memoria non è 
 **Prossimo: il sigillo.** Quattro letture, fissate nel task history `1b90fef` **prima** di vedere i
 numeri: **A** byte-identico 23/23 · **B** il caso che deve fallire · **C** il controllo positivo sul
 blob vecchio · **D** lo sforo, che **si riporta**.
+
+---
+
+# ✗ **CORREZIONE: avevo scritto «dichiarato e MISURATO» di una cosa che NON è misurata** *(2026-09-28)*
+
+### **Simulatore `b4cc6645` → `a37414cf`. Solo commenti e schede: nessuna riga eseguibile.**
+
+**Nel commit `95249c5` ho scritto, dentro `esegui_passo`:**
+
+```
+⚠ IL LIMITE, DICHIARATO E MISURATO (non supposto): ... Lo sforo massimo per
+passo e' riportato dal sigillo `csv/_seal_fork/_sig_max_nodi.py`.
+```
+
+### **Era falso quando l'ho scritto**, e la stessa frase era finita in due schede del
+`REGISTRO_FISICA`. **Non solo non era misurato: NON È MISURABILE su quella scena.**
+
+## La misura che l'ha smentito
+
+| | |
+|---|---|
+| scena | `(ii)(a)` `MASSE-COERENTI`, seme `11`, `n = 2107` |
+| passi girati | ### **40** |
+| nascite | ### **ZERO** — `n` resta `2107` per tutti e 40 |
+
+> ### 📌 **Quindi `n` non cresce, e uno sforo non si osserva.** Per misurarlo serve **una scena che
+> cresce**, cioè un run lungo: ### **è una misura a sé, e non è questa.**
+
+**E la conseguenza sul sigillo, che è la ragione per cui l'ho scoperto:** il braccio che doveva far
+scattare **il controllo dello schedulatore** *(`--maxnodi` pari a `n`, aspettando che una nascita
+sfori)* ### **non scatta mai** — il run arriva in fondo. **Il braccio era mal progettato, non la
+cura.** *(E `semina` ora ferma prima che una scena possa nascere oltre il limite, quindi la strada
+«scena più grande del tetto» è chiusa per costruzione.)*
+
+**Come si esercita allora il sito dello schedulatore:** con un `net` **sintetico** il cui `n` supera
+`MAX_NODI`. Il controllo sta **prima** della validazione e **prima di toccare `net`**, quindi un
+oggetto con il solo `.n` basta — ed è il pattern del collaudo a due facce di `_h_etc_1.py`.
+### **E dà un controllo positivo netto: il blob NUOVO solleva `LimiteNodiSuperato`, il VECCHIO
+arriva a toccare `net` e muore di `AttributeError`.**
+
+**Il sigillo è nel commit successivo**, sul blob `a37414cf`.

@@ -4302,8 +4302,10 @@ che l'avrebbe **saltato nel caso più comune** *(nessun `--regime` sulla riga di
 > `_ferma_se_oltre_max_nodi(net.n, 0, ...)`: ### **un passo che non si puo' fare NON COMINCIA.**
 > **Sta all'inizio e non alla fine** perche' all'inizio e' una *precondizione*, alla fine
 > sarebbe una *constatazione* con lo stato gia' oltre il limite. ### ⚠ **E il limite,
-> dichiarato:** `mitosi` crea nodi **dentro** il passo, quindi un passo che sfora **finisce**
-> e l'errore arriva **al passo dopo** -- lo **sforo si MISURA** nel sigillo.
+> dichiarato e NON MISURATO:** `mitosi` crea nodi **dentro** il passo, quindi un passo che
+> sfora **finisce** e l'errore arriva **al passo dopo**. ### **QUANTO sia lo sforo NON LO SO:**
+> sulla scena dei sigilli `(ii)(a)` sono **misurati 40 passi con ZERO nascite**, quindi `n` non
+> cresce e lo sforo **non si osserva**. Serve una scena **che cresce**: e' una misura a se'.
 > *(La legge della guardia sta nella scheda `guardia-max-nodi`.)*
 # ㉙ LO SCHEDULATORE DEL PASSO — **`esegui_passo` / `PASSO_COMPOSIZIONE`**
 
@@ -4505,7 +4507,7 @@ forma di `A8`.
 | **la forma, ora** | **UN** controllo, `_ferma_se_oltre_max_nodi(n_attuale, quanti, dove)`, e **un'eccezione dedicata**, `LimiteNodiSuperato`. **Quattro siti di chiamata**: lo schedulatore *(inizio del passo)*, `semina` *(numero chiesto)*, `semina` *(saturazione, dopo la geometria)* -- e i due rami di `mitosi` che **non leggono piu' `MAX_NODI`** |
 | **perche' UNA funzione e non tre `raise`** | tre copie sarebbero **tre leggi**, e `9-ter`: *a parita' di effetto si preferisce togliere un'eccezione* |
 | **dove sta il controllo dello schedulatore** | ### **all'INIZIO del passo**, perche' e' una **precondizione**: un passo che non si puo' fare **non comincia**. Alla fine sarebbe una constatazione, con lo stato gia' oltre il limite |
-| ⚠ **il limite, dichiarato** | `mitosi` crea nodi **dentro** il passo: un passo che sfora **finisce**, e l'errore arriva **al passo dopo**. Lo sforo si **MISURA** nel sigillo, non si suppone |
+| ⚠ **il limite, dichiarato e NON MISURATO** | `mitosi` crea nodi **dentro** il passo: un passo che sfora **finisce**, e l'errore arriva **al passo dopo**. ### **Quanto sia lo sforo NON LO SO:** sulla scena dei sigilli sono **misurati 40 passi con ZERO nascite**, quindi `n` non cresce e lo sforo non si osserva. Serve una scena **che cresce** |
 | **la dimensione** | `4000000` contro i **~12800** nodi del pilota: **byte-inerte, e sigillato 23 su 23** |
 | **il futuro** | ### **va ELIMINATO** *(decisione di Luca)*. Una guardia che non serve e' una riga in meno, non una legge |
 

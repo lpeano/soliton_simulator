@@ -1034,9 +1034,13 @@ def esegui_passo(net, composizione=None):
     # [MAX-NODI-FERMA, 2026-09-28] IL CONTROLLO DELLO SCHEDULATORE, e sta all'INIZIO perche' e'
     #   una PRECONDIZIONE: <<questo passo si puo' fare>>. Un passo che non si puo' fare NON
     #   COMINCIA. Alla fine sarebbe una constatazione, e lo stato sarebbe gia' oltre il limite.
-    #   ⚠ IL LIMITE, DICHIARATO E MISURATO (non supposto): `mitosi` crea nodi DENTRO il passo,
-    #   quindi un passo che sfora FINISCE e l'errore arriva al passo DOPO. Lo sforo massimo per
-    #   passo e' riportato dal sigillo `csv/_seal_fork/_sig_max_nodi.py`.
+    #   ⚠ IL LIMITE, DICHIARATO E **NON MISURATO**: `mitosi` crea nodi DENTRO il passo, quindi un
+    #   passo che sfora FINISCE e l'errore arriva al passo DOPO. **QUANTO** sia lo sforo massimo
+    #   NON LO SO, e non e' misurato: sulla scena dei sigilli `(ii)(a)` (n = 2107, seme 11)
+    #   MISURATI 40 PASSI CON ZERO NASCITE, quindi `n` non cresce e lo sforo non si osserva. Per
+    #   misurarlo serve una scena CHE CRESCE, cioe' un run lungo -- ed e' una misura a se'.
+    #   *(Il commento precedente diceva <<dichiarato e MISURATO ... riportato dal sigillo>>: era
+    #   FALSO quando l'ho scritto, e questa e' la correzione. Vedi `MAX-NODI-FERMA`.)*
     _ferma_se_oltre_max_nodi(net.n, 0, 'schedulatore: inizio del passo')
     for _nome in comp:
         if _nome in _PASSO_FASI:
