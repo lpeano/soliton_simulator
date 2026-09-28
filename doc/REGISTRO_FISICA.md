@@ -4313,6 +4313,14 @@ che l'avrebbe **saltato nel caso più comune** *(nessun `--regime` sulla riga di
 > sulla scena dei sigilli `(ii)(a)` sono **misurati 40 passi con ZERO nascite**, quindi `n` non
 > cresce e lo sforo **non si osserva**. Serve una scena **che cresce**: e' una misura a se'.
 > *(La legge della guardia sta nella scheda `guardia-max-nodi`.)*
+
+> ### 🗄 **2026-09-28: `_passo.passo_pieno` ha un FALLBACK per i blob PRE-`T1`, e non indebolisce
+> `H-P9`.** Un blob storico estratto **non ha `esegui_passo`**, quindi dopo `T1` ### **nessun sigillo
+> poteva piu' confrontarsi con il codice di prima** -- ed e' esattamente cio' che `H-P8` esiste per
+> proteggere. Il fallback itera `ordine()` *(le CINQUE LEGGI, che sono le stesse prima e dopo `T1`:
+> `T1` ha aggiunto le FASI, che un blob pre-`T1` non ha)* e ### **scatta SOLO quando l'esecutore NON
+> ESISTE**, cosa che per il simulatore sul disco non puo' succedere: **per il codice di oggi il ramo
+> e' MORTO**. Contato da `_g_passo_pieno_pre_t1`.
 # ㉙ LO SCHEDULATORE DEL PASSO — **`esegui_passo` / `PASSO_COMPOSIZIONE`**
 
 > ### **`T1` del piano `SCHED-PASSO`** *(2026-09-28, decisione di Luca)*: **lo schedulatore possiede

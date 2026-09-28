@@ -221,7 +221,28 @@ def passo_pieno(S, net):
     dall'esecutore**: se non lo fa, si solleva qui invece di far girare due fisiche.
     """
     composizione()          # il controllo del contratto: solleva se il driver va per conto suo
-    return S.esegui_passo(net)
+    _ese = getattr(S, "esegui_passo", None)
+    if _ese is not None:
+        return _ese(net)
+    # ------------------------------------------------------------------ FALLBACK PRE-`T1`
+    # ⚠ SERVE A UNA COSA SOLA, e va detta: far avanzare un BLOB STORICO ESTRATTO che
+    #   `esegui_passo` NON CE L'HA, perche' precede `T1`. Senza questo, **nessun sigillo puo'
+    #   piu' confrontarsi con un blob pre-`T1`** -- e il confronto col codice di prima e' la
+    #   cosa che `H-P8` esiste per proteggere.
+    # ### NON INDEBOLISCE `H-P9`: scatta SOLO quando l'esecutore NON ESISTE, cosa che per il
+    #   simulatore sul disco non puo' succedere. Per il codice di oggi il ramo e' MORTO, e chi
+    #   volesse saltare l'esecutore lo troverebbe comunque li'.
+    # ### E NON REINVENTA L'ORDINE: usa `ordine()`, che legge `PASSO_COMPOSIZIONE`. Le cinque
+    #   LEGGI sono le stesse prima e dopo `T1` -- `T1` ha aggiunto le FASI (`apri`, `chiudi`,
+    #   `verifica_invarianti`), che un blob pre-`T1` non ha e che `ordine()` non restituisce.
+    _pre = getattr(S, "_g_passo_pieno_pre_t1", 0)
+    S._g_passo_pieno_pre_t1 = _pre + 1
+    for _tipo, _nome in ordine():
+        if _tipo == "modulo":
+            getattr(S, _nome)(net)
+        else:
+            getattr(net, _nome)()
+    return None
 
 
 def frame_pieno(S, net, passi=None):
