@@ -1473,7 +1473,7 @@ nascite misurato prima di questa cura, nei passi con nascite, viene da un campo 
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura |
 |---|---|---|---|
-| `csv/_test_fork/_guasto_ripieghi.py` | `7582e89c` | `python csv/_test_fork/_guasto_ripieghi.py --passi=30` | dallo stato al passo **30** della scena **GRANDE**, per **ogni** grandezza per nodo: che cosa fa un passo se la cache e' **CORTA** o **LUNGA** di uno. Quattro esiti: **PROTETTO** *(errore dichiarato)*, **ROTTO RUMOROSO**, **RIPIEGO SILENZIOSO**, **INERTE** |
+| `csv/_test_fork/_guasto_ripieghi.py` | `3df06c44` | `python csv/_test_fork/_guasto_ripieghi.py --passi=30` | dallo stato al passo **30** della scena **GRANDE**, per **ogni** grandezza per nodo: che cosa fa un passo se la cache e' **CORTA** o **LUNGA** di uno. Quattro esiti: **PROTETTO** *(errore dichiarato)*, **ROTTO RUMOROSO**, **RIPIEGO SILENZIOSO**, **INERTE** |
 
 > ### 📌 **E' COMMITTATO PRIMA DI GIRARE, e quindi qui non ci sono numeri:** il mandato chiede
 > **lo strumento prima della misura**, e un esito scritto prima del giro sarebbe una previsione
@@ -1504,3 +1504,11 @@ deve dare **RIPIEGO SILENZIOSO su TUTTA LA RETE** -- e' il flash di `PSI-FLASH`.
 > solo se **entrambi** i guasti danno **PROTETTO**, **oppure** se danno **INERTE** ed e'
 > **DIMOSTRATO** che nessuna legge del passo la legge. ### **«Inerte» da solo NON BASTA**, e lo
 > strumento lo stampa accanto al conteggio invece di lasciarlo capire.
+
+> ### ⛔ **Il primo giro (`7582e89c`) e' MORTO nel CONTROLLO, e il difetto era mio.** Il confronto
+> sanificava con `nan_to_num` **DOPO** la sottrazione, e il simulatore impone
+> **`np.seterr(invalid='raise')`** *(`:8835`, invarianti accesi = default)*.
+> ### **`invalid` non scatta su un `nan` che passa: scatta su `inf - inf`** — quindi almeno una
+> grandezza per nodo porta un `inf`. **`3df06c44`** sanifica **prima**, sotto `errstate`, conta
+> **`NaN` contro `NaN` come UGUALE**, e ### **ELENCA le grandezze non finite** invece di morirci
+> sopra. *(Il fallimento e' committato a se': `360e681`.)*

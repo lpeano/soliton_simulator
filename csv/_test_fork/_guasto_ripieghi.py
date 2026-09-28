@@ -41,6 +41,10 @@ leggeva **il ramo sbagliato** degli `IfExp`.
    silenzio il passo si **rigira con un tracciatore** limitato alle funzioni della tabella
    generata, e si registra **quale delle righe elencate ha ESEGUITO**. *(E' misura, non lettura:
    e' il punto della prova.)*
+3. ### **il confronto sanifica PRIMA della sottrazione, sotto `errstate`**, e `NaN` contro `NaN`
+   conta **uguale**. *(Il simulatore impone `np.seterr(invalid='raise')` a `:8835`: sanificare
+   dopo ha ucciso il primo giro dentro il CONTROLLO. E `invalid` scatta su `inf - inf`, non su un
+   `nan` che passa -- quindi le grandezze **non finite** ora si **ELENCANO**.)*
 
 COMANDO:  python csv/_test_fork/_guasto_ripieghi.py [--passi=30] [--salta-precura]
 USCITA:   0 se il controllo tiene e il caso che deve fallire fallisce; 1 altrimenti.
@@ -143,6 +147,63 @@ def _foto(net):
     return q
 
 
+def _diff(xa, ya):
+    """**La differenza: sotto `errstate`, e sanificando PRIMA -- non dopo.**
+
+    ### Perche' esiste, ed e' un FALLIMENTO MISURATO il 2026-09-28
+    Il simulatore imposta **`np.seterr(over='raise', divide='raise', invalid='raise')`** a
+    `:8835`, **con gli invarianti ACCESI, che sono il default**. Io sanificavo con `nan_to_num`
+    **DOPO** la sottrazione, cioe' **dopo** l'operazione che alza l'eccezione:
+    ### **il primo giro e' morto nel CONTROLLO, e non per la fisica.**
+
+    ### ⚠ **E `invalid` NON scatta su un `nan` che passa: scatta su `inf - inf`.** Quindi almeno
+    una grandezza per nodo porta un `inf` -- e adesso ### **si ELENCA** *(`non_finiti`)* invece di
+    far morire il confronto.
+
+    **`NaN` contro `NaN` conta UGUALE:** e' lo **stesso stato**, non un cambiamento.
+    """
+    with np.errstate(all="ignore"):
+        try:
+            eq = np.asarray(xa == ya)
+        except Exception:
+            return None, 0.0
+        try:
+            eq = eq | (np.isnan(xa) & np.isnan(ya))
+        except (TypeError, ValueError):
+            pass
+        diverso = ~eq
+        try:
+            fx = np.nan_to_num(xa.astype(complex), nan=0.0, posinf=0.0, neginf=0.0)
+            fy = np.nan_to_num(ya.astype(complex), nan=0.0, posinf=0.0, neginf=0.0)
+            s = float(np.abs(fx - fy).max()) if bool(diverso.any()) else 0.0
+        except Exception:
+            s = float("nan")
+    return diverso, s
+
+
+def non_finiti(net, elenco):
+    """Quali grandezze portano `inf` o `nan`, e quanti. ### **Si ELENCA: e' un fatto sullo stato.**
+
+    *(Il primo giro e' morto proprio su questo, senza dire quale grandezza fosse.)*
+    """
+    q = {}
+    with np.errstate(all="ignore"):
+        for k in list(elenco) + [x for x in GRANDEZZE if x not in elenco]:
+            v = getattr(net, k, None)
+            if v is None:
+                continue
+            try:
+                arr = np.asarray(v)
+                if arr.dtype.kind not in "fc":
+                    continue
+                q_inf, q_nan = int(np.sum(np.isinf(arr))), int(np.sum(np.isnan(arr)))
+            except Exception:
+                continue
+            if q_inf or q_nan:
+                q[k] = {"inf": q_inf, "nan": q_nan, "elementi": int(arr.size)}
+    return q
+
+
 def _confronta(a, b, n_nodi, n_archi):
     """Quante grandezze, quanti **nodi** e quanti **archi** cambiano, e lo scostamento massimo.
 
@@ -166,13 +227,13 @@ def _confronta(a, b, n_nodi, n_archi):
             forme.append(k)
             cambiate.append(k + "(forma)")
             continue
-        d = np.abs(np.nan_to_num(np.asarray(xa - ya, complex), nan=0.0, posinf=0.0, neginf=0.0))
-        if not (d.size and float(d.max()) > 0.0):
+        diverso, s = _diff(xa, ya)
+        if diverso is None or not bool(diverso.any()):
             continue
         cambiate.append(k)
-        scost = max(scost, float(d.max()))
-        ax = d.reshape(len(d), -1)
-        quanti = int(np.sum(ax.max(axis=1) > 0.0))
+        scost = max(scost, s)
+        ax = diverso.reshape(len(diverso), -1)
+        quanti = int(np.sum(ax.any(axis=1)))
         if per_arco:
             archi = max(archi, quanti)
         else:
@@ -341,6 +402,15 @@ def principale():
     print("  SOSPETTE (per arco con len == n per caso): %s"
           % (", ".join(sospette) if sospette else "NESSUNA (n = %d != archi = %d)" % (n0, m0)))
     print("")
+    nf = non_finiti(net, elenco)
+    print("  NON FINITI allo stato BASE (`inf` o `nan`): %s" % ("NESSUNO" if not nf else ""))
+    for k in sorted(nf):
+        print("    %-26s inf %-8d nan %-8d su %d elementi"
+              % (k, nf[k]["inf"], nf[k]["nan"], nf[k]["elementi"]))
+    if nf:
+        print("  ⚠ E' IL MOTIVO PER CUI IL PRIMO GIRO E' MORTO: `np.seterr(invalid='raise')`")
+        print("    (:8835) e `inf - inf`. Ora si elenca e il confronto sanifica PRIMA.")
+    print("")
 
     # ---- 3: il CONTROLLO ----------------------------------------------------------------
     print("=" * 108)
@@ -361,7 +431,7 @@ def principale():
         print("  ### CONTROLLO FALLITO: LA PROVA NON VALE, e non si finge che valga.")
         io.open(os.path.join(FUORI, "_guasto_ripieghi.json"), "w", encoding="utf-8",
                 newline=chr(10)).write(json.dumps(
-                    {"vale": False, "controllo": c,
+                    {"vale": False, "controllo": c, "non_finiti_a_BASE": nf,
                      "motivo": "un passo da due copie di BASE non e' byte-identico"},
                     indent=1, ensure_ascii=False, default=float))
         return 1
@@ -453,6 +523,7 @@ def principale():
          "nmasse": S._NMASSE_VIDEO["n"], "sep": S._NMASSE_VIDEO["sep"],
          "errori_dichiarati": [c.__name__ for c in DICH], "vale": True,
          "grandezze_per_nodo": elenco, "sospette_per_arco": sospette, "escluse": list(ESCLUSE),
+         "non_finiti_a_BASE": nf,
          "controllo": c, "esiti": esiti,
          "a_posto": a_posto, "inerti": inerti, "ripiego_silenzioso": silenzio,
          "rotto_rumoroso": rumore, "effetto_oltre_ultimo_nodo": tutta_rete,

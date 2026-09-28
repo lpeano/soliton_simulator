@@ -6664,3 +6664,24 @@ DOPO la sottrazione** — cioe' **dopo** l'operazione che alza l'eccezione. ### 
 
 **COSA RICONTROLLARE:** il CONTROLLO **non ha dato verdetto**, quindi ### **della determinabilita'
 del passo da una copia oggi NON SO NIENTE** — ne' che tiene, ne' che non tiene.
+
+---
+
+# 🔧 **La correzione del confronto: sanificare PRIMA, ed ELENCARE i non finiti** *(2026-09-28)*
+
+`csv/_test_fork/_guasto_ripieghi.py` passa da **`7582e89c`** a **`3df06c44`**.
+### **Nessun codice di fisica**; blob del simulatore **`f7541d03`**, invariato.
+
+| | |
+|---|---|
+| **la differenza** | si calcola **sotto `np.errstate(all="ignore")`**, e si **sanifica PRIMA** della sottrazione, non dopo |
+| ### **`NaN` contro `NaN` conta UGUALE** | e' lo **stesso stato**, non un cambiamento. *(Prima avrei contato «cambiato» uno stato identico.)* |
+| **l'uguaglianza e' ESATTA** | `xa == ya`, non una soglia: ### **un ripiego che cambia un bit e' un ripiego** |
+| ### **i non finiti si ELENCANO** | `non_finiti()` dice **quale** grandezza porta `inf` o `nan`, **quanti**, e su quanti elementi — ### **la cosa che il primo giro NON ha detto** |
+
+> ### 📌 **Perche' la correzione e' un commit a se':** il par.5 dice che dopo un fallimento non si
+> aggiusta al volo dentro lo stesso commit. ### **Il fallimento sta in `360e681`, e questo e' il
+> commit della cura** — cosi' da git si vede **che ho sbagliato**, non solo che alla fine tornava.
+
+**⚠ E resta un «non so» aperto, che il giro chiudera':** ### **quale** grandezza porta `inf` non lo
+so ancora. Lo **elenca** lo strumento, non lo deduco io.
