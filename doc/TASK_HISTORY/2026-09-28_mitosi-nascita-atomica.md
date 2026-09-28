@@ -474,3 +474,89 @@ riferirsi allo stesso `psi`.**
 |---|---|
 | **①** | **i due run hanno scritto sullo STESSO `.json`**, quindi quello committato è ### **l'ultimo, cioè il blob di oggi.** I due `.txt` sono entrambi committati e sono il record. **È un difetto del banco**: l'uscita deve dipendere dal blob |
 | **②** | **la copia resta un debito:** `_flash_scomposizione_copia.py` si fonde con `_flash_scomposizione.py` appena i due processi bloccati sono chiusi |
+
+---
+
+# 🎯 **LA CAUSA È TROVATA, e non da me** *(dichiarazione aggiornata, 2026-09-28)*
+
+> ### **L'ha trovata il guardiano** *(Luca)*, con una sonda che traccia `psi` **legge per legge** nel
+> passo della prima nascita. **Va scritto di chi è**, perché il mio banco non ci è arrivato: il suo
+> criterio ④ mi ha fermato *(giustamente: confrontava `psi` calcolato **dentro** `step` con un
+> ricalcolo su uno stato già cambiato — ### **il criterio era MAL POSTO, e l'ho scritto io**)*.
+
+## I suoi numeri
+
+| | |
+|---|---|
+| `mean\|psi\|` sui nodi vecchi | `1.545` all'uscita di **`step`**, di **`mitosi`** e di **`rilassa_disegno`** |
+| | ### **`2.524`** dopo `calcola_psi(w=None)` in `memoria_hebbiana_moto` **`:6822`** *(pozzo `366.17`)* |
+| dentro quel ricalcolo | ### **λ degli archi = `0.800000` = `LAM` su TUTTI gli archi**, contro `0.5937`–`0.6062` nei passi normali |
+| | `exp(-d/λ)` medio **`0.1223`** contro **`0.0655`** |
+
+## La causa, letta dal codice
+
+```
+lambda_nodi :3256   if not hasattr(self, "psi") or len(self.psi) < self.n:
+                        return np.full(self.n, LAM)        <- RIPIEGO SILENZIOSO 1
+lambda_nodi :3261   if getattr(self, "_calcolo_schermatura", False):
+                        return np.full(self.n, LAM)        <- RIPIEGO SILENZIOSO 2
+```
+
+> ### 📌 **Al passo di nascita `mitosi` fa crescere `n`, quindi `len(psi) < n`, quindi `lambda_nodi`
+> restituisce `LAM` PER TUTTA LA RETE: la SCHERMATURA SI SPEGNE IN SILENZIO.** `λ` più grande →
+> `exp(-d/λ)` più grande → **pesi più grandi** → ### **`|psi|` più grande per TUTTI, non per il
+> nato.**
+
+### ➜ **E questo scioglie il paradosso che il guardiano aveva posto:** *«una nascita su 12802 nodi
+non può spostare il campo di tutti di `2.6×` se lo stato è coerente»*. ### **Non lo sposta la
+nascita: lo sposta una GUARDIA CHE SI SPEGNE.** Il `2.6×` non è fisica, è **l'assenza della
+schermatura**.
+
+### **Ed è la famiglia di `A8`/`A9` in forma pura** — la stessa di `MAX_NODI`: *un ripiego che salta
+in silenzio è un comportamento sconosciuto*. **Qui il ripiego non «salta»: cambia la fisica di tutta
+la rete per un passo, e nessuno lo sa dai dati.**
+
+---
+
+# ✅ **LE DECISIONI DI LUCA, e la cura non cambia**
+
+| | decisione |
+|---|---|
+| **①** | ### **la cura resta quella approvata:** `mitosi` **ESTENDE** `psi` *(media dei genitori)* e `psi_spin` *(da `a`)*, così ### **`len(psi) == n` SEMPRE** |
+| **②** | **in più:** i **due** ripieghi silenziosi di `lambda_nodi` diventano ### **ERRORI ESPLICITI** *(`A9`)*, come `MAX_NODI`. **Se dopo la cura uno dei due scatta ancora, il run si ferma e lo dice** |
+| **③** | i **criteri del sigillo**, qui sotto |
+| **④** | un'**ipotesi da VERIFICARE nel sigillo, non da assumere**, qui sotto |
+
+> ### 📌 **La ② è la cura vera, e va detto perché:** la ① fa in modo che il ripiego **non scatti
+> più**; la ② fa in modo che ### **se scattasse, lo si sappia.** Senza la ②, la ① è una cura che
+> *spera*: qualunque altra strada che faccia crescere `n` senza estendere `psi` **rimetterebbe il
+> flash, in silenzio.** **La ① toglie la causa nota; la ② toglie il SILENZIO.**
+
+## ### **I CRITERI DEL SIGILLO, sulla scena GRANDE** *(`sep 6.1158`, `nmasse 3`, seme `11`)*
+
+| | criterio | passa se |
+|---|---|---|
+| ### **A** | **passi SENZA nascite** | ### **byte-identici** |
+| ### **B** | **al passo di nascita: λ degli archi** | ### **resta nell'intervallo dei passi normali** `0.5937`–`0.6062`, ### **NON `0.8`** |
+| ### **C** | **al passo di nascita: `mean(phi_g)`** | ### **resta vicino alla base** *(`130.22`)*, non a `366` |
+| ### **D** | ### **il caso che DEVE fallire** | **sul blob VECCHIO `λ = 0.8` SI DEVE VEDERE.** Senza, `B` non distingue la cura da niente |
+| ### **E** | i due ripieghi, dopo la cura | **non scattano**; e **se scattassero, il run si ferma** |
+
+## ### **L'IPOTESI DA VERIFICARE, NON DA ASSUMERE**
+
+> **I passi SOTTO la base — `60` a `0.908×`, `66` a `0.870×` — sono il passo DOPO un flash, con la
+> schermatura che RIPARTE su una densità GONFIATA.**
+
+**Perché è plausibile:** `lambda_nodi` calcola `u = rho / rho_c` e `fattore = 1/(1+softplus(u-1))`
+— ### **più densità, più schermatura, quindi λ più PICCOLO**. Dopo un flash `rho` è gonfiata, quindi
+al passo seguente λ scende **sotto** il normale, e `|psi|` con lui.
+### ⚠ **Ma NON la assumo:** si verifica guardando λ **al passo successivo alla nascita** e
+confrontandolo coi passi normali. **Se λ non scende, l'ipotesi cade** — e il sotto-base ha un'altra
+causa che va cercata.
+
+## 🗄 **Il banco della scomposizione si ARCHIVIA come superato**
+
+**Decisione di Luca:** la domanda a cui rispondeva — *«quale ingrediente porta il `2.6`?»* — ### **è
+chiusa: lo porta la schermatura che si spegne.** Il banco *(e la sua copia)* vanno in
+`csv/_archivio/`, ### **col motivo e col fatto che il suo criterio ④ era mal posto** — perché un
+banco archiviato senza il perché è un reperto muto.
