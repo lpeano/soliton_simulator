@@ -1,0 +1,127 @@
+[TIMBRO] _ripieghi_len_n.py  sha1-BYTE 3d4aa44c  committato e pulito
+====================================================================================================
+PASSAGGIO 1 -- STATICO: i confronti fra un `len(...)` e `n` / `self.n`
+====================================================================================================
+  riga    dentro                     op     cosa                   sorgente
+  :729    _righe_stato_universo      Lt     net.psi                if not hasattr(net, "psi") or len(net.psi) <
+  :2153   _aggiorna_lift_spinoriale  Lt     self._nb               if not hasattr(self, "_nb") or self._nb is N
+  :2262   _estendi_psi_spinor        Lt     cur                    elif len(cur) < n:
+  :2265   _estendi_psi_spinor        Gt     cur                    elif len(cur) > n:
+  :2403   olonomia_lift_ciclo        Lt     self._spinor_lift      if len(self._spinor_lift) < self.n:
+  :2478   _feedback_spinoriale_archi Lt     self._spinor_lift      if len(self._spinor_lift) < self.n:
+  :2525   chiralita_core_locale      Lt     self.psi               if not hasattr(self, "psi") or len(self.psi)
+  :2581   misura_spin_picco_massa    Lt     self.psi               if not hasattr(self, "psi") or len(self.psi)
+  :2583   misura_spin_picco_massa    Lt     self._nb               if not hasattr(self, "_nb") or len(self._nb)
+  :2587   misura_spin_picco_massa    Lt     self._spinor_lift      if len(self._spinor_lift) < self.n:
+  :2616   misura_spin_picco_massa    GtE    self.perc_chi          chi = self.perc_chi[dominio].astype(float) i
+  :2617   misura_spin_picco_massa    GtE    self._nb               nb = self._nb[dominio] if hasattr(self, "_nb
+  :2622   misura_spin_picco_massa    Lt     self._spinor_lift      if len(self._spinor_lift) < self.n and hasat
+  :2622   misura_spin_picco_massa    GtE    self._nb               if len(self._spinor_lift) < self.n and hasat
+  :2625   misura_spin_picco_massa    GtE    self._spinor_lift      if len(self._spinor_lift) >= self.n
+  :2693   misura_spin_picco_positivi Lt     self.perc_chi          if len(self.perc_chi) < self.n:
+  :2760   circolazione_topologica    Lt     self.psi               if not hasattr(self, "psi") or len(self.psi)
+  :2767   circolazione_topologica    GtE    self._nb               ha_spin = SPINORE and hasattr(self, "_nb") a
+  :2806   circolazione_topologica    GtE    _psp                   if _psp is not None and len(_psp) >= self.n:
+  :2835   circolazione_topologica    GtE    self.perc_chi          if ha_spin and len(self.perc_chi) >= self.n:
+  :3274   _riallinea_tracking        Lt     self.conc_nodi         while len(self.conc_nodi) < self.n: self.con
+  :3275   _riallinea_tracking        Gt     self.conc_nodi         if len(self.conc_nodi) > self.n: del self.co
+  :3352   _allaccia                  GtE    self.perc_chi          if COMPAT_CHI and len(a) and len(self.perc_c
+  :3391   lambda_nodi                Lt     self.psi               if len(self.psi) < self.n:
+  :3461   ritmo                      NotEq  self._psi_prec         if self._psi_prec is None or len(self._psi_p
+  :3465   ritmo                      Eq     self.psi               self._psi_prec = self.psi.copy() if len(self
+  :3477   ritmo                      NotEq  _ps                    if _ps is None or _psp is None or len(_ps) !
+  :3477   ritmo                      NotEq  _psp                   if _ps is None or _psp is None or len(_ps) !
+  :3486   ritmo                      Eq     _ps                    if CAMPO_SPINORIALE and _ps is not None and 
+  :3486   ritmo                      Eq     _psp                   if CAMPO_SPINORIALE and _ps is not None and 
+  :3576   _passo_spinoriale          Lt     self.omega_s           if len(self.omega_s) < n:
+  :3578   _passo_spinoriale          Gt     self.omega_s           elif len(self.omega_s) > n:
+  :3581   _passo_spinoriale          Eq     self.phi_s             b0 = self.phi_s if len(self.phi_s) == n else
+  :3583   _passo_spinoriale          Lt     self._nb               elif len(self._nb) < n:
+  :3587   _passo_spinoriale          Gt     self._nb               elif len(self._nb) > n:
+  :3600   _passo_spinoriale          Lt     self.psi               if not hasattr(self, "psi") or len(self.psi)
+  :3620   _passo_spinoriale          Lt     _xi                    if _xi is None or len(_xi) < n:
+  :3651   _passo_spinoriale          NotEq  self._nb_prec          if not hasattr(self, "_nb_prec") or self._nb
+  :3680   _passo_spinoriale          GtE    self.perc_chi          if CHI_CORE and len(self.perc_chi) >= n:
+  :3715   _passo_spinoriale          Lt     self.psi               if not hasattr(self, "psi") or len(self.psi)
+  :3747   _passo_spinoriale          GtE    _csp_in                if _csp_in is not None and len(_csp_in) >= n
+  :4084   _passo_spinoriale          GtE    psi_snapshot           if psi_snapshot is not None and len(psi_snap
+  :4086   _passo_spinoriale          GtE    self.psi               elif len(self.psi) >= n:
+  :4138   _passo_spinoriale          GtE    self.perc_chi          if (OROLOGIO_SEGNO and hasattr(self, "perc_c
+  :4145   _passo_spinoriale          GtE    _csp2                  if _csp2 is not None and len(_csp2) >= n:
+  :4464   _nb_grav                   GtE    _ps                    if _ps is not None and len(_ps) >= n:
+  :5264   _bloch_ritardato           NotEq  nbr                    if nbr is None or len(nbr) != n:
+  :5280   _bloch_ritardato           Lt     r_loc                  if r_loc is None or len(r_loc) < n:
+  :5344   _r_nodo_mitosi             Lt     r                      if r is None or len(r) < n:
+  :5384   _tau_arco_causale          Lt     csn                    if csn is None or len(csn) < self.n:
+  :5454   _tempo_luce_nodo           GtE    csp                    if csp is not None and len(csp) >= n:
+  :5477   _coppia_interferenza       GtE    _ps                    if _ps is not None and len(_ps) >= n:
+  :5541   step                       Eq     getattr(self, 'psi_spi and len(getattr(self, "psi_spin", [])) == se
+  :5545   step                       Eq     getattr(self, 'psi_spi if CAMPO_SPINORIALE and hasattr(self, "psi_s
+  :5587   step                       GtE    self.perc_chi          if TEMPO_SEGNO and not (not np.isscalar(dt_n
+  :5588   step                       GtE    self.psi               and len(self.psi) >= self.n):
+  :5592   step                       GtE    self.perc_chi          if TEMPO_SEGNO and not np.isscalar(dt_n) and
+  :5592   step                       GtE    self.psi               if TEMPO_SEGNO and not np.isscalar(dt_n) and
+  :5715   step                       GtE    self.perc_chi          if CHI_CORE and len(self.perc_chi) >= self.n
+  :5722   step                       GtE    self.perc_chi          elif VERSO_CHI and len(self.perc_chi) >= sel
+  :5730   step                       GtE    self.perc_chi          elif not (CHI_CORE and len(self.perc_chi) >=
+  :5750   step                       GtE    self.d0                P_eq = float(np.median(self.d0[:self.n])) if
+  :5754   step                       GtE    self.psi               _psi_ct = (self.psi if len(self.psi) >= self
+  :5799   step                       GtE    self.phivel            pv = self.phivel[:self.n] if len(self.phivel
+  :5838   step                       NotEq  self.phi_s             if SPINORE_VIVO and SPINORE and self.n > 2 a
+  :5842   step                       Eq     self.phi_s             if SPINORE_VIVO and SPINORE and self.n > 2 a
+  :5852   step                       GtE    self.perc_chi          if TORS_4PI and len(self.perc_chi) >= self.n
+  :5859   step                       Eq     getattr(self, _cache_t len(getattr(self, _cache_tors, [])) == self.
+  :5868   step                       GtE    self._deg              _twn = _twn / np.maximum(self._deg[:self.n] 
+  :5885   step                       GtE    self.perc_chi          if CHI_BASC and (CHI_COOP or not CHI_DA_SPIN
+  :5911   step                       GtE    self.perc_chi          len(self.perc_chi) >= self.n
+  :5912   step                       GtE    getattr(self, '_psi_sp and len(getattr(self, "_psi_spinor", [])) >=
+  :5917   step                       GtE    self.perc_chi          if (_chi_da_psi and SPINORE_CORRETTO and len
+  :5918   step                       GtE    getattr(self, '_psi_sp and len(getattr(self, "_psi_spinor", [])) >=
+  :6000   step                       GtE    _pv_src                r_nodo = np.abs(_pv_src[:self.n]) if len(_pv
+  :6225   step                       GtE    self.psi               _I_ok = hasattr(self, "psi") and len(self.ps
+  :6960   pozzo_grafo                GtE    self.psi               I = (np.abs(self.psi[:n]) ** 2 if intensita 
+  :7002   memoria_hebbiana_moto      Lt     self.psi               if not hasattr(self, "psi") or len(self.psi)
+  :7009   memoria_hebbiana_moto      Lt     self.mem_mot           if len(self.mem_mot) < n:
+  :7115   memoria_hebbiana_moto      Lt     self._nb               if not hasattr(self, "_nb") or self._nb is N
+  :7116   memoria_hebbiana_moto      Eq     self.phi_s             b0 = self.phi_s if len(self.phi_s) == self.n
+  :7129   memoria_hebbiana_moto      GtE    self._nb               if SPINORE and not (self._nb is not None and
+  :7133   memoria_hebbiana_moto      GtE    self._nb               if SPINORE and self._nb is not None and len(
+  :7186   memoria_hebbiana_moto      GtE    self._nb               if LS_AZIM and self._nb is not None and len(
+  :7328   memoria_hebbiana_moto      GtE    _csn                   if _csn is not None and len(_csn) >= self.n:
+  :7394   memoria_hebbiana_moto      GtE    self.psi               I_nodi = np.abs(self.psi[:n]) ** 2 if hasatt
+  :8068   _render_vista_rete_sola    GtE    net.psi                if hasattr(net, "psi") and len(net.psi) >= n
+  :8073   _render_vista_rete_sola    GtE    net.perc_chi           chi = (net.perc_chi[:n] if hasattr(net, "per
+  :9998   _diag_completa             GtE    net.d                  cols['d_min'], cols['d_max'], cols['d_mean']
+  :9999   _diag_completa             GtE    net.d0                 cols['d0_min'], cols['d0_max'], cols['d0_mea
+  :10009  _diag_completa             GtE    net.eta                _eta_v = net.eta[:n] if len(net.eta) >= n el
+  :10052  _diag_completa             GtE    _nb_g                  if _nb_g is not None and len(_nb_g) >= n and
+  :10069  _diag_completa             GtE    _psp                   if (_nb_g is not None and _psp is not None a
+  :10069  _diag_completa             GtE    _nb_g                  if (_nb_g is not None and _psp is not None a
+  :10088  _diag_completa             GtE    net.perc_chi           _pcm = np.sign(np.asarray(net.perc_chi[:n]))
+  :10203  _diag_completa             GtE    _nbm                   if _nbm is not None and len(_nbm) >= n and n
+  :10210  _diag_completa             GtE    _omm                   if _omm is not None and len(_omm) >= n and n
+  :10457  _diag_completa             GtE    net.phivel             if len(net.phivel) >= n and len(ii):
+  :10474  _diag_completa             GtE    net.perc_chi           if len(net.perc_chi) >= n and n > 10:
+
+  ### TROVATI 99 confronti, in 25 funzioni
+
+scena: nmasse 3, sep 6.1158  ->  n = 12802, archi = 471564
+
+  funzioni con almeno un bersaglio: 26 su 167
+  la traccia si accende dal passo 41 (prima: run NUDO)
+====================================================================================================
+PASSAGGIO 2 -- A RUNTIME: quali prendono il RAMO DI SCORTA, e quando
+====================================================================================================
+  prima nascita al passo 42
+
+  passo   riga    dentro                     cosa                   volte    CORTE    len -> n
+  43      :3620   _passo_spinoriale          _xi                    1        1        12802 -> 12803
+
+  ### AL PASSO DI NASCITA prendono il ramo di scorta: 0 siti  ->  []
+  ### AL PASSO DOPO: 1 siti  ->  ['_passo_spinoriale:3620(_xi)']
+
+  ⚠ QUESTO E' UN ELENCO, NON UN VERDETTO: un `len(x) < n` puo' essere LEGITTIMO
+    (l'inizializzazione) oppure un RIPIEGO CHE CAMBIA LA FISICA. La differenza la
+    fa CHE COSA restituisce il ramo di scorta, e va letta sito per sito.
+
+scritto: C:\Users\lpeano\soliton_simulator\csv\_test_fork\_ripieghi_len_n.json

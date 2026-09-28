@@ -6278,3 +6278,30 @@ sbagliato una volta per ciascuno dei due.)*
 
 > ### 🛑 **STOP.** Il sigillo fallisce, lo stato è committato, e non aggiusto niente nello stesso
 > giro.
+
+---
+
+# ✅ **La sonda dei ripieghi fino al passo 72: UN solo sito, e è quello legittimo** *(2026-09-28)*
+
+*(Blob curato `f7541d03`, scena grande, `--traccia-da=41`, fino al **72**: dentro ci sono **otto**
+passi di nascita e **il canale di Schwinger**.)*
+
+| passo | sito | `len` → `n` |
+|---|---|---|
+| 43 · 51 · 66 · 67 · 70 · 71 · 72 | ### **`_passo_spinoriale` `:3620` `_xi`** — **una volta per passo** | `12802→12803` … `12810→12811` |
+
+### ➜ **`_rho_sorgente` NON COMPARE PIÙ** *(prima mordeva 2 volte su 15 al passo 43)*. E **nessun
+altro** dei 100 siti prende il ramo di scorta.
+### ➜ **E le nascite MULTIPLE sono coperte:** al passo 71 `len 12807 → n 12810`, ### **tre nodi in un
+colpo** — e ancora **solo `_xi`**.
+
+> ### 📌 **Quindi nella finestra misurata i ripieghi che cambiano la fisica in silenzio sono GIÀ
+> ZERO.** ### ⚠ **Ma non è l'obiettivo di `RIPIEGHI-ZERO`:** 72 passi su una scena sola **non dicono
+> niente dei 99 siti che qui non scattano.** **La classificazione del punto ① serve esattamente a
+> giudicarli senza aspettare che scattino.**
+
+**⚠ Un difetto della STAMPA, non dei numeri:** la tabella a schermo filtra ai soli passi
+`nascita/+1/+2`, quindi le righe dei passi 51, 66, 67, 70, 71, 72 ### **non si vedono a schermo pur
+essendo tutte nel `json`**. I numeri qui sopra vengono dal **referto**, che è completo. *(Lo dico
+invece di lasciar credere che il giro si sia fermato al 43 — che è quello che la stampa suggerisce, e
+che mi ha già ingannato una volta in questa sessione.)*
