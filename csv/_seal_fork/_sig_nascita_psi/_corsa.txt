@@ -1,0 +1,62 @@
+[TIMBRO] _sig_nascita_psi.py  sha1-BYTE 3e6b00ad  committato e pulito
+simulatore blob sha1-BYTE 407e6c51
+`_eredita_psi_figli` introdotto da 4efd3ae4; il PADRE e' il blob PRE-CURA 05691d41
+
+============================================================================================
+BRACCIO A -- PASSI SENZA NASCITE: byte-identico col blob PRE-CURA
+============================================================================================
+  git worktree add -> ok
+  grandezza      forma      identico?    elementi diversi
+  ### IDENTICHE: tutte e 23 le grandezze confrontate, byte per byte.
+  BRACCIO A: PASSA
+
+============================================================================================
+SCENA GRANDE: il blob PRE-CURA e quello CURATO, fino a due passi dopo la nascita
+============================================================================================
+  PRE-CURA  nascita al passo 42   fermato: -   ric.=0  init=0  ered.=0(salti 0)
+  CURATO    nascita al passo 42   fermato: -   ric.=308  init=1  ered.=1(salti 0)
+
+============================================================================================
+BRACCIO D -- IL CASO CHE DEVE FALLIRE: sul PRE-CURA `lambda = 0.8` al passo di nascita
+============================================================================================
+  passo di nascita PRE-CURA: 42   chiamate con lam = LAM: 8 su 13
+  lambda nei passi normali PRE-CURA: 0.586093 - 0.608402   (LAM = 0.800000)
+  mean(phi_g) al passo di nascita PRE-CURA: 366.1746
+  BRACCIO D: PASSA -- il difetto si vede
+
+============================================================================================
+BRACCIO B e C -- dopo la cura: `lambda` normale e `mean(phi_g)` vicino alla base
+============================================================================================
+  passo di nascita CURATO: 42   chiamate: 12, di cui a LAM: 7
+  lambda nei passi normali CURATO: 0.597739 - 0.608402
+  chiamate NON ricorsive al passo di nascita FUORI dall'intervallo: 0 []
+  BRACCIO B: PASSA
+  mean(phi_g): base 131.6639   al passo di nascita 138.5578   ->  1.0524 x la base
+  BRACCIO C: PASSA  (criterio: entro il 10 % dalla base)
+
+============================================================================================
+BRACCIO E -- `len(psi) < n` non scatta mai; il contatore della ricorsione si RIPORTA
+============================================================================================
+  la cura si e' fermata per `SchermaturaSpenta`? NO
+  chiamate a LAM nei passi SENZA nascite:  PRE 302   DOPO 302   ->  STESSO NUMERO
+  BRACCIO E: PASSA
+
+============================================================================================
+IPOTESI 4 -- il passo DOPO la nascita era SOTTO la base. Dopo la cura c'e' ancora?
+============================================================================================
+  PRE-CURA  base 131.2447   passo dopo la nascita 127.3738   ->  0.9705 x
+  CURATO    base 131.6639   passo dopo la nascita 146.2450   ->  1.1107 x
+  ### SI RIPORTA, NON E' UN CRITERIO: se il sotto-base resta anche dopo la cura,
+  ### l'ipotesi CADE e il sotto-base ha un'altra causa.
+
+============================================================================================
+  braccio A: PASSA
+  braccio B: PASSA
+  braccio C: PASSA
+  braccio D: PASSA
+  braccio E: PASSA
+============================================================================================
+### SIGILLO `PSI-FLASH`: PASSA
+============================================================================================
+
+scritto: C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sig_nascita_psi.json

@@ -155,7 +155,7 @@ elencate qui        583   (tolte le etichette locali, gli assiomi e gli standard
 | **`H-P3`** | PRESIDIO DEL HOOK: un sigillo che configura il modulo A MANO invece di passare dal CLI | `presidio` | `9176216 12:38` |
 | **`H-P5`** | PRESIDIO DEL HOOK: un referto che non dichiara la configurazione INTERA | `presidio` | `1b5f7ab 09:07` |
 | **`H-P7`** | PRESIDIO DEL HOOK: un flag il cui commento cambia senza nominare quel flag | `presidio` | `69624a8 20:27` |
-| **`H-P8`** | PRESIDIO DEL HOOK: un confronto che prende il codice di prima da HEAD invece che dal PADRE | `presidio` | `7b8a396 13:03` |
+| **`H-P8`** | PRESIDIO DEL HOOK: un confronto che prende il codice di prima da HEAD invece che dal PADRE | `presidio` | `7910c81 15:36` |
 | **`H-P9`** | PRESIDIO DEL HOOK: uno strumento che fa avanzare una rete con net.step() invece di passo_pieno | `presidio` | `7b8a396 13:03` |
 | **`H-REG-R`** | PRESIDIO DEL HOOK: una legge che cambia senza la sua scheda in REGISTRO_FISICA | `presidio` | `8455a16 23:44` |
 | **`H-RIGHE`** | PRESIDIO DEL HOOK: CLAUDE.md oltre le 400 righe | `presidio` | `2b273da 22:34` |
@@ -203,8 +203,8 @@ elencate qui        583   (tolte le etichette locali, gli assiomi e gli standard
 
 | stato | quanti | quali |
 |---|--:|---|
-| `aperto` | 58 | `ALLUNG-RELATIVO` `ARCHI-PRIMI` `CENS-A1` `CENS-A2` `CENS-A3` `CENS-A4` `CENS-A5` `CENS-A6` `CENS-A7` `CENS-B1` `CENS-B10` `CENS-B11` `CENS-B12` `CENS-B13` `CENS-B14` `CENS-B15` `CENS-B16` `CENS-B2` `CENS-B3` `CENS-B4` `CENS-B5` `CENS-B6` `CENS-B7` `CENS-B8` `CENS-B9` `D01` `D04` `D05` `D06` `D07` `D08` `D10` `D12` `D13` `D14` `D15` `D20` `D21` `D23` `D24` `D28` `D29` `D30` `D33` `D35` `D38` `FOGLIO-NULLO` `FORMA-N-VUOTO` `MCRIT-RICALCOLO` `MITOSI-SOGLIA-GRAD` `PSI-FLASH` `RAMPA-2` `RINCULO-RIPETUTI` `S09-MEDIANA` `SCIOGLIMENTO-FASE` `SYNCDB-HEADLESS` `TORS-SPINTA` `V5-SOGLIA` |
-| `chiuso` | 14 | `CTRL-RISCELTA` `D02` `D11` `D16` `D17` `D18` `D19` `D22` `D32` `D34` `D37` `DRIVER-SCENA-II` `OSSERVABILE-P1` `T4-TAUTOLOGICO` |
+| `aperto` | 57 | `ALLUNG-RELATIVO` `ARCHI-PRIMI` `CENS-A1` `CENS-A2` `CENS-A3` `CENS-A4` `CENS-A5` `CENS-A6` `CENS-A7` `CENS-B1` `CENS-B10` `CENS-B11` `CENS-B12` `CENS-B13` `CENS-B14` `CENS-B15` `CENS-B16` `CENS-B2` `CENS-B3` `CENS-B4` `CENS-B5` `CENS-B6` `CENS-B7` `CENS-B8` `CENS-B9` `D01` `D04` `D05` `D06` `D07` `D08` `D10` `D12` `D13` `D14` `D15` `D20` `D21` `D23` `D24` `D28` `D29` `D30` `D33` `D35` `D38` `FOGLIO-NULLO` `FORMA-N-VUOTO` `MCRIT-RICALCOLO` `MITOSI-SOGLIA-GRAD` `RAMPA-2` `RINCULO-RIPETUTI` `S09-MEDIANA` `SCIOGLIMENTO-FASE` `SYNCDB-HEADLESS` `TORS-SPINTA` `V5-SOGLIA` |
+| `chiuso` | 15 | `CTRL-RISCELTA` `D02` `D11` `D16` `D17` `D18` `D19` `D22` `D32` `D34` `D37` `DRIVER-SCENA-II` `OSSERVABILE-P1` `PSI-FLASH` `T4-TAUTOLOGICO` |
 | `da-decidere` | 11 | `D03` `D25` `D26` `D31` `D36` `REG-A` `REG-B` `REG-C` `REG-R` `REG-V` `U1` |
 | `non-difetto` | 3 | `D09` `D27` `HASHSEED-RIPROD` |
 

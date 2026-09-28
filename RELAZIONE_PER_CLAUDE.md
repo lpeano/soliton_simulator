@@ -6103,3 +6103,49 @@ codice: *la byte-identità non copre i percorsi delle nascite*.
 
 **Prossimo: il codice** — ① `mitosi` estende `psi`/`psi_spin`, ② `a` `len(psi) < n` diventa errore,
 ② `b` la ricorsione resta col contatore e la sua **definizione** nel `REGISTRO_FISICA`.
+
+---
+
+# ✅ **SIGILLO `PSI-FLASH`: PASSA, cinque bracci su cinque** *(2026-09-28)*
+
+### **Simulatore `05691d41` → `407e6c51`.** `csv/_seal_fork/_sig_nascita_psi.py` *(`3e6b00ad`)*,
+referto `1ab27a01`. **La voce è CHIUSA.**
+
+| braccio | esito |
+|---|---|
+| **A** passi **senza** nascite | ### **tutte e 23 le grandezze identiche byte per byte** |
+| **D** il caso che **deve** fallire | sul **PRE-CURA**: **8 chiamate a `LAM` su 13** e pozzo **`366.17`** — ### **il difetto si vede** |
+| **B** `λ` al passo di nascita | ### **0** chiamate non ricorsive fuori dall'intervallo `0.5977`–`0.6084` |
+| **C** `mean(phi_g)` al passo di nascita | ### **`138.5578` su base `131.6639` = `1.0524×`** — era `2.812×` |
+| **E** i due ripieghi | nessun `SchermaturaSpenta`; chiamate a `LAM` nei passi senza nascite ### **302 = 302** |
+
+> ### 📌 **La cura in un numero:** al passo di nascita le chiamate a `LAM` passano da **8 su 13** a
+> **7 su 12**. ### **La chiamata sparita è esattamente UNA** — quella del ripiego `len(psi) < n`.
+> **E le 7 che restano sono la ricorsione, che è la definizione.**
+
+## ✅ **L'ipotesi ④ è CORROBORATA, e non l'ho assunta**
+
+| | base | passo **dopo** la nascita | |
+|---|---|---|---|
+| **PRE-CURA** | `131.2447` | `127.3738` | ### **`0.9705×` — SOTTO** |
+| **CURATO** | `131.6639` | `146.2450` | ### **`1.1107×` — SOPRA** |
+
+### ➜ **Il livello sotto la base SPARISCE con la cura**: era davvero **la coda del flash** — la
+schermatura che ripartiva su una densità gonfiata. **Dichiarata prima dei numeri, e si riporta come
+corroborazione, non come criterio.**
+
+## 🗄 Debiti chiusi
+
+**Il banco della scomposizione è archiviato**, in due file: la versione **corretta** *(`3125acef`)*
+e quella col **ciclo `O(m²)`** che ha bloccato due run *(`868fffea`)*. ### **Col perché:** la
+domanda è chiusa *(il `2.6` lo porta la schermatura)*, e il suo criterio ④ era **mal posto, e l'avevo
+scritto io.** *(Un banco archiviato senza il perché è un reperto muto.)* **I due processi bloccati si
+sono chiusi, e il worktree temporaneo è rimosso.**
+
+**⚠ Una soglia scelta, dichiarata:** il braccio `C` usa *«entro il 10 % dalla base»*. **È larga, e
+serve a distinguere `1.05` da `2.81`, non a misurare.**
+
+> ### 🛑 **STOP.** `PSI-FLASH` è chiusa e il pezzo ② di `T3` ha il suo sigillo. **Resta da fare, e
+> non lo faccio senza il tuo via:** il **riordino** della mitosi nelle quattro fasi *(decisione ·
+> struttura · nascita · derivate)*. ### **Questo pezzo lo ha reso MISURABILE — si sa che il flash
+> non c'è più e che la byte-identità nei passi senza nascite tiene — ma NON lo ha fatto.**

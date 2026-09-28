@@ -1364,3 +1364,39 @@ lo dice e non misura il passo 0.**
 > ### **E che cosa NON vuol dire:** non vuol dire che quei sigilli siano sbagliati. Vuol dire che
 > **il loro braccio di byte-identita' NON HA PERCORSO quei rami**, e quindi **non dice niente su di
 > essi.**
+
+## `PSI-FLASH`, il sigillo — **cinque bracci su cinque** *(2026-09-28)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_seal_fork/_sig_nascita_psi.py` | `3e6b00ad` | `python csv/_seal_fork/_sig_nascita_psi.py --passi=46` | **A** byte-identita' nei passi **senza** nascite *(scena piccola)* · **B** `lambda` degli archi al passo di nascita *(scena GRANDE)* · **C** `mean(phi_g)` al passo di nascita · **D** il **caso che deve fallire** sul blob PRE-CURA · **E** i due ripieghi, **distinti** | ### **PASSA 5/5.** A **23 su 23** identiche · B **0** chiamate non ricorsive fuori intervallo · C ### **`1.0524x` la base invece di `2.812x`** · D sul PRE-CURA **8 chiamate a LAM su 13** e pozzo **366.17** · E nessun `SchermaturaSpenta`, e **302 = 302** |
+
+**Referto:** `csv/_seal_fork/_sig_nascita_psi.json` *(blob byte `1ab27a01`)*; la stampa in
+`csv/_seal_fork/_sig_nascita_psi/_corsa.txt` *(`bd15e71e`)*.
+**Simulatore `407e6c51`; il PRE-CURA e' `05691d41`**, preso da un **`git worktree`** sul **PADRE**
+del commit che introduce la cura *(`4efd3ae4`)* -- ### **ancora NON pinnata** (`H-P8`). Il worktree
+serve perche' `_hashseed_prova.py` carica il simulatore **dal disco** e non ha un `--sim`:
+### **cosi' lo strumento di allora gira sul simulatore di allora**, coerenti fra loro. **E si rimuove
+a sigillo chiuso.**
+
+> ### 📌 **Il numero che dice la cura in una riga:** al passo di nascita le chiamate a `LAM` passano
+> da ### **8 su 13** a ### **7 su 12**. **La chiamata sparita e' esattamente UNA:** quella che il
+> ripiego `len(psi) < n` causava. **E le 7 che restano sono la ricorsione, che e' la definizione.**
+
+**La scena si prende da `a`** *(`nmasse`, `sep` del driver)*, **non scritta a mano**: e' l'errore che
+aveva fatto misurare tutto sulla scena piccola.
+**⚠ E una soglia SCELTA, dichiarata:** il braccio `C` usa *«entro il 10 %»*. **Serve a distinguere
+`1.05` da `2.81`, non a misurare.**
+
+## 🗄 Il banco della scomposizione, **archiviato come superato** *(2026-09-28)*
+
+| file | blob (byte) | che cos'e' |
+|---|---|---|
+| `csv/_archivio/_flash_scomposizione.py` | `3125acef` | la versione **corretta** *(serie di `mean(phi_g)`, criterio `V5` cablato)* |
+| `csv/_archivio/_flash_scomposizione_ROTTO.py` | `868fffea` | quella col **ciclo `O(m^2)`** che ha **bloccato due run** |
+
+**Perche' esce** *(decisione di Luca)*: ### **la domanda a cui rispondeva -- <<quale ingrediente
+porta il `2.6`?>> -- e' chiusa: lo porta la schermatura che si spegne.**
+**E perche' non ci e' arrivato:** il suo criterio ④ confrontava `psi` calcolato **dentro** `step` con
+un ricalcolo su uno stato **gia' cambiato**. ### **Era MAL POSTO, e l'avevo scritto io.**
+*(Un banco archiviato senza il perche' e' un reperto muto.)*
