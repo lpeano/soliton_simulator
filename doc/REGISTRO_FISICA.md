@@ -733,6 +733,11 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 
 <!-- SCHEDA nome=tempo-proprio funzioni=ritmo,_cli,_applica_flag flag=TAU_LOC,TEMPO_SEGNO,TEMPO_PROPRIO_ORIENTATO,RITMO_WRAP_2PI -->
 
+> **-> NOTA DEL 2026-09-28, e sta qui perche' questa scheda POSSIEDE `_cli`: NESSUNA
+> LEGGE E' CAMBIATA.** Il commit di `MAX-NODI-FERMA` tocca **il solo testo di `help`** di
+> `--maxnodi`, per dire che ora **ferma il run** invece di troncare. **Il default resta
+> `4000000`.** *(La legge sta nella scheda `guardia-max-nodi`.)*
+
 > **→ NOTA DEL 2026-09-25, e sta qui perche' questa scheda POSSIEDE `_cli` e `_applica_flag`:**
 > un flag nuovo, **`CONTRASTO_INTENSIVO`** (`--contrasto-intensivo`), si parsa in `_cli` e si
 > applica in `_applica_flag`, **con la `global` dichiarata nella stessa funzione** — senza,
@@ -1006,6 +1011,14 @@ distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifi
 **La legge sta nella scheda `mitosi-schwinger`.**
 
 <!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,_dphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
+
+> **-> NOTA DEL 2026-09-28 (`MAX-NODI-FERMA`), e riguarda `semina`: LA LEGGE DELLA SEMINA NON
+> E' CAMBIATA, e' cambiato CIO' CHE FA QUANDO NON CI STA.** Prima **troncava**
+> (`min(n, MAX_NODI - self.n)`): si chiedevano `n` nodi, ne nascevano meno, **e dai dati non
+> si vedeva**. Ora **ferma il run**. ### **Byte-inerte finche' la guardia non morde**, cioe
+> sempre nelle corse reali. **Il ramo `_sat` (saturazione) resta com'era: li' il numero lo
+> decide LA GEOMETRIA**, e il controllo sul numero vero sta **dopo** la geometria.
+> *(La legge della guardia sta nella scheda `guardia-max-nodi`.)*
 # ⑥ LA FASE `φ` E IL SUO DOMINIO — **`semina` / `_w4` / `_w8` / `step`**
 
 > ### 🏗 **T1, 2026-09-28: `step` non apre piu' il passo, e non e' piu' il proprietario di niente**
@@ -1277,6 +1290,15 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 > `fase-phi` non deve poter credere che la legge sia ancora quella.**
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
+
+> **-> NOTA DEL 2026-09-28 (`MAX-NODI-FERMA`): LA LEGGE DELLA MITOSI NON E' CAMBIATA -- LE E'
+> STATA TOLTA UNA COSA CHE NON ERA SUA.** Due rami leggevano `MAX_NODI`:
+> `if self.n >= MAX_NODI or not len(self.tw): return 0` (### **zero nascite in silenzio**) e
+> `if COPPIA_MIT > 0.0 and self.n < MAX_NODI` (### **canale di Schwinger spento in
+> silenzio**). ### **Una guardia di MEMORIA diventava una LEGGE.** Ora la mitosi non legge
+> piu' `MAX_NODI`: ferma lo **schedulatore**. **`not len(self.tw)` RESTA**, perche' quella e'
+> una rete senza archi -- *non c'e' niente da dividere* -- e non ha nulla a che vedere con
+> la memoria. *(La legge della guardia sta nella scheda `guardia-max-nodi`.)*
 
 > **→ NOTA DEL 2026-09-25: la LEGGE DELLA MITOSI NON E' CAMBIATA.** Il commit di
 > `INERZIA-1(C)` tocca **la riga accanto** alla `global MITOSI_2LAM` in `_applica_flag`, per
@@ -4274,6 +4296,15 @@ che l'avrebbe **saltato nel caso più comune** *(nessun `--regime` sulla riga di
 ---
 
 <!-- SCHEDA nome=schedulatore-del-passo funzioni=esegui_passo,valida_composizione,update,_passo,batch_condensazione,_dbg_init flag=PASSO_COMPOSIZIONE,_PASSO_FASI,_PASSO_MODULO,_PASSO_REGISTRO,_PASSO_CODA,_PASSO_TIPI,_PASSO_FUNZIONE -->
+
+> ### 🆕 **2026-09-28 (`MAX-NODI-FERMA`): lo schedulatore ha una PRECONDIZIONE.**
+> Prima di validare la composizione, `esegui_passo` chiama
+> `_ferma_se_oltre_max_nodi(net.n, 0, ...)`: ### **un passo che non si puo' fare NON COMINCIA.**
+> **Sta all'inizio e non alla fine** perche' all'inizio e' una *precondizione*, alla fine
+> sarebbe una *constatazione* con lo stato gia' oltre il limite. ### ⚠ **E il limite,
+> dichiarato:** `mitosi` crea nodi **dentro** il passo, quindi un passo che sfora **finisce**
+> e l'errore arriva **al passo dopo** -- lo **sforo si MISURA** nel sigillo.
+> *(La legge della guardia sta nella scheda `guardia-max-nodi`.)*
 # ㉙ LO SCHEDULATORE DEL PASSO — **`esegui_passo` / `PASSO_COMPOSIZIONE`**
 
 > ### **`T1` del piano `SCHED-PASSO`** *(2026-09-28, decisione di Luca)*: **lo schedulatore possiede
@@ -4457,3 +4488,27 @@ il rinculo **non e' deciso: va DERIVATO** (`A1`), e misurato in `T3`.
 *(Documento: `doc/REGOLE_composizione_T3.md`; tabelle generate in
 `doc/REGOLE_composizione_T3_tabelle.md`. Strumento `csv/_test_fork/_etc_sovrapposizione.py`.
 **94 scritture, e le eccezioni sono ZERO.**)*
+
+<!-- SCHEDA nome=guardia-max-nodi funzioni=_ferma_se_oltre_max_nodi flag=MAX_NODI -->
+# ㉚ `MAX_NODI`: UNA GUARDIA DI MEMORIA NON E' UNA LEGGE *(`MAX-NODI-FERMA`, 2026-09-28)*
+
+**Questa scheda esiste per dire che qui NON c'e' fisica**, ed e' il punto: `MAX_NODI` **non e' un
+tetto fisico** (`A11`) e **non protegge da un errore di fisica**. Protegge la RAM.
+
+**Fino al 2026-09-28 pero' LA FISICA LA CAMBIAVA**, perche' i tre siti che la leggevano **non
+fermavano il run**: `mitosi` restituiva **zero nascite**, `semina` **troncava**, il canale di
+**Schwinger** si **spegneva**. ### **Tre leggi silenziose nate da una guardia di memoria** -- la
+forma di `A8`.
+
+| | |
+|---|---|
+| **la forma, ora** | **UN** controllo, `_ferma_se_oltre_max_nodi(n_attuale, quanti, dove)`, e **un'eccezione dedicata**, `LimiteNodiSuperato`. **Quattro siti di chiamata**: lo schedulatore *(inizio del passo)*, `semina` *(numero chiesto)*, `semina` *(saturazione, dopo la geometria)* -- e i due rami di `mitosi` che **non leggono piu' `MAX_NODI`** |
+| **perche' UNA funzione e non tre `raise`** | tre copie sarebbero **tre leggi**, e `9-ter`: *a parita' di effetto si preferisce togliere un'eccezione* |
+| **dove sta il controllo dello schedulatore** | ### **all'INIZIO del passo**, perche' e' una **precondizione**: un passo che non si puo' fare **non comincia**. Alla fine sarebbe una constatazione, con lo stato gia' oltre il limite |
+| ⚠ **il limite, dichiarato** | `mitosi` crea nodi **dentro** il passo: un passo che sfora **finisce**, e l'errore arriva **al passo dopo**. Lo sforo si **MISURA** nel sigillo, non si suppone |
+| **la dimensione** | `4000000` contro i **~12800** nodi del pilota: **byte-inerte, e sigillato 23 su 23** |
+| **il futuro** | ### **va ELIMINATO** *(decisione di Luca)*. Una guardia che non serve e' una riga in meno, non una legge |
+
+*(Il ramo `_sat` di `semina` resta com'era: in saturazione **il numero lo decide la geometria**, e
+quel valore serve solo alla scorciatoia `semina(0)` che ritorna subito. Il controllo sul numero VERO
+sta **dopo** la geometria.)*

@@ -581,3 +581,32 @@ All'avvio, **se un flag inerte è ACCESO**, il simulatore lo dice e **nomina l'a
 imposta **dopo** *(per esempio uno strumento che le inietta a runtime, come `--flag=` di
 `csv/_test_fork/_hashseed_prova.py`)* **non lo fa scattare** — e in quel caso è chi lancia che sa cosa
 sta facendo.
+
+## ⚠ `--maxnodi` **FERMA IL RUN** dal 2026-09-28 *(`MAX-NODI-FERMA`, primo pezzo di codice di `T3`)*
+
+| | |
+|---|---|
+| **cosa fa** | e' la **GUARDIA DI MEMORIA** sul numero di puntatori: `MAX_NODI` |
+| **DEFAULT** | ### **`4000000`** *(quattro milioni)*, **invariato** |
+| **byte-inerte a default?** | ### **SI, ed e' sigillato:** `csv/_seal_fork/_sig_max_nodi.py`, **23 grandezze su 23 identiche** |
+
+### **CHE COSA E' CAMBIATO:** prima, quando il numero di nodi arrivava al tetto, **tre siti
+cambiavano la fisica in silenzio** e il run continuava:
+
+| sito | che cosa faceva |
+|---|---|
+| `mitosi` | restituiva **ZERO NASCITE** -- e dai dati sembrava che la fisica avesse deciso cosi' |
+| `semina` | **troncava** al numero che ci stava: si chiedevano `n` nodi, ne nascevano meno |
+| canale di **Schwinger** | si **spegneva** |
+
+### ➜ **Ora il run SI FERMA**, con `LimiteNodiSuperato` e un messaggio che dice **dove**, **quanti
+nodi**, **quanti richiesti** e **di quanto** si e' superato il tetto.
+
+> ### 📌 **E il commento della costante lo diceva GIA':** *«se lo fosse, la misura e' da rifare con
+> piu' memoria, **non da troncare**»*. **L'intenzione era scritta e il codice faceva l'opposto** --
+> la forma esatta che `A8` esiste per impedire.
+
+**SE MORDE, CHE FARE:** si **rialza `--maxnodi`** e si rifa' la misura. ### **Non si tronca.**
+
+**⚠ E non e' un tetto fisico** (`A11`): non protegge da un errore di fisica, protegge la RAM.
+**In futuro va ELIMINATO** *(decisione di Luca, 2026-09-28)*.

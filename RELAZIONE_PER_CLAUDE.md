@@ -5582,3 +5582,57 @@ regola d'oro. **Propongo `MAX_NODI` per primo**, perché non tocca la fisica del
 sigilla **byte-identico**.
 
 > ### 🛑 **STOP.**
+
+---
+
+# 🔧 **`MAX-NODI-FERMA`, il CODICE: la guardia di memoria ferma il run** *(2026-09-28)*
+
+### **Simulatore `1fc9235f` → `b4cc6645`.** Primo pezzo di codice di `T3`, approvato da Luca.
+**Il sigillo è nel commit successivo** — par.5: *«il codice che genera un output dev'essere già
+committato quando l'output nasce»*.
+
+## La forma: **UN controllo, non tre**
+
+| | |
+|---|---|
+| `LimiteNodiSuperato(RuntimeError)` | un'eccezione **dedicata**, non un `SystemExit` generico |
+| `_ferma_se_oltre_max_nodi(n_attuale, quanti, dove)` | **una** funzione, e ### **non tronca mai**. `dove` dice **quale** dei punti ha fermato il run |
+
+**Perché una funzione e non tre `raise`:** tre copie sarebbero **tre leggi**, e `9-ter` dice *a
+parità di effetto si preferisce togliere un'eccezione*.
+
+## I quattro siti
+
+| sito | prima | dopo |
+|---|---|---|
+| **schedulatore** `esegui_passo` | *(niente)* | ### **il controllo, all'INIZIO del passo** |
+| `semina` | `max(0, min(n, MAX_NODI − self.n))` | ### **controlla e non tronca** |
+| `semina` *(saturazione)* | — | **il controllo DOPO la geometria**, dove il numero vero si conosce |
+| `mitosi` `:6058` | `if self.n >= MAX_NODI or not len(self.tw): return 0` | **resta solo** `not len(self.tw)` |
+| Schwinger `:6481` | `if COPPIA_MIT > 0.0 and self.n < MAX_NODI:` | **resta solo** `COPPIA_MIT > 0.0` |
+
+> ### 📌 **Il controllo sta all'INIZIO del passo perché è una PRECONDIZIONE:** *«questo passo si può
+> fare»*. Un passo che non si può fare **non comincia**. Alla fine sarebbe una **constatazione**, con
+> lo stato già oltre il limite.
+> ### ⚠ **E il limite, dichiarato:** `mitosi` crea nodi **dentro** il passo, quindi un passo che
+> sfora **finisce** e l'errore arriva **al passo dopo**. ### **Lo sforo lo MISURA il sigillo, non lo
+> suppongo.**
+
+## Che cosa ho verificato **prima** di toccare
+
+### **Nessun chiamante di `semina` dipende dal troncamento.** Il massimo passato in tutto il repo è
+`SEME_INIZIALE = 900`, contro `4 000 000`. *(E `semina(0)` continua a ritornare subito: è
+comportamento dichiarato al `:8861`.)*
+
+**E il ramo `_sat` resta com'era**, che non è una dimenticanza: in saturazione ### **il numero lo
+decide la geometria**, e quel valore serve **solo** alla scorciatoia `n == 0`.
+
+## Le tre cose dello stesso commit *(par.6)*
+
+**README** — `--maxnodi`, cosa fa, il **default invariato `4000000`**, e che è **byte-inerte a
+default** · **REGISTRO_FISICA** — la scheda *«una guardia di memoria non è una legge»* ·
+**INVENTARIO** — nel commit del sigillo, insieme allo strumento che ancora non esiste.
+
+**Prossimo: il sigillo.** Quattro letture, fissate nel task history `1b90fef` **prima** di vedere i
+numeri: **A** byte-identico 23/23 · **B** il caso che deve fallire · **C** il controllo positivo sul
+blob vecchio · **D** lo sforo, che **si riporta**.

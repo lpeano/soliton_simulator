@@ -925,6 +925,43 @@ class ComposizioneNonValida(ValueError):
     """La composizione del passo viola la struttura della transazione."""
 
 
+class LimiteNodiSuperato(RuntimeError):
+    """**`MAX_NODI` e' una GUARDIA DI MEMORIA, non di fisica: quando morde, il run SI FERMA.**
+
+    *(`MAX-NODI-FERMA`, cura del 2026-09-28. Prima di questa cura i tre siti che la leggevano
+    CAMBIAVANO LA FISICA IN SILENZIO -- la mitosi restituiva zero nascite, la semina si
+    troncava, il canale di Schwinger si spegneva -- e il run continuava come se la fisica
+    avesse deciso cosi'.* ### **Era la forma esatta che `A8` esiste per impedire**, *e il
+    commento della costante lo diceva gia': <<la misura e' da rifare con piu' memoria, NON da
+    troncare>>. L'intenzione era scritta e il codice faceva l'opposto.)*
+    """
+
+
+def _ferma_se_oltre_max_nodi(n_attuale, quanti, dove):
+    """**UN SOLO controllo per `MAX_NODI`, e non tronca MAI.**
+
+    E' **una** funzione e non tre `raise` copiati, perche' tre copie sarebbero **tre leggi**
+    e `9-ter` dice di non moltiplicarle: *a parita' di effetto si preferisce togliere
+    un'eccezione*.
+
+    `dove` non e' decorativo: **dice QUALE dei quattro punti ha fermato il run**, e senza di
+    esso l'errore non si distingue da un altro.
+    """
+    if n_attuale + quanti <= MAX_NODI:
+        return
+    raise LimiteNodiSuperato(
+        "[MAX_NODI] IL RUN SI FERMA, e non si tronca (`MAX-NODI-FERMA`, `A8`).\n"
+        "  dove ...... %s\n"
+        "  nodi ora .. %d\n"
+        "  richiesti . %d  ->  totale %d\n"
+        "  MAX_NODI .. %d  (superato di %d)\n"
+        "  CHE FARE: la misura si RIFA' CON PIU' MEMORIA (`--maxnodi`), NON si tronca.\n"
+        "  Troncare cambierebbe la FISICA in silenzio: meno nascite, meno semina, il canale\n"
+        "  di Schwinger spento -- e nessuno lo saprebbe dai dati."
+        % (dove, n_attuale, quanti, n_attuale + quanti, MAX_NODI,
+           n_attuale + quanti - MAX_NODI))
+
+
 def valida_composizione(comp):
     """**Il passo e' una TRANSAZIONE: la sua struttura non e' negoziabile.**
 
@@ -994,6 +1031,13 @@ def esegui_passo(net, composizione=None):
     #   deve fallire **con il passo ancora da cominciare**, non a meta'.
     comp = valida_composizione(PASSO_COMPOSIZIONE if composizione is None
                              else composizione)
+    # [MAX-NODI-FERMA, 2026-09-28] IL CONTROLLO DELLO SCHEDULATORE, e sta all'INIZIO perche' e'
+    #   una PRECONDIZIONE: <<questo passo si puo' fare>>. Un passo che non si puo' fare NON
+    #   COMINCIA. Alla fine sarebbe una constatazione, e lo stato sarebbe gia' oltre il limite.
+    #   ⚠ IL LIMITE, DICHIARATO E MISURATO (non supposto): `mitosi` crea nodi DENTRO il passo,
+    #   quindi un passo che sfora FINISCE e l'errore arriva al passo DOPO. Lo sforo massimo per
+    #   passo e' riportato dal sigillo `csv/_seal_fork/_sig_max_nodi.py`.
+    _ferma_se_oltre_max_nodi(net.n, 0, 'schedulatore: inizio del passo')
     for _nome in comp:
         if _nome in _PASSO_FASI:
             getattr(net, _PASSO_FASI[_nome])()
@@ -1852,6 +1896,13 @@ MAX_NODI = 4000000      # GUARDIA DI MEMORIA, non di fisica: non limita la dinam
                         # impedisce solo l'esaurimento della RAM. Va tenuta cosi' alta
                         # da non essere mai raggiunta nelle corse reali; se lo fosse,
                         # la misura e' da rifare con piu' memoria, non da troncare.
+                        # [MAX-NODI-FERMA, 2026-09-28] E ORA IL CODICE FA CIO' CHE QUESTO
+                        # COMMENTO DICEVA GIA': quando `MAX_NODI` morde, il run SI FERMA con
+                        # `LimiteNodiSuperato`. Prima troncava e continuava -- tre siti che
+                        # cambiavano la FISICA in silenzio (`A8`). Si cambia con `--maxnodi`,
+                        # e il controllo e' UNO: `_ferma_se_oltre_max_nodi`.
+                        # ⚠ NON E' UN TETTO FISICO (`A11`): non protegge da un errore di
+                        # fisica, protegge la RAM -- e in futuro VA ELIMINATO.
 EMB_IT   = 3
 EMB_ETA  = 0.12
 
@@ -2921,13 +2972,27 @@ class Rete:
                 "[semina] `n < 0` (saturazione) RICHIEDE `SEMINA_LAM`: senza distanza minima\n"
                 "  la saturazione non esiste. Per il braccio di controllo di `P-GONFIA` si passa\n"
                 "  il numero MISURATO dal braccio acceso, non un numero qualunque (`A9`).")
-        n = (MAX_NODI - self.n) if _sat else max(0, min(n, MAX_NODI - self.n))
+        # [MAX-NODI-FERMA, 2026-09-28] NON SI TRONCA PIU'. Era:
+        #     n = (MAX_NODI - self.n) if _sat else max(0, min(n, MAX_NODI - self.n))
+        #   Il `min` tagliava la semina IN SILENZIO: si chiedevano `n` nodi, ne nascevano meno,
+        #   e dai dati non si vedeva. Ora si FERMA. Byte-inerte finche' la guardia non morde,
+        #   cioe' sempre nelle corse reali (`MAX_NODI` = 4e6 contro i ~12800 nodi del pilota).
+        #   ⚠ IL RAMO `_sat` RESTA COM'ERA, e non e' una dimenticanza: in saturazione
+        #   IL NUMERO LO DECIDE LA GEOMETRIA (`n = len(p)` qui sotto), e questo valore serve
+        #   SOLO alla scorciatoia `if n == 0: return` -- che e' comportamento dichiarato
+        #   (`semina(0)` ritorna subito). Il controllo sul numero VERO sta dopo la geometria.
+        if not _sat:
+            _ferma_se_oltre_max_nodi(self.n, n, 'semina: nodi chiesti dal chiamante')
+        n = (MAX_NODI - self.n) if _sat else max(0, n)
         if n == 0: return
         r = _scala_sistema() * 0.5 if raggio is None else raggio
         if SEMINA_LAM:
             p = self._semina_lam(-1 if _sat else n, r, centro)
             n = len(p)                 # in saturazione il numero lo decide la GEOMETRIA
             if n == 0: return
+            # [MAX-NODI-FERMA] il numero VERO della saturazione si conosce solo QUI, dopo la
+            #   geometria: e' il punto in cui si puo' controllare senza troncare niente.
+            _ferma_se_oltre_max_nodi(self.n, n, 'semina: saturazione, numero deciso dalla geometria')
         else:
             u = self.rng.normal(size=(n, 3)); u /= np.linalg.norm(u, axis=1, keepdims=True)
             p = np.asarray(centro, float) + u * (r * self.rng.random(n) ** (1 / 3))[:, None]
@@ -6055,7 +6120,13 @@ class Rete:
         if TRACCIA_D0: self._traccia_d0('P1_dopo_rilass', _tr_pre)
         
     def mitosi(self):
-        if self.n >= MAX_NODI or not len(self.tw): return 0
+        # [MAX-NODI-FERMA, 2026-09-28] `self.n >= MAX_NODI` TOLTO da questa guardia. Era:
+        #     if self.n >= MAX_NODI or not len(self.tw): return 0
+        #   `return 0` significa ZERO NASCITE, e il run continuava come se la fisica avesse
+        #   deciso di non far nascere niente: la guardia di MEMORIA diventava una LEGGE. Ora
+        #   ferma lo schedulatore. `not len(self.tw)` RESTA: quella e' una rete senza archi,
+        #   cioe' <<non c'e' niente da dividere>>, e non ha nulla a che vedere con la memoria.
+        if not len(self.tw): return 0
         avv = np.abs(self.tw)
         # soglia della mitosi: 2pi classico, oppure 3pi se la torsione vive sul dominio
         # doppio (TORS_4PI). MISURATO: la torsione a doppia copertura accumula la fase
@@ -6478,7 +6549,11 @@ class Rete:
         # difetti opposti. L'anti-nodo e' collocato sul punto medio come il nodo,
         # cosi' i due nascono sovrapposti e la dinamica (antifase -> repulsione) li
         # separa da se'. NON si impone alcuna forza: solo la fase opposta.
-        if COPPIA_MIT > 0.0 and self.n < MAX_NODI:
+        # [MAX-NODI-FERMA, 2026-09-28] `and self.n < MAX_NODI` TOLTO. Era:
+        #     if COPPIA_MIT > 0.0 and self.n < MAX_NODI:
+        #   Spegneva il CANALE DI SCHWINGER in silenzio: l'emissione di coppia sparisce e dai
+        #   dati sembra che la fisica non la produca. Ora ferma lo schedulatore.
+        if COPPIA_MIT > 0.0:
             # CREAZIONE DI COPPIA alla Schwinger: probabilistica secondo l'ECCESSO di
             # torsione oltre il quanto critico. Come nel meccanismo di Schwinger la
             # creazione e' soppressa sotto la soglia (sciolta<=1) e sale esponenzialmente
@@ -8988,7 +9063,9 @@ def _cli():
                         "con dt/2 raddoppia --passi per lo stesso tempo fisico. Default None = invariato (byte-identico).")
     p.add_argument("--nodi", type=int, default=SEME_INIZIALE, help="puntatori del seme iniziale")
     p.add_argument("--maxnodi", type=int, default=MAX_NODI,
-                   help="tetto ai puntatori (la mitosi ne crea: serve margine)")
+                   help="GUARDIA DI MEMORIA sui puntatori (la mitosi ne crea: serve margine). "
+                        "Dal 2026-09-28 quando morde IL RUN SI FERMA con `LimiteNodiSuperato`: "
+                        "non tronca piu' in silenzio. Se morde, si RIALZA questo numero.")
     p.add_argument("--diffres", type=float, default=DIFF_RES,
                    help="1 = diffonde il residuo: P_eq=rho diventa punto fisso esatto")
     p.add_argument("--alfanat", type=float, default=ALPHA_NAT,
