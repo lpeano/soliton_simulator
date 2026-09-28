@@ -6305,3 +6305,40 @@ colpo** — e ancora **solo `_xi`**.
 essendo tutte nel `json`**. I numeri qui sopra vengono dal **referto**, che è completo. *(Lo dico
 invece di lasciar credere che il giro si sia fermato al 43 — che è quello che la stampa suggerisce, e
 che mi ha già ingannato una volta in questa sessione.)*
+
+---
+
+# ✅ **`PSI-FLASH` è CHIUSA: sei bracci su sei, col metro stretto** *(2026-09-28)*
+
+**Simulatore `f7541d03`**, PRE-CURA `05691d41`, scena **grande** fino al passo **72**.
+`_sig_nascita_psi.py` *(`dfebef2a`)*, referto *(`bf50de74`)*.
+
+| braccio | esito |
+|---|---|
+| **A** byte-identità nei passi senza nascite | **23 su 23** |
+| **B · C · D** | passano — e sul PRE-CURA il difetto **si vede**: `8 su 13` a `LAM`, pozzo `366.17` |
+| ### **E** per passo, stesso dominio | **41** passi comuni, ### **zero** differenti. **Totale riportato, non confrontato: `517` / `505`** |
+| ### **F** nessun salto | naturale **`2.1010 %`** · curato ### **`1.7281 %`** · PRE-CURA ### **`197.2613 %`**, che la supera **94 volte** |
+
+## ⚠ E non ho chiuso sul primo `PASS`
+
+Il rigiro passava già, **ma il metro diceva `86.66 %`** invece del tuo `2.10 %`: dentro c'era il
+**transitorio d'avvio**. `phi_g(0)` è **zero esatto**, quindi i primi salti sono **il campo che
+nasce**. ### **Quaranta volte troppo largo — ho stretto e rigirato.**
+
+### **E la scelta del confine non è fragile, ed è misurata:** da **4** e da **6** il metro è **lo
+stesso** su entrambi i giri. **Se cambiasse col confine sarebbe una manopola (`A1`); non cambia.**
+
+## 📊 **Il numero che si riporta, e pesa**
+
+| | passi con nascite | nati | `n` finale |
+|---|---|---|---|
+| **PRE-CURA** | **12** | **30** | 12832 |
+| **CURATO** | **8** | ### **10** | 12812 |
+
+### ➜ **Le nascite calano di un fattore TRE**, e il meccanismo è preciso: il flash **gonfiava `psi`
+di `1.62×`**, e una `psi` gonfiata **fa scattare più mitosi**.
+
+> ### 📌 **Quindi parte della mitosi di prima era PRODOTTA DAL CAMPO GONFIATO.** E ogni conteggio di
+> nascite misurato prima di questa cura, **nei passi con nascite, viene da un campo gonfiato.**
+> **Si riporta, non è un criterio** — ma è la cosa che un lettore fra tre giorni deve trovare scritta.

@@ -1,0 +1,109 @@
+[TIMBRO] _sig_nascita_psi.py  sha1-BYTE dfebef2a  committato e pulito
+simulatore blob sha1-BYTE f7541d03
+`_eredita_psi_figli` introdotto da 4efd3ae4; il PADRE e' il blob PRE-CURA 05691d41
+
+============================================================================================
+BRACCIO A -- PASSI SENZA NASCITE: byte-identico col blob PRE-CURA
+============================================================================================
+  git worktree add -> ok
+  grandezza      forma      identico?    elementi diversi
+  ### IDENTICHE: tutte e 23 le grandezze confrontate, byte per byte.
+  BRACCIO A: PASSA
+
+============================================================================================
+SCENA GRANDE: il blob PRE-CURA e quello CURATO, fino a due passi dopo la nascita
+============================================================================================
+  PRE-CURA  nascita al passo 42   fermato: -   ric.=0  init=0  ered.=0(salti 0)
+  CURATO    nascita al passo 42   fermato: -   ric.=504  init=1  ered.=9(salti 0)
+
+============================================================================================
+BRACCIO D -- IL CASO CHE DEVE FALLIRE: sul PRE-CURA `lambda = 0.8` al passo di nascita
+============================================================================================
+  passo di nascita PRE-CURA: 42   chiamate con lam = LAM: 8 su 13
+  lambda nei passi normali PRE-CURA: 0.586093 - 0.608402   (LAM = 0.800000)
+  mean(phi_g) al passo di nascita PRE-CURA: 366.1746
+  BRACCIO D: PASSA -- il difetto si vede
+
+============================================================================================
+BRACCIO B e C -- dopo la cura: `lambda` normale e `mean(phi_g)` vicino alla base
+============================================================================================
+  passo di nascita CURATO: 42   chiamate: 12, di cui a LAM: 7
+  lambda nei passi normali CURATO: 0.597739 - 0.608402
+  chiamate NON ricorsive al passo di nascita FUORI dall'intervallo: 0 []
+  BRACCIO B: PASSA
+  mean(phi_g): base 131.8956   al passo di nascita 138.5578   ->  1.0505 x la base
+  BRACCIO C: PASSA  (criterio: entro il 10 % dalla base)
+
+============================================================================================
+BRACCIO E -- `len(psi) < n` non scatta mai; il contatore della ricorsione si RIPORTA
+============================================================================================
+  la cura si e' fermata per `SchermaturaSpenta`? NO
+  passi PRIMA della prima nascita (dominio comune): 41, dal 1 al 41
+  chiamate a LAM per passo, PRE: [7, 8]   DOPO: [7, 8]
+  passi in cui i due giri DIFFERISCONO: 0 []
+  ### E IL TOTALE SI RIPORTA, NON SI CONFRONTA: PRE 517, DOPO 505 -- i domini sono
+      diversi appena le traiettorie divergono, e confrontarli sarebbe l'errore di prima.
+  BRACCIO E: PASSA
+
+============================================================================================
+IPOTESI 4 -- il passo DOPO la nascita era SOTTO la base. Dopo la cura c'e' ancora?
+============================================================================================
+  PRE-CURA  base 131.0163   passo dopo la nascita 127.3738   ->  0.9722 x
+  CURATO    base 131.8956   passo dopo la nascita 139.6312   ->  1.0586 x
+  ### SI RIPORTA, NON E' UN CRITERIO: se il sotto-base resta anche dopo la cura,
+  ### l'ipotesi CADE e il sotto-base ha un'altra causa.
+
+============================================================================================
+BRACCIO F -- NESSUN SALTO: nessun passo salta piu' dell'oscillazione NATURALE
+============================================================================================
+  ⚠⚠ RISCRITTO (decisione di Luca, 2026-09-28). La prima stesura misurava lo
+     scostamento dalla BASE, cioe' da una MEDIA GLOBALE -- e la serie DERIVA, quindi
+     quello misurava anche la deriva: il 10.48 % che faceva fallire il braccio ERA LA
+     DERIVA, non un gradino. Ora si misura IL SALTO FRA DUE PASSI CONSECUTIVI, e il
+     metro e' l'oscillazione naturale della STESSA corsa, PRIMA di ogni nascita.
+
+  PRE-CURA  prima nascita al passo 42
+      oscillazione NATURALE (passi 4-41, senza il transitorio): max 2.1010 %  al passo 7
+      (col transitorio d'avvio dentro il metro farebbe 86.66 %: QUARANTA volte piu' largo)
+      salto MASSIMO dal passo di nascita in poi: 197.2613 % al passo 70
+        passo 70   salto 197.2613 %   <== SUPERA l'oscillazione naturale
+        passo 67   salto 196.9899 %   <== SUPERA l'oscillazione naturale
+        passo 64   salto 196.0277 %   <== SUPERA l'oscillazione naturale
+        passo 61   salto 194.7798 %   <== SUPERA l'oscillazione naturale
+
+  CURATO    prima nascita al passo 42
+      oscillazione NATURALE (passi 4-41, senza il transitorio): max 2.1010 %  al passo 7
+      (col transitorio d'avvio dentro il metro farebbe 86.66 %: QUARANTA volte piu' largo)
+      salto MASSIMO dal passo di nascita in poi: 1.7281 % al passo 70
+        passo 70   salto   1.7281 %
+        passo 68   salto   1.6350 %
+        passo 72   salto   1.5724 %
+        passo 66   salto   1.4723 %
+
+  BRACCIO F: PASSA -- nessun salto oltre l'oscillazione naturale
+  E IL CASO CHE DEVE FALLIRE: sul PRE-CURA il salto massimo e' 197.26 % contro un'
+  oscillazione naturale di 2.10 %  ->  SUPERA, e il difetto si vede
+
+============================================================================================
+SI RIPORTA, NON E' UN CRITERIO: le nascite e la traiettoria dopo il 42
+============================================================================================
+  ### La cura CAMBIA LA DINAMICA, ed e' ATTESO: `psi` non viene piu' gonfiata, quindi
+  ### le decisioni di mitosi a valle cambiano. Confrontare il passo k di un giro col
+  ### passo k dell'altro, dopo la prima nascita, NON confronta la stessa cosa.
+  PRE-CURA  nascite ai passi [42, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 72]
+            nati in tutto 30, n finale 12832
+  CURATO    nascite ai passi [42, 50, 65, 66, 69, 70, 71, 72]
+            nati in tutto 10, n finale 12812
+
+============================================================================================
+  braccio A: PASSA
+  braccio B: PASSA
+  braccio C: PASSA
+  braccio D: PASSA
+  braccio E: PASSA
+  braccio F: PASSA
+============================================================================================
+### SIGILLO `PSI-FLASH`: PASSA
+============================================================================================
+
+scritto: C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sig_nascita_psi.json

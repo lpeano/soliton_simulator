@@ -1438,3 +1438,31 @@ passi diversi. ### **La cura ha cambiato la dinamica -- atteso -- ma allora il c
 dopo il 42, non confronta la stessa cosa.**
 **⚠ E la base e' una MEDIA GLOBALE su una serie che DERIVA:** uno scostamento da lei misura **anche
 la deriva**, non solo il gradino.
+
+### ✅ Il sigillo di `PSI-FLASH`, **terzo giro: sei bracci su sei** *(2026-09-28)*
+
+`csv/_seal_fork/_sig_nascita_psi.py` blob **`dfebef2a`**, referto **`bf50de74`**, stampa
+`_sig_nascita_psi/_corsa72c.txt` *(`ab0ecd50`)*. Simulatore **`f7541d03`**, PRE-CURA **`05691d41`**,
+scena **GRANDE** fino al **passo 72**.
+
+| braccio | criterio | esito |
+|---|---|---|
+| **A** | byte-identita' nei passi senza nascite | **23 su 23** |
+| **B** | `lambda` al passo di nascita | **0** chiamate non ricorsive fuori intervallo |
+| **C** | `mean(phi_g)` al passo di nascita | `1.0505x` la base |
+| **D** | il caso che deve fallire | sul PRE-CURA **8 su 13** a `LAM`, pozzo **366.17** |
+| ### **E** | ### **PER PASSO, sullo stesso dominio** | **41** passi comuni, ### **ZERO** differenti, `7`-`8` ricorsioni per passo in entrambi. **Totale riportato e non confrontato: 517 / 505** |
+| ### **F** | ### **NESSUN SALTO** | oscillazione naturale **`2.1010 %`** al passo 7 *(passi 4-41)*; curato ### **`1.7281 %`**; PRE-CURA ### **`197.2613 %`**, che la supera **94 volte** |
+
+> ### ⚠ **E il metro di `F` era 40 volte troppo largo nella prima stesura:** dentro c'era il
+> **transitorio d'avvio** *(`86.66 %` al passo 2)*. `phi_g(0)` e' **zero esatto**, quindi i primi
+> salti sono **il campo che nasce**, non oscillazione. ### **La scelta del confine NON e' fragile ed
+> e' misurata: da 4 e da 6 il metro e' LO STESSO** su entrambi i giri -- quindi non e' una manopola
+> (`A1`). **E non ho chiuso sul PASS ottenuto col metro largo: ho stretto e rigirato.**
+
+**SI RIPORTA, e pesa:** il PRE-CURA ha nascite in **12** passi con **30** nati e `n` finale
+**12832**; il curato in **8** passi con **10** nati e `n` finale **12812**.
+### ➜ **Le nascite calano di un fattore TRE**, ed e' atteso con un meccanismo preciso: il flash
+**gonfiava `psi` di `1.62x`**, e una `psi` gonfiata **fa scattare piu' mitosi**.
+### **Quindi parte della mitosi di prima era PRODOTTA DAL CAMPO GONFIATO** -- e ogni conteggio di
+nascite misurato prima di questa cura, nei passi con nascite, viene da un campo gonfiato.
