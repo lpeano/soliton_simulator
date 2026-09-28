@@ -543,6 +543,14 @@ contro un nullo di `1.4e-03` — **da `140` a `310` volte il suo valore sotto ip
 ---
 
 <!-- SCHEDA nome=gravita-bifase funzioni=pozzo_grafo,_nb_grav flag=GRAV_BIFASE,VIRIALE,LS_AZIM,PHI_CRIT,K_FRANGE,POZZO_D -->
+
+> ### ⛔ **NOTA DEL 2026-09-28 (`PSI-FLASH`): `_nb_grav` NON RIPIEGA PIU' IN SILENZIO.**
+> Quando `psi_spin` era piu' corta di `n` restituiva **`self._nb`** invece del Bloch **nativo**
+> del campo emesso: ### **un'ALTRA DIREZIONE, e la direzione entra nella GRAVITA'**.
+> ⚠ **MISURATO: su questa scena NON SCATTA MAI** nella finestra della nascita, quindi la riga
+> e' **byte-inerte** qui -- **il sigillo non potra' dimostrare che serve, solo che non rompe.**
+> **Ora solleva `CacheCorta`**, e la cache va **estesa alla nascita** (`_eredita_psi_figli`), non
+> allungata dove la si legge. *(La legge sta nella scheda `schermatura-nucleo-nudo`.)*
 # ③ LA GRAVITA' BIFASE — **`GRAV_BIFASE` / `S09_spinta_med` / `S10_grav_med`**
 
 > **STATO: `DIFETTOSA`.** Difetti **`D01`** e **`D02`**. **Viola `A2`, `A5` e `A11` cor. 6.**
@@ -1582,6 +1590,14 @@ scendono sotto `2 LAM` e **la condizione diventa via via più difficile**. **Il 
 mitosi col tempo invece di regolarla.** `C3` guarda questo, e `300` passi **non lo escludono.**
 
 <!-- SCHEDA nome=inerzia-spinoriale funzioni=_passo_spinoriale,_rho_sorgente,_applica_flag,_cli flag=CONTRASTO_INTENSIVO,CAMPO_SPINORIALE,TAU_A -->
+
+> ### ⛔ **NOTA DEL 2026-09-28 (`PSI-FLASH`): `_rho_sorgente` NON RIPIEGA PIU' IN SILENZIO.**
+> Quando `rho_spin` era piu' corta di `n` restituiva **`abs(psi)^2`** invece di `rho_spin`: con
+> `CAMPO_SPINORIALE` acceso la densita' sorgente **E'** `rho_spin`, quindi quello non era un
+> ripiego, era ### **UN'ALTRA GRANDEZZA data a TUTTA LA RETE**. **MISURATO: 2 volte su 15 al
+> passo DOPO la nascita** *(len 12802, n 12803)*, ed era **il gradino del +11 % sul pozzo**.
+> **Ora solleva `CacheCorta`**, e la cache va **estesa alla nascita** (`_eredita_psi_figli`), non
+> allungata dove la si legge. *(La legge sta nella scheda `schermatura-nucleo-nudo`.)*
 # Ⓐ `inerzia-spinoriale` — **QUANTO COSTA GIRARE A UNO SPINORE**
 
 > ### 🗄 **(b)2, 2026-09-27: il settore spinoriale ha UN SOLO percorso**
@@ -4554,7 +4570,7 @@ numero di punti che **esistono** in `p`.
 > davvero** -- quella e' lo **stato del grafo**, archi compresi, che **non e' ancora stato toccato**.
 > **Ma e' un'allocazione che prima, col troncamento, non avveniva.**
 
-<!-- SCHEDA nome=schermatura-nucleo-nudo funzioni=lambda_nodi,_lam_archi,_eredita_psi_figli,massa_critica_adattiva flag=SCHERMATURA,LAM -->
+<!-- SCHEDA nome=schermatura-nucleo-nudo funzioni=lambda_nodi,_lam_archi,_eredita_psi_figli,massa_critica_adattiva,_ferma_se_cache_corta,_rho_sorgente,_nb_grav flag=SCHERMATURA,LAM -->
 # ㉛ LA SCHERMATURA, E PERCHE' LA MASSA CRITICA SI CALCOLA SUL NUCLEO NUDO
 
 **La legge:** `lambda_nodi` da' a ogni nodo una **portata** che SCENDE dove la densita' sale --
@@ -4606,6 +4622,25 @@ mitosi, cioe' **un'altra lettura mista**. **Il valore vero arriva al passo dopo,
 **Chiamata ai DUE canali di nascita:** la mitosi *(genitori `a`, `b`)* e lo Schwinger *(`aa`, `bb`)*.
 **Il segno dell'antinodo non si tocca:** `psi` e' **complesso** e l'antinodo nasce a `anti = fm + pi`,
 quindi ### **il segno e' GIA' nella sua fase.**
+
+## ⛔ **IL SECONDO GIRO: il GRADINO al passo DOPO la nascita** *(2026-09-28)*
+
+**Il flash grande era curato, il gradino no:** `140.0` -> `138.6` -> ### **`146.2` (+11 % sulla
+base)** -> `137.6`. ### **Il livello sotto la base non era sparito: era COPERTO da un difetto di
+segno opposto.** *(Rilievo del guardiano su una mia lettura sbagliata: avevo letto <<non piu' sotto>>
+come <<a posto>>.)*
+
+| sito | il valore di scorta, e perche' non va |
+|---|---|
+| ### `_rho_sorgente` | restituiva **`abs(psi)^2`** invece di **`rho_spin`**: ### **un'ALTRA DENSITA' per tutta la rete** -- e la densita' entra in `lambda_nodi`, quindi nella schermatura, quindi nel campo. **MISURATO: 2 volte su 15 al passo dopo la nascita** *(len 12802, n 12803)* |
+| `_nb_grav` | restituiva **`self._nb`** invece del Bloch **nativo** del campo emesso: **un'ALTRA DIREZIONE**, e la direzione entra nella **gravita'**. ⚠ **MISURATO: non scatta mai in questa finestra**, quindi la sua cura e' **byte-inerte** qui |
+
+### ➜ **La cura: `_eredita_psi_figli` estende ANCHE `rho_spin`** *(il nato prende `rho_spin[a]`,
+coerente con `psi_spin[a]`: sono la stessa grandezza vista in due modi,
+`rho_spin = psi_spin^dag psi_spin`)*, **e i due ripieghi sollevano `CacheCorta`.**
+
+**⚠ E NON si "ripara" allungando la cache a valle:** allungarla dove la si legge **e' proprio il
+ripiego** che l'eccezione esiste per rendere impossibile.
 
 *(`⚠` La somma di `psi` e' complessa: due genitori in antifase danno un figlio con `|psi| ~ 0`.
 **E' interferenza distruttiva, cioe' fisica, non un errore.**)*

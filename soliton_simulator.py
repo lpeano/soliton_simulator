@@ -957,6 +957,46 @@ class SchermaturaSpenta(RuntimeError):
     """
 
 
+class CacheCorta(RuntimeError):
+    """**Una CACHE e' piu' corta di `n`, e il ramo di scorta darebbe UN'ALTRA GRANDEZZA.**
+
+    *(`PSI-FLASH`, seconda cura del 2026-09-28.)* La forma e' quella di `SchermaturaSpenta`,
+    e i siti sono due:
+
+    | sito | il valore di scorta, e perche' non va |
+    |---|---|
+    | `_rho_sorgente` | restituiva **`|psi|^2`** invece di **`rho_spin`**: ### **un'ALTRA
+      DENSITA' per tutta la rete**, e la densita' entra in `lambda_nodi`, quindi nella
+      schermatura, quindi nel campo |
+    | `_nb_grav` | restituiva **`self._nb`** invece del Bloch NATIVO del campo emesso:
+      ### **un'ALTRA DIREZIONE**, e la direzione entra nella gravita' |
+
+    ### **Il gradino del +11 % al passo DOPO la nascita era questo**, e il flash grande lo
+    copriva: due difetti di segno opposto. *(Causa trovata dal guardiano, Luca.)*
+
+    **Chi la vede, che fare:** la cache va ESTESA alla nascita (`_eredita_psi_figli`).
+    ⚠ **E NON si "ripara" allungandola qui:** allungarla a valle e' proprio il ripiego che
+    questa eccezione esiste per rendere impossibile.
+    """
+
+
+def _ferma_se_cache_corta(nome, quanta, n, dove, scorta):
+    """**UN SOLO controllo per le cache corte**, come `_ferma_se_oltre_max_nodi`."""
+    if quanta >= n:
+        return
+    _nl = chr(10)
+    raise CacheCorta(_nl.join([
+        "[CACHE CORTA] IL RUN SI FERMA (`PSI-FLASH`, `A9`).",
+        "  cache ..... %s" % nome,
+        "  len ....... %d" % quanta,
+        "  n ......... %d   (mancano %d valori)" % (n, n - quanta),
+        "  dove ...... %s" % dove,
+        "  il ramo di scorta avrebbe dato: %s" % scorta,
+        "  PERCHE': quel valore di scorta e' UN'ALTRA GRANDEZZA, e la darebbe a TUTTA LA",
+        "  RETE in silenzio. CHE FARE: la cache va ESTESA alla nascita",
+        "  (`_eredita_psi_figli`), NON allungata qui."]))
+
+
 def _ferma_se_oltre_max_nodi(n_attuale, quanti, dove):
     """**UN SOLO controllo per `MAX_NODI`, e non tronca MAI.**
 
@@ -2272,6 +2312,16 @@ class Rete:
             self.psi_spin = np.concatenate([cs[:n0], cs[a]])
         else:
             self._g_eredpsis_salti = getattr(self, "_g_eredpsis_salti", 0) + 1
+        # [PSI-FLASH, 2026-09-28] `rho_spin` COME `psi_spin`, e non e' un'aggiunta ovvia: senza,
+        #   `_rho_sorgente` prendeva il suo ripiego AL PASSO DOPO la nascita e restituiva `|psi|^2`
+        #   invece di `rho_spin` PER TUTTA LA RETE -- il GRADINO del +11 % che il flash grande
+        #   copriva. **Il nato prende `rho_spin[a]`, coerente con `psi_spin[a]`** (decisione di
+        #   Luca): sono la stessa grandezza vista in due modi, `rho_spin = psi_spin^dag psi_spin`.
+        rs = getattr(self, "rho_spin", None)
+        if rs is not None and len(rs) >= n0:
+            self.rho_spin = np.concatenate([np.asarray(rs)[:n0], np.asarray(rs)[a]])
+        else:
+            self._g_eredrho_salti = getattr(self, "_g_eredrho_salti", 0) + 1
 
     def _eredita_spinore_figli(self, src, segno=1):
         """Estende le cache spinoriali ai nuovi nodi EREDITANDO dal genitore src (regola D: eredita
@@ -4381,7 +4431,17 @@ class Rete:
         n = self.n
         if CAMPO_SPINORIALE:
             _rs = getattr(self, "rho_spin", None)
-            if _rs is not None and len(_rs) >= n:
+            # [PSI-FLASH, 2026-09-28] IL RIPIEGO ERA SILENZIOSO. Era:
+            #     if _rs is not None and len(_rs) >= n: return ...[:n]
+            #     return np.abs(self.psi[:n]) ** 2          <- per TUTTA la rete
+            #   Con `CAMPO_SPINORIALE` ACCESO la densita' sorgente E' `rho_spin`: cadere su
+            #   `|psi|^2` non e' un ripiego, e' UN'ALTRA GRANDEZZA. MISURATO: scattava 2
+            #   volte su 15 al passo DOPO la nascita (len 12802, n 12803), e quello era il
+            #   GRADINO del +11 % sul pozzo.
+            #   ⚠ `_rs is None` RESTA legittimo: il campo non e' ancora stato calcolato.
+            if _rs is not None:
+                _ferma_se_cache_corta("rho_spin", len(_rs), n, "_rho_sorgente",
+                                      "abs(psi)**2, cioe' UN'ALTRA DENSITA'")
                 return np.asarray(_rs)[:n]
         return np.abs(self.psi[:n]) ** 2
 
@@ -4392,6 +4452,15 @@ class Rete:
         n = self.n
         if CAMPO_SPINORIALE:
             _ps = getattr(self, "psi_spin", None)
+            # [PSI-FLASH, 2026-09-28] LO STESSO SCHEMA, LO STESSO TRATTAMENTO (decisione di
+            #   Luca): il ramo di scorta dava `self._nb` invece del Bloch NATIVO del campo
+            #   emesso -- UN'ALTRA DIREZIONE, e la direzione entra nella GRAVITA'.
+            #   ⚠ MISURATO: su questa scena NON SCATTA MAI nella finestra della nascita,
+            #   quindi questa riga e' BYTE-INERTE qui. **Lo dico prima di misurarlo**: il
+            #   sigillo non puo' dimostrare che serve, solo che non rompe.
+            if _ps is not None:
+                _ferma_se_cache_corta("psi_spin", len(_ps), n, "_nb_grav",
+                                      "self._nb, cioe' UN'ALTRA DIREZIONE di Bloch")
             if _ps is not None and len(_ps) >= n:
                 _ps = np.asarray(_ps)[:n]
                 _a = _ps[:, 0]; _b = _ps[:, 1]
