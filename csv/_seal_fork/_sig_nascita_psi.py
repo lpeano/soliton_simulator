@@ -10,7 +10,8 @@ guardiano, 2026-09-28)*:
 | **B** | al **passo di nascita**, scena GRANDE: `lambda` degli archi | ### **resta nell'intervallo dei passi normali, NON `0.8`** |
 | **C** | al **passo di nascita**: `mean(phi_g)` | ### **resta vicino alla base**, non a `366` |
 | **D** | ### **IL CASO CHE DEVE FALLIRE** | sul blob **PRE-CURA** `lambda = 0.8` ### **SI DEVE VEDERE** |
-| **E** | i due ripieghi | `len(psi) < n` ### **non scatta mai**; il contatore della **ricorsione** si RIPORTA, **stesso numero** prima e dopo nei passi senza nascite |
+| **E** | i due ripieghi | `len(psi) < n` ### **non scatta mai**; le ricorsioni ### **PER PASSO** sono uguali nei due giri **nei passi PRIMA della prima nascita** *(lo stesso dominio)*. **Il totale si RIPORTA, non si confronta** |
+| **F** | ### **NESSUN SALTO** | in tutta la corsa `|phi_g(k)/phi_g(k-1) - 1|` ### **non supera il massimo misurato nei passi PRIMA della prima nascita** della stessa corsa. **Sul PRE-CURA deve FALLIRE** |
 
 **E un'IPOTESI da verificare, non da assumere** *(decisione ④ di Luca)*: i passi **sotto** la base
 sono il passo **DOPO** un flash, con la schermatura che riparte su una densita' gonfiata.
@@ -252,17 +253,37 @@ def principale():
     mai = dopo["fermato"] is None or not dopo["fermato"].get("e_schermatura")
     print("  la cura si e' fermata per `SchermaturaSpenta`? %s"
           % ("NO" if mai else "SI -- e allora la cura non tiene"))
-    # lo STESSO numero di ricorsioni nei passi SENZA nascite: si contano le chiamate a LAM nei
-    # passi con `nati == 0`, prima e dopo
-    def _ric_senza_nascite(r):
-        return sum(1 for k, lst in r["lam"].items() for v in lst
-                   if v["tutti_LAM"] and r["serie"].get(k, {}).get("nati", 0) == 0)
-    rp, rd = _ric_senza_nascite(pre), _ric_senza_nascite(dopo)
-    print("  chiamate a LAM nei passi SENZA nascite:  PRE %d   DOPO %d   ->  %s"
-          % (rp, rd, "STESSO NUMERO" if rp == rd else "DIVERSO"))
-    esiti["E"] = bool(mai and rp == rd)
-    REF["E"] = {"mai_fermato": bool(mai), "ricorsioni_senza_nascite_pre": rp,
-                "ricorsioni_senza_nascite_dopo": rd, "passa": esiti["E"]}
+    # ⚠⚠ IL BRACCIO E, RISCRITTO **PER PASSO** (decisione di Luca, 2026-09-28). La prima stesura
+    #   sommava le chiamate a LAM sui passi SENZA nascite e confrontava i due totali: 421 contro
+    #   449. ### Ma i due giri hanno nascite in PASSI DIVERSI, quindi <<i passi senza nascite>> sono
+    #   DUE INSIEMI DIVERSI: sommava su DOMINI DIVERSI, e non misurava cio' che diceva.
+    #   ### Ora si confronta PER PASSO, e SOLO nei passi PRIMA DELLA PRIMA NASCITA -- dove i due
+    #   giri percorrono la STESSA traiettoria, quindi il confronto e' definito.
+    #   **Il totale si RIPORTA, non si confronta.**
+    def _ric_per_passo(r):
+        q = {}
+        for k, lst in r["lam"].items():
+            q[k] = sum(1 for v in lst if v["tutti_LAM"])
+        return q
+    rp, rd = _ric_per_passo(pre), _ric_per_passo(dopo)
+    k0 = min(pre["nascita"] or 10 ** 9, dopo["nascita"] or 10 ** 9)
+    comuni = sorted(k for k in set(rp) & set(rd) if k < k0)
+    diversi = [(k, rp[k], rd[k]) for k in comuni if rp[k] != rd[k]]
+    print("  passi PRIMA della prima nascita (dominio comune): %d, dal %s al %s"
+          % (len(comuni), comuni[0] if comuni else "?", comuni[-1] if comuni else "?"))
+    _campione = sorted({rp[k] for k in comuni})
+    print("  chiamate a LAM per passo, PRE: %s   DOPO: %s"
+          % (_campione, sorted({rd[k] for k in comuni})))
+    print("  passi in cui i due giri DIFFERISCONO: %d %s" % (len(diversi), diversi[:6]))
+    print("  ### E IL TOTALE SI RIPORTA, NON SI CONFRONTA: PRE %d, DOPO %d -- i domini sono"
+          % (sum(rp.values()), sum(rd.values())))
+    print("      diversi appena le traiettorie divergono, e confrontarli sarebbe l'errore di prima.")
+    esiti["E"] = bool(mai and not diversi and comuni)
+    REF["E"] = {"mai_fermato": bool(mai), "passi_comuni": comuni,
+                "per_passo_pre": {str(k): rp[k] for k in comuni},
+                "per_passo_dopo": {str(k): rd[k] for k in comuni},
+                "differenti": diversi, "totale_pre": sum(rp.values()),
+                "totale_dopo": sum(rd.values()), "passa": esiti["E"]}
     print("  BRACCIO E: %s" % ("PASSA" if esiti["E"] else "FALLISCE"))
     print("")
 
@@ -286,48 +307,75 @@ def principale():
     print("  ### l'ipotesi CADE e il sotto-base ha un'altra causa.")
     print("")
 
-    # ============ BRACCIO F: IL PASSO DOPO OGNI NASCITA, entro il 5 % dalla base =========
+    # ============ BRACCIO F: **NESSUN SALTO** ==============================================
     print("=" * 92)
-    print("BRACCIO F -- IL PASSO DOPO OGNI NASCITA: entro il 5 % dalla base (CRITERIO)")
+    print("BRACCIO F -- NESSUN SALTO: nessun passo salta piu' dell'oscillazione NATURALE")
     print("=" * 92)
-    print("  ⚠ E' IL BRACCIO CHE MANCAVA: il primo sigillo guardava SOLO il passo di")
-    print("    nascita, ed e' passato lasciando un gradino del +11 % al passo DOPO --")
-    print("    visibile nei suoi stessi numeri. Ora il passo dopo E' UN CRITERIO.")
+    print("  ⚠⚠ RISCRITTO (decisione di Luca, 2026-09-28). La prima stesura misurava lo")
+    print("     scostamento dalla BASE, cioe' da una MEDIA GLOBALE -- e la serie DERIVA, quindi")
+    print("     quello misurava anche la deriva: il 10.48 % che faceva fallire il braccio ERA LA")
+    print("     DERIVA, non un gradino. Ora si misura IL SALTO FRA DUE PASSI CONSECUTIVI, e il")
+    print("     metro e' l'oscillazione naturale della STESSA corsa, PRIMA di ogni nascita.")
     print("")
     F = {}
     for nome, r in (("PRE-CURA", pre), ("CURATO", dopo)):
-        b = [v["mean_phi_g"] for k, v in r["serie"].items() if v["nati"] == 0 and k >= 4]
-        bb = (sum(b) / len(b)) if b else None
-        nasc = sorted(k for k, v in r["serie"].items() if v["nati"] > 0)
-        peggio, dove = 0.0, None
-        righe = []
-        for kn in nasc:
-            vd = r["serie"].get(kn + 1)
-            if not vd or not bb:
-                continue
-            sc = abs(vd["mean_phi_g"] / bb - 1.0)
-            righe.append((kn + 1, vd["mean_phi_g"], vd["mean_phi_g"] / bb))
-            if sc > peggio:
-                peggio, dove = sc, kn + 1
-        F[nome] = {"base": bb, "nascite": nasc, "peggio_scostamento": peggio,
-                   "peggio_al_passo": dove,
-                   "righe": [{"passo": a, "mean_phi_g": c, "su_base": d}
-                             for a, c, d in righe]}
-        print("  %-9s base %s   nascite ai passi %s" % (nome, ("%.4f" % bb) if bb else "?",
-                                                       nasc[:14]))
-        for a, c, d in righe[:14]:
-            print("      passo %-4d dopo una nascita: %10.4f  ->  %.4f x la base%s"
-                  % (a, c, d, "   <== FUORI dal 5 %" if abs(d - 1.0) > 0.05 else ""))
-        print("      ### scostamento PEGGIORE: %.4f (%.2f %%) al passo %s"
-              % (peggio, 100.0 * peggio, dove))
+        ks = sorted(r["serie"])
+        salti = []
+        for i in range(1, len(ks)):
+            a, b = r["serie"][ks[i - 1]]["mean_phi_g"], r["serie"][ks[i]]["mean_phi_g"]
+            if a:
+                salti.append((ks[i], abs(b / a - 1.0)))
+        kn = r["nascita"] or (ks[-1] + 1)
+        prima = [(k, s) for k, s in salti if k < kn]
+        poi = [(k, s) for k, s in salti if k >= kn]
+        mp = max((s for _k, s in prima), default=0.0)
+        kmp = max(prima, key=lambda x: x[1])[0] if prima else None
+        mq = max((s for _k, s in poi), default=0.0)
+        kmq = max(poi, key=lambda x: x[1])[0] if poi else None
+        F[nome] = {"nascita": r["nascita"], "max_prima": mp, "al_passo_prima": kmp,
+                   "max_dopo": mq, "al_passo_dopo": kmq,
+                   "supera": bool(mq > mp),
+                   "peggiori": [{"passo": k, "salto": s}
+                                for k, s in sorted(poi, key=lambda x: -x[1])[:5]]}
+        print("  %-9s prima nascita al passo %s" % (nome, r["nascita"]))
+        print("      oscillazione NATURALE (prima della nascita): max %.4f %% al passo %s"
+              % (100.0 * mp, kmp))
+        print("      salto MASSIMO dal passo di nascita in poi: %.4f %% al passo %s"
+              % (100.0 * mq, kmq))
+        for v in F[nome]["peggiori"][:4]:
+            print("        passo %-4d salto %8.4f %%%s"
+                  % (v["passo"], 100.0 * v["salto"],
+                     "   <== SUPERA l'oscillazione naturale" if v["salto"] > mp else ""))
         print("")
-    esiti["F"] = bool(F["CURATO"]["peggio_scostamento"] <= 0.05)
+    esiti["F"] = bool(not F["CURATO"]["supera"])
     REF["F"] = F
-    print("  BRACCIO F: %s" % ("PASSA" if esiti["F"] else "FALLISCE"))
-    print("  (sul PRE-CURA lo scostamento peggiore e' %.2f %%: il difetto SI DEVE vedere)"
-          % (100.0 * F["PRE-CURA"]["peggio_scostamento"]))
+    print("  BRACCIO F: %s" % ("PASSA -- nessun salto oltre l'oscillazione naturale"
+                               if esiti["F"] else "FALLISCE"))
+    print("  E IL CASO CHE DEVE FALLIRE: sul PRE-CURA il salto massimo e' %.2f %% contro un'"
+          % (100.0 * F["PRE-CURA"]["max_dopo"]))
+    print("  oscillazione naturale di %.2f %%  ->  %s"
+          % (100.0 * F["PRE-CURA"]["max_prima"],
+             "SUPERA, e il difetto si vede" if F["PRE-CURA"]["supera"] else "NON SUPERA"))
+    esiti["F"] = bool(esiti["F"] and F["PRE-CURA"]["supera"])
     print("")
 
+    # ============ SI RIPORTA, NON E' UN CRITERIO ==========================================
+    print("=" * 92)
+    print("SI RIPORTA, NON E' UN CRITERIO: le nascite e la traiettoria dopo il 42")
+    print("=" * 92)
+    print("  ### La cura CAMBIA LA DINAMICA, ed e' ATTESO: `psi` non viene piu' gonfiata, quindi")
+    print("  ### le decisioni di mitosi a valle cambiano. Confrontare il passo k di un giro col")
+    print("  ### passo k dell'altro, dopo la prima nascita, NON confronta la stessa cosa.")
+    RIP = {}
+    for nome, r in (("PRE-CURA", pre), ("CURATO", dopo)):
+        nasc = sorted(k for k, v in r["serie"].items() if v["nati"] > 0)
+        tot = sum(v["nati"] for v in r["serie"].values())
+        RIP[nome] = {"passi_con_nascite": nasc, "nati_totali": tot,
+                     "n_finale": max(v["n"] for v in r["serie"].values()) if r["serie"] else None}
+        print("  %-9s nascite ai passi %s" % (nome, nasc[:14]))
+        print("            nati in tutto %d, n finale %s" % (tot, RIP[nome]["n_finale"]))
+    REF["riportati"] = RIP
+    print("")
     print("=" * 92)
     for k in ("A", "B", "C", "D", "E", "F"):
         print("  braccio %s: %s" % (k, "PASSA" if esiti.get(k) else "FALLISCE"))
