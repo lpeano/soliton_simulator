@@ -6580,3 +6580,47 @@ Quindi `n` cala **solo** se `phi` si accorcia. E `phi` ha **cinque** scritture i
 **Due reperti che NON riscrivo:** l'incrocio *(`RIPIEGHI_incrocio.md`)* e la lettura a mano
 *(`RIPIEGHI_lettura_d.md`)* restano come sono — sono il **reperto di un confronto fatto in un momento
 preciso**, e l'annotazione sta nell'incrocio, come per i task history.
+
+---
+
+# 🔧 **LA PROVA A GUASTO: lo strumento, committato PRIMA di girare** *(2026-09-28)*
+
+`csv/_test_fork/_guasto_ripieghi.py`, blob byte **`7582e89c`**. ### **Nessun codice di fisica**:
+il blob del simulatore resta **`f7541d03`**.
+
+> ### **Perche' una prova a GUASTO e non un'altra lettura:** su questi stessi siti **quattro volte
+> una lettura ha sbagliato** — `full(n,…)` contato come *«estende»*, la condizione fusa chiamata
+> *«inizializzazione»*, `==`/`!=` messi *«fuori dal mandato»*, e il ramo degli `IfExp` **invertito**.
+> ### **Tre erano regole mie e la quarta era il mio strumento. Questa prova non legge: guasta.**
+
+## Che cosa fa, in cinque mosse
+
+| | |
+|---|---|
+| **1** | scena **GRANDE** *(`nmasse` e `sep` **dall'argv**, come fa il pilota)*, seme `11`, fino al passo **30** — **prima di qualsiasi nascita** |
+| **2** | ### **l'elenco delle grandezze per nodo si trova IN AUTOMATICO**, non a mano: ogni attributo della rete con `len == n` allo stato BASE |
+| **3** | ### **CONTROLLO**: un passo **due volte da due copie**. Non byte-identico ⇒ ### **`vale: false`, e si ferma** |
+| **4** | per ognuna: **CORTA** e **LUNGA**, da copie fresche. Quattro esiti — **PROTETTO** · **ROTTO RUMOROSO** · ### **RIPIEGO SILENZIOSO** · **INERTE** |
+| **5** | ### **il caso che deve fallire**: `psi` CORTA sul blob **PRE-CURA** deve dare il **flash su tutta la rete** |
+
+## Tre scelte che vanno dette **prima** dei numeri
+
+1. ### ⚠ **`phi` e' ESCLUSA, e lo dichiaro nella stampa:** `n` **E'** `len(phi)` *(property
+   `:2063`)*. Accorciarla non accorcia una cache — ### **cambia `n`**, e il confronto perde il
+   riferimento. *(E' esattamente cio' che ho verificato nel commit precedente.)*
+2. **per nodo sui primi `n-1`, per arco INTERI.** Cosi' un cambiamento su un nodo e' **per
+   costruzione** un effetto **su qualcun altro**, non sul nodo che ho guastato io.
+   ### **Nella prima stesura tagliavo tutto a `n-1`: su un array per arco avrei guardato 12801
+   archi su 471564.** L'ho corretto prima del commit, non dopo i numeri.
+3. ### **la riga responsabile si TROVA col tracciatore**, limitato alle funzioni della tabella
+   generata, e si registra **quale riga elencata ha ESEGUITO**. ### **Misura, non lettura — e' il
+   punto della prova.** *(Su tutto il simulatore `settrace` non finisce: misurato il 2026-09-28.)*
+
+> ### 📌 **IL CRITERIO E' SUO, ED E' FISSATO PRIMA DEI NUMERI:** una grandezza e' **«a posto»** solo
+> se **entrambi** i guasti danno **PROTETTO**, **oppure** se danno **INERTE** ed e' **DIMOSTRATO**
+> che nessuna legge del passo la legge. ### **«Inerte» da solo NON BASTA**, e lo strumento lo
+> stampa accanto al conteggio invece di lasciarlo dedurre.
+
+**Qui non ci sono esiti, ed e' voluto:** il mandato dice **strumento committato prima di girare**.
+### **Un esito scritto prima del giro sarebbe una previsione travestita da misura.**
+**PROSSIMO:** il giro, e il commit del referto con l'incrocio su `doc/RIPIEGHI_incrocio.md`.

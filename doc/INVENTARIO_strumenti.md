@@ -1466,3 +1466,41 @@ scena **GRANDE** fino al **passo 72**.
 **gonfiava `psi` di `1.62x`**, e una `psi` gonfiata **fa scattare piu' mitosi**.
 ### **Quindi parte della mitosi di prima era PRODOTTA DAL CAMPO GONFIATO** -- e ogni conteggio di
 nascite misurato prima di questa cura, nei passi con nascite, viene da un campo gonfiato.
+
+---
+
+## La PROVA A GUASTO dei ripieghi *(2026-09-28)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura |
+|---|---|---|---|
+| `csv/_test_fork/_guasto_ripieghi.py` | `7582e89c` | `python csv/_test_fork/_guasto_ripieghi.py --passi=30` | dallo stato al passo **30** della scena **GRANDE**, per **ogni** grandezza per nodo: che cosa fa un passo se la cache e' **CORTA** o **LUNGA** di uno. Quattro esiti: **PROTETTO** *(errore dichiarato)*, **ROTTO RUMOROSO**, **RIPIEGO SILENZIOSO**, **INERTE** |
+
+> ### 📌 **E' COMMITTATO PRIMA DI GIRARE, e quindi qui non ci sono numeri:** il mandato chiede
+> **lo strumento prima della misura**, e un esito scritto prima del giro sarebbe una previsione
+> travestita da misura. ### **I numeri arrivano nel commit del referto.**
+
+**Perche' esiste:** ### **quattro volte una LETTURA ha sbagliato** su questi stessi siti
+*(`full(n,…)` contato come «estende», la condizione fusa chiamata «inizializzazione», `==`/`!=`
+messi fuori dal mandato, e il ramo degli `IfExp` invertito)*. **Questa prova non legge: guasta.**
+
+**Tre scelte di misura, dichiarate prima dei numeri:**
+
+| | |
+|---|---|
+| **`phi` e' ESCLUSA** | `n` **E'** `len(phi)` *(property `:2063`)*: accorciarla non accorcia una cache, ### **cambia `n`** -- e il confronto perderebbe il riferimento |
+| **per nodo sui primi `n-1`, per arco INTERI** | un cambiamento su un nodo e' allora **per costruzione** un effetto **su qualcun altro**. *(Tagliare un array per arco a `n-1` guarderebbe `12801` archi su `471564`.)* |
+| ### **la riga responsabile si TROVA** | per chi ripiega in silenzio il passo si **rigira col tracciatore** limitato alle funzioni della tabella generata: si registra **quale riga elencata ha ESEGUITO**. ### **Misura, non lettura** |
+
+**Il CONTROLLO e' una condizione di validita', non un braccio:** un passo **due volte da due copie**
+di BASE deve essere **byte-identico** *(il generatore e' `net.rng`, dentro la rete, quindi la copia
+profonda lo porta con se')*. ### **Se non lo e', lo strumento scrive `vale: false` e si ferma.**
+
+**Il CASO CHE DEVE FALLIRE** *(`P1-sexies`)*: il guasto **CORTO su `psi`** sul blob **PRE-CURA**
+*(estratto col padre del commit che introduce `_eredita_psi_figli`, mai un hash fissato a mano)*
+deve dare **RIPIEGO SILENZIOSO su TUTTA LA RETE** -- e' il flash di `PSI-FLASH`.
+### **Se non lo da', lo strumento esce con `1` e dice che la prova non dimostra niente.**
+
+> ### 📌 **IL CRITERIO E' FISSATO DAL GUARDIANO PRIMA DEI NUMERI:** una grandezza e' **«a posto»**
+> solo se **entrambi** i guasti danno **PROTETTO**, **oppure** se danno **INERTE** ed e'
+> **DIMOSTRATO** che nessuna legge del passo la legge. ### **«Inerte» da solo NON BASTA**, e lo
+> strumento lo stampa accanto al conteggio invece di lasciarlo capire.
