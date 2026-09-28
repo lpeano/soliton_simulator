@@ -5953,3 +5953,69 @@ nascita, quindi ### **lì non morde.** **Ma il caso esiste:** dal passo 70 al 12
 | ### **②** | ### **il via al RUN LUNGO del sigillo** *(~30 min, un seme, 44 passi, due blob)* |
 
 > ### 🛑 **STOP**, come da mandato: prima del codice della mitosi.
+
+---
+
+# 🔬 **I numeri: `V5` passa, il flash è identico su oggi, e il CRITERIO ④ mi ferma** *(2026-09-28)*
+
+### **Nessun codice di fisica. Blob del simulatore `05691d41`, invariato.**
+
+## ✅ `V5` — **ordine e scena sono quelli dei fotogrammi**
+
+| passo | atteso | ottenuto | |
+|---|---|---|---|
+| **40** | `138.68` | ### **`138.6832`** | **PASSA** |
+| **42** | `366.17` | ### **`366.1746`** | **PASSA** |
+
+**E la prima nascita è al passo 42**, `n 12802 → 12803`. Il ripiego usa **l'ordine di oggi** su un
+blob di ieri: riprodurre quei numeri è **la prova che ordine e scena sono i loro**.
+
+## ✅ Il tuo punto ②: **il flash c'è ancora sul blob di oggi, identico all'ultima cifra**
+
+I due referti differiscono in **tre righe**: il nome del simulatore, la riga dell'esecutore, e **un
+secondo di cronometro**. ### **Tutti i numeri di fisica coincidono.**
+
+> ### 📌 **Quindi nessuna cura di oggi lo ha toccato** — `MAX-NODI-FERMA`, `L_CONSERVA`,
+> `SYNC_UPDATE`, i pavimenti: **sulla scena grande sono byte-inerti anche qui.** ### **Ed è anche la
+> prova che il ripiego riproduce il passo di allora:** i due blob, per strade diverse, danno lo
+> stesso stato.
+
+## ⛔ **Il CRITERIO ④ FALLISCE: i numeri della scomposizione NON valgono**
+
+| `mean\|psi\|` sui 12802 nodi vecchi | |
+|---|---|
+| **P0** — `psi` che `step` ha lasciato | `1.544777` |
+| **V0** — il mio ricalcolo sullo stato **PRE** | ### **`1.082039`** |
+| rapporto | ### **`0.700450`**, e doveva essere `1.000000` |
+
+**Il criterio diceva *«se `V0` non coincide, MI FERMO»*, e mi fermo.** I valori si riportano e **non
+si interpretano**: `P5` `0.9562×P0` · `Pw` `0.6946×P0` · `Pf` `0.9562×P0` · `Pn` `0.9562×P0`.
+
+## ⚠ Due difetti del banco, **miei**
+
+### **① Misura l'ISTANTE SBAGLIATO.** `P0` e le varianti stanno **al confine della mitosi**; il
+flash è misurato **alla fine del passo**. Infatti `P5` dà `0.96×P0` mentre `phi_g` salta `2.64×`:
+**non possono riferirsi allo stesso `psi`.**
+
+> ### ➜ **E questo RESTRINGE dove sta il flash:** se al confine della mitosi `mean|psi|` **non si
+> muove**, il salto nasce **dopo**, nel ricalcolo che fa una legge successiva — e `PSI-FLASH` indica
+> `:6821` in `memoria_hebbiana_moto`. **Non è una conclusione: è dove guardare.**
+
+### **② Il rapporto `0.700` è il numero più interessante del giro, e non so di chi sia.**
+
+| | candidato, e nessuno è dimostrato |
+|---|---|
+| **(i)** | ### **`eta`.** `step` fa `w = self._pesi(); self.eta += dt_n`: **calcola i pesi, POI incrementa l'età.** Un `_pesi()` rifatto dopo `step` usa `eta + dt` → `ramp` diverso → **pesi diversi**. Se è questo, ### **`calcola_psi(w=None)` non può MAI riprodurre il `psi` di `step`**, e la lettura mista non è solo su `d`: è **anche su `eta`** |
+| **(ii)** | **il mio banco**, che chiama `_grado()` e forza `_S = None` |
+
+### **Non scelgo fra i due: distinguerli è UNA misura, e va fatta prima di qualunque cura.**
+
+## Due cose di forma, dichiarate
+
+**I due run hanno scritto sullo stesso `.json`**: quello committato è **l'ultimo**, cioè il blob di
+oggi; i due `.txt` sono entrambi committati e sono il record. ### **È un difetto del banco: l'uscita
+deve dipendere dal blob.** E **la copia resta un debito**, da fondere col file vero quando i due
+processi bloccati sono chiusi.
+
+> ### 🛑 **STOP.** Niente codice della mitosi: con il criterio ④ fallito **non saprei attribuire
+> nulla di ciò che la cura cambia.**

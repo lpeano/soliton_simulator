@@ -391,3 +391,86 @@ stesse dimensioni:
 chiamandolo su `I` e su `2·I` e guardando se `phi_g` raddoppia. ### **Serve a sapere se il `2.6` su
 `phi_g` è davvero `1.62` su `|psi|`** — l'assunzione che io e la voce abbiamo ereditato senza
 verificare.
+
+---
+
+# 🔬 **I NUMERI DELLA SCOMPOSIZIONE** *(2026-09-28)* — ### **`V5` passa, il CRITERIO ④ FALLISCE**
+
+## ✅ `V5`: **ordine e scena sono quelli dei fotogrammi**
+
+| passo | atteso *(fotogrammi)* | ottenuto | |
+|---|---|---|---|
+| 38 | — | `138.6407` | |
+| **40** | **`138.68`** | ### **`138.6832`** | ### **PASSA** |
+| **42** | **`366.17`** | ### **`366.1746`** | ### **PASSA** |
+
+### **E la prima nascita è al passo 42**, `n 12802 → 12803`, come i fotogrammi. Il ripiego usa
+**l'ordine di oggi** su un blob di ieri, e riprodurre quei numeri è **la prova che ordine e scena
+sono i loro.** *(311 s per arrivarci.)*
+
+## ✅ **Punto ② del guardiano: il flash c'è ANCORA sul blob di oggi, identico**
+
+**I due referti differiscono in TRE righe, e sono il nome del simulatore, la riga dell'esecutore e
+un secondo di cronometro.** ### **Tutti i numeri di fisica sono identici all'ultima cifra.**
+
+| | blob **vecchio** `e203f9a8` | blob **di oggi** `05691d41` |
+|---|---|---|
+| esecutore | **assente** → ripiego | **`esegui_passo`** |
+| passo 40 | `138.6832` | ### **`138.6832`** |
+| passo 42 | `366.1746` | ### **`366.1746`** |
+| prima nascita | passo **42** | passo **42** |
+
+> ### 📌 **Quindi il flash non è stato toccato da nessuna delle cure di oggi** — `MAX-NODI-FERMA`,
+> `L_CONSERVA`, `SYNC_UPDATE`, i pavimenti: ### **sulla scena grande sono byte-inerti anche qui.**
+> **Ed è anche la prova che il ripiego pre-`T1` riproduce il passo di allora**, perché i due blob,
+> per strade diverse, danno lo stesso stato.
+
+## ⛔ **IL CRITERIO ④ FALLISCE, e i numeri della scomposizione NON VALGONO**
+
+| | `mean\|psi\|` sui 12802 nodi vecchi |
+|---|---|
+| **P0** — `psi` che `step` ha lasciato | `1.544777` |
+| **V0** — **il mio ricalcolo sullo STATO PRE** | ### **`1.082039`** |
+| **rapporto** | ### **`0.700450`** — e doveva essere `1.000000` entro `1e-9` |
+
+### ➜ **Il banco NON riproduce il `psi` di `step`, quindi non misura ciò che dice.** Il criterio ④
+diceva *«se `V0` non coincide, MI FERMO»*, ed è quello che faccio. **I numeri qui sotto si
+riportano, e NON si interpretano:**
+
+| | | |
+|---|---|---|
+| **P5** ricalcolo POST completo | `1.477078` | `0.9562 × P0` |
+| **Pw** pesi dei sopravvissuti al PRE | `1.073072` | `0.6946 × P0` |
+| **Pf** fase dei nodi vecchi al PRE | `1.477104` | `0.9562 × P0` |
+| **Pn** archi del nato a peso zero | `1.477078` | `0.9562 × P0` |
+
+## ⚠ **DUE DIFETTI DEL BANCO, e sono miei**
+
+### **① Il banco misura L'ISTANTE SBAGLIATO.**
+
+`P0` e le varianti stanno **al confine della mitosi**. Il flash — `366.17` — è misurato **alla fine
+del passo**, dopo che `rilassa_disegno` e `memoria_hebbiana_moto` hanno girato. ### **Sono due
+istanti diversi**, e infatti `P5` dà `0.96 × P0` mentre `phi_g` salta di `2.64×`: **non possono
+riferirsi allo stesso `psi`.**
+
+> ### 📌 **E questo RESTRINGE dove sta il flash:** se al confine della mitosi `mean|psi|` non si
+> muove, ### **il salto nasce DOPO**, nel ricalcolo che una legge successiva fa — e `PSI-FLASH`
+> indica proprio `:6821` in `memoria_hebbiana_moto`. **Non è una conclusione: è dove guardare.**
+
+### **② Il rapporto `0.700` è il numero più interessante del giro, e non so ancora di chi sia.**
+
+**Due candidati, e nessuno dei due è dimostrato:**
+
+| | candidato |
+|---|---|
+| **(i)** | ### **`eta`.** `step` fa `w = self._pesi(); self.eta += dt_n` — **prima calcola i pesi, POI incrementa l'età.** Un `_pesi()` rifatto dopo `step` usa `eta + dt`, quindi un `ramp` diverso, quindi **pesi diversi**. Se è questo, ### **`calcola_psi(w=None)` NON PUÒ MAI riprodurre il `psi` di `step`** — e la «lettura mista» non è solo su `d`: è **anche su `eta`** |
+| **(ii)** | **il mio banco**: chiamo `net._grado()` e forzo `net._S = None` per ricostruire la struttura. Se `satura` o `_pesi` dipendono da `_deg`, l'ho spostato io |
+
+### **Non scelgo fra i due: la distinzione è UNA misura, e va fatta prima di qualunque cura.**
+
+## 🗒 Due cose di forma, dichiarate
+
+| | |
+|---|---|
+| **①** | **i due run hanno scritto sullo STESSO `.json`**, quindi quello committato è ### **l'ultimo, cioè il blob di oggi.** I due `.txt` sono entrambi committati e sono il record. **È un difetto del banco**: l'uscita deve dipendere dal blob |
+| **②** | **la copia resta un debito:** `_flash_scomposizione_copia.py` si fonde con `_flash_scomposizione.py` appena i due processi bloccati sono chiusi |

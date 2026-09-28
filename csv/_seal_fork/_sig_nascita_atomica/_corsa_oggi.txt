@@ -1,0 +1,44 @@
+[TIMBRO] _flash_scomposizione_copia.py  sha1-BYTE 3125acef  committato e pulito
+simulatore ....... soliton_simulator.py
+esecutore ........ `esegui_passo`
+scena ............ nmasse 3, sep 6.1158  ->  n = 12802, archi = 471564
+
+### CRITERIO 5, IL PRIMO NUMERO: SCALA_AMP = 1.0
+    (`calcola_psi` moltiplica per SCALA_AMP, `step` no: se e' 1.0 la differenza fra le
+     due formule e' INERTE, e il fattore va cercato altrove.)
+
+### `pozzo_grafo` e' LINEARE in I?  mean|phi_g(2I)| / mean|phi_g(I)| = 2.000000
+    (2.000000 = lineare, e allora un 2.631x su phi_g e' la RADICE su |psi|)
+    ### ➜ LINEARE: il passaggio 2.6 -> 1.62 su |psi| E' LEGITTIMO.
+
+  passo 38   n = 12802    mean(phi_g) =     138.6407
+  passo 40   n = 12802    mean(phi_g) =     138.6832
+  passo 42   n = 12803    mean(phi_g) =     366.1746
+### PRIMA NASCITA al passo 42: 1 nati, n 12802 -> 12803  (310 s dal via)
+
+### CRITERIO V5 -- ordine e scena sono quelli dei fotogrammi?
+    passo 40   atteso     138.68   ottenuto     138.68   ->  PASSA
+    passo 42   atteso     366.17   ottenuto     366.17   ->  PASSA
+    ### ➜ RIPRODOTTO: i numeri della scomposizione VALGONO.
+
+============================================================================================
+LA SCOMPOSIZIONE, su `mean|psi|` dei 12802 NODI VECCHI
+============================================================================================
+  archi: PRE 471564 -> POST 471565   ->  divisi 1, sopravvissuti 471563
+  P0  `psi` che `step` ha lasciato ............ mean|psi| = 1.544777
+  V0  ricalcolo sullo STATO PRE .............. mean|psi| = 1.082039   (rapporto 0.700449867)
+      ### CRITERIO 4 -- il banco e' sano? NO: MI FERMO
+
+  P5  ricalcolo POST completo (IL FLASH) ..... mean|psi| = 1.477078   -> 0.9562 x P0
+  Pw  POST, pesi dei sopravvissuti = PRE ..... mean|psi| = 1.073072   -> 0.6946 x P0
+  Pf  POST, fase dei nodi vecchi = PRE ....... mean|psi| = 1.477104   -> 0.9562 x P0
+  Pn  POST, archi del nato a peso ZERO ....... mean|psi| = 1.477078   -> 0.9562 x P0
+
+============================================================================================
+  P5_ricalcolo_POST          0.9562 x P0
+  Pw_pesi_al_PRE             0.6946 x P0
+  Pf_fase_al_PRE             0.9562 x P0
+  Pn_nato_a_peso_zero        0.9562 x P0
+============================================================================================
+
+scritto: C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sig_nascita_atomica\_flash_scomposizione.json
