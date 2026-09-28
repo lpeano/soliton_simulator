@@ -6624,3 +6624,43 @@ il blob del simulatore resta **`f7541d03`**.
 **Qui non ci sono esiti, ed e' voluto:** il mandato dice **strumento committato prima di girare**.
 ### **Un esito scritto prima del giro sarebbe una previsione travestita da misura.**
 **PROSSIMO:** il giro, e il commit del referto con l'incrocio su `doc/RIPIEGHI_incrocio.md`.
+
+---
+
+# ⛔ **IL PRIMO GIRO DELLA PROVA A GUASTO MUORE NEL CONTROLLO — e il difetto e' mio** *(2026-09-28)*
+
+**Non e' la fisica: e' il mio strumento.** Stampa in `csv/_seal_fork/_guasto_ripieghi/_corsa.txt`.
+### **Committo il fallimento PRIMA di correggerlo** *(par.5: la correzione e' un commit a se')*.
+
+**Fin dove e' arrivato, e questo pezzo VALE:**
+
+| | |
+|---|---|
+| scena | `nmasse 3`, `sep 6.1158` → ### **`n = 12802`, archi `471564`** dopo **30 passi**, **zero nascite** |
+| ### **grandezze per nodo trovate IN AUTOMATICO** | ### **31** |
+| sospette *(per arco con `len == n` per caso)* | ### **NESSUNA** — `n = 12802` e archi `= 471564` non possono coincidere |
+| siti della tabella dati al tracciatore | **96** *(su 101 righe: 5 non hanno la forma che il lettore riconosce)* |
+
+**Le 31, e nove NON le avevo nelle 23 del sigillo:** `_chi_core_nodi` `_chi_core_raggio`
+`_chi_core_rho0` `_chi_geom_nodi` `_cs_nodo_prev` `_deg` `_fatt_cs_ultimo` `_g_rampa_prec`
+`_nb_ret` `_psi_spin_prec` `_r_corrente` `_xi_rumore` `conc_nodi` `pos` `rho_spin`.
+### ➜ **L'elenco automatico era la scelta giusta: a mano ne avrei perse quindici.**
+
+## ⛔ Dov'e' morto, e perche' e' colpa mia
+
+```
+_confronta -> np.asarray(xa - ya, complex)
+FloatingPointError: invalid value encountered in subtract
+```
+
+### **Il simulatore imposta `np.seterr(over='raise', divide='raise', invalid='raise')`**
+*(`:8835`, con gli invarianti ACCESI, che sono il default)*. **Io sanificavo con `nan_to_num`
+DOPO la sottrazione** — cioe' **dopo** l'operazione che alza l'eccezione. ### **Troppo tardi.**
+
+> ### 📌 **E dice una cosa sullo STATO, non solo sul mio codice:** `invalid` non scatta su un
+> `nan` che passa, ### **scatta su `inf - inf`**. Quindi **almeno una delle grandezze per nodo
+> contiene `inf`** al passo 31 — molto probabilmente **una sentinella** *(un raggio o una distanza
+> «nessuno»)*, ma ### **QUALE non lo so ancora, e non lo indovino.** La correzione lo **elenca**.
+
+**COSA RICONTROLLARE:** il CONTROLLO **non ha dato verdetto**, quindi ### **della determinabilita'
+del passo da una copia oggi NON SO NIENTE** — ne' che tiene, ne' che non tiene.
