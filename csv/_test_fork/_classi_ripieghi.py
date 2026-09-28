@@ -108,22 +108,42 @@ def _confronti():
             if k in visti:
                 break
             visti.add(k)
-            # l'`if` (o l'`IfExp`, o il `while`) che CONTIENE il confronto: e' li' che sta il
-            # ramo di scorta. Si risale finche' non si trova un nodo di controllo.
-            su, cond, ramo = nd, None, None
+            # ⚠⚠ LA FAMIGLIA DEL CONFRONTO, e la prima stesura le MESCOLAVA TUTTE E TRE:
+            #   CORTA  `len(x) < n` oppure `len(x) >= n` -> la cache e' PIU' CORTA di `n`, e il
+            #          ramo di scorta e' quello che si prende QUANDO LO E'. E' la famiglia del
+            #          mandato.
+            #   LUNGA  `len(x) > n` -> la cache e' PIU' LUNGA: quello e' un TRONCAMENTO, un'altra
+            #          cosa, e non sostituisce nessuna legge.
+            #   ALTRO  `==`, `!=` -> ne' l'uno ne' l'altro.
+            # ### E IL RAMO DI SCORTA NON STA SEMPRE NELLO STESSO POSTO: con `<` sta nel CORPO
+            #   dell'`if`, con `>=` sta nell'`else` (o FUORI dall'`if`). La prima stesura prendeva
+            #   SEMPRE il corpo, quindi per i `>=` riportava IL RAMO BUONO spacciandolo per il ramo
+            #   di scorta. **Trovato leggendo la sua uscita, non da un'asserzione.**
+            _op = type(nd.ops[0]).__name__
+            _corta_se_vero = _op in ("Lt", "LtE")
+            fam = "ALTRO"
+            if _op in ("Lt", "LtE", "GtE"):
+                fam = "CORTA"
+            elif _op == "Gt":
+                fam = "LUNGA"
+            su, cond, ramo, dove_ramo = nd, None, None, None
             for _ in range(8):
                 su = padre.get(su)
                 if su is None:
                     break
                 if isinstance(su, (ast.If, ast.While)):
                     cond = ast.unparse(su.test)
-                    corpo = su.body if nd.lineno <= (su.body[0].lineno if su.body else 0) or True \
-                        else su.orelse
-                    ramo = NL.join(ast.unparse(x) for x in corpo)[:220]
+                    corpo = su.body if _corta_se_vero else (su.orelse or [])
+                    dove_ramo = ("corpo dell'if" if _corta_se_vero
+                                 else ("else dell'if" if su.orelse
+                                       else "FUORI dall'if (nessun else)"))
+                    ramo = (NL.join(ast.unparse(x) for x in corpo)[:220] if corpo
+                            else "(nessun else: si continua dopo l'if)")
                     break
                 if isinstance(su, ast.IfExp):
                     cond = ast.unparse(su.test)
-                    ramo = "(espressione condizionale) " + ast.unparse(su.orelse)[:180]
+                    ramo = ast.unparse(su.orelse if _corta_se_vero else su.body)[:180]
+                    dove_ramo = "espressione condizionale"
                     break
                 if isinstance(su, ast.BoolOp):
                     continue
@@ -131,6 +151,7 @@ def _confronti():
                           "contro": tb, "op": type(nd.ops[0]).__name__,
                           "condizione": (cond or "")[:200],
                           "ramo_di_scorta": (ramo or "(non trovato)"),
+                          "famiglia": fam, "dove_e_il_ramo": dove_ramo or "(?)",
                           "sorgente": RIG[nd.lineno - 1].strip()[:150]})
             break
     return sorted(fuori, key=lambda x: x["riga"])
@@ -138,6 +159,11 @@ def _confronti():
 
 def classifica(v, perimetro):
     """La classe, e **la regola che l'ha decisa**. `(d)` non si assegna: si SEGNALA."""
+    if v["famiglia"] != "CORTA":
+        return "x", ("FUORI DAL MANDATO: famiglia %s -- `len(x) > n` e' un TRONCAMENTO, e "
+                     "`==`/`!=` non e' ne' l'uno ne' l'altro" % v["famiglia"])
+    if "raise " in v["ramo_di_scorta"]:
+        return "e", "GIA' CURATO: il ramo di scorta SOLLEVA"
     if v["dentro"] not in perimetro:
         return "c", "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo"
     r = v["ramo_di_scorta"]
@@ -168,8 +194,13 @@ def principale():
     print("")
     for k, nome in (("a", "inizializzazione"), ("b", "estensione dei soli nuovi"),
                     ("c", "diagnostica o disegno, NON fisica"),
+                    ("e", "GIA' CURATO: il ramo di scorta SOLLEVA"),
+                    ("x", "FUORI DAL MANDATO (troncamento, oppure ==/!=)"),
                     ("d", "DA LEGGERE (candidati a sostituzione di legge)")):
         print("  (%s) %-46s %d" % (k, nome, conta.get(k, 0)))
+    print("")
+    print("  della famiglia CORTA (quella del mandato): %d su %d"
+          % (sum(1 for v in conf if v["famiglia"] == "CORTA"), len(conf)))
     print("")
     print("=" * 108)
     print("I CANDIDATI (d): nel perimetro della fisica, e il ramo di scorta NON estende")
@@ -182,17 +213,18 @@ def principale():
 
     # ---- la TABELLA, generata: `L-NUMERI` ----------------------------------------------
     NOMI = {"a": "**(a)** inizializzazione", "b": "**(b)** estensione dei soli nuovi",
-            "c": "**(c)** diagnostica o disegno", "d": "### **(d) DA LEGGERE**"}
-    R = ["# I 100 CONFRONTI `len(x) < n`, NELLE QUATTRO CLASSI", "",
+            "c": "**(c)** diagnostica o disegno", "d": "### **(d) DA LEGGERE**",
+            "e": "**(e)** GIA' CURATO: il ramo di scorta SOLLEVA",
+            "x": "*(fuori dal mandato: troncamento oppure ==/!=)*"}
+    # ⚠ IL TITOLO SI GENERA DAL CONTO: la prima stesura diceva "100" a mano, e sono 99.
+    R = ["# I %d CONFRONTI FRA UN `len(...)` E `n`, NELLE CLASSI" % len(conf), "",
          "> ### **Generato da** `csv/_test_fork/_classi_ripieghi.py`. **Non si modifica a mano:** si",
          "> rigira lo strumento. *(Punto ① di `RIPIEGHI-ZERO`.)*", "",
          "**Confronti: %d, in %d funzioni.** Perimetro della fisica *(raggiungibile dalle cinque"
          " leggi e dalle fasi del passo)*: **%d** funzioni."
          % (len(conf), len({v["dentro"] for v in conf}), len(perimetro)), "",
          "| classe | quanti |", "|---|---|"]
-    for k, nome in (("a", "inizializzazione"), ("b", "estensione dei soli nuovi"),
-                    ("c", "diagnostica o disegno, NON fisica"),
-                    ("d", "DA LEGGERE")):
+    for k in ("a", "b", "c", "e", "x", "d"):
         R.append("| %s | **%d** |" % (NOMI[k], conta.get(k, 0)))
     R += ["", "## ⚠ Che cosa e' automatico e che cosa non lo e'", "",
           "| classe | com'e' deciso |", "|---|---|",
@@ -203,13 +235,13 @@ def principale():
           "| ### **(d)** | ### **NON assegnata dallo strumento: e' la lista di cio' che va LETTO"
           " a mano.** La classe piu' grave e' quella che lo strumento **rifiuta** di assegnare |",
           "", "## La tabella, sito per sito", "",
-          "| riga | funzione | cache | classe | la regola, e la RIGA che la giustifica |",
-          "|---|---|---|---|---|"]
+          "| riga | funzione | cache | fam. | classe | la regola, e la RIGA che la giustifica |",
+          "|---|---|---|---|---|---|"]
     for v in conf:
-        R.append("| `:%d` | `%s` | `%s` | %s | %s <br> `%s` |"
-                 % (v["riga"], v["dentro"], v["cosa"][:26], NOMI[v["classe"]],
-                    v["regola"],
-                    v["ramo_di_scorta"].replace(NL, " ; ").replace("|", "\\|")[:150]))
+        R.append("| `:%d` | `%s` | `%s` | %s | %s | %s <br> *(%s)* `%s` |"
+                 % (v["riga"], v["dentro"], v["cosa"][:26], v["famiglia"],
+                    NOMI[v["classe"]], v["regola"], v["dove_e_il_ramo"],
+                    v["ramo_di_scorta"].replace(NL, " ; ").replace("|", chr(92) + "|")[:150]))
     R.append("")
     OUTMD = os.path.join(RADICE, "doc", "RIPIEGHI_classi.md")
     io.open(OUTMD, "w", encoding="utf-8", newline=NL).write(NL.join(R) + NL)

@@ -6364,3 +6364,58 @@ ciascuno»*.
 > descrivono** — quindi ho rimesso i byte del commit, **con `git cat-file -p` e non con
 > `git checkout`**, come prescrive il par.7. *(Il banco è archiviato e superato: quel referto non si
 > rigenera.)*
+
+---
+
+# 📋 **`RIPIEGHI-ZERO` punto ①: la classificazione. 99 confronti, non 100** *(2026-09-28)*
+
+### **Nessun codice.** `doc/RIPIEGHI_classi.md` *(`70123db0`)*, generato da
+`csv/_test_fork/_classi_ripieghi.py` *(`223b0d0c`)*.
+
+| classe | quanti |
+|---|---|
+| **(a)** inizializzazione | **11** |
+| **(b)** estensione dei soli nuovi | **15** |
+| **(c)** diagnostica o disegno, **non fisica** | **30** |
+| **(e)** ### **già curato: il ramo di scorta SOLLEVA** | **1** |
+| **(x)** fuori dal mandato *(troncamento, o `==`/`!=`)* | **19** |
+| ### **(d) DA LEGGERE** | ### **23** |
+
+**Famiglia `CORTA`** *(quella del mandato)*: **80 su 99**. Perimetro della fisica: **58** funzioni.
+
+## 📌 **La forma dello strumento è la cosa che conta**
+
+> ### **La classe (d) non viene ASSEGNATA: viene SEGNALATA.** `(a)`, `(b)`, `(c)` ed `(e)` si
+> decidono con regole dichiarate; **tutto il resto finisce in `(d)` con scritto «DA LEGGERE»**.
+> ### **Cioè la classe più grave è quella che lo strumento RIFIUTA di assegnare.**
+>
+> **E `(c)` è oggettiva:** il sito **non è raggiungibile** dalle cinque leggi né dalle fasi, quindi
+> **non può cambiare la fisica di un passo.** Nessun giudizio.
+
+## ⚠ **Tre difetti dello strumento, trovati leggendo la sua prima uscita**
+
+| | |
+|---|---|
+| **①** | **mescolava tre famiglie**: `len(x) < n` *(il mandato)*, `len(x) > n` *(**troncamento**, un'altra cosa)*, `==`/`!=` |
+| **②** | ### **prendeva SEMPRE il corpo dell'`if` come ramo di scorta.** Con `>=` il ramo di scorta è l'`else`: quindi per quei siti **riportava il ramo BUONO spacciandolo per il ramo di scorta** |
+| **③** | **non riconosceva i siti già curati**: `lambda_nodi` compariva fra i candidati mentre il suo ramo di scorta **solleva** |
+
+**E il titolo diceva «100» scritto a mano: ora si genera dal conto.**
+
+## ⚠ **Una discrepanza, e la dichiaro: 99 contro 100**
+
+La sonda `_ripieghi_len_n.py` ne contava **100**, questo strumento **99**. ### **Non so quale dei due
+sia giusto, e non lo indovino** — è una differenza di **uno** su 99, e va letta. **Lo dico perché due
+strumenti miei non concordano.**
+
+## I 23 candidati stanno in **quattro** funzioni
+
+`step` **19** · `_passo_spinoriale` **2** · `_feedback_spinoriale_archi` **1** ·
+`memoria_hebbiana_moto` **1**. ### **E quindici dei 19 di `step` riguardano `perc_chi`.**
+### **Non li ho ancora letti uno per uno:** il mandato chiedeva **la tabella e la lista**, e la
+lettura dei 23 è il passo successivo — da lì usciranno i `(d)` veri.
+
+**Due limiti che non spaccio per verificati:** la classe `(b)` dice che il ramo di scorta **estende**,
+**non** che estenda *i soli nuovi senza toccare gli esistenti* — quella metà del criterio resta da
+leggere; e i **19** della classe `(x)` sono **fuori dal mandato, non innocenti**: un troncamento
+silenzioso è un altro difetto, di un'altra famiglia.
