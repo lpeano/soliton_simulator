@@ -5290,3 +5290,80 @@ nel dump** (`P5`).
 > ordine, byte-identico — e il sigillo su un giro **abbastanza lungo** da avere
 > `_g_smp_chirurgie > 0`. **Con 3 passi non se ne producono**, quindi userò la **scena del pilota**
 > *(~12.8k nodi)* fino al passo **60**, e lo dirò.
+
+---
+
+# 🛑 **La mitosi NON si spezza per TIPO restando byte-identica. Ho misurato perché** *(2026-09-28)*
+
+*(`doc/MITOSI_non_si_spezza_per_tipo.md`.)* ### **Nessun codice. Blob `1fc9235f` prima e dopo.**
+
+**Le due richieste del mandato — «una voce strutturale e una di stato» e «stesso ordine, quindi
+byte-identico» — sono incompatibili**, e non per una difficoltà tecnica: **per come è fatto il corpo
+di `mitosi()` oggi.**
+
+## La misura
+
+`mitosi()` ha **105 istruzioni** di primo livello *(532 righe)*; **26** scrivono stato o struttura.
+**La sequenza dei tipi:**
+
+```
+STRUT STRUT STATO STRUT STATO STRUT STATO STATO STATO STATO STATO
+STRUT STATO STATO STRUT STRUT STRUT STATO STATO STATO STATO STRUT
+STATO STATO STRUT MISTA
+```
+
+**Ultimo `STATO` alla posizione 23, primo `STRUT` alla posizione 0.**
+### **Nessuna cucitura: né «stato poi struttura», né il contrario.**
+
+> ### 📌 **Il punto che decide:** ### **lo stato dei nodi NATI è scritto PRIMA della struttura degli
+> archi** *(`:6380` prima di `:6446`)*, **e lo stato PER ARCO è scritto DOPO** *(`:6459-6472`)*.
+> **Quindi «prima la struttura, poi lo stato» non è l'ordine di oggi — e nemmeno il suo contrario.
+> Spezzare per tipo richiede di RIORDINARE, e riordinare cambia la fisica.**
+
+**⚠ E c'è una cosa peggiore dell'alternanza:** l'istruzione `:6481` è **`MISTA`** — **un solo
+blocco** che scrive `d`, `d0`, `eta`, `mem_mot`, `peq`, `perc_chi`, `perc_geom` **e** `_rep`,
+`coppie_nate`, `i`, `j`, `nati`, `perc_tw`. **Non è alternanza: è intreccio dentro la stessa
+istruzione.**
+
+## La divisione che **sarebbe** byte-identica: per **CANALE**
+
+Il blocco `:6481` è la **creazione di coppia alla Schwinger**, ed è la **penultima** istruzione —
+dopo c'è solo `return`. **107 righe su 532**, e legge dal corpo di `mitosi` ### **cinque variabili
+sole: `a`, `b`, `fm`, `sciolta`, `sel`.** Si stacca **senza riordinare niente**, e il nome è già nel
+tuo piano: *«leggi strutturali (mitosi, Schwinger)»*.
+
+> ### ⚠ **Ma non risolve l'ambiguità: entrambe resterebbero `AMBIGUA`.** La mitosi per divisione
+> scrive struttura **e** stato; la Schwinger **è** il blocco `MISTA`. ### **Spezzare per canale
+> raddoppia le voci ambigue invece di togliere l'ambiguità**, e per `9-ter` il conto delle leggi non
+> deve crescere senza motivo.
+
+## Le tre strade
+
+| | | byte-identico? |
+|---|---|---|
+| **(a)** | la mitosi resta **una** voce `AMBIGUA`, e si spezza **in `T3`** — quando le variazioni si separano dalle scritture e **il riordino è il lavoro previsto** | ### **sì** |
+| **(b)** | si spezza **per canale**: `mitosi` + `schwinger` | **sì**, ma **due `AMBIGUA`** |
+| **(c)** | si spezza per tipo **adesso**, riordinando | ### **NO** — è `T3` sotto un altro nome, **senza la fotografia e le variazioni che rendono il riordino corretto** |
+
+### ➜ **Raccomando (a).**
+**`T2` esiste per dichiarare i tipi senza cambiare comportamento**, e l'ambiguità della mitosi
+### **non è un difetto della dichiarazione: è un fatto del codice**, che il tipo `AMBIGUA` dice
+correttamente. **Spezzarla per canale la nasconderebbe meglio senza risolverla; spezzarla per tipo
+richiede il riordino.**
+**E con (a) non si perde niente:** la voce resta `AMBIGUA` e **visibile**, la verifica dei tipi
+**continua a passare 8/8** *(l'`AMBIGUA` è coerente: scrive davvero entrambi)*, e **il lavoro si fa
+una volta sola**, in `T3`, invece di due.
+
+**Se scegli (b)** il lavoro è piccolo e chiaro: estrarre il blocco finale in un metodo che riceve i
+cinque valori, aggiungere la voce **subito dopo `mitosi`**, e il sigillo come da mandato.
+### **Lo dico perché è fattibile, non perché lo consigli.**
+
+## Il resto del mandato
+
+La verifica dei tipi è **oggi 8/8 e passa** *(diventa 9 solo con (b))*. **Il caso che deve fallire**
+— voci invertite — **è pronto per (b)** e richiede la regola *«la struttura viene dopo le
+dinamiche»*, che **oggi non esiste perché non c'è una voce strutturale separata**. **Il sigillo sulla
+scena del pilota non è girato:** senza codice da sigillare **non c'è niente da confrontare** — ma il
+criterio *(`_g_smp_chirurgie > 0` fino al passo 60)* **resta**, e vale per (b) e per `T3`.
+
+> ### 🛑 **STOP. Aspetto la tua scelta fra (a), (b) e (c).**
