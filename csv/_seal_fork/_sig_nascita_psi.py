@@ -108,8 +108,7 @@ def corri_grande(sim, passi):
                     "nati": int(net.n) - n_prima}
         if nascita is None and int(net.n) > n_prima:
             nascita = k
-        if nascita and k >= nascita + 2:
-            break
+        pass
     net._lam_archi = _lam
     return {"LAM": LAM, "serie": serie, "lam": stato["lam"], "nascita": nascita,
             "fermato": fermato, "n0": int(net.n),
@@ -128,7 +127,7 @@ def _intervallo_normali(r):
 
 
 def principale():
-    passi = 46
+    passi = 72
     for x in sys.argv[1:]:
         if x.startswith("--passi="):
             passi = int(x.split("=", 1)[1])
@@ -287,10 +286,52 @@ def principale():
     print("  ### l'ipotesi CADE e il sotto-base ha un'altra causa.")
     print("")
 
+    # ============ BRACCIO F: IL PASSO DOPO OGNI NASCITA, entro il 5 % dalla base =========
     print("=" * 92)
-    for k in ("A", "B", "C", "D", "E"):
+    print("BRACCIO F -- IL PASSO DOPO OGNI NASCITA: entro il 5 % dalla base (CRITERIO)")
+    print("=" * 92)
+    print("  ⚠ E' IL BRACCIO CHE MANCAVA: il primo sigillo guardava SOLO il passo di")
+    print("    nascita, ed e' passato lasciando un gradino del +11 % al passo DOPO --")
+    print("    visibile nei suoi stessi numeri. Ora il passo dopo E' UN CRITERIO.")
+    print("")
+    F = {}
+    for nome, r in (("PRE-CURA", pre), ("CURATO", dopo)):
+        b = [v["mean_phi_g"] for k, v in r["serie"].items() if v["nati"] == 0 and k >= 4]
+        bb = (sum(b) / len(b)) if b else None
+        nasc = sorted(k for k, v in r["serie"].items() if v["nati"] > 0)
+        peggio, dove = 0.0, None
+        righe = []
+        for kn in nasc:
+            vd = r["serie"].get(kn + 1)
+            if not vd or not bb:
+                continue
+            sc = abs(vd["mean_phi_g"] / bb - 1.0)
+            righe.append((kn + 1, vd["mean_phi_g"], vd["mean_phi_g"] / bb))
+            if sc > peggio:
+                peggio, dove = sc, kn + 1
+        F[nome] = {"base": bb, "nascite": nasc, "peggio_scostamento": peggio,
+                   "peggio_al_passo": dove,
+                   "righe": [{"passo": a, "mean_phi_g": c, "su_base": d}
+                             for a, c, d in righe]}
+        print("  %-9s base %s   nascite ai passi %s" % (nome, ("%.4f" % bb) if bb else "?",
+                                                       nasc[:14]))
+        for a, c, d in righe[:14]:
+            print("      passo %-4d dopo una nascita: %10.4f  ->  %.4f x la base%s"
+                  % (a, c, d, "   <== FUORI dal 5 %" if abs(d - 1.0) > 0.05 else ""))
+        print("      ### scostamento PEGGIORE: %.4f (%.2f %%) al passo %s"
+              % (peggio, 100.0 * peggio, dove))
+        print("")
+    esiti["F"] = bool(F["CURATO"]["peggio_scostamento"] <= 0.05)
+    REF["F"] = F
+    print("  BRACCIO F: %s" % ("PASSA" if esiti["F"] else "FALLISCE"))
+    print("  (sul PRE-CURA lo scostamento peggiore e' %.2f %%: il difetto SI DEVE vedere)"
+          % (100.0 * F["PRE-CURA"]["peggio_scostamento"]))
+    print("")
+
+    print("=" * 92)
+    for k in ("A", "B", "C", "D", "E", "F"):
         print("  braccio %s: %s" % (k, "PASSA" if esiti.get(k) else "FALLISCE"))
-    passa = all(esiti.get(k) for k in ("A", "B", "C", "D", "E"))
+    passa = all(esiti.get(k) for k in ("A", "B", "C", "D", "E", "F"))
     print("=" * 92)
     print("### SIGILLO `PSI-FLASH`: %s" % ("PASSA" if passa else "FALLISCE"))
     print("=" * 92)
