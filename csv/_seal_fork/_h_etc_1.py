@@ -46,7 +46,9 @@ _presidio.avvia(__file__)
 import _passo  # noqa: E402
 
 SIM = os.path.join(RADICE, "soliton_simulator.py")
-ATTESO_OGGI = 8          # misurato nella FASE 0 di ETC-PASSO sul blob e203f9a8
+ATTESO_OGGI = 7          # 2026-09-28: era 8, e l'ottavo era :6529 in _togli_rotazione_rigida,
+#   cioe' L'UNICO in un RAMO MORTO (L_CONSERVA). Archiviato quel ramo, le 7 che restano sono
+#   TUTTE VIVE, e il conto dice UNA cosa sola invece di due.
 
 
 def analizza(sorgente, leggi):

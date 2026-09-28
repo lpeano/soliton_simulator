@@ -54,6 +54,9 @@ def confronta(pa, pb):
         return str(z["_argv"]) if "_argv" in z.files else "(non registrato)"
     print("ARGV di A: %s" % _av(A))
     print("ARGV di B: %s" % _av(B))
+    def _fi(z):
+        return str(z["_flag_imposti"]) if "_flag_imposti" in z.files else "(non registrato)"
+    print("FLAG DI MODULO imposti, A: %s   B: %s" % (_fi(A), _fi(B)))
     print("  -> configurazioni %s" % ("UGUALI" if _av(A) == _av(B) else "### DIVERSE"))
     print("n di A: %s   n di B: %s" % (str(A["n"]), str(B["n"])))
     print("")
@@ -102,13 +105,14 @@ def confronta(pa, pb):
         {"a": os.path.basename(pa), "b": os.path.basename(pb),
          "hashseed_a": str(A["_hashseed"]), "hashseed_b": str(B["_hashseed"]),
          "blob_sim_a": _bl(A), "blob_sim_b": _bl(B),
+         "flag_imposti_a": _fi(A), "flag_imposti_b": _fi(B),
          "diverse": diversi, "righe": righe}, indent=1, ensure_ascii=False, sort_keys=True))
     print("")
     print("scritto: " + OUT)
     return 1 if diversi else 0
 
 
-def gira(out, seme, passi, extra=None):
+def gira(out, seme, passi, extra=None, flag=None):
     import _cli_flag
     import _passo
     hs = os.environ.get("PYTHONHASHSEED")
@@ -124,6 +128,18 @@ def gira(out, seme, passi, extra=None):
         argv = list(argv) + list(extra)
         print("FLAG EXTRA, aggiunti a quelli del driver: %s" % " ".join(extra))
     S, a = _cli_flag.carica_dal_cli(list(argv), nome="sim_hs")
+    # `--flag=NOME=VALORE`: impone una COSTANTE DI MODULO che NON ha un flag CLI. Serve ai
+    #   sigilli sui rami che si accendono solo modificando il sorgente -- per esempio
+    #   `L_CONSERVA`, che non ha `--l-conserva`. **Finisce nel dump**, perche' un confronto
+    #   deve poter dire su quale configurazione e' girato (`P5`).
+    imposti = {}
+    for _f in (flag or []):
+        _k, _, _v = _f.partition("=")
+        assert hasattr(S, _k), "flag di modulo INESISTENTE: %s" % _k
+        _nuovo = {"True": True, "False": False}.get(_v, _v)
+        setattr(S, _k, _nuovo)
+        imposti[_k] = _nuovo
+        print("FLAG DI MODULO IMPOSTO: %s = %r  (non ha un flag CLI)" % (_k, _nuovo))
     print("CONFIGURAZIONE INTERA (%d voci): %s" % (len(argv), " ".join(argv[1:])))
     S._NMASSE_VIDEO["n"] = 2
     S._NMASSE_VIDEO["sep"] = 3.0
@@ -145,7 +161,8 @@ def gira(out, seme, passi, extra=None):
     print("blob del simulatore (sha1 dei byte): %s" % _bl[:8])
     dati = {"n": np.asarray(net.n), "_hashseed": np.asarray(str(hs)),
             "_blob_sim": np.asarray(_bl), "_passi": np.asarray(passi),
-            "_seme": np.asarray(seme), "_argv": np.asarray(" ".join(argv[1:]))}
+            "_seme": np.asarray(seme), "_argv": np.asarray(" ".join(argv[1:])),
+            "_flag_imposti": np.asarray(repr(sorted(imposti.items())))}
     # I CONTATORI DEL CONFINE DEL PASSO, nel dump: dalla cura `(c)1` il confine e' idempotente e
     # <<quante leggi hanno trovato la fotografia gia' aperta>> e' un numero che il sigillo deve
     # poter LEGGERE, non supporre (`A8`).
@@ -171,7 +188,7 @@ if __name__ == "__main__":
     if "--confronta" in A:
         k = A.index("--confronta")
         sys.exit(confronta(A[k + 1], A[k + 2]))
-    out, seme, passi, extra = os.path.join(_QUI, "_hs.npz"), 11, 3, []
+    out, seme, passi, extra, flag = os.path.join(_QUI, "_hs.npz"), 11, 3, [], []
     for x in A:
         if x.startswith("--out="):
             out = x.split("=", 1)[1]
@@ -181,4 +198,6 @@ if __name__ == "__main__":
             passi = int(x.split("=", 1)[1])
         elif x.startswith("--extra="):
             extra += x.split("=", 1)[1].split(",")
-    sys.exit(gira(out, seme, passi, extra))
+        elif x.startswith("--flag="):
+            flag.append(x.split("=", 1)[1])
+    sys.exit(gira(out, seme, passi, extra, flag))

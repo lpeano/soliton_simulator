@@ -4117,6 +4117,27 @@ quindi `sqrt(Lam)` quelle di `|psi|`; `ampiezza` esce in unità di `phivel`, cio
 <!-- SCHEDA nome=rilassamento-disegno funzioni=rilassa_disegno flag=L_CONSERVA,EMB_IT,EMB_ETA -->
 # ㉗ IL RILASSAMENTO DEL DISEGNO — **`rilassa_disegno`**, e **`A3-DISEGNO`**
 
+> ### 🗄 **`L_CONSERVA` E' ARCHIVIATO** *(2026-09-28, strada (b) scelta da Luca)*
+>
+> `_togli_rotazione_rigida` e il ramo che lo chiamava sono in **`csv/_archivio/_l_conserva.py`**
+> *(tag `pre-archivio-lconserva`)*, e con loro la variabile `pos0`, che non aveva piu' lettori.
+> **Il codice stesso lo marcava <<ERRATA, NON usare>>:** azzerava **tutta** la rotazione rigida a
+> ogni passo e **distruggeva la PRECESSIONE FISICA REALE** *(`L_z ~ -0.9`, verso coerente
+> all'84 %)*. ### **Conservare `L` non e' annullare la rotazione.**
+> ### ➜ **E LA RAGIONE CHE L'HA FATTO USCIRE ADESSO E' IL TIPO.** La catena
+> `rilassa_disegno -> _togli_rotazione_rigida -> calcola_psi` faceva scrivere `psi` e `psi_spin`
+> a una legge di tipo **`disegno`**, che dice *<<scrive solo `pos`>>*. **La verifica statica dei
+> tipi l'ha trovato, e Luca ha scelto di archiviare invece di cambiare il tipo:**
+> ### **ora il tipo e' VERO PER COSTRUZIONE invece che scusato.** La verifica passa **8/8**.
+> **⚠ E IL RAMO AGIVA, misurato PRIMA di toglierlo:** acceso contro spento, ### **17 grandezze su
+> 23 DIVERSE**. **Non e' una pulizia: e' una decisione.**
+> **`L_CONSERVA` non e' stato tolto** *(decisione 3)*: e' un **no-op accettato**, e **non ha
+> nemmeno un flag CLI** -- per accenderlo si modificava il sorgente.
+> **E porta con se' `H-ETC-1`:** quel ramo conteneva la `calcola_psi()` di `:6529`, **l'unica degli
+> 8 siti in un ramo morto**. Ora sono **7, tutte vive**, e il conto dice **una cosa sola invece di
+> due**.
+
+
 > ### 🏗 **T1: il disegno non apre piu' il passo**
 > **`T1`, 2026-09-28: l'apertura del passo NON sta piu' qui.** La fa lo **SCHEDULATORE**
 > (`esegui_passo`), in testa alla composizione, e **l'idempotenza di `(c)1` non serve piu'** --
@@ -4188,6 +4209,17 @@ di `H-ETC-1` non vada letto come «8 problemi vivi»**.
 
 <!-- SCHEDA nome=leggi-in-uso funzioni=_applica_regime,_avvisa_leggi_in_uso flag=VERLET,REGIME -->
 # ㉘ LE LEGGI IN USO — **`VERLET` e il `REGIME` deterministico**, e l'avviso che le sorveglia
+
+> ### 🚩 **E ORA AVVISA ANCHE SUI FLAG INERTI ACCESI** *(2026-09-28)*
+>
+> `[flag-inerti]`: se un flag **inerte** e' **acceso**, lo dice e **nomina l'archivio** --
+> `L_CONSERVA`, `PAV_COM`, `SYNC_UPDATE`. ### **Un flag che non fa niente e che qualcuno accende
+> e' un'ASPETTATIVA TRADITA, non un dettaglio.**
+> **⚠ E' un AVVISO, non un presidio** (`A9`), come l'altro che vive in questa funzione.
+> **⚠ E il suo limite, dichiarato:** legge le costanti **al momento della configurazione**. Chi le
+> imposta **dopo** *(per esempio `--flag=` di `csv/_test_fork/_hashseed_prova.py`)* **non lo fa
+> scattare** -- e in quel caso e' chi lancia che sa cosa sta facendo.
+
 
 > ### **DECISIONE DI LUCA, 2026-09-27:** *«`VERLET` e `REGIME` deterministico si TENGONO COME SONO.
 > Nessuna archiviazione, nessun cambiamento. **L'importante è che siano USATI.**»*

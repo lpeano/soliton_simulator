@@ -1015,11 +1015,20 @@ REPULS_LEGGE = True      # repulsione EMERGENTE con conversione dinamica (riempi
                         # <0 = repulsiva (pressione interna), derivata da d|Psi|^2/dphi.
                         # NON e' una forza scelta: e' il gradiente di |Psi|^2, l'unica
                         # forma coerente. Candidata alla faccia repulsiva del modello.
-L_CONSERVA = False      # ERRATA, NON usare (default OFF). Doveva rimuovere la rotazione spuria del
-                        # rilassamento, ma AZZERA tutta la rotazione rigida ad ogni passo -> distrugge
-                        # la PRECESSIONE FISICA REALE del sistema (momento angolare netto misurato
-                        # L_z~-0.9, verso coerente all'84%). Conservare L != annullare la rotazione.
-                        # La fisica fondamentale (fasi/mitosi/moto) conserva gia' L da sola. Vedi doc.
+L_CONSERVA = False      # ⚠⚠ NO-OP ACCETTATO DAL 2026-09-28: il suo ramo e' ARCHIVIATO.
+                        # Era marcato <<ERRATA, NON usare>>: doveva rimuovere la rotazione spuria del
+                        # rilassamento, ma AZZERAVA tutta la rotazione rigida a ogni passo -> distruggeva
+                        # la PRECESSIONE FISICA REALE (L_z~-0.9, verso coerente all'84%). Conservare L
+                        # != annullare la rotazione, e la fisica fondamentale conserva gia' L da sola.
+                        # `_togli_rotazione_rigida` e il ramo che lo chiamava sono in
+                        # `csv/_archivio/_l_conserva.py` (tag `pre-archivio-lconserva`).
+                        # ⚠ IL RAMO AGIVA: 17 grandezze su 23 differivano ad accenderlo -- non e' una
+                        # pulizia, e' una decisione (Luca, strada (b)).
+                        # ⚠ E FACEVA DICHIARARE IL FALSO AL TIPO di `rilassa_disegno`: la catena
+                        # `rilassa_disegno -> _togli_rotazione_rigida -> calcola_psi` le faceva scrivere
+                        # `psi`, mentre il tipo `disegno` dice <<scrive solo pos>>. Ora e' vero per
+                        # COSTRUZIONE. NON E' STATO TOLTO (decisione 3) e si DICHIARA all'avvio.
+                        # NB: non ha nemmeno un flag CLI -- per accenderlo si modifica il sorgente.
 ANTIFASE_ADD = False    # LEGGE DI STABILITA' (esplorativa): i nuovi nodi in regione sovra-densa
                         # nascono in ANTIFASE con prob tanh((rho-rho_eq)/rho_c), rho_c da N_critico.
                         # Annichila le AGGIUNTE (non la materia esistente) -> il grumo si stabilizza.
@@ -6643,7 +6652,6 @@ class Rete:
         indipendentemente da quante volte il chiamante invoca il rilassamento. Non e' un
         tetto: e' un feedback che accelera il rilassamento dove serve."""
         if self.n < 2 or not len(self.i): return
-        pos0 = self.pos.copy() if L_CONSERVA else None   # per misurare la rotazione spuria
         for _ in range(it):
             v = self.pos[self.j] - self.pos[self.i]
             L = np.maximum(np.linalg.norm(v, axis=1), 1e-9)
@@ -6657,43 +6665,11 @@ class Rete:
         if not np.isfinite(self.pos).all():
             self.pos = np.nan_to_num(self.pos, nan=0.0, posinf=0.0, neginf=0.0)
         self.pos -= self.pos.mean(axis=0)
-        if L_CONSERVA and pos0 is not None:
-            # CONSERVAZIONE DEL MOMENTO ANGOLARE: il rilassamento fa inseguire le coordinate alla
-            # metrica (fisica, si mantiene), ma la media sui vicini introduce una ROTAZIONE RIGIDA
-            # spuria (non-centrale) che rompe L. La rimuovo proiettando via la sola rotazione rigida
-            # netta dello spostamento, pesata per |Psi|^2 (l'inerzia = materia). NON tocca la
-            # deformazione (la metrica che si realizza), solo la rotazione globale parassita.
-            self._togli_rotazione_rigida(pos0)
-
-    def _togli_rotazione_rigida(self, pos0):
-        """rimuove la rotazione rigida netta introdotta dallo spostamento pos0->pos, pesata per
-        l'inerzia |Psi|^2. ITERATIVA: ripete finche' L residuo e' trascurabile (~conservazione
-        completa). Conserva il momento angolare senza alterare la deformazione metrica."""
-        n = self.n
-        if not hasattr(self, "psi") or len(self.psi) < n:
-            try: self.calcola_psi()
-            except Exception: return
-        w = np.abs(self.psi[:n]) ** 2
-        if w.sum() < 1e-9: return
-        P0 = pos0[:n]
-        c = np.average(P0, axis=0, weights=w)      # centro pesato (inerzia), fisso
-        r = P0 - c                                  # posizioni rispetto al centro (riferimento)
-        I = np.sum(w * (r**2).sum(axis=1)) + 1e-9   # momento d'inerzia (fisso)
-        for _ in range(12):                         # itero: la rimozione lineare e' approssimata
-            P = self.pos[:n]
-            d = P - P0                              # spostamento residuo dal riferimento
-            Lz = np.sum(w * (r[:,0]*d[:,1] - r[:,1]*d[:,0]))
-            Lx = np.sum(w * (r[:,1]*d[:,2] - r[:,2]*d[:,1]))
-            Ly = np.sum(w * (r[:,2]*d[:,0] - r[:,0]*d[:,2]))
-            Lnorm = abs(Lz)+abs(Lx)+abs(Ly)
-            if Lnorm < 1e-6: break
-            oz, ox, oy = Lz/I, Lx/I, Ly/I
-            rot = np.empty_like(P)
-            rot[:,0] = oy*r[:,2] - oz*r[:,1]
-            rot[:,1] = oz*r[:,0] - ox*r[:,2]
-            rot[:,2] = ox*r[:,1] - oy*r[:,0]
-            self.pos[:n] = P - rot
-
+        # [2026-09-28] IL RAMO DI `L_CONSERVA` E' ARCHIVIATO (csv/_archivio/_l_conserva.py).
+        #   Era marcato <<ERRATA, NON usare>> dal codice stesso, e la catena
+        #   `rilassa_disegno -> _togli_rotazione_rigida -> calcola_psi` faceva scrivere `psi`
+        #   a una legge di tipo `disegno`: il tipo dichiarava il FALSO. Ora e' vero per
+        #   COSTRUZIONE. ⚠ E il ramo AGIVA: 17 grandezze su 23 differivano ad accenderlo.
 
     def pozzo_grafo(self, intensita=None):
         """Pozzo fisico locale del grafo, condiviso da dinamica e visualizzazione.
@@ -10763,6 +10739,24 @@ def _avvisa_leggi_in_uso():
     DOPO `_applica_flag`: un controllo messo li' leggerebbe il `REGIME` di testa al file e
     **direbbe la cosa sbagliata proprio quando conta**.
     """
+    # ⚠ I FLAG INERTI ACCESI: un flag che non fa niente e che qualcuno accende e' una
+    #   ASPETTATIVA TRADITA, non un dettaglio. Si dichiara, e si dice DOVE e' finito.
+    _inerti = []
+    if L_CONSERVA:
+        _inerti.append("L_CONSERVA: il suo ramo e' ARCHIVIATO in "
+              "csv/_archivio/_l_conserva.py (era marcato <<ERRATA, NON usare>>: "
+              "azzerava la precessione fisica reale). Il flag NON FA NIENTE.")
+    if PAV_COM:
+        _inerti.append("PAV_COM: il pavimento di d0 e' ARCHIVIATO in "
+              "csv/_archivio/_pavimenti_morti.py. La garanzia sulle lunghezze e' LAM.")
+    if SYNC_UPDATE:
+        _inerti.append("SYNC_UPDATE: i suoi rami sono ARCHIVIATI in "
+              "csv/_archivio/_sync_update.py. Il suo raggio era UNA legge su cinque.")
+    if _inerti:
+        print("[flag-inerti] ⚠ %d FLAG ACCESI CHE NON FANNO NIENTE:"
+              % len(_inerti), flush=True)
+        for _f in _inerti:
+            print("[flag-inerti]    - " + _f, flush=True)
     _manca = []
     if not VERLET:
         _manca.append("VERLET e' SPENTO: il sottociclo metrico gira con EULERO ESPLICITO. "

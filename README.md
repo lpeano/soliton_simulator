@@ -553,3 +553,31 @@ Ogni rifiuto dice **cosa fare**, e l'eccezione si dichiara nel file
 >
 > **Due flag con `SYNC` nel nome, due cose diverse:** `--sync-spinore` (`SYNC_SPINORE`) **non è
 > toccato** e continua a funzionare.
+
+---
+
+## ⚠ `L_CONSERVA` è un **NO-OP ACCETTATO** dal 2026-09-28
+
+| | |
+|---|---|
+| **cosa faceva** | rimuoveva la **rotazione rigida netta** introdotta dal rilassamento del disegno, pesata per `|Psi|²` |
+| **default** | `False`, e **non ha nemmeno un flag CLI**: per accenderlo si **modificava il sorgente** |
+| **byte-inerte?** | ### **sì, in entrambi gli stati** |
+| **perché** | ### **il codice stesso lo marcava «ERRATA, NON usare»**: *«AZZERA tutta la rotazione rigida a ogni passo → distrugge la PRECESSIONE FISICA REALE»* *(`L_z ≈ −0.9`, verso coerente all'84 %)*. **Conservare `L` ≠ annullare la rotazione** |
+| **e la ragione che l'ha fatto uscire adesso** | ### faceva **dichiarare il falso al TIPO** di `rilassa_disegno`: la catena `rilassa_disegno → _togli_rotazione_rigida → calcola_psi` le faceva scrivere `psi`, mentre il tipo `disegno` dice *«scrive solo `pos`»*. **Archiviandolo il tipo è vero per costruzione** |
+| **dove è finito** | `csv/_archivio/_l_conserva.py`, tag **`pre-archivio-lconserva`** |
+| **non è stato TOLTO** | decisione 3, e **lo dichiara all'avvio** insieme agli altri flag inerti accesi |
+
+> ### ⚠ **E il ramo AGIVA, misurato PRIMA di toglierlo:** con `L_CONSERVA` acceso contro spento,
+> ### **17 grandezze su 23 differivano.** **Non è una pulizia: è una decisione.**
+
+## L'avviso `[flag-inerti]`
+
+All'avvio, **se un flag inerte è ACCESO**, il simulatore lo dice e **nomina l'archivio**:
+`L_CONSERVA` · `PAV_COM` · `SYNC_UPDATE`.
+### **Un flag che non fa niente e che qualcuno accende è un'aspettativa tradita, non un dettaglio.**
+
+**⚠ Il limite, dichiarato:** l'avviso legge le costanti **al momento della configurazione**. Chi le
+imposta **dopo** *(per esempio uno strumento che le inietta a runtime, come `--flag=` di
+`csv/_test_fork/_hashseed_prova.py`)* **non lo fa scattare** — e in quel caso è chi lancia che sa cosa
+sta facendo.
