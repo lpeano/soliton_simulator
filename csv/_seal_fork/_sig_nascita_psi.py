@@ -155,10 +155,21 @@ def principale():
     # allora si confrontano DUE dump prodotti dallo stesso strumento su DUE alberi -- e l'unico
     # modo onesto senza toccare il file vero e' `git stash`-free: si usa `git worktree`.
     lav = os.path.join(FUORI, "_albero_precura")
+    # ⚠ `prune` PRIMA DI TUTTO, e non e' pignoleria: se qualcuno cancella la cartella con
+    #   `rm -rf` (l'ho fatto io fra due giri), **git la tiene REGISTRATA**, `worktree add`
+    #   falisce perche' il percorso e' gia' preso, e il sottoprocesso riceve una directory
+    #   che non esiste -> `NotADirectoryError`. MISURATO: un rigiro perso.
+    subprocess.run(["git", "worktree", "prune"], cwd=RADICE, capture_output=True)
     if not os.path.isdir(lav):
         p = subprocess.run(["git", "worktree", "add", "--detach", lav, introduce + "^"],
                            cwd=RADICE, capture_output=True)
         print("  git worktree add -> %s" % ("ok" if p.returncode == 0 else _t(p.stderr)[:200]))
+    # ### E SI VERIFICA CHE L'ALBERO CI SIA, invece di fidarsi: senza questo, il braccio A
+    #   fallisce con un errore di sottoprocesso che NON dice che manca l'albero.
+    _prova = os.path.join(lav, "csv", "_test_fork", "_hashseed_prova.py")
+    if not os.path.isfile(_prova):
+        raise SystemExit("[A] l'albero PRE-CURA non c'e': manca %s. Il braccio A non si"
+                         " puo' fare, e NON si finge che passi." % _prova)
     p1 = subprocess.run([sys.executable, os.path.join(lav, "csv", "_test_fork",
                                                       "_hashseed_prova.py"),
                          "--out=" + A, "--seme=11", "--passi=3"],
