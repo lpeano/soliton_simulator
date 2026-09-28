@@ -135,8 +135,21 @@ def principale():
     stato = {"passo": 0}
     reg = {}
 
+    # ⚠ LA TRACCIA E' RISTRETTA ALLE FUNZIONI CHE CONTENGONO UN BERSAGLIO, e non e' un
+    #   dettaglio: il tracciatore globale restituiva se stesso per OGNI funzione del
+    #   simulatore, quindi tracciava OGNI RIGA. MISURATO: a 30 passi tracciati non finiva.
+    #   Ora il gancio globale torna `None` per le funzioni SENZA bersagli, e quelle non
+    #   costano niente. ### La copertura NON cambia: i bersagli sono gli stessi.
+    FUNZ = set()
+    for _nd in ast.walk(ARB):
+        if isinstance(_nd, ast.FunctionDef) and any(_nd.lineno <= r <= _nd.end_lineno
+                                                    for r in PER_RIGA):
+            FUNZ.add(_nd.name)
+    print("  funzioni con almeno un bersaglio: %d su %d" % (len(FUNZ), len(
+        [1 for _x in ast.walk(ARB) if isinstance(_x, ast.FunctionDef)])))
+
     def _tr(frame, ev, _arg):
-        if frame.f_code.co_filename != SIM:
+        if frame.f_code.co_filename != SIM or frame.f_code.co_name not in FUNZ:
             return None
         if ev == "line" and frame.f_lineno in PER_RIGA:
             for v in PER_RIGA[frame.f_lineno]:
