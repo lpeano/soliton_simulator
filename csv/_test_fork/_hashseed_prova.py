@@ -141,9 +141,27 @@ def gira(out, seme, passi, extra=None, flag=None):
         imposti[_k] = _nuovo
         print("FLAG DI MODULO IMPOSTO: %s = %r  (non ha un flag CLI)" % (_k, _nuovo))
     print("CONFIGURAZIONE INTERA (%d voci): %s" % (len(argv), " ".join(argv[1:])))
-    S._NMASSE_VIDEO["n"] = 2
-    S._NMASSE_VIDEO["sep"] = 3.0
+    # ⚠⚠ QUESTI DUE SONO IMPOSTI A MANO E SOVRASCRIVONO L'ARGV DEL DRIVER (`--nmasse 3`,
+    #   `--sep 6.1158`). **Rilievo del guardiano, 2026-09-28:** il dump registrava `_argv`
+    #   con i valori del driver mentre la scena girava con QUESTI -- cioe' il referto
+    #   dichiarava una configurazione diversa da quella che gira (`P5`).
+    #   ### LA SCENA PICCOLA RESTA, per decisione di Luca: i dump di byte-identita' devono
+    #   restare CONFRONTABILI con quelli dei sigilli passati. **Ma ora si DICHIARA.**
+    #   ⚠ E LA CONSEGUENZA VA LETTA: 2107 nodi contro 12802, e ZERO NASCITE in 40 passi.
+    #   **La byte-identita' misurata qui NON COPRE i percorsi che esistono solo con le
+    #   nascite** (la mitosi dopo il `return 0`, il canale di Schwinger, le estensioni).
+    SCENA_NMASSE, SCENA_SEP = 2, 3.0
+    S._NMASSE_VIDEO["n"] = SCENA_NMASSE
+    S._NMASSE_VIDEO["sep"] = SCENA_SEP
     S._NMASSE_VIDEO["size"] = None
+    _sep_argv = float(getattr(a, "sep", SCENA_SEP))
+    _nm_argv = int(getattr(a, "nmasse", SCENA_NMASSE))
+    print("SCENA IMPOSTA A MANO: nmasse = %d, sep = %.4f" % (SCENA_NMASSE, SCENA_SEP))
+    print("SCENA CHE L'ARGV CHIEDEREBBE: nmasse = %d, sep = %.4f%s"
+          % (_nm_argv, _sep_argv,
+             "   <== DIVERSA: la scena e' PICCOLA di proposito, e i percorsi delle "
+             "NASCITE non si percorrono"
+             if (_nm_argv, _sep_argv) != (SCENA_NMASSE, SCENA_SEP) else ""))
     S.avvia_test("MASSE-COERENTI")()
     net = S.net
     print("")
@@ -162,7 +180,18 @@ def gira(out, seme, passi, extra=None, flag=None):
     dati = {"n": np.asarray(net.n), "_hashseed": np.asarray(str(hs)),
             "_blob_sim": np.asarray(_bl), "_passi": np.asarray(passi),
             "_seme": np.asarray(seme), "_argv": np.asarray(" ".join(argv[1:])),
-            "_flag_imposti": np.asarray(repr(sorted(imposti.items())))}
+            "_flag_imposti": np.asarray(repr(sorted(imposti.items()))),
+            # ⚠ LA SCENA EFFETTIVA, e non quella che l'argv chiederebbe (`P5`)
+            "_scena_nmasse": np.asarray(SCENA_NMASSE),
+            "_scena_sep": np.asarray(SCENA_SEP),
+            "_scena_nmasse_argv": np.asarray(_nm_argv),
+            "_scena_sep_argv": np.asarray(_sep_argv),
+            "_scena_n": np.asarray(int(net.n)),
+            "_scena_m": np.asarray(int(len(net.i))),
+            "_scena_nota": np.asarray(
+                "nmasse e sep IMPOSTI A MANO, sovrascrivono l'argv: scena PICCOLA di "
+                "proposito. ZERO nascite in 40 passi, quindi la byte-identita' NON copre "
+                "i percorsi delle nascite.")}
     # I CONTATORI DEL CONFINE DEL PASSO, nel dump: dalla cura `(c)1` il confine e' idempotente e
     # <<quante leggi hanno trovato la fotografia gia' aperta>> e' un numero che il sigillo deve
     # poter LEGGERE, non supporre (`A8`).
