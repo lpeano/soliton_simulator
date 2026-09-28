@@ -5741,6 +5741,12 @@ cresce**, cioè un run lungo. **È una misura a sé.** *(Sta scritto nel codice,
 
 ---
 
+**E un referto che era rimasto sul disco:** `csv/_test_fork/_hashseed_prova.json` — è il confronto
+del braccio `A` scritto dallo strumento come effetto collaterale, e dichiara la coppia
+**`1fc9235f` → `a37414cf`**. ### **Lo committo nello stesso giro, non al prossimo:** è la prova del
+braccio A, e un referto che resta sul disco è la stessa forma di ritardo che il checkpoint aveva già
+dovuto elencare.
+
 ### ➜ **Il pezzo ① di `T3` è chiuso.** Il prossimo è **②: la separazione della mitosi con la nascita
 atomica e il rinculo dei genitori** — e il suo sigillo ### **NON sarà byte-identico**, quindi prima
 del codice dichiaro **cosa mi aspetto che cambi** e **cosa deve restare uguale**.

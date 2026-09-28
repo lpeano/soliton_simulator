@@ -1,11 +1,11 @@
 {
- "a": "LC_dopo_off.npz",
- "b": "LC_dopo_on.npz",
+ "a": "PRIMA.npz",
+ "b": "DOPO.npz",
  "blob_sim_a": "1fc9235f",
- "blob_sim_b": "1fc9235f",
+ "blob_sim_b": "a37414cf",
  "diverse": [],
  "flag_imposti_a": "[]",
- "flag_imposti_b": "[('L_CONSERVA', True)]",
+ "flag_imposti_b": "[]",
  "hashseed_a": "None",
  "hashseed_b": "None",
  "righe": [
