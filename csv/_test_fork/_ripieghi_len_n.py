@@ -186,8 +186,11 @@ def principale():
         serie[k] = int(net.n) - n_prima
         if nascita is None and int(net.n) > n_prima:
             nascita = k
-        if nascita and k >= nascita + 2:
-            break
+        # ⚠ NIENTE `break` DUE PASSI DOPO LA PRIMA NASCITA: c'era, e la prima corsa a 72
+        #   passi si e' fermata al 44 -- cioe' NON HA VISTO i passi 58-72, che sono
+        #   esattamente quelli con NASCITE MULTIPLE e col canale di SCHWINGER. Il `break`
+        #   l'avevo togliuto dal SIGILLO e dimenticato QUI: lo stesso errore in due posti
+        #   non e' lo stesso errore due volte, e' uno che non ho cercato nel secondo posto.
     sys.settrace(None)
 
     print("=" * 100)
