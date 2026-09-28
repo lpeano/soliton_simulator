@@ -5234,3 +5234,59 @@ passerebbe da **8** a **7 vivi + 0 morti**, e il conto direbbe una cosa sola inv
 > *(par.5)*, e la correzione sarà **un commit a sé**. **`T2` (la mitosi) — la mitosi spezzata — non parte**
 > finché questa non è decisa: spezzare la mitosi mentre una voce su otto dichiara il falso
 > aggiungerebbe un'ambiguità sopra un'incoerenza.
+
+---
+
+# ✅ **`L_CONSERVA` archiviato: il tipo di `rilassa_disegno` è VERO per costruzione** *(2026-09-28)*
+
+*(Referto `csv/_seal_fork/_sig_arch_lconserva.json`.)* ### **Blob: `fe00b48a` → `1fc9235f`**, tag
+`pre-archivio-lconserva`.
+
+## Il sigillo, tre bracci più i due controlli che avevi chiesto
+
+| | confronto | atteso | esito |
+|---|---|---|---|
+| **A** | col driver, prima vs dopo | IDENTICO | ### **23/23, 0 diverse** |
+| **B** | ### **PRIMA**, `L_CONSERVA` acceso vs spento | ### **DIVERSO** | ### **17 grandezze** |
+| **C** | **DOPO**, acceso vs spento | IDENTICO | ### **0 diverse — il no-op** |
+| **+** | verifica statica dei **tipi** | 8 su 8 | ### **8/8** |
+| **+** | **`H-ETC-1`** | 7 chiamate, tutte vive | ### **7** |
+
+**Il braccio B l'ho misurato prima di toccare**, ed è quello che conta: ### **il ramo agiva davvero.**
+**Non è una pulizia: è una decisione.**
+
+## Perché è uscito adesso, e non prima
+
+Il codice **lo marcava già** «ERRATA, NON usare»: *«azzera tutta la rotazione rigida a ogni passo →
+distrugge la PRECESSIONE FISICA REALE»* *(`L_z ≈ −0.9`, verso coerente all'84 %)*. **Conservare `L`
+non è annullare la rotazione.**
+
+> ### ➜ **Ma la ragione che l'ha fatto uscire è IL TIPO.** La catena
+> `rilassa_disegno → _togli_rotazione_rigida → calcola_psi` faceva scrivere `psi` e `psi_spin` a una
+> legge di tipo `disegno`. ### **Il tipo dichiarava il falso, e la verifica statica l'ha trovato.**
+> **Un difetto noto e marcato «ERRATA» era sopravvissuto a tutto; è bastato dichiarare un tipo per
+> farlo uscire.**
+
+## E porta con sé `H-ETC-1`
+
+Quel ramo conteneva la `calcola_psi()` di `:6529`, ### **l'unica degli 8 siti in un ramo morto.**
+Ora sono **7, tutte vive**, e `ATTESO_OGGI` passa da `8` a `7`: **il conto dice una cosa sola invece
+di due.**
+
+## Due cose nuove negli strumenti
+
+**`[flag-inerti]`** all'avvio: se un flag **inerte** è **acceso**, il simulatore lo dice e **nomina
+l'archivio** — `L_CONSERVA`, `PAV_COM`, `SYNC_UPDATE`. ### **Un flag che non fa niente e che qualcuno
+accende è un'aspettativa tradita, non un dettaglio.**
+**`--flag=NOME=VALORE`** nello strumento di confronto: serve ai sigilli sui rami che si accendono
+**solo modificando il sorgente** — ### **`L_CONSERVA` non ha un flag CLI.** I flag imposti **finiscono
+nel dump** (`P5`).
+
+> ### ⚠ **E il limite dell'avviso, dichiarato:** legge le costanti **al momento della
+> configurazione**, quindi il `--flag=` dello strumento *(che le imposta dopo)* **non lo fa
+> scattare**. Nei bracci B e C l'avviso **non compare**, e **non è un difetto dell'avviso**.
+
+> ### 🛑 **STOP.** Prossimo: **la mitosi spezzata** in una voce strutturale e una di stato, stesso
+> ordine, byte-identico — e il sigillo su un giro **abbastanza lungo** da avere
+> `_g_smp_chirurgie > 0`. **Con 3 passi non se ne producono**, quindi userò la **scena del pilota**
+> *(~12.8k nodi)* fino al passo **60**, e lo dirò.

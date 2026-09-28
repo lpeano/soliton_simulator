@@ -1,9 +1,11 @@
 {
- "a": "T2a_dopo.npz",
- "b": "T2b_dopo.npz",
- "blob_sim_a": "4dc59cad",
- "blob_sim_b": "fe00b48a",
+ "a": "LC_dopo_off.npz",
+ "b": "LC_dopo_on.npz",
+ "blob_sim_a": "1fc9235f",
+ "blob_sim_b": "1fc9235f",
  "diverse": [],
+ "flag_imposti_a": "[]",
+ "flag_imposti_b": "[('L_CONSERVA', True)]",
  "hashseed_a": "None",
  "hashseed_b": "None",
  "righe": [

@@ -1,0 +1,544 @@
+{
+ "blob": {
+  "dopo": "1fc9235f",
+  "prima": "fe00b48a"
+ },
+ "bracci": [
+  {
+   "atteso": "IDENTICO",
+   "diverse": [],
+   "nome": "A - col driver, prima contro dopo",
+   "passa": true
+  },
+  {
+   "atteso": "DIVERSO",
+   "diverse": [
+    "d",
+    "d0",
+    "phi",
+    "phi_s",
+    "phivel",
+    "psi",
+    "psi_spin",
+    "_psi_spinor",
+    "_spinor_lift",
+    "omega_s",
+    "_nb",
+    "_nb_prec",
+    "tw",
+    "twp",
+    "vd",
+    "peq",
+    "mem_mot"
+   ],
+   "nome": "B - PRIMA, L_CONSERVA acceso contro spento",
+   "nota": "e' la prova che il ramo AGIVA davvero quando era acceso",
+   "passa": true
+  },
+  {
+   "atteso": "IDENTICO",
+   "diverse": [],
+   "nome": "C - DOPO, L_CONSERVA acceso contro spento",
+   "nota": "e' la prova del NO-OP",
+   "passa": true
+  }
+ ],
+ "condizioni": {
+  "m": 70199,
+  "n": 2107,
+  "passi": 3,
+  "scena": "(ii)(a)",
+  "seme": 11
+ },
+ "controlli_in_piu": [
+  {
+   "atteso": "8 voci su 8 coerenti",
+   "nome": "verifica statica dei TIPI",
+   "passa": true,
+   "uscita": 0
+  },
+  {
+   "atteso": "7 chiamate senza w, TUTTE VIVE",
+   "nome": "H-ETC-1",
+   "nota": "l'ottava era :6529 in _togli_rotazione_rigida, l'UNICA in un ramo morto: ora il conto dice UNA cosa sola invece di due",
+   "passa": true,
+   "senza_w": 7
+  }
+ ],
+ "dettaglio": {
+  "A": {
+   "a": "LC_prima_off.npz",
+   "b": "LC_dopo_off.npz",
+   "blob_sim_a": "fe00b48a",
+   "blob_sim_b": "1fc9235f",
+   "diverse": [],
+   "flag_imposti_a": "[]",
+   "flag_imposti_b": "[]",
+   "hashseed_a": "None",
+   "hashseed_b": "None",
+   "righe": [
+    {
+     "diversi": 0,
+     "grandezza": "d",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "d0",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "phi",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "phi_s",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "phivel",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "psi",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "psi_spin",
+     "identico": true,
+     "n": 4214
+    },
+    {
+     "diversi": 0,
+     "grandezza": "_psi_spinor",
+     "identico": true,
+     "n": 4214
+    },
+    {
+     "diversi": 0,
+     "grandezza": "_psi_prec",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "_spinor_lift",
+     "identico": true,
+     "n": 4214
+    },
+    {
+     "diversi": 0,
+     "grandezza": "omega_s",
+     "identico": true,
+     "n": 6321
+    },
+    {
+     "diversi": 0,
+     "grandezza": "_nb",
+     "identico": true,
+     "n": 6321
+    },
+    {
+     "diversi": 0,
+     "grandezza": "_nb_prec",
+     "identico": true,
+     "n": 6321
+    },
+    {
+     "diversi": 0,
+     "grandezza": "eta",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "tw",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "twp",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "vd",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "peq",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "mem_mot",
+     "identico": true,
+     "n": 6321
+    },
+    {
+     "diversi": 0,
+     "grandezza": "perc_chi",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "perc_geom",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "i",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "j",
+     "identico": true,
+     "n": 70199
+    }
+   ]
+  },
+  "B": {
+   "a": "LC_prima_off.npz",
+   "b": "LC_prima_on.npz",
+   "blob_sim_a": "fe00b48a",
+   "blob_sim_b": "fe00b48a",
+   "diverse": [
+    "d",
+    "d0",
+    "phi",
+    "phi_s",
+    "phivel",
+    "psi",
+    "psi_spin",
+    "_psi_spinor",
+    "_spinor_lift",
+    "omega_s",
+    "_nb",
+    "_nb_prec",
+    "tw",
+    "twp",
+    "vd",
+    "peq",
+    "mem_mot"
+   ],
+   "flag_imposti_a": "[]",
+   "flag_imposti_b": "[('L_CONSERVA', True)]",
+   "hashseed_a": "None",
+   "hashseed_b": "None",
+   "righe": [
+    {
+     "diversi": 8118,
+     "grandezza": "d",
+     "identico": false,
+     "n": 70199
+    },
+    {
+     "diversi": 70181,
+     "grandezza": "d0",
+     "identico": false,
+     "n": 70199
+    },
+    {
+     "diversi": 2104,
+     "grandezza": "phi",
+     "identico": false,
+     "n": 2107
+    },
+    {
+     "diversi": 286,
+     "grandezza": "phi_s",
+     "identico": false,
+     "n": 2107
+    },
+    {
+     "diversi": 2105,
+     "grandezza": "phivel",
+     "identico": false,
+     "n": 2107
+    },
+    {
+     "diversi": 2107,
+     "grandezza": "psi",
+     "identico": false,
+     "n": 2107
+    },
+    {
+     "diversi": 3472,
+     "grandezza": "psi_spin",
+     "identico": false,
+     "n": 4214
+    },
+    {
+     "diversi": 3980,
+     "grandezza": "_psi_spinor",
+     "identico": false,
+     "n": 4214
+    },
+    {
+     "diversi": 0,
+     "grandezza": "_psi_prec",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 3980,
+     "grandezza": "_spinor_lift",
+     "identico": false,
+     "n": 4214
+    },
+    {
+     "diversi": 6226,
+     "grandezza": "omega_s",
+     "identico": false,
+     "n": 6321
+    },
+    {
+     "diversi": 1991,
+     "grandezza": "_nb",
+     "identico": false,
+     "n": 6321
+    },
+    {
+     "diversi": 1991,
+     "grandezza": "_nb_prec",
+     "identico": false,
+     "n": 6321
+    },
+    {
+     "diversi": 0,
+     "grandezza": "eta",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 69780,
+     "grandezza": "tw",
+     "identico": false,
+     "n": 70199
+    },
+    {
+     "diversi": 69439,
+     "grandezza": "twp",
+     "identico": false,
+     "n": 70199
+    },
+    {
+     "diversi": 70196,
+     "grandezza": "vd",
+     "identico": false,
+     "n": 70199
+    },
+    {
+     "diversi": 67455,
+     "grandezza": "peq",
+     "identico": false,
+     "n": 70199
+    },
+    {
+     "diversi": 6321,
+     "grandezza": "mem_mot",
+     "identico": false,
+     "n": 6321
+    },
+    {
+     "diversi": 0,
+     "grandezza": "perc_chi",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "perc_geom",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "i",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "j",
+     "identico": true,
+     "n": 70199
+    }
+   ]
+  },
+  "C": {
+   "a": "LC_dopo_off.npz",
+   "b": "LC_dopo_on.npz",
+   "blob_sim_a": "1fc9235f",
+   "blob_sim_b": "1fc9235f",
+   "diverse": [],
+   "flag_imposti_a": "[]",
+   "flag_imposti_b": "[('L_CONSERVA', True)]",
+   "hashseed_a": "None",
+   "hashseed_b": "None",
+   "righe": [
+    {
+     "diversi": 0,
+     "grandezza": "d",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "d0",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "phi",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "phi_s",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "phivel",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "psi",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "psi_spin",
+     "identico": true,
+     "n": 4214
+    },
+    {
+     "diversi": 0,
+     "grandezza": "_psi_spinor",
+     "identico": true,
+     "n": 4214
+    },
+    {
+     "diversi": 0,
+     "grandezza": "_psi_prec",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "_spinor_lift",
+     "identico": true,
+     "n": 4214
+    },
+    {
+     "diversi": 0,
+     "grandezza": "omega_s",
+     "identico": true,
+     "n": 6321
+    },
+    {
+     "diversi": 0,
+     "grandezza": "_nb",
+     "identico": true,
+     "n": 6321
+    },
+    {
+     "diversi": 0,
+     "grandezza": "_nb_prec",
+     "identico": true,
+     "n": 6321
+    },
+    {
+     "diversi": 0,
+     "grandezza": "eta",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "tw",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "twp",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "vd",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "peq",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "mem_mot",
+     "identico": true,
+     "n": 6321
+    },
+    {
+     "diversi": 0,
+     "grandezza": "perc_chi",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "perc_geom",
+     "identico": true,
+     "n": 2107
+    },
+    {
+     "diversi": 0,
+     "grandezza": "i",
+     "identico": true,
+     "n": 70199
+    },
+    {
+     "diversi": 0,
+     "grandezza": "j",
+     "identico": true,
+     "n": 70199
+    }
+   ]
+  }
+ },
+ "limite_dichiarato": "l'avviso [flag-inerti] legge le costanti AL MOMENTO DELLA CONFIGURAZIONE, quindi il --flag= dello strumento (che le imposta DOPO) non lo fa scattare: nei bracci B e C l'avviso NON compare, e non e' un difetto dell'avviso.",
+ "sigillo": "ARCH-LCONSERVA: _togli_rotazione_rigida archiviato, L_CONSERVA no-op accettato",
+ "tutti": true
+}
