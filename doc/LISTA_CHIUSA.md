@@ -18,8 +18,8 @@
 | il testo | `420` caratteri della riga | `117` del `titolo_breve` **+ la fonte in colonna** |
 
 ```
-voci nell'indice      845
-in LISTA              386   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
+voci nell'indice      848
+in LISTA              389   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
 FUORI LISTA           459   col motivo, dai campi dell'indice
 ```
 
@@ -36,7 +36,7 @@ FUORI LISTA           459   col motivo, dai campi dell'indice
 | **E** | **DISEGNO E STATISTICHE GLOBALI** | `A2`/`A5`: mediane e medie globali dentro una legge locale, e il disegno nella fisica | 9 |
 | **F** | **FRENO E CONTRAZIONE** | `SCALA_MIN`, il freno a senso unico, la coesione, la repulsione, `d0`, `LAM` | 41 |
 | **G** | **ARRETRATO DEGLI STRUMENTI** | presidi, ancore, reperti, ripresa, il passo incompleto: **non e' fisica** | 7 |
-| **?** | **SENZA FAMIGLIA** | nessuna regola dell'indice ha deciso: **le elenco invece di metterle in una famiglia a caso** | 230 |
+| **?** | **SENZA FAMIGLIA** | nessuna regola dell'indice ha deciso: **le elenco invece di metterle in una famiglia a caso** | 233 |
 
 ---
 
@@ -245,7 +245,7 @@ FUORI LISTA           459   col motivo, dai campi dell'indice
 
 ---
 
-## FAMIGLIA **?** — SENZA FAMIGLIA — da assegnare a mano   *(230 voci)*
+## FAMIGLIA **?** — SENZA FAMIGLIA — da assegnare a mano   *(233 voci)*
 
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
@@ -438,6 +438,7 @@ FUORI LISTA           459   col motivo, dai campi dell'indice
 | `DA-DECIDERE` | **Z4a** | — | (CITATO 16 volte, MAI definito in un registro) [Z4a] | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **Z4b** | — | (CITATO 10 volte, MAI definito in un registro) [Z4b] | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **DOPPIA-COP** | — | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non misurata | `aperto` | `cura` | `CURE_fisica_ordine.md` |
+| `NO` | **MAX-NODI-FERMA** | — | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run | `aperto` | `cura` | `REGOLE_composizione_T3.md` |
 | `SI` | **SCHED-PASSO** | — | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | `aperto` | `cura` | `PIANO_schedulatore_passo.md` |
 | `NO` | **ALLUNG-RELATIVO** | — | il criterio V6 dell'allungamento sottrae variazioni relative con DENOMINATORI DIVERSI | `aperto` | `difetto` | `csv/_test_fork/_pilota_prova1…` |
 | `NO` | **ARCHI-PRIMI** | — | la vista disegna i PRIMI 24000 archi per indice: il 100 % finisce in un quadrante, misurato | `aperto` | `difetto` | `soliton_simulator.py` |
@@ -460,8 +461,10 @@ FUORI LISTA           459   col motivo, dai campi dell'indice
 | `NO` | **D29** | — | CINQUE NODI DI VUOTO sono i piu' connessi dell'intero sistema: il vuoto ha degli HUB, e non... | `aperto` | `difetto` | `STATO_RUN.md` |
 | `NO` | **FOGLIO-NULLO** | — | il diagnostico dei fogli vale il suo NULLO sulla scena (ii): la fase sta sul confine | `aperto` | `difetto` | `csv/_test_fork/_pilota_prova1…` |
 | `NO` | **FORMA-N-VUOTO** | — | `n` in forma_passo0 non puo' cambiare: e' l'insieme congelato del passo 0 (P4) | `aperto` | `difetto` | `csv/_test_fork/_pilota_prova1…` |
+| `DA-DECIDERE` | **MITOSI-SOGLIA-GRAD** | — | la soglia di mitosi si abbassa col gradiente di tempo proprio: ampiezza 0.3 e tanh a mano | `aperto` | `difetto` | `REGOLE_composizione_T3.md` |
 | `DA-DECIDERE` | **S09-MEDIANA** | — | la spinta S09 scala con `median(d0)` GLOBALE: lo stesso A2 gia' curato in S05 il 2026-09-17 | `aperto` | `difetto` | `soliton_simulator.py` |
 | `NO` | **SYNCDB-HEADLESS** | — | `--sync-db` in headless CARICA ma non SALVA: lo dice il docstring del driver | `aperto` | `difetto` | `csv/_test_fork/_scena_video.py` |
+| `DA-DECIDERE` | **TORS-SPINTA** | — | la spinta repulsiva di torsione: legge DINAMICA dentro mitosi(), con tre numeri non derivati | `aperto` | `difetto` | `REGOLE_composizione_T3.md` |
 | `NO` | **V5-SOGLIA** | — | il criterio V5 confonde SCIOGLIERSI con MIGRARE, e misura lo spostamento con LAM | `aperto` | `difetto` | `TASK_HISTORY/2026-09-27_pilot…` |
 | `NO` | **FATTI-AVVIO** | — | la catena di AVVIO non ha un solo fatto in FATTI_dal_codice.md: _applica_flag, avvia_test... | `da-decidere` | `fronte` | `FATTI_dal_codice.md` |
 | `NO` | **IMPL-2** | — | una SECONDA implementazione indipendente, scritta dalle LEGGI e non dal codice | `da-decidere` | `fronte` | `VALUTAZIONE_go.md` |

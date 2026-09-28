@@ -7,10 +7,10 @@
 > collaudo lo verifica *(il caso `CONTAGIO`)*.
 
 ```
-voci nell'indice    845
-elencate qui        578   (tolte le etichette locali, gli assiomi e gli standard)
-  di cui task       146
-  di cui difetti     82   (tipo `difetto` o `sospetto`)
+voci nell'indice    848
+elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard)
+  di cui task       147
+  di cui difetti     84   (tipo `difetto` o `sospetto`)
   senza marcatore   350   NON elencate: non sono lavoro in corso
 ```
 
@@ -27,8 +27,8 @@ elencate qui        578   (tolte le etichette locali, gli assiomi e gli standard
 
 | id | cosa | tipo | ultimo commit che lo nomina |
 |---|---|:--:|---|
-| **`SCHED-PASSO`** | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | `cura` | `8455a16 23:44` |
-| **`SCHED-T3-REGOLE`** | le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in tre famiglie | `misura` | `5ac5150 08:56` |
+| **`SCHED-PASSO`** | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | `cura` | `1f8ceac 09:52` |
+| **`SCHED-T3-REGOLE`** | le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in tre famiglie | `misura` | `1f8ceac 09:52` |
 
 ## CON RISERVA — 43
 
@@ -78,7 +78,7 @@ elencate qui        578   (tolte le etichette locali, gli assiomi e gli standard
 | **`Z98`** | Z98 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / COESCAUSALE (C4): un solo ISTANTE e il CONO DEL... | `fronte` | `eeb31ec 20:20` |
 | **`Z99`** | Z99 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / ANOMSIMM (C1-bis): il pavimento max(peq, 1e-9) E' TOLTO.… | `fronte` | `294e3f8 13:15` |
 
-## IN CODA — 27
+## IN CODA — 28
 
 | id | cosa | tipo | ultimo commit che lo nomina |
 |---|---|:--:|---|
@@ -86,10 +86,10 @@ elencate qui        578   (tolte le etichette locali, gli assiomi e gli standard
 | **`C5RES-INVARIANTI`** | I RESIDUI DI C5 — I4 la scatola nera (rigiocare da solo il passo in cui scatta un invariante)... | `cura` | `f6d432c 12:45` |
 | **`CHK3`** | CHECKPOINT: referto dei quattro esiti, ciascuno contro le sue letture fissate PRIMA /... | `cura` | `1fce1b5 13:20` |
 | **`CHK3-D`** | Nel referto del CHK3, la sezione «I DIFETTI NUOVI CONTRO LE MISURE GIA' FATTE» — D27 (quattro... | `cura` | `944064a 13:06` |
-| **`CLIP-INVENTARIO`** | INVENTARIO dei clip, tetti e pavimenti del passo pieno: 27 TETTI FISICI su 117 guardie | `altro` | `826bca6 22:07` |
+| **`CLIP-INVENTARIO`** | INVENTARIO dei clip, tetti e pavimenti del passo pieno: 27 TETTI FISICI su 117 guardie | `altro` | `1f8ceac 09:52` |
 | **`COLLAUDO-NON-ESEGUITO`** | un collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come PASS | `altro` | `8ed23cd 01:31` |
 | **`D32-CONTATORE`** | i contatori `_rep_taupp_*` contano un clamp che NON ESISTE PIU' | `altro` | `768653c 01:26` |
-| **`DOPPIA-COP`** | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non misurata | `cura` | `826bca6 22:07` |
+| **`DOPPIA-COP`** | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non misurata | `cura` | `1f8ceac 09:52` |
 | **`FASCE-TAU`** | LA CRESCITA E' COORDINATA COL TEMPO PROPRIO? — l'espansione non dev'essere omogenea in senso... | `cura` | `1fce1b5 13:20` |
 | **`FATTI-AVVIO`** | la catena di AVVIO non ha un solo fatto in FATTI_dal_codice.md: _applica_flag, avvia_test... | `fronte` | `982258e 02:01` |
 | **`FILI-CORTI`** | i fili si accorciano SOLO FRA LE MASSE o OVUNQUE? Il calo della distanza viene dai `d`, non... | `altro` | `8c2997c 10:00` |
@@ -100,6 +100,7 @@ elencate qui        578   (tolte le etichette locali, gli assiomi e gli standard
 | **`IMPL-2`** | una SECONDA implementazione indipendente, scritta dalle LEGGI e non dal codice | `fronte` | `8f71b29 01:54` |
 | **`INDICE-LEGGERO`** | l'indice pesa 169 KB e leggerlo intero non fa risparmiare contesto: serve un comando di... | `fronte` | `18db738 00:54` |
 | **`MASSA-MIGRA`** | la massa segue i NODI o la COERENZA? E come cambia la sua FORMA? | `altro` | `6e3d520 08:02` |
+| **`MAX-NODI-FERMA`** | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run | `cura` | `—` |
 | **`PASSO-PIENO`** | un hook che rifiuta uno script che avanza con net.step() invece di csv/_passo.py passo_pieno | `altro` | `fdd9889 01:50` |
 | **`PAT-1`** | dovespingelagravita.py non rispetta il pattern 5 (nessun CONTROLLO DELL'INVOLUCRO) / PATTERN §4... | `cura` | `bf8aaad 17:45` |
 | **`PAT-2`** | spegnigravbifase.py:184 non rispetta il pattern 2 (usa max\/Δ\/ invece delle FIRME) / PATTERN §4... | `cura` | `bf8aaad 17:45` |
@@ -144,12 +145,12 @@ elencate qui        578   (tolte le etichette locali, gli assiomi e gli standard
 | **`CURA2-STRUTTURALE`** | la CURA 2 diventa STRUTTURALE: i rami `else` di TEMPO_UNICO_MITOSI escono dal simulatore senza... | `altro` | `982258e 02:01` |
 | **`E4-LAM`** | LAM FATTO il 2026-09-24 / LA LEGGE «NESSUNA LUNGHEZZA SOTTO LAM» DEVE DIVENTARE STRUTTURALE —... | `altro` | `612e7fa 23:14` |
 | **`ETC-C1-CONFINE`** | cura (c) pezzo 1: la fotografia si apre a inizio PASSO PIENO, non di step, e idempotente | `cura` | `6ac0008 22:24` |
-| **`ETC-PASSO`** | LA CURA (a): il passo diventa SINCRONO -- fotografia a inizio passo, commit a fine passo | `cura` | `bd3baa1 09:34` |
+| **`ETC-PASSO`** | LA CURA (a): il passo diventa SINCRONO -- fotografia a inizio passo, commit a fine passo | `cura` | `1f8ceac 09:52` |
 | **`ETICHETTA-A13`** | l'etichetta sbagliata `A13` dove la regola e' `A3-DISEGNO`: corretta nei documenti, non ancora... | `altro` | `e519408 03:52` |
 | **`G1`** | §1 QUANTO CONTA IL DISEGNO — Ldisegno/d per arco, per regione, nel tempo, e la correlazione col... | `cura` | `4a76517 15:00` |
 | **`G3`** | §3 PROVA DI SPEGNIMENTO: la GRAVITA' BIFASE / GLOBALE-DISEGNO §3 / FATTA. sigillo 7/7 ·... | `cura` | `0be343a 09:21` |
 | **`G4`** | §4 PROVA DI SPEGNIMENTO: la MEMORIA DEL MOTO — flag MEMMOTO / GLOBALE-DISEGNO §4 / FATTO (finito... | `cura` | `8ee4377 17:24` |
-| **`H-ETC-1`** | PRESIDIO PROPOSTO E NON CABLATO: zero calcola_psi senza w dentro passo_pieno | `presidio` | `56552f0 08:19` |
+| **`H-ETC-1`** | PRESIDIO PROPOSTO E NON CABLATO: zero calcola_psi senza w dentro passo_pieno | `presidio` | `1f8ceac 09:52` |
 | **`H-INDICE`** | PRESIDIO DEL HOOK: un ID citato in un documento vivo o nel messaggio che non e' nell'indice | `presidio` | `2b273da 22:34` |
 | **`H-P1-bis`** | PRESIDIO DEL HOOK: un referto committato senza toccare la relazione | `presidio` | `ee5ecd3 22:52` |
 | **`H-P3`** | PRESIDIO DEL HOOK: un sigillo che configura il modulo A MANO invece di passare dal CLI | `presidio` | `fdd9889 01:50` |
@@ -168,7 +169,7 @@ elencate qui        578   (tolte le etichette locali, gli assiomi e gli standard
 | **`MITOSI-NON-DIVISA`** | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si alternano 26 volte | `misura` | `5ac5150 08:56` |
 | **`OKN-ASSERT`** | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(..., default) CHE... | `altro` | `e216730 01:33` |
 | **`P1-bis`** | LA RELAZIONE SI SCRIVE NELLO STESSO COMMIT DEL RISCONTRO | `presidio` | `2ebbd25 09:22` |
-| **`P1-quater`** | OGNI SOSTITUZIONE DI TESTO SI ASSERISCE PER SE', MAI IN BLOCCO | `presidio` | `1c35078 17:14` |
+| **`P1-quater`** | OGNI SOSTITUZIONE DI TESTO SI ASSERISCE PER SE', MAI IN BLOCCO | `presidio` | `1f8ceac 09:52` |
 | **`POTENZE-1`** | CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6/6: F2 da x47 000 a x1.4, F1 2.427... | `altro` | `4a76517 15:00` |
 | **`POZZO-D`** | la cura di D02 (flag `POZZO_D` nel codice): nel pozzo del grafo `L` viene da `self.d` e non da `pos` | `altro` | `89b8ec9 07:57` |
 | **`RAMPA-1`** | CHIUSA il 2026-09-25, strada (3) (decisione di Luca): sigillo 9/9 dal CLI, ramp =... | `altro` | `4a5d085 20:33` |
@@ -179,7 +180,7 @@ elencate qui        578   (tolte le etichette locali, gli assiomi e gli standard
 | **`S12`** | S12 APPROVATO DA LUCA il 2026-09-24 / IL RILASSAMENTO DI rep DENTRO mitosi() (:5280) E' UN... | `altro` | `1486cac 09:27` |
 | **`SCENA-1`** | CHIUSA il 2026-09-25, strada (1) (decisione di Luca) / SEMINALAM era approvata ma INCOMPATIBILE... | `altro` | `f96b4bc 15:07` |
 | **`SCHED-T1`** | T1 dello schedulatore: la composizione e' una LISTA e c'e' UN SOLO esecutore, esegui_passo | `cura` | `dab9304 00:27` |
-| **`SCHED-T2-TIPI`** | T2 (i tipi): gli 8 tipi del registro del passo, e dopo L_CONSERVA sono coerenti 8 su 8 | `cura` | `bd3baa1 09:34` |
+| **`SCHED-T2-TIPI`** | T2 (i tipi): gli 8 tipi del registro del passo, e dopo L_CONSERVA sono coerenti 8 su 8 | `cura` | `1f8ceac 09:52` |
 | **`SCHED-T2-VALIDA`** | T2: esegui_passo VALIDA la composizione -- apri primo, coda fissa, registro, nessun doppio | `cura` | `5ac5150 08:56` |
 | **`Z106`** | Z106 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / GLI ARCHI PIU' SPINTI DA S09 NON SONO UNA CODA... | `fronte` | `e0dd5a4 16:43` |
 | **`Z110`** | Z110 CHIUSA PER MISURA ⏳[archivi delle cure · MISURA] / r E taupp SONO DUE GRANDEZZE DIVERSE CON... | `fronte` | `cfa33e7 18:55` |
@@ -194,7 +195,7 @@ elencate qui        578   (tolte le etichette locali, gli assiomi e gli standard
 | **`Z16`** | Z16 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / Y5 ROSSO: la causa e' rhosorgente <= 0, NON peq. E nessuna... | `fronte` | `45a77d0 18:31` |
 | **`Z5`** | Z5 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / A3 NON E' UN CASO PARTICOLARE DI A2 — risolta... | `fronte` | `56b348b 13:12` |
 
-## DIFETTI E SOSPETTI — 82 righe
+## DIFETTI E SOSPETTI — 84 righe
 
 > **Il raggruppamento e' per il campo `stato` dell'indice**, non per le parole della prosa:
 > piu' grossolano di prima *(non distingue `CURA INEFFICACE` da `DA RIMISURARE`)*, ma
@@ -202,7 +203,7 @@ elencate qui        578   (tolte le etichette locali, gli assiomi e gli standard
 
 | stato | quanti | quali |
 |---|--:|---|
-| `aperto` | 54 | `ALLUNG-RELATIVO` `ARCHI-PRIMI` `CENS-A1` `CENS-A2` `CENS-A3` `CENS-A4` `CENS-A5` `CENS-A6` `CENS-A7` `CENS-B1` `CENS-B10` `CENS-B11` `CENS-B12` `CENS-B13` `CENS-B14` `CENS-B15` `CENS-B16` `CENS-B2` `CENS-B3` `CENS-B4` `CENS-B5` `CENS-B6` `CENS-B7` `CENS-B8` `CENS-B9` `D01` `D04` `D05` `D06` `D07` `D08` `D10` `D12` `D13` `D14` `D15` `D20` `D21` `D23` `D24` `D28` `D29` `D30` `D33` `D35` `D38` `FOGLIO-NULLO` `FORMA-N-VUOTO` `PSI-FLASH` `RAMPA-2` `S09-MEDIANA` `SCIOGLIMENTO-FASE` `SYNCDB-HEADLESS` `V5-SOGLIA` |
+| `aperto` | 56 | `ALLUNG-RELATIVO` `ARCHI-PRIMI` `CENS-A1` `CENS-A2` `CENS-A3` `CENS-A4` `CENS-A5` `CENS-A6` `CENS-A7` `CENS-B1` `CENS-B10` `CENS-B11` `CENS-B12` `CENS-B13` `CENS-B14` `CENS-B15` `CENS-B16` `CENS-B2` `CENS-B3` `CENS-B4` `CENS-B5` `CENS-B6` `CENS-B7` `CENS-B8` `CENS-B9` `D01` `D04` `D05` `D06` `D07` `D08` `D10` `D12` `D13` `D14` `D15` `D20` `D21` `D23` `D24` `D28` `D29` `D30` `D33` `D35` `D38` `FOGLIO-NULLO` `FORMA-N-VUOTO` `MITOSI-SOGLIA-GRAD` `PSI-FLASH` `RAMPA-2` `S09-MEDIANA` `SCIOGLIMENTO-FASE` `SYNCDB-HEADLESS` `TORS-SPINTA` `V5-SOGLIA` |
 | `chiuso` | 14 | `CTRL-RISCELTA` `D02` `D11` `D16` `D17` `D18` `D19` `D22` `D32` `D34` `D37` `DRIVER-SCENA-II` `OSSERVABILE-P1` `T4-TAUTOLOGICO` |
 | `da-decidere` | 11 | `D03` `D25` `D26` `D31` `D36` `REG-A` `REG-B` `REG-C` `REG-R` `REG-V` `U1` |
 | `non-difetto` | 3 | `D09` `D27` `HASHSEED-RIPROD` |

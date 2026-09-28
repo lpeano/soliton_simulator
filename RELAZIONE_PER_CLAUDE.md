@@ -5513,3 +5513,72 @@ corretto: `:5639` e `:5642` sono l'`if` e l'`else` della **stessa condizione**.
 > **copertura di riga**, non da un conteggio.
 
 **Prossimo:** il **punto 7 del checkpoint** — i sei punti del recepimento in `T3`. **Un commit.**
+
+---
+
+# 📐 **PUNTO 7 DEL CHECKPOINT: `T3` recepisce le decisioni, e le ECCEZIONI sono ZERO** *(2026-09-28)*
+
+### **Nessun codice nel simulatore. Blob `1fc9235f` prima e dopo.**
+
+## Il conto, prima e dopo
+
+| | prima | dopo |
+|---|---|---|
+| ### **ECCEZIONE** | **14** | ### **0** |
+| 1 · variazione | 19 | **22** |
+| 2 · rilassamento | 3 | **6** |
+| 3 · derivata | 12 | **14** |
+| 6 · gruppo | — | **2** |
+| 7 · nascita | — | **1** |
+| 0 · segno | — | **3** |
+
+**`4 · vincolo` resta 6, `5 · struttura` resta 40, il totale resta 94:** ### **nessuna scrittura è
+apparsa o sparita, si sono spostate di casella.**
+*(Le tabelle sono **generate** in `doc/REGOLE_composizione_T3_tabelle.md` — `L-NUMERI`.)*
+
+## I sei punti, fatti
+
+| | punto | esito |
+|---|---|---|
+| **①** | l'**attribuzione** della strada (a) in `MITOSI-NON-DIVISA` | ### **scritta: è una decisione di LUCA del 2026-09-28, non mia** |
+| **②** | l'eccezione dei **segni** | **corretta nel documento e nel classificatore**, con la verifica a runtime |
+| **③** | `twp` → **derivata**, `_peq_esatto` → **rilassamento** | **cablate** |
+| **④** | **forma 6 `gruppo`** e **forma 7 `nascita`** | **cablate** |
+| **⑤** | le voci **`TORS-SPINTA`**, **`MAX-NODI-FERMA`**, **`MITOSI-SOGLIA-GRAD`** | **create** *(848 voci, validatore a posto)* |
+| **⑥** | la **nascita come evento atomico**, col **rinculo dei genitori** | **nel documento, par.4.4** |
+
+## ⚠ Tre cose che ho trovato correggendo, e che correggono ME
+
+| | |
+|---|---|
+| **①** | ### **`omega_s` NON ha bisogno della forma 6.** `omega_new = omega_src + dtn_c·(…)` è **un'addizione nell'algebra**, e l'algebra **è** uno spazio vettoriale. Delle tre scritture che avevo messo in famiglia B, la forma 6 serve a **`_nb`** *(il versore)* e **`phi_s`** *(la sua coordinata)*: ### **2 scritture, non 3.** Una regola in meno da applicare — il verso giusto per `9-ter` |
+| **②** | ### **il controllo `0 · segno` messo per PRIMO rubava le ESTENSIONI:** contava **7** invece di 3, perché `perc_chi = concatenate([...])` della mitosi è **`5 · struttura`**, non una decisione di segno. **Si controlla per ULTIMO** |
+| **③** | **due correzioni al classificatore che Luca NON ha chiesto**, e le dichiaro: l'**alias transitivo** *(`y = self.x + δ` è una variazione di `x`)* e **`.copy()` che non cambia la forma**. Sono loro a far uscire `:5921`, `:5922` e `:3970` dalle eccezioni. ### **Se il criterio non regge si toglie, e tornano a essere 3 eccezioni** |
+
+**E un'imprecisione che RESTA, dichiarata:** `:5945` esce `2 · rilassamento` perché il freno rilegge
+la fotografia, ma la sua forma vera è **`1 + 4`: `foto + freno(δ)`**, cioè `C3`. ### **Il
+classificatore non sa esprimere una composizione di due forme.**
+
+## Le tre voci nuove, in una riga ciascuna
+
+| voce | il fatto | quando |
+|---|---|---|
+| **`TORS-SPINTA`** | `:6307`/`:6309` scrivono `d0` **dentro `mitosi()`**: una **legge dinamica nascosta**, con **tre numeri non derivati** — `0.02`, la pendenza `3.0`, e l'inversione a `3.5 π` *(punto medio, ma «punto medio» è una scelta)* | **dopo `T3`** |
+| **`MAX-NODI-FERMA`** | tre siti *(`:6058`, `:2924`, `:6481`)* **cambiano la fisica in silenzio**, e ### **il commento di `:1851` dice già che è sbagliato**: *«da rifare con più memoria, non da troncare»* | ### **in `T3`** |
+| **`MITOSI-SOGLIA-GRAD`** | `:6132` `soglia0·(1 − 0.3·tanh(grad))`: **`soglia0 = 3π` è derivata**, l'**ampiezza `0.3` e il `tanh` no** | **dopo `T3`** |
+
+## Una lacuna mia, recuperata e dichiarata
+
+### **`_etc_sovrapposizione.py` non aveva la sua voce nell'inventario**, ed è nato in `5ac5150`.
+È il **par.6 ①**, che è **una regola scritta e non un presidio** *(`A9`)* — e infatti non ha
+impedito niente. **Aggiunta ora, col ritardo dichiarato.**
+
+## ➜ **Che cosa serve adesso**
+
+### **L'approvazione del codice di `T3`.** Il guardiano verifica prima il recepimento, come da
+decisione ①. **E `T3` ha DUE pezzi di codice, non uno** — la **separazione della mitosi** *(con la
+nascita atomica)* e il **controllo di `MAX_NODI`** — quindi **due commit e due sigilli**, per la
+regola d'oro. **Propongo `MAX_NODI` per primo**, perché non tocca la fisica delle corse reali e si
+sigilla **byte-identico**.
+
+> ### 🛑 **STOP.**

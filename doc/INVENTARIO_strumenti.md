@@ -1257,3 +1257,28 @@ deve essere rifiutato, il secondo deve passare.** *(I due file sono locali: il d
 **⚠ NON SI RILANCIA:** ogni sostituzione **asserisce il valore vecchio** e ogni aggiunta **fallisce
 se il testo c'è già** *(`P1-quater`)*, quindi un secondo giro **esce `1` senza scrivere**. Il
 referto è **l'indice stesso**, e la tabella delle 16 modifiche è nel messaggio del commit.
+
+## `T3`, il classificatore della SOVRAPPOSIZIONE *(2026-09-28)*
+
+> ### ⚠ **UNA LACUNA MIA, e la dichiaro: questa voce MANCAVA.** Lo strumento e' nato in `5ac5150` e
+> **non ha avuto la sua voce nell'inventario in quel commit**, che e' il par.6 ① di `CLAUDE.md`.
+> **E' una regola scritta, non un presidio** (`A9`), e infatti non ha impedito niente. **Recuperata
+> qui, col ritardo dichiarato.**
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_etc_sovrapposizione.py` | `d0c8e951` | `python csv/_test_fork/_etc_sovrapposizione.py` | la **FORMA di composizione** di ogni scrittura di stato nel perimetro delle cinque leggi: le **cinque forme** di Luca, le **due accettate** *(`6 gruppo`, `7 nascita`)* e **l'esenzione** *(`0 segno`)* | **94** scritture, e ### **le ECCEZIONI sono ZERO**: `1` 22 · `2` 6 · `3` 14 · `4` 6 · `5` 40 · `6` 2 · `7` 1 · `0` 3 |
+
+**Referto:** `csv/_test_fork/_etc_sovrapposizione.json` *(blob byte `d3b5aa68`)*.
+**E scrive anche `doc/REGOLE_composizione_T3_tabelle.md`**, cioe' **le tabelle del documento**: non
+si ricopiano a mano (`L-NUMERI`), **le genera lui a ogni giro**.
+**Blob precedenti:** `9b683cbf` *(14 eccezioni, prima delle decisioni)* → `d0c8e951`.
+**⚠ Analisi STATICA:** l'esenzione `0 segno` **regge su una condizione che questo strumento NON puo'
+verificare**, e la verifica vive in `csv/_seal_fork/_sig_segni_una_legge.py`, **a runtime**.
+
+| strumento | blob (byte) | comando | cosa fa |
+|---|---|---|---|
+| `csv/_archivio/_indice_t3_punto7.py` | `ac6ef486` | `python csv/_archivio/_indice_t3_punto7.py` | le **tre voci nuove** di `T3` *(`TORS-SPINTA`, `MAX-NODI-FERMA`, `MITOSI-SOGLIA-GRAD`)* piu' l'**attribuzione** in `MITOSI-NON-DIVISA` |
+
+**⚠ NON SI RILANCIA:** ogni voce **fallisce se l'id esiste** e ogni aggiunta **fallisce se il testo
+c'e' gia'**. Il referto e' **l'indice stesso**.

@@ -317,3 +317,33 @@ reperto committato** *(par.7 di `CLAUDE.md`: il codice di una misura dev'essere 
 **Quindi la divisione in moduli mantiene `soliton_simulator.py` come FACCIATA** che re-esporta i
 nomi, e ogni passo ha il suo **sigillo byte-identico**. **Un `ImportError` in uno strumento vecchio
 non è un fastidio: è un reperto che non si rigira più**, e `CLAUDE.md` lo chiama **un difetto nuovo**.
+
+---
+
+# 9. LE AGGIUNTE A `T3` *(decisioni di Luca, 2026-09-28)*
+
+**Il piano di `T3` non era solo <<separa la mitosi>>.** Luca ha aggiunto **quattro cose**, e tre
+sono **registrazioni** *(niente cura ora)*:
+
+| | aggiunta | dove sta scritta | e' una cura? |
+|---|---|---|---|
+| **a** | ### **LA NASCITA E' UN EVENTO ATOMICO**, e comprende **il RINCULO DEI GENITORI** | `doc/REGOLE_composizione_T3.md` par.4.4 | ### **SI, in `T3`** |
+| **b** | la **spinta repulsiva di torsione** e' una **legge dinamica nascosta** in `mitosi()`, con **tre numeri non derivati** | quel documento par.6.1, voce `TORS-SPINTA` | **no: dopo `T3`** |
+| **c** | **`MAX_NODI`** diventa **un controllo dello schedulatore che FERMA il run** con un errore esplicito, **mai troncare**, col suo caso che deve fallire | par.6.2, voce `MAX-NODI-FERMA` | ### **SI, in `T3`** |
+| **d** | la **soglia di mitosi** modulata dal gradiente di tempo proprio: **ampiezza `0.3` e `tanh` a mano** | par.6.3, voce `MITOSI-SOGLIA-GRAD` | **no: dopo `T3`** |
+
+> ### 📌 **Quindi `T3` ha DUE pezzi di codice, non uno:** la **separazione della mitosi** *(con la
+> nascita atomica)* e il **controllo di `MAX_NODI`**. **Sono due commit e due sigilli**, per la
+> regola d'oro: un interruttore alla volta.
+
+**E il `MAX_NODI` va prima o dopo?** ### **Prima**, e la ragione e' che non tocca la fisica delle
+corse reali *(4 000 000 contro i ~12 800 nodi del pilota)*: e' **un controllo che non cambia un
+byte** del run base, quindi si sigilla **byte-identico** e non si mescola con il riordino.
+*(Proposta mia; se Luca preferisce l'ordine inverso, si inverte.)*
+
+## E LE DUE COSE CHE RESTANO FUORI DA `T3`, con il loro posto deciso
+
+| | quando |
+|---|---|
+| **`DOPPIA-COP`** *(il ritmo a `2 pi` da invertire)* | ### **subito DOPO `T3`, PRIMA di `T4`**, cura a se' col suo sigillo: **due cambi di fisica nello stesso sigillo non si attribuiscono** |
+| **`CLIP-INVENTARIO`** *(la tabella per FLAG della famiglia 2)* | **dopo `T3`** |

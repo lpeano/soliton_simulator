@@ -1,141 +1,16 @@
 {
  "blob_sim": "1fc9235f749b10a113fd82e5781868afe5d3a04f",
  "conta": {
-  "1-variazione": 19,
-  "2-rilassamento": 3,
-  "3-derivata": 12,
+  "0-segno": 3,
+  "1-variazione": 22,
+  "2-rilassamento": 6,
+  "3-derivata": 14,
   "4-vincolo": 6,
   "5-struttura": 40,
-  "ECCEZIONE": 14
+  "6-gruppo": 2,
+  "7-nascita": 1
  },
- "eccezioni": [
-  {
-   "attributo": "omega_s",
-   "dentro": "_passo_spinoriale",
-   "forma": "ECCEZIONE",
-   "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 3970,
-   "sorgente": "self.omega_s = omega_new.copy()"
-  },
-  {
-   "attributo": "_nb",
-   "dentro": "_passo_spinoriale",
-   "forma": "ECCEZIONE",
-   "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 3971,
-   "sorgente": "self._nb = nb_new.copy()                          # Bloch (derivato dal primario se SPINORE_CORRETTO)"
-  },
-  {
-   "attributo": "phi_s",
-   "dentro": "_passo_spinoriale",
-   "forma": "ECCEZIONE",
-   "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 3979,
-   "sorgente": "self.phi_s = np.arccos(np.clip(nb_new[:, 2], -1, 1))            # b = angolo polare [0,pi]"
-  },
-  {
-   "attributo": "twp",
-   "dentro": "step",
-   "forma": "ECCEZIONE",
-   "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 5620,
-   "sorgente": "self.twp = self._w8(dph + twist_dip)"
-  },
-  {
-   "attributo": "twp",
-   "dentro": "step",
-   "forma": "ECCEZIONE",
-   "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 5624,
-   "sorgente": "self.twp = dph"
-  },
-  {
-   "attributo": "perc_geom",
-   "dentro": "step",
-   "forma": "ECCEZIONE",
-   "op": "[]=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 5639,
-   "sorgente": "self.perc_geom[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_geom.dtype)"
-  },
-  {
-   "attributo": "perc_chi",
-   "dentro": "step",
-   "forma": "ECCEZIONE",
-   "op": "[]=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 5642,
-   "sorgente": "self.perc_chi[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_chi.dtype)"
-  },
-  {
-   "attributo": "perc_chi",
-   "dentro": "step",
-   "forma": "ECCEZIONE",
-   "op": "[]=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 5666,
-   "sorgente": "self.perc_chi[:self.n] = np.where(np.real(_ov) >= 0.0, 1, -1).astype(self.perc_chi.dtype)"
-  },
-  {
-   "attributo": "peq",
-   "dentro": "step",
-   "forma": "ECCEZIONE",
-   "op": "[]=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 5698,
-   "sorgente": "if nuevos := nuovi.any(): self.peq[nuovi] = rho[nuovi]"
-  },
-  {
-   "attributo": "peq",
-   "dentro": "step",
-   "forma": "ECCEZIONE",
-   "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 5750,
-   "sorgente": "self.peq = self._peq_esatto(rho, flusso, dt_e, tau_bg_loc)"
-  },
-  {
-   "attributo": "peq",
-   "dentro": "step",
-   "forma": "ECCEZIONE",
-   "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 5756,
-   "sorgente": "self.peq = self._peq_esatto(rho, flusso, dt_e, TAU_BG)"
-  },
-  {
-   "attributo": "vd",
-   "dentro": "step",
-   "forma": "ECCEZIONE",
-   "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 5921,
-   "sorgente": "self.vd = vd_half + 0.5 * dts * acc_next"
-  },
-  {
-   "attributo": "d",
-   "dentro": "step",
-   "forma": "ECCEZIONE",
-   "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 5922,
-   "sorgente": "self.d = d_new"
-  },
-  {
-   "attributo": "d",
-   "dentro": "step",
-   "forma": "ECCEZIONE",
-   "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
-   "riga": 5945,
-   "sorgente": "self.d = _smp_d_ini + self._smorza(_smp_d_ini, _dxd, 'd_passo')"
-  }
- ],
+ "eccezioni": [],
  "funzioni": 53,
  "leggi": [
   "scuoti_vuoto",
@@ -153,7 +28,7 @@
     "1-variazione",
     "4-vincolo",
     "5-struttura",
-    "ECCEZIONE"
+    "6-gruppo"
    ],
    "incrementano": [
     "_passo_spinoriale"
@@ -208,14 +83,11 @@
    "n": 3
   },
   "d": {
-   "assegnano": [
-    "step"
-   ],
+   "assegnano": [],
    "forme": [
     "1-variazione",
     "2-rilassamento",
-    "5-struttura",
-    "ECCEZIONE"
+    "5-struttura"
    ],
    "incrementano": [
     "step"
@@ -258,14 +130,14 @@
    "n": 4
   },
   "omega_s": {
-   "assegnano": [
+   "assegnano": [],
+   "forme": [
+    "1-variazione",
+    "5-struttura"
+   ],
+   "incrementano": [
     "_passo_spinoriale"
    ],
-   "forme": [
-    "5-struttura",
-    "ECCEZIONE"
-   ],
-   "incrementano": [],
    "n": 4
   },
   "peq": {
@@ -274,8 +146,9 @@
    ],
    "forme": [
     "1-variazione",
+    "2-rilassamento",
     "5-struttura",
-    "ECCEZIONE"
+    "7-nascita"
    ],
    "incrementano": [
     "step"
@@ -283,23 +156,19 @@
    "n": 7
   },
   "perc_chi": {
-   "assegnano": [
-    "step"
-   ],
+   "assegnano": [],
    "forme": [
-    "5-struttura",
-    "ECCEZIONE"
+    "0-segno",
+    "5-struttura"
    ],
    "incrementano": [],
    "n": 4
   },
   "perc_geom": {
-   "assegnano": [
-    "step"
-   ],
+   "assegnano": [],
    "forme": [
-    "5-struttura",
-    "ECCEZIONE"
+    "0-segno",
+    "5-struttura"
    ],
    "incrementano": [],
    "n": 3
@@ -319,7 +188,7 @@
    ],
    "forme": [
     "5-struttura",
-    "ECCEZIONE"
+    "6-gruppo"
    ],
    "incrementano": [],
    "n": 3
@@ -373,20 +242,18 @@
     "step"
    ],
    "forme": [
-    "5-struttura",
-    "ECCEZIONE"
+    "3-derivata",
+    "5-struttura"
    ],
    "incrementano": [],
    "n": 4
   },
   "vd": {
-   "assegnano": [
-    "step"
-   ],
+   "assegnano": [],
    "forme": [
+    "1-variazione",
     "2-rilassamento",
-    "5-struttura",
-    "ECCEZIONE"
+    "5-struttura"
    ],
    "incrementano": [
     "step"
@@ -569,18 +436,18 @@
   {
    "attributo": "omega_s",
    "dentro": "_passo_spinoriale",
-   "forma": "ECCEZIONE",
+   "forma": "1-variazione",
    "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "la variazione e' gia' calcolata nella locale `omega_new`",
    "riga": 3970,
    "sorgente": "self.omega_s = omega_new.copy()"
   },
   {
    "attributo": "_nb",
    "dentro": "_passo_spinoriale",
-   "forma": "ECCEZIONE",
+   "forma": "6-gruppo",
    "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "rotazione: si compone nel GRUPPO, non sommando i valori",
    "riga": 3971,
    "sorgente": "self._nb = nb_new.copy()                          # Bloch (derivato dal primario se SPINORE_CORRETTO)"
   },
@@ -614,9 +481,9 @@
   {
    "attributo": "phi_s",
    "dentro": "_passo_spinoriale",
-   "forma": "ECCEZIONE",
+   "forma": "6-gruppo",
    "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "rotazione: si compone nel GRUPPO, non sommando i valori",
    "riga": 3979,
    "sorgente": "self.phi_s = np.arccos(np.clip(nb_new[:, 2], -1, 1))            # b = angolo polare [0,pi]"
   },
@@ -695,9 +562,9 @@
   {
    "attributo": "twp",
    "dentro": "step",
-   "forma": "ECCEZIONE",
+   "forma": "3-derivata",
    "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "assegnazione piena di una grandezza DERIVATA",
    "riga": 5620,
    "sorgente": "self.twp = self._w8(dph + twist_dip)"
   },
@@ -713,36 +580,36 @@
   {
    "attributo": "twp",
    "dentro": "step",
-   "forma": "ECCEZIONE",
+   "forma": "3-derivata",
    "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "assegnazione piena di una grandezza DERIVATA",
    "riga": 5624,
    "sorgente": "self.twp = dph"
   },
   {
    "attributo": "perc_geom",
    "dentro": "step",
-   "forma": "ECCEZIONE",
+   "forma": "0-segno",
    "op": "[]=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "decisione categoriale +1/-1: fuori dalla sovrapposizione per costruzione, esclusivita' verificata a RUNTIME",
    "riga": 5639,
    "sorgente": "self.perc_geom[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_geom.dtype)"
   },
   {
    "attributo": "perc_chi",
    "dentro": "step",
-   "forma": "ECCEZIONE",
+   "forma": "0-segno",
    "op": "[]=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "decisione categoriale +1/-1: fuori dalla sovrapposizione per costruzione, esclusivita' verificata a RUNTIME",
    "riga": 5642,
    "sorgente": "self.perc_chi[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_chi.dtype)"
   },
   {
    "attributo": "perc_chi",
    "dentro": "step",
-   "forma": "ECCEZIONE",
+   "forma": "0-segno",
    "op": "[]=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "decisione categoriale +1/-1: fuori dalla sovrapposizione per costruzione, esclusivita' verificata a RUNTIME",
    "riga": 5666,
    "sorgente": "self.perc_chi[:self.n] = np.where(np.real(_ov) >= 0.0, 1, -1).astype(self.perc_chi.dtype)"
   },
@@ -758,18 +625,18 @@
   {
    "attributo": "peq",
    "dentro": "step",
-   "forma": "ECCEZIONE",
+   "forma": "7-nascita",
    "op": "[]=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "valore di partenza dei SOLI nuovi indici (`nuovi`, la maschera dei NaN)",
    "riga": 5698,
    "sorgente": "if nuevos := nuovi.any(): self.peq[nuovi] = rho[nuovi]"
   },
   {
    "attributo": "peq",
    "dentro": "step",
-   "forma": "ECCEZIONE",
+   "forma": "2-rilassamento",
    "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "rilassamento in forma CHIUSA: `_peq_esatto`",
    "riga": 5750,
    "sorgente": "self.peq = self._peq_esatto(rho, flusso, dt_e, tau_bg_loc)"
   },
@@ -785,9 +652,9 @@
   {
    "attributo": "peq",
    "dentro": "step",
-   "forma": "ECCEZIONE",
+   "forma": "2-rilassamento",
    "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "rilassamento in forma CHIUSA: `_peq_esatto`",
    "riga": 5756,
    "sorgente": "self.peq = self._peq_esatto(rho, flusso, dt_e, TAU_BG)"
   },
@@ -803,18 +670,18 @@
   {
    "attributo": "vd",
    "dentro": "step",
-   "forma": "ECCEZIONE",
+   "forma": "1-variazione",
    "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "`x = x + d` (la fotografia vive in una LOCALE: `vd_half`)",
    "riga": 5921,
    "sorgente": "self.vd = vd_half + 0.5 * dts * acc_next"
   },
   {
    "attributo": "d",
    "dentro": "step",
-   "forma": "ECCEZIONE",
+   "forma": "1-variazione",
    "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "la variazione e' gia' calcolata nella locale `d_new`",
    "riga": 5922,
    "sorgente": "self.d = d_new"
   },
@@ -848,9 +715,9 @@
   {
    "attributo": "d",
    "dentro": "step",
-   "forma": "ECCEZIONE",
+   "forma": "2-rilassamento",
    "op": "=",
-   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "perche": "`x + a*(bersaglio - x)`",
    "riga": 5945,
    "sorgente": "self.d = _smp_d_ini + self._smorza(_smp_d_ini, _dxd, 'd_passo')"
   },

@@ -4428,3 +4428,32 @@ posto dove si vede che sono **sei** *(i quattro qui piu' i due di*
 > ### 📌 **E una misura che conferma il progetto:** dopo `T1`, `_g_smp_gia_aperta = 0` — mentre in
 > `(c)1` valeva `4` per passo. ### **L'idempotenza non serve più: il compositore SA di essere il
 > primo.** `(c)1` era il primo abbozzo di questo confine, e il tag `pre-schedulatore-t1` lo conserva.
+
+## LE REGOLE DI COMPOSIZIONE, dichiarate il 2026-09-28 (`T3`)
+
+**La forma della sovrapposizione non e' un dettaglio di implementazione: e' un vincolo sulla FORMA
+delle leggi**, e quindi sta qui. **Le cinque forme di Luca** — `1 variazione` · `2 rilassamento` ·
+`3 derivata` · `4 vincolo` · `5 struttura` — **piu' due accettate e una esenzione:**
+
+| forma | la legge |
+|---|---|
+| **6 · `gruppo`** | le grandezze che vivono in un **GRUPPO** *(il versore `_nb` e la sua coordinata polare `phi_s`)* **non compongono per somma dei valori**: due rotazioni compongono per **moltiplicazione**. ### **E' la fisica di `SU(2)`, che questo registro impone gia'.** ⚠ `omega_s` **NON** e' fra queste: `omega_new = omega_src + dtn_c*(...)` e' un'**addizione nell'algebra**, e l'algebra E' uno spazio vettoriale |
+| **7 · `nascita`** | i **valori di partenza dei soli nuovi indici**, dopo la struttura e **fuori dalla somma**. La maschera e' `isnan` sulla grandezza di stato, che **significa** <<gli indici che non hanno ancora un valore>> |
+| **0 · `segno`** | ### **NON e' una forma: e' un'ESENZIONE.** Le grandezze categoriali in `{+1,-1}` *(`perc_chi`, `perc_geom`)* non si compongono affatto: **sommare due decisioni darebbe `+2`, `0` o `-2`**, che non sono valori ammessi. **UNA SOLA legge scrive ogni grandezza-segno** |
+
+> ### 📌 **L'esenzione `0 segno` REGGE SU UNA CONDIZIONE, e la condizione E' GIA' VERA PER
+> COSTRUZIONE:** e' la cura di `A6-PERCCHI`. **Verificata a RUNTIME** (`_sig_segni_una_legge.py`,
+> 3 passi sulla scena `(ii)(a)`, seme 11): `perc_geom` solo da `:5639` **3 su 3**, `perc_chi` solo
+> da `:5666` **3 su 3**, e `:5642` **ZERO** — perche' `:5639` e `:5642` sono l'`if` e l'`else` della
+> **stessa** condizione. ### **Si DICHIARA, non si cura.**
+> **⚠ E un'analisi statica non puo' vederlo:** vede **le scritture** e non **le condizioni che le
+> escludono**. Per questo il verdetto viene dalla **copertura di riga**.
+
+**LA NASCITA E' UN EVENTO ATOMICO** *(decisione di Luca, 2026-09-28)*: la transazione comprende **il
+RINCULO DEI GENITORI**, non solo i valori del figlio. ### **Se il rinculo sta fuori dall'evento, una
+legge successiva vede uno stato in cui la materia e' comparsa dal nulla.** **Come** si distribuisce
+il rinculo **non e' deciso: va DERIVATO** (`A1`), e misurato in `T3`.
+
+*(Documento: `doc/REGOLE_composizione_T3.md`; tabelle generate in
+`doc/REGOLE_composizione_T3_tabelle.md`. Strumento `csv/_test_fork/_etc_sovrapposizione.py`.
+**94 scritture, e le eccezioni sono ZERO.**)*

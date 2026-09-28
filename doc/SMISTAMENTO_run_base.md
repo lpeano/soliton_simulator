@@ -11,8 +11,8 @@ mano**: si rigenera.)*
 > **per regola, non per giudizio**.
 
 ```
-voci nell'indice          845
-in questo smistamento     156   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
+voci nell'indice          848
+in questo smistamento     159   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
 di cui blocca SI          10
 ```
 
@@ -45,6 +45,8 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D03](REVISIONE_SI_202
 |---|:--:|---|
 | **S09-MEDIANA** | `DA-DECIDERE` |  |
 | **DOPPIA-COP** | `DA-DECIDERE` |  |
+| **TORS-SPINTA** | `DA-DECIDERE` |  |
+| **MITOSI-SOGLIA-GRAD** | `DA-DECIDERE` |  |
 
 ## FAMIGLIA **A** — INERZIA E AVVIO   *(58 voci)*
 
@@ -203,11 +205,12 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D03](REVISIONE_SI_202
 | `NO` | **D13** | I sigilli storici non sono stati rigirati sul blob corrente / Z11 / — / APERTO | voce di PROCESSO o di STRUMENTO: non e' una legge del sistema | `STATO_RUN.md` |
 | `NO` | **Z15** | Z15 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / 14 .pkl su 36 non portano il BLOB del codice che li ha... | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 
-## FAMIGLIA **?** — SENZA FAMIGLIA — nessuna regola ha deciso   *(34 voci)*
+## FAMIGLIA **?** — SENZA FAMIGLIA — nessuna regola ha deciso   *(37 voci)*
 
 | blocca? | id | che cos'e' | **il motivo, in una frase** | fonte |
 |:--:|---|---|---|---|
 | `DA-DECIDERE` | **DOPPIA-COP** | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non misurata |  | `CURE_fisica_ordine.md` |
+| `NO` | **MAX-NODI-FERMA** | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run |  | `REGOLE_composizione_T3.md` |
 | `SI` | **SCHED-PASSO** | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | eredita il blocco da `ETC-PASSO` (chiusa come superata il 2026-09-28): il run base gira con stato MISTO t/t+1 in 4 leggi su 5, 56 letture sporche su 31 attributi misurate dall'AST da csv/_test_fork/_etc_letture.py, e la cura vive in `T3` | `PIANO_schedulatore_passo.md` |
 | `NO` | **ALLUNG-RELATIVO** | il criterio V6 dell'allungamento sottrae variazioni relative con DENOMINATORI DIVERSI |  | `csv/_test_fork/_pilota_prova1.py` |
 | `NO` | **ARCHI-PRIMI** | la vista disegna i PRIMI 24000 archi per indice: il 100 % finisce in un quadrante, misurato |  | `soliton_simulator.py` |
@@ -230,8 +233,10 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D03](REVISIONE_SI_202
 | `NO` | **D29** | CINQUE NODI DI VUOTO sono i piu' connessi dell'intero sistema: il vuoto ha degli HUB, e non... | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `NO` | **FOGLIO-NULLO** | il diagnostico dei fogli vale il suo NULLO sulla scena (ii): la fase sta sul confine |  | `csv/_test_fork/_pilota_prova1_braccio.py` |
 | `NO` | **FORMA-N-VUOTO** | `n` in forma_passo0 non puo' cambiare: e' l'insieme congelato del passo 0 (P4) |  | `csv/_test_fork/_pilota_prova1.py` |
+| `DA-DECIDERE` | **MITOSI-SOGLIA-GRAD** | la soglia di mitosi si abbassa col gradiente di tempo proprio: ampiezza 0.3 e tanh a mano |  | `REGOLE_composizione_T3.md` |
 | `DA-DECIDERE` | **S09-MEDIANA** | la spinta S09 scala con `median(d0)` GLOBALE: lo stesso A2 gia' curato in S05 il 2026-09-17 |  | `soliton_simulator.py` |
 | `NO` | **SYNCDB-HEADLESS** | `--sync-db` in headless CARICA ma non SALVA: lo dice il docstring del driver |  | `csv/_test_fork/_scena_video.py` |
+| `DA-DECIDERE` | **TORS-SPINTA** | la spinta repulsiva di torsione: legge DINAMICA dentro mitosi(), con tre numeri non derivati |  | `REGOLE_composizione_T3.md` |
 | `NO` | **V5-SOGLIA** | il criterio V5 confonde SCIOGLIERSI con MIGRARE, e misura lo spostamento con LAM |  | `TASK_HISTORY/2026-09-27_pilota-prova1.md` |
 | `NO` | **FATTI-AVVIO** | la catena di AVVIO non ha un solo fatto in FATTI_dal_codice.md: _applica_flag, avvia_test... |  | `FATTI_dal_codice.md` |
 | `NO` | **IMPL-2** | una SECONDA implementazione indipendente, scritta dalle LEGGI e non dal codice |  | `VALUTAZIONE_go.md` |
