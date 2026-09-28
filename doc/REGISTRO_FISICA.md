@@ -4585,7 +4585,7 @@ PRIMA:  if not hasattr(self, "psi") or len(self.psi) < self.n: return np.full(se
 
 | | |
 |---|---|
-| `not hasattr` | ### **inizializzazione**: al passo 1 `psi` non esiste. **RESTA**, e si conta (`_g_scherm_init`). Misurato: **1** volta in 44 passi |
+| ### `len(psi) == 0` | ### **inizializzazione**, e ### **NON e' `not hasattr`**: `Rete.__init__` fa `self.psi = np.zeros(0, complex)`, quindi l'attributo ESISTE SEMPRE. **RESTA**, e si conta (`_g_scherm_init`). ⚠ **La mia prima stesura splittava su `not hasattr` e l'errore scattava alla COSTRUZIONE DELLA SCENA**: la sonda contava le due condizioni insieme, e ho attribuito alla prima l'occorrenza del passo 1 che era della seconda |
 | ### `len(psi) < n` | ### **IL DIFETTO**: al passo di nascita `mitosi` fa crescere `n`, e ### **la schermatura si spegneva PER TUTTA LA RETE** -- `lambda` da `~0.60` a `0.80`, `exp(-d/lam)` da `0.0655` a `0.1223`, `|psi|` su di `1.62x` **per TUTTI, non per il nato**, e il pozzo da `130` a `366`. **ORA SOLLEVA `SchermaturaSpenta`** |
 
 > ### 📌 **Il `2.6x` sul pozzo NON ERA FISICA: era l'assenza della schermatura.** E scioglie il

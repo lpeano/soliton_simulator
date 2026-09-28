@@ -3329,7 +3329,13 @@ class Rete:
         #   la schermatura SI SPEGNEVA PER TUTTA LA RETE -- `lambda` da ~0.60 a 0.80, e `|psi|` su
         #   di 1.62x per TUTTI, non per il nato. **ORA FERMA IL RUN.** Misurato: scattava 1 volta
         #   in 44 passi, ed era il passo della nascita.
-        if not hasattr(self, "psi"):
+        # ⚠ CORREZIONE DI UNA MIA LETTURA SBAGLIATA, 2026-09-28: avevo scritto che il caso
+        #   dell'INIZIALIZZAZIONE e' `not hasattr(self, "psi")`. **E' FALSO:** `Rete.__init__` fa
+        #   `self.psi = np.zeros(0, complex)`, quindi l'attributo ESISTE SEMPRE e
+        #   ### l'inizializzazione e' `len(psi) == 0`. La mia sonda contava le due condizioni
+        #   insieme, e ho attribuito alla prima l'occorrenza del passo 1 che era della seconda.
+        #   **Con lo split sbagliato l'errore scattava alla COSTRUZIONE DELLA SCENA.**
+        if (not hasattr(self, "psi")) or len(self.psi) == 0:
             self._g_scherm_init = getattr(self, "_g_scherm_init", 0) + 1
             return np.full(self.n, LAM)
         if len(self.psi) < self.n:
