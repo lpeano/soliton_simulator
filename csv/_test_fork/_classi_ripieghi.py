@@ -120,11 +120,19 @@ def _confronti():
             #   SEMPRE il corpo, quindi per i `>=` riportava IL RAMO BUONO spacciandolo per il ramo
             #   di scorta. **Trovato leggendo la sua uscita, non da un'asserzione.**
             _op = type(nd.ops[0]).__name__
-            _corta_se_vero = _op in ("Lt", "LtE")
+            _corta_se_vero = _op in ("Lt", "LtE", "NotEq")
+            # ⚠⚠ `==` E `!=` NON SONO <<FUORI DAL MANDATO>>, e su questo il guardiano ha ragione
+            #   su SEI siti piu' uno: `len(x) != n` **INCLUDE** `len(x) < n`, quindi il ramo
+            #   scatta ANCHE quando la cache e' corta; e `len(x) == n` protegge IL RAMO BUONO,
+            #   quindi il suo `else` scatta ANCHE quando e' corta.
+            #   ### Era la TERZA volta che una mia regola di famiglia nascondeva i siti cercati.
             fam = "ALTRO"
-            if _op in ("Lt", "LtE", "GtE"):
+            if _op in ("Lt", "LtE", "GtE", "NotEq"):
                 fam = "CORTA"
+            elif _op == "Eq":
+                fam = "CORTA"          # il ramo di scorta e' l'`else` del confronto di uguaglianza
             elif _op == "Gt":
+                fam = "LUNGA"
                 fam = "LUNGA"
             su, cond, ramo, dove_ramo = nd, None, None, None
             for _ in range(8):
@@ -146,7 +154,13 @@ def _confronti():
                     break
                 if isinstance(su, ast.IfExp):
                     cond = ast.unparse(su.test)
-                    ramo = ast.unparse(su.orelse if _corta_se_vero else su.body)[:180]
+                    # ⚠⚠ ERA INVERTITO, e l'incrocio col guardiano l'ha smascherato: in
+                    #   `A if len(x) < n else B` il caso CORTA e' **A**, non B; in
+                    #   `A if len(x) >= n else B` e' **B**, non A. ### Con l'inversione riportavo
+                    #   IL RAMO BUONO come se fosse il ramo di scorta, PER TUTTI gli IfExp -- e da
+                    #   li' e' nata una mia <<famiglia 3>> che NON ESISTE. La prova e' :7394,
+                    #   dove il ramo vero e' `np.ones(n)`: densita' a UNO per tutta la rete.
+                    ramo = ast.unparse(su.body if _corta_se_vero else su.orelse)
                     dove_ramo = "espressione condizionale"
                     break
                 if isinstance(su, ast.BoolOp):

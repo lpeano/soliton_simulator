@@ -6534,3 +6534,49 @@ scattare. ### **Va verificato che nessuna legge tolga nodi, e non l'ho fatto.**
 > ### 🛑 **Sulla forma della cura non decido:** la sua proposta — **un solo controllo dello
 > schedulatore** invece di quaranta `raise` sparsi — **è più stretta della mia** e coincide col
 > registro delle grandezze per nodo di `T3`. **Decide Luca.**
+
+---
+
+# 🔧 **Strumento corretto, e la prova che NESSUNA LEGGE TOGLIE NODI** *(2026-09-28)*
+
+**Due correzioni.** `IfExp`: il ramo non è più invertito. **La famiglia**: `len ≠ n` **include**
+`len < n`, e l'`else` di `len == n` scatta **anche** quando la cache è corta — ### **non sono «fuori
+dal mandato».**
+
+| | prima | ora |
+|---|---|---|
+| **(x)** *(fuori dal mandato)* | 19 | ### **4** — restano **solo** i troncamenti con `>` |
+| **(d)** | 43 | ### **58** in 13 funzioni |
+| famiglia `CORTA` | 82 | **97 su 101** |
+
+## ✅ E la tua correzione su `:6225` è giusta — **sbagliavo anch'io, nello stesso modo**
+
+`:6229` è `I_nodi = abs(psi)**2 if _I_ok else np.ones(self.n)`: ### **densità a UNO per tutta la
+rete**, ed è **lo stesso scambio di rami** che avevo appena trovato nel mio strumento.
+### ➜ **Dei due punti in cui dicevo «ha torto lui» ne resta ZERO:** su `:5754` le due descrizioni
+coincidono *(`cs_rappr = CS_M`)*, quindi **non era un disaccordo di sostanza**.
+
+## ✅ **Nessuna legge toglie nodi**, e la ragione è strutturale
+
+### **`n` non è un attributo: è una property** — `def n(self): return len(self.phi)` *(`:2063`)*.
+Quindi `n` cala **solo** se `phi` si accorcia. E `phi` ha **cinque** scritture in tutto il file:
+
+| | |
+|---|---|
+| `:1977` | inizializzazione, `zeros(0)` |
+| `:3139` | semina, `concatenate` |
+| `:5848` | `step`, `% dphi` — ### **stessa lunghezza** |
+| `:6641` · `:6803` | mitosi e Schwinger, `concatenate` |
+
+### **Nessuna fetta, nessun troncamento** *(`self.phi = self.phi[` non trova niente)*.
+
+> ### ➜ **`n` cresce solo**, quindi i tre `len(x) > n` *(`:2265 :3578 :3587`)* **non possono
+> scattare** a meno che una cache venga estesa **due volte**: ### **il tuo verdetto regge — devono
+> diventare errori.**
+>
+> ### **E dice anche perché `phi` va esclusa dalla prova a guasto:** accorciarla **non accorcia una
+> cache, CAMBIA `n`.**
+
+**Due reperti che NON riscrivo:** l'incrocio *(`RIPIEGHI_incrocio.md`)* e la lettura a mano
+*(`RIPIEGHI_lettura_d.md`)* restano come sono — sono il **reperto di un confronto fatto in un momento
+preciso**, e l'annotazione sta nell'incrocio, come per i task history.
