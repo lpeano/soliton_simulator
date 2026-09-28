@@ -12,10 +12,11 @@
    "ramo_di_scorta": "net.calcola_psi()",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 729,
+   "scattato_72": false,
    "sorgente": "if not hasattr(net, \"psi\") or len(net.psi) < n:"
   },
   {
-   "classe": "a",
+   "classe": "d",
    "condizione": "not hasattr(self, '_nb') or self._nb is None or len(self._nb) < self.n",
    "contro": "self.n",
    "cosa": "self._nb",
@@ -24,8 +25,9 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "return",
-   "regola": "la condizione porta anche <<non esiste ancora>> (is None, not hasattr)",
+   "regola": "DA LEGGERE -- **CONDIZIONE FUSA**: la non-esistenza (is None, not hasattr) sta IN OR con la lunghezza. Due casi in un ramo: VA SEPARATA come in `lambda_nodi`",
    "riga": 2153,
+   "scattato_72": false,
    "sorgente": "if not hasattr(self, \"_nb\") or self._nb is None or len(self._nb) < self.n:"
   },
   {
@@ -38,8 +40,9 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "manca = self._bloch_a_spinore(nb_rif[len(cur):n])\nself._psi_spinor = np.vstack([cur, manca])",
-   "regola": "il ramo di scorta ESTENDE (vstack)",
+   "regola": "il ramo di scorta ALLUNGA LA CODA (vstack) e RINOMINA la cache, quindi i primi len(x) restano",
    "riga": 2262,
+   "scattato_72": false,
    "sorgente": "elif len(cur) < n:"
   },
   {
@@ -54,6 +57,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "FUORI DAL MANDATO: famiglia LUNGA -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 2265,
+   "scattato_72": false,
    "sorgente": "elif len(cur) > n:"
   },
   {
@@ -68,6 +72,7 @@
    "ramo_di_scorta": "return 1.0 + 0j",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2403,
+   "scattato_72": false,
    "sorgente": "if len(self._spinor_lift) < self.n:"
   },
   {
@@ -80,12 +85,13 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "self._sfb_lift_corto = getattr(self, '_sfb_lift_corto', 0) + 1\nself._sfb_lift_shape = (len(self._spinor_lift), self.n)\nreturn out",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 2478,
+   "scattato_72": false,
    "sorgente": "if len(self._spinor_lift) < self.n:"
   },
   {
-   "classe": "a",
+   "classe": "d",
    "condizione": "not hasattr(self, 'psi') or len(self.psi) < self.n",
    "contro": "self.n",
    "cosa": "self.psi",
@@ -94,8 +100,9 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "self.calcola_psi()",
-   "regola": "la condizione porta anche <<non esiste ancora>> (not hasattr)",
+   "regola": "DA LEGGERE -- **CONDIZIONE FUSA**: la non-esistenza (not hasattr) sta IN OR con la lunghezza. Due casi in un ramo: VA SEPARATA come in `lambda_nodi`",
    "riga": 2525,
+   "scattato_72": false,
    "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < self.n:"
   },
   {
@@ -110,6 +117,7 @@
    "ramo_di_scorta": "self.calcola_psi()",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2581,
+   "scattato_72": false,
    "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < self.n:"
   },
   {
@@ -124,6 +132,7 @@
    "ramo_di_scorta": "mancanti = self.n - len(getattr(self, '_nb', []))\nnuovi = np.tile([0.0, 0.0, 1.0], (mancanti, 1))\nself._nb = np.vstack([self._nb, nuovi]) if hasattr(self, '_nb') else nuovi",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2583,
+   "scattato_72": false,
    "sorgente": "if not hasattr(self, \"_nb\") or len(self._nb) < self.n:"
   },
   {
@@ -138,6 +147,7 @@
    "ramo_di_scorta": "self._aggiorna_lift_spinoriale()",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2587,
+   "scattato_72": false,
    "sorgente": "if len(self._spinor_lift) < self.n:"
   },
   {
@@ -152,6 +162,7 @@
    "ramo_di_scorta": "self.perc_chi[dominio].astype(float)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2616,
+   "scattato_72": false,
    "sorgente": "chi = self.perc_chi[dominio].astype(float) if len(self.perc_chi) >= self.n else np.zeros(len(dominio))"
   },
   {
@@ -166,6 +177,7 @@
    "ramo_di_scorta": "self._nb[dominio]",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2617,
+   "scattato_72": false,
    "sorgente": "nb = self._nb[dominio] if hasattr(self, \"_nb\") and len(self._nb) >= self.n else np.zeros((len(dominio), 3))"
   },
   {
@@ -180,6 +192,7 @@
    "ramo_di_scorta": "self._aggiorna_lift_spinoriale()",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2622,
+   "scattato_72": false,
    "sorgente": "if len(self._spinor_lift) < self.n and hasattr(self, \"_nb\") and len(self._nb) >= self.n:"
   },
   {
@@ -194,6 +207,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2622,
+   "scattato_72": false,
    "sorgente": "if len(self._spinor_lift) < self.n and hasattr(self, \"_nb\") and len(self._nb) >= self.n:"
   },
   {
@@ -208,6 +222,7 @@
    "ramo_di_scorta": "self._spinor_lift[dominio]",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2625,
+   "scattato_72": false,
    "sorgente": "if len(self._spinor_lift) >= self.n"
   },
   {
@@ -222,6 +237,7 @@
    "ramo_di_scorta": "return self.misura_spin_picco_massa(idx, pesi)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2693,
+   "scattato_72": false,
    "sorgente": "if len(self.perc_chi) < self.n:"
   },
   {
@@ -236,6 +252,7 @@
    "ramo_di_scorta": "self.calcola_psi()",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2760,
+   "scattato_72": false,
    "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < self.n:"
   },
   {
@@ -250,6 +267,7 @@
    "ramo_di_scorta": "(non trovato)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2767,
+   "scattato_72": false,
    "sorgente": "ha_spin = SPINORE and hasattr(self, \"_nb\") and self._nb is not None and len(self._nb) >= self.n"
   },
   {
@@ -264,6 +282,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2806,
+   "scattato_72": false,
    "sorgente": "if _psp is not None and len(_psp) >= self.n:"
   },
   {
@@ -278,6 +297,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 2835,
+   "scattato_72": false,
    "sorgente": "if ha_spin and len(self.perc_chi) >= self.n:"
   },
   {
@@ -292,6 +312,7 @@
    "ramo_di_scorta": "self.conc_nodi.append([])",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 3274,
+   "scattato_72": false,
    "sorgente": "while len(self.conc_nodi) < self.n: self.conc_nodi.append([])"
   },
   {
@@ -306,6 +327,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "FUORI DAL MANDATO: famiglia LUNGA -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 3275,
+   "scattato_72": false,
    "sorgente": "if len(self.conc_nodi) > self.n: del self.conc_nodi[self.n:]"
   },
   {
@@ -320,6 +342,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 3352,
+   "scattato_72": false,
    "sorgente": "if COMPAT_CHI and len(a) and len(self.perc_chi) >= self.n:"
   },
   {
@@ -331,9 +354,10 @@
    "dove_e_il_ramo": "corpo dell'if",
    "famiglia": "CORTA",
    "op": "Lt",
-   "ramo_di_scorta": "raise SchermaturaSpenta(\"[SCHERMATURA] IL RUN SI FERMA (`PSI-FLASH`, `A9`).\\n  len(psi) .. %d\\n  n ......... %d   (mancano %d valori)\\n  PERCHE': con `psi` piu' corta di `n`, `lambda_nodi` restituiva `LAM` per TUTTA\\n  l",
-   "regola": "GIA' CURATO: il ramo di scorta SOLLEVA",
+   "ramo_di_scorta": "raise SchermaturaSpenta(\"[SCHERMATURA] IL RUN SI FERMA (`PSI-FLASH`, `A9`).\\n  len(psi) .. %d\\n  n ......... %d   (mancano %d valori)\\n  PERCHE': con `psi` piu' corta di `n`, `lambda_nodi` restituiva `LAM` per TUTTA\\n  la rete, cioe' SPEGNEVA LA SCHERMATURA, e il campo saliva di ~1.62x per tutti.\\n  CHE FARE: `psi` va ESTESA a ogni nascita (`_eredita_psi_figli`). Se questo\\n  errore scatta, una strada nuova fa crescere `n` senza estendere `psi` -- e\\n  prima di questa cura quella strada cambiava la fisica IN SILENZIO.\" % (len(self.psi), self.n, self.n - len(self.psi)))",
+   "regola": "GIA' CURATO: il ramo di scorta SOLLEVA (o chiama il controllo che solleva)",
    "riga": 3391,
+   "scattato_72": false,
    "sorgente": "if len(self.psi) < self.n:"
   },
   {
@@ -348,6 +372,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 3461,
+   "scattato_72": false,
    "sorgente": "if self._psi_prec is None or len(self._psi_prec) != self.n:"
   },
   {
@@ -362,6 +387,7 @@
    "ramo_di_scorta": "self.psi.copy()",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 3465,
+   "scattato_72": false,
    "sorgente": "self._psi_prec = self.psi.copy() if len(self.psi) == self.n else np.ones(self.n, complex)"
   },
   {
@@ -376,6 +402,7 @@
    "ramo_di_scorta": "if _ps is _psp or np.array_equal(_ps, _psp):\n    self._ritmo_snap_identico = getattr(self, '_ritmo_snap_identico', 0) + 1",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 3477,
+   "scattato_72": false,
    "sorgente": "if _ps is None or _psp is None or len(_ps) != self.n or len(_psp) != self.n:"
   },
   {
@@ -390,6 +417,7 @@
    "ramo_di_scorta": "if _ps is _psp or np.array_equal(_ps, _psp):\n    self._ritmo_snap_identico = getattr(self, '_ritmo_snap_identico', 0) + 1",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 3477,
+   "scattato_72": false,
    "sorgente": "if _ps is None or _psp is None or len(_ps) != self.n or len(_psp) != self.n:"
   },
   {
@@ -404,6 +432,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 3486,
+   "scattato_72": false,
    "sorgente": "if CAMPO_SPINORIALE and _ps is not None and _psp is not None and len(_ps) == self.n and len(_psp) == self.n:"
   },
   {
@@ -418,6 +447,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 3486,
+   "scattato_72": false,
    "sorgente": "if CAMPO_SPINORIALE and _ps is not None and _psp is not None and len(_ps) == self.n and len(_psp) == self.n:"
   },
   {
@@ -430,8 +460,9 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "self.omega_s = np.vstack([self.omega_s, np.zeros((n - len(self.omega_s), 3))])",
-   "regola": "il ramo di scorta ESTENDE (vstack, zeros)",
+   "regola": "il ramo di scorta ALLUNGA LA CODA (vstack) e RINOMINA la cache, quindi i primi len(x) restano",
    "riga": 3576,
+   "scattato_72": false,
    "sorgente": "if len(self.omega_s) < n:"
   },
   {
@@ -446,6 +477,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "FUORI DAL MANDATO: famiglia LUNGA -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 3578,
+   "scattato_72": false,
    "sorgente": "elif len(self.omega_s) > n:"
   },
   {
@@ -460,6 +492,7 @@
    "ramo_di_scorta": "self.phi_s",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 3581,
+   "scattato_72": false,
    "sorgente": "b0 = self.phi_s if len(self.phi_s) == n else np.zeros(n)"
   },
   {
@@ -472,8 +505,9 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "k = n - len(self._nb)\nnuovi = np.tile([0.0, 0.0, 1.0], (k, 1))\nself._nb = np.vstack([self._nb, nuovi])",
-   "regola": "il ramo di scorta ESTENDE (vstack, tile)",
+   "regola": "il ramo di scorta ALLUNGA LA CODA (vstack) e RINOMINA la cache, quindi i primi len(x) restano",
    "riga": 3583,
+   "scattato_72": false,
    "sorgente": "elif len(self._nb) < n:"
   },
   {
@@ -488,10 +522,11 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "FUORI DAL MANDATO: famiglia LUNGA -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 3587,
+   "scattato_72": false,
    "sorgente": "elif len(self._nb) > n:"
   },
   {
-   "classe": "a",
+   "classe": "d",
    "condizione": "not hasattr(self, 'psi') or len(self.psi) < n",
    "contro": "n",
    "cosa": "self.psi",
@@ -500,8 +535,9 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "self.calcola_psi()",
-   "regola": "la condizione porta anche <<non esiste ancora>> (not hasattr)",
+   "regola": "DA LEGGERE -- **CONDIZIONE FUSA**: la non-esistenza (not hasattr) sta IN OR con la lunghezza. Due casi in un ramo: VA SEPARATA come in `lambda_nodi`",
    "riga": 3600,
+   "scattato_72": false,
    "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < n:"
   },
   {
@@ -513,9 +549,10 @@
    "dove_e_il_ramo": "corpo dell'if",
    "famiglia": "CORTA",
    "op": "Lt",
-   "ramo_di_scorta": "self._xi_esteso = getattr(self, '_xi_esteso', 0) + 1\nself._xi_nuovi = getattr(self, '_xi_nuovi', 0) + max(n - (0 if _xi is None else len(_xi)), 0)\n_base = np.asarray(_xi, float) if _xi is not None else np.zeros((0, 3))\n_",
-   "regola": "il ramo di scorta ESTENDE (zeros)",
+   "ramo_di_scorta": "self._xi_esteso = getattr(self, '_xi_esteso', 0) + 1\nself._xi_nuovi = getattr(self, '_xi_nuovi', 0) + max(n - (0 if _xi is None else len(_xi)), 0)\n_base = np.asarray(_xi, float) if _xi is not None else np.zeros((0, 3))\n_manca = n - len(_base)\n_xi = np.vstack([_base, self.rng.normal(0, 1.0, (_manca, 3))]) if _manca > 0 else _base[:n]",
+   "regola": "il ramo di scorta ALLUNGA LA CODA (vstack) e RINOMINA la cache, quindi i primi len(x) restano",
    "riga": 3620,
+   "scattato_72": true,
    "sorgente": "if _xi is None or len(_xi) < n:"
   },
   {
@@ -530,6 +567,7 @@
    "ramo_di_scorta": "nb_vic = self._nb_prec",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 3651,
+   "scattato_72": false,
    "sorgente": "if not hasattr(self, \"_nb_prec\") or self._nb_prec is None or len(self._nb_prec) != n:"
   },
   {
@@ -541,13 +579,14 @@
    "dove_e_il_ramo": "else dell'if",
    "famiglia": "CORTA",
    "op": "GtE",
-   "ramo_di_scorta": "if CHI_CORE:\n    self._g_chicore_passo_salti = getattr(self, '_g_chicore_passo_salti', 0) + 1\n    self._g_chicore_passo_shape = (len(self.perc_chi), n)\n    self._g_chicore_passo_quando = self._g_chicore_passo_tot\nchi_nod",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "ramo_di_scorta": "if CHI_CORE:\n    self._g_chicore_passo_salti = getattr(self, '_g_chicore_passo_salti', 0) + 1\n    self._g_chicore_passo_shape = (len(self.perc_chi), n)\n    self._g_chicore_passo_quando = self._g_chicore_passo_tot\nchi_nodi = self.perc_chi[:n].astype(float)",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 3680,
+   "scattato_72": false,
    "sorgente": "if CHI_CORE and len(self.perc_chi) >= n:"
   },
   {
-   "classe": "a",
+   "classe": "d",
    "condizione": "not hasattr(self, 'psi') or len(self.psi) < n",
    "contro": "n",
    "cosa": "self.psi",
@@ -556,12 +595,13 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "self.calcola_psi()",
-   "regola": "la condizione porta anche <<non esiste ancora>> (not hasattr)",
+   "regola": "DA LEGGERE -- **CONDIZIONE FUSA**: la non-esistenza (not hasattr) sta IN OR con la lunghezza. Due casi in un ramo: VA SEPARATA come in `lambda_nodi`",
    "riga": 3715,
+   "scattato_72": false,
    "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < n: self.calcola_psi()"
   },
   {
-   "classe": "b",
+   "classe": "d",
    "condizione": "_csp_in is not None and len(_csp_in) >= n",
    "contro": "n",
    "cosa": "_csp_in",
@@ -570,12 +610,13 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "self._cs_in_fallback = getattr(self, '_cs_in_fallback', 0) + 1\n_cs_in = np.full(n, CS_M)",
-   "regola": "il ramo di scorta ESTENDE (full)",
+   "regola": "DA LEGGERE -- **SOSTITUZIONE**: `full(n, ...)` non allunga la coda, SCRIVE TUTTA LA RETE",
    "riga": 3747,
+   "scattato_72": false,
    "sorgente": "if _csp_in is not None and len(_csp_in) >= n:"
   },
   {
-   "classe": "b",
+   "classe": "d",
    "condizione": "psi_snapshot is not None and len(psi_snapshot) >= n",
    "contro": "n",
    "cosa": "psi_snapshot",
@@ -584,12 +625,13 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "if len(self.psi) >= n:\n    rho = np.abs(self.psi[:n]) ** 2\nelse:\n    rho = np.zeros(n)",
-   "regola": "il ramo di scorta ESTENDE (zeros)",
+   "regola": "DA LEGGERE -- **SOSTITUZIONE**: `zeros(n, ...)` non allunga la coda, SCRIVE TUTTA LA RETE",
    "riga": 4084,
+   "scattato_72": false,
    "sorgente": "if psi_snapshot is not None and len(psi_snapshot) >= n:"
   },
   {
-   "classe": "b",
+   "classe": "d",
    "condizione": "len(self.psi) >= n",
    "contro": "n",
    "cosa": "self.psi",
@@ -598,8 +640,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "rho = np.zeros(n)",
-   "regola": "il ramo di scorta ESTENDE (zeros)",
+   "regola": "DA LEGGERE -- **SOSTITUZIONE**: `zeros(n, ...)` non allunga la coda, SCRIVE TUTTA LA RETE",
    "riga": 4086,
+   "scattato_72": false,
    "sorgente": "elif len(self.psi) >= n:"
   },
   {
@@ -612,12 +655,13 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "np.where(np.asarray(self.perc_chi[:n]) >= 0.0, 1.0, -1.0)",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 4138,
+   "scattato_72": false,
    "sorgente": "if (OROLOGIO_SEGNO and hasattr(self, \"perc_chi\") and len(self.perc_chi) >= n) else 1.0)"
   },
   {
-   "classe": "b",
+   "classe": "d",
    "condizione": "_csp2 is not None and len(_csp2) >= n",
    "contro": "n",
    "cosa": "_csp2",
@@ -626,12 +670,43 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "_csn2 = np.full(n, CS_M)",
-   "regola": "il ramo di scorta ESTENDE (full)",
+   "regola": "DA LEGGERE -- **SOSTITUZIONE**: `full(n, ...)` non allunga la coda, SCRIVE TUTTA LA RETE",
    "riga": 4145,
+   "scattato_72": false,
    "sorgente": "if _csp2 is not None and len(_csp2) >= n:"
   },
   {
-   "classe": "a",
+   "classe": "e",
+   "condizione": "(nessuna: il controllo e' UNA CHIAMATA, non un `if`)",
+   "contro": "n",
+   "cosa": "rho_spin",
+   "dentro": "_rho_sorgente",
+   "dove_e_il_ramo": "dentro la guardia",
+   "famiglia": "CORTA",
+   "op": "(guardia)",
+   "ramo_di_scorta": "_ferma_se_cache_corta('rho_spin', len(_rs), n, '_rho_sorgente', \"abs(psi)**2, cioe' UN'ALTRA DENSITA'\")",
+   "regola": "GIA' CURATO: il ramo di scorta SOLLEVA (o chiama il controllo che solleva)",
+   "riga": 4443,
+   "scattato_72": false,
+   "sorgente": "_ferma_se_cache_corta(\"rho_spin\", len(_rs), n, \"_rho_sorgente\","
+  },
+  {
+   "classe": "e",
+   "condizione": "(nessuna: il controllo e' UNA CHIAMATA, non un `if`)",
+   "contro": "n",
+   "cosa": "psi_spin",
+   "dentro": "_nb_grav",
+   "dove_e_il_ramo": "dentro la guardia",
+   "famiglia": "CORTA",
+   "op": "(guardia)",
+   "ramo_di_scorta": "_ferma_se_cache_corta('psi_spin', len(_ps), n, '_nb_grav', \"self._nb, cioe' UN'ALTRA DIREZIONE di Bloch\")",
+   "regola": "GIA' CURATO: il ramo di scorta SOLLEVA (o chiama il controllo che solleva)",
+   "riga": 4462,
+   "scattato_72": false,
+   "sorgente": "_ferma_se_cache_corta(\"psi_spin\", len(_ps), n, \"_nb_grav\","
+  },
+  {
+   "classe": "e",
    "condizione": "_ps is not None and len(_ps) >= n",
    "contro": "n",
    "cosa": "_ps",
@@ -640,8 +715,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "la condizione porta anche <<non esiste ancora>> (is not None)",
+   "regola": "GIA' CURATO: nella stessa funzione c'e' la guardia che solleva, quindi questo confronto e' RIDONDANTE",
    "riga": 4464,
+   "scattato_72": false,
    "sorgente": "if _ps is not None and len(_ps) >= n:"
   },
   {
@@ -656,10 +732,11 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 5264,
+   "scattato_72": false,
    "sorgente": "if nbr is None or len(nbr) != n:"
   },
   {
-   "classe": "b",
+   "classe": "d",
    "condizione": "r_loc is None or len(r_loc) < n",
    "contro": "n",
    "cosa": "r_loc",
@@ -668,12 +745,13 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "dt_n = np.full(n, DT)",
-   "regola": "il ramo di scorta ESTENDE (full)",
+   "regola": "DA LEGGERE -- **SOSTITUZIONE**: `full(n, ...)` non allunga la coda, SCRIVE TUTTA LA RETE",
    "riga": 5280,
+   "scattato_72": false,
    "sorgente": "if r_loc is None or len(r_loc) < n:"
   },
   {
-   "classe": "b",
+   "classe": "d",
    "condizione": "r is None or len(r) < n",
    "contro": "n",
    "cosa": "r",
@@ -682,12 +760,13 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "self._tum_r_salti = getattr(self, '_tum_r_salti', 0) + 1\nself._tum_r_forma = (-1 if r is None else len(r), n)\nself._tum_r_quando = self._tum_r_tot\nreturn np.ones(n)",
-   "regola": "il ramo di scorta ESTENDE (ones)",
+   "regola": "DA LEGGERE -- **SOSTITUZIONE**: `ones(n, ...)` non allunga la coda, SCRIVE TUTTA LA RETE",
    "riga": 5344,
+   "scattato_72": false,
    "sorgente": "if r is None or len(r) < n:"
   },
   {
-   "classe": "b",
+   "classe": "d",
    "condizione": "csn is None or len(csn) < self.n",
    "contro": "self.n",
    "cosa": "csn",
@@ -696,12 +775,13 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "self._tum_cs_salti = getattr(self, '_tum_cs_salti', 0) + 1\nself._tum_cs_forma = (-1 if csn is None else len(csn), self.n)\nself._tum_cs_quando = self._tum_cs_tot\ncs_arco = np.full(n_archi, CS_M, dtype=float)",
-   "regola": "il ramo di scorta ESTENDE (full)",
+   "regola": "DA LEGGERE -- **SOSTITUZIONE**: `full(n, ...)` non allunga la coda, SCRIVE TUTTA LA RETE",
    "riga": 5384,
+   "scattato_72": false,
    "sorgente": "if csn is None or len(csn) < self.n:"
   },
   {
-   "classe": "b",
+   "classe": "d",
    "condizione": "csp is not None and len(csp) >= n",
    "contro": "n",
    "cosa": "csp",
@@ -710,12 +790,13 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "self._cs_fallback = getattr(self, '_cs_fallback', 0) + 1\nself._cs_fallback_ultimo = (int(n), int(len(csp)) if csp is not None else -1)\ncs_nodo = np.full(n, CS_M)",
-   "regola": "il ramo di scorta ESTENDE (full)",
+   "regola": "DA LEGGERE -- **SOSTITUZIONE**: `full(n, ...)` non allunga la coda, SCRIVE TUTTA LA RETE",
    "riga": 5454,
+   "scattato_72": false,
    "sorgente": "if csp is not None and len(csp) >= n:"
   },
   {
-   "classe": "a",
+   "classe": "d",
    "condizione": "_ps is not None and len(_ps) >= n",
    "contro": "n",
    "cosa": "_ps",
@@ -724,8 +805,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "la condizione porta anche <<non esiste ancora>> (is not None)",
+   "regola": "DA LEGGERE -- **CONDIZIONE FUSA**: la non-esistenza (is not None) sta IN OR con la lunghezza. Due casi in un ramo: VA SEPARATA come in `lambda_nodi`",
    "riga": 5477,
+   "scattato_72": false,
    "sorgente": "if _ps is not None and len(_ps) >= n:"
   },
   {
@@ -740,6 +822,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 5541,
+   "scattato_72": false,
    "sorgente": "and len(getattr(self, \"psi_spin\", [])) == self.n):"
   },
   {
@@ -754,6 +837,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 5545,
+   "scattato_72": false,
    "sorgente": "if CAMPO_SPINORIALE and hasattr(self, \"psi_spin\") and len(getattr(self, \"psi_spin\", [])) == self.n:"
   },
   {
@@ -766,8 +850,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5587,
+   "scattato_72": false,
    "sorgente": "if TEMPO_SEGNO and not (not np.isscalar(dt_n) and len(self.perc_chi) >= self.n"
   },
   {
@@ -780,8 +865,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5588,
+   "scattato_72": false,
    "sorgente": "and len(self.psi) >= self.n):"
   },
   {
@@ -794,8 +880,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5592,
+   "scattato_72": false,
    "sorgente": "if TEMPO_SEGNO and not np.isscalar(dt_n) and len(self.perc_chi) >= self.n and len(self.psi) >= self.n:"
   },
   {
@@ -808,8 +895,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5592,
+   "scattato_72": false,
    "sorgente": "if TEMPO_SEGNO and not np.isscalar(dt_n) and len(self.perc_chi) >= self.n and len(self.psi) >= self.n:"
   },
   {
@@ -821,9 +909,10 @@
    "dove_e_il_ramo": "else dell'if",
    "famiglia": "CORTA",
    "op": "GtE",
-   "ramo_di_scorta": "if VERSO_CHI and len(self.perc_chi) >= self.n:\n    _pc_vc = self.perc_geom if CHI_COOP else self.perc_chi\n    twn = np.pi * 0.5 * (_pc_vc[i] - _pc_vc[j]) / PHI_CRIT\nelif not (CHI_CORE and len(self.perc_chi) >= self.n):\n ",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "ramo_di_scorta": "if VERSO_CHI and len(self.perc_chi) >= self.n:\n    _pc_vc = self.perc_geom if CHI_COOP else self.perc_chi\n    twn = np.pi * 0.5 * (_pc_vc[i] - _pc_vc[j]) / PHI_CRIT\nelif not (CHI_CORE and len(self.perc_chi) >= self.n):\n    twn = _tw_t / PHI_CRIT",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5715,
+   "scattato_72": false,
    "sorgente": "if CHI_CORE and len(self.perc_chi) >= self.n:"
   },
   {
@@ -836,8 +925,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "if not (CHI_CORE and len(self.perc_chi) >= self.n):\n    twn = _tw_t / PHI_CRIT",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5722,
+   "scattato_72": false,
    "sorgente": "elif VERSO_CHI and len(self.perc_chi) >= self.n:"
   },
   {
@@ -850,8 +940,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5730,
+   "scattato_72": false,
    "sorgente": "elif not (CHI_CORE and len(self.perc_chi) >= self.n):"
   },
   {
@@ -864,8 +955,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "float(np.median(self.d0[:self.n]))",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5750,
+   "scattato_72": false,
    "sorgente": "P_eq = float(np.median(self.d0[:self.n])) if self.n > 0 and len(self.d0) >= self.n else 1.0"
   },
   {
@@ -878,8 +970,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "self.psi",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5754,
+   "scattato_72": false,
    "sorgente": "_psi_ct = (self.psi if len(self.psi) >= self.n else None)"
   },
   {
@@ -892,8 +985,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "self.phivel[:self.n]",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5799,
+   "scattato_72": false,
    "sorgente": "pv = self.phivel[:self.n] if len(self.phivel) >= self.n else np.zeros(self.n)"
   },
   {
@@ -908,6 +1002,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 5838,
+   "scattato_72": false,
    "sorgente": "if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) != self.n:"
   },
   {
@@ -922,6 +1017,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 5842,
+   "scattato_72": false,
    "sorgente": "if SPINORE_VIVO and SPINORE and self.n > 2 and len(self.phi_s) == self.n:"
   },
   {
@@ -934,8 +1030,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "_ttw = _tau_tw_locale(self) if TAU_LOCALI else TAU_TW\nself.tw += self._w4(dph - self.twp) - dt_e * self.tw / _ttw\nself.twp = dph",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5852,
+   "scattato_72": false,
    "sorgente": "if TORS_4PI and len(self.perc_chi) >= self.n:"
   },
   {
@@ -950,6 +1047,7 @@
    "ramo_di_scorta": "getattr(self, _cache_tors)",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 5859,
+   "scattato_72": false,
    "sorgente": "len(getattr(self, _cache_tors, [])) == self.n"
   },
   {
@@ -962,8 +1060,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "self._deg[:self.n]",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5868,
+   "scattato_72": false,
    "sorgente": "_twn = _twn / np.maximum(self._deg[:self.n] if len(self._deg) >= self.n else 1.0, 1.0)"
   },
   {
@@ -976,8 +1075,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5885,
+   "scattato_72": false,
    "sorgente": "if CHI_BASC and (CHI_COOP or not CHI_DA_SPINORE) and len(self.perc_chi) >= self.n and len(self.tw):"
   },
   {
@@ -990,8 +1090,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5911,
+   "scattato_72": false,
    "sorgente": "len(self.perc_chi) >= self.n"
   },
   {
@@ -1004,8 +1105,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5912,
+   "scattato_72": false,
    "sorgente": "and len(getattr(self, \"_psi_spinor\", [])) >= self.n):"
   },
   {
@@ -1018,8 +1120,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5917,
+   "scattato_72": false,
    "sorgente": "if (_chi_da_psi and SPINORE_CORRETTO and len(self.perc_chi) >= self.n"
   },
   {
@@ -1032,8 +1135,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 5918,
+   "scattato_72": false,
    "sorgente": "and len(getattr(self, \"_psi_spinor\", [])) >= self.n):"
   },
   {
@@ -1046,8 +1150,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "np.abs(_pv_src[:self.n])",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 6000,
+   "scattato_72": false,
    "sorgente": "r_nodo = np.abs(_pv_src[:self.n]) if len(_pv_src) >= self.n else np.ones(self.n)"
   },
   {
@@ -1060,12 +1165,13 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "if TRACCIA_D0:\n    _tr_pre = self.d0.copy()\nself.d0 += self._sd0(dt_e * (self.d - self.d0) / TAU_P)\nif TRACCIA_D0:\n    self._traccia_d0('S04_rilass_TAU_P', _tr_pre)",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 6225,
+   "scattato_72": false,
    "sorgente": "_I_ok = hasattr(self, \"psi\") and len(self.psi) >= self.n"
   },
   {
-   "classe": "a",
+   "classe": "d",
    "condizione": "intensita is None and len(self.psi) >= n",
    "contro": "n",
    "cosa": "self.psi",
@@ -1074,12 +1180,13 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "np.abs(self.psi[:n]) ** 2",
-   "regola": "la condizione porta anche <<non esiste ancora>> (is None)",
+   "regola": "DA LEGGERE -- **CONDIZIONE FUSA**: la non-esistenza (is None) sta IN OR con la lunghezza. Due casi in un ramo: VA SEPARATA come in `lambda_nodi`",
    "riga": 6960,
+   "scattato_72": false,
    "sorgente": "I = (np.abs(self.psi[:n]) ** 2 if intensita is None and len(self.psi) >= n"
   },
   {
-   "classe": "a",
+   "classe": "d",
    "condizione": "not hasattr(self, 'psi') or len(self.psi) < n",
    "contro": "n",
    "cosa": "self.psi",
@@ -1088,8 +1195,9 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "self.calcola_psi()",
-   "regola": "la condizione porta anche <<non esiste ancora>> (not hasattr)",
+   "regola": "DA LEGGERE -- **CONDIZIONE FUSA**: la non-esistenza (not hasattr) sta IN OR con la lunghezza. Due casi in un ramo: VA SEPARATA come in `lambda_nodi`",
    "riga": 7002,
+   "scattato_72": false,
    "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < n:"
   },
   {
@@ -1102,12 +1210,13 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "self.mem_mot = np.vstack([self.mem_mot, np.zeros((n - len(self.mem_mot), 3))])",
-   "regola": "il ramo di scorta ESTENDE (vstack, zeros)",
+   "regola": "il ramo di scorta ALLUNGA LA CODA (vstack) e RINOMINA la cache, quindi i primi len(x) restano",
    "riga": 7009,
+   "scattato_72": false,
    "sorgente": "if len(self.mem_mot) < n:"
   },
   {
-   "classe": "b",
+   "classe": "d",
    "condizione": "not hasattr(self, '_nb') or self._nb is None or len(self._nb) < self.n",
    "contro": "self.n",
    "cosa": "self._nb",
@@ -1116,8 +1225,9 @@
    "famiglia": "CORTA",
    "op": "Lt",
    "ramo_di_scorta": "b0 = self.phi_s if len(self.phi_s) == self.n else np.zeros(self.n)\nself._nb = np.stack([np.sin(b0), np.zeros(self.n), np.cos(b0)], axis=1)",
-   "regola": "il ramo di scorta ESTENDE (zeros)",
+   "regola": "DA LEGGERE -- **SOSTITUZIONE**: `zeros(n, ...)` non allunga la coda, SCRIVE TUTTA LA RETE",
    "riga": 7115,
+   "scattato_72": false,
    "sorgente": "if not hasattr(self, \"_nb\") or self._nb is None or len(self._nb) < self.n:"
   },
   {
@@ -1132,10 +1242,11 @@
    "ramo_di_scorta": "self.phi_s",
    "regola": "FUORI DAL MANDATO: famiglia ALTRO -- `len(x) > n` e' un TRONCAMENTO, e `==`/`!=` non e' ne' l'uno ne' l'altro",
    "riga": 7116,
+   "scattato_72": false,
    "sorgente": "b0 = self.phi_s if len(self.phi_s) == self.n else np.zeros(self.n)"
   },
   {
-   "classe": "a",
+   "classe": "d",
    "condizione": "SPINORE and (not (self._nb is not None and len(self._nb) >= self.n))",
    "contro": "self.n",
    "cosa": "self._nb",
@@ -1144,12 +1255,13 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "la condizione porta anche <<non esiste ancora>> (is not None)",
+   "regola": "DA LEGGERE -- **CONDIZIONE FUSA**: la non-esistenza (is not None) sta IN OR con la lunghezza. Due casi in un ramo: VA SEPARATA come in `lambda_nodi`",
    "riga": 7129,
+   "scattato_72": false,
    "sorgente": "if SPINORE and not (self._nb is not None and len(self._nb) >= self.n):"
   },
   {
-   "classe": "a",
+   "classe": "d",
    "condizione": "SPINORE and self._nb is not None and (len(self._nb) >= self.n)",
    "contro": "self.n",
    "cosa": "self._nb",
@@ -1158,12 +1270,13 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
-   "regola": "la condizione porta anche <<non esiste ancora>> (is not None)",
+   "regola": "DA LEGGERE -- **CONDIZIONE FUSA**: la non-esistenza (is not None) sta IN OR con la lunghezza. Due casi in un ramo: VA SEPARATA come in `lambda_nodi`",
    "riga": 7133,
+   "scattato_72": false,
    "sorgente": "if SPINORE and self._nb is not None and len(self._nb) >= self.n:"
   },
   {
-   "classe": "a",
+   "classe": "d",
    "condizione": "LS_AZIM and self._nb is not None and (len(self._nb) >= self.n)",
    "contro": "self.n",
    "cosa": "self._nb",
@@ -1172,12 +1285,13 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "tangenz = np.abs(grav) * sin2 * np.sign(circ_arc)",
-   "regola": "la condizione porta anche <<non esiste ancora>> (is not None)",
+   "regola": "DA LEGGERE -- **CONDIZIONE FUSA**: la non-esistenza (is not None) sta IN OR con la lunghezza. Due casi in un ramo: VA SEPARATA come in `lambda_nodi`",
    "riga": 7186,
+   "scattato_72": false,
    "sorgente": "if LS_AZIM and self._nb is not None and len(self._nb) >= self.n:"
   },
   {
-   "classe": "b",
+   "classe": "d",
    "condizione": "_csn is not None and len(_csn) >= self.n",
    "contro": "self.n",
    "cosa": "_csn",
@@ -1186,8 +1300,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "_csa = np.full(int(np.sum(mask)), float(CS_M))\nself._g_cct_salti = getattr(self, '_g_cct_salti', 0) + 1",
-   "regola": "il ramo di scorta ESTENDE (full)",
+   "regola": "DA LEGGERE -- **SOSTITUZIONE**: `full(n, ...)` non allunga la coda, SCRIVE TUTTA LA RETE",
    "riga": 7328,
+   "scattato_72": false,
    "sorgente": "if _csn is not None and len(_csn) >= self.n:"
   },
   {
@@ -1200,8 +1315,9 @@
    "famiglia": "CORTA",
    "op": "GtE",
    "ramo_di_scorta": "np.abs(self.psi[:n]) ** 2",
-   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende",
+   "regola": "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda",
    "riga": 7394,
+   "scattato_72": false,
    "sorgente": "I_nodi = np.abs(self.psi[:n]) ** 2 if hasattr(self, \"psi\") and len(self.psi) >= n else np.ones(n)"
   },
   {
@@ -1216,6 +1332,7 @@
    "ramo_di_scorta": "Ivis = np.zeros(n)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 8068,
+   "scattato_72": false,
    "sorgente": "if hasattr(net, \"psi\") and len(net.psi) >= n:"
   },
   {
@@ -1230,6 +1347,7 @@
    "ramo_di_scorta": "net.perc_chi[:n]",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 8073,
+   "scattato_72": false,
    "sorgente": "chi = (net.perc_chi[:n] if hasattr(net, \"perc_chi\") and len(net.perc_chi) >= n"
   },
   {
@@ -1244,6 +1362,7 @@
    "ramo_di_scorta": "net.d[:n]",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 9998,
+   "scattato_72": false,
    "sorgente": "cols['d_min'], cols['d_max'], cols['d_mean'], _ = _stat(net.d[:n] if len(net.d) >= n else net.d)"
   },
   {
@@ -1258,6 +1377,7 @@
    "ramo_di_scorta": "net.d0[:n]",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 9999,
+   "scattato_72": false,
    "sorgente": "cols['d0_min'], cols['d0_max'], cols['d0_mean'], _ = _stat(net.d0[:n] if len(net.d0) >= n else net.d0)"
   },
   {
@@ -1272,6 +1392,7 @@
    "ramo_di_scorta": "net.eta[:n]",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 10009,
+   "scattato_72": false,
    "sorgente": "_eta_v = net.eta[:n] if len(net.eta) >= n else net.eta"
   },
   {
@@ -1286,6 +1407,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 10052,
+   "scattato_72": false,
    "sorgente": "if _nb_g is not None and len(_nb_g) >= n and n > 0:"
   },
   {
@@ -1300,6 +1422,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 10069,
+   "scattato_72": false,
    "sorgente": "if (_nb_g is not None and _psp is not None and len(_psp) >= n and len(_nb_g) >= n and n > 0 and len(net.i)):"
   },
   {
@@ -1314,6 +1437,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 10069,
+   "scattato_72": false,
    "sorgente": "if (_nb_g is not None and _psp is not None and len(_psp) >= n and len(_nb_g) >= n and n > 0 and len(net.i)):"
   },
   {
@@ -1328,6 +1452,7 @@
    "ramo_di_scorta": "np.sign(np.asarray(net.perc_chi[:n]))",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 10088,
+   "scattato_72": false,
    "sorgente": "_pcm = np.sign(np.asarray(net.perc_chi[:n])) if len(net.perc_chi) >= n else np.ones(n)"
   },
   {
@@ -1342,6 +1467,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 10203,
+   "scattato_72": false,
    "sorgente": "if _nbm is not None and len(_nbm) >= n and nuc.sum() >= 3:"
   },
   {
@@ -1356,6 +1482,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 10210,
+   "scattato_72": false,
    "sorgente": "if _omm is not None and len(_omm) >= n and nuc.sum() >= 3:"
   },
   {
@@ -1370,6 +1497,7 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 10457,
+   "scattato_72": false,
    "sorgente": "if len(net.phivel) >= n and len(ii):"
   },
   {
@@ -1384,15 +1512,15 @@
    "ramo_di_scorta": "(nessun else: si continua dopo l'if)",
    "regola": "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo",
    "riga": 10474,
+   "scattato_72": false,
    "sorgente": "if len(net.perc_chi) >= n and n > 10:"
   }
  ],
  "conta": {
-  "a": 11,
-  "b": 15,
+  "b": 5,
   "c": 30,
-  "d": 23,
-  "e": 1,
+  "d": 43,
+  "e": 4,
   "x": 19
  },
  "funzioni_con_confronti": [
@@ -1406,6 +1534,7 @@
   "_passo_spinoriale",
   "_r_nodo_mitosi",
   "_render_vista_rete_sola",
+  "_rho_sorgente",
   "_riallinea_tracking",
   "_righe_stato_universo",
   "_tau_arco_causale",

@@ -137,7 +137,11 @@ def _confronti():
                     dove_ramo = ("corpo dell'if" if _corta_se_vero
                                  else ("else dell'if" if su.orelse
                                        else "FUORI dall'if (nessun else)"))
-                    ramo = (NL.join(ast.unparse(x) for x in corpo)[:220] if corpo
+                    # ⚠ IL CORPO INTERO PER LE REGOLE, troncato SOLO per la tabella: col
+                    #   taglio a 220 caratteri il `vstack` di `:3620` cadeva FUORI, e il
+                    #   sito finiva fra le SOSTITUZIONI mentre ALLUNGA la coda.
+                    #   ### Una regola che legge un testo TRONCATO giudica cio' che non vede.
+                    ramo = (NL.join(ast.unparse(x) for x in corpo) if corpo
                             else "(nessun else: si continua dopo l'if)")
                     break
                 if isinstance(su, ast.IfExp):
@@ -154,7 +158,36 @@ def _confronti():
                           "famiglia": fam, "dove_e_il_ramo": dove_ramo or "(?)",
                           "sorgente": RIG[nd.lineno - 1].strip()[:150]})
             break
+    # ⚠⚠ E I SITI GIA' CURATI SPARISCONO DALLA SCANSIONE, e il guardiano l'ha notato:
+    #   `_rho_sorgente` NON compariva in tabella. La ragione e' che la cura ha SPOSTATO il
+    #   confronto DENTRO `_ferma_se_cache_corta`, dove non e' piu' un `len(...)` contro `n`:
+    #   ### CURARE UN SITO LO RENDEVA INVISIBILE ALLO STRUMENTO CHE LI CONTA.
+    #   Quindi si cercano ANCHE le chiamate ai controlli che sollevano, e sono classe (e).
+    #   ### E questo e' un requisito per il PRESIDIO del punto 3: deve vedere ENTRAMBE le
+    #   forme, il confronto in chiaro e la chiamata all'helper.
+    # ⚠ SOLO `_ferma_se_cache_corta`: `_ferma_se_oltre_max_nodi` guarda il NUMERO DI NODI
+    #   contro `MAX_NODI`, che e' un'ALTRA FAMIGLIA -- non una cache piu' corta di `n`.
+    #   Contarlo qui gonfiava le (e) da 3 a 5.
+    GUARDIE = ("_ferma_se_cache_corta",)
+    for nd in ast.walk(ARB):
+        if not (isinstance(nd, ast.Call) and isinstance(nd.func, ast.Name)
+                and nd.func.id in GUARDIE):
+            continue
+        _arg = "?"
+        for a in nd.args:
+            if isinstance(a, ast.Constant) and isinstance(a.value, str):
+                _arg = a.value
+                break
+        fuori.append({"riga": nd.lineno, "dentro": _fn_di(nd.lineno), "cosa": _arg,
+                      "contro": "n", "op": "(guardia)", "condizione": "(nessuna: il"
+                      " controllo e' UNA CHIAMATA, non un `if`)",
+                      "ramo_di_scorta": ast.unparse(nd)[:200],
+                      "famiglia": "CORTA", "dove_e_il_ramo": "dentro la guardia",
+                      "sorgente": RIG[nd.lineno - 1].strip()[:150]})
     return sorted(fuori, key=lambda x: x["riga"])
+
+
+COPERTE = set()
 
 
 def classifica(v, perimetro):
@@ -162,20 +195,46 @@ def classifica(v, perimetro):
     if v["famiglia"] != "CORTA":
         return "x", ("FUORI DAL MANDATO: famiglia %s -- `len(x) > n` e' un TRONCAMENTO, e "
                      "`==`/`!=` non e' ne' l'uno ne' l'altro" % v["famiglia"])
-    if "raise " in v["ramo_di_scorta"]:
-        return "e", "GIA' CURATO: il ramo di scorta SOLLEVA"
+    r = v["ramo_di_scorta"]
+    if "raise " in r or "_ferma_se_cache_corta" in r:
+        return "e", "GIA' CURATO: il ramo di scorta SOLLEVA (o chiama il controllo che solleva)"
+    # ⚠ E UN CONFRONTO NELLA STESSA FUNZIONE DI UNA GUARDIA E' GIA' COPERTO: in `_nb_grav`
+    #   il `len(_ps) >= n` e' RIDONDANTE, perche' la guardia sopra ha gia' sollevato se la
+    #   cache era corta. Senza questa regola lo stesso sito compariva DUE VOLTE, una in (e)
+    #   e una in (d).
+    if v["dentro"] in COPERTE:
+        return "e", ("GIA' CURATO: nella stessa funzione c'e' la guardia che solleva, quindi"
+                     " questo confronto e' RIDONDANTE")
     if v["dentro"] not in perimetro:
         return "c", "NON raggiungibile dalle cinque leggi ne' dalle fasi del passo"
-    r = v["ramo_di_scorta"]
-    if any(("." + e + "(") in r or (" " + e + "(") in r or r.startswith(e + "(")
-           for e in ESTENDE):
-        return "b", "il ramo di scorta ESTENDE (%s)" % ", ".join(
-            e for e in ESTENDE if ("." + e + "(") in r or (" " + e + "(") in r
-            or r.startswith(e + "("))
+    # ⚠⚠ (b) CORRETTA (rilievo del guardiano, 2026-09-28): **`np.full(n, ...)`, `zeros(n)`,
+    #   `ones(n)` NON ESTENDONO LA CODA: SOSTITUISCONO IL VALORE DI TUTTA LA RETE**, e sono la
+    #   stessa famiglia del flash. La mia prima regola li contava come <<estende>> perche'
+    #   guardava solo il NOME della chiamata: ### cosi' la regola NASCONDEVA i difetti cercati.
+    #   ### (b) VALE SOLO SE SI ALLUNGA LA CODA lasciando intatti i primi `len(x)`, e la firma di
+    #   quello e' che il ramo di scorta **rinomina la cache stessa** dentro l'estensione
+    #   (`concatenate([x, ...])`, `vstack([x, ...])`).
+    ALLUNGA = ("concatenate", "vstack", "hstack", "append", "pad", "resize")
+    _usate = [e for e in ALLUNGA if ("." + e + "(") in r or (" " + e + "(") in r
+              or r.startswith(e + "(")]
+    _tiene_testa = _usate and (v["cosa"] in r or (v["cosa"].split(".")[-1] in r))
+    if _tiene_testa:
+        return "b", ("il ramo di scorta ALLUNGA LA CODA (%s) e RINOMINA la cache, quindi i primi "
+                     "len(x) restano" % ", ".join(_usate))
+    _sostituisce = [e for e in ("full", "zeros", "ones", "empty") if (e + "(") in r]
+    if _sostituisce:
+        return "d", ("DA LEGGERE -- **SOSTITUZIONE**: `%s(n, ...)` non allunga la coda, SCRIVE "
+                     "TUTTA LA RETE" % _sostituisce[0])
+    # ⚠⚠ (a) CORRETTA: la regola <<c'e' anche `not hasattr` / `is None`>> RIPETEVA L'ERRORE di
+    #   `e3fda4b`. Una condizione che mette **la non-esistenza IN OR con la lunghezza** non e'
+    #   un'inizializzazione: e' ### **DUE CASI DIVERSI IN UN SOLO RAMO** -- e il secondo e' il
+    #   ricalcolo a meta' passo, cioe' il flash. ### VA SEPARATA, come in `lambda_nodi`.
+    #   **Quindi (a) NON si assegna piu' a macchina:** si assegna LEGGENDO.
     if any(x in v["condizione"] for x in NONESISTE):
-        return "a", "la condizione porta anche <<non esiste ancora>> (%s)" % ", ".join(
-            x for x in NONESISTE if x in v["condizione"])
-    return "d", "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON estende"
+        return "d", ("DA LEGGERE -- **CONDIZIONE FUSA**: la non-esistenza (%s) sta IN OR con la "
+                     "lunghezza. Due casi in un ramo: VA SEPARATA come in `lambda_nodi`"
+                     % ", ".join(x for x in NONESISTE if x in v["condizione"]))
+    return "d", "DA LEGGERE: nel perimetro della fisica, e il ramo di scorta NON allunga la coda"
 
 
 def principale():
@@ -183,8 +242,23 @@ def principale():
     leggi = [n for _t, n in _passo.ordine()]
     fasi = ["apri", "chiudi", "verifica_invarianti"]
     perimetro = raggiungibili(leggi + fasi)
+    # ---- IL GIUNTO COL RUNTIME: e' MAI SCATTATO nei 72 passi della scena grande? ----
+    #   Si legge il referto della sonda (`_ripieghi_len_n.json`), che ha girato sullo STESSO
+    #   blob: quindi i numeri di riga combaciano. ### Senza questo, la tabella dice che un
+    #   sito POTREBBE mordere e non dice se ha morso.
+    RT = os.path.join(_QUI, "_ripieghi_len_n.json")
+    scattate, blob_rt = None, None
+    if os.path.isfile(RT):
+        _d = json.load(io.open(RT, encoding="utf-8"))
+        scattate = {(x["riga"], x["cosa"]) for x in _d.get("runtime_corte", [])}
+        blob_rt = _d.get("passo_nascita")
+    COPERTE.update(v["dentro"] for v in conf if v["op"] == "(guardia)")
     for v in conf:
         v["classe"], v["regola"] = classifica(v, perimetro)
+        if scattate is None:
+            v["scattato_72"] = None
+        else:
+            v["scattato_72"] = bool(any(k[0] == v["riga"] for k in scattate))
     conta = {}
     for v in conf:
         conta[v["classe"]] = conta.get(v["classe"], 0) + 1
@@ -198,6 +272,14 @@ def principale():
                     ("x", "FUORI DAL MANDATO (troncamento, oppure ==/!=)"),
                     ("d", "DA LEGGERE (candidati a sostituzione di legge)")):
         print("  (%s) %-46s %d" % (k, nome, conta.get(k, 0)))
+    print("")
+    # ⚠ RIGHE E SITI NON SONO LA STESSA COSA, e il guardiano l'ha chiesto sui SITI:
+    #   `_nb_grav` compare DUE VOLTE in (e) -- la guardia e il confronto ormai ridondante --
+    #   quindi le (e) sono 4 RIGHE ma 3 SITI. Si stampano entrambi i numeri.
+    print("  %-4s %-8s %s" % ("cl.", "righe", "SITI DISTINTI (funzione)"))
+    for k in ("a", "b", "c", "e", "x", "d"):
+        q = [v for v in conf if v["classe"] == k]
+        print("  (%s)  %-8d %d" % (k, len(q), len({v["dentro"] for v in q})))
     print("")
     print("  della famiglia CORTA (quella del mandato): %d su %d"
           % (sum(1 for v in conf if v["famiglia"] == "CORTA"), len(conf)))

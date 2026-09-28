@@ -6419,3 +6419,44 @@ lettura dei 23 è il passo successivo — da lì usciranno i `(d)` veri.
 **non** che estenda *i soli nuovi senza toccare gli esistenti* — quella metà del criterio resta da
 leggere; e i **19** della classe `(x)` sono **fuori dal mandato, non innocenti**: un troncamento
 silenzioso è un altro difetto, di un'altra famiglia.
+
+---
+
+# ✗ **Due mie regole automatiche NASCONDEVANO i difetti cercati** *(2026-09-28)*
+
+**Rilievi del guardiano, tutti e tre giusti.** ### **Nessun codice di fisica.**
+
+| | il rilievo | l'effetto |
+|---|---|---|
+| **①** | `(b)` contava come *«estende»* anche `np.full(n,…)`, `zeros(n)`, `ones(n)` | ### **quelli non allungano la coda: SOSTITUISCONO il valore di TUTTA la rete.** Ora `(b)` sono **esattamente i cinque** che hai indicato |
+| **②** | `(a)` usava *«c'è anche `not hasattr`/`is None`»* | ### **ripeteva l'errore di `e3fda4b`**: la non-esistenza **in OR** con la lunghezza non è inizializzazione, sono **due casi in un ramo**. ### **Ora `(a)` è ZERO: non si assegna più a macchina** |
+| **③** | le `(e)` erano 1 e devono essere 3 | ### **e la ragione è un buco che vale per il presidio del punto ③:** la cura ha spostato il confronto **dentro `_ferma_se_cache_corta`**, dove non è più un `len(…)` contro `n` — ### **curare un sito lo rendeva INVISIBILE allo strumento che li conta** |
+
+**E un quarto difetto, trovato da me:** il corpo del ramo di scorta era **troncato a 220 caratteri
+anche per le REGOLE**, così il `vstack` di `:3620` cadeva fuori e il sito finiva fra le sostituzioni
+mentre **allunga** la coda. ### **Una regola che legge un testo troncato giudica ciò che non vede.**
+
+# 📖 **I 43 `(d)` letti a mano: quattro famiglie**
+
+| | famiglia | siti | |
+|---|---|---|---|
+| **①** | ### **ricalcolo a metà passo** `len(psi) < n → calcola_psi()` | **4** | tocca **tutti** i nodi: ### **è `lambda_nodi` prima della cura** |
+| **②** | ### **sostituzione di un valore a TUTTA la rete** | **9** | `cs` dinamica spenta · ### **tempo proprio spento** (`dt_n = full(n, DT)`) · **ritmo a uno** · **densità a zero** · Bloch ricostruito |
+| **③** | usa la cache così com'è → **array più corto di `n`** | **8** | ### **non so cosa succede a valle: serve una misura, e non l'ho fatta** |
+| **④** | ### **solo un contatore, e poi SI SALTA IL BLOCCO** | ### **22** | ### **invisibile alla regola automatica per costruzione** |
+
+> ### 📌 **La ④ è la maggioranza, e la mia regola non poteva vederla:** guardava **il valore
+> restituito**, e lì il ramo di scorta **non scrive niente** — l'effetto va letto su ### **ciò che NON
+> viene fatto**, cioè sul blocco che salta.
+>
+> ### ⚠ **E tre della famiglia ② non hanno nemmeno un CONTATORE** *(`:4145`, `:4084`, `:4086`)*: **se
+> scattassero, non lo saprebbe nessuno.**
+
+## ✅ Una cosa **generata** che vale per tutti e 43
+
+### **Nessuno è scattato nei 72 passi della scena grande** *(giunto col referto della sonda, stesso
+blob)*. ### ⚠ **Ma «mai scattato» non vuol dire «innocuo»:** `lambda_nodi` scattava **una volta su 44
+passi**, e quella volta bastava a gonfiare il campo di tutta la rete del **62 %**.
+
+**Propongo e non faccio:** ① stessa cura di `lambda_nodi` · ② stessa cura, **e prima un contatore dove
+manca** · ③ **prima una misura** · ④ lettura uno per uno del blocco che salta, **un lavoro a sé**.
