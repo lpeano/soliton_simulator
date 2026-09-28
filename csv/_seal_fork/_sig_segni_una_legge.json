@@ -1,0 +1,74 @@
+{
+ "argv": [
+  "--test",
+  "MASSE-COERENTI",
+  "--nmasse",
+  "3",
+  "--sep",
+  "6.1158",
+  "--giri",
+  "0",
+  "--campo-spinoriale",
+  "--spinore-vivo",
+  "--spinore-corretto",
+  "--chi-core",
+  "--calore-scal",
+  "--deparam-orologio",
+  "--verlet",
+  "--fork-su2",
+  "--fork-su2-mem",
+  "--cs-dinamico",
+  "--tau-luce",
+  "--rumore-colorato",
+  "--pav-com",
+  "--guscio-morbido",
+  "--zeta-vir",
+  "--ritmo-wrap-2pi",
+  "--tempo-unico-mitosi",
+  "--semina-lam",
+  "--semina-matura",
+  "--mitosi-2lam",
+  "--pozzo-d",
+  "--contrasto-intensivo",
+  "--nodi",
+  "0",
+  "--seed",
+  "11",
+  "--chi-basc",
+  "--chi-coop",
+  "--coes-adim",
+  "--peq-esatto",
+  "--peq-nascita-locale",
+  "--scala-min-passo",
+  "--coes-causale",
+  "--anom-simm",
+  "--invarianti=on",
+  "--plast-din",
+  "--viriale",
+  "--olon-part"
+ ],
+ "blob_sim": "1fc9235f749b10a113fd82e5781868afe5d3a04f",
+ "doppie": {},
+ "esecuzioni": {
+  "5639": 3,
+  "5666": 3
+ },
+ "flag": {
+  "CHI_BASC": true,
+  "CHI_COOP": true,
+  "CHI_DA_SPINORE": false,
+  "SPINORE_CORRETTO": true
+ },
+ "m": 70199,
+ "n": 2107,
+ "passa": true,
+ "passi": 3,
+ "per_grandezza": {
+  "perc_chi": [
+   5666
+  ],
+  "perc_geom": [
+   5639
+  ]
+ }
+}

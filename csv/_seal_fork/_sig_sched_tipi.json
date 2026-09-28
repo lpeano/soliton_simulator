@@ -1,7 +1,7 @@
 {
- "blob_sim": "fe00b48a403717f2fe0fa06645d3bb6849472391",
- "non_coerenti": 1,
- "passa": false,
+ "blob_sim": "1fc9235f749b10a113fd82e5781868afe5d3a04f",
+ "non_coerenti": 0,
+ "passa": true,
  "registro": [
   "apri",
   "chiudi",
@@ -100,15 +100,12 @@
    "voce": "mitosi"
   },
   {
-   "coerente": false,
+   "coerente": true,
    "funzione": "rilassa_disegno",
-   "motivo": "un `disegno` deve scrivere SOLO `pos`, e scrive anche ['psi', 'psi_spin']",
+   "motivo": null,
    "pos": true,
    "snapshot": [],
-   "stato": [
-    "psi",
-    "psi_spin"
-   ],
+   "stato": [],
    "struttura": [],
    "tipo": "disegno",
    "voce": "rilassa_disegno"

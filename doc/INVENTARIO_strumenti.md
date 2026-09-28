@@ -1214,3 +1214,46 @@ python csv/_test_fork/_hashseed_prova.py --confronta PRIMA.npz DOPO.npz
 **Il controllo ③ si rigira** creando due sorgenti sintetici — uno che fa `net.step()` in un ciclo,
 uno che chiama `esegui_passo` — e passandoli a `csv/_hook_presidi.py::_avanza_con_step`: **il primo
 deve essere rifiutato, il secondo deve passare.** *(I due file sono locali: il dato è il comando.)*
+
+## `T2` dello schedulatore: i **referti rigirati** dopo `L_CONSERVA` *(2026-09-28)*
+
+> **Perché rigirati:** `L_CONSERVA` *(`56552f0`, simulatore `fe00b48a` → `1fc9235f`)* ha **tolto una
+> chiamata** e **tolto la catena** che rendeva incoerente un tipo. **I due referti di prima
+> descrivevano un blob che non c'è più**, e li si rigira: **un referto scaduto è un numero senza
+> provenienza.**
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_seal_fork/_sig_sched_tipi.py` | `e60f6f65` | `python csv/_seal_fork/_sig_sched_tipi.py` | il **tipo dichiarato** in `_PASSO_TIPI` è **coerente con ciò che la funzione SCRIVE**, dedotto dall'AST | ### **8 su 8 coerenti**, `non_coerenti = 0`, sul blob `1fc9235f`. **Esce `0`** |
+| `csv/_seal_fork/_h_etc_1.py` | `7851ef01` | `python csv/_seal_fork/_h_etc_1.py` | **`H-ETC-1`**: chiamate a `calcola_psi` **prive di `w`** fra le **53** funzioni raggiungibili dalle cinque leggi | ### **conta `7`**, e `ATTESO_OGGI = 7`: era **8** sul blob `e203f9a8`, e la chiamata che è sparita è quella di `_togli_rotazione_rigida` |
+
+**Referti:** `csv/_seal_fork/_sig_sched_tipi.json` *(blob byte `a289bc47`)* ·
+`csv/_seal_fork/_h_etc_1.json` *(blob byte `19068acd`)*. **Entrambi dichiarano `blob_sim
+1fc9235f`.**
+
+## Il sigillo dei **segni**: una sola legge scrive ogni grandezza-segno *(2026-09-28)*
+
+> ### 📌 **Nasce da una CORREZIONE DEL GUARDIANO**, non da un dubbio mio: nel documento delle regole
+> di `T3` avevo scritto che `perc_chi` è **scritta due volte nello stesso passo** e che *«la seconda
+> sovrascrive la prima»*. **È falso** — `:5639` e `:5642` sono l'`if` e l'`else` della **stessa
+> condizione**. **L'analisi statica vede le scritture e non le condizioni che le escludono.**
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_seal_fork/_sig_segni_una_legge.py` | `48fb1141` | `python csv/_seal_fork/_sig_segni_una_legge.py --passi=3` | **copertura di riga a RUNTIME** dei tre siti che scrivono una grandezza-segno, con l'argv del driver sulla scena `(ii)(a)` | ### **un solo sito per grandezza**: `perc_geom` ← `:5639` **3/3**, `perc_chi` ← `:5666` **3/3**, `:5642` **ZERO**. **Esce `0`** |
+
+**Referto:** `csv/_seal_fork/_sig_segni_una_legge.json` *(blob byte `db4e1cdb`)*.
+**Flag che decidono:** `CHI_BASC=True CHI_COOP=True CHI_DA_SPINORE=False SPINORE_CORRETTO=True`.
+**Scena:** `MASSE-COERENTI`, seme `11`, `n = 2107`, `m = 70199`, **3 passi pieni**.
+**Il verdetto viene dalla copertura, non dal conteggio** — ed è per questo che vale: `:5666` gira
+**con `CHI_DA_SPINORE` SPENTO**, perché `_chi_da_psi = CHI_DA_SPINORE or CHI_COOP` *(`:5653`)*.
+
+## Le decisioni di Luca sull'indice: **la patch, e non si rilancia** *(2026-09-28)*
+
+| strumento | blob (byte) | comando | cosa fa |
+|---|---|---|---|
+| `csv/_archivio/_indice_decisioni_6.py` | `2377ec89` | `python csv/_archivio/_indice_decisioni_6.py` | **16 modifiche** a `doc/INDICE_ID.tsv`: le **sei decisioni** di Luca sulle pendenze del checkpoint `bd3baa1`, più la correzione di `SCHED-T2-TIPI` |
+
+**⚠ NON SI RILANCIA:** ogni sostituzione **asserisce il valore vecchio** e ogni aggiunta **fallisce
+se il testo c'è già** *(`P1-quater`)*, quindi un secondo giro **esce `1` senza scrivere**. Il
+referto è **l'indice stesso**, e la tabella delle 16 modifiche è nel messaggio del commit.

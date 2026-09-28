@@ -11,12 +11,12 @@ mano**: si rigenera.)*
 > **per regola, non per giudizio**.
 
 ```
-voci nell'indice          784
-in questo smistamento     136   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
-di cui blocca SI          5
+voci nell'indice          845
+in questo smistamento     156   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
+di cui blocca SI          10
 ```
 
-## 🎯 **L'ORDINE DI LAVORO DEI `SI`** — 5 voci, e l'ordine E' PER DIPENDENZA
+## 🎯 **L'ORDINE DI LAVORO DEI `SI`** — 10 voci, e l'ordine E' PER DIPENDENZA
 
 > **Il lavoro sui `SI` comincia SOLO col via di Luca.** L'ordine e i motivi vengono da
 > **`doc/ORDINE_SI.tsv`**, che e' un DATO: si cambia la' dentro, non qui.
@@ -38,6 +38,13 @@ di cui blocca SI          5
 INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D03](REVISIONE_SI_2026-09-26.md#d03) · [D31](REVISIONE_SI_2026-09-26.md#d31) · [SCALE-TW](REVISIONE_SI_2026-09-26.md#scale-tw) · [U1](REVISIONE_SI_2026-09-26.md#u1)
 
 **Le voci che NON bloccano hanno la loro sezione qui:** [NON BLOCCANO](REVISIONE_SI_2026-09-26.md#non-bloccano).
+
+## ⚠ **VOCI CHE NON TORNANO CON LA PROVA DATA**
+
+| voce | `blocca` | perche' non torna |
+|---|:--:|---|
+| **S09-MEDIANA** | `DA-DECIDERE` |  |
+| **DOPPIA-COP** | `DA-DECIDERE` |  |
 
 ## FAMIGLIA **A** — INERZIA E AVVIO   *(58 voci)*
 
@@ -196,10 +203,21 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D03](REVISIONE_SI_202
 | `NO` | **D13** | I sigilli storici non sono stati rigirati sul blob corrente / Z11 / — / APERTO | voce di PROCESSO o di STRUMENTO: non e' una legge del sistema | `STATO_RUN.md` |
 | `NO` | **Z15** | Z15 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / 14 .pkl su 36 non portano il BLOB del codice che li ha... | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 
-## FAMIGLIA **?** — SENZA FAMIGLIA — nessuna regola ha deciso   *(14 voci)*
+## FAMIGLIA **?** — SENZA FAMIGLIA — nessuna regola ha deciso   *(34 voci)*
 
 | blocca? | id | che cos'e' | **il motivo, in una frase** | fonte |
 |:--:|---|---|---|---|
+| `DA-DECIDERE` | **DOPPIA-COP** | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non misurata |  | `CURE_fisica_ordine.md` |
+| `SI` | **SCHED-PASSO** | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | eredita il blocco da `ETC-PASSO` (chiusa come superata il 2026-09-28): il run base gira con stato MISTO t/t+1 in 4 leggi su 5, 56 letture sporche su 31 attributi misurate dall'AST da csv/_test_fork/_etc_letture.py, e la cura vive in `T3` | `PIANO_schedulatore_passo.md` |
+| `NO` | **ALLUNG-RELATIVO** | il criterio V6 dell'allungamento sottrae variazioni relative con DENOMINATORI DIVERSI |  | `csv/_test_fork/_pilota_prova1.py` |
+| `NO` | **ARCHI-PRIMI** | la vista disegna i PRIMI 24000 archi per indice: il 100 % finisce in un quadrante, misurato |  | `soliton_simulator.py` |
+| `SI` | **CENS-A1** | [A] la RIDUZIONE AL LIMITE dello spinore: lo stato che la garantisce non e' raggiungibile | la riduzione al limite dello spinore e' la PROPRIETA' su cui poggiano i sigilli del fork: se e' falsa, quei sigilli certificano uno stato fuori dall'orbita del sistema | `CENSIMENTO_intenzioni.md` |
+| `SI` | **CENS-A2** | [A] `TORS_4PI`: *"Prova sperimentale, default off"*, e il default e' `True` | chiusa da (b): rendere `4 pi` strutturale puo' spostare la soglia di mitosi | `CENSIMENTO_intenzioni.md` |
+| `NO` | **CENS-A3** | [A] `COPPIA_MIT`: *"(opzione, spenta di default)"*, e il default e' `1.0` |  | `CENSIMENTO_intenzioni.md` |
+| `NO` | **CENS-A4** | [A] `MITOSI_DIR`: *"MITOSI DIREZIONALE ATTIVA"*, e il valore e' `0.0` |  | `CENSIMENTO_intenzioni.md` |
+| `NO` | **CENS-A5** | [A] `_passo_spinoriale` *"ORFANO"*: smentito da un altro commento dello stesso file |  | `CENSIMENTO_intenzioni.md` |
+| `SI` | **CENS-A6** | [A] `README.md`: *"Tutti gli script di lancio includono esplicitamente `--sync`"* | chiusa da (a): la cura rende l'aggiornamento SINCRONO, e cio' cambia i numeri | `CENSIMENTO_intenzioni.md` |
+| `SI` | **CENS-A7** | [A] il commento di `calcola_psi`: *"~19 chiamanti"*, misurato **2** | chiusa da (a): imporre `w` a ogni `calcola_psi` cambia quale `psi` legge la fisica | `CENSIMENTO_intenzioni.md` |
 | `NO` | **D05** | I residui di C5: I4 scatola nera, I5 underflow per riga, modalita' fine / il mandato C5 e la... | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `NO` | **D06** | fattcsultimo e' SCRITTO e MAI LETTO (quarto caso della stessa famiglia) / Z7, letto dal codice /... | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `NO` | **D07** | TAUA e' UN SOLO numero per DUE leggi fisiche distinte / Z10, Z9-bis / — / APERTO | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
@@ -210,15 +228,24 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D03](REVISIONE_SI_202
 | `NO` | **D21** | floord0 e' SOSPESA, e i due rami violano assiomi DIVERSI: la scelta non e' stata fatta / Z4 / —... | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `NO` | **D23** | La cucitura dello snapshot FALLISCE su entrambi i fronti, e si DIMOSTRA perche'. NON CABLATA /... | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `NO` | **D29** | CINQUE NODI DI VUOTO sono i piu' connessi dell'intero sistema: il vuoto ha degli HUB, e non... | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
+| `NO` | **FOGLIO-NULLO** | il diagnostico dei fogli vale il suo NULLO sulla scena (ii): la fase sta sul confine |  | `csv/_test_fork/_pilota_prova1_braccio.py` |
+| `NO` | **FORMA-N-VUOTO** | `n` in forma_passo0 non puo' cambiare: e' l'insieme congelato del passo 0 (P4) |  | `csv/_test_fork/_pilota_prova1.py` |
+| `DA-DECIDERE` | **S09-MEDIANA** | la spinta S09 scala con `median(d0)` GLOBALE: lo stesso A2 gia' curato in S05 il 2026-09-17 |  | `soliton_simulator.py` |
+| `NO` | **SYNCDB-HEADLESS** | `--sync-db` in headless CARICA ma non SALVA: lo dice il docstring del driver |  | `csv/_test_fork/_scena_video.py` |
+| `NO` | **V5-SOGLIA** | il criterio V5 confonde SCIOGLIERSI con MIGRARE, e misura lo spostamento con LAM |  | `TASK_HISTORY/2026-09-27_pilota-prova1.md` |
 | `NO` | **FATTI-AVVIO** | la catena di AVVIO non ha un solo fatto in FATTI_dal_codice.md: _applica_flag, avvia_test... |  | `FATTI_dal_codice.md` |
 | `NO` | **IMPL-2** | una SECONDA implementazione indipendente, scritta dalle LEGGI e non dal codice |  | `VALUTAZIONE_go.md` |
 | `NO` | **INDICE-LEGGERO** | l'indice pesa 169 KB e leggerlo intero non fa risparmiare contesto: serve un comando di... |  | `csv/_indice_id.py` |
 | `NO` | **B7-SHAKE** | SHAKE 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / shake-then-freeze — la precessione mutua non... | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
+| `NO` | **PROVA1-40-80** | i NODI delle masse del passo 0 si avvicinano piu' dei controlli a 40-80 passi; il calo sta negli INT |  | `csv/_test_fork/_pilota_prova1/CONFRONTO_previsione.txt` |
+| `NO` | **SCHED-T3-REGOLE** | le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in tre famiglie |  | `REGOLE_composizione_T3.md` |
+| `NO` | **SCHW-CORTI** | il 39 % delle coppie Schwinger ACCORCIA il grafo: 2*dd < d, misurato |  | `csv/_test_fork/_pilota_prova1/CONFRONTO_previsione.txt` |
+| `NO` | **TRATTI-INTERNI** | a 80 passi il calo di A(t) sta negli INTERNI, non nel varco: le regioni si contraggono |  | `csv/_test_fork/_pilota_prova1/SCOMPOSIZIONE_tratti.txt` |
 
 ---
 
 **COSA QUESTA LISTA NON DICE:**
-- **non dice che le altre 648 voci siano irrilevanti**: dice che **non possono bloccare un run
+- **non dice che le altre 689 voci siano irrilevanti**: dice che **non possono bloccare un run
   base** perche' sono chiuse, sono teoria, o sono etichette locali di un sigillo.
 - **il titolo e' UNA riga**: la spiegazione sta nella fonte, e la fonte e' in colonna.
 - **`motivo` viene dalla COLONNA dell'indice**, non da una regola di questo script: se una riga

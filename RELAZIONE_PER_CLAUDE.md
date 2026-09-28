@@ -5451,3 +5451,65 @@ si chiude qui** · il numero di nascite cambierà e **si riporta, non è un crit
 derivate**, e **`_peq_esatto` è un rilassamento**. Le correggo nel classificatore quando `T3` parte.
 
 > ### 🛑 **STOP.**
+
+---
+
+# 🗂 **LE SEI DECISIONI DI LUCA, e i tre referti che erano rimasti fuori** *(2026-09-28)*
+
+*(Risposte alle sei pendenze del checkpoint `bd3baa1`.)* ### **Nessun codice. Blob `1fc9235f` prima
+e dopo.** **16 modifiche all'indice**, tutte da uno script con l'ancora asserita
+*(`csv/_archivio/_indice_decisioni_6.py`, blob byte `2377ec89`, **e non si rilancia**)*.
+
+## Le sei risposte, come le ha date Luca
+
+| | decisione | dove è registrata |
+|---|---|---|
+| **①** | il **codice di `T3`** si approva **dopo** il recepimento nel documento; il guardiano verifica prima | `SCHED-T3-REGOLE`, ora **`IN CORSO`** |
+| **②** | ### **`DOPPIA-COP`: subito DOPO `T3`, PRIMA di `T4`, cura a sé col suo sigillo** — *non* dentro `T3`: **sarebbero due cambi di fisica nello stesso sigillo** | `DOPPIA-COP` |
+| **③** | ### **`ETC-PASSO` si CHIUDE** come *superata da `SCHED-PASSO`*, e **`blocca_run_base = SI` SI SPOSTA** | `ETC-PASSO` → `SCHED-PASSO` |
+| **④** | **`CLIP-INVENTARIO`**, la tabella per flag: **dopo `T3`** | `CLIP-INVENTARIO` |
+| **⑤** | **i tre numeri della spinta repulsiva: dopo `T3`**, quando diventa una legge a sé | *voce nuova, nel commit del punto 7* |
+| **⑥** | ### **`MAX_NODI`: fermare il run con errore esplicito**, e in futuro eliminarlo | *voce nuova, nel commit del punto 7* |
+
+> ### 📌 **Sulla ③, una cosa che non è una scelta di stile: il VALIDATORE la impone.**
+> `blocca = SI` con `stato = chiuso` è una **contraddizione** che `csv/_indice_id.py` rifiuta nel
+> `pre-commit`. **Chiudere `ETC-PASSO` senza spostare il blocco non sarebbe passato.** E il motivo
+> **non si duplica**: la prova *(le 56 letture sporche su 31 attributi)* vive ora **su
+> `SCHED-PASSO`**, e su `ETC-PASSO` resta col timbro `[SUPERATO]`.
+> **Il difetto NON è risolto: è la FORMA della cura che è stata sostituita.** Gli `SI` del run base
+> restano **10**.
+
+## La correzione che il checkpoint aveva dichiarato
+
+### **`SCHED-T2-TIPI` è CHIUSA**, e il titolo non dice più *«UNA non è coerente»*: dopo
+`L_CONSERVA` sono ### **8 su 8**, `non_coerenti = 0`.
+
+## I tre referti che erano rimasti fuori — **e il ritardo lo dichiaro**
+
+| referto | prima | ora |
+|---|---|---|
+| `_sig_sched_tipi.json` | 7 su 8 | ### **8 su 8** |
+| `_h_etc_1.json` | conta **8** | ### **conta 7**, e `ATTESO_OGGI = 7` |
+| `_sig_segni_una_legge.json` | — | ### **nuovo** |
+
+**Erano sul disco e non committati**, e il checkpoint li ha elencati proprio per questo.
+### **Era un ritardo, e non lo sana il fatto di recuperarlo qui.**
+
+## Il sigillo dei segni: **la correzione del guardiano, verificata**
+
+Avevo scritto che `perc_chi` è **scritta due volte nello stesso passo**. **È falso**, e Luca l'ha
+corretto: `:5639` e `:5642` sono l'`if` e l'`else` della **stessa condizione**.
+
+| riga | grandezza | esecuzioni su 3 passi |
+|---|---|---|
+| `:5639` | `perc_geom` *(torsione, ramo `if CHI_COOP`)* | **3** |
+| `:5642` | `perc_chi` *(ramo `else`)* | ### **ZERO** |
+| `:5666` | `perc_chi` *(segno dello spinore)* | **3** |
+
+> ### 📌 **La regola «UNA SOLA legge scrive ogni grandezza-segno» è GIÀ VERA PER COSTRUZIONE** — è
+> la cura di `A6-PERCCHI`. **Va dichiarata, non curata, e non si archivia niente.**
+> **E la lezione sul metodo, che in questa sessione è la quarta:** l'analisi statica vede **le
+> scritture** e **non le condizioni che le escludono**. Per questo il verdetto qui viene dalla
+> **copertura di riga**, non da un conteggio.
+
+**Prossimo:** il **punto 7 del checkpoint** — i sei punti del recepimento in `T3`. **Un commit.**

@@ -1,6 +1,6 @@
 {
- "atteso_oggi": 8,
- "blob_sim": "e203f9a8b9b74278e610c6c0997f01659d6e9f6d",
+ "atteso_oggi": 7,
+ "blob_sim": "1fc9235f749b10a113fd82e5781868afe5d3a04f",
  "collaudo": [
   {
    "caso": "BUONO (deve dare 0 senza-w)",
@@ -23,13 +23,13 @@
  "con_w": [
   {
    "dentro": "step",
-   "riga": 5220,
-   "sorgente": "psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi(w)"
+   "riga": 5371,
+   "sorgente": "psi_forces = self.calcola_psi(w)"
   },
   {
    "dentro": "step",
-   "riga": 5382,
-   "sorgente": "psi_sync = psi_t if SYNC_UPDATE else self.calcola_psi(w)"
+   "riga": 5533,
+   "sorgente": "psi_sync = self.calcola_psi(w)"
   }
  ],
  "leggi": [
@@ -39,46 +39,41 @@
   "rilassa_disegno",
   "memoria_hebbiana_moto"
  ],
- "raggiungibili": 59,
+ "raggiungibili": 53,
  "senza_w": [
   {
    "dentro": "lambda_vuoto",
-   "riga": 776,
+   "riga": 777,
    "sorgente": "net.calcola_psi()"
   },
   {
    "dentro": "scuoti_vuoto",
-   "riga": 792,
+   "riga": 793,
    "sorgente": "net.calcola_psi()"
   },
   {
    "dentro": "chiralita_core_locale",
-   "riga": 2164,
+   "riga": 2353,
    "sorgente": "self.calcola_psi()"
   },
   {
    "dentro": "_passo_spinoriale",
-   "riga": 3182,
+   "riga": 3365,
    "sorgente": "self.calcola_psi()"
   },
   {
    "dentro": "_passo_spinoriale",
-   "riga": 3298,
+   "riga": 3479,
    "sorgente": "if not hasattr(self, \"psi\") or len(self.psi) < n: self.calcola_psi()"
   },
   {
    "dentro": "step",
-   "riga": 5261,
-   "sorgente": "psi_forces = psi_t if SYNC_UPDATE else self.calcola_psi()"
-  },
-  {
-   "dentro": "_togli_rotazione_rigida",
-   "riga": 6529,
-   "sorgente": "try: self.calcola_psi()"
+   "riga": 5412,
+   "sorgente": "psi_forces = self.calcola_psi()"
   },
   {
    "dentro": "memoria_hebbiana_moto",
-   "riga": 6608,
+   "riga": 6731,
    "sorgente": "self.calcola_psi()"
   }
  ]
