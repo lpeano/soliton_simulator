@@ -337,20 +337,33 @@ def principale():
             if a:
                 salti.append((ks[i], abs(b / a - 1.0)))
         kn = r["nascita"] or (ks[-1] + 1)
-        prima = [(k, s) for k, s in salti if k < kn]
+        # ⚠⚠ IL TRANSITORIO D'AVVIO NON E' OSCILLAZIONE, E VA FUORI DAL METRO.
+        #   `phi_g` al passo 0 e' ZERO ESATTO (`psi` non esiste ancora), quindi il salto dei
+        #   primi passi e' IL CAMPO CHE NASCE, non un'oscillazione. Con dentro il passo 2 il
+        #   metro fa **86.66 %** invece di **2.10 %**: ### QUARANTA VOLTE PIU' LARGO, e il
+        #   braccio sarebbe passato quasi comunque.
+        #   ### LA SCELTA DEL 4 NON E' FRAGILE, ED E' MISURATO: da 4 e da 6 il metro e' LO
+        #   STESSO -- 2.1010 % al passo 7 -- su ENTRAMBI i giri. Se cambiasse col confine,
+        #   sarebbe una manopola; non cambia.
+        AVVIO = 4
+        prima = [(k, s) for k, s in salti if AVVIO <= k < kn]
+        largo = max((s for k, s in salti if k < kn), default=0.0)
         poi = [(k, s) for k, s in salti if k >= kn]
         mp = max((s for _k, s in prima), default=0.0)
         kmp = max(prima, key=lambda x: x[1])[0] if prima else None
         mq = max((s for _k, s in poi), default=0.0)
         kmq = max(poi, key=lambda x: x[1])[0] if poi else None
         F[nome] = {"nascita": r["nascita"], "max_prima": mp, "al_passo_prima": kmp,
+                   "metro_col_transitorio": largo, "avvio_escluso_fino_a": AVVIO,
                    "max_dopo": mq, "al_passo_dopo": kmq,
                    "supera": bool(mq > mp),
                    "peggiori": [{"passo": k, "salto": s}
                                 for k, s in sorted(poi, key=lambda x: -x[1])[:5]]}
         print("  %-9s prima nascita al passo %s" % (nome, r["nascita"]))
-        print("      oscillazione NATURALE (prima della nascita): max %.4f %% al passo %s"
-              % (100.0 * mp, kmp))
+        print("      oscillazione NATURALE (passi %d-%s, senza il transitorio): max %.4f %%"
+            "  al passo %s" % (AVVIO, kn - 1, 100.0 * mp, kmp))
+        print("      (col transitorio d'avvio dentro il metro farebbe %.2f %%: QUARANTA"
+            " volte piu' largo)" % (100.0 * largo))
         print("      salto MASSIMO dal passo di nascita in poi: %.4f %% al passo %s"
               % (100.0 * mq, kmq))
         for v in F[nome]["peggiori"][:4]:
