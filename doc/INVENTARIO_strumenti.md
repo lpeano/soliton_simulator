@@ -1512,3 +1512,33 @@ deve dare **RIPIEGO SILENZIOSO su TUTTA LA RETE** -- e' il flash di `PSI-FLASH`.
 > grandezza per nodo porta un `inf`. **`3df06c44`** sanifica **prima**, sotto `errstate`, conta
 > **`NaN` contro `NaN` come UGUALE**, e ### **ELENCA le grandezze non finite** invece di morirci
 > sopra. *(Il fallimento e' committato a se': `360e681`.)*
+
+### 🔥 **La prova a guasto, GIRATA** *(2026-09-28)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_guasto_ripieghi.py` | `3df06c44` | `python csv/_test_fork/_guasto_ripieghi.py --passi=30` | i due guasti su ogni grandezza per nodo | ### **A POSTO: 0 su 31.** RIPIEGO SILENZIOSO **10** · ROTTO RUMOROSO **8** · INERTE su entrambi **12** · ### **con effetto oltre l'ultimo nodo: 10** |
+| `csv/_test_fork/_referto_guasto.py` | `36a44cc8` | `python csv/_test_fork/_referto_guasto.py` | **genera** `doc/RIPIEGHI_guasto.md` dal `json`: nessun numero ricopiato a mano (`L-NUMERI`) | 196 righe |
+
+**Referti:** `csv/_seal_fork/_guasto_ripieghi/_guasto_ripieghi.json` *(`9d935528`)* · la stampa
+`_corsa.txt` · la **configurazione intera** `_configurazione.txt` *(**zero differenze su 80**
+booleani dal driver)* · il simulatore **PRE-CURA** `_sim_precura.py` *(blob `05691d41`, accanto ai
+dati come chiede il par.7)*. Il documento: `doc/RIPIEGHI_guasto.md` *(`e8721758`)*.
+
+| | |
+|---|---|
+| ### ✅ **il CONTROLLO tiene** | un passo da due copie di BASE e' **byte-identico**, `net.rng` compreso → **la prova vale** |
+| ### ✅ **il caso che deve fallire FALLISCE** | `psi` CORTA sul pre-cura: **17** grandezze, **12801** nodi, **471564** archi, scost. **`1.256e+01`**. ### **Lo stesso guasto oggi: `SchermaturaSpenta`** |
+| ### ⛔ **le due sole PROTETTE** | `psi` e `rho_spin` — **le due curate stamattina**, e ### **solo dal lato CORTA** |
+
+> ### 📌 **IL MECCANISMO, e non e' una lettura:** `:4462` *(la guardia su `psi_spin`)* ### **ESEGUE
+> e non spara**, perche' `calcola_psi` riscrive `psi_spin` a piena lunghezza a `:4421`; e
+> `_estendi_psi_spinor` **allunga la coda** a `:2264`, disarmando ogni guardia a valle.
+> ### ➜ **Una guardia DENTRO una legge arriva troppo tardi o viene aggirata.**
+
+**⚠ E TRE DIFETTI DELLO STRUMENTO, dichiarati nel referto e che NON toccano gli esiti:** le
+etichette del braccio pre-cura sono **sbagliate** *(righe del file pre-cura annotate con la tabella
+di oggi)*; *«eseguita»* **non** vuol dire *«ramo di scorta preso»* *(registro la guardia, non il
+corpo)*; il filtro per **nome** perde gli **alias locali**. **Invalidano la colonna «riga
+responsabile», non il verdetto** — che esce dal confronto dello stato.
+**E lo strumento NON chiama `dichiara_configurazione`:** `_configurazione.txt` e' un **riparo**.

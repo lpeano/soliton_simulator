@@ -6685,3 +6685,80 @@ del passo da una copia oggi NON SO NIENTE** — ne' che tiene, ne' che non tiene
 
 **⚠ E resta un «non so» aperto, che il giro chiudera':** ### **quale** grandezza porta `inf` non lo
 so ancora. Lo **elenca** lo strumento, non lo deduco io.
+
+---
+
+# 🔥 **LA PROVA A GUASTO: `0` grandezze su `31` sono «a posto»** *(2026-09-28)*
+
+`doc/RIPIEGHI_guasto.md` *(blob `e8721758`, **generato** da `csv/_test_fork/_referto_guasto.py`)*.
+### **Nessun codice di fisica:** blob del simulatore **`f7541d03`**, invariato.
+
+| | |
+|---|---|
+| ### ✅ **il CONTROLLO tiene** | un passo da due copie di BASE e' **byte-identico**, `net.rng` compreso → ### **la prova VALE** |
+| ### ⛔ **A POSTO** | ### **`0` su `31`** |
+| ### **RIPIEGO SILENZIOSO** | **10**, e ### **tutte e dieci cambiano OLTRE l'ultimo nodo**: `12801` nodi su `12801`, cioe' **ogni nodo tranne quello che ho guastato io** |
+| ROTTO RUMOROSO | **8** *(`ValueError` / `IndexError` di broadcast: **si fermano**, ma non con un errore dichiarato)* |
+| INERTE su entrambi | **12** — ### **e «inerte» NON vuol dire protetto** |
+| ### ✅ **il caso che deve fallire FALLISCE** | `psi` CORTA sul pre-cura: **17** grandezze, **12801** nodi, **471564** archi, scost. **`1.256e+01`**. ### **Lo stesso guasto OGGI: `SchermaturaSpenta`** |
+
+### ➜ **Le due sole che sollevano un errore dichiarato sono `psi` e `rho_spin` — le due che ho curato stamattina — e SOLO dal lato CORTA.**
+`_ferma_se_cache_corta` comincia con `if quanta >= n: return`: ### **una cache PIU' LUNGA passa in
+silenzio.** `psi` LUNGA da' un `ValueError` di broadcast, non un errore dichiarato.
+
+## ⚙ **Il meccanismo, e si legge dai NUMERI**
+
+| | |
+|---|---|
+| ### **la guardia ESEGUE e non spara** | `:4462` *(`_ferma_se_cache_corta("psi_spin", …)`, la cura di stamattina)* **esegue**, e `psi_spin` ripiega comunque su **12801 nodi**. ### **Se esegue e non solleva, quando la legge l'array e' GIA' lungo `n`** — e l'unica scrittura a piena lunghezza e' `:4421` in `calcola_psi`. ### **La guardia sta A VALLE della riscrittura** |
+| ### **un estensore a monte la DISARMA** | per `_psi_spinor` il tracciatore vede `:2262` ma **non** `:2265`: il ramo preso e' `:2264` `vstack([cur, manca])`. La cache arriva lunga `n` **con una riga inventata**, e lo scostamento e' ### **`4.75e+03`**, il piu' grande del giro |
+| ### **e la classe (b) NON e' sicura** | `mem_mot` e' **(b)** *(estensione VERA della coda, `:7009`)*, e il guasto cambia ### **12611 nodi**. L'elemento inventato e' `zeros(1,3)` e appartiene a un nodo ### **CHE ESISTEVA GIA'**. ### **(b) e' sicura per i nodi APPENA NATI, non per una cache corta per altra ragione — e i due casi hanno la STESSA FORMA** |
+
+> ### 📌 **E QUESTO E' L'ARGOMENTO PER LA TUA FORMA DI CURA, non per la mia.** Tre guasti su tre
+> mostrano che una guardia **dentro** una legge arriva **troppo tardi** *(a valle di una
+> riscrittura)* o viene **aggirata** *(a monte di un estensore)*. ### **Un controllo UNICO nello
+> schedulatore, prima che le leggi girino, non ha questo problema.** Curare sito per sito ha
+> lasciato **29 grandezze su 31** scoperte.
+
+## ⛔ Tre difetti del MIO strumento — e **nessuno tocca gli esiti**
+
+Gli esiti escono dal **confronto dello stato**, non dal tracciatore: quello che segue invalida la
+colonna **«riga responsabile»**, ### **non il verdetto**.
+
+1. ### **le etichette del braccio PRE-CURA sono SBAGLIATE:** numeri di riga del file **pre-cura**
+   annotati con la tabella di **oggi**, e ### **le righe SHIFTANO fra due blob** — la regola del
+   par.2 che ho scritto io. **Verificato:** pre-cura `:3391` e' `if med == _med_corrente:`,
+   `:5754` e' `F = Mw @ np.exp(1j*self.phi)`. ### **Nessuna delle tre e' un confronto su `psi`.**
+2. ### **«eseguita» non vuol dire «ramo di scorta PRESO»:** registro la riga della **guardia**, non
+   quella del **corpo**, e un `if` si esegue in **entrambi** i casi.
+3. ### **il filtro per NOME perde gli ALIAS LOCALI** *(`_csp_in = getattr(self, "_cs_nodo_prev")`)*:
+   ### **le 4 che sembravano «mai nominate» sono TUTTE nella tabella, in classe `(d)`, con un
+   altro nome.**
+
+> ### 📌 **E' LA QUINTA VOLTA, SEMPRE LA STESSA FORMA:** una regola che parte dal **nome** o dalla
+> **sintassi** e non da **che cosa scatta**. ### **La prova a guasto e' immune — guasta e guarda —
+> il pezzo che ci ho attaccato sopra per attribuire la colpa NO.**
+> **Che cosa la renderebbe una prova:** la riga del **corpo**, oppure i **contatori `_g_*`**
+> confrontati fra controllo e guasto, che ### **sono gia' li' per `A8`** — e dove **non** c'e' il
+> contatore, ### **la sua assenza e' essa stessa un difetto `A8`.**
+
+## ✅ **E una correzione a cio' che ho scritto in `360e681`**
+
+Avevo detto che una grandezza porta un `inf` e che ### **non sapevo quale**. E' **`eta`**, ed e'
+### **`inf` su TUTTI i 12802 nodi — LEGITTIMO E GIA' DICHIARATO**: la tabella dei domini dice
+*«`eta`: `nonneg_inf`, e **`+inf` per il vuoto DATO**»* *(`:241-242`)*. Un nodo del vuoto seminato
+**non ha un tempo di accensione**. ### ➜ **Il primo giro non e' morto su un difetto della fisica:
+e' morto sul mio confronto.**
+
+## I tre *«da guardare a mano»* del gruppo 7
+
+| | |
+|---|---|
+| `:2153` | ### **la riga non e' MAI stata eseguita** in un passo *(assente da tutte e 10 le tracce)*, e `_nb` da' **INERTE su entrambi**. ➜ **dormiente in questa configurazione** |
+| `:5750` | ### **la prova NON PUO' provarlo, e lo dico:** `d0` e' **per arco**. ### **Ma la misura conferma la tua lettura per un'altra via:** archi `471564` contro `n = 12802` → `len(d0) >= n` **sempre vero** |
+| `:5859` | la riga **esegue**, e il guasto da' **INERTE su entrambi**. ➜ ### **hai ragione: e' un RICALCOLO**, e riproduce la cache **esattamente**. ### ⚠ **Ma e' LETTA, quindi per il criterio non passa** |
+
+**Che cosa questa prova NON dice:** **«inerte» non e' un'assoluzione** *(12 grandezze, e servirebbe
+dimostrare che nessuna legge le legge)*; ### **e' UN passo, non una traiettoria** — il guasto entra
+al passo **30** e le nascite cominciano al **42**, quindi un ripiego che morde **solo dopo una
+nascita qui non compare.**

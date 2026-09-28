@@ -1,4 +1,4 @@
-[TIMBRO] _guasto_ripieghi.py  sha1-BYTE 7582e89c  committato e pulito
+[TIMBRO] _guasto_ripieghi.py  sha1-BYTE 3df06c44  committato e pulito
 simulatore ... soliton_simulator.py, blob sha1-BYTE f7541d03
 scena ........ nmasse 3, sep 6.1158  ->  n = 12802, archi = 471564   (dopo 30 passi)
 dichiarati ... CacheCorta, SchermaturaSpenta, LimiteNodiSuperato, ComposizioneNonValida
@@ -43,16 +43,77 @@ GRANDEZZE PER NODO (len == n allo stato BASE), trovate IN AUTOMATICO: 31
   accorcia una cache, CAMBIA `n` -- e allora il confronto non avrebbe riferimento.
   SOSPETTE (per arco con len == n per caso): NESSUNA (n = 12802 != archi = 471564)
 
+  NON FINITI allo stato BASE (`inf` o `nan`): 
+    eta                        inf 12802    nan 0        su 12802 elementi
+  ⚠ E' IL MOTIVO PER CUI IL PRIMO GIRO E' MORTO: `np.seterr(invalid='raise')`
+    (:8835) e `inf - inf`. Ora si elenca e il confronto sanifica PRIMA.
+
 ============================================================================================================
 CONTROLLO -- un passo DUE VOLTE da due copie di BASE: byte-identico?
 ============================================================================================================
-Traceback (most recent call last):
-  File "C:\Users\lpeano\soliton_simulator\csv\_test_fork\_guasto_ripieghi.py", line 467, in <module>
-    sys.exit(principale())
-             ~~~~~~~~~~^^
-  File "C:\Users\lpeano\soliton_simulator\csv\_test_fork\_guasto_ripieghi.py", line 357, in principale
-    c = _confronta(fa, fb, n0, m0)
-  File "C:\Users\lpeano\soliton_simulator\csv\_test_fork\_guasto_ripieghi.py", line 169, in _confronta
-    d = np.abs(np.nan_to_num(np.asarray(xa - ya, complex), nan=0.0, posinf=0.0, neginf=0.0))
-                                        ~~~^~~~
-FloatingPointError: invalid value encountered in subtract
+  grandezze diverse: 0 []   scostamento max 0.000e+00
+  ### CONTROLLO OK: il passo e' deterministico dalla copia, `net.rng` compreso.
+
+============================================================================================================
+I GUASTI: per ogni grandezza, CORTA e LUNGA da una copia FRESCA di BASE
+============================================================================================================
+  grandezza                CORTA                    LUNGA                    (CORTA) che cambia
+  _chi_core_nodi           INERTE                   INERTE                   
+  _chi_core_raggio         INERTE                   INERTE                   
+  _chi_core_rho0           INERTE                   INERTE                   
+  _chi_geom_nodi           INERTE                   INERTE                   
+  _cs_nodo_prev            RIPIEGO SILENZIOSO       INERTE                   15 gr / 12801 nodi / 471564 archi / 8.04e-02
+  _deg                     ROTTO RUMOROSO (ValueErr ROTTO RUMOROSO (ValueErr 
+  _fatt_cs_ultimo          INERTE                   INERTE                   
+  _g_rampa_prec            INERTE                   INERTE                   
+  _nb                      INERTE                   INERTE                   
+  _nb_prec                 RIPIEGO SILENZIOSO       RIPIEGO SILENZIOSO       6 gr / 12801 nodi / 0 archi / 8.09e-02
+  _nb_ret                  RIPIEGO SILENZIOSO       RIPIEGO SILENZIOSO       9 gr / 12801 nodi / 471564 archi / 2.20e-03
+  _psi_prec                RIPIEGO SILENZIOSO       RIPIEGO SILENZIOSO       15 gr / 12801 nodi / 471564 archi / 1.26e+01
+  _psi_spin_prec           RIPIEGO SILENZIOSO       RIPIEGO SILENZIOSO       15 gr / 12801 nodi / 471564 archi / 1.13e-01
+  _psi_spinor              RIPIEGO SILENZIOSO       INERTE                   17 gr / 12801 nodi / 471564 archi / 4.75e+03
+  _r_corrente              INERTE                   INERTE                   
+  _spinor_lift             RIPIEGO SILENZIOSO       INERTE                   9 gr / 12801 nodi / 471564 archi / 1.55e-02
+  _xi_rumore               INERTE                   INERTE                   
+  conc_nodi                INERTE                   INERTE                   
+  eta                      ROTTO RUMOROSO (ValueErr ROTTO RUMOROSO (ValueErr 
+  mem_mot                  RIPIEGO SILENZIOSO       INERTE                   2 gr / 12611 nodi / 471564 archi / 2.21e-02
+  omega_s                  INERTE                   INERTE                   
+  perc_chi                 ROTTO RUMOROSO (IndexErr INERTE                   
+  perc_geom                ROTTO RUMOROSO (IndexErr INERTE                   
+  perc_tw                  INERTE                   INERTE                   
+  phi0                     ROTTO RUMOROSO (IndexErr INERTE                   
+  phi_s                    RIPIEGO SILENZIOSO       RIPIEGO SILENZIOSO       6 gr / 12801 nodi / 0 archi / 4.15e-02
+  phivel                   ROTTO RUMOROSO (ValueErr ROTTO RUMOROSO (ValueErr 
+  pos                      ROTTO RUMOROSO (ValueErr ROTTO RUMOROSO (ValueErr 
+  psi                      PROTETTO (SchermaturaSpe ROTTO RUMOROSO (ValueErr 
+  psi_spin                 RIPIEGO SILENZIOSO       RIPIEGO SILENZIOSO       15 gr / 12801 nodi / 471564 archi / 1.13e-01
+  rho_spin                 PROTETTO (CacheCorta)    INERTE                   
+
+============================================================================================================
+IL CRITERIO (fissato dal guardiano PRIMA dei numeri)
+============================================================================================================
+  A POSTO -- PROTETTO su ENTRAMBI i guasti .......   0  []
+  INERTI su entrambi (NON <<a posto>>) ...........  12  ['_chi_core_nodi', '_chi_core_raggio', '_chi_core_rho0', '_chi_geom_nodi', '_fatt_cs_ultimo', '_g_rampa_prec', '_nb', '_r_corrente', '_xi_rumore', 'conc_nodi', 'omega_s', 'perc_tw']
+  ### RIPIEGO SILENZIOSO .........................  10  ['_cs_nodo_prev', '_nb_prec', '_nb_ret', '_psi_prec', '_psi_spin_prec', '_psi_spinor', '_spinor_lift', 'mem_mot', 'phi_s', 'psi_spin']
+  ROTTO RUMOROSO .................................   8  ['_deg', 'eta', 'perc_chi', 'perc_geom', 'phi0', 'phivel', 'pos', 'psi']
+  ### EFFETTO OLTRE L'ULTIMO NODO (tutta la rete)   10  ['_cs_nodo_prev', '_nb_prec', '_nb_ret', '_psi_prec', '_psi_spin_prec', '_psi_spinor', '_spinor_lift', 'mem_mot', 'phi_s', 'psi_spin']
+
+  ⚠ <<INERTE>> NON VUOL DIRE PROTETTO: vuol dire che in QUESTO passo nessuna legge
+    l'ha letta. Per dirla <<a posto>> serve DIMOSTRARE che nessuna legge la legge.
+
+============================================================================================================
+IL CASO CHE DEVE FALLIRE -- `psi` CORTA sul blob PRE-CURA: deve essere il FLASH
+============================================================================================================
+  `_eredita_psi_figli` introdotto da 4efd3ae4 -> il PADRE e' il blob PRE-CURA 05691d41
+  scena PRE-CURA: n = 12802, archi = 471564   (dopo 30 passi)
+  psi                      RIPIEGO SILENZIOSO       ROTTO RUMOROSO (ValueErr 17 gr / 12801 nodi / 471564 archi / 1.26e+01
+
+  esito: RIPIEGO SILENZIOSO -- 17 grandezze, 12801 nodi, 471564 archi, scostamento max 1.256e+01
+  riga responsabile TROVATA col tracciatore: :3391 lambda_nodi (self.psi) **(e)** GIA' CURATO: il ramo di scorta SOLLEVA
+  riga responsabile TROVATA col tracciatore: :3465 ritmo (self.psi) ### **(d) DA LEGGERE**
+  riga responsabile TROVATA col tracciatore: :5754 step (self.psi) ### **(d) DA LEGGERE**
+  ### IL CASO CHE DEVE FALLIRE FALLISCE COME DEVE: il ripiego silenzioso su tutta la rete c'e'.
+
+scritto: C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_guasto_ripieghi\_guasto_ripieghi.json
+USCITA: 0
