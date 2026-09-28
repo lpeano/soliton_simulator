@@ -5367,3 +5367,87 @@ scena del pilota non è girato:** senza codice da sigillare **non c'è niente da
 criterio *(`_g_smp_chirurgie > 0` fino al passo 60)* **resta**, e vale per (b) e per `T3`.
 
 > ### 🛑 **STOP. Aspetto la tua scelta fra (a), (b) e (c).**
+
+---
+
+# 📐 **T3, primo commit: LE REGOLE DI COMPOSIZIONE** *(2026-09-28)*
+
+*(`doc/REGOLE_composizione_T3.md`.)* ### **Nessun codice. Blob `1fc9235f` prima e dopo.**
+**E `T2` è chiusa:** la mitosi resta **una voce `AMBIGUA`** per la strada **(a)**, registrata in
+`MITOSI-NON-DIVISA` col motivo e il rinvio a `T3`.
+
+## Il conto: **94 scritture di stato, e 80 rientrano già nelle cinque forme**
+
+| forma | n. |
+|---|---|
+| 1 · variazione | **19** |
+| 2 · rilassamento | **3** |
+| 3 · derivata | **12** |
+| 4 · vincolo | **6** |
+| 5 · struttura | **40** |
+| ### ECCEZIONE | ### **14** |
+
+## ⚠ La scoperta che **cambia la dimensione del lavoro di `T3`**
+
+Al primo giro le eccezioni erano **16**; insegnando al classificatore gli **alias locali** sono
+scese. **E il motivo è il punto:**
+
+```
+self.phivel = _phivel_t + delta_phivel                                # :5592
+self.d      = _smp_d_ini + self._smorza(_smp_d_ini, _dxd, 'd_passo')  # :5945
+```
+
+### **Il codice scrive GIÀ in forma «fotografia + variazione». Solo che la fotografia vive in una
+VARIABILE LOCALE** — `_phivel_t`, `_phi_t`, `_smp_d_ini` — **invece che in un oggetto dichiarato.**
+
+> ### 📌 **`T3` non è una riscrittura della fisica: è rendere esplicito ciò che il codice fa già in
+> tre posti e non fa negli altri.** E `:5945` è **letteralmente la forma modello**: `foto + freno(δ)`,
+> cioè **`C3`**.
+
+**E una cosa buona sul caso peggiore:** ### **nessun attributo è incrementato da due leggi E assegnato
+pieno da una terza.** `d0` — il più scritto, da **tre** leggi — è **`1 · 5` puro: si somma e basta.**
+
+## Le 14 eccezioni sono **tre famiglie** più **8 limiti del mio classificatore**
+
+### **A · decisioni categoriali** — `perc_chi`, `perc_geom`: sono **segni `±1`**.
+### **La sovrapposizione non si applica per costruzione:** sommare due decisioni darebbe `+2`, `0` o
+`−2`, **che non sono valori ammessi**. Oggi le scrive solo `step` — **ma `:5642` e `:5666` la scrivono
+due volte nello stesso passo, e la seconda sovrascrive la prima.**
+
+### **B · rotazioni** — `_nb` è un **versore**, e `nb_new` è `nb` **ruotato**.
+### **Due rotazioni compongono per moltiplicazione, non per addizione.** Non è un'eccezione da sanare:
+**è la fisica di `SU(2)`**, che `REGISTRO_FISICA` impone già.
+
+### **C · inizializzazione dei nati** — `peq[nuovi] = rho[nuovi]`: non è dinamica **e non è
+struttura**. È **la voce di stato della mitosi**, quella che la strada (a) ha rinviato qui.
+
+**Le 8 restanti non sono eccezioni:** `_peq_esatto` **è** un rilassamento in forma chiusa dentro un
+helper; `twp` **è** una derivata *(la differenza di fase avvolta)*; `:5921`/`:5922` sono le **mezze
+spinte del Verlet** attraverso un locale di ciclo; `:5945` è **`C3`**.
+
+## La mitosi nel nuovo ordine: **quattro fasi**
+
+**decisione** *(sulla fotografia, nessuna scrittura)* → **struttura** *(crea ed estende)* →
+**nascita** *(valore di partenza ai soli nuovi indici)* → **derivate** *(`psi` solo per i nati)*.
+
+**E cosa cambia**, dichiarato: ### **gli archi che si dividono possono essere diversi** *(la decisione
+si prende sulla fotografia)* · l'ordine di scrittura si inverte per i nodi — ### **questo è il
+riordino, ed è il lavoro di `T3`** · `psi` si **estende** invece di ricalcolarsi, e ### **`PSI-FLASH`
+si chiude qui** · il numero di nascite cambierà e **si riporta, non è un criterio**.
+
+> ### 📌 **E una cosa che la separazione regala:** con la struttura come fase distinta, **`H-ETC-2`
+> può permutare TUTTE le dinamiche** invece delle sole due prima di `mitosi`. **Il presidio diventa
+> più forte grazie al riordino** — ed è l'argomento per farlo in `T3` e non prima.
+
+## ➜ **Tre decisioni, e sono solo le eccezioni come da mandato**
+
+| | |
+|---|---|
+| **①** | **le decisioni categoriali:** **(i)** l'ultima vince *(è oggi, va solo dichiarato)* · **(ii)** una sola legge ha il diritto · **(iii)** voto sul segno — ### **e (iii) è una legge nuova, che `9-ter` scoraggia** |
+| **②** | ### **accetti una forma 6, `gruppo`**, per le rotazioni? **Senza, il settore spinoriale resta fuori dalla sovrapposizione** |
+| **③** | ### **accetti una forma 7, `nascita`** — valori di partenza dei soli nuovi indici, fuori dalla somma? **Serve anche a `psi`/`psi_spin` dei nati** |
+
+**Due cose che NON chiedo**, perché sono letture del codice e non decisioni: **`twp` va fra le
+derivate**, e **`_peq_esatto` è un rilassamento**. Le correggo nel classificatore quando `T3` parte.
+
+> ### 🛑 **STOP.**

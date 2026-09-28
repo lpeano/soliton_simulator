@@ -1,0 +1,1245 @@
+{
+ "blob_sim": "1fc9235f749b10a113fd82e5781868afe5d3a04f",
+ "conta": {
+  "1-variazione": 19,
+  "2-rilassamento": 3,
+  "3-derivata": 12,
+  "4-vincolo": 6,
+  "5-struttura": 40,
+  "ECCEZIONE": 14
+ },
+ "eccezioni": [
+  {
+   "attributo": "omega_s",
+   "dentro": "_passo_spinoriale",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 3970,
+   "sorgente": "self.omega_s = omega_new.copy()"
+  },
+  {
+   "attributo": "_nb",
+   "dentro": "_passo_spinoriale",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 3971,
+   "sorgente": "self._nb = nb_new.copy()                          # Bloch (derivato dal primario se SPINORE_CORRETTO)"
+  },
+  {
+   "attributo": "phi_s",
+   "dentro": "_passo_spinoriale",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 3979,
+   "sorgente": "self.phi_s = np.arccos(np.clip(nb_new[:, 2], -1, 1))            # b = angolo polare [0,pi]"
+  },
+  {
+   "attributo": "twp",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5620,
+   "sorgente": "self.twp = self._w8(dph + twist_dip)"
+  },
+  {
+   "attributo": "twp",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5624,
+   "sorgente": "self.twp = dph"
+  },
+  {
+   "attributo": "perc_geom",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "[]=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5639,
+   "sorgente": "self.perc_geom[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_geom.dtype)"
+  },
+  {
+   "attributo": "perc_chi",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "[]=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5642,
+   "sorgente": "self.perc_chi[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_chi.dtype)"
+  },
+  {
+   "attributo": "perc_chi",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "[]=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5666,
+   "sorgente": "self.perc_chi[:self.n] = np.where(np.real(_ov) >= 0.0, 1, -1).astype(self.perc_chi.dtype)"
+  },
+  {
+   "attributo": "peq",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "[]=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5698,
+   "sorgente": "if nuevos := nuovi.any(): self.peq[nuovi] = rho[nuovi]"
+  },
+  {
+   "attributo": "peq",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5750,
+   "sorgente": "self.peq = self._peq_esatto(rho, flusso, dt_e, tau_bg_loc)"
+  },
+  {
+   "attributo": "peq",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5756,
+   "sorgente": "self.peq = self._peq_esatto(rho, flusso, dt_e, TAU_BG)"
+  },
+  {
+   "attributo": "vd",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5921,
+   "sorgente": "self.vd = vd_half + 0.5 * dts * acc_next"
+  },
+  {
+   "attributo": "d",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5922,
+   "sorgente": "self.d = d_new"
+  },
+  {
+   "attributo": "d",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5945,
+   "sorgente": "self.d = _smp_d_ini + self._smorza(_smp_d_ini, _dxd, 'd_passo')"
+  }
+ ],
+ "funzioni": 53,
+ "leggi": [
+  "scuoti_vuoto",
+  "step",
+  "mitosi",
+  "rilassa_disegno",
+  "memoria_hebbiana_moto"
+ ],
+ "per_attributo": {
+  "_nb": {
+   "assegnano": [
+    "_passo_spinoriale"
+   ],
+   "forme": [
+    "1-variazione",
+    "4-vincolo",
+    "5-struttura",
+    "ECCEZIONE"
+   ],
+   "incrementano": [
+    "_passo_spinoriale"
+   ],
+   "n": 8
+  },
+  "_nb_prec": {
+   "assegnano": [
+    "_passo_spinoriale"
+   ],
+   "forme": [
+    "3-derivata",
+    "5-struttura"
+   ],
+   "incrementano": [],
+   "n": 2
+  },
+  "_psi_prec": {
+   "assegnano": [
+    "ritmo",
+    "step"
+   ],
+   "forme": [
+    "3-derivata",
+    "5-struttura"
+   ],
+   "incrementano": [],
+   "n": 3
+  },
+  "_psi_spinor": {
+   "assegnano": [
+    "_estendi_psi_spinor",
+    "_passo_spinoriale"
+   ],
+   "forme": [
+    "3-derivata",
+    "5-struttura"
+   ],
+   "incrementano": [],
+   "n": 5
+  },
+  "_spinor_lift": {
+   "assegnano": [
+    "_aggiorna_lift_spinoriale",
+    "_passo_spinoriale"
+   ],
+   "forme": [
+    "3-derivata",
+    "5-struttura"
+   ],
+   "incrementano": [],
+   "n": 3
+  },
+  "d": {
+   "assegnano": [
+    "step"
+   ],
+   "forme": [
+    "1-variazione",
+    "2-rilassamento",
+    "5-struttura",
+    "ECCEZIONE"
+   ],
+   "incrementano": [
+    "step"
+   ],
+   "n": 6
+  },
+  "d0": {
+   "assegnano": [],
+   "forme": [
+    "1-variazione",
+    "5-struttura"
+   ],
+   "incrementano": [
+    "memoria_hebbiana_moto",
+    "mitosi",
+    "step"
+   ],
+   "n": 12
+  },
+  "eta": {
+   "assegnano": [],
+   "forme": [
+    "1-variazione",
+    "5-struttura"
+   ],
+   "incrementano": [
+    "step"
+   ],
+   "n": 3
+  },
+  "mem_mot": {
+   "assegnano": [],
+   "forme": [
+    "2-rilassamento",
+    "5-struttura"
+   ],
+   "incrementano": [
+    "memoria_hebbiana_moto"
+   ],
+   "n": 4
+  },
+  "omega_s": {
+   "assegnano": [
+    "_passo_spinoriale"
+   ],
+   "forme": [
+    "5-struttura",
+    "ECCEZIONE"
+   ],
+   "incrementano": [],
+   "n": 4
+  },
+  "peq": {
+   "assegnano": [
+    "step"
+   ],
+   "forme": [
+    "1-variazione",
+    "5-struttura",
+    "ECCEZIONE"
+   ],
+   "incrementano": [
+    "step"
+   ],
+   "n": 7
+  },
+  "perc_chi": {
+   "assegnano": [
+    "step"
+   ],
+   "forme": [
+    "5-struttura",
+    "ECCEZIONE"
+   ],
+   "incrementano": [],
+   "n": 4
+  },
+  "perc_geom": {
+   "assegnano": [
+    "step"
+   ],
+   "forme": [
+    "5-struttura",
+    "ECCEZIONE"
+   ],
+   "incrementano": [],
+   "n": 3
+  },
+  "phi": {
+   "assegnano": [],
+   "forme": [
+    "4-vincolo",
+    "5-struttura"
+   ],
+   "incrementano": [],
+   "n": 7
+  },
+  "phi_s": {
+   "assegnano": [
+    "_passo_spinoriale"
+   ],
+   "forme": [
+    "5-struttura",
+    "ECCEZIONE"
+   ],
+   "incrementano": [],
+   "n": 3
+  },
+  "phivel": {
+   "assegnano": [],
+   "forme": [
+    "1-variazione",
+    "5-struttura"
+   ],
+   "incrementano": [
+    "scuoti_vuoto",
+    "step"
+   ],
+   "n": 4
+  },
+  "psi": {
+   "assegnano": [
+    "calcola_psi",
+    "step"
+   ],
+   "forme": [
+    "3-derivata"
+   ],
+   "incrementano": [],
+   "n": 3
+  },
+  "psi_spin": {
+   "assegnano": [
+    "calcola_psi"
+   ],
+   "forme": [
+    "3-derivata"
+   ],
+   "incrementano": [],
+   "n": 1
+  },
+  "tw": {
+   "assegnano": [],
+   "forme": [
+    "1-variazione",
+    "5-struttura"
+   ],
+   "incrementano": [
+    "step"
+   ],
+   "n": 4
+  },
+  "twp": {
+   "assegnano": [
+    "step"
+   ],
+   "forme": [
+    "5-struttura",
+    "ECCEZIONE"
+   ],
+   "incrementano": [],
+   "n": 4
+  },
+  "vd": {
+   "assegnano": [
+    "step"
+   ],
+   "forme": [
+    "2-rilassamento",
+    "5-struttura",
+    "ECCEZIONE"
+   ],
+   "incrementano": [
+    "step"
+   ],
+   "n": 4
+  }
+ },
+ "tutte": [
+  {
+   "attributo": "phivel",
+   "dentro": "scuoti_vuoto",
+   "forma": "1-variazione",
+   "op": "[]+=",
+   "perche": "incremento `+=`",
+   "riga": 839,
+   "sorgente": "net.phivel[:net.n] += calcio"
+  },
+  {
+   "attributo": "_spinor_lift",
+   "dentro": "_aggiorna_lift_spinoriale",
+   "forma": "3-derivata",
+   "op": "=",
+   "perche": "assegnazione piena di una grandezza DERIVATA",
+   "riga": 2054,
+   "sorgente": "self._spinor_lift = candidato"
+  },
+  {
+   "attributo": "_psi_spinor",
+   "dentro": "_estendi_psi_spinor",
+   "forma": "3-derivata",
+   "op": "=",
+   "perche": "assegnazione piena di una grandezza DERIVATA",
+   "riga": 2146,
+   "sorgente": "self._psi_spinor = self._bloch_a_spinore(nb_rif[:n])"
+  },
+  {
+   "attributo": "_psi_spinor",
+   "dentro": "_estendi_psi_spinor",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `vstack`",
+   "riga": 2149,
+   "sorgente": "self._psi_spinor = np.vstack([cur, manca])"
+  },
+  {
+   "attributo": "_psi_spinor",
+   "dentro": "_estendi_psi_spinor",
+   "forma": "3-derivata",
+   "op": "=",
+   "perche": "assegnazione piena di una grandezza DERIVATA",
+   "riga": 2151,
+   "sorgente": "self._psi_spinor = cur[:n]"
+  },
+  {
+   "attributo": "_nb",
+   "dentro": "_eredita_spinore_figli",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `vstack`",
+   "riga": 2180,
+   "sorgente": "self._nb = np.vstack([self._nb, self._nb[src]])"
+  },
+  {
+   "attributo": "_nb_prec",
+   "dentro": "_eredita_spinore_figli",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `vstack`",
+   "riga": 2182,
+   "sorgente": "self._nb_prec = np.vstack([self._nb_prec, self._nb_prec[src]])"
+  },
+  {
+   "attributo": "omega_s",
+   "dentro": "_eredita_spinore_figli",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `vstack`",
+   "riga": 2190,
+   "sorgente": "self.omega_s = np.vstack([self.omega_s, self.omega_s[src]])"
+  },
+  {
+   "attributo": "_psi_spinor",
+   "dentro": "_eredita_spinore_figli",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `vstack`",
+   "riga": 2195,
+   "sorgente": "self._psi_spinor = np.vstack([self._psi_spinor, er])"
+  },
+  {
+   "attributo": "_spinor_lift",
+   "dentro": "_eredita_spinore_figli",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `vstack`",
+   "riga": 2200,
+   "sorgente": "self._spinor_lift = np.vstack([self._spinor_lift, el])"
+  },
+  {
+   "attributo": "_psi_prec",
+   "dentro": "_eredita_spinore_figli",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 2202,
+   "sorgente": "self._psi_prec = np.concatenate([self._psi_prec, self._psi_prec[src]])"
+  },
+  {
+   "attributo": "_psi_prec",
+   "dentro": "ritmo",
+   "forma": "3-derivata",
+   "op": "=",
+   "perche": "ramo di un'espressione condizionale: assegnazione piena di una grandezza DERIVATA",
+   "riga": 3229,
+   "sorgente": "self._psi_prec = self.psi.copy() if len(self.psi) == self.n else np.ones(self.n, complex)"
+  },
+  {
+   "attributo": "omega_s",
+   "dentro": "_passo_spinoriale",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `vstack`",
+   "riga": 3341,
+   "sorgente": "self.omega_s = np.vstack([self.omega_s, np.zeros((n - len(self.omega_s), 3))])"
+  },
+  {
+   "attributo": "omega_s",
+   "dentro": "_passo_spinoriale",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "troncamento `x[:k]`",
+   "riga": 3343,
+   "sorgente": "self.omega_s = self.omega_s[:n]"
+  },
+  {
+   "attributo": "_nb",
+   "dentro": "_passo_spinoriale",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `stack`",
+   "riga": 3346,
+   "sorgente": "self._nb = np.stack([np.sin(b0), np.zeros(n), np.cos(b0)], axis=1)"
+  },
+  {
+   "attributo": "_nb",
+   "dentro": "_passo_spinoriale",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `vstack`",
+   "riga": 3350,
+   "sorgente": "self._nb = np.vstack([self._nb, nuovi])"
+  },
+  {
+   "attributo": "_nb",
+   "dentro": "_passo_spinoriale",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "troncamento `x[:k]`",
+   "riga": 3352,
+   "sorgente": "self._nb = self._nb[:n]"
+  },
+  {
+   "attributo": "_nb",
+   "dentro": "_passo_spinoriale",
+   "forma": "1-variazione",
+   "op": "=",
+   "perche": "`x = x + d`",
+   "riga": 3410,
+   "sorgente": "self._nb = self._nb + _calcio * amp[:, None]"
+  },
+  {
+   "attributo": "_nb",
+   "dentro": "_passo_spinoriale",
+   "forma": "4-vincolo",
+   "op": "=",
+   "perche": "normalizzazione (divisione per una norma)",
+   "riga": 3411,
+   "sorgente": "self._nb = self._nb / np.maximum(np.linalg.norm(self._nb, axis=1, keepdims=True), 1e-9)"
+  },
+  {
+   "attributo": "omega_s",
+   "dentro": "_passo_spinoriale",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 3970,
+   "sorgente": "self.omega_s = omega_new.copy()"
+  },
+  {
+   "attributo": "_nb",
+   "dentro": "_passo_spinoriale",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 3971,
+   "sorgente": "self._nb = nb_new.copy()                          # Bloch (derivato dal primario se SPINORE_CORRETTO)"
+  },
+  {
+   "attributo": "_nb_prec",
+   "dentro": "_passo_spinoriale",
+   "forma": "3-derivata",
+   "op": "=",
+   "perche": "assegnazione piena di una grandezza DERIVATA",
+   "riga": 3972,
+   "sorgente": "self._nb_prec = nb_new.copy()                     # memorizzo per il ritardo causale"
+  },
+  {
+   "attributo": "_psi_spinor",
+   "dentro": "_passo_spinoriale",
+   "forma": "3-derivata",
+   "op": "=",
+   "perche": "assegnazione piena di una grandezza DERIVATA",
+   "riga": 3974,
+   "sorgente": "self._psi_spinor = psi_sp_new                 # primario complesso: segno di doppia-copertura robusto"
+  },
+  {
+   "attributo": "_spinor_lift",
+   "dentro": "_passo_spinoriale",
+   "forma": "3-derivata",
+   "op": "=",
+   "perche": "assegnazione piena di una grandezza DERIVATA",
+   "riga": 3975,
+   "sorgente": "self._spinor_lift = psi_sp_new.copy()         # il lift E' il primario (niente ri-derivazione da nb)"
+  },
+  {
+   "attributo": "phi_s",
+   "dentro": "_passo_spinoriale",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 3979,
+   "sorgente": "self.phi_s = np.arccos(np.clip(nb_new[:, 2], -1, 1))            # b = angolo polare [0,pi]"
+  },
+  {
+   "attributo": "psi",
+   "dentro": "calcola_psi",
+   "forma": "3-derivata",
+   "op": "=",
+   "perche": "assegnazione piena di una grandezza DERIVATA",
+   "riga": 4164,
+   "sorgente": "self.psi = np.zeros(self.n, complex); return self.psi"
+  },
+  {
+   "attributo": "psi",
+   "dentro": "calcola_psi",
+   "forma": "3-derivata",
+   "op": "=",
+   "perche": "assegnazione piena di una grandezza DERIVATA",
+   "riga": 4171,
+   "sorgente": "self.psi = self.satura(F)                          # saturazione regolarizzata (Leggi XV/XVIII)"
+  },
+  {
+   "attributo": "psi_spin",
+   "dentro": "calcola_psi",
+   "forma": "3-derivata",
+   "op": "=",
+   "perche": "assegnazione piena di una grandezza DERIVATA",
+   "riga": 4185,
+   "sorgente": "self.psi_spin = _Fs / (1.0 + GAMMA * _norm)[:, None]               # saturazione sulla NORMA (non ruota lo spinore)"
+  },
+  {
+   "attributo": "_psi_prec",
+   "dentro": "step",
+   "forma": "3-derivata",
+   "op": "=",
+   "perche": "assegnazione piena di una grandezza DERIVATA",
+   "riga": 5278,
+   "sorgente": "self._psi_prec = self.psi.copy()"
+  },
+  {
+   "attributo": "eta",
+   "dentro": "step",
+   "forma": "1-variazione",
+   "op": "+=",
+   "perche": "incremento `+=`",
+   "riga": 5341,
+   "sorgente": "w = self._pesi(); self.eta += dt_n"
+  },
+  {
+   "attributo": "phivel",
+   "dentro": "step",
+   "forma": "1-variazione",
+   "op": "=",
+   "perche": "`x = x + d` (la fotografia vive in una LOCALE: `_phivel_t`)",
+   "riga": 5592,
+   "sorgente": "self.phivel = _phivel_t + delta_phivel"
+  },
+  {
+   "attributo": "phi",
+   "dentro": "step",
+   "forma": "4-vincolo",
+   "op": "=",
+   "perche": "avvolgimento `%`",
+   "riga": 5593,
+   "sorgente": "self.phi = (_phi_t + (dt_n_s * self.phivel) + delta_sync_phi) % self._dphi()  # dt_n_s = verso firmato (5.3a)"
+  },
+  {
+   "attributo": "tw",
+   "dentro": "step",
+   "forma": "1-variazione",
+   "op": "+=",
+   "perche": "incremento `+=`",
+   "riga": 5619,
+   "sorgente": "self.tw += self._w8(dph + twist_dip - self.twp) - dt_e * self.tw / _ttw"
+  },
+  {
+   "attributo": "twp",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5620,
+   "sorgente": "self.twp = self._w8(dph + twist_dip)"
+  },
+  {
+   "attributo": "tw",
+   "dentro": "step",
+   "forma": "1-variazione",
+   "op": "+=",
+   "perche": "incremento `+=`",
+   "riga": 5623,
+   "sorgente": "self.tw += self._w4(dph - self.twp) - dt_e * self.tw / _ttw"
+  },
+  {
+   "attributo": "twp",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5624,
+   "sorgente": "self.twp = dph"
+  },
+  {
+   "attributo": "perc_geom",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "[]=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5639,
+   "sorgente": "self.perc_geom[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_geom.dtype)"
+  },
+  {
+   "attributo": "perc_chi",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "[]=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5642,
+   "sorgente": "self.perc_chi[:self.n] = np.where(twn > soglia, 1, -1).astype(self.perc_chi.dtype)"
+  },
+  {
+   "attributo": "perc_chi",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "[]=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5666,
+   "sorgente": "self.perc_chi[:self.n] = np.where(np.real(_ov) >= 0.0, 1, -1).astype(self.perc_chi.dtype)"
+  },
+  {
+   "attributo": "psi",
+   "dentro": "step",
+   "forma": "3-derivata",
+   "op": "=",
+   "perche": "assegnazione piena di una grandezza DERIVATA",
+   "riga": 5674,
+   "sorgente": "self.psi = self.satura(F)"
+  },
+  {
+   "attributo": "peq",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "[]=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5698,
+   "sorgente": "if nuevos := nuovi.any(): self.peq[nuovi] = rho[nuovi]"
+  },
+  {
+   "attributo": "peq",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5750,
+   "sorgente": "self.peq = self._peq_esatto(rho, flusso, dt_e, tau_bg_loc)"
+  },
+  {
+   "attributo": "peq",
+   "dentro": "step",
+   "forma": "1-variazione",
+   "op": "+=",
+   "perche": "incremento `+=`",
+   "riga": 5752,
+   "sorgente": "self.peq += dt_e * ((rho - self.peq) / tau_bg_loc + flusso / TAU_DIFF)"
+  },
+  {
+   "attributo": "peq",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5756,
+   "sorgente": "self.peq = self._peq_esatto(rho, flusso, dt_e, TAU_BG)"
+  },
+  {
+   "attributo": "peq",
+   "dentro": "step",
+   "forma": "1-variazione",
+   "op": "+=",
+   "perche": "incremento `+=`",
+   "riga": 5758,
+   "sorgente": "self.peq += dt_e * ((rho - self.peq) / TAU_BG + flusso / TAU_DIFF)"
+  },
+  {
+   "attributo": "vd",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5921,
+   "sorgente": "self.vd = vd_half + 0.5 * dts * acc_next"
+  },
+  {
+   "attributo": "d",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5922,
+   "sorgente": "self.d = d_new"
+  },
+  {
+   "attributo": "vd",
+   "dentro": "step",
+   "forma": "2-rilassamento",
+   "op": "=",
+   "perche": "`x + a*(bersaglio - x)`",
+   "riga": 5931,
+   "sorgente": "self.vd = self.vd + dts * (cs_arco ** 2 * lap + src - beta * self.vd)"
+  },
+  {
+   "attributo": "d",
+   "dentro": "step",
+   "forma": "2-rilassamento",
+   "op": "=",
+   "perche": "`x + a*(bersaglio - x)`",
+   "riga": 5936,
+   "sorgente": "self.d = self.d + self._smorza(self.d, dts * self.vd, 'd')"
+  },
+  {
+   "attributo": "d",
+   "dentro": "step",
+   "forma": "1-variazione",
+   "op": "=",
+   "perche": "`x = x + d`",
+   "riga": 5938,
+   "sorgente": "self.d = self.d + dts * self.vd"
+  },
+  {
+   "attributo": "d",
+   "dentro": "step",
+   "forma": "ECCEZIONE",
+   "op": "=",
+   "perche": "ASSEGNAZIONE PIENA di una grandezza non derivata: <<sommare le variazioni>> non e' definito se due leggi la fanno",
+   "riga": 5945,
+   "sorgente": "self.d = _smp_d_ini + self._smorza(_smp_d_ini, _dxd, 'd_passo')"
+  },
+  {
+   "attributo": "d0",
+   "dentro": "step",
+   "forma": "1-variazione",
+   "op": "+=",
+   "perche": "incremento `+=`",
+   "riga": 6036,
+   "sorgente": "self.d0 += self._sd0(dt_e * (self.d - self.d0) / tau_p_loc)"
+  },
+  {
+   "attributo": "d0",
+   "dentro": "step",
+   "forma": "1-variazione",
+   "op": "+=",
+   "perche": "incremento `+=`",
+   "riga": 6047,
+   "sorgente": "self.d0 += self._sd0(np.clip(dt_e * cs_taup * d_arco * _lap_d0, -_cfl, _cfl))"
+  },
+  {
+   "attributo": "d0",
+   "dentro": "step",
+   "forma": "1-variazione",
+   "op": "+=",
+   "perche": "incremento `+=`",
+   "riga": 6051,
+   "sorgente": "self.d0 += self._sd0(dt_e * (self.d - self.d0) / TAU_P)"
+  },
+  {
+   "attributo": "d0",
+   "dentro": "mitosi",
+   "forma": "1-variazione",
+   "op": "=",
+   "perche": "`x = x + d`",
+   "riga": 6309,
+   "sorgente": "self.d0 = self.d0 + self._sd0(spinta)          # Locale pura"
+  },
+  {
+   "attributo": "phi",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6380,
+   "sorgente": "self.phi = np.concatenate([self.phi, fm]); self.phi0 = np.concatenate([self.phi0, fm])"
+  },
+  {
+   "attributo": "phi_s",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6381,
+   "sorgente": "self.phi_s = np.concatenate([self.phi_s, self.phi_s[a]])   # spinore del figlio: eredita dal genitore"
+  },
+  {
+   "attributo": "phivel",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6382,
+   "sorgente": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[a] + self.phivel[b])])"
+  },
+  {
+   "attributo": "eta",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6383,
+   "sorgente": "self.eta = np.concatenate([self.eta, np.zeros(len(sel))])"
+  },
+  {
+   "attributo": "perc_chi",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6386,
+   "sorgente": "self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])"
+  },
+  {
+   "attributo": "perc_geom",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6389,
+   "sorgente": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[a]])"
+  },
+  {
+   "attributo": "mem_mot",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "ramo di un'espressione condizionale: estensione `vstack`",
+   "riga": 6398,
+   "sorgente": "self.mem_mot = np.vstack([self.mem_mot, self.mem_mot[a]]) if len(self.mem_mot) else np.zeros((len(sel), 3))"
+  },
+  {
+   "attributo": "phi",
+   "dentro": "mitosi",
+   "forma": "4-vincolo",
+   "op": "[]=",
+   "perche": "avvolgimento `%`",
+   "riga": 6419,
+   "sorgente": "self.phi[a] = (self.phi[a] + calcio_a) % self._dphi()"
+  },
+  {
+   "attributo": "phi",
+   "dentro": "mitosi",
+   "forma": "4-vincolo",
+   "op": "[]=",
+   "perche": "avvolgimento `%`",
+   "riga": 6420,
+   "sorgente": "self.phi[b] = (self.phi[b] + calcio_b) % self._dphi()"
+  },
+  {
+   "attributo": "phi",
+   "dentro": "mitosi",
+   "forma": "4-vincolo",
+   "op": "[]=",
+   "perche": "avvolgimento `%`",
+   "riga": 6423,
+   "sorgente": "self.phi[g] = (self.phi[g] + self.rng.normal(0, 1, len(g)) *"
+  },
+  {
+   "attributo": "d",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6459,
+   "sorgente": "self.d = np.concatenate([self.d[keep], dh, dh])"
+  },
+  {
+   "attributo": "d0",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6462,
+   "sorgente": "self.d0 = np.concatenate([self.d0[keep], d0new])"
+  },
+  {
+   "attributo": "vd",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6464,
+   "sorgente": "self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])"
+  },
+  {
+   "attributo": "peq",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6465,
+   "sorgente": "self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])"
+  },
+  {
+   "attributo": "tw",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6471,
+   "sorgente": "self.tw = np.concatenate([self.tw[keep], zz, zz])"
+  },
+  {
+   "attributo": "twp",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6472,
+   "sorgente": "self.twp = np.concatenate([self.twp[keep], self._wphi(self.phi[a] - fm),"
+  },
+  {
+   "attributo": "phi",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6535,
+   "sorgente": "self.phi = np.concatenate([self.phi, anti])"
+  },
+  {
+   "attributo": "phi_s",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6537,
+   "sorgente": "self.phi_s = np.concatenate([self.phi_s, np.zeros(nc)])   # spinore antinodo: 0 (inerte se spento)"
+  },
+  {
+   "attributo": "phivel",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6538,
+   "sorgente": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[aa] + self.phivel[bb])])"
+  },
+  {
+   "attributo": "eta",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6539,
+   "sorgente": "self.eta = np.concatenate([self.eta, np.zeros(nc)])"
+  },
+  {
+   "attributo": "perc_chi",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6542,
+   "sorgente": "self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])"
+  },
+  {
+   "attributo": "perc_geom",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6546,
+   "sorgente": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[aa]])"
+  },
+  {
+   "attributo": "mem_mot",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "ramo di un'espressione condizionale: estensione `vstack`",
+   "riga": 6553,
+   "sorgente": "self.mem_mot = np.vstack([self.mem_mot, np.zeros((nc, 3))]) if len(self.mem_mot) else np.zeros((nc, 3))"
+  },
+  {
+   "attributo": "d",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6570,
+   "sorgente": "self.d = np.concatenate([self.d, dd, dd])"
+  },
+  {
+   "attributo": "d0",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6573,
+   "sorgente": "self.d0 = np.concatenate([self.d0, dd, dd])"
+  },
+  {
+   "attributo": "vd",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6575,
+   "sorgente": "self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])"
+  },
+  {
+   "attributo": "peq",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6576,
+   "sorgente": "self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])"
+  },
+  {
+   "attributo": "tw",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6584,
+   "sorgente": "self.tw = np.concatenate([self.tw, zz2, zz2])"
+  },
+  {
+   "attributo": "twp",
+   "dentro": "mitosi",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `concatenate`",
+   "riga": 6585,
+   "sorgente": "self.twp = np.concatenate([self.twp, self._wphi(self.phi[aa] - anti),"
+  },
+  {
+   "attributo": "mem_mot",
+   "dentro": "memoria_hebbiana_moto",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `vstack`",
+   "riga": 6738,
+   "sorgente": "self.mem_mot = np.vstack([self.mem_mot, np.zeros((n - len(self.mem_mot), 3))])"
+  },
+  {
+   "attributo": "mem_mot",
+   "dentro": "memoria_hebbiana_moto",
+   "forma": "2-rilassamento",
+   "op": "[]=",
+   "perche": "`(1-a)*x + a*E` o forma equivalente",
+   "riga": 6758,
+   "sorgente": "self.mem_mot[:self.n] = (1.0 - plast) * self.mem_mot[:self.n] + plast * grad_tw"
+  },
+  {
+   "attributo": "d0",
+   "dentro": "memoria_hebbiana_moto",
+   "forma": "1-variazione",
+   "op": "[]+=",
+   "perche": "incremento `+=`",
+   "riga": 6784,
+   "sorgente": "self.d0[mask] += self._sd0(proj, mask)"
+  },
+  {
+   "attributo": "_nb",
+   "dentro": "memoria_hebbiana_moto",
+   "forma": "5-struttura",
+   "op": "=",
+   "perche": "estensione `stack`",
+   "riga": 6845,
+   "sorgente": "self._nb = np.stack([np.sin(b0), np.zeros(self.n), np.cos(b0)], axis=1)"
+  },
+  {
+   "attributo": "d0",
+   "dentro": "memoria_hebbiana_moto",
+   "forma": "1-variazione",
+   "op": "[]+=",
+   "perche": "incremento `+=`",
+   "riga": 6930,
+   "sorgente": "self.d0[mask] += self._sd0(spinta * float(np.median(self.d0[mask])), mask)"
+  },
+  {
+   "attributo": "d0",
+   "dentro": "memoria_hebbiana_moto",
+   "forma": "1-variazione",
+   "op": "[]+=",
+   "perche": "incremento `+=`",
+   "riga": 6936,
+   "sorgente": "self.d0[mask] += self._sd0(grav * float(np.median(self.d0[mask])), mask)"
+  },
+  {
+   "attributo": "d0",
+   "dentro": "memoria_hebbiana_moto",
+   "forma": "1-variazione",
+   "op": "[]+=",
+   "perche": "incremento `+=`",
+   "riga": 6958,
+   "sorgente": "self.d0[mask] += self._sd0(flusso, mask)"
+  },
+  {
+   "attributo": "d0",
+   "dentro": "memoria_hebbiana_moto",
+   "forma": "1-variazione",
+   "op": "[]+=",
+   "perche": "incremento `+=`",
+   "riga": 7108,
+   "sorgente": "self.d0[mask] += self._sd0(_delta_coes, mask)"
+  },
+  {
+   "attributo": "d0",
+   "dentro": "memoria_hebbiana_moto",
+   "forma": "1-variazione",
+   "op": "[]+=",
+   "perche": "incremento `+=`",
+   "riga": 7110,
+   "sorgente": "self.d0[mask] += self._sd0("
+  },
+  {
+   "attributo": "phi",
+   "dentro": "memoria_hebbiana_moto",
+   "forma": "4-vincolo",
+   "op": "[]=",
+   "perche": "avvolgimento `%`",
+   "riga": 7159,
+   "sorgente": "self.phi[ii] = (self.phi[ii] + shift_fase_dinamico) % self._dphi()"
+  }
+ ]
+}
