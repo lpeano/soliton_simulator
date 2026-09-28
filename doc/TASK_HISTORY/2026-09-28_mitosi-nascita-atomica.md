@@ -150,3 +150,122 @@ né un fallimento: è il segnale che ho toccato la decisione senza volerlo** —
 | ☐ | **passo 2-3**: il confine dell'evento atomico e l'estensione di `psi`/`psi_spin` |
 | ☐ | **commit del codice**, col blob prima → dopo |
 | ☐ | **passo 4**: il sigillo a cinque bracci, **commit a sé** *(par.5)*, poi ### **STOP** |
+
+---
+
+# ✅ **LE TRE CORREZIONI DEL GUARDIANO, e le misure dei passi 0-1** *(annotazione del 2026-09-28)*
+
+> **Piano approvato nella sostanza** *(perimetro dopo il `return`, decisione invariata in questo
+> pezzo)*. ### **Le sezioni sopra NON sono riscritte: qui sotto ci sono le correzioni e i numeri.**
+
+## ✗ **Correzione 1 — `psi`/`psi_spin` dei nati: NIENTE forma 3**
+
+**Quello che avevo scritto** *(par.1.3)*: *«forma **7** per il valore di partenza, forma **3** per il
+ricalcolo dei soli nati»*. ### **La forma 3 è sbagliata**, e la ragione è quella che la cura combatte:
+
+> Un ricalcolo **a metà passo** leggerebbe **il grafo DOPO la mitosi**. ### **È di nuovo una lettura
+> mista.** Il nato **EREDITA** dai genitori *(forma **7**)*, e **il valore vero arriva al passo dopo**,
+> dal ricalcolo normale di `step`.
+
+### ➜ **E la REGOLA di eredità la PROPONGO, non la scelgo.** Le tre che il codice già usa alla nascita:
+
+| | regola | chi la usa già alla nascita | conseguenza su `psi` |
+|---|---|---|---|
+| **(a)** | ### **media dei genitori** `0.5·(psi[a] + psi[b])` | `phivel` *(`:6469`)*, e **`phi` del figlio è `fm`, la fase MEDIA** | **coerente con `fm`**. ⚠ Somma **complessa**: genitori in antifase danno un figlio con `\|psi\| ≈ 0` — che è **interferenza distruttiva**, cioè fisica, non un errore |
+| **(b)** | **eredità da un genitore** `psi[a]` | `phi_s`, `perc_chi`, `perc_geom` *(`:6468`, `:6473`, `:6476`)* | **rompe la simmetria** fra i due genitori: `a` e `b` non sono interscambiabili |
+| **(c)** | **zero** | `eta`, `tw`, `perc_tw` *(`:6470`, `:6558`, `:6484`)* | il nato è **invisibile al campo** per un passo |
+
+### **La mia raccomandazione: (a) per `psi`, e (b) per `psi_spin`** — e l'asimmetria ha una ragione,
+non è una svista: ### **il compagno di `psi` è `phi`, che alla nascita prende la MEDIA (`fm`); il
+compagno di `psi_spin` è `phi_s`, che alla nascita EREDITA da `a`.** **Dare a ciascuno la regola del
+proprio compagno è l'unica scelta che non aggiunge una convenzione nuova** *(`9-ter`)*.
+### ⚠ **Ma è una PROPOSTA: decide Luca.**
+
+## ✅ **Correzione 2 — il criterio `C` passa per costruzione: serve il FENOMENO**
+
+**Aveva ragione:** *«`calcola_psi` chiamata zero volte»* è ### **una tautologia** — se estendo `psi`
+la guardia non scatta **per costruzione**, e un criterio che non può fallire non misura nulla
+*(`A9`)*. **Il criterio nuovo, e sostituisce `C`:**
+
+| | ### **`C-bis`, IL FENOMENO** |
+|---|---|
+| **cosa** | il **salto locale** di `mean(phi_g)` al passo di nascita **rispetto ai due passi vicini** |
+| **oggi** | ### **`2.631×` su `phi_g`, cioè `1.622×` su `\|psi\|`** *(riprodotto dai fotogrammi: `138.68 → 366.17 → 139.72` ai passi 40/42/44)* |
+| **dopo** | ### **`≈ 1.0`** |
+| **il caso che DEVE fallire** | ### **sul blob VECCHIO il salto DEVE vedersi.** Senza, `C-bis` non distingue la cura da niente |
+
+## ✅ **Correzione 3 — la scena: quella del video, e non se ne cerca un'altra**
+
+**Accettato, e ho cancellato la sonda che cercava scene.** ### **La finestra è il passo 42 coi vicini
+40 e 44**, e le misure qui sotto dicono **perché deve essere quella e non un'altra.**
+
+---
+
+# 📏 **LE MISURE DEI PASSI 0-1**
+*(`csv/_test_fork/_flash_passo01.py`, **sola lettura**: AST + i 61 fotogrammi locali del pilota)*
+
+## ① ### **IL FLASH SMETTE, ed è il fatto che nessuno aveva**
+
+| passi col flash | ### **SOLO `2`, `42`, `58`, `62`, `68`** |
+|---|---|
+| passi con nascite | ### **dal 42 al 120, QUASI TUTTI** — e dal 70 in poi **ogni** fotogramma, fino a **`+56` nodi ogni due passi** |
+| il salto dal passo 70 al 120 | ### **`1.000`** |
+
+> ### 📌 **La spiegazione candidata non è «il flash sparisce»: è «il flash diventa la NORMA».**
+> Quando **ogni** passo ha nascite, **ogni** passo ricalcola, e ### **non esiste più un passo vicino
+> NON ricalcolato con cui fare il rapporto.** **Sparisce il CONTRASTO, non il meccanismo.**
+>
+> ### ➜ **E questo è il motivo per cui la finestra del passo 42 è OBBLIGATORIA:** è l'unica in cui i
+> vicini sono passi **senza** nascite. **La prescrizione del guardiano non è una comodità: è la sola
+> finestra in cui il fenomeno è misurabile.**
+
+## ② **I casi «nascite ma nessun flash» hanno un'ipotesi nuova**
+
+I fotogrammi sono **ogni due passi**: un `dn > 0` fra `k−2` e `k` **non dice** se la nascita è al
+passo `k−1` o al passo `k`. Se il flash dura **un solo passo** — e il meccanismo lo prevede, perché
+al passo dopo `len(psi) == n` — ### **una nascita al passo DISPARI ha il flash al passo DISPARI, che
+non è fotografato.**
+### ⚠ **NON è dimostrato, e la granularità non permette di dimostrarlo:** serve un run che guardi
+**ogni** passo. **Ma è l'ipotesi che mancava**, e sostituisce quella caduta *(«ha ricalcolato l'altro
+sito»)*.
+
+## ③ ⚠ **I siti sono SETTE, non otto — e DUE sono raggiungibili dopo `mitosi`, non uno**
+
+**Avevo contato `calcola_psi` stessa: è il BERSAGLIO, non una guardia.** E dei 7:
+
+| | |
+|---|---|
+| ### **`:6821` in `memoria_hebbiana_moto`** | raggiungibile dopo `mitosi` — **è quello che la voce conosceva** |
+| ### **`:3256` in `lambda_nodi`** | ### **raggiungibile dopo `mitosi`, e la voce NON lo aveva** |
+
+### ➜ **Quale dei due arriva PRIMO è da verificare**, e cambia dove scatta il flash.
+
+## ④ ### **I fotogrammi NON permettono di ripartire**
+
+Contengono `pos`, `phi`, `phi_g`, `dpozzo`, `ii`, `jj`, `n`, `na`, `dphi`, `blob`, `seme`, `passo`.
+### **Mancano `d`, `d0`, `vd`, `peq`, `tw`, `twp`, `psi`, `psi_spin`, `eta`, `phivel`.**
+
+> ### ➜ **Quindi il sigillo deve RIFARE il run fino al passo 44, su DUE blob.** Il costo, **dal
+> registro del run che li ha prodotti** *(avvio `10:46:43`, chiuso `11:29:11`, 4 semi in parallelo,
+> 120 passi)*: ### **~21 s per passo su un seme → ~15 minuti per braccio, ~30 minuti in tutto.**
+> ### **È UN RUN LUNGO, e come tale lo decide Luca.**
+
+## ⑤ **Il rinculo a indici ripetuti: voce `RINCULO-RIPETUTI`, e NON si corregge qui**
+
+**Il mio «non so» n. 5 è confermato fondato dal guardiano** — non da una mia misura. **Perché morda
+servono DUE archi che si dividono nello stesso passo e condividono un nodo:** con una sola divisione
+`a` e `b` sono distinti e ### **al passo 42 NON morde.** **Ma il caso esiste:** dal passo 70 al 120 le
+nascite sono **decine** per fotogramma, quindi divisioni che condividono un nodo sono **attese**.
+### **Voce a sé, fuori da questo sigillo, per decisione di Luca.**
+
+---
+
+# 🔁 **IL TODO, AGGIORNATO**
+
+| | |
+|---|---|
+| ☑ | passo 0: la scena è prescritta, la finestra è il passo 42, **e ora si sa perché deve essere quella** |
+| ☑ | passo 1: i siti *(7, due dopo `mitosi`)* e il rinculo *(voce `RINCULO-RIPETUTI`)* |
+| ☐ | ### **la REGOLA DI EREDITÀ: aspetta Luca** *(proposta: (a) per `psi`, (b) per `psi_spin`)* |
+| ☐ | ### **il RUN LUNGO del sigillo (~30 min): aspetta Luca** |
+| ☐ | poi il confine dell'evento atomico, il codice, il sigillo |

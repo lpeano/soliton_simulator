@@ -7,10 +7,10 @@
 > collaudo lo verifica *(il caso `CONTAGIO`)*.
 
 ```
-voci nell'indice    848
-elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard)
+voci nell'indice    849
+elencate qui        582   (tolte le etichette locali, gli assiomi e gli standard)
   di cui task       147
-  di cui difetti     84   (tipo `difetto` o `sospetto`)
+  di cui difetti     85   (tipo `difetto` o `sospetto`)
   senza marcatore   350   NON elencate: non sono lavoro in corso
 ```
 
@@ -28,7 +28,7 @@ elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard
 | id | cosa | tipo | ultimo commit che lo nomina |
 |---|---|:--:|---|
 | **`SCHED-PASSO`** | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | `cura` | `1f8ceac 09:52` |
-| **`SCHED-T3-REGOLE`** | le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in tre famiglie | `misura` | `1f8ceac 09:52` |
+| **`SCHED-T3-REGOLE`** | le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in tre famiglie | `misura` | `eefefb9 11:23` |
 
 ## CON RISERVA — 43
 
@@ -89,7 +89,7 @@ elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard
 | **`CLIP-INVENTARIO`** | INVENTARIO dei clip, tetti e pavimenti del passo pieno: 27 TETTI FISICI su 117 guardie | `altro` | `1f8ceac 09:52` |
 | **`COLLAUDO-NON-ESEGUITO`** | un collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come PASS | `altro` | `8ed23cd 01:31` |
 | **`D32-CONTATORE`** | i contatori `_rep_taupp_*` contano un clamp che NON ESISTE PIU' | `altro` | `768653c 01:26` |
-| **`DOPPIA-COP`** | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non misurata | `cura` | `1f8ceac 09:52` |
+| **`DOPPIA-COP`** | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non misurata | `cura` | `eefefb9 11:23` |
 | **`FASCE-TAU`** | LA CRESCITA E' COORDINATA COL TEMPO PROPRIO? — l'espansione non dev'essere omogenea in senso... | `cura` | `1fce1b5 13:20` |
 | **`FATTI-AVVIO`** | la catena di AVVIO non ha un solo fatto in FATTI_dal_codice.md: _applica_flag, avvia_test... | `fronte` | `982258e 02:01` |
 | **`FILI-CORTI`** | i fili si accorciano SOLO FRA LE MASSE o OVUNQUE? Il calo della distanza viene dai `d`, non... | `altro` | `8c2997c 10:00` |
@@ -165,7 +165,7 @@ elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard
 | **`L-PATCH`** | LE PATCH SI LANCIANO IN PRIMO PIANO; niente git stash con una patch in corso; nei patch script... | `presidio` | `2b273da 22:34` |
 | **`L-UN-PROMPT`** | UN PROMPT ALLA VOLTA: i rilievi che arrivano durante un lavoro vanno in CODA | `presidio` | `72b27d0 22:41` |
 | **`LETTORI-INDICE`** | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FUORI PERIMETRO —... | `altro` | `4f15f7a 18:58` |
-| **`MAX-NODI-FERMA`** | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run | `cura` | `37899e3 10:58` |
+| **`MAX-NODI-FERMA`** | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run | `cura` | `c7b2084 11:19` |
 | **`MITOSI-NON-DIVISA`** | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si alternano 26 volte | `misura` | `4b8a27d 10:09` |
 | **`OKN-ASSERT`** | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(..., default) CHE... | `altro` | `e216730 01:33` |
 | **`P1-bis`** | LA RELAZIONE SI SCRIVE NELLO STESSO COMMIT DEL RISCONTRO | `presidio` | `2ebbd25 09:22` |
@@ -195,7 +195,7 @@ elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard
 | **`Z16`** | Z16 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / Y5 ROSSO: la causa e' rhosorgente <= 0, NON peq. E nessuna... | `fronte` | `45a77d0 18:31` |
 | **`Z5`** | Z5 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / A3 NON E' UN CASO PARTICOLARE DI A2 — risolta... | `fronte` | `56b348b 13:12` |
 
-## DIFETTI E SOSPETTI — 84 righe
+## DIFETTI E SOSPETTI — 85 righe
 
 > **Il raggruppamento e' per il campo `stato` dell'indice**, non per le parole della prosa:
 > piu' grossolano di prima *(non distingue `CURA INEFFICACE` da `DA RIMISURARE`)*, ma
@@ -203,7 +203,7 @@ elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard
 
 | stato | quanti | quali |
 |---|--:|---|
-| `aperto` | 56 | `ALLUNG-RELATIVO` `ARCHI-PRIMI` `CENS-A1` `CENS-A2` `CENS-A3` `CENS-A4` `CENS-A5` `CENS-A6` `CENS-A7` `CENS-B1` `CENS-B10` `CENS-B11` `CENS-B12` `CENS-B13` `CENS-B14` `CENS-B15` `CENS-B16` `CENS-B2` `CENS-B3` `CENS-B4` `CENS-B5` `CENS-B6` `CENS-B7` `CENS-B8` `CENS-B9` `D01` `D04` `D05` `D06` `D07` `D08` `D10` `D12` `D13` `D14` `D15` `D20` `D21` `D23` `D24` `D28` `D29` `D30` `D33` `D35` `D38` `FOGLIO-NULLO` `FORMA-N-VUOTO` `MITOSI-SOGLIA-GRAD` `PSI-FLASH` `RAMPA-2` `S09-MEDIANA` `SCIOGLIMENTO-FASE` `SYNCDB-HEADLESS` `TORS-SPINTA` `V5-SOGLIA` |
+| `aperto` | 57 | `ALLUNG-RELATIVO` `ARCHI-PRIMI` `CENS-A1` `CENS-A2` `CENS-A3` `CENS-A4` `CENS-A5` `CENS-A6` `CENS-A7` `CENS-B1` `CENS-B10` `CENS-B11` `CENS-B12` `CENS-B13` `CENS-B14` `CENS-B15` `CENS-B16` `CENS-B2` `CENS-B3` `CENS-B4` `CENS-B5` `CENS-B6` `CENS-B7` `CENS-B8` `CENS-B9` `D01` `D04` `D05` `D06` `D07` `D08` `D10` `D12` `D13` `D14` `D15` `D20` `D21` `D23` `D24` `D28` `D29` `D30` `D33` `D35` `D38` `FOGLIO-NULLO` `FORMA-N-VUOTO` `MITOSI-SOGLIA-GRAD` `PSI-FLASH` `RAMPA-2` `RINCULO-RIPETUTI` `S09-MEDIANA` `SCIOGLIMENTO-FASE` `SYNCDB-HEADLESS` `TORS-SPINTA` `V5-SOGLIA` |
 | `chiuso` | 14 | `CTRL-RISCELTA` `D02` `D11` `D16` `D17` `D18` `D19` `D22` `D32` `D34` `D37` `DRIVER-SCENA-II` `OSSERVABILE-P1` `T4-TAUTOLOGICO` |
 | `da-decidere` | 11 | `D03` `D25` `D26` `D31` `D36` `REG-A` `REG-B` `REG-C` `REG-R` `REG-V` `U1` |
 | `non-difetto` | 3 | `D09` `D27` `HASHSEED-RIPROD` |

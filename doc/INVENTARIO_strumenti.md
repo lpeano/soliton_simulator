@@ -1324,3 +1324,17 @@ finiva a 21 volte la propria guardia, in silenzio.** E' la ragione per cui il co
 
 **⚠ RESTA DICHIARATO E NON MISURATO:** quanto valga lo **sforo** dentro un passo. **Serve una scena
 che cresce**, cioe' un run lungo: e' una misura a se'.
+
+## `T3` pezzo ②, i passi 0-1: **il flash, i suoi siti, il rinculo** *(2026-09-28)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_flash_passo01.py` | `605fe10b` | `python csv/_test_fork/_flash_passo01.py` | **SOLA LETTURA**: l'AST del simulatore e i **61 fotogrammi LOCALI** del pilota. ① il **salto** di `mean(phi_g)` passo per passo · ② i **siti** con la guardia `len(self.psi) < n` e quali sono **raggiungibili dopo `mitosi`** · ③ **quando morde** il rinculo a indici ripetuti | ### **il flash SMETTE**: solo ai passi `2`, `42`, `58`, `62`, `68`, e dal 70 al 120 il salto e' `1.000` con nascite a ogni fotogramma · **salto al passo 42: `2.631x` su `phi_g`, `1.622x` su `|psi|`** · **siti 7, due dopo `mitosi`** |
+
+**Referto:** `csv/_test_fork/_flash_passo01.json` *(blob byte `b799994e`)*.
+**⚠ I FOTOGRAMMI SONO LOCALI** (`STATI-LOCALI`, `.gitignore`): `csv/_test_fork/_pilota_prova1/stati/`,
+81 `.npz` prodotti dal run `pilota-prova1-stati` sul blob `e203f9a8`. **Senza quelli lo strumento
+lo dice e non misura il passo 0.**
+**E NON PERMETTONO DI RIPARTIRE:** mancano `d`, `d0`, `vd`, `peq`, `tw`, `twp`, `psi`, `psi_spin`,
+`eta`, `phivel`. ### **Il sigillo del pezzo ② deve RIFARE il run fino al passo 44, su due blob:
+~21 s per passo su un seme, cioe' ~30 minuti in tutto.**

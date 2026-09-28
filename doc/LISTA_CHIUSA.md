@@ -18,8 +18,8 @@
 | il testo | `420` caratteri della riga | `117` del `titolo_breve` **+ la fonte in colonna** |
 
 ```
-voci nell'indice      848
-in LISTA              388   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
+voci nell'indice      849
+in LISTA              389   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
 FUORI LISTA           460   col motivo, dai campi dell'indice
 ```
 
@@ -36,7 +36,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 | **E** | **DISEGNO E STATISTICHE GLOBALI** | `A2`/`A5`: mediane e medie globali dentro una legge locale, e il disegno nella fisica | 9 |
 | **F** | **FRENO E CONTRAZIONE** | `SCALA_MIN`, il freno a senso unico, la coesione, la repulsione, `d0`, `LAM` | 41 |
 | **G** | **ARRETRATO DEGLI STRUMENTI** | presidi, ancore, reperti, ripresa, il passo incompleto: **non e' fisica** | 7 |
-| **?** | **SENZA FAMIGLIA** | nessuna regola dell'indice ha deciso: **le elenco invece di metterle in una famiglia a caso** | 232 |
+| **?** | **SENZA FAMIGLIA** | nessuna regola dell'indice ha deciso: **le elenco invece di metterle in una famiglia a caso** | 233 |
 
 ---
 
@@ -245,7 +245,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 
 ---
 
-## FAMIGLIA **?** — SENZA FAMIGLIA — da assegnare a mano   *(232 voci)*
+## FAMIGLIA **?** — SENZA FAMIGLIA — da assegnare a mano   *(233 voci)*
 
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
@@ -461,6 +461,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 | `NO` | **FOGLIO-NULLO** | — | il diagnostico dei fogli vale il suo NULLO sulla scena (ii): la fase sta sul confine | `aperto` | `difetto` | `csv/_test_fork/_pilota_prova1…` |
 | `NO` | **FORMA-N-VUOTO** | — | `n` in forma_passo0 non puo' cambiare: e' l'insieme congelato del passo 0 (P4) | `aperto` | `difetto` | `csv/_test_fork/_pilota_prova1…` |
 | `DA-DECIDERE` | **MITOSI-SOGLIA-GRAD** | — | la soglia di mitosi si abbassa col gradiente di tempo proprio: ampiezza 0.3 e tanh a mano | `aperto` | `difetto` | `REGOLE_composizione_T3.md` |
+| `DA-DECIDERE` | **RINCULO-RIPETUTI** | — | il rinculo dei genitori applica UNA spinta sola a un nodo genitore due volte nello stesso passo | `aperto` | `difetto` | `TASK_HISTORY/2026-09-28_mitos…` |
 | `DA-DECIDERE` | **S09-MEDIANA** | — | la spinta S09 scala con `median(d0)` GLOBALE: lo stesso A2 gia' curato in S05 il 2026-09-17 | `aperto` | `difetto` | `soliton_simulator.py` |
 | `NO` | **SYNCDB-HEADLESS** | — | `--sync-db` in headless CARICA ma non SALVA: lo dice il docstring del driver | `aperto` | `difetto` | `csv/_test_fork/_scena_video.py` |
 | `DA-DECIDERE` | **TORS-SPINTA** | — | la spinta repulsiva di torsione: legge DINAMICA dentro mitosi(), con tre numeri non derivati | `aperto` | `difetto` | `REGOLE_composizione_T3.md` |

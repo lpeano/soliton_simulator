@@ -5884,3 +5884,72 @@ cura non lo era, ora lo è»**, e lascia leggibile la frase che l'ha generata.
 
 **Prossimo: il pezzo ② di `T3`.** Come da mandato, **prima del codice** dichiaro cosa mi aspetto che
 cambi e cosa deve restare uguale — nel task history, committato prima.
+
+---
+
+# 📏 **Pezzo ② di `T3`, passi 0-1: il flash SMETTE, e i siti sono due** *(2026-09-28)*
+
+### **Nessun codice. Blob del simulatore `05691d41`, invariato.** Sola lettura: l'AST e i **61
+fotogrammi locali** del pilota. Le **tre correzioni del guardiano** sono **annotate** nel task
+history, non riscritte.
+
+## ① ### **Il numero del mandato, riprodotto dai fotogrammi**
+
+`mean(phi_g)`: **`138.68 → 366.17 → 139.72`** ai passi `40/42/44` → ### **`2.631×` su `phi_g`, cioè
+`1.622×` su `|psi|`.** *(Tu dicevi `1.62`.)*
+
+## ② 🔍 **IL FLASH SMETTE, ed è il fatto che la voce non aveva**
+
+| | |
+|---|---|
+| passi col flash | ### **SOLO `2`, `42`, `58`, `62`, `68`** |
+| dal passo 70 al 120 | nascite a **ogni** fotogramma, fino a **`+56` nodi ogni due passi** — e ### **il salto è `1.000`** |
+
+> ### 📌 **La spiegazione candidata non è «il flash sparisce»: è «il flash diventa la NORMA».**
+> Quando **ogni** passo ha nascite, **ogni** passo ricalcola, e ### **non esiste più un passo vicino
+> NON ricalcolato con cui fare il rapporto.** **Sparisce il contrasto, non il meccanismo.**
+>
+> ### ➜ **E allora la tua prescrizione non è una comodità: è l'UNICA finestra in cui il fenomeno si
+> misura.** Fuori da lì i vicini hanno nascite anche loro, e il criterio `C-bis` non avrebbe
+> contrasto. **Avevo accettato la scena come un'indicazione; è un vincolo.**
+
+**E il passo `2` ha il flash con ZERO nascite:** è l'**inizializzazione** — la metà
+`not hasattr(self,'psi')` della guardia, non la metà `len(psi) < n`.
+
+## ③ ⚠ **I siti sono SETTE, non otto. E DUE sono raggiungibili dopo `mitosi`, non uno**
+
+Nella dichiarazione avevo scritto **8**: ### **avevo contato `calcola_psi` stessa, che è il BERSAGLIO
+e non una guardia.** Dei 7:
+
+| | |
+|---|---|
+| `:6821` in `memoria_hebbiana_moto` | raggiungibile dopo `mitosi` — **è quello che `PSI-FLASH` conosceva** |
+| ### `:3256` in `lambda_nodi` | ### **raggiungibile dopo `mitosi`, e la voce NON lo aveva** |
+
+### ➜ **Quale dei due arriva primo è da verificare, e cambia dove scatta il flash.**
+
+## ④ ### **Il sigillo costa un RUN LUNGO, e lo decidi tu**
+
+I fotogrammi ### **non permettono di ripartire**: mancano `d`, `d0`, `vd`, `peq`, `tw`, `twp`, `psi`,
+`psi_spin`, `eta`, `phivel`. Quindi il sigillo deve **rifare il run fino al passo 44, su DUE blob**.
+**Dal registro del run che li ha prodotti** *(`10:46:43` → `11:29:11`, 4 semi in parallelo, 120
+passi)*: ### **~21 s per passo su un seme → ~15 min per braccio, ~30 min in tutto.**
+
+## ⑤ **`RINCULO-RIPETUTI`: voce aperta, e NON si corregge qui**
+
+Il mio *«non so»* n. 5, **confermato fondato da te** — non da una mia misura. Perché morda servono
+**due archi che si dividono nello stesso passo e condividono un nodo**: al passo 42 c'è **una sola**
+nascita, quindi ### **lì non morde.** **Ma il caso esiste:** dal passo 70 al 120 le nascite sono
+**decine** per fotogramma. **La cura naturale è `np.add.at`** — che **somma** sugli indici ripetuti —
+**ma è un cambio di fisica e va sigillato da solo.**
+
+---
+
+## ➜ **DUE COSE CHE ASPETTO DA TE, e sono le uniche**
+
+| | |
+|---|---|
+| ### **①** | ### **LA REGOLA DI EREDITÀ di `psi`/`psi_spin` dei nati** — la propongo e non la scelgo. **(a)** media dei genitori · **(b)** eredità da `a` · **(c)** zero. ### **Raccomando (a) per `psi` e (b) per `psi_spin`**, e l'asimmetria ha una ragione: **il compagno di `psi` è `phi`, che alla nascita prende la MEDIA (`fm`); il compagno di `psi_spin` è `phi_s`, che EREDITA da `a`.** Dare a ciascuno la regola del proprio compagno è **l'unica scelta che non aggiunge una convenzione nuova** *(`9-ter`)* |
+| ### **②** | ### **il via al RUN LUNGO del sigillo** *(~30 min, un seme, 44 passi, due blob)* |
+
+> ### 🛑 **STOP**, come da mandato: prima del codice della mitosi.
