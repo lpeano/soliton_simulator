@@ -6460,3 +6460,77 @@ passi**, e quella volta bastava a gonfiare il campo di tutta la rete del **62 %*
 
 **Propongo e non faccio:** ① stessa cura di `lambda_nodi` · ② stessa cura, **e prima un contatore dove
 manca** · ③ **prima una misura** · ④ lettura uno per uno del blocco che salta, **un lavoro a sé**.
+
+---
+
+# 🔀 **L'INCROCIO: 45 accordi, 6 disaccordi — e ho torto io su tutti e sei** *(2026-09-28)*
+
+`doc/RIPIEGHI_incrocio.md`. **L'indipendenza è verificabile da git** *(la mia lettura in `ce92526`, la
+sua analisi dopo in `755723c`)* — ### ⚠ **ma il suo testo era nel messaggio: la cecità letterale non
+c'è, c'è l'ORDINE** — e l'ordine lo mostra la storia, che è meglio della mia parola.
+
+| | |
+|---|---|
+| siti che lui nomina | **55**, e ### **ZERO assenti dalla mia tabella** |
+| ✅ **ACCORDO** | **45** — i **5** legittimi, i **30** di diagnostica, i **3** già curati: **identici** |
+| ### ⛔ **DISACCORDO** | ### **6** |
+
+## ⛔ I sei disaccordi hanno **una causa sola, e è mia**
+
+La mia regola diceva *«`==` e `!=` sono fuori dal mandato»*. ### **È falso:**
+
+```
+len(x) != n   INCLUDE   len(x) < n          -> scatta ANCHE quando la cache e' corta
+len(x) == n   protegge il ramo BUONO        -> il suo `else` scatta ANCHE quando e' corta
+```
+
+`:3461 :3477 :5541 :5545 :5838 :5264` — e con `:5859` fanno **sette**.
+
+> ### 📌 **È la TERZA volta che una mia regola di famiglia nasconde i siti cercati** — dopo `(b)` che
+> contava `full(n,…)` come *«estende»* e `(a)` che chiamava *«inizializzazione»* una condizione fusa.
+> ### **Tre volte la stessa forma: una regola che parte dalla SINTASSI e non da CHE COSA SCATTA.**
+
+## ⛔ E un **quarto** difetto mio, smascherato dall'incrocio
+
+Per le **espressioni condizionali** la scelta del ramo è ### **INVERTITA**: per tutti gli `IfExp` ho
+riportato **il ramo buono** come se fosse il ramo di scorta. **La prova è il sito che lui classifica
+giusto:**
+
+| `:7394` | `I_nodi = abs(psi[:n])**2 if … len(psi) >= n else np.ones(n)` |
+|---|---|
+| la mia lettura | *«usa la cache così com'è»* |
+| ### il ramo VERO | ### **`np.ones(n)` — densità a UNO per tutta la rete** |
+
+### ➜ **La mia «famiglia ③» (8 siti) NON ESISTE: è un artefatto, e si dissolve nella sua classe 4.**
+Lo stesso per `:5754`, dove il ramo vero è **`None`**.
+
+## ✅ Dove ha torto lui: **due caselle, non due letture**
+
+`:5754` non è *«cs dinamica»* *(la cache è `psi`, il ramo è `None`)* e `:6225` non scrive una densità
+*(mette un **flag** a falso)*: sono **leggi saltate**. ### **In entrambi la sua conclusione resta
+giusta** — lo dico perché il mandato lo chiede, non perché cambi qualcosa.
+
+## Due cose che la sua lettura ha e la mia no
+
+| | |
+|---|---|
+| `:5750` | ### **confronta `len(d0)` — PER ARCO — con `n`, che conta i NODI:** sempre vero, **il ramo non scatta mai**. Io l'avevo messo fra i candidati **senza vedere che confronta due grandezze diverse** |
+| i **dormienti** | vengono dai **flag del driver**, che il mio strumento **non legge**: ### **la mia `(d)` mescola siti VIVI e DORMIENTI**, e la distinzione è sua |
+
+## E una cosa che posso dare a lui
+
+*«Perché `_rho_sorgente` non compare?»* → ### **la cura ha spostato il confronto dentro
+`_ferma_se_cache_corta`.** ### **Curare un sito lo rendeva invisibile allo strumento che li conta** —
+ed è un **requisito per il presidio del punto ③**: deve riconoscere **entrambe** le forme.
+
+## ⚠ Due cose da non leggere come se fossero giuste
+
+### **`doc/RIPIEGHI_classi.md` è ora NOTA essere sbagliata** nella colonna del ramo di scorta **per
+tutti gli `IfExp`**: non l'ho rigenerata in questo giro *(il mandato dice «commit, STOP»)*, **ma non
+va letta come se fosse giusta.**
+E **il verdetto sui troncamenti `>` è suo, non mio**: se nessuna legge toglie nodi non devono mai
+scattare. ### **Va verificato che nessuna legge tolga nodi, e non l'ho fatto.**
+
+> ### 🛑 **Sulla forma della cura non decido:** la sua proposta — **un solo controllo dello
+> schedulatore** invece di quaranta `raise` sparsi — **è più stretta della mia** e coincide col
+> registro delle grandezze per nodo di `T3`. **Decide Luca.**
