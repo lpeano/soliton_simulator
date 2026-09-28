@@ -2984,10 +2984,13 @@ class Rete:
         #   ⚠ IL RAMO `_sat` RESTA COM'ERA, e non e' una dimenticanza: in saturazione
         #   IL NUMERO LO DECIDE LA GEOMETRIA (`n = len(p)` qui sotto), e il valore calcolato qui
         #   con `MAX_NODI` **NON VIENE USATO** -- serve SOLO alla scorciatoia `if n == 0: return`,
-        #   che e' comportamento dichiarato (`semina(0)` ritorna subito). **Quindi oggi la
-        #   saturazione NON e' controllata da `MAX_NODI`**: lo ha rilevato il guardiano
-        #   (Luca, 2026-09-28) sul punto 2 dei miei <<non so>>, e la sua prescrizione e'
-        #   **UN SOLO controllo, DOPO `n = len(p)`, sul NUMERO VERO, PER ENTRAMBI I RAMI.**
+        #   che e' comportamento dichiarato (`semina(0)` ritorna subito).
+        #   **PRIMA DI QUESTA CURA la saturazione NON era controllata da `MAX_NODI`**: lo ha
+        #   rilevato il guardiano (Luca, 2026-09-28) sul punto 2 dei miei <<non so>>, e la sua
+        #   prescrizione e' **UN SOLO controllo, DOPO `n = len(p)`, sul NUMERO VERO, PER ENTRAMBI
+        #   I RAMI**. ### **ORA LO E'**, e il controllo unico sta dopo l'`if`/`else`.
+        #   *(Il commento precedente diceva <<quindi OGGI la saturazione NON e' controllata>>:
+        #   era vero della versione VECCHIA e falso di questa. Correzione chiesta dal guardiano.)*
         n = (MAX_NODI - self.n) if _sat else max(0, n)
         if n == 0: return
         r = _scala_sistema() * 0.5 if raggio is None else raggio

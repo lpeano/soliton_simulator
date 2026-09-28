@@ -5850,3 +5850,37 @@ cambi** *(i flash di `psi` al passo di nascita)* e **cosa deve restare uguale ne
 nascite**.
 
 > ### 🛑 **STOP.**
+
+---
+
+# 🟨 **MISURA DI LUCA: il ramo senza `SEMINA_LAM` è coperto. E il commento era falso** *(2026-09-28)*
+
+### **Simulatore `2feb5ba0` → `05691d41`. Solo un commento.**
+
+## La misura, e non è mia
+
+| | `MAX_NODI = 100`, `semina(200)` |
+|---|---|
+| blob **vecchio** | ### **tronca a 100, in silenzio** |
+| blob **nuovo** | ### **solleva `LimiteNodiSuperato`** |
+
+### ➜ **Il buco che avevo dichiarato è chiuso**, e va detto **da chi l'ha chiuso:** il sigillo non ci
+arriva *(la scena dei sigilli chiede la saturazione)* e il suo braccio `E` verifica **solo la
+forma**. ### **La misura è di Luca.**
+
+**Resta non misurato solo lo SFORO dentro un passo** — serve una scena che cresce.
+
+## Il commento corretto
+
+Sopra `:2976` avevo scritto: *«quindi **oggi** la saturazione **NON** è controllata da `MAX_NODI`»*.
+### **Era vero della versione VECCHIA e falso di questa.** Ora il commento dice **«prima di questa
+cura non lo era, ora lo è»**, e lascia leggibile la frase che l'ha generata.
+
+> ### 📌 **La forma dell'errore, che è la seconda volta oggi:** ho scritto **al presente** una frase
+> che descriveva **il passato**. La prima volta era *«dichiarato e MISURATO»* di una cosa non
+> misurata; questa è *«oggi NON è controllata»* di una cosa che la riga sotto controlla.
+> **Un commento scritto nel tempo sbagliato è un commento scaduto appena nasce** — ed è la famiglia
+> di difetti per cui `CLAUDE.md` dice *«verifica dal codice, non dai commenti»*.
+
+**Prossimo: il pezzo ② di `T3`.** Come da mandato, **prima del codice** dichiaro cosa mi aspetto che
+cambi e cosa deve restare uguale — nel task history, committato prima.

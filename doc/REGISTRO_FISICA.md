@@ -1016,7 +1016,10 @@ distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifi
 > E' CAMBIATA, e' cambiato CIO' CHE FA QUANDO NON CI STA.** Prima **troncava**
 > (`min(n, MAX_NODI - self.n)`): si chiedevano `n` nodi, ne nascevano meno, **e dai dati non
 > si vedeva**. Ora **ferma il run**. ### **Byte-inerte finche' la guardia non morde**, cioe
-> sempre nelle corse reali. ### **E IL CONTROLLO E' UNO, DOPO LA GEOMETRIA, PER ENTRAMBI I RAMI**
+> sempre nelle corse reali. ### 🟨 **E IL RAMO SENZA `SEMINA_LAM` E' COPERTO: misura di Luca del
+> 2026-09-28** -- `MAX_NODI = 100` con `semina(200)`, **il vecchio tronca a 100 in silenzio, il nuovo
+> solleva `LimiteNodiSuperato`**.
+> ### **E IL CONTROLLO E' UNO, DOPO LA GEOMETRIA, PER ENTRAMBI I RAMI**
 > *(prescrizione del guardiano, 2026-09-28)*: nel ramo `_sat` il numero lo decide **la geometria**
 > (`n = len(p)`) e il valore calcolato con `MAX_NODI` **non viene usato**, quindi **prima la
 > saturazione non era controllata affatto**; e un controllo dentro il solo ramo `SEMINA_LAM`
@@ -4525,6 +4528,11 @@ affatto.**
 **dentro il solo ramo `SEMINA_LAM`**. ### **Due controlli sono due leggi** *(`9-ter`)*, **e quello
 dentro il ramo lasciava scoperto l'altro ramo.** Ora e' **uno**, dopo l'`if`/`else`, dove `n` e' il
 numero di punti che **esistono** in `p`.
+
+> ### 🟨 **MISURA DI LUCA, 2026-09-28: il ramo senza `SEMINA_LAM` E' COPERTO.** Con `MAX_NODI = 100`
+> e `semina(200)`: ### **il blob VECCHIO tronca a 100 in silenzio, il NUOVO solleva
+> `LimiteNodiSuperato`.** *(Il sigillo non ci arriva -- la scena dei sigilli chiede la saturazione --
+> e il suo braccio `E` verifica solo la FORMA. **Questa e' la misura, e non e' mia: e' di Luca.**)*
 
 > ### ⚠ **LA CONSEGUENZA, DICHIARATA:** controllando **dopo**, i punti `p` sono ### **gia' allocati**
 > quando il run si ferma. Sono `n x 3` float, e **non sono la memoria che `MAX_NODI` protegge
