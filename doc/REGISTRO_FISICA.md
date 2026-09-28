@@ -1297,6 +1297,13 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
 
+> ### 🆕 **NOTA DEL 2026-09-28 (`PSI-FLASH`): la mitosi ora ESTENDE `psi` e `psi_spin` ai nati.**
+> **La legge della mitosi non cambia**: cambia che ### **i nati ricevono un `psi` invece di lasciare
+> `len(psi) < n`**, che spegneva la schermatura per tutta la rete. `psi` prende la **media dei
+> genitori** *(il compagno di `phi`, che alla nascita prende `fm`)*, `psi_spin` **eredita da `a`**
+> *(il compagno di `phi_s`)*. **Ai DUE canali**: mitosi (`a`,`b`) e Schwinger (`aa`,`bb`).
+> *(La legge della schermatura sta nella scheda `schermatura-nucleo-nudo`.)*
+
 > **-> NOTA DEL 2026-09-28 (`MAX-NODI-FERMA`): LA LEGGE DELLA MITOSI NON E' CAMBIATA -- LE E'
 > STATA TOLTA UNA COSA CHE NON ERA SUA.** Due rami leggevano `MAX_NODI`:
 > `if self.n >= MAX_NODI or not len(self.tw): return 0` (### **zero nascite in silenzio**) e
@@ -4546,3 +4553,59 @@ numero di punti che **esistono** in `p`.
 > quando il run si ferma. Sono `n x 3` float, e **non sono la memoria che `MAX_NODI` protegge
 > davvero** -- quella e' lo **stato del grafo**, archi compresi, che **non e' ancora stato toccato**.
 > **Ma e' un'allocazione che prima, col troncamento, non avveniva.**
+
+<!-- SCHEDA nome=schermatura-nucleo-nudo funzioni=lambda_nodi,_lam_archi,_eredita_psi_figli,massa_critica_adattiva flag=SCHERMATURA,LAM -->
+# ㉛ LA SCHERMATURA, E PERCHE' LA MASSA CRITICA SI CALCOLA SUL NUCLEO NUDO
+
+**La legge:** `lambda_nodi` da' a ogni nodo una **portata** che SCENDE dove la densita' sale --
+`u = rho/rho_c`, `fattore = 1/(1 + softplus(u-1))`, `lambda = max(LAM*fattore, LAM*0.15)`. Sugli
+archi si simmetrizza: `_lam_archi = max(0.5*(lam_i + lam_j), 1e-6)`. Entra nei pesi come
+`exp(-d/lam)`, quindi ### **lambda piu' grande = accoppiamento piu' esteso = campo piu' forte.**
+
+## ✅ **DEFINIZIONE, decisa da Luca il 2026-09-28: la massa critica si calcola SUL NUCLEO NUDO**
+
+Dentro `massa_critica_adattiva` la schermatura vale **`LAM`**, non il suo valore schermato, e
+### **non e' un ripiego: e' la definizione.**
+
+> ### 📌 **La soglia che ACCENDE la schermatura non puo' dipendere dalla schermatura stessa.**
+> Il codice la implementa con `_calcolo_schermatura`, che esiste anche per **rompere la ricorsione**
+> fra `lambda_nodi` e `massa_critica_adattiva` -- ma la ragione VERA e' la prima.
+
+**⚠ E IL NUMERO, che mancava** (`A8`, contatore `_g_scherm_ricorsione`): **MISURATO `308` volte su
+`44` passi, cioe' SETTE PER PASSO.** Su `530` chiamate di `_lam_archi`, ### **`310` restituiscono
+`LAM`: il `58.5 %`.**
+
+## ⛔ **IL DIFETTO CHE C'ERA ACCANTO, e non era la stessa cosa** *(`PSI-FLASH`)*
+
+```
+PRIMA:  if not hasattr(self, "psi") or len(self.psi) < self.n: return np.full(self.n, LAM)
+```
+
+### **Due condizioni in un `or`, e sono cose diverse:**
+
+| | |
+|---|---|
+| `not hasattr` | ### **inizializzazione**: al passo 1 `psi` non esiste. **RESTA**, e si conta (`_g_scherm_init`). Misurato: **1** volta in 44 passi |
+| ### `len(psi) < n` | ### **IL DIFETTO**: al passo di nascita `mitosi` fa crescere `n`, e ### **la schermatura si spegneva PER TUTTA LA RETE** -- `lambda` da `~0.60` a `0.80`, `exp(-d/lam)` da `0.0655` a `0.1223`, `|psi|` su di `1.62x` **per TUTTI, non per il nato**, e il pozzo da `130` a `366`. **ORA SOLLEVA `SchermaturaSpenta`** |
+
+> ### 📌 **Il `2.6x` sul pozzo NON ERA FISICA: era l'assenza della schermatura.** E scioglie il
+> paradosso: **una nascita su 12802 nodi non muove il campo di tutti** -- lo muove **una guardia che
+> si spegne.** *(Causa trovata dal guardiano; verificata da `csv/_test_fork/_lambda_al_flash.py`.)*
+
+## ✅ **LA CURA: `psi` si EREDITA alla nascita** *(`_eredita_psi_figli`, forma 7)*
+
+| grandezza | regola | il compagno che la usa gia' |
+|---|---|---|
+| `psi` | ### **media dei genitori** `0.5*(psi[a] + psi[b])` | `phi` del figlio e' `fm`, la fase **MEDIA** |
+| `psi_spin` | ### **eredita' da `a`** | `phi_s` alla nascita **eredita da `a`** |
+
+**Dare a ciascuno la regola del PROPRIO compagno e' l'unica scelta che non aggiunge una convenzione
+nuova** (`9-ter`). **E NON un ricalcolo:** un ricalcolo a meta' passo leggerebbe il grafo **dopo** la
+mitosi, cioe' **un'altra lettura mista**. **Il valore vero arriva al passo dopo, da `step`.**
+
+**Chiamata ai DUE canali di nascita:** la mitosi *(genitori `a`, `b`)* e lo Schwinger *(`aa`, `bb`)*.
+**Il segno dell'antinodo non si tocca:** `psi` e' **complesso** e l'antinodo nasce a `anti = fm + pi`,
+quindi ### **il segno e' GIA' nella sua fase.**
+
+*(`⚠` La somma di `psi` e' complessa: due genitori in antifase danno un figlio con `|psi| ~ 0`.
+**E' interferenza distruttiva, cioe' fisica, non un errore.**)*

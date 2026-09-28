@@ -610,3 +610,21 @@ nodi**, **quanti richiesti** e **di quanto** si e' superato il tetto.
 
 **⚠ E non e' un tetto fisico** (`A11`): non protegge da un errore di fisica, protegge la RAM.
 **In futuro va ELIMINATO** *(decisione di Luca, 2026-09-28)*.
+
+## 🆕 `PSI-FLASH` **curato** dal 2026-09-28: la schermatura non si spegne più alla nascita
+
+| | |
+|---|---|
+| **cosa c'era** | al passo di una nascita `mitosi` faceva crescere `n`, quindi `len(psi) < n`, quindi `lambda_nodi` restituiva `LAM` **per tutta la rete**: ### **la schermatura si spegneva in silenzio** |
+| **quanto valeva** | `λ` da `~0.60` a **`0.80`**, `exp(-d/λ)` da `0.0655` a `0.1223`, ### **`\|psi\|` su di `1.62×` per TUTTI** *(non per il nato)*, e il pozzo da `130` a **`366`** |
+| **la cura** | `mitosi` **ESTENDE** `psi` *(media dei genitori)* e `psi_spin` *(da `a`)* ai nati, ai **due** canali *(mitosi e Schwinger)*. Così ### **`len(psi) == n` sempre** |
+| **e il presidio** | `len(psi) < n` in `lambda_nodi` ### **solleva `SchermaturaSpenta` e FERMA il run.** Se scatta, una strada nuova fa crescere `n` senza estendere `psi` — e **prima cambiava la fisica in silenzio** |
+| **NESSUN FLAG NUOVO** | ### **non c'è niente da accendere: è una cura strutturale.** `SCHERMATURA` e `LAM` restano come erano |
+
+### ⚠ **Che cosa NON è cambiato, e va detto:** il ripiego della **ricorsione** in `lambda_nodi`
+*(`_calcolo_schermatura`)* ### **RESTA**, perché non è un difetto: è la **definizione** — *la massa
+critica si calcola sul **nucleo nudo**, perché la soglia che accende la schermatura non può dipendere
+dalla schermatura stessa*. **Ora è contata** *(`_g_scherm_ricorsione`)*: **sette per passo**.
+
+> ### 📌 **E il `2.6×` sul pozzo non era fisica:** era l'assenza della schermatura. **Ogni numero
+> misurato in un passo CON nascite, prima di questa cura, viene da un campo gonfiato di `~1.6×`.**

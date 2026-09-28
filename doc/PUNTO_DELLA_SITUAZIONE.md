@@ -7,10 +7,10 @@
 > collaudo lo verifica *(il caso `CONTAGIO`)*.
 
 ```
-voci nell'indice    849
-elencate qui        582   (tolte le etichette locali, gli assiomi e gli standard)
+voci nell'indice    850
+elencate qui        583   (tolte le etichette locali, gli assiomi e gli standard)
   di cui task       147
-  di cui difetti     85   (tipo `difetto` o `sospetto`)
+  di cui difetti     86   (tipo `difetto` o `sospetto`)
   senza marcatore   350   NON elencate: non sono lavoro in corso
 ```
 
@@ -28,7 +28,7 @@ elencate qui        582   (tolte le etichette locali, gli assiomi e gli standard
 | id | cosa | tipo | ultimo commit che lo nomina |
 |---|---|:--:|---|
 | **`SCHED-PASSO`** | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | `cura` | `1f8ceac 09:52` |
-| **`SCHED-T3-REGOLE`** | le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in tre famiglie | `misura` | `eefefb9 11:23` |
+| **`SCHED-T3-REGOLE`** | le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in tre famiglie | `misura` | `792b925 15:02` |
 
 ## CON RISERVA — 43
 
@@ -39,7 +39,7 @@ elencate qui        582   (tolte le etichette locali, gli assiomi e gli standard
 | **`INERZIA-1(C)`** | 1(C) — CURATA e SIGILLATA 3/6 il 2026-09-25: GIUSTA e INSUFFICIENTE / LA CURA TOGLIE ESATTAMENTE... | `altro` | `4a76517 15:00` |
 | **`RIPRESA-ARGV`** | APERTA il 2026-09-26 (limite di un meccanismo che ho costruito io) / LA RIPRESA SI FIDA DEL... | `altro` | `4a76517 15:00` |
 | **`S09`** | IL TETTO DI r E' RAGGIUNTO PER UNA VIA CHE NON CONOSCIAMO — lettura di Luca, 2026-09-22: la... | `altro` | `a92f599 13:21` |
-| **`U2`** | M2 DIVENTA URGENTE — la mitosi mette figli SOTTO la scala di Planck. Con la semina nuova gli... | `altro` | `fd75302 12:12` |
+| **`U2`** | M2 DIVENTA URGENTE — la mitosi mette figli SOTTO la scala di Planck. Con la semina nuova gli... | `altro` | `a461b65 15:15` |
 | **`Z100`** | Z100 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / INVARIANTI (C5): il programma si ferma quando una... | `fronte` | `bc940ff 22:30` |
 | **`Z101`** | Z101 APERTA ⏳[EPOCA 3 · MISURA] / VALIDAZIONE A 600 PASSI: 6 criteri su 8 REGGONO. L'ESPLOSIONE... | `fronte` | `bc940ff 22:30` |
 | **`Z102`** | Z102 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / CHI FA SCAPPARE d0: E' IL FRENO DELLA SCALA MINIMA.... | `fronte` | `7263b19 16:38` |
@@ -152,11 +152,11 @@ elencate qui        582   (tolte le etichette locali, gli assiomi e gli standard
 | **`H-ETC-1`** | PRESIDIO PROPOSTO E NON CABLATO: zero calcola_psi senza w dentro passo_pieno | `presidio` | `1f8ceac 09:52` |
 | **`H-INDICE`** | PRESIDIO DEL HOOK: un ID citato in un documento vivo o nel messaggio che non e' nell'indice | `presidio` | `2b273da 22:34` |
 | **`H-P1-bis`** | PRESIDIO DEL HOOK: un referto committato senza toccare la relazione | `presidio` | `ee5ecd3 22:52` |
-| **`H-P3`** | PRESIDIO DEL HOOK: un sigillo che configura il modulo A MANO invece di passare dal CLI | `presidio` | `fdd9889 01:50` |
+| **`H-P3`** | PRESIDIO DEL HOOK: un sigillo che configura il modulo A MANO invece di passare dal CLI | `presidio` | `9176216 12:38` |
 | **`H-P5`** | PRESIDIO DEL HOOK: un referto che non dichiara la configurazione INTERA | `presidio` | `1b5f7ab 09:07` |
 | **`H-P7`** | PRESIDIO DEL HOOK: un flag il cui commento cambia senza nominare quel flag | `presidio` | `69624a8 20:27` |
-| **`H-P8`** | PRESIDIO DEL HOOK: un confronto che prende il codice di prima da HEAD invece che dal PADRE | `presidio` | `4b80887 10:49` |
-| **`H-P9`** | PRESIDIO DEL HOOK: uno strumento che fa avanzare una rete con net.step() invece di passo_pieno | `presidio` | `dab9304 00:27` |
+| **`H-P8`** | PRESIDIO DEL HOOK: un confronto che prende il codice di prima da HEAD invece che dal PADRE | `presidio` | `7b8a396 13:03` |
+| **`H-P9`** | PRESIDIO DEL HOOK: uno strumento che fa avanzare una rete con net.step() invece di passo_pieno | `presidio` | `7b8a396 13:03` |
 | **`H-REG-R`** | PRESIDIO DEL HOOK: una legge che cambia senza la sua scheda in REGISTRO_FISICA | `presidio` | `8455a16 23:44` |
 | **`H-RIGHE`** | PRESIDIO DEL HOOK: CLAUDE.md oltre le 400 righe | `presidio` | `2b273da 22:34` |
 | **`H-VALIDATORE`** | PRESIDIO DEL HOOK: un indice mal formato o con una voce persa rispetto al tag | `presidio` | `69624a8 20:27` |
@@ -165,8 +165,8 @@ elencate qui        582   (tolte le etichette locali, gli assiomi e gli standard
 | **`L-PATCH`** | LE PATCH SI LANCIANO IN PRIMO PIANO; niente git stash con una patch in corso; nei patch script... | `presidio` | `2b273da 22:34` |
 | **`L-UN-PROMPT`** | UN PROMPT ALLA VOLTA: i rilievi che arrivano durante un lavoro vanno in CODA | `presidio` | `72b27d0 22:41` |
 | **`LETTORI-INDICE`** | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FUORI PERIMETRO —... | `altro` | `4f15f7a 18:58` |
-| **`MAX-NODI-FERMA`** | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run | `cura` | `c7b2084 11:19` |
-| **`MITOSI-NON-DIVISA`** | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si alternano 26 volte | `misura` | `4b8a27d 10:09` |
+| **`MAX-NODI-FERMA`** | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run | `cura` | `a461b65 15:15` |
+| **`MITOSI-NON-DIVISA`** | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si alternano 26 volte | `misura` | `1003be6 15:13` |
 | **`OKN-ASSERT`** | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(..., default) CHE... | `altro` | `e216730 01:33` |
 | **`P1-bis`** | LA RELAZIONE SI SCRIVE NELLO STESSO COMMIT DEL RISCONTRO | `presidio` | `2ebbd25 09:22` |
 | **`P1-quater`** | OGNI SOSTITUZIONE DI TESTO SI ASSERISCE PER SE', MAI IN BLOCCO | `presidio` | `1f8ceac 09:52` |
@@ -179,7 +179,7 @@ elencate qui        582   (tolte le etichette locali, gli assiomi e gli standard
 | **`RIPIEGO-1`** | APERTA E CHIUSA il 2026-09-25 (difetto mio, rilevato da LUCA) / UN RIPIEGO GLOBALE SU UNA... | `altro` | `da1c65b 01:26` |
 | **`S12`** | S12 APPROVATO DA LUCA il 2026-09-24 / IL RILASSAMENTO DI rep DENTRO mitosi() (:5280) E' UN... | `altro` | `1486cac 09:27` |
 | **`SCENA-1`** | CHIUSA il 2026-09-25, strada (1) (decisione di Luca) / SEMINALAM era approvata ma INCOMPATIBILE... | `altro` | `f96b4bc 15:07` |
-| **`SCHED-T1`** | T1 dello schedulatore: la composizione e' una LISTA e c'e' UN SOLO esecutore, esegui_passo | `cura` | `dab9304 00:27` |
+| **`SCHED-T1`** | T1 dello schedulatore: la composizione e' una LISTA e c'e' UN SOLO esecutore, esegui_passo | `cura` | `7b8a396 13:03` |
 | **`SCHED-T2-TIPI`** | T2 (i tipi): gli 8 tipi del registro del passo, e dopo L_CONSERVA sono coerenti 8 su 8 | `cura` | `1f8ceac 09:52` |
 | **`SCHED-T2-VALIDA`** | T2: esegui_passo VALIDA la composizione -- apri primo, coda fissa, registro, nessun doppio | `cura` | `5ac5150 08:56` |
 | **`Z106`** | Z106 CHIUSA PER MISURA ⏳[EPOCA 3 · MISURA] / GLI ARCHI PIU' SPINTI DA S09 NON SONO UNA CODA... | `fronte` | `e0dd5a4 16:43` |
@@ -195,7 +195,7 @@ elencate qui        582   (tolte le etichette locali, gli assiomi e gli standard
 | **`Z16`** | Z16 VALE SEMPRE ⏳[EPOCA 1 · MISURA] / Y5 ROSSO: la causa e' rhosorgente <= 0, NON peq. E nessuna... | `fronte` | `45a77d0 18:31` |
 | **`Z5`** | Z5 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] / A3 NON E' UN CASO PARTICOLARE DI A2 — risolta... | `fronte` | `56b348b 13:12` |
 
-## DIFETTI E SOSPETTI — 85 righe
+## DIFETTI E SOSPETTI — 86 righe
 
 > **Il raggruppamento e' per il campo `stato` dell'indice**, non per le parole della prosa:
 > piu' grossolano di prima *(non distingue `CURA INEFFICACE` da `DA RIMISURARE`)*, ma
@@ -203,7 +203,7 @@ elencate qui        582   (tolte le etichette locali, gli assiomi e gli standard
 
 | stato | quanti | quali |
 |---|--:|---|
-| `aperto` | 57 | `ALLUNG-RELATIVO` `ARCHI-PRIMI` `CENS-A1` `CENS-A2` `CENS-A3` `CENS-A4` `CENS-A5` `CENS-A6` `CENS-A7` `CENS-B1` `CENS-B10` `CENS-B11` `CENS-B12` `CENS-B13` `CENS-B14` `CENS-B15` `CENS-B16` `CENS-B2` `CENS-B3` `CENS-B4` `CENS-B5` `CENS-B6` `CENS-B7` `CENS-B8` `CENS-B9` `D01` `D04` `D05` `D06` `D07` `D08` `D10` `D12` `D13` `D14` `D15` `D20` `D21` `D23` `D24` `D28` `D29` `D30` `D33` `D35` `D38` `FOGLIO-NULLO` `FORMA-N-VUOTO` `MITOSI-SOGLIA-GRAD` `PSI-FLASH` `RAMPA-2` `RINCULO-RIPETUTI` `S09-MEDIANA` `SCIOGLIMENTO-FASE` `SYNCDB-HEADLESS` `TORS-SPINTA` `V5-SOGLIA` |
+| `aperto` | 58 | `ALLUNG-RELATIVO` `ARCHI-PRIMI` `CENS-A1` `CENS-A2` `CENS-A3` `CENS-A4` `CENS-A5` `CENS-A6` `CENS-A7` `CENS-B1` `CENS-B10` `CENS-B11` `CENS-B12` `CENS-B13` `CENS-B14` `CENS-B15` `CENS-B16` `CENS-B2` `CENS-B3` `CENS-B4` `CENS-B5` `CENS-B6` `CENS-B7` `CENS-B8` `CENS-B9` `D01` `D04` `D05` `D06` `D07` `D08` `D10` `D12` `D13` `D14` `D15` `D20` `D21` `D23` `D24` `D28` `D29` `D30` `D33` `D35` `D38` `FOGLIO-NULLO` `FORMA-N-VUOTO` `MCRIT-RICALCOLO` `MITOSI-SOGLIA-GRAD` `PSI-FLASH` `RAMPA-2` `RINCULO-RIPETUTI` `S09-MEDIANA` `SCIOGLIMENTO-FASE` `SYNCDB-HEADLESS` `TORS-SPINTA` `V5-SOGLIA` |
 | `chiuso` | 14 | `CTRL-RISCELTA` `D02` `D11` `D16` `D17` `D18` `D19` `D22` `D32` `D34` `D37` `DRIVER-SCENA-II` `OSSERVABILE-P1` `T4-TAUTOLOGICO` |
 | `da-decidere` | 11 | `D03` `D25` `D26` `D31` `D36` `REG-A` `REG-B` `REG-C` `REG-R` `REG-V` `U1` |
 | `non-difetto` | 3 | `D09` `D27` `HASHSEED-RIPROD` |

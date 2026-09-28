@@ -11,8 +11,8 @@ mano**: si rigenera.)*
 > **per regola, non per giudizio**.
 
 ```
-voci nell'indice          849
-in questo smistamento     159   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
+voci nell'indice          850
+in questo smistamento     160   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
 di cui blocca SI          10
 ```
 
@@ -48,6 +48,7 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D03](REVISIONE_SI_202
 | **TORS-SPINTA** | `DA-DECIDERE` |  |
 | **MITOSI-SOGLIA-GRAD** | `DA-DECIDERE` |  |
 | **RINCULO-RIPETUTI** | `DA-DECIDERE` |  |
+| **MCRIT-RICALCOLO** | `DA-DECIDERE` |  |
 
 ## FAMIGLIA **A** — INERZIA E AVVIO   *(58 voci)*
 
@@ -206,7 +207,7 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D03](REVISIONE_SI_202
 | `NO` | **D13** | I sigilli storici non sono stati rigirati sul blob corrente / Z11 / — / APERTO | voce di PROCESSO o di STRUMENTO: non e' una legge del sistema | `STATO_RUN.md` |
 | `NO` | **Z15** | Z15 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / 14 .pkl su 36 non portano il BLOB del codice che li ha... | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 
-## FAMIGLIA **?** — SENZA FAMIGLIA — nessuna regola ha deciso   *(37 voci)*
+## FAMIGLIA **?** — SENZA FAMIGLIA — nessuna regola ha deciso   *(38 voci)*
 
 | blocca? | id | che cos'e' | **il motivo, in una frase** | fonte |
 |:--:|---|---|---|---|
@@ -233,6 +234,7 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D03](REVISIONE_SI_202
 | `NO` | **D29** | CINQUE NODI DI VUOTO sono i piu' connessi dell'intero sistema: il vuoto ha degli HUB, e non... | nessuna prova la lega al run base: **non blocca fino a prova contraria**, ed e' la regola, non un giudizio | `STATO_RUN.md` |
 | `NO` | **FOGLIO-NULLO** | il diagnostico dei fogli vale il suo NULLO sulla scena (ii): la fase sta sul confine |  | `csv/_test_fork/_pilota_prova1_braccio.py` |
 | `NO` | **FORMA-N-VUOTO** | `n` in forma_passo0 non puo' cambiare: e' l'insieme congelato del passo 0 (P4) |  | `csv/_test_fork/_pilota_prova1.py` |
+| `DA-DECIDERE` | **MCRIT-RICALCOLO** | massa_critica_adattiva si ricalcola 7 volte per passo su stati diversi: e' una lettura mista |  | `REGISTRO_FISICA.md` |
 | `DA-DECIDERE` | **MITOSI-SOGLIA-GRAD** | la soglia di mitosi si abbassa col gradiente di tempo proprio: ampiezza 0.3 e tanh a mano |  | `REGOLE_composizione_T3.md` |
 | `DA-DECIDERE` | **RINCULO-RIPETUTI** | il rinculo dei genitori applica UNA spinta sola a un nodo genitore due volte nello stesso passo |  | `TASK_HISTORY/2026-09-28_mitosi-nascita-atomica.md` |
 | `DA-DECIDERE` | **S09-MEDIANA** | la spinta S09 scala con `median(d0)` GLOBALE: lo stesso A2 gia' curato in S05 il 2026-09-17 |  | `soliton_simulator.py` |

@@ -937,6 +937,26 @@ class LimiteNodiSuperato(RuntimeError):
     """
 
 
+class SchermaturaSpenta(RuntimeError):
+    """**La SCHERMATURA si e' spenta per tutta la rete, e il run SI FERMA.**
+
+    *(`PSI-FLASH`, cura del 2026-09-28.)* `lambda_nodi` aveva un ripiego silenzioso:
+    `if len(self.psi) < self.n: return np.full(self.n, LAM)`. ### **Al passo di nascita `mitosi`
+    fa crescere `n`, quindi `len(psi) < n`, quindi la schermatura si spegneva PER TUTTA LA RETE**
+    -- `lambda` da `~0.60` a `0.80`, `exp(-d/lambda)` da `0.0655` a `0.1223`, e `|psi|` su di
+    `1.62x` **per TUTTI, non per il nato**.
+
+    ### **Il `2.6x` sul pozzo non era fisica: era l'ASSENZA della schermatura.**
+    *(Causa trovata dal guardiano, Luca, 2026-09-28; verificata da
+    `csv/_test_fork/_lambda_al_flash.py`.)*
+
+    **Chi la vede, che fare:** `psi` deve essere ESTESA a ogni nascita
+    *(`_eredita_psi_figli`)*. **Se questo errore scatta, una strada nuova fa crescere `n` senza
+    estendere `psi`** -- e ### **prima di questa cura quella strada cambiava la fisica in
+    silenzio.**
+    """
+
+
 def _ferma_se_oltre_max_nodi(n_attuale, quanti, dove):
     """**UN SOLO controllo per `MAX_NODI`, e non tronca MAI.**
 
@@ -2205,6 +2225,54 @@ class Rete:
         elif len(cur) > n:
             self._psi_spinor = cur[:n]
 
+    def _eredita_psi_figli(self, src_a, src_b=None):
+        """**`psi` e `psi_spin` dei NATI: EREDITA', non ricalcolo.** *(forma 7, `nascita`.)*
+
+        ### Perche' EREDITA' e non un ricalcolo -- correzione del guardiano (Luca, 2026-09-28)
+        Un ricalcolo a meta' passo leggerebbe **il grafo DOPO la mitosi**: sarebbe **di nuovo una
+        lettura mista**, cioe' la cosa che questa cura combatte. **Il nato eredita, e il valore
+        vero arriva al passo dopo** dal ricalcolo normale di `step`.
+
+        ### Le due regole, e NON sono uguali per una ragione
+        | | regola | il compagno che gia' la usa |
+        |---|---|---|
+        | `psi` | ### **MEDIA dei genitori** | `phi` del figlio e' `fm`, la fase **MEDIA** |
+        | `psi_spin` | ### **EREDITA' da `a`** | `phi_s` alla nascita **eredita da `a`** |
+
+        **Dare a ciascuno la regola del PROPRIO compagno e' l'unica scelta che non aggiunge una
+        convenzione nuova** (`9-ter`). *(Approvata da Luca, 2026-09-28.)*
+
+        ⚠ **E la somma di `psi` e' COMPLESSA:** due genitori in antifase danno un figlio con
+        `|psi| ~ 0`. ### **E' interferenza distruttiva, cioe' fisica, non un errore.**
+
+        **Va chiamata DOPO la crescita di `self.n`**, come `_eredita_spinore_figli`:
+        `n0 = self.n - len(src_a)`. `src_b is None` vuol dire **un solo genitore** *(l'antinodo
+        della creazione di coppia eredita dalla coppia `aa`/`bb`, e chi non ha il secondo passa
+        solo il primo)*.
+        """
+        a = np.asarray(src_a, int)
+        k = len(a)
+        if k == 0:
+            return
+        n0 = self.n - k                                # conteggio PRIMA della crescita
+        if n0 <= 0:
+            return
+        b = a if src_b is None else np.asarray(src_b, int)
+        # ⚠ SI CONTA, non si assume (`A8`): se una delle due cache non e' allineata a `n0` non si
+        #   puo' ereditare, e quel salto e' proprio cio' che faceva spegnere la schermatura.
+        self._g_eredpsi_tot = getattr(self, "_g_eredpsi_tot", 0) + 1
+        cur = getattr(self, "psi", None)
+        if cur is not None and len(cur) >= n0:
+            self.psi = np.concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])
+        else:
+            self._g_eredpsi_salti = getattr(self, "_g_eredpsi_salti", 0) + 1
+            self._g_eredpsi_shape = (len(cur) if cur is not None else -1, n0)
+        cs = getattr(self, "psi_spin", None)
+        if cs is not None and len(cs) >= n0:
+            self.psi_spin = np.concatenate([cs[:n0], cs[a]])
+        else:
+            self._g_eredpsis_salti = getattr(self, "_g_eredpsis_salti", 0) + 1
+
     def _eredita_spinore_figli(self, src, segno=1):
         """Estende le cache spinoriali ai nuovi nodi EREDITANDO dal genitore src (regola D: eredita
         lo spinore COMPLESSO col segno, non un Bloch ri-derivato). segno=-1 per antinodi (doppia-
@@ -3253,12 +3321,43 @@ class Rete:
         """SCHERMATURA NON-PARAMETRICA ANCORATA A N_CRITICO."""
         if (not SCHERMATURA) or (not len(self.i)):
             return np.full(self.n, LAM)
-        if not hasattr(self, "psi") or len(self.psi) < self.n:
+        # [PSI-FLASH, 2026-09-28] LE DUE CONDIZIONI ERANO IN UN `or`, E SONO COSE DIVERSE. Era:
+        #     if not hasattr(self, "psi") or len(self.psi) < self.n: return np.full(self.n, LAM)
+        #   ⚠ `not hasattr` e' L'INIZIALIZZAZIONE: al passo 1 `psi` non esiste ancora, e usare
+        #   `LAM` e' l'unica cosa possibile. **RESTA.** Misurato: scatta 1 volta in 44 passi.
+        #   ⚠⚠ `len(psi) < n` era IL DIFETTO: al passo di nascita `mitosi` fa crescere `n`, quindi
+        #   la schermatura SI SPEGNEVA PER TUTTA LA RETE -- `lambda` da ~0.60 a 0.80, e `|psi|` su
+        #   di 1.62x per TUTTI, non per il nato. **ORA FERMA IL RUN.** Misurato: scattava 1 volta
+        #   in 44 passi, ed era il passo della nascita.
+        if not hasattr(self, "psi"):
+            self._g_scherm_init = getattr(self, "_g_scherm_init", 0) + 1
             return np.full(self.n, LAM)
+        if len(self.psi) < self.n:
+            raise SchermaturaSpenta(
+                "[SCHERMATURA] IL RUN SI FERMA (`PSI-FLASH`, `A9`).\n"
+                "  len(psi) .. %d\n"
+                "  n ......... %d   (mancano %d valori)\n"
+                "  PERCHE': con `psi` piu' corta di `n`, `lambda_nodi` restituiva `LAM` per TUTTA\n"
+                "  la rete, cioe' SPEGNEVA LA SCHERMATURA, e il campo saliva di ~1.62x per tutti.\n"
+                "  CHE FARE: `psi` va ESTESA a ogni nascita (`_eredita_psi_figli`). Se questo\n"
+                "  errore scatta, una strada nuova fa crescere `n` senza estendere `psi` -- e\n"
+                "  prima di questa cura quella strada cambiava la fisica IN SILENZIO."
+                % (len(self.psi), self.n, self.n - len(self.psi)))
         rho = self._rho_sorgente()   # [FASE 2] |psi|^2 (off) o rho_spin = norma del campo emesso (CAMPO_SPINORIALE on)
         # massa_critica_adattiva usa i pesi correnti e quindi richiama lambda_nodi.
         # Nel ramo ricorsivo si usa LAM: il crossover resta dinamico senza loop infinito.
         if getattr(self, "_calcolo_schermatura", False):
+            # [PSI-FLASH, 2026-09-28] QUESTO RIPIEGO RESTA, E NON E' UN DIFETTO: e' la DEFINIZIONE
+            #   di come si calcola la massa critica -- **sul NUCLEO NUDO**, `lambda = LAM`, perche'
+            #   ### la soglia che ACCENDE la schermatura non puo' dipendere dalla schermatura
+            #   stessa. *(Decisione di Luca, 2026-09-28; scheda `schermatura-nucleo-nudo`.)*
+            #   ⚠ QUELLO CHE MANCAVA ERA IL NUMERO, e ora c'e' (`A8`): MISURATO 308 volte su 44
+            #   passi, cioe' SETTE PER PASSO, contro le 2 del ripiego di `len(psi)`. Su 530
+            #   chiamate di `_lam_archi`, 310 restituiscono `LAM`: il 58.5 %.
+            #   ⚠⚠ E UNA COSA DA FARE ALTROVE, non qui: `massa_critica_adattiva` si RICALCOLA a
+            #   ogni richiesta, su stati DIVERSI dentro lo stesso passo -- e' una LETTURA MISTA.
+            #   Va calcolata UNA volta nella fase `apri`, sulla fotografia. Voce `MCRIT-RICALCOLO`.
+            self._g_scherm_ricorsione = getattr(self, "_g_scherm_ricorsione", 0) + 1
             return np.full(self.n, LAM)
         self._calcolo_schermatura = True
         try:
@@ -6484,6 +6583,9 @@ class Rete:
         self.perc_tw = np.concatenate([self.perc_tw, np.zeros(len(sel))])
         self.mem_mot = np.vstack([self.mem_mot, self.mem_mot[a]]) if len(self.mem_mot) else np.zeros((len(sel), 3))
         self._eredita_spinore_figli(a, segno=1)   # regola D: figlio eredita lo spinore COMPLESSO del genitore
+        # [PSI-FLASH, 2026-09-28] `psi` (media dei genitori) e `psi_spin` (da `a`) ai NATI:
+        #   senza questa riga `len(psi) < n` e la SCHERMATURA SI SPEGNEVA per tutta la rete.
+        self._eredita_psi_figli(a, b)
         # TRACKING: i figli della mitosi ereditano la concorrenza del genitore a (nascono dalla sua
         # divisione, concorrono alle stesse masse). conc_archi viene riallineato sotto (keep+nuovi).
         if self.conc_nodi:
@@ -6643,6 +6745,10 @@ class Rete:
                 self.perc_tw = np.concatenate([self.perc_tw, np.zeros(nc)])
                 self.mem_mot = np.vstack([self.mem_mot, np.zeros((nc, 3))]) if len(self.mem_mot) else np.zeros((nc, 3))
                 self._eredita_spinore_figli(aa, segno=-1)   # antinodo: doppia-copertura opposta (antichirale)
+                # [PSI-FLASH] lo STESSO per il canale di Schwinger: i genitori sono `aa`/`bb`.
+                #   ⚠ E IL SEGNO NON SI TOCCA: `psi` e` un campo COMPLESSO, e l antinodo nasce
+                #   a fase `anti = fm + pi`, cioe` il segno e` GIA` nella sua fase.
+                self._eredita_psi_figli(aa, bb)
                 # TRACKING: l'anti-nodo Schwinger EREDITA la concorrenza del genitore aa. Se aa
                 # concorre a una massa (nasce nel campo di una massa), l'anti-nodo vi concorre pure
                 # (categoria "creazione di coppie" = accrescimento, non materia nuova). Se aa non
