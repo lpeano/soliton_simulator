@@ -6342,3 +6342,25 @@ di `1.62×`**, e una `psi` gonfiata **fa scattare più mitosi**.
 > ### 📌 **Quindi parte della mitosi di prima era PRODOTTA DAL CAMPO GONFIATO.** E ogni conteggio di
 > nascite misurato prima di questa cura, **nei passi con nascite, viene da un campo gonfiato.**
 > **Si riporta, non è un criterio** — ma è la cosa che un lettore fra tre giorni deve trovare scritta.
+
+---
+
+# 🗒 **Il referto del braccio `A`, e un referto che ho RIPRISTINATO** *(2026-09-28)*
+
+**Nessun push perso:** `bcf5ee1` è su `origin/fork-su2`, locale e remoto allineati. ### **Dopo non
+c'è niente perché mi sono fermato**, come il mandato chiede — *«un commit per punto, STOP dopo
+ciascuno»*.
+
+**Ma due referti erano rimasti sul disco**, e dicono due cose diverse:
+
+| | |
+|---|---|
+| ### `_hashseed_prova.json` | ### **è la prova del braccio `A`**: dichiara la coppia confrontata — `blob_sim_a` **`05691d41`** *(PRE-CURA)* → `blob_sim_b` **`f7541d03`** *(curato)*. **Va committato**: senza, il braccio `A` dice *«23 su 23»* e **non dice fra CHE COSA** |
+| ### `_flash_scomposizione.json` | ### **RIPRISTINATO dal commit**, e non committato. Sul disco c'era una versione **di un altro giro** del banco *(blob `_sim_e203f9a8.py`, **senza** la serie di `mean(phi_g)`)*, mentre quella committata è **quella documentata** *(blob di oggi, **con** la serie)* |
+
+> ### 📌 **Ed è un difetto che avevo già dichiarato**, non una sorpresa: il banco della
+> scomposizione **scriveva due giri sullo stesso path**, e l'ultimo vinceva. ### **Sovrascrivere il
+> referto documentato con uno senza provenienza avrebbe rotto ciò che l'indice e l'inventario
+> descrivono** — quindi ho rimesso i byte del commit, **con `git cat-file -p` e non con
+> `git checkout`**, come prescrive il par.7. *(Il banco è archiviato e superato: quel referto non si
+> rigenera.)*
