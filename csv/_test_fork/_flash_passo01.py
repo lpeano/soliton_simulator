@@ -120,6 +120,37 @@ def passo0():
                   % (k, v["n"], dn, v["mean_phi_g"], v["max_phi_g"], salto,
                      "### FLASH" if fl else ""))
         tab.append({"passo": k, "dn": dn, "salto_mean_phi_g": salto, "flash": bool(fl), **v})
+    # ⚠⚠ IL LIVELLO, E NON IL RAPPORTO. Il rapporto coi vicini e' CIECO a uno spostamento
+    #   di LIVELLO: se anche i vicini sono alti, il rapporto fa 1 mentre il campo e'
+    #   permanentemente gonfiato. **E' l'errore che ho fatto**, e l'ha rilevato il
+    #   guardiano (Luca, 2026-09-28): <<leggi la tua tabella per livelli, non per rapporti>>.
+    _n0 = per_passo[ks[0]]["n"]
+    senza = [k for k in ks if per_passo[k]["n"] == _n0 and k >= 4]   # senza il transitorio
+    base = sum(per_passo[k]["mean_phi_g"] for k in senza) / len(senza)
+    print("")
+    print("  ### IL LIVELLO DI RIFERIMENTO (regime SENZA nascite, passi %d-%d): %.2f"
+          % (senza[0], senza[-1], base))
+    print("  %-7s %-8s %-13s %-12s %-12s" % ("passo", "n", "mean(phi_g)", "su base",
+                                            "su |psi|"))
+    liv = []
+    for k in ks:
+        v = per_passo[k]
+        r = v["mean_phi_g"] / base
+        liv.append({"passo": k, "su_base": r, "su_psi": r ** 0.5})
+        if k % 10 == 0 or k in (42, 58, 60, 62, 64, 66, 68, 70):
+            print("  %-7d %-8d %-13.2f %-12.3f %-12.3f"
+                  % (k, v["n"], v["mean_phi_g"], r, r ** 0.5))
+    fin = [x for x in liv if 62 <= x["passo"] <= 120]
+    med = sum(x["su_base"] for x in fin) / len(fin)
+    print("")
+    print("  ### DAL PASSO 62 AL 120 il livello medio e' %.3f x la base, cioe' %.3f x su |psi|"
+          % (med, med ** 0.5))
+    print("  ### E AL PASSO 120 e' ancora %.3f x la base (%.3f x su |psi|): NON TORNA GIU'."
+          % (liv[-1]["su_base"], liv[-1]["su_psi"]))
+    print("  ### ➜ IL FLASH NON SMETTE: DIVENTA LO STATO PERMANENTE.")
+    print("  ⚠ E `phi_g` e' il POZZO, non `|psi|`: il passaggio 2.6 -> 1.6 assume che")
+    print("    `pozzo_grafo` sia LINEARE in `I = |psi|^2`. NON L'HO VERIFICATO, e la voce")
+    print("    `PSI-FLASH` fa la stessa assunzione: va verificata, non ereditata.")
     flash = [t["passo"] for t in tab if t["flash"]]
     nasc = [t["passo"] for t in tab if t["dn"] > 0]
     print("")
@@ -148,6 +179,9 @@ def passo0():
             "riavvio_possibile": not manca, "tabella": tab,
             "passi_flash": flash, "passi_nascite": nasc,
             "nascite_senza_flash": sorted(set(nasc) - set(flash)),
+            "livello_base_senza_nascite": base, "livelli": liv,
+            "livello_medio_62_120_su_base": med,
+            "livello_al_120_su_base": liv[-1]["su_base"],
             "blob_che_li_ha_prodotti": str(z0["blob"])}
 
 

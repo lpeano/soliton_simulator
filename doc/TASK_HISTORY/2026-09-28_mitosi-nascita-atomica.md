@@ -269,3 +269,125 @@ nascite sono **decine** per fotogramma, quindi divisioni che condividono un nodo
 | ☐ | ### **la REGOLA DI EREDITÀ: aspetta Luca** *(proposta: (a) per `psi`, (b) per `psi_spin`)* |
 | ☐ | ### **il RUN LUNGO del sigillo (~30 min): aspetta Luca** |
 | ☐ | poi il confine dell'evento atomico, il codice, il sigillo |
+
+---
+
+# ✗ **CORREZIONE: ho letto RAPPORTI dove contava il LIVELLO** *(annotazione del 2026-09-28)*
+
+> **Rilievo del guardiano:** *«leggi la TUA tabella per livelli, non per rapporti: dal passo 62
+> `mean(phi_g)` resta stabilmente al livello del flash (~340, e scende a 215 al passo 120) contro
+> ~135 del regime senza nascite. Il flash NON smette: diventa lo stato permanente.»*
+> ### **Aveva ragione, e l'errore è nello STRUMENTO che ho scritto io:** il rapporto coi vicini è
+> **cieco a uno spostamento di livello** — se anche i vicini sono alti, il rapporto fa `1.000` mentre
+> il campo è **permanentemente gonfiato**.
+
+## I numeri, per LIVELLO *(generati, `csv/_test_fork/_flash_passo01.py`)*
+
+**Riferimento: il regime SENZA nascite, passi `4`–`40`: `mean(phi_g) = 130.22`.**
+
+| passo | `n` | `mean(phi_g)` | **su base** | **su `\|psi\|`** |
+|---|---|---|---|---|
+| 40 | 12802 | 138.68 | 1.065 | 1.032 |
+| ### 42 | 12803 | ### 366.17 | ### **2.812** | ### **1.677** |
+| 44 | 12803 | 139.72 | 1.073 | 1.036 |
+| 58 | 12805 | 352.94 | 2.710 | 1.646 |
+| ### 60 | 12806 | ### 118.26 | ### **0.908** | 0.953 |
+| 62 | 12811 | 346.58 | 2.662 | 1.631 |
+| ### 66 | 12816 | ### 113.28 | ### **0.870** | 0.933 |
+| 68 | 12822 | 333.97 | 2.565 | 1.601 |
+| 80 | 12879 | 292.44 | 2.246 | 1.499 |
+| 100 | 13090 | 233.24 | 1.791 | 1.338 |
+| ### 120 | 13444 | ### 215.02 | ### **1.651** | ### **1.285** |
+
+### ➜ **Dal passo 62 al 120 il livello medio è `1.994×` la base, cioè `1.412×` su `|psi|`. E al passo
+120 è ancora `1.651×`: NON TORNA GIÙ.**
+
+> ### 📌 **Il flash non è un picco: è una TRANSIZIONE DI STATO.** Fino al passo 56 il sistema torna
+> sempre a ~`135`; nella finestra `58`–`68` **alterna** fra il livello alto (~`2.6×`) e uno
+> **leggermente SOTTO** la base (`0.87`–`0.91×`); dal `68` in poi ### **resta sul livello alto e
+> decade lentamente senza mai tornare.**
+> **L'alternanza sotto/sopra è un fatto nuovo che nessuna delle due ipotesi precedenti spiega**, né
+> la mia *(parità dei fotogrammi)* né quella caduta.
+
+**⚠ E una cosa che NON ho verificato, e la voce `PSI-FLASH` fa la stessa assunzione:** il passaggio
+`2.6 → 1.6` assume che **`pozzo_grafo` sia LINEARE in `I = |psi|²`**. ### **Va verificato, non
+ereditato.**
+
+---
+
+# ✗ **CORREZIONE: la scena del video è `sep = 6.1158`, non `3.0`**
+
+**Cercando di riprodurre la finestra del passo 42 ho trovato una discrepanza:** i fotogrammi dicono
+`n = 12802`, e la scena che costruivo io dava ### **`n = 2107`** — con la **stessa** chiamata
+`avvia_test("MASSE-COERENTI")`.
+
+| | |
+|---|---|
+| **la causa** | ### **scrivevo `sep = 3.0` A MANO.** Il pilota fa `float(getattr(a, "sep", 3.0))`, e il driver passa ### **`--sep 6.1158`**. E `nmasse` non è 2 ma ### **3** *(`max(2, a.nmasse)`)* |
+| **la verifica** | con `sep = 6.1158`: ### **`n = 12802` esatto**, `m = 471564` archi |
+| **il falso allarme che ho evitato** | avevo già scritto che *«la scena del video non è riproducibile sul blob di oggi»*. ### **È FALSO:** costruita sul blob `e203f9a8` **e** su quello di oggi dà **`2107` in entrambi**, quindi non era il simulatore. **Era il mio `sep`** |
+
+> ### 📌 **La lezione, e vale oltre questo caso:** ### **un parametro di scena scritto a mano è la
+> stessa famiglia di `H-P3`** — *«non configurare il modulo a mano, passa dal CLI»*. **I sigilli
+> precedenti usavano `sep = 3.0` per una scena PICCOLA di proposito**, e ho ricopiato quel valore
+> dentro una misura che aveva bisogno della scena GRANDE. ### **Da qui in poi `nmasse` e `sep` si
+> leggono da `a`, come fa il pilota.**
+
+**E questo spiega i «40 passi con zero nascite»:** erano sulla scena **piccola** *(`2107` nodi)*.
+### **La scena del video ha `12802` nodi e partorisce al passo 42.**
+
+**Costo confermato:** `471564` archi contro i `70199` della scena piccola. Dal registro del run che
+ha prodotto i fotogrammi: ### **~21 s per passo → ~15 min per arrivare al passo 44.**
+
+---
+
+# 🔬 **LA SCOMPOSIZIONE DEL FATTORE: i criteri, FISSATI PRIMA DEI NUMERI**
+
+> **Mandato:** *«ψ ricalcolato subito prima e subito dopo mitosi, sostituendo UN ingrediente alla
+> volta (`w`, `_mat(w)`, `φ`, archi e nodi del nato) per identificare quale produce il 2.6×. Se il
+> fattore viene da uno stato a metà costruzione, dillo: cambia la forma della cura.»*
+
+## Le due formule, lette dal codice — e **una differenza che va guardata per prima**
+
+```
+calcola_psi :4250-4251   amp = SCALA_AMP
+                         F = self._mat(w) @ (amp * np.exp(1j * self.phi))
+step        :5750-5753   Mw = self._mat(w)
+                         F = Mw @ np.exp(1j * self.phi)
+```
+
+### ⚠ **`calcola_psi` moltiplica per `SCALA_AMP`, `step` NO.** `SCALA_AMP = 1.0` di default
+*(`:301`)* e vale `sqrt(SCALA_B)` — ### **quindi se il driver non cambia `SCALA_B` è inerte, ma va
+LETTO E RIPORTATO prima di tutto il resto**: se non fosse `1.0`, spiegherebbe il fattore da solo e
+la scomposizione andrebbe riletta.
+
+## Gli ingredienti, e come si sostituiscono senza barare sulle DIMENSIONI
+
+**Il problema:** prima della mitosi il grafo ha `m` archi e `n` nodi, dopo `m+1` e `n+1`.
+### **Quindi «sostituire un ingrediente» non è sempre definito**, e lo dichiaro invece di far finta.
+**La misura si fa sui NODI VECCHI e sugli ARCHI SOPRAVVISSUTI** *(`keep`)*, così ogni variante ha le
+stesse dimensioni:
+
+| | variante | che cosa isola |
+|---|---|---|
+| **V0** | `w` pre · `φ` pre · struttura pre | ### **deve coincidere con `psi` di `step`**: se no, il banco è rotto |
+| **V1** | ### **`w` POST** · `φ` pre · struttura pre | i **pesi**: `d` cambiata dalla mitosi e dal rilassamento, `eta` incrementata |
+| **V2** | `w` pre · ### **`φ` POST** · struttura pre | la **fase**: il **rinculo dei genitori** |
+| **V3** | `w` pre · `φ` pre · ### **struttura POST** *(ristretta a `keep`)* | la **matrice**: la cache `_S`/`_perm` |
+| **V4** | tutto POST, **ma senza il nodo e gli archi nati** | ### **l'interazione** fra i tre |
+| **V5** | tutto POST, **col nato** | ### **il valore del flash**: deve riprodurre `366.17` |
+
+## ### **I CRITERI, e sono fissati ORA**
+
+| | |
+|---|---|
+| ### **①** | un ingrediente è ### **LA CAUSA** se da solo porta `mean\|psi\|` sui nodi vecchi a ### **≥ 1.30×** di `V0`, **e gli altri due restano sotto `1.10×`** |
+| ### **②** | se ### **nessuno** arriva a `1.30×` ma `V4` sì, la causa è ### **un'INTERAZIONE**, e lo dico invece di attribuirla a uno |
+| ### **③** | se il fattore compare ### **solo in `V5`** *(cioè solo col nato dentro)*, allora **un nodo su 12802 muove il campo di tutti** — e ### **quella è la cosa che il guardiano dice essere impossibile a stato coerente**: allora il fattore viene da ### **uno stato a METÀ COSTRUZIONE**, e ### **CAMBIA LA FORMA DELLA CURA** |
+| ### **④** | se `V0` ### **non coincide** con `psi` di `step` entro `1e-12` relativo, ### **MI FERMO**: il banco non misura ciò che dice |
+| ### **⑤** | `SCALA_AMP` ### **si riporta come primo numero.** Se `≠ 1.0`, tutto il resto si rilegge |
+
+**E una lettura in più che costa zero:** ### **`pozzo_grafo` è lineare in `I`?** Si verifica
+chiamandolo su `I` e su `2·I` e guardando se `phi_g` raddoppia. ### **Serve a sapere se il `2.6` su
+`phi_g` è davvero `1.62` su `|psi|`** — l'assunzione che io e la voce abbiamo ereditato senza
+verificare.
