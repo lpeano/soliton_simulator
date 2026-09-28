@@ -6019,3 +6019,54 @@ processi bloccati sono chiusi.
 
 > ### 🛑 **STOP.** Niente codice della mitosi: con il criterio ④ fallito **non saprei attribuire
 > nulla di ciò che la cura cambia.**
+
+---
+
+# 🎯 **La causa del flash: la SCHERMATURA si spegne. Confermata, e non l'ho trovata io** *(2026-09-28)*
+
+**L'ha trovata il guardiano**, con una sonda che traccia `psi` legge per legge. ### **Il mio banco
+non ci è arrivato, e il suo criterio ④ — che avevo scritto io — era MAL POSTO.**
+
+`lambda_nodi` `:3256`: `if not hasattr(self, "psi") or len(self.psi) < self.n: return np.full(self.n, LAM)`.
+Al passo di nascita `mitosi` fa crescere `n`, quindi ### **la schermatura si spegne per tutta la
+rete**: `λ` passa da `~0.60` a `0.80`, `exp(-d/λ)` cresce, i pesi crescono, ### **`|psi|` cresce per
+TUTTI — non per il nato.**
+
+> ### 📌 **Il `2.6×` non è fisica: è l'ASSENZA della schermatura.** E scioglie il paradosso che il
+> guardiano aveva posto — *una nascita su 12802 nodi non può spostare il campo di tutti*.
+> ### **Non lo sposta la nascita: lo sposta una guardia che si spegne.**
+
+**Verificato con la mia sonda** *(scena grande, 44 passi)*: al passo 42 **una** chiamata con
+`λ = LAM` su tutti gli archi e ripiego `len(psi) < n`; `λ` normale **`0.5861`–`0.6084`**. Il mio
+intervallo **contiene** il suo.
+
+## ⚠ **E la decisione ② non è applicabile come è scritta**
+
+| su 44 passi | |
+|---|---|
+| chiamate di `_lam_archi` | **530**, di cui **310 a `LAM`** *(`58.5 %`)* |
+| per `len(psi) < n` | ### **2** — passo `1` *(inizializzazione)* e passo `42` *(la nascita)* |
+| per la **ricorsione** | ### **308, sette per passo, su OGNI passo** |
+
+### ➜ **Trasformare in errore anche il ripiego della ricorsione fermerebbe il run al passo 1.** Quel
+ripiego **non è un difetto**: il codice ne scrive la ragione — **rompere una ricorsione infinita**
+fra `lambda_nodi` e `massa_critica_adattiva`.
+
+**Propongo:** `len(psi) < n` → **errore**; `not hasattr` → **resta** *(al passo 1 `psi` non esiste, e
+### le due condizioni oggi sono in un `or`: vanno SEPARATE)*; la ricorsione → **contatore**, non
+errore.
+
+> ### ❓ **E una domanda di fisica che non decido io:** il **`58.5 %`** delle valutazioni di
+> `_lam_archi` ha la schermatura **spenta**. Sono **dodici** chiamate per passo: sette ricorsive,
+> cinque «vere». ### **Non so dire se sette su dodici sia il numero atteso.**
+
+## 🔎 Decisione ④: primo indizio, **non conferma**
+
+`42` → `366.17` *(`2.812×`)* · ### `43` → **`127.37`** *(`0.978×`, **sotto la base**)* · `44` →
+`139.72` *(`1.073×`)*. **Il calo c'è ed è al passo giusto, ma è `0.978×`, non lo `0.87`–`0.91×` dei
+passi 60 e 66:** ### **l'ipotesi predice un calo, il calo c'è, di un ordine di grandezza più
+piccolo.** Resta al sigillo.
+
+> ### 🛑 **STOP prima del codice, e non per prudenza:** la decisione ② non è applicabile come
+> scritta, e la variante giusta è **un giudizio di fisica**. Scriverla a modo mio sarebbe prendere
+> una decisione al posto di Luca.

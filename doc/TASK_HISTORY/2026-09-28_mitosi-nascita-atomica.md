@@ -560,3 +560,72 @@ causa che va cercata.
 chiusa: lo porta la schermatura che si spegne.** Il banco *(e la sua copia)* vanno in
 `csv/_archivio/`, ### **col motivo e col fatto che il suo criterio ④ era mal posto** — perché un
 banco archiviato senza il perché è un reperto muto.
+
+---
+
+# ✅ **VERIFICATO con la mia sonda — e con un fatto che cambia la decisione ②** *(2026-09-28)*
+
+*(`csv/_test_fork/_lambda_al_flash.py`, blob di oggi `05691d41`, scena GRANDE `sep 6.1158`
+`nmasse 3` seme `11`, `44` passi. La spia avvolge `_lam_archi` **sull'istanza**: nessun file del
+simulatore è toccato.)*
+
+## ✅ **La causa è CONFERMATA**
+
+| | |
+|---|---|
+| prima nascita | **passo 42** |
+| al passo 42, chiamate con `λ = LAM` su **tutti** gli archi **e** ripiego `len(psi) < n` | ### **1** |
+| `λ` medio nei passi normali | **`0.586093` – `0.608402`** *(`LAM` = `0.800000`)* |
+
+### ➜ **Al passo di nascita la schermatura si spegne per TUTTA la rete, e il ripiego che la spegne è
+`len(self.psi) < self.n` — esattamente l'effetto che `mitosi` produce facendo crescere `n`.**
+**I numeri del guardiano tornano**, e l'intervallo che ho misurato io *(`0.5861`–`0.6084`)* contiene
+il suo *(`0.5937`–`0.6062`)*.
+
+## ⚠ **IL FATTO CHE CAMBIA LA DECISIONE ②: il secondo ripiego scatta SEMPRE, e per DISEGNO**
+
+| su **44** passi | |
+|---|---|
+| chiamate di `_lam_archi` | **530** |
+| che restituiscono `λ = LAM` | ### **310, il `58.5 %`** |
+| per `len(psi) < n` | ### **2** — **passo 1** *(l'inizializzazione: `not hasattr`)* e **passo 42** *(la nascita)* |
+| per la **ricorsione** *(`_calcolo_schermatura`)* | ### **308, cioè SETTE PER PASSO, su ogni passo** |
+
+> ### 🛑 **Quindi la decisione ② come è scritta FERMEREBBE IL RUN AL PASSO 1.** Il ripiego della
+> ricorsione **non è un difetto: è una scelta dichiarata**, e il codice ne scrive la ragione —
+> *«`massa_critica_adattiva` usa i pesi correnti e quindi richiama `lambda_nodi`. Nel ramo ricorsivo
+> si usa `LAM`: il crossover resta dinamico senza loop infinito.»*
+> ### **È lì per ROMPERE UNA RICORSIONE INFINITA.** Trasformarlo in errore non toglie un silenzio:
+> **toglie il run.**
+
+## ➜ **Quello che propongo, e la scelta è di Luca**
+
+| ripiego | quante volte | che cosa propongo |
+|---|---|---|
+| ### `len(psi) < n` *(`:3256`)* | **1 in 44 passi**, la nascita | ### **ERRORE ESPLICITO**, come `MAX_NODI`. È il difetto |
+| **`not hasattr(self, "psi")`** *(la stessa riga, altra metà)* | **1**, il passo `1` | ### **RESTA**, ed è legittimo: al passo 1 `psi` **non esiste ancora**. ⚠ **Sono due condizioni in un `or`, e vanno SEPARATE** |
+| ### la **ricorsione** *(`:3261`)* | **308, 7 per passo** | ### **NON un errore: un CONTATORE** *(`A8`)*. Il comportamento è dichiarato e intenzionale; quello che manca è **il numero**, e adesso c'è |
+
+> ### ⚠ **E una domanda che i numeri aprono, e che non risolvo da solo:** ### **il `58.5 %` delle
+> chiamate a `_lam_archi` restituisce `LAM`, cioè la schermatura è SPENTA nella maggioranza delle
+> valutazioni.** Il codice lo giustifica **per il ramo ricorsivo**, e `_lam_archi` viene chiamata
+> **dodici volte per passo**: le sette ricorsive alimentano `massa_critica_adattiva`, le altre
+> cinque sono le valutazioni «vere». **Non so dire se sette su dodici sia il numero atteso**, e
+> ### **non è una cosa che decido io**: è fisica.
+
+## 🔎 **La decisione ④, primo indizio — e NON è una conferma**
+
+**L'ipotesi:** i passi sotto la base sono quelli **dopo** un flash, con la schermatura che riparte su
+una densità gonfiata.
+
+| passo | `mean(phi_g)` | su base `130.22` |
+|---|---|---|
+| 42 *(nascita)* | **366.17** | `2.812×` |
+| ### 43 | ### **127.37** | ### **`0.978×`** — **sotto la base** |
+| 44 | 139.72 | `1.073×` |
+
+### **Un abbassamento c'è, ed è al passo giusto — ma è `0.978×`, non il `0.87`–`0.91×` dei passi 60
+e 66.** ### ➜ **L'ipotesi NON è confermata: predice un calo, e il calo c'è, ma di un ordine di
+grandezza più piccolo.** Resta al sigillo.
+**E `λ` al passo 44 è appena più basso che al 43** *(`0.594005` contro `0.595487` sul minimo)*: il
+verso è quello previsto, **l'ampiezza no.**
