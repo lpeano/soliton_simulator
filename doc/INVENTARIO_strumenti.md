@@ -1338,3 +1338,29 @@ lo dice e non misura il passo 0.**
 **E NON PERMETTONO DI RIPARTIRE:** mancano `d`, `d0`, `vd`, `peq`, `tw`, `twp`, `psi`, `psi_spin`,
 `eta`, `phivel`. ### **Il sigillo del pezzo ② deve RIFARE il run fino al passo 44, su due blob:
 ~21 s per passo su un seme, cioe' ~30 minuti in tutto.**
+
+## La scena dei sigilli, DICHIARATA — e i sigilli che non hanno mai visto una nascita *(2026-09-28)*
+
+> ### ⚠ **Rilievo del guardiano:** `csv/_test_fork/_hashseed_prova.py` imponeva `sep = 3.0` e
+> `nmasse = 2` **a mano**, mentre il dump registrava `_argv` col **`--sep 6.1158`** del driver.
+> ### **Il referto dichiarava una configurazione diversa da quella che girava** (`P5`). E la
+> conseguenza e' piu' grossa della forma: **tutti i sigilli che dicono «scena `(ii)(a)`, argv del
+> driver» sono girati sulla scena PICCOLA** -- `2107` nodi, **zero nascite in 40 passi**.
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_test_fork/_hashseed_prova.py` | `fa225a95` | `python csv/_test_fork/_hashseed_prova.py --out=X.npz --seme=11 --passi=3` | *(invariato nel confronto)* e **ORA DICHIARA LA SCENA**: `_scena_nmasse`, `_scena_sep`, `_scena_*_argv`, `_scena_n`, `_scena_m`, `_scena_nota` | la **scena piccola RESTA** *(i dump devono restare confrontabili)*, ma a schermo e nel dump compaiono **le DUE scene**, con l'avviso quando differiscono |
+| `csv/_test_fork/_sigilli_senza_nascite.py` | `7401720d` | `python csv/_test_fork/_sigilli_senza_nascite.py` | quali commit hanno toccato **la regione delle nascite**, derivato **da git** | **179** commit sul simulatore, ### **37 nella regione delle nascite**, di cui **13** portano un file di sigillo nel commit |
+
+**Referto:** `csv/_test_fork/_sigilli_senza_nascite.json` *(blob byte `9fc81805`)*; la stampa in
+`csv/_seal_fork/_sig_nascita_atomica/_elenco_senza_nascite.txt` *(`dce02307`)*.
+
+> ### ⚠ **IL CRITERIO E' PER TESTO, NON PER RAGGIUNGIBILITA', e lo strumento lo dichiara** (`A9`):
+> riconosce la regione dai marcatori `concatenate([self.`, `vstack([self.`, `COPPIA_MIT`,
+> `coppie_nate`, `pos_figlio`, `d0new`, `perc_tw`, `_g_nati_`. Un commit puo' comparire per un
+> `concatenate` **fuori** dalla mitosi, e uno puo' **mancare**. ### **E' UN ELENCO DA LEGGERE, NON
+> UN VERDETTO** -- e il mandato dice *«solo l'elenco, niente da rifare adesso»*.
+>
+> ### **E che cosa NON vuol dire:** non vuol dire che quei sigilli siano sbagliati. Vuol dire che
+> **il loro braccio di byte-identita' NON HA PERCORSO quei rami**, e quindi **non dice niente su di
+> essi.**

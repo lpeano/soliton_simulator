@@ -6070,3 +6070,36 @@ piccolo.** Resta al sigillo.
 > ### 🛑 **STOP prima del codice, e non per prudenza:** la decisione ② non è applicabile come
 > scritta, e la variante giusta è **un giudizio di fisica**. Scriverla a modo mio sarebbe prendere
 > una decisione al posto di Luca.
+
+---
+
+# 🗂 **Punto ③: la scena dichiarata, e i 37 commit che non hanno mai visto una nascita** *(2026-09-28)*
+
+### **Nessun codice di fisica. Blob `05691d41`, invariato.**
+
+**Il dump ora dichiara la scena EFFETTIVA** accanto a quella che l'argv chiederebbe. ### **La scena
+piccola RESTA**, per tua decisione: i dump di byte-identità devono restare **confrontabili** con
+quelli dei sigilli passati. **Cambia solo che ora si dichiara** — e con la conseguenza scritta nel
+codice: *la byte-identità non copre i percorsi delle nascite*.
+
+## I numeri dell'elenco
+
+| | |
+|---|---|
+| commit che hanno toccato il simulatore | **179** |
+| ### che hanno toccato la **regione delle nascite** | ### **37** |
+| di quelli, con un **file di sigillo nello stesso commit** | **13** |
+
+**Fra loro ci sono `CURA 4`, `CURA C3`, `CURA C5`, `CHI_COOP`, `U2`, `STEP 2`, lo `STRATO 1`** — e
+### **`MAX-NODI-FERMA`, cioè il mio commit di oggi**, che tocca `COPPIA_MIT`.
+
+> ### ⚠ **Il criterio è PER TESTO, non per raggiungibilità, e lo strumento lo dichiara:** un commit
+> può comparire per un `concatenate` fuori dalla mitosi, e uno può mancare. ### **È un elenco da
+> leggere, non un verdetto** — e *«solo l'elenco, niente da rifare adesso»*.
+>
+> ### **E che cosa NON vuol dire:** non vuol dire che quei sigilli siano sbagliati. Vuol dire che
+> **il loro braccio di byte-identità non ha percorso quei rami**, quindi **non dice niente su di
+> essi.**
+
+**Prossimo: il codice** — ① `mitosi` estende `psi`/`psi_spin`, ② `a` `len(psi) < n` diventa errore,
+② `b` la ricorsione resta col contatore e la sua **definizione** nel `REGISTRO_FISICA`.

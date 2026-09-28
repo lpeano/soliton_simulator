@@ -1,0 +1,399 @@
+{
+ "commit_nella_regione": [
+  {
+   "commit": "95249c5",
+   "data": "2026-09-28",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "MAX-NODI-FERMA, il codice: la guardia di memoria FERMA il run invece di troncare in sile"
+  },
+  {
+   "commit": "900fe60",
+   "data": "2026-09-25",
+   "file_di_sigillo": [
+    "csv/_seal_fork/_sigillo_cura4_accensione.py"
+   ],
+   "marcatori": [
+    "concatenate([self."
+   ],
+   "soggetto": "CURA 4: l'accensione del campo -- flag SEMINA_MATURA, OFF di default"
+  },
+  {
+   "commit": "e84f4a9",
+   "data": "2026-09-25",
+   "file_di_sigillo": [
+    "csv/_seal_fork/_sigillo_u2_contatori.py"
+   ],
+   "marcatori": [
+    "d0new"
+   ],
+   "soggetto": "U2: contatori SEPARATI per grandezza e per sito, sugli ARCHI VERI"
+  },
+  {
+   "commit": "287e27d",
+   "data": "2026-09-24",
+   "file_di_sigillo": [
+    "csv/_seal_fork/_sig_cura1/REFERTO.txt"
+   ],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "CURA 1 IN CODICE -- l'orologio: RITMO_WRAP_2PI accesa dal driver, TW_SPINORE BLOCCATO. 6"
+  },
+  {
+   "commit": "df1f42e",
+   "data": "2026-09-22",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "concatenate([self."
+   ],
+   "soggetto": "B1 -- IL FLAG FASE_2PI, spento di default. Blob 3d91338e -> 445e2896"
+  },
+  {
+   "commit": "a68e798",
+   "data": "2026-09-21",
+   "file_di_sigillo": [
+    "csv/_seal_fork/_sigillo_invarianti.py"
+   ],
+   "marcatori": [
+    "perc_tw"
+   ],
+   "soggetto": "CURA C5 -- GLI INVARIANTI: 42 domini, due livelli, e l'errore dice DOVE. Codice PRIMA de"
+  },
+  {
+   "commit": "85ff325",
+   "data": "2026-09-21",
+   "file_di_sigillo": [
+    "csv/_seal_fork/_sigillo_scala_min_passo.py"
+   ],
+   "marcatori": [
+    "d0new"
+   ],
+   "soggetto": "CURA C3 -- SCALA_MIN_PASSO: il freno UNA VOLTA PER PASSO. Codice committato PRIMA dei si"
+  },
+  {
+   "commit": "11b6431",
+   "data": "2026-09-21",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT",
+    "d0new"
+   ],
+   "soggetto": "SCALA_MIN e COES_ADIM -- la forma che SMORZA LA DISCESA, e i sette pavimenti che sparisc"
+  },
+  {
+   "commit": "0f4fc1e",
+   "data": "2026-09-21",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT",
+    "concatenate([self."
+   ],
+   "soggetto": "CHI_COOP: geometria e carica COOPERANO invece di escludersi -- codice committato PRIMA d"
+  },
+  {
+   "commit": "ab4907e",
+   "data": "2026-09-20",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "_g_nati_"
+   ],
+   "soggetto": "I CONTATORI DEI NATI PER RAMO E L'OLONOMIA FIRMATA. Byte-inerti, committati prima del si"
+  },
+  {
+   "commit": "3ca7731",
+   "data": "2026-09-17",
+   "file_di_sigillo": [
+    "csv/_seal_fork/_sigillo_rep_spinta.py",
+    "csv/_seal_fork/_sigillo_rep_spinta.txt",
+    "csv/_seal_fork/_sigillo_rimozione5.py",
+    "csv/_seal_fork/_sigillo_rimozione5.txt"
+   ],
+   "marcatori": [
+    "concatenate([self."
+   ],
+   "soggetto": "BONIFICA (3/n): (2) spinta LOCALE, (3) _rep CON MEMORIA (A7: cricchetto chiuso), (5) cod"
+  },
+  {
+   "commit": "afa6559",
+   "data": "2026-09-14",
+   "file_di_sigillo": [
+    "csv/_seal_fork/_sigillo_turbo.py",
+    "csv/_seal_fork/_sigillo_turbo_OUT.txt"
+   ],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "TURBO RISTRETTO cablato e sigillato 13/13. Ma lo scan K={1,2,5,10} sarebbe NULLO per SCA"
+  },
+  {
+   "commit": "4f44c68",
+   "data": "2026-09-14",
+   "file_di_sigillo": [
+    "csv/_seal_fork/_sigillo_step2.py",
+    "csv/_seal_fork/_sigillo_step2_OUT.txt",
+    "csv/_seal_fork/_st2_off.pkl.cond.csv",
+    "csv/_seal_fork/_st2_old.pkl.cond.csv"
+   ],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "STEP 2 cablato, ma il SIGILLO FALLISCE: S3 e' CIECO (omega_clk = 0 nel test). Commit del"
+  },
+  {
+   "commit": "94c2609",
+   "data": "2026-09-14",
+   "file_di_sigillo": [
+    "csv/_seal_fork/_s1_mem.pkl.cond.csv",
+    "csv/_seal_fork/_s1_off.pkl.cond.csv",
+    "csv/_seal_fork/_s1_off_base.pkl.cond.csv",
+    "csv/_seal_fork/_s1_old.pkl.cond.csv"
+   ],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "PEZZO 4 / STRATO 1: connessione con MEMORIA (ritardazione tau=d/cs). Sigillo 23/23 PASS."
+  },
+  {
+   "commit": "6d66887",
+   "data": "2026-09-13",
+   "file_di_sigillo": [
+    "csv/_seal_fork/_reperto_inerzia.py",
+    "csv/_seal_fork/_sigillo_pezzo3.py"
+   ],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "PEZZO 3 cablato ma INERTE: sigillo S2b FALLISCE. Non e' un bug, e' un teorema. STOP."
+  },
+  {
+   "commit": "77c83e5",
+   "data": "2026-09-11",
+   "file_di_sigillo": [
+    "csv/_seal_53c/_sigillo_53c.py"
+   ],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "MOD 5.3c (--orologio-segno): firma il VERSO dell'orologio de Broglie INTERNO _phc con s_"
+  },
+  {
+   "commit": "0639ba2",
+   "data": "2026-09-10",
+   "file_di_sigillo": [
+    "csv/_seal_53a/_out_sigillo_53a.txt",
+    "csv/_seal_53a/_sigillo_53a.py",
+    "csv/_seal_53rel/_candidato_Bpp.py",
+    "csv/_seal_53rel/_check_5_3b_magnitudine.py"
+   ],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "MOD 5.3a+5.3b (--tempo-segno): tempo proprio DEPURATO — verso da materia/antimateria coe"
+  },
+  {
+   "commit": "954549f",
+   "data": "2026-09-09",
+   "file_di_sigillo": [
+    "csv/_seal_fase1/_sigillo_fase1.py"
+   ],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "[dev-spinoriale] FASE 1: il campo EMESSO dallo spinore (calcola_psi spinoriale). Flag --"
+  },
+  {
+   "commit": "97c4586",
+   "data": "2026-09-09",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "coppie_nate"
+   ],
+   "soggetto": "tracing per-passo del SEGNO + bracci V/B/C (dev-dof, par.48): il segno DECADE, non e' ra"
+  },
+  {
+   "commit": "1fcf16c",
+   "data": "2026-09-08",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "WIP dev-dof (par.46): IMPLEMENTATO --kuramoto-su2 (via NON-ABELIANA) - SIGILLI DA FARE d"
+  },
+  {
+   "commit": "42fb4d3",
+   "data": "2026-09-08",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "IMPLEMENTATO --sync-fase-orologio (dev-dof, par.44): Kuramoto sul SEGNO di doppia-copert"
+  },
+  {
+   "commit": "946b464",
+   "data": "2026-09-07",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "fix: blocco condensazione reso SOLA-LETTURA (snapshot/restore delle 8 cache attorno a ca"
+  },
+  {
+   "commit": "2e39ea0",
+   "data": "2026-09-07",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "WIP dev-dof: --deparam-orologio (default off) - orologio RELAZIONALE (coerenza d'arco in"
+  },
+  {
+   "commit": "03c2ca4",
+   "data": "2026-09-06",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "sync-spinore (default off): Kuramoto SU(2) sugli spinori. Torque di allineamento omega_s"
+  },
+  {
+   "commit": "5769a12",
+   "data": "2026-09-06",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT",
+    "concatenate([self.",
+    "vstack([self."
+   ],
+   "soggetto": "spinore-corretto (master, default off): orologio proprio de Broglie + spinore primario c"
+  },
+  {
+   "commit": "bf0f75e",
+   "data": "2026-09-06",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "spinore: flag --tw-spinore (default off) - aggancia la torsione a 4pi (doppia copertura)"
+  },
+  {
+   "commit": "c2175ee",
+   "data": "2026-09-04",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "Document snapshot sync and prepare dynamic speed campaigns"
+  },
+  {
+   "commit": "f2db60e",
+   "data": "2026-09-04",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "Add dynamic metric wave speed A/B test"
+  },
+  {
+   "commit": "2bd7ec8",
+   "data": "2026-09-04",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT",
+    "vstack([self."
+   ],
+   "soggetto": "Add core-aware chirality dynamics"
+  },
+  {
+   "commit": "4fb04dd",
+   "data": "2026-09-03",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "Add new CSV output files for spinore plastdin analysis"
+  },
+  {
+   "commit": "d17953e",
+   "data": "2026-09-03",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "d0new"
+   ],
+   "soggetto": "Aggiungi flag --plast-din: plasticita' metrica dinamica alla mitosi (legge, zero paramet"
+  },
+  {
+   "commit": "2dd0756",
+   "data": "2026-09-03",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "Aggiungi flag --spinore-vivo: reinnesta l'evoluzione SU(2) nell'ordine ETC"
+  },
+  {
+   "commit": "eb6283f",
+   "data": "2026-08-31",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "Aggiornato .gitignore per escludere i video di output"
+  },
+  {
+   "commit": "53f885b",
+   "data": "2026-08-31",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "TestAperti"
+  },
+  {
+   "commit": "5108c24",
+   "data": "2026-08-29",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "Add new batch scripts for viriale and zeta-loc tests; update soliton simulator for new d"
+  },
+  {
+   "commit": "4ef1f61",
+   "data": "2026-08-29",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT"
+   ],
+   "soggetto": "Refactor simulation logs and update soliton simulator"
+  },
+  {
+   "commit": "670310f",
+   "data": "2026-08-28",
+   "file_di_sigillo": [],
+   "marcatori": [
+    "COPPIA_MIT",
+    "concatenate([self.",
+    "coppie_nate",
+    "d0new",
+    "perc_tw",
+    "pos_figlio",
+    "vstack([self."
+   ],
+   "soggetto": "Implement code changes to enhance functionality and improve performance"
+  }
+ ],
+ "commit_totali": 179,
+ "marcatori": [
+  "concatenate([self.",
+  "vstack([self.",
+  "COPPIA_MIT",
+  "coppie_nate",
+  "pos_figlio",
+  "d0new",
+  "perc_tw",
+  "_g_nati_"
+ ]
+}

@@ -1,0 +1,138 @@
+[TIMBRO] _sigilli_senza_nascite.py  sha1-BYTE 7401720d  committato e pulito
+commit che hanno toccato il simulatore: 179
+
+================================================================================================
+COMMIT CHE HANNO TOCCATO LA REGIONE DELLE NASCITE: 37
+================================================================================================
+
+  95249c5   2026-09-28  MAX-NODI-FERMA, il codice: la guardia di memoria FERMA il run invece di troncare in sile
+      marcatori: COPPIA_MIT
+
+  900fe60   2026-09-25  CURA 4: l'accensione del campo -- flag SEMINA_MATURA, OFF di default
+      marcatori: concatenate([self.
+      sigilli nel commit: _sigillo_cura4_accensione.py
+
+  e84f4a9   2026-09-25  U2: contatori SEPARATI per grandezza e per sito, sugli ARCHI VERI
+      marcatori: d0new
+      sigilli nel commit: _sigillo_u2_contatori.py
+
+  287e27d   2026-09-24  CURA 1 IN CODICE -- l'orologio: RITMO_WRAP_2PI accesa dal driver, TW_SPINORE BLOCCATO. 6
+      marcatori: COPPIA_MIT
+      sigilli nel commit: REFERTO.txt
+
+  df1f42e   2026-09-22  B1 -- IL FLAG FASE_2PI, spento di default. Blob 3d91338e -> 445e2896
+      marcatori: concatenate([self.
+
+  a68e798   2026-09-21  CURA C5 -- GLI INVARIANTI: 42 domini, due livelli, e l'errore dice DOVE. Codice PRIMA de
+      marcatori: perc_tw
+      sigilli nel commit: _sigillo_invarianti.py
+
+  85ff325   2026-09-21  CURA C3 -- SCALA_MIN_PASSO: il freno UNA VOLTA PER PASSO. Codice committato PRIMA dei si
+      marcatori: d0new
+      sigilli nel commit: _sigillo_scala_min_passo.py
+
+  11b6431   2026-09-21  SCALA_MIN e COES_ADIM -- la forma che SMORZA LA DISCESA, e i sette pavimenti che sparisc
+      marcatori: COPPIA_MIT, d0new
+
+  0f4fc1e   2026-09-21  CHI_COOP: geometria e carica COOPERANO invece di escludersi -- codice committato PRIMA d
+      marcatori: COPPIA_MIT, concatenate([self.
+
+  ab4907e   2026-09-20  I CONTATORI DEI NATI PER RAMO E L'OLONOMIA FIRMATA. Byte-inerti, committati prima del si
+      marcatori: _g_nati_
+
+  3ca7731   2026-09-17  BONIFICA (3/n): (2) spinta LOCALE, (3) _rep CON MEMORIA (A7: cricchetto chiuso), (5) cod
+      marcatori: concatenate([self.
+      sigilli nel commit: _sigillo_rep_spinta.py, _sigillo_rep_spinta.txt, _sigillo_rimozione5.py, _sigillo_rimozione5.txt
+
+  afa6559   2026-09-14  TURBO RISTRETTO cablato e sigillato 13/13. Ma lo scan K={1,2,5,10} sarebbe NULLO per SCA
+      marcatori: COPPIA_MIT
+      sigilli nel commit: _sigillo_turbo.py, _sigillo_turbo_OUT.txt
+
+  4f44c68   2026-09-14  STEP 2 cablato, ma il SIGILLO FALLISCE: S3 e' CIECO (omega_clk = 0 nel test). Commit del
+      marcatori: COPPIA_MIT
+      sigilli nel commit: _sigillo_step2.py, _sigillo_step2_OUT.txt, _st2_off.pkl.cond.csv, _st2_old.pkl.cond.csv
+
+  94c2609   2026-09-14  PEZZO 4 / STRATO 1: connessione con MEMORIA (ritardazione tau=d/cs). Sigillo 23/23 PASS.
+      marcatori: COPPIA_MIT
+      sigilli nel commit: _s1_mem.pkl.cond.csv, _s1_off.pkl.cond.csv, _s1_off_base.pkl.cond.csv, _s1_old.pkl.cond.csv
+
+  6d66887   2026-09-13  PEZZO 3 cablato ma INERTE: sigillo S2b FALLISCE. Non e' un bug, e' un teorema. STOP.
+      marcatori: COPPIA_MIT
+      sigilli nel commit: _reperto_inerzia.py, _sigillo_pezzo3.py
+
+  77c83e5   2026-09-11  MOD 5.3c (--orologio-segno): firma il VERSO dell'orologio de Broglie INTERNO _phc con s_
+      marcatori: COPPIA_MIT
+      sigilli nel commit: _sigillo_53c.py
+
+  0639ba2   2026-09-10  MOD 5.3a+5.3b (--tempo-segno): tempo proprio DEPURATO — verso da materia/antimateria coe
+      marcatori: COPPIA_MIT
+      sigilli nel commit: _out_sigillo_53a.txt, _sigillo_53a.py, _candidato_Bpp.py, _check_5_3b_magnitudine.py
+
+  954549f   2026-09-09  [dev-spinoriale] FASE 1: il campo EMESSO dallo spinore (calcola_psi spinoriale). Flag --
+      marcatori: COPPIA_MIT
+      sigilli nel commit: _sigillo_fase1.py
+
+  97c4586   2026-09-09  tracing per-passo del SEGNO + bracci V/B/C (dev-dof, par.48): il segno DECADE, non e' ra
+      marcatori: coppie_nate
+
+  1fcf16c   2026-09-08  WIP dev-dof (par.46): IMPLEMENTATO --kuramoto-su2 (via NON-ABELIANA) - SIGILLI DA FARE d
+      marcatori: COPPIA_MIT
+
+  42fb4d3   2026-09-08  IMPLEMENTATO --sync-fase-orologio (dev-dof, par.44): Kuramoto sul SEGNO di doppia-copert
+      marcatori: COPPIA_MIT
+
+  946b464   2026-09-07  fix: blocco condensazione reso SOLA-LETTURA (snapshot/restore delle 8 cache attorno a ca
+      marcatori: COPPIA_MIT
+
+  2e39ea0   2026-09-07  WIP dev-dof: --deparam-orologio (default off) - orologio RELAZIONALE (coerenza d'arco in
+      marcatori: COPPIA_MIT
+
+  03c2ca4   2026-09-06  sync-spinore (default off): Kuramoto SU(2) sugli spinori. Torque di allineamento omega_s
+      marcatori: COPPIA_MIT
+
+  5769a12   2026-09-06  spinore-corretto (master, default off): orologio proprio de Broglie + spinore primario c
+      marcatori: COPPIA_MIT, concatenate([self., vstack([self.
+
+  bf0f75e   2026-09-06  spinore: flag --tw-spinore (default off) - aggancia la torsione a 4pi (doppia copertura)
+      marcatori: COPPIA_MIT
+
+  c2175ee   2026-09-04  Document snapshot sync and prepare dynamic speed campaigns
+      marcatori: COPPIA_MIT
+
+  f2db60e   2026-09-04  Add dynamic metric wave speed A/B test
+      marcatori: COPPIA_MIT
+
+  2bd7ec8   2026-09-04  Add core-aware chirality dynamics
+      marcatori: COPPIA_MIT, vstack([self.
+
+  4fb04dd   2026-09-03  Add new CSV output files for spinore plastdin analysis
+      marcatori: COPPIA_MIT
+
+  d17953e   2026-09-03  Aggiungi flag --plast-din: plasticita' metrica dinamica alla mitosi (legge, zero paramet
+      marcatori: d0new
+
+  2dd0756   2026-09-03  Aggiungi flag --spinore-vivo: reinnesta l'evoluzione SU(2) nell'ordine ETC
+      marcatori: COPPIA_MIT
+
+  eb6283f   2026-08-31  Aggiornato .gitignore per escludere i video di output
+      marcatori: COPPIA_MIT
+
+  53f885b   2026-08-31  TestAperti
+      marcatori: COPPIA_MIT
+
+  5108c24   2026-08-29  Add new batch scripts for viriale and zeta-loc tests; update soliton simulator for new d
+      marcatori: COPPIA_MIT
+
+  4ef1f61   2026-08-29  Refactor simulation logs and update soliton simulator
+      marcatori: COPPIA_MIT
+
+  670310f   2026-08-28  Implement code changes to enhance functionality and improve performance
+      marcatori: COPPIA_MIT, concatenate([self., coppie_nate, d0new, perc_tw, pos_figlio, vstack([self.
+
+================================================================================================
+### PER QUESTI LA BYTE-IDENTITA' MISURATA SULLA SCENA PICCOLA NON COPRE LE NASCITE.
+### Non vuol dire che siano sbagliati: vuol dire che il loro braccio di byte-identita'
+### NON HA PERCORSO quei rami, e quindi NON DICE NIENTE su di essi.
+================================================================================================
+
+scritto: C:\Users\lpeano\soliton_simulator\csv\_test_fork\_sigilli_senza_nascite.json
