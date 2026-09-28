@@ -1,6 +1,6 @@
 {
  "ancora_cura": "LimiteNodiSuperato",
- "blob_sim": "a37414cffa9a9c63f45ac0a2c826983ef1c4e1c5",
+ "blob_sim": "2feb5ba03049f0e2f9147545449a237bbef188b6",
  "blob_sim_vecchio": "1fc9235f749b10a113fd82e5781868afe5d3a04f",
  "bracci": {
   "A": {
@@ -40,13 +40,24 @@
    "nascite": 0,
    "passi_provati": 40,
    "perche": "sulla scena dei sigilli non ci sono nascite, e `semina` ferma prima che una scena possa nascere oltre il tetto: serve un run lungo"
+  },
+  "E": {
+   "chiamate": [
+    3011
+   ],
+   "dentro_un_ramo": [],
+   "fuori": [
+    3011
+   ],
+   "passa": true
   }
  },
  "commit_che_introduce": "95249c530ce2a95c2d60cd4d3dcc384fb03e2a57",
  "esiti": {
   "A": true,
   "B": true,
-  "C": true
+  "C": true,
+  "E": true
  },
  "passa": true
 }

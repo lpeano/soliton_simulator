@@ -6,9 +6,17 @@
 | | braccio | passa se |
 |---|---|---|
 | **A** | **byte-identita'** col driver, 3 passi, seme 11 | ### **23 grandezze su 23, 0 diverse** |
-| **B** | ### **IL CASO CHE DEVE FALLIRE**: `--maxnodi` basso | solleva **`LimiteNodiSuperato`**, il messaggio **nomina `MAX_NODI`**, e il processo **esce diverso da 0** |
+| **B** | ### **IL CASO CHE DEVE FALLIRE**, in **due** sotto-casi: la **semina** e lo **schedulatore** | solleva **`LimiteNodiSuperato`**, il messaggio **nomina `MAX_NODI`**, e il processo **esce diverso da 0** |
 | **C** | **CONTROLLO POSITIVO**: lo stesso comando sul blob **VECCHIO** | il vecchio **NON si ferma**: esce **0** e produce uno stato |
-| **D** | **lo SFORO dentro il passo** | ### **si RIPORTA, non e' un criterio** |
+| **E** | **la FORMA del controllo in `semina`** *(statica)* | ### **UNO** solo, e **NON dentro un ramo**: cosi' copre **entrambi i rami per costruzione** |
+| **D** | **lo SFORO dentro il passo** | ### **NON MISURABILE qui, e si dichiara** |
+
+### 📌 **E il braccio `E` c'e' perche' IL GUARDIANO HA TROVATO CHE MANCAVA.** La prima stesura
+della cura metteva il controllo **dentro il solo ramo `SEMINA_LAM`** e **lasciava scoperto
+l'altro**. ### **Ho provato a coprirlo A RUNTIME e non si puo':** la scena dei sigilli **chiede
+la saturazione**, e il braccio falliva su **entrambi** i blob -- cioe' non misurava la cura.
+**Allora si verifica la FORMA**: un solo controllo, **fuori dai rami**. ⚠ **E' STATICA, e lo
+dico** -- dimostra la struttura, non l'esecuzione.
 
 ### **`B` e' il braccio che conta** (`P1-sexies`): **un presidio che non fallisce mai non si
 distingue da uno assente** (`A9`). E ### **`C` e' quello che impedisce di aver inventato la cura:**
@@ -28,6 +36,7 @@ python csv/_seal_fork/_sig_max_nodi.py --corri=<MAX_NODI> [--sim=<percorso>] [--
 ```
 *Esce `0` se il run **arriva in fondo**, `3` se `LimiteNodiSuperato` lo **ferma**.)*
 """
+import ast
 import hashlib
 import io
 import json
@@ -53,6 +62,8 @@ PROVA = os.path.join(RADICE, "csv", "_test_fork", "_hashseed_prova.py")
 # IL NOME CHE LA CURA INTRODUCE: da qui `sim_prima_del_flag` RISALE al commit che lo ha
 # introdotto e prende il PADRE. NESSUN COMMIT PINNATO A MANO (`H-P8`).
 ANCORA_CURA = "LimiteNodiSuperato"
+# il nome della funzione di controllo, per la verifica STRUTTURALE del braccio E
+BERSAGLIO = "_ferma_se_oltre_max_nodi"
 
 
 def _riga(x):
@@ -62,6 +73,52 @@ def _riga(x):
 # ============================================================================================
 # IL BRACCIO INTERNO: UN run, e dice come esce
 # ============================================================================================
+def controllo_fuori_dai_rami():
+    """**`semina` ha UN SOLO controllo, e NON sta dentro un ramo.** Verifica STRUTTURALE.
+
+    ### **Perche' STRUTTURALE e non a runtime, ed e' una MISURA che l'ha imposto:** il ramo
+    **senza** `SEMINA_LAM` **non e' raggiungibile** sulla scena dei sigilli -- la scena
+    `MASSE-COERENTI` chiama `semina(-1)`, cioe' **chiede la saturazione**, e senza `SEMINA_LAM`
+    quella alza il `SystemExit` che c'era **da prima di questa cura**. *(Provato: il braccio a
+    runtime falliva su ENTRAMBI i blob, vecchio e nuovo -- cioe' non misurava la cura.)*
+
+    **Allora si verifica la PROPRIETA' invece del comportamento:** il controllo e' **UNO** ed e'
+    un'istruzione **del corpo di `semina`**, non del corpo di un `if`. ### **Se sta fuori dai
+    rami, copre entrambi i rami per COSTRUZIONE** -- e non serve entrarci per saperlo.
+
+    ⚠ **E' una lettura STATICA, e lo dico** (`A9`): dimostra la FORMA, non l'esecuzione.
+    """
+    arb = ast.parse(io.open(SIM, encoding="utf-8").read())
+    fn = None
+    for nd in ast.walk(arb):
+        if isinstance(nd, ast.FunctionDef) and nd.name == "semina":
+            fn = nd
+    if fn is None:
+        raise SystemExit("[E] `semina` non trovata: la verifica non si puo' fare")
+
+    def _chiamate(corpo):
+        q = []
+        for s in corpo or []:
+            for nd in ast.walk(s):
+                if isinstance(nd, ast.Call) and getattr(nd.func, "id", None) == BERSAGLIO:
+                    q.append(nd.lineno)
+        return q
+
+    tutte = _chiamate(fn.body)
+    dentro = []
+    for nd in ast.walk(fn):
+        if isinstance(nd, (ast.If, ast.For, ast.While, ast.Try)):
+            for ramo in ("body", "orelse", "finalbody"):
+                dentro += _chiamate(getattr(nd, ramo, None))
+    fuori = [x for x in tutte if x not in dentro]
+    print("  chiamate a `%s` in `semina`: %d, alle righe %s" % (BERSAGLIO, len(tutte), tutte))
+    print("  di queste, DENTRO un ramo: %d %s" % (len(dentro), sorted(set(dentro)) or ""))
+    print("  FUORI dai rami (corpo della funzione): %d %s" % (len(fuori), fuori))
+    ok = (len(tutte) == 1) and (len(dentro) == 0) and (len(fuori) == 1)
+    return ok, {"chiamate": tutte, "dentro_un_ramo": sorted(set(dentro)), "fuori": fuori,
+                "passa": ok}
+
+
 def sintetico(sim):
     """**Il controllo dello SCHEDULATORE, esercitato con un `net` SINTETICO.**
 
@@ -110,13 +167,19 @@ def sintetico(sim):
     return 0
 
 
-def corri(max_nodi, sim, passi):
+def corri(max_nodi, sim, passi, senza_lam=False):
     # ⚠ `extra` di `argv_del_driver` va nella `sys.argv` DEL DRIVER, non del simulatore: il
     #   driver legge dei POSIZIONALI, e un `--maxnodi=` li' finisce dentro `int(...)` e muore.
     #   Quindi `--maxnodi` si aggiunge all'argv CHE IL DRIVER HA COSTRUITO PER IL SIMULATORE.
     S0, argv = _cli_flag.argv_del_driver(extra=["--seme=11"],
                                          dest=os.path.join(FUORI, "_scarto_cli"))
     argv = list(argv) + ["--maxnodi=%d" % max_nodi]
+    if senza_lam:
+        # `senza` ASSERISCE che il flag ci FOSSE: se un giorno il driver smettesse di
+        # passarlo, questo braccio diventerebbe IDENTICO all'altro e misurerebbe niente.
+        argv = _cli_flag.senza(argv, "--semina-lam")
+        print("[corri] SENZA `--semina-lam`: il ramo NON di saturazione, quello che la")
+        print("        prima stesura della cura LASCIAVA SCOPERTO")
     print("[corri] maxnodi = %d   passi = %d" % (max_nodi, passi))
     print("[corri] simulatore = %s" % os.path.basename(sim))
     # l'eccezione esiste SOLO dopo la cura: sul blob vecchio non c'e', e allora non si cattura
@@ -163,10 +226,12 @@ def corri(max_nodi, sim, passi):
 # ============================================================================================
 # IL SIGILLO
 # ============================================================================================
-def _sotto(max_nodi=None, sim=None, passi=3, sint=False):
+def _sotto(max_nodi=None, sim=None, passi=3, sint=False, senza_lam=False):
     """Lancia un braccio interno IN SOTTOPROCESSO e restituisce `(codice, testo)`."""
     cmd = [sys.executable, os.path.abspath(__file__)]
     cmd.append("--sintetico" if sint else "--corri=%d" % max_nodi)
+    if senza_lam:
+        cmd.append("--senza-lam")
     cmd.append("--passi=%d" % passi)
     if sim:
         cmd.append("--sim=" + sim)
@@ -285,6 +350,24 @@ def principale():
     print("  BRACCIO C: %s" % ("PASSA -- il vecchio NON si fermava" if ok_c else "FALLISCE"))
     print("")
 
+    # ================= BRACCIO E: la FORMA del controllo in `semina` =======================
+    print("=" * 92)
+    print("BRACCIO E -- `semina` ha UN SOLO controllo, e NON sta DENTRO un ramo (STATICO)")
+    print("=" * 92)
+    ok_e, ref_e = controllo_fuori_dai_rami()
+    esiti["E"] = ok_e
+    REF["E"] = ref_e
+    print("")
+    print("  Il ramo SENZA `--semina-lam` NON E' RAGGIUNGIBILE sulla scena dei sigilli: la scena")
+    print("  MASSE-COERENTI chiama `semina(-1)`, cioe' CHIEDE la saturazione, e senza SEMINA_LAM")
+    print("  quella alza il SystemExit che c'era DA PRIMA di questa cura.")
+    print("  PROVATO: il braccio a runtime falliva su ENTRAMBI i blob -- non misurava la cura.")
+    print("  Quindi qui si verifica LA FORMA: un solo controllo, FUORI dai rami, che per")
+    print("  COSTRUZIONE copre entrambi i rami. E' una lettura STATICA, e lo dico (`A9`).")
+    print("")
+    print("  BRACCIO E: %s" % ("PASSA" if ok_e else "FALLISCE"))
+    print("")
+
     # ================= BRACCIO D: lo sforo, e NON E' MISURABILE QUI ========================
     print("=" * 92)
     print("BRACCIO D -- LO SFORO dentro il passo: **DICHIARATO E NON MISURATO**")
@@ -305,7 +388,7 @@ def principale():
 
     # ================= IL VERDETTO =========================================================
     print("=" * 92)
-    for k in ("A", "B", "C"):
+    for k in ("A", "B", "C", "E"):
         print("  braccio %s: %s" % (k, "PASSA" if esiti[k] else "FALLISCE"))
     passa = all(esiti.values())
     print("=" * 92)
@@ -324,7 +407,7 @@ def principale():
 
 
 if __name__ == "__main__":
-    _corri, _sim, _passi, _sint = None, SIM, 3, False
+    _corri, _sim, _passi, _sint, _slam = None, SIM, 3, False, False
     for _x in sys.argv[1:]:
         if _x.startswith("--corri="):
             _corri = int(_x.split("=", 1)[1])
@@ -334,6 +417,8 @@ if __name__ == "__main__":
             _passi = int(_x.split("=", 1)[1])
         elif _x == "--sintetico":
             _sint = True
+        elif _x == "--senza-lam":
+            _slam = True
     if _sint:
         sys.exit(sintetico(_sim))
-    sys.exit(corri(_corri, _sim, _passi) if _corri is not None else principale())
+    sys.exit(corri(_corri, _sim, _passi, _slam) if _corri is not None else principale())

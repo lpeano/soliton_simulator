@@ -1287,10 +1287,10 @@ c'e' gia'**. Il referto e' **l'indice stesso**.
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
 |---|---|---|---|---|
-| `csv/_seal_fork/_sig_max_nodi.py` | `2dbd5d5a` | `python csv/_seal_fork/_sig_max_nodi.py` | **tre bracci**: **(A)** byte-identita' col driver · **(B)** il **caso che deve fallire**, in due sotto-casi *(la semina e lo schedulatore)* · **(C)** il **controllo positivo** sul blob **vecchio** | ### **PASSA.** (A) ### **tutte e 23 le grandezze identiche byte per byte** · (B) **2 su 2** fermano il run · (C) **2 su 2**, il vecchio **non si ferma**. **Esce `0`** |
+| `csv/_seal_fork/_sig_max_nodi.py` | `8120a2af` | `python csv/_seal_fork/_sig_max_nodi.py` | **quattro bracci**: **(A)** byte-identita' col driver · **(B)** il **caso che deve fallire**, in due sotto-casi *(la semina e lo schedulatore)* · **(C)** il **controllo positivo** sul blob **vecchio** · **(E)** la **FORMA** del controllo in `semina`, **statica** | ### **PASSA.** (A) ### **tutte e 23 le grandezze identiche byte per byte** · (B) **2 su 2** fermano il run · (C) **2 su 2**, il vecchio **non si ferma** · (E) ### **1 chiamata, 0 dentro un ramo** |
 
-**Referto:** `csv/_seal_fork/_sig_max_nodi.json` *(blob byte `beddb607`)*.
-**Simulatore:** `a37414cf`; **il vecchio** e' `1fc9235f`, estratto **in binario** dal **PADRE** del
+**Referto:** `csv/_seal_fork/_sig_max_nodi.json` *(blob byte `3316c0ba`)*.
+**Simulatore:** `2feb5ba0`; **il vecchio** e' `1fc9235f`, estratto **in binario** dal **PADRE** del
 commit della cura *(`95249c5~1`, cioe' `H-P8`: non si prende <<il codice di prima>> da `HEAD`)*.
 
 **Bracci interni, che il sigillo lancia in SOTTOPROCESSO** *(un `raise` va visto **come esce il
@@ -1299,6 +1299,13 @@ processo**)*:
 python csv/_seal_fork/_sig_max_nodi.py --corri=<MAX_NODI> [--sim=<percorso>] [--passi=N]
 python csv/_seal_fork/_sig_max_nodi.py --sintetico [--sim=<percorso>]
 ```
+**IL BRACCIO `E` E' STATICO E NASCE DA UN FALLIMENTO:** il ramo **senza `--semina-lam`** -- quello
+che la prima stesura della cura **lasciava scoperto** -- ### **non e' raggiungibile a runtime sulla
+scena dei sigilli**, perche' la scena `MASSE-COERENTI` chiama `semina(-1)`, cioe' **chiede la
+saturazione**, e senza `SEMINA_LAM` alza il `SystemExit` che c'era **da prima**. **Provato: il
+braccio falliva su ENTRAMBI i blob, cioe' non misurava la cura.** Allora si verifica **la FORMA**:
+`_ferma_se_oltre_max_nodi` in `semina` e' ### **UNA chiamata, 0 dentro un ramo, 1 nel corpo** --
+quindi copre **entrambi i rami per costruzione**. ⚠ **E' una lettura statica, e lo dico** (`A9`).
 **La dump `PRIMA`** *(`csv/_seal_fork/_sig_max_nodi/PRIMA.npz`)* **e' presa col blob `1fc9235f`**, e
 questo sigillo **non puo' ricostruirla da se'**: se manca, **si ferma e lo dice**.
 

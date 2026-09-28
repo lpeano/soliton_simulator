@@ -5799,3 +5799,54 @@ leggibile, con la risposta accanto.
 
 **`MAX-NODI-FERMA` torna `aperto`/`IN CORSO`:** ### **il sigillo va RIGIRATO sul blob nuovo** — un
 sigillo che dichiara un blob che non gira più non è un sigillo.
+
+---
+
+# ✅ **SIGILLO rigirato sul blob `2feb5ba0`: PASSA, e ha un braccio in più** *(2026-09-28)*
+
+Strumento `csv/_seal_fork/_sig_max_nodi.py` *(blob `8120a2af`)*, referto `_sig_max_nodi.json`
+*(`3316c0ba`)*. **`MAX-NODI-FERMA` è di nuovo CHIUSA.**
+
+| braccio | esito |
+|---|---|
+| **A** byte-identità col driver | ### **tutte e 23 le grandezze identiche byte per byte** |
+| **B1** la **semina** *(`--maxnodi=100`)* | **ferma**, e dice *«semina: numero VERO, dopo la geometria»* |
+| **B2** lo **schedulatore** *(`net` sintetico)* | **ferma**, e dice *«schedulatore: inizio del passo»* |
+| **C1 · C2** il blob **vecchio** `1fc9235f` | ### **non si ferma** in nessuno dei due |
+| **E** 🆕 la **FORMA** del controllo in `semina` | ### **1 chiamata, 0 dentro un ramo, 1 nel corpo** |
+
+## 🆕 **Il braccio `E`, e nasce da un FALLIMENTO che vale la pena raccontare**
+
+Volevo coprire **a runtime** il ramo **senza `SEMINA_LAM`** — ### **quello che la mia prima stesura
+lasciava scoperto**, cioè esattamente il buco che il guardiano ha trovato. **Non si può:**
+
+> La scena dei sigilli `MASSE-COERENTI` chiama **`semina(-1)`**, cioè ### **chiede la saturazione**,
+> e senza `SEMINA_LAM` quella alza il `SystemExit` che c'era **da prima di questa cura**.
+
+### **Il braccio falliva su ENTRAMBI i blob, vecchio e nuovo** — cioè **non misurava la cura**, e un
+braccio che fallisce su entrambe le facce non distingue nulla. **L'ho tolto.**
+
+**Al suo posto si verifica LA PROPRIETÀ invece del comportamento**, leggendo l'AST: in `semina`
+`_ferma_se_oltre_max_nodi` è ### **UNA chiamata, ZERO dentro un ramo, UNA nel corpo della
+funzione** — quindi ### **copre entrambi i rami PER COSTRUZIONE**, e non serve entrarci per saperlo.
+
+> ### ⚠ **È una lettura STATICA, e lo dico** *(`A9`)*: **dimostra la struttura, non l'esecuzione.**
+> Un braccio statico non è un braccio a runtime, e non lo spaccio per tale. **Ma è più di
+> un'asserzione mia**, perché è una proprietà che una macchina ricontrolla a ogni giro — e in questa
+> sessione l'analisi statica mi ha ingannato **quattro volte** sulle *condizioni*: qui non chiede
+> quali rami girano, chiede **dove sta un'istruzione**, e quella è una domanda a cui l'AST risponde
+> senza margine.
+
+## Che cosa resta aperto, ed è sempre lo stesso
+
+### **Quanto valga lo SFORO dentro un passo non lo so**, e non è misurato: serve **una scena che
+cresce**. ### **E il ramo senza `SEMINA_LAM` non è coperto a runtime**, per la ragione qui sopra.
+
+---
+
+### ➜ **Il pezzo ① di `T3` è chiuso, di nuovo.** Il prossimo è **②: la separazione della mitosi con
+la nascita atomica e il rinculo dei genitori** — e prima del codice dichiaro **cosa mi aspetto che
+cambi** *(i flash di `psi` al passo di nascita)* e **cosa deve restare uguale nei passi senza
+nascite**.
+
+> ### 🛑 **STOP.**
