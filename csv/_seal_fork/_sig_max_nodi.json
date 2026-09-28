@@ -1,0 +1,52 @@
+{
+ "ancora_cura": "LimiteNodiSuperato",
+ "blob_sim": "a37414cffa9a9c63f45ac0a2c826983ef1c4e1c5",
+ "blob_sim_vecchio": "1fc9235f749b10a113fd82e5781868afe5d3a04f",
+ "bracci": {
+  "A": {
+   "dopo": "DOPO.npz",
+   "identico": true,
+   "prima": "PRIMA.npz",
+   "ritorno": 0
+  },
+  "B": {
+   "B1_semina": {
+    "maxnodi": 100,
+    "nomina_max_nodi": true,
+    "passa": true,
+    "ritorno": 3
+   },
+   "B2_schedulatore_sintetico": {
+    "dice_schedulatore": true,
+    "nomina_max_nodi": true,
+    "passa": true,
+    "ritorno": 3
+   }
+  },
+  "C": {
+   "C1_semina": {
+    "maxnodi": 100,
+    "passa": true,
+    "ritorno": 0
+   },
+   "C2_schedulatore_sintetico": {
+    "passa": true,
+    "ritorno": 4
+   }
+  },
+  "D": {
+   "misurato": false,
+   "n_costante": 2107,
+   "nascite": 0,
+   "passi_provati": 40,
+   "perche": "sulla scena dei sigilli non ci sono nascite, e `semina` ferma prima che una scena possa nascere oltre il tetto: serve un run lungo"
+  }
+ },
+ "commit_che_introduce": "95249c530ce2a95c2d60cd4d3dcc384fb03e2a57",
+ "esiti": {
+  "A": true,
+  "B": true,
+  "C": true
+ },
+ "passa": true
+}

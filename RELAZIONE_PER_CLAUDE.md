@@ -5677,3 +5677,72 @@ oggetto con il solo `.n` basta — ed è il pattern del collaudo a due facce di 
 arriva a toccare `net` e muore di `AttributeError`.**
 
 **Il sigillo è nel commit successivo**, sul blob `a37414cf`.
+
+---
+
+# ✅ **SIGILLO `MAX-NODI-FERMA`: PASSA. E il primo giro era FALLITO** *(2026-09-28)*
+
+**Simulatore `a37414cf`.** Strumento `csv/_seal_fork/_sig_max_nodi.py` *(blob `d43c4100`)*, referto
+`_sig_max_nodi.json` *(`0fd0668c`)*. **La voce è CHIUSA.**
+
+| braccio | che cosa misura | esito |
+|---|---|---|
+| **A** | **byte-identità** col driver, 3 passi, seme `11` | ### **tutte e 23 le grandezze identiche byte per byte** |
+| **B1** | `--maxnodi=100`: la **semina** non ci sta | ### **FERMA** *(ritorno `3`, il messaggio nomina `MAX_NODI`)* |
+| **B2** | lo **schedulatore**, con un `net` **sintetico** `n = MAX_NODI + 1` | ### **FERMA**, e dice *«schedulatore: inizio del passo»* |
+| **C1** | `--maxnodi=100` sul blob **vecchio** `1fc9235f` | ### **NON si ferma** — arriva in fondo |
+| **C2** | il `net` sintetico sul **vecchio** | ### **NON si ferma** per `MAX_NODI`: muore di `AttributeError` |
+| **D** | lo **sforo** dentro il passo | ### **NON MISURATO**, e si dichiara |
+
+## ⚠ **Il primo giro è FALLITO, e conta più del secondo**
+
+Il braccio `B2`, come l'avevo progettato, metteva `--maxnodi` pari a `n` **e aspettava che una
+nascita sforasse il tetto**. **Non sfora mai:**
+
+> ### **40 passi sulla scena `(ii)(a)`, seme `11`: ZERO nascite.** `n` resta `2107` per tutti e 40.
+
+### **Era il braccio a essere mal progettato, non la cura** — e la strada *«una scena più grande del
+tetto»* è **chiusa per costruzione**, perché `semina` ora ferma prima. Il sito dello schedulatore si
+esercita con un **`net` sintetico**: basta `.n`, perché ### **il controllo sta PRIMA di toccare
+`net`** — ed è proprio questo che il braccio dimostra. **E il controllo positivo diventa netto:** il
+nuovo solleva `LimiteNodiSuperato`, il vecchio **arriva a toccare `net`** e muore di
+`AttributeError`.
+
+## 🔍 **E un fatto misurato sul VECCHIO, più forte di quello che credevo**
+
+Avevo scritto che il vecchio *«troncava»*. ### **Nel ramo di saturazione non troncava nemmeno.**
+
+Con `MAX_NODI = 100`, il blob `1fc9235f` ### **costruisce una scena di 2107 nodi e gira 3 passi
+senza dire niente**: nel ramo `_sat` il tetto veniva **sovrascritto** da `n = len(p)`, cioè dalla
+geometria.
+
+> ### 📌 **Lo stato finiva a 21 volte la propria guardia di memoria, in silenzio.** Ed è la ragione
+> per cui il controllo nuovo sta **anche DOPO la geometria** — che nel progetto avevo messo *«perché
+> lì il numero vero si conosce»*, senza sapere **quanto** servisse.
+
+## 🛡 **E `H-P8` ha RIFIUTATO il primo commit del sigillo, con ragione**
+
+La prima stesura estraeva il blob vecchio da un commit **pinnato a mano** *(`95249c5~1`)*. Il
+presidio l'ha bloccata perché vede `cat-file` accanto a un nome che dice *«vecchio»* e **non sa
+distinguere un'ancora buona da una fragile**. ### **E sul merito aveva ragione comunque:**
+
+> ### **Un'ancora scritta a mano non si accorge di essere sbagliata.**
+
+Ora il sigillo usa **`_cli_flag.sim_prima_del_flag("LimiteNodiSuperato", …)`**, che **trova** il
+commit che introduce quel nome *(`git log -S`, la voce più vecchia → `95249c53`)*, ne prende **il
+padre**, e ### **ASSERISCE che il file estratto non contenga quel nome** — se l'ancora fosse
+sbagliata, **si ferma invece di misurare niente** *(`A9`)*.
+
+## Che cosa resta aperto, dichiarato
+
+### **Quanto valga lo SFORO dentro un passo non lo so**, e non è misurato: serve **una scena che
+cresce**, cioè un run lungo. **È una misura a sé.** *(Sta scritto nel codice, in due schede del
+`REGISTRO_FISICA`, nell'inventario e qui.)*
+
+---
+
+### ➜ **Il pezzo ① di `T3` è chiuso.** Il prossimo è **②: la separazione della mitosi con la nascita
+atomica e il rinculo dei genitori** — e il suo sigillo ### **NON sarà byte-identico**, quindi prima
+del codice dichiaro **cosa mi aspetto che cambi** e **cosa deve restare uguale**.
+
+> ### 🛑 **STOP.**

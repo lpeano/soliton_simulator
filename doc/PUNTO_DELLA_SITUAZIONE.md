@@ -23,11 +23,10 @@ elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard
 > *(suffisso minuscolo)*, **`V`** *(una lettera)*. **Sono `8` righe della coda unica: se
 > devono comparire, gli serve un ID** — e non e' una regex piu' larga, e' una rinomina.
 
-## IN CORSO — 3
+## IN CORSO — 2
 
 | id | cosa | tipo | ultimo commit che lo nomina |
 |---|---|:--:|---|
-| **`MAX-NODI-FERMA`** | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run | `cura` | `1b90fef 10:19` |
 | **`SCHED-PASSO`** | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | `cura` | `1f8ceac 09:52` |
 | **`SCHED-T3-REGOLE`** | le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in tre famiglie | `misura` | `1f8ceac 09:52` |
 
@@ -128,7 +127,7 @@ elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard
 | **`Z117`** | Z117 CHIUSA PER DIMOSTRAZIONE + MISURA / IL WRAP «A 4π» DI ritmo() NON AVVOLGE NIENTE: su (-2π... | `fronte` | `18db738 00:54` |
 | **`Z73`** | Z73 RITIRATA ⏳[EPOCA 1 · MISURA] / RITIRATA UNA SECONDA VOLTA il 2026-09-20, e la smentita sta... | `fronte` | `2cca038 17:52` |
 
-## FATTO — 62
+## FATTO — 63
 
 | id | cosa | tipo | ultimo commit che lo nomina |
 |---|---|:--:|---|
@@ -166,6 +165,7 @@ elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard
 | **`L-PATCH`** | LE PATCH SI LANCIANO IN PRIMO PIANO; niente git stash con una patch in corso; nei patch script... | `presidio` | `2b273da 22:34` |
 | **`L-UN-PROMPT`** | UN PROMPT ALLA VOLTA: i rilievi che arrivano durante un lavoro vanno in CODA | `presidio` | `72b27d0 22:41` |
 | **`LETTORI-INDICE`** | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FUORI PERIMETRO —... | `altro` | `4f15f7a 18:58` |
+| **`MAX-NODI-FERMA`** | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run | `cura` | `f4d059c 10:37` |
 | **`MITOSI-NON-DIVISA`** | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si alternano 26 volte | `misura` | `4b8a27d 10:09` |
 | **`OKN-ASSERT`** | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(..., default) CHE... | `altro` | `e216730 01:33` |
 | **`P1-bis`** | LA RELAZIONE SI SCRIVE NELLO STESSO COMMIT DEL RISCONTRO | `presidio` | `2ebbd25 09:22` |

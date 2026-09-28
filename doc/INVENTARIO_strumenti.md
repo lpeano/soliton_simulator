@@ -1282,3 +1282,38 @@ verificare**, e la verifica vive in `csv/_seal_fork/_sig_segni_una_legge.py`, **
 
 **⚠ NON SI RILANCIA:** ogni voce **fallisce se l'id esiste** e ogni aggiunta **fallisce se il testo
 c'e' gia'**. Il referto e' **l'indice stesso**.
+
+## `MAX-NODI-FERMA`, il sigillo *(2026-09-28)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
+|---|---|---|---|---|
+| `csv/_seal_fork/_sig_max_nodi.py` | `2dbd5d5a` | `python csv/_seal_fork/_sig_max_nodi.py` | **tre bracci**: **(A)** byte-identita' col driver · **(B)** il **caso che deve fallire**, in due sotto-casi *(la semina e lo schedulatore)* · **(C)** il **controllo positivo** sul blob **vecchio** | ### **PASSA.** (A) ### **tutte e 23 le grandezze identiche byte per byte** · (B) **2 su 2** fermano il run · (C) **2 su 2**, il vecchio **non si ferma**. **Esce `0`** |
+
+**Referto:** `csv/_seal_fork/_sig_max_nodi.json` *(blob byte `beddb607`)*.
+**Simulatore:** `a37414cf`; **il vecchio** e' `1fc9235f`, estratto **in binario** dal **PADRE** del
+commit della cura *(`95249c5~1`, cioe' `H-P8`: non si prende <<il codice di prima>> da `HEAD`)*.
+
+**Bracci interni, che il sigillo lancia in SOTTOPROCESSO** *(un `raise` va visto **come esce il
+processo**)*:
+```
+python csv/_seal_fork/_sig_max_nodi.py --corri=<MAX_NODI> [--sim=<percorso>] [--passi=N]
+python csv/_seal_fork/_sig_max_nodi.py --sintetico [--sim=<percorso>]
+```
+**La dump `PRIMA`** *(`csv/_seal_fork/_sig_max_nodi/PRIMA.npz`)* **e' presa col blob `1fc9235f`**, e
+questo sigillo **non puo' ricostruirla da se'**: se manca, **si ferma e lo dice**.
+
+> ### ⚠ **IL PRIMO GIRO E' FALLITO, e conta piu' del secondo.** Il braccio `B2` aspettava che una
+> **NASCITA** sforasse il tetto: sulla scena `(ii)(a)` seme `11` ci sono ### **40 passi con ZERO
+> nascite**, quindi `n` non cresce. ### **Era il braccio a essere mal progettato, non la cura.**
+> Il sito dello schedulatore si esercita con un **`net` sintetico** *(basta `.n`, perche' il
+> controllo sta **prima** di toccare `net`)*, e il controllo positivo e' **netto**: il nuovo solleva
+> **`LimiteNodiSuperato`**, il vecchio **arriva a toccare `net`** e muore di **`AttributeError`**.
+
+**E un fatto misurato sul VECCHIO, piu' forte di quello che credevo:** con `MAX_NODI = 100` il blob
+vecchio **costruisce una scena di 2107 nodi e gira 3 passi senza dire niente**. Nel ramo di
+saturazione il tetto veniva **sovrascritto** da `n = len(p)`: ### **non troncava nemmeno -- lo stato
+finiva a 21 volte la propria guardia, in silenzio.** E' la ragione per cui il controllo nuovo sta
+**anche DOPO la geometria**.
+
+**⚠ RESTA DICHIARATO E NON MISURATO:** quanto valga lo **sforo** dentro un passo. **Serve una scena
+che cresce**, cioe' un run lungo: e' una misura a se'.
