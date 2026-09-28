@@ -23,10 +23,11 @@ elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard
 > *(suffisso minuscolo)*, **`V`** *(una lettera)*. **Sono `8` righe della coda unica: se
 > devono comparire, gli serve un ID** — e non e' una regex piu' larga, e' una rinomina.
 
-## IN CORSO — 2
+## IN CORSO — 3
 
 | id | cosa | tipo | ultimo commit che lo nomina |
 |---|---|:--:|---|
+| **`MAX-NODI-FERMA`** | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run | `cura` | `66fd56c 10:50` |
 | **`SCHED-PASSO`** | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | `cura` | `1f8ceac 09:52` |
 | **`SCHED-T3-REGOLE`** | le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in tre famiglie | `misura` | `1f8ceac 09:52` |
 
@@ -95,7 +96,7 @@ elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard
 | **`FILI-CORTI`** | i fili si accorciano SOLO FRA LE MASSE o OVUNQUE? Il calo della distanza viene dai `d`, non... | `altro` | `8c2997c 10:00` |
 | **`FUGA-MULTIRIGA`** | la via d'uscita di H-REG-R e H-P1-bis e' una regex SENZA re.S: una dichiarazione su PIU' RIGHE... | `altro` | `ee5ecd3 22:52` |
 | **`G4-MEMARCO`** | MEMARCO — LA MEMORIA DEL MOTO TRADOTTA IN FORMA RELAZIONALE (aggiunta di Luca al §4, 2026-09-22) /… | `cura` | `010809a 13:57` |
-| **`H-ETC-2`** | PRESIDIO PROPOSTO E NON CABLATO: permutare le cinque leggi deve dare lo STESSO stato (Jacobi) | `presidio` | `5ac5150 08:56` |
+| **`H-ETC-2`** | PRESIDIO PROPOSTO E NON CABLATO: permutare le cinque leggi deve dare lo STESSO stato (Jacobi) | `presidio` | `4b80887 10:49` |
 | **`H-REGR-LARGA`** | H-REG-R associa una scheda per NOME DI FUNZIONE: scatta su qualunque modifica a `_applica_flag`... | `altro` | `ee5ecd3 22:52` |
 | **`IMPL-2`** | una SECONDA implementazione indipendente, scritta dalle LEGGI e non dal codice | `fronte` | `8f71b29 01:54` |
 | **`INDICE-LEGGERO`** | l'indice pesa 169 KB e leggerlo intero non fa risparmiare contesto: serve un comando di... | `fronte` | `18db738 00:54` |
@@ -127,7 +128,7 @@ elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard
 | **`Z117`** | Z117 CHIUSA PER DIMOSTRAZIONE + MISURA / IL WRAP «A 4π» DI ritmo() NON AVVOLGE NIENTE: su (-2π... | `fronte` | `18db738 00:54` |
 | **`Z73`** | Z73 RITIRATA ⏳[EPOCA 1 · MISURA] / RITIRATA UNA SECONDA VOLTA il 2026-09-20, e la smentita sta... | `fronte` | `2cca038 17:52` |
 
-## FATTO — 63
+## FATTO — 62
 
 | id | cosa | tipo | ultimo commit che lo nomina |
 |---|---|:--:|---|
@@ -155,7 +156,7 @@ elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard
 | **`H-P3`** | PRESIDIO DEL HOOK: un sigillo che configura il modulo A MANO invece di passare dal CLI | `presidio` | `fdd9889 01:50` |
 | **`H-P5`** | PRESIDIO DEL HOOK: un referto che non dichiara la configurazione INTERA | `presidio` | `1b5f7ab 09:07` |
 | **`H-P7`** | PRESIDIO DEL HOOK: un flag il cui commento cambia senza nominare quel flag | `presidio` | `69624a8 20:27` |
-| **`H-P8`** | PRESIDIO DEL HOOK: un confronto che prende il codice di prima da HEAD invece che dal PADRE | `presidio` | `44f37d9 02:09` |
+| **`H-P8`** | PRESIDIO DEL HOOK: un confronto che prende il codice di prima da HEAD invece che dal PADRE | `presidio` | `4b80887 10:49` |
 | **`H-P9`** | PRESIDIO DEL HOOK: uno strumento che fa avanzare una rete con net.step() invece di passo_pieno | `presidio` | `dab9304 00:27` |
 | **`H-REG-R`** | PRESIDIO DEL HOOK: una legge che cambia senza la sua scheda in REGISTRO_FISICA | `presidio` | `8455a16 23:44` |
 | **`H-RIGHE`** | PRESIDIO DEL HOOK: CLAUDE.md oltre le 400 righe | `presidio` | `2b273da 22:34` |
@@ -165,7 +166,6 @@ elencate qui        581   (tolte le etichette locali, gli assiomi e gli standard
 | **`L-PATCH`** | LE PATCH SI LANCIANO IN PRIMO PIANO; niente git stash con una patch in corso; nei patch script... | `presidio` | `2b273da 22:34` |
 | **`L-UN-PROMPT`** | UN PROMPT ALLA VOLTA: i rilievi che arrivano durante un lavoro vanno in CODA | `presidio` | `72b27d0 22:41` |
 | **`LETTORI-INDICE`** | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FUORI PERIMETRO —... | `altro` | `4f15f7a 18:58` |
-| **`MAX-NODI-FERMA`** | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run | `cura` | `f4d059c 10:37` |
 | **`MITOSI-NON-DIVISA`** | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si alternano 26 volte | `misura` | `4b8a27d 10:09` |
 | **`OKN-ASSERT`** | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(..., default) CHE... | `altro` | `e216730 01:33` |
 | **`P1-bis`** | LA RELAZIONE SI SCRIVE NELLO STESSO COMMIT DEL RISCONTRO | `presidio` | `2ebbd25 09:22` |

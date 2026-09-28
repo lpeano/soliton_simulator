@@ -1016,8 +1016,11 @@ distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifi
 > E' CAMBIATA, e' cambiato CIO' CHE FA QUANDO NON CI STA.** Prima **troncava**
 > (`min(n, MAX_NODI - self.n)`): si chiedevano `n` nodi, ne nascevano meno, **e dai dati non
 > si vedeva**. Ora **ferma il run**. ### **Byte-inerte finche' la guardia non morde**, cioe
-> sempre nelle corse reali. **Il ramo `_sat` (saturazione) resta com'era: li' il numero lo
-> decide LA GEOMETRIA**, e il controllo sul numero vero sta **dopo** la geometria.
+> sempre nelle corse reali. ### **E IL CONTROLLO E' UNO, DOPO LA GEOMETRIA, PER ENTRAMBI I RAMI**
+> *(prescrizione del guardiano, 2026-09-28)*: nel ramo `_sat` il numero lo decide **la geometria**
+> (`n = len(p)`) e il valore calcolato con `MAX_NODI` **non viene usato**, quindi **prima la
+> saturazione non era controllata affatto**; e un controllo dentro il solo ramo `SEMINA_LAM`
+> **lascerebbe scoperto l'altro ramo**.
 > *(La legge della guardia sta nella scheda `guardia-max-nodi`.)*
 # ⑥ LA FASE `φ` E IL SUO DOMINIO — **`semina` / `_w4` / `_w8` / `step`**
 
@@ -4504,13 +4507,26 @@ forma di `A8`.
 
 | | |
 |---|---|
-| **la forma, ora** | **UN** controllo, `_ferma_se_oltre_max_nodi(n_attuale, quanti, dove)`, e **un'eccezione dedicata**, `LimiteNodiSuperato`. **Quattro siti di chiamata**: lo schedulatore *(inizio del passo)*, `semina` *(numero chiesto)*, `semina` *(saturazione, dopo la geometria)* -- e i due rami di `mitosi` che **non leggono piu' `MAX_NODI`** |
+| **la forma, ora** | **UN** controllo, `_ferma_se_oltre_max_nodi(n_attuale, quanti, dove)`, e **un'eccezione dedicata**, `LimiteNodiSuperato`. ### **DUE soli siti di chiamata**: lo schedulatore *(inizio del passo)* e `semina` *(**dopo la geometria**, sul numero VERO, per **entrambi** i rami)* -- e i due rami di `mitosi` che **non leggono piu' `MAX_NODI`** |
 | **perche' UNA funzione e non tre `raise`** | tre copie sarebbero **tre leggi**, e `9-ter`: *a parita' di effetto si preferisce togliere un'eccezione* |
 | **dove sta il controllo dello schedulatore** | ### **all'INIZIO del passo**, perche' e' una **precondizione**: un passo che non si puo' fare **non comincia**. Alla fine sarebbe una constatazione, con lo stato gia' oltre il limite |
 | ⚠ **il limite, dichiarato e NON MISURATO** | `mitosi` crea nodi **dentro** il passo: un passo che sfora **finisce**, e l'errore arriva **al passo dopo**. ### **Quanto sia lo sforo NON LO SO:** sulla scena dei sigilli sono **misurati 40 passi con ZERO nascite**, quindi `n` non cresce e lo sforo non si osserva. Serve una scena **che cresce** |
 | **la dimensione** | `4000000` contro i **~12800** nodi del pilota: **byte-inerte, e sigillato 23 su 23** |
 | **il futuro** | ### **va ELIMINATO** *(decisione di Luca)*. Una guardia che non serve e' una riga in meno, non una legge |
 
-*(Il ramo `_sat` di `semina` resta com'era: in saturazione **il numero lo decide la geometria**, e
-quel valore serve solo alla scorciatoia `semina(0)` che ritorna subito. Il controllo sul numero VERO
-sta **dopo** la geometria.)*
+## ✅ **PRESCRIZIONE DEL GUARDIANO** *(Luca, 2026-09-28)*: **un solo controllo, sul numero VERO**
+
+Il ramo `_sat` di `semina` **passa `-1` a `_semina_lam`**, e il numero lo decide **la geometria**
+(`n = len(p)`): ### **il valore calcolato con `MAX_NODI` NON VIENE USATO**, serve solo alla
+scorciatoia `semina(0)`. ### **Quindi prima di questa cura la saturazione non era controllata
+affatto.**
+
+**E la prima stesura della cura metteva DUE controlli** -- uno prima, sul numero *chiesto*, e uno
+**dentro il solo ramo `SEMINA_LAM`**. ### **Due controlli sono due leggi** *(`9-ter`)*, **e quello
+dentro il ramo lasciava scoperto l'altro ramo.** Ora e' **uno**, dopo l'`if`/`else`, dove `n` e' il
+numero di punti che **esistono** in `p`.
+
+> ### ⚠ **LA CONSEGUENZA, DICHIARATA:** controllando **dopo**, i punti `p` sono ### **gia' allocati**
+> quando il run si ferma. Sono `n x 3` float, e **non sono la memoria che `MAX_NODI` protegge
+> davvero** -- quella e' lo **stato del grafo**, archi compresi, che **non e' ancora stato toccato**.
+> **Ma e' un'allocazione che prima, col troncamento, non avveniva.**

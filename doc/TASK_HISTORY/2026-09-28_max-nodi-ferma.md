@@ -31,6 +31,7 @@
 |---|---|
 | **①** | ### **non so se `MAX_NODI` possa essere SUPERATO DENTRO un passo.** `mitosi` crea nodi: se il controllo sta **all'inizio** del passo, il passo in corso può sforare e l'errore arriva **al passo dopo**. **Non so quanto sia il massimo sforo**, e non lo misuro qui |
 | **②** | non so se `semina` con `n < 0` *(saturazione)* possa produrre **più di `MAX_NODI`** nodi dalla geometria: in quel ramo **il numero lo decide la geometria**, non il chiamante |
+| **②-bis** | ### ✅ **RISPOSTO DAL GUARDIANO** *(Luca, 2026-09-28)*, e la risposta è **sì e no**: in saturazione il numero calcolato con `MAX_NODI` ### **non viene usato** — `_semina_lam` riceve `-1` e il numero lo decide la geometria con `n = len(p)`. ### **Quindi oggi la saturazione NON è controllata da `MAX_NODI`.** **Prescrizione:** il controllo va **dopo `n = len(p)`, sul numero vero, PER ENTRAMBI I RAMI.** *(La mia prima stesura ne metteva **due** — uno prima sul numero chiesto, uno dentro il solo ramo `SEMINA_LAM` — e quello dentro il ramo **lasciava scoperto l'altro ramo**.)* |
 | **③** | ### **non so se qualcuno DIPENDA dal troncamento.** Se un test o una scena passa un `n` più grande di `MAX_NODI` aspettandosi il troncamento, con questa cura **muore**. Lo cerco, ma per nome: è un limite *(`A9`)* |
 | **④** | non so se `MAX_NODI` sia letta da altri punti che non ho ancora visto: `:7872`, `:8157` la stampano, `:8427` la riscrive dal CLI. **Quelle sono stampe e configurazione, non fisica** — ma la lista dei siti l'ho fatta con `grep` |
 

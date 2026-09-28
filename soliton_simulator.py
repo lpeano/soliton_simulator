@@ -2982,11 +2982,12 @@ class Rete:
         #   e dai dati non si vedeva. Ora si FERMA. Byte-inerte finche' la guardia non morde,
         #   cioe' sempre nelle corse reali (`MAX_NODI` = 4e6 contro i ~12800 nodi del pilota).
         #   ⚠ IL RAMO `_sat` RESTA COM'ERA, e non e' una dimenticanza: in saturazione
-        #   IL NUMERO LO DECIDE LA GEOMETRIA (`n = len(p)` qui sotto), e questo valore serve
-        #   SOLO alla scorciatoia `if n == 0: return` -- che e' comportamento dichiarato
-        #   (`semina(0)` ritorna subito). Il controllo sul numero VERO sta dopo la geometria.
-        if not _sat:
-            _ferma_se_oltre_max_nodi(self.n, n, 'semina: nodi chiesti dal chiamante')
+        #   IL NUMERO LO DECIDE LA GEOMETRIA (`n = len(p)` qui sotto), e il valore calcolato qui
+        #   con `MAX_NODI` **NON VIENE USATO** -- serve SOLO alla scorciatoia `if n == 0: return`,
+        #   che e' comportamento dichiarato (`semina(0)` ritorna subito). **Quindi oggi la
+        #   saturazione NON e' controllata da `MAX_NODI`**: lo ha rilevato il guardiano
+        #   (Luca, 2026-09-28) sul punto 2 dei miei <<non so>>, e la sua prescrizione e'
+        #   **UN SOLO controllo, DOPO `n = len(p)`, sul NUMERO VERO, PER ENTRAMBI I RAMI.**
         n = (MAX_NODI - self.n) if _sat else max(0, n)
         if n == 0: return
         r = _scala_sistema() * 0.5 if raggio is None else raggio
@@ -2994,12 +2995,20 @@ class Rete:
             p = self._semina_lam(-1 if _sat else n, r, centro)
             n = len(p)                 # in saturazione il numero lo decide la GEOMETRIA
             if n == 0: return
-            # [MAX-NODI-FERMA] il numero VERO della saturazione si conosce solo QUI, dopo la
-            #   geometria: e' il punto in cui si puo' controllare senza troncare niente.
-            _ferma_se_oltre_max_nodi(self.n, n, 'semina: saturazione, numero deciso dalla geometria')
         else:
             u = self.rng.normal(size=(n, 3)); u /= np.linalg.norm(u, axis=1, keepdims=True)
             p = np.asarray(centro, float) + u * (r * self.rng.random(n) ** (1 / 3))[:, None]
+        # [MAX-NODI-FERMA, prescrizione del guardiano del 2026-09-28] UN SOLO CONTROLLO, QUI, SUL
+        #   NUMERO VERO, PER ENTRAMBI I RAMI. `n` e' ora il numero di punti che ESISTONO in `p`:
+        #   nel ramo `SEMINA_LAM` perche' l'ha deciso la GEOMETRIA (`n = len(p)`), nell'altro
+        #   perche' `p` ha esattamente `n` righe. Prima il controllo era DUE: uno prima, sul
+        #   numero CHIESTO, e uno dentro il solo ramo `SEMINA_LAM`. Due controlli sono due leggi
+        #   (`9-ter`), e quello dentro il ramo LASCIAVA SCOPERTO l'altro ramo.
+        #   ⚠ E LA CONSEGUENZA, DICHIARATA: controllando DOPO, i punti `p` sono GIA' ALLOCATI
+        #   quando il run si ferma. Sono `n x 3` float, e non sono la memoria che `MAX_NODI`
+        #   protegge davvero (quella e' lo STATO DEL GRAFO, archi compresi, che non e' ancora
+        #   stato toccato) -- ma e' un'allocazione che prima, col troncamento, non avveniva.
+        _ferma_se_oltre_max_nodi(self.n, n, 'semina: numero VERO, dopo la geometria')
         if fase is None:
             ph = self.rng.random(n) * 4 * np.pi
         else:

@@ -5752,3 +5752,50 @@ atomica e il rinculo dei genitori** — e il suo sigillo ### **NON sarà byte-id
 del codice dichiaro **cosa mi aspetto che cambi** e **cosa deve restare uguale**.
 
 > ### 🛑 **STOP.**
+
+---
+
+# 🛡 **CORREZIONE DEL GUARDIANO: un solo controllo in `semina`, sul numero VERO** *(2026-09-28)*
+
+### **Simulatore `a37414cf` → `2feb5ba0`.** Nota di Luca sul **punto 2** dei miei *«non so»* del task
+history `1b90fef`. ### **Aveva ragione, e il difetto era nella FORMA della mia cura.**
+
+## Che cosa ha rilevato
+
+> In saturazione *(`n < 0`)* il numero calcolato con `MAX_NODI` ### **non viene usato**:
+> `_semina_lam` riceve `-1` e il numero lo decide **la geometria**, con `n = len(p)`.
+> ### **Quindi oggi la saturazione NON è controllata da `MAX_NODI`.**
+
+**È esattamente il mio «non so» n. 2**, e il sigillo l'aveva già sfiorato dal lato della misura: con
+`MAX_NODI = 100` il blob vecchio costruiva **2107 nodi in silenzio**. ### **Sapevo il SINTOMO, non
+avevo capito la CAUSA.**
+
+## Che cosa avevo sbagliato, e non è un dettaglio
+
+| | la mia prima stesura | perché è sbagliata |
+|---|---|---|
+| **①** | un controllo **prima**, sul numero **chiesto** | non vede il numero vero |
+| **②** | un controllo **dentro il solo ramo `SEMINA_LAM`** | ### **lascia SCOPERTO l'altro ramo** |
+
+### **E due controlli sono DUE LEGGI** *(`9-ter`)*, dopo che avevo scritto nel commit del codice
+*«UN controllo e non tre `raise`, perché tre copie sarebbero tre leggi»*. ### **Ho applicato il
+criterio alla funzione e non ai siti di chiamata.**
+
+## La forma nuova
+
+**UN** controllo, **dopo l'`if`/`else`**, dove `n` è il numero di punti che **esistono** in `p`: nel
+ramo `SEMINA_LAM` perché l'ha deciso la geometria, nell'altro perché `p` ha esattamente `n` righe.
+### **I siti di chiamata passano da QUATTRO a DUE:** lo schedulatore e `semina`.
+
+> ### ⚠ **E la conseguenza, che dichiaro invece di lasciarla scoprire:** controllando **dopo**, i
+> punti `p` sono ### **già allocati** quando il run si ferma. Sono `n × 3` float, e **non sono la
+> memoria che `MAX_NODI` protegge davvero** — quella è lo **stato del grafo**, archi compresi, che
+> **non è ancora stato toccato**. ### **Ma è un'allocazione che prima, col troncamento, non
+> avveniva.** Se per Luca è troppo, la strada è un controllo *anche* prima — e allora **tornano due
+> leggi**, e la scelta è sua.
+
+**Il «non so» n. 2 del task history è ANNOTATO, non riscritto** *(par.8)*: la domanda resta
+leggibile, con la risposta accanto.
+
+**`MAX-NODI-FERMA` torna `aperto`/`IN CORSO`:** ### **il sigillo va RIGIRATO sul blob nuovo** — un
+sigillo che dichiara un blob che non gira più non è un sigillo.

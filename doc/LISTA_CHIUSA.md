@@ -19,8 +19,8 @@
 
 ```
 voci nell'indice      848
-in LISTA              388   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
-FUORI LISTA           460   col motivo, dai campi dell'indice
+in LISTA              389   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
+FUORI LISTA           459   col motivo, dai campi dell'indice
 ```
 
 ---
@@ -36,7 +36,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 | **E** | **DISEGNO E STATISTICHE GLOBALI** | `A2`/`A5`: mediane e medie globali dentro una legge locale, e il disegno nella fisica | 9 |
 | **F** | **FRENO E CONTRAZIONE** | `SCALA_MIN`, il freno a senso unico, la coesione, la repulsione, `d0`, `LAM` | 41 |
 | **G** | **ARRETRATO DEGLI STRUMENTI** | presidi, ancore, reperti, ripresa, il passo incompleto: **non e' fisica** | 7 |
-| **?** | **SENZA FAMIGLIA** | nessuna regola dell'indice ha deciso: **le elenco invece di metterle in una famiglia a caso** | 232 |
+| **?** | **SENZA FAMIGLIA** | nessuna regola dell'indice ha deciso: **le elenco invece di metterle in una famiglia a caso** | 233 |
 
 ---
 
@@ -245,7 +245,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 
 ---
 
-## FAMIGLIA **?** — SENZA FAMIGLIA — da assegnare a mano   *(232 voci)*
+## FAMIGLIA **?** — SENZA FAMIGLIA — da assegnare a mano   *(233 voci)*
 
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
@@ -438,6 +438,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 | `DA-DECIDERE` | **Z4a** | — | (CITATO 16 volte, MAI definito in un registro) [Z4a] | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **Z4b** | — | (CITATO 10 volte, MAI definito in un registro) [Z4b] | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **DOPPIA-COP** | — | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non misurata | `aperto` | `cura` | `CURE_fisica_ordine.md` |
+| `NO` | **MAX-NODI-FERMA** | — | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run | `aperto` | `cura` | `REGOLE_composizione_T3.md` |
 | `SI` | **SCHED-PASSO** | — | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | `aperto` | `cura` | `PIANO_schedulatore_passo.md` |
 | `NO` | **ALLUNG-RELATIVO** | — | il criterio V6 dell'allungamento sottrae variazioni relative con DENOMINATORI DIVERSI | `aperto` | `difetto` | `csv/_test_fork/_pilota_prova1…` |
 | `NO` | **ARCHI-PRIMI** | — | la vista disegna i PRIMI 24000 archi per indice: il 100 % finisce in un quadrante, misurato | `aperto` | `difetto` | `soliton_simulator.py` |
@@ -484,7 +485,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 
 ---
 
-## 📤 **FUORI LISTA — 460 voci, ciascuna col MOTIVO** *(dai campi dell'indice)*
+## 📤 **FUORI LISTA — 459 voci, ciascuna col MOTIVO** *(dai campi dell'indice)*
 
 ### motivo: **etichetta LOCALE a una scheda o a un sigillo: il nome pieno include il sigillo, e non e' un fronte del programma**   *(245 voci)*
 
@@ -736,7 +737,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 | ZZ888 | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)… | `criterio-locale` |
 | ZZ999 | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)… | `criterio-locale` |
 
-### motivo: **gia' curata o chiusa**   *(151 voci)*
+### motivo: **gia' curata o chiusa**   *(150 voci)*
 
 | id | che cos'e' | tipo |
 |---|---|:--:|
@@ -799,7 +800,6 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 | INERZIA-1(C) | 1(C) — CURATA e SIGILLATA 3/6 il 2026-09-25: GIUSTA e INSUFFICIENTE / LA CURA TOGLIE… | `altro` |
 | LETTORI-INDICE | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FUORI PERIMETRO… | `altro` |
 | MASSA-ID-FISSO | MASSA-ID a LIGNAGGIO FISSO: non applicabile, la precondizione V-PRE non regge (i nati toccano… | `misura` |
-| MAX-NODI-FERMA | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run | `cura` |
 | MITOSI-NON-DIVISA | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si alternano 26 volte | `misura` |
 | OKN-ASSERT | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(..., default) CHE... | `altro` |
 | OSSERVABILE-P1 | APERTA il 2026-09-26 (rilievo di Luca) / NON ESISTE UNO STRUMENTO UFFICIALE PER LA DISTANZA… | `difetto` |

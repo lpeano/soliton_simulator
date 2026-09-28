@@ -12,7 +12,7 @@ mano**: si rigenera.)*
 
 ```
 voci nell'indice          848
-in questo smistamento     158   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
+in questo smistamento     159   (tipo difetto/fronte/misura/cura E stato aperto/da-decidere)
 di cui blocca SI          10
 ```
 
@@ -205,11 +205,12 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D03](REVISIONE_SI_202
 | `NO` | **D13** | I sigilli storici non sono stati rigirati sul blob corrente / Z11 / — / APERTO | voce di PROCESSO o di STRUMENTO: non e' una legge del sistema | `STATO_RUN.md` |
 | `NO` | **Z15** | Z15 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] / 14 .pkl su 36 non portano il BLOB del codice che li ha... | fronte di epoca 1-2 o «vale per quella scena»: e' una MISURA DA RIFARE, non un ostacolo | `RAMIFICAZIONI.md` |
 
-## FAMIGLIA **?** — SENZA FAMIGLIA — nessuna regola ha deciso   *(36 voci)*
+## FAMIGLIA **?** — SENZA FAMIGLIA — nessuna regola ha deciso   *(37 voci)*
 
 | blocca? | id | che cos'e' | **il motivo, in una frase** | fonte |
 |:--:|---|---|---|---|
 | `DA-DECIDERE` | **DOPPIA-COP** | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non misurata |  | `CURE_fisica_ordine.md` |
+| `NO` | **MAX-NODI-FERMA** | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve FERMARE il run |  | `REGOLE_composizione_T3.md` |
 | `SI` | **SCHED-PASSO** | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | eredita il blocco da `ETC-PASSO` (chiusa come superata il 2026-09-28): il run base gira con stato MISTO t/t+1 in 4 leggi su 5, 56 letture sporche su 31 attributi misurate dall'AST da csv/_test_fork/_etc_letture.py, e la cura vive in `T3` | `PIANO_schedulatore_passo.md` |
 | `NO` | **ALLUNG-RELATIVO** | il criterio V6 dell'allungamento sottrae variazioni relative con DENOMINATORI DIVERSI |  | `csv/_test_fork/_pilota_prova1.py` |
 | `NO` | **ARCHI-PRIMI** | la vista disegna i PRIMI 24000 archi per indice: il 100 % finisce in un quadrante, misurato |  | `soliton_simulator.py` |
@@ -249,7 +250,7 @@ INFERENZA)*: [CLI-1](REVISIONE_SI_2026-09-26.md#cli-1) · [D03](REVISIONE_SI_202
 ---
 
 **COSA QUESTA LISTA NON DICE:**
-- **non dice che le altre 690 voci siano irrilevanti**: dice che **non possono bloccare un run
+- **non dice che le altre 689 voci siano irrilevanti**: dice che **non possono bloccare un run
   base** perche' sono chiuse, sono teoria, o sono etichette locali di un sigillo.
 - **il titolo e' UNA riga**: la spiegazione sta nella fonte, e la fonte e' in colonna.
 - **`motivo` viene dalla COLONNA dell'indice**, non da una regola di questo script: se una riga
