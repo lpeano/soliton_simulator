@@ -18,8 +18,8 @@
 | il testo | `420` caratteri della riga | `117` del `titolo_breve` **+ la fonte in colonna** |
 
 ```
-voci nell'indice      850
-in LISTA              390   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
+voci nell'indice      851
+in LISTA              391   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
 FUORI LISTA           460   col motivo, dai campi dell'indice
 ```
 
@@ -36,7 +36,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 | **E** | **DISEGNO E STATISTICHE GLOBALI** | `A2`/`A5`: mediane e medie globali dentro una legge locale, e il disegno nella fisica | 9 |
 | **F** | **FRENO E CONTRAZIONE** | `SCALA_MIN`, il freno a senso unico, la coesione, la repulsione, `d0`, `LAM` | 41 |
 | **G** | **ARRETRATO DEGLI STRUMENTI** | presidi, ancore, reperti, ripresa, il passo incompleto: **non e' fisica** | 7 |
-| **?** | **SENZA FAMIGLIA** | nessuna regola dell'indice ha deciso: **le elenco invece di metterle in una famiglia a caso** | 234 |
+| **?** | **SENZA FAMIGLIA** | nessuna regola dell'indice ha deciso: **le elenco invece di metterle in una famiglia a caso** | 235 |
 
 ---
 
@@ -245,7 +245,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 
 ---
 
-## FAMIGLIA **?** — SENZA FAMIGLIA — da assegnare a mano   *(234 voci)*
+## FAMIGLIA **?** — SENZA FAMIGLIA — da assegnare a mano   *(235 voci)*
 
 | blocca? | id | alias | che cos'e' | stato | tipo | fonte |
 |:--:|---|---|---|:--:|:--:|---|
@@ -438,6 +438,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 | `DA-DECIDERE` | **Z4a** | — | (CITATO 16 volte, MAI definito in un registro) [Z4a] | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **Z4b** | — | (CITATO 10 volte, MAI definito in un registro) [Z4b] | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **DOPPIA-COP** | — | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non misurata | `aperto` | `cura` | `CURE_fisica_ordine.md` |
+| `DA-DECIDERE` | **RIPIEGHI-ZERO** | — | ZERO ripieghi che cambiano la fisica in silenzio: tutti e 100 i confronti `len(x) < n` | `aperto` | `cura` | `TASK_HISTORY/2026-09-28_mitos…` |
 | `SI` | **SCHED-PASSO** | — | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | `aperto` | `cura` | `PIANO_schedulatore_passo.md` |
 | `NO` | **ALLUNG-RELATIVO** | — | il criterio V6 dell'allungamento sottrae variazioni relative con DENOMINATORI DIVERSI | `aperto` | `difetto` | `csv/_test_fork/_pilota_prova1…` |
 | `NO` | **ARCHI-PRIMI** | — | la vista disegna i PRIMI 24000 archi per indice: il 100 % finisce in un quadrante, misurato | `aperto` | `difetto` | `soliton_simulator.py` |

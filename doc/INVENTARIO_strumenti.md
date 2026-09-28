@@ -1420,3 +1420,21 @@ un ricalcolo su uno stato **gia' cambiato**. ### **Era MAL POSTO, e l'avevo scri
 
 **⚠ La traccia si accende dal passo 41**, e il prezzo e' dichiarato: dei passi prima non si sa
 niente. **Con `settrace` su tutto, su 471564 archi, il run NON FINIVA** -- misurato, e fermato.
+
+### ⛔ Il sigillo di `PSI-FLASH`, secondo giro a **72 passi**: **FALLISCE** *(2026-09-28)*
+
+`csv/_seal_fork/_sig_nascita_psi.py` passa a **`1d1e5edf`** *(corsa fino al passo chiesto, e il
+**braccio `F`**: il passo dopo **ogni** nascita entro il 5 % dalla base)*. Referto **`acd584a2`**,
+stampa `_sig_nascita_psi/_corsa72.txt` *(`f9fd7363`)*.
+
+| | |
+|---|---|
+| **A B C D** | **PASSANO** |
+| ### **E** | ### **FALLISCE -- e il braccio e' MAL POSTO, l'ho scritto io**: confronta somme su **domini diversi** *(i passi senza nascite non sono gli stessi nei due giri)* |
+| ### **F** | ### **FALLISCE: `10.48 %` contro il `5 %`.** Ma lo scostamento peggiore va da **`168.70 %`** a **`10.48 %`**, un **fattore 16** |
+
+**⚠ E le due traiettorie DIVERGONO:** il PRE-CURA ha nascite in **12** passi, il curato in **8**, e in
+passi diversi. ### **La cura ha cambiato la dinamica -- atteso -- ma allora il confronto per passo,
+dopo il 42, non confronta la stessa cosa.**
+**⚠ E la base e' una MEDIA GLOBALE su una serie che DERIVA:** uno scostamento da lei misura **anche
+la deriva**, non solo il gradino.

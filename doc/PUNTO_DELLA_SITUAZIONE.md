@@ -7,9 +7,9 @@
 > collaudo lo verifica *(il caso `CONTAGIO`)*.
 
 ```
-voci nell'indice    850
-elencate qui        583   (tolte le etichette locali, gli assiomi e gli standard)
-  di cui task       147
+voci nell'indice    851
+elencate qui        584   (tolte le etichette locali, gli assiomi e gli standard)
+  di cui task       148
   di cui difetti     86   (tipo `difetto` o `sospetto`)
   senza marcatore   350   NON elencate: non sono lavoro in corso
 ```
@@ -23,10 +23,11 @@ elencate qui        583   (tolte le etichette locali, gli assiomi e gli standard
 > *(suffisso minuscolo)*, **`V`** *(una lettera)*. **Sono `8` righe della coda unica: se
 > devono comparire, gli serve un ID** — e non e' una regex piu' larga, e' una rinomina.
 
-## IN CORSO — 2
+## IN CORSO — 3
 
 | id | cosa | tipo | ultimo commit che lo nomina |
 |---|---|:--:|---|
+| **`RIPIEGHI-ZERO`** | ZERO ripieghi che cambiano la fisica in silenzio: tutti e 100 i confronti `len(x) < n` | `cura` | `23d105d 17:48` |
 | **`SCHED-PASSO`** | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | `cura` | `1f8ceac 09:52` |
 | **`SCHED-T3-REGOLE`** | le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in tre famiglie | `misura` | `976cab3 15:53` |
 
@@ -169,7 +170,7 @@ elencate qui        583   (tolte le etichette locali, gli assiomi e gli standard
 | **`MITOSI-NON-DIVISA`** | la mitosi NON si spezza per TIPO restando byte-identica: struttura e stato si alternano 26 volte | `misura` | `1003be6 15:13` |
 | **`OKN-ASSERT`** | CHIUSA il 2026-09-26, a run finito (residuo rilevato da Luca) / UN getattr(..., default) CHE... | `altro` | `e216730 01:33` |
 | **`P1-bis`** | LA RELAZIONE SI SCRIVE NELLO STESSO COMMIT DEL RISCONTRO | `presidio` | `2ebbd25 09:22` |
-| **`P1-quater`** | OGNI SOSTITUZIONE DI TESTO SI ASSERISCE PER SE', MAI IN BLOCCO | `presidio` | `1f8ceac 09:52` |
+| **`P1-quater`** | OGNI SOSTITUZIONE DI TESTO SI ASSERISCE PER SE', MAI IN BLOCCO | `presidio` | `57a3f08 17:40` |
 | **`POTENZE-1`** | CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6/6: F2 da x47 000 a x1.4, F1 2.427... | `altro` | `4a76517 15:00` |
 | **`POZZO-D`** | la cura di D02 (flag `POZZO_D` nel codice): nel pozzo del grafo `L` viene da `self.d` e non da `pos` | `altro` | `89b8ec9 07:57` |
 | **`RAMPA-1`** | CHIUSA il 2026-09-25, strada (3) (decisione di Luca): sigillo 9/9 dal CLI, ramp =... | `altro` | `4a5d085 20:33` |

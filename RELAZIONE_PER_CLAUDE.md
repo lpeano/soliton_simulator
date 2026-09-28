@@ -6210,3 +6210,71 @@ questa scena**, che va detto prima di misurarla.
 > sono `2`, e uno dei due è legittimo e dichiarato.** ### **La forma non basta a giudicare: serve
 > sapere CHE COSA restituisce il ramo di scorta.** *(Ed è il motivo per cui non ho curato niente
 > prima di elencare.)*
+
+---
+
+# ⛔ **SIGILLO `PSI-FLASH` a 72 passi: FALLISCE. `E` e `F`** *(2026-09-28)*
+
+### **Simulatore `f7541d03`; il PRE-CURA è `05691d41`** *(prima di **entrambe** le cure)*.
+**Committo il fallimento e mi fermo**, come prescrive il par.5.
+
+| braccio | esito |
+|---|---|
+| **A** byte-identità nei passi senza nascite | **PASSA** — 23 su 23 |
+| **B** `λ` al passo di nascita | **PASSA** — 0 chiamate non ricorsive fuori intervallo |
+| **C** `mean(phi_g)` al passo di nascita | **PASSA** — `1.0505×` |
+| **D** il caso che deve fallire | **PASSA** — sul PRE-CURA `8 su 13` a `LAM`, pozzo `366.17` |
+| ### **E** i due ripieghi | ### **FALLISCE** |
+| ### **F** il passo dopo ogni nascita | ### **FALLISCE** |
+
+## ✅ **Quello che la cura HA fatto, e si vede**
+
+| | PRE-CURA | CURATO |
+|---|---|---|
+| scostamento **peggiore** al passo dopo una nascita | ### **`168.70 %`** *(passo 59)* | ### **`10.48 %`** *(passo 72)* |
+
+### **Un fattore 16.** E il pattern cambia natura: prima era un'**alternanza** `2.69× / 0.90× / 2.65× / 0.88×`, ora è ### **una DERIVA monotona verso il basso**: `1.0586 · 1.0347 · 0.9505 · 0.9487 · 0.9132 · 0.9095 · 0.8952`.
+
+## ⛔ **Ma `10.48 %` non è `5 %`, e il braccio F fallisce. Giustamente.**
+
+**E non so se il residuo sia un difetto o fisica.** ### **Non lo indovino.** Ma due cose le so, e
+sono **entrambe difetti del MIO banco**:
+
+### **① Il braccio `E` è MAL POSTO, e l'ho scritto io**
+
+Conta le chiamate a `LAM` nei passi **senza nascite** e le confronta fra i due giri: `421` contro
+`449`. ### **Ma i due giri hanno nascite in passi DIVERSI**, quindi *«i passi senza nascite»* sono
+**due insiemi diversi**: ### **sto confrontando somme su domini diversi.** Non misura ciò che dice.
+**È la stessa famiglia del criterio ④ della scomposizione.**
+
+### **② Le due traiettorie DIVERGONO, e il confronto per passo perde senso dopo il 42**
+
+| | passi con nascite |
+|---|---|
+| **PRE-CURA** | `42, 58, 59, 61, 62, 64, 65, 67, 68, 70, 71, 72` — **12** |
+| **CURATO** | `42, 50, 65, 66, 69, 70, 71, 72` — **8** |
+
+### ➜ **La cura ha cambiato la dinamica**, ed è **atteso** — `psi` non viene più gonfiata, quindi le
+decisioni di mitosi a valle cambiano. **Ma allora confrontare il passo `59` di uno col `59` dell'altro
+non confronta la stessa cosa.** *(E il numero di nascite va **riportato**, non usato come criterio:
+lo diceva il piano di `T3`.)*
+
+## ❓ **E un terzo dubbio, che riguarda la SOGLIA e non la cura**
+
+La base è la **media sui passi senza nascite di quel giro**, cioè **un numero globale**. Ma la serie
+### **DERIVA**: nei fotogrammi `mean(phi_g)` sale da `117` a `138` fra i passi 4 e 40, e scende da
+`366` a `215` dopo la transizione. ### **Uno scostamento dalla media globale misura anche la deriva,
+non solo il gradino.**
+
+> ### **Quindi il `10.48 %` al passo 72 può essere: (a) un residuo di gradino; (b) la deriva della
+> serie; (c) fisica nuova, perché la traiettoria è un'altra.** ### **Il braccio F, come è scritto, non
+> li distingue** — e non riscrivo il criterio da solo: la soglia del `5 %` è tua.
+
+**Quello che propongo, e non faccio:** il criterio *«nessun gradino»* si misura **in locale** — il
+passo dopo la nascita contro i suoi **vicini**, non contro la media globale — **e in più** un
+criterio di **livello** contro il regime prima della nascita. ### **Servono entrambi: il rapporto
+locale è cieco a uno spostamento di livello, il livello globale è cieco alla deriva.** *(Ho già
+sbagliato una volta per ciascuno dei due.)*
+
+> ### 🛑 **STOP.** Il sigillo fallisce, lo stato è committato, e non aggiusto niente nello stesso
+> giro.
