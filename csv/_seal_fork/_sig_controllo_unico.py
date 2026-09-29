@@ -47,6 +47,10 @@ FUORI = os.path.join(RADICE, "csv", "_seal_fork", "_sig_controllo_unico")
 SIM = os.path.join(RADICE, "soliton_simulator.py")
 # il blob PRE-CONTROLLO: l'ultimo prima del controllo unico. **Non e' un hash scelto a mano:** e'
 #   il PADRE del commit che introduce `_ferma_se_registro_incoerente`, e si ricava da git.
+# L'ANCORA si puo' dare dal CLI (`--ancora=`), e serve perche' lo STESSO sigillo vale per piu'
+#   pezzi: il controllo unico si ancora a `_ferma_se_registro_incoerente`, il pezzo delle GUARDIE a
+#   un token della sua propria cura. In entrambi i casi il blob <<di prima>> e' il PADRE del commit
+#   che introduce l'ancora, e lo estrae `_cli_flag.sim_prima_del_flag` (`H-P8`).
 ANCORA_CONTROLLO = "_ferma_se_registro_incoerente"
 GRANDEZZE = ("d", "d0", "phi", "phi0", "phi_s", "phivel", "psi", "psi_spin", "eta", "tw", "twp",
              "vd", "peq", "mem_mot", "perc_chi", "perc_geom", "perc_tw", "omega_s", "_nb",
@@ -299,10 +303,13 @@ def braccio_C(passi_base):
 
 
 def principale():
+    global ANCORA_CONTROLLO
     passi = 72
     for x in sys.argv[1:]:
         if x.startswith("--passi="):
             passi = int(x.split("=", 1)[1])
+        elif x.startswith("--ancora="):
+            ANCORA_CONTROLLO = x.split("=", 1)[1]
     if not os.path.isdir(FUORI):
         os.makedirs(FUORI)
     PRIMA = os.path.join(FUORI, "_sim_prima_controllo.py")

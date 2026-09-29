@@ -7397,3 +7397,46 @@ motivo misurato** — o ### **qualcosa non la crea mai, e allora il registro DIC
 
 **E' la forma che `A8` chiede:** *un comportamento che non si conta e' un comportamento
 sconosciuto.* Qui non si contava **l'assenza definitiva**, e ora si conta.
+
+---
+
+# 🧹 **GUARDIE, primo pezzo: `_sin2_vir` separata e la guardia di `P_eq` tolta** *(2026-09-29)*
+
+Simulatore da **`81be5f41`** a ### **`64e9f62e`**; sigillo a **`70aa1f62`** *(l'ancora si da' dal
+CLI, cosi' lo STESSO sigillo vale per piu' pezzi)*.
+
+| | |
+|---|---|
+| ### **`_sin2_vir`, condizione SEPARATA** | `None` ### **resta legittimo e contato** *(`A1`: al primo giro non esiste, e inventare un valore sarebbe un numero scelto)*; ### **lunghezza sbagliata SOLLEVA**. **Due rami, due contatori**, come prima |
+| ### **la guardia di `P_eq` TOLTA** | `len(d0) >= len(i)` era ### **sempre vera per costruzione**: una guardia che non guarda niente *(`A9`)*. ### **`self.n > 0` RESTA** — su una rete vuota `median([])` da' `nan` e `seterr(invalid='raise')` solleva |
+| ### **byte-inerte, MISURATO** | **12 passi**, **23 grandezze**, **zero differenze** — ### **e i contatori sono IDENTICI** *(`salti` **1** e **4**, cioe' **solo** la causa `None`)*. **E' il controllo piu' fine della byte-identita' sulle sole grandezze** |
+
+## ⛔ **E sui 57 siti restanti ti porto una cosa che ho MISURATO, perche' cambia il conto**
+
+### **Il tuo criterio del sigillo NON PUO' VEDERLI.** La prova a guasto trova **solo `_sin2_vir`**,
+perche' per tutti gli altri ### **il controllo unico spara PRIMA**. ➜ **«Zero ripieghi silenziosi»
+e' raggiungibile GIA' ORA, coi due item nominati.**
+
+### ➜ **Quindi i 57 sono PULIZIA DI RAMI MORTI, e nessuna misura ne verifica la correttezza.**
+Il rischio e' **a senso unico**: un mio errore puo' rompere il **percorso vivo**, e ### **nessun
+braccio del sigillo lo distinguerebbe da un errore di battitura** — mentre il beneficio e' che un
+ramo morto non inganni il prossimo lettore.
+
+**E sono piu' delicati di quanto sembrasse, ed e' il motivo per cui non li spazzo in un colpo:**
+
+| | |
+|---|---|
+| **quanti** | **57** siti in **13** funzioni: `step` **23**, `_passo_spinoriale` **10**, `memoria_hebbiana_moto` **8**, `ritmo` **6**, e nove funzioni con 1-2 |
+| ### **che forma hanno** | ### **in gran parte CONDIZIONI FUSE** *(`is None or len != n`)*, cioe' **la stessa forma di `lambda_nodi` e `_sin2_vir`**: la cura e' la **separazione**, non la rimozione |
+| ### **e portano CONTATORI `A8` da preservare** | `_ritmo_sicurezza`, `_ritmo_guard4pi_ko`, `_ritmo_snap_identico`, `_g_zeta_vir_*`… ### **Un contatore che cambia di uno e' un difetto**, e la byte-identita' sulle grandezze **non lo vedrebbe** |
+
+> ### 📌 **La regola uniforme che ne esce, e la scrivo prima di applicarla:**
+> ### **il CONTROLLO UNICO possiede le LUNGHEZZE; i siti possiedono solo «esiste ancora?».**
+> Quindi: **condizione fusa** → si tiene il test di **esistenza** e la **lunghezza SOLLEVA**;
+> **condizione di sola lunghezza** → ### **si toglie** *(il controllo la garantisce)*.
+> **E i contatori si confrontano, non solo le grandezze.**
+
+### ➜ **Li faccio a GRUPPI PER FUNZIONE, verificando byte-identita' E CONTATORI dopo ogni gruppo**,
+cosi' un mio errore **si localizza** invece di nascondersi in un diff da 57 punti.
+**Se preferisci che li faccia tutti in un colpo, dimmelo** — ma allora il sigillo non potra' dirmi
+**quale** dei 57 ha sbagliato.

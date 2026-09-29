@@ -1054,6 +1054,19 @@ distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifi
 > garantisce `len(d0) == m` ai due punti del passo. **Va tolta col resto delle guardie di
 > sostituzione**, nel commit separato che il mandato prevede.
 
+> ### ✅ **FATTO IL 2026-09-29 — la guardia di `P_eq` E' TOLTA, e `_sin2_vir` e' SEPARATA**
+> *(punto 3 di Luca, primo pezzo; entrambe dentro `step`)*
+>
+> | | |
+> |---|---|
+> | **`P_eq`** | via `and len(self.d0) >= len(self.i)`: ### **era sempre vera per costruzione** — una guardia che non guarda niente *(`A9`)*. ### **`self.n > 0` RESTA**, e non e' la stessa cosa: su una rete vuota `median([])` da' `nan` e `np.seterr(invalid='raise')` **solleva**. ### **La FETTA non e' toccata** *(`P-EQ-MEDIANA-ARCHI`, in coda)* |
+> | ### **`_sin2_vir`** | la **condizione fusa** del **freno anisotropo** e' separata **nei due rami** *(non-Verlet e gemello Verlet, coi loro due contatori)*: `None` ### **resta legittimo e contato** *(`A1`)*, **lunghezza sbagliata SOLLEVA** |
+>
+> ### **Byte-inerte, e MISURATO: 12 passi, 23 grandezze, zero differenze — E I CONTATORI IDENTICI**
+> *(`_g_zeta_vir_a_salti` **1**, `_g_zeta_vir_b_salti` **4**, in entrambi i blob: scatta **solo** la
+> causa `None`)*. ### **Il confronto sui CONTATORI e' piu' fine di quello sulle grandezze**, e qui
+> serve: un contatore che cambiasse di uno sarebbe un difetto che la byte-identita' **non vedrebbe**.
+
 > **-> NOTA DEL 2026-09-28 (`MAX-NODI-FERMA`), e riguarda `semina`: LA LEGGE DELLA SEMINA NON
 > E' CAMBIATA, e' cambiato CIO' CHE FA QUANDO NON CI STA.** Prima **troncava**
 > (`min(n, MAX_NODI - self.n)`): si chiedevano `n` nodi, ne nascevano meno, **e dai dati non
@@ -4710,6 +4723,28 @@ ripiego** che l'eccezione esiste per rendere impossibile.
 ---
 
 <!-- SCHEDA nome=registro-grandezze funzioni=_ferma_se_registro_incoerente,_ferma_registro,registro_mai_apparse flag=REGISTRO_STATO,REGISTRO_DERIVATE,REGISTRO_METRI,CONTROLLO_REGISTRO,CacheLunga -->
+
+> ### 📌 **AGGIUNTA DEL 2026-09-29 — `_ferma_registro` CHIAMATA DAI SITI: la condizione fusa di
+> `_sin2_vir`** *(punto 3 di Luca, primo pezzo)*
+>
+> Il **freno anisotropo** *(`ZETA_VIR`)* leggeva `_sin2_vir` con una **condizione fusa**:
+> `is None` **or** `len != len(beta)`. ### **Il codice STESSO dichiarava che le due cause «sono cose
+> diverse e vanno distinte, non sommate»** — e le distingueva **nel contatore** *(`shape[0] = -1`)*,
+> ### ⚠ **ma NON nel comportamento: entrambe portavano a «nessun freno».**
+>
+> | | |
+> |---|---|
+> | `None` | ### **LEGITTIMO E DERIVATO, e resta**: `memoria_hebbiana_moto` gira **dopo** `step`, quindi al primo giro non esiste; e inventare un valore iniziale sarebbe ### **un numero SCELTO** (`A1`) — *«al primo giro NON C'E' FRENO ANISOTROPO, ed e' corretto che sia cosi'»* |
+> | **lunghezza sbagliata** | ### **SOLLEVA** *(`CacheCorta`/`CacheLunga` via `_ferma_registro`)*: faceva **sparire una legge in silenzio, per TUTTA LA RETE** — ed era ### **l'ultimo ripiego silenzioso che la prova a guasto vedeva** |
+>
+> **Due rami, due contatori**, come prima: `_a` *(non-Verlet)* e `_b` *(gemello Verlet, a sottopassi
+> CFL)*. ### **E la separazione e' BYTE-INERTE, MISURATA: 12 passi, 23 grandezze, zero differenze —
+> E I CONTATORI SONO IDENTICI** *(`salti` 1 e 4, cioe' solo la causa `None`)*.
+>
+> ### ⚠ **E la guardia di `P_eq` e' TOLTA** *(`len(d0) >= len(i)`, sempre vera per costruzione ora:
+> una guardia che non guarda niente, `A9`)*. ### **`self.n > 0` RESTA**, e non e' la stessa cosa: su
+> una rete vuota la mediana di un array vuoto da' `nan`, e `np.seterr(invalid='raise')` solleva.
+> ### **E la FETTA non e' toccata** — e' `P-EQ-MEDIANA-ARCHI`, **in coda**.
 
 > ### 📌 **AGGIUNTA DEL 2026-09-29 — `registro_mai_apparse`: IL RENDICONTO DELLA TOLLERANZA**
 > *(punto 2 di Luca, che chiude un varco che avevo aperto io)*

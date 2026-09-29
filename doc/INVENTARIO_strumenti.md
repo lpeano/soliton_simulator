@@ -1663,7 +1663,7 @@ lei stessa** un evento dopo)*, ### **e per entrambe la dichiarazione ESISTE GIA'
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa fa |
 |---|---|---|---|
-| `csv/_seal_fork/_sig_controllo_unico.py` | `bb7e975b` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
+| `csv/_seal_fork/_sig_controllo_unico.py` | `70aa1f62` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
 
 **I cinque criteri sono di Luca e sono fissati PRIMA del codice** *(piano `f684353f`, par.5)*.
 
