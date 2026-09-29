@@ -4767,6 +4767,23 @@ ripiego** che l'eccezione esiste per rendere impossibile.
 > | **`TipoSbagliato`** | il **quarto** nome per il **quarto** difetto distinto — corta,
 >   lunga, forma, tipo — e ### **non una legge in piu': la legge e' UNA** |
 >
+> ### ⛔ **IL BUCO CURATO LO STESSO GIORNO, e l'ha visto il guardiano**
+> La prima stesura diceva `if suo is not None and str(suo) != tipo`, e quel **`is not None`**
+> era ### **UNA SECONDA ESENZIONE IMPLICITA** — mentre il registro ne dichiara ### **una
+> sola** *(`conc_nodi`)*. ### **E' la stessa famiglia dei ripieghi appena chiusi: una
+> condizione di ESISTENZA che copre un difetto.**
+>
+> **MISURATO PRIMA della cura**, su sei grandezze trasformate in **lista** con la forma giusta:
+> ### **`psi` e `eta` SALTATE IN SILENZIO** *(e `psi` e' una delle sei complesse)*, `phi0` e
+> `perc_chi` **rotte rumorosamente** *(`TypeError`, `AttributeError`)*, `pos` e `_psi_spinor`
+> ### **gia' prese da `FormaSbagliata`** — perche' ### **una lista PERDE IL SECONDO ASSE.**
+> ### ➜ **Il buco viveva SOLO sulle grandezze a UN asse**, dove la forma resta giusta.
+>
+> **DOPO la cura** *(`dtype` assente e tipo dichiarato → `TipoSbagliato`, col tipo vero
+> `"(nessun dtype: <classe>)"`)*: ### **sei su sei PROTETTE — zero silenziose, zero
+> rumorose** — e i due che prima **rompevano** alzano ora ### **l'errore DICHIARATO**.
+> ### **L'unica esenzione resta quella scritta nel registro.**
+>
 > ### ⚠ **LA RISERVA, DICHIARATA: i tre `int64` dipendono dalla PIATTAFORMA.**
 > `_deg` `perc_chi` `perc_geom` sono `int64` **su questa macchina**, ma la larghezza
 > dell'intero predefinito di numpy **cambia fra piattaforme**. ### **Se l'errore scatta su uno

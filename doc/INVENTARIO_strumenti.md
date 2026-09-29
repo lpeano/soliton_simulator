@@ -1663,7 +1663,7 @@ lei stessa** un evento dopo)*, ### **e per entrambe la dichiarazione ESISTE GIA'
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa fa |
 |---|---|---|---|
-| `csv/_seal_fork/_sig_controllo_unico.py` | `4890b4a2` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
+| `csv/_seal_fork/_sig_controllo_unico.py` | `a13a385c` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
 
 **I cinque criteri sono di Luca e sono fissati PRIMA del codice** *(piano `f684353f`, par.5)*.
 
@@ -1728,3 +1728,18 @@ bracci.**
 >
 > *(E il messaggio finale diceva «tutti e cinque i bracci» quando erano **sei**: ora il numero si
 > conta.)*
+
+| strumento | blob (byte) | comando | cosa misura |
+|---|---|---|---|
+| `csv/_test_fork/_sonda_buco_tipo.py` | `a114c92f` | `python csv/_test_fork/_sonda_buco_tipo.py` | trasforma in **lista** sei grandezze **tipate** *(forma giusta, nessun `dtype`)* e dice se il controllo le **salta**, le **rompe** o le **protegge** |
+
+**Referti:** `csv/_seal_fork/_sig_tipo_buco/_prima_della_correzione.txt` *(prodotto dalla sonda
+`c0d0fe1c`, che asseriva la conclusione)* e `_dopo_la_correzione.txt` *(sonda `a114c92f`, che la
+### **DERIVA dai risultati**)*.
+**Esito: PRIMA `psi` ed `eta` SALTATE IN SILENZIO, `phi0` e `perc_chi` rotte, `pos` e `_psi_spinor`
+gia' protette; DOPO ### SEI SU SEI PROTETTE, zero silenziose e zero rumorose.**
+
+> ### 📌 **E la sonda e' stata CORRETTA nello stesso giro, perche' la sua conclusione era
+> ASSERITA:** stampava *«il tipo non viene guardato»*, una frase ### **vera prima della cura e FALSA
+> dopo**. Ora ### **il conto si DERIVA dai risultati**. *(Il file `_prima` porta la conclusione
+> vecchia, che era accurata quando e' stato prodotto: il blob della sonda e' scritto qui accanto.)*

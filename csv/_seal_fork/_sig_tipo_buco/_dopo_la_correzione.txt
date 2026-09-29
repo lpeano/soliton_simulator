@@ -1,0 +1,20 @@
+[TIMBRO] _sonda_buco_tipo.py  sha1-BYTE a114c92f  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
+blob del simulatore PRIMA della correzione: 62d67675
+10 passi sani: OK, controlli 90
+
+IL BUCO: `suo is not None` e' una SECONDA ESENZIONE IMPLICITA, e il registro ne dichiara UNA.
+Una grandezza TIPATA che diventa una LISTA non ha `dtype`, quindi il controllo del tipo
+la SALTA. Ecco che cosa succede OGGI, con la forma giusta:
+
+  psi           -> list  PROTETTO da TipoSbagliato
+  phi0          -> list  PROTETTO da TipoSbagliato
+  perc_chi      -> list  PROTETTO da TipoSbagliato
+  pos           -> list  PROTETTO da FormaSbagliata
+  _psi_spinor   -> list  PROTETTO da FormaSbagliata
+  eta           -> list  PROTETTO da TipoSbagliato
+
+IL CONTO, derivato: SALTATI IN SILENZIO 0 [] | ROTTI RUMOROSI 0 [] | PROTETTI 6 ['_psi_spinor', 'eta', 'perc_chi', 'phi0', 'pos', 'psi']
+
+LA LETTURA: una lista PERDE IL SECONDO ASSE, quindi le grandezze a DUE assi sono prese da
+`FormaSbagliata` in ogni caso. Per quelle a UN SOLO asse la forma resta GIUSTA, quindi
+tutto dipende dal controllo del TIPO: e' li' che viveva il buco, e `psi` e' fra loro.

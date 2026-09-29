@@ -286,6 +286,10 @@ def braccio_F(net, S):
     print("=" * 104)
     print("BRACCIO F -- il RENDICONTO della tolleranza: grandezze di STATO MAI apparse")
     print("=" * 104)
+    # ⚠ E il braccio F non scompatta il registro: chiede al SIMULATORE. E' la ragione per cui
+    #   questo braccio NON si e' rotto quando il registro e' passato da 2 a 3 campi, mentre C, A e
+    #   D SI'. ### Chi legge una struttura scompattandola a mano si rompe quando la struttura
+    #   cresce; chi passa da una funzione no.
     mai = S.registro_mai_apparse(net)
     apparse = len(S.REGISTRO_STATO) - len(mai)
     print("  grandezze di STATO: %d   apparse almeno una volta: %d   ### MAI apparse: %d"
@@ -324,7 +328,7 @@ def braccio_C(passi_base):
                  if isinstance(c, type))
     n, m = int(net.n), int(len(net.i))
     prot, esiti = [], {}
-    for nome, _forma in S.REGISTRO_STATO:
+    for nome, _forma, _tipo in S.REGISTRO_STATO:
         ok = []
         for guasto in ("CORTA", "LUNGA"):
             C = copy.deepcopy(net)
@@ -420,10 +424,10 @@ def principale():
         j = None
     if j is not None:
         S, net = carica(None)
-        stato = [k for k, _f in S.REGISTRO_STATO]
+        stato = [k for k, _f, _t in S.REGISTRO_STATO]
         aposto = set(j.get("a_posto") or [])
         mancano = sorted(set(stato) - aposto)
-        archi = sorted(k for k, f in S.REGISTRO_STATO if f[0] == "m")
+        archi = sorted(k for k, f, _t in S.REGISTRO_STATO if f[0] == "m")
         archi_ok = sorted(set(archi) - aposto)
         A_ok, D_ok = (not mancano), (not archi_ok)
         a_dati = {"stato": len(stato), "a_posto": len(aposto & set(stato)),

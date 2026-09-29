@@ -1283,8 +1283,21 @@ def _ferma_se_registro_incoerente(net, dove):
             # ### IL TIPO, e si guarda SOLO quando la forma e' giusta: se la forma e' sbagliata
             #   il difetto e' quello, e due errori insieme non aiutano chi legge.
             if tipo is not None:
+                # ⚠ IL BUCO CURATO IL 2026-09-29 (rilievo del guardiano): prima la condizione era
+                #   `if suo is not None and str(suo) != tipo`, e quel `is not None` era UNA SECONDA
+                #   ESENZIONE IMPLICITA -- mentre il registro ne dichiara UNA SOLA (`conc_nodi`).
+                #   ### E' la stessa famiglia dei ripieghi appena chiusi: una condizione di
+                #   ESISTENZA che copre un difetto.
+                #   MISURATO PRIMA DELLA CURA: una grandezza tipata trasformata in LISTA con la
+                #   forma giusta veniva SALTATA IN SILENZIO -- `psi` (una delle sei complesse) ed
+                #   `eta`. Le grandezze a DUE assi erano gia' prese da `FormaSbagliata`, perche'
+                #   una lista perde il secondo asse: ### IL BUCO VIVEVA SOLO SU QUELLE A UN ASSE.
                 suo = getattr(v, "dtype", None)
-                if suo is not None and str(suo) != tipo:
+                if suo is None:
+                    _ferma_registro(TipoSbagliato, "TIPO", nome, attesa, vera, dove,
+                                    atteso_tipo=tipo,
+                                    tipo_vero="(nessun dtype: %s)" % type(v).__name__)
+                if str(suo) != tipo:
                     _ferma_registro(TipoSbagliato, "TIPO", nome, attesa, vera, dove,
                                     atteso_tipo=tipo, tipo_vero=str(suo))
             apparse.add(nome)

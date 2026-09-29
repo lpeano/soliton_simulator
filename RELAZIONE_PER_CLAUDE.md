@@ -7810,3 +7810,42 @@ letture di `A`/`D`)*.
 ### ➜ **Quindi il sigillo della generalizzazione 3 NON e' stato dato**, e il giro che leggi qui
 ### **e' SUPERATO**: va rifatto sul blob **corretto**, dopo le due cure. **Lo dico invece di
 riportare `B`/`E`/`F` come se fossero il sigillo.**
+
+---
+
+# ✅ **LE DUE CURE: il buco del tipo e il sigillo ai tre campi** *(2026-09-29)*
+
+Simulatore da **`83bc2934`** a ### **`62d67675`**; sigillo a **`a13a385c`**; sonda nuova
+`csv/_test_fork/_sonda_buco_tipo.py` *(`a114c92f`)*.
+
+## ✅ **① Il buco del tipo e' chiuso, e l'esenzione resta UNA**
+
+`dtype` **assente** e tipo **dichiarato** → ### **`TipoSbagliato`**, col tipo vero
+`"(nessun dtype: <classe>)"`. ### **L'unica esenzione e' quella scritta nel registro.**
+
+| | prima | dopo |
+|---|---|---|
+| ### **saltati in SILENZIO** | ### **2** — `psi`, `eta` | ### **0** |
+| **rotti RUMOROSI** | **2** — `phi0`, `perc_chi` | ### **0** |
+| **PROTETTI** | 2 *(da `FormaSbagliata`)* | ### **6 su 6** |
+
+### ➜ **E i due che ROMPEVANO alzano ora l'errore DICHIARATO**, non un `TypeError` a valle.
+
+## ✅ **② Il sigillo legge i tre campi**
+
+`braccio_C`, e le due letture di `A`/`D`: ### **tre punti che scompattavano due campi su tre.**
+
+> ### 📌 **E una cosa che il fallimento ha insegnato, scritta nel codice:** ### **il braccio `F`
+> NON si e' rotto**, perche' non scompatta il registro — ### **chiede al SIMULATORE**
+> *(`registro_mai_apparse`)*. **Chi legge una struttura scompattandola a mano si rompe quando la
+> struttura cresce; chi passa da una funzione no.**
+
+## ✅ **③ E ho corretto la SONDA, perche' la sua conclusione era ASSERITA**
+
+Stampava *«il tipo non viene guardato»*: ### **vera prima della cura, FALSA dopo.** Ora ### **il
+conto si DERIVA dai risultati**. Il file `_prima` porta la conclusione vecchia — che era **accurata
+quando e' stato prodotto** — e il blob della sonda di allora *(`c0d0fe1c`)* e' scritto nell'inventario
+accanto a quello nuovo. ### **Un referto non si riscrive: si dice con quale strumento e' nato.**
+
+**Il sigillo della generalizzazione 3 e' il prossimo giro, sul blob `62d67675`**, e la prova a guasto
+va rigirata **prima** perche' il blob e' cambiato.
