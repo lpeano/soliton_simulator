@@ -7649,3 +7649,36 @@ e lunghi sul PRIMO asse**, e nessuno di essi puo' produrre una forma sbagliata. 
 tocco lo strumento adesso** — lo farei con un referto gia' girato, e sarebbe la stessa
 confusione fra misura e strumento che ho appena curato: ### **va nella generalizzazione 3**,
 dove lo strumento cambia comunque.
+
+---
+
+# 🔁 **GENERALIZZAZIONE 2: il controllo DOPO OGNI VOCE** *(2026-09-29)*
+
+Simulatore da **`e86317bf`** a ### **`c8fbc1cc`**; sigillo a **`4890b4a2`**.
+### **Il secondo limite che avevo dichiarato non c'e' piu'.**
+
+| | |
+|---|---|
+| **prima** | **due** punti: la precondizione e **dopo `mitosi`**. ### ⚠ **E `calcola_psi` riscrive `psi_spin` e `_estendi_psi_spinor` allunga `_psi_spinor` A META' PASSO**: una grandezza fuori forma **fra** i due punti ### **non veniva vista** |
+| **ora** | ### **dopo OGNI voce della composizione** |
+| il costo | ~**30** confronti di forma per voce: con **8** voci, ### **9 controlli per passo**. **E' la ragione per cui si puo' fare** |
+| ### **e TOGLIE un `if`** | lo schedulatore ### **non cabla piu' `'mitosi'`**: la composizione resta un **DATO** ancora piu' di prima, e il docstring di `esegui_passo` diventa vero ### **senza eccezioni** |
+
+**Prova di fumo:** 10 passi sani, ### **90 controlli** *(erano 20)*, **42** assenze contate *(erano
+14)*, **zero errori**.
+
+## ⚠ **E due CONTATORI cambiano PER COSTRUZIONE: come l'ho gestito**
+
+`_g_registro_controlli` e `_g_registro_assenti` contano ### **i controlli, non la fisica**: con piu'
+punti **devono** crescere. Se li confrontassi, ### **confronterei la modifica CON SE STESSA** — e il
+braccio `B` fallirebbe per una ragione che **non e' un difetto**.
+
+> ### 📌 **Come NON l'ho fatto: una esclusione silenziosa.** Il sigillo li **separa per NOME**
+> *(`CONTATORI_DEL_PRESIDIO`, e sono **tre**)* e li ### **STAMPA col valore di prima e di oggi**.
+> ### **Un contatore escluso in silenzio e' un buco; uno escluso per nome e stampato e' una
+> DICHIARAZIONE.** L'elenco e' corto ed esplicito proprio perche' escludere un contatore e'
+> **esattamente** cio' che potrebbe nascondere un difetto.
+
+**Il sigillo sulla scena grande fino al 72, con le nascite, e' il prossimo giro** — e questa volta
+### **il referto della prova a guasto va rigirato PRIMA**, perche' il blob e' cambiato e il sigillo
+lo verifica. *(Lo ha gia' fatto fallire una volta, ed era giusto.)*

@@ -1360,12 +1360,11 @@ def esegui_passo(net, composizione=None):
     #   *(Il commento precedente diceva <<dichiarato e MISURATO ... riportato dal sigillo>>: era
     #   FALSO quando l'ho scritto, e questa e' la correzione. Vedi `MAX-NODI-FERMA`.)*
     _ferma_se_oltre_max_nodi(net.n, 0, 'schedulatore: inizio del passo')
-    # [RIPIEGHI-ZERO, 2026-09-29] IL PRIMO PUNTO DI CONTROLLO, e sta QUI e non dentro
-    #   `_smp_apri` per una ragione precisa: e' una PRECONDIZIONE, e una precondizione NON
-    #   DEVE MUOVERSI CON UNA VOCE. `H-ETC-2` PERMUTA la composizione, e un controllo
-    #   dentro la fase `apri` si sposterebbe con lei -- mentre <<il passo comincia con le
-    #   lunghezze giuste>> vale in QUALUNQUE ordine.
-    _ferma_se_registro_incoerente(net, 'schedulatore: apri, prima delle leggi')
+    # [RIPIEGHI-ZERO, 2026-09-29] LA PRECONDIZIONE, e sta QUI e non dentro `_smp_apri` per una
+    #   ragione precisa: una precondizione NON DEVE MUOVERSI CON UNA VOCE. `H-ETC-2` PERMUTA la
+    #   composizione, e un controllo dentro la fase `apri` si sposterebbe con lei -- mentre <<il
+    #   passo comincia con le forme giuste>> vale in QUALUNQUE ordine.
+    _ferma_se_registro_incoerente(net, 'schedulatore: prima delle leggi')
     for _nome in comp:
         if _nome in _PASSO_FASI:
             getattr(net, _PASSO_FASI[_nome])()
@@ -1375,12 +1374,15 @@ def esegui_passo(net, composizione=None):
             net.verifica_invarianti(dove='esegui_passo')
         else:
             getattr(net, _nome)()
-        # [RIPIEGHI-ZERO, 2026-09-29] IL SECONDO PUNTO: `mitosi` e' IL SOLO POSTO DEL PASSO
-        #   IN CUI `n` CRESCE, quindi l'unico istante in cui una cache puo' diventare corta.
-        #   L'`if` guarda IL NOME DI UNA VOCE, che e' un DATO della composizione -- non un
-        #   flag: la composizione resta un dato, e il docstring qui sopra resta vero.
-        if _nome == 'mitosi':
-            _ferma_se_registro_incoerente(net, 'schedulatore: subito dopo `mitosi`')
+        # [RIPIEGHI-ZERO, generalizzazione 2 del 2026-09-29, decisione di Luca]
+        #   IL CONTROLLO DOPO **OGNI** VOCE, non piu' solo dopo `mitosi`.
+        #   ⚠ PERCHE': con due soli punti restava un limite che avevo DICHIARATO -- `calcola_psi`
+        #     riscrive `psi_spin` e `_estendi_psi_spinor` allunga `_psi_spinor` **a META' PASSO**,
+        #     e una grandezza che andasse fuori forma FRA i due punti NON VENIVA VISTA.
+        #   ⚠ E COSTA POCO, ed e' la ragione per cui si puo' fare: ~30 confronti di forma per voce.
+        #   ### E TOGLIE UN `if` SUL NOME DI UNA VOCE: lo schedulatore non cabla piu' `'mitosi'`,
+        #     quindi la composizione resta un DATO anche piu' di prima.
+        _ferma_se_registro_incoerente(net, 'schedulatore: dopo la voce `%s`' % _nome)
     net._g_passi_eseguiti = getattr(net, '_g_passi_eseguiti', 0) + 1
     if comp != tuple(PASSO_COMPOSIZIONE):
         net._g_passi_composizione_altra = getattr(net, '_g_passi_composizione_altra', 0) + 1

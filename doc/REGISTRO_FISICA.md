@@ -4385,6 +4385,24 @@ che l'avrebbe **saltato nel caso più comune** *(nessun `--regime` sulla riga di
 
 <!-- SCHEDA nome=schedulatore-del-passo funzioni=esegui_passo,valida_composizione,update,_passo,batch_condensazione,_dbg_init flag=PASSO_COMPOSIZIONE,_PASSO_FASI,_PASSO_MODULO,_PASSO_REGISTRO,_PASSO_CODA,_PASSO_TIPI,_PASSO_FUNZIONE -->
 
+> ### 📌 **GENERALIZZAZIONE 2 DEL 2026-09-29 — IL CONTROLLO DOPO *OGNI* VOCE** *(decisione di Luca)*
+>
+> Prima il controllo del registro girava in **due** punti: la **precondizione** e **dopo `mitosi`**.
+> ### ⚠ **E restava un limite che avevo DICHIARATO:** `calcola_psi` riscrive `psi_spin` e
+> `_estendi_psi_spinor` allunga `_psi_spinor` ### **a META' PASSO** — una grandezza che andasse fuori
+> forma **fra** i due punti ### **non veniva vista**.
+>
+> ### ➜ **Ora il controllo gira DOPO OGNI VOCE della composizione.**
+>
+> | | |
+> |---|---|
+> | **il costo** | ~**30** confronti di forma per voce: con **8** voci, **9** controlli per passo *(la precondizione piu' una per voce)*. ### **E' la ragione per cui si puo' fare** |
+> | ### **e TOGLIE un `if` sul nome di una voce** | lo schedulatore ### **non cabla piu' `'mitosi'`**: la composizione resta un **DATO** ancora piu' di prima, e il docstring di `esegui_passo` diventa vero **senza eccezioni** |
+> | ### ⚠ **due CONTATORI cambiano per costruzione** | `_g_registro_controlli` e `_g_registro_assenti` contano ### **i controlli, non la fisica**: con piu' punti **devono** crescere. Il sigillo li **separa per NOME** e li ### **RIPORTA invece di farli sparire** — un contatore escluso in silenzio e' un buco, uno escluso per nome e stampato e' una **dichiarazione** |
+>
+> **Misurato sulla scena piccola:** 10 passi sani, ### **90 controlli** *(era 20)*, **42** assenze
+> contate *(erano 14)*, **zero errori**.
+
 > ### 📌 **AGGIUNTA DEL 2026-09-29 — `esegui_passo` ACQUISISCE IL SECONDO PRESIDIO DELLO SCHEDULATORE** *(`RIPIEGHI-ZERO`, decisione di Luca)*
 >
 > Accanto a `_ferma_se_oltre_max_nodi` *(che resta)* lo schedulatore chiama ora

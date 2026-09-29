@@ -112,6 +112,14 @@ def _foto(net):
     return q
 
 
+# ⚠ I CONTATORI DEL PRESIDIO STESSO: contano **quanti controlli sono stati fatti**, non la
+#   fisica. Quando il presidio cambia -- per esempio passando da due punti a uno per VOCE -- questi
+#   DEVONO cambiare, ### e confrontarli vorrebbe dire confrontare la modifica CON SE STESSA.
+#   ### Sono NOMINATI e sono TRE: escludere un contatore e' esattamente cio' che potrebbe nascondere
+#   un difetto, quindi l'elenco e' corto, esplicito, e si riporta a parte invece di sparire.
+CONTATORI_DEL_PRESIDIO = ("_g_registro_controlli", "_g_registro_assenti", "_g_registro_spento")
+
+
 def _contatori(net):
     """**I CONTATORI, non le grandezze.** *(Decisione di Luca, 2026-09-29.)*
 
@@ -140,13 +148,18 @@ def _contatori(net):
 
 
 def _diverse_contatori(a, b):
-    """I contatori diversi, col valore di **prima** e di **oggi**."""
-    fuori = []
+    """`(veri, del_presidio)`: i contatori diversi, separati.
+
+    ### **I contatori del PRESIDIO non fanno fallire, ma si RIPORTANO.** Un contatore escluso in
+    silenzio e' un buco; uno escluso **per nome** e **stampato** e' una dichiarazione.
+    """
+    veri, presidio = [], []
     for k in sorted(set(a) | set(b)):
         x, y = a.get(k, "(assente)"), b.get(k, "(assente)")
-        if x != y:
-            fuori.append((k, x, y))
-    return fuori
+        if x == y:
+            continue
+        (presidio if k in CONTATORI_DEL_PRESIDIO else veri).append((k, x, y))
+    return veri, presidio
 
 
 def _diverse(a, b):
@@ -203,7 +216,11 @@ def braccio_B(passi, prima):
             return False, {"passo": k, "eccezione": type(e).__name__,
                            "messaggio": str(e)[:400]}
         d = _diverse(_foto(netA), _foto(netB))
-        c = _diverse_contatori(_contatori(netA), _contatori(netB))
+        c, c_presidio = _diverse_contatori(_contatori(netA), _contatori(netB))
+        if k == passi and c_presidio:
+            print("  contatori DEL PRESIDIO, diversi per costruzione (non fanno fallire):")
+            for x in c_presidio:
+                print("      `%s`: prima %s -> oggi %s" % x)
         if d or c:
             quante += 1
             if primo is None:
