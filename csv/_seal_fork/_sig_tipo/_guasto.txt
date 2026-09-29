@@ -1,5 +1,5 @@
 [TIMBRO] _guasto_ripieghi.py  sha1-BYTE 682f1ba4  committato e pulito
-simulatore ... soliton_simulator.py, blob sha1-BYTE 83bc2934
+simulatore ... soliton_simulator.py, blob sha1-BYTE 62d67675
 scena ........ nmasse 3, sep 6.1158  ->  n = 12802, archi = 471564   (dopo 30 passi)
 dichiarati ... CacheCorta, CacheLunga, FormaSbagliata, TipoSbagliato, SchermaturaSpenta, LimiteNodiSuperato, ComposizioneNonValida
 siti nella tabella generata (per il tracciatore): 95

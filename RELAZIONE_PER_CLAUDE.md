@@ -7849,3 +7849,38 @@ accanto a quello nuovo. ### **Un referto non si riscrive: si dice con quale stru
 
 **Il sigillo della generalizzazione 3 e' il prossimo giro, sul blob `62d67675`**, e la prova a guasto
 va rigirata **prima** perche' il blob e' cambiato.
+
+---
+
+# ✅ **Il sigillo del TIPO passa: sei su sei — e la GENERALIZZAZIONE e' completa** *(2026-09-29)*
+
+### **Numeri GENERATI dai referti** *(`L-NUMERI`)*. Blob da **`83bc2934`** a **`62d67675`**.
+### **L'ancora e' `nessun dtype`, quindi il confronto e' col blob PRIMA della cura del buco:**
+### **questo sigillo misura il TIPO e la CHIUSURA DEL BUCO insieme.**
+
+| braccio | numeri |
+|---|---|
+| ### **`B`** | ### **72 passi, 0 passi con differenze** — grandezze **E 179 contatori** |
+| **`A`** | **30 su 30** a posto, mancano **NESSUNA** |
+| **`D`** | **7** per arco, non a posto **NESSUNA** |
+| **`C`** | a controllo spento: **0** protette |
+| **`E`** | **10 nati**, 648 controlli, 42 assenze, **zero errori** |
+| **`F`** | **30 su 30** apparse, mai apparse **0** |
+| ripiego silenzioso | ### **0** |
+
+## 🏁 **La GENERALIZZAZIONE del controllo unico: dove siamo**
+
+| | che cosa fa | sigillo |
+|---|---|---|
+| **1** | **forma completa**: tutte le dimensioni, non solo la prima | ### **PASSATO** |
+| **2** | **dopo OGNI voce** del passo, non in due punti | ### **PASSATO** |
+| **3** | il **TIPO**, piu' il **buco** del `dtype` assente | ### **PASSATO** |
+| **4** | **derivate SPORCHE alla nascita** | ### **nel PIANO** del riordino |
+| **5** | **matrice di configurazioni** | ### **in coda con `T5`** |
+
+### ➜ **E i tre limiti che avevo scritto nella scheda sono DUE in meno:**
+### **«un solo asse» non c'e' piu'** *(1)*, ### **«due punti, non tutto il passo» non c'e' piu'**
+*(2, e resta solo la finestra DENTRO una voce, che il controllo non puo' vedere per
+costruzione)*. ### **Il terzo — «una scena, una configurazione» — lo togliera' il punto 3 del
+mandato precedente** *(registro DICHIARATO, con le liste non dichiarate che fermano il run)*,
+### **e sta nel piano del riordino.**
