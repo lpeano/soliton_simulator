@@ -7756,3 +7756,57 @@ lasciarlo capire a chi lo trova.
 cambiano nessun verdetto** *(i guasti iniettati sono corti e lunghi sul primo asse)*, ### **ma
 lasciarle fuori era esattamente il difetto di `CacheLunga`** — 23 grandezze etichettate male — e
 questa volta lo chiudo **prima** che morda.
+
+---
+
+# ⛔ **DUE FALLIMENTI, e li committo prima di correggerli** *(2026-09-29)*
+
+### **Nessun codice di fisica in questo commit:** simulatore `83bc2934`, invariato.
+
+## ⛔ **① IL BUCO DEL CONTROLLO DEL TIPO — rilievo del guardiano, e MISURATO**
+
+`csv/_seal_fork/_sig_tipo_buco/_prima_della_correzione.txt`.
+Il controllo del tipo dice `if suo is not None and str(suo) != tipo`: ### **`suo is not None` e' una
+SECONDA ESENZIONE IMPLICITA**, mentre il registro ne dichiara ### **una sola** *(`conc_nodi`)*.
+### **E' la stessa famiglia dei ripieghi appena chiusi: una condizione di ESISTENZA che copre un
+difetto.**
+
+**Sei grandezze provate, trasformate in LISTA con la forma giusta:**
+
+| grandezza | esito **oggi** |
+|---|---|
+| ### **`psi`** | ### **SALTATO IN SILENZIO** — ed e' **una delle sei complesse** |
+| ### **`eta`** | ### **SALTATO IN SILENZIO** |
+| `phi0` | ROTTO RUMOROSO *(`TypeError` a valle)* |
+| `perc_chi` | ROTTO RUMOROSO *(`AttributeError: 'list' has no 'astype'`)* |
+| `pos` · `_psi_spinor` | **PROTETTI da `FormaSbagliata`** |
+
+### ➜ **E la misura DELIMITA il buco meglio della lettura:** una lista ### **perde il secondo asse**,
+quindi le grandezze **a due assi** sono gia' prese dal controllo della **forma**. ### **Il buco vive
+SOLO sulle grandezze a UN asse** — per loro la forma resta giusta e il tipo **non viene guardato**.
+### **Due su sei silenziose, e una e' `psi`.**
+
+## ⛔ **② IL SIGILLO E' CROLLATO NEL BRACCIO `C`, e il difetto e' mio**
+
+```
+for nome, _forma in S.REGISTRO_STATO:
+ValueError: too many values to unpack (expected 2)
+```
+
+Ho portato il registro a ### **TRE campi** *(nome, forma, tipo)* e ### **ho aggiornato solo il
+simulatore**: il sigillo ne scompatta ancora **due**, in **tre** punti *(`braccio_C`, e le due
+letture di `A`/`D`)*.
+
+| braccio | esito |
+|---|---|
+| **`B`** | ### **PASSA** — 72 passi, zero differenze, grandezze **e contatori**, contro `c8fbc1cc` |
+| **`E`** · **`F`** | **PASSANO** |
+| ### **`C`, `A`, `D`** | ### **NON SONO GIRATI**: il sigillo e' morto prima |
+
+> ### 📌 **E' la forma d'errore che questa sessione ha visto piu' volte: cambio una STRUTTURA e
+> aggiorno i suoi lettori A MANO.** Il registro e' passato da 2 a 3 campi e ### **il presidio non ha
+> potuto dirmelo, perche' e' lo STRUMENTO a essere rimasto indietro, non il codice.**
+
+### ➜ **Quindi il sigillo della generalizzazione 3 NON e' stato dato**, e il giro che leggi qui
+### **e' SUPERATO**: va rifatto sul blob **corretto**, dopo le due cure. **Lo dico invece di
+riportare `B`/`E`/`F` come se fossero il sigillo.**

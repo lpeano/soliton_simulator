@@ -1,0 +1,18 @@
+[TIMBRO] sonda_buco.py  sha1-BYTE c0d0fe1c  FUORI DA UN REPO GIT
+blob del simulatore PRIMA della correzione: 83bc2934
+10 passi sani: OK, controlli 90
+
+IL BUCO: `suo is not None` e' una SECONDA ESENZIONE IMPLICITA, e il registro ne dichiara UNA.
+Una grandezza TIPATA che diventa una LISTA non ha `dtype`, quindi il controllo del tipo
+la SALTA. Ecco che cosa succede OGGI, con la forma giusta:
+
+  psi           -> list  *** SALTATO IN SILENZIO ***
+  phi0          -> list  ROTTO RUMOROSO: TypeError -- only integer scalar arrays can be converted to a sca
+  perc_chi      -> list  ROTTO RUMOROSO: AttributeError -- 'list' object has no attribute 'astype'
+  pos           -> list  PROTETTO da FormaSbagliata
+  _psi_spinor   -> list  PROTETTO da FormaSbagliata
+  eta           -> list  *** SALTATO IN SILENZIO ***
+
+LA LETTURA: una lista perde il SECONDO asse, quindi le grandezze a due assi vengono prese
+da `FormaSbagliata`. Le grandezze A UN SOLO ASSE no: per loro la forma resta giusta e il
+tipo non viene guardato. ### E `psi` E' UNA DELLE SEI COMPLESSE.
