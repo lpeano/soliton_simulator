@@ -1,7 +1,7 @@
 {
- "blob_oggi": "e86317bf43fd388e81884940f09edba362a2995a",
- "blob_prima": "64e9f62e7bfd6dcfc5148ea86b4ebf6acbe0d4ee",
- "introduce": "9b23ee3fe70b9cdc5c964b5011271c59d84cc1af",
+ "blob_oggi": "c8fbc1cce00bff3384aff7d10dd97706d53683b7",
+ "blob_prima": "e86317bf43fd388e81884940f09edba362a2995a",
+ "introduce": "915bd7cfe9c89e671f93de614241eb70505821e3",
  "passi": 72,
  "bracci": {
   "A": true,
@@ -140,14 +140,14 @@
     "ROTTO(ValueError)"
    ]
   },
-  "chiamate_spente": 60
+  "chiamate_spente": 270
  },
  "E": {
   "n_iniziale": 12802,
   "n_finale": 12812,
   "nati": 10,
-  "controlli": 144,
-  "assenze_contate": 14
+  "controlli": 648,
+  "assenze_contate": 42
  },
  "F": {
   "stato": 30,

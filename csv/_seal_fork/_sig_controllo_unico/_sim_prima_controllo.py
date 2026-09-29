@@ -1001,6 +1001,22 @@ class CacheLunga(RuntimeError):
     """
 
 
+class FormaSbagliata(RuntimeError):
+    """**Il PRIMO asse e' giusto e uno degli ALTRI no.**
+
+    *(`RIPIEGHI-ZERO`, generalizzazione del 2026-09-29 decisa da Luca.)*
+
+    ### Perche' esiste: il controllo guardava UN SOLO ASSE, e lo dichiaravo come limite
+    `len` e' **il primo asse**. Ma ### **dieci grandezze del registro hanno DUE assi** -- `pos`
+    `_nb` `_nb_prec` `_nb_ret` `mem_mot` `omega_s` sono `(n, 3)`, `_psi_spinor` `_psi_spin_prec`
+    `_spinor_lift` `psi_spin` sono `(n, 2)` -- e ### **un secondo asse sbagliato PASSAVA.**
+
+    ### -> **Ora il registro dichiara la FORMA e il controllo la verifica TUTTA.**
+    Un `(n, 2)` dove ci vuole `(n, 3)` non e' ne' corto ne' lungo: e' ### **un'altra grandezza**,
+    e merita il suo nome.
+    """
+
+
 def _ferma_se_cache_corta(nome, quanta, n, dove, scorta):
     """**UN SOLO controllo per le cache corte**, come `_ferma_se_oltre_max_nodi`."""
     if quanta >= n:
@@ -1036,18 +1052,46 @@ def _ferma_se_cache_corta(nome, quanta, n, dove, scorta):
 #   `m` E' `len(i)`: controllarli contro se stessi non vorrebbe dire niente.
 REGISTRO_METRI = (("phi", "nodo"), ("i", "arco"), ("j", "arco"))
 
-# LE GRANDEZZE DI STATO: lunghe ESATTAMENTE `n` (nodi) o `m` (archi) ai due punti di controllo.
-#   Sono le 30 che la misura ha trovato GIA' PIENE quando `mitosi` ritorna.
+# LE GRANDEZZE DI STATO, con la loro FORMA ATTESA (generalizzazione di Luca, 2026-09-29).
+#   ("n",) = un asse lungo `n`; ("n", 3) = `n x 3`; ("m",) = un asse lungo `m`.
+#   IL CONTROLLO VERIFICA TUTTI GLI ASSI, non solo il primo: dieci grandezze qui hanno DUE assi, e
+#   prima un secondo asse sbagliato PASSAVA (era il limite che avevo dichiarato nella scheda).
+#   ⚠ LE FORME SONO MISURATE, non scritte a mano: vengono dalla colonna `forma` di
+#     `doc/REGISTRO_grandezze.md`, che `csv/_test_fork/_registro_grandezze.py` genera dal runtime.
+#   ⚠ `conc_nodi` e' una LISTA DI LISTE e il suo secondo asse vale 0 e CAMBIA (le voci si
+#     aggiungono): si dichiara SOLO il primo asse, perche' dichiarare `0` sarebbe dichiarare il
+#     falso.
 REGISTRO_STATO = (
-    ("_cs_nodo_prev", "nodo"), ("_deg", "nodo"), ("_nb", "nodo"), ("_nb_prec", "nodo"),
-    ("_nb_ret", "nodo"), ("_psi_prec", "nodo"), ("_psi_spin_prec", "nodo"),
-    ("_psi_spinor", "nodo"), ("_spinor_lift", "nodo"), ("conc_nodi", "nodo"),
-    ("eta", "nodo"), ("mem_mot", "nodo"), ("omega_s", "nodo"), ("perc_chi", "nodo"),
-    ("perc_geom", "nodo"), ("perc_tw", "nodo"), ("phi0", "nodo"), ("phi_s", "nodo"),
-    ("phivel", "nodo"), ("pos", "nodo"), ("psi", "nodo"), ("psi_spin", "nodo"),
-    ("rho_spin", "nodo"),
-    ("_rep", "arco"), ("d", "arco"), ("d0", "arco"), ("peq", "arco"), ("tw", "arco"),
-    ("twp", "arco"), ("vd", "arco"),
+    ("_cs_nodo_prev", ("n",)),
+    ("_deg", ("n",)),
+    ("_nb", ("n", 3,)),   # float64
+    ("_nb_prec", ("n", 3,)),   # float64
+    ("_nb_ret", ("n", 3,)),   # float64
+    ("_psi_prec", ("n",)),
+    ("_psi_spin_prec", ("n", 2,)),   # complex128
+    ("_psi_spinor", ("n", 2,)),   # complex128
+    ("_spinor_lift", ("n", 2,)),   # complex128
+    ("conc_nodi", ("n",)),
+    ("eta", ("n",)),
+    ("mem_mot", ("n", 3,)),   # float64
+    ("omega_s", ("n", 3,)),   # float64
+    ("perc_chi", ("n",)),
+    ("perc_geom", ("n",)),
+    ("perc_tw", ("n",)),
+    ("phi0", ("n",)),
+    ("phi_s", ("n",)),
+    ("phivel", ("n",)),
+    ("pos", ("n", 3,)),   # float64
+    ("psi", ("n",)),
+    ("psi_spin", ("n", 2,)),   # complex128
+    ("rho_spin", ("n",)),
+    ("_rep", ("m",)),
+    ("d", ("m",)),
+    ("d0", ("m",)),
+    ("peq", ("m",)),
+    ("tw", ("m",)),
+    ("twp", ("m",)),
+    ("vd", ("m",)),
 )
 
 # LE DERIVATE: ricalcolate a piena lunghezza dalla loro legge, quindi fra due ricalcoli la loro
@@ -1078,16 +1122,31 @@ REGISTRO_DERIVATE = (
 CONTROLLO_REGISTRO = True
 
 
-def _ferma_registro(eccezione, come, nome, classe, quanta, bersaglio, dove):
+def _forma_di(v):
+    """La forma **vera** di una grandezza: `shape` per un array, `(len,)` per una lista."""
+    if v is None:
+        return None
+    f = getattr(v, "shape", None)
+    if f is not None:
+        return tuple(int(x) for x in f)
+    try:
+        return (int(len(v)),)
+    except Exception:
+        return None
+
+
+def _scrivi_forma(f):
+    return "NON ESISTE" if f is None else ("x".join(str(x) for x in f) or "()")
+
+
+def _ferma_registro(eccezione, come, nome, attesa, vera, dove):
     """Il messaggio, **in un posto solo**: due copie sarebbero due leggi (`9-ter`)."""
     _nl = chr(10)
     raise eccezione(_nl.join([
         "[REGISTRO %s] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)." % come,
-        "  grandezza . %s   (classe: per %s)" % (nome, classe),
-        "  len ....... %s" % ("NON ESISTE" if quanta < 0 else
-                                    ("0 (VUOTA)" if quanta == 0 else str(quanta))),
-        "  bersaglio . %d   (%s)" % (bersaglio, "n = len(phi)" if classe == "nodo"
-                                     else "m = len(i)"),
+        "  grandezza . %s" % nome,
+        "  forma ..... %s" % _scrivi_forma(vera),
+        "  attesa .... %s" % _scrivi_forma(attesa),
         "  dove ...... %s" % dove,
         "  PERCHE: il registro dichiara questa grandezza di STATO, cioe con una REGOLA DI",
         "  NASCITA. Se la sua lunghezza non e esattamente il bersaglio, una legge la leggera",
@@ -1113,7 +1172,7 @@ def registro_mai_apparse(net):
     qualcosa non la crea mai *(e allora il registro dice il falso)*.
     """
     apparse = getattr(net, "_g_registro_apparse", None) or set()
-    return sorted(nome for nome, _classe in REGISTRO_STATO if nome not in apparse)
+    return sorted(nome for nome, _forma in REGISTRO_STATO if nome not in apparse)
 
 
 def _ferma_se_registro_incoerente(net, dove):
@@ -1172,23 +1231,27 @@ def _ferma_se_registro_incoerente(net, dove):
     n = int(net.n)
     m = int(len(net.i))
     apparse = net.__dict__.setdefault("_g_registro_apparse", set())
-    for nome, classe in REGISTRO_STATO:
-        bersaglio = n if classe == "nodo" else m
-        v = getattr(net, nome, None)
-        quanta = -1 if v is None else len(v)
+    for nome, forma in REGISTRO_STATO:
+        # LA FORMA ATTESA, con il primo asse risolto: ("n", 3) -> (n, 3).
+        attesa = ((n if forma[0] == "n" else m),) + tuple(forma[1:])
+        vera = _forma_di(getattr(net, nome, None))
         # <<ASSENTE>> = non esiste OPPURE esiste VUOTA (`np.zeros(0)` di `Rete.__init__`).
-        if quanta <= 0 < bersaglio:
+        if (vera is None or vera[0] <= 0) and attesa[0] > 0:
             if nome not in apparse:
                 net._g_registro_assenti = getattr(net, "_g_registro_assenti", 0) + 1
                 continue
             # ### GIA VISTA PIENA E ORA NON C E PIU: e' una SPARIZIONE, ed e' un difetto.
-            _ferma_registro(CacheCorta, "SPARITA", nome, classe, quanta, bersaglio, dove)
-        if quanta == bersaglio:
+            _ferma_registro(CacheCorta, "SPARITA", nome, attesa, vera, dove)
+        if vera == attesa:
             apparse.add(nome)
             continue
-        if quanta < bersaglio:
-            _ferma_registro(CacheCorta, "CORTA", nome, classe, quanta, bersaglio, dove)
-        _ferma_registro(CacheLunga, "LUNGA", nome, classe, quanta, bersaglio, dove)
+        if vera[0] < attesa[0]:
+            _ferma_registro(CacheCorta, "CORTA", nome, attesa, vera, dove)
+        if vera[0] > attesa[0]:
+            _ferma_registro(CacheLunga, "LUNGA", nome, attesa, vera, dove)
+        # ### IL PRIMO ASSE E' GIUSTO E UN ALTRO NO: non e' ne' corta ne' lunga, e' UN ALTRA
+        #   GRANDEZZA. E' il limite <<un solo asse>> che avevo dichiarato, e che ora non c e piu.
+        _ferma_registro(FormaSbagliata, "FORMA", nome, attesa, vera, dove)
     net._g_registro_controlli = getattr(net, "_g_registro_controlli", 0) + 1
 
 
@@ -6302,7 +6365,7 @@ class Rete:
         if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) != len(beta):
             _ferma_registro(CacheCorta if len(self._sin2_vir) < len(beta) else CacheLunga,
                             "CORTA" if len(self._sin2_vir) < len(beta) else "LUNGA",
-                            "_sin2_vir", "arco", len(self._sin2_vir), len(beta),
+                            "_sin2_vir", (len(beta),), _forma_di(self._sin2_vir),
                             "step: freno anisotropo (zeta-vir, ramo A)")
         if ZETA_VIR and self._sin2_vir is not None:
             beta = beta * (1.0 - self._sin2_vir)
@@ -6405,7 +6468,7 @@ class Rete:
                     _ferma_registro(CacheCorta if len(self._sin2_vir) < len(beta_new)
                                     else CacheLunga,
                                     "CORTA" if len(self._sin2_vir) < len(beta_new) else "LUNGA",
-                                    "_sin2_vir", "arco", len(self._sin2_vir), len(beta_new),
+                                    "_sin2_vir", (len(beta_new),), _forma_di(self._sin2_vir),
                                     "step: freno anisotropo (zeta-vir, ramo B, gemello Verlet)")
                 if ZETA_VIR and self._sin2_vir is not None:
                     beta_new = beta_new * (1.0 - self._sin2_vir)

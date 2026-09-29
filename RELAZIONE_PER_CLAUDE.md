@@ -7682,3 +7682,29 @@ braccio `B` fallirebbe per una ragione che **non e' un difetto**.
 **Il sigillo sulla scena grande fino al 72, con le nascite, e' il prossimo giro** — e questa volta
 ### **il referto della prova a guasto va rigirato PRIMA**, perche' il blob e' cambiato e il sigillo
 lo verifica. *(Lo ha gia' fatto fallire una volta, ed era giusto.)*
+
+---
+
+# ✅ **Il sigillo del CONTROLLO DOPO OGNI VOCE passa: sei su sei** *(2026-09-29)*
+
+### **Numeri GENERATI dai referti** *(`L-NUMERI`)*. Blob da **`e86317bf`** a **`c8fbc1cc`**.
+
+| braccio | numeri |
+|---|---|
+| ### **`B`** | ### **72 passi, 0 passi con differenze** — grandezze **E 179 contatori** |
+| **`A`** | **30 su 30** a posto, mancano **NESSUNA** |
+| **`D`** | **7** per arco, non a posto **NESSUNA** |
+| **`C`** | a controllo spento: **0** protette |
+| **`E`** | **10 nati**, ### **648 controlli** *(erano 144)*, **42** assenze contate *(erano 14)*, **zero errori** |
+| **`F`** | **30 su 30** apparse, mai apparse **0** |
+| ripiego silenzioso | ### **0** |
+
+### ➜ **E i due contatori DEL PRESIDIO sono RIPORTATI, non nascosti:**
+`_g_registro_assenti` **14 → 42** e `_g_registro_controlli` **144 → 648**, stampati dal
+braccio `B` come ### **diversi per costruzione** — con **179** altri contatori confrontati
+### **e zero differenze fra quelli.**
+
+### ⚠ **E il braccio `E` era il punto delicato, e l'ho detto prima:** con nove controlli per
+passo una **derivata** viene guardata **nove volte** invece di due, quindi un errore qui
+avrebbe significato ### **una derivata classificata male nel registro**, non un difetto del
+codice. ### **Non e' successo: 30 su 30 di STATO, zero errori, 10 nati.**
