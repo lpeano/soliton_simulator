@@ -1683,3 +1683,20 @@ lei stessa** un evento dopo)*, ### **e per entrambe la dichiarazione ESISTE GIA'
 > codice di prima» da `HEAD` e ### **diventavano VUOTI appena la cura era committata**.)*
 > **E nello stesso giro ho aggiunto `dichiara_configurazione` (`P5`)** — l'omissione che avevo
 > dichiarato per `_guasto_ripieghi.py`, ### **e qui non la ripeto.**
+
+**ESITO, dal referto `_sig_controllo_unico.json`:** ### **IL SIGILLO PASSA, tutti e cinque i
+bracci.**
+
+| braccio | numeri |
+|---|---|
+| **`A`** | **30 su 30** di STATO a posto, mancano **NESSUNA** |
+| **`D`** | **7** per arco, non a posto **NESSUNA** |
+| ### **`B`** | **72** passi, ### **0** passi con differenze contro `f7541d03` |
+| ### **`C`** | protette a controllo **SPENTO**: ### **0** *(chiamate spente contate: 60)* |
+| **`E`** | `n` da **12802** a **12812**, ### **10 nati**, 144 controlli, 14 assenze contate |
+
+> ### 📌 **Residuo DICHIARATO e non aggiustato:** `_sin2_vir` — una **DERIVATA per arco**, quindi
+> **fuori dal criterio `A`**, ma ### **l'unico ripiego silenzioso che resta**. E' una
+> **condizione fusa** *(`is None` **or** lunghezza)* dove il caso `None` e' legittimo e
+> derivato (`A1`) e il caso **lunghezza** fa sparire il **freno anisotropo** in silenzio per
+> tutta la rete. ### **Va nel commit delle guardie, separato.**

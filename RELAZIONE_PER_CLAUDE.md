@@ -7315,3 +7315,57 @@ radice del repo e' ### **DUE livelli sopra, non uno**. Cercavo i moduli in `csv/
 **`aa7d78ae`**.
 **Nessun commit del fallimento a se':** ### **lo strumento non e' nemmeno PARTITO** — zero misure,
 zero referto, tre righe di traceback. **Non c'e' uno stato da conservare: c'e' una riga sbagliata.**
+
+---
+
+# ✅ **IL SIGILLO DEL CONTROLLO UNICO PASSA: TUTTI E CINQUE I BRACCI** *(2026-09-29)*
+
+Strumento `csv/_seal_fork/_sig_controllo_unico.py`, stampa `_corsa.txt`, referto
+`_sig_controllo_unico.json`. ### **I numeri di questo paragrafo sono GENERATI dal referto**
+*(`L-NUMERI`)*, non ricopiati — e in questa sessione un blob ricopiato a mano era **sbagliato**.
+
+| | blob |
+|---|---|
+| simulatore **OGGI** | ### **`fc9ef41c`** |
+| blob **PRE-CONTROLLO** *(il PADRE del commit che introduce l'ancora, `c047850`)* | **`f7541d03`** |
+
+| braccio | che cosa dimostra | esito |
+|---|---|---|
+| **`A`** | **PROTETTO su CORTA e LUNGA** per tutte le grandezze di **STATO** | ### **PASSA** — **30 su 30**, mancano **NESSUNA** |
+| **`D`** | **controllo positivo sugli ARCHI** | ### **PASSA** — **7** per arco, non a posto **NESSUNA** |
+| **`B`** | **byte-identico fino al passo 72**, ### **PASSO PER PASSO**, sul dominio comune | ### **PASSA** — **72** passi, ### **0** passi con differenze |
+| **`C`** | ### **il caso che DEVE fallire**: a controllo **SPENTO** i guasti tornano scoperti | ### **PASSA** — protette a controllo spento: ### **0**; chiamate a controllo spento **CONTATE**: **60** |
+| **`E`** | un run **SANO CON NASCITE** arriva al 72 **senza un solo errore del registro** | ### **PASSA** — `n` da **12802** a **12812** *(### **10 nati**)*, **144** controlli, **14** assenze contate |
+
+### ➜ **`B` e' il braccio che pesa piu' degli altri: 72 passi, ZERO differenze in OGNI passo.**
+### **La cura NON cambia un bit su un run sano** — nascite comprese — **e lo dice un confronto
+### fatto passo per passo, non una somma alla fine.**
+
+### ➜ **E `C` e' quello che rende il sigillo una MISURA e non una constatazione:** a controllo
+**spento** le grandezze protette su entrambi i lati sono ### **0**. Quindi la protezione
+### **viene DAL CONTROLLO**, non da qualcos'altro che sarebbe passato comunque.
+
+## ⛔ **Il residuo, dichiarato e NON aggiustato: `_sin2_vir`**
+
+E' una **DERIVATA per arco**, quindi ### **fuori dal criterio `A`, che parla delle grandezze
+di STATO** — ma resta ### **l'unico ripiego silenzioso del sistema**, e guastarla fa sparire
+il **freno anisotropo** per **tutta la rete**.
+
+### **E' una CONDIZIONE FUSA, e il codice STESSO dichiara che le due cause «sono cose
+### diverse e vanno distinte, non sommate»** — le distingue **nel contatore**, ### ⚠ **non
+nel comportamento.** Il caso `None` e' **legittimo e derivato** *(`A1`: al primo giro non c'e'
+freno, e inventare un valore iniziale sarebbe un numero scelto)*; il caso **lunghezza** fa
+### **sparire una legge in silenzio**.
+
+### ➜ **Stessa forma di `lambda_nodi`, stessa cura: SEPARARE le due condizioni.** Va nel
+commit delle **guardie di sostituzione**, che il mandato tiene **separato**. ### **Non l'ho
+aggiustato qui, e non lo aggiusto dentro il commit del sigillo.**
+
+## ⚠ Che cosa questo sigillo NON dice
+
+| | |
+|---|---|
+| **una scena, una configurazione** | `nmasse 3`, `sep 6.1158`, seme `11`, **zero differenze su 80 booleani** dal driver. ### **Con altri flag una voce di STATO potrebbe non esistere mai** — e allora il controllo si ferma **nominandola** |
+| **due punti, non tutto il passo** | `calcola_psi` riscrive a `:4421` e `_estendi_psi_spinor` allunga a `:2264`, ### **entrambi a META' PASSO**: una cache che va corta **fra** i due punti non viene vista |
+| **un solo asse** | `len` guarda **il primo**: dieci grandezze sono a due assi, e ### **un secondo asse sbagliato passerebbe** |
+| ### **le guardie di sostituzione sono ANCORA LI'** | il controllo unico **si aggiunge**, non ha **sostituito** niente: ### **il commit che le toglie e' il prossimo pezzo** |

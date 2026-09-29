@@ -1,0 +1,161 @@
+{
+ "blob_oggi": "fc9ef41c8ef375eb7b2c6e26ae4038cae2704279",
+ "blob_prima": "f7541d036229cf5e787114cf19ce5fcf53f77b9a",
+ "introduce": "c0478509b5db5c5053c981fd62afbdd7189d6170",
+ "passi": 72,
+ "bracci": {
+  "A": true,
+  "D": true,
+  "B": true,
+  "C": true,
+  "E": true
+ },
+ "B": {
+  "passi": 72,
+  "passi_diversi": 0
+ },
+ "C": {
+  "protette_a_controllo_spento": [],
+  "esiti": {
+   "_cs_nodo_prev": [
+    "PASSA",
+    "PASSA"
+   ],
+   "_deg": [
+    "ROTTO(ValueError)",
+    "ROTTO(ValueError)"
+   ],
+   "_nb": [
+    "PASSA",
+    "PASSA"
+   ],
+   "_nb_prec": [
+    "PASSA",
+    "PASSA"
+   ],
+   "_nb_ret": [
+    "PASSA",
+    "PASSA"
+   ],
+   "_psi_prec": [
+    "PASSA",
+    "PASSA"
+   ],
+   "_psi_spin_prec": [
+    "PASSA",
+    "PASSA"
+   ],
+   "_psi_spinor": [
+    "PASSA",
+    "PASSA"
+   ],
+   "_spinor_lift": [
+    "PASSA",
+    "PASSA"
+   ],
+   "conc_nodi": [
+    "PASSA",
+    "PASSA"
+   ],
+   "eta": [
+    "ROTTO(ValueError)",
+    "ROTTO(ValueError)"
+   ],
+   "mem_mot": [
+    "PASSA",
+    "PASSA"
+   ],
+   "omega_s": [
+    "PASSA",
+    "PASSA"
+   ],
+   "perc_chi": [
+    "ROTTO(IndexError)",
+    "PASSA"
+   ],
+   "perc_geom": [
+    "ROTTO(IndexError)",
+    "PASSA"
+   ],
+   "perc_tw": [
+    "PASSA",
+    "PASSA"
+   ],
+   "phi0": [
+    "ROTTO(IndexError)",
+    "PASSA"
+   ],
+   "phi_s": [
+    "PASSA",
+    "PASSA"
+   ],
+   "phivel": [
+    "ROTTO(ValueError)",
+    "ROTTO(ValueError)"
+   ],
+   "pos": [
+    "ROTTO(ValueError)",
+    "ROTTO(ValueError)"
+   ],
+   "psi": [
+    "PROTETTO",
+    "ROTTO(ValueError)"
+   ],
+   "psi_spin": [
+    "PASSA",
+    "PASSA"
+   ],
+   "rho_spin": [
+    "PROTETTO",
+    "PASSA"
+   ],
+   "_rep": [
+    "PASSA",
+    "PASSA"
+   ],
+   "d": [
+    "ROTTO(ValueError)",
+    "ROTTO(ValueError)"
+   ],
+   "d0": [
+    "ROTTO(ValueError)",
+    "ROTTO(ValueError)"
+   ],
+   "peq": [
+    "ROTTO(ValueError)",
+    "ROTTO(ValueError)"
+   ],
+   "tw": [
+    "ROTTO(ValueError)",
+    "ROTTO(ValueError)"
+   ],
+   "twp": [
+    "ROTTO(ValueError)",
+    "ROTTO(ValueError)"
+   ],
+   "vd": [
+    "ROTTO(ValueError)",
+    "ROTTO(ValueError)"
+   ]
+  },
+  "chiamate_spente": 60
+ },
+ "E": {
+  "n_iniziale": 12802,
+  "n_finale": 12812,
+  "nati": 10,
+  "controlli": 144,
+  "assenze_contate": 14
+ },
+ "A_e_D": {
+  "stato": 30,
+  "a_posto": 30,
+  "mancano": [],
+  "archi": 7,
+  "archi_non_a_posto": [],
+  "ripiego_silenzioso": [
+   "_sin2_vir"
+  ]
+ },
+ "passa": true
+}
