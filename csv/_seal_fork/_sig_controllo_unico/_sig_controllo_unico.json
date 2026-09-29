@@ -1,11 +1,11 @@
 {
- "blob_oggi": "64e9f62e7bfd6dcfc5148ea86b4ebf6acbe0d4ee",
- "blob_prima": "fc9ef41c8ef375eb7b2c6e26ae4038cae2704279",
- "introduce": "4036ad9efc76e8b459a26029e19cb50a8f0f4b74",
+ "blob_oggi": "e86317bf43fd388e81884940f09edba362a2995a",
+ "blob_prima": "64e9f62e7bfd6dcfc5148ea86b4ebf6acbe0d4ee",
+ "introduce": "9b23ee3fe70b9cdc5c964b5011271c59d84cc1af",
  "passi": 72,
  "bracci": {
-  "A": true,
-  "D": true,
+  "A": false,
+  "D": false,
   "B": true,
   "C": true,
   "E": true,
@@ -155,12 +155,9 @@
   "mai_apparse": []
  },
  "A_e_D": {
-  "stato": 30,
-  "a_posto": 30,
-  "mancano": [],
-  "archi": 7,
-  "archi_non_a_posto": [],
-  "ripiego_silenzioso": []
+  "referto_stantio": true,
+  "blob_referto": "64e9f62e7bfd6dcfc5148ea86b4ebf6acbe0d4ee",
+  "blob_oggi": "e86317bf43fd388e81884940f09edba362a2995a"
  },
- "passa": true
+ "passa": false
 }

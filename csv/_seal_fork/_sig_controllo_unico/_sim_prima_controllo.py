@@ -1098,6 +1098,24 @@ def _ferma_registro(eccezione, come, nome, classe, quanta, bersaglio, dove):
         "  nel registro CON IL SUO MOTIVO MISURATO -- non tolta dal controllo in silenzio."]))
 
 
+def registro_mai_apparse(net):
+    """**Le grandezze di STATO del registro che NON si sono MAI viste piene.**
+
+    ### Perche' esiste: CHIUDE IL VARCO della tolleranza *(punto 2 di Luca, 2026-09-29)*
+    L'assenza e' tollerata **per grandezza, fino alla sua prima apparizione** -- ed e' necessario,
+    perche' `_nb_ret` e' il **Bloch RITARDATO** e al primo passo **non esiste un passato**.
+    ### **Ma una tolleranza senza un rendiconto e' un VARCO:** una grandezza che non appare MAI
+    resterebbe **fuori dal controllo per sempre, in silenzio**.
+
+    ### -> **Quindi a fine run, e IN OGNI SIGILLO, si ELENCA cio' che non e' mai apparso.**
+    Se la lista non e' vuota, ### **non e' una curiosita': e' un ESITO** -- o la grandezza non
+    esiste in questa configurazione *(e va dichiarata **DERIVATA** col suo motivo misurato)*, o
+    qualcosa non la crea mai *(e allora il registro dice il falso)*.
+    """
+    apparse = getattr(net, "_g_registro_apparse", None) or set()
+    return sorted(nome for nome, _classe in REGISTRO_STATO if nome not in apparse)
+
+
 def _ferma_se_registro_incoerente(net, dove):
     """**UN SOLO controllo, nello schedulatore, invece di quaranta `raise` sparsi.**
 
@@ -5946,8 +5964,14 @@ class Rete:
             #   (12802 su 471564), cioe' un SOTTOINSIEME ARBITRARIO ordinato per creazione.
             #   Correggerlo CAMBIA IL VALORE di `P_eq`, quindi e' un cambio di fisica: vuole
             #   il suo commit e il suo sigillo.
-            P_eq = (float(np.median(self.d0[:self.n]))
-                    if self.n > 0 and len(self.d0) >= len(self.i) else 1.0)
+            # [RIPIEGHI-ZERO, 2026-09-29] LA GUARDIA SULLA LUNGHEZZA E' TOLTA: il CONTROLLO
+            #   UNICO garantisce `len(d0) == m` ai due punti del passo, quindi `len(d0) >= len(i)`
+            #   era una condizione SEMPRE VERA -- una guardia che non guarda niente (`A9`).
+            #   ⚠ `self.n > 0` RESTA, e non e' la stessa cosa: su una rete VUOTA la mediana di un
+            #     array vuoto da' `nan`, e con `np.seterr(invalid='raise')` (:8835) SOLLEVA.
+            #   ⚠ E LA FETTA NON E' TOCCATA: `self.d0[:self.n]` prende i PRIMI `n` ARCHI su `m`, ed
+            #     e' il sospetto `P-EQ-MEDIANA-ARCHI`, IN CODA. Correggerla CAMBIA IL VALORE.
+            P_eq = float(np.median(self.d0[:self.n])) if self.n > 0 else 1.0
             # RIGIDITA' DEL MEZZO: con cs-dinamico il mezzo NON e' omogeneo. Il target (grandezza
             # globale, gauge del vuoto) usa la rigidita' rappresentativa = mediana del campo cs locale.
             if CS_DINAMICO:
@@ -6267,7 +6291,20 @@ class Rete:
         # `shape` vale -1 al primo posto quando `_sin2_vir` e' None: le DUE cause di fallimento
         # (memoria assente / lunghezza diversa) sono cose diverse e vanno distinte, non sommate.
         self._g_zeta_vir_a_tot = getattr(self, "_g_zeta_vir_a_tot", 0) + 1
-        if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta):
+        # [RIPIEGHI-ZERO, 2026-09-29] LA CONDIZIONE FUSA E' SEPARATA, come in `lambda_nodi`.
+        #   Il commento qui sotto lo diceva gia': <<le DUE cause (memoria assente / lunghezza
+        #   diversa) sono cose diverse e vanno distinte, non sommate>> -- e le distingueva NEL
+        #   CONTATORE ma NON NEL COMPORTAMENTO: entrambe portavano a <<nessun freno>>.
+        #   MISURATO dalla prova a guasto: accorciare `_sin2_vir` faceva sparire il freno
+        #   anisotropo PER TUTTA LA RETE, in silenzio -- l'ultimo ripiego silenzioso del sistema.
+        #   ORA: `None` resta LEGITTIMO e contato (A1: al primo giro non esiste, e inventare un
+        #   valore iniziale sarebbe un numero scelto); LUNGHEZZA SBAGLIATA SOLLEVA.
+        if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) != len(beta):
+            _ferma_registro(CacheCorta if len(self._sin2_vir) < len(beta) else CacheLunga,
+                            "CORTA" if len(self._sin2_vir) < len(beta) else "LUNGA",
+                            "_sin2_vir", "arco", len(self._sin2_vir), len(beta),
+                            "step: freno anisotropo (zeta-vir, ramo A)")
+        if ZETA_VIR and self._sin2_vir is not None:
             beta = beta * (1.0 - self._sin2_vir)
         elif ZETA_VIR:
             # [A8/A9, 2026-09-20] IL RAMO CHE PRIMA TACEVA, ORA DICHIARA -- e NON cambia un bit.
@@ -6361,7 +6398,16 @@ class Rete:
                 # ragione. Ha il SUO contatore, non quello di sopra: sapere QUALE dei due salta
                 # e' il punto, e un contatore condiviso lo nasconderebbe.
                 self._g_zeta_vir_b_tot = getattr(self, "_g_zeta_vir_b_tot", 0) + 1
-                if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta_new):
+                # [RIPIEGHI-ZERO, 2026-09-29] LA STESSA SEPARAZIONE nel gemello Verlet: stessa
+                #   causa, stessa scelta. `None` legittimo e contato, LUNGHEZZA SBAGLIATA SOLLEVA.
+                if (ZETA_VIR and self._sin2_vir is not None
+                        and len(self._sin2_vir) != len(beta_new)):
+                    _ferma_registro(CacheCorta if len(self._sin2_vir) < len(beta_new)
+                                    else CacheLunga,
+                                    "CORTA" if len(self._sin2_vir) < len(beta_new) else "LUNGA",
+                                    "_sin2_vir", "arco", len(self._sin2_vir), len(beta_new),
+                                    "step: freno anisotropo (zeta-vir, ramo B, gemello Verlet)")
+                if ZETA_VIR and self._sin2_vir is not None:
                     beta_new = beta_new * (1.0 - self._sin2_vir)
                 elif ZETA_VIR:
                     # [A8/A9, 2026-09-20] LO STESSO RAMO, nel gemello Verlet: stessa causa (ORDINE,
@@ -9435,6 +9481,16 @@ def esegui_headless(a):
             if _grabbed >= n:
                 break
     print(f"[headless] scritto {a.out} ({_grabbed} frame registrati)")
+    # [RIPIEGHI-ZERO, punto 2 di Luca] IL RENDICONTO DELLA TOLLERANZA, a fine run: una grandezza
+    #   di STATO mai apparsa resterebbe fuori dal controllo PER SEMPRE, in silenzio.
+    _mai = registro_mai_apparse(net)
+    print("[registro] grandezze di STATO MAI apparse: %s"
+          % (", ".join(_mai) if _mai else "NESSUNA (tutte e %d si sono viste piene)"
+             % len(REGISTRO_STATO)))
+    if _mai:
+        print("[registro] *** NON E' UNA CURIOSITA', E' UN ESITO: o non esistono in questa "
+              "configurazione, e vanno dichiarate DERIVATE col loro motivo misurato, oppure "
+              "qualcosa non le crea mai -- e allora il registro dice il falso. ***")
 
 
 def _cli():

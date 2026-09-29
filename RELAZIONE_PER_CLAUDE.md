@@ -7588,3 +7588,33 @@ E **8 passi sani** girano senza un errore *(16 controlli)*.
 
 **Il sigillo sulla scena grande fino al 72, con contatori, e' il prossimo giro:** ### **la prova di
 fumo non e' il sigillo**, e la byte-identita' va misurata dove ci sono le nascite.
+
+---
+
+# ⛔ **Il sigillo della forma FALLISCE su `A`/`D` — e il presidio che ha sparato l'ho messo io** *(2026-09-29)*
+
+Stampa in `csv/_seal_fork/_sig_forma/_corsa.txt`. ### **Committo il fallimento prima di rimediare**
+*(par.5)*. **Nessun codice di fisica:** `e86317bf`.
+
+| braccio | esito |
+|---|---|
+| ### **`B`** | ### **PASSA** — **72 passi**, **zero differenze in ogni passo**, grandezze **E contatori**, contro `64e9f62e` |
+| **`C`** | **PASSA** — a controllo spento **0** protette |
+| **`E`** | **PASSA** — **10 nati**, 144 controlli, nessun errore |
+| **`F`** | **PASSA** — **30 su 30** apparse, mai apparse **0** |
+| ### **`A` e `D`** | ### **FALLISCONO**, e ### **non per la cura**: `REFERTO STANTIO — prodotto sul blob 64e9f62e, il simulatore di oggi e' e86317bf` |
+
+## ✅ **Il presidio ha funzionato, ed e' la cosa da dire**
+
+Due commit fa *(`465bf95`)* ho aggiunto al sigillo il controllo che ### **il referto di `A`/`D` sia
+dello STESSO blob**, perche' mi era capitato di leggerne uno **vecchio** e riportare un residuo
+### **che la cura aveva gia' chiuso**. ### ➜ **Oggi ha sparato da solo, e su di me.**
+
+> ### 📌 **E' esattamente cio' che un presidio deve fare:** impedire **a me** la scorciatoia che avevo
+> preso **senza accorgermene**. *«Un sigillo che legge un referto STANTIO non e' un sigillo: e' una
+> citazione»* — e ora non lo puo' piu' essere.
+
+### ➜ **La cura NON e' un cambiamento di codice: e' la MISURA che manca.** La prova a guasto va
+rigirata sul blob **`e86317bf`**, e ### **fino a quel referto i bracci `A` e `D` di questo pezzo non
+sono verificati.** *(Il braccio `B` — che e' quello che dimostra la byte-inerzia della forma
+completa — ### **e' PASSATO**.)*
