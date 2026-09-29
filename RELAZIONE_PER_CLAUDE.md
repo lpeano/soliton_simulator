@@ -6762,3 +6762,46 @@ e' morto sul mio confronto.**
 dimostrare che nessuna legge le legge)*; ### **e' UN passo, non una traiettoria** — il guasto entra
 al passo **30** e le nascite cominciano al **42**, quindi un ripiego che morde **solo dopo una
 nascita qui non compare.**
+
+---
+
+# 📋 **IL TASK HISTORY DEL CONTROLLO UNICO, scritto PRIMA di guardare** *(2026-09-29)*
+
+`doc/TASK_HISTORY/2026-09-29_controllo-unico-schedulatore.md`. ### **Nessun codice, nessuna misura:**
+solo cosa **credo prima** di aprire il codice delle regole di nascita — cosi' l'ordine e'
+**verificabile da git** *(`par.8`)* e non asserito da me.
+
+**Decisione di Luca recepita:** la cura di `RIPIEGHI-ZERO` e' ### **il CONTROLLO UNICO dello
+schedulatore**, non guardie sparse. `len == n` **esattamente**, in «apri» e subito dopo mitosi,
+altrimenti `CacheCorta`/`CacheLunga` **col nome**; il registro dichiara la **regola di nascita**;
+poi le guardie di **sostituzione** si **togliono**, restano le **vere inizializzazioni** separate
+dagli `OR`.
+
+## Le sei cose che NON so, dichiarate prima
+
+| | |
+|---|---|
+| **1** | la fase **«apri»** esiste oggi nello schedulatore o **va creata**? *(E se va creata, e' una legge in piu'? `9-ter`)* |
+| ### **2** | ### **due punti di controllo BASTANO? Ho una ragione MISURATA per dubitarne:** `calcola_psi` riscrive `psi_spin` a `:4421` e `_estendi_psi_spinor` allunga a `:2264`, ### **entrambi A META' PASSO** |
+| ### **3** | ### **«assente» non e' «di lunghezza sbagliata»** — al primo passo alcune cache sono legittimamente `None` o di lunghezza `0`. ### **Se il controllo non li distingue, si ferma alla COSTRUZIONE DELLA SCENA: e' esattamente l'errore di `d14892a5`** |
+| **4** | quante sono le grandezze **per arco** e quale sia il loro riferimento *(presumo `m = len(i)`, **non verificato**)* |
+| **5** | le grandezze a **due assi** *(`pos`, `_nb`, `mem_mot` `(n,3)`, `_psi_spinor` `(n,2)`)*: un controllo su `len` guarda **il primo asse**. Un presidio parziale va **dichiarato** |
+| **6** | se ci sono altre grandezze il cui valore di nascita e' una **sentinella** *(come `eta = inf`)*: una regola *«zero»* messa dove il codice mette `inf` **di proposito** sarebbe un cambio di fisica travestito da uniformita' |
+
+## ⚠ E una cosa che mi aspetto NON torni, e la dico prima
+
+**Il criterio «byte-identico fino al 72» presuppone che togliere le guardie sia byte-inerte.**
+### **Una misura dice che DUE guardie SCATTANO in un run sano** al passo dopo una nascita
+*(`_rho_sorgente` e `_xi_rumore`, referto `de9c12ed`)* — e ### **una delle due e' DICHIARATAMENTE
+LEGITTIMA**: il codice a `:3570` dice *«questo NON e' un fallback: e' il percorso normale della
+mitosi; `xi` e' l'AMBIENTE, non una proprieta' del nodo, quindi il figlio NON lo eredita»*.
+
+> ### 📌 ➜ **Quella «guardia» E' una regola di nascita — nel registro diventa «estrazione nuova».**
+> ### **La parte difficile del piano non e' togliere le guardie: e' DISTINGUERE la guardia dalla
+> regola di nascita.** Toglierle alla cieca **cambierebbe la fisica**, e il sigillo byte-identico
+> lo vedrebbe — ma solo **dopo** aver scritto il codice.
+
+**In coda, e non lo faccio adesso** (`L-UN-PROMPT`): ### ⚠ **questo file tiene TRE giorni** *(26,
+27, 28)* invece del solo giorno corrente — l'ultimo chiuso in `doc/relazioni/` e' il **2026-09-25**,
+e qui ci sono **6764 righe**. ### **E' una violazione in corso del par.4**, la dichiaro, e la chiusura
+dei tre giorni e' **un commit a se'**.
