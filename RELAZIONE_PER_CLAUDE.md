@@ -7559,3 +7559,32 @@ E' VERIFICATO.**
   misura |
 | ### **i limiti del controllo** | **un solo asse** · **due punti, non tutto il passo** · **una
   scena e una configurazione**. ### **Sono nella scheda, non in una nota di chat** |
+
+---
+
+# 📐 **GENERALIZZAZIONE 1: la FORMA COMPLETA, non solo il primo asse** *(2026-09-29)*
+
+Simulatore da **`64e9f62e`** a ### **`e86317bf`**; sigillo a **`44b65046`**.
+### **Il limite che avevo DICHIARATO nella scheda non c'e' piu'.**
+
+| | |
+|---|---|
+| **prima** | `len` guarda **il primo asse**, e ### **dieci grandezze del registro hanno DUE assi** — `pos` `_nb` `_nb_prec` `_nb_ret` `mem_mot` `omega_s` sono `(n,3)`, `_psi_spinor` `_psi_spin_prec` `_spinor_lift` `psi_spin` sono `(n,2)`. ### **Un secondo asse sbagliato PASSAVA** |
+| **ora** | il registro dichiara `("n",)` · `("n", 3)` · `("n", 2)` · `("m",)`, e il primo asse ### **si risolve** in `n` o `m` al controllo. ### **Si verificano TUTTI gli assi** |
+| ### **le forme sono MISURATE** | vengono dalla colonna `forma` di `doc/REGISTRO_grandezze.md`, che `_registro_grandezze.py` genera **dal runtime**: ### **non le ho scritte a mano** |
+| **`FormaSbagliata`** | classe **nuova**: primo asse giusto, un altro no. ### **Non e' ne' corta ne' lunga: e' UN'ALTRA grandezza** |
+| ### ⚠ `conc_nodi` | e' una **lista di liste** col secondo asse `0` che **cambia**: si dichiara ### **solo il primo asse**, perche' dichiarare `0` sarebbe **dichiarare il falso** |
+
+## ✅ **Il caso che deve fallire, MISURATO**
+
+| grandezza | forma rotta | esito |
+|---|---|---|
+| `pos` | `2107x2` invece di `2107x3` | ### **`FormaSbagliata`** |
+| `_nb` | `2107x4` invece di `2107x3` | ### **`FormaSbagliata`** |
+| `_psi_spinor` | `2107x3` invece di `2107x2` | ### **`FormaSbagliata`** |
+
+### ➜ **Tre su tre, col messaggio che stampa ENTRAMBE le forme. Prima nessuno dei tre veniva visto.**
+E **8 passi sani** girano senza un errore *(16 controlli)*.
+
+**Il sigillo sulla scena grande fino al 72, con contatori, e' il prossimo giro:** ### **la prova di
+fumo non e' il sigillo**, e la byte-identita' va misurata dove ci sono le nascite.

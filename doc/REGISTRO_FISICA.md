@@ -1062,6 +1062,12 @@ distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifi
 > | **`P_eq`** | via `and len(self.d0) >= len(self.i)`: ### **era sempre vera per costruzione** — una guardia che non guarda niente *(`A9`)*. ### **`self.n > 0` RESTA**, e non e' la stessa cosa: su una rete vuota `median([])` da' `nan` e `np.seterr(invalid='raise')` **solleva**. ### **La FETTA non e' toccata** *(`P-EQ-MEDIANA-ARCHI`, in coda)* |
 > | ### **`_sin2_vir`** | la **condizione fusa** del **freno anisotropo** e' separata **nei due rami** *(non-Verlet e gemello Verlet, coi loro due contatori)*: `None` ### **resta legittimo e contato** *(`A1`)*, **lunghezza sbagliata SOLLEVA** |
 >
+> ### ✅ **AGGIORNATO IL 2026-09-29 (generalizzazione 1):** i due siti di `_sin2_vir` passano
+> ora a `_ferma_registro` la ### **FORMA** *(`_forma_di(self._sin2_vir)` contro `(len(beta),)`)*
+> invece di due interi. ### **Cambia solo il MESSAGGIO** — la condizione e' la stessa — e la
+> ragione e' che il controllo ora verifica **tutti gli assi**, quindi il messaggio deve poter
+> dire una forma e non una lunghezza. **La legge sta nella scheda `registro-grandezze`.**
+>
 > ### **Byte-inerte, e MISURATO: 12 passi, 23 grandezze, zero differenze — E I CONTATORI IDENTICI**
 > *(`_g_zeta_vir_a_salti` **1**, `_g_zeta_vir_b_salti` **4**, in entrambi i blob: scatta **solo** la
 > causa `None`)*. ### **Il confronto sui CONTATORI e' piu' fine di quello sulle grandezze**, e qui
@@ -4722,7 +4728,34 @@ ripiego** che l'eccezione esiste per rendere impossibile.
 
 ---
 
-<!-- SCHEDA nome=registro-grandezze funzioni=_ferma_se_registro_incoerente,_ferma_registro,registro_mai_apparse flag=REGISTRO_STATO,REGISTRO_DERIVATE,REGISTRO_METRI,CONTROLLO_REGISTRO,CacheLunga -->
+<!-- SCHEDA nome=registro-grandezze funzioni=_ferma_se_registro_incoerente,_ferma_registro,registro_mai_apparse,_forma_di,_scrivi_forma flag=REGISTRO_STATO,REGISTRO_DERIVATE,REGISTRO_METRI,CONTROLLO_REGISTRO,CacheLunga,FormaSbagliata -->
+
+> ### 📌 **GENERALIZZAZIONE 1 DEL 2026-09-29 — LA FORMA COMPLETA** *(decisione di Luca)*
+>
+> ### ⚠ **Il controllo guardava UN SOLO ASSE, e io l'avevo dichiarato come LIMITE:** `len` e'
+> il primo asse, e ### **dieci grandezze del registro hanno DUE assi** — `pos` `_nb` `_nb_prec`
+> `_nb_ret` `mem_mot` `omega_s` sono `(n, 3)`, `_psi_spinor` `_psi_spin_prec` `_spinor_lift`
+> `psi_spin` sono `(n, 2)`. ### **Un secondo asse sbagliato PASSAVA.**
+>
+> ### ➜ **Ora il registro dichiara la FORMA e il controllo la verifica TUTTA.**
+>
+> | | |
+> |---|---|
+> | la dichiarazione | `("n",)` · `("n", 3)` · `("n", 2)` · `("m",)`, e il primo asse si
+>   **risolve** in `n` o `m` al momento del controllo |
+> | ### **le forme sono MISURATE** | vengono dalla colonna `forma` di
+>   `doc/REGISTRO_grandezze.md`, che `_registro_grandezze.py` genera **dal runtime**:
+>   ### **non le ho scritte a mano** |
+> | **`FormaSbagliata`** | classe **nuova**: primo asse **giusto**, un altro **no**.
+>   ### **Non e' ne' corta ne' lunga: e' UN'ALTRA GRANDEZZA**, e merita il suo nome |
+> | ### ⚠ `conc_nodi` | e' una **lista di liste** e il suo secondo asse vale `0` e **cambia**
+>   *(le voci si aggiungono)*: si dichiara ### **solo il primo asse**, perche' dichiarare `0`
+>   sarebbe **dichiarare il falso** |
+>
+> ### ✅ **IL CASO CHE DEVE FALLIRE, misurato:** un **secondo asse** sbagliato su `pos`
+> *(`n×2` invece di `n×3`)*, `_nb` *(`n×4`)* e `_psi_spinor` *(`n×3` invece di `n×2`)* alza
+> ### **`FormaSbagliata` tre volte su tre**, con **entrambe le forme** nel messaggio.
+> **Prima nessuno dei tre veniva visto.**
 
 > ### 📌 **AGGIUNTA DEL 2026-09-29 — `_ferma_registro` CHIAMATA DAI SITI: la condizione fusa di
 > `_sin2_vir`** *(punto 3 di Luca, primo pezzo)*

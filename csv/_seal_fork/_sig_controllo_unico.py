@@ -307,7 +307,7 @@ def braccio_C(passi_base):
                  if isinstance(c, type))
     n, m = int(net.n), int(len(net.i))
     prot, esiti = [], {}
-    for nome, classe in S.REGISTRO_STATO:
+    for nome, _forma in S.REGISTRO_STATO:
         ok = []
         for guasto in ("CORTA", "LUNGA"):
             C = copy.deepcopy(net)
@@ -403,10 +403,10 @@ def principale():
         j = None
     if j is not None:
         S, net = carica(None)
-        stato = [k for k, _c in S.REGISTRO_STATO]
+        stato = [k for k, _f in S.REGISTRO_STATO]
         aposto = set(j.get("a_posto") or [])
         mancano = sorted(set(stato) - aposto)
-        archi = sorted(k for k, c in S.REGISTRO_STATO if c == "arco")
+        archi = sorted(k for k, f in S.REGISTRO_STATO if f[0] == "m")
         archi_ok = sorted(set(archi) - aposto)
         A_ok, D_ok = (not mancano), (not archi_ok)
         a_dati = {"stato": len(stato), "a_posto": len(aposto & set(stato)),
