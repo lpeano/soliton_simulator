@@ -1658,3 +1658,28 @@ lei stessa** un evento dopo)*, ### **e per entrambe la dichiarazione ESISTE GIA'
 > il bersaglio**.
 > ### 📌 **E il primo giro NON e' buttato: il numero che conta lo ha dato comunque —
 > ### RIPIEGO SILENZIOSO da 10 a ZERO.**
+
+### 🔬 Il SIGILLO del controllo unico *(2026-09-29)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa fa |
+|---|---|---|---|
+| `csv/_seal_fork/_sig_controllo_unico.py` | `154a0379` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
+
+**I cinque criteri sono di Luca e sono fissati PRIMA del codice** *(piano `f684353f`, par.5)*.
+
+> ### 📌 **Due scelte di misura, dichiarate prima dei numeri:**
+> **①** `B` confronta ### **PASSO PER PASSO**, non solo alla fine — ### **il primo passo in cui
+> qualcosa cambia E' l'informazione**, e una somma finale la nasconderebbe *(e' il braccio `E` di
+> `PSI-FLASH` che ho sbagliato una volta, sommando su domini diversi)*.
+> **②** il blob **PRE-CONTROLLO** non e' un hash scelto a mano: e' ### **il PADRE del commit che
+> introduce `_ferma_se_registro_incoerente`**, ricavato da `git log -S`, ed e' estratto con
+> **`git cat-file -p` IN BINARIO** *(par.7: **non** `git checkout`, per la trappola CRLF)*.
+
+> ### ⛔ **`H-P8` ha RIFIUTATO la prima stesura, e aveva ragione.** Estraeva il blob pre-controllo
+> con `git cat-file -p <introduce>^:...` **fatto a mano**. ### **`_cli_flag.sim_prima_del_flag` fa
+> la stessa cosa ancorando al PADRE del commit che introduce l'ancora**, ed e' la funzione che il
+> presidio riconosce: ### **meno codice, e un presidio in piu' invece di uno aggirato.**
+> *(Il difetto che `H-P8` esiste per impedire e' `ANCORE-1`: **25 sigilli** che prendevano «il
+> codice di prima» da `HEAD` e ### **diventavano VUOTI appena la cura era committata**.)*
+> **E nello stesso giro ho aggiunto `dichiara_configurazione` (`P5`)** — l'omissione che avevo
+> dichiarato per `_guasto_ripieghi.py`, ### **e qui non la ripeto.**
