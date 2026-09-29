@@ -1,5 +1,5 @@
 {
- "blob_sim_sha1_byte": "fc9ef41c8ef375eb7b2c6e26ae4038cae2704279",
+ "blob_sim_sha1_byte": "64e9f62e7bfd6dcfc5148ea86b4ebf6acbe0d4ee",
  "passi_base": 30,
  "n_base": 12802,
  "archi_base": 471564,
@@ -7,6 +7,7 @@
  "sep": 6.1158,
  "errori_dichiarati": [
   "CacheCorta",
+  "CacheLunga",
   "SchermaturaSpenta",
   "LimiteNodiSuperato",
   "ComposizioneNonValida"
@@ -19,6 +20,7 @@
   "_chi_geom_nodi",
   "_cs_nodo_prev",
   "_deg",
+  "_dt_e_ultimo",
   "_fatt_cs_ultimo",
   "_g_rampa_prec",
   "_nb",
@@ -28,12 +30,17 @@
   "_psi_spin_prec",
   "_psi_spinor",
   "_r_corrente",
+  "_rep",
+  "_sin2_vir",
   "_spinor_lift",
   "_xi_rumore",
   "conc_nodi",
+  "d",
+  "d0",
   "eta",
   "mem_mot",
   "omega_s",
+  "peq",
   "perc_chi",
   "perc_geom",
   "perc_tw",
@@ -43,11 +50,16 @@
   "pos",
   "psi",
   "psi_spin",
-  "rho_spin"
+  "rho_spin",
+  "tw",
+  "twp",
+  "vd"
  ],
  "sospette_per_arco": [],
  "escluse": [
-  "phi"
+  "phi",
+  "i",
+  "j"
  ],
  "non_finiti_a_BASE": {
   "eta": {
@@ -162,7 +174,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -176,10 +188,32 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   }
+  },
+  "_dt_e_ultimo": {
+   "CORTA": {
+    "esito": "INERTE",
+    "cambiate": [],
+    "quante": 0,
+    "nodi": 0,
+    "archi": 0,
+    "forme_diverse": [],
+    "scostamento_max": 0.0,
+    "oltre_l_ultimo_nodo": false
+   },
+   "LUNGA": {
+    "esito": "INERTE",
+    "cambiate": [],
+    "quante": 0,
+    "nodi": 0,
+    "archi": 0,
+    "forme_diverse": [],
+    "scostamento_max": 0.0,
+    "oltre_l_ultimo_nodo": false
    }
   },
   "_fatt_cs_ultimo": {
@@ -234,7 +268,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -248,7 +282,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -262,7 +296,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -276,7 +310,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -290,7 +324,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -304,7 +338,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -332,6 +366,34 @@
     "oltre_l_ultimo_nodo": false
    }
   },
+  "_rep": {
+   "CORTA": {
+    "esito": "PROTETTO",
+    "tipo": "CacheCorta",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   },
+   "LUNGA": {
+    "esito": "PROTETTO",
+    "tipo": "CacheLunga",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   }
+  },
+  "_sin2_vir": {
+   "CORTA": {
+    "esito": "PROTETTO",
+    "tipo": "CacheCorta",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   },
+   "LUNGA": {
+    "esito": "PROTETTO",
+    "tipo": "CacheLunga",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   }
+  },
   "_spinor_lift": {
    "CORTA": {
     "esito": "PROTETTO",
@@ -340,7 +402,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -376,7 +438,35 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
+    "tipo": "CacheLunga",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   }
+  },
+  "d": {
+   "CORTA": {
+    "esito": "PROTETTO",
+    "tipo": "CacheCorta",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   },
+   "LUNGA": {
+    "esito": "PROTETTO",
+    "tipo": "CacheLunga",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   }
+  },
+  "d0": {
+   "CORTA": {
+    "esito": "PROTETTO",
+    "tipo": "CacheCorta",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   },
+   "LUNGA": {
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -390,7 +480,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -404,7 +494,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -418,7 +508,21 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
+    "tipo": "CacheLunga",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   }
+  },
+  "peq": {
+   "CORTA": {
+    "esito": "PROTETTO",
+    "tipo": "CacheCorta",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   },
+   "LUNGA": {
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -432,7 +536,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -446,7 +550,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -460,7 +564,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -474,7 +578,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -488,7 +592,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -502,7 +606,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -516,7 +620,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -530,7 +634,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -544,7 +648,7 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
@@ -558,26 +662,56 @@
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
-    "esito": "ROTTO RUMOROSO",
+    "esito": "PROTETTO",
+    "tipo": "CacheLunga",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   }
+  },
+  "tw": {
+   "CORTA": {
+    "esito": "PROTETTO",
+    "tipo": "CacheCorta",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   },
+   "LUNGA": {
+    "esito": "PROTETTO",
+    "tipo": "CacheLunga",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   }
+  },
+  "twp": {
+   "CORTA": {
+    "esito": "PROTETTO",
+    "tipo": "CacheCorta",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   },
+   "LUNGA": {
+    "esito": "PROTETTO",
+    "tipo": "CacheLunga",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   }
+  },
+  "vd": {
+   "CORTA": {
+    "esito": "PROTETTO",
+    "tipo": "CacheCorta",
+    "dove": "soliton_simulator.py:1084",
+    "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
+   },
+   "LUNGA": {
+    "esito": "PROTETTO",
     "tipo": "CacheLunga",
     "dove": "soliton_simulator.py:1084",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   }
  },
- "a_posto": [],
- "inerti": [
-  "_chi_core_nodi",
-  "_chi_core_raggio",
-  "_chi_core_rho0",
-  "_chi_geom_nodi",
-  "_fatt_cs_ultimo",
-  "_g_rampa_prec",
-  "_r_corrente",
-  "_xi_rumore"
- ],
- "ripiego_silenzioso": [],
- "rotto_rumoroso": [
+ "a_posto": [
   "_cs_nodo_prev",
   "_deg",
   "_nb",
@@ -586,11 +720,16 @@
   "_psi_prec",
   "_psi_spin_prec",
   "_psi_spinor",
+  "_rep",
+  "_sin2_vir",
   "_spinor_lift",
   "conc_nodi",
+  "d",
+  "d0",
   "eta",
   "mem_mot",
   "omega_s",
+  "peq",
   "perc_chi",
   "perc_geom",
   "perc_tw",
@@ -600,12 +739,85 @@
   "pos",
   "psi",
   "psi_spin",
-  "rho_spin"
+  "rho_spin",
+  "tw",
+  "twp",
+  "vd"
  ],
+ "inerti": [
+  "_chi_core_nodi",
+  "_chi_core_raggio",
+  "_chi_core_rho0",
+  "_chi_geom_nodi",
+  "_dt_e_ultimo",
+  "_fatt_cs_ultimo",
+  "_g_rampa_prec",
+  "_r_corrente",
+  "_xi_rumore"
+ ],
+ "ripiego_silenzioso": [],
+ "rotto_rumoroso": [],
  "effetto_oltre_ultimo_nodo": [],
  "caso_che_deve_fallire": {
-  "fatto": false,
-  "esito": null,
-  "fallisce_come_deve": null
+  "fatto": true,
+  "esito": {
+   "CORTA": {
+    "esito": "RIPIEGO SILENZIOSO",
+    "cambiate": [
+     "_nb",
+     "_nb_prec",
+     "_psi_prec",
+     "_psi_spinor",
+     "_spinor_lift",
+     "d",
+     "d0",
+     "mem_mot",
+     "omega_s",
+     "peq",
+     "phi",
+     "phi_s",
+     "phivel",
+     "psi",
+     "psi_spin",
+     "tw",
+     "vd"
+    ],
+    "quante": 17,
+    "nodi": 12801,
+    "archi": 471564,
+    "forme_diverse": [],
+    "scostamento_max": 12.563390597216413,
+    "oltre_l_ultimo_nodo": true,
+    "righe_eseguite": [
+     2360,
+     3684,
+     3794,
+     4291,
+     4293,
+     5471,
+     5684,
+     5794,
+     6056,
+     6086,
+     6129,
+     6135,
+     6136,
+     7178,
+     7220
+    ],
+    "righe_responsabili": [
+     ":4293 _passo_spinoriale (self.psi) ### **(d) DA LEGGERE**",
+     ":7178 pozzo_grafo (self.psi) ### **(d) DA LEGGERE**",
+     ":7220 memoria_hebbiana_moto (self.psi) ### **(d) DA LEGGERE**"
+    ]
+   },
+   "LUNGA": {
+    "esito": "ROTTO RUMOROSO",
+    "tipo": "ValueError",
+    "dove": "_sim_precura.py:3312",
+    "messaggio": "operands could not be broadcast together with shapes (12803,) (12802,) "
+   }
+  },
+  "fallisce_come_deve": true
  }
 }

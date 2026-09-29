@@ -1,4 +1,4 @@
-[TIMBRO] _sig_controllo_unico.py  sha1-BYTE 13fad02b  committato e pulito
+[TIMBRO] _sig_controllo_unico.py  sha1-BYTE 6e044a81  committato e pulito
 simulatore OGGI ........ 64e9f62e
 `registro_mai_apparse` introdotto da 4036ad9efc76
 blob PRE-CONTROLLO ..... fc9ef41c   (estratto IN BINARIO, par.7)
@@ -73,7 +73,7 @@ BRACCI A e D -- dal referto di `_guasto_ripieghi.py` (gia' girato e committato)
 ========================================================================================================
   A: grandezze di STATO 30, a posto 30, mancano NESSUNA
   D: per arco 7, non a posto NESSUNA
-  RIPIEGO SILENZIOSO residuo (anche su DERIVATE): ['_sin2_vir']
+  ### RIPIEGO SILENZIOSO residuo (anche su DERIVATE): NESSUNO
 
 ========================================================================================================
 IL VERDETTO
@@ -85,6 +85,6 @@ IL VERDETTO
   braccio E ... PASSA
   braccio F ... PASSA
 
-### IL SIGILLO PASSA: tutti e cinque i bracci.
+### IL SIGILLO PASSA: tutti e 6 i bracci.
 scritto: C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sig_controllo_unico\_sig_controllo_unico.json
 USCITA: 0

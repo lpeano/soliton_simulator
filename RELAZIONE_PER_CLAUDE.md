@@ -7519,3 +7519,43 @@ conta invece di essere scritto.)*
 ### ➜ **Quindi NON dichiaro chiuso `RIPIEGHI-ZERO`:** la prova a guasto sta rigirando sul blob di
 oggi, e ### **fino a quel referto il criterio «zero ripieghi silenziosi, `_sin2_vir` compresa» NON
 E' VERIFICATO.**
+
+---
+
+# 🏁 **`RIPIEGHI-ZERO` E' CHIUSA: il sigillo passa su SEI bracci** *(2026-09-29)*
+
+### **I numeri sono GENERATI dai due referti** *(`L-NUMERI`)*: il sigillo
+`_sig_controllo_unico.json` e la prova a guasto `_guasto_ripieghi.json`, ### **prodotta sullo
+### STESSO blob — e ora il sigillo lo VERIFICA invece di fidarsi.**
+
+| braccio | esito | numeri |
+|---|---|---|
+| **`A`** | **PASSA** | **30 su 30** di STATO a posto, mancano **NESSUNA** |
+| **`D`** | **PASSA** | **7** per arco, non a posto **NESSUNA** |
+| ### **`B`** | ### **PASSA** | ### **72 passi, 0 passi con differenze** — grandezze **E 179 contatori** — contro **`fc9ef41c`**, scena **GRANDE**, ### **con le nascite** |
+| ### **`C`** | **PASSA** | protette a controllo **SPENTO**: ### **0** *(chiamate spente contate: 60)* |
+| **`E`** | **PASSA** | `n` da **12802** a **12812**, ### **10 nati**, 144 controlli, 14 assenze contate |
+| ### **`F`** | **PASSA** | **30 su 30** apparse, ### **MAI apparse: 0** |
+
+## ✅ **E il numero che chiude la voce**
+
+| | prima della cura *(`f173050`)* | ora |
+|---|---|---|
+| ### **RIPIEGO SILENZIOSO** | **10** | ### **0** |
+| ### **effetto oltre l'ultimo nodo** | **10** | ### **0** |
+| **ROTTO RUMOROSO** | **8** | **0** |
+| ### **A POSTO** | **0 su 31** | ### **31** |
+
+### ➜ **`_sin2_vir` COMPRESA: era l'ultimo, ed e' a posto.** E il **caso che deve fallire** e'
+**invariato**: `psi` corta sul pre-cura da' ancora il ripiego su **tutta la rete**.
+
+## Che cosa resta, e non lo nascondo
+
+| | |
+|---|---|
+| ### **`POTATURA-GUARDIE`** | **57** rami morti *(12 fusi, 45 di sola lunghezza)*, ### **in coda
+  dopo il riordino della mitosi** — perche' quel riordino tocchera' molte di quelle righe |
+| `P-EQ-MEDIANA-ARCHI` | la **fetta** `d0[:n]` su una grandezza **per arco**: in coda, con la sua
+  misura |
+| ### **i limiti del controllo** | **un solo asse** · **due punti, non tutto il passo** · **una
+  scena e una configurazione**. ### **Sono nella scheda, non in una nota di chat** |

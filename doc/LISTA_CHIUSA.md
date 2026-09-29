@@ -18,9 +18,9 @@
 | il testo | `420` caratteri della riga | `117` del `titolo_breve` **+ la fonte in colonna** |
 
 ```
-voci nell'indice      851
+voci nell'indice      854
 in LISTA              391   (stato aperto o da-decidere, e un tipo che puo' essere un fronte)
-FUORI LISTA           460   col motivo, dai campi dell'indice
+FUORI LISTA           463   col motivo, dai campi dell'indice
 ```
 
 ---
@@ -438,7 +438,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 | `DA-DECIDERE` | **Z4a** | — | (CITATO 16 volte, MAI definito in un registro) [Z4a] | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **Z4b** | — | (CITATO 10 volte, MAI definito in un registro) [Z4b] | `da-decidere` | `altro` | `(nessuna definizione trovata)` |
 | `DA-DECIDERE` | **DOPPIA-COP** | — | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non misurata | `aperto` | `cura` | `CURE_fisica_ordine.md` |
-| `DA-DECIDERE` | **RIPIEGHI-ZERO** | — | ZERO ripieghi che cambiano la fisica in silenzio: tutti e 100 i confronti `len(x) < n` | `aperto` | `cura` | `TASK_HISTORY/2026-09-28_mitos…` |
+| `NO` | **POTATURA-GUARDIE** | — | I 57 rami MORTI delle guardie di lunghezza: potatura rimandata dopo il riordino della mitosi | `aperto` | `cura` | `POTATURA_guardie.md` |
 | `SI` | **SCHED-PASSO** | — | il passo pieno diventa uno SCHEDULATORE: le regole del passo sono architettura, non intenzioni | `aperto` | `cura` | `PIANO_schedulatore_passo.md` |
 | `NO` | **ALLUNG-RELATIVO** | — | il criterio V6 dell'allungamento sottrae variazioni relative con DENOMINATORI DIVERSI | `aperto` | `difetto` | `csv/_test_fork/_pilota_prova1…` |
 | `NO` | **ARCHI-PRIMI** | — | la vista disegna i PRIMI 24000 archi per indice: il 100 % finisce in un quadrante, misurato | `aperto` | `difetto` | `soliton_simulator.py` |
@@ -487,7 +487,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 
 ---
 
-## 📤 **FUORI LISTA — 460 voci, ciascuna col MOTIVO** *(dai campi dell'indice)*
+## 📤 **FUORI LISTA — 463 voci, ciascuna col MOTIVO** *(dai campi dell'indice)*
 
 ### motivo: **etichetta LOCALE a una scheda o a un sigillo: il nome pieno include il sigillo, e non e' un fronte del programma**   *(245 voci)*
 
@@ -739,7 +739,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 | ZZ888 | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)… | `criterio-locale` |
 | ZZ999 | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/task history)… | `criterio-locale` |
 
-### motivo: **gia' curata o chiusa**   *(151 voci)*
+### motivo: **gia' curata o chiusa**   *(152 voci)*
 
 | id | che cos'e' | tipo |
 |---|---|:--:|
@@ -812,6 +812,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 | RAMPA-1 | CHIUSA il 2026-09-25, strada (3) (decisione di Luca): sigillo 9/9 dal CLI, ramp =... | `altro` |
 | RIORDINO-NOMI-H | il prefisso `H-` e' sui NOMI VECCHI (H-P3) e non sui nomi semantici (H-CLI) che la proposta... | `altro` |
 | RIORDINO-POSTO2 | IL POSTO 2 HA 11 REGOLE E IL TETTO E' 10: quale si fonde | `fronte` |
+| RIPIEGHI-ZERO | ZERO ripieghi che cambiano la fisica in silenzio: tutti e 100 i confronti `len(x) < n` | `cura` |
 | RIPIEGO-1 | APERTA E CHIUSA il 2026-09-25 (difetto mio, rilevato da LUCA) / UN RIPIEGO GLOBALE SU UNA... | `altro` |
 | SCENA-1 | CHIUSA il 2026-09-25, strada (1) (decisione di Luca) / SEMINALAM era approvata ma… | `altro` |
 | SCHED-T1 | T1 dello schedulatore: la composizione e' una LISTA e c'e' UN SOLO esecutore, esegui_passo | `cura` |
@@ -895,7 +896,7 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 | Z98 | Z98 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / COESCAUSALE (C4): un solo ISTANTE e il CONO DEL... | `fronte` |
 | Z99 | Z99 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / ANOMSIMM (C1-bis): il pavimento max(peq, 1e-9) E'… | `fronte` |
 
-### motivo: **sospetto, NON acclarato: si promuove con la prova**   *(18 voci)*
+### motivo: **sospetto, NON acclarato: si promuove con la prova**   *(20 voci)*
 
 | id | che cos'e' | tipo |
 |---|---|:--:|
@@ -915,6 +916,8 @@ FUORI LISTA           460   col motivo, dai campi dell'indice
 | CENS-B7 | [B] *"Default ancora off; **convergenza e superiorita' rispetto al percors | `sospetto` |
 | CENS-B8 | [B] *"INTEGRATORE METRICO **SPERIMENTALE** ... Default off per mantenere i | `sospetto` |
 | CENS-B9 | [B] *"LEGGE DI STABILITA' (**esplorativa**): i nuovi nodi in regione sovra | `sospetto` |
+| GEOM-SENZA-VERSO | perc_geom nasce da /tw/: perde il VERSO, ma la catena della torsione la usa come chiralita | `sospetto` |
+| P-EQ-MEDIANA-ARCHI | P_eq prende la mediana dei PRIMI n ARCHI su m: un sottoinsieme arbitrario, non tutti | `sospetto` |
 | PSI-FLASH | /psi/ SALTA di 1.6x nei passi con nascite: due siti ricalcolano psi dopo la mitosi, nello… | `sospetto` |
 | SCIOGLIMENTO-FASE | perche' coer_campo va da 0.999 a 0.20 in 120 passi: la scena non tocca phivel e la coppia non… | `sospetto` |
 
