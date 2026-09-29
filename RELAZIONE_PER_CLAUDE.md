@@ -7369,3 +7369,31 @@ aggiustato qui, e non lo aggiusto dentro il commit del sigillo.**
 | **due punti, non tutto il passo** | `calcola_psi` riscrive a `:4421` e `_estendi_psi_spinor` allunga a `:2264`, ### **entrambi a META' PASSO**: una cache che va corta **fra** i due punti non viene vista |
 | **un solo asse** | `len` guarda **il primo**: dieci grandezze sono a due assi, e ### **un secondo asse sbagliato passerebbe** |
 | ### **le guardie di sostituzione sono ANCORA LI'** | il controllo unico **si aggiunge**, non ha **sostituito** niente: ### **il commit che le toglie e' il prossimo pezzo** |
+
+---
+
+# 🔒 **Punto 2: il VARCO della tolleranza e' chiuso** *(2026-09-29)*
+
+Simulatore da **`fc9ef41c`** a ### **`81be5f41`**; sigillo a **`bb7e975b`**.
+**Scheda `registro-grandezze`** aggiornata, piu' la nota in `scena-masse-coerenti` *(che possiede
+`esegui_headless`)*.
+
+### ⚠ **Il varco l'avevo aperto io, e la tua correzione lo chiude**
+
+La tolleranza dell'assenza e' **per grandezza, fino alla prima apparizione** — ed e' **necessaria**,
+perche' `_nb_ret` e' il Bloch **ritardato** e ### **al primo passo non esiste un passato**.
+### **Ma una tolleranza SENZA RENDICONTO e' un varco:** una grandezza che non appare **mai**
+### **resterebbe fuori dal controllo per sempre, in silenzio** — e nessuno lo saprebbe.
+
+| | |
+|---|---|
+| `registro_mai_apparse(net)` | l'elenco delle voci di **STATO** che **non si sono mai viste piene**. **Non e' fisica e non tocca un bit:** legge `_g_registro_apparse` e stampa |
+| **a fine run** | l'ultima riga del run **headless** lo stampa, e se la lista non e' vuota ### **dice che NON e' una curiosita': e' un ESITO** |
+| ### **nei sigilli: braccio `F`** | legge ### **dalla rete del braccio `E`**, cosi' il rendiconto parla del **run appena fatto** e non di un altro. ### **Se anche UNA sola non e' mai apparsa, `F` FALLISCE** |
+
+### ➜ **E le due letture possibili sono entrambe gravi, per questo e' un esito:**
+o la grandezza ### **non esiste in questa configurazione** — e va dichiarata **DERIVATA col suo
+motivo misurato** — o ### **qualcosa non la crea mai, e allora il registro DICE IL FALSO.**
+
+**E' la forma che `A8` chiede:** *un comportamento che non si conta e' un comportamento
+sconosciuto.* Qui non si contava **l'assenza definitiva**, e ora si conta.

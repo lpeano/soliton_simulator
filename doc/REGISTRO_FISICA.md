@@ -3762,6 +3762,12 @@ spostamento ILLIMITATO**, che è la firma di `A11`.
 
 <!-- SCHEDA nome=scena-masse-coerenti funzioni=_semina_masse_coerenti,esegui_headless,_massa flag=_MC_VIDEO,TESTS,MASSE-COERENTI,SEMINA_LAM -->
 
+> **→ NOTA DEL 2026-09-29, e sta qui perche' questa scheda POSSIEDE `esegui_headless`:**
+> l'ultima riga del run headless ora stampa anche ### **l'elenco delle grandezze di STATO MAI
+> APPARSE** *(`registro_mai_apparse`)*. ### **La scena non cambia, e non cambia un bit:** e' un
+> **rendiconto** a run finito. **La legge sta nella scheda `registro-grandezze`**; qui sta solo
+> il punto in cui viene stampato, perche' `REG-R` mappa **per funzione**.
+
 # ③ `scena-masse-coerenti` — **LA SCENA `(ii)`: UN VUOTO SOLO, E LE MASSE SONO REGIONI**
 
 **Decisione di Luca, 2026-09-25.** È una **SCENA**, non una legge: non entra in nessuna equazione
@@ -4703,7 +4709,24 @@ ripiego** che l'eccezione esiste per rendere impossibile.
 
 ---
 
-<!-- SCHEDA nome=registro-grandezze funzioni=_ferma_se_registro_incoerente,_ferma_registro flag=REGISTRO_STATO,REGISTRO_DERIVATE,REGISTRO_METRI,CONTROLLO_REGISTRO,CacheLunga -->
+<!-- SCHEDA nome=registro-grandezze funzioni=_ferma_se_registro_incoerente,_ferma_registro,registro_mai_apparse flag=REGISTRO_STATO,REGISTRO_DERIVATE,REGISTRO_METRI,CONTROLLO_REGISTRO,CacheLunga -->
+
+> ### 📌 **AGGIUNTA DEL 2026-09-29 — `registro_mai_apparse`: IL RENDICONTO DELLA TOLLERANZA**
+> *(punto 2 di Luca, che chiude un varco che avevo aperto io)*
+>
+> La tolleranza dell'assenza e' **per grandezza, fino alla prima apparizione** — necessaria,
+> perche' `_nb_ret` e' il Bloch **ritardato** e al primo passo ### **non esiste un passato**.
+> ### ⚠ **Ma una tolleranza SENZA RENDICONTO e' un VARCO:** una grandezza che non appare **mai**
+> resterebbe ### **fuori dal controllo per sempre, in silenzio.**
+>
+> ### ➜ **Quindi a fine run, e IN OGNI SIGILLO, si ELENCA cio' che non e' mai apparso**, e se la
+> lista non e' vuota ### **non e' una curiosita': e' un ESITO** — o la grandezza **non esiste**
+> in questa configurazione *(e va dichiarata **DERIVATA** col suo motivo misurato)*, o qualcosa
+> ### **non la crea mai, e allora il registro dice il falso.**
+>
+> **Non e' fisica e non tocca un bit:** legge `_g_registro_apparse` e stampa. **E' un
+> RENDICONTO**, cioe' la forma che `A8` chiede: *un comportamento che non si conta e' un
+> comportamento sconosciuto.*
 
 # 📒 **IL REGISTRO DELLE GRANDEZZE, E IL CONTROLLO UNICO** *(`RIPIEGHI-ZERO`, 2026-09-29)*
 

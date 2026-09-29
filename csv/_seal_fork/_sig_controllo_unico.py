@@ -12,6 +12,7 @@ ha girati `csv/_test_fork/_guasto_ripieghi.py`; qui stanno **`B`**, **`C`** ed *
 | ### **`B`** | ### **byte-identico fino al passo 72** contro il blob **PRE-CONTROLLO**, sul **dominio comune** | **una** grandezza diversa in **un** passo |
 | ### **`C`** | ### **IL CASO CHE DEVE FALLIRE** (`P1-sexies`): col controllo **SPENTO**, i guasti tornano a **NON** essere protetti | se restano protetti anche a controllo spento, ### **il sigillo non sta misurando il controllo** |
 | ### **`E`** | un run **SANO CON NASCITE** arriva al **72** ### **senza un solo `CacheCorta`/`CacheLunga`** | un solo errore: vuol dire che ho messo una **DERIVATA** fra le STATO |
+| ### **`F`** | ### **il RENDICONTO DELLA TOLLERANZA** *(punto 2 di Luca)*: **quali** grandezze di STATO non si sono **MAI** viste piene | ### **anche UNA SOLA**: la tolleranza dell'assenza diventerebbe un **varco**, e quella grandezza resterebbe fuori dal controllo **per sempre, in silenzio** |
 
 ### ⚠ Due scelte di misura, dichiarate prima dei numeri
 
@@ -176,7 +177,11 @@ def braccio_B(passi, prima):
 
 
 def braccio_E(passi):
-    """**Un run SANO CON NASCITE arriva al passo `passi` senza un solo errore del registro.**"""
+    """**Un run SANO CON NASCITE arriva al passo `passi` senza un solo errore del registro.**
+
+    Restituisce anche `(S, net)`: il braccio **`F`** legge da **QUESTA** rete, cosi' il rendiconto
+    della tolleranza parla del **run appena fatto** e non di un altro.
+    """
     import contextlib
     print("")
     print("=" * 104)
@@ -201,7 +206,36 @@ def braccio_E(passi):
                           " nascite."))
     return nato > 0, {"n_iniziale": n0, "n_finale": int(net.n), "nati": nato,
                       "controlli": int(getattr(net, "_g_registro_controlli", 0)),
-                      "assenze_contate": int(getattr(net, "_g_registro_assenti", 0))}
+                      "assenze_contate": int(getattr(net, "_g_registro_assenti", 0))}, S, net
+
+
+def braccio_F(net, S):
+    """### **Il RENDICONTO della tolleranza: che cosa non e' MAI apparso.**
+
+    *(Punto 2 di Luca, 2026-09-29.)* L'assenza e' tollerata **per grandezza, fino alla prima
+    apparizione** -- necessario, perche' `_nb_ret` e' il Bloch **ritardato**. ### **Ma una
+    tolleranza senza rendiconto e' un VARCO**, e questo braccio lo chiude: **se anche UNA sola
+    grandezza di STATO non si e' mai vista piena, il sigillo lo RIPORTA come esito.**
+    """
+    print("")
+    print("=" * 104)
+    print("BRACCIO F -- il RENDICONTO della tolleranza: grandezze di STATO MAI apparse")
+    print("=" * 104)
+    mai = S.registro_mai_apparse(net)
+    apparse = len(S.REGISTRO_STATO) - len(mai)
+    print("  grandezze di STATO: %d   apparse almeno una volta: %d   ### MAI apparse: %d"
+          % (len(S.REGISTRO_STATO), apparse, len(mai)))
+    if mai:
+        print("  ### %s" % ", ".join(mai))
+        print("  ### F FALLISCE: o non esistono in questa configurazione -- e vanno dichiarate")
+        print("      DERIVATE col loro motivo misurato -- oppure qualcosa non le crea mai, e")
+        print("      allora IL REGISTRO DICE IL FALSO. In entrambi i casi restano FUORI dal")
+        print("      controllo in silenzio, ed e' il varco che il punto 2 chiude.")
+    else:
+        print("  ### F PASSA: tutte e %d si sono viste piene, quindi la tolleranza dell assenza"
+              % len(S.REGISTRO_STATO))
+        print("      NON lascia nessuna grandezza fuori dal controllo.")
+    return (not mai), {"stato": len(S.REGISTRO_STATO), "apparse": apparse, "mai_apparse": mai}
 
 
 def braccio_C(passi_base):
@@ -286,7 +320,9 @@ def principale():
 
     esiti = {}
     esiti["B"] = braccio_B(passi, PRIMA)
-    esiti["E"] = braccio_E(passi)
+    _ok_E, _dati_E, _S_E, _net_E = braccio_E(passi)
+    esiti["E"] = (_ok_E, _dati_E)
+    esiti["F"] = braccio_F(_net_E, _S_E)
     esiti["C"] = braccio_C(30)
 
     # --- A e D dal referto committato della prova a guasto
@@ -320,8 +356,9 @@ def principale():
     print("=" * 104)
     print("IL VERDETTO")
     print("=" * 104)
-    tutti = {"A": A_ok, "D": D_ok, "B": esiti["B"][0], "C": esiti["C"][0], "E": esiti["E"][0]}
-    for k in ("A", "B", "C", "D", "E"):
+    tutti = {"A": A_ok, "D": D_ok, "B": esiti["B"][0], "C": esiti["C"][0],
+             "E": esiti["E"][0], "F": esiti["F"][0]}
+    for k in ("A", "B", "C", "D", "E", "F"):
         print("  braccio %s ... %s" % (k, "PASSA" if tutti[k] else "### FALLISCE"))
     passa = all(tutti.values())
     print("")
@@ -331,7 +368,8 @@ def principale():
     io.open(OUT, "w", encoding="utf-8", newline=chr(10)).write(json.dumps(
         {"blob_oggi": blob(SIM), "blob_prima": blob(PRIMA), "introduce": str(introduce),
          "passi": passi, "bracci": tutti,
-         "B": esiti["B"][1], "C": esiti["C"][1], "E": esiti["E"][1], "A_e_D": a_dati,
+         "B": esiti["B"][1], "C": esiti["C"][1], "E": esiti["E"][1], "F": esiti["F"][1],
+         "A_e_D": a_dati,
          "passa": passa}, indent=1, ensure_ascii=False, default=float))
     print("scritto: " + OUT)
     return 0 if passa else 1

@@ -1663,7 +1663,7 @@ lei stessa** un evento dopo)*, ### **e per entrambe la dichiarazione ESISTE GIA'
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa fa |
 |---|---|---|---|
-| `csv/_seal_fork/_sig_controllo_unico.py` | `aa7d78ae` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
+| `csv/_seal_fork/_sig_controllo_unico.py` | `bb7e975b` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
 
 **I cinque criteri sono di Luca e sono fissati PRIMA del codice** *(piano `f684353f`, par.5)*.
 
@@ -1700,3 +1700,11 @@ bracci.**
 > **condizione fusa** *(`is None` **or** lunghezza)* dove il caso `None` e' legittimo e
 > derivato (`A1`) e il caso **lunghezza** fa sparire il **freno anisotropo** in silenzio per
 > tutta la rete. ### **Va nel commit delle guardie, separato.**
+
+> ### 📌 **BRACCIO `F` aggiunto il 2026-09-29** *(punto 2 di Luca)*: **il RENDICONTO della
+> tolleranza.** Elenca le grandezze di **STATO** che **non si sono MAI viste piene**, leggendole
+> ### **dalla rete del braccio `E`** — cosi' il rendiconto parla del **run appena fatto** e non di
+> un altro. ### **Se anche UNA sola non e' mai apparsa, `F` FALLISCE**: o non esiste in questa
+> configurazione *(e va dichiarata DERIVATA col suo motivo misurato)*, o qualcosa non la crea mai
+> *(e allora il registro dice il falso)*. ### **In entrambi i casi resterebbe fuori dal controllo in
+> silenzio, ed e' il varco che il punto 2 chiude.**

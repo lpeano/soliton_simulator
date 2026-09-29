@@ -1098,6 +1098,24 @@ def _ferma_registro(eccezione, come, nome, classe, quanta, bersaglio, dove):
         "  nel registro CON IL SUO MOTIVO MISURATO -- non tolta dal controllo in silenzio."]))
 
 
+def registro_mai_apparse(net):
+    """**Le grandezze di STATO del registro che NON si sono MAI viste piene.**
+
+    ### Perche' esiste: CHIUDE IL VARCO della tolleranza *(punto 2 di Luca, 2026-09-29)*
+    L'assenza e' tollerata **per grandezza, fino alla sua prima apparizione** -- ed e' necessario,
+    perche' `_nb_ret` e' il **Bloch RITARDATO** e al primo passo **non esiste un passato**.
+    ### **Ma una tolleranza senza un rendiconto e' un VARCO:** una grandezza che non appare MAI
+    resterebbe **fuori dal controllo per sempre, in silenzio**.
+
+    ### -> **Quindi a fine run, e IN OGNI SIGILLO, si ELENCA cio' che non e' mai apparso.**
+    Se la lista non e' vuota, ### **non e' una curiosita': e' un ESITO** -- o la grandezza non
+    esiste in questa configurazione *(e va dichiarata **DERIVATA** col suo motivo misurato)*, o
+    qualcosa non la crea mai *(e allora il registro dice il falso)*.
+    """
+    apparse = getattr(net, "_g_registro_apparse", None) or set()
+    return sorted(nome for nome, _classe in REGISTRO_STATO if nome not in apparse)
+
+
 def _ferma_se_registro_incoerente(net, dove):
     """**UN SOLO controllo, nello schedulatore, invece di quaranta `raise` sparsi.**
 
@@ -9435,6 +9453,16 @@ def esegui_headless(a):
             if _grabbed >= n:
                 break
     print(f"[headless] scritto {a.out} ({_grabbed} frame registrati)")
+    # [RIPIEGHI-ZERO, punto 2 di Luca] IL RENDICONTO DELLA TOLLERANZA, a fine run: una grandezza
+    #   di STATO mai apparsa resterebbe fuori dal controllo PER SEMPRE, in silenzio.
+    _mai = registro_mai_apparse(net)
+    print("[registro] grandezze di STATO MAI apparse: %s"
+          % (", ".join(_mai) if _mai else "NESSUNA (tutte e %d si sono viste piene)"
+             % len(REGISTRO_STATO)))
+    if _mai:
+        print("[registro] *** NON E' UNA CURIOSITA', E' UN ESITO: o non esistono in questa "
+              "configurazione, e vanno dichiarate DERIVATE col loro motivo misurato, oppure "
+              "qualcosa non le crea mai -- e allora il registro dice il falso. ***")
 
 
 def _cli():
