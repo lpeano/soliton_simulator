@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_sig_controllo_unico.py", line 38, in <module>
+    import _presidio  # noqa: E402
+    ^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named '_presidio'
+USCITA: 1

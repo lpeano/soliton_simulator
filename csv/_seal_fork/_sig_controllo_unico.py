@@ -33,7 +33,7 @@ import subprocess
 import sys
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
-RADICE = os.path.abspath(os.path.join(_QUI, ".."))
+RADICE = os.path.abspath(os.path.join(_QUI, "..", ".."))   # il sigillo sta in csv/_seal_fork/: DUE livelli
 sys.path.insert(0, os.path.join(RADICE, "csv"))
 import _presidio  # noqa: E402
 

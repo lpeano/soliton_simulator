@@ -7265,3 +7265,53 @@ riscritte**, e **2** sono **auto-rinfreschi gia' dichiarati e contati** nel codi
 
 **Restano da girare:** il braccio `A` **rifatto** *(archi compresi)*, il **`B`** *(byte-identico fino
 al 72)*, il **`C`** *(col controllo spento si torna a zero protette)* e il **caso che deve fallire**.
+
+---
+
+# ✅ **SIGILLO, braccio `A` rifatto: 30 su 30 di STATO protette, archi compresi** *(2026-09-29)*
+
+Stampa in `csv/_seal_fork/_sig_controllo_unico/_braccio_A.txt`, strumento **`dd327a2a`**.
+### **Nessun codice di fisica:** simulatore `fc9ef41c`.
+
+| | |
+|---|---|
+| ### **`A` PASSA** | ### **30 su 30** grandezze di **STATO**: **PROTETTO su CORTA** *(`CacheCorta`)* **e su LUNGA** *(`CacheLunga`)* |
+| ### **`D` PASSA** | fra le 30 ci sono le **7 PER ARCO** — `_rep` `d` `d0` `peq` `tw` `twp` `vd`: ### **il controllo positivo sugli archi c'e'** |
+| **ROTTO RUMOROSO** | ### **ZERO** *(era 8)* |
+| **INERTI su entrambi** | **9**: le **8 derivate per nodo** piu' `_dt_e_ultimo`. ### **Sono ESATTAMENTE quelle che il controllo non guarda per costruzione** |
+| ### **il caso che deve fallire** | ### **INVARIATO**: `psi` corta sul pre-cura da' ancora **17** grandezze, **12801** nodi, **471564** archi, scost. **`1.256e+01`** |
+
+### ➜ **E il confronto col prima e' netto:** `RIPIEGO SILENZIOSO` **da 10 a 1**, `EFFETTO OLTRE
+L'ULTIMO NODO` **da 10 a 1**, `A POSTO` **da 0 a 30**.
+
+## ⛔ **L'UNO che resta: `_sin2_vir`, e ora so ESATTAMENTE che cos'e'**
+
+E' una **DERIVATA per arco**. Guastandola, il **freno anisotropo** sparisce e ### **tutta la rete
+cambia**. La condizione, in `step`:
+
+```
+if ZETA_VIR and self._sin2_vir is not None and len(self._sin2_vir) == len(beta):
+```
+
+### **E' una CONDIZIONE FUSA — e il codice STESSO dichiara che le due cause «sono cose diverse e vanno distinte, non sommate».**
+Le distingue **nel contatore** *(`shape[0] = -1`)*, ### ⚠ **ma NON nel comportamento: entrambe
+portano a «nessun freno».**
+
+| | |
+|---|---|
+| il caso **`None`** | ### **LEGITTIMO E DERIVATO**: `memoria_hebbiana_moto` gira **dopo** `step`, quindi al primo giro non esiste; e il commento dice che inizializzarlo sarebbe ### **un NUMERO SCELTO** (`A1`) — *«al primo giro NON C'E' FRENO ANISOTROPO, ed e' corretto che sia cosi'»* |
+| il caso **lunghezza** | ### **fa sparire una LEGGE in silenzio, per tutta la rete** |
+
+### ➜ **E' la stessa forma di `lambda_nodi`, e la cura e' la stessa: SEPARARE le due condizioni** —
+`None` resta **dichiarato e contato**, lunghezza sbagliata ### **SOLLEVA**.
+**Va nel commit delle guardie di sostituzione**, che il mandato tiene **separato**. ### **Non lo
+aggiusto qui.**
+
+## 🔧 E una riga sbagliata nel sigillo, presa prima di ogni misura
+
+`ModuleNotFoundError: No module named '_presidio'`: il sigillo sta in `csv/_seal_fork/`, quindi la
+radice del repo e' ### **DUE livelli sopra, non uno**. Cercavo i moduli in `csv/csv`.
+### **L'ho verificata su `_sig_nascita_psi.py:41` invece di indovinarla.** Blob da `154a0379` a
+**`aa7d78ae`**.
+**Nessun commit del fallimento a se':** ### **lo strumento non e' nemmeno PARTITO** — zero misure,
+zero referto, tre righe di traceback. **Non c'e' uno stato da conservare: c'e' una riga sbagliata.**
