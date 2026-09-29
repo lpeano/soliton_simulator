@@ -7440,3 +7440,44 @@ ramo morto non inganni il prossimo lettore.
 cosi' un mio errore **si localizza** invece di nascondersi in un diff da 57 punti.
 **Se preferisci che li faccia tutti in un colpo, dimmelo** — ma allora il sigillo non potra' dirmi
 **quale** dei 57 ha sbagliato.
+
+---
+
+# ✂ **`POTATURA-GUARDIE` registrata, e il sigillo ora confronta i CONTATORI** *(2026-09-29)*
+
+`doc/POTATURA_guardie.md` *(`9f872714`, **generato** da `csv/_test_fork/_gen_potatura.py`,
+`2b9b584d`)*, la voce **`POTATURA-GUARDIE`** nell'indice, e la **regola di confine** nella scheda
+`registro-grandezze`. Sigillo a **`13fad02b`**. ### **Nessun codice di fisica:** `64e9f62e`.
+
+## ⭐ **La regola di confine, registrata**
+
+> # **IL CONTROLLO UNICO POSSIEDE LE LUNGHEZZE.**
+> # **I SITI POSSIEDONO SOLO «ESISTE ANCORA?».**
+
+| forma | che cosa se ne fa |
+|---|---|
+| **condizione FUSA** — ### **12 siti** | si **tiene** l'**esistenza** *(inizializzazione vera, resta)*, ### **la LUNGHEZZA SOLLEVA** |
+| **sola LUNGHEZZA** — ### **45 siti** | ### **si TOGLIE**: il controllo la garantisce, e una guardia che non guarda niente e' `A9` |
+
+**Misurati: 57 siti in 13 funzioni** — `step` 23, `_passo_spinoriale` 10, `memoria_hebbiana_moto` 8,
+`ritmo` 6, e nove funzioni con 1-2. ### **La lista e' GENERATA, non scritta a mano**, e i numeri di
+riga ### **si rigenerano invece di essere aggiornati** *(par.2: shiftano)*.
+
+### 🛑 **E la potatura e' RIMANDATA, per la tua ragione:** il **riordino della mitosi** tocchera'
+molte di quelle righe, e potarle adesso vorrebbe dire farlo **due volte**.
+
+## ✅ **E il sigillo confronta ora ANCHE I CONTATORI**
+
+Hai ragione che serve: ### **un contatore che cambia di UNO e' un difetto, e le 23 grandezze NON lo
+vedrebbero** — lo stato puo' restare identico mentre il **percorso** e' cambiato. Il braccio `B`
+prende **ogni attributo intero** *(o tupla di interi, come le `_..._shape`)* che comincia con `_`, e
+### **stampa il primo contatore diverso col valore di prima e di oggi**.
+
+**E l'ancora si da' dal CLI:** `--ancora=registro_mai_apparse` da' ### **esattamente `fc9ef41c`**,
+e l'ho **verificato** invece di assumerlo. *(Passa sempre da `sim_prima_del_flag`, quindi `H-P8`
+resta soddisfatto.)*
+
+### ⚠ **E il punto 1 e' proprio quello che non avevo misurato:** la byte-identita' dei due item
+nominati l'avevo provata su **12 passi della scena PICCOLA**, dove ### **non c'e' nessuna nascita**.
+### **E' dopo una nascita che `_sin2_vir` potrebbe essere corta** — quindi il giro che conta e' la
+scena **GRANDE fino al 72, con le nascite**. **Lo dici tu, e non lo avevo fatto.**

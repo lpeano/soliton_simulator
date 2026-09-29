@@ -9,7 +9,7 @@ ha girati `csv/_test_fork/_guasto_ripieghi.py`; qui stanno **`B`**, **`C`** ed *
 |---|---|---|
 | **`A`** *(altrove)* | la prova a guasto da' **PROTETTO su CORTA e LUNGA** per **tutte** le grandezze di **STATO** | un solo `INERTE`, `ROTTO RUMOROSO` o `RIPIEGO SILENZIOSO` su una voce di STATO |
 | **`D`** *(altrove)* | **controllo positivo sugli ARCHI**: anche le 7 per arco sono protette | un `INERTE` o un ripiego su una per arco |
-| ### **`B`** | ### **byte-identico fino al passo 72** contro il blob **PRE-CONTROLLO**, sul **dominio comune** | **una** grandezza diversa in **un** passo |
+| ### **`B`** | ### **byte-identico fino al passo 72** contro il blob di prima, sul **dominio comune**, ### **grandezze E CONTATORI** | **una** grandezza **oppure UN CONTATORE** diverso in **un** passo |
 | ### **`C`** | ### **IL CASO CHE DEVE FALLIRE** (`P1-sexies`): col controllo **SPENTO**, i guasti tornano a **NON** essere protetti | se restano protetti anche a controllo spento, ### **il sigillo non sta misurando il controllo** |
 | ### **`E`** | un run **SANO CON NASCITE** arriva al **72** ### **senza un solo `CacheCorta`/`CacheLunga`** | un solo errore: vuol dire che ho messo una **DERIVATA** fra le STATO |
 | ### **`F`** | ### **il RENDICONTO DELLA TOLLERANZA** *(punto 2 di Luca)*: **quali** grandezze di STATO non si sono **MAI** viste piene | ### **anche UNA SOLA**: la tolleranza dell'assenza diventerebbe un **varco**, e quella grandezza resterebbe fuori dal controllo **per sempre, in silenzio** |
@@ -112,6 +112,43 @@ def _foto(net):
     return q
 
 
+def _contatori(net):
+    """**I CONTATORI, non le grandezze.** *(Decisione di Luca, 2026-09-29.)*
+
+    ### Perche' servono, ed e' un controllo PIU' FINE della byte-identita'
+    Le cure di questo pezzo toccano **rami che si CONTANO** *(`A8`)*: `_g_zeta_vir_a_salti`,
+    `_ritmo_sicurezza`, `_ritmo_guard4pi_ko`... ### **Un contatore che cambia di UNO e' un difetto
+    -- e le 23 grandezze del sigillo NON LO VEDREBBERO**, perche' il valore dello stato puo'
+    restare identico mentre il *percorso* e' cambiato.
+
+    Si prende **ogni attributo che e' un intero** *(o una tupla di interi, come le `_..._shape`)*
+    **e comincia con `_`**: i contatori di questo repo hanno tutti quella forma.
+    """
+    q = {}
+    for k, v in sorted(vars(net).items()):
+        if not k.startswith("_"):
+            continue
+        if isinstance(v, bool):
+            continue
+        if isinstance(v, int):
+            q[k] = int(v)
+        elif isinstance(v, tuple) and v and all(isinstance(x, int) for x in v):
+            q[k] = tuple(int(x) for x in v)
+        elif isinstance(v, set) and all(isinstance(x, str) for x in v):
+            q[k] = tuple(sorted(v))
+    return q
+
+
+def _diverse_contatori(a, b):
+    """I contatori diversi, col valore di **prima** e di **oggi**."""
+    fuori = []
+    for k in sorted(set(a) | set(b)):
+        x, y = a.get(k, "(assente)"), b.get(k, "(assente)")
+        if x != y:
+            fuori.append((k, x, y))
+    return fuori
+
+
 def _diverse(a, b):
     """Le grandezze diverse **sul DOMINIO COMUNE**, con lo scostamento massimo."""
     fuori = []
@@ -166,16 +203,23 @@ def braccio_B(passi, prima):
             return False, {"passo": k, "eccezione": type(e).__name__,
                            "messaggio": str(e)[:400]}
         d = _diverse(_foto(netA), _foto(netB))
-        if d:
+        c = _diverse_contatori(_contatori(netA), _contatori(netB))
+        if d or c:
             quante += 1
             if primo is None:
                 primo = {"passo": k, "grandezze": [x[0] for x in d],
-                         "scostamento_max": max(x[2] for x in d)}
-                print("  ### passo %d: PRIMA DIFFERENZA -- %d grandezze: %s   scost. max %.3e"
-                      % (k, len(d), ", ".join(x[0] for x in d[:6]), primo["scostamento_max"]))
+                         "scostamento_max": max([x[2] for x in d] or [0.0]),
+                         "contatori": [{"nome": x[0], "prima": str(x[1]), "oggi": str(x[2])}
+                                       for x in c]}
+                print("  ### passo %d: PRIMA DIFFERENZA -- %d grandezze (%s) e ### %d CONTATORI"
+                      % (k, len(d), ", ".join(x[0] for x in d[:6]) or "nessuna", len(c)))
+                for x in c[:8]:
+                    print("      contatore `%s`: prima %s -> oggi %s" % x)
     if primo is None:
-        print("  ### B PASSA: %d passi, ZERO differenze in ogni passo." % passi)
-        return True, {"passi": passi, "passi_diversi": 0}
+        print("  ### B PASSA: %d passi, ZERO differenze in ogni passo -- grandezze E CONTATORI."
+              % passi)
+        return True, {"passi": passi, "passi_diversi": 0,
+                      "contatori_confrontati": len(_contatori(netB))}
     print("  ### B FALLISCE: %d passi su %d con differenze." % (quante, passi))
     return False, {"passi": passi, "passi_diversi": quante, "primo": primo}
 

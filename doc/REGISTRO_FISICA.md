@@ -4742,7 +4742,30 @@ ripiego** che l'eccezione esiste per rendere impossibile.
 > E I CONTATORI SONO IDENTICI** *(`salti` 1 e 4, cioe' solo la causa `None`)*.
 >
 > ### ⚠ **E la guardia di `P_eq` e' TOLTA** *(`len(d0) >= len(i)`, sempre vera per costruzione ora:
-> una guardia che non guarda niente, `A9`)*. ### **`self.n > 0` RESTA**, e non e' la stessa cosa: su
+> una guardia che non guarda niente, `A9`)*.
+
+> ---
+>
+> ### ⭐ **LA REGOLA DI CONFINE, e vale anche per la potatura futura** *(Luca, 2026-09-29)*
+>
+> > # **IL CONTROLLO UNICO POSSIEDE LE LUNGHEZZE.**
+> > # **I SITI POSSIEDONO SOLO «ESISTE ANCORA?».**
+>
+> | forma del sito | che cosa se ne fa |
+> |---|---|
+> | **condizione FUSA** *(`is None` / `not hasattr` **e** un test di lunghezza)* | si **tiene** il test di **esistenza** — ### **e' un'inizializzazione VERA, e resta** — e ### **la LUNGHEZZA SOLLEVA** |
+> | **sola LUNGHEZZA** | ### **si TOGLIE**: il controllo la garantisce, e ### **una guardia che non guarda niente e' `A9`** |
+>
+> ### ⚠ **E si confrontano ANCHE I CONTATORI, non solo le grandezze.** Questi rami **si contano**
+> *(`A8`)*: `_ritmo_sicurezza`, `_ritmo_guard4pi_ko`, `_ritmo_snap_identico`, `_g_zeta_vir_*`,
+> `_cs_in_fallback`… ### **Un contatore che cambia di UNO e' un difetto, e le 23 grandezze del
+> sigillo NON lo vedrebbero**: lo stato puo' restare identico mentre il **percorso** e' cambiato.
+>
+> ### 🛑 **E la POTATURA dei 57 rami morti e' RIMANDATA** *(decisione di Luca)*: **dopo lo
+> schedulatore**, perche' ### **il riordino della mitosi tocchera' molte di quelle righe** e potarle
+> adesso vorrebbe dire farlo **due volte**. La lista e' in **`doc/POTATURA_guardie.md`**, **generata**
+> — **57 siti in 13 funzioni: 12 condizioni FUSE e 45 di sola lunghezza** — e la voce e'
+> **`POTATURA-GUARDIE`**. ### **`self.n > 0` RESTA**, e non e' la stessa cosa: su
 > una rete vuota la mediana di un array vuoto da' `nan`, e `np.seterr(invalid='raise')` solleva.
 > ### **E la FETTA non e' toccata** — e' `P-EQ-MEDIANA-ARCHI`, **in coda**.
 

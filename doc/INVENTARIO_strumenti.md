@@ -1663,7 +1663,7 @@ lei stessa** un evento dopo)*, ### **e per entrambe la dichiarazione ESISTE GIA'
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa fa |
 |---|---|---|---|
-| `csv/_seal_fork/_sig_controllo_unico.py` | `70aa1f62` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
+| `csv/_seal_fork/_sig_controllo_unico.py` | `13fad02b` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
 
 **I cinque criteri sono di Luca e sono fissati PRIMA del codice** *(piano `f684353f`, par.5)*.
 
@@ -1708,3 +1708,13 @@ bracci.**
 > configurazione *(e va dichiarata DERIVATA col suo motivo misurato)*, o qualcosa non la crea mai
 > *(e allora il registro dice il falso)*. ### **In entrambi i casi resterebbe fuori dal controllo in
 > silenzio, ed e' il varco che il punto 2 chiude.**
+
+| strumento | blob (byte) | comando | cosa fa |
+|---|---|---|---|
+| `csv/_test_fork/_gen_potatura.py` | `2b9b584d` | `python csv/_test_fork/_gen_potatura.py` | **genera** `doc/POTATURA_guardie.md` dalla tabella `doc/RIPIEGHI_classi.md`: i **57** rami morti, **12 fusi** e **45 di sola lunghezza**, in **13** funzioni. ### **La lista non e' scritta a mano e i numeri di riga si RIGENERANO** |
+
+> ### 📌 **Il braccio `B` confronta ora ANCHE I CONTATORI** *(decisione di Luca, 2026-09-29)*: ogni
+> attributo **intero** *(o tupla di interi, come le `_..._shape`)* che comincia con `_`.
+> ### **Un contatore che cambia di UNO e' un difetto, e le 23 grandezze NON lo vedrebbero** — lo
+> stato puo' restare identico mentre il **percorso** e' cambiato. **E l'ancora si da' dal CLI**
+> *(`--ancora=registro_mai_apparse` da' esattamente il blob **`fc9ef41c`**, verificato)*.
