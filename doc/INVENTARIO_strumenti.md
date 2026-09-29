@@ -1517,7 +1517,7 @@ deve dare **RIPIEGO SILENZIOSO su TUTTA LA RETE** -- e' il flash di `PSI-FLASH`.
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
 |---|---|---|---|---|
-| `csv/_test_fork/_guasto_ripieghi.py` | `3df06c44` | `python csv/_test_fork/_guasto_ripieghi.py --passi=30` | i due guasti su ogni grandezza per nodo | ### **A POSTO: 0 su 31.** RIPIEGO SILENZIOSO **10** · ROTTO RUMOROSO **8** · INERTE su entrambi **12** · ### **con effetto oltre l'ultimo nodo: 10** |
+| `csv/_test_fork/_guasto_ripieghi.py` | `dd327a2a` | `python csv/_test_fork/_guasto_ripieghi.py --passi=30` | i due guasti su ogni grandezza **per nodo E per arco** | ### **A POSTO: 0 su 31.** RIPIEGO SILENZIOSO **10** · ROTTO RUMOROSO **8** · INERTE su entrambi **12** · ### **con effetto oltre l'ultimo nodo: 10** |
 | `csv/_test_fork/_referto_guasto.py` | `36a44cc8` | `python csv/_test_fork/_referto_guasto.py` | **genera** `doc/RIPIEGHI_guasto.md` dal `json`: nessun numero ricopiato a mano (`L-NUMERI`) | 196 righe |
 
 **Referti:** `csv/_seal_fork/_guasto_ripieghi/_guasto_ripieghi.json` *(`9d935528`)* · la stampa
@@ -1644,3 +1644,17 @@ lei stessa** un evento dopo)*, ### **e per entrambe la dichiarazione ESISTE GIA'
 > «una legge le legge CORTE?», e il dato per rispondere e' nella misura stessa** *(ogni evento
 > porta la lunghezza vista)*. ### **Percio' la misura VALE e non si rigira: il referto la legge
 > bene.** **La stampa si corregge a parte, ed e' in coda:** il blob che ha girato resta `97cb0ea3`.
+
+> ### ⛔ **Il primo giro del SIGILLO ha smascherato DUE difetti dello strumento, non della cura**
+> *(2026-09-29, blob `3df06c44` → `dd327a2a`)*
+>
+> | | |
+> |---|---|
+> | ### **① `CacheLunga` non era fra i DICHIARATI** | e' **nata dopo** lo strumento, quindi il lato **LUNGA** risultava ### **«ROTTO RUMOROSO»** mentre era ### **PROTETTO**: **23 grandezze su 23 etichettate male**, e ### **il verdetto del criterio `A` sarebbe stato FALSO** |
+> | ### **② le grandezze PER ARCO non venivano guastate affatto** | l'elenco cercava **solo** `len == n`: `d` `d0` `peq` `tw` `twp` `vd` `_rep` ### **non comparivano nella tabella**, e il **criterio `D`** *(controllo positivo sugli archi)* ### **non era coperto da nessuna misura** |
+>
+> **`dd327a2a`** aggiunge `CacheLunga` ai dichiarati, estende l'elenco a `len == m`, ed **esclude
+> `i` e `j`** oltre a `phi`: ### **sono i METRI**, e accorciarli non accorcia una cache — **cambia
+> il bersaglio**.
+> ### 📌 **E il primo giro NON e' buttato: il numero che conta lo ha dato comunque —
+> ### RIPIEGO SILENZIOSO da 10 a ZERO.**

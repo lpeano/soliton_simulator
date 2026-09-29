@@ -7226,3 +7226,42 @@ sospetto CADE e lo dico.**
 
 ⚠ **La riga del sospetto:** il mandato cita `:5872`; su `fc9ef41c` `twist_dip` sta a ### **`:6061`**.
 **Le righe shiftano fra i blob, e ho cercato per nome** *(par.2)*.
+
+---
+
+# 🔬 **SIGILLO, primo giro del braccio `A`: RIPIEGO SILENZIOSO da 10 a ZERO** *(2026-09-29)*
+
+Stampa in `csv/_seal_fork/_sig_controllo_unico/_guasto_con_controllo.txt`.
+### **Il numero che conta c'e' gia'**, ma ### **il VERDETTO non si consegna: due difetti dello
+STRUMENTO** *(non della cura)* lo falsano, e li ho corretti in questo commit.
+
+| | prima della cura *(`f173050`)* | ora |
+|---|---|---|
+| ### **RIPIEGO SILENZIOSO** | **10** | ### **ZERO** |
+| ### **effetto oltre l'ultimo nodo** | **10** | ### **ZERO** |
+| `psi` CORTA | RIPIEGO SILENZIOSO *(12801 nodi)* | ### **PROTETTO `CacheCorta`** |
+| le 23 di STATO per nodo | — | ### **PROTETTO su CORTA**, e su LUNGA **`CacheLunga`** |
+
+## ⛔ **I due difetti dello strumento, e uno e' solo un'ETICHETTA**
+
+| | |
+|---|---|
+| ### **① `CacheLunga` non era fra i DICHIARATI** | e' ### **nata DOPO lo strumento**, quindi il lato LUNGA risultava ### **«ROTTO RUMOROSO»** mentre era ### **PROTETTO**. **23 su 23 etichettate male**, e ### **il verdetto del criterio `A` sarebbe stato FALSO** |
+| ### **② le grandezze PER ARCO non venivano guastate AFFATTO** | l'elenco cercava **solo** `len == n`: `d` `d0` `peq` `tw` `twp` `vd` `_rep` ### **non comparivano**, e il **criterio `D`** — il controllo positivo sugli archi — ### **non era coperto da nessuna misura** |
+
+**Corretti in `dd327a2a`**, che aggiunge `CacheLunga` ai dichiarati, estende l'elenco a `len == m` ed
+**esclude `i` e `j`** oltre a `phi`: ### **sono i METRI, e accorciarli non accorcia una cache —
+cambia il BERSAGLIO.**
+
+## E gli **8 INERTI** su entrambi i lati
+
+`_chi_core_nodi` `_chi_core_raggio` `_chi_core_rho0` `_chi_geom_nodi` `_fatt_cs_ultimo`
+`_g_rampa_prec` `_r_corrente` `_xi_rumore`: ### **sono ESATTAMENTE le 8 DERIVATE per nodo del
+registro**, che il controllo **non guarda per costruzione**.
+### ➜ **E per loro «inerte» NON basta, ma la prova c'e' ALTROVE:** la misura dell'ordine
+*(`bd9262f`)* ha mostrato che **4** nessuna legge le legge, **2** la legge le trova **gia'
+riscritte**, e **2** sono **auto-rinfreschi gia' dichiarati e contati** nel codice.
+### **Quel pezzo del criterio del guardiano e' soddisfatto da una MISURA, non da un'assunzione.**
+
+**Restano da girare:** il braccio `A` **rifatto** *(archi compresi)*, il **`B`** *(byte-identico fino
+al 72)*, il **`C`** *(col controllo spento si torna a zero protette)* e il **caso che deve fallire**.

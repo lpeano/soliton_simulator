@@ -75,9 +75,13 @@ ANCORA_CURA = "_eredita_psi_figli"
 GRANDEZZE = ("d", "d0", "phi", "phi0", "phi_s", "phivel", "psi", "psi_spin", "eta", "tw", "twp",
              "vd", "peq", "mem_mot", "perc_chi", "perc_geom", "perc_tw", "omega_s", "_nb",
              "_nb_prec", "_psi_spinor", "_psi_prec", "_spinor_lift")
-# ⚠ `phi` DEFINISCE `n` (property `:2063`): accorciarla CAMBIA `n`, non accorcia una cache.
-ESCLUSE = ("phi",)
-DICHIARATI_NOMI = ("CacheCorta", "SchermaturaSpenta", "LimiteNodiSuperato",
+# I METRI si escludono e si DICHIARANO: `phi` definisce `n` (property) e `i`/`j` definiscono `m`.
+#   Accorciarli non accorcia una cache: CAMBIA IL BERSAGLIO, e il confronto perde il riferimento.
+ESCLUSE = ("phi", "i", "j")
+# CacheLunga E' NATA DOPO QUESTO STRUMENTO (`RIPIEGHI-ZERO`, 2026-09-29): senza aggiungerla qui
+#   il lato LUNGA risultava ROTTO RUMOROSO mentre era PROTETTO, e il verdetto del criterio `A`
+#   sarebbe stato FALSO. MISURATO: 23 grandezze su 23 etichettate male.
+DICHIARATI_NOMI = ("CacheCorta", "CacheLunga", "SchermaturaSpenta", "LimiteNodiSuperato",
                    "ComposizioneNonValida")
 
 
@@ -277,7 +281,14 @@ def carica(sim, passi):
 
 
 def per_nodo(net):
-    """**L'elenco, trovato in automatico:** `len == n` allo stato BASE."""
+    """**L'elenco, trovato in automatico:** `len == n` **oppure `len == m`**, allo stato BASE.
+
+    ### Perche' anche gli ARCHI, ed e' il criterio `D` del sigillo
+    La prima stesura guardava **solo** `len == n`, quindi ### **le grandezze per ARCO non venivano
+    guastate affatto** -- e il <<controllo positivo sugli archi>> del piano ### **non era coperto da
+    nessuna misura.** *(Lo ha mostrato il primo giro del sigillo: `d` `d0` `peq` `tw` `twp` `vd`
+    `_rep` non comparivano nella tabella.)*
+    """
     n, m = int(net.n), int(len(net.i))
     q, sospette = [], []
     for k, v in sorted(vars(net).items()):
@@ -289,7 +300,7 @@ def per_nodo(net):
             L = len(v)
         except Exception:
             continue
-        if L != n:
+        if L not in (n, m):
             continue
         q.append(k)
         # ⚠ una grandezza PER ARCO potrebbe avere `len == n` per caso: si segnala.
