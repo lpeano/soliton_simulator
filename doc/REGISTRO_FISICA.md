@@ -4746,7 +4746,37 @@ ripiego** che l'eccezione esiste per rendere impossibile.
 
 ---
 
-<!-- SCHEDA nome=registro-grandezze funzioni=_ferma_se_registro_incoerente,_ferma_registro,registro_mai_apparse,_forma_di,_scrivi_forma flag=REGISTRO_STATO,REGISTRO_DERIVATE,REGISTRO_METRI,CONTROLLO_REGISTRO,CacheLunga,FormaSbagliata -->
+<!-- SCHEDA nome=registro-grandezze funzioni=_ferma_se_registro_incoerente,_ferma_registro,registro_mai_apparse,_forma_di,_scrivi_forma flag=REGISTRO_STATO,REGISTRO_DERIVATE,REGISTRO_METRI,CONTROLLO_REGISTRO,CacheLunga,FormaSbagliata,TipoSbagliato -->
+
+> ### 📌 **GENERALIZZAZIONE 3 DEL 2026-09-29 — IL TIPO** *(decisione di Luca)*
+>
+> > ### **Un COMPLESSO diventato REALE perde META' DELL'INFORMAZIONE senza cambiare forma.**
+>
+> E le **sei** grandezze `complex128` del registro — `psi` `_psi_prec` `_psi_spinor`
+> `_psi_spin_prec` `_spinor_lift` `psi_spin` — sono ### **esattamente quelle su cui e' nato il
+> flash di `PSI-FLASH`**: la **fase** vive nella parte immaginaria, e un `np.real` di troppo la
+> butterebbe via ### **senza che ne' la LUNGHEZZA ne' la FORMA se ne accorgano.**
+>
+> | | |
+> |---|---|
+> | il terzo campo | **21** `float64` · **6** `complex128` · **3** `int64` · **1** esente |
+> | ### **`None` = ESENTE, e c'e' UNA sola** | `conc_nodi`: e' una **LISTA**, e il suo
+>   `float64` misurato e' un ### **ARTEFATTO di `np.asarray` su liste vuote** |
+> | **quando si guarda** | ### **solo se la FORMA e' giusta**: se la forma e' sbagliata il
+>   difetto e' quello, e ### **due errori insieme non aiutano chi legge** |
+> | **`TipoSbagliato`** | il **quarto** nome per il **quarto** difetto distinto — corta,
+>   lunga, forma, tipo — e ### **non una legge in piu': la legge e' UNA** |
+>
+> ### ⚠ **LA RISERVA, DICHIARATA: i tre `int64` dipendono dalla PIATTAFORMA.**
+> `_deg` `perc_chi` `perc_geom` sono `int64` **su questa macchina**, ma la larghezza
+> dell'intero predefinito di numpy **cambia fra piattaforme**. ### **Se l'errore scatta su uno
+> di quei tre, la cosa da aggiornare e' IL REGISTRO, non il codice** — e ### **il messaggio
+> d'errore lo DICE**, invece di lasciarlo capire.
+>
+> ### ✅ **IL CASO CHE DEVE FALLIRE, misurato — SETTE su sette:** `psi`, `_psi_spinor`,
+> `psi_spin` ### **da complesso a reale** *(`float64` invece di `complex128`)*; `_nb` e `pos`
+> a `float32`; `perc_chi` e `_deg` a `float64`. ### **Tutti e sette alzano `TipoSbagliato`, e
+> la FORMA in tutti e sette era GIUSTA** — quindi nessuno di essi veniva visto prima.
 
 > ### 📌 **GENERALIZZAZIONE 1 DEL 2026-09-29 — LA FORMA COMPLETA** *(decisione di Luca)*
 >

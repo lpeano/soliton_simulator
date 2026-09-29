@@ -7708,3 +7708,51 @@ braccio `B` come ### **diversi per costruzione** — con **179** altri contatori
 passo una **derivata** viene guardata **nove volte** invece di due, quindi un errore qui
 avrebbe significato ### **una derivata classificata male nel registro**, non un difetto del
 codice. ### **Non e' successo: 30 su 30 di STATO, zero errori, 10 nati.**
+
+---
+
+# 🔢 **GENERALIZZAZIONE 3: il TIPO** *(2026-09-29)*
+
+Simulatore da **`c8fbc1cc`** a ### **`83bc2934`**; prova a guasto a **`682f1ba4`**.
+
+> ### **Un COMPLESSO diventato REALE perde META' DELL'INFORMAZIONE senza cambiare forma.**
+
+E le **sei** `complex128` del registro — `psi` `_psi_prec` `_psi_spinor` `_psi_spin_prec`
+`_spinor_lift` `psi_spin` — sono ### **esattamente quelle su cui e' nato il flash di `PSI-FLASH`**:
+la **fase** vive nella parte immaginaria, e un `np.real` di troppo la butterebbe via ### **senza che
+ne' la lunghezza ne' la forma se ne accorgano.** **Il tuo argomento morde dove serve.**
+
+| | |
+|---|---|
+| il terzo campo | **21** `float64` · **6** `complex128` · **3** `int64` · **1** esente |
+| ### **`None` = ESENTE, e c'e' UNA sola** | `conc_nodi`: e' una **lista**, e il suo `float64` misurato e' ### **un artefatto di `np.asarray` su liste vuote** |
+| **quando si guarda** | ### **solo se la FORMA e' giusta** — se la forma e' sbagliata il difetto e' quello, e ### **due errori insieme non aiutano chi legge** |
+| **`TipoSbagliato`** | il **quarto** nome per il **quarto** difetto distinto *(corta · lunga · forma · tipo)*, e ### **non una legge in piu': la legge e' UNA** |
+
+## ✅ **Il caso che deve fallire: SETTE su sette**
+
+| grandezza | tipo rotto | esito |
+|---|---|---|
+| `psi` `_psi_spinor` `psi_spin` | ### **da COMPLESSO a REALE** | ### **`TipoSbagliato`** ×3 |
+| `_nb` `pos` | `float32` invece di `float64` | **`TipoSbagliato`** ×2 |
+| `perc_chi` `_deg` | `float64` invece di `int64` | **`TipoSbagliato`** ×2 |
+
+### ➜ **E in tutti e sette la FORMA era GIUSTA: prima nessuno di essi veniva visto.**
+E **10 passi sani** girano con **90 controlli** e zero errori.
+
+### ⚠ **Due sonde mie hanno fallito, e non era il codice**
+`eta` e' **tutto `inf`**, e `astype(int64)` su `inf` solleva sotto `seterr(invalid='raise')`: ### **il
+mio test e' morto prima di arrivare al controllo.** L'ho rifatto su grandezze **castabili**. *(Lo dico
+perche' un caso-che-deve-fallire che muore per conto suo non e' un caso-che-deve-fallire.)*
+
+## ⚠ **La riserva, e resta scritta nel codice**
+
+`_deg` `perc_chi` `perc_geom` sono `int64` **su questa macchina**, ma ### **la larghezza dell'intero
+predefinito di numpy cambia fra piattaforme**. ### **Se l'errore scatta su uno di quei tre, la cosa
+da aggiornare e' IL REGISTRO, non il codice** — e ### **il messaggio d'errore lo DICE**, invece di
+lasciarlo capire a chi lo trova.
+
+**E ho aggiunto `FormaSbagliata` e `TipoSbagliato` ai dichiarati della prova a guasto:** qui ### **non
+cambiano nessun verdetto** *(i guasti iniettati sono corti e lunghi sul primo asse)*, ### **ma
+lasciarle fuori era esattamente il difetto di `CacheLunga`** — 23 grandezze etichettate male — e
+questa volta lo chiudo **prima** che morda.

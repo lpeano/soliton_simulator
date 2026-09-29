@@ -81,8 +81,12 @@ ESCLUSE = ("phi", "i", "j")
 # CacheLunga E' NATA DOPO QUESTO STRUMENTO (`RIPIEGHI-ZERO`, 2026-09-29): senza aggiungerla qui
 #   il lato LUNGA risultava ROTTO RUMOROSO mentre era PROTETTO, e il verdetto del criterio `A`
 #   sarebbe stato FALSO. MISURATO: 23 grandezze su 23 etichettate male.
-DICHIARATI_NOMI = ("CacheCorta", "CacheLunga", "SchermaturaSpenta", "LimiteNodiSuperato",
-                   "ComposizioneNonValida")
+# E `FormaSbagliata`/`TipoSbagliato` sono nate con le generalizzazioni del 2026-09-29: qui NON
+#   cambiano nessun verdetto -- i guasti iniettati sono CORTI e LUNGHI sul PRIMO asse, e nessuno di
+#   essi puo' produrre una forma o un tipo sbagliati -- ma si aggiungono ORA, perche' lasciarle
+#   fuori era esattamente il difetto di `CacheLunga`: 23 grandezze etichettate male.
+DICHIARATI_NOMI = ("CacheCorta", "CacheLunga", "FormaSbagliata", "TipoSbagliato",
+                   "SchermaturaSpenta", "LimiteNodiSuperato", "ComposizioneNonValida")
 
 
 def _t(x):

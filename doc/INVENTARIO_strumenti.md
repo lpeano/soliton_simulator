@@ -1517,7 +1517,7 @@ deve dare **RIPIEGO SILENZIOSO su TUTTA LA RETE** -- e' il flash di `PSI-FLASH`.
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura | esito |
 |---|---|---|---|---|
-| `csv/_test_fork/_guasto_ripieghi.py` | `dd327a2a` | `python csv/_test_fork/_guasto_ripieghi.py --passi=30` | i due guasti su ogni grandezza **per nodo E per arco** | ### **A POSTO: 0 su 31.** RIPIEGO SILENZIOSO **10** · ROTTO RUMOROSO **8** · INERTE su entrambi **12** · ### **con effetto oltre l'ultimo nodo: 10** |
+| `csv/_test_fork/_guasto_ripieghi.py` | `682f1ba4` | `python csv/_test_fork/_guasto_ripieghi.py --passi=30` | i due guasti su ogni grandezza **per nodo E per arco** | ### **A POSTO: 0 su 31.** RIPIEGO SILENZIOSO **10** · ROTTO RUMOROSO **8** · INERTE su entrambi **12** · ### **con effetto oltre l'ultimo nodo: 10** |
 | `csv/_test_fork/_referto_guasto.py` | `36a44cc8` | `python csv/_test_fork/_referto_guasto.py` | **genera** `doc/RIPIEGHI_guasto.md` dal `json`: nessun numero ricopiato a mano (`L-NUMERI`) | 196 righe |
 
 **Referti:** `csv/_seal_fork/_guasto_ripieghi/_guasto_ripieghi.json` *(`9d935528`)* · la stampa

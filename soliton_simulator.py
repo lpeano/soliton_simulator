@@ -1017,6 +1017,28 @@ class FormaSbagliata(RuntimeError):
     """
 
 
+class TipoSbagliato(RuntimeError):
+    """**La forma e' giusta e il TIPO no.**
+
+    *(`RIPIEGHI-ZERO`, generalizzazione 3 del 2026-09-29, decisione di Luca.)*
+
+    > ### **Un COMPLESSO diventato REALE perde META' DELL'INFORMAZIONE senza cambiare forma.**
+
+    E le sei grandezze `complex128` del registro -- `psi` `_psi_prec` `_psi_spinor`
+    `_psi_spin_prec` `_spinor_lift` `psi_spin` -- sono ### **esattamente quelle su cui e' nato il
+    flash di `PSI-FLASH`**: la fase vive nella parte immaginaria, e un `np.real` di troppo la
+    butterebbe via ### **senza che ne' la LUNGHEZZA ne' la FORMA se ne accorgano.**
+
+    ### -> **E' il QUARTO nome per il QUARTO difetto distinto** -- corta, lunga, forma, tipo -- e
+    **non** una legge in piu': ### **la legge e' UNA, `_ferma_se_registro_incoerente`.**
+
+    ### ⚠ **LA RISERVA, dichiarata: i tre `int64` dipendono dalla PIATTAFORMA.**
+    `_deg` `perc_chi` `perc_geom` sono `int64` **su questa macchina**, ma la larghezza dell'intero
+    predefinito di numpy **cambia fra piattaforme**. ### **Se questo errore scatta su uno di quei
+    tre, la cosa da aggiornare e' IL REGISTRO, non il codice** -- e il messaggio lo dice.
+    """
+
+
 def _ferma_se_cache_corta(nome, quanta, n, dove, scorta):
     """**UN SOLO controllo per le cache corte**, come `_ferma_se_oltre_max_nodi`."""
     if quanta >= n:
@@ -1054,6 +1076,13 @@ REGISTRO_METRI = (("phi", "nodo"), ("i", "arco"), ("j", "arco"))
 
 # LE GRANDEZZE DI STATO, con la loro FORMA ATTESA (generalizzazione di Luca, 2026-09-29).
 #   ("n",) = un asse lungo `n`; ("n", 3) = `n x 3`; ("m",) = un asse lungo `m`.
+#   IL TERZO CAMPO E' IL TIPO (generalizzazione 3 di Luca): un COMPLESSO diventato REALE perde
+#   META' DELL'INFORMAZIONE SENZA CAMBIARE FORMA, e le sei `complex128` qui sono esattamente quelle
+#   su cui e' nato il flash. `None` = ESENTE, e c'e' UNA sola esenzione: `conc_nodi`, che e' una
+#   LISTA e il cui `float64` misurato e' un ARTEFATTO di `np.asarray` su liste vuote.
+#   ⚠ RISERVA DICHIARATA: i tre `int64` (`_deg`, `perc_chi`, `perc_geom`) hanno una larghezza che
+#     DIPENDE DALLA PIATTAFORMA. Se il controllo scatta su uno di quei tre, si aggiorna IL REGISTRO,
+#     non il codice -- e il messaggio lo dice.
 #   IL CONTROLLO VERIFICA TUTTI GLI ASSI, non solo il primo: dieci grandezze qui hanno DUE assi, e
 #   prima un secondo asse sbagliato PASSAVA (era il limite che avevo dichiarato nella scheda).
 #   ⚠ LE FORME SONO MISURATE, non scritte a mano: vengono dalla colonna `forma` di
@@ -1062,36 +1091,36 @@ REGISTRO_METRI = (("phi", "nodo"), ("i", "arco"), ("j", "arco"))
 #     aggiungono): si dichiara SOLO il primo asse, perche' dichiarare `0` sarebbe dichiarare il
 #     falso.
 REGISTRO_STATO = (
-    ("_cs_nodo_prev", ("n",)),
-    ("_deg", ("n",)),
-    ("_nb", ("n", 3,)),   # float64
-    ("_nb_prec", ("n", 3,)),   # float64
-    ("_nb_ret", ("n", 3,)),   # float64
-    ("_psi_prec", ("n",)),
-    ("_psi_spin_prec", ("n", 2,)),   # complex128
-    ("_psi_spinor", ("n", 2,)),   # complex128
-    ("_spinor_lift", ("n", 2,)),   # complex128
-    ("conc_nodi", ("n",)),
-    ("eta", ("n",)),
-    ("mem_mot", ("n", 3,)),   # float64
-    ("omega_s", ("n", 3,)),   # float64
-    ("perc_chi", ("n",)),
-    ("perc_geom", ("n",)),
-    ("perc_tw", ("n",)),
-    ("phi0", ("n",)),
-    ("phi_s", ("n",)),
-    ("phivel", ("n",)),
-    ("pos", ("n", 3,)),   # float64
-    ("psi", ("n",)),
-    ("psi_spin", ("n", 2,)),   # complex128
-    ("rho_spin", ("n",)),
-    ("_rep", ("m",)),
-    ("d", ("m",)),
-    ("d0", ("m",)),
-    ("peq", ("m",)),
-    ("tw", ("m",)),
-    ("twp", ("m",)),
-    ("vd", ("m",)),
+    ("_cs_nodo_prev", ("n",), "float64"),
+    ("_deg", ("n",), "int64"),
+    ("_nb", ("n", 3,), "float64"),
+    ("_nb_prec", ("n", 3,), "float64"),
+    ("_nb_ret", ("n", 3,), "float64"),
+    ("_psi_prec", ("n",), "complex128"),
+    ("_psi_spin_prec", ("n", 2,), "complex128"),
+    ("_psi_spinor", ("n", 2,), "complex128"),
+    ("_spinor_lift", ("n", 2,), "complex128"),
+    ("conc_nodi", ("n",), None),   # ESENTE: e' una LISTA, non ha un dtype
+    ("eta", ("n",), "float64"),
+    ("mem_mot", ("n", 3,), "float64"),
+    ("omega_s", ("n", 3,), "float64"),
+    ("perc_chi", ("n",), "int64"),
+    ("perc_geom", ("n",), "int64"),
+    ("perc_tw", ("n",), "float64"),
+    ("phi0", ("n",), "float64"),
+    ("phi_s", ("n",), "float64"),
+    ("phivel", ("n",), "float64"),
+    ("pos", ("n", 3,), "float64"),
+    ("psi", ("n",), "complex128"),
+    ("psi_spin", ("n", 2,), "complex128"),
+    ("rho_spin", ("n",), "float64"),
+    ("_rep", ("m",), "float64"),
+    ("d", ("m",), "float64"),
+    ("d0", ("m",), "float64"),
+    ("peq", ("m",), "float64"),
+    ("tw", ("m",), "float64"),
+    ("twp", ("m",), "float64"),
+    ("vd", ("m",), "float64"),
 )
 
 # LE DERIVATE: ricalcolate a piena lunghezza dalla loro legge, quindi fra due ricalcoli la loro
@@ -1139,7 +1168,8 @@ def _scrivi_forma(f):
     return "NON ESISTE" if f is None else ("x".join(str(x) for x in f) or "()")
 
 
-def _ferma_registro(eccezione, come, nome, attesa, vera, dove):
+def _ferma_registro(eccezione, come, nome, attesa, vera, dove,
+                    atteso_tipo=None, tipo_vero=None):
     """Il messaggio, **in un posto solo**: due copie sarebbero due leggi (`9-ter`)."""
     _nl = chr(10)
     raise eccezione(_nl.join([
@@ -1147,10 +1177,16 @@ def _ferma_registro(eccezione, come, nome, attesa, vera, dove):
         "  grandezza . %s" % nome,
         "  forma ..... %s" % _scrivi_forma(vera),
         "  attesa .... %s" % _scrivi_forma(attesa),
+        "  tipo ...... %s" % ("(non guardato)" if tipo_vero is None else tipo_vero),
+        "  atteso .... %s" % ("(non dichiarato)" if atteso_tipo is None else atteso_tipo),
         "  dove ...... %s" % dove,
         "  PERCHE: il registro dichiara questa grandezza di STATO, cioe con una REGOLA DI",
         "  NASCITA. Se la sua lunghezza non e esattamente il bersaglio, una legge la leggera",
         "  e prendera un valore CHE NESSUNO HA DICHIARATO.",
+        "  E SE IL DIFETTO E IL TIPO: un COMPLESSO diventato REALE perde META DELL",
+        "  INFORMAZIONE senza cambiare forma, e le sei complex128 del registro sono quelle su cui",
+        "  e nato il flash. ⚠ MA per i tre int64 (_deg, perc_chi, perc_geom) la larghezza DIPENDE",
+        "  DALLA PIATTAFORMA: se scatta su uno di quei tre, SI AGGIORNA IL REGISTRO, non il codice.",
         "  CHE FARE: cercare CHI l ha estesa, o NON l ha estesa, alla nascita. NON si allunga",
         "  e NON si tronca qui: sarebbe il ripiego che questo controllo esiste per impedire.",
         "  E se in questa configurazione la grandezza NON ESISTE mai, va dichiarata DERIVATA",
@@ -1172,7 +1208,7 @@ def registro_mai_apparse(net):
     qualcosa non la crea mai *(e allora il registro dice il falso)*.
     """
     apparse = getattr(net, "_g_registro_apparse", None) or set()
-    return sorted(nome for nome, _forma in REGISTRO_STATO if nome not in apparse)
+    return sorted(nome for nome, _forma, _tipo in REGISTRO_STATO if nome not in apparse)
 
 
 def _ferma_se_registro_incoerente(net, dove):
@@ -1231,10 +1267,11 @@ def _ferma_se_registro_incoerente(net, dove):
     n = int(net.n)
     m = int(len(net.i))
     apparse = net.__dict__.setdefault("_g_registro_apparse", set())
-    for nome, forma in REGISTRO_STATO:
+    for nome, forma, tipo in REGISTRO_STATO:
         # LA FORMA ATTESA, con il primo asse risolto: ("n", 3) -> (n, 3).
         attesa = ((n if forma[0] == "n" else m),) + tuple(forma[1:])
-        vera = _forma_di(getattr(net, nome, None))
+        v = getattr(net, nome, None)
+        vera = _forma_di(v)
         # <<ASSENTE>> = non esiste OPPURE esiste VUOTA (`np.zeros(0)` di `Rete.__init__`).
         if (vera is None or vera[0] <= 0) and attesa[0] > 0:
             if nome not in apparse:
@@ -1243,6 +1280,13 @@ def _ferma_se_registro_incoerente(net, dove):
             # ### GIA VISTA PIENA E ORA NON C E PIU: e' una SPARIZIONE, ed e' un difetto.
             _ferma_registro(CacheCorta, "SPARITA", nome, attesa, vera, dove)
         if vera == attesa:
+            # ### IL TIPO, e si guarda SOLO quando la forma e' giusta: se la forma e' sbagliata
+            #   il difetto e' quello, e due errori insieme non aiutano chi legge.
+            if tipo is not None:
+                suo = getattr(v, "dtype", None)
+                if suo is not None and str(suo) != tipo:
+                    _ferma_registro(TipoSbagliato, "TIPO", nome, attesa, vera, dove,
+                                    atteso_tipo=tipo, tipo_vero=str(suo))
             apparse.add(nome)
             continue
         if vera[0] < attesa[0]:
