@@ -7127,3 +7127,37 @@ gli eventi**, ### **anche alla semina** *(`:3185`)*, dove oggi riceve un `±1` c
 archi allacciati hanno `tw = 0`.
 ### ➜ **Commit e sigillo SEPARATI, dopo il controllo unico**, come hai detto: e' un cambio di fisica
 *(il valore vive fino a `chi_basc`, ma il frame-drag `:5715` lo legge prima)*. **In coda, dichiarato.**
+
+---
+
+# 🧭 **`GEOM-SENZA-VERSO`: registrata, IN CODA** *(2026-09-29)*
+
+`doc/GEOM_SENZA_VERSO.md` piu' la riga nell'indice. ### **Nessun codice di fisica, nessuna misura:**
+il mandato dice *«DA FARE DOPO il sigillo del controllo unico»*, e ### **non interrompo il lavoro in
+corso** (`L-UN-PROMPT`). **Registro adesso perche' un ID nuovo citato in un messaggio senza la sua
+riga viene RIFIUTATO dal hook** — la registrazione non e' il lavoro.
+
+## ✅ **La lettura del guardiano e' VERIFICATA SUL CODICE**
+
+⚠ **E le righe del mandato venivano da un blob precedente** *(`:5894` `:5921` `:5715` `:5860`)*: il
+mio ne ha ~200 in piu', quindi ### **ho cercato per NOME, non per riga** *(par.2)*.
+
+| | su `9cf6fb07` |
+|---|---|
+| la definizione | `:6076`-`:6083` — `twabs = abs(_tw_src)`, accumulata sui **due** estremi, divisa per `_deg`, poi `where(twn > soglia, 1, -1)`: ### ✅ **e' la MEDIA di `\|tw\|` sugli archi del nodo** |
+| la soglia | `PHI_CRIT = 2*np.pi` *(`:516`)*, **locale, non la mediana globale**: ### ✅ **un quanto di olonomia** |
+| `perc_chi` = carica | `:6110`, dal **segno dell'overlap spinoriale**: ### ✅ |
+| `twist_dip` col segno | `:6061`, `pi*0.5*(chi_torsione[i] - chi_torsione[j])`, e `chi_torsione` viene da `perc_geom`: ### ✅ |
+| ### **l'ORDINE** | i lettori a `:5908` e `:5917` stanno ### **PRIMA** della riscrittura a `:6083`: ### ✅ **il frame-drag legge il valore del passo PRECEDENTE** |
+
+### ➜ **Quindi il rilievo sta in piedi: `tw` ha un segno, `perc_geom` lo butta via nascendo da `|tw|`, e la catena della torsione la usa come chiralita' CON SEGNO.**
+**Due nuclei avvolti in versi opposti ricevono la stessa etichetta `+1`**, e il *«verso»* che la
+catena produce dice ### **«dal centro verso fuori», non «orario o antiorario»**.
+
+**I criteri della misura sono fissati NEL DOCUMENTO, prima dei numeri**, compreso il caso in cui
+### **si ferma e si dice**: se il verso per nodo e la circolazione sui cicli **non concordano**,
+allora il verso **non e' ben definito cosi'**. **Le tre strade sono descritte con pro e contro, e
+non ne scelgo nessuna.**
+
+**E il collegamento con la decisione gia' presa tiene:** `perc_geom` del nato `= -1` ### **resta
+valida con qualunque strada** — un nodo con torsione zero non ha compiuto il giro.
