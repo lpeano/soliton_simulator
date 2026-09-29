@@ -29,7 +29,16 @@ dopo ### **non le vede corte**.
 | ### **PIENE quando `mitosi` ritorna** *(nessuno puo' vederle corte)* | ### **30** | `_cs_nodo_prev` · `_deg` · `_nb` · `_nb_prec` · `_nb_ret` · `_psi_prec` · `_psi_spin_prec` · `_psi_spinor` · `_spinor_lift` · `conc_nodi` · `eta` · `mem_mot` · `omega_s` · `perc_chi` · `perc_geom` · `perc_tw` · `phi0` · `phi_s` · `phivel` · `pos` · `psi` · `psi_spin` · `rho_spin` · `_rep` · `d` · `d0` · `peq` · `tw` · `twp` · `vd` |
 | ### **CORTE quando `mitosi` ritorna** | ### **10** | `_chi_core_nodi` · `_chi_core_raggio` · `_chi_core_rho0` · `_chi_geom_nodi` · `_fatt_cs_ultimo` · `_g_rampa_prec` · `_r_corrente` · `_xi_rumore` · `_dt_e_ultimo` · `_sin2_vir` |
 
-### ➜ **Le 30 PIENE sono esattamente quelle CON una regola di nascita: la regola si vede nella misura, non solo nel codice.**
+### ➜ **Le 30 PIENE sono, TRANNE UNA, quelle con una regola di nascita — e la regola si vede nella MISURA, non solo nel codice.**
+
+### ⚠ **CORREZIONE a cio' che avevo scritto in `bd9262f`:** dicevo *«esattamente l'insieme che ha una regola di nascita»*, ### **e non e' vero per DUE voci** — le ho verificate:
+
+| | |
+|---|---|
+| `_deg` | ### **e' DERIVATA**, e risulta piena perche' `mitosi` chiama `_grado` a `:6738` e `:6859`, che la **ricalcola dal `bincount`**. Nessuna eredita', e va bene cosi' |
+| ### `conc_nodi` | ### **HA una regola di nascita, e il mio strumento l'aveva PERSA:** `.append(eredita)` a `:6669` e `:6839`, **dentro `mitosi`**. ### **E' una MUTAZIONE IN POSTO, non un assegnamento** — quindi l'AST *(che cerca `self.X =`)* non la vedeva, e la sorveglianza *(che intercetta `__setattr__`)* la dava **MAI TOCCATA**. ### **Lo stesso punto cieco, in due strumenti diversi** |
+
+> ### 📌 **E dice un LIMITE della misura che vale per tutte le liste:** la sorveglianza vede gli **assegnamenti**, non le **mutazioni in posto**. Per un contenitore mutabile *«mai toccata» significa «non misurato»*, non *«nessuno la tocca»*.
 
 ## Le **10** corte: **una legge le legge corte?**
 
@@ -84,14 +93,14 @@ testo e si dice dove sta adesso.**
 | `phi0` | nodo | **Schwinger** | uguale a phi alla nascita | `:6804` | stesso `anti` di `phi` |
 | `pos` | nodo | **divisione** | punto medio dei genitori | `:6617` | media aritmetica delle due posizioni |
 | `pos` | nodo | **Schwinger** | punto medio | `:6802` | media aritmetica |
-| `phivel` | nodo | **semina** | ### **estrazione nuova, oppure zero** ### ⚠ **DA PORTARE A LUCA** | `:3154` | DUE RAMI: col calore iniziale un calcio gaussiano (a :3152 moltiplicato per `chi_nuovi`), senza calore `np.zeros(n)` a :3157 |
+| `phivel` | nodo | **semina** | CONDIZIONATA AL FLAG del calore iniziale: estrazione nuova col calore, zero senza | `:3154` | REGOLA CONDIZIONATA, e si dichiara come tale: col calore iniziale acceso il nato riceve un calcio gaussiano di scala `_CALORE_INIT` -- e a :3152, nel ramo chirale, il calcio e` MOLTIPLICATO PER `chi_nuovi`, quindi CORRELATO AL SEGNO CHIRALE; senza calore iniziale il nato parte a `np.zeros(n)` (:3157) |
 | `phivel` | nodo | **divisione** | media dei genitori | `:6643` | semisomma esplicita |
 | `perc_chi` | nodo | **semina** | estrazione nuova | `:3144` | sorteggio del segno, lo STESSO array usato anche per `perc_geom` |
 | `perc_chi` | nodo | **divisione** | eredita dal genitore a | `:6647` | copia diretta |
 | `perc_chi` | nodo | **Schwinger** | eredita INVERTITA (carica opposta) | `:6810` | il segno meno: l antiparticella ha carica opposta |
 | `perc_geom` | nodo | **semina** | estrazione nuova | `:3185` | lo stesso sorteggio di `perc_chi` |
 | `perc_geom` | nodo | **divisione** | eredita dal genitore a | `:6650` | copia diretta |
-| `perc_geom` | nodo | **Schwinger** | ### **eredita DIRETTA, NON invertita** ### ⚠ **DA PORTARE A LUCA** | `:6814` | copia diretta -- e alla Schwinger `perc_chi` INVERTE e `perc_geom` NO |
+| `perc_geom` | nodo | **Schwinger** | ### **APERTA -- decide Luca fra due opzioni** ### ⛔ **APERTA: DECIDE LUCA** | `:6814` | OGGI il codice COPIA (`perc_geom[aa]`) mentre `perc_chi` INVERTE (`-perc_chi[aa]`, :6810). LE DUE OPZIONI: (a) RESTA COPIATA, e la ragione da scrivere e` che la chiralita` geometrica non e` una carica, quindi non si coniuga; (b) SI INVERTE come `perc_chi`, e la ragione e` che la coppia deve nascere NEUTRA anche nella chiralita` geometrica. IL MESSAGGIO DEL GUARDIANO CONTENEVA IL SEGNAPOSTO `[scegli: ... OPPURE ...]`, quindi la decisione NON C E` e NON LA PRENDO IO |
 | `omega_s` | nodo | **semina** | estrazione nuova | `:3191` | calcio gaussiano isotropo sui tre assi |
 | `omega_s` | nodo | **divisione** | eredita dal genitore | `:2363` | copia diretta dal genitore `src` |
 | `_psi_spinor` | nodo | **divisione** | eredita COL SEGNO di doppia copertura | `:2365` | copia dal genitore, e a :2367 `er = -er` per l antichirale: segno di doppia copertura opposto |
@@ -99,30 +108,25 @@ testo e si dice dove sta adesso.**
 | `d` | arco | **divisione** | META` del padre, con pavimento LAM | `:6690` | l arco si spezza in due tronconi da `d/2`, e `_nasce(dh, mitosi, 2, 0)` impone la scala minima LAM |
 | `d` | arco | **Schwinger** | nuova a scala minima | `:6790` | i due archi della coppia nascono alla scala minima, non ereditano |
 | `d` | arco | **allaccio** | nuova a scala minima | `:3359` | il troncone parte da LAM |
-| `d0` | arco | **divisione** | ### **META`, con tre rami** ### ⚠ **DA PORTARE A LUCA** | `:6722` | TRE RAMI a :6704 :6707 :6709 che scelgono fra `d0h` (meta` di d0) e `dh` (meta` di d) |
+| `d0` | arco | **divisione** | riposo del figlio = META` della lunghezza del padre x fattore plastico | `:6703` | NON sono due grandezze, ed e` la correzione del guardiano: `dh = d[sel]/2` (:6690) e `d0h = dh*(1+fattore)`, quindi il riposo del figlio esce SEMPRE dalla meta` della LUNGHEZZA del padre. I tre rami scelgono SOLO IL FATTORE: `PLAST_DIN` lo ricava dallo stress metrico per l eccesso di torsione, `PLAST_MIT` lo mette costante per `sciolta`, e senza nessuno dei due il fattore e` 1 |
 | `tw` | arco | **divisione** | zero | `:6734` | i tronconi nascono senza torsione |
 | `tw` | arco | **allaccio** | zero | `:3366` | l arco nuovo nasce senza torsione |
 | `i` | metro-arco | **divisione** | topologia: l arco a-b e` SOSTITUITO da a-m e m-b | `:6710` | `keep` TOGLIE l arco spezzato: non e` un valore che si eredita, e` la topologia |
 | `j` | metro-arco | **divisione** | topologia: secondo troncone | `:6711` | idem |
 | `i` | metro-arco | **Schwinger** | topologia: due archi nuovi verso k | `:6840` | il nodo `k` della coppia si allaccia ad `aa` e `bb` |
 | `j` | metro-arco | **Schwinger** | topologia: due archi nuovi verso k | `:6841` | idem |
+| `conc_nodi` | nodo | **divisione** | eredita la concorrenza alle masse del genitore a | `:6668` | E` una MUTAZIONE IN POSTO (`.append`), non un assegnamento: per questo il mio strumento diceva NESSUNA REGOLA e la sorveglianza diceva MAI TOCCATA -- LO STESSO PUNTO CIECO, due volte. La regola c e`: il figlio nasce concorrendo alle stesse masse del genitore, con le voci COPIATE |
+| `conc_nodi` | nodo | **Schwinger** | eredita, e MARCA l origine come `schwinger` | `:6838` | eredita le voci del genitore e aggiunge un quarto campo che distingue la creazione di coppia dall accrescimento per mitosi |
+| `_deg` | nodo | **divisione** | DERIVATA: ricalcolata a piena lunghezza DENTRO la mitosi | `:2066` | non si eredita: `_grado` la ricalcola dal `bincount` degli archi, e `mitosi` la chiama a :6738 e :6859. Per questo risulta PIENA al controllo pur non avendo una regola di eredita` |
 
-**Ancore verificate: 29 su 29.** ### ✅ **Tutte trovate, e UNA VOLTA SOLA.**
+**Ancore verificate: 32 su 32.** ### ✅ **Tutte trovate, e UNA VOLTA SOLA.**
 
-## 🛑 **I 3 casi che porto a Luca, e SOLO questi**
+## 🛑 **Che cosa resta a Luca: 1 voce**
 
 **Il mandato dice: *«porta SOLO i casi in cui la regola esistente ti sembra fisicamente
 discutibile, uno per uno, con la riga»*.** ### **Gli altri li ho scritti e non li porto.**
 
-### ⚠ `phivel` — evento **semina** — `:3154`
-
-**La regola che c'e':** estrazione nuova, oppure zero. **Come si legge:** DUE RAMI: col calore iniziale un calcio gaussiano (a :3152 moltiplicato per `chi_nuovi`), senza calore `np.zeros(n)` a :3157
-
 ### ⚠ `perc_geom` — evento **Schwinger** — `:6814`
 
-**La regola che c'e':** eredita DIRETTA, NON invertita. **Come si legge:** copia diretta -- e alla Schwinger `perc_chi` INVERTE e `perc_geom` NO
-
-### ⚠ `d0` — evento **divisione** — `:6722`
-
-**La regola che c'e':** META`, con tre rami. **Come si legge:** TRE RAMI a :6704 :6707 :6709 che scelgono fra `d0h` (meta` di d0) e `dh` (meta` di d)
+**La regola che c'e':** APERTA -- decide Luca fra due opzioni. **Come si legge:** OGGI il codice COPIA (`perc_geom[aa]`) mentre `perc_chi` INVERTE (`-perc_chi[aa]`, :6810). LE DUE OPZIONI: (a) RESTA COPIATA, e la ragione da scrivere e` che la chiralita` geometrica non e` una carica, quindi non si coniuga; (b) SI INVERTE come `perc_chi`, e la ragione e` che la coppia deve nascere NEUTRA anche nella chiralita` geometrica. IL MESSAGGIO DEL GUARDIANO CONTENEVA IL SEGNAPOSTO `[scegli: ... OPPURE ...]`, quindi la decisione NON C E` e NON LA PRENDO IO
 

@@ -56,7 +56,8 @@ def verifica_ancore():
         anc = c[4]
         trovate = [k + 1 for k, x in enumerate(righe) if anc in x]
         fuori.append({"grandezza": c[0], "classe": c[1], "evento": c[2], "regola": c[3],
-                      "ancora": anc, "derivazione": c[5], "dubbio": c[6].strip() == "SI",
+                      "ancora": anc, "derivazione": c[5], "dubbio": c[6].strip() in ("SI", "APERTA"),
+                      "aperta": c[6].strip() == "APERTA",
                       "righe": trovate})
     return fuori
 
@@ -109,8 +110,26 @@ def principale():
     P("| ### **CORTE quando `mitosi` ritorna** | ### **%d** | %s |"
       % (len(corte), " · ".join("`%s`" % x for x in corte)))
     P("")
-    P("### ➜ **Le %d PIENE sono esattamente quelle CON una regola di nascita: la regola si vede"
-      " nella misura, non solo nel codice.**" % len(piene))
+    P("### ➜ **Le %d PIENE sono, TRANNE UNA, quelle con una regola di nascita — e la regola"
+      " si vede nella MISURA, non solo nel codice.**" % len(piene))
+    P("")
+    P("### ⚠ **CORREZIONE a cio' che avevo scritto in `bd9262f`:** dicevo *«esattamente"
+      " l'insieme che ha una regola di nascita»*, ### **e non e' vero per DUE voci** — le ho"
+      " verificate:")
+    P("")
+    P("| | |")
+    P("|---|---|")
+    P("| `_deg` | ### **e' DERIVATA**, e risulta piena perche' `mitosi` chiama `_grado` a `:6738`"
+      " e `:6859`, che la **ricalcola dal `bincount`**. Nessuna eredita', e va bene cosi' |")
+    P("| ### `conc_nodi` | ### **HA una regola di nascita, e il mio strumento l'aveva PERSA:**"
+      " `.append(eredita)` a `:6669` e `:6839`, **dentro `mitosi`**. ### **E' una MUTAZIONE IN"
+      " POSTO, non un assegnamento** — quindi l'AST *(che cerca `self.X =`)* non la vedeva, e la"
+      " sorveglianza *(che intercetta `__setattr__`)* la dava **MAI TOCCATA**. ### **Lo stesso"
+      " punto cieco, in due strumenti diversi** |")
+    P("")
+    P("> ### 📌 **E dice un LIMITE della misura che vale per tutte le liste:** la"
+      " sorveglianza vede gli **assegnamenti**, non le **mutazioni in posto**. Per un contenitore"
+      " mutabile *«mai toccata» significa «non misurato»*, non *«nessuno la tocca»*.")
     P("")
     P("## Le **%d** corte: **una legge le legge corte?**" % len(corte))
     P("")
@@ -197,7 +216,8 @@ def principale():
         P("| `%s` | %s | **%s** | %s%s | %s | %s |"
           % (r["grandezza"], r["classe"], r["evento"],
              "### **" + r["regola"] + "**" if r["dubbio"] else r["regola"],
-             " ### ⚠ **DA PORTARE A LUCA**" if r["dubbio"] else "",
+             (" ### ⛔ **APERTA: DECIDE LUCA**" if r.get("aperta")
+              else " ### ⚠ **DA PORTARE A LUCA**") if r["dubbio"] else "",
              dove, r["derivazione"]))
     P("")
     P("**Ancore verificate: %d su %d.** %s"
@@ -207,7 +227,8 @@ def principale():
               % (len(perse), ", ".join("%s/%s" % (x["grandezza"], x["evento"]) for x in perse))))
     P("")
     dubbi = [r for r in reg if r["dubbio"]]
-    P("## 🛑 **I %d casi che porto a Luca, e SOLO questi**" % len(dubbi))
+    P("## 🛑 **Che cosa resta a Luca: %d voce%s**"
+      % (len(dubbi), "" if len(dubbi) == 1 else ""))
     P("")
     P("**Il mandato dice: *«porta SOLO i casi in cui la regola esistente ti sembra fisicamente")
     P("discutibile, uno per uno, con la riga»*.** ### **Gli altri li ho scritti e non li porto.**")

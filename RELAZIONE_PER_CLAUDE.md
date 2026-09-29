@@ -7005,3 +7005,54 @@ numeri di riga **shiftano fra i blob**, ed e' un errore che ho gia' fatto in que
 | **3** | ### `phivel` alla **semina**, `:3154` | ### **DUE rami**: col calore iniziale un calcio gaussiano *(a `:3152` moltiplicato per `chi_nuovi`, quindi **correlato al segno chirale**)*, senza calore `np.zeros(n)`. ### **E' una regola CONDIZIONATA A UN FLAG**, e il registro dovrebbe dichiarare quale |
 
 **Gli altri 26 li ho scritti e non li porto**, come chiedi.
+
+---
+
+# 📜 **IL REGISTRO DELLE REGOLE DI NASCITA: 32, e una resta APERTA** *(2026-09-29)*
+
+`doc/REGOLE_nascita.tsv` *(`1a2b9e14`)* → `doc/ORDINE_letture.md`, **generato**.
+### **Nessun byte di fisica:** `f7541d03`. ### **32 ancore su 32 verificate, una volta sola.**
+
+## ⛔ **Il punto 1 NON contiene una decisione, e non la prendo io**
+
+Il messaggio dice, alla lettera: *«DECISIONE DI LUCA: `[scegli: "resta copiata, come dichiarato"
+OPPURE "si inverte come perc_chi, perche' la coppia deve nascere neutra anche nella chiralita'
+geometrica"]`»*. ### **E' il SEGNAPOSTO, non la scelta.**
+`perc_geom` alla Schwinger resta **APERTA** nel registro, con **le due opzioni e la ragione di
+ciascuna**:
+
+| | |
+|---|---|
+| **(a) resta copiata** | la ragione da scrivere e' che ### **la chiralita' geometrica non e' una carica, quindi non si coniuga** |
+| **(b) si inverte** | la ragione e' che ### **la coppia deve nascere NEUTRA anche nella chiralita' geometrica** |
+
+**Oggi il codice fa (a)** *(`perc_geom[aa]`, `:6814`)* mentre `perc_chi` fa (b) *(`-perc_chi[aa]`,
+`:6810`)*. ### **Ho fatto tutto il resto e questa l'ho lasciata aperta**, invece di fermare il
+lavoro o di scegliere al posto tuo.
+
+## ✅ Punto 2 — **hai ragione: `d0` NON sono due grandezze**
+
+`dh = d[sel]/2` *(`:6690`)* e `d0h = dh * (1 + fattore)`: ### **il riposo del figlio esce SEMPRE
+dalla META' DELLA LUNGHEZZA DEL PADRE.** I tre rami scelgono ### **solo il fattore** — `PLAST_DIN`
+lo **ricava** dallo stress metrico per l'eccesso di torsione, `PLAST_MIT` lo mette **costante** per
+`sciolta`, e senza nessuno dei due il fattore e' **1**. **Scritta cosi'.**
+
+## ✅ Punto 3 — `phivel` alla semina, **dichiarata condizionata al flag**
+
+Col calore iniziale un calcio gaussiano di scala `_CALORE_INIT` — e a `:3152`, nel ramo chirale,
+### **moltiplicato per `chi_nuovi`, quindi CORRELATO AL SEGNO CHIRALE**; senza calore, `zeros(n)`.
+
+## ⚠ **E una CORREZIONE a cio' che ho scritto in `bd9262f`**
+
+Avevo detto che le **30** piene sono *«esattamente l'insieme che ha una regola di nascita»*.
+### **Non e' vero per DUE voci, e le ho verificate:**
+
+| | |
+|---|---|
+| `_deg` | ### **e' DERIVATA** e risulta piena perche' `mitosi` chiama `_grado` a `:6738` e `:6859`, che la **ricalcola dal `bincount`**. Nessuna eredita', e va bene cosi' |
+| ### `conc_nodi` | ### **HA una regola di nascita e il mio strumento l'aveva PERSA:** `.append(eredita)` a `:6669` e `:6839`, **dentro `mitosi`** — il figlio nasce concorrendo alle stesse masse del genitore, e alla Schwinger la voce viene **marcata `"schwinger"`**. ### **E' una MUTAZIONE IN POSTO**, quindi l'AST *(che cerca `self.X =`)* non la vedeva e la sorveglianza *(che intercetta `__setattr__`)* la dava **MAI TOCCATA**: ### **lo stesso punto cieco in DUE strumenti diversi** |
+
+> ### 📌 **E vale come LIMITE per tutte le liste:** la sorveglianza vede gli **assegnamenti**, non
+> le **mutazioni in posto**. Per un contenitore mutabile *«mai toccata»* significa ### **«non
+> misurato»**, non *«nessuno la tocca»*. **Le tre righe nuove del registro nascono da questa
+> correzione.**
