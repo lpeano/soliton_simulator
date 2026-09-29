@@ -741,6 +741,15 @@ moto)*. **Tira GIÙ, come tutti gli scrittori fisici.**
 
 <!-- SCHEDA nome=tempo-proprio funzioni=ritmo,_cli,_applica_flag flag=TAU_LOC,TEMPO_SEGNO,TEMPO_PROPRIO_ORIENTATO,RITMO_WRAP_2PI -->
 
+> **→ NOTA DEL 2026-09-29, e sta qui perche' questa scheda POSSIEDE `_cli` e `_applica_flag`:**
+> un flag nuovo, ### **`CONTROLLO_REGISTRO`** *(`--senza-controllo-registro`)*, si parsa in
+> `_cli` e si applica in `_applica_flag`, ### **con la `global` dichiarata nella stessa
+> funzione** — senza, nascerebbe **morto**, ed e' come `--tau-a`, `--semina-matura` e
+> `--mitosi-2lam` sono stati inerti per un giorno intero **coi loro sigilli che passavano**.
+> ### ⚠ **E il suo DEFAULT e' ACCESO, al contrario di tutti gli altri:** il flag **SPEGNE**.
+> **Il TEMPO PROPRIO non cambia:** quel flag riguarda **il registro delle grandezze**, e la
+> sua legge sta nella scheda **`registro-grandezze`**. Qui sta solo il passaggio dal CLI.
+
 > **-> NOTA DEL 2026-09-28, e sta qui perche' questa scheda POSSIEDE `_cli`: NESSUNA
 > LEGGE E' CAMBIATA.** Il commit di `MAX-NODI-FERMA` tocca **il solo testo di `help`** di
 > `--maxnodi`, per dire che ora **ferma il run** invece di troncare. **Il default resta
@@ -4326,6 +4335,28 @@ che l'avrebbe **saltato nel caso più comune** *(nessun `--regime` sulla riga di
 
 <!-- SCHEDA nome=schedulatore-del-passo funzioni=esegui_passo,valida_composizione,update,_passo,batch_condensazione,_dbg_init flag=PASSO_COMPOSIZIONE,_PASSO_FASI,_PASSO_MODULO,_PASSO_REGISTRO,_PASSO_CODA,_PASSO_TIPI,_PASSO_FUNZIONE -->
 
+> ### 📌 **AGGIUNTA DEL 2026-09-29 — `esegui_passo` ACQUISISCE IL SECONDO PRESIDIO DELLO SCHEDULATORE** *(`RIPIEGHI-ZERO`, decisione di Luca)*
+>
+> Accanto a `_ferma_se_oltre_max_nodi` *(che resta)* lo schedulatore chiama ora
+> **`_ferma_se_registro_incoerente`** in **due** punti, e **la legge sta nella scheda
+> `registro-grandezze`**: qui si dichiara **soltanto il PASSAGGIO**, perche' `REG-R` mappa
+> **per funzione**.
+>
+> | punto | dove, e ### **perche' li'** |
+> |---|---|
+> | **l'`apri`** | ### **prima del ciclo**, accanto a `MAX_NODI` — e **non** dentro
+>   `_smp_apri`: e' una **PRECONDIZIONE**, e una precondizione ### **non deve muoversi con
+>   una voce.** `H-ETC-2` **permuta** la composizione, e *«il passo comincia con le lunghezze
+>   giuste»* vale in **qualunque** ordine |
+> | **dopo `mitosi`** | ### **dentro il ciclo**, subito dopo che la voce ha girato: `mitosi`
+>   e' ### **il solo posto del passo in cui `n` cresce** |
+>
+> ### ⚠ **E il docstring di `esegui_passo` resta VERO:** l'`if` guarda ### **il NOME DI UNA
+> VOCE**, che e' un **dato** della composizione — **non un flag**. La composizione resta un
+> DATO, ed e' la ragione per cui **non** ho scelto la variante con **due voci nuove**
+> *(`valida_composizione` vieta i duplicati, quindi servirebbero due nomi: ### **due leggi in
+> piu', e `9-ter` dice di non moltiplicarle**)*.
+
 > ### 🆕 **2026-09-28 (`MAX-NODI-FERMA`): lo schedulatore ha una PRECONDIZIONE.**
 > Prima di validare la composizione, `esegui_passo` chiama
 > `_ferma_se_oltre_max_nodi(net.n, 0, ...)`: ### **un passo che non si puo' fare NON COMINCIA.**
@@ -4644,3 +4675,83 @@ ripiego** che l'eccezione esiste per rendere impossibile.
 
 *(`⚠` La somma di `psi` e' complessa: due genitori in antifase danno un figlio con `|psi| ~ 0`.
 **E' interferenza distruttiva, cioe' fisica, non un errore.**)*
+
+---
+
+<!-- SCHEDA nome=registro-grandezze funzioni=_ferma_se_registro_incoerente,_ferma_registro flag=REGISTRO_STATO,REGISTRO_DERIVATE,REGISTRO_METRI,CONTROLLO_REGISTRO,CacheLunga -->
+
+# 📒 **IL REGISTRO DELLE GRANDEZZE, E IL CONTROLLO UNICO** *(`RIPIEGHI-ZERO`, 2026-09-29)*
+
+## La forma
+
+> ### **Ai due punti dello schedulatore, ogni grandezza di STATO ha lunghezza ESATTAMENTE il suo
+> ### bersaglio: `n` per i nodi, `m` per gli archi. Altrimenti il run SI FERMA, col NOME.**
+
+`len(x) == n` *(nodi)* · `len(x) == m` *(archi)* · piu' corta → **`CacheCorta`** · piu' lunga →
+**`CacheLunga`**. ### **Non c'e' un valore di scorta, non c'e' un troncamento, non c'e' un
+allungamento: c'e' un errore.**
+
+## La derivazione: **perche' UNICO e non quaranta guardie**
+
+**Non e' una preferenza di stile: e' misurato.** La **prova a guasto** del 2026-09-28
+*(`f173050`)* ha mostrato col **comportamento** che una guardia **dentro** una legge non tiene:
+
+| | |
+|---|---|
+| `:4462`, la guardia su `psi_spin` | ### **ESEGUE e non spara**, perche' `calcola_psi` ha gia' riscritto `psi_spin` a piena lunghezza: ### **sta A VALLE della riscrittura** |
+| `_estendi_psi_spinor` | **allunga la coda** con una riga **inventata**, quindi ogni guardia a valle trova un array **giusto**: ### **un estensore a monte la DISARMA** |
+| la classe `(b)` *(«estende i soli nuovi»)* | ### **non e' sicura**: `mem_mot` estende **davvero** la coda e il guasto cambia **12611 nodi**, perche' l'elemento inventato appartiene a un nodo ### **CHE ESISTEVA GIA'** |
+
+### ➜ **Curare sito per sito aveva lasciato 29 grandezze su 31 scoperte: `0` su `31` erano «a posto».**
+
+## Le due classi, e ### **il criterio NON e' «stato o derivata»**
+
+**Il mio piano diceva «stato o derivata», e Luca l'ha corretto:** `psi` **E'** derivata *(la scrive
+`calcola_psi`)* e ha avuto bisogno di una regola di nascita ### **perche' una legge la leggeva fra
+la mitosi e il ricalcolo** — ed e' li' che nasceva il flash di `PSI-FLASH`.
+
+> ### 📌 **IL CRITERIO E': «una legge la legge CORTA fra la nascita e la sua riscrittura?»**
+
+| classe | quante | che cosa vuol dire |
+|---|---|---|
+| ### **`REGISTRO_STATO`** | **30** | sono **GIA' PIENE** quando `mitosi` ritorna: ### **nessuno puo' vederle corte.** Si controllano |
+| ### **`REGISTRO_DERIVATE`** | **10** | sono **corte** a quell'istante, e per ognuna la **terza colonna dice il MOTIVO MISURATO** per cui va bene: **4** nessuna legge le legge · **4** la legge le trova **gia' riscritte** · **2** sono **AUTO-RINFRESCHI** |
+| `REGISTRO_METRI` | **3** | `phi` `i` `j`: ### **non sono voci, sono il RIFERIMENTO** *(`n` E' `len(phi)`, `m` E' `len(i)`)* |
+
+**I due auto-rinfreschi erano GIA' dichiarati e contati nel codice**, e la misura lo conferma:
+`_xi_rumore` *(«NON e' un fallback: e' il percorso normale della mitosi; `xi` e' l'AMBIENTE …
+il figlio NON lo eredita»)* e `_g_rampa_prec` *(«e' un array DIAGNOSTICO … il suo disallineamento
+SI CONTA … si perde una MISURA, non una legge»)*. ### ➜ **`A8` era gia' rispettato in entrambi.**
+
+## ⚠ **«ASSENTE» non e' «DI LUNGHEZZA SBAGLIATA», e la tolleranza e' PER GRANDEZZA**
+
+E' la distinzione che Luca ha imposto in `lambda_nodi`. **Due cose l'hanno allargata, e entrambe
+sono MISURATE, non supposte:**
+
+1. ### **«assente» comprende «esiste ma e' VUOTA»**: `Rete.__init__` crea diverse cache come
+   `np.zeros(0)`. La prima stesura guardava solo `is None` e ### **si e' fermata all'`apri` del
+   PRIMO passo** su `_psi_spinor`.
+2. ### **la tolleranza e' PER GRANDEZZA, fino alla sua PRIMA APPARIZIONE** — e non *«prima del
+   primo passo»*, che ### **ferma un run sano all'`apri` del passo 2** su **`_nb_ret`**.
+
+| dall'`apri` del passo | quante diventano piene |
+|---|---|
+| **0** *(subito dopo la semina)* | **18** |
+| **1** | **11** |
+| ### **2** | ### **1: `_nb_ret`** |
+| mai, in 12 passi | **0** |
+
+### ➜ **E la ragione di `_nb_ret` e' FISICA, non pigrizia: e' il Bloch RITARDATO** `n(t-tau)`
+*(`FORK_SU2_MEM`)*, ### **e al primo passo NON ESISTE UN PASSATO.**
+**La forma «tollera fino al passo 2» sarebbe stata una MANOPOLA** (`A1`): *«fino alla prima
+apparizione»* non contiene nessun numero scelto. ### **E una grandezza che SPARISCE dopo essersi
+vista piena e' un ERRORE** — che e' il caso che la regola di Luca vuole impedire.
+
+## I limiti, dichiarati
+
+| | |
+|---|---|
+| ### **il controllo guarda UN SOLO ASSE** | `len` e' il **primo** asse. `pos` `_nb` `_nb_prec` `_nb_ret` `mem_mot` `omega_s` sono `(n,3)`, `_psi_spinor` `_psi_spin_prec` `_spinor_lift` sono `(n,2)`: ### **un secondo asse sbagliato passerebbe** |
+| ### **due punti potrebbero non bastare** | `calcola_psi` riscrive `psi_spin` a `:4421` e `_estendi_psi_spinor` allunga a `:2264`, ### **entrambi a META' PASSO**: una cache che va corta **fra** i due punti non viene vista |
+| **il registro viene da UNA configurazione** | `nmasse 3`, `sep 6.1158`, seme `11`, **zero differenze su 80 booleani** dal driver. ### **Con altri flag una voce di STATO potrebbe non esistere mai** — e allora il controllo si ferma **nominandola**, che e' informazione, non un difetto: va dichiarata **DERIVATA col suo motivo misurato**, mai togliere in silenzio |
+| ### **e le LISTE hanno un punto cieco** | `conc_nodi` cresce con `.append`, non con un assegnamento: l'AST e la sorveglianza **non la vedevano**. ### **La sua regola di nascita esiste** *(`:6669`, `:6839`)*, e l'ho trovata solo verificando a mano |

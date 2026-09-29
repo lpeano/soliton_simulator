@@ -7056,3 +7056,74 @@ Avevo detto che le **30** piene sono *«esattamente l'insieme che ha una regola 
 > le **mutazioni in posto**. Per un contenitore mutabile *«mai toccata»* significa ### **«non
 > misurato»**, non *«nessuno la tocca»*. **Le tre righe nuove del registro nascono da questa
 > correzione.**
+
+---
+
+# ⚙ **IL CONTROLLO UNICO DELLO SCHEDULATORE: il codice** *(2026-09-29)*
+
+Simulatore da **`f7541d03`** a ### **`9cf6fb07`**. Scheda nuova **`registro-grandezze`** in
+`doc/REGISTRO_FISICA.md`, piu' il passaggio dichiarato nelle schede `schedulatore-del-passo` e
+`tempo-proprio`. README col flag e **col suo default**. Voce `RIPIEGHI-ZERO` aggiornata.
+
+| | |
+|---|---|
+| **`CacheLunga`** | classe **nuova**: `_ferma_se_cache_corta` comincia con `if quanta >= n: return`, quindi ### **il lato LUNGA era scoperto** — e la prova a guasto lo ha mostrato *(`psi` allungata da' un `ValueError` di broadcast)* |
+| **`REGISTRO_STATO`** | **30** voci: `len` **esattamente** `n` *(nodi)* o `m` *(archi)* ai due punti |
+| **`REGISTRO_DERIVATE`** | **10** voci **escluse**, ognuna ### **col suo motivo MISURATO** nella terza colonna |
+| `REGISTRO_METRI` | `phi` `i` `j`: ### **il riferimento, non voci** |
+| **i due punti** | `apri` ### **prima del ciclo** *(precondizione: non deve muoversi quando `H-ETC-2` permuta)* e ### **subito dopo la voce `mitosi`** *(il solo posto in cui `n` cresce)* |
+| ### **il flag** | `--senza-controllo-registro`, e ### **il DEFAULT E' ACCESO: il flag SPEGNE** |
+
+### ⚠ **Il default acceso e' una deviazione dal par.3, e la dichiaro invece di nasconderla**
+*«Tutti i flag nuovi OFF di default»*. ### **Qui no, e la ragione e' che non e' un esperimento: e'
+la CURA approvata**, e un controllo spento di default ### **non impedisce niente** (`A9`).
+Il flag esiste **per il criterio `C`** del sigillo *(rifare la prova a guasto col controllo spento
+e ritrovare zero protette)*, e ogni chiamata a controllo spento ### **si CONTA**
+*(`_g_registro_spento`)*. **Se preferisci il default spento, si ribalta in una riga** — ma allora la
+cura e' inerte finche' qualcuno non passa il flag.
+
+## ⛔ **DUE cose che la TUA regola dell'assenza non copriva, e le ho MISURATE girando**
+
+| | |
+|---|---|
+| **1** | ### **«assente» comprende «esiste ma e' VUOTA».** `Rete.__init__` crea diverse cache come `np.zeros(0)`: non sono `None` e non sono *«di lunghezza sbagliata»* — sono **non inizializzate**. La prima stesura guardava solo `is None` e ### **si e' fermata all'`apri` del PRIMO passo** su `_psi_spinor` |
+| ### **2** | ### **la tua regola — «assenza tollerata SOLO prima del primo passo completato» — FERMA UN RUN SANO all'`apri` del passo 2**, su **`_nb_ret`** |
+
+**La misura, sulla scena piccola a seme 11:**
+
+| dall'`apri` del passo | quante diventano piene |
+|---|---|
+| **0** *(subito dopo la semina)* | **18** |
+| **1** | **11** |
+| ### **2** | ### **1: `_nb_ret`** |
+| mai, in 12 passi | ### **0** |
+
+### ➜ **E la ragione di `_nb_ret` e' FISICA, non pigrizia: e' il Bloch RITARDATO `n(t-tau)`, e al primo passo NON ESISTE UN PASSATO.**
+
+**Come l'ho allargata, nel modo minimo e senza numeri:** la tolleranza e' ### **PER GRANDEZZA, fino
+alla sua PRIMA APPARIZIONE**. ### **«Fino al passo 2» sarebbe stata una MANOPOLA** (`A1`); *«fino
+alla prima apparizione»* non contiene nessun numero scelto. ### **E una grandezza che SPARISCE dopo
+essersi vista piena e' un ERRORE** — che e' esattamente il caso che la tua regola vuole impedire.
+**Se questo allargamento non ti va, dimmelo: e' una riga.**
+
+## La prova di fumo *(non e' il sigillo)*
+
+| | |
+|---|---|
+| **10 passi sani** | ### **OK** — 20 controlli, **14** assenze contate, ### **30 su 30 apparse** |
+| i due guasti su `psi` `d` `pos` `_nb_ret` `peq` | ### **PROTETTO su CORTA e su LUNGA, 10 su 10** — e ci sono **per nodo** e **per arco** |
+
+**Il sigillo vero e' il prossimo pezzo:** prova a guasto rifatta su tutte le 30 di STATO, passi senza
+nascite **byte-identici fino al 72**, e il **caso che deve fallire** invariato.
+
+## 📌 **E la tua correzione su `perc_geom`: registrata, NON applicata qui**
+
+### **Non avevo scelto niente**: la voce era **APERTA** nel registro con entrambe le opzioni, ed e'
+committata cosi' in `5512799`. ### **Non c'e' nessuna scelta da annullare.**
+**La tua decisione:** `perc_geom` ### **derivata dalla sua definizione** — `+1` se la torsione media
+dei suoi archi supera `PHI_CRIT`, altrimenti `-1` *(`chi_basc`, `:5894`)*; il nato ha archi con
+`tw = 0` *(`:6735` divisione, `:6856` Schwinger)*, quindi ### **`perc_geom` del nato = `-1` in TUTTI
+gli eventi**, ### **anche alla semina** *(`:3185`)*, dove oggi riceve un `±1` casuale mentre gli
+archi allacciati hanno `tw = 0`.
+### ➜ **Commit e sigillo SEPARATI, dopo il controllo unico**, come hai detto: e' un cambio di fisica
+*(il valore vive fino a `chi_basc`, ma il frame-drag `:5715` lo legge prima)*. **In coda, dichiarato.**
