@@ -1,9 +1,35 @@
-# 🧭 **`GEOM-SENZA-VERSO`: un'INTENSITA' usata come VERSO** *(voce nuova, 2026-09-29)*
+# 🧭 **`GEOM-SENZA-VERSO`** *(voce nuova, 2026-09-29)*
+
+> # ⭐ **LA STELLA POLARE** *(principio guida, **DECISO DA LUCA** il 2026-09-29)*
+>
+> ## **A. LE LEGGI SONO SIMMETRICHE, GLI STATI SCELGONO.**
+> ### **Nessuna legge deve preferire un verso di rotazione.** Se un verso prevale, deve
+> ### **EMERGERE dall'evoluzione** *(rottura **SPONTANEA**)*, **non essere scritto nella legge**.
+>
+> ## **B. UNA ROTTURA ESPLICITA E' AMMESSA SOLO COME POSTULATO DICHIARATO**
+> **un solo termine**, **nominato**, **col suo peso**, **accendibile e spegnibile**,
+> **confrontabile**. ### ⛔ **Mai come effetto collaterale di un valore assoluto.**
+>
+> ## **C. TRE GRANDEZZE, TRE MESTIERI, MAI MESCOLATI**
+>
+> | grandezza | il suo mestiere | da dove viene |
+> |---|---|---|
+> | `perc_geom` | ### **«avvolto si' o no»** — **DOVE** c'e' materia avvolta | l'**INTENSITA'** `\|tw\|` |
+> | *(oggi non esiste)* | ### **VERSO DI ROTAZIONE** del nucleo — orario / antiorario | il ### **SEGNO della circolazione** della torsione |
+> | `perc_chi` | ### **CARICA** — materia / antimateria | il **foglio della doppia copertura** dello spinore |
+>
+> ## **D. LA DIREZIONE SCELTA E' LA STRADA (ii)**
+> `perc_geom` **resta si'/no**; la **catena della rotazione** *(frame-drag, chiralita' del core,
+> `TORS_4PI`)* ### **legge il verso dalla CIRCOLAZIONE CON SEGNO**.
+>
+> | | |
+> |---|---|
+> | ### ⛔ **(i) scartata** | rimetterebbe **due informazioni in una variabile**: ### **l'errore GIA' CORRETTO con `CHI_COOP`** |
+> | **(iii)** | resta **solo se la misura mostra che il problema non esiste** |
 
 > ### ⚠ **SOLO REGISTRAZIONE. Nessun codice di fisica, nessuna misura ancora fatta.**
-> **Mandato di Luca:** *«DA FARE DOPO il sigillo del controllo unico. Prima solo registrazione e
-> MISURA.»* ### **In coda, dichiarata.** *(`L-UN-PROMPT`: un rilievo che arriva durante un lavoro
-> va in CODA, non lo interrompe.)*
+> **Mandato di Luca:** *«DA FARE DOPO il sigillo del controllo unico.»* ### **In coda, dichiarata**
+> *(`L-UN-PROMPT`)*. ### **E nessun codice di fisica finche' Luca non decide.**
 
 ### ✅ **La lettura del guardiano e' VERIFICATA SUL CODICE, e le righe sono quelle di `9cf6fb07`**
 
@@ -59,6 +85,32 @@ Va descritto in `doc/REGISTRO_FISICA.md` **come legge**, col suo **ordine nel pa
 | ### **DIFETTO DIMOSTRATO** | esistono nuclei avvolti in **ENTRAMBI** i versi che ricevono la stessa etichetta — ### **almeno il 10 % nel gruppo minoritario, su almeno uno dei due metodi** |
 | **DIFETTO DI PRINCIPIO, NON ATTIVO** | tutti i nuclei hanno **lo stesso** verso. Allora va capito ### **PERCHE' nascono tutti cosi'** — possibile **rottura di simmetria introdotta proprio da questa catena** — e si riporta |
 | ### 🛑 **SI FERMA E SI DICE** | se **(a)** e **(b)** ### **non concordano fra loro**: allora ### **il verso non e' ben definito cosi'**, e non si va avanti |
+
+## ⛔ **IL SOSPETTO DA VERIFICARE, ed e' la motivazione di `A`**
+
+> ### **Specchiando il sistema** *(fasi invertite)* **`tw` cambia segno, ma `|tw|` NO — quindi
+> ### `perc_geom` no — quindi `twist_dip = pi/2 (chi_i - chi_j)` NON cambia segno.**
+
+### ➜ **La legge aggiunge alla torsione LO STESSO contributo nel mondo specchiato: e' una rottura
+ESPLICITA della simmetria, probabilmente INVOLONTARIA.**
+### **E se i nuclei risultassero tutti dello stesso verso, potrebbe essere QUESTO TERMINE e non
+fisica emergente.**
+
+⚠ **La riga:** il mandato cita `:5872`; su `fc9ef41c` `twist_dip` sta a ### **`:6061`** — le righe
+**shiftano fra i blob**, e ho cercato **per nome** *(par.2)*.
+
+---
+
+## 🪞 **AGGIUNTA 7 — LA PROVA DELLO SPECCHIO** *(dopo la misura del par. precedente)*
+
+| | |
+|---|---|
+| ### **(a) PRIMA di girare** | ### **PROPORRE A LUCA la trasformazione di specchio COMPLETA** per questo modello: **quali grandezze cambiano segno e quali no** *(`phi`, `phi0`, `phivel`, `tw`, `twp`, lo **spinore e le sue cache**, `omega_s`, `_nb`, `perc_chi`, ed eventuali altre)*, ### **con la RAGIONE per ciascuna**. ### ⛔ **Non si gira finche' Luca non approva: definire lo specchio e' una scelta di FISICA** |
+| **(b)** | scena **grande**, seme `11`, stato al passo **30**; copia **A** normale, copia **B** **specchiata**; **N** passi pieni su entrambe, con ### **N scelto e DICHIARATO prima** |
+| ### **(c) il CRITERIO, fissato ORA** | se le leggi sono simmetriche, per **ogni** grandezza lo stato di **B** deve essere ### **lo specchio di quello di A entro l'errore numerico**. Si riporta ### **la PRIMA grandezza e il PRIMO passo in cui lo specchio si rompe, e la RIGA che lo produce** |
+| ### **(d) il caso che DEVE fallire** | con `twist_dip` **com'e' adesso**, lo specchio ### **DEVE rompersi** se il sospetto e' giusto. ### **Se NON si rompe, il sospetto CADE — e si dice.** |
+
+---
 
 ## 🛑 LE TRE STRADE — **decide Luca, non io: qui solo pro e contro**
 

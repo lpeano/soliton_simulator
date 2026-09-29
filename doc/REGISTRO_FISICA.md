@@ -4780,3 +4780,63 @@ vista piena e' un ERRORE** — che e' il caso che la regola di Luca vuole impedi
 | ### **due punti potrebbero non bastare** | `calcola_psi` riscrive `psi_spin` a `:4421` e `_estendi_psi_spinor` allunga a `:2264`, ### **entrambi a META' PASSO**: una cache che va corta **fra** i due punti non viene vista |
 | **il registro viene da UNA configurazione** | `nmasse 3`, `sep 6.1158`, seme `11`, **zero differenze su 80 booleani** dal driver. ### **Con altri flag una voce di STATO potrebbe non esistere mai** — e allora il controllo si ferma **nominandola**, che e' informazione, non un difetto: va dichiarata **DERIVATA col suo motivo misurato**, mai togliere in silenzio |
 | ### **e le LISTE hanno un punto cieco** | `conc_nodi` cresce con `.append`, non con un assegnamento: l'AST e la sorveglianza **non la vedevano**. ### **La sua regola di nascita esiste** *(`:6669`, `:6839`)*, e l'ho trovata solo verificando a mano |
+
+---
+
+# ⭐ **STELLA POLARE: LE LEGGI SONO SIMMETRICHE, GLI STATI SCELGONO** *(Luca, 2026-09-29)*
+
+> ### ⚠ **E' un PRINCIPIO, non ancora una legge del codice:** non porta un marcatore `SCHEDA`,
+> perche' oggi **non governa nessuna funzione modificata**. ### **Il marcatore arriva col codice**,
+> quando la strada **(ii)** si cabla. La voce e' **`GEOM-SENZA-VERSO`**, il documento e'
+> `doc/GEOM_SENZA_VERSO.md`.
+
+## **A. Nessuna legge deve preferire un verso di rotazione**
+
+### **Se un verso prevale, deve EMERGERE dall'evoluzione — rottura SPONTANEA — non essere scritto
+nella legge.**
+
+## **B. Una rottura ESPLICITA e' ammessa solo come POSTULATO DICHIARATO**
+
+**un solo termine · nominato · col suo peso · accendibile e spegnibile · confrontabile.**
+### ⛔ **Mai come effetto collaterale di un valore assoluto.**
+
+## **C. Tre grandezze, tre mestieri, mai mescolati**
+
+| grandezza | mestiere | da dove viene |
+|---|---|---|
+| `perc_geom` | ### **«avvolto si' o no»**: **DOVE** c'e' materia avvolta | l'**intensita'** `\|tw\|` |
+| *(oggi non esiste)* | ### **VERSO DI ROTAZIONE**: orario / antiorario | il ### **SEGNO della circolazione** della torsione |
+| `perc_chi` | ### **CARICA**: materia / antimateria | il **foglio della doppia copertura** dello spinore |
+
+> ### 📌 **E' la stessa forma dell'errore che `CHI_COOP` ha GIA' corretto il 2026-09-21:** allora
+> **una sola variabile** *(`perc_chi`)* faceva **due lavori** — la **carica** e la **geometria** — e
+> fu **divisa**. ### **Rimettere il verso dentro `perc_geom` ripeterebbe quell'errore**, ed e' la
+> ragione per cui la strada **(i)** e' **scartata**.
+
+## ⛔ **IL SOSPETTO, e motiva `A`**
+
+> **Specchiando il sistema** *(fasi invertite)* **`tw` cambia segno, `|tw|` NO — quindi `perc_geom`
+> no — quindi `twist_dip = pi/2 (chi_i - chi_j)` *(`:6061`)* NON cambia segno.**
+
+### ➜ **La legge aggiunge alla torsione LO STESSO contributo nel mondo specchiato: una rottura
+ESPLICITA della simmetria, probabilmente INVOLONTARIA.** E se i nuclei risultassero tutti dello
+stesso verso, ### **potrebbe essere questo termine e non fisica emergente.**
+
+**L'anello:** `tw` → `|tw|` → `perc_geom` → `twist_dip` → `tw`. **E l'ordine nel passo conta:** i
+lettori della catena stanno a `:5908` e `:5917`, ### **PRIMA** della riscrittura di `perc_geom` a
+`:6083` — quindi il frame-drag legge **il valore del passo precedente**.
+
+## La direzione scelta, e come si prova
+
+**Strada (ii):** `perc_geom` resta *si'/no*; la catena della rotazione ### **legge il verso dalla
+circolazione con segno**. **La (iii)** *(lasciare tutto)* resta **solo se la misura mostra che il
+problema non esiste** — e allora ### **va scritto qui PERCHE' un'intensita' vale come chiralita'**.
+
+### 🪞 **LA PROVA DELLO SPECCHIO** *(criterio fissato prima dei numeri)*
+Copia **A** normale e copia **B** **specchiata** dallo stesso stato: se le leggi sono simmetriche,
+### **B deve restare lo specchio di A entro l'errore numerico**, e si riporta ### **la prima
+grandezza e il primo passo in cui lo specchio si rompe, con la riga che lo produce**.
+### ⛔ **E la trasformazione di specchio la DEFINISCE LUCA prima del giro: dire quali grandezze
+cambiano segno e quali no e' una scelta di FISICA, non una convenzione di misura.**
+**Il caso che deve fallire:** con `twist_dip` com'e', lo specchio ### **deve rompersi**; se non si
+rompe, ### **il sospetto cade, e si dice.**

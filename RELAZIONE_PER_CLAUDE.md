@@ -7190,3 +7190,39 @@ per il controllo unico chiede **byte-identico**.
 > due metri che il registro delle grandezze, da qui in avanti, rende impossibile.**
 > **Che cosa la deciderebbe:** misurare `P_eq` con la mediana su **tutti** gli archi contro quella
 > sui primi `n`, ai passi 30/60/72, e vedere **di quanto** differiscono.
+
+---
+
+# ⭐ **La STELLA POLARE di `GEOM-SENZA-VERSO`: registrata** *(2026-09-29)*
+
+`doc/GEOM_SENZA_VERSO.md` *(in testa alla voce)* e `doc/REGISTRO_FISICA.md`, piu' la nota
+nell'indice. ### **Nessun codice di fisica, nessuna misura: la voce resta IN CODA dopo il sigillo**,
+e il braccio `A` del sigillo sta girando mentre scrivo. **Non interrompo.**
+
+| | |
+|---|---|
+| **A** | ### **LE LEGGI SONO SIMMETRICHE, GLI STATI SCELGONO.** Se un verso prevale deve **EMERGERE** — rottura **spontanea** — **non essere scritto nella legge** |
+| **B** | una rottura esplicita e' ammessa **solo come POSTULATO DICHIARATO**: un termine nominato, col suo peso, accendibile e spegnibile. ### ⛔ **Mai come effetto collaterale di un valore assoluto** |
+| **C** | ### **tre grandezze, tre mestieri**: `perc_geom` = *avvolto si'/no* dall'**intensita'** · il **VERSO** dal **segno della circolazione** · `perc_chi` = **carica** dal foglio della doppia copertura |
+| **D** | ### **strada (ii)**. La **(i)** e' **scartata**: rimetterebbe due informazioni in una variabile, ### **l'errore che `CHI_COOP` ha GIA' corretto il 2026-09-21**. La **(iii)** resta solo se la misura mostra che il problema non esiste |
+
+### ➜ **E il collegamento con `CHI_COOP` regge: e' la STESSA forma d'errore.**
+Allora **una** variabile faceva **due** lavori *(carica e geometria)* e fu **divisa**. ### **Rimettere
+il verso dentro `perc_geom` ripeterebbe quell'errore**, ed e' la ragione per cui **(i)** cade.
+
+## 🪞 L'aggiunta 7 registrata, **e il primo passo e' una DOMANDA a te**
+
+### ⛔ **La trasformazione di specchio la DEFINISCI TU, prima del giro.** Dire quali grandezze
+cambiano segno e quali no ### **e' una scelta di FISICA, non una convenzione di misura** — e il
+mandato lo dice: *«non girare finche' Luca non la approva»*. **La proposta completa** *(`phi`,
+`phi0`, `phivel`, `tw`, `twp`, lo spinore e le sue cache, `omega_s`, `_nb`, `perc_chi`, e le altre
+che trovero')* ### **la scrivo nel task history della voce, dopo il sigillo**, con la ragione per
+ciascuna.
+
+**Il criterio e il caso che deve fallire sono fissati adesso:** `B` deve restare **lo specchio di
+`A`** entro l'errore numerico, si riporta ### **la prima grandezza e il primo passo in cui si rompe,
+con la riga**; e con `twist_dip` com'e' ### **lo specchio DEVE rompersi** — ### **se non si rompe, il
+sospetto CADE e lo dico.**
+
+⚠ **La riga del sospetto:** il mandato cita `:5872`; su `fc9ef41c` `twist_dip` sta a ### **`:6061`**.
+**Le righe shiftano fra i blob, e ho cercato per nome** *(par.2)*.
