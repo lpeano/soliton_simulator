@@ -1663,7 +1663,7 @@ lei stessa** un evento dopo)*, ### **e per entrambe la dichiarazione ESISTE GIA'
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa fa |
 |---|---|---|---|
-| `csv/_seal_fork/_sig_controllo_unico.py` | `13fad02b` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
+| `csv/_seal_fork/_sig_controllo_unico.py` | `6e044a81` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
 
 **I cinque criteri sono di Luca e sono fissati PRIMA del codice** *(piano `f684353f`, par.5)*.
 
@@ -1718,3 +1718,13 @@ bracci.**
 > ### **Un contatore che cambia di UNO e' un difetto, e le 23 grandezze NON lo vedrebbero** — lo
 > stato puo' restare identico mentre il **percorso** e' cambiato. **E l'ancora si da' dal CLI**
 > *(`--ancora=registro_mai_apparse` da' esattamente il blob **`fc9ef41c`**, verificato)*.
+
+> ### ⛔ **DUE DIFETTI DEL SIGILLO, presi dal suo stesso giro** *(2026-09-29)*
+>
+> | | |
+> |---|---|
+> | ### **① il referto di `A`/`D` era accettato SENZA verificare su quale BLOB era stato prodotto** | ### **E' capitato davvero**: il referto della prova a guasto era di **PRIMA** della cura di `_sin2_vir`, e il sigillo riportava un residuo ### **che quella cura aveva gia' chiuso**. ### **Un sigillo che legge un referto STANTIO non e' un sigillo: e' una CITAZIONE.** Ora confronta `blob_sim_sha1_byte` col blob di oggi e ### **si rifiuta di leggerlo** |
+> | ### **② il RESIDUO non entrava nel verdetto** | era stampato come **nota**. Ma il criterio di Luca per il pezzo delle guardie e' ### **«zero ripieghi silenziosi, `_sin2_vir` COMPRESA»**: quindi il residuo ### **fa FALLIRE `A`**, non lo commenta |
+>
+> *(E il messaggio finale diceva «tutti e cinque i bracci» quando erano **sei**: ora il numero si
+> conta.)*

@@ -7481,3 +7481,41 @@ resta soddisfatto.)*
 nominati l'avevo provata su **12 passi della scena PICCOLA**, dove ### **non c'e' nessuna nascita**.
 ### **E' dopo una nascita che `_sin2_vir` potrebbe essere corta** — quindi il giro che conta e' la
 scena **GRANDE fino al 72, con le nascite**. **Lo dici tu, e non lo avevo fatto.**
+
+---
+
+# ⛔ **IL SIGILLO PASSAVA SENZA PROVARE CIO' CHE SERVIVA: due difetti miei** *(2026-09-29)*
+
+Stampa in `csv/_seal_fork/_sig_guardie/_corsa.txt`. Sigillo da **`13fad02b`** a **`6e044a81`**.
+### **Nessun codice di fisica:** `64e9f62e`.
+
+## ✅ **Quello che il giro HA provato, e vale**
+
+| | |
+|---|---|
+| ### **`B` PASSA** | ### **72 passi, ZERO differenze in OGNI passo — grandezze E CONTATORI** — contro **`fc9ef41c`**, sulla scena **GRANDE**, ### **con le nascite**. E' il giro che tu hai chiesto, e quello che mi mancava |
+| **`E` PASSA** | `n` da **12802** a **12812**, ### **10 nati**, 144 controlli, 14 assenze contate, **nessun errore** |
+| ### **`F` PASSA** | **30 su 30** apparse, ### **MAI apparse: 0** — la tolleranza dell'assenza **non lascia niente fuori** |
+| **`C` PASSA** | a controllo **spento**: **0** protette *(60 chiamate contate)* |
+
+### ➜ **E il punto 1 era giusto: `_sin2_vir` DOPO una nascita andava misurata, non supposta.** Il
+braccio `B` la copre ora sulla scena grande, con le nascite, ### **e anche sui contatori.**
+
+## ⛔ **Ma i bracci `A` e `D` NON provavano niente, e il difetto e' mio**
+
+| | |
+|---|---|
+| ### **① il referto era STANTIO, e il sigillo lo leggeva in silenzio** | `A`/`D` leggono il referto della prova a guasto ### **senza verificare su quale BLOB e' stato prodotto**. Quello in cartella era di ### **PRIMA della cura di `_sin2_vir`**, quindi il sigillo riportava un residuo ### **che la cura aveva gia' chiuso** |
+| ### **② e il residuo non entrava nel verdetto** | era stampato come **nota**. Ma il tuo criterio e' ### **«zero ripieghi silenziosi, `_sin2_vir` COMPRESA»**: ### **il residuo deve far FALLIRE `A`**, non commentarlo |
+
+> ### 📌 **Un sigillo che legge un referto STANTIO non e' un sigillo: e' una CITAZIONE.**
+> E' la stessa forma di `ANCORE-1` — **25 sigilli che prendevano «il codice di prima» da `HEAD`** e
+> diventavano vuoti — solo dall'altro lato: ### **non il codice vecchio, ma la MISURA vecchia.**
+> **Ora il sigillo confronta `blob_sim_sha1_byte` col blob di oggi e SI RIFIUTA di leggerlo.**
+
+*(E il messaggio finale diceva «tutti e cinque i bracci» quando erano **sei**: ora il numero si
+conta invece di essere scritto.)*
+
+### ➜ **Quindi NON dichiaro chiuso `RIPIEGHI-ZERO`:** la prova a guasto sta rigirando sul blob di
+oggi, e ### **fino a quel referto il criterio «zero ripieghi silenziosi, `_sin2_vir` compresa» NON
+E' VERIFICATO.**

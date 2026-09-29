@@ -385,6 +385,23 @@ def principale():
     a_dati = {}
     if os.path.isfile(REFERTO_A):
         j = json.load(io.open(REFERTO_A, encoding="utf-8"))
+        # ### IL REFERTO DEVE ESSERE DI QUESTO BLOB, e senza questo controllo il sigillo
+        #   accettava in SILENZIO una misura fatta su un ALTRO simulatore -- ed e' capitato:
+        #   il referto della prova a guasto era di PRIMA della cura di `_sin2_vir`, e il sigillo
+        #   riportava un residuo che quella cura aveva gia' chiuso.
+        #   ### Un sigillo che legge un referto STANTIO non e' un sigillo: e' una citazione.
+        _suo = str(j.get("blob_sim_sha1_byte") or "")
+        if _suo != blob(SIM):
+            print("  ### REFERTO STANTIO: e' stato prodotto sul blob %s, il simulatore di oggi"
+                  " e' %s." % (_suo[:8] or "(ignoto)", blob(SIM)[:8]))
+            print("      I bracci `A` e `D` NON si possono leggere da qui: rigirare")
+            print("      `python csv/_test_fork/_guasto_ripieghi.py --passi=30` e ripetere.")
+            a_dati = {"referto_stantio": True, "blob_referto": _suo,
+                      "blob_oggi": blob(SIM)}
+            j = None
+    else:
+        j = None
+    if j is not None:
         S, net = carica(None)
         stato = [k for k, _c in S.REGISTRO_STATO]
         aposto = set(j.get("a_posto") or [])
@@ -398,9 +415,17 @@ def principale():
         print("  A: grandezze di STATO %d, a posto %d, mancano %s"
               % (len(stato), len(aposto & set(stato)), mancano if mancano else "NESSUNA"))
         print("  D: per arco %d, non a posto %s" % (len(archi), archi_ok if archi_ok else "NESSUNA"))
-        print("  RIPIEGO SILENZIOSO residuo (anche su DERIVATE): %s"
-              % (j.get("ripiego_silenzioso") or "NESSUNO"))
-    else:
+        res = j.get("ripiego_silenzioso") or []
+        print("  ### RIPIEGO SILENZIOSO residuo (anche su DERIVATE): %s"
+              % (res if res else "NESSUNO"))
+        # ### IL CRITERIO DI LUCA PER IL PEZZO DELLE GUARDIE: zero ripieghi silenziosi,
+        #   `_sin2_vir` COMPRESA. Quindi il residuo entra nel verdetto di `A`, non e' una nota.
+        if res:
+            A_ok = False
+            print("      ### `A` NON PASSA: il criterio chiede ZERO ripieghi silenziosi,")
+            print("          `_sin2_vir` compresa -- e queste sono ancora li'.")
+        a_dati["ripiego_silenzioso"] = res
+    elif not a_dati.get("referto_stantio"):
         print("  ### referto di A NON TROVATO: %s" % REFERTO_A)
 
     print("")
@@ -413,7 +438,7 @@ def principale():
         print("  braccio %s ... %s" % (k, "PASSA" if tutti[k] else "### FALLISCE"))
     passa = all(tutti.values())
     print("")
-    print("### IL SIGILLO %s" % ("PASSA: tutti e cinque i bracci." if passa
+    print("### IL SIGILLO %s" % (("PASSA: tutti e %d i bracci." % len(tutti)) if passa
                                  else "FALLISCE, e NON lo aggiusto: si committa e si FERMA."))
     OUT = os.path.join(FUORI, "_sig_controllo_unico.json")
     io.open(OUT, "w", encoding="utf-8", newline=chr(10)).write(json.dumps(

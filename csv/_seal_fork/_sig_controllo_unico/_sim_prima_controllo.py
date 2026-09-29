@@ -980,6 +980,27 @@ class CacheCorta(RuntimeError):
     """
 
 
+class CacheLunga(RuntimeError):
+    """**Una CACHE e' piu' LUNGA del suo bersaglio, e nessuno se ne accorgeva.**
+
+    *(`RIPIEGHI-ZERO`, cura del 2026-09-29, decisione di Luca.)*
+
+    ### Perche' esiste, ed e' MISURATO
+    `_ferma_se_cache_corta` comincia con **`if quanta >= n: return`**: ### **il lato LUNGA era
+    SCOPERTO.** La **prova a guasto** del 2026-09-28 lo ha mostrato col **comportamento** --
+    `psi` allungata di uno da' un ### **`ValueError` di broadcast**, non un errore dichiarato.
+    E i tre confronti `len(x) > n` *(`:2265` `:3578` `:3587`)* **non possono scattare**, perche'
+    ### **nessuna legge toglie nodi**: `n` E' `len(phi)`, e le cinque scritture di `phi` sono
+    tutte inizializzazione / `concatenate` / modulo.
+
+    ### -> **Quindi una cache PIU' LUNGA non e' un caso da gestire: e' un ERRORE**, e vuol dire
+    che qualcuno l'ha estesa **due volte**.
+
+    **Chi la vede, che fare:** cercare **il secondo** estensore. ### **NON si tronca:** troncare
+    sarebbe il ripiego che questa eccezione esiste per rendere impossibile.
+    """
+
+
 def _ferma_se_cache_corta(nome, quanta, n, dove, scorta):
     """**UN SOLO controllo per le cache corte**, come `_ferma_se_oltre_max_nodi`."""
     if quanta >= n:
@@ -995,6 +1016,162 @@ def _ferma_se_cache_corta(nome, quanta, n, dove, scorta):
         "  PERCHE': quel valore di scorta e' UN'ALTRA GRANDEZZA, e la darebbe a TUTTA LA",
         "  RETE in silenzio. CHE FARE: la cache va ESTESA alla nascita",
         "  (`_eredita_psi_figli`), NON allungata qui."]))
+
+
+# ============================================================================
+#  IL REGISTRO DELLE GRANDEZZE, e IL CONTROLLO UNICO DELLO SCHEDULATORE
+#  (`RIPIEGHI-ZERO`, 2026-09-29 -- decisione di Luca, piano approvato)
+# ============================================================================
+#  NON E' UNA LISTA SCRITTA A MANO: e' l'esito di DUE MISURE committate.
+#    (1) `csv/_test_fork/_registro_grandezze.py` ha trovato IN AUTOMATICO chi e' per nodo
+#        (`len == n`) e chi per arco (`len == m`): 32 + 11, e ZERO ambigue.
+#    (2) `csv/_test_fork/_ordine_letture.py` ha misurato, in un passo CON NASCITA, chi e' GIA'
+#        PIENO quando `mitosi` ritorna: 30 su 40. Le altre 10 sono corte, e per ognuna si e'
+#        misurato SE UNA LEGGE LE LEGGE CORTE. Risposta: BUCHI ZERO.
+#  E IL CRITERIO E' DI LUCA, e NON e' "stato o derivata": e' "LETTA fra la nascita e la sua
+#    riscrittura". `psi` E' derivata, e ha avuto bisogno di una regola di nascita perche' una
+#    legge la leggeva nell intervallo -- ed e' li' che nasceva il flash di `PSI-FLASH`.
+
+# I METRI: non sono voci del registro, sono il RIFERIMENTO. `n` E' `len(phi)` (property) e
+#   `m` E' `len(i)`: controllarli contro se stessi non vorrebbe dire niente.
+REGISTRO_METRI = (("phi", "nodo"), ("i", "arco"), ("j", "arco"))
+
+# LE GRANDEZZE DI STATO: lunghe ESATTAMENTE `n` (nodi) o `m` (archi) ai due punti di controllo.
+#   Sono le 30 che la misura ha trovato GIA' PIENE quando `mitosi` ritorna.
+REGISTRO_STATO = (
+    ("_cs_nodo_prev", "nodo"), ("_deg", "nodo"), ("_nb", "nodo"), ("_nb_prec", "nodo"),
+    ("_nb_ret", "nodo"), ("_psi_prec", "nodo"), ("_psi_spin_prec", "nodo"),
+    ("_psi_spinor", "nodo"), ("_spinor_lift", "nodo"), ("conc_nodi", "nodo"),
+    ("eta", "nodo"), ("mem_mot", "nodo"), ("omega_s", "nodo"), ("perc_chi", "nodo"),
+    ("perc_geom", "nodo"), ("perc_tw", "nodo"), ("phi0", "nodo"), ("phi_s", "nodo"),
+    ("phivel", "nodo"), ("pos", "nodo"), ("psi", "nodo"), ("psi_spin", "nodo"),
+    ("rho_spin", "nodo"),
+    ("_rep", "arco"), ("d", "arco"), ("d0", "arco"), ("peq", "arco"), ("tw", "arco"),
+    ("twp", "arco"), ("vd", "arco"),
+)
+
+# LE DERIVATE: ricalcolate a piena lunghezza dalla loro legge, quindi fra due ricalcoli la loro
+#   lunghezza NON E' UN INVARIANTE. NON si controllano ai due punti, e il MOTIVO di ognuna e'
+#   MISURATO, non supposto: e' la terza colonna.
+REGISTRO_DERIVATE = (
+    ("_chi_core_nodi", "nodo", "nessuna legge la legge nella finestra della nascita"),
+    ("_chi_core_raggio", "nodo", "nessuna legge la legge nella finestra della nascita"),
+    ("_chi_core_rho0", "nodo", "nessuna legge la legge nella finestra della nascita"),
+    ("_fatt_cs_ultimo", "nodo", "nessuna legge la legge -- e coincide col commento del codice, "
+                                "che la dichiara DIAGNOSTICA e senza lettori (Z7)"),
+    ("_chi_geom_nodi", "nodo", "la legge la trova GIA RISCRITTA (chiralita_core_locale)"),
+    ("_r_corrente", "nodo", "la legge la trova GIA RISCRITTA (step)"),
+    ("_g_rampa_prec", "nodo", "AUTO-RINFRESCO: `_pesi` la legge corta e la riscrive LEI STESSA "
+                              "un evento dopo, e il disallineamento e GIA CONTATO "
+                              "(`_g_rampa_prec_disallineata`)"),
+    ("_xi_rumore", "nodo", "AUTO-RINFRESCO, ed E LA REGOLA DI NASCITA: `xi` e l AMBIENTE, non "
+                           "una proprieta del nodo, quindi il figlio NON lo eredita -- e il "
+                           "codice lo dichiara al sito di lettura"),
+    ("_dt_e_ultimo", "arco", "la legge la trova GIA RISCRITTA (step)"),
+    ("_sin2_vir", "arco", "la legge la trova GIA RISCRITTA (memoria_hebbiana_moto)"),
+)
+
+# ACCESO DI DEFAULT, e la ragione va detta: NON E' UN ESPERIMENTO, E' UNA CURA APPROVATA. Un
+#   controllo spento di default non impedisce niente (`A9`). Il flag `--senza-controllo-registro`
+#   esiste PER IL SIGILLO: il criterio `C` chiede che, col controllo SPENTO, la prova a guasto
+#   torni a dare ZERO grandezze protette -- senno' il sigillo non sta misurando il controllo.
+CONTROLLO_REGISTRO = True
+
+
+def _ferma_registro(eccezione, come, nome, classe, quanta, bersaglio, dove):
+    """Il messaggio, **in un posto solo**: due copie sarebbero due leggi (`9-ter`)."""
+    _nl = chr(10)
+    raise eccezione(_nl.join([
+        "[REGISTRO %s] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)." % come,
+        "  grandezza . %s   (classe: per %s)" % (nome, classe),
+        "  len ....... %s" % ("NON ESISTE" if quanta < 0 else
+                                    ("0 (VUOTA)" if quanta == 0 else str(quanta))),
+        "  bersaglio . %d   (%s)" % (bersaglio, "n = len(phi)" if classe == "nodo"
+                                     else "m = len(i)"),
+        "  dove ...... %s" % dove,
+        "  PERCHE: il registro dichiara questa grandezza di STATO, cioe con una REGOLA DI",
+        "  NASCITA. Se la sua lunghezza non e esattamente il bersaglio, una legge la leggera",
+        "  e prendera un valore CHE NESSUNO HA DICHIARATO.",
+        "  CHE FARE: cercare CHI l ha estesa, o NON l ha estesa, alla nascita. NON si allunga",
+        "  e NON si tronca qui: sarebbe il ripiego che questo controllo esiste per impedire.",
+        "  E se in questa configurazione la grandezza NON ESISTE mai, va dichiarata DERIVATA",
+        "  nel registro CON IL SUO MOTIVO MISURATO -- non tolta dal controllo in silenzio."]))
+
+
+def _ferma_se_registro_incoerente(net, dove):
+    """**UN SOLO controllo, nello schedulatore, invece di quaranta `raise` sparsi.**
+
+    ### Perche' UNICO, ed e' MISURATO (prova a guasto del 2026-09-28)
+    Una guardia **dentro** una legge arriva **troppo tardi**, o viene **aggirata**:
+
+    | | |
+    |---|---|
+    | `:4462`, la guardia su `psi_spin` | **ESEGUE e non spara**, perche' `calcola_psi` ha gia'
+      riscritto `psi_spin` a piena lunghezza: ### **sta A VALLE della riscrittura** |
+    | `_estendi_psi_spinor` | **allunga la coda** con una riga **inventata**, quindi ogni guardia
+      a valle trova un array **giusto**: ### **un estensore a monte la DISARMA** |
+
+    ### -> **Curare sito per sito aveva lasciato 29 grandezze su 31 scoperte.**
+
+    **I due punti** sono quelli decisi da Luca: l'`apri` *(precondizione, prima del ciclo)* e
+    **subito dopo `mitosi`**, che e' **il solo posto del passo in cui `n` cresce**.
+
+    ### ASSENTE non e' DI LUNGHEZZA SBAGLIATA
+    E' la distinzione che Luca ha imposto in `lambda_nodi`: prima che il **primo passo** sia
+    finito una cache pigra puo' non esistere, e ### **si CONTA** (`A8`); ### **dopo, l'assenza
+    e' un ERRORE** -- senno' diventa un ripiego silenzioso nuovo.
+
+    ### E <<ASSENTE>> COMPRENDE <<ESISTE MA E' VUOTA>>, ed e' MISURATO
+    La prima stesura guardava solo `is None`, e ### **si e' fermata all `apri` del PRIMO passo**
+    su `_psi_spinor`: `Rete.__init__` crea diverse cache come **`np.zeros(0)`**, quindi non sono
+    `None` e non sono <<di lunghezza sbagliata>> -- sono ### **non ancora inizializzate**.
+    *(E' il <<non so>> n.3 del piano, in una forma che non avevo previsto: l ho visto girando,
+    non leggendo.)*
+
+    ### E LA TOLLERANZA E' PER GRANDEZZA, non <<prima del primo passo>>: MISURATO
+    La regola di Luca diceva *<<assenza tollerata SOLO prima del primo passo completato>>*, e
+    ### **ferma un run sano all apri del passo 2** su **`_nb_ret`**. La misura, sulla scena
+    piccola a seme 11, dice quando ognuna diventa piena per la prima volta:
+
+    | dall apri del passo | quante |
+    |---|---|
+    | **0** *(subito dopo la semina)* | **18** |
+    | **1** | **11** |
+    | ### **2** | ### **1: `_nb_ret`** |
+    | mai, in 12 passi | **0** |
+
+    ### **E la ragione di `_nb_ret` e' FISICA, non pigrizia: e' il Bloch RITARDATO** (`FORK_SU2_MEM`,
+    `n(t-tau)`), ### **e al primo passo NON ESISTE UN PASSATO.**
+
+    ### -> **Allora la tolleranza e' PER GRANDEZZA, fino alla sua PRIMA APPARIZIONE**, e non
+    contiene alcun numero scelto (`A1`): l assenza **si CONTA** finche' la grandezza non si e'
+    ancora mai vista piena; ### **dopo, se SPARISCE, e un ERRORE** -- ed e' il caso che la regola
+    di Luca vuole impedire. *(La forma <<tollera fino al passo 2>> sarebbe stata una MANOPOLA.)*
+    """
+    if not CONTROLLO_REGISTRO:
+        net._g_registro_spento = getattr(net, "_g_registro_spento", 0) + 1
+        return
+    n = int(net.n)
+    m = int(len(net.i))
+    apparse = net.__dict__.setdefault("_g_registro_apparse", set())
+    for nome, classe in REGISTRO_STATO:
+        bersaglio = n if classe == "nodo" else m
+        v = getattr(net, nome, None)
+        quanta = -1 if v is None else len(v)
+        # <<ASSENTE>> = non esiste OPPURE esiste VUOTA (`np.zeros(0)` di `Rete.__init__`).
+        if quanta <= 0 < bersaglio:
+            if nome not in apparse:
+                net._g_registro_assenti = getattr(net, "_g_registro_assenti", 0) + 1
+                continue
+            # ### GIA VISTA PIENA E ORA NON C E PIU: e' una SPARIZIONE, ed e' un difetto.
+            _ferma_registro(CacheCorta, "SPARITA", nome, classe, quanta, bersaglio, dove)
+        if quanta == bersaglio:
+            apparse.add(nome)
+            continue
+        if quanta < bersaglio:
+            _ferma_registro(CacheCorta, "CORTA", nome, classe, quanta, bersaglio, dove)
+        _ferma_registro(CacheLunga, "LUNGA", nome, classe, quanta, bersaglio, dove)
+    net._g_registro_controlli = getattr(net, "_g_registro_controlli", 0) + 1
 
 
 def _ferma_se_oltre_max_nodi(n_attuale, quanti, dove):
@@ -1102,6 +1279,12 @@ def esegui_passo(net, composizione=None):
     #   *(Il commento precedente diceva <<dichiarato e MISURATO ... riportato dal sigillo>>: era
     #   FALSO quando l'ho scritto, e questa e' la correzione. Vedi `MAX-NODI-FERMA`.)*
     _ferma_se_oltre_max_nodi(net.n, 0, 'schedulatore: inizio del passo')
+    # [RIPIEGHI-ZERO, 2026-09-29] IL PRIMO PUNTO DI CONTROLLO, e sta QUI e non dentro
+    #   `_smp_apri` per una ragione precisa: e' una PRECONDIZIONE, e una precondizione NON
+    #   DEVE MUOVERSI CON UNA VOCE. `H-ETC-2` PERMUTA la composizione, e un controllo
+    #   dentro la fase `apri` si sposterebbe con lei -- mentre <<il passo comincia con le
+    #   lunghezze giuste>> vale in QUALUNQUE ordine.
+    _ferma_se_registro_incoerente(net, 'schedulatore: apri, prima delle leggi')
     for _nome in comp:
         if _nome in _PASSO_FASI:
             getattr(net, _PASSO_FASI[_nome])()
@@ -1111,6 +1294,12 @@ def esegui_passo(net, composizione=None):
             net.verifica_invarianti(dove='esegui_passo')
         else:
             getattr(net, _nome)()
+        # [RIPIEGHI-ZERO, 2026-09-29] IL SECONDO PUNTO: `mitosi` e' IL SOLO POSTO DEL PASSO
+        #   IN CUI `n` CRESCE, quindi l'unico istante in cui una cache puo' diventare corta.
+        #   L'`if` guarda IL NOME DI UNA VOCE, che e' un DATO della composizione -- non un
+        #   flag: la composizione resta un dato, e il docstring qui sopra resta vero.
+        if _nome == 'mitosi':
+            _ferma_se_registro_incoerente(net, 'schedulatore: subito dopo `mitosi`')
     net._g_passi_eseguiti = getattr(net, '_g_passi_eseguiti', 0) + 1
     if comp != tuple(PASSO_COMPOSIZIONE):
         net._g_passi_composizione_altra = getattr(net, '_g_passi_composizione_altra', 0) + 1
@@ -5747,7 +5936,18 @@ class Rete:
             # (densita' di sfondo); l'energia di fase che quel vuoto sostiene scala con P_eq attraverso
             # la relazione di dispersione (v^2, la rigidita' del mezzo). Nessun numero libero: tutto da
             # grandezze gia' nel sistema (d0, la scala di frequenza mediana del ritmo).
-            P_eq = float(np.median(self.d0[:self.n])) if self.n > 0 and len(self.d0) >= self.n else 1.0
+            # [RIPIEGHI-ZERO, 2026-09-29] IL CONFRONTO ERA FRA DUE METRI DIVERSI, e Luca l ha
+            #   rilevato: `d0` e' PER ARCO e veniva confrontata con `self.n`, che conta i
+            #   NODI. `471564 >= 12802` e' sempre vero, quindi il ramo di scorta NON SCATTA
+            #   MAI -- ed era un ripiego solo in apparenza. Ora il confronto e' archi contro
+            #   archi, e resta sempre vero: LA CORREZIONE E' BYTE-INERTE.
+            # ⚠ E RESTA UN SOSPETTO A SE', REGISTRATO COME `P-EQ-MEDIANA-ARCHI` E NON CURATO
+            #   QUI: la FETTA `self.d0[:self.n]` prende la mediana dei PRIMI `n` ARCHI su `m`
+            #   (12802 su 471564), cioe' un SOTTOINSIEME ARBITRARIO ordinato per creazione.
+            #   Correggerlo CAMBIA IL VALORE di `P_eq`, quindi e' un cambio di fisica: vuole
+            #   il suo commit e il suo sigillo.
+            P_eq = (float(np.median(self.d0[:self.n]))
+                    if self.n > 0 and len(self.d0) >= len(self.i) else 1.0)
             # RIGIDITA' DEL MEZZO: con cs-dinamico il mezzo NON e' omogeneo. Il target (grandezza
             # globale, gauge del vuoto) usa la rigidita' rappresentativa = mediana del campo cs locale.
             if CS_DINAMICO:
@@ -8678,6 +8878,10 @@ def _applica_flag(a):
     global TAU_A      # [ESPERIMENTO --tau-a] senza questo l'override sarebbe una LOCALE, cioe' INERTE IN SILENZIO
     global COPPIA_RECIPROCA, GRAV_AMPIEZZA
     global PEQ_ESATTO, PEQ_NASCITA_LOCALE, SCALA_MIN_PASSO, COES_CAUSALE, ANOM_SIMM
+    global CONTROLLO_REGISTRO   # [RIPIEGHI-ZERO] senza la `global` l assegnamento sotto
+    #   creerebbe una LOCALE e il flag nascerebbe MORTO -- e' il difetto documentato di
+    #   `--tau-a`, `--semina-matura` e `--mitosi-2lam`, inerti per un giorno intero coi
+    #   loro sigilli che PASSAVANO.
     global INVARIANTI
     global SEMINA_LAM
     global TEMPO_UNICO_MITOSI, POZZO_D
@@ -8804,6 +9008,10 @@ def _applica_flag(a):
     PEQ_ESATTO = bool(getattr(a, "peq_esatto", False))             # rilassamento esatto di peq (C1)
     PEQ_NASCITA_LOCALE = bool(getattr(a, "peq_nascita_locale", False))  # nascita locale di peq (C2)
     SCALA_MIN_PASSO = bool(getattr(a, "scala_min_passo", False))   # freno una volta per passo (C3)
+    # [RIPIEGHI-ZERO] il DEFAULT E ACCESO: il flag SPEGNE, non accende. Scritto cosi perche
+    #   una cura inerte a default non e una cura, e il sigillo ha bisogno di poterla
+    #   spegnere DAL CLI (H-P3: un sigillo non configura il modulo a mano).
+    CONTROLLO_REGISTRO = not bool(getattr(a, "senza_controllo_registro", False))
     COES_CAUSALE = bool(getattr(a, "coes_causale", False))         # coesione causale (C4)
     ANOM_SIMM = bool(getattr(a, "anom_simm", False))               # anomalia simmetrica (C1-bis)
     INVARIANTI = (str(getattr(a, "invarianti", "on")).lower() != "off")   # gli invarianti (C5)
@@ -9480,6 +9688,16 @@ def _cli():
                         "diventa cs_arco*DT col cs del nodo PIU' LENTO invece di LAM*sqrt(K_C)*DT, "
                         "che e' costruito su costanti di modulo e non conosce il cono del luogo "
                         "(A5). Zero parametri. Default off = byte-identico.")
+    p.add_argument("--senza-controllo-registro", action="store_true",
+                   dest="senza_controllo_registro",
+                   help="SPEGNE il CONTROLLO UNICO del registro delle grandezze "
+                        "(`RIPIEGHI-ZERO`). DEFAULT: il controllo e ACCESO, perche non e "
+                        "un esperimento ma una CURA approvata, e un controllo spento non "
+                        "impedisce niente (A9). QUESTO FLAG ESISTE PER IL SIGILLO: il "
+                        "criterio C chiede che, col controllo SPENTO, la prova a guasto "
+                        "torni a dare ZERO grandezze protette -- senno il sigillo non sta "
+                        "misurando il controllo. Con il flag, ogni chiamata si CONTA in "
+                        "`_g_registro_spento` invece di passare in silenzio.")
     p.add_argument("--scala-min-passo", action="store_true", dest="scala_min_passo",
                    help="IL FRENO DELLA SCALA MINIMA UNA VOLTA PER PASSO, sulla VARIAZIONE "
                         "TOTALE di d0 e di d, dal valore di INIZIO passo. Le sei scritture di d0 "

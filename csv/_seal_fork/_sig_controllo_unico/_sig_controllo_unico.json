@@ -1,18 +1,20 @@
 {
- "blob_oggi": "fc9ef41c8ef375eb7b2c6e26ae4038cae2704279",
- "blob_prima": "f7541d036229cf5e787114cf19ce5fcf53f77b9a",
- "introduce": "c0478509b5db5c5053c981fd62afbdd7189d6170",
+ "blob_oggi": "64e9f62e7bfd6dcfc5148ea86b4ebf6acbe0d4ee",
+ "blob_prima": "fc9ef41c8ef375eb7b2c6e26ae4038cae2704279",
+ "introduce": "4036ad9efc76e8b459a26029e19cb50a8f0f4b74",
  "passi": 72,
  "bracci": {
   "A": true,
   "D": true,
   "B": true,
   "C": true,
-  "E": true
+  "E": true,
+  "F": true
  },
  "B": {
   "passi": 72,
-  "passi_diversi": 0
+  "passi_diversi": 0,
+  "contatori_confrontati": 179
  },
  "C": {
   "protette_a_controllo_spento": [],
@@ -146,6 +148,11 @@
   "nati": 10,
   "controlli": 144,
   "assenze_contate": 14
+ },
+ "F": {
+  "stato": 30,
+  "apparse": 30,
+  "mai_apparse": []
  },
  "A_e_D": {
   "stato": 30,
