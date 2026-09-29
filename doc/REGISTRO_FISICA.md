@@ -1029,6 +1029,31 @@ distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifi
 
 <!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,_dphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
 
+> ### 📌 **NOTA DEL 2026-09-29 — `P_eq` dentro `step`: IL CONFRONTO ERA FRA DUE METRI DIVERSI**
+> *(`RIPIEGHI-ZERO`, rilevato da Luca)*
+>
+> `P_eq` e' la **rigidita' del mezzo** *(la relazione di dispersione, `v^2`)*, e il codice dice che
+> viene da *«`d0`, la scala di frequenza mediana del ritmo»*. La guardia era
+> **`len(self.d0) >= self.n`**: ### ⚠ **`d0` e' PER ARCO e `self.n` conta i NODI.**
+> `471564 >= 12802` e' **sempre vero**, quindi ### **il ramo di scorta (`1.0`) non scattava mai** --
+> era un ripiego **solo in apparenza**.
+>
+> **Ora il confronto e' `len(self.d0) >= len(self.i)`**, archi contro archi, e resta sempre vero:
+> ### ✅ **BYTE-INERTE, e MISURATO** — 8 passi, 23 grandezze, **zero differenze** contro il blob
+> `9cf6fb07`.
+>
+> ### ⛔ **E LA FETTA NON E' IL CONFRONTO, e NON e' curata qui**
+> `float(np.median(self.d0[:self.n]))` prende la mediana dei ### **PRIMI `n` ARCHI su `m`** --
+> **12802 su 471564** sulla scena grande -- cioe' un **sottoinsieme arbitrario**, ordinato per
+> **creazione**. ### **Una mediana su un sottoinsieme arbitrario non e' «la scala mediana del
+> ritmo».**
+> **Registrata come `P-EQ-MEDIANA-ARCHI`** e lasciata **IN CODA**: correggerla ### **cambia il
+> VALORE di `P_eq`**, quindi e' un cambio di fisica e vuole il suo commit e il suo sigillo.
+>
+> ### ⚠ **E la guardia e' ora RIDONDANTE:** il **controllo unico** *(scheda `registro-grandezze`)*
+> garantisce `len(d0) == m` ai due punti del passo. **Va tolta col resto delle guardie di
+> sostituzione**, nel commit separato che il mandato prevede.
+
 > **-> NOTA DEL 2026-09-28 (`MAX-NODI-FERMA`), e riguarda `semina`: LA LEGGE DELLA SEMINA NON
 > E' CAMBIATA, e' cambiato CIO' CHE FA QUANDO NON CI STA.** Prima **troncava**
 > (`min(n, MAX_NODI - self.n)`): si chiedevano `n` nodi, ne nascevano meno, **e dai dati non

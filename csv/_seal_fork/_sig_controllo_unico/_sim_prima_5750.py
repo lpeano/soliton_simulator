@@ -5936,18 +5936,7 @@ class Rete:
             # (densita' di sfondo); l'energia di fase che quel vuoto sostiene scala con P_eq attraverso
             # la relazione di dispersione (v^2, la rigidita' del mezzo). Nessun numero libero: tutto da
             # grandezze gia' nel sistema (d0, la scala di frequenza mediana del ritmo).
-            # [RIPIEGHI-ZERO, 2026-09-29] IL CONFRONTO ERA FRA DUE METRI DIVERSI, e Luca l ha
-            #   rilevato: `d0` e' PER ARCO e veniva confrontata con `self.n`, che conta i
-            #   NODI. `471564 >= 12802` e' sempre vero, quindi il ramo di scorta NON SCATTA
-            #   MAI -- ed era un ripiego solo in apparenza. Ora il confronto e' archi contro
-            #   archi, e resta sempre vero: LA CORREZIONE E' BYTE-INERTE.
-            # ⚠ E RESTA UN SOSPETTO A SE', REGISTRATO COME `P-EQ-MEDIANA-ARCHI` E NON CURATO
-            #   QUI: la FETTA `self.d0[:self.n]` prende la mediana dei PRIMI `n` ARCHI su `m`
-            #   (12802 su 471564), cioe' un SOTTOINSIEME ARBITRARIO ordinato per creazione.
-            #   Correggerlo CAMBIA IL VALORE di `P_eq`, quindi e' un cambio di fisica: vuole
-            #   il suo commit e il suo sigillo.
-            P_eq = (float(np.median(self.d0[:self.n]))
-                    if self.n > 0 and len(self.d0) >= len(self.i) else 1.0)
+            P_eq = float(np.median(self.d0[:self.n])) if self.n > 0 and len(self.d0) >= self.n else 1.0
             # RIGIDITA' DEL MEZZO: con cs-dinamico il mezzo NON e' omogeneo. Il target (grandezza
             # globale, gauge del vuoto) usa la rigidita' rappresentativa = mediana del campo cs locale.
             if CS_DINAMICO:

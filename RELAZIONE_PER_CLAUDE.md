@@ -7161,3 +7161,32 @@ non ne scelgo nessuna.**
 
 **E il collegamento con la decisione gia' presa tiene:** `perc_geom` del nato `= -1` ### **resta
 valida con qualunque strada** — un nodo con torsione zero non ha compiuto il giro.
+
+---
+
+# 🔧 **`:5750` corretto: archi contro `m`, e BYTE-INERTE MISURATO** *(2026-09-29)*
+
+Simulatore da **`9cf6fb07`** a ### **`fc9ef41c`**. **Una riga di codice**, piu' i commenti.
+
+| | |
+|---|---|
+| **prima** | `len(self.d0) >= self.n` — ### **`d0` e' PER ARCO e `self.n` conta i NODI**: `471564 >= 12802` e' **sempre vero**, quindi il ramo di scorta ### **non scattava mai**. Era un ripiego **solo in apparenza** |
+| **ora** | `len(self.d0) >= len(self.i)` — **archi contro archi**, e resta **sempre vero** |
+| ### **byte-inerte, e MISURATO** | **8 passi**, **23 grandezze**, ### **zero differenze** contro il blob `9cf6fb07`, estratto con `git cat-file -p` ### **in BINARIO** *(par.7: non `git checkout`)* |
+
+## ⛔ **E nella STESSA riga ho trovato un'altra cosa, che NON ho curato qui**
+
+### **La FETTA non e' il confronto:** `float(np.median(self.d0[:self.n]))` prende la mediana dei
+### **PRIMI `n` ARCHI su `m`** — **12802 su 471564** sulla scena grande. ### **`d0` e' per ARCO e
+`n` conta i NODI: quella fetta non ha un significato**, e il sottoinsieme e' ordinato per
+**creazione**.
+
+**Registrata come `P-EQ-MEDIANA-ARCHI`, IN CODA, e NON curata in questo commit** — perche'
+### **correggere la fetta CAMBIA IL VALORE di `P_eq`**, quindi e' un cambio di fisica, e il mandato
+per il controllo unico chiede **byte-identico**.
+
+> ### 📌 **E dice una cosa sul perche' il registro serve:** chi ha scritto `[:self.n]` su una
+> grandezza **per arco** probabilmente la credeva **per nodo** — ### **la stessa confusione fra i
+> due metri che il registro delle grandezze, da qui in avanti, rende impossibile.**
+> **Che cosa la deciderebbe:** misurare `P_eq` con la mediana su **tutti** gli archi contro quella
+> sui primi `n`, ai passi 30/60/72, e vedere **di quanto** differiscono.
