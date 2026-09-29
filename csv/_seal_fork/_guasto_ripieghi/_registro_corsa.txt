@@ -1,0 +1,5 @@
+[TIMBRO] _registro_grandezze.py  sha1-BYTE 5e501255  !! MODIFICATO rispetto a HEAD (blob-git c3d93a26) -- i byte che girano NON sono quelli committati
+per nodo 32 · per arco 11 · ambigue 0   (n = 12802, m = 471564)
+funzioni raggiungibili dai siti di nascita: 38
+scritto: C:\Users\lpeano\soliton_simulator\doc\REGISTRO_grandezze.md
+USCITA: 0

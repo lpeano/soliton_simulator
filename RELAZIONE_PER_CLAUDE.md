@@ -6805,3 +6805,86 @@ mitosi; `xi` e' l'AMBIENTE, non una proprieta' del nodo, quindi il figlio NON lo
 27, 28)* invece del solo giorno corrente — l'ultimo chiuso in `doc/relazioni/` e' il **2026-09-25**,
 e qui ci sono **6764 righe**. ### **E' una violazione in corso del par.4**, la dichiaro, e la chiusura
 dei tre giorni e' **un commit a se'**.
+
+---
+
+# 🧭 **IL PIANO DEL CONTROLLO UNICO — e il mandato si rompe in un punto** *(2026-09-29)*
+
+`doc/PIANO_controllo_unico.md` *(blob `f684353f`)* e `doc/REGISTRO_grandezze.md` *(`cfb59fb8`,
+**generato**)*. ### **Nessun byte di fisica:** simulatore **`f7541d03`**, invariato.
+
+| | per NODO | per ARCO |
+|---|---|---|
+| trovate **in automatico** | ### **32** *(= le **31** della prova a guasto **+ `phi`**, il metro)* | ### **11** |
+| con regola di nascita | **22** | **9** |
+| ### **senza** regola | ### **10** | ### **2** |
+| **DA DECIDERE** | **9** | **5** |
+| *«incoerenti»* | **3** | **3** |
+
+`m = len(i) = len(j) = 471564`, e ### **zero grandezze ambigue**: la divisione nodo/arco **non
+richiede una mia scelta**.
+
+## ⛔ **Il punto in cui il mandato si rompe, e va deciso prima del codice**
+
+**Le 10 (+2) senza regola di nascita NON sono buchi: le ho lette a mano una per una, e sono
+DERIVATE** — ognuna ha **una sola** scrittura, **a piena lunghezza** *(`chiralita_core_locale`,
+`_grado`, `step`, `_pesi`, `_passo_spinoriale`, `memoria_hebbiana_moto`)*.
+
+> ### 📌 **`mitosi` fa crescere `n`, e una DERIVATA non viene allungata li': viene RISCRITTA
+> INTERA dalla sua legge, che gira PRIMA di `mitosi` *(`step`)* o AL PASSO DOPO.**
+> ### ➜ **Al punto «subito dopo mitosi» e' CORTA per costruzione, e legittimamente. E anche
+> all'`apri` del passo dopo, perche' `apri` viene prima di `step`.**
+> ### ⛔ **Applicare il controllo a tutte e 32 FERMEREBBE UN RUN SANO ALLA PRIMA NASCITA.**
+
+**Proposta: il registro dichiara DUE CLASSI.** **STATO** → `len == n` esattamente ai due punti.
+**DERIVATA** → **non** si controlla li'; si controlla che **la sua legge la riscriva prima che
+qualcuno la legga**. ### **E la classe si MISURA, non si assume:** passo ① del lavoro, `len(x)` ai
+due punti in un passo con nascita. ### **Predizione scritta ORA: le 22+9 sono `== n`, le 10+2 sono
+corte. Se una di STATO risulta corta, quella e' un BUCO VERO e va curata PRIMA.**
+
+## ⛔ **E le sei «incoerenze» sono MIE, non del codice**
+
+`phi_s` `phivel` `pos` · `_rep` `peq` `vd`: **tutte e sei** hanno i due siti `:664x` e `:680x`, cioe'
+**la MITOSI VERA** e **il canale di SCHWINGER** — che stanno nella **stessa funzione**, e il mio
+strumento li conta percio' come **un evento solo**.
+### **E il codice DICHIARA che sono due eventi:** *«[peq-nascita-locale] gli archi della creazione di
+coppia alla Schwinger nascono con `nan` e vengono CALIBRATI da `step()` … **l'eredita' della MITOSI
+non si tocca: un arco che si spezza non nasce, CONTINUA**»*.
+### ➜ **Ho scelto la GRANA sul confine di una FUNZIONE invece che su quello di un EVENTO FISICO** —
+la stessa forma d'errore delle altre volte. **Proposta: QUATTRO eventi** *(semina · divisione ·
+Schwinger · allaccio)*, e le sei si dissolvono ### **senza aggiungere una legge** *(`9-ter`)*.
+
+## ✅ Lo schedulatore: **zero leggi nuove**
+
+`apri` **esiste** *(`:866`)*, e c'e' un **precedente esatto**: `esegui_passo` ha gia' una
+precondizione, `_ferma_se_oltre_max_nodi`, **prima del ciclo**, perche' *«un passo che non si puo'
+fare NON COMINCIA»*. ### **Proposta `B`:** ① precondizione in `esegui_passo` prima del ciclo — una
+precondizione **non deve muoversi con una voce**, e `H-ETC-2` **permuta** la composizione ·
+② dentro il ciclo, subito dopo la voce `'mitosi'`.
+**L'alternativa `A`** *(due voci nuove nella composizione)* e' **piu' pulita** ma costa **due voci**,
+e `valida_composizione` **vieta i duplicati**: ### **per `9-ter` vince `B`.**
+### ⚠ **Differenza dal mandato alla lettera, dichiarata:** tu dici *«nella fase apri»*, io propongo
+*«al momento dell'apri, dallo schedulatore»*. Se intendi **dentro `_smp_apri`** si fa, ma il
+controllo **si sposta quando la composizione si permuta**.
+
+**Serve anche `CacheLunga`** *(classe nuova)*: la cura del 2026-09-28 comincia con
+`if quanta >= n: return`, quindi ### **il lato LUNGA e' scoperto** — la prova a guasto lo ha
+mostrato. **E un quarto campo `puo_essere_assente`**, con **contatore** *(`A8`)* e non errore:
+### **«assente» non e' «di lunghezza sbagliata», e un controllo che non li distingue si ferma alla
+COSTRUZIONE DELLA SCENA — l'errore di `d14892a5`.**
+
+## ⛔ Tre siti **NON sono guardie**, e toglierli cambierebbe la fisica
+
+| | |
+|---|---|
+| `_xi_rumore` `:3570` | il codice lo **dichiara**: *«NON e' un fallback: e' il percorso normale della mitosi; `xi` e' l'AMBIENTE … il figlio NON lo eredita»*. ### **E' una REGOLA DI NASCITA scritta al sito di LETTURA:** si dichiara, il ramo **resta** e **conta** |
+| `conc_nodi` / `_riallinea_tracking` `:3274-3275` | ### **allunga E TRONCA**, e il docstring dice *«senza dover patchare ogni singolo punto che crea nodi/archi»*: ### **l'esatto opposto del tuo disegno** — una riparazione silenziosa al posto di una regola |
+| `:5750` `step` | confronta `len(d0)` **per ARCO** con `n` dei **NODI**: ### **due metri diversi**, non un ripiego |
+
+### ➜ **E' il punto che avevo dichiarato PRIMA di guardare** *(`b55514b`)*: **la parte difficile non
+e' togliere le guardie — e' distinguere la guardia dalla regola di nascita. Tre su tre confermate.**
+
+**I criteri del sigillo** *(`A`-`F`)* e le **sette cose che non decido io**, ognuna col suo criterio
+di chiusura, stanno nei par.5 e 6 del piano. ### **Il criterio che mi aspetto piu' fragile e' `B`**
+*(byte-identico al 72)*, e il perche' e' scritto: **due guardie SCATTANO in un run sano**
+*(`de9c12ed`)*, e una e' legittima.

@@ -1547,7 +1547,7 @@ responsabile», non il verdetto** — che esce dal confronto dello stato.
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura |
 |---|---|---|---|
-| `csv/_test_fork/_registro_grandezze.py` | `5910fde6` | `python csv/_test_fork/_registro_grandezze.py --passi=30` | ① **a runtime**: chi e' **per nodo** *(`len == n`)* e chi **per arco** *(`len == m`)* allo stato BASE — **stessa scena e stesso passo della prova a guasto**, cosi' i due elenchi si confrontano · ② **dall'AST**: **tutte** le scritture `self.X = ...` con funzione ed espressione, e la **regola di nascita PROPOSTA** dai soli siti che **allungano** |
+| `csv/_test_fork/_registro_grandezze.py` | `5e501255` | `python csv/_test_fork/_registro_grandezze.py --passi=30` | ① **a runtime**: chi e' **per nodo** *(`len == n`)* e chi **per arco** *(`len == m`)* allo stato BASE — **stessa scena e stesso passo della prova a guasto**, cosi' i due elenchi si confrontano · ② **dall'AST**: **tutte** le scritture `self.X = ...` con funzione ed espressione, e la **regola di nascita PROPOSTA** dai soli siti che **allungano** |
 
 **Genera `doc/REGISTRO_grandezze.md`.** ### **E' una SONDA, non un sigillo:** esce sempre con `0`,
 il verdetto lo da' il piano.
@@ -1559,3 +1559,18 @@ il verdetto lo da' il piano.
 > Luca *(`A1`)*.
 > ### **Una grandezza senza NESSUNA scrittura che la allunga a un sito di nascita e' un BUCO, non
 > una regola** — ed e' la **causa** del ripiego, non il ripiego.
+
+> ### ⛔ **Il primo blob (`5910fde6`) avrebbe scritto «BUCO» FALSI, e l'ho preso verificando il
+> registro PRIMA di pubblicarlo.** Usava una **lista di nomi** *(`semina`/`mitosi`/`_allaccia`)*, e
+> l'estensione e' **delegata** a `_eredita_psi_figli` e `_eredita_spinore_figli`, che `mitosi` chiama
+> a `:6660` e `:6822`. ### **Sarebbe stata la SESTA volta che una mia regola basata sul NOME nasconde
+> cio' che cerca.** `5e501255` usa il **grafo delle chiamate** *(38 funzioni raggiungibili dai siti di
+> nascita)*, **stampa la CATENA** di ogni voce, e ### **spezza la colonna per EVENTO**: `semina` ·
+> `mitosi (+Schwinger)` · `_allaccia`, perche' ### **la semina crea dal VUOTO e la mitosi divide un
+> GENITORE — due regole diverse non sono un'incoerenza, sono due eventi.**
+
+**Referto:** `doc/REGISTRO_grandezze.md` *(blob `cfb59fb8`)* · la stampa
+`csv/_seal_fork/_guasto_ripieghi/_registro_corsa.txt`.
+**Esito:** per nodo **32** *(= le 31 della prova a guasto **+ `phi`**, il metro)* · per arco **11** ·
+### **ambigue ZERO** · con regola di nascita **22 + 9** · ### **senza regola 10 + 2** · **DA
+DECIDERE 9 + 5** · *«incoerenti»* **3 + 3**.
