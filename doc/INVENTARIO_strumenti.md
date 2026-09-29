@@ -1579,7 +1579,7 @@ DECIDERE 9 + 5** · *«incoerenti»* **3 + 3**.
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura |
 |---|---|---|---|
-| `csv/_test_fork/_ordine_letture.py` | `3a35664d` | `python csv/_test_fork/_ordine_letture.py --da=40 --fino=72` | in un passo **CON NASCITA**, per ogni grandezza del registro: la **prima LETTURA DI LEGGE** e la **prima RISCRITTURA COMPLETA** *(`len == n`)*, ### **in ordine**. Il confine e' l'istante in cui `phi` viene assegnata **piu' lunga** |
+| `csv/_test_fork/_ordine_letture.py` | `97cb0ea3` | `python csv/_test_fork/_ordine_letture.py --da=40 --fino=72` | in un passo **CON NASCITA**, per ogni grandezza del registro: la **prima LETTURA DI LEGGE** e la **prima RISCRITTURA COMPLETA** *(`len == n`)*, ### **in ordine**. Il confine e' l'istante in cui `phi` viene assegnata **piu' lunga** |
 
 > ### 📌 **Perche' esiste, ed e' la correzione del guardiano al mio piano:** il criterio del
 > controllo unico **non e'** *«stato o derivata»*. ### **`psi` E' derivata, e ha avuto bisogno di
@@ -1596,3 +1596,21 @@ simulatore cambia**, e la classe si rimette com'era a fine misura.
 | ### **il CONTROLLO e' una condizione di validita'** | lo stesso passo **con** e **senza** sorveglianza deve essere ### **byte-identico**. Se non lo e', `vale: false` e si ferma |
 | ### **due specie di LETTURA, e separarle e' obbligatorio** | chi **estende** una cache la **legge** per estenderla *(`concatenate([self.eta, …])`)*: ### **quella non e' una lettura di legge, e' parte della riscrittura.** Si separa dalla **funzione chiamante** — se e' raggiungibile dai siti di nascita e' una lettura di **estensione** |
 | `phi`, `i`, `j` | sono i **METRI** *(`n = len(phi)`, `m = len(i)`)*: si sorvegliano *(`phi` E' il confine)* ma ### **non sono voci del registro** |
+
+> ### ⛔ **La prima stesura (`3a35664d`) e' GIRATA e il suo verdetto era NULLO** *(fallimento in
+> `249ee3c`)*. **Quattro difetti, tutti dall'aver fissato UN SOLO METRO:**
+> ① la riscrittura completa cercata come `len == n` **anche per le grandezze per ARCO**, piene a
+> `m`: ### **tutte e nove «mai riscritta» per costruzione** · ② il confine era la riga di `phi`, ma
+> `mitosi` estende `pos` **un evento prima** (`:6640`), e `pos` risultava *«letta prima»*,
+> ### **un artefatto** · ③ la finestra si chiudeva a **fine passo**, e `_xi_rumore` ripiega **al
+> passo seguente** · ④ ogni lettura contava come lettura di **legge**, ### **anche quella di
+> `verifica_invarianti`, che `_PASSO_TIPI` dichiara «osservatore: LEGGE SOLTANTO»**.
+>
+> **`97cb0ea3` cura tutti e quattro:** bersaglio **`n` per i nodi e `m` per gli archi** con la
+> classe **fissata prima della nascita** · finestra da ### **quando `mitosi` RITORNA** · finestra
+> **estesa al passo seguente** · tipo del lettore ### **preso da `_PASSO_TIPI`**, la tabella del
+> simulatore. **E non tiene piu' l'elenco degli eventi** *(1,9 milioni per passo)*: registra **solo
+> le PRIME occorrenze**.
+> ### ⚠ **E un quinto difetto l'ho preso PRIMA di girare:** il bersaglio era fissato **a fine
+> passo**, quindi nel passo di nascita **nessuna riscrittura** sarebbe stata registrata. Ora si
+> fissa **dentro `mitosi`**, dove la finestra si apre.

@@ -10,38 +10,46 @@
 
 **Il mio piano sbagliava qui, e la correzione e' di Luca:** `psi` **E'** derivata *(la scrive
 `calcola_psi`)*, e ha avuto bisogno di ereditare **non** per la sua natura, ma perche'
-### **una legge la leggeva dopo la mitosi e prima del ricalcolo** -- ed e' esattamente li' che
-nasceva il flash.
+### **una legge la leggeva dopo la mitosi e prima del ricalcolo** — ed e' li' che nasceva il flash.
+
+## ⛔ I QUATTRO difetti della PRIMA stesura *(`3a35664d`, fallimento in `249ee3c`)*
+
+**La corsa era valida, il verdetto NO.** Tutti e quattro venivano dall'aver fissato **un solo
+metro**:
+
+| | difetto | la cura, qui |
+|---|---|---|
+| **①** | la riscrittura completa cercata come `len == n` ### **anche per le grandezze PER ARCO**, che sono piene a `m`: tutte e nove risultavano *«mai riscritta»* **per costruzione** | ### **il bersaglio e' `n` per i nodi e `m` per gli archi**, e la classe si fissa **PRIMA** della nascita |
+| **②** | il confine era la riga di `phi`, ### **ma la mitosi estende `pos` a `:6640`, un evento PRIMA**: `pos` risultava *«letta prima»*, ### **un artefatto** | ### **la finestra parte da quando la voce `mitosi` RITORNA** — dentro `mitosi` nessuna legge legge |
+| **③** | la finestra si chiudeva a **fine passo**, e non distingueva *«riscritta al passo dopo prima che qualcuno la legga»* da *«letta corta al passo dopo»* — ### **il caso di `_xi_rumore`** | ### **la finestra continua NEL PASSO SEGUENTE** |
+| **④** | ogni lettura contava come *«lettura di legge»*, ### **anche quella di `verifica_invarianti`**, che `_PASSO_TIPI` dichiara **`osservatore`: LEGGE SOLTANTO** | ### **il TIPO del lettore si prende da `_PASSO_TIPI`**, la tabella del simulatore: `osservatore` e `disegno` **non** sono leggi |
 
 ## Come si misura, e ### **non e' una lettura del codice**
 
 | | |
 |---|---|
-| **1** | scena **GRANDE** *(`nmasse` e `sep` dall'argv)*, seme `11`, avanti fino a ### **un passo CON NASCITA** *(il primo e' il `42`)* |
-| **2** | la rete viene **sorvegliata**: una **sottoclasse dinamica** intercetta `__getattribute__` e `__setattr__` per **le sole grandezze del registro**, e **registra l'ORDINE** *(un contatore) e la FUNZIONE CHIAMANTE* |
-| **3** | ### **il confine e' la NASCITA**: l'istante in cui `phi` viene assegnata **piu' lunga di prima** *(`n` E' `len(phi)`)* |
-| **4** | da quell'istante, per ogni grandezza: la **prima LETTURA** e la **prima RISCRITTURA COMPLETA** *(`len == n`)* |
+| **1** | scena **GRANDE**, seme `11`, avanti fino a ### **un passo CON NASCITA** — che si **cerca**, non si assume |
+| **2** | la rete e' **sorvegliata** da una **sottoclasse dinamica**: `__getattribute__`, `__setattr__` e ### **`mitosi`**, per le sole grandezze del registro. Registra **ordine** e **funzione chiamante** |
+| **3** | ### **la finestra si apre quando `mitosi` RITORNA** *(se `n` e' cresciuto)* e si chiude **a fine del passo SEGUENTE** |
+| **4** | per ogni grandezza, nella finestra: prima **lettura di LEGGE**, prima lettura dell'**osservatore**, prima **riscrittura COMPLETA** *(al proprio bersaglio)* |
 
-## I tre esiti, e il verdetto e' l'ORDINE
+## Gli esiti
 
 | | |
 |---|---|
-| ### **LETTA PRIMA** | ### **SERVE UNA REGOLA DI NASCITA.** E' il caso di `psi`: qualcuno la legge corta prima che la sua legge la riscriva |
-| **RISCRITTA PRIMA** | **puo' restare corta**: nessuno la vede nell'intervallo |
-| **MAI TOCCATA** | nell'intervallo non e' ne' letta ne' riscritta. ### **Si riporta, e NON e' un'assoluzione** *(nel passo dopo potrebbe esserlo)* |
+| ### **PIENA A FINE MITOSI** | e' gia' lunga al suo bersaglio quando `mitosi` ritorna: ### **nessuno puo' vederla corta.** E' il caso di chi **ha** una regola di nascita |
+| ### **LETTA PRIMA** | ### **SERVE UNA REGOLA DI NASCITA** — una **legge** la legge corta prima che venga riscritta |
+| **RISCRITTA PRIMA** | **puo' restare corta**: nessuna legge la vede |
+| **SOLO L'OSSERVATORE** | la guarda solo `verifica_invarianti` / il disegno: ### **si riporta, e va deciso a parte** |
+| **MAI TOCCATA** | in **due** passi non e' ne' letta ne' riscritta. ### **Non e' un'assoluzione** |
 
-> ### 📌 **E LE LETTURE SI DISTINGUONO IN DUE SPECIE, senno' il verdetto e' falso:** una funzione
-> che **estende** una cache la **legge** per estenderla *(`np.concatenate([self.eta, ...])`)*.
-> ### **Quella NON e' una lettura di legge: e' parte della riscrittura.** Si separa guardando la
-> **funzione chiamante**: se e' raggiungibile dai siti di nascita e' una **lettura di estensione**.
-
-### ⚠ **La sorveglianza NON cambia la fisica, e va detto come si garantisce**
-`__getattribute__` restituisce **lo stesso oggetto**, `__setattr__` **scrive lo stesso valore**: si
-**annota** e si delega. Il generatore `net.rng` non viene toccato. **E il braccio di CONTROLLO lo
-verifica**: lo stesso passo, con e senza sorveglianza, ### **deve essere byte-identico**.
+### ⚠ **La sorveglianza NON cambia la fisica, e il CONTROLLO lo verifica:** lo stesso passo con
+e senza, ### **byte-identico**. Se non lo e', `vale: false` e si ferma.
+**E non si tiene un elenco di eventi:** si registrano **solo le PRIME occorrenze** *(43 voci)* —
+la prima stesura ne teneva **1,9 milioni per passo**.
 
 COMANDO:  python csv/_test_fork/_ordine_letture.py [--da=40] [--fino=72]
-USCITA:   0 se il controllo byte-identico tiene e una nascita e' stata trovata; 1 altrimenti.
+USCITA:   0 se il controllo tiene e una nascita e' stata trovata; 1 altrimenti.
 """
 import ast
 import copy
@@ -64,17 +72,18 @@ SIM = os.path.join(RADICE, "soliton_simulator.py")
 FUORI = os.path.join(RADICE, "csv", "_seal_fork", "_ordine_letture")
 SCARTO = os.path.join(FUORI, "_scarto_cli")
 RADICI_NASCITA = ("semina", "mitosi", "_allaccia")
-# ⚠ `phi` e `i`/`j` sono i METRI (`n = len(phi)`, `m = len(i)`): si sorvegliano comunque, perche'
-#   `phi` E' il confine, ma non sono voci del registro.
+# ⚠ `phi` e `i`/`j` sono i METRI (`n = len(phi)`, `m = len(i)`): si sorvegliano -- `phi` serve a
+#   sapere se `n` e' cresciuto -- ma NON sono voci del registro.
 METRI = ("phi", "i", "j")
-# le 23 del sigillo, per il braccio di CONTROLLO byte-identico
+# i tipi di `_PASSO_TIPI` che NON sono leggi. **Dalla tabella del simulatore, non da una mia idea.**
+NON_LEGGI = ("osservatore", "disegno")
 GRANDEZZE = ("d", "d0", "phi", "phi0", "phi_s", "phivel", "psi", "psi_spin", "eta", "tw", "twp",
              "vd", "peq", "mem_mot", "perc_chi", "perc_geom", "perc_tw", "omega_s", "_nb",
              "_nb_prec", "_psi_spinor", "_psi_prec", "_spinor_lift")
 
 
-def raggiungibili(radici):
-    """Le funzioni **raggiungibili** dai siti di nascita. *(Come in `_registro_grandezze.py`.)*"""
+def _grafo():
+    """`{funzione: {chiamate}}` e l'insieme dei nomi definiti, dall'AST del simulatore."""
     albero = ast.parse(io.open(SIM, encoding="utf-8").read())
     fine = {x.name: x for x in ast.walk(albero)
             if isinstance(x, (ast.FunctionDef, ast.AsyncFunctionDef))}
@@ -87,6 +96,10 @@ def raggiungibili(radici):
                 if nc in fine and nc != nome:
                     s.add(nc)
         chiama[nome] = s
+    return fine, chiama
+
+
+def raggiungibili_da(radici, fine, chiama):
     fuori, coda = set(), []
     for r in radici:
         if r in fine:
@@ -101,19 +114,20 @@ def raggiungibili(radici):
     return fuori
 
 
-def per_nodo_e_arco(net):
-    """L'elenco **misurato**: `len == n` e `len == m`. *(Lo stesso criterio del registro.)*"""
-    n, m = int(net.n), int(len(net.i))
-    nodo, arco = [], []
-    for k, v in sorted(vars(net).items()):
-        if not isinstance(v, (np.ndarray, list)):
-            continue
-        try:
-            L = len(v)
-        except Exception:
-            continue
-        (nodo if L == n else arco if L == m else []).append(k)
-    return nodo, arco
+def tipi_dei_lettori(S):
+    """`{funzione: {tipi delle VOCI che la possono raggiungere}}`.
+
+    ### **Il tipo viene da `_PASSO_TIPI`, che e' la tabella del SIMULATORE** — non da una mia
+    classificazione. Una funzione raggiungibile da piu' voci porta **tutti** i loro tipi.
+    """
+    fine, chiama = _grafo()
+    fasi = dict(getattr(S, "_PASSO_FASI", {}))
+    fuori = {}
+    for voce, tipo in getattr(S, "_PASSO_TIPI", {}).items():
+        radice = fasi.get(voce, voce)
+        for f in raggiungibili_da((radice,), fine, chiama):
+            fuori.setdefault(f, set()).add(tipo)
+    return fuori, raggiungibili_da(RADICI_NASCITA, fine, chiama)
 
 
 def _lun(v):
@@ -123,49 +137,94 @@ def _lun(v):
         return -1
 
 
-def sorveglia(net, nomi):
-    """Mette la rete **sotto sorveglianza** e restituisce il registratore.
+def per_nodo_e_arco(net):
+    n, m = int(net.n), int(len(net.i))
+    nodo, arco = [], []
+    for k, v in sorted(vars(net).items()):
+        if not isinstance(v, (np.ndarray, list)):
+            continue
+        L = _lun(v)
+        if L == n:
+            nodo.append(k)
+        elif L == m:
+            arco.append(k)
+    return nodo, arco
 
-    **Sottoclasse dinamica**, non una patch del simulatore: ### **nessun byte del simulatore
-    cambia**, e a fine misura la classe si rimette com'era.
+
+def sorveglia(net, nomi, tipi, classe):
+    """Mette la rete **sotto sorveglianza**. Restituisce `(stato, classe_originale)`.
+
+    ### **Nessun byte del simulatore cambia:** e' una **sottoclasse dinamica**, e a fine misura la
+    classe si rimette com'era. Si **annota** e si **delega**: stesso oggetto in lettura, stesso
+    valore in scrittura.
     """
-    stato = {"k": 0, "confine": None, "eventi": [], "n_al_confine": None}
-    OSS = set(nomi)
     base = type(net)
+    st = {"k": 0, "finestra": False, "fine_mitosi": None, "n": None, "m": None,
+          "bersaglio": {}, "primi": {}, "cresciuto": False, "eventi_contati": 0,
+          "len_a_fine_mitosi": None}
+    OSS = set(nomi)
+
+    def _reg(nome, specie, lung, chi):
+        st["eventi_contati"] += 1
+        if not st["finestra"]:
+            return
+        p = st["primi"].setdefault(nome, {})
+        if specie == "W":
+            if lung == st["bersaglio"].get(nome) and "riscrittura" not in p:
+                p["riscrittura"] = {"evento": st["k"], "chi": chi, "len": lung}
+            return
+        t = tipi.get(chi, set())
+        e_legge = bool(t) and not t.issubset(set(NON_LEGGI))
+        chiave = "lettura_legge" if e_legge else "lettura_non_legge"
+        if chiave not in p:
+            p[chiave] = {"evento": st["k"], "chi": chi, "len": lung,
+                         "tipi": sorted(t) or ["(fuori dalle voci)"]}
 
     class Sorvegliata(base):
         def __getattribute__(self, nome):
             v = base.__getattribute__(self, nome)
             if nome in OSS:
-                stato["k"] += 1
+                st["k"] += 1
                 try:
                     chi = sys._getframe(1).f_code.co_name
                 except Exception:
                     chi = "?"
-                stato["eventi"].append((stato["k"], "R", nome, _lun(v), chi))
+                _reg(nome, "R", _lun(v), chi)
             return v
 
         def __setattr__(self, nome, valore):
+            base.__setattr__(self, nome, valore)
             if nome in OSS:
-                vecchia = _lun(base.__getattribute__(self, nome)
-                               if hasattr(base, nome) or nome in self.__dict__ else None)
-                base.__setattr__(self, nome, valore)
-                stato["k"] += 1
+                st["k"] += 1
                 try:
                     chi = sys._getframe(1).f_code.co_name
                 except Exception:
                     chi = "?"
-                nuova = _lun(valore)
-                stato["eventi"].append((stato["k"], "W", nome, nuova, chi))
-                # ### IL CONFINE: `phi` assegnata PIU' LUNGA di prima -> `n` e' cresciuto.
-                if nome == "phi" and stato["confine"] is None and nuova > vecchia >= 0:
-                    stato["confine"] = stato["k"]
-                    stato["n_al_confine"] = nuova
-                return
-            base.__setattr__(self, nome, valore)
+                _reg(nome, "W", _lun(valore), chi)
+
+        def mitosi(self, *a, **k):
+            d = base.__getattribute__(self, "__dict__")
+            n_prima = _lun(d.get("phi"))
+            r = base.mitosi(self, *a, **k)
+            # ### LA FINESTRA SI APRE QUI: dentro `mitosi` nessuna legge legge.
+            if not st["finestra"]:
+                n_dopo = _lun(d.get("phi"))
+                st["fine_mitosi"] = st["k"]
+                st["n"], st["m"] = n_dopo, _lun(d.get("i"))
+                st["cresciuto"] = bool(n_dopo > n_prima >= 0)
+                if st["cresciuto"]:
+                    # ### IL BERSAGLIO SI FISSA QUI, non a fine passo: `n` per i nodi, `m` per
+                    #   gli archi. **Fissarlo dopo il passo era un difetto della stesura di
+                    #   mezzo: durante il passo di nascita nessuna riscrittura sarebbe stata
+                    #   registrata**, e l'ho preso prima di girare.
+                    st["bersaglio"] = {k: (st["n"] if classe.get(k) == "nodo" else st["m"])
+                                       for k in classe}
+                    st["len_a_fine_mitosi"] = {k: _lun(d.get(k)) for k in classe}
+                    st["finestra"] = True
+            return r
 
     net.__class__ = Sorvegliata
-    return stato, base
+    return st, base
 
 
 def _foto(net):
@@ -214,6 +273,7 @@ def carica(passi):
 
 
 def principale():
+    import contextlib
     da, fino = 40, 72
     for x in sys.argv[1:]:
         if x.startswith("--da="):
@@ -222,122 +282,121 @@ def principale():
             fino = int(x.split("=", 1)[1])
     if not os.path.isdir(FUORI):
         os.makedirs(FUORI)
-    RAGG = raggiungibili(RADICI_NASCITA)
     S, net = carica(da)
+    tipi, _ragg = tipi_dei_lettori(S)
     nodo, arco = per_nodo_e_arco(net)
+    # ### LA CLASSE SI FISSA PRIMA DELLA NASCITA: e' il difetto (1) della prima stesura.
+    classe = {}
+    for k in nodo:
+        classe[k] = "nodo"
+    for k in arco:
+        classe[k] = "arco"
     voci = [k for k in nodo + arco if k not in METRI]
+    classe_voci = {k: classe[k] for k in voci}
     osservate = sorted(set(voci) | set(METRI))
     print("scena ........ nmasse %d, sep %.4f  ->  n = %d, archi = %d   (dopo %d passi)"
           % (S._NMASSE_VIDEO["n"], S._NMASSE_VIDEO["sep"], net.n, len(net.i), da))
-    print("sorvegliate .. %d  (%d voci del registro + %d metri: %s)"
+    print("sorvegliate .. %d  (%d voci + %d metri: %s)"
           % (len(osservate), len(voci), len(METRI), ", ".join(METRI)))
-    print("funzioni raggiungibili dai siti di nascita: %d" % len(RAGG))
+    print("classe FISSATA PRIMA della nascita: %d per nodo, %d per arco"
+          % (len(nodo) - sum(1 for x in METRI if x in nodo),
+             len(arco) - sum(1 for x in METRI if x in arco)))
+    print("tipi dei lettori presi da `_PASSO_TIPI`: %d funzioni mappate; NON leggi: %s"
+          % (len(tipi), ", ".join(NON_LEGGI)))
     print("")
 
-    # ---- il CONTROLLO: la sorveglianza non cambia un bit ---------------------------------
+    # ---- il CONTROLLO --------------------------------------------------------------------
     print("=" * 104)
     print("CONTROLLO -- lo stesso passo CON e SENZA sorveglianza: byte-identico?")
     print("=" * 104)
-    import contextlib
     A, B = copy.deepcopy(net), copy.deepcopy(net)
     S.net = A
     with contextlib.redirect_stdout(io.StringIO()):
         _passo.passo_pieno(S, A)
     fa = _foto(A)
-    st_b, base_b = sorveglia(B, osservate)
+    stb, baseb = sorveglia(B, osservate, tipi, classe_voci)
     S.net = B
     with contextlib.redirect_stdout(io.StringIO()):
         _passo.passo_pieno(S, B)
-    B.__class__ = base_b
-    fb = _foto(B)
-    sano = _identiche(fa, fb)
-    print("  eventi registrati nel passo di prova: %d" % len(st_b["eventi"]))
-    print("  ### %s" % ("CONTROLLO OK: la sorveglianza NON cambia un bit."
-                        if sano else
-                        "CONTROLLO FALLITO: la sorveglianza PERTURBA. LA MISURA NON VALE."))
+    B.__class__ = baseb
+    sano = _identiche(fa, _foto(B))
     S.net = net
+    print("  eventi intercettati nel passo di prova: %d" % stb["eventi_contati"])
+    print("  ### %s" % ("CONTROLLO OK: la sorveglianza NON cambia un bit." if sano else
+                        "CONTROLLO FALLITO: la sorveglianza PERTURBA. LA MISURA NON VALE."))
     if not sano:
         io.open(os.path.join(FUORI, "_ordine_letture.json"), "w", encoding="utf-8",
                 newline=chr(10)).write(json.dumps(
-                    {"vale": False, "motivo": "la sorveglianza perturba lo stato"},
-                    indent=1, ensure_ascii=False))
+                    {"vale": False, "motivo": "la sorveglianza perturba lo stato"}, indent=1))
         return 1
     print("")
 
-    # ---- avanti fino a un passo CON NASCITA, sorvegliando ---------------------------------
+    # ---- la misura -----------------------------------------------------------------------
     print("=" * 104)
-    print("AVANTI FINO A UN PASSO CON NASCITA (il confine e' `phi` assegnata PIU' LUNGA)")
+    print("AVANTI FINO A UN PASSO CON NASCITA. La finestra si apre quando `mitosi` RITORNA,")
+    print("e si chiude a FINE DEL PASSO SEGUENTE.")
     print("=" * 104)
-    passo, trovato, st = da, None, None
+    st, base = sorveglia(net, osservate, tipi, classe_voci)
+    passo, nascita, dopo_la_nascita = da, None, 0
+    pieno_a_fine_mitosi = None
     while passo < fino:
         passo += 1
-        C = copy.deepcopy(net)
-        st, base = sorveglia(C, osservate)
-        S.net = C
-        with contextlib.redirect_stdout(io.StringIO()):
-            _passo.passo_pieno(S, C)
-        C.__class__ = base
-        if st["confine"] is not None:
-            trovato = passo
-            print("  passo %d: ### NASCITA -- n da %d a %d, confine all'evento %d, eventi totali %d"
-                  % (passo, net.n, st["n_al_confine"], st["confine"], len(st["eventi"])))
-            break
-        print("  passo %d: nessuna nascita (%d eventi)" % (passo, len(st["eventi"])))
-        S.net = net
         with contextlib.redirect_stdout(io.StringIO()):
             _passo.passo_pieno(S, net)
-    S.net = net
-    if trovato is None:
+        if nascita is None and st["cresciuto"]:
+            nascita = passo
+            pieno_a_fine_mitosi = st["len_a_fine_mitosi"]
+            print("  passo %d: ### NASCITA -- n = %d, m = %d, `mitosi` ritorna all'evento %d"
+                  % (passo, st["n"], st["m"], st["fine_mitosi"]))
+            dopo_la_nascita = 1
+            continue
+        if nascita is not None:
+            dopo_la_nascita += 1
+            if dopo_la_nascita >= 2:
+                print("  passo %d: passo SEGUENTE percorso, finestra chiusa" % passo)
+                break
+        else:
+            print("  passo %d: nessuna nascita" % passo)
+    net.__class__ = base
+    if nascita is None:
         print("  ### NESSUNA NASCITA fino al passo %d: LA MISURA NON SI PUO' FARE." % fino)
         io.open(os.path.join(FUORI, "_ordine_letture.json"), "w", encoding="utf-8",
                 newline=chr(10)).write(json.dumps(
-                    {"vale": False, "motivo": "nessuna nascita entro il passo %d" % fino},
-                    indent=1, ensure_ascii=False))
+                    {"vale": False, "motivo": "nessuna nascita entro %d" % fino}, indent=1))
         return 1
     print("")
 
-    # ---- l'ordine, dopo il confine --------------------------------------------------------
-    conf, nn = st["confine"], st["n_al_confine"]
-    dopo = [e for e in st["eventi"] if e[0] >= conf]
+    # ---- il verdetto ---------------------------------------------------------------------
     esiti = {}
     for k in voci:
-        mio = [e for e in dopo if e[2] == k]
-        letture = [e for e in mio if e[1] == "R"]
-        # ### una lettura fatta da chi ESTENDE non e' una lettura di legge: e' la riscrittura.
-        legge = [e for e in letture if e[4] not in RAGG]
-        estens = [e for e in letture if e[4] in RAGG]
-        riscr = [e for e in mio if e[1] == "W" and e[3] == nn]
-        pl = legge[0] if legge else None
-        pr = riscr[0] if riscr else None
-        if pl is None and pr is None:
-            esito = "MAI TOCCATA"
-        elif pl is None:
-            esito = "RISCRITTA PRIMA"
-        elif pr is None:
+        p = st["primi"].get(k, {})
+        bers = st["n"] if classe.get(k) == "nodo" else st["m"]
+        ll, ln, rr = (p.get("lettura_legge"), p.get("lettura_non_legge"), p.get("riscrittura"))
+        if ll and rr:
+            esito = "LETTA PRIMA" if ll["evento"] < rr["evento"] else "RISCRITTA PRIMA"
+        elif ll:
             esito = "LETTA E MAI RISCRITTA"
+        elif rr:
+            esito = "RISCRITTA PRIMA"
+        elif ln:
+            esito = "SOLO L'OSSERVATORE"
         else:
-            esito = "LETTA PRIMA" if pl[0] < pr[0] else "RISCRITTA PRIMA"
-        esiti[k] = {
-            "esito": esito,
-            "prima_lettura_di_legge": ({"evento": pl[0], "len": pl[3], "chi": pl[4]}
-                                       if pl else None),
-            "prima_riscrittura_completa": ({"evento": pr[0], "len": pr[3], "chi": pr[4]}
-                                           if pr else None),
-            "letture_di_legge": len(legge), "letture_di_estensione": len(estens),
-            "prime_letture_di_estensione": [{"evento": e[0], "chi": e[4]} for e in estens[:3]],
-        }
+            esito = "MAI TOCCATA"
+        esiti[k] = {"classe": classe.get(k), "bersaglio": bers, "esito": esito,
+                    "lettura_di_legge": ll, "lettura_non_di_legge": ln, "riscrittura": rr}
     print("=" * 104)
-    print("L'ORDINE: prima LETTURA DI LEGGE contro prima RISCRITTURA COMPLETA (len == %d)" % nn)
+    print("L'ORDINE, nella finestra (bersaglio: n = %d per i nodi, m = %d per gli archi)"
+          % (st["n"], st["m"]))
     print("=" * 104)
-    print("  %-22s %-24s %-28s %s" % ("grandezza", "esito", "prima lettura (chi)",
-                                      "prima riscrittura (chi)"))
+    print("  %-20s %-5s %-22s %-26s %s"
+          % ("grandezza", "cl.", "esito", "prima lettura di LEGGE", "prima riscrittura"))
     for k in voci:
         r = esiti[k]
-        pl, pr = r["prima_lettura_di_legge"], r["prima_riscrittura_completa"]
-        print("  %-22s %-24s %-28s %s"
-              % (k, r["esito"],
-                 ("#%d %s" % (pl["evento"], pl["chi"]))[:28] if pl else "--",
-                 ("#%d %s" % (pr["evento"], pr["chi"])) if pr else "--"))
+        ll, rr = r["lettura_di_legge"], r["riscrittura"]
+        print("  %-20s %-5s %-22s %-26s %s"
+              % (k, r["classe"][:4], r["esito"],
+                 ("#%d %s" % (ll["evento"], ll["chi"]))[:26] if ll else "--",
+                 ("#%d %s" % (rr["evento"], rr["chi"])) if rr else "--"))
 
     def q(e):
         return sorted(k for k in voci if esiti[k]["esito"] == e)
@@ -348,18 +407,21 @@ def principale():
     for e, nota in (("LETTA PRIMA", "### SERVE UNA REGOLA DI NASCITA"),
                     ("LETTA E MAI RISCRITTA", "### SERVE UNA REGOLA DI NASCITA"),
                     ("RISCRITTA PRIMA", "puo' restare corta"),
-                    ("MAI TOCCATA", "non e' un'assoluzione: nel passo dopo potrebbe esserlo")):
+                    ("SOLO L'OSSERVATORE", "la guarda solo il controllo di dominio o il disegno"),
+                    ("MAI TOCCATA", "in DUE passi: e NON e' un'assoluzione")):
         v = q(e)
         print("  %-24s %3d  %s" % (e, len(v), nota))
         if v:
             print("      %s" % ", ".join(v))
     OUT = os.path.join(FUORI, "_ordine_letture.json")
     io.open(OUT, "w", encoding="utf-8", newline=chr(10)).write(json.dumps(
-        {"vale": True, "passo_di_nascita": trovato, "n_al_confine": nn,
-         "evento_del_confine": conf, "eventi_totali": len(st["eventi"]),
+        {"vale": True, "passo_di_nascita": nascita, "n": st["n"], "m": st["m"],
+         "evento_fine_mitosi": st["fine_mitosi"], "eventi_intercettati": st["eventi_contati"],
          "nmasse": S._NMASSE_VIDEO["n"], "sep": S._NMASSE_VIDEO["sep"],
-         "voci": voci, "metri": list(METRI), "controllo_byte_identico": True,
-         "esiti": esiti}, indent=1, ensure_ascii=False, default=float))
+         "voci": voci, "metri": list(METRI), "classe": classe,
+         "len_a_fine_mitosi": pieno_a_fine_mitosi, "controllo_byte_identico": True,
+         "non_leggi": list(NON_LEGGI), "esiti": esiti},
+        indent=1, ensure_ascii=False, default=float))
     print("")
     print("scritto: " + OUT)
     return 0
