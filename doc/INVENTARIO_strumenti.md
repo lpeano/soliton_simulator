@@ -1542,3 +1542,20 @@ di oggi)*; *«eseguita»* **non** vuol dire *«ramo di scorta preso»* *(registr
 corpo)*; il filtro per **nome** perde gli **alias locali**. **Invalidano la colonna «riga
 responsabile», non il verdetto** — che esce dal confronto dello stato.
 **E lo strumento NON chiama `dichiara_configurazione`:** `_configurazione.txt` e' un **riparo**.
+
+### 📒 Il registro delle grandezze *(2026-09-29)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura |
+|---|---|---|---|
+| `csv/_test_fork/_registro_grandezze.py` | `5910fde6` | `python csv/_test_fork/_registro_grandezze.py --passi=30` | ① **a runtime**: chi e' **per nodo** *(`len == n`)* e chi **per arco** *(`len == m`)* allo stato BASE — **stessa scena e stesso passo della prova a guasto**, cosi' i due elenchi si confrontano · ② **dall'AST**: **tutte** le scritture `self.X = ...` con funzione ed espressione, e la **regola di nascita PROPOSTA** dai soli siti che **allungano** |
+
+**Genera `doc/REGISTRO_grandezze.md`.** ### **E' una SONDA, non un sigillo:** esce sempre con `0`,
+il verdetto lo da' il piano.
+
+> ### 📌 **La regola di nascita si PROPONE, non si assegna a macchina**, ed e' la lezione di
+> `_classi_ripieghi.py`: **quattro** volte una regola automatica ha **nascosto** cio' che cercava.
+> ### **L'espressione e' SEMPRE riportata** — senza quella tabella la colonna della proposta
+> sarebbe una cosa da **credere**. E cio' che non e' evidente resta ### **DA DECIDERE**, che decide
+> Luca *(`A1`)*.
+> ### **Una grandezza senza NESSUNA scrittura che la allunga a un sito di nascita e' un BUCO, non
+> una regola** — ed e' la **causa** del ripiego, non il ripiego.
