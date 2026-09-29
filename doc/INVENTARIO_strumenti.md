@@ -1574,3 +1574,25 @@ il verdetto lo da' il piano.
 **Esito:** per nodo **32** *(= le 31 della prova a guasto **+ `phi`**, il metro)* · per arco **11** ·
 ### **ambigue ZERO** · con regola di nascita **22 + 9** · ### **senza regola 10 + 2** · **DA
 DECIDERE 9 + 5** · *«incoerenti»* **3 + 3**.
+
+### 🔬 L'ordine fra la prima lettura e la prima riscrittura *(2026-09-29)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura |
+|---|---|---|---|
+| `csv/_test_fork/_ordine_letture.py` | `3a35664d` | `python csv/_test_fork/_ordine_letture.py --da=40 --fino=72` | in un passo **CON NASCITA**, per ogni grandezza del registro: la **prima LETTURA DI LEGGE** e la **prima RISCRITTURA COMPLETA** *(`len == n`)*, ### **in ordine**. Il confine e' l'istante in cui `phi` viene assegnata **piu' lunga** |
+
+> ### 📌 **Perche' esiste, ed e' la correzione del guardiano al mio piano:** il criterio del
+> controllo unico **non e'** *«stato o derivata»*. ### **`psi` E' derivata, e ha avuto bisogno di
+> ereditare perche' UNA LEGGE LA LEGGEVA fra la mitosi e il ricalcolo** — ed e' li' che nasceva il
+> flash. ### ➜ **Il criterio e' l'ORDINE: letta prima ⇒ serve una regola di nascita; riscritta
+> prima ⇒ puo' restare corta.**
+
+**Come:** una **sottoclasse dinamica** intercetta `__getattribute__` e `__setattr__` per le sole
+grandezze del registro e registra **ordine** e **funzione chiamante**. ### **Nessun byte del
+simulatore cambia**, e la classe si rimette com'era a fine misura.
+
+| | |
+|---|---|
+| ### **il CONTROLLO e' una condizione di validita'** | lo stesso passo **con** e **senza** sorveglianza deve essere ### **byte-identico**. Se non lo e', `vale: false` e si ferma |
+| ### **due specie di LETTURA, e separarle e' obbligatorio** | chi **estende** una cache la **legge** per estenderla *(`concatenate([self.eta, …])`)*: ### **quella non e' una lettura di legge, e' parte della riscrittura.** Si separa dalla **funzione chiamante** — se e' raggiungibile dai siti di nascita e' una lettura di **estensione** |
+| `phi`, `i`, `j` | sono i **METRI** *(`n = len(phi)`, `m = len(i)`)*: si sorvegliano *(`phi` E' il confine)* ma ### **non sono voci del registro** |
