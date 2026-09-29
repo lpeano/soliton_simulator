@@ -6928,3 +6928,80 @@ una mia idea**: `dinamica`/`vincolo`/`AMBIGUA` = **legge**; `osservatore`/`diseg
 **COSA NON SO ANCORA, e per questo non consegno la misura:** dei **16** *«letta e mai riscritta»*,
 **quante** lo sono per il difetto ① *(nove, per certo)* e quante per il ③. ### **Non lo indovino: si
 rimisura.**
+
+---
+
+# ✅ **PUNTO 1 E PUNTO 7: la misura vale, e i BUCHI sono ZERO** *(2026-09-29)*
+
+`doc/ORDINE_letture.md` *(`1dca883f`, **generato**)* · misura `cde9dce2` · dichiarazione
+`doc/REGOLE_nascita.tsv` *(`c45ca427`, **29 regole**)*. ### **Nessun byte di fisica:** `f7541d03`.
+
+## ✅ **Punto 1 — l'ordine, e il criterio di Luca regge**
+
+| | |
+|---|---|
+| ### **il CONTROLLO tiene** | lo stesso passo con e senza sorveglianza e' ### **byte-identico**, su **1 887 282** eventi |
+| la nascita | ### **trovata** al passo **42**, `n = 12803`, `m = 471565` |
+| ### **PIENE quando `mitosi` ritorna** | ### **30 su 40** |
+| **CORTE** | **10** |
+| ### ✅ **BUCHI** | ### **ZERO** |
+
+### ➜ **Le 30 piene sono ESATTAMENTE l'insieme che HA una regola di nascita: la regola si vede nella MISURA, non solo nel codice.**
+
+**E le 10 corte, una per una:**
+
+| | |
+|---|---|
+| **4** | ### **nessuna legge le legge** — `_chi_core_nodi` `_chi_core_rho0` `_chi_core_raggio` `_fatt_cs_ultimo` *(e questo conferma il «nessun lettore (Z7)» scritto nel codice)* |
+| **4** | la legge le trova ### **GIA' PIENE** — `_chi_geom_nodi` `_r_corrente` `_dt_e_ultimo` `_sin2_vir`: riscritte **prima** della lettura |
+| ### **2** | ### **AUTO-RINFRESCO**: `_xi_rumore` e `_g_rampa_prec` — una legge le legge **corte** e ### **le riscrive lei stessa UN EVENTO dopo** |
+
+> ### 📌 **E per entrambi gli auto-rinfreschi la dichiarazione ESISTE GIA' NEL CODICE:**
+> `_xi_rumore` → *«NON e' un fallback: e' il percorso normale della mitosi … il figlio NON lo
+> eredita»*; `_g_rampa_prec` → *«e' un array **DIAGNOSTICO** … il suo disallineamento **SI CONTA**
+> … qui se il confronto salta si perde una **MISURA**, non una legge»*, col contatore
+> `_g_rampa_prec_disallineata`. ### ➜ **`A8` e' gia' rispettato in entrambi.**
+
+### ➜ **Che cosa vuol dire per il controllo unico: NON C'E' NIENTE DA CURARE PRIMA.**
+Le **30** piene passano `len == n` **per costruzione**; le **10** corte si **escludono** e si
+**dichiarano**, e due dichiarazioni sono gia' scritte.
+
+## ⛔ **Il SESTO difetto del mio strumento, e perche' NON rigiro la misura**
+
+La sua **stampa** etichetta *«LETTA PRIMA»* **24** grandezze, e ### **l'etichetta e' fuorviante**:
+la finestra si apre quando `mitosi` **ritorna**, e a quell'istante **30 su 40 sono GIA' PIENE** —
+chi le legge dopo ### **non le vede corte**.
+### **La domanda vera non e' «chi legge prima»: e' «una legge le legge CORTE?»** — e il dato per
+rispondere ### **e' dentro la misura stessa**, perche' ogni evento porta la **lunghezza vista**.
+### ➜ **Percio' la misura VALE e non si rigira: il referto la legge bene.** La stampa si corregge
+**a parte**, ed e' in coda; ### **il blob che ha girato resta `97cb0ea3`.**
+
+## ✅ **Punto 7 — le regole di nascita: le ho lette e scritte, 29, e le ancore si verificano**
+
+**Perche' il mio strumento le dava «DA DECIDERE»:** il valore passa da una **variabile locale**
+*(`fm`, `anti`, `pos_figlio`, `chi_nuovi`, `er`, `el`, `dh`, `calcio_phi`, `calcio_omega`)*, e
+l'AST leggeva **il nome della locale** invece della sua definizione.
+### **La stessa cecita' sugli ALIAS, stavolta dal lato del VALORE.**
+
+| | |
+|---|---|
+| `phi` divisione | ### **fase MEDIA dei genitori**: `fm = (phi[a] - 0.5*D) % dphi` — `D` e' la differenza fra i genitori, quindi `phi[a] - D/2` **e' il punto medio**; il `bias` lo sposta secondo l'asimmetria di torsione |
+| `phi` Schwinger | ### **antifase**: `anti = (fm[pick] + dphi/2) % dphi` |
+| `pos` | ### **punto medio**, a entrambi gli eventi — quindi la mia *«incoerenza»* su `pos` **non esisteva** |
+| `_psi_spinor` `_spinor_lift` | ### **eredita COL SEGNO** di doppia copertura *(`er = -er` per l'antichirale)* |
+| `d` divisione | ### **META' del padre**, col pavimento `LAM` |
+| `perc_chi` Schwinger | ### **eredita INVERTITA** — la carica dell'antiparticella |
+
+### ⚠ **Ogni riga si verifica per ANCORA, cercata per TESTO, e la riga di OGGI e' stampata** — i
+numeri di riga **shiftano fra i blob**, ed e' un errore che ho gia' fatto in questa stessa sessione.
+### ✅ **29 ancore su 29 trovate, e una volta sola.**
+
+## 🛑 **I TRE casi che porto a Luca, e SOLO questi**
+
+| # | dove | la regola che c'e', e perche' la porto |
+|---|---|---|
+| **1** | ### `perc_geom` alla **Schwinger**, `:6814` | ### **`perc_chi` INVERTE** *(`-perc_chi[aa]`, `:6810`)* **e `perc_geom` NO** *(`perc_geom[aa]`)*. La **carica** si ribalta, la **chiralita' geometrica** no. ### **Puo' essere voluto — `[chi-coop]` le tiene distinte — ma un'antiparticella con la stessa chiralita' geometrica e carica opposta e' un'asimmetria che non so giustificare** |
+| **2** | ### `d0` alla **divisione**, `:6722` | ### **TRE rami** *(`:6704` `:6707` `:6709`)* scelgono fra `d0h` *(meta' di `d0`)* e `dh` *(meta' di `d`)*. ### **Sono due grandezze diverse**, e quale vince dipende da un ramo: **non so dire se le tre scelte siano la stessa legge** |
+| **3** | ### `phivel` alla **semina**, `:3154` | ### **DUE rami**: col calore iniziale un calcio gaussiano *(a `:3152` moltiplicato per `chi_nuovi`, quindi **correlato al segno chirale**)*, senza calore `np.zeros(n)`. ### **E' una regola CONDIZIONATA A UN FLAG**, e il registro dovrebbe dichiarare quale |
+
+**Gli altri 26 li ho scritti e non li porto**, come chiedi.

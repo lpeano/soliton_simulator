@@ -1,0 +1,30 @@
+grandezza	classe	evento	regola	ancora	derivazione	dubbio
+phi	metro-nodo	semina	estrazione nuova	ph = self.rng.random(n) * 4 * np.pi	fase CASUALE sul doppio giro; nel ramo con `fase` data e` `float(fase) + rng.normal(0, 0.05, n)`	NO
+phi	metro-nodo	divisione	media (fase media dei genitori)	fm = (self.phi[a] - 0.5 * D) % self._dphi()	`D` e` la differenza di fase fra i genitori: `phi[a] - D/2` E` IL PUNTO MEDIO. Con `MITOSI_DIR` il `bias = 0.5*tanh(...)` sposta il punto medio secondo l asimmetria di torsione, e a :6638 un `flip` puo` aggiungere mezzo giro	NO
+phi	metro-nodo	Schwinger	antifase del figlio di mitosi	anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()	mezzo giro esatto dal figlio scelto: e` la coppia particella-antiparticella	NO
+phi0	nodo	divisione	uguale a phi alla nascita	self.phi0 = np.concatenate([self.phi0, fm])	stesso `fm` di `phi`: il nato ha fase di riferimento UGUALE alla sua fase, cioe` scarto zero	NO
+phi0	nodo	Schwinger	uguale a phi alla nascita	self.phi0 = np.concatenate([self.phi0, anti])	stesso `anti` di `phi`	NO
+pos	nodo	divisione	punto medio dei genitori	pos_figlio = 0.5 * (self.pos[a] + self.pos[b])	media aritmetica delle due posizioni	NO
+pos	nodo	Schwinger	punto medio	np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])	media aritmetica	NO
+phivel	nodo	semina	estrazione nuova, oppure zero	calcio_phi = self.rng.normal(0, _CALORE_INIT, n)	DUE RAMI: col calore iniziale un calcio gaussiano (a :3152 moltiplicato per `chi_nuovi`), senza calore `np.zeros(n)` a :3157	SI
+phivel	nodo	divisione	media dei genitori	np.concatenate([self.phivel, 0.5 * (self.phivel[a] + self.phivel[b])])	semisomma esplicita	NO
+perc_chi	nodo	semina	estrazione nuova	chi_nuovi = self.rng.choice([-1, 1], n)	sorteggio del segno, lo STESSO array usato anche per `perc_geom`	NO
+perc_chi	nodo	divisione	eredita dal genitore a	np.concatenate([self.perc_chi, self.perc_chi[a]])	copia diretta	NO
+perc_chi	nodo	Schwinger	eredita INVERTITA (carica opposta)	np.concatenate([self.perc_chi, -self.perc_chi[aa]])	il segno meno: l antiparticella ha carica opposta	NO
+perc_geom	nodo	semina	estrazione nuova	np.concatenate([self.perc_geom, chi_nuovi])	lo stesso sorteggio di `perc_chi`	NO
+perc_geom	nodo	divisione	eredita dal genitore a	np.concatenate([self.perc_geom, self.perc_geom[a]])	copia diretta	NO
+perc_geom	nodo	Schwinger	eredita DIRETTA, NON invertita	np.concatenate([self.perc_geom, self.perc_geom[aa]])	copia diretta -- e alla Schwinger `perc_chi` INVERTE e `perc_geom` NO	SI
+omega_s	nodo	semina	estrazione nuova	calcio_omega = self.rng.normal(0, _CALORE_INIT, (n, 3))	calcio gaussiano isotropo sui tre assi	NO
+omega_s	nodo	divisione	eredita dal genitore	np.vstack([self.omega_s, self.omega_s[src]])	copia diretta dal genitore `src`	NO
+_psi_spinor	nodo	divisione	eredita COL SEGNO di doppia copertura	er = self._psi_spinor[src].copy()	copia dal genitore, e a :2367 `er = -er` per l antichirale: segno di doppia copertura opposto	NO
+_spinor_lift	nodo	divisione	eredita COL SEGNO	el = self._spinor_lift[src].copy()	copia dal genitore, e a :2372 `el = -el`	NO
+d	arco	divisione	META` del padre, con pavimento LAM	dh = self.d[sel] / 2	l arco si spezza in due tronconi da `d/2`, e `_nasce(dh, mitosi, 2, 0)` impone la scala minima LAM	NO
+d	arco	Schwinger	nuova a scala minima	dd = self._nasce(np.maximum(	i due archi della coppia nascono alla scala minima, non ereditano	NO
+d	arco	allaccio	nuova a scala minima	dd = self._nasce(dd, 	il troncone parte da LAM	NO
+d0	arco	divisione	META`, con tre rami	d0new = self._nasce(d0new, 	TRE RAMI a :6704 :6707 :6709 che scelgono fra `d0h` (meta` di d0) e `dh` (meta` di d)	SI
+tw	arco	divisione	zero	zz = np.zeros(len(sel))	i tronconi nascono senza torsione	NO
+tw	arco	allaccio	zero	np.concatenate([self.tw, np.zeros(len(dd))])	l arco nuovo nasce senza torsione	NO
+i	metro-arco	divisione	topologia: l arco a-b e` SOSTITUITO da a-m e m-b	np.concatenate([self.i[keep], a, m])	`keep` TOGLIE l arco spezzato: non e` un valore che si eredita, e` la topologia	NO
+j	metro-arco	divisione	topologia: secondo troncone	np.concatenate([self.j[keep], m, b])	idem	NO
+i	metro-arco	Schwinger	topologia: due archi nuovi verso k	np.concatenate([self.i, aa, k])	il nodo `k` della coppia si allaccia ad `aa` e `bb`	NO
+j	metro-arco	Schwinger	topologia: due archi nuovi verso k	np.concatenate([self.j, k, bb])	idem	NO

@@ -1614,3 +1614,33 @@ simulatore cambia**, e la classe si rimette com'era a fine misura.
 > ### ⚠ **E un quinto difetto l'ho preso PRIMA di girare:** il bersaglio era fissato **a fine
 > passo**, quindi nel passo di nascita **nessuna riscrittura** sarebbe stata registrata. Ora si
 > fissa **dentro `mitosi`**, dove la finestra si apre.
+
+### 🔬 La misura dell'ordine, **GIRATA**, e le regole di nascita *(2026-09-29)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa fa |
+|---|---|---|---|
+| `csv/_test_fork/_ordine_letture.py` | `97cb0ea3` | `python csv/_test_fork/_ordine_letture.py --da=40 --fino=72` | **misura** l'ordine lettura/riscrittura nella finestra della nascita |
+| `csv/_test_fork/_referto_ordine.py` | `b0e89744` | `python csv/_test_fork/_referto_ordine.py` | **genera** `doc/ORDINE_letture.md` dalla misura **e** dalla dichiarazione `doc/REGOLE_nascita.tsv`, ### **verificando ogni ancora PER TESTO** e stampando la riga di oggi |
+
+**Referti:** `csv/_seal_fork/_ordine_letture/_ordine_letture.json` *(`cde9dce2`)* · la stampa
+`_corsa.txt` · la dichiarazione `doc/REGOLE_nascita.tsv` *(`c45ca427`, **29 regole**)* · il
+documento `doc/ORDINE_letture.md` *(`1dca883f`)*.
+
+| | |
+|---|---|
+| ### ✅ **il CONTROLLO tiene** | lo stesso passo **con** e **senza** sorveglianza e' ### **byte-identico** su **1 887 282** eventi intercettati |
+| la nascita | ### **trovata** al passo **42** *(al 41 nessuna)*: `n = 12803`, `m = 471565`, `mitosi` ritorna all'evento **3 774 496** |
+| ### **PIENE a fine mitosi** | ### **30 su 40** — ed **e' esattamente l'insieme che HA una regola di nascita**: ### **la regola si vede nella MISURA, non solo nel codice** |
+| **CORTE a fine mitosi** | **10** |
+| ### ✅ **BUCHI** | ### **ZERO** |
+
+**Delle 10 corte:** **4** nessuna legge le legge · **4** la legge le trova **gia' piene** · **2**
+sono **AUTO-RINFRESCHI** *(`_xi_rumore` e `_g_rampa_prec`: la legge le legge corte e **le riscrive
+lei stessa** un evento dopo)*, ### **e per entrambe la dichiarazione ESISTE GIA' NEL CODICE**.
+
+> ### ⛔ **E IL SESTO DIFETTO DI `_ordine_letture.py`, dichiarato:** la sua **stampa** etichetta
+> *«LETTA PRIMA»* **24** grandezze, e l'etichetta e' **fuorviante** — la finestra si apre quando
+> `mitosi` **ritorna**, e a quell'istante **30 su 40 sono GIA' PIENE**. ### **La domanda vera e'
+> «una legge le legge CORTE?», e il dato per rispondere e' nella misura stessa** *(ogni evento
+> porta la lunghezza vista)*. ### **Percio' la misura VALE e non si rigira: il referto la legge
+> bene.** **La stampa si corregge a parte, ed e' in coda:** il blob che ha girato resta `97cb0ea3`.

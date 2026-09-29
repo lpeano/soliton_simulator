@@ -1,76 +1,81 @@
-[TIMBRO] _ordine_letture.py  sha1-BYTE 3a35664d  committato e pulito
+[TIMBRO] _ordine_letture.py  sha1-BYTE 97cb0ea3  committato e pulito
 scena ........ nmasse 3, sep 6.1158  ->  n = 12802, archi = 471564   (dopo 40 passi)
-sorvegliate .. 43  (40 voci del registro + 3 metri: phi, i, j)
-funzioni raggiungibili dai siti di nascita: 38
+sorvegliate .. 43  (40 voci + 3 metri: phi, i, j)
+classe FISSATA PRIMA della nascita: 31 per nodo, 9 per arco
+tipi dei lettori presi da `_PASSO_TIPI`: 59 funzioni mappate; NON leggi: osservatore, disegno
 
 ========================================================================================================
 CONTROLLO -- lo stesso passo CON e SENZA sorveglianza: byte-identico?
 ========================================================================================================
-  eventi registrati nel passo di prova: 1887282
+  eventi intercettati nel passo di prova: 1887282
   ### CONTROLLO OK: la sorveglianza NON cambia un bit.
 
 ========================================================================================================
-AVANTI FINO A UN PASSO CON NASCITA (il confine e' `phi` assegnata PIU' LUNGA)
+AVANTI FINO A UN PASSO CON NASCITA. La finestra si apre quando `mitosi` RITORNA,
+e si chiude a FINE DEL PASSO SEGUENTE.
 ========================================================================================================
-  passo 41: nessuna nascita (1887282 eventi)
-  passo 42: ### NASCITA -- n da 12802 a 12803, confine all'evento 1887092, eventi totali 1887422
+  passo 41: nessuna nascita
+  passo 42: ### NASCITA -- n = 12803, m = 471565, `mitosi` ritorna all'evento 3774496
+  passo 43: passo SEGUENTE percorso, finestra chiusa
 
 ========================================================================================================
-L'ORDINE: prima LETTURA DI LEGGE contro prima RISCRITTURA COMPLETA (len == 12803)
+L'ORDINE, nella finestra (bersaglio: n = 12803 per i nodi, m = 471565 per gli archi)
 ========================================================================================================
-  grandezza              esito                    prima lettura (chi)          prima riscrittura (chi)
-  _chi_core_nodi         LETTA E MAI RISCRITTA    #1887419 verifica_invarianti --
-  _chi_core_raggio       LETTA E MAI RISCRITTA    #1887422 verifica_invarianti --
-  _chi_core_rho0         LETTA E MAI RISCRITTA    #1887421 verifica_invarianti --
-  _chi_geom_nodi         LETTA E MAI RISCRITTA    #1887420 verifica_invarianti --
-  _cs_nodo_prev          RISCRITTA PRIMA          #1887357 memoria_hebbiana_mo #1887118 _eredita_spinore_figli
-  _deg                   RISCRITTA PRIMA          #1887235 rilassa_disegno     #1887207 _grado
-  _fatt_cs_ultimo        LETTA E MAI RISCRITTA    #1887409 verifica_invarianti --
-  _g_rampa_prec          MAI TOCCATA              --                           --
-  _nb                    RISCRITTA PRIMA          #1887323 memoria_hebbiana_mo #1887124 _eredita_spinore_figli
-  _nb_prec               RISCRITTA PRIMA          #1887416 verifica_invarianti #1887130 _eredita_spinore_figli
-  _nb_ret                RISCRITTA PRIMA          #1887417 verifica_invarianti #1887132 _eredita_spinore_figli
-  _psi_prec              RISCRITTA PRIMA          #1887410 verifica_invarianti #1887149 _eredita_spinore_figli
-  _psi_spin_prec         RISCRITTA PRIMA          #1887412 verifica_invarianti #1887151 _eredita_spinore_figli
-  _psi_spinor            RISCRITTA PRIMA          #1887411 verifica_invarianti #1887140 _eredita_spinore_figli
-  _r_corrente            LETTA E MAI RISCRITTA    #1887408 verifica_invarianti --
-  _spinor_lift           RISCRITTA PRIMA          #1887414 verifica_invarianti #1887144 _eredita_spinore_figli
-  _xi_rumore             LETTA E MAI RISCRITTA    #1887418 verifica_invarianti --
-  conc_nodi              MAI TOCCATA              --                           --
-  eta                    RISCRITTA PRIMA          #1887398 verifica_invarianti #1887103 mitosi
-  mem_mot                RISCRITTA PRIMA          #1887294 memoria_hebbiana_mo #1887115 mitosi
-  omega_s                RISCRITTA PRIMA          #1887404 verifica_invarianti #1887136 _eredita_spinore_figli
-  perc_chi               RISCRITTA PRIMA          #1887400 verifica_invarianti #1887106 mitosi
-  perc_geom              RISCRITTA PRIMA          #1887401 verifica_invarianti #1887109 mitosi
-  perc_tw                RISCRITTA PRIMA          #1887402 verifica_invarianti #1887111 mitosi
-  phi0                   RISCRITTA PRIMA          #1887395 verifica_invarianti #1887094 mitosi
-  phi_s                  RISCRITTA PRIMA          #1887396 verifica_invarianti #1887097 mitosi
-  phivel                 RISCRITTA PRIMA          #1887397 verifica_invarianti #1887101 mitosi
-  pos                    LETTA PRIMA              #1887217 rilassa_disegno     #1887237 rilassa_disegno
-  psi                    RISCRITTA PRIMA          #1887287 memoria_hebbiana_mo #1887154 _eredita_psi_figli
-  psi_spin               RISCRITTA PRIMA          #1887334 _nb_grav            #1887156 _eredita_psi_figli
-  rho_spin               RISCRITTA PRIMA          #1887403 verifica_invarianti #1887158 _eredita_psi_figli
-  _dt_e_ultimo           LETTA E MAI RISCRITTA    #1887390 verifica_invarianti --
-  _rep                   LETTA E MAI RISCRITTA    #1887388 verifica_invarianti --
-  _sin2_vir              LETTA E MAI RISCRITTA    #1887389 verifica_invarianti --
-  d                      LETTA E MAI RISCRITTA    #1887221 rilassa_disegno     --
-  d0                     LETTA E MAI RISCRITTA    #1887314 memoria_hebbiana_mo --
-  peq                    LETTA E MAI RISCRITTA    #1887385 verifica_invarianti --
-  tw                     LETTA E MAI RISCRITTA    #1887295 memoria_hebbiana_mo --
-  twp                    LETTA E MAI RISCRITTA    #1887387 verifica_invarianti --
-  vd                     LETTA E MAI RISCRITTA    #1887384 verifica_invarianti --
+  grandezza            cl.   esito                  prima lettura di LEGGE     prima riscrittura
+  _chi_core_nodi       nodo  RISCRITTA PRIMA        --                         #5661493 chiralita_core_locale
+  _chi_core_raggio     nodo  RISCRITTA PRIMA        --                         #5661495 chiralita_core_locale
+  _chi_core_rho0       nodo  RISCRITTA PRIMA        --                         #5661494 chiralita_core_locale
+  _chi_geom_nodi       nodo  RISCRITTA PRIMA        #5661606 step              #4718175 chiralita_core_locale
+  _cs_nodo_prev        nodo  LETTA PRIMA            #3774639 memoria_hebbiana_ #5661647 step
+  _deg                 nodo  LETTA E MAI RISCRITTA  #3774579 memoria_hebbiana_ --
+  _fatt_cs_ultimo      nodo  RISCRITTA PRIMA        --                         #5661499 _passo_spinoriale
+  _g_rampa_prec        nodo  LETTA PRIMA            #3774771 _pesi             #3774772 _pesi
+  _nb                  nodo  LETTA PRIMA            #3774605 memoria_hebbiana_ #4718237 _passo_spinoriale
+  _nb_prec             nodo  LETTA PRIMA            #4718242 _passo_spinoriale #5661597 _passo_spinoriale
+  _nb_ret              nodo  LETTA PRIMA            #3774832 _bloch_ritardato  #3774837 _bloch_ritardato
+  _psi_prec            nodo  LETTA PRIMA            #3774740 ritmo             #3774752 step
+  _psi_spin_prec       nodo  LETTA PRIMA            #3774746 ritmo             #3774760 step
+  _psi_spinor          nodo  LETTA PRIMA            #3774827 _coppia_interfere #5661598 _passo_spinoriale
+  _r_corrente          nodo  RISCRITTA PRIMA        #3774836 _bloch_ritardato  #3774762 step
+  _spinor_lift         nodo  LETTA PRIMA            #3774921 _feedback_spinori #5661599 _passo_spinoriale
+  _xi_rumore           nodo  LETTA PRIMA            #4718234 _passo_spinoriale #4718235 _passo_spinoriale
+  conc_nodi            nodo  MAI TOCCATA            --                         --
+  eta                  nodo  LETTA PRIMA            #3774770 _pesi             #3774823 step
+  mem_mot              nodo  LETTA E MAI RISCRITTA  #3774576 memoria_hebbiana_ --
+  omega_s              nodo  LETTA PRIMA            #4718219 _passo_spinoriale #5661595 _passo_spinoriale
+  perc_chi             nodo  LETTA E MAI RISCRITTA  #3774927 step              --
+  perc_geom            nodo  LETTA E MAI RISCRITTA  #3774929 step              --
+  perc_tw              nodo  SOLO L'OSSERVATORE     --                         --
+  phi0                 nodo  LETTA E MAI RISCRITTA  #3774824 step              --
+  phi_s                nodo  LETTA PRIMA            #4718213 step              #5661600 _passo_spinoriale
+  phivel               nodo  LETTA PRIMA            #3774731 scuoti_vuoto      #5661601 step
+  pos                  nodo  RISCRITTA PRIMA        #3774580 memoria_hebbiana_ #3774519 rilassa_disegno
+  psi                  nodo  LETTA PRIMA            #3774569 memoria_hebbiana_ #3774841 calcola_psi
+  psi_spin             nodo  LETTA PRIMA            #3774616 _nb_grav          #3774844 calcola_psi
+  rho_spin             nodo  LETTA PRIMA            #3774780 _rho_sorgente     #3774847 calcola_psi
+  _dt_e_ultimo         arco  RISCRITTA PRIMA        #5661774 _fattore_tempo_ar #3774761 step
+  _rep                 arco  LETTA PRIMA            #5661777 mitosi            #5661784 mitosi
+  _sin2_vir            arco  RISCRITTA PRIMA        #5661662 step              #3774621 memoria_hebbiana_moto
+  d                    arco  LETTA PRIMA            #3774604 pozzo_grafo       #5661684 step
+  d0                   arco  LETTA PRIMA            #3774596 memoria_hebbiana_ #3774662 _smp_chiudi
+  peq                  arco  LETTA PRIMA            #5661503 _passo_spinoriale #5661659 step
+  tw                   arco  LETTA PRIMA            #3774577 memoria_hebbiana_ #5661618 step
+  twp                  arco  LETTA PRIMA            #5661616 step              #5661619 step
+  vd                   arco  LETTA PRIMA            #5661665 step              #5661683 step
 
 ========================================================================================================
 IL VERDETTO (criterio del guardiano, punto 1)
 ========================================================================================================
-  LETTA PRIMA                1  ### SERVE UNA REGOLA DI NASCITA
-      pos
-  LETTA E MAI RISCRITTA     16  ### SERVE UNA REGOLA DI NASCITA
-      _chi_core_nodi, _chi_core_raggio, _chi_core_rho0, _chi_geom_nodi, _dt_e_ultimo, _fatt_cs_ultimo, _r_corrente, _rep, _sin2_vir, _xi_rumore, d, d0, peq, tw, twp, vd
-  RISCRITTA PRIMA           21  puo' restare corta
-      _cs_nodo_prev, _deg, _nb, _nb_prec, _nb_ret, _psi_prec, _psi_spin_prec, _psi_spinor, _spinor_lift, eta, mem_mot, omega_s, perc_chi, perc_geom, perc_tw, phi0, phi_s, phivel, psi, psi_spin, rho_spin
-  MAI TOCCATA                2  non e' un'assoluzione: nel passo dopo potrebbe esserlo
-      _g_rampa_prec, conc_nodi
+  LETTA PRIMA               24  ### SERVE UNA REGOLA DI NASCITA
+      _cs_nodo_prev, _g_rampa_prec, _nb, _nb_prec, _nb_ret, _psi_prec, _psi_spin_prec, _psi_spinor, _rep, _spinor_lift, _xi_rumore, d, d0, eta, omega_s, peq, phi_s, phivel, psi, psi_spin, rho_spin, tw, twp, vd
+  LETTA E MAI RISCRITTA      5  ### SERVE UNA REGOLA DI NASCITA
+      _deg, mem_mot, perc_chi, perc_geom, phi0
+  RISCRITTA PRIMA            9  puo' restare corta
+      _chi_core_nodi, _chi_core_raggio, _chi_core_rho0, _chi_geom_nodi, _dt_e_ultimo, _fatt_cs_ultimo, _r_corrente, _sin2_vir, pos
+  SOLO L'OSSERVATORE         1  la guarda solo il controllo di dominio o il disegno
+      perc_tw
+  MAI TOCCATA                1  in DUE passi: e NON e' un'assoluzione
+      conc_nodi
 
 scritto: C:\Users\lpeano\soliton_simulator\csv\_seal_fork\_ordine_letture\_ordine_letture.json
 USCITA: 0

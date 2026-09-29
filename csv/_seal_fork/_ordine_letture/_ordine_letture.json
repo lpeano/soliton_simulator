@@ -1,9 +1,10 @@
 {
  "vale": true,
  "passo_di_nascita": 42,
- "n_al_confine": 12803,
- "evento_del_confine": 1887092,
- "eventi_totali": 1887422,
+ "n": 12803,
+ "m": 471565,
+ "evento_fine_mitosi": 3774496,
+ "eventi_intercettati": 5661994,
  "nmasse": 3,
  "sep": 6.1158,
  "voci": [
@@ -53,843 +54,1055 @@
   "i",
   "j"
  ],
+ "classe": {
+  "_chi_core_nodi": "nodo",
+  "_chi_core_raggio": "nodo",
+  "_chi_core_rho0": "nodo",
+  "_chi_geom_nodi": "nodo",
+  "_cs_nodo_prev": "nodo",
+  "_deg": "nodo",
+  "_fatt_cs_ultimo": "nodo",
+  "_g_rampa_prec": "nodo",
+  "_nb": "nodo",
+  "_nb_prec": "nodo",
+  "_nb_ret": "nodo",
+  "_psi_prec": "nodo",
+  "_psi_spin_prec": "nodo",
+  "_psi_spinor": "nodo",
+  "_r_corrente": "nodo",
+  "_spinor_lift": "nodo",
+  "_xi_rumore": "nodo",
+  "conc_nodi": "nodo",
+  "eta": "nodo",
+  "mem_mot": "nodo",
+  "omega_s": "nodo",
+  "perc_chi": "nodo",
+  "perc_geom": "nodo",
+  "perc_tw": "nodo",
+  "phi": "nodo",
+  "phi0": "nodo",
+  "phi_s": "nodo",
+  "phivel": "nodo",
+  "pos": "nodo",
+  "psi": "nodo",
+  "psi_spin": "nodo",
+  "rho_spin": "nodo",
+  "_dt_e_ultimo": "arco",
+  "_rep": "arco",
+  "_sin2_vir": "arco",
+  "d": "arco",
+  "d0": "arco",
+  "i": "arco",
+  "j": "arco",
+  "peq": "arco",
+  "tw": "arco",
+  "twp": "arco",
+  "vd": "arco"
+ },
+ "len_a_fine_mitosi": {
+  "_chi_core_nodi": 12802,
+  "_chi_core_raggio": 12802,
+  "_chi_core_rho0": 12802,
+  "_chi_geom_nodi": 12802,
+  "_cs_nodo_prev": 12803,
+  "_deg": 12803,
+  "_fatt_cs_ultimo": 12802,
+  "_g_rampa_prec": 12802,
+  "_nb": 12803,
+  "_nb_prec": 12803,
+  "_nb_ret": 12803,
+  "_psi_prec": 12803,
+  "_psi_spin_prec": 12803,
+  "_psi_spinor": 12803,
+  "_r_corrente": 12802,
+  "_spinor_lift": 12803,
+  "_xi_rumore": 12802,
+  "conc_nodi": 12803,
+  "eta": 12803,
+  "mem_mot": 12803,
+  "omega_s": 12803,
+  "perc_chi": 12803,
+  "perc_geom": 12803,
+  "perc_tw": 12803,
+  "phi0": 12803,
+  "phi_s": 12803,
+  "phivel": 12803,
+  "pos": 12803,
+  "psi": 12803,
+  "psi_spin": 12803,
+  "rho_spin": 12803,
+  "_dt_e_ultimo": 471564,
+  "_rep": 471565,
+  "_sin2_vir": 471564,
+  "d": 471565,
+  "d0": 471565,
+  "peq": 471565,
+  "tw": 471565,
+  "twp": 471565,
+  "vd": 471565
+ },
  "controllo_byte_identico": true,
+ "non_leggi": [
+  "osservatore",
+  "disegno"
+ ],
  "esiti": {
   "_chi_core_nodi": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887419,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "RISCRITTA PRIMA",
+   "lettura_di_legge": null,
+   "lettura_non_di_legge": {
+    "evento": 3774701,
+    "chi": "verifica_invarianti",
     "len": 12802,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 1,
-   "letture_di_estensione": 0,
-   "prime_letture_di_estensione": []
+   "riscrittura": {
+    "evento": 5661493,
+    "chi": "chiralita_core_locale",
+    "len": 12803
+   }
   },
   "_chi_core_raggio": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887422,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "RISCRITTA PRIMA",
+   "lettura_di_legge": null,
+   "lettura_non_di_legge": {
+    "evento": 3774704,
+    "chi": "verifica_invarianti",
     "len": 12802,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 1,
-   "letture_di_estensione": 0,
-   "prime_letture_di_estensione": []
+   "riscrittura": {
+    "evento": 5661495,
+    "chi": "chiralita_core_locale",
+    "len": 12803
+   }
   },
   "_chi_core_rho0": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887421,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "RISCRITTA PRIMA",
+   "lettura_di_legge": null,
+   "lettura_non_di_legge": {
+    "evento": 3774703,
+    "chi": "verifica_invarianti",
     "len": 12802,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 1,
-   "letture_di_estensione": 0,
-   "prime_letture_di_estensione": []
+   "riscrittura": {
+    "evento": 5661494,
+    "chi": "chiralita_core_locale",
+    "len": 12803
+   }
   },
   "_chi_geom_nodi": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887420,
-    "len": 12802,
-    "chi": "verifica_invarianti"
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "RISCRITTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 5661606,
+    "chi": "step",
+    "len": 12803,
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 1,
-   "letture_di_estensione": 0,
-   "prime_letture_di_estensione": []
+   "lettura_non_di_legge": {
+    "evento": 3774702,
+    "chi": "verifica_invarianti",
+    "len": 12802,
+    "tipi": [
+     "osservatore"
+    ]
+   },
+   "riscrittura": {
+    "evento": 4718175,
+    "chi": "chiralita_core_locale",
+    "len": 12803
+   }
   },
   "_cs_nodo_prev": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887357,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774639,
+    "chi": "memoria_hebbiana_moto",
     "len": 12803,
-    "chi": "memoria_hebbiana_moto"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887118,
+   "lettura_non_di_legge": {
+    "evento": 3774689,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "_eredita_spinore_figli"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 2,
-   "letture_di_estensione": 1,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887117,
-     "chi": "_eredita_spinore_figli"
-    }
-   ]
+   "riscrittura": {
+    "evento": 5661647,
+    "chi": "step",
+    "len": 12803
+   }
   },
   "_deg": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887235,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA E MAI RISCRITTA",
+   "lettura_di_legge": {
+    "evento": 3774579,
+    "chi": "memoria_hebbiana_moto",
     "len": 12803,
-    "chi": "rilassa_disegno"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887207,
+   "lettura_non_di_legge": {
+    "evento": 3774517,
+    "chi": "rilassa_disegno",
     "len": 12803,
-    "chi": "_grado"
+    "tipi": [
+     "disegno"
+    ]
    },
-   "letture_di_legge": 7,
-   "letture_di_estensione": 0,
-   "prime_letture_di_estensione": []
+   "riscrittura": null
   },
   "_fatt_cs_ultimo": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887409,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "RISCRITTA PRIMA",
+   "lettura_di_legge": null,
+   "lettura_non_di_legge": {
+    "evento": 3774691,
+    "chi": "verifica_invarianti",
     "len": 12802,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 1,
-   "letture_di_estensione": 0,
-   "prime_letture_di_estensione": []
+   "riscrittura": {
+    "evento": 5661499,
+    "chi": "_passo_spinoriale",
+    "len": 12803
+   }
   },
   "_g_rampa_prec": {
-   "esito": "MAI TOCCATA",
-   "prima_lettura_di_legge": null,
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 0,
-   "letture_di_estensione": 0,
-   "prime_letture_di_estensione": []
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774771,
+    "chi": "_pesi",
+    "len": 12802,
+    "tipi": [
+     "dinamica"
+    ]
+   },
+   "lettura_non_di_legge": null,
+   "riscrittura": {
+    "evento": 3774772,
+    "chi": "_pesi",
+    "len": 12803
+   }
   },
   "_nb": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887323,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774605,
+    "chi": "memoria_hebbiana_moto",
     "len": 12803,
-    "chi": "memoria_hebbiana_moto"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887124,
+   "lettura_non_di_legge": {
+    "evento": 3774697,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "_eredita_spinore_figli"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 8,
-   "letture_di_estensione": 5,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887119,
-     "chi": "_eredita_spinore_figli"
-    },
-    {
-     "evento": 1887120,
-     "chi": "_eredita_spinore_figli"
-    },
-    {
-     "evento": 1887121,
-     "chi": "_eredita_spinore_figli"
-    }
-   ]
+   "riscrittura": {
+    "evento": 4718237,
+    "chi": "_passo_spinoriale",
+    "len": 12803
+   }
   },
   "_nb_prec": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887416,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 4718242,
+    "chi": "_passo_spinoriale",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887130,
+   "lettura_non_di_legge": {
+    "evento": 3774698,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "_eredita_spinore_figli"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 5,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887125,
-     "chi": "_eredita_spinore_figli"
-    },
-    {
-     "evento": 1887126,
-     "chi": "_eredita_spinore_figli"
-    },
-    {
-     "evento": 1887127,
-     "chi": "_eredita_spinore_figli"
-    }
-   ]
+   "riscrittura": {
+    "evento": 5661597,
+    "chi": "_passo_spinoriale",
+    "len": 12803
+   }
   },
   "_nb_ret": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887417,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774832,
+    "chi": "_bloch_ritardato",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887132,
+   "lettura_non_di_legge": {
+    "evento": 3774699,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "_eredita_spinore_figli"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 1,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887131,
-     "chi": "_eredita_spinore_figli"
-    }
-   ]
+   "riscrittura": {
+    "evento": 3774837,
+    "chi": "_bloch_ritardato",
+    "len": 12803
+   }
   },
   "_psi_prec": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887410,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774740,
+    "chi": "ritmo",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887149,
+   "lettura_non_di_legge": {
+    "evento": 3774692,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "_eredita_spinore_figli"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 4,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887145,
-     "chi": "_eredita_spinore_figli"
-    },
-    {
-     "evento": 1887146,
-     "chi": "_eredita_spinore_figli"
-    },
-    {
-     "evento": 1887147,
-     "chi": "_eredita_spinore_figli"
-    }
-   ]
+   "riscrittura": {
+    "evento": 3774752,
+    "chi": "step",
+    "len": 12803
+   }
   },
   "_psi_spin_prec": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887412,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774746,
+    "chi": "ritmo",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887151,
+   "lettura_non_di_legge": {
+    "evento": 3774694,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "_eredita_spinore_figli"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 1,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887150,
-     "chi": "_eredita_spinore_figli"
-    }
-   ]
+   "riscrittura": {
+    "evento": 3774760,
+    "chi": "step",
+    "len": 12803
+   }
   },
   "_psi_spinor": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887411,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774827,
+    "chi": "_coppia_interferenza",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887140,
+   "lettura_non_di_legge": {
+    "evento": 3774693,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "_eredita_spinore_figli"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 3,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887137,
-     "chi": "_eredita_spinore_figli"
-    },
-    {
-     "evento": 1887138,
-     "chi": "_eredita_spinore_figli"
-    },
-    {
-     "evento": 1887139,
-     "chi": "_eredita_spinore_figli"
-    }
-   ]
+   "riscrittura": {
+    "evento": 5661598,
+    "chi": "_passo_spinoriale",
+    "len": 12803
+   }
   },
   "_r_corrente": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887408,
-    "len": 12802,
-    "chi": "verifica_invarianti"
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "RISCRITTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774836,
+    "chi": "_bloch_ritardato",
+    "len": 12803,
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 1,
-   "letture_di_estensione": 0,
-   "prime_letture_di_estensione": []
+   "lettura_non_di_legge": {
+    "evento": 3774690,
+    "chi": "verifica_invarianti",
+    "len": 12802,
+    "tipi": [
+     "osservatore"
+    ]
+   },
+   "riscrittura": {
+    "evento": 3774762,
+    "chi": "step",
+    "len": 12803
+   }
   },
   "_spinor_lift": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887414,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774921,
+    "chi": "_feedback_spinoriale_archi",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887144,
+   "lettura_non_di_legge": {
+    "evento": 3774696,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "_eredita_spinore_figli"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 3,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887141,
-     "chi": "_eredita_spinore_figli"
-    },
-    {
-     "evento": 1887142,
-     "chi": "_eredita_spinore_figli"
-    },
-    {
-     "evento": 1887143,
-     "chi": "_eredita_spinore_figli"
-    }
-   ]
+   "riscrittura": {
+    "evento": 5661599,
+    "chi": "_passo_spinoriale",
+    "len": 12803
+   }
   },
   "_xi_rumore": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887418,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 4718234,
+    "chi": "_passo_spinoriale",
     "len": 12802,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 1,
-   "letture_di_estensione": 0,
-   "prime_letture_di_estensione": []
+   "lettura_non_di_legge": {
+    "evento": 3774700,
+    "chi": "verifica_invarianti",
+    "len": 12802,
+    "tipi": [
+     "osservatore"
+    ]
+   },
+   "riscrittura": {
+    "evento": 4718235,
+    "chi": "_passo_spinoriale",
+    "len": 12803
+   }
   },
   "conc_nodi": {
+   "classe": "nodo",
+   "bersaglio": 12803,
    "esito": "MAI TOCCATA",
-   "prima_lettura_di_legge": null,
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 0,
-   "letture_di_estensione": 4,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887159,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887160,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887161,
-     "chi": "mitosi"
-    }
-   ]
+   "lettura_di_legge": null,
+   "lettura_non_di_legge": null,
+   "riscrittura": null
   },
   "eta": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887398,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774770,
+    "chi": "_pesi",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887103,
+   "lettura_non_di_legge": {
+    "evento": 3774680,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "mitosi"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 1,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887102,
-     "chi": "mitosi"
-    }
-   ]
+   "riscrittura": {
+    "evento": 3774823,
+    "chi": "step",
+    "len": 12803
+   }
   },
   "mem_mot": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887294,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA E MAI RISCRITTA",
+   "lettura_di_legge": {
+    "evento": 3774576,
+    "chi": "memoria_hebbiana_moto",
     "len": 12803,
-    "chi": "memoria_hebbiana_moto"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887115,
+   "lettura_non_di_legge": {
+    "evento": 3774687,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "mitosi"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 7,
-   "letture_di_estensione": 3,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887112,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887113,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887114,
-     "chi": "mitosi"
-    }
-   ]
+   "riscrittura": null
   },
   "omega_s": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887404,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 4718219,
+    "chi": "_passo_spinoriale",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887136,
+   "lettura_non_di_legge": {
+    "evento": 3774686,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "_eredita_spinore_figli"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 3,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887133,
-     "chi": "_eredita_spinore_figli"
-    },
-    {
-     "evento": 1887134,
-     "chi": "_eredita_spinore_figli"
-    },
-    {
-     "evento": 1887135,
-     "chi": "_eredita_spinore_figli"
-    }
-   ]
+   "riscrittura": {
+    "evento": 5661595,
+    "chi": "_passo_spinoriale",
+    "len": 12803
+   }
   },
   "perc_chi": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887400,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA E MAI RISCRITTA",
+   "lettura_di_legge": {
+    "evento": 3774927,
+    "chi": "step",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887106,
+   "lettura_non_di_legge": {
+    "evento": 3774682,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "mitosi"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 4,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887104,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887105,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887165,
-     "chi": "mitosi"
-    }
-   ]
+   "riscrittura": null
   },
   "perc_geom": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887401,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA E MAI RISCRITTA",
+   "lettura_di_legge": {
+    "evento": 3774929,
+    "chi": "step",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887109,
+   "lettura_non_di_legge": {
+    "evento": 3774683,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "mitosi"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 2,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887107,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887108,
-     "chi": "mitosi"
-    }
-   ]
+   "riscrittura": null
   },
   "perc_tw": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887402,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "SOLO L'OSSERVATORE",
+   "lettura_di_legge": null,
+   "lettura_non_di_legge": {
+    "evento": 3774684,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887111,
-    "len": 12803,
-    "chi": "mitosi"
-   },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 1,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887110,
-     "chi": "mitosi"
-    }
-   ]
+   "riscrittura": null
   },
   "phi0": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887395,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA E MAI RISCRITTA",
+   "lettura_di_legge": {
+    "evento": 3774824,
+    "chi": "step",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887094,
+   "lettura_non_di_legge": {
+    "evento": 3774677,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "mitosi"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 1,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887093,
-     "chi": "mitosi"
-    }
-   ]
+   "riscrittura": null
   },
   "phi_s": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887396,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 4718213,
+    "chi": "step",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887097,
+   "lettura_non_di_legge": {
+    "evento": 3774678,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "mitosi"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 2,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887095,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887096,
-     "chi": "mitosi"
-    }
-   ]
+   "riscrittura": {
+    "evento": 5661600,
+    "chi": "_passo_spinoriale",
+    "len": 12803
+   }
   },
   "phivel": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887397,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774731,
+    "chi": "scuoti_vuoto",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887101,
+   "lettura_non_di_legge": {
+    "evento": 3774679,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "mitosi"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 3,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887098,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887099,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887100,
-     "chi": "mitosi"
-    }
-   ]
+   "riscrittura": {
+    "evento": 5661601,
+    "chi": "step",
+    "len": 12803
+   }
   },
   "pos": {
-   "esito": "LETTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887217,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "RISCRITTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774580,
+    "chi": "memoria_hebbiana_moto",
     "len": 12803,
-    "chi": "rilassa_disegno"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887237,
+   "lettura_non_di_legge": {
+    "evento": 3774499,
+    "chi": "rilassa_disegno",
     "len": 12803,
-    "chi": "rilassa_disegno"
+    "tipi": [
+     "disegno"
+    ]
    },
-   "letture_di_legge": 20,
-   "letture_di_estensione": 0,
-   "prime_letture_di_estensione": []
+   "riscrittura": {
+    "evento": 3774519,
+    "chi": "rilassa_disegno",
+    "len": 12803
+   }
   },
   "psi": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887287,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774569,
+    "chi": "memoria_hebbiana_moto",
     "len": 12803,
-    "chi": "memoria_hebbiana_moto"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887154,
+   "lettura_non_di_legge": {
+    "evento": 3774675,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "_eredita_psi_figli"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 8,
-   "letture_di_estensione": 1,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887153,
-     "chi": "_eredita_psi_figli"
-    }
-   ]
+   "riscrittura": {
+    "evento": 3774841,
+    "chi": "calcola_psi",
+    "len": 12803
+   }
   },
   "psi_spin": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887334,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774616,
+    "chi": "_nb_grav",
     "len": 12803,
-    "chi": "_nb_grav"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887156,
+   "lettura_non_di_legge": {
+    "evento": 3774695,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "_eredita_psi_figli"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 2,
-   "letture_di_estensione": 1,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887155,
-     "chi": "_eredita_psi_figli"
-    }
-   ]
+   "riscrittura": {
+    "evento": 3774844,
+    "chi": "calcola_psi",
+    "len": 12803
+   }
   },
   "rho_spin": {
-   "esito": "RISCRITTA PRIMA",
-   "prima_lettura_di_legge": {
-    "evento": 1887403,
+   "classe": "nodo",
+   "bersaglio": 12803,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774780,
+    "chi": "_rho_sorgente",
     "len": 12803,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "AMBIGUA",
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": {
-    "evento": 1887158,
+   "lettura_non_di_legge": {
+    "evento": 3774685,
+    "chi": "verifica_invarianti",
     "len": 12803,
-    "chi": "_eredita_psi_figli"
+    "tipi": [
+     "osservatore"
+    ]
    },
-   "letture_di_legge": 1,
-   "letture_di_estensione": 1,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887157,
-     "chi": "_eredita_psi_figli"
-    }
-   ]
+   "riscrittura": {
+    "evento": 3774847,
+    "chi": "calcola_psi",
+    "len": 12803
+   }
   },
   "_dt_e_ultimo": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887390,
-    "len": 471564,
-    "chi": "verifica_invarianti"
+   "classe": "arco",
+   "bersaglio": 471565,
+   "esito": "RISCRITTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 5661774,
+    "chi": "_fattore_tempo_arco",
+    "len": 471565,
+    "tipi": [
+     "AMBIGUA"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 1,
-   "letture_di_estensione": 0,
-   "prime_letture_di_estensione": []
+   "lettura_non_di_legge": {
+    "evento": 3774672,
+    "chi": "verifica_invarianti",
+    "len": 471564,
+    "tipi": [
+     "osservatore"
+    ]
+   },
+   "riscrittura": {
+    "evento": 3774761,
+    "chi": "step",
+    "len": 471565
+   }
   },
   "_rep": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887388,
+   "classe": "arco",
+   "bersaglio": 471565,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 5661777,
+    "chi": "mitosi",
     "len": 471565,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "AMBIGUA"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 1,
-   "letture_di_estensione": 3,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887193,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887194,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887195,
-     "chi": "mitosi"
-    }
-   ]
+   "lettura_non_di_legge": {
+    "evento": 3774670,
+    "chi": "verifica_invarianti",
+    "len": 471565,
+    "tipi": [
+     "osservatore"
+    ]
+   },
+   "riscrittura": {
+    "evento": 5661784,
+    "chi": "mitosi",
+    "len": 471565
+   }
   },
   "_sin2_vir": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887389,
+   "classe": "arco",
+   "bersaglio": 471565,
+   "esito": "RISCRITTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 5661662,
+    "chi": "step",
     "len": 471565,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 1,
-   "letture_di_estensione": 0,
-   "prime_letture_di_estensione": []
+   "lettura_non_di_legge": {
+    "evento": 3774671,
+    "chi": "verifica_invarianti",
+    "len": 471565,
+    "tipi": [
+     "osservatore"
+    ]
+   },
+   "riscrittura": {
+    "evento": 3774621,
+    "chi": "memoria_hebbiana_moto",
+    "len": 471565
+   }
   },
   "d": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887221,
+   "classe": "arco",
+   "bersaglio": 471565,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774604,
+    "chi": "pozzo_grafo",
     "len": 471565,
-    "chi": "rilassa_disegno"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 10,
-   "letture_di_estensione": 3,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887172,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887173,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887181,
-     "chi": "mitosi"
-    }
-   ]
+   "lettura_non_di_legge": {
+    "evento": 3774503,
+    "chi": "rilassa_disegno",
+    "len": 471565,
+    "tipi": [
+     "disegno"
+    ]
+   },
+   "riscrittura": {
+    "evento": 5661684,
+    "chi": "step",
+    "len": 471565
+   }
   },
   "d0": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887314,
+   "classe": "arco",
+   "bersaglio": 471565,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774596,
+    "chi": "memoria_hebbiana_moto",
     "len": 471565,
-    "chi": "memoria_hebbiana_moto"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 16,
-   "letture_di_estensione": 3,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887174,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887175,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887183,
-     "chi": "mitosi"
-    }
-   ]
+   "lettura_non_di_legge": {
+    "evento": 3774665,
+    "chi": "verifica_invarianti",
+    "len": 471565,
+    "tipi": [
+     "osservatore"
+    ]
+   },
+   "riscrittura": {
+    "evento": 3774662,
+    "chi": "_smp_chiudi",
+    "len": 471565
+   }
   },
   "peq": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887385,
+   "classe": "arco",
+   "bersaglio": 471565,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 5661503,
+    "chi": "_passo_spinoriale",
     "len": 471565,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 1,
-   "letture_di_estensione": 3,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887189,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887190,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887191,
-     "chi": "mitosi"
-    }
-   ]
+   "lettura_non_di_legge": {
+    "evento": 3774667,
+    "chi": "verifica_invarianti",
+    "len": 471565,
+    "tipi": [
+     "osservatore"
+    ]
+   },
+   "riscrittura": {
+    "evento": 5661659,
+    "chi": "step",
+    "len": 471565
+   }
   },
   "tw": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887295,
+   "classe": "arco",
+   "bersaglio": 471565,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 3774577,
+    "chi": "memoria_hebbiana_moto",
     "len": 471565,
-    "chi": "memoria_hebbiana_moto"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 6,
-   "letture_di_estensione": 4,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887163,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887164,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887176,
-     "chi": "mitosi"
-    }
-   ]
+   "lettura_non_di_legge": {
+    "evento": 3774668,
+    "chi": "verifica_invarianti",
+    "len": 471565,
+    "tipi": [
+     "osservatore"
+    ]
+   },
+   "riscrittura": {
+    "evento": 5661618,
+    "chi": "step",
+    "len": 471565
+   }
   },
   "twp": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887387,
+   "classe": "arco",
+   "bersaglio": 471565,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 5661616,
+    "chi": "step",
     "len": 471565,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 1,
-   "letture_di_estensione": 1,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887199,
-     "chi": "mitosi"
-    }
-   ]
+   "lettura_non_di_legge": {
+    "evento": 3774669,
+    "chi": "verifica_invarianti",
+    "len": 471565,
+    "tipi": [
+     "osservatore"
+    ]
+   },
+   "riscrittura": {
+    "evento": 5661619,
+    "chi": "step",
+    "len": 471565
+   }
   },
   "vd": {
-   "esito": "LETTA E MAI RISCRITTA",
-   "prima_lettura_di_legge": {
-    "evento": 1887384,
+   "classe": "arco",
+   "bersaglio": 471565,
+   "esito": "LETTA PRIMA",
+   "lettura_di_legge": {
+    "evento": 5661665,
+    "chi": "step",
     "len": 471565,
-    "chi": "verifica_invarianti"
+    "tipi": [
+     "dinamica"
+    ]
    },
-   "prima_riscrittura_completa": null,
-   "letture_di_legge": 1,
-   "letture_di_estensione": 3,
-   "prime_letture_di_estensione": [
-    {
-     "evento": 1887185,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887186,
-     "chi": "mitosi"
-    },
-    {
-     "evento": 1887187,
-     "chi": "mitosi"
-    }
-   ]
+   "lettura_non_di_legge": {
+    "evento": 3774666,
+    "chi": "verifica_invarianti",
+    "len": 471565,
+    "tipi": [
+     "osservatore"
+    ]
+   },
+   "riscrittura": {
+    "evento": 5661683,
+    "chi": "step",
+    "len": 471565
+   }
   }
  }
 }
