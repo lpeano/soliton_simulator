@@ -6888,3 +6888,43 @@ e' togliere le guardie — e' distinguere la guardia dalla regola di nascita. Tr
 di chiusura, stanno nei par.5 e 6 del piano. ### **Il criterio che mi aspetto piu' fragile e' `B`**
 *(byte-identico al 72)*, e il perche' e' scritto: **due guardie SCATTANO in un run sano**
 *(`de9c12ed`)*, e una e' legittima.
+
+---
+
+# ⛔ **LA MISURA DELL'ORDINE GIRA, IL CONTROLLO TIENE — e ha TRE DIFETTI MIEI** *(2026-09-29)*
+
+Stampa in `csv/_seal_fork/_ordine_letture/_corsa.txt`. ### **Committo il fallimento PRIMA di
+correggerlo** *(par.5)*. **Nessun byte di fisica:** simulatore `f7541d03`.
+
+**Quello che VALE, e vale davvero:**
+
+| | |
+|---|---|
+| ### **il CONTROLLO tiene** | lo stesso passo **con** e **senza** sorveglianza e' ### **byte-identico**, su **1 887 282** eventi registrati. ### **La sorveglianza per sottoclasse dinamica NON perturba** |
+| la nascita | **trovata al passo 42** *(al 41 nessuna)*, `n` da **12802** a **12803**, confine all'evento **1 887 092** |
+| ### **21 grandezze «RISCRITTA PRIMA»** | e ### **questa conclusione REGGE**: la riscrittura completa arriva **prima** di qualunque lettura di legge — fra loro `psi` `psi_spin` `rho_spin`, cioe' ### **la cura di ieri si vede nella misura** |
+
+## ⛔ I tre difetti, e ognuno falsifica una casella
+
+| | |
+|---|---|
+| ### **① le grandezze PER ARCO sono confrontate con `n`** | cerco la riscrittura completa come `len == 12803`, ### **ma una grandezza per arco e' piena a `m`**, non a `n`. ### ➜ **Tutte e NOVE le per-arco risultano «LETTA E MAI RISCRITTA» per costruzione** *(`d` `d0` `peq` `tw` `twp` `vd` `_rep` `_sin2_vir` `_dt_e_ultimo`)*: ### **il verdetto su di loro e' NULLO** |
+| ### **② il confine e' `phi`, ma la mitosi estende ALTRO PRIMA di `phi`** | `pos` e' estesa a `:6640` e `phi` a `:6641`: ### **la riscrittura di `pos` cade UN EVENTO PRIMA della mia finestra**, e cosi' `pos` risulta ### **«LETTA PRIMA» — che e' un ARTEFATTO.** La finestra giusta parte da ### **quando la voce `mitosi` RITORNA**, non dalla riga di `phi` |
+| ### **③ la finestra si chiude a fine passo** | *«letta e mai riscritta»* non distingue **«riscritta al passo DOPO prima che qualcuno la legga»** da **«letta corta al passo dopo»**. ### **E' proprio il caso di `_xi_rumore`:** qui la legge non la tocca, ma il ripiego `:3570` scatta **al passo seguente** — misurato in `de9c12ed` |
+
+## ⚠ E un **quarto** punto che non e' un difetto ma una distinzione che manca
+
+Per le sette derivate per nodo la prima lettura e' ### **`verifica_invarianti`** — che
+`_PASSO_TIPI` dichiara **`osservatore`: LEGGE SOLTANTO**. ### **Una lettura dell'OSSERVATORE non e'
+una lettura di LEGGE**, e metterle nello stesso paniere fa sembrare *«serve una regola di nascita»*
+un caso che invece e' *«la guarda solo il controllo di dominio»*.
+### ➜ **Il tipo del lettore va preso da `_PASSO_TIPI`**, che e' la tabella del simulatore, **non da
+una mia idea**: `dinamica`/`vincolo`/`AMBIGUA` = **legge**; `osservatore`/`disegno` = **no**.
+
+> ### 📌 **Tre difetti su tre vengono dall'aver fissato UN SOLO metro** — `n` per tutti, `phi` come
+> confine, il passo come finestra. ### **E' la stessa forma delle volte scorse: una regola che
+> parte da una comodita' di misura invece che da cio' che deve decidere.**
+
+**COSA NON SO ANCORA, e per questo non consegno la misura:** dei **16** *«letta e mai riscritta»*,
+**quante** lo sono per il difetto ① *(nove, per certo)* e quante per il ③. ### **Non lo indovino: si
+rimisura.**

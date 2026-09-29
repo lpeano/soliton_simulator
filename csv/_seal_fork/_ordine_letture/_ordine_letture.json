@@ -1,0 +1,895 @@
+{
+ "vale": true,
+ "passo_di_nascita": 42,
+ "n_al_confine": 12803,
+ "evento_del_confine": 1887092,
+ "eventi_totali": 1887422,
+ "nmasse": 3,
+ "sep": 6.1158,
+ "voci": [
+  "_chi_core_nodi",
+  "_chi_core_raggio",
+  "_chi_core_rho0",
+  "_chi_geom_nodi",
+  "_cs_nodo_prev",
+  "_deg",
+  "_fatt_cs_ultimo",
+  "_g_rampa_prec",
+  "_nb",
+  "_nb_prec",
+  "_nb_ret",
+  "_psi_prec",
+  "_psi_spin_prec",
+  "_psi_spinor",
+  "_r_corrente",
+  "_spinor_lift",
+  "_xi_rumore",
+  "conc_nodi",
+  "eta",
+  "mem_mot",
+  "omega_s",
+  "perc_chi",
+  "perc_geom",
+  "perc_tw",
+  "phi0",
+  "phi_s",
+  "phivel",
+  "pos",
+  "psi",
+  "psi_spin",
+  "rho_spin",
+  "_dt_e_ultimo",
+  "_rep",
+  "_sin2_vir",
+  "d",
+  "d0",
+  "peq",
+  "tw",
+  "twp",
+  "vd"
+ ],
+ "metri": [
+  "phi",
+  "i",
+  "j"
+ ],
+ "controllo_byte_identico": true,
+ "esiti": {
+  "_chi_core_nodi": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887419,
+    "len": 12802,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 1,
+   "letture_di_estensione": 0,
+   "prime_letture_di_estensione": []
+  },
+  "_chi_core_raggio": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887422,
+    "len": 12802,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 1,
+   "letture_di_estensione": 0,
+   "prime_letture_di_estensione": []
+  },
+  "_chi_core_rho0": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887421,
+    "len": 12802,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 1,
+   "letture_di_estensione": 0,
+   "prime_letture_di_estensione": []
+  },
+  "_chi_geom_nodi": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887420,
+    "len": 12802,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 1,
+   "letture_di_estensione": 0,
+   "prime_letture_di_estensione": []
+  },
+  "_cs_nodo_prev": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887357,
+    "len": 12803,
+    "chi": "memoria_hebbiana_moto"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887118,
+    "len": 12803,
+    "chi": "_eredita_spinore_figli"
+   },
+   "letture_di_legge": 2,
+   "letture_di_estensione": 1,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887117,
+     "chi": "_eredita_spinore_figli"
+    }
+   ]
+  },
+  "_deg": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887235,
+    "len": 12803,
+    "chi": "rilassa_disegno"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887207,
+    "len": 12803,
+    "chi": "_grado"
+   },
+   "letture_di_legge": 7,
+   "letture_di_estensione": 0,
+   "prime_letture_di_estensione": []
+  },
+  "_fatt_cs_ultimo": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887409,
+    "len": 12802,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 1,
+   "letture_di_estensione": 0,
+   "prime_letture_di_estensione": []
+  },
+  "_g_rampa_prec": {
+   "esito": "MAI TOCCATA",
+   "prima_lettura_di_legge": null,
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 0,
+   "letture_di_estensione": 0,
+   "prime_letture_di_estensione": []
+  },
+  "_nb": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887323,
+    "len": 12803,
+    "chi": "memoria_hebbiana_moto"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887124,
+    "len": 12803,
+    "chi": "_eredita_spinore_figli"
+   },
+   "letture_di_legge": 8,
+   "letture_di_estensione": 5,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887119,
+     "chi": "_eredita_spinore_figli"
+    },
+    {
+     "evento": 1887120,
+     "chi": "_eredita_spinore_figli"
+    },
+    {
+     "evento": 1887121,
+     "chi": "_eredita_spinore_figli"
+    }
+   ]
+  },
+  "_nb_prec": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887416,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887130,
+    "len": 12803,
+    "chi": "_eredita_spinore_figli"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 5,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887125,
+     "chi": "_eredita_spinore_figli"
+    },
+    {
+     "evento": 1887126,
+     "chi": "_eredita_spinore_figli"
+    },
+    {
+     "evento": 1887127,
+     "chi": "_eredita_spinore_figli"
+    }
+   ]
+  },
+  "_nb_ret": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887417,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887132,
+    "len": 12803,
+    "chi": "_eredita_spinore_figli"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 1,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887131,
+     "chi": "_eredita_spinore_figli"
+    }
+   ]
+  },
+  "_psi_prec": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887410,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887149,
+    "len": 12803,
+    "chi": "_eredita_spinore_figli"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 4,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887145,
+     "chi": "_eredita_spinore_figli"
+    },
+    {
+     "evento": 1887146,
+     "chi": "_eredita_spinore_figli"
+    },
+    {
+     "evento": 1887147,
+     "chi": "_eredita_spinore_figli"
+    }
+   ]
+  },
+  "_psi_spin_prec": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887412,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887151,
+    "len": 12803,
+    "chi": "_eredita_spinore_figli"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 1,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887150,
+     "chi": "_eredita_spinore_figli"
+    }
+   ]
+  },
+  "_psi_spinor": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887411,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887140,
+    "len": 12803,
+    "chi": "_eredita_spinore_figli"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 3,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887137,
+     "chi": "_eredita_spinore_figli"
+    },
+    {
+     "evento": 1887138,
+     "chi": "_eredita_spinore_figli"
+    },
+    {
+     "evento": 1887139,
+     "chi": "_eredita_spinore_figli"
+    }
+   ]
+  },
+  "_r_corrente": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887408,
+    "len": 12802,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 1,
+   "letture_di_estensione": 0,
+   "prime_letture_di_estensione": []
+  },
+  "_spinor_lift": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887414,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887144,
+    "len": 12803,
+    "chi": "_eredita_spinore_figli"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 3,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887141,
+     "chi": "_eredita_spinore_figli"
+    },
+    {
+     "evento": 1887142,
+     "chi": "_eredita_spinore_figli"
+    },
+    {
+     "evento": 1887143,
+     "chi": "_eredita_spinore_figli"
+    }
+   ]
+  },
+  "_xi_rumore": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887418,
+    "len": 12802,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 1,
+   "letture_di_estensione": 0,
+   "prime_letture_di_estensione": []
+  },
+  "conc_nodi": {
+   "esito": "MAI TOCCATA",
+   "prima_lettura_di_legge": null,
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 0,
+   "letture_di_estensione": 4,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887159,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887160,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887161,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "eta": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887398,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887103,
+    "len": 12803,
+    "chi": "mitosi"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 1,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887102,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "mem_mot": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887294,
+    "len": 12803,
+    "chi": "memoria_hebbiana_moto"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887115,
+    "len": 12803,
+    "chi": "mitosi"
+   },
+   "letture_di_legge": 7,
+   "letture_di_estensione": 3,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887112,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887113,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887114,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "omega_s": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887404,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887136,
+    "len": 12803,
+    "chi": "_eredita_spinore_figli"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 3,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887133,
+     "chi": "_eredita_spinore_figli"
+    },
+    {
+     "evento": 1887134,
+     "chi": "_eredita_spinore_figli"
+    },
+    {
+     "evento": 1887135,
+     "chi": "_eredita_spinore_figli"
+    }
+   ]
+  },
+  "perc_chi": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887400,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887106,
+    "len": 12803,
+    "chi": "mitosi"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 4,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887104,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887105,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887165,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "perc_geom": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887401,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887109,
+    "len": 12803,
+    "chi": "mitosi"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 2,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887107,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887108,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "perc_tw": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887402,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887111,
+    "len": 12803,
+    "chi": "mitosi"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 1,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887110,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "phi0": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887395,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887094,
+    "len": 12803,
+    "chi": "mitosi"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 1,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887093,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "phi_s": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887396,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887097,
+    "len": 12803,
+    "chi": "mitosi"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 2,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887095,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887096,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "phivel": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887397,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887101,
+    "len": 12803,
+    "chi": "mitosi"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 3,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887098,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887099,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887100,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "pos": {
+   "esito": "LETTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887217,
+    "len": 12803,
+    "chi": "rilassa_disegno"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887237,
+    "len": 12803,
+    "chi": "rilassa_disegno"
+   },
+   "letture_di_legge": 20,
+   "letture_di_estensione": 0,
+   "prime_letture_di_estensione": []
+  },
+  "psi": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887287,
+    "len": 12803,
+    "chi": "memoria_hebbiana_moto"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887154,
+    "len": 12803,
+    "chi": "_eredita_psi_figli"
+   },
+   "letture_di_legge": 8,
+   "letture_di_estensione": 1,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887153,
+     "chi": "_eredita_psi_figli"
+    }
+   ]
+  },
+  "psi_spin": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887334,
+    "len": 12803,
+    "chi": "_nb_grav"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887156,
+    "len": 12803,
+    "chi": "_eredita_psi_figli"
+   },
+   "letture_di_legge": 2,
+   "letture_di_estensione": 1,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887155,
+     "chi": "_eredita_psi_figli"
+    }
+   ]
+  },
+  "rho_spin": {
+   "esito": "RISCRITTA PRIMA",
+   "prima_lettura_di_legge": {
+    "evento": 1887403,
+    "len": 12803,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": {
+    "evento": 1887158,
+    "len": 12803,
+    "chi": "_eredita_psi_figli"
+   },
+   "letture_di_legge": 1,
+   "letture_di_estensione": 1,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887157,
+     "chi": "_eredita_psi_figli"
+    }
+   ]
+  },
+  "_dt_e_ultimo": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887390,
+    "len": 471564,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 1,
+   "letture_di_estensione": 0,
+   "prime_letture_di_estensione": []
+  },
+  "_rep": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887388,
+    "len": 471565,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 1,
+   "letture_di_estensione": 3,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887193,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887194,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887195,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "_sin2_vir": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887389,
+    "len": 471565,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 1,
+   "letture_di_estensione": 0,
+   "prime_letture_di_estensione": []
+  },
+  "d": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887221,
+    "len": 471565,
+    "chi": "rilassa_disegno"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 10,
+   "letture_di_estensione": 3,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887172,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887173,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887181,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "d0": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887314,
+    "len": 471565,
+    "chi": "memoria_hebbiana_moto"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 16,
+   "letture_di_estensione": 3,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887174,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887175,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887183,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "peq": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887385,
+    "len": 471565,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 1,
+   "letture_di_estensione": 3,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887189,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887190,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887191,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "tw": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887295,
+    "len": 471565,
+    "chi": "memoria_hebbiana_moto"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 6,
+   "letture_di_estensione": 4,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887163,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887164,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887176,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "twp": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887387,
+    "len": 471565,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 1,
+   "letture_di_estensione": 1,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887199,
+     "chi": "mitosi"
+    }
+   ]
+  },
+  "vd": {
+   "esito": "LETTA E MAI RISCRITTA",
+   "prima_lettura_di_legge": {
+    "evento": 1887384,
+    "len": 471565,
+    "chi": "verifica_invarianti"
+   },
+   "prima_riscrittura_completa": null,
+   "letture_di_legge": 1,
+   "letture_di_estensione": 3,
+   "prime_letture_di_estensione": [
+    {
+     "evento": 1887185,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887186,
+     "chi": "mitosi"
+    },
+    {
+     "evento": 1887187,
+     "chi": "mitosi"
+    }
+   ]
+  }
+ }
+}
