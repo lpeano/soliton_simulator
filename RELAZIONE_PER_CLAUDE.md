@@ -7618,3 +7618,34 @@ dello STESSO blob**, perche' mi era capitato di leggerne uno **vecchio** e ripor
 rigirata sul blob **`e86317bf`**, e ### **fino a quel referto i bracci `A` e `D` di questo pezzo non
 sono verificati.** *(Il braccio `B` — che e' quello che dimostra la byte-inerzia della forma
 completa — ### **e' PASSATO**.)*
+
+---
+
+# ✅ **Il sigillo della FORMA COMPLETA passa: sei bracci su sei** *(2026-09-29)*
+
+### **I numeri sono GENERATI dai due referti** *(`L-NUMERI`)*, e il referto della prova a
+guasto e' ora ### **dello STESSO blob** — il sigillo lo verifica, e la volta prima lo ha
+### **rifiutato da solo**.
+
+| | |
+|---|---|
+| blob | da **`64e9f62e`** a **`e86317bf`** |
+| ### **`B`** | ### **72 passi, 0 passi con differenze** — grandezze **E 179 contatori** — scena **GRANDE**, ### **con le nascite** |
+| **`A`** | **30 su 30** di STATO a posto, mancano **NESSUNA** |
+| **`D`** | **7** per arco, non a posto **NESSUNA** |
+| **`C`** | a controllo **spento**: **0** protette |
+| **`E`** | **10 nati**, 144 controlli, 14 assenze contate |
+| **`F`** | **30 su 30** apparse, mai apparse **0** |
+| ripiego silenzioso | ### **0** |
+
+### ➜ **La FORMA COMPLETA e' byte-inerte su 72 passi CON NASCITE, contatori compresi**, e
+il caso che deve fallire *(un secondo asse sbagliato)* ### **alza `FormaSbagliata` tre
+volte su tre**.
+
+### ⚠ **Una cosa che ho verificato invece di lasciarla per aria:** `FormaSbagliata` **non
+e' fra i dichiarati** di `_guasto_ripieghi.py` — come `CacheLunga` la volta scorsa.
+### **Qui NON puo' cambiare nessun verdetto:** i guasti che la prova inietta sono **corti
+e lunghi sul PRIMO asse**, e nessuno di essi puo' produrre una forma sbagliata. ### **Non
+tocco lo strumento adesso** — lo farei con un referto gia' girato, e sarebbe la stessa
+confusione fra misura e strumento che ho appena curato: ### **va nella generalizzazione 3**,
+dove lo strumento cambia comunque.

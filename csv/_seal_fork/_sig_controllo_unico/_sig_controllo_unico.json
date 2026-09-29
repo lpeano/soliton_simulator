@@ -4,8 +4,8 @@
  "introduce": "9b23ee3fe70b9cdc5c964b5011271c59d84cc1af",
  "passi": 72,
  "bracci": {
-  "A": false,
-  "D": false,
+  "A": true,
+  "D": true,
   "B": true,
   "C": true,
   "E": true,
@@ -155,9 +155,12 @@
   "mai_apparse": []
  },
  "A_e_D": {
-  "referto_stantio": true,
-  "blob_referto": "64e9f62e7bfd6dcfc5148ea86b4ebf6acbe0d4ee",
-  "blob_oggi": "e86317bf43fd388e81884940f09edba362a2995a"
+  "stato": 30,
+  "a_posto": 30,
+  "mancano": [],
+  "archi": 7,
+  "archi_non_a_posto": [],
+  "ripiego_silenzioso": []
  },
- "passa": false
+ "passa": true
 }
