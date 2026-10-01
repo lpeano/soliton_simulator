@@ -1513,10 +1513,27 @@ TORS_4PI = True         # TORSIONE A DOPPIA COPERTURA (4pi): se True, la torsion
                         # dominio doppio [-4pi,4pi] includendo i profili di percorrenza dei
                         # legami dipolari, e la soglia di mitosi diventa 4pi. Prova
                         # sperimentale, default off: non tocca la torsione classica.
-MITOSI_DIR = 0.0        # MITOSI DIREZIONALE ATTIVA: il figlio nasce spostato in fase verso il
-                        # figlio nasce decentrato verso il gradiente di torsione (frazione
-                        # della semi-lunghezza dell'arco). Polarizza la replicazione e fa
-                        # traslare il baricentro lungo la geodetica. Sperimentale.
+MITOSI_DIR = 0.0        # ⚠ VALE ZERO, QUINDI IL RAMO NON GIRA MAI -- e il commento diceva
+                        # l'opposto: <<MITOSI DIREZIONALE ATTIVA>>. E' `CENS-A4`, e sono DUE
+                        # difetti e non uno: un ramo morto, E un commento che dice il contrario.
+                        # [COMMIT 0 del riordino della mitosi, 2026-10-01, decisione di Luca:
+                        #  `MITOSI_DIR` SI ARCHIVIA. Questo commit corregge SOLO il commento,
+                        #  ed e' BYTE-INERTE: il valore non si tocca, il ramo resta dov'e'.]
+                        #
+                        # L'IDEA che il ramo esprimeva: il figlio nasce DECENTRATO verso il
+                        # gradiente di torsione, cioe' verso l'estremo piu' avvolto, e cosi' la
+                        # replicazione si polarizza e il baricentro trasla lungo la geodetica.
+                        # ### L'IDEA E' GIUSTA E NON SI BUTTA: e' il PRIMO TENTATIVO della voce
+                        #     `FRAZIONE-DIVISIONE` (aperta il 2026-10-01), dove la posizione del
+                        #     figlio diventa `t = f(stato_a, stato_b)` con `f(a,b) = 1 - f(b,a)`.
+                        # ### LA FORMA NO, e per questo si archivia: a :6981 il ramo fa
+                        #     `bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))`, cioe' TRE
+                        #     NUMERI A MANO -- il coefficiente `MITOSI_DIR`, la `tanh` scelta, e
+                        #     lo `0.5` davanti. `A1` dice la legge, non il numero.
+                        # IL SEGUITO STA IN doc/PIANO_riordino_mitosi.md (voce FRAZIONE-DIVISIONE):
+                        # il primo passo NON e' scegliere `t`, e' MISURARE se la posizione del
+                        # figlio sia FISICA o solo DISEGNO -- quali leggi leggono `pos` e quali
+                        # solo `d`.
 MEM_HEBB  = True        # MEMORIA HEBBIANA DEL MOTO ATTIVA (inerzia plastica). Quando attiva,
                         # l'inerzia e la plasticita' NON sono parametri: derivano dallo stato.
                         # Inerzia = |Psi|^2 del nodo (la massa e' l'inerzia). Plasticita' =

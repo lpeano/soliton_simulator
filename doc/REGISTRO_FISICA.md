@@ -1358,6 +1358,21 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
 
+> ### 📌 **COMMIT 0 DEL RIORDINO, 2026-10-01 — `MITOSI_DIR` SI ARCHIVIA, e il commento diceva il
+> contrario** *(decisione di Luca; `CENS-A4`)*
+>
+> | | |
+> |---|---|
+> | il fatto | `MITOSI_DIR = 0.0`, quindi ### **il ramo a `:6975`-`:6981` NON GIRA MAI** — e il commento diceva ### **«MITOSI DIREZIONALE ATTIVA»**. ### **Sono DUE difetti e non uno:** un ramo **morto**, **e** un commento che dice **il contrario** |
+> | ### **che cosa cambia questo commit** | ### **SOLO IL COMMENTO.** Il valore non si tocca, il ramo resta dov'e'. ### ✅ **E la byte-inerzia e' PROVATA DALLA STRUTTURA, non da un run: l'AST del file e' IDENTICO** *(1 525 008 caratteri di dump, uguali)* — ### **quindi cambiano per costruzione solo i commenti** |
+> | ### ✅ **l'IDEA non si butta** | *«il figlio nasce decentrato verso il gradiente di torsione»* ### **E' `t = f(stato_a, stato_b)`** con la torsione come grandezza: e' il ### **PRIMO TENTATIVO** della voce **`FRAZIONE-DIVISIONE`**, e il commento ora lo **cita** |
+> | ### ⛔ **la FORMA si archivia** | `bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))` *(`:6981`)* = ### **TRE numeri a mano** — il coefficiente, la `tanh`, e lo `0.5`. ### **`A1`: la legge, non il numero** |
+>
+> ### ⚠ **Perche' il ramo NON esce in questo commit:** il par.3 dice **un interruttore alla volta**,
+> e ### **togliere il ramo e' una modifica dell'AST**, cioe' una cosa **diversa** dal correggere una
+> frase falsa. ### **L'archiviazione del ramo e' una voce a se'** *(il `(7)` del piano)*, e
+> `RAMI-OFF-CURA2` dice **come**: ### **archiviato COPIATO dal sorgente, non cancellato.**
+
 > ### 🆕 **NOTA DEL 2026-09-28 (`PSI-FLASH`): la mitosi ora ESTENDE `psi` e `psi_spin` ai nati.**
 > **La legge della mitosi non cambia**: cambia che ### **i nati ricevono un `psi` invece di lasciare
 > `len(psi) < n`**, che spegneva la schermatura per tutta la rete. `psi` prende la **media dei

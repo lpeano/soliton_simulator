@@ -8141,3 +8141,23 @@ un punto.** ### ➜ **La stessa misura risponde a DUE voci**, e conviene farle i
 
 **PROSSIMO:** il **commit 0** *(il commento di `MITOSI_DIR`)*, da solo; poi il **commit 1**
 *(registro dichiarato)* col suo sigillo.
+
+---
+
+# 🔧 **COMMIT 0: il commento di `MITOSI_DIR` diceva il contrario del codice** *(2026-10-01)*
+
+Simulatore da **`62d67675`** a ### **`24b4a20a`**. **Scheda `mitosi-schwinger` aggiornata.**
+
+| | |
+|---|---|
+| il fatto | `MITOSI_DIR = 0.0`, quindi ### **il ramo non gira mai** — e il commento diceva ### **«MITOSI DIREZIONALE ATTIVA»** *(`CENS-A4`)*. ### **Due difetti e non uno:** un ramo **morto** e un commento che dice **il contrario** |
+| ### ✅ **byte-inerte, PROVATO DALLA STRUTTURA** | ### **l'AST del file e' IDENTICO** — `1 525 008` caratteri di dump, uguali. ### **Quindi cambiano per COSTRUZIONE solo i commenti**, e non serve un sigillo per dirlo: ### **una prova strutturale e' piu' forte di un run** |
+| ### ✅ **l'IDEA non si butta** | *«il figlio nasce decentrato verso il gradiente di torsione»* ### **E' `t = f(stato_a, stato_b)`** con la torsione come grandezza: e' il **primo tentativo** di `FRAZIONE-DIVISIONE`, e il commento ora lo **cita** |
+| ### ⛔ **la FORMA si archivia** | `0.5 * tanh(MITOSI_DIR * (twn[a] − twn[b]))` = ### **tre numeri a mano** |
+
+### ⚠ **E il RAMO non esce in questo commit, per una ragione precisa**
+Il par.3 dice **un interruttore alla volta**, e ### **togliere il ramo CAMBIA L'AST** — cioe' e' una
+cosa **diversa** dal correggere una frase falsa. ### **Se li mescolassi, la prova «l'AST e' identico»
+non esisterebbe piu'**, e con lei la ragione per cui questo commit non ha bisogno di un sigillo.
+**L'archiviazione del ramo e' la voce `(7)`**, e `RAMI-OFF-CURA2` dice come: ### **copiato dal
+sorgente, non cancellato.**
