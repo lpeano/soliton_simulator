@@ -8369,3 +8369,50 @@ frase scritta quando era vera, e mai piu' riletta.** Corretta nello stesso commi
 > differenze` che non veniva dal suo blob, e il residuo `_sin2_vir` gia' chiuso.
 > ### **Non le ho trovate LEGGENDO: le ha trovate un PRESIDIO o un NUMERO GENERATO.** E' la
 > ragione per cui `L-NUMERI` esiste.
+
+# 🔧 **COMMIT 0-bis: i commenti sul REGIME dicevano l'opposto del codice** *(2026-10-01)*
+
+> ### **Luca, il regime che gira e' il DETERMINISTICO, e gira dal 2026-08-28. I commenti
+> ### dichiaravano DEFAULT e «il sistema canonico» l'ALTRO.**
+
+**Verificato, non supposto:** `REGIME = "deterministico"` dal commit `670310f` *(2026-08-28)*, e
+### **nessuno script di `csv/_test_fork/` ne' di `csv/_seal_fork/` seleziona lo stocastico** — lo
+nominano **solo** le copie vecchie del simulatore, che sono **reperti**, non strumenti.
+### ➜ **Quindi lo stocastico non lo gira nessuno e NESSUN SIGILLO LO COPRE**, e ora il commento lo
+dice.
+
+## 🔢 **NOVE SITI, e il grep li ha contati: zero frasi false rimaste**
+
+Il **blocco d'intestazione** piu' **otto commenti di riga**: i tre *«canonico»* del ramo stocastico,
+il commento di `SCUOTIMENTO`, i due *«canonico»* della semina, e i **due commenti dei rami dentro
+`mitosi`**. Cio' che il grep trova adesso sono ### **le correzioni che CITANO il testo vecchio** —
+e il testo vecchio si cita invece di cancellarlo, perche' ### **un commento falso tolto in silenzio
+non insegna niente a chi legge dopo.**
+
+### ⚠ **UNA COSA NON L'HO TOCCATA, E LA DICHIARO**
+La **stringa di help** di `--tau-a` dice *«il `2.0` e' il valore 'canonico', ma il canonico vuole
+anche `G_PH = 0.15`»*, e usa *«canonico»* nel senso del regime. ### **Ma e' un LITERAL, non un
+commento: cambiarla cambierebbe l'AST**, e questo commit ### **deve restare byte-inerte.** Va in un
+giro a se'.
+
+## ✅ **LA PROVA E' STRUTTURALE, non un run**
+
+### **L'AST e' IDENTICO: 1.544.902 caratteri e lo stesso `sha1 6b26a7a4` prima e dopo.** Quindi
+cambiano **per costruzione** solo i commenti, e ### **non serve un sigillo per dirlo** — una prova
+strutturale e' **piu' forte** di un run, perche' ### **non dipende da una scena ne' da una
+configurazione.**
+
+## ⛔ **E UNA CORREZIONE ALLA TUA PREMESSA, che rende la cosa PEGGIORE e non migliore**
+
+Dicevi che `REGIME` *«non viene riassegnato da nessuna parte, ne' da riga di comando»*. ### **Si
+puo' riassegnare:** c'e' `--regime`, e `_applica_regime` fa `global REGIME`. **E due strumenti lo
+passano** *(`_osserva_vuoto.py`, `_sigillo_osservatore.py`)* — ### **ma solo per passare
+`"deterministico"`**, quindi ### **la parte che conta della tua premessa tiene.**
+### ⚠ **E NON E' RIDONDANTE, ed e' la trappola `--regime` gia' repertata:** il ramo di modulo mette
+`_SCUOTIMENTO_REGIME = True` in ### **ENTRAMBI** i casi, mentre `_applica_regime` mette
+`SCUOTIMENTO = False` per il deterministico. ### ➜ **LO STESSO NOME DI REGIME DA' DUE SISTEMI
+DIVERSI, a seconda che il flag sia passato o no.** E il commento di `SCUOTIMENTO` diceva *«segue
+REGIME; True in stocastico»*: ### **non segue il regime — da li' vale SEMPRE `True`.**
+
+**Con questo non si decide niente sul regime: si DICHIARA come stanno le cose.** La voce e'
+`REGIME-COMMENTI`.

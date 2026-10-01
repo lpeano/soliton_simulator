@@ -101,18 +101,41 @@ import numpy as np
 
 # ============================================================================
 # INTERRUTTORE DI REGIME
-#   "stocastico"     -> vuoto stocastico ATTIVO. Configurazione VALIDATA e STABILE. DEFAULT.
-#                       Il vuoto fa da termostato e da sorgente di asimmetria; la materia
-#                       condensa dalle sue fluttuazioni. E' il sistema canonico.
-#   "deterministico" -> vuoto SPENTO. Mitosi modulata dal TEMPO PROPRIO LOCALE (WIP).
-#                       Impulso iniziale conservativo nella semina, attrito ridotto. Proof of
-#                       concept: la materia condensa dal seme iniziale e il termostato da tempo
-#                       proprio controlla in parte l'energia, ma lo stress resta alto e manca
-#                       l'innesco della prima asimmetria (tau omogeneo all'inizio).
-#                       DA RIPRENDERE: seme iniziale di asimmetria strutturale (fase/torsione).
+#
+# ⚠⚠ CHE COSA GIRA, E DA QUANDO -- e i commenti di prima dicevano IL CONTRARIO
+#   ### GIRA IL DETERMINISTICO, E GIRA DAL 2026-08-28 (commit `670310f`). Tutto: ogni test, ogni
+#       sigillo, ogni misura di questo repo.
+#   ### LO STOCASTICO NON LO GIRA NESSUNO, E NESSUN SIGILLO LO COPRE. Non e' un'opinione: nessuno
+#       script di `csv/_test_fork/` ne' di `csv/_seal_fork/` lo seleziona -- lo nominano SOLO le
+#       copie vecchie del simulatore (`_old_sim_pre_*.py`), che sono reperti, non strumenti.
+#   ### E DUE STRUMENTI PASSANO `--regime`, ma per passare "deterministico": `_osserva_vuoto.py`
+#       e `_sigillo_osservatore.py`. ⚠ E NON E' RIDONDANTE, ED E' LA TRAPPOLA `--regime`:
+#       passare il flag CAMBIA `SCUOTIMENTO` (vedi `_applica_regime`), perche' qui sotto il ramo
+#       di modulo mette `_SCUOTIMENTO_REGIME = True` in ENTRAMBI i casi, mentre `_applica_regime`
+#       lo mette `False` per il deterministico. ### LO STESSO NOME DI REGIME DA' DUE SISTEMI
+#       DIVERSI, a seconda che il flag sia passato o no.
+#   [COMMIT 0-bis del riordino, 2026-10-01: questo commit corregge SOLO COMMENTI ed e'
+#    BYTE-INERTE. NON decide niente sul regime: DICHIARA come stanno le cose.]
+#
+#   "deterministico" -> ### IL REGIME IN USO, E L'UNICO SIGILLATO. Vuoto SPENTO (al netto della
+#                       trappola qui sopra). Mitosi modulata dal TEMPO PROPRIO LOCALE. Impulso
+#                       iniziale conservativo nella semina, attrito ridotto.
+#                       ⚠ IL COMMENTO DI PRIMA LO CHIAMAVA <<WIP / proof of concept>>: era FALSO
+#                         quando l'ho letto, perche' e' il sistema su cui gira TUTTO. Cio' che
+#                         resta vero del vecchio testo e' il LIMITE FISICO, e lo tengo: lo stress
+#                         resta alto e MANCA L'INNESCO DELLA PRIMA ASIMMETRIA (tau omogeneo
+#                         all'inizio). DA RIPRENDERE: seme iniziale di asimmetria strutturale
+#                         (fase/torsione).
+#   "stocastico"     -> vuoto stocastico ATTIVO: il vuoto fa da termostato e da sorgente di
+#                       asimmetria, e la materia condensa dalle sue fluttuazioni.
+#                       ⚠ IL COMMENTO DI PRIMA LO CHIAMAVA <<DEFAULT>> e <<il sistema canonico>>:
+#                         ### FALSO SU ENTRAMBI. Non e' il default (il default e' la riga qui
+#                         sotto) e ### NON E' COPERTO DA NESSUN SIGILLO. <<VALIDATA e STABILE>>
+#                         si riferisce all'EPOCA 1, prima del fork SU(2): per l'epoca 2 non
+#                         esiste una misura che lo dica.
 # APERTO: la PRECESSIONE fra due masse persiste in regime deterministico? Se si', il momento
 #         angolare netto NON dipende dal vuoto stocastico (risultato forte).
-REGIME = "deterministico"     # <-- cambia qui: "stocastico" (stabile) | "deterministico" (default: forma pura + calcio vett)
+REGIME = "deterministico"     # <-- `REGIME` E' QUESTO, ED E' CIO' CHE GIRA. L'altro valore di `REGIME` e' "stocastico", che NESSUN SIGILLO COPRE.
 
 if REGIME == "deterministico":
     _SCUOTIMENTO_REGIME = True  
@@ -121,9 +144,9 @@ if REGIME == "deterministico":
     _CALORE_INIT = 0.4         # impulso iniziale conservativo (punto zero)
 else:
     _SCUOTIMENTO_REGIME = True
-    _G_PH_REGIME = 0.15        # attrito canonico validato
-    _TAU_A_REGIME = 2.0        # canonico
-    _CALORE_INIT = 0.0         # phivel nasce a zero (canonico)
+    _G_PH_REGIME = 0.15        # ⚠ <<canonico validato>> VALE PER L'EPOCA 1: questo ramo NON gira
+    _TAU_A_REGIME = 2.0        # idem: valore dell'epoca 1, in un ramo che NON gira
+    _CALORE_INIT = 0.0         # phivel nasce a zero (epoca 1; ramo che NON gira)
 # ============================================================================
 import sys as _sys
 # Backend non-interattivo (Agg) SOLO quando si registra un video headless (--test).
@@ -765,7 +788,12 @@ def _righe_stato_universo(net):
 #     materia solo all'81% del vuoto): la coerenza e' il discriminante fisico giusto.
 # Nessun numero scelto: ampiezza dall'energia del vuoto (dinamica), modulazione
 # dalla geometria locale. Sempre attiva (flag SCUOTIMENTO, default on).
-SCUOTIMENTO  = _SCUOTIMENTO_REGIME  # legge dello scuotimento (segue REGIME; True in stocastico)
+# ⚠ IL COMMENTO DI PRIMA DICEVA <<segue REGIME; True in stocastico>>, E NON SEGUE IL REGIME:
+#   il ramo di modulo mette `_SCUOTIMENTO_REGIME = True` in ENTRAMBI i casi, quindi qui vale
+#   SEMPRE True, qualunque sia `REGIME`. ### A seguire il regime e' `_applica_regime`, che gira
+#   SOLO se `--regime` e' passato da riga di comando e mette `False` per il deterministico.
+#   ### E' LA TRAPPOLA `--regime`, dichiarata nell'intestazione di REGIME.
+SCUOTIMENTO  = _SCUOTIMENTO_REGIME  # `SCUOTIMENTO` vale SEMPRE True da qui; solo `--regime` lo cambia
 
 def lambda_vuoto(net):
     """Energia del vuoto DINAMICA: densita' di energia d'interferenza <|Psi|^2>.
@@ -3702,8 +3730,9 @@ class Rete:
         # profilo di percorrenza: verso casuale (+1/-1) = le due antichiralita', ~50/50.
         # (assegnato PRIMA di phivel perche' il calcio chirale lo usa)
         chi_nuovi = self.rng.choice([-1, 1], n)
-        # impulso iniziale di fase: zero in regime stocastico (canonico), calcio termico di punto
-        # zero in regime deterministico (_CALORE_INIT), sostituto del vuoto come energia iniziale.
+        # impulso iniziale di fase: zero in regime stocastico (ramo che NON gira), calcio termico
+        # di punto zero in regime DETERMINISTICO (_CALORE_INIT), che e' il regime in uso: qui il
+        # calcio sostituisce il vuoto come energia iniziale.
         if _CALORE_INIT > 0:
             if CALORE_VETTORIALE:
                 # CALCIO CHIRALE: la fluttuazione di fase e' FIRMATA dalla chiralita' del solitone.
@@ -3711,7 +3740,7 @@ class Rete:
                 # frame-drag e mem_mot possono agganciare e trasformare in rotazione orbitale.
                 calcio_phi = chi_nuovi * self.rng.normal(_CALORE_INIT, _CALORE_INIT * 0.5, n)
             else:
-                calcio_phi = self.rng.normal(0, _CALORE_INIT, n)   # scalare isotropo (canonico)
+                calcio_phi = self.rng.normal(0, _CALORE_INIT, n)   # scalare isotropo (epoca 1)
             self.phivel = np.concatenate([self.phivel, calcio_phi])
         else:
             self.phivel = np.concatenate([self.phivel, np.zeros(n)])
@@ -7269,7 +7298,8 @@ class Rete:
         sciolta = np.abs(self.tw[sel]) / PHI_CRIT
         g = np.concatenate([a, b])
         if REGIME == "deterministico":
-            # REGIME DETERMINISTICO (WIP): impulso modulato dal TEMPO PROPRIO LOCALE tau =
+            # ### REGIME DETERMINISTICO -- IL RAMO CHE GIRA (il commento diceva <<WIP>>, e lo
+            # diceva del ramo su cui girano TUTTI i sigilli). Impulso modulato dal TEMPO PROPRIO LOCALE tau =
             # 1+|tw|/PHI_CRIT. Componente comune diretta da tau (rompe la simmetria attorno alla
             # materia, non si media a zero) + parte chirale antisimmetrica. Saturazione tau/(1+tau)
             # = termostato (auto-freno dove tau alto). Vedi note REGIME in testa al file.
@@ -7282,7 +7312,15 @@ class Rete:
             self.phi[a] = (self.phi[a] + calcio_a) % self._dphi()
             self.phi[b] = (self.phi[b] + calcio_b) % self._dphi()
         else:
-            # REGIME STOCASTICO (canonico, validato): rinculo di fase casuale. DEFAULT.
+            # ### REGIME STOCASTICO -- RAMO CHE NON GIRA MAI, e il commento diceva l'opposto:
+            # <<canonico, validato ... DEFAULT>>. ### E' FALSO SU TUTTI E TRE I PUNTI: il default
+            # e' "deterministico" (dal 2026-08-28), nessuno strumento seleziona lo stocastico, e
+            # ### NESSUN SIGILLO COPRE QUESTO RAMO. <<validato>> si riferisce all'EPOCA 1.
+            # ⚠ E QUI IL CONFRONTO CON IL RAMO SOPRA DICE UNA COSA DI FISICA: il deterministico
+            #   ha un'autointerazione (la torsione dell'arco decide la forza del calcio, la
+            #   chiralita' il verso), questo ha un RINCULO CASUALE. Vedi
+            #   `DIVISIONE-AUTOCONSISTENTE`.
+            # rinculo di fase casuale:
             self.phi[g] = (self.phi[g] + self.rng.normal(0, 1, len(g)) *
                            KICK_TW * np.concatenate([sciolta, sciolta])) % self._dphi()
         keep = np.ones(len(self.i), bool); keep[sel] = False

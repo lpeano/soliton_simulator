@@ -1029,6 +1029,21 @@ distanza minima **la saturazione non esiste** — e `semina` lo dice da sé rifi
 
 <!-- SCHEDA nome=fase-phi funzioni=_w4,_w8,_wphi,_dphi,circolazione_topologica,semina,step flag=FASE_2PI,TORS_4PI -->
 
+> ### ⚠ **COMMIT 0-bis — L'IMPULSO INIZIALE DI FASE DELLA SEMINA: quale ramo gira** *(2026-10-01)*
+>
+> Il commento diceva *«zero in regime stocastico **(canonico)**, calcio termico di punto zero in
+> regime deterministico»*, e ### **l'etichetta «canonico» stava sul ramo che NON GIRA.**
+>
+> | | |
+> |---|---|
+> | ### **cio' che gira** | `REGIME = "deterministico"`, quindi `_CALORE_INIT = 0.4`: ### **`phivel` nasce con un calcio termico di punto zero**, e quel calcio ### **SOSTITUISCE il vuoto come energia iniziale** |
+> | **cio' che non gira** | il ramo stocastico, dove `_CALORE_INIT = 0.0` e `phivel` ### **nasce a zero** *(valore dell'**epoca 1**)* |
+> | ### **e la forma del calcio dipende da un ALTRO flag** | `CALORE_VETTORIALE`: se acceso il calcio e' ### **FIRMATO dalla chiralita'** *(`chi_nuovi · normal(...)`)* e ### **non si media a zero**; se spento e' un ### **rumore isotropo** |
+>
+> ### ➜ **Va detto nella scheda perche' tocca `phivel` ALLA NASCITE:** l'energia iniziale della
+> fase ### **non e' un dettaglio di configurazione**, e ### **l'etichetta «canonico» puntava al
+> ramo sbagliato.**
+
 > ### 📌 **NOTA DEL 2026-09-29 — `P_eq` dentro `step`: IL CONFRONTO ERA FRA DUE METRI DIVERSI**
 > *(`RIPIEGHI-ZERO`, rilevato da Luca)*
 >
@@ -1357,6 +1372,26 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 > `fase-phi` non deve poter credere che la legge sia ancora quella.**
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
+
+> ### ⚠ **COMMIT 0-bis — DENTRO `mitosi` CI SONO DUE RAMI, E UNO NON GIRA MAI** *(2026-10-01)*
+>
+> | ramo | che cosa fa | gira? |
+> |---|---|---|
+> | ### **deterministico** | il calcio ai genitori e' ### **modulato dal TEMPO PROPRIO LOCALE**: `tau = 1+|tw|/PHI_CRIT`, `mod = tau/(1+tau)`, una **parte comune** `KICK_TW·sciolta·(mod−0.5)` e una **parte chirale** `±½·KICK_TW·sciolta·chi·mod` | ### **SI', ED E' L'UNICO SIGILLATO** |
+> | ### **stocastico** | **rinculo di fase CASUALE**: `rng.normal(0,1)·KICK_TW·sciolta` | ### **MAI** |
+>
+> ### ⛔ **E il commento del ramo stocastico diceva *«canonico, validato ... DEFAULT»*: falso su
+> tutti e tre i punti.** `REGIME = "deterministico"` ### **dal 2026-08-28** (`670310f`), **nessuno
+> strumento** seleziona lo stocastico, e ### **nessun sigillo copre quel ramo.**
+>
+> ### 📌 **E IL CONFRONTO FRA I DUE RAMI DICE UNA COSA DI FISICA, non di manutenzione**
+> ### **Il ramo che gira HA GIA' UN'AUTOINTERAZIONE, e deterministica:** ### **la torsione
+> dell'arco decide QUANTO FORTE e' il calcio**, e ### **la chiralita' di ciascun genitore ne
+> decide IL VERSO.** L'altro ramo ha un **rinculo casuale**.
+> ### ➜ **Quindi alla domanda di Luca *«non dovrebbe esserci una parte di autointerazione?»* la
+> risposta e' «C'E' GIA'», non «manca»** — e il lavoro e' ### **renderla autoconsistente**:
+> la voce e' **`DIVISIONE-AUTOCONSISTENTE`**, e il suo difetto piu' grave e' che ### **i figli
+> ripartono da `tw = 0`, cioe' la torsione SPARISCE senza un bilancio.**
 
 > ### 📌 **COMMIT 0 DEL RIORDINO, 2026-10-01 — `MITOSI_DIR` SI ARCHIVIA, e il commento diceva il
 > contrario** *(decisione di Luca; `CENS-A4`)*
@@ -4166,6 +4201,27 @@ aggiunti**.
 ---
 
 <!-- SCHEDA nome=scuotimento-vuoto funzioni=scuoti_vuoto,lambda_vuoto flag=SCUOTIMENTO,CALORE_VETTORIALE,RUMORE_COLORATO -->
+
+> ### ⚠ **COMMIT 0-bis — `SCUOTIMENTO` *NON* SEGUE IL REGIME, e il commento diceva che lo segue**
+> *(2026-10-01, `REGIME-COMMENTI`. E' un fatto di FISICA, non una svista di testo.)*
+>
+> **Il commento diceva:** *«legge dello scuotimento (segue `REGIME`; `True` in stocastico)»*.
+>
+> | dove | che cosa fa davvero |
+> |---|---|
+> | il **ramo di modulo** *(sempre eseguito)* | mette `_SCUOTIMENTO_REGIME = True` ### **in ENTRAMBI i rami** — deterministico **e** stocastico. ### **Quindi da qui `SCUOTIMENTO` vale SEMPRE `True`, qualunque sia `REGIME`.** |
+> | `_applica_regime` *(solo se `--regime` e' passato)* | mette ### **`SCUOTIMENTO = False`** per il deterministico |
+>
+> ### ➜ **LO STESSO NOME DI REGIME DA' DUE SISTEMI DIVERSI, a seconda che il flag sia stato
+> passato o no.** ### **E il vuoto acceso o spento non e' un dettaglio: e' il termostato e la
+> sorgente di asimmetria.**
+> **E' la trappola `--regime`, gia' repertata**, e ### **i due strumenti che passano
+> `--regime deterministico`** *(`_osserva_vuoto.py`, `_sigillo_osservatore.py`)* ### **lo fanno
+> PROPRIO per questo**: `O2` e' un A/B a **variabile singola** che cambia **solo**
+> `SCUOTIMENTO`.
+> ### ⚠ **Quindi <<il run di default>> e <<il run con `--regime deterministico`>> NON sono lo
+> stesso sistema**, e un confronto fra misure prese nei due modi ### **non e' un confronto a
+> variabile singola.**
 # ㉖ LO SCUOTIMENTO DEL VUOTO — **`scuoti_vuoto`**, la **prima** legge del passo
 
 > ### 🏗 **T1, 2026-09-28: l'apertura del passo non sta piu' qui**
