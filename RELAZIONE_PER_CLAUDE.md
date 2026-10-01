@@ -8511,3 +8511,37 @@ per strumento. ### **Lo scrivo come fronte nel piano, non lo faccio adesso.**
 
 **La parte buona: il controllo zero esisteva, ed e' lui che ha fermato tutto.** Un confronto
 partito su scene non uguali avrebbe dato un verdetto ### **inventato.**
+
+# ⛔ **UN TERZO DIFETTO MIO: `phi` confrontata su una RETTA, e vive su un CERCHIO** *(2026-10-01)*
+
+Il primo run utile di `DIVISIONE-AUTOCONSISTENTE:M2` dava `phi` **DIVERSA** con scostamento
+### **1.2563e+01 su 12801 nodi su 12802.** ### **Quel numero e' quasi esattamente `4 pi` = 12.566:**
+non era fisica, erano ### **due valori ai due capi dello stesso intervallo.**
+### -> **Sulle cicliche si misura la distanza SUL CERCHIO**, col periodo preso da ### **`_dphi()`
+del simulatore** -- non scritto a mano *(e' il difetto che `D34` ha mostrato costare caro)*.
+
+## COME SI MISURA IL <<DOVE>>, ora
+
+`localizza` rifa' **un** passo su due scene nuove con la **spia sui confini di voce** -- il
+controllo del **commit 1**, che gira **dopo ogni voce** -- e confronta ### **confine per confine.**
+### **La prima voce in cui una grandezza differisce E' il luogo**, e non e' un'inferenza.
+**E si riporta la serie intera:** una grandezza puo' divergere **dopo** una voce che si limita a
+### **propagare** una differenza nata prima. ### **Una voce che diverge non e' ancora una colpa.**
+
+## CIO' CHE IL RUN RIFIUTATO AVEVA GIA' DETTO, e che non si cancella
+
+| | |
+|---|---|
+| ### **`d0`** | ### **DIVERSA, relativo `2.66e-02` su TUTTI i 471564 archi** -- ### **non e' rumore** |
+| il resto per nodo | `1e-15`...`1e-16`: ### **rumore d'ORDINE DI SOMMA** *(`bincount`/`add.at` su `(i,j)` riordinati)* |
+| `d`, `vd`, `peq`, `_rep`, `pos`, `psi`, `psi_spin`, `eta`, `perc_*` | ### **IDENTICHE** |
+| ### **le nascite** | ### **ZERO** in un passo: ### **il calcio della mitosi NON HA AGITO**, quindi la differenza su `d0` viene da ALTRO -- ### **il primo sospetto e' scartato DAI NUMERI, non difeso** |
+
+### E UNA COSA VERIFICATA CHE NON E' LA CAUSA
+`_cs_arco_da_nodo` e' una ### **MEDIA ARMONICA** dei due estremi, ### **simmetrica in `(ii, jj)`.**
+Quindi `cs_arco` **non** dipende dal verso, e non e' lei. *(L'ho verificata **prima** di
+sospettarla in un referto.)*
+
+### IL VERDETTO DI `DIVISIONE-AUTOCONSISTENTE:M2` NON E' ANCORA SCRITTO
+Col confronto sul cerchio il conto delle grandezze diverse **cambiera'**, e ### **va riletto prima
+di concludere.**

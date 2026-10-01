@@ -58,6 +58,14 @@ import _passo  # noqa: E402
 FUORI = os.path.join(RADICE, "csv", "_test_fork", "_verso_archi")
 SIM = os.path.join(RADICE, "soliton_simulator.py")
 
+# ### LE GRANDEZZE CICLICHE: `phi` vive su un CERCHIO di periodo `_dphi()`, e una differenza
+#   di `_dphi()` NON E' UNA DIFFERENZA -- e' lo stesso angolo.
+#   ⚠ MIO DIFETTO, trovato al primo run utile: il confronto lineare dava
+#     scostamento 1.2563e+01 su 12801 nodi su 12802, cioe' QUASI ESATTAMENTE `4 pi` = 12.566.
+#     ### Non era fisica: erano due valori ai due capi dello stesso intervallo.
+#   ### -> Sulle cicliche si misura la DISTANZA SUL CERCHIO: ((a - b + P/2) mod P) - P/2.
+CICLICHE = ("phi", "phi0", "phi_s")
+
 # le grandezze PER NODO: il verdetto si legge QUI. Non si trasformano invertendo `(i, j)`.
 PER_NODO = ("phi", "phi0", "phi_s", "phivel", "psi", "psi_spin", "eta", "pos", "perc_tw",
             "perc_chi", "perc_geom", "mem_mot", "omega_s", "rho_spin", "_nb", "_psi_spinor")
@@ -101,7 +109,7 @@ def specchia(net):
             "antisimmetriche_cambiate_di_segno": list(PER_ARCO_ANTISIMMETRICHE)}
 
 
-def confronta(a, b, nomi, segno=1.0):
+def confronta(a, b, nomi, segno=1.0, periodo=None):
     """Le differenze fra due reti su un elenco di grandezze. `segno = -1` per le antisimmetriche.
 
     ### ⛔ **DUE DIFETTI MIEI, curati il 2026-10-01, e li ha trovati IL CONTROLLO ZERO di questo
@@ -144,6 +152,12 @@ def confronta(a, b, nomi, segno=1.0):
             else:
                 xx = x.astype(float)
                 yy = y.astype(float)
+            # ### SE LA GRANDEZZA E' CICLICA, la differenza si riporta sul cerchio PRIMA di
+            #   qualunque confronto: su un cerchio `0` e `P - eps` sono VICINI.
+            if periodo is not None and nome in CICLICHE and not np.iscomplexobj(xx):
+                _P = float(periodo)
+                _diff = ((xx - yy + _P * 0.5) % _P) - _P * 0.5
+                yy = xx - _diff
             # ### UGUAGLIANZA ELEMENTO PER ELEMENTO, con `NaN` contro `NaN` dichiarato UGUALE.
             uguali = (xx == yy) | (np.isnan(xx) & np.isnan(yy))
             diversi = ~uguali
@@ -164,6 +178,99 @@ def confronta(a, b, nomi, segno=1.0):
                       "elementi_non_finiti": non_finiti,
                       "elementi_diversi_non_finiti": diversi_non_finiti})
     return fuori
+
+
+def localizza(stampa):
+    """### **QUALE VOCE del passo fa divergere le due reti, per prima.**
+
+    **Il mandato chiede di dire DOVE**, e *«il calcio della mitosi e' il primo sospetto, non
+    l'unico»*. ### **Qui il DOVE si MISURA** invece di indovinarlo.
+
+    ### COME, e di nuovo con l'imbragatura del commit 1
+    La **spia** su `_ferma_se_registro_incoerente` *(chiamato **dopo ogni voce**)* registra una
+    **fotografia** delle grandezze che interessano a **ogni confine di voce**. Si fa un passo
+    sulla rete **base** registrando, poi un passo sulla rete **specchiata** confrontando ### **lo
+    stesso confine con lo stesso confine.**
+    ### ➜ **La prima voce in cui una grandezza differisce E' il luogo**, e non e' un'inferenza.
+
+    ### ⚠ **UNA VOCE CHE DIVERGE NON E' ANCORA UNA COLPA:** una grandezza puo' divergere **dopo**
+    una voce che si limita a **propagare** una differenza nata prima. ### **Per questo si riporta
+    la SERIE INTERA**, non solo la prima: chi legge vede **dove nasce** e **dove cresce**.
+    """
+    SA, A = carica("verso_loc_base")
+    SB, B = carica("verso_loc_spec")
+    specchia(B)
+    bersagli = ("d0", "d", "phi", "tw", "vd", "peq")
+    foto = {"A": [], "B": []}
+    quale = {"ora": "A"}
+
+    def istantanea(nt):
+        return {k: (np.asarray(getattr(nt, k)).copy() if getattr(nt, k, None) is not None
+                    else None) for k in bersagli}
+
+    for S, nt, et in ((SA, A, "A"), (SB, B, "B")):
+        vero = S._ferma_se_registro_incoerente
+
+        def spia(x, dove, voce=None, comp=None, _S=S, _vero=vero, _et=et):
+            foto[_et].append({"voce": voce, "dove": dove, "dati": istantanea(x)})
+            return _vero(x, dove, voce=voce, comp=comp)
+
+        S._ferma_se_registro_incoerente = spia
+        with contextlib.redirect_stdout(io.StringIO()):
+            _passo.passo_pieno(S, nt)
+        S._ferma_se_registro_incoerente = vero
+
+    if len(foto["A"]) != len(foto["B"]):
+        stampa("  ### NON CONFRONTABILE: %d confini su A e %d su B"
+               % (len(foto["A"]), len(foto["B"])))
+        return {"errore": "numero di confini diverso"}
+
+    P = float(SA._dphi())
+    serie = []
+    stampa("")
+    stampa("  %-26s %s" % ("confine (dopo la voce)",
+                           "  ".join("%12s" % k for k in bersagli)))
+    for ra, rb in zip(foto["A"], foto["B"]):
+        riga = {"voce": ra["voce"], "dove": ra["dove"], "scostamenti": {}}
+        celle = []
+        for k in bersagli:
+            x, y = ra["dati"][k], rb["dati"][k]
+            if x is None or y is None or x.shape != y.shape:
+                celle.append("%12s" % "-")
+                riga["scostamenti"][k] = None
+                continue
+            xx = x.astype(float)
+            yy = y.astype(float)
+            # `tw` e' ANTISIMMETRICA: si riporta col segno prima di confrontare.
+            if k in PER_ARCO_ANTISIMMETRICHE:
+                yy = -yy
+            if k in CICLICHE:
+                yy = xx - (((xx - yy + P * 0.5) % P) - P * 0.5)
+            with np.errstate(invalid="ignore", over="ignore"):
+                fin = np.isfinite(xx) & np.isfinite(yy)
+                dd = np.abs(xx - yy)
+                m = float(np.max(dd[fin])) if np.count_nonzero(fin) else 0.0
+            riga["scostamenti"][k] = m
+            celle.append("%12.3e" % m)
+        serie.append(riga)
+        stampa("  %-26s %s" % (str(ra["voce"] or "(prima delle leggi)")[:26], "  ".join(celle)))
+
+    primo = {}
+    for k in bersagli:
+        for riga in serie:
+            v = riga["scostamenti"].get(k)
+            if v is not None and v > 0.0:
+                primo[k] = {"voce": riga["voce"], "scostamento": v}
+                break
+    stampa("")
+    stampa("  ### LA PRIMA VOCE CHE FA DIVERGERE, per grandezza:")
+    for k in bersagli:
+        if k in primo:
+            stampa("      %-6s -> dopo la voce `%s`   (scostamento %.3e)"
+                   % (k, primo[k]["voce"], primo[k]["scostamento"]))
+        else:
+            stampa("      %-6s -> MAI, in questo passo" % k)
+    return {"serie": serie, "prima_voce_che_divide": primo}
 
 
 def principale():
@@ -194,7 +301,7 @@ def principale():
     stampa("")
 
     # --- le due scene partono IDENTICHE, e si VERIFICA invece di crederlo
-    pari = confronta(A, B, PER_NODO)
+    pari = confronta(A, B, PER_NODO, periodo=SA._dphi())
     # ### <<ASSENTE IN ENTRAMBI>> E' COERENTE e non fa fallire il controllo zero: le cache
     #   pigre (`psi_spin`, `rho_spin`, `_nb`) NON ESISTONO prima del primo passo, in nessuna
     #   delle due reti. ### Cio' che fa fallire e' <<assente in UNO SOLO>> o <<DIVERSA>>.
@@ -229,7 +336,7 @@ def principale():
     stampa("=" * 104)
     stampa("IL VERDETTO SI LEGGE SUI NODI (invarianti per la trasformazione)")
     stampa("=" * 104)
-    nodi = confronta(A, B, PER_NODO)
+    nodi = confronta(A, B, PER_NODO, periodo=SA._dphi())
     nd = [x for x in nodi if x.get("esito") == "DIVERSA"]
     stampa("  %-16s %-19s %14s %14s %12s" % ("grandezza", "esito", "scost.max fin.", "relativo",
                                              "elem. div."))
@@ -261,7 +368,18 @@ def principale():
                    % (x["grandezza"], x.get("esito", "?"), x.get("scostamento_max_sui_finiti", 0.0),
                       x.get("scostamento_relativo", 0.0), x.get("elementi_diversi", "-")))
 
-    # --- e il primo sospetto, nominato: il calcio della mitosi
+    # ------------------------------------------------- DOVE: la PRIMA VOCE che divide
+    stampa("")
+    stampa("=" * 104)
+    stampa("DOVE, misurato: LA PRIMA VOCE DEL PASSO IN CUI UNA GRANDEZZA DIVERGE")
+    stampa("=" * 104)
+    stampa("  Si rifa' UN passo su due scene nuove, con la SPIA sui confini di voce")
+    stampa("  (il controllo del commit 1, che gira dopo OGNI voce), e si confronta voce per voce.")
+    dove = localizza(stampa)
+    stampa("")
+    stampa("=" * 104)
+    stampa("DOVE: il primo sospetto era il CALCIO DELLA MITOSI, e si dice se ha agito")
+    stampa("=" * 104)
     stampa("")
     stampa("=" * 104)
     stampa("DOVE: il primo sospetto e' il CALCIO DELLA MITOSI, e si dice se ha agito")
@@ -283,6 +401,7 @@ def principale():
                                   ("_g_nati_mitosi", "_g_nati_schwinger")},
                          "specchio": {c: int(getattr(B, c, 0)) for c in
                                       ("_g_nati_mitosi", "_g_nati_schwinger")}},
+             "dove_per_voce": dove,
              "verdetto_il_verso_entra_nella_fisica": bool(nd)}
     json.dump(fuori, io.open(os.path.join(FUORI, "_verso_archi.json"), "w", encoding="utf-8"),
               indent=1, ensure_ascii=False)
