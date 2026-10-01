@@ -107,7 +107,11 @@ def principale():
                 "salti_r_prima": salti_prima,
                 "salti_r_dopo": int(getattr(net, "_tum_r_salti", 0)),
                 "n": int(net.n), "m": int(len(net.i)),
-                "len_r_corrente": int(len(getattr(net, "_r_corrente", []) or []))}
+                # ⚠ MIO DIFETTO, e il run si e' fermato: `array or []` CHIAMA bool() su un
+                #   array, e numpy SOLLEVA (<<the truth value of an array ... is ambiguous>>).
+                #   Si guarda `is None`, che e' la sola domanda che si volesse fare.
+                "len_r_corrente": (-1 if getattr(net, "_r_corrente", None) is None
+                                   else int(len(net._r_corrente)))}
         if perche and "soglia" in perche:
             sg = np.asarray(perche["soglia"], float)
             av = np.asarray(perche["avv"], float)
