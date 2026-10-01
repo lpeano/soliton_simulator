@@ -1,0 +1,109 @@
+========================================================================================================
+LE MISURE DI `DIVISIONE-AUTOCONSISTENTE` + CALORE -- M0, M1, M3, M4, M6
+========================================================================================================
+simulatore ..... 287154f3   (sha1 dei byte grezzi)
+questo strumento a9944b1a
+passi .......... 72
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 81
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 81.
+
+
+
+========================================================================================================
+IL RUN: 72 passi, con la SPIA sui CONFINI DI VOCE (generalizzazione 2)
+========================================================================================================
+  confini di voce misurati: 648
+  passi con NASCITE: 8
+
+========================================================================================================
+M0 -- ESISTE UN'ENERGIA TOTALE? (le parti MISURABILI, su stato SVILUPPATO)
+========================================================================================================
+  funzioni il cui NOME promette un'energia: 1
+      `_energia` -> energia d'interferenza della coorte, normalizzata al suo valore iniziale
+  M_PH = 1.0   (uniforme: la cinetica di fase e' 0.5*sum(phivel^2))
+  CS_DINAMICO = True   VERLET = True   FORK_SU2_MEM = True
+  cs_nodo UNIFORME: False   (scarto relativo fra gli estremi del campo: 0.8293091178712905)
+  cs sui DUE ESTREMI di uno stesso arco: scarto mediano 1.707e-01, massimo 9.769e-01
+      archi con scarto NON NULLO: 471574 su 471575
+  ### SE cs NON E' UNIFORME, la forza metrica cs^2 (M - I) q NON E' UN GRADIENTE:
+      `M` e' simmetrica, ma `diag(cs^2) M` NON LO E'. Quindi per il settore metrico
+      NON esiste un'energia potenziale, e non e' una mia opinione: e' la matrice.
+
+========================================================================================================
+M1 -- QUANTA |tw| SPARISCE con le divisioni, come FRAZIONE del totale
+========================================================================================================
+  voci `mitosi` misurate: 72   di cui con |tw| in CALO: 8
+  variazione RELATIVA di sum|tw| sulla voce `mitosi`:
+      mediana 0.000e+00   minima -1.193e-05   massima 0.000e+00
+  somma algebrica delle variazioni su 72 passi: -6.786142e+01
+  sum|tw| all'inizio 0.000000e+00 -> alla fine 1.266450e+06
+
+========================================================================================================
+M3 -- IL TERMOSTATO NOSE-HOOVER
+========================================================================================================
+  ### P-EQ-MEDIANA-ARCHI: `T_target` = cs_rappr^2 * P_eq, e `cs_rappr` NON cambia
+      -> IL RAPPORTO DI T_target E' ESATTAMENTE IL RAPPORTO DI P_eq.
+      P_eq(tutti gli archi) / P_eq(i primi n): mediano 1.016799  min 1.008744  max 1.022422
+      cioe' T_target cambierebbe di quel fattore SU TUTTO IL SISTEMA.
+  xi_termo: frena (xi>0) in 16 passi, RIFORNISCE (xi<0) in 56, nullo in 0
+  xi_termo: min -2.744638e-01  mediano -1.572751e-01  max 3.543944e-01   al CLIP +-2 esatto: 0 volte
+  E_cin (la MEDIA che vede il termostato): min 1.909848e-01  max 1.329253e+01
+  P_eq mediana: fetta dei primi n = 1.862717e+00   TUTTI gli archi = 1.893534e+00
+  ### il PAVIMENTO 1e-6 di `Tt = max(T_target, 1e-6)`: P_eq non ci si avvicina
+      (se la mediana di P_eq e' 1.863e+00, T_target = cs^2 * P_eq e' molto sopra 1e-6)
+
+========================================================================================================
+M4 -- IL BILANCIO DI UNA DIVISIONE: il CALCIO contro la CANCELLAZIONE DELL'ARCO
+========================================================================================================
+  passi con nascite: 8   voci `mitosi` con n cresciuto: 8
+  ### IL CALCIO, MISURATO ATTORNO ALLA VOCE `mitosi` (non sul passo intero):
+      genitori (nodi che c'erano PRIMA) con `phi` mosso ...... 18
+      genitori con `phivel` mosso ............................ 0
+      somma |dphi| 2.599642e+00   max |dphi| 2.554070e-01
+      somma |dphivel| 0.000000e+00   max |dphivel| 0.000000e+00
+  ### -> IL CALCIO SPOSTA `phi` E NON `phivel`: non cambia 0.5*sum(phivel^2)
+      dei nodi che c'erano, cambia la FASE -- cioe' il termine di
+      INTERFERENZA, che e' proprio il pezzo di cui M0 dice che NON esiste
+      come funzione di stato (connessione dal Bloch RITARDATO).
+  ### LA CINETICA DI FASE, SEPARATA:
+      variazione sui SOLI nodi che c'erano prima ... +0.000000e+00
+      variazione includendo i NATI ................. +2.490278e+01
+      -> la differenza, +2.490278e+01, e' CIO' CHE I NATI PORTANO DENTRO la somma,
+         e NON e' energia che il calcio ha dato a qualcuno.
+  passo  42: d_n +1  d_m +1  d_K_fase +1.299e+00  d_K_metr +2.582e-02  d_Q2 -3.015e-02  d_S_tw -7.192e+00
+  passo  50: d_n +1  d_m +1  d_K_fase +2.614e-01  d_K_metr +9.264e-02  d_Q2 -4.372e-01  d_S_tw -7.132e+00
+  passo  65: d_n +1  d_m +1  d_K_fase +3.308e+00  d_K_metr +2.000e-02  d_Q2 -2.690e-01  d_S_tw -7.862e+00
+  passo  66: d_n +1  d_m +1  d_K_fase +2.170e+00  d_K_metr +5.521e-04  d_Q2 +5.984e-05  d_S_tw -7.663e+00
+  passo  69: d_n +1  d_m +1  d_K_fase +3.624e+00  d_K_metr +3.467e-04  d_Q2 -4.568e-02  d_S_tw -6.979e+00
+  passo  70: d_n +3  d_m +4  d_K_fase +3.615e+00  d_K_metr +1.804e-01  d_Q2 -4.474e-01  d_S_tw -1.515e+01
+  passo  71: d_n +1  d_m +1  d_K_fase +9.484e+00  d_K_metr +7.318e-02  d_Q2 -1.779e-01  d_S_tw -7.541e+00
+  passo  72: d_n +1  d_m +1  d_K_fase +1.142e+00  d_K_metr +5.797e-08  d_Q2 -5.286e-02  d_S_tw -8.347e+00
+
+========================================================================================================
+M6 -- LO SCUOTIMENTO COME SORGENTE: quanta agitazione, DOVE, e quanta TORSIONE
+========================================================================================================
+  voci `scuoti_vuoto` misurate: 72
+  IMMETTE nella cinetica di fase: d_K_fase mediano +1.223831e+03, somma +8.253611e+04, positivo in 72 passi su 72
+  ### TORSIONE IMMESSA: d_S_tw somma +0.000000e+00, passi con variazione non nulla 0
+      (`scuoti_vuoto` scrive SOLO `net.phivel`: se questo numero e' 0, la
+       sorgente del vuoto NON immette avvolgimento, e i DUE bilanci -- energia e
+       avvolgimento -- hanno sorgenti DIVERSE.)
+  DOVE: l'ampiezza e' PER NODO (stress locale * coerenza locale), quindi e' una
+        agitazione LOCALE e non un bagno globale -- al contrario del Nose-Hoover.
+
+========================================================================================================
+ATTRIBUZIONE ALLE VOCI: chi muove che cosa (somma su tutti i passi)
+========================================================================================================
+  voce                       sum d_K_fase   sum d_K_metr       sum d_Q2     sum d_S_tw
+  apri                        +0.0000e+00    +0.0000e+00    +0.0000e+00    +0.0000e+00
+  scuoti_vuoto                +8.2536e+04    +0.0000e+00    +0.0000e+00    +0.0000e+00
+  step                        +1.5849e+03    +3.1944e+04    -1.6158e+05    +1.2665e+06
+  mitosi                      +2.4903e+01    +3.9294e-01    -1.4597e+00    -6.7861e+01
+  rilassa_disegno             +0.0000e+00    +0.0000e+00    +0.0000e+00    +0.0000e+00
+  memoria_hebbiana_moto       +0.0000e+00    +0.0000e+00    +3.8423e+05    +0.0000e+00
+  chiudi                      +0.0000e+00    +0.0000e+00    -4.9336e+04    +0.0000e+00
+  verifica_invarianti         +0.0000e+00    +0.0000e+00    +0.0000e+00    +0.0000e+00

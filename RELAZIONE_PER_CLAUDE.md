@@ -8681,3 +8681,103 @@ La regola dice *«ogni numero esce da uno script»*. ### **Qui il numero usciva 
 CONCLUSIONE no** — era una mia convinzione messa in un `print`. ### ➜ **Una conclusione cablata e'
 un numero ricopiato a mano travestito da misura**, e questo giro mi dice che `L-NUMERI` vale anche
 per i **verdetti**, non solo per le cifre. *(Blob dello strumento corretto: `a9944b1a`.)*
+
+# 🧪 **I REFERTI DELLE MISURE DEL CALORE: `:M0` `:M1` `:M3` `:M4` `:M6`** *(2026-10-01)*
+
+*(voce `DIVISIONE-AUTOCONSISTENTE`; 72 passi, scena grande, seme 11, sistema di riferimento,
+`P5` verificato: **zero differenze su 81 booleani**. Referto:
+`csv/_test_fork/_misure_calore/_misure_calore.json`.)*
+
+## ⛔ **`:M0` — NON ESISTE un'energia totale, e il settore metrico NON HA un potenziale**
+
+| | |
+|---|---|
+| funzioni che **promettono** un'energia | ### **UNA**, `_energia`, e il suo docstring dice da se' che e' *«energia d'interferenza della coorte, **normalizzata al suo valore iniziale**»*: ### **una didascalia, non un'energia** |
+| `M_PH` | ### **`1.0` UNIFORME** -> la cinetica di fase `0.5*sum(phivel²)` e' **esatta** |
+| ### **`cs` uniforme?** | ### **NO.** Scarto relativo fra i due estremi di **uno stesso arco**: ### **mediano `1.707e-01`, massimo `9.769e-01`**, e ### **471574 archi su 471575** hanno scarto **non nullo** |
+
+### ➜ **Quindi `diag(cs²)·M` non e' simmetrica, e per il settore metrico NON ESISTE UN'ENERGIA
+POTENZIALE.** ### **Non e' un'opinione: e' la matrice.** *(`M` **e'** simmetrica: due archi che
+condividono il nodo `v` danno `0.5/deg_v` in **entrambi** i versi. E' `cs` per arco che rompe tutto.)*
+**E il secondo motivo resta quello strutturale:** con `FORK_SU2_MEM` la connessione nasce dal Bloch
+**ritardato**, quindi ### **la forza a `t` dipende dallo stato a `t−τ`.**
+
+## 🔴 **`:M1` — OGNI DIVISIONE DISTRUGGE PIU' DI UN AVVOLGIMENTO INTERO**
+
+**`PHI_CRIT = 6.283185`, cioe' `2π` esatto.** Per **arco diviso**:
+
+| | |
+|---|---|
+| `\|tw\|` perso per arco diviso | `7.19` `7.13` `7.86` `7.66` `6.98` `3.79` `7.54` `8.35` |
+| ### **in AVVOLGIMENTI** | ### **mediano `1.17`**, min `0.60`, max `1.33` |
+| in **relativo** sul totale di rete | ### **`5.358e-05`** su 72 passi *(totale perso `67.86` su `1.266e+06`)* |
+
+### ⚠ **E I DUE NUMERI DICONO COSE OPPOSTE, quindi vanno letti INSIEME**
+### **In relativo e' trascurabile — ma SOLO perche' le divisioni sono OTTO in 72 passi.**
+### **Per evento sparisce TUTTO l'avvolgimento dell'arco, e piu' di uno intero.** ### ➜ **Non e'
+un arrotondamento: e' una carica che svanisce, evento per evento**, e il pozzo cresce **con il
+ritmo delle divisioni.** *(I figli nascono a `tw = 0`: l'arco rimosso porta via il suo, e nessuno
+lo riceve.)*
+
+## ✅ **`:M4` — IL CALCIO SPOSTA `phi` E NON `phivel`: la tua premessa REGGE, e ora e' DERIVATA**
+
+*(misurato **attorno alla voce `mitosi`**, non sul passo intero, e **solo sui nodi che c'erano**)*
+
+| | |
+|---|---|
+| genitori con `phi` mosso | ### **18** *(8 eventi)* |
+| genitori con `phivel` mosso | ### **0** |
+| cinetica di fase sui nodi **preesistenti** | ### **`+0.000000e+00`** — ### **esattamente zero** |
+| cinetica di fase **includendo i nati** | `+2.490278e+01` — ### **tutto cio' che i NATI portano dentro la somma** |
+
+### ➜ **Il calcio NON FA LAVORO sulla cinetica di fase: sposta SOLO le fasi.** Agisce dunque sul
+### **termine di INTERFERENZA** — ed e' **esattamente il pezzo che `:M0` dice NON ESSERE una
+funzione di stato** *(connessione dal Bloch ritardato)*.
+### ⛔ **Conseguenza per il piano, e va detta chiara: «il bilancio energetico del calcio» NON SI
+PUO' NEMMENO PORRE con le leggi di oggi.** Il calcio muove una grandezza il cui *«potenziale»*
+### **non esiste come funzione dello stato istantaneo.**
+
+**E la cancellazione dell'arco, separata:** `d_Q2` e' **negativa** in 7 eventi su 8
+*(da `−3.0e-02` a `−4.5e-01`)*, `d_K_metr` **positiva e piccola**.
+
+## 🔵 **`:M3` — IL TERMOSTATO E' PREVALENTEMENTE UNA SORGENTE, e un suo clip non scatta mai**
+
+| | |
+|---|---|
+| ### **`xi` rifornisce** *(`xi < 0`)* | ### **56 passi su 72** |
+| `xi` frena *(`xi > 0`)* | **16** |
+| `xi` al **clip `±2`** | ### **0 volte** — ### **una guardia che non guarda** (`A9`) |
+| `E_cin` | da `1.91e-01` a ### **`1.33e+01`**: **×70** in 72 passi |
+| ### **`P-EQ-MEDIANA-ARCHI`** | con la mediana di **TUTTI** gli archi, `T_target` ### **salirebbe del `+1.68%`** *(mediano; min `+0.87%`, max `+2.24%`)* ### **SU TUTTO IL SISTEMA** |
+
+### ⚠ **Il rapporto di `T_target` E' ESATTAMENTE il rapporto di `P_eq`**, perche' `cs_rappr` non
+cambia: ### **non e' una stima, e' un'identita'.**
+
+## 🟢 **`:M6` — LO SCUOTIMENTO E' LA SORGENTE DOMINANTE, e NON immette avvolgimento**
+
+| | |
+|---|---|
+| immette nella cinetica di fase | ### **`+1.22e+03` per passo** *(mediano)*, totale ### **`+8.25e+04`**, ### **positivo in 72 passi su 72** |
+| `step`, per confronto | `+1.58e+03` in **totale** -> ### **il vuoto immette 52 volte tanto** |
+| ### **torsione immessa** | ### **`0.000000e+00` ESATTO**, zero passi con variazione |
+| **dove** | ampiezza **per nodo**, da **stress locale** e **coerenza locale**: ### **agitazione LOCALE**, non un bagno |
+
+### ➜ **I DUE BILANCI HANNO SORGENTI DIVERSE, e ora e' MISURATO:** l'energia viene dal **vuoto**,
+l'avvolgimento da **`step`** *(`+1.27e+06`)*. ### **Un'unica «legge di conservazione» sarebbe falsa
+su entrambi i lati.**
+
+## 📊 **L'ATTRIBUZIONE PER VOCE** *(possibile solo grazie al controllo del commit 1)*
+
+| voce | `d_K_fase` | `d_K_metr` | `d_Q2` | `d_S_tw` |
+|---|---|---|---|---|
+| `scuoti_vuoto` | ### **`+8.25e+04`** | `0` | `0` | ### **`0`** |
+| `step` | `+1.58e+03` | `+3.19e+04` | `−1.62e+05` | ### **`+1.27e+06`** |
+| `mitosi` | `+2.49e+01` | `+3.93e-01` | `−1.46e+00` | ### **`−6.79e+01`** |
+| `memoria_hebbiana_moto` | ### **`0`** | `0` | ### **`+3.84e+05`** | `0` |
+| `chiudi` | `0` | `0` | `−4.93e+04` *(il freno)* | `0` |
+| `apri`, `rilassa_disegno`, `verifica_invarianti` | `0` | `0` | `0` | `0` |
+
+### **`memoria_hebbiana_moto` muove `Q2` di `+3.84e+05` e la cinetica di fase di ZERO** — coerente
+col fatto che scrive `d0` e `phi`, **non** `phivel`. ### **Ed e' la stessa voce che `:M2` ha
+trovato dipendere dal VERSO DELL'ARCO:** la voce che muove di piu' la metrica ### **e' quella che
+dipende da una convenzione arbitraria.**
