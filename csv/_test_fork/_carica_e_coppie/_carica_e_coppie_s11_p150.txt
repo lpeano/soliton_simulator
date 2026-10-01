@@ -1,0 +1,167 @@
+========================================================================================================
+G1-G4 -- LA CARICA, L'ANTIMATERIA, E SE IL SEGNO E' UNA CONVENZIONE
+========================================================================================================
+simulatore ..... 287154f3
+questo strumento 1ce1cac8
+seme 11   passi 150
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 81
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 81.
+
+
+========================================================================================================
+G3 -- `peq` ENTRA NELLA DECISIONE DI CREARE COPPIE?
+========================================================================================================
+  COPPIA_DENSITA = False   (ESPLORATIVO: lega la coppia all'anomalia di densita')
+  ANTIFASE_ADD   = False      COPPIA_MIT = 1.0
+  ### -> NEL SISTEMA DI RIFERIMENTO `peq` NON ENTRA nella decisione di creare
+      coppie: IL LEGAME PREVISTO DALLA VISIONE (a) E' SPENTO.
+
+========================================================================================================
+IL RUN: 150 passi, con la SPIA sui confini di voce
+========================================================================================================
+  passo 0: n 12802   sum(perc_chi) 36   (+6419 / -6383)
+
+========================================================================================================
+G1 -- LA CARICA: la serie, e se il segno e' una CONVENZIONE
+========================================================================================================
+   passo        n   sum(chi)       +1       -1
+       0    12802         36     6419     6383
+       1    12802      12802    12802        0
+       2    12802      12802    12802        0
+     ...
+     148    13944      13102    13523      421
+     149    13974      13082    13528      446
+     150    14000      13066    13533      467
+
+  ### IL SEGNO DIPENDE DAL RAPPRESENTANTE CANONICO? (gauge: canon -> -canon,
+      che e' LO STESSO STATO FISICO, un giro di 2 pi nella doppia copertura)
+      cariche RIBALTATE dal gauge: 14000 su 14000   (frazione 1.000000)
+      la legge del simulatore e il mio ricalcolo concordano su 14000 nodi su 14000
+      FRAGILITA': |real(_ov)| mediano 9.966714e-01; nodi sotto 1e-12: 0; nodi sotto
+      1e-6 della mediana: 0
+  ### -> TUTTE. Il segno della carica E' UNA SCELTA DI GAUGE, non una
+      proprieta' fisica del nodo: la stessa famiglia del verso degli archi.
+
+========================================================================================================
+G4 -- QUANTI NODI CREA UN EVENTO, E COME CAMBIA LA CARICA TOTALE
+========================================================================================================
+  eventi con `n` cambiato: 83
+   passo voce                      d_n d_sum(chi)
+      42 mitosi                     +1         +1
+      50 mitosi                     +1         +1
+      65 mitosi                     +1         +1
+      66 mitosi                     +1         +1
+      69 mitosi                     +1         +1
+      70 mitosi                     +3         +1
+      71 mitosi                     +1         +1
+      72 mitosi                     +1         +1
+      73 mitosi                     +1         +1
+      76 mitosi                     +1         +1
+      77 mitosi                     +1         +1
+      78 mitosi                     +1         +1
+      79 mitosi                     +1         +1
+      80 mitosi                     +3         +3
+      81 mitosi                     +1         +1
+      82 mitosi                     +4         +2
+      83 mitosi                     +3         +3
+      84 mitosi                     +6         +4
+      86 mitosi                     +5         +3
+      87 mitosi                     +5         +1
+      88 mitosi                     +4         +2
+      89 mitosi                     +8         +4
+      90 mitosi                     +4         +2
+      91 mitosi                     +6         +4
+      92 mitosi                     +8         +4
+      93 mitosi                     +6         +4
+      94 mitosi                     +3         +3
+      95 mitosi                     +8         +4
+      96 mitosi                     +8         +4
+      97 mitosi                     +6         +6
+      98 mitosi                    +13         +5
+      99 mitosi                    +10         +8
+     100 mitosi                    +10         +4
+     101 mitosi                     +8         +6
+     102 mitosi                     +6         +6
+     103 mitosi                    +13         +7
+     104 mitosi                    +21        +15
+     105 mitosi                    +13         +5
+     106 mitosi                    +23         +9
+     107 mitosi                    +10         +8
+     108 mitosi                    +12         +8
+     109 mitosi                    +11         +7
+     110 mitosi                    +24        +12
+     111 mitosi                     +6         +4
+     112 mitosi                    +11         +7
+     113 mitosi                    +17         +7
+     114 mitosi                    +12         +6
+     115 mitosi                    +22         +8
+     116 mitosi                    +23        +15
+     117 mitosi                    +21         +7
+     118 mitosi                    +29        +13
+     119 mitosi                    +14         +6
+     120 mitosi                    +21        +15
+     121 mitosi                    +25        +17
+     122 mitosi                    +21        +13
+     123 mitosi                    +30        +14
+     124 mitosi                    +24        +16
+     125 mitosi                    +18        +14
+     126 mitosi                    +16        +14
+     127 mitosi                    +19         +9
+     128 mitosi                    +28        +16
+     129 mitosi                    +20        +16
+     130 mitosi                    +42        +22
+     131 mitosi                    +24        +12
+     132 mitosi                    +25        +13
+     133 mitosi                    +13        +11
+     134 mitosi                    +30        +10
+     135 mitosi                    +24        +12
+     136 mitosi                    +21         +7
+     137 mitosi                    +27        +11
+     138 mitosi                    +19        +19
+     139 mitosi                    +18        +14
+     140 mitosi                    +21         +7
+     141 mitosi                    +23        +11
+     142 mitosi                    +14        +10
+     143 mitosi                    +38        +20
+     144 mitosi                    +33        +15
+     145 mitosi                    +27        +17
+     146 mitosi                    +29        +17
+     147 mitosi                    +28        +14
+     148 mitosi                    +32        +14
+     149 mitosi                    +30        +14
+     150 mitosi                    +26        +18
+
+  ### eventi che NON cambiano la carica totale: 0 su 83
+  ### -> LA CARICA NON SI CONSERVA ALLE NASCITE. Il commento dello Schwinger
+      dice <<la coppia e' NEUTRA e N(+1)-N(-1) NON cambia>>, ma lo Schwinger
+      crea UN SOLO nodo (l'antinodo) accanto a un genitore CHE C'ERA GIA':
+      la somma cambia di -perc_chi[genitore], cioe' di +-1.
+
+  ⚠ E LE REGOLE DI NASCITA DELLA CARICA DURANO UN SOLO PASSO: `perc_chi` viene
+    RISCRITTA a ogni passo dal segno dell'overlap con il rappresentante canonico.
+    Quindi <<l'antinodo nasce con chiralita' opposta>> e' vero per UN passo.
+
+========================================================================================================
+G2 (D35) -- PER IL CAMPO, L'ANTINODO E' IDENTICO AL GENITORE?
+========================================================================================================
+  FASE_2PI = False   _dphi() = 12.566371   (2 pi = 6.283185)
+  nati dallo Schwinger in questo run: 260
+  |exp(i*phi) - exp(i*(phi + dphi/2))| su 14000 nodi: max 2.121e-15, mediano 2.734e-16
+  ### -> IDENTICO A PRECISIONE DI MACCHINA: con `phi` su 4 pi il `+2 pi` NON E'
+      UN'ANTIFASE, e per il campo l'antiparticella E' LA PARTICELLA. E' `D35`, e
+      il commento del codice lo diceva gia': qui e' MISURATO.
+
+========================================================================================================
+E-base -- LA LINEA DI BASE DEI CRITERI DEL PAR. (E)
+========================================================================================================
+  K_fase  da 1.000550e+03 a 7.338120e+04   (x 73.341)
+  E_cin   da 1.563115e-01 a 1.048303e+01   (x 67.065)
+  K_fase cresce in 95 passi su 150
+  VOLUME: n da 12802 a 14000, archi da 471564 a 473022, sum(d) da 8.508401e+05 a 8.953708e+05 (x 1.0523)
+  ### -> QUESTA E' LA LINEA DI BASE: il criterio <<non esplode>> del par. (E) va
+      scritto in modo che IL SISTEMA DI OGGI LO PASSI, oppure la crescita di `E_cin`
+      a volume quasi fermo E' GIA' UN DIFETTO, e va registrata come tale.

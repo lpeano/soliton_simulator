@@ -1,0 +1,94 @@
+========================================================================================================
+G1-G4 -- LA CARICA, L'ANTIMATERIA, E SE IL SEGNO E' UNA CONVENZIONE
+========================================================================================================
+simulatore ..... 287154f3
+questo strumento 1ce1cac8
+seme 12   passi 72
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 81
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 81.
+
+
+========================================================================================================
+G3 -- `peq` ENTRA NELLA DECISIONE DI CREARE COPPIE?
+========================================================================================================
+  COPPIA_DENSITA = False   (ESPLORATIVO: lega la coppia all'anomalia di densita')
+  ANTIFASE_ADD   = False      COPPIA_MIT = 1.0
+  ### -> NEL SISTEMA DI RIFERIMENTO `peq` NON ENTRA nella decisione di creare
+      coppie: IL LEGAME PREVISTO DALLA VISIONE (a) E' SPENTO.
+
+========================================================================================================
+IL RUN: 72 passi, con la SPIA sui confini di voce
+========================================================================================================
+  passo 0: n 12765   sum(perc_chi) -43   (+6361 / -6404)
+
+========================================================================================================
+G1 -- LA CARICA: la serie, e se il segno e' una CONVENZIONE
+========================================================================================================
+   passo        n   sum(chi)       +1       -1
+       0    12765        -43     6361     6404
+       1    12765      12765    12765        0
+       2    12765      12765    12765        0
+     ...
+      70    12782      12774    12778        4
+      71    12782      12774    12778        4
+      72    12782      12774    12778        4
+
+  ### IL SEGNO DIPENDE DAL RAPPRESENTANTE CANONICO? (gauge: canon -> -canon,
+      che e' LO STESSO STATO FISICO, un giro di 2 pi nella doppia copertura)
+      cariche RIBALTATE dal gauge: 12782 su 12782   (frazione 1.000000)
+      la legge del simulatore e il mio ricalcolo concordano su 12782 nodi su 12782
+      FRAGILITA': |real(_ov)| mediano 9.996364e-01; nodi sotto 1e-12: 0; nodi sotto
+      1e-6 della mediana: 0
+  ### -> TUTTE. Il segno della carica E' UNA SCELTA DI GAUGE, non una
+      proprieta' fisica del nodo: la stessa famiglia del verso degli archi.
+
+========================================================================================================
+G4 -- QUANTI NODI CREA UN EVENTO, E COME CAMBIA LA CARICA TOTALE
+========================================================================================================
+  eventi con `n` cambiato: 10
+   passo voce                      d_n d_sum(chi)
+      36 mitosi                     +1         +1
+      52 mitosi                     +2         +0
+      54 mitosi                     +1         +1
+      59 mitosi                     +1         +1
+      60 mitosi                     +2         +0
+      62 mitosi                     +2         +2
+      66 mitosi                     +1         +1
+      67 mitosi                     +2         +0
+      69 mitosi                     +2         +2
+      70 mitosi                     +3         +1
+
+  ### eventi che NON cambiano la carica totale: 3 su 10
+  ### -> LA CARICA NON SI CONSERVA ALLE NASCITE. Il commento dello Schwinger
+      dice <<la coppia e' NEUTRA e N(+1)-N(-1) NON cambia>>, ma lo Schwinger
+      crea UN SOLO nodo (l'antinodo) accanto a un genitore CHE C'ERA GIA':
+      la somma cambia di -perc_chi[genitore], cioe' di +-1.
+
+  ⚠ E LE REGOLE DI NASCITA DELLA CARICA DURANO UN SOLO PASSO: `perc_chi` viene
+    RISCRITTA a ogni passo dal segno dell'overlap con il rappresentante canonico.
+    Quindi <<l'antinodo nasce con chiralita' opposta>> e' vero per UN passo.
+
+========================================================================================================
+G2 (D35) -- PER IL CAMPO, L'ANTINODO E' IDENTICO AL GENITORE?
+========================================================================================================
+  FASE_2PI = False   _dphi() = 12.566371   (2 pi = 6.283185)
+  nati dallo Schwinger in questo run: 4
+  |exp(i*phi) - exp(i*(phi + dphi/2))| su 12782 nodi: max 2.133e-15, mediano 2.734e-16
+  ### -> IDENTICO A PRECISIONE DI MACCHINA: con `phi` su 4 pi il `+2 pi` NON E'
+      UN'ANTIFASE, e per il campo l'antiparticella E' LA PARTICELLA. E' `D35`, e
+      il commento del codice lo diceva gia': qui e' MISURATO.
+
+========================================================================================================
+E-base -- LA LINEA DI BASE DEI CRITERI DEL PAR. (E)
+========================================================================================================
+  K_fase  da 1.052137e+03 a 8.685975e+04   (x 82.556)
+  E_cin   da 1.648472e-01 a 1.359095e+01   (x 82.446)
+  K_fase cresce in 72 passi su 72
+  VOLUME: n da 12765 a 12782, archi da 468042 a 468063, sum(d) da 8.443151e+05 a 8.523347e+05 (x 1.0095)
+  ### -> QUESTA E' LA LINEA DI BASE: il criterio <<non esplode>> del par. (E) va
+      scritto in modo che IL SISTEMA DI OGGI LO PASSI, oppure la crescita di `E_cin`
+      a volume quasi fermo E' GIA' UN DIFETTO, e va registrata come tale.

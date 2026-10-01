@@ -8960,3 +8960,95 @@ LOCALE: ogni variazione ha una causa dichiarata.**
 | ### **criterio 8** | la divisione crea ### **solo SPAZIO NEUTRO**; la materia carica nasce ### **solo a COPPIE** *(due nodi nuovi, `+1` e `−1`, localmente)*. ⚠ **E oggi il codice non fa cosi'**: `:G4` misura che lo Schwinger crea ### **UN SOLO nodo** |
 | ### **decisione 5** | ### **`MEM-HEBB-VERSO` BLOCCA il run base.** Si cura ### **dopo i commit 2 e 3**, con una funzione chiamata per i due estremi e ### **`np.add.at`** al posto dell'assegnazione con indici ripetuti. `MEM-HEBB-PIANO-XY` ### **si misura prima** |
 | **2, 3, 4** | ### **APERTE**, e aspettano `:M7` e le misure del passo 2 |
+
+# 🧪 **I REFERTI `G1`-`G4` E LA LINEA DI BASE** *(2026-10-01, tre run)*
+
+*(voce `DIVISIONE-AUTOCONSISTENTE`; scena grande; `seme 11 / 72`, `seme 12 / 72`,
+`seme 11 / 150`; referti in `csv/_test_fork/_carica_e_coppie/`.)*
+
+## 🔴 **`:G1` — IL SEGNO DELLA CARICA E' UNA SCELTA DI GAUGE. Confermato, e al 100 %**
+
+| run | cariche ribaltate dal gauge | `|real(_ov)|` mediano |
+|---|---|---|
+| seme 11 / 72 | ### **12812 su 12812** *(frazione `1.000000`)* | `0.99966` |
+| seme 12 / 72 | ### **12782 su 12782** | `0.99964` |
+| seme 11 / 150 | ### **14000 su 14000** | `0.99667` |
+
+### ⚠ **E LA FRAGILITA' DICE UNA COSA IN PIU', opposta a quella che mi aspettavo:** `|real(_ov)|`
+mediano e' ### **~1**, e i nodi sotto `1e-12` sono ### **ZERO.** ### ➜ **Il segno e'
+NUMERICAMENTE ROBUSTISSIMO e CONVENZIONALE AL 100 %**: non si ribalta per un epsilon, ### **si
+ribalta TUTTO INSIEME se si cambia una scelta di gauge** — e `−canon` e' ### **lo stesso stato
+fisico.**
+### **Quindi «carica» oggi non e' una proprieta' del nodo: e' il nome di una convenzione**, ed e'
+### **la stessa famiglia del verso degli archi** (`MEM-HEBB-VERSO`).
+
+### 📈 **E LA SERIE, sui due semi** *(confermata la misura del guardiano)*
+
+| | passo 0 | passo 1 | fine |
+|---|---|---|---|
+| **seme 11** | `sum = 36` *(6419 `+`, 6383 `−`)* | ### **`12802`: TUTTI `+1`** | `12810` *(1 nodo `−`)* |
+| **seme 12** | ### **`sum = −43`** *(6361 `+`, 6404 `−`)* | ### **`12765`: TUTTI `+1`** | `12774` *(4 nodi `−`)* |
+
+### ⭐ **E IL RUN LUNGO AGGIUNGE UN FATTO CHE RAFFINA IL RILIEVO DEL GUARDIANO**
+*«Nella scena di riferimento non c'e' antimateria»* ### **e' vero a 72 passi** *(1 nodo su 12812)*
+### **e NON a 150**: i nodi `−1` passano da ### **0 al passo 1 · 1 a meta' run · 467 al passo 150**
+*(su `n = 14000`, cioe' il ### **3.34 %**)*.
+### ➜ **Non e' «assenza di antimateria»: e' una ASIMMETRIA ENORME che si forma col tempo** —
+`96.7 %` contro `3.34 %`. ### **E il segno di quell'asimmetria e' quello del gauge.**
+
+## 🔴 **`:G4` — LA CARICA NON SI CONSERVA ALLE NASCITE, e la neutralita' e' un CASO**
+
+| run | eventi | ### **neutri** |
+|---|---|---|
+| seme 11 / 72 | 8 | ### **0** |
+| seme 12 / 72 | 10 | ### **3** |
+| seme 11 / 150 | 83 | ### **0** |
+
+### 🔎 **E GUARDANDO `d_n` CONTRO `d_somma` SI VEDE PERCHE'**
+Su **seme 12** i cinque eventi con `d_n = +2` danno ### **`d_somma = 0` in TRE casi e `+2` in
+DUE.** ### ➜ **La neutralita' di una coppia NON E' GARANTITA DALLA LEGGE: dipende dalle cariche
+dei GENITORI.** Due antinodi nascono opposti ai **loro** genitori: se i genitori avevano cariche
+opposte la somma fa `0`, se le avevano uguali fa `±2`. ### **E' una COINCIDENZA, non una
+conservazione.**
+### ⚠ **E nel run lungo `d_somma` e' SEMPRE POSITIVA** *(fino a `+22` su `d_n = +42`)*:
+### **le nascite aggiungono carica POSITIVA in modo sistematico.**
+
+### ➜ **LO SCOSTAMENTO DALLA VISIONE (b), detto in una riga:** ### **la carica oggi non si
+conserva, e non e' nemmeno una grandezza persistente** — viene **riscritta ogni passo** da un
+segno **dipendente dal gauge**, quindi ### **la regola di nascita della carica dura UN passo.**
+
+## ✅ **`:G2` (`D35`) — l'antinodo e' IDENTICO al genitore, misurato**
+
+`FASE_2PI = False`, `_dphi() = 12.566371` *(= `4π`)*, `anti = phi + 2π`, e il campo legge
+`exp(i·phi)`: ### **`|exp(i·phi) − exp(i·(phi + 2π))|` max `2.13e-15`** su tutti i nodi.
+### ➜ **Identico a precisione di macchina: con `phi` su `4π` il `+2π` NON E' UN'ANTIFASE**, e per
+il campo ### **l'antiparticella E' la particella.** Il commento `D35` lo diceva; ### **ora e'
+misurato.**
+
+## ✅ **`:G3` — `peq` NON entra nella creazione di coppie**
+
+`COPPIA_DENSITA = False` *(esplorativo)*, `ANTIFASE_ADD = False`, `COPPIA_MIT = 1.0`.
+### ➜ **Il legame previsto dalla visione (a)** — *«`peq` e' il riferimento che separa i tre
+esiti»* — ### **E' SPENTO nel sistema di riferimento.**
+
+## ⭐ **`E-base` — E QUI IL RUN LUNGO RIBALTA LA LETTURA DEL RUN CORTO**
+
+| run | `K_fase` | `E_cin` | passi in cui `K` cresce | volume `sum(d)` |
+|---|---|---|---|---|
+| seme 11 / 72 | ### **× 85.1** | × 85.0 | ### **72 su 72** | × 1.0095 |
+| seme 12 / 72 | × 82.6 | × 82.4 | ### **72 su 72** | × 1.0095 |
+| ### **seme 11 / 150** | ### **× 73.3** | ### **× 67.1** | ### **95 su 150** | × 1.0523 |
+
+> ### **`K_fase` ha il MASSIMO al passo 88 (`9.4484e+04`) e finisce a `7.3381e+04`, cioe' al
+> ### 77.7 % del massimo. IL SISTEMA NON ESPLODE: SALE, PASSA PER UN PICCO, E SCENDE.**
+
+### ⛔ **E QUESTO DICE CHE LA MIA FINESTRA DI 72 PASSI ERA TROPPO CORTA PER QUEL GIUDIZIO**
+A 72 passi `K_fase` cresce in ### **72 passi su 72** ed e' al ### **100 % del suo massimo**:
+### **da li' «cresce senza fermarsi» e' indistinguibile da «sta salendo verso un picco».**
+### ➜ **Il criterio del par. `(E)` va riscritto:** ### **non «non esplode» su 72 passi, ma «NON
+CRESCE SENZA TETTO su una finestra che contiene il picco»** — e ### **la finestra minima e' un
+dato da misurare, non da scegliere.**
+### ✅ **E NON E' UN DIFETTO DA REGISTRARE:** il guardiano chiedeva *«se il sistema di oggi non
+passa, il criterio va scritto diversamente, oppure e' gia' un difetto»*. ### **Il sistema di oggi
+PASSA**, con il criterio scritto sulla finestra giusta. ### **Era il criterio a essere sbagliato,
+non il sistema.**
