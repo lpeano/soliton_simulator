@@ -8860,3 +8860,41 @@ prima asimmetria (tau omogeneo all'inizio)**»*. ### **Era FALSA su quale regime
 sul limite fisico** — e ora ### **il limite e' MISURATO**: `_nb = n` esatto e' *«omogeneo»* scritto
 in numeri. ### **Avevo tenuto quella frase nel commento perche' non sapevo smentirla: oggi la
 misura la CONFERMA.**
+
+# ⛔ **CORREZIONE DI PROCEDURA: il PIANO e' finito nel commit del REFERTO** *(2026-10-01)*
+
+**Il messaggio di `c923ccd` dice:** *«`doc/PIANO_divisione_e_calore.md`: la parte (A) riempita coi
+numeri **(il piano si committa a se', dopo** …)»*.
+### ⛔ **E' INESATTO.** Il file era **nuovo**, quindi in quel commit sono entrate ### **tutte le 321
+righe del piano**, non la sola parte (A). ### **Non c'e' nessun «commit del piano» che segue: e'
+quello.**
+
+### **Due regole violate, e le dico entrambe:**
+| | |
+|---|---|
+| **l'ordine del mandato** | *«(1) strumenti · (2) run e referti · ### **(3) commit del piano**»* — e ### **(2) e (3) sono finiti insieme** |
+| **par.5** | ### **«un commit = un cambiamento logico»**: un referto e un piano sono ### **due** |
+
+### **Perche' e' successo:** lo **stesso script** che scriveva il referto nella relazione riempiva
+anche la parte (A) del piano coi numeri appena misurati, e ### **ho messo in `git add` tutto cio'
+che lo script aveva toccato** senza accorgermi che il piano non era ancora committato.
+### ➜ **La forma dell'errore e' nota: `git add` di cio' che uno script ha toccato, invece di cio'
+che il commit DICHIARA.** E' la stessa famiglia del `git add -A csv/_test_fork` di stamattina, che
+aveva trascinato dentro decine di file vecchi e fatto scattare `H-P9`. ### **Due volte oggi.**
+
+### ✅ **Non lo riscrivo e non lo sposto:** un commit non si falsifica *(par.8: si ANNOTA)*, e
+### **il contenuto e' giusto — e' la DICHIARAZIONE che era sbagliata.** Questa e' la rettifica, e
+vive nel repo accanto a quel commit.
+
+---
+
+# ✅ **IL MANDATO E' CHIUSO: che cosa c'e' nel repo** *(2026-10-01)*
+
+| | |
+|---|---|
+| **(A) il regime** | ### **misurato** *(`REGIME-DUE-SISTEMI`, `SCUOT-INNESCO`)*, cura ### **PROPOSTA** e via ① ### **esclusa dai numeri**; i referti sul sistema «altro» ### **da marcare** *(elencati)*; la stringa di `--tau-a` e l'archiviazione dello stocastico ### **in coda, con il loro giro** |
+| **(B) le misure** | ### **`:M0` `:M1` `:M2` `:M3` `:M4` `:M5` `:M6` fatte e committate**; ### **`:M7` DICHIARATA MANCANTE** *(la potenza del solo termine del termostato)*, e senza di lei la decisione 4 ### **non ha il suo numero** |
+| **(C) il piano** | `doc/PIANO_divisione_e_calore.md`, **321 righe**: i **due bilanci**, la **temperatura per nodo** con la sua regola di nascita, cosa sostituisce del Nose-Hoover, ### **il rischio dichiarato** *(senza un «fuori» il sistema puo' solo perdere)*, i **sette criteri**, la dipendenza dal **commit 3** e il perche' serve anche il **`6a`**, e le ### **cinque decisioni** per Luca |
+
+### 🛑 **STOP.** Il **commit 2** del riordino e la **cura di `--regime`** partono ### **solo dopo la
+verifica del guardiano.**
