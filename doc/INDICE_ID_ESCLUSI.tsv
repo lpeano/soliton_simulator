@@ -85,3 +85,4 @@ H-ETC-1	etichetta LOCALE di un presidio PROPOSTO, non ancora cablato	0
 H-ETC-2	etichetta LOCALE di un presidio PROPOSTO, non ancora cablato	0
 B16	etichetta LOCALE del censimento (CENS-B16 e il suo ID); nel testo compare come CENS-B1..B16	0
 NON-DIFETTO	locuzione del testo (<<non si curi un NON-DIFETTO>>), non un identificatore	0
+PRE-CONTROLLO	locuzione del testo (<<il blob PRE-CONTROLLO>>), non un identificatore: e il blob del PADRE del commit che introduce il controllo unico, e si ricava da git	1

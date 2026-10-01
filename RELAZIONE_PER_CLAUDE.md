@@ -8296,3 +8296,49 @@ riporto nel suo commit: ### **`REGIME` SI PUO' riassegnare**, c'e' `--regime` e 
 **tiene**: ### **lo stocastico non lo gira nessuno, e nessun sigillo lo copre.**
 
 **PUSHATO insieme a questo paragrafo.**
+
+# ⛔ **IL SIGILLO DEL COMMIT 1 NON HA CHIUSO, e i due difetti sono MIEI** *(2026-10-01)*
+
+> ### **Luca, non ti dico «passa»: il run si e' fermato, e la fisica e' l'unica cosa che e' andata
+> ### bene.**
+
+## ✅ **IL NUMERO CHE CONTA, e va detto per primo: LA FISICA E' BYTE-IDENTICA**
+
+| braccio | esito |
+|---|---|
+| ### **`B`** | ### **0 grandezze diverse su 72 passi** contro `f7541d03` — ### **la fisica non cambia di un bit** |
+| **`E`** | **PASSA**: 72 passi, `n` da 12802 a ### **12812 (10 nati)**, 648 controlli, 42 assenze contate, ### **zero errori del registro** |
+| **`F`** | **PASSA**: ### **tutte e 30** si sono viste piene |
+| **`C`** | **PASSA**: a controllo **spento**, protette ### **0** *(270 chiamate spente contate)* |
+| ### **`B`, verdetto** | ### **FALLISCE**, e per ### **UN SOLO contatore** |
+| ### **`G`** | ### **MORTO a meta'**: `pippo` e `pluto` fermano il run come devono, poi ### **un mio errore** |
+
+## ⛔ **DIFETTO MIO N.1 — ho usato un DECODIFICATORE DI BYTE come formattatore**
+
+In `braccio_G` avevo scritto `_t(getattr(net, "_smp_d0", None))`, e `_t` ### **decodifica byte**:
+su `None` muore con `AttributeError`. ### **Il braccio e' morto DOPO i due casi che passavano**,
+quindi il terzo — la finestra — ### **non e' stato provato dal sigillo** *(lo era dalla prova di
+fumo, che non e' un sigillo)*. ### **Curato usando il formattatore DEL SIMULATORE**, che su `None`
+dice *«NON ESISTE»*: cosi' non c'e' una seconda formattazione da tenere allineata.
+
+## ⛔ **DIFETTO MIO N.2 — `_g_registro_apparse` non e' un contatore, e' un LIBRO MASTRO**
+
+E' ### **l'insieme delle grandezze gia' viste piene**, e `_contatori` lo raccoglie perche' e' un
+`set` di stringhe. ### **Il blob PRE-CONTROLLO non puo' averlo: non ha il registro.** Quindi
+confrontarlo vuol dire ### **confrontare la modifica con se stessa** — ed e' la ragione, **la
+stessa e non una nuova**, per cui gli altri quattro sono esclusi.
+### **E l'esclusione non apre un buco:** il suo **contenuto** ha un presidio a parte — ### **il
+braccio `F` fallisce se anche UNA SOLA grandezza non si e' mai vista piena.**
+
+## ⚠ **E MENTRE LO CURAVO HO SCOPERTO UN NUMERO STANTIO NELL'INVENTARIO**
+
+La voce del sigillo dichiarava *«`B`: 72 passi, **0** passi con differenze»* accanto al blob
+`a13a385c`, ### **che CONTIENE la clausola dei `set`** *(entrata il 2026-09-29 alle 15:07 con
+`bd7c4ae`, mentre `_g_registro_apparse` esisteva dalle 14:28 con `4036ad9`)*.
+### ➜ **Ma un run di `B` su quel blob del sigillo AVREBBE segnalato la differenza, per
+costruzione.** ### **Quindi il numero e il blob di quella voce non venivano dallo stesso run**, e
+non e' un'opinione: e' una **deduzione** dalla struttura. E' `L-NUMERI` — ### **un numero ricopiato
+non ha provenienza.** Lo correggo nella voce quando il sigillo ri-girato produce il numero vero.
+
+### **PROSSIMO: il sigillo ri-girato per intero**, dal referto di un solo run — ### **non ricucito
+da due.** Il run fallito resta committato in `csv/_seal_fork/_sig_controllo_unico/_run_2026-10-01_FALLITO.txt`.

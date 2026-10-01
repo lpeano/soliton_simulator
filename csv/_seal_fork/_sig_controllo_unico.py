@@ -119,7 +119,22 @@ def _foto(net):
 #   ### Sono NOMINATI e sono TRE: escludere un contatore e' esattamente cio' che potrebbe nascondere
 #   un difetto, quindi l'elenco e' corto, esplicito, e si riporta a parte invece di sparire.
 CONTATORI_DEL_PRESIDIO = ("_g_registro_controlli", "_g_registro_assenti", "_g_registro_spento",
-                          "_g_finestra_chiusa_dentro")
+                          "_g_finestra_chiusa_dentro", "_g_registro_apparse")
+
+# ### ⚠ `_g_registro_apparse` NON E' UN CONTATORE: e' IL LIBRO MASTRO del presidio (l'insieme delle
+#   grandezze gia' viste piene), e `_contatori` lo raccoglie perche' e' un `set` di stringhe.
+#   ### IL BLOB PRE-CONTROLLO NON PUO' AVERLO: non ha il registro. Quindi confrontarlo vorrebbe
+#   dire confrontare la modifica CON SE STESSA, ed e' la ragione per cui gli altri quattro sono
+#   esclusi -- la stessa, non una nuova.
+#   ### E L'ESCLUSIONE NON APRE UN BUCO, perche' IL SUO CONTENUTO HA UN PRESIDIO A PARTE:
+#   ### il braccio `F` FALLISCE se anche UNA SOLA grandezza di STATO non si e' mai vista piena.
+#   Quindi <<quali grandezze sono apparse>> resta sorvegliato; qui si toglie solo il confronto con
+#   un blob che quella domanda NON SI PUO' PORRE.
+#   ⚠ E VA DETTO CHE QUESTO HA SCOPERTO UN NUMERO STANTIO NELL'INVENTARIO: la voce del sigillo
+#   dichiarava <<B: 72 passi, 0 passi con differenze>> accanto al blob `a13a385c`, che CONTIENE la
+#   clausola dei `set`. Ma il blob pre-controllo non puo' avere `_g_registro_apparse`, quindi un
+#   run di `B` su quel blob del sigillo AVREBBE SEGNALATO la differenza: ### il numero e il blob
+#   della voce non venivano dallo stesso run. (`L-NUMERI`: un numero ricopiato non ha provenienza.)
 
 
 def _contatori(net):
@@ -414,7 +429,10 @@ def braccio_G(passi_base):
     with contextlib.redirect_stdout(io.StringIO()):
         for _ in range(passi_base):
             _passo.passo_pieno(S, net)
-    aperta_prima = _t(getattr(net, "_smp_d0", None))
+    # ⚠ MIO DIFETTO, colto dal run del 2026-10-01: qui avevo messo `_t`, che DECODIFICA BYTE,
+    #   e su `None` moriva con AttributeError. Si usa IL FORMATTATORE DEL SIMULATORE, che su
+    #   `None` dice <<NON ESISTE>> -- e cosi' non c'e' una seconda formattazione da tenere allineata.
+    aperta_prima = S._scrivi_forma(S._forma_di(getattr(net, "_smp_d0", None)))
     net._smp_d0 = np.zeros(int(len(net.i)))
     net._smp_d = np.zeros(int(len(net.i)))
     try:
@@ -429,7 +447,7 @@ def braccio_G(passi_base):
                              else "### FERMA con l ALTRO errore: %s" % type(e).__name__)
         passa = passa and ok
     print("  finestra `_smp_d0` rimessa a fine passo ... %s" % esiti["finestra"])
-    print("  (a fine passo, SANA, la finestra era: %s)" % (aperta_prima or "CHIUSA"))
+    print("  (a fine passo, SANA, la finestra era: %s)" % aperta_prima)
     print("  ### G %s" % ("PASSA: tutti e tre FERMANO il run, e con l errore DICHIARATO."
                           if passa else
                           "FALLISCE: almeno uno non ferma, o ferma con un altro errore."))
