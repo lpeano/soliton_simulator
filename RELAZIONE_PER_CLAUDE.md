@@ -7884,3 +7884,50 @@ va rigirata **prima** perche' il blob e' cambiato.
 costruzione)*. ### **Il terzo — «una scena, una configurazione» — lo togliera' il punto 3 del
 mandato precedente** *(registro DICHIARATO, con le liste non dichiarate che fermano il run)*,
 ### **e sta nel piano del riordino.**
+
+---
+
+# 📜 **PASSO 1 del riordino: la STORIA della mitosi** *(2026-10-01)*
+
+`doc/MITOSI_storia.md` *(`e97fc073`, 249 righe)*. ### **Nessun codice di fisica:** `62d67675`.
+
+## Il numero che giustifica il riordino, e l'ho MISURATO dall'AST
+
+| | |
+|---|---|
+| `mitosi` | ### **549 righe** *(`:6680`-`:7228`)*, e contiene **anche** il canale di Schwinger |
+| attributi scritti dentro | ### **56 distinti, 79 scritture**; **19** allungano, **38** scritture di allungamento |
+| ### **grandezze del registro scritte QUI** | ### **16 su 30** |
+| ### **scritte ALTROVE** | ### **13** *(nei due `_eredita_*`)* **piu'** `conc_nodi` **per mutazione in posto** |
+
+### ➜ **La nascita di un nodo tocca 30 grandezze dichiarate e le scrive in TRE posti diversi.**
+
+## La storia: la famiglia piu' lunga sono **SETTE cache**
+
+`_cs_nodo_prev` *(`C7`)* · `_psi_spin_prec` *(`C11`, ### **inerte nel 95.33 % delle chiamate PER
+MESI**)* · `_psi_spinor` · `_psi_prec` · `psi` *(`PSI-FLASH`)* · `rho_spin` · `psi_spin`.
+### **Sette cure, tutte GIUSTE, e il difetto tornava** — perche' la causa non era la cache: era
+### **che la nascita non avesse un posto solo.** Il controllo unico ha chiuso la famiglia **per
+struttura**; ### **il riordino e' quello che toglie la CAUSA.**
+
+## Le **12** toppe ancora presenti, ognuna con riga, classe e domanda aperta
+
+**La soglia `3π`** *(`D36`, acclarata per misura: portando `phi` su `2π` gli archi sopra soglia
+passano da **7047 a ZERO**)* · **il `0.3`** della modulazione, ### **un numero scelto DUE RIGHE
+SOTTO il commento che spiega perche' i parametri nascosti sono vietati** · **il punto medio**
+*(`M2`①, `U2`: figli **sotto `LAM`**)* · **le meta' portate a `LAM`** che ### **FABBRICANO
+lunghezza** *(`M2`②)* · **due pavimenti** e `massa_critica_collasso` dentro una legge locale
+*(`U1`, `A2`)* · la ### **riallocazione silenziosa di `_rep`**, che sta ### **nell'unica finestra che
+il controllo unico non vede** · lo **Schwinger** che prende la lunghezza **dal disegno** *(`39.06 %`
+delle coppie accorcia il grafo)* · **`MITOSI_DIR`** che ### **dichiara ATTIVO cio' che e' `0.0`** ·
+**`MITMAX`** · **`conc_nodi`** e la riparazione che **tronca** · **`FRAG1`** · la **rampa** del nato.
+
+## ⚠ **E DUE confini che NON tengono: lo dico invece di assorbirli**
+
+| | |
+|---|---|
+| ### **`M2`/`U2`/`MITOSI_2LAM`** | ### **non si separano dalla STRUTTURA.** La parte **(b)** chiede come nascono `pos`, `d`, `d0` — e ### **il punto medio e la fabbricazione di lunghezza SONO quella parte.** La **decisione** se accendere `MITOSI_2LAM` e' di Luca, ### **ma la DOMANDA sta dentro il piano** |
+| ### **`D36`/la soglia `3π`** | ### **non si separa dalla DECISIONE.** La parte **(a)** chiede *«la soglia e cosa legge»*: ### **la soglia E' `D36`**. Il piano **puo'** lasciarla invariata e dichiararlo *(byte-identico)*, ### **ma non puo' descrivere la decisione senza nominarla** |
+
+**PROSSIMO:** il **passo 2**, `doc/PIANO_riordino_mitosi.md`, con le quattro parti, la
+generalizzazione **3-bis**, i criteri fissati prima dei numeri e l'ordine dei commit.
