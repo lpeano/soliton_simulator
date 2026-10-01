@@ -8416,3 +8416,75 @@ REGIME; True in stocastico»*: ### **non segue il regime — da li' vale SEMPRE 
 
 **Con questo non si decide niente sul regime: si DICHIARA come stanno le cose.** La voce e'
 `REGIME-COMMENTI`.
+
+# 🔬 **GLI STRUMENTI DI `DIVISIONE-AUTOCONSISTENTE` + CALORE, committati PRIMA di girare** *(2026-10-01)*
+
+> ### **Luca, la prima risposta e' una brutta notizia e viene dalla LETTURA, non da un run:
+> ### IL MODELLO NON HA UN'ENERGIA TOTALE.**
+
+## ⛔ **`DIVISIONE-AUTOCONSISTENTE:M0` — e la risposta e' NO, con tre ragioni e due di esse STRUTTURALI**
+
+**Non esiste nessuna funzione che calcoli un'energia totale.** Le tre cose che ci somigliano
+### **non lo sono:**
+
+| | |
+|---|---|
+| `E_cin` *(`:6334`)* | e' una ### **MEDIA** di `phivel²`, **senza `M_PH`**, e serve ### **solo da ingresso al termostato** |
+| `_energia(etichetta)` *(`:8439`)* | ### **non e' un'energia**: e' la somma di `intensita() = |psi|²` su una **coorte**, **normalizzata** al valore iniziale — ### **una didascalia del video** |
+| un termine elastico | ### **non esiste**: nessuna somma di quel tipo nel file |
+
+### ➜ **E DUE RAGIONI DICONO CHE UN'ENERGIA DI STATO NON PUO' ESISTERE, nel sistema di riferimento**
+
+**① IL SETTORE METRICO.** La forza e' `acc = cs²·lap(q) + src − beta·vd` con `q = d − d0` e
+`lap = 0.5(med_i + med_j) − q`, cioe' ### **`lap = (M − I)q`** dove `M` e' la media sui nodi.
+### **`M` E' SIMMETRICA** *(due archi che condividono il nodo `v` danno `0.5/deg_v` in entrambi i
+versi)*, quindi ### **con `cs` UNIFORME la forza SAREBBE `−∇V`** con `V = ½ cs²·qᵀ(I−M)q`.
+### ⛔ **Ma `diag(cs²)·M` NON e' simmetrica**, e `CS_DINAMICO` e' ### **ACCESO** nella
+configurazione di riferimento: `cs_arco` e' **per arco**. ### ➜ **Quindi per il settore metrico
+NON ESISTE UN POTENZIALE. Non e' un'opinione: e' la matrice.** *(E lo strumento lo **misura**: lo
+scarto di `cs` sui due estremi di uno stesso arco.)*
+
+**② IL SETTORE DI FASE.** La coppia e' `K_C·Im(conj(z)(A z))`, che con `A` simmetrica e'
+`−∂H/∂φ` di un ### **XY**: `H = −K_C Σ A_ij cos(φ_j − φ_i)`. ### ⛔ **Ma con `FORK_SU2_MEM`
+(Strato 1, acceso) la connessione nasce dal Bloch RITARDATO `n(t−τ)`: la forza a `t` dipende dallo
+stato a `t−τ`.** ### ➜ **Non e' il gradiente di una funzione dello stato ISTANTANEO** — e non lo
+dico io: ### **lo dichiara il docstring del fork** *(«rompe il teorema di inerzia»)*.
+
+**③ E CI SONO TERMINI ESPRESSAMENTE NON CONSERVATIVI:** `beta·vd`, `xi_termo·phivel` *(che
+### **RIFORNISCE** quando `xi < 0`)*, `src`, e `scuoti_vuoto` che inietta in `phivel`.
+
+### ⚠ **CHE COSA QUESTO VUOL DIRE PER IL CALORE, e va detto prima dei numeri**
+### **«Bilancio» e «calore» non hanno base OGGI**, ed e' esattamente cio' che il mandato
+sospettava. ### **La forma piu' naturale la PROPONGO e non la introduco** *(come chiedi)*: quattro
+pezzi — `K_fase` *(esatta: `M_PH = 1` uniforme)*, `K_metr` *(con massa d'arco posta a 1 e
+**dichiarata**)*, `V_metr` *(vale **solo** se `cs` e' uniforme)*, `V_fase` *(vale **solo** senza il
+ritardo)* — ### **piu' un CONTO ESPLICITO DEI FLUSSI non conservativi.** La voce e'
+`ENERGIA-NON-DEFINITA`.
+
+## 🔧 **TRE STRUMENTI, e una tecnica che non avevo previsto**
+
+| strumento | misure |
+|---|---|
+| `_misure_calore.py` | `DIVISIONE-AUTOCONSISTENTE:M0` · `DIVISIONE-AUTOCONSISTENTE:M1` · `DIVISIONE-AUTOCONSISTENTE:M3` · `DIVISIONE-AUTOCONSISTENTE:M4` · `DIVISIONE-AUTOCONSISTENTE:M6` |
+| `_verso_archi.py` | `DIVISIONE-AUTOCONSISTENTE:M2` *(e vale anche per `GEOM-SENZA-VERSO`)* |
+| `_pos_contro_d.py` | `DIVISIONE-AUTOCONSISTENTE:M5`, in **due** modi: **statica** dall'AST e **a runtime** |
+
+> ### ⭐ **LA TECNICA: LE VOCI DELLO SCHEDULATORE DIVENTANO PUNTI DI MISURA**
+> `_misure_calore.py` mette una **spia** su `_ferma_se_registro_incoerente`, che il **commit 1**
+> chiama ### **dopo OGNI voce**. ### ➜ **La variazione di una grandezza si ATTRIBUISCE ALLA
+> VOCE**, invece di essere letta a fine passo come un totale indistinto.
+> ### **Il presidio del commit 1 e' diventato l'imbragatura di misura di questo lavoro** — e non
+> era uno scopo: e' un effetto. *(Un presidio che serve anche a misurare costa meno di due.)*
+
+## ✅ **E LA TUA DECISIONE SUL REGIME E' REGISTRATA: `REGIME-DUE-SISTEMI`**
+
+Il **sistema di riferimento** e' dichiarato: ### **`REGIME` deterministico dal modulo,
+`SCUOTIMENTO = True`, SENZA `--regime`** — quello che girano tutti i sigilli.
+**La cura la propongo nel piano**, con le due vie *(allineare `_applica_regime` al modulo, oppure
+**rinominare cio' che produce**)*, e ### **dico subito quale preferisco e perche'**: la seconda,
+perche' la prima ### **distruggerebbe la misura `O2`**, che e' costruita **proprio** su quella
+differenza. ### **E i referti prodotti sul sistema «altro» li MARCO, non li riscrivo**, come
+chiedi: sono `_sigillo_osservatore.py` *(braccio `O2`)* e `_osserva_vuoto.py` *(`--regime-det`)*.
+
+### **PROSSIMO: i run dei tre strumenti, e poi il piano.** Gli strumenti sono committati **prima**,
+come chiede il mandato e il par.5.

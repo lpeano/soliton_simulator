@@ -1659,6 +1659,42 @@ lei stessa** un evento dopo)*, ### **e per entrambe la dichiarazione ESISTE GIA'
 > ### 📌 **E il primo giro NON e' buttato: il numero che conta lo ha dato comunque —
 > ### RIPIEGO SILENZIOSO da 10 a ZERO.**
 
+### 🔬 Gli STRUMENTI DI MISURA di `DIVISIONE-AUTOCONSISTENTE` e del CALORE *(2026-10-01)*
+
+**Mandato del guardiano, su priorita' di Luca** *(«qua si gioca veramente la dinamica pulita di
+tutto»)*. ### **Committati PRIMA di girare**, come chiede il mandato e il par.5.
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura |
+|---|---|---|---|
+| `csv/_test_fork/_misure_calore.py` | `d0ae4beb` | `python csv/_test_fork/_misure_calore.py --passi=72` | **`DIVISIONE-AUTOCONSISTENTE:M0`** *(esiste un'energia totale: le parti misurabili)* · **`DIVISIONE-AUTOCONSISTENTE:M1`** *(quanta `|tw|` sparisce con le divisioni, come frazione)* · **`DIVISIONE-AUTOCONSISTENTE:M3`** *(il termostato Nose-Hoover: serie, clip, pavimenti, e il fattore di `T_target` con la mediana di TUTTI gli archi)* · **`DIVISIONE-AUTOCONSISTENTE:M4`** *(il bilancio di una divisione, col calcio separato dalla cancellazione)* · **`DIVISIONE-AUTOCONSISTENTE:M6`** *(lo scuotimento come sorgente: energia e torsione immesse, e dove)* |
+| `csv/_test_fork/_verso_archi.py` | `e70b2569` | `python csv/_test_fork/_verso_archi.py --passi=1` | **`DIVISIONE-AUTOCONSISTENTE:M2`** *(il verso dell'arco entra nella fisica? Si invertono `(i,j)` per TUTTI gli archi, `tw` cambia segno, e si confrontano le grandezze PER NODO)*. ### **Vale anche per `GEOM-SENZA-VERSO`** |
+| `csv/_test_fork/_pos_contro_d.py` | `edb2e305` | `python csv/_test_fork/_pos_contro_d.py --passi=1` | **`DIVISIONE-AUTOCONSISTENTE:M5`** *(quali leggi leggono `pos` e quali solo `d`: la posizione del figlio e' FISICA o solo DISEGNO?)*, in **due modi** — **statica** dall'AST col grafo delle chiamate, e **a runtime** per intercettazione |
+
+> ### ⭐ **LA TECNICA DI MISURA NUOVA, e non era prevista: LE VOCI DELLO SCHEDULATORE**
+> `_misure_calore.py` mette una **spia** su `_ferma_se_registro_incoerente`, che il **commit 1**
+> chiama ### **dopo OGNI voce** *(generalizzazione 2 di Luca)*. ### ➜ **Ogni confine di voce
+> diventa un punto di misura**, e la variazione di una grandezza si puo' ### **ATTRIBUIRE ALLA
+> VOCE** invece di essere letta a fine passo come un totale indistinto.
+> ### **Il presidio del commit 1 e' diventato l'imbragatura di misura di questo lavoro**, e questo
+> non era uno scopo: e' un effetto. *(Un presidio che serve anche a misurare costa meno di due.)*
+
+> ### ⛔ **E I NOMI DELLE MISURE STANNO NEL NAMESPACE DELLA VOCE, perche' `M2` E' GIA' PRESO**
+> Il mandato le chiama `M0`…`M6`. ### **Ma nell'indice `M1`, `M2`, `M3`, `M4` ESISTONO GIA'**, e
+> ### **`M2` e' «LA MITOSI — DUE DIFETTI DA ACCLARARE: ① il figlio nasce nel PUNTO MEDIO»**, cioe'
+> ### **lo STESSO argomento.** ### ➜ **La forma nuda avrebbe risolto al difetto sbagliato**, ed e'
+> la famiglia della collisione `P3`/`P5` che il prefisso `H-` ha curato.
+> ### **Quindi: `DIVISIONE-AUTOCONSISTENTE:M0` … `:M6`.** La forma corta resta **dentro i tre
+> file e nei loro `json`**, dove e' **locale** e il par.9 la consente — ### **mai in un documento
+> vivo, mai in un messaggio di commit.**
+> *(E l'ha trovata `H-INDICE`, rifiutando il commit: non la mia attenzione.)*
+
+> ### ⚠ **CHE COSA QUESTI STRUMENTI NON FANNO, dichiarato prima dei numeri**
+> ### **Non chiamano <<energia>> cio' che non lo e'.** `K_fase` e' una cinetica vera *(`M_PH = 1`
+> uniforme)*, `K_metr` lo e' **con massa d'arco posta a 1 e DICHIARATA**, e `Q2` e' un ### **proxy
+> dichiarato**, non un potenziale — perche' la forza metrica e' `cs^2 (M − I) q`, **non** `−k q`.
+> ### **Un bilancio su una grandezza che non si conserva nemmeno in principio non e' un bilancio:
+> e' una somma.** Il perche' sta in `DIVISIONE-AUTOCONSISTENTE:M0`.
+
 ### 🔬 Il SIGILLO del controllo unico *(2026-09-29)*
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa fa |
