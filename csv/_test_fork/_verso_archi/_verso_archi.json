@@ -1,0 +1,395 @@
+{
+ "blob_sim_sha1_byte": "287154f343c8bf27424a7d856dbd2a13ad7b1b34",
+ "blob_strumento": "7c8b02008514f1a38da9c6b1d90a972d0b62fdf5",
+ "passi": 1,
+ "specchio": {
+  "archi_invertiti": 471564,
+  "antisimmetriche_cambiate_di_segno": [
+   "tw",
+   "twp"
+  ]
+ },
+ "controllo_zero_diverse": [],
+ "per_nodo": [
+  {
+   "grandezza": "phi",
+   "esito": "DIVERSA",
+   "scostamento_max_sui_finiti": 1.3031410787828053,
+   "scostamento_relativo": 0.10372010601205603,
+   "elementi_diversi": 12801,
+   "elementi": 12802,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "phi0",
+   "esito": "IDENTICA",
+   "scostamento_max_sui_finiti": 0.0,
+   "scostamento_relativo": 0.0,
+   "elementi_diversi": 0,
+   "elementi": 12802,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "phi_s",
+   "esito": "DIVERSA",
+   "scostamento_max_sui_finiti": 8.881784197001252e-16,
+   "scostamento_relativo": 2.8388236716904914e-16,
+   "elementi_diversi": 1,
+   "elementi": 12802,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "phivel",
+   "esito": "DIVERSA",
+   "scostamento_max_sui_finiti": 1.1102230246251565e-16,
+   "scostamento_relativo": 5.942189627650389e-17,
+   "elementi_diversi": 41,
+   "elementi": 12802,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "psi",
+   "esito": "IDENTICA",
+   "scostamento_max_sui_finiti": 0.0,
+   "scostamento_relativo": 0.0,
+   "elementi_diversi": 0,
+   "elementi": 12802,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "psi_spin",
+   "esito": "IDENTICA",
+   "scostamento_max_sui_finiti": 0.0,
+   "scostamento_relativo": 0.0,
+   "elementi_diversi": 0,
+   "elementi": 25604,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "eta",
+   "esito": "IDENTICA",
+   "scostamento_max_sui_finiti": 0.0,
+   "scostamento_relativo": 0.0,
+   "elementi_diversi": 0,
+   "elementi": 12802,
+   "elementi_non_finiti": 12802,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "pos",
+   "esito": "IDENTICA",
+   "scostamento_max_sui_finiti": 0.0,
+   "scostamento_relativo": 0.0,
+   "elementi_diversi": 0,
+   "elementi": 38406,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "perc_tw",
+   "esito": "IDENTICA",
+   "scostamento_max_sui_finiti": 0.0,
+   "scostamento_relativo": 0.0,
+   "elementi_diversi": 0,
+   "elementi": 12802,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "perc_chi",
+   "esito": "IDENTICA",
+   "scostamento_max_sui_finiti": 0.0,
+   "scostamento_relativo": 0.0,
+   "elementi_diversi": 0,
+   "elementi": 12802,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "perc_geom",
+   "esito": "IDENTICA",
+   "scostamento_max_sui_finiti": 0.0,
+   "scostamento_relativo": 0.0,
+   "elementi_diversi": 0,
+   "elementi": 12802,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "mem_mot",
+   "esito": "DIVERSA",
+   "scostamento_max_sui_finiti": 8.049116928532385e-16,
+   "scostamento_relativo": 2.9103244477113882e-15,
+   "elementi_diversi": 37414,
+   "elementi": 38406,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "omega_s",
+   "esito": "DIVERSA",
+   "scostamento_max_sui_finiti": 6.938893903907228e-18,
+   "scostamento_relativo": 4.0786177508915224e-16,
+   "elementi_diversi": 19085,
+   "elementi": 38406,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "rho_spin",
+   "esito": "IDENTICA",
+   "scostamento_max_sui_finiti": 0.0,
+   "scostamento_relativo": 0.0,
+   "elementi_diversi": 0,
+   "elementi": 12802,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "_nb",
+   "esito": "DIVERSA",
+   "scostamento_max_sui_finiti": 3.3306690738754696e-16,
+   "scostamento_relativo": 3.330673317086524e-16,
+   "elementi_diversi": 298,
+   "elementi": 38406,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "_psi_spinor",
+   "esito": "DIVERSA",
+   "scostamento_max_sui_finiti": 2.220447389282501e-16,
+   "scostamento_relativo": 2.220448096484207e-16,
+   "elementi_diversi": 10647,
+   "elementi": 25604,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  }
+ ],
+ "per_nodo_diverse": [
+  "phi",
+  "phi_s",
+  "phivel",
+  "mem_mot",
+  "omega_s",
+  "_nb",
+  "_psi_spinor"
+ ],
+ "per_arco_simmetriche": [
+  {
+   "grandezza": "d",
+   "esito": "IDENTICA",
+   "scostamento_max_sui_finiti": 0.0,
+   "scostamento_relativo": 0.0,
+   "elementi_diversi": 0,
+   "elementi": 471564,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "d0",
+   "esito": "DIVERSA",
+   "scostamento_max_sui_finiti": 0.06459987074545981,
+   "scostamento_relativo": 0.026590896314235366,
+   "elementi_diversi": 471564,
+   "elementi": 471564,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "vd",
+   "esito": "IDENTICA",
+   "scostamento_max_sui_finiti": 0.0,
+   "scostamento_relativo": 0.0,
+   "elementi_diversi": 0,
+   "elementi": 471564,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "peq",
+   "esito": "IDENTICA",
+   "scostamento_max_sui_finiti": 0.0,
+   "scostamento_relativo": 0.0,
+   "elementi_diversi": 0,
+   "elementi": 471564,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "_rep",
+   "esito": "IDENTICA",
+   "scostamento_max_sui_finiti": 0.0,
+   "scostamento_relativo": 0.0,
+   "elementi_diversi": 0,
+   "elementi": 471564,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  }
+ ],
+ "per_arco_antisimmetriche": [
+  {
+   "grandezza": "tw",
+   "esito": "DIVERSA",
+   "scostamento_max_sui_finiti": 3.552713678800501e-15,
+   "scostamento_relativo": 3.769553189615351e-16,
+   "elementi_diversi": 105114,
+   "elementi": 471564,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  },
+  {
+   "grandezza": "twp",
+   "esito": "DIVERSA",
+   "scostamento_max_sui_finiti": 3.552713678800501e-15,
+   "scostamento_relativo": 3.769553189615351e-16,
+   "elementi_diversi": 105114,
+   "elementi": 471564,
+   "elementi_non_finiti": 0,
+   "elementi_diversi_non_finiti": 0
+  }
+ ],
+ "nascite": {
+  "base": {
+   "_g_nati_mitosi": 0,
+   "_g_nati_schwinger": 0
+  },
+  "specchio": {
+   "_g_nati_mitosi": 0,
+   "_g_nati_schwinger": 0
+  }
+ },
+ "dove_per_voce": {
+  "serie": [
+   {
+    "voce": null,
+    "dove": "schedulatore: prima delle leggi",
+    "scostamenti": {
+     "d0": 0.0,
+     "d": 0.0,
+     "phi": 0.0,
+     "tw": 0.0,
+     "vd": 0.0,
+     "peq": 0.0
+    }
+   },
+   {
+    "voce": "apri",
+    "dove": "schedulatore: dopo la voce `apri`",
+    "scostamenti": {
+     "d0": 0.0,
+     "d": 0.0,
+     "phi": 0.0,
+     "tw": 0.0,
+     "vd": 0.0,
+     "peq": 0.0
+    }
+   },
+   {
+    "voce": "scuoti_vuoto",
+    "dove": "schedulatore: dopo la voce `scuoti_vuoto`",
+    "scostamenti": {
+     "d0": 0.0,
+     "d": 0.0,
+     "phi": 0.0,
+     "tw": 0.0,
+     "vd": 0.0,
+     "peq": 0.0
+    }
+   },
+   {
+    "voce": "step",
+    "dove": "schedulatore: dopo la voce `step`",
+    "scostamenti": {
+     "d0": 0.0,
+     "d": 0.0,
+     "phi": 0.0,
+     "tw": 3.552713678800501e-15,
+     "vd": 0.0,
+     "peq": 0.0
+    }
+   },
+   {
+    "voce": "mitosi",
+    "dove": "schedulatore: dopo la voce `mitosi`",
+    "scostamenti": {
+     "d0": 0.0,
+     "d": 0.0,
+     "phi": 0.0,
+     "tw": 3.552713678800501e-15,
+     "vd": 0.0,
+     "peq": 0.0
+    }
+   },
+   {
+    "voce": "rilassa_disegno",
+    "dove": "schedulatore: dopo la voce `rilassa_disegno`",
+    "scostamenti": {
+     "d0": 0.0,
+     "d": 0.0,
+     "phi": 0.0,
+     "tw": 3.552713678800501e-15,
+     "vd": 0.0,
+     "peq": 0.0
+    }
+   },
+   {
+    "voce": "memoria_hebbiana_moto",
+    "dove": "schedulatore: dopo la voce `memoria_hebbiana_moto`",
+    "scostamenti": {
+     "d0": 0.08595678203495005,
+     "d": 0.0,
+     "phi": 1.3031410787828053,
+     "tw": 3.552713678800501e-15,
+     "vd": 0.0,
+     "peq": 0.0
+    }
+   },
+   {
+    "voce": "chiudi",
+    "dove": "schedulatore: dopo la voce `chiudi`",
+    "scostamenti": {
+     "d0": 0.06459987074545981,
+     "d": 0.0,
+     "phi": 1.3031410787828053,
+     "tw": 3.552713678800501e-15,
+     "vd": 0.0,
+     "peq": 0.0
+    }
+   },
+   {
+    "voce": "verifica_invarianti",
+    "dove": "schedulatore: dopo la voce `verifica_invarianti`",
+    "scostamenti": {
+     "d0": 0.06459987074545981,
+     "d": 0.0,
+     "phi": 1.3031410787828053,
+     "tw": 3.552713678800501e-15,
+     "vd": 0.0,
+     "peq": 0.0
+    }
+   }
+  ],
+  "prima_voce_che_divide": {
+   "d0": {
+    "voce": "memoria_hebbiana_moto",
+    "scostamento": 0.08595678203495005
+   },
+   "phi": {
+    "voce": "memoria_hebbiana_moto",
+    "scostamento": 1.3031410787828053
+   },
+   "tw": {
+    "voce": "step",
+    "scostamento": 3.552713678800501e-15
+   }
+  }
+ },
+ "verdetto_il_verso_entra_nella_fisica": true
+}

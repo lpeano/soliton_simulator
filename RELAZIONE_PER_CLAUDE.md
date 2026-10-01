@@ -8550,3 +8550,77 @@ di concludere.**
 > modulo, e lo chiamavo su `S`. ### **Il run si e' fermato subito con `AttributeError`** — cioe'
 > nel modo giusto: ### **non ha prodotto un numero sbagliato, non ha prodotto NULLA.**
 > *(Blob dello strumento: `7c8b0200`.)*
+
+# 🔴 **`DIVISIONE-AUTOCONSISTENTE:M2` — IL VERSO DELL'ARCO ENTRA NELLA FISICA, e so DOVE** *(2026-10-01)*
+
+> ### **Luca: SI'. E non e' il calcio della mitosi — quello, in questo passo, NON HA NEMMENO
+> ### AGITO (zero nascite). E' `memoria_hebbiana_moto`, e i numeri lo dicono da soli.**
+
+## 📐 **LA LOCALIZZAZIONE, voce per voce** *(scostamento massimo, scena grande, seme 11, 1 passo)*
+
+| confine | `d0` | `phi` | `tw` |
+|---|---|---|---|
+| prima delle leggi · `apri` · `scuoti_vuoto` | `0` | `0` | `0` |
+| `step` · `mitosi` · `rilassa_disegno` | `0` | `0` | `3.55e-15` *(rumore)* |
+| ### **`memoria_hebbiana_moto`** | ### **8.60e-02** | ### **1.303** | `3.55e-15` |
+| `chiudi` · `verifica_invarianti` | `6.46e-02` | `1.303` | `3.55e-15` |
+
+### ➜ **Da `1e-15` a `1e-1` IN UNA VOCE: un fattore `1e14`.** ### **Non e' amplificazione di
+rumore: e' una LEGGE ASIMMETRICA.** *(E `d`, `vd`, `peq` non divergono MAI in questo passo.)*
+
+## 🔎 **I DUE SITI, e li ho letti dal codice dopo che la misura mi ha detto dove guardare**
+
+### **① `proj`: la memoria del moto proiettata sulla DIREZIONE DELL'ARCO** → scrive `d0`
+```
+memedge = 0.5*(mem_mot[ii]*(I[ii]/Imed) + mem_mot[jj]*(I[jj]/Imed))   # SIMMETRICO (vettore)
+proj    = sum(memedge * dirarc, axis=1)                                # dirarc SI INVERTE
+self.d0[mask] += self._sd0(proj, mask)
+```
+`memedge` e' **simmetrico**, ma `dirarc = (pos[jj] − pos[ii])/|…|` ### **si inverte**: quindi
+`proj` ### **cambia segno**, e ### **`d0` si muove al CONTRARIO.** ### ⛔ **`d0` e' una LUNGHEZZA
+di riposo: non ha verso.** Il segno della sua variazione ### **non puo' dipendere dall'ordine in
+cui l'arco e' stato memorizzato.**
+
+### **② lo SHIFT DI FASE applicato a UN SOLO ESTREMO** → scrive `phi`
+```
+proiezione_trasversale = sum(self.mem_mot[ii] * dir_laterale, axis=1)   # SOLO ii
+shift = clip(accoppiamento * proiezione_trasversale * (d/d0), -pi/4, +pi/4)
+self.phi[ii] = (self.phi[ii] + shift) % _dphi()                         # SOLO ii
+```
+### **Due volte `ii` e mai `jj`:** la memoria usata e' quella del **primo** estremo, e lo shift va
+al **primo** estremo. ### **Scambiando le etichette cambia CHI riceve il calcio di fase e da CHI
+viene calcolato.** *(`dir_laterale` invece **e' simmetrico**: nasce dal punto medio
+`0.5*(pos[ii]+pos[jj])` — ### **l'ho verificato, e NON e' un terzo sito.**)*
+
+## ⛔ **E DENTRO IL SITO ② C'E' UN DIFETTO DIVERSO E PIU' GRAVE, che la misura ha fatto emergere**
+
+> ### **`self.phi[ii] = (...)` con `ii` CHE CONTIENE RIPETIZIONI: in numpy l'ULTIMO VINCE.**
+
+Un nodo e' il **primo estremo** di **molti** archi. Con l'indicizzazione fancy in **scrittura**,
+### **solo l'ultimo arco di quel nodo applica il suo shift** — ### **tutti gli altri vengono
+scartati IN SILENZIO.** Non e' una somma mancata: e' ### **una scelta implicita fatta
+dall'ORDINE DELL'ARRAY.** *(Se la legge volesse sommare servirebbe `np.add.at`, che il file usa
+altrove: qui no.)*
+### ➜ **E' la voce in coda che si chiama proprio «stesso path vince l'ultimo»**, trovata qui in
+una forma nuova. ### **Non la curo adesso** *(nessuna riga del simulatore in questo giro)*: la
+registro.
+
+## ⚠ **UNA COSA CHE HO NOTATO E CHE NON APPARTIENE A QUESTA MISURA**
+`dir_laterale = (−dir_radiale[1], dir_radiale[0], 0)` e' una rotazione di 90 gradi ### **nel solo
+piano xy**, con la componente `z` **azzerata**: ### **un PIANO PREFERITO** in una legge che
+dovrebbe essere isotropa. ### **Non e' il verso dell'arco e non e' oggetto di `M2`**: lo segnalo
+perche' l'ho visto, e va in coda.
+
+## ✅ **E CHE COSA QUESTO SIGNIFICA PER LA VOCE**
+
+Il difetto **(iii)** che avevo scritto nel piano — *«il calcio della mitosi non e' simmetrico
+nello scambio `a ↔ b`»* — ### **non e' un caso isolato: e' una FAMIGLIA**, e il membro che **gira
+piu' spesso** *(ogni passo, non solo alle nascite)* sta in `memoria_hebbiana_moto`.
+### ➜ **Quindi il criterio «simmetria della LEGGE, non del risultato» non e' una raffinatezza del
+piano del calore: e' una cura che serve SUBITO**, e la misura dice **esattamente dove**.
+
+### 📌 **E una verifica onesta che ho fatto PRIMA di accusare:** `circ_nodo`, che accumula
+`+twn_a` su `ii` e `−twn_a` su `jj`, ### **SEMBRA** la stessa forma del calcio — ### **ma e'
+INVARIANTE**, perche' e' dispari **sia** nell'orientazione **sia** in `tw`, e le due disparita' si
+annullano. ### **L'ho calcolato invece di sospettarlo**, e lo scrivo perche' il prossimo che legge
+non rifaccia il sospetto.
