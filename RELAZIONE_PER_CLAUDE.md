@@ -8161,3 +8161,86 @@ cosa **diversa** dal correggere una frase falsa. ### **Se li mescolassi, la prov
 non esisterebbe piu'**, e con lei la ragione per cui questo commit non ha bisogno di un sigillo.
 **L'archiviazione del ramo e' la voce `(7)`**, e `RAMI-OFF-CURA2` dice come: ### **copiato dal
 sorgente, non cancellato.**
+
+# 🔧 **COMMIT 1: IL REGISTRO E' DICHIARATO — e al primo giro ha trovato un buco vero** *(2026-10-01)*
+
+> ### **Luca, il presidio `3-bis` ha trovato DUE grandezze che il registro non dichiarava, e la
+> ### causa e' una mia misura fatta nel punto sbagliato.**
+
+**Il terzo limite che avevo dichiarato nella scheda non c'e' piu':** il controllo non parte piu' da
+un **elenco**, parte da **cio' che la rete ha** — scorre `vars(net)`, prende cio' che ha il primo
+asse `== n` o `== m`, e se il nome non e' nel registro **ferma il run**. **Cosi' la regola vale con
+QUALUNQUE FLAG**, ed e' il limite *«una scena, una configurazione»* che cade.
+**E la regola non parte dal NOME ne' dalla SINTASSI, ed e' deliberato:** in questa sessione **sei
+volte** una mia regola basata sul nome o sulla sintassi ha nascosto cio' che cercava. Qui una
+grandezza si qualifica **per la sua FORMA**, che e' un fatto **misurato a runtime**.
+
+## ⛔ **IL BUCO: `_smp_d0` e `_smp_d`, e la causa e' MIA**
+
+Al **primo** giro il controllo si e' fermato su `_smp_d0` *(per arco, `float64`, «dopo la voce
+`apri`»)*. Sono la **fotografia di `d0` e `d` a inizio passo** *(`SCALA_MIN_PASSO` C3 +
+`COES_CAUSALE` C4)*, e il registro **non le dichiarava**.
+### **Perche' non le vedevo:** il registro l'ho costruito **misurando `vars(net)` alla FINE di un
+passo** *(`_registro_grandezze.py`, fine del passo 30)*, e queste **a fine passo non esistono** —
+le azzera `_smp_chiudi`. ### **Una misura presa a UN SOLO ISTANTE non puo' vedere cio' che vive
+FRA DUE ISTANTI.** E' esattamente il buco che il **controllo dopo ogni voce** esisteva per trovare:
+**la generalizzazione 2 ha pagato la generalizzazione 3.**
+
+## 🧪 **LA MISURA, prima della dichiarazione** *(scena piccola, seme 11, 3 passi, 27 controlli)*
+
+| dove | `_smp_d0` e `_smp_d` |
+|---|---|
+| `prima delle leggi` | ### **NON ESISTONO** |
+| da `apri` a `memoria_hebbiana_moto` *(sei voci)* | ### **lunghe `m` = 70199** |
+| dopo `chiudi`, dopo `verifica_invarianti` | ### **NON ESISTONO** |
+
+**Zero casi ambigui, zero disallineamenti, e le due sempre insieme.**
+
+## ➜ **NON SONO DERIVATE, E NEMMENO DI STATO: SONO UNA TERZA COSA, E SI DICHIARA**
+
+**Di STATO no:** ai punti di controllo **devono NON esserci**. **Derivate no:** per il tuo criterio
+*(letta fra la nascita e la sua riscrittura)* **sono lette dentro la finestra**, e la terza colonna
+delle derivate chiede un **motivo misurato** che qui **non esiste** — scriverlo sarebbe stato
+**falso**. Allora si dichiarano per cio' che **sono**: `REGISTRO_FINESTRA`, con forma, tipo, **la
+voce che apre**, **la voce che chiude** e il motivo misurato.
+### **E il controllo ne esce PIU' FORTE, non piu' debole:** fuori dalla finestra la grandezza
+**deve non esistere**, ed e' **il difetto che `_smp_chiudi` TEME nel suo stesso commento** —
+*«senno' resterebbe aperta e il passo dopo leggerebbe quella del passo prima»*. ### **Era un timore
+in un commento; ora e' un presidio** (`A9`).
+**Il verso molle si CONTA e non ferma** (`A8`): a `SCALA_MIN_PASSO` e `COES_CAUSALE` spenti la
+finestra **non si apre mai**, e non e' un difetto — ma *«non si e' aperta»* deve essere
+**leggibile** (`_g_finestra_chiusa_dentro`), non supposto.
+
+## 🧹 **E IL CONTO DELLE LEGGI NON CRESCE** (`9-ter`)
+
+La cascata **forma -> tipo** e' uscita in `_controlla_forma_e_tipo`, e la chiamano **entrambi** i
+cicli: **30 righe diventate 5**. ### **La tabella nuova aggiunge una DICHIARAZIONE, non una legge.**
+E la finestra **si deriva dalla composizione IN USO** *(`valida_composizione` impone `apri` prima e
+la coda in fondo)*, con la voce passata come **DATO** — **non letta dal testo della stringa `dove`**,
+che sarebbe stata di nuovo una regola basata sulla **sintassi**.
+
+## 🔎 **E UN SECONDO REPERTO, trovato da un CONTATORE che smentisce un COMMENTO**
+
+`_g_smp_gia_aperta` e' **assente** dopo 8 passi sani: **nessuno** ha mai trovato la fotografia gia'
+aperta. Ma il docstring di `_smp_apri` dice *«la chiamano **tutte e cinque le leggi**, in testa»*.
+**Verificato col grep:** in `soliton_simulator.py` di oggi **l'unico chiamante e' la voce `apri`
+dello schedulatore**; i `self._smp_apri()` dentro le leggi vivono **solo nelle copie vecchie**.
+### **Sono due cose e non una** *(come `CENS-A4`)*: un **commento scaduto** e un **contatore che non
+puo' salire**. ### **Non l'ho toccato:** e' la famiglia del **commit 0-bis** che mi hai appena dato,
+e va in quel giro. La voce e' `SMP-APRI-COMMENTO`.
+**E l'idempotenza non si butta prima di averla misurata:** `csv/_seal_fork/_sigillo_scala_min_passo.py`
+chiama `net._smp_apri()` **direttamente**, fuori dallo schedulatore.
+
+## 📋 **LA CODA, dal tuo mandato di adesso** *(registrata qui perche' una coda in chat non esiste)*
+
+| | |
+|---|---|
+| **commit 0-bis** | i **due commenti falsi sul REGIME** — `REGIME = "deterministico"` mai riassegnato, il ramo stocastico che si dichiara *«canonico, validato, DEFAULT»*, e l'intestazione che chiama il deterministico *«WIP»*. **Byte-inerte**, col **grep** di tutti gli altri *«default»*/*«canonico»* |
+| **il piano** | `FRAZIONE-DIVISIONE` diventa ### **`DIVISIONE-AUTOCONSISTENTE`**, **fuori dal riordino**, in coda: **una** legge *(dove si rompe, cosa ereditano i figli, il calcio ai genitori)* al posto di tre pezzi, col **BILANCIO della torsione**, e le due misure `M1` *(quanta `|tw|` sparisce)* e `M2` *(il verso dell'arco, collegata a `GEOM-SENZA-VERSO`)* |
+
+### **PROSSIMO: il sigillo del commit 1** — `A`/`D` vanno **rigirati** perche' il referto e' ora
+**stantio** *(il blob e' cambiato, e il controllo che l'ho messo io mi coglie per la seconda
+volta)*, poi `B` fino al **72** sulla scena grande con le nascite, contatori compresi, e il
+**braccio `G`** coi tre casi che devono fallire. **Poi il commit 0-bis e il commit del piano.**
+
+**blob del simulatore (byte grezzi): `5d29334b` · blob del sigillo: `37ea1f49`**

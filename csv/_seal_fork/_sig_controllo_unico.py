@@ -12,6 +12,7 @@ ha girati `csv/_test_fork/_guasto_ripieghi.py`; qui stanno **`B`**, **`C`** ed *
 | ### **`B`** | ### **byte-identico fino al passo 72** contro il blob di prima, sul **dominio comune**, ### **grandezze E CONTATORI** | **una** grandezza **oppure UN CONTATORE** diverso in **un** passo |
 | ### **`C`** | ### **IL CASO CHE DEVE FALLIRE** (`P1-sexies`): col controllo **SPENTO**, i guasti tornano a **NON** essere protetti | se restano protetti anche a controllo spento, ### **il sigillo non sta misurando il controllo** |
 | ### **`E`** | un run **SANO CON NASCITE** arriva al **72** ### **senza un solo `CacheCorta`/`CacheLunga`** | un solo errore: vuol dire che ho messo una **DERIVATA** fra le STATO |
+| ### **`G`** | ### **I TRE CASI CHE DEVONO FALLIRE del commit 1** (`P1-sexies`): `pippo` per **nodo**, `pluto` per **arco**, e la **finestra lasciata aperta** | **uno** dei tre che **PASSA**: una grandezza non dichiarata resterebbe fuori dal controllo in silenzio |
 | ### **`F`** | ### **il RENDICONTO DELLA TOLLERANZA** *(punto 2 di Luca)*: **quali** grandezze di STATO non si sono **MAI** viste piene | ### **anche UNA SOLA**: la tolleranza dell'assenza diventerebbe un **varco**, e quella grandezza resterebbe fuori dal controllo **per sempre, in silenzio** |
 
 ### ⚠ Due scelte di misura, dichiarate prima dei numeri
@@ -117,7 +118,8 @@ def _foto(net):
 #   DEVONO cambiare, ### e confrontarli vorrebbe dire confrontare la modifica CON SE STESSA.
 #   ### Sono NOMINATI e sono TRE: escludere un contatore e' esattamente cio' che potrebbe nascondere
 #   un difetto, quindi l'elenco e' corto, esplicito, e si riporta a parte invece di sparire.
-CONTATORI_DEL_PRESIDIO = ("_g_registro_controlli", "_g_registro_assenti", "_g_registro_spento")
+CONTATORI_DEL_PRESIDIO = ("_g_registro_controlli", "_g_registro_assenti", "_g_registro_spento",
+                          "_g_finestra_chiusa_dentro")
 
 
 def _contatori(net):
@@ -367,6 +369,73 @@ def braccio_C(passi_base):
                    "chiamate_spente": int(getattr(net, "_g_registro_spento", 0))}
 
 
+def braccio_G(passi_base):
+    """### **I TRE CASI CHE DEVONO FALLIRE del commit 1** *(`P1-sexies`)*.
+
+    | caso | che cosa dimostra |
+    |---|---|
+    | `pippo`, lunga `n` | una grandezza **non dichiarata** PER NODO ferma il run |
+    | `pluto`, lunga `m` | **e anche per ARCO** -- i due metri, non uno |
+    | `_smp_d0` **lasciata aperta** | una grandezza **a finestra** che sopravvive al passo ferma il run |
+
+    ### ⚠ Perche' il terzo caso esiste, ed e' la ragione per cui il commit 1 e' cresciuto
+    Il presidio `3-bis` ### **al suo PRIMO giro ha trovato due grandezze vere** che il registro non
+    dichiarava: `_smp_d0` e `_smp_d`. ### **Il registro era stato costruito MISURANDO `vars(net)`
+    alla FINE di un passo**, e queste a fine passo **non esistono**. Una misura presa a **un solo
+    istante** non puo' vedere cio' che vive **fra due istanti**.
+    ### -> **La prova a guasto NON le raggiunge** *(inietta fra i passi, e fra i passi non ci
+    sono)*: ### **il solo modo di provarle e' QUESTO braccio.**
+    """
+    import contextlib
+    print("")
+    print("=" * 104)
+    print("BRACCIO G -- I TRE CASI CHE DEVONO FALLIRE: `pippo`, `pluto`, finestra APERTA")
+    print("=" * 104)
+    esiti, passa = {}, True
+    # --- i due non dichiarati, uno per METRO
+    for nome, metro in (("pippo", "n"), ("pluto", "m")):
+        S, net = carica(None)
+        quanti = int(net.n) if metro == "n" else int(len(net.i))
+        setattr(net, nome, np.zeros(quanti))
+        try:
+            with contextlib.redirect_stdout(io.StringIO()):
+                _passo.passo_pieno(S, net)
+            esiti[nome] = "### PASSA -- IL PRESIDIO NON LA VEDE"
+            passa = False
+        except Exception as e:
+            atteso = getattr(S, "GrandezzaNonDichiarata", None)
+            ok = isinstance(atteso, type) and isinstance(e, atteso)
+            esiti[nome] = ("FERMA con %s" % type(e).__name__ if ok
+                           else "### FERMA con l ALTRO errore: %s" % type(e).__name__)
+            passa = passa and ok
+        print("  %-8s (per %s, lunga %d) ... %s" % (nome, metro, quanti, esiti[nome]))
+    # --- la finestra lasciata aperta: si fa UN passo, poi si RIMETTE la fotografia
+    S, net = carica(None)
+    with contextlib.redirect_stdout(io.StringIO()):
+        for _ in range(passi_base):
+            _passo.passo_pieno(S, net)
+    aperta_prima = _t(getattr(net, "_smp_d0", None))
+    net._smp_d0 = np.zeros(int(len(net.i)))
+    net._smp_d = np.zeros(int(len(net.i)))
+    try:
+        with contextlib.redirect_stdout(io.StringIO()):
+            _passo.passo_pieno(S, net)
+        esiti["finestra"] = "### PASSA -- IL PRESIDIO NON LA VEDE"
+        passa = False
+    except Exception as e:
+        atteso = getattr(S, "FinestraRestataAperta", None)
+        ok = isinstance(atteso, type) and isinstance(e, atteso)
+        esiti["finestra"] = ("FERMA con %s" % type(e).__name__ if ok
+                             else "### FERMA con l ALTRO errore: %s" % type(e).__name__)
+        passa = passa and ok
+    print("  finestra `_smp_d0` rimessa a fine passo ... %s" % esiti["finestra"])
+    print("  (a fine passo, SANA, la finestra era: %s)" % (aperta_prima or "CHIUSA"))
+    print("  ### G %s" % ("PASSA: tutti e tre FERMANO il run, e con l errore DICHIARATO."
+                          if passa else
+                          "FALLISCE: almeno uno non ferma, o ferma con un altro errore."))
+    return passa, {"esiti": esiti, "finestra_a_fine_passo": aperta_prima}
+
+
 def principale():
     global ANCORA_CONTROLLO
     passi = 72
@@ -396,6 +465,7 @@ def principale():
     esiti["E"] = (_ok_E, _dati_E)
     esiti["F"] = braccio_F(_net_E, _S_E)
     esiti["C"] = braccio_C(30)
+    esiti["G"] = braccio_G(2)
 
     # --- A e D dal referto committato della prova a guasto
     print("")
@@ -454,8 +524,8 @@ def principale():
     print("IL VERDETTO")
     print("=" * 104)
     tutti = {"A": A_ok, "D": D_ok, "B": esiti["B"][0], "C": esiti["C"][0],
-             "E": esiti["E"][0], "F": esiti["F"][0]}
-    for k in ("A", "B", "C", "D", "E", "F"):
+             "E": esiti["E"][0], "F": esiti["F"][0], "G": esiti["G"][0]}
+    for k in ("A", "B", "C", "D", "E", "F", "G"):
         print("  braccio %s ... %s" % (k, "PASSA" if tutti[k] else "### FALLISCE"))
     passa = all(tutti.values())
     print("")
@@ -466,6 +536,7 @@ def principale():
         {"blob_oggi": blob(SIM), "blob_prima": blob(PRIMA), "introduce": str(introduce),
          "passi": passi, "bracci": tutti,
          "B": esiti["B"][1], "C": esiti["C"][1], "E": esiti["E"][1], "F": esiti["F"][1],
+         "G": esiti["G"][1],
          "A_e_D": a_dati,
          "passa": passa}, indent=1, ensure_ascii=False, default=float))
     print("scritto: " + OUT)

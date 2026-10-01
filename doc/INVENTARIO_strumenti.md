@@ -1663,9 +1663,16 @@ lei stessa** un evento dopo)*, ### **e per entrambe la dichiarazione ESISTE GIA'
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa fa |
 |---|---|---|---|
-| `csv/_seal_fork/_sig_controllo_unico.py` | `a13a385c` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
+| `csv/_seal_fork/_sig_controllo_unico.py` | `37ea1f49` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
 
 **I cinque criteri sono di Luca e sono fissati PRIMA del codice** *(piano `f684353f`, par.5)*.
+
+> ### ➕ **BRACCIO `G`, aggiunto col COMMIT 1 del riordino** *(2026-10-01)*: ### **i TRE casi che
+> devono fallire** — `pippo` *(per **nodo**)*, `pluto` *(per **arco**)* e ### **la finestra
+> `_smp_d0` lasciata aperta.**
+> **Perche' il terzo esiste:** la **prova a guasto NON lo raggiunge**, perche' inietta **fra i
+> passi** e `_smp_d0` ### **fra i passi non esiste** — vive **solo dentro** il passo.
+> ### **Il solo modo di provarla e' questo braccio.**
 
 > ### 📌 **Due scelte di misura, dichiarate prima dei numeri:**
 > **①** `B` confronta ### **PASSO PER PASSO**, non solo alla fine — ### **il primo passo in cui

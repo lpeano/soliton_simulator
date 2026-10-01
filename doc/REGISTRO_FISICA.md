@@ -4400,6 +4400,24 @@ che l'avrebbe **saltato nel caso più comune** *(nessun `--regime` sulla riga di
 
 <!-- SCHEDA nome=schedulatore-del-passo funzioni=esegui_passo,valida_composizione,update,_passo,batch_condensazione,_dbg_init flag=PASSO_COMPOSIZIONE,_PASSO_FASI,_PASSO_MODULO,_PASSO_REGISTRO,_PASSO_CODA,_PASSO_TIPI,_PASSO_FUNZIONE -->
 
+> ### 📌 **COMMIT 1 DEL RIORDINO — LA VOCE PASSA AL CONTROLLO COME *DATO*** *(2026-10-01)*
+>
+> `esegui_passo` ora chiama il controllo con ### **`voce=_nome` e `comp=comp`**, e la ragione e'
+> precisa: le grandezze **a finestra** *(`REGISTRO_FINESTRA`, scheda `registro-grandezze`)*
+> esistono **solo dentro** il passo, e per sapere se il punto di controllo e' **dentro o fuori**
+> la finestra serve ### **QUALE voce ha appena girato.**
+>
+> | | |
+> |---|---|
+> | ### **non si legge dalla stringa `dove`** | `dove` e' una **frase per chi legge l'errore**; ricavarne il nome della voce sarebbe ### **una regola che parte dalla SINTASSI** — l'errore che in questa sessione ho fatto **sei** volte |
+> | ### **la finestra si DERIVA, non si elenca** | `_finestra_aperta` usa la composizione ### **IN USO**, non quella canonica: `H-ETC-2` **permuta** l'ordine, e un elenco di voci scritto a mano ### **direbbe il falso appena l'ordine cambia** |
+> | ### **e la derivazione e' sicura per COSTRUZIONE** | la garanzia viene da `valida_composizione`, che **impone** `apri` come **prima** voce e la **coda** `('chiudi', 'verifica_invarianti')`: ### **quindi `chiudi` esiste SEMPRE e viene SEMPRE dopo `apri`** |
+>
+> ### ⚠ **E LO SCHEDULATORE NON CONTIENE PIU' FISICA DI PRIMA:** `voce` e `comp` sono **cio' che
+> lo schedulatore GIA' SA** *(quale voce sta girando, in quale composizione)*, passato invece che
+> ri-dedotto. ### **Nessun `if` su un nome di voce e' entrato in `esegui_passo`** — la
+> composizione resta un **DATO**.
+
 > ### 📌 **GENERALIZZAZIONE 2 DEL 2026-09-29 — IL CONTROLLO DOPO *OGNI* VOCE** *(decisione di Luca)*
 >
 > Prima il controllo del registro girava in **due** punti: la **precondizione** e **dopo `mitosi`**.
@@ -4761,7 +4779,79 @@ ripiego** che l'eccezione esiste per rendere impossibile.
 
 ---
 
-<!-- SCHEDA nome=registro-grandezze funzioni=_ferma_se_registro_incoerente,_ferma_registro,registro_mai_apparse,_forma_di,_scrivi_forma flag=REGISTRO_STATO,REGISTRO_DERIVATE,REGISTRO_METRI,CONTROLLO_REGISTRO,CacheLunga,FormaSbagliata,TipoSbagliato -->
+<!-- SCHEDA nome=registro-grandezze funzioni=_ferma_se_registro_incoerente,_ferma_registro,registro_mai_apparse,_forma_di,_scrivi_forma,_controlla_forma_e_tipo,_finestra_aperta flag=REGISTRO_STATO,REGISTRO_DERIVATE,REGISTRO_METRI,REGISTRO_FINESTRA,REGISTRO_NOMI,CONTROLLO_REGISTRO,CacheLunga,FormaSbagliata,TipoSbagliato,GrandezzaNonDichiarata,FinestraRestataAperta -->
+
+> ### 📌 **COMMIT 1 DEL RIORDINO — IL REGISTRO E' DICHIARATO, NON MISURATO** *(2026-10-01)*
+>
+> > ### **Il controllo non parte piu' da un ELENCO: parte da CIO' CHE LA RETE HA.**
+>
+> **Era il TERZO limite che avevo dichiarato in questa scheda**, e ora non c'e' piu': il registro
+> era stato costruito **misurando UNA scena e UNA configurazione**, quindi ### **con altri flag
+> una grandezza nuova poteva comparire e restare FUORI dal controllo in silenzio, per sempre.**
+> **Ora** `_ferma_se_registro_incoerente` scorre `vars(net)`, prende cio' che e' array o lista col
+> **primo asse** `== n` oppure `== m`, e ### **se il nome non e' nel registro FERMA IL RUN**
+> (`GrandezzaNonDichiarata`).
+>
+> ### ⚠ **LA REGOLA NON PARTE DAL NOME NE' DALLA SINTASSI, ed e' deliberato**
+> In questa sessione ### **SEI volte** una mia regola basata sul **nome** o sulla **sintassi** ha
+> nascosto cio' che cercava. ### **Qui una grandezza si qualifica PER LA SUA FORMA**, che e' un
+> **fatto misurato a runtime**: nessun nome, nessun alias, nessuna sintassi.
+>
+> ### ✅ **E AL PRIMO GIRO IL PRESIDIO HA TROVATO UN BUCO VERO: `_smp_d0` e `_smp_d`**
+> Sono **per arco**, `float64`, e il registro ### **non le dichiarava.** Il motivo e' preciso:
+> ### **il registro era stato costruito misurando `vars(net)` alla FINE di un passo**
+> *(`csv/_test_fork/_registro_grandezze.py`, fine del passo 30)*, e queste ### **a fine passo NON
+> ESISTONO** — le azzera `_smp_chiudi`. ### **Una misura presa a UN SOLO ISTANTE non puo' vedere
+> cio' che vive FRA DUE ISTANTI**, ed e' esattamente il buco che il **controllo dopo ogni voce**
+> esisteva per trovare.
+>
+> ### 🧪 **LA FINESTRA, MISURATA voce per voce** *(scena piccola, seme 11, 3 passi, 27 controlli)*
+>
+> | dove | `_smp_d0` e `_smp_d` |
+> |---|---|
+> | `prima delle leggi` | ### **NON ESISTONO** |
+> | da `apri` a `memoria_hebbiana_moto` *(sei voci)* | ### **lunghe `m` = 70199** |
+> | dopo `chiudi`, dopo `verifica_invarianti` | ### **NON ESISTONO** |
+>
+> **Zero casi ambigui, zero disallineamenti, e le due SEMPRE INSIEME.**
+>
+> ### ➜ **ALLORA NON SONO DERIVATE, E NEMMENO DI STATO: SONO UNA TERZA COSA, E SI DICHIARA**
+> **Di STATO no:** una grandezza di stato ha una **regola di nascita** e la sua lunghezza e' un
+> invariante ai punti di controllo — queste a quei punti ### **devono NON esserci.**
+> **Derivate no:** per il criterio di Luca *(letta fra la nascita e la sua riscrittura)* ### **sono
+> LETTE dentro la finestra** — le scrive `_smp_apri`, le riallinea `_smp_chirurgia`, le legge e le
+> chiude `_smp_chiudi`. ### **Chiamarle derivate sarebbe FALSO**, e la terza colonna delle derivate
+> chiede un **motivo misurato** che qui non esiste.
+> ### **Si dichiarano per cio' che SONO:** `REGISTRO_FINESTRA`, con la **forma**, il **tipo**, la
+> **voce che apre**, la **voce che chiude** e il **motivo misurato**.
+>
+> ### ⛔ **E IL CONTROLLO DIVENTA PIU' FORTE, NON PIU' DEBOLE**
+> ### **Fuori dalla finestra la grandezza DEVE NON ESISTERE** (`FinestraRestataAperta`), ed e'
+> ### **il difetto che `_smp_chiudi` TEME nel suo stesso commento**: *«la fotografia si CHIUDE
+> sempre, senno' resterebbe aperta e ### il passo dopo leggerebbe quella del passo prima»*.
+> ### **Era un timore scritto in un commento; ora e' un presidio** (`A9`).
+> **Il verso molle SI CONTA e non ferma** (`A8`): `_smp_apri` fotografa **solo se**
+> `SCALA_MIN_PASSO or COES_CAUSALE`, quindi a flag spenti la finestra ### **non si apre mai**, e
+> *«non si e' aperta»* deve essere **leggibile** (`_g_finestra_chiusa_dentro`), non supposto.
+>
+> ### 📐 **E LA FINESTRA SI DERIVA DALLA COMPOSIZIONE IN USO, non da un elenco di voci**
+> `H-ETC-2` **permuta** l'ordine, e un elenco scritto a mano direbbe il falso appena l'ordine
+> cambia. `valida_composizione` **impone** che `apri` sia la prima voce e che la coda sia
+> `('chiudi', 'verifica_invarianti')`: ### **quindi `chiudi` esiste SEMPRE e viene SEMPRE dopo
+> `apri`**, e `_finestra_aperta` puo' derivare l'intervallo invece di cablarlo.
+> ### **E la voce passa al controllo come DATO** (`voce=`, `comp=`), ### **non si legge dal testo
+> della stringa `dove`**: leggerla da una frase sarebbe di nuovo una regola basata sulla SINTASSI.
+>
+> ### 🧹 **UNA SOLA LEGGE, non due** (`9-ter`)
+> La cascata **forma -> tipo** e' uscita in `_controlla_forma_e_tipo` e la chiamano **entrambi** i
+> cicli *(STATO e FINESTRA)*: ### **la tabella nuova aggiunge una DICHIARAZIONE, non una legge** —
+> 30 righe diventate 5 nel ciclo, e il conto delle leggi **non cresce**.
+>
+> ### ⚠ **IL LIMITE CHE RESTA, dichiarato**
+> Una grandezza con `len` **diverso** da `n` e da `m` ### **non viene vista** *(per esempio una per
+> faccia o per ciclo)*: il presidio copre ### **i DUE METRI che il registro conosce, non tutti i
+> metri possibili.** E se `n == m` i due metri sono **indistinguibili** — oggi `12802` contro
+> `471564`, e lo strumento del registro **lo controlla e lo dichiara.**
 
 > ### 📌 **GENERALIZZAZIONE 3 DEL 2026-09-29 — IL TIPO** *(decisione di Luca)*
 >

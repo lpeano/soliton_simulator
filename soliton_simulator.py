@@ -1017,6 +1017,88 @@ class FormaSbagliata(RuntimeError):
     """
 
 
+class FinestraRestataAperta(RuntimeError):
+    """**Una grandezza che vive SOLO DENTRO il passo e' ancora li' quando il passo e' chiuso.**
+
+    *(`RIPIEGHI-ZERO`, **commit 1** del riordino, 2026-10-01.)*
+
+    ### Perche' esiste: IL PRESIDIO `3-bis` HA TROVATO UN BUCO VERO AL SUO PRIMO GIRO
+    `_smp_d0` e `_smp_d` sono **per arco**, `float64`, e ### **il registro NON LE DICHIARAVA.**
+    Il motivo e' preciso e va detto: ### **il registro era stato costruito MISURANDO `vars(net)`
+    alla FINE di un passo** *(`csv/_test_fork/_registro_grandezze.py`, fine del passo 30)*, e
+    queste due ### **a fine passo NON ESISTONO** -- le azzera `_smp_chiudi`. ### **Una misura
+    presa a un solo istante non puo' vedere cio' che vive fra due istanti.**
+    ### -> **E' esattamente il buco che il controllo DOPO OGNI VOCE esisteva per trovare.**
+
+    ### LA FINESTRA, MISURATA voce per voce (scena piccola, seme 11, 3 passi, 27 controlli)
+    | dove | `_smp_d0` e `_smp_d` |
+    |---|---|
+    | `prima delle leggi` | ### **NON ESISTONO** |
+    | da `apri` a `memoria_hebbiana_moto` *(sei voci)* | ### **lunghe `m` = 70199** |
+    | dopo `chiudi`, dopo `verifica_invarianti` | ### **NON ESISTONO** |
+    **Zero casi ambigui, zero disallineamenti, e le due SEMPRE INSIEME.**
+
+    ### Allora NON sono DERIVATE, e nemmeno di STATO: sono UNA TERZA COSA, e si DICHIARA
+    **Di STATO no:** una grandezza di stato ha una **regola di nascita** e la sua lunghezza e' un
+    **invariante ai due punti** -- queste a quei punti ### **devono NON esserci.**
+    **Derivate no:** per il criterio di Luca *(letta fra la nascita e la sua riscrittura)* ###
+    **sono LETTE dentro la finestra** -- le scrive `_smp_apri`, le allinea `_smp_chirurgia`, le
+    legge e le chiude `_smp_chiudi`. ### **Chiamarle derivate sarebbe FALSO**, e la terza colonna
+    del registro delle derivate chiede un **motivo misurato** che qui non esiste.
+    ### -> **Si dichiarano per cio' che SONO: una finestra, con la voce che l'APRE e quella che
+    la CHIUDE.** E il controllo diventa piu' forte, non piu' debole:
+    ### **fuori dalla finestra la grandezza DEVE NON ESSERCI.**
+
+    ### E QUESTO E' IL DIFETTO CHE IL CODICE STESSO TEMEVA, ora IMPEDITO
+    `_smp_chiudi` lo scrive da se': *<<la fotografia si CHIUDE sempre, senno' resterebbe aperta
+    e ### il passo dopo leggerebbe quella del passo prima>>*. ### **Era un timore scritto in un
+    commento; ora e' un presidio** (`A9`: un presidio che non impedisce non e' un presidio).
+
+    ### ⚠ E LA FINESTRA PUO' NON APRIRSI, legittimamente: SI CONTA (`A8`)
+    `_smp_apri` fotografa **solo se** `SCALA_MIN_PASSO or COES_CAUSALE`. A flag spenti la finestra
+    ### **non si apre mai**, e non e' un difetto. ### **Quindi <<dentro la finestra e assente>> si
+    CONTA** (`_g_finestra_chiusa_dentro`) **invece di fermare**: cosi' *<<la finestra non si e'
+    aperta>>* e' ### **leggibile invece che supposto**, e il sigillo lo confronta come gli altri
+    contatori. ### **Il verso duro e' l'altro, e quello FERMA: presente FUORI dalla finestra.**
+    """
+
+
+class GrandezzaNonDichiarata(RuntimeError):
+    """**La rete HA una grandezza per nodo o per arco che il REGISTRO non dichiara.**
+
+    *(`RIPIEGHI-ZERO`, generalizzazione **3-bis**, 2026-10-01 — **commit 1** del riordino.)*
+
+    ### Perche' esiste: toglie il TERZO limite che avevo scritto nella scheda
+    Il registro e' stato costruito ### **MISURANDO** una scena e una configurazione *(`nmasse 3`,
+    `sep 6.1158`, seme `11`, zero differenze su 80 booleani dal driver)*. ### **Con altri flag una
+    grandezza nuova poteva comparire e restare FUORI dal controllo in silenzio, per sempre.**
+
+    ### -> **Ora il controllo non parte da un elenco: PARTE DA CIO' CHE LA RETE HA.**
+    Scorre `vars(net)`, prende cio' che e' **array o lista** col **primo asse** `== n` oppure `== m`,
+    e ### **se il nome non e' nel registro FERMA IL RUN, nominandolo.**
+
+    ### ⚠ **E LA REGOLA NON PARTE DAL NOME NE' DALLA SINTASSI, ed e' deliberato**
+    In questa sessione ### **SEI volte** una mia regola basata sul **nome** o sulla **sintassi** ha
+    nascosto cio' che cercava: `full(n,…)` contato come *«estende»* · la condizione fusa chiamata
+    *«inizializzazione»* · `==`/`!=` messi *«fuori dal mandato»* *(sette siti)* · il ramo degli
+    `IfExp` **invertito** *(una «famiglia» inesistente)* · il filtro per **nome** che perde gli
+    **alias locali** · una lista di **nomi** al posto del **grafo** *(falsi «buchi»)*.
+    ### **La forma dell'errore e' sempre la stessa: una regola che parte dal NOME o dalla SINTASSI
+    invece che da CIO' CHE FA.** ### -> **Qui una grandezza si qualifica PER LA SUA FORMA**, che e'
+    un **fatto misurato a runtime**: nessun nome, nessuna sintassi, nessun alias.
+
+    ### ⚠ **IL LIMITE CHE RESTA, dichiarato**
+    Una grandezza con `len` **diverso** da `n` e da `m` ### **non viene vista** *(per esempio una per
+    faccia o per ciclo)*: ### **il presidio copre i DUE METRI che il registro conosce, non tutti i
+    metri possibili.** E se `n == m` i due metri sono **indistinguibili** — oggi `12802` contro
+    `471564`, e lo strumento del registro **lo controlla e lo dichiara**.
+
+    **Chi la vede, che fare:** ### **o la grandezza entra nel registro** *(con forma, tipo e, se e'
+    di STATO, la sua regola di nascita)*, ### **o si dichiara DERIVATA col suo motivo MISURATO.**
+    ### **Mai togliere il nome dal controllo in silenzio.**
+    """
+
+
 class TipoSbagliato(RuntimeError):
     """**La forma e' giusta e il TIPO no.**
 
@@ -1144,11 +1226,36 @@ REGISTRO_DERIVATE = (
     ("_sin2_vir", "arco", "la legge la trova GIA RISCRITTA (memoria_hebbiana_moto)"),
 )
 
+# LE GRANDEZZE A FINESTRA: ESISTONO SOLO DENTRO IL PASSO (commit 1 del riordino, 2026-10-01).
+#   (nome, forma, tipo, voce che APRE, voce che CHIUDE, motivo MISURATO)
+#   ⚠ NON SONO una quarta classe di FISICA: sono la QUARTA TABELLA DI UNA DICHIARAZIONE. La legge
+#     resta UNA (`_ferma_se_registro_incoerente`), e la cascata forma->tipo e' in UN POSTO SOLO
+#     (`_controlla_forma_e_tipo`): due copie sarebbero due leggi, ed e' `9-ter`.
+#   ⚠ QUESTE DUE LE HA TROVATE IL PRESIDIO `3-bis`, non io: il registro era stato costruito
+#     MISURANDO `vars(net)` alla FINE di un passo, e a fine passo queste NON ESISTONO.
+REGISTRO_FINESTRA = (
+    ("_smp_d0", ("m",), "float64", "apri", "chiudi",
+     "la fotografia di `d0` a inizio passo pieno (`SCALA_MIN_PASSO` C3 + `COES_CAUSALE` C4): la "
+     "scrive `_smp_apri`, la riallinea `_smp_chirurgia` quando la mitosi cambia gli archi, la "
+     "legge e la azzera `_smp_chiudi`. MISURATA aperta da `apri` a `memoria_hebbiana_moto`."),
+    ("_smp_d", ("m",), "float64", "apri", "chiudi",
+     "la fotografia di `d` dello stesso istante, e viaggia SEMPRE con `_smp_d0`: misurate "
+     "insieme in tutti e 27 i controlli, mai una senza l altra."),
+)
+
 # ACCESO DI DEFAULT, e la ragione va detta: NON E' UN ESPERIMENTO, E' UNA CURA APPROVATA. Un
 #   controllo spento di default non impedisce niente (`A9`). Il flag `--senza-controllo-registro`
 #   esiste PER IL SIGILLO: il criterio `C` chiede che, col controllo SPENTO, la prova a guasto
 #   torni a dare ZERO grandezze protette -- senno' il sigillo non sta misurando il controllo.
 CONTROLLO_REGISTRO = True
+
+# TUTTI i nomi che il registro dichiara, nelle sue QUATTRO tabelle. ### Si costruisce DAL
+#   REGISTRO, non si riscrive a mano: una voce aggiunta a una delle quattro entra qui PER
+#   COSTRUZIONE -- ed e' la ragione per cui la tabella nuova non ha richiesto di toccare `3-bis`.
+REGISTRO_NOMI = frozenset([x[0] for x in REGISTRO_STATO]
+                          + [x[0] for x in REGISTRO_DERIVATE]
+                          + [x[0] for x in REGISTRO_METRI]
+                          + [x[0] for x in REGISTRO_FINESTRA])
 
 
 def _forma_di(v):
@@ -1211,7 +1318,70 @@ def registro_mai_apparse(net):
     return sorted(nome for nome, _forma, _tipo in REGISTRO_STATO if nome not in apparse)
 
 
-def _ferma_se_registro_incoerente(net, dove):
+def _controlla_forma_e_tipo(nome, attesa, v, vera, tipo, dove):
+    """**La cascata forma -> tipo, IN UN POSTO SOLO** *(`9-ter`: due copie sarebbero due leggi)*.
+
+    La chiamano **due** cicli -- le grandezze di **STATO** e quelle **A FINESTRA** -- e il motivo
+    per cui e' una funzione e non un blocco ripetuto e' che ### **la seconda tabella non deve
+    aggiungere una legge**: aggiunge una **dichiarazione**.
+
+    ### L'ORDINE NON E' DECORATIVO: prima la FORMA, e il TIPO solo se la forma e' giusta
+    Se la forma e' sbagliata ### **il difetto e' quello**, e due errori insieme non aiutano chi
+    legge.
+
+    ### ⚠ IL BUCO DEL TIPO, CURATO IL 2026-09-29 (rilievo del guardiano)
+    Prima la condizione era `if suo is not None and str(suo) != tipo`, e quel `is not None` era
+    ### **UNA SECONDA ESENZIONE IMPLICITA** -- mentre il registro ne dichiara **UNA SOLA**
+    (`conc_nodi`). E' la stessa famiglia dei ripieghi chiusi da `RIPIEGHI-ZERO`: ### **una
+    condizione di ESISTENZA che copre un difetto.**
+    **MISURATO PRIMA DELLA CURA:** una grandezza tipata trasformata in **LISTA** con la forma
+    giusta veniva ### **SALTATA IN SILENZIO** -- `psi` *(una delle sei complesse)* ed `eta`. Le
+    grandezze a **due** assi erano gia' prese da `FormaSbagliata`, perche' una lista perde il
+    secondo asse: ### **il buco viveva SOLO su quelle a un asse.**
+    """
+    if vera != attesa:
+        if vera[0] < attesa[0]:
+            _ferma_registro(CacheCorta, "CORTA", nome, attesa, vera, dove)
+        if vera[0] > attesa[0]:
+            _ferma_registro(CacheLunga, "LUNGA", nome, attesa, vera, dove)
+        # ### IL PRIMO ASSE E' GIUSTO E UN ALTRO NO: non e' ne' corta ne' lunga, e' UN ALTRA
+        #   GRANDEZZA. E' il limite <<un solo asse>> che avevo dichiarato, e che ora non c e piu.
+        _ferma_registro(FormaSbagliata, "FORMA", nome, attesa, vera, dove)
+    if tipo is None:
+        return
+    suo = getattr(v, "dtype", None)
+    if suo is None:
+        _ferma_registro(TipoSbagliato, "TIPO", nome, attesa, vera, dove, atteso_tipo=tipo,
+                        tipo_vero="(nessun dtype: %s)" % type(v).__name__)
+    if str(suo) != tipo:
+        _ferma_registro(TipoSbagliato, "TIPO", nome, attesa, vera, dove, atteso_tipo=tipo,
+                        tipo_vero=str(suo))
+
+
+def _finestra_aperta(voce, apre, chiude, comp):
+    """**La finestra e' APERTA da `apre` (compresa) a `chiude` (esclusa)** -- nella composizione
+    IN USO, non in quella canonica.
+
+    ### Perche' si DERIVA dalla composizione invece di elencare le voci
+    `H-ETC-2` **permuta** l'ordine delle voci, e un elenco scritto a mano
+    *(<<aperta dopo `step`, dopo `mitosi`, ...>>)* ### **direbbe il falso appena l'ordine cambia.**
+    Due cose rendono la derivazione sicura, e sono **imposte da `valida_composizione`**:
+    `apri` e' **sempre la prima** voce, e la **coda** e' sempre `('chiudi', 'verifica_invarianti')`
+    -- ### **quindi `chiudi` esiste SEMPRE e viene SEMPRE dopo `apri`.**
+
+    `voce is None` e' ### **la PRECONDIZIONE**: il passo non e' ancora cominciato, e la finestra
+    del passo PRECEDENTE deve essere ### **gia' chiusa.** *(E' il caso che `_smp_chiudi` teme nel
+    suo commento: <<il passo dopo leggerebbe quella del passo prima>>.)*
+    """
+    if voce is None:
+        return False
+    c = list(comp) if comp else list(PASSO_COMPOSIZIONE)
+    if apre not in c or chiude not in c or voce not in c:
+        return False
+    return c.index(apre) <= c.index(voce) < c.index(chiude)
+
+
+def _ferma_se_registro_incoerente(net, dove, voce=None, comp=None):
     """**UN SOLO controllo, nello schedulatore, invece di quaranta `raise` sparsi.**
 
     ### Perche' UNICO, ed e' MISURATO (prova a guasto del 2026-09-28)
@@ -1280,35 +1450,74 @@ def _ferma_se_registro_incoerente(net, dove):
             # ### GIA VISTA PIENA E ORA NON C E PIU: e' una SPARIZIONE, ed e' un difetto.
             _ferma_registro(CacheCorta, "SPARITA", nome, attesa, vera, dove)
         if vera == attesa:
-            # ### IL TIPO, e si guarda SOLO quando la forma e' giusta: se la forma e' sbagliata
-            #   il difetto e' quello, e due errori insieme non aiutano chi legge.
-            if tipo is not None:
-                # ⚠ IL BUCO CURATO IL 2026-09-29 (rilievo del guardiano): prima la condizione era
-                #   `if suo is not None and str(suo) != tipo`, e quel `is not None` era UNA SECONDA
-                #   ESENZIONE IMPLICITA -- mentre il registro ne dichiara UNA SOLA (`conc_nodi`).
-                #   ### E' la stessa famiglia dei ripieghi appena chiusi: una condizione di
-                #   ESISTENZA che copre un difetto.
-                #   MISURATO PRIMA DELLA CURA: una grandezza tipata trasformata in LISTA con la
-                #   forma giusta veniva SALTATA IN SILENZIO -- `psi` (una delle sei complesse) ed
-                #   `eta`. Le grandezze a DUE assi erano gia' prese da `FormaSbagliata`, perche'
-                #   una lista perde il secondo asse: ### IL BUCO VIVEVA SOLO SU QUELLE A UN ASSE.
-                suo = getattr(v, "dtype", None)
-                if suo is None:
-                    _ferma_registro(TipoSbagliato, "TIPO", nome, attesa, vera, dove,
-                                    atteso_tipo=tipo,
-                                    tipo_vero="(nessun dtype: %s)" % type(v).__name__)
-                if str(suo) != tipo:
-                    _ferma_registro(TipoSbagliato, "TIPO", nome, attesa, vera, dove,
-                                    atteso_tipo=tipo, tipo_vero=str(suo))
+            _controlla_forma_e_tipo(nome, attesa, v, vera, tipo, dove)
             apparse.add(nome)
             continue
-        if vera[0] < attesa[0]:
-            _ferma_registro(CacheCorta, "CORTA", nome, attesa, vera, dove)
-        if vera[0] > attesa[0]:
-            _ferma_registro(CacheLunga, "LUNGA", nome, attesa, vera, dove)
-        # ### IL PRIMO ASSE E' GIUSTO E UN ALTRO NO: non e' ne' corta ne' lunga, e' UN ALTRA
-        #   GRANDEZZA. E' il limite <<un solo asse>> che avevo dichiarato, e che ora non c e piu.
-        _ferma_registro(FormaSbagliata, "FORMA", nome, attesa, vera, dove)
+        _controlla_forma_e_tipo(nome, attesa, v, vera, tipo, dove)
+    # ### LE GRANDEZZE A FINESTRA: fuori dalla finestra DEVONO NON ESSERCI (commit 1, 2026-10-01).
+    #   ⚠ IL VERSO DURO E' QUESTO, ed e' il difetto che `_smp_chiudi` TEME nel suo commento:
+    #     <<la fotografia si CHIUDE sempre, senno' resterebbe aperta e il passo dopo leggerebbe
+    #     quella del passo prima>>. Era un timore in un commento; ora e' un presidio (`A9`).
+    #   ⚠ IL VERSO MOLLE SI CONTA E NON FERMA (`A8`): `_smp_apri` fotografa SOLO se
+    #     `SCALA_MIN_PASSO or COES_CAUSALE`, quindi a flag spenti la finestra NON SI APRE MAI e
+    #     non e' un difetto -- ma <<non si e' aperta>> deve essere LEGGIBILE, non supposto.
+    for nome, forma, tipo, apre, chiude, _perche in REGISTRO_FINESTRA:
+        attesa = ((n if forma[0] == "n" else m),) + tuple(forma[1:])
+        v = getattr(net, nome, None)
+        vera = _forma_di(v)
+        dentro = _finestra_aperta(voce, apre, chiude, comp)
+        if vera is None or vera[0] <= 0:
+            if dentro:
+                net._g_finestra_chiusa_dentro = getattr(net, "_g_finestra_chiusa_dentro", 0) + 1
+            continue
+        if not dentro:
+            _nl = chr(10)
+            raise FinestraRestataAperta(_nl.join([
+                "[REGISTRO FINESTRA APERTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`).",
+                "  grandezza . %s" % nome,
+                "  forma ..... %s" % _scrivi_forma(vera),
+                "  la apre ... la voce `%s`" % apre,
+                "  la chiude . la voce `%s`" % chiude,
+                "  dove ...... %s" % dove,
+                "  PERCHE: questa grandezza vive SOLO DENTRO il passo, e qui il passo e FUORI",
+                "  dalla sua finestra -- quindi NON DOVREBBE ESISTERE. Se esiste, la finestra",
+                "  non si e chiusa, e LA LEGGE DEL PASSO DOPO LEGGEREBBE LA FOTOGRAFIA DEL",
+                "  PASSO PRIMA: un valore vecchio preso per nuovo, che e il ripiego silenzioso",
+                "  che `RIPIEGHI-ZERO` esiste per impedire.",
+                "  CHE FARE: cercare CHI non ha chiuso -- il ritorno anticipato di una legge e",
+                "  il primo sospetto. NON si azzera qui: azzerare sarebbe il ripiego.",
+                "  MOTIVO DICHIARATO NEL REGISTRO: %s" % _perche]))
+        _controlla_forma_e_tipo(nome, attesa, v, vera, tipo, dove)
+    # ### 3-bis: LE GRANDEZZE NON DICHIARATE. Non si parte da un elenco: si parte da CIO' CHE LA
+    #   RETE HA, cosi' la regola vale CON QUALUNQUE FLAG. E il criterio e' LA FORMA, non il nome.
+    for nome, v in list(vars(net).items()):
+        if nome in REGISTRO_NOMI:
+            continue
+        if not isinstance(v, (np.ndarray, list)):
+            continue
+        f = _forma_di(v)
+        if f is None or not f:
+            continue
+        if f[0] != n and f[0] != m:
+            continue
+        # ⚠ `n == m` renderebbe i due metri indistinguibili: si dice QUALE si e' riconosciuto, e
+        #   se coincidono si dice ANCHE QUESTO invece di sceglierne uno.
+        _quale = ("n E m (INDISTINGUIBILI: n == m == %d)" % n if n == m
+                  else ("n = %d" % n if f[0] == n else "m = %d" % m))
+        _nl = chr(10)
+        raise GrandezzaNonDichiarata(_nl.join([
+            "[REGISTRO NON DICHIARATA] IL RUN SI FERMA (`RIPIEGHI-ZERO` 3-bis).",
+            "  grandezza . %s" % nome,
+            "  forma ..... %s" % _scrivi_forma(f),
+            "  primo asse  %s" % _quale,
+            "  tipo ...... %s" % str(getattr(v, "dtype", type(v).__name__)),
+            "  dove ...... %s" % dove,
+            "  PERCHE: la rete HA una grandezza per nodo o per arco che IL REGISTRO NON DICHIARA.",
+            "  Il controllo non parte da un elenco: parte da CIO CHE LA RETE HA, cosi vale con",
+            "  QUALUNQUE FLAG -- e un flag che crea una grandezza nuova la fa COMPARIRE qui.",
+            "  CHE FARE: o la grandezza ENTRA NEL REGISTRO (forma, tipo, e se e di STATO la sua",
+            "  regola di nascita), o si DICHIARA DERIVATA CON IL SUO MOTIVO MISURATO.",
+            "  MAI togliere il nome dal controllo in silenzio."]))
     net._g_registro_controlli = getattr(net, "_g_registro_controlli", 0) + 1
 
 
@@ -1439,7 +1648,12 @@ def esegui_passo(net, composizione=None):
         #   ⚠ E COSTA POCO, ed e' la ragione per cui si puo' fare: ~30 confronti di forma per voce.
         #   ### E TOGLIE UN `if` SUL NOME DI UNA VOCE: lo schedulatore non cabla piu' `'mitosi'`,
         #     quindi la composizione resta un DATO anche piu' di prima.
-        _ferma_se_registro_incoerente(net, 'schedulatore: dopo la voce `%s`' % _nome)
+        #   ⚠ `voce` e `comp` NON sono decorativi e NON si ricavano dalla stringa `dove`: la
+        #     finestra si DERIVA dalla composizione IN USO, e un controllo che leggesse il NOME
+        #     dentro una frase sarebbe una regola che parte dalla SINTASSI -- l errore che in
+        #     questa sessione ho fatto SEI volte. Qui la voce passa come DATO.
+        _ferma_se_registro_incoerente(net, 'schedulatore: dopo la voce `%s`' % _nome,
+                                      voce=_nome, comp=comp)
     net._g_passi_eseguiti = getattr(net, '_g_passi_eseguiti', 0) + 1
     if comp != tuple(PASSO_COMPOSIZIONE):
         net._g_passi_composizione_altra = getattr(net, '_g_passi_composizione_altra', 0) + 1
