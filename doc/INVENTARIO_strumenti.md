@@ -1697,6 +1697,21 @@ tutto»)*. ### **Committati PRIMA di girare**, come chiede il mandato e il par.5
 > ### **Un bilancio su una grandezza che non si conserva nemmeno in principio non e' un bilancio:
 > e' una somma.** Il perche' sta in `DIVISIONE-AUTOCONSISTENTE:M0`.
 
+### 🔬 Il SIGILLO del COMMIT 2 del riordino *(2026-10-01)*
+
+| strumento | blob (byte) | comando che lo rigira **verbatim** | cosa misura |
+|---|---|---|---|
+| `csv/_seal_fork/_sig_decisione_separata.py` | `06209df4` | `python csv/_seal_fork/_sig_decisione_separata.py --passi=72` | **`A`** *(### **byte-identico fino al 72**, grandezze **e contatori**, contro il blob di prima)* · **`B`** *(### **il caso che deve fallire**: un arco portato **sopra la sua soglia locale** deve entrare nell'insieme che `decidi_divisione` **DICHIARA**)* · **`C`** *(### **MISURA, non prova**: quanto vale la **soglia** dove avvengono le divisioni)* |
+
+> ### ➕ **E PORTA UN PRESIDIO CHE IERI MANCAVA:** controlla che il blob *«di prima»*
+> ### **NON contenga l'ancora della cura** — ed e' il difetto `SIM-PRIMA-STANTIO`, trovato oggi
+> su un artefatto committato. ### **Da reperto a presidio nello stesso giorno.**
+
+> ### ⚠ **PERCHE' `B` NON MUOVE LA SOGLIA, come il piano chiedeva:** la soglia ### **non ha un
+> handle esterno** *(nasce da `PHI_CRIT + π` modulata dal gradiente, e toccare `PHI_CRIT` cambia
+> **tutto** il criterio)*. ### **Si porta L'ARCO sopra la SUA soglia locale**, che la decisione
+> dichiara nel `perche'`: ### **stesso effetto misurato, nessuna costante di fisica toccata.**
+
 ### 🔬 Il SIGILLO del controllo unico *(2026-09-29)*
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa fa |

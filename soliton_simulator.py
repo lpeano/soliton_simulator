@@ -6937,14 +6937,54 @@ class Rete:
         if TRACCIA_D0: _tr_pre = self.d0.copy()
         if TRACCIA_D0: self._traccia_d0('P1_dopo_rilass', _tr_pre)
         
-    def mitosi(self):
+    def decidi_divisione(self):
+        """**CHI DECIDE quali archi si dividono — SEPARATO da chi esegue.**
+
+        *(`COMMIT 2` del riordino della mitosi, 2026-10-01. ### **BYTE-IDENTICO: zero bit.**)*
+
+        ### Perche' esiste: `mitosi` intrecciava decisione ed esecuzione per ~280 righe
+        ### **E percio' <<chi decide>> non si poteva nemmeno LEGGERE.** Ora la decisione e' una
+        funzione che si legge dall'inizio alla fine, e l'esecuzione un'altra.
+
+        ### ⛔ **E NON <<LEGGE E NON SCRIVE NIENTE>>, come il piano prometteva: lo DICHIARO.**
+        Il piano *(`doc/PIANO_riordino_mitosi.md`, parte (a))* diceva
+        *«`decidi_divisione(net)` ### legge e NON SCRIVE NIENTE»*. ### **Non e' realizzabile senza
+        cambiare la fisica**, e queste sono le tre scritture che restano **dentro** — ciascuna col
+        suo motivo:
+
+        | la scrittura | perche' NON puo' uscire |
+        |---|---|
+        | ### **l'estrazione casuale** `self.rng.random(len(avv))` | il generatore ### **avanza**: spostarla cambia ### **l'ORDINE delle estrazioni**, e il run non sarebbe piu' byte-identico. *(E' esattamente cio' che il **commit 3** deve dichiarare.)* |
+        | ### **`self._rep`** *(la memoria di repulsione)* | e' una grandezza ### **di STATO col suo rilassamento esatto** `_rep + (rep − _rep)·exp(−dt/tau)`: ### **e' la MEMORIA della decisione**, non un effetto dell'esecuzione |
+        | ### **i contatori** *(`_tum_*`, `_rep_*`, `_g_m2l_*`, `negate`)* | contano ### **cio' che la decisione ha fatto** (`A8`). Spostarli li farebbe contare un'altra cosa |
+
+        ### ➜ **Quindi la promessa onesta non e' «non scrive»: e' «NON TOCCA LA FISICA DEI NODI E
+        ### DEGLI ARCHI».** Non crea, non distrugge, non muove `phi`, `d`, `d0`, `pos`, `tw`.
+        ### **Dichiararla pura sarebbe stato FALSO**, e un sigillo su una promessa falsa non prova
+        niente.
+
+        ### Che cosa restituisce
+        `(sel, perche)` — ### **`sel`** sono gli indici degli archi che si dividono;
+        ### **`perche`** e' il *«perche'»* chiesto dal piano, e ### **l'esecuzione ne usa UNA
+        chiave, `I`** *(la densita' sorgente)*: ### **misurato, non supposto** — lo strumento di
+        patch ha **verificato** che l'esecuzione non legge nessun altro locale della decisione.
+        Le altre chiavi ci sono ### **per essere LETTE** *(il criterio, non il suo esito)*, e il
+        loro essere inutilizzate e' ### **dichiarato qui invece di essere scoperto dopo.**
+
+        ### ⛔ **Soglia e `0.3` INVARIATI**, come decide il piano: la soglia ### **E' `D36`**, e
+        toccarla ### **cambia la fisica** *(acclarato per misura: con `phi` su `2π` gli archi sopra
+        soglia passano da **7047 a ZERO**)*. ### **Questo commit non la tocca.**
+        """
         # [MAX-NODI-FERMA, 2026-09-28] `self.n >= MAX_NODI` TOLTO da questa guardia. Era:
         #     if self.n >= MAX_NODI or not len(self.tw): return 0
         #   `return 0` significa ZERO NASCITE, e il run continuava come se la fisica avesse
         #   deciso di non far nascere niente: la guardia di MEMORIA diventava una LEGGE. Ora
         #   ferma lo schedulatore. `not len(self.tw)` RESTA: quella e' una rete senza archi,
         #   cioe' <<non c'e' niente da dividere>>, e non ha nulla a che vedere con la memoria.
-        if not len(self.tw): return 0
+        # ⚠ IL `perche'` SI RESTITUISCE ANCHE QUANDO NON NASCE NIENTE, ed e' il punto del
+        #   commit: una decisione LEGGIBILE deve essere leggibile SOPRATTUTTO quando dice NO.
+        #   Qui non c'e' ancora niente da dire: la rete non ha archi.
+        if not len(self.tw): return None, {}
         avv = np.abs(self.tw)
         # soglia della mitosi: 2pi classico, oppure 3pi se la torsione vive sul dominio
         # doppio (TORS_4PI). MISURATO: la torsione a doppia copertura accumula la fase
@@ -7201,7 +7241,10 @@ class Rete:
             #   portare d0 sotto la scala minima, o lo stress |d-d0|/d0 diverge (bug rientrante)
             if TRACCIA_D0: self._traccia_d0('P2_dopo_spinta', _tr_pre)
         c = np.where(nasce)[0]
-        if not len(c): return 0
+        if not len(c):
+            # nessun candidato: il criterio C'E' TUTTO, e si consegna.
+            return None, {"avv": avv, "soglia": soglia, "prob": prob, "nasce": nasce,
+                          "resp": resp, "segno": segno}
         c = c if MITMAX == 0 else c[np.argsort(avv[c])[::-1]][:MITMAX]
         I = self._rho_sorgente()   # [FASE 5] soglia mitosi su densita' SPINORIALE (rho_spin ON / |psi|^2 OFF); limite identico
         a, b = self.i[c], self.j[c]
@@ -7221,7 +7264,31 @@ class Rete:
                                    float(_dc.min()) if _dc.size else float("inf"))
             ok = ok & _conforme
         self.negate += int((~ok).sum()); sel = c[ok]
-        if not len(sel): return 0
+        if not len(sel):
+            # candidati c'erano, ma nessuno ammesso: si consegna ANCHE il filtro.
+            return None, {"avv": avv, "soglia": soglia, "prob": prob, "nasce": nasce,
+                          "resp": resp, "segno": segno, "I": I, "candidati": c,
+                          "ammessi": ok}
+        # ### IL <<PERCHE'>> CHIESTO DAL PIANO. `I` e' l'unica chiave che l'esecuzione legge
+        #   (verificato dallo strumento di patch); le altre ci sono PER ESSERE LETTE.
+        return sel, {"I": I, "avv": avv, "soglia": soglia, "prob": prob, "nasce": nasce,
+                     "resp": resp, "segno": segno, "candidati": c, "ammessi": ok}
+
+    def mitosi(self):
+        """**CHI ESEGUE la divisione** — la decisione sta in `decidi_divisione`.
+
+        *(`COMMIT 2` del riordino, 2026-10-01: ### **una RIORGANIZZAZIONE, non una cura.**
+        Byte-identico, zero bit.)*
+
+        ### ⚠ **L'ORDINE NON E' CAMBIATO DI UN PASSO:** la decisione gira **prima**, com'e' sempre
+        stato, e ### **le sue scritture avvengono nello STESSO punto del passo.** L'unica cosa che
+        cambia e' ### **dove si legge il codice.**
+        """
+        sel, perche = self.decidi_divisione()
+        if sel is None:
+            return 0
+        # ### L'UNICA chiave che l'esecuzione legge, e il patch l'ha VERIFICATO.
+        I = perche["I"]
         a, b = self.i[sel], self.j[sel]; m = self.n + np.arange(len(sel))
         D = self._wphi(self.phi[a] - self.phi[b])
         # FASE DEL FIGLIO. Di default la fase media (mitosi isotropa nell'interferenza:

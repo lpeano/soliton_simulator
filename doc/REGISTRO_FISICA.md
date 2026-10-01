@@ -1371,7 +1371,37 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 > rimando, perche' `semina` compare in entrambi i marcatori e **un lettore che arriva da
 > `fase-phi` non deve poter credere che la legge sia ancora quella.**
 
-<!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
+<!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi,decidi_divisione flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
+
+> ### 📌 **COMMIT 2 DEL RIORDINO — LA DECISIONE E' USCITA, E NON E' UNA LEGGE NUOVA** *(2026-10-01)*
+>
+> ### **`decidi_divisione` entra in QUESTA scheda, non in una sua:** e' ### **la stessa legge di
+> `mitosi`**, separata da chi la esegue. ### **Byte-identico, zero bit** — soglia e `0.3`
+> ### **invariati**, come decide il piano *(la soglia **E'** `D36`, e toccarla cambia la fisica)*.
+>
+> | | |
+> |---|---|
+> | ### **che cosa si LEGGE adesso** | `decidi_divisione(net) -> (sel, perche)`: ### **il criterio dall'inizio alla fine**, senza le 274 righe di esecuzione in mezzo |
+> | ### **l'interfaccia, MISURATA** | su **25** nomi candidati, l'esecuzione legge della decisione ### **UNO SOLO: `I`** *(la densita' sorgente)*. Verificato dallo strumento di patch, ### **saltando i commenti e gli argomenti omonimi** |
+> | ### **e il `perche'` si consegna ANCHE quando non nasce niente** | ### **il caso piu' frequente**: una decisione leggibile deve esserlo ### **soprattutto quando dice NO** |
+>
+> ### ⛔ **E NON «LEGGE E NON SCRIVE NIENTE», come il piano prometteva: LO DICHIARO QUI**
+> Tre scritture restano **dentro**, e ciascuna ha un motivo di **fisica**:
+>
+> | la scrittura | perche' non puo' uscire |
+> |---|---|
+> | ### **l'estrazione casuale** | il generatore **avanza**: spostarla cambia ### **l'ORDINE delle estrazioni**, e il run non sarebbe piu' byte-identico |
+> | ### **`self._rep`** | e' una grandezza di **STATO** col suo rilassamento esatto: ### **e' la MEMORIA della decisione**, non un effetto dell'esecuzione |
+> | **i contatori** | contano ### **cio' che la decisione ha fatto** (`A8`) |
+>
+> ### ➜ **La promessa onesta e': «NON TOCCA LA FISICA DEI NODI E DEGLI ARCHI».** Non crea, non
+> distrugge, non muove `phi`, `d`, `d0`, `pos`, `tw`. ### **Dichiararla pura sarebbe stato FALSO, e
+> un sigillo su una promessa falsa non prova niente.**
+>
+> ### 🧪 **E UN'OSSERVAZIONE NON SPIEGATA, registrata e non inseguita:** sulla scena **piccola**
+> ### **26 archi stanno SOPRA la soglia locale e `prob` vale ZERO ESATTO per tutti.** Spiega
+> *«zero nascite in 40 passi»* con qualcosa ### **piu' forte di una probabilita' bassa**, e
+> ### **va misurato a se'.**
 
 > ### ⚠ **COMMIT 0-bis — DENTRO `mitosi` CI SONO DUE RAMI, E UNO NON GIRA MAI** *(2026-10-01)*
 >
