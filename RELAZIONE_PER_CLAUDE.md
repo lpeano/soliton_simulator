@@ -8816,3 +8816,47 @@ con la funzione che il percorso vero usa.**
 
 ### ➜ **E questo CONFERMA la pretesa di `O2`:** `--regime deterministico` cambia ### **SOLO
 `SCUOTIMENTO`.** *(Blob dello strumento: `211b0b46`.)*
+
+# 🔴 **`REGIME-DUE-SISTEMI` MISURATO: non e' una deriva, sono DUE FISICHE DIVERSE** *(2026-10-01)*
+
+> ### **Luca: senza il vuoto il sistema e' STERILE. Zero nascite in 72 passi, e gli spin non si
+> ### inclinano MAI.**
+
+## 📊 **I NUMERI** *(72 passi, scena grande, seme 11; `A` = riferimento, `B` = con `--regime`)*
+
+| | `A` | `B` | |
+|---|---|---|---|
+| si separano | ### **al passo 1** | — | **16** grandezze e **15** contatori |
+| ### **nodi al 72** | ### **12812** | ### **12802** | ### **`B` NON HA AVUTO NESSUNA NASCITA** |
+| archi al 72 | 471575 | 471564 | idem |
+| ### **`_nb`** *(Bloch)* | `1.905e+04` | ### **`1.2802e+04` = `n` ESATTO** | ### **ogni Bloch e' un versore con UNA sola componente: lo spin non si e' MAI inclinato** |
+| `_psi_spinor`, `_spinor_lift` | `1.660e+04` | ### **`1.2802e+04` = `n`** | idem: spinore **banale** |
+| ### **`eta`** | `8.748e-01` | ### **`0.000000e+00`** | scarto relativo ### **`1.000`** |
+| `d` | `8.589e+05` | `8.565e+05` | relativo `2.80e-03` |
+| `d0` | `9.390e+05` | `9.350e+05` | relativo `4.35e-03` |
+
+## ➜ **CHE COSA QUESTO DECIDE, e non e' quello che mi aspettavo**
+
+### ⛔ **LA VIA ① E' ESCLUSA.** Allineare `_applica_regime` al modulo ### **cancellerebbe un
+sistema che qualcuno ha misurato** — e il braccio `O2` di `_sigillo_osservatore.py` e' un A/B a
+**variabile singola** costruito **PROPRIO** su questa differenza. ### **E la differenza non e' un
+dettaglio: e' il confine fra un sistema che genera materia e uno che non la genera.**
+### ✅ **RESTA LA VIA ②, come avevo scritto PRIMA di vedere il numero:** `--regime` non tocca piu'
+`SCUOTIMENTO`, e il sistema col vuoto spento si chiede con un flag **suo**.
+
+## ⭐ **E UN FATTO DI FISICA NUOVO, che la misura ha dato in regalo**
+
+> ### **LO SCUOTIMENTO DEL VUOTO E' L'INNESCO: senza di lui NIENTE NASCE e lo spin resta
+> ### OMOGENEO.**
+
+`_nb` somma `= n` **esatto** significa che ogni Bloch e' ### **lo stesso versore**: ### **la
+simmetria non si rompe mai.** E con `:M6` *(il vuoto immette **52 volte** cio' che immette `step`,
+positivo in **72 passi su 72**)* il quadro si chiude: ### **il vuoto non e' un disturbo da
+tollerare, e' il motore.**
+
+### ✅ **E QUESTO CONFERMA LA SOLA COSA VERA DI QUEL COMMENTO CHE HO CORRETTO AL COMMIT 0-bis**
+L'intestazione diceva, del deterministico: *«lo stress resta alto e ### **manca l'innesco della
+prima asimmetria (tau omogeneo all'inizio)**»*. ### **Era FALSA su quale regime gira, ed era VERA
+sul limite fisico** — e ora ### **il limite e' MISURATO**: `_nb = n` esatto e' *«omogeneo»* scritto
+in numeri. ### **Avevo tenuto quella frase nel commento perche' non sapevo smentirla: oggi la
+misura la CONFERMA.**

@@ -1,0 +1,70 @@
+========================================================================================================
+REGIME-DUE-SISTEMI -- di quanto differiscono i due sistemi che hanno lo STESSO NOME
+========================================================================================================
+simulatore ..... 287154f3
+questo strumento 211b0b46
+passi .......... 72
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 81
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 81.
+
+
+========================================================================================================
+I DUE SISTEMI, come li vede il modulo
+========================================================================================================
+                   A = RIFERIMENTO (senza flag) B = col --regime          
+  REGIME           deterministico             deterministico             
+  SCUOTIMENTO      True                       False                      ### DIVERSO
+  G_PH             0.003                      0.003                      
+  TAU_A            50.0                       50.0                       
+  _CALORE_INIT     0.4                        0.4                        
+
+  ### E' la TRAPPOLA `--regime`: lo STESSO nome di regime, DUE sistemi.
+
+========================================================================================================
+IL CONFRONTO, PASSO PER PASSO
+========================================================================================================
+  ### passo 1: PRIMA DIFFERENZA -- 16 grandezze, 15 contatori
+      `_nb`: A {'forma': [12802, 3], 'somma_assoluta': 18799.234809132362, 'massimo': 0.9999987260200415, 'non_finiti': 0}
+             B {'forma': [12802, 3], 'somma_assoluta': 12802.0, 'massimo': 1.0, 'non_finiti': 0}
+      `_nb_prec`: A {'forma': [12802, 3], 'somma_assoluta': 18799.234809132362, 'massimo': 0.9999987260200415, 'non_finiti': 0}
+                  B {'forma': [12802, 3], 'somma_assoluta': 12802.0, 'massimo': 1.0, 'non_finiti': 0}
+      `_psi_prec`: A {'forma': [12802], 'somma_assoluta': 19703.818877745234, 'massimo': 6.934012493274256, 'non_finiti': 0}
+                   B {'forma': [0], 'vuota': True}
+      `_psi_spinor`: A {'forma': [12802, 2], 'somma_assoluta': 16328.797671904988, 'massimo': 0.9999996815049597, 'non_finiti': 0}
+                     B {'forma': [12802, 2], 'somma_assoluta': 12802.0, 'massimo': 1.0000000000000002, 'non_finiti': 0}
+      `_spinor_lift`: A {'forma': [12802, 2], 'somma_assoluta': 16328.797671904988, 'massimo': 0.9999996815049597, 'non_finiti': 0}
+                      B {'forma': [12802, 2], 'somma_assoluta': 12802.0, 'massimo': 1.0000000000000002, 'non_finiti': 0}
+      `d`: A {'forma': [471564], 'somma_assoluta': 850840.1154318766, 'massimo': 2.399998112572086, 'non_finiti': 0}
+           B {'forma': [471564], 'somma_assoluta': 850840.1154021244, 'massimo': 2.3999981129694397, 'non_finiti': 0}
+
+========================================================================================================
+LO STATO FINALE, al passo 72
+========================================================================================================
+  n: A 12812  B 12802      archi: A 471575  B 471564
+  grandezze con somma o massimo DIVERSI: 25 su 23
+      _m             A 471575   B 471564
+      _n             A 12812   B 12802
+      _nb            somma|.| A 1.905023e+04  B 1.280200e+04   scarto relativo 3.280e-01
+      _nb_prec       somma|.| A 1.905023e+04  B 1.280200e+04   scarto relativo 3.280e-01
+      _psi_prec      somma|.| A 1.893862e+04  B 2.108050e+04   scarto relativo 1.131e-01
+      _psi_spinor    somma|.| A 1.659675e+04  B 1.280200e+04   scarto relativo 2.286e-01
+      _spinor_lift   somma|.| A 1.659675e+04  B 1.280200e+04   scarto relativo 2.286e-01
+      d              somma|.| A 8.588941e+05  B 8.564877e+05   scarto relativo 2.802e-03
+      d0             somma|.| A 9.390461e+05  B 9.349613e+05   scarto relativo 4.350e-03
+      eta            somma|.| A 8.747847e-01  B 0.000000e+00   scarto relativo 1.000e+00
+
+========================================================================================================
+CHE COSA QUESTA MISURA DECIDE, e che cosa NON decide
+========================================================================================================
+  I due sistemi si separano al passo 1.
+  ### Allora la via (1) -- allineare `_applica_regime` al modulo -- BUTTEREBBE VIA
+      UN SISTEMA CHE QUALCUNO HA MISURATO: il braccio `O2` di
+      `_sigillo_osservatore.py` e' un A/B a variabile singola costruito PROPRIO su
+      questa differenza. ### Resta la via (2): rinominare cio' che produce.
+  ⚠ E I REFERTI PRODOTTI SUL SISTEMA `B` SI MARCANO, NON SI RISCRIVONO (par.9):
+      csv/_test_fork/_sigillo_osservatore.py (braccio O2) e
+      csv/_test_fork/_osserva_vuoto.py (flag --regime-det).
