@@ -102,13 +102,34 @@ def specchia(net):
 
 
 def confronta(a, b, nomi, segno=1.0):
-    """Le differenze fra due reti su un elenco di grandezze. `segno = -1` per le antisimmetriche."""
+    """Le differenze fra due reti su un elenco di grandezze. `segno = -1` per le antisimmetriche.
+
+    ### ⛔ **DUE DIFETTI MIEI, curati il 2026-10-01, e li ha trovati IL CONTROLLO ZERO di questo
+    stesso strumento** *(che percio' ha fatto il suo lavoro: ha RIFIUTATO la misura)*.
+
+    | | |
+    |---|---|
+    | ### **<<assente in UNO dei due>>** | la condizione era `x is None or y is None`, che e' vera anche quando ### **mancano a ENTRAMBI** — e cache pigre come `psi_spin`, `rho_spin`, `_nb` ### **non esistono prima del primo passo**, in nessuna delle due reti. ### **Assente in entrambi non e' una differenza: e' uno STATO COERENTE** |
+    | ### **i NON FINITI** | `eta` contiene `inf` *(misurati 12802)*, e ### **`inf − inf` da' `NaN`**, che non e' mai `== 0`: la grandezza risultava **DIVERSA** senza che un solo elemento differisse. ### **E' la stessa trappola di `nan_to_num` dopo la sottrazione**, gia' incontrata in questa sessione |
+
+    ### ➜ **La cura: si confrontano gli ELEMENTI, non la distanza.** `x == y` tratta `inf == inf`
+    come uguale e `+inf` contro `−inf` come diverso *(che e' giusto)*, e ### **`NaN` contro `NaN` si
+    dichiara UGUALE** — perche' qui la domanda e' *«e' lo stesso stato?»*, non *«quanto distano?»*.
+    La **distanza** si calcola **solo sugli elementi finiti**, e i non finiti ### **si CONTANO e si
+    riportano** invece di inquinare il massimo.
+    """
     fuori = []
     for nome in nomi:
         x = getattr(a, nome, None)
         y = getattr(b, nome, None)
+        if x is None and y is None:
+            # ### assente in ENTRAMBI: non e' una differenza, e' uno stato coerente.
+            fuori.append({"grandezza": nome, "esito": "ASSENTE IN ENTRAMBI",
+                          "elementi_diversi": 0})
+            continue
         if x is None or y is None:
-            fuori.append({"grandezza": nome, "esito": "ASSENTE in uno dei due"})
+            fuori.append({"grandezza": nome, "esito": "ASSENTE IN UNO SOLO",
+                          "dove": ("a" if x is None else "b")})
             continue
         x = np.asarray(x)
         y = np.asarray(y) * segno
@@ -117,14 +138,31 @@ def confronta(a, b, nomi, segno=1.0):
                           "forma_a": list(x.shape), "forma_b": list(y.shape)})
             continue
         with np.errstate(invalid="ignore", over="ignore"):
-            d = np.abs(x.astype(complex) - y.astype(complex)) if np.iscomplexobj(x) \
-                else np.abs(x.astype(float) - y.astype(float))
-            scala = max(float(np.max(np.abs(x))) if x.size else 0.0, 1e-30)
-            dm = float(np.max(d)) if d.size else 0.0
-            quante = int(np.count_nonzero(d > 0.0))
-        fuori.append({"grandezza": nome, "esito": ("IDENTICA" if dm == 0.0 else "DIVERSA"),
-                      "scostamento_max": dm, "scostamento_relativo": dm / scala,
-                      "elementi_diversi": quante, "elementi": int(d.size)})
+            if np.iscomplexobj(x) or np.iscomplexobj(y):
+                xx = x.astype(complex)
+                yy = y.astype(complex)
+            else:
+                xx = x.astype(float)
+                yy = y.astype(float)
+            # ### UGUAGLIANZA ELEMENTO PER ELEMENTO, con `NaN` contro `NaN` dichiarato UGUALE.
+            uguali = (xx == yy) | (np.isnan(xx) & np.isnan(yy))
+            diversi = ~uguali
+            quante = int(np.count_nonzero(diversi))
+            # la DISTANZA si misura SOLO dove entrambi sono finiti: altrove non ha senso.
+            finiti = np.isfinite(xx) & np.isfinite(yy)
+            d = np.abs(xx - yy)
+            dfin = d[finiti & diversi]
+            dm = float(np.max(dfin)) if dfin.size else 0.0
+            base = np.abs(xx[np.isfinite(xx)])
+            scala = max(float(np.max(base)) if base.size else 0.0, 1e-30)
+            non_finiti = int(np.count_nonzero(~finiti))
+            diversi_non_finiti = int(np.count_nonzero(diversi & ~finiti))
+        fuori.append({"grandezza": nome, "esito": ("IDENTICA" if quante == 0 else "DIVERSA"),
+                      "scostamento_max_sui_finiti": dm,
+                      "scostamento_relativo": dm / scala,
+                      "elementi_diversi": quante, "elementi": int(d.size),
+                      "elementi_non_finiti": non_finiti,
+                      "elementi_diversi_non_finiti": diversi_non_finiti})
     return fuori
 
 
@@ -157,7 +195,11 @@ def principale():
 
     # --- le due scene partono IDENTICHE, e si VERIFICA invece di crederlo
     pari = confronta(A, B, PER_NODO)
-    diverse_subito = [x for x in pari if x.get("esito") not in ("IDENTICA",)]
+    # ### <<ASSENTE IN ENTRAMBI>> E' COERENTE e non fa fallire il controllo zero: le cache
+    #   pigre (`psi_spin`, `rho_spin`, `_nb`) NON ESISTONO prima del primo passo, in nessuna
+    #   delle due reti. ### Cio' che fa fallire e' <<assente in UNO SOLO>> o <<DIVERSA>>.
+    diverse_subito = [x for x in pari
+                      if x.get("esito") not in ("IDENTICA", "ASSENTE IN ENTRAMBI")]
     stampa("CONTROLLO ZERO: le due scene partono identiche?")
     stampa("  grandezze per nodo confrontate: %d   DIVERSE: %d"
            % (len(pari), len(diverse_subito)))
@@ -189,11 +231,11 @@ def principale():
     stampa("=" * 104)
     nodi = confronta(A, B, PER_NODO)
     nd = [x for x in nodi if x.get("esito") == "DIVERSA"]
-    stampa("  %-16s %-10s %14s %14s %12s" % ("grandezza", "esito", "scost. max", "relativo",
+    stampa("  %-16s %-19s %14s %14s %12s" % ("grandezza", "esito", "scost.max fin.", "relativo",
                                              "elem. div."))
     for x in nodi:
-        stampa("  %-16s %-10s %14.4e %14.4e %12s"
-               % (x["grandezza"], x.get("esito", "?"), x.get("scostamento_max", 0.0),
+        stampa("  %-16s %-19s %14.4e %14.4e %12s"
+               % (x["grandezza"], x.get("esito", "?"), x.get("scostamento_max_sui_finiti", 0.0),
                   x.get("scostamento_relativo", 0.0), x.get("elementi_diversi", "-")))
     stampa("")
     stampa("  ### GRANDEZZE PER NODO DIVERSE: %d su %d" % (len(nd), len(nodi)))
@@ -215,8 +257,8 @@ def principale():
                        ("ANTISIMMETRICHE (riportate con -1)", anti)):
         stampa("  %s:" % et)
         for x in gruppo:
-            stampa("      %-8s %-10s scost.max %12.4e  relativo %12.4e  elem.div %s"
-                   % (x["grandezza"], x.get("esito", "?"), x.get("scostamento_max", 0.0),
+            stampa("      %-8s %-19s scost.max(fin) %12.4e  relativo %12.4e  elem.div %s"
+                   % (x["grandezza"], x.get("esito", "?"), x.get("scostamento_max_sui_finiti", 0.0),
                       x.get("scostamento_relativo", 0.0), x.get("elementi_diversi", "-")))
 
     # --- e il primo sospetto, nominato: il calcio della mitosi

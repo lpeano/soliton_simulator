@@ -8488,3 +8488,26 @@ chiedi: sono `_sigillo_osservatore.py` *(braccio `O2`)* e `_osserva_vuoto.py` *(
 
 ### **PROSSIMO: i run dei tre strumenti, e poi il piano.** Gli strumenti sono committati **prima**,
 come chiede il mandato e il par.5.
+
+# ⛔ **`DIVISIONE-AUTOCONSISTENTE:M2` si e' RIFIUTATA di girare, e aveva ragione** *(2026-10-01)*
+
+Il **controllo zero** dello strumento — *«le due scene partono identiche?»* — ### **ha rifiutato la
+misura**, e i due difetti erano ### **MIEI, dello strumento**, non della fisica:
+
+| | |
+|---|---|
+| ### **<<assente in UNO dei due>>** | la condizione era `x is None or y is None`, vera anche quando ### **mancano a ENTRAMBI**: `psi_spin`, `rho_spin`, `_nb` sono **cache pigre** e ### **non esistono prima del primo passo**, in nessuna delle due reti |
+| ### **i NON FINITI** | `eta` contiene `inf` *(12802, gia' misurati)*, e ### **`inf − inf` da' `NaN`**, che non e' mai `== 0`: `eta` risultava **DIVERSA** ### **senza che un solo elemento differisse** |
+
+### ➜ **La cura: si confrontano gli ELEMENTI, non la distanza.** `x == y` tratta `inf == inf` come
+uguale e `+inf` contro `−inf` come diverso *(che e' giusto)*, e ### **`NaN` contro `NaN` si
+dichiara UGUALE** — perche' la domanda e' *«e' lo stesso stato?»*, non *«quanto distano?»*. La
+distanza si calcola ### **solo sugli elementi finiti**, e i non finiti ### **si CONTANO.**
+
+### ⚠ **E LA TRAPPOLA DEI NON FINITI E' LA SECONDA VOLTA IN QUESTA SESSIONE** *(la prima:
+`nan_to_num` **dopo** la sottrazione, sotto `seterr(invalid='raise')`)*. ### **Stessa forma, altro
+file** — e segna che <<confronta due stati>> nel repo ### **merita UNA funzione sola**, non una
+per strumento. ### **Lo scrivo come fronte nel piano, non lo faccio adesso.**
+
+**La parte buona: il controllo zero esisteva, ed e' lui che ha fermato tutto.** Un confronto
+partito su scene non uguali avrebbe dato un verdetto ### **inventato.**
