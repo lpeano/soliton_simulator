@@ -9168,3 +9168,58 @@ garanzia e' che il sigillo lo riscriva, cioe' ### **dipende dal fatto che qualcu
 |---|---|
 | `_guasto_ripieghi.json` | il referto che avevo ### **rigirato sul blob del commit 1** *(`5d29334b`)* e ### **mai committato**: la versione committata era di `62d67675`. ### **E il sigillo LEGGE quel file e ne verifica il blob** — quindi da un clone fresco avrebbe detto *«referto stantio»* |
 | `doc/INDICE_ID_ESCLUSI.tsv` | l'esclusione di ### **`M7`**, aggiunta e ### **mai committata**: un commit che citasse `M7` sarebbe stato ### **rifiutato da `H-INDICE`** |
+
+# ✅ **IL SIGILLO DEL COMMIT 2 PASSA — e il suo braccio di MISURA mi smentisce di nuovo** *(2026-10-01)*
+
+## ✅ **IL VERDETTO**
+
+| braccio | esito |
+|---|---|
+| ### **`A`** | ### **PASSA: 72 passi, ZERO differenze** — grandezze **e contatori** — contro il blob di prima |
+| ### **`B`** | ### **PASSA**: l'arco `287100` *(`|tw| = 9.0611`, soglia locale `9.4248`)* portato a `soglia·1.000001` ### **cambia lato**, e i sopra-soglia passano da **191** a **192**: ### **`+1 esatto`** |
+| **`C`** | **MISURA**, non entra nel verdetto |
+
+### ➜ **La separazione decisione/esecuzione e' una RIORGANIZZAZIONE: provato al bit.**
+
+## ⛔⛔ **E IL BRACCIO `C` FALSIFICA LA MIA CORREZIONE DI STAMATTINA. Seconda volta sullo stesso numero.**
+
+| la misura | il valore |
+|---|---|
+| ### **la soglia** | ### **`9.424778` — min = mediana = max**, cioe' ### **`3π` ESATTO, su TUTTI i 471575 archi** |
+| in avvolgimenti | ### **`1.5000` .. `1.5000`** |
+| archi **sopra** soglia | **191** su 471575, con `|tw|` fino a ### **`29.1158`** *(= `4.63` avvolgimenti)* |
+| `prob` massima | `2.847e-03` *(e sulla scena piccola era ZERO: ecco perche' la' non nasce niente)* |
+
+### ⛔ **QUINDI «LA BANDA MODULATA SCENDE A 6.597» E' FALSO: LA BANDA NON ESISTE.**
+`soglia = soglia0·(1 − 0.3·tanh(grad_modula))` e' uguale a `soglia0` ### **esattamente**, per
+**ogni** arco ### ➜ **`tanh(grad_modula) = 0` ➜ `grad_modula = 0`**, e `grad_modula` e'
+### **`|r[i] − r[j]|`, il gradiente del TEMPO PROPRIO.**
+### ➜ **Il tempo proprio e' UNIFORME, e la modulazione del `0.3` NON AGISCE.**
+
+### ⚠ **E QUESTO TOCCA IL BERSAGLIO DEL PROGETTO, non e' un dettaglio**
+Il commento di quella riga dice che la modulazione fa ### **«nascere piu' materia dal lato dove il
+tempo rallenta, quindi il baricentro trasla lungo la geodetica — PRINCIPIO DI EQUIVALENZA»**.
+### **Misurato: `grad_modula = 0`, quindi quel meccanismo NON STA GIRANDO.**
+### ⚠ **MA NON DICO «ramo morto»**, e la ragione e' precisa: la scena e' ### **`MASSE-COERENTI`,
+simmetrica per costruzione.** ### **Un tempo proprio uniforme potrebbe essere una proprieta' della
+SCENA, non della legge.** ### **Per dirlo serve una scena ASIMMETRICA**, e non l'ho misurata.
+
+## ⛔ **E RESTA UNA CONTRADDIZIONE CHE NON SO SCIOGLIERE, e NON scrivo una quarta spiegazione**
+
+| | |
+|---|---|
+| la soglia e' | ### **`9.4248`**, e sotto di essa `prob = 0` **per costruzione** *(`ecc` clippato, `satura(0) = 0`)* |
+| quindi un arco diviso deve avere | ### **`|tw| >= 9.4248`** |
+| ma `d_S_tw` di un evento a **una** divisione misura | ### **`−7.19`** |
+
+### ➜ **`−7.19` e' INCOMPATIBILE con una soglia di `9.42`**, quindi ### **una delle mie
+assunzioni su `d_S_tw` e' ancora sbagliata** — la piu' probabile: che i due archi figli nascano a
+`tw = 0` e che nessun altro `tw` cambi dentro la voce.
+### 🛑 **NON SCRIVO UNA QUARTA VERSIONE.** Tre le ho scritte e tre erano sbagliate *(«una carica
+che svanisce» · «un arco a `3.79` sotto `2π`» · «la banda modulata scende a `6.597`»)*.
+### **La prossima frase su questo numero nasce da UNA misura diretta, o non si scrive.**
+
+### 📐 **LA MISURA CHE LA SCIOGLIE, dichiarata e NON fatta**
+### **Registrare `|tw|` degli archi in `sel` e `Σ|tw|` prima e dopo, AL PASSO DI UNA DIVISIONE.**
+E' un braccio in piu' di `_misure_calore.py`, ### **e non l'ho girato**: lo dico invece di
+dedurlo. *(La voce e' `TW-DIVISIONE-INCOGNITA`.)*

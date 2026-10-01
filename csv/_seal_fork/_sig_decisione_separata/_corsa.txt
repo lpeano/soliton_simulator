@@ -1,0 +1,48 @@
+========================================================================================================
+IL SIGILLO DEL COMMIT 2: la DECISIONE separata dall'ESECUZIONE
+========================================================================================================
+simulatore OGGI ..... 3ddc56d9
+`decidi_divisione` introdotto da 2f129ba2ce9d
+blob PRIMA .......... 287154f3   (estratto IN BINARIO, par.7)
+occorrenze di `decidi_divisione` nel blob di PRIMA: 0   (giusto)
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 81
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 81.
+
+
+========================================================================================================
+BRACCIO A -- BYTE-IDENTICO fino al passo 72, grandezze E CONTATORI
+========================================================================================================
+  n = 12802 / 12802   archi = 471564 / 471564
+  ### A PASSA: 72 passi, ZERO differenze -- grandezze E CONTATORI.
+
+========================================================================================================
+BRACCIO C (MISURA, non prova) -- LA SOGLIA DOVE AVVENGONO LE DIVISIONI
+========================================================================================================
+  soglia: min 9.424778  mediana 9.424778  max 9.424778   (in avvolgimenti: 1.5000 .. 1.5000)
+  archi SOPRA la soglia locale: 191 su 471575   |tw| max 29.115757
+  prob: max 2.847348e-03   fra i SOPRA-soglia: max 0.002847348272697836
+  i |tw| piu' alti fra i sopra-soglia: ['27.2857', '27.3639', '27.4866', '27.5133', '28.2014', '28.2345', '28.6048', '28.9607', '29.0178', '29.1158']
+  ### QUESTO E' IL NUMERO CHE MI SERVE: se la soglia qui vale ~9.42, un arco con
+      |tw| fra 6.98 e 8.35 e' SOTTO soglia, e la mia spiegazione committata
+      (<<la banda modulata scende a 6.597>>) NON REGGE su questa scena.
+
+========================================================================================================
+BRACCIO B -- IL CASO CHE DEVE FALLIRE: un arco portato SOPRA la sua soglia locale
+========================================================================================================
+  arco 287100: |tw| 9.061115, soglia locale 9.424778
+  sopra-soglia PRIMA: False   DOPO averlo portato a soglia*1.000001: True
+  quanti sopra soglia: 191 -> 192   (atteso: +1 esatto)
+  ### B PASSA: l'arco cambia lato, e `decidi_divisione` LO DICHIARA nel suo `perche'`.
+
+========================================================================================================
+IL VERDETTO
+========================================================================================================
+  braccio A ... PASSA
+  braccio B ... PASSA
+  braccio C ... MISURA (non entra nel verdetto)
+
+### IL SIGILLO PASSA.

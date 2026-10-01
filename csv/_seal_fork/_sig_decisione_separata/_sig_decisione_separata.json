@@ -1,0 +1,53 @@
+{
+ "blob_sim_sha1_byte": "3ddc56d947d91069c89ae476f89afcadcb1ae4e6",
+ "blob_prima": "287154f343c8bf27424a7d856dbd2a13ad7b1b34",
+ "introduce": "2f129ba2ce9de7af78c04b5048efa3647dfa5392",
+ "occorrenze_ancora_nel_prima": 0,
+ "passi": 72,
+ "A": {
+  "passa": true,
+  "passi_diversi": 0,
+  "primo": null
+ },
+ "B": {
+  "passa": true,
+  "dati": {
+   "arco": 287100,
+   "tw_prima": 9.061114576526784,
+   "soglia_locale": 9.42477796076938,
+   "sopra_prima": false,
+   "sopra_dopo": true,
+   "quanti_sopra_prima": 191,
+   "quanti_sopra_dopo": 192
+  }
+ },
+ "C_misura": {
+  "soglia_min": 9.42477796076938,
+  "soglia_mediana": 9.42477796076938,
+  "soglia_max": 9.42477796076938,
+  "soglia_in_avvolgimenti": [
+   1.5,
+   1.5
+  ],
+  "archi_sopra_soglia": 191,
+  "archi": 471575,
+  "avv_max": 29.11575715921739,
+  "prob_max": 0.002847348272697836,
+  "prob_max_sopra": 0.002847348272697836,
+  "avv_dei_sopra": [
+   27.28574540887921,
+   27.363865620466044,
+   27.486577614445142,
+   27.513344413653357,
+   28.201405554248954,
+   28.234488359230784,
+   28.604792387726373,
+   28.960653397246766,
+   29.017815092759413,
+   29.11575715921739
+  ],
+  "PHI_CRIT": 6.283185307179586,
+  "sel": null
+ },
+ "passa": true
+}
