@@ -4964,6 +4964,23 @@ vista piena e' un ERRORE** — che e' il caso che la regola di Luca vuole impedi
 
 # ⭐ **STELLA POLARE: LE LEGGI SONO SIMMETRICHE, GLI STATI SCELGONO** *(Luca, 2026-09-29)*
 
+> ### ✅ **E IL 2026-10-01 LA STELLA POLARE HA LA SUA PRIMA APPLICAZIONE: `FRAZIONE-DIVISIONE`.**
+> **Domanda di fisica di Luca:** *«perche' per forza il punto medio?»* — e ### **il punto medio NON
+> E' DERIVATO**: e' la scelta simmetrica, ### **ma ignora che i due estremi hanno STATI DIVERSI.**
+> ### ➜ **La forma giusta e' `t = f(stato_a, stato_b)` con `f(a,b) = 1 − f(b,a)`:** scambiando gli
+> estremi il figlio va nella posizione **speculare**, e ### **il punto medio e' solo il caso in cui
+> gli stati sono UGUALI.** ### **La legge resta simmetrica; sceglie lo STATO.**
+> **La voce e' `FRAZIONE-DIVISIONE`**, i criteri sono in `doc/PIANO_riordino_mitosi.md`, e
+> ### **quale grandezza decide `t` lo decide Luca.**
+
+> ### ✅ **DUE DECISIONI DI LUCA DEL 2026-10-01, e questa e' la loro REGISTRAZIONE**
+> *(par.4: un'approvazione in chat non basta — e la prima volta non l'avevo scritta)*
+>
+> | | |
+> |---|---|
+> | ### **i QUATTRO EVENTI di nascita** | `semina` · `divisione` · `Schwinger` · `allaccio`: ### **APPROVATI.** Sono la base del registro delle regole di nascita *(`doc/REGOLE_nascita.tsv`)*, e senza di loro le sei *«incoerenze»* di quel registro ### **tornerebbero a essere difetti** |
+> | ### **la TERZA VIA, il VELENO** | ### **APPROVATA nella forma RAFFINATA**: controllo di finitezza ### **PER GRANDEZZA**, con le esenzioni ### **dichiarate nel registro** *(`eta`: `inf` per il vuoto DATO)* — ### **lo stesso schema del TIPO.** ### **«Derivata sporca» e «`peq` da calibrare» diventano UN SOLO meccanismo con UN SOLO nome** *(`peq` nasce `NaN` «da calibrare» a `:3693` e a `:7165`, e `step` la calibra: il sistema lo fa **gia'**)*. ### **Prezzo ACCETTATO:** al passo della nascita il sigillo confronta al byte ### **lo STATO, non le derivate** |
+
 > ### ⚠ **E' un PRINCIPIO, non ancora una legge del codice:** non porta un marcatore `SCHEDA`,
 > perche' oggi **non governa nessuna funzione modificata**. ### **Il marcatore arriva col codice**,
 > quando la strada **(ii)** si cabla. La voce e' **`GEOM-SENZA-VERSO`**, il documento e'

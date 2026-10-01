@@ -8075,3 +8075,69 @@ evento unico · **4** derivate sporche · ### **5 `perc_geom`** *(salito: dipend
 dice ### **«Nessun codice. STOP dopo»**. La correzione e' byte-inerte ### **ma e' comunque una riga
 del simulatore**, e infilarla in un commit dichiarato senza codice sarebbe ### **la scorciatoia che i
 presidi di questo repo esistono per impedire.** ➜ **E' il commit 0, e si fa per primo.**
+
+---
+
+# ⭐ **IL PIANO DIVENTA DEFINITIVO: la FRAZIONE `t`, e due decisioni NEL REPO** *(2026-10-01)*
+
+`doc/PIANO_riordino_mitosi.md` **`d62a7fcd`** *(523 righe)*, voce nuova **`FRAZIONE-DIVISIONE`**
+nell'indice, e le due decisioni in `doc/REGISTRO_FISICA.md`.
+### **Nessuna riga di codice del simulatore:** `62d67675`.
+
+## ⭐ **La tua domanda cambia la parte (b), e aveva una risposta migliore della mia**
+
+**«Perche' per forza il punto medio?»** — e ### **il punto medio NON E' DERIVATO: e' la toppa ③.**
+E' la scelta **simmetrica**, ### **ma ignora che i due estremi hanno STATI DIVERSI** *(torsione,
+densita', `psi`, tempo proprio)*.
+
+> ### **`t = f(stato_a, stato_b)` con `f(a,b) = 1 − f(b,a)`:** scambiando gli estremi il figlio va
+> nella posizione **speculare**, e ### **il punto medio e' solo il caso in cui gli stati sono
+> UGUALI.**
+
+### ➜ **E' la stella polare applicata: la LEGGE resta simmetrica, sceglie lo STATO.**
+### **E' l'opposto esatto di `MITOSI_DIR`**, che metteva un **coefficiente scelto** davanti a una
+`tanh` **scelta**, con `0.5 *` davanti — ### **tre numeri a mano.**
+
+**Come la struttura si prepara** *(commit `6a`)*: ### **lo STESSO `t` per `pos_figlio` E per `d`/`d0`
+dei due nuovi archi** — oggi sono **due formule indipendenti** che per caso dicono entrambe «meta'»,
+### **e domani devono dire LA STESSA COSA, o il figlio nasce in un posto e gli archi ne descrivono un
+altro.** `t = 0.5` **dichiarato in un solo posto**, Schwinger compreso: ### **da quattro formule a un
+valore dichiarato, e byte-identico.**
+
+## ✅ **L'ordine: il vecchio commit 6 mescolava due cose, e hai ragione**
+
+### **`6a` riorganizzazione byte-identica** *(`t` esplicito)* · ### **`6b` cambiamento di fisica**
+*(`MITOSI_2LAM` legge)*. ### **Mescolati, un fallimento non si sa a chi attribuirlo** — il difetto
+che il par.3 chiama *«un interruttore alla volta»*.
+**E `6b` in forma GENERALE:** `t·d >= LAM` **e** `(1−t)·d >= LAM` — ### **con `t = 0.5` identica a
+`d >= 2·LAM`, ma VERA quando `t` cambiera'**. Scriverla in forma speciale vorrebbe dire ### **fidarsi
+della memoria** invece della forma.
+**E al `6b` si misura anche cosa succede DOPO agli archi rifiutati:** ### **restano sopra soglia per
+sempre, la torsione si scarica altrove, o la dinamica li allunga finche' si dividono?** — tre esiti,
+tutti **misurabili**.
+
+## ✅ **Le due decisioni sono ORA NEL REPO, con la data**
+
+| | |
+|---|---|
+| ### **i QUATTRO EVENTI** | **APPROVATI**, e ### **la registrazione e' nel registro fisica e nel piano** — non in chat. **Il paragrafo del mio errore RESTA**: *«il difetto non si cancella, si annota»* |
+| ### **il VELENO** | **APPROVATO** nella forma raffinata. ### **«Derivata sporca» e «`peq` da calibrare» diventano UN SOLO meccanismo con UN SOLO nome.** Prezzo accettato: al passo della nascita il sigillo del commit 4 confronta al byte ### **lo STATO, non le derivate** — ### **l'unico criterio del piano che si restringe, e per DECISIONE, non per mia comodita'** |
+
+## ⭐ **`FRAZIONE-DIVISIONE`: la voce e' aperta, coi criteri fissati ORA**
+
+**simmetria** `f(a,b) = 1 − f(b,a)` · **entrambi i pezzi `>= LAM`** · ### **nessun coefficiente
+scelto a mano** · **quale grandezza decide `t`: decide Luca**.
+### **`MITOSI_DIR` si archivia nella FORMA, ma la sua IDEA e' citata li'** come **primo tentativo**:
+*«il figlio nasce spostato verso l'estremo con piu' torsione»* ### **E' `t = f(stato_a, stato_b)` con
+la torsione come grandezza.**
+
+### 📐 **E il primo passo e' una MISURA, non la scelta di `t`**
+### **Quali leggi leggono `pos` e quali solo `d`** — cioe' ### **se la posizione del figlio e' FISICA
+o solo DISEGNO.** Se fosse solo disegno, `t` conterebbe **solo** per `d`/`d0`, e la decisione su `t`
+sarebbe ### **una decisione sulla LUNGHEZZA, non sulla posizione.**
+### ⚠ **E c'e' un indizio gia' MISURATO:** `SCHW-CORTI` dice che lo Schwinger prende `dd` **da
+`pos`** e il **39.06 %** delle coppie accorcia il grafo ⇒ ### **`pos` entra NELLA METRICA almeno in
+un punto.** ### ➜ **La stessa misura risponde a DUE voci**, e conviene farle insieme.
+
+**PROSSIMO:** il **commit 0** *(il commento di `MITOSI_DIR`)*, da solo; poi il **commit 1**
+*(registro dichiarato)* col suo sigillo.

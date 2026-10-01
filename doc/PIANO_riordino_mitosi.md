@@ -68,6 +68,41 @@ per impedire.** ➜ **E' il COMMIT 0 dell'ordine qui sotto**, e si fa **per prim
 | **`tw` dei nuovi** | ### **`0`** *(`zz = zeros(len(sel))`)* |
 | **lo Schwinger** | ### **AGGIUNGE** due archi verso `k` **senza togliere** `(aa,bb)`, e ### **`dd` viene da `pos`** |
 
+## ⭐ **LA DOMANDA DI FISICA DI LUCA: «perche' per forza il punto medio?»** *(2026-10-01)*
+
+> ### **Il punto medio NON E' DERIVATO: e' la toppa ③.**
+> E' la scelta **simmetrica**, ### **ma ignora che i due estremi hanno STATI DIVERSI** — torsione,
+> densita', `psi`, tempo proprio.
+
+### ➜ **Per la STELLA POLARE** *(«le leggi sono simmetriche, gli stati scelgono»)* **la forma giusta
+e' una FRAZIONE:**
+
+```
+t = f(stato_a, stato_b)        con        f(a, b) = 1 - f(b, a)
+```
+
+### **Scambiando gli estremi il figlio va nella posizione SPECULARE**, e ### **il punto medio e' solo
+il caso in cui gli stati sono UGUALI.** ### ➜ **Non e' una legge che preferisce un lato: e' una legge
+simmetrica che lascia scegliere allo stato** — esattamente la forma che la stella polare chiede, e
+### **l'opposto di `MITOSI_DIR`**, che metteva un **coefficiente scelto** davanti a una `tanh`.
+
+### ⚠ **E non si decide ORA quale grandezza scelga `t`:** e' una ### **decisione di fisica di Luca**,
+in una ### **voce a se' (`FRAZIONE-DIVISIONE`)**. ### **Qui si prepara SOLO la STRUTTURA.**
+
+## ✅ **Come la struttura si prepara** *(commit 6a)*
+
+| | |
+|---|---|
+| **1** | il figlio sta a ### **`t·d` da `a`** e a ### **`(1−t)·d` da `b`** |
+| ### **2** | ### **LO STESSO `t`** vale per **`pos_figlio`** *(dove nasce)* **e per `d`/`d0` dei due nuovi archi** *(quanto sono lunghi)*. ### **Oggi sono DUE formule indipendenti che per caso dicono entrambe «meta'»: domani devono dire LA STESSA COSA, o il figlio nasce in un posto e gli archi ne descrivono un altro** |
+| **3** | per ora ### **`t = 0.5` per tutti, DICHIARATO IN UN SOLO POSTO.** ### **Il punto medio smette di essere una FORMULA SPARSA e diventa un VALORE DICHIARATO** |
+| **4** | ### **lo stesso vale per lo SCHWINGER**, dove il figlio nasce **anche li'** nel punto medio |
+
+> ### 📌 **Perche' questo e' un riordino e non una cura:** con `t = 0.5` ### **il valore non cambia di
+> un bit.** Cambia **dove vive**: da **quattro formule** *(`pos` e `d` per la divisione, `pos` e `dd`
+> per lo Schwinger)* a ### **una costante dichiarata** — e **da li'** una decisione di fisica potra'
+> cambiarla ### **in un posto solo.**
+
 ## ⛔ **Il confine che NON tiene, e lo dico invece di assorbirlo**
 
 > ### **`M2` ① e ②, `U2` e `MITOSI_2LAM` NON si possono separare da questa parte.**
@@ -115,9 +150,12 @@ decisione**, non mitigato.
 
 | | |
 |---|---|
-| ### **la LEGGE, non un interruttore** | la decisione di Luca e' **`MITOSI_2LAM` ON come LEGGE**: quindi ### **il ramo `else` ESCE dal sorgente**, come in `CURA2-STRUTTURALE` — e ### **va ARCHIVIATO COPIATO**, non cancellato *(`RAMI-OFF-CURA2`)* |
+| ### **6a: `t` esplicito, `t = 0.5`** | ### **BYTE-IDENTICO, contatori compresi.** E' una **riorganizzazione**: lo stesso numero, in un posto solo. ### **Caso che DEVE fallire: una copia con `t = 0.5 + 1e-9` deve cambiare `pos` E `d` dei nati, e il sigillo deve vederlo** *(se non lo vede, non sta guardando la struttura)* |
+| ### **6b: la LEGGE, non un interruttore** | `MITOSI_2LAM` diventa **legge**: ### **il ramo `else` ESCE dal sorgente**, come in `CURA2-STRUTTURALE` — e ### **va ARCHIVIATO COPIATO**, non cancellato *(`RAMI-OFF-CURA2`)* |
+| ### **6b: e la forma e' GENERALE** | ### **non `d >= 2·LAM`, ma `t·d >= LAM` E `(1−t)·d >= LAM`.** Con `t = 0.5` ### **e' la stessa cosa**, ma ### **resta vera quando `t` cambiera'** — ed e' la ragione per cui `6a` viene **prima** |
 | ### **cosa deve restare IDENTICO** | ### **tutto cio' che NON riguarda gli archi rifiutati.** Gli archi con `d >= 2·LAM` si dividono **come prima**, ed e' su loro che il byte-identico vale |
-| ### **cosa CAMBIA, ed e' atteso** | gli archi con `d < 2·LAM` ### **NON si dividono piu'**: si misura ### **quante divisioni sono RIFIUTATE** *(il contatore `_g_m2l_negati` esiste gia')* e ### **di quanto cala `n` al passo 72**. ### **Si riporta, non si giudica** |
+| ### **cosa CAMBIA, ed e' atteso** | gli archi che non passano ### **NON si dividono piu'**: si misura ### **quante divisioni sono RIFIUTATE** *(il contatore `_g_m2l_negati` esiste gia')* e ### **di quanto cala `n` al passo 72**. ### **Si riporta, non si giudica** |
+| ### ⭐ **e si misura COSA SUCCEDE DOPO** *(richiesta di Luca)* | ### **gli archi rifiutati che fine fanno?** Tre esiti possibili, e sono **misurabili**: ### **① restano sopra soglia PER SEMPRE** *(un serbatoio di torsione che non si scarica)* · ### **② la torsione si scarica ALTROVE** *(e allora la mitosi si sposta, non si ferma)* · ### **③ la dinamica li ALLUNGA finche' si dividono** *(e allora e' solo un ritardo)*. ### **Si misura: per gli archi rifiutati, `\|tw\|` e `d` nel tempo fino al 72, e quanti finiscono per dividersi** |
 | ### ✅ **e una cosa SMETTE di esistere** | ### **la fabbricazione di lunghezza di `M2` ②**: niente sotto `2·LAM` si divide ⇒ `d/2 >= LAM` ⇒ ### **`_nasce` non ripara, e `d/2 + d/2 = d` esattamente** |
 | ### **il caso che DEVE fallire** | una copia in cui `pos_figlio` e' spostato di `1e-9`: il sigillo ### **deve vederlo**. E una in cui `tw` dei nuovi archi e' `1e-12` invece di `0`: ### **deve vederlo** |
 
@@ -149,11 +187,20 @@ nascita(net, evento, genitori, quante) -> None
 | | |
 |---|---|
 | **la tabella** | ### **`REGOLE_nascita.tsv` (32 regole) e' il punto di partenza**, ed e' gia' **verificata per ancora** |
-| ### **i QUATTRO eventi** | `semina` · `divisione` · `Schwinger` · `allaccio` — ### ⚠ **PROPOSTA DA APPROVARE, e la correzione e' mia** *(vedi sotto)* |
+| ### **i QUATTRO eventi** | `semina` · `divisione` · `Schwinger` · `allaccio` — ### ✅ **APPROVATI DA LUCA il 2026-10-01**, e ### **questa riga E' la registrazione** *(vedi sotto)* |
 | **le regole** | `eredita` · `media` · `zero` · `estrazione nuova` · ### **`eredita INVERTITA`** *(la carica alla Schwinger)* · ### **`derivata dalla definizione`** *(`perc_geom`)* |
 | ### **il presidio** | ### **una grandezza del registro che NON compare nella tabella dell'evento ferma il run**: *«regola di nascita non dichiarata per `<nome>` all'evento `<evento>`»*. ### **E' lo stesso disegno del controllo unico, spostato alla nascita** |
 
-### ⛔ **I QUATTRO EVENTI: ho scritto «decisi da Luca» e NEL REPO NON C'E'**
+### ✅ **I QUATTRO EVENTI SONO APPROVATI, e ORA la decisione E' NEL REPO** *(2026-10-01)*
+
+> ### **DECISIONE DI LUCA, 2026-10-01: i quattro eventi di nascita — `semina`, `divisione`,
+> `Schwinger`, `allaccio` — sono APPROVATI.**
+
+### ⚠ **E la registrazione e' QUESTA RIGA, non la chat:** l'approvazione era arrivata il **2026-09-29**
+e ### **io non l'avevo scritta nel repo**. Il paragrafo qui sotto resta ### **perche' il difetto non
+si cancella: si annota** *(par.8)*.
+
+### ⛔ **Com'era andata: ho scritto «decisi da Luca» e NEL REPO NON C'ERA**
 
 Il guardiano ha chiesto di **citare il commit o la frase**. ### **L'ho cercata e non c'e'.**
 Nel repo esiste ### **solo la mia PROPOSTA** — `doc/PIANO_controllo_unico.md:94` *(«Proposta: il
@@ -293,8 +340,19 @@ distingue da cio' che e' legittimo.**
 | ### ➜ **la convergenza** | ### **«derivata sporca» e «`peq` da calibrare» sono LA STESSA COSA.** La generalizzazione 4 non aggiunge una legge: ### **da un NOME a cio' che il sistema fa gia' in due punti** — e per `9-ter` questo conta |
 | ### ⚠ **il prezzo, dichiarato** | il veleno ### **rende NON BYTE-IDENTICO** il passo della nascita, perche' una derivata che prima conteneva un valore vecchio ora contiene `NaN`. ### **Non e' una riorganizzazione: e' un cambio di stato** — e il suo sigillo **non puo'** chiedere byte-identico sulle derivate |
 
-### 🛑 **E la decisione di Luca su (d): SOSPESA finche' non c'e' la misura.**
-### **La misura ora c'e', ed e' qui sopra.** ### **Decide Luca.**
+## ✅ **LA DECISIONE DI LUCA su (d): il VELENO e' APPROVATO** *(2026-10-01)*
+
+> ### **DECISIONE DI LUCA, 2026-10-01: la terza via — il VELENO — e' APPROVATA nella FORMA
+> RAFFINATA.**
+
+| | |
+|---|---|
+| **la forma** | controllo di finitezza ### **PER GRANDEZZA**, con le esenzioni ### **DICHIARATE NEL REGISTRO** *(`eta`: `inf` per il vuoto)* — ### **lo stesso schema del TIPO** |
+| ### **e un solo MECCANISMO, un solo NOME** | ### **«derivata sporca» e «`peq` da calibrare» diventano LA STESSA COSA.** Non due convenzioni che si assomigliano: **una** |
+| ### **il prezzo, ACCETTATO** | al passo della nascita il sigillo del **commit 4** confronta al byte ### **lo STATO, NON le derivate**. ### **E' il solo criterio del piano che si restringe, ed e' una DECISIONE, non un allentamento mio** |
+
+### ➜ **E questa riga e' la REGISTRAZIONE della decisione** *(par.4: un'approvazione in chat non
+basta)*.
 
 ### **Criteri, fissati PRIMA dei numeri**
 
@@ -364,19 +422,27 @@ distingue da cio' che e' legittimo.**
 | **2** | ### **decisione SEPARATA** *(a)* | `decidi_divisione` legge e non scrive. ### **Soglia e `0.3` INVARIATI** | ### **byte-identico, zero bit** + la soglia portata **appena sotto il `|tw|` piu' alto fra gli archi oggi sotto soglia** ⇒ ### **almeno un arco NOTO deve passare**, e si confronta ### **la LISTA arco per arco** |
 | **3** | ### **nascita come EVENTO UNICO** *(c)* | i due `_eredita_*` **assorbiti**, la tabella delle 32 regole, il presidio della **regola non dichiarata** | byte-identico 72, **contatori compresi** + i **tre** casi che devono fallire |
 | **4** | ### **derivate SPORCHE** *(d, generalizzazione 4)* | la marca, e `DerivataSporca` | byte-identico + **riscrittura rinviata** ⇒ deve nominare la derivata |
-| **5** | ### **`perc_geom` del nato `= −1`** | ### **FUORI dal riordino, gia' deciso.** ### ⬆ **SPOSTATO QUI dal fondo** *(correzione del guardiano)*: ### **dipende SOLO dal punto unico di nascita (commit 3), NON dalla struttura** — quindi **non deve aspettare la decisione su `M2`** | byte-identico **tranne** `perc_geom` dei nati, e il **frame-drag** misurato |
-| **6** | ### **STRUTTURA: `MITOSI_2LAM` ON come LEGGE** *(b)* | ### **DECISO da Luca**: si **rifiuta** la divisione sotto `2·LAM`. ### **E il caso «fabbricazione di lunghezza» smette di esistere** | ### **non byte-identico, ed e' ATTESO**: si **misura** quante divisioni sono **rifiutate** e **di quanto cala `n`** al passo 72 — ### **si riporta, non si giudica** |
-| **(7)** | *(fuori dal riordino, in coda)* | `D36` *(soglia adimensionale)* · il **`0.3`** · i **pavimenti** e `massa_critica_collasso` · `MITMAX` **errore** · `MITOSI_DIR` **archiviato** | ognuna ### **voce a se', con la sua misura** |
+| **5** | ### **`perc_geom` del nato `= −1`** | ### **FUORI dal riordino, gia' deciso.** Dipende **solo** dal punto unico di nascita *(commit 3)*, ### **non dalla struttura** | byte-identico **tranne** `perc_geom` dei nati, e il **frame-drag** misurato |
+| ### **6a** | ### **STRUTTURA: la FRAZIONE `t` esplicita, `t = 0.5`** | ### **RIORGANIZZAZIONE**: da **quattro formule** a ### **un valore dichiarato in un posto solo**. Lo stesso `t` per `pos` e per `d`/`d0`, ### **Schwinger compreso** | ### **BYTE-IDENTICO, contatori compresi** + ### **`t = 0.5 + 1e-9` deve cambiare `pos` E `d` dei nati** |
+| ### **6b** | ### **`MITOSI_2LAM` come LEGGE, in forma GENERALE** | `t·d >= LAM` **e** `(1−t)·d >= LAM`. Il ramo `else` **esce** e si **archivia copiato** | ### **NON byte-identico, ATTESO**: divisioni **rifiutate**, calo di `n` al 72, ### **e che fine fanno gli archi rifiutati** |
+| **(7)** | *(fuori dal riordino, in coda)* | `D36` · il **`0.3`** · i **pavimenti** e `massa_critica_collasso` · `MITMAX` **errore** · ### **`FRAZIONE-DIVISIONE`** *(e `MITOSI_DIR` e' **archiviato** al commit 0)* | ognuna ### **voce a se', con la sua misura** |
 
 ### ⚠ **Perche' `1` viene PRIMA di tutto**
 Il **registro dichiarato** e' l'unico pezzo che ### **rende impossibile dimenticare una grandezza
 mentre si sposta la nascita.** Farlo **dopo** vorrebbe dire riordinare ### **senza la rete di
 sicurezza**, ed e' esattamente l'errore che la storia racconta **sette volte**.
 
-### ⚠ **Perche' la STRUTTURA viene ULTIMA**
-E' ### **la sola che tocca la fisica** *(`n` cambia)*. Tutto cio' che la precede e'
-### **byte-identico** *(tranne `perc_geom`, che cambia solo quella grandezza e lo dichiara)*, quindi
-### **se il commit 6 fallisce si sa che e' lui**, e non uno dei riordini.
+### ⚠ **Perche' la STRUTTURA e' DIVISA in `6a` e `6b`** *(correzione del guardiano)*
+Il vecchio commit 6 ### **mescolava una RIORGANIZZAZIONE byte-identica** *(`t` esplicito)*
+### **con un CAMBIAMENTO DI FISICA** *(`MITOSI_2LAM` legge)*. ### **Mescolati, un fallimento non si
+sa a chi attribuirlo** — ed e' il difetto che il par.3 chiama *«un interruttore alla volta»*.
+### ➜ **`6a` byte-identico, `6b` misurato: se `6b` sposta un numero, si sa che e' la LEGGE.**
+
+### ⚠ **E perche' `6b` e' scritta in forma GENERALE**
+`t·d >= LAM` **e** `(1−t)·d >= LAM` ### **con `t = 0.5` e' identica a `d >= 2·LAM`**, quindi **non
+cambia niente oggi**. ### **Ma resta VERA quando `t` cambiera'**, e scriverla in forma speciale
+vorrebbe dire ### **dover ricordare di generalizzarla il giorno della decisione su `t`** — cioe'
+**fidarsi della memoria** invece della forma.
 
 ### ✅ **E perche' `perc_geom` e' SALITO al 5** *(correzione del guardiano)*
 Avevo messo `perc_geom` **in fondo**, dopo la struttura. ### **E' sbagliato: dipende solo dal PUNTO
@@ -402,6 +468,48 @@ decisione che non lo riguarda.**
 |---|---|
 | ### **`M2`/`U2`/`MITOSI_2LAM`** | ### **sono la parte (b)**, non una voce accanto. **Il commit 5 non si puo' scrivere senza la decisione di Luca** |
 | ### **`D36`/la soglia `3π`** | ### **e' la parte (a)**. Il piano la lascia **invariata** e lo **dichiara**, ### **ma la decisione (a)-1 resta aperta e va risposta** |
+
+---
+
+# ⭐ **LA VOCE NUOVA: `FRAZIONE-DIVISIONE`** *(fuori dal riordino, aperta il 2026-10-01)*
+
+> ### **Quale grandezza decide `t`? LO DECIDE LUCA.** Qui stanno **solo i criteri**, ### **fissati
+> ORA, prima di qualunque numero.**
+
+| | il criterio |
+|---|---|
+| ### **1 — simmetria** | ### **`f(a,b) = 1 − f(b,a)`.** Scambiando gli estremi il figlio va nella posizione **speculare**. ### **E' la stella polare applicata: la legge e' simmetrica, lo STATO scegle** |
+| ### **2 — entrambi i pezzi `>= LAM`** | `t·d >= LAM` **e** `(1−t)·d >= LAM`. ### **Senza questo, una `t` vicina a `0` o a `1` rimetterebbe `M2` ① dalla finestra** |
+| ### **3 — nessun coefficiente scelto a mano** | ### **`A1`.** E' il criterio che **archivia `MITOSI_DIR` nella FORMA** |
+| **4 — quale grandezza** | ### **decide Luca.** I candidati che lo stato offre: `tw` *(torsione)*, la **densita'**, `psi`, il **tempo proprio** — ### **e non ne propongo uno: la misura viene prima** |
+
+### ⚠ **`MITOSI_DIR` si archivia nella FORMA, ma la sua IDEA e' il primo tentativo di questa voce**
+
+```
+bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))        # :6981
+```
+
+### ➜ **L'IDEA e' giusta e va citata qui:** *«il figlio nasce spostato verso l'estremo con piu'
+torsione»* ### **e' esattamente `t = f(stato_a, stato_b)` con la torsione come grandezza.**
+### ⛔ **La FORMA no:** un ### **coefficiente scelto** *(`MITOSI_DIR`)* davanti a una `tanh`
+### **scelta**, e per di piu' con `0.5 *` davanti — ### **tre numeri a mano**.
+### **Si archivia la forma, si conserva l'idea.** *(Ed e' la ragione per cui `MITOSI_DIR` esce al
+commit 0 ma la sua riga **vive qui**.)*
+
+## 📐 **IL PRIMO PASSO E' UNA MISURA, e non e' quella che sembra**
+
+> ### **Quali leggi leggono `pos` e quali solo `d`?** Cioe': ### **la posizione del figlio e' FISICA
+> o solo DISEGNO?**
+
+| | |
+|---|---|
+| **perche' e' la prima** | se `pos` fosse ### **solo disegno**, `t` conterebbe **solo** per `d`/`d0` — e la decisione su `t` sarebbe ### **una decisione sulla LUNGHEZZA, non sulla posizione** |
+| ### **e c'e' un indizio MISURATO** | `SCHW-CORTI`: lo Schwinger prende `dd` ### **da `pos`**, e il **39.06 %** delle coppie accorcia il grafo. ### **Quindi `pos` entra NELLA METRICA almeno in un punto** — ed e' il residuo `A3-DISEGNO` |
+| **come si misura** | lo **stesso strumento** della sorveglianza: si intercetta la **lettura** di `pos` e si elenca ### **quali funzioni la leggono**, separando `osservatore`/`disegno` dalle **leggi** *(da `_PASSO_TIPI`, come gia' fatto)* |
+
+### ⚠ **E un collegamento da non perdere:** questa misura ### **risponde anche a `SCHW-CORTI`**
+*(«`dd` da `d` o da `pos`?»)*. ### **Le due voci guardano LO STESSO fatto da due lati**, e conviene
+misurarle insieme.
 
 ---
 
