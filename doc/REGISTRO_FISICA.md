@@ -5123,6 +5123,78 @@ vista piena e' un ERRORE** — che e' il caso che la regola di Luca vuole impedi
 
 ---
 
+# ⭐⭐ **LA VISIONE DI LUCA SULLA NASCITA E SULLA CONSERVAZIONE** *(Luca, 2026-10-01)*
+
+> ### **(a) LA NASCITA DI UN NODO HA TRE ESITI: SPAZIO · MATERIA · MATERIA E ANTIMATERIA.**
+> ### **`peq` — la densita' di equilibrio del vuoto — E' IL RIFERIMENTO CHE LI SEPARA.**
+>
+> ### **(b) SI CONSERVA ESATTAMENTE SOLO LA CARICA**, cioe' materia contro antimateria.
+>
+> ### **(c) L'ENERGIA GLOBALE NON SI CONSERVA.** Il modello deve poter simulare uno spaziotempo
+> ### **che si espande** — e in relativita' generale, in espansione, ### **non c'e' conservazione
+> ### globale dell'energia.** ### **Resta il bilancio LOCALE: ogni variazione ha una CAUSA
+> ### DICHIARATA.**
+
+### 📌 **PERCHE' QUESTE TRE RIGHE CAMBIANO IL PIANO DEL CALORE**
+Il piano era costruito su **due bilanci paralleli** — avvolgimento **ed** energia — ### **e li
+trattava come due conservazioni.** La visione dice che ### **non sono simmetrici:**
+
+| | |
+|---|---|
+| ### **la CARICA** | ### **si conserva ESATTAMENTE.** E' l'unica legge di conservazione **stretta** del modello |
+| ### **l'AVVOLGIMENTO `tw`** | ### **NON e' la carica e NON si conserva.** La sua perdita alla divisione ### **non e' un difetto da curare: e' una LEGGE da scrivere** |
+| ### **l'ENERGIA** | ### **non si conserva globalmente, e non DEVE.** Il bilancio che si chiede e' ### **locale**: *«ogni variazione ha una causa dichiarata»* |
+
+> ### ⚠ **E QUESTO RIBALTA UNA MIA CONCLUSIONE, non la raffina.** Avevo scritto che
+> `DIVISIONE-AUTOCONSISTENTE:M1` mostrava ### **«una carica che svanisce, evento per evento»** —
+> e ### **`tw` NON E' UNA CARICA.** La misura resta *(`1.17` avvolgimenti per arco diviso, con
+> `PHI_CRIT = 2π` esatto)*, ### **ma la sua LETTURA era sbagliata: non e' una violazione, e' un
+> PREZZO NON SCRITTO.**
+
+---
+
+## ⭐ **DECISIONE 1 DI LUCA: «LA TORSIONE PAGA LO SPAZIO»** *(2026-10-01)*
+
+> ### **L'avvolgimento che sparisce alla divisione E' IL PREZZO DEL NODO NUOVO.**
+> ### **Si riscrive come LEGGE DICHIARATA, col bilancio scritto — quanto avvolgimento per quanto
+> ### spazio — invece di restare una perdita nascosta.**
+
+| | |
+|---|---|
+| **che cosa NON e'** | ### **non e' una carica che svanisce** *(era la mia lettura, ed era sbagliata)* |
+| **che cosa e'** | ### **una CONVERSIONE**: avvolgimento -> spazio. E una conversione ### **si scrive**, con il suo tasso |
+| ### **cosa la rende una legge e non una toppa** | ### **il bilancio DEVE essere scritto:** quanto `tw` per quanto spazio. ### **Senza il tasso non e' una legge, e' ancora una perdita** |
+| **il numero misurato da cui parte** | `1.17` avvolgimenti per arco diviso *(min `0.60`, max `1.33`)*, ### **e sono il dato di partenza del tasso, non il tasso** |
+
+## ⭐ **CRITERIO 8 DI LUCA: LA DIVISIONE CREA SOLO SPAZIO NEUTRO** *(2026-10-01)*
+
+> ### **La divisione da sola crea SOLO SPAZIO NEUTRO. La materia CARICA nasce solo A COPPIE:
+> ### due nodi nuovi, uno `+1` e uno `−1`, LOCALMENTE — cosi' la carica totale NON CAMBIA.**
+
+### ⚠ **E OGGI IL CODICE NON FA COSI', ed e' misurato** *(`:G4`)*: lo **Schwinger** crea ### **UN
+SOLO nodo** *(l'antinodo, accanto a un genitore **che c'era gia'**)*, quindi ### **la somma della
+carica cambia di `±1`** — e il commento del codice dice l'opposto *(«la coppia e' NEUTRA e
+`N(+1) − N(−1)` NON cambia»)*. ### **Il criterio 8 e' la forma che quel pezzo deve prendere.**
+
+## ⭐ **DECISIONE 5 DI LUCA: `MEM-HEBB-VERSO` BLOCCA IL RUN BASE** *(2026-10-01)*
+
+| | |
+|---|---|
+| ### **blocca** | ### **SI'.** Finche' non e' curato, ### **ogni misura nuova nasce su un sistema che dipende dall'ordine di memorizzazione degli archi** |
+| **quando** | ### **la prossima modifica di FISICA dopo i commit 2 e 3 del riordino**, col suo piano e il suo sigillo |
+| ### **come** | ### **UNA funzione chiamata per i DUE estremi** *(coi ruoli scambiati)*, e ### **`np.add.at` al posto dell'assegnazione con indici ripetuti** |
+| **e il piano `xy`** | `MEM-HEBB-PIANO-XY` ### **si MISURA prima di curarlo** |
+
+## 🕐 **LE DECISIONI 2, 3 E 4 RESTANO APERTE** *(e aspettano una misura, non una mia proposta)*
+
+| | aspetta |
+|---|---|
+| **2** — il Nose-Hoover si sostituisce o si affianca | ### **`:M7`** *(la potenza del solo `−xi·phivel`)* |
+| **3** — quale grandezza decide `t` | le misure del passo 2 |
+| **4** — il ruolo dello scuotimento | ### **`:M7`**, e `SCUOT-INNESCO` ha gia' ristretto il campo: ### **se il vuoto e' l'INNESCO, il calore non puo' sostituirlo** |
+
+---
+
 # ⭐ **STELLA POLARE: LE LEGGI SONO SIMMETRICHE, GLI STATI SCELGONO** *(Luca, 2026-09-29)*
 
 > ### ✅ **E IL 2026-10-01 LA STELLA POLARE HA LA SUA PRIMA APPLICAZIONE: `FRAZIONE-DIVISIONE`.**

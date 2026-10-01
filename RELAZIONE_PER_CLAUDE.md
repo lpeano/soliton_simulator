@@ -8926,3 +8926,37 @@ con indici ripetuti)*.
 ### **ma una mia <<verifica>> era sbagliata, e la annoto invece di riscriverla** (par.8).
 ### ⚠ **E la lezione e' precisa: «l'ho verificato» vale solo se dico QUALE RIGA ho letto.** Le due
 `dir_*` stanno in due blocchi diversi della stessa funzione, e il nome non le distingue.
+
+# ⭐⭐ **LA TUA VISIONE E' NEL REPO, con la data di oggi** *(2026-10-01)*
+
+**Registrata in `doc/REGISTRO_FISICA.md`, accanto alla STELLA POLARE**, e ### **non all'ordine (3)
+del mandato ma SUBITO** — perche' ### **una decisione tua registrata in ritardo e' l'errore che ho
+gia' fatto con i quattro eventi**, e par.4 dice che un'approvazione in chat **non basta**.
+
+## ⛔ **E LA PRIMA COSA CHE FA E' RIBALTARE UNA MIA CONCLUSIONE**
+
+Avevo scritto che `DIVISIONE-AUTOCONSISTENTE:M1` mostrava ### **«una carica che svanisce, evento
+per evento»**. ### **`tw` NON E' LA CARICA.** La misura resta — `1.17` avvolgimenti per arco
+diviso, `PHI_CRIT = 2π` esatto — ### **ma la sua LETTURA era sbagliata: non e' una violazione, e'
+un PREZZO NON SCRITTO.**
+### ➜ **«La torsione paga lo spazio»**: l'avvolgimento che sparisce e' ### **il prezzo del nodo
+nuovo**, e diventa una **legge dichiarata col suo bilancio** *(quanto avvolgimento per quanto
+spazio)*. ### **E il numero misurato e' il DATO DI PARTENZA del tasso, non il tasso.**
+
+## ✅ **E UNA TUA RIGA RISOLVE UN PROBLEMA CHE AVEVO DICHIARATO IRRISOLTO**
+
+Nel piano avevo scritto: *«senza un «fuori» il sistema puo' SOLO PERDERE»*, e l'avevo messo come
+### **il rischio vero** della temperatura per nodo.
+### ➜ **La tua (c) lo scioglie:** ### **l'energia globale NON DEVE conservarsi** — uno spaziotempo
+che si espande non la conserva. ### **Quindi «il sistema puo' solo perdere» non e' un difetto da
+evitare: e' una POSSIBILITA' LEGITTIMA**, e cio' che resta da chiedere e' ### **il bilancio
+LOCALE: ogni variazione ha una causa dichiarata.**
+### **Era il mio ostacolo piu' grosso, e non era un ostacolo: era un'assunzione mia.**
+
+## 📋 **LE ALTRE DECISIONI, registrate**
+
+| | |
+|---|---|
+| ### **criterio 8** | la divisione crea ### **solo SPAZIO NEUTRO**; la materia carica nasce ### **solo a COPPIE** *(due nodi nuovi, `+1` e `−1`, localmente)*. ⚠ **E oggi il codice non fa cosi'**: `:G4` misura che lo Schwinger crea ### **UN SOLO nodo** |
+| ### **decisione 5** | ### **`MEM-HEBB-VERSO` BLOCCA il run base.** Si cura ### **dopo i commit 2 e 3**, con una funzione chiamata per i due estremi e ### **`np.add.at`** al posto dell'assegnazione con indici ripetuti. `MEM-HEBB-PIANO-XY` ### **si misura prima** |
+| **2, 3, 4** | ### **APERTE**, e aspettano `:M7` e le misure del passo 2 |
