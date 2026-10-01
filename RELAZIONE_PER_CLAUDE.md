@@ -8342,3 +8342,30 @@ non ha provenienza.** Lo correggo nella voce quando il sigillo ri-girato produce
 
 ### **PROSSIMO: il sigillo ri-girato per intero**, dal referto di un solo run — ### **non ricucito
 da due.** Il run fallito resta committato in `csv/_seal_fork/_sig_controllo_unico/_run_2026-10-01_FALLITO.txt`.
+
+# ✅ **IL SIGILLO DEL COMMIT 1 PASSA: tutti e SETTE i bracci, da UN SOLO run** *(2026-10-01)*
+
+| braccio | numeri *(generati dal `json`, non ricopiati)* |
+|---|---|
+| **`A`** | **30 su 30** di STATO a posto, mancano **NESSUNA** |
+| **`D`** | **7** per arco, non a posto **NESSUNA** |
+| ### **`B`** | **72** passi, ### **0** passi con differenze contro `f7541d03`, su ### **179 contatori confrontati** |
+| **`C`** | protette a controllo **SPENTO**: **0** *(270 chiamate spente contate)* |
+| **`E`** | `n` da **12802** a **12812** *(### **10 nati**)*, **648** controlli, **42** assenze contate |
+| **`F`** | **30 su 30** viste piene, mai apparse **NESSUNA** |
+| ### **`G`** | `pippo` e `pluto` fermano con ### **`GrandezzaNonDichiarata`**, la finestra con ### **`FinestraRestataAperta`** |
+| **ripiego silenzioso residuo** | ### **NESSUNO** |
+
+### ⛔ **E IL RUN HA SCOPERTO UNA SECONDA FRASE SCADUTA, nell'inventario**
+La voce del sigillo portava: *«residuo DICHIARATO e non aggiustato: `_sin2_vir`, ### l'unico
+ripiego silenzioso che resta»*. ### **Quel commit c'e' stato** *(`0053aca`)*, e ### **il referto
+di oggi dice `NESSUNO`.** ### **La nota e' rimasta a dire il falso finche' un numero GENERATO non
+l'ha smentita** — ### **stessa famiglia del commento di `MITOSI_DIR` e di quelli sul REGIME: una
+frase scritta quando era vera, e mai piu' riletta.** Corretta nello stesso commit.
+
+> ### 📌 **E vale la pena dire che cosa ha trovato questo giro, in tutto: QUATTRO frasi false**
+> `MITOSI_DIR` *(commit 0)* · il docstring di `_smp_apri` *(`SMP-APRI-COMMENTO`, in coda)* · i
+> commenti sul **REGIME** *(commit 0-bis, il prossimo)* · e ora ### **due numeri**: lo `0
+> differenze` che non veniva dal suo blob, e il residuo `_sin2_vir` gia' chiuso.
+> ### **Non le ho trovate LEGGENDO: le ha trovate un PRESIDIO o un NUMERO GENERATO.** E' la
+> ragione per cui `L-NUMERI` esiste.

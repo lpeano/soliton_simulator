@@ -1663,7 +1663,7 @@ lei stessa** un evento dopo)*, ### **e per entrambe la dichiarazione ESISTE GIA'
 
 | strumento | blob (byte) | comando che lo rigira **verbatim** | cosa fa |
 |---|---|---|---|
-| `csv/_seal_fork/_sig_controllo_unico.py` | `37ea1f49` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
+| `csv/_seal_fork/_sig_controllo_unico.py` | `e915cbad` | `python csv/_seal_fork/_sig_controllo_unico.py --passi=72` | i bracci **`B`** *(byte-identico fino al 72 contro il blob PRE-CONTROLLO)*, **`C`** *(il caso che deve fallire: col controllo SPENTO i guasti tornano scoperti)* ed **`E`** *(un run sano CON NASCITE arriva al 72 senza un solo errore del registro)*, piu' il **riepilogo** che cita `A` e `D` dal referto committato di `_guasto_ripieghi.py` |
 
 **I cinque criteri sono di Luca e sono fissati PRIMA del codice** *(piano `f684353f`, par.5)*.
 
@@ -1691,22 +1691,38 @@ lei stessa** un evento dopo)*, ### **e per entrambe la dichiarazione ESISTE GIA'
 > **E nello stesso giro ho aggiunto `dichiara_configurazione` (`P5`)** — l'omissione che avevo
 > dichiarato per `_guasto_ripieghi.py`, ### **e qui non la ripeto.**
 
-**ESITO, dal referto `_sig_controllo_unico.json`:** ### **IL SIGILLO PASSA, tutti e cinque i
-bracci.**
+**ESITO, dal referto `_sig_controllo_unico.json`** *(un SOLO run, 2026-10-01, blob del
+simulatore `5d29334b`)*: ### **IL SIGILLO PASSA, tutti e SETTE i bracci.**
 
 | braccio | numeri |
 |---|---|
 | **`A`** | **30 su 30** di STATO a posto, mancano **NESSUNA** |
 | **`D`** | **7** per arco, non a posto **NESSUNA** |
-| ### **`B`** | **72** passi, ### **0** passi con differenze contro `f7541d03` |
-| ### **`C`** | protette a controllo **SPENTO**: ### **0** *(chiamate spente contate: 60)* |
-| **`E`** | `n` da **12802** a **12812**, ### **10 nati**, 144 controlli, 14 assenze contate |
+| ### **`B`** | **72** passi, ### **0** passi con differenze contro `f7541d03` — ### **179 contatori confrontati** |
+| ### **`C`** | protette a controllo **SPENTO**: ### **0** *(chiamate spente contate: 270)* |
+| **`E`** | `n` da **12802** a **12812** *(### **10 nati**)*, controlli **648**, assenze contate **42** |
+| **`F`** | **30 su 30** viste piene, mai apparse: **NESSUNA** |
+| ### **`G`** | `pippo` ### **FERMA con GrandezzaNonDichiarata** · `pluto` ### **FERMA con GrandezzaNonDichiarata** · finestra ### **FERMA con FinestraRestataAperta** |
+| **ripiego silenzioso residuo** | ### **NESSUNO** |
 
-> ### 📌 **Residuo DICHIARATO e non aggiustato:** `_sin2_vir` — una **DERIVATA per arco**, quindi
-> **fuori dal criterio `A`**, ma ### **l'unico ripiego silenzioso che resta**. E' una
-> **condizione fusa** *(`is None` **or** lunghezza)* dove il caso `None` e' legittimo e
-> derivato (`A1`) e il caso **lunghezza** fa sparire il **freno anisotropo** in silenzio per
-> tutta la rete. ### **Va nel commit delle guardie, separato.**
+> ### ⛔ **E LA VOCE DI PRIMA PORTAVA UN NUMERO STANTIO, che questo run ha scoperto**
+> Diceva *«`B`: 72 passi, **0** passi con differenze»* accanto al blob `a13a385c`, ### **che
+> CONTIENE la clausola dei `set`** di `_contatori` *(entrata il 2026-09-29 alle 15:07 con
+> `bd7c4ae`, mentre `_g_registro_apparse` esisteva dalle 14:28 con `4036ad9`)*. ### **Ma il blob
+> PRE-CONTROLLO non puo' avere `_g_registro_apparse`: non ha il registro.** Quindi un run di `B`
+> su quel blob del sigillo ### **avrebbe segnalato la differenza, PER COSTRUZIONE** — e dunque
+> ### **il numero e il blob di quella voce non venivano dallo stesso run.**
+> ### ➜ **`L-NUMERI`: un numero ricopiato non ha provenienza, uno generato ce l'ha.** Questa
+> tabella e' **generata dal `json`**, non ricopiata.
+
+> ### ✅ **IL RESIDUO `_sin2_vir` E' CHIUSO, e questa nota era SCADUTA** *(corretta il 2026-10-01)*
+> **Diceva:** *«l'unico ripiego silenzioso che resta ... va nel commit delle guardie, separato»*.
+> ### **Quel commit c'e' stato** *(`0053aca`: la condizione fusa SEPARATA — `None` legittimo e
+> **contato**, lunghezza sbagliata che **spara**)*, e ### **il referto di oggi dice `ripiego
+> silenzioso residuo: NESSUNO`.**
+> ### ⚠ **E la nota e' rimasta li' a dire il falso fino a che un numero GENERATO non l'ha
+> smentita** — che e' la stessa famiglia del commento di `MITOSI_DIR` e di quelli sul REGIME:
+> ### **una frase scritta quando era vera, e mai piu' riletta.**
 
 > ### 📌 **BRACCIO `F` aggiunto il 2026-09-29** *(punto 2 di Luca)*: **il RENDICONTO della
 > tolleranza.** Elenca le grandezze di **STATO** che **non si sono MAI viste piene**, leggendole

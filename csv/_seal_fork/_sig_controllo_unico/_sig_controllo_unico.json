@@ -1,7 +1,7 @@
 {
- "blob_oggi": "62d67675b29f70e28a9d876bfb9875101945983e",
- "blob_prima": "83bc29340072d37158b292fe942dca41bfc8d034",
- "introduce": "35a6db13dd8301a78c4083b6268db21243d96c6c",
+ "blob_oggi": "5d29334b31a7999f0727f71723d0012547eff201",
+ "blob_prima": "f7541d036229cf5e787114cf19ce5fcf53f77b9a",
+ "introduce": "c0478509b5db5c5053c981fd62afbdd7189d6170",
  "passi": 72,
  "bracci": {
   "A": true,
@@ -9,7 +9,8 @@
   "B": true,
   "C": true,
   "E": true,
-  "F": true
+  "F": true,
+  "G": true
  },
  "B": {
   "passi": 72,
@@ -153,6 +154,14 @@
   "stato": 30,
   "apparse": 30,
   "mai_apparse": []
+ },
+ "G": {
+  "esiti": {
+   "pippo": "FERMA con GrandezzaNonDichiarata",
+   "pluto": "FERMA con GrandezzaNonDichiarata",
+   "finestra": "FERMA con FinestraRestataAperta"
+  },
+  "finestra_a_fine_passo": "NON ESISTE"
  },
  "A_e_D": {
   "stato": 30,
