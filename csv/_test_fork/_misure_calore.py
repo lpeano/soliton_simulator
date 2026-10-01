@@ -132,13 +132,17 @@ def m0_struttura(S, net):
                 _doc = ast.get_docstring(nodo) or "(senza docstring)"
                 candidate[nodo.name] = _doc.split(chr(10))[0][:120]
     # 2) `cs_nodo`: se NON e' uniforme, `cs_arco` non lo e', e la forza metrica NON e' un gradiente.
-    csn = np.asarray(getattr(net, "_cs_nodo_prev", []), dtype=float)
-    uniforme = (len(csn) > 0 and float(np.max(csn) - np.min(csn)) == 0.0)
+    # ⚠ MIO DIFETTO, e il run si e' fermato: PRIMA del primo passo `_cs_nodo_prev` e' uno
+    #   SCALARE 0-d (o assente), e `len()` di un oggetto senza dimensioni SOLLEVA. Si usa
+    #   `atleast_1d` e `.size`. ### E la correzione non e' solo tecnica: lo scarto di `cs` va
+    #   misurato su uno stato SVILUPPATO, non sulla semina -- per questo `M0` ora gira DOPO il run.
+    csn = np.atleast_1d(np.asarray(getattr(net, "_cs_nodo_prev", []), dtype=float))
+    uniforme = (csn.size > 0 and float(np.max(csn) - np.min(csn)) == 0.0)
     scarto = (float((np.max(csn) - np.min(csn)) / max(abs(float(np.median(csn))), 1e-30))
-              if len(csn) else None)
+              if csn.size else None)
     # lo scarto RELATIVO FRA I DUE ESTREMI di uno stesso arco: e' quello che rompe la simmetria
     #   di `diag(cs^2)(I - M)`, perche' `M` e' simmetrica ma `diag(cs^2) M` no.
-    if len(csn) and len(net.i):
+    if csn.size and len(net.i):
         a = csn[np.asarray(net.i)]
         b = csn[np.asarray(net.j)]
         with np.errstate(divide="ignore", invalid="ignore"):
@@ -186,29 +190,6 @@ def principale():
     _cli_flag.dichiara_configurazione(S, stampa)
     stampa("")
 
-    # ---------------------------------------------------------------- M0
-    stampa("=" * 104)
-    stampa("M0 -- ESISTE UN'ENERGIA TOTALE? (le parti MISURABILI)")
-    stampa("=" * 104)
-    m0 = m0_struttura(S, net)
-    stampa("  funzioni il cui NOME promette un'energia: %d"
-           % len(m0["funzioni_che_promettono_energia"]))
-    for k, v in m0["funzioni_che_promettono_energia"].items():
-        stampa("      `%s` -> %s" % (k, v))
-    stampa("  M_PH = %s   (uniforme: la cinetica di fase e' 0.5*sum(phivel^2))" % m0["M_PH"])
-    stampa("  CS_DINAMICO = %s   VERLET = %s   FORK_SU2_MEM = %s"
-           % (m0["CS_DINAMICO"], m0["VERLET"], m0["FORK_SU2_MEM"]))
-    stampa("  cs_nodo UNIFORME: %s   (scarto relativo fra gli estremi del campo: %s)"
-           % (m0["cs_nodo_uniforme"], m0["cs_nodo_scarto_relativo_totale"]))
-    if m0["cs_sui_due_estremi_di_un_arco"]:
-        a = m0["cs_sui_due_estremi_di_un_arco"]
-        stampa("  cs sui DUE ESTREMI di uno stesso arco: scarto mediano %.3e, massimo %.3e"
-               % (a["mediano"], a["massimo"]))
-        stampa("      archi con scarto NON NULLO: %d su %d"
-               % (a["archi_con_scarto_non_nullo"], a["archi"]))
-    stampa("  ### SE cs NON E' UNIFORME, la forza metrica cs^2 (M - I) q NON E' UN GRADIENTE:")
-    stampa("      `M` e' simmetrica, ma `diag(cs^2) M` NON LO E'. Quindi per il settore metrico")
-    stampa("      NON esiste un'energia potenziale, e non e' una mia opinione: e' la matrice.")
 
     # ------------------------------------------------- la SPIA sulle voci
     per_voce = []
@@ -263,6 +244,31 @@ def principale():
     S._ferma_se_registro_incoerente = vero
     stampa("  confini di voce misurati: %d" % len(per_voce))
     stampa("  passi con NASCITE: %d" % len(mitosi_dettaglio))
+
+    # ---------------------------------------------------------------- M0
+    stampa("")
+    stampa("=" * 104)
+    stampa("M0 -- ESISTE UN'ENERGIA TOTALE? (le parti MISURABILI, su stato SVILUPPATO)")
+    stampa("=" * 104)
+    m0 = m0_struttura(S, net)
+    stampa("  funzioni il cui NOME promette un'energia: %d"
+           % len(m0["funzioni_che_promettono_energia"]))
+    for k, v in m0["funzioni_che_promettono_energia"].items():
+        stampa("      `%s` -> %s" % (k, v))
+    stampa("  M_PH = %s   (uniforme: la cinetica di fase e' 0.5*sum(phivel^2))" % m0["M_PH"])
+    stampa("  CS_DINAMICO = %s   VERLET = %s   FORK_SU2_MEM = %s"
+           % (m0["CS_DINAMICO"], m0["VERLET"], m0["FORK_SU2_MEM"]))
+    stampa("  cs_nodo UNIFORME: %s   (scarto relativo fra gli estremi del campo: %s)"
+           % (m0["cs_nodo_uniforme"], m0["cs_nodo_scarto_relativo_totale"]))
+    if m0["cs_sui_due_estremi_di_un_arco"]:
+        a = m0["cs_sui_due_estremi_di_un_arco"]
+        stampa("  cs sui DUE ESTREMI di uno stesso arco: scarto mediano %.3e, massimo %.3e"
+               % (a["mediano"], a["massimo"]))
+        stampa("      archi con scarto NON NULLO: %d su %d"
+               % (a["archi_con_scarto_non_nullo"], a["archi"]))
+    stampa("  ### SE cs NON E' UNIFORME, la forza metrica cs^2 (M - I) q NON E' UN GRADIENTE:")
+    stampa("      `M` e' simmetrica, ma `diag(cs^2) M` NON LO E'. Quindi per il settore metrico")
+    stampa("      NON esiste un'energia potenziale, e non e' una mia opinione: e' la matrice.")
 
     # ---------------------------------------------------------------- M1
     stampa("")

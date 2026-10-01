@@ -8624,3 +8624,10 @@ piano del calore: e' una cura che serve SUBITO**, e la misura dice **esattamente
 INVARIANTE**, perche' e' dispari **sia** nell'orientazione **sia** in `tw`, e le due disparita' si
 annullano. ### **L'ho calcolato invece di sospettarlo**, e lo scrivo perche' il prossimo che legge
 non rifaccia il sospetto.
+
+> ### 🔧 **QUARTO difetto mio, e il run lungo si e' fermato subito:** `_cs_nodo_prev`, **prima del
+> primo passo**, e' uno ### **scalare 0-d** — e `len()` di un oggetto senza dimensioni **solleva**.
+> ### **E la correzione non e' solo tecnica:** lo scarto di `cs` va misurato su uno stato
+> ### **SVILUPPATO**, non sulla semina, quindi ### **`DIVISIONE-AUTOCONSISTENTE:M0` ora gira DOPO
+> il run** invece che prima. *(Blob dello strumento: `342d5710`.)*
+> ### **Si e' fermato PRIMA di produrre un numero**, che e' il modo giusto di sbagliare.
