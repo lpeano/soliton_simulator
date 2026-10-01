@@ -153,6 +153,42 @@ funzioni di servizio, e una per mutazione in posto. *(Misurato dall'AST sul blob
 > FORMULA dentro lo script e' sbagliata**, e `L-NUMERI` non protegge da questo: ### **protegge
 > dalla trascrizione, non dalla derivazione.**
 
+> ### ✅✅ **ANNOTAZIONE DEL 2026-10-01 (punto 3 del guardiano): LA MODULAZIONE AGISCE, E LA
+> ### SPIEGAZIONE DI `db89b37` REGGE. Era la mia «correzione» di `0487c20` a essere SBAGLIATA.**
+>
+> **Misurato DENTRO la decisione** *(`csv/_test_fork/_soglia_alla_divisione.py`, blob `e37a7d59`;
+> fallback dell'orologio uniforme ### **scattato 0 volte**)*:
+>
+> | | |
+> |---|---|
+> | la soglia **minima** sulla rete | da ### **`6.9136`** a `9.4248` ➜ ### **la modulazione del `0.3` AGISCE** |
+> | gli archi divisi | `|tw|` da `6.98` a `8.35`, ### **ognuno APPENA SOPRA la sua soglia locale** *(da `6.96` a `8.19`)*; ### **nessuno sotto** |
+> | `Δ sum|tw|` della voce `mitosi` | ### **esattamente `−sum|tw|` dei divisi**, scarto `~1e-10` |
+>
+> ### ⛔ **PERCHE' IL MIO BRACCIO `C` AVEVA VISTO `3π` ESATTO SU TUTTI GLI ARCHI, con la riga:**
+> ```
+> _r_nodo_mitosi():  r = getattr(self, "_r_corrente", None)
+>                    if r is None or len(r) < n: return np.ones(n)   # OROLOGIO UNIFORME
+> ```
+> Il braccio `C` chiamava `decidi_divisione()` ### **FUORI dal passo**, dopo il 72° — e
+> ### **il passo 72 ha partorito**, quindi `n = 12812` mentre `_r_corrente`, scritta da `step`
+> **prima** della mitosi, era lunga `12811`. ### **`len(r) < n` ➜ fallback ➜ `grad = 0` ➜
+> `soglia = 3π` esatto.**
+> ### ⚠ **E `_r_corrente` sta in `REGISTRO_DERIVATE` PROPRIO PERCHE' la sua lunghezza non e' un
+> invariante:** ### **il registro me lo diceva, e l'ho ignorato.** Stessa famiglia di `_smp_d0` —
+> ### **una grandezza valida SOLO DENTRO il passo** — che il presidio `3-bis` mi aveva fatto
+> trovare **il giorno prima.**
+>
+> ### 🛑 **E LA STORIA DELLA «CAMPANA» NASCEVA DAL `3.79`, CHE ERA UN ARTEFATTO** *(punto 5)*
+> La «campana che ammette archi sotto soglia» ### **non esiste**: ### **sotto la soglia locale la
+> probabilita' e' ZERO PER COSTRUZIONE** *(`ecc = max(avv/soglia − 1, 0)` clippato, e
+> `satura(0) = 0` esatto)*. La `tanh` del `segno` decide ### **CREA contro RESPINGE, sopra la
+> soglia** — e nient'altro.
+> ### ➜ **La lettura del guardiano era sbagliata quanto il numero su cui l'avevo costruita**, e
+> ### **il numero era mio.** ### **La frase giusta e' quella di `db89b37`: la soglia e'
+> `3π·(1 − 0.3·tanh(grad))`, e le divisioni avvengono nella PARTE BASSA della banda.**
+
+
 
 ```
 if TORS_4PI and not FASE_2PI:

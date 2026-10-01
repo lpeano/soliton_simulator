@@ -46,3 +46,15 @@ IL VERDETTO
   braccio C ... MISURA (non entra nel verdetto)
 
 ### IL SIGILLO PASSA.
+
+========================================================================================================
+ANNOTAZIONE DEL 2026-10-01 -- IL BRACCIO C DI QUESTA CORSA E' SBAGLIATO
+========================================================================================================
+La soglia letta qui (9.424778 su TUTTI gli archi) NON E' la soglia vera: la decisione e'
+stata chiamata FUORI dal passo, dopo il 72 -- e il passo 72 HA PARTORITO, quindi n era
+cresciuto oltre len(_r_corrente) e `_r_nodo_mitosi` e' caduto nel suo FALLBACK, che
+restituisce un orologio UNIFORME (np.ones). Con r uniforme grad_modula = 0 e la
+modulazione del 0.3 sparisce.
+LA MISURA GIUSTA e' in csv/_test_fork/_soglia_alla_divisione/: soglia minima da 6.9136,
+archi divisi TUTTI appena sopra la loro soglia locale, fallback scattato 0 volte.
+I BRACCI A E B DI QUESTA CORSA RESTANO VALIDI: il braccio C era FUORI dal verdetto.

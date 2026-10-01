@@ -9278,3 +9278,30 @@ DENTRO la decisione** — lui ricalcolando la formula subito dopo, io avvolgendo
 Una riga del referto stampa ### **`su %d decisioni`** invece del numero: ### **un `%` mancante.**
 Non tocca nessun dato *(il valore e' nel `json`: `decisioni`)*, e ### **lo correggo insieme al
 braccio `C`**, non con un commit a se'.
+
+# 📌 **LE ANNOTAZIONI, nei cinque posti** *(punti 3 e 5 del mandato, 2026-10-01)*
+
+| dove | che cosa dice |
+|---|---|
+| `doc/MITOSI_storia.md` | ### **la modulazione AGISCE**, la spiegazione di `db89b37` **regge**, e ### **la «campana» non esiste** |
+| `doc/PIANO_divisione_e_calore.md` | idem |
+| il referto del braccio `C` | ### **in coda alla corsa**: quella soglia non e' la vera, e ### **`A` e `B` restano validi** |
+| `SOGLIA-NON-MODULATA` | ### **CHIUSA COME FALSA**, e ### **non cancellata** *(par.9)* |
+| `TW-DIVISIONE-INCOGNITA` | ### **SCIOLTA, coi numeri** |
+
+### 🛑 **E IL PUNTO 5, che e' quello che mi costa di piu'**
+La storia della ### **«campana»** nasceva dal `3.79`, ### **che era un artefatto MIO.** Sotto la
+soglia locale ### **la probabilita' e' ZERO PER COSTRUZIONE** *(`ecc` clippato, `satura(0) = 0`
+esatto)*, e la `tanh` del `segno` decide ### **CREA contro RESPINGE, SOPRA la soglia.**
+### ➜ **La lettura del guardiano era sbagliata quanto il numero su cui l'ho costruita — e il
+numero era mio.** ### **Ho trascinato il guardiano in un errore, e poi ho «corretto» la sua
+correzione con un secondo errore.** Tre versioni sbagliate di fila, e ### **quella giusta era la
+PRIMA che avevo scritto** *(`db89b37`)*.
+
+### 📐 **E LA FORMA DELL'ERRORE E' SEMPRE LA STESSA, due giorni di fila**
+### **Misurare una grandezza FUORI dalla finestra in cui e' valida.** `_smp_d0` *(trovata dal
+presidio `3-bis`)*, `DIVISIONE-AUTOCONSISTENTE:M0` *(misurata prima del run)*, e ora
+### **`_r_corrente`, che il REGISTRO dichiara derivata proprio per questo.**
+### ➜ **Il presidio esiste e funziona DENTRO il passo; i miei strumenti di misura lo chiamano da
+FUORI, dove nessuno guarda.** ### **E' li' che va messo il prossimo presidio**, e lo scrivo come
+proposta invece di cablarlo adesso.
