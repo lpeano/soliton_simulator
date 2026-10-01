@@ -9052,3 +9052,31 @@ dato da misurare, non da scegliere.**
 passa, il criterio va scritto diversamente, oppure e' gia' un difetto»*. ### **Il sistema di oggi
 PASSA**, con il criterio scritto sulla finestra giusta. ### **Era il criterio a essere sbagliato,
 non il sistema.**
+
+# ✅ **PASSO 3: IL PIANO AGGIORNATO** *(2026-10-01, 458 righe)*
+
+| | che cosa e' entrato |
+|---|---|
+| ### **la visione** | i tre punti, e ### **che cosa cambiano**: la **(c)** scioglie il rischio che avevo dichiarato irrisolto, e ### **ribalta la mia lettura di `:M1`** |
+| ### **i due bilanci, riscritti** | ### **NON sono simmetrici**: la carica si conserva **esattamente**, l'avvolgimento **no e non deve** *(«la torsione paga lo spazio», col **tasso** da scrivere)*, l'energia **non globalmente** |
+| ### **gli SCOSTAMENTI** | ### **sette righe, ognuna con la sua misura** — e due di loro *(`SCHWINGER-UN-NODO` e `CARICA-DI-GAUGE`)* ### **si curano INSIEME o la cura non si vede** |
+| ### **`D36` PROMOSSA** | ### **prerequisito dell'antimateria**: `D36` -> `FASE_2PI` -> `D35`. Senza di lei l'esito *«materia e antimateria»* ### **non e' rappresentabile**, e il criterio 8 ### **non si puo' nemmeno provare** |
+| ### **il criterio 8** | la divisione crea **solo spazio neutro**; la materia carica nasce **a coppie** — ### **«per costruzione, non per coincidenza»** |
+| ### **le tre correzioni** | la soglia **a campana** · `dir_laterale` **non simmetrica** · il criterio `(E)` **riscritto** |
+
+## ⭐ **E LA CORREZIONE SULLA SOGLIA E' ANCHE NELLA STORIA DELLA MITOSI**
+
+`doc/MITOSI_storia.md` la descriveva come ### **netta**. Il codice usa
+`segno = −tanh(3.0·(pos − centro))`, ### **positivo per tutto cio' che sta SOTTO il centro.**
+### ✅ **E il conto torna sul numero misurato:** l'arco a `|tw| = 3.79` sta in posizione `1.603`
+contro un `centro = 2.75`, quindi ### **`segno = +0.998`: quasi il massimo della campana.**
+### **Un gradino a `3π` non l'avrebbe mai diviso.**
+### ⚠ **E una cosa NON l'affermo:** che cosa **seleziona** gli archi non e' quel segno da solo — se
+lo fosse, si dividerebbe molto di piu'. ### **Il cancello completo e' una lettura a se', e non la
+faccio per non sostituire una descrizione sbagliata con un'altra.**
+
+### ➕ **Il `3.0` dentro la `tanh` e' entrato nell'elenco del criterio 2**, con gli altri numeri
+scelti a mano *(`KICK_TW`, lo `0.5`, il `clip(±2)`, il pavimento `1e-6`, il `clip(±π/4)`)*.
+
+### 🕐 **`:M7` resta da fare** *(la potenza del solo `−xi·phivel`)*, e ### **senza di lei le
+decisioni 2 e 4 non hanno il loro numero.**

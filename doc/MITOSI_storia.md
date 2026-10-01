@@ -76,6 +76,32 @@ funzioni di servizio, e una per mutazione in posto. *(Misurato dall'AST sul blob
 
 ### ⛔ **① La SOGLIA della divisione: `3π`** — `:6708`
 
+> ### ⛔ **CORREZIONE DEL 2026-10-01: LA DIVISIONE NON SCATTA «SOPRA `3π`».**
+> *(Rilievo del guardiano, e `DIVISIONE-AUTOCONSISTENTE:M1` lo mostra con un numero.)*
+>
+> **Questa sezione descrive la soglia come NETTA — un valore sopra il quale si divide.** Il codice
+> non fa cosi': la creazione passa per una ### **PROBABILITA' A CAMPANA**:
+> ```
+> pos_soglia = 1 + soglia/PHI_CRIT ;  pos_tetto = 1 + TW_TETTO/PHI_CRIT
+> centro     = 0.5*(pos_soglia + pos_tetto)
+> segno      = -tanh(3.0 * (pos_torsione - centro))        # :7068
+> ```
+> ### **Il segno e' POSITIVO (crea) per tutto cio' che sta SOTTO il `centro`**, e va da `+max`
+> alla soglia a `−max` al tetto `4π`.
+>
+> ### ✅ **E LA MISURA LO CONFERMA:** fra gli **otto** archi divisi in 72 passi ce n'e' uno con
+> ### **`|tw| = 3.79`**, cioe' ### **mezzo giro SOTTO `2π`** e **molto** sotto `3π`.
+> *(In posizione: `1 + 3.79/6.283 = 1.603` contro un `centro = 2.75`, quindi
+> `segno = −tanh(3·(1.603 − 2.75)) = +0.998`, ### **quasi il massimo della campana**.)*
+> ### ➜ **Un gradino a `3π` non l'avrebbe mai diviso.**
+>
+> ### ⚠ **E UNA COSA CHE NON AFFERMO:** che cosa **seleziona** gli archi non e' questo segno da
+> solo — se lo fosse si dividerebbe molto di piu'. ### **Il cancello completo e' una lettura a
+> se'**, e non la faccio qui per non sostituire una descrizione sbagliata con un'altra.
+>
+> ### ➕ **E IL `3.0` DENTRO LA `tanh` E' UN NUMERO SCELTO A MANO:** entra nell'elenco del
+> **criterio 2** di `doc/PIANO_divisione_e_calore.md` *(`A1`: la legge, non il numero)*.
+
 ```
 if TORS_4PI and not FASE_2PI:
     twist_max = np.pi          # |chi_i - chi_j| = 2 -> pi*0.5*2 = pi

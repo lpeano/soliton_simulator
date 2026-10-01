@@ -116,11 +116,52 @@ puo' SOSTITUIRLO** — al massimo puo' **riceverne** l'energia e condurla.
 
 ---
 
-# **(B) I DUE BILANCI, e sono DUE perche' sono DUE COSE**
+# **(A-bis) LA VISIONE DI LUCA, e che cosa cambia in questo piano** *(2026-10-01)*
 
-> ### **L'energia persa in una rottura diventa calore. Ma la TORSIONE e' un AVVOLGIMENTO, simile a
-> ### una CARICA, e NON E' ENERGIA.**
-> *(E' la distinzione che Luca ha posto, ed e' il cuore di questo piano.)*
+*(Registrata in `doc/REGISTRO_FISICA.md` con la data. Qui sta solo **cio' che cambia nel piano**.)*
+
+| | |
+|---|---|
+| **(a)** | la nascita ha ### **TRE esiti**: **spazio** · **materia** · **materia e antimateria**; ### **`peq` e' il riferimento che li separa** |
+| **(b)** | ### **si conserva ESATTAMENTE solo la CARICA** |
+| **(c)** | ### **l'energia GLOBALE non si conserva** *(uno spaziotempo in espansione non la conserva)*; resta il ### **bilancio LOCALE** |
+
+## ⛔ **LA (c) SCIOGLIE IL RISCHIO CHE AVEVO DICHIARATO IRRISOLTO**
+
+Avevo scritto, come **il rischio vero** della temperatura per nodo: *«senza un «fuori» il sistema
+puo' SOLO PERDERE»*.
+### ➜ **Se l'energia globale non DEVE conservarsi, quello non e' un difetto da evitare: e' una
+POSSIBILITA' LEGITTIMA.** Cio' che resta da chiedere e' ### **il bilancio LOCALE: ogni variazione
+ha una causa dichiarata.** ### **Era il mio ostacolo piu' grosso, e non era un ostacolo: era una
+mia assunzione.**
+
+## ⛔ **E RIBALTA LA MIA LETTURA DI `:M1`, non la raffina**
+
+Avevo scritto che `:M1` mostrava ### **«una carica che svanisce, evento per evento»**.
+### **`tw` NON E' LA CARICA.** La misura resta — `1.17` avvolgimenti per arco diviso — ### **ma non
+e' una violazione: e' un PREZZO NON SCRITTO.**
+
+---
+
+# **(B) I DUE BILANCI, e NON sono simmetrici**
+
+> ### **La CARICA si conserva esattamente. L'AVVOLGIMENTO no, e non deve. L'ENERGIA nemmeno,
+> ### globalmente — ma OGNI VARIAZIONE HA UNA CAUSA DICHIARATA.**
+
+| | ### **la CARICA** | ### **l'AVVOLGIMENTO `tw`** | ### **l'ENERGIA** |
+|---|---|---|---|
+| **si conserva?** | ### **SI', ESATTAMENTE** *(l'unica conservazione stretta del modello)* | ### **NO, e non deve** | ### **NO globalmente**; ### **SI' localmente**, come bilancio con causa |
+| **la forma** | `N(+1) − N(−1)` **invariante**, e la materia carica nasce ### **solo a coppie** *(criterio 8)* | ### **«LA TORSIONE PAGA LO SPAZIO»**: una **conversione** col suo **tasso scritto** | prima = figli + calcio + calore, ### **piu' i flussi dichiarati** |
+| ### **com'e' OGGI** | ### **NON si conserva** *(`:G4`)* e ### **non e' nemmeno persistente** *(`:G1`)* | ### **sparisce senza legge**: `1.17` avvolgimenti per arco diviso *(`:M1`)* | il calcio ### **non fa lavoro** *(`:M4`)*, e un addendo ### **non e' definibile** *(`:M0`)* |
+
+## ⭐ **DECISIONE 1 DI LUCA, nella sua forma definitiva: «LA TORSIONE PAGA LO SPAZIO»**
+
+| | |
+|---|---|
+| **che cosa NON e'** | ### **non e' una carica che svanisce** — era la mia lettura, ed era sbagliata |
+| **che cosa e'** | ### **una CONVERSIONE** avvolgimento -> spazio, e una conversione ### **si scrive col suo tasso** |
+| ### **cosa la rende legge** | ### **il bilancio DEVE essere scritto**: quanto `tw` per quanto spazio. ### **Senza il tasso non e' una legge, e' ancora una perdita** |
+| **il dato di partenza** | `1.17` avvolgimenti per arco diviso *(min `0.60`, max `1.33`)* — ### **il DATO, non il tasso** |
 
 | | ### **BILANCIO DELL'AVVOLGIMENTO** | ### **BILANCIO DELL'ENERGIA** |
 |---|---|---|
@@ -146,6 +187,40 @@ un'equazione con un simbolo che non esiste.**
 `scuoti_vuoto` scrive ### **solo `net.phivel`**: immette **energia** e ### **non immette
 avvolgimento.** ### ➜ **Quindi i due bilanci non si possono fondere in uno**, e un'unica *«legge di
 conservazione»* sarebbe **falsa su entrambi i lati.**
+
+---
+
+# **(B-bis) GLI SCOSTAMENTI FRA LA VISIONE E IL CODICE, punto per punto e con la misura**
+
+*(Ognuno ha la sua misura. ### **Nessuno e' una mia impressione.**)*
+
+| la visione dice | il codice fa | la misura |
+|---|---|---|
+| **(a)** `peq` separa i tre esiti | ### **`peq` NON entra** nella creazione di coppie: `COPPIA_DENSITA = False` *(esplorativo)* | ### **`:G3`** |
+| **(a)** esiste l'esito *«materia e antimateria»* | ### **per il campo l'antinodo E' il genitore**: `anti = phi + 2π` su un dominio di `4π`, e il campo legge `exp(i·phi)` -> `|Δ| = 2.13e-15` | ### **`:G2`** *(`D35`)* |
+| **(b)** la carica si conserva **esattamente** | ### **NON si conserva alle nascite**: eventi neutri ### **0/8**, **3/10**, **0/83**; e nel run lungo `d_somma` ### **sempre POSITIVA** | ### **`:G4`** |
+| **(b)** la carica e' **una grandezza** | ### **e' una CONVENZIONE**: il segno dipende dal rappresentante canonico, e cambiare gauge ribalta ### **il 100 % delle cariche** *(12812/12812, 12782/12782, 14000/14000)* | ### **`:G1`** |
+| **(b)** materia **contro** antimateria | ### **l'antimateria si forma TARDI e resta una minoranza**: nodi `−1` da **0** al passo 1 a ### **467 su 14000** al passo 150 *(3.34 %)* | ### **`:G1`**, run lungo |
+| la materia carica nasce **a coppie** *(criterio 8)* | ### **lo Schwinger crea UN SOLO nodo**, accanto a un genitore che c'era gia' | ### **`:G4`** |
+| la neutralita' di una coppia | ### **e' un CASO, non una legge**: sul seme 12 i `d_n = +2` danno `d_somma = 0` in **3** casi e `+2` in **2**, secondo le cariche dei **genitori** | ### **`:G4`** |
+
+### ⚠ **E DUE SCOSTAMENTI SI CURANO INSIEME O LA CURA NON SI VEDE**
+### **`SCHWINGER-UN-NODO` e `CARICA-DI-GAUGE`:** anche facendo nascere le coppie **neutre per
+costruzione**, ### **la carica resterebbe riscritta ogni passo da un segno di gauge** — quindi la
+conservazione sarebbe ### **invisibile un passo dopo.**
+
+---
+
+# **(B-ter) `D36` E' PROMOSSA: e' il PREREQUISITO DELL'ANTIMATERIA** *(decisione del guardiano)*
+
+> ### **La catena: soglia adimensionale (`D36`) -> fase su `2π` (`FASE_2PI`) -> antiparticella
+> ### VERA (`D35`).**
+
+| | |
+|---|---|
+| perche' e' una **catena** | con `phi` su `4π` l'antifase `+2π` ### **non e' un'antifase** *(`:G2`, misurato)*. Per averne una vera serve ### **`FASE_2PI`**, cioe' `phi` su `2π` — e `FASE_2PI` ### **dipende da `D36`**, la soglia **adimensionale** |
+| ### **che cosa cambia nel piano** | ### **`D36` non e' piu' «in coda»: e' un PREREQUISITO.** Senza di lei l'esito *«materia e antimateria»* della visione (a) ### **non e' rappresentabile**, e il criterio 8 ### **non si puo' nemmeno provare** |
+| **l'ordine che ne segue** | `D36` ### **prima** di qualunque legge sull'antimateria; il criterio 8 ### **dopo** |
 
 ---
 
@@ -217,16 +292,72 @@ suo PARENTE PIU' PROSSIMO.** Le tre possibilita', e ### **la scelta e' di Luca**
 
 ---
 
+# **(C-bis) TRE CORREZIONI A COSE CHE AVEVO SCRITTO** *(rilievi del guardiano, 2026-10-01)*
+
+## ⛔ **① LA DIVISIONE NON SCATTA «SOPRA `3π`»: E' UNA PROBABILITA' A CAMPANA**
+
+La soglia non e' netta: e' ### **`segno = −tanh(3·(pos − centro))`** attorno a `pos_soglia`, cioe'
+### **una campana**, non un gradino.
+### ✅ **E `:M1` LO MOSTRA DA SE':** fra gli otto archi divisi ce n'e' uno con ### **`|tw| = 3.79`**,
+cioe' ### **mezzo giro SOTTO `2π`** e ### **molto sotto `3π`.** ### **Un gradino a `3π` non
+l'avrebbe mai diviso.**
+### ➜ **Va corretto QUI e nella STORIA DELLA MITOSI**, dove la soglia e' descritta come netta. E il
+### **`3.0` dentro la `tanh` entra nell'elenco del criterio 2**: ### **e' un numero scelto a mano.**
+
+## ⛔ **② `dir_laterale` NON E' SIMMETRICA, e la mia «verifica» era sbagliata**
+
+Avevo scritto, fra le *«verifiche fatte prima di accusare»*, che `dir_laterale` ### **«nasce dal
+punto medio»**. A `:8040`:
+```
+v_rel        = self.pos[jj] - self.pos[ii]
+dir_radiale  = v_rel / |v_rel|
+dir_laterale = (-dir_radiale[1], dir_radiale[0], 0)
+```
+### **Nasce da `pos[jj] − pos[ii]`: SI INVERTE col verso.** Avevo letto `_rmid` di un ### **ALTRO
+blocco** della stessa funzione e gliel'avevo attribuito.
+### ➜ **Il sito ② di `MEM-HEBB-VERSO` ha TRE dipendenze dal verso, non due.** ### **Il verdetto di
+`:M2` non cambia; la mia verifica si'** — e si ### **ANNOTA**, non si riscrive (par.8).
+
+## ⭐ **③ IL CRITERIO «NON ESPLODE» ERA SBAGLIATO, NON IL SISTEMA** *(`FINESTRA-DEL-PICCO`)*
+
+| | |
+|---|---|
+| a **72** passi | `K_fase` cresce in ### **72 passi su 72** ed e' al ### **100 % del suo massimo** *(× 85.1)*, a volume quasi fermo *(`sum(d)` × 1.0095)* |
+| a **150** passi | il massimo e' ### **al passo 88**, e la fine e' al ### **77.7 % del massimo**; cresce in ### **95 passi su 150** |
+
+### ➜ **IL SISTEMA NON ESPLODE: sale, passa per un PICCO, e scende.** E da una finestra di 72 passi
+### **«cresce senza fermarsi» e' INDISTINGUIBILE da «sta salendo verso un picco».**
+### ✅ **Quindi il criterio del par. `(E)` si riscrive:** ### **non «non esplode», ma «NON CRESCE
+SENZA TETTO su una finestra CHE CONTIENE IL PICCO»**, e ### **la finestra minima e' un DATO da
+misurare, non da scegliere.**
+### ⚠ **E vale per ogni sigillo che gira a 72 passi:** `72` e' la lunghezza scelta per la
+### **byte-identita'**, dove il picco non c'entra — ### **ma non e' una lunghezza adatta a
+giudicare una DINAMICA.**
+
+---
+
 # **(D) I CRITERI, fissati ORA, prima di qualunque numero e di qualunque legge**
 
 | | il criterio | perche' |
 |---|---|---|
 | ### **1 — SIMMETRIA DELLA LEGGE, non del risultato** | ### **ogni legge su un arco e' UNA funzione, chiamata per i DUE estremi coi ruoli scambiati** | ### **`:M2` ha misurato che oggi non e' cosi'**: `self.phi[ii] += shift` applica a **un solo** estremo. Una simmetria *«che viene fuori»* dai numeri ### **non e' una simmetria: e' una coincidenza** |
-| ### **2 — NESSUN COEFFICIENTE SCELTO A MANO** | `KICK_TW` · lo **`0.5`** del calcio chirale · il **`clip(±2)`** di `xi_termo` · il **pavimento `1e-6`** di `Tt` · il **`clip(±π/4)`** dello shift di fase · la **velocita' di conduzione** del calore · l'**accoppiamento calore-fase** | ### **`A1`: la legge, non il numero.** Ognuno ### **derivato oppure DICHIARATO** come scelto — e un numero dichiarato scelto e' un **difetto aperto**, non una soluzione |
+| ### **2 — NESSUN COEFFICIENTE SCELTO A MANO** | `KICK_TW` · lo **`0.5`** del calcio chirale · il **`clip(±2)`** di `xi_termo` · il **pavimento `1e-6`** di `Tt` · il **`clip(±π/4)`** dello shift di fase · ### **il `3.0` dentro la `tanh` della soglia di divisione** · la **velocita' di conduzione** del calore · l'**accoppiamento calore-fase** | ### **`A1`: la legge, non il numero.** Ognuno ### **derivato oppure DICHIARATO** come scelto — e un numero dichiarato scelto e' un **difetto aperto**, non una soluzione |
 | ### **3 — LOCALITA'** | nessuna media, mediana o somma **globale** dentro una legge locale | ### **`A2`**, ed e' il difetto per cui il Nose-Hoover va sostituito |
 | ### **4 — BILANCIO CHIUSO, e sono DUE** | avvolgimento **e** energia, ### **separati**, e ### **ogni perdita DICHIARATA** | ### **`A8` applicato a una carica**: un avvolgimento che sparisce senza una riga che lo dica e' ### **un ripiego silenzioso DI FISICA** |
 | ### **5 — STABILITA' DELLA CONDUZIONE rispetto al `dt`** | la conduzione del calore e' una **diffusione**: ha un **limite di stabilita'** che dipende da `dt` e dal grafo | ### **si collega a `DT-CONVERGENZA`**: una legge nuova che diverge a `dt` piccolo ### **non e' una legge, e' un artefatto dell'integratore**. ⚠ **E la forma esatta esiste gia' nel repo** *(`peq-esatto`: combinazione convessa, `exp(-dt/tau)`)*, ### **quindi non si usa un Eulero esplicito** |
 | ### **6 — PER OGNI CAMBIAMENTO, IL CASO CHE DEVE FALLIRE** | scritto **prima** di girare | ### **`P1-sexies`**: senza il caso che deve fallire un sigillo non misura la cura, ### **misura se stesso** |
+
+## ⭐ **CRITERIO 8 DI LUCA: LA DIVISIONE CREA SOLO SPAZIO NEUTRO** *(2026-10-01)*
+
+> ### **La divisione da sola crea SOLO SPAZIO NEUTRO. La materia CARICA nasce solo A COPPIE: due
+> ### nodi nuovi, uno `+1` e uno `−1`, LOCALMENTE — cosi' la carica totale NON CAMBIA.**
+
+| | |
+|---|---|
+| ### **«per costruzione», non «per coincidenza»** | oggi la neutralita' ### **dipende dalle cariche dei genitori** *(`:G4`: `0` in 3 casi, `+2` in 2, sugli stessi `d_n = +2`)*. Il criterio chiede che sia ### **una proprieta' della LEGGE** |
+| ### **due nodi NUOVI** | oggi lo Schwinger ne crea ### **UNO**, accanto a un genitore che c'era gia' *(`SCHWINGER-UN-NODO`)* |
+| **localmente** | i due nodi nascono ### **vicini**, non uno qui e uno altrove: la carica si conserva ### **anche in una regione**, non solo in totale |
+| ### ⚠ **e non si puo' provare prima di `D36`** | senza `FASE_2PI` l'antinodo ### **e' il genitore per il campo** *(`:G2`)*, quindi *«uno `+1` e uno `−1`»* ### **non e' distinguibile dal campo.** ### **`D36` viene PRIMA** |
 
 ## 📐 **E UN CRITERIO IN PIU' CHE `:M2` HA RESO NECESSARIO**
 
@@ -243,10 +374,15 @@ il criterio della scelta.** ### **Il default di numpy non e' una legge fisica.**
 ### **E' la ragione per cui il termostato esiste, quindi e' il criterio che la sostituzione deve
 passare.** Tre prove, e le soglie si fissano **qui**, prima dei numeri:
 
+> ### ⚠ **RISCRITTO il 2026-10-01 dopo `FINESTRA-DEL-PICCO`:** la versione di prima diceva
+> *«non esplode»* su **72 passi**, e ### **il sistema di riferimento NON l'avrebbe passata** —
+> perche' a 72 passi e' al **100 % del suo massimo**. ### **Era il criterio a essere sbagliato.**
+
 | prova | che cosa guarda | che cosa la fa FALLIRE |
 |---|---|---|
-| ### **(i) NON SI SPEGNE** | `K_fase` *(= `0.5·Σ phivel²`)* su **72 passi**, e poi su un run **lungo** | ### **un decadimento monotono** verso zero: se `K_fase` cala in **ogni** finestra, il sistema si sta spegnendo |
-| ### **(ii) NON ESPLODE** | la stessa serie, e gli **invarianti** | una crescita **senza tetto**, oppure ### **un solo invariante violato** |
+| ### **(i) NON SI SPEGNE** | `K_fase` *(= `0.5·Σ phivel²`)* su una finestra ### **che contiene il picco** | ### **un decadimento monotono** verso zero: se `K_fase` cala in **ogni** sottofinestra, il sistema si sta spegnendo |
+| ### **(ii) NON CRESCE SENZA TETTO** *(non piu' «non esplode»)* | la stessa serie, ### **e dove sta il MASSIMO** | ### **il massimo ALLA FINE della finestra**, che vuol dire ### **finestra troppo corta e giudizio impossibile**; oppure una crescita che ### **non ha massimo** su una finestra che per il riferimento lo contiene; oppure ### **un solo invariante violato** |
+| ### **(0) LA FINESTRA, e si misura PRIMA** | la **lunghezza minima** che contiene il picco del **riferimento** | ### **misurata: il picco e' al passo 88**, quindi ### **72 passi NON BASTANO e 150 si'.** Una prova di dinamica su 72 passi ### **non e' una prova** |
 | ### **(iii) IL CONTO TORNA** | ### **il bilancio dell'energia, voce per voce** | ### **un residuo non dichiarato**: cio' che entra meno cio' che esce meno il calore ### **deve fare zero entro la precisione**, e il residuo si **riporta** |
 
 ### ⚠ **E LA PROVA (iii) SI PUO' FARE SOLO CON L'IMBRAGATURA DEL COMMIT 1**
