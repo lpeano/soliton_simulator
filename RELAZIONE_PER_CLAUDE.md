@@ -8631,3 +8631,19 @@ non rifaccia il sospetto.
 > ### **SVILUPPATO**, non sulla semina, quindi ### **`DIVISIONE-AUTOCONSISTENTE:M0` ora gira DOPO
 > il run** invece che prima. *(Blob dello strumento: `342d5710`.)*
 > ### **Si e' fermato PRIMA di produrre un numero**, che e' il modo giusto di sbagliare.
+
+# 🔧 **LO STRUMENTO DELLA MISURA SUL `--regime`, committato prima di girare** *(2026-10-01)*
+
+`csv/_test_fork/_regime_due_sistemi.py` *(blob `f28a7588`)*: due reti dalla **stessa** scena di
+riferimento, una ### **senza `--regime`** *(il sistema di riferimento)* e una ### **con `--regime
+deterministico`**, confrontate ### **passo per passo** su 23 grandezze di stato **e sui contatori**
+— lo stesso schema del braccio `B` del sigillo del controllo unico.
+
+### ⚠ **E DICHIARO SUBITO CHE COSA QUESTA MISURA NON DECIDE**
+### **La differenza, grande o piccola, non e' il problema.** Il problema e' che ### **due sistemi
+diversi abbiano lo stesso nome.** La misura serve a **una** cosa: dire se la via ①
+*(«allineare `_applica_regime` al modulo»)* ### **butterebbe via un sistema che qualcuno ha
+misurato** — il braccio `O2` di `_sigillo_osservatore.py` e' un A/B a **variabile singola**
+costruito ### **PROPRIO su quella differenza.**
+### ➜ **Qualunque sia il numero, resta preferibile la via ②: rinominare cio' che produce.** Lo
+scrivo **prima** di vedere il numero, cosi' il numero non puo' cambiarmi la conclusione a posteriori.
