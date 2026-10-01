@@ -9136,3 +9136,35 @@ sbagliata**, e ### **`L-NUMERI` non protegge da questo: protegge dalla TRASCRIZI
 DERIVAZIONE.**
 ### **Le due annotazioni sono in `doc/MITOSI_storia.md` e in `doc/PIANO_divisione_e_calore.md`,
 accanto alla versione sbagliata — che resta leggibile** (par.8).
+
+# ⛔ **UN ARTEFATTO COMMITTATO DICEVA DI ESSERE «IL CODICE DI PRIMA» E NON LO ERA** *(2026-10-01)*
+
+Guardando i file **modificati e non committati** *(cosa che ho fatto per non ripetere l'errore del
+`git add` di cio' che uno script ha toccato)* ho trovato tre cose in sospeso, e ### **una e' un
+difetto vero.**
+
+## ⛔ **`_sim_prima_controllo.py`: il file COMMITTATO conteneva LA CURA**
+
+| | |
+|---|---|
+| la versione **committata** | sha1 ### **`83bc2934`**, e conteneva ### **QUATTRO occorrenze di `_ferma_se_registro_incoerente`** |
+| cos'e' `83bc2934` | ### **uno dei blobi INTERMEDI della cura stessa** *(quello del TIPO)* |
+| la versione **su disco** | ### **`f7541d03`**, che e' il pre-controllo **vero** — ### **quello che il sigillo dichiara nel suo stesso referto** |
+
+### ✅ **E IL SIGILLO NON E' DIFETTOSO:** ### **ri-estrae il file a ogni run** con
+`_cli_flag.sim_prima_del_flag` *(la cura di `H-P8`)*, quindi ### **tutti i run hanno confrontato
+contro il blob giusto.** Il difetto era ### **nell'ARTEFATTO COMMITTATO.**
+### ⚠ **Perche' conta comunque:** chi legge il repo **senza rigirare** il sigillo avrebbe creduto
+che la byte-identita' fosse provata contro quel file, cioe' ### **contro la cura stessa a uno
+stadio intermedio: un confronto VUOTO.** ### **E' la famiglia di `ANCORE-1`, in una forma nuova:
+non l'ancora sbagliata — L'ARTEFATTO sbagliato.**
+### 📌 **E IL PRESIDIO CHE MANCA, proposto:** ### **nessuno controlla che un file chiamato
+`_sim_prima_*` NON contenga l'ancora della cura.** Sarebbe un controllo di **una riga**. Oggi la
+garanzia e' che il sigillo lo riscriva, cioe' ### **dipende dal fatto che qualcuno lo rigiri.**
+
+## 📋 **E LE ALTRE DUE COSE IN SOSPESO, entrambe OMISSIONI MIE**
+
+| | |
+|---|---|
+| `_guasto_ripieghi.json` | il referto che avevo ### **rigirato sul blob del commit 1** *(`5d29334b`)* e ### **mai committato**: la versione committata era di `62d67675`. ### **E il sigillo LEGGE quel file e ne verifica il blob** — quindi da un clone fresco avrebbe detto *«referto stantio»* |
+| `doc/INDICE_ID_ESCLUSI.tsv` | l'esclusione di ### **`M7`**, aggiunta e ### **mai committata**: un commit che citasse `M7` sarebbe stato ### **rifiutato da `H-INDICE`** |

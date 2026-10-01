@@ -1,5 +1,5 @@
 {
- "blob_sim_sha1_byte": "62d67675b29f70e28a9d876bfb9875101945983e",
+ "blob_sim_sha1_byte": "5d29334b31a7999f0727f71723d0012547eff201",
  "passi_base": 30,
  "n_base": 12802,
  "archi_base": 471564,
@@ -172,13 +172,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -186,13 +186,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -266,13 +266,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -280,13 +280,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -294,13 +294,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -308,13 +308,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -322,13 +322,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -336,13 +336,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -372,13 +372,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -386,13 +386,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -400,13 +400,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -436,13 +436,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -450,13 +450,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -464,13 +464,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -478,13 +478,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -492,13 +492,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -506,13 +506,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -520,13 +520,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -534,13 +534,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -548,13 +548,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -562,13 +562,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -576,13 +576,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -590,13 +590,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -604,13 +604,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -618,13 +618,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -632,13 +632,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -646,13 +646,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -660,13 +660,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -674,13 +674,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -688,13 +688,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   },
@@ -702,13 +702,13 @@
    "CORTA": {
     "esito": "PROTETTO",
     "tipo": "CacheCorta",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO CORTA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    },
    "LUNGA": {
     "esito": "PROTETTO",
     "tipo": "CacheLunga",
-    "dove": "soliton_simulator.py:1175",
+    "dove": "soliton_simulator.py:1282",
     "messaggio": "[REGISTRO LUNGA] IL RUN SI FERMA (`RIPIEGHI-ZERO`, `A9`)."
    }
   }
