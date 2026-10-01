@@ -193,7 +193,7 @@ def principale():
 
     # ------------------------------------------------- la SPIA sulle voci
     per_voce = []
-    stato = {"passo": 0, "foto": None, "phi_prima": None, "cont_prima": None}
+    stato = {"passo": 0, "foto": None, "prima_mitosi": None, "calcio": []}
     vero = S._ferma_se_registro_incoerente
 
     def spia(nt, dove, voce=None, comp=None):
@@ -201,6 +201,35 @@ def principale():
         prec = stato["foto"]
         riga = {"passo": stato["passo"], "voce": voce, "dove": dove}
         riga.update(s)
+        # ### M4, LA CURA DEL 2026-10-01: il CALCIO si misura ATTORNO ALLA VOCE `mitosi`, non
+        #   prima-e-dopo il passo. ⚠ MIO DIFETTO, e il suo stesso numero l'ha smentito: col
+        #   confronto sull'INTERO PASSO risultavano mossi 102448 genitori sia su `phi` sia su
+        #   `phivel` -- cioe' TUTTI i nodi, perche' `step` e `scuoti_vuoto` li muovono tutti.
+        #   ### Quel numero non parlava del calcio: parlava del passo.
+        #   La composizione mette `step` SUBITO PRIMA di `mitosi`, quindi la fotografia
+        #   <<prima della mitosi>> e' quella del confine precedente -- e si tiene SOLO quella.
+        if voce == "mitosi" and stato["prima_mitosi"] is not None:
+            _pm = stato["prima_mitosi"]
+            _n0 = len(_pm["phi"])
+            _ph = np.asarray(nt.phi)[:_n0]
+            _pv = np.asarray(nt.phivel)[:_n0]
+            _dphi = np.abs(((_ph - _pm["phi"] + np.pi) % (2 * np.pi)) - np.pi)
+            _dpv = np.abs(_pv - _pm["phivel"])
+            stato["calcio"].append({
+                "passo": stato["passo"], "n_prima": int(_n0), "n_dopo": int(nt.n),
+                "genitori_con_phi_mosso": int(np.count_nonzero(_dphi > 0.0)),
+                "genitori_con_phivel_mosso": int(np.count_nonzero(_dpv > 0.0)),
+                "dphi_somma": float(np.sum(_dphi)), "dphi_max": float(np.max(_dphi)),
+                "dphivel_somma": float(np.sum(_dpv)), "dphivel_max": float(np.max(_dpv)),
+                # la cinetica dei SOLI nodi che c'erano prima, contro quella di TUTTI:
+                #   serve a separare <<i nati entrano nella somma>> da <<il calcio muove phivel>>.
+                "K_fase_vecchi_prima": float(0.5 * np.sum(_pm["phivel"] ** 2)),
+                "K_fase_vecchi_dopo": float(0.5 * np.sum(_pv ** 2)),
+                "K_fase_tutti_dopo": float(0.5 * np.sum(np.asarray(nt.phivel)[:int(nt.n)] ** 2)),
+            })
+        # la fotografia per il confine DOPO (cioe' <<prima della prossima voce>>)
+        stato["prima_mitosi"] = {"phi": np.asarray(nt.phi)[:int(nt.n)].copy(),
+                                 "phivel": np.asarray(nt.phivel)[:int(nt.n)].copy()}
         if prec is not None:
             for k in ("K_fase", "K_metr", "Q2", "S_tw"):
                 riga["d_" + k] = s[k] - prec[k]
@@ -221,26 +250,14 @@ def principale():
     for k in range(1, passi + 1):
         stato["passo"] = k
         cont_prima = {c: int(getattr(net, c, 0)) for c in CONTATORI_NASCITA}
-        n_prima = int(net.n)
-        phi_prima = np.asarray(net.phi)[:n_prima].copy()
-        pv_prima = np.asarray(net.phivel)[:n_prima].copy()
         with contextlib.redirect_stdout(io.StringIO()):
             _passo.passo_pieno(S, net)
         cont_dopo = {c: int(getattr(net, c, 0)) for c in CONTATORI_NASCITA}
         nati = {c: cont_dopo[c] - cont_prima[c] for c in CONTATORI_NASCITA}
         if any(nati.values()):
-            # ### M4: IL CALCIO SPOSTA `phi`, NON `phivel` -- e qui si MISURA, non si crede.
-            n_dopo = int(net.n)
-            phi_dopo = np.asarray(net.phi)[:n_prima]
-            pv_dopo = np.asarray(net.phivel)[:n_prima]
-            dphi = np.abs(((phi_dopo - phi_prima + np.pi) % (2 * np.pi)) - np.pi)
-            mitosi_dettaglio.append({
-                "passo": k, "nati": nati, "n_prima": n_prima, "n_dopo": n_dopo,
-                "genitori_con_phi_mosso": int(np.count_nonzero(dphi > 0.0)),
-                "dphi_somma": float(np.sum(dphi)), "dphi_max": float(np.max(dphi)),
-                "genitori_con_phivel_mosso": int(np.count_nonzero(pv_dopo != pv_prima)),
-                "dphivel_somma_assoluta": float(np.sum(np.abs(pv_dopo - pv_prima))),
-            })
+            # ⚠ IL CONTEGGIO DELLE NASCITE resta sul passo (i contatori sono cumulativi); il
+            #   CALCIO invece si misura ATTORNO ALLA VOCE, e lo fa la spia.
+            mitosi_dettaglio.append({"passo": k, "nati": nati})
     S._ferma_se_registro_incoerente = vero
     stampa("  confini di voce misurati: %d" % len(per_voce))
     stampa("  passi con NASCITE: %d" % len(mitosi_dettaglio))
@@ -350,20 +367,44 @@ def principale():
         m4["voci_mitosi"].append({k: r.get(k) for k in
                                   ("passo", "d_K_fase", "d_K_metr", "d_Q2", "d_S_tw", "d_n",
                                    "d_m", "K_fase", "K_metr", "Q2", "S_tw", "n", "m")})
+    calcio = [x for x in stato["calcio"] if x["n_dopo"] > x["n_prima"]]
+    m4["calcio_attorno_alla_voce"] = stato["calcio"]
     if mitosi_dettaglio:
-        gm = sum(x["genitori_con_phi_mosso"] for x in mitosi_dettaglio)
-        gv = sum(x["genitori_con_phivel_mosso"] for x in mitosi_dettaglio)
-        stampa("  passi con nascite: %d" % len(mitosi_dettaglio))
-        stampa("  ### IL CALCIO SPOSTA `phi` E NON `phivel`, MISURATO:")
-        stampa("      genitori con `phi` mosso ...... %d" % gm)
-        stampa("      genitori con `phivel` mosso ... %d   <-- se 0, il calcio NON tocca la cinetica"
-               % gv)
+        stampa("  passi con nascite: %d   voci `mitosi` con n cresciuto: %d"
+               % (len(mitosi_dettaglio), len(calcio)))
+    if calcio:
+        gm = sum(x["genitori_con_phi_mosso"] for x in calcio)
+        gv = sum(x["genitori_con_phivel_mosso"] for x in calcio)
+        stampa("  ### IL CALCIO, MISURATO ATTORNO ALLA VOCE `mitosi` (non sul passo intero):")
+        stampa("      genitori (nodi che c'erano PRIMA) con `phi` mosso ...... %d" % gm)
+        stampa("      genitori con `phivel` mosso ............................ %d" % gv)
         stampa("      somma |dphi| %.6e   max |dphi| %.6e"
-               % (sum(x["dphi_somma"] for x in mitosi_dettaglio),
-                  max(x["dphi_max"] for x in mitosi_dettaglio)))
-        stampa("  ### QUINDI il calcio NON cambia 0.5*sum(phivel^2): cambia la FASE, cioe' il")
-        stampa("      termine di INTERFERENZA -- che e' proprio il pezzo di cui M0 dice che NON")
-        stampa("      esiste come funzione di stato (connessione dal Bloch RITARDATO).")
+               % (sum(x["dphi_somma"] for x in calcio),
+                  max(x["dphi_max"] for x in calcio)))
+        stampa("      somma |dphivel| %.6e   max |dphivel| %.6e"
+               % (sum(x["dphivel_somma"] for x in calcio),
+                  max(x["dphivel_max"] for x in calcio)))
+        # ### LA CONCLUSIONE SI DERIVA DAL NUMERO. (Nella prima stesura era CABLATA nel testo, e
+        #   il suo stesso numero l'ha smentita: e' il difetto che `L-NUMERI` esiste per impedire.)
+        if gv == 0 and gm > 0:
+            stampa("  ### -> IL CALCIO SPOSTA `phi` E NON `phivel`: non cambia 0.5*sum(phivel^2)")
+            stampa("      dei nodi che c'erano, cambia la FASE -- cioe' il termine di")
+            stampa("      INTERFERENZA, che e' proprio il pezzo di cui M0 dice che NON esiste")
+            stampa("      come funzione di stato (connessione dal Bloch RITARDATO).")
+        elif gv > 0:
+            stampa("  ### -> IL CALCIO TOCCA ANCHE `phivel` su %d genitori: la premessa del" % gv)
+            stampa("      mandato (<<sposta phi, non phivel>>) NON regge, e va corretta.")
+        else:
+            stampa("  ### -> nessun genitore mosso: in questi passi il calcio NON HA AGITO.")
+        # separazione fra <<i nati entrano nella somma>> e <<il calcio muove phivel>>
+        dv = sum(x["K_fase_vecchi_dopo"] - x["K_fase_vecchi_prima"] for x in calcio)
+        dt_ = sum(x["K_fase_tutti_dopo"] - x["K_fase_vecchi_prima"] for x in calcio)
+        stampa("  ### LA CINETICA DI FASE, SEPARATA:")
+        stampa("      variazione sui SOLI nodi che c'erano prima ... %+.6e" % dv)
+        stampa("      variazione includendo i NATI ................. %+.6e" % dt_)
+        stampa("      -> la differenza, %+.6e, e' CIO' CHE I NATI PORTANO DENTRO la somma,"
+               % (dt_ - dv))
+        stampa("         e NON e' energia che il calcio ha dato a qualcuno.")
     for r in m4["voci_mitosi"]:
         if r.get("d_m") or r.get("d_n"):
             stampa("  passo %3d: d_n %+d  d_m %+d  d_K_fase %+.3e  d_K_metr %+.3e  d_Q2 %+.3e  "

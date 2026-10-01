@@ -8647,3 +8647,37 @@ misurato** — il braccio `O2` di `_sigillo_osservatore.py` e' un A/B a **variab
 costruito ### **PROPRIO su quella differenza.**
 ### ➜ **Qualunque sia il numero, resta preferibile la via ②: rinominare cio' che produce.** Lo
 scrivo **prima** di vedere il numero, cosi' il numero non puo' cambiarmi la conclusione a posteriori.
+
+# ⛔ **UNA MIA CONCLUSIONE ERA CABLATA, E IL SUO STESSO NUMERO L'HA SMENTITA** *(2026-10-01)*
+
+> ### **Luca, questo e' l'errore peggiore che ho fatto oggi, e va detto per primo.**
+
+La misura `DIVISIONE-AUTOCONSISTENTE:M4` stampava:
+
+> *«### IL CALCIO SPOSTA `phi` E NON `phivel`, MISURATO … ### QUINDI il calcio NON cambia
+> `0.5*sum(phivel^2)`»*
+
+### ⛔ **Ma quella frase era SCRITTA NEL CODICE, non derivata dal numero** — e il numero accanto
+diceva: ### **«genitori con `phivel` mosso ... 102448»**, cioe' ### **esattamente quanti quelli con
+`phi` mosso.** ### **La conclusione contraddiceva il dato che le stava sopra, e il referto le
+stampava entrambe.**
+
+## 🔎 **E IL NUMERO ERA SBAGLIATO ANCHE LUI, per un secondo difetto**
+
+Confrontavo `phi` e `phivel` ### **prima e dopo l'INTERO PASSO**, non ### **attorno alla voce
+`mitosi`.** `102448 = 8 × 12806`, cioe' ### **TUTTI i nodi**: li muovono `step` e `scuoti_vuoto`.
+### ➜ **Quel numero non parlava del calcio: parlava del passo.**
+
+## ✅ **LE DUE CURE**
+
+| | |
+|---|---|
+| **la misura** | il calcio si misura ### **attorno alla VOCE `mitosi`**, con la spia *(la composizione mette `step` subito prima, quindi il confine precedente E' il «prima»)*, e ### **solo sui nodi che c'erano gia'** |
+| ### **la conclusione** | ### **si DERIVA dal numero con un `if`**, e ha **tre** rami: `phivel` fermo, `phivel` mosso *(e allora dico che la premessa del mandato non regge)*, nessun genitore mosso |
+| **in piu'** | la cinetica di fase si riporta ### **separata**: *«sui soli nodi che c'erano»* contro *«includendo i nati»* — cosi' ### **cio' che i nati PORTANO DENTRO la somma non si confonde con energia data dal calcio** |
+
+### ⚠ **E LA LEZIONE E' ESATTAMENTE `L-NUMERI`, in una forma che non avevo previsto**
+La regola dice *«ogni numero esce da uno script»*. ### **Qui il numero usciva da uno script, ma la
+CONCLUSIONE no** — era una mia convinzione messa in un `print`. ### ➜ **Una conclusione cablata e'
+un numero ricopiato a mano travestito da misura**, e questo giro mi dice che `L-NUMERI` vale anche
+per i **verdetti**, non solo per le cifre. *(Blob dello strumento corretto: `a9944b1a`.)*
