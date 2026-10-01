@@ -9080,3 +9080,59 @@ scelti a mano *(`KICK_TW`, lo `0.5`, il `clip(±2)`, il pavimento `1e-6`, il `cl
 
 ### 🕐 **`:M7` resta da fare** *(la potenza del solo `−xi·phivel`)*, e ### **senza di lei le
 decisioni 2 e 4 non hanno il loro numero.**
+
+# ⛔⛔ **IL `3.79` NON ESISTE: UN MIO ERRORE HA GENERATO UN RILIEVO, E L'HO SCRITTO IN DUE DOCUMENTI** *(2026-10-01)*
+
+> ### **Luca, questa e' la correzione piu' scomoda della giornata, e va detta per intero.**
+
+## 🔢 **L'ERRORE: ho diviso per gli ARCHI NUOVI invece che per le DIVISIONI**
+
+| evento | `d_n` | `d_m` |
+|---|---|---|
+| una **divisione** | `+1` | `+1` *(uno rimosso, due aggiunti)* |
+| uno **Schwinger** | `+1` | ### **`+2`** |
+
+### ➜ **L'evento del passo 70 era `d_n +3, d_m +4`, cioe' DUE DIVISIONI piu' UNO SCHWINGER.** Il
+`|tw|` per arco diviso e' ### **`15.1458 / 2 = 7.57`**, non `15.1458 / 4 = 3.79`.
+### **Il `3.79` non e' il `|tw|` di nessun arco: e' una media fra cose diverse.**
+
+## ✅ **I NUMERI VERI** *(separando gli eventi con `div = 2·d_n − d_m`)*
+
+| | `|tw|` | in **avvolgimenti** |
+|---|---|---|
+| minimo | ### **6.9793** | ### **1.111** |
+| mediano | **7.5568** | **1.203** |
+| massimo | **8.3466** | **1.328** |
+
+*(prima avevo scritto: min `0.60`, mediano `1.17`, max `1.33` — ### **il minimo era l'artefatto**)*
+
+## 🔎 **E IL CONTO ORA TORNA, con una spiegazione DIVERSA dalla campana**
+
+La soglia **modulata** e' `3π·(1 − 0.3·tanh(grad))`, cioe' fra ### **`6.5973` e `9.4248`** — fra
+### **`1.05` e `1.50` avvolgimenti. TUTTI gli archi divisi stanno DENTRO quella banda** *(il minimo
+e' `6.98 ≥ 6.60`)*.
+
+### ⛔ **E SOTTO LA SOGLIA LOCALE NIENTE PUO' DIVIDERSI, MAI**
+`ecc = max(avv/soglia − 1, 0)` e' **clippato a zero**, e ### **`satura(0) = 0` esattamente** —
+quindi `ampiezza = 0`, `resp = 0`, `prob = 1 − exp(0) = 0`, e ### **`nasce` e' FALSO per
+costruzione.** ### **La campana `−tanh(3·(pos − centro))` NON ammette archi sotto soglia: decide
+soltanto CREA contro RESPINGE, SOPRA la soglia.**
+
+### ➜ **LA FRASE GIUSTA, che sostituisce sia la mia che quella del guardiano:**
+### **la soglia non e' il `3π` NOMINALE — e' `3π·(1 − 0.3·tanh(grad))`, e le divisioni avvengono
+nella PARTE BASSA della banda.** ### **«Sopra `3π`» e' sbagliato, ma non per una campana: perche'
+il `3π` e' il TETTO della banda, non la soglia.**
+
+### ⚠ **E IL NUMERO CHE CONTA DAVVERO E' IL `0.3`, non il `3.0` della `tanh`:** e' lui a decidere
+### **quanto in basso scende la soglia**, cioe' ### **la larghezza della banda in cui nasce la
+materia.** Entrambi restano nel criterio 2, ### **ma il `0.3` e' quello con l'effetto misurato.**
+
+## 📌 **LA LEZIONE, e non e' comoda**
+
+### **Il guardiano ha costruito un rilievo su un numero che avevo derivato male, e io l'ho scritto
+in DUE documenti come fatto — senza rifare il conto.**
+### ➜ **Un numero generato da uno script non e' al sicuro se la FORMULA dentro lo script e'
+sbagliata**, e ### **`L-NUMERI` non protegge da questo: protegge dalla TRASCRIZIONE, non dalla
+DERIVAZIONE.**
+### **Le due annotazioni sono in `doc/MITOSI_storia.md` e in `doc/PIANO_divisione_e_calore.md`,
+accanto alla versione sbagliata — che resta leggibile** (par.8).

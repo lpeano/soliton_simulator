@@ -304,6 +304,58 @@ l'avrebbe mai diviso.**
 ### ➜ **Va corretto QUI e nella STORIA DELLA MITOSI**, dove la soglia e' descritta come netta. E il
 ### **`3.0` dentro la `tanh` entra nell'elenco del criterio 2**: ### **e' un numero scelto a mano.**
 
+> ### ⛔⛔ **CORREZIONE DEL 2026-10-01 (stesso giorno): IL `3.79` NON ESISTE, E LA CORREZIONE QUI
+> ### SOPRA E' SBAGLIATA. Si ANNOTA e non si riscrive** *(par.8)*.
+>
+> ### **L'errore e' MIO, e ha generato il rilievo del guardiano:** nel referto di
+> `DIVISIONE-AUTOCONSISTENTE:M1` avevo diviso `d_S_tw` per ### **`d_m`** *(gli archi nuovi)*
+> invece che per ### **il NUMERO DI DIVISIONI**. Ma i due eventi non hanno la stessa impronta:
+>
+> | evento | `d_n` | `d_m` |
+> |---|---|---|
+> | una **divisione** | `+1` | `+1` *(uno rimosso, due aggiunti)* |
+> | uno **Schwinger** | `+1` | ### **`+2`** |
+>
+> ### ➜ **L'evento del passo 70 era `d_n +3, d_m +4`, cioe' DUE DIVISIONI piu' UNO SCHWINGER**, e
+> il `|tw|` per arco diviso e' ### **`15.1458 / 2 = 7.57`**, non `/4 = 3.79`.
+>
+> ### ✅ **I NUMERI VERI, ricalcolati separando gli eventi** *(`div = 2·d_n − d_m`)*:
+>
+> | | `|tw|` | in **avvolgimenti** |
+> |---|---|---|
+> | minimo | ### **6.9793** | ### **1.111** |
+> | mediano | **7.5568** | **1.203** |
+> | massimo | **8.3466** | **1.328** |
+>
+> ### 🔎 **E ADESSO IL CONTO TORNA, ED E' UNA SPIEGAZIONE DIVERSA DALLA CAMPANA**
+> La soglia ### **modulata** vale `3π·(1 − 0.3·tanh(grad))`, cioe' sta fra ### **`6.5973`** e
+> `9.4248` — ### **fra `1.05` e `1.50` avvolgimenti.** ### **TUTTI gli archi divisi stanno DENTRO
+> quella banda** *(il minimo e' `6.98 ≥ 6.60`)*.
+>
+> ### ⛔ **E SOTTO LA SOGLIA LOCALE NIENTE PUO' DIVIDERSI, MAI:** `ecc = max(avv/soglia − 1, 0)` e'
+> ### **clippato a zero**, `satura(0) = 0` ### **esattamente**, quindi `ampiezza = 0`, `resp = 0`,
+> `prob = 1 − exp(0) = 0` e ### **`nasce` e' FALSO per costruzione.** ### **La campana
+> `−tanh(3·(pos − centro))` non ammette archi sotto soglia: decide soltanto CREA contro RESPINGE
+> SOPRA la soglia.**
+>
+> ### ➜ **LA FRASE GIUSTA, che sostituisce entrambe le precedenti:**
+> ### **la soglia NON e' il `3π` nominale — e' `3π·(1 − 0.3·tanh(grad))`, e le divisioni avvengono
+> ### nella PARTE BASSA di quella banda** *(da `1.11` a `1.33` avvolgimenti, contro un nominale di
+> `1.50`)*. ### **Quindi «sopra `3π`» e' sbagliato, ma non perche' ci sia una campana: perche' il
+> `3π` e' il TETTO della banda, non la soglia.**
+>
+> ### ⚠ **E IL `0.3` DELLA MODULAZIONE E' IL NUMERO CHE CONTA DAVVERO**, non il `3.0` della `tanh`:
+> e' lui a decidere ### **quanto in basso** puo' scendere la soglia, cioe' ### **la larghezza della
+> banda in cui la materia nasce.** ### **Entrambi restano nell'elenco del criterio 2**, ma
+> ### **il `0.3` e' quello con l'effetto fisico misurato.**
+>
+> ### 📌 **E LA LEZIONE E' LA PIU' SCOMODA DELLA GIORNATA:** il guardiano ha costruito un rilievo
+> ### **su un numero che avevo derivato male**, e io ### **l'ho scritto in DUE documenti come
+> fatto, senza rifare il conto.** ### **Un numero generato da uno script non e' al sicuro se la
+> FORMULA dentro lo script e' sbagliata**, e `L-NUMERI` non protegge da questo: ### **protegge
+> dalla trascrizione, non dalla derivazione.**
+
+
 ## ⛔ **② `dir_laterale` NON E' SIMMETRICA, e la mia «verifica» era sbagliata**
 
 Avevo scritto, fra le *«verifiche fatte prima di accusare»*, che `dir_laterale` ### **«nasce dal
