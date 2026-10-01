@@ -179,7 +179,8 @@ def principale():
     stampa("")
     stampa("  ### IL FALLBACK DI `_r_nodo_mitosi` (l'orologio UNIFORME): scattato %d volte"
            % sum(salti))
-    stampa("      su %d decisioni. Se e' ZERO, la soglia misurata qui e' quella VERA -- ed e'")
+    stampa("      su %d decisioni. Se e' ZERO, la soglia misurata qui e' quella VERA -- ed e'"
+           % len(dentro))
     stampa("      la differenza col braccio C del sigillo, che chiamava la decisione FUORI dal")
     stampa("      passo, quando `len(_r_corrente) < n` e il fallback SCATTA.")
 

@@ -9,7 +9,7 @@
 |---|---|---|
 | ### **`A`** | ### **byte-identico fino al passo 72** contro il blob di prima, ### **grandezze E CONTATORI** | **una** grandezza o **un** contatore diverso in **un** passo |
 | ### **`B`** | ### **IL CASO CHE DEVE FALLIRE** (`P1-sexies`): un arco portato ### **sopra la sua soglia locale** deve ### **entrare nell'insieme dei sopra-soglia che `decidi_divisione` DICHIARA** | se l'insieme non cambia, ### **il `perche'` non descrive la decisione: la decora** |
-| ### **`C`** | ### **LA MISURA CHE MI SERVE PER UNA CORREZIONE:** quanto vale la **soglia** DOVE AVVENGONO LE DIVISIONI, e il `|tw|` degli archi che si dividono ### **davvero** | niente: ### **e' una MISURA, non una prova** -- e il referto la riporta come tale |
+| ### **`C`** | ### **LA SOGLIA LOCALE, misurata DENTRO la decisione** *(avvolgendo `decidi_divisione`)*: la soglia degli archi che si dividono, le statistiche sulla rete, e ### **il contatore del FALLBACK dell'orologio** | niente nel verdetto: ### **e' una MISURA.** ⛔ **Ma la PRIMA stesura la prendeva FUORI dal passo e ha prodotto una conclusione FALSA**, quindi ora ### **il referto dichiara se il fallback e' scattato** |
 
 ### ⚠ **PERCHE' `B` NON MUOVE LA SOGLIA, come il piano diceva**
 Il piano chiedeva *«si porta la soglia APPENA SOTTO il `|tw|` piu' alto fra gli archi che OGGI
@@ -22,6 +22,23 @@ arco NOTO cambia lato)*, e ### **non si tocca nessuna costante di fisica.**
 ### ⚠ **E NON si prova su `sel`:** `prob` di un arco appena sopra soglia e' ### **minuscola**, e
 un'estrazione casuale non e' un criterio. ### **Si prova sulla parte DETERMINISTICA**, che e'
 quella che la separazione deve avere conservato.
+
+### ⛔⛔ **IL BRACCIO `C` DELLA PRIMA STESURA ERA SBAGLIATO, e la correzione e' QUESTA**
+*(rilievo del guardiano, 2026-10-01, punto 4)*
+Chiamava `decidi_divisione()` ### **FUORI dal passo**, dopo il ciclo dei 72, e leggeva
+### **`soglia = 3π` esatto su tutti gli archi** — da cui avevo concluso *«la modulazione non
+agisce»*, ### **che e' FALSO.** La causa e' una riga:
+```
+_r_nodo_mitosi():  r = getattr(self, "_r_corrente", None)
+                   if r is None or len(r) < n: return np.ones(n)   # OROLOGIO UNIFORME
+```
+### **Il passo 72 ha partorito**, quindi `n` era cresciuto oltre `len(_r_corrente)` *(scritta da
+`step` **prima** della mitosi)* ➜ ### **fallback ➜ `grad_modula = 0` ➜ soglia non modulata.**
+### ➜ **ORA `C` AVVOLGE LA DECISIONE e misura DENTRO il passo**, e ### **riporta il contatore
+`_tum_r_salti`**: cosi' *«il fallback non e' scattato»* e' ### **un numero, non una mia
+assicurazione.**
+### ⚠ **E `_r_corrente` sta in `REGISTRO_DERIVATE` PROPRIO PERCHE' la sua lunghezza non e' un
+invariante: il registro lo dichiarava.**
 
 COMANDO:  python csv/_seal_fork/_sig_decisione_separata.py [--passi=72]
 USCITA:   0 se `A` e `B` passano; 1 altrimenti. Referto in
@@ -188,44 +205,67 @@ def principale():
                                                                                       passi)))
 
     # ------------------------------------------------------------------ C (misura)
+    # ⛔ RISCRITTO il 2026-10-01: la prima stesura chiamava la decisione FUORI dal passo e
+    #   leggeva una soglia NON MODULATA, perche' `_r_nodo_mitosi` cadeva nel suo fallback.
+    #   Ora si avvolge la decisione e si misura DENTRO, col contatore del fallback a fianco.
     stampa("")
     stampa("=" * 104)
-    stampa("BRACCIO C (MISURA, non prova) -- LA SOGLIA DOVE AVVENGONO LE DIVISIONI")
+    stampa("BRACCIO C (MISURA, non prova) -- LA SOGLIA LOCALE, DENTRO LA DECISIONE")
     stampa("=" * 104)
-    sel, perche = B.decidi_divisione()
-    mis = {}
-    if perche and "soglia" in perche:
-        sg = np.asarray(perche["soglia"], float)
-        av = np.asarray(perche["avv"], float)
-        pr = np.asarray(perche["prob"], float)
-        sopra = av >= sg
-        PHI = float(getattr(SB, "PHI_CRIT", 2 * np.pi))
-        mis = {"soglia_min": float(sg.min()), "soglia_mediana": float(np.median(sg)),
-               "soglia_max": float(sg.max()),
-               "soglia_in_avvolgimenti": [float(sg.min() / PHI), float(sg.max() / PHI)],
-               "archi_sopra_soglia": int(sopra.sum()), "archi": int(av.size),
-               "avv_max": float(av.max()), "prob_max": float(pr.max()),
-               "prob_max_sopra": (float(pr[sopra].max()) if sopra.any() else None),
-               "avv_dei_sopra": ([float(x) for x in np.sort(av[sopra])[-10:]]
-                                 if sopra.any() else []),
-               "PHI_CRIT": PHI,
-               "sel": (None if sel is None else [int(x) for x in sel])}
-        stampa("  soglia: min %.6f  mediana %.6f  max %.6f   (in avvolgimenti: %.4f .. %.4f)"
-               % (mis["soglia_min"], mis["soglia_mediana"], mis["soglia_max"],
-                  mis["soglia_in_avvolgimenti"][0], mis["soglia_in_avvolgimenti"][1]))
-        stampa("  archi SOPRA la soglia locale: %d su %d   |tw| max %.6f"
-               % (mis["archi_sopra_soglia"], mis["archi"], mis["avv_max"]))
-        stampa("  prob: max %.6e   fra i SOPRA-soglia: max %s"
-               % (mis["prob_max"], mis["prob_max_sopra"]))
-        if mis["avv_dei_sopra"]:
-            stampa("  i |tw| piu' alti fra i sopra-soglia: %s"
-                   % ["%.4f" % x for x in mis["avv_dei_sopra"]])
-        stampa("  ### QUESTO E' IL NUMERO CHE MI SERVE: se la soglia qui vale ~%.2f, un arco con"
-               % mis["soglia_mediana"])
-        stampa("      |tw| fra 6.98 e 8.35 e' SOTTO soglia, e la mia spiegazione committata")
-        stampa("      (<<la banda modulata scende a 6.597>>) NON REGGE su questa scena.")
-    else:
-        stampa("  `perche'` senza `soglia`: la rete non ha archi, o la decisione e' uscita subito.")
+    SC, C = carica(None, "sig_c2_soglia")
+    dentro = []
+    _vero_dec = C.decidi_divisione
+
+    def _dec_spia():
+        _salti = int(getattr(C, "_tum_r_salti", 0))
+        _sel, _perche = _vero_dec()
+        _r = {"salti_r": int(getattr(C, "_tum_r_salti", 0)) - _salti,
+              "n": int(C.n), "m": int(len(C.i)),
+              "len_r_corrente": (-1 if getattr(C, "_r_corrente", None) is None
+                                 else int(len(C._r_corrente)))}
+        if _perche and "soglia" in _perche:
+            _sg = np.asarray(_perche["soglia"], float)
+            _av = np.asarray(_perche["avv"], float)
+            _r.update({"soglia_min": float(_sg.min()), "soglia_max": float(_sg.max()),
+                       "archi_sopra": int(np.count_nonzero(_av >= _sg))})
+            if _sel is not None and len(_sel):
+                _r["divisi"] = [{"arco": int(k), "tw": float(_av[k]), "soglia": float(_sg[k]),
+                                 "sopra": bool(_av[k] >= _sg[k])} for k in _sel]
+        dentro.append(_r)
+        return _sel, _perche
+
+    C.decidi_divisione = _dec_spia
+    for _k in range(passi):
+        with contextlib.redirect_stdout(io.StringIO()):
+            _passo.passo_pieno(SC, C)
+    _sm = [r["soglia_min"] for r in dentro if "soglia_min" in r]
+    _sx = [r["soglia_max"] for r in dentro if "soglia_max" in r]
+    _sa = [r["archi_sopra"] for r in dentro if "archi_sopra" in r]
+    _ev = [r for r in dentro if r.get("divisi")]
+    _salti = sum(r["salti_r"] for r in dentro)
+    mis = {"decisioni": len(dentro), "fallback_r_scattato": int(_salti),
+           "soglia_min": (min(_sm) if _sm else None), "soglia_max": (max(_sx) if _sx else None),
+           "archi_sopra_min": (min(_sa) if _sa else None),
+           "archi_sopra_max": (max(_sa) if _sa else None),
+           "tre_pi": float(3 * np.pi), "eventi": _ev,
+           "tutti_i_divisi_sopra": bool(all(d["sopra"] for r in _ev for d in r["divisi"]))}
+    stampa("  decisioni misurate: %d" % mis["decisioni"])
+    stampa("  ### IL FALLBACK dell'orologio UNIFORME (`_tum_r_salti`): scattato %d volte"
+           % mis["fallback_r_scattato"])
+    stampa("      Se e' ZERO, la soglia qui sotto e' QUELLA VERA. Se non lo e', questa misura")
+    stampa("      NON si puo' leggere -- ed e' l'errore che la prima stesura ha fatto.")
+    if _sm:
+        stampa("  soglia: minima sulla rete da %.4f a %.4f   (3 pi = %.4f)"
+               % (mis["soglia_min"], mis["soglia_max"], mis["tre_pi"]))
+        stampa("  archi sopra la soglia locale: da %d a %d"
+               % (mis["archi_sopra_min"], mis["archi_sopra_max"]))
+        stampa("  ### LA MODULAZIONE AGISCE se la soglia minima sta SOTTO 3 pi.")
+    stampa("  archi divisi: %d   tutti SOPRA la loro soglia locale: %s"
+           % (sum(len(r["divisi"]) for r in _ev), mis["tutti_i_divisi_sopra"]))
+    for r in _ev:
+        for d in r["divisi"]:
+            stampa("      arco %8d  |tw| %8.4f  soglia locale %8.4f  sopra %s"
+                   % (d["arco"], d["tw"], d["soglia"], d["sopra"]))
 
     # ------------------------------------------------------------------ B
     stampa("")
@@ -233,6 +273,11 @@ def principale():
     stampa("BRACCIO B -- IL CASO CHE DEVE FALLIRE: un arco portato SOPRA la sua soglia locale")
     stampa("=" * 104)
     ok_B, datiB = False, {}
+    # ⚠ `B` rifa' la decisione sulla rete del braccio A, che e' a fine 72 passi: la soglia che
+    #   legge puo' essere quella del FALLBACK, e NON IMPORTA -- `B` prova che l'insieme
+    #   DICHIARATO cambia quando l'arco cambia lato, e quella e' una proprieta' della
+    #   DICHIARAZIONE, non della soglia. ### Lo si dice invece di lasciarlo capire.
+    sel, perche = B.decidi_divisione()
     if perche and "soglia" in perche:
         sg = np.asarray(perche["soglia"], float)
         av = np.asarray(perche["avv"], float)

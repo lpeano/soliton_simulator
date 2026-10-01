@@ -9305,3 +9305,22 @@ presidio `3-bis`)*, `DIVISIONE-AUTOCONSISTENTE:M0` *(misurata prima del run)*, e
 ### ➜ **Il presidio esiste e funziona DENTRO il passo; i miei strumenti di misura lo chiamano da
 FUORI, dove nessuno guarda.** ### **E' li' che va messo il prossimo presidio**, e lo scrivo come
 proposta invece di cablarlo adesso.
+
+# 🔧 **PUNTO 4: il braccio `C` ora misura DENTRO la decisione** *(2026-10-01)*
+
+| | |
+|---|---|
+| **prima** | chiamava `decidi_divisione()` ### **una volta, FUORI dal passo**, dopo il ciclo dei 72 |
+| ### **ora** | ### **avvolge la decisione** e misura ### **a ogni chiamata, dentro il passo**, su una rete sua |
+| ### **e porta il contatore** | ### **`_tum_r_salti`**: cosi' *«il fallback non e' scattato»* e' ### **un numero, non una mia assicurazione** — e il referto dice che ### **se il fallback e' scattato quella misura NON SI PUO' LEGGERE** |
+
+### ✅ **E HO RESO ESPLICITO PERCHE' IL BRACCIO `B` RESTA COM'E'**
+`B` rifa' la decisione sulla rete del braccio `A`, a fine 72 passi, ### **dove la soglia puo'
+essere quella del fallback — e NON IMPORTA**: `B` prova che ### **l'insieme DICHIARATO cambia
+quando l'arco cambia lato**, che e' una proprieta' della **dichiarazione**, non della soglia.
+### **Ora e' scritto nel codice**, invece di essere qualcosa da capire.
+
+### 🔧 **E il `%` mancante** di `_soglia_alla_divisione.py` *(«su `%d` decisioni»)* e' corretto
+### **nello stesso giro**, come avevo detto: ### **non meritava un commit a se'.**
+
+### 🛑 **E QUI MI FERMO, come da mandato.** Il **commit 3** resta per una sessione nuova.
