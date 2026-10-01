@@ -8244,3 +8244,55 @@ volta)*, poi `B` fino al **72** sulla scena grande con le nascite, contatori com
 **braccio `G`** coi tre casi che devono fallire. **Poi il commit 0-bis e il commit del piano.**
 
 **blob del simulatore (byte grezzi): `5d29334b` · blob del sigillo: `37ea1f49`**
+
+# ⭐ **`FRAZIONE-DIVISIONE` diventa `DIVISIONE-AUTOCONSISTENTE`** *(2026-10-01, solo piano)*
+
+> ### **Luca, alla tua seconda domanda — «non dovrebbe esserci una parte di autointerazione?» —
+> ### la risposta che il codice da' e' «C'E' GIA'», non «manca».**
+
+Nel regime deterministico la **torsione dell'arco** decide **quanto forte** e' il calcio ai
+genitori, e la **chiralita' di ciascun genitore** ne decide **il verso**. ### **Quindi il lavoro non
+e' aggiungere l'autointerazione: e' renderla AUTOCONSISTENTE.** Ed e' per questo che la voce ha
+dovuto cambiare nome: non era piu' *«dove si rompe l'arco»*, era ### **come si spartisce una
+carica.** Il nome vecchio resta come **`alias`** — vive nei reperti e nel commento di `MITOSI_DIR`,
+e **i reperti non si riscrivono** *(par.9)*.
+
+## ⛔ **I tre difetti, e il primo e' il piu' grave**
+
+| | |
+|---|---|
+| ### **(i) la torsione SPARISCE** | i figli ripartono da **`tw = 0`** e ### **nessuna legge dice quanta va al calcio e quanta si perde.** `tw` e' un **avvolgimento** su `±4π`, cioe' ### **qualcosa di simile a una CARICA** |
+| **(ii) il punto medio** | non derivato — la **toppa ③** |
+| ### **(iii) il calcio non e' simmetrico in `a <-> b`** | `+chi_a` contro ### **`−chi_b`**: scambiando le etichette **si inverte il verso** del calcio di chi era `b`. Ma `a` e `b` vengono ### **solo dall'ordine di memorizzazione di `(i, j)`** — ### **un'orientazione arbitraria che entra nella fisica**, cioe' `GEOM-SENZA-VERSO` |
+
+## ✅ **E un criterio nuovo che non avevi ancora dovuto scrivere: IL BILANCIO**
+
+> ### **quanta torsione c'era prima = quanta ne hanno i figli + quanta ne prende il calcio +
+> ### quanta si perde — e ogni perdita va DICHIARATA.**
+
+E' ### **`A8` applicato a una CARICA**: una torsione che sparisce **senza una riga che lo dica** e'
+### **un ripiego silenzioso di FISICA**, non di codice. **E `KICK_TW` entra in `A1`:** va
+**dichiarato o derivato**, non lasciato dov'e'.
+
+### **Le due misure vengono PRIMA di qualunque legge:** `M1` *(quanta `|tw|` sparisce per passo,
+come frazione del totale: se e' trascurabile lo dico, se no e' un **pozzo**)* e `M2` *(si invertono
+`(i,j) -> (j,i)` per **tutti** gli archi e si fa un passo pieno: se cambia **oltre la
+rinumerazione**, il verso entra nella fisica e dico **dove**)*. ### **`M2` la riporto anche a
+`GEOM-SENZA-VERSO`: si misura UNA volta e vale per due voci.**
+**La forma della legge la decidi tu. Io non ne propongo una.**
+
+## ⚠ **E DEVO DIRTI PERCHE' HO INVERTITO IL TUO ORDINE**
+
+Avevi detto *«commit 0-bis, poi il commit del piano»*. ### **Ho fatto prima il piano**, e non e' una
+preferenza: il commit **0-bis modifica `soliton_simulator.py`**, e ### **il par.5 vieta di toccare un
+file del percorso in uso mentre un run gira** — il sigillo del commit 1 sta girando adesso. ### **Il
+piano tocca solo documenti**, quindi era l'unico dei due che si potesse fare. ### **0-bis parte
+appena il sigillo chiude.**
+
+### **E su 0-bis ho gia' fatto la parte in sola lettura, con una CORREZIONE alla premessa** — la
+riporto nel suo commit: ### **`REGIME` SI PUO' riassegnare**, c'e' `--regime` e `_applica_regime` fa
+`global REGIME`, e ### **due strumenti lo passano** *(`_osserva_vuoto.py`, `_sigillo_osservatore.py`)*
+— ### **ma solo per passare `"deterministico"`.** Quindi la parte che conta della tua premessa
+**tiene**: ### **lo stocastico non lo gira nessuno, e nessun sigillo lo copre.**
+
+**PUSHATO insieme a questo paragrafo.**

@@ -87,7 +87,7 @@ simmetrica che lascia scegliere allo stato** — esattamente la forma che la ste
 ### **l'opposto di `MITOSI_DIR`**, che metteva un **coefficiente scelto** davanti a una `tanh`.
 
 ### ⚠ **E non si decide ORA quale grandezza scelga `t`:** e' una ### **decisione di fisica di Luca**,
-in una ### **voce a se' (`FRAZIONE-DIVISIONE`)**. ### **Qui si prepara SOLO la STRUTTURA.**
+in una ### **voce a se' (`DIVISIONE-AUTOCONSISTENTE`, nata come `FRAZIONE-DIVISIONE`)**. ### **Qui si prepara SOLO la STRUTTURA.**
 
 ## ✅ **Come la struttura si prepara** *(commit 6a)*
 
@@ -425,7 +425,7 @@ basta)*.
 | **5** | ### **`perc_geom` del nato `= −1`** | ### **FUORI dal riordino, gia' deciso.** Dipende **solo** dal punto unico di nascita *(commit 3)*, ### **non dalla struttura** | byte-identico **tranne** `perc_geom` dei nati, e il **frame-drag** misurato |
 | ### **6a** | ### **STRUTTURA: la FRAZIONE `t` esplicita, `t = 0.5`** | ### **RIORGANIZZAZIONE**: da **quattro formule** a ### **un valore dichiarato in un posto solo**. Lo stesso `t` per `pos` e per `d`/`d0`, ### **Schwinger compreso** | ### **BYTE-IDENTICO, contatori compresi** + ### **`t = 0.5 + 1e-9` deve cambiare `pos` E `d` dei nati** |
 | ### **6b** | ### **`MITOSI_2LAM` come LEGGE, in forma GENERALE** | `t·d >= LAM` **e** `(1−t)·d >= LAM`. Il ramo `else` **esce** e si **archivia copiato** | ### **NON byte-identico, ATTESO**: divisioni **rifiutate**, calo di `n` al 72, ### **e che fine fanno gli archi rifiutati** |
-| **(7)** | *(fuori dal riordino, in coda)* | `D36` · il **`0.3`** · i **pavimenti** e `massa_critica_collasso` · `MITMAX` **errore** · ### **`FRAZIONE-DIVISIONE`** *(e `MITOSI_DIR` e' **archiviato** al commit 0)* | ognuna ### **voce a se', con la sua misura** |
+| **(7)** | *(fuori dal riordino, in coda)* | `D36` · il **`0.3`** · i **pavimenti** e `massa_critica_collasso` · `MITMAX` **errore** · ### **`DIVISIONE-AUTOCONSISTENTE`** *(e `MITOSI_DIR` e' **archiviato** al commit 0)* | ognuna ### **voce a se', con la sua misura** |
 
 ### ⚠ **Perche' `1` viene PRIMA di tutto**
 Il **registro dichiarato** e' l'unico pezzo che ### **rende impossibile dimenticare una grandezza
@@ -471,7 +471,86 @@ decisione che non lo riguarda.**
 
 ---
 
-# ⭐ **LA VOCE NUOVA: `FRAZIONE-DIVISIONE`** *(fuori dal riordino, aperta il 2026-10-01)*
+# ⭐ **LA VOCE: `DIVISIONE-AUTOCONSISTENTE`** *(fuori dal riordino, in coda)*
+
+> ### 🔁 **RINOMINATA il 2026-10-01**, e la ragione e' **di fisica, non di nome**: nata come
+> `FRAZIONE-DIVISIONE` *(«dove si rompe l'arco»)*, ### **la voce ha dovuto allargarsi** quando la
+> seconda domanda di Luca — *«non dovrebbe esserci una parte di autointerazione?»* — ha portato il
+> guardiano a **rileggere il ramo che gira**. ### **Il nome vecchio resta come `alias`:** vive nei
+> reperti, nei task history e nel commento di `MITOSI_DIR`, e ### **i reperti non si riscrivono**
+> *(par.9)*.
+
+> ### 🔎 **CHE COSA FA OGGI IL RAMO CHE GIRA** *(deterministico, `mitosi`)*
+> ```
+> tau      = 1 + |tw|/PHI_CRIT ;  mod = tau/(1+tau) ;  sciolta = |tw|/PHI_CRIT
+> comune   = KICK_TW * sciolta * (mod - 0.5)
+> calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod
+> calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod
+> ```
+> e i **due archi nuovi nascono con `tw = 0`**.
+> ### ➜ **QUINDI L'AUTOINTERAZIONE C'E' GIA', ED E' DETERMINISTICA:** la **torsione dell'arco**
+> decide **quanto forte** e' il calcio ai genitori, e la **chiralita' di ciascun genitore** ne
+> decide **il verso**. ### **La risposta alla domanda di Luca e' «c'e'», non «manca»** — e il
+> lavoro non e' aggiungerla, e' ### **renderla autoconsistente.**
+
+## ⛔ **I TRE DIFETTI, e il primo e' il piu' grave**
+
+| | il difetto |
+|---|---|
+| ### **(i) LA TORSIONE SPARISCE** | i due archi figli ripartono da ### **`tw = 0`**, e ### **non c'e' una legge che dica quanta torsione va al calcio e quanta si perde.** Il paragone e' ### **un nastro attorcigliato tagliato in due: ogni pezzo tiene la sua torsione, la torsione non evapora.** `tw` e' un **avvolgimento** *(contato su `±4π`)*, cioe' qualcosa di simile a una ### **carica**: ### **che sparisca alla nascita va giustificato o curato** |
+| **(ii) IL PUNTO MEDIO** | non e' derivato — e' la **toppa ③**. E' la domanda che ha aperto la voce |
+| ### **(iii) IL CALCIO NON E' SIMMETRICO NELLO SCAMBIO `a <-> b`** | il genitore `a` riceve `+chi_a`, il genitore `b` riceve ### **`−chi_b`**: scambiando le etichette ### **si inverte il verso del calcio del nodo che era `b`.** Ma ### **«`a`» e «`b`» dipendono SOLO dall'ordine di memorizzazione dell'arco `(i, j)`** — e se l'arco non ha un **verso fisico dichiarato**, ### **e' un'orientazione ARBITRARIA che entra nella FISICA.** ### **Stessa famiglia di `GEOM-SENZA-VERSO`** |
+
+## ➜ **LA FORMA: UNA legge sola, guidata dalla torsione dell'arco stesso**
+
+> ### **Al posto di tre pezzi separati** *(dove si rompe · cosa ereditano i figli · il calcio)*,
+> ### **UNA legge**, e la sua **forma la decide Luca**.
+
+| | |
+|---|---|
+| ### **DOVE si rompe l'arco** | la frazione `t`, con ### **`f(a,b) = 1 − f(b,a)`** |
+| ### **COSA ereditano i figli** | ### **la loro parte di `tw`**, invece di **zero** |
+| ### **IL CALCIO ai genitori** | ### **solo cio' che NON va ai figli**, con il **verso deciso dallo STATO** |
+
+## ✅ **I CRITERI, fissati ORA** *(prima di qualunque legge e di qualunque numero)*
+
+| | il criterio |
+|---|---|
+| ### **1 — simmetria** | ### **`f(a,b) = 1 − f(b,a)`** nello scambio `a <-> b`. ### **E' la stella polare applicata: la legge e' simmetrica, lo STATO scegle** |
+| ### **2 — entrambi i pezzi `>= LAM`** | `t·d >= LAM` **e** `(1−t)·d >= LAM`. ### **Senza questo, una `t` vicina a `0` o a `1` rimetterebbe `M2` ① dalla finestra** |
+| ### **3 — nessun coefficiente scelto a mano** | ### **`A1`, e stavolta COMPRENDE `KICK_TW`:** ### **va dichiarato o derivato**, non lasciato dov'e'. E' il criterio che **archivia `MITOSI_DIR` nella FORMA** |
+| ### **4 — un BILANCIO ESPLICITO della torsione** | ### **quanta ce n'era prima = quanta ne hanno i figli + quanta ne prende il calcio + quanta si perde** — e ### **ogni perdita va DICHIARATA.** E' la forma di `A8` applicata a una **carica**: ### **una torsione che sparisce senza una riga che lo dica e' un ripiego silenzioso di fisica** |
+| **5 — quale grandezza decide `t`** | ### **decide Luca.** I candidati che lo stato offre: `tw` *(torsione)*, la **densita'**, `psi`, il **tempo proprio** — ### **e non ne propongo uno: la misura viene prima** |
+
+## 🧪 **LE PRIME DUE MISURE, prima di qualsiasi legge** *(scena grande, fino al 72)*
+
+| | la misura | che cosa decide |
+|---|---|---|
+| ### **`M1`** | ### **quanta `|tw|` sparisce per passo con le divisioni** — la somma di `|tw[sel]|`, ### **come FRAZIONE della `|tw|` totale della rete** | ### **se e' trascurabile LO SI DICE** *(e (i) e' un difetto formale)*; ### **se no, e' un POZZO che va curato** |
+| ### **`M2`** | ### **il ruolo del VERSO dell'arco:** si invertono `(i,j) -> (j,i)` per ### **TUTTI** gli archi allo stato **BASE** *(e `tw` cambia segno **coerentemente**, se e' definito orientato)*, poi ### **un passo pieno** | se la simulazione cambia ### **oltre la rinumerazione**, ### **il verso dell'arco ENTRA NELLA FISICA** — e si dice ### **DOVE** *(il calcio della mitosi e' il primo sospetto, **non l'unico**)* |
+
+### ⚠ **`M2` APPARTIENE ANCHE A `GEOM-SENZA-VERSO`, e si collega**
+Le due voci chiedono ### **la stessa cosa da due lati**: *«un'orientazione arbitraria entra nella
+fisica?»*. ### **Si misura UNA volta e si riporta a entrambe.**
+
+### 📐 **E LA MISURA `pos` CONTRO `d` ORA FA PARTE DI QUESTA VOCE**
+*(era un passo a se' di `FRAZIONE-DIVISIONE`, e ci resta dentro)*
+
+> ### **Quali leggi leggono `pos` e quali solo `d`?** Cioe': ### **la posizione del figlio e' FISICA
+> o solo DISEGNO?**
+
+| | |
+|---|---|
+| **perche' conta** | se `pos` fosse ### **solo disegno**, `t` conterebbe **solo** per `d`/`d0` — e la decisione su `t` sarebbe ### **una decisione sulla LUNGHEZZA, non sulla posizione** |
+| ### **e c'e' un indizio MISURATO** | `SCHW-CORTI`: lo Schwinger prende `dd` ### **da `pos`**, e il **39.06 %** delle coppie accorcia il grafo. ### **Quindi `pos` entra NELLA METRICA almeno in un punto** — ed e' il residuo `A3-DISEGNO` |
+| **come si misura** | lo **stesso strumento** della sorveglianza: si intercetta la **lettura** di `pos` e si elenca ### **quali funzioni la leggono**, separando `osservatore`/`disegno` dalle **leggi** *(da `_PASSO_TIPI`, come gia' fatto)* |
+
+### ⚠ **E un collegamento da non perdere:** questa misura ### **risponde anche a `SCHW-CORTI`**
+*(«`dd` da `d` o da `pos`?»)*. ### **Le due voci guardano LO STESSO fatto da due lati.**
+
+---
+
+# 🗄 **IL MATERIALE EREDITATO DA `FRAZIONE-DIVISIONE`** *(invariato, e resta valido)*
 
 > ### **Quale grandezza decide `t`? LO DECIDE LUCA.** Qui stanno **solo i criteri**, ### **fissati
 > ORA, prima di qualunque numero.**
@@ -496,20 +575,9 @@ torsione»* ### **e' esattamente `t = f(stato_a, stato_b)` con la torsione come 
 ### **Si archivia la forma, si conserva l'idea.** *(Ed e' la ragione per cui `MITOSI_DIR` esce al
 commit 0 ma la sua riga **vive qui**.)*
 
-## 📐 **IL PRIMO PASSO E' UNA MISURA, e non e' quella che sembra**
-
-> ### **Quali leggi leggono `pos` e quali solo `d`?** Cioe': ### **la posizione del figlio e' FISICA
-> o solo DISEGNO?**
-
-| | |
-|---|---|
-| **perche' e' la prima** | se `pos` fosse ### **solo disegno**, `t` conterebbe **solo** per `d`/`d0` — e la decisione su `t` sarebbe ### **una decisione sulla LUNGHEZZA, non sulla posizione** |
-| ### **e c'e' un indizio MISURATO** | `SCHW-CORTI`: lo Schwinger prende `dd` ### **da `pos`**, e il **39.06 %** delle coppie accorcia il grafo. ### **Quindi `pos` entra NELLA METRICA almeno in un punto** — ed e' il residuo `A3-DISEGNO` |
-| **come si misura** | lo **stesso strumento** della sorveglianza: si intercetta la **lettura** di `pos` e si elenca ### **quali funzioni la leggono**, separando `osservatore`/`disegno` dalle **leggi** *(da `_PASSO_TIPI`, come gia' fatto)* |
-
-### ⚠ **E un collegamento da non perdere:** questa misura ### **risponde anche a `SCHW-CORTI`**
-*(«`dd` da `d` o da `pos`?»)*. ### **Le due voci guardano LO STESSO fatto da due lati**, e conviene
-misurarle insieme.
+### ⚠ **E LA MISURA `pos`/`d` E' SALITA IN TESTA ALLA VOCE** *(qui sopra)*: non e' piu' «il primo
+passo di `FRAZIONE-DIVISIONE`», e' ### **una delle misure di `DIVISIONE-AUTOCONSISTENTE`** — perche'
+`t` non decide piu' **soltanto** una posizione, decide anche ### **come si spartisce una carica.**
 
 ---
 
