@@ -225,7 +225,7 @@ def localizza(stampa):
                % (len(foto["A"]), len(foto["B"])))
         return {"errore": "numero di confini diverso"}
 
-    P = float(SA._dphi())
+    P = float(A._dphi())
     serie = []
     stampa("")
     stampa("  %-26s %s" % ("confine (dopo la voce)",
@@ -301,7 +301,7 @@ def principale():
     stampa("")
 
     # --- le due scene partono IDENTICHE, e si VERIFICA invece di crederlo
-    pari = confronta(A, B, PER_NODO, periodo=SA._dphi())
+    pari = confronta(A, B, PER_NODO, periodo=A._dphi())
     # ### <<ASSENTE IN ENTRAMBI>> E' COERENTE e non fa fallire il controllo zero: le cache
     #   pigre (`psi_spin`, `rho_spin`, `_nb`) NON ESISTONO prima del primo passo, in nessuna
     #   delle due reti. ### Cio' che fa fallire e' <<assente in UNO SOLO>> o <<DIVERSA>>.
@@ -336,7 +336,7 @@ def principale():
     stampa("=" * 104)
     stampa("IL VERDETTO SI LEGGE SUI NODI (invarianti per la trasformazione)")
     stampa("=" * 104)
-    nodi = confronta(A, B, PER_NODO, periodo=SA._dphi())
+    nodi = confronta(A, B, PER_NODO, periodo=A._dphi())
     nd = [x for x in nodi if x.get("esito") == "DIVERSA"]
     stampa("  %-16s %-19s %14s %14s %12s" % ("grandezza", "esito", "scost.max fin.", "relativo",
                                              "elem. div."))

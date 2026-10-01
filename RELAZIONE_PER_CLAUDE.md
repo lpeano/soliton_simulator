@@ -8545,3 +8545,8 @@ sospettarla in un referto.)*
 ### IL VERDETTO DI `DIVISIONE-AUTOCONSISTENTE:M2` NON E' ANCORA SCRITTO
 Col confronto sul cerchio il conto delle grandezze diverse **cambiera'**, e ### **va riletto prima
 di concludere.**
+
+> ### 🔧 **Correzione minima, nello stesso giro:** `_dphi` e' un **metodo della RETE**, non del
+> modulo, e lo chiamavo su `S`. ### **Il run si e' fermato subito con `AttributeError`** — cioe'
+> nel modo giusto: ### **non ha prodotto un numero sbagliato, non ha prodotto NULLA.**
+> *(Blob dello strumento: `7c8b0200`.)*
