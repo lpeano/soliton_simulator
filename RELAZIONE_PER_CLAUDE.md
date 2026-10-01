@@ -7988,3 +7988,90 @@ scrivere senza la tua decisione.** ### **`D36`/la soglia `3π` E' la parte (a)**
 invariata e lo dichiara, ### **ma la domanda resta aperta e va risposta.**
 **E un terzo che segnalo adesso:** il commit 5 tocca `dd`, quindi ### **`SCHW-CORTI` («`dd` da `d` o
 da `pos`») diventera' inevitabile** — e allora ### **mi fermero' e lo diro', invece di assorbirlo.**
+
+---
+
+# ✅ **IL PIANO AGGIORNATO: quattro correzioni, le decisioni, e la terza via MISURATA** *(2026-10-01)*
+
+`doc/PIANO_riordino_mitosi.md` **`b4a63427`** *(413 righe)*, sonda `csv/_test_fork/_sonda_veleno.py`
+*(`20edc5b5`)*, referto `csv/_seal_fork/_sonda_veleno/_referto.txt`.
+### **Nessuna riga di codice del simulatore:** `62d67675`.
+
+## ⛔ **Correzione 1 — avevo scritto una cosa FALSA, e il codice lo dice meglio di me**
+
+**Dicevo:** *«`A13` e la conservazione della lunghezza **non possono valere entrambe** alla nascita»*.
+### **E' FALSO.** Con `MITOSI_2LAM` ON il filtro a `:6956` fa `ok = ok & _conforme`: un arco con
+`d < 2·LAM` ### **non si divide AFFATTO**, i figli nascono a ### **`d/2 >= LAM`**, `_nasce` **non
+ripara**, e ### **`d/2 + d/2 = d` esattamente. Valgono tutte e due.**
+
+### ➜ **Il mio errore e' stato LOGICO, non di lettura:** ho trattato la divisione come **obbligatoria**
+e da li' ho dedotto un conflitto fra due leggi che ### **non si toccano**.
+### **E il codice aveva la risposta sotto gli occhi:** il commento del filtro dice che la cura va
+dove *«si decide se questo candidato si divide o no»*, ### **«NON in `_nasce`: la' si RIPARA, e la
+cura e' proprio togliere la riparazione»**.
+**E `MITOSI_2LAM` era gia' «approvata da Luca»** *(`:418`)*: era OFF solo per *«un interruttore alla
+volta»*.
+
+## ⛔ **Correzione 2 — il caso che deve fallire di (a) NON POTEVA fallire**
+
+*«Si altera la soglia di `1e-12`»*: ### **nessun arco sta a `1e-12` dalla soglia**, quindi il sigillo
+sarebbe passato **per costruzione, senza guardare niente.**
+### ➜ **Ora: la soglia si porta APPENA SOTTO il `|tw|` piu' alto fra gli archi che OGGI stanno sotto
+soglia** — cosi' ### **almeno un arco NOTO deve passare** — **e si confronta la LISTA arco per arco**,
+non il conteggio *(un conteggio uguale puo' nascondere due archi scambiati)*.
+
+## ⛔ **Correzione 3 — il caso di (d) usava `_deg`, che NON e' una derivata**
+
+`_deg` e' in ### **`REGISTRO_STATO`** *(`:1095`)*, non in `REGISTRO_DERIVATE`: il caso ### **non
+provava niente della marca.** Ora si rinvia la riscrittura di **`_chi_geom_nodi`** *(o `_r_corrente`)*.
+
+## ⛔ **Correzione 4 — un rischio che NON avevo dichiarato**
+
+Spostare le scritture in un punto solo puo' cambiare ### **l'ORDINE DELLE ESTRAZIONI CASUALI** e
+### **l'ordine delle SOMME in virgola mobile.** E il generatore e' **uno** *(`net.rng`)*:
+### **chi pesca prima cambia cio' che pescano tutti gli altri.**
+➜ **Prima del commit 3 si MISURA** quali estrazioni avvengono nella nascita **e in che ordine**;
+### **l'ordine diventa parte del CONTRATTO**, scritto nella tabella delle regole.
+### 🛑 **E se il byte-identico cade SOLO per questo, mi fermo e lo dico: NON allento il criterio.**
+
+## 🧪 **(d) La terza via: l'ho MISURATA, e la quarta misura RAFFINA la proposta**
+
+**L'opzione «ai confini» non regge, e hai ragione:** dopo `mitosi` una derivata e' sporca
+**legittimamente**, quindi un controllo al confine ### **o la segnala per sbaglio o non controlla
+nessuna lettura.**
+
+| la misura | il numero |
+|---|---|
+| ### **il COSTO** | controllo di finitezza su 30 voci: **`0.002085 s`**; un passo: **`2.849 s`** ⇒ ### **`0.073 %`** *(con 9 controlli, `0.659 %`)* — **trascurabile** |
+| ### **derivate INTERE** | ### **ZERO**: tutte e 10 sono `float64` ⇒ la domanda **non ha casi** |
+| ### **`seterr(invalid='raise')`** | il `NaN` ### **PROPAGA** *(somma, prodotto, **confronto**, `isfinite`, `sum`)*; solleva **solo** su `astype(int64)` e `inf − inf` ⇒ ### **il veleno arriva allo stato invece di far crashare la lettura** |
+| ### ⚠ **④ non nel mandato** | ### **`eta` ha GIA' `inf` su tutti i 12802 nodi**, legittimo e dichiarato ⇒ ### **un controllo GLOBALE di finitezza spara al primo passo** |
+
+### ✅ **E la cosa che rende la proposta piu' forte: IL SISTEMA USA GIA' IL VELENO**
+
+`peq` — **una grandezza di STATO** — nasce ### **`NaN`** a `:3693` *(`# da calibrare`)* e a `:7165`,
+e ### **`step` la CALIBRA**. ### ➜ **«Derivata sporca» e «`peq` da calibrare» sono LA STESSA COSA:**
+la generalizzazione 4 ### **non introduce una convenzione — da' un nome a quella che il sistema ha
+gia' in due punti**, e per `9-ter` questo conta.
+### **La forma raffinata:** finitezza **per grandezza, con l'esenzione DICHIARATA nel registro** —
+lo stesso schema del **tipo**. ### **Il prezzo, dichiarato: il veleno NON e' byte-identico** sul
+passo della nascita, quindi il suo sigillo **non puo'** chiederlo sulle derivate.
+
+## ⛔ **E una cosa che devo dire di me: i quattro eventi**
+
+Il piano diceva *«decisi da Luca il 2026-09-29»*. ### **L'ho cercato nel repo e NON C'E'.**
+Esiste **solo la mia proposta** *(`doc/PIANO_controllo_unico.md:94` e `:192`)*. ### **L'approvazione
+e' arrivata, ma SOLO IN CHAT, e io non l'ho scritta nel repo** — il difetto del par.4, ### **e qui il
+perso e' una DECISIONE, non una misura.** **Peggio: l'ho poi citata come se il repo la registrasse.**
+➜ **Ora e' marcata `PROPOSTA DA APPROVARE`**, come chiedi.
+
+## ✅ **L'ordine, corretto**
+
+**0** il commento di `MITOSI_DIR` · **1** registro dichiarato · **2** decisione separata · **3**
+evento unico · **4** derivate sporche · ### **5 `perc_geom`** *(salito: dipende solo dal punto unico,
+### **non dalla struttura**)* · **6** struttura *(`MITOSI_2LAM` legge)* · **(7)** le voci a se'.
+
+### ⚠ **Il «subito» di `MITOSI_DIR` NON l'ho fatto in questo commit**, e dico perche': il mandato
+dice ### **«Nessun codice. STOP dopo»**. La correzione e' byte-inerte ### **ma e' comunque una riga
+del simulatore**, e infilarla in un commit dichiarato senza codice sarebbe ### **la scorciatoia che i
+presidi di questo repo esistono per impedire.** ➜ **E' il commit 0, e si fa per primo.**

@@ -30,15 +30,21 @@ funzioni di servizio, e 1 per mutazione in posto.**
 | ### ⛔ **NON cambia la soglia** | `3π` resta **identica**, e il piano lo dichiara: ### **byte-identico**. Ma ### **la soglia E' `D36`** *(acclarato per misura: con `phi` su `2π` gli archi sopra soglia passano da **7047 a ZERO**)*, e ### **un riordino che la tocca cambia la fisica** |
 | ### ⛔ **NON cambia il `0.3`** | resta, ### **e si DICHIARA come numero non derivato** nel registro fisica. **Toglierlo e' una cura a se'** |
 
-## 🛑 **Le domande che NON decido io**
+## ✅ **LE DECISIONI DI LUCA** *(2026-10-01)* — **tutte e cinque RISPOSTE**
 
-| | |
+| | la decisione |
 |---|---|
-| **1** | ### **la soglia si riscrive ADIMENSIONALE** *(un rapporto a `PHI_CRIT`, cosi' che non dipenda dal dominio di `phi`)*, **oppure resta assoluta e `D36` resta aperta?** |
-| **2** | ### **il `0.3` si deriva o si toglie?** Se nessuna grandezza del sistema lo da', ### **`A1` dice di toglierlo** — ma togliere una modulazione **cambia dove nasce la materia** |
-| **3** | ### **`massa_critica_collasso()` dentro una legge locale e' `A2`?** *(`U1`: 21 usi dentro leggi.)* E ### **i due pavimenti `1e-6`/`1e-3` da quale errore proteggono** *(`A11`)*? |
-| **4** | ### **`MITOSI_DIR`**: il bias direzionale **entra** o si **archivia**? Oggi ### **il commento dice «ATTIVA» e il valore e' `0.0`** |
-| **5** | ### **`MITMAX`**: resta un parametro, o diventa un **errore** come `MAX_NODI`? |
+| **1** | ### **la soglia `3π` resta INVARIATA nel riordino.** `D36` *(soglia adimensionale)* diventa ### **una voce a se', DOPO, con la sua misura** |
+| **2** | ### **il `0.3` si DICHIARA** nel registro fisica **come numero NON derivato**. ### **Toglierlo e' una cura a se', dopo** |
+| **3** | ### **i pavimenti `1e-6`/`1e-3` e `massa_critica_collasso`: FUORI dal riordino**, come voce a se' |
+| **4** | ### **`MITOSI_DIR` si ARCHIVIA** *(vale `0.0`, il ramo non gira)*, e ### **il commento «ATTIVA» si corregge SUBITO** |
+| **5** | ### **`MITMAX` diventa un ERRORE come `MAX_NODI`**, non un tetto che tronca |
+
+### ⚠ **Sul «subito» di (4): NON l'ho fatto in questo commit, e dico perche'**
+Il mandato di questo giro dice ### **«Nessun codice. STOP dopo»**. La correzione del commento e'
+**byte-inerte**, ### **ma e' comunque una riga del simulatore** — e infilarla in un commit dichiarato
+senza codice sarebbe ### **esattamente il tipo di scorciatoia che i presidi di questo repo esistono
+per impedire.** ➜ **E' il COMMIT 0 dell'ordine qui sotto**, e si fa **per primo**.
 
 ### **Criteri, fissati PRIMA dei numeri**
 
@@ -46,7 +52,7 @@ funzioni di servizio, e 1 per mutazione in posto.**
 |---|---|
 | ### **deve restare IDENTICO AL BYTE** | **tutto**: quali archi si dividono, quanti, e in quale ordine. ### **La separazione decisione/esecuzione e' una RIORGANIZZAZIONE, non una cura** |
 | cosa puo' cambiare | ### **niente.** Un solo bit diverso ⇒ **non e' una separazione, e' una cura non dichiarata** |
-| ### **il caso che DEVE fallire** | si **altera la soglia di `1e-12`** in una copia: il sigillo ### **deve vedere un numero di nascite diverso**. Se non lo vede, ### **il sigillo non guarda la decisione** |
+| ### **il caso che DEVE fallire** | ### ⛔ **CORRETTO: la prima stesura NON POTEVA fallire.** Dicevo *«si altera la soglia di `1e-12`»*, e ### **nessun arco sta a `1e-12` dalla soglia**: il sigillo sarebbe passato **per costruzione**, senza guardare niente. ### ➜ **Ora: si porta la soglia APPENA SOTTO il `\|tw\|` piu' alto fra gli archi che OGGI stanno sotto soglia**, cosi' ### **almeno UN arco NOTO deve passare** — e si confronta ### **la LISTA di `decidi_divisione` ARCO PER ARCO**, non il conteggio delle nascite *(un conteggio uguale puo' nascondere due archi scambiati)* |
 
 ---
 
@@ -68,22 +74,51 @@ funzioni di servizio, e 1 per mutazione in posto.**
 > La parte (b) **e'** *«come nascono `pos`, `d`, `d0`»*, e ### **il punto medio e la fabbricazione di
 > lunghezza SONO quella descrizione.** Non sono voci accanto al riordino: ### **sono il riordino.**
 
-| il difetto | la scelta che va DICHIARATA |
+| il difetto | ### **la DECISIONE di Luca** |
 |---|---|
-| ### **`M2` ①** il figlio a `d/2` da ciascun genitore e' ### **sotto `LAM` se `d < 2·LAM`** → viola **`A13`** | **(i)** si **rifiuta** la divisione *(e' `MITOSI_2LAM`, che esiste ed e' **OFF**)* · **(ii)** si accetta e ### **`A13` non vale alla nascita**, e va **scritto** |
-| ### **`M2` ②** due meta' portate a `LAM` danno ### **`2·LAM` al posto di `d`**: **fabbricano lunghezza** | **(i)** `MITOSI_2LAM` ON ⇒ ### **il caso non esiste piu'** · **(ii)** si accetta, e ### **il motore di gonfiamento va DICHIARATO e MISURATO** |
+| ### **`M2` ①** il figlio a `d/2` da ciascun genitore e' ### **sotto `LAM` se `d < 2·LAM`** → viola **`A13`** | ### ✅ **si RIFIUTA la divisione**: `MITOSI_2LAM` **ON**, come **legge** |
+| ### **`M2` ②** due meta' portate a `LAM` danno `2·LAM` al posto di `d` | ### ✅ **il caso SMETTE DI ESISTERE**: niente sotto `2·LAM` si divide, quindi ### **`d/2 + d/2 = d` esattamente** e `_nasce` non ripara |
 
-### 🛑 **DECIDE LUCA, e non ne scelgo una.** ### **Ma le due domande stanno DENTRO il piano**, perche'
-la parte (b) non si puo' scrivere senza rispondervi. **La mia osservazione, non la mia decisione:**
-### **`A13` e la conservazione della lunghezza non possono valere entrambe alla nascita** — una delle
-due cede, e il riordino e' il posto giusto per **dire quale**.
+## ⛔ **UNA MIA AFFERMAZIONE ERA FALSA, e il guardiano l'ha smontata sul codice**
+
+**Avevo scritto:** *«`A13` e la conservazione della lunghezza **non possono valere entrambe** alla
+nascita — una delle due cede»*. ### **E' FALSO.**
+
+**Con `MITOSI_2LAM` ON** *(il filtro sta a `:6956`)* un arco con `d < 2·LAM` ### **NON SI DIVIDE
+AFFATTO**: `ok = ok & _conforme` lo **toglie dai candidati** prima dello spezzamento. Allora i figli
+nascono a ### **`d/2 >= LAM`**, ### **`_nasce` non ripara niente**, e ### **`d/2 + d/2 = d`
+ESATTAMENTE.** ### ➜ **Valgono TUTTE E DUE.**
+
+> ### 📌 **L'incompatibilita' esiste SOLO se la divisione e' OBBLIGATORIA** — e non lo e'.
+> ### **Il mio errore e' stato logico, non di lettura: ho trattato la divisione come un atto dovuto,
+> e da li' ho dedotto un conflitto fra due leggi che non si toccano.**
+> **E il codice lo sapeva gia':** il commento del filtro dice che la cura va messa dove *«si decide
+> se questo candidato si divide o no»*, ### **«NON in `_nasce`: la' si RIPARA, e la cura e' proprio
+> togliere la riparazione»**. **Avevo la risposta sotto gli occhi.**
+
+### ✅ **E `MITOSI_2LAM` era GIA' «approvata da Luca»**, scritto nel commento a `:418`: era **OFF**
+solo per *«un interruttore alla volta»*, ### **non perche' la legge fosse in dubbio.**
+
+## ✅ **LA DECISIONE DI LUCA sulla parte (b)** *(2026-10-01)*
+
+> ### **Si RIFIUTA la divisione sotto `2·LAM`: `MITOSI_2LAM` ON, come LEGGE e non come
+> interruttore**, nel **commit 5**, con la misura di ### **quante divisioni vengono rifiutate** e
+> ### **di quanto cala `n` al passo 72** — *«si riporta, non si giudica»*.
+
+### ➜ **E il caso «fabbricazione di lunghezza» SMETTE DI ESISTERE, e lo dichiaro:**
+`M2` ② descriveva due meta' portate a `LAM` che davano `2·LAM` al posto di `d`. ### **Con la
+divisione rifiutata sotto `2·LAM`, quel caso non si presenta piu': `_nasce` non ha piu' niente da
+riparare sui tronconi della mitosi.** ### **Il secondo motore di gonfiamento di `M2` e' CHIUSO dalla
+decisione**, non mitigato.
 
 ### **Criteri, fissati PRIMA dei numeri**
 
 | | |
 |---|---|
-| ### **con `MITOSI_2LAM` OFF** | ### **byte-identico**: `pos`, `i`, `j`, `d`, `d0`, `tw` dei nati **identici** |
-| **con `MITOSI_2LAM` ON** | ### **NON byte-identico, ed e' atteso**: si **misura** quante divisioni vengono **rifiutate** e di quanto cala `n` al passo 72. ### **Il numero si riporta, non si giudica** |
+| ### **la LEGGE, non un interruttore** | la decisione di Luca e' **`MITOSI_2LAM` ON come LEGGE**: quindi ### **il ramo `else` ESCE dal sorgente**, come in `CURA2-STRUTTURALE` — e ### **va ARCHIVIATO COPIATO**, non cancellato *(`RAMI-OFF-CURA2`)* |
+| ### **cosa deve restare IDENTICO** | ### **tutto cio' che NON riguarda gli archi rifiutati.** Gli archi con `d >= 2·LAM` si dividono **come prima**, ed e' su loro che il byte-identico vale |
+| ### **cosa CAMBIA, ed e' atteso** | gli archi con `d < 2·LAM` ### **NON si dividono piu'**: si misura ### **quante divisioni sono RIFIUTATE** *(il contatore `_g_m2l_negati` esiste gia')* e ### **di quanto cala `n` al passo 72**. ### **Si riporta, non si giudica** |
+| ### ✅ **e una cosa SMETTE di esistere** | ### **la fabbricazione di lunghezza di `M2` ②**: niente sotto `2·LAM` si divide ⇒ `d/2 >= LAM` ⇒ ### **`_nasce` non ripara, e `d/2 + d/2 = d` esattamente** |
 | ### **il caso che DEVE fallire** | una copia in cui `pos_figlio` e' spostato di `1e-9`: il sigillo ### **deve vederlo**. E una in cui `tw` dei nuovi archi e' `1e-12` invece di `0`: ### **deve vederlo** |
 
 ---
@@ -114,9 +149,26 @@ nascita(net, evento, genitori, quante) -> None
 | | |
 |---|---|
 | **la tabella** | ### **`REGOLE_nascita.tsv` (32 regole) e' il punto di partenza**, ed e' gia' **verificata per ancora** |
-| ### **i QUATTRO eventi** | `semina` · `divisione` · `Schwinger` · `allaccio` — ### **decisi da Luca il 2026-09-29** |
+| ### **i QUATTRO eventi** | `semina` · `divisione` · `Schwinger` · `allaccio` — ### ⚠ **PROPOSTA DA APPROVARE, e la correzione e' mia** *(vedi sotto)* |
 | **le regole** | `eredita` · `media` · `zero` · `estrazione nuova` · ### **`eredita INVERTITA`** *(la carica alla Schwinger)* · ### **`derivata dalla definizione`** *(`perc_geom`)* |
 | ### **il presidio** | ### **una grandezza del registro che NON compare nella tabella dell'evento ferma il run**: *«regola di nascita non dichiarata per `<nome>` all'evento `<evento>`»*. ### **E' lo stesso disegno del controllo unico, spostato alla nascita** |
+
+### ⛔ **I QUATTRO EVENTI: ho scritto «decisi da Luca» e NEL REPO NON C'E'**
+
+Il guardiano ha chiesto di **citare il commit o la frase**. ### **L'ho cercata e non c'e'.**
+Nel repo esiste ### **solo la mia PROPOSTA** — `doc/PIANO_controllo_unico.md:94` *(«Proposta: il
+registro dichiara QUATTRO eventi»)* e `:192` *(fra le cose che **non** decido io)*, piu' il
+paragrafo della relazione che la propone.
+
+> ### 📌 **L'approvazione e' arrivata, ma SOLO IN CHAT — e io non l'ho scritta nel repo.**
+> ### **E' esattamente il difetto del par.4: «un riscontro non relazionato e' un riscontro perso»**
+> — e qui il perso e' **una decisione**, non una misura. ### **Peggio: l'ho poi CITATA come se il
+> repo la registrasse**, dandole un'autorita' che nel repo non ha.
+
+### ➜ **Quindi la tratto come il mandato dice: PROPOSTA DA APPROVARE.**
+I quattro eventi **restano la base del piano** *(senza di loro le sei «incoerenze» di `REGOLE_nascita`
+tornano a essere difetti)*, ### **ma la riga che li dichiara decisi non la scrivo finche' non c'e' un
+commit che la porti.**
 
 ### ⚠ **Che cosa questo richiede, e non e' gratis**
 
@@ -126,11 +178,33 @@ nascita(net, evento, genitori, quante) -> None
 | ### **`conc_nodi` deve smettere di crescere per MUTAZIONE** | e' l'unica che cresce con `.append`, ### **invisibile all'AST e alla sorveglianza**. ➜ **O entra nel registro con una scrittura vera, o esce dal registro e la sua riparazione si motiva** |
 | ### **la riallocazione di `_rep` deve sparire** | `_rep = zeros(...)` quando le lunghezze non tornano ### **butta la memoria in silenzio**, e sta ### **nell'unica finestra che il controllo unico non vede**. Con la nascita in un punto solo ### **quel ramo non ha piu' ragione di esistere** |
 
+## ⛔ **UN RISCHIO CHE NON AVEVO DICHIARATO** *(correzione del guardiano)*
+
+> ### **Spostare le scritture della nascita in un punto solo puo' cambiare L'ORDINE DELLE ESTRAZIONI
+> CASUALI** *(`_xi_rumore` e le altre)* ### **e l'ordine delle SOMME IN VIRGOLA MOBILE.**
+
+**E il generatore e' `net.rng`, uno solo**: ### **chi pesca prima cambia cio' che pescano tutti gli
+altri.** Un riordino che sembra una pura riorganizzazione ### **puo' cambiare il mondo per il solo
+fatto di aver cambiato l'ORDINE.**
+
+### ➜ **Quindi, PRIMA di scrivere il commit 3:**
+
+| | |
+|---|---|
+| **1** | ### **si MISURA quali estrazioni casuali avvengono nella nascita e in che ORDINE** — con la sorveglianza su `net.rng`, come quella che ha gia' intercettato **1 887 282** accessi per passo |
+| **2** | ### **l'ordine diventa PARTE DEL CONTRATTO**: va scritto nella tabella delle regole di nascita, accanto alle regole |
+| **3** | ### **e la SOMMA conta quanto l'estrazione**: dove un valore nasce da una somma di contributi, ### **l'ordine degli addendi e' parte del risultato** in virgola mobile |
+
+> ### 🛑 **E SE IL BYTE-IDENTICO CADE SOLO PER QUESTO: MI FERMO E LO DICO.**
+> ### **NON allento il criterio.** *(E' la regola di Luca, ed e' quella giusta: un criterio allentato
+> per far passare un commit non e' un criterio, e' una formalita'.)*
+
 ### **Criteri, fissati PRIMA dei numeri**
 
 | | |
 |---|---|
 | ### **byte-identico, scena grande fino al 72, CON nascite** | **grandezze E contatori**, contro il blob di prima. ### **La nascita come evento unico e' una RIORGANIZZAZIONE: non deve cambiare un bit** |
+| ### **e l'ORDINE delle estrazioni e' nel contratto** | ### **misurato PRIMA**, scritto nella tabella, e ### **verificato dal sigillo** |
 | ### **e il CONTATORE e' il controllo piu' fine** | i rami della nascita **si contano** *(`_rep_realloc`, `_g_eredpsi_*`, `_ritmo_sicurezza`…)*: ### **un contatore che cambia di uno e' un difetto che le grandezze non vedrebbero** — misurato in questa sessione |
 | ### **il caso che DEVE fallire** | **tre**, e sono quelli che dimostrano che il sigillo vede un difetto **della nascita**: ### **① si TOGLIE una grandezza dalla tabella** ⇒ deve fermarsi con *«regola non dichiarata»* · ### **② si cambia la regola di UNA grandezza** *(`psi` da `media` a `eredita`)* ⇒ il sigillo **deve vedere la differenza** · ### **③ si lascia una scrittura SPARSA a valle** ⇒ deve essere **impossibile**, cioe' il presidio deve nominarla |
 
@@ -167,14 +241,60 @@ costruzione**.
 | ### **la lettura** | leggere una derivata **sporca** ⇒ ### **`DerivataSporca`**, col **nome**, **chi** la legge e **quale legge** dovrebbe pulirla |
 | ### ⚠ **il costo, e va detto** | intercettare **la lettura** costa: la sorveglianza di questa sessione ha misurato ### **1 887 282 accessi per passo** sulle sole 43 grandezze. ### **Un controllo su OGNI lettura non e' gratis come uno sui CONFINI delle voci** |
 
-### 🛑 **La domanda che NON decido io**
+## ⛔ **L'opzione «AI CONFINI» NON FUNZIONA, e il guardiano ha ragione**
 
-> ### **La marca si verifica a OGNI LETTURA** *(costoso, e coglie tutto)* ### **oppure ai CONFINI
-> DELLE VOCI** *(come il controllo unico: ~30 confronti per voce, e coglie «e' stata riscritta prima
-> che la voce finisse»)*?
-> **La mia osservazione:** ai confini delle voci ### **la regola diventa «una derivata non puo'
-> attraversare un confine di voce sporca»**, che e' piu' debole della lettera del mandato ### **ma ha
-> un costo noto e un presidio gia' in piedi.** ### **Decide Luca.**
+**Avevo proposto di verificare la marca ai confini delle voci.** ### **Non regge:** dopo `mitosi`
+una derivata e' sporca ### **LEGITTIMAMENTE** fino alla voce che la riscrive — quindi un controllo al
+confine ### **o la segnala per sbaglio, o non controlla nessuna lettura.** **Era una terza via solo
+in apparenza: in realta' e' la prima che non guarda niente.**
+
+## 🧪 **LA TERZA VIA VERA: il VELENO. E l'ho MISURATA** *(sonda `csv/_test_fork/_sonda_veleno.py`)*
+
+> ### **Alla nascita le derivate dei nuovi nodi si riempiono con un valore AVVELENATO** *(`NaN` per i
+> float)*, **e il controllo unico verifica che nessuna grandezza di STATO contenga valori non
+> finiti.** ### **Una lettura sporca PROPAGA il veleno nello stato, e viene presa al confine
+> successivo.**
+
+### ✅ **E non e' un'invenzione: il sistema LO FA GIA', in due punti**
+
+| | |
+|---|---|
+| `:3693` in `_allaccia` | `self.peq = np.concatenate([self.peq, np.full(len(dd), np.nan)])` ### **` # da calibrare`** |
+| `:7165` nella mitosi/Schwinger | `pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))` |
+
+### ➜ **`peq` — una grandezza di STATO — nasce `NaN` PER DISEGNO, e `step` la CALIBRA.**
+Il flag lo dichiara: *«gli archi della creazione di coppia alla Schwinger nascono con `nan` e vengono
+**CALIBRATI** da `step()`»*. ### **Cioe' `peq` E' GIA' una grandezza «sporca alla nascita, con un
+veleno e un pulitore dichiarato»: la generalizzazione 4 non introduce una convenzione nuova — ESTENDE
+QUELLA CHE IL SISTEMA HA GIA'.**
+
+### 📊 **Le tre misure che il mandato chiede** *(scena GRANDE, `n = 12802`, `m = 471564`)*
+
+| | |
+|---|---|
+| ### **① il COSTO** | un controllo di finitezza su **tutte e 30** le voci di STATO: ### **`0.002085 s`**. Un **passo** costa ### **`2.849 s`** ⇒ ### **lo `0.073 %`**. Con **9** controlli per passo *(generalizzazione 2)*: ### **lo `0.659 %`.** ### **E' trascurabile** |
+| ### **② le derivate INTERE** | ### **ZERO.** Tutte e **10** le derivate sono `float64` ⇒ ### **il veleno `NaN` esiste per TUTTE**, e la domanda *«cosa si fa dove `NaN` non esiste»* ### **non ha casi** |
+| ### **③ `seterr(invalid='raise')`** | ### **il `NaN` PROPAGA**: somma, prodotto, ### **confronto `>`**, `isfinite`, `sum` — **nessuna eccezione**. Solleva **solo** su `astype(int64)` e su `inf - inf` ⇒ ### **il veleno funziona: arriva allo stato invece di far crashare la lettura** |
+
+### ⛔ **E una QUARTA misura che NON era nel mandato, e RAFFINA la proposta**
+
+**Censimento dei non finiti su un run SANO:** ### **UNA grandezza di STATO ne ha gia'** —
+### **`eta`, `inf` su TUTTI i 12802 nodi** — ed e' ### **LEGITTIMO E DICHIARATO** *(dominio
+`nonneg_inf`: «`+inf` per il vuoto DATO»)*.
+### ➜ **Quindi un controllo GLOBALE di finitezza SPARA AL PRIMO PASSO**, e il veleno ### **non si
+distingue da cio' che e' legittimo.**
+
+### ✅ **LA PROPOSTA, raffinata dalle misure** *(e decide Luca)*
+
+| | |
+|---|---|
+| **la forma** | il controllo di finitezza e' ### **PER GRANDEZZA, con l'esenzione DICHIARATA NEL REGISTRO** — ### **lo stesso schema gia' in piedi per il TIPO** *(`None` = esente, e c'e' **una** sola esenzione)* |
+| le esenzioni | ### **`eta`**, permanente e dichiarata *(`+inf` e' nel suo dominio)*; ### **`peq`**, **temporanea** — `NaN` dalla nascita fino alla calibrazione di `step` ### **che e' ESATTAMENTE la semantica «sporca»** |
+| ### ➜ **la convergenza** | ### **«derivata sporca» e «`peq` da calibrare» sono LA STESSA COSA.** La generalizzazione 4 non aggiunge una legge: ### **da un NOME a cio' che il sistema fa gia' in due punti** — e per `9-ter` questo conta |
+| ### ⚠ **il prezzo, dichiarato** | il veleno ### **rende NON BYTE-IDENTICO** il passo della nascita, perche' una derivata che prima conteneva un valore vecchio ora contiene `NaN`. ### **Non e' una riorganizzazione: e' un cambio di stato** — e il suo sigillo **non puo'** chiedere byte-identico sulle derivate |
+
+### 🛑 **E la decisione di Luca su (d): SOSPESA finche' non c'e' la misura.**
+### **La misura ora c'e', ed e' qui sopra.** ### **Decide Luca.**
 
 ### **Criteri, fissati PRIMA dei numeri**
 
@@ -182,7 +302,7 @@ costruzione**.
 |---|---|
 | ### **byte-identico** | la marca **legge e scrive un insieme di nomi**: ### **non tocca una grandezza di fisica** |
 | i contatori | ### **i contatori della MARCA sono «del presidio»** e cambiano per costruzione: si **separano per nome e si RIPORTANO**, come gia' fatto per `_g_registro_*` |
-| ### **il caso che DEVE fallire** | ### **si rinvia la riscrittura di UNA derivata** *(per esempio non si ricalcola `_deg` in `mitosi`)*: deve alzare **`DerivataSporca`** e ### **nominare `_deg`**. **Se non lo fa, la marca non guarda niente** |
+| ### **il caso che DEVE fallire** | ### ⛔ **CORRETTO: usavo `_deg`, che NON e' una derivata.** `_deg` e' in ### **`REGISTRO_STATO`** *(`:1095`)*, non in `REGISTRO_DERIVATE` — quindi il caso **non provava niente della marca**. ### ➜ **Ora: si rinvia la riscrittura di `_chi_geom_nodi`** *(o di `_r_corrente`)*, che sono ### **derivate VERE**, e il sigillo deve ### **nominare quella grandezza**. **Se non lo fa, la marca non guarda niente** |
 
 ---
 
@@ -239,21 +359,30 @@ costruzione**.
 
 | # | commit | che cosa cambia | sigillo |
 |---|---|---|---|
+| ### **0** | ### **il commento di `MITOSI_DIR`** | dice **«ATTIVA»** e il valore e' **`0.0`**: ### **una riga, byte-inerte, e Luca la vuole «subito»** | ### **nessun sigillo**: e' un **commento**. *(E `H-P7` lo guarda: un flag il cui commento cambia deve nominare quel flag)* |
 | **1** | ### **registro DICHIARATO** *(3-bis)* | `GrandezzaNonDichiarata`, e il controllo scorre `vars(net)` | byte-identico 72 + ### **`pippo` e `pluto`** |
-| **2** | ### **decisione SEPARATA** *(a)* | `decidi_divisione` legge e non scrive. ### **Soglia e `0.3` INVARIATI** | ### **byte-identico, zero bit** + soglia alterata di `1e-12` ⇒ **deve** cambiare le nascite |
+| **2** | ### **decisione SEPARATA** *(a)* | `decidi_divisione` legge e non scrive. ### **Soglia e `0.3` INVARIATI** | ### **byte-identico, zero bit** + la soglia portata **appena sotto il `|tw|` piu' alto fra gli archi oggi sotto soglia** ⇒ ### **almeno un arco NOTO deve passare**, e si confronta ### **la LISTA arco per arco** |
 | **3** | ### **nascita come EVENTO UNICO** *(c)* | i due `_eredita_*` **assorbiti**, la tabella delle 32 regole, il presidio della **regola non dichiarata** | byte-identico 72, **contatori compresi** + i **tre** casi che devono fallire |
 | **4** | ### **derivate SPORCHE** *(d, generalizzazione 4)* | la marca, e `DerivataSporca` | byte-identico + **riscrittura rinviata** ⇒ deve nominare la derivata |
-| **5** | ### **STRUTTURA: `pos`, `d`, `d0`** *(b)* | ### **SOLO dopo la decisione di Luca su `M2`/`MITOSI_2LAM`**: con `OFF` byte-identico, con `ON` **misurato** | byte-identico a `OFF`; a `ON` il **calo di `n`** misurato e riportato |
-| **6** | `perc_geom` del nato `= −1` | ### **FUORI dal riordino, gia' deciso.** Qui perche' ora il registro e' ### **l'unico posto che scrive una regola di nascita** | byte-identico **tranne** `perc_geom` dei nati, e il **frame-drag** misurato |
+| **5** | ### **`perc_geom` del nato `= −1`** | ### **FUORI dal riordino, gia' deciso.** ### ⬆ **SPOSTATO QUI dal fondo** *(correzione del guardiano)*: ### **dipende SOLO dal punto unico di nascita (commit 3), NON dalla struttura** — quindi **non deve aspettare la decisione su `M2`** | byte-identico **tranne** `perc_geom` dei nati, e il **frame-drag** misurato |
+| **6** | ### **STRUTTURA: `MITOSI_2LAM` ON come LEGGE** *(b)* | ### **DECISO da Luca**: si **rifiuta** la divisione sotto `2·LAM`. ### **E il caso «fabbricazione di lunghezza» smette di esistere** | ### **non byte-identico, ed e' ATTESO**: si **misura** quante divisioni sono **rifiutate** e **di quanto cala `n`** al passo 72 — ### **si riporta, non si giudica** |
+| **(7)** | *(fuori dal riordino, in coda)* | `D36` *(soglia adimensionale)* · il **`0.3`** · i **pavimenti** e `massa_critica_collasso` · `MITMAX` **errore** · `MITOSI_DIR` **archiviato** | ognuna ### **voce a se', con la sua misura** |
 
 ### ⚠ **Perche' `1` viene PRIMA di tutto**
 Il **registro dichiarato** e' l'unico pezzo che ### **rende impossibile dimenticare una grandezza
 mentre si sposta la nascita.** Farlo **dopo** vorrebbe dire riordinare ### **senza la rete di
 sicurezza**, ed e' esattamente l'errore che la storia racconta **sette volte**.
 
-### ⚠ **Perche' `5` viene DOPO**
-Tocca la **fisica** *(`n` cambia)*. Tutto cio' che lo precede e' ### **byte-identico**, quindi se `5`
-fallisce ### **si sa che e' lui**, e non uno dei quattro riordini.
+### ⚠ **Perche' la STRUTTURA viene ULTIMA**
+E' ### **la sola che tocca la fisica** *(`n` cambia)*. Tutto cio' che la precede e'
+### **byte-identico** *(tranne `perc_geom`, che cambia solo quella grandezza e lo dichiara)*, quindi
+### **se il commit 6 fallisce si sa che e' lui**, e non uno dei riordini.
+
+### ✅ **E perche' `perc_geom` e' SALITO al 5** *(correzione del guardiano)*
+Avevo messo `perc_geom` **in fondo**, dopo la struttura. ### **E' sbagliato: dipende solo dal PUNTO
+UNICO di nascita** *(commit 3)* — serve che il registro sia **l'unico posto** che scrive una regola
+di nascita, ### **e non serve affatto che la struttura sia riordinata.** ➜ **Cosi' non aspetta una
+decisione che non lo riguarda.**
 
 ---
 

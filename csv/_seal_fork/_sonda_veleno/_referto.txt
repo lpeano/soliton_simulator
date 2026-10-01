@@ -1,0 +1,44 @@
+[TIMBRO] _sonda_veleno.py  sha1-BYTE 20edc5b5  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
+scena GRANDE: n = 12802, archi = 471564, dopo 3 passi
+costo di UN PASSO, misurato: 2.849 s
+
+====================================================================================================
+4. I NON FINITI SU UN RUN SANO -- e non era nel mandato
+====================================================================================================
+  grandezze di STATO con valori NON FINITI: 1
+    eta            float64     inf 12802   nan 0       su 12802
+  ### UN CONTROLLO GLOBALE DI FINITEZZA SPARA SUBITO: il veleno NON si distingue
+      da cio' che e' legittimo, e la proposta va RAFFINATA.
+
+====================================================================================================
+1. IL COSTO del controllo di finitezza, alle dimensioni VERE
+====================================================================================================
+  un controllo su tutte le 30 voci di STATO: 0.002085 s
+  un PASSO: 2.849 s
+  ### il controllo costa il 0.073 % di un passo
+  e con 9 controlli per passo (la generalizzazione 2): 0.659 %
+
+====================================================================================================
+2. LE DERIVATE INTERE: dove `NaN` NON ESISTE
+====================================================================================================
+  derivate totali: 10
+  float/complex (il veleno `NaN` ESISTE): 10  ['_chi_core_nodi', '_chi_core_raggio', '_chi_core_rho0', '_fatt_cs_ultimo', '_chi_geom_nodi', '_r_corrente', '_g_rampa_prec', '_xi_rumore', '_dt_e_ultimo', '_sin2_vir']
+  ### INTERE (il veleno NaN NON esiste): 0  []
+
+====================================================================================================
+3. L'INTERAZIONE con `np.seterr(invalid='raise')` -- misurata, non supposta
+====================================================================================================
+  assegnare NaN in un array  -> PASSA (il NaN PROPAGA, nessuna eccezione)
+  SOMMA con NaN              -> PASSA (il NaN PROPAGA, nessuna eccezione)
+  PRODOTTO con NaN           -> PASSA (il NaN PROPAGA, nessuna eccezione)
+  CONFRONTO > con NaN        -> PASSA (il NaN PROPAGA, nessuna eccezione)
+  np.isfinite su NaN         -> PASSA (il NaN PROPAGA, nessuna eccezione)
+  np.sum con NaN             -> PASSA (il NaN PROPAGA, nessuna eccezione)
+  astype(int64) su NaN       -> ### SOLLEVA FloatingPointError: invalid value encountered in cast
+  inf - inf                  -> ### SOLLEVA FloatingPointError: invalid value encountered in subtract
+
+### LA LETTURA SI DERIVA DAI RISULTATI QUI SOPRA, e sta nel piano: il veleno e' utile
+    SOLO SE PROPAGA. Dove solleva, il difetto si vede subito ma con un'eccezione NON
+    DICHIARATA; dove propaga, lo prende il controllo al confine -- se il controllo lo
+    sa distinguere da cio' che e' legittimo.
+USCITA: 0

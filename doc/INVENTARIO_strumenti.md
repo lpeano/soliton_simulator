@@ -1743,3 +1743,25 @@ gia' protette; DOPO ### SEI SU SEI PROTETTE, zero silenziose e zero rumorose.**
 > ASSERITA:** stampava *«il tipo non viene guardato»*, una frase ### **vera prima della cura e FALSA
 > dopo**. Ora ### **il conto si DERIVA dai risultati**. *(Il file `_prima` porta la conclusione
 > vecchia, che era accurata quando e' stato prodotto: il blob della sonda e' scritto qui accanto.)*
+
+### 🧪 La sonda del VELENO *(2026-10-01)*
+
+| strumento | blob (byte) | comando | cosa misura |
+|---|---|---|---|
+| `csv/_test_fork/_sonda_veleno.py` | `20edc5b5` | `python csv/_test_fork/_sonda_veleno.py --passi=3` | la **terza via** per le derivate sporche: ① il **costo** del controllo di finitezza alle dimensioni vere · ② quante derivate sono **intere** *(dove `NaN` non esiste)* · ③ l'interazione con **`np.seterr(invalid='raise')`** · ### **④ il censimento dei non finiti su un run SANO**, che non era nel mandato |
+
+**Referto:** `csv/_seal_fork/_sonda_veleno/_referto.txt`.
+**Esito:** controllo di finitezza su 30 voci **`0.002085 s`** contro un passo da **`2.849 s`** ⇒
+### **lo `0.073 %`** *(con 9 controlli per passo, lo `0.659 %`)* · derivate **intere: ZERO** *(tutte
+e 10 `float64`)* · il `NaN` ### **PROPAGA** in somma, prodotto, confronto, `isfinite` e `sum`, e
+solleva **solo** su `astype(int64)` e `inf - inf` · ### **e UNA grandezza di STATO ha GIA' non finiti
+su un run sano: `eta`, `inf` su tutti i 12802** — legittimo e dichiarato.
+
+> ### 📌 **La quarta misura RAFFINA la proposta, ed e' per questo che l'ho fatta:** un controllo
+> **globale** di finitezza ### **sparerebbe al primo passo**, e il veleno **non si distinguerebbe da
+> cio' che e' legittimo. ➜ Il controllo va fatto PER GRANDEZZA, con l'esenzione DICHIARATA** — lo
+> stesso schema gia' in piedi per il **tipo**.
+> ### ✅ **E il sistema usa GIA' il veleno:** `peq` nasce **`NaN`** a `:3693` *(«da calibrare»)* e a
+> `:7165`, e `step` la **calibra**. ### **«Derivata sporca» e «`peq` da calibrare» sono la STESSA
+> COSA**, e per `9-ter` questo conta: la generalizzazione 4 ### **da' un nome a cio' che il sistema
+> fa gia' in due punti.**
