@@ -1,0 +1,67 @@
+========================================================================================================
+M7 -- LA POTENZA DEL SOLO TERMINE DEL TERMOSTATO (-xi*phivel)
+========================================================================================================
+simulatore ..... 3ddc56d9
+questo strumento 64ba17d0
+seme 11   passi 150
+
+====================================================================================================
+LA CONFIGURAZIONE INTERA (`P5`) -- non i flag toccati, TUTTI
+====================================================================================================
+  booleani di modulo confrontati con l'argv del DRIVER: 81
+  -> IN CONFIGURAZIONE DEL DRIVER: nessuna differenza. ZERO su 81.
+
+
+========================================================================================================
+LE PREMESSE DELLA MISURA, dichiarate PRIMA dei numeri
+========================================================================================================
+  M_PH = 1.0   DT = 0.01   TEMPO_SEGNO = False
+  -> `dt_n_s = dt_n` (una riga del codice, col flag spento), quindi
+     W_termo = -(xi/M_PH) * sum(dt_n * phivel_t^2)
+
+========================================================================================================
+I RIPIEGHI: questa misura e' leggibile SOLO se sono tutti a ZERO
+========================================================================================================
+  passi misurati: 149 su 150
+  ### ⚠ RIPIEGHI SCATTATI, in totale: {'_ritmo_sicurezza': 1}
+  ### -> I PASSI SQUALIFICATI SONO 1, e NON entrano nei totali:
+      passo 1: {'_ritmo_sicurezza': 1}
+      ⚠ `_ritmo_sicurezza` vuol dire che `ritmo()` e' caduto nel suo ramo di
+        sicurezza e ha restituito UN OROLOGIO UNIFORME (`np.ones`): e' LA STESSA
+        trappola del braccio C del sigillo del commit 2 -- ma qui IL CONTATORE
+        L'HA VISTA, ed e' esattamente per questo che il mandato chiede di
+        controllarli.
+  orologio: PER NODO   r in [2.0583314210398385e-05, 1.4142124553753874]
+
+========================================================================================================
+LA POTENZA DEL SOLO TERMOSTATO, per passo
+========================================================================================================
+   passo        W_termo        dK_step          resto    scuotimento         xi
+       2    +1.1354e+00    +1.5037e+00    +3.6821e-01    +6.2571e+01    -0.0442
+       3    +2.7688e+00    +3.2805e+00    +5.1161e-01    +1.6362e+02    -0.0733
+       4    +4.1329e-04    +8.1310e-04    +3.9981e-04    +1.6591e+02    -0.0733
+       5    +3.4067e+00    +4.3895e+00    +9.8279e-01    +2.3100e+02    -0.0954
+       6    +7.1342e-02    +9.1747e-02    +2.0405e-02    +3.0210e+02    -0.0955
+     ...
+     146    -1.4000e+03    -1.3697e+03    +3.0282e+01    +1.0011e+03    +1.1406
+     147    -1.4016e+03    -1.3703e+03    +3.1248e+01    +1.3395e+03    +1.1333
+     148    -1.3881e+03    -1.3582e+03    +2.9859e+01    +1.0351e+03    +1.1258
+     149    -1.3867e+03    -1.3558e+03    +3.0900e+01    +1.2058e+03    +1.1181
+     150    -1.3580e+03    -1.3285e+03    +2.9552e+01    +1.2170e+03    +1.1104
+
+  ### IL TERMOSTATO: RIFORNISCE in 55 passi, FRENA in 94, su 149 misurati
+  W_termo: somma -1.132279e+05   mediana -5.137735e+02   min -2.236451e+03   max +2.313955e+02
+  dK_step: somma -1.092785e+05      resto (coppia + 2 ordine): somma +3.949405e+03
+  scuotimento: somma +1.774618e+05
+
+========================================================================================================
+LA DOMANDA DELLA DECISIONE 4: IL VUOTO COPRE IL TERMOSTATO?
+========================================================================================================
+  energia RIFORNITA dal termostato (solo i passi con W>0): +3.678130e+03
+  energia IMMESSA dallo scuotimento (tutti i passi) ......: +1.774618e+05
+  ### RAPPORTO scuotimento / rifornimento del termostato: 48.2478
+  ### -> SI': il vuoto immette PIU' di quanto il termostato rifornisce,
+      quindi in TOTALE lo COPRE. ⚠ Ma <<in totale>> non e' <<passo per
+      passo>>, e nemmeno <<nello stesso LUOGO>>: il vuoto e' locale, il
+      termostato e' globale. La copertura TOTALE non garantisce quella LOCALE.
+  passi in cui lo scuotimento copre il termostato DA SOLO: 149 su 149

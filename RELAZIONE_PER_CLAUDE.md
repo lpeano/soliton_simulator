@@ -9324,3 +9324,84 @@ quando l'arco cambia lato**, che e' una proprieta' della **dichiarazione**, non 
 ### **nello stesso giro**, come avevo detto: ### **non meritava un commit a se'.**
 
 ### 🛑 **E QUI MI FERMO, come da mandato.** Il **commit 3** resta per una sessione nuova.
+
+# 🧪 **`DIVISIONE-AUTOCONSISTENTE:M7` — LA POTENZA DEL SOLO TERMOSTATO** *(2026-10-01)*
+
+*(`csv/_test_fork/_m7_potenza_termostato.py`, blob `64ba17d0`; scena grande, seme 11,
+**150 passi** — la finestra contiene il picco al passo 88.)*
+
+## ✅ **PRIMA DI TUTTO: I RIPIEGHI, come chiede la regola di oggi**
+
+| | |
+|---|---|
+| passi misurati | ### **149 su 150** |
+| ### **squalificato** | ### **il passo 1**, per `_ritmo_sicurezza` |
+| che cosa vuol dire | ### **`ritmo()` e' caduto nel suo ramo di sicurezza e ha restituito un OROLOGIO UNIFORME** — ### **la stessa trappola del braccio `C`**, ma qui ### **il contatore l'ha VISTA** |
+| l'orologio, negli altri 149 | `r` da ### **`2.06e-05` a `1.4142`**: ### **tutt'altro che uniforme** |
+
+### ➜ **E il passo squalificato NON entra nei totali.** *(Prima squalificavo la misura intera: era
+grossolano. Un ripiego squalifica **il passo in cui e' scattato**.)*
+
+## 📊 **IL TERMOSTATO FRENA PIU' DI QUANTO RIFORNISCA, e la finestra a 72 passi lo nascondeva**
+
+| | |
+|---|---|
+| ### **rifornisce** *(`W > 0`)* | **55** passi |
+| ### **frena** *(`W < 0`)* | ### **94** passi |
+| ### **`xi` cambia segno** | ### **UNA volta, al passo 56** |
+| `W_termo` totale | ### **`−1.1323e+05`** — ### **in NETTO il termostato TOGLIE energia** |
+| `W_termo` | mediana `−5.14e+02`, min `−2.24e+03`, max `+2.31e+02` |
+
+### ⛔ **E `:M3`, su 72 passi, diceva «rifornisce in 56 passi su 72»: era VERO e INCOMPLETO.**
+### **Il termostato rifornisce fino al passo 56 e poi FRENA, per 94 passi.**
+
+## ⭐ **E IL PICCO SPIEGA TUTTO: prima e dopo l'`88` sono due regimi**
+
+| | `W_termo` | rifornisce | frena | scuotimento |
+|---|---|---|---|---|
+| ### **fino al picco** *(≤ 88)* | `−1.4102e+04` | **55** | 32 | `+1.0510e+05` |
+| ### **dopo il picco** *(> 88)* | ### **`−9.9126e+04`** | ### **0** | ### **62** | `+7.2366e+04` |
+
+### ➜ **Dopo il picco il termostato NON rifornisce MAI: frena in TUTTI e 62 i passi.**
+### **La discesa di `K_fase` dal massimo al `77.6 %` — che `FINESTRA-DEL-PICCO` aveva misurato —
+### E' IL TERMOSTATO CHE FRENA.** ### **Il picco non e' un caso: e' il punto in cui il termostato
+cambia mestiere.**
+
+## ✅ **LA RISPOSTA ALLA DECISIONE 4 — e la domanda era girata dalla parte sbagliata**
+
+| | |
+|---|---|
+| energia **rifornita** dal termostato *(soli passi con `W > 0`)* | `+3.678e+03` |
+| energia **immessa** dallo scuotimento | ### **`+1.775e+05`** |
+| ### **rapporto** | ### **`48.2`** |
+| passi in cui il vuoto copre il termostato ### **DA SOLO** | ### **149 su 149** |
+
+### ➜ **SI': IL VUOTO COPRE IL TERMOSTATO, e con un margine di 48 volte.**
+
+### ⛔ **MA LA RISPOSTA UTILE E' UN'ALTRA, e la misura la impone:**
+> ### **Il ruolo DOMINANTE del termostato non e' rifornire — e' FRENARE.** Rifornisce `+3.7e+03`
+> e toglie `−1.13e+05`: ### **trenta volte di piu'.**
+
+### ➜ **Quindi togliere il termostato NON lascerebbe un deficit di energia** *(il vuoto lo copre
+48 volte)*: ### **lascerebbe il sistema SENZA FRENO**, con un vuoto che immette `+1.775e+05` e
+### **nessuno che lo contrasti.**
+### ⚠ **E il rischio che avevo scritto nel piano era ROVESCIATO:** dicevo *«senza un «fuori» il
+sistema puo' solo PERDERE»*. ### **Misurato: il pericolo e' l'opposto — senza il termostato il
+sistema puo' solo CRESCERE.** *(E la (c) di Luca restava giusta: l'energia globale non si
+conserva. ### **Ma non si conserva VERSO L'ALTO.**)*
+
+### 📌 **E UNA CONSEGUENZA PER LA PROPOSTA DEL CALORE LOCALE**
+La temperatura per nodo nasce *«dove si dissipa»* e ### **conduce**: puo' sostituire il
+termostato come ### **sorgente** *(che e' il ruolo piccolo)*, ### **ma la proposta non dice come
+FRENA.** ### ➜ **Questo e' il pezzo che manca al piano**, e non l'avevo visto perche' guardavo la
+finestra sbagliata.
+
+## ⚠ **E CHE COSA NON FACCIO: non presento un bilancio CHIUSO**
+
+I tre numeri sono esatti ciascuno per se' *(lo scuotimento e il `resto` sono `ΔK` misurati ai
+confini di voce; `W_termo` e' il lavoro del termine)*. ### **Ma sommarli e confrontarli con `ΔK`
+totale richiede anche la voce `mitosi` e il passo 1 escluso**, e nel mio primo tentativo di
+riconciliazione ### **ho contato DUE VOLTE lo scuotimento del passo 2.**
+### ➜ **Quindi non riporto nessun residuo**: ### **un bilancio che non quadra per un mio errore di
+conteggio non e' un residuo fisico**, ed e' esattamente l'errore che oggi mi e' costato tre
+versioni. ### **Il bilancio chiuso e' una misura a se', e la dichiaro NON FATTA.**
