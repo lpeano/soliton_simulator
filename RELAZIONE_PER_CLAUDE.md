@@ -8781,3 +8781,38 @@ su entrambi i lati.**
 col fatto che scrive `d0` e `phi`, **non** `phivel`. ### **Ed e' la stessa voce che `:M2` ha
 trovato dipendere dal VERSO DELL'ARCO:** la voce che muove di piu' la metrica ### **e' quella che
 dipende da una convenzione arbitraria.**
+
+# ⛔ **IL PRIMO RUN SUL `--regime` DAVA «ZERO DIFFERENZE», E ERA PRIVO DI SIGNIFICATO** *(2026-10-01)*
+
+> ### **Luca: quello zero NON voleva dire «i due sistemi sono uguali». Voleva dire che
+> ### IL MIO STRUMENTO NON AVEVA CREATO IL SECONDO SISTEMA.**
+
+### 🔎 **IL PERCORSO DEL CLI HA TRE PASSI, E `carica_dal_cli` NE FA DUE**
+`_cli_flag.carica_dal_cli` esegue `_cli()` e `_applica_flag(a)` — ### **le due funzioni che il
+driver chiama fino all'ancora.** Ma ### **`_applica_regime` NON e' fra quelle:** il simulatore la
+chiama a `:11742`, **dopo**, nel suo punto d'ingresso.
+### ➜ **Quindi passare `--regime` a `carica_dal_cli` NON FA NIENTE**, e il mio primo confronto
+### **misurava due volte lo STESSO sistema.** Lo `0` era ### **vuoto, non rassicurante.**
+
+### ⚠ **E HO QUASI SCRITTO LA CONCLUSIONE SBAGLIATA**
+Il referto diceva *«i due sistemi NON si distinguono su 72 passi»*, e ### **l'avrei riportata se non
+mi fossi chiesto PERCHE' `SCUOTIMENTO` risultasse `True` in entrambi.** ### **La domanda che ha
+salvato la misura e' stata guardare il numero che NON TORNAVA**, non il verdetto che tornava.
+
+### ✅ **LA CURA, e la fa gia' uno strumento esistente**
+`csv/_test_fork/_osserva_vuoto.py` chiama ### **`S._applica_regime(arg)`** a `:283`. ### **Lo fa
+GIUSTO** — l'ho verificato **prima** di sospettarlo, e lo scrivo perche' il prossimo non vada a
+cercare un difetto che non c'e'. ### **Il mio strumento ora fa lo stesso.**
+### ⚠ **E non e' «configurare il modulo a mano»** (`H-P3`): e' ### **completare il percorso del CLI
+con la funzione che il percorso vero usa.**
+
+### 🔬 **CON LA CURA, LA TRAPPOLA SCATTA** *(prova di fumo, 1 passo)*
+
+| | A = riferimento | B = con `--regime` |
+|---|---|---|
+| `REGIME` | deterministico | deterministico |
+| ### **`SCUOTIMENTO`** | ### **`True`** | ### **`False`** |
+| `G_PH`, `TAU_A`, `_CALORE_INIT` | `0.003`, `50.0`, `0.4` | ### **identici** |
+
+### ➜ **E questo CONFERMA la pretesa di `O2`:** `--regime deterministico` cambia ### **SOLO
+`SCUOTIMENTO`.** *(Blob dello strumento: `211b0b46`.)*

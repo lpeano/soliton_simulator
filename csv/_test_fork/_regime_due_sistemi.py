@@ -57,10 +57,30 @@ def blob(percorso):
 
 
 def carica(nome, extra):
+    """### ⚠ **IL PERCORSO DEL CLI HA TRE PASSI, E `carica_dal_cli` NE FA DUE.**
+
+    **Difetto mio, e il primo run l'ha scoperto dando `0 differenze`:** `_cli_flag.carica_dal_cli`
+    esegue `_cli()` e `_applica_flag(a)` — ### **le due funzioni che il driver chiama fino
+    all'ancora** — ma ### **`_applica_regime` NON e' fra quelle**: il simulatore la chiama a
+    `:11742`, **dopo**, nel suo punto d'ingresso. ### ➜ **Quindi passare `--regime` a
+    `carica_dal_cli` NON FA NIENTE**, e il mio primo confronto ### **misurava due volte lo stesso
+    sistema** — il che spiega lo `0` e lo rende ### **privo di significato, non rassicurante.**
+
+    ### ✅ **La cura e' chiamare la funzione DEL SIMULATORE, come fa gia' `_osserva_vuoto.py`**
+    *(`:283`: `S._applica_regime(arg)`)*. ### **Non e' configurare il modulo a mano** (`H-P3`): e'
+    ### **completare il percorso del CLI** con la funzione che il percorso vero usa.
+    *(E `_osserva_vuoto.py` lo fa **giusto**: l'ho verificato prima di sospettarlo.)*
+
+    ⚠ **Con `extra` vuoto `_applica_regime` esce subito** *(nessun override)*, ### **ma si chiama
+    su ENTRAMBI i rami**, cosi' i due percorsi sono **identici nella struttura** e la differenza
+    puo' venire **solo** dal flag.
+    """
     with contextlib.redirect_stdout(io.StringIO()):
         _S0, argv = _cli_flag.argv_del_driver(extra=["--seme=11"],
                                               dest=os.path.join(FUORI, "_scarto_cli"))
         S, a = _cli_flag.carica_dal_cli(list(argv) + list(extra), nome=nome)
+        # ### IL TERZO PASSO DEL PERCORSO, che `carica_dal_cli` non fa.
+        S._applica_regime(a)
         S._NMASSE_VIDEO["n"] = max(2, int(getattr(a, "nmasse", 2)))
         S._NMASSE_VIDEO["sep"] = float(getattr(a, "sep", 3.0))
         S._NMASSE_VIDEO["size"] = None
