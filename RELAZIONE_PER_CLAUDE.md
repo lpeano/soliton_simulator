@@ -7931,3 +7931,60 @@ delle coppie accorcia il grafo)* · **`MITOSI_DIR`** che ### **dichiara ATTIVO c
 
 **PROSSIMO:** il **passo 2**, `doc/PIANO_riordino_mitosi.md`, con le quattro parti, la
 generalizzazione **3-bis**, i criteri fissati prima dei numeri e l'ordine dei commit.
+
+---
+
+# 🧭 **PASSO 2: il PIANO del riordino della mitosi** *(2026-10-01)*
+
+`doc/PIANO_riordino_mitosi.md`. ### **Nessuna riga di codice del simulatore:** `62d67675`.
+**Cinque blocchi di criteri fissati prima dei numeri, sei casi che devono fallire, sette decisioni
+lasciate a te.**
+
+## Le quattro parti, piu' la 3-bis
+
+| | che cosa fa, e che cosa **non** fa |
+|---|---|
+| ### **(a) DECISIONE** | ### **separa la decisione dall'esecuzione** *(`decidi_divisione` legge e NON scrive)*. ### ⛔ **NON cambia la soglia `3π` ne' il `0.3`**: restano, e si **dichiarano**. **Byte-identico, zero bit** |
+| ### **(b) STRUTTURA** | ### **non si puo' scrivere senza la tua decisione su `M2`/`MITOSI_2LAM`**: il punto medio e la fabbricazione di lunghezza **sono** questa parte |
+| ### **(c) EVENTO UNICO** | ### **da TRE posti a UNO**: i due `_eredita_*` **assorbiti**, la tabella delle **32** regole, e ### **una grandezza senza regola dichiarata FERMA il run** |
+| ### **(d) DERIVATE SPORCHE** | la marca alla nascita, `DerivataSporca`. ### **Oggi la regola e' vera per MISURA; questo la rende vera per COSTRUZIONE** |
+| ### **(3-bis) REGISTRO DICHIARATO** | ### **toglie il terzo limite**: una grandezza per nodo/arco **non dichiarata** ferma il run |
+
+## ✅ **Come evito che la regola del 3-bis dipenda dai NOMI o dalla SINTASSI**
+
+**Hai chiesto proprio questo, ed e' l'errore che ho fatto SEI VOLTE in questa sessione** — le ho
+elencate tutte nel piano, con che cosa ognuna ha nascosto.
+### ➜ **Il presidio parte dal RUNTIME, non dall'AST:** `vars(net)` e il **primo asse**.
+### **Nessun nome, nessuna sintassi, nessun alias: una grandezza si qualifica per la sua FORMA, che
+e' un fatto.** E il caso che deve fallire e' banale e decisivo: ### **`net.pippo = zeros(n)` deve
+fermare il run nominando `pippo`**, e `net.pluto = zeros(m)` deve dire **per arco**.
+**Il limite che RESTA, dichiarato:** una grandezza con `len` diverso da `n` e da `m` ### **non viene
+vista** — il presidio copre **i due metri che il registro conosce**, non tutti i metri possibili.
+
+## L'ordine dei commit, e perche' quello
+
+**1** registro dichiarato · **2** decisione separata · **3** evento unico · **4** derivate sporche ·
+**5** struttura *(`pos`, `d`, `d0`)* · **6** `perc_geom` del nato.
+
+| | |
+|---|---|
+| ### **`1` PRIMA di tutto** | e' l'unico pezzo che ### **rende impossibile dimenticare una grandezza mentre si sposta la nascita.** Farlo dopo vorrebbe dire riordinare **senza la rete di sicurezza** — ### **l'errore che la storia racconta SETTE volte** |
+| ### **`5` DOPO** | e' il solo che ### **tocca la fisica** *(`n` cambia)*. Tutto cio' che lo precede e' byte-identico, quindi ### **se `5` fallisce si sa che e' lui** |
+
+## 🛑 **Le sette domande che NON decido io**
+
+soglia **adimensionale** o resta assoluta *(e `D36` resta aperta)* · il **`0.3`** si deriva o si
+toglie · `massa_critica_collasso` dentro una legge locale e' **`A2`**, e i due pavimenti da quale
+errore proteggono *(`A11`)* · **`MITOSI_DIR`** entra o si archivia · **`MITMAX`** parametro o errore ·
+### **`M2`: si RIFIUTA la divisione sotto `2·LAM` o si accetta che `A13` non valga alla nascita** ·
+### **la marca delle derivate si verifica a OGNI LETTURA o ai CONFINI DELLE VOCI** *(e qui ho messo
+il costo misurato: **1 887 282 accessi per passo**, quindi non e' gratis come un controllo sui
+confini)*.
+
+## ⚠ **E i due confini che NON tengono, ripetuti perche' bloccano due commit**
+
+### **`M2`/`U2`/`MITOSI_2LAM` SONO la parte (b)**, non una voce accanto: ### **il commit 5 non si puo'
+scrivere senza la tua decisione.** ### **`D36`/la soglia `3π` E' la parte (a)**: il piano la lascia
+invariata e lo dichiara, ### **ma la domanda resta aperta e va risposta.**
+**E un terzo che segnalo adesso:** il commit 5 tocca `dd`, quindi ### **`SCHW-CORTI` («`dd` da `d` o
+da `pos`») diventera' inevitabile** — e allora ### **mi fermero' e lo diro', invece di assorbirlo.**
