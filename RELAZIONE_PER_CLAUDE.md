@@ -8898,3 +8898,31 @@ vive nel repo accanto a quel commit.
 
 ### 🛑 **STOP.** Il **commit 2** del riordino e la **cura di `--regime`** partono ### **solo dopo la
 verifica del guardiano.**
+
+# 🔧 **LO STRUMENTO DI `G1`-`G4` E DELLA LINEA DI BASE, committato prima di girare** *(2026-10-01)*
+
+`csv/_test_fork/_carica_e_coppie.py` *(blob `1ce1cac8`)*. **Gira tre volte**, come chiede il mandato:
+`seme 11 / 72 passi`, `seme 12 / 72 passi`, `seme 11 / 150 passi`.
+
+## ⛔ **E PRIMA DI OGNI MISURA, UN MIO ERRORE DA ANNOTARE: `dir_laterale`**
+
+In `98fa482` ho scritto che `dir_laterale` ### **«e' SIMMETRICO: nasce dal punto medio»**, e l'ho
+messo fra le *«verifiche fatte prima di accusare»*. ### ⛔ **ERA FALSO.** A `:8040`:
+
+```
+v_rel       = self.pos[jj] - self.pos[ii]
+dir_radiale = v_rel / |v_rel|
+dir_laterale = (-dir_radiale[1], dir_radiale[0], 0)
+```
+
+### **Nasce da `pos[jj] − pos[ii]`, quindi SI INVERTE col verso dell'arco.**
+### **L'errore e' mio e grossolano:** avevo letto `_rmid = 0.5*(pos[ii]+pos[jj]) − _cen` di un
+### **ALTRO blocco** *(la sezione `VIRIALE`)* e gliel'avevo attribuito — ### **ho verificato la
+variabile sbagliata e ho scritto la verifica come se fosse quella giusta.**
+### ➜ **Quindi il sito ② di `MEM-HEBB-VERSO` ha TRE dipendenze dal verso, non due:** `mem_mot[ii]`
+*(un solo estremo)*, ### **`dir_laterale` (si inverte)**, e `self.phi[ii] = …` *(un solo estremo,
+con indici ripetuti)*.
+### **Il verdetto di `:M2` NON cambia** — il verso entra nella fisica, e il luogo e' lo stesso —
+### **ma una mia <<verifica>> era sbagliata, e la annoto invece di riscriverla** (par.8).
+### ⚠ **E la lezione e' precisa: «l'ho verificato» vale solo se dico QUALE RIGA ho letto.** Le due
+`dir_*` stanno in due blocchi diversi della stessa funzione, e il nome non le distingue.
