@@ -9223,3 +9223,58 @@ che svanisce» · «un arco a `3.79` sotto `2π`» · «la banda modulata scende
 ### **Registrare `|tw|` degli archi in `sel` e `Σ|tw|` prima e dopo, AL PASSO DI UNA DIVISIONE.**
 E' un braccio in piu' di `_misure_calore.py`, ### **e non l'ho girato**: lo dico invece di
 dedurlo. *(La voce e' `TW-DIVISIONE-INCOGNITA`.)*
+
+# ✅ **LA SOGLIA, MISURATA DENTRO LA DECISIONE: il guardiano ha ragione su tutto** *(2026-10-01)*
+
+*(`csv/_test_fork/_soglia_alla_divisione.py`, blob `e37a7d59`; scena grande, seme 11, 72 passi.)*
+
+## 📐 **GLI ARCHI CHE SI DIVIDONO, con la LORO soglia locale**
+
+| passo | arco | `|tw|` | soglia locale | sopra? |
+|---|---|---|---|---|
+| 42 | 379571 | `7.1923` | `7.0035` | ### **SI'** |
+| 50 | 381842 | `7.1318` | `7.0587` | ### **SI'** |
+| 65 | 398285 | `7.8618` | `7.0955` | ### **SI'** |
+| 66 | 92616 | `7.6630` | `7.5262` | ### **SI'** |
+| 69 | 320721 | `6.9793` | `6.9610` | ### **SI'** |
+| 70 | 73528 | `7.4367` | `7.3743` | ### **SI'** |
+| 70 | 423584 | `7.7091` | `7.4228` | ### **SI'** |
+| 71 | 432947 | `7.5407` | `7.1383` | ### **SI'** |
+| 72 | 354776 | `8.3466` | `8.1890` | ### **SI'** |
+
+### ➜ **TUTTI sopra la loro soglia locale, nessuno sotto. Ogni arco sta APPENA SOPRA.**
+
+## ✅ **E I TRE NUMERI CHE CHIUDONO LA QUESTIONE**
+
+| | |
+|---|---|
+| ### **la soglia MINIMA sulla rete** | da ### **`6.9136`** a `9.4248` ➜ ### **LA MODULAZIONE AGISCE**, e la soglia **scende** dove il tempo proprio ha un gradiente |
+| la soglia **massima** | sempre `9.4248` = `3π` *(ci sono archi con `grad = 0`, ed e' normale)* |
+| archi sopra soglia | da ### **`0` a `397`** *(il mio braccio `C` diceva `191`: era il conto **sotto il fallback**)* |
+| ### **il FALLBACK dell'orologio uniforme** | ### **scattato `0` volte.** ### **Quindi questa soglia e' quella VERA**, e non e' una mia assicurazione: e' un contatore |
+
+## ✅ **`TW-DIVISIONE-INCOGNITA` E' SCIOLTA, e il conto quadra a `1e-10`**
+
+`Δ sum|tw|` della voce `mitosi` contro `−sum|tw|` degli archi in `sel`:
+
+| passo | atteso | visto | scarto |
+|---|---|---|---|
+| 42 | `−7.1923` | `−7.1923` | `1.9e-10` |
+| 70 | ### **`−15.1458`** *(due divisioni)* | `−15.1458` | `1.4e-10` |
+| 72 | `−8.3466` | `−8.3466` | `7.9e-11` |
+
+### ➜ **Non c'era nessuna contraddizione: c'era una soglia misurata nel posto sbagliato.**
+### **E la mia assunzione contestata — «i figli nascono a `tw = 0` e nessun altro `tw` cambia» —
+### era GIUSTA.** Era la **soglia** a essere sbagliata, non il bilancio.
+
+## 🔎 **E IL CONFRONTO COL GUARDIANO: gli stessi archi, gli stessi numeri**
+
+Le soglie locali differiscono ### **nella quarta cifra** *(`7.0955` contro `7.0976`, `8.1890`
+contro `8.1882`)*, e la ragione e' dichiarata: ### **misuriamo in due istanti leggermente diversi
+DENTRO la decisione** — lui ricalcolando la formula subito dopo, io avvolgendo la funzione.
+### **Il verso del risultato non cambia di niente: ogni arco sta appena sopra la sua soglia.**
+
+## ⚠ **E UN DIFETTO DI STAMPA DEL MIO STRUMENTO, dichiarato**
+Una riga del referto stampa ### **`su %d decisioni`** invece del numero: ### **un `%` mancante.**
+Non tocca nessun dato *(il valore e' nel `json`: `decisioni`)*, e ### **lo correggo insieme al
+braccio `C`**, non con un commit a se'.
