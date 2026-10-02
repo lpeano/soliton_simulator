@@ -1575,3 +1575,43 @@ La tua domanda — *<<come sai che il veleno e' passato per tutte le leggi se fa
 ### **Il veleno `NaN`** — approvato da te il 2026-10-01 nella forma raffinata — piu' i ### **quattro criteri di COPERTURA** che hai aggiunto oggi. ### ➜ **Prima la MISURA, committata prima di girare; poi il codice; poi il sigillo.**
 
 ---
+
+# ⛔ **IL PRIMO GIRO DELLA MISURA HA UN VERDETTO VACUO SU ENTRAMBI I NUMERI** *(2026-10-03)*
+
+> ### **Luca: <<808 letture sporche su 0 PROVATE, 31 non provate>>. NESSUNO DEI DUE NUMERI SIGNIFICA QUALCOSA, e te lo dico prima di curarlo.**
+
+## ✅ **MA LE TRE SCENE HANNO AVUTO NASCITE, e la scena LUNGA si e' vista servire**
+
+| scena | | passi con nascita | eventi mitosi | eventi Schwinger |
+|---|---|---|---|---|
+| **corta** | seme 11, 72 | **8** | **8** | **1** |
+| ### **lunga** | seme 11, ### **150** | ### **83** | ### **83** | ### **64** |
+| **altro seme** | seme 12, 72 | **10** | **10** | **4** |
+
+### 📌 **E si vede PERCHE' chiedevi piu' di una scena:** con la sola corta il canale di Schwinger e' ### **quasi assente** *(1 evento)*; a 150 passi ne fa ### **64.** Una misura sulla sola scena corta avrebbe parlato di un canale che non ha girato.
+
+## ⛔ **DIFETTO 1 — le 808 sono UN lettore che non avevo dichiarato**
+
+Tutte e 808 vengono dalla ### **STESSA riga**, il `:6112`: `getattr(self, quale, None)` dentro il ciclo su `DOMINI`, cioe' dentro ### **`verifica_invarianti`** — ### **il controllo degli invarianti**, l'ultima voce del passo.
+### ➜ **E col veleno quella e' PROPRIO la voce che lo prenderebbe.** ### **808 letture da UNA riga di presidio non sono 808 difetti.**
+
+## ⛔ **DIFETTO 2 — e questo e' peggio: LO ZERO ERA GARANTITO DALLA COSTRUZIONE**
+
+`PASSO_COMPOSIZIONE` e' `apri, scuoti_vuoto, ### STEP, ### MITOSI, rilassa_disegno, …`
+
+### ➜ **`step` viene PRIMA di `mitosi`.** Una derivata avvelenata alla nascita viene riletta da `step` ### **AL PASSO DOPO** — e la mia finestra ### **si chiudeva all'inizio di ogni passo**, cioe' ### **esattamente prima di quella lettura.** E `step` e' dove sta ### **la maggior parte delle letture.**
+
+### ⛔ **Quindi la finestra NON POTEVA contenere nessuna delle 31 letture: lo zero era un teorema sulla mia implementazione, non un fatto sul simulatore.**
+
+### 📌 **E' l'UNDICESIMO `FALSO-ZERO`, ed e' il piu' istruttivo:** i dieci precedenti venivano da un ### **INSIEME** scelto male; questo da una ### **FINESTRA TEMPORALE** scelta male. ### **Stessa forma — uno zero che non poteva essere altro — su un asse nuovo.**
+
+## ✅ **PERCHE' L'HO VISTO, e questa e' la parte che ha funzionato**
+
+Perche' il referto stampa ### **DUE COLONNE**: le letture dall'### **AST** e quelle dal ### **runtime.** Il runtime ne trovava per tutte e dieci le derivate; l'AST ne attribuiva ### **zero** alla finestra.
+### ➜ **Due colonne che non tornano sono un difetto di una delle due, e non si possono ignorare** — ed e' lo stesso meccanismo che nel collaudo aveva trovato il nono e il decimo.
+
+### ✅ **LA CURA: la finestra e' PER GRANDEZZA e dura FINO ALLA SUA RISCRITTURA**, attraverso il confine del passo — che e' ### **letteralmente** cio' che la domanda chiede: *<<letta fra la nascita e la riscrittura>>*. E se una derivata non viene mai riscritta ### **resta sporca**, ed e' giusto.
+
+### 📌 **E la correzione e' il commit che SEGUE** *(par.5)*: questo porta ### **lo stato e il fallimento**, non la cura.
+
+---

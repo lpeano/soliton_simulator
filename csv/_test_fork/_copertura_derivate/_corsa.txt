@@ -1,0 +1,137 @@
+========================================================================================================
+LE DERIVATE ALLA NASCITA: le letture SPORCHE e LA COPERTURA
+========================================================================================================
+  simulatore .. dc10df7f (sha1 byte grezzi)
+  ### le derivate sono DERIVATE dal sorgente (`REGISTRO_DERIVATE`): 10
+      _chi_core_nodi, _chi_core_raggio, _chi_core_rho0, _fatt_cs_ultimo, _chi_geom_nodi, _r_corrente, _g_rampa_prec, _xi_rumore, _dt_e_ultimo, _sin2_vir
+
+--------------------------------------------------------------------------------------------------------
+PEZZO 2 -- LE LETTURE DALL'AST, in TUTTO il simulatore (anche i rami spenti)
+  ### righe che leggono una derivata: 31 in tutto
+      _chi_core_nodi       3 righe
+      _chi_core_raggio     1 righe
+      _chi_core_rho0       1 righe
+      _fatt_cs_ultimo      0 righe
+      _chi_geom_nodi       2 righe
+      _r_corrente          2 righe
+      _g_rampa_prec        1 righe
+      _xi_rumore           1 righe
+      _dt_e_ultimo         3 righe
+      _sin2_vir           17 righe
+
+--------------------------------------------------------------------------------------------------------
+PEZZI 1 e 4 -- LA COPERTURA DAL RUNTIME, su TRE scene
+  scena `corta`:
+    passi 72, seme 11 .. passi CON nascita 8, eventi mitosi 8, Schwinger 1 (nodi 9 / 1)
+  scena `lunga`:
+    passi 150, seme 11 .. passi CON nascita 83, eventi mitosi 83, Schwinger 64 (nodi 938 / 260)
+  scena `altro_seme`:
+    passi 72, seme 12 .. passi CON nascita 10, eventi mitosi 10, Schwinger 4 (nodi 13 / 4)
+
+  ### E LE LETTURE DEL PRESIDIO sono CONTATE A PARTE, non fra le sporche:
+      i lettori di presidio DICHIARATI: _ferma_se_registro_incoerente, rapporto_guardie, _forma_di, _registro_coerente, _censimento, grandezze, foto, _diagnostica, stato_registro
+      *(col veleno quelle sono ESATTAMENTE le letture che DEVONO vedere il `NaN`:
+        contarle fra le sporche direbbe che il controllo unico e' un difetto.)*
+
+  ### E LE LETTURE PER NOME VARIABILE NON RISOLTE: 25
+      l'AST non sa SU CHI cadono (il nome e' calcolato a run); il runtime le vede.
+      ### E' un LIMITE DICHIARATO del pezzo 2, non un'omissione.
+
+  ### righe che leggono una derivata NELLA FINESTRA DELLA NASCITA, unione delle tre:
+      _chi_core_nodi       1 righe provate
+      _chi_core_raggio     1 righe provate
+      _chi_core_rho0       1 righe provate
+      _fatt_cs_ultimo      1 righe provate
+      _chi_geom_nodi       1 righe provate
+      _r_corrente          1 righe provate
+      _g_rampa_prec        0 righe provate
+      _xi_rumore           1 righe provate
+      _dt_e_ultimo         1 righe provate
+      _sin2_vir            1 righe provate
+
+--------------------------------------------------------------------------------------------------------
+LE LETTURE SPORCHE: una derivata LETTA nella finestra PRIMA di essere riscritta
+  ### letture sporche trovate: 808
+      ### _dt_e_ultimo       letta da `verifica_invarianti` :6112   (scena `corta`)
+      ### _r_corrente        letta da `verifica_invarianti` :6112   (scena `corta`)
+      ### _fatt_cs_ultimo    letta da `verifica_invarianti` :6112   (scena `corta`)
+      ### _xi_rumore         letta da `verifica_invarianti` :6112   (scena `corta`)
+      ### _chi_core_nodi     letta da `verifica_invarianti` :6112   (scena `corta`)
+      ### _chi_geom_nodi     letta da `verifica_invarianti` :6112   (scena `corta`)
+      ### _chi_core_rho0     letta da `verifica_invarianti` :6112   (scena `corta`)
+      ### _chi_core_raggio   letta da `verifica_invarianti` :6112   (scena `corta`)
+
+--------------------------------------------------------------------------------------------------------
+PEZZO 3 -- LA DIFFERENZA: le letture MAI PROVATE, ciascuna col suo MOTIVO
+  ### letture dall'AST 31   PROVATE nella finestra 0   ### NON PROVATE 31
+  --- condizione mai scattata: 24
+      _chi_core_nodi     `step` :7286
+          il gate e' `TORS_4PI and len(self.perc_chi) >= self.n`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _chi_core_nodi     `step` :7287
+          il gate e' `TORS_4PI and len(self.perc_chi) >= self.n`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _chi_core_nodi     `_diag_completa` :11559
+          il gate e' `CHI_CORE`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _chi_core_raggio   `_diag_completa` :11566
+          il gate e' `CHI_CORE`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _chi_core_rho0     `_diag_completa` :11564
+          il gate e' `CHI_CORE`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _chi_geom_nodi     `step` :7286
+          il gate e' `TORS_4PI and len(self.perc_chi) >= self.n`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _chi_geom_nodi     `step` :7287
+          il gate e' `TORS_4PI and len(self.perc_chi) >= self.n`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _g_rampa_prec      `_pesi` :5703
+          il gate e' `SEMINA_MATURA`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _xi_rumore         `_passo_spinoriale` :5029
+          il gate e' `SCUOTIMENTO and RUMORE_COLORATO`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _sin2_vir          `step` :7507
+          il gate e' `ZETA_VIR and self._sin2_vir is not None and (len(self._sin2_vir) != len(beta))`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _sin2_vir          `step` :7508
+          il gate e' `ZETA_VIR and self._sin2_vir is not None and (len(self._sin2_vir) != len(beta))`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _sin2_vir          `step` :7509
+          il gate e' `ZETA_VIR and self._sin2_vir is not None and (len(self._sin2_vir) != len(beta))`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _sin2_vir          `step` :7512
+          il gate e' `ZETA_VIR and self._sin2_vir is not None`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _sin2_vir          `step` :7527
+          il gate e' `not (ZETA_VIR and self._sin2_vir is not None)`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _sin2_vir          `step` :7607
+          il gate e' `VERLET`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _sin2_vir          `step` :7608
+          il gate e' `VERLET`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _sin2_vir          `step` :7609
+          il gate e' `VERLET and ZETA_VIR and self._sin2_vir is not None and (len(self._sin2_vir) != len(beta_new))`, e nessuna delle tre scene l'ha reso vero n
+      _sin2_vir          `step` :7611
+          il gate e' `VERLET and ZETA_VIR and self._sin2_vir is not None and (len(self._sin2_vir) != len(beta_new))`, e nessuna delle tre scene l'ha reso vero n
+      _sin2_vir          `step` :7612
+          il gate e' `VERLET and ZETA_VIR and self._sin2_vir is not None and (len(self._sin2_vir) != len(beta_new))`, e nessuna delle tre scene l'ha reso vero n
+      _sin2_vir          `step` :7614
+          il gate e' `VERLET`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _sin2_vir          `step` :7615
+          il gate e' `VERLET and ZETA_VIR and self._sin2_vir is not None`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _sin2_vir          `step` :7622
+          il gate e' `VERLET and not (ZETA_VIR and self._sin2_vir is not None)`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _sin2_vir          `step` :7623
+          il gate e' `VERLET and not (ZETA_VIR and self._sin2_vir is not None)`, e nessuna delle tre scene l'ha reso vero nella finestra
+      _sin2_vir          `_diag_completa` :12017
+          il gate e' `not (_coorti)`, e nessuna delle tre scene l'ha reso vero nella finestra
+  --- non raggiunta, SENZA GATE: 7
+      _r_corrente        `_bloch_ritardato` :6690
+          nessuna condizione la protegge: se non e' stata letta e' perche' la funzione non e' stata chiamata nella finestra
+      _r_corrente        `_r_nodo_mitosi` :6754
+          nessuna condizione la protegge: se non e' stata letta e' perche' la funzione non e' stata chiamata nella finestra
+      _dt_e_ultimo       `_fattore_tempo_arco` :6770
+          nessuna condizione la protegge: se non e' stata letta e' perche' la funzione non e' stata chiamata nella finestra
+      _dt_e_ultimo       `decidi_divisione` :7996
+          nessuna condizione la protegge: se non e' stata letta e' perche' la funzione non e' stata chiamata nella finestra
+      _dt_e_ultimo       `decidi_divisione` :7998
+          nessuna condizione la protegge: se non e' stata letta e' perche' la funzione non e' stata chiamata nella finestra
+      _sin2_vir          `step` :7506
+          nessuna condizione la protegge: se non e' stata letta e' perche' la funzione non e' stata chiamata nella finestra
+      _sin2_vir          `step` :7511
+          nessuna condizione la protegge: se non e' stata letta e' perche' la funzione non e' stata chiamata nella finestra
+
+========================================================================================================
+### IL VERDETTO, scritto nella forma che il mandato impone:
+###   808 LETTURE SPORCHE su 0 provate, 31 non provate (elencate sopra).
+### ⛔ E NON SI SCRIVE <<nessuna derivata sporca>>: quella frase affermerebbe
+###   qualcosa sulle 31 righe che NON sono state guardate.
+========================================================================================================
