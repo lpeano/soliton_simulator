@@ -45,6 +45,26 @@ stessi argomenti e nello stesso ordine. ### **Lo stream non si tocca** -- si ann
 | ### **① un FALSO ZERO sulla semina** | la prima stesura metteva la spia **sottoclassando `S.Rete`** *(dopo `carica_dal_cli`)*, e riportava ### **«estrazioni della semina: 0»** -- un numero **falso**, non un errore. ### **La causa, verificata e non supposta:** `_applica_flag` crea la `Rete` *(`:9830`)* e chiama `net.semina(...)` *(`:9847`)* ### **DENTRO `carica_dal_cli`**, cioe' **prima** che una sottoclasse possa esistere | si avvolge ### **`np.random.default_rng`** *(l'**unico** punto in cui il file costruisce un generatore: `:2564`)* **prima** del caricamento, e si ripristina dopo. ### **Cosi' la spia c'e' dal primo numero pescato** |
 | ### **② l'ordine degli addendi NON conta sui CONTATORI** | la (B) elencava **82** scritture, e fra loro ### **`getattr(self, '_g_nati_mitosi', 0) + int(len(a))`**: una somma di **INTERI**, dove ### **l'ordine degli addendi NON cambia il risultato.** Metterle nel contratto lo ### **diluisce**: il contratto deve dire dove l'ordine **conta** | ogni riga porta ### **se la grandezza e' nel REGISTRO** e ### **se la somma e' in VIRGOLA MOBILE.** ### **Il CONTRATTO e' il sottoinsieme in virgola mobile**; gli interi si riportano **separati e dichiarati inerti** |
 
+## ⛔ **E UN TERZO DIFETTO, trovato GUARDANDO IL REFERTO DEL GIRO VERO**
+
+> ### **La cura ② confondeva DUE cose, e ha prodotto una riga FALSA: `i` e `j` finivano sotto
+> ### «l'ordine NON conta».**
+
+### **Per `np.concatenate([self.i[keep], a, m])` l'ordine decide LA TOPOLOGIA.** Non e' una
+questione di ultimo bit: e' ### **quale valore va a quale indice**, cioe' **il significato.**
+### ➜ **Le due cose, separate:**
+
+| forma | quando l'ordine conta | perche' |
+|---|---|---|
+| ### **CONCATENAZIONE** | ### **SEMPRE, per qualunque tipo** | decide ### **quale valore va a quale INDICE.** Una permutazione qui ### **non sposta un bit: cambia il sistema** |
+| ### **SOMMA aritmetica** | ### **solo in VIRGOLA MOBILE** | cambia ### **l'ULTIMO BIT.** Sugli interi *(i contatori)* e' **inerte** |
+
+### 📌 **E l'ho visto nel mio stesso output, non da un presidio.** La riga diceva
+*«`i` [None] `self.i[keep] | a | m` -- l'ordine NON conta»*, ### **ed e' la topologia del grafo.**
+### **Il tipo `None` veniva dal fatto che `i` e' un METRO, e `REGISTRO_METRI` non dichiara un
+tipo**: il mio codice leggeva *«tipo assente»* e concludeva *«non in virgola mobile»*, quindi
+*«inerte»*. ### **Due passaggi leciti, una conclusione falsa.**
+
 ### 📌 **E il ① e' il difetto peggiore dei due, perche' non fallisce: RISPONDE.**
 Uno zero falso in un referto ### **si legge come un fatto** -- *«la semina non pesca»* -- e
 avrebbe mandato il contratto a dire il contrario di cio' che succede. ### **E' la stessa famiglia
@@ -269,18 +289,35 @@ def somme_della_nascita(percorso, funzioni, nomi_registro, tipi_registro):
                 continue
             g = nomi[0]
             tp = tipi_registro.get(g)
-            # ⚠ L'ORDINE DEGLI ADDENDI CONTA SOLO IN VIRGOLA MOBILE. `getattr(self, '_g_x', 0)
-            #   + 1` e' una somma di INTERI: l'ordine NON cambia il risultato, e metterla nel
-            #   contratto lo diluisce. Il tipo viene dal REGISTRO, non da un'euristica sul nome;
-            #   cio' che il registro non dichiara si marca `(non dichiarata)` e NON si assume.
-            mobile = None
-            if g in nomi_registro:
-                mobile = bool(tp is not None and ("float" in str(tp) or "complex" in str(tp)))
+            # ⚠ ⚠ DUE COSE DIVERSE, E LA PRIMA STESURA LE CONFONDEVA (difetto trovato
+            #   GUARDANDO IL PROPRIO OUTPUT: `i` e `j` finivano sotto <<l'ordine NON conta>>,
+            #   ed e' FALSO -- l'ordine di `concatenate([i[keep], a, m])` decide LA TOPOLOGIA).
+            #     * CONCATENAZIONE: l'ordine decide QUALE VALORE VA A QUALE INDICE. Conta
+            #       SEMPRE, per QUALUNQUE tipo: non e' una questione di ultimo bit, e' il
+            #       significato. Una permutazione qui non sposta un bit: cambia il sistema.
+            #     * SOMMA ARITMETICA: l'ordine degli addendi cambia l'ULTIMO BIT, e solo in
+            #       VIRGOLA MOBILE. `getattr(self, '_g_x', 0) + 1` e' intera: inerte.
+            #   Il tipo viene dal REGISTRO, non da un'euristica sul nome. I METRI (`phi`, `i`,
+            #   `j`) nel registro NON hanno un tipo dichiarato: si marca `None` e NON si assume.
+            if vista[0] == "somma":
+                mobile = None
+                if g in nomi_registro:
+                    mobile = bool(tp is not None
+                                  and ("float" in str(tp) or "complex" in str(tp)))
+                perche = ("somma in VIRGOLA MOBILE: l'ultimo bit dipende dall'ordine"
+                          if mobile else
+                          ("somma di INTERI: l'ordine e' inerte" if mobile is False
+                           else "somma, tipo NON DICHIARATO nel registro: non lo assumo"))
+            else:
+                mobile = True
+                perche = ("CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. "
+                          "Conta per qualunque tipo, e non e' una questione di ultimo bit")
             fuori.append({"funzione": nodo.name, "riga_oggi": x.lineno,
                           "grandezza": g, "forma": vista[0],
                           "nel_registro": g in nomi_registro,
                           "tipo_dichiarato": tp,
                           "ordine_conta": mobile,
+                          "perche": perche,
                           "addendi_in_ordine": vista[1],
                           "testo": righe[x.lineno - 1].strip()[:150]})
     return fuori
@@ -483,31 +520,52 @@ def principale():
     for x in getattr(S, "REGISTRO_FINESTRA", ()):
         tipi_reg[x[0]] = x[2]
     somme = somme_della_nascita(SIM, FUNZ, nomi_reg, tipi_reg)
-    conta = [s for s in somme if s["ordine_conta"] is True]
-    inerti = [s for s in somme if s["ordine_conta"] is False]
-    fuori_reg = [s for s in somme if s["ordine_conta"] is None]
+    conc = [s for s in somme if s["forma"] != "somma"]
+    s_mob = [s for s in somme if s["forma"] == "somma" and s["ordine_conta"] is True]
+    s_int = [s for s in somme if s["forma"] == "somma" and s["ordine_conta"] is False]
+    s_nd = [s for s in somme if s["forma"] == "somma" and s["ordine_conta"] is None]
+    nel_reg = [s for s in somme if s["nel_registro"]]
     stampa("  funzioni esaminate: %s" % ", ".join(FUNZ))
-    stampa("  scritture trovate : %d   di cui nel REGISTRO %d"
-           % (len(somme), len(conta) + len(inerti)))
+    stampa("  scritture trovate : %d   di cui nel REGISTRO %d" % (len(somme), len(nel_reg)))
     stampa("")
-    stampa("  ### IL CONTRATTO E' QUESTO: %d scritture in VIRGOLA MOBILE, dove l'ordine CONTA"
-           % len(conta))
+    stampa("  ### IL CONTRATTO, E SONO DUE COSE DIVERSE:")
+    stampa("  ###   (1) %3d CONCATENAZIONI -- l'ordine decide QUALE VALORE VA A QUALE INDICE."
+           % len(conc))
+    stampa("  ###       Conta per QUALUNQUE tipo: non e' l'ultimo bit, e' il SIGNIFICATO.")
+    stampa("  ###   (2) %3d SOMME in VIRGOLA MOBILE -- l'ordine degli addendi cambia"
+           % len(s_mob))
+    stampa("  ###       l'ULTIMO BIT.")
+    stampa("  ###   e %3d somme di INTERI, dove l'ordine e' INERTE (fuori dal contratto)."
+           % len(s_int))
+    if s_nd:
+        stampa("  ###   piu' %d somme di grandezze col tipo NON DICHIARATO: non lo assumo."
+               % len(s_nd))
+    stampa("")
+    stampa("  (1) LE CONCATENAZIONI, nell'ordine del sorgente:")
     stampa("  " + "-" * 100)
-    for s in conta:
-        stampa("  :%-6d %-22s %-12s %-16s [%s]" % (s["riga_oggi"], s["funzione"], s["forma"],
-                                                   s["grandezza"], s["tipo_dichiarato"]))
+    for s in conc:
+        stampa("  :%-6d %-22s %-10s %-16s [%s]%s"
+               % (s["riga_oggi"], s["funzione"], s["forma"], s["grandezza"],
+                  s["tipo_dichiarato"], "" if s["nel_registro"] else "  (NON nel registro)"))
+        stampa("          pezzi in ordine: %s" % " | ".join(s["addendi_in_ordine"]))
+    stampa("")
+    stampa("  (2) LE SOMME IN VIRGOLA MOBILE:")
+    stampa("  " + "-" * 100)
+    for s in s_mob:
+        stampa("  :%-6d %-22s %-16s [%s]" % (s["riga_oggi"], s["funzione"], s["grandezza"],
+                                             s["tipo_dichiarato"]))
         stampa("          addendi in ordine: %s" % " | ".join(s["addendi_in_ordine"]))
+    if not s_mob:
+        stampa("          NESSUNA. Le somme aritmetiche di questo perimetro sono tutte INTERE")
+        stampa("          (i contatori), quindi il contratto e' TUTTO nelle concatenazioni.")
     stampa("")
-    stampa("  E %d scritture di grandezze del registro in cui l'ordine NON conta (INTERI):"
-           % len(inerti))
-    for s in inerti:
-        stampa("    :%-6d %-16s [%s]  %s" % (s["riga_oggi"], s["grandezza"],
-                                             s["tipo_dichiarato"],
-                                             " | ".join(s["addendi_in_ordine"])[:70]))
-    stampa("")
-    stampa("  E %d scritture NON nel registro (contatori, locali, tracking): FUORI dal contratto"
-           % len(fuori_reg))
-    stampa("    %s" % ", ".join(sorted({s["grandezza"] for s in fuori_reg})))
+    stampa("  LE SOMME DI INTERI, inerti e fuori dal contratto: %d" % len(s_int))
+    stampa("    %s" % ", ".join(sorted({s["grandezza"] for s in s_int})))
+    if s_nd:
+        stampa("  LE SOMME col tipo NON DICHIARATO: %d" % len(s_nd))
+        for s in s_nd:
+            stampa("    :%-6d %-16s %s" % (s["riga_oggi"], s["grandezza"],
+                                           " | ".join(s["addendi_in_ordine"])[:70]))
     stampa("")
 
     ref = {"vale": True,
@@ -532,10 +590,11 @@ def principale():
                                                       "elementi": q["elementi"]}
                                                      for (v, mt), q in sorted(sem.items())],
                                "n": int(S2.net.n), "archi": len(S2.net.i)},
-           "somme_ordine_addendi": somme,
-           "somme_contratto_virgola_mobile": conta,
-           "somme_interi_ordine_inerte": inerti,
-           "somme_fuori_dal_registro": fuori_reg,
+           "scritture_ordine": somme,
+           "contratto_concatenazioni": conc,
+           "contratto_somme_virgola_mobile": s_mob,
+           "somme_interi_ordine_inerte": s_int,
+           "somme_tipo_non_dichiarato": s_nd,
            "registro_completo": registro}
     io.open(os.path.join(FUORI, "_ordine_estrazioni.json"), "w", encoding="utf-8",
             newline=NL).write(json.dumps(ref, indent=1, default=str))

@@ -341,3 +341,49 @@ Il giro corto e' costato ### **meno di un minuto** e ha preso **due difetti**, d
 **PROSSIMO: il giro VERO, dal passo 40 al 72, sulla scena grande, dove le nascite ci sono.**
 
 ---
+
+# ⛔ **TERZO DIFETTO DELLO STRUMENTO, e l'ho visto nel referto del giro VERO** *(2026-10-02)*
+
+> ### **Luca, il referto diceva che per `i` e `j` «l'ordine NON conta». E' la topologia del grafo.**
+
+Strumento da **`59ef30a4`** a ### **`6297a6d6`**. ### **Nessuna riga del simulatore:** blob `3ddc56d9` prima e dopo. **Il giro vero si rifa' dopo questa cura** *(par.5: la correzione e' un commit a se', PRIMA del nuovo giro)*.
+
+## ⛔ **LA RIGA FALSA, per intero**
+
+```
+E 15 scritture di grandezze del registro in cui l'ordine NON conta (INTERI):
+    :7414   i   [None]   self.i[keep] | a | m
+    :7415   j   [None]   self.j[keep] | m | b
+```
+
+### ➜ **`np.concatenate([self.i[keep], a, m])` E' LA TOPOLOGIA.** Permutare quei tre pezzi ### **non sposta un ultimo bit: cambia quali nodi sono collegati.** Dirlo «inerte» in un **contratto** sarebbe stato ### **autorizzare esattamente la cosa che il contratto esiste per vietare.**
+
+## 🔎 **LA CAUSA: due passaggi leciti, una conclusione falsa**
+
+| | |
+|---|---|
+| **1** | `i` e `j` sono **METRI**, e `REGISTRO_METRI` e' `(("phi","nodo"), ("i","arco"), ("j","arco"))`: ### **NON dichiara un tipo** |
+| **2** | il mio codice leggeva *«tipo assente»* e concludeva *«non e' virgola mobile»*, quindi ### **«l'ordine e' inerte»** |
+| ### ➜ | ### **nessuno dei due passaggi e' sbagliato; la CATENA lo e'** — perche' la domanda *«l'ordine conta?»* ### **non si decide dal TIPO quando la forma e' una CONCATENAZIONE** |
+
+## ✅ **LE DUE COSE, ora separate, e sono DIVERSE in natura**
+
+| forma | l'ordine conta | perche' |
+|---|---|---|
+| ### **CONCATENAZIONE** *(`concatenate`, `vstack`)* | ### **SEMPRE, per qualunque tipo** | decide ### **quale valore va a quale INDICE**: non e' l'ultimo bit, e' ### **il SIGNIFICATO** |
+| ### **SOMMA aritmetica** *(`a + b`)* | ### **solo in VIRGOLA MOBILE** | cambia ### **l'ULTIMO BIT.** Sugli interi *(i contatori)* e' **inerte**, e li' la cura ② aveva ragione |
+
+### 📌 **E LA FORMA DELL'ERRORE E' LA MIA, di nuovo: una regola che parte da un ATTRIBUTO** *(il tipo)* **invece che da CIO' CHE L'ESPRESSIONE FA** *(concatenare contro sommare)*. ### **E' la settima volta in questa sessione**, e stavolta non l'ha trovata un presidio: ### **l'ho letta nel mio referto** — che e' il motivo per cui un referto si legge invece di committarlo.
+
+## ✅ **CIO' CHE IL GIRO VERO HA GIA' DETTO, e che resta valido**
+
+| | |
+|---|---|
+| ### **il CONTROLLO tiene** | con e senza spia: ### **byte-identico**, 188 grandezze e contatori |
+| ### **la sequenza di un passo SENZA nascite: TRE estrazioni** | `scuoti_vuoto`→`normal`(12802) · `step`→`normal`(38406) · ### **`mitosi`→`random`(471564)** |
+| ### **CON nascite: QUATTRO** | le stesse tre, piu' ### **`mitosi`→`random`(1)** |
+| ### **e il falso zero e' curato** | fuori dal passo: ### **42 estrazioni**, non 0 — **6** nel vuoto di `_applica_flag`, **36** nella scena |
+
+**PROSSIMO: il giro vero RIFATTO, e poi il contratto nella tabella.**
+
+---
