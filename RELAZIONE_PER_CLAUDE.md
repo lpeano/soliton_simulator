@@ -1750,3 +1750,46 @@ Il veleno ### **estende** le derivate, quindi ### **ogni guardia che usa la lung
 ### 📌 **E le altre 95** *(su grandezze non derivate)* sono la coda di `LUNGHEZZA-COME-SEGNALE`, la voce nuova: ### **spostare l'estrazione fresca di `_xi_rumore` da `step` a `nascita()` CAMBIA IL CONTRATTO DELL'ORDINE DELLE ESTRAZIONI**, quindi e' un commit a se', ### **NON byte-identico**, con la nuova sequenza misurata.
 
 ---
+
+# ✅ **L'ESENZIONE PER CELLA FUNZIONA: IL RUN ARRIVA IN FONDO, 72 SU 72** *(2026-10-03)*
+
+> ### **Luca: via (a) implementata. E la tua osservazione sulla caduta era la cosa piu' importante di questo giro — l'ho scritta nella scheda `invarianti`, perche' li' la trovera' chi legge il controllo.**
+
+Simulatore da **`7a1a21af`** a ### **`b378491a`**.
+
+## ⛔ **QUELLO CHE IL VELENO HA RESO VISIBILE, e non lo sapeva nessuno**
+
+> ### **PRIMA del veleno, dopo ogni nascita, QUELLO STESSO CONTROLLO verificava il dominio di derivate che portavano VALORI VECCHI — copiati, o semplicemente lasciati li' — e che passavano PERCHE' ERANO POSITIVI PER CASO.**
+
+### ➜ **Il controllo sulle derivate dopo una nascita verificava valori NON VALIDI.** E nessuno lo sapeva, perche' ### **un valore vecchio ma positivo supera `> 0` come un valore giusto.**
+
+### 📌 **IL VELENO NON HA INTRODOTTO IL PROBLEMA: LO HA RESO VISIBILE**, mettendo `nan` dove c'era un numero che ### **non significava niente.**
+
+## ✅ **IL COLLAUDO: 72 su 72**
+
+| | |
+|---|---|
+| veleno | **72 voci** *(9 nascite x 8 avvelenabili)*, **82 celle**, **18 esenti** |
+| ### **celle `nan` ESENTATE** | ### **71** |
+| ### **registri SCADUTI cancellati** | ### **29** — cioe' ### **la rilevazione dell'oggetto riscritto GIRA DAVVERO**, non e' un ramo morto |
+| le due **esenti** | restano ### **CORTE** *(12811 contro 12812)* con ### **zero `nan`** |
+| `_sin2_vir` | ### **0 `nan`**: `memoria_hebbiana_moto` la riscrive ### **intera** — come avevo analizzato ### **prima** di scrivere il codice |
+
+## ✅ **DUE SCELTE CHE VALE DIRE**
+
+### **① SI TIENE IL RIFERIMENTO, NON `id()`, ed e' PIU' FORTE:** un `id` si puo' ### **riusare** dopo che l'oggetto e' stato liberato, e allora un registro ### **scaduto sembrerebbe VIVO.** Col riferimento l'oggetto non puo' essere liberato, quindi `is` e' ### **esatto.** Il prezzo e' ### **una copia stantia per derivata**, che vive al massimo fino al prossimo controllo.
+
+### **② IL SECONDO VERSO DELLA STRETTEZZA E' IL PUNTO:** un ### **NUMERO** in una cella avvelenata vuol dire che qualcuno ha scritto ### **una cella senza riscrivere la derivata** — ### **un difetto DA NOMINARE**, non un'esenzione. ### **Un'esenzione che ammettesse anche i numeri non impedirebbe niente** (`A9`).
+
+## ✅ **E I DUE CASI CHE DEVONO FALLIRE sono nel sigillo** *(bracci `E` e `F`, sei in tutto)*
+
+| | |
+|---|---|
+| ### **`E`** | una legge scrive ### **UNA CELLA** avvelenata ### **senza riscrivere l'array.** L'iniezione e' ### **IN POSTO**, quindi ### **conserva l'identita'** — il registro resta ### **VIVO**, ed e' esattamente il caso che l'esenzione deve ### **nominare** |
+| ### **`F`** | il veleno ### **NON registra** le celle ⇒ il run deve cadere ### **come cadeva PRIMA della via (a)**: al passo 42, su `_dt_e_ultimo`. ### **E' il controllo positivo DEL REGISTRO:** se il run passasse anche senza registro, l'esenzione ### **non sarebbe ancorata a niente** e il braccio `A` non proverebbe nulla |
+
+### ✅ **Entrambe le ancore d'iniezione sono VERIFICATE UNICHE** *(1 su 1)* **e l'iniezione COMPILA** — controllato prima di girare, non dopo.
+
+**PROSSIMO: il sigillo, sei bracci. E poi mi fermo, come da mandato.**
+
+---

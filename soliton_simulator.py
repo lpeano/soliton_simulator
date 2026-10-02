@@ -1505,7 +1505,33 @@ def _avvelena_derivate(net):
             net._g_veleno_gia_lunga = getattr(net, "_g_veleno_gia_lunga", 0) + 1
             continue
         quanti = bersaglio - len(v)
-        setattr(net, nome, np.concatenate([v, np.full(quanti, np.nan)]))
+        # ### IL REGISTRO DEL VELENO: le CELLE avvelenate e L'IDENTITA' dell'array.
+        #   (via (a) di `VELENO-DOMINI`, decisione di Luca del 2026-10-03.)
+        #   Serve a `verifica_invarianti`, che senza di lui controllava il dominio di
+        #   NOVE derivate come se fossero STATO -- e col veleno le faceva violare il
+        #   dominio ### PER COSTRUZIONE (il run cadeva al passo 42 su `_dt_e_ultimo`).
+        #
+        #   ### SI TIENE IL RIFERIMENTO, NON `id()`, ED E' PIU' FORTE: un `id` si puo'
+        #   RIUSARE dopo che l'oggetto e' stato liberato, e allora un registro scaduto
+        #   sembrerebbe VIVO. Tenendo il riferimento l'oggetto non puo' essere liberato,
+        #   quindi `is` e' ESATTO. ### Il prezzo e' UNA copia stantia per derivata, e
+        #   vive al massimo fino al prossimo `verifica_invarianti`, che la cancella.
+        #
+        #   ### E LA CODA PRECEDENTE SI UNISCE, se e' ancora VIVA: in un passo con
+        #   DUE nascite (divisione e Schwinger) il veleno gira due volte, e dopo la
+        #   seconda le celle avvelenate sono l'UNIONE -- perche' `concatenate`
+        #   conserva la testa, quindi i `nan` della prima sono ancora li'.
+        _vreg = getattr(net, "_veleno_registro", None)
+        if _vreg is None:
+            _vreg = {}
+            net._veleno_registro = _vreg
+        _prec = _vreg.get(nome)
+        _inizio = len(v)
+        if _prec is not None and _prec["arr"] is v:
+            _inizio = min(int(_prec["inizio"]), len(v))
+        _nuovo = np.concatenate([v, np.full(quanti, np.nan)])
+        setattr(net, nome, _nuovo)
+        _vreg[nome] = {"arr": _nuovo, "inizio": int(_inizio), "fine": int(bersaglio)}
         net._g_veleno_voci = getattr(net, "_g_veleno_voci", 0) + 1
         net._g_veleno_celle = getattr(net, "_g_veleno_celle", 0) + int(quanti)
 
@@ -6318,6 +6344,61 @@ class Rete:
                 else:
                     cattivo = ~fin; regola = 'finito'
             cattivo = np.asarray(cattivo)
+            # ### IL VELENO: ESENZIONE PER CELLA, ANCORATA AL REGISTRO DEL VELENO.
+            #   (`COMMIT 4`, via (a), decisione di Luca del 2026-10-03.)
+            #
+            #   ### E' IL TERZO CASO DELLA STESSA ESENZIONE, e i primi due stanno qui
+            #   sopra -- per questo NON e' una legge in piu' (`9-ter`):
+            #     `eta` -> `nonneg_inf`: esenzione sull'INTERO DOMINIO (`+inf` legittimo)
+            #     `peq` -> `_peqn_idx`:  esenzione ### PER CELLA, ancorata a una MARCA
+            #     ### le derivate AVVELENATE -> `_veleno_registro`: esenzione PER CELLA,
+            #       ancorata al VELENO. ### La terza volta che si usa la stessa forma.
+            #
+            #   ### E NESSUN ELENCO A MANO: il registro del veleno lo scrive
+            #   `_avvelena_derivate` leggendo la CLASSE DI NASCITA da `REGISTRO_DERIVATE`.
+            #
+            #   ### E LA CADUTA CHE L'HA RICHIESTA DICE UNA COSA IN PIU', da non perdere:
+            #   PRIMA del veleno, dopo ogni nascita, questo stesso controllo verificava il
+            #   dominio di derivate che portavano ### VALORI VECCHI (copiati o lasciati), e
+            #   che passavano ### PERCHE' ERANO POSITIVI PER CASO. ### Il controllo sulle
+            #   derivate dopo una nascita verificava valori NON VALIDI -- e nessuno lo
+            #   sapeva finche' il veleno non ha messo `nan` dove c'era un numero vecchio.
+            _vel = (getattr(self, '_veleno_registro', None) or {}).get(quale)
+            if _vel is not None:
+                if _vel['arr'] is not getattr(self, quale, None):
+                    # ### SCADUTO: la legge ha RISCRITTO la derivata, quindi il veleno
+                    #   non c'e' piu' e il dominio si applica PIENO, come prima.
+                    #   ⚠ IL LIMITE, DICHIARATO: una modifica ### IN POSTO conserverebbe
+                    #     l'identita' dell'oggetto, quindi il registro sembrerebbe VIVO
+                    #     mentre la derivata e' stata ricalcolata -- e le celle
+                    #     avvelenate, ora riempite di numeri veri, verrebbero NOMINATE
+                    #     come difetto. ### MISURATO: ZERO modifiche in posto sulle dieci
+                    #     derivate, e il rilevatore ha il suo CONTROLLO POSITIVO cablato
+                    #     (`csv/_test_fork/_copertura_derivate/`; il blob del referto e'
+                    #     citato dal braccio `D` del sigillo del veleno).
+                    del self._veleno_registro[quale]
+                    self._g_inv_veleno_scaduti = (getattr(self, '_g_inv_veleno_scaduti', 0)
+                                                  + 1)
+                elif cattivo.ndim == 1 and v.dtype.kind == 'f':
+                    _i0 = int(_vel['inizio'])
+                    _i1 = min(int(_vel['fine']), len(cattivo))
+                    _mv = np.zeros(len(cattivo), dtype=bool)
+                    if _i1 > _i0:
+                        _mv[_i0:_i1] = True
+                    _nanv = ~np.isfinite(np.asarray(v, dtype=float))
+                    # ### STRETTO NEI DUE VERSI, e il secondo verso e' il punto: nelle
+                    #   celle avvelenate il valore ### DEVE essere `nan`. Un NUMERO li'
+                    #   vuol dire che qualcuno ha scritto ### UNA CELLA senza riscrivere
+                    #   la derivata, e quello e' un ### DIFETTO DA NOMINARE -- non
+                    #   un'esenzione. Un'esenzione che ammettesse anche i numeri sarebbe
+                    #   `A9`: un presidio che ammette tutto non impedisce niente.
+                    cattivo = np.where(_mv, ~_nanv, cattivo)
+                    self._g_inv_veleno_ok = (getattr(self, '_g_inv_veleno_ok', 0)
+                                             + int(np.sum(_mv & _nanv)))
+                    regola = (regola + ' | e nelle %d celle AVVELENATE il valore DEVE '
+                              'essere `nan` (esenzione PER CELLA ancorata al veleno: un '
+                              'NUMERO li\' significa una cella scritta SENZA riscrivere '
+                              'la derivata)' % int(np.sum(_mv)))
             if cattivo.ndim > 1:
                 cattivo = np.any(cattivo, axis=tuple(range(1, cattivo.ndim)))
             if not np.any(cattivo):

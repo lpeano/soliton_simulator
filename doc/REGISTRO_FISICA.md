@@ -1498,6 +1498,51 @@ Un flag renderebbe il presidio ### **un'opzione** — ed e' il difetto che `E4-L
 curato *(<<il controllo era legge, chi la faceva rispettare era un'opzione>>)* e che
 `_nasce` dichiara di aver tolto *(<<IL GATE E' TOLTO: il presidio agisce SEMPRE>>)*.
 
+## ✅ **L'ESENZIONE PER CELLA, ANCORATA AL VELENO** *(via (a), decisione di Luca, 2026-10-03)*
+
+### **E' IL TERZO CASO DELLA STESSA ESENZIONE**, e per `9-ter` questo e' il punto: non e'
+una legge nuova, e' la ### **terza volta che si usa la stessa.**
+
+| | la forma | l'ancora |
+|---|---|---|
+| `eta` | esenzione sull'### **INTERO DOMINIO** | la **forma** `nonneg_inf` |
+| `peq` | esenzione ### **PER CELLA** | la **marca** `_peqn_idx` |
+| ### **le derivate avvelenate** | esenzione ### **PER CELLA** | il ### **registro del veleno** `_veleno_registro` |
+
+### **COME FUNZIONA**
+
+| | |
+|---|---|
+| **1** | `_avvelena_derivate` registra, per ogni derivata avvelenata, le ### **celle** `[inizio:fine]` e ### **il RIFERIMENTO all'array** che ha scritto |
+| **2** | se il registro e' ### **VIVO** *(stesso oggetto)*: nelle celle avvelenate il valore ### **DEVE essere `nan`** — ### **stretto nei DUE versi** — e ### **fuori** da quelle celle vale il dominio dichiarato, come prima |
+| **3** | se l'oggetto e' ### **CAMBIATO** *(la legge ha riscritto la derivata)*: il registro e' ### **SCADUTO**, si cancella, e il dominio si applica ### **PIENO** |
+
+### ⛔ **IL SECONDO VERSO E' IL PUNTO, e senza di lui l'esenzione sarebbe `A9`:** un
+### **NUMERO** in una cella avvelenata vuol dire che qualcuno ha scritto ### **UNA CELLA
+senza riscrivere la derivata** — e quello e' un ### **DIFETTO DA NOMINARE**, non
+un'esenzione. ### **Un'esenzione che ammettesse anche i numeri non impedirebbe niente.**
+
+### ✅ **E SI TIENE IL RIFERIMENTO, NON `id()`, ED E' PIU' FORTE:** un `id` si puo'
+### **RIUSARE** dopo che l'oggetto e' stato liberato, e allora un registro ### **scaduto
+sembrerebbe VIVO.** Tenendo il riferimento l'oggetto non puo' essere liberato, quindi `is`
+e' ### **esatto.** Il prezzo e' ### **una copia stantia per derivata**, che vive al massimo
+fino al prossimo `verifica_invarianti`.
+
+### ⚠ **IL LIMITE, DICHIARATO:** una modifica ### **IN POSTO** conserverebbe
+l'identita', quindi il registro sembrerebbe ### **vivo** mentre la derivata e' stata
+ricalcolata — e le celle, ora piene di numeri veri, verrebbero ### **nominate come
+difetto.** ### ✅ **MISURATO: ZERO modifiche in posto sulle dieci derivate**, e il
+rilevatore ha il suo ### **controllo positivo cablato**
+*(`csv/_test_fork/_copertura_derivate/`; il blob del referto e' citato dal braccio `D` del
+sigillo)*.
+
+### 📌 **E IL COLLAUDO DICE CHE FUNZIONA** *(72 passi, seme 11)*: il run ### **arriva
+in fondo**, ### **71** celle `nan` esentate, ### **29 registri SCADUTI** cancellati *(cioe'
+la rilevazione dell'oggetto riscritto gira davvero)*, e le due esenti restano ### **corte**
+*(12811 contro 12812)* con ### **zero `nan`**.
+
+---
+
 ## ### ⛔ **IL LIMITE CHE IL PRIMO COLLAUDO HA TROVATO: `VELENO-DOMINI`**
 
 Il veleno ### **fa cadere il run al passo 42**, alla ### **prima mitosi**:
@@ -3583,6 +3628,33 @@ prima di sapere con quali flag si gira.**
 giorno tornasse incompatibile **lo direbbe da sé.**
 
 <!-- SCHEDA nome=invarianti funzioni=verifica_invarianti flag=INVARIANTI,DOMINI -->
+
+> ### ✅ **COMMIT 4 — IL CONTROLLO DI DOMINIO HA UN'ESENZIONE PER CELLA, ANCORATA AL VELENO** *(2026-10-03)*
+>
+> ### **E LA CADUTA CHE L'HA RICHIESTA DICE UNA COSA CHE NESSUNO SAPEVA, e va scritta qui:**
+> ### **PRIMA del veleno, dopo ogni nascita, QUESTO STESSO CONTROLLO verificava il dominio
+> ### di derivate che portavano VALORI VECCHI** *(copiati, o semplicemente lasciati li')*,
+> ### **e che passavano PERCHE' ERANO POSITIVI PER CASO.**
+>
+> ### ➜ **Il controllo sulle derivate dopo una nascita verificava valori NON VALIDI** — e
+> ### nessuno lo sapeva, perche' un valore vecchio ma positivo supera `> 0` come un valore
+> ### giusto. ### **Il veleno non ha introdotto il problema: lo ha reso VISIBILE**, mettendo
+> ### `nan` dove c'era un numero che non significava niente.
+>
+> **COME FUNZIONA l'esenzione**: per una derivata con un registro di veleno ### **VIVO**
+> *(stesso oggetto)*, nelle celle avvelenate il valore ### **DEVE essere `nan`** — e un
+> ### **NUMERO** li' e' un ### **DIFETTO DA NOMINARE**, perche' vuol dire che qualcuno ha
+> scritto ### **una cella senza riscrivere la derivata**. Fuori da quelle celle vale il
+> dominio dichiarato, come prima. Se l'oggetto e' ### **cambiato**, il registro e' ### **scaduto**:
+> si cancella e il dominio si applica ### **pieno**.
+>
+> ### 📌 **E' IL TERZO CASO DELLA STESSA ESENZIONE** *(dopo `eta` sull'intero dominio e
+> `peq` per cella con la marca `_peqn_idx`)*, quindi per `9-ter` ### **non e' una legge in piu'.**
+> ### **E non c'e' nessun elenco a mano:** il registro del veleno lo scrive `_avvelena_derivate`
+> leggendo la ### **CLASSE DI NASCITA** da `REGISTRO_DERIVATE`.
+>
+> *(La scheda del veleno e' `veleno-derivate`.)*
+
 
 > ## ✅ **AGGIORNATA il 2026-09-25 — `nonneg_inf`, e l'invariante HA FERMATO UNA CURA**
 > **Il dominio di `eta` e' cambiato** (`RAMPA-1`: il vuoto dato ha `eta = +inf`), quindi la sua

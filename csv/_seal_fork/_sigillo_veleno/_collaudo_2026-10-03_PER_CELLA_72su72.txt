@@ -1,0 +1,29 @@
+[TIMBRO] _sonda_vel2.py  sha1-BYTE ?  FUORI DA UN REPO GIT
+  passi fatti: 72 su 72
+  ### IL RUN E' ARRIVATO IN FONDO
+  nati mitosi 8, Schwinger 1
+  _g_veleno_voci             72
+  _g_veleno_celle            82
+  _g_veleno_esenti           18
+  _g_inv_veleno_ok           71
+  _g_inv_veleno_scaduti      29
+  _g_inv_peq_nan_ok          2
+  registro del veleno VIVO alla fine: 7 voci
+    _chi_core_nodi     celle [12811:12812]  vivo=True
+    _chi_core_raggio   celle [12811:12812]  vivo=True
+    _chi_core_rho0     celle [12811:12812]  vivo=True
+    _chi_geom_nodi     celle [12811:12812]  vivo=True
+    _dt_e_ultimo       celle [471574:471575]  vivo=True
+    _fatt_cs_ultimo    celle [12811:12812]  vivo=True
+    _r_corrente        celle [12811:12812]  vivo=True
+  --- le derivate ---
+    _chi_core_nodi     avvelena       len=12812   atteso=12812   nan=1
+    _chi_core_raggio   avvelena       len=12812   atteso=12812   nan=1
+    _chi_core_rho0     avvelena       len=12812   atteso=12812   nan=1
+    _fatt_cs_ultimo    avvelena       len=12812   atteso=12812   nan=1
+    _chi_geom_nodi     avvelena       len=12812   atteso=12812   nan=1
+    _r_corrente        avvelena       len=12812   atteso=12812   nan=1
+    _g_rampa_prec      auto-rinfresco len=12811   atteso=12812   nan=0
+    _xi_rumore         auto-rinfresco len=12811   atteso=12812   nan=0
+    _dt_e_ultimo       avvelena       len=471575  atteso=471575  nan=1
+    _sin2_vir          avvelena       len=471575  atteso=471575  nan=0

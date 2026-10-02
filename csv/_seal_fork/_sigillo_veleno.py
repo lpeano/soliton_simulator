@@ -55,6 +55,21 @@ ANCORA = "_avvelena_derivate(net)"
 # il caso che DEVE fallire: si toglie l'esenzione a `_xi_rumore`.
 ESENZIONE = '("_xi_rumore", "nodo", "auto-rinfresco",'
 SENZA_ESENZIONE = '("_xi_rumore", "nodo", "avvelena",'
+# ### IL BRACCIO `E`: una legge scrive UNA CELLA AVVELENATA senza riscrivere l'array.
+#   L'iniezione e' IN POSTO, quindi ### CONSERVA L'IDENTITA' dell'oggetto -- cioe' il
+#   registro del veleno resta ### VIVO, ed e' esattamente il caso che l'esenzione per
+#   cella deve NOMINARE: un NUMERO in una cella avvelenata.
+ANCORA_CELLA = "    _avvelena_derivate(net)"
+SCRITTURA_DI_CELLA = (
+    "    _rt = (getattr(net, \'_veleno_registro\', None) or {}).get(\'_dt_e_ultimo\')\n"
+    "    if _rt is not None and _rt[\'inizio\'] < len(net._dt_e_ultimo):\n"
+    "        net._dt_e_ultimo[_rt[\'inizio\']] = 1.0   # CELLA SCRITTA, array NO")
+# ### IL BRACCIO `F`: il veleno NON registra le celle. Allora il controllo non ha
+#   niente a cui ancorare l'esenzione, e il run deve cadere ### COME CADEVA PRIMA
+#   della via (a): al passo 42, su `_dt_e_ultimo`.
+ANCORA_REGISTRO = ('        _vreg[nome] = {"arr": _nuovo, "inizio": int(_inizio), '
+                   '"fine": int(bersaglio)}')
+SENZA_REGISTRO = "        pass   # REGISTRO DEL VELENO TOLTO (caso che deve fallire)"
 # le tre scene, le STESSE della misura della copertura.
 SCENE = (("corta", 11, 72), ("lunga", 11, 150), ("altro_seme", 12, 72))
 # il referto della copertura, da CITARE col suo blob (braccio `D`).
@@ -316,15 +331,95 @@ def principale():
     stampa("  ### BRACCIO D: %s" % ("PASSA" if D_ok else "FALLISCE"))
     stampa("")
 
-    passa = bool(A_ok) and bool(C_ok) and bool(B_ok) and bool(D_ok)
+    # ---------- BRACCIO E: una cella avvelenata SCRITTA, l'array NO ------------------------
     stampa("=" * 104)
-    stampa("### IL SIGILLO %s   (A %s · B %s · C %s · D %s)"
+    stampa("BRACCIO E -- UNA CELLA AVVELENATA SCRITTA senza riscrivere l'array")
+    stampa("=" * 104)
+    stampa("  L'iniezione e' IN POSTO (`net._dt_e_ultimo[inizio] = 1.0`), quindi CONSERVA")
+    stampa("  l'identita' dell'oggetto: il registro del veleno resta VIVO. ### E allora")
+    stampa("  l'esenzione per cella DEVE NOMINARE quella cella, perche' un NUMERO li' vuol")
+    stampa("  dire che qualcuno ha scritto UNA CELLA senza riscrivere la derivata.")
+    stampa("  ### E' il SECONDO VERSO della strettezza: senza di lui l'esenzione")
+    stampa("  ### ammetterebbe tutto, ed e' `A9` (un presidio che ammette tutto non")
+    stampa("  ### impedisce niente).")
+    dest_e = os.path.join(FUORI, "_sim_cella_scritta.py")
+    E_ok, caduto_e = None, None
+    try:
+        diverse_e = copia_con(dest_e, ANCORA_CELLA,
+                              ANCORA_CELLA + NL + SCRITTURA_DI_CELLA, "braccio E")
+        stampa("  la copia: %s" % json.dumps(diverse_e, ensure_ascii=False))
+        SE, nE = carica("E_cella_scritta", 11, sim=dest_e)
+        caduto_e = avanza(SE, nE, 72)
+        if caduto_e:
+            nomina = "_dt_e_ultimo" in (caduto_e["messaggio"] or "")
+            cella = "AVVELENATE" in (caduto_e["messaggio"] or "")
+            stampa("  ### IL RUN E' CADUTO, ed e' CIO' CHE DEVE SUCCEDERE:")
+            stampa("      passo %s, voce `%s`, riga %s"
+                   % (caduto_e["passo"], caduto_e["voce"], caduto_e["riga"]))
+            stampa("      tipo ...... %s" % caduto_e["tipo"])
+            stampa("      messaggio . %s" % (caduto_e["messaggio"] or "")[:420])
+            stampa("      ### nomina `_dt_e_ultimo`? %s" % ("SI" if nomina else "NO"))
+            stampa("      ### e dice che e' una CELLA AVVELENATA? %s"
+                   % ("SI" if cella else "NO"))
+            E_ok = bool(nomina)
+        else:
+            stampa("  ### IL RUN NON E' CADUTO: l'esenzione per cella AMMETTE un NUMERO")
+            stampa("  ###   dove deve esserci `nan`, cioe' ammette TUTTO (`A9`).")
+            E_ok = False
+    except SystemExit as e:
+        stampa("  ### BRACCIO E NON ESEGUIBILE: %s" % e)
+        E_ok = False
+    stampa("  ### BRACCIO E: %s" % ("PASSA" if E_ok else "FALLISCE"))
+    stampa("")
+
+    # ---------- BRACCIO F: il veleno NON registra le celle ---------------------------------
+    stampa("=" * 104)
+    stampa("BRACCIO F -- IL VELENO NON REGISTRA LE CELLE: il run deve cadere COME PRIMA")
+    stampa("=" * 104)
+    stampa("  Senza il registro il controllo non ha niente a cui ancorare l'esenzione, e il")
+    stampa("  run deve cadere come cadeva PRIMA della via (a): al passo 42, su")
+    stampa("  `_dt_e_ultimo` che viola `> 0`. ### E' il CONTROLLO POSITIVO DEL REGISTRO:")
+    stampa("  ### se il run passasse anche senza registro, l'esenzione non sarebbe ancorata")
+    stampa("  ### a niente e il braccio A non proverebbe nulla.")
+    dest_f = os.path.join(FUORI, "_sim_senza_registro.py")
+    F_ok, caduto_f = None, None
+    try:
+        diverse_f = copia_con(dest_f, ANCORA_REGISTRO, SENZA_REGISTRO, "braccio F")
+        stampa("  la copia: %s" % json.dumps(diverse_f, ensure_ascii=False))
+        SF, nF = carica("F_senza_registro", 11, sim=dest_f)
+        caduto_f = avanza(SF, nF, 72)
+        if caduto_f:
+            stampa("  ### IL RUN E' CADUTO, ed e' CIO' CHE DEVE SUCCEDERE:")
+            stampa("      passo %s, voce `%s`, riga %s"
+                   % (caduto_f["passo"], caduto_f["voce"], caduto_f["riga"]))
+            stampa("      messaggio . %s" % (caduto_f["messaggio"] or "")[:320])
+            stampa("      ### al passo 42, come prima della via (a)? %s"
+                   % ("SI" if caduto_f["passo"] == 42 else
+                      "### NO, al passo %s" % caduto_f["passo"]))
+            F_ok = "_dt_e_ultimo" in (caduto_f["messaggio"] or "")
+        else:
+            stampa("  ### IL RUN NON E' CADUTO senza il registro: allora l'esenzione NON e'")
+            stampa("  ###   ancorata al registro, e il braccio A non prova niente.")
+            F_ok = False
+    except SystemExit as e:
+        stampa("  ### BRACCIO F NON ESEGUIBILE: %s" % e)
+        F_ok = False
+    stampa("  ### BRACCIO F: %s" % ("PASSA" if F_ok else "FALLISCE"))
+    stampa("")
+
+    passa = (bool(A_ok) and bool(C_ok) and bool(B_ok) and bool(D_ok)
+             and bool(E_ok) and bool(F_ok))
+    stampa("=" * 104)
+    stampa("### IL SIGILLO %s   (A %s · B %s · C %s · D %s · E %s · F %s)"
            % ("PASSA" if passa else "FALLISCE",
               "OK" if A_ok else "NO", "OK" if B_ok else "NO",
-              "OK" if C_ok else "NO", "OK" if D_ok else "NO"))
+              "OK" if C_ok else "NO", "OK" if D_ok else "NO",
+              "OK" if E_ok else "NO", "OK" if F_ok else "NO"))
     stampa("=" * 104)
     ref.update({"passa": bool(passa), "braccio_A": bool(A_ok), "braccio_B": B_ok,
                 "braccio_C": bool(C_ok), "braccio_D": bool(D_ok),
+                "braccio_E": E_ok, "braccio_E_dettaglio": caduto_e,
+                "braccio_F": F_ok, "braccio_F_dettaglio": caduto_f,
                 "braccio_B_dettaglio": caduto_b2,
                 "copertura_citata": ({"blob_referto": blob(COPERTURA),
                                       "blob_sim": cop["blob_sim_sha1_byte"],
