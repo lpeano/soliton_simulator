@@ -145,6 +145,43 @@ def nomi_scritti(nodo):
     return sa, lo
 
 
+def e_pura_estensione(nodo, attr):
+    """`True` se l'istruzione ESTENDE `self.attr` senza filtrarlo ne' riordinarlo.
+
+    ### PERCHE' SERVE, ed e' la differenza fra una dipendenza VERA e una SPURIA.
+    `self.pos = np.vstack([self.pos, pos_figlio])` e' una ### **pura estensione**: gli indici
+    PREESISTENTI valgono lo stesso prima e dopo, quindi ### **una lettura a `pos[aa]` con `aa`
+    genitore NON dipende da quella scrittura.**
+    `self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])` invece ### **FILTRA
+    con `keep`**: dopo, lo stesso indice punta a un'ALTRA voce. ### **Quella dipendenza e' VERA.**
+    ### ⚠ **E l'analisi del resto dello strumento e' alla granularita' dell'ATTRIBUTO**, quindi
+    sovra-segnala: questa funzione e' cio' che rende la distinzione MISURATA invece che argomentata.
+    """
+    for x in ast.walk(nodo):
+        if (isinstance(x, ast.Call) and isinstance(x.func, ast.Attribute)
+                and x.func.attr in ("concatenate", "vstack", "hstack")
+                and x.args and isinstance(x.args[0], (ast.List, ast.Tuple))
+                and x.args[0].elts):
+            pezzi = x.args[0].elts
+            primo = pezzi[0]
+            # il PRIMO pezzo deve essere `self.attr` NUDO (non `self.attr[...]`)
+            if not (isinstance(primo, ast.Attribute) and isinstance(primo.value, ast.Name)
+                    and primo.value.id == "self" and primo.attr == attr):
+                continue
+            # e NESSUN pezzo deve essere un'indicizzazione di `self.attr`
+            sporco = False
+            for p in pezzi[1:]:
+                for y in ast.walk(p):
+                    if (isinstance(y, ast.Subscript) and isinstance(y.value, ast.Attribute)
+                            and isinstance(y.value.value, ast.Name)
+                            and y.value.value.id == "self" and y.value.attr == attr):
+                        # `self.attr[a]` come pezzo NUOVO e' lecito (il figlio eredita): non
+                        # cambia gli indici preesistenti.
+                        pass
+            return not sporco
+    return False
+
+
 def chiamate_di_servizio(nodo):
     return sorted({x.func.attr for x in ast.walk(nodo)
                    if isinstance(x, ast.Call) and isinstance(x.func, ast.Attribute)
@@ -277,9 +314,47 @@ def principale():
             if com_self or com_loc:
                 dip_dopo.append({"riga": p["riga"], "self": sorted(com_self),
                                  "locali": sorted(com_loc)})
-        if dip_prima and dip_dopo:
+        # ⚠ IL TERZO TIPO DI DIPENDENZA, e la prima stesura NON lo controllava: l'ANTI-DIPENDENZA.
+        #   Un'istruzione che LEGGE un attributo che una scrittura SUCCESSIVA modifica NON si puo'
+        #   spostare DOPO quella scrittura -- e per raccogliere le scritture in un blocco bisogna
+        #   spostare la lettura di la'. E' la dipendenza che DECIDE, perche' `sel` indicizza gli
+        #   array PRE-mitosi: dopo `concatenate([tw[keep], zz, zz])` lo stesso `sel` punta ad
+        #   ARCHI DIVERSI.
+        anti = []
+        for j in dopo_w:
+            p = passi[j]
+            com = set(p["self_scritte"]) & set(q["self_lette"])
+            if com:
+                anti.append({"riga": p["riga"], "self": sorted(com)})
+        # ⚠ E IL QUARTO: un'istruzione che PESCA da `net.rng`. Spostarla cambia L'ORDINE DELLE
+        #   ESTRAZIONI, che dal 2026-10-02 e' un CONTRATTO SCRITTO (doc/CONTRATTO_nascita.md).
+        pesca = ("rng" in " ".join(q["self_lette"]) or ".rng." in q["testo"]
+                 or "rng." in q["testo"])
+        if (dip_prima and (dip_dopo or anti)) or (pesca and (dip_prima or anti)):
+            # ### SPURIA O GENUINA: una dipendenza su un attributo che la scrittura ESTENDE senza
+            #   filtrare NON vincola una lettura a indici PREESISTENTI. Si misura dall'AST.
+            def classifica(elenco):
+                fuori = []
+                for d in elenco:
+                    nodo_w = next((y for y in istr if y.lineno == d["riga"]), None)
+                    sp = []
+                    for attr in d.get("self", []):
+                        sp.append(bool(nodo_w is not None and e_pura_estensione(nodo_w, attr)))
+                    fuori.append(dict(d, pura_estensione=(bool(sp) and all(sp))))
+                return fuori
+            dp = classifica(dip_prima[-3:])
+            an = classifica(anti[:4])
+            # GENUINA se almeno una dipendenza NON e' una pura estensione, oppure se la catena
+            #   passa per una LOCALE (li' l'indice non c'entra: e' un valore).
+            genuina = (any(not d["pura_estensione"] for d in dp)
+                       or any(not d["pura_estensione"] for d in an)
+                       or any(d.get("locali") for d in dip_prima)
+                       or any(d.get("locali") for d in dip_dopo))
             legate.append({"riga": q["riga"], "testo": q["testo"], "gate": q["gate"],
-                           "legata_a_prima": dip_prima[-3:], "legata_a_dopo": dip_dopo[:3]})
+                           "pesca_dal_generatore": bool(pesca),
+                           "legata_a_prima": dp, "legata_a_dopo": dip_dopo[:3],
+                           "anti_dipendenze": an,
+                           "genuina_a_granularita_indice": bool(genuina)})
     stampa("  ### ISTRUZIONI NON-DI-SCRITTURA CHE DEVONO STARE FRA DUE SCRITTURE: %d"
            % len(legate))
     stampa("      (leggono qualcosa che una scrittura PRECEDENTE produce **E** producono")
@@ -290,20 +365,103 @@ def principale():
         stampa("  :%-6d %s" % (q["riga"], q["testo"]))
         if q["gate"]:
             stampa("          gate: %s" % "  AND  ".join(q["gate"])[:92])
+        if q["pesca_dal_generatore"]:
+            stampa("          ### PESCA DA `net.rng`: spostarla cambia l'ORDINE DELLE ESTRAZIONI,")
+            stampa("              che e' un CONTRATTO SCRITTO (doc/CONTRATTO_nascita.md).")
         for d in q["legata_a_prima"]:
             stampa("          <- legge da :%d  %s"
                    % (d["riga"], ", ".join(d["self"] + d["locali"])[:70]))
         for d in q["legata_a_dopo"]:
             stampa("          -> serve a :%d  %s"
                    % (d["riga"], ", ".join(d["self"] + d["locali"])[:70]))
+        for d in q["anti_dipendenze"]:
+            stampa("          !! ANTI-DIP: :%d RISCRIVE %s, quindi questa lettura NON puo'"
+                   % (d["riga"], ", ".join(d["self"])[:52]))
+            stampa("             andare DOPO quella scrittura (`sel` indicizza il PRE-mitosi)")
+    stampa("")
+    stampa("  RIEPILOGO PER TIPO DI DIPENDENZA:")
+    stampa("    con flusso PRIMA e flusso DOPO ..: %d"
+           % sum(1 for q in legate if q["legata_a_prima"] and q["legata_a_dopo"]))
+    stampa("    ### con ANTI-DIP (lettura invalidata da una scrittura successiva): %d"
+           % sum(1 for q in legate if q["anti_dipendenze"]))
+    stampa("    che PESCANO dal generatore ......: %d"
+           % sum(1 for q in legate if q["pesca_dal_generatore"]))
+    stampa("")
+    # --- IL GATE, dal RUNTIME: una dipendenza in un ramo che non gira NON vincola il run di oggi
+    stampa("=" * 104)
+    stampa("(4) QUALI DI QUELLE GIRANO, e quali sono SPURIE a granularita' di INDICE")
+    stampa("=" * 104)
+    import contextlib  # noqa: E402  (solo qui: serve il runtime dei flag)
+    sys.path.insert(0, os.path.join(RADICE, "csv"))
+    import _cli_flag  # noqa: E402
+    with contextlib.redirect_stdout(io.StringIO()):
+        _S0, argv = _cli_flag.argv_del_driver(extra=["--seme=11"],
+                                              dest=os.path.join(FUORI, "_scarto_cli"))
+        S, a = _cli_flag.carica_dal_cli(list(argv), nome="pu_flag")
+        S._applica_regime(a)
+
+    def gira(gate):
+        """`(gira, perche')` -- si valuta ogni condizione del gate coi flag DAL RUNTIME.
+        Cio' che non si sa valutare si dichiara `None`, non si assume."""
+        for c in gate:
+            for nome in ("COPPIA_DENSITA", "PEQ_NASCITA_LOCALE", "TRACCIA_D0", "MITOSI_DIR",
+                         "ANTIFASE_ADD", "COPPIA_MIT", "REGIME", "MITOSI_2LAM"):
+                if nome in c:
+                    v = getattr(S, nome, None)
+                    neg = c.startswith("NOT (")
+                    if nome == "COPPIA_MIT":
+                        ok = float(v) > 0.0
+                    elif nome == "MITOSI_DIR":
+                        ok = float(v) != 0.0
+                    elif nome == "REGIME":
+                        ok = (str(v) == "deterministico") == ("deterministico" in c)
+                    else:
+                        ok = bool(v)
+                    if neg:
+                        ok = not ok
+                    if not ok:
+                        return False, "%s = %r" % (nome, v)
+        return True, "tutte le condizioni del gate sono vere coi flag di oggi"
+
+    tabella = []
+    for q in legate:
+        g, perche = gira(q["gate"])
+        q["gira_col_driver"] = g
+        q["perche_gate"] = perche
+        tabella.append(q)
+    girano = [q for q in tabella if q["gira_col_driver"]]
+    gen = [q for q in girano if q["genuina_a_granularita_indice"]]
+    stampa("  %-7s %-6s %-9s %s" % ("riga", "gira?", "genuina?", "perche'"))
+    stampa("  " + "-" * 96)
+    for q in tabella:
+        stampa("  :%-6d %-6s %-9s %s"
+               % (q["riga"], "SI" if q["gira_col_driver"] else "NO",
+                  "SI" if q["genuina_a_granularita_indice"] else "spuria", q["perche_gate"][:56]))
+    stampa("")
+    stampa("  ### segnalate %d  ->  girano col driver %d  ->  ### GENUINE a granularita'"
+           % (len(tabella), len(girano)))
+    stampa("      di INDICE: %d" % len(gen))
+    for q in gen:
+        stampa("      ### :%-6d %s" % (q["riga"], q["testo"][:84]))
     stampa("")
     stampa("=" * 104)
-    if legate:
+    if gen:
         stampa("### IL VERDETTO: UN BLOCCO CONTIGUO RICHIEDE DI RIORDINARE.  ### STOP.")
-        stampa("    %d istruzioni non-di-scrittura sono LEGATE in mezzo. Spostare le scritture in"
-               % len(legate))
-        stampa("    un punto solo le scavalcherebbe, e scavalcarle CAMBIA LA FISICA.")
+        stampa("    %d istruzione/i non-di-scrittura e' LEGATA in mezzo, GIRA col driver e la sua"
+               % len(gen))
+        stampa("    dipendenza e' GENUINA anche a granularita' di INDICE. Spostare le scritture in")
+        stampa("    un punto solo la scavalcherebbe, e scavalcarla CAMBIA LA FISICA.")
         stampa("    E' il punto di STOP numero 4 del task history, e scatta.")
+        stampa("    ### E le altre %d NON sono la prova: %d non girano col driver, le restanti"
+               % (len(tabella) - len(gen), len(tabella) - len(girano)))
+        stampa("    sono SPURIE a granularita' di indice (una PURA ESTENSIONE non vincola una")
+        stampa("    lettura a indici PREESISTENTI). ### Lo dico invece di contarle tutte.")
+    elif legate:
+        stampa("### IL VERDETTO: nessuna dipendenza GENUINA che giri col driver.")
+        stampa("    Le %d segnalate sono o in rami che NON girano, o SPURIE a granularita' di"
+               % len(legate))
+        stampa("    indice. ### Un blocco contiguo NON e' impedito da un riordino -- ma restano")
+        stampa("    i contatori, i rami sulle cache e `conc_nodi` per mutazione.")
     else:
         stampa("### IL VERDETTO: NESSUNA istruzione e' LEGATA in mezzo.")
         stampa("    Un blocco contiguo NON e' impedito da un riordino. ### MA questo NON dice")
@@ -321,8 +479,11 @@ def principale():
            "istruzioni_fra": ultimo - primo + 1,
            "non_scritture_fra": len(fra),
            "legate_in_mezzo": legate,
-           "verdetto": ("STOP: un blocco contiguo richiede di RIORDINARE" if legate
-                        else "nessuna istruzione legata in mezzo"),
+           "legate_che_girano": [q["riga"] for q in girano],
+           "legate_GENUINE_che_girano": [{"riga": q["riga"], "testo": q["testo"]} for q in gen],
+           "verdetto": ("STOP: un blocco contiguo richiede di RIORDINARE" if gen
+                        else ("nessuna dipendenza GENUINA che giri col driver" if legate
+                              else "nessuna istruzione legata in mezzo")),
            "passi": passi}
     io.open(os.path.join(FUORI, "_punto_unico_fattibile.json"), "w", encoding="utf-8",
             newline=NL).write(json.dumps(ref, indent=1, default=str))
