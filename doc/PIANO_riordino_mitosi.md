@@ -281,6 +281,28 @@ per far passare un commit non e' un criterio, e' una formalita'.)*
 
 # **(d) DERIVATE — generalizzazione 4: le derivate SPORCHE alla nascita**
 
+### ⚠ **I CRITERI DEL SIGILLO DEL COMMIT 4, FISSATI PRIMA DEI NUMERI** *(mandato del 2026-10-03; la domanda e' di Luca)*
+
+> ### **«Come sai che il veleno e' passato per tutte le leggi se fai solo 72 passi?»**
+
+### ➜ **Il `NaN` prova SOLO le letture che nel run AVVENGONO.** Uno zero del veleno ### **senza la copertura e' un `FALSO-ZERO`** — e sarebbe l'ottavo di una forma che in due giorni ha morso otto volte.
+
+| | il sigillo del commit 4 DEVE portare |
+|---|---|
+| **1** | ### **COPERTURA DAL RUNTIME:** per ogni derivata avvelenata, ### **quali RIGHE di quali leggi l'hanno LETTA** dopo una nascita — ### **tracciamento delle righe, non una stima** |
+| **2** | ### **LETTURE DALL'AST:** ### **tutte** le letture di ogni derivata in ### **tutto** il simulatore, comprese quelle nei rami che ### **non girano** |
+| **3** | ### **LA DIFFERENZA `2` meno `1`, RIGA PER RIGA:** le letture ### **MAI PROVATE** dal veleno, ciascuna ### **col suo motivo** — flag spento *(dal runtime)*, condizione mai scattata, voce ### **fuori dallo schedulatore** *(come `PRE-RILASSAMENTO-FUORI-PASSO`)* |
+| **4** | ### **PIU' DI UNA SCENA:** oltre a seme 11 / 72 passi, ### **almeno un run LUNGO (150 passi) e un ALTRO SEME**, dichiarando ### **quanti eventi di mitosi e di Schwinger** ha avuto ciascuno |
+
+### 📌 **E IL VERDETTO SI SCRIVE COSI', e non altrimenti:**
+> ### **«zero letture sporche su `N` PROVATE, `M` NON PROVATE (elencate)»**
+
+### ⛔ **MAI «nessuna derivata sporca»:** quella frase afferma qualcosa su cio' che ### **non e' stato guardato.**
+
+---
+
+
+
 > ### **Quando nasce un nodo, le derivate sono segnate DA RICALCOLARE; leggerne una sporca e' un
 > ERRORE; tornano pulite quando la loro legge le riscrive.**
 > ### **E' la regola «letta fra nascita e riscrittura» resa LEGGE DEL SISTEMA** invece di un

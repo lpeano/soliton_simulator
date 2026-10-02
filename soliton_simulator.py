@@ -1631,9 +1631,13 @@ def _rn_div_omega_s(net, c):
 @_nascita_regola("divisione", "perc_chi", "eredita la chiralita' del genitore `a`",
                  "self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])",
                  "[CHI_COOP via 2 di 3] profilo dormiente, non ancora accoppiato. "
-                 "### E QUESTO RAMO NON CONSERVA `N(+1) - N(-1)`: aggiunge un nodo dello "
-                 "STESSO segno del genitore. L'altro ramo (Schwinger) nasce OPPOSTO e la "
-                 "conserva -- per questo i nati si contano DUE volte, non una")
+                 "### E QUESTO RAMO SPOSTA `N(+1) - N(-1)` DI `+segno(perc_chi[a])` PER "
+                 "FIGLIO: aggiunge un nodo dello STESSO segno del genitore. L'altro ramo "
+                 "(Schwinger) lo sposta nel verso OPPOSTO, e ### ⚠ I DUE SI CANCELLANO "
+                 "SOLO SUGLI ARCHI DOVE SCATTANO ENTRAMBI: la conservazione e' DELLA "
+                 "COPPIA, non della somma dei due rami. ### MISURATO: 9 contro 1 in 72 "
+                 "passi, cioe' +8. ### Per questo i nati si contano DUE volte e non una: "
+                 "un totale non direbbe da dove viene la carica.")
 def _rn_div_perc_chi(net, c):
     net.perc_chi = np.concatenate([net.perc_chi, net.perc_chi[c["a"]]])
 
@@ -1767,9 +1771,15 @@ def _rn_div_d(net, c):
 @_nascita_regola("divisione", "d0", "meta' dell'arco, con offset plastico",
                  "self.d0 = np.concatenate([self.d0[keep], d0new])",
                  "con `PLAST_DIN` l'offset e' emergente (stress metrico per eccesso di "
-                 "torsione, saturato); con `PLAST_MIT > 0` e' proporzionale alla torsione "
-                 "sciolta; altrimenti e' `dh` nudo. `d0new` e' GIA' `[d0h, d0h]`, cioe' i "
-                 "due figli, e passa per `_nasce('mitosi', 0, 1)`")
+                 "torsione, saturato); con `PLAST_MIT > 0` e' proporzionale a `sciolta`; "
+                 "altrimenti e' `dh` nudo. `d0new` e' GIA' `[d0h, d0h]`, cioe' i due "
+                 "figli, e passa per `_nasce('mitosi', 0, 1)`. "
+                 "### ⚠ E IL NOME `sciolta` PRESUPPONE UNA COSA NON MISURATA: `sciolta` "
+                 "e' solo `|tw|/PHI_CRIT`, cioe' LA TORSIONE DELL'ARCO IN UNITA' DEL "
+                 "QUANTO -- e <<sciolta>> suggerisce che sia stata LIBERATA e spesa da "
+                 "qualche parte. ### NON LO E': vedi la regola di `tw` e "
+                 "`DIVISIONE-AUTOCONSISTENTE:M1`. ### Il nome NON si cambia qui (sarebbe "
+                 "una riga di logica in un commit di soli commenti): e' IN CODA.")
 def _rn_div_d0(net, c):
     net.d0 = np.concatenate([net.d0[c["keep"]], c["d0new"]])
 
@@ -1791,8 +1801,16 @@ _nascita_non_si_tocca("divisione", "_peqn_idx",
 
 @_nascita_regola("divisione", "tw", "zero",
                  "self.tw = np.concatenate([self.tw[keep], zz, zz])",
-                 "i due tronconi nascono senza torsione: la torsione dell'arco e' stata "
-                 "SCIOLTA dalla divisione, ed e' cio' che il calcio ha speso")
+                 "i due tronconi nascono con `tw = 0`: la torsione dell'arco SPARISCE. "
+                 "### IL CALCIO LA USA COME MISURA MA NON LA CONSERVA: `|tw|` decide "
+                 "QUANTO colpire i genitori, e l'avvolgimento NON viene trasferito -- "
+                 "MISURATO: `DIVISIONE-AUTOCONSISTENTE:M1`, ~1.2 giri persi per arco "
+                 "diviso, SENZA BILANCIO. Se debba conservarsi e' "
+                 "`DIVISIONE-AUTOCONSISTENTE`, APERTA. "
+                 "### ⛔ E LA FRASE DI PRIMA ERA FALSA, e la lascio scritta perche' un "
+                 "errore non si cancella (par.8): diceva che la torsione era <<SCIOLTA "
+                 "dalla divisione, ed e' cio' che il calcio ha SPESO>>, cioe' DAVA PER "
+                 "RISOLTA una domanda aperta. Rilievo del guardiano, 2026-10-03.")
 def _rn_div_tw(net, c):
     zz = np.zeros(c["quante"])
     net.tw = np.concatenate([net.tw[c["keep"]], zz, zz])
@@ -1930,8 +1948,14 @@ def _rn_sch_spinor_lift(net, c):
                  "se `aa` concorre a una massa, l'antinodo vi concorre pure (categoria "
                  "*creazione di coppie* = accrescimento); se `aa` non concorre a nulla, "
                  "l'antinodo resta senza concorrenza (materia nuova dal vuoto teso). "
-                 "La distinzione FISICA: la Schwinger drena tensione di una massa "
-                 "esistente, tranne quando nasce lontano da ogni massa. "
+                 "### ⚠ E LA FRASE DI PRIMA AFFERMAVA UN TRASFERIMENTO CHE NESSUNO HA "
+                 "MISURATO: diceva che <<la Schwinger DRENA tensione di una massa "
+                 "esistente>>. ### QUESTA REGOLA NON DRENA NIENTE: copia la lista di "
+                 "concorrenza del genitore e le aggiunge una MARCA `schwinger`. Che la "
+                 "creazione di coppia dreni la tensione della massa e' una LETTURA "
+                 "FISICA PLAUSIBILE, non una misura -- e il bilancio della torsione alla "
+                 "nascita e' `DIVISIONE-AUTOCONSISTENTE`, APERTA. Rilievo del guardiano, "
+                 "2026-10-03. "
                  "### E qui pure la mutazione diventa SCRITTURA, col `len` crescente "
                  "conservato")
 def _rn_sch_conc_nodi(net, c):
@@ -1972,9 +1996,22 @@ def _rn_sch_omega_s(net, c):
 
 @_nascita_regola("schwinger", "perc_chi", "eredita INVERTITA (la CARICA si coniuga)",
                  "self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])",
-                 "### l'antiparticella nasce con chiralita' OPPOSTA al genitore. "
-                 "### E' IL RAMO CHE CONSERVA: la coppia e' NEUTRA e `N(+1) - N(-1)` NON "
-                 "cambia, come le coppie nel vuoto quantistico")
+                 "### l'antiparticella nasce con chiralita' OPPOSTA al genitore: "
+                 "`-perc_chi[aa]`. ### QUINDI QUESTO SINGOLO NODO SPOSTA `N(+1) - N(-1)` "
+                 "DI `-segno(perc_chi[aa])`, non di zero. "
+                 "### ⚠ LA CONSERVAZIONE E' DELLA COPPIA, NON DEL RAMO, E LA COPPIA NON "
+                 "SI FORMA SEMPRE: la mitosi aggiunge un figlio dello STESSO segno, lo "
+                 "Schwinger un antinodo OPPOSTO, e i due si cancellano SOLO sugli archi "
+                 "dove scattano ENTRAMBI -- e lo Schwinger scatta su un SOTTOINSIEME "
+                 "(`pick`). "
+                 "### E I CONTATORI DEL REPO LO DICONO: 72 passi, seme 11 -> "
+                 "`_g_nati_mitosi = 9` contro `_g_nati_schwinger = 1`, cioe' "
+                 "`N(+1) - N(-1)` si e' spostato di +8 in quel run "
+                 "(`csv/_test_fork/_sonda_commit3/_sonda_commit3.json`, `nati_dopo`). "
+                 "### ⛔ E LA FRASE DI PRIMA DICEVA <<E' IL RAMO CHE CONSERVA, la coppia "
+                 "e' NEUTRA e `N(+1) - N(-1)` NON cambia>>: era VERA DELLA COPPIA e FALSA "
+                 "DEL RAMO, e i due contatori esistono proprio per distinguerle. Rilievo "
+                 "del guardiano, 2026-10-03.")
 def _rn_sch_perc_chi(net, c):
     net.perc_chi = np.concatenate([net.perc_chi, -net.perc_chi[c["aa"]]])
 

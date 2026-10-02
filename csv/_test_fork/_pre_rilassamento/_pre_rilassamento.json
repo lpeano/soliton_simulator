@@ -1,0 +1,25 @@
+{
+ "blob_sim_sha1_byte": "f103989b5c2cef00fa63da6b630c08d322ab2290",
+ "argv_voci": 47,
+ "seed": 11,
+ "nodi": 0,
+ "SEME_INIZIALE": 900,
+ "condizione_vera": false,
+ "step_fuori_dallo_schedulatore": 0,
+ "rilassa_disegno_chiamate": 0,
+ "rilassa_disegno_argomenti": null,
+ "step_dentro_la_scena": 0,
+ "n_dopo_il_caricamento": null,
+ "n_dopo_la_scena": 12802,
+ "controllo_positivo": {
+  "argv_cambiato": "--nodi 0 -> --nodi 400",
+  "nodi": 400,
+  "n_dopo_semina": 458,
+  "step": 300,
+  "rilassa": 1,
+  "rilassa_arg": [
+   30
+  ],
+  "passa": true
+ }
+}

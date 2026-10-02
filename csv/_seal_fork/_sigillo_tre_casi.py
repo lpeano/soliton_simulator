@@ -275,6 +275,20 @@ def principale():
         stampa("  ### CONTROLLO POSITIVO NON ESEGUIBILE: %s" % e)
         ok3, diverse3, trovata = False, {}, []
     stampa("")
+    stampa("")
+    stampa("  ### ⛔ IL LIMITE DI QUESTO PRESIDIO, e si legge PRIMA dello zero di sopra")
+    stampa("      (rilievo del guardiano, 2026-10-03):")
+    stampa("      La ricerca gira SOLO dentro le funzioni che CHIAMANO `nascita()`, e oggi")
+    stampa("      quella e' UNA SOLA: %s." % ", ".join(chiamanti))
+    stampa("      ### QUINDI un'estensione di una grandezza del registro fatta in `step()`,")
+    stampa("      ### o in un'altra voce del passo, NON VIENE NOMINATA.")
+    stampa("      Il presidio prova che la nascita e' in un punto solo DENTRO il suo")
+    stampa("      perimetro; NON prova che nessun ALTRO posto del simulatore allunghi")
+    stampa("      quelle grandezze. ### E' una differenza vera, e lo zero di sopra si legge")
+    stampa("      con questo limite davanti.")
+    stampa("      Allargare la ricerca a TUTTO il file e' la stessa cosa del cablaggio nel")
+    stampa("      `pre-commit`, ed e' IN CODA (`NASCITA-PUNTO-UNICO`).")
+    stampa("")
     stampa("  ### E IL PRESIDIO NON E' CABLATO IN UN HOOK: e' uno SCRIPT (`A9`).")
     stampa("      Finche' non gira nel `pre-commit`, NON IMPEDISCE NIENTE -- lo dico.")
     stampa("  ### CASO 3: %s" % ("PASSA" if ok3 else "FALLISCE"))
@@ -282,6 +296,12 @@ def principale():
                      "controllo_positivo_trovate": trovata, "righe_diverse": diverse3,
                      "grandezze_governate": len(ordine), "regole": len(regole),
                      "chiamanti": chiamanti,
+                     "LIMITE": ("la ricerca gira SOLO dentro le funzioni che chiamano "
+                                "nascita() (oggi: %s). Un'estensione di una grandezza del "
+                                "registro in step() o in un'altra voce del passo NON viene "
+                                "nominata. Rilievo del guardiano, 2026-10-03; allargarla a "
+                                "tutto il file e' IN CODA come il cablaggio."
+                                % ", ".join(chiamanti)),
                      "NON_CABLATO": "e' uno script, non un hook (A9)"}
     stampa("")
 

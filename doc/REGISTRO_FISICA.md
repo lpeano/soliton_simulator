@@ -1387,7 +1387,7 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 >
 > | grandezza | `divisione` | `schwinger` |
 > |---|---|---|
-> | `perc_chi` | **eredita** ⇒ ### **ROMPE** `N(+1)-N(-1)` | ### **eredita INVERTITA** ⇒ ### **CONSERVA** |
+> | `perc_chi` | **eredita** ⇒ sposta `N(+1)-N(-1)` di ### **`+segno`** per figlio | ### **eredita INVERTITA** ⇒ lo sposta di ### **`-segno`** |
 > | `perc_geom` | eredita | ### **eredita NON invertita** — *la geometria non e' una carica e non si coniuga* |
 > | `mem_mot` | **eredita** dal genitore | ### **zero** — *non continua un moto, comincia* |
 > | `phi_s` | **eredita** dal genitore | ### **zero** |
@@ -1399,10 +1399,64 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 > ### ⚠ **L'ULTIMA RIGA E' UN RILIEVO, non una conferma:** la coppia `psi`/`psi_spin` segue *«la regola del proprio compagno»* — e nello Schwinger ### **il compagno di `psi_spin` non c'e' piu'**, perche' `phi_s` dell'antinodo e' zero. ### **Il commit 3 SPOSTA e non cura, quindi la lascia tale** — ma ora e' ### **VISIBILE in tabella** invece di essere sepolta in due funzioni diverse.
 >
 > ### ✅ **E L'ORDINE E' MISURATO, non assunto** *(`csv/_test_fork/_ordine_registro.py`)*: l'ordine del **registro** e' un ordine ### **topologico valido** — **4 vincoli genuini, 0 violazioni**. `phi` prima di `twp` · `peq` prima di `_peqn_idx` · `n0` nel **contesto** · le **6 chiamate con effetto** collocate a mano.
+>
+> ### ⛔ **CORREZIONE DEL 2026-10-03, su rilievo del guardiano: CINQUE DERIVAZIONI DI
+> ### QUESTA TABELLA AFFERMAVANO UN BILANCIO CHE NESSUNO HA MISURATO** — e la riga
+> ### `perc_chi` qui sopra era una di esse.
+>
+> | | diceva | dice ORA, e perche' |
+> |---|---|---|
+> | `tw` | *<<la torsione e' stata ### **SCIOLTA** dalla divisione, ed e' cio' che il calcio
+> ha ### **SPESO**>>* | ### **FALSA.** Il calcio ### **USA `|tw|` come MISURA** di quanto
+> colpire, e ### **NON trasferisce l'avvolgimento**: `DIVISIONE-AUTOCONSISTENTE:M1` ha
+> misurato ### **~1.2 giri persi per arco diviso, SENZA BILANCIO**. ### **Se debba
+> conservarsi e' una domanda APERTA** |
+> | `perc_chi`, ### **entrambi gli eventi** | *<<e' il ramo che ### **CONSERVA**: la coppia
+> e' NEUTRA e `N(+1)-N(-1)` NON cambia>>* | ### **VERA DELLA COPPIA, FALSA DEL RAMO.**
+> L'antinodo ### **da solo** sposta la carica di `-segno(perc_chi[aa])`; i due rami si
+> cancellano ### **SOLO sugli archi dove scattano ENTRAMBI**, e lo Schwinger scatta su un
+> ### **sottoinsieme** (`pick`) |
+> | `schwinger`/`conc_nodi` | *<<la Schwinger ### **DRENA** tensione di una massa
+> esistente>>* | ### **un trasferimento non misurato.** Quella regola ### **copia una lista
+> e le mette una marca** — che la coppia dreni la massa e' una lettura ### **plausibile**,
+> non una misura |
+> | `d0` | *<<proporzionale alla torsione ### **sciolta**>>* | la frase e' esatta, ma
+> ### **il NOME `sciolta` presuppone il bilancio**: e' solo `|tw|/PHI_CRIT`. ### **Il nome
+> non si cambia in un commit di commenti:** e' in coda |
+>
+> ### 📌 **E IL NUMERO CHE SMONTA LA CONSERVAZIONE ERA GIA' COMMITTATO:** 72 passi,
+> seme 11 — ### **`_g_nati_mitosi = 9` contro `_g_nati_schwinger = 1`**, cioe'
+> `N(+1)-N(-1)` si e' spostato di ### **+8** in quel run
+> *(`csv/_test_fork/_sonda_commit3/_sonda_commit3.json`, `nati_dopo`)*.
+> ### ⛔ **I DUE CONTATORI ESISTONO PROPRIO PER DISTINGUERE LE DUE COSE, e la frase era
+> ### scritta come se non esistessero.**
+>
+> ### ✅ **E LE FRASI VECCHIE RESTANO CITATE, nelle derivazioni e qui: un errore non si
+> ### cancella, si ANNOTA** (par.8). ### **Trovate col setaccio** *(`csv/_test_fork/_setaccio_derivazioni.py`: 9 segnalate su 72, e il giudizio e' 5 da
+> riscrivere e 4 non-fisica)*.
 
 <!-- SCHEDA nome=nascita-punto-unico funzioni=_nascita_collaudo_della_tabella,_nascita_collocata,_nascita_non_si_tocca,_nascita_regola,_ordine_di_nascita,_registra_regola,_rn_div_conc_nodi,_rn_div_cs_nodo_prev,_rn_div_d,_rn_div_d0,_rn_div_eta,_rn_div_i,_rn_div_j,_rn_div_mem_mot,_rn_div_nb,_rn_div_nb_prec,_rn_div_nb_ret,_rn_div_omega_s,_rn_div_peq,_rn_div_perc_chi,_rn_div_perc_geom,_rn_div_perc_tw,_rn_div_phi,_rn_div_phi0,_rn_div_phi_s,_rn_div_phivel,_rn_div_pos,_rn_div_psi,_rn_div_psi_prec,_rn_div_psi_spin,_rn_div_psi_spin_prec,_rn_div_psi_spinor,_rn_div_rep,_rn_div_rho_spin,_rn_div_spinor_lift,_rn_div_tw,_rn_div_twp,_rn_div_vd,_rn_sch_conc_nodi,_rn_sch_cs_nodo_prev,_rn_sch_d,_rn_sch_d0,_rn_sch_eta,_rn_sch_i,_rn_sch_j,_rn_sch_mem_mot,_rn_sch_nb,_rn_sch_nb_prec,_rn_sch_nb_ret,_rn_sch_omega_s,_rn_sch_peq,_rn_sch_peqn_idx,_rn_sch_perc_chi,_rn_sch_perc_geom,_rn_sch_perc_tw,_rn_sch_phi,_rn_sch_phi0,_rn_sch_phi_s,_rn_sch_phivel,_rn_sch_pos,_rn_sch_psi,_rn_sch_psi_prec,_rn_sch_psi_spin,_rn_sch_psi_spin_prec,_rn_sch_psi_spinor,_rn_sch_rep,_rn_sch_rho_spin,_rn_sch_spinor_lift,_rn_sch_tw,_rn_sch_twp,_rn_sch_vd,nascita flag=REGOLE_NASCITA,ORDINE_DI_NASCITA,EVENTI_DI_NASCITA,EVENTI_CONVERTITI -->
 
 # **`nascita-punto-unico` — IL PUNTO UNICO DI NASCITA, e le sue 72 regole**
+
+## ⛔ **CORREZIONE DEL 2026-10-03: CINQUE DERIVAZIONI AFFERMAVANO UN BILANCIO NON MISURATO**
+
+> ### **Rilievo del guardiano. Una derivazione di questa tabella SI LEGGE COME UN FATTO** —
+> ### e cinque su 72 davano per risolte domande APERTE.
+
+| la regola | diceva | dice ORA, e perche' |
+|---|---|---|
+| ### **`divisione`/`tw`** | *<<la torsione dell'arco e' stata ### **SCIOLTA** dalla divisione, ed e' cio' che il calcio ha ### **SPESO**>>* | ### **FALSA.** Il calcio ### **USA `|tw|` come MISURA** di quanto colpire e ### **NON trasferisce l'avvolgimento**: `DIVISIONE-AUTOCONSISTENTE:M1` ha misurato ### **~1.2 giri persi per arco diviso, SENZA BILANCIO.** ### **Se debba conservarsi e' APERTA** |
+| ### **`perc_chi`**, su ### **ENTRAMBI** gli eventi | *<<e' il ramo che ### **CONSERVA**: la coppia e' NEUTRA e `N(+1)-N(-1)` NON cambia>>* | ### **VERA DELLA COPPIA, FALSA DEL RAMO.** L'antinodo ### **da solo** sposta la carica di `-segno(perc_chi[aa])`; i due rami si cancellano ### **SOLO sugli archi dove scattano ENTRAMBI**, e lo Schwinger scatta su un ### **sottoinsieme** (`pick`) |
+| ### **`schwinger`/`conc_nodi`** | *<<la Schwinger ### **DRENA** tensione di una massa esistente>>* | ### **un trasferimento che nessuno ha misurato.** Quella regola ### **copia una lista e le mette una marca**: che la coppia dreni la massa e' una lettura ### **plausibile**, non una misura |
+| ### **`divisione`/`d0`** | *<<proporzionale alla torsione ### **sciolta**>>* | la frase e' ### **esatta**, ma ### **il NOME `sciolta` presuppone il bilancio**: e' solo `|tw|/PHI_CRIT`. ### **Il nome non si cambia in un commit di commenti** — in coda |
+
+### 📌 **E IL NUMERO CHE SMONTA LA CONSERVAZIONE ERA GIA' COMMITTATO:** 72 passi, seme 11 — ### **`_g_nati_mitosi = 9` contro `_g_nati_schwinger = 1`**, cioe' `N(+1)-N(-1)` si e' spostato di ### **+8** in quel run *(`csv/_test_fork/_sonda_commit3/_sonda_commit3.json`, `nati_dopo`)*.
+### ⛔ **I DUE CONTATORI ESISTONO PROPRIO PER DISTINGUERE LE DUE COSE, e la frase era scritta come se non esistessero.**
+
+### ✅ **E LE FRASI VECCHIE RESTANO CITATE nelle derivazioni: un errore non si cancella, si ANNOTA** *(par.8)*. Trovate col ### **setaccio** *(`csv/_test_fork/_setaccio_derivazioni.py`: ### **9 segnalate su 72**, e il giudizio e' ### **5 da riscrivere, 4 non-fisica** — li' *<<conserva>>* parla del ### **CODICE**)*.
+
+### ⚠ **E NESSUNA DI QUESTE CINQUE RISCRITTURE TOCCA UNA RIGA DI LOGICA:** sono stringhe di documentazione, e che il cambio sia ### **inerte si PROVA** — `csv/_seal_fork/_sigillo_inerzia_commenti.py` confronta gli ### **alberi sintattici** normalizzando solo la documentazione.
 
 > ### **Questa scheda esiste perche' `H-REG-R` ha RIFIUTATO il commit, e aveva ragione:**
 > ### **76 nomi nuovi nel simulatore senza una scheda che li nominasse.** Il presidio non

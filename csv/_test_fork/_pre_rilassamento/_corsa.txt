@@ -1,0 +1,40 @@
+====================================================================================================
+IL PRE-RILASSAMENTO FUORI DALLO SCHEDULATORE -- misurato dal RUNTIME
+====================================================================================================
+  simulatore .. f103989b (sha1 byte grezzi)
+
+  argv del driver: 47 voci, e porta `--seme=11`
+
+  --- DOPO `carica_dal_cli` (cioe' dopo `_applica_flag`) ---
+      `a.seed` ................... 11
+      `a.nodi` ................... 0
+      `SEME_INIZIALE` ............ 900
+      `a.nodi != SEME_INIZIALE` .. True
+      ### `net.n` ora ............ 0
+      ### `net.step()` chiamate .. 0   <-- FUORI dallo schedulatore
+      ### `rilassa_disegno` ...... 0, con argomento None
+      la CONDIZIONE del `:10658` era vera? False
+
+  --- `avvia_test('MASSE-COERENTI')`, cioe' LA SCENA DEI SIGILLI ---
+      ### `net.step()` chiamate DENTRO la scena .. 0
+      ### `net.n` dopo la scena .................. 12802
+
+----------------------------------------------------------------------------------------------------
+### VERDETTO: NON GIRA in questa configurazione.
+###   E questo NON vuol dire <<non gira mai>>: vuol dire che con QUESTO
+###   argv la condizione del `:10658` e' falsa. L'insieme e' DICHIARATO:
+###   un solo argv, quello del driver col seme 11.
+### E NON SI CURA: si DICHIARA (voce `PRE-RILASSAMENTO-FUORI-PASSO`).
+
+----------------------------------------------------------------------------------------------------
+IL CONTROLLO POSITIVO: lo STESSO argv con `--nodi 400` invece di `--nodi 0`
+      `a.nodi` ................... 400
+      ### `net.n` dopo la semina . 458
+      ### `net.step()` chiamate .. 300
+      ### `rilassa_disegno` ...... 1, con [30]
+      ### IL CONTROLLO POSITIVO PASSA: 300 step e 1 rilassa_disegno, come dice il sorgente
+
+### ➜ QUINDI IL VERDETTO SI SCRIVE COSI', e non altrimenti:
+###   <<ZERO step fuori dallo schedulatore su UN argv DICHIARATO (quello del
+###   driver, seme 11), e il controllo positivo con `--nodi 400` ne da' 300>>.
+###   MAI <<il pre-rilassamento non gira>>: gira, e la condizione dice QUANDO.
