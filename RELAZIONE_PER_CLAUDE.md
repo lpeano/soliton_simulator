@@ -1141,3 +1141,57 @@ Lo ### **estrae `sim_prima_del_flag`** dal padre del commit, a ogni giro. ### **
 | **3** — il **PUNTO UNICO** | ### **PROSSIMO** |
 
 ---
+
+# ⛔ **IL QUINTO FALSO ZERO DELLA SESSIONE, E L'HO TROVATO IO PRIMA DI USARLO** *(2026-10-02)*
+
+> ### **Luca: prima di scrivere una riga del commit 3 ho misurato una cosa che lo strumento dello STOP 4 NON aveva misurato. La prima risposta era ZERO, ed era FALSA. Te la racconto perche' lo zero l'ho smontato io, e perche' questa forma d'errore ora ha un NOME nell'indice.**
+
+## 📌 **LA DOMANDA CHE MANCAVA, e sono DUE domande diverse**
+
+| | |
+|---|---|
+| lo **STOP 4** chiedeva | le scritture della nascita si possono rendere ### **CONTIGUE**? *(si puo' spostare FUORI il codice che sta fra loro)* |
+| ### **questa chiede** | le scritture si possono ### **PERMUTARE FRA LORO**? *(il piano vuole <<**nell'ordine del REGISTRO**>>)* |
+
+### ➜ **La seconda puo' dire NO con la prima che dice SI**, e ### **non l'avevo misurata.** *(Strumento nuovo: `csv/_test_fork/_ordine_registro.py`.)*
+
+## ⛔ **LA PRIMA RISPOSTA: <<zero dipendenze, l'ordine del registro e' raggiungibile>>. FALSA.**
+
+### **Il motivo e' sempre lo stesso, ed e' il quinto:** facevo girare l'analisi sul ### **solo `REGISTRO_STATO`** (30 voci) — e cosi'
+
+| grandezza | dove sta davvero | che cosa l'esclusione nascondeva |
+|---|---|---|
+| `phi`, `i`, `j` | ### **`REGISTRO_METRI`** | `i`/`j` sono la ### **topologia**; `phi` e' la fase che ### **`twp` LEGGE** |
+| `_peqn_idx` | ### **in NESSUN registro** | il commento al sorgente `:7588` ### **DICHIARA** la dipendenza: *<<la marca va QUI, DOPO il `concatenate`: gli indici si riferiscono all'array FINALE>>* |
+
+### ⛔ **Cioe': l'insieme su cui misuravo ESCLUDEVA per costruzione le grandezze intrecciate.** ### **Uno zero cosi' non e' una misura: e' una tautologia.**
+
+## ✅ **LA CURA, e non e' <<stare piu' attento>>: NESSUN INSIEME SCELTO A MANO**
+
+Si prendono ### **TUTTE** le scritture del perimetro, si costruisce il ### **grafo delle dipendenze**, e ### **i contatori escono da se'** — perche' ### **non leggono e non sono letti**, non perche' io li abbia classificati.
+### ✅ **E ogni arco si CLASSIFICA**, perche' un arco conservativo non e' un ostacolo: e' ### **INERTE** se la scrittura letta e' una ### **pura ESTENSIONE** e la lettura e' sui ### **soli GENITORI** *(indici `< n0`)* — li' l'ordine non puo' cambiare il valore.
+
+## ✅ **LA MISURA VERA: 4 vincoli GENUINI, e l'ordine del registro li rispetta TUTTI**
+
+| vincolo | perche' |
+|---|---|
+| ### **`phi` prima di `twp`** | `twp` legge `phi[a,b]` ### **DOPO il calcio**, e il calcio e' una scrittura INDICIZZATA sui genitori: non e' un'estensione, quindi l'arco e' **genuino** |
+| ### **`peq` prima di `_peqn_idx`** | `_peqn_idx` legge `peq` ### **INTERA** — ed e' esattamente cio' che il commento DICHIARA |
+
+### ✅ **E l'ordine del registro e' un ordine TOPOLOGICO valido:** `phi` sta in `METRI`, cioe' ### **prima** di tutto `STATO` *(dove sta `twp`)*; e `_peqn_idx`, che in nessun registro sta, va ### **dichiarato dopo `peq`** nella tabella.
+*(E ci sono ### **6 chiamate con EFFETTO** — `_smp_chirurgia`, `_traccia_d0`, `_grado`, tre per evento — che ### **NON sono regole di nascita** e vanno collocate a mano e dichiarate.)*
+
+## 📌 **E ORA LA FORMA HA UN NOME NELL'INDICE: `FALSO-ZERO`**
+
+Ho cercato *<<falso zero>>* nell'indice: ### **ZERO voci su 879** — benche' in questa sessione la forma abbia morso ### **CINQUE volte**, e ogni volta ### **mi avesse convinto.** Ora e' una voce, con ### **le cinque occorrenze** e ### **un criterio di chiusura**.
+
+### ➜ **LA REGOLA, in tre righe:**
+### **① uno ZERO si dichiara INSIEME all'insieme su cui e' misurato** — *<<zero su N, e N comprende X>>*, mai *<<zero>>* da solo.
+### **② ogni misura che PUO' rispondere zero vuole un CONTROLLO POSITIVO** (`STANDARD 2`) — ed e' esattamente cio' che ha salvato il caso dell'ancora, dove l'assertazione ha trasformato un falso zero in un ### **rifiuto**.
+### **③ nessun insieme scelto a mano: l'insieme si DERIVA dal sorgente.**
+
+### ⚠ **E oggi e' una REGOLA SCRITTA, non un presidio** (`A9`): la voce si chiude ### **quando un referto che stampa uno zero senza dichiarare l'insieme fa FALLIRE il commit.** Non e' cablato.
+
+**PROSSIMO: il commit 3, il punto unico — e ora l'ordine della tabella e' MISURATO prima di scriverlo, non scoperto dopo.**
+
+---

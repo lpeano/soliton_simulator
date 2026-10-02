@@ -1,0 +1,331 @@
+{
+  "blob_sim_sha1_byte": "3d78cfd258ecf37e5cc43323f8c5105b66b3877e",
+  "ordine_registro": [
+    "phi",
+    "i",
+    "j",
+    "_cs_nodo_prev",
+    "_deg",
+    "_nb",
+    "_nb_prec",
+    "_nb_ret",
+    "_psi_prec",
+    "_psi_spin_prec",
+    "_psi_spinor",
+    "_spinor_lift",
+    "conc_nodi",
+    "eta",
+    "mem_mot",
+    "omega_s",
+    "perc_chi",
+    "perc_geom",
+    "perc_tw",
+    "phi0",
+    "phi_s",
+    "phivel",
+    "pos",
+    "psi",
+    "psi_spin",
+    "rho_spin",
+    "_rep",
+    "d",
+    "d0",
+    "peq",
+    "tw",
+    "twp",
+    "vd",
+    "_smp_d0",
+    "_smp_d"
+  ],
+  "registri": {
+    "REGISTRO_METRI": 3,
+    "REGISTRO_STATO": 30,
+    "REGISTRO_DERIVATE": 10,
+    "REGISTRO_FINESTRA": 2,
+    "REGISTRO_NOMI": 0
+  },
+  "divisione": {
+    "grandezze": [
+      "ultima_frac_antifase",
+      "pos",
+      "phi",
+      "phi0",
+      "phi_s",
+      "phivel",
+      "eta",
+      "perc_chi",
+      "perc_geom",
+      "_g_nati_mitosi",
+      "_g_nati_mitosi_ev",
+      "perc_tw",
+      "mem_mot",
+      "_cs_nodo_prev",
+      "_nb",
+      "_nb_prec",
+      "_nb_ret",
+      "omega_s",
+      "_psi_spinor",
+      "_spinor_lift",
+      "_psi_prec",
+      "_psi_spin_prec",
+      "_g_eredpsi_tot",
+      "psi",
+      "_g_eredpsi_salti",
+      "_g_eredpsi_shape",
+      "psi_spin",
+      "_g_eredpsis_salti",
+      "rho_spin",
+      "_g_eredrho_salti",
+      "i",
+      "j",
+      "conc_archi",
+      "d",
+      "d0",
+      "vd",
+      "peq",
+      "_rep",
+      "tw",
+      "twp",
+      "nati"
+    ],
+    "fuori_registro": [
+      "ultima_frac_antifase",
+      "_g_nati_mitosi",
+      "_g_nati_mitosi_ev",
+      "_g_eredpsi_tot",
+      "_g_eredpsi_salti",
+      "_g_eredpsi_shape",
+      "_g_eredpsis_salti",
+      "_g_eredrho_salti",
+      "conc_archi",
+      "nati"
+    ],
+    "archi_genuini": [
+      {
+        "prima": "phi",
+        "dopo": "twp",
+        "dipendenza": "flusso",
+        "riga_prima": 7409,
+        "riga_dopo": 7470,
+        "chi_legge": "twp",
+        "indici": [
+          "a",
+          "b"
+        ],
+        "letta": "phi"
+      },
+      {
+        "prima": "phi",
+        "dopo": "twp",
+        "dipendenza": "flusso",
+        "riga_prima": 7410,
+        "riga_dopo": 7470,
+        "chi_legge": "twp",
+        "indici": [
+          "a",
+          "b"
+        ],
+        "letta": "phi"
+      },
+      {
+        "prima": "phi",
+        "dopo": "twp",
+        "dipendenza": "flusso",
+        "riga_prima": 7421,
+        "riga_dopo": 7470,
+        "chi_legge": "twp",
+        "indici": [
+          "a",
+          "b"
+        ],
+        "letta": "phi"
+      }
+    ],
+    "archi_inerti": [
+      {
+        "prima": "phi",
+        "dopo": "twp",
+        "dipendenza": "flusso",
+        "riga_prima": 7366,
+        "riga_dopo": 7470,
+        "chi_legge": "twp",
+        "indici": [
+          "a",
+          "b"
+        ],
+        "letta": "phi",
+        "perche_inerte": "`phi` e' una PURA ESTENSIONE e `twp` la legge solo sui GENITORI (a,b): l'ordine NON cambia il valore"
+      }
+    ],
+    "violati_dall_ordine_del_registro": [],
+    "assorbite": [
+      "_cs_nodo_prev",
+      "_g_eredpsi_salti",
+      "_g_eredpsi_shape",
+      "_g_eredpsi_tot",
+      "_g_eredpsis_salti",
+      "_g_eredrho_salti",
+      "_nb",
+      "_nb_prec",
+      "_nb_ret",
+      "_psi_prec",
+      "_psi_spin_prec",
+      "_psi_spinor",
+      "_spinor_lift",
+      "omega_s",
+      "psi",
+      "psi_spin",
+      "rho_spin"
+    ]
+  },
+  "schwinger": {
+    "grandezze": [
+      "ultima_prob_coppia",
+      "_g_peqn_archi",
+      "_g_peqn_ev",
+      "_g_peqn_mediana",
+      "pos",
+      "phi",
+      "phi0",
+      "phi_s",
+      "phivel",
+      "eta",
+      "perc_chi",
+      "perc_geom",
+      "_g_nati_schwinger",
+      "_g_nati_schwinger_ev",
+      "perc_tw",
+      "mem_mot",
+      "_cs_nodo_prev",
+      "_nb",
+      "_nb_prec",
+      "_nb_ret",
+      "omega_s",
+      "_psi_spinor",
+      "_spinor_lift",
+      "_psi_prec",
+      "_psi_spin_prec",
+      "_g_eredpsi_tot",
+      "psi",
+      "_g_eredpsi_salti",
+      "_g_eredpsi_shape",
+      "psi_spin",
+      "_g_eredpsis_salti",
+      "rho_spin",
+      "_g_eredrho_salti",
+      "i",
+      "j",
+      "d",
+      "d0",
+      "vd",
+      "peq",
+      "_peqn_idx",
+      "_rep",
+      "tw",
+      "twp",
+      "nati",
+      "coppie_nate"
+    ],
+    "fuori_registro": [
+      "ultima_prob_coppia",
+      "_g_peqn_archi",
+      "_g_peqn_ev",
+      "_g_peqn_mediana",
+      "_g_nati_schwinger",
+      "_g_nati_schwinger_ev",
+      "_g_eredpsi_tot",
+      "_g_eredpsi_salti",
+      "_g_eredpsi_shape",
+      "_g_eredpsis_salti",
+      "_g_eredrho_salti",
+      "_peqn_idx",
+      "nati",
+      "coppie_nate"
+    ],
+    "archi_genuini": [
+      {
+        "prima": "peq",
+        "dopo": "_peqn_idx",
+        "dipendenza": "flusso",
+        "riga_prima": 7586,
+        "riga_dopo": 7591,
+        "chi_legge": "_peqn_idx",
+        "indici": [
+          ""
+        ],
+        "letta": "peq"
+      }
+    ],
+    "archi_inerti": [
+      {
+        "prima": "phi",
+        "dopo": "twp",
+        "dipendenza": "flusso",
+        "riga_prima": 7541,
+        "riga_dopo": 7595,
+        "chi_legge": "twp",
+        "indici": [
+          "aa",
+          "bb"
+        ],
+        "letta": "phi",
+        "perche_inerte": "`phi` e' una PURA ESTENSIONE e `twp` la legge solo sui GENITORI (aa,bb): l'ordine NON cambia il valore"
+      }
+    ],
+    "violati_dall_ordine_del_registro": [],
+    "assorbite": [
+      "_cs_nodo_prev",
+      "_g_eredpsi_salti",
+      "_g_eredpsi_shape",
+      "_g_eredpsi_tot",
+      "_g_eredpsis_salti",
+      "_g_eredrho_salti",
+      "_nb",
+      "_nb_prec",
+      "_nb_ret",
+      "_psi_prec",
+      "_psi_spin_prec",
+      "_psi_spinor",
+      "_spinor_lift",
+      "omega_s",
+      "psi",
+      "psi_spin",
+      "rho_spin"
+    ]
+  },
+  "servizio": [
+    {
+      "nome": "_smp_chirurgia",
+      "riga": 7459,
+      "evento": "divisione"
+    },
+    {
+      "nome": "_traccia_d0",
+      "riga": 7461,
+      "evento": "divisione"
+    },
+    {
+      "nome": "_grado",
+      "riga": 7472,
+      "evento": "divisione"
+    },
+    {
+      "nome": "_smp_chirurgia",
+      "riga": 7582,
+      "evento": "schwinger"
+    },
+    {
+      "nome": "_traccia_d0",
+      "riga": 7584,
+      "evento": "schwinger"
+    },
+    {
+      "nome": "_grado",
+      "riga": 7597,
+      "evento": "schwinger"
+    }
+  ],
+  "vincoli_genuini": 4,
+  "violati": 0,
+  "registro_basta": true
+}

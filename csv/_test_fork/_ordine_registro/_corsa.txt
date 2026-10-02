@@ -1,0 +1,42 @@
+====================================================================================================
+IN CHE ORDINE SI POSSONO SCRIVERE LE GRANDEZZE DELLA NASCITA?
+  simulatore  blob 3d78cfd2 (sha1 byte grezzi)
+  REGISTRO_DERIVATE     10 voci
+  REGISTRO_FINESTRA      2 voci
+  REGISTRO_METRI         3 voci
+  REGISTRO_NOMI          0 voci
+  REGISTRO_STATO        30 voci
+  ### l'ordine del REGISTRO, per intero: METRI + STATO + FINESTRA = 35 voci
+
+  ### E QUESTA VERSIONE CURA UN FALSO ZERO della versione 1fb6ac63:
+      quella faceva girare l'analisi sul solo REGISTRO_STATO, e cosi'
+      ESCLUDEVA phi/i/j (REGISTRO_METRI) e _peqn_idx (nessun registro),
+      cioe' ESATTAMENTE le grandezze intrecciate. Qui NESSUN insieme
+      e' scelto a mano: si prendono TUTTE le scritture del perimetro.
+
+----------------------------------------------------------------------------------------------------
+EVENTO `divisione`: 44 scritture su 41 grandezze DIVERSE
+  di cui nel REGISTRO 31, FUORI dal registro 10
+      le FUORI: ultima_frac_antifase, _g_nati_mitosi, _g_nati_mitosi_ev, _g_eredpsi_tot, _g_eredpsi_salti, _g_eredpsi_shape, _g_eredpsis_salti, _g_eredrho_salti, conc_archi, nati
+  ### ARCHI DI DIPENDENZA: 3 GENUINI, 1 inerti (estensione letta sui genitori)
+      ### phi            DEVE stare prima di twp             (flusso: `twp` legge `phi` su [a,b])
+  ### L'ORDINE DEL REGISTRO VIOLA 0 di questi vincoli
+----------------------------------------------------------------------------------------------------
+EVENTO `schwinger`: 45 scritture su 45 grandezze DIVERSE
+  di cui nel REGISTRO 31, FUORI dal registro 14
+      le FUORI: ultima_prob_coppia, _g_peqn_archi, _g_peqn_ev, _g_peqn_mediana, _g_nati_schwinger, _g_nati_schwinger_ev, _g_eredpsi_tot, _g_eredpsi_salti, _g_eredpsi_shape, _g_eredpsis_salti, _g_eredrho_salti, _peqn_idx, nati, coppie_nate
+  ### ARCHI DI DIPENDENZA: 1 GENUINI, 1 inerti (estensione letta sui genitori)
+      ### peq            DEVE stare prima di _peqn_idx       (flusso: `_peqn_idx` legge `peq` INTERA)
+  ### L'ORDINE DEL REGISTRO VIOLA 0 di questi vincoli
+----------------------------------------------------------------------------------------------------
+LE CHIAMATE CON EFFETTO, che NON sono regole e vanno collocate A MANO: 6
+    _smp_chirurgia     :7459   evento `divisione`
+    _traccia_d0        :7461   evento `divisione`
+    _grado             :7472   evento `divisione`
+    _smp_chirurgia     :7582   evento `schwinger`
+    _traccia_d0        :7584   evento `schwinger`
+    _grado             :7597   evento `schwinger`
+====================================================================================================
+### VERDETTO
+###   vincoli d'ordine GENUINI nel perimetro: 4
+###   l'ordine del REGISTRO li rispetta TUTTI: e' un ordine topologico valido.
