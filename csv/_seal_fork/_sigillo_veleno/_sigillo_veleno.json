@@ -1,0 +1,224 @@
+{
+ "blob_sim_sha1_byte": "b378491a01574d774f2c3f88fb16fb5cbfec7afc",
+ "blob_sigillo": "7da887bec55542ca95a5d83cf805cbd78305525f",
+ "ancora": "_avvelena_derivate(net)",
+ "commit_che_introduce": "b9c109a4c1aaf2bc67a860ddf26d6a9fab07700d",
+ "blob_prima": "dc10df7fb500d70237864743341511511e30c2d8",
+ "scene": [
+  {
+   "etichetta": "corta",
+   "seme": 11,
+   "passi": 72,
+   "nascite": [
+    8,
+    1
+   ],
+   "diff_stato": [
+    {
+     "nome": "_g_inv_veleno_ok",
+     "come": "presente in UNO solo"
+    },
+    {
+     "nome": "_g_inv_veleno_scaduti",
+     "come": "presente in UNO solo"
+    },
+    {
+     "nome": "_g_veleno_celle",
+     "come": "presente in UNO solo"
+    },
+    {
+     "nome": "_g_veleno_esenti",
+     "come": "presente in UNO solo"
+    },
+    {
+     "nome": "_g_veleno_voci",
+     "come": "presente in UNO solo"
+    }
+   ],
+   "n_diff_derivate": 7,
+   "esenti": [
+    {
+     "grandezza": "_g_rampa_prec",
+     "len": 12811,
+     "n": 12812,
+     "corta": true,
+     "non_finiti": 0
+    },
+    {
+     "grandezza": "_xi_rumore",
+     "len": 12811,
+     "n": 12812,
+     "corta": true,
+     "non_finiti": 0
+    }
+   ],
+   "veleno": {
+    "_g_veleno_voci": 72,
+    "_g_veleno_celle": 82,
+    "_g_veleno_esenti": 18,
+    "_g_veleno_gia_lunga": 0,
+    "_g_veleno_assenti": 0,
+    "_g_veleno_multiasse": 0,
+    "_g_veleno_non_float": 0
+   }
+  },
+  {
+   "etichetta": "lunga",
+   "seme": 11,
+   "passi": 150,
+   "nascite": [
+    83,
+    64
+   ],
+   "diff_stato": [
+    {
+     "nome": "_g_inv_veleno_ok",
+     "come": "presente in UNO solo"
+    },
+    {
+     "nome": "_g_inv_veleno_scaduti",
+     "come": "presente in UNO solo"
+    },
+    {
+     "nome": "_g_veleno_celle",
+     "come": "presente in UNO solo"
+    },
+    {
+     "nome": "_g_veleno_esenti",
+     "come": "presente in UNO solo"
+    },
+    {
+     "nome": "_g_veleno_voci",
+     "come": "presente in UNO solo"
+    }
+   ],
+   "n_diff_derivate": 7,
+   "esenti": [
+    {
+     "grandezza": "_g_rampa_prec",
+     "len": 13974,
+     "n": 14000,
+     "corta": true,
+     "non_finiti": 0
+    },
+    {
+     "grandezza": "_xi_rumore",
+     "len": 13974,
+     "n": 14000,
+     "corta": true,
+     "non_finiti": 0
+    }
+   ],
+   "veleno": {
+    "_g_veleno_voci": 1176,
+    "_g_veleno_celle": 10104,
+    "_g_veleno_esenti": 294,
+    "_g_veleno_gia_lunga": 0,
+    "_g_veleno_assenti": 0,
+    "_g_veleno_multiasse": 0,
+    "_g_veleno_non_float": 0
+   }
+  },
+  {
+   "etichetta": "altro_seme",
+   "seme": 12,
+   "passi": 72,
+   "nascite": [
+    10,
+    4
+   ],
+   "diff_stato": [
+    {
+     "nome": "_g_inv_veleno_ok",
+     "come": "presente in UNO solo"
+    },
+    {
+     "nome": "_g_inv_veleno_scaduti",
+     "come": "presente in UNO solo"
+    },
+    {
+     "nome": "_g_veleno_celle",
+     "come": "presente in UNO solo"
+    },
+    {
+     "nome": "_g_veleno_esenti",
+     "come": "presente in UNO solo"
+    },
+    {
+     "nome": "_g_veleno_voci",
+     "come": "presente in UNO solo"
+    }
+   ],
+   "n_diff_derivate": 0,
+   "esenti": [
+    {
+     "grandezza": "_g_rampa_prec",
+     "len": 12782,
+     "n": 12782,
+     "corta": false,
+     "non_finiti": 0
+    },
+    {
+     "grandezza": "_xi_rumore",
+     "len": 12782,
+     "n": 12782,
+     "corta": false,
+     "non_finiti": 0
+    }
+   ],
+   "veleno": {
+    "_g_veleno_voci": 112,
+    "_g_veleno_celle": 144,
+    "_g_veleno_esenti": 28,
+    "_g_veleno_gia_lunga": 0,
+    "_g_veleno_assenti": 0,
+    "_g_veleno_multiasse": 0,
+    "_g_veleno_non_float": 0
+   }
+  }
+ ],
+ "passa": false,
+ "braccio_A": false,
+ "braccio_B": true,
+ "braccio_C": true,
+ "braccio_D": true,
+ "braccio_E": true,
+ "braccio_E_dettaglio": {
+  "passo": 42,
+  "tipo": "DominioViolato",
+  "messaggio": "[INVARIANTE] `_dt_e_ultimo` VIOLA `> 0 | e nelle 1 celle AVVELENATE il valore DEVE essere `nan` (esenzione PER CELLA ancorata al veleno: un NUMERO li' significa una cella scritta SENZA riscrivere la derivata)` al passo 42, in `esegui_passo`.\n  quanti: 1\n  indici (primi 8): 471564\n  valori (primi 8): 1.000000e+00\n  arco=12802-1583 quanti=1 su=471565",
+  "voce": "verifica_invarianti",
+  "riga": 6420,
+  "codice": "raise DominioViolato(quale, regola, passo, idx,"
+ },
+ "braccio_F": true,
+ "braccio_F_dettaglio": {
+  "passo": 42,
+  "tipo": "DominioViolato",
+  "messaggio": "[INVARIANTE] `_dt_e_ultimo` VIOLA `> 0` al passo 42, in `esegui_passo`.\n  quanti: 1\n  indici (primi 8): 471564\n  valori (primi 8): nan\n  arco=12802-1583 quanti=1 su=471565",
+  "voce": "verifica_invarianti",
+  "riga": 6417,
+  "codice": "raise DominioViolato(quale, regola, passo, idx,"
+ },
+ "braccio_B_dettaglio": {
+  "caduto": false,
+  "non_finiti_xi": 0,
+  "diff_stato": [
+   {
+    "nome": "_g_veleno_esenti",
+    "come": "scalare",
+    "a": "18",
+    "b": "9"
+   },
+   {
+    "nome": "_g_veleno_multiasse",
+    "come": "presente in UNO solo"
+   }
+  ]
+ },
+ "copertura_citata": {
+  "blob_referto": "3b31a7121a0f79dea7dd2fbe57c0e4a6d0f779a3",
+  "blob_sim": "dc10df7fb500d70237864743341511511e30c2d8",
+  "verdetto": "198 letture sporche su 2 provate, 29 non provate"
+ }
+}

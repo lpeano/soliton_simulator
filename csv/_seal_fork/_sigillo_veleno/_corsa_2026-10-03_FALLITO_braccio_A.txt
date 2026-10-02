@@ -1,0 +1,130 @@
+[TIMBRO] _sigillo_veleno.py  sha1-BYTE 7da887be  committato e pulito
+========================================================================================================
+IL SIGILLO DEL COMMIT 4: il VELENO alle derivate (via A, decisione di Luca)
+========================================================================================================
+simulatore ..... b378491a
+questo sigillo . 7da887be
+regola in ...... csv/_confronto_nascita.py  71fd078a
+
+il <<prima>> .. blob dc10df7f, dal PADRE di b9c109a4 (l'ancora e' `_avvelena_derivate(net)`)
+    *(e `sim_prima_del_flag` ASSERISCE che l'ancora NON sia nel file estratto)*
+
+========================================================================================================
+BRACCIO A -- lo STATO e' byte-identico sulle TRE scene; le DERIVATE no
+========================================================================================================
+  scena `corta      ` seme 11, 72 passi, nascite 8/1
+      ### differenze sullo STATO ..... 5   (atteso 0)
+          ### {"nome": "_g_inv_veleno_ok", "come": "presente in UNO solo"}
+          ### {"nome": "_g_inv_veleno_scaduti", "come": "presente in UNO solo"}
+          ### {"nome": "_g_veleno_celle", "come": "presente in UNO solo"}
+          ### {"nome": "_g_veleno_esenti", "come": "presente in UNO solo"}
+          ### {"nome": "_g_veleno_voci", "come": "presente in UNO solo"}
+      differenze sulle DERIVATE ...... 7   (atteso > 0: il veleno AGISCE)
+      veleno: voci 72, celle 82, esenti 18, gia' lunghe 0
+      ### le due ESENTI, dopo il run:
+          _g_rampa_prec      {"grandezza": "_g_rampa_prec", "len": 12811, "n": 12812, "corta": true, "non_finiti": 0}
+          _xi_rumore         {"grandezza": "_xi_rumore", "len": 12811, "n": 12812, "corta": true, "non_finiti": 0}
+  scena `lunga      ` seme 11, 150 passi, nascite 83/64
+      ### differenze sullo STATO ..... 5   (atteso 0)
+          ### {"nome": "_g_inv_veleno_ok", "come": "presente in UNO solo"}
+          ### {"nome": "_g_inv_veleno_scaduti", "come": "presente in UNO solo"}
+          ### {"nome": "_g_veleno_celle", "come": "presente in UNO solo"}
+          ### {"nome": "_g_veleno_esenti", "come": "presente in UNO solo"}
+          ### {"nome": "_g_veleno_voci", "come": "presente in UNO solo"}
+      differenze sulle DERIVATE ...... 7   (atteso > 0: il veleno AGISCE)
+      veleno: voci 1176, celle 10104, esenti 294, gia' lunghe 0
+      ### le due ESENTI, dopo il run:
+          _g_rampa_prec      {"grandezza": "_g_rampa_prec", "len": 13974, "n": 14000, "corta": true, "non_finiti": 0}
+          _xi_rumore         {"grandezza": "_xi_rumore", "len": 13974, "n": 14000, "corta": true, "non_finiti": 0}
+  scena `altro_seme ` seme 12, 72 passi, nascite 10/4
+      ### differenze sullo STATO ..... 5   (atteso 0)
+          ### {"nome": "_g_inv_veleno_ok", "come": "presente in UNO solo"}
+          ### {"nome": "_g_inv_veleno_scaduti", "come": "presente in UNO solo"}
+          ### {"nome": "_g_veleno_celle", "come": "presente in UNO solo"}
+          ### {"nome": "_g_veleno_esenti", "come": "presente in UNO solo"}
+          ### {"nome": "_g_veleno_voci", "come": "presente in UNO solo"}
+      differenze sulle DERIVATE ...... 0   (atteso > 0: il veleno AGISCE)
+      veleno: voci 112, celle 144, esenti 28, gia' lunghe 0
+      ### le due ESENTI, dopo il run:
+          _g_rampa_prec      {"grandezza": "_g_rampa_prec", "len": 12782, "n": 12782, "corta": false, "non_finiti": 0}
+          _xi_rumore         {"grandezza": "_xi_rumore", "len": 12782, "n": 12782, "corta": false, "non_finiti": 0}
+
+  ### BRACCIO A: FALLISCE
+  ### BRACCIO C: PASSA (le esenti non hanno NaN aggiunti dal veleno)
+
+========================================================================================================
+BRACCIO B -- IL CASO CHE DEVE FALLIRE: si toglie l'esenzione a `_xi_rumore`
+========================================================================================================
+  Il registro dichiara `_xi_rumore` AUTO-RINFRESCO perche' la guardia
+  `if _xi is None or len(_xi) < n:` (:5031) E' IL SUO SEGNALE, e il commento
+  dichiara che quello e' IL PERCORSO NORMALE della mitosi. Togliere l'esenzione
+  deve ROMPERE il run, e il sigillo deve dire DOVE.
+  la copia: {"righe_diverse": [1280]}
+  il run NON e' caduto. Allora la differenza deve essere MISURABILE:
+      ### `_xi_rumore` non finiti: 0   (len 12811, n 12812)
+      ### differenze sullo STATO contro il simulatore sano: 2
+          ### {"nome": "_g_veleno_esenti", "come": "scalare", "a": "18", "b": "9"}
+          ### {"nome": "_g_veleno_multiasse", "come": "presente in UNO solo"}
+  ### BRACCIO B: PASSA
+
+========================================================================================================
+BRACCIO D -- IL VERDETTO DELLA COPERTURA, citato dal referto COMMITTATO
+========================================================================================================
+  referto .. csv/_test_fork/_copertura_derivate/_copertura_derivate.json
+      blob del referto ........... 3b31a712
+      girato sul simulatore ...... dc10df7f
+      ### IL VERDETTO ............ 198 letture sporche su 2 provate, 29 non provate
+      letture dall'AST 31, provate 2, NON provate 29
+          condizione mai scattata        22
+          non raggiunta, SENZA GATE      7
+      controllo positivo della finestra (iniettato): True
+  ### E IL VERDETTO NON SI RISCRIVE A PAROLE: si CITA, col blob del referto
+  ###   e col blob del simulatore su cui e' girato. Un numero ricopiato non
+  ###   ha provenienza (`L-NUMERI`).
+  ### BRACCIO D: PASSA
+
+========================================================================================================
+BRACCIO E -- UNA CELLA AVVELENATA SCRITTA senza riscrivere l'array
+========================================================================================================
+  L'iniezione e' IN POSTO (`net._dt_e_ultimo[inizio] = 1.0`), quindi CONSERVA
+  l'identita' dell'oggetto: il registro del veleno resta VIVO. ### E allora
+  l'esenzione per cella DEVE NOMINARE quella cella, perche' un NUMERO li' vuol
+  dire che qualcuno ha scritto UNA CELLA senza riscrivere la derivata.
+  ### E' il SECONDO VERSO della strettezza: senza di lui l'esenzione
+  ### ammetterebbe tutto, ed e' `A9` (un presidio che ammette tutto non
+  ### impedisce niente).
+  la copia: {"righe_prima": 12886, "righe_dopo": 12889}
+  ### IL RUN E' CADUTO, ed e' CIO' CHE DEVE SUCCEDERE:
+      passo 42, voce `verifica_invarianti`, riga 6420
+      tipo ...... DominioViolato
+      messaggio . [INVARIANTE] `_dt_e_ultimo` VIOLA `> 0 | e nelle 1 celle AVVELENATE il valore DEVE essere `nan` (esenzione PER CELLA ancorata al veleno: un NUMERO li' significa una cella scritta SENZA riscrivere la derivata)` al passo 42, in `esegui_passo`.
+  quanti: 1
+  indici (primi 8): 471564
+  valori (primi 8): 1.000000e+00
+  arco=12802-1583 quanti=1 su=471565
+      ### nomina `_dt_e_ultimo`? SI
+      ### e dice che e' una CELLA AVVELENATA? SI
+  ### BRACCIO E: PASSA
+
+========================================================================================================
+BRACCIO F -- IL VELENO NON REGISTRA LE CELLE: il run deve cadere COME PRIMA
+========================================================================================================
+  Senza il registro il controllo non ha niente a cui ancorare l'esenzione, e il
+  run deve cadere come cadeva PRIMA della via (a): al passo 42, su
+  `_dt_e_ultimo` che viola `> 0`. ### E' il CONTROLLO POSITIVO DEL REGISTRO:
+  ### se il run passasse anche senza registro, l'esenzione non sarebbe ancorata
+  ### a niente e il braccio A non proverebbe nulla.
+  la copia: {"righe_diverse": [1534]}
+  ### IL RUN E' CADUTO, ed e' CIO' CHE DEVE SUCCEDERE:
+      passo 42, voce `verifica_invarianti`, riga 6417
+      messaggio . [INVARIANTE] `_dt_e_ultimo` VIOLA `> 0` al passo 42, in `esegui_passo`.
+  quanti: 1
+  indici (primi 8): 471564
+  valori (primi 8): nan
+  arco=12802-1583 quanti=1 su=471565
+      ### al passo 42, come prima della via (a)? SI
+  ### BRACCIO F: PASSA
+
+========================================================================================================
+### IL SIGILLO FALLISCE   (A NO · B OK · C OK · D OK · E OK · F OK)
+========================================================================================================

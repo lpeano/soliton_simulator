@@ -1793,3 +1793,50 @@ Simulatore da **`7a1a21af`** a ### **`b378491a`**.
 **PROSSIMO: il sigillo, sei bracci. E poi mi fermo, come da mandato.**
 
 ---
+
+# ⛔ **IL SIGILLO FALLISCE SUL BRACCIO `A`, E IL DIFETTO E' DEL SIGILLO** *(2026-10-03)*
+
+> ### **Luca: A NO · B OK · C OK · D OK · E OK · F OK. E il braccio `A` fallisce su DUE criteri che il PIANO AVEVA GIA' FISSATO e io non ho implementato.**
+
+## ✅ **CIO' CHE PASSA, e `E` nel modo migliore**
+
+| | |
+|---|---|
+| ### **`E`** una cella avvelenata **scritta** | ### **IL RUN CADE** al passo 42, `verifica_invarianti` riga ### **6420**, e il messaggio ### **NOMINA `_dt_e_ultimo` E DICE che e' una cella AVVELENATA**, col valore ### **`1.000000e+00`** — esattamente quello iniettato, all'indice `471564` |
+| ### **`F`** il veleno non registra | il run cade al passo 42 col messaggio ### **IDENTICO a prima della via (a)** — l'esenzione ### **E' ancorata al registro** |
+| **`C`** | le due esenti senza `NaN`, in tutte e tre le scene |
+| **`D`** | la copertura citata col blob del referto *(`3b31a712`)* e del simulatore |
+
+## ⛔ **DIFETTO 1 — i contatori del PRESIDIO non vanno confrontati**
+
+Le 5 *<<differenze sullo stato>>* sono, ### **in tutte e tre le scene, esattamente queste**: `_g_veleno_voci`, `_g_veleno_celle`, `_g_veleno_esenti`, `_g_inv_veleno_ok`, `_g_inv_veleno_scaduti` — tutte *<<presente in UNO solo>>*, perche' nel simulatore di ### **prima** non esistono.
+
+### ➜ **E il piano lo diceva:** *«i contatori della MARCA sono <<del presidio>> e cambiano ### **per costruzione**: si ### **SEPARANO PER NOME e si RIPORTANO**»*. ### **Il mio braccio `A` non l'ha fatto.**
+
+## ⛔ **DIFETTO 2 — <<le derivate devono DIFFERIRE>> non e' il controllo giusto**
+
+Nella scena `altro_seme` le derivate sono ### **IDENTICHE** alla fine *(0 differenze)*, ### **e il veleno aveva agito** *(112 voci, 144 celle)*: le leggi avevano riscritto ### **tutte** le celle avvelenate prima della fine, quindi i valori finali coincidono.
+
+### ➜ **Cioe' il mio controllo positivo chiede una cosa che PUO' legittimamente non avverarsi** — ed e' ### **la stessa forma dell'errore del controllo della finestra di stamattina.** ### **Un controllo che puo' fallire senza che ci sia un difetto non e' un controllo.**
+
+### ✅ **IL CONTROLLO GIUSTO E' UN CONTATORE:** `_g_veleno_celle > 0` dice che il veleno ### **ha agito**, e ### **non dipende da cosa resta alla fine.**
+
+## ⛔ **E UN FATTO NUOVO che il braccio `B` ha trovato, e smonta una mia dichiarazione**
+
+Nel braccio `B` e' comparso `_g_veleno_multiasse`. ### **Misurato: `_xi_rumore` ha shape `(12802, 3)` — DUE ASSI.**
+
+### ➜ **Quindi il ramo `multiasse` del veleno la salterebbe COMUNQUE, anche senza l'esenzione.**
+
+| | |
+|---|---|
+| ### **il braccio `B` NON era discriminante** | togliere l'esenzione a `_xi_rumore` ### **non cambia niente di sostanziale**, e il mio criterio ha detto PASSA perche' la differenza conteneva ### **due contatori del veleno.** ### **Lo STESSO difetto del braccio `A`** |
+| ### **va ancorato a `_g_rampa_prec`** | che e' ### **`(12802,)` 1-D float64**, cioe' ### **davvero avvelenabile** se le si toglie l'esenzione. *(Il mandato diceva <<una delle due>>.)* |
+| ### **e una mia riga di registro e' una MEZZA VERITA'** | dice che l'esenzione protegge `_xi_rumore` dal veleno. ### **Oggi la protegge il ramo MULTIASSE.** L'esenzione resta giusta come ### **dichiarazione d'intento** *(morderebbe se diventasse 1-D)*, ma ### **dire che e' lei a proteggerla oggi e' falso** — ed e' la famiglia delle cinque derivazioni che ho corretto stamattina |
+
+### ⛔ **E LA MIA DICHIARAZIONE <<tutte e dieci sono 1-D>> ERA SBAGLIATA:** il piano diceva ### **<<tutte e 10 sono float64>>**, e io ho letto ### **1-D.** ### **Nove su dieci lo sono; `_xi_rumore` no.**
+
+### 📌 **E il ramo `multiasse` l'avevo scritto <<per prudenza, con ZERO casi oggi>>:** aveva ### **un caso**, e il contatore me l'ha detto. ### **Un ramo contato invece di taciuto e' la ragione per cui questo si e' visto.**
+
+### ✅ **Committo il fallimento e NON lo curo qui** *(par.5)*, e qui conta il doppio: la correzione tocca ### **I CRITERI** del sigillo, e ### **un criterio corretto nello stesso commit in cui fallisce e' un criterio che si adatta al risultato.**
+
+---
