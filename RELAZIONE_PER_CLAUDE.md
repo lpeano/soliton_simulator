@@ -1052,3 +1052,39 @@ Il referto di **`81b0c24`** e' stato prodotto sul simulatore ### **`3ddc56d9`**,
 **PROSSIMO: il giro vero, quattro bracci, sul simulatore `3d78cfd2`.**
 
 ---
+
+# ⛔ **IL BRACCIO `D` E' MORTO SU UN MIO ERRORE DI API. Committo il fallimento PRIMA di correggerlo** *(2026-10-02)*
+
+> ### **Luca, `A`, `B` e `C` passano sul simulatore nuovo. Il braccio `D` non e' nemmeno partito, e la ragione e' banale e mia.**
+
+**Il reperto:** `csv/_seal_fork/_sigillo_confronto_esteso/_corsa_2026-10-02_FALLITO_braccio_D.txt`. ### **Nessuna riga del simulatore:** blob `3d78cfd2`.
+
+## ✅ **CIO' CHE IL GIRO HA GIA' DETTO, e va detto per primo**
+
+| | |
+|---|---|
+| la **copia guasta** | ### **CHIRURGICA**: una riga, `:7539` — ### **l'ancora nuova ha funzionato** |
+| ### **braccio `B`** | ### **PASSA**: la regola nuova vede ### **1 differenza, ed e' `_g_peqn_mediana`** *(`1.7026802215251897` contro `1.70268022152519`, ### **1 ulp**)*; la regola di OGGI ne vede ### **ZERO** |
+| ### **braccio `C`** | ### **PASSA**: 0 differenze con ### **entrambe** le regole |
+| **braccio `A`** | **PASSA** |
+
+### 📌 **E il valore della mediana e' CAMBIATO rispetto a ieri sera**, come avevo dichiarato: ### **`1.7026985177180012` prima, `1.7026802215251897` ora.** ### **E' l'effetto della cura del passo 2** — e il braccio `D` esiste proprio per misurarlo invece di constatarlo.
+
+## ⛔ **L'ERRORE: ho usato il VALORE DI RITORNO come un PERCORSO**
+
+```
+FileNotFoundError: No such file or directory: 'f54126119edc92157688c07b6449d2ce5588615d'
+```
+
+### **`_cli_flag.sim_prima_del_flag(nome_flag, dest)` SCRIVE su `dest` e RESTITUISCE L'HASH DEL COMMIT** che introduce l'ancora. ### **Io ho trattato il ritorno come il percorso del file.**
+### ➜ **E l'ho letto nel docstring DOPO**, non prima: ### **e' `P1` — ho usato un'API per associazione** *(«una funzione che estrae un file restituisce il file»)* ### **invece di leggere che cosa restituisce.**
+
+## ✅ **CHE COSA QUESTO NON E', e conta dirlo**
+
+### **Non e' un fallimento del SIGILLO: e' un errore dello STRUMENTO.** `A`, `B` e `C` hanno misurato e passato ### **prima** che `D` morisse, e i loro numeri sono nel reperto.
+### ⚠ **Ma il referto `json` NON e' stato scritto** *(il crash e' arrivato prima)*, quindi ### **quei tre bracci non hanno un referto strutturato**: resta ### **la stampa**, committata come reperto. ### **Lo dico invece di citare numeri che nel repo non hanno un `json`.**
+
+## ✅ **E IL FALLIMENTO SI COMMITTA PRIMA DELLA CORREZIONE** *(par.5)*
+### **La correzione e' un commit a se', e il giro si rifa' dopo.** ### **Non lo aggiusto dentro questo commit.**
+
+---
