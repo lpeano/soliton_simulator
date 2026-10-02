@@ -1,0 +1,26 @@
+====================================================================================================
+UN CAMBIO DI SOLI COMMENTI SI PROVA: gli ALBERI SINTATTICI, non una scena
+====================================================================================================
+  l'ANCORA ...... '~1.2 giri persi per arco'
+  il <<prima>> .. dal PADRE di 3cc16532  ->  blob f103989b   (IN BINARIO)
+      *(e `sim_prima_del_flag` ASSERISCE che l'ancora NON sia nel file estratto)*
+  il <<dopo>> ... il disco           blob dc10df7f
+
+  --- la NORMALIZZAZIONE, e si conta ---
+      docstring tolti ............ prima 138   dopo 138
+      argomenti di doc. azzerati . prima 204   dopo 204
+      ### chiavi (evento, grandezza) .. prima 68   dopo 68
+      ### chiavi PERSE nessuna   chiavi NUOVE nessuna
+      *(le chiavi NON si normalizzano: sono l'evento e la grandezza, cioe' QUALE
+        regola governa QUALE grandezza. Normalizzarle renderebbe il confronto
+        cieco proprio al difetto piu' grave.)*
+
+  ### GLI ALBERI NORMALIZZATI COINCIDONO? SI
+
+====================================================================================================
+### IL SIGILLO PASSA: NESSUNA ISTRUZIONE E' CAMBIATA.
+###   I due file differiscono SOLO in commenti, docstring e stringhe di
+###   DOCUMENTAZIONE della tabella di nascita. ### La fisica e' identica per
+###   COSTRUZIONE -- per qualunque scena, qualunque seme, qualunque flag.
+###   E le 68 chiavi (evento, grandezza) sono le STESSE.
+====================================================================================================

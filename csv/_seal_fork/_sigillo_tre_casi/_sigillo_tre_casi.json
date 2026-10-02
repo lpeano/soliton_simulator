@@ -1,16 +1,16 @@
 {
- "blob_sim_sha1_byte": "f103989b5c2cef00fa63da6b630c08d322ab2290",
- "blob_sigillo": "2ab06dbaed948e316f518702dbb49c3800c6c7fe",
+ "blob_sim_sha1_byte": "dc10df7fb500d70237864743341511511e30c2d8",
+ "blob_sigillo": "014d469e06ef3bbaae10a65fb2dda0f6f79ce392",
  "seme": 11,
  "passi": 72,
  "caso_1": {
   "passa": true,
   "righe_diverse": {
-   "righe_prima": 12635,
-   "righe_dopo": 12635,
+   "righe_prima": 12672,
+   "righe_dopo": 12672,
    "aggiunte": 0,
    "righe_diverse": [
-    1777
+    1787
    ]
   },
   "eccezione": "regola di nascita non dichiarata per `peq` all'evento `divisione` (e altre 0). La tabella `REGOLE_NASCITA` deve coprire TUTTO `ORDINE_DI_NASCITA`."
@@ -22,21 +22,22 @@
    {
     "grandezza": "phi",
     "dentro": "mitosi",
-    "riga": 8242,
+    "riga": 8279,
     "codice": "self.phi = np.concatenate([self.phi, fm])"
    }
   ],
   "righe_diverse": {
-   "righe_prima": 12635,
-   "righe_dopo": 12636,
+   "righe_prima": 12672,
+   "righe_dopo": 12673,
    "aggiunte": 1,
-   "prima_riga_diversa": 8242
+   "prima_riga_diversa": 8279
   },
   "grandezze_governate": 36,
   "regole": 65,
   "chiamanti": [
    "mitosi"
   ],
+  "LIMITE": "la ricerca gira SOLO dentro le funzioni che chiamano nascita() (oggi: mitosi). Un'estensione di una grandezza del registro in step() o in un'altra voce del passo NON viene nominata. Rilievo del guardiano, 2026-10-03; allargarla a tutto il file e' IN CODA come il cablaggio.",
   "NON_CABLATO": "e' uno script, non un hook (A9)"
  },
  "caso_2": {
@@ -261,11 +262,11 @@
    }
   ],
   "righe_diverse": {
-   "righe_prima": 12635,
-   "righe_dopo": 12635,
+   "righe_prima": 12672,
+   "righe_dopo": 12672,
    "aggiunte": 0,
    "righe_diverse": [
-    1708
+    1712
    ]
   }
  },

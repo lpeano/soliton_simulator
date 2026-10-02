@@ -1,15 +1,15 @@
-[TIMBRO] _sigillo_tre_casi.py  sha1-BYTE 2ab06dba  committato e pulito
+[TIMBRO] _sigillo_tre_casi.py  sha1-BYTE 014d469e  committato e pulito
 ========================================================================================================
 I TRE CASI CHE DEVONO FALLIRE  --  `COMMIT 3`, la nascita come evento unico
 ========================================================================================================
-simulatore ..... f103989b (sha1 byte grezzi)
-questo sigillo . 2ab06dba
+simulatore ..... dc10df7f (sha1 byte grezzi)
+questo sigillo . 014d469e
 seme 11   passi 72
 
 ========================================================================================================
 CASO 1 -- SI TOGLIE UNA GRANDEZZA DALLA TABELLA: il run deve FERMARSI
 ========================================================================================================
-  copia: una grandezza RINOMINATA nella tabella: {'righe_prima': 12635, 'righe_dopo': 12635, 'aggiunte': 0, 'righe_diverse': [1777]}
+  copia: una grandezza RINOMINATA nella tabella: {'righe_prima': 12672, 'righe_dopo': 12672, 'aggiunte': 0, 'righe_diverse': [1787]}
   l'import ha alzato ... RuntimeError
   il messaggio ......... regola di nascita non dichiarata per `peq` all'evento `divisione` (e altre 0). La tabella `REGOLE_NASCITA` deve coprire TUTTO `ORDINE_DI_NASCITA`.
   nomina la grandezza E l'evento? SI
@@ -23,9 +23,23 @@ CASO 3 -- UNA SCRITTURA SPARSA A VALLE: il presidio deve NOMINARLA
   ### estensioni SPARSE nel perimetro, fuori dalle regole: 0
 
   CONTROLLO POSITIVO: iniettata `self.phi = np.concatenate([self.phi, fm])`
-      subito DOPO la chiamata al punto unico: {'righe_prima': 12635, 'righe_dopo': 12636, 'aggiunte': 1, 'prima_riga_diversa': 8242}
+      subito DOPO la chiamata al punto unico: {'righe_prima': 12672, 'righe_dopo': 12673, 'aggiunte': 1, 'prima_riga_diversa': 8279}
       ### il presidio la trova? SI
-      ### NOMINATA: phi dentro `mitosi` :8242   self.phi = np.concatenate([self.phi, fm])
+      ### NOMINATA: phi dentro `mitosi` :8279   self.phi = np.concatenate([self.phi, fm])
+
+
+  ### ⛔ IL LIMITE DI QUESTO PRESIDIO, e si legge PRIMA dello zero di sopra
+      (rilievo del guardiano, 2026-10-03):
+      La ricerca gira SOLO dentro le funzioni che CHIAMANO `nascita()`, e oggi
+      quella e' UNA SOLA: mitosi.
+      ### QUINDI un'estensione di una grandezza del registro fatta in `step()`,
+      ### o in un'altra voce del passo, NON VIENE NOMINATA.
+      Il presidio prova che la nascita e' in un punto solo DENTRO il suo
+      perimetro; NON prova che nessun ALTRO posto del simulatore allunghi
+      quelle grandezze. ### E' una differenza vera, e lo zero di sopra si legge
+      con questo limite davanti.
+      Allargare la ricerca a TUTTO il file e' la stessa cosa del cablaggio nel
+      `pre-commit`, ed e' IN CODA (`NASCITA-PUNTO-UNICO`).
 
   ### E IL PRESIDIO NON E' CABLATO IN UN HOOK: e' uno SCRIPT (`A9`).
       Finche' non gira nel `pre-commit`, NON IMPEDISCE NIENTE -- lo dico.
@@ -34,7 +48,7 @@ CASO 3 -- UNA SCRITTURA SPARSA A VALLE: il presidio deve NOMINARLA
 ========================================================================================================
 CASO 2 -- SI CAMBIA LA REGOLA DI `psi` (da MEDIA a EREDITA): il sigillo deve VEDERLA
 ========================================================================================================
-  copia: `psi` EREDITA da `a` invece di MEDIARE. {'righe_prima': 12635, 'righe_dopo': 12635, 'aggiunte': 0, 'righe_diverse': [1708]}
+  copia: `psi` EREDITA da `a` invece di MEDIARE. {'righe_prima': 12672, 'righe_dopo': 12672, 'aggiunte': 0, 'righe_diverse': [1712]}
       ### ed e' il cambio di UNA regola, non di un numero: e' il tipo di
       ### difetto che un riordino puo' introdurre senza accorgersene.
   ### il sigillo vede 47 differenze

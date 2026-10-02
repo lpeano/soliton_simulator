@@ -1539,3 +1539,39 @@ La tua domanda — *<<come sai che il veleno e' passato per tutte le leggi se fa
 ### 📌 **E il verdetto si scrivera' cosi':** *<<zero letture sporche su `N` PROVATE, `M` NON PROVATE (elencate)>>*. ### ⛔ **MAI <<nessuna derivata sporca>>**, che afferma qualcosa su cio' che non e' stato guardato.
 
 ---
+
+# ✅✅ **I DUE REFERTI DEL PASSO 1: le cinque riscritture sono PROVATE inerti** *(2026-10-03)*
+
+> ### **Luca: il sigillo dell'inerzia dice che NESSUNA ISTRUZIONE e' cambiata — non <<non ho visto differenze>>, ma <<non ci sono differenze>>, per costruzione.**
+
+## ✅ **IL SIGILLO DELL'INERZIA**
+
+| | |
+|---|---|
+| il **«prima»** | ### **`f103989b`**, dal ### **PADRE** del commit che introduce l'ancora *(`3cc1653`)*, in **binario** |
+| l'**ancora** | `~1.2 giri persi per arco` — una frase della documentazione ### **NUOVA**, cioe' ### **il BERSAGLIO** e non il modo in cui e' scritta *(la lezione di `6ab31f7`)* |
+| normalizzati | **138** docstring e **204** argomenti di documentazione, ### **per parte** |
+| ### **gli alberi coincidono?** | ### **SI** |
+| ### **le chiavi `(evento, grandezza)`** | ### **68, le STESSE: zero perse, zero nuove** |
+
+### ➜ **Quindi le cinque derivazioni riscritte sono SOLO documentazione, e non per mia parola:** ### **per qualunque scena, qualunque seme, qualunque flag.**
+
+## ✅ **I TRE CASI, RIGIRATI SUL BLOB NUOVO: gli STESSI tre esiti**
+
+| caso | esito |
+|---|---|
+| **①** | **PASSA** — `RuntimeError` all'import; copia chirurgica di ### **una riga** *(`:1787`)* |
+| **②** | **PASSA** — ### **47 differenze**, `psi` fra loro, **8** eventi di mitosi |
+| **③** | **PASSA** — ### **0** nel vero, e il controllo positivo ### **NOMINA** `phi` dentro `mitosi` `:8279` |
+
+### 📌 **E che siano IDENTICI a quelli di `3e89c3f` su un blob DIVERSO era la cosa da ricontrollare:** se fossero cambiati, le riscritture avrebbero toccato la fisica — e il sigillo dell'inerzia dice che non l'hanno toccata. ### **Due prove indipendenti che dicono la stessa cosa.**
+
+## ✅ **E IL REFERTO DEI TRE CASI ORA PORTA IL LIMITE**
+
+*<<la ricerca gira ### **SOLO** dentro le funzioni che chiamano `nascita()`, e oggi quella e' ### **UNA SOLA: `mitosi`**>>* — nella stampa ### **e nel `json`** *(`caso_3.LIMITE`)*, cosi' chi legge lo zero del caso ③ ### **lo legge col limite davanti.**
+
+## 📋 **PROSSIMO: IL COMMIT 4, e i suoi criteri sono GIA' nel piano**
+
+### **Il veleno `NaN`** — approvato da te il 2026-10-01 nella forma raffinata — piu' i ### **quattro criteri di COPERTURA** che hai aggiunto oggi. ### ➜ **Prima la MISURA, committata prima di girare; poi il codice; poi il sigillo.**
+
+---

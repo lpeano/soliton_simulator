@@ -1,0 +1,39 @@
+{
+ "passa": true,
+ "prima_ref": "3cc16532^ (il PADRE del commit che introduce l'ancora)",
+ "ancora": "~1.2 giri persi per arco",
+ "commit_che_introduce_l_ancora": "3cc165327658c7d5524819b7b195b9f60e707044",
+ "blob_prima": "f103989b5c2cef00fa63da6b630c08d322ab2290",
+ "blob_dopo": "dc10df7fb500d70237864743341511511e30c2d8",
+ "blob_sigillo": "40219579c2b3bc79d4163a5535c86d7ee366a960",
+ "alberi_uguali": true,
+ "docstring_tolti": [
+  138,
+  138
+ ],
+ "argomenti_normalizzati": [
+  204,
+  204
+ ],
+ "chiavi": [
+  68,
+  68
+ ],
+ "chiavi_perse": [],
+ "chiavi_nuove": [],
+ "divergenza": null,
+ "registratori": {
+  "_nascita_regola": [
+   2,
+   3,
+   4
+  ],
+  "_nascita_collocata": [
+   2,
+   3
+  ],
+  "_nascita_non_si_tocca": [
+   2
+  ]
+ }
+}

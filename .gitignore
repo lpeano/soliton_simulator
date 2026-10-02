@@ -57,3 +57,6 @@ csv/_seal_fork/_sigillo_confronto_esteso/_sim_prima_punto_unico.py
 #   di essere copie del simulatore e non lo sono piu' (`SIM-PRIMA-STANTIO`),
 #   per 2.4 MB. ### Il dato E' il comando che le produce.
 csv/_seal_fork/_sigillo_tre_casi/_sim_*.py
+#   E il <<prima>> del sigillo dell'inerzia dei commenti: lo ESTRAE
+#   `sim_prima_del_flag` dal padre del commit, a ogni giro.
+csv/_seal_fork/_sigillo_inerzia_commenti/_sim_prima.py
