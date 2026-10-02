@@ -1006,3 +1006,49 @@ Viene da ### **`_cli_flag.sim_prima_del_flag`**, ancorato al ### **PADRE del com
 **PROSSIMO: il giro vero, quattro bracci. Poi il referto, e il commit 3.**
 
 ---
+
+# ⛔ **IL SIGILLO SI E' RIFIUTATO DI GIRARE, E AVEVA RAGIONE: la mia ancora nominava la FORMULA invece del BERSAGLIO** *(2026-10-02)*
+
+> ### **Luca, il giro a quattro bracci non e' partito. Non ha prodotto un verdetto sbagliato: si e' FERMATO, e il motivo e' un difetto mio.**
+
+Sigillo da **`80863806`** a ### **`8df62ea6`**. ### **Nessuna riga del simulatore:** blob `3d78cfd2` prima e dopo.
+
+## ⛔ **CHE COSA HA DETTO, per intero**
+
+```
+** l'ancora della copia guasta e' presente 0 volte (attesa 1). NON scrivo la copia. **
+```
+
+### **L'ancora era `self._g_peqn_mediana = float(np.median(self.peq))`** — cioe' ### **il MODO in cui il valore si calcola.** E ### **il passo 2 ha cambiato ESATTAMENTE quella riga** *(ora legge la locale `_peqn_med_pre`)*. ### ➜ **Quindi l'ancora non c'era piu'.**
+
+## ✅ **IL PRESIDIO HA FUNZIONATO, e va detto per primo**
+
+Il sigillo ### **non ha scritto una copia non guasta** e ### **non ha consegnato un verdetto**: si e' fermato con l'assertazione dell'ancora *(`P1-quater`: si conta l'ancora e si FALLISCE se non e' unica)*.
+### 📌 **Se non l'avessi messa, la copia sarebbe stata IDENTICA all'originale**, il braccio `B` avrebbe trovato ### **ZERO differenze**, e ### **avrei letto quello zero come «la regola nuova non vede l'ulp»** — cioe' avrei concluso ### **il contrario del vero.** ### **Un quarto falso zero, evitato da un'assertazione.**
+
+## ⛔ **MA L'ANCORA ERA FRAGILE PER COSTRUZIONE, e questo e' il difetto mio**
+
+| | |
+|---|---|
+| che cosa **nominava** | ### **la FORMULA**: `= float(np.median(self.peq))` |
+| che cosa il sigillo **perturba** | ### **il VALORE MEMORIZZATO** in `self._g_peqn_mediana` |
+| ### ➜ **lo scarto** | ### **nominava il MODO invece del BERSAGLIO** — e un modo cambia, un bersaglio no |
+
+### ✅ **LA CURA: l'ancora e' l'ASSEGNAZIONE**, `self._g_peqn_mediana = _peqn_med_pre`, e la copia guasta avvolge ### **il membro destro qualunque sia**: `float(np.nextafter(_peqn_med_pre, np.inf))`.
+### ➜ **Cosi' sopravvive a un cambio di come il valore si calcola** — che e' esattamente cio' che e' appena successo.
+*(E `np.nextafter(nan, inf)` resta `nan`: col gate falso la copia e' inerte, come l'originale.)*
+
+## ⚠ **E UNA CONSEGUENZA SUL REFERTO DI PRIMA, che dichiaro**
+
+Il referto di **`81b0c24`** e' stato prodotto sul simulatore ### **`3ddc56d9`**, e il suo `json` lo porta scritto *(`blob_sim_sha1_byte`)*. ### **Sul simulatore di ora (`3d78cfd2`) quel sigillo, come era committato allora, SI RIFIUTEREBBE di girare.**
+### ➜ **Non e' un referto sbagliato: e' il referto di un BLOB PRECISO**, e si legge con quel blob davanti — ### **che e' la ragione per cui il blob sta nel `json` e non solo nel messaggio di commit.**
+### ✅ **E il giro che segue lo SOSTITUISCE**, su `3d78cfd2`, con ### **quattro bracci invece di tre.**
+
+## 📌 **E LA FAMIGLIA DELL'ERRORE E' GIA' NEL REPO, col suo nome**
+
+### **E' `ANCORE-1`** — *25 sigilli che prendevano «il codice di prima» da `HEAD` e diventavano VUOTI appena la cura era committata.* ### **Qui non e' il «prima» a essere scaduto: e' l'ANCORA DELL'INIEZIONE** — e la forma e' la stessa: ### **un sigillo che si svuota perche' il codice sotto si e' mosso.**
+### ⚠ **E la lezione operativa sta in una riga:** ### **un'ancora d'iniezione nomina CIO' CHE SI PERTURBA, non come lo si calcola.**
+
+**PROSSIMO: il giro vero, quattro bracci, sul simulatore `3d78cfd2`.**
+
+---

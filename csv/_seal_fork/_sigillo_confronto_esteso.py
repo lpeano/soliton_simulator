@@ -72,8 +72,17 @@ NL = chr(10)
 SIM = os.path.join(RADICE, "soliton_simulator.py")
 FUORI = os.path.join(RADICE, "csv", "_seal_fork", "_sigillo_confronto_esteso")
 # L'ANCORA della copia guasta: si cerca per TESTO e si asserisce UNICA (`P1-quater`).
-ANCORA = "self._g_peqn_mediana = float(np.median(self.peq))"
-GUASTA = "self._g_peqn_mediana = float(np.nextafter(np.median(self.peq), np.inf))"
+# ⚠ L'ANCORA E' L'ASSEGNAZIONE, NON LA FORMULA, e la ragione e' un difetto PRESO DAL VIVO:
+#   la prima stesura ancorava a `self._g_peqn_mediana = float(np.median(self.peq))` -- cioe' al
+#   MODO in cui il valore si calcola. Il passo 2 della via (b) ha cambiato ESATTAMENTE quella
+#   riga, e il sigillo si e' RIFIUTATO di girare: ancora presente ZERO volte.
+#   ### IL PRESIDIO HA FUNZIONATO (si e' fermato invece di scrivere una copia non guasta), MA
+#   ### L'ANCORA ERA FRAGILE PER COSTRUZIONE: nominava la formula invece del BERSAGLIO.
+#   ➜ Ora nomina l'ASSEGNAZIONE a `self._g_peqn_mediana`, qualunque sia il suo membro destro:
+#   e' CIO' CHE IL SIGILLO PERTURBA, e sopravvive a un cambio di come il valore si calcola.
+#   *(`np.nextafter(nan, inf)` resta `nan`: col gate falso la copia e' inerte, come l'originale.)*
+ANCORA = "self._g_peqn_mediana = _peqn_med_pre"
+GUASTA = "self._g_peqn_mediana = float(np.nextafter(_peqn_med_pre, np.inf))"
 
 
 def blob(p):
