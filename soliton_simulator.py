@@ -1283,7 +1283,15 @@ REGISTRO_DERIVATE = (
      "codice lo dichiara al sito di lettura. ### ESENTE DAL VELENO: la guardia "
      "`len(_xi) < n` al :5031 E IL SUO SEGNALE, e il commento dichiara che quello e "
      "IL PERCORSO NORMALE della mitosi -- estenderla farebbe nascere i nodi nuovi con "
-     "NaN invece di un campione fresco (99 letture sporche misurate)"),
+     "NaN invece di un campione fresco (99 letture sporche misurate). "
+     "### ⚠ MA OGGI NON E L ESENZIONE A PROTEGGERLA, ED E UNA MEZZA VERITA CHE "
+     "CORREGGO: `_xi_rumore` ha shape (12802, 3), cioe DUE ASSI, quindi il ramo "
+     "`multiasse` di `_avvelena_derivate` la salterebbe COMUNQUE -- e il braccio `B` "
+     "del sigillo l ha MISURATO, perche togliendole l esenzione NON CAMBIAVA NIENTE e "
+     "il contatore `_g_veleno_multiasse` e comparso. L esenzione resta GIUSTA come "
+     "DICHIARAZIONE D INTENTO (morderebbe se un domani diventasse 1-D), ma dire che e "
+     "lei a proteggerla OGGI era falso. E per questo il braccio `B` e ancorato a "
+     "`_g_rampa_prec`, che e (12802,) 1-D e quindi DAVVERO avvelenabile"),
     ("_dt_e_ultimo", "arco", "avvelena", "la legge la trova GIA RISCRITTA (step)"),
     ("_sin2_vir", "arco", "avvelena",
      "la legge la trova GIA RISCRITTA (memoria_hebbiana_moto), che la riscrive INTERA "

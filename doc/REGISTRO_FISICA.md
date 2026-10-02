@@ -1543,6 +1543,19 @@ la rilevazione dell'oggetto riscritto gira davvero)*, e le due esenti restano ##
 
 ---
 
+## ⛔ **E UNA MEZZA VERITA' DI QUESTA SCHEDA, CORRETTA DAL SIGILLO** *(2026-10-03)*
+
+La tabella delle due esenti diceva che l'esenzione protegge `_xi_rumore` dal veleno.
+### ⚠ **Oggi NON e' lei a proteggerla:** `_xi_rumore` ha shape ### **`(12802, 3)`** — ### **DUE ASSI** — quindi il ramo `multiasse` di `_avvelena_derivate` ### **la salterebbe COMUNQUE.**
+
+### ✅ **E L'HA MISURATO IL BRACCIO `B` DEL SIGILLO**, al primo giro: togliendole l'esenzione ### **non cambiava niente**, e il contatore ### **`_g_veleno_multiasse`** e' comparso. ### **Un ramo CONTATO invece di taciuto e' la ragione per cui questo si e' visto** — e l'avevo scritto *<<per prudenza, con ZERO casi oggi>>*: ### **ne aveva uno.**
+
+### 📌 **L'esenzione resta GIUSTA come DICHIARAZIONE D'INTENTO** *(morderebbe se un domani `_xi_rumore` diventasse 1-D)*, ### **ma dire che e' lei a proteggerla oggi era falso.** ### ➜ **E per questo il braccio `B` e' ancorato a `_g_rampa_prec`**, che e' `(12802,)` 1-D e quindi ### **davvero avvelenabile.**
+
+### ⚠ **E LA MIA DICHIARAZIONE <<tutte e dieci sono 1-D>> ERA SBAGLIATA:** il piano diceva *<<tutte e 10 sono `float64`>>*, e io ho letto ### **1-D.** ### **Nove su dieci lo sono.**
+
+---
+
 ## ### ⛔ **IL LIMITE CHE IL PRIMO COLLAUDO HA TROVATO: `VELENO-DOMINI`**
 
 Il veleno ### **fa cadere il run al passo 42**, alla ### **prima mitosi**:

@@ -52,9 +52,33 @@ NL = chr(10)
 #   `6ab31f7`, dove un'ancora nominava la FORMULA e si e' rotta appena la formula
 #   e' cambiata.
 ANCORA = "_avvelena_derivate(net)"
-# il caso che DEVE fallire: si toglie l'esenzione a `_xi_rumore`.
-ESENZIONE = '("_xi_rumore", "nodo", "auto-rinfresco",'
-SENZA_ESENZIONE = '("_xi_rumore", "nodo", "avvelena",'
+# ### I CONTATORI DEL PRESIDIO, e si SEPARANO PER NOME e si RIPORTANO -- non si
+#   escludono in silenzio. Il piano lo prescriveva e il primo giro non l'ha fatto:
+#   *<<i contatori della MARCA sono <<del presidio>> e cambiano PER COSTRUZIONE: si
+#   separano per NOME e si RIPORTANO, come gia' fatto per `_g_registro_*`>>*.
+#   ### Nel simulatore di PRIMA questi nomi NON ESISTONO, quindi compaiono come
+#   <<presente in UNO solo>> -- cinque in tutte e tre le scene, ed e' per questo che
+#   il braccio `A` falliva.
+#   ### \u26a0 E SI RIPORTANO, NON SI NASCONDONO: il referto li elenca a parte, e se
+#   una differenza NON corrisponde a questi prefissi allora e' una differenza VERA
+#   dello stato. Escluderli senza dirlo sarebbe indebolire il criterio.
+PREFISSI_CONTATORI_VELENO = ("_g_veleno_", "_g_inv_veleno_")
+# il caso che DEVE fallire: si toglie l'esenzione a `_g_rampa_prec`.
+# ### E NON A `_xi_rumore`, e il motivo e' MISURATO: `_xi_rumore` ha shape (12802, 3),
+#   cioe' DUE ASSI, quindi ### il ramo `multiasse` del veleno la salterebbe COMUNQUE --
+#   e togliere la sua esenzione NON CAMBIEREBBE NIENTE. Il primo giro l'ha fatto, e il
+#   braccio ha detto PASSA per DUE CONTATORI DEL VELENO: un caso che non discrimina.
+#   ### `_g_rampa_prec` invece e' (12802,) 1-D float64, cioe' DAVVERO avvelenabile.
+#   *(Il mandato diceva <<togli l'esenzione a UNA DELLE DUE>>.)*
+# ### E L'EFFETTO ATTESO NON E' UNA CADUTA, e va previsto PRIMA: `_g_rampa_prec` e' la
+#   SOLA derivata che NON sta in `DOMINI`, quindi il controllo di dominio non la guarda.
+#   Avvelenarla rende VERA la guardia `len(_prec) == len(ramp)` al :5704, quindi
+#   `ramp < _prec` confronta con `nan` e da' ### False IN SILENZIO -- e i contatori
+#   diagnostici `_g_rampa_cali`, `_g_rampa_calo_somma`, `_g_rampa_calo_max` ### SMETTONO
+#   DI SALIRE. ### Quella e' la differenza che il braccio deve vedere, e NON e' un
+#   contatore del veleno: e' un contatore della DIAGNOSTICA, cioe' stato vero.
+ESENZIONE = '("_g_rampa_prec", "nodo", "auto-rinfresco",'
+SENZA_ESENZIONE = '("_g_rampa_prec", "nodo", "avvelena",'
 # ### IL BRACCIO `E`: una legge scrive UNA CELLA AVVELENATA senza riscrivere l'array.
 #   L'iniezione e' IN POSTO, quindi ### CONSERVA L'IDENTITA' dell'oggetto -- cioe' il
 #   registro del veleno resta ### VIVO, ed e' esattamente il caso che l'esenzione per
@@ -195,7 +219,11 @@ def principale():
         der = {d[0] for d in derivate_di(SA)}
         stato_a = {k: v for k, v in fa.items() if k not in der}
         stato_b = {k: v for k, v in fb.items() if k not in der}
-        d_stato = CN.confronta(stato_a, stato_b)
+        _tutte = CN.confronta(stato_a, stato_b)
+        # ### SI SEPARANO PER NOME E SI RIPORTANO (il piano lo prescriveva).
+        d_presidio = [x for x in _tutte
+                      if str(x.get("nome", "")).startswith(PREFISSI_CONTATORI_VELENO)]
+        d_stato = [x for x in _tutte if x not in d_presidio]
         d_der = CN.confronta({k: v for k, v in fa.items() if k in der},
                              {k: v for k, v in fb.items() if k in der})
         ev = (int(getattr(nA, "_g_nati_mitosi_ev", 0)),
@@ -205,15 +233,30 @@ def principale():
         stampa("      ### differenze sullo STATO ..... %d   (atteso 0)" % len(d_stato))
         for x in d_stato[:10]:
             stampa("          ### %s" % json.dumps(x, ensure_ascii=False, default=str)[:220])
-        stampa("      differenze sulle DERIVATE ...... %d   (atteso > 0: il veleno AGISCE)"
+        stampa("      contatori DEL PRESIDIO, separati e RIPORTATI: %d" % len(d_presidio))
+        for x in d_presidio:
+            stampa("          %s" % json.dumps(x, ensure_ascii=False, default=str)[:160])
+        stampa("          *(cambiano PER COSTRUZIONE: nel simulatore di PRIMA questi nomi")
+        stampa("            non esistono. Si RIPORTANO, non si nascondono -- e se una")
+        stampa("            differenza non avesse questi prefissi sarebbe STATO VERO.)*")
+        stampa("      differenze sulle DERIVATE ...... %d   (informazione, NON un criterio)"
                % len(d_der))
+        stampa("          *(il primo giro CHIEDEVA che fossero > 0, ed era SBAGLIATO: nella")
+        stampa("            scena `altro_seme` sono ZERO perche' le leggi avevano riscritto")
+        stampa("            TUTTE le celle avvelenate prima della fine del run. Un controllo")
+        stampa("            che puo' fallire senza che ci sia un difetto NON e' un controllo.)*")
         stampa("      veleno: voci %s, celle %s, esenti %s, gia' lunghe %s"
                % tuple(getattr(nA, c, 0) for c in
                        ("_g_veleno_voci", "_g_veleno_celle", "_g_veleno_esenti",
                         "_g_veleno_gia_lunga")))
         if not ev[0]:
             stampa("      ### NESSUNA MITOSI: zero differenze NON significa niente. NON MISURATO.")
-        ok = (not d_stato) and bool(d_der) and bool(ev[0])
+        # ### IL CONTROLLO POSITIVO E' UN CONTATORE, non cio' che resta alla fine:
+        #   `_g_veleno_celle > 0` dice che il veleno HA AGITO, e non dipende da quante
+        #   celle le leggi hanno riscritto prima della fine del run.
+        _celle = int(getattr(nA, "_g_veleno_celle", 0))
+        stampa("      ### IL CONTROLLO POSITIVO: celle avvelenate = %d   (atteso > 0)" % _celle)
+        ok = (not d_stato) and bool(_celle) and bool(ev[0])
         A_ok = A_ok and ok
         # ---------- BRACCIO C, sulla stessa foto: le due esenti NON avvelenate ----------
         esenti = [d[0] for d in derivate_di(SA) if d[2] == "auto-rinfresco"]
@@ -236,7 +279,10 @@ def principale():
                                            json.dumps(x, ensure_ascii=False)[:150]))
         ref["scene"].append({"etichetta": etichetta, "seme": seme, "passi": passi,
                              "nascite": list(ev), "diff_stato": d_stato,
-                             "n_diff_derivate": len(d_der), "esenti": righe_c,
+                             "n_diff_derivate": len(d_der),
+                             "contatori_del_presidio": d_presidio,
+                             "celle_avvelenate": int(getattr(nA, "_g_veleno_celle", 0)),
+                             "esenti": righe_c,
                              "veleno": {c: getattr(nA, c, 0) for c in
                                         ("_g_veleno_voci", "_g_veleno_celle",
                                          "_g_veleno_esenti", "_g_veleno_gia_lunga",
@@ -252,10 +298,19 @@ def principale():
     stampa("=" * 104)
     stampa("BRACCIO B -- IL CASO CHE DEVE FALLIRE: si toglie l'esenzione a `_xi_rumore`")
     stampa("=" * 104)
-    stampa("  Il registro dichiara `_xi_rumore` AUTO-RINFRESCO perche' la guardia")
-    stampa("  `if _xi is None or len(_xi) < n:` (:5031) E' IL SUO SEGNALE, e il commento")
-    stampa("  dichiara che quello e' IL PERCORSO NORMALE della mitosi. Togliere l'esenzione")
-    stampa("  deve ROMPERE il run, e il sigillo deve dire DOVE.")
+    stampa("  Il registro dichiara `_g_rampa_prec` AUTO-RINFRESCO perche' la guardia")
+    stampa("  `if _prec is not None and len(_prec) == len(ramp):` (:5704) E' IL SUO SEGNALE.")
+    stampa("  ### E NON USO `_xi_rumore`, e il motivo e' MISURATO: ha shape (12802, 3), cioe'")
+    stampa("  ### DUE ASSI, quindi il ramo `multiasse` del veleno la salterebbe COMUNQUE --")
+    stampa("  ### togliere la sua esenzione NON CAMBIEREBBE NIENTE. Il primo giro l'ha fatto,")
+    stampa("  ### e il braccio ha detto PASSA per DUE CONTATORI DEL VELENO.")
+    stampa("  ### E L'EFFETTO ATTESO NON E' UNA CADUTA, e lo prevedo PRIMA: `_g_rampa_prec` e'")
+    stampa("  ### la SOLA derivata che NON sta in DOMINI, quindi il controllo di dominio non")
+    stampa("  ### la guarda. Avvelenarla rende VERA la guardia, quindi `ramp < _prec` confronta")
+    stampa("  ### con `nan` e da' False IN SILENZIO: i contatori `_g_rampa_cali`,")
+    stampa("  ### `_g_rampa_calo_somma`, `_g_rampa_calo_max` SMETTONO DI SALIRE. ### Quella e'")
+    stampa("  ### la differenza che questo braccio deve vedere, e NON e' un contatore del")
+    stampa("  ### veleno: e' un contatore della DIAGNOSTICA, cioe' STATO VERO.")
     dest_b = os.path.join(FUORI, "_sim_senza_esenzione.py")
     B_ok, caduto_b2 = None, None
     try:
@@ -281,20 +336,35 @@ def principale():
             der2 = {d[0] for d in derivate_di(SA2)}
             d2 = CN.confronta({k: v for k, v in fa2.items() if k not in der2},
                               {k: v for k, v in fc.items() if k not in der2})
-            xi = np.asarray(getattr(nC, "_xi_rumore", []))
-            nonf = int(np.sum(~np.isfinite(xi))) if xi.size and xi.dtype.kind == "f" else 0
+            gp = np.asarray(getattr(nC, "_g_rampa_prec", []))
+            nonf = int(np.sum(~np.isfinite(gp))) if gp.size and gp.dtype.kind == "f" else 0
+            # ### E I CONTATORI DEL VELENO NON CONTANO COME DIFFERENZA, ed e' il difetto
+            #   che ha fatto passare questo braccio al primo giro: si separano, si
+            #   RIPORTANO, e il criterio guarda SOLO il resto.
+            d2_pres = [x for x in d2
+                       if str(x.get("nome", "")).startswith(PREFISSI_CONTATORI_VELENO)]
+            d2_vere = [x for x in d2 if x not in d2_pres]
             stampa("  il run NON e' caduto. Allora la differenza deve essere MISURABILE:")
-            stampa("      ### `_xi_rumore` non finiti: %d   (len %d, n %d)"
-                   % (nonf, len(xi), nC.n))
-            stampa("      ### differenze sullo STATO contro il simulatore sano: %d" % len(d2))
-            for x in d2[:8]:
+            stampa("      ### `_g_rampa_prec` non finiti: %d   (len %d, n %d)"
+                   % (nonf, len(gp), nC.n))
+            stampa("      contatori DEL VELENO (separati, NON contano): %d" % len(d2_pres))
+            for x in d2_pres:
+                stampa("          %s" % json.dumps(x, ensure_ascii=False, default=str)[:160])
+            stampa("      ### differenze VERE sullo stato: %d" % len(d2_vere))
+            for x in d2_vere[:12]:
                 stampa("          ### %s" % json.dumps(x, ensure_ascii=False, default=str)[:200])
-            B_ok = bool(nonf) or bool(d2)
+            B_ok = bool(nonf) or bool(d2_vere)
+            if not B_ok:
+                stampa("  ### NE' CADUTO NE' DIVERSO (a parte i contatori del veleno):")
+                stampa("  ###   togliere l'esenzione NON CAMBIA NIENTE, quindi l'esenzione")
+                stampa("  ###   NON E' GIUSTIFICATA dal sigillo -- e questo e' un difetto")
+                stampa("  ###   del DISEGNO, non del run.")
             if not B_ok:
                 stampa("  ### ⛔ NE' CADUTO NE' DIVERSO: togliere l'esenzione non cambia")
                 stampa("  ###   NIENTE, quindi l'esenzione NON E' GIUSTIFICATA dal sigillo")
                 stampa("  ###   -- e questo e' un difetto del disegno, non del run.")
-            caduto_b2 = {"caduto": False, "non_finiti_xi": nonf, "diff_stato": d2}
+            caduto_b2 = {"caduto": False, "non_finiti_g_rampa_prec": nonf,
+                         "contatori_del_veleno": d2_pres, "diff_vere": d2_vere}
     except SystemExit as e:
         stampa("  ### BRACCIO B NON ESEGUIBILE: %s" % e)
         B_ok = False
