@@ -182,6 +182,112 @@ def e_pura_estensione(nodo, attr):
     return False
 
 
+def indici_stantii(albero, funzioni):
+    """**LETTURE A INDICE STANTIO: un `x[idx]` DOPO che `x` e' stato RIFILTRATO.**
+
+    ### ⛔ **NON e' una domanda sulla MOVIBILITA': e' un DIFETTO GIA' PRESENTE.**
+    Una riscrittura come `self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])`
+    ### **FILTRA con `keep`**: dopo quella riga ### **lo stesso indice punta a UN'ALTRA VOCE.**
+    Una lettura `self.peq[sel]` che venga **dopo** legge ### **gli archi sbagliati, in silenzio** --
+    e in silenzio perche' l'array e' **piu' lungo**, quindi ### **l'indice resta VALIDO** e nessuna
+    eccezione scatta.
+
+    ### ⭐ **LA REGOLA, dichiarata perche' il verdetto dipende da lei**
+
+    | | |
+    |---|---|
+    | una **riscrittura con FILTRO** | `self.x = <concat>([... ])` in cui il pezzo che porta il
+      vecchio contenuto e' ### **`self.x[M]` INDICIZZATO** e non `self.x` nudo. ### **Una PURA
+      ESTENSIONE non conta**, perche' non sposta gli indici preesistenti |
+    | un **indice STANTIO** | un `Name` ### **assegnato PRIMA** della riscrittura e ### **NON
+      riassegnato** fra la riscrittura e la lettura |
+    | ### **il reperto** | una lettura o scrittura ### **`self.x[idx]` DOPO** la riscrittura, con
+      `idx` stantio |
+
+    ### ⚠ **E IL LIMITE, dichiarato:** un indice **ricalcolato** fra le due righe non e'
+    stantio, e la regola lo vede *(si guarda la RIASSEGNAZIONE)*. Ma ### **un indice passato a una
+    FUNZIONE che lo rimappa non si vede**: l'analisi e' locale alla funzione.
+    """
+    fuori = []
+    for n in ast.walk(albero):
+        if not (isinstance(n, ast.FunctionDef) and n.name in funzioni):
+            continue
+        # tutte le assegnazioni di Name, con la riga
+        assegnati = {}
+        for x in ast.walk(n):
+            if isinstance(x, (ast.Assign, ast.AugAssign)):
+                mire = x.targets if isinstance(x, ast.Assign) else [x.target]
+                for m in mire:
+                    for y in ([m] if not isinstance(m, (ast.Tuple, ast.List)) else m.elts):
+                        if isinstance(y, ast.Name):
+                            assegnati.setdefault(y.id, []).append(x.lineno)
+            elif isinstance(x, ast.For):
+                for y in ast.walk(x.target):
+                    if isinstance(y, ast.Name):
+                        assegnati.setdefault(y.id, []).append(x.lineno)
+        # le riscritture CON FILTRO, per attributo
+        filtri = []
+        for x in ast.walk(n):
+            if not isinstance(x, ast.Assign) or len(x.targets) != 1:
+                continue
+            m = x.targets[0]
+            if not (isinstance(m, ast.Attribute) and isinstance(m.value, ast.Name)
+                    and m.value.id == "self"):
+                continue
+            attr = m.attr
+            if e_pura_estensione(x, attr):
+                continue
+            # il pezzo vecchio e' `self.attr[M]` indicizzato?
+            maschera = None
+            for y in ast.walk(x.value):
+                if (isinstance(y, ast.Subscript) and isinstance(y.value, ast.Attribute)
+                        and isinstance(y.value.value, ast.Name)
+                        and y.value.value.id == "self" and y.value.attr == attr
+                        and isinstance(y.slice, ast.Name)):
+                    maschera = y.slice.id
+                    break
+            if maschera is not None:
+                filtri.append({"attr": attr, "riga": x.lineno, "maschera": maschera,
+                               "testo": ast.unparse(x)[:110]})
+        # le letture/scritture `self.attr[idx]` DOPO una riscrittura con filtro
+        for f in filtri:
+            for y in ast.walk(n):
+                if not (isinstance(y, ast.Subscript) and isinstance(y.value, ast.Attribute)
+                        and isinstance(y.value.value, ast.Name)
+                        and y.value.value.id == "self" and y.value.attr == f["attr"]):
+                    continue
+                if y.lineno <= f["riga"]:
+                    continue
+                if not isinstance(y.slice, ast.Name):
+                    continue
+                idx = y.slice.id
+                righe_idx = assegnati.get(idx, [])
+                if not righe_idx:
+                    continue
+                prima = [r for r in righe_idx if r < f["riga"]]
+                fra = [r for r in righe_idx if f["riga"] < r <= y.lineno]
+                if prima and not fra:
+                    istr = next((z for z in ast.walk(n)
+                                 if isinstance(z, (ast.Assign, ast.AugAssign, ast.Expr))
+                                 and z.lineno == y.lineno), None)
+                    fuori.append({"funzione": n.name, "attr": f["attr"],
+                                  "riscrittura_riga": f["riga"], "maschera": f["maschera"],
+                                  "riscrittura": f["testo"],
+                                  "lettura_riga": y.lineno,
+                                  "indice": idx, "indice_assegnato_a": prima,
+                                  "lettura": (ast.unparse(istr)[:110] if istr
+                                              else ast.unparse(y)[:110]),
+                                  "gate": gate_di(n.body, istr) if istr else []})
+    # si deduplica per (riga di lettura, attributo, indice)
+    visti, puliti = set(), []
+    for q in fuori:
+        k = (q["lettura_riga"], q["attr"], q["indice"])
+        if k not in visti:
+            visti.add(k)
+            puliti.append(q)
+    return sorted(puliti, key=lambda z: z["lettura_riga"])
+
+
 def chiamate_di_servizio(nodo):
     return sorted({x.func.attr for x in ast.walk(nodo)
                    if isinstance(x, ast.Call) and isinstance(x.func, ast.Attribute)
@@ -444,6 +550,40 @@ def principale():
     for q in gen:
         stampa("      ### :%-6d %s" % (q["riga"], q["testo"][:84]))
     stampa("")
+    # --- (5) LE LETTURE A INDICE STANTIO: un DIFETTO, non una domanda sulla movibilita' ---------
+    stampa("=" * 104)
+    stampa("(5) LETTURE A INDICE STANTIO -- `x[idx]` DOPO che `x` e' stato RIFILTRATO")
+    stampa("=" * 104)
+    stampa("    Non e' una domanda sulla MOVIBILITA': e' un DIFETTO GIA' PRESENTE. Dopo una")
+    stampa("    riscrittura con filtro, lo stesso indice punta a UN'ALTRA VOCE -- e in silenzio,")
+    stampa("    perche' l'array e' PIU' LUNGO e l'indice resta VALIDO.")
+    stantii = indici_stantii(t, ("mitosi", "semina", "_allaccia", "_eredita_psi_figli",
+                                 "_eredita_spinore_figli"))
+    for q in stantii:
+        g, perche = gira(q["gate"])
+        q["gira_col_driver"] = g
+        q["perche_gate"] = perche
+    stampa("")
+    stampa("  ### TROVATE: %d" % len(stantii))
+    for q in stantii:
+        stampa("")
+        stampa("  ### :%d  `%s`  <- legge `%s[%s]` con l'indice STANTIO"
+               % (q["lettura_riga"], q["lettura"][:80], q["attr"], q["indice"]))
+        stampa("          la riscrittura CON FILTRO e' a :%d, maschera `%s`:"
+               % (q["riscrittura_riga"], q["maschera"]))
+        stampa("            %s" % q["riscrittura"])
+        stampa("          l'indice `%s` e' assegnato a :%s e NON riassegnato in mezzo"
+               % (q["indice"], ",".join(str(x) for x in q["indice_assegnato_a"])))
+        if q["gate"]:
+            stampa("          gate: %s" % "  AND  ".join(q["gate"])[:88])
+        stampa("          ### GIRA col driver: %s   (%s)"
+               % ("SI" if q["gira_col_driver"] else "NO", q["perche_gate"][:50]))
+    vivi = [q for q in stantii if q["gira_col_driver"]]
+    if stantii:
+        stampa("")
+        stampa("  ### di cui GIRANO col driver: %d   -> %s" % (len(vivi),
+               "DIFETTO ATTIVO" if vivi else "difetti LATENTI, in rami spenti"))
+    stampa("")
     stampa("=" * 104)
     if gen:
         stampa("### IL VERDETTO: UN BLOCCO CONTIGUO RICHIEDE DI RIORDINARE.  ### STOP.")
@@ -480,6 +620,8 @@ def principale():
            "non_scritture_fra": len(fra),
            "legate_in_mezzo": legate,
            "legate_che_girano": [q["riga"] for q in girano],
+           "letture_a_indice_stantio": stantii,
+           "indici_stantii_che_girano": [q["lettura_riga"] for q in vivi],
            "legate_GENUINE_che_girano": [{"riga": q["riga"], "testo": q["testo"]} for q in gen],
            "verdetto": ("STOP: un blocco contiguo richiede di RIORDINARE" if gen
                         else ("nessuna dipendenza GENUINA che giri col driver" if legate

@@ -1,6 +1,6 @@
 {
  "blob_sim_sha1_byte": "3ddc56d947d91069c89ae476f89afcadcb1ae4e6",
- "blob_strumento": "be5c8133c1352ede8dea4bf50986c3f2ec55e4b6",
+ "blob_strumento": "2f2fc2295429e27cf571860a2ce46dfb6af2fa5b",
  "mitosi": {
   "riga_da": 7277,
   "riga_a": 7564
@@ -355,6 +355,28 @@
   7501,
   7505
  ],
+ "letture_a_indice_stantio": [
+  {
+   "funzione": "mitosi",
+   "attr": "peq",
+   "riscrittura_riga": 7433,
+   "maschera": "keep",
+   "riscrittura": "self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])",
+   "lettura_riga": 7472,
+   "indice": "sel",
+   "indice_assegnato_a": [
+    7287
+   ],
+   "lettura": "peq_sel = self.peq[sel]",
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "COPPIA_DENSITA"
+   ],
+   "gira_col_driver": false,
+   "perche_gate": "COPPIA_DENSITA = False"
+  }
+ ],
+ "indici_stantii_che_girano": [],
  "legate_GENUINE_che_girano": [
   {
    "riga": 7494,

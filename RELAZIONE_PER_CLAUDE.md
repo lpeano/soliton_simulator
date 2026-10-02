@@ -769,3 +769,52 @@ Il mio task history fissa come ### **punto di STOP numero ④**: *«il punto uni
 ### 🛑 **MI FERMO QUI.** Il punto di STOP ④ e' quello che il task history ha fissato **prima** di cominciare, ### **e scattava proprio per non farmi riordinare le scritture credendo di spostarle.**
 
 ---
+
+# ⛔ **UN DIFETTO LATENTE NEL SIMULATORE: `mitosi` legge `peq` AGLI ARCHI SBAGLIATI, in silenzio** *(2026-10-02)*
+
+> ### **Luca, il rilievo del guardiano e' giusto, e il mio strumento aveva trovato LA RIGA ma non IL DIFETTO: la segnalava come «non spostabile», non come «lettura gia' sbagliata».**
+
+Strumento da **`be5c8133`** a ### **`2f2fc229`**. ### **Nessuna riga del simulatore:** blob `3ddc56d9` prima e dopo. **Voce: `PEQ-SEL-STANTIO`.**
+
+## ⛔ **IL DIFETTO, in tre righe**
+
+```
+:7287   sel = ...                                                                  <- l'indice
+:7433   self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])   <- RIFILTRA
+:7472   peq_sel = self.peq[sel]        # dentro `if COPPIA_DENSITA:`                <- STANTIO
+```
+
+### ➜ **Dopo `:7433` lo stesso indice punta a UN'ALTRA VOCE**, perche' `keep` ha **tolto** gli archi spezzati. ### **E lo fa IN SILENZIO**, e la ragione e' precisa: l'array e' ### **PIU' LUNGO** *(`m − len(sel) + 2·len(sel) = m + len(sel)`)*, quindi ### **l'indice resta VALIDO** — nessuna eccezione, nessun `NaN`, nessuna lunghezza fuori posto.
+### ✅ **OGGI NON GIRA:** il gate e' `COPPIA_MIT > 0.0 AND COPPIA_DENSITA`, e ### **`COPPIA_DENSITA = False`** sia come default di modulo *(`:1714`)* sia **dal runtime** con l'argv del driver. ### **E' un difetto LATENTE.**
+
+## ✅ **IL CASO CHE DEVE FALLIRE: lo strumento l'ha trovato DA SOLO**
+
+Come chiedi, l'ho usato come ### **caso che deve fallire del mio stesso strumento**, e il rilevatore nuovo lo trova ### **per quello che e'**:
+
+```
+### TROVATE: 1
+### :7472  `peq_sel = self.peq[sel]`  <- legge `peq[sel]` con l'indice STANTIO
+        la riscrittura CON FILTRO e' a :7433, maschera `keep`
+        l'indice `sel` e' assegnato a :7287 e NON riassegnato in mezzo
+        gate: COPPIA_MIT > 0.0  AND  COPPIA_DENSITA
+        ### GIRA col driver: NO   (COPPIA_DENSITA = False)
+```
+
+### ⚠ **E la differenza fra i due criteri non e' cosmetica:** il criterio vecchio chiedeva *«questa istruzione si puo' spostare?»*; ### **il nuovo chiede «questa lettura e' GIA' sbagliata?»** — e sono due domande diverse che cadono sulla stessa riga per ragioni diverse.
+### ⭐ **LA REGOLA E' DICHIARATA, perche' il verdetto dipende da lei:** una riscrittura e' ### **con FILTRO** se il pezzo che porta il vecchio contenuto e' `self.x[M]` **indicizzato** *(### **una pura estensione non conta**: non sposta gli indici preesistenti)*; e un indice e' ### **STANTIO** se e' assegnato **prima** della riscrittura e ### **non riassegnato in mezzo.**
+### ⚠ **E il LIMITE, dichiarato:** un indice **passato a una funzione che lo rimappa** ### **non si vede** — l'analisi e' locale alla funzione.
+
+## ✅ **E HO CERCATO ALTRI CASI, come chiedi: nel perimetro e' L'UNICO**
+
+Sulle cinque funzioni *(`mitosi`, `semina`, `_allaccia`, i due `_eredita_*`)*: ### **1 trovato, 0 che girano.**
+### ➜ **E la ragione per cui gli altri non ci sono e' strutturale, non fortuna:** le altre riscritture per arco *(`d`, `d0`, `vd`, `_rep`, `tw`, `twp`, `i`, `j`)* sono ### **rifiltrate con `keep` ma NON vengono piu' lette a indice pre-mitosi dopo**; e le grandezze per ### **NODO sono solo ESTESE**, quindi gli indici dei genitori restano validi. ### **Lo dico cosi' perche' «non ce ne sono altri» con una ragione vale, senza una ragione e' una speranza.**
+
+## 📌 **E UNA COSA CHE LA CURA, QUANDO SI FARA', DOVRA' GUARDARE IN FACCIA**
+
+Gli archi di `sel` sono ### **esattamente quelli con `keep` FALSE**: dopo `:7433` ### **non esistono piu' affatto.** ### ➜ **Quindi non c'e' una «rimappatura» dell'indice: c'e' la constatazione che quella lettura NON HA UN SIGNIFICATO dopo la riscrittura.** ### **Che cosa la chiuderebbe: una decisione su che cosa `COPPIA_DENSITA` debba leggere** — il `peq` dell'arco **PADRE** prima dello spezzamento *(e allora la lettura va prima)*, oppure quello dei due archi **FIGLI** *(e allora gli indici sono altri)*. ### **Non la prendo io.**
+
+## ✅ **E NON LA CURO ORA, come hai deciso**
+
+Il commit 3 deve ### **preservare il comportamento dei rami che GIRANO**, e una cura di un ramo spento infilata la' dentro sarebbe ### **un secondo cambiamento nello stesso commit** *(par.5)*. ### **E se il blocco unico spostasse NATURALMENTE quella lettura prima della riscrittura, lo DICHIARO come cura del ramo spento, separata e nominata** — non assorbita in silenzio.
+
+---

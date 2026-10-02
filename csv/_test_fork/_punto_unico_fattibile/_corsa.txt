@@ -2,7 +2,7 @@
 IL PUNTO UNICO DI NASCITA SI PUO' SCRIVERE SENZA RIORDINARE?  (passo 3 del COMMIT 3)
 ========================================================================================================
 simulatore ..... 3ddc56d9
-questo strumento be5c8133
+questo strumento 2f2fc229
 `mitosi` :7277 -> :7564  (288 righe)
 grandezze del registro, DALLE TABELLE del simulatore: 63
   `_eredita_psi_figli` scrive 3 grandezze del registro: psi, psi_spin, rho_spin
@@ -90,6 +90,24 @@ grandezze del registro, DALLE TABELLE del simulatore: 63
       ### :7494   dd = self._nasce(np.maximum(0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1
       ### :7501   pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))
       ### :7505   self._g_peqn_mediana = float(np.median(self.peq))
+
+========================================================================================================
+(5) LETTURE A INDICE STANTIO -- `x[idx]` DOPO che `x` e' stato RIFILTRATO
+========================================================================================================
+    Non e' una domanda sulla MOVIBILITA': e' un DIFETTO GIA' PRESENTE. Dopo una
+    riscrittura con filtro, lo stesso indice punta a UN'ALTRA VOCE -- e in silenzio,
+    perche' l'array e' PIU' LUNGO e l'indice resta VALIDO.
+
+  ### TROVATE: 1
+
+  ### :7472  `peq_sel = self.peq[sel]`  <- legge `peq[sel]` con l'indice STANTIO
+          la riscrittura CON FILTRO e' a :7433, maschera `keep`:
+            self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])
+          l'indice `sel` e' assegnato a :7287 e NON riassegnato in mezzo
+          gate: COPPIA_MIT > 0.0  AND  COPPIA_DENSITA
+          ### GIRA col driver: NO   (COPPIA_DENSITA = False)
+
+  ### di cui GIRANO col driver: 0   -> difetti LATENTI, in rami spenti
 
 ========================================================================================================
 ### IL VERDETTO: UN BLOCCO CONTIGUO RICHIEDE DI RIORDINARE.  ### STOP.
