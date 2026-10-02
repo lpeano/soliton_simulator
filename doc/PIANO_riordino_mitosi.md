@@ -187,7 +187,7 @@ nascita(net, evento, genitori, quante) -> None
 
 | | |
 |---|---|
-| **la tabella** | ### **`REGOLE_nascita.tsv` (32 regole) e' il punto di partenza**, ed e' gia' **verificata per ancora** |
+| **la tabella** | ### **`REGOLE_nascita.tsv` (32 regole) e' il punto di partenza**, ed e' gia' **verificata per ancora**. ### ✅ **E L'ARRIVO, dal 2026-10-02, e' `doc/TABELLA_nascita.md`** — ### **GENERATO** da `csv/_tabella_nascita.py` a partire da `REGOLE_NASCITA` nel simulatore, con ### **72 righe** *(36 grandezze x 2 eventi)*. ### ⚠ **I due documenti NON si fondono, e tenerli separati dice una cosa:** quello a mano era ### **cio' che credevo**, quello generato e' ### **cio' che il codice garantisce** — e se divergono, ### **ha ragione il generato** |
 | ### **i QUATTRO eventi** | `semina` · `divisione` · `Schwinger` · `allaccio` — ### ✅ **APPROVATI DA LUCA il 2026-10-01**, e ### **questa riga E' la registrazione** *(vedi sotto)* |
 | **le regole** | `eredita` · `media` · `zero` · `estrazione nuova` · ### **`eredita INVERTITA`** *(la carica alla Schwinger)* · ### **`derivata dalla definizione`** *(`perc_geom`)* |
 | ### **il presidio** | ### **una grandezza del registro che NON compare nella tabella dell'evento ferma il run**: *«regola di nascita non dichiarata per `<nome>` all'evento `<evento>`»*. ### **E' lo stesso disegno del controllo unico, spostato alla nascita** |

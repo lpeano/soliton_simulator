@@ -1,18 +1,18 @@
-[TIMBRO] _sigillo_confronto_esteso.py  sha1-BYTE 11b4f20e  committato e pulito
+[TIMBRO] _sigillo_confronto_esteso.py  sha1-BYTE b4bf1f7e  committato e pulito
 ========================================================================================================
 SIGILLO DELLA REGOLA DI CONFRONTO ESTESA  (via (b) passo 1, decisione di Luca)
 ========================================================================================================
-simulatore ..... 3d78cfd2
-questo sigillo . 11b4f20e
-regola in ...... csv/_confronto_nascita.py  cf00b8dc
+simulatore ..... f103989b
+questo sigillo . b4bf1f7e
+regola in ...... csv/_confronto_nascita.py  71fd078a
 seme 11   passi 72
 
 ========================================================================================================
 LA COPIA GUASTA: `_g_peqn_mediana` cambiata di UN ULP (`np.nextafter(..., inf)`)
 ========================================================================================================
   file ........... csv/_seal_fork/_sigillo_confronto_esteso/_sim_ulp.py
-  blob ........... 5dfbac76
-  righe DIVERSE .. 1   [7539]
+  blob ........... cdbeeb92
+  righe DIVERSE .. 1   [8346]
   ### CHIRURGICA: SI
 
   braccio A: scena n = 12802, archi = 471564
@@ -63,16 +63,16 @@ BRACCIO A -- LA REGOLA: che cosa confronta, e PERCHE'
   ### scattate nella foto ........... 231
   ### che la regola di OGGI SI PERDE . 24
       ### _cura4_maturi              scritta da semina; letta fuori dal perimetro
-      ### _g_eredpsi_salti           scritta da _eredita_psi_figli; riportata in 10 file tracciati
-      ### _g_eredpsi_shape           scritta da _eredita_psi_figli; riportata in 7 file tracciati
-      ### _g_eredpsis_salti          scritta da _eredita_psi_figli; riportata in 9 file tracciati
-      ### _g_eredrho_salti           scritta da _eredita_psi_figli; riportata in 9 file tracciati
+      ### _g_eredpsi_salti           scritta da _rn_div_psi; riportata in 12 file tracciati
+      ### _g_eredpsi_shape           scritta da _rn_div_psi; riportata in 9 file tracciati
+      ### _g_eredpsis_salti          scritta da _rn_div_psi_spin; riportata in 11 file tracciati
+      ### _g_eredrho_salti           scritta da _rn_div_rho_spin; riportata in 11 file tracciati
       ### _g_m2l_dmin                scritta da decidi_divisione; riportata in 14 file tracciati
-      ### _g_peqn_mediana            scritta da mitosi; riportata in 30 file tracciati
+      ### _g_peqn_mediana            scritta da mitosi; riportata in 32 file tracciati
       ### _g_tors4pi_quando          scritta da decidi_divisione; riportata in 19 file tracciati
       ### _g_tors4pi_salti           scritta da decidi_divisione; riportata in 19 file tracciati
       ### _g_tors4pi_shape           scritta da decidi_divisione; riportata in 19 file tracciati
-      ### _peqn_idx                  scritta da mitosi; riportata in 21 file tracciati
+      ### _peqn_idx                  scritta da _rn_sch_peqn_idx; riportata in 33 file tracciati
       ### _rep_dte_assente           scritta da decidi_divisione; riportata in 23 file tracciati
       ### _rep_dte_fallback          scritta da decidi_divisione; riportata in 28 file tracciati
       ### _rep_guardia_salti         scritta da decidi_divisione; riportata in 27 file tracciati
@@ -84,12 +84,15 @@ BRACCIO A -- LA REGOLA: che cosa confronta, e PERCHE'
       ### masse_info                 scritta da semina; letta fuori dal perimetro
       ### nati                       scritta da mitosi; letta fuori dal perimetro
       ### negate                     scritta da decidi_divisione; letta fuori dal perimetro
-      ### ultima_frac_antifase       scritta da mitosi; riportata in 53 file tracciati
+      ### ultima_frac_antifase       scritta da mitosi; riportata in 55 file tracciati
       ### ultima_prob_coppia         scritta da mitosi; letta fuori dal perimetro
   grandezze dell'insieme MAI apparse: 17   _cura4_maturi, _g_eredpsi_salti, _g_eredpsi_shape, _g_eredpsis_salti, _g_eredrho_salti, _g_tors4pi_quando, _g_tors4pi_salti, _g_tors4pi_shape, _peqn_idx, _rep_dte_assente, _rep_dte_fallback, _rep_guardia_salti, _rep_guardia_shape, _rep_realloc, _smp_d, _smp_d0, ultima_frac_antifase
       (non e' un difetto: una grandezza di un ramo spento non esiste. Si DICE.)
 
   ### LE TRE SCOPERTE DAL CONTRATTO, sono nell'insieme? _g_peqn_mediana=SI  ultima_prob_coppia=SI  ultima_frac_antifase=SI
+  ### NESSUNA GRANDEZZA PERSA rispetto al referto committato?
+      il referto precedente ne elencava 248; ora ne mancano 0
+      ### SI: nessuna. L'insieme non si e' ristretto.
   ### BRACCIO A: PASSA
 
 ========================================================================================================
@@ -125,5 +128,18 @@ BRACCIO D -- LA DIFFERENZA ATTESA: la cura di `PEQ-MEDIANA-ISTANTE`
   ### BRACCIO D: PASSA
 
 ========================================================================================================
-### IL SIGILLO PASSA   (A OK · B OK · C OK · D OK · copia chirurgica OK)
+BRACCIO E -- IL COMMIT 3: il PUNTO UNICO DI NASCITA non cambia un bit
+========================================================================================================
+  il <<prima>> .. csv/_seal_fork/_sigillo_confronto_esteso/_sim_prima_punto_unico.py  blob 3d78cfd2
+      dal PADRE del commit che introduce il punto unico, cioe' di ff62420b^
+      (`H-P8`; e `sim_prima_del_flag` ASSERISCE che l'ancora NON sia nel file)
+  grandezze confrontate: 231 (insieme NUOVO) / 222 (regola di OGGI)
+  con la regola NUOVA ... differenze: 0
+  con la regola di OGGI  differenze: 0
+  eventi di nascita nel run: mitosi 8, Schwinger 1
+
+  ### BRACCIO E: PASSA -- byte-identico su TUTTO
+
+========================================================================================================
+### IL SIGILLO PASSA   (A OK · B OK · C OK · D OK · E OK · copia chirurgica OK)
 ========================================================================================================

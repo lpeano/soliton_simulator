@@ -1356,3 +1356,45 @@ Si ### **INIETTA** `self.phi = np.concatenate([self.phi, fm])` subito dopo la ch
 ### **Oggi NON IMPEDISCE NIENTE**, e lo stampa da se' nel referto. Cablarlo nel `pre-commit` e' una voce di ### **coda**, non una cosa che faccio dentro il commit 3.
 
 ---
+
+# ✅✅ **IL COMMIT 3 PASSA. IL PUNTO UNICO DI NASCITA NON CAMBIA UN BIT** *(2026-10-02)*
+
+> ### **Luca: il sigillo ha CINQUE bracci e passano tutti. Il braccio `E` e' il criterio del commit 3, e dice ZERO — su TUTTO, senza eccezioni.**
+
+*(72 passi, scena grande, seme 11. Simulatore **`f103989b`**, sigillo **`b4bf1f7e`**.)*
+
+## ✅ **BRACCIO `E` — IL COMMIT 3, e il criterio era ZERO SENZA ECCEZIONI**
+
+| | |
+|---|---|
+| il **«prima»** | ### **`3d78cfd2`**, dal ### **PADRE del commit che introduce il punto unico** *(`ff62420b^`)*, estratto **in BINARIO** |
+| grandezze **confrontate** | ### **231** con la regola nuova, **222** con quella di oggi |
+| ### **differenze** | ### **0** con la regola NUOVA · ### **0** con quella di OGGI |
+| ### **e le NASCITE ci sono state** | ### **8 eventi di mitosi, 1 di Schwinger** |
+
+### 📌 **L'ULTIMA RIGA NON E' UN ORNAMENTO, ed e' cablata:** ### **se nel run non ci fossero state nascite, il braccio FALLIREBBE.** *«Zero differenze su zero nascite»* non e' un sigillo, e' un ### **NON MISURATO** — ed e' la voce `FALSO-ZERO`, che oggi ha ### **sette** casi.
+
+## ✅ **BRACCIO `A` — E NESSUNA GRANDEZZA E' PERSA, che era il rischio vero**
+
+| | |
+|---|---|
+| nell'insieme | ### **248** *(contatore 179, registro 45, scritta-nella-nascita 24)* |
+| scattate nel run | **231** |
+| ### **PERSE rispetto al referto committato** | ### **0** su 248 attese |
+| che la regola di OGGI si perde | **24** |
+
+### ✅ **E LA PROVA CHE LO SCANNER HA SEGUITO LO SPOSTAMENTO E' UNA RIGA DEL REFERTO:** `_peqn_idx` risulta ### **«scritta da `_rn_sch_peqn_idx`»** — cioe' il perimetro ### **vede dentro le regole nuove**, che scrivono `net.<nome>` e non `self.<nome>`.
+### ➜ **Senza quella cura il sigillo avrebbe detto «0 differenze» perche' NON LE CERCAVA PIU'**, ed e' il difetto peggiore che un sigillo possa avere.
+
+## ✅ **E GLI ALTRI TRE CONTINUANO A PASSARE, sul simulatore nuovo**
+
+| braccio | esito |
+|---|---|
+| **`B`** l'ulp **iniettato** | ### **PASSA**: 1 differenza *(`_g_peqn_mediana`, **1 ulp**)*, e **0** con la regola di oggi |
+| **`C`** l'involucro | ### **PASSA**: **0** con entrambe |
+| **`D`** la differenza **attesa** | ### **PASSA**: il «prima» e' `3ddc56d9`, e la differenza e' ### **UNA SOLA** |
+| la copia guasta | ### **CHIRURGICA** |
+
+### 📌 **E CHE `D` PASSI ANCORA DICE UNA COSA IN PIU':** la differenza col blob ### **di PRIMA del passo 2** e' ### **ancora UNA SOLA** — cioe' il commit 3 ### **non ne ha aggiunta nessuna.** E' lo stesso fatto di `E`, visto da un'altra distanza.
+
+---

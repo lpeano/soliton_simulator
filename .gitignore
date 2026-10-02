@@ -49,3 +49,5 @@ csv/_seal_fork/_sigillo_confronto_esteso/_sim_ulp.py
 #   dal PADRE del commit che introduce l'ancora, a ogni giro. Il repo ha gia' quel
 #   blob nella sua storia: committarne una copia sarebbe duplicare git.
 csv/_seal_fork/_sigillo_confronto_esteso/_sim_prima_cura.py
+#   E lo stesso per il <<PRIMA>> del braccio `E` (il commit 3).
+csv/_seal_fork/_sigillo_confronto_esteso/_sim_prima_punto_unico.py
