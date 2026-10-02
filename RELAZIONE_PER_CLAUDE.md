@@ -1088,3 +1088,14 @@ FileNotFoundError: No such file or directory: 'f54126119edc92157688c07b6449d2ce5
 ### **La correzione e' un commit a se', e il giro si rifa' dopo.** ### **Non lo aggiusto dentro questo commit.**
 
 ---
+
+# ✅ **LA CORREZIONE DEL BRACCIO `D`, un commit a se'** *(2026-10-02)*
+
+Sigillo da **`8df62ea6`** a ### **`11b4f20e`**. ### **Nessuna riga del simulatore:** blob `3d78cfd2`.
+
+### **`dest` e' il PERCORSO, il valore di ritorno e' il COMMIT.** E il ritorno non si butta: ### **si RIPORTA nel referto** come *«il commit che introduce l'ancora»*, perche' ### **dice a chi legge su quale coppia di blob il confronto e' ancorato** — ed e' l'informazione che `H-P8` esiste per rendere verificabile.
+### 📌 **E il commento sul difetto resta nel codice**, accanto alla riga: ### **letto il docstring DOPO, non prima** — `P1` applicato a un'API, usata per **associazione** *(«una funzione che estrae un file restituisce il file»)* invece che per cio' che **dichiara**.
+
+**PROSSIMO: il giro vero, quattro bracci.**
+
+---

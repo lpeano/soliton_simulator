@@ -261,9 +261,16 @@ def principale():
     stampa("BRACCIO D -- LA DIFFERENZA ATTESA: la cura di `PEQ-MEDIANA-ISTANTE`")
     stampa("=" * 104)
     ANCORA_CURA = "_peqn_med_pre"
-    D_ok, dD_n, dD_o, prima = None, [], [], None
+    # ⚠ `sim_prima_del_flag(nome, dest)` SCRIVE su `dest` e RESTITUISCE L'HASH DEL COMMIT che
+    #   introduce l'ancora. La prima stesura trattava il RITORNO come il percorso, e il braccio
+    #   e' morto con `FileNotFoundError: 'f54126119edc...'`. ### Letto il docstring DOPO, non
+    #   prima: e' `P1` applicato a un'API -- usata per ASSOCIAZIONE invece che per cio' che dice.
+    #   ### Ora il percorso e' `dest` e il ritorno si RIPORTA come commit, che e' informazione utile.
+    D_ok, dD_n, dD_o, prima, introduce = None, [], [], None, None
+    dest_prima = os.path.join(FUORI, "_sim_prima_cura.py")
     try:
-        prima = _cli_flag.sim_prima_del_flag(ANCORA_CURA, os.path.join(FUORI, "_sim_prima_cura.py"))
+        introduce = _cli_flag.sim_prima_del_flag(ANCORA_CURA, dest_prima)
+        prima = dest_prima
     except Exception as e:
         stampa("  ### BRACCIO D NON ESEGUIBILE: %s: %s" % (type(e).__name__, e))
         stampa("      (l'ancora `%s` non e' ancora committata, oppure `git log -S` non la trova.)"
@@ -271,8 +278,9 @@ def principale():
     if prima:
         stampa("  il <<prima>> .. %s  blob %s"
                % (os.path.relpath(prima, RADICE).replace(chr(92), "/"), blob(prima)[:8]))
-        stampa("      (dal PADRE del commit che introduce `%s`, estratto in BINARIO: `H-P8`)"
-               % ANCORA_CURA)
+        stampa("      dal PADRE del commit che introduce `%s`, cioe' di %s^, estratto in BINARIO"
+               % (ANCORA_CURA, introduce[:8]))
+        stampa("      (`H-P8`; e `sim_prima_del_flag` ASSERISCE che l'ancora NON sia nel file)")
         SD, nD = carica("cfr_D", seme, sim=prima)
         avanza(SD, nD, passi)
         fd, _ = CN.foto(SD, nD, sorgente=prima)
@@ -328,6 +336,7 @@ def principale():
                          "solo_g_peqn_mediana": bool(solo_quella)},
            "braccio_D": {"eseguito": bool(prima), "passa": D_ok,
                          "blob_prima": (blob(prima) if prima else None),
+                         "commit_che_introduce_l_ancora": introduce,
                          "ancora": "_peqn_med_pre",
                          "diff_nuova": dD_n, "diff_oggi": dD_o}}
     io.open(os.path.join(FUORI, "_sigillo_confronto_esteso.json"), "w", encoding="utf-8",
