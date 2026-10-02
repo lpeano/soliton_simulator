@@ -487,3 +487,70 @@ if nome.startswith("_sigillo_") and (t["repo"] is not None) and (not t["tracciat
 Il referto porta ### **`blob_strumento`** dentro il `json`, quindi ### **quale blob ha prodotto quel numero e' scritto nel dato**, non nel timbro a stdout. ### **La ricostruibilita' non dipende dal presidio che non ha bloccato** — ma dipendeva da me, e questo e' il punto di `A9`.
 
 ---
+
+# ✅ **IL GUARDIANO HA TROVATO UN BUCO VERO: le riduzioni non sono solo `add.at`** *(2026-10-02)*
+
+> ### **Luca, il rilievo e' giusto e il caso concreto esiste: `mitosi` scrive `ultima_prob_coppia = float(prob_coppia.mean())`, una MEDIA IN VIRGOLA MOBILE sugli archi di `sel`. Il mio rilevatore la perdeva.**
+
+Strumento da **`e4ccf2d0`** a ### **`acf50d19`**, piu' `csv/_conta_referti.py` *(`d6592303`)*. ### **Nessuna riga del simulatore:** blob `3ddc56d9` prima e dopo. **Il giro vero si fa DOPO questa cura, come chiedi.**
+
+## ✅ **PRIMA LA RISPOSTA ALLA TUA DOMANDA, che e' la piu' importante: IL SIGILLO LE CONFRONTA?**
+
+### **NO. E non e' una rassicurazione: e' un BUCO DEL SIGILLO.**
+
+La regola del braccio `B` *(letta dal codice, `csv/_seal_fork/_sig_controllo_unico.py`, `_contatori`)* confronta ### **DUE insiemi**: le grandezze di `REGISTRO_NOMI`, e i **contatori** = ogni attributo che ### **comincia con `_` ED E' UN INTERO.**
+
+| grandezza | nel registro? | contatore? | ### **il sigillo la confronta?** |
+|---|---|---|---|
+| `ultima_prob_coppia` | NO | NO *(e' un **float** senza `_`)* | ### **NO** |
+| `ultima_frac_antifase` | NO | NO | ### **NO** |
+| ### **`_g_peqn_mediana`** | NO | ### **NO, ed e' il caso peggiore: COMINCIA con `_` ma e' un FLOAT** | ### **NO** |
+
+### ➜ **Quindi se il commit 3 cambiasse l'ordine degli archi, il sigillo NON CADREBBE: ci passerebbe accanto IN SILENZIO.** ### **E' `A8` applicato al sigillo** — *un comportamento che non si conta e' un comportamento sconosciuto*.
+### ✅ **CONSEGUENZA OPERATIVA, e la scrivo PRIMA e non dopo: il sigillo del commit 3 DEVE confrontare anche queste tre.** ### **La regola «`_` piu' intero» e' una regola sul NOME e sul TIPO, non su cio' che la grandezza FA** — ed e' la settima volta in questa sessione che una regola di quella forma nasconde cio' che cerca.
+### 📌 **E `_g_peqn_mediana` e' l'esempio che vale da solo:** porta il prefisso `_g_` dei contatori, ### **quindi un lettore la crede coperta**, e non lo e' perche' e' un `float`.
+
+## 📊 **IL CENSIMENTO DELLE RIDUZIONI, allargato — col GATE e coi flag dal RUNTIME**
+
+| riga | scrive | forma | gate | ### **gira?** |
+|---|---|---|---|---|
+| `:7304` `:7305` | *(locale `twn`)* | `np.add.at` | `MITOSI_DIR != 0.0` | ### **NO** *(`0.0`)* |
+| `:7334` | `ultima_frac_antifase` | `flip.mean` | `ANTIFASE_ADD` | ### **NO** *(`False`)* |
+| ### **`:7479`** | ### **`ultima_prob_coppia`** | ### **`prob_coppia.mean`** | `COPPIA_MIT > 0.0` | ### **SI'** *(`1.0`)* |
+| `:7501` `:7505` | *(locale `pmed`)*, `_g_peqn_mediana` | `np.median` | `COPPIA_MIT > 0` e `estratto.any()` | si', **ma la MEDIANA non dipende dall'ordine** |
+| `:7495` `:3708` | *(locali `dd`, `u`)* | `np.linalg.norm(axis=1)` | — | si', **ma somma TRE componenti in ordine FISSO** |
+
+### ✅ **E le due «inerti» sono MISURATE, non dichiarate a parole:** mediana ### **0 permutazioni su 200** la cambiano · `norm(axis=1)` ### **deterministica** · media di **BOOLEANI** *(il caso di `flip.mean()`)* ### **0 su 200.**
+
+## ⭐ **E SULLA `.mean()` CHE GIRA, la misura dice una cosa piu' FINE di «dipende dall'ordine»**
+
+**Permutazioni (su 200) che cambiano una media in virgola mobile, PER TAGLIA:**
+
+| `n` | 1 | 2 | 3 | 4 | 8 | 64 | 4096 |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| cambiano | **0** | **0** | **0** | **0** | ### **44** | 6 | ### **97** |
+
+**E `len(sel)` nella finestra misurata vale:** ### **`1` in sette eventi su otto, `2` al passo 70.**
+### ➜ **Quindi `ultima_prob_coppia` e' inerte all'ordine OGGI — ma PER TAGLIA, non per LEGGE.** ### **Da ~8 archi in su la media cambia per permutazione**, e una scena che si dividesse piu' spesso la renderebbe ordine-dipendente ### **senza che nessuna legge sia cambiata.**
+### 📌 **E' esattamente la forma che `A8` chiama pericolosa:** *un'inerzia che dipende da un numero di oggi* ### **non e' un'inerzia: e' una coincidenza che vale finche' dura.** Va nel contratto **cosi'**, non come *«non conta»*.
+
+## ✅ **E IL CONTEGGIO CHE HAI CHIESTO** *(`PRESIDIO-RIFIUTO-SOLO-SIGILLI`, e SOLO il conteggio)*
+
+**Nessuna modifica a `csv/_presidio.py` ne' a `doc/ASSIOMI.md`.** `csv/_conta_referti.py`:
+
+| | |
+|---|--:|
+| script `.py` sotto `csv/` *(escluso `_archivio` e `__pycache__`)* | **573** |
+| chiamati `_sigillo_*` | **75** |
+| ### **NON** chiamati `_sigillo_*` | **498** |
+| di questi, che **scrivono** un file | **366** |
+| ### **e di questi, con almeno un referto TRACCIATO da git** | ### **89** |
+| per confronto, i `_sigillo_*` con un referto tracciato | **43** su 75 |
+
+### ➜ **`89` script che il rifiuto del presidio NON copre mettono un referto nel repo, contro `43` sigilli che copre: il rapporto e' `2.1` a 1.**
+### ⚠ **E i TRE limiti sono dichiarati nel docstring, non arrotondati:** la convenzione *«una cartella col nome dello script»* ### **non e' cablata** *(chi scrive altrove non e' contato ⇒ **SOTTOSTIMA**)*; *«contiene `open(...,'w')`»* e' una regola ### **sulla SINTASSI**, quindi il numero si legge come un **tetto dei candidati** incrociato con un **fatto di git**; e ### **non dice se quei referti siano STATI prodotti da un blob dirty** — dice quanti script stanno nella classe in cui ### **potrebbe succedere.**
+### 🛑 **La voce resta IN CODA e la decisione e' tua**, come hai detto.
+
+**PROSSIMO: il giro vero, il contratto nella tabella, il referto. Poi il commit 3 e il suo sigillo.**
+
+---

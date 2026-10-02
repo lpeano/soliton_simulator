@@ -421,24 +421,140 @@ def tutte_le_somme_del_perimetro(percorso, funzioni):
     return {"totale": tot, "per_numero_di_addendi": per_n, "con_tre_o_piu": tre}
 
 
-def riduzioni_ordine_dipendenti(percorso, funzioni):
-    """`np.add.at` e `np.bincount`: riduzioni il cui risultato dipende dall'ORDINE degli addendi.
+# LE FORME DI RIDUZIONE, e NON sono solo `add.at` e `bincount`.
+#   ⚠ RILIEVO DEL GUARDIANO, 2026-10-02: la prima stesura cercava SOLO `np.add.at` e
+#     `np.bincount`, e PERDEVA le `.mean()`. Il caso concreto: `mitosi` scrive
+#     `self.ultima_prob_coppia = float(prob_coppia.mean())`, ### una MEDIA IN VIRGOLA MOBILE
+#     sugli archi di `sel`, il cui valore dipende dall'ORDINE degli archi.
+#   ⚠ E `self.rng.normal` NON e' una riduzione: la sottostringa `norm` la faceva entrare. Si
+#     escludono le chiamate su `rng`, e si dichiara perche'.
+RIDUZIONI_SOSPETTE = ("add.at", "bincount", "mean", "sum", "dot", "cumsum", "prod", "average",
+                      "std", "var", "einsum", "matmul", "inner", "trapz", "nansum", "nanmean",
+                      "add.reduce")
+# QUESTE si trovano e si dichiarano NON ordine-dipendenti, col MOTIVO, invece di tacerle:
+#   un'assenza dichiarata e' informazione; un'assenza silenziosa e' un buco.
+RIDUZIONI_INERTI = {
+    "median": "la MEDIANA non dipende dall'ordine -- misurato in questo stesso referto",
+    "norm": "`np.linalg.norm(..., axis=1)` somma TRE componenti in ordine FISSO: l'ordine degli "
+            "ARCHI non entra, e il risultato e' deterministico -- misurato",
+}
 
-    Non sono somme scritte: sono **accumulazioni** su molti termini, e li' l'associativita' morde
-    davvero. Si elencano col loro RAMO, cosi' si vede se girano.
+
+def _gate_di(nodo, bersaglio):
+    """Le condizioni degli `if` che RACCHIUDONO `bersaglio`, dall'esterno all'interno.
+
+    ### Serve a dire se una riduzione GIRA: una riduzione dentro `if MITOSI_DIR != 0.0` con
+    `MITOSI_DIR = 0.0` non avviene, e dirlo e' meta' della risposta.
+    """
+    fuori = []
+
+    def scendi(x, cond):
+        if x is bersaglio:
+            fuori.append(list(cond))
+            return True
+        for f in ast.iter_child_nodes(x):
+            c2 = cond
+            if isinstance(x, ast.If) and f in x.body:
+                c2 = cond + [ast.unparse(x.test)]
+            elif isinstance(x, ast.If) and f in x.orelse:
+                c2 = cond + ["NOT (%s)" % ast.unparse(x.test)]
+            if scendi(f, c2):
+                return True
+        return False
+    scendi(nodo, [])
+    return fuori[0] if fuori else []
+
+
+def riduzioni_ordine_dipendenti(percorso, funzioni):
+    """Le RIDUZIONI del perimetro: accumulazioni il cui risultato dipende dall'ORDINE.
+
+    Non sono somme SCRITTE: sono **accumulazioni** su molti termini, e li' l'associativita' morde.
+    Ognuna porta: il **gate** *(gli `if` che la racchiudono)*, la **grandezza** che il suo
+    risultato scrive *(se e' assegnato a `self.X`)*, e se la forma e' **sospetta** o **dichiarata
+    inerte col motivo**.
     """
     src = io.open(percorso, encoding="utf-8").read()
     t = ast.parse(src)
     fuori = []
     for n in ast.walk(t):
-        if isinstance(n, ast.FunctionDef) and n.name in funzioni:
-            for x in ast.walk(n):
-                if isinstance(x, ast.Call):
-                    s = ast.unparse(x.func)
-                    if "add.at" in s or "bincount" in s:
-                        fuori.append({"funzione": n.name, "riga_oggi": x.lineno,
-                                      "testo": ast.unparse(x)[:120]})
+        if not (isinstance(n, ast.FunctionDef) and n.name in funzioni):
+            continue
+        # la grandezza scritta: si risale all'`Assign` che CONTIENE la chiamata
+        scrive = {}
+        for a in ast.walk(n):
+            if isinstance(a, (ast.Assign, ast.AugAssign)):
+                mire = a.targets if isinstance(a, ast.Assign) else [a.target]
+                nomi = []
+                for m in mire:
+                    mm = m
+                    while isinstance(mm, ast.Subscript):
+                        mm = mm.value
+                    if (isinstance(mm, ast.Attribute) and isinstance(mm.value, ast.Name)
+                            and mm.value.id == "self"):
+                        nomi.append(mm.attr)
+                    elif isinstance(mm, ast.Name):
+                        nomi.append("(locale) " + mm.id)
+                for y in ast.walk(a.value):
+                    if isinstance(y, ast.Call) and nomi:
+                        scrive[id(y)] = nomi[0]
+        for x in ast.walk(n):
+            if not isinstance(x, ast.Call):
+                continue
+            s = ast.unparse(x.func)
+            # ⚠ `rng.normal` NON e' una riduzione: la sottostringa `norm` la faceva entrare.
+            if ".rng." in s or s.startswith("rng.") or s.endswith(".rng"):
+                continue
+            inerte = next((k for k in RIDUZIONI_INERTI if k in s), None)
+            sosp = any(f in s for f in RIDUZIONI_SOSPETTE)
+            if not (inerte or sosp):
+                continue
+            fuori.append({"funzione": n.name, "riga_oggi": x.lineno,
+                          "testo": ast.unparse(x)[:130],
+                          "forma": s,
+                          "gate": _gate_di(n, x),
+                          "scrive": scrive.get(id(x)),
+                          "ordine_dipendente": (False if inerte else None),
+                          "motivo": RIDUZIONI_INERTI[inerte] if inerte else
+                                    "forma SOSPETTA: una riduzione su molti termini in virgola "
+                                    "mobile dipende dall'ordine. Va letta col suo GATE e con la "
+                                    "TAGLIA su cui gira"})
     return fuori
+
+
+def controllo_riduzioni(stampa):
+    """MISURA quali riduzioni dipendono dall'ordine, invece di asserirlo.
+
+    ### E misura anche la TAGLIA, che e' il punto piu' fine: una media in virgola mobile dipende
+    dall'ordine **in generale**, ma su `1`, `2` o `3` elementi ### **no** -- e allora un'inerzia
+    c'e' **PER TAGLIA, non per LEGGE**, che e' una cosa diversa e va scritta diversa.
+    """
+    r = np.random.default_rng(7)
+    def quante(y, giri=200):
+        return int(sum(1 for _ in range(giri)
+                       if y.mean() != y[r.permutation(len(y))].mean()))
+    out = {"media_float_per_taglia": {}}
+    stampa("  MEDIA in virgola mobile -- permutazioni (su 200) che la CAMBIANO, per TAGLIA:")
+    for n in (1, 2, 3, 4, 8, 64, 4096):
+        y = r.random(n) * r.choice([1.0, 1e-9, 1e9], n)
+        k = quante(y)
+        out["media_float_per_taglia"][str(n)] = k
+        stampa("      n = %-5d -> %3d su 200%s" % (n, k, "   <- ORDINE-DIPENDENTE" if k else ""))
+    f = r.random(4096) < 0.37
+    out["media_booleani"] = quante(f)
+    x = r.random(4096) * r.choice([1.0, 1e-9, 1e9], 4096)
+    out["mediana_float"] = int(sum(1 for _ in range(200)
+                                   if np.median(x) != np.median(x[r.permutation(len(x))])))
+    v = r.normal(0, 1e6, (4096, 3))
+    out["norm_axis1_deterministica"] = bool(np.array_equal(np.linalg.norm(v, axis=1),
+                                                           np.linalg.norm(v, axis=1)))
+    stampa("  MEDIA di BOOLEANI (4096) ..: %d su 200   -> %s"
+           % (out["media_booleani"],
+              "ESATTA, l'ordine non conta" if not out["media_booleani"] else "ORDINE-DIPENDENTE"))
+    stampa("  MEDIANA (4096) ............: %d su 200   -> %s"
+           % (out["mediana_float"],
+              "l'ordine non conta" if not out["mediana_float"] else "ORDINE-DIPENDENTE"))
+    stampa("  norm(axis=1) deterministica: %s" % out["norm_axis1_deterministica"])
+    return out
 
 
 def principale():
@@ -721,18 +837,63 @@ def principale():
     stampa("")
     # ---------- (3) le RIDUZIONI, dove l'associativita' morde davvero -------------------------
     rid = riduzioni_ordine_dipendenti(SIM, FUNZ)
-    stampa("  (3) LE RIDUZIONI ordine-dipendenti (`np.add.at`, `np.bincount`): %d" % len(rid))
-    stampa("      Non sono somme SCRITTE: sono ACCUMULAZIONI su molti termini, e li'")
-    stampa("      l'associativita' morde davvero.")
+    stampa("  (3) LE RIDUZIONI -- accumulazioni su molti termini, e li' l'associativita' morde.")
+    stampa("      ### RILIEVO DEL GUARDIANO: non sono solo `add.at` e `bincount`. Le `.mean()`")
+    stampa("      in virgola mobile lo sono anche, e la prima stesura LE PERDEVA.")
+    stampa("  " + "-" * 100)
+    stampa("  E prima di classificarle, QUALI riduzioni dipendono dall'ordine -- MISURATO:")
+    ridm = controllo_riduzioni(stampa)
+    stampa("")
+    # IL GATE si valuta dal RUNTIME: una condizione su un flag si risolve col valore del flag.
+    FLAG = {}
+    for k in ("MITOSI_DIR", "ANTIFASE_ADD", "COPPIA_MIT", "COPPIA_DENSITA", "PEQ_NASCITA_LOCALE",
+              "PLAST_DIN", "PLAST_MIT", "MITOSI_2LAM", "REGIME", "SEMINA_LAM", "CHI_COOP"):
+        FLAG[k] = getattr(S, k, "<assente>")
+    stampa("      I FLAG dei gate, dal RUNTIME: %s"
+           % "  ".join("%s=%r" % (k, v) for k, v in FLAG.items()))
+    stampa("")
+    stampa("      %-6s %-20s %-26s %s" % ("riga", "funzione", "scrive", "forma"))
+    stampa("      " + "-" * 94)
     for q in rid:
-        stampa("      :%-6d %-22s %s" % (q["riga_oggi"], q["funzione"], q["testo"]))
-    stampa("      E IL RAMO IN CUI VIVONO, dal RUNTIME: MITOSI_DIR = %r" % getattr(S, "MITOSI_DIR",
-                                                                                  "<assente>"))
-    if float(getattr(S, "MITOSI_DIR", 0.0)) == 0.0 and rid:
-        stampa("      ### ➜ `MITOSI_DIR = 0.0`, quindi quel ramo NON GIRA e queste riduzioni")
-        stampa("          NON avvengono nella configurazione di riferimento. Resta DICHIARATO:")
-        stampa("          se un giorno `MITOSI_DIR != 0`, l'ordine di `add.at` entra nel")
-        stampa("          contratto -- e il contratto di OGGI non lo copre.")
+        stampa("      :%-5d %-20s %-26s %s" % (q["riga_oggi"], q["funzione"],
+                                               str(q["scrive"])[:26], q["forma"][:34]))
+        if q["gate"]:
+            stampa("             gate: %s" % "  AND  ".join(q["gate"]))
+        stampa("             %s" % q["motivo"][:108])
+    stampa("")
+    # ### LA DOMANDA CHE IL GUARDIANO HA POSTO: il SIGILLO le confronta al byte?
+    #   La regola del sigillo del controllo unico (braccio B) e' DUE insiemi:
+    #     * le grandezze di `REGISTRO_NOMI`;
+    #     * i CONTATORI = ogni attributo che comincia con `_` ED E' UN INTERO.
+    #   Una grandezza che non sta in nessuno dei due NON E' CONFRONTATA, e un cambio li' passa
+    #   in silenzio: e' `A8` applicato al sigillo.
+    stampa("      ### IL SIGILLO LE CONFRONTA? La regola del braccio `B` e' DUE insiemi:")
+    stampa("          (i) le grandezze di `REGISTRO_NOMI`; (ii) i contatori = attributi che")
+    stampa("          cominciano con `_` ED E' UN INTERO. Chi non sta in nessuno dei due")
+    stampa("          NON E' CONFRONTATO.")
+    visto = {}
+    for q in rid:
+        g = q["scrive"]
+        if not g or g.startswith("(locale)"):
+            continue
+        v = getattr(net, g, None)
+        nel_reg = g in nomi_reg
+        cont = g.startswith("_") and isinstance(v, (int, np.integer)) and not isinstance(v, bool)
+        visto[g] = {"nel_registro": nel_reg, "contatore": bool(cont),
+                    "tipo_runtime": type(v).__name__,
+                    "confrontata": bool(nel_reg or cont)}
+    for g, q in sorted(visto.items()):
+        stampa("          %-26s registro=%-5s contatore=%-5s tipo=%-9s ### CONFRONTATA: %s"
+               % (g, q["nel_registro"], q["contatore"], q["tipo_runtime"],
+                  "SI" if q["confrontata"] else "### NO"))
+    non_vista = [g for g, q in visto.items() if not q["confrontata"]]
+    if non_vista:
+        stampa("      ### ⛔ %d grandezza/e scritta/e da una riduzione NON sono confrontate dal"
+               % len(non_vista))
+        stampa("          sigillo: %s" % ", ".join(sorted(non_vista)))
+        stampa("          ➜ Quindi un cambio d'ordine li' NON farebbe cadere il sigillo: ci")
+        stampa("            passerebbe accanto IN SILENZIO. E' `A8` applicato al sigillo, e il")
+        stampa("            sigillo del commit 3 deve CONFRONTARLE invece di ignorarle.")
     stampa("")
     stampa("  I CONTATORI, somme di INTERI fuori dal registro: %d  (ordine INERTE)" % len(s_nd))
     stampa("    %s" % ", ".join(sorted({s["grandezza"] for s in s_nd})))
@@ -770,6 +931,10 @@ def principale():
            "somme_tre_o_piu_addendi_ORDINE_CONTA": tre_piu,
            "somme_due_addendi_ordine_inerte": due,
            "riduzioni_ordine_dipendenti": rid,
+           "controllo_riduzioni": ridm,
+           "flag_dei_gate_dal_runtime": {k: (v if isinstance(v, (int, float, str, bool))
+                                             else str(v)) for k, v in FLAG.items()},
+           "riduzioni_il_sigillo_le_confronta": visto,
            "tutte_le_somme_del_perimetro": tutte,
            "MITOSI_DIR_dal_runtime": float(getattr(S, "MITOSI_DIR", 0.0)),
            "somme_interi_nel_registro": s_int,
