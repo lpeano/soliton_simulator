@@ -1927,3 +1927,49 @@ La caduta che ha aperto `VELENO-DOMINI` · il 72/72 con l'esenzione per cella ·
 ### ⚠ **E UNA COSA RESTA APERTA SUL COMMIT 4**, la tua nota: l'esenzione usa `~np.isfinite`, quindi ### **accetta anche `±inf`** in una cella avvelenata, mentre il veleno e' ### **`NaN` per definizione.** ### **`VELENO-DOMINI` resta APERTA con riserva**, e la cura e' un commit a se'.
 
 ---
+
+# 📌 **TRE VOCI NUOVE, REGISTRATE: `INVARIANZA-LOCALE-CS` e le sue due figlie** *(2026-10-03)*
+
+> ### **Luca: solo documenti e indice, nessuna riga di codice, come hai chiesto. E la voce madre lega insieme cose che finora erano tre difetti separati.**
+
+## ⛔ **`TETTO-CAUSALE-TEMPO-COORDINATO` — e il numero che lo rende grave**
+
+Il tetto e' `_passo_causale = _csa * DT` *(`:9099`)*: ### **`c_s` LOCALE dell'arco, ma `DT` COORDINATO** — non il tempo proprio, che il sistema ### **calcola e usa altrove** come `dt_e = DT * 0.5 * (r_i + r_j)` *(`step`, `:7157`)*. Gli altri tre siti: `:8905`, `:8961` *(`c_sistema * DT`)* e `:9110` *(il ramo senza cache)*.
+
+### ➜ **E non e' un dettaglio di forma:** `r` e' misurato fra ### **`2e-5` e `1.41`** *(`:M7`)*, cioe' ### **cinque ordini di grandezza** — quindi dove `r` e' piccolo il tetto permette, ### **in unita' locali, spostamenti oltre la velocita' della luce locale.** ### **E' un riferimento esterno.**
+
+### 📌 **E non e' un ramo marginale:** `_g_cct_allarga` e `_g_cct_stringe` dicono che il tetto lavora su ### **~27e6 e 6.8e6 archi.**
+
+### ✅ **E L'ORDINE DI CURA E' SCRITTO, prima del codice:** ### **①** la misura *(quanti archi il tetto limita oggi, quanti con `c_s*dt_e`, la ### **distribuzione di `r`** sugli archi limitati — serve a sapere se la cura ### **stringe o allarga, e DOVE**)*; ### **②** il codice, ### **dicendo** cosa diventano il ripiego `CS_M` e il confronto `_glob`; ### **③** il sigillo, con le differenze ### **solo a valle** di `memoria_hebbiana_moto` e il caso che deve fallire: ### **con `r = 1` ovunque i due tetti coincidono AL BIT.** ### **Un controllo esatto, non statistico.**
+
+## 📌 **`INVARIANZA-LOCALE-CS` — la madre, e la distinzione che fa**
+
+> ### **Ogni osservatore, fatto della stessa materia, misura la SUA `c_s` costante sul posto; il tick globale e' SOLO la coordinata.**
+
+| il caso | che genere di difetto e' |
+|---|---|
+| il **tetto causale** | ### **quantificato** — ha una voce sua |
+| i **sotto-passi** dell'integratore *(`:7746-7758`)* | ### **solo NUMERICO**: un numero deciso dal massimo globale ### **non cambia la fisica locale**, cambia ### **quanto bene la si integra** |
+| `_cs_nodo_prev` col ripiego su `CS_M` in ### **DUE punti** | un ### **GEMELLO**, cioe' un `9-ter`: ### **di `c_s` locale deve esistere UNA SOLA definizione** |
+
+### ✅ **E la misura prevista e' pulita:** ### **due regioni a `c_s` diversa**, e le grandezze ### **adimensionali** in ### **unita' locali** *(velocita' d'onda, periodi, lunghezze a riposo)* ### **devono coincidere.** Se non coincidono, la differenza ### **misura quanto riferimento esterno** il sistema sta dando all'osservatore locale.
+
+## 📌 **`MASSE-PESI-SOVRAPPOSTE` — e una cosa da dichiarare che cambia come si legge tutto**
+
+> ### **Un nodo appartiene a PIU' masse, con peso diverso. Una massa e' una CONFIGURAZIONE DEL CAMPO, non un insieme di nodi.**
+
+### ✅ **E oggi l'appartenenza pesata E' NELLE MISURE, NON NELLE LEGGI**, e lo dichiaro: i pesi li calcola `aggiorna_pesi_concorrenza` *(`:4858`)* come `cos(phi_nodo - phi_massa)`, ### **ma NESSUNA legge del passo li legge** — li usano solo il tracciamento, la diagnostica e il batch.
+
+### ⛔ **E LE TRE DOMANDE VANNO DECISE PRIMA DI `CARICA-ROTAZIONE`**, che ho messo ### **BLOCCATA**:
+
+| | la domanda |
+|---|---|
+| **1** | ### **partizione dell'unita'**: i pesi sommano a 1? ### **Oggi NO** — un coseno in `[-1, 1]` senza vincolo, quindi un nodo con peso `0.8` in due masse conta la sua rotazione ### **1.6 volte**, e ### **la somma delle cariche delle masse NON torna alla carica del campo.** Con la partizione ### **la conservazione vale per COSTRUZIONE** |
+| **2** | ### **pesi negativi**: il guscio in antifase contribuisce ### **contro** la massa, o ### **appartiene a un'altra**? ### **Sono due fisiche diverse**, non due convenzioni |
+| **3** | ### **masse dal CAMPO, non da etichette**: oggi nascono dalla semina con un'identita' e ### **i figli EREDITANO la lista** *(la regola `conc_nodi` della tabella lo fa, per entrambi gli eventi)*. ### **Una massa dovrebbe EMERGERE dall'interferenza ed essere RICONOSCIUTA.** E' il nodo di `MASSA-ID` |
+
+### 📌 **E una toppa in piu' in `LUNGHEZZA-COME-SEGNALE`:** `_riallinea_tracking` *(`:4847`)* ### **allunga `conc_nodi` e `conc_archi` con voci VUOTE** quando la rete cresce — cioe' usa la lunghezza come segnale di *<<nodo nuovo>>*. E ### **`conc_nodi` e' una grandezza del REGISTRO**, non una struttura di servizio: ### **e' stato.**
+
+### ⚠ **E la tua nota su `np.isnan` e' registrata su `VELENO-DOMINI`, che torna APERTA con riserva:** l'esenzione usa `~np.isfinite`, quindi ### **accetta anche `±inf`.** E la forma dell'errore e' ### **nota in questo repo**: per `eta` esiste la forma `nonneg_inf` ### **proprio perche' `+inf` e' legittimo** — cioe' il repo ### **distingue gia'** `nan` da `inf`, e io li ho confusi in una riga nuova. ### **Un commit a se'.**
+
+---
