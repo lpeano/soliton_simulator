@@ -1882,3 +1882,48 @@ La riga stampata diceva *«si toglie l'esenzione a `_xi_rumore`»*, mentre il co
 ### ✅ **E la riga di docstring ora dice una cosa che il titolo da solo non diceva:** per `_g_rampa_prec`, che e' la ### **sola derivata fuori da `DOMINI`**, *<<rompere>>* vuol dire che i contatori della diagnostica ### **smettono di salire**, non che il run cade.
 
 ---
+
+# ✅✅ **IL COMMIT 4 E' CHIUSO: IL SIGILLO PASSA, SEI BRACCI SU SEI** *(2026-10-03)*
+
+> ### **Luca: lo STATO e' byte-identico su tutte e tre le scene, e i quattro casi che devono fallire fallliscono — ciascuno nel modo che avevo previsto PRIMA di girarli.**
+
+*Simulatore ### **`41e4e107`**, sigillo **`7754099c`**. Il «prima» e' ### **`dc10df7f`**, dal PADRE di `b9c109a4`.*
+
+## ✅ **`A` — ZERO differenze sullo STATO, tutte e tre le scene**
+
+| scena | nascite | differenze STATO | contatori del presidio | celle avvelenate |
+|---|---|---|---|---|
+| corta *(72)* | 8/1 | ### **0** | 5, ### **a parte** | **82** |
+| lunga *(150)* | ### **83/64** | ### **0** | 5, ### **a parte** | ### **10104** |
+| altro seme *(72)* | 10/4 | ### **0** | 5, ### **a parte** | **144** |
+
+### 📌 **E i contatori del presidio ci sono, ELENCATI — non nascosti:** una differenza fuori dai prefissi dichiarati sarebbe ### **stato vero.**
+
+## ✅ **`B` — e il valore sta nell'aver scritto la previsione PRIMA**
+
+In `308dd0a`: *«`_g_rampa_prec` e' la SOLA derivata fuori da `DOMINI`, quindi avvelenarla ### **non fara' cadere** il run — i contatori ### **smetteranno di salire**»*. I numeri:
+
+| | |
+|---|---|
+| `_g_rampa_prec` non finiti | **1** |
+| contatori del veleno | **3**, ### **separati e non contati** |
+| ### **differenze VERE** | **4**: `_g_rampa_cali` ### **24→36** · `_g_rampa_calo_quando` **818→854** · `_g_rampa_prec_disallineata` e `_shape` ### **presenti in UNO solo** |
+
+### ➜ **Il ramo che contava il disallineamento HA SMESSO DI SCATTARE.** Previsione committata ### **prima**, confermata dai numeri.
+
+## ✅ **`E` e `F` — i due casi dell'esenzione per cella**
+
+| | |
+|---|---|
+| ### **`E`** | il run cade al passo 42, riga ### **6428**, e ### **NOMINA `_dt_e_ultimo` dicendo che e' una cella AVVELENATA**, col valore ### **`1.000000e+00`** — esattamente quello iniettato |
+| ### **`F`** | il run cade al passo 42, riga **6425**, col messaggio ### **identico a prima della via (a)** — l'esenzione ### **E' ancorata al registro** |
+
+## 📌 **E I QUATTRO REPERTI DEL PERCORSO RESTANO, coi loro nomi**
+
+La caduta che ha aperto `VELENO-DOMINI` · il 72/72 con l'esenzione per cella · il fallimento dei ### **miei** due criteri · il giro che passava ma ### **nominava la grandezza sbagliata.**
+
+### ➜ **Non si cancellano perche' il giro dopo e' andato bene:** dicono che questo sigillo e' stato corretto ### **TRE volte** prima di passare — ### **due sui criteri, una sull'intestazione** — e ogni correzione e' un commit a se' che git mostra in ordine.
+
+### ⚠ **E UNA COSA RESTA APERTA SUL COMMIT 4**, la tua nota: l'esenzione usa `~np.isfinite`, quindi ### **accetta anche `±inf`** in una cella avvelenata, mentre il veleno e' ### **`NaN` per definizione.** ### **`VELENO-DOMINI` resta APERTA con riserva**, e la cura e' un commit a se'.
+
+---

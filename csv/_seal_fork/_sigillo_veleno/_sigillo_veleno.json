@@ -1,6 +1,6 @@
 {
- "blob_sim_sha1_byte": "b378491a01574d774f2c3f88fb16fb5cbfec7afc",
- "blob_sigillo": "7da887bec55542ca95a5d83cf805cbd78305525f",
+ "blob_sim_sha1_byte": "41e4e107de3965ebf571fe58702a2876ba0b1073",
+ "blob_sigillo": "7754099ca547f5118f666aa65c1e46961533de45",
  "ancora": "_avvelena_derivate(net)",
  "commit_che_introduce": "b9c109a4c1aaf2bc67a860ddf26d6a9fab07700d",
  "blob_prima": "dc10df7fb500d70237864743341511511e30c2d8",
@@ -13,7 +13,9 @@
     8,
     1
    ],
-   "diff_stato": [
+   "diff_stato": [],
+   "n_diff_derivate": 7,
+   "contatori_del_presidio": [
     {
      "nome": "_g_inv_veleno_ok",
      "come": "presente in UNO solo"
@@ -35,7 +37,7 @@
      "come": "presente in UNO solo"
     }
    ],
-   "n_diff_derivate": 7,
+   "celle_avvelenate": 82,
    "esenti": [
     {
      "grandezza": "_g_rampa_prec",
@@ -70,7 +72,9 @@
     83,
     64
    ],
-   "diff_stato": [
+   "diff_stato": [],
+   "n_diff_derivate": 7,
+   "contatori_del_presidio": [
     {
      "nome": "_g_inv_veleno_ok",
      "come": "presente in UNO solo"
@@ -92,7 +96,7 @@
      "come": "presente in UNO solo"
     }
    ],
-   "n_diff_derivate": 7,
+   "celle_avvelenate": 10104,
    "esenti": [
     {
      "grandezza": "_g_rampa_prec",
@@ -127,7 +131,9 @@
     10,
     4
    ],
-   "diff_stato": [
+   "diff_stato": [],
+   "n_diff_derivate": 0,
+   "contatori_del_presidio": [
     {
      "nome": "_g_inv_veleno_ok",
      "come": "presente in UNO solo"
@@ -149,7 +155,7 @@
      "come": "presente in UNO solo"
     }
    ],
-   "n_diff_derivate": 0,
+   "celle_avvelenate": 144,
    "esenti": [
     {
      "grandezza": "_g_rampa_prec",
@@ -177,8 +183,8 @@
    }
   }
  ],
- "passa": false,
- "braccio_A": false,
+ "passa": true,
+ "braccio_A": true,
  "braccio_B": true,
  "braccio_C": true,
  "braccio_D": true,
@@ -188,7 +194,7 @@
   "tipo": "DominioViolato",
   "messaggio": "[INVARIANTE] `_dt_e_ultimo` VIOLA `> 0 | e nelle 1 celle AVVELENATE il valore DEVE essere `nan` (esenzione PER CELLA ancorata al veleno: un NUMERO li' significa una cella scritta SENZA riscrivere la derivata)` al passo 42, in `esegui_passo`.\n  quanti: 1\n  indici (primi 8): 471564\n  valori (primi 8): 1.000000e+00\n  arco=12802-1583 quanti=1 su=471565",
   "voce": "verifica_invarianti",
-  "riga": 6420,
+  "riga": 6428,
   "codice": "raise DominioViolato(quale, regola, passo, idx,"
  },
  "braccio_F": true,
@@ -197,13 +203,19 @@
   "tipo": "DominioViolato",
   "messaggio": "[INVARIANTE] `_dt_e_ultimo` VIOLA `> 0` al passo 42, in `esegui_passo`.\n  quanti: 1\n  indici (primi 8): 471564\n  valori (primi 8): nan\n  arco=12802-1583 quanti=1 su=471565",
   "voce": "verifica_invarianti",
-  "riga": 6417,
+  "riga": 6425,
   "codice": "raise DominioViolato(quale, regola, passo, idx,"
  },
  "braccio_B_dettaglio": {
   "caduto": false,
-  "non_finiti_xi": 0,
-  "diff_stato": [
+  "non_finiti_g_rampa_prec": 1,
+  "contatori_del_veleno": [
+   {
+    "nome": "_g_veleno_celle",
+    "come": "scalare",
+    "a": "82",
+    "b": "92"
+   },
    {
     "nome": "_g_veleno_esenti",
     "come": "scalare",
@@ -211,7 +223,31 @@
     "b": "9"
    },
    {
-    "nome": "_g_veleno_multiasse",
+    "nome": "_g_veleno_voci",
+    "come": "scalare",
+    "a": "72",
+    "b": "81"
+   }
+  ],
+  "diff_vere": [
+   {
+    "nome": "_g_rampa_cali",
+    "come": "scalare",
+    "a": "24",
+    "b": "36"
+   },
+   {
+    "nome": "_g_rampa_calo_quando",
+    "come": "scalare",
+    "a": "818",
+    "b": "854"
+   },
+   {
+    "nome": "_g_rampa_prec_disallineata",
+    "come": "presente in UNO solo"
+   },
+   {
+    "nome": "_g_rampa_prec_shape",
     "come": "presente in UNO solo"
    }
   ]
