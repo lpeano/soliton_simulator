@@ -189,6 +189,101 @@ def _getattr_variabile(nodo):
             and not isinstance(nodo.args[1], ast.Constant))
 
 
+def modifiche_in_posto(albero, nomi):
+    """I siti che modificano una derivata IN POSTO: `x[i] = ...`, `x[:] = ...`, `copyto`.
+
+    ### LA SEMANTICA DELLA SPIA, e va DICHIARATA perche' taglia in due direzioni
+    (rilievo del guardiano, 2026-10-03). In `self.x[i] = v` Python valuta ### PRIMA
+    `self.x` -- cioe' chiama `__get__` -- e poi `__setitem__` sull'array. ### Quindi la
+    spia vede ### **una LETTURA, non una scrittura**:
+
+    | | |
+    |---|---|
+    | un ricalcolo ### **PARZIALE** in posto *(`x[i] = ...`)* | ### **non pulisce**, ed e' ### **GIUSTO**: gli altri elementi restano quelli di prima, cioe' quelli che la nascita ha invalidato |
+    | un ricalcolo ### **COMPLETO** in posto *(`x[:] = ...`, `np.copyto(x, ...)`)* | ### **non pulisce NEMMENO**, e questo e' ### **SBAGLIATO**: darebbe letture sporche ### **spurie** |
+
+    ### \u279c **L'errore cade dalla parte PRUDENTE** *(una lettura sporca in piu' da
+    spiegare, non una in meno)*, ### **ma solo se i siti del secondo tipo si ELENCANO** --
+    altrimenti un allarme spurio si legge come un difetto del simulatore.
+    """
+    parziali, completi = [], []
+
+    def dentro(nodo, funzione):
+        for figlio in ast.iter_child_nodes(nodo):
+            f2 = figlio.name if isinstance(figlio, ast.FunctionDef) else funzione
+            if isinstance(figlio, (ast.Assign, ast.AugAssign)):
+                mire = (figlio.targets if isinstance(figlio, ast.Assign)
+                        else [figlio.target])
+                for m in mire:
+                    if not isinstance(m, ast.Subscript):
+                        continue
+                    b = m.value
+                    if not (isinstance(b, ast.Attribute) and isinstance(b.value, ast.Name)
+                            and b.value.id in ("self", "net") and b.attr in nomi):
+                        continue
+                    s = ast.unparse(m.slice)
+                    voce = {"grandezza": b.attr, "funzione": f2, "riga": figlio.lineno,
+                            "codice": ast.unparse(figlio)[:120], "indice": s}
+                    completo = s in (":", "...", "slice(None, None, None)")
+                    (completi if completo else parziali).append(voce)
+            if (isinstance(figlio, ast.Call) and isinstance(figlio.func, ast.Attribute)
+                    and figlio.func.attr == "copyto" and figlio.args):
+                a0 = figlio.args[0]
+                if (isinstance(a0, ast.Attribute) and isinstance(a0.value, ast.Name)
+                        and a0.value.id in ("self", "net") and a0.attr in nomi):
+                    completi.append({"grandezza": a0.attr, "funzione": f2,
+                                     "riga": figlio.lineno,
+                                     "codice": ast.unparse(figlio)[:120],
+                                     "indice": "np.copyto"})
+            dentro(figlio, f2)
+
+    dentro(albero, "<modulo>")
+    return parziali, completi
+
+
+def collaudo_in_posto():
+    """### IL CONTROLLO POSITIVO del rilevatore delle modifiche in posto (`STANDARD 2`).
+
+    Senza di lui lo *<<zero modifiche in posto>>* sul simulatore vero sarebbe
+    ### **indistinguibile da un rilevatore rotto** -- ed e' la forma `FALSO-ZERO`, che in
+    due giorni ha morso ### **undici volte.** Gira su un frammento ### **sintetico**, in
+    memoria, e costa microsecondi: ### **non c'e' nessuna ragione per non cablarlo.**
+
+    Il frammento contiene ### **cinque** righe, e il rilevatore deve prenderne
+    ### **esattamente tre**, con la classificazione giusta:
+
+    | la riga | atteso |
+    |---|---|
+    | `self._sin2_vir[idx] = 1.0` | ### **PARZIALE** |
+    | `self._r_corrente[:] = 3.0` | ### **COMPLETA** |
+    | `np.copyto(self._xi_rumore, nuovo)` | ### **COMPLETA** |
+    | `self._dt_e_ultimo = 7.0` | ### **ignorata**: non e' in posto |
+    | `self.peq[:] = 1.0` | ### **ignorata**: `peq` non e' una derivata |
+
+    ### \u279c **Le due righe ignorate contano quanto le tre trovate:** un rilevatore
+    troppo largo gonfierebbe l'elenco degli allarmi spuri e renderebbe illeggibile
+    l'unica cosa che conta.
+    """
+    finto = NL.join([
+        "class Rete:",
+        "    def legge(self):",
+        "        self._r_corrente[:] = 3.0",
+        "        self._sin2_vir[idx] = 1.0",
+        "        np.copyto(self._xi_rumore, nuovo)",
+        "        self._dt_e_ultimo = 7.0",
+        "        self.peq[:] = 1.0",
+    ])
+    nomi = ("_r_corrente", "_sin2_vir", "_xi_rumore", "_dt_e_ultimo")
+    pz, cp = modifiche_in_posto(ast.parse(finto), nomi)
+    atteso_pz = [("_sin2_vir", "idx")]
+    atteso_cp = [("_r_corrente", ":"), ("_xi_rumore", "np.copyto")]
+    ott_pz = sorted((x["grandezza"], x["indice"]) for x in pz)
+    ott_cp = sorted((x["grandezza"], x["indice"]) for x in cp)
+    return {"passa": ott_pz == sorted(atteso_pz) and ott_cp == sorted(atteso_cp),
+            "parziali_attese": atteso_pz, "parziali_ottenute": ott_pz,
+            "complete_attese": sorted(atteso_cp), "complete_ottenute": ott_cp}
+
+
 def letture_dall_ast(albero, nomi):
     """TUTTE le letture `self.<deriv>` nel file: `{deriv: [(funzione, riga, gate)]}`.
 
@@ -291,12 +386,19 @@ class Diario:
     def __init__(self, nomi):
         self.nomi = list(nomi)
         self.sporche_ora = set()   # le derivate SPORCHE in questo istante
+        self.dentro_nascita = False
+        self.scritte_nella_nascita = set()
+        self.nascite = 0
         self.coperte = {k: set() for k in nomi}        # (funzione, riga) che LEGGONO
         self.coperte_finestra = {k: set() for k in nomi}
         self.coperte_presidio = {k: set() for k in nomi}   # il CONTROLLO che guarda
         self.scritte = {k: set() for k in nomi}
         self.sporche = []                              # letture PRIMA della scrittura
-        self.passi_con_nascita = 0
+
+    def inizia_nascita(self):
+        """Comincia a registrare le scritture fatte DENTRO una chiamata a `nascita`."""
+        self.dentro_nascita = True
+        self.scritte_nella_nascita = set()
 
     def apri_finestra(self):
         """Una nascita: TUTTE le derivate diventano SPORCHE, e restano tali FINO ALLA
@@ -319,8 +421,20 @@ class Diario:
         riscrittura>>*. Se una derivata non viene mai riscritta resta sporca, ed ### e'
         giusto: leggerla e' leggere un valore che la nascita ha invalidato.
         """
-        self.sporche_ora = set(self.nomi)
-        self.passi_con_nascita += 1
+        # ### SPORCHE TUTTE, TRANNE QUELLE CHE LA NASCITA HA SCRITTO LEI STESSA.
+        #   Senza questa sottrazione una grandezza appena riscritta DENTRO la nascita
+        #   (da una regola o da una chiamata collocata) tornerebbe sporca ### subito
+        #   dopo essere stata scritta bene, e le sue letture successive risulterebbero
+        #   sporche ### PER ERRORE. Rilievo del guardiano, 2026-10-03.
+        #   ### ⚠ E OGGI QUESTA SOTTRAZIONE HA ZERO CASI, e lo dico invece di
+        #   lasciarlo credere: le tre grandezze scritte dalle CHIAMATE COLLOCATE sono
+        #   `_deg` (in `REGISTRO_STATO`) e `_smp_d`/`_smp_d0` (in `REGISTRO_FINESTRA`),
+        #   ### e NESSUNA delle tre e' in `REGISTRO_DERIVATE`. Il rilievo e' giusto
+        #   nella FORMA, e la cura resta cablata perche' ### un domani il registro puo'
+        #   cambiare -- e allora morderebbe senza avvisare.
+        self.sporche_ora = set(self.nomi) - set(self.scritte_nella_nascita)
+        self.dentro_nascita = False
+        self.nascite += 1
 
     def leggi(self, nome, funzione, riga):
         # ### IL PRESIDIO NON E' UNA LEGGE, e tenerli separati e' il punto: il controllo
@@ -342,6 +456,8 @@ class Diario:
         #   passo, non un'altra grandezza. E' la semantica del par.(d): <<tornano pulite
         #   quando LA LORO LEGGE le riscrive>>.
         self.sporche_ora.discard(nome)
+        if self.dentro_nascita:
+            self.scritte_nella_nascita.add(nome)
 
 
 def carica(nome, seme, sim):
@@ -379,15 +495,50 @@ def una_scena(etichetta, seme, passi, nomi, stampa):
     #   diventerebbe un buco -- e per questo le due voci si leggono insieme.
     for k in nomi:
         setattr(sim.Rete, k, Spia(k, diario))
-    _mitosi0 = sim.Rete.mitosi
+    # ### SI AVVOLGE `nascita`, NON `mitosi`, E QUESTO E' IL TERZO DIFETTO DELLA
+    #   FINESTRA (rilievo del guardiano, 2026-10-03). Avvolgendo `mitosi` la finestra
+    #   si apriva ### QUANDO MITOSI RITORNAVA -- ma la nascita avviene DENTRO, alla
+    #   chiamata `nascita(self, "divisione", c)`, e dopo di lei ### mitosi CONTINUA
+    #   (il ramo Schwinger, con la sua `nascita(self, "schwinger", c2)`).
+    #   ### ➜ DUE ERRORI OPPOSTI, e il primo e' quello grave:
+    #     ① LETTURE PERSE: tutto cio' che `mitosi` legge DOPO la nascita della
+    #       divisione -- cioe' ### tutta la preparazione dello Schwinger, 64 eventi
+    #       nella scena lunga -- avveniva PRIMA che la finestra si aprisse, quindi
+    #       ### non era mai contato come sporco;
+    #     ② FALSI ALLARMI: le grandezze riscritte DENTRO la nascita tornavano
+    #       sporche al ritorno di `mitosi`, dopo essere state scritte bene.
+    #   ### ✅ ORA: la finestra si apre alla FINE DI OGNI chiamata a `nascita`, PER
+    #   EVENTO, e sottrae cio' che quella chiamata ha scritto.
+    # ### E UNA COLLOCATA CHE GIRA *DOPO* `nascita()`: COME LA TRATTO, E PERCHE'
+    #   (la domanda e' del guardiano, 2026-10-03). Il caso concreto e' `_grado()`, che
+    #   `mitosi` chiama ### DOPO il blocco della nascita perche' legge `i`, `j` e
+    #   `len(phi)` -- cioe' e' una DERIVATA della topologia.
+    #   ### LA RISPOSTA E' CHE NON HA BISOGNO DI UN TRATTAMENTO SPECIALE, e per due
+    #   ragioni distinte:
+    #     \u2460 ### `_grado()` NON SCRIVE NESSUNA DELLE DIECI DERIVATE SORVEGLIATE.
+    #       Scrive `_deg` (che sta in `REGISTRO_STATO`) e `_cicli_topologici`; nessuna
+    #       delle due e' in `REGISTRO_DERIVATE`. ### Misurato sul registro, non assunto.
+    #       Lo stesso vale per `_smp_chirurgia` (`_smp_d`/`_smp_d0`, in
+    #       `REGISTRO_FINESTRA`) e per `_traccia_d0`.
+    #     \u2461 ### E SE DOMANI NE SCRIVESSE UNA, LA SEMANTICA E' GIA' GIUSTA: la
+    #       finestra e' PER GRANDEZZA e la chiude ### LA SCRITTURA, dovunque avvenga --
+    #       dentro `nascita`, dopo di lei, o in un passo successivo. Una collocata che
+    #       riscrive una derivata la PULISCE alla sua riga, ### che e' esattamente cio'
+    #       che deve fare. La sottrazione in `apri_finestra` serve al caso OPPOSTO: una
+    #       grandezza scritta DENTRO la nascita che altrimenti verrebbe RIMARCATA sporca
+    #       subito dopo.
+    #   ### \u279c Quindi: nessuna eccezione per `_grado`, e il motivo e' che non ne
+    #   serve una. Dichiararlo e' il punto -- un'eccezione non necessaria sarebbe una
+    #   legge in piu' (`9-ter`).
+    _nascita0 = sim.nascita
 
-    def mitosi_spiata(self, *a, **k):
-        r = _mitosi0(self, *a, **k)
-        if r:
-            diario.apri_finestra()
+    def nascita_spiata(net, evento, c):
+        diario.inizia_nascita()
+        r = _nascita0(net, evento, c)
+        diario.apri_finestra()
         return r
 
-    sim.Rete.mitosi = mitosi_spiata
+    sim.nascita = nascita_spiata
     try:
         with contextlib.redirect_stdout(io.StringIO()):
             for _ in range(passi):
@@ -400,14 +551,15 @@ def una_scena(etichetta, seme, passi, nomi, stampa):
               int(getattr(net, "_g_nati_mitosi", 0)),
               int(getattr(net, "_g_nati_schwinger", 0)))
     finally:
-        sim.Rete.mitosi = _mitosi0
+        sim.nascita = _nascita0
         for k in nomi:
             try:
                 delattr(sim.Rete, k)
             except AttributeError:
                 pass
-    stampa("    passi %d, seme %d .. passi CON nascita %d, eventi mitosi %d, Schwinger %d "
-           "(nodi %d / %d)" % (passi, seme, diario.passi_con_nascita, ev[0], ev[1], ev[2], ev[3]))
+    stampa("    passi %d, seme %d .. chiamate a `nascita` %d, eventi mitosi %d, "
+           "Schwinger %d (nodi %d / %d)"
+           % (passi, seme, diario.nascite, ev[0], ev[1], ev[2], ev[3]))
     return diario, ev
 
 
@@ -442,6 +594,44 @@ def principale():
         stampa("      %-18s %3d righe" % (k, len(ast_let[k])))
     stampa("")
 
+    # ---------- LA SEMANTICA DELLE MODIFICHE IN POSTO, dichiarata -----------------------------
+    parz, compl = modifiche_in_posto(albero, nomi)
+    stampa("-" * 104)
+    stampa("LA SEMANTICA DELLA SPIA SULLE MODIFICHE IN POSTO, e si DICHIARA")
+    stampa("  In `self.x[i] = v` Python valuta PRIMA `self.x` (cioe' `__get__`) e poi")
+    stampa("  `__setitem__`: ### la spia vede UNA LETTURA, NON UNA SCRITTURA.")
+    stampa("    un ricalcolo PARZIALE in posto (`x[i] = ...`) .. NON pulisce, ed e' GIUSTO")
+    stampa("      (gli altri elementi restano quelli che la nascita ha invalidato)")
+    stampa("    un ricalcolo COMPLETO in posto (`x[:] = ...`, `np.copyto`) NON pulisce")
+    stampa("      NEMMENO, e questo e' ### SBAGLIATO: darebbe letture sporche SPURIE")
+    stampa("  ### L'errore cade dalla parte PRUDENTE, ma solo se i siti si ELENCANO:")
+    stampa("      modifiche in posto PARZIALI: %d" % len(parz))
+    for x in parz:
+        stampa("          %-18s `%s` :%d  [%s]  %s"
+               % (x["grandezza"], x["funzione"], x["riga"], x["indice"], x["codice"][:70]))
+    stampa("      ### modifiche in posto COMPLETE (quelle che darebbero allarmi SPURI): %d"
+           % len(compl))
+    for x in compl:
+        stampa("          ### %-18s `%s` :%d  [%s]  %s"
+               % (x["grandezza"], x["funzione"], x["riga"], x["indice"], x["codice"][:70]))
+    if not compl:
+        stampa("          ### NESSUNA: quindi oggi nessun allarme puo' essere spurio per")
+        stampa("          ### questa ragione.")
+    # ### E LO ZERO VALE SOLO SE IL RILEVATORE FUNZIONA (`STANDARD 2`, `FALSO-ZERO`):
+    cip = collaudo_in_posto()
+    stampa("      ### IL CONTROLLO POSITIVO DEL RILEVATORE, su un frammento sintetico:")
+    stampa("          parziali: attese %s   ottenute %s"
+           % (cip["parziali_attese"], cip["parziali_ottenute"]))
+    stampa("          complete: attese %s   ottenute %s"
+           % (cip["complete_attese"], cip["complete_ottenute"]))
+    stampa("          *(e DUE righe devono essere IGNORATE: `self._dt_e_ultimo = 7.0`, che")
+    stampa("            non e' in posto, e `self.peq[:]`, che non e' una derivata. Un")
+    stampa("            rilevatore troppo largo renderebbe illeggibile l'unica cosa che conta.)*")
+    stampa("          ### %s"
+           % ("IL RILEVATORE FUNZIONA, quindi lo zero di sopra E' VERO." if cip["passa"]
+              else "### IL RILEVATORE NON FUNZIONA: lo zero di sopra NON VALE."))
+    stampa("")
+
     # ---------- pezzo 1 e 4: le tre scene ------------------------------------------------------
     stampa("-" * 104)
     stampa("PEZZI 1 e 4 -- LA COPERTURA DAL RUNTIME, su TRE scene")
@@ -473,6 +663,32 @@ def principale():
     stampa("  ### righe che leggono una derivata NELLA FINESTRA DELLA NASCITA, unione delle tre:")
     for k in nomi:
         stampa("      %-18s %3d righe provate" % (k, len(coperte[k])))
+    stampa("")
+
+    # ---------- IL CONTROLLO POSITIVO DELLA FINESTRA ------------------------------------------
+    #   ### Lo chiede il guardiano, e serve a una cosa sola: se la cura della finestra
+    #   non ha attaccato, le letture che `mitosi` fa DOPO la nascita della divisione
+    #   (cioe' tutta la preparazione dello Schwinger) ### non compaiono, e lo zero
+    #   tornerebbe a essere garantito dalla costruzione invece che misurato.
+    stampa("-" * 104)
+    stampa("IL CONTROLLO POSITIVO DELLA FINESTRA: `mitosi` legge DOPO la nascita?")
+    stampa("  Se la finestra si aprisse al RITORNO di `mitosi` (il difetto curato), le letture")
+    stampa("  del ramo Schwinger -- che stanno DENTRO `mitosi`, dopo la nascita della")
+    stampa("  divisione -- NON comparirebbero. ### Zero qui = la cura non ha attaccato.")
+    dentro_mitosi = {}
+    for et, d in diari.items():
+        v = sorted({(k, f, r) for k in nomi for (f, r) in d.coperte_finestra[k]
+                    if f == "mitosi"})
+        dentro_mitosi[et] = v
+        stampa("      scena `%-11s` letture nella finestra da DENTRO `mitosi`: %d"
+               % (et, len(v)))
+        for k, f, r in v[:8]:
+            stampa("          %-18s `%s` :%d" % (k, f, r))
+    pos_ok = bool(dentro_mitosi.get("lunga"))
+    stampa("  ### IL CONTROLLO POSITIVO %s"
+           % ("PASSA: la scena lunga ne ha %d" % len(dentro_mitosi["lunga"]) if pos_ok
+              else "### FALLISCE: ZERO nella scena lunga, quindi la cura della finestra "
+                   "NON HA ATTACCATO e il verdetto che segue NON VALE"))
     stampa("")
 
     # ---------- le letture SPORCHE ------------------------------------------------------------
@@ -562,7 +778,7 @@ def principale():
         "blob_sim_sha1_byte": blob(SIM),
         "derivate": nomi,
         "scene": [{"etichetta": e, "seme": s, "passi": p,
-                   "passi_con_nascita": diari[e].passi_con_nascita,
+                   "chiamate_a_nascita": diari[e].nascite,
                    "eventi_mitosi": eventi[e][0], "eventi_schwinger": eventi[e][1],
                    "nodi_mitosi": eventi[e][2], "nodi_schwinger": eventi[e][3]}
                   for e, s, p in SCENE],
@@ -575,6 +791,11 @@ def principale():
         "letture_per_nome_variabile_NON_risolte": per_nome_variabile,
         "totale_provate": tot_ast - len(non_provate),
         "letture_sporche": sporche,
+        "collaudo_del_rilevatore_in_posto": cip,
+        "modifiche_in_posto_PARZIALI": parz,
+        "modifiche_in_posto_COMPLETE_allarmi_spuri": compl,
+        "controllo_positivo_finestra": {"passa": bool(pos_ok),
+                                        "letture_da_dentro_mitosi": dentro_mitosi},
         "non_provate": non_provate,
         "verdetto": ("zero letture sporche su %d provate, %d non provate"
                      % (tot_ast - len(non_provate), len(non_provate))) if not sporche else

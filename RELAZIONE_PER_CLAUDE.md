@@ -1615,3 +1615,47 @@ Perche' il referto stampa ### **DUE COLONNE**: le letture dall'### **AST** e que
 ### 📌 **E la correzione e' il commit che SEGUE** *(par.5)*: questo porta ### **lo stato e il fallimento**, non la cura.
 
 ---
+
+# ⛔ **UN TERZO DIFETTO DELLA FINESTRA, e il giro l'ho FERMATO a meta'** *(2026-10-03)*
+
+> ### **Luca: la finestra si apriva al RITORNO di `mitosi`. Ma la nascita avviene DENTRO, e dopo di lei MITOSI CONTINUA.**
+
+### 📌 **Il giro precedente l'ho fermato a meta':** girava con la finestra sbagliata, e ### **un giro che non puo' dare un verdetto valido e' tempo e crediti buttati.**
+
+## ⛔ **DUE ERRORI OPPOSTI, e il primo e' quello grave**
+
+| | |
+|---|---|
+| ### **① LETTURE PERSE** | tutto cio' che `mitosi` legge ### **dopo** la nascita della divisione — cioe' ### **tutta la preparazione dello Schwinger**, che nella scena lunga ha ### **64 eventi** — avveniva ### **PRIMA** che la finestra si aprisse |
+| **② FALSI ALLARMI** | le grandezze riscritte ### **dentro** la nascita tornavano sporche al ritorno di `mitosi`, ### **dopo essere state scritte bene** |
+
+## ✅ **LA CURA: si avvolge `nascita`, alla FINE di ogni chiamata, PER EVENTO**
+
+E si ### **sottrae** cio' che quella chiamata ha scritto.
+### 📌 **E dichiaro che la sottrazione ha OGGI ZERO CASI**, invece di lasciarlo credere: le tre grandezze delle chiamate collocate sono `_deg` *(in `REGISTRO_STATO`)* e `_smp_d`/`_smp_d0` *(in `REGISTRO_FINESTRA`)*, e ### **nessuna e' in `REGISTRO_DERIVATE`.** Il rilievo e' giusto nella ### **forma**, e la cura resta cablata perche' ### **il registro puo' cambiare, e allora morderebbe senza avvisare.**
+
+## ✅ **E `_grado`, che gira DOPO `nascita()`: NESSUNA eccezione, e dico perche'**
+
+### **①** non scrive nessuna delle dieci *(scrive `_deg` e `_cicli_topologici`)* — ### **misurato sul registro, non assunto.**
+### **②** e se domani ne scrivesse una, ### **la semantica e' GIA' giusta**: la finestra e' per grandezza e ### **la chiude LA SCRITTURA, dovunque avvenga.** Una collocata che riscrive una derivata ### **la pulisce alla sua riga.**
+### ➜ **Un'eccezione non necessaria sarebbe una legge in piu'** (`9-ter`).
+
+## ✅ **E LA SEMANTICA SULLE MODIFICHE IN POSTO, dichiarata E misurata**
+
+In `self.x[i] = v` Python valuta ### **prima `self.x`** *(il `__get__`)*: ### **la spia vede una LETTURA, non una scrittura.**
+
+| | |
+|---|---|
+| ricalcolo **PARZIALE** in posto | ### **non pulisce**, ed e' ### **giusto** |
+| ricalcolo ### **COMPLETO** in posto *(`x[:] =`, `np.copyto`)* | ### **non pulisce NEMMENO**, e questo e' ### **sbagliato**: darebbe allarmi ### **SPURI** |
+
+### ✅ **MISURATO: ZERO modifiche in posto sulle dieci derivate**, ne' parziali ne' complete — quindi ### **oggi nessun allarme puo' essere spurio per questa ragione.**
+### ✅ **E LO ZERO HA IL SUO CONTROLLO POSITIVO, CABLATO nel referto:** un frammento sintetico di cinque righe dove il rilevatore deve prenderne ### **TRE** con la classificazione giusta e ### **IGNORARNE DUE** *(una non in posto, una che non e' una derivata)*. ### **Le due ignorate contano quanto le tre trovate:** un rilevatore troppo largo renderebbe illeggibile l'unica cosa che conta. ### **Passa.**
+
+## ✅ **E IL CONTROLLO POSITIVO DELLA FINESTRA e' nel referto, come hai chiesto**
+
+Almeno una lettura da ### **dentro `mitosi`** deve comparire nella finestra della scena ### **lunga**. ### ⛔ **Zero li' = la cura non ha attaccato, e tutto il resto del referto NON VALE** — e il referto lo stampa cosi', non come una nota a margine.
+
+### ✅ **E questa volta NON ho usato `git stash`** *(`L-PATCH`)*: `git add` dei file e basta.
+
+---
