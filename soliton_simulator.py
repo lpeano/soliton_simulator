@@ -7287,6 +7287,36 @@ class Rete:
         sel, perche = self.decidi_divisione()
         if sel is None:
             return 0
+        # [PEQ-MEDIANA-ISTANTE, 2026-10-02, decisione di Luca -- via (b) passo 2]
+        #   `_g_peqn_mediana` e' il DIAGNOSTICO <<cio' che si EVITA>>: la mediana GLOBALE
+        #   di `peq` che `PEQ_NASCITA_LOCALE` esiste per NON usare. Prima stava DENTRO il
+        #   blocco di Schwinger, FRA le due scritture di `peq` -- e li' era l'UNICO ostacolo
+        #   al PUNTO UNICO di nascita: una mediana sull'intero array presa fra la
+        #   riscrittura `concatenate([peq[keep], peq[sel], peq[sel]])` e l'estensione dello
+        #   Schwinger NON si puo' spostare ne' prima ne' dopo (misurato da
+        #   `csv/_test_fork/_punto_unico_fattibile.py`).
+        #
+        #   ### L'ISTANTE E' DICHIARATO: LO STATO DA CUI LA NASCITA DEL PASSO PARTE.
+        #   Non e' una scelta di comodo, ed e' l'unico istante NON AMBIGUO: <<dopo la
+        #   nascita completa>> dipenderebbe da QUALI RAMI sono scattati dentro `mitosi`
+        #   (Schwinger si'/no, quanti archi), quindi due passi darebbero mediane prese su
+        #   stati diversi PER RAGIONI DIVERSE.
+        #   ### E IL NUMERO CAMBIA, e si dichiara: prima era la mediana DOPO la
+        #   riscrittura della mitosi, ora e' quella PRIMA. La differenza e' esattamente
+        #   l'effetto di quella riscrittura sulla mediana, e il sigillo esteso
+        #   (`csv/_seal_fork/_sigillo_confronto_esteso.py`) deve vedere QUELLA e
+        #   NIENT'ALTRO.
+        #   ### IL GATE NON CAMBIA: l'assegnazione resta dov'era, sotto le sue tre
+        #   condizioni. Qui si cattura solo il VALORE, in una LOCALE -- cosi'
+        #   l'assegnazione non e' piu' una LETTURA di `self.peq` e non blocca piu' il
+        #   blocco contiguo delle scritture.
+        #   ### IL COSTO, MISURATO e non stimato: `np.median` su 471564 float costa
+        #   `0.0053 s`, cioe' lo `0.187 %` di un passo da `2.849 s`. Il gate e' CHEAP
+        #   (due booleani e una lunghezza), quindi la mediana si paga solo nei passi in
+        #   cui una divisione c'e' davvero.
+        _peqn_med_pre = (float(np.median(self.peq))
+                         if (COPPIA_MIT > 0.0 and PEQ_NASCITA_LOCALE and len(sel))
+                         else float("nan"))
         # ### L'UNICA chiave che l'esecuzione legge, e il patch l'ha VERIFICATO.
         I = perche["I"]
         a, b = self.i[sel], self.j[sel]; m = self.n + np.arange(len(sel))
@@ -7502,7 +7532,11 @@ class Rete:
                 if PEQ_NASCITA_LOCALE:
                     self._g_peqn_archi = getattr(self, '_g_peqn_archi', 0) + int(2 * nc)
                     self._g_peqn_ev = getattr(self, '_g_peqn_ev', 0) + 1
-                    self._g_peqn_mediana = float(np.median(self.peq))   # cio' che si EVITA
+                    # [PEQ-MEDIANA-ISTANTE] ### NON piu' `np.median(self.peq)` QUI: il
+                    #   valore e' quello CATTURATO IN TESTA a `mitosi`, sullo stato da cui
+                    #   la nascita parte. ### Cosi' questa riga NON E' PIU' UNA LETTURA di
+                    #   `self.peq`, e smette di essere l'unico ostacolo al punto unico.
+                    self._g_peqn_mediana = _peqn_med_pre   # cio' che si EVITA (PRE-nascita)
                 self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])
                 self.phi = np.concatenate([self.phi, anti])
                 self.phi0 = np.concatenate([self.phi0, anti])

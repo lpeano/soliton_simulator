@@ -922,3 +922,50 @@ A **3 passi** il braccio `B` ### **FALLISCE**, perche' senza uno Schwinger ### *
 **PROSSIMO: il passo 2 — `_g_peqn_mediana` presa UNA volta, a un istante DICHIARATO. Il disegno e' pronto e il codice NON e' ancora scritto.**
 
 ---
+
+# 🔧 **VIA (b) PASSO 2: `_g_peqn_mediana` HA UN ISTANTE DICHIARATO. Il blocco al punto unico non c'e' piu'** *(2026-10-02)*
+
+> ### **Luca, il codice c'e' e il sigillo NON e' ancora girato: lo committo prima, come chiede il par.5. E il blocco e' sparito: la misura lo dice.**
+
+Simulatore da **`3ddc56d9`** a ### **`3d78cfd2`** *(sha1 byte grezzi)*. ### **DUE sostituzioni**, ognuna asserita per se'.
+
+## ⭐ **L'ISTANTE, e perche' QUESTO e non un altro**
+
+> ### **LO STATO DA CUI LA NASCITA DEL PASSO PARTE.**
+
+| | |
+|---|---|
+| ### **perche' e' l'unico NON AMBIGUO** | *«dopo la nascita completa»* dipenderebbe da ### **quali rami sono scattati** dentro `mitosi` *(Schwinger si'/no, quanti archi)*: due passi darebbero mediane prese su stati diversi ### **per ragioni diverse** |
+| ### **la FORMA, minima** | il valore si **cattura in una LOCALE** in testa a `mitosi`; ### **l'assegnazione resta DOV'ERA**, sotto le sue tre condizioni ⇒ ### **il GATE non cambia, cambia SOLO il numero** |
+| ### **e l'assegnazione smette di essere una LETTURA di `peq`** | ed e' ### **esattamente** cio' che la toglie dalla strada del punto unico |
+
+### ⛔ **E IL NUMERO CAMBIA, e lo dichiaro prima di misurarlo:** era la mediana ### **DOPO** la riscrittura della mitosi, ora e' quella ### **PRIMA**. ### **La differenza e' esattamente l'effetto di quella riscrittura sulla mediana** — e il sigillo esteso deve vedere ### **QUELLA e nient'altro.**
+
+## ✅ **IL COSTO, MISURATO e non stimato**
+
+`np.median` su **471564** float: ### **`0.0053 s`**, cioe' lo ### **`0.187 %`** di un passo da `2.849 s`. E il gate della cattura e' **cheap** *(due booleani e una lunghezza)*, quindi ### **la mediana si paga solo nei passi in cui una divisione c'e' davvero.**
+
+## ✅ **E IL BLOCCO AL PUNTO UNICO NON C'E' PIU': la misura lo dice**
+
+Rigirato `csv/_test_fork/_punto_unico_fattibile.py` sul simulatore nuovo:
+
+| | prima | ### **dopo** |
+|---|--:|--:|
+| segnalate | 7 | **6** |
+| girano col driver | 5 | **4** |
+| ### **GENUINE a granularita' di indice** | ### **3** | ### **2** |
+
+### ➜ **E le due che restano sono quelle che avevo GIA' dichiarate non-bloccanti**, col loro perche': `:7524 dd` *(la lettura di `pos` e' una pura **estensione**, e il flusso locale `dd` si solleva prima del blocco)* e `:7531 pmed` *(con `PEQ_NASCITA_LOCALE = True` ### **la mediana non viene nemmeno valutata**)*.
+### ✅ **Quindi il blocco e' caduto, e non per una mia lettura: per la stessa misura che l'aveva trovato.**
+
+## ⚠ **E LA RAGIONE PER CUI IL SIGILLO E' VENUTO PRIMA, detta col numero**
+
+La regola di confronto di ieri *(registro piu' `_`-e-intero)* ### **NON guardava `_g_peqn_mediana`** — comincia con `_` ### **ma e' un `float`.** ### ➜ **Quindi questa cura sarebbe passata IN SILENZIO**, e ### **il difetto non sarebbe stato il cambiamento: sarebbe stato il non vederlo** (`A8`). ### **L'ordine che hai dato era quello giusto, e ora ha un numero.**
+
+## 📌 **E `PEQ-SEL-STANTIO` NON e' curato qui, come hai deciso**
+
+Il difetto latente di `:7472` *(`COPPIA_DENSITA`, il `peq` degli archi sbagliati)* ### **resta registrato e intatto.** ### **E questa cura non lo tocca:** sposta la cattura di un **diagnostico**, ### **non la lettura di `peq_sel`** — che vive in un ramo spento e va decisa a parte.
+
+**PROSSIMO: il sigillo del passo 2 — la differenza ATTESA invece che INIETTATA. Deve essere UNA.**
+
+---

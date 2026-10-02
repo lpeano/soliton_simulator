@@ -1373,6 +1373,22 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 
 <!-- SCHEDA nome=mitosi-schwinger funzioni=mitosi,decidi_divisione flag=MITOSI_DIR,ANTIFASE_ADD,COPPIA_MIT,PLAST_MIT,KICK_TW,REGIME,MITOSI_2LAM -->
 
+> ### 📌 **`PEQ-MEDIANA-ISTANTE` — IL DIAGNOSTICO `_g_peqn_mediana` HA UN ISTANTE DICHIARATO** *(decisione di Luca, 2026-10-02)*
+>
+> ### **Non e' una legge: e' un DIAGNOSTICO**, e sta qui perche' ### **la sua POSIZIONE era un fatto di fisica mascherato.**
+>
+> | | |
+> |---|---|
+> | **che cos'e'** | *«cio' che si EVITA»*: la ### **mediana GLOBALE** di `peq` che `PEQ_NASCITA_LOCALE` esiste per ### **NON usare** |
+> | ### **dov'era** | ### **FRA le due scritture di `peq`** — la riscrittura della mitosi *(`concatenate([peq[keep], peq[sel], peq[sel]])`)* e l'estensione dello Schwinger. ### **Una mediana sull'INTERO array, presa fra due riscritture di quell'array** |
+> | ### **perche' contava** | ### **era l'UNICO ostacolo genuino al PUNTO UNICO di nascita** *(misurato: `csv/_test_fork/_punto_unico_fattibile.py`)*. Non si poteva spostare ### **ne' prima** *(leggerebbe il `peq` pre-mitosi)* ### **ne' dopo** *(quello post-Schwinger)* |
+> | ### **l'ISTANTE, ora** | ### **LO STATO DA CUI LA NASCITA DEL PASSO PARTE.** Il valore si **cattura** in una locale in testa a `mitosi`; ### **l'assegnazione resta dov'era**, sotto le sue tre condizioni ⇒ ### **il GATE non cambia, cambia SOLO il numero** |
+> | ### **perche' QUESTO istante** | e' ### **l'unico NON AMBIGUO**: *«dopo la nascita completa»* dipenderebbe da ### **quali rami sono scattati** dentro `mitosi` *(Schwinger si'/no, quanti archi)*, e due passi darebbero mediane prese su stati diversi ### **per ragioni diverse** |
+> | ### **il NUMERO cambia, e si dichiara** | prima era la mediana ### **DOPO** la riscrittura della mitosi, ora e' quella ### **PRIMA**, e la differenza e' ### **esattamente l'effetto di quella riscrittura.** ### **NON e' byte-identico, e lo e' DI PROPOSITO su QUELLA SOLA grandezza** |
+> | **il COSTO, misurato** | `np.median` su 471564 float: ### **`0.0053 s`**, cioe' lo ### **`0.187 %`** di un passo da `2.849 s`. Il gate della cattura e' **cheap**, quindi si paga ### **solo nei passi in cui una divisione c'e' davvero** |
+>
+> ### ⚠ **E LA RAGIONE PER CUI IL SIGILLO E' VENUTO PRIMA:** la regola di confronto di ieri *(registro piu' `_`-e-intero)* ### **NON guardava `_g_peqn_mediana`** — comincia con `_` **ma e' un `float`**. ### **Quindi questa cura sarebbe passata IN SILENZIO**, e ### **il difetto non sarebbe stato il cambiamento: sarebbe stato il non vederlo** (`A8`). La regola estesa e' `csv/_confronto_nascita.py`, e il suo sigillo `csv/_seal_fork/_sigillo_confronto_esteso.py`.
+
 > ### 📌 **COMMIT 2 DEL RIORDINO — LA DECISIONE E' USCITA, E NON E' UNA LEGGE NUOVA** *(2026-10-01)*
 >
 > ### **`decidi_divisione` entra in QUESTA scheda, non in una sua:** e' ### **la stessa legge di
