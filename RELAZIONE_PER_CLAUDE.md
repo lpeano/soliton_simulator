@@ -668,3 +668,31 @@ Lo stesso referto porta la misura ### **IEEE-754**: ### **due addendi commutativ
 **PROSSIMO: la misura che decide se il punto unico si puo' scrivere SENZA RIORDINARE le scritture — ed e' il punto ④ in cui il mio task history dice di FERMARMI, se la risposta e' no.**
 
 ---
+
+# 🔧 **LO STRUMENTO DEL PUNTO DI STOP ④, committato PRIMA di girare** *(2026-10-02)*
+
+`csv/_test_fork/_punto_unico_fattibile.py` *(blob **`b771ad6a`**)*. ### **Nessuna riga del simulatore:** blob `3ddc56d9` prima e dopo.
+
+## ⭐ **PERCHE' QUESTA MISURA VIENE PRIMA DEL CODICE**
+
+Il mio task history fissa come ### **punto di STOP numero ④**: *«il punto unico richiede di RIORDINARE le scritture (non solo di spostarle) ⇒ STOP: riordinare CAMBIA LA FISICA»*. ### **E non e' un timore teorico: `doc/MITOSI_non_si_spezza_per_tipo.md` lo ha GIA' MISURATO una volta** — il 2026-09-28, per lo spezzamento per TIPO, e la risposta fu ### **che non si poteva.**
+### ➜ **Quindi si misura PRIMA, invece di scoprirlo quando il sigillo cade.**
+
+## 📐 **LA DOMANDA, scomposta in tre — e la terza e' quella che decide**
+
+| # | la domanda | lo strumento |
+|--:|---|---|
+| **1** | dove sono le **scritture** delle grandezze del registro, in ordine di sorgente | l'AST. ### **I nomi del registro si leggono DALLE TABELLE del simulatore**, non si scrivono a mano; e ### **la CHIAMATA a `_eredita_*` E' una scrittura**, con le grandezze ricavate dal **loro** AST |
+| **2** | quali istruzioni **NON-di-scrittura** stanno fra la prima e l'ultima | idem, ### **scendendo dentro gli `if` e i cicli** *(una scrittura dentro `if COPPIA_MIT > 0.0` E' una scrittura della nascita: trattare quel blocco come UNA istruzione nasconderebbe la domanda)* |
+| ### **3** | ### **quante di quelle DEVONO restare dov'e' sono?** | una ### **DIPENDENZA IN DUE VERSI**: l'istruzione ### **legge** qualcosa che una scrittura precedente produce ### **E** produce qualcosa che una scrittura successiva consuma. ### **Chi soddisfa entrambe non si puo' spostare ne' prima ne' dopo** |
+
+## ⭐ **IL CRITERIO, FISSATO ORA, PRIMA DEI NUMERI**
+
+> ### **Se esiste ANCHE UNA SOLA istruzione non-di-scrittura che DEVE stare fra due scritture, allora un blocco contiguo richiede di RIORDINARE ⇒ STOP.**
+
+### ⚠ **E IL VERSO OPPOSTO E' DICHIARATO, perche' senza di lui il criterio sarebbe sbilanciato:** ### **zero dipendenze NON dice che il punto unico sia facile.** Dice solo che ### **non e' impedito da un riordino.** Restano ### **i contatori**, ### **i rami condizionali sulle lunghezze delle cache** *(i sei dei due `_eredita_*`)*, e ### **`conc_nodi`, che cresce per MUTAZIONE IN POSTO** — i tre punti che il task history ha dichiarato come la parte difficile.
+### 📌 **Questa misura risponde a UNA domanda, non a tutte**, e lo scrivo perche' un criterio che risponde a una domanda sola ### **va letto per quella.**
+
+**PROSSIMO: il run, e il verdetto. Se dice STOP, mi fermo li' e lo dico.**
+
+---
