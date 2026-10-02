@@ -1,9 +1,9 @@
 ========================================================================================================
 IL PUNTO UNICO DI NASCITA SI PUO' SCRIVERE SENZA RIORDINARE?  (passo 3 del COMMIT 3)
 ========================================================================================================
-simulatore ..... 3ddc56d9
+simulatore ..... 3d78cfd2
 questo strumento 2f2fc229
-`mitosi` :7277 -> :7564  (288 righe)
+`mitosi` :7277 -> :7598  (322 righe)
 grandezze del registro, DALLE TABELLE del simulatore: 63
   `_eredita_psi_figli` scrive 3 grandezze del registro: psi, psi_spin, rho_spin
   `_eredita_spinore_figli` scrive 9 grandezze del registro: _cs_nodo_prev, _nb, _nb_prec, _nb_ret, _psi_prec, _psi_spin_prec, _psi_spinor, _spinor_lift, omega_s
@@ -14,62 +14,57 @@ grandezze del registro, DALLE TABELLE del simulatore: 63
 ========================================================================================================
 (1) LE SCRITTURE DEL REGISTRO, in ordine di sorgente
 ========================================================================================================
-  istruzioni di `mitosi` (scendendo dentro `if` e cicli) ... 139
+  istruzioni di `mitosi` (scendendo dentro `if` e cicli) ... 140
   di cui SCRIVONO una grandezza del registro .............. 47
-  la PRIMA e' a :7335, l'ULTIMA a :7563
+  la PRIMA e' a :7365, l'ULTIMA a :7597
   istruzioni FRA la prima e l'ultima ..................... 111
   ### di queste, NON di scrittura ........................ 64
 
 ========================================================================================================
 (3) QUANTE DEVONO RESTARE DOV'E' SONO -- e questo e' il numero che decide
 ========================================================================================================
-  ### ISTRUZIONI NON-DI-SCRITTURA CHE DEVONO STARE FRA DUE SCRITTURE: 7
+  ### ISTRUZIONI NON-DI-SCRITTURA CHE DEVONO STARE FRA DUE SCRITTURE: 6
       (leggono qualcosa che una scrittura PRECEDENTE produce **E** producono
        qualcosa che una scrittura SUCCESSIVA consuma: non si possono spostare
        ne' prima ne' dopo il blocco)
 
-  :7375   chi_a = self.perc_chi[a]
+  :7405   chi_a = self.perc_chi[a]
           gate: REGIME == 'deterministico'
-          <- legge da :7342  perc_chi
-          !! ANTI-DIP: :7514 RISCRIVE perc_chi, quindi questa lettura NON puo'
+          <- legge da :7372  perc_chi
+          !! ANTI-DIP: :7548 RISCRIVE perc_chi, quindi questa lettura NON puo'
              andare DOPO quella scrittura (`sel` indicizza il PRE-mitosi)
-  :7375   chi_b = self.perc_chi[b]
+  :7405   chi_b = self.perc_chi[b]
           gate: REGIME == 'deterministico'
-          <- legge da :7342  perc_chi
-          !! ANTI-DIP: :7514 RISCRIVE perc_chi, quindi questa lettura NON puo'
+          <- legge da :7372  perc_chi
+          !! ANTI-DIP: :7548 RISCRIVE perc_chi, quindi questa lettura NON puo'
              andare DOPO quella scrittura (`sel` indicizza il PRE-mitosi)
-  :7472   peq_sel = self.peq[sel]
+  :7502   peq_sel = self.peq[sel]
           gate: COPPIA_MIT > 0.0  AND  COPPIA_DENSITA
-          <- legge da :7433  peq
-          !! ANTI-DIP: :7552 RISCRIVE peq, quindi questa lettura NON puo'
+          <- legge da :7463  peq
+          !! ANTI-DIP: :7586 RISCRIVE peq, quindi questa lettura NON puo'
              andare DOPO quella scrittura (`sel` indicizza il PRE-mitosi)
-  :7494   dd = self._nasce(np.maximum(0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05), 's
+  :7524   dd = self._nasce(np.maximum(0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05), 's
           gate: COPPIA_MIT > 0.0  AND  estratto.any()
-          <- legge da :7335  pos
-          -> serve a :7546  dd
-          -> serve a :7549  dd
-          !! ANTI-DIP: :7506 RISCRIVE pos, quindi questa lettura NON puo'
+          <- legge da :7365  pos
+          -> serve a :7580  dd
+          -> serve a :7583  dd
+          !! ANTI-DIP: :7540 RISCRIVE pos, quindi questa lettura NON puo'
              andare DOPO quella scrittura (`sel` indicizza il PRE-mitosi)
-  :7501   pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))
+  :7531   pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))
           gate: COPPIA_MIT > 0.0  AND  estratto.any()
-          <- legge da :7433  peq
-          -> serve a :7552  pmed
-          !! ANTI-DIP: :7552 RISCRIVE peq, quindi questa lettura NON puo'
+          <- legge da :7463  peq
+          -> serve a :7586  pmed
+          !! ANTI-DIP: :7586 RISCRIVE peq, quindi questa lettura NON puo'
              andare DOPO quella scrittura (`sel` indicizza il PRE-mitosi)
-  :7505   self._g_peqn_mediana = float(np.median(self.peq))
-          gate: COPPIA_MIT > 0.0  AND  estratto.any()  AND  PEQ_NASCITA_LOCALE
-          <- legge da :7433  peq
-          !! ANTI-DIP: :7552 RISCRIVE peq, quindi questa lettura NON puo'
-             andare DOPO quella scrittura (`sel` indicizza il PRE-mitosi)
-  :7547   _tr_pre = self.d0.copy()
+  :7581   _tr_pre = self.d0.copy()
           gate: COPPIA_MIT > 0.0  AND  estratto.any()  AND  TRACCIA_D0
-          <- legge da :7430  d0
-          !! ANTI-DIP: :7549 RISCRIVE d0, quindi questa lettura NON puo'
+          <- legge da :7460  d0
+          !! ANTI-DIP: :7583 RISCRIVE d0, quindi questa lettura NON puo'
              andare DOPO quella scrittura (`sel` indicizza il PRE-mitosi)
 
   RIEPILOGO PER TIPO DI DIPENDENZA:
     con flusso PRIMA e flusso DOPO ..: 2
-    ### con ANTI-DIP (lettura invalidata da una scrittura successiva): 7
+    ### con ANTI-DIP (lettura invalidata da una scrittura successiva): 6
     che PESCANO dal generatore ......: 0
 
 ========================================================================================================
@@ -77,19 +72,17 @@ grandezze del registro, DALLE TABELLE del simulatore: 63
 ========================================================================================================
   riga    gira?  genuina?  perche'
   ------------------------------------------------------------------------------------------------
-  :7375   SI     spuria    tutte le condizioni del gate sono vere coi flag di oggi
-  :7375   SI     spuria    tutte le condizioni del gate sono vere coi flag di oggi
-  :7472   NO     SI        COPPIA_DENSITA = False
-  :7494   SI     SI        tutte le condizioni del gate sono vere coi flag di oggi
-  :7501   SI     SI        tutte le condizioni del gate sono vere coi flag di oggi
-  :7505   SI     SI        tutte le condizioni del gate sono vere coi flag di oggi
-  :7547   NO     SI        TRACCIA_D0 = False
+  :7405   SI     spuria    tutte le condizioni del gate sono vere coi flag di oggi
+  :7405   SI     spuria    tutte le condizioni del gate sono vere coi flag di oggi
+  :7502   NO     SI        COPPIA_DENSITA = False
+  :7524   SI     SI        tutte le condizioni del gate sono vere coi flag di oggi
+  :7531   SI     SI        tutte le condizioni del gate sono vere coi flag di oggi
+  :7581   NO     SI        TRACCIA_D0 = False
 
-  ### segnalate 7  ->  girano col driver 5  ->  ### GENUINE a granularita'
-      di INDICE: 3
-      ### :7494   dd = self._nasce(np.maximum(0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1
-      ### :7501   pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))
-      ### :7505   self._g_peqn_mediana = float(np.median(self.peq))
+  ### segnalate 6  ->  girano col driver 4  ->  ### GENUINE a granularita'
+      di INDICE: 2
+      ### :7524   dd = self._nasce(np.maximum(0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1
+      ### :7531   pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))
 
 ========================================================================================================
 (5) LETTURE A INDICE STANTIO -- `x[idx]` DOPO che `x` e' stato RIFILTRATO
@@ -100,8 +93,8 @@ grandezze del registro, DALLE TABELLE del simulatore: 63
 
   ### TROVATE: 1
 
-  ### :7472  `peq_sel = self.peq[sel]`  <- legge `peq[sel]` con l'indice STANTIO
-          la riscrittura CON FILTRO e' a :7433, maschera `keep`:
+  ### :7502  `peq_sel = self.peq[sel]`  <- legge `peq[sel]` con l'indice STANTIO
+          la riscrittura CON FILTRO e' a :7463, maschera `keep`:
             self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])
           l'indice `sel` e' assegnato a :7287 e NON riassegnato in mezzo
           gate: COPPIA_MIT > 0.0  AND  COPPIA_DENSITA
@@ -111,7 +104,7 @@ grandezze del registro, DALLE TABELLE del simulatore: 63
 
 ========================================================================================================
 ### IL VERDETTO: UN BLOCCO CONTIGUO RICHIEDE DI RIORDINARE.  ### STOP.
-    3 istruzione/i non-di-scrittura e' LEGATA in mezzo, GIRA col driver e la sua
+    2 istruzione/i non-di-scrittura e' LEGATA in mezzo, GIRA col driver e la sua
     dipendenza e' GENUINA anche a granularita' di INDICE. Spostare le scritture in
     un punto solo la scavalcherebbe, e scavalcarla CAMBIA LA FISICA.
     E' il punto di STOP numero 4 del task history, e scatta.

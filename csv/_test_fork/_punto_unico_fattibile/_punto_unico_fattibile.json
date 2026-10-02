@@ -1,9 +1,9 @@
 {
- "blob_sim_sha1_byte": "3ddc56d947d91069c89ae476f89afcadcb1ae4e6",
+ "blob_sim_sha1_byte": "3d78cfd258ecf37e5cc43323f8c5105b66b3877e",
  "blob_strumento": "2f2fc2295429e27cf571860a2ce46dfb6af2fa5b",
  "mitosi": {
   "riga_da": 7277,
-  "riga_a": 7564
+  "riga_a": 7598
  },
  "grandezze_registro": [
   "AUTO-RINFRESCO, ed E LA REGOLA DI NASCITA: `xi` e l AMBIENTE, non una proprieta del nodo, quindi il figlio NON lo eredita -- e il codice lo dichiara al sito di lettura",
@@ -93,15 +93,15 @@
   "_smp_chirurgia": [],
   "_nasce": []
  },
- "istruzioni": 139,
+ "istruzioni": 140,
  "scritture_registro": 47,
- "prima_scrittura_riga": 7335,
- "ultima_scrittura_riga": 7563,
+ "prima_scrittura_riga": 7365,
+ "ultima_scrittura_riga": 7597,
  "istruzioni_fra": 111,
  "non_scritture_fra": 64,
  "legate_in_mezzo": [
   {
-   "riga": 7375,
+   "riga": 7405,
    "testo": "chi_a = self.perc_chi[a]",
    "gate": [
     "REGIME == 'deterministico'"
@@ -109,7 +109,7 @@
    "pesca_dal_generatore": false,
    "legata_a_prima": [
     {
-     "riga": 7342,
+     "riga": 7372,
      "self": [
       "perc_chi"
      ],
@@ -120,7 +120,7 @@
    "legata_a_dopo": [],
    "anti_dipendenze": [
     {
-     "riga": 7514,
+     "riga": 7548,
      "self": [
       "perc_chi"
      ],
@@ -132,7 +132,7 @@
    "perche_gate": "tutte le condizioni del gate sono vere coi flag di oggi"
   },
   {
-   "riga": 7375,
+   "riga": 7405,
    "testo": "chi_b = self.perc_chi[b]",
    "gate": [
     "REGIME == 'deterministico'"
@@ -140,7 +140,7 @@
    "pesca_dal_generatore": false,
    "legata_a_prima": [
     {
-     "riga": 7342,
+     "riga": 7372,
      "self": [
       "perc_chi"
      ],
@@ -151,7 +151,7 @@
    "legata_a_dopo": [],
    "anti_dipendenze": [
     {
-     "riga": 7514,
+     "riga": 7548,
      "self": [
       "perc_chi"
      ],
@@ -163,7 +163,7 @@
    "perche_gate": "tutte le condizioni del gate sono vere coi flag di oggi"
   },
   {
-   "riga": 7472,
+   "riga": 7502,
    "testo": "peq_sel = self.peq[sel]",
    "gate": [
     "COPPIA_MIT > 0.0",
@@ -172,7 +172,7 @@
    "pesca_dal_generatore": false,
    "legata_a_prima": [
     {
-     "riga": 7433,
+     "riga": 7463,
      "self": [
       "peq"
      ],
@@ -183,7 +183,7 @@
    "legata_a_dopo": [],
    "anti_dipendenze": [
     {
-     "riga": 7552,
+     "riga": 7586,
      "self": [
       "peq"
      ],
@@ -195,7 +195,7 @@
    "perche_gate": "COPPIA_DENSITA = False"
   },
   {
-   "riga": 7494,
+   "riga": 7524,
    "testo": "dd = self._nasce(np.maximum(0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05), 's",
    "gate": [
     "COPPIA_MIT > 0.0",
@@ -204,7 +204,7 @@
    "pesca_dal_generatore": false,
    "legata_a_prima": [
     {
-     "riga": 7335,
+     "riga": 7365,
      "self": [
       "pos"
      ],
@@ -214,14 +214,14 @@
    ],
    "legata_a_dopo": [
     {
-     "riga": 7546,
+     "riga": 7580,
      "self": [],
      "locali": [
       "dd"
      ]
     },
     {
-     "riga": 7549,
+     "riga": 7583,
      "self": [],
      "locali": [
       "dd"
@@ -230,7 +230,7 @@
    ],
    "anti_dipendenze": [
     {
-     "riga": 7506,
+     "riga": 7540,
      "self": [
       "pos"
      ],
@@ -242,7 +242,7 @@
    "perche_gate": "tutte le condizioni del gate sono vere coi flag di oggi"
   },
   {
-   "riga": 7501,
+   "riga": 7531,
    "testo": "pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))",
    "gate": [
     "COPPIA_MIT > 0.0",
@@ -251,7 +251,7 @@
    "pesca_dal_generatore": false,
    "legata_a_prima": [
     {
-     "riga": 7433,
+     "riga": 7463,
      "self": [
       "peq"
      ],
@@ -261,7 +261,7 @@
    ],
    "legata_a_dopo": [
     {
-     "riga": 7552,
+     "riga": 7586,
      "self": [],
      "locali": [
       "pmed"
@@ -270,7 +270,7 @@
    ],
    "anti_dipendenze": [
     {
-     "riga": 7552,
+     "riga": 7586,
      "self": [
       "peq"
      ],
@@ -282,40 +282,7 @@
    "perche_gate": "tutte le condizioni del gate sono vere coi flag di oggi"
   },
   {
-   "riga": 7505,
-   "testo": "self._g_peqn_mediana = float(np.median(self.peq))",
-   "gate": [
-    "COPPIA_MIT > 0.0",
-    "estratto.any()",
-    "PEQ_NASCITA_LOCALE"
-   ],
-   "pesca_dal_generatore": false,
-   "legata_a_prima": [
-    {
-     "riga": 7433,
-     "self": [
-      "peq"
-     ],
-     "locali": [],
-     "pura_estensione": false
-    }
-   ],
-   "legata_a_dopo": [],
-   "anti_dipendenze": [
-    {
-     "riga": 7552,
-     "self": [
-      "peq"
-     ],
-     "pura_estensione": true
-    }
-   ],
-   "genuina_a_granularita_indice": true,
-   "gira_col_driver": true,
-   "perche_gate": "tutte le condizioni del gate sono vere coi flag di oggi"
-  },
-  {
-   "riga": 7547,
+   "riga": 7581,
    "testo": "_tr_pre = self.d0.copy()",
    "gate": [
     "COPPIA_MIT > 0.0",
@@ -325,7 +292,7 @@
    "pesca_dal_generatore": false,
    "legata_a_prima": [
     {
-     "riga": 7430,
+     "riga": 7460,
      "self": [
       "d0"
      ],
@@ -336,7 +303,7 @@
    "legata_a_dopo": [],
    "anti_dipendenze": [
     {
-     "riga": 7549,
+     "riga": 7583,
      "self": [
       "d0"
      ],
@@ -349,20 +316,19 @@
   }
  ],
  "legate_che_girano": [
-  7375,
-  7375,
-  7494,
-  7501,
-  7505
+  7405,
+  7405,
+  7524,
+  7531
  ],
  "letture_a_indice_stantio": [
   {
    "funzione": "mitosi",
    "attr": "peq",
-   "riscrittura_riga": 7433,
+   "riscrittura_riga": 7463,
    "maschera": "keep",
    "riscrittura": "self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])",
-   "lettura_riga": 7472,
+   "lettura_riga": 7502,
    "indice": "sel",
    "indice_assegnato_a": [
     7287
@@ -379,16 +345,12 @@
  "indici_stantii_che_girano": [],
  "legate_GENUINE_che_girano": [
   {
-   "riga": 7494,
+   "riga": 7524,
    "testo": "dd = self._nasce(np.maximum(0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05), 's"
   },
   {
-   "riga": 7501,
+   "riga": 7531,
    "testo": "pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))"
-  },
-  {
-   "riga": 7505,
-   "testo": "self._g_peqn_mediana = float(np.median(self.peq))"
   }
  ],
  "verdetto": "STOP: un blocco contiguo richiede di RIORDINARE",
@@ -434,7 +396,29 @@
    ]
   },
   {
-   "riga": 7291,
+   "riga": 7317,
+   "testo": "_peqn_med_pre = float(np.median(self.peq)) if COPPIA_MIT > 0.0 and PEQ_NASCITA_LOCALE and len(se",
+   "scrive_registro": [],
+   "servizio": [],
+   "self_scritte": [],
+   "self_lette": [
+    "peq"
+   ],
+   "locali_scritte": [
+    "_peqn_med_pre"
+   ],
+   "locali_lette": [
+    "COPPIA_MIT",
+    "PEQ_NASCITA_LOCALE",
+    "float",
+    "len",
+    "np",
+    "sel"
+   ],
+   "gate": []
+  },
+  {
+   "riga": 7321,
    "testo": "I = perche['I']",
    "scrive_registro": [],
    "servizio": [],
@@ -449,7 +433,7 @@
    "gate": []
   },
   {
-   "riga": 7292,
+   "riga": 7322,
    "testo": "a, b = (self.i[sel], self.j[sel])",
    "scrive_registro": [],
    "servizio": [],
@@ -468,7 +452,7 @@
    "gate": []
   },
   {
-   "riga": 7292,
+   "riga": 7322,
    "testo": "m = self.n + np.arange(len(sel))",
    "scrive_registro": [],
    "servizio": [],
@@ -487,7 +471,7 @@
    "gate": []
   },
   {
-   "riga": 7293,
+   "riga": 7323,
    "testo": "D = self._wphi(self.phi[a] - self.phi[b])",
    "scrive_registro": [],
    "servizio": [],
@@ -506,7 +490,7 @@
    "gate": []
   },
   {
-   "riga": 7303,
+   "riga": 7333,
    "testo": "twn = np.zeros(self.n)",
    "scrive_registro": [],
    "servizio": [],
@@ -525,7 +509,7 @@
    ]
   },
   {
-   "riga": 7304,
+   "riga": 7334,
    "testo": "np.add.at(twn, self.i[self.i < self.n], np.abs(self.tw)[self.i < self.n])",
    "scrive_registro": [],
    "servizio": [],
@@ -545,7 +529,7 @@
    ]
   },
   {
-   "riga": 7305,
+   "riga": 7335,
    "testo": "np.add.at(twn, self.j[self.j < self.n], np.abs(self.tw)[self.j < self.n])",
    "scrive_registro": [],
    "servizio": [],
@@ -565,7 +549,7 @@
    ]
   },
   {
-   "riga": 7306,
+   "riga": 7336,
    "testo": "twn = twn / np.maximum(self._deg, 1)",
    "scrive_registro": [],
    "servizio": [],
@@ -585,7 +569,7 @@
    ]
   },
   {
-   "riga": 7308,
+   "riga": 7338,
    "testo": "bias = 0.5 * np.tanh(MITOSI_DIR * (twn[a] - twn[b]))",
    "scrive_registro": [],
    "servizio": [],
@@ -606,7 +590,7 @@
    ]
   },
   {
-   "riga": 7309,
+   "riga": 7339,
    "testo": "fm = (self.phi[a] - (0.5 + bias) * D) % self._dphi()",
    "scrive_registro": [],
    "servizio": [],
@@ -628,7 +612,7 @@
    ]
   },
   {
-   "riga": 7311,
+   "riga": 7341,
    "testo": "fm = (self.phi[a] - 0.5 * D) % self._dphi()",
    "scrive_registro": [],
    "servizio": [],
@@ -649,7 +633,7 @@
    ]
   },
   {
-   "riga": 7312,
+   "riga": 7342,
    "testo": "pos_figlio = 0.5 * (self.pos[a] + self.pos[b])",
    "scrive_registro": [],
    "servizio": [],
@@ -667,7 +651,7 @@
    "gate": []
   },
   {
-   "riga": 7322,
+   "riga": 7352,
    "testo": "rho_sel = 0.5 * (I[a] + I[b])",
    "scrive_registro": [],
    "servizio": [],
@@ -686,7 +670,7 @@
    ]
   },
   {
-   "riga": 7323,
+   "riga": 7353,
    "testo": "peq_sel = self.peq[sel]",
    "scrive_registro": [],
    "servizio": [],
@@ -705,7 +689,7 @@
    ]
   },
   {
-   "riga": 7324,
+   "riga": 7354,
    "testo": "peq_sel = np.where(np.isnan(peq_sel), rho_sel, peq_sel)",
    "scrive_registro": [],
    "servizio": [],
@@ -724,7 +708,7 @@
    ]
   },
   {
-   "riga": 7327,
+   "riga": 7357,
    "testo": "rho_c = np.maximum(peq_sel, 1e-06) * max(massa_critica_collasso() / max(self.n, 1), 0.001)",
    "scrive_registro": [],
    "servizio": [],
@@ -746,7 +730,7 @@
    ]
   },
   {
-   "riga": 7328,
+   "riga": 7358,
    "testo": "s = (rho_sel - peq_sel) / np.maximum(rho_c, 1e-06)",
    "scrive_registro": [],
    "servizio": [],
@@ -766,7 +750,7 @@
    ]
   },
   {
-   "riga": 7329,
+   "riga": 7359,
    "testo": "p_anti = np.where(s > 0, np.tanh(s), 0.0)",
    "scrive_registro": [],
    "servizio": [],
@@ -784,7 +768,7 @@
    ]
   },
   {
-   "riga": 7330,
+   "riga": 7360,
    "testo": "flip = self.rng.random(len(sel)) < p_anti",
    "scrive_registro": [],
    "servizio": [],
@@ -805,7 +789,7 @@
    ]
   },
   {
-   "riga": 7332,
+   "riga": 7362,
    "testo": "_mezzo = self._dphi() / 2.0",
    "scrive_registro": [],
    "servizio": [],
@@ -822,7 +806,7 @@
    ]
   },
   {
-   "riga": 7333,
+   "riga": 7363,
    "testo": "fm = np.where(flip, (fm + _mezzo) % self._dphi(), fm)",
    "scrive_registro": [],
    "servizio": [],
@@ -844,7 +828,7 @@
    ]
   },
   {
-   "riga": 7334,
+   "riga": 7364,
    "testo": "self.ultima_frac_antifase = float(flip.mean()) if len(flip) else 0.0",
    "scrive_registro": [],
    "servizio": [],
@@ -863,7 +847,7 @@
    ]
   },
   {
-   "riga": 7335,
+   "riga": 7365,
    "testo": "self.pos = np.vstack([self.pos, pos_figlio])",
    "scrive_registro": [
     "pos"
@@ -883,7 +867,7 @@
    "gate": []
   },
   {
-   "riga": 7336,
+   "riga": 7366,
    "testo": "self.phi = np.concatenate([self.phi, fm])",
    "scrive_registro": [
     "phi"
@@ -903,7 +887,7 @@
    "gate": []
   },
   {
-   "riga": 7336,
+   "riga": 7366,
    "testo": "self.phi0 = np.concatenate([self.phi0, fm])",
    "scrive_registro": [
     "phi0"
@@ -923,7 +907,7 @@
    "gate": []
   },
   {
-   "riga": 7337,
+   "riga": 7367,
    "testo": "self.phi_s = np.concatenate([self.phi_s, self.phi_s[a]])",
    "scrive_registro": [
     "phi_s"
@@ -943,7 +927,7 @@
    "gate": []
   },
   {
-   "riga": 7338,
+   "riga": 7368,
    "testo": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[a] + self.phivel[b])])",
    "scrive_registro": [
     "phivel"
@@ -964,7 +948,7 @@
    "gate": []
   },
   {
-   "riga": 7339,
+   "riga": 7369,
    "testo": "self.eta = np.concatenate([self.eta, np.zeros(len(sel))])",
    "scrive_registro": [
     "eta"
@@ -985,7 +969,7 @@
    "gate": []
   },
   {
-   "riga": 7342,
+   "riga": 7372,
    "testo": "self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])",
    "scrive_registro": [
     "perc_chi"
@@ -1005,7 +989,7 @@
    "gate": []
   },
   {
-   "riga": 7345,
+   "riga": 7375,
    "testo": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[a]])",
    "scrive_registro": [
     "perc_geom"
@@ -1025,7 +1009,7 @@
    "gate": []
   },
   {
-   "riga": 7351,
+   "riga": 7381,
    "testo": "self._g_nati_mitosi = getattr(self, '_g_nati_mitosi', 0) + int(len(a))",
    "scrive_registro": [],
    "servizio": [],
@@ -1043,7 +1027,7 @@
    "gate": []
   },
   {
-   "riga": 7352,
+   "riga": 7382,
    "testo": "self._g_nati_mitosi_ev = getattr(self, '_g_nati_mitosi_ev', 0) + 1",
    "scrive_registro": [],
    "servizio": [],
@@ -1058,7 +1042,7 @@
    "gate": []
   },
   {
-   "riga": 7353,
+   "riga": 7383,
    "testo": "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(len(sel))])",
    "scrive_registro": [
     "perc_tw"
@@ -1079,7 +1063,7 @@
    "gate": []
   },
   {
-   "riga": 7354,
+   "riga": 7384,
    "testo": "self.mem_mot = np.vstack([self.mem_mot, self.mem_mot[a]]) if len(self.mem_mot) else np.zeros((le",
    "scrive_registro": [
     "mem_mot"
@@ -1101,7 +1085,7 @@
    "gate": []
   },
   {
-   "riga": 7355,
+   "riga": 7385,
    "testo": "self._eredita_spinore_figli(a, segno=1)",
    "scrive_registro": [
     "_cs_nodo_prev",
@@ -1128,7 +1112,7 @@
    "gate": []
   },
   {
-   "riga": 7358,
+   "riga": 7388,
    "testo": "self._eredita_psi_figli(a, b)",
    "scrive_registro": [
     "psi",
@@ -1150,7 +1134,7 @@
    "gate": []
   },
   {
-   "riga": 7363,
+   "riga": 7393,
    "testo": "eredita = [v[:] for v in self.conc_nodi[kk]] if kk < len(self.conc_nodi) else []",
    "scrive_registro": [],
    "servizio": [],
@@ -1172,7 +1156,7 @@
    ]
   },
   {
-   "riga": 7364,
+   "riga": 7394,
    "testo": "self.conc_nodi.append(eredita)",
    "scrive_registro": [],
    "servizio": [],
@@ -1190,7 +1174,7 @@
    ]
   },
   {
-   "riga": 7365,
+   "riga": 7395,
    "testo": "sciolta = np.abs(self.tw[sel]) / PHI_CRIT",
    "scrive_registro": [],
    "servizio": [],
@@ -1209,7 +1193,7 @@
    "gate": []
   },
   {
-   "riga": 7366,
+   "riga": 7396,
    "testo": "g = np.concatenate([a, b])",
    "scrive_registro": [],
    "servizio": [],
@@ -1226,7 +1210,7 @@
    "gate": []
   },
   {
-   "riga": 7373,
+   "riga": 7403,
    "testo": "tau_a = 1.0 + np.abs(self.tw[sel]) / PHI_CRIT",
    "scrive_registro": [],
    "servizio": [],
@@ -1247,7 +1231,7 @@
    ]
   },
   {
-   "riga": 7374,
+   "riga": 7404,
    "testo": "mod = tau_a / (1.0 + tau_a)",
    "scrive_registro": [],
    "servizio": [],
@@ -1264,7 +1248,7 @@
    ]
   },
   {
-   "riga": 7375,
+   "riga": 7405,
    "testo": "chi_a = self.perc_chi[a]",
    "scrive_registro": [],
    "servizio": [],
@@ -1283,7 +1267,7 @@
    ]
   },
   {
-   "riga": 7375,
+   "riga": 7405,
    "testo": "chi_b = self.perc_chi[b]",
    "scrive_registro": [],
    "servizio": [],
@@ -1302,7 +1286,7 @@
    ]
   },
   {
-   "riga": 7376,
+   "riga": 7406,
    "testo": "comune = KICK_TW * sciolta * (mod - 0.5)",
    "scrive_registro": [],
    "servizio": [],
@@ -1321,7 +1305,7 @@
    ]
   },
   {
-   "riga": 7377,
+   "riga": 7407,
    "testo": "calcio_a = comune + 0.5 * KICK_TW * sciolta * chi_a * mod",
    "scrive_registro": [],
    "servizio": [],
@@ -1342,7 +1326,7 @@
    ]
   },
   {
-   "riga": 7378,
+   "riga": 7408,
    "testo": "calcio_b = comune - 0.5 * KICK_TW * sciolta * chi_b * mod",
    "scrive_registro": [],
    "servizio": [],
@@ -1363,7 +1347,7 @@
    ]
   },
   {
-   "riga": 7379,
+   "riga": 7409,
    "testo": "self.phi[a] = (self.phi[a] + calcio_a) % self._dphi()",
    "scrive_registro": [
     "phi"
@@ -1386,7 +1370,7 @@
    ]
   },
   {
-   "riga": 7380,
+   "riga": 7410,
    "testo": "self.phi[b] = (self.phi[b] + calcio_b) % self._dphi()",
    "scrive_registro": [
     "phi"
@@ -1409,7 +1393,7 @@
    ]
   },
   {
-   "riga": 7391,
+   "riga": 7421,
    "testo": "self.phi[g] = (self.phi[g] + self.rng.normal(0, 1, len(g)) * KICK_TW * np.concatenate([sciolta, ",
    "scrive_registro": [
     "phi"
@@ -1436,7 +1420,7 @@
    ]
   },
   {
-   "riga": 7393,
+   "riga": 7423,
    "testo": "keep = np.ones(len(self.i), bool)",
    "scrive_registro": [],
    "servizio": [],
@@ -1455,7 +1439,7 @@
    "gate": []
   },
   {
-   "riga": 7393,
+   "riga": 7423,
    "testo": "keep[sel] = False",
    "scrive_registro": [],
    "servizio": [],
@@ -1471,7 +1455,7 @@
    "gate": []
   },
   {
-   "riga": 7394,
+   "riga": 7424,
    "testo": "dh = self.d[sel] / 2",
    "scrive_registro": [],
    "servizio": [],
@@ -1488,7 +1472,7 @@
    "gate": []
   },
   {
-   "riga": 7404,
+   "riga": 7434,
    "testo": "stress_arco = np.abs(self.d[sel] - self.d0[sel]) / np.maximum(self.d0[sel], 1e-06)",
    "scrive_registro": [],
    "servizio": [],
@@ -1509,7 +1493,7 @@
    ]
   },
   {
-   "riga": 7405,
+   "riga": 7435,
    "testo": "sciolta_ecc = np.abs(self.tw[sel]) / PHI_CRIT - 1.0",
    "scrive_registro": [],
    "servizio": [],
@@ -1530,7 +1514,7 @@
    ]
   },
   {
-   "riga": 7406,
+   "riga": 7436,
    "testo": "fattore_plastico = np.tanh(np.maximum(sciolta_ecc * stress_arco, 0.0))",
    "scrive_registro": [],
    "servizio": [],
@@ -1549,7 +1533,7 @@
    ]
   },
   {
-   "riga": 7407,
+   "riga": 7437,
    "testo": "d0h = dh * (1.0 + fattore_plastico)",
    "scrive_registro": [],
    "servizio": [],
@@ -1567,7 +1551,7 @@
    ]
   },
   {
-   "riga": 7408,
+   "riga": 7438,
    "testo": "d0new = np.concatenate([d0h, d0h])",
    "scrive_registro": [],
    "servizio": [],
@@ -1585,7 +1569,7 @@
    ]
   },
   {
-   "riga": 7410,
+   "riga": 7440,
    "testo": "d0h = dh * (1.0 + PLAST_MIT * sciolta)",
    "scrive_registro": [],
    "servizio": [],
@@ -1605,7 +1589,7 @@
    ]
   },
   {
-   "riga": 7411,
+   "riga": 7441,
    "testo": "d0new = np.concatenate([d0h, d0h])",
    "scrive_registro": [],
    "servizio": [],
@@ -1624,7 +1608,7 @@
    ]
   },
   {
-   "riga": 7413,
+   "riga": 7443,
    "testo": "d0new = np.concatenate([dh, dh])",
    "scrive_registro": [],
    "servizio": [],
@@ -1643,7 +1627,7 @@
    ]
   },
   {
-   "riga": 7414,
+   "riga": 7444,
    "testo": "self.i = np.concatenate([self.i[keep], a, m])",
    "scrive_registro": [
     "i"
@@ -1665,7 +1649,7 @@
    "gate": []
   },
   {
-   "riga": 7415,
+   "riga": 7445,
    "testo": "self.j = np.concatenate([self.j[keep], m, b])",
    "scrive_registro": [
     "j"
@@ -1687,7 +1671,7 @@
    "gate": []
   },
   {
-   "riga": 7419,
+   "riga": 7449,
    "testo": "keep_idx = np.where(keep)[0]",
    "scrive_registro": [],
    "servizio": [],
@@ -1705,7 +1689,7 @@
    ]
   },
   {
-   "riga": 7420,
+   "riga": 7450,
    "testo": "self.conc_archi = [self.conc_archi[e] if e < len(self.conc_archi) else [] for e in keep_idx] + [",
    "scrive_registro": [],
    "servizio": [],
@@ -1728,7 +1712,7 @@
    ]
   },
   {
-   "riga": 7424,
+   "riga": 7454,
    "testo": "dh = self._nasce(dh, 'mitosi', 2, 0)",
    "scrive_registro": [],
    "servizio": [
@@ -1747,7 +1731,7 @@
    "gate": []
   },
   {
-   "riga": 7426,
+   "riga": 7456,
    "testo": "d0new = self._nasce(d0new, 'mitosi', 0, 1)",
    "scrive_registro": [],
    "servizio": [
@@ -1766,7 +1750,7 @@
    "gate": []
   },
   {
-   "riga": 7427,
+   "riga": 7457,
    "testo": "self.d = np.concatenate([self.d[keep], dh, dh])",
    "scrive_registro": [
     "d"
@@ -1787,7 +1771,7 @@
    "gate": []
   },
   {
-   "riga": 7428,
+   "riga": 7458,
    "testo": "_tr_pre = self.d0.copy()",
    "scrive_registro": [],
    "servizio": [],
@@ -1804,7 +1788,7 @@
    ]
   },
   {
-   "riga": 7429,
+   "riga": 7459,
    "testo": "self._smp_chirurgia(keep=keep, nuovi=d0new)",
    "scrive_registro": [],
    "servizio": [
@@ -1822,7 +1806,7 @@
    "gate": []
   },
   {
-   "riga": 7430,
+   "riga": 7460,
    "testo": "self.d0 = np.concatenate([self.d0[keep], d0new])",
    "scrive_registro": [
     "d0"
@@ -1843,7 +1827,7 @@
    "gate": []
   },
   {
-   "riga": 7431,
+   "riga": 7461,
    "testo": "self._traccia_d0('S06_mitosi', _tr_pre)",
    "scrive_registro": [],
    "servizio": [],
@@ -1860,7 +1844,7 @@
    ]
   },
   {
-   "riga": 7432,
+   "riga": 7462,
    "testo": "self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])",
    "scrive_registro": [
     "vd"
@@ -1881,7 +1865,7 @@
    "gate": []
   },
   {
-   "riga": 7433,
+   "riga": 7463,
    "testo": "self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])",
    "scrive_registro": [
     "peq"
@@ -1902,7 +1886,7 @@
    "gate": []
   },
   {
-   "riga": 7437,
+   "riga": 7467,
    "testo": "self._rep = np.concatenate([self._rep[keep], self._rep[sel], self._rep[sel]])",
    "scrive_registro": [
     "_rep"
@@ -1923,7 +1907,7 @@
    "gate": []
   },
   {
-   "riga": 7438,
+   "riga": 7468,
    "testo": "zz = np.zeros(len(sel))",
    "scrive_registro": [],
    "servizio": [],
@@ -1940,7 +1924,7 @@
    "gate": []
   },
   {
-   "riga": 7439,
+   "riga": 7469,
    "testo": "self.tw = np.concatenate([self.tw[keep], zz, zz])",
    "scrive_registro": [
     "tw"
@@ -1961,7 +1945,7 @@
    "gate": []
   },
   {
-   "riga": 7440,
+   "riga": 7470,
    "testo": "self.twp = np.concatenate([self.twp[keep], self._wphi(self.phi[a] - fm), self._wphi(fm - self.ph",
    "scrive_registro": [
     "twp"
@@ -1986,7 +1970,7 @@
    "gate": []
   },
   {
-   "riga": 7442,
+   "riga": 7472,
    "testo": "self._grado()",
    "scrive_registro": [
     "_deg"
@@ -2003,7 +1987,7 @@
    "gate": []
   },
   {
-   "riga": 7442,
+   "riga": 7472,
    "testo": "self.nati += len(sel)",
    "scrive_registro": [],
    "servizio": [],
@@ -2019,7 +2003,7 @@
    "gate": []
   },
   {
-   "riga": 7459,
+   "riga": 7489,
    "testo": "eccesso_torsione = np.maximum(0.0, sciolta - 1.0)",
    "scrive_registro": [],
    "servizio": [],
@@ -2037,7 +2021,7 @@
    ]
   },
   {
-   "riga": 7470,
+   "riga": 7500,
    "testo": "I = self._rho_sorgente()",
    "scrive_registro": [],
    "servizio": [],
@@ -2055,7 +2039,7 @@
    ]
   },
   {
-   "riga": 7471,
+   "riga": 7501,
    "testo": "rho_sel = 0.5 * (I[a] + I[b])",
    "scrive_registro": [],
    "servizio": [],
@@ -2075,7 +2059,7 @@
    ]
   },
   {
-   "riga": 7472,
+   "riga": 7502,
    "testo": "peq_sel = self.peq[sel]",
    "scrive_registro": [],
    "servizio": [],
@@ -2095,7 +2079,7 @@
    ]
   },
   {
-   "riga": 7473,
+   "riga": 7503,
    "testo": "peq_sel = np.where(np.isnan(peq_sel), rho_sel, peq_sel)",
    "scrive_registro": [],
    "servizio": [],
@@ -2115,7 +2099,7 @@
    ]
   },
   {
-   "riga": 7474,
+   "riga": 7504,
    "testo": "anom = np.maximum(0.0, (rho_sel - peq_sel) / np.maximum(peq_sel, 1e-06))",
    "scrive_registro": [],
    "servizio": [],
@@ -2135,7 +2119,7 @@
    ]
   },
   {
-   "riga": 7475,
+   "riga": 7505,
    "testo": "eccesso_totale = eccesso_torsione + anom",
    "scrive_registro": [],
    "servizio": [],
@@ -2154,7 +2138,7 @@
    ]
   },
   {
-   "riga": 7477,
+   "riga": 7507,
    "testo": "eccesso_totale = eccesso_torsione",
    "scrive_registro": [],
    "servizio": [],
@@ -2172,7 +2156,7 @@
    ]
   },
   {
-   "riga": 7478,
+   "riga": 7508,
    "testo": "prob_coppia = 1.0 - np.exp(-COPPIA_MIT * eccesso_totale)",
    "scrive_registro": [],
    "servizio": [],
@@ -2191,7 +2175,7 @@
    ]
   },
   {
-   "riga": 7479,
+   "riga": 7509,
    "testo": "self.ultima_prob_coppia = float(prob_coppia.mean()) if len(prob_coppia) else 0.0",
    "scrive_registro": [],
    "servizio": [],
@@ -2210,7 +2194,7 @@
    ]
   },
   {
-   "riga": 7480,
+   "riga": 7510,
    "testo": "estratto = self.rng.random(len(sel)) < prob_coppia",
    "scrive_registro": [],
    "servizio": [],
@@ -2231,7 +2215,7 @@
    ]
   },
   {
-   "riga": 7482,
+   "riga": 7512,
    "testo": "pick = np.where(estratto)[0]",
    "scrive_registro": [],
    "servizio": [],
@@ -2250,7 +2234,7 @@
    ]
   },
   {
-   "riga": 7483,
+   "riga": 7513,
    "testo": "aa, bb = (a[pick], b[pick])",
    "scrive_registro": [],
    "servizio": [],
@@ -2271,7 +2255,7 @@
    ]
   },
   {
-   "riga": 7488,
+   "riga": 7518,
    "testo": "anti = (fm[pick] + self._dphi() / 2.0) % self._dphi()",
    "scrive_registro": [],
    "servizio": [],
@@ -2292,7 +2276,7 @@
    ]
   },
   {
-   "riga": 7489,
+   "riga": 7519,
    "testo": "nc = len(pick)",
    "scrive_registro": [],
    "servizio": [],
@@ -2311,7 +2295,7 @@
    ]
   },
   {
-   "riga": 7490,
+   "riga": 7520,
    "testo": "k = self.n + np.arange(nc)",
    "scrive_registro": [],
    "servizio": [],
@@ -2332,7 +2316,7 @@
    ]
   },
   {
-   "riga": 7494,
+   "riga": 7524,
    "testo": "dd = self._nasce(np.maximum(0.5 * np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1), 0.05), 's",
    "scrive_registro": [],
    "servizio": [
@@ -2357,7 +2341,7 @@
    ]
   },
   {
-   "riga": 7501,
+   "riga": 7531,
    "testo": "pmed = np.nan if PEQ_NASCITA_LOCALE else float(np.median(self.peq))",
    "scrive_registro": [],
    "servizio": [],
@@ -2379,7 +2363,7 @@
    ]
   },
   {
-   "riga": 7503,
+   "riga": 7533,
    "testo": "self._g_peqn_archi = getattr(self, '_g_peqn_archi', 0) + int(2 * nc)",
    "scrive_registro": [],
    "servizio": [],
@@ -2400,7 +2384,7 @@
    ]
   },
   {
-   "riga": 7504,
+   "riga": 7534,
    "testo": "self._g_peqn_ev = getattr(self, '_g_peqn_ev', 0) + 1",
    "scrive_registro": [],
    "servizio": [],
@@ -2419,20 +2403,17 @@
    ]
   },
   {
-   "riga": 7505,
-   "testo": "self._g_peqn_mediana = float(np.median(self.peq))",
+   "riga": 7539,
+   "testo": "self._g_peqn_mediana = _peqn_med_pre",
    "scrive_registro": [],
    "servizio": [],
    "self_scritte": [
     "_g_peqn_mediana"
    ],
-   "self_lette": [
-    "peq"
-   ],
+   "self_lette": [],
    "locali_scritte": [],
    "locali_lette": [
-    "float",
-    "np"
+    "_peqn_med_pre"
    ],
    "gate": [
     "COPPIA_MIT > 0.0",
@@ -2441,7 +2422,7 @@
    ]
   },
   {
-   "riga": 7506,
+   "riga": 7540,
    "testo": "self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])",
    "scrive_registro": [
     "pos"
@@ -2465,7 +2446,7 @@
    ]
   },
   {
-   "riga": 7507,
+   "riga": 7541,
    "testo": "self.phi = np.concatenate([self.phi, anti])",
    "scrive_registro": [
     "phi"
@@ -2488,7 +2469,7 @@
    ]
   },
   {
-   "riga": 7508,
+   "riga": 7542,
    "testo": "self.phi0 = np.concatenate([self.phi0, anti])",
    "scrive_registro": [
     "phi0"
@@ -2511,7 +2492,7 @@
    ]
   },
   {
-   "riga": 7509,
+   "riga": 7543,
    "testo": "self.phi_s = np.concatenate([self.phi_s, np.zeros(nc)])",
    "scrive_registro": [
     "phi_s"
@@ -2534,7 +2515,7 @@
    ]
   },
   {
-   "riga": 7510,
+   "riga": 7544,
    "testo": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[aa] + self.phivel[bb])])",
    "scrive_registro": [
     "phivel"
@@ -2558,7 +2539,7 @@
    ]
   },
   {
-   "riga": 7511,
+   "riga": 7545,
    "testo": "self.eta = np.concatenate([self.eta, np.zeros(nc)])",
    "scrive_registro": [
     "eta"
@@ -2581,7 +2562,7 @@
    ]
   },
   {
-   "riga": 7514,
+   "riga": 7548,
    "testo": "self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])",
    "scrive_registro": [
     "perc_chi"
@@ -2604,7 +2585,7 @@
    ]
   },
   {
-   "riga": 7518,
+   "riga": 7552,
    "testo": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[aa]])",
    "scrive_registro": [
     "perc_geom"
@@ -2627,7 +2608,7 @@
    ]
   },
   {
-   "riga": 7522,
+   "riga": 7556,
    "testo": "self._g_nati_schwinger = getattr(self, '_g_nati_schwinger', 0) + int(nc)",
    "scrive_registro": [],
    "servizio": [],
@@ -2647,7 +2628,7 @@
    ]
   },
   {
-   "riga": 7523,
+   "riga": 7557,
    "testo": "self._g_nati_schwinger_ev = getattr(self, '_g_nati_schwinger_ev', 0) + 1",
    "scrive_registro": [],
    "servizio": [],
@@ -2665,7 +2646,7 @@
    ]
   },
   {
-   "riga": 7524,
+   "riga": 7558,
    "testo": "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(nc)])",
    "scrive_registro": [
     "perc_tw"
@@ -2688,7 +2669,7 @@
    ]
   },
   {
-   "riga": 7525,
+   "riga": 7559,
    "testo": "self.mem_mot = np.vstack([self.mem_mot, np.zeros((nc, 3))]) if len(self.mem_mot) else np.zeros((",
    "scrive_registro": [
     "mem_mot"
@@ -2712,7 +2693,7 @@
    ]
   },
   {
-   "riga": 7526,
+   "riga": 7560,
    "testo": "self._eredita_spinore_figli(aa, segno=-1)",
    "scrive_registro": [
     "_cs_nodo_prev",
@@ -2742,7 +2723,7 @@
    ]
   },
   {
-   "riga": 7530,
+   "riga": 7564,
    "testo": "self._eredita_psi_figli(aa, bb)",
    "scrive_registro": [
     "psi",
@@ -2767,7 +2748,7 @@
    ]
   },
   {
-   "riga": 7539,
+   "riga": 7573,
    "testo": "eredita = [v[:] for v in self.conc_nodi[gk]] if gk < len(self.conc_nodi) else []",
    "scrive_registro": [],
    "servizio": [],
@@ -2791,7 +2772,7 @@
    ]
   },
   {
-   "riga": 7542,
+   "riga": 7576,
    "testo": "eredita = [[v[0], v[1], v[2], 'schwinger'] if len(v) == 3 else v[:] for v in eredita]",
    "scrive_registro": [],
    "servizio": [],
@@ -2813,7 +2794,7 @@
    ]
   },
   {
-   "riga": 7543,
+   "riga": 7577,
    "testo": "self.conc_nodi.append(eredita)",
    "scrive_registro": [],
    "servizio": [],
@@ -2833,7 +2814,7 @@
    ]
   },
   {
-   "riga": 7544,
+   "riga": 7578,
    "testo": "self.i = np.concatenate([self.i, aa, k])",
    "scrive_registro": [
     "i"
@@ -2857,7 +2838,7 @@
    ]
   },
   {
-   "riga": 7545,
+   "riga": 7579,
    "testo": "self.j = np.concatenate([self.j, k, bb])",
    "scrive_registro": [
     "j"
@@ -2881,7 +2862,7 @@
    ]
   },
   {
-   "riga": 7546,
+   "riga": 7580,
    "testo": "self.d = np.concatenate([self.d, dd, dd])",
    "scrive_registro": [
     "d"
@@ -2904,7 +2885,7 @@
    ]
   },
   {
-   "riga": 7547,
+   "riga": 7581,
    "testo": "_tr_pre = self.d0.copy()",
    "scrive_registro": [],
    "servizio": [],
@@ -2923,7 +2904,7 @@
    ]
   },
   {
-   "riga": 7548,
+   "riga": 7582,
    "testo": "self._smp_chirurgia(nuovi=np.concatenate([dd, dd]))",
    "scrive_registro": [],
    "servizio": [
@@ -2944,7 +2925,7 @@
    ]
   },
   {
-   "riga": 7549,
+   "riga": 7583,
    "testo": "self.d0 = np.concatenate([self.d0, dd, dd])",
    "scrive_registro": [
     "d0"
@@ -2967,7 +2948,7 @@
    ]
   },
   {
-   "riga": 7550,
+   "riga": 7584,
    "testo": "self._traccia_d0('S07_schwinger', _tr_pre)",
    "scrive_registro": [],
    "servizio": [],
@@ -2986,7 +2967,7 @@
    ]
   },
   {
-   "riga": 7551,
+   "riga": 7585,
    "testo": "self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])",
    "scrive_registro": [
     "vd"
@@ -3009,7 +2990,7 @@
    ]
   },
   {
-   "riga": 7552,
+   "riga": 7586,
    "testo": "self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])",
    "scrive_registro": [
     "peq"
@@ -3033,7 +3014,7 @@
    ]
   },
   {
-   "riga": 7557,
+   "riga": 7591,
    "testo": "self._peqn_idx = np.arange(len(self.peq) - 2 * nc, len(self.peq))",
    "scrive_registro": [],
    "servizio": [],
@@ -3056,7 +3037,7 @@
    ]
   },
   {
-   "riga": 7558,
+   "riga": 7592,
    "testo": "self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])",
    "scrive_registro": [
     "_rep"
@@ -3079,7 +3060,7 @@
    ]
   },
   {
-   "riga": 7559,
+   "riga": 7593,
    "testo": "zz2 = np.zeros(nc)",
    "scrive_registro": [],
    "servizio": [],
@@ -3098,7 +3079,7 @@
    ]
   },
   {
-   "riga": 7560,
+   "riga": 7594,
    "testo": "self.tw = np.concatenate([self.tw, zz2, zz2])",
    "scrive_registro": [
     "tw"
@@ -3121,7 +3102,7 @@
    ]
   },
   {
-   "riga": 7561,
+   "riga": 7595,
    "testo": "self.twp = np.concatenate([self.twp, self._wphi(self.phi[aa] - anti), self._wphi(anti - self.phi",
    "scrive_registro": [
     "twp"
@@ -3148,7 +3129,7 @@
    ]
   },
   {
-   "riga": 7563,
+   "riga": 7597,
    "testo": "self._grado()",
    "scrive_registro": [
     "_deg"
@@ -3168,7 +3149,7 @@
    ]
   },
   {
-   "riga": 7563,
+   "riga": 7597,
    "testo": "self.nati += nc",
    "scrive_registro": [],
    "servizio": [],
@@ -3186,7 +3167,7 @@
    ]
   },
   {
-   "riga": 7563,
+   "riga": 7597,
    "testo": "self.coppie_nate += nc",
    "scrive_registro": [],
    "servizio": [],
@@ -3204,7 +3185,7 @@
    ]
   },
   {
-   "riga": 7564,
+   "riga": 7598,
    "testo": "return len(sel)",
    "scrive_registro": [],
    "servizio": [],

@@ -969,3 +969,18 @@ Il difetto latente di `:7472` *(`COPPIA_DENSITA`, il `peq` degli archi sbagliati
 **PROSSIMO: il sigillo del passo 2 — la differenza ATTESA invece che INIETTATA. Deve essere UNA.**
 
 ---
+
+# ⛔ **UN'OMISSIONE MIA, recuperata subito: il referto che prova il commit precedente non era nel commit precedente** *(2026-10-02)*
+
+Nel messaggio di **`f541261`** ho scritto i numeri del punto unico *(segnalate `7 -> 6`, girano `5 -> 4`, ### **genuine `3 -> 2`**)* ### **citandoli come prova che il blocco e' caduto** — e ### **il referto che li contiene non era in quel commit.**
+
+| | |
+|---|---|
+| i file | `csv/_test_fork/_punto_unico_fattibile/_corsa.txt` e `_punto_unico_fattibile.json`, **rigirati** sul simulatore `3d78cfd2` |
+| ### **che cosa sarebbe successo** | chi legge `f541261` da un clone fresco ### **trova i numeri nel messaggio e nel repo il referto VECCHIO**, quello del simulatore `3ddc56d9` — ### **cioe' il referto che dice che il blocco C'E'** |
+| ### **la famiglia** | ### **e' `git add` di cio' che il commit DICHIARA invece di cio' che prova**, ed e' ### **la stessa omissione di `_guasto_ripieghi.json` del 2026-10-01** *(un referto rigirato e mai committato)* |
+
+### ➜ **E' un RITARDO, e il recupero non lo sana: lo conferma** *(par.4)*. ### **Lo dico invece di infilare i due file nel prossimo commit come se ci fossero sempre stati.**
+### 📌 **E la causa e' precisa:** ho guardato `git status` *(come mi ero imposto)*, ho visto i due file ### **e ho messo nel `git add` solo cio' che avevo in testa** — il codice e i documenti. ### **Guardare lo stato non basta se non si legge cio' che dice.**
+
+---
