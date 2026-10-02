@@ -2024,3 +2024,58 @@ L'intestazione diceva *<<transizione dolce ### **(tanh)**>>*, e il codice usa ##
 ### ⚠ **E la storia da citare la hai data tu, ed e' una trappola vera:** ### **`Z48` era l'anello delle masse SEMINATE, un artefatto del batch**; la struttura vera e' `Z49`. ### **Chi rifa' la misura deve sapere che un anello nel profilo radiale puo' venire dalla scena e non dalla fisica.**
 
 ---
+
+## ⛔ **IL DIFETTO DI METODO: lo strumento della misura della schermatura E' GIRATO FUORI DAL REPO**
+
+*(rilievo del guardiano, 2026-10-03, su `4f6b315`. **Curato, in un commit a se', come chiesto.**)*
+
+### **IL FATTO, e non lo attenuo:** la sonda che ha prodotto
+`csv/_test_fork/_schermatura_rami/_corsa.txt` e' girata **nella cartella di lavoro temporanea**,
+**fuori dal repo**, e **non era committata** — mentre **il referto SI'.** Un referto senza lo
+strumento che lo produce e' **un numero senza provenienza** *(par.7: il codice di una misura
+dev'essere recuperabile **per costruzione**)*.
+
+### 📌 **E IL PRESIDIO ME L'AVEVA SCRITTO, ALLA PRIMA RIGA:**
+
+```
+[TIMBRO] _sonda_scherm.py  sha1-BYTE ?  FUORI DA UN REPO GIT
+```
+
+### ➜ **Quindi `_presidio.avvia` funzionava: ERO IO A NON LEGGERLO.** E' la differenza fra
+**un presidio che IMPEDISCE** e **uno che DICHIARA** — cioe' `A9` — e qui la dichiarazione c'era
+e **io le sono passato sopra.**
+
+### ⚠ **E NELL'INVENTARIO L'AVEVO TRIAGGIATO COME <<sonda usa-e-getta, nessuno script
+committato>>.** Ma la regola del triage dice che una sonda usa-e-getta ha una riga **che dice
+dove sta il referto**, e una sonda **senza** referto e' **un reperto**: qui il referto e'
+**committato**, quindi non era una sonda usa-e-getta — era **una misura con lo strumento
+mancante.** Ho usato l'etichetta piu' comoda invece di quella giusta.
+
+### \U0001f4cc **E' IL TERZO CASO DI `PRESIDIO-RIFIUTO-SOLO-SIGILLI`, E IL PEGGIORE DEI TRE**
+
+| | il caso | si puo' leggere in modo benevolo? |
+|---|---|---|
+| **1** | tracciato ma **DIRTY** | si': il file c'e', il blob si cita, e il timbro dice `!! MODIFICATO` |
+| **2** | si chiama **`_sig_`** invece di `_sigillo_` | si': e' nel repo, solo fuori dalla classe protetta |
+| **3** | ### **FUORI DA UN REPO GIT** | ### **NO. Non c'e' NESSUN blob da citare.** |
+
+## ✅ **E UNA CORREZIONE DI UNA MIA FRASE SCADUTA, trovata curando questo**
+
+Quella voce diceva *«**quel conteggio NON l'ho fatto**, e lo dico invece di stimarlo»*.
+### **Il conteggio ERA stato fatto, lo STESSO GIORNO**, da `csv/_conta_referti.py` *(blob
+`d6592303`)*, e il numero stava **nell'inventario**:
+
+> **573** script · **75** `_sigillo_*` · **498** no · di questi **366** scrivono un file ·
+> ### **89 hanno un referto TRACCIATO DA GIT**, contro **43 su 75** fra i sigilli
+> ⇒ ### **rapporto 2.1 a 1** *(dichiarato una **sottostima**)*.
+
+### ➜ **Quindi la domanda aperta di quella voce HA la sua risposta: `89` e' MOLTI**, e per il
+criterio di chiusura che la voce stessa si era data, **la via e' la `(b)`**: il rifiuto deve
+dipendere da **CIO' CHE LO SCRIPT FA** *(produce un referto committato)*, **non dal suo NOME.**
+### ⚠ **La DECIDI TU, come dice la voce: io ho il numero, non la decisione.**
+### 📌 **E la mia parte dell'errore resta scritta:** ho lasciato un *«non l'ho fatto»* in una
+voce dell'indice dove il conteggio era **gia' nell'inventario** — cioe' **un commento scaduto
+dentro l'indice**, che e' esattamente la forma di errore che `doc/FATTI_dal_codice.md` esiste
+per impedire.
+
+---
