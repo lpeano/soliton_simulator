@@ -2079,3 +2079,74 @@ dentro l'indice**, che e' esattamente la forma di errore che `doc/FATTI_dal_codi
 per impedire.
 
 ---
+
+## ✅ **IL REFERTO RIFATTO DAL BLOB COMMITTATO — e i numeri vecchi SI RIPRODUCONO**
+
+Lo strumento *(ora `csv/_test_fork/_schermatura_rami.py`, blob `0856be80`)* e' girato col timbro
+**`committato e pulito`**, e il confronto col referto vecchio e' **la cosa che volevo sapere**:
+
+| | referto VECCHIO *(fuori dal repo)* | referto NUOVO *(dal blob committato)* |
+|---|---|---|
+| `_g_scherm_ricorsione` | 504 | ### **504** |
+| `_g_scherm_init` | 1 | ### **1** |
+| `lambda` min / max | 0.594814 / 0.609170 | ### **0.594814 / 0.609170** |
+
+### ➜ **Quindi quei numeri erano GIUSTI: mancava la PROVENIENZA, non la correttezza.**
+Lo dico perche' e' la distinzione che conta — **un numero senza provenienza non e' un numero
+sbagliato, e' un numero che nessuno puo' RIFARE.**
+
+## 📌 **E IL TUO FATTO E' MISURATO: `11.31 %` di `rho_c`**
+
+Invertendo la legge *(`softplus = 1/f - 1`, `u = 1 + log(exp(softplus)-1)`)*, col **controllo di
+ritorno** che da' uno scarto di **UN ULP** `2.22e-16`:
+
+> `u = rho/rho_c` va da ### **zero** *(`-2.2e-16`, cioe' arrotondamento)* a ### **`0.113102`**,
+> mediana `0.067303`. ### **La densita' massima della scena e' l'`11.31 %` di `rho_c`**, e la'
+> il fattore vale `0.743517` contro `0.761463` a densita' nulla: ### **una variazione del `2.36 %`.**
+
+### ➜ **LA PARTE <<DOVE E' DENSO>> NON LAVORA: la legge si comporta come una COSTANTE,
+`LAM * 0.76 = 0.609170`.** ### **Quindi la stabilita' delle masse in questa scena NON viene dalla
+schermatura per densita'**, come dici tu.
+
+## ⚠ **MA IL NUMERO DICE UNA COSA IN PIU', E CAMBIA IL DISEGNO DELLA MISURA**
+
+**La legge ha DUE parti, e solo UNA e' inerte:**
+
+| | la parte | quanto pesa in questa scena |
+|---|---|---|
+| **1** | un ### **TAGLIO COSTANTE del `23.85 %`**, che c'e' ### **anche a densita' NULLA** | ### **GRANDE** |
+| **2** | la parte ### **dipendente dalla densita'** | ### **`2.36 %` — e' questa che non lavora** |
+
+### ⛔ **E `SCHERMATURA = False` SPEGNE TUTTE E DUE:** `lambda_nodi` *(`:4966`)* restituisce
+`np.full(n, LAM)`, cioe' **`0.800000` invece di `~0.609`** — ### **un `+31.3 %`, non un `2.36 %`.**
+### **E il repo l'ha GIA' MISURATO:** il commento di `PSI-FLASH` dentro `lambda_nodi` dice che
+quando la schermatura si spegneva per tutta la rete *«`lambda` da ~0.60 a 0.80, e **`|psi|` su di
+`1.62x` per TUTTI**»*.
+
+### ➜ **QUINDI LA MISURA A DUE BRACCI DI `GUSCIO-ANTIFASE-EMERGENTE` SAREBBE CONFUSA:** il
+braccio `OFF` cambia `lambda` del **31.3 %**, e quasi tutto quel `31.3 %` viene dal **taglio
+costante**, non dalla densita'. ### **Attribuire il risultato alla <<schermatura per densita'>>
+sarebbe sbagliato PER COSTRUZIONE** — ed e' la forma di errore di `P1`.
+
+### ✅ **SERVE UN TERZO BRACCIO, e ISOLA:** `lambda = LAM * 0.761463` **costante**, cioe' la legge
+**congelata al suo valore per `rho → 0`**.
+
+| confronto | che cosa isola | la previsione |
+|---|---|---|
+| `ON` contro ### **`COSTANTE`** | ### **la parte DENSA** | differenza ### **piccola** *(il fattore varia del 2.36 %)* — ### **e si puo' sbagliare, quindi vale** |
+| ### **`COSTANTE`** contro `OFF` | ### **il taglio COSTANTE** | ### **`|psi|` ×1.62**, dal numero gia' misurato di `PSI-FLASH` |
+
+### 📌 **E il terzo braccio NON aggiunge una legge** *(`9-ter`)*: e' **la STESSA legge valutata a
+`u = 0`**, cioe' un **caso limite** di quella che c'e', non una variante nuova.
+
+## ⚠ **E UNA TRAPPOLA IN CUI SONO CADUTO IO, nel commit di ieri**
+
+Le righe citate nelle due voci *(`:4948`, `:4998`, `:5003-5004`, `:5005`)* sono del blob
+**PRIMA** di `7ed56608`: ### **shiftate di 16 dall'intestazione nuova dello STESSO commit
+`4f6b315` che le ha scritte.** E' letteralmente la trappola che `CLAUDE.md` par.2 nomina —
+*«cerca per NOME di funzione, mai per riga»* — ### **e l'ho fatta scrivendo le righe vecchie in
+un commit che le spostava.** Riallineate: `lambda_nodi` ### **`:4964`**, `Ncrit` ### **`:5014`**,
+la *«lettura mista»* ### **`:5007-5009`**, `softplus`/`fattore` ### **`:5019-5020`**,
+`portata_minima` ### **`:5021`**. ### **L'ancora vera e' il NOME, non il numero.**
+
+---

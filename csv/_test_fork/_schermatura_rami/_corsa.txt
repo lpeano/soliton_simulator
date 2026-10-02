@@ -1,13 +1,50 @@
-[TIMBRO] _sonda_scherm.py  sha1-BYTE ?  FUORI DA UN REPO GIT
-  SCHERMATURA = True   (configurazione del driver)
-  dopo la costruzione della scena:
-    _g_scherm_init           0
-    _g_scherm_ricorsione     0
-  dopo 72 passi:
+====================================================================================================
+I DUE RAMI DI RIPIEGO DI `lambda_nodi`, E IN CHE REGIME LAVORA LA SCHERMATURA
+====================================================================================================
+  simulatore .. 7ed56608 (sha1 byte grezzi)
+  questo strumento .. 0856be80
+  seme 11, 72 passi, configurazione DEL DRIVER
+
+  SCHERMATURA = True   LAM = 0.800000   portata_minima = 0.15*LAM = 0.120000
+  dopo la costruzione della scena: {'_g_scherm_init': 0, '_g_scherm_ricorsione': 0}
+
+----------------------------------------------------------------------------------------------------
+PEZZO 1 -- I DUE RAMI DI RIPIEGO, dopo 72 passi
     _g_scherm_init                1   -> 0.014 per passo
     _g_scherm_ricorsione        504   -> 7.00 per passo
-  e per confronto, cio' che il commento del codice dichiara (blob VECCHIO):
-    _g_scherm_ricorsione: 308 su 44 passi = 7.00 per passo
-    _g_scherm_init:       2 (il ripiego di len(psi))
-  e lo stato della schermatura ADESSO: lambda min 0.594814  max 0.609170  (LAM = 0.800000, portata_minima = 0.120000)
-    nodi alla PORTATA MINIMA: 0 su 12812 (0.00%)
+  ### il ramo RICORSIVO restituisce `LAM` a TUTTA LA RETE, e il suo tasso e'
+      lo STESSO del commento vecchio (308 su 44 = 7.00): e' DETERMINISTICO.
+
+----------------------------------------------------------------------------------------------------
+PEZZO 3 -- LA PORTATA MINIMA MORDE?
+    lambda   min 0.594814   max 0.609170   (su 12812 nodi)
+    portata_minima = 0.120000
+    ### nodi AL PAVIMENTO: 0 su 12812 (0.00 %)
+    ### il minimo misurato sta 4.96 volte SOPRA il pavimento.
+
+----------------------------------------------------------------------------------------------------
+PEZZO 2 -- IN CHE REGIME LAVORA LA LEGGE: si INVERTE il fattore
+    la legge: fattore = 1 / (1 + softplus(u - 1)),  u = rho/rho_c
+    ### a u = 0 (densita' NULLA) il fattore e' 0.761463, cioe' la portata e'
+        TAGLIATA DEL 23.85 % ANCHE DOVE NON C'E' NIENTE: la schermatura NON
+        RESTITUISCE MAI `LAM`. E `LAM * 0.761463` = 0.609170.
+    ### il CONTROLLO DI RITORNO: rifatto il conto in avanti, scarto max 2.220e-16
+        (se fosse grande, l'inversione non sarebbe esatta e `u` non si leggerebbe)
+    ### u = rho/rho_c:  min -0.000000   max 0.113102   mediana 0.067303
+    ### cioe' LA DENSITA' MASSIMA DELLA SCENA E' IL 11.31 % DI rho_c.
+    ### e il fattore varia da 0.743517 a 0.761463, cioe' del 2.36 %
+
+====================================================================================================
+### IL VERDETTO
+###   LA PARTE <<DOVE E' DENSO>> DELLA SCHERMATURA NON LAVORA.
+###   La densita' massima della scena e' il 11.31 % di rho_c, e in quel
+###   regime il fattore varia del 2.36 %: la legge si comporta come una
+###   COSTANTE, `LAM * 0.76`.
+### ➜ QUINDI LA STABILITA' DELLE MASSE IN QUESTA SCENA NON VIENE DALLA
+###   SCHERMATURA PER DENSITA'. Qualunque cosa le stabilizzi, non e' questa
+###   legge nel suo regime attivo -- ed e' un dato per
+###   `GUSCIO-ANTIFASE-EMERGENTE`, che chiede proprio se il guscio emerge.
+### ⚠ E NON DICE CHE LA LEGGE E' INUTILE: dice che in QUESTA scena non e'
+###   lei a lavorare. Una scena piu' densa la farebbe entrare, e il numero
+###   sopra dice QUANTO piu' densa (u deve arrivare a 1).
+====================================================================================================
