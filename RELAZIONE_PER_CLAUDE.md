@@ -2150,3 +2150,130 @@ la *«lettura mista»* ### **`:5007-5009`**, `softplus`/`fattore` ### **`:5019-5
 `portata_minima` ### **`:5021`**. ### **L'ancora vera e' il NOME, non il numero.**
 
 ---
+
+## ⛔ **LA SCHERMATURA E' NATA SBAGLIATA, E LO E' DAL PRIMO GIORNO** *(verificato dal repo)*
+
+*(aggiunta a `SCHERMATURA-LEGGE-REVISIONE`, decisione di Luca del 2026-10-03. **Solo documenti e
+indice**, nessuna riga di logica: simulatore `7ed56608`, invariato.)*
+
+### ✅ **HO VERIFICATO LA TUA STORIA DAL REPO INVECE DI PRENDERLA PER BUONA, ed e' esatta.**
+`670310f` *(2026-08-28)*, **stessa formula di oggi**, e il suo commento diceva **quattro cose
+false**:
+
+| dove | la frase del commento originale | vera? |
+|---|---|---|
+| `:902` | *«fattore in (0,1], **= 1 sotto soglia**»* | ### **NO** |
+| `:904` | *«`f = 1/(1 + softplus(u-1))` → **1 se rho < rho_c**»* | ### **NO** |
+| `:906` | *«dolce, ≥ 0, **~0 sotto soglia**»* | ### **NO:** `0.3133` a `u = 0` |
+| `:883` | *«dove `rho << rho_c` **resta `LAM`** (interferenza piena)»* | ### **NO** |
+
+`softplus(-1) = 0.3132616875182229` ⇒ `f(0) = 0.7614628596146600` ⇒ portata nel vuoto
+**`LAM*0.76 = 0.609170`**. ### **L'intenzione scritta era <<nessuna schermatura sotto soglia>>; il
+codice non l'ha mai fatto.**
+
+### ✅ **E LA TUA CORREZIONE TIENE, verificata col conto:** `f(u) = 1/(1 + softplus(u-1) -
+softplus(-1))` da' ### **`f(0) = 1.0` e `float(f(0)) == 1.0` e' VERO AL BIT** — quindi il caso che
+deve fallire ### **passa per costruzione**, non per fortuna. Sotto soglia `~1` *(a `u = 0.1131`,
+`f = 0.969277`)*, sopra soglia `~1/u`, monotona, `f ≤ 1` con uguaglianza **solo** a `u = 0`.
+### 📌 **E non aggiunge una manopola:** `softplus(-1)` **non e' un numero scelto**, e' il valore
+che la legge **stessa** ha a `u = 0` — e' una **normalizzazione**, non una legge in piu' *(`9-ter`)*.
+
+### **I numeri nella scena di oggi:** `lambda` da `[0.594814, 0.609170]` a
+### **`[0.775421, 0.800000]`** — **`+30.3 %` su tutti i nodi**, e la variazione *dentro* la scena
+da `2.36 %` a `3.07 %`.
+
+### ✅ **E LA DIFFERENZA ATTESA SI PUO' GIA' DICHIARARE, da un numero che il repo ha GIA' misurato:**
+`PSI-FLASH` dice che con `lambda` da `~0.60` a `0.80` ⇒ ### **`|psi|` ×`1.62` per TUTTI**, pozzo da
+`130` a `366`. La cura fa **essenzialmente quello stesso salto**. ### ⚠ **Ma la PATOLOGIA non si
+trasferisce, e lo dico perche' nessuno legga quel `×1.62` come una previsione di rottura:** in
+`PSI-FLASH` lo spegnimento era **transitorio e incoerente** *(al passo di nascita, per tutta la
+rete — una **discontinuita'**, ed e' per quello che SOLLEVA)*; la cura e' un cambio **coerente**
+della legge. ### **Trasferisce la MAGNITUDINE, non il difetto.**
+
+## ⛔ **E IL PRIMO DEI TRE FATTI CHE AGGIUNGO E' UN MIO ERRORE: `P1`**
+
+### **QUESTO FATTO ERA GIA' NEL REPO.** `doc/REGISTRO_FISICA.md` porta la previsione
+`REGISTRO_FISICA:P5` — *«`lambda_nodi` quasi **COSTANTE, `0.74`-`0.76 LAM` ovunque**»* — e ne
+traeva **gia' la conclusione, con le tue parole**:
+
+> *«se `lambda_nodi` e' quasi costante, la legge di schermatura e' di fatto **SPENTA dalla soglia
+> irraggiungibile** — cioe' lo stesso difetto di `massa_critica_collasso`, visto da un'altra legge»*
+
+### ➜ **Io ho presentato come nuovo cio' che il repo aveva GIA' concluso**, in `4f6b315` e
+`f13d39e`, senza aver letto quella voce. ### **E' esattamente la forma di `P1`** — *«rileggi dal
+DISCO cio' che e' gia' stabilito»*. ### **La previsione era giusta a QUATTRO CIFRE:** prediceva
+`0.74`-`0.76`, misurato `0.743517`-`0.761463`. ### **Il mio contributo e' la QUANTIFICAZIONE**
+*(`u` max `11.31 %`, la variazione `2.36 %`, `f(0)` esatto, l'inversione col controllo di ritorno a
+un ulp)*, ### **non la scoperta.** L'ho annotato **su `P5`**, cosi' chi la legge sa che la sua
+previsione e' stata verificata.
+
+## ⚠ **IL SECONDO: IL PAVIMENTO E' UNA REGRESSIONE, non solo un numero non derivato**
+
+`670310f` finiva con **`return LAM * fattore`** — ### **nessun pavimento** — e il commento a
+`:883` si vantava proprio di questo: ### **«Nessun LAM_MIN scelto.»** *(la legge VECCHIA aveva
+`P_LAM` e `LAM_MIN` come due parametri liberi, con una taglia **non monotona**: `LAM_MIN`
+`0.1`/`0.3` → `2369`/`9669`)*. ### **`portata_minima = LAM * 0.15` e' entrata SEI GIORNI DOPO**
+*(`5198938`, 2026-09-03)*. ### ➜ **Quindi il punto `(c)` della voce e' piu' grave di come l'avevo
+scritto: e' il ritorno esatto della manopola che la legge esisteva per eliminare.**
+
+## ⛔ **IL TERZO: C'E' UN SECONDO PAVIMENTO, NASCOSTO NEL CLIP — e oggi e' INERTE**
+
+`np.clip(u-1, -30, 30)` satura il fattore a **`1/31 = 0.032258`** *(`lambda = 0.025806`)*, che sta
+### **SOTTO** `portata_minima = 0.12`:
+
+| | | |
+|---|---|---|
+| lato **`+30`** | satura `lambda` a `0.025806` | ### **non puo' MAI influenzare il risultato** *(il pavimento morde da `u ~ 6.65`)* |
+| lato **`-30`** | vorrebbe `u < -29` | ### **impossibile per `rho ≥ 0`** |
+
+### ➜ **Il clip e' interamente MORTO dietro il pavimento.** ### ⚠ **Ma diventa VIVO se il
+pavimento si toglie:** sopra `u = 31` la legge **smetterebbe di andare come `1/u`** e tornerebbe
+**costante a `LAM/31`**. ### 📌 **Quindi i due punti si decidono INSIEME:** derivare il pavimento
+senza guardare il clip ### **sposta** il difetto invece di curarlo — ed e' `A11`.
+
+## ⚠ **E UNA CONSEGUENZA SULL'ORDINE, che non era nel mandato**
+
+### **LA CURA E `GUSCIO-ANTIFASE-EMERGENTE` INTERFERISCONO.** Dopo la cura, nella scena di oggi
+`lambda ∈ [0.775421, 0.800000]`; con `SCHERMATURA = False` e' **`0.800000` piatto**:
+### **al massimo `3.07 %` di differenza.** ### ➜ **I due bracci di quella misura COLLASSANO** —
+confronterebbe due cose quasi identiche e concluderebbe *«la schermatura non conta»*, che sarebbe
+### **un artefatto della scena, non fisica: un `FALSO-ZERO` del tipo <<lo zero era garantito dalla
+costruzione>>.**
+
+### ➜ **Se la cura arriva prima, quella misura va fatta in una scena PIU' DENSA** *(dove `u`
+arriva a `~1`)*. ### **E il terzo braccio che avevo proposto in `f13d39e` diventa SUPERFLUO dopo
+la cura**, perche' la legge corretta a `u ~ 0` ### **e' gia'** il braccio costante.
+### ⚠ **L'ordine lo decidi tu:** lo scrivo perche' **la scelta dell'ordine cambia il disegno**, e
+deciderla senza questo numero sarebbe deciderla alla cieca.
+
+## ✅ **LA DOMANDA MINORE: `u min -0.000000` — NON e' `-0.0`, ed e' l'INVERSIONE**
+
+### **E' un negativo piccolo, non uno zero negativo:** `float(u_min) == 0.0` e' ### **FALSO**. Il
+valore nel json committato *(`f13d39e`)* e' ### **`-2.220446049250313e-16`**, che e'
+### **esattamente un ulp di `1.0`** *(`np.spacing(1.0)`)*.
+
+### **E non viene da `rho`: viene dall'ULTIMO passo dell'inversione**, dove c'e' una
+**cancellazione**:
+
+```
+f = 0.7614628596146600      ->  softplus = 0.3132616875182228
+expm1(softplus)             =  0.3678794411714423   (= e^-1)
+log(expm1(...))             = -1.00000000000000022  <- NON -1 esatto
+u = 1 + (-1.00000000000000022) = -2.22044604925031308e-16
+```
+
+### ➜ **Quindi `rho` non e' negativa: `u` vale ZERO ESATTO e l'arrotondamento dell'inversione lo
+porta un ulp sotto.** ### 📌 **E dice una cosa vera, non solo un artefatto:** quel nodo ha
+`lambda` **esattamente** `0.609170287691728` = `LAM * f(0)`, cioe' ### **ci sono nodi a densita'
+ESATTAMENTE nulla** — vuoto pieno. *(E lo scarto del controllo di ritorno e' **lo stesso ulp**:
+i due numeri sono la stessa cosa vista dai due lati.)*
+
+### ⚠ **I numeri di questo paragrafo NON escono dallo strumento committato**, che riporta `u_min`
+ma non la sua diagnosi: escono dal comando qui sotto, che metto **verbatim** perche' sia
+rigirabile *(`L-NUMERI`: la provenienza e' il comando)*.
+
+```
+python -c "import numpy as np; LAM=0.8; f=0.609170287691728/LAM; s=1.0/f-1.0; L=np.log(np.expm1(s)); print(L, 1.0+L, (1.0+L)==0.0, np.spacing(1.0))"
+```
+
+---

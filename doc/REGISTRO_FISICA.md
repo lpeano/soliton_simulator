@@ -5165,6 +5165,57 @@ numero di punti che **esistono** in `p`.
 archi si simmetrizza: `_lam_archi = max(0.5*(lam_i + lam_j), 1e-6)`. Entra nei pesi come
 `exp(-d/lam)`, quindi ### **lambda piu' grande = accoppiamento piu' esteso = campo piu' forte.**
 
+## ⛔ **E LA LEGGE NON RESTITUISCE MAI `LAM`: LO SBAGLIO E' DEL PRIMO GIORNO**
+
+*(fatto trovato dal guardiano sulla storia, 2026-10-03; voce `SCHERMATURA-LEGGE-REVISIONE`.*
+*La decisione di che farne e' di Luca, e la correzione proposta e' in quella voce.)*
+
+### **`softplus(-1) = ln(1 + e^-1) = 0.3132616875182229`**, quindi **a densita' NULLA**
+### **`f(0) = 0.7614628596146600`** e la portata nel vuoto e' **`LAM * 0.76 = 0.609170`**,
+### **non `LAM`.** La legge non e' *«accorcia la portata dove e' denso»*: e'
+### **«accorcia SEMPRE del 23.85 %, e di piu' dove e' denso».**
+
+### ⚠ **E L'INTENZIONE SCRITTA ERA L'OPPOSTO, dal commit di nascita `670310f`
+*(2026-08-28)*, con la STESSA formula di oggi:**
+
+| dove | la frase del commento originale | vera? |
+|---|---|---|
+| `:902` | *«fattore in (0,1], **= 1 sotto soglia**»* | ### **NO** |
+| `:904` | *«`f = 1/(1 + softplus(u-1))` **-> 1 se rho < rho_c**»* | ### **NO** |
+| `:906` | *«dolce, >= 0, **~0 sotto soglia**»* | ### **NO:** `0.3133` a `u = 0` |
+| `:883` | *«dove `rho << rho_c` **resta `LAM`** (interferenza piena)»* | ### **NO** |
+
+### ➜ **L'INTENZIONE ERA <<NESSUNA SCHERMATURA SOTTO SOGLIA>>. IL CODICE NON L'HA MAI
+FATTO**, e sono passate **cinque settimane** — perche' nelle scene di allora le regioni
+**sopra** soglia erano comuni e il taglio nel vuoto si confondeva col resto.
+### **Oggi la scena e' TUTTA sotto soglia** *(`u` max **`0.113102`**, cioe' l'**`11.31 %`**
+di `rho_c`; referto `csv/_test_fork/_schermatura_rami/`)* e il **taglio costante e' l'UNICA
+cosa che la legge fa.**
+
+### 📌 **E IL REPO L'AVEVA GIA' PREVISTO:** `REGISTRO_FISICA:P5` diceva
+*«`lambda_nodi` quasi **COSTANTE, `0.74`-`0.76 LAM` ovunque**»* e ne traeva la conclusione
+— *«la legge di schermatura e' di fatto **SPENTA dalla soglia irraggiungibile**»*.
+### **Misurato: `0.743517`-`0.761463`. La previsione era giusta a QUATTRO CIFRE**, e la
+soglia non e' solo irraggiungibile: ### **e' lontana un fattore ~9.**
+
+### ⚠ **E IL PAVIMENTO `LAM*0.15` NON C'ERA:** `670310f` finiva con
+`return LAM * fattore`, e il suo commento *(`:883`)* si vantava proprio di questo —
+### **«Nessun LAM_MIN scelto.»** *(la legge vecchia aveva `P_LAM` e `LAM_MIN` come due
+parametri liberi, con una taglia **non monotona**: `LAM_MIN` `0.1`/`0.3` -> `2369`/`9669`)*.
+### **`portata_minima = LAM * 0.15` e' entrata SEI GIORNI DOPO** *(`5198938`, 2026-09-03)*:
+### ➜ **e' il ritorno della manopola che questa legge esisteva per eliminare.**
+
+### ⛔ **E C'E' UN SECONDO PAVIMENTO, NASCOSTO NEL CLIP, oggi INERTE:**
+`np.clip(u-1, -30, 30)` satura il fattore a **`1/31 = 0.032258`** *(`lambda = 0.025806`)*,
+che sta **SOTTO** `portata_minima = 0.12` — quindi il lato **`+30`** del clip **non puo' mai
+influenzare il valore restituito** *(il pavimento esplicito morde da `u ~ 6.65`)*, e il lato
+**`-30`** vorrebbe `u < -29`, impossibile per `rho >= 0`. ### **Il clip e' interamente morto
+dietro il pavimento.** ### ⚠ **Ma diventa VIVO se il pavimento si toglie:** sopra
+`u = 31` la legge smetterebbe di andare come `1/u` e tornerebbe **costante a `LAM/31`**.
+### ➜ **I due punti si decidono INSIEME:** derivare il pavimento senza guardare il clip
+### **sposta** il difetto invece di curarlo — ed e' `A11` *(un tetto che protegge da un
+errore: si cerca l'errore)*.
+
 ## ✅ **DEFINIZIONE, decisa da Luca il 2026-09-28: la massa critica si calcola SUL NUCLEO NUDO**
 
 Dentro `massa_critica_adattiva` la schermatura vale **`LAM`**, non il suo valore schermato, e
