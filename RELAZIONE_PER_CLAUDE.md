@@ -218,3 +218,47 @@ Il **par.9** dice: *«un difetto nuovo = una riga nell'indice, **piu' la spiegaz
 ### 📌 **Che cosa la deciderebbe:** se `STATO_RUN.md` sia ancora il posto della spiegazione lunga **o** se il par.9 vada riscritto su cio' che si fa davvero. ### **Decidi tu**, e nel frattempo l'informazione **non e' persa**: sta nell'indice, interrogabile col comando.
 
 ---
+
+# 📋 **IL TASK HISTORY DEL COMMIT 3, committato PRIMA del lavoro** *(2026-10-02)*
+
+`doc/TASK_HISTORY/2026-10-02_commit3-nascita-evento-unico.md`. ### **Nessuna riga del simulatore:** blob **`3ddc56d9`** prima e dopo. **Il rito del par.8: il ragionamento si scrive prima, e il suo commit dev'essere ANTENATO dei commit del lavoro** — così l'ordine è **verificabile da git** invece che asserito da me.
+
+## ⚠ **LE CINQUE COSE CHE CREDO E NON HO VERIFICATO, scritte prima di guardare**
+
+| # | cosa credo | perché può essere falso |
+|--:|---|---|
+| **1** | le estrazioni casuali nella nascita sono **DUE** *(`ANTIFASE_ADD` e `COPPIA_MIT`)* | ### **non ho verificato il DEFAULT di `ANTIFASE_ADD`**, e non ho guardato se `_nasce`, `_grado` o `_smp_chirurgia` peschino |
+| **2** | il ramo **stocastico** non gira, quindi la sua estrazione non entra nel contratto | verificato il 2026-10-01, ### **ma solo per la configurazione del driver** |
+| ### **3** | ### **assorbire i due `_eredita_*` è la parte DIFFICILE, non la tabella** | portano **sei contatori** e **rami condizionali sulla LUNGHEZZA delle cache**: ### **byte-identico sui CONTATORI vuol dire riprodurre anche i rami che NON scattano** |
+| **4** | `conc_nodi` è il **punto cieco** *(cresce con `.append`)* | l'hanno persa **due strumenti diversi**, nello stesso modo |
+| ### **5** | ### **l'ordine delle SOMME conta quanto l'estrazione** | `psi` del nato è `0.5*(cur[a] + cur[b])`: ### **se la tabella la calcolasse in un ordine diverso, cambierebbe l'ultimo bit** |
+
+## ✅ **COME MISURO L'ORDINE DELLE ESTRAZIONI — e NON leggendo il codice**
+
+### **Avvolgendo `net.rng`** con un oggetto che inoltra e registra *(metodo, `size`, ordine d'arrivo)*, con l'attribuzione alla **voce** presa dalla spia sui confini del **commit 1**.
+### ➜ **Perché non l'AST:** l'AST vede `self.rng.random(...)` **in cinque posti** e ### **non sa quali rami girano** — `ANTIFASE_ADD` e `COPPIA_DENSITA` sono flag, quindi ### **un conteggio statico direbbe 5 dove il runtime dice 1 o 2.** È la regola che in questa sessione ho violato **sei volte**: ### **non leggere il codice, guardare il runtime.**
+### 🛑 **E il controllo che rende la misura valida:** ### **lo stesso passo CON e SENZA la spia deve essere byte-identico.** Se non lo è, la spia **consuma il generatore** e ### **la misura misura la spia.**
+
+### 📌 **E UNA LETTURA FISSATA ORA, prima dei numeri**
+### **Se le estrazioni nella nascita risultassero ZERO** nella configurazione di riferimento, allora ### **il rischio dichiarato nel piano NON si applica a questo commit**, e lo dirò così invece di tenere in piedi un pericolo che i numeri hanno escluso. ### **Ma le SOMME restano, e quelle non dipendono da un flag.**
+
+## 🛑 **I CINQUE PUNTI IN CUI MI FERMO, scritti prima**
+
+**①** la spia su `net.rng` **perturba** il passo · **②** ### **il byte-identico cade SOLO per l'ordine delle estrazioni o delle somme** · **③** un caso che deve fallire **passa** · **④** il punto unico richiede di ### **RIORDINARE** le scritture *(non solo di spostarle)* · **⑤** assorbire i due `_eredita_*` richiede di ### **cambiare un contatore.**
+### ➜ **Il ② è quello che conta, e lo scrivo perché è la tentazione più forte di questo lavoro:** allentare il criterio a *«identico tranne l'ultimo bit»* farebbe passare il commit e ### **butterebbe via la sola prova che la riorganizzazione non è una cura mascherata.**
+
+## ⚠ **E UNA LACUNA DEL REPO CHE HO TROVATO LEGGENDO I FATTI, come il par.0 impone**
+
+`doc/FATTI_dal_codice.md` ha **2 fatti** su `mitosi` e **1** su `_eredita_spinore_figli`. ### **Ma `_eredita_psi_figli`, `semina`, `_allaccia`, `_nasce` e `decidi_divisione` hanno ZERO fatti.**
+### ➜ **Sto per toccare cinque funzioni su cui il repo non ha un solo fatto verificato**, ed è la ### **stessa lacuna di `pozzo_grafo`** che ha fatto allargare `FATTI-AVVIO` il 2026-09-27. ### **In CODA, non in questo giro** *(`L-UN-PROMPT`)*, **ma registrata invece che scoperta dopo.**
+
+## ⚠ **E DUE COSE CHE NON SO SE SIANO FATTIBILI, e le dico ADESSO**
+
+| | |
+|---|---|
+| ### **la SEMINA e l'ALLACCIO nello stesso punto della DIVISIONE** | nascono in un momento del tutto diverso *(la costruzione della scena, non il passo)*: ### **metterli nella stessa funzione potrebbe essere la cosa giusta o un'astrazione forzata**, e non lo so prima di provarci |
+| ### **se le 30 grandezze abbiano DAVVERO una regola per ogni evento** | la tabella dichiara **32** regole su `grandezza x evento`, ### **non 30x4 = 120.** Un presidio che pretendesse una regola per ogni coppia ### **chiederebbe 120 righe dove ce ne sono 32** — e allora il presidio sarebbe sbagliato, non la tabella |
+
+**PROSSIMO: lo strumento che misura l'ordine delle estrazioni, committato PRIMA di girarlo.**
+
+---
