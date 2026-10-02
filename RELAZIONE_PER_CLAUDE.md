@@ -1323,3 +1323,36 @@ Le regole sono ### **funzioni di modulo** e scrivono ### **`net.<nome>`, non `se
 ### 📌 **E una SONDA ha girato prima, ma NON e' una prova e lo dice da se':** `csv/_test_fork/_sonda_commit3.py` prende il *«prima»* da una ### **copia**, non da `git`. Serve a una cosa sola: ### **non committare codice che non ha mai girato.**
 
 ---
+
+# ⛔ **IL CASO ③ DEL PIANO NON AVEVA UN PRESIDIO, E L'HO COSTRUITO** *(2026-10-02)*
+
+> ### **Luca: il par.(c) chiede TRE casi che devono fallire. Il terzo diceva <<una scrittura sparsa a valle deve essere IMPOSSIBILE, cioe' il presidio deve nominarla>>. Il presidio che ho scritto nel commit 3 NON LO FA, e lo dico prima di girare qualunque cosa.**
+
+## ⛔ **CHE COSA IL PRESIDIO DEL PUNTO UNICO FA, E CHE COSA NON FA**
+
+| | |
+|---|---|
+| **fa** | verifica che ### **ogni grandezza del registro ABBIA una regola** per l'evento ⇒ una dimenticanza ferma il run |
+| ### **NON fa** | ### **non verifica che nessun ALTRO la scriva.** Una riga aggiunta ### **DOPO** la chiamata a `nascita()` sarebbe passata ### **in silenzio** |
+
+### ➜ **Cioe': il punto unico era <<unico>> PER COSTRUZIONE MIA, non per presidio.** E `A9` dice che una regola scritta e un presidio sono cose diverse.
+
+## ✅ **IL PRESIDIO ③, e la distinzione E' il punto**
+
+| forma | dentro `mitosi`, fuori dalle regole |
+|---|---|
+| `self.phi = np.concatenate([...])` | ### **VIETATA**: allunga, cioe' ### **fa nascere** |
+| `self.phi[a] = ...` | ### **AMMESSA**: tocca nodi che ### **esistono gia'** — e' ### **IL CALCIO** |
+
+### 📌 **Senza questa distinzione il presidio avrebbe vietato il calcio**, che e' fisica e non una nascita — e un presidio che vieta cio' che e' giusto ### **viene spento**, cioe' e' peggio di nessun presidio.
+
+## ✅ **E HA UN CONTROLLO POSITIVO, perche' altrimenti lo zero non vale niente** (`STANDARD 2`)
+
+Si ### **INIETTA** `self.phi = np.concatenate([self.phi, fm])` subito dopo la chiamata al punto unico, in una ### **copia**, e ### **il presidio deve NOMINARLA** — grandezza, funzione, riga.
+### ➜ **Lo zero sul simulatore vero conta SOLO perche' l'iniezione da' uno.**
+
+## ⚠ **E NON E' CABLATO IN UN HOOK: e' uno SCRIPT** (`A9`)
+
+### **Oggi NON IMPEDISCE NIENTE**, e lo stampa da se' nel referto. Cablarlo nel `pre-commit` e' una voce di ### **coda**, non una cosa che faccio dentro il commit 3.
+
+---
