@@ -1,0 +1,5453 @@
+{
+ "vale": true,
+ "blob_sim_sha1_byte": "3ddc56d947d91069c89ae476f89afcadcb1ae4e6",
+ "blob_strumento": "a4c656075196fe91141a3460cd85d34b93ec0666",
+ "seme": 11,
+ "da": 40,
+ "fino": 72,
+ "controllo_con_senza_spia": {
+  "byte_identico": true,
+  "grandezze_e_contatori": 188,
+  "estrazioni_nel_passo_di_prova": 3
+ },
+ "nascite": [
+  {
+   "passo": 42,
+   "d_n": 1,
+   "d_m": 1
+  },
+  {
+   "passo": 50,
+   "d_n": 1,
+   "d_m": 1
+  },
+  {
+   "passo": 65,
+   "d_n": 1,
+   "d_m": 1
+  },
+  {
+   "passo": 66,
+   "d_n": 1,
+   "d_m": 1
+  },
+  {
+   "passo": 69,
+   "d_n": 1,
+   "d_m": 1
+  },
+  {
+   "passo": 70,
+   "d_n": 3,
+   "d_m": 4
+  },
+  {
+   "passo": 71,
+   "d_n": 1,
+   "d_m": 1
+  },
+  {
+   "passo": 72,
+   "d_n": 1,
+   "d_m": 1
+  }
+ ],
+ "estrazioni_totali": 111,
+ "per_voce_e_metodo": [
+  {
+   "voce": "mitosi",
+   "metodo": "random",
+   "chiamate": 40,
+   "elementi": 15090134
+  },
+  {
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "chiamate": 32,
+   "elementi": 409739
+  },
+  {
+   "voce": "step",
+   "metodo": "normal",
+   "chiamate": 39,
+   "elementi": 1229244
+  }
+ ],
+ "sequenza_passo_senza_nascite": [
+  [
+   "scuoti_vuoto",
+   "normal",
+   12802
+  ],
+  [
+   "step",
+   "normal",
+   38406
+  ],
+  [
+   "mitosi",
+   "random",
+   471564
+  ]
+ ],
+ "sequenza_passo_con_nascite": [
+  [
+   "scuoti_vuoto",
+   "normal",
+   12802
+  ],
+  [
+   "step",
+   "normal",
+   38406
+  ],
+  [
+   "mitosi",
+   "random",
+   471564
+  ],
+  [
+   "mitosi",
+   "random",
+   1
+  ]
+ ],
+ "passo_senza_nascite": 41,
+ "passo_con_nascite": 42,
+ "fuori_dal_passo": {
+  "estrazioni": 42,
+  "misurato": true,
+  "per_voce_e_metodo": [
+   {
+    "voce": "scena MASSE-COERENTI (avvia_test)",
+    "metodo": "choice",
+    "chiamate": 16,
+    "elementi": 573253
+   },
+   {
+    "voce": "scena MASSE-COERENTI (avvia_test)",
+    "metodo": "normal",
+    "chiamate": 4,
+    "elementi": 14039
+   },
+   {
+    "voce": "scena MASSE-COERENTI (avvia_test)",
+    "metodo": "random",
+    "chiamate": 16,
+    "elementi": 1694155
+   },
+   {
+    "voce": "vuoto (_applica_flag, dentro carica_dal_cli)",
+    "metodo": "choice",
+    "chiamate": 1,
+    "elementi": 900
+   },
+   {
+    "voce": "vuoto (_applica_flag, dentro carica_dal_cli)",
+    "metodo": "normal",
+    "chiamate": 3,
+    "elementi": 6300
+   },
+   {
+    "voce": "vuoto (_applica_flag, dentro carica_dal_cli)",
+    "metodo": "random",
+    "chiamate": 2,
+    "elementi": 1800
+   }
+  ],
+  "n": 12802,
+  "archi": 471564
+ },
+ "scritture_ordine": [
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2891,
+   "grandezza": "_g_eredpsi_tot",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_eredpsi_tot', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_eredpsi_tot', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_eredpsi_tot', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_eredpsi_tot = getattr(self, \"_g_eredpsi_tot\", 0) + 1"
+  },
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2894,
+   "grandezza": "psi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "complex128",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "cur[:n0]",
+    "0.5 * (cur[a] + cur[b])"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "cur[a]",
+      "cur[b]"
+     ],
+     "testo": "cur[a] + cur[b]"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self.psi = np.concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])"
+  },
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2896,
+   "grandezza": "_g_eredpsi_salti",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_eredpsi_salti', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_eredpsi_salti', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_eredpsi_salti', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_eredpsi_salti = getattr(self, \"_g_eredpsi_salti\", 0) + 1"
+  },
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2900,
+   "grandezza": "psi_spin",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "complex128",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "cs[:n0]",
+    "cs[a]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.psi_spin = np.concatenate([cs[:n0], cs[a]])"
+  },
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2902,
+   "grandezza": "_g_eredpsis_salti",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_eredpsis_salti', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_eredpsis_salti', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_eredpsis_salti', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_eredpsis_salti = getattr(self, \"_g_eredpsis_salti\", 0) + 1"
+  },
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2910,
+   "grandezza": "rho_spin",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "np.asarray(rs)[:n0]",
+    "np.asarray(rs)[a]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.rho_spin = np.concatenate([np.asarray(rs)[:n0], np.asarray(rs)[a]])"
+  },
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2912,
+   "grandezza": "_g_eredrho_salti",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_eredrho_salti', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_eredrho_salti', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_eredrho_salti', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_eredrho_salti = getattr(self, \"_g_eredrho_salti\", 0) + 1"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2937,
+   "grandezza": "_cs_nodo_prev",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "_csp_er",
+    "np.asarray(_csp_er, float)[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._cs_nodo_prev = np.concatenate([_csp_er, np.asarray(_csp_er, float)[src]])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2941,
+   "grandezza": "_nb",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._nb",
+    "self._nb[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._nb = np.vstack([self._nb, self._nb[src]])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2949,
+   "grandezza": "_nb_ret",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "_nbr_er",
+    "_nbr_er[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._nb_ret = np.vstack([_nbr_er, _nbr_er[src]])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2951,
+   "grandezza": "omega_s",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.omega_s",
+    "self.omega_s[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.omega_s = np.vstack([self.omega_s, self.omega_s[src]])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2956,
+   "grandezza": "_psi_spinor",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "complex128",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._psi_spinor",
+    "er"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._psi_spinor = np.vstack([self._psi_spinor, er])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2961,
+   "grandezza": "_spinor_lift",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "complex128",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._spinor_lift",
+    "el"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._spinor_lift = np.vstack([self._spinor_lift, el])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2963,
+   "grandezza": "_psi_prec",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "complex128",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._psi_prec",
+    "self._psi_prec[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._psi_prec = np.concatenate([self._psi_prec, self._psi_prec[src]])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2975,
+   "grandezza": "_psi_spin_prec",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "complex128",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "_pspr",
+    "np.asarray(_pspr)[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._psi_spin_prec = np.vstack([_pspr, np.asarray(_pspr)[src]])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2943,
+   "grandezza": "_nb_prec",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._nb_prec",
+    "self._nb_prec[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._nb_prec = np.vstack([self._nb_prec, self._nb_prec[src]])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3726,
+   "grandezza": "pos",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.pos",
+    "p"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.pos = np.vstack([self.pos, p])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3727,
+   "grandezza": "phi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi",
+    "ph % self._dphi()"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi = np.concatenate([self.phi, ph % self._dphi()])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3728,
+   "grandezza": "phi0",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi0",
+    "ph % self._dphi()"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi0 = np.concatenate([self.phi0, ph % self._dphi()])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3729,
+   "grandezza": "phi_s",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi_s",
+    "np.zeros(n)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi_s = np.concatenate([self.phi_s, np.zeros(n)])   # spinore: nasce a 0 (inerte se spento)"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3771,
+   "grandezza": "perc_chi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "int64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_chi",
+    "chi_nuovi"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_chi = np.concatenate([self.perc_chi, chi_nuovi])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3774,
+   "grandezza": "perc_geom",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "int64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_geom",
+    "chi_nuovi"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_geom = np.concatenate([self.perc_geom, chi_nuovi])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3775,
+   "grandezza": "perc_tw",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_tw",
+    "np.zeros(n)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(n)])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3744,
+   "grandezza": "phivel",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phivel",
+    "calcio_phi"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phivel = np.concatenate([self.phivel, calcio_phi])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3746,
+   "grandezza": "phivel",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phivel",
+    "np.zeros(n)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phivel = np.concatenate([self.phivel, np.zeros(n)])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3766,
+   "grandezza": "eta",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.eta",
+    "np.zeros(n)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.eta = np.concatenate([self.eta, np.zeros(n)])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3769,
+   "grandezza": "eta",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.eta",
+    "np.zeros(n)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.eta = np.concatenate([self.eta, np.zeros(n)])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3817,
+   "grandezza": "_g_cura4_maturati",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_cura4_maturati', 0)",
+    "int(_b - _a)"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_cura4_maturati', 0)",
+      "int(_b - _a)"
+     ],
+     "testo": "getattr(self, '_g_cura4_maturati', 0) + int(_b - _a)"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_cura4_maturati = getattr(self, \"_g_cura4_maturati\", 0) + int(_b - _a)"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3938,
+   "grandezza": "_g_compat_chi_tot",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_compat_chi_tot', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_compat_chi_tot', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_compat_chi_tot', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_compat_chi_tot = getattr(self, \"_g_compat_chi_tot\", 0) + 1"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3945,
+   "grandezza": "i",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.i",
+    "a"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.i = np.concatenate([self.i, a]); self.j = np.concatenate([self.j, b])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3945,
+   "grandezza": "j",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.j",
+    "b"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.i = np.concatenate([self.i, a]); self.j = np.concatenate([self.j, b])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3950,
+   "grandezza": "d",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.d",
+    "dd"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.d = np.concatenate([self.d, dd]); self.d0 = np.concatenate([self.d0, dd])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3950,
+   "grandezza": "d0",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.d0",
+    "dd"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.d = np.concatenate([self.d, dd]); self.d0 = np.concatenate([self.d0, dd])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3952,
+   "grandezza": "vd",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.vd",
+    "np.zeros(len(dd))"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.vd = np.concatenate([self.vd, np.zeros(len(dd))])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3953,
+   "grandezza": "peq",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.peq",
+    "np.full(len(dd), np.nan)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.peq = np.concatenate([self.peq, np.full(len(dd), np.nan)])  # da calibrare"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3954,
+   "grandezza": "_rep",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._rep",
+    "np.zeros(len(dd))"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._rep = np.concatenate([self._rep, np.zeros(len(dd))])       # [(3)] nessuna storia"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3955,
+   "grandezza": "tw",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.tw",
+    "np.zeros(len(dd))"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.tw = np.concatenate([self.tw, np.zeros(len(dd))])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3956,
+   "grandezza": "twp",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.twp",
+    "np.zeros(len(dd))"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.twp = np.concatenate([self.twp, np.zeros(len(dd))])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3940,
+   "grandezza": "_g_compat_chi_spento",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_compat_chi_spento', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_compat_chi_spento', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_compat_chi_spento', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_compat_chi_spento = getattr(self, \"_g_compat_chi_spento\", 0) + 1"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7335,
+   "grandezza": "pos",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.pos",
+    "pos_figlio"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.pos = np.vstack([self.pos, pos_figlio])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7336,
+   "grandezza": "phi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi",
+    "fm"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi = np.concatenate([self.phi, fm]); self.phi0 = np.concatenate([self.phi0, fm])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7336,
+   "grandezza": "phi0",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi0",
+    "fm"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi = np.concatenate([self.phi, fm]); self.phi0 = np.concatenate([self.phi0, fm])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7337,
+   "grandezza": "phi_s",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi_s",
+    "self.phi_s[a]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi_s = np.concatenate([self.phi_s, self.phi_s[a]])   # spinore del figlio: eredita dal genitore"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7338,
+   "grandezza": "phivel",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phivel",
+    "0.5 * (self.phivel[a] + self.phivel[b])"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "self.phivel[a]",
+      "self.phivel[b]"
+     ],
+     "testo": "self.phivel[a] + self.phivel[b]"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[a] + self.phivel[b])])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7339,
+   "grandezza": "eta",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.eta",
+    "np.zeros(len(sel))"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.eta = np.concatenate([self.eta, np.zeros(len(sel))])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7342,
+   "grandezza": "perc_chi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "int64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_chi",
+    "self.perc_chi[a]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7345,
+   "grandezza": "perc_geom",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "int64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_geom",
+    "self.perc_geom[a]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[a]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7351,
+   "grandezza": "_g_nati_mitosi",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_nati_mitosi', 0)",
+    "int(len(a))"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_nati_mitosi', 0)",
+      "int(len(a))"
+     ],
+     "testo": "getattr(self, '_g_nati_mitosi', 0) + int(len(a))"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_nati_mitosi = getattr(self, \"_g_nati_mitosi\", 0) + int(len(a))"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7352,
+   "grandezza": "_g_nati_mitosi_ev",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_nati_mitosi_ev', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_nati_mitosi_ev', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_nati_mitosi_ev', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_nati_mitosi_ev = getattr(self, \"_g_nati_mitosi_ev\", 0) + 1"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7353,
+   "grandezza": "perc_tw",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_tw",
+    "np.zeros(len(sel))"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(len(sel))])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7414,
+   "grandezza": "i",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.i[keep]",
+    "a",
+    "m"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.i = np.concatenate([self.i[keep], a, m])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7415,
+   "grandezza": "j",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.j[keep]",
+    "m",
+    "b"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.j = np.concatenate([self.j[keep], m, b])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7427,
+   "grandezza": "d",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.d[keep]",
+    "dh",
+    "dh"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.d = np.concatenate([self.d[keep], dh, dh])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7430,
+   "grandezza": "d0",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.d0[keep]",
+    "d0new"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.d0 = np.concatenate([self.d0[keep], d0new])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7432,
+   "grandezza": "vd",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.vd[keep]",
+    "self.vd[sel]",
+    "self.vd[sel]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7433,
+   "grandezza": "peq",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.peq[keep]",
+    "self.peq[sel]",
+    "self.peq[sel]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7437,
+   "grandezza": "_rep",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._rep[keep]",
+    "self._rep[sel]",
+    "self._rep[sel]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._rep = np.concatenate([self._rep[keep], self._rep[sel], self._rep[sel]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7439,
+   "grandezza": "tw",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.tw[keep]",
+    "zz",
+    "zz"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.tw = np.concatenate([self.tw[keep], zz, zz])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7440,
+   "grandezza": "twp",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.twp[keep]",
+    "self._wphi(self.phi[a] - fm)",
+    "self._wphi(fm - self.phi[b])"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.twp = np.concatenate([self.twp[keep], self._wphi(self.phi[a] - fm),"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7420,
+   "grandezza": "conc_archi",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "[self.conc_archi[e] if e < len(self.conc_archi) else [] for e in keep_idx]",
+    "[[] for _ in range(2 * len(a))]"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "[self.conc_archi[e] if e < len(self.conc_archi) else [] for e in keep_idx]",
+      "[[] for _ in range(2 * len(a))]"
+     ],
+     "testo": "[self.conc_archi[e] if e < len(self.conc_archi) else [] for e in keep_idx] + [[] for _ in range(2 * len(a))]"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self.conc_archi = ([self.conc_archi[e] if e < len(self.conc_archi) else []"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7506,
+   "grandezza": "pos",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.pos",
+    "0.5 * (self.pos[aa] + self.pos[bb])"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "self.pos[aa]",
+      "self.pos[bb]"
+     ],
+     "testo": "self.pos[aa] + self.pos[bb]"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7507,
+   "grandezza": "phi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi",
+    "anti"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi = np.concatenate([self.phi, anti])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7508,
+   "grandezza": "phi0",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi0",
+    "anti"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi0 = np.concatenate([self.phi0, anti])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7509,
+   "grandezza": "phi_s",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi_s",
+    "np.zeros(nc)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi_s = np.concatenate([self.phi_s, np.zeros(nc)])   # spinore antinodo: 0 (inerte se spento)"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7510,
+   "grandezza": "phivel",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phivel",
+    "0.5 * (self.phivel[aa] + self.phivel[bb])"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "self.phivel[aa]",
+      "self.phivel[bb]"
+     ],
+     "testo": "self.phivel[aa] + self.phivel[bb]"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[aa] + self.phivel[bb])])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7511,
+   "grandezza": "eta",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.eta",
+    "np.zeros(nc)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.eta = np.concatenate([self.eta, np.zeros(nc)])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7514,
+   "grandezza": "perc_chi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "int64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_chi",
+    "-self.perc_chi[aa]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7518,
+   "grandezza": "perc_geom",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "int64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_geom",
+    "self.perc_geom[aa]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[aa]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7522,
+   "grandezza": "_g_nati_schwinger",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_nati_schwinger', 0)",
+    "int(nc)"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_nati_schwinger', 0)",
+      "int(nc)"
+     ],
+     "testo": "getattr(self, '_g_nati_schwinger', 0) + int(nc)"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_nati_schwinger = getattr(self, \"_g_nati_schwinger\", 0) + int(nc)"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7523,
+   "grandezza": "_g_nati_schwinger_ev",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_nati_schwinger_ev', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_nati_schwinger_ev', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_nati_schwinger_ev', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_nati_schwinger_ev = getattr(self, \"_g_nati_schwinger_ev\", 0) + 1"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7524,
+   "grandezza": "perc_tw",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_tw",
+    "np.zeros(nc)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(nc)])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7544,
+   "grandezza": "i",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.i",
+    "aa",
+    "k"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.i = np.concatenate([self.i, aa, k])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7545,
+   "grandezza": "j",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.j",
+    "k",
+    "bb"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.j = np.concatenate([self.j, k, bb])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7546,
+   "grandezza": "d",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.d",
+    "dd",
+    "dd"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.d = np.concatenate([self.d, dd, dd])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7549,
+   "grandezza": "d0",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.d0",
+    "dd",
+    "dd"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.d0 = np.concatenate([self.d0, dd, dd])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7551,
+   "grandezza": "vd",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.vd",
+    "np.zeros(2 * nc)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7552,
+   "grandezza": "peq",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.peq",
+    "np.full(2 * nc, pmed)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7558,
+   "grandezza": "_rep",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._rep",
+    "np.zeros(2 * nc)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])   # [(3)] archi nuovi"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7560,
+   "grandezza": "tw",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.tw",
+    "zz2",
+    "zz2"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.tw = np.concatenate([self.tw, zz2, zz2])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7561,
+   "grandezza": "twp",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.twp",
+    "self._wphi(self.phi[aa] - anti)",
+    "self._wphi(anti - self.phi[bb])"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.twp = np.concatenate([self.twp, self._wphi(self.phi[aa] - anti),"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7503,
+   "grandezza": "_g_peqn_archi",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_peqn_archi', 0)",
+    "int(2 * nc)"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_peqn_archi', 0)",
+      "int(2 * nc)"
+     ],
+     "testo": "getattr(self, '_g_peqn_archi', 0) + int(2 * nc)"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_peqn_archi = getattr(self, '_g_peqn_archi', 0) + int(2 * nc)"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7504,
+   "grandezza": "_g_peqn_ev",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_peqn_ev', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_peqn_ev', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_peqn_ev', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_peqn_ev = getattr(self, '_g_peqn_ev', 0) + 1"
+  }
+ ],
+ "contratto_concatenazioni": [
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2894,
+   "grandezza": "psi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "complex128",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "cur[:n0]",
+    "0.5 * (cur[a] + cur[b])"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "cur[a]",
+      "cur[b]"
+     ],
+     "testo": "cur[a] + cur[b]"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self.psi = np.concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])"
+  },
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2900,
+   "grandezza": "psi_spin",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "complex128",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "cs[:n0]",
+    "cs[a]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.psi_spin = np.concatenate([cs[:n0], cs[a]])"
+  },
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2910,
+   "grandezza": "rho_spin",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "np.asarray(rs)[:n0]",
+    "np.asarray(rs)[a]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.rho_spin = np.concatenate([np.asarray(rs)[:n0], np.asarray(rs)[a]])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2937,
+   "grandezza": "_cs_nodo_prev",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "_csp_er",
+    "np.asarray(_csp_er, float)[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._cs_nodo_prev = np.concatenate([_csp_er, np.asarray(_csp_er, float)[src]])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2941,
+   "grandezza": "_nb",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._nb",
+    "self._nb[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._nb = np.vstack([self._nb, self._nb[src]])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2949,
+   "grandezza": "_nb_ret",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "_nbr_er",
+    "_nbr_er[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._nb_ret = np.vstack([_nbr_er, _nbr_er[src]])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2951,
+   "grandezza": "omega_s",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.omega_s",
+    "self.omega_s[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.omega_s = np.vstack([self.omega_s, self.omega_s[src]])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2956,
+   "grandezza": "_psi_spinor",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "complex128",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._psi_spinor",
+    "er"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._psi_spinor = np.vstack([self._psi_spinor, er])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2961,
+   "grandezza": "_spinor_lift",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "complex128",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._spinor_lift",
+    "el"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._spinor_lift = np.vstack([self._spinor_lift, el])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2963,
+   "grandezza": "_psi_prec",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "complex128",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._psi_prec",
+    "self._psi_prec[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._psi_prec = np.concatenate([self._psi_prec, self._psi_prec[src]])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2975,
+   "grandezza": "_psi_spin_prec",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "complex128",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "_pspr",
+    "np.asarray(_pspr)[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._psi_spin_prec = np.vstack([_pspr, np.asarray(_pspr)[src]])"
+  },
+  {
+   "funzione": "_eredita_spinore_figli",
+   "riga_oggi": 2943,
+   "grandezza": "_nb_prec",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._nb_prec",
+    "self._nb_prec[src]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._nb_prec = np.vstack([self._nb_prec, self._nb_prec[src]])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3726,
+   "grandezza": "pos",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.pos",
+    "p"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.pos = np.vstack([self.pos, p])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3727,
+   "grandezza": "phi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi",
+    "ph % self._dphi()"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi = np.concatenate([self.phi, ph % self._dphi()])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3728,
+   "grandezza": "phi0",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi0",
+    "ph % self._dphi()"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi0 = np.concatenate([self.phi0, ph % self._dphi()])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3729,
+   "grandezza": "phi_s",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi_s",
+    "np.zeros(n)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi_s = np.concatenate([self.phi_s, np.zeros(n)])   # spinore: nasce a 0 (inerte se spento)"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3771,
+   "grandezza": "perc_chi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "int64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_chi",
+    "chi_nuovi"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_chi = np.concatenate([self.perc_chi, chi_nuovi])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3774,
+   "grandezza": "perc_geom",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "int64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_geom",
+    "chi_nuovi"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_geom = np.concatenate([self.perc_geom, chi_nuovi])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3775,
+   "grandezza": "perc_tw",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_tw",
+    "np.zeros(n)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(n)])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3744,
+   "grandezza": "phivel",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phivel",
+    "calcio_phi"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phivel = np.concatenate([self.phivel, calcio_phi])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3746,
+   "grandezza": "phivel",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phivel",
+    "np.zeros(n)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phivel = np.concatenate([self.phivel, np.zeros(n)])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3766,
+   "grandezza": "eta",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.eta",
+    "np.zeros(n)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.eta = np.concatenate([self.eta, np.zeros(n)])"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3769,
+   "grandezza": "eta",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.eta",
+    "np.zeros(n)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.eta = np.concatenate([self.eta, np.zeros(n)])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3945,
+   "grandezza": "i",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.i",
+    "a"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.i = np.concatenate([self.i, a]); self.j = np.concatenate([self.j, b])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3945,
+   "grandezza": "j",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.j",
+    "b"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.i = np.concatenate([self.i, a]); self.j = np.concatenate([self.j, b])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3950,
+   "grandezza": "d",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.d",
+    "dd"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.d = np.concatenate([self.d, dd]); self.d0 = np.concatenate([self.d0, dd])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3950,
+   "grandezza": "d0",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.d0",
+    "dd"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.d = np.concatenate([self.d, dd]); self.d0 = np.concatenate([self.d0, dd])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3952,
+   "grandezza": "vd",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.vd",
+    "np.zeros(len(dd))"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.vd = np.concatenate([self.vd, np.zeros(len(dd))])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3953,
+   "grandezza": "peq",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.peq",
+    "np.full(len(dd), np.nan)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.peq = np.concatenate([self.peq, np.full(len(dd), np.nan)])  # da calibrare"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3954,
+   "grandezza": "_rep",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._rep",
+    "np.zeros(len(dd))"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._rep = np.concatenate([self._rep, np.zeros(len(dd))])       # [(3)] nessuna storia"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3955,
+   "grandezza": "tw",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.tw",
+    "np.zeros(len(dd))"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.tw = np.concatenate([self.tw, np.zeros(len(dd))])"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3956,
+   "grandezza": "twp",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.twp",
+    "np.zeros(len(dd))"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.twp = np.concatenate([self.twp, np.zeros(len(dd))])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7335,
+   "grandezza": "pos",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.pos",
+    "pos_figlio"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.pos = np.vstack([self.pos, pos_figlio])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7336,
+   "grandezza": "phi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi",
+    "fm"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi = np.concatenate([self.phi, fm]); self.phi0 = np.concatenate([self.phi0, fm])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7336,
+   "grandezza": "phi0",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi0",
+    "fm"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi = np.concatenate([self.phi, fm]); self.phi0 = np.concatenate([self.phi0, fm])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7337,
+   "grandezza": "phi_s",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi_s",
+    "self.phi_s[a]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi_s = np.concatenate([self.phi_s, self.phi_s[a]])   # spinore del figlio: eredita dal genitore"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7338,
+   "grandezza": "phivel",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phivel",
+    "0.5 * (self.phivel[a] + self.phivel[b])"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "self.phivel[a]",
+      "self.phivel[b]"
+     ],
+     "testo": "self.phivel[a] + self.phivel[b]"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[a] + self.phivel[b])])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7339,
+   "grandezza": "eta",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.eta",
+    "np.zeros(len(sel))"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.eta = np.concatenate([self.eta, np.zeros(len(sel))])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7342,
+   "grandezza": "perc_chi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "int64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_chi",
+    "self.perc_chi[a]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_chi = np.concatenate([self.perc_chi, self.perc_chi[a]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7345,
+   "grandezza": "perc_geom",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "int64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_geom",
+    "self.perc_geom[a]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[a]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7353,
+   "grandezza": "perc_tw",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_tw",
+    "np.zeros(len(sel))"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(len(sel))])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7414,
+   "grandezza": "i",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.i[keep]",
+    "a",
+    "m"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.i = np.concatenate([self.i[keep], a, m])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7415,
+   "grandezza": "j",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.j[keep]",
+    "m",
+    "b"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.j = np.concatenate([self.j[keep], m, b])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7427,
+   "grandezza": "d",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.d[keep]",
+    "dh",
+    "dh"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.d = np.concatenate([self.d[keep], dh, dh])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7430,
+   "grandezza": "d0",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.d0[keep]",
+    "d0new"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.d0 = np.concatenate([self.d0[keep], d0new])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7432,
+   "grandezza": "vd",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.vd[keep]",
+    "self.vd[sel]",
+    "self.vd[sel]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.vd = np.concatenate([self.vd[keep], self.vd[sel], self.vd[sel]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7433,
+   "grandezza": "peq",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.peq[keep]",
+    "self.peq[sel]",
+    "self.peq[sel]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.peq = np.concatenate([self.peq[keep], self.peq[sel], self.peq[sel]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7437,
+   "grandezza": "_rep",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._rep[keep]",
+    "self._rep[sel]",
+    "self._rep[sel]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._rep = np.concatenate([self._rep[keep], self._rep[sel], self._rep[sel]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7439,
+   "grandezza": "tw",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.tw[keep]",
+    "zz",
+    "zz"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.tw = np.concatenate([self.tw[keep], zz, zz])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7440,
+   "grandezza": "twp",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.twp[keep]",
+    "self._wphi(self.phi[a] - fm)",
+    "self._wphi(fm - self.phi[b])"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.twp = np.concatenate([self.twp[keep], self._wphi(self.phi[a] - fm),"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7506,
+   "grandezza": "pos",
+   "forma": "vstack",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.pos",
+    "0.5 * (self.pos[aa] + self.pos[bb])"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "self.pos[aa]",
+      "self.pos[bb]"
+     ],
+     "testo": "self.pos[aa] + self.pos[bb]"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self.pos = np.vstack([self.pos, 0.5 * (self.pos[aa] + self.pos[bb])])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7507,
+   "grandezza": "phi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi",
+    "anti"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi = np.concatenate([self.phi, anti])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7508,
+   "grandezza": "phi0",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi0",
+    "anti"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi0 = np.concatenate([self.phi0, anti])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7509,
+   "grandezza": "phi_s",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phi_s",
+    "np.zeros(nc)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.phi_s = np.concatenate([self.phi_s, np.zeros(nc)])   # spinore antinodo: 0 (inerte se spento)"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7510,
+   "grandezza": "phivel",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.phivel",
+    "0.5 * (self.phivel[aa] + self.phivel[bb])"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "self.phivel[aa]",
+      "self.phivel[bb]"
+     ],
+     "testo": "self.phivel[aa] + self.phivel[bb]"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self.phivel = np.concatenate([self.phivel, 0.5 * (self.phivel[aa] + self.phivel[bb])])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7511,
+   "grandezza": "eta",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.eta",
+    "np.zeros(nc)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.eta = np.concatenate([self.eta, np.zeros(nc)])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7514,
+   "grandezza": "perc_chi",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "int64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_chi",
+    "-self.perc_chi[aa]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_chi = np.concatenate([self.perc_chi, -self.perc_chi[aa]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7518,
+   "grandezza": "perc_geom",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "int64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_geom",
+    "self.perc_geom[aa]"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_geom = np.concatenate([self.perc_geom, self.perc_geom[aa]])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7524,
+   "grandezza": "perc_tw",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.perc_tw",
+    "np.zeros(nc)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.perc_tw = np.concatenate([self.perc_tw, np.zeros(nc)])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7544,
+   "grandezza": "i",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.i",
+    "aa",
+    "k"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.i = np.concatenate([self.i, aa, k])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7545,
+   "grandezza": "j",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": null,
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.j",
+    "k",
+    "bb"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.j = np.concatenate([self.j, k, bb])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7546,
+   "grandezza": "d",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.d",
+    "dd",
+    "dd"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.d = np.concatenate([self.d, dd, dd])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7549,
+   "grandezza": "d0",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.d0",
+    "dd",
+    "dd"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.d0 = np.concatenate([self.d0, dd, dd])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7551,
+   "grandezza": "vd",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.vd",
+    "np.zeros(2 * nc)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.vd = np.concatenate([self.vd, np.zeros(2 * nc)])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7552,
+   "grandezza": "peq",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.peq",
+    "np.full(2 * nc, pmed)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.peq = np.concatenate([self.peq, np.full(2 * nc, pmed)])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7558,
+   "grandezza": "_rep",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self._rep",
+    "np.zeros(2 * nc)"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self._rep = np.concatenate([self._rep, np.zeros(2 * nc)])   # [(3)] archi nuovi"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7560,
+   "grandezza": "tw",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.tw",
+    "zz2",
+    "zz2"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.tw = np.concatenate([self.tw, zz2, zz2])"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7561,
+   "grandezza": "twp",
+   "forma": "concatenate",
+   "nel_registro": true,
+   "tipo_dichiarato": "float64",
+   "ordine_conta": true,
+   "perche": "CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. Conta per qualunque tipo, e non e' una questione di ultimo bit",
+   "addendi_in_ordine": [
+    "self.twp",
+    "self._wphi(self.phi[aa] - anti)",
+    "self._wphi(anti - self.phi[bb])"
+   ],
+   "somme_annidate": [],
+   "max_addendi_in_una_somma": 0,
+   "testo": "self.twp = np.concatenate([self.twp, self._wphi(self.phi[aa] - anti),"
+  }
+ ],
+ "controllo_ieee754": {
+  "due_addendi_commutativi": true,
+  "tre_addendi_associativi": false,
+  "differenze_su_200000": 48083
+ },
+ "somme_aritmetiche_tutte": [
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_eredpsi_tot', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_eredpsi_tot', 0) + 1",
+   "grandezza": "_g_eredpsi_tot",
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2891,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "cur[a]",
+    "cur[b]"
+   ],
+   "testo": "cur[a] + cur[b]",
+   "grandezza": "psi",
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2894,
+   "tipo_dichiarato": "complex128",
+   "nel_registro": true
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_eredpsi_salti', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_eredpsi_salti', 0) + 1",
+   "grandezza": "_g_eredpsi_salti",
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2896,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_eredpsis_salti', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_eredpsis_salti', 0) + 1",
+   "grandezza": "_g_eredpsis_salti",
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2902,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_eredrho_salti', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_eredrho_salti', 0) + 1",
+   "grandezza": "_g_eredrho_salti",
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2912,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_cura4_maturati', 0)",
+    "int(_b - _a)"
+   ],
+   "testo": "getattr(self, '_g_cura4_maturati', 0) + int(_b - _a)",
+   "grandezza": "_g_cura4_maturati",
+   "funzione": "semina",
+   "riga_oggi": 3817,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_compat_chi_tot', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_compat_chi_tot', 0) + 1",
+   "grandezza": "_g_compat_chi_tot",
+   "funzione": "_allaccia",
+   "riga_oggi": 3938,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_compat_chi_spento', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_compat_chi_spento', 0) + 1",
+   "grandezza": "_g_compat_chi_spento",
+   "funzione": "_allaccia",
+   "riga_oggi": 3940,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "self.phivel[a]",
+    "self.phivel[b]"
+   ],
+   "testo": "self.phivel[a] + self.phivel[b]",
+   "grandezza": "phivel",
+   "funzione": "mitosi",
+   "riga_oggi": 7338,
+   "tipo_dichiarato": "float64",
+   "nel_registro": true
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_nati_mitosi', 0)",
+    "int(len(a))"
+   ],
+   "testo": "getattr(self, '_g_nati_mitosi', 0) + int(len(a))",
+   "grandezza": "_g_nati_mitosi",
+   "funzione": "mitosi",
+   "riga_oggi": 7351,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_nati_mitosi_ev', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_nati_mitosi_ev', 0) + 1",
+   "grandezza": "_g_nati_mitosi_ev",
+   "funzione": "mitosi",
+   "riga_oggi": 7352,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "[self.conc_archi[e] if e < len(self.conc_archi) else [] for e in keep_idx]",
+    "[[] for _ in range(2 * len(a))]"
+   ],
+   "testo": "[self.conc_archi[e] if e < len(self.conc_archi) else [] for e in keep_idx] + [[] for _ in range(2 * len(a))]",
+   "grandezza": "conc_archi",
+   "funzione": "mitosi",
+   "riga_oggi": 7420,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "self.pos[aa]",
+    "self.pos[bb]"
+   ],
+   "testo": "self.pos[aa] + self.pos[bb]",
+   "grandezza": "pos",
+   "funzione": "mitosi",
+   "riga_oggi": 7506,
+   "tipo_dichiarato": "float64",
+   "nel_registro": true
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "self.phivel[aa]",
+    "self.phivel[bb]"
+   ],
+   "testo": "self.phivel[aa] + self.phivel[bb]",
+   "grandezza": "phivel",
+   "funzione": "mitosi",
+   "riga_oggi": 7510,
+   "tipo_dichiarato": "float64",
+   "nel_registro": true
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_nati_schwinger', 0)",
+    "int(nc)"
+   ],
+   "testo": "getattr(self, '_g_nati_schwinger', 0) + int(nc)",
+   "grandezza": "_g_nati_schwinger",
+   "funzione": "mitosi",
+   "riga_oggi": 7522,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_nati_schwinger_ev', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_nati_schwinger_ev', 0) + 1",
+   "grandezza": "_g_nati_schwinger_ev",
+   "funzione": "mitosi",
+   "riga_oggi": 7523,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_peqn_archi', 0)",
+    "int(2 * nc)"
+   ],
+   "testo": "getattr(self, '_g_peqn_archi', 0) + int(2 * nc)",
+   "grandezza": "_g_peqn_archi",
+   "funzione": "mitosi",
+   "riga_oggi": 7503,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_peqn_ev', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_peqn_ev', 0) + 1",
+   "grandezza": "_g_peqn_ev",
+   "funzione": "mitosi",
+   "riga_oggi": 7504,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  }
+ ],
+ "somme_tre_o_piu_addendi_ORDINE_CONTA": [],
+ "somme_due_addendi_ordine_inerte": [
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_eredpsi_tot', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_eredpsi_tot', 0) + 1",
+   "grandezza": "_g_eredpsi_tot",
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2891,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "cur[a]",
+    "cur[b]"
+   ],
+   "testo": "cur[a] + cur[b]",
+   "grandezza": "psi",
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2894,
+   "tipo_dichiarato": "complex128",
+   "nel_registro": true
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_eredpsi_salti', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_eredpsi_salti', 0) + 1",
+   "grandezza": "_g_eredpsi_salti",
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2896,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_eredpsis_salti', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_eredpsis_salti', 0) + 1",
+   "grandezza": "_g_eredpsis_salti",
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2902,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_eredrho_salti', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_eredrho_salti', 0) + 1",
+   "grandezza": "_g_eredrho_salti",
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2912,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_cura4_maturati', 0)",
+    "int(_b - _a)"
+   ],
+   "testo": "getattr(self, '_g_cura4_maturati', 0) + int(_b - _a)",
+   "grandezza": "_g_cura4_maturati",
+   "funzione": "semina",
+   "riga_oggi": 3817,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_compat_chi_tot', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_compat_chi_tot', 0) + 1",
+   "grandezza": "_g_compat_chi_tot",
+   "funzione": "_allaccia",
+   "riga_oggi": 3938,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_compat_chi_spento', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_compat_chi_spento', 0) + 1",
+   "grandezza": "_g_compat_chi_spento",
+   "funzione": "_allaccia",
+   "riga_oggi": 3940,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "self.phivel[a]",
+    "self.phivel[b]"
+   ],
+   "testo": "self.phivel[a] + self.phivel[b]",
+   "grandezza": "phivel",
+   "funzione": "mitosi",
+   "riga_oggi": 7338,
+   "tipo_dichiarato": "float64",
+   "nel_registro": true
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_nati_mitosi', 0)",
+    "int(len(a))"
+   ],
+   "testo": "getattr(self, '_g_nati_mitosi', 0) + int(len(a))",
+   "grandezza": "_g_nati_mitosi",
+   "funzione": "mitosi",
+   "riga_oggi": 7351,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_nati_mitosi_ev', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_nati_mitosi_ev', 0) + 1",
+   "grandezza": "_g_nati_mitosi_ev",
+   "funzione": "mitosi",
+   "riga_oggi": 7352,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "[self.conc_archi[e] if e < len(self.conc_archi) else [] for e in keep_idx]",
+    "[[] for _ in range(2 * len(a))]"
+   ],
+   "testo": "[self.conc_archi[e] if e < len(self.conc_archi) else [] for e in keep_idx] + [[] for _ in range(2 * len(a))]",
+   "grandezza": "conc_archi",
+   "funzione": "mitosi",
+   "riga_oggi": 7420,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "self.pos[aa]",
+    "self.pos[bb]"
+   ],
+   "testo": "self.pos[aa] + self.pos[bb]",
+   "grandezza": "pos",
+   "funzione": "mitosi",
+   "riga_oggi": 7506,
+   "tipo_dichiarato": "float64",
+   "nel_registro": true
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "self.phivel[aa]",
+    "self.phivel[bb]"
+   ],
+   "testo": "self.phivel[aa] + self.phivel[bb]",
+   "grandezza": "phivel",
+   "funzione": "mitosi",
+   "riga_oggi": 7510,
+   "tipo_dichiarato": "float64",
+   "nel_registro": true
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_nati_schwinger', 0)",
+    "int(nc)"
+   ],
+   "testo": "getattr(self, '_g_nati_schwinger', 0) + int(nc)",
+   "grandezza": "_g_nati_schwinger",
+   "funzione": "mitosi",
+   "riga_oggi": 7522,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_nati_schwinger_ev', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_nati_schwinger_ev', 0) + 1",
+   "grandezza": "_g_nati_schwinger_ev",
+   "funzione": "mitosi",
+   "riga_oggi": 7523,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_peqn_archi', 0)",
+    "int(2 * nc)"
+   ],
+   "testo": "getattr(self, '_g_peqn_archi', 0) + int(2 * nc)",
+   "grandezza": "_g_peqn_archi",
+   "funzione": "mitosi",
+   "riga_oggi": 7503,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  },
+  {
+   "quanti": 2,
+   "addendi": [
+    "getattr(self, '_g_peqn_ev', 0)",
+    "1"
+   ],
+   "testo": "getattr(self, '_g_peqn_ev', 0) + 1",
+   "grandezza": "_g_peqn_ev",
+   "funzione": "mitosi",
+   "riga_oggi": 7504,
+   "tipo_dichiarato": null,
+   "nel_registro": false
+  }
+ ],
+ "riduzioni_ordine_dipendenti": [
+  {
+   "funzione": "semina",
+   "riga_oggi": 3708,
+   "testo": "np.linalg.norm(u, axis=1, keepdims=True)",
+   "forma": "np.linalg.norm",
+   "gate": [
+    "NOT (SEMINA_LAM)"
+   ],
+   "scrive": "(locale) u",
+   "ordine_dipendente": false,
+   "motivo": "`np.linalg.norm(..., axis=1)` somma TRE componenti in ordine FISSO: l'ordine degli ARCHI non entra, e il risultato e' deterministico -- misurato"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3919,
+   "testo": "np.median(self.lambda_nodi())",
+   "forma": "np.median",
+   "gate": [],
+   "scrive": "(locale) rc",
+   "ordine_dipendente": false,
+   "motivo": "la MEDIANA non dipende dall'ordine -- misurato in questo stesso referto"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7304,
+   "testo": "np.add.at(twn, self.i[self.i < self.n], np.abs(self.tw)[self.i < self.n])",
+   "forma": "np.add.at",
+   "gate": [
+    "MITOSI_DIR != 0.0"
+   ],
+   "scrive": null,
+   "ordine_dipendente": null,
+   "motivo": "forma SOSPETTA: una riduzione su molti termini in virgola mobile dipende dall'ordine. Va letta col suo GATE e con la TAGLIA su cui gira"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7305,
+   "testo": "np.add.at(twn, self.j[self.j < self.n], np.abs(self.tw)[self.j < self.n])",
+   "forma": "np.add.at",
+   "gate": [
+    "MITOSI_DIR != 0.0"
+   ],
+   "scrive": null,
+   "ordine_dipendente": null,
+   "motivo": "forma SOSPETTA: una riduzione su molti termini in virgola mobile dipende dall'ordine. Va letta col suo GATE e con la TAGLIA su cui gira"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7334,
+   "testo": "flip.mean()",
+   "forma": "flip.mean",
+   "gate": [
+    "ANTIFASE_ADD"
+   ],
+   "scrive": "ultima_frac_antifase",
+   "ordine_dipendente": null,
+   "motivo": "forma SOSPETTA: una riduzione su molti termini in virgola mobile dipende dall'ordine. Va letta col suo GATE e con la TAGLIA su cui gira"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7479,
+   "testo": "prob_coppia.mean()",
+   "forma": "prob_coppia.mean",
+   "gate": [
+    "COPPIA_MIT > 0.0"
+   ],
+   "scrive": "ultima_prob_coppia",
+   "ordine_dipendente": null,
+   "motivo": "forma SOSPETTA: una riduzione su molti termini in virgola mobile dipende dall'ordine. Va letta col suo GATE e con la TAGLIA su cui gira"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7501,
+   "testo": "np.median(self.peq)",
+   "forma": "np.median",
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ],
+   "scrive": "(locale) pmed",
+   "ordine_dipendente": false,
+   "motivo": "la MEDIANA non dipende dall'ordine -- misurato in questo stesso referto"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7505,
+   "testo": "np.median(self.peq)",
+   "forma": "np.median",
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()",
+    "PEQ_NASCITA_LOCALE"
+   ],
+   "scrive": "_g_peqn_mediana",
+   "ordine_dipendente": false,
+   "motivo": "la MEDIANA non dipende dall'ordine -- misurato in questo stesso referto"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7495,
+   "testo": "np.linalg.norm(self.pos[aa] - self.pos[bb], axis=1)",
+   "forma": "np.linalg.norm",
+   "gate": [
+    "COPPIA_MIT > 0.0",
+    "estratto.any()"
+   ],
+   "scrive": "(locale) dd",
+   "ordine_dipendente": false,
+   "motivo": "`np.linalg.norm(..., axis=1)` somma TRE componenti in ordine FISSO: l'ordine degli ARCHI non entra, e il risultato e' deterministico -- misurato"
+  }
+ ],
+ "controllo_riduzioni": {
+  "media_float_per_taglia": {
+   "1": 0,
+   "2": 0,
+   "3": 10,
+   "4": 25,
+   "5": 38,
+   "8": 61,
+   "64": 72,
+   "4096": 62
+  },
+  "giri_per_taglia": 200,
+  "soglia_misurata": 3,
+  "media_booleani": 0,
+  "mediana_float": 0,
+  "norm_per_riga_cambia_permutando_le_righe": 0
+ },
+ "flag_dei_gate_dal_runtime": {
+  "MITOSI_DIR": 0.0,
+  "ANTIFASE_ADD": false,
+  "COPPIA_MIT": 1.0,
+  "COPPIA_DENSITA": false,
+  "PEQ_NASCITA_LOCALE": true,
+  "PLAST_DIN": true,
+  "PLAST_MIT": 0.0,
+  "MITOSI_2LAM": true,
+  "REGIME": "deterministico",
+  "SEMINA_LAM": true,
+  "CHI_COOP": true
+ },
+ "riduzioni_il_sigillo_le_confronta": {
+  "ultima_frac_antifase": {
+   "nel_registro": false,
+   "contatore": false,
+   "tipo_runtime": "NoneType",
+   "confrontata": false
+  },
+  "ultima_prob_coppia": {
+   "nel_registro": false,
+   "contatore": false,
+   "tipo_runtime": "float",
+   "confrontata": false
+  },
+  "_g_peqn_mediana": {
+   "nel_registro": false,
+   "contatore": false,
+   "tipo_runtime": "float",
+   "confrontata": false
+  }
+ },
+ "verdetto_ultima_prob_coppia": {
+  "taglie_len_sel": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   2
+  ],
+  "soglia_misurata": 3,
+  "max_len_sel": 2,
+  "esito": "INERTE NELLA FINESTRA, con margine 1"
+ },
+ "tutte_le_somme_del_perimetro": {
+  "totale": 39,
+  "per_numero_di_addendi": {
+   "2": 39
+  },
+  "con_tre_o_piu": []
+ },
+ "MITOSI_DIR_dal_runtime": 0.0,
+ "somme_interi_nel_registro": [],
+ "somme_tipo_non_dichiarato": [
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2891,
+   "grandezza": "_g_eredpsi_tot",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_eredpsi_tot', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_eredpsi_tot', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_eredpsi_tot', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_eredpsi_tot = getattr(self, \"_g_eredpsi_tot\", 0) + 1"
+  },
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2896,
+   "grandezza": "_g_eredpsi_salti",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_eredpsi_salti', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_eredpsi_salti', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_eredpsi_salti', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_eredpsi_salti = getattr(self, \"_g_eredpsi_salti\", 0) + 1"
+  },
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2902,
+   "grandezza": "_g_eredpsis_salti",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_eredpsis_salti', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_eredpsis_salti', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_eredpsis_salti', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_eredpsis_salti = getattr(self, \"_g_eredpsis_salti\", 0) + 1"
+  },
+  {
+   "funzione": "_eredita_psi_figli",
+   "riga_oggi": 2912,
+   "grandezza": "_g_eredrho_salti",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_eredrho_salti', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_eredrho_salti', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_eredrho_salti', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_eredrho_salti = getattr(self, \"_g_eredrho_salti\", 0) + 1"
+  },
+  {
+   "funzione": "semina",
+   "riga_oggi": 3817,
+   "grandezza": "_g_cura4_maturati",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_cura4_maturati', 0)",
+    "int(_b - _a)"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_cura4_maturati', 0)",
+      "int(_b - _a)"
+     ],
+     "testo": "getattr(self, '_g_cura4_maturati', 0) + int(_b - _a)"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_cura4_maturati = getattr(self, \"_g_cura4_maturati\", 0) + int(_b - _a)"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3938,
+   "grandezza": "_g_compat_chi_tot",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_compat_chi_tot', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_compat_chi_tot', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_compat_chi_tot', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_compat_chi_tot = getattr(self, \"_g_compat_chi_tot\", 0) + 1"
+  },
+  {
+   "funzione": "_allaccia",
+   "riga_oggi": 3940,
+   "grandezza": "_g_compat_chi_spento",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_compat_chi_spento', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_compat_chi_spento', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_compat_chi_spento', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_compat_chi_spento = getattr(self, \"_g_compat_chi_spento\", 0) + 1"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7351,
+   "grandezza": "_g_nati_mitosi",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_nati_mitosi', 0)",
+    "int(len(a))"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_nati_mitosi', 0)",
+      "int(len(a))"
+     ],
+     "testo": "getattr(self, '_g_nati_mitosi', 0) + int(len(a))"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_nati_mitosi = getattr(self, \"_g_nati_mitosi\", 0) + int(len(a))"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7352,
+   "grandezza": "_g_nati_mitosi_ev",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_nati_mitosi_ev', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_nati_mitosi_ev', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_nati_mitosi_ev', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_nati_mitosi_ev = getattr(self, \"_g_nati_mitosi_ev\", 0) + 1"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7420,
+   "grandezza": "conc_archi",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "[self.conc_archi[e] if e < len(self.conc_archi) else [] for e in keep_idx]",
+    "[[] for _ in range(2 * len(a))]"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "[self.conc_archi[e] if e < len(self.conc_archi) else [] for e in keep_idx]",
+      "[[] for _ in range(2 * len(a))]"
+     ],
+     "testo": "[self.conc_archi[e] if e < len(self.conc_archi) else [] for e in keep_idx] + [[] for _ in range(2 * len(a))]"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self.conc_archi = ([self.conc_archi[e] if e < len(self.conc_archi) else []"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7522,
+   "grandezza": "_g_nati_schwinger",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_nati_schwinger', 0)",
+    "int(nc)"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_nati_schwinger', 0)",
+      "int(nc)"
+     ],
+     "testo": "getattr(self, '_g_nati_schwinger', 0) + int(nc)"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_nati_schwinger = getattr(self, \"_g_nati_schwinger\", 0) + int(nc)"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7523,
+   "grandezza": "_g_nati_schwinger_ev",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_nati_schwinger_ev', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_nati_schwinger_ev', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_nati_schwinger_ev', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_nati_schwinger_ev = getattr(self, \"_g_nati_schwinger_ev\", 0) + 1"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7503,
+   "grandezza": "_g_peqn_archi",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_peqn_archi', 0)",
+    "int(2 * nc)"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_peqn_archi', 0)",
+      "int(2 * nc)"
+     ],
+     "testo": "getattr(self, '_g_peqn_archi', 0) + int(2 * nc)"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_peqn_archi = getattr(self, '_g_peqn_archi', 0) + int(2 * nc)"
+  },
+  {
+   "funzione": "mitosi",
+   "riga_oggi": 7504,
+   "grandezza": "_g_peqn_ev",
+   "forma": "somma",
+   "nel_registro": false,
+   "tipo_dichiarato": null,
+   "ordine_conta": null,
+   "perche": "somma, tipo NON DICHIARATO nel registro: non lo assumo",
+   "addendi_in_ordine": [
+    "getattr(self, '_g_peqn_ev', 0)",
+    "1"
+   ],
+   "somme_annidate": [
+    {
+     "quanti": 2,
+     "addendi": [
+      "getattr(self, '_g_peqn_ev', 0)",
+      "1"
+     ],
+     "testo": "getattr(self, '_g_peqn_ev', 0) + 1"
+    }
+   ],
+   "max_addendi_in_una_somma": 2,
+   "testo": "self._g_peqn_ev = getattr(self, '_g_peqn_ev', 0) + 1"
+  }
+ ],
+ "registro_completo": [
+  {
+   "ordine": 1,
+   "passo": 41,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12802
+   ],
+   "size": null,
+   "quanti": 12802
+  },
+  {
+   "ordine": 2,
+   "passo": 41,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12802,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38406
+  },
+  {
+   "ordine": 3,
+   "passo": 41,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471564
+   ],
+   "size": null,
+   "quanti": 471564
+  },
+  {
+   "ordine": 4,
+   "passo": 42,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12802
+   ],
+   "size": null,
+   "quanti": 12802
+  },
+  {
+   "ordine": 5,
+   "passo": 42,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12802,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38406
+  },
+  {
+   "ordine": 6,
+   "passo": 42,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471564
+   ],
+   "size": null,
+   "quanti": 471564
+  },
+  {
+   "ordine": 7,
+   "passo": 42,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    1
+   ],
+   "size": null,
+   "quanti": 1
+  },
+  {
+   "ordine": 8,
+   "passo": 43,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12803
+   ],
+   "size": null,
+   "quanti": 12803
+  },
+  {
+   "ordine": 9,
+   "passo": 43,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12803,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38409
+  },
+  {
+   "ordine": 10,
+   "passo": 43,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     1,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 3
+  },
+  {
+   "ordine": 11,
+   "passo": 43,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471565
+   ],
+   "size": null,
+   "quanti": 471565
+  },
+  {
+   "ordine": 12,
+   "passo": 44,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12803
+   ],
+   "size": null,
+   "quanti": 12803
+  },
+  {
+   "ordine": 13,
+   "passo": 44,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12803,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38409
+  },
+  {
+   "ordine": 14,
+   "passo": 44,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471565
+   ],
+   "size": null,
+   "quanti": 471565
+  },
+  {
+   "ordine": 15,
+   "passo": 45,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12803
+   ],
+   "size": null,
+   "quanti": 12803
+  },
+  {
+   "ordine": 16,
+   "passo": 45,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12803,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38409
+  },
+  {
+   "ordine": 17,
+   "passo": 45,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471565
+   ],
+   "size": null,
+   "quanti": 471565
+  },
+  {
+   "ordine": 18,
+   "passo": 46,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12803
+   ],
+   "size": null,
+   "quanti": 12803
+  },
+  {
+   "ordine": 19,
+   "passo": 46,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12803,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38409
+  },
+  {
+   "ordine": 20,
+   "passo": 46,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471565
+   ],
+   "size": null,
+   "quanti": 471565
+  },
+  {
+   "ordine": 21,
+   "passo": 47,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12803
+   ],
+   "size": null,
+   "quanti": 12803
+  },
+  {
+   "ordine": 22,
+   "passo": 47,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12803,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38409
+  },
+  {
+   "ordine": 23,
+   "passo": 47,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471565
+   ],
+   "size": null,
+   "quanti": 471565
+  },
+  {
+   "ordine": 24,
+   "passo": 48,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12803
+   ],
+   "size": null,
+   "quanti": 12803
+  },
+  {
+   "ordine": 25,
+   "passo": 48,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12803,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38409
+  },
+  {
+   "ordine": 26,
+   "passo": 48,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471565
+   ],
+   "size": null,
+   "quanti": 471565
+  },
+  {
+   "ordine": 27,
+   "passo": 49,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12803
+   ],
+   "size": null,
+   "quanti": 12803
+  },
+  {
+   "ordine": 28,
+   "passo": 49,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12803,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38409
+  },
+  {
+   "ordine": 29,
+   "passo": 49,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471565
+   ],
+   "size": null,
+   "quanti": 471565
+  },
+  {
+   "ordine": 30,
+   "passo": 50,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12803
+   ],
+   "size": null,
+   "quanti": 12803
+  },
+  {
+   "ordine": 31,
+   "passo": 50,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12803,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38409
+  },
+  {
+   "ordine": 32,
+   "passo": 50,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471565
+   ],
+   "size": null,
+   "quanti": 471565
+  },
+  {
+   "ordine": 33,
+   "passo": 50,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    1
+   ],
+   "size": null,
+   "quanti": 1
+  },
+  {
+   "ordine": 34,
+   "passo": 51,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 35,
+   "passo": 51,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 36,
+   "passo": 51,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     1,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 3
+  },
+  {
+   "ordine": 37,
+   "passo": 51,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 38,
+   "passo": 52,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 39,
+   "passo": 52,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 40,
+   "passo": 52,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 41,
+   "passo": 53,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 42,
+   "passo": 53,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 43,
+   "passo": 53,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 44,
+   "passo": 54,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 45,
+   "passo": 54,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 46,
+   "passo": 54,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 47,
+   "passo": 55,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 48,
+   "passo": 55,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 49,
+   "passo": 55,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 50,
+   "passo": 56,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 51,
+   "passo": 56,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 52,
+   "passo": 56,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 53,
+   "passo": 57,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 54,
+   "passo": 57,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 55,
+   "passo": 57,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 56,
+   "passo": 58,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 57,
+   "passo": 58,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 58,
+   "passo": 58,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 59,
+   "passo": 59,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 60,
+   "passo": 59,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 61,
+   "passo": 59,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 62,
+   "passo": 60,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 63,
+   "passo": 60,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 64,
+   "passo": 60,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 65,
+   "passo": 61,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 66,
+   "passo": 61,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 67,
+   "passo": 61,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 68,
+   "passo": 62,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 69,
+   "passo": 62,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 70,
+   "passo": 62,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 71,
+   "passo": 63,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 72,
+   "passo": 63,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 73,
+   "passo": 63,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 74,
+   "passo": 64,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 75,
+   "passo": 64,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 76,
+   "passo": 64,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 77,
+   "passo": 65,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12804
+   ],
+   "size": null,
+   "quanti": 12804
+  },
+  {
+   "ordine": 78,
+   "passo": 65,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12804,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38412
+  },
+  {
+   "ordine": 79,
+   "passo": 65,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471566
+   ],
+   "size": null,
+   "quanti": 471566
+  },
+  {
+   "ordine": 80,
+   "passo": 65,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    1
+   ],
+   "size": null,
+   "quanti": 1
+  },
+  {
+   "ordine": 81,
+   "passo": 66,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12805
+   ],
+   "size": null,
+   "quanti": 12805
+  },
+  {
+   "ordine": 82,
+   "passo": 66,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12805,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38415
+  },
+  {
+   "ordine": 83,
+   "passo": 66,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     1,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 3
+  },
+  {
+   "ordine": 84,
+   "passo": 66,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471567
+   ],
+   "size": null,
+   "quanti": 471567
+  },
+  {
+   "ordine": 85,
+   "passo": 66,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    1
+   ],
+   "size": null,
+   "quanti": 1
+  },
+  {
+   "ordine": 86,
+   "passo": 67,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12806
+   ],
+   "size": null,
+   "quanti": 12806
+  },
+  {
+   "ordine": 87,
+   "passo": 67,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12806,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38418
+  },
+  {
+   "ordine": 88,
+   "passo": 67,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     1,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 3
+  },
+  {
+   "ordine": 89,
+   "passo": 67,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471568
+   ],
+   "size": null,
+   "quanti": 471568
+  },
+  {
+   "ordine": 90,
+   "passo": 68,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12806
+   ],
+   "size": null,
+   "quanti": 12806
+  },
+  {
+   "ordine": 91,
+   "passo": 68,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12806,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38418
+  },
+  {
+   "ordine": 92,
+   "passo": 68,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471568
+   ],
+   "size": null,
+   "quanti": 471568
+  },
+  {
+   "ordine": 93,
+   "passo": 69,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12806
+   ],
+   "size": null,
+   "quanti": 12806
+  },
+  {
+   "ordine": 94,
+   "passo": 69,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12806,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38418
+  },
+  {
+   "ordine": 95,
+   "passo": 69,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471568
+   ],
+   "size": null,
+   "quanti": 471568
+  },
+  {
+   "ordine": 96,
+   "passo": 69,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    1
+   ],
+   "size": null,
+   "quanti": 1
+  },
+  {
+   "ordine": 97,
+   "passo": 70,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12807
+   ],
+   "size": null,
+   "quanti": 12807
+  },
+  {
+   "ordine": 98,
+   "passo": 70,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12807,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38421
+  },
+  {
+   "ordine": 99,
+   "passo": 70,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     1,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 3
+  },
+  {
+   "ordine": 100,
+   "passo": 70,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471569
+   ],
+   "size": null,
+   "quanti": 471569
+  },
+  {
+   "ordine": 101,
+   "passo": 70,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    2
+   ],
+   "size": null,
+   "quanti": 2
+  },
+  {
+   "ordine": 102,
+   "passo": 71,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12810
+   ],
+   "size": null,
+   "quanti": 12810
+  },
+  {
+   "ordine": 103,
+   "passo": 71,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12810,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38430
+  },
+  {
+   "ordine": 104,
+   "passo": 71,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     3,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 9
+  },
+  {
+   "ordine": 105,
+   "passo": 71,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471573
+   ],
+   "size": null,
+   "quanti": 471573
+  },
+  {
+   "ordine": 106,
+   "passo": 71,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    1
+   ],
+   "size": null,
+   "quanti": 1
+  },
+  {
+   "ordine": 107,
+   "passo": 72,
+   "voce": "scuoti_vuoto",
+   "metodo": "normal",
+   "args": [
+    0.0,
+    1.0,
+    12811
+   ],
+   "size": null,
+   "quanti": 12811
+  },
+  {
+   "ordine": 108,
+   "passo": 72,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     12811,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 38433
+  },
+  {
+   "ordine": 109,
+   "passo": 72,
+   "voce": "step",
+   "metodo": "normal",
+   "args": [
+    0,
+    1.0,
+    [
+     1,
+     3
+    ]
+   ],
+   "size": null,
+   "quanti": 3
+  },
+  {
+   "ordine": 110,
+   "passo": 72,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    471574
+   ],
+   "size": null,
+   "quanti": 471574
+  },
+  {
+   "ordine": 111,
+   "passo": 72,
+   "voce": "mitosi",
+   "metodo": "random",
+   "args": [
+    1
+   ],
+   "size": null,
+   "quanti": 1
+  }
+ ]
+}

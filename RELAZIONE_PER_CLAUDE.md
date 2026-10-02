@@ -603,3 +603,68 @@ Lo stesso referto porta la misura ### **IEEE-754**: ### **due addendi commutativ
 **PROSSIMO: il giro vero, il contratto generato, il referto. Poi il commit 3 e il suo sigillo, che confronta anche le tre grandezze scoperte.**
 
 ---
+
+# ✅ **PASSI 1 E 2 DEL COMMIT 3 CHIUSI: L'ORDINE E' MISURATO, IL CONTRATTO E' NEL REPO** *(2026-10-02)*
+
+> ### **Luca: il contratto c'e', e porta un REQUISITO per il sigillo che prima non c'era.**
+
+**Referto:** `csv/_test_fork/_ordine_estrazioni/_ordine_estrazioni.json` *(`vale: true`, strumento **`a4c65607`**)* · **contratto:** `doc/CONTRATTO_nascita.md` *(**`340d06c8`**, 142 righe, **generato**)* · **tabella:** `doc/REGOLE_nascita.tsv` *(**`84bb5d7f`**, da **7 a 8** colonne)*. ### **Nessuna riga del simulatore:** blob **`3ddc56d9`** prima e dopo.
+
+## ✅ **IL CONTROLLO, per primo: la misura VALE**
+
+| | |
+|---|---|
+| lo stesso passo **CON** e **SENZA** la spia su `net.rng` | ### **BYTE-IDENTICO**, su **188** grandezze **e contatori** |
+| la configurazione | **zero differenze su 81 booleani** (`H-P5`) |
+| lo strumento | ### **`a4c65607`, committato e pulito** |
+
+## 📊 **LA SEQUENZA DELLE ESTRAZIONI — la parte stretta del contratto**
+
+| | passo SENZA nascite *(41)* | passo CON nascite *(42)* |
+|---|---|---|
+| **1** | `scuoti_vuoto` → `rng.normal` *(12802)* | idem |
+| **2** | `step` → `rng.normal` *(38406)* | idem |
+| ### **3** | ### **`mitosi` → `rng.random` (471564)** = **tutti gli archi**: e' ### **`decidi_divisione`**, e pesca a **OGNI** passo | idem |
+| ### **4** | — | ### **`mitosi` → `rng.random` (1)** = gli archi **selezionati**: e' lo ### **SCHWINGER** |
+
+### ⛔ **E `ANTIFASE_ADD` pescherebbe ma e' SPENTO:** l'assenza di quell'estrazione ### **e' parte del contratto**, e se un giorno si accendesse la sequenza avrebbe **cinque** estrazioni e ### **questo contratto non la coprirebbe.** Scritto nel documento.
+**E fuori dal passo: 42 estrazioni** — **6** nel vuoto di `_applica_flag`, **36** nella scena.
+
+## ⭐ **L'ORDINE DEGLI ADDENDI: la misura RESTRINGE il contratto**
+
+### **Due addendi sono commutativi AL BIT; tre no** *(48083 differenze su 200000)* ⇒ ### **l'ordine conta DA TRE IN SU.** E nel perimetro: ### **39 somme, TUTTE a due addendi, ZERO con tre o piu'** — **locali comprese**, e questo ### **chiude il buco degli alias locali con una MISURA invece che con una promessa.**
+### ➜ **Quindi il contratto delle somme e' VUOTO, e il contratto vero sta nelle 68 CONCATENAZIONI** — dove l'ordine decide ### **quale valore va a quale INDICE**, cioe' **il significato**. *(Permutare `concatenate([i[keep], a, m])` ### **cambia quali nodi sono collegati.**)*
+**Riga per riga sta nella colonna `ordine_pezzi`**, abbinata ### **PER ANCORA**: **14** righe a una sola concatenazione · **17** senza *(col **motivo**)* · ### **1 con ancora NON UNIVOCA, nominata.**
+
+## ⛔ **E IL CONTRATTO PORTA UN REQUISITO PER IL SIGILLO, che prima non c'era**
+
+### **Tre grandezze scritte da una riduzione NON sono confrontate dal sigillo:** `ultima_prob_coppia`, `ultima_frac_antifase`, ### **`_g_peqn_mediana`** *(il caso peggiore: ha il prefisso `_g_` dei contatori, ### **quindi un lettore la crede coperta**, e non lo e' perche' e' un `float`)*.
+### ➜ **Il sigillo del commit 3 DEVE confrontarle**, ed e' scritto nel contratto ### **prima** di scrivere il sigillo.
+### ⭐ **E la regola su `ultima_prob_coppia`, DERIVATA e non scritta da me:** ### **inerte all'ordine solo se `len(sel) <= 2`; da `3` in su DIPENDE.** Le taglie vere nella finestra sono ### **`1` sette volte e `2` una** ⇒ ### **inerte, con margine UNO.** ### **Non per legge: perche' la scena divide poco.**
+
+## ✅ **E DUE CONTROLLI SULLA TABELLA, perche' un lettore non si rompa in silenzio**
+
+**①** le **prime SETTE colonne**: ### **0 righe su 33 cambiate**, verificato **anche dall'esterno** contro il blob a `HEAD`. · **②** ho ### **rigirato il lettore** `_referto_ordine.py`: ### **33 differenze, TUTTE E 33 soli NUMERI DI RIGA, zero d'altro tipo** — il documento era **stantio** su un blob vecchio, e ora porta le righe di oggi. **32 ancore verificate su 32, 1 dubbio** *(il `perc_geom` alla Schwinger, che resta APERTA)*.
+
+## ⛔⛔ **E UN RISCONTRO CHE CAMBIA UN CRITERIO DEL PIANO: `MITOSI_2LAM` E' GIA' ACCESO**
+
+> ### **Luca, il piano dichiara `MITOSI_2LAM` OFF. Il DRIVER lo ACCENDE, e dal runtime vale `True`.**
+
+| | |
+|---|---|
+| **default di modulo** | `MITOSI_2LAM = False` *(`:441`)* · `PLAST_DIN = False` *(`:1736`)* |
+| ### **l'argv del DRIVER** | contiene ### **`--mitosi-2lam`** e ### **`--plast-din`** |
+| ### **dal RUNTIME** | ### **`MITOSI_2LAM = True`** · ### **`PLAST_DIN = True`** |
+
+### ➜ **LA CONSEGUENZA, ed e' su un CRITERIO:** il piano descrive il **commit 6b** come ### **«NON byte-identico, ATTESO»**. ### **Ma se il flag e' GIA' ON nella configurazione su cui girano TUTTI i sigilli, far uscire il ramo `else` e' BYTE-IDENTICO IN QUELLA CONFIGURAZIONE** — lo sarebbe non-byte-identico ### **solo con l'argv NUDO.**
+### ⚠ **E che il flag AGISCA non l'ho misurato:** lo direbbe ### **`_g_m2l_negati`** sulla finestra dei 72 passi. ### **Quella misura NON l'ho girata**, e la dichiaro *(`L-UN-PROMPT`)*.
+### 📌 **E `PLAST_DIN` acceso rende STANTIO un fatto di `doc/FATTI_dal_codice.md`:** quel documento dice che *«la compressione osservata e' il regime di default (dimezzamento `d0 = d/2`)»*, ### **ma con `PLAST_DIN` acceso il ramo che gira e' `d0h = dh*(1 + fattore_plastico)`**, perche' nella catena `if/elif/else` ### **`PLAST_DIN` viene PRIMA.** ### ✅ **`doc/REGOLE_nascita.tsv` invece era GIA' CORRETTA**: nomina `PLAST_DIN` e dice che i tre rami scelgono **solo il fattore**.
+### ➜ **La forma dell'errore e' quella del par.6 punto 2 — «il DEFAULT conta piu' della descrizione» — letta al contrario:** ### **la DESCRIZIONE ha preso il default e ha ignorato che il driver lo ribalta.** Stessa famiglia di `CENS-A4`. Voce ### **`MITOSI-2LAM-ACCESO`**, e le annotazioni sono nel piano accanto alle righe vecchie.
+
+## 📋 **IL TODO DEL TASK HISTORY, aggiornato** *(par.5-bis: un TODO aggiornato «dopo» e' un TODO falso)*
+
+**0** task history → ### **FATTO** *(`59e9b99`)* · **1** strumento → ### **FATTO**, con ### **SEI cure** *(tre falsi zero, una tautologia, un rilevatore troppo stretto, un campione di uno)* · **2** run e referto → ### **FATTO** · **3** contratto nella tabella → ### **FATTO** · **4** il CODICE → ### **PROSSIMO** · **5** il sigillo → **DA FARE**, ### **e ora ha un requisito in piu': le tre grandezze scoperte** · **6** referto e **STOP** → **DA FARE** · **7** i fatti mancanti → **IN CODA**.
+
+**PROSSIMO: la misura che decide se il punto unico si puo' scrivere SENZA RIORDINARE le scritture — ed e' il punto ④ in cui il mio task history dice di FERMARMI, se la risposta e' no.**
+
+---

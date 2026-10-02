@@ -86,38 +86,38 @@ testo e si dice dove sta adesso.**
 
 | grandezza | cl. | evento | ### **regola** | riga OGGI | come si legge |
 |---|---|---|---|---|---|
-| `phi` | metro-nodo | **semina** | estrazione nuova | `:3134` | fase CASUALE sul doppio giro; nel ramo con `fase` data e` `float(fase) + rng.normal(0, 0.05, n)` |
-| `phi` | metro-nodo | **divisione** | media (fase media dei genitori) | `:6616` | `D` e` la differenza di fase fra i genitori: `phi[a] - D/2` E` IL PUNTO MEDIO. Con `MITOSI_DIR` il `bias = 0.5*tanh(...)` sposta il punto medio secondo l asimmetria di torsione, e a :6638 un `flip` puo` aggiungere mezzo giro |
-| `phi` | metro-nodo | **Schwinger** | antifase del figlio di mitosi | `:6784` | mezzo giro esatto dal figlio scelto: e` la coppia particella-antiparticella |
-| `phi0` | nodo | **divisione** | uguale a phi alla nascita | `:6641` | stesso `fm` di `phi`: il nato ha fase di riferimento UGUALE alla sua fase, cioe` scarto zero |
-| `phi0` | nodo | **Schwinger** | uguale a phi alla nascita | `:6804` | stesso `anti` di `phi` |
-| `pos` | nodo | **divisione** | punto medio dei genitori | `:6617` | media aritmetica delle due posizioni |
-| `pos` | nodo | **Schwinger** | punto medio | `:6802` | media aritmetica |
-| `phivel` | nodo | **semina** | CONDIZIONATA AL FLAG del calore iniziale: estrazione nuova col calore, zero senza | `:3154` | REGOLA CONDIZIONATA, e si dichiara come tale: col calore iniziale acceso il nato riceve un calcio gaussiano di scala `_CALORE_INIT` -- e a :3152, nel ramo chirale, il calcio e` MOLTIPLICATO PER `chi_nuovi`, quindi CORRELATO AL SEGNO CHIRALE; senza calore iniziale il nato parte a `np.zeros(n)` (:3157) |
-| `phivel` | nodo | **divisione** | media dei genitori | `:6643` | semisomma esplicita |
-| `perc_chi` | nodo | **semina** | estrazione nuova | `:3144` | sorteggio del segno, lo STESSO array usato anche per `perc_geom` |
-| `perc_chi` | nodo | **divisione** | eredita dal genitore a | `:6647` | copia diretta |
-| `perc_chi` | nodo | **Schwinger** | eredita INVERTITA (carica opposta) | `:6810` | il segno meno: l antiparticella ha carica opposta |
-| `perc_geom` | nodo | **semina** | estrazione nuova | `:3185` | lo stesso sorteggio di `perc_chi` |
-| `perc_geom` | nodo | **divisione** | eredita dal genitore a | `:6650` | copia diretta |
-| `perc_geom` | nodo | **Schwinger** | ### **APERTA -- decide Luca fra due opzioni** ### ⛔ **APERTA: DECIDE LUCA** | `:6814` | OGGI il codice COPIA (`perc_geom[aa]`) mentre `perc_chi` INVERTE (`-perc_chi[aa]`, :6810). LE DUE OPZIONI: (a) RESTA COPIATA, e la ragione da scrivere e` che la chiralita` geometrica non e` una carica, quindi non si coniuga; (b) SI INVERTE come `perc_chi`, e la ragione e` che la coppia deve nascere NEUTRA anche nella chiralita` geometrica. IL MESSAGGIO DEL GUARDIANO CONTENEVA IL SEGNAPOSTO `[scegli: ... OPPURE ...]`, quindi la decisione NON C E` e NON LA PRENDO IO |
-| `omega_s` | nodo | **semina** | estrazione nuova | `:3191` | calcio gaussiano isotropo sui tre assi |
-| `omega_s` | nodo | **divisione** | eredita dal genitore | `:2363` | copia diretta dal genitore `src` |
-| `_psi_spinor` | nodo | **divisione** | eredita COL SEGNO di doppia copertura | `:2365` | copia dal genitore, e a :2367 `er = -er` per l antichirale: segno di doppia copertura opposto |
-| `_spinor_lift` | nodo | **divisione** | eredita COL SEGNO | `:2370` | copia dal genitore, e a :2372 `el = -el` |
-| `d` | arco | **divisione** | META` del padre, con pavimento LAM | `:6690` | l arco si spezza in due tronconi da `d/2`, e `_nasce(dh, mitosi, 2, 0)` impone la scala minima LAM |
-| `d` | arco | **Schwinger** | nuova a scala minima | `:6790` | i due archi della coppia nascono alla scala minima, non ereditano |
-| `d` | arco | **allaccio** | nuova a scala minima | `:3359` | il troncone parte da LAM |
-| `d0` | arco | **divisione** | riposo del figlio = META` della lunghezza del padre x fattore plastico | `:6703` | NON sono due grandezze, ed e` la correzione del guardiano: `dh = d[sel]/2` (:6690) e `d0h = dh*(1+fattore)`, quindi il riposo del figlio esce SEMPRE dalla meta` della LUNGHEZZA del padre. I tre rami scelgono SOLO IL FATTORE: `PLAST_DIN` lo ricava dallo stress metrico per l eccesso di torsione, `PLAST_MIT` lo mette costante per `sciolta`, e senza nessuno dei due il fattore e` 1 |
-| `tw` | arco | **divisione** | zero | `:6734` | i tronconi nascono senza torsione |
-| `tw` | arco | **allaccio** | zero | `:3366` | l arco nuovo nasce senza torsione |
-| `i` | metro-arco | **divisione** | topologia: l arco a-b e` SOSTITUITO da a-m e m-b | `:6710` | `keep` TOGLIE l arco spezzato: non e` un valore che si eredita, e` la topologia |
-| `j` | metro-arco | **divisione** | topologia: secondo troncone | `:6711` | idem |
-| `i` | metro-arco | **Schwinger** | topologia: due archi nuovi verso k | `:6840` | il nodo `k` della coppia si allaccia ad `aa` e `bb` |
-| `j` | metro-arco | **Schwinger** | topologia: due archi nuovi verso k | `:6841` | idem |
-| `conc_nodi` | nodo | **divisione** | eredita la concorrenza alle masse del genitore a | `:6668` | E` una MUTAZIONE IN POSTO (`.append`), non un assegnamento: per questo il mio strumento diceva NESSUNA REGOLA e la sorveglianza diceva MAI TOCCATA -- LO STESSO PUNTO CIECO, due volte. La regola c e`: il figlio nasce concorrendo alle stesse masse del genitore, con le voci COPIATE |
-| `conc_nodi` | nodo | **Schwinger** | eredita, e MARCA l origine come `schwinger` | `:6838` | eredita le voci del genitore e aggiunge un quarto campo che distingue la creazione di coppia dall accrescimento per mitosi |
-| `_deg` | nodo | **divisione** | DERIVATA: ricalcolata a piena lunghezza DENTRO la mitosi | `:2066` | non si eredita: `_grado` la ricalcola dal `bincount` degli archi, e `mitosi` la chiama a :6738 e :6859. Per questo risulta PIENA al controllo pur non avendo una regola di eredita` |
+| `phi` | metro-nodo | **semina** | estrazione nuova | `:3722` | fase CASUALE sul doppio giro; nel ramo con `fase` data e` `float(fase) + rng.normal(0, 0.05, n)` |
+| `phi` | metro-nodo | **divisione** | media (fase media dei genitori) | `:7311` | `D` e` la differenza di fase fra i genitori: `phi[a] - D/2` E` IL PUNTO MEDIO. Con `MITOSI_DIR` il `bias = 0.5*tanh(...)` sposta il punto medio secondo l asimmetria di torsione, e a :6638 un `flip` puo` aggiungere mezzo giro |
+| `phi` | metro-nodo | **Schwinger** | antifase del figlio di mitosi | `:7488` | mezzo giro esatto dal figlio scelto: e` la coppia particella-antiparticella |
+| `phi0` | nodo | **divisione** | uguale a phi alla nascita | `:7336` | stesso `fm` di `phi`: il nato ha fase di riferimento UGUALE alla sua fase, cioe` scarto zero |
+| `phi0` | nodo | **Schwinger** | uguale a phi alla nascita | `:7508` | stesso `anti` di `phi` |
+| `pos` | nodo | **divisione** | punto medio dei genitori | `:7312` | media aritmetica delle due posizioni |
+| `pos` | nodo | **Schwinger** | punto medio | `:7506` | media aritmetica |
+| `phivel` | nodo | **semina** | CONDIZIONATA AL FLAG del calore iniziale: estrazione nuova col calore, zero senza | `:3743` | REGOLA CONDIZIONATA, e si dichiara come tale: col calore iniziale acceso il nato riceve un calcio gaussiano di scala `_CALORE_INIT` -- e a :3152, nel ramo chirale, il calcio e` MOLTIPLICATO PER `chi_nuovi`, quindi CORRELATO AL SEGNO CHIRALE; senza calore iniziale il nato parte a `np.zeros(n)` (:3157) |
+| `phivel` | nodo | **divisione** | media dei genitori | `:7338` | semisomma esplicita |
+| `perc_chi` | nodo | **semina** | estrazione nuova | `:3732` | sorteggio del segno, lo STESSO array usato anche per `perc_geom` |
+| `perc_chi` | nodo | **divisione** | eredita dal genitore a | `:7342` | copia diretta |
+| `perc_chi` | nodo | **Schwinger** | eredita INVERTITA (carica opposta) | `:7514` | il segno meno: l antiparticella ha carica opposta |
+| `perc_geom` | nodo | **semina** | estrazione nuova | `:3774` | lo stesso sorteggio di `perc_chi` |
+| `perc_geom` | nodo | **divisione** | eredita dal genitore a | `:7345` | copia diretta |
+| `perc_geom` | nodo | **Schwinger** | ### **APERTA -- decide Luca fra due opzioni** ### ⛔ **APERTA: DECIDE LUCA** | `:7518` | OGGI il codice COPIA (`perc_geom[aa]`) mentre `perc_chi` INVERTE (`-perc_chi[aa]`, :6810). LE DUE OPZIONI: (a) RESTA COPIATA, e la ragione da scrivere e` che la chiralita` geometrica non e` una carica, quindi non si coniuga; (b) SI INVERTE come `perc_chi`, e la ragione e` che la coppia deve nascere NEUTRA anche nella chiralita` geometrica. IL MESSAGGIO DEL GUARDIANO CONTENEVA IL SEGNAPOSTO `[scegli: ... OPPURE ...]`, quindi la decisione NON C E` e NON LA PRENDO IO |
+| `omega_s` | nodo | **semina** | estrazione nuova | `:3780` | calcio gaussiano isotropo sui tre assi |
+| `omega_s` | nodo | **divisione** | eredita dal genitore | `:2951` | copia diretta dal genitore `src` |
+| `_psi_spinor` | nodo | **divisione** | eredita COL SEGNO di doppia copertura | `:2953` | copia dal genitore, e a :2367 `er = -er` per l antichirale: segno di doppia copertura opposto |
+| `_spinor_lift` | nodo | **divisione** | eredita COL SEGNO | `:2958` | copia dal genitore, e a :2372 `el = -el` |
+| `d` | arco | **divisione** | META` del padre, con pavimento LAM | `:7394` | l arco si spezza in due tronconi da `d/2`, e `_nasce(dh, mitosi, 2, 0)` impone la scala minima LAM |
+| `d` | arco | **Schwinger** | nuova a scala minima | `:7494` | i due archi della coppia nascono alla scala minima, non ereditano |
+| `d` | arco | **allaccio** | nuova a scala minima | `:3948` | il troncone parte da LAM |
+| `d0` | arco | **divisione** | riposo del figlio = META` della lunghezza del padre x fattore plastico | `:7407` | NON sono due grandezze, ed e` la correzione del guardiano: `dh = d[sel]/2` (:6690) e `d0h = dh*(1+fattore)`, quindi il riposo del figlio esce SEMPRE dalla meta` della LUNGHEZZA del padre. I tre rami scelgono SOLO IL FATTORE: `PLAST_DIN` lo ricava dallo stress metrico per l eccesso di torsione, `PLAST_MIT` lo mette costante per `sciolta`, e senza nessuno dei due il fattore e` 1 |
+| `tw` | arco | **divisione** | zero | `:7438` | i tronconi nascono senza torsione |
+| `tw` | arco | **allaccio** | zero | `:3955` | l arco nuovo nasce senza torsione |
+| `i` | metro-arco | **divisione** | topologia: l arco a-b e` SOSTITUITO da a-m e m-b | `:7414` | `keep` TOGLIE l arco spezzato: non e` un valore che si eredita, e` la topologia |
+| `j` | metro-arco | **divisione** | topologia: secondo troncone | `:7415` | idem |
+| `i` | metro-arco | **Schwinger** | topologia: due archi nuovi verso k | `:7544` | il nodo `k` della coppia si allaccia ad `aa` e `bb` |
+| `j` | metro-arco | **Schwinger** | topologia: due archi nuovi verso k | `:7545` | idem |
+| `conc_nodi` | nodo | **divisione** | eredita la concorrenza alle masse del genitore a | `:7363` | E` una MUTAZIONE IN POSTO (`.append`), non un assegnamento: per questo il mio strumento diceva NESSUNA REGOLA e la sorveglianza diceva MAI TOCCATA -- LO STESSO PUNTO CIECO, due volte. La regola c e`: il figlio nasce concorrendo alle stesse masse del genitore, con le voci COPIATE |
+| `conc_nodi` | nodo | **Schwinger** | eredita, e MARCA l origine come `schwinger` | `:7542` | eredita le voci del genitore e aggiunge un quarto campo che distingue la creazione di coppia dall accrescimento per mitosi |
+| `_deg` | nodo | **divisione** | DERIVATA: ricalcolata a piena lunghezza DENTRO la mitosi | `:2654` | non si eredita: `_grado` la ricalcola dal `bincount` degli archi, e `mitosi` la chiama a :6738 e :6859. Per questo risulta PIENA al controllo pur non avendo una regola di eredita` |
 
 **Ancore verificate: 32 su 32.** ### ✅ **Tutte trovate, e UNA VOLTA SOLA.**
 
@@ -126,7 +126,7 @@ testo e si dice dove sta adesso.**
 **Il mandato dice: *«porta SOLO i casi in cui la regola esistente ti sembra fisicamente
 discutibile, uno per uno, con la riga»*.** ### **Gli altri li ho scritti e non li porto.**
 
-### ⚠ `perc_geom` — evento **Schwinger** — `:6814`
+### ⚠ `perc_geom` — evento **Schwinger** — `:7518`
 
 **La regola che c'e':** APERTA -- decide Luca fra due opzioni. **Come si legge:** OGGI il codice COPIA (`perc_geom[aa]`) mentre `perc_chi` INVERTE (`-perc_chi[aa]`, :6810). LE DUE OPZIONI: (a) RESTA COPIATA, e la ragione da scrivere e` che la chiralita` geometrica non e` una carica, quindi non si coniuga; (b) SI INVERTE come `perc_chi`, e la ragione e` che la coppia deve nascere NEUTRA anche nella chiralita` geometrica. IL MESSAGGIO DEL GUARDIANO CONTENEVA IL SEGNAPOSTO `[scegli: ... OPPURE ...]`, quindi la decisione NON C E` e NON LA PRENDO IO
 
