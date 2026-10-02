@@ -1,0 +1,135 @@
+========================================================================================================
+CHI USA LA LUNGHEZZA DI UN ARRAY COME SEGNALE DI <<NODO NUOVO>>?
+========================================================================================================
+  simulatore .. 7a1a21af (sha1 byte grezzi)
+  grandezze dei registri: 45   derivate: 10
+  ### il registro DICHIARA la classe di nascita delle derivate:
+      _chi_core_nodi     avvelena
+      _chi_core_raggio   avvelena
+      _chi_core_rho0     avvelena
+      _fatt_cs_ultimo    avvelena
+      _chi_geom_nodi     avvelena
+      _r_corrente        avvelena
+      _g_rampa_prec      auto-rinfresco
+      _xi_rumore         auto-rinfresco
+      _dt_e_ultimo       avvelena
+      _sin2_vir          avvelena
+
+  ### CHE COSA CERCA, e la forma e' DICHIARATA: un confronto fra una LUNGHEZZA
+      (`len(...)`, `.shape[0]`, `.size`) di una grandezza DEL REGISTRO e un
+      CONTEGGIO (`self.n`, un'altra lunghezza, un intero). Gli operatori sono
+      tutti e sei (`<`,`>`,`<=`,`>=`,`==`,`!=`): un <<segnale>> si puo' scrivere
+      in entrambi i versi, e cercarne uno solo sarebbe un FALSO-ZERO.
+
+--------------------------------------------------------------------------------------------------------
+### TROVATI: 101 confronti di lunghezza su grandezze del registro
+
+### E LA DOMANDA CHE RIGUARDA IL COMMIT 4: quanti sono su una DERIVATA? 6
+    _sin2_vir          `step` :7639   ### AVVELENABILE          len(self._sin2_vir) != len(beta)
+    _sin2_vir          `step` :7640   ### AVVELENABILE          len(self._sin2_vir) < len(beta)
+    _sin2_vir          `step` :7641   ### AVVELENABILE          len(self._sin2_vir) < len(beta)
+    _sin2_vir          `step` :7741   ### AVVELENABILE          len(self._sin2_vir) != len(beta_new)
+    _sin2_vir          `step` :7742   ### AVVELENABILE          len(self._sin2_vir) < len(beta_new)
+    _sin2_vir          `step` :7744   ### AVVELENABILE          len(self._sin2_vir) < len(beta_new)
+
+### ⛔ 6 GUARDIE DI LUNGHEZZA SU DERIVATE AVVELENABILI: il veleno le
+###   CAMBIEREBBE, e vanno decise PRIMA del commit 4.
+
+--------------------------------------------------------------------------------------------------------
+E LE ALTRE, sulle grandezze NON derivate: 95 -- sono la coda di `LUNGHEZZA-COME-SEGNALE`
+    phivel             `_tau_tw_locale` :551    len <   self.n
+    psi                `classifica_topologia` :694    len <   self.n
+    psi                `_righe_stato_universo` :752    len <   <locale:n>
+    psi                `lambda_vuoto` :804    len <   self.n
+    psi                `scuoti_vuoto` :820    len <   self.n
+    perc_chi           `scuoti_vuoto` :860    len ==   self.n
+    perc_chi           `scuoti_vuoto` :864    len ==   self.n
+    _nb                `_aggiorna_lift_spinoriale` :3787   len <   self.n
+    _spinor_lift       `olonomia_lift_ciclo` :3946   len <   self.n
+    _spinor_lift       `_feedback_spinoriale_archi` :4021   len <   self.n
+    psi                `chiralita_core_locale` :4068   len <   self.n
+    psi                `misura_spin_picco_massa` :4124   len <   self.n
+    _nb                `misura_spin_picco_massa` :4126   len <   self.n
+    _spinor_lift       `misura_spin_picco_massa` :4130   len <   self.n
+    perc_chi           `misura_spin_picco_massa` :4159   len >=   self.n
+    _nb                `misura_spin_picco_massa` :4160   len >=   self.n
+    _spinor_lift       `misura_spin_picco_massa` :4165   len <   self.n
+    _nb                `misura_spin_picco_massa` :4165   len >=   self.n
+    _spinor_lift       `misura_spin_picco_massa` :4168   len >=   self.n
+    perc_chi           `misura_spin_picco_positivi` :4236   len <   self.n
+    psi                `circolazione_topologica` :4303   len <   self.n
+    _nb                `circolazione_topologica` :4310   len >=   self.n
+    perc_chi           `circolazione_topologica` :4378   len >=   self.n
+    psi                `_registra_concorrenza` :4795   len <   <locale:k>
+    conc_nodi          `_riallinea_tracking` :4818   len <   self.n
+    conc_nodi          `_riallinea_tracking` :4819   len >   self.n
+    psi                `aggiorna_pesi_concorrenza` :4838   len <   <locale:k>
+    perc_chi           `_allaccia` :4896   len >=   self.n
+    psi                `lambda_nodi` :4932   len ==   0
+    psi                `lambda_nodi` :4935   len <   self.n
+    _psi_prec          `ritmo` :5005   len !=   self.n
+    psi                `ritmo` :5009   len ==   self.n
+    omega_s            `_passo_spinoriale` :5120   len <   <locale:n>
+    omega_s            `_passo_spinoriale` :5122   len >   <locale:n>
+    phi_s              `_passo_spinoriale` :5125   len ==   <locale:n>
+    _nb                `_passo_spinoriale` :5127   len <   <locale:n>
+    _nb                `_passo_spinoriale` :5131   len >   <locale:n>
+    psi                `_passo_spinoriale` :5144   len <   <locale:n>
+    _nb_prec           `_passo_spinoriale` :5195   len !=   <locale:n>
+    perc_chi           `_passo_spinoriale` :5224   len >=   <locale:n>
+    psi                `_passo_spinoriale` :5259   len <   <locale:n>
+    i                  `_passo_spinoriale` :5345   len !=   len(<locale:_peq_a>)
+    i                  `_passo_spinoriale` :5357   len ==   len(<locale:_peq_a>)
+    psi                `_passo_spinoriale` :5630   len >=   <locale:n>
+    perc_chi           `_passo_spinoriale` :5682   len >=   <locale:n>
+    tw                 `_pesi` :5874   len !=   len(d)
+    tw                 `_pesi` :5878   len ==   len(d)
+    d                  `verifica_invarianti` :6332   len ==   len(<locale:cattivo>)
+    i                  `verifica_invarianti` :6332   len ==   len(d)
+    d0                 `_smp_chiudi` :6405   len !=   len(<locale:v>)
+    perc_chi           `step` :7131   len >=   self.n
+    psi                `step` :7132   len >=   self.n
+    perc_chi           `step` :7136   len >=   self.n
+    psi                `step` :7136   len >=   self.n
+    perc_chi           `step` :7259   len >=   self.n
+    perc_chi           `step` :7266   len >=   self.n
+    perc_chi           `step` :7274   len >=   self.n
+    psi                `step` :7315   len >=   self.n
+    phivel             `step` :7360   len >=   self.n
+    phi_s              `step` :7399   len !=   self.n
+    phi_s              `step` :7403   len ==   self.n
+    perc_chi           `step` :7413   len >=   self.n
+    _deg               `step` :7429   len >=   self.n
+    perc_chi           `step` :7446   len >=   self.n
+    perc_chi           `step` :7472   len >=   self.n
+    perc_chi           `step` :7478   len >=   self.n
+    peq                `step` :7530   len <   <locale:_idx_n>
+    d                  `step` :7781   len ==   len(<locale:_smp_d_ini>)
+    psi                `step` :7808   len >=   self.n
+    i                  `decidi_divisione` :7990   len !=   len(<locale:avv>)
+    i                  `decidi_divisione` :7994   len ==   len(<locale:avv>)
+    _rep               `decidi_divisione` :8136   len !=   len(<locale:rep>)
+    d0                 `decidi_divisione` :8176   len !=   len(<locale:avv>)
+    d0                 `decidi_divisione` :8179   len ==   len(<locale:avv>)
+    psi                `pozzo_grafo` :8641   len >=   <locale:n>
+    psi                `memoria_hebbiana_moto` :8683   len <   <locale:n>
+    mem_mot            `memoria_hebbiana_moto` :8690   len <   <locale:n>
+    _nb                `memoria_hebbiana_moto` :8796   len <   self.n
+    phi_s              `memoria_hebbiana_moto` :8797   len ==   self.n
+    _nb                `memoria_hebbiana_moto` :8810   len >=   self.n
+    _nb                `memoria_hebbiana_moto` :8814   len >=   self.n
+    _nb                `memoria_hebbiana_moto` :8867   len >=   self.n
+    d                  `memoria_hebbiana_moto` :8942   len ==   len(<locale:_f_d>)
+    d0                 `memoria_hebbiana_moto` :8942   len ==   len(<locale:_f_d0>)
+    psi                `memoria_hebbiana_moto` :9075   len >=   <locale:n>
+    psi                `_render_vista_rete_sola` :9749   len >=   <locale:n>
+    perc_chi           `_render_vista_rete_sola` :9754   len >=   <locale:n>
+    psi                `update` :10034  len ==   <locale:n0>
+    tw                 `update` :10080  len >=   <locale:na>
+    d                  `_diag_completa` :11707  len >=   <locale:n>
+    d0                 `_diag_completa` :11708  len >=   <locale:n>
+    eta                `_diag_completa` :11718  len >=   <locale:n>
+    perc_chi           `_diag_completa` :11797  len >=   <locale:n>
+    phivel             `_diag_completa` :12166  len >=   <locale:n>
+    perc_chi           `_diag_completa` :12183  len >=   <locale:n>
+========================================================================================================

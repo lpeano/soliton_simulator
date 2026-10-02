@@ -64,3 +64,7 @@ csv/_seal_fork/_sigillo_inerzia_commenti/_sim_prima.py
 #   finestra: la rigenera lo strumento a ogni giro, con l'ancora ASSERITA
 #   unica. Committarla sarebbe un artefatto che scade (`SIM-PRIMA-STANTIO`).
 csv/_test_fork/_copertura_derivate/_sim_lettura_iniettata.py
+#   E le copie del sigillo del veleno (il <<prima>> e quella senza
+#   l'esenzione): le rigenera il sigillo a ogni giro, con le ancore
+#   ASSERITE uniche.
+csv/_seal_fork/_sigillo_veleno/_sim_*.py

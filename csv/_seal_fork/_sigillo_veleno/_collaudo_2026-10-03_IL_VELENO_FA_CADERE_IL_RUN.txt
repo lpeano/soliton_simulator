@@ -1,0 +1,32 @@
+  passi fatti: 42
+  ### IL RUN E' CADUTO al passo 42: DominioViolato
+  ### [INVARIANTE] `_dt_e_ultimo` VIOLA `> 0` al passo 42, in `esegui_passo`.
+  quanti: 1
+  indici (primi 8): 471564
+  valori (primi 8): nan
+  arco=12802-1583 quanti=1 su=471565
+      quanti: 1
+      indici (primi 8): 471564
+      valori (primi 8): nan
+      arco=12802-1583 quanti=1 su=471565
+  nati mitosi 1, Schwinger 0
+  _g_veleno_voci           8
+  _g_veleno_celle          8
+  _g_veleno_esenti         2
+  _g_veleno_gia_lunga      ### assente
+  _g_veleno_assenti        ### assente
+  _g_veleno_multiasse      ### assente
+  _g_veleno_non_float      ### assente
+  --- le derivate: lunghezza e NaN ---
+    _chi_core_nodi     avvelena       len=12803   atteso=12803   nan=1
+    _chi_core_raggio   avvelena       len=12803   atteso=12803   nan=1
+    _chi_core_rho0     avvelena       len=12803   atteso=12803   nan=1
+    _fatt_cs_ultimo    avvelena       len=12803   atteso=12803   nan=1
+    _chi_geom_nodi     avvelena       len=12803   atteso=12803   nan=1
+    _r_corrente        avvelena       len=12803   atteso=12803   nan=1
+    _g_rampa_prec      auto-rinfresco len=12802   atteso=12803   nan=0
+    _xi_rumore         auto-rinfresco len=12802   atteso=12803   nan=0
+    _dt_e_ultimo       avvelena       len=471565  atteso=471565  nan=1
+    _sin2_vir          avvelena       len=471565  atteso=471565  nan=0
+
+[exited with code 0]

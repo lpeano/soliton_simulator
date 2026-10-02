@@ -1236,23 +1236,71 @@ REGISTRO_STATO = (
 # LE DERIVATE: ricalcolate a piena lunghezza dalla loro legge, quindi fra due ricalcoli la loro
 #   lunghezza NON E' UN INVARIANTE. NON si controllano ai due punti, e il MOTIVO di ognuna e'
 #   MISURATO, non supposto: e' la terza colonna.
+# LE CLASSI DI NASCITA DI UNA DERIVATA, e sono DUE (`COMMIT 4` del riordino, 2026-10-03).
+#   ⚠ ESISTONO PERCHE' UNA MISURA LE HA RICHIESTE, non per simmetria: il veleno `NaN`
+#     ESTENDE la derivata alla lunghezza nuova, e `csv/_test_fork/_copertura_derivate.py`
+#     ha misurato che **DUE** derivate usano il DISALLINEAMENTO DI LUNGHEZZA come
+#     SEGNALE per ripulirsi -- quindi estenderle **distrugge il meccanismo che il
+#     registro dichiara**, in due modi opposti:
+#       `_xi_rumore`    `:5031`  `if _xi is None or len(_xi) < n:`  -> estendere la rende
+#         FALSA, quindi **l'estrazione fresca NON avviene** e i nodi nuovi prendono `NaN`.
+#         E il commento dichiara che quello e' **IL PERCORSO NORMALE della mitosi**.
+#       `_g_rampa_prec` `:5704`  `if ... len(_prec) == len(ramp):` -> estendere la rende
+#         VERA, quindi `ramp < _prec` confronta con `NaN`, da' **False in silenzio**, e il
+#         ramo che conta `_g_rampa_prec_disallineata` **smette di scattare**.
+#   ### DECISIONE DI LUCA, 2026-10-03: VIA A -- si avvelena ogni derivata TRANNE quelle
+#     dichiarate `auto-rinfresco`. ### E' LA FORMA GIA' APPROVATA per le esenzioni di
+#     `eta` (`nonneg_inf`: `+inf` per il vuoto) e di `peq` (`nan` da calibrare), quindi
+#     per `9-ter` **non e' una legge in piu': e' il TERZO caso della STESSA esenzione.**
+#   ### E IL REGISTRO LE DICHIARAVA GIA' COSI', A PAROLE: questa colonna non aggiunge una
+#     convenzione, la rende **LEGGIBILE DA UNA MACCHINA** -- e `_avvelena_derivate` la
+#     legge DA QUI. ### NESSUN ELENCO A MANO nel codice del veleno.
+NASCITA_DERIVATA = ("avvelena", "auto-rinfresco")
+
+# (nome, dove, CLASSE DI NASCITA, motivo MISURATO)
 REGISTRO_DERIVATE = (
-    ("_chi_core_nodi", "nodo", "nessuna legge la legge nella finestra della nascita"),
-    ("_chi_core_raggio", "nodo", "nessuna legge la legge nella finestra della nascita"),
-    ("_chi_core_rho0", "nodo", "nessuna legge la legge nella finestra della nascita"),
-    ("_fatt_cs_ultimo", "nodo", "nessuna legge la legge -- e coincide col commento del codice, "
-                                "che la dichiara DIAGNOSTICA e senza lettori (Z7)"),
-    ("_chi_geom_nodi", "nodo", "la legge la trova GIA RISCRITTA (chiralita_core_locale)"),
-    ("_r_corrente", "nodo", "la legge la trova GIA RISCRITTA (step)"),
-    ("_g_rampa_prec", "nodo", "AUTO-RINFRESCO: `_pesi` la legge corta e la riscrive LEI STESSA "
-                              "un evento dopo, e il disallineamento e GIA CONTATO "
-                              "(`_g_rampa_prec_disallineata`)"),
-    ("_xi_rumore", "nodo", "AUTO-RINFRESCO, ed E LA REGOLA DI NASCITA: `xi` e l AMBIENTE, non "
-                           "una proprieta del nodo, quindi il figlio NON lo eredita -- e il "
-                           "codice lo dichiara al sito di lettura"),
-    ("_dt_e_ultimo", "arco", "la legge la trova GIA RISCRITTA (step)"),
-    ("_sin2_vir", "arco", "la legge la trova GIA RISCRITTA (memoria_hebbiana_moto)"),
+    ("_chi_core_nodi", "nodo", "avvelena",
+     "nessuna legge la legge nella finestra della nascita"),
+    ("_chi_core_raggio", "nodo", "avvelena",
+     "nessuna legge la legge nella finestra della nascita"),
+    ("_chi_core_rho0", "nodo", "avvelena",
+     "nessuna legge la legge nella finestra della nascita"),
+    ("_fatt_cs_ultimo", "nodo", "avvelena",
+     "nessuna legge la legge -- e coincide col commento del codice, "
+     "che la dichiara DIAGNOSTICA e senza lettori (Z7)"),
+    ("_chi_geom_nodi", "nodo", "avvelena",
+     "la legge la trova GIA RISCRITTA (chiralita_core_locale)"),
+    ("_r_corrente", "nodo", "avvelena", "la legge la trova GIA RISCRITTA (step)"),
+    ("_g_rampa_prec", "nodo", "auto-rinfresco",
+     "AUTO-RINFRESCO: `_pesi` la legge corta e la riscrive LEI STESSA "
+     "un evento dopo, e il disallineamento e GIA CONTATO "
+     "(`_g_rampa_prec_disallineata`). ### ESENTE DAL VELENO: il disallineamento di "
+     "lunghezza E IL SUO SEGNALE, e estenderla lo distruggerebbe -- MISURATO, "
+     "csv/_test_fork/_copertura_derivate/ (99 letture sporche su tre scene)"),
+    ("_xi_rumore", "nodo", "auto-rinfresco",
+     "AUTO-RINFRESCO, ed E LA REGOLA DI NASCITA: `xi` e l AMBIENTE, non "
+     "una proprieta del nodo, quindi il figlio NON lo eredita -- e il "
+     "codice lo dichiara al sito di lettura. ### ESENTE DAL VELENO: la guardia "
+     "`len(_xi) < n` al :5031 E IL SUO SEGNALE, e il commento dichiara che quello e "
+     "IL PERCORSO NORMALE della mitosi -- estenderla farebbe nascere i nodi nuovi con "
+     "NaN invece di un campione fresco (99 letture sporche misurate)"),
+    ("_dt_e_ultimo", "arco", "avvelena", "la legge la trova GIA RISCRITTA (step)"),
+    ("_sin2_vir", "arco", "avvelena",
+     "la legge la trova GIA RISCRITTA (memoria_hebbiana_moto), che la riscrive INTERA "
+     "(`s2full = np.zeros(len(self.i))`, :8724) nello STESSO passo, dopo `mitosi`. "
+     "### QUINDI IL VELENO E INERTE QUI, e lo si dichiara: le 6 guardie di lunghezza del "
+     "`step` (:7506-7508, :7608-7611) NON sono ripieghi ma un PRESIDIO CHE SOLLEVA "
+     "(`_ferma_registro(CacheCorta/CacheLunga)`), e il veleno le trova la lunghezza GIA "
+     "giusta -- come oggi, perche la riscrittura avviene prima del prossimo `step`"),
 )
+_fuori_vocabolario = [v[0] for v in REGISTRO_DERIVATE if v[2] not in NASCITA_DERIVATA]
+if _fuori_vocabolario:
+    raise RuntimeError(
+        "classe di nascita non dichiarata per %s: le classi sono %s. "
+        "Una derivata senza classe non si puo' ne' avvelenare ne' esentare, e il "
+        "silenzio NON e' una terza possibilita'."
+        % (", ".join(_fuori_vocabolario), ", ".join(NASCITA_DERIVATA)))
+del _fuori_vocabolario
 
 # LE GRANDEZZE A FINESTRA: ESISTONO SOLO DENTRO IL PASSO (commit 1 del riordino, 2026-10-01).
 #   (nome, forma, tipo, voce che APRE, voce che CHIUDE, motivo MISURATO)
@@ -1387,6 +1435,81 @@ def _nascita_non_si_tocca(evento, grandezza, perche):
                                            "ancora": "(nessuna)", "derivazione": perche}
 
 
+def _avvelena_derivate(net):
+    """### IL VELENO: le derivate dei nodi/archi NUOVI si riempiono di `NaN`.
+
+    *(`COMMIT 4` del riordino, 2026-10-03. Terza via del par.(d), **approvata da Luca il
+    2026-10-01** nella forma raffinata, e la **VIA A** scelta il 2026-10-03.)*
+
+    ### PERCHE' IL VELENO E NON UNA MARCA LETTA A OGNI ACCESSO
+    Intercettare **la lettura** costa: la sorveglianza ha misurato **1 887 282 accessi
+    per passo**. Il veleno invece non costa niente a chi legge: ### **una lettura sporca
+    PROPAGA il `NaN` nello stato, e il controllo lo prende al confine successivo** -- e
+    un controllo di finitezza su tutte e 30 le voci di stato costa `0.002085 s`, cioe'
+    lo ### **0.073 %** di un passo.
+
+    ### E NON E UNA CONVENZIONE NUOVA: IL SISTEMA LO FA GIA' IN DUE PUNTI
+    `peq` nasce `nan` in `_allaccia` *(`# da calibrare`)* e nello Schwinger con
+    `PEQ_NASCITA_LOCALE`, e `step` la ### **CALIBRA**. ### *<<derivata sporca>>* e
+    *<<`peq` da calibrare>>* sono ### **LA STESSA COSA**, e per `9-ter` questo conta: il
+    commit 4 ### **da' un NOME a cio' che il sistema fa gia'.**
+
+    ### L'ESENZIONE LA DICHIARA IL REGISTRO, NON QUESTO CODICE
+    ### **NESSUN ELENCO A MANO QUI.** Si legge `REGISTRO_DERIVATE[...][2]`, e le voci
+    `auto-rinfresco` si saltano. Il perche' di ciascuna e' nella sua riga di registro,
+    col numero misurato. ### **Un elenco scritto qui sarebbe una seconda fonte, e
+    divergerebbe.**
+
+    ### E NON HA UN FLAG, ED E UNA SCELTA
+    Un flag renderebbe il presidio ### **un'opzione** -- ed e' esattamente il difetto che
+    `E4-LAM` ha curato *(<<il controllo era legge, chi la faceva rispettare era
+    un'opzione>>)* e che `_nasce` dichiara di aver tolto *(<<IL GATE E' TOLTO: il
+    presidio agisce SEMPRE>>)*. ### **Il veleno agisce sempre.**
+
+    ### ⚠ E IL PREZZO E DICHIARATO E ACCETTATO (decisione di Luca): il passo della
+    nascita ### **NON e' byte-identico sulle DERIVATE**, perche' una derivata che prima
+    restava CORTA ora e' lunga e piena di `NaN`. ### **Il sigillo del commit 4 confronta
+    al byte lo STATO, non le derivate** -- e' il solo criterio del piano che si
+    restringe, ed e' una ### **DECISIONE**, non un allentamento.
+    """
+    n, m = len(net.phi), len(net.i)
+    for nome, dove, classe, _motivo in REGISTRO_DERIVATE:
+        if classe == "auto-rinfresco":
+            # ### ESENTE, E LO DICE IL REGISTRO: il disallineamento di lunghezza E' il
+            #   segnale con cui quella grandezza si ripulisce, e estenderla lo
+            #   DISTRUGGEREBBE. Misurato: csv/_test_fork/_copertura_derivate/.
+            net._g_veleno_esenti = getattr(net, "_g_veleno_esenti", 0) + 1
+            continue
+        v = getattr(net, nome, None)
+        if v is None:
+            net._g_veleno_assenti = getattr(net, "_g_veleno_assenti", 0) + 1
+            continue
+        v = np.asarray(v)
+        bersaglio = n if dove == "nodo" else m
+        if v.ndim != 1:
+            # ### NON SI AVVELENA CIO' CHE NON SI SA AVVELENARE, e si CONTA: un array a
+            #   piu' assi vorrebbe una riga di `NaN`, non un elemento. Oggi nessuna delle
+            #   dieci e' cosi' (tutte 1-D), e se una lo diventasse questo contatore
+            #   salirebbe invece di far passare la cosa in silenzio.
+            net._g_veleno_multiasse = getattr(net, "_g_veleno_multiasse", 0) + 1
+            continue
+        if v.dtype.kind != "f":
+            # ### E NON SI AVVELENA UN INTERO: `NaN` non esiste fra gli interi, e
+            #   concatenarlo FORZEREBBE un cambio di dtype -- che il controllo unico
+            #   prenderebbe come un difetto, giustamente. MISURATO: tutte e dieci le
+            #   derivate sono `float64`, quindi questo ramo ha ZERO casi oggi.
+            net._g_veleno_non_float = getattr(net, "_g_veleno_non_float", 0) + 1
+            continue
+        if len(v) >= bersaglio:
+            # gia' lunga: la sua legge l'ha riscritta, oppure non c'erano nati per lei.
+            net._g_veleno_gia_lunga = getattr(net, "_g_veleno_gia_lunga", 0) + 1
+            continue
+        quanti = bersaglio - len(v)
+        setattr(net, nome, np.concatenate([v, np.full(quanti, np.nan)]))
+        net._g_veleno_voci = getattr(net, "_g_veleno_voci", 0) + 1
+        net._g_veleno_celle = getattr(net, "_g_veleno_celle", 0) + int(quanti)
+
+
 def nascita(net, evento, c):
     """### IL PUNTO UNICO: scrive le grandezze della nascita, in ordine DICHIARATO.
 
@@ -1416,7 +1539,17 @@ def nascita(net, evento, c):
                 % (nome, evento))
         if voce["regola"] is not None:
             voce["regola"](net, c)
-    # ### E QUI NON C'E' UN CONTATORE, ED E' UNA SCELTA.
+    # ### IL VELENO, e sta QUI perche' QUI e' il punto unico della nascita
+    #   (`COMMIT 4`). Dopo che tutte le regole hanno scritto, le derivate dei
+    #   nodi/archi NUOVI si riempiono di `NaN` -- tranne quelle che il REGISTRO
+    #   dichiara `auto-rinfresco`.
+    #   ### PERCHE' DOPO E NON PRIMA: il veleno estende fino a `len(net.phi)` e
+    #   `len(net.i)`, cioe' alle lunghezze NUOVE -- e quelle le stabiliscono le
+    #   regole di `phi` e di `i`. Prima del blocco non esisterebbero ancora.
+    #   ### E PER EVENTO, non per passo: ogni chiamata a `nascita` aggiunge nodi o
+    #   archi, quindi ogni chiamata avvelena cio' che ha appena allungato.
+    _avvelena_derivate(net)
+    # ### E QUI NON C'E' UN CONTATORE DELLE NASCITE, ED E' UNA SCELTA.
     #   La prima stesura ne aveva uno (`_g_nascite`). L'ho tolto per due ragioni:
     #   ### ① il criterio del commit 3 e' BYTE-IDENTICO, e un contatore nuovo
     #     obbligherebbe il sigillo a DICHIARARE UN'ECCEZIONE -- e un criterio con

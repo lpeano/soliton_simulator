@@ -143,7 +143,9 @@ def principale():
         if mm:
             tipi[mm.group(1)] = mm.group(3)
     interi, float_, altre = [], [], []
-    for nome, _classe, _motivo in S.REGISTRO_DERIVATE:
+    # ### QUATTRO campi dal `COMMIT 4`: il registro dichiara anche la CLASSE DI
+    #   NASCITA (`avvelena` / `auto-rinfresco`), e un unpack a tre si romperebbe.
+    for nome, _dove, _classe_nascita, _motivo in S.REGISTRO_DERIVATE:
         t = tipi.get(nome, "(non misurato)")
         (interi if t.startswith("int") else float_ if t.startswith(("float", "complex"))
          else altre).append((nome, t))

@@ -1,0 +1,998 @@
+{
+ "blob_sim_sha1_byte": "7a1a21afff28654c6f346d8d971519418a8c36e7",
+ "derivate": [
+  "_chi_core_nodi",
+  "_chi_core_raggio",
+  "_chi_core_rho0",
+  "_fatt_cs_ultimo",
+  "_chi_geom_nodi",
+  "_r_corrente",
+  "_g_rampa_prec",
+  "_xi_rumore",
+  "_dt_e_ultimo",
+  "_sin2_vir"
+ ],
+ "classe_dichiarata": {
+  "_chi_core_nodi": "avvelena",
+  "_chi_core_raggio": "avvelena",
+  "_chi_core_rho0": "avvelena",
+  "_fatt_cs_ultimo": "avvelena",
+  "_chi_geom_nodi": "avvelena",
+  "_r_corrente": "avvelena",
+  "_g_rampa_prec": "auto-rinfresco",
+  "_xi_rumore": "auto-rinfresco",
+  "_dt_e_ultimo": "avvelena",
+  "_sin2_vir": "avvelena"
+ },
+ "totale": 101,
+ "sulle_derivate": [
+  {
+   "grandezza": "_sin2_vir",
+   "come": "len",
+   "operatore": "!=",
+   "contro": "len(<locale:beta>)",
+   "funzione": "step",
+   "riga": 7639,
+   "codice": "len(self._sin2_vir) != len(beta)"
+  },
+  {
+   "grandezza": "_sin2_vir",
+   "come": "len",
+   "operatore": "<",
+   "contro": "len(<locale:beta>)",
+   "funzione": "step",
+   "riga": 7640,
+   "codice": "len(self._sin2_vir) < len(beta)"
+  },
+  {
+   "grandezza": "_sin2_vir",
+   "come": "len",
+   "operatore": "<",
+   "contro": "len(<locale:beta>)",
+   "funzione": "step",
+   "riga": 7641,
+   "codice": "len(self._sin2_vir) < len(beta)"
+  },
+  {
+   "grandezza": "_sin2_vir",
+   "come": "len",
+   "operatore": "!=",
+   "contro": "len(<locale:beta_new>)",
+   "funzione": "step",
+   "riga": 7741,
+   "codice": "len(self._sin2_vir) != len(beta_new)"
+  },
+  {
+   "grandezza": "_sin2_vir",
+   "come": "len",
+   "operatore": "<",
+   "contro": "len(<locale:beta_new>)",
+   "funzione": "step",
+   "riga": 7742,
+   "codice": "len(self._sin2_vir) < len(beta_new)"
+  },
+  {
+   "grandezza": "_sin2_vir",
+   "come": "len",
+   "operatore": "<",
+   "contro": "len(<locale:beta_new>)",
+   "funzione": "step",
+   "riga": 7744,
+   "codice": "len(self._sin2_vir) < len(beta_new)"
+  }
+ ],
+ "pericolosi": [
+  {
+   "grandezza": "_sin2_vir",
+   "come": "len",
+   "operatore": "!=",
+   "contro": "len(<locale:beta>)",
+   "funzione": "step",
+   "riga": 7639,
+   "codice": "len(self._sin2_vir) != len(beta)"
+  },
+  {
+   "grandezza": "_sin2_vir",
+   "come": "len",
+   "operatore": "<",
+   "contro": "len(<locale:beta>)",
+   "funzione": "step",
+   "riga": 7640,
+   "codice": "len(self._sin2_vir) < len(beta)"
+  },
+  {
+   "grandezza": "_sin2_vir",
+   "come": "len",
+   "operatore": "<",
+   "contro": "len(<locale:beta>)",
+   "funzione": "step",
+   "riga": 7641,
+   "codice": "len(self._sin2_vir) < len(beta)"
+  },
+  {
+   "grandezza": "_sin2_vir",
+   "come": "len",
+   "operatore": "!=",
+   "contro": "len(<locale:beta_new>)",
+   "funzione": "step",
+   "riga": 7741,
+   "codice": "len(self._sin2_vir) != len(beta_new)"
+  },
+  {
+   "grandezza": "_sin2_vir",
+   "come": "len",
+   "operatore": "<",
+   "contro": "len(<locale:beta_new>)",
+   "funzione": "step",
+   "riga": 7742,
+   "codice": "len(self._sin2_vir) < len(beta_new)"
+  },
+  {
+   "grandezza": "_sin2_vir",
+   "come": "len",
+   "operatore": "<",
+   "contro": "len(<locale:beta_new>)",
+   "funzione": "step",
+   "riga": 7744,
+   "codice": "len(self._sin2_vir) < len(beta_new)"
+  }
+ ],
+ "classe_non_dichiarata": [],
+ "sulle_altre": [
+  {
+   "grandezza": "phivel",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "_tau_tw_locale",
+   "riga": 551,
+   "codice": "len(net.phivel) < net.n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "classifica_topologia",
+   "riga": 694,
+   "codice": "len(net.psi) < net.n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "<locale:n>",
+   "funzione": "_righe_stato_universo",
+   "riga": 752,
+   "codice": "len(net.psi) < n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "lambda_vuoto",
+   "riga": 804,
+   "codice": "len(net.psi) < net.n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "scuoti_vuoto",
+   "riga": 820,
+   "codice": "len(net.psi) < net.n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": "==",
+   "contro": "self.n",
+   "funzione": "scuoti_vuoto",
+   "riga": 860,
+   "codice": "len(net.perc_chi) == net.n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": "==",
+   "contro": "self.n",
+   "funzione": "scuoti_vuoto",
+   "riga": 864,
+   "codice": "len(net.perc_chi) == net.n"
+  },
+  {
+   "grandezza": "_nb",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "_aggiorna_lift_spinoriale",
+   "riga": 3787,
+   "codice": "len(self._nb) < self.n"
+  },
+  {
+   "grandezza": "_spinor_lift",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "olonomia_lift_ciclo",
+   "riga": 3946,
+   "codice": "len(self._spinor_lift) < self.n"
+  },
+  {
+   "grandezza": "_spinor_lift",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "_feedback_spinoriale_archi",
+   "riga": 4021,
+   "codice": "len(self._spinor_lift) < self.n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "chiralita_core_locale",
+   "riga": 4068,
+   "codice": "len(self.psi) < self.n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "misura_spin_picco_massa",
+   "riga": 4124,
+   "codice": "len(self.psi) < self.n"
+  },
+  {
+   "grandezza": "_nb",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "misura_spin_picco_massa",
+   "riga": 4126,
+   "codice": "len(self._nb) < self.n"
+  },
+  {
+   "grandezza": "_spinor_lift",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "misura_spin_picco_massa",
+   "riga": 4130,
+   "codice": "len(self._spinor_lift) < self.n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "misura_spin_picco_massa",
+   "riga": 4159,
+   "codice": "len(self.perc_chi) >= self.n"
+  },
+  {
+   "grandezza": "_nb",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "misura_spin_picco_massa",
+   "riga": 4160,
+   "codice": "len(self._nb) >= self.n"
+  },
+  {
+   "grandezza": "_spinor_lift",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "misura_spin_picco_massa",
+   "riga": 4165,
+   "codice": "len(self._spinor_lift) < self.n"
+  },
+  {
+   "grandezza": "_nb",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "misura_spin_picco_massa",
+   "riga": 4165,
+   "codice": "len(self._nb) >= self.n"
+  },
+  {
+   "grandezza": "_spinor_lift",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "misura_spin_picco_massa",
+   "riga": 4168,
+   "codice": "len(self._spinor_lift) >= self.n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "misura_spin_picco_positivi",
+   "riga": 4236,
+   "codice": "len(self.perc_chi) < self.n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "circolazione_topologica",
+   "riga": 4303,
+   "codice": "len(self.psi) < self.n"
+  },
+  {
+   "grandezza": "_nb",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "circolazione_topologica",
+   "riga": 4310,
+   "codice": "len(self._nb) >= self.n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "circolazione_topologica",
+   "riga": 4378,
+   "codice": "len(self.perc_chi) >= self.n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "<locale:k>",
+   "funzione": "_registra_concorrenza",
+   "riga": 4795,
+   "codice": "k < len(self.psi)"
+  },
+  {
+   "grandezza": "conc_nodi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "_riallinea_tracking",
+   "riga": 4818,
+   "codice": "len(self.conc_nodi) < self.n"
+  },
+  {
+   "grandezza": "conc_nodi",
+   "come": "len",
+   "operatore": ">",
+   "contro": "self.n",
+   "funzione": "_riallinea_tracking",
+   "riga": 4819,
+   "codice": "len(self.conc_nodi) > self.n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "<locale:k>",
+   "funzione": "aggiorna_pesi_concorrenza",
+   "riga": 4838,
+   "codice": "k < len(self.psi)"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "_allaccia",
+   "riga": 4896,
+   "codice": "len(self.perc_chi) >= self.n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "==",
+   "contro": "0",
+   "funzione": "lambda_nodi",
+   "riga": 4932,
+   "codice": "len(self.psi) == 0"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "lambda_nodi",
+   "riga": 4935,
+   "codice": "len(self.psi) < self.n"
+  },
+  {
+   "grandezza": "_psi_prec",
+   "come": "len",
+   "operatore": "!=",
+   "contro": "self.n",
+   "funzione": "ritmo",
+   "riga": 5005,
+   "codice": "len(self._psi_prec) != self.n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "==",
+   "contro": "self.n",
+   "funzione": "ritmo",
+   "riga": 5009,
+   "codice": "len(self.psi) == self.n"
+  },
+  {
+   "grandezza": "omega_s",
+   "come": "len",
+   "operatore": "<",
+   "contro": "<locale:n>",
+   "funzione": "_passo_spinoriale",
+   "riga": 5120,
+   "codice": "len(self.omega_s) < n"
+  },
+  {
+   "grandezza": "omega_s",
+   "come": "len",
+   "operatore": ">",
+   "contro": "<locale:n>",
+   "funzione": "_passo_spinoriale",
+   "riga": 5122,
+   "codice": "len(self.omega_s) > n"
+  },
+  {
+   "grandezza": "phi_s",
+   "come": "len",
+   "operatore": "==",
+   "contro": "<locale:n>",
+   "funzione": "_passo_spinoriale",
+   "riga": 5125,
+   "codice": "len(self.phi_s) == n"
+  },
+  {
+   "grandezza": "_nb",
+   "come": "len",
+   "operatore": "<",
+   "contro": "<locale:n>",
+   "funzione": "_passo_spinoriale",
+   "riga": 5127,
+   "codice": "len(self._nb) < n"
+  },
+  {
+   "grandezza": "_nb",
+   "come": "len",
+   "operatore": ">",
+   "contro": "<locale:n>",
+   "funzione": "_passo_spinoriale",
+   "riga": 5131,
+   "codice": "len(self._nb) > n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "<locale:n>",
+   "funzione": "_passo_spinoriale",
+   "riga": 5144,
+   "codice": "len(self.psi) < n"
+  },
+  {
+   "grandezza": "_nb_prec",
+   "come": "len",
+   "operatore": "!=",
+   "contro": "<locale:n>",
+   "funzione": "_passo_spinoriale",
+   "riga": 5195,
+   "codice": "len(self._nb_prec) != n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:n>",
+   "funzione": "_passo_spinoriale",
+   "riga": 5224,
+   "codice": "len(self.perc_chi) >= n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "<locale:n>",
+   "funzione": "_passo_spinoriale",
+   "riga": 5259,
+   "codice": "len(self.psi) < n"
+  },
+  {
+   "grandezza": "i",
+   "come": "len",
+   "operatore": "!=",
+   "contro": "len(<locale:_peq_a>)",
+   "funzione": "_passo_spinoriale",
+   "riga": 5345,
+   "codice": "len(_peq_a) != len(self.i)"
+  },
+  {
+   "grandezza": "i",
+   "come": "len",
+   "operatore": "==",
+   "contro": "len(<locale:_peq_a>)",
+   "funzione": "_passo_spinoriale",
+   "riga": 5357,
+   "codice": "len(_peq_a) == len(self.i)"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:n>",
+   "funzione": "_passo_spinoriale",
+   "riga": 5630,
+   "codice": "len(self.psi) >= n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:n>",
+   "funzione": "_passo_spinoriale",
+   "riga": 5682,
+   "codice": "len(self.perc_chi) >= n"
+  },
+  {
+   "grandezza": "tw",
+   "come": "len",
+   "operatore": "!=",
+   "contro": "len(d)",
+   "funzione": "_pesi",
+   "riga": 5874,
+   "codice": "len(self.tw) != len(self.d)"
+  },
+  {
+   "grandezza": "tw",
+   "come": "len",
+   "operatore": "==",
+   "contro": "len(d)",
+   "funzione": "_pesi",
+   "riga": 5878,
+   "codice": "len(self.tw) == len(self.d)"
+  },
+  {
+   "grandezza": "d",
+   "come": "len",
+   "operatore": "==",
+   "contro": "len(<locale:cattivo>)",
+   "funzione": "verifica_invarianti",
+   "riga": 6332,
+   "codice": "len(cattivo) == len(self.d)"
+  },
+  {
+   "grandezza": "i",
+   "come": "len",
+   "operatore": "==",
+   "contro": "len(d)",
+   "funzione": "verifica_invarianti",
+   "riga": 6332,
+   "codice": "len(self.i) == len(self.d)"
+  },
+  {
+   "grandezza": "d0",
+   "come": "len",
+   "operatore": "!=",
+   "contro": "len(<locale:v>)",
+   "funzione": "_smp_chiudi",
+   "riga": 6405,
+   "codice": "len(v) != len(self.d0)"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7131,
+   "codice": "len(self.perc_chi) >= self.n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7132,
+   "codice": "len(self.psi) >= self.n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7136,
+   "codice": "len(self.perc_chi) >= self.n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7136,
+   "codice": "len(self.psi) >= self.n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7259,
+   "codice": "len(self.perc_chi) >= self.n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7266,
+   "codice": "len(self.perc_chi) >= self.n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7274,
+   "codice": "len(self.perc_chi) >= self.n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7315,
+   "codice": "len(self.psi) >= self.n"
+  },
+  {
+   "grandezza": "phivel",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7360,
+   "codice": "len(self.phivel) >= self.n"
+  },
+  {
+   "grandezza": "phi_s",
+   "come": "len",
+   "operatore": "!=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7399,
+   "codice": "len(self.phi_s) != self.n"
+  },
+  {
+   "grandezza": "phi_s",
+   "come": "len",
+   "operatore": "==",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7403,
+   "codice": "len(self.phi_s) == self.n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7413,
+   "codice": "len(self.perc_chi) >= self.n"
+  },
+  {
+   "grandezza": "_deg",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7429,
+   "codice": "len(self._deg) >= self.n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7446,
+   "codice": "len(self.perc_chi) >= self.n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7472,
+   "codice": "len(self.perc_chi) >= self.n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7478,
+   "codice": "len(self.perc_chi) >= self.n"
+  },
+  {
+   "grandezza": "peq",
+   "come": "len",
+   "operatore": "<",
+   "contro": "<locale:_idx_n>",
+   "funzione": "step",
+   "riga": 7530,
+   "codice": "_idx_n < len(self.peq)"
+  },
+  {
+   "grandezza": "d",
+   "come": "len",
+   "operatore": "==",
+   "contro": "len(<locale:_smp_d_ini>)",
+   "funzione": "step",
+   "riga": 7781,
+   "codice": "len(_smp_d_ini) == len(self.d)"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "step",
+   "riga": 7808,
+   "codice": "len(self.psi) >= self.n"
+  },
+  {
+   "grandezza": "i",
+   "come": "len",
+   "operatore": "!=",
+   "contro": "len(<locale:avv>)",
+   "funzione": "decidi_divisione",
+   "riga": 7990,
+   "codice": "len(self.i) != len(avv)"
+  },
+  {
+   "grandezza": "i",
+   "come": "len",
+   "operatore": "==",
+   "contro": "len(<locale:avv>)",
+   "funzione": "decidi_divisione",
+   "riga": 7994,
+   "codice": "len(self.i) == len(avv)"
+  },
+  {
+   "grandezza": "_rep",
+   "come": "len",
+   "operatore": "!=",
+   "contro": "len(<locale:rep>)",
+   "funzione": "decidi_divisione",
+   "riga": 8136,
+   "codice": "len(self._rep) != len(rep)"
+  },
+  {
+   "grandezza": "d0",
+   "come": "len",
+   "operatore": "!=",
+   "contro": "len(<locale:avv>)",
+   "funzione": "decidi_divisione",
+   "riga": 8176,
+   "codice": "len(self.d0) != len(avv)"
+  },
+  {
+   "grandezza": "d0",
+   "come": "len",
+   "operatore": "==",
+   "contro": "len(<locale:avv>)",
+   "funzione": "decidi_divisione",
+   "riga": 8179,
+   "codice": "len(self.d0) == len(avv)"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:n>",
+   "funzione": "pozzo_grafo",
+   "riga": 8641,
+   "codice": "len(self.psi) >= n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "<",
+   "contro": "<locale:n>",
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 8683,
+   "codice": "len(self.psi) < n"
+  },
+  {
+   "grandezza": "mem_mot",
+   "come": "len",
+   "operatore": "<",
+   "contro": "<locale:n>",
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 8690,
+   "codice": "len(self.mem_mot) < n"
+  },
+  {
+   "grandezza": "_nb",
+   "come": "len",
+   "operatore": "<",
+   "contro": "self.n",
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 8796,
+   "codice": "len(self._nb) < self.n"
+  },
+  {
+   "grandezza": "phi_s",
+   "come": "len",
+   "operatore": "==",
+   "contro": "self.n",
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 8797,
+   "codice": "len(self.phi_s) == self.n"
+  },
+  {
+   "grandezza": "_nb",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 8810,
+   "codice": "len(self._nb) >= self.n"
+  },
+  {
+   "grandezza": "_nb",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 8814,
+   "codice": "len(self._nb) >= self.n"
+  },
+  {
+   "grandezza": "_nb",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "self.n",
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 8867,
+   "codice": "len(self._nb) >= self.n"
+  },
+  {
+   "grandezza": "d",
+   "come": "len",
+   "operatore": "==",
+   "contro": "len(<locale:_f_d>)",
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 8942,
+   "codice": "len(_f_d) == len(self.d)"
+  },
+  {
+   "grandezza": "d0",
+   "come": "len",
+   "operatore": "==",
+   "contro": "len(<locale:_f_d0>)",
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 8942,
+   "codice": "len(_f_d0) == len(self.d0)"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:n>",
+   "funzione": "memoria_hebbiana_moto",
+   "riga": 9075,
+   "codice": "len(self.psi) >= n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:n>",
+   "funzione": "_render_vista_rete_sola",
+   "riga": 9749,
+   "codice": "len(net.psi) >= n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:n>",
+   "funzione": "_render_vista_rete_sola",
+   "riga": 9754,
+   "codice": "len(net.perc_chi) >= n"
+  },
+  {
+   "grandezza": "psi",
+   "come": "len",
+   "operatore": "==",
+   "contro": "<locale:n0>",
+   "funzione": "update",
+   "riga": 10034,
+   "codice": "len(net.psi) == n0"
+  },
+  {
+   "grandezza": "tw",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:na>",
+   "funzione": "update",
+   "riga": 10080,
+   "codice": "len(net.tw) >= na"
+  },
+  {
+   "grandezza": "d",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:n>",
+   "funzione": "_diag_completa",
+   "riga": 11707,
+   "codice": "len(net.d) >= n"
+  },
+  {
+   "grandezza": "d0",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:n>",
+   "funzione": "_diag_completa",
+   "riga": 11708,
+   "codice": "len(net.d0) >= n"
+  },
+  {
+   "grandezza": "eta",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:n>",
+   "funzione": "_diag_completa",
+   "riga": 11718,
+   "codice": "len(net.eta) >= n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:n>",
+   "funzione": "_diag_completa",
+   "riga": 11797,
+   "codice": "len(net.perc_chi) >= n"
+  },
+  {
+   "grandezza": "phivel",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:n>",
+   "funzione": "_diag_completa",
+   "riga": 12166,
+   "codice": "len(net.phivel) >= n"
+  },
+  {
+   "grandezza": "perc_chi",
+   "come": "len",
+   "operatore": ">=",
+   "contro": "<locale:n>",
+   "funzione": "_diag_completa",
+   "riga": 12183,
+   "codice": "len(net.perc_chi) >= n"
+  }
+ ]
+}

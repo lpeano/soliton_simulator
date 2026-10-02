@@ -1435,9 +1435,123 @@ casuali, e `6.08` è **peggio del caso**, cioè il segno che la statistica è sb
 > ### cancella, si ANNOTA** (par.8). ### **Trovate col setaccio** *(`csv/_test_fork/_setaccio_derivazioni.py`: 9 segnalate su 72, e il giudizio e' 5 da
 > riscrivere e 4 non-fisica)*.
 
+<!-- SCHEDA nome=veleno-derivate funzioni=_avvelena_derivate flag=NASCITA_DERIVATA,REGISTRO_DERIVATE -->
+
+# **`veleno-derivate` — IL VELENO: le derivate dei nati nascono `NaN`**
+
+> ### **Quando nasce un nodo, le sue derivate sono SPORCHE; leggerne una e' un ERRORE;
+> tornano pulite quando la loro legge le riscrive.**
+> ### **E il VELENO e' il modo in cui quella regola diventa una LEGGE DEL SISTEMA** invece
+> di un accertamento fatto una volta con una misura.
+
+*(`COMMIT 4` del riordino. Terza via del par.(d), **approvata da Luca il 2026-10-01** nella
+forma raffinata; **VIA A** scelta il 2026-10-03 dopo la misura della copertura.)*
+
+## **LA FORMA**
+
+```
+_avvelena_derivate(net)      # alla FINE di nascita(), per EVENTO
+    per ogni voce di REGISTRO_DERIVATE:
+        se la CLASSE DI NASCITA e' `auto-rinfresco`  ->  SI SALTA (esente)
+        altrimenti, se e' CORTA  ->  si estende con `NaN` fino a `n` (o `m`)
+```
+
+| | |
+|---|---|
+| **dimensioni** | ### **nessuna**: `NaN` non ha unita'. Il veleno non introduce una formula |
+| **cosa LEGGE** | `len(net.phi)`, `len(net.i)`, e la ### **CLASSE** dal registro |
+| **cosa SCRIVE** | le voci di `REGISTRO_DERIVATE` di classe `avvelena`, ### **solo in coda** |
+| **limiti** (`A11`) | ### **nessun clip, nessun pavimento.** I quattro rami che NON avvelenano *(esente, assente, multiasse, non-float, gia'-lunga)* sono ### **CONTATI, non taciuti** |
+
+## ### ✅ **PERCHE' IL VELENO E NON UNA MARCA LETTA A OGNI ACCESSO**
+
+Intercettare **la lettura** costa: la sorveglianza ha misurato ### **1 887 282 accessi per
+passo.** Il veleno non costa niente a chi legge: ### **una lettura sporca PROPAGA il `NaN`
+nello stato, e il controllo lo prende al confine successivo** — e un controllo di
+finitezza su tutte e 30 le voci di stato costa `0.002085 s`, lo ### **0.073 %** di un passo.
+
+### 📌 **E NON E UNA CONVENZIONE NUOVA: IL SISTEMA LO FA GIA IN DUE PUNTI.** `peq`
+nasce `nan` in `_allaccia` *(`# da calibrare`)* e nello Schwinger con `PEQ_NASCITA_LOCALE`,
+e `step` la ### **CALIBRA**. ### **<<derivata sporca>> e <<`peq` da calibrare>> sono LA
+STESSA COSA**, e per `9-ter` questo conta: il commit 4 ### **da' un NOME a cio' che il
+sistema fa gia'.**
+
+## ### ⚠ **LE DUE ESENTI, e l'esenzione LA DICHIARA IL REGISTRO**
+
+| | la guardia | con il veleno, se NON fosse esente |
+|---|---|---|
+| `_xi_rumore` `:5031` | `if _xi is None or len(_xi) < n:` | estendere la rende ### **FALSA** ⇒ ### **l'estrazione fresca NON avviene** ⇒ i nati prendono `NaN`. E il commento dichiara che quello e' ### **<<IL PERCORSO NORMALE della mitosi>>** |
+| `_g_rampa_prec` `:5704` | `if ... len(_prec) == len(ramp):` | estendere la rende ### **VERA** ⇒ `ramp < _prec` confronta con `NaN` ⇒ ### **False in silenzio**, e il ramo che conta il disallineamento ### **smette di scattare** |
+
+### ➜ **IL DISALLINEAMENTO DI LUNGHEZZA *E* IL SEGNALE con cui quelle due si
+ripuliscono**, e riempirle di `NaN` lo distruggerebbe. ### **MISURATO: 99 letture sporche
+ciascuna, su tre scene** *(`csv/_test_fork/_copertura_derivate/`)*.
+
+### ✅ **E L'ESENZIONE E NEL REGISTRO, NON NEL CODICE DEL VELENO:** `REGISTRO_DERIVATE`
+ha una colonna ### **CLASSE DI NASCITA** col vocabolario `NASCITA_DERIVATA`, e
+`_avvelena_derivate` ### **la legge da la'.** ### **Un elenco scritto nel veleno sarebbe
+una seconda fonte, e divergerebbe.**
+
+## ### ⚠ **E NON HA UN FLAG, ED E UNA SCELTA**
+
+Un flag renderebbe il presidio ### **un'opzione** — ed e' il difetto che `E4-LAM` ha
+curato *(<<il controllo era legge, chi la faceva rispettare era un'opzione>>)* e che
+`_nasce` dichiara di aver tolto *(<<IL GATE E' TOLTO: il presidio agisce SEMPRE>>)*.
+
+## ### ⛔ **IL LIMITE CHE IL PRIMO COLLAUDO HA TROVATO: `VELENO-DOMINI`**
+
+Il veleno ### **fa cadere il run al passo 42**, alla ### **prima mitosi**:
+`DominioViolato` — `_dt_e_ultimo` viola `> 0`, 1 elemento, indice `471564`, valore `nan`,
+arco `12802-1583`.
+
+### **LA CAUSA:** `DOMINI` ha 42 voci e ### **NOVE sono derivate**; `verifica_invarianti`
+le controlla ### **come se fossero STATO**, quindi una derivata avvelenata ### **viola il
+suo dominio PER COSTRUZIONE.**
+
+### 📌 **E NON E UN DIFETTO SCOPERTO NEL SIMULATORE: E IL VELENO CHE HA TROVATO SE
+STESSO.** Nessuna ### **LEGGE** ha letto la derivata sporca — l'ha vista il
+### **PRESIDIO**, ed e' il suo lavoro.
+
+### ✅ **IL PEZZO CHE MANCA, e il piano lo prevedeva:** *<<il controllo di finitezza e'
+PER GRANDEZZA, con l'esenzione DICHIARATA NEL REGISTRO>>*. La forma esiste ### **due
+volte**: `DOMINI['peq'] = ('peq', …)` ammette `nan` sugli archi,
+`DOMINI['eta'] = ('nonneg_inf', …)` ammette `+inf`. ### **Serve la TERZA: una forma di
+dominio per le derivate AVVELENATE**, che ammetta `nan` ### **dove il veleno l'ha messo e
+solo la'.** ### ⛔ **NON implementata: tocca il presidio centrale, e la forma e' una
+scelta di Luca.**
+
+## **Criteri, fissati PRIMA dei numeri** *(il sigillo e' `csv/_seal_fork/_sigillo_veleno.py`)*
+
+| | |
+|---|---|
+| ### **`A`** | lo ### **STATO** byte-identico sulle ### **tre scene**, e le ### **DERIVATE NO** — il prezzo ### **dichiarato e ACCETTATO**. E `A` ### **verifica che le derivate DIFFERISCANO**: se fossero identiche il veleno ### **non avrebbe fatto niente** |
+| ### **`B`** | il ### **caso che DEVE fallire**: si ### **toglie l'esenzione** a `_xi_rumore` ⇒ il run deve ### **ROMPERSI, con voce e riga** |
+| **`C`** | le ### **due esenti NON avvelenate**: restano ### **CORTE**, senza `NaN` |
+| **`D`** | il verdetto della ### **COPERTURA**, ### **CITATO** dal referto committato col suo blob *(`L-NUMERI`)* |
+
+---
+
 <!-- SCHEDA nome=nascita-punto-unico funzioni=_nascita_collaudo_della_tabella,_nascita_collocata,_nascita_non_si_tocca,_nascita_regola,_ordine_di_nascita,_registra_regola,_rn_div_conc_nodi,_rn_div_cs_nodo_prev,_rn_div_d,_rn_div_d0,_rn_div_eta,_rn_div_i,_rn_div_j,_rn_div_mem_mot,_rn_div_nb,_rn_div_nb_prec,_rn_div_nb_ret,_rn_div_omega_s,_rn_div_peq,_rn_div_perc_chi,_rn_div_perc_geom,_rn_div_perc_tw,_rn_div_phi,_rn_div_phi0,_rn_div_phi_s,_rn_div_phivel,_rn_div_pos,_rn_div_psi,_rn_div_psi_prec,_rn_div_psi_spin,_rn_div_psi_spin_prec,_rn_div_psi_spinor,_rn_div_rep,_rn_div_rho_spin,_rn_div_spinor_lift,_rn_div_tw,_rn_div_twp,_rn_div_vd,_rn_sch_conc_nodi,_rn_sch_cs_nodo_prev,_rn_sch_d,_rn_sch_d0,_rn_sch_eta,_rn_sch_i,_rn_sch_j,_rn_sch_mem_mot,_rn_sch_nb,_rn_sch_nb_prec,_rn_sch_nb_ret,_rn_sch_omega_s,_rn_sch_peq,_rn_sch_peqn_idx,_rn_sch_perc_chi,_rn_sch_perc_geom,_rn_sch_perc_tw,_rn_sch_phi,_rn_sch_phi0,_rn_sch_phi_s,_rn_sch_phivel,_rn_sch_pos,_rn_sch_psi,_rn_sch_psi_prec,_rn_sch_psi_spin,_rn_sch_psi_spin_prec,_rn_sch_psi_spinor,_rn_sch_rep,_rn_sch_rho_spin,_rn_sch_spinor_lift,_rn_sch_tw,_rn_sch_twp,_rn_sch_vd,nascita flag=REGOLE_NASCITA,ORDINE_DI_NASCITA,EVENTI_DI_NASCITA,EVENTI_CONVERTITI -->
 
 # **`nascita-punto-unico` — IL PUNTO UNICO DI NASCITA, e le sue 72 regole**
+
+## ✅ **E DAL `COMMIT 4` IL PUNTO UNICO FA UN'ULTIMA COSA: IL VELENO**
+
+Dopo che ### **tutte le regole hanno scritto**, `nascita()` chiama
+### **`_avvelena_derivate(net)`** — e sta ### **qui** perche' ### **qui e' il punto unico
+della nascita.**
+
+| | |
+|---|---|
+| ### **perche' DOPO e non prima** | il veleno estende fino a `len(net.phi)` e `len(net.i)`, cioe' alle lunghezze ### **NUOVE** — e quelle le stabiliscono le regole di `phi` e di `i`. ### **Prima del blocco non esisterebbero ancora** |
+| ### **perche' PER EVENTO** | ogni chiamata a `nascita` aggiunge nodi o archi, quindi ### **ogni chiamata avvelena cio' che ha appena allungato** |
+| la scheda del veleno | ### **`veleno-derivate`**, qui sopra |
+
+### 📌 **E questo e' il primo pezzo di fisica che il punto unico ha reso POSSIBILE:**
+prima della riorganizzazione le scritture della nascita stavano in ### **tre posti**, e
+*<<dopo che tutte le regole hanno scritto>>* ### **non era un istante nominabile.**
+
+---
 
 ## ⛔ **CORREZIONE DEL 2026-10-03: CINQUE DERIVAZIONI AFFERMAVANO UN BILANCIO NON MISURATO**
 
@@ -5036,6 +5150,29 @@ ripiego** che l'eccezione esiste per rendere impossibile.
 ---
 
 <!-- SCHEDA nome=registro-grandezze funzioni=_ferma_se_registro_incoerente,_ferma_registro,registro_mai_apparse,_forma_di,_scrivi_forma,_controlla_forma_e_tipo,_finestra_aperta flag=REGISTRO_STATO,REGISTRO_DERIVATE,REGISTRO_METRI,REGISTRO_FINESTRA,REGISTRO_NOMI,CONTROLLO_REGISTRO,CacheLunga,FormaSbagliata,TipoSbagliato,GrandezzaNonDichiarata,FinestraRestataAperta -->
+
+> ### ✅ **COMMIT 4 — IL REGISTRO DICHIARA ANCHE LA CLASSE DI NASCITA DI UNA DERIVATA** *(2026-10-03)*
+>
+> ### **`REGISTRO_DERIVATE` ha una colonna in piu': `avvelena` oppure `auto-rinfresco`**, col
+> vocabolario `NASCITA_DERIVATA` e un ### **`assert` ALL'IMPORT** che rifiuta una classe fuori
+> vocabolario — *<<una derivata senza classe non si puo' ne' avvelenare ne' esentare, e il
+> silenzio NON e' una terza possibilita'>>*.
+>
+> ### 📌 **E' LA STESSA FORMA DELLE ESENZIONI GIA' APPROVATE**, e per `9-ter` questo
+> conta: `DOMINI['eta'] = ('nonneg_inf', …)` dichiara che `+inf` e' legittimo,
+> `DOMINI['peq'] = ('peq', …)` che `nan` lo e' sugli archi, e ora la ### **classe di nascita**
+> dichiara quali derivate ### **non si avvelenano.** ### **Tre casi della STESSA esenzione, non
+> tre leggi.**
+>
+> ### ⚠ **E IL REGISTRO LO DICEVA GIA', A PAROLE:** la colonna del motivo di `_g_rampa_prec`
+> e di `_xi_rumore` conteneva *<<AUTO-RINFRESCO>>* dal 2026-10-01. ### **Il commit 4 non
+> aggiunge una convenzione: la rende LEGGIBILE DA UNA MACCHINA** — e
+> `_avvelena_derivate` la legge da la', ### **senza nessun elenco a mano.**
+>
+> *(La scheda del veleno e' `veleno-derivate`.)*
+>
+> ### ⚠ **E UN CONSUMATORE ESTERNO SI E' ROTTO, e si aggiusta nello stesso commit** (par.6):
+> `csv/_test_fork/_sonda_veleno.py` faceva un unpack a ### **TRE** campi. Ora e' a quattro.
 
 > ### 📌 **COMMIT 1 DEL RIORDINO — IL REGISTRO E' DICHIARATO, NON MISURATO** *(2026-10-01)*
 >

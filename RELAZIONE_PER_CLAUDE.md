@@ -1697,3 +1697,56 @@ Almeno una lettura da ### **dentro `mitosi`** deve comparire nella finestra dell
 Con la sola corta il canale di Schwinger ha ### **1 evento contro 64.** La scena lunga che hai chiesto ### **e' quella che fa il lavoro.**
 
 ---
+
+# ⛔ **IL COMMIT 4 E' SCRITTO, E IL VELENO HA FATTO CADERE IL RUN. MI FERMO.** *(2026-10-03)*
+
+> ### **Luca: il tuo mandato dice <<se il veleno fa cadere un run, FERMATI e dillo con la voce e la riga>>. La condizione si e' verificata al PRIMO collaudo.**
+
+Simulatore da **`dc10df7f`** a ### **`7a1a21af`**.
+
+## ⛔ **LA CADUTA, con voce e riga**
+
+| | |
+|---|---|
+| **passo** | ### **42** — ### **la PRIMA mitosi** |
+| **voce** | `esegui_passo` → ### **`verifica_invarianti`** |
+| la **grandezza** | ### **`_dt_e_ultimo`**, derivata ### **per ARCO**, classe `avvelena` |
+| il **dominio violato** | ### **`> 0`** — *«il passo di tempo efficace d'arco: un tempo e' POSITIVO»* |
+| **quanti** | ### **1**: indice `471564`, valore `nan`, arco `12802-1583` |
+
+## ⛔ **LA CAUSA: `DOMINI` include NOVE delle dieci derivate**
+
+`verifica_invarianti` le controlla ### **come se fossero STATO**, quindi una derivata avvelenata ### **viola il suo dominio PER COSTRUZIONE.** *(La sola fuori da `DOMINI` e' `_g_rampa_prec`.)*
+
+### 📌 **E NON E' UN DIFETTO CHE IL VELENO HA SCOPERTO NEL SIMULATORE: E' IL VELENO CHE HA TROVATO SE STESSO.**
+### **Nessuna LEGGE ha letto la derivata sporca** — l'ha vista ### **il PRESIDIO**, ed e' il suo lavoro. ### ➜ **Dirlo e' importante: la caduta misura un buco del MIO disegno, non una lettura sporca di una legge.**
+
+## ✅ **IL PEZZO CHE MANCA, e il piano lo PREVEDEVA**
+
+> *«il controllo di finitezza e' ### **PER GRANDEZZA, con l'esenzione DICHIARATA NEL REGISTRO** — lo stesso schema gia' in piedi per il TIPO»*
+
+E la forma ### **esiste gia' nel repo**, due volte: `DOMINI['peq'] = ('peq', …)` ammette `nan` sugli archi, `DOMINI['eta'] = ('nonneg_inf', …)` ammette `+inf`.
+### ➜ **Serve la TERZA: una forma di dominio per le derivate AVVELENATE**, che ammetta `nan` ### **dove il veleno l'ha messo, e solo la'.**
+
+### ⛔ **NON l'ho implementata**, e per due ragioni: ### **①** il tuo mandato dice di fermarmi, e la condizione si e' verificata; ### **②** tocca ### **`DOMINI` e `verifica_invarianti`**, cioe' il ### **presidio centrale**, e la forma dell'esenzione e' una scelta che il piano riserva a te.
+
+## ✅ **E IL VELENO, PER IL RESTO, FUNZIONA ESATTAMENTE COME DISEGNATO**
+
+| | |
+|---|---|
+| avvelenate | ### **8 voci, 8 celle** |
+| ### **esenti** | ### **2**, e restano ### **CORTE** *(12802 contro 12803)* ### **senza un solo `NaN`** |
+| l'esenzione | la ### **legge dal REGISTRO**: ### **nessun elenco a mano** nel codice del veleno |
+
+### ✅ **E un `assert` all'import rifiuta una classe fuori vocabolario:** *«una derivata senza classe non si puo' ne' avvelenare ne' esentare, e il silenzio NON e' una terza possibilita'»*.
+
+## ✅ **E UNA RICERCA CHE HO FATTO *PRIMA*, perche' non era rimandabile**
+
+Il veleno ### **estende** le derivate, quindi ### **ogni guardia che usa la lunghezza come segnale cambia comportamento.** Se ce ne fosse una ### **non prevista** su una derivata avvelenabile, il veleno la romperebbe.
+
+### **101 confronti di lunghezza**, di cui ### **6 su una derivata** — tutte e sei su ### **`_sin2_vir`**, in `step`.
+### ✅ **E NON sono ripieghi: sono un PRESIDIO CHE SOLLEVA** *(`_ferma_registro(CacheCorta/CacheLunga)`)*, curato perche' *«accorciare `_sin2_vir` faceva sparire il freno anisotropo PER TUTTA LA RETE, in silenzio»*. Il veleno trova la lunghezza ### **gia' giusta**, perche' `memoria_hebbiana_moto` la riscrive ### **INTERA** nello stesso passo — quindi ### **inerte li'**, e dichiarato nella riga di registro.
+
+### 📌 **E le altre 95** *(su grandezze non derivate)* sono la coda di `LUNGHEZZA-COME-SEGNALE`, la voce nuova: ### **spostare l'estrazione fresca di `_xi_rumore` da `step` a `nascita()` CAMBIA IL CONTRATTO DELL'ORDINE DELLE ESTRAZIONI**, quindi e' un commit a se', ### **NON byte-identico**, con la nuova sequenza misurata.
+
+---
