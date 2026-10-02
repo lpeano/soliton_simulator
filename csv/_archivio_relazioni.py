@@ -123,6 +123,10 @@ def testa_viva(preambolo, giorni, gia, oggi):
     fuori = list(preambolo)
     while fuori and not fuori[-1].strip():
         fuori.pop()
+    if fuori and fuori[-1].strip() == "---":
+        fuori.pop()        # il separatore lo riscrive la riga qui sotto: senno' a ogni rilancio
+        while fuori and not fuori[-1].strip():   # ne cresce uno in piu' (misurato: `---` doppio)
+            fuori.pop()
     righe_tab = dict(gia)
     for g in giorni:
         if g != oggi:
