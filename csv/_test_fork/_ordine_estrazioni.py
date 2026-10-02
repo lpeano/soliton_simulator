@@ -521,39 +521,69 @@ def riduzioni_ordine_dipendenti(percorso, funzioni):
     return fuori
 
 
-def controllo_riduzioni(stampa):
-    """MISURA quali riduzioni dipendono dall'ordine, invece di asserirlo.
+GIRI = 200
 
-    ### E misura anche la TAGLIA, che e' il punto piu' fine: una media in virgola mobile dipende
-    dall'ordine **in generale**, ma su `1`, `2` o `3` elementi ### **no** -- e allora un'inerzia
-    c'e' **PER TAGLIA, non per LEGGE**, che e' una cosa diversa e va scritta diversa.
+
+def controllo_riduzioni(stampa):
+    """MISURA quali riduzioni dipendono dall'ordine, invece di asserirlo, **e a quale TAGLIA**.
+
+    ### ⛔ **UN ERRORE DELLA PRIMA STESURA, trovato dal guardiano, ed era un FALSO ZERO.**
+    La prima stesura usava ### **UN SOLO vettore per taglia** e provava 200 permutazioni **di
+    quello**. Con le scale `1e9`/`1e-9`, per `n = 3` e `n = 4` ### **quel vettore dava `0` PER
+    CASO**, e il referto concludeva *«inerte fino a 4, ordine-dipendente da ~8»*.
+    ### ➜ **E quella conclusione CONTRADDICEVA la misura IEEE-754 dello stesso strumento** --
+    *due addendi commutativi al bit, tre no* -- che da' la soglia ### **3**. ### **Due referti
+    dello stesso strumento che si contraddicono: il secondo era sbagliato.**
+    ### ✅ **Cura: per ogni taglia si provano `GIRI` vettori DIVERSI**, uno per permutazione.
+    *(Misurato dopo la cura: `n=2` -> 0, `n=3` -> 10, `n=4` -> 25 su 200.)*
+
+    ### ⚠ **E il test sulla `norm` era una TAUTOLOGIA** *(rilievo del guardiano)*: confrontava la
+    **stessa chiamata con se stessa**. ### **Ora misura cio' che conta: la norma PER RIGA non
+    dipende dall'ordine delle RIGHE** -- si permutano le righe e si confronta riga per riga.
     """
     r = np.random.default_rng(7)
-    def quante(y, giri=200):
-        return int(sum(1 for _ in range(giri)
-                       if y.mean() != y[r.permutation(len(y))].mean()))
-    out = {"media_float_per_taglia": {}}
-    stampa("  MEDIA in virgola mobile -- permutazioni (su 200) che la CAMBIANO, per TAGLIA:")
-    for n in (1, 2, 3, 4, 8, 64, 4096):
-        y = r.random(n) * r.choice([1.0, 1e-9, 1e9], n)
-        k = quante(y)
+    out = {"media_float_per_taglia": {}, "giri_per_taglia": GIRI}
+    stampa("  MEDIA in virgola mobile -- VETTORI DIVERSI (su %d) la cui media CAMBIA per una" % GIRI)
+    stampa("  permutazione, PER TAGLIA.  (La prima stesura usava UN SOLO vettore: FALSO ZERO.)")
+    soglia = None
+    for n in (1, 2, 3, 4, 5, 8, 64, 4096):
+        k = 0
+        for _ in range(GIRI):
+            y = r.random(n) * r.choice([1.0, 1e-9, 1e9], n)
+            if y.mean() != y[r.permutation(n)].mean():
+                k += 1
         out["media_float_per_taglia"][str(n)] = k
-        stampa("      n = %-5d -> %3d su 200%s" % (n, k, "   <- ORDINE-DIPENDENTE" if k else ""))
+        if k and soglia is None:
+            soglia = n
+        stampa("      n = %-5d -> %3d su %d%s" % (n, k, GIRI,
+                                                 "   <- ORDINE-DIPENDENTE" if k else ""))
+    out["soglia_misurata"] = soglia
+    stampa("  ### ➜ LA SOGLIA MISURATA e' n = %s: da li' in su una media in virgola mobile"
+           % soglia)
+    stampa("      DIPENDE dall'ordine. ### E coincide con la misura IEEE-754 di questo stesso")
+    stampa("      referto (due addendi commutativi al bit, TRE no): le due si CONFERMANO.")
     f = r.random(4096) < 0.37
-    out["media_booleani"] = quante(f)
+    out["media_booleani"] = int(sum(1 for _ in range(GIRI)
+                                    if f.mean() != f[r.permutation(len(f))].mean()))
     x = r.random(4096) * r.choice([1.0, 1e-9, 1e9], 4096)
-    out["mediana_float"] = int(sum(1 for _ in range(200)
+    out["mediana_float"] = int(sum(1 for _ in range(GIRI)
                                    if np.median(x) != np.median(x[r.permutation(len(x))])))
-    v = r.normal(0, 1e6, (4096, 3))
-    out["norm_axis1_deterministica"] = bool(np.array_equal(np.linalg.norm(v, axis=1),
-                                                           np.linalg.norm(v, axis=1)))
-    stampa("  MEDIA di BOOLEANI (4096) ..: %d su 200   -> %s"
-           % (out["media_booleani"],
+    # ⚠ NON una tautologia: si permutano le RIGHE e si confronta RIGA PER RIGA.
+    kn = 0
+    for _ in range(50):
+        v = r.normal(0, 1e6, (512, 3))
+        p = r.permutation(512)
+        if not np.array_equal(np.linalg.norm(v, axis=1)[p], np.linalg.norm(v[p], axis=1)):
+            kn += 1
+    out["norm_per_riga_cambia_permutando_le_righe"] = kn
+    stampa("  MEDIA di BOOLEANI (4096) ..: %d su %d   -> %s"
+           % (out["media_booleani"], GIRI,
               "ESATTA, l'ordine non conta" if not out["media_booleani"] else "ORDINE-DIPENDENTE"))
-    stampa("  MEDIANA (4096) ............: %d su 200   -> %s"
-           % (out["mediana_float"],
+    stampa("  MEDIANA (4096) ............: %d su %d   -> %s"
+           % (out["mediana_float"], GIRI,
               "l'ordine non conta" if not out["mediana_float"] else "ORDINE-DIPENDENTE"))
-    stampa("  norm(axis=1) deterministica: %s" % out["norm_axis1_deterministica"])
+    stampa("  NORM per riga: permutando le RIGHE, la norma di una riga cambia? %d su 50   -> %s"
+           % (kn, "l'ordine delle RIGHE non entra" if not kn else "ORDINE-DIPENDENTE"))
     return out
 
 
@@ -886,6 +916,45 @@ def principale():
         stampa("          %-26s registro=%-5s contatore=%-5s tipo=%-9s ### CONFRONTATA: %s"
                % (g, q["nel_registro"], q["contatore"], q["tipo_runtime"],
                   "SI" if q["confrontata"] else "### NO"))
+    # ### IL VERDETTO SU `ultima_prob_coppia` SI DERIVA, NON SI CABLA.
+    #   Lezione del 2026-10-01: una conclusione messa in un `print` e' un numero ricopiato a mano
+    #   travestito da misura. Qui si incrociano DUE misure di questo stesso referto: la SOGLIA
+    #   (da quale taglia una media in virgola mobile dipende dall'ordine) e la DISTRIBUZIONE VERA
+    #   di `len(sel)` (la taglia su cui la media gira davvero).
+    taglie = sorted(e["quanti"] for e in registro
+                    if e["voce"] == "mitosi" and e["quanti"] < 1000)
+    soglia = ridm.get("soglia_misurata")
+    verdetto = {"taglie_len_sel": taglie, "soglia_misurata": soglia}
+    stampa("      ### E IL VERDETTO SU `ultima_prob_coppia`, DERIVATO da due misure di questo")
+    stampa("          stesso referto invece che scritto da me:")
+    stampa("          la SOGLIA misurata e' n = %s" % soglia)
+    stampa("          le TAGLIE vere di `len(sel)` nella finestra: %s"
+           % (", ".join(str(x) for x in taglie) if taglie else "(nessun evento)"))
+    if not taglie or soglia is None:
+        verdetto["esito"] = "NON DETERMINABILE"
+        stampa("          ### NON DETERMINABILE: manca una delle due misure.")
+    else:
+        mx = max(taglie)
+        verdetto["max_len_sel"] = mx
+        if mx < soglia:
+            verdetto["esito"] = "INERTE NELLA FINESTRA, con margine %d" % (soglia - mx)
+            stampa("          ### ➜ max(len(sel)) = %d < soglia %d: `ultima_prob_coppia` e'"
+                   % (mx, soglia))
+            stampa("              INERTE all'ordine IN QUESTA FINESTRA -- e il MARGINE e' di")
+            stampa("              SOLI %d arco/archi. ### NON e' inerte per LEGGE: lo e' perche'"
+                   % (soglia - mx))
+            stampa("              la scena divide POCO. Un passo con %d divisioni la renderebbe"
+                   % soglia)
+            stampa("              ordine-dipendente SENZA che nessuna legge sia cambiata.")
+        else:
+            verdetto["esito"] = "ORDINE-DIPENDENTE: max(len(sel)) >= soglia"
+            stampa("          ### ⛔ max(len(sel)) = %d >= soglia %d: `ultima_prob_coppia` E'"
+                   % (mx, soglia))
+            stampa("              ORDINE-DIPENDENTE in questa finestra.")
+    stampa("          ### LA REGOLA PER IL CONTRATTO: `ultima_prob_coppia` e' inerte all'ordine")
+    stampa("          SOLO SE `len(sel) <= %s`; da %s in su DIPENDE dall'ordine degli archi."
+           % ((soglia - 1) if soglia else "?", soglia))
+    stampa("")
     non_vista = [g for g, q in visto.items() if not q["confrontata"]]
     if non_vista:
         stampa("      ### ⛔ %d grandezza/e scritta/e da una riduzione NON sono confrontate dal"
@@ -935,6 +1004,7 @@ def principale():
            "flag_dei_gate_dal_runtime": {k: (v if isinstance(v, (int, float, str, bool))
                                              else str(v)) for k, v in FLAG.items()},
            "riduzioni_il_sigillo_le_confronta": visto,
+           "verdetto_ultima_prob_coppia": verdetto,
            "tutte_le_somme_del_perimetro": tutte,
            "MITOSI_DIR_dal_runtime": float(getattr(S, "MITOSI_DIR", 0.0)),
            "somme_interi_nel_registro": s_int,

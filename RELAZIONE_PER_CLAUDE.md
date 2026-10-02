@@ -526,12 +526,14 @@ La regola del braccio `B` *(letta dal codice, `csv/_seal_fork/_sig_controllo_uni
 
 **Permutazioni (su 200) che cambiano una media in virgola mobile, PER TAGLIA:**
 
-| `n` | 1 | 2 | 3 | 4 | 8 | 64 | 4096 |
-|---|--:|--:|--:|--:|--:|--:|--:|
-| cambiano | **0** | **0** | **0** | **0** | ### **44** | 6 | ### **97** |
+> ### ⛔ **QUESTA TABELLA E' SBAGLIATA, e la lascio leggibile** *(par.8)*. **Rilievo del guardiano, 2026-10-02:** il test usava ### **UN SOLO vettore per taglia**, e per `n = 3` e `n = 4` quel vettore dava `0` ### **per caso**. ### **La soglia vera e' `3`**, e la tabella corretta sta nel paragrafo *«UN SETTIMO ERRORE»* piu' sotto.
+>
+> | `n` | 1 | 2 | 3 | 4 | 8 | 64 | 4096 |
+> |---|--:|--:|--:|--:|--:|--:|--:|
+> | ~~cambiano~~ | **0** | **0** | ~~**0**~~ | ~~**0**~~ | ~~44~~ | ~~6~~ | ~~97~~ |
 
 **E `len(sel)` nella finestra misurata vale:** ### **`1` in sette eventi su otto, `2` al passo 70.**
-### ➜ **Quindi `ultima_prob_coppia` e' inerte all'ordine OGGI — ma PER TAGLIA, non per LEGGE.** ### **Da ~8 archi in su la media cambia per permutazione**, e una scena che si dividesse piu' spesso la renderebbe ordine-dipendente ### **senza che nessuna legge sia cambiata.**
+### ➜ **Quindi `ultima_prob_coppia` e' inerte all'ordine OGGI — ma PER TAGLIA, non per LEGGE.** ~~Da ~8 archi in su la media cambia per permutazione~~ ### ⛔ **IL «~8» E' SBAGLIATO: la soglia e' `3`** *(rilievo del guardiano; la riga resta leggibile, par.8)*, e una scena che si dividesse piu' spesso la renderebbe ordine-dipendente ### **senza che nessuna legge sia cambiata.**
 ### 📌 **E' esattamente la forma che `A8` chiama pericolosa:** *un'inerzia che dipende da un numero di oggi* ### **non e' un'inerzia: e' una coincidenza che vale finche' dura.** Va nel contratto **cosi'**, non come *«non conta»*.
 
 ## ✅ **E IL CONTEGGIO CHE HAI CHIESTO** *(`PRESIDIO-RIFIUTO-SOLO-SIGILLI`, e SOLO il conteggio)*
@@ -552,5 +554,52 @@ La regola del braccio `B` *(letta dal codice, `csv/_seal_fork/_sig_controllo_uni
 ### 🛑 **La voce resta IN CODA e la decisione e' tua**, come hai detto.
 
 **PROSSIMO: il giro vero, il contratto nella tabella, il referto. Poi il commit 3 e il suo sigillo.**
+
+---
+
+# ⛔ **UN SETTIMO ERRORE, E UN SETTIMO FALSO ZERO: un vettore per taglia non e' una misura** *(2026-10-02)*
+
+> ### **Luca, il guardiano ha ragione e l'errore e' grave: avevo scritto «inerte fino a 4, ordine-dipendente da ~8». La soglia e' TRE, e me lo diceva una misura MIA dello stesso strumento.**
+
+Strumento da **`acf50d19`** a ### **`a4c65607`**, generatore del contratto a **`14ed832c`**. ### **Nessuna riga del simulatore:** blob `3ddc56d9` prima e dopo.
+
+## ⛔ **IL DIFETTO: UN SOLO VETTORE PER TAGLIA**
+
+Il controllo provava ### **200 permutazioni di UN SOLO vettore**, per ogni taglia. Con le scale `1e9`/`1e-9` ### **quel vettore, per `n = 3` e `n = 4`, dava `0` PER CASO** — gli addendi si assorbivano.
+### ➜ **Un campione di UNO non e' una misura: e' un aneddoto.** E l'ho stampato come numero.
+
+| | con **UN** vettore *(sbagliato)* | ### **con 200 vettori DIVERSI** *(giusto)* |
+|---|--:|--:|
+| `n = 1` | 0 | **0** |
+| `n = 2` | 0 | **0** |
+| ### **`n = 3`** | ### **0** | ### **10 su 200** |
+| ### **`n = 4`** | ### **0** | ### **25 su 200** |
+| `n = 5` | — | **38** |
+| `n = 8` | 44 | **61** |
+| `n = 4096` | 97 | **62** |
+
+## ⛔⛔ **E LA COSA PEGGIORE: IL REFERTO CONTRADDICEVA UN'ALTRA MISURA DELLO STESSO STRUMENTO**
+
+Lo stesso referto porta la misura ### **IEEE-754**: ### **due addendi commutativi AL BIT, tre NO.** ### ➜ **Quella misura da' la soglia `3`**, ed e' ### **esattamente quella giusta.**
+### **Quindi avevo due numeri miei che si contraddicevano, nello stesso file, e non li ho incrociati.**
+### 📌 **E' la stessa forma dell'errore del 2026-10-01**, quando una conclusione cablata in un `print` contraddiceva il numero stampato sopra: ### **li' la conclusione contraddiceva il dato, qui un dato contraddice l'altro.** ### **La cura e' la stessa: il verdetto si DERIVA incrociando le misure, non si scrive.**
+
+## ✅ **LA CURA, in tre pezzi**
+
+| | |
+|---|---|
+| **1** | ### **`200` vettori DIVERSI per taglia**, uno per permutazione. La soglia misurata e' ### **`3`**, e lo strumento ### **la stampa accanto alla misura IEEE-754 dicendo che le due si CONFERMANO** |
+| **2** | il test sulla `norm` era una ### **TAUTOLOGIA** *(confrontava la stessa chiamata con se stessa)*: ora ### **permuta le RIGHE e confronta riga per riga** — cioe' misura cio' che conta, che l'ordine delle **righe** non entri nella norma di una riga. ### **Misurato: `0` su 50** |
+| ### **3** | ### **il verdetto su `ultima_prob_coppia` si DERIVA**, incrociando ### **la soglia misurata** con ### **la distribuzione VERA di `len(sel)`** — non lo scrivo io |
+
+## ⭐ **E LA REGOLA DEL CONTRATTO CAMBIA, e diventa PIU' STRETTA**
+
+> ### **`ultima_prob_coppia` e' inerte all'ordine SOLO SE `len(sel) <= 2`. Da `3` in su DIPENDE dall'ordine degli archi.**
+
+**E le taglie vere di `len(sel)` nella finestra misurata:** ### **`1` in sette eventi su otto, `2` al passo 70.**
+### ➜ **Quindi e' inerte nella finestra, ma il MARGINE E' DI UN SOLO ARCO.** ### **Un passo con TRE divisioni la renderebbe ordine-dipendente senza che nessuna legge sia cambiata** — e con *«~8»* quel margine sembrava **sei volte** piu' largo di quello che e'.
+### 📌 **E' esattamente per questo che l'errore conta:** non cambiava il verdetto *(inerte oggi)*, ### **cambiava di quanto siamo lontani dal non esserlo.**
+
+**PROSSIMO: il giro vero, il contratto generato, il referto. Poi il commit 3 e il suo sigillo, che confronta anche le tre grandezze scoperte.**
 
 ---

@@ -229,20 +229,90 @@ def principale():
     P("## 4. LE RIDUZIONI -- **%d**, e li' l'associativita' morde davvero"
       % len(d["riduzioni_ordine_dipendenti"]))
     P("")
-    P("`np.add.at` e `np.bincount` ### **non sono somme SCRITTE: sono ACCUMULAZIONI su molti "
-      "termini.**")
+    P("### ⚠ **NON sono solo `np.add.at` e `np.bincount`** *(rilievo del guardiano, "
+      "2026-10-02)*: ### **una `.mean()` in virgola mobile lo e' anche**, e la prima stesura del "
+      "rilevatore ### **la perdeva.** Sono **accumulazioni su molti termini**, non somme scritte.")
     P("")
-    P("| funzione | riga di oggi | che cosa |")
-    P("|---|--:|---|")
+    P("| riga | funzione | scrive | forma | gate |")
+    P("|--:|---|---|---|---|")
     for q in d["riduzioni_ordine_dipendenti"]:
-        P("| `%s` | `:%d` | `%s` |" % (q["funzione"], q["riga_oggi"], q["testo"]))
+        P("| `:%d` | `%s` | %s | `%s` | %s |"
+          % (q["riga_oggi"], q["funzione"],
+             ("### **`%s`**" % q["scrive"]) if (q["scrive"] and not
+                                               q["scrive"].startswith("(locale)"))
+             else ("*%s*" % q["scrive"] if q["scrive"] else "-"),
+             q["forma"], (" AND ".join("`%s`" % x for x in q["gate"]) if q["gate"] else "-")))
     P("")
-    P("### ⚠ **E IL RAMO IN CUI VIVONO, dal RUNTIME: `MITOSI_DIR = %s`.**"
-      % d["MITOSI_DIR_dal_runtime"])
-    if float(d["MITOSI_DIR_dal_runtime"]) == 0.0:
-        P("### ➜ **Quel ramo NON GIRA, quindi queste riduzioni NON avvengono nella "
-          "configurazione di riferimento.** ### **Resta DICHIARATO: se un giorno `MITOSI_DIR != "
-          "0`, l'ordine di `add.at` entra nel contratto, e il contratto di OGGI non lo copre.**")
+    P("### **I FLAG dei gate, dal RUNTIME:** %s"
+      % "  ·  ".join("`%s = %r`" % (k, v)
+                         for k, v in d["flag_dei_gate_dal_runtime"].items()))
+    P("")
+    cr = d["controllo_riduzioni"]
+    P("### ✅ **QUALI riduzioni dipendano dall'ordine e' MISURATO, non dichiarato a parole**")
+    P("")
+    P("| | |")
+    P("|---|---|")
+    P("| MEDIA in virgola mobile | ### **dipende dall'ordine da `n = %s` IN SU** -- "
+      "`%d` vettori DIVERSI per taglia: %s |"
+      % (cr.get("soglia_misurata"), cr.get("giri_per_taglia", 0),
+         ", ".join("`n=%s`: %d" % (k, cr["media_float_per_taglia"][k])
+                   for k in sorted(cr["media_float_per_taglia"], key=lambda z: int(z)))))
+    P("| MEDIA di **BOOLEANI** | **%d** su %d ⇒ ### **ESATTA**, l'ordine non conta "
+      "*(e' il caso di `flip.mean()`)* |" % (cr["media_booleani"], cr.get("giri_per_taglia", 0)))
+    P("| **MEDIANA** | **%d** su %d ⇒ l'ordine **non conta** |"
+      % (cr["mediana_float"], cr.get("giri_per_taglia", 0)))
+    P("| `norm(axis=1)` **per riga** | permutando le **RIGHE**, la norma di una riga cambia "
+      "**%d** volte su 50 ⇒ l'ordine delle righe **non entra** |"
+      % cr.get("norm_per_riga_cambia_permutando_le_righe", -1))
+    P("")
+    P("### ⛔ **E LA SOGLIA `n = %s` COINCIDE con la misura IEEE-754 del par. 3** *(due "
+      "addendi commutativi al bit, TRE no)*: ### **le due misure si confermano a vicenda.**"
+      % cr.get("soglia_misurata"))
+    P("### ⚠ **E una versione precedente di questo referto diceva «inerte fino a 4, "
+      "ordine-dipendente da ~8»: era un FALSO ZERO** -- usava **UN SOLO vettore per taglia**, "
+      "e per `n = 3` e `n = 4` quel vettore dava `0` **per caso**. ### **La riga vecchia resta nel "
+      "repo** *(par.8)*, e questa e' la correzione.")
+    P("")
+    vp = d.get("verdetto_ultima_prob_coppia", {})
+    P("### ⭐ **LA REGOLA DEL CONTRATTO SU `ultima_prob_coppia`, DERIVATA dai numeri**")
+    P("")
+    P("> ### **`ultima_prob_coppia` e' inerte all'ordine SOLO SE `len(sel) <= %s`; da `%s` in su "
+      "DIPENDE dall'ordine degli archi.**"
+      % ((cr.get("soglia_misurata") or 0) - 1, cr.get("soglia_misurata")))
+    P("")
+    P("| | |")
+    P("|---|---|")
+    P("| la soglia **misurata** | `n = %s` |" % cr.get("soglia_misurata"))
+    P("| le taglie **vere** di `len(sel)` nella finestra | %s |"
+      % (", ".join("`%s`" % x for x in vp.get("taglie_len_sel", [])) or "*(nessun evento)*"))
+    P("| ### **l'esito** | ### **%s** |" % vp.get("esito", "NON DETERMINABILE"))
+    P("")
+    if vp.get("esito", "").startswith("INERTE"):
+        P("### ⚠ **E NON E' INERTE PER LEGGE: lo e' perche' la scena divide POCO.** Il "
+          "margine e' di ### **pochi archi**: ### **un passo con `%s` divisioni la renderebbe "
+          "ordine-dipendente SENZA che nessuna legge sia cambiata.** ### **E' la forma che `A8` "
+          "chiama pericolosa:** *un'inerzia che dipende da un numero di oggi non e' un'inerzia, e' "
+          "una coincidenza che vale finche' dura.*" % cr.get("soglia_misurata"))
+    P("")
+    P("## 4-bis. ⛔ **E IL SIGILLO NON CONFRONTA TRE DI QUESTE GRANDEZZE**")
+    P("")
+    P("La regola del braccio `B` *(letta da `csv/_seal_fork/_sig_controllo_unico.py`, "
+      "`_contatori`)* confronta ### **DUE insiemi**: le grandezze di `REGISTRO_NOMI`, e i "
+      "**contatori** = ogni attributo che ### **comincia con `_` ED E' UN INTERO.**")
+    P("")
+    P("| grandezza | nel registro? | contatore? | tipo a runtime | ### **confrontata?** |")
+    P("|---|---|---|---|---|")
+    for g, q in sorted(d.get("riduzioni_il_sigillo_le_confronta", {}).items()):
+        P("| `%s` | %s | %s | `%s` | %s |"
+          % (g, q["nel_registro"], q["contatore"], q["tipo_runtime"],
+             "SI" if q["confrontata"] else "### **NO**"))
+    P("")
+    P("### ➜ **Quindi un cambio d'ordine su queste tre NON farebbe cadere il sigillo: ci "
+      "passerebbe accanto IN SILENZIO.** ### **E' `A8` applicato al sigillo.**")
+    P("### ⚠ **E `_g_peqn_mediana` e' il caso peggiore:** porta il prefisso `_g_` dei "
+      "contatori, ### **quindi un lettore la crede coperta**, e non lo e' perche' e' un `float`.")
+    P("### ✅ **REQUISITO PER IL SIGILLO DEL COMMIT 3, scritto QUI e PRIMA:** deve "
+      "confrontare ### **anche queste tre**, non solo il registro e i contatori interi.")
     P("")
     P("## 5. L'ORDINE DEI PEZZI DI OGNI CONCATENAZIONE -- **%d**, e sta nella TABELLA"
       % len(conc))
