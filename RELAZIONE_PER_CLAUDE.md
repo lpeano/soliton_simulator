@@ -387,3 +387,103 @@ E 15 scritture di grandezze del registro in cui l'ordine NON conta (INTERI):
 **PROSSIMO: il giro vero RIFATTO, e poi il contratto nella tabella.**
 
 ---
+
+# ⛔ **QUARTO DIFETTO, ANCORA UN FALSO ZERO — e la cura porta DUE misure che non avevo** *(2026-10-02)*
+
+> ### **Luca, il referto diceva «0 somme in virgola mobile». Ma `psi` del nato E' una somma: `0.5*(cur[a] + cur[b])`. Guardavo solo la forma piu' esterna.**
+
+Strumento da **`6297a6d6`** a ### **`e4ccf2d0`**. ### **Nessuna riga del simulatore:** blob `3ddc56d9` prima e dopo.
+
+## ⛔ **IL DIFETTO: la somma era ANNIDATA dentro un pezzo della concatenazione**
+
+```
+self.psi = np.concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])
+                                           ^^^^^^^^^^^^^^^^^  <- QUESTA
+```
+Il mio classificatore trovava la forma **esterna** *(`concatenate`)*, la metteva fra le concatenazioni e ### **si fermava**. ### ➜ **Quindi il conteggio delle somme in virgola mobile era ZERO per COSTRUZIONE**, non per misura. ### **Terzo falso zero in un giorno, e tutti miei.**
+
+## ⭐ **E LA CURA MI HA FATTO MISURARE UNA COSA CHE NON SAPEVO, e cambia il contratto**
+
+> ### **In IEEE-754 l'addizione e' COMMUTATIVA ma NON ASSOCIATIVA. Quindi l'ordine degli addendi conta da TRE in su, NON da due.**
+
+**MISURATO dallo strumento stesso**, su valori scelti per metterla in crisi *(scale `1e8` e `1e-8`, 200000 elementi)*:
+
+| | |
+|---|---|
+| ### **DUE addendi** | `a+b` contro `b+a`: ### **BYTE-IDENTICI** |
+| ### **TRE addendi** | `(a+b)+c` contro `a+(b+c)`: ### **DIVERSI in 48083 casi su 200000** |
+
+### ➜ **E questo RESTRINGE il contratto, invece di allargarlo:** le somme della nascita — `0.5*(cur[a]+cur[b])`, `0.5*(phivel[a]+phivel[b])`, `0.5*(pos[a]+pos[b])` — hanno ### **DUE addendi**, quindi ### **il loro ordine NON va nel contratto.** ### **E non e' una mia assicurazione: e' una misura che lo strumento rifa' a ogni giro.**
+
+## ✅ **E IL BUCO DEGLI ALIAS LOCALI, CHIUSO CON UNA MISURA invece che inseguito**
+
+Il mio classificatore parte dalle scritture di `self.<nome>`, quindi ### **perde le somme che passano da una VARIABILE LOCALE** — e ce n'e' una che conta: ### **`pos_figlio = 0.5 * (self.pos[a] + self.pos[b])`**, il figlio della mitosi. ### **E' il punto cieco degli alias locali, che in questa sessione ha gia' nascosto cose QUATTRO volte.**
+### ➜ **Invece di inseguirlo, ho misurato la cosa che INVALIDEREBBE la conclusione:** ### **esiste nel perimetro UNA somma di tre addendi o piu'?**
+
+| | |
+|---|---|
+| somme `+` nelle 5 funzioni, ### **qualunque bersaglio, locali comprese** | ### **39** |
+| con **due** addendi | ### **39** |
+| ### **con TRE o piu'** | ### **ZERO** |
+
+### ➜ **Quindi il buco NON PUO' CAMBIARE IL VERDETTO**, e lo dico con un numero invece di con una promessa. ### **E' la forma giusta di chiudere un limite: non «ho guardato bene», ma «ecco la misura che lo renderebbe irrilevante».**
+
+## ✅ **E UNA TERZA COSA CHE IL REFERTO ORA PORTA: le RIDUZIONI**
+
+`np.add.at` e `np.bincount` ### **non sono somme SCRITTE: sono ACCUMULAZIONI su molti termini**, e li' l'associativita' morde davvero. Nel perimetro sono ### **DUE**, entrambe in `mitosi`:
+```
+:7304  np.add.at(twn, self.i[self.i < self.n], np.abs(self.tw)[...])
+:7305  np.add.at(twn, self.j[self.j < self.n], np.abs(self.tw)[...])
+```
+### ➜ **E vivono nel ramo `if MITOSI_DIR != 0.0`, che dal RUNTIME vale `0.0`: NON GIRANO.**
+### ⚠ **Resta DICHIARATO, e non e' una formalita':** se un giorno `MITOSI_DIR != 0`, ### **l'ordine di `add.at` entra nel contratto — e il contratto di OGGI non lo copre.**
+
+**PROSSIMO: il giro vero rifatto, il contratto nella tabella, e il referto.**
+
+---
+
+# ⛔ **UNA MIA FRASE SUL PRESIDIO ERA FALSA, e l'ha smentita il mio stesso run** *(2026-10-02)*
+
+> ### **Luca: ho scritto che `_presidio.avvia` RIFIUTA DI GIRARE uno script non committato. Per il mio strumento NON E' VERO, e il mio strumento ha girato dirty fino in fondo.**
+
+**Dove l'ho scritta:** nel messaggio del commit **`dacec29`** e nel suo paragrafo di relazione —
+*«`_presidio.avvia` RIFIUTA DI GIRARE uno script non committato e pulito — e' un meccanismo, non una nota (`A9`)»*.
+### **Le due righe RESTANO leggibili** *(par.8: si annota)*, e questa e' la correzione.
+
+## 🔎 **IL CODICE, letto invece che ricordato** *(`csv/_presidio.py`, `:121`)*
+
+```
+if nome.startswith("_sigillo_") and (t["repo"] is not None) and (not t["tracciato"] or t["dirty"]):
+    print("[TIMBRO] RIFIUTO DI GIRARE: ... Per un diagnostico
+          questo controllo NON blocca: dichiara e prosegue.")
+    sys.exit(2)
+```
+
+### ➜ **Il rifiuto e' CONDIZIONATO AL NOME: solo `_sigillo_*`.** Per ogni altro script il timbro dice ### **`!! MODIFICATO rispetto a HEAD`** e ### **si prosegue** — e il commento del codice ### **lo dichiara apertamente.**
+
+## ✅ **E NON L'HO INFERITO: L'HO MISURATO**
+
+| | |
+|---|---|
+| `csv/_test_fork/_ordine_estrazioni.py` | **tracciato** `True` · ### **dirty `True`** · `sha1-byte` `e4ccf2d0` |
+| il nome comincia con `_sigillo_`? | ### **NO** |
+| ### **ha girato?** | ### **SI', fino in fondo, uscita `0`, e ha prodotto un referto** |
+
+## ⚠ **E IL DIFETTO NON E' DEL CODICE: E' DELLA FRASE CHE LO DESCRIVE, e sta negli ASSIOMI**
+
+`doc/ASSIOMI.md`, dentro **`A9`**, dice: *«`avvia(__file__)` forza utf-8, timbra lo script con git, e **rifiuta di girare** se lo script non e' committato e pulito»* — ### **senza la condizione sul nome.**
+### ➜ **E io ho ricopiato quella frase senza verificarla sul codice.** ### **E' `P1` applicato a un presidio**, ed e' la forma d'errore che questo repo chiama *«verifica dal codice, non dai commenti»* — ### **stavolta il commento stava in un documento d'avvio.**
+
+### 📌 **PERCHE' CONTA, e non e' una pedanteria**
+`A9` cita questo meccanismo come ### **L'ESEMPIO di «un MECCANISMO, non una nota»**, cioe' come la prova che `A9` non viola se stesso. ### **Ma per i DIAGNOSTICI — la grande maggioranza degli script di `csv/` — il meccanismo NON IMPEDISCE: DICHIARA.** Quindi per quella classe la protezione del par.7 e' ### **un timbro da leggere, non un blocco** — ed e' esattamente la differenza che `A9` esiste per nominare.
+
+## 🛑 **LE TRE VIE, e NON ne scelgo nessuna** *(`PRESIDIO-RIFIUTO-SOLO-SIGILLI`)*
+
+**(a)** si **precisa la frase** di `A9` con la condizione sul nome — ### ⚠ **ma `doc/ASSIOMI.md` e' dichiarato INTOCCABILE** (`CLAUDE.md` par.0), **quindi la decidi tu**. · **(b)** il rifiuto si estende a ### **OGNI script che produce un referto COMMITTATO**, non solo a quelli chiamati `_sigillo_*` — e allora il criterio ### **non e' piu' il NOME ma CIO' CHE LO SCRIPT FA**, che e' la forma giusta *(ed e' la lezione che in questa sessione si e' ripetuta **sette** volte)*. · **(c)** resta com'e' e **si DICHIARA**, con `A9` applicato a se stesso.
+
+### 📐 **CHE COSA LA DECIDEREBBE:** contare ### **quanti script di `csv/` producono un referto committato e NON si chiamano `_sigillo_*`.** Se sono molti, la **(b)** e' la via, perche' la protezione del par.7 oggi ### **non li copre.** ### **Quel conteggio NON L'HO FATTO, e lo dico invece di stimarlo.**
+
+## ✅ **E UNA COSA CHE IL REFERTO DI OGGI FA BENE COMUNQUE**
+Il referto porta ### **`blob_strumento`** dentro il `json`, quindi ### **quale blob ha prodotto quel numero e' scritto nel dato**, non nel timbro a stdout. ### **La ricostruibilita' non dipende dal presidio che non ha bloccato** — ma dipendeva da me, e questo e' il punto di `A9`.
+
+---

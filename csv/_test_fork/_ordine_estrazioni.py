@@ -252,6 +252,31 @@ def somme_della_nascita(percorso, funzioni, nomi_registro, tipi_registro):
             return addendi(e.left) + addendi(e.right)
         return [e]
 
+    def somme_annidate(e):
+        """TUTTE le somme aritmetiche dentro `e`, anche dentro i pezzi di una concatenazione.
+
+        ⚠ LA PRIMA STESURA GUARDAVA SOLO LA FORMA PIU' ESTERNA, e ha prodotto il quarto falso
+        zero: *<<0 somme in virgola mobile>>* mentre `psi` del nato e'
+        `concatenate([cur[:n0], 0.5 * (cur[a] + cur[b])])` -- la somma c'e', ANNIDATA.
+        """
+        fuori = []
+
+        def scendi(x):
+            if isinstance(x, ast.BinOp) and isinstance(x.op, ast.Add):
+                ad = addendi(x)
+                fuori.append({"quanti": len(ad), "addendi": [ast.unparse(p) for p in ad],
+                              "testo": ast.unparse(x)[:120]})
+                # NON si scende dentro gli addendi di questa catena: li conterei due volte.
+                # Si scende solo dentro cio' che NON e' parte della catena (gli argomenti).
+                for p in ad:
+                    for f in ast.iter_child_nodes(p):
+                        scendi(f)
+                return
+            for f in ast.iter_child_nodes(x):
+                scendi(f)
+        scendi(e)
+        return fuori
+
     def pezzi_concat(e):
         if (isinstance(e, ast.Call) and isinstance(e.func, ast.Attribute)
                 and e.func.attr in ("concatenate", "vstack", "hstack", "stack")
@@ -312,6 +337,11 @@ def somme_della_nascita(percorso, funzioni, nomi_registro, tipi_registro):
                 mobile = True
                 perche = ("CONCATENAZIONE: l'ordine decide quale valore va a quale INDICE. "
                           "Conta per qualunque tipo, e non e' una questione di ultimo bit")
+            # ⚠ LE SOMME ANNIDATE: anche dentro i pezzi di una concatenazione. La prima
+            #   stesura guardava solo la forma ESTERNA, e il referto diceva <<0 somme in
+            #   virgola mobile>> mentre `psi` del nato contiene `0.5 * (cur[a] + cur[b])`.
+            ann = somme_annidate(x.value)
+            mx = max([s["quanti"] for s in ann], default=0)
             fuori.append({"funzione": nodo.name, "riga_oggi": x.lineno,
                           "grandezza": g, "forma": vista[0],
                           "nel_registro": g in nomi_registro,
@@ -319,7 +349,95 @@ def somme_della_nascita(percorso, funzioni, nomi_registro, tipi_registro):
                           "ordine_conta": mobile,
                           "perche": perche,
                           "addendi_in_ordine": vista[1],
+                          "somme_annidate": ann,
+                          "max_addendi_in_una_somma": mx,
                           "testo": righe[x.lineno - 1].strip()[:150]})
+    return fuori
+
+
+def controllo_ieee(stampa):
+    """MISURA, non assume, le due proprieta' su cui poggia la lettura del contratto.
+
+    * DUE addendi: `a + b` e `b + a` sono **byte-identici** (IEEE-754: l'addizione e'
+      COMMUTATIVA). ### Quindi su una somma di due addendi l'ordine NON conta.
+    * TRE addendi: `(a+b)+c` e `a+(b+c)` **differiscono** (l'addizione NON e' ASSOCIATIVA).
+      ### Quindi da tre addendi in su l'ordine conta.
+    I valori sono scelti perche' la METTANO in crisi (scale `1e8` e `1e-8`), non a caso.
+    """
+    r = np.random.default_rng(0)
+    a = r.normal(0, 1e8, 200000)
+    b = r.normal(0, 1e-8, 200000)
+    c = r.normal(0, 1e-8, 200000)
+    comm = bool(np.array_equal((a + b).view(np.uint64), (b + a).view(np.uint64)))
+    ass = bool(np.array_equal(((a + b) + c).view(np.uint64), (a + (b + c)).view(np.uint64)))
+    quante = int(np.sum(((a + b) + c) != (a + (b + c))))
+    stampa("  DUE addendi   `a+b` contro `b+a`      byte-identici: %s" % comm)
+    stampa("  TRE addendi   `(a+b)+c` contro `a+(b+c)`  identici: %s   (differenze: %d su 200000)"
+           % (ass, quante))
+    stampa("  ### ➜ L'ORDINE DEGLI ADDENDI CONTA DA **TRE** IN SU, non da due. MISURATO.")
+    return {"due_addendi_commutativi": comm, "tre_addendi_associativi": ass,
+            "differenze_su_200000": quante}
+
+
+def tutte_le_somme_del_perimetro(percorso, funzioni):
+    """TUTTE le somme `+` delle funzioni, **QUALUNQUE sia il bersaglio** -- locali comprese.
+
+    ### ⚠ PERCHE' SERVE, ed e' il modo in cui chiudo un BUCO DICHIARATO del mio stesso strumento:
+    la misura (2) parte dalle **scritture di `self.<nome>`**, quindi ### **perde le somme che
+    passano da una VARIABILE LOCALE** -- per esempio `pos_figlio = 0.5 * (pos[a] + pos[b])`, che
+    il figlio della mitosi usa. ### **E' il punto cieco degli ALIAS LOCALI**, che in questa
+    sessione ha gia' nascosto cose quattro volte.
+    ### ➜ **Invece di inseguirlo, si misura la cosa che INVALIDEREBBE la conclusione:** esiste,
+    nel perimetro, **una somma di TRE addendi o piu'?** Se no, ### **il buco non puo' cambiare il
+    verdetto**, perche' a due addendi l'ordine e' commutativo (misurato).
+    """
+    src = io.open(percorso, encoding="utf-8").read()
+    t = ast.parse(src)
+
+    def addendi(e):
+        if isinstance(e, ast.BinOp) and isinstance(e.op, ast.Add):
+            return addendi(e.left) + addendi(e.right)
+        return [e]
+
+    per_n, tre = {}, []
+    tot = 0
+    for n in ast.walk(t):
+        if not (isinstance(n, ast.FunctionDef) and n.name in funzioni):
+            continue
+        visti = set()
+        for x in ast.walk(n):
+            if isinstance(x, ast.BinOp) and isinstance(x.op, ast.Add):
+                if id(x) in visti:
+                    continue
+                ad = addendi(x)
+                for y in ad:
+                    for z in ast.walk(y):
+                        visti.add(id(z))
+                tot += 1
+                per_n[len(ad)] = per_n.get(len(ad), 0) + 1
+                if len(ad) >= 3:
+                    tre.append({"funzione": n.name, "riga_oggi": x.lineno,
+                                "quanti": len(ad), "testo": ast.unparse(x)[:120]})
+    return {"totale": tot, "per_numero_di_addendi": per_n, "con_tre_o_piu": tre}
+
+
+def riduzioni_ordine_dipendenti(percorso, funzioni):
+    """`np.add.at` e `np.bincount`: riduzioni il cui risultato dipende dall'ORDINE degli addendi.
+
+    Non sono somme scritte: sono **accumulazioni** su molti termini, e li' l'associativita' morde
+    davvero. Si elencano col loro RAMO, cosi' si vede se girano.
+    """
+    src = io.open(percorso, encoding="utf-8").read()
+    t = ast.parse(src)
+    fuori = []
+    for n in ast.walk(t):
+        if isinstance(n, ast.FunctionDef) and n.name in funzioni:
+            for x in ast.walk(n):
+                if isinstance(x, ast.Call):
+                    s = ast.unparse(x.func)
+                    if "add.at" in s or "bincount" in s:
+                        fuori.append({"funzione": n.name, "riga_oggi": x.lineno,
+                                      "testo": ast.unparse(x)[:120]})
     return fuori
 
 
@@ -521,25 +639,22 @@ def principale():
         tipi_reg[x[0]] = x[2]
     somme = somme_della_nascita(SIM, FUNZ, nomi_reg, tipi_reg)
     conc = [s for s in somme if s["forma"] != "somma"]
-    s_mob = [s for s in somme if s["forma"] == "somma" and s["ordine_conta"] is True]
+    # `s_mob` non serve piu`: la classificazione per TIPO della forma esterna e` stata
+    #   sostituita dal conteggio degli ADDENDI (vedi la (2)).  Resta `s_int`/`s_nd` per i
+    #   contatori, che si riportano separati e dichiarati inerti.
     s_int = [s for s in somme if s["forma"] == "somma" and s["ordine_conta"] is False]
     s_nd = [s for s in somme if s["forma"] == "somma" and s["ordine_conta"] is None]
     nel_reg = [s for s in somme if s["nel_registro"]]
     stampa("  funzioni esaminate: %s" % ", ".join(FUNZ))
     stampa("  scritture trovate : %d   di cui nel REGISTRO %d" % (len(somme), len(nel_reg)))
     stampa("")
-    stampa("  ### IL CONTRATTO, E SONO DUE COSE DIVERSE:")
+    stampa("  ### IL CONTRATTO, E SONO TRE COSE DIVERSE:")
     stampa("  ###   (1) %3d CONCATENAZIONI -- l'ordine decide QUALE VALORE VA A QUALE INDICE."
            % len(conc))
     stampa("  ###       Conta per QUALUNQUE tipo: non e' l'ultimo bit, e' il SIGNIFICATO.")
-    stampa("  ###   (2) %3d SOMME in VIRGOLA MOBILE -- l'ordine degli addendi cambia"
-           % len(s_mob))
-    stampa("  ###       l'ULTIMO BIT.")
-    stampa("  ###   e %3d somme di INTERI, dove l'ordine e' INERTE (fuori dal contratto)."
-           % len(s_int))
-    if s_nd:
-        stampa("  ###   piu' %d somme di grandezze col tipo NON DICHIARATO: non lo assumo."
-               % len(s_nd))
+    stampa("  ###   (2) le SOMME ARITMETICHE, comprese le ANNIDATE: contano da TRE addendi in su")
+    stampa("  ###       (ASSOCIATIVITA'); a DUE sono commutative, e lo si MISURA qui sotto.")
+    stampa("  ###   (3) le RIDUZIONI `np.add.at` / `np.bincount`: li' l'ordine morde davvero.")
     stampa("")
     stampa("  (1) LE CONCATENAZIONI, nell'ordine del sorgente:")
     stampa("  " + "-" * 100)
@@ -549,23 +664,81 @@ def principale():
                   s["tipo_dichiarato"], "" if s["nel_registro"] else "  (NON nel registro)"))
         stampa("          pezzi in ordine: %s" % " | ".join(s["addendi_in_ordine"]))
     stampa("")
-    stampa("  (2) LE SOMME IN VIRGOLA MOBILE:")
+    # ---------- (2) LE SOMME ARITMETICHE, comprese le ANNIDATE -------------------------------
+    stampa("  (2) LE SOMME ARITMETICHE, comprese quelle ANNIDATE dentro una concatenazione")
     stampa("  " + "-" * 100)
-    for s in s_mob:
-        stampa("  :%-6d %-22s %-16s [%s]" % (s["riga_oggi"], s["funzione"], s["grandezza"],
-                                             s["tipo_dichiarato"]))
-        stampa("          addendi in ordine: %s" % " | ".join(s["addendi_in_ordine"]))
-    if not s_mob:
-        stampa("          NESSUNA. Le somme aritmetiche di questo perimetro sono tutte INTERE")
-        stampa("          (i contatori), quindi il contratto e' TUTTO nelle concatenazioni.")
+    stampa("  E prima di contarle, le DUE proprieta' su cui poggia la lettura -- MISURATE:")
+    ieee = controllo_ieee(stampa)
     stampa("")
-    stampa("  LE SOMME DI INTERI, inerti e fuori dal contratto: %d" % len(s_int))
-    stampa("    %s" % ", ".join(sorted({s["grandezza"] for s in s_int})))
-    if s_nd:
-        stampa("  LE SOMME col tipo NON DICHIARATO: %d" % len(s_nd))
-        for s in s_nd:
-            stampa("    :%-6d %-16s %s" % (s["riga_oggi"], s["grandezza"],
-                                           " | ".join(s["addendi_in_ordine"])[:70]))
+    tutte_somme = []
+    for s in somme:
+        for q in s["somme_annidate"]:
+            tutte_somme.append(dict(q, grandezza=s["grandezza"], funzione=s["funzione"],
+                                    riga_oggi=s["riga_oggi"],
+                                    tipo_dichiarato=s["tipo_dichiarato"],
+                                    nel_registro=s["nel_registro"]))
+    tre_piu = [q for q in tutte_somme if q["quanti"] >= 3]
+    due = [q for q in tutte_somme if q["quanti"] == 2]
+    stampa("  somme aritmetiche trovate (annidate comprese): %d" % len(tutte_somme))
+    stampa("    con DUE addendi  -> l'ordine e' INERTE (commutativita' misurata): %d" % len(due))
+    stampa("    con TRE o piu'   -> ### L'ORDINE CONTA, ED ENTRA NEL CONTRATTO : %d" % len(tre_piu))
+    if tre_piu:
+        for q in tre_piu:
+            stampa("      :%-6d %-16s %d addendi: %s" % (q["riga_oggi"], q["grandezza"],
+                                                         q["quanti"], " | ".join(q["addendi"])))
+    else:
+        stampa("      ### NESSUNA. Nel perimetro della nascita non esiste una somma scritta di")
+        stampa("          TRE o piu' addendi, quindi l'ASSOCIATIVITA' non ha casi. Le somme a")
+        stampa("          DUE addendi -- `0.5*(x[a] + x[b])` -- sono COMMUTATIVE per IEEE-754,")
+        stampa("          misurato qui sopra: il loro ordine NON va nel contratto.")
+    stampa("")
+    # ⚠ IL BUCO DEGLI ALIAS LOCALI, e si CHIUDE misurando cio' che invaliderebbe la conclusione.
+    tutte = tutte_le_somme_del_perimetro(SIM, FUNZ)
+    stampa("  ### E IL BUCO DEGLI ALIAS LOCALI, CHIUSO CON UNA MISURA invece che inseguito:")
+    stampa("      la (2) parte dalle scritture di `self.<nome>`, quindi PERDE le somme che")
+    stampa("      passano da una LOCALE (`pos_figlio = 0.5 * (pos[a] + pos[b])`).")
+    stampa("      ➜ Allora si contano TUTTE le somme del perimetro, QUALUNQUE bersaglio:")
+    stampa("        totale %d   %s" % (tutte["totale"],
+                                       "  ".join("con %d addendi: %d" % (k, tutte[
+                                           "per_numero_di_addendi"][k])
+                                                 for k in sorted(
+                                                     tutte["per_numero_di_addendi"]))))
+    if tutte["con_tre_o_piu"]:
+        stampa("        ### ⛔ CON TRE O PIU' ADDENDI: %d -- L'ORDINE CONTA, e vanno nel contratto"
+               % len(tutte["con_tre_o_piu"]))
+        for q in tutte["con_tre_o_piu"]:
+            stampa("          :%-6d %-22s %d addendi  %s" % (q["riga_oggi"], q["funzione"],
+                                                             q["quanti"], q["testo"]))
+    else:
+        stampa("        ### ✅ ZERO con tre o piu' addendi ➜ IL BUCO NON PUO' CAMBIARE IL")
+        stampa("            VERDETTO: a due addendi l'ordine e' commutativo, misurato sopra.")
+    stampa("")
+    stampa("  LE SOMME a due addendi, elencate perche' chi legge le cerca:")
+    for q in due[:40]:
+        stampa("    :%-6d %-16s %s" % (q["riga_oggi"], q["grandezza"], q["testo"][:80]))
+    if len(due) > 40:
+        stampa("    ... e altre %d (tutte nel `json`)" % (len(due) - 40))
+    stampa("")
+    # ---------- (3) le RIDUZIONI, dove l'associativita' morde davvero -------------------------
+    rid = riduzioni_ordine_dipendenti(SIM, FUNZ)
+    stampa("  (3) LE RIDUZIONI ordine-dipendenti (`np.add.at`, `np.bincount`): %d" % len(rid))
+    stampa("      Non sono somme SCRITTE: sono ACCUMULAZIONI su molti termini, e li'")
+    stampa("      l'associativita' morde davvero.")
+    for q in rid:
+        stampa("      :%-6d %-22s %s" % (q["riga_oggi"], q["funzione"], q["testo"]))
+    stampa("      E IL RAMO IN CUI VIVONO, dal RUNTIME: MITOSI_DIR = %r" % getattr(S, "MITOSI_DIR",
+                                                                                  "<assente>"))
+    if float(getattr(S, "MITOSI_DIR", 0.0)) == 0.0 and rid:
+        stampa("      ### ➜ `MITOSI_DIR = 0.0`, quindi quel ramo NON GIRA e queste riduzioni")
+        stampa("          NON avvengono nella configurazione di riferimento. Resta DICHIARATO:")
+        stampa("          se un giorno `MITOSI_DIR != 0`, l'ordine di `add.at` entra nel")
+        stampa("          contratto -- e il contratto di OGGI non lo copre.")
+    stampa("")
+    stampa("  I CONTATORI, somme di INTERI fuori dal registro: %d  (ordine INERTE)" % len(s_nd))
+    stampa("    %s" % ", ".join(sorted({s["grandezza"] for s in s_nd})))
+    if s_int:
+        stampa("  E %d somme di grandezze del registro, intere: %s"
+               % (len(s_int), ", ".join(sorted({s["grandezza"] for s in s_int}))))
     stampa("")
 
     ref = {"vale": True,
@@ -592,8 +765,14 @@ def principale():
                                "n": int(S2.net.n), "archi": len(S2.net.i)},
            "scritture_ordine": somme,
            "contratto_concatenazioni": conc,
-           "contratto_somme_virgola_mobile": s_mob,
-           "somme_interi_ordine_inerte": s_int,
+           "controllo_ieee754": ieee,
+           "somme_aritmetiche_tutte": tutte_somme,
+           "somme_tre_o_piu_addendi_ORDINE_CONTA": tre_piu,
+           "somme_due_addendi_ordine_inerte": due,
+           "riduzioni_ordine_dipendenti": rid,
+           "tutte_le_somme_del_perimetro": tutte,
+           "MITOSI_DIR_dal_runtime": float(getattr(S, "MITOSI_DIR", 0.0)),
+           "somme_interi_nel_registro": s_int,
            "somme_tipo_non_dichiarato": s_nd,
            "registro_completo": registro}
     io.open(os.path.join(FUORI, "_ordine_estrazioni.json"), "w", encoding="utf-8",
