@@ -12,6 +12,19 @@
 | ### **A -- LA REGOLA** | ### **elenca che cosa confronta, e PERCHE'** *(classe per classe)*, e nomina ### **le grandezze che la regola di OGGI si perde** | se l'insieme nuovo **non contiene** `_g_peqn_mediana`, `ultima_prob_coppia` o `ultima_frac_antifase`, ### **la regola non ha fatto il suo lavoro** |
 | ### **B -- IL CASO CHE DEVE FALLIRE** | su una COPIA del simulatore con ### **`_g_peqn_mediana` cambiata di UN ULP**: ### **la regola NUOVA deve CADERE, quella di OGGI NO** | se la nuova **non vede** la differenza, non serve a niente; ### **se la VECCHIA la vede, il caso non prova nulla** *(vorrebbe dire che era gia' coperta)* |
 | ### **C -- L'INVOLUCRO** | due bracci sul simulatore ### **NON modificato** danno ### **ZERO differenze con ENTRAMBE le regole** | ### **senza questo, lo `0` del braccio `B` potrebbe voler dire «il banco e' rotto»** invece di «la regola vecchia non vede» |
+| ### **D -- LA DIFFERENZA ATTESA** *(aggiunto col passo 2)* | la cura di ### **`PEQ-MEDIANA-ISTANTE`** sposta l'istante di `_g_peqn_mediana`: il confronto col simulatore ### **PRIMA della cura** deve dare ### **ESATTAMENTE quella differenza e nient'altro** -- e ### **ZERO con la regola di oggi** | se ne trova ### **DUE**, la cura ha toccato qualcos'altro e ### **il commit NON passa**; se ne trova ### **ZERO**, la cura ### **non ha fatto niente** |
+
+### ⭐ **LA DIFFERENZA FRA `B` E `D`, ed e' il punto**
+`B` ### **INIETTA** una differenza *(un ulp, in una copia guasta)* per mostrare che la regola la
+**vede**. `D` ### **NE ASPETTA UNA** *(quella della cura)* per mostrare che la regola vede
+### **esattamente cio' che e' cambiato e niente di piu'.** ### **Sono i due versi della stessa
+domanda**, e servono entrambi.
+
+### ⚠ **E il «prima» di `D` NON viene da `HEAD`:** viene da ### **`_cli_flag.sim_prima_del_flag`**,
+ancorato al ### **PADRE del commit che introduce l'ancora** `_peqn_med_pre`, estratto ### **in
+BINARIO** e con l'assertazione che ### **quell'ancora NON ci sia.** E' `H-P8`, e il difetto che
+esiste per impedire e' `ANCORE-1`: ### **25 sigilli che prendevano «il codice di prima» da `HEAD`
+e diventavano VUOTI appena la cura era committata.**
 
 ### ⭐ **PERCHE' IL BRACCIO `C` NON E' FACOLTATIVO**
 `STANDARD 1` lo dice: ### **un criterio di IDENTITA' fallisce rumorosamente col banco rotto; uno
@@ -232,12 +245,58 @@ def principale():
     stampa("  ### BRACCIO B: %s" % ("PASSA" if B_ok else "FALLISCE"))
     stampa("")
 
+    # BRACCIO D -------------------------------------------------------------------------------
+    #   ⚠ IL <<PRIMA>> NON VIENE DA `HEAD`: viene dal PADRE del commit che introduce l'ancora
+    #     (`H-P8`), estratto in BINARIO, e `sim_prima_del_flag` ASSERISCE che l'ancora NON ci sia.
+    stampa("=" * 104)
+    stampa("BRACCIO D -- LA DIFFERENZA ATTESA: la cura di `PEQ-MEDIANA-ISTANTE`")
+    stampa("=" * 104)
+    ANCORA_CURA = "_peqn_med_pre"
+    D_ok, dD_n, dD_o, prima = None, [], [], None
+    try:
+        prima = _cli_flag.sim_prima_del_flag(ANCORA_CURA, os.path.join(FUORI, "_sim_prima_cura.py"))
+    except Exception as e:
+        stampa("  ### BRACCIO D NON ESEGUIBILE: %s: %s" % (type(e).__name__, e))
+        stampa("      (l'ancora `%s` non e' ancora committata, oppure `git log -S` non la trova.)"
+               % ANCORA_CURA)
+    if prima:
+        stampa("  il <<prima>> .. %s  blob %s"
+               % (os.path.relpath(prima, RADICE).replace(chr(92), "/"), blob(prima)[:8]))
+        stampa("      (dal PADRE del commit che introduce `%s`, estratto in BINARIO: `H-P8`)"
+               % ANCORA_CURA)
+        SD, nD = carica("cfr_D", seme, sim=prima)
+        avanza(SD, nD, passi)
+        fd, _ = CN.foto(SD, nD, sorgente=prima)
+        dD_n = CN.confronta(fa, fd)
+        dD_o = CN.confronta({k: v for k, v in fa.items() if k in oggi},
+                            {k: v for k, v in fd.items() if k in oggi})
+        stampa("  con la regola NUOVA ... differenze: %d" % len(dD_n))
+        for d in dD_n:
+            stampa("      ### %s" % d)
+        stampa("  con la regola di OGGI  differenze: %d" % len(dD_o))
+        for d in dD_o:
+            stampa("      %s" % d)
+        solo_D = (len(dD_n) == 1 and dD_n[0]["nome"] == "_g_peqn_mediana")
+        D_ok = solo_D and (not dD_o)
+        stampa("")
+        stampa("  la differenza e' ESATTAMENTE `_g_peqn_mediana` e nient'altro? %s"
+               % ("SI" if solo_D else "NO"))
+        stampa("  la regola di OGGI NON la vede? ............................... %s"
+               % ("SI" if not dD_o else "NO"))
+        if len(dD_n) == 0:
+            stampa("  ### ⛔ ZERO differenze: la cura NON HA FATTO NIENTE, e il braccio FALLISCE.")
+        elif len(dD_n) > 1:
+            stampa("  ### ⛔ PIU' DI UNA: la cura ha toccato qualcos'altro. IL COMMIT NON PASSA.")
+        stampa("  ### BRACCIO D: %s" % ("PASSA" if D_ok else "FALLISCE"))
+    stampa("")
+
     # VERDETTO --------------------------------------------------------------------------------
     stampa("=" * 104)
-    passa = A_ok and B_ok and C_ok and chirurgica
-    stampa("### IL SIGILLO %s   (A %s · B %s · C %s · copia chirurgica %s)"
+    passa = A_ok and B_ok and C_ok and chirurgica and (D_ok is not False)
+    stampa("### IL SIGILLO %s   (A %s · B %s · C %s · D %s · copia chirurgica %s)"
            % ("PASSA" if passa else "FALLISCE",
               "OK" if A_ok else "NO", "OK" if B_ok else "NO", "OK" if C_ok else "NO",
+              ("OK" if D_ok else ("NO" if D_ok is False else "NON ESEGUITO")),
               "OK" if chirurgica else "NO"))
     stampa("=" * 104)
 
@@ -257,7 +316,11 @@ def principale():
                          "perche": {k: quali[k]["perche"] for k in quali}},
            "braccio_C": {"passa": bool(C_ok), "diff_nuova": dC_n, "diff_oggi": dC_o},
            "braccio_B": {"passa": bool(B_ok), "diff_nuova": dB_n, "diff_oggi": dB_o,
-                         "solo_g_peqn_mediana": bool(solo_quella)}}
+                         "solo_g_peqn_mediana": bool(solo_quella)},
+           "braccio_D": {"eseguito": bool(prima), "passa": D_ok,
+                         "blob_prima": (blob(prima) if prima else None),
+                         "ancora": "_peqn_med_pre",
+                         "diff_nuova": dD_n, "diff_oggi": dD_o}}
     io.open(os.path.join(FUORI, "_sigillo_confronto_esteso.json"), "w", encoding="utf-8",
             newline=NL).write(json.dumps(ref, indent=1, default=str))
     io.open(os.path.join(FUORI, "_corsa.txt"), "w", encoding="utf-8",

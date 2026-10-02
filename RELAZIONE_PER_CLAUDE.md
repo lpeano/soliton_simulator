@@ -984,3 +984,25 @@ Nel messaggio di **`f541261`** ho scritto i numeri del punto unico *(segnalate `
 ### 📌 **E la causa e' precisa:** ho guardato `git status` *(come mi ero imposto)*, ho visto i due file ### **e ho messo nel `git add` solo cio' che avevo in testa** — il codice e i documenti. ### **Guardare lo stato non basta se non si legge cio' che dice.**
 
 ---
+
+# 🔧 **IL BRACCIO `D` DEL SIGILLO ESTESO: LA DIFFERENZA ATTESA, committato PRIMA di girare** *(2026-10-02)*
+
+Sigillo da **`f1f7d783`** a ### **`80863806`**. ### **Nessuna riga del simulatore:** blob `3d78cfd2` prima e dopo.
+
+## ⭐ **LA DIFFERENZA FRA `B` E `D`, ed e' il punto**
+
+| | |
+|---|---|
+| ### **`B`** | ### **INIETTA** una differenza *(un ulp, in una copia guasta)* → mostra che la regola ### **la VEDE** |
+| ### **`D`** | ### **NE ASPETTA UNA** *(quella della cura)* → mostra che la regola vede ### **esattamente cio' che e' cambiato e NIENTE DI PIU'** |
+
+### ➜ **Sono i due versi della stessa domanda, e servono entrambi.** E i criteri di `D` sono fissati **ora**: ### **DUE differenze ⇒ la cura ha toccato qualcos'altro e il commit NON passa; ZERO ⇒ la cura non ha fatto niente.**
+
+## ⚠ **E IL «PRIMA» NON VIENE DA `HEAD`**
+
+Viene da ### **`_cli_flag.sim_prima_del_flag`**, ancorato al ### **PADRE del commit che introduce `_peqn_med_pre`**, estratto ### **in BINARIO** *(par.7: non `git checkout`)* e con l'assertazione che ### **quell'ancora NON ci sia nel file estratto.**
+### 📌 **E' `H-P8`, e il difetto che esiste per impedire ha un numero:** ### **`ANCORE-1`, 25 sigilli che prendevano «il codice di prima» da `HEAD`** e ### **diventavano VUOTI appena la cura era committata.**
+
+**PROSSIMO: il giro vero, quattro bracci. Poi il referto, e il commit 3.**
+
+---
